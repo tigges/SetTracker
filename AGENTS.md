@@ -33,8 +33,9 @@ setradar.ai.
   removed in Next 16; ESLint runs directly.
 - **Ingestion / crawler:** `npm run ingest` upserts newly discovered sets & DJs.
   **Primary sources:** SoundCloud (`src/lib/ingest/soundcloud/`) curated shows
-  via api-v2 + **hearthis.at** house categories (`src/lib/ingest/hearthis/`).
-  Both parse description + timed comments; SC has adaptive poll limits
+  via api-v2 + **hearthis.at** house categories (`src/lib/ingest/hearthis/`) +
+  **YouTube** curated sets (`src/lib/ingest/youtube/` — description tracklists
+  and YouTube Music song credits). SC has adaptive poll limits
   (`data/soundcloud-poll-state.json`). **sourceHash refresh** when tracklists
   change (preserves `community_resolved` rows). After ingest, applies
   `data/resolutions.json` (Suggest ID → GitHub issue → paste JSON → redeploy).
