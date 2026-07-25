@@ -59,6 +59,11 @@ export default async function SetPage({
             >
               {type.label}
             </span>
+            {set.genre && (
+              <span className="rounded-full border border-line px-2 py-0.5 text-[11px] text-muted">
+                {set.genre}
+              </span>
+            )}
             {set.series && <span className="eyebrow">{set.series.name}</span>}
             {set.event && (
               <span className="eyebrow">

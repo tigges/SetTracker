@@ -99,6 +99,8 @@ model Set {
   title       String
   // "radio" | "festival" | "soundcloud"
   type        String
+  // music genre, e.g. "Bass House", "Tech House", "UK Garage"
+  genre       String?
   publishedAt DateTime
   durationSec Int
   sourceUrl   String?

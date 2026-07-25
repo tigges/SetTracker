@@ -33,6 +33,7 @@ export type RawSet = {
   sourceSlug: string; // stable id from the source → becomes set.slug
   title: string;
   type: "radio" | "festival" | "soundcloud";
+  genre?: string;
   primaryArtist: RawArtist;
   collaborators?: RawArtist[];
   eventName?: string;

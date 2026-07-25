@@ -120,6 +120,7 @@ export async function runIngest(
         slug: raw.sourceSlug,
         title: raw.title,
         type: raw.type,
+        genre: raw.genre ?? null,
         publishedAt: raw.publishedAt,
         durationSec: raw.durationSec,
         sourceName: raw.sourceName,

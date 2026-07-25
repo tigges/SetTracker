@@ -16,7 +16,6 @@ export function SetCard({ set }: { set: FeedItem }) {
     (set.collaborators.length > 0
       ? ` b2b ${set.collaborators.map((c) => c.name).join(", ")}`
       : "");
-  const context = set.seriesName ?? set.eventName ?? null;
 
   return (
     <Link
@@ -47,7 +46,7 @@ export function SetCard({ set }: { set: FeedItem }) {
             <span className="eyebrow" style={{ color: accent }}>
               {type.label}
             </span>
-            {context && <span className="eyebrow truncate">· {context}</span>}
+            {set.genre && <span className="eyebrow truncate">· {set.genre}</span>}
           </div>
           <h3 className="mt-1 truncate text-[15px] font-semibold leading-tight text-ink">
             {djLine}
