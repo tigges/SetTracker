@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { EntityThumb } from "@/components/EntityThumb";
 import { StatusBar } from "@/components/StatusBits";
 import {
   SET_TYPE_META,
@@ -16,6 +17,8 @@ export function SetCard({ set }: { set: FeedItem }) {
     (set.collaborators.length > 0
       ? ` b2b ${set.collaborators.map((c) => c.name).join(", ")}`
       : "");
+  const thumb =
+    set.imageUrl ?? set.primaryDj?.imageUrl ?? null;
 
   return (
     <Link
@@ -24,16 +27,13 @@ export function SetCard({ set }: { set: FeedItem }) {
     >
       <div className="flex items-start gap-3">
         <div className="relative flex-none">
-          <div
-            className="grid h-12 w-12 place-items-center rounded-xl text-lg font-black"
-            style={{
-              background: `${accent}22`,
-              color: accent,
-              border: `1px solid ${accent}44`,
-            }}
-          >
-            {(set.primaryDj?.name ?? "?").slice(0, 1)}
-          </div>
+          <EntityThumb
+            src={thumb}
+            label={set.primaryDj?.name ?? set.title}
+            accent={accent}
+            size={48}
+            radius={12}
+          />
           <span
             className="absolute -bottom-1 -right-1 grid h-5 w-5 place-items-center rounded-md border border-line bg-bg text-[10px] text-muted"
             title={type.label}

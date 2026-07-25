@@ -35,5 +35,9 @@ on SQLite. There is only one service to run.
   `TODO(real)` seam for wiring real 1001Tracklists/SoundCloud crawling. The
   GitHub Pages workflow runs it on a 6-hour cron (seed → ingest → export →
   deploy), so on the static site "new data" arrives via scheduled rebuilds.
+- **Artwork thumbnails:** `npm run thumbs` fills null `imageUrl` on Dj / Label /
+  Track / Set via the Deezer Search API (no key). Idempotent; skips rows that
+  already have art. Sets fall back to the primary DJ image. The Pages workflow
+  runs this after ingest. UI uses `EntityThumb` with monogram fallback.
 - **Standard commands** live in `package.json` scripts and `README.md`; prefer
   those over ad-hoc invocations.

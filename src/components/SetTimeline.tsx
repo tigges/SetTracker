@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { EntityThumb } from "@/components/EntityThumb";
 import {
   PROVENANCE_META,
   STATUS_META,
@@ -161,6 +162,13 @@ export function SetTimeline({
                   <span className="mono w-16 flex-none text-[12px] text-muted">
                     {fmtTimestamp(p.timestamp)}
                   </span>
+                  <EntityThumb
+                    src={p.imageUrl}
+                    label={p.title}
+                    accent={statusColor(p.idStatus)}
+                    size={32}
+                    radius={6}
+                  />
                   <span
                     className="dot"
                     title={meta?.label}
@@ -243,12 +251,28 @@ export function SetTimeline({
                       <Link
                         href={`/labels/${p.labelSlug}`}
                         onClick={(e) => e.stopPropagation()}
-                        className="hidden flex-none rounded-full border border-line bg-bg2 px-2 py-0.5 text-[11px] text-muted transition-colors hover:border-brand hover:text-brand lg:inline"
+                        className="hidden flex-none items-center gap-1.5 rounded-full border border-line bg-bg2 py-0.5 pl-0.5 pr-2 text-[11px] text-muted transition-colors hover:border-brand hover:text-brand lg:inline-flex"
                       >
+                        <EntityThumb
+                          src={p.labelImageUrl}
+                          label={p.labelName}
+                          accent={p.labelColor ?? "var(--brand)"}
+                          size={16}
+                          radius={999}
+                          monogram={p.labelName.slice(0, 1)}
+                        />
                         {p.labelName}
                       </Link>
                     ) : (
-                      <span className="hidden flex-none rounded-full border border-line bg-bg2 px-2 py-0.5 text-[11px] text-muted lg:inline">
+                      <span className="hidden flex-none items-center gap-1.5 rounded-full border border-line bg-bg2 py-0.5 pl-0.5 pr-2 text-[11px] text-muted lg:inline-flex">
+                        <EntityThumb
+                          src={p.labelImageUrl}
+                          label={p.labelName}
+                          accent={p.labelColor ?? "var(--brand)"}
+                          size={16}
+                          radius={999}
+                          monogram={p.labelName.slice(0, 1)}
+                        />
                         {p.labelName}
                       </span>
                     ))}

@@ -15,7 +15,8 @@
     "db:seed": "prisma db seed",
     "db:reset": "prisma migrate reset --force",
     "db:setup": "prisma migrate deploy && prisma db seed",
-    "ingest": "tsx prisma/ingest.ts"
+    "ingest": "tsx prisma/ingest.ts",
+    "thumbs": "tsx prisma/thumbs.ts"
   },
   "dependencies": {
     "@prisma/client": "^6.19.3",

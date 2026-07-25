@@ -26,6 +26,9 @@ model Dj {
   instagram  String?
   twitter    String?
 
+  // resolved artwork URL (Deezer CDN etc.); null → monogram fallback in UI
+  imageUrl   String?
+
   sets       SetArtist[]
   series     Series[]
 
@@ -40,6 +43,8 @@ model Series {
   djId   String
   dj     Dj     @relation(fields: [djId], references: [id])
   sets   Set[]
+
+  @@index([djId])
 }
 
 // A record label.
@@ -51,6 +56,8 @@ model Label {
   soundcloud String?
   instagram  String?
   website    String?
+  // resolved artwork URL (album art used as label mark); null → initials fallback
+  imageUrl   String?
   tracks     Track[]
 }
 
@@ -74,12 +81,17 @@ model Track {
   bpm         Int?
   musicalKey  String?
   releaseDate DateTime?
+  // resolved release artwork URL; null → no track thumb in UI
+  imageUrl    String?
 
   plays       Played[] @relation("TrackPlays")
   // ID records that were community-resolved to this track.
   resolvedIds IdTrack[] @relation("ResolvedTrack")
 
   createdAt   DateTime @default(now())
+
+  @@index([labelId])
+  @@index([title, artistName])
 }
 
 // A first-class "ID" record for an unreleased / unknown track.
@@ -114,6 +126,8 @@ model Set {
   sourceUrl   String?
   sourceName  String? // e.g. "1001Tracklists", "SoundCloud"
   cover       String // hex color for the cover gradient seed
+  // resolved set/mix artwork (or primary DJ image); null → monogram fallback
+  imageUrl    String?
 
   eventId     String?
   event       Event?   @relation(fields: [eventId], references: [id])
@@ -124,6 +138,12 @@ model Set {
   plays       Played[]
 
   createdAt   DateTime @default(now())
+
+  @@index([publishedAt])
+  @@index([genre])
+  @@index([type])
+  @@index([eventId])
+  @@index([seriesId])
 }
 
 // Join between Set and DJ. Supports b2b / collaborations. One artist is primary.
@@ -136,6 +156,7 @@ model SetArtist {
   isPrimary Boolean @default(false)
 
   @@unique([setId, djId])
+  @@index([djId])
 }
 
 // The core edge: a track played at a position in a set.
@@ -159,4 +180,7 @@ model Played {
   idTrack    IdTrack? @relation("IdPlays", fields: [idTrackId], references: [id])
 
   @@unique([setId, position])
+  @@index([trackId])
+  @@index([idTrackId])
+  @@index([setId, idStatus])
 }
