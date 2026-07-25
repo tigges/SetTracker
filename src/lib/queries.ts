@@ -20,6 +20,33 @@ function tallyStatuses(plays: { idStatus: string }[]): StatusCounts {
   return c;
 }
 
+/** Aggregate play status counts per set via SQL groupBy (no play-row payload). */
+async function statusCountsBySetIds(
+  setIds: string[],
+): Promise<Map<string, { counts: StatusCounts; trackCount: number }>> {
+  const out = new Map<string, { counts: StatusCounts; trackCount: number }>();
+  if (setIds.length === 0) return out;
+
+  const groups = await prisma.played.groupBy({
+    by: ["setId", "idStatus"],
+    where: { setId: { in: setIds } },
+    _count: { _all: true },
+  });
+
+  for (const g of groups) {
+    let entry = out.get(g.setId);
+    if (!entry) {
+      entry = { counts: emptyCounts(), trackCount: 0 };
+      out.set(g.setId, entry);
+    }
+    entry.trackCount += g._count._all;
+    if (g.idStatus in entry.counts) {
+      entry.counts[g.idStatus as IdStatus] += g._count._all;
+    }
+  }
+  return out;
+}
+
 // ---------------------------------------------------------------------------
 // Sets feed
 // ---------------------------------------------------------------------------
@@ -30,12 +57,14 @@ export async function getFeed() {
       artists: { include: { dj: true }, orderBy: { isPrimary: "desc" } },
       event: true,
       series: true,
-      plays: { select: { idStatus: true } },
     },
   });
 
+  const tallies = await statusCountsBySetIds(sets.map((s) => s.id));
+
   return sets.map((s) => {
     const primary = s.artists.find((a) => a.isPrimary) ?? s.artists[0];
+    const tally = tallies.get(s.id);
     return {
       id: s.id,
       slug: s.slug,
@@ -54,8 +83,8 @@ export async function getFeed() {
       collaborators: s.artists
         .filter((a) => !a.isPrimary)
         .map((a) => ({ name: a.dj.name, slug: a.dj.slug })),
-      trackCount: s.plays.length,
-      statusCounts: tallyStatuses(s.plays),
+      trackCount: tally?.trackCount ?? 0,
+      statusCounts: tally?.counts ?? emptyCounts(),
     };
   });
 }
@@ -161,7 +190,6 @@ export async function getDjBySlug(slug: string) {
           artists: { include: { dj: true }, orderBy: { isPrimary: "desc" } },
           event: true,
           series: true,
-          plays: { select: { idStatus: true, provenance: true } },
         },
       },
     },
@@ -171,10 +199,39 @@ export async function getDjBySlug(slug: string) {
     .map((sa) => sa.set)
     .sort((a, b) => b.publishedAt.getTime() - a.publishedAt.getTime());
   const setIds = sets.map((s) => s.id);
+  const recent = sets.slice(0, 8);
 
-  // recent sets
-  const recentSets = sets.slice(0, 8).map((s) => {
+  const [tallies, provenanceGroups, trackTotal] = await Promise.all([
+    statusCountsBySetIds(setIds),
+    setIds.length
+      ? prisma.played.groupBy({
+          by: ["provenance"],
+          where: { setId: { in: setIds } },
+          _count: { _all: true },
+        })
+      : Promise.resolve([]),
+    setIds.length
+      ? prisma.played.count({ where: { setId: { in: setIds } } })
+      : Promise.resolve(0),
+  ]);
+
+  const health = emptyCounts();
+  for (const id of setIds) {
+    const t = tallies.get(id);
+    if (!t) continue;
+    for (const k of Object.keys(health) as IdStatus[]) {
+      health[k] += t.counts[k];
+    }
+  }
+
+  const provenance: Record<string, number> = {};
+  for (const g of provenanceGroups) {
+    provenance[g.provenance] = g._count._all;
+  }
+
+  const recentSets = recent.map((s) => {
     const primary = s.artists.find((a) => a.isPrimary) ?? s.artists[0];
+    const tally = tallies.get(s.id);
     return {
       slug: s.slug,
       title: s.title,
@@ -184,17 +241,11 @@ export async function getDjBySlug(slug: string) {
       cover: s.cover,
       eventName: s.event?.name ?? null,
       seriesName: s.series?.name ?? null,
-      trackCount: s.plays.length,
-      statusCounts: tallyStatuses(s.plays),
+      trackCount: tally?.trackCount ?? 0,
+      statusCounts: tally?.counts ?? emptyCounts(),
       isPrimary: primary?.dj.id === dj.id,
     };
   });
-
-  // source health across all this DJ's sets
-  const allPlays = sets.flatMap((s) => s.plays);
-  const health = tallyStatuses(allPlays);
-  const provenance: Record<string, number> = {};
-  for (const p of allPlays) provenance[p.provenance] = (provenance[p.provenance] ?? 0) + 1;
 
   // most-played tracks (identified + community-resolved carry a trackId)
   let mostPlayed: { title: string; artistName: string; count: number }[] = [];
@@ -209,6 +260,7 @@ export async function getDjBySlug(slug: string) {
     const trackIds = grouped.map((g) => g.trackId!).filter(Boolean);
     const trackRecords = await prisma.track.findMany({
       where: { id: { in: trackIds } },
+      select: { id: true, title: true, artistName: true },
     });
     const byId = new Map(trackRecords.map((t) => [t.id, t]));
     mostPlayed = grouped
@@ -225,7 +277,9 @@ export async function getDjBySlug(slug: string) {
   const collabRows = setIds.length
     ? await prisma.setArtist.findMany({
         where: { setId: { in: setIds }, djId: { not: dj.id } },
-        include: { dj: true },
+        include: {
+          dj: { select: { id: true, name: true, slug: true, accent: true } },
+        },
       })
     : [];
   const collabMap = new Map<
@@ -264,7 +318,7 @@ export async function getDjBySlug(slug: string) {
     })),
     totals: {
       sets: sets.length,
-      tracks: allPlays.length,
+      tracks: trackTotal,
     },
     recentSets,
     mostPlayed,
@@ -280,7 +334,16 @@ export type DjProfile = NonNullable<Awaited<ReturnType<typeof getDjBySlug>>>;
 // misc
 // ---------------------------------------------------------------------------
 export async function getDjList() {
-  return prisma.dj.findMany({ orderBy: { name: "asc" } });
+  return prisma.dj.findMany({
+    orderBy: { name: "asc" },
+    select: {
+      id: true,
+      slug: true,
+      name: true,
+      homeCity: true,
+      accent: true,
+    },
+  });
 }
 
 export async function getAllSetSlugs() {
@@ -292,8 +355,10 @@ export async function getGenres() {
   const rows = await prisma.set.findMany({
     where: { genre: { not: null } },
     select: { genre: true },
+    distinct: ["genre"],
+    orderBy: { genre: "asc" },
   });
-  return [...new Set(rows.map((r) => r.genre!).filter(Boolean))].sort();
+  return rows.map((r) => r.genre!).filter(Boolean);
 }
 
 // ---------------------------------------------------------------------------
@@ -304,16 +369,19 @@ export async function getLabels() {
     orderBy: { name: "asc" },
     include: { _count: { select: { tracks: true } } },
   });
-  const plays = await prisma.played.findMany({
-    where: { track: { labelId: { not: null } } },
-    select: { setId: true, track: { select: { labelId: true } } },
-  });
-  const setsByLabel = new Map<string, Set<string>>();
-  for (const p of plays) {
-    const lid = p.track!.labelId!;
-    if (!setsByLabel.has(lid)) setsByLabel.set(lid, new Set());
-    setsByLabel.get(lid)!.add(p.setId);
-  }
+
+  // Distinct set cardinality per label without loading every play row into JS.
+  const setCounts = await prisma.$queryRaw<{ labelId: string; setCount: number }[]>`
+    SELECT t.labelId AS labelId, COUNT(DISTINCT p.setId) AS setCount
+    FROM Played p
+    INNER JOIN Track t ON t.id = p.trackId
+    WHERE t.labelId IS NOT NULL
+    GROUP BY t.labelId
+  `;
+  const setsByLabel = new Map(
+    setCounts.map((r) => [r.labelId, Number(r.setCount)]),
+  );
+
   return labels
     .map((l) => ({
       id: l.id,
@@ -321,7 +389,7 @@ export async function getLabels() {
       name: l.name,
       color: l.color,
       trackCount: l._count.tracks,
-      setCount: setsByLabel.get(l.id)?.size ?? 0,
+      setCount: setsByLabel.get(l.id) ?? 0,
     }))
     .filter((l) => l.trackCount > 0)
     .sort((a, b) => b.setCount - a.setCount || b.trackCount - a.trackCount);

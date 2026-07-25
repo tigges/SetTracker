@@ -40,6 +40,8 @@ model Series {
   djId   String
   dj     Dj     @relation(fields: [djId], references: [id])
   sets   Set[]
+
+  @@index([djId])
 }
 
 // A record label.
@@ -80,6 +82,9 @@ model Track {
   resolvedIds IdTrack[] @relation("ResolvedTrack")
 
   createdAt   DateTime @default(now())
+
+  @@index([labelId])
+  @@index([title, artistName])
 }
 
 // A first-class "ID" record for an unreleased / unknown track.
@@ -124,6 +129,12 @@ model Set {
   plays       Played[]
 
   createdAt   DateTime @default(now())
+
+  @@index([publishedAt])
+  @@index([genre])
+  @@index([type])
+  @@index([eventId])
+  @@index([seriesId])
 }
 
 // Join between Set and DJ. Supports b2b / collaborations. One artist is primary.
@@ -136,6 +147,7 @@ model SetArtist {
   isPrimary Boolean @default(false)
 
   @@unique([setId, djId])
+  @@index([djId])
 }
 
 // The core edge: a track played at a position in a set.
@@ -159,4 +171,7 @@ model Played {
   idTrack    IdTrack? @relation("IdPlays", fields: [idTrackId], references: [id])
 
   @@unique([setId, position])
+  @@index([trackId])
+  @@index([idTrackId])
+  @@index([setId, idStatus])
 }
