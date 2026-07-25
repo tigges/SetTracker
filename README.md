@@ -62,8 +62,21 @@ npm run dev        # http://localhost:3000
 | `npm run db:seed`    | Seed mock data                         |
 | `npm run db:setup`   | `db:deploy` + `db:seed`                |
 | `npm run db:reset`   | Drop, re-migrate and re-seed the DB    |
-| `npm run ingest`     | Upsert newly discovered sets & DJs     |
+| `npm run ingest`     | Upsert sets from SoundCloud (+ optional backfill) |
 | `npm run thumbs`     | Resolve artwork URLs (Deezer / iTunes) |
+
+### SoundCloud ingest
+
+Primary pipeline (`src/lib/ingest/soundcloud/`): polls curated DJ/show accounts
+via SoundCloud’s public api-v2, keeps long-form radio/live/mix uploads, parses
+description tracklists and timed comments into `Played` rows (`provenance:
+soundcloud`). Idempotent by `sc-{user}-{permalink}` slug.
+
+| Env | Effect |
+| --- | --- |
+| `SOUNDCLOUD_CLIENT_ID` | Optional override (else discovered from SC page hydration) |
+| `INGEST_SKIP_TOPDJS=1` | SoundCloud only (skip synthetic top-100 backfill) |
+| `INGEST_SYNTHETIC=1` | Also emit legacy demo rows |
 
 The SQLite database lives at `prisma/dev.db` (git-ignored). Connection string
 is in `.env` (`DATABASE_URL="file:./dev.db"`).
