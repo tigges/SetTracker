@@ -1,35 +1,9 @@
-import { getFeed, type FeedItem } from "@/lib/queries";
-import { SetCard } from "@/components/SetCard";
+import { getFeed, getGenres } from "@/lib/queries";
+import { SetFeed } from "@/components/SetFeed";
 import { StatusLegend } from "@/components/StatusBits";
 
-function within7Days(d: Date): boolean {
-  return Date.now() - new Date(d).getTime() < 7 * 24 * 60 * 60 * 1000;
-}
-
-function Section({ title, sets }: { title: string; sets: FeedItem[] }) {
-  if (sets.length === 0) return null;
-  return (
-    <section className="mb-10">
-      <div className="mb-4 flex items-baseline gap-3">
-        <h2 className="text-[13px] font-semibold uppercase tracking-[0.14em] text-muted">
-          {title}
-        </h2>
-        <span className="mono text-[12px] text-muted2">{sets.length}</span>
-        <div className="h-px flex-1 bg-line" />
-      </div>
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {sets.map((s) => (
-          <SetCard key={s.id} set={s} />
-        ))}
-      </div>
-    </section>
-  );
-}
-
 export default async function Home() {
-  const feed = await getFeed();
-  const thisWeek = feed.filter((s) => within7Days(s.publishedAt));
-  const earlier = feed.filter((s) => !within7Days(s.publishedAt));
+  const [feed, genres] = await Promise.all([getFeed(), getGenres()]);
 
   return (
     <div>
@@ -46,8 +20,7 @@ export default async function Home() {
         </div>
       </div>
 
-      <Section title="This week" sets={thisWeek} />
-      <Section title="Earlier" sets={earlier} />
+      <SetFeed feed={feed} genres={genres} />
     </div>
   );
 }

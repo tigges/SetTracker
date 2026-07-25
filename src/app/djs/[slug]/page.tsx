@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getDjBySlug, getAllDjSlugs } from "@/lib/queries";
 import { StatusBar, StatusLegend } from "@/components/StatusBits";
+import { SocialLinks } from "@/components/SocialLinks";
 import {
   PROVENANCE_META,
   SET_TYPE_META,
@@ -88,6 +89,9 @@ export default async function DjPage({
           </div>
         </div>
         {dj.bio && <p className="mt-4 max-w-2xl text-[14px] text-muted">{dj.bio}</p>}
+        <div className="mt-4">
+          <SocialLinks links={dj.socials} />
+        </div>
       </div>
 
       <div className="mt-6 grid grid-cols-1 gap-5 lg:grid-cols-3">

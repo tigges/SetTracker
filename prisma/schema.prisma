@@ -21,6 +21,11 @@ model Dj {
   bio        String?
   accent     String // hex color used as the profile accent in the UI
 
+  // main social accounts (nullable; crawler can fill real handles later)
+  soundcloud String?
+  instagram  String?
+  twitter    String?
+
   sets       SetArtist[]
   series     Series[]
 
@@ -39,11 +44,14 @@ model Series {
 
 // A record label.
 model Label {
-  id     String  @id @default(cuid())
-  slug   String  @unique
-  name   String
-  color  String? // hex, optional brand color
-  tracks Track[]
+  id         String  @id @default(cuid())
+  slug       String  @unique
+  name       String
+  color      String? // hex, optional brand color
+  soundcloud String?
+  instagram  String?
+  website    String?
+  tracks     Track[]
 }
 
 // An event where a set was performed (festival, club night, radio station).
@@ -99,6 +107,8 @@ model Set {
   title       String
   // "radio" | "festival" | "soundcloud"
   type        String
+  // music genre, e.g. "Bass House", "Tech House", "UK Garage"
+  genre       String?
   publishedAt DateTime
   durationSec Int
   sourceUrl   String?

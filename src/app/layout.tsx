@@ -27,12 +27,12 @@ export default function RootLayout({
             <Link href="/" className="flex items-center gap-2">
               <span
                 className="grid h-6 w-6 place-items-center rounded-[6px] text-[13px] font-black text-bg"
-                style={{ background: "linear-gradient(135deg,#ff7a1a,#ec3f97)" }}
+                style={{ background: "var(--brand-strong)" }}
               >
                 S
               </span>
               <span className="text-[15px] font-extrabold tracking-tight">
-                SET<span className="text-muted">GRAPH</span>
+                SET<span className="text-brand">GRAPH</span>
               </span>
             </Link>
             <nav className="flex items-center gap-1 text-[13px]">
@@ -47,6 +47,12 @@ export default function RootLayout({
                 className="rounded-md px-2.5 py-1.5 text-muted transition-colors hover:bg-panel hover:text-ink"
               >
                 DJs
+              </Link>
+              <Link
+                href="/labels"
+                className="rounded-md px-2.5 py-1.5 text-muted transition-colors hover:bg-panel hover:text-ink"
+              >
+                Labels
               </Link>
             </nav>
             <div className="ml-auto hidden lg:block">

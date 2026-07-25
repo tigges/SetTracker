@@ -19,7 +19,7 @@ export default async function SetPage({
   if (!set) notFound();
 
   const type = SET_TYPE_META[set.type] ?? { label: set.type, glyph: "•" };
-  const accent = set.primaryDj?.accent ?? "#ff7a1a";
+  const accent = set.primaryDj?.accent ?? "var(--brand)";
 
   return (
     <div>
@@ -32,15 +32,23 @@ export default async function SetPage({
 
       {/* header */}
       <div className="mt-4 flex flex-col gap-5 border-b border-line pb-7 sm:flex-row sm:items-start">
-        <div
-          className="grid h-20 w-20 flex-none place-items-center rounded-xl text-3xl"
-          style={{
-            background: `linear-gradient(140deg, ${accent}30, ${set.cover}18)`,
-            border: `1px solid ${accent}45`,
-            color: accent,
-          }}
-        >
-          {type.glyph}
+        <div className="relative flex-none">
+          <div
+            className="grid h-20 w-20 place-items-center rounded-2xl text-3xl font-black"
+            style={{
+              background: `${accent}24`,
+              border: `1px solid ${accent}4d`,
+              color: accent,
+            }}
+          >
+            {(set.primaryDj?.name ?? "?").slice(0, 1)}
+          </div>
+          <span
+            className="absolute -bottom-1.5 -right-1.5 grid h-7 w-7 place-items-center rounded-lg border border-line bg-bg text-sm text-muted"
+            title={type.label}
+          >
+            {type.glyph}
+          </span>
         </div>
 
         <div className="min-w-0 flex-1">
@@ -51,6 +59,11 @@ export default async function SetPage({
             >
               {type.label}
             </span>
+            {set.genre && (
+              <span className="rounded-full border border-line px-2 py-0.5 text-[11px] text-muted">
+                {set.genre}
+              </span>
+            )}
             {set.series && <span className="eyebrow">{set.series.name}</span>}
             {set.event && (
               <span className="eyebrow">
