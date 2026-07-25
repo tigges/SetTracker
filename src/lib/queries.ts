@@ -165,6 +165,7 @@ export async function getSetBySlug(slug: string) {
         p.idTrack?.suspectedArtist ??
         null;
       const label = p.track?.label ?? resolved?.label ?? null;
+      const track = p.track ?? resolved;
       return {
         id: p.id,
         position: p.position,
@@ -174,12 +175,18 @@ export async function getSetBySlug(slug: string) {
         rawText: p.rawText,
         title,
         artistName,
-        imageUrl: p.track?.imageUrl ?? resolved?.imageUrl ?? null,
+        imageUrl: track?.imageUrl ?? null,
         labelName: label?.name ?? null,
         labelSlug: label?.slug ?? null,
         labelColor: label?.color ?? null,
         labelImageUrl: label?.imageUrl ?? null,
-        bpm: p.track?.bpm ?? resolved?.bpm ?? null,
+        bpm: track?.bpm ?? null,
+        musicalKey: track?.musicalKey ?? null,
+        mixName: track?.mixName ?? null,
+        remixerName: track?.remixerName ?? null,
+        genre: track?.genre ?? null,
+        trackDurationSec: track?.durationSec ?? null,
+        beatportUrl: track?.beatportUrl ?? null,
         idNote: p.idTrack?.note ?? null,
         resolvedTitle: resolved ? `${resolved.artistName} – ${resolved.title}` : null,
       };

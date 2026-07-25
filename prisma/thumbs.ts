@@ -6,12 +6,14 @@
  * - Labels: fill when imageUrl is null
  * - DJs: always re-resolve (cheap; fixes wrong artist matches after matcher upgrades)
  * - Tracks: fill nulls, and re-resolve rows that only have an artist portrait so
- *   we can upgrade to release cover art when available
+ *   we can upgrade to release cover art when available; also fill durationSec /
+ *   mixName / remixerName from matched provider titles when sparse
  * - Sets: fill nulls; refresh when primary DJ image changed
  *
  * Usage: npm run thumbs
  */
 import { PrismaClient } from "@prisma/client";
+import { parseTrackTitle } from "../src/lib/trackMeta";
 import {
   isArtistArtUrl,
   resolveArtistImage,
@@ -38,6 +40,7 @@ type Stats = {
     covers: number;
     artistFallback: number;
     upgraded: number;
+    meta: number;
   };
   sets: { scanned: number; filled: number; missed: number; updated: number };
 };
@@ -53,6 +56,7 @@ async function main() {
       covers: 0,
       artistFallback: 0,
       upgraded: 0,
+      meta: 0,
     },
     sets: { scanned: 0, filled: 0, missed: 0, updated: 0 },
   };
@@ -103,37 +107,92 @@ async function main() {
     }
   }
 
-  console.log("[thumbs] resolving track artwork (covers preferred)…");
+  console.log("[thumbs] resolving track artwork + light meta…");
   const tracks = await prisma.track.findMany({
-    select: { id: true, title: true, artistName: true, imageUrl: true },
+    select: {
+      id: true,
+      title: true,
+      artistName: true,
+      imageUrl: true,
+      durationSec: true,
+      mixName: true,
+      remixerName: true,
+    },
     orderBy: { title: "asc" },
     ...(TRACK_LIMIT > 0 ? { take: TRACK_LIMIT } : {}),
   });
-  // Only hit the network for missing art or artist-portrait fallbacks we can upgrade.
-  const trackQueue = tracks.filter((t) => !t.imageUrl || isArtistArtUrl(t.imageUrl));
+  // Network for missing/upgradeable art, or sparse duration/mix meta.
+  const trackQueue = tracks.filter(
+    (t) =>
+      !t.imageUrl ||
+      isArtistArtUrl(t.imageUrl) ||
+      t.durationSec == null ||
+      t.mixName == null,
+  );
   for (const t of trackQueue) {
     stats.tracks.scanned += 1;
     const prev = t.imageUrl;
-    const result = await resolveTrackImage(t.title, t.artistName);
-    await sleep(DELAY_MS);
-    if (result) {
-      if (prev !== result.url) {
-        await prisma.track.update({
-          where: { id: t.id },
-          data: { imageUrl: result.url },
-        });
+    const fromTitle = parseTrackTitle(t.title);
+    const needsArt = !t.imageUrl || isArtistArtUrl(t.imageUrl);
+    const needsDuration = t.durationSec == null;
+    // Skip network when only mix is sparse and the title already encodes it.
+    const canLocalMix =
+      !t.mixName && !!fromTitle.mixName && !needsArt && !needsDuration;
+
+    const data: {
+      imageUrl?: string;
+      durationSec?: number;
+      mixName?: string;
+      remixerName?: string;
+    } = {};
+
+    let result: Awaited<ReturnType<typeof resolveTrackImage>> = null;
+    if (canLocalMix) {
+      data.mixName = fromTitle.mixName!;
+      if (fromTitle.remixerName && !t.remixerName) {
+        data.remixerName = fromTitle.remixerName;
+      }
+    } else {
+      result = await resolveTrackImage(t.title, t.artistName);
+      await sleep(DELAY_MS);
+
+      if (result?.url && result.url !== prev) {
+        data.imageUrl = result.url;
         if (prev && result.kind === "cover") stats.tracks.upgraded += 1;
       }
+
+      const matchedParsed = result?.matchedTitle
+        ? parseTrackTitle(result.matchedTitle)
+        : null;
+      const mixName = t.mixName ?? matchedParsed?.mixName ?? fromTitle.mixName;
+      const remixerName =
+        t.remixerName ?? matchedParsed?.remixerName ?? fromTitle.remixerName;
+      if (mixName && !t.mixName) data.mixName = mixName;
+      if (remixerName && !t.remixerName) data.remixerName = remixerName;
+      if (needsDuration && result?.durationSec != null) {
+        data.durationSec = result.durationSec;
+      }
+    }
+
+    if (Object.keys(data).length > 0) {
+      await prisma.track.update({ where: { id: t.id }, data });
+      if (data.mixName || data.remixerName || data.durationSec != null) {
+        stats.tracks.meta += 1;
+      }
+    }
+
+    if (result?.url) {
       stats.tracks.filled += 1;
       if (result.kind === "cover") stats.tracks.covers += 1;
-      else stats.tracks.artistFallback += 1;
-    } else {
+      else if (result.kind === "artist") stats.tracks.artistFallback += 1;
+    } else if (Object.keys(data).length === 0) {
       stats.tracks.missed += 1;
     }
+
     if (stats.tracks.scanned % 25 === 0) {
       console.log(
         `  … tracks ${stats.tracks.scanned}/${trackQueue.length}` +
-          ` (covers ${stats.tracks.covers}, artist-fallback ${stats.tracks.artistFallback}, upgraded ${stats.tracks.upgraded})`,
+          ` (covers ${stats.tracks.covers}, artist-fallback ${stats.tracks.artistFallback}, upgraded ${stats.tracks.upgraded}, meta ${stats.tracks.meta})`,
       );
     }
   }

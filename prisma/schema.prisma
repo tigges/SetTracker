@@ -71,18 +71,27 @@ model Event {
   sets     Set[]
 }
 
-// A released, identified track.
+// A released, identified track (the playable unit in a set — not the release).
 model Track {
   id          String   @id @default(cuid())
   title       String
   artistName  String
+  // Mix / version label when distinct from title, e.g. "Extended Mix"
+  mixName     String?
+  // Remixer credit when present, e.g. "Marten Hörger"
+  remixerName String?
   labelId     String?
   label       Label?   @relation(fields: [labelId], references: [id])
+  // Track-level genre when known (sets also carry a genre)
+  genre       String?
   bpm         Int?
   musicalKey  String?
+  durationSec Int?
   releaseDate DateTime?
   // resolved release artwork URL; null → no track thumb in UI
   imageUrl    String?
+  // Canonical Beatport track/release URL when known (not a search page)
+  beatportUrl String?
 
   plays       Played[] @relation("TrackPlays")
   // ID records that were community-resolved to this track.
@@ -92,6 +101,7 @@ model Track {
 
   @@index([labelId])
   @@index([title, artistName])
+  @@index([genre])
 }
 
 // A first-class "ID" record for an unreleased / unknown track.

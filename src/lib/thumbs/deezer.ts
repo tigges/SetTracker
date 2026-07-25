@@ -150,14 +150,35 @@ export async function resolveLabelImage(name: string): Promise<string | null> {
 }
 
 export type TrackImageResult = {
-  url: string;
+  /** Artwork URL when found; omit/null when only meta was matched. */
+  url?: string | null;
   /** cover = release artwork; artist = portrait fallback */
-  kind: "cover" | "artist";
+  kind?: "cover" | "artist" | null;
+  /** Provider track duration in seconds when matched. */
+  durationSec?: number | null;
+  /** Matched provider title (useful for mix/remix parsing). */
+  matchedTitle?: string | null;
 };
+
+function trackRowMatches(
+  row: { title: string; artist?: { name?: string } },
+  title: string,
+  primaryArtist: string,
+  artistVariants: string[],
+): boolean {
+  if (!nameClose(row.title, title)) return false;
+  const rowArtist = row.artist?.name ?? "";
+  return (
+    !rowArtist ||
+    artistVariants.some((v) => nameClose(rowArtist, v)) ||
+    artistMatchScore(rowArtist, primaryArtist) >= 70
+  );
+}
 
 /**
  * Resolve track artwork. Prefers Deezer release cover art; only falls back to
  * the artist portrait when no matching track/release is found.
+ * Also returns duration + matched title when a track hit is found.
  */
 export async function resolveTrackImage(
   title: string,
@@ -173,39 +194,61 @@ export async function resolveTrackImage(
     `${title} ${artistName}`,
   ];
 
+  let metaOnly: TrackImageResult | null = null;
+
   for (const term of queries) {
     const q = encodeURIComponent(term);
     const json = await deezerGet<
       DeezerList<{
         title: string;
+        duration?: number;
         artist?: { name?: string };
         album?: { cover_medium?: string };
       }>
     >(`/search/track?q=${q}&limit=10`);
     const rows = json?.data ?? [];
 
-    // Pass 1: title + artist both close, require cover art.
     for (const row of rows) {
-      if (!nameClose(row.title, title)) continue;
-      const rowArtist = row.artist?.name ?? "";
-      const artistOk =
-        !rowArtist ||
-        artistVariants.some((v) => nameClose(rowArtist, v)) ||
-        artistMatchScore(rowArtist, primaryArtist) >= 70;
-      if (!artistOk) continue;
+      if (!trackRowMatches(row, title, primaryArtist, artistVariants)) continue;
+      const durationSec =
+        typeof row.duration === "number" && row.duration > 0 ? row.duration : null;
       const img = usableImageUrl(row.album?.cover_medium);
-      if (img && isCoverArtUrl(img)) return { url: preferMedium(img), kind: "cover" };
+      if (img && isCoverArtUrl(img)) {
+        return {
+          url: preferMedium(img),
+          kind: "cover",
+          durationSec,
+          matchedTitle: row.title,
+        };
+      }
+      if (!metaOnly && (durationSec || row.title)) {
+        metaOnly = { durationSec, matchedTitle: row.title };
+      }
     }
   }
 
   // Pass 2: iTunes song artwork (often has covers Deezer misses).
   const itunes = await resolveTrackImageItunes(title, primaryArtist);
-  if (itunes) return itunes;
+  if (itunes) {
+    return {
+      ...itunes,
+      durationSec: itunes.durationSec ?? metaOnly?.durationSec ?? null,
+      matchedTitle: itunes.matchedTitle ?? metaOnly?.matchedTitle ?? null,
+    };
+  }
 
   // Pass 3: artist portrait only as last resort.
   const artistImg = await resolveArtistImage(primaryArtist);
-  if (artistImg) return { url: artistImg, kind: "artist" };
-  return null;
+  if (artistImg) {
+    return {
+      url: artistImg,
+      kind: "artist",
+      durationSec: metaOnly?.durationSec ?? null,
+      matchedTitle: metaOnly?.matchedTitle ?? null,
+    };
+  }
+
+  return metaOnly;
 }
 
 async function resolveTrackImageItunes(
@@ -227,6 +270,7 @@ async function resolveTrackImageItunes(
         trackName?: string;
         artistName?: string;
         artworkUrl100?: string;
+        trackTimeMillis?: number;
       }[];
     };
     for (const row of json.results ?? []) {
@@ -235,7 +279,18 @@ async function resolveTrackImageItunes(
         continue;
       }
       const art = row.artworkUrl100?.replace("100x100bb", "300x300bb");
-      if (art?.startsWith("https://")) return { url: art, kind: "cover" };
+      const durationSec =
+        typeof row.trackTimeMillis === "number"
+          ? Math.round(row.trackTimeMillis / 1000)
+          : null;
+      if (art?.startsWith("https://")) {
+        return {
+          url: art,
+          kind: "cover",
+          durationSec,
+          matchedTitle: row.trackName,
+        };
+      }
     }
   } catch {
     /* ignore */

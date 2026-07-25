@@ -21,6 +21,14 @@ export type RawPlay = {
   artistName?: string;
   label?: string; // label display name
   bpm?: number;
+  musicalKey?: string;
+  genre?: string;
+  durationSec?: number;
+  /** Mix / version label when known upstream (else parsed from title). */
+  mixName?: string;
+  remixerName?: string;
+  /** Canonical Beatport URL only — never a search page. */
+  beatportUrl?: string;
   // unresolved id:
   idLabel?: string; // e.g. "AC Slater - ID"
   suspectedArtist?: string;
