@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getAllLabelSlugs, getLabelBySlug } from "@/lib/queries";
+import { EntityThumb } from "@/components/EntityThumb";
 import { SocialLinks } from "@/components/SocialLinks";
 import { SET_TYPE_META, fmtDate, fmtDuration, fmtRelative } from "@/lib/status";
 
@@ -58,12 +59,14 @@ export default async function LabelPage({
         }}
       >
         <div className="flex items-center gap-5">
-          <div
-            className="grid h-16 w-16 flex-none place-items-center rounded-2xl text-lg font-black"
-            style={{ background: `${color}26`, color, border: `1px solid ${color}55` }}
-          >
-            {label.name.slice(0, 2).toUpperCase()}
-          </div>
+          <EntityThumb
+            src={label.imageUrl}
+            label={label.name}
+            accent={color}
+            size={64}
+            radius={16}
+            monogram={label.name.slice(0, 2).toUpperCase()}
+          />
           <div className="min-w-0">
             <p className="eyebrow" style={{ color }}>
               Label
@@ -93,12 +96,14 @@ export default async function LabelPage({
                   return (
                     <li key={s.slug}>
                       <Link href={`/sets/${s.slug}`} className="flex items-center gap-3 py-3 hover:opacity-90">
-                        <span
-                          className="grid h-9 w-9 flex-none place-items-center rounded-lg text-sm"
-                          style={{ background: `${color}1a`, color, border: `1px solid ${color}33` }}
-                        >
-                          {type.glyph}
-                        </span>
+                        <EntityThumb
+                          src={s.imageUrl}
+                          label={s.title}
+                          accent={color}
+                          size={36}
+                          radius={8}
+                          monogram={type.glyph}
+                        />
                         <div className="min-w-0 flex-1">
                           <div className="truncate text-[14px] text-ink">
                             {s.primaryDjName}
@@ -126,6 +131,13 @@ export default async function LabelPage({
               {label.topTracks.slice(0, 10).map((t, i) => (
                 <li key={i} className="flex items-center gap-3">
                   <span className="mono w-4 flex-none text-[12px] text-muted2">{i + 1}</span>
+                  <EntityThumb
+                    src={t.imageUrl}
+                    label={t.title}
+                    accent={color}
+                    size={32}
+                    radius={6}
+                  />
                   <div className="min-w-0 flex-1">
                     <div className="flex items-baseline justify-between gap-3">
                       <span className="truncate text-[13px] text-ink">

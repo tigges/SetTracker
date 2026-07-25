@@ -75,10 +75,16 @@ export async function getFeed() {
       durationSec: s.durationSec,
       sourceName: s.sourceName,
       cover: s.cover,
+      imageUrl: s.imageUrl,
       eventName: s.event?.name ?? null,
       seriesName: s.series?.name ?? null,
       primaryDj: primary
-        ? { name: primary.dj.name, slug: primary.dj.slug, accent: primary.dj.accent }
+        ? {
+            name: primary.dj.name,
+            slug: primary.dj.slug,
+            accent: primary.dj.accent,
+            imageUrl: primary.dj.imageUrl,
+          }
         : null,
       collaborators: s.artists
         .filter((a) => !a.isPrimary)
@@ -125,13 +131,23 @@ export async function getSetBySlug(slug: string) {
     sourceName: set.sourceName,
     sourceUrl: set.sourceUrl,
     cover: set.cover,
+    imageUrl: set.imageUrl ?? primary?.dj.imageUrl ?? null,
     event: set.event,
     series: set.series,
-    primaryDj: primary?.dj ?? null,
+    primaryDj: primary?.dj
+      ? {
+          id: primary.dj.id,
+          name: primary.dj.name,
+          slug: primary.dj.slug,
+          accent: primary.dj.accent,
+          imageUrl: primary.dj.imageUrl,
+        }
+      : null,
     artists: set.artists.map((a) => ({
       name: a.dj.name,
       slug: a.dj.slug,
       accent: a.dj.accent,
+      imageUrl: a.dj.imageUrl,
       isPrimary: a.isPrimary,
     })),
     statusCounts: tallyStatuses(set.plays),
@@ -158,9 +174,11 @@ export async function getSetBySlug(slug: string) {
         rawText: p.rawText,
         title,
         artistName,
+        imageUrl: p.track?.imageUrl ?? resolved?.imageUrl ?? null,
         labelName: label?.name ?? null,
         labelSlug: label?.slug ?? null,
         labelColor: label?.color ?? null,
+        labelImageUrl: label?.imageUrl ?? null,
         bpm: p.track?.bpm ?? resolved?.bpm ?? null,
         idNote: p.idTrack?.note ?? null,
         resolvedTitle: resolved ? `${resolved.artistName} – ${resolved.title}` : null,
@@ -239,6 +257,7 @@ export async function getDjBySlug(slug: string) {
       publishedAt: s.publishedAt,
       durationSec: s.durationSec,
       cover: s.cover,
+      imageUrl: s.imageUrl ?? primary?.dj.imageUrl ?? null,
       eventName: s.event?.name ?? null,
       seriesName: s.series?.name ?? null,
       trackCount: tally?.trackCount ?? 0,
@@ -248,7 +267,12 @@ export async function getDjBySlug(slug: string) {
   });
 
   // most-played tracks (identified + community-resolved carry a trackId)
-  let mostPlayed: { title: string; artistName: string; count: number }[] = [];
+  let mostPlayed: {
+    title: string;
+    artistName: string;
+    count: number;
+    imageUrl: string | null;
+  }[] = [];
   if (setIds.length) {
     const grouped = await prisma.played.groupBy({
       by: ["trackId"],
@@ -260,17 +284,29 @@ export async function getDjBySlug(slug: string) {
     const trackIds = grouped.map((g) => g.trackId!).filter(Boolean);
     const trackRecords = await prisma.track.findMany({
       where: { id: { in: trackIds } },
-      select: { id: true, title: true, artistName: true },
+      select: { id: true, title: true, artistName: true, imageUrl: true },
     });
     const byId = new Map(trackRecords.map((t) => [t.id, t]));
     mostPlayed = grouped
       .map((g) => {
         const t = byId.get(g.trackId!);
         return t
-          ? { title: t.title, artistName: t.artistName, count: g._count.trackId }
+          ? {
+              title: t.title,
+              artistName: t.artistName,
+              count: g._count.trackId,
+              imageUrl: t.imageUrl,
+            }
           : null;
       })
-      .filter((x): x is { title: string; artistName: string; count: number } => !!x);
+      .filter(
+        (x): x is {
+          title: string;
+          artistName: string;
+          count: number;
+          imageUrl: string | null;
+        } => !!x,
+      );
   }
 
   // collaborators (DJs sharing a set with this DJ)
@@ -306,6 +342,7 @@ export async function getDjBySlug(slug: string) {
     homeCity: dj.homeCity,
     bio: dj.bio,
     accent: dj.accent,
+    imageUrl: dj.imageUrl,
     socials: {
       soundcloud: dj.soundcloud,
       instagram: dj.instagram,
@@ -342,6 +379,7 @@ export async function getDjList() {
       name: true,
       homeCity: true,
       accent: true,
+      imageUrl: true,
     },
   });
 }
@@ -388,6 +426,7 @@ export async function getLabels() {
       slug: l.slug,
       name: l.name,
       color: l.color,
+      imageUrl: l.imageUrl,
       trackCount: l._count.tracks,
       setCount: setsByLabel.get(l.id) ?? 0,
     }))
@@ -445,6 +484,7 @@ export async function getLabelBySlug(slug: string) {
     slug: label.slug,
     name: label.name,
     color: label.color,
+    imageUrl: label.imageUrl,
     socials: {
       soundcloud: label.soundcloud,
       instagram: label.instagram,
@@ -461,11 +501,17 @@ export async function getLabelBySlug(slug: string) {
         genre: s.genre,
         publishedAt: s.publishedAt,
         durationSec: s.durationSec,
+        imageUrl: s.imageUrl ?? prim?.dj.imageUrl ?? null,
         primaryDjName: prim?.dj.name ?? null,
         primaryDjSlug: prim?.dj.slug ?? null,
       };
     }),
-    topTracks,
+    topTracks: topTracks.map((t) => {
+      const full = label.tracks.find(
+        (x) => x.title === t.title && x.artistName === t.artistName,
+      );
+      return { ...t, imageUrl: full?.imageUrl ?? null };
+    }),
     artists,
   };
 }

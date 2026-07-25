@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { EntityThumb } from "@/components/EntityThumb";
 import { getLabels } from "@/lib/queries";
 
 export default async function LabelsPage() {
@@ -24,12 +25,14 @@ export default async function LabelsPage() {
               href={`/labels/${l.slug}`}
               className="card flex items-center gap-3 p-4 transition-colors hover:border-[color:var(--muted2)]"
             >
-              <span
-                className="grid h-11 w-11 flex-none place-items-center rounded-xl text-sm font-black"
-                style={{ background: `${color}22`, color, border: `1px solid ${color}44` }}
-              >
-                {l.name.slice(0, 2).toUpperCase()}
-              </span>
+              <EntityThumb
+                src={l.imageUrl}
+                label={l.name}
+                accent={color}
+                size={44}
+                radius={12}
+                monogram={l.name.slice(0, 2).toUpperCase()}
+              />
               <div className="min-w-0 flex-1">
                 <div className="truncate text-[15px] font-semibold text-ink">
                   {l.name}

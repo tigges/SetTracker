@@ -26,6 +26,9 @@ model Dj {
   instagram  String?
   twitter    String?
 
+  // resolved artwork URL (Deezer CDN etc.); null → monogram fallback in UI
+  imageUrl   String?
+
   sets       SetArtist[]
   series     Series[]
 
@@ -53,6 +56,8 @@ model Label {
   soundcloud String?
   instagram  String?
   website    String?
+  // resolved artwork URL (album art used as label mark); null → initials fallback
+  imageUrl   String?
   tracks     Track[]
 }
 
@@ -76,6 +81,8 @@ model Track {
   bpm         Int?
   musicalKey  String?
   releaseDate DateTime?
+  // resolved release artwork URL; null → no track thumb in UI
+  imageUrl    String?
 
   plays       Played[] @relation("TrackPlays")
   // ID records that were community-resolved to this track.
@@ -119,6 +126,8 @@ model Set {
   sourceUrl   String?
   sourceName  String? // e.g. "1001Tracklists", "SoundCloud"
   cover       String // hex color for the cover gradient seed
+  // resolved set/mix artwork (or primary DJ image); null → monogram fallback
+  imageUrl    String?
 
   eventId     String?
   event       Event?   @relation(fields: [eventId], references: [id])

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { EntityThumb } from "@/components/EntityThumb";
 import { getDjList } from "@/lib/queries";
 
 export default async function DjsPage() {
@@ -22,16 +23,13 @@ export default async function DjsPage() {
             href={`/djs/${dj.slug}`}
             className="card flex items-center gap-3 p-4 transition-colors hover:border-[color:var(--muted2)]"
           >
-            <span
-              className="grid h-11 w-11 flex-none place-items-center rounded-xl text-lg font-black"
-              style={{
-                background: `${dj.accent}22`,
-                color: dj.accent,
-                border: `1px solid ${dj.accent}44`,
-              }}
-            >
-              {dj.name.slice(0, 1)}
-            </span>
+            <EntityThumb
+              src={dj.imageUrl}
+              label={dj.name}
+              accent={dj.accent}
+              size={44}
+              radius={12}
+            />
             <div className="min-w-0">
               <div className="truncate text-[15px] font-semibold text-ink">
                 {dj.name}

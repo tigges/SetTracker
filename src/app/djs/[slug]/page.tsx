@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getDjBySlug, getAllDjSlugs } from "@/lib/queries";
+import { EntityThumb } from "@/components/EntityThumb";
 import { StatusBar, StatusLegend } from "@/components/StatusBits";
 import { SocialLinks } from "@/components/SocialLinks";
 import {
@@ -69,12 +70,13 @@ export default async function DjPage({
         }}
       >
         <div className="flex items-center gap-5">
-          <div
-            className="grid h-16 w-16 flex-none place-items-center rounded-2xl text-2xl font-black"
-            style={{ background: `${accent}26`, color: accent, border: `1px solid ${accent}55` }}
-          >
-            {dj.name.slice(0, 1)}
-          </div>
+          <EntityThumb
+            src={dj.imageUrl}
+            label={dj.name}
+            accent={accent}
+            size={64}
+            radius={16}
+          />
           <div className="min-w-0">
             <p className="eyebrow" style={{ color: accent }}>
               DJ profile
@@ -107,16 +109,14 @@ export default async function DjPage({
                       href={`/sets/${s.slug}`}
                       className="flex items-center gap-3 py-3 transition-colors hover:opacity-90"
                     >
-                      <span
-                        className="grid h-9 w-9 flex-none place-items-center rounded-lg text-sm"
-                        style={{
-                          background: `${accent}1a`,
-                          color: accent,
-                          border: `1px solid ${accent}33`,
-                        }}
-                      >
-                        {type.glyph}
-                      </span>
+                      <EntityThumb
+                        src={s.imageUrl}
+                        label={s.title}
+                        accent={accent}
+                        size={36}
+                        radius={8}
+                        monogram={type.glyph}
+                      />
                       <div className="min-w-0 flex-1">
                         <div className="flex items-center gap-2">
                           <span className="truncate text-[14px] text-ink">
@@ -156,6 +156,13 @@ export default async function DjPage({
                     <span className="mono w-4 flex-none text-[12px] text-muted2">
                       {i + 1}
                     </span>
+                    <EntityThumb
+                      src={t.imageUrl}
+                      label={t.title}
+                      accent={accent}
+                      size={32}
+                      radius={6}
+                    />
                     <div className="min-w-0 flex-1">
                       <div className="flex items-baseline justify-between gap-3">
                         <span className="truncate text-[13px] text-ink">
