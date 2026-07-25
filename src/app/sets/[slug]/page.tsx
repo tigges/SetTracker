@@ -112,7 +112,8 @@ export default async function SetPage({
               </span>
             )}
           </div>
-          {set.sourceName === "SoundCloud" && (
+          {(set.sourceName === "SoundCloud" ||
+            set.sourceName === "hearthis.at") && (
             <p className="mt-2 max-w-xl text-[12px] text-muted2">
               Tracklist is whatever the upload description / timed comments
               include — often partial. Suggest an ID on unresolved rows to fill

@@ -1,5 +1,6 @@
 /**
- * Parse SoundCloud episode descriptions and timed comments into tracklist rows.
+ * Parse mix descriptions and timed comments into tracklist rows.
+ * Used by SoundCloud + hearthis (and later YouTube) adapters.
  *
  * Honest mapping:
  * - "Artist - Title" → identified (best-effort; not Beatport-verified)
@@ -8,6 +9,7 @@
  * - non-tracklist noise (links, follow CTAs) is dropped
  */
 
+import type { Provenance } from "../../status";
 import type { RawPlay } from "../types";
 
 const TS_PREFIX =
@@ -51,8 +53,8 @@ function looksLikeTracklistLine(line: string): boolean {
   if (!line || line.length < 3 || line.length > 200) return false;
   if (SKIP_LINE.test(line)) return false;
   if (/^[#@]/.test(line)) return false;
-  // numbered list / artist - title / ID
-  if (/^\d{1,3}[.)]\s+\S/.test(line)) return true;
+  // numbered list / artist - title / ID (also "01 | Artist - Title")
+  if (/^\d{1,3}([.)]|\s*[.|]\s+)\S/.test(line)) return true;
   if (ID_LINE.test(line)) return true;
   if (/\s[-–—]\s/.test(line)) return true;
   return false;
@@ -62,15 +64,17 @@ function classifyLine(
   rawLine: string,
   position: number,
   timestamp: number,
+  provenance: Provenance,
 ): RawPlay | null {
   let line = rawLine.trim();
-  line = line.replace(/^\d{1,3}[.)]\s+/, "");
+  // "1. ", "01)", "01 | " prefixes from pasted tracklists (require separator)
+  line = line.replace(/^\d{1,3}\s*[.)|]\s+/, "");
   if (!looksLikeTracklistLine(line) && !ID_LINE.test(line)) return null;
 
   const base = {
     position,
     timestamp,
-    provenance: "soundcloud" as const,
+    provenance,
     rawText: rawLine.trim(),
   };
 
@@ -136,6 +140,7 @@ function classifyLine(
 export function parseDescriptionTracklist(
   description: string | null | undefined,
   durationSec: number,
+  provenance: Provenance = "soundcloud",
 ): RawPlay[] {
   if (!description?.trim()) return [];
   const text = stripHtml(description);
@@ -178,7 +183,7 @@ export function parseDescriptionTracklist(
 
   const plays: RawPlay[] = [];
   for (const row of chosen) {
-    const play = classifyLine(row.line, row.position, row.sec);
+    const play = classifyLine(row.line, row.position, row.sec, provenance);
     if (play) plays.push(play);
   }
   return plays.map((p, i) => ({ ...p, position: i + 1 }));
@@ -188,6 +193,7 @@ export function parseTimedComments(
   comments: { body?: string; timestamp?: number | null }[],
   durationSec: number,
   startPosition = 1,
+  provenance: Provenance = "soundcloud",
 ): RawPlay[] {
   const timed = comments
     .filter((c) => c.body?.trim() && c.timestamp != null && c.timestamp >= 0)
@@ -207,7 +213,7 @@ export function parseTimedComments(
         plays.push({
           position: pos++,
           timestamp: c.sec,
-          provenance: "soundcloud",
+          provenance,
           idStatus: "unresolved_id",
           idLabel: "ID - ID",
           note: c.body.slice(0, 160),
@@ -216,7 +222,7 @@ export function parseTimedComments(
       }
       continue;
     }
-    const play = classifyLine(c.body, pos, c.sec);
+    const play = classifyLine(c.body, pos, c.sec, provenance);
     if (play) {
       plays.push(play);
       pos += 1;

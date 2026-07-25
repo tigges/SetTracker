@@ -6,7 +6,12 @@ export type IdStatus =
   | "community_resolved"
   | "unparsed";
 
-export type Provenance = "1001tl" | "soundcloud" | "fingerprint" | "community";
+export type Provenance =
+  | "1001tl"
+  | "soundcloud"
+  | "hearthis"
+  | "fingerprint"
+  | "community";
 
 export const STATUS_META: Record<
   IdStatus,
@@ -51,6 +56,7 @@ export const PROVENANCE_META: Record<
 > = {
   "1001tl": { label: "1001TL parse", short: "1001TL" },
   soundcloud: { label: "SoundCloud parse", short: "SoundCloud" },
+  hearthis: { label: "hearthis.at parse", short: "hearthis" },
   fingerprint: { label: "Fingerprint", short: "Fingerprint" },
   community: { label: "Community", short: "Community" },
 };

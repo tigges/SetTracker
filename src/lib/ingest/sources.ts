@@ -1,4 +1,5 @@
 import type { Provenance } from "../status";
+import { hearthisAdapter } from "./hearthis/adapter";
 import { slugify, type RawArtist, type RawPlay, type RawSet, type SourceAdapter } from "./types";
 import { topDjs } from "./topDjs";
 import { soundcloudAdapter } from "./soundcloud/adapter";
@@ -92,5 +93,12 @@ function withOptionalSynthetic(base: SourceAdapter[]): SourceAdapter[] {
   return base;
 }
 
-/** Primary pipeline: SoundCloud official api-v2 (anonymous client_id). */
-export const adapters: SourceAdapter[] = withOptionalSynthetic([soundcloudAdapter]);
+/**
+ * Primary pipeline:
+ * - SoundCloud curated shows (anonymous client_id)
+ * - hearthis.at house-family categories (public api-v2)
+ */
+export const adapters: SourceAdapter[] = withOptionalSynthetic([
+  soundcloudAdapter,
+  hearthisAdapter,
+]);
