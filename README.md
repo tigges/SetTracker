@@ -1,8 +1,11 @@
-# SETGRAPH
+# setradar.ai
 
-A bass house DJ **set database** (MVP). Browse radio episodes, festival sets and
-SoundCloud mixes; every track row carries a **status** and **provenance** so you
-can see what's identified and what's still an ID.
+A bass house DJ **set database** (MVP), branded as **setradar.ai**. Browse radio
+episodes, festival sets and SoundCloud mixes; every track row carries a
+**status** and **provenance** so you can see what's identified and what's still
+an ID.
+
+> Live (GitHub Pages): https://tigges.github.io/SetTracker/
 
 ## Stack
 
@@ -36,12 +39,14 @@ Provenance per row: `1001TL parse`, `SoundCloud parse`, `fingerprint`, `communit
    row.
 3. **DJ profile** (`/djs/[slug]`) — series, recent sets, most-played tracks,
    collaborators and source health.
+4. **Labels** (`/labels`, `/labels/[slug]`) — imprint index and profiles.
 
 ## Getting started
 
 ```bash
 npm install
-npm run db:setup   # apply migrations + seed mock data (16 DJs, 20 sets)
+npm run db:setup   # apply migrations + seed mock data
+npm run thumbs     # resolve Deezer/iTunes artwork into imageUrl fields
 npm run dev        # http://localhost:3000
 ```
 
@@ -57,6 +62,8 @@ npm run dev        # http://localhost:3000
 | `npm run db:seed`    | Seed mock data                         |
 | `npm run db:setup`   | `db:deploy` + `db:seed`                |
 | `npm run db:reset`   | Drop, re-migrate and re-seed the DB    |
+| `npm run ingest`     | Upsert newly discovered sets & DJs     |
+| `npm run thumbs`     | Resolve artwork URLs (Deezer / iTunes) |
 
 The SQLite database lives at `prisma/dev.db` (git-ignored). Connection string
 is in `.env` (`DATABASE_URL="file:./dev.db"`).
@@ -64,14 +71,16 @@ is in `.env` (`DATABASE_URL="file:./dev.db"`).
 ## Deploy (GitHub Pages)
 
 All data is build-time seed data, so the app can be published as a fully static
-site. `.github/workflows/deploy-pages.yml` seeds the DB, runs a static export
-and deploys to GitHub Pages on every push to `main`.
+site. `.github/workflows/deploy-pages.yml` seeds the DB, ingests, resolves
+thumbnails, runs a static export and deploys to GitHub Pages on every push to
+`main` (and on a 6-hour cron).
 
 ```bash
 # reproduce the static export locally → writes to out/
 GITHUB_PAGES=true PAGES_BASE_PATH=/SetTracker npm run build
 ```
 
-The Pages build sets `output: "export"` with `basePath=/SetTracker` (the project
-subpath). Local dev and `next start` are unaffected — the export only activates
-when `GITHUB_PAGES=true`.
+The Pages build sets `output: "export"` with `basePath=/SetTracker` (the GitHub
+repo subpath — product brand is setradar.ai; the path is unchanged until the
+repo/domain is renamed). Local dev and `next start` are unaffected — the export
+only activates when `GITHUB_PAGES=true`.

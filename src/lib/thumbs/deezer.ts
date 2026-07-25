@@ -3,7 +3,7 @@
  * Used at build/ingest time to resolve artwork URLs for DJs, labels, tracks, sets.
  */
 
-const UA = "SETGRAPH/0.1 (+https://github.com/tigges/SetTracker; artwork resolver)";
+const UA = "SetRadar/0.1 (+https://setradar.ai; artwork resolver)";
 
 /** Empty / missing Deezer artwork patterns to reject. */
 const BAD_IMAGE_MARKERS = [
