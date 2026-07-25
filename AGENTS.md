@@ -12,8 +12,10 @@ on SQLite. There is only one service to run.
 - **Run the app:** `npm run dev` (Turbopack, http://localhost:3000). Dev output
   goes to `.next/dev` in Next 16.
 - **Database:** SQLite at `prisma/dev.db` (git-ignored), `DATABASE_URL` is in the
-  committed `.env` (local file path only, not a secret). The update script runs
-  `prisma migrate deploy` + `prisma db seed`, so the DB is ready on startup.
+  committed `.env` (local file path only, not a secret). The startup update
+  script only refreshes deps (`npm install` + `prisma generate`); it does NOT
+  touch the DB. On a fresh VM run **`npm run db:setup`** once (applies migrations
+  + seeds) before `npm run dev`, otherwise pages error with missing tables.
 - **Re-seeding is destructive:** `npm run db:seed` wipes all tables first, then
   recreates 16 DJs / 20 sets / ~160 plays. Use `npm run db:reset` to drop +
   re-migrate + re-seed from scratch.
