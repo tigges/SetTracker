@@ -144,26 +144,43 @@ export function parseDescriptionTracklist(
     .map((l) => l.trim())
     .filter(Boolean);
 
-  const plays: RawPlay[] = [];
-  let pos = 0;
+  // Prefer lines that carry a real cue timestamp. Track names without times are
+  // still kept (they come from the upload description — not invented), but we
+  // never synthesize filler tracks when the description has no tracklist.
+  const stamped: { line: string; sec: number }[] = [];
+  const unstamped: string[] = [];
   for (const line of lines) {
     const { sec, rest } = parseTimestampPrefix(line);
-    const candidate = rest || line;
-    if (!looksLikeTracklistLine(candidate) && sec == null) continue;
-    pos += 1;
-    const ts =
-      sec ??
-      (plays.length === 0
-        ? 0
-        : Math.min(
-            durationSec,
-            Math.round((durationSec * pos) / Math.max(lines.length + 1, 2)),
-          ));
-    const play = classifyLine(candidate, pos, ts);
-    if (play) plays.push(play);
+    const candidate = (rest || line).trim();
+    if (!candidate) continue;
+    if (sec != null) {
+      if (looksLikeTracklistLine(candidate) || ID_LINE.test(candidate)) {
+        stamped.push({ line: candidate, sec: Math.min(durationSec, sec) });
+      }
+      continue;
+    }
+    if (looksLikeTracklistLine(candidate) || ID_LINE.test(candidate)) {
+      unstamped.push(candidate);
+    }
   }
 
-  // Re-number after filtering
+  // If the description has timed cues, trust those only — avoids mixing real
+  // cue points with evenly-spaced guesses from leftover prose lines.
+  const chosen =
+    stamped.length > 0
+      ? stamped.map((s, i) => ({ line: s.line, sec: s.sec, position: i + 1 }))
+      : unstamped.map((line, i) => ({
+          line,
+          // Order-only placement when the source omitted timestamps.
+          sec: Math.round((durationSec * (i + 1)) / (unstamped.length + 1)),
+          position: i + 1,
+        }));
+
+  const plays: RawPlay[] = [];
+  for (const row of chosen) {
+    const play = classifyLine(row.line, row.position, row.sec);
+    if (play) plays.push(play);
+  }
   return plays.map((p, i) => ({ ...p, position: i + 1 }));
 }
 

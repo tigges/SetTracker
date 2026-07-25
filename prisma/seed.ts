@@ -1173,80 +1173,94 @@ async function main() {
     },
   ];
 
-  for (const s of setDefs) {
-    const set = await prisma.set.create({
-      data: {
-        slug: s.slug,
-        title: s.title,
-        type: s.type,
-        genre: s.genre ?? djGenre[s.primary] ?? "Bass House",
-        publishedAt: daysAgo(s.daysAgo),
-        durationSec: s.durationSec,
-        sourceName: s.source,
-        sourceUrl: s.sourceUrl,
-        cover: s.cover,
-        eventId: s.event ? events[s.event] : null,
-        seriesId: s.series ? series[s.series] : null,
-      },
-    });
-
-    // artists
-    await prisma.setArtist.create({
-      data: { setId: set.id, djId: djs[s.primary], isPrimary: true },
-    });
-    for (const c of s.collaborators ?? []) {
-      await prisma.setArtist.create({
-        data: { setId: set.id, djId: djs[c], isPrimary: false },
+  // Fabricated demo sets (evenly spaced cues, catalog TITLE_POOL picks) are opt-in.
+  // Production / Pages builds leave this off so only real SoundCloud ingest rows ship.
+  const seedMockSets = process.env.SEED_MOCK_SETS === "1";
+  if (!seedMockSets) {
+    console.log(
+      "Skipping mock sets/plays (SEED_MOCK_SETS!=1). Real tracklists come from ingest.",
+    );
+  } else {
+    for (const s of setDefs) {
+      const set = await prisma.set.create({
+        data: {
+          slug: s.slug,
+          title: s.title,
+          type: s.type,
+          genre: s.genre ?? djGenre[s.primary] ?? "Bass House",
+          publishedAt: daysAgo(s.daysAgo),
+          durationSec: s.durationSec,
+          sourceName: s.source,
+          sourceUrl: s.sourceUrl,
+          cover: s.cover,
+          eventId: s.event ? events[s.event] : null,
+          seriesId: s.series ? series[s.series] : null,
+        },
       });
-    }
 
-    // plays
-    const n = s.tracklist.length;
-    for (let i = 0; i < n; i++) {
-      const e = s.tracklist[i];
-      const timestamp = Math.round((s.durationSec * (i + 1)) / (n + 1));
-      const base = { setId: set.id, position: i + 1, timestamp, provenance: e.prov };
-
-      if (e.kind === "id") {
-        await prisma.played.create({
-          data: { ...base, idStatus: "identified", trackId: tracks[e.track] },
-        });
-      } else if (e.kind === "unid") {
-        const idTrack = await prisma.idTrack.create({
-          data: { label: e.label, suspectedArtist: e.suspected, note: e.note, status: "unresolved" },
-        });
-        await prisma.played.create({
-          data: {
-            ...base,
-            idStatus: "unresolved_id",
-            idTrackId: idTrack.id,
-            rawText: e.label,
-          },
-        });
-      } else if (e.kind === "res") {
-        const idTrack = await prisma.idTrack.create({
-          data: {
-            label: e.label,
-            status: "community_resolved",
-            resolvedTrackId: tracks[e.track],
-          },
-        });
-        await prisma.played.create({
-          data: {
-            ...base,
-            idStatus: "community_resolved",
-            idTrackId: idTrack.id,
-            trackId: tracks[e.track],
-            rawText: e.label,
-          },
-        });
-      } else {
-        await prisma.played.create({
-          data: { ...base, idStatus: "unparsed", rawText: e.text },
+      // artists
+      await prisma.setArtist.create({
+        data: { setId: set.id, djId: djs[s.primary], isPrimary: true },
+      });
+      for (const c of s.collaborators ?? []) {
+        await prisma.setArtist.create({
+          data: { setId: set.id, djId: djs[c], isPrimary: false },
         });
       }
+
+      // plays
+      const n = s.tracklist.length;
+      for (let i = 0; i < n; i++) {
+        const e = s.tracklist[i];
+        const timestamp = Math.round((s.durationSec * (i + 1)) / (n + 1));
+        const base = { setId: set.id, position: i + 1, timestamp, provenance: e.prov };
+
+        if (e.kind === "id") {
+          await prisma.played.create({
+            data: { ...base, idStatus: "identified", trackId: tracks[e.track] },
+          });
+        } else if (e.kind === "unid") {
+          const idTrack = await prisma.idTrack.create({
+            data: {
+              label: e.label,
+              suspectedArtist: e.suspected,
+              note: e.note,
+              status: "unresolved",
+            },
+          });
+          await prisma.played.create({
+            data: {
+              ...base,
+              idStatus: "unresolved_id",
+              idTrackId: idTrack.id,
+              rawText: e.label,
+            },
+          });
+        } else if (e.kind === "res") {
+          const idTrack = await prisma.idTrack.create({
+            data: {
+              label: e.label,
+              status: "community_resolved",
+              resolvedTrackId: tracks[e.track],
+            },
+          });
+          await prisma.played.create({
+            data: {
+              ...base,
+              idStatus: "community_resolved",
+              idTrackId: idTrack.id,
+              trackId: tracks[e.track],
+              rawText: e.label,
+            },
+          });
+        } else {
+          await prisma.played.create({
+            data: { ...base, idStatus: "unparsed", rawText: e.text },
+          });
+        }
+      }
+      console.log(`  set ${s.slug}: ${n} plays @ ${hms(s.durationSec)}`);
     }
-    console.log(`  set ${s.slug}: ${n} plays @ ${hms(s.durationSec)}`);
   }
 
   const counts = {

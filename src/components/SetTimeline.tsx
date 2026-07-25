@@ -139,6 +139,12 @@ export function SetTimeline({
           <span className="eyebrow">Tracklist</span>
           <span className="mono text-[12px] text-muted2">{plays.length} rows</span>
         </div>
+        {plays.length === 0 ? (
+          <p className="px-4 py-10 text-center text-[13px] text-muted2">
+            No tracklist parsed from the source yet. We only show tracks found in
+            the upload description or timed comments — nothing invented.
+          </p>
+        ) : null}
         <ol>
           {plays.map((p) => {
             const isActive = p.id === activeId;

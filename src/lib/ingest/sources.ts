@@ -83,13 +83,13 @@ const syntheticDemo: SourceAdapter = {
 };
 
 function withOptionalSynthetic(base: SourceAdapter[]): SourceAdapter[] {
+  // Fabricated catalog backfill is opt-in only — never invent tracklists by default.
   if (process.env.INGEST_SYNTHETIC === "1") {
     return [...base, syntheticDemo, topDjs];
   }
-  // Default: real SoundCloud + lightweight top-DJ backfill for catalog breadth.
-  // Set INGEST_SKIP_TOPDJS=1 to run SoundCloud only.
-  if (process.env.INGEST_SKIP_TOPDJS === "1") return base;
-  return [...base, topDjs];
+  // Legacy: INGEST_TOPDJS=1 (or INGEST_SKIP_TOPDJS=0) re-enables synthetic top-DJ sets.
+  if (process.env.INGEST_TOPDJS === "1") return [...base, topDjs];
+  return base;
 }
 
 /** Primary pipeline: SoundCloud official api-v2 (anonymous client_id). */

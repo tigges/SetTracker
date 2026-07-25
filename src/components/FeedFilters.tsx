@@ -97,7 +97,7 @@ export function FeedFilters({
             onClick={() => setGenre("all")}
             className={chip(genre === "all")}
           >
-            All genres
+            All
           </button>
           {genres.map((g) => (
             <button
