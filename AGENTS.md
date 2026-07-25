@@ -29,5 +29,11 @@ on SQLite. There is only one service to run.
   a new Prisma client without a regenerate.
 - **Lint / typecheck:** `npm run lint` and `npx tsc --noEmit`. `next lint` was
   removed in Next 16; ESLint runs directly.
+- **Ingestion / crawler:** `npm run ingest` upserts newly "discovered" sets & DJs
+  into the DB (idempotent — dedupes by set slug). Source adapters live in
+  `src/lib/ingest/sources.ts` and currently emit synthetic data with a clear
+  `TODO(real)` seam for wiring real 1001Tracklists/SoundCloud crawling. The
+  GitHub Pages workflow runs it on a 6-hour cron (seed → ingest → export →
+  deploy), so on the static site "new data" arrives via scheduled rebuilds.
 - **Standard commands** live in `package.json` scripts and `README.md`; prefer
   those over ad-hoc invocations.
