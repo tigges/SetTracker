@@ -67,7 +67,7 @@ export default function RootLayout({
 
         <footer className="mx-auto max-w-6xl px-5 pb-10 pt-4">
           <div className="border-t border-line pt-5 text-[12px] text-muted2">
-            setradar.ai · bass house set database (MVP) · seeded with mock data
+            setradar.ai · bass house set database · tracklists from SoundCloud + community IDs
           </div>
         </footer>
       </body>

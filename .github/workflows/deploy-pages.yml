@@ -41,6 +41,7 @@ jobs:
           npx prisma migrate deploy
           npx prisma db seed
 
+      # SoundCloud ingest only — mock seed sets and topDjs synthetics stay off.
       - name: Crawl sources for new sets & DJs
         run: npm run ingest
 

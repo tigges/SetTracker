@@ -55,7 +55,7 @@ export const SOUNDCLOUD_SHOWS: SoundCloudShow[] = [
     seriesName: undefined,
     minDurationSec: 25 * 60,
     titleMatch: /\b(radio|live|mix|session|b2b|warehouse|set)\b/i,
-    limit: 12,
+    limit: 20,
   },
   {
     permalink: "nightbassrecords",
@@ -67,7 +67,7 @@ export const SOUNDCLOUD_SHOWS: SoundCloudShow[] = [
     seriesName: "Night Bass Radio",
     minDurationSec: 40 * 60,
     titleMatch: /\b(night bass radio|radio\s*#?\d+|guest mix|mix)\b/i,
-    limit: 15,
+    limit: 20,
   },
   {
     permalink: "cloonee",
@@ -78,7 +78,7 @@ export const SOUNDCLOUD_SHOWS: SoundCloudShow[] = [
     type: "soundcloud",
     minDurationSec: 30 * 60,
     titleMatch: /\b(live|b2b|mix|set|sunrise|radio)\b/i,
-    limit: 12,
+    limit: 18,
   },
   {
     permalink: "marten-horger",
@@ -92,7 +92,7 @@ export const SOUNDCLOUD_SHOWS: SoundCloudShow[] = [
     type: "soundcloud",
     minDurationSec: 20 * 60,
     titleMatch: /\b(mix|session|radio|live|1live|hörg|horg)\b/i,
-    limit: 12,
+    limit: 18,
   },
   {
     permalink: "waxmotif",
@@ -103,7 +103,7 @@ export const SOUNDCLOUD_SHOWS: SoundCloudShow[] = [
     type: "soundcloud",
     minDurationSec: 25 * 60,
     titleMatch: /\b(mix|radio|live|session|b2b)\b/i,
-    limit: 10,
+    limit: 15,
   },
   {
     permalink: "theprescription",
@@ -115,7 +115,7 @@ export const SOUNDCLOUD_SHOWS: SoundCloudShow[] = [
     seriesName: "The Prescription",
     minDurationSec: 30 * 60,
     titleMatch: /\b(prescription|radio|mix|episode)\b/i,
-    limit: 10,
+    limit: 15,
   },
 ];
 
