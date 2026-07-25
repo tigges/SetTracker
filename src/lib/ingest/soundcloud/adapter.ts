@@ -82,9 +82,11 @@ async function trackToRawSet(
   );
 
   let fromComments = parseTimedComments([], durationSec);
+  // Pull timed comments for long-form sets — often the only tracklist signal
+  // when the description is promo-only (lives, radio shows).
   if ((track.comment_count ?? 0) > 0 && durationSec >= 15 * 60) {
     try {
-      const comments = await fetchTrackComments(track.id, 80);
+      const comments = await fetchTrackComments(track.id, 200);
       fromComments = parseTimedComments(comments, durationSec);
       await sleep(120);
     } catch (err) {

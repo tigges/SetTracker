@@ -117,6 +117,80 @@ export const SOUNDCLOUD_SHOWS: SoundCloudShow[] = [
     titleMatch: /\b(prescription|radio|mix|episode)\b/i,
     limit: 15,
   },
+
+  // -------------------- House (broader) — top SC set sources --------------------
+  {
+    permalink: "keinemusik",
+    userId: 42109,
+    label: "Keinemusik",
+    primaryArtist: dj("Keinemusik", {
+      accent: "#e8c547",
+      homeCity: "Berlin, DE",
+    }),
+    genre: "Afro House",
+    type: "radio",
+    seriesName: "Keinemusik Radio",
+    minDurationSec: 35 * 60,
+    titleMatch: /\b(keinemusik|radio|mix|session)\b/i,
+    limit: 30,
+  },
+  {
+    permalink: "solomun",
+    userId: 4545,
+    label: "Solomun",
+    primaryArtist: dj("Solomun", {
+      accent: "#f0e6d8",
+      homeCity: "Hamburg, DE",
+    }),
+    genre: "Melodic House",
+    type: "soundcloud",
+    minDurationSec: 30 * 60,
+    titleMatch: /\b(mix|christmas|momentum|live|radio|session|diynamic)\b/i,
+    limit: 25,
+  },
+  {
+    permalink: "domdolla",
+    userId: 627109,
+    label: "Dom Dolla",
+    primaryArtist: dj("Dom Dolla", {
+      accent: "#ff4d6d",
+      homeCity: "Melbourne, AU",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    minDurationSec: 40 * 60,
+    titleMatch: /\b(live|b2b|mix|set|creamfields|stadium)\b/i,
+    limit: 20,
+  },
+  {
+    permalink: "meduzamusic",
+    userId: 572691174,
+    label: "MEDUZA",
+    primaryArtist: dj("MEDUZA", {
+      accent: "#5cc7e8",
+      homeCity: "Italy",
+    }),
+    genre: "House",
+    type: "radio",
+    seriesName: "Aeterna Radio",
+    minDurationSec: 40 * 60,
+    titleMatch: /\b(aeterna|radio|live|mix|set|open to close)\b/i,
+    limit: 20,
+  },
+  {
+    permalink: "johnsummit",
+    userId: 173854108,
+    label: "John Summit",
+    primaryArtist: dj("John Summit", {
+      accent: "#7cffb2",
+      homeCity: "Chicago, US",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    minDurationSec: 35 * 60,
+    titleMatch: /\b(live|mix|set|radio|b2b|experts only)\b/i,
+    limit: 20,
+  },
 ];
 
 export function isSetCandidate(
