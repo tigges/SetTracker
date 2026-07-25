@@ -189,9 +189,27 @@ export function SetTimeline({
                       >
                         {p.title}
                       </span>
-                      {p.bpm && (
+                      {p.mixName && (
+                        <span
+                          className="hidden truncate text-[11px] text-muted2 sm:inline"
+                          title={p.remixerName ? `Remixer: ${p.remixerName}` : p.mixName}
+                        >
+                          {p.mixName}
+                        </span>
+                      )}
+                      {p.bpm != null && (
                         <span className="mono flex-none text-[11px] text-muted2">
                           {p.bpm} BPM
+                        </span>
+                      )}
+                      {p.musicalKey && (
+                        <span className="mono flex-none text-[11px] text-muted2">
+                          {p.musicalKey}
+                        </span>
+                      )}
+                      {p.trackDurationSec != null && p.trackDurationSec > 0 && (
+                        <span className="mono flex-none text-[11px] text-muted2">
+                          {fmtTimestamp(p.trackDurationSec)}
                         </span>
                       )}
                     </div>
@@ -221,7 +239,9 @@ export function SetTimeline({
                   {(p.idStatus === "identified" ||
                     p.idStatus === "community_resolved") &&
                     (() => {
-                      const links = listenLinks(p.title, p.artistName);
+                      const links = listenLinks(p.title, p.artistName, {
+                        beatportUrl: p.beatportUrl,
+                      });
                       const pill =
                         "grid h-6 place-items-center rounded-md border border-line px-1.5 text-[10px] text-muted2 transition-colors hover:border-brand hover:text-brand";
                       return (
@@ -243,7 +263,11 @@ export function SetTimeline({
                             href={links.beatport}
                             target="_blank"
                             rel="noreferrer"
-                            title="Find on Beatport"
+                            title={
+                              p.beatportUrl
+                                ? "Open on Beatport"
+                                : "Search on Beatport"
+                            }
                             className={`${pill} hidden sm:grid`}
                           >
                             BP

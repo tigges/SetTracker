@@ -7,6 +7,7 @@ import { readFileSync } from "fs";
 import path from "path";
 import type { PrismaClient } from "@prisma/client";
 import { labelSocials } from "../social";
+import { parseTrackTitle } from "../trackMeta";
 import { slugify } from "./types";
 
 export type ResolutionRow = {
@@ -84,13 +85,24 @@ export async function applyResolutions(
           }));
         labelId = label.id;
       }
+      const parsed = parseTrackTitle(row.trackTitle);
       track = await prisma.track.create({
         data: {
           title: row.trackTitle,
           artistName: row.artistName,
           labelId,
+          mixName: parsed.mixName,
+          remixerName: parsed.remixerName,
         },
       });
+    } else if (!track.mixName || !track.remixerName) {
+      const parsed = parseTrackTitle(row.trackTitle);
+      const data: { mixName?: string; remixerName?: string } = {};
+      if (parsed.mixName && !track.mixName) data.mixName = parsed.mixName;
+      if (parsed.remixerName && !track.remixerName) data.remixerName = parsed.remixerName;
+      if (Object.keys(data).length > 0) {
+        track = await prisma.track.update({ where: { id: track.id }, data });
+      }
     }
 
     let idTrackId = play.idTrackId;

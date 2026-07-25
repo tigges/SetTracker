@@ -84,14 +84,20 @@ export function fmtTimestamp(sec: number): string {
   return h > 0 ? `${h}:${mm}:${ss}` : `${mm}:${ss}`;
 }
 
-// External "listen" deep links. We have mock metadata (no real audio/track IDs),
-// so these open a search on each provider for the track — the closest we can get
-// to "play" without licensed streams.
-export function listenLinks(title: string, artist?: string | null) {
+// External "listen" deep links. Prefer a canonical Beatport URL when stored;
+// otherwise open a search — the closest we can get without licensed streams.
+export function listenLinks(
+  title: string,
+  artist?: string | null,
+  opts?: { beatportUrl?: string | null },
+) {
   const q = encodeURIComponent([artist, title].filter(Boolean).join(" ").trim());
   return {
     youtube: `https://www.youtube.com/results?search_query=${q}`,
-    beatport: `https://www.beatport.com/search?q=${q}`,
+    beatport:
+      opts?.beatportUrl && opts.beatportUrl.startsWith("https://www.beatport.com/")
+        ? opts.beatportUrl
+        : `https://www.beatport.com/search?q=${q}`,
     soundcloud: `https://soundcloud.com/search?q=${q}`,
   };
 }

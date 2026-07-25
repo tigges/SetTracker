@@ -1,5 +1,6 @@
 import type { PrismaClient } from "@prisma/client";
 import { djSocials, labelSocials } from "../social";
+import { parseTrackTitle } from "../trackMeta";
 import { hashRawSetContent } from "./hash";
 import { adapters as defaultAdapters } from "./sources";
 import { slugify, type RawArtist, type RawPlay, type RawSet, type SourceAdapter } from "./types";
@@ -86,16 +87,59 @@ export async function runIngest(
     return rec.id;
   }
 
-  async function upsertTrack(
-    title: string,
-    artistName: string,
-    labelName?: string,
-  ): Promise<string> {
-    const existing = await prisma.track.findFirst({ where: { title, artistName } });
-    if (existing) return existing.id;
-    const labelId = await upsertLabel(labelName);
+  async function upsertTrack(play: {
+    title: string;
+    artistName: string;
+    label?: string;
+    bpm?: number;
+    musicalKey?: string;
+    genre?: string;
+    durationSec?: number;
+    mixName?: string;
+    remixerName?: string;
+    beatportUrl?: string;
+  }): Promise<string> {
+    const parsed = parseTrackTitle(play.title);
+    const mixName = play.mixName ?? parsed.mixName;
+    const remixerName = play.remixerName ?? parsed.remixerName;
+    const existing = await prisma.track.findFirst({
+      where: { title: play.title, artistName: play.artistName },
+    });
+    if (existing) {
+      // Fill sparse meta without overwriting known values.
+      const data: Record<string, unknown> = {};
+      if (mixName && !existing.mixName) data.mixName = mixName;
+      if (remixerName && !existing.remixerName) data.remixerName = remixerName;
+      if (play.bpm != null && existing.bpm == null) data.bpm = play.bpm;
+      if (play.musicalKey && !existing.musicalKey) data.musicalKey = play.musicalKey;
+      if (play.genre && !existing.genre) data.genre = play.genre;
+      if (play.durationSec != null && existing.durationSec == null) {
+        data.durationSec = play.durationSec;
+      }
+      if (play.beatportUrl && !existing.beatportUrl) data.beatportUrl = play.beatportUrl;
+      if (play.label && !existing.labelId) {
+        const labelId = await upsertLabel(play.label);
+        if (labelId) data.labelId = labelId;
+      }
+      if (Object.keys(data).length > 0) {
+        await prisma.track.update({ where: { id: existing.id }, data });
+      }
+      return existing.id;
+    }
+    const labelId = await upsertLabel(play.label);
     const created = await prisma.track.create({
-      data: { title, artistName, labelId },
+      data: {
+        title: play.title,
+        artistName: play.artistName,
+        labelId,
+        mixName,
+        remixerName,
+        bpm: play.bpm ?? null,
+        musicalKey: play.musicalKey ?? null,
+        genre: play.genre ?? null,
+        durationSec: play.durationSec ?? null,
+        beatportUrl: play.beatportUrl ?? null,
+      },
     });
     stats.newTracks += 1;
     return created.id;
@@ -143,14 +187,36 @@ export async function runIngest(
         idStatus: p.idStatus,
       };
       if (p.idStatus === "identified" && p.trackTitle && p.artistName) {
-        const trackId = await upsertTrack(p.trackTitle, p.artistName, p.label);
+        const trackId = await upsertTrack({
+          title: p.trackTitle,
+          artistName: p.artistName,
+          label: p.label,
+          bpm: p.bpm,
+          musicalKey: p.musicalKey,
+          genre: p.genre,
+          durationSec: p.durationSec,
+          mixName: p.mixName,
+          remixerName: p.remixerName,
+          beatportUrl: p.beatportUrl,
+        });
         await prisma.played.create({ data: { ...base, trackId } });
       } else if (
         p.idStatus === "community_resolved" &&
         p.trackTitle &&
         p.artistName
       ) {
-        const trackId = await upsertTrack(p.trackTitle, p.artistName, p.label);
+        const trackId = await upsertTrack({
+          title: p.trackTitle,
+          artistName: p.artistName,
+          label: p.label,
+          bpm: p.bpm,
+          musicalKey: p.musicalKey,
+          genre: p.genre,
+          durationSec: p.durationSec,
+          mixName: p.mixName,
+          remixerName: p.remixerName,
+          beatportUrl: p.beatportUrl,
+        });
         const idTrack = await prisma.idTrack.create({
           data: {
             label: p.idLabel ?? "ID - ID",
