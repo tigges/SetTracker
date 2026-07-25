@@ -8,11 +8,14 @@
  * 4) emit RawSet with stable sourceSlug + sourceHash
  */
 
+import { artistsForSet } from "../artists";
+import { promotedSoundcloudPermalinks } from "../discovery/run";
 import { hashRawSetContent } from "../hash";
 import { slugify, type RawSet, type SourceAdapter } from "../types";
 import {
   fetchTrackComments,
   fetchUserTracks,
+  resolveUser,
   sleep,
   type ScTrack,
 } from "./client";
@@ -98,12 +101,14 @@ async function trackToRawSet(
   }
 
   const plays = mergeTracklistSignals(fromDescription, fromComments);
+  const { primary, collaborators } = artistsForSet(title, show.primaryArtist);
   const raw: RawSet = {
     sourceSlug,
     title,
     type: setTypeFor(track, show),
     genre: track.genre?.trim() || show.genre,
-    primaryArtist: show.primaryArtist,
+    primaryArtist: primary,
+    collaborators,
     seriesName: inferSeriesName(title, show),
     publishedAt: publishedAtOf(track),
     durationSec,
@@ -114,6 +119,47 @@ async function trackToRawSet(
   };
   raw.sourceHash = hashRawSetContent(raw);
   return raw;
+}
+
+async function withPromotedShows(
+  base: SoundCloudShow[],
+): Promise<SoundCloudShow[]> {
+  const promoted = promotedSoundcloudPermalinks();
+  if (promoted.length === 0) return base;
+  const seen = new Set(base.map((s) => s.permalink.toLowerCase()));
+  const out = [...base];
+  for (const p of promoted) {
+    const key = p.permalink.toLowerCase();
+    if (seen.has(key)) continue;
+    try {
+      const user = await resolveUser(p.permalink);
+      await sleep(120);
+      if (!user.id) continue;
+      seen.add(key);
+      out.push({
+        permalink: user.permalink || p.permalink,
+        userId: user.id,
+        label: p.name,
+        primaryArtist: {
+          name: p.name,
+          slug: slugify(p.name),
+          accent: p.accent,
+        },
+        genre: p.genre,
+        type: "soundcloud",
+        minDurationSec: 25 * 60,
+        titleMatch: /\b(live|mix|set|b2b|radio|session)\b/i,
+        limit: 12,
+      });
+      console.log(`[soundcloud] + promoted show ${p.permalink} (${user.id})`);
+    } catch (err) {
+      console.warn(
+        `[soundcloud] promote resolve failed ${p.permalink}:`,
+        err instanceof Error ? err.message : err,
+      );
+    }
+  }
+  return out;
 }
 
 export function createSoundCloudAdapter(
@@ -130,7 +176,8 @@ export function createSoundCloudAdapter(
         updatedAt: new Date().toISOString(),
         shows: { ...state.shows },
       };
-      const ordered = sortShowsByHeat(shows, state);
+      const allShows = await withPromotedShows(shows);
+      const ordered = sortShowsByHeat(allShows, state);
 
       for (const show of ordered) {
         const baseline = show.limit ?? 12;

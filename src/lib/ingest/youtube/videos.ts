@@ -5,7 +5,7 @@
  * - include a timed tracklist in the description, or
  * - have YouTube Music "songs in this video" credits (Content ID)
  *
- * Venue channels are polled separately via `venues.ts`.
+ * Venue + artist channels are polled separately via `venues.ts` / `artists.ts`.
  */
 
 import type { RawArtist } from "../types";
@@ -47,5 +47,25 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     type: "festival",
     seriesName: "Cafe Mambo",
     eventName: "Cafe Mambo Ibiza",
+  },
+  {
+    video: "https://www.youtube.com/watch?v=EXKpyYAXtyw",
+    primaryArtist: dj("Chris Lake", {
+      accent: "#3d8bfd",
+      homeCity: "London, UK",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    eventName: "Los Angeles Historic Park",
+  },
+  {
+    video: "https://www.youtube.com/watch?v=6v9ByGvQqbY",
+    primaryArtist: dj("Oliver Heldens", {
+      accent: "#7c5cff",
+      homeCity: "Netherlands",
+    }),
+    genre: "Future House",
+    type: "radio",
+    seriesName: "Heldeep Radio",
   },
 ];

@@ -66,4 +66,17 @@ assert.equal(james.length, 3);
 assert.equal(james[0].artistName, "Technotronic");
 assert.equal(james[1].timestamp, 2 * 60 + 5);
 
+const heldeep = parseDescriptionTracklist(
+  `Heldeep Radio Opener - 00:00
+1. Aden Rémai, GAWP - Killer Sound (feat. I Jah) 00:39
+2. Oliver Heldens, Kryder, The Young Punx - AEIOU 03:44
+3. Oden & Fatzo - You Don't Want To Think About It 08:29`,
+  3600,
+  "youtube",
+);
+assert.equal(heldeep.length, 4);
+assert.equal(heldeep[1].timestamp, 39);
+assert.equal(heldeep[1].artistName, "Aden Rémai, GAWP");
+assert.equal(heldeep[2].timestamp, 3 * 60 + 44);
+
 console.log("parseTracklist.test.ts ok");
