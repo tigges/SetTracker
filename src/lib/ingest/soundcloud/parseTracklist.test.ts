@@ -26,4 +26,15 @@ assert.equal(untimedPlays[0].trackTitle, "Track A");
 const empty = parseDescriptionTracklist("Just a vibe dump with no tracklist", 3600);
 assert.equal(empty.length, 0);
 
+const numbered = parseDescriptionTracklist(
+  `01 | Intro - berlin city
+02 | Thomas Tonfeld - Die Straßen
+03 | Jonny Bee - Flowers And Flawors (Original Mix)`,
+  3600,
+  "hearthis",
+);
+assert.equal(numbered.length, 3);
+assert.equal(numbered[1].artistName, "Thomas Tonfeld");
+assert.equal(numbered[0].provenance, "hearthis");
+
 console.log("parseTracklist.test.ts ok");
