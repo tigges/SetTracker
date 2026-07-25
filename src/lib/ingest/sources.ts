@@ -1,5 +1,6 @@
 import type { Provenance } from "../status";
 import { slugify, type RawArtist, type RawPlay, type RawSet, type SourceAdapter } from "./types";
+import { topDjs } from "./topDjs";
 
 // ---------------------------------------------------------------------------
 // Small DSL to author tracklists compactly (mirrors the seed helpers).
@@ -194,4 +195,4 @@ const soundcloud: SourceAdapter = {
   },
 };
 
-export const adapters: SourceAdapter[] = [oneThousandOne, soundcloud];
+export const adapters: SourceAdapter[] = [oneThousandOne, soundcloud, topDjs];
