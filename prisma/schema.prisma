@@ -128,6 +128,9 @@ model Set {
   cover       String // hex color for the cover gradient seed
   // resolved set/mix artwork (or primary DJ image); null → monogram fallback
   imageUrl    String?
+  // Hash of source payload (description/comments/title). When it changes, ingest
+  // refreshes the tracklist instead of skip-forever.
+  sourceHash  String?
 
   eventId     String?
   event       Event?   @relation(fields: [eventId], references: [id])

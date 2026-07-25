@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { EntityThumb } from "@/components/EntityThumb";
+import { SuggestIdButton } from "@/components/SuggestId";
 import {
   PROVENANCE_META,
   STATUS_META,
@@ -19,10 +20,12 @@ export function SetTimeline({
   plays,
   durationSec,
   accent,
+  setSlug,
 }: {
   plays: PlayRow[];
   durationSec: number;
   accent: string;
+  setSlug: string;
 }) {
   const [activeId, setActiveId] = useState<string | null>(plays[0]?.id ?? null);
   const [flashId, setFlashId] = useState<string | null>(null);
@@ -202,6 +205,18 @@ export function SetTimeline({
                       )}
                     </div>
                   </div>
+
+                  {(p.idStatus === "unresolved_id" ||
+                    p.idStatus === "unparsed") && (
+                    <SuggestIdButton
+                      setSlug={setSlug}
+                      position={p.position}
+                      timestamp={p.timestamp}
+                      currentLabel={
+                        p.artistName ? `${p.artistName} – ${p.title}` : p.title
+                      }
+                    />
+                  )}
 
                   {(p.idStatus === "identified" ||
                     p.idStatus === "community_resolved") &&

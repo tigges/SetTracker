@@ -123,6 +123,7 @@ export default async function SetPage({
         plays={set.plays}
         durationSec={set.durationSec}
         accent={accent}
+        setSlug={set.slug}
       />
     </div>
   );

@@ -45,6 +45,8 @@ export type RawSet = {
   sourceName: string;
   sourceUrl?: string;
   cover: string;
+  /** Optional content hash — when set, ingest refreshes plays if it changes. */
+  sourceHash?: string;
   plays: RawPlay[];
 };
 

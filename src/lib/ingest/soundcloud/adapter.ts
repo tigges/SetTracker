@@ -2,12 +2,13 @@
  * Real SoundCloud source adapter for setradar.ai.
  *
  * Pipeline per curated show:
- * 1) list recent public uploads (api-v2)
+ * 1) adaptive poll (hot shows fetched deeper / first)
  * 2) keep long-form sets / radio / live mixes
  * 3) parse description tracklist + timed comments
- * 4) emit RawSet with stable sourceSlug = soundcloud permalink
+ * 4) emit RawSet with stable sourceSlug + sourceHash
  */
 
+import { hashRawSetContent } from "../hash";
 import { slugify, type RawSet, type SourceAdapter } from "../types";
 import {
   fetchTrackComments,
@@ -20,6 +21,14 @@ import {
   parseDescriptionTracklist,
   parseTimedComments,
 } from "./parseTracklist";
+import {
+  adaptiveLimit,
+  loadPollState,
+  savePollState,
+  sortShowsByHeat,
+  summarizeTracksForState,
+  type PollStateFile,
+} from "./pollState";
 import {
   SOUNDCLOUD_SHOWS,
   inferSeriesName,
@@ -41,7 +50,6 @@ function publishedAtOf(track: ScTrack): Date {
 }
 
 function coverOf(track: ScTrack, show: SoundCloudShow): string {
-  // Keep hex cover seed for UI fallbacks; artwork URL is resolved later by thumbs.
   return show.primaryArtist.accent ?? ACCENT_FALLBACK;
 }
 
@@ -74,7 +82,6 @@ async function trackToRawSet(
   );
 
   let fromComments = parseTimedComments([], durationSec);
-  // Timed comments: only fetch when the upload looks interactive / long-form.
   if ((track.comment_count ?? 0) > 0 && durationSec >= 15 * 60) {
     try {
       const comments = await fetchTrackComments(track.id, 80);
@@ -89,8 +96,7 @@ async function trackToRawSet(
   }
 
   const plays = mergeTracklistSignals(fromDescription, fromComments);
-
-  return {
+  const raw: RawSet = {
     sourceSlug,
     title,
     type: setTypeFor(track, show),
@@ -104,6 +110,8 @@ async function trackToRawSet(
     cover: coverOf(track, show),
     plays,
   };
+  raw.sourceHash = hashRawSetContent(raw);
+  return raw;
 }
 
 export function createSoundCloudAdapter(
@@ -115,11 +123,26 @@ export function createSoundCloudAdapter(
     async fetchRecent(): Promise<RawSet[]> {
       const out: RawSet[] = [];
       const seen = new Set<string>();
+      const state = loadPollState();
+      const nextState: PollStateFile = {
+        updatedAt: new Date().toISOString(),
+        shows: { ...state.shows },
+      };
+      const ordered = sortShowsByHeat(shows, state);
 
-      for (const show of shows) {
+      for (const show of ordered) {
+        const baseline = show.limit ?? 12;
+        const limit = adaptiveLimit(show.permalink, baseline, state);
         let tracks: ScTrack[] = [];
         try {
-          tracks = await fetchUserTracks(show.userId, show.limit ?? 12);
+          console.log(
+            `[soundcloud] poll ${show.permalink} limit=${limit}` +
+              (state.shows[show.permalink]
+                ? ` (recent=${state.shows[show.permalink].recentUploadCount})`
+                : ""),
+          );
+          tracks = await fetchUserTracks(show.userId, limit);
+          nextState.shows[show.permalink] = summarizeTracksForState(tracks, limit);
           await sleep(150);
         } catch (err) {
           console.error(
@@ -146,6 +169,15 @@ export function createSoundCloudAdapter(
             );
           }
         }
+      }
+
+      try {
+        savePollState(nextState);
+      } catch (err) {
+        console.warn(
+          "[soundcloud] could not persist poll state:",
+          err instanceof Error ? err.message : err,
+        );
       }
 
       return out;
