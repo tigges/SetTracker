@@ -11,6 +11,12 @@ import type { FeedItem } from "@/lib/queries";
 export function SetCard({ set }: { set: FeedItem }) {
   const type = SET_TYPE_META[set.type] ?? { label: set.type, glyph: "•" };
   const accent = set.primaryDj?.accent ?? "var(--brand)";
+  const djLine =
+    (set.primaryDj?.name ?? "Unknown") +
+    (set.collaborators.length > 0
+      ? ` b2b ${set.collaborators.map((c) => c.name).join(", ")}`
+      : "");
+  const context = set.seriesName ?? set.eventName ?? null;
 
   return (
     <Link
@@ -33,25 +39,12 @@ export function SetCard({ set }: { set: FeedItem }) {
             <span className="eyebrow" style={{ color: accent }}>
               {type.label}
             </span>
-            {set.seriesName && (
-              <span className="eyebrow truncate">· {set.seriesName}</span>
-            )}
-            {set.eventName && (
-              <span className="eyebrow truncate">· {set.eventName}</span>
-            )}
+            {context && <span className="eyebrow truncate">· {context}</span>}
           </div>
           <h3 className="mt-1 truncate text-[15px] font-semibold leading-tight text-ink">
-            {set.title}
+            {djLine}
           </h3>
-          <p className="mt-0.5 truncate text-[13px] text-muted">
-            {set.primaryDj?.name}
-            {set.collaborators.length > 0 && (
-              <span className="text-muted2">
-                {" "}
-                b2b {set.collaborators.map((c) => c.name).join(", ")}
-              </span>
-            )}
-          </p>
+          <p className="mt-0.5 truncate text-[13px] text-muted">{set.title}</p>
         </div>
       </div>
 

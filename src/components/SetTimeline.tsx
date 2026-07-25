@@ -5,6 +5,7 @@ import {
   PROVENANCE_META,
   STATUS_META,
   fmtTimestamp,
+  listenLinks,
   statusColor,
   statusLabel,
   type IdStatus,
@@ -193,14 +194,57 @@ export function SetTimeline({
                     </div>
                   </div>
 
+                  {(p.idStatus === "identified" ||
+                    p.idStatus === "community_resolved") &&
+                    (() => {
+                      const links = listenLinks(p.title, p.artistName);
+                      const pill =
+                        "grid h-6 place-items-center rounded-md border border-line px-1.5 text-[10px] text-muted2 transition-colors hover:border-brand hover:text-brand";
+                      return (
+                        <div
+                          className="flex flex-none items-center gap-1"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <a
+                            href={links.youtube}
+                            target="_blank"
+                            rel="noreferrer"
+                            title="Play / search on YouTube"
+                            className={`${pill} w-6`}
+                            aria-label="Play on YouTube"
+                          >
+                            ▶
+                          </a>
+                          <a
+                            href={links.beatport}
+                            target="_blank"
+                            rel="noreferrer"
+                            title="Find on Beatport"
+                            className={`${pill} hidden sm:grid`}
+                          >
+                            BP
+                          </a>
+                          <a
+                            href={links.soundcloud}
+                            target="_blank"
+                            rel="noreferrer"
+                            title="Search on SoundCloud"
+                            className={`${pill} hidden sm:grid`}
+                          >
+                            SC
+                          </a>
+                        </div>
+                      );
+                    })()}
+
                   {p.labelName && (
-                    <span className="hidden flex-none rounded-full border border-line bg-bg2 px-2 py-0.5 text-[11px] text-muted sm:inline">
+                    <span className="hidden flex-none rounded-full border border-line bg-bg2 px-2 py-0.5 text-[11px] text-muted lg:inline">
                       {p.labelName}
                     </span>
                   )}
 
                   <span
-                    className="flex-none rounded-md border border-line px-2 py-0.5 text-[11px] text-muted2"
+                    className="hidden flex-none rounded-md border border-line px-2 py-0.5 text-[11px] text-muted2 sm:inline"
                     title={`Provenance: ${prov?.label ?? p.provenance}`}
                   >
                     {prov?.short ?? p.provenance}
