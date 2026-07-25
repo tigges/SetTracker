@@ -11,6 +11,7 @@ export type Provenance =
   | "soundcloud"
   | "hearthis"
   | "youtube"
+  | "bandcamp"
   | "fingerprint"
   | "community";
 
@@ -59,6 +60,7 @@ export const PROVENANCE_META: Record<
   soundcloud: { label: "SoundCloud parse", short: "SoundCloud" },
   hearthis: { label: "hearthis.at parse", short: "hearthis" },
   youtube: { label: "YouTube parse", short: "YouTube" },
+  bandcamp: { label: "Bandcamp", short: "Bandcamp" },
   fingerprint: { label: "Fingerprint", short: "Fingerprint" },
   community: { label: "Community", short: "Community" },
 };

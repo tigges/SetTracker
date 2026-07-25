@@ -1,5 +1,5 @@
 /**
- * YouTube source adapter for curated DJ sets / lives.
+ * YouTube source adapter for curated DJ sets / lives + venue channels.
  *
  * Tracklist signals (honest, no invented titles):
  * 1) Timed / numbered lines in the video description
@@ -12,8 +12,20 @@
 import { hashRawSetContent } from "../hash";
 import { parseDescriptionTracklist } from "../soundcloud/parseTracklist";
 import { slugify, type RawPlay, type RawSet, type SourceAdapter } from "../types";
-import { fetchWatchMeta, sleep, type YtMusicCredit } from "./client";
+import {
+  fetchChannelVideoIds,
+  fetchWatchMeta,
+  sleep,
+  type YtMusicCredit,
+  type YtWatchMeta,
+} from "./client";
 import { YOUTUBE_SETS, type YoutubeSetSource } from "./videos";
+import {
+  artistFromVenueTitle,
+  isVenueSetCandidate,
+  YOUTUBE_VENUES,
+  type YoutubeVenueChannel,
+} from "./venues";
 
 function musicCreditsToPlays(
   credits: YtMusicCredit[],
@@ -56,7 +68,17 @@ function mergeDescriptionAndCredits(
   return merged.map((p, i) => ({ ...p, position: i + 1 }));
 }
 
-async function videoToRawSet(src: YoutubeSetSource): Promise<RawSet | null> {
+function playsFromMeta(meta: YtWatchMeta): RawPlay[] {
+  const fromDescription = parseDescriptionTracklist(
+    meta.description,
+    meta.durationSec,
+    "youtube",
+  );
+  const fromMusic = musicCreditsToPlays(meta.musicCredits, meta.durationSec);
+  return mergeDescriptionAndCredits(fromDescription, fromMusic);
+}
+
+async function curatedToRawSet(src: YoutubeSetSource): Promise<RawSet | null> {
   const meta = await fetchWatchMeta(src.video);
   const durationSec = meta.durationSec;
   if (durationSec < 10 * 60) {
@@ -66,15 +88,7 @@ async function videoToRawSet(src: YoutubeSetSource): Promise<RawSet | null> {
     return null;
   }
 
-  const fromDescription = parseDescriptionTracklist(
-    meta.description,
-    durationSec,
-    "youtube",
-  );
-  const fromMusic = musicCreditsToPlays(meta.musicCredits, durationSec);
-  const plays = mergeDescriptionAndCredits(fromDescription, fromMusic);
-
-  // Still ingest the set even with 0 plays — honest empty state.
+  const plays = playsFromMeta(meta);
   const title = (src.title || meta.title).trim();
   const sourceSlug = `yt-${meta.videoId}`.slice(0, 120);
   const artist = src.primaryArtist;
@@ -88,6 +102,8 @@ async function videoToRawSet(src: YoutubeSetSource): Promise<RawSet | null> {
       ...artist,
       slug: artist.slug || slugify(artist.name),
     },
+    seriesName: src.seriesName,
+    eventName: src.eventName,
     publishedAt: meta.publishedAt ?? new Date(),
     durationSec,
     sourceName: "YouTube",
@@ -99,13 +115,55 @@ async function videoToRawSet(src: YoutubeSetSource): Promise<RawSet | null> {
 
   console.log(
     `[youtube] + ${sourceSlug} (${plays.length} plays;` +
-      ` desc=${fromDescription.length}, music=${fromMusic.length}; ${durationSec}s)`,
+      ` curated; ${durationSec}s)`,
+  );
+  return raw;
+}
+
+async function venueVideoToRawSet(
+  videoId: string,
+  venue: YoutubeVenueChannel,
+): Promise<RawSet | null> {
+  const meta = await fetchWatchMeta(videoId);
+  if (!isVenueSetCandidate(meta.title, meta.durationSec, venue)) {
+    return null;
+  }
+
+  const artistName = artistFromVenueTitle(meta.title);
+  const plays = playsFromMeta(meta);
+  const sourceSlug = `yt-${meta.videoId}`.slice(0, 120);
+
+  const raw: RawSet = {
+    sourceSlug,
+    title: meta.title.trim(),
+    type: "festival",
+    genre: venue.genre,
+    primaryArtist: {
+      name: artistName,
+      slug: slugify(artistName),
+      accent: venue.accent,
+    },
+    seriesName: venue.seriesName,
+    eventName: venue.seriesName,
+    publishedAt: meta.publishedAt ?? new Date(),
+    durationSec: meta.durationSec,
+    sourceName: "YouTube",
+    sourceUrl: meta.watchUrl,
+    cover: venue.accent,
+    plays,
+  };
+  raw.sourceHash = hashRawSetContent(raw);
+
+  console.log(
+    `[youtube] + ${sourceSlug} (${plays.length} plays;` +
+      ` ${venue.seriesName}; ${meta.durationSec}s)`,
   );
   return raw;
 }
 
 export function createYoutubeAdapter(
   videos: YoutubeSetSource[] = YOUTUBE_SETS,
+  venues: YoutubeVenueChannel[] = YOUTUBE_VENUES,
 ): SourceAdapter {
   return {
     id: "youtube",
@@ -113,12 +171,12 @@ export function createYoutubeAdapter(
     async fetchRecent(): Promise<RawSet[]> {
       const out: RawSet[] = [];
       const seen = new Set<string>();
+
       for (const src of videos) {
         try {
-          const raw = await videoToRawSet(src);
+          const raw = await curatedToRawSet(src);
           await sleep(250);
-          if (!raw) continue;
-          if (seen.has(raw.sourceSlug)) continue;
+          if (!raw || seen.has(raw.sourceSlug)) continue;
           seen.add(raw.sourceSlug);
           out.push(raw);
         } catch (err) {
@@ -128,6 +186,38 @@ export function createYoutubeAdapter(
           );
         }
       }
+
+      for (const venue of venues) {
+        const limit = venue.limit ?? 8;
+        let ids: string[] = [];
+        try {
+          ids = await fetchChannelVideoIds(venue.channel, limit);
+          await sleep(300);
+        } catch (err) {
+          console.warn(
+            `[youtube] channel ${venue.channel}:`,
+            err instanceof Error ? err.message : err,
+          );
+          continue;
+        }
+
+        for (const id of ids) {
+          if (seen.has(`yt-${id}`)) continue;
+          try {
+            const raw = await venueVideoToRawSet(id, venue);
+            await sleep(250);
+            if (!raw || seen.has(raw.sourceSlug)) continue;
+            seen.add(raw.sourceSlug);
+            out.push(raw);
+          } catch (err) {
+            console.warn(
+              `[youtube] skip venue ${id}:`,
+              err instanceof Error ? err.message : err,
+            );
+          }
+        }
+      }
+
       return out;
     },
   };

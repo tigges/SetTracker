@@ -259,3 +259,44 @@ function approxDurationFromPlayer(player: Record<string, unknown>): number | nul
 export function sleep(ms: number): Promise<void> {
   return new Promise((r) => setTimeout(r, ms));
 }
+
+/**
+ * Recent uploads from a YouTube channel videos tab (no API key).
+ * Returns video IDs in page order (newest-first when the tab hydrates).
+ */
+export async function fetchChannelVideoIds(
+  handleOrUrl: string,
+  limit = 12,
+): Promise<string[]> {
+  const handle = handleOrUrl.trim();
+  let url: string;
+  if (handle.startsWith("http")) {
+    url = handle.includes("/videos")
+      ? handle
+      : `${handle.replace(/\/$/, "")}/videos`;
+  } else {
+    const h = handle.startsWith("@") ? handle : `@${handle}`;
+    url = `https://www.youtube.com/${h}/videos`;
+  }
+
+  const res = await fetch(url, {
+    headers: {
+      "User-Agent": UA,
+      "Accept-Language": "en-US,en;q=0.9",
+      Accept: "text/html",
+    },
+    signal: AbortSignal.timeout(25_000),
+  });
+  if (!res.ok) throw new Error(`YouTube channel HTTP ${res.status} for ${url}`);
+  const html = await res.text();
+  const ids = [...html.matchAll(/"videoId":"([\w-]{11})"/g)].map((m) => m[1]);
+  const unique: string[] = [];
+  const seen = new Set<string>();
+  for (const id of ids) {
+    if (seen.has(id)) continue;
+    seen.add(id);
+    unique.push(id);
+    if (unique.length >= limit) break;
+  }
+  return unique;
+}

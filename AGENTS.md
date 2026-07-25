@@ -34,14 +34,15 @@ setradar.ai.
 - **Ingestion / crawler:** `npm run ingest` upserts newly discovered sets & DJs.
   **Primary sources:** SoundCloud (`src/lib/ingest/soundcloud/`) curated shows
   via api-v2 + **hearthis.at** house categories (`src/lib/ingest/hearthis/`) +
-  **YouTube** curated sets (`src/lib/ingest/youtube/` — description tracklists
-  and YouTube Music song credits). SC has adaptive poll limits
-  (`data/soundcloud-poll-state.json`). **sourceHash refresh** when tracklists
-  change (preserves `community_resolved` rows). After ingest, applies
-  `data/resolutions.json` (Suggest ID → GitHub issue → paste JSON → redeploy).
-  Optional: `HEARTHIS_MAX_SETS`, `INGEST_TOPDJS=1`, `INGEST_SYNTHETIC=1`,
-  `SOUNDCLOUD_CLIENT_ID`. Do **not** crawl 1001Tracklists. Pages cron: seed →
-  ingest → thumbs → export.
+  **YouTube** curated sets + venue channels (`src/lib/ingest/youtube/` —
+  Boiler Room / Cercle / Mixmag; description tracklists and YouTube Music song
+  credits) + **Bandcamp** curated tracks/albums (`src/lib/ingest/bandcamp/`).
+  SC has adaptive poll limits (`data/soundcloud-poll-state.json`). **sourceHash
+  refresh** when tracklists change (preserves `community_resolved` rows). After
+  ingest, applies `data/resolutions.json` (Suggest ID → GitHub issue → paste
+  JSON → redeploy). Optional: `HEARTHIS_MAX_SETS`, `INGEST_TOPDJS=1`,
+  `INGEST_SYNTHETIC=1`, `SOUNDCLOUD_CLIENT_ID`. Do **not** crawl 1001Tracklists.
+  Pages cron: seed → ingest → thumbs → export.
 - **Artwork thumbnails:** `npm run thumbs` fills null `imageUrl` on Dj / Label /
   Track / Set via the Deezer Search API (no key). Idempotent; skips rows that
   already have art. Sets fall back to the primary DJ image. The Pages workflow

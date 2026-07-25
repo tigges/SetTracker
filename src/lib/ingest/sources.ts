@@ -1,4 +1,5 @@
 import type { Provenance } from "../status";
+import { bandcampAdapter } from "./bandcamp/adapter";
 import { hearthisAdapter } from "./hearthis/adapter";
 import { slugify, type RawArtist, type RawPlay, type RawSet, type SourceAdapter } from "./types";
 import { topDjs } from "./topDjs";
@@ -98,10 +99,12 @@ function withOptionalSynthetic(base: SourceAdapter[]): SourceAdapter[] {
  * Primary pipeline:
  * - SoundCloud curated shows (anonymous client_id)
  * - hearthis.at house-family categories (public api-v2)
- * - YouTube curated sets (description + Music credits)
+ * - YouTube curated sets + venue channels (description + Music credits)
+ * - Bandcamp curated tracks/albums
  */
 export const adapters: SourceAdapter[] = withOptionalSynthetic([
   soundcloudAdapter,
   hearthisAdapter,
   youtubeAdapter,
+  bandcampAdapter,
 ]);

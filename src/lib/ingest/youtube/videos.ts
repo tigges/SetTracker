@@ -5,8 +5,7 @@
  * - include a timed tracklist in the description, or
  * - have YouTube Music "songs in this video" credits (Content ID)
  *
- * This is the same density lever as SoundCloud descriptions — when the
- * uploader (or YT Music) lists tracks, we can ingest them honestly.
+ * Venue channels are polled separately via `venues.ts`.
  */
 
 import type { RawArtist } from "../types";
@@ -20,6 +19,8 @@ export type YoutubeSetSource = {
   type?: "radio" | "festival" | "soundcloud";
   /** Optional override title */
   title?: string;
+  seriesName?: string;
+  eventName?: string;
 };
 
 function dj(name: string, extra: Partial<RawArtist> = {}): RawArtist {
@@ -35,5 +36,16 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     }),
     genre: "Bass House",
     type: "festival",
+  },
+  {
+    video: "https://www.youtube.com/watch?v=9MZz5YazOUo",
+    primaryArtist: dj("James Hype", {
+      accent: "#ff3d6e",
+      homeCity: "Liverpool, UK",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    seriesName: "Cafe Mambo",
+    eventName: "Cafe Mambo Ibiza",
   },
 ];
