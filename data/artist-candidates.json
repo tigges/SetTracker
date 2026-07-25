@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "updatedAt": "2026-07-25T23:20:00.000Z",
+  "candidates": [
+    {
+      "name": "Tita Lau",
+      "slug": "tita-lau",
+      "score": 80,
+      "status": "promoted",
+      "evidence": [
+        {
+          "kind": "set_collaborator",
+          "detail": "Billed on yt-9MZz5YazOUo",
+          "sourceSlug": "yt-9MZz5YazOUo",
+          "weight": 40
+        },
+        {
+          "kind": "tracklist_channel",
+          "detail": "YouTube channel publishes long mixes",
+          "weight": 40
+        }
+      ],
+      "youtubeHandle": "@TitaLau",
+      "soundcloudPermalink": "titalau",
+      "genre": "Tech House",
+      "accent": "#ff8fab",
+      "updatedAt": "2026-07-25T23:20:00.000Z",
+      "promotedAt": "2026-07-25T23:20:00.000Z"
+    },
+    {
+      "name": "Prospa",
+      "slug": "prospa",
+      "score": 40,
+      "status": "queued",
+      "evidence": [
+        {
+          "kind": "set_collaborator",
+          "detail": "Common Cloonee B2B partner",
+          "weight": 40
+        }
+      ],
+      "soundcloudPermalink": "prospa",
+      "genre": "House",
+      "accent": "#ffd166",
+      "updatedAt": "2026-07-25T23:20:00.000Z"
+    }
+  ]
+}

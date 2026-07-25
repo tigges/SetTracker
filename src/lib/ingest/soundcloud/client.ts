@@ -92,6 +92,13 @@ export type ScCollection<T> = {
   next_href?: string | null;
 };
 
+export async function resolveUser(permalinkOrUrl: string): Promise<ScUser> {
+  const url = permalinkOrUrl.startsWith("http")
+    ? permalinkOrUrl
+    : `https://soundcloud.com/${permalinkOrUrl.replace(/^\//, "")}`;
+  return scGet<ScUser>(`/resolve?url=${encodeURIComponent(url)}`);
+}
+
 export async function fetchUserTracks(
   userId: number,
   limit = 20,

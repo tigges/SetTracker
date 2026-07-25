@@ -8,6 +8,7 @@
  * 4) parse with shared tracklist helpers (provenance: hearthis)
  */
 
+import { artistsForSet } from "../artists";
 import { hashRawSetContent } from "../hash";
 import {
   mergeTracklistSignals,
@@ -153,16 +154,19 @@ async function trackToRawSet(
     track.permalink_url ||
     `https://hearthis.at/${userPermalink}/${trackPermalink}/`;
 
+  const { primary, collaborators } = artistsForSet(title, {
+    name: artistName,
+    slug: artistSlug,
+    accent: pickAccent(artistSlug),
+  });
+
   const raw: RawSet = {
     sourceSlug,
     title,
     type: setTypeFor(title),
     genre: (detail.genre || track.genre || category.genre || "House").trim(),
-    primaryArtist: {
-      name: artistName,
-      slug: artistSlug,
-      accent: pickAccent(artistSlug),
-    },
+    primaryArtist: primary,
+    collaborators,
     publishedAt: publishedAtOf(detail),
     durationSec,
     sourceName: "hearthis.at",

@@ -15,25 +15,49 @@ import type { RawPlay } from "../types";
 const TS_PREFIX =
   /^(?:\[?(\d{1,2}):(\d{2})(?::(\d{2}))?\]?|\(?(\d{1,2}):(\d{2})(?::(\d{2}))?\)?)\s*[-–—.]?\s*/;
 
+/** Trailing cue: "1. Artist - Title 00:39" / "... (12:05)" */
+const TS_SUFFIX =
+  /\s*[-([]?(\d{1,2}):(\d{2})(?::(\d{2}))?[\])]?\s*$/;
+
 const SKIP_LINE =
   /^(https?:\/\/|www\.|stream\b|download\b|follow\b|subscribe\b|merch\b|spotify\b|instagram\b|tiktok\b|facebook\b|booking\b|out now\b|free download\b|linktr\.ee|shout out\b|latest updates\b)/i;
 
 const ID_LINE =
   /^(?:id\b.*|.*\bid\b)$/i;
 
+function tsToSec(
+  a: string,
+  b: string,
+  c: string | undefined,
+): number {
+  if (c != null) return Number(a) * 3600 + Number(b) * 60 + Number(c);
+  return Number(a) * 60 + Number(b);
+}
+
 function parseTimestampPrefix(line: string): { sec: number | null; rest: string } {
   const m = line.match(TS_PREFIX);
   if (!m) return { sec: null, rest: line };
   const hh = m[3] != null || m[6] != null;
   if (hh) {
-    const h = Number(m[1] ?? m[4]);
-    const min = Number(m[2] ?? m[5]);
-    const s = Number(m[3] ?? m[6]);
-    return { sec: h * 3600 + min * 60 + s, rest: line.slice(m[0].length).trim() };
+    return {
+      sec: tsToSec(m[1] ?? m[4], m[2] ?? m[5], m[3] ?? m[6]),
+      rest: line.slice(m[0].length).trim(),
+    };
   }
-  const min = Number(m[1] ?? m[4]);
-  const s = Number(m[2] ?? m[5]);
-  return { sec: min * 60 + s, rest: line.slice(m[0].length).trim() };
+  return {
+    sec: tsToSec(m[1] ?? m[4], m[2] ?? m[5], undefined),
+    rest: line.slice(m[0].length).trim(),
+  };
+}
+
+function parseTimestampSuffix(line: string): { sec: number | null; rest: string } {
+  const m = line.match(TS_SUFFIX);
+  if (!m) return { sec: null, rest: line };
+  // Avoid treating track numbers like "1. Title" as a trailing cue — require
+  // the suffix to not be the whole numbered prefix we already stripped logic for.
+  const rest = line.slice(0, m.index).trim();
+  if (!rest || rest.length < 3) return { sec: null, rest: line };
+  return { sec: tsToSec(m[1], m[2], m[3]), rest };
 }
 
 function stripHtml(input: string): string {
@@ -106,10 +130,12 @@ function classifyLine(
 
   // Venue-style "00:00:00 Song Title" with no artist credit
   if (looseTitle) {
+    const trackTitle = line.replace(/\s*[-–—]\s*$/, "").trim();
+    if (!trackTitle) return null;
     return {
       ...base,
       idStatus: "identified",
-      trackTitle: line,
+      trackTitle,
     };
   }
 
@@ -190,8 +216,20 @@ export function parseDescriptionTracklist(
   const stamped: { line: string; sec: number }[] = [];
   const unstamped: string[] = [];
   for (const line of lines) {
-    const { sec, rest } = parseTimestampPrefix(line);
-    const candidate = (rest || line).trim();
+    let sec: number | null = null;
+    let candidate = line;
+    const prefix = parseTimestampPrefix(line);
+    if (prefix.sec != null) {
+      sec = prefix.sec;
+      candidate = prefix.rest;
+    } else {
+      const suffix = parseTimestampSuffix(line);
+      if (suffix.sec != null) {
+        sec = suffix.sec;
+        candidate = suffix.rest;
+      }
+    }
+    candidate = candidate.trim();
     if (!candidate) continue;
     if (sec != null) {
       if (

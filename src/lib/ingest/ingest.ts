@@ -1,6 +1,7 @@
 import type { PrismaClient } from "@prisma/client";
 import { djSocials, labelSocials } from "../social";
 import { parseTrackTitle } from "../trackMeta";
+import { runDiscovery, type DiscoveryStats } from "./discovery/run";
 import { hashRawSetContent } from "./hash";
 import { adapters as defaultAdapters } from "./sources";
 import { slugify, type RawArtist, type RawPlay, type RawSet, type SourceAdapter } from "./types";
@@ -24,6 +25,10 @@ export type IngestStats = {
   newDjs: number;
   newTracks: number;
   bySource: Record<string, { new: number; refreshed: number; skipped: number }>;
+  discovery?: DiscoveryStats;
+  /** Sets with ≥1 identified/community play */
+  setsWithTracklist: number;
+  totalPlaysIngested: number;
 };
 
 type CommunityKeep = {
@@ -47,7 +52,15 @@ export async function runIngest(
     newDjs: 0,
     newTracks: 0,
     bySource: {},
+    setsWithTracklist: 0,
+    totalPlaysIngested: 0,
   };
+
+  const collaboratorMentions: Array<{
+    name: string;
+    sourceSlug: string;
+    weight?: number;
+  }> = [];
 
   const djCache = new Map<string, string>();
   const labelCache = new Map<string, string>();
@@ -318,6 +331,48 @@ export async function runIngest(
     await writePlays(setId, plays);
   }
 
+  async function syncSetArtists(
+    setId: string,
+    primaryDjId: string,
+    collaboratorIds: string[],
+  ): Promise<void> {
+    const desired = new Map<string, boolean>();
+    desired.set(primaryDjId, true);
+    for (const id of collaboratorIds) {
+      if (id === primaryDjId) continue;
+      if (!desired.has(id)) desired.set(id, false);
+    }
+
+    const existing = await prisma.setArtist.findMany({ where: { setId } });
+    const existingByDj = new Map(existing.map((r) => [r.djId, r]));
+
+    for (const [djId, isPrimary] of desired) {
+      const row = existingByDj.get(djId);
+      if (!row) {
+        await prisma.setArtist.create({ data: { setId, djId, isPrimary } });
+      } else if (row.isPrimary !== isPrimary) {
+        await prisma.setArtist.update({
+          where: { id: row.id },
+          data: { isPrimary },
+        });
+      }
+      existingByDj.delete(djId);
+    }
+    for (const stale of existingByDj.values()) {
+      await prisma.setArtist.delete({ where: { id: stale.id } });
+    }
+  }
+
+  function noteCollaborators(raw: RawSet): void {
+    for (const c of raw.collaborators ?? []) {
+      collaboratorMentions.push({
+        name: c.name,
+        sourceSlug: raw.sourceSlug,
+        weight: 28,
+      });
+    }
+  }
+
   async function ingestSet(raw: RawSet): Promise<void> {
     stats.scannedSets += 1;
     const sourceHash = raw.sourceHash ?? hashRawSetContent(raw);
@@ -325,8 +380,25 @@ export async function runIngest(
       where: { slug: raw.sourceSlug },
     });
 
+    const playSignal = raw.plays.filter(
+      (p) => p.idStatus === "identified" || p.idStatus === "community_resolved",
+    ).length;
+    if (playSignal > 0) {
+      stats.setsWithTracklist += 1;
+      stats.totalPlaysIngested += raw.plays.length;
+    }
+    noteCollaborators(raw);
+
+    const primaryDjId = await upsertDj(raw.primaryArtist);
+    const collaboratorIds: string[] = [];
+    for (const c of raw.collaborators ?? []) {
+      collaboratorIds.push(await upsertDj(c));
+    }
+
     if (existing) {
       if (existing.sourceHash && existing.sourceHash === sourceHash) {
+        // Still refresh artist linkage (b2b backfill) even when tracklist is unchanged.
+        await syncSetArtists(existing.id, primaryDjId, collaboratorIds);
         stats.skippedSets += 1;
         return;
       }
@@ -349,6 +421,7 @@ export async function runIngest(
           sourceHash,
         },
       });
+      await syncSetArtists(existing.id, primaryDjId, collaboratorIds);
       await replacePlays(existing.id, plays);
       stats.refreshedSets += 1;
       console.log(
@@ -357,10 +430,6 @@ export async function runIngest(
       );
       return;
     }
-
-    const primaryDjId = await upsertDj(raw.primaryArtist);
-    const collaboratorIds: string[] = [];
-    for (const c of raw.collaborators ?? []) collaboratorIds.push(await upsertDj(c));
 
     const eventId = await upsertEvent(raw.eventName, raw.eventKind, raw.eventLocation);
     const seriesId = await upsertSeries(raw.seriesName, primaryDjId);
@@ -382,16 +451,7 @@ export async function runIngest(
       },
     });
 
-    await prisma.setArtist.create({
-      data: { setId: set.id, djId: primaryDjId, isPrimary: true },
-    });
-    for (const djId of collaboratorIds) {
-      if (djId === primaryDjId) continue;
-      await prisma.setArtist.create({
-        data: { setId: set.id, djId, isPrimary: false },
-      });
-    }
-
+    await syncSetArtists(set.id, primaryDjId, collaboratorIds);
     await writePlays(set.id, raw.plays);
     stats.newSets += 1;
   }
@@ -416,6 +476,15 @@ export async function runIngest(
       refreshed: stats.refreshedSets - before.refreshed,
       skipped: stats.skippedSets - before.skipped,
     };
+  }
+
+  try {
+    stats.discovery = await runDiscovery(prisma, { collaboratorMentions });
+  } catch (err) {
+    console.warn(
+      "[ingest] discovery failed:",
+      err instanceof Error ? err.message : err,
+    );
   }
 
   return stats;
