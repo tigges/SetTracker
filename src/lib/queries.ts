@@ -130,6 +130,7 @@ export async function getSetBySlug(slug: string) {
         title,
         artistName,
         labelName: label?.name ?? null,
+        labelSlug: label?.slug ?? null,
         labelColor: label?.color ?? null,
         bpm: p.track?.bpm ?? resolved?.bpm ?? null,
         idNote: p.idTrack?.note ?? null,
@@ -281,6 +282,117 @@ export async function getAllSetSlugs() {
   const rows = await prisma.set.findMany({ select: { slug: true } });
   return rows.map((r) => r.slug);
 }
+
+export async function getGenres() {
+  const rows = await prisma.set.findMany({
+    where: { genre: { not: null } },
+    select: { genre: true },
+  });
+  return [...new Set(rows.map((r) => r.genre!).filter(Boolean))].sort();
+}
+
+// ---------------------------------------------------------------------------
+// Labels
+// ---------------------------------------------------------------------------
+export async function getLabels() {
+  const labels = await prisma.label.findMany({
+    orderBy: { name: "asc" },
+    include: { _count: { select: { tracks: true } } },
+  });
+  const plays = await prisma.played.findMany({
+    where: { track: { labelId: { not: null } } },
+    select: { setId: true, track: { select: { labelId: true } } },
+  });
+  const setsByLabel = new Map<string, Set<string>>();
+  for (const p of plays) {
+    const lid = p.track!.labelId!;
+    if (!setsByLabel.has(lid)) setsByLabel.set(lid, new Set());
+    setsByLabel.get(lid)!.add(p.setId);
+  }
+  return labels
+    .map((l) => ({
+      id: l.id,
+      slug: l.slug,
+      name: l.name,
+      color: l.color,
+      trackCount: l._count.tracks,
+      setCount: setsByLabel.get(l.id)?.size ?? 0,
+    }))
+    .filter((l) => l.trackCount > 0)
+    .sort((a, b) => b.setCount - a.setCount || b.trackCount - a.trackCount);
+}
+
+export async function getAllLabelSlugs() {
+  const rows = await prisma.label.findMany({ select: { slug: true } });
+  return rows.map((r) => r.slug);
+}
+
+export async function getLabelBySlug(slug: string) {
+  const label = await prisma.label.findUnique({
+    where: { slug },
+    include: { tracks: true },
+  });
+  if (!label) return null;
+
+  const trackIds = label.tracks.map((t) => t.id);
+  const plays = trackIds.length
+    ? await prisma.played.findMany({
+        where: { trackId: { in: trackIds } },
+        include: {
+          set: { include: { artists: { include: { dj: true }, orderBy: { isPrimary: "desc" } } } },
+          track: true,
+        },
+      })
+    : [];
+
+  const setMap = new Map<string, (typeof plays)[number]["set"]>();
+  for (const p of plays) if (!setMap.has(p.setId)) setMap.set(p.setId, p.set);
+  const sets = [...setMap.values()].sort(
+    (a, b) => b.publishedAt.getTime() - a.publishedAt.getTime(),
+  );
+
+  const playCount = new Map<string, number>();
+  for (const p of plays)
+    if (p.trackId) playCount.set(p.trackId, (playCount.get(p.trackId) ?? 0) + 1);
+  const topTracks = label.tracks
+    .map((t) => ({ title: t.title, artistName: t.artistName, count: playCount.get(t.id) ?? 0 }))
+    .sort((a, b) => b.count - a.count);
+
+  const artistMap = new Map<string, { name: string; slug: string; accent: string; count: number }>();
+  for (const p of plays) {
+    const prim = p.set.artists.find((a) => a.isPrimary) ?? p.set.artists[0];
+    if (!prim) continue;
+    const cur = artistMap.get(prim.dj.id);
+    if (cur) cur.count += 1;
+    else artistMap.set(prim.dj.id, { name: prim.dj.name, slug: prim.dj.slug, accent: prim.dj.accent, count: 1 });
+  }
+  const artists = [...artistMap.values()].sort((a, b) => b.count - a.count);
+
+  return {
+    slug: label.slug,
+    name: label.name,
+    color: label.color,
+    trackCount: label.tracks.length,
+    setCount: sets.length,
+    sets: sets.map((s) => {
+      const prim = s.artists.find((a) => a.isPrimary) ?? s.artists[0];
+      return {
+        slug: s.slug,
+        title: s.title,
+        type: s.type,
+        genre: s.genre,
+        publishedAt: s.publishedAt,
+        durationSec: s.durationSec,
+        primaryDjName: prim?.dj.name ?? null,
+        primaryDjSlug: prim?.dj.slug ?? null,
+      };
+    }),
+    topTracks,
+    artists,
+  };
+}
+
+export type LabelProfile = NonNullable<Awaited<ReturnType<typeof getLabelBySlug>>>;
 
 export async function getAllDjSlugs() {
   const rows = await prisma.dj.findMany({ select: { slug: true } });

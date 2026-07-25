@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   PROVENANCE_META,
@@ -237,11 +238,20 @@ export function SetTimeline({
                       );
                     })()}
 
-                  {p.labelName && (
-                    <span className="hidden flex-none rounded-full border border-line bg-bg2 px-2 py-0.5 text-[11px] text-muted lg:inline">
-                      {p.labelName}
-                    </span>
-                  )}
+                  {p.labelName &&
+                    (p.labelSlug ? (
+                      <Link
+                        href={`/labels/${p.labelSlug}`}
+                        onClick={(e) => e.stopPropagation()}
+                        className="hidden flex-none rounded-full border border-line bg-bg2 px-2 py-0.5 text-[11px] text-muted transition-colors hover:border-brand hover:text-brand lg:inline"
+                      >
+                        {p.labelName}
+                      </Link>
+                    ) : (
+                      <span className="hidden flex-none rounded-full border border-line bg-bg2 px-2 py-0.5 text-[11px] text-muted lg:inline">
+                        {p.labelName}
+                      </span>
+                    ))}
 
                   <span
                     className="hidden flex-none rounded-md border border-line px-2 py-0.5 text-[11px] text-muted2 sm:inline"

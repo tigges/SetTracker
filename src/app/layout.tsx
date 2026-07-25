@@ -48,6 +48,12 @@ export default function RootLayout({
               >
                 DJs
               </Link>
+              <Link
+                href="/labels"
+                className="rounded-md px-2.5 py-1.5 text-muted transition-colors hover:bg-panel hover:text-ink"
+              >
+                Labels
+              </Link>
             </nav>
             <div className="ml-auto hidden lg:block">
               <StatusLegend />
