@@ -1,12 +1,19 @@
 /**
- * Resolve missing artwork URLs for DJs, labels, tracks and sets via Deezer.
- * Idempotent: skips rows that already have imageUrl.
+ * Resolve artwork URLs for DJs, labels, tracks and sets via Deezer (+ iTunes
+ * for track covers). Wired into the GitHub Pages workflow after seed + ingest.
+ *
+ * Behaviour:
+ * - Labels: fill when imageUrl is null
+ * - DJs: always re-resolve (cheap; fixes wrong artist matches after matcher upgrades)
+ * - Tracks: fill nulls, and re-resolve rows that only have an artist portrait so
+ *   we can upgrade to release cover art when available
+ * - Sets: fill nulls; refresh when primary DJ image changed
  *
  * Usage: npm run thumbs
- * Wired into the GitHub Pages workflow after seed + ingest.
  */
 import { PrismaClient } from "@prisma/client";
 import {
+  isArtistArtUrl,
   resolveArtistImage,
   resolveLabelImage,
   resolveSetImage,
@@ -16,24 +23,38 @@ import {
 
 const prisma = new PrismaClient();
 
-/** Delay between Deezer calls to stay polite. */
+/** Delay between API calls to stay polite. */
 const DELAY_MS = Number(process.env.THUMBS_DELAY_MS ?? 120);
 /** Optional cap for tracks (0 = all). Useful for local smoke tests. */
 const TRACK_LIMIT = Number(process.env.THUMBS_TRACK_LIMIT ?? 0);
 
 type Stats = {
-  djs: { scanned: number; filled: number; missed: number };
+  djs: { scanned: number; filled: number; missed: number; updated: number };
   labels: { scanned: number; filled: number; missed: number };
-  tracks: { scanned: number; filled: number; missed: number };
-  sets: { scanned: number; filled: number; missed: number };
+  tracks: {
+    scanned: number;
+    filled: number;
+    missed: number;
+    covers: number;
+    artistFallback: number;
+    upgraded: number;
+  };
+  sets: { scanned: number; filled: number; missed: number; updated: number };
 };
 
 async function main() {
   const stats: Stats = {
-    djs: { scanned: 0, filled: 0, missed: 0 },
+    djs: { scanned: 0, filled: 0, missed: 0, updated: 0 },
     labels: { scanned: 0, filled: 0, missed: 0 },
-    tracks: { scanned: 0, filled: 0, missed: 0 },
-    sets: { scanned: 0, filled: 0, missed: 0 },
+    tracks: {
+      scanned: 0,
+      filled: 0,
+      missed: 0,
+      covers: 0,
+      artistFallback: 0,
+      upgraded: 0,
+    },
+    sets: { scanned: 0, filled: 0, missed: 0, updated: 0 },
   };
 
   console.log("[thumbs] resolving label artwork…");
@@ -56,10 +77,9 @@ async function main() {
     }
   }
 
-  console.log("[thumbs] resolving DJ artwork…");
+  console.log("[thumbs] resolving DJ artwork (refresh all)…");
   const djs = await prisma.dj.findMany({
-    where: { imageUrl: null },
-    select: { id: true, name: true, slug: true },
+    select: { id: true, name: true, slug: true, imageUrl: true },
     orderBy: { name: "asc" },
   });
   const djImageById = new Map<string, string>();
@@ -68,55 +88,63 @@ async function main() {
     const url = await resolveArtistImage(d.name);
     await sleep(DELAY_MS);
     if (url) {
-      await prisma.dj.update({ where: { id: d.id }, data: { imageUrl: url } });
+      if (d.imageUrl !== url) {
+        await prisma.dj.update({ where: { id: d.id }, data: { imageUrl: url } });
+        stats.djs.updated += 1;
+        console.log(`  ✓ dj ${d.slug}${d.imageUrl ? " (updated)" : ""}`);
+      } else {
+        console.log(`  = dj ${d.slug}`);
+      }
       djImageById.set(d.id, url);
       stats.djs.filled += 1;
-      console.log(`  ✓ dj ${d.slug}`);
     } else {
       stats.djs.missed += 1;
       console.log(`  · dj ${d.slug} (no match)`);
     }
   }
-  // Also load already-filled DJ images for set fallback.
-  const withImages = await prisma.dj.findMany({
-    where: { imageUrl: { not: null } },
-    select: { id: true, imageUrl: true },
-  });
-  for (const d of withImages) {
-    if (d.imageUrl) djImageById.set(d.id, d.imageUrl);
-  }
 
-  console.log("[thumbs] resolving track artwork…");
+  console.log("[thumbs] resolving track artwork (covers preferred)…");
   const tracks = await prisma.track.findMany({
-    where: { imageUrl: null },
-    select: { id: true, title: true, artistName: true },
+    select: { id: true, title: true, artistName: true, imageUrl: true },
     orderBy: { title: "asc" },
     ...(TRACK_LIMIT > 0 ? { take: TRACK_LIMIT } : {}),
   });
-  for (const t of tracks) {
+  // Only hit the network for missing art or artist-portrait fallbacks we can upgrade.
+  const trackQueue = tracks.filter((t) => !t.imageUrl || isArtistArtUrl(t.imageUrl));
+  for (const t of trackQueue) {
     stats.tracks.scanned += 1;
-    const url = await resolveTrackImage(t.title, t.artistName);
+    const prev = t.imageUrl;
+    const result = await resolveTrackImage(t.title, t.artistName);
     await sleep(DELAY_MS);
-    if (url) {
-      await prisma.track.update({ where: { id: t.id }, data: { imageUrl: url } });
+    if (result) {
+      if (prev !== result.url) {
+        await prisma.track.update({
+          where: { id: t.id },
+          data: { imageUrl: result.url },
+        });
+        if (prev && result.kind === "cover") stats.tracks.upgraded += 1;
+      }
       stats.tracks.filled += 1;
+      if (result.kind === "cover") stats.tracks.covers += 1;
+      else stats.tracks.artistFallback += 1;
     } else {
       stats.tracks.missed += 1;
     }
     if (stats.tracks.scanned % 25 === 0) {
       console.log(
-        `  … tracks ${stats.tracks.scanned}/${tracks.length} (filled ${stats.tracks.filled})`,
+        `  … tracks ${stats.tracks.scanned}/${trackQueue.length}` +
+          ` (covers ${stats.tracks.covers}, artist-fallback ${stats.tracks.artistFallback}, upgraded ${stats.tracks.upgraded})`,
       );
     }
   }
 
   console.log("[thumbs] resolving set artwork…");
   const sets = await prisma.set.findMany({
-    where: { imageUrl: null },
     select: {
       id: true,
       title: true,
       slug: true,
+      imageUrl: true,
       artists: {
         where: { isPrimary: true },
         take: 1,
@@ -126,16 +154,28 @@ async function main() {
     orderBy: { publishedAt: "desc" },
   });
   for (const s of sets) {
-    stats.sets.scanned += 1;
     const primary = s.artists[0]?.dj;
-    // Prefer already-resolved primary DJ image (no extra API call).
-    let url = primary?.imageUrl ?? (primary ? djImageById.get(primary.id) : null) ?? null;
+    const djUrl =
+      primary?.imageUrl ?? (primary ? djImageById.get(primary.id) : null) ?? null;
+
+    // Refresh when empty, or when set art still points at a stale DJ portrait.
+    const needsWork =
+      !s.imageUrl ||
+      (djUrl && isArtistArtUrl(s.imageUrl) && s.imageUrl !== djUrl);
+
+    if (!needsWork) continue;
+    stats.sets.scanned += 1;
+
+    let url = djUrl;
     if (!url) {
       url = await resolveSetImage(s.title, primary?.name ?? null);
       await sleep(DELAY_MS);
     }
     if (url) {
-      await prisma.set.update({ where: { id: s.id }, data: { imageUrl: url } });
+      if (s.imageUrl !== url) {
+        await prisma.set.update({ where: { id: s.id }, data: { imageUrl: url } });
+        stats.sets.updated += 1;
+      }
       stats.sets.filled += 1;
     } else {
       stats.sets.missed += 1;
