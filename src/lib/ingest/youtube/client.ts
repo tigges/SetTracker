@@ -176,7 +176,7 @@ export async function fetchWatchMeta(videoIdOrUrl: string): Promise<YtWatchMeta>
   let title = String(details.title || "").trim();
   let channel = String(details.author || "").trim();
   let durationSec = Math.max(0, Number(details.lengthSeconds || 0) || 0);
-  let description = String(details.shortDescription || "");
+  const description = String(details.shortDescription || "");
 
   // Fallbacks from ytInitialData overlay when player blob is restricted.
   if (initial && (!title || !channel || !durationSec)) {
