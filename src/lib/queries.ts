@@ -252,6 +252,11 @@ export async function getDjBySlug(slug: string) {
     homeCity: dj.homeCity,
     bio: dj.bio,
     accent: dj.accent,
+    socials: {
+      soundcloud: dj.soundcloud,
+      instagram: dj.instagram,
+      twitter: dj.twitter,
+    },
     series: dj.series.map((s) => ({
       slug: s.slug,
       name: s.name,
@@ -372,6 +377,11 @@ export async function getLabelBySlug(slug: string) {
     slug: label.slug,
     name: label.name,
     color: label.color,
+    socials: {
+      soundcloud: label.soundcloud,
+      instagram: label.instagram,
+      website: label.website,
+    },
     trackCount: label.tracks.length,
     setCount: sets.length,
     sets: sets.map((s) => {

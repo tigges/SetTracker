@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import { djSocials, labelSocials } from "../src/lib/social";
 
 const prisma = new PrismaClient();
 
@@ -70,7 +71,7 @@ async function main() {
   ];
   const labels: Record<string, string> = {};
   for (const [slug, name, color] of labelData) {
-    const l = await prisma.label.create({ data: { slug, name, color } });
+    const l = await prisma.label.create({ data: { slug, name, color, ...labelSocials(name) } });
     labels[slug] = l.id;
   }
 
@@ -111,7 +112,7 @@ async function main() {
   ];
   const djs: Record<string, string> = {};
   for (const [slug, name, homeCity, accent, bio] of djData) {
-    const d = await prisma.dj.create({ data: { slug, name, homeCity, accent, bio } });
+    const d = await prisma.dj.create({ data: { slug, name, homeCity, accent, bio, ...djSocials(name) } });
     djs[slug] = d.id;
   }
 

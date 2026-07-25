@@ -124,9 +124,12 @@ function coverFor(seed: string): string {
   return COVERS[h % COVERS.length];
 }
 
-function titleFor(i: number, k: number): string {
-  return TITLE_POOL[(i * 3 + k) % TITLE_POOL.length];
-}
+// A shared catalog of (title, artist) so generated mixes are realistically
+// multi-artist and reuse tracks across sets (good for label / most-played stats).
+const CATALOG: { title: string; artist: string }[] = TOP_100.flatMap(([name], j) => [
+  { title: TITLE_POOL[(j * 2) % TITLE_POOL.length], artist: name },
+  { title: TITLE_POOL[(j * 2 + 1) % TITLE_POOL.length], artist: name },
+]);
 
 const SET_KINDS = [
   { type: "radio" as const, title: "Essential Mix", source: "1001Tracklists" },
@@ -141,30 +144,41 @@ function daysAgo(n: number): Date {
   return d;
 }
 
-// One set per DJ, with a short representative tracklist covering all statuses.
+// One set per DJ — a full, realistic mix (~18-22 multi-artist tracks) covering
+// all four statuses, with the DJ's own tracks opening the set.
 function buildSet(name: string, genre: string, i: number): RawSet {
   const slug = slugify(name);
   const kind = SET_KINDS[i % SET_KINDS.length];
   const accent = coverFor(slug);
-  const durationSec = 3600;
-  const t1 = titleFor(i, 0);
-  const t2 = titleFor(i, 1);
-  const t3 = titleFor(i, 2);
+  const durationSec = kind.type === "festival" ? 3900 : 3600;
   const prov = kind.type === "soundcloud" ? "soundcloud" : "1001tl";
+  const ownA = CATALOG[(2 * i) % CATALOG.length];
+  const ownB = CATALOG[(2 * i + 1) % CATALOG.length];
+  const n = 18 + (i % 5); // 18..22 tracks
 
-  const entries: Omit<RawPlay, "position" | "timestamp">[] = [
-    { idStatus: "identified", provenance: prov, trackTitle: t1, artistName: name },
-    { idStatus: "identified", provenance: prov, trackTitle: t2, artistName: name },
-    { idStatus: "unresolved_id", provenance: prov, idLabel: `${name} - ID`, suspectedArtist: name, rawText: `${name} - ID` },
-    { idStatus: "community_resolved", provenance: "community", idLabel: "ID - ID", trackTitle: t3, artistName: name, rawText: "ID - ID" },
-    { idStatus: "unparsed", provenance: prov, rawText: "unreleased dub (rip)" },
-    { idStatus: "identified", provenance: "fingerprint", trackTitle: t1, artistName: name },
-  ];
-  const n = entries.length;
+  const entries: Omit<RawPlay, "position" | "timestamp">[] = [];
+  for (let j = 0; j < n; j++) {
+    const cat = CATALOG[(i * 7 + j * 13) % CATALOG.length];
+    if (j === 0) {
+      entries.push({ idStatus: "identified", provenance: prov, trackTitle: ownA.title, artistName: name });
+    } else if (j === 1) {
+      entries.push({ idStatus: "identified", provenance: prov, trackTitle: ownB.title, artistName: name });
+    } else if (j % 7 === 6) {
+      entries.push({ idStatus: "unresolved_id", provenance: prov, idLabel: `${cat.artist} - ID`, suspectedArtist: cat.artist, rawText: `${cat.artist} - ID` });
+    } else if (j % 9 === 4) {
+      entries.push({ idStatus: "community_resolved", provenance: "community", idLabel: "ID - ID", trackTitle: cat.title, artistName: cat.artist, rawText: "ID - ID" });
+    } else if (j % 11 === 10) {
+      entries.push({ idStatus: "unparsed", provenance: prov, rawText: "unreleased dub (rip)" });
+    } else {
+      entries.push({ idStatus: "identified", provenance: j % 8 === 5 ? "fingerprint" : prov, trackTitle: cat.title, artistName: cat.artist });
+    }
+  }
+
+  const nn = entries.length;
   const plays: RawPlay[] = entries.map((e, idx) => ({
     ...e,
     position: idx + 1,
-    timestamp: Math.round((durationSec * (idx + 1)) / (n + 1)),
+    timestamp: Math.round((durationSec * (idx + 1)) / (nn + 1)),
   }));
 
   return {

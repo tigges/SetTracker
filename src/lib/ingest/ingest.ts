@@ -1,4 +1,5 @@
 import type { PrismaClient } from "@prisma/client";
+import { djSocials, labelSocials } from "../social";
 import { adapters as defaultAdapters } from "./sources";
 import { slugify, type RawArtist, type RawSet, type SourceAdapter } from "./types";
 
@@ -54,6 +55,7 @@ export async function runIngest(
         homeCity: raw.homeCity ?? null,
         bio: raw.bio ?? null,
         accent: raw.accent ?? pickAccent(slug),
+        ...djSocials(raw.name),
       },
     });
     stats.newDjs += 1;
@@ -66,7 +68,7 @@ export async function runIngest(
     const slug = slugify(name);
     if (labelCache.has(slug)) return labelCache.get(slug)!;
     const existing = await prisma.label.findUnique({ where: { slug } });
-    const rec = existing ?? (await prisma.label.create({ data: { slug, name } }));
+    const rec = existing ?? (await prisma.label.create({ data: { slug, name, ...labelSocials(name) } }));
     labelCache.set(slug, rec.id);
     return rec.id;
   }

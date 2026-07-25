@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getAllLabelSlugs, getLabelBySlug } from "@/lib/queries";
+import { SocialLinks } from "@/components/SocialLinks";
 import { SET_TYPE_META, fmtDate, fmtDuration, fmtRelative } from "@/lib/status";
 
 export async function generateStaticParams() {
@@ -73,6 +74,9 @@ export default async function LabelPage({
               <span className="mono">{label.setCount}</span> sets ·{" "}
               <span className="mono">{label.artists.length}</span> artists
             </p>
+            <div className="mt-3">
+              <SocialLinks links={label.socials} />
+            </div>
           </div>
         </div>
       </div>
