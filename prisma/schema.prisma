@@ -1,4 +1,4 @@
-// SETGRAPH — bass house DJ set database (MVP)
+// setradar.ai — bass house DJ set database (MVP)
 // SQLite for local dev. Note: Prisma enums are not supported on SQLite,
 // so status/provenance/type fields are strings with documented allowed values.
 

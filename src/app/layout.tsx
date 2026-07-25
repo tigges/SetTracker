@@ -8,9 +8,10 @@ const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "SETGRAPH — bass house set database",
+  title: "setradar.ai — bass house set database",
   description:
-    "A database of bass house DJ sets: tracklists, IDs, provenance and source health.",
+    "setradar.ai — a database of bass house DJ sets: tracklists, IDs, provenance and source health.",
+  applicationName: "setradar.ai",
 };
 
 export default function RootLayout({
@@ -29,10 +30,11 @@ export default function RootLayout({
                 className="grid h-6 w-6 place-items-center rounded-[6px] text-[13px] font-black text-bg"
                 style={{ background: "var(--brand-strong)" }}
               >
-                S
+                R
               </span>
               <span className="text-[15px] font-extrabold tracking-tight">
-                SET<span className="text-brand">GRAPH</span>
+                SET<span className="text-brand">RADAR</span>
+                <span className="text-muted2">.ai</span>
               </span>
             </Link>
             <nav className="flex items-center gap-1 text-[13px]">
@@ -65,7 +67,7 @@ export default function RootLayout({
 
         <footer className="mx-auto max-w-6xl px-5 pb-10 pt-4">
           <div className="border-t border-line pt-5 text-[12px] text-muted2">
-            SETGRAPH · bass house set database (MVP) · seeded with mock data
+            setradar.ai · bass house set database (MVP) · seeded with mock data
           </div>
         </footer>
       </body>
