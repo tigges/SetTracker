@@ -274,3 +274,13 @@ export type DjProfile = NonNullable<Awaited<ReturnType<typeof getDjBySlug>>>;
 export async function getDjList() {
   return prisma.dj.findMany({ orderBy: { name: "asc" } });
 }
+
+export async function getAllSetSlugs() {
+  const rows = await prisma.set.findMany({ select: { slug: true } });
+  return rows.map((r) => r.slug);
+}
+
+export async function getAllDjSlugs() {
+  const rows = await prisma.dj.findMany({ select: { slug: true } });
+  return rows.map((r) => r.slug);
+}

@@ -2,8 +2,6 @@ import { getFeed, type FeedItem } from "@/lib/queries";
 import { SetCard } from "@/components/SetCard";
 import { StatusLegend } from "@/components/StatusBits";
 
-export const dynamic = "force-dynamic";
-
 function within7Days(d: Date): boolean {
   return Date.now() - new Date(d).getTime() < 7 * 24 * 60 * 60 * 1000;
 }

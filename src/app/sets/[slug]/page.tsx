@@ -1,11 +1,13 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getSetBySlug } from "@/lib/queries";
+import { getSetBySlug, getAllSetSlugs } from "@/lib/queries";
 import { SetTimeline } from "@/components/SetTimeline";
 import { StatusLegend } from "@/components/StatusBits";
 import { SET_TYPE_META, fmtDate, fmtDuration } from "@/lib/status";
 
-export const dynamic = "force-dynamic";
+export async function generateStaticParams() {
+  return (await getAllSetSlugs()).map((slug) => ({ slug }));
+}
 
 export default async function SetPage({
   params,
