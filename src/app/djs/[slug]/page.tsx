@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getDjBySlug } from "@/lib/queries";
+import { getDjBySlug, getAllDjSlugs } from "@/lib/queries";
 import { StatusBar, StatusLegend } from "@/components/StatusBits";
 import {
   PROVENANCE_META,
@@ -11,7 +11,9 @@ import {
   type Provenance,
 } from "@/lib/status";
 
-export const dynamic = "force-dynamic";
+export async function generateStaticParams() {
+  return (await getAllDjSlugs()).map((slug) => ({ slug }));
+}
 
 function Panel({
   title,

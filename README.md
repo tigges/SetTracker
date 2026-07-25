@@ -60,3 +60,18 @@ npm run dev        # http://localhost:3000
 
 The SQLite database lives at `prisma/dev.db` (git-ignored). Connection string
 is in `.env` (`DATABASE_URL="file:./dev.db"`).
+
+## Deploy (GitHub Pages)
+
+All data is build-time seed data, so the app can be published as a fully static
+site. `.github/workflows/deploy-pages.yml` seeds the DB, runs a static export
+and deploys to GitHub Pages on every push to `main`.
+
+```bash
+# reproduce the static export locally → writes to out/
+GITHUB_PAGES=true PAGES_BASE_PATH=/SetTracker npm run build
+```
+
+The Pages build sets `output: "export"` with `basePath=/SetTracker` (the project
+subpath). Local dev and `next start` are unaffected — the export only activates
+when `GITHUB_PAGES=true`.
