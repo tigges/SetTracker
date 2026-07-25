@@ -60,6 +60,25 @@ function looksLikeTracklistLine(line: string): boolean {
   return false;
 }
 
+/** Title-only cue after a timestamp (Cercle / some venue uploads). */
+function looksLikeTimestampedTitle(line: string): boolean {
+  if (!line || line.length < 2 || line.length > 200) return false;
+  if (SKIP_LINE.test(line)) return false;
+  if (/^[#@]/.test(line)) return false;
+  if (/^(track\s*list|set\s*list|tracklist|setlist)\b[:\s]*$/i.test(line)) {
+    return false;
+  }
+  // Drop obvious promo / section headers that sometimes sit near cues
+  if (
+    /^(join|follow|subscribe|about the artist|socials?|watch more|community)\b/i.test(
+      line,
+    )
+  ) {
+    return false;
+  }
+  return true;
+}
+
 function classifyLine(
   rawLine: string,
   position: number,
@@ -69,7 +88,14 @@ function classifyLine(
   let line = rawLine.trim();
   // "1. ", "01)", "01 | " prefixes from pasted tracklists (require separator)
   line = line.replace(/^\d{1,3}\s*[.)|]\s+/, "");
-  if (!looksLikeTracklistLine(line) && !ID_LINE.test(line)) return null;
+  const looseTitle =
+    !looksLikeTracklistLine(line) &&
+    !ID_LINE.test(line) &&
+    looksLikeTimestampedTitle(line);
+
+  if (!looksLikeTracklistLine(line) && !ID_LINE.test(line) && !looseTitle) {
+    return null;
+  }
 
   const base = {
     position,
@@ -77,6 +103,15 @@ function classifyLine(
     provenance,
     rawText: rawLine.trim(),
   };
+
+  // Venue-style "00:00:00 Song Title" with no artist credit
+  if (looseTitle) {
+    return {
+      ...base,
+      idStatus: "identified",
+      trackTitle: line,
+    };
+  }
 
   // ID forms
   if (/^id\s*[-–—]\s*id$/i.test(line) || /^id$/i.test(line)) {
@@ -159,7 +194,11 @@ export function parseDescriptionTracklist(
     const candidate = (rest || line).trim();
     if (!candidate) continue;
     if (sec != null) {
-      if (looksLikeTracklistLine(candidate) || ID_LINE.test(candidate)) {
+      if (
+        looksLikeTracklistLine(candidate) ||
+        ID_LINE.test(candidate) ||
+        looksLikeTimestampedTitle(candidate)
+      ) {
         stamped.push({ line: candidate, sec: Math.min(durationSec, sec) });
       }
       continue;
