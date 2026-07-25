@@ -23,6 +23,14 @@ export function usableImageUrl(url: string | null | undefined): string | null {
   return url;
 }
 
+export function isCoverArtUrl(url: string | null | undefined): boolean {
+  return !!url && url.includes("/images/cover/");
+}
+
+export function isArtistArtUrl(url: string | null | undefined): boolean {
+  return !!url && url.includes("/images/artist/");
+}
+
 /** Prefer a slightly larger square when Deezer gives size variants. */
 export function preferMedium(url: string): string {
   return url
@@ -39,7 +47,6 @@ async function deezerGet<T>(pathAndQuery: string): Promise<T | null> {
   try {
     const res = await fetch(url, {
       headers: { "User-Agent": UA, Accept: "application/json" },
-      // Node 18+ / CI
       signal: AbortSignal.timeout(12_000),
     });
     if (!res.ok) return null;
@@ -51,13 +58,18 @@ async function deezerGet<T>(pathAndQuery: string): Promise<T | null> {
 
 type DeezerList<T> = { data?: T[]; total?: number };
 
-function norm(s: string): string {
-  return s
+/** Latinize so Hörger / Hørger / Horger collapse to the same key. */
+export function norm(s: string): string {
+  const mapped = s
     .toLowerCase()
+    .replace(/ø/g, "o")
+    .replace(/æ/g, "ae")
+    .replace(/ð/g, "d")
+    .replace(/ß/g, "ss")
+    .replace(/ł/g, "l")
     .normalize("NFKD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/[^a-z0-9]+/g, " ")
-    .trim();
+    .replace(/[\u0300-\u036f]/g, "");
+  return mapped.replace(/[^a-z0-9]+/g, " ").trim();
 }
 
 function nameClose(a: string, b: string): boolean {
@@ -66,20 +78,43 @@ function nameClose(a: string, b: string): boolean {
   return na === nb || na.includes(nb) || nb.includes(na);
 }
 
+/**
+ * Score how well a Deezer artist name matches our target.
+ * Exact (after latinize) wins; collab strings that merely contain the name lose.
+ */
+function artistMatchScore(candidate: string, target: string): number {
+  const nc = norm(candidate);
+  const nt = norm(target);
+  if (!nc || !nt) return 0;
+  if (nc === nt) return 100;
+  // "marten horger and neon steve" / feat. lines
+  if (/\b(and|&|feat|ft|versus|vs|x)\b/.test(nc) || nc.includes(",")) {
+    if (nc.includes(nt)) return 15;
+    return 0;
+  }
+  if (nc.startsWith(nt) || nt.startsWith(nc)) return 70;
+  if (nc.includes(nt) || nt.includes(nc)) return 40;
+  return 0;
+}
+
 export async function resolveArtistImage(name: string): Promise<string | null> {
   const q = encodeURIComponent(name);
   const json = await deezerGet<
     DeezerList<{ name: string; picture_medium?: string; nb_fan?: number }>
-  >(`/search/artist?q=${q}&limit=8`);
+  >(`/search/artist?q=${q}&limit=12`);
   const rows = json?.data ?? [];
-  // Prefer exact-ish name with the most fans (filters stub / empty artists).
-  const ranked = [...rows].sort((a, b) => (b.nb_fan ?? 0) - (a.nb_fan ?? 0));
-  for (const row of ranked) {
-    if (!nameClose(row.name, name)) continue;
-    const img = usableImageUrl(row.picture_medium);
-    if (img) return preferMedium(img);
-  }
-  for (const row of ranked) {
+  if (rows.length === 0) return null;
+
+  const ranked = [...rows]
+    .map((row) => ({
+      row,
+      score: artistMatchScore(row.name, name),
+      fans: row.nb_fan ?? 0,
+    }))
+    .filter((x) => x.score > 0)
+    .sort((a, b) => b.score - a.score || b.fans - a.fans);
+
+  for (const { row } of ranked) {
     const img = usableImageUrl(row.picture_medium);
     if (img) return preferMedium(img);
   }
@@ -99,7 +134,7 @@ export async function resolveLabelImage(name: string): Promise<string | null> {
   // Fallback: album titled like the label (compilations).
   const q2 = encodeURIComponent(name);
   const json2 = await deezerGet<
-    DeezerList<{ title?: string; cover_medium?: string; artist?: { name?: string } }>
+    DeezerList<{ title?: string; cover_medium?: string }>
   >(`/search/album?q=${q2}&limit=5`);
   for (const row of json2?.data ?? []) {
     if (row.title && nameClose(row.title, name)) {
@@ -114,13 +149,30 @@ export async function resolveLabelImage(name: string): Promise<string | null> {
   return null;
 }
 
+export type TrackImageResult = {
+  url: string;
+  /** cover = release artwork; artist = portrait fallback */
+  kind: "cover" | "artist";
+};
+
+/**
+ * Resolve track artwork. Prefers Deezer release cover art; only falls back to
+ * the artist portrait when no matching track/release is found.
+ */
 export async function resolveTrackImage(
   title: string,
   artistName: string,
-): Promise<string | null> {
-  // Collab strings like "Chris Lake, Aatig" → try primary artist first.
-  const primaryArtist = artistName.split(/[,&]| b2b | x /i)[0]?.trim() || artistName;
-  const queries = [`${title} ${primaryArtist}`, `${title} ${artistName}`];
+): Promise<TrackImageResult | null> {
+  const primaryArtist =
+    artistName.split(/[,&]| b2b | x /i)[0]?.trim() || artistName;
+  const artistVariants = [...new Set([primaryArtist, artistName, norm(primaryArtist)])];
+
+  const queries = [
+    `artist:"${primaryArtist}" track:"${title}"`,
+    `${title} ${primaryArtist}`,
+    `${title} ${artistName}`,
+  ];
+
   for (const term of queries) {
     const q = encodeURIComponent(term);
     const json = await deezerGet<
@@ -129,24 +181,66 @@ export async function resolveTrackImage(
         artist?: { name?: string };
         album?: { cover_medium?: string };
       }>
-    >(`/search/track?q=${q}&limit=8`);
+    >(`/search/track?q=${q}&limit=10`);
     const rows = json?.data ?? [];
+
+    // Pass 1: title + artist both close, require cover art.
     for (const row of rows) {
       if (!nameClose(row.title, title)) continue;
       const rowArtist = row.artist?.name ?? "";
-      if (
-        rowArtist &&
-        !nameClose(rowArtist, primaryArtist) &&
-        !nameClose(rowArtist, artistName)
-      ) {
-        continue;
-      }
+      const artistOk =
+        !rowArtist ||
+        artistVariants.some((v) => nameClose(rowArtist, v)) ||
+        artistMatchScore(rowArtist, primaryArtist) >= 70;
+      if (!artistOk) continue;
       const img = usableImageUrl(row.album?.cover_medium);
-      if (img) return preferMedium(img);
+      if (img && isCoverArtUrl(img)) return { url: preferMedium(img), kind: "cover" };
     }
   }
-  // Synthetic / unreleased rows often miss on Deezer — use the artist portrait.
-  return resolveArtistImage(primaryArtist);
+
+  // Pass 2: iTunes song artwork (often has covers Deezer misses).
+  const itunes = await resolveTrackImageItunes(title, primaryArtist);
+  if (itunes) return itunes;
+
+  // Pass 3: artist portrait only as last resort.
+  const artistImg = await resolveArtistImage(primaryArtist);
+  if (artistImg) return { url: artistImg, kind: "artist" };
+  return null;
+}
+
+async function resolveTrackImageItunes(
+  title: string,
+  artistName: string,
+): Promise<TrackImageResult | null> {
+  const term = encodeURIComponent(`${title} ${artistName}`);
+  try {
+    const res = await fetch(
+      `https://itunes.apple.com/search?term=${term}&media=music&entity=song&limit=8`,
+      {
+        headers: { "User-Agent": UA, Accept: "application/json" },
+        signal: AbortSignal.timeout(12_000),
+      },
+    );
+    if (!res.ok) return null;
+    const json = (await res.json()) as {
+      results?: {
+        trackName?: string;
+        artistName?: string;
+        artworkUrl100?: string;
+      }[];
+    };
+    for (const row of json.results ?? []) {
+      if (!row.trackName || !nameClose(row.trackName, title)) continue;
+      if (row.artistName && artistMatchScore(row.artistName, artistName) < 40) {
+        continue;
+      }
+      const art = row.artworkUrl100?.replace("100x100bb", "300x300bb");
+      if (art?.startsWith("https://")) return { url: art, kind: "cover" };
+    }
+  } catch {
+    /* ignore */
+  }
+  return null;
 }
 
 export async function resolveSetImage(
@@ -162,7 +256,7 @@ export async function resolveSetImage(
   >(`/search/album?q=${q}&limit=5`);
   for (const row of json?.data ?? []) {
     const img = usableImageUrl(row.cover_medium);
-    if (img) return preferMedium(img);
+    if (img && isCoverArtUrl(img)) return preferMedium(img);
   }
   if (primaryArtistName) return resolveArtistImage(primaryArtistName);
   return null;
