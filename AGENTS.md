@@ -31,14 +31,14 @@ setradar.ai.
   a new Prisma client without a regenerate.
 - **Lint / typecheck:** `npm run lint` and `npx tsc --noEmit`. `next lint` was
   removed in Next 16; ESLint runs directly.
-- **Ingestion / crawler:** `npm run ingest` upserts newly discovered sets & DJs
-  (idempotent — dedupes by set slug). **Primary source is SoundCloud**
-  (`src/lib/ingest/soundcloud/`): curated show accounts via api-v2 (anonymous
-  `client_id` from page hydration, or `SOUNDCLOUD_CLIENT_ID`), description +
-  timed-comment tracklist parse, long-form set filter. Optional:
-  `INGEST_SKIP_TOPDJS=1` (SoundCloud only), `INGEST_SYNTHETIC=1` (demo rows),
-  `SOUNDCLOUD_CLIENT_ID` override. Do **not** crawl 1001Tracklists. The GitHub
-  Pages workflow runs seed → ingest → thumbs → export on a 6-hour cron.
+- **Ingestion / crawler:** `npm run ingest` upserts newly discovered sets & DJs.
+  **Primary source is SoundCloud** (`src/lib/ingest/soundcloud/`): curated shows
+  via api-v2, description + timed-comment parse, **adaptive poll limits**
+  (`data/soundcloud-poll-state.json`), **sourceHash refresh** when tracklists
+  change (preserves `community_resolved` rows). After ingest, applies
+  `data/resolutions.json` (Suggest ID → GitHub issue → paste JSON → redeploy).
+  Optional: `INGEST_SKIP_TOPDJS=1`, `INGEST_SYNTHETIC=1`, `SOUNDCLOUD_CLIENT_ID`.
+  Do **not** crawl 1001Tracklists. Pages cron: seed → ingest → thumbs → export.
 - **Artwork thumbnails:** `npm run thumbs` fills null `imageUrl` on Dj / Label /
   Track / Set via the Deezer Search API (no key). Idempotent; skips rows that
   already have art. Sets fall back to the primary DJ image. The Pages workflow

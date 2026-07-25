@@ -1,7 +1,8 @@
 import type { PrismaClient } from "@prisma/client";
 import { djSocials, labelSocials } from "../social";
+import { hashRawSetContent } from "./hash";
 import { adapters as defaultAdapters } from "./sources";
-import { slugify, type RawArtist, type RawSet, type SourceAdapter } from "./types";
+import { slugify, type RawArtist, type RawPlay, type RawSet, type SourceAdapter } from "./types";
 
 const ACCENT_PALETTE = [
   "#ff7a45", "#4fb0e0", "#ff7096", "#b0d24e", "#ffd24d",
@@ -17,10 +18,20 @@ function pickAccent(seed: string): string {
 export type IngestStats = {
   scannedSets: number;
   newSets: number;
+  refreshedSets: number;
   skippedSets: number;
   newDjs: number;
   newTracks: number;
-  bySource: Record<string, { new: number; skipped: number }>;
+  bySource: Record<string, { new: number; refreshed: number; skipped: number }>;
+};
+
+type CommunityKeep = {
+  position: number;
+  timestamp: number;
+  trackTitle: string;
+  artistName: string;
+  idLabel: string | null;
+  note: string | null;
 };
 
 export async function runIngest(
@@ -30,13 +41,13 @@ export async function runIngest(
   const stats: IngestStats = {
     scannedSets: 0,
     newSets: 0,
+    refreshedSets: 0,
     skippedSets: 0,
     newDjs: 0,
     newTracks: 0,
     bySource: {},
   };
 
-  // caches to avoid repeated lookups within a run
   const djCache = new Map<string, string>();
   const labelCache = new Map<string, string>();
 
@@ -68,32 +79,52 @@ export async function runIngest(
     const slug = slugify(name);
     if (labelCache.has(slug)) return labelCache.get(slug)!;
     const existing = await prisma.label.findUnique({ where: { slug } });
-    const rec = existing ?? (await prisma.label.create({ data: { slug, name, ...labelSocials(name) } }));
+    const rec =
+      existing ??
+      (await prisma.label.create({ data: { slug, name, ...labelSocials(name) } }));
     labelCache.set(slug, rec.id);
     return rec.id;
   }
 
-  async function upsertTrack(title: string, artistName: string, labelName?: string): Promise<string> {
+  async function upsertTrack(
+    title: string,
+    artistName: string,
+    labelName?: string,
+  ): Promise<string> {
     const existing = await prisma.track.findFirst({ where: { title, artistName } });
     if (existing) return existing.id;
     const labelId = await upsertLabel(labelName);
-    const created = await prisma.track.create({ data: { title, artistName, labelId } });
+    const created = await prisma.track.create({
+      data: { title, artistName, labelId },
+    });
     stats.newTracks += 1;
     return created.id;
   }
 
-  async function upsertEvent(name?: string, kind?: string, location?: string): Promise<string | null> {
+  async function upsertEvent(
+    name?: string,
+    kind?: string,
+    location?: string,
+  ): Promise<string | null> {
     if (!name) return null;
     const slug = slugify(name);
     const existing = await prisma.event.findUnique({ where: { slug } });
     if (existing) return existing.id;
     const created = await prisma.event.create({
-      data: { slug, name, kind: kind ?? "event", location: location ?? null },
+      data: {
+        slug,
+        name,
+        kind: kind ?? "event",
+        location: location ?? null,
+      },
     });
     return created.id;
   }
 
-  async function upsertSeries(name: string | undefined, djId: string): Promise<string | null> {
+  async function upsertSeries(
+    name: string | undefined,
+    djId: string,
+  ): Promise<string | null> {
     if (!name) return null;
     const slug = slugify(name);
     const existing = await prisma.series.findUnique({ where: { slug } });
@@ -102,11 +133,162 @@ export async function runIngest(
     return created.id;
   }
 
+  async function writePlays(setId: string, plays: RawPlay[]): Promise<void> {
+    for (const p of plays) {
+      const base = {
+        setId,
+        position: p.position,
+        timestamp: p.timestamp,
+        provenance: p.provenance,
+        idStatus: p.idStatus,
+      };
+      if (p.idStatus === "identified" && p.trackTitle && p.artistName) {
+        const trackId = await upsertTrack(p.trackTitle, p.artistName, p.label);
+        await prisma.played.create({ data: { ...base, trackId } });
+      } else if (
+        p.idStatus === "community_resolved" &&
+        p.trackTitle &&
+        p.artistName
+      ) {
+        const trackId = await upsertTrack(p.trackTitle, p.artistName, p.label);
+        const idTrack = await prisma.idTrack.create({
+          data: {
+            label: p.idLabel ?? "ID - ID",
+            status: "community_resolved",
+            resolvedTrackId: trackId,
+            note: p.note ?? null,
+          },
+        });
+        await prisma.played.create({
+          data: {
+            ...base,
+            trackId,
+            idTrackId: idTrack.id,
+            rawText: p.idLabel ?? p.rawText,
+          },
+        });
+      } else if (p.idStatus === "unresolved_id") {
+        const idTrack = await prisma.idTrack.create({
+          data: {
+            label: p.idLabel ?? "ID - ID",
+            suspectedArtist: p.suspectedArtist ?? null,
+            note: p.note ?? null,
+            status: "unresolved",
+          },
+        });
+        await prisma.played.create({
+          data: {
+            ...base,
+            idTrackId: idTrack.id,
+            rawText: p.idLabel ?? p.rawText,
+          },
+        });
+      } else {
+        await prisma.played.create({
+          data: {
+            ...base,
+            idStatus: "unparsed",
+            rawText: p.rawText ?? null,
+          },
+        });
+      }
+    }
+  }
+
+  async function snapshotCommunityKeeps(setId: string): Promise<CommunityKeep[]> {
+    const rows = await prisma.played.findMany({
+      where: { setId, idStatus: "community_resolved" },
+      include: { track: true, idTrack: true },
+    });
+    return rows
+      .filter((r) => r.track)
+      .map((r) => ({
+        position: r.position,
+        timestamp: r.timestamp,
+        trackTitle: r.track!.title,
+        artistName: r.track!.artistName,
+        idLabel: r.idTrack?.label ?? r.rawText,
+        note: r.idTrack?.note ?? null,
+      }));
+  }
+
+  function mergeCommunityKeeps(
+    sourcePlays: RawPlay[],
+    keeps: CommunityKeep[],
+  ): RawPlay[] {
+    if (keeps.length === 0) return sourcePlays;
+    const byPosition = new Map(sourcePlays.map((p) => [p.position, p]));
+    for (const k of keeps) {
+      byPosition.set(k.position, {
+        position: k.position,
+        timestamp: k.timestamp,
+        idStatus: "community_resolved",
+        provenance: "community",
+        trackTitle: k.trackTitle,
+        artistName: k.artistName,
+        idLabel: k.idLabel ?? `${k.artistName} - ID`,
+        note: k.note ?? undefined,
+        rawText: k.idLabel ?? undefined,
+      });
+    }
+    return [...byPosition.values()]
+      .sort((a, b) => a.position - b.position || a.timestamp - b.timestamp)
+      .map((p, i) => ({ ...p, position: i + 1 }));
+  }
+
+  async function replacePlays(setId: string, plays: RawPlay[]): Promise<void> {
+    const oldPlays = await prisma.played.findMany({
+      where: { setId },
+      select: { idTrackId: true },
+    });
+    await prisma.played.deleteMany({ where: { setId } });
+    const orphanIds = [
+      ...new Set(oldPlays.map((p) => p.idTrackId).filter(Boolean) as string[]),
+    ];
+    for (const id of orphanIds) {
+      const still = await prisma.played.count({ where: { idTrackId: id } });
+      if (still === 0) await prisma.idTrack.delete({ where: { id } }).catch(() => {});
+    }
+    await writePlays(setId, plays);
+  }
+
   async function ingestSet(raw: RawSet): Promise<void> {
     stats.scannedSets += 1;
-    const existing = await prisma.set.findUnique({ where: { slug: raw.sourceSlug } });
+    const sourceHash = raw.sourceHash ?? hashRawSetContent(raw);
+    const existing = await prisma.set.findUnique({
+      where: { slug: raw.sourceSlug },
+    });
+
     if (existing) {
-      stats.skippedSets += 1;
+      if (existing.sourceHash && existing.sourceHash === sourceHash) {
+        stats.skippedSets += 1;
+        return;
+      }
+
+      // Refresh tracklist; preserve prior community resolutions by position.
+      const keeps = await snapshotCommunityKeeps(existing.id);
+      const plays = mergeCommunityKeeps(raw.plays, keeps);
+
+      await prisma.set.update({
+        where: { id: existing.id },
+        data: {
+          title: raw.title,
+          type: raw.type,
+          genre: raw.genre ?? null,
+          publishedAt: raw.publishedAt,
+          durationSec: raw.durationSec,
+          sourceName: raw.sourceName,
+          sourceUrl: raw.sourceUrl ?? null,
+          cover: raw.cover,
+          sourceHash,
+        },
+      });
+      await replacePlays(existing.id, plays);
+      stats.refreshedSets += 1;
+      console.log(
+        `[ingest] refresh ${raw.sourceSlug}` +
+          (keeps.length ? ` (kept ${keeps.length} community rows)` : ""),
+      );
       return;
     }
 
@@ -128,49 +310,32 @@ export async function runIngest(
         sourceName: raw.sourceName,
         sourceUrl: raw.sourceUrl ?? null,
         cover: raw.cover,
+        sourceHash,
         eventId,
         seriesId,
       },
     });
 
-    await prisma.setArtist.create({ data: { setId: set.id, djId: primaryDjId, isPrimary: true } });
+    await prisma.setArtist.create({
+      data: { setId: set.id, djId: primaryDjId, isPrimary: true },
+    });
     for (const djId of collaboratorIds) {
       if (djId === primaryDjId) continue;
-      await prisma.setArtist.create({ data: { setId: set.id, djId, isPrimary: false } });
+      await prisma.setArtist.create({
+        data: { setId: set.id, djId, isPrimary: false },
+      });
     }
 
-    for (const p of raw.plays) {
-      const base = {
-        setId: set.id,
-        position: p.position,
-        timestamp: p.timestamp,
-        provenance: p.provenance,
-        idStatus: p.idStatus,
-      };
-      if (p.idStatus === "identified" && p.trackTitle && p.artistName) {
-        const trackId = await upsertTrack(p.trackTitle, p.artistName, p.label);
-        await prisma.played.create({ data: { ...base, trackId } });
-      } else if (p.idStatus === "community_resolved" && p.trackTitle && p.artistName) {
-        const trackId = await upsertTrack(p.trackTitle, p.artistName, p.label);
-        const idTrack = await prisma.idTrack.create({
-          data: { label: p.idLabel ?? "ID - ID", status: "community_resolved", resolvedTrackId: trackId },
-        });
-        await prisma.played.create({ data: { ...base, trackId, idTrackId: idTrack.id, rawText: p.idLabel } });
-      } else if (p.idStatus === "unresolved_id") {
-        const idTrack = await prisma.idTrack.create({
-          data: { label: p.idLabel ?? "ID - ID", suspectedArtist: p.suspectedArtist ?? null, note: p.note ?? null, status: "unresolved" },
-        });
-        await prisma.played.create({ data: { ...base, idTrackId: idTrack.id, rawText: p.idLabel } });
-      } else {
-        await prisma.played.create({ data: { ...base, idStatus: "unparsed", rawText: p.rawText ?? null } });
-      }
-    }
-
+    await writePlays(set.id, raw.plays);
     stats.newSets += 1;
   }
 
   for (const adapter of adapters) {
-    const before = { new: stats.newSets, skipped: stats.skippedSets };
+    const before = {
+      new: stats.newSets,
+      refreshed: stats.refreshedSets,
+      skipped: stats.skippedSets,
+    };
     let sets: RawSet[] = [];
     try {
       sets = await adapter.fetchRecent();
@@ -178,11 +343,11 @@ export async function runIngest(
       console.error(`[ingest] ${adapter.label} fetch failed:`, err);
       continue;
     }
-    // Oldest first so positions/relations are stable if adapters share artists.
     sets.sort((a, b) => a.publishedAt.getTime() - b.publishedAt.getTime());
     for (const s of sets) await ingestSet(s);
     stats.bySource[adapter.id] = {
       new: stats.newSets - before.new,
+      refreshed: stats.refreshedSets - before.refreshed,
       skipped: stats.skippedSets - before.skipped,
     };
   }

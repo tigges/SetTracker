@@ -78,6 +78,16 @@ soundcloud`). Idempotent by `sc-{user}-{permalink}` slug.
 | `INGEST_SKIP_TOPDJS=1` | SoundCloud only (skip synthetic top-100 backfill) |
 | `INGEST_SYNTHETIC=1` | Also emit legacy demo rows |
 
+Ingest **refreshes** a set when its `sourceHash` changes (new description /
+comments), keeping prior community resolutions. Adaptive polling prefers hot
+accounts (see `data/soundcloud-poll-state.json`).
+
+### Suggest ID (community wedge)
+
+On unresolved / unparsed rows, **Suggest ID** opens a GitHub issue with a
+`data/resolutions.json` snippet. Approved entries are applied on the next
+ingest/deploy and flip the play to `community_resolved`.
+
 The SQLite database lives at `prisma/dev.db` (git-ignored). Connection string
 is in `.env` (`DATABASE_URL="file:./dev.db"`).
 
