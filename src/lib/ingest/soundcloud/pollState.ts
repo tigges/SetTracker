@@ -47,10 +47,10 @@ export function adaptiveLimit(
 ): number {
   const prev = state.shows[permalink];
   if (!prev) return baseline;
-  if (prev.recentUploadCount >= 3) return Math.min(30, Math.max(baseline, 20));
-  if (prev.recentUploadCount >= 1) return Math.min(20, Math.max(baseline, 12));
-  // Quiet show — still peek, but cheaper
-  return Math.min(baseline, 6);
+  if (prev.recentUploadCount >= 3) return Math.min(40, Math.max(baseline, 24));
+  if (prev.recentUploadCount >= 1) return Math.min(30, Math.max(baseline, 16));
+  // Quiet show — still fetch a real page of history (never starve cold accounts).
+  return Math.max(12, Math.min(baseline, 18));
 }
 
 /** Sort shows so recently-active accounts are polled first. */
