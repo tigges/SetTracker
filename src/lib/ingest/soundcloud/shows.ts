@@ -191,6 +191,38 @@ export const SOUNDCLOUD_SHOWS: SoundCloudShow[] = [
     titleMatch: /\b(live|mix|set|radio|b2b|experts only)\b/i,
     limit: 20,
   },
+
+  // -------------------- Profile lives (not /sets album tabs) --------------------
+  // Artist /sets pages are mostly EP/remix packs. These accounts still upload
+  // long-form lives on their track feed — poll those, skip album playlists.
+  {
+    permalink: "bijou",
+    userId: 2080568,
+    label: "BIJOU",
+    primaryArtist: dj("BIJOU", {
+      accent: "#ff5c8a",
+      homeCity: "Los Angeles, US",
+    }),
+    genre: "G-House",
+    type: "festival",
+    minDurationSec: 40 * 60,
+    titleMatch: /\b(live|mix|set|b2b|radio|factory)\b/i,
+    limit: 20,
+  },
+  {
+    permalink: "robin-schulz",
+    userId: 7293319,
+    label: "Robin Schulz",
+    primaryArtist: dj("Robin Schulz", {
+      accent: "#5aa9e6",
+      homeCity: "Germany",
+    }),
+    genre: "Dance",
+    type: "festival",
+    minDurationSec: 40 * 60,
+    titleMatch: /\b(live|dj set|mix|set|pacha|ibiza|radio)\b/i,
+    limit: 15,
+  },
 ];
 
 export function isSetCandidate(
