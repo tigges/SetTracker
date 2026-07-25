@@ -24,15 +24,23 @@ export function SetCard({ set }: { set: FeedItem }) {
       className="card group relative flex flex-col gap-4 p-4 transition-colors hover:border-[color:var(--muted2)]"
     >
       <div className="flex items-start gap-3">
-        <div
-          className="grid h-12 w-12 flex-none place-items-center rounded-lg text-lg"
-          style={{
-            background: `linear-gradient(140deg, ${accent}2b, ${set.cover}18)`,
-            border: `1px solid ${accent}40`,
-            color: accent,
-          }}
-        >
-          {type.glyph}
+        <div className="relative flex-none">
+          <div
+            className="grid h-12 w-12 place-items-center rounded-xl text-lg font-black"
+            style={{
+              background: `${accent}22`,
+              color: accent,
+              border: `1px solid ${accent}44`,
+            }}
+          >
+            {(set.primaryDj?.name ?? "?").slice(0, 1)}
+          </div>
+          <span
+            className="absolute -bottom-1 -right-1 grid h-5 w-5 place-items-center rounded-md border border-line bg-bg text-[10px] text-muted"
+            title={type.label}
+          >
+            {type.glyph}
+          </span>
         </div>
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2">

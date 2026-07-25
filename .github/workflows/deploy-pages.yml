@@ -3,6 +3,9 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  # Regularly crawl sources for new sets & DJs and redeploy the static site.
+  schedule:
+    - cron: "0 */6 * * *"
   workflow_dispatch:
 
 # Allow the workflow to publish to GitHub Pages.
@@ -37,6 +40,9 @@ jobs:
         run: |
           npx prisma migrate deploy
           npx prisma db seed
+
+      - name: Crawl sources for new sets & DJs
+        run: npm run ingest
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
