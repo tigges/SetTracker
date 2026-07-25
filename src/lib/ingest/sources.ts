@@ -3,6 +3,7 @@ import { hearthisAdapter } from "./hearthis/adapter";
 import { slugify, type RawArtist, type RawPlay, type RawSet, type SourceAdapter } from "./types";
 import { topDjs } from "./topDjs";
 import { soundcloudAdapter } from "./soundcloud/adapter";
+import { youtubeAdapter } from "./youtube/adapter";
 
 // ---------------------------------------------------------------------------
 // Small DSL to author tracklists compactly (synthetic adapters only).
@@ -97,8 +98,10 @@ function withOptionalSynthetic(base: SourceAdapter[]): SourceAdapter[] {
  * Primary pipeline:
  * - SoundCloud curated shows (anonymous client_id)
  * - hearthis.at house-family categories (public api-v2)
+ * - YouTube curated sets (description + Music credits)
  */
 export const adapters: SourceAdapter[] = withOptionalSynthetic([
   soundcloudAdapter,
   hearthisAdapter,
+  youtubeAdapter,
 ]);

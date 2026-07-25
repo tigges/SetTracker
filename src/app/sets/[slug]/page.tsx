@@ -113,11 +113,12 @@ export default async function SetPage({
             )}
           </div>
           {(set.sourceName === "SoundCloud" ||
-            set.sourceName === "hearthis.at") && (
+            set.sourceName === "hearthis.at" ||
+            set.sourceName === "YouTube") && (
             <p className="mt-2 max-w-xl text-[12px] text-muted2">
-              Tracklist is whatever the upload description / timed comments
-              include — often partial. Suggest an ID on unresolved rows to fill
-              gaps.
+              Tracklist comes from the source description, timed comments, or
+              YouTube Music song credits — often partial / untimed. Suggest an
+              ID on unresolved rows to fill gaps.
             </p>
           )}
         </div>
