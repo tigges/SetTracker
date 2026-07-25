@@ -194,13 +194,7 @@ export function SetTimeline({
                   </div>
 
                   {p.labelName && (
-                    <span
-                      className="hidden flex-none rounded-full px-2 py-0.5 text-[11px] sm:inline"
-                      style={{
-                        color: p.labelColor ?? "var(--muted)",
-                        background: `${p.labelColor ?? "#6b7280"}1a`,
-                      }}
-                    >
+                    <span className="hidden flex-none rounded-full border border-line bg-bg2 px-2 py-0.5 text-[11px] text-muted sm:inline">
                       {p.labelName}
                     </span>
                   )}

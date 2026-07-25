@@ -19,7 +19,7 @@ export default async function SetPage({
   if (!set) notFound();
 
   const type = SET_TYPE_META[set.type] ?? { label: set.type, glyph: "•" };
-  const accent = set.primaryDj?.accent ?? "#ff7a1a";
+  const accent = set.primaryDj?.accent ?? "var(--brand)";
 
   return (
     <div>

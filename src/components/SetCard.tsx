@@ -10,7 +10,7 @@ import type { FeedItem } from "@/lib/queries";
 
 export function SetCard({ set }: { set: FeedItem }) {
   const type = SET_TYPE_META[set.type] ?? { label: set.type, glyph: "•" };
-  const accent = set.primaryDj?.accent ?? "#ff7a1a";
+  const accent = set.primaryDj?.accent ?? "var(--brand)";
 
   return (
     <Link

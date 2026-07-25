@@ -78,22 +78,22 @@ async function main() {
   // DJs
   // -------------------------------------------------------------------------
   const djData = [
-    ["marten-horger", "Marten Hörger", "Berlin, DE", "#ff7a1a", "German producer bending tech house into hard-hitting bass grooves."],
-    ["ac-slater", "AC Slater", "Los Angeles, US", "#f5a623", "Night Bass founder and the definitional voice of modern bass house."],
-    ["chris-lake", "Chris Lake", "Los Angeles, US", "#d7dde2", "Black Book Records boss steering peak-time house."],
-    ["tchami", "Tchami", "Paris, FR", "#e0338a", "Future house pioneer and Confession label head."],
-    ["bradeazy", "bradeazy", "Atlanta, US", "#34e0c4", "Bass-forward selector splicing house, garage and dubstep."],
-    ["wax-motif", "Wax Motif", "Los Angeles, US", "#ffcf40", "Divided Souls founder with a G-house pedigree."],
-    ["malaa", "Malaa", "Paris, FR", "#8a8f98", "Masked Confession affiliate dealing in dark house."],
-    ["habstrakt", "Habstrakt", "Lyon, FR", "#6a5cff", "French producer straddling bass house and dubstep."],
-    ["jauz", "Jauz", "Los Angeles, US", "#ff3b6b", "Bite This! captain fusing bass house and riddim."],
-    ["dombresky", "Dombresky", "Marseille, FR", "#ff6b3d", "French house energy with a festival gloss."],
-    ["cid", "CID", "New York, US", "#4bd0c0", "House of Hustle founder, Grammy-winning house selector."],
-    ["volac", "Volac", "Moscow, RU", "#b06bff", "Russian duo delivering relentless tech-tinged bass house."],
-    ["bijou", "BIJOU", "Phoenix, US", "#ff2d7e", "G-house purveyor and Do Not Duplicate boss."],
-    ["westend", "Westend", "Nashville, US", "#2bd67b", "Tech house rising through Insomniac and bitbird."],
-    ["vnssa", "VNSSA", "Los Angeles, US", "#ff9f1c", "Night Bass mainstay pushing raw house and bass."],
-    ["cause-affect", "Cause & Affect", "Vancouver, CA", "#1ec8e0", "Canadian duo bridging bass house and UK garage."],
+    ["marten-horger", "Marten Hörger", "Berlin, DE", "#ff7a45", "German producer bending tech house into hard-hitting bass grooves."],
+    ["ac-slater", "AC Slater", "Los Angeles, US", "#f2b33d", "Night Bass founder and the definitional voice of modern bass house."],
+    ["chris-lake", "Chris Lake", "Los Angeles, US", "#c6cfda", "Black Book Records boss steering peak-time house."],
+    ["tchami", "Tchami", "Paris, FR", "#e06cc4", "Future house pioneer and Confession label head."],
+    ["bradeazy", "bradeazy", "Atlanta, US", "#3aa0e0", "Bass-forward selector splicing house, garage and dubstep."],
+    ["wax-motif", "Wax Motif", "Los Angeles, US", "#f4c560", "Divided Souls founder with a G-house pedigree."],
+    ["malaa", "Malaa", "Paris, FR", "#97a0b0", "Masked Confession affiliate dealing in dark house."],
+    ["habstrakt", "Habstrakt", "Lyon, FR", "#8a7cff", "French producer straddling bass house and dubstep."],
+    ["jauz", "Jauz", "Los Angeles, US", "#ff6b84", "Bite This! captain fusing bass house and riddim."],
+    ["dombresky", "Dombresky", "Marseille, FR", "#ff9457", "French house energy with a festival gloss."],
+    ["cid", "CID", "New York, US", "#45c7e0", "House of Hustle founder, Grammy-winning house selector."],
+    ["volac", "Volac", "Moscow, RU", "#b48cff", "Russian duo delivering relentless tech-tinged bass house."],
+    ["bijou", "BIJOU", "Phoenix, US", "#ff6fb0", "G-house purveyor and Do Not Duplicate boss."],
+    ["westend", "Westend", "Nashville, US", "#52c7d2", "Tech house rising through Insomniac and bitbird."],
+    ["vnssa", "VNSSA", "Los Angeles, US", "#ffa84d", "Night Bass mainstay pushing raw house and bass."],
+    ["cause-affect", "Cause & Affect", "Vancouver, CA", "#4e9dff", "Canadian duo bridging bass house and UK garage."],
   ];
   const djs: Record<string, string> = {};
   for (const [slug, name, homeCity, accent, bio] of djData) {
@@ -217,7 +217,7 @@ async function main() {
       daysAgo: 2,
       durationSec: 3600,
       source: "1001Tracklists",
-      cover: "#f5a623",
+      cover: "#f2b33d",
       tracklist: [
         id("turn-it-up"),
         id("roll-with-it"),
@@ -240,7 +240,7 @@ async function main() {
       daysAgo: 4,
       durationSec: 3600,
       source: "1001Tracklists",
-      cover: "#e0338a",
+      cover: "#e06cc4",
       tracklist: [
         id("prophecy"),
         id("ride"),
@@ -263,7 +263,7 @@ async function main() {
       daysAgo: 6,
       durationSec: 3600,
       source: "1001Tracklists",
-      cover: "#ff7a1a",
+      cover: "#ff7a45",
       tracklist: [
         id("turbulence"),
         id("lose-my-mind"),
@@ -285,7 +285,7 @@ async function main() {
       daysAgo: 9,
       durationSec: 3600,
       source: "1001Tracklists",
-      cover: "#34e0c4",
+      cover: "#3aa0e0",
       tracklist: [
         id("drop-it"),
         id("warehouse"),
@@ -306,7 +306,7 @@ async function main() {
       daysAgo: 12,
       durationSec: 3600,
       source: "1001Tracklists",
-      cover: "#d7dde2",
+      cover: "#c6cfda",
       tracklist: [
         id("deceiver"),
         id("all-night"),
@@ -328,7 +328,7 @@ async function main() {
       daysAgo: 16,
       durationSec: 3600,
       source: "1001Tracklists",
-      cover: "#f5a623",
+      cover: "#f2b33d",
       tracklist: [
         id("turn-it-up"),
         id("tunnel"),
@@ -349,7 +349,7 @@ async function main() {
       daysAgo: 20,
       durationSec: 3600,
       source: "1001Tracklists",
-      cover: "#e0338a",
+      cover: "#e06cc4",
       tracklist: [
         id("prophecy"),
         id("feel-your-love"),
@@ -371,7 +371,7 @@ async function main() {
       daysAgo: 3,
       durationSec: 4500,
       source: "1001Tracklists",
-      cover: "#d7dde2",
+      cover: "#c6cfda",
       tracklist: [
         id("all-night"),
         id("deceiver"),
@@ -395,7 +395,7 @@ async function main() {
       daysAgo: 5,
       durationSec: 3900,
       source: "1001Tracklists",
-      cover: "#e0338a",
+      cover: "#e06cc4",
       tracklist: [
         id("ride"),
         id("prophecy"),
@@ -417,7 +417,7 @@ async function main() {
       daysAgo: 8,
       durationSec: 3600,
       source: "1001Tracklists",
-      cover: "#ff7a1a",
+      cover: "#ff7a45",
       tracklist: [
         id("turbulence"),
         id("lose-my-mind"),
@@ -439,7 +439,7 @@ async function main() {
       daysAgo: 14,
       durationSec: 3600,
       source: "1001Tracklists",
-      cover: "#ffcf40",
+      cover: "#f4c560",
       tracklist: [
         id("ratchet"),
         id("vibrate"),
@@ -460,7 +460,7 @@ async function main() {
       daysAgo: 18,
       durationSec: 3300,
       source: "1001Tracklists",
-      cover: "#ff3b6b",
+      cover: "#ff6b84",
       tracklist: [
         id("get-down"),
         id("overdrive"),
@@ -480,7 +480,7 @@ async function main() {
       daysAgo: 22,
       durationSec: 4200,
       source: "1001Tracklists",
-      cover: "#4bd0c0",
+      cover: "#45c7e0",
       tracklist: [
         id("shake-it"),
         id("midnight"),
@@ -501,7 +501,7 @@ async function main() {
       daysAgo: 25,
       durationSec: 3600,
       source: "1001Tracklists",
-      cover: "#ff6b3d",
+      cover: "#ff9457",
       tracklist: [
         id("feel-your-love"),
         id("neon"),
@@ -523,7 +523,7 @@ async function main() {
       durationSec: 3000,
       source: "SoundCloud",
       sourceUrl: "https://soundcloud.com/bradeazy",
-      cover: "#34e0c4",
+      cover: "#3aa0e0",
       tracklist: [
         raw("Intro — bradeazy edit", "soundcloud"),
         id("drop-it", "soundcloud"),
@@ -544,7 +544,7 @@ async function main() {
       durationSec: 3600,
       source: "SoundCloud",
       sourceUrl: "https://soundcloud.com/volac",
-      cover: "#b06bff",
+      cover: "#b48cff",
       tracklist: [
         id("rave-tool", "soundcloud"),
         id("serotonin", "soundcloud"),
@@ -564,7 +564,7 @@ async function main() {
       durationSec: 2700,
       source: "SoundCloud",
       sourceUrl: "https://soundcloud.com/vnssa",
-      cover: "#ff9f1c",
+      cover: "#ffa84d",
       tracklist: [
         id("tunnel", "soundcloud"),
         id("roll-with-it", "soundcloud"),
@@ -583,7 +583,7 @@ async function main() {
       durationSec: 3300,
       source: "SoundCloud",
       sourceUrl: "https://soundcloud.com/habstrakt",
-      cover: "#6a5cff",
+      cover: "#8a7cff",
       tracklist: [
         id("higher-ground", "soundcloud"),
         id("gravity", "soundcloud"),
@@ -603,7 +603,7 @@ async function main() {
       durationSec: 3600,
       source: "SoundCloud",
       sourceUrl: "https://soundcloud.com/bijou",
-      cover: "#ff2d7e",
+      cover: "#ff6fb0",
       tracklist: [
         id("flex", "soundcloud"),
         id("juke", "soundcloud"),
@@ -623,7 +623,7 @@ async function main() {
       durationSec: 3000,
       source: "SoundCloud",
       sourceUrl: "https://soundcloud.com/westend",
-      cover: "#2bd67b",
+      cover: "#52c7d2",
       tracklist: [
         id("moonwalk", "soundcloud"),
         id("bass-jam", "soundcloud"),
