@@ -1,0 +1,50 @@
+import Link from "next/link";
+import { getDjList } from "@/lib/queries";
+
+export const dynamic = "force-dynamic";
+
+export default async function DjsPage() {
+  const djs = await getDjList();
+
+  return (
+    <div>
+      <div className="mb-8">
+        <p className="eyebrow">Artists</p>
+        <h1 className="mt-1 text-3xl font-extrabold tracking-tight">DJs</h1>
+        <p className="mt-2 max-w-2xl text-[14px] text-muted">
+          {djs.length} bass house artists tracked across radio, festival and
+          SoundCloud sets.
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {djs.map((dj) => (
+          <Link
+            key={dj.id}
+            href={`/djs/${dj.slug}`}
+            className="card flex items-center gap-3 p-4 transition-colors hover:border-[color:var(--muted2)]"
+          >
+            <span
+              className="grid h-11 w-11 flex-none place-items-center rounded-xl text-lg font-black"
+              style={{
+                background: `${dj.accent}22`,
+                color: dj.accent,
+                border: `1px solid ${dj.accent}44`,
+              }}
+            >
+              {dj.name.slice(0, 1)}
+            </span>
+            <div className="min-w-0">
+              <div className="truncate text-[15px] font-semibold text-ink">
+                {dj.name}
+              </div>
+              <div className="truncate text-[12px] text-muted2">
+                {dj.homeCity}
+              </div>
+            </div>
+          </Link>
+        ))}
+      </div>
+    </div>
+  );
+}

@@ -1,0 +1,152 @@
+// SETGRAPH — bass house DJ set database (MVP)
+// SQLite for local dev. Note: Prisma enums are not supported on SQLite,
+// so status/provenance/type fields are strings with documented allowed values.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// A DJ / artist that performs sets.
+model Dj {
+  id         String   @id @default(cuid())
+  slug       String   @unique
+  name       String
+  realName   String?
+  homeCity   String?
+  bio        String?
+  accent     String // hex color used as the profile accent in the UI
+
+  sets       SetArtist[]
+  series     Series[]
+
+  createdAt  DateTime @default(now())
+}
+
+// A recurring show / mix series (e.g. a weekly radio show).
+model Series {
+  id     String @id @default(cuid())
+  slug   String @unique
+  name   String
+  djId   String
+  dj     Dj     @relation(fields: [djId], references: [id])
+  sets   Set[]
+}
+
+// A record label.
+model Label {
+  id     String  @id @default(cuid())
+  slug   String  @unique
+  name   String
+  color  String? // hex, optional brand color
+  tracks Track[]
+}
+
+// An event where a set was performed (festival, club night, radio station).
+model Event {
+  id       String @id @default(cuid())
+  slug     String @unique
+  name     String
+  kind     String // "festival" | "club" | "radio" | "livestream"
+  location String?
+  sets     Set[]
+}
+
+// A released, identified track.
+model Track {
+  id          String   @id @default(cuid())
+  title       String
+  artistName  String
+  labelId     String?
+  label       Label?   @relation(fields: [labelId], references: [id])
+  bpm         Int?
+  musicalKey  String?
+  releaseDate DateTime?
+
+  plays       Played[] @relation("TrackPlays")
+  // ID records that were community-resolved to this track.
+  resolvedIds IdTrack[] @relation("ResolvedTrack")
+
+  createdAt   DateTime @default(now())
+}
+
+// A first-class "ID" record for an unreleased / unknown track.
+// Resolvable later: when the community identifies it, resolvedTrack is set
+// and status flips to "community_resolved".
+model IdTrack {
+  id             String  @id @default(cuid())
+  label          String  // display label, e.g. "ID - ID" or "Marten Hørger - ID"
+  suspectedArtist String?
+  note           String?
+  // "unresolved" | "community_resolved"
+  status         String  @default("unresolved")
+  resolvedTrackId String?
+  resolvedTrack  Track?  @relation("ResolvedTrack", fields: [resolvedTrackId], references: [id])
+
+  plays          Played[] @relation("IdPlays")
+
+  createdAt      DateTime @default(now())
+}
+
+// A DJ set / mix.
+model Set {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String
+  // "radio" | "festival" | "soundcloud"
+  type        String
+  publishedAt DateTime
+  durationSec Int
+  sourceUrl   String?
+  sourceName  String? // e.g. "1001Tracklists", "SoundCloud"
+  cover       String // hex color for the cover gradient seed
+
+  eventId     String?
+  event       Event?   @relation(fields: [eventId], references: [id])
+  seriesId    String?
+  series      Series?  @relation(fields: [seriesId], references: [id])
+
+  artists     SetArtist[]
+  plays       Played[]
+
+  createdAt   DateTime @default(now())
+}
+
+// Join between Set and DJ. Supports b2b / collaborations. One artist is primary.
+model SetArtist {
+  id        String  @id @default(cuid())
+  setId     String
+  set       Set     @relation(fields: [setId], references: [id])
+  djId      String
+  dj        Dj      @relation(fields: [djId], references: [id])
+  isPrimary Boolean @default(false)
+
+  @@unique([setId, djId])
+}
+
+// The core edge: a track played at a position in a set.
+model Played {
+  id         String   @id @default(cuid())
+  setId      String
+  set        Set      @relation(fields: [setId], references: [id])
+  position   Int
+  // offset from set start, in seconds
+  timestamp  Int
+  // "identified" | "unresolved_id" | "community_resolved" | "unparsed"
+  idStatus   String
+  // "1001tl" | "soundcloud" | "fingerprint" | "community"
+  provenance String
+  // raw parsed text as it appeared in the source tracklist
+  rawText    String?
+
+  trackId    String?
+  track      Track?   @relation("TrackPlays", fields: [trackId], references: [id])
+  idTrackId  String?
+  idTrack    IdTrack? @relation("IdPlays", fields: [idTrackId], references: [id])
+
+  @@unique([setId, position])
+}
