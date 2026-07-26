@@ -37,6 +37,30 @@ export const KNOWN_HANDLES: Record<string, HandleHint> = {
     genre: "Tech House",
     accent: "#00c2ff",
   },
+  "marten hørger": {
+    youtubeHandle: "@MARTENHORGER",
+    soundcloudPermalink: "marten-horger",
+    genre: "Bass House",
+    accent: "#ff7a45",
+  },
+  "marten horger": {
+    youtubeHandle: "@MARTENHORGER",
+    soundcloudPermalink: "marten-horger",
+    genre: "Bass House",
+    accent: "#ff7a45",
+  },
+  "marten hörger": {
+    youtubeHandle: "@MARTENHORGER",
+    soundcloudPermalink: "marten-horger",
+    genre: "Bass House",
+    accent: "#ff7a45",
+  },
+  "robin schulz": {
+    youtubeHandle: "@robinschulz",
+    soundcloudPermalink: "robin-schulz",
+    genre: "Dance",
+    accent: "#5aa9e6",
+  },
   "oliver heldens": {
     youtubeHandle: "@OliverHeldens",
     soundcloudPermalink: "oliverheldens",
@@ -68,24 +92,34 @@ export const KNOWN_HANDLES: Record<string, HandleHint> = {
     accent: "#4cc9f0",
   },
   prospa: {
+    youtubeHandle: "@ProspaUK",
     soundcloudPermalink: "prospauk",
     genre: "House",
     accent: "#ffd166",
   },
   "mau p": {
+    youtubeHandle: "@maupmusic",
     soundcloudPermalink: "realmaup",
     genre: "Tech House",
     accent: "#118ab2",
   },
   "black coffee": {
+    youtubeHandle: "@realblackcoffee",
     soundcloudPermalink: "realblackcoffee",
     genre: "Afro House",
     accent: "#222222",
   },
   "chapter & verse": {
+    youtubeHandle: "@chapterandversemusic",
     soundcloudPermalink: "chapterandverseofficial",
     genre: "Bass House",
     accent: "#f77f00",
+  },
+  keinemusik: {
+    youtubeHandle: "@keinemusik",
+    soundcloudPermalink: "keinemusik",
+    genre: "Afro House",
+    accent: "#e8c547",
   },
   "purple disco machine": {
     youtubeHandle: "@purplediscomachine",
@@ -106,6 +140,7 @@ export const KNOWN_HANDLES: Record<string, HandleHint> = {
     accent: "#00f5d4",
   },
   sidepiece: {
+    youtubeHandle: "@youasidepiece",
     soundcloudPermalink: "sidepiece",
     genre: "Tech House",
     accent: "#fee440",

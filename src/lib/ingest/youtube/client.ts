@@ -263,6 +263,10 @@ export function sleep(ms: number): Promise<void> {
 function channelBase(handleOrUrl: string): string {
   const handle = handleOrUrl.trim();
   if (handle.startsWith("http")) return handle.replace(/\/$/, "");
+  // Accept bare channel IDs (UC…) as well as @handles
+  if (/^UC[\w-]{20,}$/.test(handle)) {
+    return `https://www.youtube.com/channel/${handle}`;
+  }
   const h = handle.startsWith("@") ? handle : `@${handle}`;
   return `https://www.youtube.com/${h}`;
 }
@@ -408,7 +412,10 @@ export async function fetchChannelVideoIdsDeep(
   return out;
 }
 
-/** Extract outbound social links from a channel About page. */
+const SOCIAL_HOST_RE =
+  "soundcloud\\.com|instagram\\.com|x\\.com|twitter\\.com|tiktok\\.com|facebook\\.com|fb\\.com|linktr\\.ee|hoo\\.be|lnk\\.to|fanlink\\.tv|ffm\\.to|open\\.spotify\\.com|music\\.apple\\.com|beatport\\.com|youtube\\.com|youtu\\.be";
+
+/** Extract outbound social / hub links from a channel About (or channel) page. */
 export async function fetchChannelSocialLinks(
   handleOrUrl: string,
 ): Promise<string[]> {
@@ -418,16 +425,145 @@ export async function fetchChannelSocialLinks(
     const html = await fetchChannelTabHtml(url);
     const escaped = [
       ...html.matchAll(
-        /https?:\\\/\\\/(?:www\.)?(soundcloud\.com|instagram\.com|x\.com|twitter\.com|linktr\.ee|tiktok\.com|facebook\.com)[^"\\]*/gi,
+        new RegExp(
+          `https?:\\\\/\\\\/(?:www\\\\.)?(?:${SOCIAL_HOST_RE})[^"\\\\]*`,
+          "gi",
+        ),
       ),
     ].map((m) => m[0].replace(/\\\//g, "/"));
     const plain = [
       ...html.matchAll(
-        /https?:\/\/(?:www\.)?(soundcloud\.com|instagram\.com|x\.com|twitter\.com|linktr\.ee)[^\s"\\<]+/gi,
+        new RegExp(
+          `https?:\\/\\/(?:www\\.)?(?:${SOCIAL_HOST_RE})[^\\s"\\\\<]+`,
+          "gi",
+        ),
       ),
     ].map((m) => m[0].replace(/[),.;]+$/, ""));
-    return [...new Set([...escaped, ...plain])];
+    // Bare www. / host paths that YouTube surfaces without scheme
+    const bare = [
+      ...html.matchAll(
+        /(?:instagram\.com|twitter\.com|x\.com|tiktok\.com|facebook\.com|soundcloud\.com)\/[A-Za-z0-9._~-]+/gi,
+      ),
+    ].map((m) => `https://${m[0]}`);
+    return [...new Set([...escaped, ...plain, ...bare])].filter(isUsefulOutboundLink);
   } catch {
     return [];
+  }
+}
+
+/** Drop YouTube chrome / assets that match the broad host regex. */
+function isUsefulOutboundLink(url: string): boolean {
+  try {
+    const u = new URL(url);
+    const host = u.hostname.replace(/^www\./, "").toLowerCase();
+    if (host === "youtube.com" || host === "youtu.be") {
+      // Keep channel / @ / watch links; drop favicons, error beacons, /s/desktop assets
+      if (/\/(s\/desktop|img\/|error_)/i.test(u.pathname)) return false;
+      if (u.searchParams.has("t") && u.searchParams.get("t") === "jserror") {
+        return false;
+      }
+      return (
+        u.pathname.startsWith("/@") ||
+        u.pathname.startsWith("/channel/") ||
+        u.pathname.startsWith("/c/") ||
+        u.pathname.startsWith("/user/") ||
+        u.pathname.startsWith("/watch")
+      );
+    }
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Resolve a channel URL or UC… id to the public @handle when YouTube exposes
+ * `canonicalBaseUrl:"/@Foo"`.
+ */
+export async function resolveYoutubeHandle(
+  handleOrUrlOrChannelId: string,
+): Promise<string | null> {
+  if (!handleOrUrlOrChannelId?.trim()) return null;
+  const at = handleOrUrlOrChannelId.match(/@([\w.-]+)/);
+  if (at && !handleOrUrlOrChannelId.includes("channel/")) {
+    return `@${at[1]}`;
+  }
+  try {
+    const html = await fetchChannelTabHtml(channelBase(handleOrUrlOrChannelId));
+    const canonical = html.match(/"canonicalBaseUrl":"\/(@[\w.-]+)"/);
+    if (canonical) return canonical[1];
+    const vanity = html.match(
+      /https?:\/\/(?:www\.)?youtube\.com\/(@[\w.-]+)/i,
+    );
+    return vanity?.[1] ?? null;
+  } catch {
+    return null;
+  }
+}
+
+function normName(s: string): string {
+  return s
+    .toLowerCase()
+    .replace(/[øØ]/g, "o")
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/&/g, " and ")
+    .replace(/[^a-z0-9]+/g, "");
+}
+
+/**
+ * Search YouTube for an artist channel and return the best @handle when the
+ * channel title roughly matches the artist name (or SC permalink).
+ */
+export async function searchYoutubeChannelHandle(
+  artistName: string,
+  opts?: { soundcloudPermalink?: string | null },
+): Promise<string | null> {
+  const q = encodeURIComponent(`${artistName} DJ`);
+  // sp=EgIQAg%3D%3D → Channel filter
+  const url = `https://www.youtube.com/results?search_query=${q}&sp=EgIQAg%253D%253D`;
+  try {
+    const html = await fetchChannelTabHtml(url);
+    const handles = [
+      ...html.matchAll(/"canonicalBaseUrl":"\/(@[\w.-]+)"/g),
+    ].map((m) => m[1]);
+    const uniq = [...new Set(handles)];
+    if (!uniq.length) return null;
+
+    const want = normName(artistName);
+    const sc = opts?.soundcloudPermalink
+      ? normName(opts.soundcloudPermalink)
+      : "";
+
+    for (const h of uniq.slice(0, 8)) {
+      const handleNorm = normName(h.replace(/^@/, ""));
+      // Prefer exact / near-exact handle matches (realblackcoffee, chapterandversemusic)
+      if (
+        handleNorm === want ||
+        handleNorm === sc ||
+        handleNorm.includes(want) ||
+        (sc && handleNorm.includes(sc)) ||
+        (want.length >= 6 && sc && sc.includes(handleNorm))
+      ) {
+        return h;
+      }
+      // Fall back to fetching channel title
+      try {
+        const page = await fetchChannelTabHtml(channelBase(h));
+        await sleep(80);
+        const title =
+          page.match(/<title>([^<]+)<\/title>/i)?.[1]?.replace(
+            /\s*-\s*YouTube\s*$/i,
+            "",
+          ) ?? "";
+        const t = normName(title);
+        if (t === want || t.includes(want) || want.includes(t)) return h;
+      } catch {
+        /* try next */
+      }
+    }
+    return null;
+  } catch {
+    return null;
   }
 }

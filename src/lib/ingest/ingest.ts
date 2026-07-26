@@ -1,5 +1,6 @@
 import type { PrismaClient } from "@prisma/client";
-import { djSocials, labelSocials } from "../social";
+import { djSocialsFromKnown, labelSocials } from "../social";
+import { ARTIST_ROSTER } from "./roster";
 import { parseTrackTitle } from "../trackMeta";
 import { runCrosslinkDiscovery, type HandleReport } from "./discovery/crosslink";
 import { runDiscovery, type DiscoveryStats } from "./discovery/run";
@@ -74,19 +75,40 @@ export async function runIngest(
   async function upsertDj(raw: RawArtist): Promise<string> {
     const slug = raw.slug || slugify(raw.name);
     if (djCache.has(slug)) return djCache.get(slug)!;
+    const roster = ARTIST_ROSTER.find(
+      (a) => slugify(a.name) === slug || a.name === raw.name,
+    );
+    const socials = djSocialsFromKnown({
+      name: raw.name,
+      soundcloudPermalink: roster?.soundcloud?.permalink,
+      socials: roster?.socials,
+      website: roster?.website,
+    });
     const existing = await prisma.dj.findUnique({ where: { slug } });
     if (existing) {
+      // Refresh curated socials / official spelling when roster knows better
+      if (roster) {
+        await prisma.dj.update({
+          where: { id: existing.id },
+          data: {
+            name: roster.name,
+            accent: roster.accent || existing.accent,
+            homeCity: roster.homeCity ?? existing.homeCity,
+            ...socials,
+          },
+        });
+      }
       djCache.set(slug, existing.id);
       return existing.id;
     }
     const created = await prisma.dj.create({
       data: {
         slug,
-        name: raw.name,
-        homeCity: raw.homeCity ?? null,
+        name: roster?.name ?? raw.name,
+        homeCity: roster?.homeCity ?? raw.homeCity ?? null,
         bio: raw.bio ?? null,
-        accent: raw.accent ?? pickAccent(slug),
-        ...djSocials(raw.name),
+        accent: roster?.accent ?? raw.accent ?? pickAccent(slug),
+        ...socials,
       },
     });
     stats.newDjs += 1;

@@ -2,8 +2,9 @@
  * Cross-fertilise artist handles across YouTube ↔ SoundCloud ↔ social links.
  *
  * Sources:
- * - YouTube channel About page outbound links
+ * - YouTube channel About page outbound links (+ bare IG/X/SC paths)
  * - SoundCloud profile website + description links
+ * - Link hubs (hoo.be, lnk.to, fanlink, linktr.ee, …) expanded automatically
  * - Roster seed data
  *
  * Writes an updated handle report; soft-updates artist-candidates.json.
@@ -13,7 +14,12 @@ import { writeFileSync, mkdirSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { ARTIST_ROSTER, rosterMissingHandles } from "../roster";
 import { resolveUser, scGet, sleep } from "../soundcloud/client";
-import { fetchChannelSocialLinks } from "../youtube/client";
+import {
+  fetchChannelSocialLinks,
+  resolveYoutubeHandle,
+  searchYoutubeChannelHandle,
+} from "../youtube/client";
+import { expandAllLinkHubs } from "./linkHubs";
 import { loadCandidates, saveCandidates, upsertCandidate } from "./store";
 import { slugify } from "../types";
 
@@ -64,6 +70,27 @@ function extractYoutubeHandle(url: string): string | null {
   return null;
 }
 
+function extractYoutubeChannelId(url: string): string | null {
+  const m = url.match(/youtube\.com\/channel\/(UC[\w-]{20,})/i);
+  return m?.[1] ?? null;
+}
+
+function extractInstagram(url: string): string | null {
+  const m = url.match(/instagram\.com\/([A-Za-z0-9._]+)/i);
+  if (!m) return null;
+  if (["p", "reel", "stories", "explore"].includes(m[1].toLowerCase())) {
+    return null;
+  }
+  return m[1];
+}
+
+function extractTwitter(url: string): string | null {
+  const m = url.match(/(?:twitter|x)\.com\/([A-Za-z0-9_]+)/i);
+  if (!m) return null;
+  if (["intent", "share", "home", "i"].includes(m[1].toLowerCase())) return null;
+  return m[1];
+}
+
 async function scOutboundLinks(permalink: string): Promise<string[]> {
   try {
     const u = await resolveUser(permalink);
@@ -76,6 +103,12 @@ async function scOutboundLinks(permalink: string): Promise<string[]> {
     const desc = String(full.description || "");
     for (const m of desc.matchAll(/https?:\/\/[^\s)]+/gi)) {
       links.push(m[0].replace(/[),.;]+$/, ""));
+    }
+    // Bare hosts in SC bios (common: instagram.com/foo)
+    for (const m of desc.matchAll(
+      /(?:instagram\.com|twitter\.com|x\.com|tiktok\.com|youtube\.com)\/[A-Za-z0-9@._-]+/gi,
+    )) {
+      links.push(`https://${m[0].replace(/^https?:\/\//i, "")}`);
     }
     return links;
   } catch {
@@ -117,13 +150,16 @@ export async function runCrosslinkDiscovery(): Promise<HandleReport> {
       }
     }
 
-    const uniq = [...new Set(discovered)];
+    // Follow link hubs (hoo.be / lnk.to / fanlink / …) for nested socials
+    let uniq = await expandAllLinkHubs(discovered);
+    if (uniq.length > discovered.length) crosslinkHits += 1;
+
     let youtubeHandle = artist.youtube?.handle || null;
     let youtubeStatus = artist.youtube?.status || "missing";
     let scPermalink = artist.soundcloud?.permalink || null;
     let scStatus = artist.soundcloud?.status || "missing";
 
-    // Fill missing YT from SC/description links
+    // Fill missing YT from @handles in discovered links
     if (!youtubeHandle || youtubeStatus === "missing") {
       for (const l of uniq) {
         const h = extractYoutubeHandle(l);
@@ -136,7 +172,46 @@ export async function runCrosslinkDiscovery(): Promise<HandleReport> {
       }
     }
 
-    // Fill missing SC from YT about links
+    // Resolve youtube.com/channel/UC… → @handle when still missing
+    if (!youtubeHandle || youtubeStatus === "missing") {
+      for (const l of uniq) {
+        const channelId = extractYoutubeChannelId(l);
+        if (!channelId) continue;
+        try {
+          const h = await resolveYoutubeHandle(channelId);
+          await sleep(120);
+          if (h) {
+            youtubeHandle = h;
+            youtubeStatus = "unverified";
+            crosslinkHits += 1;
+            uniq = [...new Set([...uniq, `https://www.youtube.com/${h}`])];
+            break;
+          }
+        } catch {
+          /* ignore */
+        }
+      }
+    }
+
+    // Last resort: YouTube channel search by artist name
+    if (!youtubeHandle || youtubeStatus === "missing") {
+      try {
+        const h = await searchYoutubeChannelHandle(artist.name, {
+          soundcloudPermalink: scPermalink,
+        });
+        await sleep(150);
+        if (h) {
+          youtubeHandle = h;
+          youtubeStatus = "unverified";
+          crosslinkHits += 1;
+          uniq = [...new Set([...uniq, `https://www.youtube.com/${h}`])];
+        }
+      } catch {
+        /* ignore */
+      }
+    }
+
+    // Fill missing SC from YT about / hub links
     if (!scPermalink || scStatus === "missing") {
       for (const l of uniq) {
         const p = extractSoundcloudPermalink(l);
@@ -149,11 +224,29 @@ export async function runCrosslinkDiscovery(): Promise<HandleReport> {
       }
     }
 
+    // Soft-promote weak → ok when YT About / hubs confirm matching SC/IG
+    if (
+      youtubeHandle &&
+      (youtubeStatus === "weak" || youtubeStatus === "unverified") &&
+      scPermalink &&
+      scStatus === "ok"
+    ) {
+      const scMentioned = uniq.some(
+        (l) => extractSoundcloudPermalink(l)?.toLowerCase() === scPermalink?.toLowerCase(),
+      );
+      if (scMentioned) {
+        youtubeStatus = "ok";
+        crosslinkHits += 1;
+      }
+    }
+
     const reasons: string[] = [];
     if (!youtubeHandle || youtubeStatus === "missing") {
       reasons.push("missing YouTube @handle");
     } else if (youtubeStatus === "weak" || youtubeStatus === "unverified") {
-      reasons.push(`YouTube ${youtubeStatus}${artist.youtube?.note ? `: ${artist.youtube.note}` : ""}`);
+      reasons.push(
+        `YouTube ${youtubeStatus}${artist.youtube?.note ? `: ${artist.youtube.note}` : ""}`,
+      );
     }
     if (!scPermalink || scStatus === "missing") {
       reasons.push("missing SoundCloud permalink");
@@ -184,6 +277,8 @@ export async function runCrosslinkDiscovery(): Promise<HandleReport> {
 
     // Soft-promote into candidate queue when we have a workable handle
     if (youtubeHandle || scPermalink) {
+      const ig = uniq.map(extractInstagram).find(Boolean);
+      const tw = uniq.map(extractTwitter).find(Boolean);
       upsertCandidate(file, {
         name: artist.name,
         slug: slugify(artist.name),
@@ -196,6 +291,12 @@ export async function runCrosslinkDiscovery(): Promise<HandleReport> {
             detail: "roster artist",
             weight: 40,
           },
+          ...(ig
+            ? [{ kind: "manual" as const, detail: `ig:${ig}`, weight: 5 }]
+            : []),
+          ...(tw
+            ? [{ kind: "manual" as const, detail: `x:${tw}`, weight: 5 }]
+            : []),
         ],
         youtubeHandle: youtubeHandle || undefined,
         soundcloudPermalink: scPermalink || undefined,
@@ -247,8 +348,11 @@ export async function runCrosslinkDiscovery(): Promise<HandleReport> {
     "",
     "## How we cross-fertilise",
     "",
-    "- YouTube About → SoundCloud / Instagram / X / Linktree",
-    "- SoundCloud profile website + description → YouTube / Instagram / Linktree",
+    "- YouTube About → SoundCloud / Instagram / X / TikTok / hubs",
+    "- SoundCloud profile website + description → YouTube / Instagram / hubs",
+    "- Link hubs (hoo.be, lnk.to, fanlink, linktr.ee, …) expanded automatically",
+    "- `youtube.com/channel/UC…` resolved to public `@handle`",
+    "- YouTube channel search by artist name when About/SC still lack a handle",
     "- Roster seeds + SC user search for missing permalinks",
     "- Candidates auto-promoted when a handle resolves",
     "",
@@ -261,7 +365,7 @@ export async function runCrosslinkDiscovery(): Promise<HandleReport> {
   console.log(
     `[crosslink] roster gaps (static): ${rosterMissingHandles()
       .map((a) => a.name)
-      .join(", ")}`,
+      .join(", ") || "(none)"}`,
   );
 
   return report;

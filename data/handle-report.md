@@ -1,88 +1,37 @@
 # Artist handle report
 
-Updated: 2026-07-26T03:46:21.053Z
+Updated: 2026-07-26T11:19:32.666Z
 
-## Needs attention (14)
+## Needs attention (4)
 
 ### James Hype
 - SoundCloud weak: few SC uploads
 - YouTube: @JamesHype (ok)
 - SoundCloud: jameshype (weak)
-- Discovered links: https://www.jameshype.com, https://instagram.com/itswildwallace, https://instagram.com/filmedbybenjamin
+- Discovered links: https://www.jameshype.com, https://www.youtube.com/@JamesHype/about?referring_app=com.apple.mobilesafari-smartbanner, https://www.youtube.com/@JamesHype/about, https://www.youtube.com/channel/UCkAmFYllx331zGshdN4xPng, https://www.youtube.com/channel/UCkAmFYllx331zGshdN4xPng?feature=applinks, https://lnk.to/JH-TRIGGER, https://instagram.com/itswildwallace, https://instagram.com/filmedbybenjamin
 
 ### Tita Lau
 - SoundCloud weak: 0 tracks on SC profile
 - YouTube: @TitaLau (ok)
 - SoundCloud: titalau (weak)
-
-### FISHER
-- SoundCloud unverified: best SC search hit; confirm official
-- YouTube: @fisher (ok)
-- SoundCloud: fish-tales (unverified)
-- Discovered links: http://www.instagram.com/followthefishtv, Https://www.followthefishtv.com
-
-### Prospa
-- missing YouTube @handle
-- YouTube: — (missing)
-- SoundCloud: prospauk (ok)
-
-### SIDEPIECE
-- missing YouTube @handle
-- YouTube: — (missing)
-- SoundCloud: sidepiece (ok)
-
-### BISCITS
-- YouTube unverified: confirm channel
-- YouTube: @Biscits (unverified)
-- SoundCloud: biscits (ok)
-- Discovered links: https://www.instagram.com/itsbiscits, https://x.com/BiscitsMusic
-
-### Mau P
-- missing YouTube @handle
-- YouTube: — (missing)
-- SoundCloud: realmaup (ok)
-
-### Black Coffee
-- missing YouTube @handle
-- YouTube: — (missing)
-- SoundCloud: realblackcoffee (ok)
-
-### Chapter & Verse
-- missing YouTube @handle
-- YouTube: — (missing)
-- SoundCloud: chapterandverseofficial (ok)
+- Discovered links: https://www.youtube.com/@TitaLau/about?referring_app=com.apple.mobilesafari-smartbanner, https://www.youtube.com/@TitaLau/about, https://www.youtube.com/channel/UCbNJ1b-72n98zbk8MU-eeiQ, https://www.youtube.com/channel/UCbNJ1b-72n98zbk8MU-eeiQ?feature=applinks, https://open.spotify.com/artist/5g93I, https://open.spotify.com/playlist/0Xi, https://open.spotify.com/playlist/4V5, https://www.youtube.com/watch?v=OP6cO
 
 ### AC Slater
 - YouTube weak: channel returned 0 videos in probe
 - YouTube: @acslater (weak)
 - SoundCloud: acslater (ok)
-- Discovered links: https://linktr.ee/acslater
-
-### Marten Hörger
-- YouTube weak: few long mixes on channel
-- YouTube: @MartenHorger (weak)
-- SoundCloud: marten-horger (ok)
-- Discovered links: https://marten.fanlink.tv/rave-pv-anthem
+- Discovered links: https://www.youtube.com/@acslater/about?referring_app=com.apple.mobilesafari-smartbanner, https://www.youtube.com/@acslater/about, https://www.youtube.com/channel/UCIMPemXvtgadmB84QHRMasQ, https://www.youtube.com/channel/UCIMPemXvtgadmB84QHRMasQ?feature=applinks, http://www.youtube.com/@ACSlater, https://linktr.ee/acslater, https://www.youtube.com/watch?v=BBHiIgHzw-w, https://www.youtube.com/watch?v=X2u1q9DNRD4
 
 ### Solomun
 - YouTube weak: channel probe returned empty
 - YouTube: @solomunmusic (weak)
 - SoundCloud: solomun (ok)
+- Discovered links: https://www.youtube.com/@solomunmusic/about?referring_app=com.apple.mobilesafari-smartbanner, https://www.youtube.com/@solomunmusic/about, https://www.youtube.com/channel/UC7u5nTmusPiybhyKoEwFE6A, https://www.youtube.com/channel/UC7u5nTmusPiybhyKoEwFE6A?feature=applinks, http://www.youtube.com/@solomunmusic
 
-### Robin Schulz
-- missing YouTube @handle
-- YouTube: — (missing)
-- SoundCloud: robin-schulz (ok)
-
-### Keinemusik
-- missing YouTube @handle
-- YouTube: — (missing)
-- SoundCloud: keinemusik (ok)
-- Discovered links: https://ffm.to/km074
-
-## OK (16)
+## OK (26)
 
 - **Chris Lake** — YT @ChrisLake · SC chrislake
+- **FISHER** — YT @fisher · SC fish-tales
 - **Oliver Heldens** — YT @OliverHeldens · SC oliverheldens
 - **Vintage Culture** — YT @VintageCulture · SC vintageculturemusic
 - **MEDUZA** — YT @meduzamusic · SC meduzamusic
@@ -96,12 +45,24 @@ Updated: 2026-07-26T03:46:21.053Z
 - **PAWSA** — YT @PAWSA · SC pawsa
 - **Bleu Clair** — YT @bleuclairmusic · SC bleuclair
 - **BIJOU** — YT @BIJOU · SC bijou
+- **Prospa** — YT @ProspaUK · SC prospauk
+- **SIDEPIECE** — YT @youasidepiece · SC sidepiece
 - **Sammy Virji** — YT @SammyVirji · SC sammyvirji
+- **BISCITS** — YT @Biscits · SC biscits
+- **Mau P** — YT @maupmusic · SC realmaup
+- **Black Coffee** — YT @realblackcoffee · SC realblackcoffee
+- **Chapter & Verse** — YT @chapterandversemusic · SC chapterandverseofficial
+- **Marten Hørger** — YT @MARTENHORGER · SC marten-horger
 - **Dom Dolla** — YT @domdolla · SC domdolla
+- **Robin Schulz** — YT @robinschulz · SC robin-schulz
+- **Keinemusik** — YT @keinemusik · SC keinemusik
 
 ## How we cross-fertilise
 
-- YouTube About → SoundCloud / Instagram / X / Linktree
-- SoundCloud profile website + description → YouTube / Instagram / Linktree
+- YouTube About → SoundCloud / Instagram / X / TikTok / hubs
+- SoundCloud profile website + description → YouTube / Instagram / hubs
+- Link hubs (hoo.be, lnk.to, fanlink, linktr.ee, …) expanded automatically
+- `youtube.com/channel/UC…` resolved to public `@handle`
+- YouTube channel search by artist name when About/SC still lack a handle
 - Roster seeds + SC user search for missing permalinks
 - Candidates auto-promoted when a handle resolves

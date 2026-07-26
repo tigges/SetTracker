@@ -1,9 +1,9 @@
 import assert from "node:assert/strict";
 import { beatportSearchUrl, parseTrackTitle } from "./trackMeta";
 
-const remix = parseTrackTitle("Pressure (Marten Hörger Remix)");
-assert.equal(remix.remixerName, "Marten Hörger");
-assert.equal(remix.mixName, "Marten Hörger Remix");
+const remix = parseTrackTitle("Pressure (Marten Hørger Remix)");
+assert.equal(remix.remixerName, "Marten Hørger");
+assert.equal(remix.mixName, "Marten Hørger Remix");
 
 const ext = parseTrackTitle("Night Ride (Extended Mix)");
 assert.equal(ext.mixName, "Extended Mix");

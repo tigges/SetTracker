@@ -72,7 +72,17 @@ npm run dev        # http://localhost:3000
 | `npm run db:setup`   | `db:deploy` + `db:seed`                |
 | `npm run db:reset`   | Drop, re-migrate and re-seed the DB    |
 | `npm run ingest`     | Upsert sets from SoundCloud (+ optional backfill) |
+| `npm run crosslink`  | Scrape YT/SC profiles + link hubs → handle report |
 | `npm run thumbs`     | Resolve artwork URLs (Deezer / iTunes) |
+
+### Handle cross-link (automatic)
+
+`npm run crosslink` (also the first step of ingest) scrapes each roster artist's
+YouTube About + SoundCloud bio for outbound links, then expands hubs
+(`hoo.be`, `lnk.to`, `fanlink`, `linktr.ee`, …). It resolves
+`youtube.com/channel/UC…` → `@handle`, writes `data/handle-report.md`, and
+promotes candidates. Prefer pasting a channel / hub once into the roster; the
+crawler fills the rest on the next deep ingest.
 
 ### SoundCloud ingest
 

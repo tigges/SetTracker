@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-26T03:46:21.053Z",
+  "updatedAt": "2026-07-26T11:19:32.666Z",
   "totalArtists": 30,
   "needsAttention": [
     {
@@ -16,8 +16,30 @@
       },
       "discoveredLinks": [
         "https://www.jameshype.com",
+        "https://www.youtube.com/@JamesHype/about?referring_app=com.apple.mobilesafari-smartbanner",
+        "https://www.youtube.com/@JamesHype/about",
+        "https://www.youtube.com/channel/UCkAmFYllx331zGshdN4xPng",
+        "https://www.youtube.com/channel/UCkAmFYllx331zGshdN4xPng?feature=applinks",
+        "https://lnk.to/JH-TRIGGER",
         "https://instagram.com/itswildwallace",
-        "https://instagram.com/filmedbybenjamin"
+        "https://instagram.com/filmedbybenjamin",
+        "http://www.youtube.com/@JamesHype",
+        "https://instagram.com/jameshype",
+        "https://twitter.com/JamesHYPE",
+        "https://facebook.com/jameshypethedj",
+        "https://open.spotify.com/album/0TbP7nFBGhpPmL60tL7HBH?go=1&amp;utm_source=Original_Original&amp;utm_medium=Original&amp;utm_content=3155c0d7-ae97-4e1a-b8ea-e4f2a9d6be48_none_James%20Hype_none_Trigger%20Finger_none_20260330_direct_james-hype-8339_none_lnk.to%2Fjh-trigger",
+        "https://music.apple.com/us/album/1889512443?app=music&amp;at=1l3vpUI&amp;ct=LFV_eb4ff181222747f55de5cfcec42ff2cd&amp;itscg=30440&amp;itsct=catchall_p2&amp;lId=215479952&amp;cId=none&amp;sr=2&amp;src=Linkfire&amp;ls=1",
+        "https://www.beatport.com/track/trigger-finger/28334015",
+        "https://soundcloud.com/stereohypeglobal/trigger-finger/s-pbetPPpRada?si=2c0d1e0f841645c08c6d3bb212c58fba&amp;utm_source=clipboard&amp;utm_medium=text&amp;utm_campaign=social_sharing",
+        "https://music.apple.com/us/album/1889512443?app=itunes&amp;at=1l3vpUI&amp;ct=LFV_eb4ff181222747f55de5cfcec42ff2cd&amp;itscg=30440&amp;itsct=catchall_p5&amp;lId=215479952&amp;cId=none&amp;sr=5&amp;src=Linkfire&amp;ls=1",
+        "https://youtu.be/rjAJC-EUbv4?src=Linkfire&amp;lId=3155c0d7-ae97-4e1a-b8ea-e4f2a9d6be48&amp;cId=d3d58fd7-4c47-11e6-9fd0-066c3e7a8751",
+        "https://music.youtube.com/playlist?list=OLAK5uy_mm2eZ2HtbK1z21hHwHnLJIjUHg0mU5cdw&amp;src=Linkfire&amp;lId=3155c0d7-ae97-4e1a-b8ea-e4f2a9d6be48&amp;cId=d3d58fd7-4c47-11e6-9fd0-066c3e7a8751",
+        "https://music.apple.com",
+        "https://open.spotify.com",
+        "https://www.beatport.com",
+        "https://soundcloud.com",
+        "https://youtu.be",
+        "https://music.youtube.com"
       ],
       "needsAttention": true,
       "attentionReasons": [
@@ -36,142 +58,24 @@
         "status": "weak",
         "note": "0 tracks on SC profile"
       },
-      "discoveredLinks": [],
+      "discoveredLinks": [
+        "https://www.youtube.com/@TitaLau/about?referring_app=com.apple.mobilesafari-smartbanner",
+        "https://www.youtube.com/@TitaLau/about",
+        "https://www.youtube.com/channel/UCbNJ1b-72n98zbk8MU-eeiQ",
+        "https://www.youtube.com/channel/UCbNJ1b-72n98zbk8MU-eeiQ?feature=applinks",
+        "https://open.spotify.com/artist/5g93I",
+        "https://open.spotify.com/playlist/0Xi",
+        "https://open.spotify.com/playlist/4V5",
+        "https://www.youtube.com/watch?v=OP6cO",
+        "https://www.youtube.com/watch?v=xyCWU",
+        "http://www.youtube.com/@TitaLau",
+        "https://instagram.com/tita_lau",
+        "https://tiktok.com/titalau",
+        "https://facebook.com/titalauofficial"
+      ],
       "needsAttention": true,
       "attentionReasons": [
         "SoundCloud weak: 0 tracks on SC profile"
-      ]
-    },
-    {
-      "name": "FISHER",
-      "slug": "fisher",
-      "youtube": {
-        "handle": "@fisher",
-        "status": "ok"
-      },
-      "soundcloud": {
-        "permalink": "fish-tales",
-        "status": "unverified",
-        "note": "best SC search hit; confirm official"
-      },
-      "discoveredLinks": [
-        "http://www.instagram.com/followthefishtv",
-        "Https://www.followthefishtv.com"
-      ],
-      "needsAttention": true,
-      "attentionReasons": [
-        "SoundCloud unverified: best SC search hit; confirm official"
-      ]
-    },
-    {
-      "name": "Prospa",
-      "slug": "prospa",
-      "youtube": {
-        "handle": null,
-        "status": "missing",
-        "note": "need official YouTube @handle"
-      },
-      "soundcloud": {
-        "permalink": "prospauk",
-        "status": "ok"
-      },
-      "discoveredLinks": [],
-      "needsAttention": true,
-      "attentionReasons": [
-        "missing YouTube @handle"
-      ]
-    },
-    {
-      "name": "SIDEPIECE",
-      "slug": "sidepiece",
-      "youtube": {
-        "handle": null,
-        "status": "missing",
-        "note": "need official YouTube @handle"
-      },
-      "soundcloud": {
-        "permalink": "sidepiece",
-        "status": "ok"
-      },
-      "discoveredLinks": [],
-      "needsAttention": true,
-      "attentionReasons": [
-        "missing YouTube @handle"
-      ]
-    },
-    {
-      "name": "BISCITS",
-      "slug": "biscits",
-      "youtube": {
-        "handle": "@Biscits",
-        "status": "unverified",
-        "note": "confirm channel"
-      },
-      "soundcloud": {
-        "permalink": "biscits",
-        "status": "ok"
-      },
-      "discoveredLinks": [
-        "https://www.instagram.com/itsbiscits",
-        "https://x.com/BiscitsMusic"
-      ],
-      "needsAttention": true,
-      "attentionReasons": [
-        "YouTube unverified: confirm channel"
-      ]
-    },
-    {
-      "name": "Mau P",
-      "slug": "mau-p",
-      "youtube": {
-        "handle": null,
-        "status": "missing",
-        "note": "need official YouTube @handle"
-      },
-      "soundcloud": {
-        "permalink": "realmaup",
-        "status": "ok"
-      },
-      "discoveredLinks": [],
-      "needsAttention": true,
-      "attentionReasons": [
-        "missing YouTube @handle"
-      ]
-    },
-    {
-      "name": "Black Coffee",
-      "slug": "black-coffee",
-      "youtube": {
-        "handle": null,
-        "status": "missing",
-        "note": "need official YouTube @handle"
-      },
-      "soundcloud": {
-        "permalink": "realblackcoffee",
-        "status": "ok"
-      },
-      "discoveredLinks": [],
-      "needsAttention": true,
-      "attentionReasons": [
-        "missing YouTube @handle"
-      ]
-    },
-    {
-      "name": "Chapter & Verse",
-      "slug": "chapter-verse",
-      "youtube": {
-        "handle": null,
-        "status": "missing",
-        "note": "need official YouTube @handle"
-      },
-      "soundcloud": {
-        "permalink": "chapterandverseofficial",
-        "status": "ok"
-      },
-      "discoveredLinks": [],
-      "needsAttention": true,
-      "attentionReasons": [
-        "missing YouTube @handle"
       ]
     },
     {
@@ -187,31 +91,19 @@
         "status": "ok"
       },
       "discoveredLinks": [
-        "https://linktr.ee/acslater"
+        "https://www.youtube.com/@acslater/about?referring_app=com.apple.mobilesafari-smartbanner",
+        "https://www.youtube.com/@acslater/about",
+        "https://www.youtube.com/channel/UCIMPemXvtgadmB84QHRMasQ",
+        "https://www.youtube.com/channel/UCIMPemXvtgadmB84QHRMasQ?feature=applinks",
+        "http://www.youtube.com/@ACSlater",
+        "https://linktr.ee/acslater",
+        "https://www.youtube.com/watch?v=BBHiIgHzw-w",
+        "https://www.youtube.com/watch?v=X2u1q9DNRD4",
+        "https://youtu.be/xvvLW_mQtHg?si=V5o8rbYGiz9c9jlP"
       ],
       "needsAttention": true,
       "attentionReasons": [
         "YouTube weak: channel returned 0 videos in probe"
-      ]
-    },
-    {
-      "name": "Marten Hörger",
-      "slug": "marten-horger",
-      "youtube": {
-        "handle": "@MartenHorger",
-        "status": "weak",
-        "note": "few long mixes on channel"
-      },
-      "soundcloud": {
-        "permalink": "marten-horger",
-        "status": "ok"
-      },
-      "discoveredLinks": [
-        "https://marten.fanlink.tv/rave-pv-anthem"
-      ],
-      "needsAttention": true,
-      "attentionReasons": [
-        "YouTube weak: few long mixes on channel"
       ]
     },
     {
@@ -226,48 +118,16 @@
         "permalink": "solomun",
         "status": "ok"
       },
-      "discoveredLinks": [],
-      "needsAttention": true,
-      "attentionReasons": [
-        "YouTube weak: channel probe returned empty"
-      ]
-    },
-    {
-      "name": "Robin Schulz",
-      "slug": "robin-schulz",
-      "youtube": {
-        "handle": null,
-        "status": "missing",
-        "note": "need official YouTube @handle"
-      },
-      "soundcloud": {
-        "permalink": "robin-schulz",
-        "status": "ok"
-      },
-      "discoveredLinks": [],
-      "needsAttention": true,
-      "attentionReasons": [
-        "missing YouTube @handle"
-      ]
-    },
-    {
-      "name": "Keinemusik",
-      "slug": "keinemusik",
-      "youtube": {
-        "handle": null,
-        "status": "missing",
-        "note": "need official YouTube @handle"
-      },
-      "soundcloud": {
-        "permalink": "keinemusik",
-        "status": "ok"
-      },
       "discoveredLinks": [
-        "https://ffm.to/km074"
+        "https://www.youtube.com/@solomunmusic/about?referring_app=com.apple.mobilesafari-smartbanner",
+        "https://www.youtube.com/@solomunmusic/about",
+        "https://www.youtube.com/channel/UC7u5nTmusPiybhyKoEwFE6A",
+        "https://www.youtube.com/channel/UC7u5nTmusPiybhyKoEwFE6A?feature=applinks",
+        "http://www.youtube.com/@solomunmusic"
       ],
       "needsAttention": true,
       "attentionReasons": [
-        "missing YouTube @handle"
+        "YouTube weak: channel probe returned empty"
       ]
     }
   ],
@@ -285,7 +145,48 @@
       },
       "discoveredLinks": [
         "https://instagram.com/chrislake",
-        "https://twitter.com/chrislake"
+        "https://twitter.com/chrislake",
+        "https://www.youtube.com/@ChrisLake/about?referring_app=com.apple.mobilesafari-smartbanner",
+        "https://www.youtube.com/@ChrisLake/about",
+        "https://www.youtube.com/channel/UC8XtHReHyGzgyYVTAhaWwzg",
+        "https://www.youtube.com/channel/UC8XtHReHyGzgyYVTAhaWwzg?feature=applinks",
+        "https://www.youtube.com/@chrislake?su",
+        "https://www.youtube.com/@chrislake?sub_confirmation=1",
+        "https://facebook.com/chrislake",
+        "https://tiktok.com/@chrislake",
+        "http://www.youtube.com/@chrislake",
+        "https://soundcloud.com/chrislake"
+      ],
+      "needsAttention": false,
+      "attentionReasons": []
+    },
+    {
+      "name": "FISHER",
+      "slug": "fisher",
+      "youtube": {
+        "handle": "@fisher",
+        "status": "ok"
+      },
+      "soundcloud": {
+        "permalink": "fish-tales",
+        "status": "ok",
+        "note": "official SC (followthefishtv.com in bio)"
+      },
+      "discoveredLinks": [
+        "https://instagram.com/followthefishtv",
+        "https://tiktok.com/@FISHER",
+        "https://facebook.com/followthefishtv.tv",
+        "https://followthefishtv.com",
+        "https://www.youtube.com/@fisher/about?referring_app=com.apple.mobilesafari-smartbanner",
+        "https://www.youtube.com/@fisher/about",
+        "https://www.youtube.com/channel/UCnr1-8gbgQ7YFd8twlBDhhg",
+        "https://www.youtube.com/channel/UCnr1-8gbgQ7YFd8twlBDhhg?feature=applinks",
+        "https://www.youtube.com/@Followthefis",
+        "https://www.youtube.com/@Followthefishtv/shorts",
+        "https://www.tiktok.com/@FISHER",
+        "http://www.instagram.com/followthefishtv",
+        "http://www.youtube.com/@fisher",
+        "https://www.followthefishtv.com"
       ],
       "needsAttention": false,
       "attentionReasons": []
@@ -302,11 +203,33 @@
         "status": "ok"
       },
       "discoveredLinks": [
-        "http://instagram.com/heldeeprecords/",
-        "http://soundcloud.com/HeldeepRecords/",
-        "http://twitter.com/heldeeprecords/",
+        "http://instagram.com/heldeeprecords",
+        "http://soundcloud.com/HeldeepRecords",
+        "https://www.youtube.com/@OliverHeldens/about?referring_app=com.apple.mobilesafari-smartbanner",
+        "https://www.youtube.com/@OliverHeldens/about",
+        "https://www.youtube.com/channel/UC-EVnno6x6-aAG6g1ZVoN3A",
+        "https://www.youtube.com/watch?v=P7uhrhk2bfo&amp;list=PLoVPdGdbdII0xJjKngQcBAZm5yHbdTzAR",
+        "https://www.youtube.com/c/HeldeepRecords",
+        "https://www.youtube.com/channel/UCTjKczoz-Jja-MC-EI5b77w",
+        "https://www.youtube.com/channel/UC-EVnno6x6-aAG6g1ZVoN3A?feature=applinks",
+        "https://www.youtube.com/channel/UCLLV",
+        "http://www.facebook.com/HeldeepRecords",
+        "http://twitter.com/heldeeprecords",
+        "https://open.spotify.com/artist/5nki7yRhxgM509M5ADlN1p",
+        "https://www.youtube.com/watch?v=P7uhrhk2bfo",
+        "http://www.youtube.com/@OliverHeldens",
+        "https://instagram.com/heldeeprecords",
+        "https://soundcloud.com/HeldeepRecords",
+        "https://facebook.com/HeldeepRecords",
+        "https://twitter.com/heldeeprecords",
+        "https://instagram.com/oliverheldens",
+        "https://soundcloud.com/oliverheldens",
+        "https://facebook.com/oliverheldens",
+        "https://twitter.com/oliverheldens",
         "https://www.youtube.com/channel/UCLLVQloTOSNkIF9uSdh_lWQ",
-        "https://www.youtube.com/watch?v=lYC_nQJ9mAA&list=PLoVPdGdbdII3XrN-6CvLoHGRHM5jz_OGZ"
+        "https://www.youtube.com/watch?v=lYC_nQJ9mAA&list=PLoVPdGdbdII3XrN-6CvLoHGRHM5jz_OGZ",
+        "https://youtube.com/channel",
+        "https://youtube.com/watch"
       ],
       "needsAttention": false,
       "attentionReasons": []
@@ -323,9 +246,16 @@
         "status": "ok"
       },
       "discoveredLinks": [
+        "https://www.youtube.com/channel/UC4N1snt2b0d83vOkvaWP6mg",
+        "https://www.youtube.com/channel/UC4N1snt2b0d83vOkvaWP6mg?feature=applinks",
         "http://instagram.com/vintageculture",
         "http://twitter.com/VintageCulture",
-        "https://soundcloud.com/vintageculture"
+        "https://soundcloud.com/vintageculture",
+        "http://facebook.com/vintageculturemusic",
+        "http://www.youtube.com/@vintageculture",
+        "https://instagram.com/vintageculture",
+        "https://twitter.com/VintageCulture",
+        "https://facebook.com/vintageculturemusic"
       ],
       "needsAttention": false,
       "attentionReasons": []
@@ -342,10 +272,26 @@
         "status": "ok"
       },
       "discoveredLinks": [
+        "https://www.youtube.com/@meduzamusic/about?referring_app=com.apple.mobilesafari-smartbanner",
+        "https://www.youtube.com/@meduzamusic/about",
+        "https://www.youtube.com/channel/UC65kzmQBQ-hdEIS5THSOUtA",
+        "https://www.youtube.com/channel/UC65kzmQBQ-hdEIS5THSOUtA?feature=applinks",
         "https://soundcloud.com/insomniacevents",
+        "https://open.spotify.com/playlist/4WV",
         "http://instagram.com/pasqualerotella",
         "http://instagram.com/insomniacevents",
-        "http://twitter.com/insomniacevents"
+        "https://www.tiktok.com/@insomniacevents",
+        "http://twitter.com/insomniacevents",
+        "http://facebook.com/insomniacevents",
+        "http://www.youtube.com/@Meduzamusic",
+        "https://www.youtube.com/@aeternarecordsofc",
+        "https://instagram.com/pasqualerotella",
+        "https://instagram.com/insomniacevents",
+        "https://twitter.com/insomniacevents",
+        "https://facebook.com/insomniacevents",
+        "https://instagram.com/meduzamusic",
+        "https://facebook.com/MeduzaMusic",
+        "https://twitter.com/meduzamusic"
       ],
       "needsAttention": false,
       "attentionReasons": []
@@ -361,7 +307,17 @@
         "permalink": "waxmotif",
         "status": "ok"
       },
-      "discoveredLinks": [],
+      "discoveredLinks": [
+        "https://www.youtube.com/@WaxMotif/about?referring_app=com.apple.mobilesafari-smartbanner",
+        "https://www.youtube.com/@WaxMotif/about",
+        "https://www.youtube.com/channel/UC9B6RKiyQuJbVWIvb6fqRig",
+        "https://www.youtube.com/channel/UC9B6RKiyQuJbVWIvb6fqRig?feature=applinks",
+        "http://www.youtube.com/@WaxMotif",
+        "https://soundcloud.com/waxmotif",
+        "https://instagram.com/waxmotif",
+        "https://instagram.com/house____of____wax",
+        "https://instagram.com/dividedsoulsrec"
+      ],
       "needsAttention": false,
       "attentionReasons": []
     },
@@ -377,9 +333,17 @@
         "status": "ok"
       },
       "discoveredLinks": [
+        "https://www.youtube.com/@johnsummit/about?referring_app=com.apple.mobilesafari-smartbanner",
+        "https://www.youtube.com/@johnsummit/about",
+        "https://www.youtube.com/channel/UCsIVrho83JfwUieSs_UKCmA",
+        "https://www.youtube.com/channel/UCsIVrho83JfwUieSs_UKCmA?feature=applinks",
         "https://instagram.com/johnsummit",
+        "https://tiktok.com/@johnsummit",
         "https://x.com/johnsummit",
-        "https://soundcloud.com/johnsummit"
+        "https://facebook.com/itsjohnsummit",
+        "https://soundcloud.com/johnsummit",
+        "http://www.youtube.com/@JohnSummit",
+        "https://twitter.com/johnsummit"
       ],
       "needsAttention": false,
       "attentionReasons": []
@@ -395,7 +359,13 @@
         "permalink": "cloonee",
         "status": "ok"
       },
-      "discoveredLinks": [],
+      "discoveredLinks": [
+        "https://www.youtube.com/@cloonee/about?referring_app=com.apple.mobilesafari-smartbanner",
+        "https://www.youtube.com/@cloonee/about",
+        "https://www.youtube.com/channel/UC51WF-i8Wtp1PqRc3mXfKaA",
+        "https://www.youtube.com/channel/UC51WF-i8Wtp1PqRc3mXfKaA?feature=applinks",
+        "http://www.youtube.com/@Cloonee"
+      ],
       "needsAttention": false,
       "attentionReasons": []
     },
@@ -410,7 +380,17 @@
         "permalink": "gorgon-city",
         "status": "ok"
       },
-      "discoveredLinks": [],
+      "discoveredLinks": [
+        "https://www.youtube.com/@GorgonCity/about?referring_app=com.apple.mobilesafari-smartbanner",
+        "https://www.youtube.com/@GorgonCity/about",
+        "https://www.youtube.com/channel/UCxD2gCy3e0EUWN5EylcBGMA",
+        "https://www.youtube.com/channel/UCxD2gCy3e0EUWN5EylcBGMA?feature=applinks",
+        "http://www.youtube.com/@GorgonCity",
+        "https://instagram.com/gorgoncity",
+        "https://twitter.com/GorgonCity",
+        "https://facebook.com/gorgoncity",
+        "https://soundcloud.com/gorgon-city"
+      ],
       "needsAttention": false,
       "attentionReasons": []
     },
@@ -425,7 +405,17 @@
         "permalink": "walker-and-royce",
         "status": "ok"
       },
-      "discoveredLinks": [],
+      "discoveredLinks": [
+        "https://www.youtube.com/@WalkerAndRoyce/about?referring_app=com.apple.mobilesafari-smartbanner",
+        "https://www.youtube.com/@WalkerAndRoyce/about",
+        "https://www.youtube.com/channel/UCymwQ00IBxd62AalMprssNQ",
+        "https://www.youtube.com/channel/UCymwQ00IBxd62AalMprssNQ?feature=applinks",
+        "http://www.youtube.com/@WalkerandRoyce",
+        "https://instagram.com/walkerandroyce",
+        "https://facebook.com/walkerroyce",
+        "https://twitter.com/WalkerAndRoyce",
+        "https://tiktok.com/walkerandroyce"
+      ],
       "needsAttention": false,
       "attentionReasons": []
     },
@@ -441,6 +431,15 @@
         "status": "ok"
       },
       "discoveredLinks": [
+        "https://www.youtube.com/@MaxStyler/about?referring_app=com.apple.mobilesafari-smartbanner",
+        "https://www.youtube.com/@MaxStyler/about",
+        "https://www.youtube.com/channel/UC_CrzdzLplnf2lqZwypeM1w",
+        "https://www.youtube.com/channel/UC_CrzdzLplnf2lqZwypeM1w?feature=applinks",
+        "http://www.youtube.com/@MaxStyler",
+        "https://instagram.com/maxstyler",
+        "https://twitter.com/maxstylermusic",
+        "https://soundcloud.com/maxstyler",
+        "https://facebook.com/maxstylerofficial",
         "https://maxstyler.com"
       ],
       "needsAttention": false,
@@ -458,9 +457,21 @@
         "status": "ok"
       },
       "discoveredLinks": [
-        "https://www.instagram.com/hannahlaingdj/",
+        "https://www.youtube.com/@HannahLaingDJ/about?referring_app=com.apple.mobilesafari-smartbanner",
+        "https://www.youtube.com/@HannahLaingDJ/about",
+        "https://www.youtube.com/channel/UCM-d6Nr9CJxkQ-sFcK9rrwQ",
+        "https://www.youtube.com/channel/UCM-d6Nr9CJxkQ-sFcK9rrwQ?feature=applinks",
+        "https://www.instagram.com/hannahlaingdj",
+        "https://www.tiktok.com/@hannahlaingdj",
         "https://soundcloud.com/hannahlaingdj",
-        "https://twitter.com/hannahlaingdj"
+        "https://twitter.com/hannahlaingdj",
+        "https://www.facebook.com/Hannahlaingdj",
+        "https://ffm.to/hannah-laing-triple-f",
+        "http://www.youtube.com/@hannahlaingdj",
+        "https://instagram.com/hannahlaingdj",
+        "https://facebook.com/Hannahlaingdj",
+        "https://instagram.com/doofdoof__",
+        "https://twitter.com/HannahLaingDJ"
       ],
       "needsAttention": false,
       "attentionReasons": []
@@ -477,8 +488,17 @@
         "status": "ok"
       },
       "discoveredLinks": [
-        "https://instagram.com/pawsaofficial​",
-        "https://soundcloud.com/pawsa​"
+        "https://www.youtube.com/@PAWSA/about?referring_app=com.apple.mobilesafari-smartbanner",
+        "https://www.youtube.com/@PAWSA/about",
+        "https://www.youtube.com/channel/UC-VLsQ7ZAgHGKNuFe_brN_Q",
+        "https://www.youtube.com/channel/UC-VLsQ7ZAgHGKNuFe_brN_Q?feature=applinks",
+        "https://open.spotify.com/track/5WZQkH",
+        "https://instagram.com/pawsaofficial%E2%80%8B",
+        "https://soundcloud.com/pawsa%E2%80%8B",
+        "https://www.tiktok.com/@pawsaofficial%E2%80%8B",
+        "http://www.youtube.com/@PAWSA",
+        "https://instagram.com/pawsaofficial",
+        "https://soundcloud.com/pawsa"
       ],
       "needsAttention": false,
       "attentionReasons": []
@@ -495,12 +515,28 @@
         "status": "ok"
       },
       "discoveredLinks": [
+        "https://www.youtube.com/@bleuclairmusic/about?referring_app=com.apple.mobilesafari-smartbanner",
+        "https://www.youtube.com/@bleuclairmusic/about",
+        "https://www.youtube.com/channel/UCMkA21R3-gHtT_0wtQCmtjA",
+        "https://www.youtube.com/channel/UCMkA21R3-gHtT_0wtQCmtjA?feature=applinks",
+        "https://lnk.to/GonnaDo",
+        "https://www.facebook.com/bleuclairmusic",
         "https://soundcloud.com/bleuclair",
         "https://twitter.com/BleuClairMusic",
         "https://www.instagram.com/bleuclairmu",
-        "https://www.instagram.com/_rimaldi_/",
+        "https://open.spotify.com/artist/7kA4s",
+        "https://www.instagram.com/_rimaldi_",
+        "https://open.spotify.com/artist/4HONr",
         "https://soundcloud.com/funkshway2022",
-        "https://www.instagram.com/funkshway/"
+        "https://www.instagram.com/funkshway",
+        "https://open.spotify.com/playlist/6Ln",
+        "http://www.youtube.com/@bleuclairmusic",
+        "https://facebook.com/bleuclairmusic",
+        "https://instagram.com/bleuclairmu",
+        "https://instagram.com/_rimaldi_",
+        "https://instagram.com/funkshway",
+        "https://instagram.com/bleuclairmusic",
+        "https://twitter.com/bleuclair"
       ],
       "needsAttention": false,
       "attentionReasons": []
@@ -516,7 +552,111 @@
         "permalink": "bijou",
         "status": "ok"
       },
-      "discoveredLinks": [],
+      "discoveredLinks": [
+        "https://www.youtube.com/@BIJOU/about?referring_app=com.apple.mobilesafari-smartbanner",
+        "https://www.youtube.com/@BIJOU/about",
+        "https://www.youtube.com/channel/UCHgawCLRj_sqh-lVoXlFR6A",
+        "https://www.youtube.com/channel/UCHgawCLRj_sqh-lVoXlFR6A?feature=applinks",
+        "http://www.youtube.com/@Bijou"
+      ],
+      "needsAttention": false,
+      "attentionReasons": []
+    },
+    {
+      "name": "Prospa",
+      "slug": "prospa",
+      "youtube": {
+        "handle": "@ProspaUK",
+        "status": "ok"
+      },
+      "soundcloud": {
+        "permalink": "prospauk",
+        "status": "ok"
+      },
+      "discoveredLinks": [
+        "https://www.youtube.com/channel/UCMasYklV4R1r6q3-YeBSnwQ",
+        "https://www.youtube.com/@ProspaUK/about?referring_app=com.apple.mobilesafari-smartbanner",
+        "https://www.youtube.com/@ProspaUK/about",
+        "https://www.youtube.com/channel/UCMasYklV4R1r6q3-YeBSnwQ?feature=applinks",
+        "https://www.instagram.com/youandme_mu",
+        "http://www.youtube.com/@ProspaUK",
+        "https://instagram.com/youandme_mu",
+        "https://instagram.com/prospa__"
+      ],
+      "needsAttention": false,
+      "attentionReasons": []
+    },
+    {
+      "name": "SIDEPIECE",
+      "slug": "sidepiece",
+      "youtube": {
+        "handle": "@youasidepiece",
+        "status": "ok"
+      },
+      "soundcloud": {
+        "permalink": "sidepiece",
+        "status": "ok"
+      },
+      "discoveredLinks": [
+        "https://www.youtube.com/channel/UC4CFtujFMNGXRixR5tCPKdQ",
+        "https://hoo.be/youasidepiece",
+        "https://instagram.com/sidepiece",
+        "https://twitter.com/youasidepiece",
+        "https://lnk.to/CLR019",
+        "https://www.youtube.com/@youasidepiece/about?referring_app=com.apple.mobilesafari-smartbanner",
+        "https://www.youtube.com/@youasidepiece/about",
+        "https://www.youtube.com/channel/UC4CFtujFMNGXRixR5tCPKdQ?feature=applinks",
+        "https://lnk.to/Cry-For-You",
+        "https://www.instagram.com/SIDEPIECE",
+        "https://www.tiktok.com/@youasidepiece",
+        "https://soundcloud.com/youasidepiece",
+        "https://www.facebook.com/youasidepiece",
+        "https://www.youtube.com/@youasidepiece",
+        "http://www.youtube.com/@youasidepiece",
+        "https://instagram.com/SIDEPIECE",
+        "https://facebook.com/youasidepiece",
+        "https://open.spotify.com/artist/5czbzNZZfWpyFgZyfT3Mkk?si=zwCFFXFfQDSO27ewPt868w",
+        "https://tiktok.com/@youasidepiece",
+        "https://youtube.com/@youasidepiece",
+        "https://twitter.com/youasidepiece?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor",
+        "https://soundcloud.com/sidepiece",
+        "https://www.youtube.com/playlist?list=PLiCbLD8_cd8nOXiH7mRhaIMSfrBbMDIhN",
+        "https://www.youtube.com/embed/yKJ9UqITVFA?enablejsapi=1&amp;mute=1&amp;autoplay=0",
+        "https://www.youtube.com/embed/XeKw9Umib-g?enablejsapi=1&amp;mute=1&amp;autoplay=0",
+        "https://www.youtube.com/embed/xoBwEB1NUys?enablejsapi=1&amp;mute=1&amp;autoplay=0",
+        "https://www.youtube.com/embed/F_N1bUVWHTo?enablejsapi=1&amp;mute=1&amp;autoplay=0",
+        "https://www.youtube.com/embed/nSA2BHRQa1g?enablejsapi=1&amp;mute=1&amp;autoplay=0",
+        "https://open.spotify.com/embed/artist/5czbzNZZfWpyFgZyfT3Mkk",
+        "https://youtu.be/yKJ9UqITVFA",
+        "https://www.youtube.com/embed/yKJ9UqITVFA",
+        "https://youtu.be/XeKw9Umib-g?si=OL1u19dWHJpxVpgq",
+        "https://www.youtube.com/embed/XeKw9Umib-g",
+        "https://youtu.be/xoBwEB1NUys",
+        "https://www.youtube.com/embed/xoBwEB1NUys",
+        "https://youtu.be/F_N1bUVWHTo",
+        "https://www.youtube.com/embed/F_N1bUVWHTo",
+        "https://youtu.be/nSA2BHRQa1g?si=VW2xq59X2AszkRgB",
+        "https://www.youtube.com/embed/nSA2BHRQa1g",
+        "https://www.youtube.com/embed/videoseries?list=PLiCbLD8_cd8nOXiH7mRhaIMSfrBbMDIhN",
+        "https://open.spotify.com",
+        "https://www.beatport.com",
+        "https://music.apple.com",
+        "https://music.youtube.com",
+        "https://www.tiktok.com",
+        "https://www.instagram.com",
+        "https://youtu.be",
+        "https://soundcloud.com",
+        "https://www.youtube.com",
+        "http://instagram.com",
+        "http://tiktok.com",
+        "https://open.spotify.com/track/2xVDlAuxS6rhEMXOlX9h07?go=1&amp;utm_source=Original_Original&amp;utm_medium=Original&amp;utm_content=24861552-5fd0-495a-8ca4-72591ecbcd55_none_SIDEPIECE_none_Cry%20For%20You%20%282025%29_Cry%20For%20You%20%282025%29_20250912_direct_sidepiece_none_lnk.to%2Fcry-for-you",
+        "https://www.beatport.com/release/cry-for-you-2025/5350816",
+        "https://soundcloud.com/sidepiece/cry-for-you-2025-sidepiece-extended-mix-out-926?utm_medium=api&amp;utm_campaign=social_sharing&amp;utm_source=id_313799",
+        "https://music.apple.com/us/album/1837542477?i=1837542478&amp;app=music&amp;at=1l3vpUI&amp;ct=LFV_acc12484966e1310ff5a16015913f5f8&amp;itscg=30440&amp;itsct=catchall_p4&amp;lId=213993451&amp;cId=none&amp;sr=4&amp;src=Linkfire&amp;ls=1",
+        "https://www.youtube.com/watch?v=c5LOgnuvnkA&amp;src=Linkfire&amp;lId=24861552-5fd0-495a-8ca4-72591ecbcd55&amp;cId=d3d58fd7-4c47-11e6-9fd0-066c3e7a8751",
+        "https://music.apple.com/us/album/1837542477?i=1837542478&amp;app=itunes&amp;at=1l3vpUI&amp;ct=LFV_acc12484966e1310ff5a16015913f5f8&amp;itscg=30440&amp;itsct=catchall_p6&amp;lId=213993451&amp;cId=none&amp;sr=6&amp;src=Linkfire&amp;ls=1",
+        "https://music.youtube.com/watch?v=a-a74Hn-8Ek&amp;src=Linkfire&amp;lId=24861552-5fd0-495a-8ca4-72591ecbcd55&amp;cId=d3d58fd7-4c47-11e6-9fd0-066c3e7a8751"
+      ],
       "needsAttention": false,
       "attentionReasons": []
     },
@@ -532,14 +672,158 @@
         "status": "ok"
       },
       "discoveredLinks": [
+        "https://www.youtube.com/@SammyVirji/about?referring_app=com.apple.mobilesafari-smartbanner",
+        "https://www.youtube.com/@SammyVirji/about",
+        "https://www.youtube.com/channel/UCf4EV_7RUlUGp-SgJOfcnlA",
+        "https://www.youtube.com/channel/UCf4EV_7RUlUGp-SgJOfcnlA?feature=applinks",
         "https://www.instagram.com/sammyvirji",
+        "https://www.tiktok.com/@sammyvirji",
         "https://soundcloud.com/sammyvirji",
-        "https://www.instagram.com/icreeder/",
-        "https://www.instagram.com/bp.vis/",
+        "https://www.instagram.com/icreeder",
+        "https://www.instagram.com/bp.vis",
         "https://www.instagram.com/matthew_car",
-        "https://www.instagram.com/gearle__/",
-        "https://www.instagram.com/healiosol/",
-        "https://www.instagram.com/elliotyoung"
+        "https://www.instagram.com/gearle__",
+        "https://www.instagram.com/healiosol",
+        "https://www.instagram.com/elliotyoung",
+        "http://www.youtube.com/@SammyVirji",
+        "https://instagram.com/sammyvirji",
+        "https://instagram.com/icreeder",
+        "https://instagram.com/bp.vis",
+        "https://instagram.com/matthew_car",
+        "https://instagram.com/gearle__",
+        "https://instagram.com/healiosol",
+        "https://instagram.com/elliotyoung"
+      ],
+      "needsAttention": false,
+      "attentionReasons": []
+    },
+    {
+      "name": "BISCITS",
+      "slug": "biscits",
+      "youtube": {
+        "handle": "@Biscits",
+        "status": "ok"
+      },
+      "soundcloud": {
+        "permalink": "biscits",
+        "status": "ok"
+      },
+      "discoveredLinks": [
+        "https://instagram.com/itsbiscits",
+        "https://facebook.com/biscits",
+        "https://open.spotify.com/artist/052B9SONfhoScw7dgYWw5o",
+        "https://www.beatport.com/artist/biscits/591990",
+        "https://www.youtube.com/@Biscits/about?referring_app=com.apple.mobilesafari-smartbanner",
+        "https://www.youtube.com/@Biscits/about",
+        "https://www.youtube.com/channel/UCv83I631mcPindadU4W3VxA",
+        "https://www.youtube.com/channel/UCv83I631mcPindadU4W3VxA?feature=applinks",
+        "https://ffm.to/freak_",
+        "https://www.tiktok.com/@itsbiscits",
+        "https://www.instagram.com/itsbiscits",
+        "https://www.facebook.com/biscits",
+        "https://x.com/BiscitsMusic",
+        "http://www.youtube.com/@Biscits",
+        "https://soundcloud.com/biscits"
+      ],
+      "needsAttention": false,
+      "attentionReasons": []
+    },
+    {
+      "name": "Mau P",
+      "slug": "mau-p",
+      "youtube": {
+        "handle": "@maupmusic",
+        "status": "ok"
+      },
+      "soundcloud": {
+        "permalink": "realmaup",
+        "status": "ok"
+      },
+      "discoveredLinks": [
+        "https://instagram.com/maupmusic",
+        "https://twitter.com/realmaup",
+        "https://www.youtube.com/@maupmusic/about?referring_app=com.apple.mobilesafari-smartbanner",
+        "https://www.youtube.com/@maupmusic/about",
+        "https://www.youtube.com/channel/UCTJ1YTI-M0LgBl_-JNGCwmw",
+        "https://www.youtube.com/channel/UCTJ1YTI-M0LgBl_-JNGCwmw?feature=applinks",
+        "https://instagram.com/maup",
+        "https://tiktok.com/@maup",
+        "http://www.youtube.com/@maupmusic",
+        "https://tiktok.com/@realmaup"
+      ],
+      "needsAttention": false,
+      "attentionReasons": []
+    },
+    {
+      "name": "Black Coffee",
+      "slug": "black-coffee",
+      "youtube": {
+        "handle": "@realblackcoffee",
+        "status": "ok"
+      },
+      "soundcloud": {
+        "permalink": "realblackcoffee",
+        "status": "ok"
+      },
+      "discoveredLinks": [
+        "https://www.youtube.com/@realblackcoffee/about?referring_app=com.apple.mobilesafari-smartbanner",
+        "https://www.youtube.com/@realblackcoffee/about",
+        "https://www.youtube.com/channel/UC0cUnMCsopLMon3_lXYTx_g",
+        "https://www.youtube.com/channel/UC0cUnMCsopLMon3_lXYTx_g?feature=applinks",
+        "http://www.youtube.com/@realblackcoffee",
+        "https://instagram.com/realblackcoffee",
+        "https://twitter.com/RealBlackCoffee",
+        "https://facebook.com/realblackcoffee"
+      ],
+      "needsAttention": false,
+      "attentionReasons": []
+    },
+    {
+      "name": "Chapter & Verse",
+      "slug": "chapter-verse",
+      "youtube": {
+        "handle": "@chapterandversemusic",
+        "status": "ok"
+      },
+      "soundcloud": {
+        "permalink": "chapterandverseofficial",
+        "status": "ok"
+      },
+      "discoveredLinks": [
+        "https://www.youtube.com/@chapterandversemusic/about?referring_app=com.apple.mobilesafari-smartbanner",
+        "https://www.youtube.com/@chapterandversemusic/about",
+        "https://www.youtube.com/channel/UCNz-KJMLQ7Nk6EvJ4zSnSTg",
+        "https://www.youtube.com/channel/UCNz-KJMLQ7Nk6EvJ4zSnSTg?feature=applinks",
+        "http://www.youtube.com/@chapterandversemusic"
+      ],
+      "needsAttention": false,
+      "attentionReasons": []
+    },
+    {
+      "name": "Marten Hørger",
+      "slug": "marten-horger",
+      "youtube": {
+        "handle": "@MARTENHORGER",
+        "status": "ok"
+      },
+      "soundcloud": {
+        "permalink": "marten-horger",
+        "status": "ok"
+      },
+      "discoveredLinks": [
+        "https://facebook.com/marten.horger",
+        "https://instagram.com/marten_horger",
+        "https://open.spotify.com/artist/0EdUwJSqkMmsH6Agg3G8Ls",
+        "https://marten.fanlink.tv/rave-pv-anthem",
+        "https://www.youtube.com/@MARTENHORGER/about?referring_app=com.apple.mobilesafari-smartbanner",
+        "https://www.youtube.com/@MARTENHORGER/about",
+        "https://www.youtube.com/channel/UCbgRwyASdGCVvfsEut781zA",
+        "https://www.youtube.com/channel/UCbgRwyASdGCVvfsEut781zA?feature=applinks",
+        "http://www.youtube.com/@MARTENHORGER",
+        "https://soundcloud.com/marten-horger",
+        "https://platform.twitter.com/oct.js",
+        "https://www.facebook.com/tr?id=1711912442390284&amp;ev=PageView&amp;noscript=1",
+        "https://www.facebook.com/tr?id=514503139852129&amp;ev=PageView&amp;noscript=1"
       ],
       "needsAttention": false,
       "attentionReasons": []
@@ -556,15 +840,95 @@
         "status": "ok"
       },
       "discoveredLinks": [
+        "https://www.youtube.com/@domdolla/about?referring_app=com.apple.mobilesafari-smartbanner",
+        "https://www.youtube.com/@domdolla/about",
+        "https://www.youtube.com/channel/UCUPWpXNpsqc0A_IWvBZRSOw",
+        "https://www.youtube.com/channel/UCUPWpXNpsqc0A_IWvBZRSOw?feature=applinks",
         "http://instagram.com/domdolla",
+        "http://tiktok.com/@domdolla",
+        "http://facebook.com/domdollamusic",
         "http://x.com/domdolla",
         "http://instagram.com/tiga",
+        "http://tiktok.com/@tiganonstop",
+        "http://facebook.com/officialtiga",
         "http://x.com/Tiga",
-        "http://instagram.com/tia_ho__"
+        "http://instagram.com/tia_ho__",
+        "http://tiktok.com/@tia_ho__",
+        "http://www.youtube.com/@DomDolla",
+        "https://instagram.com/domdolla",
+        "https://facebook.com/domdollamusic",
+        "https://x.com/domdolla",
+        "https://instagram.com/tiga",
+        "https://facebook.com/officialtiga",
+        "https://x.com/Tiga",
+        "https://instagram.com/tia_ho__",
+        "https://facebook.com/pg",
+        "https://twitter.com/domdolla"
+      ],
+      "needsAttention": false,
+      "attentionReasons": []
+    },
+    {
+      "name": "Robin Schulz",
+      "slug": "robin-schulz",
+      "youtube": {
+        "handle": "@robinschulz",
+        "status": "ok"
+      },
+      "soundcloud": {
+        "permalink": "robin-schulz",
+        "status": "ok"
+      },
+      "discoveredLinks": [
+        "https://facebook.com/robin.schulz.official",
+        "https://instagram.com/robin__schulz",
+        "https://tiktok.com/@robinschulzofficial",
+        "https://twitter.com/robin_schulz",
+        "https://open.spotify.com/artist/3t5xRXzsuZmMDkQzgOX35S",
+        "https://music.apple.com/de/artist/robin-schulz/347433400",
+        "https://robin-schulz.com",
+        "https://www.youtube.com/@robinschulz/about?referring_app=com.apple.mobilesafari-smartbanner",
+        "https://www.youtube.com/@robinschulz/about",
+        "https://www.youtube.com/channel/UCLVVBWrp9jw4-SYUoU42hcg",
+        "https://www.youtube.com/channel/UCLVVBWrp9jw4-SYUoU42hcg?feature=applinks",
+        "https://www.facebook.com/robin.schulz",
+        "https://www.tiktok.com/@robinschulzof",
+        "https://www.youtube.com/watch?v=Q9pQ1",
+        "http://www.youtube.com/@robinschulz",
+        "https://facebook.com/robin.schulz",
+        "https://soundcloud.com/robin-schulz"
+      ],
+      "needsAttention": false,
+      "attentionReasons": []
+    },
+    {
+      "name": "Keinemusik",
+      "slug": "keinemusik",
+      "youtube": {
+        "handle": "@keinemusik",
+        "status": "ok"
+      },
+      "soundcloud": {
+        "permalink": "keinemusik",
+        "status": "ok"
+      },
+      "discoveredLinks": [
+        "https://ffm.to/km074",
+        "https://www.youtube.com/@keinemusik/about?referring_app=com.apple.mobilesafari-smartbanner",
+        "https://www.youtube.com/@keinemusik/about",
+        "https://www.youtube.com/channel/UCYzx8QoAiRb69fEgyBInAug",
+        "https://www.youtube.com/channel/UCYzx8QoAiRb69fEgyBInAug?feature=applinks",
+        "https://ffm.to/km075",
+        "http://www.youtube.com/@keinemusik",
+        "https://instagram.com/keinemusikcrue",
+        "https://www.facebook.com/keinemusik",
+        "https://www.instagram.com/keinemusikcrue",
+        "https://soundcloud.com/keinemusik",
+        "https://open.spotify.com/artist/26WKgv73kRHD0gEDKD1i8j?si=F1DjFhy3TpaXNCTcS_EuyA&amp;dl_branch=1"
       ],
       "needsAttention": false,
       "attentionReasons": []
     }
   ],
-  "crosslinkHits": 19
+  "crosslinkHits": 40
 }
