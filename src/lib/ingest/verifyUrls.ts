@@ -157,6 +157,30 @@ export async function applyKnownUrlFixes(prisma: PrismaClient): Promise<number> 
     n += 1;
   }
 
+  // Re-home sets whose titles clearly say EDC onto the curated venue
+  // (covers Insomniac-channel crawls that previously used event=Insomniac).
+  if (canon) {
+    const orphans = await prisma.set.findMany({
+      where: {
+        OR: [
+          { eventId: null },
+          { event: { slug: { not: "edc-lv" } } },
+        ],
+        title: { contains: "EDC" },
+      },
+      select: { id: true, title: true, eventId: true },
+    });
+    for (const s of orphans) {
+      if (!/\bedc\b/i.test(s.title)) continue;
+      if (/\bedc\s*(mexico|orlando|china)\b/i.test(s.title)) continue;
+      await prisma.set.update({
+        where: { id: s.id },
+        data: { eventId: canon.id },
+      });
+      n += 1;
+    }
+  }
+
   return n;
 }
 
