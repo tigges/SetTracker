@@ -3,11 +3,16 @@
  *
  * Prefer uploads that either:
  * - include a timed tracklist in the description, or
- * - have YouTube Music "songs in this video" credits (Content ID)
+ * - have YouTube Music "songs in this video" credits (Content ID), or
+ * - carry a pasted fingerprint tracklist (`fingerprintPlays`)
  *
  * Venue + artist channels are polled separately via `venues.ts` / `artists.ts`.
  */
 
+import {
+  FP_JAMES_HYPE_GET_CLOSER_LONDON,
+  type FingerprintSeedRow,
+} from "../fingerprint/seeds";
 import type { RawArtist } from "../types";
 import { slugify } from "../types";
 
@@ -21,6 +26,11 @@ export type YoutubeSetSource = {
   title?: string;
   seriesName?: string;
   eventName?: string;
+  /**
+   * Manual fingerprint IDs (ACRCloud / AudD / pasted aha-music analysis).
+   * Written as provenance "fingerprint"; never overwrites sourceUrl.
+   */
+  fingerprintPlays?: FingerprintSeedRow[];
 };
 
 function dj(name: string, extra: Partial<RawArtist> = {}): RawArtist {
@@ -59,6 +69,19 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     title: "James Hype SYNC London (Full Set)",
     seriesName: "SYNC",
     eventName: "SYNC London",
+  },
+  {
+    video: "https://www.youtube.com/watch?v=oVOuXYtqi6I",
+    primaryArtist: dj("James Hype", {
+      accent: "#ff3d6e",
+      homeCity: "Liverpool, UK",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    title: "James Hype - Get Closer, London - Full Set",
+    seriesName: "Get Closer",
+    eventName: "Get Closer London",
+    fingerprintPlays: FP_JAMES_HYPE_GET_CLOSER_LONDON,
   },
   {
     video: "https://www.youtube.com/watch?v=i9cNYaOOdwA",

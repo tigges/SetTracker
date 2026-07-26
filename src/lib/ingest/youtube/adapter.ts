@@ -15,6 +15,10 @@ import {
   queueYoutubeSimilarChannels,
 } from "../discovery/run";
 import { inferFestivalEvent, KNOWN_EVENTS } from "../events";
+import {
+  fingerprintRowsToPlays,
+  mergeFingerprintPlays,
+} from "../fingerprint/seeds";
 import { hashRawSetContent } from "../hash";
 import { parseDescriptionTracklist } from "../soundcloud/parseTracklist";
 import { slugify, type RawPlay, type RawSet, type SourceAdapter } from "../types";
@@ -148,7 +152,13 @@ async function curatedToHit(src: YoutubeSetSource): Promise<YtHit | null> {
     return null;
   }
 
-  const plays = playsFromMeta(meta);
+  let plays = playsFromMeta(meta);
+  if (src.fingerprintPlays?.length) {
+    plays = mergeFingerprintPlays(
+      plays,
+      fingerprintRowsToPlays(src.fingerprintPlays),
+    );
+  }
   const title = (src.title || meta.title).trim();
   const sourceSlug = `yt-${meta.videoId}`.slice(0, 120);
   const { primary, collaborators } = artistsForSet(title, src.primaryArtist);
