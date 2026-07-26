@@ -8,6 +8,7 @@
  */
 
 import type { PrismaClient } from "@prisma/client";
+import { ensureClubListVenues } from "./discovery/clubLists";
 import { ensureDjMagVenues } from "./discovery/djmagClubs";
 import { ensureDiscoveredDjs } from "./discovery/ensureDjs";
 import { KNOWN_EVENTS } from "./events";
@@ -162,9 +163,11 @@ export async function applyKnownUrlFixes(prisma: PrismaClient): Promise<number> 
   // Persist roster + high-signal discovered artists as Dj rows (Guetta, etc.).
   await ensureDiscoveredDjs(prisma);
 
-  // Materialize DJ Mag Top 100 Clubs as venues (website → listable).
+  // Materialize DJ Mag Top 100 + curated club-list articles as venues.
   const clubs = await ensureDjMagVenues(prisma);
   n += clubs.created + clubs.updated;
+  const lists = await ensureClubListVenues(prisma);
+  n += lists.created + lists.updated;
 
   // Re-home sets whose titles clearly say EDC onto the curated venue
   // (covers Insomniac-channel crawls that previously used event=Insomniac).

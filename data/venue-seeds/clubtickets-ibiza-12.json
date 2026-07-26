@@ -1,0 +1,18 @@
+{
+  "source": "https://www.clubtickets.com/blog/best-clubs-ibiza",
+  "note": "ClubTickets Ibiza 2026 list — seed + live scrape.",
+  "clubs": [
+    { "name": "Hï Ibiza", "location": "Ibiza, Spain" },
+    { "name": "Ushuaïa Ibiza", "location": "Ibiza, Spain" },
+    { "name": "UNVRS", "location": "Ibiza, Spain" },
+    { "name": "O Beach Ibiza", "location": "Ibiza, Spain" },
+    { "name": "Playa Soleil", "location": "Ibiza, Spain" },
+    { "name": "Lío Ibiza", "location": "Ibiza, Spain" },
+    { "name": "Eden Ibiza", "location": "Ibiza, Spain" },
+    { "name": "Es Paradis", "location": "Ibiza, Spain" },
+    { "name": "Pacha Ibiza", "location": "Ibiza, Spain" },
+    { "name": "Amnesia Ibiza", "location": "Ibiza, Spain" },
+    { "name": "Cova Santa", "location": "Ibiza, Spain" },
+    { "name": "Hard Rock Hotel Ibiza", "location": "Ibiza, Spain" }
+  ]
+}

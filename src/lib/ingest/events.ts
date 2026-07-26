@@ -6,6 +6,7 @@
  * edc-las-vegas with zero website / zero discovery.
  */
 
+import { inferListClubEvent } from "./discovery/clubLists";
 import {
   inferDjMagClubEvent,
   resolveDjMagClubByName,
@@ -186,7 +187,7 @@ export function inferFestivalEvent(title: string): CanonicalEvent | null {
   if (/\blollapalooza\b/i.test(t)) return KNOWN_EVENTS.lollapalooza;
   if (/\bboiler\s*room\b/i.test(t)) return KNOWN_EVENTS["boiler-room"];
   if (/\bcercle\b/i.test(t)) return KNOWN_EVENTS.cercle;
-  return inferDjMagClubEvent(t);
+  return inferDjMagClubEvent(t) ?? inferListClubEvent(t);
 }
 
 export function eventSocialPayload(e: CanonicalEvent): EventSocials {
