@@ -28,11 +28,31 @@ import { parseInsomniacTrackRows, rowsToPlays } from "./parseTracklist";
 const UA =
   "Mozilla/5.0 (compatible; SetRadar/0.2; +https://setradar.ai; insomniac-nor)";
 const LISTING = "https://www.insomniac.com/music/night-owl-radio/";
+const LOAD_MORE = "https://www.insomniac.com/wp-admin/admin-ajax.php";
 const SC_USER = "insomniacevents";
 const ACCENT = "#e10600";
 
 /** Max NOR sets per ingest run (Pages build budget). */
-export const INSOMNIAC_NOR_MAX = Number(process.env.INSOMNIAC_NOR_MAX || 12);
+export function norMax(): number {
+  return Math.max(1, Number(process.env.INSOMNIAC_NOR_MAX || 40));
+}
+/** How many Load More pages to pull beyond the first listing (~24 eps each). */
+export function norListPages(): number {
+  return Math.max(1, Number(process.env.INSOMNIAC_NOR_LIST_PAGES || 6));
+}
+
+/**
+ * High-signal episodes to always try first (mega-mixes / dense tracklists).
+ * Full Insomniac archive is much larger — listing pagination fills the rest.
+ */
+export const INSOMNIAC_NOR_PRIORITY_SLUGS = [
+  "night-owl-radio-482-ft-dreamstate-socal-2024-mega-mix",
+  "night-owl-radio-475-ft-loofy-and-d-o-d",
+  "night-owl-radio-470-ft-nocturnal-wonderland-2024-mega-mix",
+  "night-owl-radio-481-ft-countdown-nye-2024-mega-mix",
+  "night-owl-radio-469-ft-escape-halloween-2024-mega-mix",
+  "night-owl-radio-464-ft-hard-summer-2024-mega-mix",
+];
 
 function durationSecOf(track: ScTrack): number {
   const ms = track.full_duration || track.duration || 0;
@@ -86,8 +106,9 @@ async function fetchHtml(url: string): Promise<string | null> {
     const res = await fetch(url, {
       headers: {
         "User-Agent": UA,
-        Accept: "text/html,application/xhtml+xml",
-        "Accept-Language": "en-US,en;q=0.9",
+        // Keep Accept minimal — richer Accept negotiation can serve a cached
+        // HTML variant whose embedded WP nonce fails admin-ajax checks.
+        Accept: "text/html",
       },
       redirect: "follow",
       signal: AbortSignal.timeout(25_000),
@@ -109,6 +130,120 @@ function slugsFromListingHtml(html: string): string[] {
     if (seen.has(slug)) continue;
     seen.add(slug);
     out.push(slug);
+  }
+  return out;
+}
+
+function listingNonce(html: string): string | null {
+  // Prefer insmMainVars.nonce — other plugins also embed "nonce" keys that 400 ajax.
+  const insm = html.match(/var\s+insmMainVars\s*=\s*(\{[\s\S]*?\})\s*;/);
+  if (insm?.[1]) {
+    try {
+      const parsed = JSON.parse(insm[1]) as { nonce?: string };
+      if (parsed.nonce) return parsed.nonce;
+    } catch {
+      /* fall through */
+    }
+  }
+  return html.match(/"nonce":"([a-f0-9]+)"/i)?.[1] ?? null;
+}
+
+function listingOffset(html: string): number {
+  const btn = html.match(
+    /class="[^"]*post-load-more-button[\s\S]*?<\/a>/i,
+  )?.[0];
+  const n = Number(btn?.match(/data-offset=["'](\d+)["']/i)?.[1] ?? 24);
+  return Number.isFinite(n) && n > 0 ? n : 24;
+}
+
+/** Paginate Insomniac NOR archive via the public "Load More" admin-ajax action. */
+async function fetchListingSlugs(): Promise<string[]> {
+  const first = await fetchHtml(LISTING);
+  if (!first) return [];
+  const out = slugsFromListingHtml(first);
+  const seen = new Set(out);
+  const nonce = listingNonce(first);
+  let offset = listingOffset(first);
+  const maxPages = norListPages();
+
+  if (!nonce || maxPages <= 1) return out;
+
+  for (let page = 1; page < maxPages; page += 1) {
+    try {
+      const body = new URLSearchParams({
+        action: "insm_get_load_more_content",
+        nonce,
+        post_type: "music",
+        offset: String(offset),
+        taxonomy: "music-section",
+        term: "night-owl-radio",
+      });
+      const res = await fetch(LOAD_MORE, {
+        method: "POST",
+        headers: {
+          "User-Agent": UA,
+          "Content-Type": "application/x-www-form-urlencoded",
+          Accept: "application/json, text/javascript, */*",
+          "X-Requested-With": "XMLHttpRequest",
+          Referer: LISTING,
+        },
+        body,
+        signal: AbortSignal.timeout(25_000),
+      });
+      if (!res.ok) {
+        console.warn(
+          `[insomniac-nor] listing page ${page + 1}: HTTP ${res.status}`,
+        );
+        break;
+      }
+      const rawText = await res.text();
+      let json: {
+        success?: boolean;
+        data?: { totalPosts?: number; content?: string } | string | number;
+      };
+      try {
+        json = JSON.parse(rawText) as typeof json;
+      } catch {
+        console.warn(
+          `[insomniac-nor] listing page ${page + 1}: non-JSON ${rawText.slice(0, 80)}`,
+        );
+        break;
+      }
+      if (json.success !== true) {
+        console.warn(
+          `[insomniac-nor] listing page ${page + 1}: ajax rejected ${rawText.slice(0, 120)}`,
+        );
+        break;
+      }
+      const content =
+        typeof json.data === "object" && json.data && "content" in json.data
+          ? json.data.content || ""
+          : "";
+      const batch = slugsFromListingHtml(content);
+      let added = 0;
+      for (const s of batch) {
+        if (seen.has(s)) continue;
+        seen.add(s);
+        out.push(s);
+        added += 1;
+      }
+      const total = Number(
+        (typeof json.data === "object" && json.data?.totalPosts) ??
+          batch.length,
+      );
+      offset += Number.isFinite(total) && total > 0 ? total : 24;
+      console.log(
+        `[insomniac-nor] listing page ${page + 1}: +${added} content=${content.length} (total ${out.length})`,
+      );
+      if (added === 0 || total === 0) break;
+      await sleep(150);
+    } catch (err) {
+      console.warn(
+        `[insomniac-nor] listing page ${page + 1}:`,
+        err instanceof Error ? err.message : err,
+      );
+      break;
+    }
   }
   return out;
 }
@@ -287,20 +422,24 @@ export function createInsomniacNorAdapter(): SourceAdapter {
     id: "insomniac-nor",
     label: "Insomniac Night Owl Radio",
     async fetchRecent(): Promise<RawSet[]> {
-      const need = Math.max(1, INSOMNIAC_NOR_MAX);
+      const need = norMax();
       console.log(`[insomniac-nor] poll listing + SC @${SC_USER} (max ${need})`);
 
-      const listingHtml = await fetchHtml(LISTING);
-      const listingSlugs = listingHtml ? slugsFromListingHtml(listingHtml) : [];
-      const scTracks = await fetchNorSoundCloudTracks(Math.max(need * 3, 40));
+      const listingSlugs = await fetchListingSlugs();
+      const scTracks = await fetchNorSoundCloudTracks(Math.max(need * 3, 80));
       const scCache = new Map<string, ScTrack>();
       for (const t of scTracks) {
         if (t.permalink) scCache.set(t.permalink.toLowerCase(), t);
       }
 
-      // Prefer listing slugs (tracklist pages exist); then SC slugs as fallbacks.
+      // Priority mega-mix / dense episodes first, then listing, then SC fallbacks.
       const ordered: string[] = [];
       const seen = new Set<string>();
+      for (const s of INSOMNIAC_NOR_PRIORITY_SLUGS) {
+        if (seen.has(s)) continue;
+        seen.add(s);
+        ordered.push(s);
+      }
       for (const s of listingSlugs) {
         if (seen.has(s)) continue;
         seen.add(s);
