@@ -38,16 +38,20 @@ setradar.ai.
   (`src/lib/ingest/youtube/` — Boiler Room / Cercle / Mixmag + James Hype–style
   artist channels; description tracklists and YouTube Music song credits) +
   **Bandcamp** curated tracks/albums (`src/lib/ingest/bandcamp/`).
-  **Discovery:** after each ingest, B2B collaborators + co-played track artists
-  land in `data/artist-candidates.json`; high-score names with known handles
-  auto-promote into SC/YT polls (`DISCOVERY_PROMOTE_SCORE`,
-  `DISCOVERY_PROMOTE_CAP`). SC has adaptive poll limits
-  (`data/soundcloud-poll-state.json`). **sourceHash refresh** when tracklists
-  change (preserves `community_resolved` rows); SetArtist links refresh even on
-  hash skip. After ingest, applies `data/resolutions.json`. Optional:
-  `HEARTHIS_MAX_SETS`, `INGEST_TOPDJS=1`, `INGEST_SYNTHETIC=1`,
-  `SOUNDCLOUD_CLIENT_ID`. Do **not** crawl 1001Tracklists. Pages cron: seed →
-  ingest → thumbs → export.
+  **Roster / deep scan:** identified artists live in
+  `src/lib/ingest/roster.ts` (drives YT artist channels + extra SC shows).
+  YouTube deep-scan uses `/videos` + `/streams` + Innertube continuation
+  (`YOUTUBE_ARTIST_VIDEO_LIMIT`, `YOUTUBE_CONTINUATION_PAGES`).
+  **Discovery:** before poll, cross-link YT About ↔ SC profile socials
+  (`data/handle-report.json` + `.md` lists artists still missing handles).
+  After ingest, B2B collaborators + co-played track artists land in
+  `data/artist-candidates.json` and auto-promote when handles resolve
+  (`DISCOVERY_PROMOTE_SCORE`, `DISCOVERY_PROMOTE_CAP`). SC has adaptive poll
+  limits (`data/soundcloud-poll-state.json`). **sourceHash refresh** when
+  tracklists change; SetArtist links refresh even on hash skip. Optional:
+  `HEARTHIS_MAX_SETS`, `SOUNDCLOUD_ARTIST_TRACK_LIMIT`, `INGEST_TOPDJS=1`,
+  `INGEST_SYNTHETIC=1`, `SOUNDCLOUD_CLIENT_ID`. Do **not** crawl
+  1001Tracklists. Pages cron: seed → ingest → thumbs → export.
 - **Artwork thumbnails:** `npm run thumbs` fills null `imageUrl` on Dj / Label /
   Track / Set via the Deezer Search API (no key). Idempotent; skips rows that
   already have art. Sets fall back to the primary DJ image. The Pages workflow

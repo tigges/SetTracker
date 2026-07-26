@@ -1,6 +1,7 @@
 import type { PrismaClient } from "@prisma/client";
 import { djSocials, labelSocials } from "../social";
 import { parseTrackTitle } from "../trackMeta";
+import { runCrosslinkDiscovery, type HandleReport } from "./discovery/crosslink";
 import { runDiscovery, type DiscoveryStats } from "./discovery/run";
 import { hashRawSetContent } from "./hash";
 import { adapters as defaultAdapters } from "./sources";
@@ -26,6 +27,11 @@ export type IngestStats = {
   newTracks: number;
   bySource: Record<string, { new: number; refreshed: number; skipped: number }>;
   discovery?: DiscoveryStats;
+  crosslink?: {
+    needsAttention: number;
+    ok: number;
+    hits: number;
+  };
   /** Sets with ≥1 identified/community play */
   setsWithTracklist: number;
   totalPlaysIngested: number;
@@ -454,6 +460,21 @@ export async function runIngest(
     await syncSetArtists(set.id, primaryDjId, collaboratorIds);
     await writePlays(set.id, raw.plays);
     stats.newSets += 1;
+  }
+
+  // Cross-link handles before polling so newly resolved SC/YT seeds are used.
+  try {
+    const report: HandleReport = await runCrosslinkDiscovery();
+    stats.crosslink = {
+      needsAttention: report.needsAttention.length,
+      ok: report.ok.length,
+      hits: report.crosslinkHits,
+    };
+  } catch (err) {
+    console.warn(
+      "[ingest] crosslink failed:",
+      err instanceof Error ? err.message : err,
+    );
   }
 
   for (const adapter of adapters) {

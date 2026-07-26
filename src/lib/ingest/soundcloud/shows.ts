@@ -5,6 +5,7 @@
  * Prefer official show / DJ accounts — not competitor databases.
  */
 
+import { ARTIST_ROSTER } from "../roster";
 import type { RawArtist } from "../types";
 import { slugify } from "../types";
 
@@ -221,9 +222,50 @@ export const SOUNDCLOUD_SHOWS: SoundCloudShow[] = [
     type: "festival",
     minDurationSec: 40 * 60,
     titleMatch: /\b(live|dj set|mix|set|pacha|ibiza|radio)\b/i,
-    limit: 15,
+    limit: 40,
   },
 ];
+
+const SC_DEEP_LIMIT = Number(process.env.SOUNDCLOUD_ARTIST_TRACK_LIMIT || 50);
+
+/** Roster artists not already in the static show list → deep-polled SC accounts. */
+export function rosterSoundcloudShows(): SoundCloudShow[] {
+  const existing = new Set(
+    SOUNDCLOUD_SHOWS.map((s) => s.permalink.toLowerCase()),
+  );
+  const out: SoundCloudShow[] = [];
+  for (const a of ARTIST_ROSTER) {
+    const sc = a.soundcloud;
+    if (!sc?.permalink || !sc.userId) continue;
+    if (sc.status === "missing") continue;
+    if (existing.has(sc.permalink.toLowerCase())) continue;
+    existing.add(sc.permalink.toLowerCase());
+    out.push({
+      permalink: sc.permalink,
+      userId: sc.userId,
+      label: a.name,
+      primaryArtist: dj(a.name, {
+        accent: a.accent,
+        homeCity: a.homeCity,
+      }),
+      genre: a.genre,
+      type: "soundcloud",
+      minDurationSec: 20 * 60,
+      titleMatch: /\b(live|mix|set|b2b|radio|session|heldeep|open\s*to\s*close)\b/i,
+      limit: a.priority === "high" ? SC_DEEP_LIMIT : Math.min(SC_DEEP_LIMIT, 40),
+    });
+  }
+  return out;
+}
+
+export function allSoundcloudShows(): SoundCloudShow[] {
+  // Raise poll depth on the static list for "scan all sets" passes.
+  const boosted = SOUNDCLOUD_SHOWS.map((s) => ({
+    ...s,
+    limit: Math.max(s.limit ?? 20, SC_DEEP_LIMIT),
+  }));
+  return [...boosted, ...rosterSoundcloudShows()];
+}
 
 export function isSetCandidate(
   title: string,

@@ -19,13 +19,15 @@ export type YoutubeVenueChannel = {
   titleMatch?: RegExp;
 };
 
+const VENUE_LIMIT = Number(process.env.YOUTUBE_VENUE_VIDEO_LIMIT || 40);
+
 export const YOUTUBE_VENUES: YoutubeVenueChannel[] = [
   {
     channel: "@boilerroom",
     seriesName: "Boiler Room",
     genre: "Electronic",
     accent: "#e10600",
-    limit: 10,
+    limit: VENUE_LIMIT,
     minDurationSec: 30 * 60,
     titleMatch: /\b(boiler room|b2b|live|set)\b/i,
   },
@@ -34,7 +36,7 @@ export const YOUTUBE_VENUES: YoutubeVenueChannel[] = [
     seriesName: "Cercle",
     genre: "Electronic",
     accent: "#1a1a1a",
-    limit: 8,
+    limit: VENUE_LIMIT,
     minDurationSec: 30 * 60,
     titleMatch: /\b(cercle|live at|live from)\b/i,
   },
@@ -43,14 +45,59 @@ export const YOUTUBE_VENUES: YoutubeVenueChannel[] = [
     seriesName: "Mixmag",
     genre: "Electronic",
     accent: "#111111",
-    limit: 10,
+    limit: VENUE_LIMIT,
     minDurationSec: 25 * 60,
     titleMatch: /\b(mixmag|lab|mix|live|set)\b/i,
+  },
+  {
+    channel: "@DefectedRecords",
+    seriesName: "Defected",
+    genre: "House",
+    accent: "#c1121f",
+    limit: VENUE_LIMIT,
+    minDurationSec: 30 * 60,
+    titleMatch: /\b(defected|in the house|glitterbox|live|mix|set)\b/i,
+  },
+  {
+    channel: "@HotSince82",
+    seriesName: "Hot Since 82",
+    genre: "Tech House",
+    accent: "#e9c46a",
+    limit: Math.min(VENUE_LIMIT, 30),
+    minDurationSec: 40 * 60,
+    titleMatch: /\b(knee deep|hot since|live|mix|set|radio)\b/i,
+  },
+  {
+    channel: "@Tomorrowland",
+    seriesName: "Tomorrowland",
+    genre: "Electronic",
+    accent: "#7b2cbf",
+    limit: VENUE_LIMIT,
+    minDurationSec: 35 * 60,
+    titleMatch: /\b(tomorrowland|live|set|mainstage|freedom)\b/i,
+  },
+  {
+    channel: "@insomniac",
+    seriesName: "Insomniac",
+    genre: "Electronic",
+    accent: "#ff006e",
+    limit: VENUE_LIMIT,
+    minDurationSec: 35 * 60,
+    titleMatch: /\b(edc|beyond|countdown|live|set|insomniac)\b/i,
+  },
+  {
+    channel: "@DJMag",
+    seriesName: "DJ Mag",
+    genre: "Electronic",
+    accent: "#000000",
+    limit: Math.min(VENUE_LIMIT, 30),
+    minDurationSec: 25 * 60,
+    titleMatch: /\b(dj mag|live|mix|set|studio|session)\b/i,
   },
 ];
 
 const SKIP_TITLE =
-  /\b(aftermovie|trailer|teaser|tickets?|announcement|#shorts|short film|documentary)\b/i;
+  /\b(aftermovie|trailer|teaser|tickets?|announcement|#shorts|short film|documentary|vlog)\b/i;
 
 export function isVenueSetCandidate(
   title: string,

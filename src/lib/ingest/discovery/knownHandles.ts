@@ -33,7 +33,7 @@ export const KNOWN_HANDLES: Record<string, HandleHint> = {
   },
   fisher: {
     youtubeHandle: "@fisher",
-    soundcloudPermalink: "fisherav",
+    soundcloudPermalink: "fish-tales",
     genre: "Tech House",
     accent: "#00c2ff",
   },
@@ -50,14 +50,42 @@ export const KNOWN_HANDLES: Record<string, HandleHint> = {
     accent: "#e85d04",
   },
   "hannah laing": {
-    soundcloudPermalink: "hannahlaing",
+    youtubeHandle: "@HannahLaingDJ",
+    soundcloudPermalink: "hannahlaingdj",
     genre: "Techno",
     accent: "#ff006e",
   },
   pawsa: {
+    youtubeHandle: "@PAWSA",
     soundcloudPermalink: "pawsa",
     genre: "Tech House",
     accent: "#adb5bd",
+  },
+  "bleu clair": {
+    youtubeHandle: "@bleuclairmusic",
+    soundcloudPermalink: "bleuclair",
+    genre: "Tech House",
+    accent: "#4cc9f0",
+  },
+  prospa: {
+    soundcloudPermalink: "prospauk",
+    genre: "House",
+    accent: "#ffd166",
+  },
+  "mau p": {
+    soundcloudPermalink: "realmaup",
+    genre: "Tech House",
+    accent: "#118ab2",
+  },
+  "black coffee": {
+    soundcloudPermalink: "realblackcoffee",
+    genre: "Afro House",
+    accent: "#222222",
+  },
+  "chapter & verse": {
+    soundcloudPermalink: "chapterandverseofficial",
+    genre: "Bass House",
+    accent: "#f77f00",
   },
   "purple disco machine": {
     youtubeHandle: "@purplediscomachine",
@@ -67,7 +95,7 @@ export const KNOWN_HANDLES: Record<string, HandleHint> = {
   },
   "gorgon city": {
     youtubeHandle: "@GorgonCity",
-    soundcloudPermalink: "gorgoncity",
+    soundcloudPermalink: "gorgon-city",
     genre: "House",
     accent: "#f15bb5",
   },
@@ -78,14 +106,13 @@ export const KNOWN_HANDLES: Record<string, HandleHint> = {
     accent: "#00f5d4",
   },
   sidepiece: {
-    youtubeHandle: "@Sidepiece",
     soundcloudPermalink: "sidepiece",
     genre: "Tech House",
     accent: "#fee440",
   },
   "walker & royce": {
     youtubeHandle: "@WalkerAndRoyce",
-    soundcloudPermalink: "walkerandroyce",
+    soundcloudPermalink: "walker-and-royce",
     genre: "Tech House",
     accent: "#9ef01a",
   },
@@ -100,17 +127,6 @@ export const KNOWN_HANDLES: Record<string, HandleHint> = {
     soundcloudPermalink: "biscits",
     genre: "Tech House",
     accent: "#ef476f",
-  },
-  "mau p": {
-    youtubeHandle: "@MauP",
-    soundcloudPermalink: "maup",
-    genre: "Tech House",
-    accent: "#118ab2",
-  },
-  prospa: {
-    soundcloudPermalink: "prospa",
-    genre: "House",
-    accent: "#ffd166",
   },
   "tony romero": {
     soundcloudPermalink: "tonyromero",

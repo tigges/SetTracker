@@ -1,11 +1,11 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-25T23:20:00.000Z",
+  "updatedAt": "2026-07-26T03:46:21.048Z",
   "candidates": [
     {
       "name": "Tita Lau",
       "slug": "tita-lau",
-      "score": 80,
+      "score": 120,
       "status": "promoted",
       "evidence": [
         {
@@ -18,31 +18,540 @@
           "kind": "tracklist_channel",
           "detail": "YouTube channel publishes long mixes",
           "weight": 40
+        },
+        {
+          "kind": "manual",
+          "detail": "roster artist",
+          "weight": 40
         }
       ],
       "youtubeHandle": "@TitaLau",
       "soundcloudPermalink": "titalau",
       "genre": "Tech House",
       "accent": "#ff8fab",
-      "updatedAt": "2026-07-25T23:20:00.000Z",
+      "updatedAt": "2026-07-26T03:46:00.409Z",
       "promotedAt": "2026-07-25T23:20:00.000Z"
     },
     {
       "name": "Prospa",
       "slug": "prospa",
-      "score": 40,
-      "status": "queued",
+      "score": 80,
+      "status": "promoted",
       "evidence": [
         {
           "kind": "set_collaborator",
           "detail": "Common Cloonee B2B partner",
+          "weight": 40
+        },
+        {
+          "kind": "manual",
+          "detail": "roster artist",
           "weight": 40
         }
       ],
       "soundcloudPermalink": "prospa",
       "genre": "House",
       "accent": "#ffd166",
-      "updatedAt": "2026-07-25T23:20:00.000Z"
+      "updatedAt": "2026-07-26T03:46:13.679Z",
+      "promotedAt": "2026-07-26T03:46:13.679Z"
+    },
+    {
+      "name": "Chris Lake",
+      "slug": "chris-lake",
+      "score": 60,
+      "status": "promoted",
+      "evidence": [
+        {
+          "kind": "manual",
+          "detail": "roster artist",
+          "weight": 40
+        }
+      ],
+      "youtubeHandle": "@ChrisLake",
+      "soundcloudPermalink": "chrislake",
+      "genre": "Tech House",
+      "accent": "#3d8bfd",
+      "updatedAt": "2026-07-26T03:46:01.225Z"
+    },
+    {
+      "name": "FISHER",
+      "slug": "fisher",
+      "score": 60,
+      "status": "promoted",
+      "evidence": [
+        {
+          "kind": "manual",
+          "detail": "roster artist",
+          "weight": 40
+        }
+      ],
+      "youtubeHandle": "@fisher",
+      "soundcloudPermalink": "fish-tales",
+      "genre": "Tech House",
+      "accent": "#00c2ff",
+      "updatedAt": "2026-07-26T03:46:02.071Z"
+    },
+    {
+      "name": "Hannah Laing",
+      "slug": "hannah-laing",
+      "score": 60,
+      "status": "promoted",
+      "evidence": [
+        {
+          "kind": "manual",
+          "detail": "roster artist",
+          "weight": 40
+        }
+      ],
+      "youtubeHandle": "@HannahLaingDJ",
+      "soundcloudPermalink": "hannahlaingdj",
+      "genre": "Techno",
+      "accent": "#ff006e",
+      "updatedAt": "2026-07-26T03:46:11.010Z"
+    },
+    {
+      "name": "James Hype",
+      "slug": "james-hype",
+      "score": 60,
+      "status": "promoted",
+      "evidence": [
+        {
+          "kind": "manual",
+          "detail": "roster artist",
+          "weight": 40
+        }
+      ],
+      "youtubeHandle": "@JamesHype",
+      "soundcloudPermalink": "jameshype",
+      "genre": "Tech House",
+      "accent": "#ff3d6e",
+      "updatedAt": "2026-07-26T03:45:59.448Z"
+    },
+    {
+      "name": "Oliver Heldens",
+      "slug": "oliver-heldens",
+      "score": 60,
+      "status": "promoted",
+      "evidence": [
+        {
+          "kind": "manual",
+          "detail": "roster artist",
+          "weight": 40
+        }
+      ],
+      "youtubeHandle": "@OliverHeldens",
+      "soundcloudPermalink": "oliverheldens",
+      "genre": "Future House",
+      "accent": "#7c5cff",
+      "updatedAt": "2026-07-26T03:46:02.982Z"
+    },
+    {
+      "name": "Vintage Culture",
+      "slug": "vintage-culture",
+      "score": 60,
+      "status": "promoted",
+      "evidence": [
+        {
+          "kind": "manual",
+          "detail": "roster artist",
+          "weight": 40
+        }
+      ],
+      "youtubeHandle": "@VintageCulture",
+      "soundcloudPermalink": "vintageculturemusic",
+      "genre": "Tech House",
+      "accent": "#e85d04",
+      "updatedAt": "2026-07-26T03:46:03.931Z"
+    },
+    {
+      "name": "AC Slater",
+      "slug": "ac-slater",
+      "score": 40,
+      "status": "promoted",
+      "evidence": [
+        {
+          "kind": "manual",
+          "detail": "roster artist",
+          "weight": 40
+        }
+      ],
+      "youtubeHandle": "@acslater",
+      "soundcloudPermalink": "acslater",
+      "genre": "Bass House",
+      "accent": "#f2b33d",
+      "updatedAt": "2026-07-26T03:46:17.648Z"
+    },
+    {
+      "name": "BIJOU",
+      "slug": "bijou",
+      "score": 40,
+      "status": "promoted",
+      "evidence": [
+        {
+          "kind": "manual",
+          "detail": "roster artist",
+          "weight": 40
+        }
+      ],
+      "youtubeHandle": "@BIJOU",
+      "soundcloudPermalink": "bijou",
+      "genre": "G-House",
+      "accent": "#ff5c8a",
+      "updatedAt": "2026-07-26T03:46:13.299Z"
+    },
+    {
+      "name": "BISCITS",
+      "slug": "biscits",
+      "score": 40,
+      "status": "promoted",
+      "evidence": [
+        {
+          "kind": "manual",
+          "detail": "roster artist",
+          "weight": 40
+        }
+      ],
+      "youtubeHandle": "@Biscits",
+      "soundcloudPermalink": "biscits",
+      "genre": "Tech House",
+      "accent": "#ef476f",
+      "updatedAt": "2026-07-26T03:46:15.860Z"
+    },
+    {
+      "name": "Black Coffee",
+      "slug": "black-coffee",
+      "score": 40,
+      "status": "promoted",
+      "evidence": [
+        {
+          "kind": "manual",
+          "detail": "roster artist",
+          "weight": 40
+        }
+      ],
+      "soundcloudPermalink": "realblackcoffee",
+      "genre": "Afro House",
+      "accent": "#222222",
+      "updatedAt": "2026-07-26T03:46:16.611Z"
+    },
+    {
+      "name": "Bleu Clair",
+      "slug": "bleu-clair",
+      "score": 40,
+      "status": "promoted",
+      "evidence": [
+        {
+          "kind": "manual",
+          "detail": "roster artist",
+          "weight": 40
+        }
+      ],
+      "youtubeHandle": "@bleuclairmusic",
+      "soundcloudPermalink": "bleuclair",
+      "genre": "Tech House",
+      "accent": "#4cc9f0",
+      "updatedAt": "2026-07-26T03:46:12.619Z"
+    },
+    {
+      "name": "Chapter & Verse",
+      "slug": "chapter-verse",
+      "score": 40,
+      "status": "promoted",
+      "evidence": [
+        {
+          "kind": "manual",
+          "detail": "roster artist",
+          "weight": 40
+        }
+      ],
+      "soundcloudPermalink": "chapterandverseofficial",
+      "genre": "Bass House",
+      "accent": "#f77f00",
+      "updatedAt": "2026-07-26T03:46:17.012Z"
+    },
+    {
+      "name": "Cloonee",
+      "slug": "cloonee",
+      "score": 40,
+      "status": "promoted",
+      "evidence": [
+        {
+          "kind": "manual",
+          "detail": "roster artist",
+          "weight": 40
+        }
+      ],
+      "youtubeHandle": "@cloonee",
+      "soundcloudPermalink": "cloonee",
+      "genre": "Tech House",
+      "accent": "#f08a3d",
+      "updatedAt": "2026-07-26T03:46:07.851Z"
+    },
+    {
+      "name": "Dom Dolla",
+      "slug": "dom-dolla",
+      "score": 40,
+      "status": "promoted",
+      "evidence": [
+        {
+          "kind": "manual",
+          "detail": "roster artist",
+          "weight": 40
+        }
+      ],
+      "youtubeHandle": "@domdolla",
+      "soundcloudPermalink": "domdolla",
+      "genre": "Tech House",
+      "accent": "#ff4d6d",
+      "updatedAt": "2026-07-26T03:46:19.562Z"
+    },
+    {
+      "name": "Gorgon City",
+      "slug": "gorgon-city",
+      "score": 40,
+      "status": "promoted",
+      "evidence": [
+        {
+          "kind": "manual",
+          "detail": "roster artist",
+          "weight": 40
+        }
+      ],
+      "youtubeHandle": "@GorgonCity",
+      "soundcloudPermalink": "gorgon-city",
+      "genre": "House",
+      "accent": "#f15bb5",
+      "updatedAt": "2026-07-26T03:46:08.660Z"
+    },
+    {
+      "name": "John Summit",
+      "slug": "john-summit",
+      "score": 40,
+      "status": "promoted",
+      "evidence": [
+        {
+          "kind": "manual",
+          "detail": "roster artist",
+          "weight": 40
+        }
+      ],
+      "youtubeHandle": "@johnsummit",
+      "soundcloudPermalink": "johnsummit",
+      "genre": "Tech House",
+      "accent": "#7cffb2",
+      "updatedAt": "2026-07-26T03:46:07.118Z"
+    },
+    {
+      "name": "Keinemusik",
+      "slug": "keinemusik",
+      "score": 40,
+      "status": "promoted",
+      "evidence": [
+        {
+          "kind": "manual",
+          "detail": "roster artist",
+          "weight": 40
+        }
+      ],
+      "soundcloudPermalink": "keinemusik",
+      "genre": "Afro House",
+      "accent": "#e8c547",
+      "updatedAt": "2026-07-26T03:46:21.048Z"
+    },
+    {
+      "name": "Marten Hörger",
+      "slug": "marten-horger",
+      "score": 40,
+      "status": "promoted",
+      "evidence": [
+        {
+          "kind": "manual",
+          "detail": "roster artist",
+          "weight": 40
+        }
+      ],
+      "youtubeHandle": "@MartenHorger",
+      "soundcloudPermalink": "marten-horger",
+      "genre": "Bass House",
+      "accent": "#ff7a45",
+      "updatedAt": "2026-07-26T03:46:18.659Z"
+    },
+    {
+      "name": "Mau P",
+      "slug": "mau-p",
+      "score": 40,
+      "status": "promoted",
+      "evidence": [
+        {
+          "kind": "manual",
+          "detail": "roster artist",
+          "weight": 40
+        }
+      ],
+      "soundcloudPermalink": "realmaup",
+      "genre": "Tech House",
+      "accent": "#118ab2",
+      "updatedAt": "2026-07-26T03:46:16.236Z"
+    },
+    {
+      "name": "Max Styler",
+      "slug": "max-styler",
+      "score": 40,
+      "status": "promoted",
+      "evidence": [
+        {
+          "kind": "manual",
+          "detail": "roster artist",
+          "weight": 40
+        }
+      ],
+      "youtubeHandle": "@MaxStyler",
+      "soundcloudPermalink": "maxstyler",
+      "genre": "Tech House",
+      "accent": "#ff9f1c",
+      "updatedAt": "2026-07-26T03:46:10.272Z"
+    },
+    {
+      "name": "MEDUZA",
+      "slug": "meduza",
+      "score": 40,
+      "status": "promoted",
+      "evidence": [
+        {
+          "kind": "manual",
+          "detail": "roster artist",
+          "weight": 40
+        }
+      ],
+      "youtubeHandle": "@meduzamusic",
+      "soundcloudPermalink": "meduzamusic",
+      "genre": "House",
+      "accent": "#5cc7e8",
+      "updatedAt": "2026-07-26T03:46:05.085Z"
+    },
+    {
+      "name": "PAWSA",
+      "slug": "pawsa",
+      "score": 40,
+      "status": "promoted",
+      "evidence": [
+        {
+          "kind": "manual",
+          "detail": "roster artist",
+          "weight": 40
+        }
+      ],
+      "youtubeHandle": "@PAWSA",
+      "soundcloudPermalink": "pawsa",
+      "genre": "Tech House",
+      "accent": "#adb5bd",
+      "updatedAt": "2026-07-26T03:46:11.887Z"
+    },
+    {
+      "name": "Robin Schulz",
+      "slug": "robin-schulz",
+      "score": 40,
+      "status": "promoted",
+      "evidence": [
+        {
+          "kind": "manual",
+          "detail": "roster artist",
+          "weight": 40
+        }
+      ],
+      "soundcloudPermalink": "robin-schulz",
+      "genre": "Dance",
+      "accent": "#5aa9e6",
+      "updatedAt": "2026-07-26T03:46:20.640Z"
+    },
+    {
+      "name": "Sammy Virji",
+      "slug": "sammy-virji",
+      "score": 40,
+      "status": "promoted",
+      "evidence": [
+        {
+          "kind": "manual",
+          "detail": "roster artist",
+          "weight": 40
+        }
+      ],
+      "youtubeHandle": "@SammyVirji",
+      "soundcloudPermalink": "sammyvirji",
+      "genre": "UK Garage",
+      "accent": "#00f5d4",
+      "updatedAt": "2026-07-26T03:46:14.948Z"
+    },
+    {
+      "name": "SIDEPIECE",
+      "slug": "sidepiece",
+      "score": 40,
+      "status": "promoted",
+      "evidence": [
+        {
+          "kind": "manual",
+          "detail": "roster artist",
+          "weight": 40
+        }
+      ],
+      "soundcloudPermalink": "sidepiece",
+      "genre": "Tech House",
+      "accent": "#fee440",
+      "updatedAt": "2026-07-26T03:46:14.048Z"
+    },
+    {
+      "name": "Solomun",
+      "slug": "solomun",
+      "score": 40,
+      "status": "promoted",
+      "evidence": [
+        {
+          "kind": "manual",
+          "detail": "roster artist",
+          "weight": 40
+        }
+      ],
+      "youtubeHandle": "@solomunmusic",
+      "soundcloudPermalink": "solomun",
+      "genre": "Melodic House",
+      "accent": "#f0e6d8",
+      "updatedAt": "2026-07-26T03:46:20.261Z"
+    },
+    {
+      "name": "Walker & Royce",
+      "slug": "walker-royce",
+      "score": 40,
+      "status": "promoted",
+      "evidence": [
+        {
+          "kind": "manual",
+          "detail": "roster artist",
+          "weight": 40
+        }
+      ],
+      "youtubeHandle": "@WalkerAndRoyce",
+      "soundcloudPermalink": "walker-and-royce",
+      "genre": "Tech House",
+      "accent": "#9ef01a",
+      "updatedAt": "2026-07-26T03:46:09.496Z"
+    },
+    {
+      "name": "Wax Motif",
+      "slug": "wax-motif",
+      "score": 40,
+      "status": "promoted",
+      "evidence": [
+        {
+          "kind": "manual",
+          "detail": "roster artist",
+          "weight": 40
+        }
+      ],
+      "youtubeHandle": "@WaxMotif",
+      "soundcloudPermalink": "waxmotif",
+      "genre": "G-House",
+      "accent": "#c56cff",
+      "updatedAt": "2026-07-26T03:46:06.024Z"
     }
   ]
 }

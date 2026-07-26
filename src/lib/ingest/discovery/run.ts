@@ -1,4 +1,5 @@
 import type { PrismaClient } from "@prisma/client";
+import { ARTIST_ROSTER } from "../roster";
 import { SOUNDCLOUD_SHOWS } from "../soundcloud/shows";
 import { slugify } from "../types";
 import { YOUTUBE_ARTIST_CHANNELS } from "../youtube/artists";
@@ -34,6 +35,9 @@ function seedSlugs(): Set<string> {
   }
   for (const ch of YOUTUBE_ARTIST_CHANNELS) {
     s.add(slugify(ch.primaryName));
+  }
+  for (const a of ARTIST_ROSTER) {
+    s.add(slugify(a.name));
   }
   return s;
 }
