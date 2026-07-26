@@ -20,6 +20,11 @@ import {
   searchYoutubeChannelHandle,
 } from "../youtube/client";
 import { expandAllLinkHubs } from "./linkHubs";
+import {
+  buildSocialMatrix,
+  socialMatrixMarkdownTable,
+  type SocialMatrix,
+} from "./socialMatrix";
 import { loadCandidates, saveCandidates, upsertCandidate } from "./store";
 import { slugify } from "../types";
 
@@ -36,6 +41,8 @@ export type HandleReportRow = {
     status: string;
     note?: string;
   };
+  /** YT · SC · X · IG · TT · BP · SF · AM · FB · Web */
+  matrix: SocialMatrix;
   discoveredLinks: string[];
   needsAttention: boolean;
   attentionReasons: string[];
@@ -256,6 +263,13 @@ export async function runCrosslinkDiscovery(): Promise<HandleReport> {
       );
     }
 
+    const matrix = buildSocialMatrix({
+      youtubeHandle,
+      soundcloudPermalink: scPermalink,
+      website: artist.website,
+      links: uniq,
+    });
+
     const row: HandleReportRow = {
       name: artist.name,
       slug: slugify(artist.name),
@@ -269,6 +283,7 @@ export async function runCrosslinkDiscovery(): Promise<HandleReport> {
         status: scStatus,
         note: artist.soundcloud?.note,
       },
+      matrix,
       discoveredLinks: uniq,
       needsAttention: reasons.length > 0,
       attentionReasons: reasons,
@@ -320,12 +335,19 @@ export async function runCrosslinkDiscovery(): Promise<HandleReport> {
   mkdirSync(dirname(path), { recursive: true });
   writeFileSync(path, `${JSON.stringify(report, null, 2)}\n`, "utf8");
 
-  // Human-readable markdown companion
+  // Human-readable markdown companion (+ full social matrix table)
   const mdPath = path.replace(/\.json$/, ".md");
+  const matrixTable = socialMatrixMarkdownTable(
+    rows.map((r) => ({ name: r.name, matrix: r.matrix })),
+  );
   const md = [
     "# Artist handle report",
     "",
     `Updated: ${report.updatedAt}`,
+    "",
+    "## Social matrix",
+    "",
+    matrixTable,
     "",
     `## Needs attention (${report.needsAttention.length})`,
     "",
@@ -355,6 +377,7 @@ export async function runCrosslinkDiscovery(): Promise<HandleReport> {
     "- YouTube channel search by artist name when About/SC still lack a handle",
     "- Roster seeds + SC user search for missing permalinks",
     "- Candidates auto-promoted when a handle resolves",
+    "- Matrix columns: YT · SC · X · IG · TT · BP · SF · AM · FB · Web",
     "",
   ].join("\n");
   writeFileSync(mdPath, md, "utf8");
