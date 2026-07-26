@@ -111,6 +111,43 @@ export async function applyKnownUrlFixes(prisma: PrismaClient): Promise<number> 
     n += 1;
   }
 
+  // BISCITS — IG is @itsbiscits (not @biscits); pin SC + Beatport hub.
+  const biscitsBio = [
+    "Tech House.",
+    "Management: charlie@palmartists.com",
+    "Booking N/S America: bshprits@teamwass.com",
+    "Booking EU/UK: Jack@unitedtalent.com",
+    "Booking AUS/NZ: Stuart@posterchild.com.au",
+  ].join(" ");
+  const biscits = await prisma.dj.findUnique({ where: { slug: "biscits" } });
+  if (biscits) {
+    await prisma.dj.update({
+      where: { id: biscits.id },
+      data: {
+        name: "BISCITS",
+        soundcloud: "https://soundcloud.com/biscits",
+        instagram: "https://www.instagram.com/itsbiscits/",
+        // No personal site in About — Beatport artist page is the catalog hub.
+        website: "https://www.beatport.com/artist/biscits/591990",
+        bio: biscitsBio,
+      },
+    });
+    n += 1;
+  } else {
+    await prisma.dj.create({
+      data: {
+        slug: "biscits",
+        name: "BISCITS",
+        accent: "#ef476f",
+        soundcloud: "https://soundcloud.com/biscits",
+        instagram: "https://www.instagram.com/itsbiscits/",
+        website: "https://www.beatport.com/artist/biscits/591990",
+        bio: biscitsBio,
+      },
+    });
+    n += 1;
+  }
+
   // Curated venue / festival websites (EDC Las Vegas etc.)
   for (const ev of Object.values(KNOWN_EVENTS)) {
     const existing = await prisma.event.findUnique({ where: { slug: ev.slug } });

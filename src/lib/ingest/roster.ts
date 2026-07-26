@@ -275,13 +275,16 @@ export const ARTIST_ROSTER_CURATED: ArtistRosterEntry[] = [
     accent: "#ef476f",
     youtube: { handle: "@Biscits", status: "ok" },
     soundcloud: { permalink: "biscits", userId: 275644376, status: "ok" },
+    // Canonical About links (IG handle is itsbiscits — not @biscits).
     socials: [
-      "https://instagram.com/itsbiscits",
-      "https://facebook.com/biscits",
+      "https://www.instagram.com/itsbiscits/",
+      "https://www.facebook.com/biscits/",
+      "https://soundcloud.com/biscits",
       "https://open.spotify.com/artist/052B9SONfhoScw7dgYWw5o",
       "https://www.beatport.com/artist/biscits/591990",
+      "https://www.youtube.com/@Biscits",
     ],
-    priority: "normal",
+    priority: "high",
   },
   {
     name: "Mau P",
