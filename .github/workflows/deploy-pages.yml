@@ -70,7 +70,8 @@ jobs:
           fi
           # Apply migrations onto the restored catalog (not an empty file).
           npx prisma migrate deploy
-          SETS=$(python3 -c "import sqlite3; print(sqlite3.connect('prisma/dev.db').execute('select count(*) from Set').fetchone()[0])")
+          # "Set" must be quoted — Set is a reserved word in SQLite.
+          SETS=$(python3 -c "import sqlite3; print(sqlite3.connect('prisma/dev.db').execute('select count(*) from \"Set\"').fetchone()[0])")
           echo "Restored catalog sets=$SETS (cache-hit=${{ steps.dbcache.outputs.cache-hit }} matched=${{ steps.dbcache.outputs.cache-matched-key }})"
           if [ "${SETS:-0}" -lt 50 ]; then
             echo "::error::Restored catalog has only $SETS sets (expected 50+). Refusing mock seed. Re-run deep deploy."
