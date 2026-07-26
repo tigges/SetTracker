@@ -13,7 +13,8 @@ export type DjSocialPin = {
   name: string;
   accent: string;
   soundcloud: string;
-  instagram: string;
+  /** Null when no verified IG — do not invent handles. */
+  instagram: string | null;
   twitter?: string | null;
   website: string;
   bio: string;
@@ -63,6 +64,79 @@ export const DJ_SOCIAL_PINS: DjSocialPin[] = [
     website: "https://www.beatport.com/artist/artbat/499932",
     bio: "Melodic Techno. SC artbatmusic, IG @artbatmusic, YT @ARTBAT — Beatport artist hub.",
   },
+  {
+    slug: "ac-slater",
+    name: "AC Slater",
+    accent: "#f2b33d",
+    soundcloud: "https://soundcloud.com/acslater",
+    instagram: "https://www.instagram.com/djacslater/",
+    website: "https://www.djacslater.com/",
+    bio: "Bass House. Official djacslater.com — YT @djacslater / user/djacslater, IG @djacslater, SC acslater, Beatport artist/ac-slater/52351.",
+  },
+  {
+    slug: "solomun",
+    name: "Solomun",
+    accent: "#f0e6d8",
+    soundcloud: "https://soundcloud.com/solomun",
+    instagram: "https://www.instagram.com/solomun/",
+    website: "https://solomun.org/",
+    bio: 'Melodic House. Diynamic / Solomun +1. Official solomun.org — YT @SolomunOfficial, IG @solomun, SC solomun. "Nobody is not loved."',
+  },
+  {
+    slug: "odd-mob",
+    name: "Odd Mob",
+    accent: "#b8f200",
+    soundcloud: "https://soundcloud.com/oddmob",
+    instagram: "https://www.instagram.com/odd_mob/",
+    website: "https://open.spotify.com/artist/4qLwtWhlhyAoQ4S9mSrDW9",
+    bio: "Tech House. Brisbane. SC oddmob, IG @odd_mob, YT @oddmob.",
+  },
+  {
+    slug: "westend",
+    name: "Westend",
+    accent: "#f72585",
+    soundcloud: "https://soundcloud.com/itsthewestend",
+    instagram: null,
+    website: "https://www.beatport.com/artist/westend/576028",
+    bio: "Tech House. NYC. SC itsthewestend (not westend), YT @itsthewestend, Beatport artist/westend/576028.",
+  },
+  {
+    slug: "sara-landry",
+    name: "Sara Landry",
+    accent: "#9b5de5",
+    soundcloud: "https://soundcloud.com/sara-landry-dj",
+    instagram: "https://www.instagram.com/saralandrydj/",
+    website: "https://www.saralandry.com",
+    bio: "Hard Techno / techno. Official saralandry.com — SC sara-landry-dj, IG @saralandrydj, YT @saralandry922, Beatport artist/sara-landry/663399.",
+  },
+  {
+    slug: "lilly-palmer",
+    name: "Lilly Palmer",
+    accent: "#ff006e",
+    soundcloud: "https://soundcloud.com/lilly_palmer",
+    instagram: "https://www.instagram.com/lilly_palmerdj/",
+    website: "https://www.beatport.com/artist/lilly-palmer/597345",
+    bio: "Techno. SC lilly_palmer, IG @lilly_palmerdj, YT @lillypalmer_dj, Beatport artist/lilly-palmer/597345.",
+  },
+  {
+    slug: "tape-b",
+    name: "Tape B",
+    accent: "#ffbe0b",
+    soundcloud: "https://soundcloud.com/tape-b-official",
+    instagram: null,
+    website: "https://linktr.ee/tapebbeats",
+    bio: "Bass / breaks. SC tape-b-official, YT @tapebbeats, linktr.ee/tapebbeats.",
+  },
+  {
+    slug: "hntr",
+    name: "HNTR",
+    accent: "#00f5d4",
+    soundcloud: "https://soundcloud.com/hntrnet",
+    instagram: "https://www.instagram.com/hntrnet/",
+    twitter: "https://twitter.com/hntrnet",
+    website: "https://www.hntr.net",
+    bio: "Techno. Toronto. Official hntr.net — SC hntrnet, IG/X @hntrnet, YT @hntrnet, No Neon Records.",
+  },
 ];
 
 /** Upsert pinned social fields for curated brand DJs. Returns rows touched. */
@@ -74,7 +148,7 @@ export async function applyDjSocialPins(prisma: PrismaClient): Promise<number> {
       name: pin.name,
       accent: pin.accent,
       soundcloud: pin.soundcloud,
-      instagram: pin.instagram,
+      instagram: pin.instagram ?? null,
       twitter: pin.twitter ?? null,
       website: pin.website,
       bio: pin.bio,

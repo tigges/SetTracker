@@ -159,4 +159,26 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     seriesName: "Ultra Shows",
     eventName: "Ultra Music Festival",
   },
+  {
+    video: "https://www.youtube.com/watch?v=g1vH9C_o-vo",
+    primaryArtist: dj("Solomun", {
+      accent: "#f0e6d8",
+      homeCity: "Hamburg, DE",
+    }),
+    genre: "Melodic House",
+    type: "festival",
+    title: "Solomun Live at EDC Las Vegas 2026 (Official Full Set)",
+    eventName: "EDC Las Vegas",
+  },
+  {
+    video: "https://www.youtube.com/watch?v=ObiAocVMTyo",
+    primaryArtist: dj("Odd Mob", {
+      accent: "#b8f200",
+      homeCity: "Brisbane, AU",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    title: "Odd Mob at Seismic Dance Event 8.0 | Full Set (Volcano Stage)",
+    eventName: "Seismic Dance Event",
+  },
 ];
