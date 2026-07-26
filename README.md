@@ -9,8 +9,12 @@ an ID.
 >
 > **Pages setup (required):** Repo → Settings → Pages → **Source = GitHub Actions**
 > (not “Deploy from a branch”). If Source is the `main` branch root, GitHub
-> briefly serves this README as the site while Actions is still ingesting — that
-> is the blank “Stack / Data model” page, not the product.
+> briefly serves this README as the site — that is the blank “Stack / Data model”
+> page, not the product.
+>
+> **Deploy speed:** pushes rebuild the site **without crawling** (uses the last
+> cached catalog DB, ~2–4 min). Full source crawls run on the 6h cron or via
+> Actions → Deploy → `deep`.
 
 ## Stack
 
