@@ -1,14 +1,17 @@
 /**
- * Resolve artwork URLs for DJs, labels, tracks and sets via Deezer (+ iTunes
- * for track covers). Wired into the GitHub Pages workflow after seed + ingest.
+ * Resolve artwork URLs for DJs, labels, tracks, sets, and venues via Deezer
+ * (+ iTunes for track covers, OG/curated for events, SC avatar fallback for DJs).
+ * Wired into the GitHub Pages workflow after seed + ingest.
  *
  * Behaviour:
- * - Labels: fill when imageUrl is null
+ * - Labels: fill when imageUrl is null (Deezer, then website OG)
  * - DJs: always re-resolve (cheap; fixes wrong artist matches after matcher upgrades)
+ *   with SoundCloud avatar fallback when Deezer misses
+ * - Events/venues: curated festival art → website OG → latest set art
  * - Tracks: fill nulls, and re-resolve rows that only have an artist portrait so
  *   we can upgrade to release cover art when available; also fill durationSec /
  *   mixName / remixerName from matched provider titles when sparse
- * - Sets: fill nulls; refresh when primary DJ image changed
+ * - Sets: fill nulls; refresh when primary DJ image changed; YT thumb from watch URL
  *
  * Usage: npm run thumbs
  */
@@ -26,10 +29,20 @@ import {
   sleep,
 } from "../src/lib/thumbs/deezer";
 import {
+  applyCuratedEventImages,
+  fillEventImages,
+} from "../src/lib/thumbs/eventImages";
+import {
   resolveHearthisTrackImage,
   resolveHearthisUserImage,
 } from "../src/lib/thumbs/hearthis";
 import { resolveTrackMetaMusicBrainz } from "../src/lib/thumbs/musicbrainz";
+import { resolveOgImage } from "../src/lib/thumbs/ogImage";
+import { resolveSoundcloudAvatar } from "../src/lib/thumbs/soundcloudAvatar";
+import {
+  pickYoutubeThumbnail,
+  youtubeVideoId,
+} from "../src/lib/thumbs/youtubeThumb";
 import { parseHearthisUrl } from "../src/lib/ingest/hearthis/client";
 
 const prisma = new PrismaClient();
@@ -46,6 +59,14 @@ const MB_LIMIT = Number(process.env.THUMBS_MB_LIMIT ?? (NULL_ONLY ? 0 : 60));
 type Stats = {
   djs: { scanned: number; filled: number; missed: number; updated: number };
   labels: { scanned: number; filled: number; missed: number };
+  events: {
+    scanned: number;
+    filled: number;
+    missed: number;
+    curated: number;
+    og: number;
+    fromSet: number;
+  };
   tracks: {
     scanned: number;
     filled: number;
@@ -64,6 +85,14 @@ async function main() {
   const stats: Stats = {
     djs: { scanned: 0, filled: 0, missed: 0, updated: 0 },
     labels: { scanned: 0, filled: 0, missed: 0 },
+    events: {
+      scanned: 0,
+      filled: 0,
+      missed: 0,
+      curated: 0,
+      og: 0,
+      fromSet: 0,
+    },
     tracks: {
       scanned: 0,
       filled: 0,
@@ -90,13 +119,23 @@ async function main() {
   console.log("[thumbs] resolving label artwork…");
   const labels = await prisma.label.findMany({
     where: { imageUrl: null },
-    select: { id: true, name: true, slug: true },
+    select: { id: true, name: true, slug: true, website: true, soundcloud: true },
     orderBy: { name: "asc" },
   });
   for (const l of labels) {
     stats.labels.scanned += 1;
-    const url = await resolveLabelImage(l.name);
+    let url = await resolveLabelImage(l.name);
     await sleep(DELAY_MS);
+    if (!url && l.soundcloud) {
+      url = await resolveSoundcloudAvatar(l.soundcloud);
+      await sleep(DELAY_MS);
+      if (url) console.log(`  ✓ label ${l.slug} (soundcloud)`);
+    }
+    if (!url && l.website) {
+      url = await resolveOgImage(l.website);
+      await sleep(DELAY_MS);
+      if (url) console.log(`  ✓ label ${l.slug} (og)`);
+    }
     if (url) {
       await prisma.label.update({ where: { id: l.id }, data: { imageUrl: url } });
       stats.labels.filled += 1;
@@ -114,7 +153,13 @@ async function main() {
   );
   const djs = await prisma.dj.findMany({
     where: NULL_ONLY ? { imageUrl: null } : undefined,
-    select: { id: true, name: true, slug: true, imageUrl: true },
+    select: {
+      id: true,
+      name: true,
+      slug: true,
+      imageUrl: true,
+      soundcloud: true,
+    },
     orderBy: { name: "asc" },
   });
   const djImageById = new Map<string, string>();
@@ -164,6 +209,11 @@ async function main() {
         await sleep(DELAY_MS);
         if (url) console.log(`  ✓ dj ${d.slug} (hearthis)`);
       }
+    }
+    if (!url && d.soundcloud) {
+      url = await resolveSoundcloudAvatar(d.soundcloud);
+      await sleep(DELAY_MS);
+      if (url) console.log(`  ✓ dj ${d.slug} (soundcloud)`);
     }
     if (url) {
       if (d.imageUrl !== url) {
@@ -346,6 +396,7 @@ async function main() {
       imageUrl: true,
       sourceUrl: true,
       sourceName: true,
+      playbackUrl: true,
       artists: {
         where: { isPrimary: true },
         take: 1,
@@ -390,6 +441,16 @@ async function main() {
       }
       if (url) console.log(`  ✓ set ${s.slug} (hearthis)`);
     }
+    // YouTube watch / playlist links → iytimg thumb
+    if (!url) {
+      const ytId =
+        youtubeVideoId(s.playbackUrl || "") ||
+        youtubeVideoId(s.sourceUrl || "");
+      if (ytId) {
+        url = pickYoutubeThumbnail(ytId);
+        console.log(`  ✓ set ${s.slug} (youtube)`);
+      }
+    }
     if (!url) url = djUrl;
     if (!url) {
       url = await resolveSetImage(s.title, primary?.name ?? null);
@@ -405,6 +466,17 @@ async function main() {
       stats.sets.missed += 1;
     }
   }
+
+  console.log("[thumbs] applying curated venue images…");
+  const curatedEvents = await applyCuratedEventImages(prisma);
+  console.log(`  curated event pins=${curatedEvents}`);
+
+  console.log("[thumbs] resolving venue / event artwork…");
+  const eventStats = await fillEventImages(prisma, {
+    delayMs: DELAY_MS,
+    sleep,
+  });
+  stats.events = eventStats;
 
   console.log("[thumbs] done:", JSON.stringify(stats, null, 2));
 }

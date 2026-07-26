@@ -58,6 +58,18 @@ export const YOUTUBE_PLAYLISTS: YoutubePlaylistSource[] = [
     minDurationSec: 30 * 60,
     titleMatch: /\b(ultra|miami|live|set|guetta|main\s*stage)\b/i,
   },
+  {
+    // Official Ultra Shows — Main Stage / stage livestreams with timed lists
+    playlist: "PLBg1SJiXSxfJ6lee3le9qRtIFLkdFwd8E",
+    seriesName: "Ultra Shows",
+    eventSlug: "ultra-miami",
+    genre: "House",
+    accent: "#7b2cbf",
+    limit: PL_LIMIT,
+    minDurationSec: 25 * 60,
+    titleMatch:
+      /\b(ultra|miami|live|set|main\s*stage|worldwide|resistance|bizarrap|bzrp)\b/i,
+  },
 ];
 
 /** Adapt a playlist source to the venue candidate helpers. */

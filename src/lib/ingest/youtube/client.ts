@@ -8,6 +8,8 @@
  * - channel-home shelves: Fans also like, Spotlights
  */
 
+import { pickYoutubeThumbnail } from "../../thumbs/youtubeThumb";
+
 /** Googlebot UA unlocks player metadata; desktop UAs often get LOGIN_REQUIRED. */
 const UA =
   "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)";
@@ -48,6 +50,8 @@ export type YtWatchMeta = {
   /** Related / suggested / "other tracks" video ids from the watch page. */
   relatedVideos: YtRelatedVideo[];
   watchUrl: string;
+  /** Best available thumbnail URL (iytimg / player thumbnails). */
+  imageUrl: string;
 };
 
 /** Extract `varName = {...};` JSON with brace matching (regex is too fragile). */
@@ -404,6 +408,10 @@ export async function fetchWatchMeta(videoIdOrUrl: string): Promise<YtWatchMeta>
   let channel = String(details.author || "").trim();
   let durationSec = Math.max(0, Number(details.lengthSeconds || 0) || 0);
   const description = String(details.shortDescription || "");
+  const thumbBlock = details.thumbnail as
+    | { thumbnails?: Array<{ url?: string; width?: number }> }
+    | undefined;
+  const thumbnails = thumbBlock?.thumbnails ?? [];
 
   // Fallbacks from ytInitialData overlay when player blob is restricted.
   if (initial && (!title || !channel || !durationSec)) {
@@ -447,6 +455,7 @@ export async function fetchWatchMeta(videoIdOrUrl: string): Promise<YtWatchMeta>
     musicCredits: uniqueCredits,
     relatedVideos: relatedFiltered,
     watchUrl,
+    imageUrl: pickYoutubeThumbnail(videoId, thumbnails),
   };
 }
 

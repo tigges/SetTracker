@@ -43,6 +43,8 @@ export const KNOWN_EVENTS: Record<string, CanonicalEvent> = {
     kind: "festival",
     location: "Bayfront Park, Miami",
     website: "https://ultramusicfestival.com/",
+    instagram: "https://www.instagram.com/ultra/",
+    twitter: "https://x.com/ultra",
   },
   "hard-summer": {
     slug: "hard-summer",
