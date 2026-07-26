@@ -11,6 +11,7 @@
 
 import {
   FP_JAMES_HYPE_GET_CLOSER_LONDON,
+  FP_JAMES_HYPE_GET_CLOSER_LONDON_2,
   type FingerprintSeedRow,
 } from "../fingerprint/seeds";
 import type { RawArtist } from "../types";
@@ -82,6 +83,19 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     seriesName: "Get Closer",
     eventName: "Get Closer London",
     fingerprintPlays: FP_JAMES_HYPE_GET_CLOSER_LONDON,
+  },
+  {
+    video: "https://www.youtube.com/watch?v=tBvllfEXio4",
+    primaryArtist: dj("James Hype", {
+      accent: "#ff3d6e",
+      homeCity: "Liverpool, UK",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    title: "James Hype - Get Closer, London #2 - Full Set",
+    seriesName: "Get Closer",
+    eventName: "Get Closer London",
+    fingerprintPlays: FP_JAMES_HYPE_GET_CLOSER_LONDON_2,
   },
   {
     video: "https://www.youtube.com/watch?v=i9cNYaOOdwA",

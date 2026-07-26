@@ -183,3 +183,55 @@ export const FP_JAMES_HYPE_GET_CLOSER_LONDON: FingerprintSeedRow[] = [
   },
   { at: "33:00", artist: "James Hype", title: "Lose Control" },
 ];
+
+/**
+ * James Hype — Get Closer, London #2 (tBvllfEXio4).
+ * Fingerprint analysis (aha-music URL → pasted 2026-07-26).
+ * Dropped garbled / off-genre false positives from the raw dump.
+ */
+export const FP_JAMES_HYPE_GET_CLOSER_LONDON_2: FingerprintSeedRow[] = [
+  { at: "01:00", artist: "Harvy Valencia, Mrodriguez", title: "Lolly" },
+  {
+    at: "03:01",
+    artist: "Hannah Laing, Stephen Kirkwood",
+    title: "Don't Wanna Go",
+  },
+  { at: "05:30", artist: "Mp Nemmo", title: "Mystic Vibes" },
+  { at: "07:12", artist: "DJ Cheese", title: "3,6 and nine" },
+  { at: "08:00", artist: "Chaval (BR)", title: "Suv (Original Mix)" },
+  { at: "09:30", artist: "OC", title: "Skrrrt Riddim" },
+  { at: "10:10", artist: "AKSON MUSIC", title: "Believe In Love INS" },
+  { at: "11:41", artist: "Stefano Noferini", title: "Extramelody" },
+  { at: "13:00", artist: "Le Ptit Mike", title: "Natural Remind" },
+  { at: "13:22", artist: "Camille Yarbrough", title: "Take Yo' Praise" },
+  {
+    at: "14:00",
+    artist: "Misericordie",
+    title: "Voodoo People (Rave Mix)",
+  },
+  { at: "17:14", artist: "Suga7", title: "Bass Shock (Original Mix)" },
+  { at: "19:00", artist: "KC Wray", title: "Nushit (Original Mix)" },
+  {
+    at: "19:26",
+    artist: "James Hype, Kim Petras, Tiësto",
+    title: "Drums (Tiësto Remix)",
+  },
+  { at: "23:12", artist: "Rihanna", title: "Pour It Up (Club Remix)" },
+  {
+    at: "25:06",
+    artist: "Exodus, Richard Grey",
+    title: "What You Say",
+  },
+  {
+    at: "25:55",
+    artist: "Anatoliy Frolov",
+    title: "Memories (Extended Mix)",
+  },
+  { at: "26:30", artist: "James Hype", title: "Wild" },
+  {
+    at: "28:30",
+    artist: "Gangs Type, Lissat",
+    title: "Loca People (Tribal Mix)",
+  },
+  { at: "29:30", artist: "The Electroclassic", title: "Daft Sounds" },
+];

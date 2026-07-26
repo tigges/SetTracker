@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import {
   fingerprintRowsToPlays,
   FP_JAMES_HYPE_GET_CLOSER_LONDON,
+  FP_JAMES_HYPE_GET_CLOSER_LONDON_2,
   mergeFingerprintPlays,
   parseClockToSec,
 } from "./seeds";
@@ -19,6 +20,14 @@ assert.equal(plays[0]!.idStatus, "identified");
 assert.equal(plays[0]!.timestamp, 31);
 assert.ok(plays.some((p) => /Lose Control/i.test(p.trackTitle || "")));
 assert.ok(plays.some((p) => /Dom Dolla Remix/i.test(p.trackTitle || "")));
+
+const plays2 = fingerprintRowsToPlays(FP_JAMES_HYPE_GET_CLOSER_LONDON_2);
+assert.ok(plays2.length >= 15);
+assert.equal(plays2[0]!.timestamp, 60);
+assert.ok(plays2.some((p) => /Drums/i.test(p.trackTitle || "")));
+assert.ok(plays2.some((p) => p.trackTitle === "Wild"));
+assert.ok(!plays2.some((p) => /getting rich/i.test(p.trackTitle || "")));
+assert.ok(!plays2.some((p) => /Jatt Tera/i.test(p.trackTitle || "")));
 
 // consecutive dup drop
 const deduped = fingerprintRowsToPlays([
