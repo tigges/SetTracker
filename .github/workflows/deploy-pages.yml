@@ -1,29 +1,27 @@
 name: Deploy to GitHub Pages
 
+# Push = fast path (no crawl). Catalog refresh = schedule / manual only.
 on:
   push:
     branches: [main]
-  # Full deep crawl on a schedule; push deploys stay light/fast.
   schedule:
     - cron: "0 */6 * * *"
   workflow_dispatch:
     inputs:
       mode:
-        description: "Ingest depth"
+        description: "push-speed (no crawl) or deep catalog refresh"
         required: true
         default: "deep"
         type: choice
         options:
-          - light
+          - fast
           - deep
 
-# Allow the workflow to publish to GitHub Pages.
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Only one concurrent Pages deployment.
 concurrency:
   group: pages
   cancel-in-progress: true
@@ -32,8 +30,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      # Push → light (minutes). Schedule / manual deep → full roster scan.
-      INGEST_MODE: ${{ github.event_name == 'schedule' && 'deep' || github.event_name == 'workflow_dispatch' && inputs.mode || 'light' }}
+      # Only cron + manual "deep" crawl the web. Everything else is instant.
+      INGEST_MODE: ${{ github.event_name == 'schedule' && 'deep' || github.event_name == 'workflow_dispatch' && inputs.mode || 'fast' }}
     steps:
       - uses: actions/checkout@v4
 
@@ -48,23 +46,27 @@ jobs:
       - name: Generate Prisma client
         run: npx prisma generate
 
-      - name: Create and seed the SQLite database (build-time data)
-        run: |
-          npx prisma migrate deploy
-          npx prisma db seed
+      - name: Apply migrations
+        run: npx prisma migrate deploy
 
-      - name: Crawl sources (light — fast push deploys)
-        if: env.INGEST_MODE == 'light'
-        env:
-          YOUTUBE_ARTIST_VIDEO_LIMIT: "6"
-          YOUTUBE_ARTIST_VIDEO_LIMIT_HIGH: "10"
-          YOUTUBE_VENUE_VIDEO_LIMIT: "8"
-          YOUTUBE_CONTINUATION_PAGES: "0"
-          SOUNDCLOUD_ARTIST_TRACK_LIMIT: "12"
-          HEARTHIS_MAX_SETS: "20"
-        run: npm run ingest
+      - name: Restore last catalog DB (skip crawl on push)
+        id: dbcache
+        uses: actions/cache/restore@v4
+        with:
+          path: prisma/dev.db
+          key: setradar-db-${{ github.run_id }}
+          restore-keys: |
+            setradar-db-
 
-      - name: Crawl sources (deep — schedule / manual)
+      - name: Seed fallback DB (only if no cached catalog)
+        if: steps.dbcache.outputs.cache-hit != 'true' && env.INGEST_MODE == 'fast'
+        run: npx prisma db seed
+
+      - name: Seed before deep crawl
+        if: env.INGEST_MODE == 'deep'
+        run: npx prisma db seed
+
+      - name: Deep crawl (schedule / manual only)
         if: env.INGEST_MODE == 'deep'
         env:
           YOUTUBE_ARTIST_VIDEO_LIMIT: "40"
@@ -75,7 +77,15 @@ jobs:
         run: npm run ingest
 
       - name: Resolve artwork thumbnails (Deezer)
+        if: env.INGEST_MODE == 'deep'
         run: npm run thumbs
+
+      - name: Save catalog DB for fast push deploys
+        if: env.INGEST_MODE == 'deep'
+        uses: actions/cache/save@v4
+        with:
+          path: prisma/dev.db
+          key: setradar-db-${{ github.run_id }}
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
@@ -94,7 +104,6 @@ jobs:
           grep -qi "setradar" out/index.html
           test ! -d out/cache
           test ! -d out/server
-          ls out | head
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
