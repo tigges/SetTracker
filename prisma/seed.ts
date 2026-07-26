@@ -139,19 +139,21 @@ async function main() {
   // -------------------------------------------------------------------------
   // Events
   // -------------------------------------------------------------------------
-  const eventData = [
-    ["edc-lv", "EDC Las Vegas", "festival", "Las Vegas Motor Speedway"],
-    ["ultra-miami", "Ultra Music Festival", "festival", "Bayfront Park, Miami"],
-    ["hard-summer", "HARD Summer", "festival", "Hollywood Park, Los Angeles"],
-    ["coachella", "Coachella", "festival", "Empire Polo Club, Indio"],
-    ["lollapalooza", "Lollapalooza", "festival", "Grant Park, Chicago"],
-    ["brooklyn-mirage", "The Brooklyn Mirage", "club", "Brooklyn, New York"],
-    ["parklife", "Parklife", "festival", "Heaton Park, Manchester"],
-    ["elrow", "elrow", "club", "various"],
+  const eventData: Array<[string, string, string, string, string | null]> = [
+    ["edc-lv", "EDC Las Vegas", "festival", "Las Vegas Motor Speedway", "https://lasvegas.edc.com/"],
+    ["ultra-miami", "Ultra Music Festival", "festival", "Bayfront Park, Miami", "https://ultramusicfestival.com/"],
+    ["hard-summer", "HARD Summer", "festival", "Hollywood Park, Los Angeles", "https://hardfest.com/"],
+    ["coachella", "Coachella", "festival", "Empire Polo Club, Indio", "https://www.coachella.com/"],
+    ["lollapalooza", "Lollapalooza", "festival", "Grant Park, Chicago", "https://www.lollapalooza.com/"],
+    ["brooklyn-mirage", "The Brooklyn Mirage", "club", "Brooklyn, New York", "https://www.avantgardner.com/"],
+    ["parklife", "Parklife", "festival", "Heaton Park, Manchester", null],
+    ["elrow", "elrow", "club", "various", null],
   ];
   const events: Record<string, string> = {};
-  for (const [slug, name, kind, location] of eventData) {
-    const e = await prisma.event.create({ data: { slug, name, kind, location } });
+  for (const [slug, name, kind, location, website] of eventData) {
+    const e = await prisma.event.create({
+      data: { slug, name, kind, location, website },
+    });
     events[slug] = e.id;
   }
 

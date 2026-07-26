@@ -15,11 +15,26 @@ export type DjSocialFields = {
   soundcloud: string | null;
   instagram: string | null;
   twitter: string | null;
+  website: string | null;
 };
 
 /** No name-derived guesses — null until roster/crosslink/curated map says so. */
 export function djSocials(_name: string): DjSocialFields {
-  return { soundcloud: null, instagram: null, twitter: null };
+  return { soundcloud: null, instagram: null, twitter: null, website: null };
+}
+
+function absUrl(u: string, hostHint?: "instagram" | "x" | "soundcloud"): string {
+  if (/^https?:\/\//i.test(u)) return u;
+  if (hostHint === "instagram") return `https://instagram.com/${u.replace(/^@/, "")}`;
+  if (hostHint === "x") return `https://x.com/${u.replace(/^@/, "")}`;
+  if (hostHint === "soundcloud") return `https://soundcloud.com/${u}`;
+  return `https://${u.replace(/^\/\//, "")}`;
+}
+
+function isSocialHost(url: string): boolean {
+  return /(soundcloud|instagram|tiktok|facebook|fb\.com|twitter|x\.com|youtube|youtu\.be|spotify|apple\.com|beatport)/i.test(
+    url,
+  );
 }
 
 /** Prefer curated roster permalinks / social URLs. Never fall back to guesses. */
@@ -33,25 +48,17 @@ export function djSocialsFromKnown(opts: {
   const ig = socials.find((u) => /instagram\.com\//i.test(u)) ?? null;
   const tw = socials.find((u) => /(twitter|x)\.com\//i.test(u)) ?? null;
   const scFromList = socials.find((u) => /soundcloud\.com\//i.test(u)) ?? null;
+  const webFromList =
+    socials.find((u) => /^https?:\/\//i.test(u) && !isSocialHost(u)) ?? null;
   const sc = opts.soundcloudPermalink
     ? `https://soundcloud.com/${opts.soundcloudPermalink}`
     : scFromList;
+  const website = opts.website || webFromList || null;
   return {
-    soundcloud: sc
-      ? sc.startsWith("http")
-        ? sc
-        : `https://soundcloud.com/${sc}`
-      : null,
-    instagram: ig
-      ? ig.startsWith("http")
-        ? ig
-        : `https://instagram.com/${ig}`
-      : null,
-    twitter: tw
-      ? tw.startsWith("http")
-        ? tw
-        : `https://x.com/${tw}`
-      : null,
+    soundcloud: sc ? absUrl(sc, "soundcloud") : null,
+    instagram: ig ? absUrl(ig, "instagram") : null,
+    twitter: tw ? absUrl(tw, "x") : null,
+    website: website ? absUrl(website) : null,
   };
 }
 
@@ -91,7 +98,10 @@ export function labelSocials(name: string): {
   website: string | null;
 } {
   const h = socialHandle(name);
-  const dashed = name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+  const dashed = name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
   const known =
     KNOWN_LABEL_SOCIALS[h] ||
     KNOWN_LABEL_SOCIALS[dashed] ||

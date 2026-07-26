@@ -8,6 +8,7 @@
  */
 
 import type { PrismaClient } from "@prisma/client";
+import { KNOWN_EVENTS } from "./events";
 
 export type VerifyStats = {
   checked: number;
@@ -57,7 +58,7 @@ async function probe(url: string): Promise<"ok" | "dead" | "soft"> {
 
 async function scrubField(
   prisma: PrismaClient,
-  kind: "dj" | "label",
+  kind: "dj" | "label" | "event",
   id: string,
   field: string,
   url: string | null | undefined,
@@ -70,6 +71,11 @@ async function scrubField(
     stats.cleared += 1;
     if (kind === "dj") {
       await prisma.dj.update({
+        where: { id },
+        data: { [field]: null },
+      });
+    } else if (kind === "event") {
+      await prisma.event.update({
         where: { id },
         data: { [field]: null },
       });
@@ -101,6 +107,80 @@ export async function applyKnownUrlFixes(prisma: PrismaClient): Promise<number> 
     });
     n += 1;
   }
+
+  // Curated venue / festival websites (EDC Las Vegas etc.)
+  for (const ev of Object.values(KNOWN_EVENTS)) {
+    const existing = await prisma.event.findUnique({ where: { slug: ev.slug } });
+    if (!existing) {
+      await prisma.event.create({
+        data: {
+          slug: ev.slug,
+          name: ev.name,
+          kind: ev.kind,
+          location: ev.location ?? null,
+          website: ev.website ?? null,
+          soundcloud: ev.soundcloud ?? null,
+          instagram: ev.instagram ?? null,
+          twitter: ev.twitter ?? null,
+        },
+      });
+      n += 1;
+      continue;
+    }
+    await prisma.event.update({
+      where: { id: existing.id },
+      data: {
+        website: ev.website ?? existing.website,
+        soundcloud: ev.soundcloud ?? existing.soundcloud,
+        instagram: ev.instagram ?? existing.instagram,
+        twitter: ev.twitter ?? existing.twitter,
+        location: existing.location ?? ev.location ?? null,
+      },
+    });
+    n += 1;
+  }
+
+  // Merge accidental edc-las-vegas fork into canonical edc-lv.
+  const fork = await prisma.event.findUnique({
+    where: { slug: "edc-las-vegas" },
+    include: { sets: { select: { id: true } } },
+  });
+  const canon = await prisma.event.findUnique({ where: { slug: "edc-lv" } });
+  if (fork && canon && fork.id !== canon.id) {
+    for (const s of fork.sets) {
+      await prisma.set.update({
+        where: { id: s.id },
+        data: { eventId: canon.id },
+      });
+    }
+    await prisma.event.delete({ where: { id: fork.id } });
+    n += 1;
+  }
+
+  // Re-home sets whose titles clearly say EDC onto the curated venue
+  // (covers Insomniac-channel crawls that previously used event=Insomniac).
+  if (canon) {
+    const orphans = await prisma.set.findMany({
+      where: {
+        OR: [
+          { eventId: null },
+          { event: { slug: { not: "edc-lv" } } },
+        ],
+        title: { contains: "EDC" },
+      },
+      select: { id: true, title: true, eventId: true },
+    });
+    for (const s of orphans) {
+      if (!/\bedc\b/i.test(s.title)) continue;
+      if (/\bedc\s*(mexico|orlando|china)\b/i.test(s.title)) continue;
+      await prisma.set.update({
+        where: { id: s.id },
+        data: { eventId: canon.id },
+      });
+      n += 1;
+    }
+  }
+
   return n;
 }
 
@@ -109,15 +189,23 @@ export async function verifyStoredSocialUrls(
 ): Promise<VerifyStats> {
   const stats: VerifyStats = { checked: 0, cleared: 0, kept: 0 };
   const fixes = await applyKnownUrlFixes(prisma);
-  if (fixes) console.log(`[verify-urls] applied ${fixes} curated label fixes`);
+  if (fixes) console.log(`[verify-urls] applied ${fixes} curated entity fixes`);
 
   const djs = await prisma.dj.findMany({
-    select: { id: true, slug: true, soundcloud: true, instagram: true, twitter: true },
+    select: {
+      id: true,
+      slug: true,
+      soundcloud: true,
+      instagram: true,
+      twitter: true,
+      website: true,
+    },
   });
   for (const d of djs) {
     await scrubField(prisma, "dj", d.id, "soundcloud", d.soundcloud, stats);
     await scrubField(prisma, "dj", d.id, "instagram", d.instagram, stats);
     await scrubField(prisma, "dj", d.id, "twitter", d.twitter, stats);
+    await scrubField(prisma, "dj", d.id, "website", d.website, stats);
   }
 
   const labels = await prisma.label.findMany({
@@ -133,6 +221,23 @@ export async function verifyStoredSocialUrls(
     await scrubField(prisma, "label", l.id, "soundcloud", l.soundcloud, stats);
     await scrubField(prisma, "label", l.id, "instagram", l.instagram, stats);
     await scrubField(prisma, "label", l.id, "website", l.website, stats);
+  }
+
+  const events = await prisma.event.findMany({
+    select: {
+      id: true,
+      slug: true,
+      soundcloud: true,
+      instagram: true,
+      twitter: true,
+      website: true,
+    },
+  });
+  for (const e of events) {
+    await scrubField(prisma, "event", e.id, "soundcloud", e.soundcloud, stats);
+    await scrubField(prisma, "event", e.id, "instagram", e.instagram, stats);
+    await scrubField(prisma, "event", e.id, "twitter", e.twitter, stats);
+    await scrubField(prisma, "event", e.id, "website", e.website, stats);
   }
 
   console.log(
