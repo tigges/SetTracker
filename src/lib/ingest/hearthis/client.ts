@@ -29,6 +29,11 @@ export type HtTrack = {
   thumb?: string | null;
   artwork_url?: string | null;
   artwork_url_retina?: string | null;
+  /** Progressive MP3 stream (always present on api-v2 detail). */
+  stream_url?: string | null;
+  /** Optional higher-quality download when the upload allows it. */
+  download_url?: string | null;
+  download_filename?: string | null;
   playback_count?: string | number;
   favoritings_count?: string | number;
   comment_count?: string | number;

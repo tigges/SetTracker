@@ -60,6 +60,26 @@ jobs:
           THUMBS_MB_LIMIT: "80"
         run: npm run thumbs
 
+      # Fingerprint sparse sets via ACRCloud (direct — never AudioScout/TrackId).
+      # No-op when secrets are unset; never overwrites sourceUrl / sourceName.
+      - name: Install ffmpeg
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+
+      - name: ACRCloud fingerprint enrich
+        env:
+          ACRCLOUD_ENABLED: "1"
+          ACRCLOUD_HOST: ${{ secrets.ACRCLOUD_HOST }}
+          ACRCLOUD_ACCESS_KEY: ${{ secrets.ACRCLOUD_ACCESS_KEY }}
+          ACRCLOUD_ACCESS_SECRET: ${{ secrets.ACRCLOUD_ACCESS_SECRET }}
+          ACRCLOUD_SET_LIMIT: "8"
+          ACRCLOUD_SAMPLE_SEC: "12"
+          ACRCLOUD_STEP_SEC: "90"
+          ACRCLOUD_MIN_SCORE: "70"
+          ACRCLOUD_MIN_IDENTIFIED: "4"
+          # Prefer SC/hearthis progressive; YT left off (bot walls / ToS).
+          ACRCLOUD_ALLOW_YOUTUBE: "0"
+        run: npm run enrich:fingerprint
+
       - name: Save enriched catalog DB
         uses: actions/cache/save@v4
         with:

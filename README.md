@@ -74,6 +74,7 @@ npm run dev        # http://localhost:3000
 | `npm run ingest`     | Upsert sets from SoundCloud (+ optional backfill) |
 | `npm run crosslink`  | Scrape YT/SC profiles + link hubs → handle report |
 | `npm run thumbs`     | Resolve artwork URLs (Deezer / iTunes) |
+| `npm run enrich:fingerprint` | ACRCloud gap-fill for sparse sets (`ACRCLOUD_*`) |
 
 ### Handle cross-link (automatic)
 
@@ -116,6 +117,26 @@ The app publishes as a fully static site. `.github/workflows/deploy-pages.yml`:
 
 - **push to `main`** — fast path (no crawl): restore cached catalog DB → export → deploy
 - **6h cron / manual `deep`** — crawl + thumbs, save DB cache, then deploy
+- **weekly `catalog-enrich`** — full thumbs + MusicBrainz + ACRCloud fingerprint gap-fill
+
+### ACRCloud fingerprint enrich
+
+`npm run enrich:fingerprint` samples SoundCloud / hearthis playback (YouTube
+opt-in) and identifies clips via ACRCloud. Writes `Played` rows with
+`provenance: fingerprint` into **timeline gaps only** — never overwrites
+`sourceUrl` / `sourceName`, never scrapes AudioScout / TrackId / 1001TL.
+
+| Env | Effect |
+| --- | --- |
+| `ACRCLOUD_ENABLED=1` | Hard gate (no network without this) |
+| `ACRCLOUD_HOST` | Identify host, e.g. `identify-eu-west-1.acrcloud.com` |
+| `ACRCLOUD_ACCESS_KEY` / `ACRCLOUD_ACCESS_SECRET` | Project credentials |
+| `ACRCLOUD_SET_LIMIT` | Max sets per run (default 5) |
+| `ACRCLOUD_SAMPLE_SEC` / `ACRCLOUD_STEP_SEC` | Clip length / spacing (12 / 90) |
+| `ACRCLOUD_MIN_SCORE` | Accept identified hits ≥ score (default 70) |
+| `ACRCLOUD_ALLOW_YOUTUBE=1` | Allow YT playback (default off) |
+
+Wire secrets into Actions → Catalog enrich. Missing credentials → safe no-op.
 
 If the catalog cache is cold, the fast path seeds mock sets so export never
 ships with empty `/sets/[slug]` routes.
