@@ -12,6 +12,7 @@ const FILTERS = [
   { id: "no-handle", label: "No handle" },
   { id: "has-handle", label: "Has handle" },
   { id: "handle-no-sets", label: "Handle · 0 sets" },
+  { id: "junk", label: "Junk names" },
 ] as const;
 
 type FilterId = (typeof FILTERS)[number]["id"];
@@ -24,6 +25,9 @@ const chip = (active: boolean) =>
   }`;
 
 function matches(d: DjListItem, filter: FilterId): boolean {
+  if (filter === "junk") return d.isJunk;
+  // Hide aria-label / form-field junk from every other browse mode.
+  if (d.isJunk) return false;
   switch (filter) {
     case "no-sets":
       return d.setCount === 0;
@@ -63,14 +67,20 @@ export function DjList({ djs }: { djs: DjListItem[] }) {
 
   const counts = useMemo(() => {
     const c: Record<FilterId, number> = {
-      all: djs.length,
+      all: 0,
       "no-sets": 0,
       "has-sets": 0,
       "no-handle": 0,
       "has-handle": 0,
       "handle-no-sets": 0,
+      junk: 0,
     };
     for (const d of djs) {
+      if (d.isJunk) {
+        c.junk++;
+        continue;
+      }
+      c.all++;
       if (d.setCount === 0) c["no-sets"]++;
       else c["has-sets"]++;
       if (d.hasHandle) {

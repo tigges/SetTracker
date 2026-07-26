@@ -1,3 +1,4 @@
+import { isJunkArtistName } from "@/lib/artistName";
 import { prisma } from "@/lib/db";
 import { normalizeGenre } from "@/lib/genre";
 import { ensureTrackSlugs } from "@/lib/tracks/ensureSlugs";
@@ -102,6 +103,12 @@ export async function getSearchIndex(): Promise<SearchIndexItem[]> {
   }
 
   for (const d of djs) {
+    if (
+      isJunkArtistName(d.name) ||
+      /^view-artist-details-for-/.test(d.slug)
+    ) {
+      continue;
+    }
     items.push({
       kind: "dj",
       title: d.name,

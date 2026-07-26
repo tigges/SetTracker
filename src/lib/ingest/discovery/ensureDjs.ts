@@ -4,6 +4,7 @@
  */
 
 import type { PrismaClient } from "@prisma/client";
+import { isJunkArtistName, sanitizeArtistName } from "../../artistName";
 import { djSocialsFromKnown } from "../../social";
 import { ARTIST_ROSTER } from "../roster";
 import { slugify } from "../types";
@@ -30,7 +31,7 @@ function accentFor(slug: string, preferred?: string): string {
 
 export async function ensureDiscoveredDjs(
   prisma: PrismaClient,
-): Promise<{ created: number; updated: number }> {
+): Promise<{ created: number; updated: number; purged: number }> {
   let created = 0;
   let updated = 0;
 
@@ -65,16 +66,19 @@ export async function ensureDiscoveredDjs(
   for (const c of file.candidates) {
     if (c.status !== "promoted" && c.status !== "queued") continue;
     if (c.score < 25 && c.status !== "promoted") continue;
-    if (!stubs.has(c.slug)) {
-      stubs.set(c.slug, {
-        name: c.name,
-        slug: c.slug,
+    const cleanName = sanitizeArtistName(c.name);
+    if (!cleanName) continue;
+    const slug = slugify(cleanName);
+    if (!stubs.has(slug)) {
+      stubs.set(slug, {
+        name: cleanName,
+        slug,
         genre: c.genre,
         accent: c.accent,
         soundcloudPermalink: c.soundcloudPermalink,
       });
     } else {
-      const s = stubs.get(c.slug)!;
+      const s = stubs.get(slug)!;
       s.soundcloudPermalink = s.soundcloudPermalink || c.soundcloudPermalink;
     }
   }
@@ -115,6 +119,36 @@ export async function ensureDiscoveredDjs(
     }
   }
 
-  console.log(`[ensure-djs] created=${created} updated=${updated}`);
-  return { created, updated };
+  const purged = await purgeJunkDjs(prisma);
+
+  console.log(
+    `[ensure-djs] created=${created} updated=${updated} purged=${purged}`,
+  );
+  return { created, updated, purged };
+}
+
+/** Delete empty Dj rows whose names are UI chrome (aria-labels, form fields). */
+async function purgeJunkDjs(prisma: PrismaClient): Promise<number> {
+  const rows = await prisma.dj.findMany({
+    select: {
+      id: true,
+      name: true,
+      slug: true,
+      _count: { select: { sets: true, series: true } },
+    },
+  });
+  const junkIds = rows
+    .filter(
+      (d) =>
+        d._count.sets === 0 &&
+        d._count.series === 0 &&
+        (isJunkArtistName(d.name) ||
+          /^view-artist-details-for-/.test(d.slug)),
+    )
+    .map((d) => d.id);
+  if (!junkIds.length) return 0;
+  const result = await prisma.dj.deleteMany({
+    where: { id: { in: junkIds } },
+  });
+  return result.count;
 }
