@@ -1,6 +1,8 @@
 name: Catalog enrich (weekly)
 
-# Full artwork refresh + MusicBrainz — kept off the 6-hour deep path.
+# Full artwork refresh + MusicBrainz + ACRCloud fingerprint gap-fill.
+# Kept off the 6-hour deep path. After a successful enrich, triggers a fast
+# Pages deploy so fingerprint IDs ship without waiting for the next push.
 on:
   schedule:
     - cron: "30 4 * * 1"
@@ -8,6 +10,7 @@ on:
 
 permissions:
   contents: read
+  actions: write
 
 concurrency:
   group: catalog-enrich
@@ -62,16 +65,33 @@ jobs:
 
       # Fingerprint sparse sets via ACRCloud (direct — never AudioScout/TrackId).
       # No-op when secrets are unset; never overwrites sourceUrl / sourceName.
+      - name: Check ACRCloud secrets
+        id: acr
+        env:
+          ACRCLOUD_HOST: ${{ secrets.ACRCLOUD_HOST }}
+          ACRCLOUD_ACCESS_KEY: ${{ secrets.ACRCLOUD_ACCESS_KEY }}
+          ACRCLOUD_ACCESS_SECRET: ${{ secrets.ACRCLOUD_ACCESS_SECRET }}
+        run: |
+          if [ -n "$ACRCLOUD_HOST" ] && [ -n "$ACRCLOUD_ACCESS_KEY" ] && [ -n "$ACRCLOUD_ACCESS_SECRET" ]; then
+            echo "configured=1" >> "$GITHUB_OUTPUT"
+            echo "ACRCloud credentials present — fingerprint enrich will run."
+          else
+            echo "configured=0" >> "$GITHUB_OUTPUT"
+            echo "::warning::ACRCLOUD_HOST / ACRCLOUD_ACCESS_KEY / ACRCLOUD_ACCESS_SECRET not set. Fingerprint enrich will no-op. Add them under Settings → Secrets and variables → Actions, then re-run this workflow."
+          fi
+
       - name: Install ffmpeg
+        if: steps.acr.outputs.configured == '1'
         run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
 
       - name: ACRCloud fingerprint enrich
+        id: fingerprint
         env:
           ACRCLOUD_ENABLED: "1"
           ACRCLOUD_HOST: ${{ secrets.ACRCLOUD_HOST }}
           ACRCLOUD_ACCESS_KEY: ${{ secrets.ACRCLOUD_ACCESS_KEY }}
           ACRCLOUD_ACCESS_SECRET: ${{ secrets.ACRCLOUD_ACCESS_SECRET }}
-          ACRCLOUD_SET_LIMIT: "8"
+          ACRCLOUD_SET_LIMIT: "12"
           ACRCLOUD_SAMPLE_SEC: "12"
           ACRCLOUD_STEP_SEC: "90"
           ACRCLOUD_MIN_SCORE: "70"
@@ -85,3 +105,18 @@ jobs:
         with:
           path: prisma/dev.db
           key: setradar-db-${{ github.run_id }}
+
+      # Ship fingerprint IDs to Pages without waiting for the next code push.
+      - name: Trigger fast Pages deploy
+        if: success()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: 'deploy-pages.yml',
+              ref: context.ref,
+              inputs: { mode: 'fast' },
+            });
+            core.info('Dispatched Deploy to GitHub Pages (fast).');

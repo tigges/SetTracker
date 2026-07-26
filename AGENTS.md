@@ -59,14 +59,16 @@ setradar.ai.
  Track / Set via the Deezer Search API (no key). Idempotent; skips rows that
  already have art. Sets fall back to the primary DJ image. The Pages workflow
  runs this after ingest. UI uses `EntityThumb` with monogram fallback.
-- **Fingerprint enrich:** `npm run enrich:fingerprint` (weekly
+- **Fingerprint enrich:** `npm run enrich:fingerprint` (weekly / dispatch
  `catalog-enrich.yml` after thumbs/MB). Samples SC/hearthis `playbackUrl`
  via ffmpeg → ACRCloud Identify (`ACRCLOUD_*` secrets + `ACRCLOUD_ENABLED=1`).
  Fills timeline gaps only with `provenance: "fingerprint"`; never overwrites
  `sourceUrl` / `sourceName`. Prefers SC/hearthis over YT
- (`ACRCLOUD_ALLOW_YOUTUBE=0` by default). Manual pasted IDs (ACRCloud/AudD /
- aha-music analysis) live in `src/lib/ingest/fingerprint/seeds.ts` and can
- attach to curated YT sets via `fingerprintPlays` — do not scrape AudioScout /
- TrackId / MusicMate.
+ (`ACRCLOUD_ALLOW_YOUTUBE=0` by default). On success, enrich dispatches a
+ fast Pages deploy. Agents cannot set repo secrets or (usually) dispatch
+ workflows — operator adds `ACRCLOUD_HOST` / `ACCESS_KEY` / `ACCESS_SECRET`
+ under Settings → Secrets, then runs Catalog enrich. Manual pasted IDs
+ (ACRCloud/AudD / aha-music) live in `src/lib/ingest/fingerprint/seeds.ts`
+ via `fingerprintPlays` — do not scrape AudioScout / TrackId / MusicMate.
 - **Standard commands** live in `package.json` scripts and `README.md`; prefer
   those over ad-hoc invocations.

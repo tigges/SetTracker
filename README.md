@@ -136,7 +136,15 @@ opt-in) and identifies clips via ACRCloud. Writes `Played` rows with
 | `ACRCLOUD_MIN_SCORE` | Accept identified hits ≥ score (default 70) |
 | `ACRCLOUD_ALLOW_YOUTUBE=1` | Allow YT playback (default off) |
 
-Wire secrets into Actions → Catalog enrich. Missing credentials → safe no-op.
+**Secrets (Settings → Secrets and variables → Actions):**
+
+| Secret | Example |
+| --- | --- |
+| `ACRCLOUD_HOST` | `identify-eu-west-1.acrcloud.com` |
+| `ACRCLOUD_ACCESS_KEY` | project access key |
+| `ACRCLOUD_ACCESS_SECRET` | project access secret |
+
+Then run **Actions → Catalog enrich (weekly) → Run workflow**. Missing credentials → safe no-op (warning in the log). A successful enrich dispatches a fast Pages deploy so new fingerprint IDs go live.
 
 If the catalog cache is cold, the fast path seeds mock sets so export never
 ships with empty `/sets/[slug]` routes.
