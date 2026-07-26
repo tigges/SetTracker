@@ -1,4 +1,8 @@
 import { prisma } from "@/lib/db";
+import {
+  relatedSlugsFor,
+  venueArtistSlugs,
+} from "@/lib/ingest/discovery/relations";
 import type { IdStatus } from "@/lib/status";
 
 export type StatusCounts = Record<IdStatus, number>;
@@ -342,6 +346,30 @@ export async function getDjBySlug(slug: string) {
   }
   const collaborators = [...collabMap.values()].sort((a, b) => b.count - a.count);
 
+  // Soft graph from press/lineup discovery — fills gaps before shared sets exist.
+  const collabSlugs = new Set(collaborators.map((c) => c.slug));
+  const relatedRaw = relatedSlugsFor(dj.slug, 16);
+  const relatedIds = relatedRaw.map((r) => r.slug).filter((s) => !collabSlugs.has(s));
+  const relatedRows = relatedIds.length
+    ? await prisma.dj.findMany({
+        where: { slug: { in: relatedIds } },
+        select: { slug: true, name: true, accent: true },
+      })
+    : [];
+  const relatedBySlug = new Map(relatedRows.map((r) => [r.slug, r]));
+  const related = relatedRaw
+    .map((r) => {
+      const row = relatedBySlug.get(r.slug);
+      if (!row) return null;
+      return {
+        slug: row.slug,
+        name: row.name,
+        accent: row.accent,
+        reason: r.reason,
+      };
+    })
+    .filter((x): x is { slug: string; name: string; accent: string; reason: string } => !!x);
+
   return {
     id: dj.id,
     slug: dj.slug,
@@ -368,6 +396,7 @@ export async function getDjBySlug(slug: string) {
     recentSets,
     mostPlayed,
     collaborators,
+    related,
     health,
     provenance,
   };
@@ -602,6 +631,18 @@ export async function getVenueBySlug(slug: string) {
 
   const tallies = await statusCountsBySetIds(event.sets.map((s) => s.id));
 
+  const lineupSlugs = venueArtistSlugs(event.slug);
+  const lineupRows = lineupSlugs.length
+    ? await prisma.dj.findMany({
+        where: { slug: { in: lineupSlugs } },
+        select: { slug: true, name: true, accent: true, imageUrl: true },
+      })
+    : [];
+  const lineupOrder = new Map(lineupSlugs.map((s, i) => [s, i]));
+  const lineupArtists = lineupRows.sort(
+    (a, b) => (lineupOrder.get(a.slug) ?? 99) - (lineupOrder.get(b.slug) ?? 99),
+  );
+
   return {
     slug: event.slug,
     name: event.name,
@@ -613,6 +654,7 @@ export async function getVenueBySlug(slug: string) {
       instagram: event.instagram,
       twitter: event.twitter,
     },
+    lineupArtists,
     setCount: event.sets.length,
     sets: event.sets.map((s) => {
       const prim = s.artists.find((a) => a.isPrimary) ?? s.artists[0];

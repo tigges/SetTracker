@@ -319,6 +319,31 @@ export const ARTIST_ROSTER: ArtistRosterEntry[] = [
     priority: "normal",
   },
   {
+    name: "David Guetta",
+    genre: "Dance",
+    accent: "#1e90ff",
+    homeCity: "Paris, FR",
+    youtube: { handle: "@davidguetta", status: "ok" },
+    soundcloud: { permalink: "davidguetta", userId: 201859, status: "ok" },
+    website: "https://davidguetta.com",
+    socials: [
+      "https://instagram.com/davidguetta",
+      "https://x.com/davidguetta",
+      "https://open.spotify.com/artist/1Cs0zKBU1kc0i8ypK3B9ai",
+    ],
+    priority: "high",
+  },
+  {
+    name: "Men Machine",
+    genre: "Bass House",
+    accent: "#ff4d6d",
+    homeCity: "Paris / Berlin",
+    // Project alias for Guetta × Horger — poll when handles resolve.
+    youtube: { handle: "@davidguetta", status: "weak", note: "project under Guetta channel for now" },
+    soundcloud: { permalink: "davidguetta", userId: 201859, status: "weak", note: "project releases often land on Guetta SC" },
+    priority: "normal",
+  },
+  {
     name: "Dom Dolla",
     genre: "Tech House",
     accent: "#ff4d6d",

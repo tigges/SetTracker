@@ -43,6 +43,26 @@ export default async function VenuePage({
         </div>
       </div>
 
+      {venue.lineupArtists.length > 0 && (
+        <section className="mb-8">
+          <h2 className="mb-3 text-[13px] font-semibold uppercase tracking-[0.14em] text-muted">
+            Lineup artists
+          </h2>
+          <div className="flex flex-wrap gap-2">
+            {venue.lineupArtists.map((a) => (
+              <Link
+                key={a.slug}
+                href={`/djs/${a.slug}`}
+                className="rounded-full border border-line bg-panel px-3 py-1 text-[12px] transition-colors hover:border-[color:var(--muted2)]"
+                style={{ color: a.accent }}
+              >
+                {a.name}
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
+
       {venue.sets.length === 0 ? (
         <p className="text-[14px] text-muted">
           No sets linked yet — check back after the next deep catalog refresh.

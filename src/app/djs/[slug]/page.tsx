@@ -260,6 +260,27 @@ export default async function DjPage({
               </div>
             )}
           </Panel>
+
+          {dj.related.length > 0 && (
+            <Panel title="Related" meta={`${dj.related.length}`}>
+              <div className="flex flex-wrap gap-2">
+                {dj.related.map((c) => (
+                  <Link
+                    key={c.slug}
+                    href={`/djs/${c.slug}`}
+                    title={c.reason}
+                    className="flex items-center gap-2 rounded-full border border-line bg-panel px-3 py-1 text-[12px] transition-colors hover:border-[color:var(--muted2)]"
+                  >
+                    <span
+                      className="dot"
+                      style={{ background: c.accent, width: 7, height: 7 }}
+                    />
+                    {c.name}
+                  </Link>
+                ))}
+              </div>
+            </Panel>
+          )}
         </div>
       </div>
     </div>

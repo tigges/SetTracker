@@ -8,6 +8,7 @@
  */
 
 import type { PrismaClient } from "@prisma/client";
+import { ensureDiscoveredDjs } from "./discovery/ensureDjs";
 import { KNOWN_EVENTS } from "./events";
 
 export type VerifyStats = {
@@ -156,6 +157,9 @@ export async function applyKnownUrlFixes(prisma: PrismaClient): Promise<number> 
     await prisma.event.delete({ where: { id: fork.id } });
     n += 1;
   }
+
+  // Persist roster + high-signal discovered artists as Dj rows (Guetta, etc.).
+  await ensureDiscoveredDjs(prisma);
 
   // Re-home sets whose titles clearly say EDC onto the curated venue
   // (covers Insomniac-channel crawls that previously used event=Insomniac).

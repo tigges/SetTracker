@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "updatedAt": "2026-07-26T13:00:00.000Z",
+  "relations": [
+    {
+      "a": "david-guetta",
+      "b": "marten-horger",
+      "reason": "Men Machine EP (Beatportal)",
+      "weight": 50,
+      "source": "https://www.beatportal.com/articles/1412031-david-guetta-and-marten-horger-launch-men-machine-with-self-titled-ep"
+    },
+    {
+      "a": "david-guetta",
+      "b": "men-machine",
+      "reason": "Men Machine project",
+      "weight": 45,
+      "source": "https://www.beatportal.com/articles/1412031-david-guetta-and-marten-horger-launch-men-machine-with-self-titled-ep"
+    },
+    {
+      "a": "marten-horger",
+      "b": "men-machine",
+      "reason": "Men Machine project",
+      "weight": 45,
+      "source": "https://www.beatportal.com/articles/1412031-david-guetta-and-marten-horger-launch-men-machine-with-self-titled-ep"
+    }
+  ],
+  "venueArtists": {
+    "tomorrowland": [
+      "david-guetta",
+      "dom-dolla",
+      "fisher",
+      "chris-lake",
+      "james-hype",
+      "oliver-heldens",
+      "solomun",
+      "black-coffee",
+      "vintage-culture",
+      "keinemusik"
+    ]
+  }
+}

@@ -43,6 +43,18 @@ export const KNOWN_HANDLES: Record<string, HandleHint> = {
     genre: "Bass House",
     accent: "#ff7a45",
   },
+  "david guetta": {
+    youtubeHandle: "@davidguetta",
+    soundcloudPermalink: "davidguetta",
+    genre: "Dance",
+    accent: "#1e90ff",
+  },
+  "men machine": {
+    youtubeHandle: "@davidguetta",
+    soundcloudPermalink: "davidguetta",
+    genre: "Bass House",
+    accent: "#ff4d6d",
+  },
   "robin schulz": {
     youtubeHandle: "@robinschulz",
     soundcloudPermalink: "robin-schulz",

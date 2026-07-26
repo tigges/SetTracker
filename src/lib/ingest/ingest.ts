@@ -560,6 +560,20 @@ export async function runIngest(
     );
   }
 
+  // Pre-poll discovery: lineup + press → promote handles → ensure Dj rows
+  // so adapters can fetch new artists/venues in THIS deep run.
+  try {
+    stats.discovery = await runDiscovery(prisma, {
+      collaboratorMentions: [],
+      scanExternal: true,
+    });
+  } catch (err) {
+    console.warn(
+      "[ingest] pre-discovery failed:",
+      err instanceof Error ? err.message : err,
+    );
+  }
+
   for (const adapter of adapters) {
     const before = {
       new: stats.newSets,
@@ -582,8 +596,22 @@ export async function runIngest(
     };
   }
 
+  // Post-poll discovery: fold B2B/coplay signals, re-promote, refresh graph.
   try {
-    stats.discovery = await runDiscovery(prisma, { collaboratorMentions });
+    const after = await runDiscovery(prisma, {
+      collaboratorMentions,
+      scanExternal: false,
+    });
+    stats.discovery = stats.discovery
+      ? {
+          ...after,
+          newlyQueued: (stats.discovery.newlyQueued ?? 0) + after.newlyQueued,
+          promoted: (stats.discovery.promoted ?? 0) + after.promoted,
+          lineupHits: stats.discovery.lineupHits ?? after.lineupHits,
+          pressHits: stats.discovery.pressHits ?? after.pressHits,
+          djsEnsured: (stats.discovery.djsEnsured ?? 0) + after.djsEnsured,
+        }
+      : after;
   } catch (err) {
     console.warn(
       "[ingest] discovery failed:",

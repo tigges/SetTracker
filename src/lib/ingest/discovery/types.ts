@@ -11,7 +11,9 @@ export type CandidateEvidence = {
     | "remixer"
     | "venue_title"
     | "tracklist_channel"
-    | "manual";
+    | "manual"
+    | "lineup"
+    | "press";
   detail: string;
   sourceSlug?: string;
   weight: number;
@@ -37,4 +39,21 @@ export type CandidateFile = {
   version: 1;
   updatedAt: string;
   candidates: ArtistCandidate[];
+};
+
+/** Soft graph edges for UI cross-links before shared sets exist. */
+export type ArtistRelation = {
+  a: string; // slug
+  b: string; // slug
+  reason: string;
+  weight: number;
+  source?: string;
+};
+
+export type RelationFile = {
+  version: 1;
+  updatedAt: string;
+  relations: ArtistRelation[];
+  /** venue slug → artist slugs seen on official lineups */
+  venueArtists: Record<string, string[]>;
 };
