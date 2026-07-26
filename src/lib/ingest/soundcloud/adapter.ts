@@ -10,6 +10,7 @@
 
 import { artistsForSet } from "../artists";
 import { promotedSoundcloudPermalinks } from "../discovery/run";
+import { inferFestivalEvent } from "../events";
 import { hashRawSetContent } from "../hash";
 import { slugify, type RawSet, type SourceAdapter } from "../types";
 import {
@@ -102,6 +103,7 @@ async function trackToRawSet(
 
   const plays = mergeTracklistSignals(fromDescription, fromComments);
   const { primary, collaborators } = artistsForSet(title, show.primaryArtist);
+  const festival = inferFestivalEvent(title);
   const raw: RawSet = {
     sourceSlug,
     title,
@@ -110,6 +112,9 @@ async function trackToRawSet(
     primaryArtist: primary,
     collaborators,
     seriesName: inferSeriesName(title, show),
+    eventName: festival?.name,
+    eventKind: festival?.kind,
+    eventLocation: festival?.location,
     publishedAt: publishedAtOf(track),
     durationSec,
     sourceName: "SoundCloud",

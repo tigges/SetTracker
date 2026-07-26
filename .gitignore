@@ -41,6 +41,9 @@ yarn-error.log*
 /prisma/*.db
 /prisma/*.db-journal
 
+# generated ingest scan output
+/data/url-scan-candidates.json
+
 # vercel
 .vercel
 

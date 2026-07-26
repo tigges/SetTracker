@@ -25,6 +25,7 @@ model Dj {
   soundcloud String?
   instagram  String?
   twitter    String?
+  website    String?
 
   // resolved artwork URL (Deezer CDN etc.); null → monogram fallback in UI
   imageUrl   String?
@@ -63,12 +64,18 @@ model Label {
 
 // An event where a set was performed (festival, club night, radio station).
 model Event {
-  id       String @id @default(cuid())
-  slug     String @unique
-  name     String
-  kind     String // "festival" | "club" | "radio" | "livestream"
-  location String?
-  sets     Set[]
+  id         String  @id @default(cuid())
+  slug       String  @unique
+  name       String
+  kind       String // "festival" | "club" | "radio" | "livestream"
+  location   String?
+  // Official site + socials when known (curated / website scan — never invented).
+  website    String?
+  soundcloud String?
+  instagram  String?
+  twitter    String?
+  imageUrl   String?
+  sets       Set[]
 }
 
 // A released, identified track (the playable unit in a set — not the release).

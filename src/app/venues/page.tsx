@@ -39,6 +39,7 @@ export default async function VenuesPage() {
                 {v.setCount} sets
                 {v.location ? ` · ${v.location}` : ""}
                 {v.kind ? ` · ${v.kind}` : ""}
+                {v.website ? " · www" : ""}
               </div>
             </div>
           </Link>

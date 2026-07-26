@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SetCard } from "@/components/SetCard";
+import { SocialLinks } from "@/components/SocialLinks";
 import { getAllVenueSlugs, getVenueBySlug } from "@/lib/queries";
 
 export async function generateStaticParams() {
@@ -37,13 +38,22 @@ export default async function VenuePage({
           {venue.location ? ` · ${venue.location}` : ""}
           {venue.kind ? ` · ${venue.kind}` : ""}
         </p>
+        <div className="mt-3">
+          <SocialLinks links={venue.socials} />
+        </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {venue.sets.map((s) => (
-          <SetCard key={s.id} set={s} />
-        ))}
-      </div>
+      {venue.sets.length === 0 ? (
+        <p className="text-[14px] text-muted">
+          No sets linked yet — check back after the next deep catalog refresh.
+        </p>
+      ) : (
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {venue.sets.map((s) => (
+            <SetCard key={s.id} set={s} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

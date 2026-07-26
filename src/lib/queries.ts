@@ -354,6 +354,7 @@ export async function getDjBySlug(slug: string) {
       soundcloud: dj.soundcloud,
       instagram: dj.instagram,
       twitter: dj.twitter,
+      website: dj.website,
     },
     series: dj.series.map((s) => ({
       slug: s.slug,
@@ -554,7 +555,9 @@ export async function getVenues() {
   });
 
   return events
-    .filter((e) => e._count.sets > 0)
+    // Keep curated festival pages (website set) even when crawl hasn't
+    // re-attached sets yet — e.g. EDC Las Vegas.
+    .filter((e) => e._count.sets > 0 || !!e.website)
     .map((e) => {
       const latest = e.sets[0];
       const prim = latest?.artists[0]?.dj;
@@ -564,8 +567,9 @@ export async function getVenues() {
         name: e.name,
         kind: e.kind,
         location: e.location,
+        website: e.website,
         setCount: e._count.sets,
-        imageUrl: latest?.imageUrl ?? prim?.imageUrl ?? null,
+        imageUrl: e.imageUrl ?? latest?.imageUrl ?? prim?.imageUrl ?? null,
         accent: prim?.accent ?? "var(--brand)",
       };
     })
@@ -574,7 +578,9 @@ export async function getVenues() {
 
 export async function getAllVenueSlugs() {
   const rows = await prisma.event.findMany({
-    where: { sets: { some: {} } },
+    where: {
+      OR: [{ sets: { some: {} } }, { website: { not: null } }],
+    },
     select: { slug: true },
   });
   return rows.map((r) => r.slug);
@@ -601,6 +607,12 @@ export async function getVenueBySlug(slug: string) {
     name: event.name,
     kind: event.kind,
     location: event.location,
+    socials: {
+      website: event.website,
+      soundcloud: event.soundcloud,
+      instagram: event.instagram,
+      twitter: event.twitter,
+    },
     setCount: event.sets.length,
     sets: event.sets.map((s) => {
       const prim = s.artists.find((a) => a.isPrimary) ?? s.artists[0];

@@ -7,6 +7,8 @@ import { runDiscovery, type DiscoveryStats } from "./discovery/run";
 import { hashRawSetContent } from "./hash";
 import { adapters as defaultAdapters } from "./sources";
 import { slugify, type RawArtist, type RawPlay, type RawSet, type SourceAdapter } from "./types";
+import { eventSocialPayload, resolveEvent } from "./events";
+import { scanEntityUrls } from "./scanEntityUrls";
 import { verifyStoredSocialUrls } from "./verifyUrls";
 
 const ACCENT_PALETTE = [
@@ -220,15 +222,36 @@ export async function runIngest(
     location?: string,
   ): Promise<string | null> {
     if (!name) return null;
-    const slug = slugify(name);
-    const existing = await prisma.event.findUnique({ where: { slug } });
-    if (existing) return existing.id;
+    const canon = resolveEvent(name, { kind, location });
+    const socials = eventSocialPayload(canon);
+    const existing = await prisma.event.findUnique({
+      where: { slug: canon.slug },
+    });
+    if (existing) {
+      await prisma.event.update({
+        where: { id: existing.id },
+        data: {
+          name: existing.name || canon.name,
+          kind: existing.kind || canon.kind,
+          location: existing.location ?? canon.location ?? null,
+          website: existing.website ?? socials.website ?? null,
+          soundcloud: existing.soundcloud ?? socials.soundcloud ?? null,
+          instagram: existing.instagram ?? socials.instagram ?? null,
+          twitter: existing.twitter ?? socials.twitter ?? null,
+        },
+      });
+      return existing.id;
+    }
     const created = await prisma.event.create({
       data: {
-        slug,
-        name,
-        kind: kind ?? "event",
-        location: location ?? null,
+        slug: canon.slug,
+        name: canon.name,
+        kind: canon.kind,
+        location: canon.location ?? null,
+        website: socials.website ?? null,
+        soundcloud: socials.soundcloud ?? null,
+        instagram: socials.instagram ?? null,
+        twitter: socials.twitter ?? null,
       },
     });
     return created.id;
@@ -568,12 +591,22 @@ export async function runIngest(
     );
   }
 
-  // Clear dead guessed social/website URLs; apply curated label fixes.
+  // Clear dead guessed social/website URLs; apply curated label/venue fixes.
   try {
     await verifyStoredSocialUrls(prisma);
   } catch (err) {
     console.warn(
       "[ingest] verify-urls failed:",
+      err instanceof Error ? err.message : err,
+    );
+  }
+
+  // Harvest more socials / set candidates / Beatport links from entity websites.
+  try {
+    await scanEntityUrls(prisma);
+  } catch (err) {
+    console.warn(
+      "[ingest] scan-urls failed:",
       err instanceof Error ? err.message : err,
     );
   }

@@ -8,6 +8,7 @@
 
 import { artistsForSet } from "../artists";
 import { promotedYoutubeChannels } from "../discovery/run";
+import { inferFestivalEvent } from "../events";
 import { hashRawSetContent } from "../hash";
 import { parseDescriptionTracklist } from "../soundcloud/parseTracklist";
 import { slugify, type RawPlay, type RawSet, type SourceAdapter } from "../types";
@@ -157,6 +158,8 @@ async function venueVideoToRawSet(
   const plays = playsFromMeta(meta);
   const sourceSlug = `yt-${meta.videoId}`.slice(0, 120);
 
+  // Prefer a named festival (EDC, Ultra, …) over the livestream channel brand.
+  const festival = inferFestivalEvent(meta.title);
   const raw: RawSet = {
     sourceSlug,
     title: meta.title.trim(),
@@ -165,8 +168,9 @@ async function venueVideoToRawSet(
     primaryArtist: primary,
     collaborators,
     // Venue brands are Events, not DJ Series — keeps /venues separate from radio shows.
-    eventName: venue.seriesName,
-    eventKind: "livestream",
+    eventName: festival?.name ?? venue.seriesName,
+    eventKind: festival?.kind ?? "livestream",
+    eventLocation: festival?.location,
     publishedAt: meta.publishedAt ?? new Date(),
     durationSec: meta.durationSec,
     sourceName: "YouTube",
