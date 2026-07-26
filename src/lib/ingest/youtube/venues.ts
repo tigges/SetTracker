@@ -33,7 +33,8 @@ export const YOUTUBE_VENUES: YoutubeVenueChannel[] = [
     eventSlug: "boiler-room",
     genre: "House",
     accent: "#e10600",
-    limit: VENUE_LIMIT,
+    // Classic archive lives on YT; poll deeper than default venue cap.
+    limit: Math.max(VENUE_LIMIT, Number(process.env.BOILERROOM_YT_LIMIT || 80)),
     minDurationSec: 30 * 60,
     titleMatch: /\b(boiler room|b2b|live|set)\b/i,
   },
@@ -138,6 +139,9 @@ export function artistFromVenueTitle(title: string): string {
   m = cleaned.match(/^(.+?)\s+[|]\s+/);
   if (m) return tidyArtist(m[1]);
   m = cleaned.match(/^(.+?)\s+[–—]\s+/);
+  if (m) return tidyArtist(m[1]);
+  // "Boiler Room London: Tiffany Day" / "Cercle: Artist"
+  m = cleaned.match(/^(?:Boiler Room\s+)?[A-Za-z][A-Za-z\s]+:\s*(.+)$/i);
   if (m) return tidyArtist(m[1]);
   return tidyArtist(cleaned);
 }

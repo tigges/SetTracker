@@ -204,6 +204,7 @@ async function venueVideoToHit(
     genre: venue.genre,
     primaryArtist: primary,
     collaborators,
+    seriesName: venue.seriesName,
     eventName: festival?.name ?? channelEvent?.name ?? venue.seriesName,
     eventKind: festival?.kind ?? channelEvent?.kind ?? "livestream",
     eventLocation: festival?.location ?? channelEvent?.location,

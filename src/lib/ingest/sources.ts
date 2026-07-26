@@ -1,5 +1,6 @@
 import type { Provenance } from "../status";
 import { bandcampAdapter } from "./bandcamp/adapter";
+import { boilerroomAdapter } from "./boilerroom/adapter";
 import { hearthisAdapter } from "./hearthis/adapter";
 import { slugify, type RawArtist, type RawPlay, type RawSet, type SourceAdapter } from "./types";
 import { topDjs } from "./topDjs";
@@ -107,4 +108,5 @@ export const adapters: SourceAdapter[] = withOptionalSynthetic([
   hearthisAdapter,
   youtubeAdapter,
   bandcampAdapter,
+  boilerroomAdapter,
 ]);
