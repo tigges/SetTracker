@@ -70,7 +70,10 @@ export const KNOWN_EVENTS: Record<string, CanonicalEvent> = {
     slug: "tomorrowland",
     name: "Tomorrowland",
     kind: "festival",
+    location: "Boom, Belgium",
     website: "https://www.tomorrowland.com/",
+    // Lineup page scanned every deep ingest (CDN + HTML + seed fallback).
+    // See discovery/lineupSources.ts
   },
   "boiler-room": {
     slug: "boiler-room",

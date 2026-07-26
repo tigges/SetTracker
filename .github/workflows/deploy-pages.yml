@@ -48,6 +48,17 @@ jobs:
       - name: Generate Prisma client
         run: npx prisma generate
 
+      # Persist discovery graph across deep runs (candidates grow each crawl).
+      - name: Restore discovery candidate graph
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            data/artist-candidates.json
+            data/artist-relations.json
+          key: setradar-discovery-${{ github.run_id }}
+          restore-keys: |
+            setradar-discovery-
+
       # Restore BEFORE migrate so we don't create an empty DB that confuses checks.
       # NOTE: actions/cache sets cache-hit=true only on exact key match. Restore-key
       # hits leave cache-hit=false even when prisma/dev.db was restored — never use
@@ -94,6 +105,9 @@ jobs:
           YOUTUBE_VENUE_VIDEO_LIMIT: "35"
           YOUTUBE_CONTINUATION_PAGES: "3"
           SOUNDCLOUD_ARTIST_TRACK_LIMIT: "50"
+          # Expand artist graph each deep run (lineup/press/B2B → promote → poll).
+          DISCOVERY_PROMOTE_SCORE: "28"
+          DISCOVERY_PROMOTE_CAP: "24"
         run: npm run ingest
 
       - name: Resolve artwork thumbnails (Deezer)
@@ -120,6 +134,15 @@ jobs:
           path: prisma/dev.db
           key: setradar-db-${{ github.run_id }}
 
+      - name: Save discovery candidate graph
+        if: env.INGEST_MODE == 'deep'
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            data/artist-candidates.json
+            data/artist-relations.json
+          key: setradar-discovery-${{ github.run_id }}
+
       # Also refresh cache after a good fast deploy so the key stays warm.
       - name: Re-save catalog DB after fast path
         if: env.INGEST_MODE == 'fast'
@@ -137,7 +160,7 @@ jobs:
         env:
           GITHUB_PAGES: "true"
           PAGES_BASE_PATH: "/SetTracker"
-          NEXT_PUBLIC_APP_VERSION: "0.2.3"
+          NEXT_PUBLIC_APP_VERSION: "0.2.4"
           NEXT_PUBLIC_GIT_SHA: ${{ github.sha }}
         run: npm run build
 

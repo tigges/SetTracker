@@ -5,7 +5,16 @@ import { slugify } from "../types";
 import { YOUTUBE_ARTIST_CHANNELS } from "../youtube/artists";
 import { YOUTUBE_SETS } from "../youtube/videos";
 import { rankCoplayArtists } from "./coplay";
+import { ensureDiscoveredDjs } from "./ensureDjs";
 import { hintForName } from "./knownHandles";
+import { scanFestivalLineups } from "./lineup";
+import { scanPressSeeds } from "./press";
+import {
+  linkCohort,
+  linkVenueArtists,
+  loadRelations,
+  saveRelations,
+} from "./relations";
 import { loadCandidates, saveCandidates, upsertCandidate } from "./store";
 import type { ArtistCandidate, CandidateEvidence } from "./types";
 
@@ -16,6 +25,8 @@ export type DiscoveryInput = {
     sourceSlug: string;
     weight?: number;
   }>;
+  /** When true, also scan curated lineup pages + press seeds. */
+  scanExternal?: boolean;
 };
 
 export type DiscoveryStats = {
@@ -23,6 +34,9 @@ export type DiscoveryStats = {
   newlyQueued: number;
   promoted: number;
   coplayHits: number;
+  lineupHits: number;
+  pressHits: number;
+  djsEnsured: number;
 };
 
 function seedSlugs(): Set<string> {
@@ -52,10 +66,37 @@ function existingDjSlugsFromFile(
   return s;
 }
 
+function queueMention(
+  file: ReturnType<typeof loadCandidates>,
+  beforeSlugs: Set<string>,
+  exclude: Set<string>,
+  name: string,
+  evidence: CandidateEvidence[],
+  score: number,
+): boolean {
+  const clean = name.replace(/H[øöØÖ]rger/g, "Horger").trim();
+  const slug = slugify(clean);
+  if (!slug || exclude.has(slug)) return false;
+  const hint = hintForName(clean);
+  const before = file.candidates.find((c) => c.slug === slug);
+  upsertCandidate(file, {
+    name: clean,
+    slug,
+    score,
+    status: "queued",
+    evidence,
+    youtubeHandle: hint?.youtubeHandle,
+    soundcloudPermalink: hint?.soundcloudPermalink,
+    bandcampUrl: hint?.bandcampUrl,
+    genre: hint?.genre,
+    accent: hint?.accent,
+  });
+  return !before && !beforeSlugs.has(slug);
+}
+
 /**
- * After ingest: rank co-plays + set collaborators into the candidate queue,
- * attach known handles, and auto-promote high-signal names into the queue
- * as `promoted` (runtime poll lists read promoted YT/SC handles).
+ * Rank co-plays + collaborators + lineup/press into the candidate queue,
+ * attach known handles, auto-promote, ensure Dj rows, and persist relations.
  */
 export async function runDiscovery(
   prisma: PrismaClient,
@@ -63,40 +104,113 @@ export async function runDiscovery(
 ): Promise<DiscoveryStats> {
   const file = loadCandidates();
   const beforeSlugs = new Set(file.candidates.map((c) => c.slug));
-  // Exclude artists already wired as primary seeds / already promoted — not
-  // every DJ row (collaborators should still become poll targets).
   const exclude = seedSlugs();
   for (const slug of existingDjSlugsFromFile(file)) exclude.add(slug);
 
   let newlyQueued = 0;
   let promoted = 0;
+  let lineupHits = 0;
+  let pressHits = 0;
+
+  const relations = loadRelations();
 
   for (const mention of input.collaboratorMentions ?? []) {
-    const slug = slugify(mention.name);
-    if (!slug || exclude.has(slug)) continue;
-    const hint = hintForName(mention.name);
-    const evidence: CandidateEvidence[] = [
-      {
-        kind: "set_collaborator",
-        detail: `Billed on ${mention.sourceSlug}`,
-        sourceSlug: mention.sourceSlug,
-        weight: mention.weight ?? 25,
-      },
-    ];
-    const before = file.candidates.find((c) => c.slug === slug);
-    upsertCandidate(file, {
-      name: mention.name,
-      slug,
-      score: mention.weight ?? 25,
-      status: "queued",
-      evidence,
-      youtubeHandle: hint?.youtubeHandle,
-      soundcloudPermalink: hint?.soundcloudPermalink,
-      bandcampUrl: hint?.bandcampUrl,
-      genre: hint?.genre,
-      accent: hint?.accent,
-    });
-    if (!before && !beforeSlugs.has(slug)) newlyQueued += 1;
+    const ok = queueMention(
+      file,
+      beforeSlugs,
+      exclude,
+      mention.name,
+      [
+        {
+          kind: "set_collaborator",
+          detail: `Billed on ${mention.sourceSlug}`,
+          sourceSlug: mention.sourceSlug,
+          weight: mention.weight ?? 25,
+        },
+      ],
+      mention.weight ?? 25,
+    );
+    if (ok) newlyQueued += 1;
+  }
+
+  if (input.scanExternal !== false) {
+    try {
+      const lineup = await scanFestivalLineups();
+      lineupHits = lineup.length;
+      const byVenue = new Map<string, string[]>();
+      for (const hit of lineup) {
+        const ok = queueMention(
+          file,
+          beforeSlugs,
+          // Lineup names should still become poll targets even if rostered —
+          // only skip exact promoted duplicates for queue counting.
+          new Set(),
+          hit.name,
+          [
+            {
+              kind: "lineup",
+              detail: hit.detail,
+              sourceSlug: hit.eventSlug,
+              weight: hit.weight,
+            },
+          ],
+          hit.weight,
+        );
+        if (ok) newlyQueued += 1;
+        const list = byVenue.get(hit.eventSlug) ?? [];
+        list.push(hit.name);
+        byVenue.set(hit.eventSlug, list);
+      }
+      for (const [venue, names] of byVenue) {
+        linkVenueArtists(relations, venue, names);
+        linkCohort(
+          relations,
+          names.slice(0, 40),
+          `${venue} lineup`,
+          20,
+          venue,
+        );
+      }
+    } catch (err) {
+      console.warn(
+        "[discovery] lineup scan failed:",
+        err instanceof Error ? err.message : err,
+      );
+    }
+
+    try {
+      const press = await scanPressSeeds();
+      pressHits = press.length;
+      const seenCohorts = new Set<string>();
+      for (const hit of press) {
+        const ok = queueMention(
+          file,
+          beforeSlugs,
+          new Set(),
+          hit.name,
+          [
+            {
+              kind: "press",
+              detail: hit.detail,
+              sourceSlug: hit.sourceUrl,
+              weight: hit.weight,
+            },
+          ],
+          hit.weight,
+        );
+        if (ok) newlyQueued += 1;
+        const key = hit.cohort.slice().sort().join("|");
+        if (!seenCohorts.has(key)) {
+          seenCohorts.add(key);
+          linkCohort(relations, hit.cohort, hit.detail, hit.weight, hit.sourceUrl);
+        }
+      }
+    } catch (err) {
+      console.warn(
+        "[discovery] press scan failed:",
+        err instanceof Error ? err.message : err,
+      );
+    }
   }
 
   const coplay = await rankCoplayArtists(prisma, {
@@ -125,8 +239,8 @@ export async function runDiscovery(
   }
 
   // Auto-promote: high score + resolvable YouTube or SoundCloud handle
-  const promoteScore = Number(process.env.DISCOVERY_PROMOTE_SCORE || 30);
-  const promoteCap = Number(process.env.DISCOVERY_PROMOTE_CAP || 12);
+  const promoteScore = Number(process.env.DISCOVERY_PROMOTE_SCORE || 28);
+  const promoteCap = Number(process.env.DISCOVERY_PROMOTE_CAP || 24);
   const promotable = file.candidates
     .filter(
       (c) =>
@@ -144,10 +258,14 @@ export async function runDiscovery(
   }
 
   saveCandidates(file);
+  saveRelations(relations);
+
+  const ensured = await ensureDiscoveredDjs(prisma);
 
   console.log(
     `[discovery] candidates=${file.candidates.length} new=${newlyQueued} ` +
-      `promoted=${promoted} coplay=${coplay.length}`,
+      `promoted=${promoted} coplay=${coplay.length} lineup=${lineupHits} ` +
+      `press=${pressHits} djs+${ensured.created}`,
   );
 
   return {
@@ -155,6 +273,9 @@ export async function runDiscovery(
     newlyQueued,
     promoted,
     coplayHits: coplay.length,
+    lineupHits,
+    pressHits,
+    djsEnsured: ensured.created,
   };
 }
 
