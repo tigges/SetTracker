@@ -47,6 +47,17 @@ export const YOUTUBE_PLAYLISTS: YoutubePlaylistSource[] = [
     minDurationSec: 30 * 60,
     titleMatch: /\b(stereohype|live|b2b|bucharest|set)\b/i,
   },
+  {
+    // David Guetta — Ultra Music Festival Miami long-form sets
+    playlist: "PLz1iM8YfFbTc1Tm-FJT15kj3g_RVIZbVW",
+    seriesName: "Ultra Miami",
+    eventSlug: "ultra-miami",
+    genre: "House",
+    accent: "#1e90ff",
+    limit: 20,
+    minDurationSec: 30 * 60,
+    titleMatch: /\b(ultra|miami|live|set|guetta|main\s*stage)\b/i,
+  },
 ];
 
 /** Adapt a playlist source to the venue candidate helpers. */

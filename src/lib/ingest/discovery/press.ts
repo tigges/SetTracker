@@ -60,9 +60,12 @@ export async function scanPressSeeds(): Promise<PressHit[]> {
   for (const seed of PRESS_SEEDS) {
     const weight = seed.weight ?? 40;
     const cohort = cohortOf(seed);
-    const scraped = await namesFromArticle(seed.url, cohort);
+    const scraped = seed.skipFetch
+      ? []
+      : await namesFromArticle(seed.url, cohort);
     const names = [...new Set([...cohort, ...scraped])];
-    console.log(`[press] ${seed.title}: ${names.join(", ")}`);
+    const tag = seed.kind === "tour" ? "tour" : "press";
+    console.log(`[${tag}] ${seed.title}: ${names.join(", ")}`);
     for (const name of names) {
       hits.push({
         name,

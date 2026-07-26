@@ -113,4 +113,14 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     type: "radio",
     seriesName: "Heldeep Radio",
   },
+  {
+    video: "https://www.youtube.com/watch?v=am7YNM3md2I",
+    primaryArtist: dj("ARTBAT", {
+      accent: "#6c63ff",
+      homeCity: "Kyiv, UA",
+    }),
+    genre: "Melodic Techno",
+    type: "festival",
+    title: "ARTBAT live set",
+  },
 ];

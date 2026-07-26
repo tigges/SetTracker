@@ -37,6 +37,24 @@ export const KNOWN_HANDLES: Record<string, HandleHint> = {
     genre: "Tech House",
     accent: "#00c2ff",
   },
+  "follow the fish": {
+    youtubeHandle: "@fisher",
+    soundcloudPermalink: "fish-tales",
+    genre: "Tech House",
+    accent: "#00c2ff",
+  },
+  artbat: {
+    youtubeHandle: "@ARTBAT",
+    soundcloudPermalink: "artbatmusic",
+    genre: "Melodic Techno",
+    accent: "#6c63ff",
+  },
+  "art bat": {
+    youtubeHandle: "@ARTBAT",
+    soundcloudPermalink: "artbatmusic",
+    genre: "Melodic Techno",
+    accent: "#6c63ff",
+  },
   "marten horger": {
     youtubeHandle: "@MARTENHORGER",
     soundcloudPermalink: "marten-horger",
