@@ -610,6 +610,8 @@ export async function runIngest(
           lineupHits: stats.discovery.lineupHits ?? after.lineupHits,
           pressHits: stats.discovery.pressHits ?? after.pressHits,
           djsEnsured: (stats.discovery.djsEnsured ?? 0) + after.djsEnsured,
+          venuesEnsured:
+            (stats.discovery.venuesEnsured ?? 0) + (after.venuesEnsured ?? 0),
         }
       : after;
   } catch (err) {

@@ -6,6 +6,11 @@
  * edc-las-vegas with zero website / zero discovery.
  */
 
+import {
+  inferDjMagClubEvent,
+  resolveDjMagClubByName,
+} from "./discovery/djmagClubs";
+
 export type EventSocials = {
   website?: string;
   soundcloud?: string;
@@ -147,6 +152,14 @@ export function resolveEvent(
       location: opts?.location || known.location,
     };
   }
+  const club = resolveDjMagClubByName(name);
+  if (club) {
+    return {
+      ...club,
+      kind: opts?.kind || club.kind,
+      location: opts?.location || club.location,
+    };
+  }
   return {
     slug,
     name: name.trim(),
@@ -156,8 +169,8 @@ export function resolveEvent(
 }
 
 /**
- * When a set title clearly names a festival, attach that Event instead of
- * (or ahead of) a generic livestream channel brand.
+ * When a set title clearly names a festival / top club, attach that Event
+ * instead of (or ahead of) a generic livestream channel brand.
  */
 export function inferFestivalEvent(title: string): CanonicalEvent | null {
   const t = title.replace(/\s+/g, " ").trim();
@@ -173,7 +186,7 @@ export function inferFestivalEvent(title: string): CanonicalEvent | null {
   if (/\blollapalooza\b/i.test(t)) return KNOWN_EVENTS.lollapalooza;
   if (/\bboiler\s*room\b/i.test(t)) return KNOWN_EVENTS["boiler-room"];
   if (/\bcercle\b/i.test(t)) return KNOWN_EVENTS.cercle;
-  return null;
+  return inferDjMagClubEvent(t);
 }
 
 export function eventSocialPayload(e: CanonicalEvent): EventSocials {

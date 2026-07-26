@@ -11,8 +11,8 @@ export default async function VenuesPage() {
         <p className="eyebrow">Places &amp; platforms</p>
         <h1 className="mt-1 text-3xl font-extrabold tracking-tight">Venues</h1>
         <p className="mt-2 max-w-2xl text-[14px] text-muted">
-          Festivals, clubs and livestream channels that host sets — separate from
-          DJs, labels and radio series.
+          Festivals, livestream channels, and DJ Mag Top 100 Clubs — separate
+          from DJs, labels and radio series.
         </p>
       </div>
 

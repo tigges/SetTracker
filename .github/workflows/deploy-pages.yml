@@ -160,7 +160,7 @@ jobs:
         env:
           GITHUB_PAGES: "true"
           PAGES_BASE_PATH: "/SetTracker"
-          NEXT_PUBLIC_APP_VERSION: "0.2.4"
+          NEXT_PUBLIC_APP_VERSION: "0.2.5"
           NEXT_PUBLIC_GIT_SHA: ${{ github.sha }}
         run: npm run build
 

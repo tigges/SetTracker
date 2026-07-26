@@ -5,6 +5,7 @@ import { slugify } from "../types";
 import { YOUTUBE_ARTIST_CHANNELS } from "../youtube/artists";
 import { YOUTUBE_SETS } from "../youtube/videos";
 import { rankCoplayArtists } from "./coplay";
+import { ensureDjMagVenues } from "./djmagClubs";
 import { ensureDiscoveredDjs } from "./ensureDjs";
 import { hintForName } from "./knownHandles";
 import { scanFestivalLineups } from "./lineup";
@@ -37,6 +38,7 @@ export type DiscoveryStats = {
   lineupHits: number;
   pressHits: number;
   djsEnsured: number;
+  venuesEnsured: number;
 };
 
 function seedSlugs(): Set<string> {
@@ -111,6 +113,7 @@ export async function runDiscovery(
   let promoted = 0;
   let lineupHits = 0;
   let pressHits = 0;
+  let venuesEnsured = 0;
 
   const relations = loadRelations();
 
@@ -134,6 +137,16 @@ export async function runDiscovery(
   }
 
   if (input.scanExternal !== false) {
+    try {
+      const clubs = await ensureDjMagVenues(prisma);
+      venuesEnsured = clubs.created + clubs.updated;
+    } catch (err) {
+      console.warn(
+        "[discovery] djmag clubs failed:",
+        err instanceof Error ? err.message : err,
+      );
+    }
+
     try {
       const lineup = await scanFestivalLineups();
       lineupHits = lineup.length;
@@ -265,7 +278,7 @@ export async function runDiscovery(
   console.log(
     `[discovery] candidates=${file.candidates.length} new=${newlyQueued} ` +
       `promoted=${promoted} coplay=${coplay.length} lineup=${lineupHits} ` +
-      `press=${pressHits} djs+${ensured.created}`,
+      `press=${pressHits} djs+${ensured.created} venues+${venuesEnsured}`,
   );
 
   return {
@@ -276,6 +289,7 @@ export async function runDiscovery(
     lineupHits,
     pressHits,
     djsEnsured: ensured.created,
+    venuesEnsured,
   };
 }
 
