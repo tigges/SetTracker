@@ -61,6 +61,39 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     eventName: "SYNC London",
   },
   {
+    video: "https://www.youtube.com/watch?v=i9cNYaOOdwA",
+    primaryArtist: dj("James Hype", {
+      accent: "#ff3d6e",
+      homeCity: "Liverpool, UK",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    title: "James Hype live at STEREOHYPE Bucharest, Romania 2023",
+    seriesName: "STEREOHYPE",
+    eventName: "STEREOHYPE Bucharest",
+  },
+  {
+    video: "https://www.youtube.com/watch?v=HTR2M4QdorM",
+    primaryArtist: dj("James Hype", {
+      accent: "#ff3d6e",
+      homeCity: "Liverpool, UK",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    title: "James Hype B2B Tita Lau live at STEREOHYPE Bucharest, Romania 2023",
+    seriesName: "STEREOHYPE",
+    eventName: "STEREOHYPE Bucharest",
+  },
+  {
+    video: "https://www.youtube.com/watch?v=mTGTcuaGhls",
+    primaryArtist: dj("Tita Lau", { accent: "#ff8fab" }),
+    genre: "Tech House",
+    type: "festival",
+    title: "Tita Lau live from STEREOHYPE | Laminor Arena - Bucharest, Romania 2023",
+    seriesName: "STEREOHYPE",
+    eventName: "STEREOHYPE Bucharest",
+  },
+  {
     video: "https://www.youtube.com/watch?v=EXKpyYAXtyw",
     primaryArtist: dj("Chris Lake", {
       accent: "#3d8bfd",

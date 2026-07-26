@@ -42,6 +42,26 @@ assert.equal(
   false,
 );
 
+const stereohype = YOUTUBE_VENUES.find((v) => v.seriesName === "STEREOHYPE")!;
+assert.equal(
+  isVenueSetCandidate(
+    "R3WIRE - House & Tech Live on STEREOHYPE | 2nd December 2023",
+    3702,
+    stereohype,
+  ),
+  true,
+);
+assert.equal(
+  isVenueSetCandidate("James Hype - Trigger Finger [STEREOHYPE]", 121, stereohype),
+  false,
+);
+assert.equal(
+  artistFromVenueTitle(
+    "James Hype B2B Tita Lau live at STEREOHYPE Bucharest, Romania 2023",
+  ),
+  "James Hype b2b Tita Lau",
+);
+
 const mixmag = YOUTUBE_VENUES.find((v) => v.seriesName === "Mixmag")!;
 assert.equal(isVenueSetCandidate("Kyle Starkey | Mixmag Lab London", 3600, mixmag), true);
 assert.equal(isVenueSetCandidate("Festival Aftermovie 2026", 3600, mixmag), false);

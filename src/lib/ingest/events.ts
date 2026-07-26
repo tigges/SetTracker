@@ -120,6 +120,15 @@ export const KNOWN_EVENTS: Record<string, CanonicalEvent> = {
     instagram: "https://www.instagram.com/ushuaiaibiza/",
     twitter: "https://twitter.com/ushuaiaibiza",
   },
+  stereohype: {
+    slug: "stereohype",
+    name: "STEREOHYPE",
+    kind: "livestream",
+    location: "London, UK",
+    website: "https://www.stereohype.com/",
+    soundcloud: "https://soundcloud.com/stereohypeglobal",
+    instagram: "https://www.instagram.com/stereohype/",
+  },
 };
 
 /** Alternate name/slug keys → canonical slug. */
@@ -140,6 +149,8 @@ const ALIAS_TO_SLUG: Record<string, string> = {
   ushuaia: "ushuaia-ibiza",
   "ushuaia-ibiza": "ushuaia-ibiza",
   "ushuaiaibiza": "ushuaia-ibiza",
+  stereohype: "stereohype",
+  "stereo-hype": "stereohype",
 };
 
 function keyOf(name: string): string {
@@ -201,6 +212,7 @@ export function inferFestivalEvent(title: string): CanonicalEvent | null {
   if (/\bcercle\b/i.test(t)) return KNOWN_EVENTS.cercle;
   // Prefer curated Ushuaïa socials over DJ Mag profile URL.
   if (/\bushua[iï]a\b/i.test(t)) return KNOWN_EVENTS["ushuaia-ibiza"];
+  if (/\bstereo\s*hype\b/i.test(t)) return KNOWN_EVENTS.stereohype;
   return inferDjMagClubEvent(t) ?? inferListClubEvent(t);
 }
 
