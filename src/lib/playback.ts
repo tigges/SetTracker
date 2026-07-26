@@ -25,7 +25,11 @@ export function detectPlaybackHost(
   if (!url) return null;
   try {
     const host = new URL(url).hostname.replace(/^www\./, "").toLowerCase();
-    if (host === "soundcloud.com" || host === "w.soundcloud.com") {
+    if (
+      host === "soundcloud.com" ||
+      host === "w.soundcloud.com" ||
+      host === "api.soundcloud.com"
+    ) {
       return "soundcloud";
     }
     if (

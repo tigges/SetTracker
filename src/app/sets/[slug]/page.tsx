@@ -144,11 +144,13 @@ export default async function SetPage({
           </div>
           {(set.sourceName === "SoundCloud" ||
             set.sourceName === "hearthis.at" ||
-            set.sourceName === "YouTube") && (
+            set.sourceName === "YouTube" ||
+            set.sourceName === "Insomniac") && (
             <p className="mt-2 max-w-xl text-[12px] text-muted2">
-              Tracklist comes from the source description, timed comments, or
-              YouTube Music song credits — often partial / untimed. Suggest an
-              ID on unresolved rows to fill gaps.
+              Tracklist comes from the source description, timed comments,
+              Insomniac Night Owl Radio pages, or YouTube Music song credits —
+              often partial / untimed. Suggest an ID on unresolved rows to fill
+              gaps.
             </p>
           )}
 
