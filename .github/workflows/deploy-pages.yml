@@ -94,7 +94,9 @@ jobs:
         run: npm run thumbs
 
       - name: Verify social / website URLs
-        if: env.INGEST_MODE == 'deep'
+        # Deep: probe + curated fixes. Fast: curated fixes only (Divided Souls etc.).
+        env:
+          VERIFY_URLS_CURATED_ONLY: ${{ env.INGEST_MODE == 'fast' && '1' || '0' }}
         run: npm run verify-urls
 
       - name: Save catalog DB for fast push deploys
