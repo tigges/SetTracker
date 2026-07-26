@@ -119,6 +119,82 @@ export async function fetchTrackComments(
   return data.collection ?? [];
 }
 
+export type ScPlaylist = {
+  id: number;
+  kind?: string;
+  title?: string;
+  permalink_url?: string;
+  track_count?: number;
+  tracks?: Array<ScTrack | { id: number }>;
+};
+
+/** Resolve a playlist URL / numeric id via api-v2. */
+export async function resolvePlaylist(
+  playlistUrlOrId: string,
+): Promise<ScPlaylist> {
+  const raw = playlistUrlOrId.trim();
+  if (/^\d+$/.test(raw)) {
+    return scGet<ScPlaylist>(`/playlists/${raw}?representation=full`);
+  }
+  const url = raw.startsWith("http")
+    ? raw
+    : `https://soundcloud.com/${raw.replace(/^\//, "")}`;
+  const resolved = await scGet<ScPlaylist>(
+    `/resolve?url=${encodeURIComponent(url)}`,
+  );
+  if (resolved.kind && resolved.kind !== "playlist") {
+    throw new Error(`SoundCloud resolve is ${resolved.kind}, not playlist`);
+  }
+  return resolved;
+}
+
+/** Batch-hydrate track stubs (playlist entries often omit title/duration). */
+export async function fetchTracksByIds(ids: number[]): Promise<ScTrack[]> {
+  const unique = [...new Set(ids.filter((n) => Number.isFinite(n) && n > 0))];
+  const out: ScTrack[] = [];
+  for (let i = 0; i < unique.length; i += 50) {
+    const batch = unique.slice(i, i + 50);
+    if (batch.length === 0) continue;
+    const data = await scGet<ScTrack[] | ScCollection<ScTrack>>(
+      `/tracks?ids=${batch.join(",")}`,
+    );
+    const list = Array.isArray(data) ? data : (data.collection ?? []);
+    out.push(...list);
+    if (i + 50 < unique.length) await sleep(80);
+  }
+  return out;
+}
+
+/**
+ * Fetch playlist tracks (hydrated). Caps at `limit` in playlist order.
+ */
+export async function fetchPlaylistTracks(
+  playlistUrlOrId: string,
+  limit = 80,
+): Promise<ScTrack[]> {
+  const pl = await resolvePlaylist(playlistUrlOrId);
+  const stubs = pl.tracks ?? [];
+  const orderedIds = stubs
+    .map((t) => ("id" in t ? t.id : 0))
+    .filter((id) => id > 0)
+    .slice(0, limit);
+
+  // Prefer already-hydrated rows; fill gaps via /tracks?ids=
+  const byId = new Map<number, ScTrack>();
+  for (const t of stubs) {
+    if ("title" in t && t.title && "id" in t) {
+      byId.set(t.id, t as ScTrack);
+    }
+  }
+  const missing = orderedIds.filter((id) => !byId.has(id));
+  if (missing.length > 0) {
+    const hydrated = await fetchTracksByIds(missing);
+    for (const t of hydrated) byId.set(t.id, t);
+  }
+
+  return orderedIds.map((id) => byId.get(id)).filter(Boolean) as ScTrack[];
+}
+
 export function sleep(ms: number): Promise<void> {
   return new Promise((r) => setTimeout(r, ms));
 }
