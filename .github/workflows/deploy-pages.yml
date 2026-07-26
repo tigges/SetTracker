@@ -1,39 +1,34 @@
 name: Deploy to GitHub Pages
 
-# Push = fast path (no crawl). Catalog refresh = schedule / manual only.
+# Push = fast path only (restore cached catalog, no crawl).
+# Deep catalog refresh lives in catalog-deep.yml (separate concurrency group).
 on:
   push:
     branches: [main]
-  schedule:
-    - cron: "0 */6 * * *"
   workflow_dispatch:
     inputs:
       mode:
-        description: "push-speed (no crawl) or deep catalog refresh"
+        description: "Fast ship from cached catalog (deep crawl is Catalog deep refresh)"
         required: true
-        default: "deep"
+        default: "fast"
         type: choice
         options:
           - fast
-          - deep
 
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Fast push deploys cancel an in-flight deep crawl so review isn't blocked.
-# Deep/schedule never cancels a fast deploy already shipping the site.
 concurrency:
   group: pages
-  cancel-in-progress: ${{ github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.mode == 'fast') }}
+  cancel-in-progress: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      # Only cron + manual "deep" crawl the web. Everything else is instant.
-      INGEST_MODE: ${{ github.event_name == 'schedule' && 'deep' || github.event_name == 'workflow_dispatch' && inputs.mode || 'fast' }}
+      INGEST_MODE: fast
     steps:
       - uses: actions/checkout@v4
 
@@ -48,7 +43,6 @@ jobs:
       - name: Generate Prisma client
         run: npx prisma generate
 
-      # Persist discovery graph across deep runs (candidates grow each crawl).
       - name: Restore discovery candidate graph
         uses: actions/cache/restore@v4
         with:
@@ -57,6 +51,7 @@ jobs:
             data/artist-relations.json
             data/venue-candidates.json
             data/roster-graduates.json
+            data/soundcloud-poll-state.json
           key: setradar-discovery-${{ github.run_id }}
           restore-keys: |
             setradar-discovery-
@@ -65,7 +60,7 @@ jobs:
       # NOTE: actions/cache sets cache-hit=true only on exact key match. Restore-key
       # hits leave cache-hit=false even when prisma/dev.db was restored — never use
       # cache-hit alone to decide whether to seed (that wiped 270→42 sets).
-      - name: Restore last catalog DB (skip crawl on push)
+      - name: Restore last catalog DB
         id: dbcache
         uses: actions/cache/restore@v4
         with:
@@ -74,96 +69,34 @@ jobs:
           restore-keys: |
             setradar-db-
 
-      - name: Require restored catalog on fast path
-        if: env.INGEST_MODE == 'fast'
+      - name: Require restored catalog
         run: |
           if [ ! -f prisma/dev.db ]; then
-            echo "::error::No catalog DB in Actions cache. Re-run Actions → Deploy → mode=deep."
+            echo "::error::No catalog DB in Actions cache. Run Actions → Catalog deep refresh."
             exit 1
           fi
-          # Apply migrations onto the restored catalog (not an empty file).
           npx prisma migrate deploy
-          # "Set" must be quoted — Set is a reserved word in SQLite.
           SETS=$(python3 -c "import sqlite3; print(sqlite3.connect('prisma/dev.db').execute('select count(*) from \"Set\"').fetchone()[0])")
           echo "Restored catalog sets=$SETS (cache-hit=${{ steps.dbcache.outputs.cache-hit }} matched=${{ steps.dbcache.outputs.cache-matched-key }})"
           if [ "${SETS:-0}" -lt 50 ]; then
-            echo "::error::Restored catalog has only $SETS sets (expected 50+). Refusing mock seed. Re-run deep deploy."
+            echo "::error::Restored catalog has only $SETS sets (expected 50+). Run Catalog deep refresh."
             exit 1
           fi
 
-      - name: Seed before deep crawl
-        if: env.INGEST_MODE == 'deep'
-        run: |
-          # Fresh schema + artist skeleton; ingest fills real sets.
-          rm -f prisma/dev.db prisma/dev.db-journal
-          npx prisma migrate deploy
-          npx prisma db seed
-
-      - name: Deep crawl (schedule / manual only)
-        if: env.INGEST_MODE == 'deep'
-        env:
-          YOUTUBE_ARTIST_VIDEO_LIMIT: "40"
-          YOUTUBE_ARTIST_VIDEO_LIMIT_HIGH: "60"
-          YOUTUBE_VENUE_VIDEO_LIMIT: "35"
-          YOUTUBE_CONTINUATION_PAGES: "3"
-          # Related / Fans also like / Spotlight expansion
-          YOUTUBE_RELATED_PER_VIDEO: "4"
-          YOUTUBE_RELATED_GLOBAL_CAP: "48"
-          YOUTUBE_SHELF_VIDEO_CAP: "12"
-          YOUTUBE_SIMILAR_CHANNEL_CAP: "24"
-          SOUNDCLOUD_ARTIST_TRACK_LIMIT: "50"
-          # Expand artist graph each deep run (lineup/press/B2B → promote → poll).
-          DISCOVERY_PROMOTE_SCORE: "28"
-          DISCOVERY_PROMOTE_CAP: "48"
-        run: npm run ingest
-
-      - name: Graduate promoted artists into roster
-        if: env.INGEST_MODE == 'deep'
-        env:
-          DISCOVERY_GRADUATE_SCORE: "40"
-          DISCOVERY_GRADUATE_CAP: "20"
-        run: npm run graduate-roster
-
-      - name: Resolve artwork + track meta (Deezer / MusicBrainz)
-        if: env.INGEST_MODE == 'deep'
-        env:
-          THUMBS_MB_LIMIT: "60"
-        run: npm run thumbs
-
-      - name: Fill missing thumbs only (fast path)
-        if: env.INGEST_MODE == 'fast'
+      - name: Fill missing thumbs only
         env:
           THUMBS_DELAY_MS: "80"
           THUMBS_NULL_ONLY: "1"
+          THUMBS_MB_LIMIT: "0"
         run: npm run thumbs
 
-      - name: Verify social / website URLs
-        # Deep: probe + curated fixes. Fast: curated fixes only (Divided Souls etc.).
+      - name: Apply curated URL fixes
         env:
-          VERIFY_URLS_CURATED_ONLY: ${{ env.INGEST_MODE == 'fast' && '1' || '0' }}
+          VERIFY_URLS_CURATED_ONLY: "1"
         run: npm run verify-urls
 
-      - name: Save catalog DB for fast push deploys
-        if: env.INGEST_MODE == 'deep'
-        uses: actions/cache/save@v4
-        with:
-          path: prisma/dev.db
-          key: setradar-db-${{ github.run_id }}
-
-      - name: Save discovery candidate graph
-        if: env.INGEST_MODE == 'deep'
-        uses: actions/cache/save@v4
-        with:
-          path: |
-            data/artist-candidates.json
-            data/artist-relations.json
-            data/venue-candidates.json
-            data/roster-graduates.json
-          key: setradar-discovery-${{ github.run_id }}
-
-      # Also refresh cache after a good fast deploy so the key stays warm.
-      - name: Re-save catalog DB after fast path
-        if: env.INGEST_MODE == 'fast'
+      # Keep the cache key warm after light enrich (catalog-deep remains the heavy writer).
+      - name: Re-save catalog DB
         uses: actions/cache/save@v4
         with:
           path: prisma/dev.db
@@ -178,7 +111,7 @@ jobs:
         env:
           GITHUB_PAGES: "true"
           PAGES_BASE_PATH: "/SetTracker"
-          NEXT_PUBLIC_APP_VERSION: "0.2.10"
+          NEXT_PUBLIC_APP_VERSION: "0.2.11"
           NEXT_PUBLIC_GIT_SHA: ${{ github.sha }}
         run: npm run build
 
@@ -192,7 +125,6 @@ jobs:
           test -d out/sets
           test -d out/djs
           test -d out/venues
-          # Guard: static export must include a real catalog, not mock seed (~42 sets)
           SET_PAGES=$(find out/sets -mindepth 1 -maxdepth 1 -type d ! -name '_placeholder' | wc -l)
           echo "Exported set pages: $SET_PAGES"
           if [ "$SET_PAGES" -lt 50 ]; then

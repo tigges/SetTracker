@@ -1,0 +1,204 @@
+name: Catalog deep refresh
+
+# Heavy crawl — separate from push deploys so code review stays fast.
+# Saves prisma/dev.db + discovery graph for the Pages deploy workflow.
+on:
+  schedule:
+    - cron: "0 */6 * * *"
+  workflow_dispatch:
+    inputs:
+      bootstrap:
+        description: "Wipe DB and re-seed before crawl (emergency only)"
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: catalog
+  cancel-in-progress: false
+
+jobs:
+  catalog:
+    runs-on: ubuntu-latest
+    env:
+      INGEST_MODE: deep
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate Prisma client
+        run: npx prisma generate
+
+      - name: Restore discovery + poll state
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            data/artist-candidates.json
+            data/artist-relations.json
+            data/venue-candidates.json
+            data/roster-graduates.json
+            data/soundcloud-poll-state.json
+          key: setradar-discovery-${{ github.run_id }}
+          restore-keys: |
+            setradar-discovery-
+
+      - name: Restore last catalog DB
+        id: dbcache
+        uses: actions/cache/restore@v4
+        with:
+          path: prisma/dev.db
+          key: setradar-db-${{ github.run_id }}
+          restore-keys: |
+            setradar-db-
+
+      - name: Prepare catalog (incremental or bootstrap)
+        env:
+          FORCE_BOOTSTRAP: ${{ inputs.bootstrap == true && '1' || '0' }}
+        run: |
+          set -euo pipefail
+          BOOTSTRAP=0
+          if [ "$FORCE_BOOTSTRAP" = "1" ]; then
+            echo "Manual bootstrap requested"
+            BOOTSTRAP=1
+          elif [ ! -f prisma/dev.db ]; then
+            echo "No catalog DB in cache — bootstrapping"
+            BOOTSTRAP=1
+          else
+            npx prisma migrate deploy
+            SETS=$(python3 -c "import sqlite3; print(sqlite3.connect('prisma/dev.db').execute('select count(*) from \"Set\"').fetchone()[0])")
+            echo "Restored catalog sets=$SETS (matched=${{ steps.dbcache.outputs.cache-matched-key }})"
+            if [ "${SETS:-0}" -lt 50 ]; then
+              echo "Catalog too small ($SETS) — bootstrapping"
+              BOOTSTRAP=1
+            else
+              echo "Incremental deep — keeping restored catalog (sourceHash skips unchanged sets)"
+            fi
+          fi
+
+          if [ "$BOOTSTRAP" = "1" ]; then
+            rm -f prisma/dev.db prisma/dev.db-journal
+            npx prisma migrate deploy
+            npx prisma db seed
+          fi
+
+      - name: Deep crawl (incremental)
+        env:
+          INGEST_SKIP_VERIFY: "1"
+          YOUTUBE_ARTIST_VIDEO_LIMIT: "30"
+          YOUTUBE_ARTIST_VIDEO_LIMIT_HIGH: "45"
+          YOUTUBE_VENUE_VIDEO_LIMIT: "25"
+          YOUTUBE_CONTINUATION_PAGES: "2"
+          YOUTUBE_RELATED_PER_VIDEO: "2"
+          YOUTUBE_RELATED_GLOBAL_CAP: "24"
+          YOUTUBE_SHELF_VIDEO_CAP: "8"
+          YOUTUBE_SIMILAR_CHANNEL_CAP: "12"
+          SOUNDCLOUD_ARTIST_TRACK_LIMIT: "40"
+          DISCOVERY_PROMOTE_SCORE: "28"
+          DISCOVERY_PROMOTE_CAP: "48"
+        run: npm run ingest
+
+      - name: Graduate promoted artists into roster
+        env:
+          DISCOVERY_GRADUATE_SCORE: "40"
+          DISCOVERY_GRADUATE_CAP: "20"
+        run: npm run graduate-roster
+
+      # Hot path: fill missing art only. Full DJ refresh + MusicBrainz → weekly enrich.
+      - name: Resolve missing artwork (incremental)
+        env:
+          THUMBS_DELAY_MS: "100"
+          THUMBS_NULL_ONLY: "1"
+          THUMBS_MB_LIMIT: "0"
+        run: npm run thumbs
+
+      - name: Verify social / website URLs (once)
+        env:
+          VERIFY_URLS_CURATED_ONLY: "0"
+        run: npm run verify-urls
+
+      - name: Guard catalog size
+        run: |
+          SETS=$(python3 -c "import sqlite3; print(sqlite3.connect('prisma/dev.db').execute('select count(*) from \"Set\"').fetchone()[0])")
+          echo "Catalog sets=$SETS"
+          if [ "${SETS:-0}" -lt 50 ]; then
+            echo "::error::Deep crawl left only $SETS sets — refusing to save/deploy."
+            exit 1
+          fi
+
+      - name: Save catalog DB
+        uses: actions/cache/save@v4
+        with:
+          path: prisma/dev.db
+          key: setradar-db-${{ github.run_id }}
+
+      - name: Save discovery + poll state
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            data/artist-candidates.json
+            data/artist-relations.json
+            data/venue-candidates.json
+            data/roster-graduates.json
+            data/soundcloud-poll-state.json
+          key: setradar-discovery-${{ github.run_id }}
+
+      # Ship the refreshed catalog so the live site updates without waiting for a push.
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - name: Build static export
+        env:
+          GITHUB_PAGES: "true"
+          PAGES_BASE_PATH: "/SetTracker"
+          NEXT_PUBLIC_APP_VERSION: "0.2.11"
+          NEXT_PUBLIC_GIT_SHA: ${{ github.sha }}
+        run: npm run build
+
+      - name: Verify export is the app
+        run: |
+          test -f out/index.html
+          grep -qi "setradar" out/index.html
+          grep -qi "SETRADAR" out/index.html
+          test ! -d out/cache
+          test ! -d out/server
+          test -d out/sets
+          SET_PAGES=$(find out/sets -mindepth 1 -maxdepth 1 -type d ! -name '_placeholder' | wc -l)
+          echo "Exported set pages: $SET_PAGES"
+          if [ "$SET_PAGES" -lt 50 ]; then
+            echo "::error::Export only has $SET_PAGES set pages — refusing to deploy."
+            exit 1
+          fi
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: out
+
+  deploy:
+    needs: catalog
+    runs-on: ubuntu-latest
+    # Share the Pages deploy lock with push deploys; never cancel the crawl job.
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
