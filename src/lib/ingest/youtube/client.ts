@@ -260,25 +260,25 @@ export function sleep(ms: number): Promise<void> {
   return new Promise((r) => setTimeout(r, ms));
 }
 
-/**
- * Recent uploads from a YouTube channel videos tab (no API key).
- * Returns video IDs in page order (newest-first when the tab hydrates).
- */
-export async function fetchChannelVideoIds(
-  handleOrUrl: string,
-  limit = 12,
-): Promise<string[]> {
+function channelBase(handleOrUrl: string): string {
   const handle = handleOrUrl.trim();
-  let url: string;
-  if (handle.startsWith("http")) {
-    url = handle.includes("/videos")
-      ? handle
-      : `${handle.replace(/\/$/, "")}/videos`;
-  } else {
-    const h = handle.startsWith("@") ? handle : `@${handle}`;
-    url = `https://www.youtube.com/${h}/videos`;
-  }
+  if (handle.startsWith("http")) return handle.replace(/\/$/, "");
+  const h = handle.startsWith("@") ? handle : `@${handle}`;
+  return `https://www.youtube.com/${h}`;
+}
 
+function uniqueIds(ids: string[], limit: number, seen: Set<string>): string[] {
+  const out: string[] = [];
+  for (const id of ids) {
+    if (seen.has(id)) continue;
+    seen.add(id);
+    out.push(id);
+    if (seen.size >= limit) break;
+  }
+  return out;
+}
+
+async function fetchChannelTabHtml(url: string): Promise<string> {
   const res = await fetch(url, {
     headers: {
       "User-Agent": UA,
@@ -288,15 +288,146 @@ export async function fetchChannelVideoIds(
     signal: AbortSignal.timeout(25_000),
   });
   if (!res.ok) throw new Error(`YouTube channel HTTP ${res.status} for ${url}`);
-  const html = await res.text();
+  return res.text();
+}
+
+async function browseContinuation(
+  apiKey: string,
+  continuation: string,
+): Promise<{ ids: string[]; next: string | null }> {
+  const res = await fetch(
+    `https://www.youtube.com/youtubei/v1/browse?prettyPrint=false&key=${apiKey}`,
+    {
+      method: "POST",
+      headers: {
+        "User-Agent": UA,
+        "Content-Type": "application/json",
+        "Accept-Language": "en-US,en;q=0.9",
+      },
+      body: JSON.stringify({
+        context: {
+          client: {
+            clientName: "WEB",
+            clientVersion: "2.20240725.01.00",
+            hl: "en",
+            gl: "US",
+          },
+        },
+        continuation,
+      }),
+      signal: AbortSignal.timeout(25_000),
+    },
+  );
+  if (!res.ok) return { ids: [], next: null };
+  const text = await res.text();
+  const ids = [...text.matchAll(/"videoId":"([\w-]{11})"/g)].map((m) => m[1]);
+  const next =
+    text.match(/"continuationCommand":\{"token":"([^"]+)"/)?.[1] ?? null;
+  return { ids, next };
+}
+
+/**
+ * Recent uploads from a YouTube channel videos tab (no API key).
+ * Returns video IDs in page order (newest-first when the tab hydrates).
+ */
+export async function fetchChannelVideoIds(
+  handleOrUrl: string,
+  limit = 12,
+): Promise<string[]> {
+  const url = `${channelBase(handleOrUrl)}/videos`;
+  const html = await fetchChannelTabHtml(url);
   const ids = [...html.matchAll(/"videoId":"([\w-]{11})"/g)].map((m) => m[1]);
-  const unique: string[] = [];
   const seen = new Set<string>();
-  for (const id of ids) {
-    if (seen.has(id)) continue;
-    seen.add(id);
-    unique.push(id);
-    if (unique.length >= limit) break;
+  return uniqueIds(ids, limit, seen);
+}
+
+/**
+ * Deep channel scan: /videos + /streams, with Innertube continuation pages.
+ * Aimed at pulling a near-complete recent catalog of long-form uploads.
+ */
+export async function fetchChannelVideoIdsDeep(
+  handleOrUrl: string,
+  limit = 80,
+): Promise<string[]> {
+  if (!handleOrUrl?.trim()) return [];
+  const base = channelBase(handleOrUrl);
+  const seen = new Set<string>();
+  const out: string[] = [];
+
+  const tabs = [`${base}/videos`, `${base}/streams`];
+  let apiKey: string | null = null;
+  let continuation: string | null = null;
+
+  for (const tab of tabs) {
+    if (out.length >= limit) break;
+    try {
+      const html = await fetchChannelTabHtml(tab);
+      await sleep(150);
+      if (!apiKey) {
+        apiKey = html.match(/"INNERTUBE_API_KEY":"([^"]+)"/)?.[1] ?? null;
+      }
+      if (!continuation) {
+        continuation =
+          html.match(/"continuationCommand":\{"token":"([^"]+)"/)?.[1] ?? null;
+      }
+      const ids = [...html.matchAll(/"videoId":"([\w-]{11})"/g)].map((m) => m[1]);
+      out.push(...uniqueIds(ids, limit - out.length, seen));
+    } catch (err) {
+      console.warn(
+        `[youtube] tab ${tab}:`,
+        err instanceof Error ? err.message : err,
+      );
+    }
   }
-  return unique;
+
+  // Paginate the videos tab continuation until we hit the limit.
+  let pages = 0;
+  const maxPages = Number(process.env.YOUTUBE_CONTINUATION_PAGES || 4);
+  while (
+    apiKey &&
+    continuation &&
+    out.length < limit &&
+    pages < maxPages
+  ) {
+    pages += 1;
+    try {
+      const page = await browseContinuation(apiKey, continuation);
+      await sleep(150);
+      out.push(...uniqueIds(page.ids, limit - out.length, seen));
+      continuation = page.next;
+      if (!page.ids.length) break;
+    } catch (err) {
+      console.warn(
+        `[youtube] continuation failed:`,
+        err instanceof Error ? err.message : err,
+      );
+      break;
+    }
+  }
+
+  return out;
+}
+
+/** Extract outbound social links from a channel About page. */
+export async function fetchChannelSocialLinks(
+  handleOrUrl: string,
+): Promise<string[]> {
+  if (!handleOrUrl?.trim()) return [];
+  const url = `${channelBase(handleOrUrl)}/about`;
+  try {
+    const html = await fetchChannelTabHtml(url);
+    const escaped = [
+      ...html.matchAll(
+        /https?:\\\/\\\/(?:www\.)?(soundcloud\.com|instagram\.com|x\.com|twitter\.com|linktr\.ee|tiktok\.com|facebook\.com)[^"\\]*/gi,
+      ),
+    ].map((m) => m[0].replace(/\\\//g, "/"));
+    const plain = [
+      ...html.matchAll(
+        /https?:\/\/(?:www\.)?(soundcloud\.com|instagram\.com|x\.com|twitter\.com|linktr\.ee)[^\s"\\<]+/gi,
+      ),
+    ].map((m) => m[0].replace(/[),.;]+$/, ""));
+    return [...new Set([...escaped, ...plain])];
+  } catch {
+    return [];
+  }
 }

@@ -17,7 +17,7 @@ import {
   type YoutubeArtistChannel,
 } from "./artists";
 import {
-  fetchChannelVideoIds,
+  fetchChannelVideoIdsDeep,
   fetchWatchMeta,
   sleep,
   type YtMusicCredit,
@@ -238,8 +238,9 @@ async function pollChannelVideos(
 ): Promise<void> {
   let ids: string[] = [];
   try {
-    ids = await fetchChannelVideoIds(channel, limit);
-    await sleep(300);
+    ids = await fetchChannelVideoIdsDeep(channel, limit);
+    console.log(`[youtube] deep-scan ${label}: ${ids.length} video ids`);
+    await sleep(200);
   } catch (err) {
     console.warn(
       `[youtube] channel ${label}:`,
@@ -251,7 +252,7 @@ async function pollChannelVideos(
     if (seen.has(`yt-${id}`)) continue;
     try {
       const raw = await handler(id);
-      await sleep(250);
+      await sleep(200);
       if (!raw || seen.has(raw.sourceSlug)) continue;
       seen.add(raw.sourceSlug);
       out.push(raw);

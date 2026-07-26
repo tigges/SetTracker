@@ -41,8 +41,14 @@ jobs:
           npx prisma migrate deploy
           npx prisma db seed
 
-      # SoundCloud ingest only — mock seed sets and topDjs synthetics stay off.
+      # Deep-scan roster artists (YT videos+streams+continuation, SC tracks).
       - name: Crawl sources for new sets & DJs
+        env:
+          YOUTUBE_ARTIST_VIDEO_LIMIT: "40"
+          YOUTUBE_ARTIST_VIDEO_LIMIT_HIGH: "60"
+          YOUTUBE_VENUE_VIDEO_LIMIT: "35"
+          YOUTUBE_CONTINUATION_PAGES: "3"
+          SOUNDCLOUD_ARTIST_TRACK_LIMIT: "50"
         run: npm run ingest
 
       - name: Resolve artwork thumbnails (Deezer)

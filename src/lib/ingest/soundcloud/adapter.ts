@@ -33,7 +33,7 @@ import {
   type PollStateFile,
 } from "./pollState";
 import {
-  SOUNDCLOUD_SHOWS,
+  allSoundcloudShows,
   inferSeriesName,
   isSetCandidate,
   type SoundCloudShow,
@@ -163,7 +163,7 @@ async function withPromotedShows(
 }
 
 export function createSoundCloudAdapter(
-  shows: SoundCloudShow[] = SOUNDCLOUD_SHOWS,
+  shows: SoundCloudShow[] = allSoundcloudShows(),
 ): SourceAdapter {
   return {
     id: "soundcloud",
