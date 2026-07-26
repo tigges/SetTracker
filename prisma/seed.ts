@@ -73,7 +73,14 @@ async function main() {
   ];
   const labels: Record<string, string> = {};
   for (const [slug, name, color] of labelData) {
-    const l = await prisma.label.create({ data: { slug, name, color, ...labelSocials(name) } });
+    // Prefer slug lookup so "divided" hits curated Divided Souls URLs.
+    const socials = {
+      ...labelSocials(name),
+      ...(labelSocials(slug).website ? labelSocials(slug) : {}),
+    };
+    const l = await prisma.label.create({
+      data: { slug, name, color, ...socials },
+    });
     labels[slug] = l.id;
   }
 

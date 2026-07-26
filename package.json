@@ -1,6 +1,6 @@
 {
   "name": "setradar",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "prisma": {
     "seed": "tsx prisma/seed.ts"
@@ -17,6 +17,7 @@
     "db:setup": "prisma migrate deploy && prisma db seed",
     "ingest": "tsx prisma/ingest.ts",
     "crosslink": "tsx prisma/crosslink.ts",
+    "verify-urls": "tsx prisma/verify-urls.ts",
     "thumbs": "tsx prisma/thumbs.ts"
   },
   "dependencies": {

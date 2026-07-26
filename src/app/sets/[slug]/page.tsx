@@ -67,10 +67,13 @@ export default async function SetPage({
             )}
             {set.series && <span className="eyebrow">{set.series.name}</span>}
             {set.event && (
-              <span className="eyebrow">
+              <Link
+                href={`/venues/${set.event.slug}`}
+                className="eyebrow transition-colors hover:text-ink"
+              >
                 {set.event.name}
                 {set.event.location ? ` · ${set.event.location}` : ""}
-              </span>
+              </Link>
             )}
           </div>
 
@@ -137,6 +140,7 @@ export default async function SetPage({
         accent={accent}
         setSlug={set.slug}
         setGenre={set.genre}
+        setSourceUrl={set.sourceUrl}
       />
     </div>
   );

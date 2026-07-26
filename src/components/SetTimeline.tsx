@@ -22,6 +22,7 @@ export function SetTimeline({
   accent,
   setSlug,
   setGenre,
+  setSourceUrl,
 }: {
   plays: PlayRow[];
   durationSec: number;
@@ -29,6 +30,8 @@ export function SetTimeline({
   setSlug: string;
   /** When set, per-track genre is only shown if it differs (avoids clutter). */
   setGenre?: string | null;
+  /** Real upload URL — used for SC listen pill instead of search guesses. */
+  setSourceUrl?: string | null;
 }) {
   const [activeId, setActiveId] = useState<string | null>(plays[0]?.id ?? null);
   const [flashId, setFlashId] = useState<string | null>(null);
@@ -257,6 +260,7 @@ export function SetTimeline({
                     (() => {
                       const links = listenLinks(p.title, p.artistName, {
                         beatportUrl: p.beatportUrl,
+                        setSourceUrl,
                       });
                       const pill =
                         "grid h-6 place-items-center rounded-md border border-line px-1.5 text-[10px] text-muted2 transition-colors hover:border-brand hover:text-brand";
@@ -288,15 +292,17 @@ export function SetTimeline({
                           >
                             BP
                           </a>
-                          <a
-                            href={links.soundcloud}
-                            target="_blank"
-                            rel="noreferrer"
-                            title="Search on SoundCloud"
-                            className={`${pill} hidden sm:grid`}
-                          >
-                            SC
-                          </a>
+                          {links.soundcloud && (
+                            <a
+                              href={links.soundcloud}
+                              target="_blank"
+                              rel="noreferrer"
+                              title="Open set on SoundCloud"
+                              className={`${pill} hidden sm:grid`}
+                            >
+                              SC
+                            </a>
+                          )}
                         </div>
                       );
                     })()}
