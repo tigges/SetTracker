@@ -17,6 +17,10 @@ assert.equal(
   artistFromVenueTitle("Artist One b2b Artist Two @ Boiler Room NYC"),
   "Artist One b2b Artist Two",
 );
+assert.equal(
+  artistFromVenueTitle("Boiler Room London: Tiffany Day"),
+  "Tiffany Day",
+);
 
 const mixmag = YOUTUBE_VENUES.find((v) => v.seriesName === "Mixmag")!;
 assert.equal(isVenueSetCandidate("Kyle Starkey | Mixmag Lab London", 3600, mixmag), true);

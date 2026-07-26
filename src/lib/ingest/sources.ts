@@ -1,5 +1,6 @@
 import type { Provenance } from "../status";
 import { bandcampAdapter } from "./bandcamp/adapter";
+import { boilerroomAdapter } from "./boilerroom/adapter";
 import { hearthisAdapter } from "./hearthis/adapter";
 import { insomniacNorAdapter } from "./insomniac/adapter";
 import { slugify, type RawArtist, type RawPlay, type RawSet, type SourceAdapter } from "./types";
@@ -103,6 +104,7 @@ function withOptionalSynthetic(base: SourceAdapter[]): SourceAdapter[] {
  * - hearthis.at house-family categories (public api-v2)
  * - YouTube curated sets + venue channels (description + Music credits)
  * - Bandcamp curated tracks/albums
+ * - Boiler Room sessions (boilerroom.tv provenance + SC/YT playback)
  */
 export const adapters: SourceAdapter[] = withOptionalSynthetic([
   soundcloudAdapter,
@@ -110,4 +112,5 @@ export const adapters: SourceAdapter[] = withOptionalSynthetic([
   hearthisAdapter,
   youtubeAdapter,
   bandcampAdapter,
+  boilerroomAdapter,
 ]);
