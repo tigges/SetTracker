@@ -9,6 +9,8 @@ export type RawArtist = {
   accent?: string;
   homeCity?: string;
   bio?: string;
+  /** Source-native portrait (SoundCloud / hearthis avatar), when known. */
+  imageUrl?: string;
 };
 
 export type RawPlay = {
@@ -53,6 +55,8 @@ export type RawSet = {
   sourceName: string;
   sourceUrl?: string;
   cover: string;
+  /** Source-native set artwork URL (hearthis/SC cover), when known. */
+  imageUrl?: string;
   /** Optional content hash — when set, ingest refreshes plays if it changes. */
   sourceHash?: string;
   plays: RawPlay[];

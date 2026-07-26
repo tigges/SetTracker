@@ -105,6 +105,8 @@ export async function runIngest(
         data.homeCity = roster.homeCity ?? existing.homeCity;
         Object.assign(data, socials);
       }
+      // Fill missing portraits from source-native avatars (hearthis / SC).
+      if (!existing.imageUrl && raw.imageUrl) data.imageUrl = raw.imageUrl;
       if (Object.keys(data).length) {
         await prisma.dj.update({ where: { id: existing.id }, data });
       }
@@ -118,6 +120,7 @@ export async function runIngest(
         homeCity: roster?.homeCity ?? raw.homeCity ?? null,
         bio: raw.bio ?? null,
         accent: roster?.accent ?? raw.accent ?? pickAccent(slug),
+        imageUrl: raw.imageUrl ?? null,
         ...socials,
       },
     });
@@ -551,6 +554,9 @@ export async function runIngest(
           sourceUrl: raw.sourceUrl ?? null,
           cover: raw.cover,
           sourceHash,
+          ...(raw.imageUrl && !existing.imageUrl
+            ? { imageUrl: raw.imageUrl }
+            : {}),
         },
       });
       await syncSetArtists(existing.id, primaryDjId, collaboratorIds);
@@ -577,6 +583,7 @@ export async function runIngest(
         sourceName: raw.sourceName,
         sourceUrl: raw.sourceUrl ?? null,
         cover: raw.cover,
+        imageUrl: raw.imageUrl ?? null,
         sourceHash,
         eventId,
         seriesId,

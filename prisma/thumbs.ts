@@ -25,7 +25,12 @@ import {
   resolveTrackImage,
   sleep,
 } from "../src/lib/thumbs/deezer";
+import {
+  resolveHearthisTrackImage,
+  resolveHearthisUserImage,
+} from "../src/lib/thumbs/hearthis";
 import { resolveTrackMetaMusicBrainz } from "../src/lib/thumbs/musicbrainz";
+import { parseHearthisUrl } from "../src/lib/ingest/hearthis/client";
 
 const prisma = new PrismaClient();
 
@@ -123,15 +128,50 @@ async function main() {
       if (d.imageUrl) djImageById.set(d.id, d.imageUrl);
     }
   }
+  // hearthis user permalinks from sets — used as Deezer fallback for DJ portraits
+  const hearthisUserByDjId = new Map<string, string>();
+  const htSets = await prisma.set.findMany({
+    where: {
+      OR: [
+        { sourceName: "hearthis.at" },
+        { sourceUrl: { contains: "hearthis.at" } },
+      ],
+    },
+    select: {
+      sourceUrl: true,
+      artists: {
+        where: { isPrimary: true },
+        take: 1,
+        select: { djId: true },
+      },
+    },
+  });
+  for (const s of htSets) {
+    const djId = s.artists[0]?.djId;
+    if (!djId || !s.sourceUrl || hearthisUserByDjId.has(djId)) continue;
+    const parsed = parseHearthisUrl(s.sourceUrl);
+    if (parsed?.user) hearthisUserByDjId.set(djId, parsed.user);
+  }
+
   for (const d of djs) {
     stats.djs.scanned += 1;
-    const url = await resolveArtistImage(d.name);
+    let url = await resolveArtistImage(d.name);
     await sleep(DELAY_MS);
+    if (!url) {
+      const htUser = hearthisUserByDjId.get(d.id);
+      if (htUser) {
+        url = await resolveHearthisUserImage(htUser);
+        await sleep(DELAY_MS);
+        if (url) console.log(`  ✓ dj ${d.slug} (hearthis)`);
+      }
+    }
     if (url) {
       if (d.imageUrl !== url) {
         await prisma.dj.update({ where: { id: d.id }, data: { imageUrl: url } });
         stats.djs.updated += 1;
-        console.log(`  ✓ dj ${d.slug}${d.imageUrl ? " (updated)" : ""}`);
+        if (!hearthisUserByDjId.get(d.id) || d.imageUrl) {
+          console.log(`  ✓ dj ${d.slug}${d.imageUrl ? " (updated)" : ""}`);
+        }
       } else {
         console.log(`  = dj ${d.slug}`);
       }
@@ -304,6 +344,8 @@ async function main() {
       title: true,
       slug: true,
       imageUrl: true,
+      sourceUrl: true,
+      sourceName: true,
       artists: {
         where: { isPrimary: true },
         take: 1,
@@ -325,7 +367,30 @@ async function main() {
     if (!needsWork) continue;
     stats.sets.scanned += 1;
 
-    let url = djUrl;
+    let url: string | null = null;
+    // Prefer native hearthis cover when the set was discovered there.
+    if (
+      s.sourceUrl &&
+      (s.sourceName === "hearthis.at" || /hearthis\.at/i.test(s.sourceUrl))
+    ) {
+      const ht = await resolveHearthisTrackImage(s.sourceUrl);
+      await sleep(DELAY_MS);
+      url = ht.setImage;
+      if (
+        ht.artistImage &&
+        primary &&
+        !primary.imageUrl &&
+        !djImageById.get(primary.id)
+      ) {
+        await prisma.dj.update({
+          where: { id: primary.id },
+          data: { imageUrl: ht.artistImage },
+        });
+        djImageById.set(primary.id, ht.artistImage);
+      }
+      if (url) console.log(`  ✓ set ${s.slug} (hearthis)`);
+    }
+    if (!url) url = djUrl;
     if (!url) {
       url = await resolveSetImage(s.title, primary?.name ?? null);
       await sleep(DELAY_MS);
