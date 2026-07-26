@@ -13,7 +13,9 @@ export type CandidateEvidence = {
     | "tracklist_channel"
     | "manual"
     | "lineup"
-    | "press";
+    | "press"
+    | "youtube_similar"
+    | "youtube_spotlight";
   detail: string;
   sourceSlug?: string;
   weight: number;

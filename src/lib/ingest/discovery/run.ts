@@ -348,3 +348,53 @@ export function promotedSoundcloudPermalinks(): Array<{
       accent: c.accent || "#ff7a45",
     }));
 }
+
+/**
+ * Queue channels discovered from YouTube "Fans also like" / similar shelves.
+ * Called from the YouTube adapter during deep polls.
+ */
+export function queueYoutubeSimilarChannels(
+  channels: Array<{ handle: string; name: string; shelf?: string }>,
+  opts?: { sourceChannel?: string; genre?: string; accent?: string },
+): number {
+  if (channels.length === 0) return 0;
+  const file = loadCandidates();
+  const exclude = seedSlugs();
+  for (const slug of existingDjSlugsFromFile(file)) exclude.add(slug);
+  let added = 0;
+
+  for (const ch of channels) {
+    const handle = ch.handle.startsWith("@") || ch.handle.startsWith("UC")
+      ? ch.handle
+      : `@${ch.handle.replace(/^@/, "")}`;
+    const name = ch.name.trim();
+    if (!name) continue;
+    const slug = slugify(name);
+    if (!slug || exclude.has(slug)) continue;
+
+    const before = file.candidates.find((c) => c.slug === slug);
+    const evidence: CandidateEvidence[] = [
+      {
+        kind: "youtube_similar",
+        detail: ch.shelf
+          ? `${ch.shelf} ← ${opts?.sourceChannel || "yt"}`
+          : `similar ← ${opts?.sourceChannel || "yt"}`,
+        weight: 18,
+      },
+    ];
+    upsertCandidate(file, {
+      name,
+      slug,
+      score: 18,
+      status: "queued",
+      evidence,
+      youtubeHandle: handle,
+      genre: opts?.genre,
+      accent: opts?.accent,
+    });
+    if (!before) added += 1;
+  }
+
+  if (added > 0 || channels.length > 0) saveCandidates(file);
+  return added;
+}

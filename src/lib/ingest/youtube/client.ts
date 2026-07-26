@@ -4,6 +4,8 @@
  * We parse ytInitialPlayerResponse + ytInitialData from the HTML for:
  * - title / channel / duration / description
  * - YouTube Music "songs in this video" cards (videoAttributeViewModel)
+ * - related / "other tracks" / end-screen video ids
+ * - channel-home shelves: Fans also like, Spotlights
  */
 
 /** Googlebot UA unlocks player metadata; desktop UAs often get LOGIN_REQUIRED. */
@@ -15,6 +17,26 @@ export type YtMusicCredit = {
   artistName: string;
 };
 
+export type YtRelatedVideo = {
+  videoId: string;
+  title: string;
+  channel?: string | null;
+  /** Shelf / section label when known (e.g. "Fans also like", "Spotlight"). */
+  shelf?: string | null;
+};
+
+export type YtSimilarChannel = {
+  handle: string;
+  name: string;
+  shelf: string;
+};
+
+export type YtChannelShelfDiscovery = {
+  similarChannels: YtSimilarChannel[];
+  spotlightVideoIds: string[];
+  relatedVideoIds: string[];
+};
+
 export type YtWatchMeta = {
   videoId: string;
   title: string;
@@ -23,6 +45,8 @@ export type YtWatchMeta = {
   description: string;
   publishedAt: Date | null;
   musicCredits: YtMusicCredit[];
+  /** Related / suggested / "other tracks" video ids from the watch page. */
+  relatedVideos: YtRelatedVideo[];
   watchUrl: string;
 };
 
@@ -113,6 +137,209 @@ function walkMusicCredits(obj: unknown, out: YtMusicCredit[]): void {
   for (const v of Object.values(o)) walkMusicCredits(v, out);
 }
 
+function videoIdFromNode(node: Record<string, unknown>): string | null {
+  if (typeof node.videoId === "string" && /^[\w-]{11}$/.test(node.videoId)) {
+    return node.videoId;
+  }
+  const nav = node.navigationEndpoint as
+    | {
+        watchEndpoint?: { videoId?: string };
+        commandMetadata?: { webCommandMetadata?: { url?: string } };
+      }
+    | undefined;
+  const fromWatch = nav?.watchEndpoint?.videoId;
+  if (fromWatch && /^[\w-]{11}$/.test(fromWatch)) return fromWatch;
+  const url = nav?.commandMetadata?.webCommandMetadata?.url;
+  if (url) {
+    const id = extractVideoId(
+      url.startsWith("http") ? url : `https://www.youtube.com${url}`,
+    );
+    if (id) return id;
+  }
+  if (typeof node.contentId === "string" && /^[\w-]{11}$/.test(node.contentId)) {
+    return node.contentId;
+  }
+  return null;
+}
+
+function handleFromBrowseUrl(url: string | null | undefined): string | null {
+  if (!url) return null;
+  const m = url.match(/youtube\.com\/(@[\w.-]+)/i) || url.match(/^\/(@[\w.-]+)/i);
+  if (m) return m[1];
+  const ch = url.match(/youtube\.com\/channel\/(UC[\w-]{20,})/i);
+  if (ch) return ch[1];
+  return null;
+}
+
+function channelFromRenderer(node: Record<string, unknown>): YtSimilarChannel | null {
+  const title =
+    textOf(node.title) ||
+    (typeof node.name === "string" ? node.name : null) ||
+    textOf((node as { headline?: unknown }).headline);
+  const nav = node.navigationEndpoint as
+    | {
+        browseEndpoint?: { canonicalBaseUrl?: string; browseId?: string };
+        commandMetadata?: { webCommandMetadata?: { url?: string } };
+      }
+    | undefined;
+  const canon = nav?.browseEndpoint?.canonicalBaseUrl;
+  const url = nav?.commandMetadata?.webCommandMetadata?.url;
+  let handle =
+    handleFromBrowseUrl(canon) ||
+    handleFromBrowseUrl(url) ||
+    (typeof nav?.browseEndpoint?.browseId === "string" &&
+    /^UC[\w-]{20,}$/.test(nav.browseEndpoint.browseId)
+      ? nav.browseEndpoint.browseId
+      : null);
+  if (!handle || !title) return null;
+  if (!handle.startsWith("@") && !handle.startsWith("UC")) {
+    handle = `@${handle.replace(/^@/, "")}`;
+  }
+  return { handle, name: title.trim(), shelf: "" };
+}
+
+/** Export for unit tests — walks watch/channel JSON for related video cards. */
+export function collectRelatedVideos(
+  root: unknown,
+  shelfHint: string | null = null,
+): YtRelatedVideo[] {
+  const out: YtRelatedVideo[] = [];
+  const seen = new Set<string>();
+
+  const push = (
+    videoId: string,
+    title: string | null,
+    channel: string | null,
+    shelf: string | null,
+  ) => {
+    if (seen.has(videoId)) return;
+    seen.add(videoId);
+    out.push({
+      videoId,
+      title: (title || "").trim(),
+      channel: channel?.trim() || null,
+      shelf: shelf?.trim() || null,
+    });
+  };
+
+  const walk = (obj: unknown, shelf: string | null): void => {
+    if (!obj) return;
+    if (Array.isArray(obj)) {
+      for (const x of obj) walk(x, shelf);
+      return;
+    }
+    if (typeof obj !== "object") return;
+    const o = obj as Record<string, unknown>;
+
+    // Shelf titles (Fans also like / Spotlight / Other tracks …)
+    let nextShelf = shelf;
+    const titleCandidate =
+      textOf(o.title) ||
+      textOf(o.header) ||
+      (o.shelfHeaderRenderer
+        ? textOf(
+            (o.shelfHeaderRenderer as { title?: unknown }).title,
+          )
+        : null);
+    if (titleCandidate && titleCandidate.length < 80) {
+      const t = titleCandidate.trim();
+      if (
+        /fans?\s+also\s+like|you might also like|similar|spotlight|other tracks|mixes for you|suggested|recommended/i.test(
+          t,
+        )
+      ) {
+        nextShelf = t;
+      }
+    }
+
+    const renderers = [
+      o.compactVideoRenderer,
+      o.videoRenderer,
+      o.endScreenVideoRenderer,
+      o.gridVideoRenderer,
+      o.playlistVideoRenderer,
+      o.lockupViewModel,
+    ];
+    for (const r of renderers) {
+      if (!r || typeof r !== "object") continue;
+      const node = r as Record<string, unknown>;
+      const id = videoIdFromNode(node);
+      if (!id) continue;
+      const title =
+        textOf(node.title) ||
+        (typeof node.title === "string" ? node.title : null) ||
+        textOf(node.metadata) ||
+        null;
+      const channel =
+        textOf(node.shortBylineText) ||
+        textOf(node.longBylineText) ||
+        textOf(node.subtitle) ||
+        null;
+      push(id, title, channel, nextShelf ?? shelfHint);
+    }
+
+    for (const v of Object.values(o)) walk(v, nextShelf);
+  };
+
+  walk(root, shelfHint);
+  return out;
+}
+
+/** Export for unit tests — channel / fans-also-like cards. */
+export function collectSimilarChannels(root: unknown): YtSimilarChannel[] {
+  const out: YtSimilarChannel[] = [];
+  const seen = new Set<string>();
+
+  const walk = (obj: unknown, shelf: string | null): void => {
+    if (!obj) return;
+    if (Array.isArray(obj)) {
+      for (const x of obj) walk(x, shelf);
+      return;
+    }
+    if (typeof obj !== "object") return;
+    const o = obj as Record<string, unknown>;
+
+    let nextShelf = shelf;
+    const titleCandidate = textOf(o.title) || textOf(o.header);
+    if (titleCandidate && titleCandidate.length < 80) {
+      const t = titleCandidate.trim();
+      if (
+        /fans?\s+also\s+like|you might also like|similar|for you|spotlight/i.test(
+          t,
+        )
+      ) {
+        nextShelf = t;
+      }
+    }
+
+    const renderers = [
+      o.channelRenderer,
+      o.gridChannelRenderer,
+      o.compactChannelRenderer,
+    ];
+    for (const r of renderers) {
+      if (!r || typeof r !== "object") continue;
+      // Prefer channels under a relevant shelf; still keep a few featured ones.
+      if (
+        nextShelf ||
+        (shelf && /fans?\s+also\s+like|similar|spotlight/i.test(shelf))
+      ) {
+        const ch = channelFromRenderer(r as Record<string, unknown>);
+        if (!ch) continue;
+        const key = ch.handle.toLowerCase();
+        if (seen.has(key)) continue;
+        seen.add(key);
+        out.push({ ...ch, shelf: nextShelf || shelf || "similar" });
+      }
+    }
+
+    for (const v of Object.values(o)) walk(v, nextShelf);
+  };
+
+  walk(root, null);
+  return out;
+}
+
 function publishedFromPlayer(player: Record<string, unknown>): Date | null {
   const micro = player.microformat as
     | { playerMicroformatRenderer?: { publishDate?: string; uploadDate?: string } }
@@ -200,6 +427,10 @@ export async function fetchWatchMeta(videoIdOrUrl: string): Promise<YtWatchMeta>
     return true;
   });
 
+  const relatedVideos = initial ? collectRelatedVideos(initial) : [];
+  // Never treat the watch page itself as a related target.
+  const relatedFiltered = relatedVideos.filter((r) => r.videoId !== videoId);
+
   if (!title) throw new Error(`YouTube metadata missing for ${videoId}`);
   if (!durationSec) {
     // Last resort so Music credits can still land with order-only cues.
@@ -214,8 +445,49 @@ export async function fetchWatchMeta(videoIdOrUrl: string): Promise<YtWatchMeta>
     description,
     publishedAt: player ? publishedFromPlayer(player) : null,
     musicCredits: uniqueCredits,
+    relatedVideos: relatedFiltered,
     watchUrl,
   };
+}
+
+/**
+ * Scrape a channel home page for Fans also like / Spotlight / similar shelves.
+ */
+export async function fetchChannelShelfDiscovery(
+  handleOrUrl: string,
+): Promise<YtChannelShelfDiscovery> {
+  const base = channelBase(handleOrUrl);
+  const html = await fetchChannelTabHtml(base);
+  const initial = extractJsonAssign(html, "ytInitialData");
+  if (!initial) {
+    return { similarChannels: [], spotlightVideoIds: [], relatedVideoIds: [] };
+  }
+
+  const similarChannels = collectSimilarChannels(initial);
+  const related = collectRelatedVideos(initial);
+  const spotlightVideoIds = [
+    ...new Set(
+      related
+        .filter((r) => r.shelf && /spotlight/i.test(r.shelf))
+        .map((r) => r.videoId),
+    ),
+  ];
+  // Also keep shelf videos tagged fans-also-like / other tracks as related seeds.
+  const relatedVideoIds = [
+    ...new Set(
+      related
+        .filter(
+          (r) =>
+            !r.shelf ||
+            /fans?\s+also\s+like|other tracks|spotlight|suggested|recommended|mixes/i.test(
+              r.shelf,
+            ),
+        )
+        .map((r) => r.videoId),
+    ),
+  ];
+
+  return { similarChannels, spotlightVideoIds, relatedVideoIds };
 }
 
 function findPlayerOverlayDetails(
