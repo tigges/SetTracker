@@ -55,8 +55,14 @@ setradar.ai.
   **cron/manual `deep` = full ingest + thumbs + cache DB**. Repo Pages Source
   must be **GitHub Actions** (not branch/`/`), or GitHub race-serves this README.
 - **Artwork thumbnails:** `npm run thumbs` fills null `imageUrl` on Dj / Label /
-  Track / Set via the Deezer Search API (no key). Idempotent; skips rows that
-  already have art. Sets fall back to the primary DJ image. The Pages workflow
-  runs this after ingest. UI uses `EntityThumb` with monogram fallback.
+ Track / Set via the Deezer Search API (no key). Idempotent; skips rows that
+ already have art. Sets fall back to the primary DJ image. The Pages workflow
+ runs this after ingest. UI uses `EntityThumb` with monogram fallback.
+- **Fingerprint enrich:** `npm run enrich:fingerprint` (weekly
+ `catalog-enrich.yml` after thumbs/MB). Samples SC/hearthis `playbackUrl`
+ via ffmpeg → ACRCloud Identify (`ACRCLOUD_*` secrets + `ACRCLOUD_ENABLED=1`).
+ Fills timeline gaps only with `provenance: "fingerprint"`; never overwrites
+ `sourceUrl` / `sourceName`. Prefers SC/hearthis over YT
+ (`ACRCLOUD_ALLOW_YOUTUBE=0` by default).
 - **Standard commands** live in `package.json` scripts and `README.md`; prefer
   those over ad-hoc invocations.
