@@ -86,8 +86,21 @@ export async function applyResolutions(
         labelId = label.id;
       }
       const parsed = parseTrackTitle(row.trackTitle);
+      const { allocateTrackSlug } = await import("../tracks/slug");
+      const trackSlug = await allocateTrackSlug(
+        row.artistName,
+        row.trackTitle,
+        async (candidate) => {
+          const hit = await prisma.track.findUnique({
+            where: { slug: candidate },
+            select: { id: true },
+          });
+          return !!hit;
+        },
+      );
       track = await prisma.track.create({
         data: {
+          slug: trackSlug,
           title: row.trackTitle,
           artistName: row.artistName,
           labelId,

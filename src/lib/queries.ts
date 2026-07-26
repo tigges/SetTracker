@@ -184,6 +184,7 @@ export async function getSetBySlug(slug: string) {
         labelSlug: label?.slug ?? null,
         labelColor: label?.color ?? null,
         labelImageUrl: label?.imageUrl ?? null,
+        trackSlug: track?.slug ?? null,
         bpm: track?.bpm ?? null,
         musicalKey: track?.musicalKey ?? null,
         mixName: track?.mixName ?? null,
@@ -279,6 +280,7 @@ export async function getDjBySlug(slug: string) {
 
   // most-played tracks (identified + community-resolved carry a trackId)
   let mostPlayed: {
+    slug: string;
     title: string;
     artistName: string;
     count: number;
@@ -295,7 +297,13 @@ export async function getDjBySlug(slug: string) {
     const trackIds = grouped.map((g) => g.trackId!).filter(Boolean);
     const trackRecords = await prisma.track.findMany({
       where: { id: { in: trackIds } },
-      select: { id: true, title: true, artistName: true, imageUrl: true },
+      select: {
+        id: true,
+        slug: true,
+        title: true,
+        artistName: true,
+        imageUrl: true,
+      },
     });
     const byId = new Map(trackRecords.map((t) => [t.id, t]));
     mostPlayed = grouped
@@ -303,6 +311,7 @@ export async function getDjBySlug(slug: string) {
         const t = byId.get(g.trackId!);
         return t
           ? {
+              slug: t.slug,
               title: t.title,
               artistName: t.artistName,
               count: g._count.trackId,
@@ -312,6 +321,7 @@ export async function getDjBySlug(slug: string) {
       })
       .filter(
         (x): x is {
+          slug: string;
           title: string;
           artistName: string;
           count: number;
@@ -504,7 +514,12 @@ export async function getLabelBySlug(slug: string) {
   for (const p of plays)
     if (p.trackId) playCount.set(p.trackId, (playCount.get(p.trackId) ?? 0) + 1);
   const topTracks = label.tracks
-    .map((t) => ({ title: t.title, artistName: t.artistName, count: playCount.get(t.id) ?? 0 }))
+    .map((t) => ({
+      slug: t.slug,
+      title: t.title,
+      artistName: t.artistName,
+      count: playCount.get(t.id) ?? 0,
+    }))
     .sort((a, b) => b.count - a.count);
 
   const artistMap = new Map<string, { name: string; slug: string; accent: string; count: number }>();
@@ -544,9 +559,7 @@ export async function getLabelBySlug(slug: string) {
       };
     }),
     topTracks: topTracks.map((t) => {
-      const full = label.tracks.find(
-        (x) => x.title === t.title && x.artistName === t.artistName,
-      );
+      const full = label.tracks.find((x) => x.slug === t.slug);
       return { ...t, imageUrl: full?.imageUrl ?? null };
     }),
     artists,
@@ -691,3 +704,153 @@ export async function getVenueBySlug(slug: string) {
 }
 
 export type VenueProfile = NonNullable<Awaited<ReturnType<typeof getVenueBySlug>>>;
+
+// ---------------------------------------------------------------------------
+// Tracks
+// ---------------------------------------------------------------------------
+export async function getTracks(limit = 120) {
+  const grouped = await prisma.played.groupBy({
+    by: ["trackId"],
+    where: { trackId: { not: null } },
+    _count: { trackId: true },
+    orderBy: { _count: { trackId: "desc" } },
+    take: limit,
+  });
+  const ids = grouped.map((g) => g.trackId!).filter(Boolean);
+  if (ids.length === 0) return [];
+  const rows = await prisma.track.findMany({
+    where: { id: { in: ids } },
+    select: {
+      id: true,
+      slug: true,
+      title: true,
+      artistName: true,
+      imageUrl: true,
+      genre: true,
+      bpm: true,
+      mixName: true,
+      label: { select: { name: true, slug: true, color: true } },
+    },
+  });
+  const byId = new Map(rows.map((t) => [t.id, t]));
+  const countBy = new Map(grouped.map((g) => [g.trackId!, g._count.trackId]));
+  return ids
+    .map((id) => {
+      const t = byId.get(id);
+      if (!t) return null;
+      return {
+        slug: t.slug,
+        title: t.title,
+        artistName: t.artistName,
+        imageUrl: t.imageUrl,
+        genre: t.genre,
+        bpm: t.bpm,
+        mixName: t.mixName,
+        labelName: t.label?.name ?? null,
+        labelSlug: t.label?.slug ?? null,
+        labelColor: t.label?.color ?? null,
+        playCount: countBy.get(id) ?? 0,
+      };
+    })
+    .filter((x): x is NonNullable<typeof x> => !!x);
+}
+
+export async function getAllTrackSlugs() {
+  const { ensureTrackSlugs } = await import("@/lib/tracks/ensureSlugs");
+  await ensureTrackSlugs(prisma);
+  const rows = await prisma.track.findMany({
+    where: { plays: { some: {} } },
+    select: { slug: true },
+  });
+  return rows.map((r) => r.slug);
+}
+
+export async function getTrackBySlug(slug: string) {
+  if (slug === "_placeholder") return null;
+  const track = await prisma.track.findUnique({
+    where: { slug },
+    include: { label: true },
+  });
+  if (!track) return null;
+
+  const plays = await prisma.played.findMany({
+    where: { trackId: track.id },
+    include: {
+      set: {
+        include: {
+          artists: { include: { dj: true }, orderBy: { isPrimary: "desc" } },
+          event: true,
+        },
+      },
+    },
+    orderBy: { set: { publishedAt: "desc" } },
+  });
+
+  const setMap = new Map<string, (typeof plays)[number]["set"]>();
+  for (const p of plays) {
+    if (!setMap.has(p.setId)) setMap.set(p.setId, p.set);
+  }
+  const sets = [...setMap.values()];
+
+  const djMap = new Map<
+    string,
+    { name: string; slug: string; accent: string; imageUrl: string | null; count: number }
+  >();
+  for (const s of sets) {
+    const prim = s.artists.find((a) => a.isPrimary) ?? s.artists[0];
+    if (!prim) continue;
+    const cur = djMap.get(prim.dj.id);
+    if (cur) cur.count += 1;
+    else
+      djMap.set(prim.dj.id, {
+        name: prim.dj.name,
+        slug: prim.dj.slug,
+        accent: prim.dj.accent,
+        imageUrl: prim.dj.imageUrl,
+        count: 1,
+      });
+  }
+
+  return {
+    slug: track.slug,
+    title: track.title,
+    artistName: track.artistName,
+    mixName: track.mixName,
+    remixerName: track.remixerName,
+    genre: track.genre,
+    bpm: track.bpm,
+    musicalKey: track.musicalKey,
+    durationSec: track.durationSec,
+    releaseDate: track.releaseDate,
+    imageUrl: track.imageUrl,
+    beatportUrl: track.beatportUrl,
+    label: track.label
+      ? {
+          name: track.label.name,
+          slug: track.label.slug,
+          color: track.label.color,
+          imageUrl: track.label.imageUrl,
+        }
+      : null,
+    playCount: plays.length,
+    setCount: sets.length,
+    djs: [...djMap.values()].sort((a, b) => b.count - a.count),
+    sets: sets.map((s) => {
+      const prim = s.artists.find((a) => a.isPrimary) ?? s.artists[0];
+      return {
+        slug: s.slug,
+        title: s.title,
+        type: s.type,
+        genre: s.genre,
+        publishedAt: s.publishedAt,
+        durationSec: s.durationSec,
+        imageUrl: s.imageUrl ?? prim?.dj.imageUrl ?? null,
+        primaryDjName: prim?.dj.name ?? null,
+        primaryDjSlug: prim?.dj.slug ?? null,
+        eventName: s.event?.name ?? null,
+      };
+    }),
+  };
+}
+
+export type TrackProfile = NonNullable<Awaited<ReturnType<typeof getTrackBySlug>>>;

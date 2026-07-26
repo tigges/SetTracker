@@ -81,6 +81,8 @@ model Event {
 // A released, identified track (the playable unit in a set — not the release).
 model Track {
   id          String   @id @default(cuid())
+  // Public URL slug (artist-title); unique. Backfilled on ingest/thumbs/build.
+  slug        String   @unique
   title       String
   artistName  String
   // Mix / version label when distinct from title, e.g. "Extended Mix"

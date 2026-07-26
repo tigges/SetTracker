@@ -66,6 +66,12 @@ export default async function RootLayout({
               >
                 Labels
               </Link>
+              <Link
+                href="/tracks"
+                className="rounded-md px-2.5 py-1.5 text-muted transition-colors hover:bg-panel hover:text-ink"
+              >
+                Tracks
+              </Link>
             </nav>
             <div className="ml-auto flex items-center gap-3">
               <GlobalSearch items={searchIndex} />

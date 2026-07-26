@@ -246,6 +246,7 @@ async function main() {
   for (const [slug, title, artistName, labelSlug, bpm] of trackData) {
     const t = await prisma.track.create({
       data: {
+        slug,
         title,
         artistName,
         bpm,

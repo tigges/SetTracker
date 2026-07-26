@@ -12,6 +12,15 @@ const KIND_LABEL: Record<SearchIndexItem["kind"], string> = {
   track: "Track",
 };
 
+const KIND_FILTERS: Array<"all" | SearchIndexItem["kind"]> = [
+  "all",
+  "set",
+  "dj",
+  "venue",
+  "label",
+  "track",
+];
+
 function score(item: SearchIndexItem, q: string): number {
   const query = q.toLowerCase().trim();
   if (!query) return 0;
@@ -31,6 +40,7 @@ export function GlobalSearch({ items }: { items: SearchIndexItem[] }) {
   const [q, setQ] = useState("");
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(0);
+  const [kind, setKind] = useState<"all" | SearchIndexItem["kind"]>("all");
   const root = useRef<HTMLDivElement>(null);
   const input = useRef<HTMLInputElement>(null);
 
@@ -38,16 +48,13 @@ export function GlobalSearch({ items }: { items: SearchIndexItem[] }) {
     const query = q.trim();
     if (query.length < 2) return [];
     return items
+      .filter((item) => kind === "all" || item.kind === kind)
       .map((item) => ({ item, s: score(item, query) }))
       .filter((x) => x.s > 0)
       .sort((a, b) => b.s - a.s || a.item.title.localeCompare(b.item.title))
       .slice(0, 12)
       .map((x) => x.item);
-  }, [items, q]);
-
-  useEffect(() => {
-    setActive(0);
-  }, [q]);
+  }, [items, q, kind]);
 
   useEffect(() => {
     function onDoc(e: MouseEvent) {
@@ -87,6 +94,7 @@ export function GlobalSearch({ items }: { items: SearchIndexItem[] }) {
         spellCheck={false}
         onChange={(e) => {
           setQ(e.target.value);
+          setActive(0);
           setOpen(true);
         }}
         onFocus={() => setOpen(true)}
@@ -114,6 +122,25 @@ export function GlobalSearch({ items }: { items: SearchIndexItem[] }) {
 
       {open && q.trim().length >= 2 && (
         <div className="absolute right-0 z-40 mt-1.5 w-[min(100vw-2rem,22rem)] overflow-hidden rounded-lg border border-line bg-panel shadow-lg shadow-black/40">
+          <div className="flex flex-wrap gap-1 border-b border-line px-2 py-1.5">
+            {KIND_FILTERS.map((k) => (
+              <button
+                key={k}
+                type="button"
+                onClick={() => {
+                  setKind(k);
+                  setActive(0);
+                }}
+                className={`rounded-md px-1.5 py-0.5 text-[10px] uppercase tracking-wide transition-colors ${
+                  kind === k
+                    ? "bg-bg2 text-brand"
+                    : "text-muted2 hover:text-ink"
+                }`}
+              >
+                {k === "all" ? "All" : KIND_LABEL[k]}
+              </button>
+            ))}
+          </div>
           {results.length === 0 ? (
             <p className="px-3 py-3 text-[12px] text-muted2">No matches</p>
           ) : (

@@ -154,7 +154,7 @@ export default async function DjPage({
             ) : (
               <ul className="space-y-2.5">
                 {dj.mostPlayed.map((t, i) => (
-                  <li key={i} className="flex items-center gap-3">
+                  <li key={t.slug} className="flex items-center gap-3">
                     <span className="mono w-4 flex-none text-[12px] text-muted2">
                       {i + 1}
                     </span>
@@ -167,10 +167,13 @@ export default async function DjPage({
                     />
                     <div className="min-w-0 flex-1">
                       <div className="flex items-baseline justify-between gap-3">
-                        <span className="truncate text-[13px] text-ink">
+                        <Link
+                          href={`/tracks/${t.slug}`}
+                          className="truncate text-[13px] text-ink transition-colors hover:text-brand"
+                        >
                           {t.title}
                           <span className="text-muted"> — {t.artistName}</span>
-                        </span>
+                        </Link>
                         <span className="mono flex-none text-[12px] text-muted2">
                           {t.count}×
                         </span>
