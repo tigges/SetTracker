@@ -6,6 +6,9 @@
  * 2) keep long-form sets / radio / live mixes
  * 3) parse description tracklist + timed comments
  * 4) emit RawSet with stable sourceSlug + sourceHash
+ *
+ * Plus curated playlists (SOUNDCLOUD_PLAYLISTS) — multi-artist festival
+ * lives attributed from titles (YouTube playlist parallel).
  */
 
 import { artistsForSet } from "../artists";
@@ -14,6 +17,7 @@ import { inferFestivalEvent } from "../events";
 import { hashRawSetContent } from "../hash";
 import { slugify, type RawSet, type SourceAdapter } from "../types";
 import {
+  fetchPlaylistTracks,
   fetchTrackComments,
   fetchUserTracks,
   resolveUser,
@@ -25,6 +29,11 @@ import {
   parseDescriptionTracklist,
   parseTimedComments,
 } from "./parseTracklist";
+import {
+  isScPlaylistSetCandidate,
+  SOUNDCLOUD_PLAYLISTS,
+  type SoundCloudPlaylistSource,
+} from "./playlists";
 import {
   adaptiveLimit,
   loadPollState,
@@ -146,6 +155,128 @@ async function trackToRawSet(
   return raw;
 }
 
+function durationSecOfTrack(track: ScTrack): number {
+  const ms = track.full_duration ?? track.duration ?? 0;
+  return Math.max(0, Math.round(ms / 1000));
+}
+
+function setTypeFromTitle(title: string): RawSet["type"] {
+  if (/\b(festival|edc|ultra|parookaville|boiler\s*room|tomorrowland)\b/i.test(title)) {
+    return "festival";
+  }
+  if (/\bradio\b/i.test(title)) return "radio";
+  return "soundcloud";
+}
+
+/**
+ * Playlist track → RawSet. Primary/collabs from title (not playlist owner).
+ * sourceSlug uses the uploader permalink so it dedupes against show polls.
+ */
+async function playlistTrackToRawSet(
+  track: ScTrack,
+  pl: SoundCloudPlaylistSource,
+): Promise<RawSet | null> {
+  const durationSec = durationSecOfTrack(track);
+  const title = (track.title || "").trim();
+  if (!title || !isScPlaylistSetCandidate(title, durationSec, pl)) return null;
+
+  const uploader = track.user?.permalink || "unknown";
+  const permalink = track.permalink || String(track.id);
+  const sourceSlug = `sc-${uploader}-${slugify(permalink)}`.slice(0, 120);
+  const sourceUrl =
+    track.permalink_url ||
+    `https://soundcloud.com/${uploader}/${permalink}`;
+
+  const fromDescription = parseDescriptionTracklist(
+    track.description,
+    durationSec,
+  );
+
+  let fromComments = parseTimedComments([], durationSec);
+  if ((track.comment_count ?? 0) > 0 && durationSec >= 15 * 60) {
+    try {
+      const comments = await fetchTrackComments(track.id, 200);
+      fromComments = parseTimedComments(comments, durationSec);
+      await sleep(120);
+    } catch (err) {
+      console.warn(
+        `[soundcloud] playlist comments failed for ${sourceUrl}:`,
+        err instanceof Error ? err.message : err,
+      );
+    }
+  }
+
+  const plays = mergeTracklistSignals(fromDescription, fromComments);
+  const artistImage = scImageUrl(track.user?.avatar_url);
+  const setImage = scImageUrl(track.artwork_url) || artistImage;
+  const { primary, collaborators } = artistsForSet(title, undefined, {
+    accent: pl.accent,
+    imageUrl: artistImage,
+  });
+  const festival = inferFestivalEvent(title);
+  const raw: RawSet = {
+    sourceSlug,
+    title,
+    type: setTypeFromTitle(title),
+    genre: track.genre?.trim() || pl.genre,
+    primaryArtist: primary,
+    collaborators,
+    seriesName: pl.seriesName,
+    eventName: festival?.name,
+    eventKind: festival?.kind,
+    eventLocation: festival?.location,
+    publishedAt: publishedAtOf(track),
+    durationSec,
+    sourceName: "SoundCloud",
+    sourceUrl,
+    playbackUrl: sourceUrl,
+    cover: pl.accent,
+    imageUrl: setImage,
+    plays,
+  };
+  raw.sourceHash = hashRawSetContent(raw);
+  return raw;
+}
+
+async function pollPlaylistTracks(
+  pl: SoundCloudPlaylistSource,
+  seen: Set<string>,
+  out: RawSet[],
+): Promise<void> {
+  let tracks: ScTrack[] = [];
+  try {
+    tracks = await fetchPlaylistTracks(pl.playlist, pl.limit ?? 80);
+    console.log(
+      `[soundcloud] playlist ${pl.seriesName}: ${tracks.length} tracks`,
+    );
+    await sleep(150);
+  } catch (err) {
+    console.warn(
+      `[soundcloud] playlist ${pl.seriesName}:`,
+      err instanceof Error ? err.message : err,
+    );
+    return;
+  }
+
+  for (const track of tracks) {
+    try {
+      const raw = await playlistTrackToRawSet(track, pl);
+      if (!raw) continue;
+      if (seen.has(raw.sourceSlug)) continue;
+      seen.add(raw.sourceSlug);
+      out.push(raw);
+      console.log(
+        `[soundcloud] +pl ${raw.sourceSlug} (${raw.plays.length} plays, ${raw.durationSec}s)`,
+      );
+    } catch (err) {
+      console.warn(
+        `[soundcloud] skip playlist track ${track.id}:`,
+        err instanceof Error ? err.message : err,
+      );
+    }
+  }
+}
+
 async function withPromotedShows(
   base: SoundCloudShow[],
 ): Promise<SoundCloudShow[]> {
@@ -189,13 +320,33 @@ async function withPromotedShows(
 
 export function createSoundCloudAdapter(
   shows: SoundCloudShow[] = allSoundcloudShows(),
+  playlists: SoundCloudPlaylistSource[] = SOUNDCLOUD_PLAYLISTS,
 ): SourceAdapter {
+  /** Fast deploy: curated playlists only (skip per-user show polls). */
+  const curatedOnly = process.env.SOUNDCLOUD_CURATED_ONLY === "1";
+  /** Playlists on by default for deep + curated-only; set =0 to disable. */
+  const includePlaylists = process.env.SOUNDCLOUD_CURATED_PLAYLISTS !== "0";
+
   return {
     id: "soundcloud",
     label: "SoundCloud",
     async fetchRecent(): Promise<RawSet[]> {
       const out: RawSet[] = [];
       const seen = new Set<string>();
+
+      if (includePlaylists) {
+        for (const pl of playlists) {
+          await pollPlaylistTracks(pl, seen, out);
+        }
+      }
+
+      if (curatedOnly) {
+        console.log(
+          `[soundcloud] curated-only: ${out.length} sets (skipped show polls)`,
+        );
+        return out;
+      }
+
       const state = loadPollState();
       const nextState: PollStateFile = {
         updatedAt: new Date().toISOString(),

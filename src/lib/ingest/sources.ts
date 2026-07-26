@@ -99,7 +99,7 @@ function withOptionalSynthetic(base: SourceAdapter[]): SourceAdapter[] {
 
 /**
  * Primary pipeline:
- * - SoundCloud curated shows (anonymous client_id)
+ * - SoundCloud curated shows + playlists (anonymous client_id)
  * - Insomniac Night Owl Radio (SC audio + Insomniac tracklists)
  * - hearthis.at house-family categories (public api-v2)
  * - YouTube curated sets + venue channels (description + Music credits)

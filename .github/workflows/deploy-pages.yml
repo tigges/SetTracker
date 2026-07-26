@@ -83,12 +83,13 @@ jobs:
             exit 1
           fi
 
-      # Light curated YouTube ingest (watch-list only) so new sample sets
-      # like Ultra Shows / Bizarrap land without a full catalog-deep run.
-      - name: Ingest curated YouTube sets
+      # Light curated ingest so new sample sets land without catalog-deep:
+      # YouTube watch-list + SoundCloud playlists (e.g. Lift Sets / Dom Dolla Live).
+      - name: Ingest curated YouTube + SoundCloud playlists
         env:
-          INGEST_ADAPTERS: "youtube"
+          INGEST_ADAPTERS: "youtube,soundcloud"
           YOUTUBE_CURATED_ONLY: "1"
+          SOUNDCLOUD_CURATED_ONLY: "1"
           INGEST_SKIP_VERIFY: "1"
         run: npm run ingest
 
