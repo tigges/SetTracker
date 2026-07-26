@@ -1,5 +1,9 @@
 import { prisma } from "@/lib/db";
-import { normalizeGenre, normalizeGenreList } from "@/lib/genre";
+import {
+  expandGenres,
+  normalizeGenre,
+  normalizeGenreList,
+} from "@/lib/genre";
 import {
   relatedSlugsFor,
   venueArtistSlugs,
@@ -76,6 +80,7 @@ export async function getFeed() {
       title: s.title,
       type: s.type,
       genre: normalizeGenre(s.genre),
+      genres: expandGenres(s.genre),
       publishedAt: s.publishedAt,
       durationSec: s.durationSec,
       sourceName: s.sourceName,
@@ -679,6 +684,7 @@ export async function getVenueBySlug(slug: string) {
         title: s.title,
         type: s.type,
         genre: normalizeGenre(s.genre),
+        genres: expandGenres(s.genre),
         publishedAt: s.publishedAt,
         durationSec: s.durationSec,
         imageUrl: s.imageUrl ?? prim?.dj.imageUrl ?? null,

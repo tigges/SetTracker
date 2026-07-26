@@ -25,8 +25,14 @@ const chip = (active: boolean) =>
       : "border-line text-muted hover:border-muted2 hover:text-ink"
   }`;
 
+function matchesGenre(s: FeedItem, genre: string): boolean {
+  if (genre === "all") return true;
+  if (s.genres?.includes(genre)) return true;
+  return s.genre === genre;
+}
+
 /**
- * Client feed: type/genre filters + "Load more" pagination over the full
+ * Client feed: category + genre filters + "Load more" pagination over the full
  * static catalog (GitHub Pages has no server API).
  */
 export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }) {
@@ -36,9 +42,7 @@ export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }
 
   const filtered = useMemo(() => {
     return feed.filter(
-      (s) =>
-        (type === "all" || s.type === type) &&
-        (genre === "all" || s.genre === genre),
+      (s) => (type === "all" || s.type === type) && matchesGenre(s, genre),
     );
   }, [feed, type, genre]);
 
@@ -53,41 +57,54 @@ export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }
 
   return (
     <div>
-      <div className="mb-6 space-y-3">
-        <div className="flex flex-wrap items-center gap-1.5">
-          {TYPES.map((t) => (
-            <button
-              key={t.id}
-              type="button"
-              onClick={() => setType(t.id)}
-              className={chip(type === t.id)}
-            >
-              {t.label}
-            </button>
-          ))}
-          <span className="mono ml-1 text-[12px] text-muted2">
-            {filtered.length} sets
-          </span>
+      <div className="mb-6 space-y-4">
+        <div>
+          <p className="mb-1.5 mono text-[10px] uppercase tracking-[0.14em] text-muted2">
+            Category
+          </p>
+          <div className="flex flex-wrap items-center gap-1.5">
+            {TYPES.map((t) => (
+              <button
+                key={t.id}
+                type="button"
+                onClick={() => setType(t.id)}
+                className={chip(type === t.id)}
+              >
+                {t.label}
+              </button>
+            ))}
+            <span className="mono ml-1 text-[12px] text-muted2">
+              {filtered.length} sets
+            </span>
+          </div>
         </div>
-        <div className="scroll-thin flex flex-nowrap gap-1.5 overflow-x-auto pb-1">
-          <button
-            type="button"
-            onClick={() => setGenre("all")}
-            className={chip(genre === "all")}
-          >
-            All
-          </button>
-          {genres.map((g) => (
-            <button
-              key={g}
-              type="button"
-              onClick={() => setGenre(g)}
-              className={`${chip(genre === g)} whitespace-nowrap`}
-            >
-              {g}
-            </button>
-          ))}
-        </div>
+
+        {genres.length > 0 && (
+          <div>
+            <p className="mb-1.5 mono text-[10px] uppercase tracking-[0.14em] text-muted2">
+              Genre
+            </p>
+            <div className="scroll-thin flex flex-nowrap gap-1.5 overflow-x-auto pb-1">
+              <button
+                type="button"
+                onClick={() => setGenre("all")}
+                className={chip(genre === "all")}
+              >
+                All
+              </button>
+              {genres.map((g) => (
+                <button
+                  key={g}
+                  type="button"
+                  onClick={() => setGenre(g)}
+                  className={`${chip(genre === g)} whitespace-nowrap`}
+                >
+                  {g}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
 
       {filtered.length === 0 ? (
