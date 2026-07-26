@@ -7,6 +7,7 @@ import { runDiscovery, type DiscoveryStats } from "./discovery/run";
 import { hashRawSetContent } from "./hash";
 import { adapters as defaultAdapters } from "./sources";
 import { slugify, type RawArtist, type RawPlay, type RawSet, type SourceAdapter } from "./types";
+import { verifyStoredSocialUrls } from "./verifyUrls";
 
 const ACCENT_PALETTE = [
   "#ff7a45", "#4fb0e0", "#ff7096", "#b0d24e", "#ffd24d",
@@ -125,10 +126,26 @@ export async function runIngest(
     if (!name) return null;
     const slug = slugify(name);
     if (labelCache.has(slug)) return labelCache.get(slug)!;
+    const socials = labelSocials(name);
     const existing = await prisma.label.findUnique({ where: { slug } });
-    const rec =
-      existing ??
-      (await prisma.label.create({ data: { slug, name, ...labelSocials(name) } }));
+    if (existing) {
+      // Refresh curated label URLs (e.g. Divided Souls) without inventing guesses.
+      if (socials.website || socials.soundcloud || socials.instagram) {
+        await prisma.label.update({
+          where: { id: existing.id },
+          data: {
+            website: socials.website ?? existing.website,
+            soundcloud: socials.soundcloud ?? existing.soundcloud,
+            instagram: socials.instagram ?? existing.instagram,
+          },
+        });
+      }
+      labelCache.set(slug, existing.id);
+      return existing.id;
+    }
+    const rec = await prisma.label.create({
+      data: { slug, name, ...socials },
+    });
     labelCache.set(slug, rec.id);
     return rec.id;
   }
@@ -547,6 +564,44 @@ export async function runIngest(
   } catch (err) {
     console.warn(
       "[ingest] discovery failed:",
+      err instanceof Error ? err.message : err,
+    );
+  }
+
+  // Clear dead guessed social/website URLs; apply curated label fixes.
+  try {
+    await verifyStoredSocialUrls(prisma);
+  } catch (err) {
+    console.warn(
+      "[ingest] verify-urls failed:",
+      err instanceof Error ? err.message : err,
+    );
+  }
+
+  // Copy primary DJ artwork onto sets still missing a thumb (cheap, no API).
+  try {
+    const bare = await prisma.set.findMany({
+      where: { imageUrl: null },
+      select: {
+        id: true,
+        artists: {
+          where: { isPrimary: true },
+          take: 1,
+          select: { dj: { select: { imageUrl: true } } },
+        },
+      },
+    });
+    let filled = 0;
+    for (const s of bare) {
+      const url = s.artists[0]?.dj.imageUrl;
+      if (!url) continue;
+      await prisma.set.update({ where: { id: s.id }, data: { imageUrl: url } });
+      filled += 1;
+    }
+    if (filled) console.log(`[ingest] set thumbs from DJ: ${filled}`);
+  } catch (err) {
+    console.warn(
+      "[ingest] set←DJ thumb copy failed:",
       err instanceof Error ? err.message : err,
     );
   }

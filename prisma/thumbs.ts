@@ -29,6 +29,8 @@ const prisma = new PrismaClient();
 const DELAY_MS = Number(process.env.THUMBS_DELAY_MS ?? 120);
 /** Optional cap for tracks (0 = all). Useful for local smoke tests. */
 const TRACK_LIMIT = Number(process.env.THUMBS_TRACK_LIMIT ?? 0);
+/** Fast path: only fill null artwork — skip DJ refresh / track upgrades. */
+const NULL_ONLY = process.env.THUMBS_NULL_ONLY === "1";
 
 type Stats = {
   djs: { scanned: number; filled: number; missed: number; updated: number };
@@ -81,12 +83,27 @@ async function main() {
     }
   }
 
-  console.log("[thumbs] resolving DJ artwork (refresh all)…");
+  console.log(
+    NULL_ONLY
+      ? "[thumbs] resolving DJ artwork (null only)…"
+      : "[thumbs] resolving DJ artwork (refresh all)…",
+  );
   const djs = await prisma.dj.findMany({
+    where: NULL_ONLY ? { imageUrl: null } : undefined,
     select: { id: true, name: true, slug: true, imageUrl: true },
     orderBy: { name: "asc" },
   });
   const djImageById = new Map<string, string>();
+  // Prefill cache from existing images so set copy works in null-only mode
+  if (NULL_ONLY) {
+    const withImg = await prisma.dj.findMany({
+      where: { imageUrl: { not: null } },
+      select: { id: true, imageUrl: true },
+    });
+    for (const d of withImg) {
+      if (d.imageUrl) djImageById.set(d.id, d.imageUrl);
+    }
+  }
   for (const d of djs) {
     stats.djs.scanned += 1;
     const url = await resolveArtistImage(d.name);
@@ -107,8 +124,13 @@ async function main() {
     }
   }
 
-  console.log("[thumbs] resolving track artwork + light meta…");
+  console.log(
+    NULL_ONLY
+      ? "[thumbs] resolving track artwork (null only, capped)…"
+      : "[thumbs] resolving track artwork + light meta…",
+  );
   const tracks = await prisma.track.findMany({
+    where: NULL_ONLY ? { imageUrl: null } : undefined,
     select: {
       id: true,
       title: true,
@@ -119,15 +141,17 @@ async function main() {
       remixerName: true,
     },
     orderBy: { title: "asc" },
-    ...(TRACK_LIMIT > 0 ? { take: TRACK_LIMIT } : {}),
+    ...(TRACK_LIMIT > 0 || NULL_ONLY
+      ? { take: TRACK_LIMIT > 0 ? TRACK_LIMIT : 80 }
+      : {}),
   });
   // Network for missing/upgradeable art, or sparse duration/mix meta.
   const trackQueue = tracks.filter(
     (t) =>
       !t.imageUrl ||
-      isArtistArtUrl(t.imageUrl) ||
-      t.durationSec == null ||
-      t.mixName == null,
+      (!NULL_ONLY && isArtistArtUrl(t.imageUrl)) ||
+      (!NULL_ONLY && t.durationSec == null) ||
+      (!NULL_ONLY && t.mixName == null),
   );
   for (const t of trackQueue) {
     stats.tracks.scanned += 1;

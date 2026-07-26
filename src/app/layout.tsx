@@ -51,6 +51,12 @@ export default function RootLayout({
                 DJs
               </Link>
               <Link
+                href="/venues"
+                className="rounded-md px-2.5 py-1.5 text-muted transition-colors hover:bg-panel hover:text-ink"
+              >
+                Venues
+              </Link>
+              <Link
                 href="/labels"
                 className="rounded-md px-2.5 py-1.5 text-muted transition-colors hover:bg-panel hover:text-ink"
               >
@@ -66,8 +72,17 @@ export default function RootLayout({
         <main className="mx-auto max-w-6xl px-5 py-8">{children}</main>
 
         <footer className="mx-auto max-w-6xl px-5 pb-10 pt-4">
-          <div className="border-t border-line pt-5 text-[12px] text-muted2">
-            setradar.ai · house set database · tracklists from SoundCloud, hearthis.at, YouTube + community IDs
+          <div className="flex flex-wrap items-center justify-between gap-2 border-t border-line pt-5 text-[12px] text-muted2">
+            <span>
+              setradar.ai · house set database · tracklists from SoundCloud,
+              hearthis.at, YouTube + community IDs
+            </span>
+            <span className="mono text-[11px]" title="Build version">
+              v{process.env.NEXT_PUBLIC_APP_VERSION ?? "0.1.0"}
+              {process.env.NEXT_PUBLIC_GIT_SHA
+                ? ` · ${process.env.NEXT_PUBLIC_GIT_SHA.slice(0, 7)}`
+                : ""}
+            </span>
           </div>
         </footer>
       </body>

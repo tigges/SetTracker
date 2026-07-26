@@ -86,6 +86,17 @@ jobs:
         if: env.INGEST_MODE == 'deep'
         run: npm run thumbs
 
+      - name: Fill missing thumbs only (fast path)
+        if: env.INGEST_MODE == 'fast'
+        env:
+          THUMBS_DELAY_MS: "80"
+          THUMBS_NULL_ONLY: "1"
+        run: npm run thumbs
+
+      - name: Verify social / website URLs
+        if: env.INGEST_MODE == 'deep'
+        run: npm run verify-urls
+
       - name: Save catalog DB for fast push deploys
         if: env.INGEST_MODE == 'deep'
         uses: actions/cache/save@v4
@@ -102,6 +113,8 @@ jobs:
         env:
           GITHUB_PAGES: "true"
           PAGES_BASE_PATH: "/SetTracker"
+          NEXT_PUBLIC_APP_VERSION: "0.2.0"
+          NEXT_PUBLIC_GIT_SHA: ${{ github.sha }}
         run: npm run build
 
       - name: Verify export is the app (not README)
@@ -115,6 +128,7 @@ jobs:
           # Dynamic routes must have been generated (empty DB used to fail here)
           test -d out/sets
           test -d out/djs
+          test -d out/venues
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3

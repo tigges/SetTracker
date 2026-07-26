@@ -529,3 +529,111 @@ export async function getAllDjSlugs() {
   const rows = await prisma.dj.findMany({ select: { slug: true } });
   return rows.map((r) => r.slug);
 }
+
+// ---------------------------------------------------------------------------
+// Venues (Event entities — festivals, clubs, livestream channels)
+// Kept separate from DJs / Labels / DJ Series.
+// ---------------------------------------------------------------------------
+export async function getVenues() {
+  const events = await prisma.event.findMany({
+    orderBy: { name: "asc" },
+    include: {
+      _count: { select: { sets: true } },
+      sets: {
+        orderBy: { publishedAt: "desc" },
+        take: 1,
+        include: {
+          artists: {
+            where: { isPrimary: true },
+            include: { dj: true },
+            take: 1,
+          },
+        },
+      },
+    },
+  });
+
+  return events
+    .filter((e) => e._count.sets > 0)
+    .map((e) => {
+      const latest = e.sets[0];
+      const prim = latest?.artists[0]?.dj;
+      return {
+        id: e.id,
+        slug: e.slug,
+        name: e.name,
+        kind: e.kind,
+        location: e.location,
+        setCount: e._count.sets,
+        imageUrl: latest?.imageUrl ?? prim?.imageUrl ?? null,
+        accent: prim?.accent ?? "var(--brand)",
+      };
+    })
+    .sort((a, b) => b.setCount - a.setCount || a.name.localeCompare(b.name));
+}
+
+export async function getAllVenueSlugs() {
+  const rows = await prisma.event.findMany({
+    where: { sets: { some: {} } },
+    select: { slug: true },
+  });
+  return rows.map((r) => r.slug);
+}
+
+export async function getVenueBySlug(slug: string) {
+  const event = await prisma.event.findUnique({
+    where: { slug },
+    include: {
+      sets: {
+        orderBy: { publishedAt: "desc" },
+        include: {
+          artists: { include: { dj: true }, orderBy: { isPrimary: "desc" } },
+        },
+      },
+    },
+  });
+  if (!event) return null;
+
+  const tallies = await statusCountsBySetIds(event.sets.map((s) => s.id));
+
+  return {
+    slug: event.slug,
+    name: event.name,
+    kind: event.kind,
+    location: event.location,
+    setCount: event.sets.length,
+    sets: event.sets.map((s) => {
+      const prim = s.artists.find((a) => a.isPrimary) ?? s.artists[0];
+      const tally = tallies.get(s.id);
+      return {
+        id: s.id,
+        slug: s.slug,
+        title: s.title,
+        type: s.type,
+        genre: s.genre,
+        publishedAt: s.publishedAt,
+        durationSec: s.durationSec,
+        imageUrl: s.imageUrl ?? prim?.dj.imageUrl ?? null,
+        primaryDj: prim
+          ? {
+              name: prim.dj.name,
+              slug: prim.dj.slug,
+              accent: prim.dj.accent,
+              imageUrl: prim.dj.imageUrl,
+            }
+          : null,
+        collaborators: s.artists
+          .filter((a) => !a.isPrimary)
+          .map((a) => ({ name: a.dj.name, slug: a.dj.slug })),
+        trackCount: tally?.trackCount ?? 0,
+        statusCounts: tally?.counts ?? emptyCounts(),
+        sourceName: s.sourceName,
+        cover: s.cover,
+        eventName: event.name,
+        seriesName: null,
+      } satisfies FeedItem;
+    }),
+  };
+}
+
+export type VenueProfile = NonNullable<Awaited<ReturnType<typeof getVenueBySlug>>>;

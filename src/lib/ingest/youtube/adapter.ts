@@ -164,8 +164,9 @@ async function venueVideoToRawSet(
     genre: venue.genre,
     primaryArtist: primary,
     collaborators,
-    seriesName: venue.seriesName,
+    // Venue brands are Events, not DJ Series — keeps /venues separate from radio shows.
     eventName: venue.seriesName,
+    eventKind: "livestream",
     publishedAt: meta.publishedAt ?? new Date(),
     durationSec: meta.durationSec,
     sourceName: "YouTube",
