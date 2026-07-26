@@ -48,9 +48,10 @@ jobs:
       - name: Generate Prisma client
         run: npx prisma generate
 
-      - name: Apply migrations
-        run: npx prisma migrate deploy
-
+      # Restore BEFORE migrate so we don't create an empty DB that confuses checks.
+      # NOTE: actions/cache sets cache-hit=true only on exact key match. Restore-key
+      # hits leave cache-hit=false even when prisma/dev.db was restored — never use
+      # cache-hit alone to decide whether to seed (that wiped 270→42 sets).
       - name: Restore last catalog DB (skip crawl on push)
         id: dbcache
         uses: actions/cache/restore@v4
@@ -60,17 +61,29 @@ jobs:
           restore-keys: |
             setradar-db-
 
-      - name: Seed fallback DB (only if no cached catalog)
-        if: steps.dbcache.outputs.cache-hit != 'true' && env.INGEST_MODE == 'fast'
-        env:
-          # Empty sets break Next static export (generateStaticParams).
-          # Mocks only until a deep crawl populates the Actions cache.
-          SEED_MOCK_SETS: "1"
-        run: npx prisma db seed
+      - name: Require restored catalog on fast path
+        if: env.INGEST_MODE == 'fast'
+        run: |
+          if [ ! -f prisma/dev.db ]; then
+            echo "::error::No catalog DB in Actions cache. Re-run Actions → Deploy → mode=deep."
+            exit 1
+          fi
+          # Apply migrations onto the restored catalog (not an empty file).
+          npx prisma migrate deploy
+          SETS=$(npx tsx -e 'import {PrismaClient} from "@prisma/client"; const p=new PrismaClient(); p.set.count().then(c=>{console.log(c); return p.$disconnect();})')
+          echo "Restored catalog sets=$SETS (cache-hit=${{ steps.dbcache.outputs.cache-hit }} matched=${{ steps.dbcache.outputs.cache-matched-key }})"
+          if [ "${SETS:-0}" -lt 50 ]; then
+            echo "::error::Restored catalog has only $SETS sets (expected 50+). Refusing mock seed. Re-run deep deploy."
+            exit 1
+          fi
 
       - name: Seed before deep crawl
         if: env.INGEST_MODE == 'deep'
-        run: npx prisma db seed
+        run: |
+          # Fresh schema + artist skeleton; ingest fills real sets.
+          rm -f prisma/dev.db prisma/dev.db-journal
+          npx prisma migrate deploy
+          npx prisma db seed
 
       - name: Deep crawl (schedule / manual only)
         if: env.INGEST_MODE == 'deep'
@@ -106,6 +119,14 @@ jobs:
           path: prisma/dev.db
           key: setradar-db-${{ github.run_id }}
 
+      # Also refresh cache after a good fast deploy so the key stays warm.
+      - name: Re-save catalog DB after fast path
+        if: env.INGEST_MODE == 'fast'
+        uses: actions/cache/save@v4
+        with:
+          path: prisma/dev.db
+          key: setradar-db-${{ github.run_id }}
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
         with:
@@ -115,7 +136,7 @@ jobs:
         env:
           GITHUB_PAGES: "true"
           PAGES_BASE_PATH: "/SetTracker"
-          NEXT_PUBLIC_APP_VERSION: "0.2.0"
+          NEXT_PUBLIC_APP_VERSION: "0.2.1"
           NEXT_PUBLIC_GIT_SHA: ${{ github.sha }}
         run: npm run build
 
@@ -123,14 +144,19 @@ jobs:
         run: |
           test -f out/index.html
           grep -qi "setradar" out/index.html
-          # App shell, not the repo README Jekyll page
           grep -qi "SETRADAR" out/index.html
           test ! -d out/cache
           test ! -d out/server
-          # Dynamic routes must have been generated (empty DB used to fail here)
           test -d out/sets
           test -d out/djs
           test -d out/venues
+          # Guard: static export must include a real catalog, not mock seed (~42 sets)
+          SET_PAGES=$(find out/sets -mindepth 1 -maxdepth 1 -type d ! -name '_placeholder' | wc -l)
+          echo "Exported set pages: $SET_PAGES"
+          if [ "$SET_PAGES" -lt 50 ]; then
+            echo "::error::Export only has $SET_PAGES set pages — refusing to deploy a wiped catalog."
+            exit 1
+          fi
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
