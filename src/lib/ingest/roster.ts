@@ -57,6 +57,7 @@ export const ARTIST_ROSTER_CURATED: ArtistRosterEntry[] = [
     youtube: { handle: "@JamesHype", status: "ok" },
     soundcloud: {
       permalink: "jameshypethedj",
+      userId: 121047111,
       status: "ok",
       note: "canonical SC; jameshype is a weak/empty stub",
     },
