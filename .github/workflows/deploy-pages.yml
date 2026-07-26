@@ -3,10 +3,19 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
-  # Regularly crawl sources for new sets & DJs and redeploy the static site.
+  # Full deep crawl on a schedule; push deploys stay light/fast.
   schedule:
     - cron: "0 */6 * * *"
   workflow_dispatch:
+    inputs:
+      mode:
+        description: "Ingest depth"
+        required: true
+        default: "deep"
+        type: choice
+        options:
+          - light
+          - deep
 
 # Allow the workflow to publish to GitHub Pages.
 permissions:
@@ -22,6 +31,9 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      # Push → light (minutes). Schedule / manual deep → full roster scan.
+      INGEST_MODE: ${{ github.event_name == 'schedule' && 'deep' || github.event_name == 'workflow_dispatch' && inputs.mode || 'light' }}
     steps:
       - uses: actions/checkout@v4
 
@@ -41,8 +53,19 @@ jobs:
           npx prisma migrate deploy
           npx prisma db seed
 
-      # Deep-scan roster artists (YT videos+streams+continuation, SC tracks).
-      - name: Crawl sources for new sets & DJs
+      - name: Crawl sources (light — fast push deploys)
+        if: env.INGEST_MODE == 'light'
+        env:
+          YOUTUBE_ARTIST_VIDEO_LIMIT: "6"
+          YOUTUBE_ARTIST_VIDEO_LIMIT_HIGH: "10"
+          YOUTUBE_VENUE_VIDEO_LIMIT: "8"
+          YOUTUBE_CONTINUATION_PAGES: "0"
+          SOUNDCLOUD_ARTIST_TRACK_LIMIT: "12"
+          HEARTHIS_MAX_SETS: "20"
+        run: npm run ingest
+
+      - name: Crawl sources (deep — schedule / manual)
+        if: env.INGEST_MODE == 'deep'
         env:
           YOUTUBE_ARTIST_VIDEO_LIMIT: "40"
           YOUTUBE_ARTIST_VIDEO_LIMIT_HIGH: "60"
@@ -64,6 +87,15 @@ jobs:
           GITHUB_PAGES: "true"
           PAGES_BASE_PATH: "/SetTracker"
         run: npm run build
+
+      - name: Verify export is the app (not README)
+        run: |
+          test -f out/index.html
+          grep -q "setradar.ai" out/index.html
+          # Guard against accidentally uploading a Next build cache
+          test ! -d out/cache
+          test ! -d out/server
+          ls out | head
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3

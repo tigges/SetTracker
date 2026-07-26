@@ -15,9 +15,10 @@ const nextConfig: NextConfig = {
         basePath: repo,
         assetPrefix: `${repo}/`,
         trailingSlash: true,
-        // Emit the static export to `out/` (also keeps it separate from `.next`,
-        // so a running `next start`/dev server isn't disturbed by a Pages build).
-        distDir: "out",
+        // Keep the Next build cache out of `out/` — static export always
+        // writes the site into `out/`, and uploading `out/` to Pages must
+        // only contain HTML/assets (not the build cache).
+        distDir: ".next-pages",
       }
     : {}),
 };

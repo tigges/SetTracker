@@ -50,8 +50,10 @@ setradar.ai.
   limits (`data/soundcloud-poll-state.json`). **sourceHash refresh** when
   tracklists change; SetArtist links refresh even on hash skip. Optional:
   `HEARTHIS_MAX_SETS`, `SOUNDCLOUD_ARTIST_TRACK_LIMIT`, `INGEST_TOPDJS=1`,
-  `INGEST_SYNTHETIC=1`, `SOUNDCLOUD_CLIENT_ID`. Do **not** crawl
-  1001Tracklists. Pages cron: seed → ingest → thumbs → export.
+  `INGEST_SYNTHETIC=1`,   `SOUNDCLOUD_CLIENT_ID`. Do **not** crawl
+  1001Tracklists. Pages: **push = light ingest** (fast), **cron/manual deep =
+  full roster scan**; then thumbs → export. Repo Pages Source must be **GitHub
+  Actions** (not branch/`/`), or GitHub will race-serve this README as the site.
 - **Artwork thumbnails:** `npm run thumbs` fills null `imageUrl` on Dj / Label /
   Track / Set via the Deezer Search API (no key). Idempotent; skips rows that
   already have art. Sets fall back to the primary DJ image. The Pages workflow

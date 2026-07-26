@@ -5,7 +5,12 @@ episodes, festival sets and SoundCloud mixes; every track row carries a
 **status** and **provenance** so you can see what's identified and what's still
 an ID.
 
-> Live (GitHub Pages): https://tigges.github.io/SetTracker/
+> Live app: https://tigges.github.io/SetTracker/
+>
+> **Pages setup (required):** Repo → Settings → Pages → **Source = GitHub Actions**
+> (not “Deploy from a branch”). If Source is the `main` branch root, GitHub
+> briefly serves this README as the site while Actions is still ingesting — that
+> is the blank “Stack / Data model” page, not the product.
 
 ## Stack
 
