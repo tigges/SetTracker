@@ -70,6 +70,10 @@ export interface SourceAdapter {
 export function slugify(input: string): string {
   return input
     .toLowerCase()
+    // Nordic / special letters that NFKD does not fold to ASCII
+    .replace(/[øØ]/g, "o")
+    .replace(/[æÆ]/g, "ae")
+    .replace(/[åÅ]/g, "a")
     .normalize("NFKD")
     .replace(/[\u0300-\u036f]/g, "") // strip diacritics
     .replace(/&/g, " ")

@@ -1,5 +1,7 @@
 import { PrismaClient } from "@prisma/client";
-import { djSocials, labelSocials } from "../src/lib/social";
+import { ARTIST_ROSTER } from "../src/lib/ingest/roster";
+import { slugify } from "../src/lib/ingest/types";
+import { djSocials, djSocialsFromKnown, labelSocials } from "../src/lib/social";
 
 const prisma = new PrismaClient();
 
@@ -79,7 +81,7 @@ async function main() {
   // DJs
   // -------------------------------------------------------------------------
   const djData = [
-    ["marten-horger", "Marten Hörger", "Berlin, DE", "#ff7a45", "German producer bending tech house into hard-hitting bass grooves."],
+    ["marten-horger", "Marten Hørger", "Berlin, DE", "#ff7a45", "German producer bending tech house into hard-hitting bass grooves."],
     ["ac-slater", "AC Slater", "Los Angeles, US", "#f2b33d", "Night Bass founder and the definitional voice of modern bass house."],
     ["chris-lake", "Chris Lake", "Los Angeles, US", "#c6cfda", "Black Book Records boss steering peak-time house."],
     ["tchami", "Tchami", "Paris, FR", "#e06cc4", "Future house pioneer and Confession label head."],
@@ -112,7 +114,18 @@ async function main() {
   ];
   const djs: Record<string, string> = {};
   for (const [slug, name, homeCity, accent, bio] of djData) {
-    const d = await prisma.dj.create({ data: { slug, name, homeCity, accent, bio, ...djSocials(name) } });
+    const roster = ARTIST_ROSTER.find((a) => slugify(a.name) === slug);
+    const socials = roster
+      ? djSocialsFromKnown({
+          name,
+          soundcloudPermalink: roster.soundcloud?.permalink,
+          socials: roster.socials,
+          website: roster.website,
+        })
+      : djSocials(name);
+    const d = await prisma.dj.create({
+      data: { slug, name, homeCity, accent, bio, ...socials },
+    });
     djs[slug] = d.id;
   }
 
@@ -160,7 +173,7 @@ async function main() {
   // -------------------------------------------------------------------------
   // Prefer real release titles where we can — thumbs resolves cover art via Deezer/iTunes.
   const trackData: [string, string, string, string | null, number][] = [
-    ["lose-my-mind", "No Bite", "Marten Hörger", "nightbass", 126],
+    ["lose-my-mind", "No Bite", "Marten Hørger", "nightbass", 126],
     ["turn-it-up", "Rampage", "AC Slater", "nightbass", 128],
     ["deceiver", "Deceiver", "Chris Lake", "blackbook", 126],
     ["prophecy", "Prophecy", "Tchami", "confession", 125],
@@ -175,7 +188,7 @@ async function main() {
     ["bass-jam", "Bass Jam", "Westend", "bitbird", 125],
     ["roll-with-it", "Roll With It", "VNSSA", "nightbass", 126],
     ["pressure", "Pressure", "Cause & Affect", null, 128],
-    ["turbulence", "Worth The Wait", "Marten Hörger", null, 128],
+    ["turbulence", "Worth The Wait", "Marten Hørger", null, 128],
     ["work", "Crew Joint", "AC Slater", "nightbass", 128],
     ["all-night", "All Night", "Chris Lake", "blackbook", 125],
     ["ride", "The Calling", "Tchami", "confession", 125],
@@ -191,10 +204,10 @@ async function main() {
     ["moonwalk", "Moonwalk", "Westend", "bitbird", 122],
     ["tunnel", "Tunnel", "VNSSA", null, 126],
     ["static", "Static", "Cause & Affect", null, 130],
-    ["pulse", "I Know", "Marten Hörger", null, 127],
+    ["pulse", "I Know", "Marten Hørger", null, 127],
     ["lowkey", "Lowkey", "Malaa", null, 125],
     ["afterdark", "A Drug From God", "Chris Lake", "blackbook", 126],
-    ["glow", "Keep On Pushing", "Marten Hörger", "confession", 126],
+    ["glow", "Keep On Pushing", "Marten Hørger", "confession", 126],
     ["get-loose", "Get Loose", "Cloonee", null, 128],
     ["low-ride", "Low Ride", "Cloonee", null, 127],
     ["superstar", "Superstar", "Matroda", null, 126],
@@ -349,11 +362,11 @@ async function main() {
         id("turbulence"),
         id("lose-my-mind"),
         id("pulse"),
-        unid("Marten Hörger - ID", "1001tl", "Marten Hörger"),
+        unid("Marten Hørger - ID", "1001tl", "Marten Hørger"),
         id("glow"),
         res("ID - ID", "vibrate", "community"),
         id("ratchet"),
-        raw("Marten Hörger - VIP edit (rip)", "1001tl"),
+        raw("Marten Hørger - VIP edit (rip)", "1001tl"),
         id("turbulence", "fingerprint"),
       ],
     },
@@ -504,9 +517,9 @@ async function main() {
         id("lose-my-mind"),
         id("pulse"),
         id("ratchet"),
-        unid("Marten Hörger - ID", "fingerprint", "Marten Hörger"),
+        unid("Marten Hørger - ID", "fingerprint", "Marten Hørger"),
         res("ID - ID", "vibrate", "community"),
-        raw("Marten Hörger - new ID (festival rip)", "fingerprint"),
+        raw("Marten Hørger - new ID (festival rip)", "fingerprint"),
         id("glow"),
         id("turbulence", "fingerprint"),
       ],

@@ -1,9 +1,11 @@
-// Derives "main account" URLs from a name. These are best-effort demo handles
-// (the crawler can later store real, verified handles on the entity instead).
+// Derives "main account" URLs from a name. Prefer roster / crawler-verified
+// handles via `djSocialsFromRoster` when available.
 
 export function socialHandle(name: string): string {
   return name
     .toLowerCase()
+    .replace(/[øØ]/g, "o")
+    .replace(/[æÆ]/g, "ae")
     .normalize("NFKD")
     .replace(/[\u0300-\u036f]/g, "")
     .replace(/[^a-z0-9]+/g, "");
@@ -19,6 +21,33 @@ export function djSocials(name: string): {
     soundcloud: `https://soundcloud.com/${h}`,
     instagram: `https://instagram.com/${h}`,
     twitter: `https://x.com/${h}`,
+  };
+}
+
+/** Prefer curated roster permalinks / social URLs over name-derived guesses. */
+export function djSocialsFromKnown(opts: {
+  name: string;
+  soundcloudPermalink?: string | null;
+  socials?: string[];
+  website?: string | null;
+}): {
+  soundcloud: string;
+  instagram: string;
+  twitter: string;
+} {
+  const fallback = djSocials(opts.name);
+  const socials = opts.socials ?? [];
+  const ig =
+    socials.find((u) => /instagram\.com\//i.test(u)) ?? fallback.instagram;
+  const tw =
+    socials.find((u) => /(twitter|x)\.com\//i.test(u)) ?? fallback.twitter;
+  const sc = opts.soundcloudPermalink
+    ? `https://soundcloud.com/${opts.soundcloudPermalink}`
+    : (socials.find((u) => /soundcloud\.com\//i.test(u)) ?? fallback.soundcloud);
+  return {
+    soundcloud: sc.startsWith("http") ? sc : `https://soundcloud.com/${sc}`,
+    instagram: ig.startsWith("http") ? ig : `https://instagram.com/${ig}`,
+    twitter: tw.startsWith("http") ? tw : `https://x.com/${tw}`,
   };
 }
 

@@ -84,8 +84,8 @@ export const SOUNDCLOUD_SHOWS: SoundCloudShow[] = [
   {
     permalink: "marten-horger",
     userId: 242146,
-    label: "Marten Hörger",
-    primaryArtist: dj("Marten Hörger", {
+    label: "Marten Hørger",
+    primaryArtist: dj("Marten Hørger", {
       accent: "#ff7a45",
       homeCity: "Berlin, DE",
     }),
