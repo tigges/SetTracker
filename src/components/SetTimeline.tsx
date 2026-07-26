@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import { EntityThumb } from "@/components/EntityThumb";
 import { SuggestIdButton } from "@/components/SuggestId";
 import {
@@ -15,6 +15,31 @@ import {
   type Provenance,
 } from "@/lib/status";
 import type { PlayRow } from "@/lib/queries";
+
+const DENSITY_KEY = "setradar.tracklistDensity";
+const densityListeners = new Set<() => void>();
+
+function subscribeDensity(onChange: () => void) {
+  densityListeners.add(onChange);
+  return () => densityListeners.delete(onChange);
+}
+
+function getDensityCompact() {
+  try {
+    return localStorage.getItem(DENSITY_KEY) === "compact";
+  } catch {
+    return false;
+  }
+}
+
+function setDensityCompact(compact: boolean) {
+  try {
+    localStorage.setItem(DENSITY_KEY, compact ? "compact" : "comfortable");
+  } catch {
+    /* ignore */
+  }
+  densityListeners.forEach((l) => l());
+}
 
 export function SetTimeline({
   plays,
@@ -36,7 +61,16 @@ export function SetTimeline({
   const [activeId, setActiveId] = useState<string | null>(plays[0]?.id ?? null);
   const [flashId, setFlashId] = useState<string | null>(null);
   const [hoverId, setHoverId] = useState<string | null>(null);
+  const compact = useSyncExternalStore(
+    subscribeDensity,
+    getDensityCompact,
+    () => false,
+  );
   const rowRefs = useRef<Record<string, HTMLDivElement | null>>({});
+
+  function toggleDensity() {
+    setDensityCompact(!getDensityCompact());
+  }
 
   const spans = useMemo(() => {
     return plays.map((p, i) => {
@@ -143,7 +177,17 @@ export function SetTimeline({
       <div className="card overflow-hidden">
         <div className="flex items-center justify-between border-b border-line px-4 py-3">
           <span className="eyebrow">Tracklist</span>
-          <span className="mono text-[12px] text-muted2">{plays.length} rows</span>
+          <div className="flex items-center gap-3">
+            <button
+              type="button"
+              onClick={toggleDensity}
+              className="mono text-[11px] text-muted2 transition-colors hover:text-ink"
+              title="Toggle tracklist density"
+            >
+              {compact ? "Comfortable" : "Compact"}
+            </button>
+            <span className="mono text-[12px] text-muted2">{plays.length} rows</span>
+          </div>
         </div>
         {plays.length === 0 ? (
           <p className="px-4 py-10 text-center text-[13px] text-muted2">
@@ -163,9 +207,9 @@ export function SetTimeline({
                     rowRefs.current[p.id] = el;
                   }}
                   onClick={() => focusRow(p.id)}
-                  className={`flex cursor-pointer items-center gap-3 border-b border-linesoft px-4 py-3 transition-colors last:border-b-0 ${
-                    flashId === p.id ? "row-flash" : ""
-                  }`}
+                  className={`flex cursor-pointer items-center gap-3 border-b border-linesoft px-4 transition-colors last:border-b-0 ${
+                    compact ? "py-1.5" : "py-3"
+                  } ${flashId === p.id ? "row-flash" : ""}`}
                   style={{
                     background: isActive ? `${accent}12` : undefined,
                     boxShadow: isActive ? `inset 3px 0 0 ${accent}` : "inset 3px 0 0 transparent",
@@ -181,27 +225,44 @@ export function SetTimeline({
                     src={p.imageUrl}
                     label={p.title}
                     accent={statusColor(p.idStatus)}
-                    size={32}
+                    size={compact ? 24 : 32}
                     radius={6}
                   />
-                  <span
-                    className="dot"
-                    title={meta?.label}
-                    style={{ background: statusColor(p.idStatus) }}
-                  />
+                  {!compact && (
+                    <span
+                      className="dot"
+                      title={meta?.label}
+                      style={{ background: statusColor(p.idStatus) }}
+                    />
+                  )}
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-2">
-                      <span
-                        className="truncate text-[14px] text-ink"
-                        style={
-                          p.idStatus === "unresolved_id"
-                            ? { color: "var(--magenta)" }
-                            : undefined
-                        }
-                      >
-                        {p.title}
-                      </span>
-                      {p.mixName && (
+                      {p.trackSlug ? (
+                        <Link
+                          href={`/tracks/${p.trackSlug}`}
+                          onClick={(e) => e.stopPropagation()}
+                          className="truncate text-[14px] text-ink transition-colors hover:text-brand"
+                          style={
+                            p.idStatus === "unresolved_id"
+                              ? { color: "var(--magenta)" }
+                              : undefined
+                          }
+                        >
+                          {p.title}
+                        </Link>
+                      ) : (
+                        <span
+                          className="truncate text-[14px] text-ink"
+                          style={
+                            p.idStatus === "unresolved_id"
+                              ? { color: "var(--magenta)" }
+                              : undefined
+                          }
+                        >
+                          {p.title}
+                        </span>
+                      )}
+                      {p.mixName && !compact && (
                         <span
                           className="hidden truncate text-[11px] text-muted2 sm:inline"
                           title={p.remixerName ? `Remixer: ${p.remixerName}` : p.mixName}
@@ -209,17 +270,19 @@ export function SetTimeline({
                           {p.mixName}
                         </span>
                       )}
-                      {p.bpm != null && (
+                      {p.bpm != null && !compact && (
                         <span className="mono flex-none text-[11px] text-muted2">
                           {p.bpm} BPM
                         </span>
                       )}
-                      {p.musicalKey && (
+                      {p.musicalKey && !compact && (
                         <span className="mono flex-none text-[11px] text-muted2">
                           {p.musicalKey}
                         </span>
                       )}
-                      {p.trackDurationSec != null && p.trackDurationSec > 0 && (
+                      {p.trackDurationSec != null &&
+                        p.trackDurationSec > 0 &&
+                        !compact && (
                         <span className="mono flex-none text-[11px] text-muted2">
                           {fmtTimestamp(p.trackDurationSec)}
                         </span>

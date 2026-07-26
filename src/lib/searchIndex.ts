@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/db";
+import { ensureTrackSlugs } from "@/lib/tracks/ensureSlugs";
 
 export type SearchIndexItem = {
   kind: "set" | "dj" | "venue" | "label" | "track";
@@ -10,6 +11,8 @@ export type SearchIndexItem = {
 
 /** Build-time index for static-export client search. */
 export async function getSearchIndex(): Promise<SearchIndexItem[]> {
+  await ensureTrackSlugs(prisma);
+
   const [sets, djs, venues, labels, trackPlays] = await Promise.all([
     prisma.set.findMany({
       select: {
@@ -71,14 +74,10 @@ export async function getSearchIndex(): Promise<SearchIndexItem[]> {
         where: { id: { in: trackIds } },
         select: {
           id: true,
+          slug: true,
           title: true,
           artistName: true,
           genre: true,
-          plays: {
-            take: 1,
-            orderBy: { set: { publishedAt: "desc" } },
-            select: { set: { select: { slug: true } } },
-          },
         },
       })
     : [];
@@ -136,13 +135,11 @@ export async function getSearchIndex(): Promise<SearchIndexItem[]> {
   }
 
   for (const t of tracks) {
-    const setSlug = t.plays[0]?.set?.slug;
-    if (!setSlug) continue;
     items.push({
       kind: "track",
       title: t.title,
       subtitle: t.artistName,
-      href: `/sets/${setSlug}`,
+      href: `/tracks/${t.slug}`,
       keywords: [t.artistName, t.genre].filter(Boolean).join(" "),
     });
   }

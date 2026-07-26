@@ -10,6 +10,11 @@ export type YoutubeVenueChannel = {
   channel: string;
   /** Series label on the set */
   seriesName: string;
+  /**
+   * Canonical Event slug from events.KNOWN_EVENTS when the channel brand
+   * itself is the venue (not a guest festival inferred from the title).
+   */
+  eventSlug?: string;
   genre: string;
   accent: string;
   /** Max recent uploads to inspect */
@@ -25,6 +30,7 @@ export const YOUTUBE_VENUES: YoutubeVenueChannel[] = [
   {
     channel: "@boilerroom",
     seriesName: "Boiler Room",
+    eventSlug: "boiler-room",
     genre: "Electronic",
     accent: "#e10600",
     limit: VENUE_LIMIT,
@@ -34,6 +40,7 @@ export const YOUTUBE_VENUES: YoutubeVenueChannel[] = [
   {
     channel: "@Cercle",
     seriesName: "Cercle",
+    eventSlug: "cercle",
     genre: "Electronic",
     accent: "#1a1a1a",
     limit: VENUE_LIMIT,
@@ -43,6 +50,7 @@ export const YOUTUBE_VENUES: YoutubeVenueChannel[] = [
   {
     channel: "@Mixmag",
     seriesName: "Mixmag",
+    eventSlug: "mixmag",
     genre: "Electronic",
     accent: "#111111",
     limit: VENUE_LIMIT,
@@ -52,6 +60,7 @@ export const YOUTUBE_VENUES: YoutubeVenueChannel[] = [
   {
     channel: "@DefectedRecords",
     seriesName: "Defected",
+    eventSlug: "defected",
     genre: "House",
     accent: "#c1121f",
     limit: VENUE_LIMIT,
@@ -70,6 +79,7 @@ export const YOUTUBE_VENUES: YoutubeVenueChannel[] = [
   {
     channel: "@Tomorrowland",
     seriesName: "Tomorrowland",
+    eventSlug: "tomorrowland",
     genre: "Electronic",
     accent: "#7b2cbf",
     limit: VENUE_LIMIT,
@@ -79,6 +89,7 @@ export const YOUTUBE_VENUES: YoutubeVenueChannel[] = [
   {
     channel: "@insomniac",
     seriesName: "Insomniac",
+    eventSlug: "insomniac",
     genre: "Electronic",
     accent: "#ff006e",
     limit: VENUE_LIMIT,

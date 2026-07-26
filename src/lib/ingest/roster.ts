@@ -1,7 +1,13 @@
 /**
  * Master roster of identified artists we want to deep-scan.
  * Single source of truth for YouTube / SoundCloud seeds + handle gaps.
+ *
+ * Curated entries live below; discovery can append graduates via
+ * data/roster-graduates.json (see discovery/graduateRoster.ts).
  */
+
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 
 export type HandleStatus = "ok" | "weak" | "missing" | "unverified";
 
@@ -24,11 +30,24 @@ export type ArtistRosterEntry = {
   priority?: "high" | "normal";
 };
 
+function loadRosterGraduates(): ArtistRosterEntry[] {
+  try {
+    const path =
+      process.env.ROSTER_GRADUATES_PATH ||
+      join(process.cwd(), "data", "roster-graduates.json");
+    const parsed = JSON.parse(readFileSync(path, "utf8")) as {
+      artists?: ArtistRosterEntry[];
+    };
+    return Array.isArray(parsed.artists) ? parsed.artists : [];
+  } catch {
+    return [];
+  }
+}
+
 /**
- * Artists we've identified as set sources. Update statuses when cross-link
- * resolution finds better handles.
+ * Hand-curated seed artists. Prefer editing this list for known brand DJs.
  */
-export const ARTIST_ROSTER: ArtistRosterEntry[] = [
+export const ARTIST_ROSTER_CURATED: ArtistRosterEntry[] = [
   // ---- High-signal tracklist / live publishers ----
   {
     name: "James Hype",
@@ -389,6 +408,14 @@ export const ARTIST_ROSTER: ArtistRosterEntry[] = [
     socials: ["https://ffm.to/km074"],
     priority: "normal",
   },
+];
+
+/**
+ * Effective deep-scan roster = curated + graduated discovery candidates.
+ */
+export const ARTIST_ROSTER: ArtistRosterEntry[] = [
+  ...ARTIST_ROSTER_CURATED,
+  ...loadRosterGraduates(),
 ];
 
 export function rosterMissingHandles(): ArtistRosterEntry[] {

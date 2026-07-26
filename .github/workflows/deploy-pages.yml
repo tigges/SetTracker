@@ -56,6 +56,7 @@ jobs:
             data/artist-candidates.json
             data/artist-relations.json
             data/venue-candidates.json
+            data/roster-graduates.json
           key: setradar-discovery-${{ github.run_id }}
           restore-keys: |
             setradar-discovery-
@@ -108,11 +109,20 @@ jobs:
           SOUNDCLOUD_ARTIST_TRACK_LIMIT: "50"
           # Expand artist graph each deep run (lineup/press/B2B → promote → poll).
           DISCOVERY_PROMOTE_SCORE: "28"
-          DISCOVERY_PROMOTE_CAP: "24"
+          DISCOVERY_PROMOTE_CAP: "48"
         run: npm run ingest
 
-      - name: Resolve artwork thumbnails (Deezer)
+      - name: Graduate promoted artists into roster
         if: env.INGEST_MODE == 'deep'
+        env:
+          DISCOVERY_GRADUATE_SCORE: "40"
+          DISCOVERY_GRADUATE_CAP: "20"
+        run: npm run graduate-roster
+
+      - name: Resolve artwork + track meta (Deezer / MusicBrainz)
+        if: env.INGEST_MODE == 'deep'
+        env:
+          THUMBS_MB_LIMIT: "60"
         run: npm run thumbs
 
       - name: Fill missing thumbs only (fast path)
@@ -143,6 +153,7 @@ jobs:
             data/artist-candidates.json
             data/artist-relations.json
             data/venue-candidates.json
+            data/roster-graduates.json
           key: setradar-discovery-${{ github.run_id }}
 
       # Also refresh cache after a good fast deploy so the key stays warm.
@@ -162,7 +173,7 @@ jobs:
         env:
           GITHUB_PAGES: "true"
           PAGES_BASE_PATH: "/SetTracker"
-          NEXT_PUBLIC_APP_VERSION: "0.2.6"
+          NEXT_PUBLIC_APP_VERSION: "0.2.7"
           NEXT_PUBLIC_GIT_SHA: ${{ github.sha }}
         run: npm run build
 

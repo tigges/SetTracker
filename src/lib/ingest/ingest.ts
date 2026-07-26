@@ -6,6 +6,7 @@ import { runCrosslinkDiscovery, type HandleReport } from "./discovery/crosslink"
 import { runDiscovery, type DiscoveryStats } from "./discovery/run";
 import { hashRawSetContent } from "./hash";
 import { adapters as defaultAdapters } from "./sources";
+import { allocateTrackSlug, trackSlugBase } from "../tracks/slug";
 import { slugify, type RawArtist, type RawPlay, type RawSet, type SourceAdapter } from "./types";
 import { eventSocialPayload, resolveEvent } from "./events";
 import { scanEntityUrls } from "./scanEntityUrls";
@@ -192,14 +193,40 @@ export async function runIngest(
         const labelId = await upsertLabel(play.label);
         if (labelId) data.labelId = labelId;
       }
+      if (!existing.slug || existing.slug === existing.id) {
+        data.slug = await allocateTrackSlug(
+          artistName,
+          play.title,
+          async (candidate) => {
+            const hit = await prisma.track.findUnique({
+              where: { slug: candidate },
+              select: { id: true },
+            });
+            return !!hit && hit.id !== existing.id;
+          },
+          trackSlugBase(artistName, play.title),
+        );
+      }
       if (Object.keys(data).length > 0) {
         await prisma.track.update({ where: { id: existing.id }, data });
       }
       return existing.id;
     }
     const labelId = await upsertLabel(play.label);
+    const slug = await allocateTrackSlug(
+      artistName,
+      play.title,
+      async (candidate) => {
+        const hit = await prisma.track.findUnique({
+          where: { slug: candidate },
+          select: { id: true },
+        });
+        return !!hit;
+      },
+    );
     const created = await prisma.track.create({
       data: {
+        slug,
         title: play.title,
         artistName,
         labelId,
