@@ -83,7 +83,7 @@ export function graduateRoster(opts?: {
   for (const c of candidates) {
     const entry: ArtistRosterEntry = {
       name: c.name,
-      genre: c.genre || "Electronic",
+      genre: c.genre || "House",
       accent: c.accent || accentFor(c.slug),
       priority: "normal",
     };
