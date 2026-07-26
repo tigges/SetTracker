@@ -1,8 +1,8 @@
 # Artist handle report
 
-Updated: 2026-07-26T11:19:32.666Z
+Updated: 2026-07-26T11:20:17.375Z
 
-## Needs attention (4)
+## Needs attention (3)
 
 ### James Hype
 - SoundCloud weak: few SC uploads
@@ -16,19 +16,13 @@ Updated: 2026-07-26T11:19:32.666Z
 - SoundCloud: titalau (weak)
 - Discovered links: https://www.youtube.com/@TitaLau/about?referring_app=com.apple.mobilesafari-smartbanner, https://www.youtube.com/@TitaLau/about, https://www.youtube.com/channel/UCbNJ1b-72n98zbk8MU-eeiQ, https://www.youtube.com/channel/UCbNJ1b-72n98zbk8MU-eeiQ?feature=applinks, https://open.spotify.com/artist/5g93I, https://open.spotify.com/playlist/0Xi, https://open.spotify.com/playlist/4V5, https://www.youtube.com/watch?v=OP6cO
 
-### AC Slater
-- YouTube weak: channel returned 0 videos in probe
-- YouTube: @acslater (weak)
-- SoundCloud: acslater (ok)
-- Discovered links: https://www.youtube.com/@acslater/about?referring_app=com.apple.mobilesafari-smartbanner, https://www.youtube.com/@acslater/about, https://www.youtube.com/channel/UCIMPemXvtgadmB84QHRMasQ, https://www.youtube.com/channel/UCIMPemXvtgadmB84QHRMasQ?feature=applinks, http://www.youtube.com/@ACSlater, https://linktr.ee/acslater, https://www.youtube.com/watch?v=BBHiIgHzw-w, https://www.youtube.com/watch?v=X2u1q9DNRD4
-
 ### Solomun
 - YouTube weak: channel probe returned empty
 - YouTube: @solomunmusic (weak)
 - SoundCloud: solomun (ok)
 - Discovered links: https://www.youtube.com/@solomunmusic/about?referring_app=com.apple.mobilesafari-smartbanner, https://www.youtube.com/@solomunmusic/about, https://www.youtube.com/channel/UC7u5nTmusPiybhyKoEwFE6A, https://www.youtube.com/channel/UC7u5nTmusPiybhyKoEwFE6A?feature=applinks, http://www.youtube.com/@solomunmusic
 
-## OK (26)
+## OK (27)
 
 - **Chris Lake** — YT @ChrisLake · SC chrislake
 - **FISHER** — YT @fisher · SC fish-tales
@@ -52,6 +46,7 @@ Updated: 2026-07-26T11:19:32.666Z
 - **Mau P** — YT @maupmusic · SC realmaup
 - **Black Coffee** — YT @realblackcoffee · SC realblackcoffee
 - **Chapter & Verse** — YT @chapterandversemusic · SC chapterandverseofficial
+- **AC Slater** — YT @ACSlater · SC acslater
 - **Marten Hørger** — YT @MARTENHORGER · SC marten-horger
 - **Dom Dolla** — YT @domdolla · SC domdolla
 - **Robin Schulz** — YT @robinschulz · SC robin-schulz

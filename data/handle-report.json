@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-26T11:19:32.666Z",
+  "updatedAt": "2026-07-26T11:20:17.375Z",
   "totalArtists": 30,
   "needsAttention": [
     {
@@ -28,10 +28,10 @@
         "https://twitter.com/JamesHYPE",
         "https://facebook.com/jameshypethedj",
         "https://open.spotify.com/album/0TbP7nFBGhpPmL60tL7HBH?go=1&amp;utm_source=Original_Original&amp;utm_medium=Original&amp;utm_content=3155c0d7-ae97-4e1a-b8ea-e4f2a9d6be48_none_James%20Hype_none_Trigger%20Finger_none_20260330_direct_james-hype-8339_none_lnk.to%2Fjh-trigger",
-        "https://music.apple.com/us/album/1889512443?app=music&amp;at=1l3vpUI&amp;ct=LFV_eb4ff181222747f55de5cfcec42ff2cd&amp;itscg=30440&amp;itsct=catchall_p2&amp;lId=215479952&amp;cId=none&amp;sr=2&amp;src=Linkfire&amp;ls=1",
+        "https://music.apple.com/us/album/1889512443?app=music&amp;at=1l3vpUI&amp;ct=LFV_092b02aad8bcb5ef9f88a7d8e03f1f4b&amp;itscg=30440&amp;itsct=catchall_p2&amp;lId=215479952&amp;cId=none&amp;sr=2&amp;src=Linkfire&amp;ls=1",
         "https://www.beatport.com/track/trigger-finger/28334015",
         "https://soundcloud.com/stereohypeglobal/trigger-finger/s-pbetPPpRada?si=2c0d1e0f841645c08c6d3bb212c58fba&amp;utm_source=clipboard&amp;utm_medium=text&amp;utm_campaign=social_sharing",
-        "https://music.apple.com/us/album/1889512443?app=itunes&amp;at=1l3vpUI&amp;ct=LFV_eb4ff181222747f55de5cfcec42ff2cd&amp;itscg=30440&amp;itsct=catchall_p5&amp;lId=215479952&amp;cId=none&amp;sr=5&amp;src=Linkfire&amp;ls=1",
+        "https://music.apple.com/us/album/1889512443?app=itunes&amp;at=1l3vpUI&amp;ct=LFV_092b02aad8bcb5ef9f88a7d8e03f1f4b&amp;itscg=30440&amp;itsct=catchall_p5&amp;lId=215479952&amp;cId=none&amp;sr=5&amp;src=Linkfire&amp;ls=1",
         "https://youtu.be/rjAJC-EUbv4?src=Linkfire&amp;lId=3155c0d7-ae97-4e1a-b8ea-e4f2a9d6be48&amp;cId=d3d58fd7-4c47-11e6-9fd0-066c3e7a8751",
         "https://music.youtube.com/playlist?list=OLAK5uy_mm2eZ2HtbK1z21hHwHnLJIjUHg0mU5cdw&amp;src=Linkfire&amp;lId=3155c0d7-ae97-4e1a-b8ea-e4f2a9d6be48&amp;cId=d3d58fd7-4c47-11e6-9fd0-066c3e7a8751",
         "https://music.apple.com",
@@ -76,34 +76,6 @@
       "needsAttention": true,
       "attentionReasons": [
         "SoundCloud weak: 0 tracks on SC profile"
-      ]
-    },
-    {
-      "name": "AC Slater",
-      "slug": "ac-slater",
-      "youtube": {
-        "handle": "@acslater",
-        "status": "weak",
-        "note": "channel returned 0 videos in probe"
-      },
-      "soundcloud": {
-        "permalink": "acslater",
-        "status": "ok"
-      },
-      "discoveredLinks": [
-        "https://www.youtube.com/@acslater/about?referring_app=com.apple.mobilesafari-smartbanner",
-        "https://www.youtube.com/@acslater/about",
-        "https://www.youtube.com/channel/UCIMPemXvtgadmB84QHRMasQ",
-        "https://www.youtube.com/channel/UCIMPemXvtgadmB84QHRMasQ?feature=applinks",
-        "http://www.youtube.com/@ACSlater",
-        "https://linktr.ee/acslater",
-        "https://www.youtube.com/watch?v=BBHiIgHzw-w",
-        "https://www.youtube.com/watch?v=X2u1q9DNRD4",
-        "https://youtu.be/xvvLW_mQtHg?si=V5o8rbYGiz9c9jlP"
-      ],
-      "needsAttention": true,
-      "attentionReasons": [
-        "YouTube weak: channel returned 0 videos in probe"
       ]
     },
     {
@@ -652,9 +624,9 @@
         "https://open.spotify.com/track/2xVDlAuxS6rhEMXOlX9h07?go=1&amp;utm_source=Original_Original&amp;utm_medium=Original&amp;utm_content=24861552-5fd0-495a-8ca4-72591ecbcd55_none_SIDEPIECE_none_Cry%20For%20You%20%282025%29_Cry%20For%20You%20%282025%29_20250912_direct_sidepiece_none_lnk.to%2Fcry-for-you",
         "https://www.beatport.com/release/cry-for-you-2025/5350816",
         "https://soundcloud.com/sidepiece/cry-for-you-2025-sidepiece-extended-mix-out-926?utm_medium=api&amp;utm_campaign=social_sharing&amp;utm_source=id_313799",
-        "https://music.apple.com/us/album/1837542477?i=1837542478&amp;app=music&amp;at=1l3vpUI&amp;ct=LFV_acc12484966e1310ff5a16015913f5f8&amp;itscg=30440&amp;itsct=catchall_p4&amp;lId=213993451&amp;cId=none&amp;sr=4&amp;src=Linkfire&amp;ls=1",
+        "https://music.apple.com/us/album/1837542477?i=1837542478&amp;app=music&amp;at=1l3vpUI&amp;ct=LFV_dabd84a2694a7bb50456e136ff084c49&amp;itscg=30440&amp;itsct=catchall_p4&amp;lId=213993451&amp;cId=none&amp;sr=4&amp;src=Linkfire&amp;ls=1",
         "https://www.youtube.com/watch?v=c5LOgnuvnkA&amp;src=Linkfire&amp;lId=24861552-5fd0-495a-8ca4-72591ecbcd55&amp;cId=d3d58fd7-4c47-11e6-9fd0-066c3e7a8751",
-        "https://music.apple.com/us/album/1837542477?i=1837542478&amp;app=itunes&amp;at=1l3vpUI&amp;ct=LFV_acc12484966e1310ff5a16015913f5f8&amp;itscg=30440&amp;itsct=catchall_p6&amp;lId=213993451&amp;cId=none&amp;sr=6&amp;src=Linkfire&amp;ls=1",
+        "https://music.apple.com/us/album/1837542477?i=1837542478&amp;app=itunes&amp;at=1l3vpUI&amp;ct=LFV_dabd84a2694a7bb50456e136ff084c49&amp;itscg=30440&amp;itsct=catchall_p6&amp;lId=213993451&amp;cId=none&amp;sr=6&amp;src=Linkfire&amp;ls=1",
         "https://music.youtube.com/watch?v=a-a74Hn-8Ek&amp;src=Linkfire&amp;lId=24861552-5fd0-495a-8ca4-72591ecbcd55&amp;cId=d3d58fd7-4c47-11e6-9fd0-066c3e7a8751"
       ],
       "needsAttention": false,
@@ -795,6 +767,31 @@
         "https://www.youtube.com/channel/UCNz-KJMLQ7Nk6EvJ4zSnSTg",
         "https://www.youtube.com/channel/UCNz-KJMLQ7Nk6EvJ4zSnSTg?feature=applinks",
         "http://www.youtube.com/@chapterandversemusic"
+      ],
+      "needsAttention": false,
+      "attentionReasons": []
+    },
+    {
+      "name": "AC Slater",
+      "slug": "ac-slater",
+      "youtube": {
+        "handle": "@ACSlater",
+        "status": "ok"
+      },
+      "soundcloud": {
+        "permalink": "acslater",
+        "status": "ok"
+      },
+      "discoveredLinks": [
+        "https://linktr.ee/acslater",
+        "https://www.youtube.com/@ACSlater/about?referring_app=com.apple.mobilesafari-smartbanner",
+        "https://www.youtube.com/@ACSlater/about",
+        "https://www.youtube.com/channel/UCIMPemXvtgadmB84QHRMasQ",
+        "https://www.youtube.com/channel/UCIMPemXvtgadmB84QHRMasQ?feature=applinks",
+        "http://www.youtube.com/@ACSlater",
+        "https://www.youtube.com/watch?v=BBHiIgHzw-w",
+        "https://www.youtube.com/watch?v=X2u1q9DNRD4",
+        "https://youtu.be/xvvLW_mQtHg?si=V5o8rbYGiz9c9jlP"
       ],
       "needsAttention": false,
       "attentionReasons": []
