@@ -4,6 +4,10 @@ import type { NextConfig } from "next";
 // subpath (https://<user>.github.io/<repo>/). All data is build-time seed data,
 // so a static export pre-renders every page. Local dev / `next start` are
 // unaffected (this branch only activates when GITHUB_PAGES=true).
+//
+// Do not set `distDir` here — with `output: "export"`, Next 16 writes the
+// static site into `distDir` when customized, which breaks the Pages upload
+// path (`out/`). Default: build cache → `.next`, export → `out/`.
 const isPages = process.env.GITHUB_PAGES === "true";
 const repo = process.env.PAGES_BASE_PATH ?? "/SetTracker";
 
@@ -15,10 +19,6 @@ const nextConfig: NextConfig = {
         basePath: repo,
         assetPrefix: `${repo}/`,
         trailingSlash: true,
-        // Keep the Next build cache out of `out/` — static export always
-        // writes the site into `out/`, and uploading `out/` to Pages must
-        // only contain HTML/assets (not the build cache).
-        distDir: ".next-pages",
       }
     : {}),
 };
