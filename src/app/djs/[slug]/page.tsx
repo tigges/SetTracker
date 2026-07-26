@@ -14,7 +14,9 @@ import {
 } from "@/lib/status";
 
 export async function generateStaticParams() {
-  return (await getAllDjSlugs()).map((slug) => ({ slug }));
+  const slugs = await getAllDjSlugs();
+  if (slugs.length === 0) return [{ slug: "_placeholder" }];
+  return slugs.map((slug) => ({ slug }));
 }
 
 function Panel({
