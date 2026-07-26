@@ -64,6 +64,9 @@ setradar.ai.
  via ffmpeg → ACRCloud Identify (`ACRCLOUD_*` secrets + `ACRCLOUD_ENABLED=1`).
  Fills timeline gaps only with `provenance: "fingerprint"`; never overwrites
  `sourceUrl` / `sourceName`. Prefers SC/hearthis over YT
- (`ACRCLOUD_ALLOW_YOUTUBE=0` by default).
+ (`ACRCLOUD_ALLOW_YOUTUBE=0` by default). Manual pasted IDs (ACRCloud/AudD /
+ aha-music analysis) live in `src/lib/ingest/fingerprint/seeds.ts` and can
+ attach to curated YT sets via `fingerprintPlays` — do not scrape AudioScout /
+ TrackId / MusicMate.
 - **Standard commands** live in `package.json` scripts and `README.md`; prefer
   those over ad-hoc invocations.
