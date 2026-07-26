@@ -102,10 +102,13 @@ is in `.env` (`DATABASE_URL="file:./dev.db"`).
 
 ## Deploy (GitHub Pages)
 
-All data is build-time seed data, so the app can be published as a fully static
-site. `.github/workflows/deploy-pages.yml` seeds the DB, ingests, resolves
-thumbnails, runs a static export and deploys to GitHub Pages on every push to
-`main` (and on a 6-hour cron).
+The app publishes as a fully static site. `.github/workflows/deploy-pages.yml`:
+
+- **push to `main`** — fast path (no crawl): restore cached catalog DB → export → deploy
+- **6h cron / manual `deep`** — crawl + thumbs, save DB cache, then deploy
+
+If the catalog cache is cold, the fast path seeds mock sets so export never
+ships with empty `/sets/[slug]` routes.
 
 ```bash
 # reproduce the static export locally → writes to out/
