@@ -163,6 +163,18 @@ export const KNOWN_HANDLES: Record<string, HandleHint> = {
     genre: "Tech House",
     accent: "#ef476f",
   },
+  biscit: {
+    youtubeHandle: "@Biscits",
+    soundcloudPermalink: "biscits",
+    genre: "Tech House",
+    accent: "#ef476f",
+  },
+  "its biscits": {
+    youtubeHandle: "@Biscits",
+    soundcloudPermalink: "biscits",
+    genre: "Tech House",
+    accent: "#ef476f",
+  },
   "tony romero": {
     soundcloudPermalink: "tonyromero",
     genre: "Tech House",
