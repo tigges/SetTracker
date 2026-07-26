@@ -1,0 +1,14 @@
+{
+  "source": "https://www.clubtickets.com/blog/best-clubs-europe",
+  "note": "ClubTickets is often Cloudflare-gated; seed covers the published 2026 shortlist. Live scrape fills gaps when reachable.",
+  "clubs": [
+    { "name": "Hï Ibiza", "location": "Ibiza, Spain" },
+    { "name": "Berghain", "location": "Berlin, Germany" },
+    { "name": "fabric", "location": "London, UK" },
+    { "name": "Ushuaïa Ibiza", "location": "Ibiza, Spain" },
+    { "name": "Amnesia Ibiza", "location": "Ibiza, Spain" },
+    { "name": "Rex Club", "location": "Paris, France" },
+    { "name": "Pacha Ibiza", "location": "Ibiza, Spain" },
+    { "name": "Papaya Club", "location": "Zrće Beach, Croatia" }
+  ]
+}

@@ -5,6 +5,7 @@ import { slugify } from "../types";
 import { YOUTUBE_ARTIST_CHANNELS } from "../youtube/artists";
 import { YOUTUBE_SETS } from "../youtube/videos";
 import { rankCoplayArtists } from "./coplay";
+import { ensureClubListVenues } from "./clubLists";
 import { ensureDjMagVenues } from "./djmagClubs";
 import { ensureDiscoveredDjs } from "./ensureDjs";
 import { hintForName } from "./knownHandles";
@@ -143,6 +144,21 @@ export async function runDiscovery(
     } catch (err) {
       console.warn(
         "[discovery] djmag clubs failed:",
+        err instanceof Error ? err.message : err,
+      );
+    }
+
+    try {
+      const lists = await ensureClubListVenues(prisma);
+      venuesEnsured += lists.created + lists.updated;
+      if (lists.newVenues.length) {
+        console.log(
+          `[discovery] auto-identified ${lists.newVenues.length} new venues from club lists`,
+        );
+      }
+    } catch (err) {
+      console.warn(
+        "[discovery] club lists failed:",
         err instanceof Error ? err.message : err,
       );
     }
