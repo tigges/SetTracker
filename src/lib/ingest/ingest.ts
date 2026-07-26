@@ -1,9 +1,6 @@
 import type { PrismaClient } from "@prisma/client";
-<<<<<<< HEAD
-import { hearthisEmbedUrl, playbackUrlFromSource } from "../playback";
-=======
 import { sanitizeArtistName } from "../artistName";
->>>>>>> origin/cursor/dj-qa-filters-b81f
+import { hearthisEmbedUrl, playbackUrlFromSource } from "../playback";
 import { djSocialsFromKnown, labelSocials } from "../social";
 import { ARTIST_ROSTER } from "./roster";
 import { parseTrackTitle } from "../trackMeta";
