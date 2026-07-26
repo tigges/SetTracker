@@ -1,10 +1,12 @@
 import type { PrismaClient } from "@prisma/client";
+import { hearthisEmbedUrl, playbackUrlFromSource } from "../playback";
 import { djSocialsFromKnown, labelSocials } from "../social";
 import { ARTIST_ROSTER } from "./roster";
 import { parseTrackTitle } from "../trackMeta";
 import { runCrosslinkDiscovery, type HandleReport } from "./discovery/crosslink";
 import { runDiscovery, type DiscoveryStats } from "./discovery/run";
 import { hashRawSetContent } from "./hash";
+import { fetchTrackDetail, sleep as htSleep } from "./hearthis/client";
 import { adapters as defaultAdapters } from "./sources";
 import { normalizeGenre } from "../genre";
 import { allocateTrackSlug, trackSlugBase } from "../tracks/slug";
@@ -12,6 +14,20 @@ import { slugify, type RawArtist, type RawPlay, type RawSet, type SourceAdapter 
 import { eventSocialPayload, resolveEvent } from "./events";
 import { scanEntityUrls } from "./scanEntityUrls";
 import { verifyStoredSocialUrls } from "./verifyUrls";
+
+function parseHearthisPath(
+  url: string,
+): { user: string; track: string } | null {
+  try {
+    const u = new URL(url);
+    if (!/(^|\.)hearthis\.at$/i.test(u.hostname)) return null;
+    const parts = u.pathname.split("/").filter(Boolean);
+    if (!parts[0] || !parts[1] || parts[0] === "embed") return null;
+    return { user: parts[0], track: parts[1] };
+  } catch {
+    return null;
+  }
+}
 
 const ACCENT_PALETTE = [
   "#ff7a45", "#4fb0e0", "#ff7096", "#b0d24e", "#ffd24d",
@@ -551,6 +567,14 @@ export async function runIngest(
           sourceUrl: raw.sourceUrl ?? null,
           cover: raw.cover,
           sourceHash,
+          ...(() => {
+            const next =
+              raw.playbackUrl ||
+              (!existing.playbackUrl
+                ? playbackUrlFromSource(raw.sourceName, raw.sourceUrl)
+                : null);
+            return next ? { playbackUrl: next } : {};
+          })(),
         },
       });
       await syncSetArtists(existing.id, primaryDjId, collaboratorIds);
@@ -576,6 +600,10 @@ export async function runIngest(
         durationSec: raw.durationSec,
         sourceName: raw.sourceName,
         sourceUrl: raw.sourceUrl ?? null,
+        playbackUrl:
+          raw.playbackUrl ??
+          playbackUrlFromSource(raw.sourceName, raw.sourceUrl) ??
+          null,
         cover: raw.cover,
         sourceHash,
         eventId,
@@ -717,5 +745,52 @@ export async function runIngest(
     );
   }
 
+  // Backfill original-audio playback URLs for older rows.
+  try {
+    const filled = await backfillPlaybackUrls(prisma);
+    if (filled) console.log(`[ingest] playbackUrl backfill: ${filled}`);
+  } catch (err) {
+    console.warn(
+      "[ingest] playbackUrl backfill failed:",
+      err instanceof Error ? err.message : err,
+    );
+  }
+
   return stats;
+}
+
+/** Fill Set.playbackUrl from sourceUrl / hearthis API when missing. */
+export async function backfillPlaybackUrls(
+  prisma: PrismaClient,
+  limit = 80,
+): Promise<number> {
+  const rows = await prisma.set.findMany({
+    where: { playbackUrl: null, sourceUrl: { not: null } },
+    select: { id: true, sourceName: true, sourceUrl: true },
+    orderBy: { publishedAt: "desc" },
+    take: limit,
+  });
+  let filled = 0;
+  for (const s of rows) {
+    let next = playbackUrlFromSource(s.sourceName, s.sourceUrl);
+    if (!next && s.sourceUrl) {
+      const ht = parseHearthisPath(s.sourceUrl);
+      if (ht) {
+        try {
+          const detail = await fetchTrackDetail(ht.user, ht.track);
+          if (detail.id != null) next = hearthisEmbedUrl(detail.id);
+          await htSleep(100);
+        } catch {
+          /* leave null */
+        }
+      }
+    }
+    if (!next) continue;
+    await prisma.set.update({
+      where: { id: s.id },
+      data: { playbackUrl: next },
+    });
+    filled += 1;
+  }
+  return filled;
 }

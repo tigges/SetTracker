@@ -22,6 +22,7 @@ import {
   HEARTHIS_MIN_DURATION_SEC,
   type HearthisCategory,
 } from "./categories";
+import { hearthisEmbedUrl } from "../../playback";
 import {
   asInt,
   fetchCategoryTracks,
@@ -153,6 +154,9 @@ async function trackToRawSet(
     detail.permalink_url ||
     track.permalink_url ||
     `https://hearthis.at/${userPermalink}/${trackPermalink}/`;
+  const trackId = detail.id ?? track.id;
+  // Embed the original hearthis audio host (not a guessed SC mirror).
+  const playbackUrl = trackId != null ? hearthisEmbedUrl(trackId) : undefined;
 
   const { primary, collaborators } = artistsForSet(title, {
     name: artistName,
@@ -171,6 +175,7 @@ async function trackToRawSet(
     durationSec,
     sourceName: "hearthis.at",
     sourceUrl,
+    playbackUrl,
     cover: pickAccent(sourceSlug),
     plays,
   };

@@ -119,6 +119,7 @@ async function trackToRawSet(
     durationSec,
     sourceName: "SoundCloud",
     sourceUrl,
+    playbackUrl: sourceUrl,
     cover: coverOf(track, show),
     plays,
   };
