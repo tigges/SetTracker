@@ -90,6 +90,16 @@ export const KNOWN_LABEL_SOCIALS: Record<
   confession: {
     soundcloud: "https://soundcloud.com/confession",
   },
+  stereohype: {
+    website: "https://www.stereohype.com/",
+    soundcloud: "https://soundcloud.com/stereohypeglobal",
+    instagram: "https://www.instagram.com/stereohype/",
+  },
+  "stereo-hype": {
+    website: "https://www.stereohype.com/",
+    soundcloud: "https://soundcloud.com/stereohypeglobal",
+    instagram: "https://www.instagram.com/stereohype/",
+  },
 };
 
 export function labelSocials(name: string): {

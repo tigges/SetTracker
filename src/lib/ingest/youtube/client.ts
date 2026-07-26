@@ -618,6 +618,23 @@ export async function fetchChannelVideoIds(
 }
 
 /**
+ * Video IDs from a public playlist (no API key).
+ * Accepts a full playlist URL or bare `PL…` / `UU…` list id.
+ */
+export async function fetchPlaylistVideoIds(
+  playlistIdOrUrl: string,
+  limit = 40,
+): Promise<string[]> {
+  const raw = playlistIdOrUrl.trim();
+  const id = raw.match(/[?&]list=([A-Za-z0-9_-]+)/)?.[1] || raw;
+  if (!id || id.length < 10) return [];
+  const url = `https://www.youtube.com/playlist?list=${encodeURIComponent(id)}`;
+  const html = await fetchChannelTabHtml(url);
+  const ids = [...html.matchAll(/"videoId":"([\w-]{11})"/g)].map((m) => m[1]!);
+  return uniqueIds(ids, limit, new Set());
+}
+
+/**
  * Deep channel scan: /videos + /streams, with Innertube continuation pages.
  * Aimed at pulling a near-complete recent catalog of long-form uploads.
  */

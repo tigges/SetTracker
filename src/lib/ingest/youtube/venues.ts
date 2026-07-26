@@ -117,6 +117,18 @@ export const YOUTUBE_VENUES: YoutubeVenueChannel[] = [
     titleMatch:
       /\b(ushua[iï]a|livestream|recorded live|audio mix|live|set|b2b|defected)\b/i,
   },
+  {
+    // James Hype’s label — livestreams + Bucharest lives (skip short releases).
+    channel: "@STEREOHYPE",
+    seriesName: "STEREOHYPE",
+    eventSlug: "stereohype",
+    genre: "Tech House",
+    accent: "#ff3d6e",
+    limit: Math.max(VENUE_LIMIT, 50),
+    minDurationSec: 30 * 60,
+    titleMatch:
+      /\b(stereohype|live|livestream|guest mix|b2b|set|house\s*&\s*tech)\b/i,
+  },
 ];
 
 const SKIP_TITLE =

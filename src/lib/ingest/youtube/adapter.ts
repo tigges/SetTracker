@@ -1,7 +1,8 @@
 /**
  * YouTube source adapter:
  * - curated watch URLs
- * - venue channels (Boiler Room / Cercle / Mixmag)
+ * - curated set playlists (e.g. STEREOHYPE guest mixes / Bucharest lives)
+ * - venue channels (Boiler Room / Cercle / Mixmag / STEREOHYPE)
  * - artist channels that publish tracklists (James Hype pattern)
  * - promoted discovery candidates (runtime)
  * - related / "other tracks" follow-ups from accepted watch pages
@@ -25,12 +26,18 @@ import {
 import {
   fetchChannelShelfDiscovery,
   fetchChannelVideoIdsDeep,
+  fetchPlaylistVideoIds,
   fetchWatchMeta,
   sleep,
   type YtMusicCredit,
   type YtRelatedVideo,
   type YtWatchMeta,
 } from "./client";
+import {
+  playlistAsVenue,
+  YOUTUBE_PLAYLISTS,
+  type YoutubePlaylistSource,
+} from "./playlists";
 import { YOUTUBE_SETS, type YoutubeSetSource } from "./videos";
 import {
   artistFromVenueTitle,
@@ -416,10 +423,54 @@ async function scanChannelShelves(
   }
 }
 
+async function pollPlaylistVideos(
+  pl: YoutubePlaylistSource,
+  seen: Set<string>,
+  out: RawSet[],
+  relatedQueue: string[],
+): Promise<void> {
+  const venue = playlistAsVenue(pl);
+  let ids: string[] = [];
+  try {
+    ids = await fetchPlaylistVideoIds(pl.playlist, pl.limit ?? 30);
+    console.log(
+      `[youtube] playlist ${pl.seriesName}: ${ids.length} video ids`,
+    );
+    await sleep(200);
+  } catch (err) {
+    console.warn(
+      `[youtube] playlist ${pl.seriesName}:`,
+      err instanceof Error ? err.message : err,
+    );
+    return;
+  }
+  for (const id of ids) {
+    if (seen.has(`yt-${id}`)) continue;
+    try {
+      const hit = await venueVideoToHit(id, venue);
+      await sleep(200);
+      if (!hit || seen.has(hit.raw.sourceSlug)) continue;
+      seen.add(hit.raw.sourceSlug);
+      out.push(hit.raw);
+      for (const rid of relatedSeedIds(hit.related, RELATED_PER_VIDEO)) {
+        if (relatedQueue.length >= RELATED_GLOBAL_CAP) break;
+        if (seen.has(`yt-${rid}`)) continue;
+        relatedQueue.push(rid);
+      }
+    } catch (err) {
+      console.warn(
+        `[youtube] skip playlist ${pl.seriesName} ${id}:`,
+        err instanceof Error ? err.message : err,
+      );
+    }
+  }
+}
+
 export function createYoutubeAdapter(
   videos: YoutubeSetSource[] = YOUTUBE_SETS,
   venues: YoutubeVenueChannel[] = YOUTUBE_VENUES,
   artistChannels: YoutubeArtistChannel[] = YOUTUBE_ARTIST_CHANNELS,
+  playlists: YoutubePlaylistSource[] = YOUTUBE_PLAYLISTS,
 ): SourceAdapter {
   return {
     id: "youtube",
@@ -447,6 +498,10 @@ export function createYoutubeAdapter(
             err instanceof Error ? err.message : err,
           );
         }
+      }
+
+      for (const pl of playlists) {
+        await pollPlaylistVideos(pl, seen, out, relatedQueue);
       }
 
       for (const venue of venues) {
