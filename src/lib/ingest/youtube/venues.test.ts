@@ -21,6 +21,26 @@ assert.equal(
   artistFromVenueTitle("Boiler Room London: Tiffany Day"),
   "Tiffany Day",
 );
+assert.equal(
+  artistFromVenueTitle(
+    "Armin van Buuren | 08th June 2025 #Livestream at Ushuaïa Ibiza",
+  ),
+  "Armin van Buuren",
+);
+
+const ushuaia = YOUTUBE_VENUES.find((v) => v.seriesName === "Ushuaïa Ibiza")!;
+assert.equal(
+  isVenueSetCandidate(
+    "KC Lights | Recorded Live at Ushuaïa Ibiza 2024 (Audio Mix)",
+    4239,
+    ushuaia,
+  ),
+  true,
+);
+assert.equal(
+  isVenueSetCandidate("Ushuaïa Ibiza 2025 (Official Aftermovie)", 89, ushuaia),
+  false,
+);
 
 const mixmag = YOUTUBE_VENUES.find((v) => v.seriesName === "Mixmag")!;
 assert.equal(isVenueSetCandidate("Kyle Starkey | Mixmag Lab London", 3600, mixmag), true);

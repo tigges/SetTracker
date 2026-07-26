@@ -49,6 +49,18 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     eventName: "Cafe Mambo Ibiza",
   },
   {
+    video: "https://www.youtube.com/watch?v=rLTCLSsqrXY",
+    primaryArtist: dj("James Hype", {
+      accent: "#ff3d6e",
+      homeCity: "Liverpool, UK",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    title: "James Hype SYNC London (Full Set)",
+    seriesName: "SYNC",
+    eventName: "SYNC London",
+  },
+  {
     video: "https://www.youtube.com/watch?v=EXKpyYAXtyw",
     primaryArtist: dj("Chris Lake", {
       accent: "#3d8bfd",

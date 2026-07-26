@@ -106,6 +106,17 @@ export const YOUTUBE_VENUES: YoutubeVenueChannel[] = [
     minDurationSec: 25 * 60,
     titleMatch: /\b(dj mag|live|mix|set|studio|session)\b/i,
   },
+  {
+    channel: "@ushuaiaibiza",
+    seriesName: "Ushuaïa Ibiza",
+    eventSlug: "ushuaia-ibiza",
+    genre: "House",
+    accent: "#00b4d8",
+    limit: VENUE_LIMIT,
+    minDurationSec: 30 * 60,
+    titleMatch:
+      /\b(ushua[iï]a|livestream|recorded live|audio mix|live|set|b2b|defected)\b/i,
+  },
 ];
 
 const SKIP_TITLE =
