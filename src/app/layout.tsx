@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { GlobalSearch } from "@/components/GlobalSearch";
+import { SiteNav } from "@/components/SiteNav";
 import { StatusLegend } from "@/components/StatusBits";
 import { getSearchIndex } from "@/lib/searchIndex";
 
@@ -41,39 +42,8 @@ export default async function RootLayout({
                 <span className="text-muted2">.ai</span>
               </span>
             </Link>
-            <nav className="hidden items-center gap-1 text-[13px] md:flex">
-              <Link
-                href="/"
-                className="rounded-md px-2.5 py-1.5 text-muted transition-colors hover:bg-panel hover:text-ink"
-              >
-                Sets
-              </Link>
-              <Link
-                href="/djs"
-                className="rounded-md px-2.5 py-1.5 text-muted transition-colors hover:bg-panel hover:text-ink"
-              >
-                DJs
-              </Link>
-              <Link
-                href="/venues"
-                className="rounded-md px-2.5 py-1.5 text-muted transition-colors hover:bg-panel hover:text-ink"
-              >
-                Venues
-              </Link>
-              <Link
-                href="/labels"
-                className="rounded-md px-2.5 py-1.5 text-muted transition-colors hover:bg-panel hover:text-ink"
-              >
-                Labels
-              </Link>
-              <Link
-                href="/tracks"
-                className="rounded-md px-2.5 py-1.5 text-muted transition-colors hover:bg-panel hover:text-ink"
-              >
-                Tracks
-              </Link>
-            </nav>
-            <div className="ml-auto flex items-center gap-3">
+            <SiteNav />
+            <div className="ml-auto flex flex-none items-center gap-2 sm:gap-3">
               <GlobalSearch items={searchIndex} />
               <div className="hidden xl:block">
                 <StatusLegend />
