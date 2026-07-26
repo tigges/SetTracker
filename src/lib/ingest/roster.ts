@@ -339,7 +339,7 @@ export const ARTIST_ROSTER_CURATED: ArtistRosterEntry[] = [
   },
   {
     name: "David Guetta",
-    genre: "Dance",
+    genre: "House",
     accent: "#1e90ff",
     homeCity: "Paris, FR",
     youtube: { handle: "@davidguetta", status: "ok" },
@@ -382,7 +382,7 @@ export const ARTIST_ROSTER_CURATED: ArtistRosterEntry[] = [
   },
   {
     name: "Robin Schulz",
-    genre: "Dance",
+    genre: "House",
     accent: "#5aa9e6",
     homeCity: "Germany",
     youtube: { handle: "@robinschulz", status: "ok" },

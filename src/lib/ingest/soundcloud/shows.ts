@@ -218,7 +218,7 @@ export const SOUNDCLOUD_SHOWS: SoundCloudShow[] = [
       accent: "#5aa9e6",
       homeCity: "Germany",
     }),
-    genre: "Dance",
+    genre: "House",
     type: "festival",
     minDurationSec: 40 * 60,
     titleMatch: /\b(live|dj set|mix|set|pacha|ibiza|radio)\b/i,

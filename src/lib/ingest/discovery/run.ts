@@ -324,7 +324,7 @@ export function promotedYoutubeChannels(): Array<{
     .map((c) => ({
       channel: c.youtubeHandle!,
       primaryName: c.name,
-      genre: c.genre || "Electronic",
+      genre: c.genre || "House",
       accent: c.accent || "#ff7a45",
       limit: 4,
       minDurationSec: 20 * 60,
@@ -344,7 +344,7 @@ export function promotedSoundcloudPermalinks(): Array<{
     .map((c) => ({
       permalink: c.soundcloudPermalink!,
       name: c.name,
-      genre: c.genre || "Electronic",
+      genre: c.genre || "House",
       accent: c.accent || "#ff7a45",
     }));
 }

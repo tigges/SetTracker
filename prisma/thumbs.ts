@@ -14,6 +14,7 @@
  */
 import { PrismaClient } from "@prisma/client";
 import { parseTrackTitle } from "../src/lib/trackMeta";
+import { rewriteStoredGenres } from "../src/lib/genre";
 import { ensureTrackSlugs } from "../src/lib/tracks/ensureSlugs";
 import { slugify } from "../src/lib/ingest/types";
 import {
@@ -74,6 +75,12 @@ async function main() {
 
   console.log("[thumbs] ensuring track slugs…");
   stats.slugs = await ensureTrackSlugs(prisma);
+
+  console.log("[thumbs] normalizing genres…");
+  const genreStats = await rewriteStoredGenres(prisma);
+  console.log(
+    `  rewritten sets=${genreStats.sets} tracks=${genreStats.tracks}`,
+  );
 
   console.log("[thumbs] resolving label artwork…");
   const labels = await prisma.label.findMany({
