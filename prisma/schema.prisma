@@ -78,7 +78,7 @@ model Track {
   artistName  String
   // Mix / version label when distinct from title, e.g. "Extended Mix"
   mixName     String?
-  // Remixer credit when present, e.g. "Marten Hörger"
+  // Remixer credit when present, e.g. "Marten Horger"
   remixerName String?
   labelId     String?
   label       Label?   @relation(fields: [labelId], references: [id])
@@ -109,7 +109,7 @@ model Track {
 // and status flips to "community_resolved".
 model IdTrack {
   id             String  @id @default(cuid())
-  label          String  // display label, e.g. "ID - ID" or "Marten Hørger - ID"
+  label          String  // display label, e.g. "ID - ID" or "Marten Horger - ID"
   suspectedArtist String?
   note           String?
   // "unresolved" | "community_resolved"

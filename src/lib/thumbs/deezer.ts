@@ -58,7 +58,7 @@ async function deezerGet<T>(pathAndQuery: string): Promise<T | null> {
 
 type DeezerList<T> = { data?: T[]; total?: number };
 
-/** Latinize so Hörger / Hørger / Horger collapse to the same key. */
+/** Latinize so umlaut/ø variants of Horger collapse to the same key. */
 export function norm(s: string): string {
   const mapped = s
     .toLowerCase()

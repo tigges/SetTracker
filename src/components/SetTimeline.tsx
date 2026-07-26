@@ -21,11 +21,14 @@ export function SetTimeline({
   durationSec,
   accent,
   setSlug,
+  setGenre,
 }: {
   plays: PlayRow[];
   durationSec: number;
   accent: string;
   setSlug: string;
+  /** When set, per-track genre is only shown if it differs (avoids clutter). */
+  setGenre?: string | null;
 }) {
   const [activeId, setActiveId] = useState<string | null>(plays[0]?.id ?? null);
   const [flashId, setFlashId] = useState<string | null>(null);
@@ -221,6 +224,13 @@ export function SetTimeline({
                     </div>
                     <div className="flex items-center gap-2 truncate text-[12px] text-muted">
                       {p.artistName && <span className="truncate">{p.artistName}</span>}
+                      {p.genre &&
+                        (!setGenre ||
+                          p.genre.toLowerCase() !== setGenre.toLowerCase()) && (
+                          <span className="flex-none text-[11px] text-muted2">
+                            · {p.genre}
+                          </span>
+                        )}
                       {p.resolvedTitle && (
                         <span className="truncate text-teal">→ {p.resolvedTitle}</span>
                       )}

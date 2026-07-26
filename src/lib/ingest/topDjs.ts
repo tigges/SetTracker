@@ -32,7 +32,7 @@ const TOP_100: [name: string, genre: string][] = [
   ["Habstrakt", "Bass House"],
   ["Dombresky", "House"],
   ["CID", "Tech House"],
-  ["Marten Hørger", "Bass House"],
+  ["Marten Horger", "Bass House"],
   ["Matroda", "Bass House"],
   ["Gettoblaster", "Ghetto House"],
   ["BIJOU", "G-House"],

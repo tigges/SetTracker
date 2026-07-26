@@ -19,6 +19,11 @@ function pickAccent(seed: string): string {
   return ACCENT_PALETTE[h % ACCENT_PALETTE.length];
 }
 
+/** Canonical display spelling — never store Hörger / Hørger. */
+function normalizeArtistName(name: string): string {
+  return name.replace(/H[øöØÖ]rger/g, "Horger");
+}
+
 export type IngestStats = {
   scannedSets: number;
   newSets: number;
@@ -73,30 +78,30 @@ export async function runIngest(
   const labelCache = new Map<string, string>();
 
   async function upsertDj(raw: RawArtist): Promise<string> {
-    const slug = raw.slug || slugify(raw.name);
+    const name = normalizeArtistName(raw.name);
+    const slug = raw.slug || slugify(name);
     if (djCache.has(slug)) return djCache.get(slug)!;
     const roster = ARTIST_ROSTER.find(
-      (a) => slugify(a.name) === slug || a.name === raw.name,
+      (a) => slugify(a.name) === slug || a.name === name || a.name === raw.name,
     );
     const socials = djSocialsFromKnown({
-      name: raw.name,
+      name,
       soundcloudPermalink: roster?.soundcloud?.permalink,
       socials: roster?.socials,
       website: roster?.website,
     });
+    const displayName = roster?.name ?? name;
     const existing = await prisma.dj.findUnique({ where: { slug } });
     if (existing) {
-      // Refresh curated socials / official spelling when roster knows better
+      const data: Record<string, unknown> = {};
+      if (existing.name !== displayName) data.name = displayName;
       if (roster) {
-        await prisma.dj.update({
-          where: { id: existing.id },
-          data: {
-            name: roster.name,
-            accent: roster.accent || existing.accent,
-            homeCity: roster.homeCity ?? existing.homeCity,
-            ...socials,
-          },
-        });
+        data.accent = roster.accent || existing.accent;
+        data.homeCity = roster.homeCity ?? existing.homeCity;
+        Object.assign(data, socials);
+      }
+      if (Object.keys(data).length) {
+        await prisma.dj.update({ where: { id: existing.id }, data });
       }
       djCache.set(slug, existing.id);
       return existing.id;
@@ -104,7 +109,7 @@ export async function runIngest(
     const created = await prisma.dj.create({
       data: {
         slug,
-        name: roster?.name ?? raw.name,
+        name: displayName,
         homeCity: roster?.homeCity ?? raw.homeCity ?? null,
         bio: raw.bio ?? null,
         accent: roster?.accent ?? raw.accent ?? pickAccent(slug),
@@ -140,15 +145,21 @@ export async function runIngest(
     remixerName?: string;
     beatportUrl?: string;
   }): Promise<string> {
+    const artistName = normalizeArtistName(play.artistName);
     const parsed = parseTrackTitle(play.title);
     const mixName = play.mixName ?? parsed.mixName;
-    const remixerName = play.remixerName ?? parsed.remixerName;
+    const remixerName = play.remixerName
+      ? normalizeArtistName(play.remixerName)
+      : parsed.remixerName
+        ? normalizeArtistName(parsed.remixerName)
+        : undefined;
     const existing = await prisma.track.findFirst({
-      where: { title: play.title, artistName: play.artistName },
+      where: { title: play.title, artistName },
     });
     if (existing) {
       // Fill sparse meta without overwriting known values.
       const data: Record<string, unknown> = {};
+      if (existing.artistName !== artistName) data.artistName = artistName;
       if (mixName && !existing.mixName) data.mixName = mixName;
       if (remixerName && !existing.remixerName) data.remixerName = remixerName;
       if (play.bpm != null && existing.bpm == null) data.bpm = play.bpm;
@@ -171,10 +182,10 @@ export async function runIngest(
     const created = await prisma.track.create({
       data: {
         title: play.title,
-        artistName: play.artistName,
+        artistName,
         labelId,
         mixName,
-        remixerName,
+        remixerName: remixerName ?? null,
         bpm: play.bpm ?? null,
         musicalKey: play.musicalKey ?? null,
         genre: play.genre ?? null,
@@ -218,7 +229,11 @@ export async function runIngest(
     return created.id;
   }
 
-  async function writePlays(setId: string, plays: RawPlay[]): Promise<void> {
+  async function writePlays(
+    setId: string,
+    plays: RawPlay[],
+    setGenre?: string | null,
+  ): Promise<void> {
     for (const p of plays) {
       const base = {
         setId,
@@ -227,6 +242,8 @@ export async function runIngest(
         provenance: p.provenance,
         idStatus: p.idStatus,
       };
+      // Inherit set genre onto tracks when the source has no per-track genre.
+      const genre = p.genre ?? setGenre ?? undefined;
       if (p.idStatus === "identified" && p.trackTitle && p.artistName) {
         const trackId = await upsertTrack({
           title: p.trackTitle,
@@ -234,7 +251,7 @@ export async function runIngest(
           label: p.label,
           bpm: p.bpm,
           musicalKey: p.musicalKey,
-          genre: p.genre,
+          genre,
           durationSec: p.durationSec,
           mixName: p.mixName,
           remixerName: p.remixerName,
@@ -252,7 +269,7 @@ export async function runIngest(
           label: p.label,
           bpm: p.bpm,
           musicalKey: p.musicalKey,
-          genre: p.genre,
+          genre,
           durationSec: p.durationSec,
           mixName: p.mixName,
           remixerName: p.remixerName,
@@ -343,7 +360,11 @@ export async function runIngest(
       .map((p, i) => ({ ...p, position: i + 1 }));
   }
 
-  async function replacePlays(setId: string, plays: RawPlay[]): Promise<void> {
+  async function replacePlays(
+    setId: string,
+    plays: RawPlay[],
+    setGenre?: string | null,
+  ): Promise<void> {
     const oldPlays = await prisma.played.findMany({
       where: { setId },
       select: { idTrackId: true },
@@ -356,7 +377,7 @@ export async function runIngest(
       const still = await prisma.played.count({ where: { idTrackId: id } });
       if (still === 0) await prisma.idTrack.delete({ where: { id } }).catch(() => {});
     }
-    await writePlays(setId, plays);
+    await writePlays(setId, plays, setGenre);
   }
 
   async function syncSetArtists(
@@ -450,7 +471,7 @@ export async function runIngest(
         },
       });
       await syncSetArtists(existing.id, primaryDjId, collaboratorIds);
-      await replacePlays(existing.id, plays);
+      await replacePlays(existing.id, plays, raw.genre);
       stats.refreshedSets += 1;
       console.log(
         `[ingest] refresh ${raw.sourceSlug}` +
@@ -480,7 +501,7 @@ export async function runIngest(
     });
 
     await syncSetArtists(set.id, primaryDjId, collaboratorIds);
-    await writePlays(set.id, raw.plays);
+    await writePlays(set.id, raw.plays, raw.genre);
     stats.newSets += 1;
   }
 
