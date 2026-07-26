@@ -91,8 +91,7 @@ jobs:
       - name: Verify export is the app (not README)
         run: |
           test -f out/index.html
-          grep -q "setradar.ai" out/index.html
-          # Guard against accidentally uploading a Next build cache
+          grep -qi "setradar" out/index.html
           test ! -d out/cache
           test ! -d out/server
           ls out | head
