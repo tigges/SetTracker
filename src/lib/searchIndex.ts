@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/db";
+import { normalizeGenre } from "@/lib/genre";
 import { ensureTrackSlugs } from "@/lib/tracks/ensureSlugs";
 
 export type SearchIndexItem = {
@@ -86,14 +87,15 @@ export async function getSearchIndex(): Promise<SearchIndexItem[]> {
 
   for (const s of sets) {
     const dj = s.artists[0]?.dj?.name;
+    const genre = normalizeGenre(s.genre);
     items.push({
       kind: "set",
       title: s.title,
-      subtitle: [dj, s.event?.name ?? s.series?.name, s.genre]
+      subtitle: [dj, s.event?.name ?? s.series?.name, genre]
         .filter(Boolean)
         .join(" · "),
       href: `/sets/${s.slug}`,
-      keywords: [dj, s.event?.name, s.series?.name, s.genre]
+      keywords: [dj, s.event?.name, s.series?.name, genre]
         .filter(Boolean)
         .join(" "),
     });
@@ -140,7 +142,7 @@ export async function getSearchIndex(): Promise<SearchIndexItem[]> {
       title: t.title,
       subtitle: t.artistName,
       href: `/tracks/${t.slug}`,
-      keywords: [t.artistName, t.genre].filter(Boolean).join(" "),
+      keywords: [t.artistName, normalizeGenre(t.genre)].filter(Boolean).join(" "),
     });
   }
 

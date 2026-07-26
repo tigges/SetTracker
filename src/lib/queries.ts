@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/db";
+import { normalizeGenre, normalizeGenreList } from "@/lib/genre";
 import {
   relatedSlugsFor,
   venueArtistSlugs,
@@ -74,7 +75,7 @@ export async function getFeed() {
       slug: s.slug,
       title: s.title,
       type: s.type,
-      genre: s.genre,
+      genre: normalizeGenre(s.genre),
       publishedAt: s.publishedAt,
       durationSec: s.durationSec,
       sourceName: s.sourceName,
@@ -129,7 +130,7 @@ export async function getSetBySlug(slug: string) {
     slug: set.slug,
     title: set.title,
     type: set.type,
-    genre: set.genre,
+    genre: normalizeGenre(set.genre),
     publishedAt: set.publishedAt,
     durationSec: set.durationSec,
     sourceName: set.sourceName,
@@ -189,7 +190,7 @@ export async function getSetBySlug(slug: string) {
         musicalKey: track?.musicalKey ?? null,
         mixName: track?.mixName ?? null,
         remixerName: track?.remixerName ?? null,
-        genre: track?.genre ?? null,
+        genre: normalizeGenre(track?.genre ?? null),
         trackDurationSec: track?.durationSec ?? null,
         beatportUrl: track?.beatportUrl ?? null,
         idNote: p.idTrack?.note ?? null,
@@ -443,7 +444,7 @@ export async function getGenres() {
     distinct: ["genre"],
     orderBy: { genre: "asc" },
   });
-  return rows.map((r) => r.genre!).filter(Boolean);
+  return normalizeGenreList(rows.map((r) => r.genre!).filter(Boolean));
 }
 
 // ---------------------------------------------------------------------------
@@ -550,7 +551,7 @@ export async function getLabelBySlug(slug: string) {
         slug: s.slug,
         title: s.title,
         type: s.type,
-        genre: s.genre,
+        genre: normalizeGenre(s.genre),
         publishedAt: s.publishedAt,
         durationSec: s.durationSec,
         imageUrl: s.imageUrl ?? prim?.dj.imageUrl ?? null,
@@ -677,7 +678,7 @@ export async function getVenueBySlug(slug: string) {
         slug: s.slug,
         title: s.title,
         type: s.type,
-        genre: s.genre,
+        genre: normalizeGenre(s.genre),
         publishedAt: s.publishedAt,
         durationSec: s.durationSec,
         imageUrl: s.imageUrl ?? prim?.dj.imageUrl ?? null,
@@ -743,7 +744,7 @@ export async function getTracks(limit = 120) {
         title: t.title,
         artistName: t.artistName,
         imageUrl: t.imageUrl,
-        genre: t.genre,
+        genre: normalizeGenre(t.genre),
         bpm: t.bpm,
         mixName: t.mixName,
         labelName: t.label?.name ?? null,
@@ -817,7 +818,7 @@ export async function getTrackBySlug(slug: string) {
     artistName: track.artistName,
     mixName: track.mixName,
     remixerName: track.remixerName,
-    genre: track.genre,
+    genre: normalizeGenre(track.genre),
     bpm: track.bpm,
     musicalKey: track.musicalKey,
     durationSec: track.durationSec,
@@ -841,7 +842,7 @@ export async function getTrackBySlug(slug: string) {
         slug: s.slug,
         title: s.title,
         type: s.type,
-        genre: s.genre,
+        genre: normalizeGenre(s.genre),
         publishedAt: s.publishedAt,
         durationSec: s.durationSec,
         imageUrl: s.imageUrl ?? prim?.dj.imageUrl ?? null,

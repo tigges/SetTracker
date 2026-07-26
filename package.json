@@ -1,6 +1,6 @@
 {
   "name": "setradar",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "private": true,
   "prisma": {
     "seed": "tsx prisma/seed.ts"
@@ -20,7 +20,8 @@
     "verify-urls": "tsx prisma/verify-urls.ts",
     "scan-urls": "tsx prisma/scan-urls.ts",
     "thumbs": "tsx prisma/thumbs.ts",
-    "graduate-roster": "tsx prisma/graduate-roster.ts"
+    "graduate-roster": "tsx prisma/graduate-roster.ts",
+    "normalize-genres": "tsx prisma/normalize-genres.ts"
   },
   "dependencies": {
     "@prisma/client": "^6.19.3",
