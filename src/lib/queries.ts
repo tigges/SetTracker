@@ -423,8 +423,23 @@ export type DjProfile = NonNullable<Awaited<ReturnType<typeof getDjBySlug>>>;
 // ---------------------------------------------------------------------------
 // misc
 // ---------------------------------------------------------------------------
-export async function getDjList() {
-  return prisma.dj.findMany({
+export type DjListItem = {
+  id: string;
+  slug: string;
+  name: string;
+  homeCity: string | null;
+  accent: string;
+  imageUrl: string | null;
+  soundcloud: string | null;
+  instagram: string | null;
+  twitter: string | null;
+  website: string | null;
+  setCount: number;
+  hasHandle: boolean;
+};
+
+export async function getDjList(): Promise<DjListItem[]> {
+  const rows = await prisma.dj.findMany({
     orderBy: { name: "asc" },
     select: {
       id: true,
@@ -433,7 +448,32 @@ export async function getDjList() {
       homeCity: true,
       accent: true,
       imageUrl: true,
+      soundcloud: true,
+      instagram: true,
+      twitter: true,
+      website: true,
+      _count: { select: { sets: true } },
     },
+  });
+
+  return rows.map((d) => {
+    const hasHandle = Boolean(
+      d.soundcloud || d.instagram || d.twitter || d.website,
+    );
+    return {
+      id: d.id,
+      slug: d.slug,
+      name: d.name,
+      homeCity: d.homeCity,
+      accent: d.accent,
+      imageUrl: d.imageUrl,
+      soundcloud: d.soundcloud,
+      instagram: d.instagram,
+      twitter: d.twitter,
+      website: d.website,
+      setCount: d._count.sets,
+      hasHandle,
+    };
   });
 }
 
