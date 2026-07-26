@@ -27,7 +27,7 @@ const chip = (active: boolean) =>
 
 function matchesGenre(s: FeedItem, genre: string): boolean {
   if (genre === "all") return true;
-  if (s.genres?.includes(genre)) return true;
+  if (s.genres?.some((g) => g === genre)) return true;
   return s.genre === genre;
 }
 
