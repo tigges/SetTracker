@@ -5,6 +5,7 @@
 
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
+import { sanitizeArtistName } from "../../artistName";
 import { LINEUP_SOURCES, type LineupSource } from "./lineupSources";
 
 export type LineupHit = {
@@ -24,18 +25,10 @@ const NOISE =
   /^(line[- ]?up|timetable|stage|mainstage|home|welcome|tickets?|passes?|weekend|day\s*\d|discover|official|tomorrowland|edc|ultra|festival|belgium|las vegas|miami|more|see all|view|buy|shop|faq|practical)$/i;
 
 function tidyName(raw: string): string | null {
-  let n = raw
-    .replace(/&amp;/g, "&")
-    .replace(/&#(\d+);/g, (_, c) => String.fromCharCode(Number(c)))
-    .replace(/\s+/g, " ")
-    .replace(/H[øöØÖ]rger/g, "Horger")
-    .trim();
-  n = n.replace(/\s+[–—|-]\s+(live|dj set|b2b).*$/i, "").trim();
-  if (n.length < 2 || n.length > 60) return null;
+  // Strip Insomniac-style aria-labels ("view artist details for X") first.
+  const n = sanitizeArtistName(raw);
+  if (!n) return null;
   if (NOISE.test(n)) return null;
-  if (!/[a-zA-Z]/.test(n)) return null;
-  // Reject obvious non-names
-  if (/https?:|www\.|@|^\d+$/.test(n)) return null;
   return n;
 }
 

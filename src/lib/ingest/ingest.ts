@@ -1,5 +1,9 @@
 import type { PrismaClient } from "@prisma/client";
+<<<<<<< HEAD
 import { hearthisEmbedUrl, playbackUrlFromSource } from "../playback";
+=======
+import { sanitizeArtistName } from "../artistName";
+>>>>>>> origin/cursor/dj-qa-filters-b81f
 import { djSocialsFromKnown, labelSocials } from "../social";
 import { ARTIST_ROSTER } from "./roster";
 import { parseTrackTitle } from "../trackMeta";
@@ -98,9 +102,11 @@ export async function runIngest(
   const djCache = new Map<string, string>();
   const labelCache = new Map<string, string>();
 
-  async function upsertDj(raw: RawArtist): Promise<string> {
-    const name = normalizeArtistName(raw.name);
-    const slug = raw.slug || slugify(name);
+  async function upsertDj(raw: RawArtist): Promise<string | null> {
+    const name = sanitizeArtistName(raw.name);
+    if (!name) return null;
+    // Prefer sanitized slug so aria-label prefixes never mint junk Dj rows.
+    const slug = slugify(name);
     if (djCache.has(slug)) return djCache.get(slug)!;
     const roster = ARTIST_ROSTER.find(
       (a) => slugify(a.name) === slug || a.name === name || a.name === raw.name,
@@ -529,9 +535,14 @@ export async function runIngest(
     noteCollaborators(raw);
 
     const primaryDjId = await upsertDj(raw.primaryArtist);
+    if (!primaryDjId) {
+      stats.skippedSets += 1;
+      return;
+    }
     const collaboratorIds: string[] = [];
     for (const c of raw.collaborators ?? []) {
-      collaboratorIds.push(await upsertDj(c));
+      const id = await upsertDj(c);
+      if (id) collaboratorIds.push(id);
     }
 
     const setGenre = normalizeGenre(raw.genre);

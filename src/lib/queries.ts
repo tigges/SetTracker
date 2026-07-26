@@ -1,3 +1,4 @@
+import { isJunkArtistName } from "@/lib/artistName";
 import { prisma } from "@/lib/db";
 import {
   expandGenres,
@@ -424,8 +425,24 @@ export type DjProfile = NonNullable<Awaited<ReturnType<typeof getDjBySlug>>>;
 // ---------------------------------------------------------------------------
 // misc
 // ---------------------------------------------------------------------------
-export async function getDjList() {
-  return prisma.dj.findMany({
+export type DjListItem = {
+  id: string;
+  slug: string;
+  name: string;
+  homeCity: string | null;
+  accent: string;
+  imageUrl: string | null;
+  soundcloud: string | null;
+  instagram: string | null;
+  twitter: string | null;
+  website: string | null;
+  setCount: number;
+  hasHandle: boolean;
+  isJunk: boolean;
+};
+
+export async function getDjList(): Promise<DjListItem[]> {
+  const rows = await prisma.dj.findMany({
     orderBy: { name: "asc" },
     select: {
       id: true,
@@ -434,7 +451,36 @@ export async function getDjList() {
       homeCity: true,
       accent: true,
       imageUrl: true,
+      soundcloud: true,
+      instagram: true,
+      twitter: true,
+      website: true,
+      _count: { select: { sets: true } },
     },
+  });
+
+  return rows.map((d) => {
+    const hasHandle = Boolean(
+      d.soundcloud || d.instagram || d.twitter || d.website,
+    );
+    const isJunk =
+      isJunkArtistName(d.name) ||
+      /^view-artist-details-for-/.test(d.slug);
+    return {
+      id: d.id,
+      slug: d.slug,
+      name: d.name,
+      homeCity: d.homeCity,
+      accent: d.accent,
+      imageUrl: d.imageUrl,
+      soundcloud: d.soundcloud,
+      instagram: d.instagram,
+      twitter: d.twitter,
+      website: d.website,
+      setCount: d._count.sets,
+      hasHandle,
+      isJunk,
+    };
   });
 }
 
@@ -659,9 +705,15 @@ export async function getVenueBySlug(slug: string) {
       })
     : [];
   const lineupOrder = new Map(lineupSlugs.map((s, i) => [s, i]));
-  const lineupArtists = lineupRows.sort(
-    (a, b) => (lineupOrder.get(a.slug) ?? 99) - (lineupOrder.get(b.slug) ?? 99),
-  );
+  const lineupArtists = lineupRows
+    .filter(
+      (a) =>
+        !isJunkArtistName(a.name) &&
+        !/^view-artist-details-for-/.test(a.slug),
+    )
+    .sort(
+      (a, b) => (lineupOrder.get(a.slug) ?? 99) - (lineupOrder.get(b.slug) ?? 99),
+    );
 
   return {
     slug: event.slug,

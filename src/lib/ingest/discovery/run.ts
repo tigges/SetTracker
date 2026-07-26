@@ -1,4 +1,5 @@
 import type { PrismaClient } from "@prisma/client";
+import { sanitizeArtistName } from "../../artistName";
 import { ARTIST_ROSTER } from "../roster";
 import { SOUNDCLOUD_SHOWS } from "../soundcloud/shows";
 import { slugify } from "../types";
@@ -16,6 +17,7 @@ import {
   linkVenueArtists,
   loadRelations,
   saveRelations,
+  scrubJunkVenueArtists,
 } from "./relations";
 import { loadCandidates, saveCandidates, upsertCandidate } from "./store";
 import type { ArtistCandidate, CandidateEvidence } from "./types";
@@ -77,7 +79,8 @@ function queueMention(
   evidence: CandidateEvidence[],
   score: number,
 ): boolean {
-  const clean = name.replace(/H[øöØÖ]rger/g, "Horger").trim();
+  const clean = sanitizeArtistName(name);
+  if (!clean) return false;
   const slug = slugify(clean);
   if (!slug || exclude.has(slug)) return false;
   const hint = hintForName(clean);
@@ -186,8 +189,10 @@ export async function runDiscovery(
           hit.weight,
         );
         if (ok) newlyQueued += 1;
+        const cleanName = sanitizeArtistName(hit.name);
+        if (!cleanName) continue;
         const list = byVenue.get(hit.eventSlug) ?? [];
-        list.push(hit.name);
+        list.push(cleanName);
         byVenue.set(hit.eventSlug, list);
       }
       for (const [venue, names] of byVenue) {
@@ -284,6 +289,11 @@ export async function runDiscovery(
     c.status = "promoted";
     c.promotedAt = new Date().toISOString();
     promoted += 1;
+  }
+
+  const scrubbed = scrubJunkVenueArtists(relations);
+  if (scrubbed) {
+    console.log(`[discovery] scrubbed ${scrubbed} junk venue-artist slugs`);
   }
 
   saveCandidates(file);

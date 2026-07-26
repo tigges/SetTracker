@@ -1,5 +1,4 @@
-import Link from "next/link";
-import { EntityThumb } from "@/components/EntityThumb";
+import { DjList } from "@/components/DjList";
 import { getDjList } from "@/lib/queries";
 
 export default async function DjsPage() {
@@ -12,35 +11,12 @@ export default async function DjsPage() {
         <h1 className="mt-1 text-3xl font-extrabold tracking-tight">DJs</h1>
         <p className="mt-2 max-w-2xl text-[14px] text-muted">
           {djs.length} bass house artists tracked across radio, festival and
-          SoundCloud sets.
+          SoundCloud sets. QA filters surface empty profiles, missing handles,
+          and junk names (e.g. aria-label chrome from lineup scrapes).
         </p>
       </div>
 
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        {djs.map((dj) => (
-          <Link
-            key={dj.id}
-            href={`/djs/${dj.slug}`}
-            className="card flex items-center gap-3 p-4 transition-colors hover:border-[color:var(--muted2)]"
-          >
-            <EntityThumb
-              src={dj.imageUrl}
-              label={dj.name}
-              accent={dj.accent}
-              size={44}
-              radius={12}
-            />
-            <div className="min-w-0">
-              <div className="truncate text-[15px] font-semibold text-ink">
-                {dj.name}
-              </div>
-              <div className="truncate text-[12px] text-muted2">
-                {dj.homeCity}
-              </div>
-            </div>
-          </Link>
-        ))}
-      </div>
+      <DjList djs={djs} />
     </div>
   );
 }
