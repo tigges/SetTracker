@@ -111,6 +111,15 @@ export const KNOWN_EVENTS: Record<string, CanonicalEvent> = {
     kind: "livestream",
     website: "https://defected.com/",
   },
+  "ushuaia-ibiza": {
+    slug: "ushuaia-ibiza",
+    name: "Ushuaïa Ibiza",
+    kind: "club",
+    location: "Playa d'en Bossa, Ibiza",
+    website: "https://www.theushuaiaexperience.com/en/club",
+    instagram: "https://www.instagram.com/ushuaiaibiza/",
+    twitter: "https://twitter.com/ushuaiaibiza",
+  },
 };
 
 /** Alternate name/slug keys → canonical slug. */
@@ -128,6 +137,9 @@ const ALIAS_TO_SLUG: Record<string, string> = {
   "hard-summer-music-festival": "hard-summer",
   "boilerroom": "boiler-room",
   "boiler-room": "boiler-room",
+  ushuaia: "ushuaia-ibiza",
+  "ushuaia-ibiza": "ushuaia-ibiza",
+  "ushuaiaibiza": "ushuaia-ibiza",
 };
 
 function keyOf(name: string): string {
@@ -187,6 +199,8 @@ export function inferFestivalEvent(title: string): CanonicalEvent | null {
   if (/\blollapalooza\b/i.test(t)) return KNOWN_EVENTS.lollapalooza;
   if (/\bboiler\s*room\b/i.test(t)) return KNOWN_EVENTS["boiler-room"];
   if (/\bcercle\b/i.test(t)) return KNOWN_EVENTS.cercle;
+  // Prefer curated Ushuaïa socials over DJ Mag profile URL.
+  if (/\bushua[iï]a\b/i.test(t)) return KNOWN_EVENTS["ushuaia-ibiza"];
   return inferDjMagClubEvent(t) ?? inferListClubEvent(t);
 }
 

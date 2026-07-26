@@ -15,7 +15,7 @@ export type HandleHint = {
 export const KNOWN_HANDLES: Record<string, HandleHint> = {
   "james hype": {
     youtubeHandle: "@JamesHype",
-    soundcloudPermalink: "jameshype",
+    soundcloudPermalink: "jameshypethedj",
     genre: "Tech House",
     accent: "#ff3d6e",
   },
