@@ -144,6 +144,9 @@ model Set {
   durationSec Int
   sourceUrl   String?
   sourceName  String? // e.g. "1001Tracklists", "SoundCloud"
+  // Original audio host URL used for on-site embed (SC track, hearthis embed, YT).
+  // May differ from sourceUrl when discovery host ≠ audio host.
+  playbackUrl String?
   cover       String // hex color for the cover gradient seed
   // resolved set/mix artwork (or primary DJ image); null → monogram fallback
   imageUrl    String?

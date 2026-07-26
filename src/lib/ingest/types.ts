@@ -52,6 +52,12 @@ export type RawSet = {
   durationSec: number;
   sourceName: string;
   sourceUrl?: string;
+  /**
+   * Original audio host URL for on-site embed.
+   * SoundCloud/YouTube: usually same as sourceUrl.
+   * hearthis: prefer app.hearthis.at/embed/{id}/… (page URL alone is not embeddable).
+   */
+  playbackUrl?: string;
   cover: string;
   /** Optional content hash — when set, ingest refreshes plays if it changes. */
   sourceHash?: string;

@@ -159,6 +159,7 @@ async function curatedToHit(src: YoutubeSetSource): Promise<YtHit | null> {
     durationSec,
     sourceName: "YouTube",
     sourceUrl: meta.watchUrl,
+    playbackUrl: meta.watchUrl,
     cover: primary.accent ?? "#ff7a45",
     plays,
   };
@@ -211,6 +212,7 @@ async function venueVideoToHit(
     durationSec: meta.durationSec,
     sourceName: "YouTube",
     sourceUrl: meta.watchUrl,
+    playbackUrl: meta.watchUrl,
     cover: venue.accent,
     plays,
   };
@@ -254,6 +256,7 @@ async function artistChannelVideoToHit(
     durationSec: meta.durationSec,
     sourceName: "YouTube",
     sourceUrl: meta.watchUrl,
+    playbackUrl: meta.watchUrl,
     cover: ch.accent,
     plays,
   };
@@ -314,6 +317,7 @@ async function relatedVideoToHit(
     durationSec: meta.durationSec,
     sourceName: "YouTube",
     sourceUrl: meta.watchUrl,
+    playbackUrl: meta.watchUrl,
     cover: seed.accent,
     plays,
   };

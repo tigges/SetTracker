@@ -2,8 +2,10 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getSetBySlug, getAllSetSlugs } from "@/lib/queries";
 import { EntityThumb } from "@/components/EntityThumb";
+import { SetPlayer } from "@/components/SetPlayer";
 import { SetTimeline } from "@/components/SetTimeline";
 import { StatusLegend } from "@/components/StatusBits";
+import { detectPlaybackHost } from "@/lib/playback";
 import { SET_TYPE_META, fmtDate, fmtDuration } from "@/lib/status";
 
 export async function generateStaticParams() {
@@ -117,6 +119,28 @@ export default async function SetPage({
                 )}
               </span>
             )}
+            {(() => {
+              const host = detectPlaybackHost(set.playbackUrl);
+              if (!host) return null;
+              const label =
+                host === "soundcloud"
+                  ? "SoundCloud"
+                  : host === "hearthis"
+                    ? "hearthis.at"
+                    : "YouTube";
+              // Only show when playback host differs from discovery source label.
+              if (
+                set.sourceName &&
+                set.sourceName.toLowerCase().includes(label.toLowerCase())
+              ) {
+                return null;
+              }
+              return (
+                <span>
+                  Audio: <span className="text-muted">{label}</span>
+                </span>
+              );
+            })()}
           </div>
           {(set.sourceName === "SoundCloud" ||
             set.sourceName === "hearthis.at" ||
@@ -127,6 +151,11 @@ export default async function SetPage({
               ID on unresolved rows to fill gaps.
             </p>
           )}
+
+          <SetPlayer
+            playbackUrl={set.playbackUrl}
+            sourceUrl={set.sourceUrl}
+          />
         </div>
       </div>
 

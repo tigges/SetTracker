@@ -140,6 +140,7 @@ export async function getSetBySlug(slug: string) {
     durationSec: set.durationSec,
     sourceName: set.sourceName,
     sourceUrl: set.sourceUrl,
+    playbackUrl: set.playbackUrl ?? set.sourceUrl,
     cover: set.cover,
     imageUrl: set.imageUrl ?? primary?.dj.imageUrl ?? null,
     event: set.event,
