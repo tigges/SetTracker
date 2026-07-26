@@ -1,0 +1,67 @@
+name: Catalog enrich (weekly)
+
+# Full artwork refresh + MusicBrainz — kept off the 6-hour deep path.
+on:
+  schedule:
+    - cron: "30 4 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: catalog-enrich
+  cancel-in-progress: false
+
+jobs:
+  enrich:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate Prisma client
+        run: npx prisma generate
+
+      - name: Restore catalog DB
+        id: dbcache
+        uses: actions/cache/restore@v4
+        with:
+          path: prisma/dev.db
+          key: setradar-db-${{ github.run_id }}
+          restore-keys: |
+            setradar-db-
+
+      - name: Require catalog
+        run: |
+          if [ ! -f prisma/dev.db ]; then
+            echo "::error::No catalog DB in cache. Run Catalog deep refresh first."
+            exit 1
+          fi
+          npx prisma migrate deploy
+          SETS=$(python3 -c "import sqlite3; print(sqlite3.connect('prisma/dev.db').execute('select count(*) from \"Set\"').fetchone()[0])")
+          echo "Catalog sets=$SETS"
+          if [ "${SETS:-0}" -lt 50 ]; then
+            echo "::error::Catalog too small ($SETS)."
+            exit 1
+          fi
+
+      - name: Full thumbs + MusicBrainz
+        env:
+          THUMBS_DELAY_MS: "120"
+          THUMBS_NULL_ONLY: "0"
+          THUMBS_MB_LIMIT: "80"
+        run: npm run thumbs
+
+      - name: Save enriched catalog DB
+        uses: actions/cache/save@v4
+        with:
+          path: prisma/dev.db
+          key: setradar-db-${{ github.run_id }}

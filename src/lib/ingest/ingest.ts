@@ -665,13 +665,18 @@ export async function runIngest(
   }
 
   // Clear dead guessed social/website URLs; apply curated label/venue fixes.
-  try {
-    await verifyStoredSocialUrls(prisma);
-  } catch (err) {
-    console.warn(
-      "[ingest] verify-urls failed:",
-      err instanceof Error ? err.message : err,
-    );
+  // CI deep runs verify once in the workflow step — skip the duplicate here.
+  if (process.env.INGEST_SKIP_VERIFY === "1") {
+    console.log("[ingest] skipping verify-urls (workflow will run it once)");
+  } else {
+    try {
+      await verifyStoredSocialUrls(prisma);
+    } catch (err) {
+      console.warn(
+        "[ingest] verify-urls failed:",
+        err instanceof Error ? err.message : err,
+      );
+    }
   }
 
   // Harvest more socials / set candidates / Beatport links from entity websites.
