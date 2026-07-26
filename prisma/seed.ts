@@ -1173,8 +1173,9 @@ async function main() {
     },
   ];
 
-  // Fabricated demo sets (evenly spaced cues, catalog TITLE_POOL picks) are opt-in.
-  // Production / Pages builds leave this off so only real SoundCloud ingest rows ship.
+  // Fabricated demo sets are opt-in (SEED_MOCK_SETS=1). Deep ingest leaves this
+  // off and fills real rows. Fast Pages deploys use mocks only on cache miss so
+  // `output: "export"` always has /sets/[slug] params.
   const seedMockSets = process.env.SEED_MOCK_SETS === "1";
   if (!seedMockSets) {
     console.log(

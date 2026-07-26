@@ -6,7 +6,9 @@ import { SocialLinks } from "@/components/SocialLinks";
 import { SET_TYPE_META, fmtDate, fmtDuration, fmtRelative } from "@/lib/status";
 
 export async function generateStaticParams() {
-  return (await getAllLabelSlugs()).map((slug) => ({ slug }));
+  const slugs = await getAllLabelSlugs();
+  if (slugs.length === 0) return [{ slug: "_placeholder" }];
+  return slugs.map((slug) => ({ slug }));
 }
 
 function Panel({

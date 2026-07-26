@@ -7,7 +7,10 @@ import { StatusLegend } from "@/components/StatusBits";
 import { SET_TYPE_META, fmtDate, fmtDuration } from "@/lib/status";
 
 export async function generateStaticParams() {
-  return (await getAllSetSlugs()).map((slug) => ({ slug }));
+  const slugs = await getAllSetSlugs();
+  // Next.js `output: "export"` errors if a dynamic route returns no params.
+  if (slugs.length === 0) return [{ slug: "_placeholder" }];
+  return slugs.map((slug) => ({ slug }));
 }
 
 export default async function SetPage({
