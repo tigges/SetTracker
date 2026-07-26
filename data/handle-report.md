@@ -31,7 +31,7 @@ Updated: 2026-07-26T11:27:29.769Z
 | Black Coffee | https://www.youtube.com/@realblackcoffee | https://soundcloud.com/realblackcoffee | https://x.com/RealBlackCoffee | https://instagram.com/realblackcoffee |  |  |  |  | https://facebook.com/realblackcoffee |  |
 | Chapter & Verse | https://www.youtube.com/@chapterandversemusic | https://soundcloud.com/chapterandverseofficial |  |  |  |  |  |  |  |  |
 | AC Slater | https://www.youtube.com/@acslater | https://soundcloud.com/acslater |  |  |  |  |  |  |  | https://linktr.ee/acslater |
-| Marten Hørger | https://www.youtube.com/@MARTENHORGER | https://soundcloud.com/marten-horger |  | https://instagram.com/marten_horger |  |  | https://open.spotify.com/artist/0EdUwJSqkMmsH6Agg3G8Ls |  | https://facebook.com/marten.horger | https://marten.fanlink.tv/rave-pv-anthem |
+| Marten Horger | https://www.youtube.com/@MARTENHORGER | https://soundcloud.com/marten-horger |  | https://instagram.com/marten_horger |  |  | https://open.spotify.com/artist/0EdUwJSqkMmsH6Agg3G8Ls |  | https://facebook.com/marten.horger | https://marten.fanlink.tv/rave-pv-anthem |
 | Dom Dolla | https://www.youtube.com/@domdolla | https://soundcloud.com/domdolla | https://x.com/domdolla | https://instagram.com/domdolla | https://tiktok.com/@domdolla |  |  |  | https://facebook.com/domdollamusic |  |
 | Solomun | https://www.youtube.com/@solomunmusic | https://soundcloud.com/solomun |  |  |  |  |  |  |  |  |
 | Robin Schulz | https://www.youtube.com/@robinschulz | https://soundcloud.com/robin-schulz | https://x.com/robin_schulz | https://instagram.com/robin__schulz | https://tiktok.com/@robinschulzofficial |  | https://open.spotify.com/artist/3t5xRXzsuZmMDkQzgOX35S | https://music.apple.com/de/artist/robin-schulz/347433400 | https://facebook.com/robin.schulz.official | https://robin-schulz.com |
@@ -76,7 +76,7 @@ Updated: 2026-07-26T11:27:29.769Z
 - **Black Coffee** — YT @realblackcoffee · SC realblackcoffee
 - **Chapter & Verse** — YT @chapterandversemusic · SC chapterandverseofficial
 - **AC Slater** — YT @acslater · SC acslater
-- **Marten Hørger** — YT @MARTENHORGER · SC marten-horger
+- **Marten Horger** — YT @MARTENHORGER · SC marten-horger
 - **Dom Dolla** — YT @domdolla · SC domdolla
 - **Solomun** — YT @solomunmusic · SC solomun
 - **Robin Schulz** — YT @robinschulz · SC robin-schulz

@@ -304,7 +304,7 @@ export const ARTIST_ROSTER: ArtistRosterEntry[] = [
     priority: "normal",
   },
   {
-    name: "Marten Hørger",
+    name: "Marten Horger",
     genre: "Bass House",
     accent: "#ff7a45",
     homeCity: "Berlin, DE",

@@ -30,7 +30,7 @@ function dj(name: string, extra: Partial<RawArtist> = {}): RawArtist {
 export const YOUTUBE_SETS: YoutubeSetSource[] = [
   {
     video: "https://www.youtube.com/watch?v=9AfzWCT7bac",
-    primaryArtist: dj("Marten Hørger", {
+    primaryArtist: dj("Marten Horger", {
       accent: "#ff7a45",
       homeCity: "Berlin, DE",
     }),

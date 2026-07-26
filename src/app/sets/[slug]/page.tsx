@@ -136,6 +136,7 @@ export default async function SetPage({
         durationSec={set.durationSec}
         accent={accent}
         setSlug={set.slug}
+        setGenre={set.genre}
       />
     </div>
   );
