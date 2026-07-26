@@ -22,4 +22,18 @@ assert.equal(
   false,
 );
 
+const ultraShows = YOUTUBE_PLAYLISTS.find((p) =>
+  p.playlist.includes("PLBg1SJiXSxfJ6lee3le9qRtIFLkdFwd8E"),
+)!;
+assert.ok(ultraShows);
+assert.equal(ultraShows.eventSlug, "ultra-miami");
+assert.equal(
+  isPlaylistSetCandidate(
+    "BIZARRAP || LIVE @ ULTRA MIAMI MAIN STAGE 2026 (ft. Skrillex & Daddy Yankee)",
+    50 * 60,
+    ultraShows,
+  ),
+  true,
+);
+
 console.log("playlists.test.ts ok");

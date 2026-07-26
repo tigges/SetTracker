@@ -168,6 +168,7 @@ async function curatedToHit(src: YoutubeSetSource): Promise<YtHit | null> {
     sourceUrl: meta.watchUrl,
     playbackUrl: meta.watchUrl,
     cover: primary.accent ?? "#ff7a45",
+    imageUrl: meta.imageUrl,
     plays,
   };
   raw.sourceHash = hashRawSetContent(raw);
@@ -222,6 +223,7 @@ async function venueVideoToHit(
     sourceUrl: meta.watchUrl,
     playbackUrl: meta.watchUrl,
     cover: venue.accent,
+    imageUrl: meta.imageUrl,
     plays,
   };
   raw.sourceHash = hashRawSetContent(raw);
@@ -266,6 +268,7 @@ async function artistChannelVideoToHit(
     sourceUrl: meta.watchUrl,
     playbackUrl: meta.watchUrl,
     cover: ch.accent,
+    imageUrl: meta.imageUrl,
     plays,
   };
   raw.sourceHash = hashRawSetContent(raw);
@@ -327,6 +330,7 @@ async function relatedVideoToHit(
     sourceUrl: meta.watchUrl,
     playbackUrl: meta.watchUrl,
     cover: seed.accent,
+    imageUrl: meta.imageUrl,
     plays,
   };
   raw.sourceHash = hashRawSetContent(raw);
@@ -472,6 +476,11 @@ export function createYoutubeAdapter(
   artistChannels: YoutubeArtistChannel[] = YOUTUBE_ARTIST_CHANNELS,
   playlists: YoutubePlaylistSource[] = YOUTUBE_PLAYLISTS,
 ): SourceAdapter {
+  /** Fast deploy: curated watch URLs (+ optional playlists) only. */
+  const curatedOnly = process.env.YOUTUBE_CURATED_ONLY === "1";
+  const includePlaylists =
+    process.env.YOUTUBE_CURATED_PLAYLISTS === "1" || !curatedOnly;
+
   return {
     id: "youtube",
     label: "YouTube",
@@ -487,6 +496,7 @@ export function createYoutubeAdapter(
           if (!hit || seen.has(hit.raw.sourceSlug)) continue;
           seen.add(hit.raw.sourceSlug);
           out.push(hit.raw);
+          if (curatedOnly) continue;
           for (const rid of relatedSeedIds(hit.related, RELATED_PER_VIDEO)) {
             if (relatedQueue.length >= RELATED_GLOBAL_CAP) break;
             if (seen.has(`yt-${rid}`)) continue;
@@ -500,8 +510,17 @@ export function createYoutubeAdapter(
         }
       }
 
-      for (const pl of playlists) {
-        await pollPlaylistVideos(pl, seen, out, relatedQueue);
+      if (includePlaylists) {
+        for (const pl of playlists) {
+          await pollPlaylistVideos(pl, seen, out, relatedQueue);
+        }
+      }
+
+      if (curatedOnly) {
+        console.log(
+          `[youtube] curated-only: ${out.length} sets (skipped channels/related)`,
+        );
+        return out;
       }
 
       for (const venue of venues) {

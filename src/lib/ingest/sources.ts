@@ -105,8 +105,11 @@ function withOptionalSynthetic(base: SourceAdapter[]): SourceAdapter[] {
  * - YouTube curated sets + venue channels (description + Music credits)
  * - Bandcamp curated tracks/albums
  * - Boiler Room sessions (boilerroom.tv provenance + SC/YT playback)
+ *
+ * Filter with INGEST_ADAPTERS=youtube,soundcloud (comma list of adapter ids)
+ * for light deploy hooks (e.g. curated YouTube only).
  */
-export const adapters: SourceAdapter[] = withOptionalSynthetic([
+const ALL_ADAPTERS: SourceAdapter[] = withOptionalSynthetic([
   soundcloudAdapter,
   insomniacNorAdapter,
   hearthisAdapter,
@@ -114,3 +117,17 @@ export const adapters: SourceAdapter[] = withOptionalSynthetic([
   bandcampAdapter,
   boilerroomAdapter,
 ]);
+
+function selectedAdapters(): SourceAdapter[] {
+  const raw = process.env.INGEST_ADAPTERS?.trim();
+  if (!raw) return ALL_ADAPTERS;
+  const want = new Set(
+    raw
+      .split(",")
+      .map((s) => s.trim().toLowerCase())
+      .filter(Boolean),
+  );
+  return ALL_ADAPTERS.filter((a) => want.has(a.id.toLowerCase()));
+}
+
+export const adapters: SourceAdapter[] = selectedAdapters();

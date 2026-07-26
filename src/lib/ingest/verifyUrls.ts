@@ -11,6 +11,7 @@ import type { PrismaClient } from "@prisma/client";
 import { ensureClubListVenues } from "./discovery/clubLists";
 import { ensureDjMagVenues } from "./discovery/djmagClubs";
 import { ensureDiscoveredDjs } from "./discovery/ensureDjs";
+import { applyCuratedEventImages } from "../thumbs/eventImages";
 import { applyDjSocialPins } from "./djSocialPins";
 import { KNOWN_EVENTS } from "./events";
 
@@ -114,6 +115,9 @@ export async function applyKnownUrlFixes(prisma: PrismaClient): Promise<number> 
 
   // Brand DJ social pins (BISCITS, Guetta, FISHER, ARTBAT, …).
   n += await applyDjSocialPins(prisma);
+
+  // Curated venue / festival share images (Ultra, EDC, Tomorrowland, …).
+  n += await applyCuratedEventImages(prisma);
 
   // Curated venue / festival websites (EDC Las Vegas etc.)
   for (const ev of Object.values(KNOWN_EVENTS)) {

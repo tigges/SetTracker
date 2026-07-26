@@ -395,6 +395,25 @@ export const ARTIST_ROSTER_CURATED: ArtistRosterEntry[] = [
     priority: "high",
   },
   {
+    name: "Bizarrap",
+    genre: "House",
+    accent: "#f4a261",
+    homeCity: "Ramos Mejía, AR",
+    youtube: { handle: "@Bizarrap", status: "ok" },
+    soundcloud: {
+      permalink: "bizarrap",
+      userId: 302974540,
+      status: "ok",
+    },
+    socials: [
+      "https://www.instagram.com/bizarrap/",
+      "https://soundcloud.com/bizarrap",
+      "https://www.youtube.com/@Bizarrap",
+      "https://open.spotify.com/artist/716NhGYqD1jl2wI1Qkgq36",
+    ],
+    priority: "high",
+  },
+  {
     name: "Men Machine",
     genre: "Bass House",
     accent: "#ff4d6d",

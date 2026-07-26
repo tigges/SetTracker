@@ -123,4 +123,17 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     type: "festival",
     title: "ARTBAT live set",
   },
+  {
+    video: "https://www.youtube.com/watch?v=0psLTNmJM38",
+    primaryArtist: dj("Bizarrap", {
+      accent: "#f4a261",
+      homeCity: "Ramos Mejía, AR",
+    }),
+    genre: "House",
+    type: "festival",
+    title:
+      "BIZARRAP || LIVE @ ULTRA MIAMI MAIN STAGE 2026 (ft. Skrillex & Daddy Yankee)",
+    seriesName: "Ultra Shows",
+    eventName: "Ultra Music Festival",
+  },
 ];

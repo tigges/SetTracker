@@ -83,6 +83,15 @@ jobs:
             exit 1
           fi
 
+      # Light curated YouTube ingest (watch-list only) so new sample sets
+      # like Ultra Shows / Bizarrap land without a full catalog-deep run.
+      - name: Ingest curated YouTube sets
+        env:
+          INGEST_ADAPTERS: "youtube"
+          YOUTUBE_CURATED_ONLY: "1"
+          INGEST_SKIP_VERIFY: "1"
+        run: npm run ingest
+
       - name: Fill missing thumbs only
         env:
           THUMBS_DELAY_MS: "80"
