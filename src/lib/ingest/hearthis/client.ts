@@ -12,6 +12,8 @@ export type HtUser = {
   permalink?: string;
   permalink_url?: string;
   avatar_url?: string;
+  avatar_url_retina?: string;
+  thumb_url?: string;
 };
 
 export type HtTrack = {
@@ -24,7 +26,9 @@ export type HtTrack = {
   permalink_url?: string;
   created_at?: string;
   release_date?: string;
+  thumb?: string | null;
   artwork_url?: string | null;
+  artwork_url_retina?: string | null;
   playback_count?: string | number;
   favoritings_count?: string | number;
   comment_count?: string | number;
@@ -63,6 +67,10 @@ export async function fetchCategoryTracks(
   return Array.isArray(data) ? data : (data.data ?? []);
 }
 
+export async function fetchUser(userPermalink: string): Promise<HtUser> {
+  return htGet<HtUser>(`/${encodeURIComponent(userPermalink)}/`);
+}
+
 export async function fetchTrackDetail(
   userPermalink: string,
   trackPermalink: string,
@@ -70,6 +78,32 @@ export async function fetchTrackDetail(
   return htGet<HtTrack>(
     `/${encodeURIComponent(userPermalink)}/${encodeURIComponent(trackPermalink)}/`,
   );
+}
+
+/** Prefer retina → standard → thumb. */
+export function pickHearthisImage(
+  ...candidates: Array<string | null | undefined>
+): string | null {
+  for (const c of candidates) {
+    const url = c?.trim();
+    if (url && /^https?:\/\//i.test(url)) return url;
+  }
+  return null;
+}
+
+/** Parse `https://hearthis.at/{user}/{track}/` → permalinks. */
+export function parseHearthisUrl(
+  url: string,
+): { user: string; track?: string } | null {
+  try {
+    const u = new URL(url);
+    if (!/(^|\.)hearthis\.at$/i.test(u.hostname)) return null;
+    const parts = u.pathname.split("/").filter(Boolean);
+    if (!parts[0] || parts[0] === "embed" || parts[0] === "api-v2") return null;
+    return { user: parts[0], track: parts[1] };
+  } catch {
+    return null;
+  }
 }
 
 export async function fetchTrackComments(

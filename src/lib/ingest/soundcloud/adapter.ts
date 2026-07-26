@@ -57,6 +57,15 @@ function coverOf(track: ScTrack, show: SoundCloudShow): string {
   return show.primaryArtist.accent ?? ACCENT_FALLBACK;
 }
 
+/** Prefer larger SC artwork variants when the API returns -large. */
+function scImageUrl(url?: string | null): string | undefined {
+  if (!url?.trim()) return undefined;
+  return url
+    .replace("-large.", "-t500x500.")
+    .replace("-t200x200.", "-t500x500.")
+    .replace("-badge.", "-t500x500.");
+}
+
 function setTypeFor(track: ScTrack, show: SoundCloudShow): RawSet["type"] {
   const title = track.title || "";
   if (/\b(festival|edc|ultra|parookaville|boiler\s*room)\b/i.test(title)) {
@@ -102,7 +111,16 @@ async function trackToRawSet(
   }
 
   const plays = mergeTracklistSignals(fromDescription, fromComments);
-  const { primary, collaborators } = artistsForSet(title, show.primaryArtist);
+  const artistImage = scImageUrl(track.user?.avatar_url);
+  const setImage =
+    scImageUrl(track.artwork_url) ||
+    artistImage ||
+    show.primaryArtist.imageUrl;
+  const preferredPrimary = {
+    ...show.primaryArtist,
+    imageUrl: show.primaryArtist.imageUrl || artistImage,
+  };
+  const { primary, collaborators } = artistsForSet(title, preferredPrimary);
   const festival = inferFestivalEvent(title);
   const raw: RawSet = {
     sourceSlug,
@@ -121,6 +139,7 @@ async function trackToRawSet(
     sourceUrl,
     playbackUrl: sourceUrl,
     cover: coverOf(track, show),
+    imageUrl: setImage,
     plays,
   };
   raw.sourceHash = hashRawSetContent(raw);

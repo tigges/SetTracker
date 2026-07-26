@@ -28,6 +28,7 @@ import {
   fetchCategoryTracks,
   fetchTrackComments,
   fetchTrackDetail,
+  pickHearthisImage,
   sleep,
   type HtTrack,
 } from "./client";
@@ -158,10 +159,27 @@ async function trackToRawSet(
   // Embed the original hearthis audio host (not a guessed SC mirror).
   const playbackUrl = trackId != null ? hearthisEmbedUrl(trackId) : undefined;
 
+  const artistImage = pickHearthisImage(
+    detail.user?.avatar_url_retina,
+    detail.user?.avatar_url,
+    track.user?.avatar_url_retina,
+    track.user?.avatar_url,
+  );
+  const setImage = pickHearthisImage(
+    detail.artwork_url_retina,
+    detail.artwork_url,
+    detail.thumb,
+    track.artwork_url_retina,
+    track.artwork_url,
+    track.thumb,
+    artistImage,
+  );
+
   const { primary, collaborators } = artistsForSet(title, {
     name: artistName,
     slug: artistSlug,
     accent: pickAccent(artistSlug),
+    imageUrl: artistImage ?? undefined,
   });
 
   const raw: RawSet = {
@@ -177,6 +195,7 @@ async function trackToRawSet(
     sourceUrl,
     playbackUrl,
     cover: pickAccent(sourceSlug),
+    imageUrl: setImage ?? undefined,
     plays,
   };
   raw.sourceHash = hashRawSetContent(raw);
