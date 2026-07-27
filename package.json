@@ -1,10 +1,6 @@
 {
   "name": "setradar",
-<<<<<<< HEAD
-  "version": "0.2.26",
-=======
   "version": "0.2.27",
->>>>>>> origin/main
   "private": true,
   "prisma": {
     "seed": "tsx prisma/seed.ts"
