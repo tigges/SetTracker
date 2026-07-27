@@ -46,7 +46,11 @@ setradar.ai.
   (`YOUTUBE_ARTIST_VIDEO_LIMIT`, `YOUTUBE_CONTINUATION_PAGES`).
   **Discovery:** before poll, cross-link YT About ↔ SC profile socials
   (`data/handle-report.json` + `.md` lists artists still missing handles).
-  After ingest, B2B collaborators + co-played track artists land in
+  Catalog DJs with YouTube sets also get channel About + description
+  “Connect with…” socials (`npm run catalog-yt-socials` /
+  `CATALOG_YT_SOCIALS_LIMIT`) — fill-null on Dj, promote SC/YT for crawl;
+  venue channels (Tomorrowland / Boiler Room / …) are skipped. After ingest,
+  B2B collaborators + co-played track artists land in
   `data/artist-candidates.json` and auto-promote when handles resolve
   (`DISCOVERY_PROMOTE_SCORE`, `DISCOVERY_PROMOTE_CAP`). SC has adaptive poll
   limits (`data/soundcloud-poll-state.json`). **sourceHash refresh** when
