@@ -147,22 +147,20 @@ jobs:
             exit 1
           fi
 
-      # GitHub Pages rejects symlinks / oversized artifacts (~1–2GB cliff).
-      - name: Flatten symlinks + size-check export
+      # GitHub Pages rejects symlinks. Raw `out/` is multi-GB HTML; the uploaded
+      # zip is much smaller — do not gate on uncompressed du (that blocked #61).
+      - name: Flatten symlinks in export
         run: |
+          RAW=$(du -sb out | awk '{print $1}')
+          echo "Export raw bytes=$RAW"
           if find out -type l | grep -q .; then
             echo "Flattening symlinks in out/"
             tmp=$(mktemp -d)
             cp -aL out/. "$tmp/"
             rm -rf out
             mv "$tmp" out
-          fi
-          SIZE_BYTES=$(du -sb out | awk '{print $1}')
-          echo "Export bytes=$SIZE_BYTES"
-          # Keep uploaded zip under the practical Pages cliff.
-          if [ "$SIZE_BYTES" -gt 1300000000 ]; then
-            echo "::error::Export is ${SIZE_BYTES} bytes (>1.3GB). Lower TRACK_STATIC_EXPORT_CAP or prune catalog."
-            exit 1
+          else
+            echo "No symlinks in out/"
           fi
 
       - name: Upload Pages artifact

@@ -826,7 +826,7 @@ export async function getTracks(limit = 120) {
 
 /** Cap static track pages so GitHub Pages artifacts stay deployable. */
 const TRACK_STATIC_EXPORT_CAP = Number(
-  process.env.TRACK_STATIC_EXPORT_CAP || 1800,
+  process.env.TRACK_STATIC_EXPORT_CAP || 1200,
 );
 
 export async function getAllTrackSlugs() {
