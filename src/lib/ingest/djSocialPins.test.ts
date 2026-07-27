@@ -17,6 +17,7 @@ for (const slug of [
   "tape-b",
   "hntr",
   "marten-horger",
+  "gentlemens-groove",
   "charlotte-de-witte",
   "black-coffee",
   "chapter-verse",
@@ -50,6 +51,14 @@ assert.equal(bySlug["tape-b"]!.instagram, null);
 assert.match(bySlug["marten-horger"]!.soundcloud, /marten-horger/);
 assert.match(bySlug["marten-horger"]!.instagram!, /marten_horger/);
 assert.match(bySlug["marten-horger"]!.website, /martenhorger\.com/);
+assert.match(
+  bySlug["gentlemens-groove"]!.soundcloud,
+  /gentlemens-groove-records/,
+);
+assert.match(
+  bySlug["gentlemens-groove"]!.website,
+  /facebook\.com\/Gentlemensgroove/i,
+);
 assert.match(bySlug["charlotte-de-witte"]!.soundcloud, /charlottedewittemusic/);
 assert.match(bySlug["charlotte-de-witte"]!.instagram!, /charlottedewittemusic/);
 assert.match(bySlug["charlotte-de-witte"]!.twitter!, /charlottedwitte/);

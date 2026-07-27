@@ -698,6 +698,24 @@ export const ARTIST_ROSTER_CURATED: ArtistRosterEntry[] = [
     socials: ["https://ffm.to/km074"],
     priority: "normal",
   },
+  {
+    name: "Gentlemen's Groove",
+    genre: "Deep House",
+    accent: "#00e5ff",
+    homeCity: "South Africa",
+    // Long mixes live on hearthis; SC is the label singles account.
+    soundcloud: {
+      permalink: "gentlemens-groove-records",
+      userId: 13671588,
+      status: "ok",
+    },
+    website: "https://www.facebook.com/Gentlemensgroove",
+    socials: [
+      "https://hearthis.at/gentlemensgroove-oz/",
+      "https://www.facebook.com/Gentlemensgroove",
+    ],
+    priority: "normal",
+  },
 ];
 
 /**

@@ -29,6 +29,10 @@ import {
   sleep,
 } from "../src/lib/thumbs/deezer";
 import {
+  applyCuratedDjImages,
+  KNOWN_DJ_IMAGES,
+} from "../src/lib/thumbs/djImages";
+import {
   applyCuratedEventImages,
   fillEventImages,
 } from "../src/lib/thumbs/eventImages";
@@ -200,6 +204,23 @@ async function main() {
 
   for (const d of djs) {
     stats.djs.scanned += 1;
+    // Curated brand logos win — do not replace with Deezer/hearthis/SC.
+    const curated = KNOWN_DJ_IMAGES[d.slug];
+    if (curated) {
+      if (d.imageUrl !== curated) {
+        await prisma.dj.update({
+          where: { id: d.id },
+          data: { imageUrl: curated },
+        });
+        stats.djs.updated += 1;
+        console.log(`  ✓ dj ${d.slug} (curated)`);
+      } else {
+        console.log(`  = dj ${d.slug} (curated)`);
+      }
+      djImageById.set(d.id, curated);
+      stats.djs.filled += 1;
+      continue;
+    }
     let url = await resolveArtistImage(d.name);
     await sleep(DELAY_MS);
     if (!url) {
@@ -466,6 +487,12 @@ async function main() {
       stats.sets.missed += 1;
     }
   }
+
+  console.log("[thumbs] applying curated DJ images…");
+  const curatedDjs = await applyCuratedDjImages(prisma);
+  console.log(
+    `  curated dj pins=${curatedDjs.djs} set pins=${curatedDjs.sets}`,
+  );
 
   console.log("[thumbs] applying curated venue images…");
   const curatedEvents = await applyCuratedEventImages(prisma);

@@ -13,6 +13,10 @@ const repo = process.env.PAGES_BASE_PATH ?? "/SetTracker";
 
 const nextConfig: NextConfig = {
   images: { unoptimized: true },
+  // Inlined for client <img> src of root-relative public/ assets.
+  env: {
+    NEXT_PUBLIC_BASE_PATH: isPages ? repo : "",
+  },
   ...(isPages
     ? {
         output: "export",
