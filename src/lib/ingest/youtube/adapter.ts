@@ -23,7 +23,10 @@ import {
 import { hashRawSetContent } from "../hash";
 import { parseDescriptionTracklist } from "../soundcloud/parseTracklist";
 import { playsFromDescription1001Links } from "../tracklists1001/client";
-import { tracklist1001RowsToPlays } from "../tracklists1001/seeds";
+import {
+  merge1001Plays,
+  tracklist1001RowsToPlays,
+} from "../tracklists1001/seeds";
 import { slugify, type RawPlay, type RawSet, type SourceAdapter } from "../types";
 import {
   YOUTUBE_ARTIST_CHANNELS,
@@ -148,12 +151,7 @@ async function enrichWith1001Tracklist(
   if (from1001.length < 5 && seed?.length) {
     from1001 = tracklist1001RowsToPlays(seed);
   }
-  if (!from1001.length) return base;
-  // A real 1001TL capture beats evenly-spaced Music-credit stubs.
-  if (from1001.length >= 12) return from1001;
-  return mergeFingerprintPlays(base, from1001, {
-    replaceIfSourceBelow: 15,
-  });
+  return merge1001Plays(base, from1001);
 }
 
 function mergeArtistChannels(

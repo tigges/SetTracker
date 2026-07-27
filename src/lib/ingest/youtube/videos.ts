@@ -14,7 +14,11 @@ import {
   FP_JAMES_HYPE_GET_CLOSER_LONDON_2,
   type FingerprintSeedRow,
 } from "../fingerprint/seeds";
-import { TL_MARTEN_HORGER_EDC_LV_2023 } from "../tracklists1001/seeds";
+import {
+  TL_CLOONEE_PROSPA_DESTINO_2026,
+  TL_MARTEN_HORGER_EDC_LV_2023,
+  TL_MARTEN_HORGER_PAROOKAVILLE_2026,
+} from "../tracklists1001/seeds";
 import type { RawArtist } from "../types";
 import { slugify } from "../types";
 
@@ -96,6 +100,30 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     title: "Dillon Francis B2B Marten Horger - Tomorrowland 2025",
     seriesName: "Tomorrowland",
     eventName: "Tomorrowland Belgium",
+  },
+  {
+    // Official Parookaville channel — 1001TL timed list (browser capture).
+    video: "https://www.youtube.com/watch?v=EbNRjEFZpDw",
+    primaryArtist: marten(),
+    genre: "Bass House",
+    type: "festival",
+    title: "Marten Horger - Parookaville 2026 Mainstage",
+    seriesName: "Parookaville",
+    eventName: "Parookaville",
+    tracklist1001: TL_MARTEN_HORGER_PAROOKAVILLE_2026,
+  },
+  {
+    // Official Cloonee upload; same night as SC clooneeb2bprospa.
+    video: "https://www.youtube.com/watch?v=UE6wjxvMRz0",
+    primaryArtist: dj("Cloonee", {
+      accent: "#ff8c42",
+      homeCity: "Dublin, IE",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    title: "Cloonee B2B Prospa - Live at Destino, Ibiza",
+    eventName: "Music On Destino",
+    tracklist1001: TL_CLOONEE_PROSPA_DESTINO_2026,
   },
   {
     video: "https://www.youtube.com/watch?v=9MZz5YazOUo",

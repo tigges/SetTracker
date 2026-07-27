@@ -9,8 +9,20 @@
  */
 
 import type { FingerprintSeedRow } from "../fingerprint/seeds";
-import { fingerprintRowsToPlays } from "../fingerprint/seeds";
+import {
+  fingerprintRowsToPlays,
+  mergeFingerprintPlays,
+} from "../fingerprint/seeds";
 import type { RawPlay } from "../types";
+import { TRACKLIST_1001_BY_SOURCE_SLUG } from "./festival2026";
+
+export {
+  TL_CHARLOTTE_DE_WITTE_TML_WE1_2026,
+  TL_CLOONEE_PROSPA_DESTINO_2026,
+  TL_MARTEN_HORGER_PAROOKAVILLE_2026,
+  TRACKLIST_1001_BY_SOURCE_SLUG,
+  evenlySpaceRows,
+} from "./festival2026";
 
 /** Same clock rows as fingerprint seeds; written with provenance 1001tl. */
 export function tracklist1001RowsToPlays(rows: FingerprintSeedRow[]): RawPlay[] {
@@ -18,6 +30,31 @@ export function tracklist1001RowsToPlays(rows: FingerprintSeedRow[]): RawPlay[] 
     ...p,
     provenance: "1001tl" as const,
   }));
+}
+
+/**
+ * Merge curated / fetched 1001 plays into a source tracklist.
+ * Dense lists (≥12) replace thin stubs; otherwise gap-fill.
+ */
+export function merge1001Plays(
+  base: RawPlay[],
+  from1001: RawPlay[],
+): RawPlay[] {
+  if (!from1001.length) return base;
+  if (from1001.length >= 12) return from1001;
+  return mergeFingerprintPlays(base, from1001, {
+    replaceIfSourceBelow: 15,
+  });
+}
+
+/** Apply curated seed keyed by sourceSlug (SoundCloud / force paths). */
+export function applyTracklist1001Seed(
+  sourceSlug: string,
+  base: RawPlay[],
+): RawPlay[] {
+  const seed = TRACKLIST_1001_BY_SOURCE_SLUG[sourceSlug];
+  if (!seed?.length) return base;
+  return merge1001Plays(base, tracklist1001RowsToPlays(seed));
 }
 
 /**
