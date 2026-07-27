@@ -43,6 +43,10 @@ export type YtWatchMeta = {
   videoId: string;
   title: string;
   channel: string;
+  /** UC… channel id from player `videoDetails` when present. */
+  channelId: string | null;
+  /** Public @handle when player / page exposes ownerProfileUrl or canonical. */
+  channelHandle: string | null;
   durationSec: number;
   description: string;
   publishedAt: Date | null;
@@ -412,6 +416,10 @@ export async function fetchWatchMeta(videoIdOrUrl: string): Promise<YtWatchMeta>
     | { thumbnails?: Array<{ url?: string; width?: number }> }
     | undefined;
   const thumbnails = thumbBlock?.thumbnails ?? [];
+  const channelId =
+    typeof details.channelId === "string" && details.channelId.startsWith("UC")
+      ? details.channelId
+      : null;
 
   // Fallbacks from ytInitialData overlay when player blob is restricted.
   if (initial && (!title || !channel || !durationSec)) {
@@ -449,6 +457,8 @@ export async function fetchWatchMeta(videoIdOrUrl: string): Promise<YtWatchMeta>
     videoId,
     title,
     channel,
+    channelId,
+    channelHandle: channelHandleFromPlayer(player, html),
     durationSec,
     description,
     publishedAt: player ? publishedFromPlayer(player) : null,
@@ -457,6 +467,26 @@ export async function fetchWatchMeta(videoIdOrUrl: string): Promise<YtWatchMeta>
     watchUrl,
     imageUrl: pickYoutubeThumbnail(videoId, thumbnails),
   };
+}
+
+/** Pull @handle from ownerProfileUrl / canonicalBaseUrl when present. */
+function channelHandleFromPlayer(
+  player: Record<string, unknown> | null,
+  html: string,
+): string | null {
+  const micro = player?.microformat as
+    | { playerMicroformatRenderer?: { ownerProfileUrl?: string } }
+    | undefined;
+  const ownerUrl = micro?.playerMicroformatRenderer?.ownerProfileUrl || "";
+  const fromOwner = ownerUrl.match(/youtube\.com\/(@[\w.-]+)/i);
+  if (fromOwner) return fromOwner[1];
+  const canonical = html.match(/"canonicalBaseUrl":"\/(@[\w.-]+)"/);
+  if (canonical) return canonical[1];
+  const vanity = html.match(
+    /https?:\\\/\\\/(?:www\\.)?youtube\\.com\\\/(@[\w.-]+)/i,
+  );
+  if (vanity) return vanity[1].replace(/\\/g, "");
+  return null;
 }
 
 /**
@@ -712,6 +742,58 @@ export async function fetchChannelVideoIdsDeep(
 
 const SOCIAL_HOST_RE =
   "soundcloud\\.com|instagram\\.com|x\\.com|twitter\\.com|tiktok\\.com|facebook\\.com|fb\\.com|linktr\\.ee|hoo\\.be|lnk\\.to|fanlink\\.tv|ffm\\.to|open\\.spotify\\.com|music\\.apple\\.com|beatport\\.com|youtube\\.com|youtu\\.be";
+
+/**
+ * Extract social / hub URLs from free text (video description "Connect with…"
+ * blocks, bios). Complements channel About scrapes.
+ */
+export function extractSocialLinksFromText(text: string): string[] {
+  if (!text?.trim()) return [];
+  const plain = [
+    ...text.matchAll(
+      new RegExp(
+        `https?:\\/\\/(?:www\\.)?(?:${SOCIAL_HOST_RE})[^\\s)\\]"']+`,
+        "gi",
+      ),
+    ),
+  ].map((m) => m[0].replace(/[),.;]+$/, ""));
+  // Explicit Website: lines (personal domains not in SOCIAL_HOST_RE)
+  const websites = [
+    ...text.matchAll(/Website:\s*(https?:\/\/[^\s)]+)/gi),
+  ].map((m) => m[1].replace(/[),.;]+$/, ""));
+  const bare = [
+    ...text.matchAll(
+      /(?:instagram\.com|twitter\.com|x\.com|tiktok\.com|facebook\.com|soundcloud\.com|youtube\.com)\/[A-Za-z0-9@._~-]+/gi,
+    ),
+  ].map((m) => `https://${m[0].replace(/^https?:\/\//i, "")}`);
+  // Relative paths common in artist descriptions: /afrojack, @afrojack
+  const relativeSc = [
+    ...text.matchAll(/Soundclouds?:\s*\/([A-Za-z0-9_-]+)/gi),
+  ].map((m) => `https://soundcloud.com/${m[1]}`);
+  const relativeIg = [
+    ...text.matchAll(/Instagram:\s*@([A-Za-z0-9._]+)/gi),
+  ].map((m) => `https://www.instagram.com/${m[1]}/`);
+  const relativeX = [
+    ...text.matchAll(/(?:Twitter|X):\s*\/([A-Za-z0-9_]+)/gi),
+  ].map((m) => `https://x.com/${m[1]}`);
+  const relativeYt = [
+    ...text.matchAll(/YouTube:\s*\/(@?[\w.-]+)/gi),
+  ].map((m) => {
+    const h = m[1].startsWith("@") ? m[1] : `@${m[1]}`;
+    return `https://www.youtube.com/${h}`;
+  });
+  const socials = [
+    ...new Set([
+      ...plain,
+      ...bare,
+      ...relativeSc,
+      ...relativeIg,
+      ...relativeX,
+      ...relativeYt,
+    ]),
+  ].filter(isUsefulOutboundLink);
+  return [...new Set([...socials, ...websites])];
+}
 
 /** Extract outbound social / hub links from a channel About (or channel) page. */
 export async function fetchChannelSocialLinks(

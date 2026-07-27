@@ -198,6 +198,59 @@ function classifyLine(
   };
 }
 
+/**
+ * Fill missing cue times. Known stamps stay; gaps interpolate between
+ * neighboring anchors (0 at start, durationSec at end).
+ */
+export function fillSparseTimestamps(
+  rows: { line: string; sec: number | null }[],
+  durationSec: number,
+): { line: string; sec: number }[] {
+  const n = rows.length;
+  if (n === 0) return [];
+  const dur = Math.max(1, durationSec);
+  const known = rows
+    .map((r, i) =>
+      r.sec != null && Number.isFinite(r.sec)
+        ? { i, s: Math.min(dur, Math.max(0, r.sec)) }
+        : null,
+    )
+    .filter((x): x is { i: number; s: number } => x != null);
+
+  if (known.length === 0) {
+    return rows.map((r, i) => ({
+      line: r.line,
+      sec: Math.round((dur * (i + 1)) / (n + 1)),
+    }));
+  }
+  if (known.length === n) {
+    return rows.map((r, i) => ({ line: r.line, sec: known.find((k) => k.i === i)!.s }));
+  }
+
+  const out = new Array<number>(n);
+  const anchors = [{ i: -1, s: 0 }, ...known, { i: n, s: dur }];
+  for (let a = 0; a < anchors.length - 1; a++) {
+    const left = anchors[a]!;
+    const right = anchors[a + 1]!;
+    const span = right.i - left.i;
+    if (span <= 0) continue;
+    for (let i = left.i + 1; i < right.i; i++) {
+      const t = (i - left.i) / span;
+      out[i] = Math.round(left.s + t * (right.s - left.s));
+    }
+    if (right.i >= 0 && right.i < n) out[right.i] = right.s;
+  }
+
+  let prev = 0;
+  for (let i = 0; i < n; i++) {
+    let s = Math.min(dur, Math.max(0, out[i] ?? 0));
+    if (s < prev) s = prev;
+    out[i] = s;
+    prev = s;
+  }
+  return rows.map((r, i) => ({ line: r.line, sec: out[i]! }));
+}
+
 export function parseDescriptionTracklist(
   description: string | null | undefined,
   durationSec: number,
@@ -210,11 +263,10 @@ export function parseDescriptionTracklist(
     .map((l) => l.trim())
     .filter(Boolean);
 
-  // Prefer lines that carry a real cue timestamp. Track names without times are
-  // still kept (they come from the upload description — not invented), but we
-  // never synthesize filler tracks when the description has no tracklist.
-  const stamped: { line: string; sec: number }[] = [];
-  const unstamped: string[] = [];
+  // Collect tracklist rows in document order. Some uploads (hearthis "Track
+  // List:" blocks) are mostly untimed with a few trailing cue annotations —
+  // keeping order matters more than dropping the untimed majority.
+  const rows: { line: string; sec: number | null }[] = [];
   for (const line of lines) {
     let sec: number | null = null;
     let candidate = line;
@@ -231,36 +283,41 @@ export function parseDescriptionTracklist(
     }
     candidate = candidate.trim();
     if (!candidate) continue;
-    if (sec != null) {
-      if (
-        looksLikeTracklistLine(candidate) ||
-        ID_LINE.test(candidate) ||
-        looksLikeTimestampedTitle(candidate)
-      ) {
-        stamped.push({ line: candidate, sec: Math.min(durationSec, sec) });
-      }
-      continue;
-    }
-    if (looksLikeTracklistLine(candidate) || ID_LINE.test(candidate)) {
-      unstamped.push(candidate);
-    }
+
+    const trackish =
+      looksLikeTracklistLine(candidate) ||
+      ID_LINE.test(candidate) ||
+      (sec != null && looksLikeTimestampedTitle(candidate));
+    if (!trackish) continue;
+
+    rows.push({
+      line: candidate,
+      sec: sec != null ? Math.min(durationSec, sec) : null,
+    });
   }
 
-  // If the description has timed cues, trust those only — avoids mixing real
-  // cue points with evenly-spaced guesses from leftover prose lines.
-  const chosen =
-    stamped.length > 0
-      ? stamped.map((s, i) => ({ line: s.line, sec: s.sec, position: i + 1 }))
-      : unstamped.map((line, i) => ({
-          line,
-          // Order-only placement when the source omitted timestamps.
-          sec: Math.round((durationSec * (i + 1)) / (unstamped.length + 1)),
-          position: i + 1,
-        }));
+  const timedCount = rows.filter((r) => r.sec != null).length;
+  const untimedCount = rows.length - timedCount;
+
+  // Dense untimed tracklist + sparse cue annotations → keep all rows and
+  // interpolate. Otherwise prefer timed-only (avoids promo "Artist - Title"
+  // crumbs next to a real timed list) or even-space a fully untimed list.
+  const keepSparseUntimed =
+    timedCount > 0 &&
+    untimedCount >= Math.max(5, timedCount * 2);
+
+  const chosen = keepSparseUntimed
+    ? fillSparseTimestamps(rows, durationSec)
+    : timedCount > 0
+      ? rows
+          .filter((r) => r.sec != null)
+          .map((r) => ({ line: r.line, sec: r.sec as number }))
+      : fillSparseTimestamps(rows, durationSec);
 
   const plays: RawPlay[] = [];
-  for (const row of chosen) {
-    const play = classifyLine(row.line, row.position, row.sec, provenance);
+  for (let i = 0; i < chosen.length; i++) {
+    const row = chosen[i]!;
+    const play = classifyLine(row.line, i + 1, row.sec, provenance);
     if (play) plays.push(play);
   }
   return plays.map((p, i) => ({ ...p, position: i + 1 }));

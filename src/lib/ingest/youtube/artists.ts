@@ -29,7 +29,7 @@ export const YOUTUBE_ARTIST_CHANNELS: YoutubeArtistChannel[] = ARTIST_ROSTER
   }));
 
 const SKIP_TITLE =
-  /\b(aftermovie|trailer|teaser|tickets?|announcement|#shorts|visualiser|lyric video|official video|conversation with|interview|podcast|vlog)\b/i;
+  /\b(aftermovie|trailer|teaser|tickets?|announcement|#shorts|visualiser|visualizer|lyric video|official video|conversation with|interview|podcast|vlog|tour life|how i became|world famous dj|episode\s*#?\d+|e\d{2,3}\b|promised land\s*#)\b/i;
 
 export function isArtistChannelSetCandidate(
   title: string,
