@@ -18,6 +18,11 @@ for (const slug of [
   "hntr",
   "marten-horger",
   "charlotte-de-witte",
+  "black-coffee",
+  "chapter-verse",
+  "walker-royce",
+  "vintage-culture",
+  "bleu-clair",
 ]) {
   assert.ok(bySlug[slug], `missing pin ${slug}`);
   assert.match(bySlug[slug]!.soundcloud, /^https:\/\/soundcloud\.com\//);
@@ -49,5 +54,18 @@ assert.match(bySlug["charlotte-de-witte"]!.soundcloud, /charlottedewittemusic/);
 assert.match(bySlug["charlotte-de-witte"]!.instagram!, /charlottedewittemusic/);
 assert.match(bySlug["charlotte-de-witte"]!.twitter!, /charlottedwitte/);
 assert.match(bySlug["charlotte-de-witte"]!.website, /charlottedewittemusic\.com/);
+
+assert.match(bySlug["black-coffee"]!.instagram!, /realblackcoffee/);
+assert.match(bySlug["black-coffee"]!.twitter!, /RealBlackCoffee/);
+assert.match(bySlug["black-coffee"]!.website, /music\.apple\.com/);
+assert.equal(bySlug["chapter-verse"]!.instagram, null);
+assert.match(bySlug["chapter-verse"]!.soundcloud, /chapterandverseofficial/);
+assert.match(bySlug["walker-royce"]!.instagram!, /walkerandroyce/);
+assert.match(bySlug["walker-royce"]!.twitter!, /WalkerAndRoyce/);
+assert.match(bySlug["vintage-culture"]!.website, /vintageculture\.com/);
+assert.match(bySlug["vintage-culture"]!.instagram!, /vintageculture/);
+assert.match(bySlug["bleu-clair"]!.instagram!, /bleuclairmusic/);
+assert.match(bySlug["bleu-clair"]!.soundcloud, /bleuclair/);
+assert.match(bySlug["bleu-clair"]!.twitter!, /bleuclair/);
 
 console.log("djSocialPins.test.ts ok");

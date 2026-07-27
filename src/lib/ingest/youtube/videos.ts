@@ -98,6 +98,16 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     eventName: "Tomorrowland Belgium",
   },
   {
+    // Official Parookaville channel — YT Music credits; denser 1001TL on #56.
+    video: "https://www.youtube.com/watch?v=EbNRjEFZpDw",
+    primaryArtist: marten(),
+    genre: "Bass House",
+    type: "festival",
+    title: "Marten Horger - Parookaville 2026 Mainstage",
+    seriesName: "Parookaville",
+    eventName: "Parookaville",
+  },
+  {
     video: "https://www.youtube.com/watch?v=9MZz5YazOUo",
     primaryArtist: dj("James Hype", {
       accent: "#ff3d6e",
@@ -243,5 +253,177 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     type: "festival",
     title: "Odd Mob at Seismic Dance Event 8.0 | Full Set (Volcano Stage)",
     eventName: "Seismic Dance Event",
+  },
+  {
+    // Artist upload — also in @Biscits "Live Streams" playlist.
+    video: "https://www.youtube.com/watch?v=l7Ytbzj7uGo",
+    primaryArtist: dj("BISCITS", {
+      accent: "#ef476f",
+      homeCity: "UK",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    title: "Biscits DJ Set - EDC Vegas 2025",
+    seriesName: "EDC Las Vegas",
+    eventName: "EDC Las Vegas",
+  },
+  {
+    video: "https://www.youtube.com/watch?v=FH7lIOv1s3Q",
+    primaryArtist: dj("Black Coffee", {
+      accent: "#222222",
+      homeCity: "South Africa",
+    }),
+    genre: "Afro House",
+    type: "festival",
+    title: "BLACK COFFEE - Mayan Warrior - Burning Man 2025",
+    eventName: "Burning Man",
+  },
+  {
+    video: "https://www.youtube.com/watch?v=6VPNizjOyBQ",
+    primaryArtist: dj("Walker & Royce", {
+      accent: "#9ef01a",
+      homeCity: "New York, US",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    title: "Walker & Royce | Fresh Start SF 2026",
+    eventName: "Fresh Start SF",
+  },
+  {
+    video: "https://www.youtube.com/watch?v=AJbSD2qYmI4",
+    primaryArtist: dj("Walker & Royce", {
+      accent: "#9ef01a",
+      homeCity: "New York, US",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    title: "Walker & Royce @ Club Space | April 4 2025",
+    eventName: "Club Space Miami",
+  },
+  {
+    video: "https://www.youtube.com/watch?v=8EocK-qw-g8",
+    primaryArtist: dj("Walker & Royce", {
+      accent: "#9ef01a",
+      homeCity: "New York, US",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    title: "Walker & Royce b2b VNSSA at Elrow",
+    eventName: "Elrow",
+  },
+  {
+    video: "https://www.youtube.com/watch?v=ubQZAmWDAxI",
+    primaryArtist: dj("Walker & Royce", {
+      accent: "#9ef01a",
+      homeCity: "New York, US",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    title: "Walker & Royce - Lollapalooza 2024 Full Set",
+    eventName: "Lollapalooza",
+  },
+  {
+    video: "https://www.youtube.com/watch?v=H8cUi1fg5rQ",
+    primaryArtist: dj("Walker & Royce", {
+      accent: "#9ef01a",
+      homeCity: "New York, US",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    title: "Walker & Royce - live from CRSSD 2024",
+    eventName: "CRSSD",
+  },
+  {
+    video: "https://www.youtube.com/watch?v=TDuFnUAo4II",
+    primaryArtist: dj("Vintage Culture", {
+      accent: "#e85d04",
+      homeCity: "Brazil",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    title: "Vintage Culture @ Pacha New York City, Affairs (2026)",
+    seriesName: "Affairs",
+    eventName: "Pacha New York",
+  },
+  {
+    video: "https://www.youtube.com/watch?v=OVex0rm7ZR4",
+    primaryArtist: dj("Vintage Culture", {
+      accent: "#e85d04",
+      homeCity: "Brazil",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    title: "Vintage Culture @ Pacha Ibiza, Affairs (2026)",
+    seriesName: "Affairs",
+    eventName: "Pacha Ibiza",
+  },
+  {
+    video: "https://www.youtube.com/watch?v=xXRjglkAmq8",
+    primaryArtist: dj("Vintage Culture", {
+      accent: "#e85d04",
+      homeCity: "Brazil",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    title:
+      "Vintage Culture @ Ultra Music Festival Miami 2026 - Resistance Megastructure",
+    seriesName: "Ultra Shows",
+    eventName: "Ultra Music Festival",
+  },
+  {
+    video: "https://www.youtube.com/watch?v=knJyJPP45dg",
+    primaryArtist: dj("Vintage Culture", {
+      accent: "#e85d04",
+      homeCity: "Brazil",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    title: "Vintage Culture Live at EDC Las Vegas, Neon Garden (Club Space)",
+    eventName: "EDC Las Vegas",
+  },
+  {
+    video: "https://www.youtube.com/watch?v=kmMYCg-igjc",
+    primaryArtist: dj("Vintage Culture", {
+      accent: "#e85d04",
+      homeCity: "Brazil",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    title: "Vintage Culture live @ Só Track Boa Festival, Brasil 2026",
+    eventName: "Só Track Boa",
+  },
+  {
+    video: "https://www.youtube.com/watch?v=jnSFLztjm80",
+    primaryArtist: dj("Bleu Clair", {
+      accent: "#4cc9f0",
+      homeCity: "Indonesia",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    title: "Bleu Clair at Tomorrowland, Belgium 2023",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+  },
+  {
+    video: "https://www.youtube.com/watch?v=c_sx3zum8Z0",
+    primaryArtist: dj("Bleu Clair", {
+      accent: "#4cc9f0",
+      homeCity: "Indonesia",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    title: "Bleu Clair live from EDC Las Vegas 2023",
+    eventName: "EDC Las Vegas",
+  },
+  {
+    video: "https://www.youtube.com/watch?v=_hdM8uJV1LM",
+    primaryArtist: dj("Bleu Clair", {
+      accent: "#4cc9f0",
+      homeCity: "Indonesia",
+    }),
+    genre: "Tech House",
+    type: "radio",
+    title: "Bleu Clair presents BLEUPRINT VOL. 5 (Live from Jakarta)",
+    seriesName: "BLEUPRINT",
   },
 ];

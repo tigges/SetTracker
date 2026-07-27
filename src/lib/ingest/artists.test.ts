@@ -4,6 +4,7 @@ import {
   performingCreditFromTitle,
   splitArtistCredit,
   splitArtistsFromSetTitle,
+  tidyPerformingCredit,
 } from "./artists";
 
 assert.equal(
@@ -11,6 +12,38 @@ assert.equal(
     "James Hype B2B Tita Lau live @ Cafe Mambo, Ibiza 2026",
   ),
   "James Hype B2B Tita Lau",
+);
+
+assert.equal(
+  performingCreditFromTitle("Biscits DJ Set - EDC Vegas 2025"),
+  "Biscits",
+);
+assert.equal(
+  tidyPerformingCredit("Biscits Tech House DJ Set"),
+  "Biscits",
+);
+assert.equal(
+  performingCreditFromTitle(
+    "Biscits for Insomniac Records Livestream (August 26, 2020)",
+  ),
+  "Biscits",
+);
+
+const biscitsPreferred = artistsForSet(
+  "Biscits DJ Set - Academy, Los Angeles",
+  { name: "BISCITS", slug: "biscits", accent: "#ef476f" },
+);
+assert.equal(biscitsPreferred.primary.slug, "biscits");
+assert.equal(biscitsPreferred.collaborators.length, 0);
+
+const loopCollab = artistsForSet(
+  "Goodboys x Biscits x Max Mylo: In The Loop at Academy, Los Angeles",
+  { name: "BISCITS", slug: "biscits", accent: "#ef476f" },
+);
+assert.equal(loopCollab.primary.slug, "biscits");
+assert.deepEqual(
+  loopCollab.collaborators.map((c) => c.name),
+  ["Goodboys", "Max Mylo"],
 );
 
 const hype = splitArtistsFromSetTitle(

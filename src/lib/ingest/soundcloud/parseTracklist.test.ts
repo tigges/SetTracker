@@ -79,4 +79,67 @@ assert.equal(heldeep[1].timestamp, 39);
 assert.equal(heldeep[1].artistName, "Aden Rémai, GAWP");
 assert.equal(heldeep[2].timestamp, 3 * 60 + 44);
 
+// hearthis-style: dense untimed Track List with a few trailing cue annotations
+// (previously collapsed to only the 3 stamped rows).
+const plugUglies = parseDescriptionTracklist(
+  `PLEASE enjoy this at very loud volume!
+Track List:
+Kalypsoul, Malü - Mana (House Ape Mix)
+VieL - Beautiful Place (Massaged Hard by House Ape)
+Armonica, Gioli & Assia - Around (Extended)
+Lili Chan - Hold Back (Extended Mix)
+Audiotones, Ranta - Riverside
+Agoria, Yacine Dessouki, NDRK - Olympe
+Soul Button, Deviu - Numinar
+Way Out West  [Distinct'ive Records 2004] - Fear  00:33:27
+AceNoise - Indian Vibes
+Basaar, Anonimat - Ocean Full of Life
+Alok, Gryffin, Julia Church - Never Letting Go (Extended Mix)
+Stephan Bodzin, Jem Cooke, Massano - Healing (Extended Mix)
+Content of Void - Daywalker
+Jorkes - Hot (NIKKNAME Remix)
+Martijn Ten Velden - Inhale
+let me you, Parque, BERNT - in another life
+Bullet Tooth - If I can't be Yours (Enamour Remix)
+STRFKR  [Polyvinyl Record Company 2013] - Golden Light  01:16:08
+Nikita Grib - It's Late For Me (Extended Mix)
+Solomun, Vintage Culture - Strange Feelings (Solomun Remix - Extended)
+Grafine - This Moment
+Ede - Tolia
+Teemon & Poomba - Dreams Driver
+Takis - Coffee & Cigarettes (Extended Mix)
+PROFF, Volen Sentir - The Rumble (Slobberknocked by House Ape)
+Booka Shade, Gab Rhome - The Sun (Jan Blomqvist Extended Remix)
+Eleonora, Fake Mood, Pepel, Kohaan - I Can Feel (House Ape Mix)
+Courtney Storm, mölly (USA) - The Leap (Extended Ape Slap Mix)
+Sebastien Leger  [Lost & Found 2019] – Lanarka  02:00:31
+Leandro Murua - Pacha
+Animalize (UK) - Yttria
+Nicky Romero, Monocule - Lost In The Dust (Extended Mix)
+Ayadou - Memories (Extended Mix)
+Klangphonics, Anna Metko - Ghost (Find Me Again)
+Budakid - Loganta
+MYRNE - Ignis
+Jakatta - American Dream (PROFF Extended Interpretation)
+Lola Bozzano - Tango
+Gorge - Touch The Sky (Extended Mix)
+Naag - Liugin (El Mundo & Zazou Remix)
+Nuage, Carbon Mass - Desert Moth (Extended)`,
+  11162,
+  "hearthis",
+);
+assert.equal(plugUglies.length, 41);
+assert.equal(plugUglies[0]!.artistName, "Kalypsoul, Malü");
+assert.equal(plugUglies[7]!.trackTitle, "Fear");
+assert.equal(plugUglies[7]!.timestamp, 33 * 60 + 27);
+assert.equal(plugUglies[17]!.trackTitle, "Golden Light");
+assert.equal(plugUglies[17]!.timestamp, 1 * 3600 + 16 * 60 + 8);
+assert.equal(plugUglies[28]!.trackTitle, "Lanarka");
+assert.equal(plugUglies[28]!.timestamp, 2 * 3600 + 31);
+assert.equal(plugUglies[40]!.artistName, "Nuage, Carbon Mass");
+assert.equal(plugUglies[0]!.provenance, "hearthis");
+// Sparse cues stay monotonic with interpolated neighbors
+assert.ok(plugUglies[6]!.timestamp <= plugUglies[7]!.timestamp);
+assert.ok(plugUglies[7]!.timestamp <= plugUglies[8]!.timestamp);
+
 console.log("parseTracklist.test.ts ok");

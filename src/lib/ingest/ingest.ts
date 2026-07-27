@@ -4,6 +4,7 @@ import { hearthisEmbedUrl, playbackUrlFromSource } from "../playback";
 import { djSocialsFromKnown, labelSocials } from "../social";
 import { ARTIST_ROSTER } from "./roster";
 import { parseTrackTitle } from "../trackMeta";
+import { runCatalogYtSocials } from "./discovery/catalogYtSocials";
 import { runCrosslinkDiscovery, type HandleReport } from "./discovery/crosslink";
 import { runDiscovery, type DiscoveryStats } from "./discovery/run";
 import { hashRawSetContent } from "./hash";
@@ -642,6 +643,17 @@ export async function runIngest(
   } catch (err) {
     console.warn(
       "[ingest] crosslink failed:",
+      err instanceof Error ? err.message : err,
+    );
+  }
+
+  // Catalog DJs with YT sets → channel About / description socials → Dj + promote.
+  // Runs before adapters so newly found SC/YT can be polled in this deep pass.
+  try {
+    await runCatalogYtSocials(prisma);
+  } catch (err) {
+    console.warn(
+      "[ingest] catalog-yt-socials failed:",
       err instanceof Error ? err.message : err,
     );
   }
