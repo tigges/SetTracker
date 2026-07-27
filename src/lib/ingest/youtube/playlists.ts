@@ -70,6 +70,17 @@ export const YOUTUBE_PLAYLISTS: YoutubePlaylistSource[] = [
     titleMatch:
       /\b(ultra|miami|live|set|main\s*stage|worldwide|resistance|bizarrap|bzrp)\b/i,
   },
+  {
+    // @Biscits — Live Streams (long DJ sets; skip Releases / Remixes / Live Tracks)
+    playlist: "PLSAUtc6DBR34M6_c_4RlpMSG81OY5lu9p",
+    seriesName: "BISCITS",
+    genre: "Tech House",
+    accent: "#ef476f",
+    limit: PL_LIMIT,
+    minDurationSec: 18 * 60,
+    titleMatch:
+      /\b(biscits|dj\s*set|live|set|stream|inflight|nocturnal|academy|space|defected|insomniac|mad\s*decent|exchange|kings?\s*hall|daytrip|in\s+the\s+loop)\b/i,
+  },
 ];
 
 /** Adapt a playlist source to the venue candidate helpers. */

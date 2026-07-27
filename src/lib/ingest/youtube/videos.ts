@@ -98,6 +98,16 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     eventName: "Tomorrowland Belgium",
   },
   {
+    // Official Parookaville channel — YT Music credits; denser 1001TL on #56.
+    video: "https://www.youtube.com/watch?v=EbNRjEFZpDw",
+    primaryArtist: marten(),
+    genre: "Bass House",
+    type: "festival",
+    title: "Marten Horger - Parookaville 2026 Mainstage",
+    seriesName: "Parookaville",
+    eventName: "Parookaville",
+  },
+  {
     video: "https://www.youtube.com/watch?v=9MZz5YazOUo",
     primaryArtist: dj("James Hype", {
       accent: "#ff3d6e",
@@ -243,5 +253,18 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     type: "festival",
     title: "Odd Mob at Seismic Dance Event 8.0 | Full Set (Volcano Stage)",
     eventName: "Seismic Dance Event",
+  },
+  {
+    // Artist upload — also in @Biscits "Live Streams" playlist.
+    video: "https://www.youtube.com/watch?v=l7Ytbzj7uGo",
+    primaryArtist: dj("BISCITS", {
+      accent: "#ef476f",
+      homeCity: "UK",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    title: "Biscits DJ Set - EDC Vegas 2025",
+    seriesName: "EDC Las Vegas",
+    eventName: "EDC Las Vegas",
   },
 ];
