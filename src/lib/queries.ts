@@ -622,7 +622,16 @@ export async function getLabelBySlug(slug: string) {
 export type LabelProfile = NonNullable<Awaited<ReturnType<typeof getLabelBySlug>>>;
 
 export async function getAllDjSlugs() {
-  const rows = await prisma.dj.findMany({ select: { slug: true } });
+  // Pages export size cliff (~1–2GB): skip discovery stub DJs with no sets.
+  // Always keep social-pinned brand DJs even before their first set lands.
+  const { DJ_SOCIAL_PINS } = await import("@/lib/ingest/djSocialPins");
+  const pinned = DJ_SOCIAL_PINS.map((p) => p.slug);
+  const rows = await prisma.dj.findMany({
+    where: {
+      OR: [{ sets: { some: {} } }, { slug: { in: pinned } }],
+    },
+    select: { slug: true },
+  });
   return rows.map((r) => r.slug);
 }
 
@@ -815,12 +824,21 @@ export async function getTracks(limit = 120) {
     .filter((x): x is NonNullable<typeof x> => !!x);
 }
 
+/** Cap static track pages so GitHub Pages artifacts stay deployable. */
+const TRACK_STATIC_EXPORT_CAP = Number(
+  process.env.TRACK_STATIC_EXPORT_CAP || 1200,
+);
+
 export async function getAllTrackSlugs() {
   const { ensureTrackSlugs } = await import("@/lib/tracks/ensureSlugs");
   await ensureTrackSlugs(prisma);
+  // Prefer frequently played tracks; Music-credit floods otherwise blow the
+  // static export past GitHub Pages' practical ~1GB artifact limit.
   const rows = await prisma.track.findMany({
     where: { plays: { some: {} } },
     select: { slug: true },
+    orderBy: { plays: { _count: "desc" } },
+    take: Math.max(200, TRACK_STATIC_EXPORT_CAP),
   });
   return rows.map((r) => r.slug);
 }

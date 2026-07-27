@@ -17,6 +17,7 @@
     "db:setup": "prisma migrate deploy && prisma db seed",
     "ingest": "tsx prisma/ingest.ts",
     "crosslink": "tsx prisma/crosslink.ts",
+    "catalog-yt-socials": "tsx scripts/catalog-yt-socials.ts",
     "verify-urls": "tsx prisma/verify-urls.ts",
     "scan-urls": "tsx prisma/scan-urls.ts",
     "thumbs": "tsx prisma/thumbs.ts",

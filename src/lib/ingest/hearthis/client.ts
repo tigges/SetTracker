@@ -37,6 +37,8 @@ export type HtTrack = {
   playback_count?: string | number;
   favoritings_count?: string | number;
   comment_count?: string | number;
+  /** Featured on hearthis — often has a filled playlist cue table. */
+  is_featured?: boolean | number | string;
   user?: HtUser;
 };
 
@@ -47,6 +49,19 @@ export type HtComment = {
   comment_position?: string | number | null;
   timestamp?: string | null;
   user?: HtUser;
+};
+
+/**
+ * Structured tracklist cue from `/{user}/{track}/playlist/`.
+ * hearthis also emits empty gap rows (`text: ""`) and occasionally a
+ * first-track row with `start=0,end=0` out of order — callers should
+ * filter empties and sort by `start`.
+ */
+export type HtPlaylistEntry = {
+  id?: string | number;
+  start?: string | number;
+  end?: string | number;
+  text?: string | null;
 };
 
 async function htGet<T>(pathAndQuery: string): Promise<T> {
@@ -131,6 +146,21 @@ export async function fetchTrackComments(
 ): Promise<HtComment[]> {
   const data = await htGet<HtComment[] | { data?: HtComment[] }>(
     `/${encodeURIComponent(userPermalink)}/${encodeURIComponent(trackPermalink)}/comments/?page=${page}&count=${count}`,
+  );
+  return Array.isArray(data) ? data : (data.data ?? []);
+}
+
+/**
+ * Structured timed tracklist (when the uploader filled hearthis cues).
+ * Prefer this over description/comments — promo descriptions often omit
+ * the table that already lives at `/playlist/`.
+ */
+export async function fetchTrackPlaylist(
+  userPermalink: string,
+  trackPermalink: string,
+): Promise<HtPlaylistEntry[]> {
+  const data = await htGet<HtPlaylistEntry[] | { data?: HtPlaylistEntry[] }>(
+    `/${encodeURIComponent(userPermalink)}/${encodeURIComponent(trackPermalink)}/playlist/`,
   );
   return Array.isArray(data) ? data : (data.data ?? []);
 }

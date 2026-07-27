@@ -32,10 +32,11 @@ setradar.ai.
 - **Lint / typecheck:** `npm run lint` and `npx tsc --noEmit`. `next lint` was
   removed in Next 16; ESLint runs directly.
 - **Ingestion / crawler:** `npm run ingest` upserts newly discovered sets & DJs.
- **Primary sources:** SoundCloud (`src/lib/ingest/soundcloud/`) curated shows
- + curated playlists (`soundcloud/playlists.ts`, e.g. Lift Sets) via api-v2 +
+  **Primary sources:** SoundCloud (`src/lib/ingest/soundcloud/`) curated shows
+  + curated playlists (`soundcloud/playlists.ts`, e.g. Lift Sets) via api-v2 +
   **hearthis.at** house categories + curated artist accounts
-  (`src/lib/ingest/hearthis/` — e.g. Gentlemen's Groove) +
+  (`src/lib/ingest/hearthis/` — structured `/{user}/{track}/playlist/` cues,
+  then description / timed comments; e.g. Gentlemen's Groove) +
   **YouTube** curated sets + venue channels + tracklist-heavy artist channels
   (`src/lib/ingest/youtube/` — Boiler Room / Cercle / Mixmag + James Hype–style
   artist channels; description tracklists and YouTube Music song credits) +
@@ -46,7 +47,11 @@ setradar.ai.
   (`YOUTUBE_ARTIST_VIDEO_LIMIT`, `YOUTUBE_CONTINUATION_PAGES`).
   **Discovery:** before poll, cross-link YT About ↔ SC profile socials
   (`data/handle-report.json` + `.md` lists artists still missing handles).
-  After ingest, B2B collaborators + co-played track artists land in
+  Catalog DJs with YouTube sets also get channel About + description
+  “Connect with…” socials (`npm run catalog-yt-socials` /
+  `CATALOG_YT_SOCIALS_LIMIT`) — fill-null on Dj, promote SC/YT for crawl;
+  venue channels (Tomorrowland / Boiler Room / …) are skipped. After ingest,
+  B2B collaborators + co-played track artists land in
   `data/artist-candidates.json` and auto-promote when handles resolve
   (`DISCOVERY_PROMOTE_SCORE`, `DISCOVERY_PROMOTE_CAP`). SC has adaptive poll
   limits (`data/soundcloud-poll-state.json`). **sourceHash refresh** when

@@ -24,6 +24,7 @@ import {
   sleep,
   type ScTrack,
 } from "./client";
+import { applyTracklist1001Seed } from "../tracklists1001/seeds";
 import {
   mergeTracklistSignals,
   parseDescriptionTracklist,
@@ -119,7 +120,10 @@ async function trackToRawSet(
     }
   }
 
-  const plays = mergeTracklistSignals(fromDescription, fromComments);
+  const plays = applyTracklist1001Seed(
+    sourceSlug,
+    mergeTracklistSignals(fromDescription, fromComments),
+  );
   const artistImage = scImageUrl(track.user?.avatar_url);
   const setImage =
     scImageUrl(track.artwork_url) ||

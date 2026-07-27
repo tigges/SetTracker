@@ -5,6 +5,8 @@
  * We only keep long uploads and skip trailers / aftermovies.
  */
 
+import type { RawArtist } from "../types";
+
 export type YoutubeVenueChannel = {
   /** @handle or channel URL */
   channel: string;
@@ -17,6 +19,11 @@ export type YoutubeVenueChannel = {
   eventSlug?: string;
   genre: string;
   accent: string;
+  /**
+   * Optional preferred primary (artist-owned playlists adapted as venues).
+   * Venue channels leave this unset and infer the DJ from the title.
+   */
+  primaryArtist?: RawArtist;
   /** Max recent uploads to inspect */
   limit?: number;
   minDurationSec?: number;
@@ -173,5 +180,10 @@ function tidyArtist(name: string): string {
   return name
     .replace(/\s+/g, " ")
     .replace(/\s+b2b\s+/gi, " b2b ")
+    .replace(
+      /\s+(?:tech\s+house\s+|bass\s+house\s+|house\s+)?(?:dj\s*)?sets?\b.*$/i,
+      "",
+    )
+    .replace(/\s+for\s+.+$/i, "")
     .trim();
 }
