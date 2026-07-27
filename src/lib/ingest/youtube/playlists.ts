@@ -5,6 +5,7 @@
  * (those are track catalogs, not mixes).
  */
 
+import type { RawArtist } from "../types";
 import {
   isVenueSetCandidate,
   type YoutubeVenueChannel,
@@ -17,6 +18,11 @@ export type YoutubePlaylistSource = {
   eventSlug?: string;
   genre: string;
   accent: string;
+  /**
+   * When set (artist-owned set playlists), force this DJ as primary —
+   * titles like "Biscits DJ Set - …" otherwise invent slug biscits-dj-set.
+   */
+  primaryArtist?: RawArtist;
   limit?: number;
   minDurationSec?: number;
   titleMatch?: RegExp;
@@ -76,10 +82,16 @@ export const YOUTUBE_PLAYLISTS: YoutubePlaylistSource[] = [
     seriesName: "BISCITS",
     genre: "Tech House",
     accent: "#ef476f",
+    primaryArtist: {
+      name: "BISCITS",
+      slug: "biscits",
+      accent: "#ef476f",
+      homeCity: "UK",
+    },
     limit: PL_LIMIT,
     minDurationSec: 18 * 60,
     titleMatch:
-      /\b(biscits|dj\s*set|live|set|stream|inflight|nocturnal|academy|space|defected|insomniac|mad\s*decent|exchange|kings?\s*hall|daytrip|in\s+the\s+loop)\b/i,
+      /\b(biscits|dj\s*set|live|set|stream|inflight|nocturnal|academy|space|defected|insomniac|mad\s*decent|exchange|kings?\s*hall|daytrip|in\s+the\s+loop|ready\s*2\s*dance)\b/i,
   },
 ];
 
@@ -93,6 +105,7 @@ export function playlistAsVenue(
     eventSlug: pl.eventSlug,
     genre: pl.genre,
     accent: pl.accent,
+    primaryArtist: pl.primaryArtist,
     limit: pl.limit,
     minDurationSec: pl.minDurationSec,
     titleMatch: pl.titleMatch,

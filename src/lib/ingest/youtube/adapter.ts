@@ -251,10 +251,21 @@ async function venueVideoToHit(
   if (!isVenueSetCandidate(meta.title, meta.durationSec, venue)) return null;
 
   const credit = artistFromVenueTitle(meta.title);
-  const { primary, collaborators } = artistsForSet(meta.title, undefined, {
+  const preferred = venue.primaryArtist
+    ? {
+        ...venue.primaryArtist,
+        slug: venue.primaryArtist.slug || slugify(venue.primaryArtist.name),
+        accent: venue.primaryArtist.accent ?? venue.accent,
+      }
+    : undefined;
+  const { primary, collaborators } = artistsForSet(meta.title, preferred, {
     accent: venue.accent,
   });
-  if (!collaborators.length && primary.name === meta.title.trim()) {
+  if (
+    !preferred &&
+    !collaborators.length &&
+    primary.name === meta.title.trim()
+  ) {
     primary.name = credit;
     primary.slug = slugify(credit);
   }

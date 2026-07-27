@@ -54,7 +54,7 @@ async function main() {
   const sets = await prisma.set.findMany({
     where: {
       OR: [
-        { sourceSlug: { in: ["yt-EbNRjEFZpDw", "yt-l7Ytbzj7uGo"] } },
+        { slug: { in: ["yt-EbNRjEFZpDw", "yt-l7Ytbzj7uGo"] } },
         { artists: { some: { dj: { slug: "biscits" } } } },
       ],
     },
@@ -68,7 +68,7 @@ async function main() {
   for (const s of sets) {
     const names = s.artists.map((a) => a.dj.name).join(" + ");
     console.log(
-      `${s.sourceSlug} | plays=${s._count.plays} | ${names} | ${s.title.slice(0, 72)}`,
+      `${s.slug} | plays=${s._count.plays} | ${names} | ${s.title.slice(0, 72)}`,
     );
   }
   console.log(`[biscits-yt] matched sets=${sets.length}`);

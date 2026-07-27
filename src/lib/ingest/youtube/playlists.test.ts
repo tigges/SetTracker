@@ -41,6 +41,7 @@ const biscitsLive = YOUTUBE_PLAYLISTS.find((p) =>
 )!;
 assert.ok(biscitsLive);
 assert.equal(biscitsLive.seriesName, "BISCITS");
+assert.equal(biscitsLive.primaryArtist?.slug, "biscits");
 assert.equal(
   isPlaylistSetCandidate(
     "Biscits DJ Set - EDC Vegas 2025",
