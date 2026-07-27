@@ -14,6 +14,7 @@ import {
   FP_JAMES_HYPE_GET_CLOSER_LONDON_2,
   type FingerprintSeedRow,
 } from "../fingerprint/seeds";
+import { TL_MARTEN_HORGER_EDC_LV_2023 } from "../tracklists1001/seeds";
 import type { RawArtist } from "../types";
 import { slugify } from "../types";
 
@@ -32,21 +33,69 @@ export type YoutubeSetSource = {
    * Written as provenance "fingerprint"; never overwrites sourceUrl.
    */
   fingerprintPlays?: FingerprintSeedRow[];
+  /**
+   * 1001Tracklists rows (browser capture / follow-link). Provenance "1001tl".
+   * Used when the upload only links 1001.tl and live HTML is Cloudflare-gated.
+   */
+  tracklist1001?: FingerprintSeedRow[];
 };
 
 function dj(name: string, extra: Partial<RawArtist> = {}): RawArtist {
   return { name, slug: slugify(name), ...extra };
 }
 
+function marten(extra: Partial<RawArtist> = {}): RawArtist {
+  return dj("Marten Horger", {
+    accent: "#ff7a45",
+    homeCity: "Berlin, DE",
+    ...extra,
+  });
+}
+
 export const YOUTUBE_SETS: YoutubeSetSource[] = [
   {
     video: "https://www.youtube.com/watch?v=9AfzWCT7bac",
-    primaryArtist: dj("Marten Horger", {
-      accent: "#ff7a45",
-      homeCity: "Berlin, DE",
-    }),
+    primaryArtist: marten(),
     genre: "Bass House",
     type: "festival",
+    title: "Marten Horger - Pop Up Rave in a Church (Ravensburg)",
+    seriesName: "Pop Up Rave",
+  },
+  {
+    video: "https://www.youtube.com/watch?v=ileReNaZW5A",
+    primaryArtist: marten(),
+    genre: "Bass House",
+    type: "festival",
+    title: "Marten Horger Live at Academy Los Angeles",
+    eventName: "Academy LA",
+  },
+  {
+    video: "https://www.youtube.com/watch?v=4NBHtb4LCKM",
+    primaryArtist: marten(),
+    genre: "Bass House",
+    type: "festival",
+    title: "Marten Horger Live from Bootshaus 2023",
+    eventName: "Bootshaus",
+  },
+  {
+    video: "https://www.youtube.com/watch?v=GIqtyI5o3qk",
+    primaryArtist: marten(),
+    genre: "Bass House",
+    type: "festival",
+    title: "Marten Horger - EDC Las Vegas 2023 Mainstage",
+    eventName: "EDC Las Vegas",
+    // Description only links https://1001.tl/vfff7hk — seed from browser scrape.
+    tracklist1001: TL_MARTEN_HORGER_EDC_LV_2023,
+  },
+  {
+    // Official Tomorrowland upload — B2B; title drives collaborator parse.
+    video: "https://www.youtube.com/watch?v=gSNSE5u1M7U",
+    primaryArtist: marten(),
+    genre: "Bass House",
+    type: "festival",
+    title: "Dillon Francis B2B Marten Horger - Tomorrowland 2025",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
   },
   {
     video: "https://www.youtube.com/watch?v=9MZz5YazOUo",

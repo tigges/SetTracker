@@ -56,6 +56,15 @@ export const DJ_SOCIAL_PINS: DjSocialPin[] = [
     bio: "Tech House. Official: followthefishtv.com — IG @followthefishtv, SC fish-tales, YT @fisher.",
   },
   {
+    slug: "marten-horger",
+    name: "Marten Horger",
+    accent: "#ff7a45",
+    soundcloud: "https://soundcloud.com/marten-horger",
+    instagram: "https://www.instagram.com/marten_horger/",
+    website: "https://www.martenhorger.com/",
+    bio: "Bass House. Berlin. Official martenhorger.com — SC marten-horger, IG @marten_horger, YT @MARTENHORGER.",
+  },
+  {
     slug: "artbat",
     name: "ARTBAT",
     accent: "#6c63ff",

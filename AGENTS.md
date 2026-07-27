@@ -51,7 +51,10 @@ setradar.ai.
   limits (`data/soundcloud-poll-state.json`). **sourceHash refresh** when
   tracklists change; SetArtist links refresh even on hash skip. Optional:
   `HEARTHIS_MAX_SETS`, `SOUNDCLOUD_ARTIST_TRACK_LIMIT`, `INGEST_TOPDJS=1`,
-  `INGEST_SYNTHETIC=1`,   `SOUNDCLOUD_CLIENT_ID`. Do **not** crawl 1001Tracklists. Pages: **push =
+  `INGEST_SYNTHETIC=1`, `SOUNDCLOUD_CLIENT_ID`. **1001Tracklists:** follow
+  `1001.tl` / tracklist URLs already linked from a source description (or
+  curated browser-capture seeds) — do **not** site-crawl or invent URLs.
+  Pages: **push =
   no crawl** (restore cached `prisma/dev.db` → build → deploy, ~minutes);
   **cron/manual `deep` = full ingest + thumbs + cache DB**. Repo Pages Source
   must be **GitHub Actions** (not branch/`/`), or GitHub race-serves this README.
