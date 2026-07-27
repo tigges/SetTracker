@@ -273,9 +273,14 @@ export async function resolvePlaybackStream(
 async function resolveSoundCloudStream(
   pageUrl: string,
 ): Promise<ResolvedStream | null> {
-  const track = await scGet<ScMediaTrack>(
+  const track = await scGet<ScMediaTrack & { policy?: string }>(
     `/resolve?url=${encodeURIComponent(pageUrl)}`,
   );
+  // SNIP = 30s preview only — useless for mid-set fingerprint probes.
+  if (String(track.policy || "").toUpperCase() === "SNIP") {
+    console.log(`[acrcloud] skip SoundCloud SNIP/preview-only: ${pageUrl}`);
+    return null;
+  }
   const clientId = await getSoundCloudClientId();
   const transcodings = track.media?.transcodings ?? [];
   const ordered = [...transcodings].sort((a, b) => {
@@ -304,6 +309,10 @@ async function resolveSoundCloudStream(
       if (!look.ok) continue;
       const body = (await look.json()) as { url?: string };
       if (!body.url) continue;
+      // Preview CDN paths are ≤30s — skip so we never seek past EOF.
+      if (/\/preview\//i.test(body.url) || /preview-media/i.test(body.url)) {
+        continue;
+      }
       return {
         host: "soundcloud",
         streamUrl: body.url,
@@ -832,20 +841,28 @@ export async function enrichSparseSetsWithAcrCloud(
   const dryRun = opts.dryRun ?? boolEnv("ACRCLOUD_DRY_RUN");
   const allowYoutube = opts.allowYoutube ?? boolEnv("ACRCLOUD_ALLOW_YOUTUBE");
 
-  const candidates = await selectSparseSetsForFingerprint(prisma, opts);
+  // Over-fetch candidates so SNIP/preview-only SC tracks don't burn the set budget.
+  const setLimit = opts.setLimit ?? numEnv("ACRCLOUD_SET_LIMIT", 5);
+  const candidates = await selectSparseSetsForFingerprint(prisma, {
+    ...opts,
+    setLimit: Math.max(setLimit * 4, setLimit),
+  });
   console.log(
-    `[acrcloud] ${candidates.length} sparse candidates` +
+    `[acrcloud] ${candidates.length} sparse candidates (probe budget ${setLimit})` +
       (dryRun ? " (dry-run)" : ""),
   );
 
   let probed = 0;
   let identified = 0;
   let unresolved = 0;
+  let setsWithStream = 0;
 
   for (const c of candidates) {
+    if (setsWithStream >= setLimit) break;
     console.log(
       `[acrcloud] probing ${c.slug} (${c.host}, ${c.identifiedStrong} strong IDs, ${c.playCount} plays)`,
     );
+    const before = probed;
     const r = await enrichOneSet(prisma, c, {
       sampleSec,
       stepSec,
@@ -856,6 +873,12 @@ export async function enrichSparseSetsWithAcrCloud(
     probed += r.probed;
     identified += r.identified;
     unresolved += r.unresolved;
+    // Count only sets that actually yielded a stream (probed or dry-run identify loop).
+    if (r.probed > 0 || r.identified > 0 || r.unresolved > 0) {
+      setsWithStream += 1;
+    } else if (probed === before) {
+      // no stream / empty plan — do not consume budget
+    }
   }
 
   return {
