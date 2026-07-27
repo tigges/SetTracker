@@ -32,9 +32,10 @@ setradar.ai.
 - **Lint / typecheck:** `npm run lint` and `npx tsc --noEmit`. `next lint` was
   removed in Next 16; ESLint runs directly.
 - **Ingestion / crawler:** `npm run ingest` upserts newly discovered sets & DJs.
- **Primary sources:** SoundCloud (`src/lib/ingest/soundcloud/`) curated shows
- + curated playlists (`soundcloud/playlists.ts`, e.g. Lift Sets) via api-v2 +
- **hearthis.at** house categories (`src/lib/ingest/hearthis/`) +
+  **Primary sources:** SoundCloud (`src/lib/ingest/soundcloud/`) curated shows
+  + curated playlists (`soundcloud/playlists.ts`, e.g. Lift Sets) via api-v2 +
+  **hearthis.at** house categories (`src/lib/ingest/hearthis/` — structured
+  `/{user}/{track}/playlist/` cues, then description / timed comments) +
   **YouTube** curated sets + venue channels + tracklist-heavy artist channels
   (`src/lib/ingest/youtube/` — Boiler Room / Cercle / Mixmag + James Hype–style
   artist channels; description tracklists and YouTube Music song credits) +
@@ -51,7 +52,7 @@ setradar.ai.
   limits (`data/soundcloud-poll-state.json`). **sourceHash refresh** when
   tracklists change; SetArtist links refresh even on hash skip. Optional:
   `HEARTHIS_MAX_SETS`, `SOUNDCLOUD_ARTIST_TRACK_LIMIT`, `INGEST_TOPDJS=1`,
-  `INGEST_SYNTHETIC=1`,   `SOUNDCLOUD_CLIENT_ID`. Do **not** crawl 1001Tracklists. Pages: **push =
+  `INGEST_SYNTHETIC=1`, `SOUNDCLOUD_CLIENT_ID`. Do **not** crawl 1001Tracklists. Pages: **push =
   no crawl** (restore cached `prisma/dev.db` → build → deploy, ~minutes);
   **cron/manual `deep` = full ingest + thumbs + cache DB**. Repo Pages Source
   must be **GitHub Actions** (not branch/`/`), or GitHub race-serves this README.
