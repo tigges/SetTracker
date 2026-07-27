@@ -1,3 +1,5 @@
+import { mediaUrl } from "@/lib/mediaUrl";
+
 /**
  * Shared avatar/cover tile. Shows a sourced image when available, otherwise a
  * monogram on the entity accent color.
@@ -30,12 +32,13 @@ export function EntityThumb({
     height: size,
     borderRadius: radius,
   } as const;
+  const resolved = mediaUrl(src);
 
-  if (src) {
+  if (resolved) {
     return (
       // eslint-disable-next-line @next/next/no-img-element -- remote Deezer CDN; static export
       <img
-        src={src}
+        src={resolved}
         alt={label}
         width={size}
         height={size}

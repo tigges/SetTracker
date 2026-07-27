@@ -7,6 +7,7 @@ import { applyDjSocialPins } from "../src/lib/ingest/djSocialPins";
 import { createHearthisAdapter } from "../src/lib/ingest/hearthis/adapter";
 import { HEARTHIS_ARTISTS } from "../src/lib/ingest/hearthis/artists";
 import { runIngest } from "../src/lib/ingest/ingest";
+import { applyCuratedDjImages } from "../src/lib/thumbs/djImages";
 
 const prisma = new PrismaClient();
 
@@ -24,6 +25,9 @@ async function main() {
     createHearthisAdapter([], [artist]),
   ]);
   console.log("ingest", stats);
+
+  const curated = await applyCuratedDjImages(prisma);
+  console.log("curated images", curated);
 
   const sets = await prisma.set.findMany({
     where: {
