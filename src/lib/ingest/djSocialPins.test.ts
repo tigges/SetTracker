@@ -16,6 +16,7 @@ for (const slug of [
   "lilly-palmer",
   "tape-b",
   "hntr",
+  "charlotte-de-witte",
 ]) {
   assert.ok(bySlug[slug], `missing pin ${slug}`);
   assert.match(bySlug[slug]!.soundcloud, /^https:\/\/soundcloud\.com\//);
@@ -40,5 +41,9 @@ assert.match(bySlug["sara-landry"]!.instagram!, /saralandrydj/);
 assert.match(bySlug["lilly-palmer"]!.instagram!, /lilly_palmerdj/);
 assert.equal(bySlug.westend!.instagram, null);
 assert.equal(bySlug["tape-b"]!.instagram, null);
+assert.match(bySlug["charlotte-de-witte"]!.soundcloud, /charlottedewittemusic/);
+assert.match(bySlug["charlotte-de-witte"]!.instagram!, /charlottedewittemusic/);
+assert.match(bySlug["charlotte-de-witte"]!.twitter!, /charlottedwitte/);
+assert.match(bySlug["charlotte-de-witte"]!.website, /charlottedewittemusic\.com/);
 
 console.log("djSocialPins.test.ts ok");
