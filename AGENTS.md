@@ -32,9 +32,10 @@ setradar.ai.
 - **Lint / typecheck:** `npm run lint` and `npx tsc --noEmit`. `next lint` was
   removed in Next 16; ESLint runs directly.
 - **Ingestion / crawler:** `npm run ingest` upserts newly discovered sets & DJs.
- **Primary sources:** SoundCloud (`src/lib/ingest/soundcloud/`) curated shows
- + curated playlists (`soundcloud/playlists.ts`, e.g. Lift Sets) via api-v2 +
- **hearthis.at** house categories (`src/lib/ingest/hearthis/`) +
+  **Primary sources:** SoundCloud (`src/lib/ingest/soundcloud/`) curated shows
+  + curated playlists (`soundcloud/playlists.ts`, e.g. Lift Sets) via api-v2 +
+  **hearthis.at** house categories (`src/lib/ingest/hearthis/` — structured
+  `/{user}/{track}/playlist/` cues, then description / timed comments) +
   **YouTube** curated sets + venue channels + tracklist-heavy artist channels
   (`src/lib/ingest/youtube/` — Boiler Room / Cercle / Mixmag + James Hype–style
   artist channels; description tracklists and YouTube Music song credits) +

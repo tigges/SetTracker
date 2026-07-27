@@ -5,7 +5,9 @@
  * 1) pull recent uploads from curated house categories
  * 2) keep long-form mixes (≥25m)
  * 3) prefer uploads with description / timed-comment tracklist signals
- * 4) parse with shared tracklist helpers (provenance: hearthis)
+ * 4) fetch structured `/{user}/{track}/playlist/` cues (primary tracklist)
+ * 5) parse description + timed comments as fallback / gap-fill
+ * 6) merge → RawPlay[] (provenance: hearthis)
  */
 
 import { artistsForSet } from "../artists";
@@ -28,10 +30,12 @@ import {
   fetchCategoryTracks,
   fetchTrackComments,
   fetchTrackDetail,
+  fetchTrackPlaylist,
   pickHearthisImage,
   sleep,
   type HtTrack,
 } from "./client";
+import { playlistEntriesToPlays } from "./playlist";
 
 const ACCENTS = [
   "#ff7a45",
@@ -87,7 +91,8 @@ type Candidate = {
   score: number;
 };
 
-async function trackToRawSet(
+/** Build a RawSet from a hearthis track (+ category genre fallback). */
+export async function trackToRawSet(
   track: HtTrack,
   category: HearthisCategory,
 ): Promise<RawSet | null> {
@@ -119,6 +124,19 @@ async function trackToRawSet(
     "hearthis",
   );
 
+  // Structured cue table — often present when the description is promo-only.
+  let fromPlaylist = playlistEntriesToPlays([], durationSec);
+  try {
+    const entries = await fetchTrackPlaylist(userPermalink, trackPermalink);
+    fromPlaylist = playlistEntriesToPlays(entries, durationSec);
+    await sleep(80);
+  } catch (err) {
+    console.warn(
+      `[hearthis] playlist failed ${userPermalink}/${trackPermalink}:`,
+      err instanceof Error ? err.message : err,
+    );
+  }
+
   let fromComments = parseTimedComments([], durationSec, 1, "hearthis");
   const commentCount = asInt(detail.comment_count ?? track.comment_count);
   if (commentCount > 0 && durationSec >= 20 * 60) {
@@ -144,7 +162,11 @@ async function trackToRawSet(
     }
   }
 
-  const plays = mergeTracklistSignals(fromDescription, fromComments);
+  // Playlist cues win; description + comments fill gaps / add unresolved IDs.
+  const plays = mergeTracklistSignals(
+    fromPlaylist,
+    mergeTracklistSignals(fromDescription, fromComments),
+  );
   const artistName =
     detail.user?.username?.trim() ||
     track.user?.username?.trim() ||
@@ -223,12 +245,20 @@ export function createHearthisAdapter(
             if (dur < HEARTHIS_MIN_DURATION_SEC) continue;
             const desc = track.description || "";
             const tl = hasTracklistSignal(desc) ? 1000 : 0;
+            const featured = track.is_featured === true || track.is_featured === 1 || track.is_featured === "1"
+              ? 400
+              : 0;
             const plays = asInt(track.playback_count);
             const favs = asInt(track.favoritings_count);
             byId.set(id, {
               track,
               category,
-              score: tl + Math.min(plays, 500) + Math.min(favs, 200) + Math.min(dur / 60, 120),
+              score:
+                tl +
+                featured +
+                Math.min(plays, 500) +
+                Math.min(favs, 200) +
+                Math.min(dur / 60, 120),
             });
           }
         } catch (err) {
