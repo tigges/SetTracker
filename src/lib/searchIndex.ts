@@ -1,6 +1,6 @@
-import { isJunkArtistName } from "@/lib/artistName";
 import { prisma } from "@/lib/db";
 import { normalizeGenre } from "@/lib/genre";
+import { getDjList } from "@/lib/queries";
 import { ensureTrackSlugs } from "@/lib/tracks/ensureSlugs";
 
 export type SearchIndexItem = {
@@ -31,16 +31,7 @@ export async function getSearchIndex(): Promise<SearchIndexItem[]> {
       },
       orderBy: { publishedAt: "desc" },
     }),
-    prisma.dj.findMany({
-      select: {
-        slug: true,
-        name: true,
-        homeCity: true,
-        website: true,
-        _count: { select: { sets: true } },
-      },
-      orderBy: { name: "asc" },
-    }),
+    getDjList(),
     prisma.event.findMany({
       select: {
         slug: true,
@@ -103,16 +94,12 @@ export async function getSearchIndex(): Promise<SearchIndexItem[]> {
   }
 
   for (const d of djs) {
-    if (
-      isJunkArtistName(d.name) ||
-      /^view-artist-details-for-/.test(d.slug)
-    ) {
-      continue;
-    }
+    // Match DJs directory Browse: store thin rows, don't surface in search.
+    if (!d.isBrowseReady) continue;
     items.push({
       kind: "dj",
       title: d.name,
-      subtitle: [d.homeCity, `${d._count.sets} sets`].filter(Boolean).join(" · "),
+      subtitle: [d.homeCity, `${d.setCount} sets`].filter(Boolean).join(" · "),
       href: `/djs/${d.slug}`,
       keywords: d.website ?? undefined,
     });
