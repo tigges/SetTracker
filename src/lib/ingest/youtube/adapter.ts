@@ -60,13 +60,33 @@ type YtHit = {
   related: YtRelatedVideo[];
 };
 
+/** Share of Latin letters / digits in a credit field (ignores spaces). */
+function latinRatio(s: string): number {
+  const chars = s.replace(/\s+/g, "");
+  if (!chars.length) return 0;
+  const latin = (chars.match(/[A-Za-zÀ-ÿ0-9]/g) || []).length;
+  return latin / chars.length;
+}
+
+/**
+ * Drop Content-ID junk (e.g. CJK false matches with a couple Latin digits).
+ * Require both artist and title to be majority Latin/digit.
+ */
+function isPlausibleMusicCredit(c: YtMusicCredit): boolean {
+  const artist = (c.artistName ?? "").trim();
+  const title = (c.title ?? "").trim();
+  if (artist.length < 2 || title.length < 2) return false;
+  return latinRatio(artist) >= 0.5 && latinRatio(title) >= 0.45;
+}
+
 function musicCreditsToPlays(
   credits: YtMusicCredit[],
   durationSec: number,
 ): RawPlay[] {
-  if (credits.length === 0) return [];
-  const n = credits.length;
-  return credits.map((c, i) => ({
+  const kept = credits.filter(isPlausibleMusicCredit);
+  if (kept.length === 0) return [];
+  const n = kept.length;
+  return kept.map((c, i) => ({
     position: i + 1,
     timestamp: Math.round((durationSec * (i + 1)) / (n + 1)),
     provenance: "youtube" as const,

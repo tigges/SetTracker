@@ -47,9 +47,11 @@ export function adaptiveLimit(
 ): number {
   const prev = state.shows[permalink];
   if (!prev) return baseline;
-  if (prev.recentUploadCount >= 3) return Math.min(40, Math.max(baseline, 24));
-  if (prev.recentUploadCount >= 1) return Math.min(30, Math.max(baseline, 16));
-  // Quiet show — still fetch a real page of history (never starve cold accounts).
+  if (prev.recentUploadCount >= 3) return Math.min(50, Math.max(baseline, 24));
+  if (prev.recentUploadCount >= 1) return Math.min(40, Math.max(baseline, 16));
+  // Quiet show — shallow by default, but honor high curated baselines
+  // (e.g. Marten Horger limit=50 so older festival uploads aren't starved).
+  if (baseline >= 24) return Math.min(50, baseline);
   return Math.max(12, Math.min(baseline, 18));
 }
 
