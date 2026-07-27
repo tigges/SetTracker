@@ -89,6 +89,8 @@ jobs:
         env:
           INGEST_ADAPTERS: "youtube,soundcloud"
           YOUTUBE_CURATED_ONLY: "1"
+          # Keep curated playlists (e.g. BISCITS Live Streams) on the fast path.
+          YOUTUBE_CURATED_PLAYLISTS: "1"
           SOUNDCLOUD_CURATED_ONLY: "1"
           INGEST_SKIP_VERIFY: "1"
         run: npm run ingest
