@@ -280,6 +280,7 @@ async function pollPlaylistTracks(
 async function withPromotedShows(
   base: SoundCloudShow[],
 ): Promise<SoundCloudShow[]> {
+  if (process.env.SOUNDCLOUD_PROMOTE_SHOWS === "0") return base;
   const promoted = promotedSoundcloudPermalinks();
   if (promoted.length === 0) return base;
   const seen = new Set(base.map((s) => s.permalink.toLowerCase()));

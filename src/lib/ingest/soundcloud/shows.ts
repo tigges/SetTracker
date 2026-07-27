@@ -91,9 +91,12 @@ export const SOUNDCLOUD_SHOWS: SoundCloudShow[] = [
     }),
     genre: "Bass House",
     type: "soundcloud",
+    // SC is mostly singles; long festival uploads are rare but important.
     minDurationSec: 20 * 60,
-    titleMatch: /\b(mix|session|radio|live|1live|hörg|horg)\b/i,
-    limit: 18,
+    titleMatch:
+      /\b(mix|session|radio|live|1live|hörg|horg|set|b2b|tomorrowland|mainstage|festival|edc|bootshaus|academy|parookaville)\b/i,
+    // SC api-v2 omits older long uploads unless limit is high enough (~50).
+    limit: 50,
   },
   {
     permalink: "waxmotif",

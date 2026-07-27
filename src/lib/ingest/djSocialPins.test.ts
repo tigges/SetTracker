@@ -16,6 +16,7 @@ for (const slug of [
   "lilly-palmer",
   "tape-b",
   "hntr",
+  "marten-horger",
   "charlotte-de-witte",
 ]) {
   assert.ok(bySlug[slug], `missing pin ${slug}`);
@@ -41,6 +42,9 @@ assert.match(bySlug["sara-landry"]!.instagram!, /saralandrydj/);
 assert.match(bySlug["lilly-palmer"]!.instagram!, /lilly_palmerdj/);
 assert.equal(bySlug.westend!.instagram, null);
 assert.equal(bySlug["tape-b"]!.instagram, null);
+assert.match(bySlug["marten-horger"]!.soundcloud, /marten-horger/);
+assert.match(bySlug["marten-horger"]!.instagram!, /marten_horger/);
+assert.match(bySlug["marten-horger"]!.website, /martenhorger\.com/);
 assert.match(bySlug["charlotte-de-witte"]!.soundcloud, /charlottedewittemusic/);
 assert.match(bySlug["charlotte-de-witte"]!.instagram!, /charlottedewittemusic/);
 assert.match(bySlug["charlotte-de-witte"]!.twitter!, /charlottedwitte/);
