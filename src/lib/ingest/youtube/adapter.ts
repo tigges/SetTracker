@@ -18,9 +18,12 @@ import { inferFestivalEvent, KNOWN_EVENTS } from "../events";
 import {
   fingerprintRowsToPlays,
   mergeFingerprintPlays,
+  type FingerprintSeedRow,
 } from "../fingerprint/seeds";
 import { hashRawSetContent } from "../hash";
 import { parseDescriptionTracklist } from "../soundcloud/parseTracklist";
+import { playsFromDescription1001Links } from "../tracklists1001/client";
+import { tracklist1001RowsToPlays } from "../tracklists1001/seeds";
 import { slugify, type RawPlay, type RawSet, type SourceAdapter } from "../types";
 import {
   YOUTUBE_ARTIST_CHANNELS,
@@ -129,6 +132,30 @@ function playsFromMeta(meta: YtWatchMeta): RawPlay[] {
   return mergeDescriptionAndCredits(fromDescription, fromMusic);
 }
 
+/**
+ * Follow 1001.tl links in the description; fall back to curated seed rows.
+ * Dense 1001 lists replace thin Music-credit stubs.
+ */
+async function enrichWith1001Tracklist(
+  meta: YtWatchMeta,
+  base: RawPlay[],
+  seed?: FingerprintSeedRow[],
+): Promise<RawPlay[]> {
+  let from1001 = await playsFromDescription1001Links(
+    meta.description,
+    meta.durationSec,
+  );
+  if (from1001.length < 5 && seed?.length) {
+    from1001 = tracklist1001RowsToPlays(seed);
+  }
+  if (!from1001.length) return base;
+  // A real 1001TL capture beats evenly-spaced Music-credit stubs.
+  if (from1001.length >= 12) return from1001;
+  return mergeFingerprintPlays(base, from1001, {
+    replaceIfSourceBelow: 15,
+  });
+}
+
 function mergeArtistChannels(
   curated: YoutubeArtistChannel[],
 ): YoutubeArtistChannel[] {
@@ -173,6 +200,7 @@ async function curatedToHit(src: YoutubeSetSource): Promise<YtHit | null> {
   }
 
   let plays = playsFromMeta(meta);
+  plays = await enrichWith1001Tracklist(meta, plays, src.tracklist1001);
   if (src.fingerprintPlays?.length) {
     plays = mergeFingerprintPlays(
       plays,
@@ -203,9 +231,11 @@ async function curatedToHit(src: YoutubeSetSource): Promise<YtHit | null> {
   };
   raw.sourceHash = hashRawSetContent(raw);
 
+  const from1001 = plays.filter((p) => p.provenance === "1001tl").length;
   console.log(
     `[youtube] + ${sourceSlug} (${plays.length} plays;` +
       ` curated; ${durationSec}s` +
+      (from1001 ? `; 1001tl=${from1001}` : "") +
       (collaborators.length ? `; +${collaborators.length} collab` : "") +
       `; related=${meta.relatedVideos.length}` +
       `)`,
@@ -229,7 +259,7 @@ async function venueVideoToHit(
     primary.slug = slugify(credit);
   }
 
-  const plays = playsFromMeta(meta);
+  const plays = await enrichWith1001Tracklist(meta, playsFromMeta(meta));
   const sourceSlug = `yt-${meta.videoId}`.slice(0, 120);
 
   const festival = inferFestivalEvent(meta.title);
@@ -280,7 +310,7 @@ async function artistChannelVideoToHit(
     accent: ch.accent,
   };
   const { primary, collaborators } = artistsForSet(meta.title, preferred);
-  const plays = playsFromMeta(meta);
+  const plays = await enrichWith1001Tracklist(meta, playsFromMeta(meta));
   if (plays.length === 0 && meta.durationSec < 25 * 60) return null;
 
   const sourceSlug = `yt-${meta.videoId}`.slice(0, 120);
@@ -339,7 +369,7 @@ async function relatedVideoToHit(
   const { primary, collaborators } = artistsForSet(meta.title, undefined, {
     accent: seed.accent,
   });
-  const plays = playsFromMeta(meta);
+  const plays = await enrichWith1001Tracklist(meta, playsFromMeta(meta));
   if (plays.length === 0 && meta.durationSec < 25 * 60) return null;
 
   const festival = inferFestivalEvent(meta.title);

@@ -14,6 +14,7 @@ import {
   FP_JAMES_HYPE_GET_CLOSER_LONDON_2,
   type FingerprintSeedRow,
 } from "../fingerprint/seeds";
+import { TL_MARTEN_HORGER_EDC_LV_2023 } from "../tracklists1001/seeds";
 import type { RawArtist } from "../types";
 import { slugify } from "../types";
 
@@ -32,6 +33,11 @@ export type YoutubeSetSource = {
    * Written as provenance "fingerprint"; never overwrites sourceUrl.
    */
   fingerprintPlays?: FingerprintSeedRow[];
+  /**
+   * 1001Tracklists rows (browser capture / follow-link). Provenance "1001tl".
+   * Used when the upload only links 1001.tl and live HTML is Cloudflare-gated.
+   */
+  tracklist1001?: FingerprintSeedRow[];
 };
 
 function dj(name: string, extra: Partial<RawArtist> = {}): RawArtist {
@@ -78,6 +84,8 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     type: "festival",
     title: "Marten Horger - EDC Las Vegas 2023 Mainstage",
     eventName: "EDC Las Vegas",
+    // Description only links https://1001.tl/vfff7hk — seed from browser scrape.
+    tracklist1001: TL_MARTEN_HORGER_EDC_LV_2023,
   },
   {
     // Official Tomorrowland upload — B2B; title drives collaborator parse.
