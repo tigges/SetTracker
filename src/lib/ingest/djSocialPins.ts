@@ -146,6 +146,15 @@ export const DJ_SOCIAL_PINS: DjSocialPin[] = [
     website: "https://www.hntr.net",
     bio: "Techno. Toronto. Official hntr.net — SC hntrnet, IG/X @hntrnet, YT @hntrnet, No Neon Records.",
   },
+  {
+    slug: "gentlemens-groove",
+    name: "Gentlemen's Groove",
+    accent: "#00e5ff",
+    soundcloud: "https://soundcloud.com/gentlemens-groove-records",
+    instagram: null,
+    website: "https://www.facebook.com/Gentlemensgroove",
+    bio: "Deep house mix series (EST. 2020). Hearthis gentlemensgroove-oz; SC label gentlemens-groove-records; FB Gentlemensgroove.",
+  },
 ];
 
 /** Upsert pinned social fields for curated brand DJs. Returns rows touched. */

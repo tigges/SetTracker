@@ -107,7 +107,19 @@ export function splitArtistsFromSetTitle(
 }
 
 function hasCollabToken(credit: string): boolean {
-  return /\b(b2b|vs\.?|feat\.?|ft\.?)\b|\sx\s|[&+]/i.test(credit);
+  return /\b(b2b|vs\.?|feat\.?|ft\.?|mixed\s+by)\b|\sx\s|[&+]/i.test(credit);
+}
+
+/** "Brand Mixed By A & B [#001]" → guest mixer names. */
+export function guestsFromMixedBy(title: string): string[] {
+  const m = title.match(
+    /\bmixed\s+by\s+(.+?)(?:\s*[\[(#]|\s*$)/i,
+  );
+  if (!m?.[1]) return [];
+  return m[1]
+    .split(/\s*[&+,]\s*|\s+and\s+/i)
+    .map((n) => n.replace(/\s+/g, " ").trim())
+    .filter((n) => n.length >= 2 && n.length <= 60);
 }
 
 /**
@@ -130,6 +142,24 @@ export function artistsForSet(
     slug: prefSlug,
     accent: preferredPrimary.accent ?? extras.accent,
   };
+
+  const mixedBy = guestsFromMixedBy(title);
+  if (mixedBy.length) {
+    return {
+      primary,
+      collaborators: mixedBy
+        .filter(
+          (n) =>
+            slugify(n) !== prefSlug &&
+            n.toLowerCase() !== preferredPrimary.name.toLowerCase(),
+        )
+        .map((name) => ({
+          name,
+          slug: slugify(name),
+          accent: extras.accent ?? preferredPrimary.accent,
+        })),
+    };
+  }
 
   if (!hasCollabToken(credit)) {
     return { primary, collaborators: [] };

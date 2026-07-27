@@ -17,17 +17,23 @@ import {
 } from "../soundcloud/parseTracklist";
 import { slugify, type RawSet, type SourceAdapter } from "../types";
 import {
+  HEARTHIS_ARTISTS,
+  type HearthisArtistSource,
+} from "./artists";
+import {
   HEARTHIS_HOUSE_CATEGORIES,
   HEARTHIS_MAX_SETS,
   HEARTHIS_MIN_DURATION_SEC,
   type HearthisCategory,
 } from "./categories";
 import { hearthisEmbedUrl } from "../../playback";
+import type { RawArtist } from "../types";
 import {
   asInt,
   fetchCategoryTracks,
   fetchTrackComments,
   fetchTrackDetail,
+  fetchUserTracks,
   pickHearthisImage,
   sleep,
   type HtTrack,
@@ -81,22 +87,19 @@ function setTypeFor(title: string): RawSet["type"] {
   return "soundcloud";
 }
 
-type Candidate = {
-  track: HtTrack;
-  category: HearthisCategory;
-  score: number;
-};
-
 async function trackToRawSet(
   track: HtTrack,
   category: HearthisCategory,
+  preferredPrimary?: RawArtist,
+  seriesName?: string,
+  minDurationSec = HEARTHIS_MIN_DURATION_SEC,
 ): Promise<RawSet | null> {
   const userPermalink = track.user?.permalink;
   const trackPermalink = track.permalink;
   if (!userPermalink || !trackPermalink) return null;
 
   const durationSec = durationSecOf(track);
-  if (durationSec < HEARTHIS_MIN_DURATION_SEC) return null;
+  if (durationSec < minDurationSec) return null;
 
   let detail = track;
   try {
@@ -175,12 +178,18 @@ async function trackToRawSet(
     artistImage,
   );
 
-  const { primary, collaborators } = artistsForSet(title, {
-    name: artistName,
-    slug: artistSlug,
-    accent: pickAccent(artistSlug),
-    imageUrl: artistImage ?? undefined,
-  });
+  const seedPrimary = preferredPrimary
+    ? {
+        ...preferredPrimary,
+        imageUrl: preferredPrimary.imageUrl || artistImage || undefined,
+      }
+    : {
+        name: artistName,
+        slug: artistSlug,
+        accent: pickAccent(artistSlug),
+        imageUrl: artistImage ?? undefined,
+      };
+  const { primary, collaborators } = artistsForSet(title, seedPrimary);
 
   const raw: RawSet = {
     sourceSlug,
@@ -189,6 +198,7 @@ async function trackToRawSet(
     genre: (detail.genre || track.genre || category.genre || "House").trim(),
     primaryArtist: primary,
     collaborators,
+    seriesName,
     publishedAt: publishedAtOf(detail),
     durationSec,
     sourceName: "hearthis.at",
@@ -202,8 +212,18 @@ async function trackToRawSet(
   return raw;
 }
 
+type Candidate = {
+  track: HtTrack;
+  category: HearthisCategory;
+  score: number;
+  preferredPrimary?: RawArtist;
+  seriesName?: string;
+  minDurationSec?: number;
+};
+
 export function createHearthisAdapter(
   categories: HearthisCategory[] = HEARTHIS_HOUSE_CATEGORIES,
+  artists: HearthisArtistSource[] = HEARTHIS_ARTISTS,
 ): SourceAdapter {
   return {
     id: "hearthis",
@@ -239,6 +259,57 @@ export function createHearthisAdapter(
         }
       }
 
+      // Curated brand / artist accounts (e.g. Gentlemen's Groove mixes).
+      for (const artist of artists) {
+        try {
+          const limit = artist.limit ?? 20;
+          console.log(`[hearthis] poll artist=${artist.permalink} limit=${limit}`);
+          const tracks = await fetchUserTracks(artist.permalink, 1, limit);
+          await sleep(120);
+          const minDur = artist.minDurationSec ?? HEARTHIS_MIN_DURATION_SEC;
+          const cat: HearthisCategory = {
+            id: `artist:${artist.permalink}`,
+            genre: artist.genre,
+          };
+          for (const track of tracks) {
+            const id = String(track.id);
+            const dur = durationSecOf(track);
+            if (dur < minDur) continue;
+            const desc = track.description || "";
+            const tl = hasTracklistSignal(desc) ? 1000 : 0;
+            const plays = asInt(track.playback_count);
+            const favs = asInt(track.favoritings_count);
+            const score =
+              2000 +
+              tl +
+              Math.min(plays, 500) +
+              Math.min(favs, 200) +
+              Math.min(dur / 60, 120);
+            const prev = byId.get(id);
+            if (prev && prev.score >= score && prev.preferredPrimary) continue;
+            byId.set(id, {
+              track: {
+                ...track,
+                user: track.user ?? {
+                  permalink: artist.permalink,
+                  username: artist.primaryArtist.name,
+                },
+              },
+              category: cat,
+              score,
+              preferredPrimary: artist.primaryArtist,
+              seriesName: artist.seriesName,
+              minDurationSec: minDur,
+            });
+          }
+        } catch (err) {
+          console.error(
+            `[hearthis] artist ${artist.permalink} failed:`,
+            err instanceof Error ? err.message : err,
+          );
+        }
+      }
+
       const ranked = [...byId.values()].sort((a, b) => b.score - a.score);
       // Always keep tracklist-bearing uploads first, then fill to max.
       const withTl = ranked.filter((c) =>
@@ -253,7 +324,13 @@ export function createHearthisAdapter(
       const seen = new Set<string>();
       for (const c of selected) {
         try {
-          const raw = await trackToRawSet(c.track, c.category);
+          const raw = await trackToRawSet(
+            c.track,
+            c.category,
+            c.preferredPrimary,
+            c.seriesName,
+            c.minDurationSec,
+          );
           if (!raw) continue;
           if (seen.has(raw.sourceSlug)) continue;
           seen.add(raw.sourceSlug);

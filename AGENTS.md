@@ -34,7 +34,8 @@ setradar.ai.
 - **Ingestion / crawler:** `npm run ingest` upserts newly discovered sets & DJs.
  **Primary sources:** SoundCloud (`src/lib/ingest/soundcloud/`) curated shows
  + curated playlists (`soundcloud/playlists.ts`, e.g. Lift Sets) via api-v2 +
- **hearthis.at** house categories (`src/lib/ingest/hearthis/`) +
+  **hearthis.at** house categories + curated artist accounts
+  (`src/lib/ingest/hearthis/` — e.g. Gentlemen's Groove) +
   **YouTube** curated sets + venue channels + tracklist-heavy artist channels
   (`src/lib/ingest/youtube/` — Boiler Room / Cercle / Mixmag + James Hype–style
   artist channels; description tracklists and YouTube Music song credits) +

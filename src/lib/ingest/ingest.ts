@@ -102,11 +102,17 @@ export async function runIngest(
   async function upsertDj(raw: RawArtist): Promise<string | null> {
     const name = sanitizeArtistName(raw.name);
     if (!name) return null;
-    // Prefer sanitized slug so aria-label prefixes never mint junk Dj rows.
-    const slug = slugify(name);
+    // Prefer curated RawArtist.slug (apostrophe brands like Gentlemen's Groove),
+    // otherwise derive from the sanitized display name.
+    const slug = raw.slug?.trim() || slugify(name);
     if (djCache.has(slug)) return djCache.get(slug)!;
     const roster = ARTIST_ROSTER.find(
-      (a) => slugify(a.name) === slug || a.name === name || a.name === raw.name,
+      (a) =>
+        a.name === name ||
+        a.name === raw.name ||
+        slugify(a.name) === slug ||
+        slugify(a.name) === slugify(name) ||
+        slugify(a.name.replace(/[''′]/g, "")) === slug,
     );
     const socials = djSocialsFromKnown({
       name,

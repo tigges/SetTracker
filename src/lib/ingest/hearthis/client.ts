@@ -76,6 +76,18 @@ export async function fetchUser(userPermalink: string): Promise<HtUser> {
   return htGet<HtUser>(`/${encodeURIComponent(userPermalink)}/`);
 }
 
+/** Recent uploads for a hearthis user (mixes + tracks). */
+export async function fetchUserTracks(
+  userPermalink: string,
+  page = 1,
+  count = 20,
+): Promise<HtTrack[]> {
+  const data = await htGet<HtTrack[] | { data?: HtTrack[] }>(
+    `/${encodeURIComponent(userPermalink)}/?type=tracks&page=${page}&count=${count}`,
+  );
+  return Array.isArray(data) ? data : (data.data ?? []);
+}
+
 export async function fetchTrackDetail(
   userPermalink: string,
   trackPermalink: string,
