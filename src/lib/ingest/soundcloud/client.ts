@@ -103,10 +103,25 @@ export async function fetchUserTracks(
   userId: number,
   limit = 20,
 ): Promise<ScTrack[]> {
-  const data = await scGet<ScCollection<ScTrack>>(
-    `/users/${userId}/tracks?limit=${limit}&linked_partitioning=1`,
-  );
-  return data.collection ?? [];
+  const out: ScTrack[] = [];
+  const seen = new Set<number>();
+  let path: string | null =
+    `/users/${userId}/tracks?limit=${Math.min(50, Math.max(limit, 1))}&linked_partitioning=1`;
+  while (path && out.length < limit) {
+    const data: ScCollection<ScTrack> = await scGet<ScCollection<ScTrack>>(path);
+    const batch = data.collection ?? [];
+    if (!batch.length) break;
+    for (const t of batch) {
+      if (seen.has(t.id)) continue;
+      seen.add(t.id);
+      out.push(t);
+      if (out.length >= limit) break;
+    }
+    const next = data.next_href?.trim() || null;
+    path = next;
+    if (path) await sleep(100);
+  }
+  return out.slice(0, limit);
 }
 
 export async function fetchTrackComments(

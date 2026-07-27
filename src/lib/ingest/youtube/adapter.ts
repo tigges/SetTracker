@@ -18,9 +18,12 @@ import { inferFestivalEvent, KNOWN_EVENTS } from "../events";
 import {
   fingerprintRowsToPlays,
   mergeFingerprintPlays,
+  type FingerprintSeedRow,
 } from "../fingerprint/seeds";
 import { hashRawSetContent } from "../hash";
 import { parseDescriptionTracklist } from "../soundcloud/parseTracklist";
+import { playsFromDescription1001Links } from "../tracklists1001/client";
+import { tracklist1001RowsToPlays } from "../tracklists1001/seeds";
 import { slugify, type RawPlay, type RawSet, type SourceAdapter } from "../types";
 import {
   YOUTUBE_ARTIST_CHANNELS,
@@ -60,13 +63,33 @@ type YtHit = {
   related: YtRelatedVideo[];
 };
 
+/** Share of Latin letters / digits in a credit field (ignores spaces). */
+function latinRatio(s: string): number {
+  const chars = s.replace(/\s+/g, "");
+  if (!chars.length) return 0;
+  const latin = (chars.match(/[A-Za-zÀ-ÿ0-9]/g) || []).length;
+  return latin / chars.length;
+}
+
+/**
+ * Drop Content-ID junk (e.g. CJK false matches with a couple Latin digits).
+ * Require both artist and title to be majority Latin/digit.
+ */
+function isPlausibleMusicCredit(c: YtMusicCredit): boolean {
+  const artist = (c.artistName ?? "").trim();
+  const title = (c.title ?? "").trim();
+  if (artist.length < 2 || title.length < 2) return false;
+  return latinRatio(artist) >= 0.5 && latinRatio(title) >= 0.45;
+}
+
 function musicCreditsToPlays(
   credits: YtMusicCredit[],
   durationSec: number,
 ): RawPlay[] {
-  if (credits.length === 0) return [];
-  const n = credits.length;
-  return credits.map((c, i) => ({
+  const kept = credits.filter(isPlausibleMusicCredit);
+  if (kept.length === 0) return [];
+  const n = kept.length;
+  return kept.map((c, i) => ({
     position: i + 1,
     timestamp: Math.round((durationSec * (i + 1)) / (n + 1)),
     provenance: "youtube" as const,
@@ -107,6 +130,30 @@ function playsFromMeta(meta: YtWatchMeta): RawPlay[] {
   );
   const fromMusic = musicCreditsToPlays(meta.musicCredits, meta.durationSec);
   return mergeDescriptionAndCredits(fromDescription, fromMusic);
+}
+
+/**
+ * Follow 1001.tl links in the description; fall back to curated seed rows.
+ * Dense 1001 lists replace thin Music-credit stubs.
+ */
+async function enrichWith1001Tracklist(
+  meta: YtWatchMeta,
+  base: RawPlay[],
+  seed?: FingerprintSeedRow[],
+): Promise<RawPlay[]> {
+  let from1001 = await playsFromDescription1001Links(
+    meta.description,
+    meta.durationSec,
+  );
+  if (from1001.length < 5 && seed?.length) {
+    from1001 = tracklist1001RowsToPlays(seed);
+  }
+  if (!from1001.length) return base;
+  // A real 1001TL capture beats evenly-spaced Music-credit stubs.
+  if (from1001.length >= 12) return from1001;
+  return mergeFingerprintPlays(base, from1001, {
+    replaceIfSourceBelow: 15,
+  });
 }
 
 function mergeArtistChannels(
@@ -153,6 +200,7 @@ async function curatedToHit(src: YoutubeSetSource): Promise<YtHit | null> {
   }
 
   let plays = playsFromMeta(meta);
+  plays = await enrichWith1001Tracklist(meta, plays, src.tracklist1001);
   if (src.fingerprintPlays?.length) {
     plays = mergeFingerprintPlays(
       plays,
@@ -183,9 +231,11 @@ async function curatedToHit(src: YoutubeSetSource): Promise<YtHit | null> {
   };
   raw.sourceHash = hashRawSetContent(raw);
 
+  const from1001 = plays.filter((p) => p.provenance === "1001tl").length;
   console.log(
     `[youtube] + ${sourceSlug} (${plays.length} plays;` +
       ` curated; ${durationSec}s` +
+      (from1001 ? `; 1001tl=${from1001}` : "") +
       (collaborators.length ? `; +${collaborators.length} collab` : "") +
       `; related=${meta.relatedVideos.length}` +
       `)`,
@@ -209,7 +259,7 @@ async function venueVideoToHit(
     primary.slug = slugify(credit);
   }
 
-  const plays = playsFromMeta(meta);
+  const plays = await enrichWith1001Tracklist(meta, playsFromMeta(meta));
   const sourceSlug = `yt-${meta.videoId}`.slice(0, 120);
 
   const festival = inferFestivalEvent(meta.title);
@@ -260,7 +310,7 @@ async function artistChannelVideoToHit(
     accent: ch.accent,
   };
   const { primary, collaborators } = artistsForSet(meta.title, preferred);
-  const plays = playsFromMeta(meta);
+  const plays = await enrichWith1001Tracklist(meta, playsFromMeta(meta));
   if (plays.length === 0 && meta.durationSec < 25 * 60) return null;
 
   const sourceSlug = `yt-${meta.videoId}`.slice(0, 120);
@@ -319,7 +369,7 @@ async function relatedVideoToHit(
   const { primary, collaborators } = artistsForSet(meta.title, undefined, {
     accent: seed.accent,
   });
-  const plays = playsFromMeta(meta);
+  const plays = await enrichWith1001Tracklist(meta, playsFromMeta(meta));
   if (plays.length === 0 && meta.durationSec < 25 * 60) return null;
 
   const festival = inferFestivalEvent(meta.title);
