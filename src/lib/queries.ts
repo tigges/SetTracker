@@ -1,4 +1,5 @@
 import { isJunkArtistName } from "@/lib/artistName";
+import { isBrowseReadyDj } from "@/lib/djBrowse";
 import { prisma } from "@/lib/db";
 import {
   expandGenres,
@@ -437,27 +438,67 @@ export type DjListItem = {
   twitter: string | null;
   website: string | null;
   setCount: number;
+  playCount: number;
+  identifiedPlayCount: number;
   hasHandle: boolean;
   isJunk: boolean;
+  /** Default directory visibility (store everything; hide thin profiles). */
+  isBrowseReady: boolean;
 };
 
+type DjPlayAggRow = {
+  djId: string;
+  playCount: number | bigint;
+  identifiedPlayCount: number | bigint;
+};
+
+async function djPlayAggregates(): Promise<
+  Map<string, { playCount: number; identifiedPlayCount: number }>
+> {
+  const rows = await prisma.$queryRaw<DjPlayAggRow[]>`
+    SELECT
+      sa.djId AS djId,
+      COUNT(p.id) AS playCount,
+      SUM(
+        CASE
+          WHEN p.idStatus IN ('identified', 'community_resolved') THEN 1
+          ELSE 0
+        END
+      ) AS identifiedPlayCount
+    FROM SetArtist sa
+    LEFT JOIN Played p ON p.setId = sa.setId
+    GROUP BY sa.djId
+  `;
+  const map = new Map<string, { playCount: number; identifiedPlayCount: number }>();
+  for (const r of rows) {
+    map.set(r.djId, {
+      playCount: Number(r.playCount ?? 0),
+      identifiedPlayCount: Number(r.identifiedPlayCount ?? 0),
+    });
+  }
+  return map;
+}
+
 export async function getDjList(): Promise<DjListItem[]> {
-  const rows = await prisma.dj.findMany({
-    orderBy: { name: "asc" },
-    select: {
-      id: true,
-      slug: true,
-      name: true,
-      homeCity: true,
-      accent: true,
-      imageUrl: true,
-      soundcloud: true,
-      instagram: true,
-      twitter: true,
-      website: true,
-      _count: { select: { sets: true } },
-    },
-  });
+  const [rows, playAgg] = await Promise.all([
+    prisma.dj.findMany({
+      orderBy: { name: "asc" },
+      select: {
+        id: true,
+        slug: true,
+        name: true,
+        homeCity: true,
+        accent: true,
+        imageUrl: true,
+        soundcloud: true,
+        instagram: true,
+        twitter: true,
+        website: true,
+        _count: { select: { sets: true } },
+      },
+    }),
+    djPlayAggregates(),
+  ]);
 
   return rows.map((d) => {
     const hasHandle = Boolean(
@@ -466,7 +507,11 @@ export async function getDjList(): Promise<DjListItem[]> {
     const isJunk =
       isJunkArtistName(d.name) ||
       /^view-artist-details-for-/.test(d.slug);
-    return {
+    const plays = playAgg.get(d.id) ?? {
+      playCount: 0,
+      identifiedPlayCount: 0,
+    };
+    const item = {
       id: d.id,
       slug: d.slug,
       name: d.name,
@@ -478,9 +523,14 @@ export async function getDjList(): Promise<DjListItem[]> {
       twitter: d.twitter,
       website: d.website,
       setCount: d._count.sets,
+      playCount: plays.playCount,
+      identifiedPlayCount: plays.identifiedPlayCount,
       hasHandle,
       isJunk,
+      isBrowseReady: false,
     };
+    item.isBrowseReady = isBrowseReadyDj(item);
+    return item;
   });
 }
 

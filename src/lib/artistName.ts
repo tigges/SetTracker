@@ -26,6 +26,13 @@ export function isJunkArtistName(name: string): boolean {
   if (/^enter your email/i.test(n)) return true;
   // Slug form of the Insomniac aria-label flood
   if (/^view-artist-details-for-/.test(n.toLowerCase())) return true;
+  // Set-title leftovers used as artist names ("AC Slater DJ Mix")
+  if (/\b(dj\s*(mix|set)|live\s*set|radio\s*show)\s*$/i.test(n)) return true;
+  // Date / "(DJ) 18.04.2025" scrape crumbs
+  if (/^\(?\s*dj\s*\)?\s*\d{1,2}[.\/-]\d{1,2}[.\/-]\d{2,4}\s*$/i.test(n)) {
+    return true;
+  }
+  if (/^\d{1,2}[.\/-]\d{1,2}[.\/-]\d{2,4}$/.test(n)) return true;
   return false;
 }
 

@@ -6,11 +6,14 @@ import { EntityThumb } from "@/components/EntityThumb";
 import type { DjListItem } from "@/lib/queries";
 
 const FILTERS = [
-  { id: "all", label: "All" },
+  { id: "browse", label: "Browse" },
+  { id: "all", label: "All stored" },
   { id: "no-sets", label: "No sets" },
+  { id: "empty-sets", label: "Empty sets" },
   { id: "has-sets", label: "Has sets" },
   { id: "no-handle", label: "No handle" },
   { id: "has-handle", label: "Has handle" },
+  { id: "no-thumb", label: "No thumb" },
   { id: "handle-no-sets", label: "Handle · 0 sets" },
   { id: "junk", label: "Junk names" },
 ] as const;
@@ -26,17 +29,24 @@ const chip = (active: boolean) =>
 
 function matches(d: DjListItem, filter: FilterId): boolean {
   if (filter === "junk") return d.isJunk;
+  if (filter === "browse") return d.isBrowseReady;
   // Hide aria-label / form-field junk from every other browse mode.
   if (d.isJunk) return false;
   switch (filter) {
+    case "all":
+      return true;
     case "no-sets":
       return d.setCount === 0;
+    case "empty-sets":
+      return d.setCount > 0 && d.playCount === 0;
     case "has-sets":
       return d.setCount > 0;
     case "no-handle":
       return !d.hasHandle;
     case "has-handle":
       return d.hasHandle;
+    case "no-thumb":
+      return !d.imageUrl;
     case "handle-no-sets":
       return d.hasHandle && d.setCount === 0;
     default:
@@ -54,11 +64,11 @@ function handleBits(d: DjListItem): string {
 }
 
 /**
- * Dev/QA island: filter the static DJ directory by set/handle gaps.
- * Temporary while cleaning discovery junk and wrong seeds.
+ * DJ directory with a default Browse view (handle + sets + tracklist + art).
+ * QA chips still expose the full stored catalog for cleanup.
  */
 export function DjList({ djs }: { djs: DjListItem[] }) {
-  const [filter, setFilter] = useState<FilterId>("all");
+  const [filter, setFilter] = useState<FilterId>("browse");
 
   const filtered = useMemo(
     () => djs.filter((d) => matches(d, filter)),
@@ -67,15 +77,19 @@ export function DjList({ djs }: { djs: DjListItem[] }) {
 
   const counts = useMemo(() => {
     const c: Record<FilterId, number> = {
+      browse: 0,
       all: 0,
       "no-sets": 0,
+      "empty-sets": 0,
       "has-sets": 0,
       "no-handle": 0,
       "has-handle": 0,
+      "no-thumb": 0,
       "handle-no-sets": 0,
       junk: 0,
     };
     for (const d of djs) {
+      if (d.isBrowseReady) c.browse++;
       if (d.isJunk) {
         c.junk++;
         continue;
@@ -83,6 +97,8 @@ export function DjList({ djs }: { djs: DjListItem[] }) {
       c.all++;
       if (d.setCount === 0) c["no-sets"]++;
       else c["has-sets"]++;
+      if (d.setCount > 0 && d.playCount === 0) c["empty-sets"]++;
+      if (!d.imageUrl) c["no-thumb"]++;
       if (d.hasHandle) {
         c["has-handle"]++;
         if (d.setCount === 0) c["handle-no-sets"]++;
@@ -97,7 +113,7 @@ export function DjList({ djs }: { djs: DjListItem[] }) {
     <div>
       <div className="mb-6">
         <p className="mb-1.5 mono text-[10px] uppercase tracking-[0.14em] text-muted2">
-          QA filter
+          Directory filter
         </p>
         <div className="flex flex-wrap items-center gap-1.5">
           {FILTERS.map((f) => (

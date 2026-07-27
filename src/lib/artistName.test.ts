@@ -21,5 +21,9 @@ assert.equal(isJunkArtistName("view artist details for Dead X"), true);
 assert.equal(isJunkArtistName("Dead X"), false);
 assert.equal(isJunkArtistName("Enter your email address"), true);
 assert.equal(isJunkArtistName("view-artist-details-for-fisher"), true);
+assert.equal(isJunkArtistName("AC Slater DJ Mix"), true);
+assert.equal(isJunkArtistName("AC Slater"), false);
+assert.equal(isJunkArtistName("(DJ) 18.04.2025"), true);
+assert.equal(isJunkArtistName("18.04.2025"), true);
 
 console.log("artistName.test.ts ok");
