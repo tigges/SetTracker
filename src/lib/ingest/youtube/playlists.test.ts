@@ -36,4 +36,23 @@ assert.equal(
   true,
 );
 
+const biscitsLive = YOUTUBE_PLAYLISTS.find((p) =>
+  p.playlist.includes("PLSAUtc6DBR34M6_c_4RlpMSG81OY5lu9p"),
+)!;
+assert.ok(biscitsLive);
+assert.equal(biscitsLive.seriesName, "BISCITS");
+assert.equal(biscitsLive.primaryArtist?.slug, "biscits");
+assert.equal(
+  isPlaylistSetCandidate(
+    "Biscits DJ Set - EDC Vegas 2025",
+    74 * 60,
+    biscitsLive,
+  ),
+  true,
+);
+assert.equal(
+  isPlaylistSetCandidate("Biscits - Crush (Live @ EDC Vegas)", 259, biscitsLive),
+  false,
+);
+
 console.log("playlists.test.ts ok");

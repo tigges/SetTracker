@@ -21,20 +21,39 @@ function normalizeCollabSeparators(input: string): string {
 }
 
 /**
+ * Drop trailing set/stream descriptors left after venue cuts
+ * ("Biscits DJ Set", "Biscits Tech House DJ Set", "BISCITS Live Stream").
+ */
+export function tidyPerformingCredit(name: string): string {
+  return name
+    .replace(/\s+/g, " ")
+    .trim()
+    .replace(
+      /\s+(?:tech\s+house\s+|bass\s+house\s+|house\s+)?(?:dj\s*)?sets?\b.*$/i,
+      "",
+    )
+    .replace(/\s+for\s+.+$/i, "")
+    .replace(/\s*(?:[-–—:|]\s*)+(?:live\s*)?streams?\b.*$/i, "")
+    .replace(/\s+(?:live\s*)?streams?\b.*$/i, "")
+    .replace(/\s*[|–—:-]+\s*$/g, "")
+    .trim();
+}
+
+/**
  * Extract the performing-artist portion of a set title before venue/event noise.
  */
 export function performingCreditFromTitle(title: string): string {
   const cleaned = title.replace(/\s+/g, " ").trim();
   let m = cleaned.match(/^(.+?)\s+live\s+(?:at|from|@)\s+/i);
-  if (m) return m[1].trim();
+  if (m) return tidyPerformingCredit(m[1]!);
   m = cleaned.match(/^(.+?)\s+@\s+/);
-  if (m) return m[1].trim();
+  if (m) return tidyPerformingCredit(m[1]!);
   m = cleaned.match(/^(.+?)\s+[|]\s+/);
-  if (m) return m[1].trim();
-  m = cleaned.match(/^(.+?)\s+[–—]\s+/);
-  if (m) return m[1].trim();
+  if (m) return tidyPerformingCredit(m[1]!);
+  m = cleaned.match(/^(.+?)\s+[–—-]\s+/);
+  if (m) return tidyPerformingCredit(m[1]!);
   // "Artist B2B Artist Cafe Mambo …" — keep full string; splitter handles b2b
-  return cleaned;
+  return tidyPerformingCredit(cleaned);
 }
 
 export type SplitArtists = {
@@ -66,7 +85,12 @@ export function splitArtistCredit(
     .filter(Boolean);
 
   const names = [...b2b, ...featured]
-    .map((n) => n.replace(/\s*,\s*$/, "").trim())
+    .map((n) =>
+      n
+        .replace(/\s*:.*$/, "") // "Max Mylo: In The Loop at Academy…"
+        .replace(/\s*,\s*$/, "")
+        .trim(),
+    )
     .filter((n) => n.length >= 2 && n.length <= 80);
 
   // Dedupe case-insensitively, preserve order
