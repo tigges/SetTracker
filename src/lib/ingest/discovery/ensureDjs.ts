@@ -78,10 +78,12 @@ export async function ensureDiscoveredDjs(
         genre: c.genre,
         accent: c.accent,
         soundcloudPermalink: c.soundcloudPermalink,
+        youtubeHandle: c.youtubeHandle,
       });
     } else {
       const s = stubs.get(slug)!;
       s.soundcloudPermalink = s.soundcloudPermalink || c.soundcloudPermalink;
+      s.youtubeHandle = s.youtubeHandle || c.youtubeHandle;
     }
   }
 

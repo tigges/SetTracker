@@ -18,6 +18,7 @@ import {
   parseTimedComments,
 } from "../soundcloud/parseTracklist";
 import { slugify, type RawSet, type SourceAdapter } from "../types";
+import { withDescriptionSocials } from "../youtube/client";
 import {
   HEARTHIS_ARTISTS,
   type HearthisArtistSource,
@@ -218,7 +219,7 @@ export async function trackToRawSet(
     title,
     type: setTypeFor(title),
     genre: (detail.genre || track.genre || category.genre || "House").trim(),
-    primaryArtist: primary,
+    primaryArtist: withDescriptionSocials(primary, description),
     collaborators,
     seriesName,
     publishedAt: publishedAtOf(detail),

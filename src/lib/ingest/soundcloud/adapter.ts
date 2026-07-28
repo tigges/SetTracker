@@ -17,6 +17,7 @@ import { promotedSoundcloudPermalinks } from "../discovery/run";
 import { inferFestivalEvent } from "../events";
 import { hashRawSetContent } from "../hash";
 import { slugify, type RawSet, type SourceAdapter } from "../types";
+import { withDescriptionSocials } from "../youtube/client";
 import {
   fetchPlaylistTracks,
   fetchTrackComments,
@@ -142,7 +143,7 @@ async function trackToRawSet(
     type: setTypeFor(track, show),
     // Prefer curated show genre when SC tags are format noise (guestmix, etc.).
     genre: normalizeGenre(track.genre) ?? show.genre,
-    primaryArtist: primary,
+    primaryArtist: withDescriptionSocials(primary, track.description),
     collaborators,
     seriesName: inferSeriesName(title, show),
     eventName: festival?.name,
@@ -225,7 +226,7 @@ async function playlistTrackToRawSet(
     title,
     type: setTypeFromTitle(title),
     genre: normalizeGenre(track.genre) ?? pl.genre,
-    primaryArtist: primary,
+    primaryArtist: withDescriptionSocials(primary, track.description),
     collaborators,
     seriesName: pl.seriesName,
     eventName: festival?.name,
