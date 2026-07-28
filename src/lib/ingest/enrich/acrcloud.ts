@@ -539,7 +539,12 @@ export async function selectSparseSetsForFingerprint(
         (p.idStatus === "identified" || p.idStatus === "community_resolved") &&
         STRONG_PROVENANCE.has(p.provenance),
     ).length;
-    if (identifiedStrong >= minIdentified) continue;
+    // Duration-aware skip: a 2h set with 4 IDs is still sparse (~2/h).
+    const expectedFloor = Math.max(
+      minIdentified,
+      Math.floor(row.durationSec / (8 * 60)), // at least ~7.5 tracks/hour identified
+    );
+    if (identifiedStrong >= expectedFloor) continue;
 
     candidates.push({
       id: row.id,
@@ -555,6 +560,10 @@ export async function selectSparseSetsForFingerprint(
   candidates.sort((a, b) => {
     const ha = HOST_PREF[a.host] - HOST_PREF[b.host];
     if (ha !== 0) return ha;
+    // Prefer worst density first (fewest plays per hour of audio).
+    const densA = a.playCount / Math.max(a.durationSec, 1);
+    const densB = b.playCount / Math.max(b.durationSec, 1);
+    if (densA !== densB) return densA - densB;
     if (a.identifiedStrong !== b.identifiedStrong) {
       return a.identifiedStrong - b.identifiedStrong;
     }

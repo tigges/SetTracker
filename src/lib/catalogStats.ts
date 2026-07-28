@@ -1,6 +1,11 @@
 import { getDjList, type DjListItem } from "@/lib/queries";
 import { prisma } from "@/lib/db";
 import {
+  assessSetDensity,
+  DENSITY_MIN_DURATION_SEC,
+  type DensitySeverity,
+} from "@/lib/setDensity";
+import {
   PROVENANCE_META,
   STATUS_META,
   STATUS_ORDER,
@@ -73,6 +78,26 @@ export type CatalogStats = {
     sourceName: string | null;
     type: string;
   }>;
+  /** Duration vs play-count gaps (incomplete tracklists). */
+  density: {
+    scanned: number;
+    thin: number;
+    severe: number;
+    worst: Array<{
+      id: string;
+      slug: string;
+      title: string;
+      sourceName: string | null;
+      durationSec: number;
+      playCount: number;
+      tracksPerHour: number;
+      avgSecPerPlay: number;
+      expectedPlays: number;
+      severity: DensitySeverity;
+      reason: string | null;
+      primaryDj: string | null;
+    }>;
+  };
 };
 
 function toStatsRow(d: DjListItem): StatsDjRow {
@@ -127,6 +152,7 @@ export async function getCatalogStats(): Promise<CatalogStats> {
     playStatusGroups,
     playProvGroups,
     emptySetRows,
+    densitySetRows,
   ] = await Promise.all([
     getDjList(),
     prisma.set.count(),
@@ -166,6 +192,22 @@ export async function getCatalogStats(): Promise<CatalogStats> {
         title: true,
         sourceName: true,
         type: true,
+      },
+    }),
+    prisma.set.findMany({
+      where: { durationSec: { gte: DENSITY_MIN_DURATION_SEC } },
+      select: {
+        id: true,
+        slug: true,
+        title: true,
+        sourceName: true,
+        durationSec: true,
+        _count: { select: { plays: true } },
+        artists: {
+          where: { isPrimary: true },
+          take: 1,
+          select: { dj: { select: { name: true } } },
+        },
       },
     }),
   ]);
@@ -258,5 +300,39 @@ export async function getCatalogStats(): Promise<CatalogStats> {
       junkNames,
     },
     emptySets: emptySetRows,
+    density: (() => {
+      const assessed = densitySetRows.map((s) => {
+        const playCount = s._count.plays;
+        const d = assessSetDensity({
+          durationSec: s.durationSec,
+          playCount,
+        });
+        return {
+          id: s.id,
+          slug: s.slug,
+          title: s.title,
+          sourceName: s.sourceName,
+          durationSec: s.durationSec,
+          playCount,
+          tracksPerHour: Math.round(d.tracksPerHour * 10) / 10,
+          avgSecPerPlay: Number.isFinite(d.avgSecPerPlay)
+            ? Math.round(d.avgSecPerPlay)
+            : -1,
+          expectedPlays: d.expectedPlays,
+          severity: d.severity,
+          reason: d.reason,
+          primaryDj: s.artists[0]?.dj.name ?? null,
+        };
+      });
+      const flagged = assessed
+        .filter((r) => r.severity === "thin" || r.severity === "severe")
+        .sort((a, b) => b.avgSecPerPlay - a.avgSecPerPlay);
+      return {
+        scanned: assessed.length,
+        thin: assessed.filter((r) => r.severity === "thin").length,
+        severe: assessed.filter((r) => r.severity === "severe").length,
+        worst: flagged.slice(0, 60),
+      };
+    })(),
   };
 }

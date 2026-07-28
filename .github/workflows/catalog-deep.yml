@@ -146,6 +146,17 @@ jobs:
             exit 1
           fi
 
+      # Catalog-internal density audit (duration vs play count). Not Songkick.
+      - name: Cross-check set tracklist density
+        run: npm run crosscheck:set-density
+
+      - name: Upload set-density report
+        uses: actions/upload-artifact@v4
+        with:
+          name: set-density
+          path: data/crosscheck/set-density.json
+          if-no-files-found: warn
+
       - name: Save catalog DB
         uses: actions/cache/save@v4
         with:

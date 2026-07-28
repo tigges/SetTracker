@@ -1,6 +1,6 @@
 {
   "name": "setradar",
-  "version": "0.2.30",
+  "version": "0.2.31",
   "private": true,
   "prisma": {
     "seed": "tsx prisma/seed.ts"
@@ -25,6 +25,7 @@
     "graduate-roster": "tsx prisma/graduate-roster.ts",
     "normalize-genres": "tsx prisma/normalize-genres.ts",
     "crosscheck:beatportal-house-2025": "tsx scripts/crosscheck-beatportal-house-2025.ts",
+    "crosscheck:set-density": "tsx scripts/crosscheck-set-density.ts",
     "enrich:djmag-sites": "tsx scripts/enrich-djmag-official-sites.ts",
     "enrich:djmag-festivals": "tsx scripts/enrich-djmag-festivals.ts",
     "enrich:djmag-djs": "tsx scripts/enrich-djmag-djs.ts"

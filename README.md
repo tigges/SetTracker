@@ -75,6 +75,7 @@ npm run dev        # http://localhost:3000
 | `npm run crosslink`  | Scrape YT/SC profiles + link hubs → handle report |
 | `npm run thumbs`     | Resolve artwork URLs (Deezer / iTunes) |
 | `npm run enrich:fingerprint` | ACRCloud gap-fill for sparse sets (`ACRCLOUD_*`) |
+| `npm run crosscheck:set-density` | Flag thin tracklists (duration vs play count) |
 
 ### Handle cross-link (automatic)
 

@@ -7,6 +7,7 @@ import { SetPlayer } from "@/components/SetPlayer";
 import { SetTimeline } from "@/components/SetTimeline";
 import { StatusLegend } from "@/components/StatusBits";
 import { detectPlaybackHost } from "@/lib/playback";
+import { assessSetDensity } from "@/lib/setDensity";
 import { SET_TYPE_META, fmtDate, fmtDuration } from "@/lib/status";
 
 export async function generateStaticParams() {
@@ -27,6 +28,10 @@ export default async function SetPage({
 
   const type = SET_TYPE_META[set.type] ?? { label: set.type, glyph: "•" };
   const accent = set.primaryDj?.accent ?? "var(--brand)";
+  const density = assessSetDensity({
+    durationSec: set.durationSec,
+    playCount: set.plays.length,
+  });
 
   return (
     <div>
@@ -103,6 +108,21 @@ export default async function SetPage({
             <span className="mono">{fmtDate(set.publishedAt)}</span>
             <span className="mono">{fmtDuration(set.durationSec)}</span>
             <span className="mono">{set.plays.length} tracks</span>
+            {density.severity !== "ok" && (
+              <span
+                className="mono"
+                style={{
+                  color:
+                    density.severity === "severe"
+                      ? "var(--magenta)"
+                      : "var(--amber)",
+                }}
+                title={density.reason ?? undefined}
+              >
+                {density.severity} tracklist · ~{density.tracksPerHour.toFixed(1)}
+                /h (expect ~{density.expectedPlays})
+              </span>
+            )}
             {set.sourceName && (
               <span>
                 Source:{" "}

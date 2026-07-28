@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getCatalogStats, type StatsDjRow } from "@/lib/catalogStats";
+import { fmtDuration } from "@/lib/status";
 import { STATUS_META, type IdStatus } from "@/lib/status";
 
 export const metadata = {
@@ -194,6 +195,11 @@ export default async function StatsPage() {
             hint={`${s.sets.empty} empty sets`}
           />
           <Stat
+            label="Thin tracklists"
+            value={s.density.thin + s.density.severe}
+            hint={`${s.density.severe} severe · ${s.density.scanned} scanned ≥30m`}
+          />
+          <Stat
             label="Tracks · Beatport"
             value={s.tracks.withBeatport}
             hint={pct(s.tracks.withBeatport, s.totals.tracks)}
@@ -344,6 +350,65 @@ export default async function StatsPage() {
             `${d.setCount} ${d.setCount === 1 ? "set" : "sets"}`
           }
         />
+
+        <section>
+          <div className="mb-3 flex items-baseline justify-between gap-3">
+            <div>
+              <h2 className="text-lg font-bold tracking-tight">
+                Thin tracklists
+              </h2>
+              <p className="mt-0.5 text-[13px] text-muted2">
+                Duration vs logged plays — house/tech-house sets usually land
+                ~8–15 tracks/hour. Avg ≥8m/play or &lt;7/h is thin; ≥10m or
+                &lt;5/h is severe (incomplete parse, not a real 6-song hour).
+              </p>
+            </div>
+            <span className="mono text-[12px] text-muted2">
+              {s.density.thin + s.density.severe}
+            </span>
+          </div>
+          {s.density.worst.length === 0 ? (
+            <p className="text-[13px] text-muted2">
+              No thin ≥30m sets in the catalog.
+            </p>
+          ) : (
+            <ul className="divide-y divide-line border-y border-line">
+              {s.density.worst.slice(0, 40).map((row) => (
+                <li key={row.id} className="py-2.5">
+                  <Link
+                    href={`/sets/${row.slug}`}
+                    className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-3 hover:text-[color:var(--brand)]"
+                  >
+                    <span className="min-w-0">
+                      <span className="block truncate text-[14px] font-medium text-ink">
+                        {row.title}
+                      </span>
+                      <span className="mono text-[11px] text-muted2">
+                        {row.primaryDj ?? "—"}
+                        {row.sourceName ? ` · ${row.sourceName}` : ""}
+                        {" · "}
+                        <span
+                          style={{
+                            color:
+                              row.severity === "severe"
+                                ? "var(--magenta)"
+                                : "var(--amber)",
+                          }}
+                        >
+                          {row.severity}
+                        </span>
+                      </span>
+                    </span>
+                    <span className="mono shrink-0 text-[12px] text-muted2">
+                      {row.playCount}/{row.expectedPlays} ·{" "}
+                      {fmtDuration(row.durationSec)} · {row.tracksPerHour}/h
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )}
+        </section>
 
         <section>
           <div className="mb-3 flex items-baseline justify-between gap-3">
