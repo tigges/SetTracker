@@ -1,0 +1,72 @@
+name: ACRCloud smoke
+
+# Fast auth check for Actions secrets (no thumbs / full enrich).
+on:
+  push:
+    branches: [main]
+    paths:
+      - "data/acr-smoke-request"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: catalog-acr-smoke
+  cancel-in-progress: true
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Check + probe ACRCloud
+        env:
+          ACRCLOUD_HOST: ${{ secrets.ACRCLOUD_HOST }}
+          ACRCLOUD_ACCESS_KEY: ${{ secrets.ACRCLOUD_ACCESS_KEY }}
+          ACRCLOUD_ACCESS_SECRET: ${{ secrets.ACRCLOUD_ACCESS_SECRET }}
+        run: |
+          HOST=$(printf '%s' "$ACRCLOUD_HOST" | tr -d '\r' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
+          KEY=$(printf '%s' "$ACRCLOUD_ACCESS_KEY" | tr -d '\r' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
+          SECRET=$(printf '%s' "$ACRCLOUD_ACCESS_SECRET" | tr -d '\r' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
+          echo "host_len=${#HOST} key_len=${#KEY} secret_len=${#SECRET}"
+          if [ -z "$HOST" ] || [ -z "$KEY" ] || [ -z "$SECRET" ]; then
+            echo "::error::ACRCloud secrets missing"
+            exit 1
+          fi
+          export ACRCLOUD_HOST="$HOST"
+          export ACRCLOUD_ACCESS_KEY="$KEY"
+          export ACRCLOUD_ACCESS_SECRET="$SECRET"
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+          ffmpeg -y -f lavfi -i anullsrc=r=44100:cl=mono -t 3 -q:a 9 -acodec libmp3lame /tmp/silent.mp3
+          npx tsx -e '
+          import { readFileSync } from "fs";
+          import { acrIdentify } from "./src/lib/ingest/enrich/acrcloud.ts";
+          (async () => {
+            const r = await acrIdentify(readFileSync("/tmp/silent.mp3"));
+            console.log(JSON.stringify(r));
+            // 2004 = auth ok, silence has no fingerprint; 0/1001 also ok.
+            // 3014 = bad signature (secrets wrong).
+            if (!r.ok && /3014|invalid signature/i.test(r.error)) {
+              console.error("FAIL: invalid signature — fix ACRCLOUD_* Actions secrets");
+              process.exit(1);
+            }
+            if (!r.ok && /quota|limit|credit|3003|3001/i.test(r.error)) {
+              console.error("FAIL: likely credits/quota:", r.error);
+              process.exit(1);
+            }
+            if (!r.ok && !/2004|fingerprint/i.test(r.error)) {
+              console.error("FAIL:", r.error);
+              process.exit(1);
+            }
+            console.log("OK: ACRCloud Actions credentials authenticate");
+          })();
+          '
