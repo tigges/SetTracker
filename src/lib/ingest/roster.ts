@@ -1196,6 +1196,7 @@ export const ARTIST_ROSTER_CURATED: ArtistRosterEntry[] = [
     name: "HUGEL",
     genre: "Melodic House",
     accent: "#06d6a0",
+    youtube: { handle: "@HUGELBeats", status: "ok" },
     soundcloud: { permalink: "hugelmusic", status: "ok" },
     priority: "high",
   },

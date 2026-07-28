@@ -545,10 +545,10 @@ export const DJ_SOCIAL_PINS: DjSocialPin[] = [
     name: "HUGEL",
     accent: "#06d6a0",
     soundcloud: "https://soundcloud.com/hugelmusic",
-    youtube: null,
+    youtube: "https://www.youtube.com/@HUGELBeats",
     instagram: null,
     website: "https://djmag.com/top100djs/2025/54/hugel",
-    bio: "Melodic House. SC hugelmusic.",
+    bio: "Melodic House. SC hugelmusic, YT @HUGELBeats.",
   },
   {
     slug: "nora-en-pure",
