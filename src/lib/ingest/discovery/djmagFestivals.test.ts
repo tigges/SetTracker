@@ -19,12 +19,22 @@ const seed = JSON.parse(
     slug: string;
     name: string;
     djmagUrl: string;
+    website?: string;
   }>;
 };
 
 assert.equal(seed.festivals.length, 100);
 assert.equal(seed.festivals[0]?.slug, "tomorrowland");
 assert.equal(seed.festivals[1]?.slug, "edc-las-vegas");
+assert.ok(
+  seed.festivals.filter((f) => f.website && !/djmag\.com/i.test(f.website))
+    .length >= 70,
+  "expected most Top 100 Festivals to have official websites",
+);
+assert.equal(
+  seed.festivals.find((f) => f.slug === "amf")?.website,
+  "https://www.amsterdammusicfestival.com/",
+);
 
 const tl = djMagFestivalToEvent(seed.festivals[0]!);
 assert.equal(tl.slug, "tomorrowland");

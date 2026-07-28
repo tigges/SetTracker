@@ -2,18 +2,20 @@
  * DJ Mag Top 100 Festivals — industry context for the venue graph.
  * Source: https://djmag.com/top100festivals
  *
- * Materializes festival Events + title inference. Official websites come from
- * KNOWN_EVENTS aliases when we already curate them (Tomorrowland, EDC, Ultra…).
- * Festival profile pages rarely list an official site (unlike Top 100 Clubs).
+ * Chart profiles do NOT embed official URLs (unlike Top 100 Clubs). We still
+ * materialize all 100 festivals, then fill Event.website from:
+ *   1) KNOWN_EVENTS aliases (Tomorrowland, EDC, Ultra, …)
+ *   2) Seed / Wikidata P856 enrichment (`npm run enrich:djmag-festivals`)
  *
  * Mixmag.net is NOT crawled — Mixmag is YouTube-venue only (@Mixmag).
  */
 
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import type { PrismaClient } from "@prisma/client";
 import { KNOWN_EVENTS, type CanonicalEvent } from "../events";
 import { slugify } from "../types";
+import { resolveWikidataOfficialWebsite } from "./wikidataOfficial";
 
 export type DjMagFestival = {
   rank: number;
@@ -55,15 +57,29 @@ const ALIAS_TO_KNOWN: Record<string, string> = {
   "countdown-nye": "countdown-nye",
 };
 
-const SKIP_TITLE_MATCH = new Set([
-  "amf", // short acronym
-  "exit",
-]);
+const SKIP_TITLE_MATCH = new Set(["amf", "exit"]);
+
+/**
+ * Hand-checked festival homepages when KNOWN_EVENTS / Wikidata miss.
+ * DJ Mag festival profiles do not embed official URLs (unlike clubs).
+ */
+const EXTRA_OFFICIAL: Record<string, string> = {
+  "lost-village": "https://lostvillagefestival.com/",
+  "beyond-valley": "https://www.beyondthevalley.com.au/",
+  "groove-cruise": "https://www.groovecruise.com/",
+  amf: "https://www.amsterdammusicfestival.com/",
+  "primer-music-festival": "https://primermusicfestival.com/",
+  "world-dj-festival": "https://www.worlddjfestival.com/",
+  "scream-or-dance": "https://www.screamordance.com/",
+  "untold-dubai": "https://untold.ae/",
+  positiv: "https://positivfestival.fr/",
+};
 
 let cached: DjMagFestival[] | null = null;
 
 function decodeEntities(s: string): string {
   return s
+    .replace(/&nbsp;/gi, " ")
     .replace(/&amp;/g, "&")
     .replace(/&quot;/g, '"')
     .replace(/&#(\d+);/g, (_, n) => String.fromCharCode(Number(n)))
@@ -82,6 +98,21 @@ function loadSeed(): DjMagFestival[] {
   } catch {
     return [];
   }
+}
+
+function mergeSeedMeta(festivals: DjMagFestival[]): DjMagFestival[] {
+  const seedBySlug = new Map(loadSeed().map((f) => [f.slug, f]));
+  return festivals.map((f) => {
+    const seed = seedBySlug.get(f.slug);
+    const knownSlug = ALIAS_TO_KNOWN[f.slug];
+    const known = knownSlug ? KNOWN_EVENTS[knownSlug] : undefined;
+    const extra = EXTRA_OFFICIAL[f.slug] ?? EXTRA_OFFICIAL[slugify(f.name)];
+    return {
+      ...f,
+      website: f.website ?? seed?.website ?? known?.website ?? extra,
+      location: f.location ?? seed?.location ?? known?.location,
+    };
+  });
 }
 
 function parseListHtml(html: string): DjMagFestival[] {
@@ -126,7 +157,7 @@ function parseListHtml(html: string): DjMagFestival[] {
       djmagUrl: `https://djmag.com/top100festivals/${YEAR}/${rank}/${slug}`,
     });
   }
-  return festivals;
+  return mergeSeedMeta(festivals);
 }
 
 async function fetchListHtml(): Promise<string | null> {
@@ -152,31 +183,133 @@ export async function loadDjMagTopFestivals(opts?: {
   const html = await fetchListHtml();
   let festivals = html ? parseListHtml(html) : [];
   const source = festivals.length >= 50 ? "live" : "seed";
-  if (festivals.length < 50) festivals = loadSeed();
+  if (festivals.length < 50) festivals = mergeSeedMeta(loadSeed());
   cached = festivals;
   console.log(`[djmag-festivals] loaded ${festivals.length} via ${source}`);
   return festivals;
 }
 
+/**
+ * Fill missing festival websites via Wikidata P856 (DJ Mag profiles omit them).
+ */
+export async function enrichDjMagFestivalWebsites(opts?: {
+  missingOnly?: boolean;
+  limit?: number;
+  persistSeed?: boolean;
+  delayMs?: number;
+}): Promise<{ fetched: number; found: number; festivals: DjMagFestival[] }> {
+  const missingOnly = opts?.missingOnly !== false;
+  const festivals = await loadDjMagTopFestivals({ force: true });
+  const targets = festivals.filter((f) => {
+    if (!missingOnly) return true;
+    if (f.website && !/djmag\.com/i.test(f.website)) return false;
+    return true;
+  });
+  const limit = opts?.limit ?? targets.length;
+  let fetched = 0;
+  let found = 0;
+
+  for (const fest of targets.slice(0, limit)) {
+    fetched += 1;
+    // Curated alias already has a real site — copy onto the chart row.
+    const knownSlug = ALIAS_TO_KNOWN[fest.slug];
+    const known = knownSlug ? KNOWN_EVENTS[knownSlug] : undefined;
+    if (known?.website) {
+      fest.website = known.website;
+      if (known.location) fest.location = known.location;
+      found += 1;
+      console.log(`[djmag-festivals] ${fest.slug} → ${fest.website} (curated)`);
+      continue;
+    }
+    const extra = EXTRA_OFFICIAL[fest.slug] ?? EXTRA_OFFICIAL[slugify(fest.name)];
+    if (extra) {
+      fest.website = extra;
+      found += 1;
+      console.log(`[djmag-festivals] ${fest.slug} → ${extra} (extra)`);
+      continue;
+    }
+    const website = await resolveWikidataOfficialWebsite(fest.name, "festival", {
+      delayMs: opts?.delayMs,
+    });
+    if (!website) {
+      console.log(`[djmag-festivals] no site ${fest.slug}`);
+      continue;
+    }
+    fest.website = website;
+    found += 1;
+    console.log(`[djmag-festivals] ${fest.slug} → ${website}`);
+  }
+
+  cached = festivals;
+  if (opts?.persistSeed) {
+    const seed = loadSeed();
+    const bySlug = new Map(festivals.map((f) => [f.slug, f]));
+    const next = seed.map((f) => {
+      const live = bySlug.get(f.slug);
+      return live
+        ? {
+            ...f,
+            website: live.website ?? f.website,
+            location: live.location ?? f.location,
+          }
+        : f;
+    });
+    for (const f of festivals) {
+      if (!next.some((x) => x.slug === f.slug)) next.push(f);
+    }
+    next.sort((a, b) => a.rank - b.rank);
+    writeFileSync(
+      SEED_PATH,
+      `${JSON.stringify(
+        {
+          source: LIST_URL,
+          year: YEAR,
+          note: "DJ Mag Top 100 Festivals. Profiles omit official URLs — `website` from KNOWN_EVENTS aliases + Wikidata P856. Mixmag.net not crawled.",
+          festivals: next,
+        },
+        null,
+        2,
+      )}\n`,
+      "utf8",
+    );
+    console.log(`[djmag-festivals] wrote seed (${found} websites)`);
+  }
+  return { fetched, found, festivals };
+}
+
 /** Canonical event for a chart row — prefer curated KNOWN_EVENTS. */
 export function djMagFestivalToEvent(fest: DjMagFestival): CanonicalEvent {
   const knownSlug = ALIAS_TO_KNOWN[fest.slug] ?? ALIAS_TO_KNOWN[slugify(fest.name)];
+  const extra =
+    EXTRA_OFFICIAL[fest.slug] ?? EXTRA_OFFICIAL[slugify(fest.name)];
   if (knownSlug && KNOWN_EVENTS[knownSlug]) {
-    return { ...KNOWN_EVENTS[knownSlug]! };
+    const known = KNOWN_EVENTS[knownSlug]!;
+    return {
+      ...known,
+      website: known.website ?? fest.website ?? extra,
+      location: known.location ?? fest.location,
+    };
   }
   return {
     slug: fest.slug,
     name: fest.name,
     kind: "festival",
     location: fest.location,
-    // Weak fallback — thumbs skip DJ Mag hosts; curated aliases supply real sites.
-    website: fest.website ?? fest.djmagUrl,
+    website: fest.website ?? extra ?? fest.djmagUrl,
   };
 }
 
 export async function ensureDjMagFestivals(
   prisma: PrismaClient,
 ): Promise<{ created: number; updated: number; total: number }> {
+  if (process.env.DJMAG_ENRICH_FESTIVALS === "1") {
+    await enrichDjMagFestivalWebsites({
+      missingOnly: true,
+      limit: Number(process.env.DJMAG_OFFICIAL_LIMIT || 100),
+      persistSeed: process.env.DJMAG_PERSIST_SEED === "1",
+    });
+  }
+
   const festivals = await loadDjMagTopFestivals();
   let created = 0;
   let updated = 0;
@@ -206,10 +339,7 @@ export async function ensureDjMagFestivals(
       if (weak) data.website = ev.website;
     }
     if (!existing.location && ev.location) data.location = ev.location;
-    if (existing.kind === "event" || existing.kind === "club") {
-      // Chart says festival — upgrade generic/event; don't demote curated livestreams.
-      if (existing.kind === "event") data.kind = "festival";
-    }
+    if (existing.kind === "event") data.kind = "festival";
     if (existing.name === slugify(existing.name) || existing.name === ev.slug) {
       data.name = ev.name;
     }

@@ -1,19 +1,23 @@
 {
   "source": "https://djmag.com/top100djs",
   "year": 2025,
-  "note": "DJ Mag Top 100 DJs chart \u2014 industry context for discovery stubs / candidates. Socials filled via crosslink/roster/pins, not invented. Mixmag.net not used.",
+  "note": "DJ Mag Top 100 DJs. Profiles omit official URLs — `website` from roster/pins + Wikidata P856 + curated extras; `homeCity` from profile From:. Mixmag.net not used.",
   "djs": [
     {
       "rank": 1,
       "slug": "david-guetta",
       "name": "David Guetta",
-      "djmagUrl": "https://djmag.com/top100djs/2025/1/david-guetta"
+      "djmagUrl": "https://djmag.com/top100djs/2025/1/david-guetta",
+      "website": "https://davidguetta.com/",
+      "homeCity": "Paris, France"
     },
     {
       "rank": 2,
       "slug": "martin-garrix",
       "name": "Martin Garrix",
-      "djmagUrl": "https://djmag.com/top100djs/2025/2/martin-garrix"
+      "djmagUrl": "https://djmag.com/top100djs/2025/2/martin-garrix",
+      "website": "https://martingarrix.com/",
+      "homeCity": "The Netherlands"
     },
     {
       "rank": 3,
@@ -25,109 +29,144 @@
       "rank": 4,
       "slug": "dimitri-vegas-mike",
       "name": "Dimitri Vegas & Like Mike",
-      "djmagUrl": "https://djmag.com/top100djs/2025/4/dimitri-vegas-mike"
+      "djmagUrl": "https://djmag.com/top100djs/2025/4/dimitri-vegas-mike",
+      "website": "https://www.dimitrivegasandlikemike.com/",
+      "homeCity": "Belgium"
     },
     {
       "rank": 5,
       "slug": "armin-van-buuren",
       "name": "Armin Van Buuren",
-      "djmagUrl": "https://djmag.com/top100djs/2025/5/armin-van-buuren"
+      "djmagUrl": "https://djmag.com/top100djs/2025/5/armin-van-buuren",
+      "website": "https://www.arminvanbuuren.com/",
+      "homeCity": "The Netherlands"
     },
     {
       "rank": 6,
       "slug": "timmy-trumpet",
       "name": "Timmy Trumpet",
-      "djmagUrl": "https://djmag.com/top100djs/2025/6/timmy-trumpet"
+      "djmagUrl": "https://djmag.com/top100djs/2025/6/timmy-trumpet",
+      "website": "https://www.timmytrumpet.com/",
+      "homeCity": "Sydney, Australia"
     },
     {
       "rank": 7,
       "slug": "fisher",
       "name": "FISHER",
-      "djmagUrl": "https://djmag.com/top100djs/2025/7/fisher"
+      "djmagUrl": "https://djmag.com/top100djs/2025/7/fisher",
+      "website": "https://followthefishtv.com/",
+      "homeCity": "Australia"
     },
     {
       "rank": 8,
       "slug": "afrojack",
       "name": "Afrojack",
-      "djmagUrl": "https://djmag.com/top100djs/2025/8/afrojack"
+      "djmagUrl": "https://djmag.com/top100djs/2025/8/afrojack",
+      "website": "https://afrojack.com/",
+      "homeCity": "Rotterdam"
     },
     {
       "rank": 9,
       "slug": "charlotte-de-witte",
       "name": "Charlotte de Witte",
-      "djmagUrl": "https://djmag.com/top100djs/2025/9/charlotte-de-witte"
+      "djmagUrl": "https://djmag.com/top100djs/2025/9/charlotte-de-witte",
+      "website": "https://charlottedewittemusic.com/",
+      "homeCity": "Ghent, Belgium"
     },
     {
       "rank": 10,
       "slug": "anyma",
       "name": "Anyma",
-      "djmagUrl": "https://djmag.com/top100djs/2025/10/anyma"
+      "djmagUrl": "https://djmag.com/top100djs/2025/10/anyma",
+      "website": "https://www.anyma.com/"
     },
     {
       "rank": 11,
       "slug": "vintage-culture",
       "name": "Vintage Culture",
-      "djmagUrl": "https://djmag.com/top100djs/2025/11/vintage-culture"
+      "djmagUrl": "https://djmag.com/top100djs/2025/11/vintage-culture",
+      "website": "https://vintageculture.com/",
+      "homeCity": "Brazil"
     },
     {
       "rank": 12,
       "slug": "peggy-gou",
       "name": "Peggy Gou",
-      "djmagUrl": "https://djmag.com/top100djs/2025/12/peggy-gou"
+      "djmagUrl": "https://djmag.com/top100djs/2025/12/peggy-gou",
+      "website": "https://peggygou.com/",
+      "homeCity": "South Korea"
     },
     {
       "rank": 13,
       "slug": "don-diablo",
       "name": "Don Diablo",
-      "djmagUrl": "https://djmag.com/top100djs/2025/13/don-diablo"
+      "djmagUrl": "https://djmag.com/top100djs/2025/13/don-diablo",
+      "website": "https://www.dondiablo.com/",
+      "homeCity": "The Netherlands"
     },
     {
       "rank": 14,
       "slug": "steve-aoki",
       "name": "Steve Aoki",
-      "djmagUrl": "https://djmag.com/top100djs/2025/14/steve-aoki"
+      "djmagUrl": "https://djmag.com/top100djs/2025/14/steve-aoki",
+      "website": "https://www.steveaoki.com/",
+      "homeCity": "California"
     },
     {
       "rank": 15,
       "slug": "hardwell",
       "name": "Hardwell",
-      "djmagUrl": "https://djmag.com/top100djs/2025/15/hardwell"
+      "djmagUrl": "https://djmag.com/top100djs/2025/15/hardwell",
+      "website": "https://djhardwell.com/",
+      "homeCity": "Breda, The Netherlands"
     },
     {
       "rank": 16,
       "slug": "calvin-harris",
       "name": "Calvin Harris",
-      "djmagUrl": "https://djmag.com/top100djs/2025/16/calvin-harris"
+      "djmagUrl": "https://djmag.com/top100djs/2025/16/calvin-harris",
+      "website": "https://www.calvinharris.com/",
+      "homeCity": "Dumfries, UK"
     },
     {
       "rank": 17,
       "slug": "black-coffee",
       "name": "Black Coffee",
-      "djmagUrl": "https://djmag.com/top100djs/2025/17/black-coffee"
+      "djmagUrl": "https://djmag.com/top100djs/2025/17/black-coffee",
+      "website": "https://music.apple.com/za/artist/black-coffee/306140760/",
+      "homeCity": "South Africa"
     },
     {
       "rank": 18,
       "slug": "ww",
       "name": "W&W",
-      "djmagUrl": "https://djmag.com/top100djs/2025/18/ww"
+      "djmagUrl": "https://djmag.com/top100djs/2025/18/ww",
+      "website": "https://www.wandwmusic.com/",
+      "homeCity": "The Netherlands"
     },
     {
       "rank": 19,
       "slug": "lost-frequencies",
       "name": "Lost Frequencies",
-      "djmagUrl": "https://djmag.com/top100djs/2025/19/lost-frequencies"
+      "djmagUrl": "https://djmag.com/top100djs/2025/19/lost-frequencies",
+      "website": "https://lostfrequencies.com/",
+      "homeCity": "Belgium"
     },
     {
       "rank": 20,
       "slug": "keinemusik",
       "name": "Keinemusik",
-      "djmagUrl": "https://djmag.com/top100djs/2025/20/keinemusik"
+      "djmagUrl": "https://djmag.com/top100djs/2025/20/keinemusik",
+      "website": "https://keinemusik.com/",
+      "homeCity": "Berlin, Germany"
     },
     {
       "rank": 21,
       "slug": "tiesto",
-      "name": "Ti\u00ebsto",
-      "djmagUrl": "https://djmag.com/top100djs/2025/21/tiesto"
+      "name": "Tiësto",
+      "djmagUrl": "https://djmag.com/top100djs/2025/21/tiesto",
+      "website": "https://www.tiesto.com/",
+      "homeCity": "The Netherlands"
     },
     {
       "rank": 22,
@@ -139,55 +178,73 @@
       "rank": 23,
       "slug": "kshmr",
       "name": "KSHMR",
-      "djmagUrl": "https://djmag.com/top100djs/2025/23/kshmr"
+      "djmagUrl": "https://djmag.com/top100djs/2025/23/kshmr",
+      "website": "https://welcometokshmr.com/",
+      "homeCity": "Berkeley, CA"
     },
     {
       "rank": 24,
       "slug": "alan-walker",
       "name": "Alan Walker",
-      "djmagUrl": "https://djmag.com/top100djs/2025/24/alan-walker"
+      "djmagUrl": "https://djmag.com/top100djs/2025/24/alan-walker",
+      "website": "https://alanwalker.com/",
+      "homeCity": "Norway"
     },
     {
       "rank": 25,
       "slug": "carl-cox",
       "name": "Carl Cox",
-      "djmagUrl": "https://djmag.com/top100djs/2025/25/carl-cox"
+      "djmagUrl": "https://djmag.com/top100djs/2025/25/carl-cox",
+      "website": "https://www.carlcox.com/",
+      "homeCity": "UK"
     },
     {
       "rank": 26,
       "slug": "oliver-heldens",
       "name": "Oliver Heldens",
-      "djmagUrl": "https://djmag.com/top100djs/2025/26/oliver-heldens"
+      "djmagUrl": "https://djmag.com/top100djs/2025/26/oliver-heldens",
+      "website": "https://oliverheldens.com/",
+      "homeCity": "The Netherlands"
     },
     {
       "rank": 27,
       "slug": "jamie-jones",
       "name": "Jamie Jones",
-      "djmagUrl": "https://djmag.com/top100djs/2025/27/jamie-jones"
+      "djmagUrl": "https://djmag.com/top100djs/2025/27/jamie-jones",
+      "homeCity": "Wales",
+      "website": "https://jamiejones.com/"
     },
     {
       "rank": 28,
       "slug": "r3hab",
       "name": "R3hab",
-      "djmagUrl": "https://djmag.com/top100djs/2025/28/r3hab"
+      "djmagUrl": "https://djmag.com/top100djs/2025/28/r3hab",
+      "website": "https://www.r3hab.com/",
+      "homeCity": "Breda, NL"
     },
     {
       "rank": 29,
       "slug": "nicky-romero",
       "name": "Nicky Romero",
-      "djmagUrl": "https://djmag.com/top100djs/2025/29/nicky-romero"
+      "djmagUrl": "https://djmag.com/top100djs/2025/29/nicky-romero",
+      "website": "https://nickyromero.com/",
+      "homeCity": "The Netherlands"
     },
     {
       "rank": 30,
       "slug": "claptone",
       "name": "Claptone",
-      "djmagUrl": "https://djmag.com/top100djs/2025/30/claptone"
+      "djmagUrl": "https://djmag.com/top100djs/2025/30/claptone",
+      "website": "https://claptone.com/",
+      "homeCity": "“Unknown.”"
     },
     {
       "rank": 31,
       "slug": "skrillex",
       "name": "Skrillex",
-      "djmagUrl": "https://djmag.com/top100djs/2025/31/skrillex"
+      "djmagUrl": "https://djmag.com/top100djs/2025/31/skrillex",
+      "website": "https://www.skrillex.com/",
+      "homeCity": "USA"
     },
     {
       "rank": 32,
@@ -199,265 +256,343 @@
       "rank": 33,
       "slug": "fred-again",
       "name": "Fred again...",
-      "djmagUrl": "https://djmag.com/top100djs/2025/33/fred-again"
+      "djmagUrl": "https://djmag.com/top100djs/2025/33/fred-again",
+      "homeCity": "UK",
+      "website": "https://www.fredagain.com/"
     },
     {
       "rank": 34,
       "slug": "swedish-house-mafia",
       "name": "Swedish House Mafia",
-      "djmagUrl": "https://djmag.com/top100djs/2025/34/swedish-house-mafia"
+      "djmagUrl": "https://djmag.com/top100djs/2025/34/swedish-house-mafia",
+      "website": "https://swedishhousemafia.com/",
+      "homeCity": "Sweden"
     },
     {
       "rank": 35,
       "slug": "joel-corry",
       "name": "Joel Corry",
-      "djmagUrl": "https://djmag.com/top100djs/2025/35/joel-corry"
+      "djmagUrl": "https://djmag.com/top100djs/2025/35/joel-corry",
+      "website": "https://www.joelcorry.com/"
     },
     {
       "rank": 36,
       "slug": "indira-paganotto",
       "name": "Indira Paganotto",
-      "djmagUrl": "https://djmag.com/top100djs/2025/36/indira-paganotto"
+      "djmagUrl": "https://djmag.com/top100djs/2025/36/indira-paganotto",
+      "homeCity": "Gran Canaria, Canary Islands",
+      "website": "https://indirapaganotto.com/"
     },
     {
       "rank": 37,
       "slug": "eric-prydz",
       "name": "Eric Prydz",
-      "djmagUrl": "https://djmag.com/top100djs/2025/37/eric-prydz"
+      "djmagUrl": "https://djmag.com/top100djs/2025/37/eric-prydz",
+      "website": "https://www.ericprydz.com/",
+      "homeCity": "Sweden"
     },
     {
       "rank": 38,
       "slug": "amelie-lens",
       "name": "Amelie Lens",
-      "djmagUrl": "https://djmag.com/top100djs/2025/38/amelie-lens"
+      "djmagUrl": "https://djmag.com/top100djs/2025/38/amelie-lens",
+      "website": "https://www.amelielens.com/",
+      "homeCity": "Belgium"
     },
     {
       "rank": 39,
       "slug": "paul-van-dyk",
       "name": "Paul van Dyk",
-      "djmagUrl": "https://djmag.com/top100djs/2025/39/paul-van-dyk"
+      "djmagUrl": "https://djmag.com/top100djs/2025/39/paul-van-dyk",
+      "website": "https://www.paulvandyk.com/",
+      "homeCity": "Germany"
     },
     {
       "rank": 40,
       "slug": "dj-snake",
       "name": "DJ Snake",
-      "djmagUrl": "https://djmag.com/top100djs/2025/40/dj-snake"
+      "djmagUrl": "https://djmag.com/top100djs/2025/40/dj-snake",
+      "website": "https://djsnake.com/",
+      "homeCity": "France"
     },
     {
       "rank": 41,
       "slug": "dom-dolla",
       "name": "Dom Dolla",
-      "djmagUrl": "https://djmag.com/top100djs/2025/41/dom-dolla"
+      "djmagUrl": "https://djmag.com/top100djs/2025/41/dom-dolla",
+      "website": "https://domdolla.com.au/",
+      "homeCity": "Melbourne, Australia"
     },
     {
       "rank": 42,
       "slug": "marshmello",
       "name": "Marshmello",
-      "djmagUrl": "https://djmag.com/top100djs/2025/42/marshmello"
+      "djmagUrl": "https://djmag.com/top100djs/2025/42/marshmello",
+      "website": "https://marshmellomusic.com/",
+      "homeCity": "Philadelphia, USA"
     },
     {
       "rank": 43,
       "slug": "martinez-brothers",
       "name": "The Martinez Brothers",
-      "djmagUrl": "https://djmag.com/top100djs/2025/43/martinez-brothers"
+      "djmagUrl": "https://djmag.com/top100djs/2025/43/martinez-brothers",
+      "homeCity": "The Bronx, New York",
+      "website": "https://themartinezbrothers.com/"
     },
     {
       "rank": 44,
       "slug": "zedd",
       "name": "Zedd",
-      "djmagUrl": "https://djmag.com/top100djs/2025/44/zedd"
+      "djmagUrl": "https://djmag.com/top100djs/2025/44/zedd",
+      "website": "https://www.zedd.net/",
+      "homeCity": "Born in Russia, raised in Germany"
     },
     {
       "rank": 45,
       "slug": "bassjackers",
       "name": "Bassjackers",
-      "djmagUrl": "https://djmag.com/top100djs/2025/45/bassjackers"
+      "djmagUrl": "https://djmag.com/top100djs/2025/45/bassjackers",
+      "website": "https://www.bassjackers.com/",
+      "homeCity": "The Netherlands"
     },
     {
       "rank": 46,
       "slug": "john-summit",
       "name": "John Summit",
-      "djmagUrl": "https://djmag.com/top100djs/2025/46/john-summit"
+      "djmagUrl": "https://djmag.com/top100djs/2025/46/john-summit",
+      "website": "https://www.johnsummitmusic.com/",
+      "homeCity": "Chicago, IL"
     },
     {
       "rank": 47,
       "slug": "quintino",
       "name": "Quintino",
-      "djmagUrl": "https://djmag.com/top100djs/2025/47/quintino"
+      "djmagUrl": "https://djmag.com/top100djs/2025/47/quintino",
+      "website": "https://www.djquintino.com/",
+      "homeCity": "Amsterdam, Netherlands"
     },
     {
       "rank": 48,
       "slug": "michael-bibi",
       "name": "Michael Bibi",
-      "djmagUrl": "https://djmag.com/top100djs/2025/48/michael-bibi"
+      "djmagUrl": "https://djmag.com/top100djs/2025/48/michael-bibi",
+      "website": "https://www.michaelbibi.com/",
+      "homeCity": "UK"
     },
     {
       "rank": 49,
       "slug": "boris-brejcha",
       "name": "Boris Brejcha",
-      "djmagUrl": "https://djmag.com/top100djs/2025/49/boris-brejcha"
+      "djmagUrl": "https://djmag.com/top100djs/2025/49/boris-brejcha",
+      "website": "https://www.borisbrejcha.de/",
+      "homeCity": "Germany"
     },
     {
       "rank": 50,
       "slug": "korolova",
       "name": "Korolova",
-      "djmagUrl": "https://djmag.com/top100djs/2025/50/korolova"
+      "djmagUrl": "https://djmag.com/top100djs/2025/50/korolova",
+      "homeCity": "Ukraine"
     },
     {
       "rank": 51,
       "slug": "alesso",
       "name": "Alesso",
-      "djmagUrl": "https://djmag.com/top100djs/2025/51/alesso"
+      "djmagUrl": "https://djmag.com/top100djs/2025/51/alesso",
+      "website": "https://alessoworld.com/"
     },
     {
       "rank": 52,
       "slug": "james-hype",
       "name": "James Hype",
-      "djmagUrl": "https://djmag.com/top100djs/2025/52/james-hype"
+      "djmagUrl": "https://djmag.com/top100djs/2025/52/james-hype",
+      "website": "https://www.jameshype.com/",
+      "homeCity": "Liverpool, UK"
     },
     {
       "rank": 53,
       "slug": "maddix",
       "name": "Maddix",
-      "djmagUrl": "https://djmag.com/top100djs/2025/53/maddix"
+      "djmagUrl": "https://djmag.com/top100djs/2025/53/maddix",
+      "website": "https://maddixmusic.com/",
+      "homeCity": "Utrecht, Netherlands"
     },
     {
       "rank": 54,
       "slug": "hugel",
       "name": "HUGEL",
-      "djmagUrl": "https://djmag.com/top100djs/2025/54/hugel"
+      "djmagUrl": "https://djmag.com/top100djs/2025/54/hugel",
+      "website": "https://www.djhugel.com/",
+      "homeCity": "Marseille, France"
     },
     {
       "rank": 55,
       "slug": "solomun",
       "name": "Solomun",
-      "djmagUrl": "https://djmag.com/top100djs/2025/55/solomun"
+      "djmagUrl": "https://djmag.com/top100djs/2025/55/solomun",
+      "website": "https://solomun.org/",
+      "homeCity": "Bosnia / Germany"
     },
     {
       "rank": 56,
       "slug": "mochakk",
       "name": "Mochakk",
-      "djmagUrl": "https://djmag.com/top100djs/2025/56/mochakk"
+      "djmagUrl": "https://djmag.com/top100djs/2025/56/mochakk",
+      "website": "https://mochakk.com/",
+      "homeCity": "Brazil"
     },
     {
       "rank": 57,
       "slug": "lilly-palmer",
       "name": "Lilly Palmer",
-      "djmagUrl": "https://djmag.com/top100djs/2025/57/lilly-palmer"
+      "djmagUrl": "https://djmag.com/top100djs/2025/57/lilly-palmer",
+      "website": "https://www.beatport.com/artist/lilly-palmer/597345/",
+      "homeCity": "“Germany, living on the shores outside of Amsterdam.”"
     },
     {
       "rank": 58,
       "slug": "nora-en-pure",
       "name": "Nora En Pure",
-      "djmagUrl": "https://djmag.com/top100djs/2025/58/nora-en-pure"
+      "djmagUrl": "https://djmag.com/top100djs/2025/58/nora-en-pure",
+      "website": "https://www.noraenpure.com/"
     },
     {
       "rank": 59,
       "slug": "atb",
       "name": "ATB",
-      "djmagUrl": "https://djmag.com/top100djs/2025/59/atb"
+      "djmagUrl": "https://djmag.com/top100djs/2025/59/atb",
+      "website": "https://www.atb-music.com/",
+      "homeCity": "Germany"
     },
     {
       "rank": 60,
       "slug": "deborah-de-luca",
       "name": "Deborah De Luca",
-      "djmagUrl": "https://djmag.com/top100djs/2025/60/deborah-de-luca"
+      "djmagUrl": "https://djmag.com/top100djs/2025/60/deborah-de-luca",
+      "homeCity": "Italy",
+      "website": "https://deborahdeluca.it/"
     },
     {
       "rank": 61,
       "slug": "above-beyond",
       "name": "Above & Beyond",
-      "djmagUrl": "https://djmag.com/top100djs/2025/61/above-beyond"
+      "djmagUrl": "https://djmag.com/top100djs/2025/61/above-beyond",
+      "website": "https://www.aboveandbeyond.nu/",
+      "homeCity": "UK (Jono and Tony), Finland (Paavo)"
     },
     {
       "rank": 62,
       "slug": "sara-landry",
       "name": "Sara Landry",
-      "djmagUrl": "https://djmag.com/top100djs/2025/62/sara-landry"
+      "djmagUrl": "https://djmag.com/top100djs/2025/62/sara-landry",
+      "website": "https://www.saralandry.com/",
+      "homeCity": "Austin, TX, USA (based in Amsterdam, Netherlands)"
     },
     {
       "rank": 63,
       "slug": "nervo",
       "name": "Nervo",
-      "djmagUrl": "https://djmag.com/top100djs/2025/63/nervo"
+      "djmagUrl": "https://djmag.com/top100djs/2025/63/nervo",
+      "homeCity": "Australia"
     },
     {
       "rank": 64,
       "slug": "sub-zero-project",
       "name": "Sub Zero Project",
-      "djmagUrl": "https://djmag.com/top100djs/2025/64/sub-zero-project"
+      "djmagUrl": "https://djmag.com/top100djs/2025/64/sub-zero-project",
+      "website": "https://www.subzeroproject.com/",
+      "homeCity": "The Netherlands."
     },
     {
       "rank": 65,
       "slug": "kolsch",
-      "name": "K\u00f6lsch",
-      "djmagUrl": "https://djmag.com/top100djs/2025/65/kolsch"
+      "name": "Kölsch",
+      "djmagUrl": "https://djmag.com/top100djs/2025/65/kolsch",
+      "homeCity": "Denmark",
+      "website": "https://www.kolschofficial.com/"
     },
     {
       "rank": 66,
       "slug": "lucas-steve",
       "name": "Lucas & Steve",
-      "djmagUrl": "https://djmag.com/top100djs/2025/66/lucas-steve"
+      "djmagUrl": "https://djmag.com/top100djs/2025/66/lucas-steve",
+      "website": "https://www.lucasandsteve.com/",
+      "homeCity": "The Netherlands"
     },
     {
       "rank": 67,
       "slug": "nico-moreno",
       "name": "Nico Moreno",
-      "djmagUrl": "https://djmag.com/top100djs/2025/67/nico-moreno"
+      "djmagUrl": "https://djmag.com/top100djs/2025/67/nico-moreno",
+      "website": "https://www.nicomoreno.info/",
+      "homeCity": "Caen, France"
     },
     {
       "rank": 68,
       "slug": "gordo",
       "name": "GORDO",
-      "djmagUrl": "https://djmag.com/top100djs/2025/68/gordo"
+      "djmagUrl": "https://djmag.com/top100djs/2025/68/gordo",
+      "website": "https://www.gordomusic.com/"
     },
     {
       "rank": 69,
       "slug": "pawsa",
       "name": "PAWSA",
-      "djmagUrl": "https://djmag.com/top100djs/2025/69/pawsa"
+      "djmagUrl": "https://djmag.com/top100djs/2025/69/pawsa",
+      "homeCity": "UK",
+      "website": "https://www.pawsaofficial.com/"
     },
     {
       "rank": 70,
       "slug": "chainsmokers",
       "name": "The Chainsmokers",
-      "djmagUrl": "https://djmag.com/top100djs/2025/70/chainsmokers"
+      "djmagUrl": "https://djmag.com/top100djs/2025/70/chainsmokers",
+      "website": "https://thechainsmokers.com/"
     },
     {
       "rank": 71,
       "slug": "liu",
       "name": "Liu",
-      "djmagUrl": "https://djmag.com/top100djs/2025/71/liu"
+      "djmagUrl": "https://djmag.com/top100djs/2025/71/liu",
+      "homeCity": "São Paulo, Brazil"
     },
     {
       "rank": 72,
       "slug": "mike-williams",
       "name": "Mike Williams",
-      "djmagUrl": "https://djmag.com/top100djs/2025/72/mike-williams"
+      "djmagUrl": "https://djmag.com/top100djs/2025/72/mike-williams",
+      "homeCity": "Amsterdam"
     },
     {
       "rank": 73,
       "slug": "artbat",
       "name": "ARTBAT",
-      "djmagUrl": "https://djmag.com/top100djs/2025/73/artbat"
+      "djmagUrl": "https://djmag.com/top100djs/2025/73/artbat",
+      "website": "https://www.beatport.com/artist/artbat/499932/",
+      "homeCity": "Ukraine"
     },
     {
       "rank": 74,
       "slug": "kaaze",
       "name": "KAAZE",
-      "djmagUrl": "https://djmag.com/top100djs/2025/74/kaaze"
+      "djmagUrl": "https://djmag.com/top100djs/2025/74/kaaze",
+      "homeCity": "Sweden"
     },
     {
       "rank": 75,
       "slug": "miss-monique",
       "name": "Miss Monique",
-      "djmagUrl": "https://djmag.com/top100djs/2025/75/miss-monique"
+      "djmagUrl": "https://djmag.com/top100djs/2025/75/miss-monique",
+      "website": "https://missmoniquemusic.com/",
+      "homeCity": "Ukraine"
     },
     {
       "rank": 76,
       "slug": "burak-yeter",
       "name": "Burak Yeter",
-      "djmagUrl": "https://djmag.com/top100djs/2025/76/burak-yeter"
+      "djmagUrl": "https://djmag.com/top100djs/2025/76/burak-yeter",
+      "website": "https://burakyeter.com/",
+      "homeCity": "Turkey"
     },
     {
       "rank": 77,
@@ -469,139 +604,171 @@
       "rank": 78,
       "slug": "le-twins",
       "name": "Le Twins",
-      "djmagUrl": "https://djmag.com/top100djs/2025/78/le-twins"
+      "djmagUrl": "https://djmag.com/top100djs/2025/78/le-twins",
+      "homeCity": "Mexico"
     },
     {
       "rank": 79,
       "slug": "i-hate-models",
       "name": "I Hate Models",
-      "djmagUrl": "https://djmag.com/top100djs/2025/79/i-hate-models"
+      "djmagUrl": "https://djmag.com/top100djs/2025/79/i-hate-models",
+      "homeCity": "France"
     },
     {
       "rank": 80,
       "slug": "marnik",
       "name": "Marnik",
-      "djmagUrl": "https://djmag.com/top100djs/2025/80/marnik"
+      "djmagUrl": "https://djmag.com/top100djs/2025/80/marnik",
+      "homeCity": "Milan, Italy"
     },
     {
       "rank": 81,
       "slug": "chris-stussy",
       "name": "Chris Stussy",
-      "djmagUrl": "https://djmag.com/top100djs/2025/81/chris-stussy"
+      "djmagUrl": "https://djmag.com/top100djs/2025/81/chris-stussy",
+      "homeCity": "Amsterdam, The Netherlands"
     },
     {
       "rank": 82,
       "slug": "deadmau5",
       "name": "Deadmau5",
-      "djmagUrl": "https://djmag.com/top100djs/2025/82/deadmau5"
+      "djmagUrl": "https://djmag.com/top100djs/2025/82/deadmau5",
+      "website": "https://deadmau5.com/",
+      "homeCity": "Toronto, Canada"
     },
     {
       "rank": 83,
       "slug": "wukong",
       "name": "WUKONG",
-      "djmagUrl": "https://djmag.com/top100djs/2025/83/wukong"
+      "djmagUrl": "https://djmag.com/top100djs/2025/83/wukong",
+      "homeCity": "Singapore"
     },
     {
       "rank": 84,
       "slug": "fedde-le-grand",
       "name": "Fedde Le Grand",
-      "djmagUrl": "https://djmag.com/top100djs/2025/84/fedde-le-grand"
+      "djmagUrl": "https://djmag.com/top100djs/2025/84/fedde-le-grand",
+      "website": "https://feddelegrand.com/",
+      "homeCity": "The Netherlands"
     },
     {
       "rank": 85,
       "slug": "ferry-corsten",
       "name": "Ferry Corsten",
-      "djmagUrl": "https://djmag.com/top100djs/2025/85/ferry-corsten"
+      "djmagUrl": "https://djmag.com/top100djs/2025/85/ferry-corsten",
+      "website": "https://www.ferrycorsten.com/"
     },
     {
       "rank": 86,
       "slug": "plastik-funk",
       "name": "Plastik Funk",
-      "djmagUrl": "https://djmag.com/top100djs/2025/86/plastik-funk"
+      "djmagUrl": "https://djmag.com/top100djs/2025/86/plastik-funk",
+      "homeCity": "Spain / Germany"
     },
     {
       "rank": 87,
       "slug": "dubvision",
       "name": "DubVision",
-      "djmagUrl": "https://djmag.com/top100djs/2025/87/dubvision"
+      "djmagUrl": "https://djmag.com/top100djs/2025/87/dubvision",
+      "website": "https://dubvisionmusic.com/",
+      "homeCity": "The Netherlands"
     },
     {
       "rank": 88,
       "slug": "b-jones",
       "name": "B Jones",
-      "djmagUrl": "https://djmag.com/top100djs/2025/88/b-jones"
+      "djmagUrl": "https://djmag.com/top100djs/2025/88/b-jones",
+      "website": "https://bjonesdj.com/",
+      "homeCity": "Spain"
     },
     {
       "rank": 89,
       "slug": "giuseppe-ottaviani",
       "name": "Giuseppe Ottaviani",
-      "djmagUrl": "https://djmag.com/top100djs/2025/89/giuseppe-ottaviani"
+      "djmagUrl": "https://djmag.com/top100djs/2025/89/giuseppe-ottaviani",
+      "website": "https://www.giuseppeottaviani.com/",
+      "homeCity": "Rome, Italy"
     },
     {
       "rank": 90,
       "slug": "cuebrick",
       "name": "Cuebrick",
-      "djmagUrl": "https://djmag.com/top100djs/2025/90/cuebrick"
+      "djmagUrl": "https://djmag.com/top100djs/2025/90/cuebrick",
+      "homeCity": "Germany"
     },
     {
       "rank": 91,
       "slug": "mariana-bo",
       "name": "Mariana Bo",
-      "djmagUrl": "https://djmag.com/top100djs/2025/91/mariana-bo"
+      "djmagUrl": "https://djmag.com/top100djs/2025/91/mariana-bo",
+      "homeCity": "Culiacán, Sinaloa, Mexico"
     },
     {
       "rank": 92,
       "slug": "meduza",
       "name": "MEDUZA",
-      "djmagUrl": "https://djmag.com/top100djs/2025/92/meduza"
+      "djmagUrl": "https://djmag.com/top100djs/2025/92/meduza",
+      "website": "https://www.meduzamusic.net/",
+      "homeCity": "Italy"
     },
     {
       "rank": 93,
       "slug": "fantasm",
       "name": "Fantasm",
-      "djmagUrl": "https://djmag.com/top100djs/2025/93/fantasm"
+      "djmagUrl": "https://djmag.com/top100djs/2025/93/fantasm",
+      "homeCity": "Los Angeles, USA and based in Lyon, France"
     },
     {
       "rank": 94,
       "slug": "vinai",
       "name": "VINAI",
-      "djmagUrl": "https://djmag.com/top100djs/2025/94/vinai"
+      "djmagUrl": "https://djmag.com/top100djs/2025/94/vinai",
+      "website": "https://www.wearevinai.com/"
     },
     {
       "rank": 95,
       "slug": "chris-lake",
       "name": "Chris Lake",
-      "djmagUrl": "https://djmag.com/top100djs/2025/95/chris-lake"
+      "djmagUrl": "https://djmag.com/top100djs/2025/95/chris-lake",
+      "website": "https://www.chris-lake.com/",
+      "homeCity": "England (originally)"
     },
     {
       "rank": 96,
       "slug": "faustix",
       "name": "Faustix",
-      "djmagUrl": "https://djmag.com/top100djs/2025/96/faustix"
+      "djmagUrl": "https://djmag.com/top100djs/2025/96/faustix",
+      "homeCity": "Denmark"
     },
     {
       "rank": 97,
       "slug": "honey-dijon",
       "name": "Honey Dijon",
-      "djmagUrl": "https://djmag.com/top100djs/2025/97/honey-dijon"
+      "djmagUrl": "https://djmag.com/top100djs/2025/97/honey-dijon",
+      "homeCity": "Chicago"
     },
     {
       "rank": 98,
       "slug": "nils-van-zandt",
       "name": "Nils van Zandt",
-      "djmagUrl": "https://djmag.com/top100djs/2025/98/nils-van-zandt"
+      "djmagUrl": "https://djmag.com/top100djs/2025/98/nils-van-zandt",
+      "homeCity": "The Netherlands"
     },
     {
       "rank": 99,
       "slug": "topic",
       "name": "Topic",
-      "djmagUrl": "https://djmag.com/top100djs/2025/99/topic"
+      "djmagUrl": "https://djmag.com/top100djs/2025/99/topic",
+      "website": "https://www.topic-music.com/",
+      "homeCity": "Germany"
     },
     {
       "rank": 100,
       "slug": "marlon-hoffstadt",
       "name": "Marlon Hoffstadt",
-      "djmagUrl": "https://djmag.com/top100djs/2025/100/marlon-hoffstadt"
+      "djmagUrl": "https://djmag.com/top100djs/2025/100/marlon-hoffstadt",
+      "website": "https://marlonhoffstadt.com/",
+      "homeCity": "Berlin Schöneberg, Germany"
     }
   ]
 }

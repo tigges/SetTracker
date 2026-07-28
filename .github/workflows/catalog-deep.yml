@@ -130,8 +130,10 @@ jobs:
       - name: Verify social / website URLs (once)
         env:
           VERIFY_URLS_CURATED_ONLY: "0"
-          # Fill missing official club sites from DJ Mag profile pages.
+          # Fill missing official club / festival / DJ sites (DJ Mag + Wikidata).
           DJMAG_ENRICH_OFFICIAL: "1"
+          DJMAG_ENRICH_FESTIVALS: "1"
+          DJMAG_ENRICH_DJS: "1"
           DJMAG_OFFICIAL_LIMIT: "100"
         run: npm run verify-urls
 
