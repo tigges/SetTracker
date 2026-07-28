@@ -1,0 +1,58 @@
+name: Import catalog DB snapshot
+
+# Restore prisma/catalog-snapshot.db into the Actions cache and fast-deploy Pages.
+# Agents with working ACRCloud creds can enrich a downloaded catalog locally, commit
+# the snapshot, and merge — this workflow ships it without GHA ACRCloud secrets.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "prisma/catalog-snapshot.db"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: write
+
+concurrency:
+  group: catalog-db-import
+  cancel-in-progress: false
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install snapshot as catalog
+        run: |
+          if [ ! -f prisma/catalog-snapshot.db ]; then
+            echo "::error::Missing prisma/catalog-snapshot.db"
+            exit 1
+          fi
+          cp prisma/catalog-snapshot.db prisma/dev.db
+          SETS=$(python3 -c "import sqlite3; print(sqlite3.connect('prisma/dev.db').execute('select count(*) from \"Set\"').fetchone()[0])")
+          echo "Catalog sets=$SETS"
+          if [ "${SETS:-0}" -lt 50 ]; then
+            echo "::error::Snapshot too small ($SETS)."
+            exit 1
+          fi
+
+      - name: Save catalog DB
+        uses: actions/cache/save@v4
+        with:
+          path: prisma/dev.db
+          key: setradar-db-${{ github.run_id }}
+
+      - name: Trigger fast Pages deploy
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: 'deploy-pages.yml',
+              ref: context.ref,
+              inputs: { mode: 'fast' },
+            });
+            core.info('Dispatched Deploy to GitHub Pages (fast).');

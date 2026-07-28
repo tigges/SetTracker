@@ -1,0 +1,52 @@
+name: Export catalog DB
+
+# Lightweight: restore cached prisma/dev.db and upload as an artifact.
+# Trigger by bumping data/db-export-request on main (agents often lack workflow_dispatch).
+on:
+  push:
+    branches: [main]
+    paths:
+      - "data/db-export-request"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: write
+
+concurrency:
+  group: catalog-db-export
+  cancel-in-progress: true
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Restore catalog DB
+        uses: actions/cache/restore@v4
+        with:
+          path: prisma/dev.db
+          key: setradar-db-${{ github.run_id }}
+          restore-keys: |
+            setradar-db-
+
+      - name: Require catalog
+        run: |
+          if [ ! -f prisma/dev.db ]; then
+            echo "::error::No catalog DB in cache."
+            exit 1
+          fi
+          SETS=$(python3 -c "import sqlite3; print(sqlite3.connect('prisma/dev.db').execute('select count(*) from \"Set\"').fetchone()[0])")
+          echo "Catalog sets=$SETS"
+          if [ "${SETS:-0}" -lt 50 ]; then
+            echo "::error::Catalog too small ($SETS)."
+            exit 1
+          fi
+
+      - name: Upload catalog DB
+        uses: actions/upload-artifact@v4
+        with:
+          name: catalog-db
+          path: prisma/dev.db
+          retention-days: 5
