@@ -109,6 +109,18 @@ export const KNOWN_HANDLES: Record<string, HandleHint> = {
     genre: "Techno",
     accent: "#ff006e",
   },
+  "hannah wants": {
+    youtubeHandle: "@HannahWantsDJ",
+    soundcloudPermalink: "hannah_wants",
+    genre: "Tech House",
+    accent: "#ff4d8d",
+  },
+  "chris lorenzo": {
+    youtubeHandle: "@ChrisLorenzo",
+    soundcloudPermalink: "chris-lorenzo-1",
+    genre: "Tech House",
+    accent: "#ff6b35",
+  },
   pawsa: {
     youtubeHandle: "@PAWSA",
     soundcloudPermalink: "pawsa",

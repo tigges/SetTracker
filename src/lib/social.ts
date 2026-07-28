@@ -213,6 +213,127 @@ export const KNOWN_LABEL_SOCIALS: Record<
   "hell-beach": {
     soundcloud: "https://soundcloud.com/hellbeach",
   },
+  defected: {
+    website: "https://defected.com/",
+    soundcloud: "https://soundcloud.com/defectedrecords",
+    instagram: "https://www.instagram.com/defectedrecords/",
+  },
+  toolroom: {
+    website: "https://www.toolroomrecords.com/",
+    soundcloud: "https://soundcloud.com/toolroom",
+    instagram: "https://www.instagram.com/toolroom/",
+  },
+  "experts-only": {
+    website: "https://www.expertsonly.club/",
+    soundcloud: "https://soundcloud.com/expertsonly",
+    instagram: "https://www.instagram.com/expertsonly/",
+  },
+  expertonly: {
+    website: "https://www.expertsonly.club/",
+    soundcloud: "https://soundcloud.com/expertsonly",
+    instagram: "https://www.instagram.com/expertsonly/",
+  },
+  "hot-creations": {
+    website: "https://www.hotcreations.com/",
+    soundcloud: "https://soundcloud.com/hotcreations",
+    instagram: "https://www.instagram.com/hotcreations/",
+  },
+  hotcreations: {
+    website: "https://www.hotcreations.com/",
+    soundcloud: "https://soundcloud.com/hotcreations",
+    instagram: "https://www.instagram.com/hotcreations/",
+  },
+  "glitterbox-recordings": {
+    website: "https://glitterbox.com/",
+    soundcloud: "https://soundcloud.com/glitterbox",
+    instagram: "https://www.instagram.com/glitterbox/",
+  },
+  glitterbox: {
+    website: "https://glitterbox.com/",
+    soundcloud: "https://soundcloud.com/glitterbox",
+    instagram: "https://www.instagram.com/glitterbox/",
+  },
+  drumcode: {
+    website: "https://www.drumcode.se/",
+    soundcloud: "https://soundcloud.com/drumcode",
+    instagram: "https://www.instagram.com/drumcode/",
+  },
+  afterlife: {
+    website: "https://afterlife-label.com/",
+    soundcloud: "https://soundcloud.com/afterlifelabel",
+    instagram: "https://www.instagram.com/afterlife/",
+  },
+  anjunadeep: {
+    website: "https://www.anjunadeep.com/",
+    soundcloud: "https://soundcloud.com/anjunadeep",
+    instagram: "https://www.instagram.com/anjunadeep/",
+  },
+  anjunabeats: {
+    website: "https://www.anjunabeats.com/",
+    soundcloud: "https://soundcloud.com/anjunabeats",
+    instagram: "https://www.instagram.com/anjunabeats/",
+  },
+  diynamic: {
+    website: "https://www.diynamic.com/",
+    soundcloud: "https://soundcloud.com/diynamic",
+    instagram: "https://www.instagram.com/diynamic/",
+  },
+  innervisions: {
+    website: "https://www.innervisions.com/",
+    soundcloud: "https://soundcloud.com/innervisions",
+    instagram: "https://www.instagram.com/innervisions/",
+  },
+  "spinnin-records": {
+    website: "https://www.spinninrecords.com/",
+    soundcloud: "https://soundcloud.com/spinninrecords",
+    instagram: "https://www.instagram.com/spinninrecords/",
+  },
+  spinninrecords: {
+    website: "https://www.spinninrecords.com/",
+    soundcloud: "https://soundcloud.com/spinninrecords",
+    instagram: "https://www.instagram.com/spinninrecords/",
+  },
+  "musical-freedom": {
+    website: "https://www.musicalfreedom.com/",
+    soundcloud: "https://soundcloud.com/musicalfreedom",
+  },
+  "armada-music": {
+    website: "https://www.armadamusic.com/",
+    soundcloud: "https://soundcloud.com/armadamusic",
+  },
+  "mad-decent": {
+    website: "https://maddecent.com/",
+    soundcloud: "https://soundcloud.com/maddecent",
+    instagram: "https://www.instagram.com/maddecent/",
+  },
+  maddecent: {
+    website: "https://maddecent.com/",
+    soundcloud: "https://soundcloud.com/maddecent",
+    instagram: "https://www.instagram.com/maddecent/",
+  },
+  mau5trap: {
+    website: "https://mau5trap.com/",
+    soundcloud: "https://soundcloud.com/mau5trap",
+  },
+  deadbeats: {
+    website: "https://deadbeats.com/",
+    soundcloud: "https://soundcloud.com/deadbeatsofficial",
+  },
+  dftd: {
+    website: "https://defected.com/",
+    soundcloud: "https://soundcloud.com/dftd",
+  },
+  "solid-grooves": {
+    soundcloud: "https://soundcloud.com/solidgrooves",
+    instagram: "https://www.instagram.com/solidgrooves/",
+  },
+  rekids: {
+    soundcloud: "https://soundcloud.com/rekids",
+  },
+  "nervous-records": {
+    website: "https://www.nervousny.com/",
+    soundcloud: "https://soundcloud.com/nervousrecords",
+  },
 };
 
 export function labelSocials(name: string): {

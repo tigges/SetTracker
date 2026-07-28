@@ -16,6 +16,10 @@ describe("curatedLabels", () => {
 
   it("includes seed staples and Beatstats imprints", () => {
     assert.ok(CURATED_LABEL_SLUGS.has("nightbass"));
+    assert.ok(CURATED_LABEL_SLUGS.has("defected"));
+    assert.ok(CURATED_LABEL_SLUGS.has("toolroom"));
+    assert.ok(CURATED_LABEL_SLUGS.has("experts-only"));
+    assert.ok(CURATED_LABEL_SLUGS.has("anjunadeep"));
     assert.ok(CURATED_LABEL_SLUGS.has("crosstown-rebels"));
     assert.ok(CURATED_LABEL_SLUGS.has("moblack-records"));
     assert.ok(CURATED_LABEL_SLUGS.has("steel-city-dance-discs"));

@@ -559,8 +559,10 @@ export const ARTIST_ROSTER_CURATED: ArtistRosterEntry[] = [
   },
   {
     name: "Chris Lorenzo",
-    genre: "Bass House",
+    // Songstats tags: Tech House (+ House / Electronic / EDM / Club)
+    genre: "Tech House",
     accent: "#ff6b35",
+    homeCity: "UK",
     youtube: { handle: "@ChrisLorenzo", status: "ok" },
     soundcloud: {
       permalink: "chris-lorenzo-1",
@@ -576,6 +578,28 @@ export const ARTIST_ROSTER_CURATED: ArtistRosterEntry[] = [
       "https://open.spotify.com/artist/7tm9Tuc70geXOOyKhtZHIj",
       "https://soundcloud.com/chris-lorenzo-1",
       "https://www.youtube.com/@ChrisLorenzo",
+    ],
+    priority: "high",
+  },
+  {
+    name: "Hannah Wants",
+    genre: "Tech House",
+    accent: "#ff4d8d",
+    homeCity: "UK",
+    youtube: { handle: "@HannahWantsDJ", status: "ok" },
+    soundcloud: {
+      permalink: "hannah_wants",
+      userId: 72049,
+      status: "ok",
+    },
+    socials: [
+      "https://www.instagram.com/hannah_wants/",
+      "https://x.com/hannah_wants",
+      "https://www.facebook.com/hannahwantsdj",
+      "https://soundcloud.com/hannah_wants",
+      "https://www.youtube.com/@HannahWantsDJ",
+      "https://open.spotify.com/artist/7sK4hnuUOXw6VStDw0q8NI",
+      "https://www.beatport.com/artist/hannah-wants/194849",
     ],
     priority: "high",
   },
