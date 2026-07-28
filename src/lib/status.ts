@@ -62,7 +62,7 @@ export const PROVENANCE_META: Record<
   hearthis: { label: "hearthis.at parse", short: "hearthis" },
   youtube: { label: "YouTube parse", short: "YouTube" },
   bandcamp: { label: "Bandcamp", short: "Bandcamp" },
-  insomniac: { label: "Insomniac NOR", short: "Insomniac" },
+  insomniac: { label: "Insomniac", short: "Insomniac" },
   fingerprint: { label: "Fingerprint", short: "Fingerprint" },
   community: { label: "Community", short: "Community" },
 };

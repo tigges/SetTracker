@@ -107,6 +107,49 @@ export const KNOWN_EVENTS: Record<string, CanonicalEvent> = {
     kind: "livestream",
     website: "https://www.insomniac.com/",
   },
+  "nocturnal-wonderland": {
+    slug: "nocturnal-wonderland",
+    name: "Nocturnal Wonderland",
+    kind: "festival",
+    location: "San Bernardino, CA",
+    website: "https://nocturnalwonderland.com/",
+  },
+  "beyond-wonderland": {
+    slug: "beyond-wonderland",
+    name: "Beyond Wonderland",
+    kind: "festival",
+    location: "San Bernardino, CA",
+    website: "https://beyondwonderland.com/",
+  },
+  "escape-halloween": {
+    slug: "escape-halloween",
+    name: "Escape Halloween",
+    kind: "festival",
+    location: "San Bernardino, CA",
+    website: "https://escapepsychocircus.com/",
+  },
+  dreamstate: {
+    slug: "dreamstate",
+    name: "Dreamstate",
+    kind: "festival",
+    location: "Los Angeles, CA",
+    website: "https://dreamstate.eu/",
+  },
+  "countdown-nye": {
+    slug: "countdown-nye",
+    name: "Countdown NYE",
+    kind: "festival",
+    location: "San Bernardino, CA",
+    website: "https://countdownnye.com/",
+  },
+  djoon: {
+    slug: "djoon",
+    name: "Djoon",
+    kind: "club",
+    location: "Paris, France",
+    website: "https://shotgun.live/venues/djoonclub",
+    instagram: "https://www.instagram.com/djoonclub/",
+  },
   defected: {
     slug: "defected",
     name: "Defected",
@@ -153,6 +196,20 @@ const ALIAS_TO_SLUG: Record<string, string> = {
   "ushuaiaibiza": "ushuaia-ibiza",
   stereohype: "stereohype",
   "stereo-hype": "stereohype",
+  nocturnal: "nocturnal-wonderland",
+  "nocturnal-wonderland": "nocturnal-wonderland",
+  beyond: "beyond-wonderland",
+  "beyond-wonderland": "beyond-wonderland",
+  "beyond-wonderland-socal": "beyond-wonderland",
+  escape: "escape-halloween",
+  "escape-halloween": "escape-halloween",
+  dreamstate: "dreamstate",
+  "dreamstate-socal": "dreamstate",
+  countdown: "countdown-nye",
+  "countdown-nye": "countdown-nye",
+  djoon: "djoon",
+  djøøn: "djoon",
+  "djoon-club": "djoon",
 };
 
 function keyOf(name: string): string {
@@ -210,11 +267,23 @@ export function inferFestivalEvent(title: string): CanonicalEvent | null {
   if (/\btomorrowland\b/i.test(t)) return KNOWN_EVENTS.tomorrowland;
   if (/\bcoachella\b/i.test(t)) return KNOWN_EVENTS.coachella;
   if (/\blollapalooza\b/i.test(t)) return KNOWN_EVENTS.lollapalooza;
+  if (/\bnocturnal\s*wonderland\b/i.test(t)) {
+    return KNOWN_EVENTS["nocturnal-wonderland"];
+  }
+  if (/\bbeyond\s*wonderland\b/i.test(t)) {
+    return KNOWN_EVENTS["beyond-wonderland"];
+  }
+  if (/\bescape(\s*halloween|\s*psycho)?\b/i.test(t)) {
+    return KNOWN_EVENTS["escape-halloween"];
+  }
+  if (/\bdreamstate\b/i.test(t)) return KNOWN_EVENTS.dreamstate;
+  if (/\bcountdown(\s*nye)?\b/i.test(t)) return KNOWN_EVENTS["countdown-nye"];
   if (/\bboiler\s*room\b/i.test(t)) return KNOWN_EVENTS["boiler-room"];
   if (/\bcercle\b/i.test(t)) return KNOWN_EVENTS.cercle;
   // Prefer curated Ushuaïa socials over DJ Mag profile URL.
   if (/\bushua[iï]a\b/i.test(t)) return KNOWN_EVENTS["ushuaia-ibiza"];
   if (/\bstereo\s*hype\b/i.test(t)) return KNOWN_EVENTS.stereohype;
+  if (/\bdjoon\b|\bdjøøn\b/i.test(t)) return KNOWN_EVENTS.djoon;
   return inferDjMagClubEvent(t) ?? inferListClubEvent(t);
 }
 

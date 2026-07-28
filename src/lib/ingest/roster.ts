@@ -19,7 +19,8 @@ export type ArtistRosterEntry = {
   youtube?: { handle: string; status: HandleStatus; note?: string };
   soundcloud?: {
     permalink: string;
-    userId: number;
+    /** Optional — filled when known; adapters can resolve by permalink. */
+    userId?: number;
     status: HandleStatus;
     note?: string;
   };
@@ -216,6 +217,52 @@ export const ARTIST_ROSTER_CURATED: ArtistRosterEntry[] = [
       "https://www.youtube.com/@WalkerAndRoyce",
     ],
     priority: "high",
+  },
+  {
+    name: "Hot Since 82",
+    genre: "Tech House",
+    accent: "#e9c46a",
+    homeCity: "Leeds, UK",
+    youtube: { handle: "@HotSince82", status: "ok" },
+    soundcloud: { permalink: "hotsince-82", userId: 5646032, status: "ok" },
+    website: "https://hotsince82.com",
+    socials: [
+      "https://hotsince82.com",
+      "https://www.facebook.com/hotsince82",
+      "https://x.com/hotsince82",
+      "https://soundcloud.com/hotsince-82",
+      "https://www.beatport.com/artist/hot-since-82/212422",
+      "https://www.youtube.com/@HotSince82",
+    ],
+    priority: "high",
+  },
+  {
+    name: "Adam Beyer",
+    genre: "Techno",
+    accent: "#111111",
+    youtube: { handle: "@adambeyer", status: "ok" },
+    socials: [
+      "https://www.instagram.com/realadambeyer/",
+      "https://www.tiktok.com/@adamdrumcodebeyer",
+      "https://open.spotify.com/artist/1btv9qmIpbp7q1ixCYNdHu",
+      "https://www.youtube.com/@adambeyer",
+    ],
+    priority: "high",
+  },
+  {
+    name: "DIJON",
+    genre: "House",
+    accent: "#f4a261",
+    youtube: { handle: "@dijon", status: "ok" },
+    website: "https://dijondijon.com",
+    socials: [
+      "https://dijondijon.com",
+      "https://www.instagram.com/dijondijon_/",
+      "https://x.com/dijondijon_",
+      "https://www.youtube.com/@dijon",
+      "https://www.youtube.com/c/DIJONDIJON",
+    ],
+    priority: "normal",
   },
   {
     name: "Max Styler",

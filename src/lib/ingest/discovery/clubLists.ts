@@ -68,6 +68,8 @@ const SLUG_ALIASES: Record<string, string> = {
   "es-paradis": "es-paradis",
   "lio-ibiza": "lio-ibiza",
   "cova-santa": "cova-santa",
+  djoon: "djoon",
+  "djoon-club": "djoon",
 };
 
 export const CLUB_LIST_SOURCES: ClubListSource[] = [
