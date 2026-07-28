@@ -50,6 +50,10 @@ export function youtubeChannelUrl(handleOrUrl: string): string | null {
     }
   }
   const handle = raw.replace(/^@/, "");
+  // Bare YouTube channel IDs (UC + 22 chars) are not @handles.
+  if (/^UC[\w-]{22}$/.test(handle)) {
+    return `https://www.youtube.com/channel/${handle}`;
+  }
   if (!/^[A-Za-z0-9._-]{2,}$/.test(handle)) return null;
   return `https://www.youtube.com/@${handle}`;
 }

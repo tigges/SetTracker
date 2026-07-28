@@ -1,6 +1,6 @@
 {
   "name": "setradar",
-  "version": "0.2.34",
+  "version": "0.2.35",
   "private": true,
   "prisma": {
     "seed": "tsx prisma/seed.ts"
@@ -29,7 +29,8 @@
     "crosscheck:set-density": "tsx scripts/crosscheck-set-density.ts",
     "enrich:djmag-sites": "tsx scripts/enrich-djmag-official-sites.ts",
     "enrich:djmag-festivals": "tsx scripts/enrich-djmag-festivals.ts",
-    "enrich:djmag-djs": "tsx scripts/enrich-djmag-djs.ts"
+    "enrich:djmag-djs": "tsx scripts/enrich-djmag-djs.ts",
+    "audit:top100": "tsx scripts/audit-top100-coverage.ts"
   },
   "dependencies": {
     "@prisma/client": "^6.19.3",
