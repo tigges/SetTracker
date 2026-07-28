@@ -178,11 +178,15 @@ function envEnabled(): boolean {
   return process.env.ACRCLOUD_ENABLED === "1";
 }
 
+function cred(name: string): string {
+  return (process.env[name] ?? "").trim();
+}
+
 function hasCredentials(): boolean {
   return Boolean(
-    process.env.ACRCLOUD_HOST &&
-      process.env.ACRCLOUD_ACCESS_KEY &&
-      process.env.ACRCLOUD_ACCESS_SECRET,
+    cred("ACRCLOUD_HOST") &&
+      cred("ACRCLOUD_ACCESS_KEY") &&
+      cred("ACRCLOUD_ACCESS_SECRET"),
   );
 }
 
@@ -481,9 +485,13 @@ export async function acrIdentify(
   sample: Buffer,
   opts?: { host?: string; accessKey?: string; accessSecret?: string },
 ): Promise<AcrIdentifyResult> {
-  const host = opts?.host ?? process.env.ACRCLOUD_HOST;
-  const accessKey = opts?.accessKey ?? process.env.ACRCLOUD_ACCESS_KEY;
-  const accessSecret = opts?.accessSecret ?? process.env.ACRCLOUD_ACCESS_SECRET;
+  const host = (opts?.host ?? cred("ACRCLOUD_HOST")).replace(
+    /^https?:\/\//,
+    "",
+  );
+  const accessKey = opts?.accessKey?.trim() ?? cred("ACRCLOUD_ACCESS_KEY");
+  const accessSecret =
+    opts?.accessSecret?.trim() ?? cred("ACRCLOUD_ACCESS_SECRET");
   if (!host || !accessKey || !accessSecret) {
     return { ok: false, error: "missing credentials" };
   }
