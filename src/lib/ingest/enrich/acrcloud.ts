@@ -36,6 +36,7 @@
 
 import { createHmac } from "node:crypto";
 import { execFile } from "node:child_process";
+import { existsSync, readFileSync } from "node:fs";
 import { mkdtemp, readFile, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -50,7 +51,9 @@ import {
   parseHearthisUrl,
   type HtTrack,
 } from "../hearthis/client";
+import { ARTIST_ROSTER } from "../roster";
 import { getSoundCloudClientId, scGet, type ScTrack } from "../soundcloud/client";
+import { slugify } from "../types";
 
 const execFileAsync = promisify(execFile);
 
@@ -98,7 +101,58 @@ export type SparseSetCandidate = {
   host: PlaybackHost;
   identifiedStrong: number;
   playCount: number;
+  /** Unresolved ID rows on this set (comment/description IDs). */
+  unresolvedCount: number;
+  /**
+   * Demand proxy: lower = hotter. DJ Mag Top 100 rank (1–100), or 50 for
+   * roster `priority: "high"`, else 999.
+   */
+  popularityRank: number;
 };
+
+/** DJ Mag Top 100 slug → rank (demand proxy until we have real viewership). */
+export function loadDjMagTop100RankBySlug(): Map<string, number> {
+  const path = join(
+    process.cwd(),
+    "data",
+    "artist-seeds",
+    "djmag-top100-djs-2025.json",
+  );
+  const out = new Map<string, number>();
+  if (!existsSync(path)) return out;
+  try {
+    const raw = JSON.parse(readFileSync(path, "utf8")) as {
+      djs?: Array<{ slug?: string; rank?: number }>;
+    };
+    for (const d of raw.djs ?? []) {
+      if (d.slug && typeof d.rank === "number") out.set(d.slug, d.rank);
+    }
+  } catch {
+    /* ignore */
+  }
+  return out;
+}
+
+function rosterHighPrioritySlugs(): Set<string> {
+  const out = new Set<string>();
+  for (const a of ARTIST_ROSTER) {
+    if (a.priority === "high") out.add(slugify(a.name));
+  }
+  return out;
+}
+
+/** Popularity rank for a primary DJ slug (1 = hottest). */
+export function popularityRankForDjSlug(
+  slug: string | null | undefined,
+  top100: Map<string, number>,
+  rosterHigh: Set<string>,
+): number {
+  if (!slug) return 999;
+  const chart = top100.get(slug);
+  if (chart != null) return chart;
+  if (rosterHigh.has(slug)) return 50;
+  return 999;
+}
 
 export type ExistingPlayMark = {
   timestamp: number;
@@ -498,7 +552,8 @@ export async function acrIdentify(
 
 /**
  * Sets that are good fingerprint candidates: have playback, thin tracklist.
- * Prefers SoundCloud / hearthis over YouTube.
+ * Prefers SoundCloud / hearthis over YouTube, then DJ Mag Top 100 / roster
+ * demand, then worst density / most unresolved IDs.
  */
 export async function selectSparseSetsForFingerprint(
   prisma: PrismaClient,
@@ -508,6 +563,8 @@ export async function selectSparseSetsForFingerprint(
   const minIdentified =
     opts.minIdentifiedToSkip ?? numEnv("ACRCLOUD_MIN_IDENTIFIED", 4);
   const allowYoutube = opts.allowYoutube ?? boolEnv("ACRCLOUD_ALLOW_YOUTUBE");
+  const top100 = loadDjMagTop100RankBySlug();
+  const rosterHigh = rosterHighPrioritySlugs();
 
   const rows = await prisma.set.findMany({
     where: {
@@ -522,8 +579,13 @@ export async function selectSparseSetsForFingerprint(
       plays: {
         select: { idStatus: true, provenance: true },
       },
+      artists: {
+        where: { isPrimary: true },
+        take: 1,
+        select: { dj: { select: { slug: true } } },
+      },
     },
-    take: 400,
+    take: 500,
   });
 
   const candidates: SparseSetCandidate[] = [];
@@ -539,13 +601,18 @@ export async function selectSparseSetsForFingerprint(
         (p.idStatus === "identified" || p.idStatus === "community_resolved") &&
         STRONG_PROVENANCE.has(p.provenance),
     ).length;
+    const unresolvedCount = row.plays.filter(
+      (p) => p.idStatus === "unresolved_id",
+    ).length;
     // Duration-aware skip: a 2h set with 4 IDs is still sparse (~2/h).
+    // Keep sets that still have unresolved IDs even if density looks ok.
     const expectedFloor = Math.max(
       minIdentified,
       Math.floor(row.durationSec / (8 * 60)), // at least ~7.5 tracks/hour identified
     );
-    if (identifiedStrong >= expectedFloor) continue;
+    if (identifiedStrong >= expectedFloor && unresolvedCount === 0) continue;
 
+    const primarySlug = row.artists[0]?.dj.slug;
     candidates.push({
       id: row.id,
       slug: row.slug,
@@ -554,24 +621,37 @@ export async function selectSparseSetsForFingerprint(
       host,
       identifiedStrong,
       playCount: row.plays.length,
+      unresolvedCount,
+      popularityRank: popularityRankForDjSlug(primarySlug, top100, rosterHigh),
     });
   }
 
-  candidates.sort((a, b) => {
-    const ha = HOST_PREF[a.host] - HOST_PREF[b.host];
-    if (ha !== 0) return ha;
-    // Prefer worst density first (fewest plays per hour of audio).
-    const densA = a.playCount / Math.max(a.durationSec, 1);
-    const densB = b.playCount / Math.max(b.durationSec, 1);
-    if (densA !== densB) return densA - densB;
-    if (a.identifiedStrong !== b.identifiedStrong) {
-      return a.identifiedStrong - b.identifiedStrong;
-    }
-    if (a.playCount !== b.playCount) return a.playCount - b.playCount;
-    return b.durationSec - a.durationSec;
-  });
+  candidates.sort(compareSparseSetCandidates);
 
   return candidates.slice(0, setLimit);
+}
+
+/** Sort: host → Top 100/roster demand → unresolved cues → density. */
+export function compareSparseSetCandidates(
+  a: SparseSetCandidate,
+  b: SparseSetCandidate,
+): number {
+  const ha = HOST_PREF[a.host] - HOST_PREF[b.host];
+  if (ha !== 0) return ha;
+  if (a.popularityRank !== b.popularityRank) {
+    return a.popularityRank - b.popularityRank;
+  }
+  if (a.unresolvedCount !== b.unresolvedCount) {
+    return b.unresolvedCount - a.unresolvedCount;
+  }
+  const densA = a.playCount / Math.max(a.durationSec, 1);
+  const densB = b.playCount / Math.max(b.durationSec, 1);
+  if (densA !== densB) return densA - densB;
+  if (a.identifiedStrong !== b.identifiedStrong) {
+    return a.identifiedStrong - b.identifiedStrong;
+  }
+  if (a.playCount !== b.playCount) return a.playCount - b.playCount;
+  return b.durationSec - a.durationSec;
 }
 
 async function upsertFingerprintTrack(
@@ -685,24 +765,102 @@ async function enrichOneSet(
       genre: true,
       durationSec: true,
       plays: {
-        select: { timestamp: true, provenance: true, idStatus: true },
+        select: {
+          id: true,
+          timestamp: true,
+          provenance: true,
+          idStatus: true,
+          idTrackId: true,
+        },
       },
     },
   });
   if (!set) return { probed: 0, identified: 0, unresolved: 0 };
 
-  const marks: ExistingPlayMark[] = [...set.plays];
+  const marks: ExistingPlayMark[] = set.plays.map((p) => ({
+    timestamp: p.timestamp,
+    provenance: p.provenance,
+    idStatus: p.idStatus,
+  }));
   const half = Math.max(30, Math.floor(opts.stepSec / 2));
+
+  let probed = 0;
+  let identified = 0;
+  let unresolved = 0;
+
+  // 1) Resolve existing unresolved_id cues at their timestamps (Top 100 path).
+  const unresolvedPlays = set.plays
+    .filter((p) => p.idStatus === "unresolved_id")
+    .sort((a, b) => a.timestamp - b.timestamp)
+    .slice(0, 8);
+  for (const play of unresolvedPlays) {
+    const clip = await sampleClipFromStream(
+      stream.streamUrl,
+      play.timestamp,
+      opts.sampleSec,
+    );
+    if (!clip) continue;
+    probed += 1;
+    const result = await acrIdentify(clip);
+    if (!result.ok) {
+      console.warn(
+        `[acrcloud] resolve fail ${candidate.slug}@${play.timestamp}: ${result.error}`,
+      );
+      continue;
+    }
+    if (!result.hit || result.hit.score < opts.minScore) {
+      unresolved += 1;
+      continue;
+    }
+    identified += 1;
+    if (!opts.dryRun) {
+      const trackId = await upsertFingerprintTrack(
+        prisma,
+        result.hit,
+        set.genre,
+      );
+      if (play.idTrackId) {
+        await prisma.idTrack.update({
+          where: { id: play.idTrackId },
+          data: {
+            status: "community_resolved",
+            resolvedTrackId: trackId,
+            note: `ACRCloud score ${result.hit.score}: ${result.hit.artist} - ${result.hit.title}`,
+          },
+        });
+      }
+      await prisma.played.update({
+        where: { id: play.id },
+        data: {
+          idStatus: "identified",
+          provenance: "fingerprint",
+          trackId,
+          rawText: `${result.hit.artist} - ${result.hit.title} (acr resolve ${result.hit.score})`,
+        },
+      });
+      console.log(
+        `[acrcloud] resolved ${candidate.slug}@${fmtTimestamp(play.timestamp)} → ${result.hit.artist} - ${result.hit.title}`,
+      );
+    } else {
+      console.log(
+        `[acrcloud] dry-run resolve ${candidate.slug}@${play.timestamp}: ${result.hit.artist} - ${result.hit.title} (${result.hit.score})`,
+      );
+    }
+    // Treat as identified so gap probes don't re-hit the same window.
+    marks.push({
+      timestamp: play.timestamp,
+      provenance: "fingerprint",
+      idStatus: "identified",
+    });
+  }
+
+  // 2) Gap-fill probes on the step grid.
   const plans = planGapProbes(
     set.durationSec,
     marks,
     opts.stepSec,
     opts.sampleSec,
   ).filter((p) => p.isGap);
-
-  let probed = 0;
-  let identified = 0;
-  let unresolved = 0;
 
   for (const plan of plans) {
     // Skip if an earlier probe in this run already filled nearby.
@@ -869,7 +1027,8 @@ export async function enrichSparseSetsWithAcrCloud(
   for (const c of candidates) {
     if (setsWithStream >= setLimit) break;
     console.log(
-      `[acrcloud] probing ${c.slug} (${c.host}, ${c.identifiedStrong} strong IDs, ${c.playCount} plays)`,
+      `[acrcloud] probing ${c.slug} (${c.host}, pop=#${c.popularityRank}, ` +
+        `${c.identifiedStrong} strong, ${c.unresolvedCount} unresolved, ${c.playCount} plays)`,
     );
     const before = probed;
     const r = await enrichOneSet(prisma, c, {
