@@ -1,7 +1,8 @@
 /**
- * Parse Insomniac Night Owl Radio accordion tracklists:
+ * Parse Insomniac music-page accordion tracklists:
  *   <b>Artist</b> "Title"
- *   <b>Artist</b> "Title" (Remix Credit)
+ *   <strong>Artist</strong> "Title" (Remix Credit)
+ *   <strong>Artist</strong> – ID …
  *
  * Guest-section headers like <b>D.O.D Guest Mix</b> (no quoted title) are skipped.
  */
@@ -27,7 +28,6 @@ export type InsomniacTrackRow = { artistName: string; trackTitle: string };
 
 function isSectionHeader(artistName: string, trackTitle: string): boolean {
   if (!trackTitle) return true;
-  // "<b>Loofy - Up All Night</b>" style guest headers sometimes get empty titles
   if (/guest\s*mix$/i.test(artistName)) return true;
   if (/^up all night$/i.test(trackTitle) && /-/i.test(artistName)) return true;
   return false;
@@ -48,13 +48,13 @@ export function parseInsomniacTrackRows(html: string): InsomniacTrackRow[] {
     .replace(/\u00a0/g, " ");
 
   const rows: InsomniacTrackRow[] = [];
-  // Do not let artist capture cross </b> boundaries (guest headers + next row).
+  // <b> or <strong>; curly/straight quotes; optional remix paren or en-dash ID line.
   const re =
-    /<b>((?:(?!<\/b>)[\s\S])*?)<\/b>\s*[“"]([^”"]+)[”"](?:\s*(\([^)]+\)))?/gi;
+    /<(?:b|strong)>((?:(?!<\/(?:b|strong)>)[\s\S])*?)<\/(?:b|strong)>\s*(?:[“"]([^”"]+)[”"](?:\s*(\([^)]+\)))?|[–—-]\s*([^<\n]{1,180}))/gi;
   let m: RegExpExecArray | null;
   while ((m = re.exec(normalized))) {
     const artistName = decodeEntities(m[1] ?? "");
-    let trackTitle = decodeEntities(m[2] ?? "");
+    let trackTitle = decodeEntities(m[2] ?? m[4] ?? "");
     const remix = decodeEntities(m[3] ?? "");
     if (remix && !trackTitle.includes(remix)) {
       trackTitle = `${trackTitle} ${remix}`.trim();

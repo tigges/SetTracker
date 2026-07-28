@@ -105,8 +105,10 @@ jobs:
           YOUTUBE_SHELF_VIDEO_CAP: "8"
           YOUTUBE_SIMILAR_CHANNEL_CAP: "12"
           SOUNDCLOUD_ARTIST_TRACK_LIMIT: "40"
-          INSOMNIAC_NOR_MAX: "40"
-          INSOMNIAC_NOR_LIST_PAGES: "8"
+          INSOMNIAC_NOR_MAX: "60"
+          INSOMNIAC_NOR_LIST_PAGES: "10"
+          INSOMNIAC_MIXES_MAX: "30"
+          INSOMNIAC_MIXES_LIST_PAGES: "4"
           DISCOVERY_PROMOTE_SCORE: "28"
           DISCOVERY_PROMOTE_CAP: "48"
         run: npm run ingest

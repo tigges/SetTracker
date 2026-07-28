@@ -33,6 +33,10 @@ export function isJunkArtistName(name: string): boolean {
     return true;
   }
   if (/^\d{1,2}[.\/-]\d{1,2}[.\/-]\d{2,4}$/.test(n)) return true;
+  // Clubs / venues that must never become Dj rows (see KNOWN_EVENTS.djoon).
+  if (/^dj[øöo]{1,2}n$/i.test(n.normalize("NFKD").replace(/[\u0300-\u036f]/g, ""))) {
+    return true;
+  }
   return false;
 }
 

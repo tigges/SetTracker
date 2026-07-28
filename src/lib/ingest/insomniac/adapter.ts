@@ -7,9 +7,14 @@
  * Discovery prefers the Insomniac NOR listing (pages that actually publish
  * tracklists). SoundCloud @insomniacevents fills duration / newer slugs when
  * the matching Insomniac page exists.
+ *
+ * Festival mega-mix episodes (Nocturnal / Escape / HARD / Dreamstate / …)
+ * are the primary “festival tracklist” source on Insomniac — video pages are
+ * mostly aftermovies without cue sheets.
  */
 
 import { splitArtistCredit } from "../artists";
+import { inferFestivalEvent } from "../events";
 import { hashRawSetContent } from "../hash";
 import {
   resolveUser,
@@ -23,22 +28,26 @@ import {
   parseDescriptionTracklist,
 } from "../soundcloud/parseTracklist";
 import { slugify, type RawArtist, type RawSet, type SourceAdapter } from "../types";
+import {
+  INSOMNIAC_ACCENT,
+  fetchInsomniacHtml,
+  fetchMusicSectionSlugs,
+  insomniacMusicUrl,
+  publishedAtFromInsomniacHtml,
+  titleFromInsomniacHtml,
+} from "./client";
 import { parseInsomniacTrackRows, rowsToPlays } from "./parseTracklist";
 
-const UA =
-  "Mozilla/5.0 (compatible; SetRadar/0.2; +https://setradar.ai; insomniac-nor)";
-const LISTING = "https://www.insomniac.com/music/night-owl-radio/";
-const LOAD_MORE = "https://www.insomniac.com/wp-admin/admin-ajax.php";
+const ACCENT = INSOMNIAC_ACCENT;
 const SC_USER = "insomniacevents";
-const ACCENT = "#e10600";
 
 /** Max NOR sets per ingest run (Pages build budget). */
 export function norMax(): number {
-  return Math.max(1, Number(process.env.INSOMNIAC_NOR_MAX || 40));
+  return Math.max(1, Number(process.env.INSOMNIAC_NOR_MAX || 60));
 }
 /** How many Load More pages to pull beyond the first listing (~24 eps each). */
 export function norListPages(): number {
-  return Math.max(1, Number(process.env.INSOMNIAC_NOR_LIST_PAGES || 6));
+  return Math.max(1, Number(process.env.INSOMNIAC_NOR_LIST_PAGES || 8));
 }
 
 /**
@@ -52,6 +61,7 @@ export const INSOMNIAC_NOR_PRIORITY_SLUGS = [
   "night-owl-radio-481-ft-countdown-nye-2024-mega-mix",
   "night-owl-radio-469-ft-escape-halloween-2024-mega-mix",
   "night-owl-radio-464-ft-hard-summer-2024-mega-mix",
+  "night-owl-radio-395-ft-beyond-wonderland-socal-2023-mega-mix",
 ];
 
 function durationSecOf(track: ScTrack): number {
@@ -65,10 +75,6 @@ function isNightOwlTrack(track: ScTrack): boolean {
   return /night-owl-radio/i.test(perm) || /night\s*owl\s*radio/i.test(title);
 }
 
-function insomniacPageUrl(slug: string): string {
-  return `https://www.insomniac.com/music/${slug.replace(/\/$/, "")}/`;
-}
-
 function guestsFromTitle(title: string): {
   primary: RawArtist;
   collaborators: RawArtist[];
@@ -80,7 +86,6 @@ function guestsFromTitle(title: string): {
       collaborators: [],
     };
   }
-  // NOR usually bills "A and B" as two guests; keep "&" inside duo names.
   const parts = ft
     .split(/\s+and\s+/i)
     .map((p) => p.trim())
@@ -101,163 +106,13 @@ function guestsFromTitle(title: string): {
   return splitArtistCredit(parts[0] || ft, { accent: ACCENT });
 }
 
-async function fetchHtml(url: string): Promise<string | null> {
-  try {
-    const res = await fetch(url, {
-      headers: {
-        "User-Agent": UA,
-        // Keep Accept minimal — richer Accept negotiation can serve a cached
-        // HTML variant whose embedded WP nonce fails admin-ajax checks.
-        Accept: "text/html",
-      },
-      redirect: "follow",
-      signal: AbortSignal.timeout(25_000),
-    });
-    if (!res.ok) return null;
-    return await res.text();
-  } catch {
-    return null;
-  }
-}
-
-function slugsFromListingHtml(html: string): string[] {
-  const out: string[] = [];
-  const seen = new Set<string>();
-  for (const m of html.matchAll(
-    /\/music\/(night-owl-radio-\d+[a-z0-9\-]*)\/?/gi,
-  )) {
-    const slug = m[1]!.toLowerCase().replace(/\/$/, "");
-    if (seen.has(slug)) continue;
-    seen.add(slug);
-    out.push(slug);
-  }
-  return out;
-}
-
-function listingNonce(html: string): string | null {
-  // Prefer insmMainVars.nonce — other plugins also embed "nonce" keys that 400 ajax.
-  const insm = html.match(/var\s+insmMainVars\s*=\s*(\{[\s\S]*?\})\s*;/);
-  if (insm?.[1]) {
-    try {
-      const parsed = JSON.parse(insm[1]) as { nonce?: string };
-      if (parsed.nonce) return parsed.nonce;
-    } catch {
-      /* fall through */
-    }
-  }
-  return html.match(/"nonce":"([a-f0-9]+)"/i)?.[1] ?? null;
-}
-
-function listingOffset(html: string): number {
-  const btn = html.match(
-    /class="[^"]*post-load-more-button[\s\S]*?<\/a>/i,
-  )?.[0];
-  const n = Number(btn?.match(/data-offset=["'](\d+)["']/i)?.[1] ?? 24);
-  return Number.isFinite(n) && n > 0 ? n : 24;
-}
-
-/** Paginate Insomniac NOR archive via the public "Load More" admin-ajax action. */
-async function fetchListingSlugs(): Promise<string[]> {
-  const first = await fetchHtml(LISTING);
-  if (!first) return [];
-  const out = slugsFromListingHtml(first);
-  const seen = new Set(out);
-  const nonce = listingNonce(first);
-  let offset = listingOffset(first);
-  const maxPages = norListPages();
-
-  if (!nonce || maxPages <= 1) return out;
-
-  for (let page = 1; page < maxPages; page += 1) {
-    try {
-      const body = new URLSearchParams({
-        action: "insm_get_load_more_content",
-        nonce,
-        post_type: "music",
-        offset: String(offset),
-        taxonomy: "music-section",
-        term: "night-owl-radio",
-      });
-      const res = await fetch(LOAD_MORE, {
-        method: "POST",
-        headers: {
-          "User-Agent": UA,
-          "Content-Type": "application/x-www-form-urlencoded",
-          Accept: "application/json, text/javascript, */*",
-          "X-Requested-With": "XMLHttpRequest",
-          Referer: LISTING,
-        },
-        body,
-        signal: AbortSignal.timeout(25_000),
-      });
-      if (!res.ok) {
-        console.warn(
-          `[insomniac-nor] listing page ${page + 1}: HTTP ${res.status}`,
-        );
-        break;
-      }
-      const rawText = await res.text();
-      let json: {
-        success?: boolean;
-        data?: { totalPosts?: number; content?: string } | string | number;
-      };
-      try {
-        json = JSON.parse(rawText) as typeof json;
-      } catch {
-        console.warn(
-          `[insomniac-nor] listing page ${page + 1}: non-JSON ${rawText.slice(0, 80)}`,
-        );
-        break;
-      }
-      if (json.success !== true) {
-        console.warn(
-          `[insomniac-nor] listing page ${page + 1}: ajax rejected ${rawText.slice(0, 120)}`,
-        );
-        break;
-      }
-      const content =
-        typeof json.data === "object" && json.data && "content" in json.data
-          ? json.data.content || ""
-          : "";
-      const batch = slugsFromListingHtml(content);
-      let added = 0;
-      for (const s of batch) {
-        if (seen.has(s)) continue;
-        seen.add(s);
-        out.push(s);
-        added += 1;
-      }
-      const total = Number(
-        (typeof json.data === "object" && json.data?.totalPosts) ??
-          batch.length,
-      );
-      offset += Number.isFinite(total) && total > 0 ? total : 24;
-      console.log(
-        `[insomniac-nor] listing page ${page + 1}: +${added} content=${content.length} (total ${out.length})`,
-      );
-      if (added === 0 || total === 0) break;
-      await sleep(150);
-    } catch (err) {
-      console.warn(
-        `[insomniac-nor] listing page ${page + 1}:`,
-        err instanceof Error ? err.message : err,
-      );
-      break;
-    }
-  }
-  return out;
-}
-
 function soundcloudPermalinkFromHtml(html: string): string | null {
   const m =
     html.match(
       /soundcloud\.com\/insomniacevents\/(night-owl-radio-[a-z0-9\-]+)/i,
-    ) ||
-    html.match(
-      /api\.soundcloud\.com\/tracks\/(\d+)/i,
-    );
+    ) || html.match(/api\.soundcloud\.com\/tracks\/(\d+)/i);
   if (!m) return null;
-  if (m[0].includes("tracks/")) return null; // id-only; handle separately
+  if (m[0].includes("tracks/")) return null;
   return m[1]!.toLowerCase();
 }
 
@@ -268,31 +123,6 @@ function soundcloudTrackIdFromHtml(html: string): number | null {
   return Number.isFinite(n) ? n : null;
 }
 
-function titleFromHtml(html: string, fallbackSlug: string): string {
-  const og = html.match(
-    /property=["']og:title["']\s+content=["']([^"']+)["']/i,
-  );
-  if (og?.[1]) return og[1].replace(/\s*[|–—].*$/, "").trim();
-  const t = html.match(/<title>([^<]+)<\/title>/i)?.[1];
-  if (t) {
-    return t
-      .replace(/\s*[|–—].*$/, "")
-      .replace(/^['‘]|['’]$/g, "")
-      .trim();
-  }
-  return fallbackSlug.replace(/-/g, " ");
-}
-
-function publishedAtFromHtml(html: string): Date | null {
-  const m =
-    html.match(
-      /property=["']article:published_time["']\s+content=["']([^"']+)["']/i,
-    ) || html.match(/datetime=["']([^"']+)["']/i);
-  if (!m?.[1]) return null;
-  const d = new Date(m[1]);
-  return Number.isNaN(d.getTime()) ? null : d;
-}
-
 async function fetchNorSoundCloudTracks(need: number): Promise<ScTrack[]> {
   const user = await resolveUser(SC_USER);
   if (!user.id) throw new Error("insomniacevents user id missing");
@@ -300,7 +130,7 @@ async function fetchNorSoundCloudTracks(need: number): Promise<ScTrack[]> {
   let path: string | null =
     `/users/${user.id}/tracks?limit=50&linked_partitioning=1`;
   let pages = 0;
-  while (path && out.length < need && pages < 8) {
+  while (path && out.length < need && pages < 10) {
     pages += 1;
     const data: ScCollection<ScTrack> =
       await scGet<ScCollection<ScTrack>>(path);
@@ -345,8 +175,8 @@ async function episodeToRawSet(
   slug: string,
   scCache: Map<string, ScTrack>,
 ): Promise<RawSet | null> {
-  const sourceUrl = insomniacPageUrl(slug);
-  const html = await fetchHtml(sourceUrl);
+  const sourceUrl = insomniacMusicUrl(slug);
+  const html = await fetchInsomniacHtml(sourceUrl);
   await sleep(150);
   if (!html) return null;
 
@@ -354,8 +184,7 @@ async function episodeToRawSet(
   if (rows.length < 3) return null;
 
   const scPermalink =
-    soundcloudPermalinkFromHtml(html) ||
-    (scCache.has(slug) ? slug : null);
+    soundcloudPermalinkFromHtml(html) || (scCache.has(slug) ? slug : null);
   const scId = soundcloudTrackIdFromHtml(html);
   const scTrack = await resolveScTrack(scPermalink, scId, scCache);
 
@@ -372,7 +201,7 @@ async function episodeToRawSet(
     );
   }
 
-  const title = (scTrack?.title || titleFromHtml(html, slug)).trim();
+  const title = (scTrack?.title || titleFromInsomniacHtml(html, slug)).trim();
   const { primary, collaborators } = guestsFromTitle(title);
   const playbackUrl =
     scTrack?.permalink_url ||
@@ -387,8 +216,10 @@ async function episodeToRawSet(
     (scTrack?.display_date || scTrack?.created_at
       ? new Date(scTrack.display_date || scTrack.created_at || "")
       : null) ||
-    publishedAtFromHtml(html) ||
+    publishedAtFromInsomniacHtml(html) ||
     new Date();
+
+  const festival = inferFestivalEvent(title);
 
   const raw: RawSet = {
     sourceSlug: `nor-${slug}`.slice(0, 120),
@@ -402,9 +233,9 @@ async function episodeToRawSet(
     primaryArtist: { ...primary, accent: primary.accent || ACCENT },
     collaborators,
     seriesName: "Night Owl Radio",
-    eventName: "Insomniac",
-    eventKind: "festival",
-    eventLocation: "Los Angeles, US",
+    eventName: festival?.name ?? "Insomniac",
+    eventKind: festival?.kind ?? "festival",
+    eventLocation: festival?.location ?? "Los Angeles, US",
     publishedAt: Number.isNaN(publishedAt.getTime()) ? new Date() : publishedAt,
     durationSec,
     sourceName: "Insomniac",
@@ -425,14 +256,22 @@ export function createInsomniacNorAdapter(): SourceAdapter {
       const need = norMax();
       console.log(`[insomniac-nor] poll listing + SC @${SC_USER} (max ${need})`);
 
-      const listingSlugs = await fetchListingSlugs();
+      const listingSlugs = await fetchMusicSectionSlugs(
+        {
+          label: "insomniac-nor",
+          listingUrl: "https://www.insomniac.com/music/night-owl-radio/",
+          term: "night-owl-radio",
+          slugPattern: /\/music\/(night-owl-radio-\d+[a-z0-9\-]*)\/?/gi,
+          maxPages: norListPages(),
+        },
+        sleep,
+      );
       const scTracks = await fetchNorSoundCloudTracks(Math.max(need * 3, 80));
       const scCache = new Map<string, ScTrack>();
       for (const t of scTracks) {
         if (t.permalink) scCache.set(t.permalink.toLowerCase(), t);
       }
 
-      // Priority mega-mix / dense episodes first, then listing, then SC fallbacks.
       const ordered: string[] = [];
       const seen = new Set<string>();
       for (const s of INSOMNIAC_NOR_PRIORITY_SLUGS) {

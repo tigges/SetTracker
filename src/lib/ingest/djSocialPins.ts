@@ -12,7 +12,8 @@ export type DjSocialPin = {
   slug: string;
   name: string;
   accent: string;
-  soundcloud: string;
+  /** Null when no verified SC — do not invent handles. */
+  soundcloud: string | null;
   /** Null when no verified IG — do not invent handles. */
   instagram: string | null;
   twitter?: string | null;
@@ -224,6 +225,35 @@ export const DJ_SOCIAL_PINS: DjSocialPin[] = [
     website: "https://open.spotify.com/artist/7kA4sEagpoNK91I7wr9tYr",
     bio: "Tech House. Indonesia. YT @bleuclairmusic — IG/FB/TikTok @bleuclairmusic, X @bleuclair, SC bleuclair.",
   },
+  {
+    slug: "hot-since-82",
+    name: "Hot Since 82",
+    accent: "#e9c46a",
+    soundcloud: "https://soundcloud.com/hotsince-82",
+    instagram: null,
+    twitter: "https://x.com/hotsince82",
+    website: "https://hotsince82.com",
+    bio: "Tech House. Leeds, UK. Official hotsince82.com — YT @HotSince82, SC hotsince-82, X/FB hotsince82, Beatport artist/hot-since-82/212422.",
+  },
+  {
+    slug: "adam-beyer",
+    name: "Adam Beyer",
+    accent: "#111111",
+    soundcloud: null,
+    instagram: "https://www.instagram.com/realadambeyer/",
+    website: "https://open.spotify.com/artist/1btv9qmIpbp7q1ixCYNdHu",
+    bio: "Techno. Drumcode. YT @adambeyer — IG @realadambeyer, TikTok @adamdrumcodebeyer, Spotify artist hub.",
+  },
+  {
+    slug: "dijon",
+    name: "DIJON",
+    accent: "#f4a261",
+    soundcloud: null,
+    instagram: "https://www.instagram.com/dijondijon_/",
+    twitter: "https://x.com/dijondijon_",
+    website: "https://dijondijon.com",
+    bio: "US. Official dijondijon.com — YT @dijon / @DIJONDIJON, IG @dijondijon_, X @dijondijon_. Not the Paris club Djoon.",
+  },
 ];
 
 /** Upsert pinned social fields for curated brand DJs. Returns rows touched. */
@@ -234,7 +264,7 @@ export async function applyDjSocialPins(prisma: PrismaClient): Promise<number> {
     const data = {
       name: pin.name,
       accent: pin.accent,
-      soundcloud: pin.soundcloud,
+      soundcloud: pin.soundcloud ?? null,
       instagram: pin.instagram ?? null,
       twitter: pin.twitter ?? null,
       website: pin.website,

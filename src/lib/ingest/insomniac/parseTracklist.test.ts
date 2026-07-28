@@ -39,6 +39,16 @@ assert.equal(guestRows[2]?.artistName, "Loofy");
 assert.equal(guestRows[2]?.trackTitle, "Last Night");
 assert.ok(!guestRows.some((r) => /guest mix/i.test(r.artistName)));
 
+// Mixes often use <strong> instead of <b>.
+const strongSample = `
+<dt><div>Metronome #169 Track List</div></dt><dd><p><strong>Claptone </strong>“Stay the Night” (Mihalis Safras remix)<br><strong>Mihalis Safras</strong> “Action”<br><strong>Gigak</strong> – ID [Material Unreleased]</p></dd>
+`;
+const strongRows = parseInsomniacTrackRows(strongSample);
+assert.equal(strongRows.length, 3);
+assert.equal(strongRows[0]?.artistName, "Claptone");
+assert.ok(strongRows[0]?.trackTitle.includes("Stay the Night"));
+assert.equal(strongRows[2]?.trackTitle, "ID [Material Unreleased]");
+
 for (const path of ["/tmp/nor-482.html", "/tmp/nor-475.html", "/tmp/nor-470.html"]) {
   try {
     const html = readFileSync(path, "utf8");

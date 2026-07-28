@@ -3,6 +3,7 @@ import { bandcampAdapter } from "./bandcamp/adapter";
 import { boilerroomAdapter } from "./boilerroom/adapter";
 import { hearthisAdapter } from "./hearthis/adapter";
 import { insomniacNorAdapter } from "./insomniac/adapter";
+import { insomniacMixesAdapter } from "./insomniac/mixes";
 import { slugify, type RawArtist, type RawPlay, type RawSet, type SourceAdapter } from "./types";
 import { topDjs } from "./topDjs";
 import { soundcloudAdapter } from "./soundcloud/adapter";
@@ -100,7 +101,7 @@ function withOptionalSynthetic(base: SourceAdapter[]): SourceAdapter[] {
 /**
  * Primary pipeline:
  * - SoundCloud curated shows + playlists (anonymous client_id)
- * - Insomniac Night Owl Radio (SC audio + Insomniac tracklists)
+ * - Insomniac Night Owl Radio + /music/mixes (SC/YT audio + Insomniac tracklists)
  * - hearthis.at house-family categories (public api-v2)
  * - YouTube curated sets + venue channels (description + Music credits)
  * - Bandcamp curated tracks/albums
@@ -112,6 +113,7 @@ function withOptionalSynthetic(base: SourceAdapter[]): SourceAdapter[] {
 const ALL_ADAPTERS: SourceAdapter[] = withOptionalSynthetic([
   soundcloudAdapter,
   insomniacNorAdapter,
+  insomniacMixesAdapter,
   hearthisAdapter,
   youtubeAdapter,
   bandcampAdapter,
