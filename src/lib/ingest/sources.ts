@@ -1,6 +1,7 @@
 import type { Provenance } from "../status";
 import { bandcampAdapter } from "./bandcamp/adapter";
 import { boilerroomAdapter } from "./boilerroom/adapter";
+import { djmagLivesetsAdapter } from "./djmag/livesets";
 import { hearthisAdapter } from "./hearthis/adapter";
 import { insomniacNorAdapter } from "./insomniac/adapter";
 import { insomniacMixesAdapter } from "./insomniac/mixes";
@@ -104,6 +105,7 @@ function withOptionalSynthetic(base: SourceAdapter[]): SourceAdapter[] {
  * - Insomniac Night Owl Radio + /music/mixes (SC/YT audio + Insomniac tracklists)
  * - hearthis.at house-family categories (public api-v2)
  * - YouTube curated sets + venue channels (description + Music credits)
+ * - DJ Mag Live Sets (djmag.com/livesets index → YT playback + tracklists)
  * - Bandcamp curated tracks/albums
  * - Boiler Room sessions (boilerroom.tv provenance + SC/YT playback)
  *
@@ -116,6 +118,7 @@ const ALL_ADAPTERS: SourceAdapter[] = withOptionalSynthetic([
   insomniacMixesAdapter,
   hearthisAdapter,
   youtubeAdapter,
+  djmagLivesetsAdapter,
   bandcampAdapter,
   boilerroomAdapter,
 ]);

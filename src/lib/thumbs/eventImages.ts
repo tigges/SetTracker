@@ -58,6 +58,8 @@ export const KNOWN_EVENT_IMAGES: Record<string, string> = {
   /** Cercle — recent channel upload thumb as brand mark. */
   cercle: "https://i.ytimg.com/vi/7bTlKxH3CgI/hqdefault.jpg",
   mixmag: "https://i.ytimg.com/vi/X8s7EKuVtBI/hqdefault.jpg",
+  /** DJ Mag Live Sets — recent channel upload thumb as brand mark. */
+  "dj-mag": "https://i.ytimg.com/vi/-HyyZo8sXgE/hqdefault.jpg",
   "ministry-of-sound":
     "https://ministryofsound.com/wp-content/uploads/2025/12/home-page-banner-1-1024x582.png",
   dreamstate:

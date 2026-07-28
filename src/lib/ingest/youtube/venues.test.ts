@@ -67,4 +67,37 @@ assert.equal(isVenueSetCandidate("Kyle Starkey | Mixmag Lab London", 3600, mixma
 assert.equal(isVenueSetCandidate("Festival Aftermovie 2026", 3600, mixmag), false);
 assert.equal(isVenueSetCandidate("Quick teaser", 120, mixmag), false);
 
+const djmag = YOUTUBE_VENUES.find((v) => v.seriesName === "DJ Mag")!;
+assert.equal(djmag.eventSlug, "dj-mag");
+assert.equal(
+  isVenueSetCandidate(
+    "Shimza Live From Camden Roundhouse, London",
+    3600,
+    djmag,
+  ),
+  true,
+);
+assert.equal(
+  isVenueSetCandidate("DJ Mag Awards Aftermovie", 3600, djmag),
+  false,
+);
+assert.equal(
+  artistFromVenueTitle(
+    "HoneyLuv B2B TSHA House Set Live From ANTS at Ushuaïa Ibiza",
+  ),
+  "HoneyLuv b2b TSHA",
+);
+assert.equal(
+  artistFromVenueTitle(
+    "Deborah De Luca Techno Set From Pyramid at Amnesia Ibiza",
+  ),
+  "Deborah De Luca",
+);
+assert.equal(
+  artistFromVenueTitle(
+    "Lee Ann Roberts Techno Set Live From DJ Mag HQ, powered by AlphaTheta",
+  ),
+  "Lee Ann Roberts",
+);
+
 console.log("venues.test.ts ok");
