@@ -615,4 +615,19 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     seriesName: "Awakenings",
     eventName: "Awakenings Festival",
   },
+  {
+    // Official Tomorrowland upload — oEmbed-validated festival set.
+    video: "https://www.youtube.com/watch?v=IG19Jo7NxnQ",
+    primaryArtist: dj("Quintino", {
+      accent: "#ff9f1c",
+      soundcloud: "https://soundcloud.com/quintino",
+      youtube: "https://www.youtube.com/@Quintino",
+      homeCity: "Netherlands",
+    }),
+    genre: "Big Room",
+    type: "festival",
+    title: "Quintino | Tomorrowland 2022 - WE1",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+  },
 ];
