@@ -1,9 +1,13 @@
 import assert from "node:assert/strict";
 import {
   acrSignature,
+  compareSparseSetCandidates,
+  loadDjMagTop100RankBySlug,
   mapAcrMusicHit,
   planGapProbes,
+  popularityRankForDjSlug,
   rankPlaybackHost,
+  type SparseSetCandidate,
 } from "./acrcloud";
 
 // --- signature ---
@@ -73,5 +77,49 @@ const open = planGapProbes(
 const at90 = open.find((p) => p.offsetSec === 90);
 assert.ok(at90);
 assert.equal(at90!.isGap, false);
+
+// --- demand proxy (DJ Mag Top 100) ---
+const top100 = loadDjMagTop100RankBySlug();
+assert.ok(top100.size >= 50, "expected seeded Top 100 DJs");
+assert.equal(top100.get("david-guetta"), 1);
+assert.equal(
+  popularityRankForDjSlug("david-guetta", top100, new Set()),
+  1,
+);
+assert.equal(
+  popularityRankForDjSlug("unknown-local-dj", top100, new Set(["westend"])),
+  999,
+);
+assert.equal(
+  popularityRankForDjSlug("westend", top100, new Set(["westend"])),
+  50,
+);
+
+function cand(
+  partial: Partial<SparseSetCandidate> & Pick<SparseSetCandidate, "id">,
+): SparseSetCandidate {
+  return {
+    slug: partial.id,
+    playbackUrl: "https://soundcloud.com/x",
+    durationSec: 3600,
+    host: "soundcloud",
+    identifiedStrong: 0,
+    playCount: 0,
+    unresolvedCount: 0,
+    popularityRank: 999,
+    ...partial,
+  };
+}
+
+const ranked = [
+  cand({ id: "long-tail", unresolvedCount: 5, popularityRank: 999 }),
+  cand({ id: "chart", unresolvedCount: 1, popularityRank: 12 }),
+  cand({ id: "host-yt", host: "youtube", popularityRank: 1 }),
+  cand({ id: "host-sc", host: "soundcloud", popularityRank: 80 }),
+].sort(compareSparseSetCandidates);
+assert.deepEqual(
+  ranked.map((c) => c.id),
+  ["chart", "host-sc", "long-tail", "host-yt"],
+);
 
 console.log("acrcloud.test.ts ok");
