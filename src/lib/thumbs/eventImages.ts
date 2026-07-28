@@ -92,6 +92,7 @@ export const EVENT_OFFICIAL_SITES: Record<string, string> = {
   coachella: "https://www.coachella.com/",
   lollapalooza: "https://www.lollapalooza.com/",
   "hard-summer": "https://hardfest.com/",
+  defected: "https://defected.com/",
   insomniac: "https://www.insomniac.com/",
   "nocturnal-wonderland": "https://nocturnalwonderland.com/",
   "beyond-wonderland": "https://beyondwonderland.com/",
