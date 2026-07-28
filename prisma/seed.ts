@@ -1,7 +1,12 @@
 import { PrismaClient } from "@prisma/client";
+import {
+  curatedLabelSlug,
+  CURATED_LABELS,
+  ensureCuratedLabels,
+} from "../src/lib/ingest/curatedLabels";
 import { ARTIST_ROSTER } from "../src/lib/ingest/roster";
 import { slugify } from "../src/lib/ingest/types";
-import { djSocials, djSocialsFromKnown, labelSocials } from "../src/lib/social";
+import { djSocials, djSocialsFromKnown } from "../src/lib/social";
 
 const prisma = new PrismaClient();
 
@@ -59,29 +64,14 @@ async function main() {
   await prisma.label.deleteMany();
 
   // -------------------------------------------------------------------------
-  // Labels
+  // Labels (curated Beatstats / seed imprints)
   // -------------------------------------------------------------------------
-  const labelData = [
-    ["nightbass", "Night Bass", "#f5a623"],
-    ["confession", "Confession", "#e0338a"],
-    ["blackbook", "Black Book Records", "#d7dde2"],
-    ["divided", "Divided Souls", "#4bd0c0"],
-    ["bitbird", "bitbird", "#7c5cff"],
-    ["monstercat", "Monstercat", "#2bd67b"],
-    ["houseofhustle", "House of Hustle", "#ff6b3d"],
-    ["insomniac", "Insomniac Records", "#ff2d55"],
-  ];
+  await ensureCuratedLabels(prisma);
   const labels: Record<string, string> = {};
-  for (const [slug, name, color] of labelData) {
-    // Prefer slug lookup so "divided" hits curated Divided Souls URLs.
-    const socials = {
-      ...labelSocials(name),
-      ...(labelSocials(slug).website ? labelSocials(slug) : {}),
-    };
-    const l = await prisma.label.create({
-      data: { slug, name, color, ...socials },
-    });
-    labels[slug] = l.id;
+  for (const entry of CURATED_LABELS) {
+    const slug = curatedLabelSlug(entry);
+    const row = await prisma.label.findUnique({ where: { slug } });
+    if (row) labels[slug] = row.id;
   }
 
   // -------------------------------------------------------------------------

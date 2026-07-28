@@ -100,6 +100,119 @@ export const KNOWN_LABEL_SOCIALS: Record<
     soundcloud: "https://soundcloud.com/stereohypeglobal",
     instagram: "https://www.instagram.com/stereohype/",
   },
+  crosstownrebels: {
+    website: "https://www.crosstownrebels.com/",
+    soundcloud: "https://soundcloud.com/crosstownrebels",
+    instagram: "https://www.instagram.com/crosstownrebels/",
+  },
+  "crosstown-rebels": {
+    website: "https://www.crosstownrebels.com/",
+    soundcloud: "https://soundcloud.com/crosstownrebels",
+    instagram: "https://www.instagram.com/crosstownrebels/",
+  },
+  moblack: {
+    website: "https://moblackrecords.com/",
+    soundcloud: "https://soundcloud.com/moblackrecords",
+    instagram: "https://www.instagram.com/moblackrecords/",
+  },
+  moblackrecords: {
+    website: "https://moblackrecords.com/",
+    soundcloud: "https://soundcloud.com/moblackrecords",
+    instagram: "https://www.instagram.com/moblackrecords/",
+  },
+  "moblack-records": {
+    website: "https://moblackrecords.com/",
+    soundcloud: "https://soundcloud.com/moblackrecords",
+    instagram: "https://www.instagram.com/moblackrecords/",
+  },
+  cajual: {
+    website: "https://www.cajual.com/",
+    soundcloud: "https://soundcloud.com/cajual",
+  },
+  soulfuric: {
+    website: "https://www.soulfuric.com/",
+    soundcloud: "https://soundcloud.com/soulfuric",
+  },
+  soulfurictrax: {
+    website: "https://www.soulfuric.com/",
+    soundcloud: "https://soundcloud.com/soulfuric",
+  },
+  "soulfuric-trax": {
+    website: "https://www.soulfuric.com/",
+    soundcloud: "https://soundcloud.com/soulfuric",
+  },
+  "soulfuric-deep": {
+    website: "https://www.soulfuric.com/",
+    soundcloud: "https://soundcloud.com/soulfuric",
+  },
+  steelcitydancediscs: {
+    soundcloud: "https://soundcloud.com/scdd",
+    instagram: "https://www.instagram.com/steelcitydancediscs/",
+  },
+  "steel-city-dance-discs": {
+    soundcloud: "https://soundcloud.com/scdd",
+    instagram: "https://www.instagram.com/steelcitydancediscs/",
+  },
+  heistrecordings: {
+    website: "https://heistrecordings.com/",
+    soundcloud: "https://soundcloud.com/heistrecordings",
+  },
+  "heist-recordings": {
+    website: "https://heistrecordings.com/",
+    soundcloud: "https://soundcloud.com/heistrecordings",
+  },
+  kneedeepinsound: {
+    website: "https://www.kneedeepinsound.com/",
+    soundcloud: "https://soundcloud.com/kneedeepinsound",
+  },
+  "knee-deep-in-sound": {
+    website: "https://www.kneedeepinsound.com/",
+    soundcloud: "https://soundcloud.com/kneedeepinsound",
+  },
+  classicmusiccompany: {
+    website: "https://www.classicmusiccompany.com/",
+    soundcloud: "https://soundcloud.com/classicmusiccompany",
+  },
+  "classic-music-company": {
+    website: "https://www.classicmusiccompany.com/",
+    soundcloud: "https://soundcloud.com/classicmusiccompany",
+  },
+  elrowmusic: {
+    website: "https://www.elrow.com/",
+    instagram: "https://www.instagram.com/elrowmusic/",
+  },
+  "elrow-music": {
+    website: "https://www.elrow.com/",
+    instagram: "https://www.instagram.com/elrowmusic/",
+  },
+  "ministry-of-sound-recordings": {
+    website: "https://www.ministryofsound.com/",
+    soundcloud: "https://soundcloud.com/ministryofsound",
+  },
+  ministryofsoundrecordings: {
+    website: "https://www.ministryofsound.com/",
+    soundcloud: "https://soundcloud.com/ministryofsound",
+  },
+  dirtybird: {
+    website: "https://dirtybirdrecords.com/",
+    soundcloud: "https://soundcloud.com/dirtybird",
+    instagram: "https://www.instagram.com/dirtybird/",
+  },
+  snatchrecords: {
+    soundcloud: "https://soundcloud.com/snatchrecords",
+  },
+  "snatch-records": {
+    soundcloud: "https://soundcloud.com/snatchrecords",
+  },
+  deeperfect: {
+    soundcloud: "https://soundcloud.com/deeperfect",
+  },
+  hellbeach: {
+    soundcloud: "https://soundcloud.com/hellbeach",
+  },
+  "hell-beach": {
+    soundcloud: "https://soundcloud.com/hellbeach",
+  },
 };
 
 export function labelSocials(name: string): {
