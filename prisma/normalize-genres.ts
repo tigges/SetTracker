@@ -1,17 +1,32 @@
 /**
- * One-shot / CI: rewrite Set + Track genres through the canonical allowlist.
+ * One-shot / CI: rewrite Set + Track genres through the canonical allowlist
+ * and fill any remaining nulls (set←DJ siblings, track←set, else House).
  * Usage: npm run normalize-genres
  */
 import { PrismaClient } from "@prisma/client";
-import { rewriteStoredGenres } from "../src/lib/genre";
+import { fillMissingGenres, rewriteStoredGenres } from "../src/lib/genre";
 
 const prisma = new PrismaClient();
 
 async function main() {
-  const result = await rewriteStoredGenres(prisma);
+  const rewritten = await rewriteStoredGenres(prisma);
+  const filled = await fillMissingGenres(prisma);
   console.log(
-    `[normalize-genres] updated sets=${result.sets} tracks=${result.tracks}`,
+    `[normalize-genres] rewritten sets=${rewritten.sets} tracks=${rewritten.tracks}; filled sets=${filled.sets} tracks=${filled.tracks}`,
   );
+
+  const setNull = await prisma.set.count({
+    where: { OR: [{ genre: null }, { genre: "" }] },
+  });
+  const trackNull = await prisma.track.count({
+    where: { OR: [{ genre: null }, { genre: "" }] },
+  });
+  if (setNull || trackNull) {
+    throw new Error(
+      `[normalize-genres] still missing genre: sets=${setNull} tracks=${trackNull}`,
+    );
+  }
+  console.log("[normalize-genres] all sets and tracks have a genre");
 }
 
 main()

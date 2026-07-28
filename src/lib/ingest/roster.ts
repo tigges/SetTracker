@@ -8,6 +8,8 @@
 
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
+import { normalizeGenre, type CanonicalGenre } from "../genre";
+import { slugify } from "./types";
 
 export type HandleStatus = "ok" | "weak" | "missing" | "unverified";
 
@@ -854,4 +856,16 @@ export function rosterMissingHandles(): ArtistRosterEntry[] {
       !a.soundcloud?.permalink
     );
   });
+}
+
+/** Curated genre for a DJ name/slug, when the roster knows them. */
+export function rosterGenreForArtist(
+  nameOrSlug: string | null | undefined,
+): CanonicalGenre | null {
+  if (!nameOrSlug?.trim()) return null;
+  const key = slugify(nameOrSlug);
+  for (const a of ARTIST_ROSTER) {
+    if (slugify(a.name) === key) return normalizeGenre(a.genre);
+  }
+  return null;
 }

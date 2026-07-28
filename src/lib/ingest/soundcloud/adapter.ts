@@ -11,6 +11,7 @@
  * lives attributed from titles (YouTube playlist parallel).
  */
 
+import { normalizeGenre } from "../../genre";
 import { artistsForSet } from "../artists";
 import { promotedSoundcloudPermalinks } from "../discovery/run";
 import { inferFestivalEvent } from "../events";
@@ -139,7 +140,8 @@ async function trackToRawSet(
     sourceSlug,
     title,
     type: setTypeFor(track, show),
-    genre: track.genre?.trim() || show.genre,
+    // Prefer curated show genre when SC tags are format noise (guestmix, etc.).
+    genre: normalizeGenre(track.genre) ?? show.genre,
     primaryArtist: primary,
     collaborators,
     seriesName: inferSeriesName(title, show),
@@ -222,7 +224,7 @@ async function playlistTrackToRawSet(
     sourceSlug,
     title,
     type: setTypeFromTitle(title),
-    genre: track.genre?.trim() || pl.genre,
+    genre: normalizeGenre(track.genre) ?? pl.genre,
     primaryArtist: primary,
     collaborators,
     seriesName: pl.seriesName,

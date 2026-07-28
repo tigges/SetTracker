@@ -17,7 +17,7 @@
  */
 import { PrismaClient } from "@prisma/client";
 import { parseTrackTitle } from "../src/lib/trackMeta";
-import { rewriteStoredGenres } from "../src/lib/genre";
+import { fillMissingGenres, rewriteStoredGenres } from "../src/lib/genre";
 import { ensureTrackSlugs } from "../src/lib/tracks/ensureSlugs";
 import { slugify } from "../src/lib/ingest/types";
 import {
@@ -116,8 +116,9 @@ async function main() {
 
   console.log("[thumbs] normalizing genres…");
   const genreStats = await rewriteStoredGenres(prisma);
+  const genreFill = await fillMissingGenres(prisma);
   console.log(
-    `  rewritten sets=${genreStats.sets} tracks=${genreStats.tracks}`,
+    `  rewritten sets=${genreStats.sets} tracks=${genreStats.tracks}; filled sets=${genreFill.sets} tracks=${genreFill.tracks}`,
   );
 
   console.log("[thumbs] resolving label artwork…");

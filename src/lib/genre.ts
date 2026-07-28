@@ -14,12 +14,14 @@ export const CANONICAL_GENRES = [
   "Deep House",
   "Afro House",
   "Melodic House",
+  "Melodic Techno",
   "Future House",
   "Progressive House",
   "Organic House",
   "Electro House",
   "Tropical House",
   "Hard House",
+  "Big Room",
   "G-House",
   "Ghetto House",
   "Techno",
@@ -62,6 +64,8 @@ const SYNONYMS: Record<string, CanonicalGenre> = {
   "melodic house": "Melodic House",
   melodichouse: "Melodic House",
   melodic: "Melodic House",
+  "melodic techno": "Melodic Techno",
+  melodictechno: "Melodic Techno",
   "future house": "Future House",
   futurehouse: "Future House",
   "progressive house": "Progressive House",
@@ -75,6 +79,9 @@ const SYNONYMS: Record<string, CanonicalGenre> = {
   "tropical house": "Tropical House",
   "hard house": "Hard House",
   hardhouse: "Hard House",
+  "big room": "Big Room",
+  bigroom: "Big Room",
+  "big-room": "Big Room",
   "g house": "G-House",
   ghouse: "G-House",
   "g-house": "G-House",
@@ -351,6 +358,20 @@ export function normalizeGenre(
   return expandGenres(raw)[0] ?? null;
 }
 
+/** Catalog default when no better signal exists (house-family product). */
+export const DEFAULT_GENRE: CanonicalGenre = "House";
+
+/** Never-null genre for storage — prefer source, then fallbacks, then House. */
+export function ensureGenre(
+  ...candidates: Array<string | null | undefined>
+): CanonicalGenre {
+  for (const c of candidates) {
+    const n = normalizeGenre(c);
+    if (n) return n;
+  }
+  return DEFAULT_GENRE;
+}
+
 /** Normalize a list for filter chips (deduped, stable order). */
 export function normalizeGenreList(genres: string[]): CanonicalGenre[] {
   const seen = new Set<CanonicalGenre>();
@@ -375,30 +396,32 @@ export function assertCanonicalWordBudget(): void {
   }
 }
 
-type GenreRowClient = {
-  set: {
-    findMany: (args: {
-      select: { id: true; genre: true };
-      where: { genre: { not: null } };
-    }) => Promise<{ id: string; genre: string | null }[]>;
-    update: (args: {
-      where: { id: string };
-      data: { genre: string | null };
-    }) => Promise<unknown>;
-  };
-  track: {
-    findMany: (args: {
-      select: { id: true; genre: true };
-      where: { genre: { not: null } };
-    }) => Promise<{ id: string; genre: string | null }[]>;
-    update: (args: {
-      where: { id: string };
-      data: { genre: string | null };
-    }) => Promise<unknown>;
-  };
-};
+/** Minimal Prisma surface used by genre rewrite / fill helpers. */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type GenreRowClient = any;
 
-/** Rewrite Set/Track genre columns to canonical forms (or null). */
+function modeGenre(values: Array<string | null | undefined>): CanonicalGenre | null {
+  const counts = new Map<CanonicalGenre, number>();
+  for (const v of values) {
+    const n = normalizeGenre(v);
+    if (!n) continue;
+    counts.set(n, (counts.get(n) ?? 0) + 1);
+  }
+  let best: CanonicalGenre | null = null;
+  let bestN = 0;
+  for (const [g, n] of counts) {
+    if (n > bestN) {
+      best = g;
+      bestN = n;
+    }
+  }
+  return best;
+}
+
+/**
+ * Rewrite Set/Track genre columns to canonical forms.
+ * Junk / unparseable values become DEFAULT_GENRE (never null).
+ */
 export async function rewriteStoredGenres(
   prisma: GenreRowClient,
 ): Promise<{ sets: number; tracks: number }> {
@@ -410,8 +433,8 @@ export async function rewriteStoredGenres(
     select: { id: true, genre: true },
   });
   for (const row of setRows) {
-    const next = normalizeGenre(row.genre);
-    if ((row.genre ?? null) === (next ?? null)) continue;
+    const next = ensureGenre(row.genre);
+    if ((row.genre ?? null) === next) continue;
     await prisma.set.update({ where: { id: row.id }, data: { genre: next } });
     sets += 1;
   }
@@ -421,12 +444,69 @@ export async function rewriteStoredGenres(
     select: { id: true, genre: true },
   });
   for (const row of trackRows) {
-    const next = normalizeGenre(row.genre);
-    if ((row.genre ?? null) === (next ?? null)) continue;
+    const next = ensureGenre(row.genre);
+    if ((row.genre ?? null) === next) continue;
     await prisma.track.update({
       where: { id: row.id },
       data: { genre: next },
     });
+    tracks += 1;
+  }
+
+  return { sets, tracks };
+}
+
+/**
+ * Fill null Set/Track genres:
+ * - Set ← mode of primary DJ's other sets → House
+ * - Track ← mode of sets it appears in → House
+ */
+export async function fillMissingGenres(
+  prisma: GenreRowClient,
+): Promise<{ sets: number; tracks: number }> {
+  let sets = 0;
+  let tracks = 0;
+
+  const allSets = await prisma.set.findMany({
+    select: {
+      id: true,
+      genre: true,
+      artists: { select: { isPrimary: true, djId: true } },
+    },
+  });
+
+  const byDj = new Map<string, Array<string | null>>();
+  for (const s of allSets) {
+    const primary = s.artists?.find((a) => a.isPrimary) ?? s.artists?.[0];
+    if (!primary) continue;
+    const list = byDj.get(primary.djId) ?? [];
+    list.push(s.genre);
+    byDj.set(primary.djId, list);
+  }
+
+  for (const s of allSets) {
+    if (normalizeGenre(s.genre)) continue;
+    const primary = s.artists?.find((a) => a.isPrimary) ?? s.artists?.[0];
+    const siblings = primary ? byDj.get(primary.djId) ?? [] : [];
+    const next = modeGenre(siblings) ?? DEFAULT_GENRE;
+    await prisma.set.update({ where: { id: s.id }, data: { genre: next } });
+    s.genre = next;
+    sets += 1;
+  }
+
+  const nullTracks = await prisma.track.findMany({
+    where: { OR: [{ genre: null }, { genre: "" }] },
+    select: {
+      id: true,
+      genre: true,
+      plays: { select: { set: { select: { genre: true } } }, take: 40 },
+    },
+  });
+  for (const t of nullTracks) {
+    if (normalizeGenre(t.genre)) continue;
+    const fromSets = modeGenre(t.plays?.map((p) => p.set.genre) ?? []);
+    const next = fromSets ?? DEFAULT_GENRE;
+    await prisma.track.update({ where: { id: t.id }, data: { genre: next } });
     tracks += 1;
   }
 

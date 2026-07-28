@@ -250,6 +250,7 @@ async function main() {
         title,
         artistName,
         bpm,
+        genre: "Bass House",
         labelId: labelSlug ? labels[labelSlug] : null,
       },
     });
