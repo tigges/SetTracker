@@ -85,6 +85,7 @@ export async function getSearchIndex(): Promise<SearchIndexItem[]> {
       !isBrowseReadySet({
         imageUrl: s.imageUrl,
         primaryDjImageUrl: primary?.imageUrl,
+        primaryDjName: primary?.name,
       })
     ) {
       continue;

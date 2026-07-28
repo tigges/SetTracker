@@ -23,10 +23,18 @@ assert.equal(isJunkArtistName("Enter your email address"), true);
 assert.equal(isJunkArtistName("view-artist-details-for-fisher"), true);
 assert.equal(isJunkArtistName("AC Slater DJ Mix"), true);
 assert.equal(isJunkArtistName("AC Slater"), false);
+assert.equal(isJunkArtistName("Afro House Late Evening MIX"), true);
+assert.equal(
+  sanitizeArtistName("Afro House Late Evening MIX"),
+  null,
+);
+assert.equal(isJunkArtistName("Tech House Vibes Session"), true);
 assert.equal(isJunkArtistName("(DJ) 18.04.2025"), true);
 assert.equal(isJunkArtistName("18.04.2025"), true);
 assert.equal(isJunkArtistName("Djoon"), true);
 assert.equal(isJunkArtistName("DJøøn"), true);
 assert.equal(isJunkArtistName("DIJON"), false);
+assert.equal(isJunkArtistName("Black Coffee"), false);
+assert.equal(isJunkArtistName("Keinemusik"), false);
 
 console.log("artistName.test.ts ok");

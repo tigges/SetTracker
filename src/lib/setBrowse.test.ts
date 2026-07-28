@@ -34,4 +34,21 @@ describe("setBrowse", () => {
       true,
     );
   });
+
+  it("hides sets whose primary is a mix-title junk name", () => {
+    assert.equal(
+      isBrowseReadySet({
+        imageUrl: "https://example.com/set.jpg",
+        primaryDjName: "Afro House Late Evening MIX",
+      }),
+      false,
+    );
+    assert.equal(
+      isBrowseReadySet({
+        imageUrl: "https://example.com/set.jpg",
+        primaryDjName: "Black Coffee",
+      }),
+      true,
+    );
+  });
 });

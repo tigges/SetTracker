@@ -112,6 +112,7 @@ export async function getFeed() {
       isBrowseReadySet({
         imageUrl: s.imageUrl,
         primaryDjImageUrl: s.primaryDj?.imageUrl,
+        primaryDjName: s.primaryDj?.name,
       }),
     );
 }
