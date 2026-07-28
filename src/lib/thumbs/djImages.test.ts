@@ -6,6 +6,10 @@ assert.equal(
   KNOWN_DJ_IMAGES["gentlemens-groove"],
   "/artists/gentlemens-groove.png",
 );
+assert.equal(
+  KNOWN_DJ_IMAGES["gentlemen-s-groove"],
+  "/artists/gentlemens-groove.png",
+);
 
 for (const [slug, url] of Object.entries(KNOWN_DJ_IMAGES)) {
   assert.match(slug, /^[a-z0-9-]+$/);

@@ -11,6 +11,7 @@ import {
   relatedSlugsFor,
   venueArtistSlugs,
 } from "@/lib/ingest/discovery/relations";
+import { isBrowseReadySet } from "@/lib/setBrowse";
 import type { IdStatus } from "@/lib/status";
 
 export type StatusCounts = Record<IdStatus, number>;
@@ -74,38 +75,45 @@ export async function getFeed() {
 
   const tallies = await statusCountsBySetIds(sets.map((s) => s.id));
 
-  return sets.map((s) => {
-    const primary = s.artists.find((a) => a.isPrimary) ?? s.artists[0];
-    const tally = tallies.get(s.id);
-    return {
-      id: s.id,
-      slug: s.slug,
-      title: s.title,
-      type: s.type,
-      genre: normalizeGenre(s.genre),
-      genres: expandGenres(s.genre),
-      publishedAt: s.publishedAt,
-      durationSec: s.durationSec,
-      sourceName: s.sourceName,
-      cover: s.cover,
-      imageUrl: s.imageUrl,
-      eventName: s.event?.name ?? null,
-      seriesName: s.series?.name ?? null,
-      primaryDj: primary
-        ? {
-            name: primary.dj.name,
-            slug: primary.dj.slug,
-            accent: primary.dj.accent,
-            imageUrl: primary.dj.imageUrl,
-          }
-        : null,
-      collaborators: s.artists
-        .filter((a) => !a.isPrimary)
-        .map((a) => ({ name: a.dj.name, slug: a.dj.slug })),
-      trackCount: tally?.trackCount ?? 0,
-      statusCounts: tally?.counts ?? emptyCounts(),
-    };
-  });
+  return sets
+    .map((s) => {
+      const primary = s.artists.find((a) => a.isPrimary) ?? s.artists[0];
+      const tally = tallies.get(s.id);
+      return {
+        id: s.id,
+        slug: s.slug,
+        title: s.title,
+        type: s.type,
+        genre: normalizeGenre(s.genre),
+        genres: expandGenres(s.genre),
+        publishedAt: s.publishedAt,
+        durationSec: s.durationSec,
+        sourceName: s.sourceName,
+        cover: s.cover,
+        imageUrl: s.imageUrl,
+        eventName: s.event?.name ?? null,
+        seriesName: s.series?.name ?? null,
+        primaryDj: primary
+          ? {
+              name: primary.dj.name,
+              slug: primary.dj.slug,
+              accent: primary.dj.accent,
+              imageUrl: primary.dj.imageUrl,
+            }
+          : null,
+        collaborators: s.artists
+          .filter((a) => !a.isPrimary)
+          .map((a) => ({ name: a.dj.name, slug: a.dj.slug })),
+        trackCount: tally?.trackCount ?? 0,
+        statusCounts: tally?.counts ?? emptyCounts(),
+      };
+    })
+    .filter((s) =>
+      isBrowseReadySet({
+        imageUrl: s.imageUrl,
+        primaryDjImageUrl: s.primaryDj?.imageUrl,
+      }),
+    );
 }
 
 export type FeedItem = Awaited<ReturnType<typeof getFeed>>[number];

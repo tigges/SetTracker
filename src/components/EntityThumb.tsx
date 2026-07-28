@@ -1,8 +1,11 @@
+"use client";
+
+import { useState } from "react";
 import { mediaUrl } from "@/lib/mediaUrl";
 
 /**
  * Shared avatar/cover tile. Shows a sourced image when available, otherwise a
- * monogram on the entity accent color.
+ * monogram on the entity accent color. Broken remote URLs fall back to monogram.
  */
 export function EntityThumb({
   src,
@@ -12,6 +15,7 @@ export function EntityThumb({
   radius = 12,
   monogram,
   className = "",
+  onImageError,
 }: {
   src?: string | null;
   /** Accessible name; used for alt text when an image is present. */
@@ -22,7 +26,10 @@ export function EntityThumb({
   /** Fallback initials / letter. Defaults to first char of label. */
   monogram?: string;
   className?: string;
+  /** Fired when a remote image fails (403 / 404) — callers may hide the card. */
+  onImageError?: () => void;
 }) {
+  const [broken, setBroken] = useState(false);
   const letter =
     (monogram != null
       ? monogram.trim().slice(0, 2)
@@ -32,7 +39,7 @@ export function EntityThumb({
     height: size,
     borderRadius: radius,
   } as const;
-  const resolved = mediaUrl(src);
+  const resolved = broken ? undefined : mediaUrl(src);
 
   if (resolved) {
     return (
@@ -49,6 +56,10 @@ export function EntityThumb({
           ...style,
           border: "1px solid var(--line)",
           background: "var(--panel2)",
+        }}
+        onError={() => {
+          setBroken(true);
+          onImageError?.();
         }}
       />
     );

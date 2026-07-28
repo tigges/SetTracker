@@ -512,7 +512,7 @@ async function main() {
   console.log("[thumbs] applying curated DJ images…");
   const curatedDjs = await applyCuratedDjImages(prisma);
   console.log(
-    `  curated dj pins=${curatedDjs.djs} set pins=${curatedDjs.sets}`,
+    `  curated dj pins=${curatedDjs.djs} set pins=${curatedDjs.sets} merged=${curatedDjs.merged}`,
   );
 
   console.log("[thumbs] applying curated venue images…");

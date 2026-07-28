@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/db";
 import { normalizeGenre } from "@/lib/genre";
 import { getDjList } from "@/lib/queries";
+import { isBrowseReadySet } from "@/lib/setBrowse";
 import { ensureTrackSlugs } from "@/lib/tracks/ensureSlugs";
 
 export type SearchIndexItem = {
@@ -21,12 +22,13 @@ export async function getSearchIndex(): Promise<SearchIndexItem[]> {
         slug: true,
         title: true,
         genre: true,
+        imageUrl: true,
         event: { select: { name: true } },
         series: { select: { name: true } },
         artists: {
           where: { isPrimary: true },
           take: 1,
-          include: { dj: { select: { name: true } } },
+          include: { dj: { select: { name: true, imageUrl: true } } },
         },
       },
       orderBy: { publishedAt: "desc" },
@@ -78,7 +80,16 @@ export async function getSearchIndex(): Promise<SearchIndexItem[]> {
   const items: SearchIndexItem[] = [];
 
   for (const s of sets) {
-    const dj = s.artists[0]?.dj?.name;
+    const primary = s.artists[0]?.dj;
+    if (
+      !isBrowseReadySet({
+        imageUrl: s.imageUrl,
+        primaryDjImageUrl: primary?.imageUrl,
+      })
+    ) {
+      continue;
+    }
+    const dj = primary?.name;
     const genre = normalizeGenre(s.genre);
     items.push({
       kind: "set",

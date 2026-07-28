@@ -14,6 +14,7 @@ import { ensureGenre, normalizeGenre } from "../genre";
 import { rosterGenreForArtist } from "./roster";
 import { allocateTrackSlug, trackSlugBase } from "../tracks/slug";
 import { slugify, type RawArtist, type RawPlay, type RawSet, type SourceAdapter } from "./types";
+import { canonicalDjSlug } from "./djSlugAliases";
 import { eventSocialPayload, resolveEvent } from "./events";
 import { scanEntityUrls } from "./scanEntityUrls";
 import { verifyStoredSocialUrls } from "./verifyUrls";
@@ -105,8 +106,9 @@ export async function runIngest(
     const name = sanitizeArtistName(raw.name);
     if (!name) return null;
     // Prefer curated RawArtist.slug (apostrophe brands like Gentlemen's Groove),
-    // otherwise derive from the sanitized display name.
-    const slug = raw.slug?.trim() || slugify(name);
+    // otherwise derive from the sanitized display name. Fold known aliases
+    // (gentlemen-s-groove → gentlemens-groove) onto the curated profile.
+    const slug = canonicalDjSlug(raw.slug?.trim() || slugify(name));
     if (djCache.has(slug)) return djCache.get(slug)!;
     const roster = ARTIST_ROSTER.find(
       (a) =>

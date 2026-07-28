@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
 import { EntityThumb } from "@/components/EntityThumb";
 import { StatusBar } from "@/components/StatusBits";
@@ -7,6 +10,7 @@ import {
   fmtDuration,
   fmtRelative,
 } from "@/lib/status";
+import { setDisplayThumb } from "@/lib/setBrowse";
 import type { FeedItem } from "@/lib/queries";
 
 export function SetCard({ set }: { set: FeedItem }) {
@@ -17,8 +21,14 @@ export function SetCard({ set }: { set: FeedItem }) {
     (set.collaborators.length > 0
       ? ` b2b ${set.collaborators.map((c) => c.name).join(", ")}`
       : "");
-  const thumb =
-    set.imageUrl ?? set.primaryDj?.imageUrl ?? null;
+  const thumb = setDisplayThumb({
+    imageUrl: set.imageUrl,
+    primaryDjImageUrl: set.primaryDj?.imageUrl,
+  });
+  const [thumbFailed, setThumbFailed] = useState(false);
+
+  // No monogram tiles in the feed — hide until artwork resolves / loads.
+  if (!thumb || thumbFailed) return null;
 
   return (
     <Link
@@ -33,6 +43,7 @@ export function SetCard({ set }: { set: FeedItem }) {
             accent={accent}
             size={48}
             radius={12}
+            onImageError={() => setThumbFailed(true)}
           />
           <span
             className="absolute -bottom-1 -right-1 grid h-5 w-5 place-items-center rounded-md border border-line bg-bg text-[10px] text-muted"

@@ -16,33 +16,22 @@ assert.equal(isBrowseReadyDj({ ...base, hasHandle: false }), false);
 assert.equal(isBrowseReadyDj({ ...base, setCount: 0 }), false);
 assert.equal(isBrowseReadyDj({ ...base, playCount: 0 }), false);
 
-// No thumb: need both set depth and identified plays
+// No monogram-only DJs — artwork required regardless of catalog weight.
 assert.equal(
   isBrowseReadyDj({
     ...base,
     imageUrl: null,
-    setCount: 4,
-    identifiedPlayCount: 50,
+    setCount: 50,
+    identifiedPlayCount: 200,
   }),
   false,
 );
 assert.equal(
   isBrowseReadyDj({
     ...base,
-    imageUrl: null,
-    setCount: 5,
-    identifiedPlayCount: 19,
+    imageUrl: "  ",
   }),
   false,
-);
-assert.equal(
-  isBrowseReadyDj({
-    ...base,
-    imageUrl: null,
-    setCount: 5,
-    identifiedPlayCount: 20,
-  }),
-  true,
 );
 
 console.log("djBrowse.test.ts ok");
