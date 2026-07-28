@@ -448,9 +448,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
   {
     video: "https://www.youtube.com/watch?v=1TN78OJjJT0",
     primaryArtist: dj("Anyma", {
-      accent: "#7b2cbf",
-      youtube: "https://www.youtube.com/@anyma_ofc",
-      soundcloud: "https://soundcloud.com/anyma_ofc",
+      accent: "#7b2cbf"
     }),
     genre: "Melodic Techno",
     type: "festival",
@@ -460,9 +458,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
   {
     video: "https://www.youtube.com/watch?v=nKHpbiYCtDQ",
     primaryArtist: dj("Peggy Gou", {
-      accent: "#e63946",
-      soundcloud: "https://soundcloud.com/peggygou",
-      youtube: "https://www.youtube.com/channel/UCWd5yMFDEuSCWzTM4xuA1fg",
+      accent: "#e63946"
     }),
     genre: "House",
     type: "festival",
@@ -474,9 +470,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     video: "https://www.youtube.com/watch?v=uqf0mOngpIk",
     primaryArtist: dj("FISHER", {
       accent: "#00c2ff",
-      soundcloud: "https://soundcloud.com/fish-tales",
-      youtube: "https://www.youtube.com/@fisher",
-      homeCity: "Australia",
+      homeCity: "Australia"
     }),
     genre: "Tech House",
     type: "festival",
@@ -487,9 +481,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     video: "https://www.youtube.com/watch?v=kttWNVHJKDo",
     primaryArtist: dj("Alok", {
       accent: "#ff6b35",
-      soundcloud: "https://soundcloud.com/livealok",
-      youtube: "https://www.youtube.com/channel/UCQlaArsZfebRbb70iXm6usg",
-      homeCity: "Brazil",
+      homeCity: "Brazil"
     }),
     genre: "House",
     type: "festival",
@@ -502,9 +494,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     video: "https://www.youtube.com/watch?v=FxEJhxdRi4Q",
     primaryArtist: dj("Timmy Trumpet", {
       accent: "#ffba08",
-      soundcloud: "https://soundcloud.com/timmytrumpet",
-      youtube: "https://www.youtube.com/channel/UCd61k-5ykv_4RIbQg-Mpvrg",
-      homeCity: "Australia",
+      homeCity: "Australia"
     }),
     genre: "Big Room",
     type: "festival",
@@ -527,8 +517,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     video: "https://www.youtube.com/watch?v=vy-k0FopsmY",
     primaryArtist: dj("Carl Cox", {
       accent: "#e63946",
-      soundcloud: "https://soundcloud.com/carl-cox",
-      homeCity: "Barbados / UK",
+      homeCity: "Barbados / UK"
     }),
     genre: "Techno",
     type: "festival",
@@ -541,9 +530,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     video: "https://www.youtube.com/watch?v=qjoM5D4cwNs",
     primaryArtist: dj("W&W", {
       accent: "#00b4d8",
-      soundcloud: "https://soundcloud.com/wandw",
-      youtube: "https://www.youtube.com/@wandwmusic",
-      homeCity: "Netherlands",
+      homeCity: "Netherlands"
     }),
     genre: "Big Room",
     type: "radio",
@@ -555,9 +542,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     video: "https://www.youtube.com/watch?v=OD5LawM8ONk",
     primaryArtist: dj("Tiësto", {
       accent: "#00bbf9",
-      soundcloud: "https://soundcloud.com/tiesto",
-      youtube: "https://www.youtube.com/@tiesto",
-      homeCity: "Netherlands",
+      homeCity: "Netherlands"
     }),
     genre: "Big Room",
     type: "festival",
@@ -567,9 +552,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
   {
     video: "https://www.youtube.com/watch?v=i-mFuxbGHzg",
     primaryArtist: dj("Reinier Zonneveld", {
-      accent: "#ff006e",
-      soundcloud: "https://soundcloud.com/reinier-zonneveld",
-      youtube: "https://www.youtube.com/@ReinierZonneveld_FilthOnAcid",
+      accent: "#ff006e"
     }),
     genre: "Techno",
     type: "festival",
@@ -580,9 +563,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
   {
     video: "https://www.youtube.com/watch?v=b-2YA4yC3UA",
     primaryArtist: dj("Claptone", {
-      accent: "#ffd60a",
-      soundcloud: "https://soundcloud.com/claptone",
-      youtube: "https://www.youtube.com/@CLAPTONEOFFICIAL",
+      accent: "#ffd60a"
     }),
     genre: "Deep House",
     type: "festival",
@@ -592,9 +573,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
   {
     video: "https://www.youtube.com/watch?v=OzGpEPZ3BZs",
     primaryArtist: dj("Vini Vici", {
-      accent: "#9b5de5",
-      soundcloud: "https://soundcloud.com/vinivicimusic",
-      youtube: "https://www.youtube.com/@ViniViciMusic",
+      accent: "#9b5de5"
     }),
     genre: "Psytrance",
     type: "festival",
@@ -605,9 +584,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
   {
     video: "https://www.youtube.com/watch?v=xUdcEDryN8o",
     primaryArtist: dj("Indira Paganotto", {
-      accent: "#ff006e",
-      soundcloud: "https://soundcloud.com/indirapaganotto",
-      youtube: "https://www.youtube.com/@IndiraPaganotto",
+      accent: "#ff006e"
     }),
     genre: "Hard Techno",
     type: "festival",
@@ -620,9 +597,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     video: "https://www.youtube.com/watch?v=IG19Jo7NxnQ",
     primaryArtist: dj("Quintino", {
       accent: "#ff9f1c",
-      soundcloud: "https://soundcloud.com/quintino",
-      youtube: "https://www.youtube.com/@Quintino",
-      homeCity: "Netherlands",
+      homeCity: "Netherlands"
     }),
     genre: "Big Room",
     type: "festival",
@@ -635,9 +610,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     video: "https://www.youtube.com/watch?v=kHJw97ZojrY",
     primaryArtist: dj("Calvin Harris", {
       accent: "#ff9f1c",
-      soundcloud: "https://soundcloud.com/calvinharris",
-      youtube: "https://www.youtube.com/@CalvinHarris",
-      homeCity: "Scotland, UK",
+      homeCity: "Scotland, UK"
     }),
     genre: "House",
     type: "festival",
@@ -647,9 +620,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
   {
     video: "https://www.youtube.com/watch?v=xVWs0ti0J90",
     primaryArtist: dj("Alan Walker", {
-      accent: "#56cfe1",
-      soundcloud: "https://soundcloud.com/alanwalker",
-      youtube: "https://www.youtube.com/@Alanwalkermusic",
+      accent: "#56cfe1"
     }),
     genre: "Future Bass",
     type: "festival",
@@ -660,9 +631,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
   {
     video: "https://www.youtube.com/watch?v=U2ZjW_8K3h4",
     primaryArtist: dj("Jamie Jones", {
-      accent: "#f72585",
-      soundcloud: "https://soundcloud.com/jamie-jones",
-      youtube: "https://www.youtube.com/@JamieJonesOfficial",
+      accent: "#f72585"
     }),
     genre: "Tech House",
     type: "festival",
@@ -673,9 +642,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
   {
     video: "https://www.youtube.com/watch?v=y3I-vaIIo9Y",
     primaryArtist: dj("R3hab", {
-      accent: "#ffbe0b",
-      soundcloud: "https://soundcloud.com/r3hab",
-      youtube: "https://www.youtube.com/@r3hab",
+      accent: "#ffbe0b"
     }),
     genre: "Big Room",
     type: "festival",
@@ -686,9 +653,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
   {
     video: "https://www.youtube.com/watch?v=oGS0A_R9tag",
     primaryArtist: dj("Skrillex", {
-      accent: "#80ffdb",
-      soundcloud: "https://soundcloud.com/skrillex",
-      youtube: "https://www.youtube.com/@skrillex",
+      accent: "#80ffdb"
     }),
     genre: "Dubstep",
     type: "festival",
