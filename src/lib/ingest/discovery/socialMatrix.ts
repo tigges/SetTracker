@@ -123,8 +123,12 @@ export function buildSocialMatrix(input: {
       if (!m.youtube) {
         const at = path.match(/^\/(@[\w.-]+)/);
         const ch = path.match(/^\/channel\/(UC[\w-]{20,})/);
+        const vanity = path.match(/^\/(c|user)\/([\w.-]+)/);
         if (at) m.youtube = `https://www.youtube.com/${at[1]}`;
         else if (ch) m.youtube = `https://www.youtube.com/channel/${ch[1]}`;
+        else if (vanity) {
+          m.youtube = `https://www.youtube.com/${vanity[1]}/${vanity[2]}`;
+        }
       }
       continue;
     }

@@ -11,6 +11,14 @@ export type RawArtist = {
   bio?: string;
   /** Source-native portrait (SoundCloud / hearthis avatar), when known. */
   imageUrl?: string;
+  /**
+   * Social / hub URLs harvested from the set or profile description
+   * (plain-text "YouTube: @x", bare youtube.com/@x, etc.). Ingest fill-nulls
+   * Dj.youtube / IG / X / website from these — never overwrites pins.
+   */
+  socialLinks?: string[];
+  /** Optional @handle when already resolved from description links. */
+  youtubeHandle?: string;
 };
 
 export type RawPlay = {

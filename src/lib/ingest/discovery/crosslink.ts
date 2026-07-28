@@ -13,13 +13,17 @@
 import { writeFileSync, mkdirSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { ARTIST_ROSTER, rosterMissingHandles } from "../roster";
-import { resolveUser, scGet, sleep } from "../soundcloud/client";
+import { sleep } from "../soundcloud/client";
 import {
+  extractYoutubeChannelIdFromUrl,
+  extractYoutubeHandleFromUrl,
+  extractYoutubeVanityFromUrl,
   fetchChannelSocialLinks,
   resolveYoutubeHandle,
   searchYoutubeChannelHandle,
 } from "../youtube/client";
 import { expandAllLinkHubs } from "./linkHubs";
+import { fetchSoundcloudProfileLinks } from "./scProfileLinks";
 import {
   buildSocialMatrix,
   socialMatrixMarkdownTable,
@@ -72,14 +76,11 @@ function extractSoundcloudPermalink(url: string): string | null {
 }
 
 function extractYoutubeHandle(url: string): string | null {
-  const at = url.match(/youtube\.com\/@([\w.-]+)/i);
-  if (at) return `@${at[1]}`;
-  return null;
+  return extractYoutubeHandleFromUrl(url);
 }
 
 function extractYoutubeChannelId(url: string): string | null {
-  const m = url.match(/youtube\.com\/channel\/(UC[\w-]{20,})/i);
-  return m?.[1] ?? null;
+  return extractYoutubeChannelIdFromUrl(url);
 }
 
 function extractInstagram(url: string): string | null {
@@ -96,31 +97,6 @@ function extractTwitter(url: string): string | null {
   if (!m) return null;
   if (["intent", "share", "home", "i"].includes(m[1].toLowerCase())) return null;
   return m[1];
-}
-
-async function scOutboundLinks(permalink: string): Promise<string[]> {
-  try {
-    const u = await resolveUser(permalink);
-    const full = await scGet<{
-      website?: string | null;
-      description?: string | null;
-    }>(`/users/${u.id}`);
-    const links: string[] = [];
-    if (full.website) links.push(String(full.website));
-    const desc = String(full.description || "");
-    for (const m of desc.matchAll(/https?:\/\/[^\s)]+/gi)) {
-      links.push(m[0].replace(/[),.;]+$/, ""));
-    }
-    // Bare hosts in SC bios (common: instagram.com/foo)
-    for (const m of desc.matchAll(
-      /(?:instagram\.com|twitter\.com|x\.com|tiktok\.com|youtube\.com)\/[A-Za-z0-9@._-]+/gi,
-    )) {
-      links.push(`https://${m[0].replace(/^https?:\/\//i, "")}`);
-    }
-    return links;
-  } catch {
-    return [];
-  }
 }
 
 /**
@@ -148,7 +124,9 @@ export async function runCrosslinkDiscovery(): Promise<HandleReport> {
 
     if (artist.soundcloud?.permalink) {
       try {
-        const links = await scOutboundLinks(artist.soundcloud.permalink);
+        const links = await fetchSoundcloudProfileLinks(
+          artist.soundcloud.permalink,
+        );
         await sleep(120);
         for (const l of links) discovered.push(l);
         if (links.length) crosslinkHits += 1;
@@ -166,7 +144,7 @@ export async function runCrosslinkDiscovery(): Promise<HandleReport> {
     let scPermalink = artist.soundcloud?.permalink || null;
     let scStatus = artist.soundcloud?.status || "missing";
 
-    // Fill missing YT from @handles in discovered links
+    // Fill missing YT from @handles / vanity / channel IDs in discovered links
     if (!youtubeHandle || youtubeStatus === "missing") {
       for (const l of uniq) {
         const h = extractYoutubeHandle(l);
@@ -179,13 +157,15 @@ export async function runCrosslinkDiscovery(): Promise<HandleReport> {
       }
     }
 
-    // Resolve youtube.com/channel/UC… → @handle when still missing
+    // Resolve youtube.com/channel/UC… and /c/ /user/ vanity → @handle
     if (!youtubeHandle || youtubeStatus === "missing") {
       for (const l of uniq) {
         const channelId = extractYoutubeChannelId(l);
-        if (!channelId) continue;
+        const vanity = extractYoutubeVanityFromUrl(l);
+        const target = channelId || vanity;
+        if (!target) continue;
         try {
-          const h = await resolveYoutubeHandle(channelId);
+          const h = await resolveYoutubeHandle(target);
           await sleep(120);
           if (h) {
             youtubeHandle = h;
@@ -199,7 +179,6 @@ export async function runCrosslinkDiscovery(): Promise<HandleReport> {
         }
       }
     }
-
     // Last resort: YouTube channel search by artist name
     if (!youtubeHandle || youtubeStatus === "missing") {
       try {

@@ -4,6 +4,7 @@ import { hearthisEmbedUrl, playbackUrlFromSource } from "../playback";
 import { djSocialsFromKnown, labelSocials } from "../social";
 import { ARTIST_ROSTER } from "./roster";
 import { parseTrackTitle } from "../trackMeta";
+import { runCatalogScSocials } from "./discovery/catalogScSocials";
 import { runCatalogYtSocials } from "./discovery/catalogYtSocials";
 import { runCrosslinkDiscovery, type HandleReport } from "./discovery/crosslink";
 import { runDiscovery, type DiscoveryStats } from "./discovery/run";
@@ -121,8 +122,8 @@ export async function runIngest(
     const socials = djSocialsFromKnown({
       name,
       soundcloudPermalink: roster?.soundcloud?.permalink,
-      youtubeHandle: roster?.youtube?.handle,
-      socials: roster?.socials,
+      youtubeHandle: roster?.youtube?.handle || raw.youtubeHandle,
+      socials: [...(roster?.socials ?? []), ...(raw.socialLinks ?? [])],
       website: roster?.website,
     });
     const displayName = roster?.name ?? name;
@@ -134,6 +135,17 @@ export async function runIngest(
         data.accent = roster.accent || existing.accent;
         data.homeCity = roster.homeCity ?? existing.homeCity;
         Object.assign(data, socials);
+      } else {
+        // Description-harvested socials: fill-null only (never clobber pins).
+        if (!existing.youtube && socials.youtube) data.youtube = socials.youtube;
+        if (!existing.instagram && socials.instagram) {
+          data.instagram = socials.instagram;
+        }
+        if (!existing.twitter && socials.twitter) data.twitter = socials.twitter;
+        if (!existing.website && socials.website) data.website = socials.website;
+        if (!existing.soundcloud && socials.soundcloud) {
+          data.soundcloud = socials.soundcloud;
+        }
       }
       // Fill missing portraits from source-native avatars (hearthis / SC).
       if (!existing.imageUrl && raw.imageUrl) data.imageUrl = raw.imageUrl;
@@ -670,6 +682,16 @@ export async function runIngest(
   } catch (err) {
     console.warn(
       "[ingest] catalog-yt-socials failed:",
+      err instanceof Error ? err.message : err,
+    );
+  }
+
+  // SC profile bios often list "YouTube: @handle" as plain text (not a link).
+  try {
+    await runCatalogScSocials(prisma);
+  } catch (err) {
+    console.warn(
+      "[ingest] catalog-sc-socials failed:",
       err instanceof Error ? err.message : err,
     );
   }

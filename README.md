@@ -73,6 +73,8 @@ npm run dev        # http://localhost:3000
 | `npm run db:reset`   | Drop, re-migrate and re-seed the DB    |
 | `npm run ingest`     | Upsert sets from SoundCloud (+ optional backfill) |
 | `npm run crosslink`  | Scrape YT/SC profiles + link hubs → handle report |
+| `npm run catalog-sc-socials` | Fill Dj YouTube/IG/… from SC bio plain-text links |
+| `npm run catalog-yt-socials` | Fill Dj socials from YT About / description links |
 | `npm run thumbs`     | Resolve artwork URLs (Deezer / iTunes) |
 | `npm run enrich:fingerprint` | ACRCloud gap-fill for sparse sets (`ACRCLOUD_*`) |
 

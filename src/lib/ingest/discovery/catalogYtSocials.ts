@@ -275,8 +275,12 @@ export async function runCatalogYtSocials(
     if (!dj.soundcloud && matrix.soundcloud) {
       data.soundcloud = absSocial(matrix.soundcloud);
     }
-    if (!dj.youtube && handle) {
-      const yt = youtubeChannelUrl(handle);
+    // Prefer the uploading artist channel; else any YT channel URL found in
+    // the description / About ("YouTube: @x", bare youtube.com/@x, …).
+    if (!dj.youtube) {
+      const yt =
+        (handle ? youtubeChannelUrl(handle) : null) ||
+        (matrix.youtube ? youtubeChannelUrl(matrix.youtube) : null);
       if (yt) data.youtube = yt;
     }
     if (!dj.instagram && matrix.instagram) {

@@ -66,4 +66,38 @@ assert.ok(links.some((l) => /instagram\.com\/afrojack/i.test(l)));
 assert.ok(links.some((l) => /x\.com\/afrojack|twitter\.com\/afrojack/i.test(l)));
 assert.ok(links.some((l) => /youtube\.com\/@afrojacktv/i.test(l)));
 
+// Plain @handle labels (previously only slash form worked for YT).
+const atLabel = extractSocialLinksFromText(`
+Connect:
+YouTube: @westend
+YT: @westendmusic
+youtube.com/@itsthewestend
+Find me YouTube @bonuschannel
+`);
+assert.ok(
+  atLabel.some((l) => /youtube\.com\/@westend$/i.test(l.replace(/\/$/, ""))),
+  `expected YouTube: @westend, got ${JSON.stringify(atLabel)}`,
+);
+assert.ok(
+  atLabel.some((l) => /youtube\.com\/@westendmusic/i.test(l)),
+  `expected YT: @westendmusic, got ${JSON.stringify(atLabel)}`,
+);
+assert.ok(
+  atLabel.some((l) => /youtube\.com\/@itsthewestend/i.test(l)),
+  `expected bare youtube.com/@…, got ${JSON.stringify(atLabel)}`,
+);
+assert.ok(
+  atLabel.some((l) => /youtube\.com\/@bonuschannel/i.test(l)),
+  `expected YouTube @bonuschannel, got ${JSON.stringify(atLabel)}`,
+);
+
+import { buildSocialMatrix } from "./socialMatrix";
+const matrix = buildSocialMatrix({
+  links: [
+    "https://www.youtube.com/c/WestendOfficial",
+    "https://www.youtube.com/user/oldvanity",
+  ],
+});
+assert.equal(matrix.youtube, "https://www.youtube.com/c/WestendOfficial");
+
 console.log("catalogYtSocials.test.ts ok");

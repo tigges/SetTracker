@@ -9,6 +9,7 @@
  */
 
 import { pickYoutubeThumbnail } from "../../thumbs/youtubeThumb";
+import type { RawArtist } from "../types";
 
 /** Googlebot UA unlocks player metadata; desktop UAs often get LOGIN_REQUIRED. */
 const UA =
@@ -776,12 +777,18 @@ export function extractSocialLinksFromText(text: string): string[] {
   const relativeX = [
     ...text.matchAll(/(?:Twitter|X):\s*\/([A-Za-z0-9_]+)/gi),
   ].map((m) => `https://x.com/${m[1]}`);
+  // YouTube labels vary: "YouTube: /x", "YouTube: @x", "YT: @x", "YouTube @x"
+  // (IG already accepts @; YT previously required a slash and missed plain @handles.)
   const relativeYt = [
-    ...text.matchAll(/YouTube:\s*\/(@?[\w.-]+)/gi),
+    ...text.matchAll(/(?:YouTube|YT)\s*:\s*(?:\/|@)?([\w.-]+)/gi),
+    ...text.matchAll(/(?:YouTube|YT)\s+@([\w.-]+)/gi),
   ].map((m) => {
-    const h = m[1].startsWith("@") ? m[1] : `@${m[1]}`;
+    const raw = m[1];
+    // Skip label leftovers / non-handles
+    if (!raw || /^(com|music|channel|watch)$/i.test(raw)) return null;
+    const h = raw.startsWith("@") ? raw : `@${raw}`;
     return `https://www.youtube.com/${h}`;
-  });
+  }).filter((u): u is string => Boolean(u));
   const socials = [
     ...new Set([
       ...plain,
@@ -793,6 +800,53 @@ export function extractSocialLinksFromText(text: string): string[] {
     ]),
   ].filter(isUsefulOutboundLink);
   return [...new Set([...socials, ...websites])];
+}
+
+/**
+ * Pull a channel handle (@x) or vanity (/c/x, /user/x, /channel/UCx) from a URL.
+ * Returns a canonical "@handle" when possible; otherwise null (caller may resolve UC…).
+ */
+export function extractYoutubeHandleFromUrl(url: string): string | null {
+  const at = url.match(/youtube\.com\/@([\w.-]+)/i);
+  if (at) return `@${at[1]}`;
+  return null;
+}
+
+/** youtube.com/channel/UC… id when present. */
+export function extractYoutubeChannelIdFromUrl(url: string): string | null {
+  const m = url.match(/youtube\.com\/channel\/(UC[\w-]{20,})/i);
+  return m?.[1] ?? null;
+}
+
+/** youtube.com/c/Name or /user/Name vanity path (not yet an @handle). */
+export function extractYoutubeVanityFromUrl(url: string): string | null {
+  const m = url.match(/youtube\.com\/(c|user)\/([\w.-]+)/i);
+  if (!m) return null;
+  return `https://www.youtube.com/${m[1]}/${m[2]}`;
+}
+
+/**
+ * Attach plain-text / bare socials from a description onto a RawArtist
+ * (fill-null at ingest — never invents handles).
+ */
+export function withDescriptionSocials(
+  primary: RawArtist,
+  description: string | null | undefined,
+): RawArtist {
+  const plain = (description || "")
+    .replace(/<br\s*\/?>/gi, "\n")
+    .replace(/<[^>]+>/g, " ");
+  const links = extractSocialLinksFromText(plain);
+  if (!links.length) return primary;
+  const yt =
+    primary.youtubeHandle ||
+    links.map(extractYoutubeHandleFromUrl).find(Boolean) ||
+    undefined;
+  return {
+    ...primary,
+    socialLinks: [...new Set([...(primary.socialLinks ?? []), ...links])],
+    youtubeHandle: yt ?? undefined,
+  };
 }
 
 /** Extract outbound social / hub links from a channel About (or channel) page. */
@@ -820,9 +874,10 @@ export async function fetchChannelSocialLinks(
       ),
     ].map((m) => m[0].replace(/[),.;]+$/, ""));
     // Bare www. / host paths that YouTube surfaces without scheme
+    // (include youtube.com/@… vanity pasted without https)
     const bare = [
       ...html.matchAll(
-        /(?:instagram\.com|twitter\.com|x\.com|tiktok\.com|facebook\.com|soundcloud\.com)\/[A-Za-z0-9._~-]+/gi,
+        /(?:instagram\.com|twitter\.com|x\.com|tiktok\.com|facebook\.com|soundcloud\.com|youtube\.com)\/[A-Za-z0-9@._~-]+/gi,
       ),
     ].map((m) => `https://${m[0]}`);
     return [...new Set([...escaped, ...plain, ...bare])].filter(isUsefulOutboundLink);
