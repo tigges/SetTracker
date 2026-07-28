@@ -18,6 +18,8 @@ export const KNOWN_EVENT_IMAGES: Record<string, string> = {
     "https://d3vhc53cl8e8km.cloudfront.net/hello-staging/wp-content/uploads/sites/21/2026/05/19195123/edclv_2027_mk_te_twoweekend_fest_site_seo_1200x630_r01.jpg",
   tomorrowland:
     "https://www.tomorrowland.com/home/media/GkfYvqthei1CQ_kr_1784285411289_2bf2ab4e-c423-4f42-9573-3eb426e231bb.jpg_0_554559390070347944.jpg?auto=format,compress&w=1200",
+  "burning-man":
+    "https://burningman.org/wp-content/themes/firebird-master/assets/images/BMP-socialCard-Rawlinson_2024.jpg",
   coachella:
     "https://media.coachella.com/content/seo_images/795/EBn21kXwRGMWDHIFsOpxoc2DgUFFdcZ0IknKjGSS.jpg",
   lollapalooza:
