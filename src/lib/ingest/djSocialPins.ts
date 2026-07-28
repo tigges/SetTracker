@@ -325,6 +325,79 @@ export const DJ_SOCIAL_PINS: DjSocialPin[] = [
     website: "https://www.mixcloud.com/Msendy/",
     bio: "Deep House. Mixcloud Msendy / Deep Perspectives — SC msandi, hearthis.at/tjzqnmf7.",
   },
+  // ---- DJ Mag Top 100 handle gaps (official sites / verified SC only) ----
+  {
+    slug: "alok",
+    name: "Alok",
+    accent: "#ff6b35",
+    soundcloud: "https://soundcloud.com/livealok",
+    youtube: "https://www.youtube.com/channel/UCQlaArsZfebRbb70iXm6usg",
+    instagram: "https://www.instagram.com/alok/",
+    twitter: "https://x.com/alokoficial",
+    website: "https://alokmusic.com/",
+    bio: "Brazilian House / EDM. Official alokmusic.com — SC livealok, YT channel UCQlaArsZfebRbb70iXm6usg, IG @alok.",
+  },
+  {
+    slug: "afrojack",
+    name: "Afrojack",
+    accent: "#ffd60a",
+    soundcloud: "https://soundcloud.com/afrojack",
+    youtube: "https://www.youtube.com/@afrojack",
+    instagram: "https://www.instagram.com/afrojack/",
+    twitter: "https://x.com/djafrojack",
+    website: "https://www.afrojack.com/",
+    bio: "Dutch House. Official afrojack.com — SC afrojack, YT @afrojack (not @https), IG @afrojack.",
+  },
+  {
+    slug: "anyma",
+    name: "Anyma",
+    accent: "#7b2cbf",
+    soundcloud: "https://soundcloud.com/anyma_ofc",
+    youtube: "https://www.youtube.com/@anyma_ofc",
+    instagram: "https://www.instagram.com/anyma/",
+    website: "https://www.anyma.com/",
+    bio: "Melodic Techno. Official anyma.com — SC anyma_ofc, YT @anyma_ofc, IG @anyma.",
+  },
+  {
+    slug: "peggy-gou",
+    name: "Peggy Gou",
+    accent: "#e63946",
+    soundcloud: "https://soundcloud.com/peggygou",
+    youtube: "https://www.youtube.com/channel/UCWd5yMFDEuSCWzTM4xuA1fg",
+    instagram: null,
+    website: "https://www.peggygou.com/",
+    bio: "House. Official peggygou.com — SC peggygou, YT channel UCWd5yMFDEuSCWzTM4xuA1fg.",
+  },
+  {
+    slug: "calvin-harris",
+    name: "Calvin Harris",
+    accent: "#ff9f1c",
+    soundcloud: "https://soundcloud.com/calvinharris",
+    youtube: "https://www.youtube.com/channel/UCIjYyZxkFucP_W-tmXg_9Ow",
+    instagram: null,
+    website: "https://calvinharris.com/",
+    bio: "Dance / EDM. Official calvinharris.com — SC calvinharris, YT channel UCIjYyZxkFucP_W-tmXg_9Ow.",
+  },
+  {
+    slug: "w-w",
+    name: "W&W",
+    accent: "#00b4d8",
+    soundcloud: "https://soundcloud.com/wandw",
+    youtube: "https://www.youtube.com/user/WandWmusic",
+    instagram: null,
+    website: "https://www.wandwmusic.com/",
+    bio: "Big Room. Official wandwmusic.com — SC wandw, YT user/WandWmusic.",
+  },
+  {
+    slug: "timmy-trumpet",
+    name: "Timmy Trumpet",
+    accent: "#ffba08",
+    soundcloud: "https://soundcloud.com/timmytrumpet",
+    youtube: "https://www.youtube.com/channel/UCd61k-5ykv_4RIbQg-Mpvrg",
+    instagram: null,
+    website: "https://www.timmytrumpet.com/",
+    bio: "Big Room / Melbourne bounce. Official timmytrumpet.com — SC timmytrumpet.",
+  },
 ];
 
 /** Upsert pinned social fields for curated brand DJs. Returns rows touched. */
@@ -367,8 +440,13 @@ export async function applyRosterYoutube(prisma: PrismaClient): Promise<number> 
     if (!existing) continue;
     if (existing.youtube === url) continue;
     // Prefer roster channel over empty / stale non-channel watch URLs.
+    // Also overwrite clearly broken handles (e.g. @https from bad scrapes).
+    const broken =
+      /youtube\.com\/@https\b/i.test(existing.youtube ?? "") ||
+      /youtube\.com\/@$/i.test(existing.youtube ?? "");
     if (
       existing.youtube &&
+      !broken &&
       /youtube\.com\/@/i.test(existing.youtube) &&
       existing.youtube !== url
     ) {
