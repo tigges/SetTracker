@@ -110,7 +110,8 @@ export const EVENT_OFFICIAL_SITES: Record<string, string> = {
 };
 
 function isWeakVenueWebsite(url: string): boolean {
-  return /6amgroup\.com|clubtickets\.com\/blog|djmag\.com\/top-100-clubs/i.test(
+  // DJ Mag Top 100 profile pages (both URL shapes) are not club OG sources.
+  return /6amgroup\.com|clubtickets\.com\/blog|djmag\.com\/top-?100-?clubs/i.test(
     url,
   );
 }

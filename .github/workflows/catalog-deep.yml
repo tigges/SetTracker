@@ -130,6 +130,9 @@ jobs:
       - name: Verify social / website URLs (once)
         env:
           VERIFY_URLS_CURATED_ONLY: "0"
+          # Fill missing official club sites from DJ Mag profile pages.
+          DJMAG_ENRICH_OFFICIAL: "1"
+          DJMAG_OFFICIAL_LIMIT: "100"
         run: npm run verify-urls
 
       - name: Guard catalog size

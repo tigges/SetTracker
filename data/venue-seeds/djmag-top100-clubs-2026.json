@@ -1,607 +1,707 @@
 {
   "source": "https://djmag.com/top100clubs",
   "year": 2026,
-  "note": "Fallback seed when live DJ Mag scrape fails. Prefer live HTML parse.",
+  "note": "Fallback seed when live DJ Mag scrape fails. Prefer live HTML parse. `website` = official club site from profile pages.",
   "clubs": [
     {
       "rank": 1,
       "slug": "unvrs",
       "name": "UNVRS",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/1/unvrs"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/1/unvrs",
+      "website": "https://unvrs.com/"
     },
     {
       "rank": 2,
       "slug": "greenvalley",
       "name": "GREENVALLEY",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/2/greenvalley"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/2/greenvalley",
+      "website": "https://greenvalleybr.com/"
     },
     {
       "rank": 3,
       "slug": "ushuaia-ibiza",
       "name": "Ushuaïa Ibiza",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/3/ushuaia-ibiza"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/3/ushuaia-ibiza",
+      "website": "https://theushuaiaexperience.com/"
     },
     {
       "rank": 4,
       "slug": "hi-ibiza",
       "name": "Hï Ibiza",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/4/hi-ibiza"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/4/hi-ibiza",
+      "website": "https://hiibiza.com/"
     },
     {
       "rank": 5,
       "slug": "savaya",
       "name": "Savaya",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/5/savaya"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/5/savaya",
+      "website": "https://www.savaya.com/"
     },
     {
       "rank": 6,
       "slug": "echostage",
       "name": "Echostage",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/6/echostage"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/6/echostage",
+      "website": "https://echostage.com/"
     },
     {
       "rank": 7,
       "slug": "laroc-club",
       "name": "Laroc Club",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/7/laroc-club"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/7/laroc-club",
+      "website": "https://www.laroc.club/valinhos/"
     },
     {
       "rank": 8,
       "slug": "fabrik",
       "name": "FABRIK",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/8/fabrik"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/8/fabrik",
+      "website": "https://www.fabrikmadrid.com/"
     },
     {
       "rank": 9,
       "slug": "illuzion-phuket",
       "name": "Illuzion Phuket",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/9/illuzion-phuket"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/9/illuzion-phuket",
+      "website": "https://illuzionphuket.com/"
     },
     {
       "rank": 10,
       "slug": "surreal-park",
       "name": "Surreal Park",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/10/surreal-park"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/10/surreal-park",
+      "website": "https://www.surreal.art.br/"
     },
     {
       "rank": 11,
       "slug": "bootshaus",
       "name": "Bootshaus",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/11/bootshaus"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/11/bootshaus",
+      "website": "https://bootshaus.tv/"
     },
     {
       "rank": 12,
       "slug": "ins-land",
       "name": "INS LAND",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/12/ins-land"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/12/ins-land",
+      "website": "https://ins.hero.com/"
     },
     {
       "rank": 13,
       "slug": "fabric",
       "name": "fabric",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/13/fabric"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/13/fabric",
+      "website": "https://fabriclondon.com/"
     },
     {
       "rank": 14,
       "slug": "club-space",
       "name": "Club Space",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/14/club-space"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/14/club-space",
+      "website": "https://www.clubspace.com/"
     },
     {
       "rank": 15,
       "slug": "warehouse-project",
       "name": "The Warehouse Project",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/15/warehouse-project"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/15/warehouse-project",
+      "website": "https://thewarehouseproject.com/"
     },
     {
       "rank": 16,
       "slug": "amnesia-ibiza",
       "name": "Amnesia Ibiza",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/16/amnesia-ibiza"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/16/amnesia-ibiza",
+      "website": "https://amnesia.es/"
     },
     {
       "rank": 17,
       "slug": "zouk-singapore",
       "name": "Zouk Singapore",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/17/zouk-singapore"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/17/zouk-singapore",
+      "website": "https://zoukgroup.com/singapore/"
     },
     {
       "rank": 18,
       "slug": "pacha-ibiza",
       "name": "PACHA IBIZA",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/18/pacha-ibiza"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/18/pacha-ibiza",
+      "website": "https://pacha.com/"
     },
     {
       "rank": 19,
       "slug": "dc-10",
       "name": "DC-10",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/19/dc-10"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/19/dc-10",
+      "website": "https://dc10ibiza.com/"
     },
     {
       "rank": 20,
       "slug": "studio-338",
       "name": "Studio 338",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/20/studio-338"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/20/studio-338",
+      "website": "https://www.studio338.co.uk/"
     },
     {
       "rank": 21,
       "slug": "berghain",
       "name": "Berghain",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/21/berghain"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/21/berghain",
+      "website": "https://berghain.de/"
     },
     {
       "rank": 22,
       "slug": "cavo-paradiso",
       "name": "Cavo Paradiso",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/22/cavo-paradiso"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/22/cavo-paradiso",
+      "website": "https://cavoparadiso.gr/"
     },
     {
       "rank": 23,
       "slug": "wave-club",
       "name": "WAVE Club",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/23/wave-club"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/23/wave-club",
+      "website": "https://wavetaipei.tw/"
     },
     {
       "rank": 24,
       "slug": "ministry-of-sound",
       "name": "Ministry Of Sound",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/24/ministry-of-sound"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/24/ministry-of-sound",
+      "website": "https://ministryofsound.com/"
     },
     {
       "rank": 25,
       "slug": "culture-club-revelin",
       "name": "Culture Club Revelin",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/25/culture-club-revelin"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/25/culture-club-revelin",
+      "website": "https://clubrevelin.com/"
     },
     {
       "rank": 26,
       "slug": "space-riccione",
       "name": "Space Riccione",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/26/space-riccione"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/26/space-riccione",
+      "website": "https://spacericcione.com/"
     },
     {
       "rank": 27,
       "slug": "play-x",
       "name": "Play X",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/27/play-x"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/27/play-x",
+      "website": "https://www.instagram.com/playxchina/"
     },
     {
       "rank": 28,
       "slug": "lost-beach-club",
       "name": "Lost Beach Club",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/28/lost-beach-club"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/28/lost-beach-club",
+      "website": "https://www.instagram.com/lostbeachclub/"
     },
     {
       "rank": 29,
       "slug": "papaya-club",
       "name": "Papaya Club",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/29/papaya-club"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/29/papaya-club",
+      "website": "https://papaya.com.hr/"
     },
     {
       "rank": 30,
       "slug": "quake-arena",
       "name": "Quake Arena",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/30/quake-arena"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/30/quake-arena",
+      "website": "https://www.quakearena.in/"
     },
     {
       "rank": 31,
       "slug": "concourse-project",
       "name": "The Concourse Project",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/31/concourse-project"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/31/concourse-project",
+      "website": "https://concourseproject.com/"
     },
     {
       "rank": 32,
       "slug": "boomerang",
       "name": "Boomerang",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/32/boomerang"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/32/boomerang",
+      "website": "https://boomeranghkg.com/"
     },
     {
       "rank": 33,
       "slug": "amnesia-cap-dagde",
       "name": "Amnesia Cap d’Agde",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/33/amnesia-cap-dagde"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/33/amnesia-cap-dagde",
+      "website": "https://www.amnesia.fr/"
     },
     {
       "rank": 34,
       "slug": "marquee-singapore",
       "name": "Marquee Singapore",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/34/marquee-singapore"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/34/marquee-singapore",
+      "website": "https://www.marqueesingapore.com/"
     },
     {
       "rank": 35,
       "slug": "d-edge",
       "name": "D-Edge",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/35/d-edge"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/35/d-edge",
+      "website": "https://www.d-edge.com.br/"
     },
     {
       "rank": 36,
       "slug": "penthouse",
       "name": "The Penthouse",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/36/penthouse"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/36/penthouse",
+      "website": "https://thepenthouse.co/dubai/"
     },
     {
       "rank": 37,
       "slug": "cafe-del-mar-phuket",
       "name": "Café Del Mar Phuket",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/37/cafe-del-mar-phuket"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/37/cafe-del-mar-phuket",
+      "website": "https://phuket.cafedelmar.com/"
     },
     {
       "rank": 38,
       "slug": "duplex",
       "name": "DupleX",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/38/duplex"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/38/duplex",
+      "website": "https://www.duplex.cz/"
     },
     {
       "rank": 39,
       "slug": "silo-dallas",
       "name": "SILO Dallas",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/39/silo-dallas"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/39/silo-dallas",
+      "website": "https://silodallas.com/"
     },
     {
       "rank": 40,
       "slug": "lod",
       "name": "LOD",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/40/lod"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/40/lod",
+      "website": "https://www.clublod.com/"
     },
     {
       "rank": 41,
       "slug": "crobar",
       "name": "Crobar",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/41/crobar"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/41/crobar",
+      "website": "https://instagram.com/crobarclub/"
     },
     {
       "rank": 42,
       "slug": "atlas-superclub-bali",
       "name": "Atlas Superclub Bali",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/42/atlas-superclub-bali"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/42/atlas-superclub-bali",
+      "website": "https://atlasbeachfest.com/super-club/"
     },
     {
       "rank": 43,
       "slug": "aplus-hanoi",
       "name": "APLUS HANOI",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/43/aplus-hanoi"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/43/aplus-hanoi",
+      "website": "https://aplushanoi.com/"
     },
     {
       "rank": 44,
       "slug": "academy-la",
       "name": "Academy LA",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/44/academy-la"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/44/academy-la",
+      "website": "https://academy.la/"
     },
     {
       "rank": 45,
       "slug": "drumsheds",
       "name": "Drumsheds",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/45/drumsheds"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/45/drumsheds",
+      "website": "https://drumshedslondon.com/"
     },
     {
       "rank": 46,
       "slug": "warung-beach-club",
       "name": "Warung Beach Club",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/46/warung-beach-club"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/46/warung-beach-club",
+      "website": "https://warungclub.com.br/"
     },
     {
       "rank": 47,
       "slug": "shishi-bali",
       "name": "ShiShi Bali",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/47/shishi-bali"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/47/shishi-bali",
+      "website": "https://www.shishibali.com/"
     },
     {
       "rank": 48,
       "slug": "exchange-la",
       "name": "Exchange LA",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/48/exchange-la"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/48/exchange-la",
+      "website": "https://exchangela.com/"
     },
     {
       "rank": 49,
       "slug": "fomo",
       "name": "FOMO",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/49/fomo"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/49/fomo",
+      "website": "https://fomobaku.com/"
     },
     {
       "rank": 50,
       "slug": "atlas-superclub-bangkok",
       "name": "Atlas Superclub Bangkok",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/50/atlas-superclub-bangkok"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/50/atlas-superclub-bangkok",
+      "website": "https://www.instagram.com/atlassuperclub.bkk/"
     },
     {
       "rank": 51,
       "slug": "zouk-tokyo",
       "name": "Zouk Tokyo",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/51/zouk-tokyo"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/51/zouk-tokyo",
+      "website": "https://www.zoukgrouptky.com/"
     },
     {
       "rank": 52,
       "slug": "club-seen-koh-samui",
       "name": "CLUB SEEN Koh Samui",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/52/club-seen-koh-samui"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/52/club-seen-koh-samui",
+      "website": "https://seenbeachclubsamui.com/"
     },
     {
       "rank": 53,
       "slug": "warehouse",
       "name": "Warehouse",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/53/warehouse"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/53/warehouse",
+      "website": "https://warehouse-nantes.fr/"
     },
     {
       "rank": 54,
       "slug": "phi-beach",
       "name": "Phi Beach",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/54/phi-beach"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/54/phi-beach",
+      "website": "https://phibeach.com/"
     },
     {
       "rank": 55,
       "slug": "h-club-jakarta",
       "name": "The H Club Jakarta",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/55/h-club-jakarta"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/55/h-club-jakarta",
+      "website": "https://holywings.com/brands/the-h-club/the-h-club-scbd/"
     },
     {
       "rank": 56,
       "slug": "nitsa",
       "name": "Nitsa",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/56/nitsa"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/56/nitsa",
+      "website": "https://www.nitsa.com/"
     },
     {
       "rank": 57,
       "slug": "lion-seoul",
       "name": "Lion Seoul",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/57/lion-seoul"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/57/lion-seoul",
+      "website": "https://www.instagram.com/lionseoul/"
     },
     {
       "rank": 58,
       "slug": "world-house",
       "name": "WORLD HOUSE",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/58/world-house"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/58/world-house",
+      "website": "https://linktr.ee/WorldHouse_Pattaya/"
     },
     {
       "rank": 59,
       "slug": "aplus-saigon",
       "name": "APLUS SAIGON",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/59/aplus-saigon"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/59/aplus-saigon",
+      "website": "https://instagram.com/aplus.saigon/"
     },
     {
       "rank": 60,
       "slug": "mad-club",
       "name": "MAD Club",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/60/mad-club"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/60/mad-club",
+      "website": "https://mad.club/"
     },
     {
       "rank": 61,
       "slug": "big-bull",
       "name": "Big Bull",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/61/big-bull"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/61/big-bull",
+      "website": "https://bigbullhyd.com/"
     },
     {
       "rank": 62,
       "slug": "room26",
       "name": "Room26",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/62/room26"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/62/room26",
+      "website": "https://www.room26.it/"
     },
     {
       "rank": 63,
       "slug": "farout-beach-club",
       "name": "Farout Beach Club",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/63/farout-beach-club"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/63/farout-beach-club",
+      "website": "https://faroutbeachclub.com/"
     },
     {
       "rank": 64,
       "slug": "avalon-hollywood",
       "name": "AVALON Hollywood",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/64/avalon-hollywood"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/64/avalon-hollywood",
+      "website": "https://avalonhollywood.com/"
     },
     {
       "rank": 65,
       "slug": "hakkasan",
       "name": "Hakkasan",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/65/hakkasan"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/65/hakkasan",
+      "website": "https://taogroup.com/venues/hakkasan-nightclub-las-vegas/"
     },
     {
       "rank": 66,
       "slug": "koko",
       "name": "Koko",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/66/koko"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/66/koko",
+      "website": "https://koko.co.uk/"
     },
     {
       "rank": 67,
       "slug": "void",
       "name": "VOID",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/67/void"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/67/void",
+      "website": "https://voidclubbkk.com/"
     },
     {
       "rank": 68,
       "slug": "cine-saigon",
       "name": "CINÉ Saigon",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/68/cine-saigon"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/68/cine-saigon",
+      "website": "https://cinesaigon.vn/"
     },
     {
       "rank": 69,
       "slug": "space-club",
       "name": "Space Club",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/69/space-club"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/69/space-club",
+      "website": "https://instagram.com/space.hkg/"
     },
     {
       "rank": 70,
       "slug": "omnia",
       "name": "OMNIA",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/70/omnia"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/70/omnia",
+      "website": "https://taogroup.com/venues/omnia-nightclub-las-vegas/"
     },
     {
       "rank": 71,
       "slug": "club-khaosan",
       "name": "The Club Khaosan",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/71/club-khaosan"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/71/club-khaosan",
+      "website": "https://theclubkhaosan.com/"
     },
     {
       "rank": 72,
       "slug": "liv-nightclub",
       "name": "Liv Nightclub",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/72/liv-nightclub"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/72/liv-nightclub",
+      "website": "https://www.livnightclub.com/miami/"
     },
     {
       "rank": 73,
       "slug": "warp-shinjuku",
       "name": "WARP Shinjuku",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/73/warp-shinjuku"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/73/warp-shinjuku",
+      "website": "https://warp-shinjuku.jp/en/"
     },
     {
       "rank": 74,
       "slug": "chinois",
       "name": "Chinois",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/74/chinois"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/74/chinois",
+      "website": "https://chinois.com/"
     },
     {
       "rank": 75,
       "slug": "mute",
       "name": "MUTE",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/75/mute"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/75/mute",
+      "website": "https://mute.com.ar/"
     },
     {
       "rank": 76,
       "slug": "papagayo-tenerife",
       "name": "Papagayo Tenerife",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/76/papagayo-tenerife"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/76/papagayo-tenerife",
+      "website": "https://papagayotenerife.com/"
     },
     {
       "rank": 77,
       "slug": "midnight-club",
       "name": "Midnight Club",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/77/midnight-club"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/77/midnight-club",
+      "website": "https://www.instagram.com/midnight.club_cn/"
     },
     {
       "rank": 78,
       "slug": "after-caposile",
       "name": "After Caposile",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/78/after-caposile"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/78/after-caposile",
+      "website": "https://aftercaposile.it/"
     },
     {
       "rank": 79,
       "slug": "radius",
       "name": "Radius",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/79/radius"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/79/radius",
+      "website": "https://radius-chicago.com/"
     },
     {
       "rank": 80,
       "slug": "index",
       "name": "Index",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/80/index"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/80/index",
+      "website": "https://indexdublin.com/"
     },
     {
       "rank": 81,
       "slug": "pelicano",
       "name": "Pelícano",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/81/pelicano"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/81/pelicano",
+      "website": "https://salapelicano.com/"
     },
     {
       "rank": 82,
       "slug": "republic-club",
       "name": "Republic Club",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/82/republic-club"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/82/republic-club",
+      "website": "https://republic-nightclub.com/"
     },
     {
       "rank": 83,
       "slug": "zouk",
       "name": "Zouk",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/83/zouk"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/83/zouk",
+      "website": "https://zoukgrouplv.com/zouk/"
     },
     {
       "rank": 84,
       "slug": "marquee-nightclub-dayclub",
       "name": "Marquee Nightclub & Dayclub",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/84/marquee-nightclub-dayclub"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/84/marquee-nightclub-dayclub",
+      "website": "https://marqueelasvegas.com/"
     },
     {
       "rank": 85,
       "slug": "ai-x",
       "name": "Ai-X",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/85/ai-x"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/85/ai-x",
+      "website": "https://www.instagram.com/aixnightclub/"
     },
     {
       "rank": 86,
       "slug": "sound",
       "name": "Sound",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/86/sound"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/86/sound",
+      "website": "https://www.soundnightclub.com/"
     },
     {
       "rank": 87,
       "slug": "aquarius",
       "name": "Aquarius",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/87/aquarius"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/87/aquarius",
+      "website": "https://aquarius.club/"
     },
     {
       "rank": 88,
       "slug": "womb",
       "name": "WOMB",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/88/womb"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/88/womb",
+      "website": "https://womb.co.jp/"
     },
     {
       "rank": 89,
       "slug": "tenax-club",
       "name": "Tenax Club",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/89/tenax-club"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/89/tenax-club",
+      "website": "https://tenax.org/"
     },
     {
       "rank": 90,
       "slug": "shelter-amsterdam",
       "name": "Shelter Amsterdam",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/90/shelter-amsterdam"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/90/shelter-amsterdam",
+      "website": "https://www.shelteramsterdam.nl/"
     },
     {
       "rank": 91,
       "slug": "beachclub",
       "name": "Beachclub",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/91/beachclub"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/91/beachclub",
+      "website": "https://www.beachclub.com/"
     },
     {
       "rank": 92,
       "slug": "ivy-sydney",
       "name": "ivy Sydney",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/92/ivy-sydney"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/92/ivy-sydney",
+      "website": "https://merivale.com/venues/ivy/"
     },
     {
       "rank": 93,
       "slug": "soho-garden",
       "name": "Soho Garden",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/93/soho-garden"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/93/soho-garden",
+      "website": "https://sohogardendxb.com/"
     },
     {
       "rank": 94,
       "slug": "amnesia-milano",
       "name": "Amnesia Milano",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/94/amnesia-milano"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/94/amnesia-milano",
+      "website": "https://amnesiamilano.com/"
     },
     {
       "rank": 95,
       "slug": "time",
       "name": "Time",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/95/time"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/95/time",
+      "website": "https://timenightclub.com/"
     },
     {
       "rank": 96,
       "slug": "ilmuretto",
       "name": "ilMuretto",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/96/ilmuretto"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/96/ilmuretto",
+      "website": "https://ilmuretto.org/"
     },
     {
       "rank": 97,
       "slug": "chinese-laundry",
       "name": "Chinese Laundry",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/97/chinese-laundry"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/97/chinese-laundry",
+      "website": "https://chineselaundry.club/"
     },
     {
       "rank": 98,
       "slug": "muze",
       "name": "MUZE",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/98/muze"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/98/muze",
+      "website": "https://www.muzeclub.com/"
     },
     {
       "rank": 99,
       "slug": "eden",
       "name": "Eden",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/99/eden"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/99/eden",
+      "website": "https://edenibiza.com/"
     },
     {
       "rank": 100,
       "slug": "open-ground",
       "name": "Open Ground",
-      "djmagUrl": "https://djmag.com/top100clubs/2026/100/open-ground"
+      "djmagUrl": "https://djmag.com/top100clubs/2026/100/open-ground",
+      "website": "https://www.openground.club/en/"
     }
   ]
 }

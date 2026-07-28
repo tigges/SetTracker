@@ -24,7 +24,8 @@
     "enrich:fingerprint": "tsx prisma/enrich-fingerprint.ts",
     "graduate-roster": "tsx prisma/graduate-roster.ts",
     "normalize-genres": "tsx prisma/normalize-genres.ts",
-    "crosscheck:beatportal-house-2025": "tsx scripts/crosscheck-beatportal-house-2025.ts"
+    "crosscheck:beatportal-house-2025": "tsx scripts/crosscheck-beatportal-house-2025.ts",
+    "enrich:djmag-sites": "tsx scripts/enrich-djmag-official-sites.ts"
   },
   "dependencies": {
     "@prisma/client": "^6.19.3",
