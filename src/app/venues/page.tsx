@@ -3,8 +3,9 @@ import { EntityThumb } from "@/components/EntityThumb";
 import { ExpandableCardGrid } from "@/components/ExpandableCardGrid";
 import { getLabels, getVenues } from "@/lib/queries";
 
-/** Default Labels preview — ~4 rows on a 3-col desktop grid. */
+/** Default Labels / Directory preview — ~4 rows on a 3-col desktop grid. */
 const LABELS_PREVIEW = 12;
+const DIRECTORY_PREVIEW = 12;
 
 const SECTIONS: Array<{
   id: string;
@@ -15,28 +16,26 @@ const SECTIONS: Array<{
   {
     id: "festivals",
     title: "Festivals",
-    blurb: "Named festival brands with sets or an official site.",
+    blurb: "Festival brands with linked sets in the catalog.",
     kinds: ["festival"],
   },
   {
     id: "clubs",
     title: "Clubs",
-    blurb: "DJ Mag Top 100 and other club rooms.",
+    blurb: "DJ Mag Top 100 and other club rooms with sets.",
     kinds: ["club"],
   },
   {
     id: "livestreams",
     title: "Livestreams & media",
-    blurb: "Boiler Room, Cercle, Mixmag and similar channels.",
+    blurb: "Boiler Room, Cercle, Mixmag and similar channels with sets.",
     kinds: ["livestream", "radio", "event"],
   },
 ];
 
-function VenueCard({
-  v,
-}: {
-  v: Awaited<ReturnType<typeof getVenues>>[number];
-}) {
+type VenueRow = Awaited<ReturnType<typeof getVenues>>[number];
+
+function VenueCard({ v }: { v: VenueRow }) {
   return (
     <Link
       href={`/venues/${v.slug}`}
@@ -64,16 +63,13 @@ function VenueCard({
   );
 }
 
-export default async function VenuesPage() {
-  const [venues, labels] = await Promise.all([getVenues(), getLabels()]);
+function bucketByKind(venues: VenueRow[]) {
   const used = new Set<string>();
-
   const buckets = SECTIONS.map((section) => {
     const items = venues.filter((v) => section.kinds.includes(v.kind));
     for (const v of items) used.add(v.id);
     return { ...section, items };
   });
-
   const leftover = venues.filter((v) => !used.has(v.id));
   if (leftover.length) {
     buckets.push({
@@ -84,6 +80,14 @@ export default async function VenuesPage() {
       items: leftover,
     });
   }
+  return buckets;
+}
+
+export default async function VenuesPage() {
+  const [venues, labels] = await Promise.all([getVenues(), getLabels()]);
+  const withSets = venues.filter((v) => v.isBrowseReady);
+  const directory = venues.filter((v) => !v.isBrowseReady);
+  const buckets = bucketByKind(withSets);
 
   return (
     <div>
@@ -91,8 +95,8 @@ export default async function VenuesPage() {
         <p className="eyebrow">Places &amp; platforms</p>
         <h1 className="mt-1 text-3xl font-extrabold tracking-tight">Venues</h1>
         <p className="mt-2 max-w-2xl text-[14px] text-muted">
-          Festivals, clubs, livestream channels, and labels — separate from DJs
-          and radio series.
+          Festivals, clubs, and livestream channels with sets first — curated
+          directory stubs without sets stay below.
         </p>
       </div>
 
@@ -167,9 +171,35 @@ export default async function VenuesPage() {
             />
           )}
         </section>
+
+        {directory.length > 0 ? (
+          <section id="directory">
+            <div className="mb-3 flex items-baseline justify-between gap-3">
+              <div>
+                <h2 className="text-lg font-bold tracking-tight">
+                  Directory · no sets yet
+                </h2>
+                <p className="mt-0.5 text-[13px] text-muted2">
+                  Curated clubs and festivals with an official site — waiting
+                  for ingest to attach sets. Detail pages stay live.
+                </p>
+              </div>
+              <span className="mono text-[12px] text-muted2">
+                {directory.length}
+              </span>
+            </div>
+            <ExpandableCardGrid
+              previewCount={DIRECTORY_PREVIEW}
+              moreLabel="venues"
+              items={directory.map((v) => (
+                <VenueCard key={v.id} v={v} />
+              ))}
+            />
+          </section>
+        ) : null}
       </div>
 
-      {venues.length === 0 && labels.length === 0 && (
+      {withSets.length === 0 && labels.length === 0 && directory.length === 0 && (
         <p className="py-16 text-center text-[14px] text-muted2">
           No venues with sets yet — they appear after a deep ingest.
         </p>

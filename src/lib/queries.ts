@@ -12,6 +12,7 @@ import {
   venueArtistSlugs,
 } from "@/lib/ingest/discovery/relations";
 import { isBrowseReadySet } from "@/lib/setBrowse";
+import { isBrowseReadyVenue, isVenueListed } from "@/lib/venueBrowse";
 import type { IdStatus } from "@/lib/status";
 
 export type StatusCounts = Record<IdStatus, number>;
@@ -725,11 +726,14 @@ export async function getVenues() {
 
   return events
     // Keep curated festival pages (website set) even when crawl hasn't
-    // re-attached sets yet — e.g. EDC Las Vegas.
-    .filter((e) => e._count.sets > 0 || !!e.website)
+    // re-attached sets yet — e.g. EDC Las Vegas. Listed in Directory below.
+    .filter((e) =>
+      isVenueListed({ setCount: e._count.sets, website: e.website }),
+    )
     .map((e) => {
       const latest = e.sets[0];
       const prim = latest?.artists[0]?.dj;
+      const setCount = e._count.sets;
       return {
         id: e.id,
         slug: e.slug,
@@ -737,7 +741,8 @@ export async function getVenues() {
         kind: e.kind,
         location: e.location,
         website: e.website,
-        setCount: e._count.sets,
+        setCount,
+        isBrowseReady: isBrowseReadyVenue({ setCount, website: e.website }),
         imageUrl: e.imageUrl ?? latest?.imageUrl ?? prim?.imageUrl ?? null,
         accent: prim?.accent ?? "var(--brand)",
       };
