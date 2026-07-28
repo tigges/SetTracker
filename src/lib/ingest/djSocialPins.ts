@@ -383,10 +383,10 @@ export const DJ_SOCIAL_PINS: DjSocialPin[] = [
     name: "W&W",
     accent: "#00b4d8",
     soundcloud: "https://soundcloud.com/wandw",
-    youtube: "https://www.youtube.com/user/WandWmusic",
+    youtube: "https://www.youtube.com/@wandwmusic",
     instagram: null,
     website: "https://www.wandwmusic.com/",
-    bio: "Big Room. Official wandwmusic.com — SC wandw, YT user/WandWmusic.",
+    bio: "Big Room. Official wandwmusic.com — SC wandw, YT @wandwmusic.",
   },
   {
     slug: "timmy-trumpet",

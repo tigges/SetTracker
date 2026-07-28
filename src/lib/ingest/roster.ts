@@ -1040,7 +1040,7 @@ export const ARTIST_ROSTER_CURATED: ArtistRosterEntry[] = [
     genre: "Big Room",
     accent: "#00b4d8",
     homeCity: "Netherlands",
-    youtube: { handle: "WandWmusic", status: "ok", note: "legacy /user/WandWmusic" },
+    youtube: { handle: "@wandwmusic", status: "ok" },
     soundcloud: { permalink: "wandw", userId: 630356, status: "ok" },
     website: "https://www.wandwmusic.com/",
     priority: "high",

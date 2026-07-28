@@ -536,4 +536,18 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     seriesName: "Boiler Room",
     eventName: "Ibiza Villa Takeovers",
   },
+  {
+    // Operator-supplied official channel upload (Rave Culture Live 002).
+    video: "https://www.youtube.com/watch?v=qjoM5D4cwNs",
+    primaryArtist: dj("W&W", {
+      accent: "#00b4d8",
+      soundcloud: "https://soundcloud.com/wandw",
+      youtube: "https://www.youtube.com/@wandwmusic",
+      homeCity: "Netherlands",
+    }),
+    genre: "Big Room",
+    type: "radio",
+    title: "W&W - Rave Culture Live 002 (DJ Set)",
+    seriesName: "Rave Culture Live",
+  },
 ];
