@@ -1,0 +1,4 @@
+# Bump the timestamp below (and merge to main) to start Catalog enrich.
+# Used when workflow_dispatch is unavailable to the actor.
+requestedAt: 2026-07-28T12:19:00Z
+reason: ship-0.2.34 ACRCloud Top 100 + unresolved resolve

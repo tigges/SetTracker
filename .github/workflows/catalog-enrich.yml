@@ -7,6 +7,11 @@ on:
   schedule:
     - cron: "30 4 * * 1"
   workflow_dispatch:
+  # Agents often lack workflow_dispatch; bump data/enrich-request on main to start.
+  push:
+    branches: [main]
+    paths:
+      - "data/enrich-request"
 
 permissions:
   contents: read
