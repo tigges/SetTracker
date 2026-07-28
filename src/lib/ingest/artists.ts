@@ -1,7 +1,11 @@
 /**
  * Split set titles into primary + collaborator artists (b2b / feat / x).
+ *
+ * Known duos/groups with "&" in the name (Walker & Royce, …) are shielded via
+ * `atomicActs` so they stay one credit — not Walker b2b Royce.
  */
 
+import { shieldAtomicActs } from "./atomicActs";
 import { slugify, type RawArtist } from "./types";
 
 const STOP_AFTER =
@@ -9,7 +13,8 @@ const STOP_AFTER =
 
 /** Normalize common collaboration separators to a single token. */
 function normalizeCollabSeparators(input: string): string {
-  return input
+  const { text, restore } = shieldAtomicActs(input);
+  const normalized = text
     .replace(/\s+b2b\.?\s+/gi, " b2b ")
     .replace(/\s+vs\.?\s+/gi, " b2b ")
     .replace(/\s+x\s+/gi, " b2b ")
@@ -18,6 +23,7 @@ function normalizeCollabSeparators(input: string): string {
     .replace(/\s+ft\.?\s+/gi, " feat ")
     .replace(/\s+/g, " ")
     .trim();
+  return restore(normalized);
 }
 
 /**
@@ -51,6 +57,9 @@ export function performingCreditFromTitle(title: string): string {
   m = cleaned.match(/^(.+?)\s+[|]\s+/);
   if (m) return tidyPerformingCredit(m[1]!);
   m = cleaned.match(/^(.+?)\s+[–—-]\s+/);
+  if (m) return tidyPerformingCredit(m[1]!);
+  // "A b2b B at Venue" — keep credits, drop venue tail
+  m = cleaned.match(/^(.+?\s+b2b\s+.+?)\s+at\s+/i);
   if (m) return tidyPerformingCredit(m[1]!);
   // "Artist B2B Artist Cafe Mambo …" — keep full string; splitter handles b2b
   return tidyPerformingCredit(cleaned);
@@ -131,7 +140,9 @@ export function splitArtistsFromSetTitle(
 }
 
 function hasCollabToken(credit: string): boolean {
-  return /\b(b2b|vs\.?|feat\.?|ft\.?|mixed\s+by)\b|\sx\s|[&+]/i.test(credit);
+  // Ignore `&` inside shielded duo names (Walker & Royce, …).
+  const { text } = shieldAtomicActs(credit);
+  return /\b(b2b|vs\.?|feat\.?|ft\.?|mixed\s+by)\b|\sx\s|[&+]/i.test(text);
 }
 
 /** "Brand Mixed By A & B [#001]" → guest mixer names. */

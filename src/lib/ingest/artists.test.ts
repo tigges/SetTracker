@@ -85,4 +85,26 @@ const noToken = artistsForSet("EDC Las Vegas 2026", {
 assert.equal(noToken.primary.name, "Cloonee");
 assert.equal(noToken.collaborators.length, 0);
 
+// Walker & Royce is one NYC duo — never Walker b2b Royce.
+const wr = splitArtistsFromSetTitle("Walker & Royce | Fresh Start SF 2026");
+assert.equal(wr.primary.name, "Walker & Royce");
+assert.equal(wr.primary.slug, "walker-royce");
+assert.equal(wr.collaborators.length, 0);
+
+const wrAnd = splitArtistCredit("Walker and Royce");
+assert.equal(wrAnd.primary.name, "Walker & Royce");
+assert.equal(wrAnd.collaborators.length, 0);
+
+const wrGuest = splitArtistsFromSetTitle(
+  "Walker & Royce b2b VNSSA at Elrow",
+);
+assert.equal(wrGuest.primary.name, "Walker & Royce");
+assert.equal(wrGuest.primary.slug, "walker-royce");
+assert.equal(wrGuest.collaborators.length, 1);
+assert.equal(wrGuest.collaborators[0]?.name, "VNSSA");
+
+const chapter = splitArtistCredit("Chapter & Verse");
+assert.equal(chapter.primary.slug, "chapter-verse");
+assert.equal(chapter.collaborators.length, 0);
+
 console.log("artists.test.ts ok");

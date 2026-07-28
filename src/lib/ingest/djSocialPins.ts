@@ -221,8 +221,8 @@ export const DJ_SOCIAL_PINS: DjSocialPin[] = [
     soundcloud: "https://soundcloud.com/walker-and-royce",
     instagram: "https://www.instagram.com/walkerandroyce/",
     twitter: "https://x.com/WalkerAndRoyce",
-    website: "https://open.spotify.com/artist/1lAwVq9MxNJkB0dEY6xNoV",
-    bio: "Tech House. NYC duo. YT @WalkerAndRoyce — IG @walkerandroyce, X @WalkerAndRoyce, FB walkerroyce, SC walker-and-royce, TikTok @walkerandroyce.",
+    website: "https://www.walkerandroyce.com/",
+    bio: "Tech House. NYC duo (Sam Walker & Gavin Royce). Official walkerandroyce.com — YT @WalkerAndRoyce, IG @walkerandroyce, X @WalkerAndRoyce, FB walkerroyce, SC walker-and-royce, TikTok @walkerandroyce.",
   },
   {
     slug: "vintage-culture",
