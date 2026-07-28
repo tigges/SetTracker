@@ -1,0 +1,3 @@
+# Bump timestamp and merge to main to smoke-test ACRCloud Actions secrets.
+requestedAt: 2026-07-28T14:25:00Z
+reason: verify credits + Actions secrets after ACRCloud top-up
