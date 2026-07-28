@@ -11,6 +11,7 @@ import {
   inferDjMagClubEvent,
   resolveDjMagClubByName,
 } from "./discovery/djmagClubs";
+import { inferDjMagFestivalEvent } from "./discovery/djmagFestivals";
 
 export type EventSocials = {
   website?: string;
@@ -86,6 +87,13 @@ export const KNOWN_EVENTS: Record<string, CanonicalEvent> = {
     // Lineup page scanned every deep ingest (CDN + HTML + seed fallback).
     // See discovery/lineupSources.ts
   },
+  "burning-man": {
+    slug: "burning-man",
+    name: "Burning Man",
+    kind: "festival",
+    location: "Black Rock City, Nevada",
+    website: "https://burningman.org/",
+  },
   "boiler-room": {
     slug: "boiler-room",
     name: "Boiler Room",
@@ -103,6 +111,13 @@ export const KNOWN_EVENTS: Record<string, CanonicalEvent> = {
     name: "Mixmag",
     kind: "livestream",
     website: "https://mixmag.net/",
+  },
+  "dj-mag": {
+    slug: "dj-mag",
+    name: "DJ Mag",
+    kind: "livestream",
+    website: "https://djmag.com/livesets",
+    soundcloud: "https://soundcloud.com/djmag",
   },
   insomniac: {
     slug: "insomniac",
@@ -135,8 +150,10 @@ export const KNOWN_EVENTS: Record<string, CanonicalEvent> = {
     slug: "dreamstate",
     name: "Dreamstate",
     kind: "festival",
-    location: "Los Angeles, CA",
-    website: "https://dreamstate.eu/",
+    location: "San Bernardino, CA",
+    // Insomniac SoCal brand site (not dreamstate.eu).
+    // Hub: https://www.insomniac.com/events/our-world/dreamstate/
+    website: "https://socal.dreamstateusa.com/",
   },
   "countdown-nye": {
     slug: "countdown-nye",
@@ -199,6 +216,10 @@ const ALIAS_TO_SLUG: Record<string, string> = {
   "holy-ship": "hard-summer",
   "boilerroom": "boiler-room",
   "boiler-room": "boiler-room",
+  "dj-mag": "dj-mag",
+  djmag: "dj-mag",
+  "djmag-com": "dj-mag",
+  mixmag: "mixmag",
   ushuaia: "ushuaia-ibiza",
   "ushuaia-ibiza": "ushuaia-ibiza",
   "ushuaiaibiza": "ushuaia-ibiza",
@@ -213,11 +234,17 @@ const ALIAS_TO_SLUG: Record<string, string> = {
   "escape-halloween": "escape-halloween",
   dreamstate: "dreamstate",
   "dreamstate-socal": "dreamstate",
+  "dreamstate-usa": "dreamstate",
+  dreamstateusa: "dreamstate",
+  "dreamstate-us": "dreamstate",
   countdown: "countdown-nye",
   "countdown-nye": "countdown-nye",
   djoon: "djoon",
   djøøn: "djoon",
   "djoon-club": "djoon",
+  "burning-man": "burning-man",
+  burningman: "burning-man",
+  "burning-man-festival": "burning-man",
 };
 
 function keyOf(name: string): string {
@@ -275,6 +302,7 @@ export function inferFestivalEvent(title: string): CanonicalEvent | null {
     return KNOWN_EVENTS["hard-summer"];
   }
   if (/\btomorrowland\b/i.test(t)) return KNOWN_EVENTS.tomorrowland;
+  if (/\bburning\s*man\b/i.test(t)) return KNOWN_EVENTS["burning-man"];
   if (/\bcoachella\b/i.test(t)) return KNOWN_EVENTS.coachella;
   if (/\blollapalooza\b/i.test(t)) return KNOWN_EVENTS.lollapalooza;
   if (/\bnocturnal\s*wonderland\b/i.test(t)) {
@@ -294,7 +322,12 @@ export function inferFestivalEvent(title: string): CanonicalEvent | null {
   if (/\bushua[iï]a\b/i.test(t)) return KNOWN_EVENTS["ushuaia-ibiza"];
   if (/\bstereo\s*hype\b/i.test(t)) return KNOWN_EVENTS.stereohype;
   if (/\bdjoon\b|\bdjøøn\b/i.test(t)) return KNOWN_EVENTS.djoon;
-  return inferDjMagClubEvent(t) ?? inferListClubEvent(t);
+  // DJ Mag Top 100 Festivals / Clubs / other club listicles (not Mixmag.net).
+  return (
+    inferDjMagFestivalEvent(t) ??
+    inferDjMagClubEvent(t) ??
+    inferListClubEvent(t)
+  );
 }
 
 export function eventSocialPayload(e: CanonicalEvent): EventSocials {

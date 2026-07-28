@@ -11,6 +11,7 @@ import {
   relatedSlugsFor,
   venueArtistSlugs,
 } from "@/lib/ingest/discovery/relations";
+import { isBrowseReadySet } from "@/lib/setBrowse";
 import type { IdStatus } from "@/lib/status";
 
 export type StatusCounts = Record<IdStatus, number>;
@@ -74,38 +75,46 @@ export async function getFeed() {
 
   const tallies = await statusCountsBySetIds(sets.map((s) => s.id));
 
-  return sets.map((s) => {
-    const primary = s.artists.find((a) => a.isPrimary) ?? s.artists[0];
-    const tally = tallies.get(s.id);
-    return {
-      id: s.id,
-      slug: s.slug,
-      title: s.title,
-      type: s.type,
-      genre: normalizeGenre(s.genre),
-      genres: expandGenres(s.genre),
-      publishedAt: s.publishedAt,
-      durationSec: s.durationSec,
-      sourceName: s.sourceName,
-      cover: s.cover,
-      imageUrl: s.imageUrl,
-      eventName: s.event?.name ?? null,
-      seriesName: s.series?.name ?? null,
-      primaryDj: primary
-        ? {
-            name: primary.dj.name,
-            slug: primary.dj.slug,
-            accent: primary.dj.accent,
-            imageUrl: primary.dj.imageUrl,
-          }
-        : null,
-      collaborators: s.artists
-        .filter((a) => !a.isPrimary)
-        .map((a) => ({ name: a.dj.name, slug: a.dj.slug })),
-      trackCount: tally?.trackCount ?? 0,
-      statusCounts: tally?.counts ?? emptyCounts(),
-    };
-  });
+  return sets
+    .map((s) => {
+      const primary = s.artists.find((a) => a.isPrimary) ?? s.artists[0];
+      const tally = tallies.get(s.id);
+      return {
+        id: s.id,
+        slug: s.slug,
+        title: s.title,
+        type: s.type,
+        genre: normalizeGenre(s.genre),
+        genres: expandGenres(s.genre),
+        publishedAt: s.publishedAt,
+        durationSec: s.durationSec,
+        sourceName: s.sourceName,
+        cover: s.cover,
+        imageUrl: s.imageUrl,
+        eventName: s.event?.name ?? null,
+        seriesName: s.series?.name ?? null,
+        primaryDj: primary
+          ? {
+              name: primary.dj.name,
+              slug: primary.dj.slug,
+              accent: primary.dj.accent,
+              imageUrl: primary.dj.imageUrl,
+            }
+          : null,
+        collaborators: s.artists
+          .filter((a) => !a.isPrimary)
+          .map((a) => ({ name: a.dj.name, slug: a.dj.slug })),
+        trackCount: tally?.trackCount ?? 0,
+        statusCounts: tally?.counts ?? emptyCounts(),
+      };
+    })
+    .filter((s) =>
+      isBrowseReadySet({
+        imageUrl: s.imageUrl,
+        primaryDjImageUrl: s.primaryDj?.imageUrl,
+        primaryDjName: s.primaryDj?.name,
+      }),
+    );
 }
 
 export type FeedItem = Awaited<ReturnType<typeof getFeed>>[number];
@@ -400,6 +409,7 @@ export async function getDjBySlug(slug: string) {
     imageUrl: dj.imageUrl,
     socials: {
       soundcloud: dj.soundcloud,
+      youtube: dj.youtube,
       instagram: dj.instagram,
       twitter: dj.twitter,
       website: dj.website,
@@ -435,6 +445,7 @@ export type DjListItem = {
   accent: string;
   imageUrl: string | null;
   soundcloud: string | null;
+  youtube: string | null;
   instagram: string | null;
   twitter: string | null;
   website: string | null;
@@ -492,6 +503,7 @@ export async function getDjList(): Promise<DjListItem[]> {
         accent: true,
         imageUrl: true,
         soundcloud: true,
+        youtube: true,
         instagram: true,
         twitter: true,
         website: true,
@@ -503,7 +515,7 @@ export async function getDjList(): Promise<DjListItem[]> {
 
   return rows.map((d) => {
     const hasHandle = Boolean(
-      d.soundcloud || d.instagram || d.twitter || d.website,
+      d.soundcloud || d.youtube || d.instagram || d.twitter || d.website,
     );
     const isJunk =
       isJunkArtistName(d.name) ||
@@ -520,6 +532,7 @@ export async function getDjList(): Promise<DjListItem[]> {
       accent: d.accent,
       imageUrl: d.imageUrl,
       soundcloud: d.soundcloud,
+      youtube: d.youtube,
       instagram: d.instagram,
       twitter: d.twitter,
       website: d.website,

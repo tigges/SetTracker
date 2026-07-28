@@ -23,6 +23,7 @@ model Dj {
 
   // main social accounts (nullable; crawler can fill real handles later)
   soundcloud String?
+  youtube    String?
   instagram  String?
   twitter    String?
   website    String?

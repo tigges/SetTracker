@@ -1,6 +1,10 @@
 import Link from "next/link";
 import { EntityThumb } from "@/components/EntityThumb";
+import { ExpandableCardGrid } from "@/components/ExpandableCardGrid";
 import { getLabels, getVenues } from "@/lib/queries";
+
+/** Default Labels preview — ~4 rows on a 3-col desktop grid. */
+const LABELS_PREVIEW = 12;
 
 const SECTIONS: Array<{
   id: string;
@@ -130,8 +134,10 @@ export default async function VenuesPage() {
           {labels.length === 0 ? (
             <p className="text-[13px] text-muted2">No labels yet.</p>
           ) : (
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {labels.map((l) => {
+            <ExpandableCardGrid
+              previewCount={LABELS_PREVIEW}
+              moreLabel="labels"
+              items={labels.map((l) => {
                 const color = l.color ?? "var(--brand)";
                 return (
                   <Link
@@ -158,7 +164,7 @@ export default async function VenuesPage() {
                   </Link>
                 );
               })}
-            </div>
+            />
           )}
         </section>
       </div>

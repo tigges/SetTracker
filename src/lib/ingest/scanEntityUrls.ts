@@ -81,7 +81,7 @@ async function fetchHtml(url: string): Promise<string | null> {
 }
 
 function classify(url: string): {
-  field?: "soundcloud" | "instagram" | "twitter" | "website";
+  field?: "soundcloud" | "youtube" | "instagram" | "twitter" | "website";
   setCandidate?: boolean;
   beatport?: boolean;
 } {
@@ -103,6 +103,10 @@ function classify(url: string): {
   if (/youtube\.com|youtu\.be/i.test(host)) {
     if (/[?&]v=|youtu\.be\/|\/(live|shorts)\//i.test(url)) {
       return { setCandidate: true };
+    }
+    // Channel / handle pages → Dj.youtube
+    if (/youtube\.com\/(@|channel\/|c\/|user\/)/i.test(url)) {
+      return { field: "youtube" };
     }
     return {};
   }
@@ -126,7 +130,7 @@ type FillTarget =
 async function fillSocial(
   prisma: PrismaClient,
   target: FillTarget,
-  field: "soundcloud" | "instagram" | "twitter" | "website",
+  field: "soundcloud" | "youtube" | "instagram" | "twitter" | "website",
   url: string,
   current: Record<string, string | null | undefined>,
   stats: ScanStats,
@@ -134,6 +138,8 @@ async function fillSocial(
   if (current[field]) return;
   // Prefer first-party website over another hub if we already have a hub.
   if (field === "website" && current.website) return;
+  // Labels / events have no youtube column — only fill on Dj.
+  if (field === "youtube" && target.kind !== "dj") return;
   const data = { [field]: url };
   if (target.kind === "dj") {
     await prisma.dj.update({ where: { id: target.id }, data });
@@ -169,7 +175,12 @@ async function scanPage(
     const c = classify(url);
     if (c.setCandidate) bag.setCandidates.add(url);
     if (c.beatport) bag.beatport.add(url);
-    if (c.field === "soundcloud" || c.field === "instagram" || c.field === "twitter") {
+    if (
+      c.field === "soundcloud" ||
+      c.field === "youtube" ||
+      c.field === "instagram" ||
+      c.field === "twitter"
+    ) {
       await fillSocial(prisma, target, c.field, url, current, stats);
     } else if (
       c.field === "website" &&
@@ -301,6 +312,7 @@ export async function scanEntityUrls(prisma: PrismaClient): Promise<ScanStats> {
       slug: true,
       website: true,
       soundcloud: true,
+      youtube: true,
       instagram: true,
       twitter: true,
     },
@@ -311,6 +323,7 @@ export async function scanEntityUrls(prisma: PrismaClient): Promise<ScanStats> {
     const current: Record<string, string | null | undefined> = {
       website: d.website,
       soundcloud: d.soundcloud,
+      youtube: d.youtube,
       instagram: d.instagram,
       twitter: d.twitter,
     };

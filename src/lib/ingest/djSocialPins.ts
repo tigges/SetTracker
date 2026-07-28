@@ -3,10 +3,13 @@
  * Applied on every verify-urls / fast deploy via applyKnownUrlFixes.
  *
  * Keep Beatport / official site as website when there is no personal homepage.
- * Schema only stores SC / IG / X / website — TikTok & Facebook stay on roster.socials.
+ * Schema stores SC / YT / IG / X / website — TikTok & Facebook stay on roster.socials.
  */
 
 import type { PrismaClient } from "@prisma/client";
+import { youtubeChannelUrl } from "../social";
+import { ARTIST_ROSTER } from "./roster";
+import { slugify } from "./types";
 
 export type DjSocialPin = {
   slug: string;
@@ -14,6 +17,8 @@ export type DjSocialPin = {
   accent: string;
   /** Null when no verified SC — do not invent handles. */
   soundcloud: string | null;
+  /** Official YouTube channel when known. */
+  youtube?: string | null;
   /** Null when no verified IG — do not invent handles. */
   instagram: string | null;
   twitter?: string | null;
@@ -27,6 +32,7 @@ export const DJ_SOCIAL_PINS: DjSocialPin[] = [
     name: "BISCITS",
     accent: "#ef476f",
     soundcloud: "https://soundcloud.com/biscits",
+    youtube: "https://www.youtube.com/@Biscits",
     instagram: "https://www.instagram.com/itsbiscits/",
     website: "https://www.beatport.com/artist/biscits/591990",
     bio: [
@@ -42,16 +48,29 @@ export const DJ_SOCIAL_PINS: DjSocialPin[] = [
     name: "David Guetta",
     accent: "#1e90ff",
     soundcloud: "https://soundcloud.com/davidguetta",
+    youtube: "https://www.youtube.com/@davidguetta",
     instagram: "https://www.instagram.com/davidguetta/",
     twitter: "https://x.com/davidguetta",
     website: "https://davidguetta.com",
     bio: "House. Official site davidguetta.com — SC davidguetta, IG/X @davidguetta.",
   },
   {
+    slug: "armin-van-buuren",
+    name: "Armin van Buuren",
+    accent: "#00a3e0",
+    soundcloud: "https://soundcloud.com/arminvanbuuren",
+    youtube: "https://www.youtube.com/@arminvanbuuren",
+    instagram: "https://www.instagram.com/arminvanbuuren/",
+    twitter: "https://x.com/arminvanbuuren",
+    website: "https://www.arminvanbuuren.com/",
+    bio: "Trance. Netherlands. Official arminvanbuuren.com — YT @arminvanbuuren, IG/X/TikTok @arminvanbuuren, SC arminvanbuuren, Armada Music.",
+  },
+  {
     slug: "fisher",
     name: "FISHER",
     accent: "#00c2ff",
     soundcloud: "https://soundcloud.com/fish-tales",
+    youtube: "https://www.youtube.com/@fisher",
     instagram: "https://www.instagram.com/followthefishtv/",
     website: "https://followthefishtv.com",
     bio: "Tech House. Official: followthefishtv.com — IG @followthefishtv, SC fish-tales, YT @fisher.",
@@ -259,6 +278,7 @@ export const DJ_SOCIAL_PINS: DjSocialPin[] = [
     name: "Dom Dolla",
     accent: "#ff4d6d",
     soundcloud: "https://soundcloud.com/domdolla",
+    youtube: "https://www.youtube.com/@DomDolla",
     instagram: "https://www.instagram.com/domdolla/",
     twitter: "https://x.com/domdolla",
     website: "https://domdolla.com.au",
@@ -269,6 +289,7 @@ export const DJ_SOCIAL_PINS: DjSocialPin[] = [
     name: "Chris Lorenzo",
     accent: "#ff6b35",
     soundcloud: "https://soundcloud.com/chris-lorenzo-1",
+    youtube: "https://www.youtube.com/@ChrisLorenzo",
     instagram: "https://www.instagram.com/chrislorenzo66/",
     twitter: "https://x.com/Lorenzosbeats",
     website: "https://chrislorenzo.komi.io",
@@ -279,6 +300,7 @@ export const DJ_SOCIAL_PINS: DjSocialPin[] = [
     name: "Hannah Wants",
     accent: "#ff4d8d",
     soundcloud: "https://soundcloud.com/hannah_wants",
+    youtube: "https://www.youtube.com/@HannahWantsDJ",
     instagram: "https://www.instagram.com/hannah_wants/",
     twitter: "https://x.com/hannah_wants",
     website: "https://www.musicglue.com/hannah-wants/",
@@ -289,6 +311,7 @@ export const DJ_SOCIAL_PINS: DjSocialPin[] = [
     name: "Dimitri Vegas & Like Mike",
     accent: "#f7b801",
     soundcloud: "https://soundcloud.com/dimitrivegasandlikemike",
+    youtube: "https://www.youtube.com/@dimitrivegasandlikemike",
     instagram: "https://www.instagram.com/dimitrivegasandlikemike/",
     website: "https://www.youtube.com/@dimitrivegasandlikemike",
     bio: "Big Room. Belgium / Tomorrowland. YT @dimitrivegasandlikemike — IG/FB/TikTok @dimitrivegasandlikemike, SC dimitrivegasandlikemike.",
@@ -313,6 +336,7 @@ export async function applyDjSocialPins(prisma: PrismaClient): Promise<number> {
       name: pin.name,
       accent: pin.accent,
       soundcloud: pin.soundcloud ?? null,
+      youtube: pin.youtube ?? null,
       instagram: pin.instagram ?? null,
       twitter: pin.twitter ?? null,
       website: pin.website,
@@ -325,6 +349,35 @@ export async function applyDjSocialPins(prisma: PrismaClient): Promise<number> {
         data: { slug: pin.slug, ...data },
       });
     }
+    n += 1;
+  }
+  // Fill missing YT from the artist roster (handle → https://youtube.com/@…).
+  n += await applyRosterYoutube(prisma);
+  return n;
+}
+
+/** Backfill Dj.youtube from ARTIST_ROSTER youtube handles when empty. */
+export async function applyRosterYoutube(prisma: PrismaClient): Promise<number> {
+  let n = 0;
+  for (const a of ARTIST_ROSTER) {
+    const url = youtubeChannelUrl(a.youtube?.handle ?? "");
+    if (!url) continue;
+    const slug = slugify(a.name);
+    const existing = await prisma.dj.findUnique({ where: { slug } });
+    if (!existing) continue;
+    if (existing.youtube === url) continue;
+    // Prefer roster channel over empty / stale non-channel watch URLs.
+    if (
+      existing.youtube &&
+      /youtube\.com\/@/i.test(existing.youtube) &&
+      existing.youtube !== url
+    ) {
+      continue;
+    }
+    await prisma.dj.update({
+      where: { id: existing.id },
+      data: { youtube: url },
+    });
     n += 1;
   }
   return n;

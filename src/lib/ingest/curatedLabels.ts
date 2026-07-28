@@ -61,6 +61,8 @@ export const CURATED_LABELS: CuratedLabel[] = withColors([
   { name: "Hot Creations", slug: "hot-creations", color: "#ff4d00" },
   { name: "Glitterbox Recordings", slug: "glitterbox-recordings", color: "#ff2d95" },
   { name: "Cecille", slug: "cecille", color: "#c8a2ff" },
+  // Beatportal House 2025 #4 label
+  { name: "Disorder", slug: "disorder", color: "#ff3355" },
   { name: "Rekids", slug: "rekids", color: "#2bd67b" },
   { name: "Nervous Records", slug: "nervous-records", color: "#ffcc00" },
   { name: "LTF Records", slug: "ltf-records", color: "#4bd0c0" },

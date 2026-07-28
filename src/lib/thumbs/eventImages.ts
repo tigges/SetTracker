@@ -18,6 +18,8 @@ export const KNOWN_EVENT_IMAGES: Record<string, string> = {
     "https://d3vhc53cl8e8km.cloudfront.net/hello-staging/wp-content/uploads/sites/21/2026/05/19195123/edclv_2027_mk_te_twoweekend_fest_site_seo_1200x630_r01.jpg",
   tomorrowland:
     "https://www.tomorrowland.com/home/media/GkfYvqthei1CQ_kr_1784285411289_2bf2ab4e-c423-4f42-9573-3eb426e231bb.jpg_0_554559390070347944.jpg?auto=format,compress&w=1200",
+  "burning-man":
+    "https://burningman.org/wp-content/themes/firebird-master/assets/images/BMP-socialCard-Rawlinson_2024.jpg",
   coachella:
     "https://media.coachella.com/content/seo_images/795/EBn21kXwRGMWDHIFsOpxoc2DgUFFdcZ0IknKjGSS.jpg",
   lollapalooza:
@@ -56,8 +58,12 @@ export const KNOWN_EVENT_IMAGES: Record<string, string> = {
   /** Cercle — recent channel upload thumb as brand mark. */
   cercle: "https://i.ytimg.com/vi/7bTlKxH3CgI/hqdefault.jpg",
   mixmag: "https://i.ytimg.com/vi/X8s7EKuVtBI/hqdefault.jpg",
+  /** DJ Mag Live Sets — recent channel upload thumb as brand mark. */
+  "dj-mag": "https://i.ytimg.com/vi/-HyyZo8sXgE/hqdefault.jpg",
   "ministry-of-sound":
     "https://ministryofsound.com/wp-content/uploads/2025/12/home-page-banner-1-1024x582.png",
+  dreamstate:
+    "https://d3vhc53cl8e8km.cloudfront.net/hello-staging/wp-content/uploads/2025/11/26203958/dssc1.jpg",
 };
 
 /**
@@ -96,7 +102,7 @@ export const EVENT_OFFICIAL_SITES: Record<string, string> = {
   "nocturnal-wonderland": "https://nocturnalwonderland.com/",
   "beyond-wonderland": "https://beyondwonderland.com/",
   "escape-halloween": "https://escapepsychocircus.com/",
-  dreamstate: "https://dreamstate.eu/",
+  dreamstate: "https://socal.dreamstateusa.com/",
   "countdown-nye": "https://countdownnye.com/",
   djoon: "https://shotgun.live/venues/djoonclub",
   "boiler-room": "https://boilerroom.tv/",
@@ -106,7 +112,8 @@ export const EVENT_OFFICIAL_SITES: Record<string, string> = {
 };
 
 function isWeakVenueWebsite(url: string): boolean {
-  return /6amgroup\.com|clubtickets\.com\/blog|djmag\.com\/top-100-clubs/i.test(
+  // DJ Mag Top 100 profile pages (both URL shapes) are not club OG sources.
+  return /6amgroup\.com|clubtickets\.com\/blog|djmag\.com\/top-?100-?clubs/i.test(
     url,
   );
 }

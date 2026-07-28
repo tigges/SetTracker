@@ -31,6 +31,9 @@ setradar.ai.
   a new Prisma client without a regenerate.
 - **Lint / typecheck:** `npm run lint` and `npx tsc --noEmit`. `next lint` was
   removed in Next 16; ESLint runs directly.
+- **Release version:** bump `package.json` `"version"` on every ship to main.
+  Pages workflows inject it as `NEXT_PUBLIC_APP_VERSION` (footer `v…`). Do not
+  hardcode the version in workflow YAML.
 - **Ingestion / crawler:** `npm run ingest` upserts newly discovered sets & DJs.
   **Primary sources:** SoundCloud (`src/lib/ingest/soundcloud/`) curated shows
   + curated playlists (`soundcloud/playlists.ts`, e.g. Lift Sets) via api-v2 +
@@ -38,8 +41,11 @@ setradar.ai.
   (`src/lib/ingest/hearthis/` — structured `/{user}/{track}/playlist/` cues,
   then description / timed comments; e.g. Gentlemen's Groove) +
   **YouTube** curated sets + venue channels + tracklist-heavy artist channels
-  (`src/lib/ingest/youtube/` — Boiler Room / Cercle / Mixmag + James Hype–style
-  artist channels; description tracklists and YouTube Music song credits) +
+  (`src/lib/ingest/youtube/` — Boiler Room / Cercle / Mixmag / DJ Mag + James
+  Hype–style artist channels; description tracklists and YouTube Music song
+  credits) + **DJ Mag Live Sets** (`src/lib/ingest/djmag/` — scrape
+  `djmag.com/livesets` for YT embeds, tracklists from YT description/credits;
+  dedupes `@DJMag` via `yt-{videoId}`) +
   **Bandcamp** curated tracks/albums (`src/lib/ingest/bandcamp/`).
   **Roster / deep scan:** identified artists live in
   `src/lib/ingest/roster.ts` (drives YT artist channels + extra SC shows).

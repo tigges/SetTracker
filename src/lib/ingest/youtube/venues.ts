@@ -56,6 +56,7 @@ export const YOUTUBE_VENUES: YoutubeVenueChannel[] = [
     titleMatch: /\b(cercle|live at|live from)\b/i,
   },
   {
+    // YouTube venue only — do NOT crawl mixmag.net editorial for industry context.
     channel: "@Mixmag",
     seriesName: "Mixmag",
     eventSlug: "mixmag",
@@ -117,13 +118,17 @@ export const YOUTUBE_VENUES: YoutubeVenueChannel[] = [
     titleMatch: /\b(edc|beyond|countdown|live|set|insomniac)\b/i,
   },
   {
+    // YouTube channel catalog; denser discovery also via djmag.com/livesets
+    // (`djmag-livesets` adapter) which shares sourceSlug `yt-{videoId}`.
     channel: "@DJMag",
     seriesName: "DJ Mag",
+    eventSlug: "dj-mag",
     genre: "House",
     accent: "#000000",
-    limit: Math.min(VENUE_LIMIT, 30),
-    minDurationSec: 25 * 60,
-    titleMatch: /\b(dj mag|live|mix|set|studio|session)\b/i,
+    limit: Math.max(VENUE_LIMIT, Number(process.env.DJMAG_YT_LIMIT || 50)),
+    minDurationSec: 20 * 60,
+    titleMatch:
+      /\b(dj\s*mag|live|mix|set|studio|session|hq|b2b|untold|ushua[iï]a)\b/i,
   },
   {
     channel: "@ushuaiaibiza",
@@ -176,6 +181,11 @@ export function artistFromVenueTitle(title: string): string {
   const cleaned = title.replace(/\s+/g, " ").trim();
   let m = cleaned.match(/^(.+?)\s+live\s+(?:at|from)\s+/i);
   if (m) return tidyArtist(m[1]);
+  // DJ Mag: "Artist Techno Set From Pyramid at Amnesia Ibiza"
+  m = cleaned.match(
+    /^(.+?)\s+(?:full\s+)?(?:live\s+)?(?:show|set)\s+(?:live\s+)?(?:at|from)\s+/i,
+  );
+  if (m) return tidyArtist(m[1]);
   m = cleaned.match(/^(.+?)\s+@\s+/i);
   if (m) return tidyArtist(m[1]);
   m = cleaned.match(/^(.+?)\s+[|]\s+/);
@@ -193,9 +203,15 @@ function tidyArtist(name: string): string {
     .replace(/\s+/g, " ")
     .replace(/\s+b2b\s+/gi, " b2b ")
     .replace(
-      /\s+(?:tech\s+house\s+|bass\s+house\s+|house\s+)?(?:dj\s*)?sets?\b.*$/i,
+      /\s+(?:hard\s+|energetic\s+|groovy\s+|latin\s+|pumping\s+|fast-paced\s+)*(?:tech(?:no|[\s-]?house)|bass(?:line|\s*house)?|house|trance|psytrance|ukg|dubstep|drum\s*&\s*bass|acid)?\s*(?:dj\s*)?sets?\b.*$/i,
+      "",
+    )
+    // Leftover genre tail after "… Techno Set From …" split: "Deborah De Luca Techno"
+    .replace(
+      /\s+(?:hard\s+|energetic\s+|groovy\s+|latin\s+|pumping\s+|fast-paced\s+)*(?:tech(?:no|[\s-]?house)|bass(?:line|\s*house)?|house|trance|psytrance|ukg|dubstep|drum\s*&\s*bass|acid)$/i,
       "",
     )
     .replace(/\s+for\s+.+$/i, "")
+    .replace(/,?\s*powered by\s+.+$/i, "")
     .trim();
 }

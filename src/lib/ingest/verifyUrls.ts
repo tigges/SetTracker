@@ -10,7 +10,10 @@
 import type { PrismaClient } from "@prisma/client";
 import { ensureClubListVenues } from "./discovery/clubLists";
 import { ensureDjMagVenues } from "./discovery/djmagClubs";
+import { ensureDjMagTopDjs } from "./discovery/djmagDjs";
+import { ensureDjMagFestivals } from "./discovery/djmagFestivals";
 import { ensureDiscoveredDjs } from "./discovery/ensureDjs";
+import { applyCuratedDjImages } from "../thumbs/djImages";
 import { applyCuratedEventImages } from "../thumbs/eventImages";
 import { applyDjSocialPins } from "./djSocialPins";
 import { KNOWN_EVENTS } from "./events";
@@ -116,6 +119,10 @@ export async function applyKnownUrlFixes(prisma: PrismaClient): Promise<number> 
   // Brand DJ social pins (BISCITS, Guetta, FISHER, ARTBAT, …).
   n += await applyDjSocialPins(prisma);
 
+  // Force curated DJ logos (Gentlemen's Groove, …) over broken hearthis covers.
+  const curatedDjs = await applyCuratedDjImages(prisma);
+  n += curatedDjs.djs + curatedDjs.sets + curatedDjs.merged;
+
   // Curated venue / festival share images (Ultra, EDC, Tomorrowland, …).
   n += await applyCuratedEventImages(prisma);
 
@@ -171,9 +178,14 @@ export async function applyKnownUrlFixes(prisma: PrismaClient): Promise<number> 
   // Persist roster + high-signal discovered artists as Dj rows (Guetta, etc.).
   await ensureDiscoveredDjs(prisma);
 
-  // Materialize DJ Mag Top 100 + curated club-list articles as venues.
+  // Industry context: DJ Mag Top 100 Clubs / Festivals / DJs + club listicles.
+  // Mixmag.net is not crawled (Mixmag = YouTube venue only).
   const clubs = await ensureDjMagVenues(prisma);
   n += clubs.created + clubs.updated;
+  const fests = await ensureDjMagFestivals(prisma);
+  n += fests.created + fests.updated;
+  const topDjs = await ensureDjMagTopDjs(prisma);
+  n += topDjs.created + topDjs.updated;
   const lists = await ensureClubListVenues(prisma);
   n += lists.created + lists.updated;
 
@@ -216,6 +228,7 @@ export async function verifyStoredSocialUrls(
       id: true,
       slug: true,
       soundcloud: true,
+      youtube: true,
       instagram: true,
       twitter: true,
       website: true,
@@ -223,6 +236,7 @@ export async function verifyStoredSocialUrls(
   });
   for (const d of djs) {
     await scrubField(prisma, "dj", d.id, "soundcloud", d.soundcloud, stats);
+    await scrubField(prisma, "dj", d.id, "youtube", d.youtube, stats);
     await scrubField(prisma, "dj", d.id, "instagram", d.instagram, stats);
     await scrubField(prisma, "dj", d.id, "twitter", d.twitter, stats);
     await scrubField(prisma, "dj", d.id, "website", d.website, stats);

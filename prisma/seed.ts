@@ -116,6 +116,7 @@ async function main() {
       ? djSocialsFromKnown({
           name,
           soundcloudPermalink: roster.soundcloud?.permalink,
+          youtubeHandle: roster.youtube?.handle,
           socials: roster.socials,
           website: roster.website,
         })

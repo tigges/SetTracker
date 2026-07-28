@@ -57,6 +57,7 @@ function matches(d: DjListItem, filter: FilterId): boolean {
 function handleBits(d: DjListItem): string {
   const bits: string[] = [];
   if (d.soundcloud) bits.push("SC");
+  if (d.youtube) bits.push("YT");
   if (d.instagram) bits.push("IG");
   if (d.twitter) bits.push("X");
   if (d.website) bits.push("Web");

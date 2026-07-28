@@ -8,6 +8,8 @@ import { YOUTUBE_SETS } from "../youtube/videos";
 import { rankCoplayArtists } from "./coplay";
 import { ensureClubListVenues } from "./clubLists";
 import { ensureDjMagVenues } from "./djmagClubs";
+import { ensureDjMagTopDjs } from "./djmagDjs";
+import { ensureDjMagFestivals } from "./djmagFestivals";
 import { ensureDiscoveredDjs } from "./ensureDjs";
 import { hintForName } from "./knownHandles";
 import { scanFestivalLineups } from "./lineup";
@@ -147,6 +149,25 @@ export async function runDiscovery(
     } catch (err) {
       console.warn(
         "[discovery] djmag clubs failed:",
+        err instanceof Error ? err.message : err,
+      );
+    }
+
+    try {
+      const fests = await ensureDjMagFestivals(prisma);
+      venuesEnsured += fests.created + fests.updated;
+    } catch (err) {
+      console.warn(
+        "[discovery] djmag festivals failed:",
+        err instanceof Error ? err.message : err,
+      );
+    }
+
+    try {
+      await ensureDjMagTopDjs(prisma);
+    } catch (err) {
+      console.warn(
+        "[discovery] djmag top djs failed:",
         err instanceof Error ? err.message : err,
       );
     }

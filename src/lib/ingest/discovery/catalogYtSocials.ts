@@ -8,6 +8,7 @@
  */
 
 import type { PrismaClient } from "@prisma/client";
+import { youtubeChannelUrl } from "../../social";
 import { expandAllLinkHubs } from "./linkHubs";
 import { buildSocialMatrix } from "./socialMatrix";
 import { loadCandidates, saveCandidates, upsertCandidate } from "./store";
@@ -152,6 +153,7 @@ export async function runCatalogYtSocials(
       sets: { some: { set: { sourceUrl: { contains: "youtube.com" } } } },
       OR: [
         { soundcloud: null },
+        { youtube: null },
         { instagram: null },
         { twitter: null },
         { website: null },
@@ -162,6 +164,7 @@ export async function runCatalogYtSocials(
       slug: true,
       name: true,
       soundcloud: true,
+      youtube: true,
       instagram: true,
       twitter: true,
       website: true,
@@ -264,12 +267,17 @@ export async function runCatalogYtSocials(
 
     const data: {
       soundcloud?: string;
+      youtube?: string;
       instagram?: string;
       twitter?: string;
       website?: string;
     } = {};
     if (!dj.soundcloud && matrix.soundcloud) {
       data.soundcloud = absSocial(matrix.soundcloud);
+    }
+    if (!dj.youtube && handle) {
+      const yt = youtubeChannelUrl(handle);
+      if (yt) data.youtube = yt;
     }
     if (!dj.instagram && matrix.instagram) {
       data.instagram = absSocial(matrix.instagram);

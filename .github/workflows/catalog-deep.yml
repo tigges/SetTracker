@@ -130,6 +130,11 @@ jobs:
       - name: Verify social / website URLs (once)
         env:
           VERIFY_URLS_CURATED_ONLY: "0"
+          # Fill missing official club / festival / DJ sites (DJ Mag + Wikidata).
+          DJMAG_ENRICH_OFFICIAL: "1"
+          DJMAG_ENRICH_FESTIVALS: "1"
+          DJMAG_ENRICH_DJS: "1"
+          DJMAG_OFFICIAL_LIMIT: "100"
         run: npm run verify-urls
 
       - name: Guard catalog size
@@ -164,11 +169,16 @@ jobs:
         with:
           enablement: true
 
+      - name: Read app version
+        id: app_version
+        run: echo "version=$(node -p "require('./package.json').version")" >> "$GITHUB_OUTPUT"
+
       - name: Build static export
         env:
           GITHUB_PAGES: "true"
           PAGES_BASE_PATH: "/SetTracker"
-          NEXT_PUBLIC_APP_VERSION: "0.2.11"
+          # Footer counter — bump package.json version on every release.
+          NEXT_PUBLIC_APP_VERSION: ${{ steps.app_version.outputs.version }}
           NEXT_PUBLIC_GIT_SHA: ${{ github.sha }}
         run: npm run build
 

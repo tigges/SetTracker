@@ -93,6 +93,7 @@ assert.match(bySlug.dijon!.website, /dijondijon\.com/);
 assert.equal(bySlug.dijon!.soundcloud, null);
 assert.match(bySlug["dom-dolla"]!.website, /domdolla\.com\.au/);
 assert.match(bySlug["chris-lorenzo"]!.soundcloud!, /chris-lorenzo-1/);
+assert.match(bySlug.biscits!.youtube!, /youtube\.com\/@Biscits/i);
 assert.match(
   bySlug["dimitri-vegas-like-mike"]!.soundcloud!,
   /dimitrivegasandlikemike/,
