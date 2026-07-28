@@ -21,6 +21,48 @@ export type StatsDjRow = {
   imageUrl: string | null;
 };
 
+export type StatsFingerprintTrack = {
+  id: string;
+  slug: string;
+  title: string;
+  artistName: string;
+  playCount: number;
+  /** One example set where ACRCloud landed this track. */
+  setSlug: string | null;
+  setTitle: string | null;
+};
+
+export type StatsFingerprintPlay = {
+  id: string;
+  idStatus: string;
+  timestamp: number;
+  rawText: string | null;
+  trackSlug: string | null;
+  trackTitle: string | null;
+  artistName: string | null;
+  setSlug: string;
+  setTitle: string;
+};
+
+export type StatsUnresolvedId = {
+  id: string;
+  label: string;
+  suspectedArtist: string | null;
+  playCount: number;
+  setSlug: string | null;
+  setTitle: string | null;
+};
+
+export type StatsSparseSet = {
+  id: string;
+  slug: string;
+  title: string;
+  sourceName: string | null;
+  durationSec: number;
+  playCount: number;
+  playbackHost: string | null;
+};
+
 export type CatalogStats = {
   totals: {
     sets: number;
@@ -47,6 +89,16 @@ export type CatalogStats = {
     withBeatport: number;
     withBpm: number;
   };
+  /** ACRCloud enrich (`provenance: "fingerprint"`). */
+  fingerprint: {
+    plays: number;
+    identified: number;
+    unresolved: number;
+    uniqueTracks: number;
+    setsTouched: number;
+    tracks: StatsFingerprintTrack[];
+    recentIdentified: StatsFingerprintPlay[];
+  };
   djs: {
     browseReady: number;
     withHandle: number;
@@ -56,8 +108,14 @@ export type CatalogStats = {
     emptyTracklists: number;
     noThumb: number;
     junk: number;
+    missingYoutube: number;
+    missingSoundcloud: number;
     /** Has sets but no social/web handle — highest-value pin work. */
     missingHandleWithSets: StatsDjRow[];
+    /** Has sets, no YouTube — description harvest / pins. */
+    missingYoutubeWithSets: StatsDjRow[];
+    /** Has sets, no SoundCloud. */
+    missingSoundcloudWithSets: StatsDjRow[];
     /** Handle present, zero linked sets. */
     handleNoSets: StatsDjRow[];
     /** Sets exist but timeline is empty. */
@@ -73,6 +131,10 @@ export type CatalogStats = {
     sourceName: string | null;
     type: string;
   }>;
+  /** Playback present, ≥30m, fewer than 7 plays — fingerprint / parse targets. */
+  sparseSets: StatsSparseSet[];
+  /** Hottest unresolved ID labels (community resolve queue). */
+  topUnresolvedIds: StatsUnresolvedId[];
 };
 
 function toStatsRow(d: DjListItem): StatsDjRow {
@@ -107,6 +169,19 @@ function namedFromGroup(
     .sort((a, b) => b.count - a.count || a.label.localeCompare(b.label));
 }
 
+function playbackHost(url: string | null | undefined): string | null {
+  if (!url?.trim()) return null;
+  try {
+    const host = new URL(url).hostname.replace(/^www\./, "").toLowerCase();
+    if (host.includes("soundcloud")) return "SoundCloud";
+    if (host.includes("youtube") || host === "youtu.be") return "YouTube";
+    if (host.includes("hearthis")) return "hearthis";
+    return host;
+  } catch {
+    return null;
+  }
+}
+
 /** Build-time catalog health snapshot for the public /stats page. */
 export async function getCatalogStats(): Promise<CatalogStats> {
   const [
@@ -127,6 +202,11 @@ export async function getCatalogStats(): Promise<CatalogStats> {
     playStatusGroups,
     playProvGroups,
     emptySetRows,
+    fingerprintStatusGroups,
+    fingerprintSetsTouched,
+    fingerprintIdentifiedPlays,
+    sparseSetRows,
+    unresolvedIdRows,
   ] = await Promise.all([
     getDjList(),
     prisma.set.count(),
@@ -168,11 +248,85 @@ export async function getCatalogStats(): Promise<CatalogStats> {
         type: true,
       },
     }),
+    prisma.played.groupBy({
+      by: ["idStatus"],
+      where: { provenance: "fingerprint" },
+      _count: { _all: true },
+    }),
+    prisma.played.findMany({
+      where: { provenance: "fingerprint" },
+      select: { setId: true },
+      distinct: ["setId"],
+    }),
+    prisma.played.findMany({
+      where: {
+        provenance: "fingerprint",
+        idStatus: "identified",
+        trackId: { not: null },
+      },
+      orderBy: { position: "asc" },
+      select: {
+        id: true,
+        idStatus: true,
+        timestamp: true,
+        rawText: true,
+        trackId: true,
+        track: {
+          select: {
+            id: true,
+            slug: true,
+            title: true,
+            artistName: true,
+          },
+        },
+        set: { select: { slug: true, title: true } },
+      },
+      take: 2000,
+    }),
+    prisma.set.findMany({
+      where: {
+        playbackUrl: { not: null },
+        durationSec: { gte: 30 * 60 },
+      },
+      select: {
+        id: true,
+        slug: true,
+        title: true,
+        sourceName: true,
+        durationSec: true,
+        playbackUrl: true,
+        _count: { select: { plays: true } },
+      },
+      take: 800,
+    }),
+    prisma.idTrack.findMany({
+      where: { status: "unresolved" },
+      select: {
+        id: true,
+        label: true,
+        suspectedArtist: true,
+        plays: {
+          take: 1,
+          orderBy: { position: "asc" },
+          select: { set: { select: { slug: true, title: true } } },
+        },
+        _count: { select: { plays: true } },
+      },
+      take: 400,
+    }),
   ]);
 
   const nonJunk = djs.filter((d) => !d.isJunk);
   const missingHandleWithSets = nonJunk
     .filter((d) => !d.hasHandle && d.setCount > 0)
+    .map(toStatsRow)
+    .sort(sortBySetsThenName);
+  const missingYoutubeWithSets = nonJunk
+    .filter((d) => !d.youtube && d.setCount > 0)
+    .map(toStatsRow)
+    .sort(sortBySetsThenName);
+  const missingSoundcloudWithSets = nonJunk
+    .filter((d) => !d.soundcloud && d.setCount > 0)
     .map(toStatsRow)
     .sort(sortBySetsThenName);
   const handleNoSets = nonJunk
@@ -200,6 +354,92 @@ export async function getCatalogStats(): Promise<CatalogStats> {
     label: STATUS_META[status as IdStatus].label,
     count: statusMap.get(status) ?? 0,
   }));
+
+  const fpStatus = new Map(
+    fingerprintStatusGroups.map((g) => [g.idStatus, g._count._all]),
+  );
+  const fpIdentified = fpStatus.get("identified") ?? 0;
+  const fpUnresolved = fpStatus.get("unresolved_id") ?? 0;
+  const fpPlays = fingerprintStatusGroups.reduce(
+    (n, g) => n + g._count._all,
+    0,
+  );
+
+  const trackAgg = new Map<string, StatsFingerprintTrack>();
+  for (const p of fingerprintIdentifiedPlays) {
+    const t = p.track;
+    if (!t) continue;
+    const cur = trackAgg.get(t.id);
+    if (cur) {
+      cur.playCount += 1;
+    } else {
+      trackAgg.set(t.id, {
+        id: t.id,
+        slug: t.slug,
+        title: t.title,
+        artistName: t.artistName,
+        playCount: 1,
+        setSlug: p.set.slug,
+        setTitle: p.set.title,
+      });
+    }
+  }
+  const fingerprintTracks = [...trackAgg.values()]
+    .sort(
+      (a, b) =>
+        b.playCount - a.playCount ||
+        a.artistName.localeCompare(b.artistName) ||
+        a.title.localeCompare(b.title),
+    )
+    .slice(0, 80);
+
+  const recentIdentified: StatsFingerprintPlay[] = fingerprintIdentifiedPlays
+    .slice()
+    .reverse()
+    .slice(0, 40)
+    .map((p) => ({
+      id: p.id,
+      idStatus: p.idStatus,
+      timestamp: p.timestamp,
+      rawText: p.rawText,
+      trackSlug: p.track?.slug ?? null,
+      trackTitle: p.track?.title ?? null,
+      artistName: p.track?.artistName ?? null,
+      setSlug: p.set.slug,
+      setTitle: p.set.title,
+    }));
+
+  const sparseSets: StatsSparseSet[] = sparseSetRows
+    .filter((s) => s._count.plays < 7)
+    .sort(
+      (a, b) =>
+        a._count.plays - b._count.plays || b.durationSec - a.durationSec,
+    )
+    .slice(0, 60)
+    .map((s) => ({
+      id: s.id,
+      slug: s.slug,
+      title: s.title,
+      sourceName: s.sourceName,
+      durationSec: s.durationSec,
+      playCount: s._count.plays,
+      playbackHost: playbackHost(s.playbackUrl),
+    }));
+
+  const topUnresolvedIds: StatsUnresolvedId[] = unresolvedIdRows
+    .map((r) => ({
+      id: r.id,
+      label: r.label,
+      suspectedArtist: r.suspectedArtist,
+      playCount: r._count.plays,
+      setSlug: r.plays[0]?.set.slug ?? null,
+      setTitle: r.plays[0]?.set.title ?? null,
+    }))
+    .sort(
+      (a, b) =>
+        b.playCount - a.playCount || a.label.localeCompare(b.label),
+    )
+    .slice(0, 40);
 
   return {
     totals: {
@@ -242,6 +482,15 @@ export async function getCatalogStats(): Promise<CatalogStats> {
       withBeatport: tracksWithBeatport,
       withBpm: tracksWithBpm,
     },
+    fingerprint: {
+      plays: fpPlays,
+      identified: fpIdentified,
+      unresolved: fpUnresolved,
+      uniqueTracks: trackAgg.size,
+      setsTouched: fingerprintSetsTouched.length,
+      tracks: fingerprintTracks,
+      recentIdentified,
+    },
     djs: {
       browseReady: djs.filter((d) => d.isBrowseReady).length,
       withHandle: nonJunk.filter((d) => d.hasHandle).length,
@@ -251,12 +500,18 @@ export async function getCatalogStats(): Promise<CatalogStats> {
       emptyTracklists: emptySetProfiles.length,
       noThumb: nonJunk.filter((d) => !d.imageUrl).length,
       junk: junkNames.length,
+      missingYoutube: missingYoutubeWithSets.length,
+      missingSoundcloud: missingSoundcloudWithSets.length,
       missingHandleWithSets,
+      missingYoutubeWithSets,
+      missingSoundcloudWithSets,
       handleNoSets,
       emptySetProfiles,
       noThumbWithSets,
       junkNames,
     },
     emptySets: emptySetRows,
+    sparseSets,
+    topUnresolvedIds,
   };
 }

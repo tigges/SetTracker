@@ -63,7 +63,7 @@ export const PROVENANCE_META: Record<
   youtube: { label: "YouTube parse", short: "YouTube" },
   bandcamp: { label: "Bandcamp", short: "Bandcamp" },
   insomniac: { label: "Insomniac", short: "Insomniac" },
-  fingerprint: { label: "Fingerprint", short: "Fingerprint" },
+  fingerprint: { label: "ACRCloud fingerprint", short: "ACRCloud" },
   community: { label: "Community", short: "Community" },
 };
 
