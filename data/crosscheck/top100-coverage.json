@@ -1,19 +1,14 @@
 {
-  "updatedAt": "2026-07-28T16:54:26.530Z",
+  "updatedAt": "2026-07-28T20:26:58.864Z",
   "summary": {
     "total": 100,
-    "withSet": 56,
-    "withTracks": 54,
-    "missingSet": 44,
-    "missingTracks": 46
+    "withSet": 61,
+    "withTracks": 59,
+    "missingSet": 39,
+    "missingTracks": 41
   },
   "top20MissingHandles": [],
   "missingSets": [
-    "#16 Calvin Harris",
-    "#24 Alan Walker",
-    "#27 Jamie Jones",
-    "#28 R3hab",
-    "#31 Skrillex",
     "#42 Marshmello",
     "#43 The Martinez Brothers",
     "#44 Zedd",
@@ -254,14 +249,14 @@
       "rank": 16,
       "name": "Calvin Harris",
       "slug": "calvin-harris",
-      "sets": 0,
-      "tracks": 0,
+      "sets": 1,
+      "tracks": 1,
       "soundcloud": "https://soundcloud.com/calvinharris",
       "youtube": "https://www.youtube.com/@CalvinHarris",
       "missingSc": false,
       "missingYt": false,
-      "missingSet": true,
-      "missingTracks": true
+      "missingSet": false,
+      "missingTracks": false
     },
     {
       "rank": 17,
@@ -358,14 +353,14 @@
       "rank": 24,
       "name": "Alan Walker",
       "slug": "alan-walker",
-      "sets": 0,
-      "tracks": 0,
+      "sets": 1,
+      "tracks": 3,
       "soundcloud": "https://soundcloud.com/alanwalker",
       "youtube": "https://www.youtube.com/@Alanwalkermusic",
       "missingSc": false,
       "missingYt": false,
-      "missingSet": true,
-      "missingTracks": true
+      "missingSet": false,
+      "missingTracks": false
     },
     {
       "rank": 25,
@@ -397,27 +392,27 @@
       "rank": 27,
       "name": "Jamie Jones",
       "slug": "jamie-jones",
-      "sets": 0,
-      "tracks": 0,
+      "sets": 1,
+      "tracks": 6,
       "soundcloud": "https://soundcloud.com/jamie-jones",
       "youtube": "https://www.youtube.com/@JamieJonesOfficial",
       "missingSc": false,
       "missingYt": false,
-      "missingSet": true,
-      "missingTracks": true
+      "missingSet": false,
+      "missingTracks": false
     },
     {
       "rank": 28,
       "name": "R3hab",
       "slug": "r3hab",
-      "sets": 0,
-      "tracks": 0,
+      "sets": 1,
+      "tracks": 34,
       "soundcloud": "https://soundcloud.com/r3hab",
       "youtube": "https://www.youtube.com/@r3hab",
       "missingSc": false,
       "missingYt": false,
-      "missingSet": true,
-      "missingTracks": true
+      "missingSet": false,
+      "missingTracks": false
     },
     {
       "rank": 29,
@@ -449,14 +444,14 @@
       "rank": 31,
       "name": "Skrillex",
       "slug": "skrillex",
-      "sets": 0,
-      "tracks": 0,
+      "sets": 1,
+      "tracks": 41,
       "soundcloud": "https://soundcloud.com/skrillex",
       "youtube": "https://www.youtube.com/@skrillex",
       "missingSc": false,
       "missingYt": false,
-      "missingSet": true,
-      "missingTracks": true
+      "missingSet": false,
+      "missingTracks": false
     },
     {
       "rank": 32,
@@ -815,9 +810,9 @@
       "slug": "atb",
       "sets": 0,
       "tracks": 0,
-      "soundcloud": null,
+      "soundcloud": "https://soundcloud.com",
       "youtube": "https://www.youtube.com/user/atbtv",
-      "missingSc": true,
+      "missingSc": false,
       "missingYt": false,
       "missingSet": true,
       "missingTracks": true
@@ -1062,9 +1057,9 @@
       "slug": "le-twins",
       "sets": 0,
       "tracks": 0,
-      "soundcloud": null,
+      "soundcloud": "https://soundcloud.com/djmag",
       "youtube": "https://www.youtube.com/@LeTwins",
-      "missingSc": true,
+      "missingSc": false,
       "missingYt": false,
       "missingSet": true,
       "missingTracks": true
