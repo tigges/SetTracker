@@ -2,6 +2,8 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import {
   assertCanonicalWordBudget,
+  DEFAULT_GENRE,
+  ensureGenre,
   expandGenres,
   normalizeGenre,
   normalizeGenreList,
@@ -21,6 +23,16 @@ describe("normalizeGenre", () => {
     assert.equal(normalizeGenre("dance"), "House");
     assert.equal(normalizeGenre("Electronic"), "House");
     assert.equal(normalizeGenre("trance"), "Trance");
+    assert.equal(normalizeGenre("Big Room"), "Big Room");
+    assert.equal(normalizeGenre("bigroom"), "Big Room");
+    assert.equal(normalizeGenre("Melodic Techno"), "Melodic Techno");
+  });
+
+  it("ensureGenre never returns null", () => {
+    assert.equal(ensureGenre("techhouse"), "Tech House");
+    assert.equal(ensureGenre("guestmix"), DEFAULT_GENRE);
+    assert.equal(ensureGenre(null, "Bass House"), "Bass House");
+    assert.equal(ensureGenre("liveset", null, undefined), DEFAULT_GENRE);
   });
 
   it("rejects format tags / non-genres", () => {

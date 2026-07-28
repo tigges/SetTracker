@@ -10,7 +10,8 @@ import { runDiscovery, type DiscoveryStats } from "./discovery/run";
 import { hashRawSetContent } from "./hash";
 import { fetchTrackDetail, sleep as htSleep } from "./hearthis/client";
 import { adapters as defaultAdapters } from "./sources";
-import { normalizeGenre } from "../genre";
+import { ensureGenre, normalizeGenre } from "../genre";
+import { rosterGenreForArtist } from "./roster";
 import { allocateTrackSlug, trackSlugBase } from "../tracks/slug";
 import { slugify, type RawArtist, type RawPlay, type RawSet, type SourceAdapter } from "./types";
 import { eventSocialPayload, resolveEvent } from "./events";
@@ -214,9 +215,8 @@ export async function runIngest(
       if (remixerName && !existing.remixerName) data.remixerName = remixerName;
       if (play.bpm != null && existing.bpm == null) data.bpm = play.bpm;
       if (play.musicalKey && !existing.musicalKey) data.musicalKey = play.musicalKey;
-      if (play.genre && !existing.genre) {
-        const g = normalizeGenre(play.genre);
-        if (g) data.genre = g;
+      if (!existing.genre) {
+        data.genre = ensureGenre(play.genre);
       }
       if (play.durationSec != null && existing.durationSec == null) {
         data.durationSec = play.durationSec;
@@ -267,7 +267,7 @@ export async function runIngest(
         remixerName: remixerName ?? null,
         bpm: play.bpm ?? null,
         musicalKey: play.musicalKey ?? null,
-        genre: normalizeGenre(play.genre) ?? null,
+        genre: ensureGenre(play.genre),
         durationSec: play.durationSec ?? null,
         beatportUrl: play.beatportUrl ?? null,
       },
@@ -343,10 +343,7 @@ export async function runIngest(
         idStatus: p.idStatus,
       };
       // Inherit set genre onto tracks when the source has no per-track genre.
-      const genre =
-        normalizeGenre(p.genre) ??
-        normalizeGenre(setGenre) ??
-        undefined;
+      const genre = ensureGenre(p.genre, setGenre);
       if (p.idStatus === "identified" && p.trackTitle && p.artistName) {
         const trackId = await upsertTrack({
           title: p.trackTitle,
@@ -552,17 +549,27 @@ export async function runIngest(
       if (id) collaboratorIds.push(id);
     }
 
-    const setGenre = normalizeGenre(raw.genre);
+    const setGenre = ensureGenre(
+      raw.genre,
+      rosterGenreForArtist(raw.primaryArtist.name),
+      existing?.genre,
+    );
 
     if (existing) {
       if (existing.sourceHash && existing.sourceHash === sourceHash) {
         // Still refresh artist linkage (b2b backfill) even when tracklist is unchanged.
         await syncSetArtists(existing.id, primaryDjId, collaboratorIds);
-        // Soft-normalize genre without re-pulling the tracklist.
-        if ((existing.genre ?? null) !== (setGenre ?? null)) {
+        // Soft-normalize / fill genre without re-pulling the tracklist.
+        // Never wipe a good genre with null; prefer incoming only when parseable.
+        const softGenre = ensureGenre(
+          normalizeGenre(raw.genre) ?? undefined,
+          existing.genre,
+          rosterGenreForArtist(raw.primaryArtist.name),
+        );
+        if ((existing.genre ?? null) !== softGenre) {
           await prisma.set.update({
             where: { id: existing.id },
-            data: { genre: setGenre },
+            data: { genre: softGenre },
           });
         }
         stats.skippedSets += 1;
