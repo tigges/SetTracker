@@ -36,5 +36,13 @@ assert.equal(isJunkArtistName("DJøøn"), true);
 assert.equal(isJunkArtistName("DIJON"), false);
 assert.equal(isJunkArtistName("Black Coffee"), false);
 assert.equal(isJunkArtistName("Keinemusik"), false);
+assert.equal(isJunkArtistName("Freedom Stage"), true);
+assert.equal(isJunkArtistName("Mainstage"), true);
+assert.equal(isJunkArtistName("Main Stage"), true);
+assert.equal(sanitizeArtistName("Freedom Stage"), null);
+assert.equal(isJunkArtistName("Afro House"), true);
+assert.equal(isJunkArtistName("Tech House"), true);
+assert.equal(sanitizeArtistName("Afro House"), null);
+assert.equal(isJunkArtistName("House"), true);
 
 console.log("artistName.test.ts ok");
