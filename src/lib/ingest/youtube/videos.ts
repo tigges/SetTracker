@@ -550,4 +550,56 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     title: "W&W - Rave Culture Live 002 (DJ Set)",
     seriesName: "Rave Culture Live",
   },
+  // Operator-supplied Top 100 gap fills (oEmbed-validated full sets only).
+  {
+    video: "https://www.youtube.com/watch?v=OD5LawM8ONk",
+    primaryArtist: dj("Tiësto", {
+      accent: "#00bbf9",
+      soundcloud: "https://soundcloud.com/tiesto",
+      youtube: "https://www.youtube.com/@tiesto",
+      homeCity: "Netherlands",
+    }),
+    genre: "Big Room",
+    type: "festival",
+    title: "Tiësto - Dreamstate 2025 (Full Set)",
+    eventName: "Dreamstate",
+  },
+  {
+    video: "https://www.youtube.com/watch?v=i-mFuxbGHzg",
+    primaryArtist: dj("Reinier Zonneveld", {
+      accent: "#ff006e",
+      soundcloud: "https://soundcloud.com/reinier-zonneveld",
+      youtube: "https://www.youtube.com/@ReinierZonneveld_FilthOnAcid",
+    }),
+    genre: "Techno",
+    type: "festival",
+    title: "Reinier Zonneveld | Awakenings Festival 2025",
+    seriesName: "Awakenings",
+    eventName: "Awakenings Festival",
+  },
+  {
+    video: "https://www.youtube.com/watch?v=b-2YA4yC3UA",
+    primaryArtist: dj("Claptone", {
+      accent: "#ffd60a",
+      soundcloud: "https://soundcloud.com/claptone",
+      youtube: "https://www.youtube.com/@CLAPTONEOFFICIAL",
+    }),
+    genre: "Deep House",
+    type: "festival",
+    title: "Claptone ‘The Masquerade’ Full Set at Movistar Arena, Buenos Aires",
+    eventName: "Movistar Arena Buenos Aires",
+  },
+  {
+    video: "https://www.youtube.com/watch?v=OzGpEPZ3BZs",
+    primaryArtist: dj("Vini Vici", {
+      accent: "#9b5de5",
+      soundcloud: "https://soundcloud.com/vinivicimusic",
+      youtube: "https://www.youtube.com/@ViniViciMusic",
+    }),
+    genre: "Psytrance",
+    type: "festival",
+    title: "Vini Vici — Transmission Poland 2022: Behind The Mask",
+    seriesName: "Transmission",
+    eventName: "Transmission Poland",
+  },
 ];
