@@ -272,7 +272,17 @@ export const DJ_SOCIAL_PINS: DjSocialPin[] = [
     instagram: "https://www.instagram.com/chrislorenzo66/",
     twitter: "https://x.com/Lorenzosbeats",
     website: "https://chrislorenzo.komi.io",
-    bio: "Bass House. YT @ChrisLorenzo — IG @chrislorenzo66, X @Lorenzosbeats, FB chrislorenzo88, SC chris-lorenzo-1, Spotify artist hub.",
+    bio: "Tech House. UK. Songstats #TechHouse — YT @ChrisLorenzo, IG @chrislorenzo66, X @Lorenzosbeats, FB chrislorenzo88, SC chris-lorenzo-1, Spotify artist hub.",
+  },
+  {
+    slug: "hannah-wants",
+    name: "Hannah Wants",
+    accent: "#ff4d8d",
+    soundcloud: "https://soundcloud.com/hannah_wants",
+    instagram: "https://www.instagram.com/hannah_wants/",
+    twitter: "https://x.com/hannah_wants",
+    website: "https://www.musicglue.com/hannah-wants/",
+    bio: "Tech House. UK. YT @HannahWantsDJ — IG/X @hannah_wants, FB hannahwantsdj, SC hannah_wants, Spotify artist hub.",
   },
   {
     slug: "dimitri-vegas-like-mike",

@@ -29,6 +29,7 @@ for (const slug of [
   "dijon",
   "dom-dolla",
   "chris-lorenzo",
+  "hannah-wants",
   "dimitri-vegas-like-mike",
   "msendy",
 ]) {
