@@ -1,11 +1,17 @@
 import Link from "next/link";
-import { getCatalogStats, type StatsDjRow } from "@/lib/catalogStats";
-import { fmtDuration } from "@/lib/status";
-import { STATUS_META, type IdStatus } from "@/lib/status";
+import {
+  getCatalogStats,
+  type StatsDjRow,
+  type StatsFingerprintTrack,
+  type StatsSparseSet,
+  type StatsUnresolvedId,
+} from "@/lib/catalogStats";
+import { STATUS_META, fmtDuration, type IdStatus } from "@/lib/status";
 
 export const metadata = {
   title: "Stats — setradar.ai",
-  description: "Catalog health: sets, DJs, handles, tracklists, and gaps.",
+  description:
+    "Catalog health: identification, ACRCloud fingerprints, handles, and gaps.",
 };
 
 function pct(part: number, whole: number): string {
@@ -69,6 +75,142 @@ function BarRow({
         </div>
       </div>
     </div>
+  );
+}
+
+function FingerprintTrackList({ tracks }: { tracks: StatsFingerprintTrack[] }) {
+  const shown = tracks.slice(0, 40);
+  return (
+    <div>
+      <h3 className="mb-2 text-[13px] font-semibold text-ink">
+        Tracks identified by ACRCloud
+      </h3>
+      <ul className="divide-y divide-line border-y border-line">
+        {shown.map((t) => (
+          <li key={t.id} className="py-2.5">
+            <div className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-3">
+              <div className="min-w-0">
+                <Link
+                  href={`/tracks/${t.slug}`}
+                  className="block truncate text-[14px] font-medium text-ink hover:text-brand"
+                >
+                  {t.artistName} — {t.title}
+                </Link>
+                {t.setSlug ? (
+                  <Link
+                    href={`/sets/${t.setSlug}`}
+                    className="mono mt-0.5 block truncate text-[11px] text-muted2 hover:text-ink"
+                  >
+                    in {t.setTitle}
+                  </Link>
+                ) : null}
+              </div>
+              <span className="mono shrink-0 text-[12px] text-muted2">
+                {t.playCount}×
+              </span>
+            </div>
+          </li>
+        ))}
+      </ul>
+      {tracks.length > shown.length ? (
+        <p className="mt-2 mono text-[11px] text-muted2">
+          Showing {shown.length} of {tracks.length}
+        </p>
+      ) : null}
+    </div>
+  );
+}
+
+function SparseSetList({ rows }: { rows: StatsSparseSet[] }) {
+  const shown = rows.slice(0, 40);
+  return (
+    <section>
+      <div className="mb-3 flex items-baseline justify-between gap-3">
+        <div>
+          <h2 className="text-lg font-bold tracking-tight">
+            Sparse sets · fingerprint queue
+          </h2>
+          <p className="mt-0.5 text-[13px] text-muted2">
+            ≥30m with playback and &lt;7 logged plays — best ACRCloud /
+            re-parse targets.
+          </p>
+        </div>
+        <span className="mono text-[12px] text-muted2">{rows.length}</span>
+      </div>
+      {shown.length === 0 ? (
+        <p className="text-[13px] text-muted2">No sparse long sets.</p>
+      ) : (
+        <ul className="divide-y divide-line border-y border-line">
+          {shown.map((set) => (
+            <li key={set.id}>
+              <Link
+                href={`/sets/${set.slug}`}
+                className="flex items-baseline justify-between gap-3 py-2.5 text-[14px] transition-colors hover:text-brand"
+              >
+                <span className="min-w-0 truncate font-medium">{set.title}</span>
+                <span className="mono shrink-0 text-[12px] text-muted2">
+                  {set.playCount}tr · {fmtDuration(set.durationSec)}
+                  {set.playbackHost ? ` · ${set.playbackHost}` : ""}
+                </span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      )}
+      {rows.length > shown.length ? (
+        <p className="mt-2 mono text-[11px] text-muted2">
+          Showing {shown.length} of {rows.length}
+        </p>
+      ) : null}
+    </section>
+  );
+}
+
+function UnresolvedIdList({ rows }: { rows: StatsUnresolvedId[] }) {
+  const shown = rows.slice(0, 40);
+  return (
+    <section>
+      <div className="mb-3 flex items-baseline justify-between gap-3">
+        <div>
+          <h2 className="text-lg font-bold tracking-tight">
+            Unresolved IDs · resolve queue
+          </h2>
+          <p className="mt-0.5 text-[13px] text-muted2">
+            Hottest open ID labels — community Suggest ID →{" "}
+            <span className="mono">data/resolutions.json</span>.
+          </p>
+        </div>
+        <span className="mono text-[12px] text-muted2">{rows.length}</span>
+      </div>
+      {shown.length === 0 ? (
+        <p className="text-[13px] text-muted2">No unresolved IDs.</p>
+      ) : (
+        <ul className="divide-y divide-line border-y border-line">
+          {shown.map((row) => (
+            <li key={row.id} className="py-2.5">
+              <div className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-3">
+                <div className="min-w-0">
+                  <span className="block truncate text-[14px] font-medium text-ink">
+                    {row.label}
+                  </span>
+                  {row.setSlug ? (
+                    <Link
+                      href={`/sets/${row.setSlug}`}
+                      className="mono mt-0.5 block truncate text-[11px] text-muted2 hover:text-ink"
+                    >
+                      {row.setTitle}
+                    </Link>
+                  ) : null}
+                </div>
+                <span className="mono shrink-0 text-[12px] text-muted2">
+                  {row.playCount}×
+                </span>
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
+    </section>
   );
 }
 
@@ -200,11 +342,79 @@ export default async function StatsPage() {
             hint={`${s.density.severe} severe · ${s.density.scanned} scanned ≥30m`}
           />
           <Stat
+            label="Sparse ≥30m"
+            value={s.sparseSets.length}
+            hint="<7 plays · fingerprint targets"
+          />
+          <Stat
+            label="No YouTube · sets"
+            value={s.djs.missingYoutube}
+            hint="description harvest / pins"
+          />
+          <Stat
+            label="No SoundCloud · sets"
+            value={s.djs.missingSoundcloud}
+            hint="crosslink / pins"
+          />
+          <Stat
+            label="ACRCloud IDs"
+            value={s.fingerprint.identified}
+            hint={`${s.fingerprint.uniqueTracks} tracks · ${s.fingerprint.setsTouched} sets`}
+          />
+          <Stat
             label="Tracks · Beatport"
             value={s.tracks.withBeatport}
             hint={pct(s.tracks.withBeatport, s.totals.tracks)}
           />
         </div>
+      </section>
+
+      <section className="mb-12">
+        <div className="mb-3 flex items-baseline justify-between gap-3">
+          <div>
+            <h2 className="text-lg font-bold tracking-tight">
+              ACRCloud fingerprint
+            </h2>
+            <p className="mt-0.5 text-[13px] text-muted2">
+              Timeline rows with provenance{" "}
+              <span className="mono">fingerprint</span> from{" "}
+              <span className="mono">npm run enrich:fingerprint</span>. Gap-fill
+              only — never overwrites source tracklists.
+            </p>
+          </div>
+          <span className="mono text-[12px] text-muted2">
+            {s.fingerprint.plays} plays
+          </span>
+        </div>
+        <div className="mb-6 grid grid-cols-2 gap-x-6 sm:grid-cols-4">
+          <Stat
+            label="Identified"
+            value={s.fingerprint.identified}
+            hint={pct(s.fingerprint.identified, Math.max(1, s.fingerprint.plays))}
+          />
+          <Stat
+            label="Unresolved / weak"
+            value={s.fingerprint.unresolved}
+            hint="no match or low score"
+          />
+          <Stat
+            label="Unique tracks"
+            value={s.fingerprint.uniqueTracks}
+          />
+          <Stat
+            label="Sets touched"
+            value={s.fingerprint.setsTouched}
+          />
+        </div>
+        {s.fingerprint.tracks.length === 0 ? (
+          <p className="text-[13px] text-muted2">
+            No ACRCloud-identified tracks yet. Enable{" "}
+            <span className="mono">ACRCLOUD_*</span> secrets and run Catalog
+            enrich.
+          </p>
+        ) : (
+          <FingerprintTrackList tracks={s.fingerprint.tracks} />
+        )}
       </section>
 
       <div className="mb-12 grid gap-10 lg:grid-cols-2">
@@ -229,7 +439,7 @@ export default async function StatsPage() {
         <section>
           <h2 className="mb-1 text-lg font-bold tracking-tight">Provenance</h2>
           <p className="mb-3 text-[13px] text-muted2">
-            Where tracklist rows came from.
+            Where tracklist rows came from (ACRCloud = fingerprint).
           </p>
           <div>
             {s.plays.byProvenance.map((row) => (
@@ -301,11 +511,35 @@ export default async function StatsPage() {
       </div>
 
       <div className="space-y-12">
+        <SparseSetList rows={s.sparseSets} />
+
+        <UnresolvedIdList rows={s.topUnresolvedIds} />
+
         <DjGapList
           title="Missing handles · has sets"
           blurb="Priority pin work — profiles with catalog weight but no SC / IG / X / web."
           rows={s.djs.missingHandleWithSets}
           empty="Every DJ with sets already has a handle."
+          meta={(d) =>
+            `${d.setCount} ${d.setCount === 1 ? "set" : "sets"} · ${d.playCount} plays`
+          }
+        />
+
+        <DjGapList
+          title="Missing YouTube · has sets"
+          blurb="SC bios often list YouTube as plain text — catalog-sc-socials / pins."
+          rows={s.djs.missingYoutubeWithSets}
+          empty="Every DJ with sets has a YouTube link."
+          meta={(d) =>
+            `${d.setCount} ${d.setCount === 1 ? "set" : "sets"} · ${d.playCount} plays`
+          }
+        />
+
+        <DjGapList
+          title="Missing SoundCloud · has sets"
+          blurb="Crosslink from YT About, or pin the permalink."
+          rows={s.djs.missingSoundcloudWithSets}
+          empty="Every DJ with sets has a SoundCloud link."
           meta={(d) =>
             `${d.setCount} ${d.setCount === 1 ? "set" : "sets"} · ${d.playCount} plays`
           }
