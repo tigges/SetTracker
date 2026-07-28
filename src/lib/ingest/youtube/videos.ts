@@ -602,4 +602,17 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     seriesName: "Transmission",
     eventName: "Transmission Poland",
   },
+  {
+    video: "https://www.youtube.com/watch?v=xUdcEDryN8o",
+    primaryArtist: dj("Indira Paganotto", {
+      accent: "#ff006e",
+      soundcloud: "https://soundcloud.com/indirapaganotto",
+      youtube: "https://www.youtube.com/@IndiraPaganotto",
+    }),
+    genre: "Hard Techno",
+    type: "festival",
+    title: "Indira Paganotto | Awakenings Festival 2025",
+    seriesName: "Awakenings",
+    eventName: "Awakenings Festival",
+  },
 ];

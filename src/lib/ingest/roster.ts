@@ -1136,6 +1136,36 @@ export const ARTIST_ROSTER_CURATED: ArtistRosterEntry[] = [
     website: "https://www.timmytrumpet.com/",
     priority: "high",
   },
+  {
+    name: "Indira Paganotto",
+    genre: "Hard Techno",
+    accent: "#ff006e",
+    youtube: { handle: "@IndiraPaganotto", status: "ok" },
+    soundcloud: {
+      permalink: "indirapaganotto",
+      userId: 682788,
+      status: "ok",
+    },
+    website: "https://indirapaganotto.com/",
+    priority: "high",
+  },
+  {
+    name: "The Martinez Brothers",
+    genre: "House",
+    accent: "#f4a261",
+    youtube: { handle: "@TheMartinezBrosTV", status: "ok" },
+    soundcloud: { permalink: "themartinezbros", status: "ok" },
+    website: "https://themartinezbrothers.com/",
+    priority: "high",
+  },
+  {
+    name: "Zedd",
+    genre: "Electro House",
+    accent: "#4cc9f0",
+    youtube: { handle: "UCPNokRZ9hacjIQ3IQL6HNUQ", status: "ok" },
+    soundcloud: { permalink: "zedd", userId: 462658, status: "ok" },
+    priority: "high",
+  },
 ];
 
 /**

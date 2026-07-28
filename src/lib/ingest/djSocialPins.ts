@@ -479,6 +479,36 @@ export const DJ_SOCIAL_PINS: DjSocialPin[] = [
     website: "https://djmag.com/top100djs/2025/32/vini-vici",
     bio: "Psytrance. SC vinivicimusic, YT @ViniViciMusic.",
   },
+  {
+    slug: "indira-paganotto",
+    name: "Indira Paganotto",
+    accent: "#ff006e",
+    soundcloud: "https://soundcloud.com/indirapaganotto",
+    youtube: "https://www.youtube.com/@IndiraPaganotto",
+    instagram: null,
+    website: "https://indirapaganotto.com/",
+    bio: "Hard Techno. Official indirapaganotto.com — SC indirapaganotto, YT @IndiraPaganotto.",
+  },
+  {
+    slug: "the-martinez-brothers",
+    name: "The Martinez Brothers",
+    accent: "#f4a261",
+    soundcloud: "https://soundcloud.com/themartinezbros",
+    youtube: "https://www.youtube.com/@TheMartinezBrosTV",
+    instagram: null,
+    website: "https://themartinezbrothers.com/",
+    bio: "House. Official themartinezbrothers.com — SC themartinezbros, YT @TheMartinezBrosTV.",
+  },
+  {
+    slug: "zedd",
+    name: "Zedd",
+    accent: "#4cc9f0",
+    soundcloud: "https://soundcloud.com/zedd",
+    youtube: "https://www.youtube.com/channel/UCPNokRZ9hacjIQ3IQL6HNUQ",
+    instagram: null,
+    website: "https://djmag.com/top100djs/2025/44/zedd",
+    bio: "Electro House. SC zedd, YT channel UCPNokRZ9hacjIQ3IQL6HNUQ.",
+  },
 ];
 
 /** Upsert pinned social fields for curated brand DJs. Returns rows touched. */
