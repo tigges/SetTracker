@@ -13,6 +13,7 @@ export function socialHandle(name: string): string {
 
 export type DjSocialFields = {
   soundcloud: string | null;
+  youtube: string | null;
   instagram: string | null;
   twitter: string | null;
   website: string | null;
@@ -20,7 +21,37 @@ export type DjSocialFields = {
 
 /** No name-derived guesses — null until roster/crosslink/curated map says so. */
 export function djSocials(_name: string): DjSocialFields {
-  return { soundcloud: null, instagram: null, twitter: null, website: null };
+  return {
+    soundcloud: null,
+    youtube: null,
+    instagram: null,
+    twitter: null,
+    website: null,
+  };
+}
+
+/** Canonical channel URL from `@Handle`, bare handle, or full YT URL (strips `?si=`). */
+export function youtubeChannelUrl(handleOrUrl: string): string | null {
+  const raw = handleOrUrl.trim();
+  if (!raw) return null;
+  if (/^https?:\/\//i.test(raw)) {
+    try {
+      const u = new URL(raw);
+      if (!/(^|\.)youtube\.com$/i.test(u.hostname) && !/^youtu\.be$/i.test(u.hostname)) {
+        return null;
+      }
+      u.search = "";
+      u.hash = "";
+      let path = u.pathname.replace(/\/+$/, "");
+      if (!path || path === "/") return null;
+      return `https://www.youtube.com${path}`;
+    } catch {
+      return null;
+    }
+  }
+  const handle = raw.replace(/^@/, "");
+  if (!/^[A-Za-z0-9._-]{2,}$/.test(handle)) return null;
+  return `https://www.youtube.com/@${handle}`;
 }
 
 function absUrl(u: string, hostHint?: "instagram" | "x" | "soundcloud"): string {
@@ -41,6 +72,7 @@ function isSocialHost(url: string): boolean {
 export function djSocialsFromKnown(opts: {
   name: string;
   soundcloudPermalink?: string | null;
+  youtubeHandle?: string | null;
   socials?: string[];
   website?: string | null;
 }): DjSocialFields {
@@ -48,14 +80,21 @@ export function djSocialsFromKnown(opts: {
   const ig = socials.find((u) => /instagram\.com\//i.test(u)) ?? null;
   const tw = socials.find((u) => /(twitter|x)\.com\//i.test(u)) ?? null;
   const scFromList = socials.find((u) => /soundcloud\.com\//i.test(u)) ?? null;
+  const ytFromList =
+    socials.find((u) => /(youtube\.com|youtu\.be)\//i.test(u)) ?? null;
   const webFromList =
     socials.find((u) => /^https?:\/\//i.test(u) && !isSocialHost(u)) ?? null;
   const sc = opts.soundcloudPermalink
     ? `https://soundcloud.com/${opts.soundcloudPermalink}`
     : scFromList;
+  const yt =
+    youtubeChannelUrl(opts.youtubeHandle ?? "") ||
+    youtubeChannelUrl(ytFromList ?? "") ||
+    null;
   const website = opts.website || webFromList || null;
   return {
     soundcloud: sc ? absUrl(sc, "soundcloud") : null,
+    youtube: yt,
     instagram: ig ? absUrl(ig, "instagram") : null,
     twitter: tw ? absUrl(tw, "x") : null,
     website: website ? absUrl(website) : null,
@@ -363,6 +402,7 @@ export function labelSocials(name: string): {
 
 export const SOCIAL_LABELS: Record<string, string> = {
   soundcloud: "SoundCloud",
+  youtube: "YouTube",
   instagram: "Instagram",
   twitter: "X",
   website: "Website",
@@ -370,7 +410,17 @@ export const SOCIAL_LABELS: Record<string, string> = {
 
 export const SOCIAL_SHORT: Record<string, string> = {
   soundcloud: "SC",
+  youtube: "YT",
   instagram: "IG",
   twitter: "X",
   website: "WWW",
 };
+
+/** Stable pill order on DJ / venue / label profiles. */
+export const SOCIAL_ORDER = [
+  "soundcloud",
+  "youtube",
+  "instagram",
+  "twitter",
+  "website",
+] as const;

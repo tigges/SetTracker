@@ -44,6 +44,7 @@ export async function ensureDiscoveredDjs(
     website?: string;
     socials?: string[];
     soundcloudPermalink?: string;
+    youtubeHandle?: string;
   };
 
   const stubs = new Map<string, Stub>();
@@ -59,6 +60,7 @@ export async function ensureDiscoveredDjs(
       website: a.website,
       socials: a.socials,
       soundcloudPermalink: a.soundcloud?.permalink,
+      youtubeHandle: a.youtube?.handle,
     });
   }
 
@@ -89,6 +91,7 @@ export async function ensureDiscoveredDjs(
       name: stub.name,
       soundcloudPermalink:
         stub.soundcloudPermalink || hint?.soundcloudPermalink,
+      youtubeHandle: stub.youtubeHandle || hint?.youtubeHandle,
       socials: stub.socials,
       website: stub.website,
     });
@@ -109,6 +112,7 @@ export async function ensureDiscoveredDjs(
     }
     const data: Record<string, unknown> = {};
     if (!existing.soundcloud && socials.soundcloud) data.soundcloud = socials.soundcloud;
+    if (!existing.youtube && socials.youtube) data.youtube = socials.youtube;
     if (!existing.instagram && socials.instagram) data.instagram = socials.instagram;
     if (!existing.twitter && socials.twitter) data.twitter = socials.twitter;
     if (!existing.website && socials.website) data.website = socials.website;

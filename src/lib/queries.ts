@@ -408,6 +408,7 @@ export async function getDjBySlug(slug: string) {
     imageUrl: dj.imageUrl,
     socials: {
       soundcloud: dj.soundcloud,
+      youtube: dj.youtube,
       instagram: dj.instagram,
       twitter: dj.twitter,
       website: dj.website,
@@ -443,6 +444,7 @@ export type DjListItem = {
   accent: string;
   imageUrl: string | null;
   soundcloud: string | null;
+  youtube: string | null;
   instagram: string | null;
   twitter: string | null;
   website: string | null;
@@ -500,6 +502,7 @@ export async function getDjList(): Promise<DjListItem[]> {
         accent: true,
         imageUrl: true,
         soundcloud: true,
+        youtube: true,
         instagram: true,
         twitter: true,
         website: true,
@@ -511,7 +514,7 @@ export async function getDjList(): Promise<DjListItem[]> {
 
   return rows.map((d) => {
     const hasHandle = Boolean(
-      d.soundcloud || d.instagram || d.twitter || d.website,
+      d.soundcloud || d.youtube || d.instagram || d.twitter || d.website,
     );
     const isJunk =
       isJunkArtistName(d.name) ||
@@ -528,6 +531,7 @@ export async function getDjList(): Promise<DjListItem[]> {
       accent: d.accent,
       imageUrl: d.imageUrl,
       soundcloud: d.soundcloud,
+      youtube: d.youtube,
       instagram: d.instagram,
       twitter: d.twitter,
       website: d.website,

@@ -216,6 +216,7 @@ export async function verifyStoredSocialUrls(
       id: true,
       slug: true,
       soundcloud: true,
+      youtube: true,
       instagram: true,
       twitter: true,
       website: true,
@@ -223,6 +224,7 @@ export async function verifyStoredSocialUrls(
   });
   for (const d of djs) {
     await scrubField(prisma, "dj", d.id, "soundcloud", d.soundcloud, stats);
+    await scrubField(prisma, "dj", d.id, "youtube", d.youtube, stats);
     await scrubField(prisma, "dj", d.id, "instagram", d.instagram, stats);
     await scrubField(prisma, "dj", d.id, "twitter", d.twitter, stats);
     await scrubField(prisma, "dj", d.id, "website", d.website, stats);
