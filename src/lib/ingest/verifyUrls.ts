@@ -15,6 +15,7 @@ import { ensureDjMagFestivals } from "./discovery/djmagFestivals";
 import { ensureDiscoveredDjs } from "./discovery/ensureDjs";
 import { applyCuratedDjImages } from "../thumbs/djImages";
 import { applyCuratedEventImages } from "../thumbs/eventImages";
+import { mergeSplitAtomicActs } from "./mergeAtomicActs";
 import { applyDjSocialPins } from "./djSocialPins";
 import { KNOWN_EVENTS } from "./events";
 
@@ -118,6 +119,15 @@ export async function applyKnownUrlFixes(prisma: PrismaClient): Promise<number> 
 
   // Brand DJ social pins (BISCITS, Guetta, FISHER, ARTBAT, …).
   n += await applyDjSocialPins(prisma);
+
+  // Walker & Royce etc. — fold false b2b half-name Dj rows onto the duo.
+  const atomic = await mergeSplitAtomicActs(prisma);
+  n += atomic.setsRelinked + atomic.junkRemoved;
+  if (atomic.setsRelinked || atomic.junkRemoved) {
+    console.log(
+      `[verify-urls] atomic duos relinked=${atomic.setsRelinked} junkRemoved=${atomic.junkRemoved}`,
+    );
+  }
 
   // Force curated DJ logos (Gentlemen's Groove, …) over broken hearthis covers.
   const curatedDjs = await applyCuratedDjImages(prisma);

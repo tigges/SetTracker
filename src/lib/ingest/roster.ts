@@ -317,7 +317,9 @@ export const ARTIST_ROSTER_CURATED: ArtistRosterEntry[] = [
       userId: 7055425,
       status: "ok",
     },
+    website: "https://www.walkerandroyce.com/",
     socials: [
+      "https://www.walkerandroyce.com/",
       "https://www.instagram.com/walkerandroyce/",
       "https://www.facebook.com/walkerroyce/",
       "https://x.com/WalkerAndRoyce",
