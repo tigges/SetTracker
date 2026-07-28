@@ -52,6 +52,9 @@ export const KNOWN_EVENTS: Record<string, CanonicalEvent> = {
     kind: "festival",
     location: "Hollywood Park, Los Angeles",
     website: "https://hardfest.com/",
+    instagram: "https://www.instagram.com/hardfest/",
+    twitter: "https://x.com/hardfest",
+    soundcloud: "https://soundcloud.com/hardfest",
   },
   coachella: {
     slug: "coachella",
@@ -155,6 +158,8 @@ export const KNOWN_EVENTS: Record<string, CanonicalEvent> = {
     name: "Defected",
     kind: "livestream",
     website: "https://defected.com/",
+    instagram: "https://www.instagram.com/defectedrecords/",
+    twitter: "https://x.com/defectedrec",
   },
   "ushuaia-ibiza": {
     slug: "ushuaia-ibiza",
@@ -188,7 +193,10 @@ const ALIAS_TO_SLUG: Record<string, string> = {
   ultra: "ultra-miami",
   "ultra-music-festival": "ultra-miami",
   hard: "hard-summer",
+  hardfest: "hard-summer",
+  "hard-fest": "hard-summer",
   "hard-summer-music-festival": "hard-summer",
+  "holy-ship": "hard-summer",
   "boilerroom": "boiler-room",
   "boiler-room": "boiler-room",
   ushuaia: "ushuaia-ibiza",
@@ -263,7 +271,9 @@ export function inferFestivalEvent(title: string): CanonicalEvent | null {
   if (/\bultra\b/i.test(t) && /\b(miami|music festival|umf)\b/i.test(t)) {
     return KNOWN_EVENTS["ultra-miami"];
   }
-  if (/\bhard\s*summer\b/i.test(t)) return KNOWN_EVENTS["hard-summer"];
+  if (/\bhard\s*(summer|fest|day of the dead|miami|nyc|sf)\b|\bholy\s*ship\b/i.test(t)) {
+    return KNOWN_EVENTS["hard-summer"];
+  }
   if (/\btomorrowland\b/i.test(t)) return KNOWN_EVENTS.tomorrowland;
   if (/\bcoachella\b/i.test(t)) return KNOWN_EVENTS.coachella;
   if (/\blollapalooza\b/i.test(t)) return KNOWN_EVENTS.lollapalooza;

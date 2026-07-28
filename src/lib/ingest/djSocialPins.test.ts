@@ -27,6 +27,10 @@ for (const slug of [
   "hot-since-82",
   "adam-beyer",
   "dijon",
+  "dom-dolla",
+  "chris-lorenzo",
+  "dimitri-vegas-like-mike",
+  "msendy",
 ]) {
   assert.ok(bySlug[slug], `missing pin ${slug}`);
   assert.match(bySlug[slug]!.website, /^https?:\/\//);
@@ -86,5 +90,12 @@ assert.match(bySlug["adam-beyer"]!.instagram!, /realadambeyer/);
 assert.equal(bySlug["adam-beyer"]!.soundcloud, null);
 assert.match(bySlug.dijon!.website, /dijondijon\.com/);
 assert.equal(bySlug.dijon!.soundcloud, null);
+assert.match(bySlug["dom-dolla"]!.website, /domdolla\.com\.au/);
+assert.match(bySlug["chris-lorenzo"]!.soundcloud!, /chris-lorenzo-1/);
+assert.match(
+  bySlug["dimitri-vegas-like-mike"]!.soundcloud!,
+  /dimitrivegasandlikemike/,
+);
+assert.match(bySlug.msendy!.website, /mixcloud\.com\/Msendy/i);
 
 console.log("djSocialPins.test.ts ok");

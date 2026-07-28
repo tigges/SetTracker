@@ -76,6 +76,17 @@ export const YOUTUBE_VENUES: YoutubeVenueChannel[] = [
     titleMatch: /\b(defected|in the house|glitterbox|live|mix|set)\b/i,
   },
   {
+    channel: "@Hardfest",
+    seriesName: "HARD",
+    eventSlug: "hard-summer",
+    genre: "Bass House",
+    accent: "#ff0000",
+    limit: Math.min(VENUE_LIMIT, 30),
+    minDurationSec: 30 * 60,
+    titleMatch:
+      /\b(hard\s*(summer|fest)|holy\s*ship|day of the dead|live|set|mix)\b/i,
+  },
+  {
     channel: "@djoonclub",
     seriesName: "Djoon",
     eventSlug: "djoon",
