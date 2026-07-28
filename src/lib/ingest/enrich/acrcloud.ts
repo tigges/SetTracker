@@ -53,6 +53,7 @@ import {
 } from "../hearthis/client";
 import { ARTIST_ROSTER } from "../roster";
 import { getSoundCloudClientId, scGet, type ScTrack } from "../soundcloud/client";
+import { slugify } from "../types";
 
 const execFileAsync = promisify(execFile);
 
@@ -135,18 +136,7 @@ export function loadDjMagTop100RankBySlug(): Map<string, number> {
 function rosterHighPrioritySlugs(): Set<string> {
   const out = new Set<string>();
   for (const a of ARTIST_ROSTER) {
-    if (a.priority === "high") {
-      out.add(
-        a.name
-          .toLowerCase()
-          .replace(/[øØ]/g, "o")
-          .normalize("NFKD")
-          .replace(/[\u0300-\u036f]/g, "")
-          .replace(/&/g, " ")
-          .replace(/[^a-z0-9]+/g, "-")
-          .replace(/(^-|-$)/g, ""),
-      );
-    }
+    if (a.priority === "high") out.add(slugify(a.name));
   }
   return out;
 }
