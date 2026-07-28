@@ -60,6 +60,8 @@ export const KNOWN_EVENT_IMAGES: Record<string, string> = {
   mixmag: "https://i.ytimg.com/vi/X8s7EKuVtBI/hqdefault.jpg",
   "ministry-of-sound":
     "https://ministryofsound.com/wp-content/uploads/2025/12/home-page-banner-1-1024x582.png",
+  dreamstate:
+    "https://d3vhc53cl8e8km.cloudfront.net/hello-staging/wp-content/uploads/2025/11/26203958/dssc1.jpg",
 };
 
 /**
@@ -98,7 +100,7 @@ export const EVENT_OFFICIAL_SITES: Record<string, string> = {
   "nocturnal-wonderland": "https://nocturnalwonderland.com/",
   "beyond-wonderland": "https://beyondwonderland.com/",
   "escape-halloween": "https://escapepsychocircus.com/",
-  dreamstate: "https://dreamstate.eu/",
+  dreamstate: "https://socal.dreamstateusa.com/",
   "countdown-nye": "https://countdownnye.com/",
   djoon: "https://shotgun.live/venues/djoonclub",
   "boiler-room": "https://boilerroom.tv/",

@@ -142,8 +142,10 @@ export const KNOWN_EVENTS: Record<string, CanonicalEvent> = {
     slug: "dreamstate",
     name: "Dreamstate",
     kind: "festival",
-    location: "Los Angeles, CA",
-    website: "https://dreamstate.eu/",
+    location: "San Bernardino, CA",
+    // Insomniac SoCal brand site (not dreamstate.eu).
+    // Hub: https://www.insomniac.com/events/our-world/dreamstate/
+    website: "https://socal.dreamstateusa.com/",
   },
   "countdown-nye": {
     slug: "countdown-nye",
@@ -220,6 +222,9 @@ const ALIAS_TO_SLUG: Record<string, string> = {
   "escape-halloween": "escape-halloween",
   dreamstate: "dreamstate",
   "dreamstate-socal": "dreamstate",
+  "dreamstate-usa": "dreamstate",
+  dreamstateusa: "dreamstate",
+  "dreamstate-us": "dreamstate",
   countdown: "countdown-nye",
   "countdown-nye": "countdown-nye",
   djoon: "djoon",
