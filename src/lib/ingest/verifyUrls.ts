@@ -13,6 +13,7 @@ import { ensureDjMagVenues } from "./discovery/djmagClubs";
 import { ensureDjMagTopDjs } from "./discovery/djmagDjs";
 import { ensureDjMagFestivals } from "./discovery/djmagFestivals";
 import { ensureDiscoveredDjs } from "./discovery/ensureDjs";
+import { applyCuratedDjImages } from "../thumbs/djImages";
 import { applyCuratedEventImages } from "../thumbs/eventImages";
 import { applyDjSocialPins } from "./djSocialPins";
 import { KNOWN_EVENTS } from "./events";
@@ -117,6 +118,10 @@ export async function applyKnownUrlFixes(prisma: PrismaClient): Promise<number> 
 
   // Brand DJ social pins (BISCITS, Guetta, FISHER, ARTBAT, …).
   n += await applyDjSocialPins(prisma);
+
+  // Force curated DJ logos (Gentlemen's Groove, …) over broken hearthis covers.
+  const curatedDjs = await applyCuratedDjImages(prisma);
+  n += curatedDjs.djs + curatedDjs.sets + curatedDjs.merged;
 
   // Curated venue / festival share images (Ultra, EDC, Tomorrowland, …).
   n += await applyCuratedEventImages(prisma);

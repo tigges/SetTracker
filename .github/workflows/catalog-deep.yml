@@ -169,11 +169,16 @@ jobs:
         with:
           enablement: true
 
+      - name: Read app version
+        id: app_version
+        run: echo "version=$(node -p "require('./package.json').version")" >> "$GITHUB_OUTPUT"
+
       - name: Build static export
         env:
           GITHUB_PAGES: "true"
           PAGES_BASE_PATH: "/SetTracker"
-          NEXT_PUBLIC_APP_VERSION: "0.2.11"
+          # Footer counter — bump package.json version on every release.
+          NEXT_PUBLIC_APP_VERSION: ${{ steps.app_version.outputs.version }}
           NEXT_PUBLIC_GIT_SHA: ${{ github.sha }}
         run: npm run build
 

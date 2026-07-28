@@ -31,6 +31,9 @@ setradar.ai.
   a new Prisma client without a regenerate.
 - **Lint / typecheck:** `npm run lint` and `npx tsc --noEmit`. `next lint` was
   removed in Next 16; ESLint runs directly.
+- **Release version:** bump `package.json` `"version"` on every ship to main.
+  Pages workflows inject it as `NEXT_PUBLIC_APP_VERSION` (footer `v…`). Do not
+  hardcode the version in workflow YAML.
 - **Ingestion / crawler:** `npm run ingest` upserts newly discovered sets & DJs.
   **Primary sources:** SoundCloud (`src/lib/ingest/soundcloud/`) curated shows
   + curated playlists (`soundcloud/playlists.ts`, e.g. Lift Sets) via api-v2 +
