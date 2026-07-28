@@ -55,6 +55,17 @@ export const DJ_SOCIAL_PINS: DjSocialPin[] = [
     bio: "House. Official site davidguetta.com — SC davidguetta, IG/X @davidguetta.",
   },
   {
+    slug: "armin-van-buuren",
+    name: "Armin van Buuren",
+    accent: "#00a3e0",
+    soundcloud: "https://soundcloud.com/arminvanbuuren",
+    youtube: "https://www.youtube.com/@arminvanbuuren",
+    instagram: "https://www.instagram.com/arminvanbuuren/",
+    twitter: "https://x.com/arminvanbuuren",
+    website: "https://www.arminvanbuuren.com/",
+    bio: "Trance. Netherlands. Official arminvanbuuren.com — YT @arminvanbuuren, IG/X/TikTok @arminvanbuuren, SC arminvanbuuren, Armada Music.",
+  },
+  {
     slug: "fisher",
     name: "FISHER",
     accent: "#00c2ff",
