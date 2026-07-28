@@ -56,6 +56,7 @@ export const YOUTUBE_VENUES: YoutubeVenueChannel[] = [
     titleMatch: /\b(cercle|live at|live from)\b/i,
   },
   {
+    // YouTube venue only — do NOT crawl mixmag.net editorial for industry context.
     channel: "@Mixmag",
     seriesName: "Mixmag",
     eventSlug: "mixmag",

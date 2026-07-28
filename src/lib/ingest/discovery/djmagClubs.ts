@@ -65,6 +65,7 @@ let cached: DjMagClub[] | null = null;
 
 function decodeEntities(s: string): string {
   return s
+    .replace(/&nbsp;/gi, " ")
     .replace(/&amp;/g, "&")
     .replace(/&quot;/g, '"')
     .replace(/&#(\d+);/g, (_, n) => String.fromCharCode(Number(n)))
@@ -108,6 +109,17 @@ export function normalizeClubWebsite(raw: string): string | null {
   } catch {
     return null;
   }
+}
+
+/** City / region from club profile intro (`Location: Ibiza, Spain`). */
+export function parseLocationFromClubHtml(html: string): string | null {
+  const m = html.match(/Location:<\/strong>\s*([^<]+)/i);
+  if (!m?.[1]) return null;
+  const loc = decodeEntities(m[1])
+    .replace(/\s+/g, " ")
+    .replace(/\u00a0/g, " ")
+    .trim();
+  return loc.length >= 2 && loc.length <= 80 ? loc : null;
 }
 
 /**
@@ -273,13 +285,21 @@ export async function enrichDjMagOfficialWebsites(opts?: {
       continue;
     }
     const website = parseOfficialWebsiteFromClubHtml(html);
+    const location = parseLocationFromClubHtml(html);
+    if (location) club.location = location;
     if (!website) {
-      console.log(`[djmag-clubs] no official site ${club.slug}`);
+      console.log(
+        `[djmag-clubs] no official site ${club.slug}` +
+          (location ? ` (loc=${location})` : ""),
+      );
       continue;
     }
     club.website = website;
     found += 1;
-    console.log(`[djmag-clubs] ${club.slug} → ${website}`);
+    console.log(
+      `[djmag-clubs] ${club.slug} → ${website}` +
+        (location ? ` · ${location}` : ""),
+    );
   }
 
   cached = clubs;
@@ -289,7 +309,12 @@ export async function enrichDjMagOfficialWebsites(opts?: {
     const bySlug = new Map(clubs.map((c) => [c.slug, c]));
     const next = seedClubs.map((c) => {
       const live = bySlug.get(c.slug);
-      return live?.website ? { ...c, website: live.website } : c;
+      if (!live) return c;
+      return {
+        ...c,
+        website: live.website ?? c.website,
+        location: live.location ?? c.location,
+      };
     });
     // Include any live-only ranks.
     for (const c of clubs) {

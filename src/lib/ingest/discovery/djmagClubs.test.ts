@@ -7,6 +7,7 @@ import {
   isDjMagProfileUrl,
   loadDjMagTopClubs,
   normalizeClubWebsite,
+  parseLocationFromClubHtml,
   parseOfficialWebsiteFromClubHtml,
   resolveDjMagClubByName,
 } from "./djmagClubs";
@@ -78,6 +79,12 @@ assert.equal(
   true,
 );
 assert.equal(isDjMagProfileUrl("https://www.savaya.com/"), false);
+assert.equal(
+  parseLocationFromClubHtml(
+    `<p><strong>Location:</strong> Ibiza, Spain&nbsp;</p>`,
+  ),
+  "Ibiza, Spain",
+);
 
 // Warm seed cache without network by resolving from seed file
 assert.equal(resolveDjMagClubByName("Berghain")?.slug, "berghain");

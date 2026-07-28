@@ -10,6 +10,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import type { PrismaClient } from "@prisma/client";
 import { slugify } from "../types";
+import { isWeakClubWebsite, loadDjMagTopClubs } from "./djmagClubs";
 
 export type ListClub = {
   name: string;
@@ -306,6 +307,21 @@ export async function ensureClubListVenues(
     }
   }
 
+  // Prefer DJ Mag Top 100 official club sites over listicle article URLs.
+  const djmag = await loadDjMagTopClubs();
+  const officialBySlug = new Map(
+    djmag.filter((c) => c.website).map((c) => [c.slug, c]),
+  );
+  for (const [slug, club] of bySlug) {
+    const official = officialBySlug.get(slug);
+    if (!official?.website) continue;
+    bySlug.set(slug, {
+      ...club,
+      website: official.website,
+      location: club.location ?? official.location,
+    });
+  }
+
   extraForInfer = [...bySlug.values()];
 
   let created = 0;
@@ -332,7 +348,15 @@ export async function ensureClubListVenues(
     }
     discovered.push({ ...club, status: "existing" });
     const data: Record<string, unknown> = {};
-    if (!existing.website && club.website) data.website = club.website;
+    const existingWeak =
+      isWeakClubWebsite(existing.website) ||
+      (!!existing.website &&
+        /6amgroup\.com|clubtickets\.com\/blog/i.test(existing.website));
+    if (club.website && existingWeak) {
+      data.website = club.website;
+    } else if (!existing.website && club.website) {
+      data.website = club.website;
+    }
     if (!existing.location && club.location) data.location = club.location;
     if (existing.kind === "event") data.kind = "club";
     if (Object.keys(data).length) {

@@ -10,6 +10,8 @@
 import type { PrismaClient } from "@prisma/client";
 import { ensureClubListVenues } from "./discovery/clubLists";
 import { ensureDjMagVenues } from "./discovery/djmagClubs";
+import { ensureDjMagTopDjs } from "./discovery/djmagDjs";
+import { ensureDjMagFestivals } from "./discovery/djmagFestivals";
 import { ensureDiscoveredDjs } from "./discovery/ensureDjs";
 import { applyCuratedEventImages } from "../thumbs/eventImages";
 import { applyDjSocialPins } from "./djSocialPins";
@@ -171,9 +173,14 @@ export async function applyKnownUrlFixes(prisma: PrismaClient): Promise<number> 
   // Persist roster + high-signal discovered artists as Dj rows (Guetta, etc.).
   await ensureDiscoveredDjs(prisma);
 
-  // Materialize DJ Mag Top 100 + curated club-list articles as venues.
+  // Industry context: DJ Mag Top 100 Clubs / Festivals / DJs + club listicles.
+  // Mixmag.net is not crawled (Mixmag = YouTube venue only).
   const clubs = await ensureDjMagVenues(prisma);
   n += clubs.created + clubs.updated;
+  const fests = await ensureDjMagFestivals(prisma);
+  n += fests.created + fests.updated;
+  const topDjs = await ensureDjMagTopDjs(prisma);
+  n += topDjs.created + topDjs.updated;
   const lists = await ensureClubListVenues(prisma);
   n += lists.created + lists.updated;
 

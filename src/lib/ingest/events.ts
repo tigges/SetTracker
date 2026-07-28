@@ -11,6 +11,7 @@ import {
   inferDjMagClubEvent,
   resolveDjMagClubByName,
 } from "./discovery/djmagClubs";
+import { inferDjMagFestivalEvent } from "./discovery/djmagFestivals";
 
 export type EventSocials = {
   website?: string;
@@ -310,7 +311,12 @@ export function inferFestivalEvent(title: string): CanonicalEvent | null {
   if (/\bushua[iï]a\b/i.test(t)) return KNOWN_EVENTS["ushuaia-ibiza"];
   if (/\bstereo\s*hype\b/i.test(t)) return KNOWN_EVENTS.stereohype;
   if (/\bdjoon\b|\bdjøøn\b/i.test(t)) return KNOWN_EVENTS.djoon;
-  return inferDjMagClubEvent(t) ?? inferListClubEvent(t);
+  // DJ Mag Top 100 Festivals / Clubs / other club listicles (not Mixmag.net).
+  return (
+    inferDjMagFestivalEvent(t) ??
+    inferDjMagClubEvent(t) ??
+    inferListClubEvent(t)
+  );
 }
 
 export function eventSocialPayload(e: CanonicalEvent): EventSocials {

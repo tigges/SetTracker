@@ -1,0 +1,607 @@
+{
+  "source": "https://djmag.com/top100djs",
+  "year": 2025,
+  "note": "DJ Mag Top 100 DJs chart \u2014 industry context for discovery stubs / candidates. Socials filled via crosslink/roster/pins, not invented. Mixmag.net not used.",
+  "djs": [
+    {
+      "rank": 1,
+      "slug": "david-guetta",
+      "name": "David Guetta",
+      "djmagUrl": "https://djmag.com/top100djs/2025/1/david-guetta"
+    },
+    {
+      "rank": 2,
+      "slug": "martin-garrix",
+      "name": "Martin Garrix",
+      "djmagUrl": "https://djmag.com/top100djs/2025/2/martin-garrix"
+    },
+    {
+      "rank": 3,
+      "slug": "alok",
+      "name": "Alok",
+      "djmagUrl": "https://djmag.com/top100djs/2025/3/alok"
+    },
+    {
+      "rank": 4,
+      "slug": "dimitri-vegas-mike",
+      "name": "Dimitri Vegas & Like Mike",
+      "djmagUrl": "https://djmag.com/top100djs/2025/4/dimitri-vegas-mike"
+    },
+    {
+      "rank": 5,
+      "slug": "armin-van-buuren",
+      "name": "Armin Van Buuren",
+      "djmagUrl": "https://djmag.com/top100djs/2025/5/armin-van-buuren"
+    },
+    {
+      "rank": 6,
+      "slug": "timmy-trumpet",
+      "name": "Timmy Trumpet",
+      "djmagUrl": "https://djmag.com/top100djs/2025/6/timmy-trumpet"
+    },
+    {
+      "rank": 7,
+      "slug": "fisher",
+      "name": "FISHER",
+      "djmagUrl": "https://djmag.com/top100djs/2025/7/fisher"
+    },
+    {
+      "rank": 8,
+      "slug": "afrojack",
+      "name": "Afrojack",
+      "djmagUrl": "https://djmag.com/top100djs/2025/8/afrojack"
+    },
+    {
+      "rank": 9,
+      "slug": "charlotte-de-witte",
+      "name": "Charlotte de Witte",
+      "djmagUrl": "https://djmag.com/top100djs/2025/9/charlotte-de-witte"
+    },
+    {
+      "rank": 10,
+      "slug": "anyma",
+      "name": "Anyma",
+      "djmagUrl": "https://djmag.com/top100djs/2025/10/anyma"
+    },
+    {
+      "rank": 11,
+      "slug": "vintage-culture",
+      "name": "Vintage Culture",
+      "djmagUrl": "https://djmag.com/top100djs/2025/11/vintage-culture"
+    },
+    {
+      "rank": 12,
+      "slug": "peggy-gou",
+      "name": "Peggy Gou",
+      "djmagUrl": "https://djmag.com/top100djs/2025/12/peggy-gou"
+    },
+    {
+      "rank": 13,
+      "slug": "don-diablo",
+      "name": "Don Diablo",
+      "djmagUrl": "https://djmag.com/top100djs/2025/13/don-diablo"
+    },
+    {
+      "rank": 14,
+      "slug": "steve-aoki",
+      "name": "Steve Aoki",
+      "djmagUrl": "https://djmag.com/top100djs/2025/14/steve-aoki"
+    },
+    {
+      "rank": 15,
+      "slug": "hardwell",
+      "name": "Hardwell",
+      "djmagUrl": "https://djmag.com/top100djs/2025/15/hardwell"
+    },
+    {
+      "rank": 16,
+      "slug": "calvin-harris",
+      "name": "Calvin Harris",
+      "djmagUrl": "https://djmag.com/top100djs/2025/16/calvin-harris"
+    },
+    {
+      "rank": 17,
+      "slug": "black-coffee",
+      "name": "Black Coffee",
+      "djmagUrl": "https://djmag.com/top100djs/2025/17/black-coffee"
+    },
+    {
+      "rank": 18,
+      "slug": "ww",
+      "name": "W&W",
+      "djmagUrl": "https://djmag.com/top100djs/2025/18/ww"
+    },
+    {
+      "rank": 19,
+      "slug": "lost-frequencies",
+      "name": "Lost Frequencies",
+      "djmagUrl": "https://djmag.com/top100djs/2025/19/lost-frequencies"
+    },
+    {
+      "rank": 20,
+      "slug": "keinemusik",
+      "name": "Keinemusik",
+      "djmagUrl": "https://djmag.com/top100djs/2025/20/keinemusik"
+    },
+    {
+      "rank": 21,
+      "slug": "tiesto",
+      "name": "Ti\u00ebsto",
+      "djmagUrl": "https://djmag.com/top100djs/2025/21/tiesto"
+    },
+    {
+      "rank": 22,
+      "slug": "reinier-zonneveld",
+      "name": "Reinier Zonneveld",
+      "djmagUrl": "https://djmag.com/top100djs/2025/22/reinier-zonneveld"
+    },
+    {
+      "rank": 23,
+      "slug": "kshmr",
+      "name": "KSHMR",
+      "djmagUrl": "https://djmag.com/top100djs/2025/23/kshmr"
+    },
+    {
+      "rank": 24,
+      "slug": "alan-walker",
+      "name": "Alan Walker",
+      "djmagUrl": "https://djmag.com/top100djs/2025/24/alan-walker"
+    },
+    {
+      "rank": 25,
+      "slug": "carl-cox",
+      "name": "Carl Cox",
+      "djmagUrl": "https://djmag.com/top100djs/2025/25/carl-cox"
+    },
+    {
+      "rank": 26,
+      "slug": "oliver-heldens",
+      "name": "Oliver Heldens",
+      "djmagUrl": "https://djmag.com/top100djs/2025/26/oliver-heldens"
+    },
+    {
+      "rank": 27,
+      "slug": "jamie-jones",
+      "name": "Jamie Jones",
+      "djmagUrl": "https://djmag.com/top100djs/2025/27/jamie-jones"
+    },
+    {
+      "rank": 28,
+      "slug": "r3hab",
+      "name": "R3hab",
+      "djmagUrl": "https://djmag.com/top100djs/2025/28/r3hab"
+    },
+    {
+      "rank": 29,
+      "slug": "nicky-romero",
+      "name": "Nicky Romero",
+      "djmagUrl": "https://djmag.com/top100djs/2025/29/nicky-romero"
+    },
+    {
+      "rank": 30,
+      "slug": "claptone",
+      "name": "Claptone",
+      "djmagUrl": "https://djmag.com/top100djs/2025/30/claptone"
+    },
+    {
+      "rank": 31,
+      "slug": "skrillex",
+      "name": "Skrillex",
+      "djmagUrl": "https://djmag.com/top100djs/2025/31/skrillex"
+    },
+    {
+      "rank": 32,
+      "slug": "vini-vici",
+      "name": "Vini Vici",
+      "djmagUrl": "https://djmag.com/top100djs/2025/32/vini-vici"
+    },
+    {
+      "rank": 33,
+      "slug": "fred-again",
+      "name": "Fred again...",
+      "djmagUrl": "https://djmag.com/top100djs/2025/33/fred-again"
+    },
+    {
+      "rank": 34,
+      "slug": "swedish-house-mafia",
+      "name": "Swedish House Mafia",
+      "djmagUrl": "https://djmag.com/top100djs/2025/34/swedish-house-mafia"
+    },
+    {
+      "rank": 35,
+      "slug": "joel-corry",
+      "name": "Joel Corry",
+      "djmagUrl": "https://djmag.com/top100djs/2025/35/joel-corry"
+    },
+    {
+      "rank": 36,
+      "slug": "indira-paganotto",
+      "name": "Indira Paganotto",
+      "djmagUrl": "https://djmag.com/top100djs/2025/36/indira-paganotto"
+    },
+    {
+      "rank": 37,
+      "slug": "eric-prydz",
+      "name": "Eric Prydz",
+      "djmagUrl": "https://djmag.com/top100djs/2025/37/eric-prydz"
+    },
+    {
+      "rank": 38,
+      "slug": "amelie-lens",
+      "name": "Amelie Lens",
+      "djmagUrl": "https://djmag.com/top100djs/2025/38/amelie-lens"
+    },
+    {
+      "rank": 39,
+      "slug": "paul-van-dyk",
+      "name": "Paul van Dyk",
+      "djmagUrl": "https://djmag.com/top100djs/2025/39/paul-van-dyk"
+    },
+    {
+      "rank": 40,
+      "slug": "dj-snake",
+      "name": "DJ Snake",
+      "djmagUrl": "https://djmag.com/top100djs/2025/40/dj-snake"
+    },
+    {
+      "rank": 41,
+      "slug": "dom-dolla",
+      "name": "Dom Dolla",
+      "djmagUrl": "https://djmag.com/top100djs/2025/41/dom-dolla"
+    },
+    {
+      "rank": 42,
+      "slug": "marshmello",
+      "name": "Marshmello",
+      "djmagUrl": "https://djmag.com/top100djs/2025/42/marshmello"
+    },
+    {
+      "rank": 43,
+      "slug": "martinez-brothers",
+      "name": "The Martinez Brothers",
+      "djmagUrl": "https://djmag.com/top100djs/2025/43/martinez-brothers"
+    },
+    {
+      "rank": 44,
+      "slug": "zedd",
+      "name": "Zedd",
+      "djmagUrl": "https://djmag.com/top100djs/2025/44/zedd"
+    },
+    {
+      "rank": 45,
+      "slug": "bassjackers",
+      "name": "Bassjackers",
+      "djmagUrl": "https://djmag.com/top100djs/2025/45/bassjackers"
+    },
+    {
+      "rank": 46,
+      "slug": "john-summit",
+      "name": "John Summit",
+      "djmagUrl": "https://djmag.com/top100djs/2025/46/john-summit"
+    },
+    {
+      "rank": 47,
+      "slug": "quintino",
+      "name": "Quintino",
+      "djmagUrl": "https://djmag.com/top100djs/2025/47/quintino"
+    },
+    {
+      "rank": 48,
+      "slug": "michael-bibi",
+      "name": "Michael Bibi",
+      "djmagUrl": "https://djmag.com/top100djs/2025/48/michael-bibi"
+    },
+    {
+      "rank": 49,
+      "slug": "boris-brejcha",
+      "name": "Boris Brejcha",
+      "djmagUrl": "https://djmag.com/top100djs/2025/49/boris-brejcha"
+    },
+    {
+      "rank": 50,
+      "slug": "korolova",
+      "name": "Korolova",
+      "djmagUrl": "https://djmag.com/top100djs/2025/50/korolova"
+    },
+    {
+      "rank": 51,
+      "slug": "alesso",
+      "name": "Alesso",
+      "djmagUrl": "https://djmag.com/top100djs/2025/51/alesso"
+    },
+    {
+      "rank": 52,
+      "slug": "james-hype",
+      "name": "James Hype",
+      "djmagUrl": "https://djmag.com/top100djs/2025/52/james-hype"
+    },
+    {
+      "rank": 53,
+      "slug": "maddix",
+      "name": "Maddix",
+      "djmagUrl": "https://djmag.com/top100djs/2025/53/maddix"
+    },
+    {
+      "rank": 54,
+      "slug": "hugel",
+      "name": "HUGEL",
+      "djmagUrl": "https://djmag.com/top100djs/2025/54/hugel"
+    },
+    {
+      "rank": 55,
+      "slug": "solomun",
+      "name": "Solomun",
+      "djmagUrl": "https://djmag.com/top100djs/2025/55/solomun"
+    },
+    {
+      "rank": 56,
+      "slug": "mochakk",
+      "name": "Mochakk",
+      "djmagUrl": "https://djmag.com/top100djs/2025/56/mochakk"
+    },
+    {
+      "rank": 57,
+      "slug": "lilly-palmer",
+      "name": "Lilly Palmer",
+      "djmagUrl": "https://djmag.com/top100djs/2025/57/lilly-palmer"
+    },
+    {
+      "rank": 58,
+      "slug": "nora-en-pure",
+      "name": "Nora En Pure",
+      "djmagUrl": "https://djmag.com/top100djs/2025/58/nora-en-pure"
+    },
+    {
+      "rank": 59,
+      "slug": "atb",
+      "name": "ATB",
+      "djmagUrl": "https://djmag.com/top100djs/2025/59/atb"
+    },
+    {
+      "rank": 60,
+      "slug": "deborah-de-luca",
+      "name": "Deborah De Luca",
+      "djmagUrl": "https://djmag.com/top100djs/2025/60/deborah-de-luca"
+    },
+    {
+      "rank": 61,
+      "slug": "above-beyond",
+      "name": "Above & Beyond",
+      "djmagUrl": "https://djmag.com/top100djs/2025/61/above-beyond"
+    },
+    {
+      "rank": 62,
+      "slug": "sara-landry",
+      "name": "Sara Landry",
+      "djmagUrl": "https://djmag.com/top100djs/2025/62/sara-landry"
+    },
+    {
+      "rank": 63,
+      "slug": "nervo",
+      "name": "Nervo",
+      "djmagUrl": "https://djmag.com/top100djs/2025/63/nervo"
+    },
+    {
+      "rank": 64,
+      "slug": "sub-zero-project",
+      "name": "Sub Zero Project",
+      "djmagUrl": "https://djmag.com/top100djs/2025/64/sub-zero-project"
+    },
+    {
+      "rank": 65,
+      "slug": "kolsch",
+      "name": "K\u00f6lsch",
+      "djmagUrl": "https://djmag.com/top100djs/2025/65/kolsch"
+    },
+    {
+      "rank": 66,
+      "slug": "lucas-steve",
+      "name": "Lucas & Steve",
+      "djmagUrl": "https://djmag.com/top100djs/2025/66/lucas-steve"
+    },
+    {
+      "rank": 67,
+      "slug": "nico-moreno",
+      "name": "Nico Moreno",
+      "djmagUrl": "https://djmag.com/top100djs/2025/67/nico-moreno"
+    },
+    {
+      "rank": 68,
+      "slug": "gordo",
+      "name": "GORDO",
+      "djmagUrl": "https://djmag.com/top100djs/2025/68/gordo"
+    },
+    {
+      "rank": 69,
+      "slug": "pawsa",
+      "name": "PAWSA",
+      "djmagUrl": "https://djmag.com/top100djs/2025/69/pawsa"
+    },
+    {
+      "rank": 70,
+      "slug": "chainsmokers",
+      "name": "The Chainsmokers",
+      "djmagUrl": "https://djmag.com/top100djs/2025/70/chainsmokers"
+    },
+    {
+      "rank": 71,
+      "slug": "liu",
+      "name": "Liu",
+      "djmagUrl": "https://djmag.com/top100djs/2025/71/liu"
+    },
+    {
+      "rank": 72,
+      "slug": "mike-williams",
+      "name": "Mike Williams",
+      "djmagUrl": "https://djmag.com/top100djs/2025/72/mike-williams"
+    },
+    {
+      "rank": 73,
+      "slug": "artbat",
+      "name": "ARTBAT",
+      "djmagUrl": "https://djmag.com/top100djs/2025/73/artbat"
+    },
+    {
+      "rank": 74,
+      "slug": "kaaze",
+      "name": "KAAZE",
+      "djmagUrl": "https://djmag.com/top100djs/2025/74/kaaze"
+    },
+    {
+      "rank": 75,
+      "slug": "miss-monique",
+      "name": "Miss Monique",
+      "djmagUrl": "https://djmag.com/top100djs/2025/75/miss-monique"
+    },
+    {
+      "rank": 76,
+      "slug": "burak-yeter",
+      "name": "Burak Yeter",
+      "djmagUrl": "https://djmag.com/top100djs/2025/76/burak-yeter"
+    },
+    {
+      "rank": 77,
+      "slug": "mau-p",
+      "name": "Mau P",
+      "djmagUrl": "https://djmag.com/top100djs/2025/77/mau-p"
+    },
+    {
+      "rank": 78,
+      "slug": "le-twins",
+      "name": "Le Twins",
+      "djmagUrl": "https://djmag.com/top100djs/2025/78/le-twins"
+    },
+    {
+      "rank": 79,
+      "slug": "i-hate-models",
+      "name": "I Hate Models",
+      "djmagUrl": "https://djmag.com/top100djs/2025/79/i-hate-models"
+    },
+    {
+      "rank": 80,
+      "slug": "marnik",
+      "name": "Marnik",
+      "djmagUrl": "https://djmag.com/top100djs/2025/80/marnik"
+    },
+    {
+      "rank": 81,
+      "slug": "chris-stussy",
+      "name": "Chris Stussy",
+      "djmagUrl": "https://djmag.com/top100djs/2025/81/chris-stussy"
+    },
+    {
+      "rank": 82,
+      "slug": "deadmau5",
+      "name": "Deadmau5",
+      "djmagUrl": "https://djmag.com/top100djs/2025/82/deadmau5"
+    },
+    {
+      "rank": 83,
+      "slug": "wukong",
+      "name": "WUKONG",
+      "djmagUrl": "https://djmag.com/top100djs/2025/83/wukong"
+    },
+    {
+      "rank": 84,
+      "slug": "fedde-le-grand",
+      "name": "Fedde Le Grand",
+      "djmagUrl": "https://djmag.com/top100djs/2025/84/fedde-le-grand"
+    },
+    {
+      "rank": 85,
+      "slug": "ferry-corsten",
+      "name": "Ferry Corsten",
+      "djmagUrl": "https://djmag.com/top100djs/2025/85/ferry-corsten"
+    },
+    {
+      "rank": 86,
+      "slug": "plastik-funk",
+      "name": "Plastik Funk",
+      "djmagUrl": "https://djmag.com/top100djs/2025/86/plastik-funk"
+    },
+    {
+      "rank": 87,
+      "slug": "dubvision",
+      "name": "DubVision",
+      "djmagUrl": "https://djmag.com/top100djs/2025/87/dubvision"
+    },
+    {
+      "rank": 88,
+      "slug": "b-jones",
+      "name": "B Jones",
+      "djmagUrl": "https://djmag.com/top100djs/2025/88/b-jones"
+    },
+    {
+      "rank": 89,
+      "slug": "giuseppe-ottaviani",
+      "name": "Giuseppe Ottaviani",
+      "djmagUrl": "https://djmag.com/top100djs/2025/89/giuseppe-ottaviani"
+    },
+    {
+      "rank": 90,
+      "slug": "cuebrick",
+      "name": "Cuebrick",
+      "djmagUrl": "https://djmag.com/top100djs/2025/90/cuebrick"
+    },
+    {
+      "rank": 91,
+      "slug": "mariana-bo",
+      "name": "Mariana Bo",
+      "djmagUrl": "https://djmag.com/top100djs/2025/91/mariana-bo"
+    },
+    {
+      "rank": 92,
+      "slug": "meduza",
+      "name": "MEDUZA",
+      "djmagUrl": "https://djmag.com/top100djs/2025/92/meduza"
+    },
+    {
+      "rank": 93,
+      "slug": "fantasm",
+      "name": "Fantasm",
+      "djmagUrl": "https://djmag.com/top100djs/2025/93/fantasm"
+    },
+    {
+      "rank": 94,
+      "slug": "vinai",
+      "name": "VINAI",
+      "djmagUrl": "https://djmag.com/top100djs/2025/94/vinai"
+    },
+    {
+      "rank": 95,
+      "slug": "chris-lake",
+      "name": "Chris Lake",
+      "djmagUrl": "https://djmag.com/top100djs/2025/95/chris-lake"
+    },
+    {
+      "rank": 96,
+      "slug": "faustix",
+      "name": "Faustix",
+      "djmagUrl": "https://djmag.com/top100djs/2025/96/faustix"
+    },
+    {
+      "rank": 97,
+      "slug": "honey-dijon",
+      "name": "Honey Dijon",
+      "djmagUrl": "https://djmag.com/top100djs/2025/97/honey-dijon"
+    },
+    {
+      "rank": 98,
+      "slug": "nils-van-zandt",
+      "name": "Nils van Zandt",
+      "djmagUrl": "https://djmag.com/top100djs/2025/98/nils-van-zandt"
+    },
+    {
+      "rank": 99,
+      "slug": "topic",
+      "name": "Topic",
+      "djmagUrl": "https://djmag.com/top100djs/2025/99/topic"
+    },
+    {
+      "rank": 100,
+      "slug": "marlon-hoffstadt",
+      "name": "Marlon Hoffstadt",
+      "djmagUrl": "https://djmag.com/top100djs/2025/100/marlon-hoffstadt"
+    }
+  ]
+}
