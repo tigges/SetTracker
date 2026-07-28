@@ -369,6 +369,12 @@ export const KNOWN_LABEL_SOCIALS: Record<
   rekids: {
     soundcloud: "https://soundcloud.com/rekids",
   },
+  disorder: {
+    soundcloud: "https://soundcloud.com/disorderrecords",
+  },
+  disorderrecords: {
+    soundcloud: "https://soundcloud.com/disorderrecords",
+  },
   "nervous-records": {
     website: "https://www.nervousny.com/",
     soundcloud: "https://soundcloud.com/nervousrecords",

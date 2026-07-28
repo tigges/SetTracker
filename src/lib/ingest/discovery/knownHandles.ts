@@ -205,6 +205,78 @@ export const KNOWN_HANDLES: Record<string, HandleHint> = {
     genre: "Tech House",
     accent: "#ef476f",
   },
+  "luke alessi": {
+    youtubeHandle: "@luke.alessi",
+    soundcloudPermalink: "lukealessiofficial",
+    genre: "House",
+    accent: "#ff8c42",
+  },
+  "chloe caillet": {
+    soundcloudPermalink: "chloecaillet",
+    genre: "House",
+    accent: "#ff6fb0",
+  },
+  "chloé caillet": {
+    soundcloudPermalink: "chloecaillet",
+    genre: "House",
+    accent: "#ff6fb0",
+  },
+  malive: {
+    youtubeHandle: "@malive",
+    soundcloudPermalink: "maliveofficial",
+    genre: "House",
+    accent: "#2bd67b",
+  },
+  "jonas blue": {
+    soundcloudPermalink: "jonasblue",
+    genre: "House",
+    accent: "#3aa0e0",
+  },
+  kolter: {
+    youtubeHandle: "@koltermusic",
+    soundcloudPermalink: "kolter",
+    genre: "House",
+    accent: "#8a7cff",
+  },
+  crusy: {
+    youtubeHandle: "@Crusy",
+    soundcloudPermalink: "crusyofficial",
+    genre: "House",
+    accent: "#ff4d6d",
+  },
+  "david penn": {
+    youtubeHandle: "@davidpenn",
+    genre: "House",
+    accent: "#45c7e0",
+  },
+  "luke dean": {
+    youtubeHandle: "@LukeDean",
+    soundcloudPermalink: "lukedean",
+    genre: "House",
+    accent: "#f5a623",
+  },
+  "the shapeshifters": {
+    youtubeHandle: "@TheShapeshifters",
+    soundcloudPermalink: "theshapeshifters",
+    genre: "House",
+    accent: "#7c5cff",
+  },
+  tripolism: {
+    youtubeHandle: "@tripolism",
+    soundcloudPermalink: "tripolism",
+    genre: "House",
+    accent: "#00e5ff",
+  },
+  vinter: {
+    youtubeHandle: "@vinter",
+    genre: "House",
+    accent: "#b48cff",
+  },
+  samm: {
+    soundcloudPermalink: "sammbe",
+    genre: "House",
+    accent: "#2a9d8f",
+  },
   biscit: {
     youtubeHandle: "@Biscits",
     soundcloudPermalink: "biscits",

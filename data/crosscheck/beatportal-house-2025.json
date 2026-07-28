@@ -1,0 +1,81 @@
+{
+  "source": "https://www.beatportal.com/articles/1210869-house-the-top-selling-tracks-artists-and-labels-of-2025",
+  "title": "House: The Top-Selling Tracks, Artists, and Labels of 2025",
+  "published": "2025-12-01",
+  "artists": [
+    "Chris Lake",
+    "Luke Alessi",
+    "Jocelyn Brown",
+    "Malive",
+    "Jonas Blue",
+    "Chloé Caillet",
+    "Kolter",
+    "Crusy",
+    "David Penn",
+    "Luke Dean"
+  ],
+  "labels": [
+    "Defected",
+    "Toolroom",
+    "Cecille",
+    "Disorder",
+    "Rekids",
+    "Nervous Records",
+    "Hot Creations",
+    "Black Book Records",
+    "LTF Records",
+    "Glitterbox Recordings"
+  ],
+  "tracks": [
+    {
+      "rank": 1,
+      "title": "The One",
+      "artists": ["Chloé Caillet", "Jocelyn Brown", "Luke Alessi"]
+    },
+    {
+      "rank": 2,
+      "title": "Edge of Desire",
+      "artists": ["Jonas Blue", "Malive"]
+    },
+    {
+      "rank": 3,
+      "title": "Ease My Mind",
+      "artists": ["Abel Balder", "Chris Lake"]
+    },
+    {
+      "rank": 4,
+      "title": "This Rhythm",
+      "artists": ["Prospa", "RAHH"]
+    },
+    {
+      "rank": 5,
+      "title": "Liquor Store",
+      "artists": ["Kolter", "Nate Dogg"]
+    },
+    {
+      "rank": 6,
+      "title": "TOO COOL TO BE CARELESS",
+      "artists": ["PAWSA"]
+    },
+    {
+      "rank": 7,
+      "title": "Dirty Cash (Money Talks)",
+      "artists": ["Adventures Of Stevie V", "PAWSA"]
+    },
+    {
+      "rank": 8,
+      "title": "Lola's Theme (Tripolism Remix)",
+      "artists": ["The Shapeshifters", "Tripolism"]
+    },
+    {
+      "rank": 9,
+      "title": "Space Pump",
+      "artists": ["Vinter"]
+    },
+    {
+      "rank": 10,
+      "title": "Body Language",
+      "artists": ["Samm"]
+    }
+  ]
+}
