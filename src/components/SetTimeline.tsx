@@ -343,6 +343,15 @@ export function SetTimeline({
                             ▶
                           </a>
                           <a
+                            href={links.spotify}
+                            target="_blank"
+                            rel="noreferrer"
+                            title="Search on Spotify"
+                            className={`${pill} hidden sm:grid`}
+                          >
+                            SP
+                          </a>
+                          <a
                             href={links.beatport}
                             target="_blank"
                             rel="noreferrer"
