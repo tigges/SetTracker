@@ -6,6 +6,7 @@ import {
   normalizeGenre,
   normalizeGenreList,
 } from "@/lib/genre";
+import { CURATED_LABEL_SLUGS } from "@/lib/ingest/curatedLabels";
 import {
   relatedSlugsFor,
   venueArtistSlugs,
@@ -580,8 +581,9 @@ export async function getLabels() {
       trackCount: l._count.tracks,
       setCount: setsByLabel.get(l.id) ?? 0,
     }))
-    .filter((l) => l.trackCount > 0)
-    .sort((a, b) => b.setCount - a.setCount || b.trackCount - a.trackCount);
+    // Curated imprints stay visible before tracklists attach them.
+    .filter((l) => l.trackCount > 0 || CURATED_LABEL_SLUGS.has(l.slug))
+    .sort((a, b) => b.setCount - a.setCount || b.trackCount - a.trackCount || a.name.localeCompare(b.name));
 }
 
 export async function getAllLabelSlugs() {

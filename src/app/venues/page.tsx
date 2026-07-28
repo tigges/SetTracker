@@ -121,8 +121,8 @@ export default async function VenuesPage() {
             <div>
               <h2 className="text-lg font-bold tracking-tight">Labels</h2>
               <p className="mt-0.5 text-[13px] text-muted2">
-                Imprints represented across tracklists — sorted by how many sets
-                feature their releases.
+                Curated dance imprints plus labels from tracklists — sorted by
+                how many sets feature their releases.
               </p>
             </div>
             <span className="mono text-[12px] text-muted2">{labels.length}</span>

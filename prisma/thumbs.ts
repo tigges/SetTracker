@@ -48,6 +48,8 @@ import {
   youtubeVideoId,
 } from "../src/lib/thumbs/youtubeThumb";
 import { parseHearthisUrl } from "../src/lib/ingest/hearthis/client";
+import { ensureCuratedLabels } from "../src/lib/ingest/curatedLabels";
+import { labelSocials } from "../src/lib/social";
 
 const prisma = new PrismaClient();
 
@@ -121,13 +123,30 @@ async function main() {
     `  rewritten sets=${genreStats.sets} tracks=${genreStats.tracks}; filled sets=${genreFill.sets} tracks=${genreFill.tracks}`,
   );
 
+  console.log("[thumbs] ensuring curated labels…");
+  const curatedLabels = await ensureCuratedLabels(prisma);
+  console.log(
+    `  curated labels created=${curatedLabels.created} updated=${curatedLabels.updated}`,
+  );
+
   console.log("[thumbs] resolving label artwork…");
+  // Fast Pages deploys skip art for trackless curated stubs (monogram UI).
   const labels = await prisma.label.findMany({
     where: { imageUrl: null },
-    select: { id: true, name: true, slug: true, website: true, soundcloud: true },
+    select: {
+      id: true,
+      name: true,
+      slug: true,
+      website: true,
+      soundcloud: true,
+      _count: { select: { tracks: true } },
+    },
     orderBy: { name: "asc" },
   });
   for (const l of labels) {
+    if (NULL_ONLY && l._count.tracks === 0) {
+      continue;
+    }
     stats.labels.scanned += 1;
     let url = await resolveLabelImage(l.name);
     await sleep(DELAY_MS);
@@ -294,8 +313,9 @@ async function main() {
     const slug = slugify(trimmed);
     const existing = await prisma.label.findUnique({ where: { slug } });
     if (existing) return existing.id;
+    const socials = labelSocials(trimmed);
     const created = await prisma.label.create({
-      data: { slug, name: trimmed },
+      data: { slug, name: trimmed, ...socials },
     });
     return created.id;
   }
