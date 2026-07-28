@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { EntityThumb } from "@/components/EntityThumb";
 import { getAllTrackSlugs, getTrackBySlug } from "@/lib/queries";
-import { beatportSearchUrl } from "@/lib/trackMeta";
+import { beatportSearchUrl, spotifySearchUrl } from "@/lib/trackMeta";
 import {
   SET_TYPE_META,
   fmtDate,
@@ -50,6 +50,7 @@ export default async function TrackPage({
 
   const accent = track.label?.color ?? "var(--brand)";
   const bpHref = track.beatportUrl ?? beatportSearchUrl(track.title, track.artistName);
+  const spHref = spotifySearchUrl(track.title, track.artistName);
 
   return (
     <div>
@@ -110,6 +111,14 @@ export default async function TrackPage({
                   {track.label.name}
                 </Link>
               )}
+              <a
+                href={spHref}
+                target="_blank"
+                rel="noreferrer"
+                className="rounded-md border border-line px-2.5 py-1 text-[12px] text-muted2 transition-colors hover:border-brand hover:text-brand"
+              >
+                Search Spotify
+              </a>
               <a
                 href={bpHref}
                 target="_blank"

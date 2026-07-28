@@ -51,3 +51,14 @@ export function beatportSearchUrl(title: string, artistName?: string | null): st
   const q = encodeURIComponent([artistName, title].filter(Boolean).join(" ").trim());
   return `https://www.beatport.com/search?q=${q}`;
 }
+
+/** Spotify search URL (not a track URI). Prefer a stored Spotify ID when we have one. */
+export function spotifySearchUrl(
+  title: string,
+  artistName?: string | null,
+): string {
+  const q = encodeURIComponent(
+    [artistName, title].filter(Boolean).join(" ").trim(),
+  );
+  return `https://open.spotify.com/search/${q}`;
+}

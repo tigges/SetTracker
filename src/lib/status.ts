@@ -112,6 +112,7 @@ export function listenLinks(
       opts?.beatportUrl && opts.beatportUrl.startsWith("https://www.beatport.com/")
         ? opts.beatportUrl
         : `https://www.beatport.com/search?q=${q}`,
+    spotify: `https://open.spotify.com/search/${q}`,
     // Only link SC when we have the set's real upload URL — never a name search.
     soundcloud: scFromSet,
   };

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getSetBySlug, getAllSetSlugs } from "@/lib/queries";
 import { EntityThumb } from "@/components/EntityThumb";
+import { SetExport } from "@/components/SetExport";
 import { SetPlayer } from "@/components/SetPlayer";
 import { SetTimeline } from "@/components/SetTimeline";
 import { StatusLegend } from "@/components/StatusBits";
@@ -163,6 +164,27 @@ export default async function SetPage({
 
       <div className="my-6">
         <StatusLegend counts={set.statusCounts} />
+      </div>
+
+      <div className="mb-6">
+        <SetExport
+          meta={{
+            title: set.title,
+            slug: set.slug,
+            artistLine: set.artists.map((a) => a.name).join(" b2b "),
+          }}
+          plays={set.plays.map((p) => ({
+            position: p.position,
+            timestamp: p.timestamp,
+            title: p.title,
+            artistName: p.artistName,
+            bpm: p.bpm,
+            musicalKey: p.musicalKey,
+            trackDurationSec: p.trackDurationSec,
+            beatportUrl: p.beatportUrl,
+            idStatus: p.idStatus,
+          }))}
+        />
       </div>
 
       <SetTimeline
