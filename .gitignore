@@ -40,6 +40,8 @@ yarn-error.log*
 /prisma/dev.db-journal
 /prisma/*.db
 /prisma/*.db-journal
+# Enriched catalog shipped via catalog-db-import.yml when GHA ACRCloud secrets fail.
+!/prisma/catalog-snapshot.db
 
 # generated ingest scan output
 /data/url-scan-candidates.json
