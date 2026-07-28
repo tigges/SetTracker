@@ -396,9 +396,21 @@ export function assertCanonicalWordBudget(): void {
   }
 }
 
-/** Minimal Prisma surface used by genre rewrite / fill helpers. */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type GenreRowClient = any;
+type GenreRowClient = {
+  set: {
+    // Loose typing so PrismaClient is assignable without pulling the full client.
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    findMany: (...args: any[]) => Promise<any[]>;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    update: (...args: any[]) => Promise<any>;
+  };
+  track: {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    findMany: (...args: any[]) => Promise<any[]>;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    update: (...args: any[]) => Promise<any>;
+  };
+};
 
 function modeGenre(values: Array<string | null | undefined>): CanonicalGenre | null {
   const counts = new Map<CanonicalGenre, number>();
@@ -476,7 +488,11 @@ export async function fillMissingGenres(
   });
 
   const byDj = new Map<string, Array<string | null>>();
-  for (const s of allSets) {
+  for (const s of allSets as Array<{
+    id: string;
+    genre: string | null;
+    artists?: Array<{ isPrimary: boolean; djId: string }>;
+  }>) {
     const primary = s.artists?.find((a) => a.isPrimary) ?? s.artists?.[0];
     if (!primary) continue;
     const list = byDj.get(primary.djId) ?? [];
@@ -484,7 +500,11 @@ export async function fillMissingGenres(
     byDj.set(primary.djId, list);
   }
 
-  for (const s of allSets) {
+  for (const s of allSets as Array<{
+    id: string;
+    genre: string | null;
+    artists?: Array<{ isPrimary: boolean; djId: string }>;
+  }>) {
     if (normalizeGenre(s.genre)) continue;
     const primary = s.artists?.find((a) => a.isPrimary) ?? s.artists?.[0];
     const siblings = primary ? byDj.get(primary.djId) ?? [] : [];
@@ -502,7 +522,11 @@ export async function fillMissingGenres(
       plays: { select: { set: { select: { genre: true } } }, take: 40 },
     },
   });
-  for (const t of nullTracks) {
+  for (const t of nullTracks as Array<{
+    id: string;
+    genre: string | null;
+    plays?: Array<{ set: { genre: string | null } }>;
+  }>) {
     if (normalizeGenre(t.genre)) continue;
     const fromSets = modeGenre(t.plays?.map((p) => p.set.genre) ?? []);
     const next = fromSets ?? DEFAULT_GENRE;
