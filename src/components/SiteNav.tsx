@@ -7,7 +7,6 @@ const LINKS = [
   { href: "/", label: "Sets" },
   { href: "/djs", label: "DJs" },
   { href: "/venues", label: "Venues" },
-  { href: "/labels", label: "Labels" },
   { href: "/tracks", label: "Tracks" },
   { href: "/stats", label: "Stats" },
 ] as const;
@@ -15,6 +14,15 @@ const LINKS = [
 function isActive(pathname: string, href: string): boolean {
   if (href === "/") {
     return pathname === "/" || pathname.startsWith("/sets");
+  }
+  // Labels live under the Venues page section; keep Venues lit on /labels.
+  if (href === "/venues") {
+    return (
+      pathname === "/venues" ||
+      pathname.startsWith("/venues/") ||
+      pathname === "/labels" ||
+      pathname.startsWith("/labels/")
+    );
   }
   return pathname === href || pathname.startsWith(`${href}/`);
 }

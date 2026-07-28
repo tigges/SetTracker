@@ -48,10 +48,10 @@ export default async function LabelPage({
   return (
     <div>
       <Link
-        href="/labels"
+        href="/venues#labels"
         className="mono text-[12px] text-muted2 transition-colors hover:text-ink"
       >
-        ← Labels
+        ← Venues · Labels
       </Link>
 
       <div
