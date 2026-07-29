@@ -8,12 +8,12 @@ export default async function Home() {
   return (
     <div>
       <div className="mb-8">
-        <p className="eyebrow">setradar.ai · bass house set database</p>
+        <p className="eyebrow">setradar.ai · house set database</p>
         <h1 className="mt-1 text-3xl font-extrabold tracking-tight">Sets</h1>
         <p className="mt-2 max-w-2xl text-[14px] text-muted">
-          Radio episodes, festival sets and SoundCloud mixes — every track row
-          carries its status and provenance, so you can see what&apos;s
-          identified and what&apos;s still an ID.
+          New uploads, radar picks, then the deep catalog — each card shows
+          tracklist health so you can see what&apos;s identified and what&apos;s
+          still an ID.
         </p>
         <div className="mt-4 lg:hidden">
           <StatusLegend />
