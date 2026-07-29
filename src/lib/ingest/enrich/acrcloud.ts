@@ -43,7 +43,12 @@ import { join } from "node:path";
 import { promisify } from "node:util";
 import type { PrismaClient } from "@prisma/client";
 import { sanitizeArtistName } from "../../artistName";
+import { normalizeGenre } from "../../genre";
 import { detectPlaybackHost, type PlaybackHost } from "../../playback";
+import {
+  assessSetDensity,
+  type DensitySeverity,
+} from "../../setDensity";
 import { fmtTimestamp } from "../../status";
 import { allocateTrackSlug, trackSlugBase } from "../../tracks/slug";
 import {
@@ -54,6 +59,13 @@ import {
 import { ARTIST_ROSTER } from "../roster";
 import { getSoundCloudClientId, scGet, type ScTrack } from "../soundcloud/client";
 import { slugify } from "../types";
+
+const WEEK_MS = 7 * 24 * 60 * 60 * 1000;
+const DENSITY_SEVERITY_RANK: Record<DensitySeverity, number> = {
+  severe: 0,
+  thin: 1,
+  ok: 2,
+};
 
 const execFileAsync = promisify(execFile);
 
@@ -91,6 +103,8 @@ export type AcrEnrichOptions = {
   minScore?: number;
   dryRun?: boolean;
   allowYoutube?: boolean;
+  /** Cap ACR identify calls per set (resolve cues + gap probes). */
+  maxProbesPerSet?: number;
 };
 
 export type SparseSetCandidate = {
@@ -108,6 +122,10 @@ export type SparseSetCandidate = {
    * roster `priority: "high"`, else 999.
    */
   popularityRank: number;
+  /** Higher = more urgent for people looking at the homepage. */
+  homepageBoost: number;
+  densitySeverity: DensitySeverity;
+  publishedAtMs: number;
 };
 
 /** DJ Mag Top 100 slug → rank (demand proxy until we have real viewership). */
@@ -152,6 +170,40 @@ export function popularityRankForDjSlug(
   if (chart != null) return chart;
   if (rosterHigh.has(slug)) return 50;
   return 999;
+}
+
+/**
+ * Homepage / product urgency for fingerprint enrich.
+ * Aligns the ACR queue with sets people actually see (This week × Top 100 /
+ * Bass House), not archive ID-comment spam.
+ *
+ * 3 — recent + product spotlight + severe density (empty/thin homepage heroes)
+ * 2 — recent + (spotlight or severe)
+ * 1 — older spotlight that is still thin/severe
+ * 0 — everything else
+ */
+export function homepageEnrichBoost(opts: {
+  publishedAt: Date;
+  primaryDjSlug?: string | null;
+  genre?: string | null;
+  densitySeverity: DensitySeverity;
+  top100: Map<string, number>;
+  nowMs?: number;
+}): number {
+  const now = opts.nowMs ?? Date.now();
+  const ageMs = now - opts.publishedAt.getTime();
+  const recent = ageMs >= 0 && ageMs < WEEK_MS;
+  const slug = opts.primaryDjSlug?.trim() || "";
+  const spotlight =
+    (slug ? opts.top100.has(slug) : false) ||
+    normalizeGenre(opts.genre) === "Bass House";
+  const severe = opts.densitySeverity === "severe";
+  const thinOrWorse = opts.densitySeverity !== "ok";
+
+  if (recent && spotlight && severe) return 3;
+  if (recent && (spotlight || severe)) return 2;
+  if (spotlight && thinOrWorse) return 1;
+  return 0;
 }
 
 export type ExistingPlayMark = {
@@ -560,8 +612,8 @@ export async function acrIdentify(
 
 /**
  * Sets that are good fingerprint candidates: have playback, thin tracklist.
- * Prefers SoundCloud / hearthis over YouTube, then DJ Mag Top 100 / roster
- * demand, then worst density / most unresolved IDs.
+ * Prefers SoundCloud / hearthis over YouTube, then homepage-visible sparse
+ * sets (This week × Top 100 / Bass House), then density / chart demand.
  */
 export async function selectSparseSetsForFingerprint(
   prisma: PrismaClient,
@@ -573,7 +625,9 @@ export async function selectSparseSetsForFingerprint(
   const allowYoutube = opts.allowYoutube ?? boolEnv("ACRCLOUD_ALLOW_YOUTUBE");
   const top100 = loadDjMagTop100RankBySlug();
   const rosterHigh = rosterHighPrioritySlugs();
+  const nowMs = Date.now();
 
+  // Full pool — the old take:500 silently dropped chart DJs outside rowid order.
   const rows = await prisma.set.findMany({
     where: {
       playbackUrl: { not: null },
@@ -584,6 +638,8 @@ export async function selectSparseSetsForFingerprint(
       slug: true,
       playbackUrl: true,
       durationSec: true,
+      publishedAt: true,
+      genre: true,
       plays: {
         select: { idStatus: true, provenance: true },
       },
@@ -593,7 +649,6 @@ export async function selectSparseSetsForFingerprint(
         select: { dj: { select: { slug: true } } },
       },
     },
-    take: 500,
   });
 
   const candidates: SparseSetCandidate[] = [];
@@ -621,6 +676,10 @@ export async function selectSparseSetsForFingerprint(
     if (identifiedStrong >= expectedFloor && unresolvedCount === 0) continue;
 
     const primarySlug = row.artists[0]?.dj.slug;
+    const density = assessSetDensity({
+      durationSec: row.durationSec,
+      playCount: row.plays.length,
+    });
     candidates.push({
       id: row.id,
       slug: row.slug,
@@ -631,6 +690,16 @@ export async function selectSparseSetsForFingerprint(
       playCount: row.plays.length,
       unresolvedCount,
       popularityRank: popularityRankForDjSlug(primarySlug, top100, rosterHigh),
+      homepageBoost: homepageEnrichBoost({
+        publishedAt: row.publishedAt,
+        primaryDjSlug: primarySlug,
+        genre: row.genre,
+        densitySeverity: density.severity,
+        top100,
+        nowMs,
+      }),
+      densitySeverity: density.severity,
+      publishedAtMs: row.publishedAt.getTime(),
     });
   }
 
@@ -639,26 +708,37 @@ export async function selectSparseSetsForFingerprint(
   return candidates.slice(0, setLimit);
 }
 
-/** Sort: host → Top 100/roster demand → unresolved cues → density. */
+/**
+ * Sort: host → homepage urgency → density severity → chart/roster demand →
+ * capped unresolved cues → sparsity → recency.
+ */
 export function compareSparseSetCandidates(
   a: SparseSetCandidate,
   b: SparseSetCandidate,
 ): number {
   const ha = HOST_PREF[a.host] - HOST_PREF[b.host];
   if (ha !== 0) return ha;
+  if (a.homepageBoost !== b.homepageBoost) {
+    return b.homepageBoost - a.homepageBoost;
+  }
+  const sev =
+    DENSITY_SEVERITY_RANK[a.densitySeverity] -
+    DENSITY_SEVERITY_RANK[b.densitySeverity];
+  if (sev !== 0) return sev;
   if (a.popularityRank !== b.popularityRank) {
     return a.popularityRank - b.popularityRank;
   }
-  if (a.unresolvedCount !== b.unresolvedCount) {
-    return b.unresolvedCount - a.unresolvedCount;
-  }
-  const densA = a.playCount / Math.max(a.durationSec, 1);
-  const densB = b.playCount / Math.max(b.durationSec, 1);
-  if (densA !== densB) return densA - densB;
+  // Cap unresolved so comment-spam ID dumps don't beat empty homepage sets.
+  const ua = Math.min(a.unresolvedCount, 8);
+  const ub = Math.min(b.unresolvedCount, 8);
+  if (ua !== ub) return ub - ua;
   if (a.identifiedStrong !== b.identifiedStrong) {
     return a.identifiedStrong - b.identifiedStrong;
   }
   if (a.playCount !== b.playCount) return a.playCount - b.playCount;
+  if (a.publishedAtMs !== b.publishedAtMs) {
+    return b.publishedAtMs - a.publishedAtMs;
+  }
   return b.durationSec - a.durationSec;
 }
 
@@ -753,7 +833,12 @@ async function enrichOneSet(
   opts: Required<
     Pick<
       AcrEnrichOptions,
-      "sampleSec" | "stepSec" | "minScore" | "dryRun" | "allowYoutube"
+      | "sampleSec"
+      | "stepSec"
+      | "minScore"
+      | "dryRun"
+      | "allowYoutube"
+      | "maxProbesPerSet"
     >
   >,
 ): Promise<{ probed: number; identified: number; unresolved: number }> {
@@ -791,6 +876,7 @@ async function enrichOneSet(
     idStatus: p.idStatus,
   }));
   const half = Math.max(30, Math.floor(opts.stepSec / 2));
+  const writeWeakGaps = boolEnv("ACRCLOUD_WRITE_WEAK_GAPS");
 
   let probed = 0;
   let identified = 0;
@@ -802,6 +888,7 @@ async function enrichOneSet(
     .sort((a, b) => a.timestamp - b.timestamp)
     .slice(0, 8);
   for (const play of unresolvedPlays) {
+    if (probed >= opts.maxProbesPerSet) break;
     const clip = await sampleClipFromStream(
       stream.streamUrl,
       play.timestamp,
@@ -862,7 +949,8 @@ async function enrichOneSet(
     });
   }
 
-  // 2) Gap-fill probes on the step grid.
+  // 2) Gap-fill probes on the step grid (budget-capped so a 5h open-to-close
+  // cannot burn the whole trial run).
   const plans = planGapProbes(
     set.durationSec,
     marks,
@@ -871,6 +959,12 @@ async function enrichOneSet(
   ).filter((p) => p.isGap);
 
   for (const plan of plans) {
+    if (probed >= opts.maxProbesPerSet) {
+      console.log(
+        `[acrcloud] probe cap ${opts.maxProbesPerSet} reached for ${candidate.slug}`,
+      );
+      break;
+    }
     // Skip if an earlier probe in this run already filled nearby.
     if (
       marks.some(
@@ -901,7 +995,9 @@ async function enrichOneSet(
     const tsLabel = fmtTimestamp(plan.offsetSec);
     if (!result.hit || result.hit.score < opts.minScore) {
       unresolved += 1;
-      if (!opts.dryRun) {
+      // Default: do not write weak gap rows — they inflate unresolvedCount and
+      // crowd the next enrich queue. Opt in with ACRCLOUD_WRITE_WEAK_GAPS=1.
+      if (!opts.dryRun && writeWeakGaps) {
         const idLabel = `ID @ ${tsLabel} (fingerprint weak)`;
         const idTrack = await prisma.idTrack.create({
           data: {
@@ -1015,6 +1111,8 @@ export async function enrichSparseSetsWithAcrCloud(
   const minScore = opts.minScore ?? numEnv("ACRCLOUD_MIN_SCORE", 70);
   const dryRun = opts.dryRun ?? boolEnv("ACRCLOUD_DRY_RUN");
   const allowYoutube = opts.allowYoutube ?? boolEnv("ACRCLOUD_ALLOW_YOUTUBE");
+  const maxProbesPerSet =
+    opts.maxProbesPerSet ?? numEnv("ACRCLOUD_MAX_PROBES_PER_SET", 20);
 
   // Over-fetch candidates so SNIP/preview-only SC tracks don't burn the set budget.
   const setLimit = opts.setLimit ?? numEnv("ACRCLOUD_SET_LIMIT", 5);
@@ -1023,7 +1121,8 @@ export async function enrichSparseSetsWithAcrCloud(
     setLimit: Math.max(setLimit * 4, setLimit),
   });
   console.log(
-    `[acrcloud] ${candidates.length} sparse candidates (probe budget ${setLimit})` +
+    `[acrcloud] ${candidates.length} sparse candidates (probe budget ${setLimit}, ` +
+      `max ${maxProbesPerSet}/set)` +
       (dryRun ? " (dry-run)" : ""),
   );
 
@@ -1035,7 +1134,8 @@ export async function enrichSparseSetsWithAcrCloud(
   for (const c of candidates) {
     if (setsWithStream >= setLimit) break;
     console.log(
-      `[acrcloud] probing ${c.slug} (${c.host}, pop=#${c.popularityRank}, ` +
+      `[acrcloud] probing ${c.slug} (${c.host}, home=${c.homepageBoost}, ` +
+        `density=${c.densitySeverity}, pop=#${c.popularityRank}, ` +
         `${c.identifiedStrong} strong, ${c.unresolvedCount} unresolved, ${c.playCount} plays)`,
     );
     const before = probed;
@@ -1045,6 +1145,7 @@ export async function enrichSparseSetsWithAcrCloud(
       minScore,
       dryRun,
       allowYoutube,
+      maxProbesPerSet,
     });
     probed += r.probed;
     identified += r.identified;

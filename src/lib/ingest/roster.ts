@@ -382,7 +382,8 @@ export const ARTIST_ROSTER_CURATED: ArtistRosterEntry[] = [
     accent: "#ff9f1c",
     youtube: { handle: "@MaxStyler", status: "ok" },
     soundcloud: { permalink: "maxstyler", userId: 8834846, status: "ok" },
-    priority: "normal",
+    // Homepage-visible SC lives with sparse ID comments — raise enrich demand.
+    priority: "high",
   },
   {
     name: "Hannah Laing",

@@ -1,4 +1,4 @@
 # Bump the timestamp below (and merge to main) to start Catalog enrich.
 # Used when workflow_dispatch is unavailable to the actor.
-requestedAt: 2026-07-28T22:30:00Z
-reason: trial-burn ACRCLOUD_SET_LIMIT=40 + Top 100 100/100 coverage ship
+requestedAt: 2026-07-29T08:30:00Z
+reason: prioritize homepage-visible sparse sets (This week Top 100 / Bass House empties)
