@@ -107,4 +107,32 @@ const chapter = splitArtistCredit("Chapter & Verse");
 assert.equal(chapter.primary.slug, "chapter-verse");
 assert.equal(chapter.collaborators.length, 0);
 
+// Set-title accidents must resolve to the artist, not the venue/series.
+assert.equal(
+  performingCreditFromTitle(
+    "Odd Mob at Seismic Dance Event 8.0 | Full Set (Volcano Stage)",
+  ),
+  "Odd Mob",
+);
+assert.equal(
+  performingCreditFromTitle("Dom Dolla // Dancefloor Currency"),
+  "Dom Dolla",
+);
+assert.equal(
+  performingCreditFromTitle(
+    "Dom Dolla Warm Up @ Pete Tong's Ibiza Classics [3/11/2017]",
+  ),
+  "Dom Dolla",
+);
+assert.equal(
+  performingCreditFromTitle("⠶ DOM DOLLA // YOU ⠶ TOUR MIX ⠶"),
+  "DOM DOLLA",
+);
+assert.equal(
+  performingCreditFromTitle(
+    "Charlotte de Witte at AMF Festival 2023",
+  ),
+  "Charlotte de Witte",
+);
+
 console.log("artists.test.ts ok");

@@ -79,12 +79,19 @@ function guestsFromTitle(title: string): {
   primary: RawArtist;
   collaborators: RawArtist[];
 } {
+  const host: RawArtist = {
+    name: "INSOMNIAC",
+    slug: "insomniac",
+    accent: ACCENT,
+  };
   const ft = title.match(/\bft\.?\s+(.+)$/i)?.[1]?.trim();
   if (!ft) {
-    return {
-      primary: { name: "INSOMNIAC", slug: "insomniac", accent: ACCENT },
-      collaborators: [],
-    };
+    return { primary: host, collaborators: [] };
+  }
+  // Festival mega-mix / venue compilation episodes are series content —
+  // never create a Dj from "Day Trip Festival 2024 Mega-Mix".
+  if (/\bmega[-\s]?mix\b/i.test(ft) || /\bfestival\b.*\b\d{4}\b/i.test(ft)) {
+    return { primary: host, collaborators: [] };
   }
   const parts = ft
     .split(/\s+and\s+/i)

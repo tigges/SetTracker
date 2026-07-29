@@ -9,7 +9,7 @@ import { shieldAtomicActs } from "./atomicActs";
 import { slugify, type RawArtist } from "./types";
 
 const STOP_AFTER =
-  /\s+(?:live\s+(?:at|from)|@|\||–|—|-)\s+/i;
+  /\s+(?:live\s+(?:at|from)|@|\||–|—|-|\/\/)\s+/i;
 
 /** Normalize common collaboration separators to a single token. */
 function normalizeCollabSeparators(input: string): string {
@@ -32,15 +32,24 @@ function normalizeCollabSeparators(input: string): string {
  */
 export function tidyPerformingCredit(name: string): string {
   return name
+    .replace(/[⠶✦★☆●◆]/g, " ")
     .replace(/\s+/g, " ")
     .trim()
+    // Series / mixtape after "//" ("Dom Dolla // Dancefloor Currency")
+    .replace(/\s+\/\/\s+.+$/i, "")
     .replace(
       /\s+(?:tech\s+house\s+|bass\s+house\s+|house\s+)?(?:dj\s*)?sets?\b.*$/i,
       "",
     )
     .replace(/\s+for\s+.+$/i, "")
+    // Venue / festival after bare "at" (also after a prior `|` cut)
+    .replace(/\s+at\s+.+$/i, "")
     .replace(/\s*(?:[-–—:|]\s*)+(?:live\s*)?streams?\b.*$/i, "")
     .replace(/\s+(?:live\s*)?streams?\b.*$/i, "")
+    // "Dom Dolla Warm Up", "Odd Mob Live", "YOU TOUR MIX"
+    .replace(/\s+warm\s*ups?\b.*$/i, "")
+    .replace(/\s+\(?\s*live\b.*$/i, "")
+    .replace(/\s+tour\s*mix\b.*$/i, "")
     .replace(/\s*[|–—:-]+\s*$/g, "")
     .trim();
 }
@@ -49,7 +58,10 @@ export function tidyPerformingCredit(name: string): string {
  * Extract the performing-artist portion of a set title before venue/event noise.
  */
 export function performingCreditFromTitle(title: string): string {
-  const cleaned = title.replace(/\s+/g, " ").trim();
+  const cleaned = title
+    .replace(/[⠶✦★☆●◆]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
   let m = cleaned.match(/^(.+?)\s+live\s+(?:at|from|@)\s+/i);
   if (m) return tidyPerformingCredit(m[1]!);
   m = cleaned.match(/^(.+?)\s+@\s+/);
@@ -58,8 +70,14 @@ export function performingCreditFromTitle(title: string): string {
   if (m) return tidyPerformingCredit(m[1]!);
   m = cleaned.match(/^(.+?)\s+[–—-]\s+/);
   if (m) return tidyPerformingCredit(m[1]!);
+  // Series titles: "Dom Dolla // Dancefloor Currency"
+  m = cleaned.match(/^(.+?)\s+\/\/\s+/);
+  if (m) return tidyPerformingCredit(m[1]!);
   // "A b2b B at Venue" — keep credits, drop venue tail
   m = cleaned.match(/^(.+?\s+b2b\s+.+?)\s+at\s+/i);
+  if (m) return tidyPerformingCredit(m[1]!);
+  // Bare venue cut: "Odd Mob at Seismic…", "Charlotte de Witte at AMF…"
+  m = cleaned.match(/^(.+?)\s+at\s+/i);
   if (m) return tidyPerformingCredit(m[1]!);
   // "Artist B2B Artist Cafe Mambo …" — keep full string; splitter handles b2b
   return tidyPerformingCredit(cleaned);

@@ -37,6 +37,14 @@ export function isJunkArtistName(name: string): boolean {
   if (/^view-artist-details-for-/.test(n.toLowerCase())) return true;
   // Set-title leftovers used as artist names ("AC Slater DJ Mix")
   if (/\b(dj\s*(mix|set)|live\s*set|radio\s*show)\s*$/i.test(n)) return true;
+  // Festival mega-mix / Night Owl episode crumbs as fake DJs
+  if (/\bmega[-\s]?mix\b/i.test(n)) return true;
+  if (/\bpodcast\b/i.test(n) || /\bdownload\s+now\b/i.test(n)) return true;
+  // "Artist at Venue / Festival …" should never be a Dj.name
+  if (/\s+at\s+.+/i.test(n) && n.length > 24) return true;
+  // Series chrome ("Dom Dolla // Dancefloor Currency", decorative bullets)
+  if (/\s+\/\/\s+/.test(n) || /⠶/.test(n)) return true;
+  if (/\bwarm\s*up\b/i.test(n)) return true;
   // Hearthis / SC channel titles mistaken for people ("Afro House Late Evening MIX")
   if (/\bmix\s*$/i.test(n)) return true;
   if (/\b(special\s+edition|hors\s+s[ée]rie)\b/i.test(n)) return true;
