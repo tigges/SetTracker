@@ -13,6 +13,18 @@ export const BRAND_HOST_SLUGS = new Set([
   "djmag",
 ]);
 
+/** Recurring shows owned by a media brand — never attach Series.djId. */
+export const BRAND_SERIES_SLUGS = new Set([
+  "night-owl-radio",
+  "metronome",
+  "insomniac-mixes",
+]);
+
+export function isBrandSeriesSlug(slug: string | null | undefined): boolean {
+  if (!slug) return false;
+  return BRAND_SERIES_SLUGS.has(slug.trim().toLowerCase());
+}
+
 const BRAND_HOST_NAMES = new Set([
   "insomniac",
   "defected tv",

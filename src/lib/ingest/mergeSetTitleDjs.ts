@@ -14,7 +14,11 @@
 
 import type { PrismaClient } from "@prisma/client";
 import { isJunkArtistName, sanitizeArtistName } from "../artistName";
-import { BRAND_HOST_SLUGS, isBrandHostSlug } from "../brandHosts";
+import {
+  BRAND_HOST_SLUGS,
+  BRAND_SERIES_SLUGS,
+  isBrandHostSlug,
+} from "../brandHosts";
 import {
   looksLikeEventOrSeriesCredit,
   performingCreditFromTitle,
@@ -191,6 +195,12 @@ function displayNameForSlug(slug: string, fallbackName: string): string {
 async function stripBrandHostPrimaries(
   prisma: PrismaClient,
 ): Promise<number> {
+  // Brand shows must not appear on a guest DJ's profile as "their" series.
+  await prisma.series.updateMany({
+    where: { slug: { in: [...BRAND_SERIES_SLUGS] } },
+    data: { djId: null },
+  });
+
   const hosts = await prisma.dj.findMany({
     where: { slug: { in: [...BRAND_HOST_SLUGS] } },
     select: { id: true, slug: true },

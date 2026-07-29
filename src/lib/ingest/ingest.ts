@@ -1,6 +1,10 @@
 import type { PrismaClient } from "@prisma/client";
 import { sanitizeArtistName } from "../artistName";
-import { isBrandHostArtist, isBrandHostSlug } from "../brandHosts";
+import {
+  isBrandHostArtist,
+  isBrandHostSlug,
+  isBrandSeriesSlug,
+} from "../brandHosts";
 import { hearthisEmbedUrl, playbackUrlFromSource } from "../playback";
 import { djSocialsFromKnown, labelSocials } from "../social";
 import { ARTIST_ROSTER } from "./roster";
@@ -360,19 +364,26 @@ export async function runIngest(
   ): Promise<string | null> {
     if (!name) return null;
     const slug = slugify(name);
+    // Brand shows (Night Owl, Metronome, …) stay hostless — guests vary per ep.
+    const hostId = isBrandSeriesSlug(slug) ? null : djId ?? null;
     const existing = await prisma.series.findUnique({ where: { slug } });
     if (existing) {
-      // Soft-fill host when a real DJ later claims an unhosted series.
-      if (!existing.djId && djId) {
+      if (isBrandSeriesSlug(slug) && existing.djId) {
         await prisma.series.update({
           where: { id: existing.id },
-          data: { djId },
+          data: { djId: null },
+        });
+      } else if (!existing.djId && hostId) {
+        // Soft-fill host when a real DJ later claims an unhosted artist series.
+        await prisma.series.update({
+          where: { id: existing.id },
+          data: { djId: hostId },
         });
       }
       return existing.id;
     }
     const created = await prisma.series.create({
-      data: { slug, name, ...(djId ? { djId } : {}) },
+      data: { slug, name, ...(hostId ? { djId: hostId } : {}) },
     });
     return created.id;
   }
