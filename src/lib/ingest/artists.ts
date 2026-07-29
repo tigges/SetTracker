@@ -55,6 +55,54 @@ export function tidyPerformingCredit(name: string): string {
 }
 
 /**
+ * True when a credit looks like an event / stage / radio series — not a person.
+ * Used to flip "Festival 4.0 - Dom Dolla" → Dom Dolla.
+ */
+export function looksLikeEventOrSeriesCredit(name: string): boolean {
+  const n = name.replace(/\s+/g, " ").trim();
+  if (!n) return true;
+  return (
+    /\bfestival\b/i.test(n) ||
+    /\blineup\b/i.test(n) ||
+    /\bstages?\b/i.test(n) ||
+    /^main\s*stage\b/i.test(n) ||
+    /\bradio\b/i.test(n) ||
+    /\b(radio\s*)?shorts?\b/i.test(n) ||
+    /\bsessions?\b/i.test(n) ||
+    /\btv\b/i.test(n) ||
+    /\bpodcast\b/i.test(n) ||
+    /\bepisode\b/i.test(n) ||
+    /\bmixtape\b/i.test(n) ||
+    /\bpresents\b/i.test(n) ||
+    /\bvirtual\s+festival\b/i.test(n) ||
+    /\btomorrowland\b/i.test(n) ||
+    /\blive\s*$/i.test(n)
+  );
+}
+
+function artistFromPresentedBy(tail: string): string | null {
+  const m = tail.match(/\bpresented by\s+(.+?)$/i);
+  if (!m?.[1]) return null;
+  return tidyPerformingCredit(
+    m[1]
+      .split(/[|,]/)[0]!
+      .replace(/\s+and\s+.+$/i, "")
+      .trim(),
+  );
+}
+
+function artistFromBySuffix(text: string): string | null {
+  const m = text.match(/\bby\s+(.+?)$/i);
+  if (!m?.[1]) return null;
+  const bit = m[1]
+    .replace(/\s*[\[(#].*$/, "")
+    .replace(/\s*[–—|-].*$/, "")
+    .trim();
+  if (!bit || looksLikeEventOrSeriesCredit(bit)) return null;
+  return tidyPerformingCredit(bit);
+}
+
+/**
  * Extract the performing-artist portion of a set title before venue/event noise.
  */
 export function performingCreditFromTitle(title: string): string {
@@ -67,9 +115,34 @@ export function performingCreditFromTitle(title: string): string {
   m = cleaned.match(/^(.+?)\s+@\s+/);
   if (m) return tidyPerformingCredit(m[1]!);
   m = cleaned.match(/^(.+?)\s+[|]\s+/);
-  if (m) return tidyPerformingCredit(m[1]!);
-  m = cleaned.match(/^(.+?)\s+[–—-]\s+/);
-  if (m) return tidyPerformingCredit(m[1]!);
+  if (m) {
+    const left = m[1]!.trim();
+    // "Series | Episode 156 - Deep House" — left is often the show, not the DJ
+    if (looksLikeEventOrSeriesCredit(left)) {
+      const by = artistFromBySuffix(cleaned);
+      if (by) return by;
+    }
+    return tidyPerformingCredit(left);
+  }
+  // "Defected Virtual Festival 4.0 - Dom Dolla" → Dom Dolla (event on left)
+  m = cleaned.match(/^(.+?)\s+[–—-]\s+(.+)$/);
+  if (m) {
+    const left = m[1]!.trim();
+    const right = m[2]!.trim();
+    if (looksLikeEventOrSeriesCredit(left)) {
+      const presented = artistFromPresentedBy(right);
+      if (presented) return presented;
+      const rightHead = right.split(/\s+[|]\s+/)[0]!.trim();
+      if (
+        rightHead &&
+        !looksLikeEventOrSeriesCredit(rightHead) &&
+        !/^\d{4}\b/.test(rightHead)
+      ) {
+        return tidyPerformingCredit(rightHead);
+      }
+    }
+    return tidyPerformingCredit(left);
+  }
   // Series titles: "Dom Dolla // Dancefloor Currency"
   m = cleaned.match(/^(.+?)\s+\/\/\s+/);
   if (m) return tidyPerformingCredit(m[1]!);
@@ -79,6 +152,11 @@ export function performingCreditFromTitle(title: string): string {
   // Bare venue cut: "Odd Mob at Seismic…", "Charlotte de Witte at AMF…"
   m = cleaned.match(/^(.+?)\s+at\s+/i);
   if (m) return tidyPerformingCredit(m[1]!);
+  // "Sunk Afinity Sessions by Japhet Be"
+  const by = artistFromBySuffix(cleaned);
+  if (by && looksLikeEventOrSeriesCredit(cleaned.replace(/\bby\s+.+$/i, ""))) {
+    return by;
+  }
   // "Artist B2B Artist Cafe Mambo …" — keep full string; splitter handles b2b
   return tidyPerformingCredit(cleaned);
 }

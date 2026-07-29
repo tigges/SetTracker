@@ -40,11 +40,23 @@ export function isJunkArtistName(name: string): boolean {
   // Festival mega-mix / Night Owl episode crumbs as fake DJs
   if (/\bmega[-\s]?mix\b/i.test(n)) return true;
   if (/\bpodcast\b/i.test(n) || /\bdownload\s+now\b/i.test(n)) return true;
+  // Festivals / virtual festivals / lineups are never people
+  if (/\bfestival\b/i.test(n) || /\blineup\b/i.test(n)) return true;
+  // Stage / radio / session / TV series brands mistaken for DJs
+  if (/\b(radio\s*)?shorts?\s*$/i.test(n)) return true;
+  if (/\bradio\b/i.test(n)) return true;
+  if (/\bsessions?\b/i.test(n)) return true;
+  if (/\btv\s*$/i.test(n)) return true;
+  if (/\bepisode\b/i.test(n) || /\bmixtape\b/i.test(n)) return true;
+  if (/\bpresents\b/i.test(n)) return true;
+  if (/\bfrom scratch\b/i.test(n)) return true;
   // "Artist at Venue / Festival …" should never be a Dj.name
   if (/\s+at\s+.+/i.test(n) && n.length > 24) return true;
   // Series chrome ("Dom Dolla // Dancefloor Currency", decorative bullets)
   if (/\s+\/\/\s+/.test(n) || /⠶/.test(n)) return true;
   if (/\bwarm\s*up\b/i.test(n)) return true;
+  // UI scrape crumbs
+  if (/\b(volume\s+control|main\s+navigation)\b/i.test(n)) return true;
   // Hearthis / SC channel titles mistaken for people ("Afro House Late Evening MIX")
   if (/\bmix\s*$/i.test(n)) return true;
   if (/\b(special\s+edition|hors\s+s[ée]rie)\b/i.test(n)) return true;
