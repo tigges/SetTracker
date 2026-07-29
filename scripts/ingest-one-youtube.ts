@@ -21,6 +21,8 @@ async function main() {
   }
   process.env.YOUTUBE_CURATED_ONLY = "1";
   process.env.INGEST_SKIP_VERIFY = "1";
+  // Skip crosslink / catalog-socials / discovery / scan-urls (YouTube 429 risk).
+  process.env.INGEST_LEAN = "1";
   const prisma = new PrismaClient();
   try {
     const adapter = createYoutubeAdapter(sources, [], [], []);

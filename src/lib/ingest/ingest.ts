@@ -660,54 +660,63 @@ export async function runIngest(
     stats.newSets += 1;
   }
 
+  // Lean mode (single-video / rate-limit-friendly): skip discovery + social
+  // harvest that hammers YouTube and often 429s local curated ingests.
+  const lean = process.env.INGEST_LEAN === "1";
+  if (lean) {
+    console.log("[ingest] lean mode — skipping crosslink/catalog-socials/discovery");
+  }
+
   // Cross-link handles before polling so newly resolved SC/YT seeds are used.
-  try {
-    const report: HandleReport = await runCrosslinkDiscovery();
-    stats.crosslink = {
-      needsAttention: report.needsAttention.length,
-      ok: report.ok.length,
-      hits: report.crosslinkHits,
-    };
-  } catch (err) {
-    console.warn(
-      "[ingest] crosslink failed:",
-      err instanceof Error ? err.message : err,
-    );
-  }
+  if (!lean) {
+    try {
+      const report: HandleReport = await runCrosslinkDiscovery();
+      stats.crosslink = {
+        needsAttention: report.needsAttention.length,
+        ok: report.ok.length,
+        hits: report.crosslinkHits,
+      };
+    } catch (err) {
+      console.warn(
+        "[ingest] crosslink failed:",
+        err instanceof Error ? err.message : err,
+      );
+    }
 
-  // Catalog DJs with YT sets → channel About / description socials → Dj + promote.
-  // Runs before adapters so newly found SC/YT can be polled in this deep pass.
-  try {
-    await runCatalogYtSocials(prisma);
-  } catch (err) {
-    console.warn(
-      "[ingest] catalog-yt-socials failed:",
-      err instanceof Error ? err.message : err,
-    );
-  }
+    // Catalog DJs with YT sets → channel About / description socials → Dj + promote.
+    // Runs before adapters so newly found SC/YT can be polled in this deep pass.
+    try {
+      await runCatalogYtSocials(prisma);
+    } catch (err) {
+      console.warn(
+        "[ingest] catalog-yt-socials failed:",
+        err instanceof Error ? err.message : err,
+      );
+    }
 
-  // SC profile bios often list "YouTube: @handle" as plain text (not a link).
-  try {
-    await runCatalogScSocials(prisma);
-  } catch (err) {
-    console.warn(
-      "[ingest] catalog-sc-socials failed:",
-      err instanceof Error ? err.message : err,
-    );
-  }
+    // SC profile bios often list "YouTube: @handle" as plain text (not a link).
+    try {
+      await runCatalogScSocials(prisma);
+    } catch (err) {
+      console.warn(
+        "[ingest] catalog-sc-socials failed:",
+        err instanceof Error ? err.message : err,
+      );
+    }
 
-  // Pre-poll discovery: lineup + press → promote handles → ensure Dj rows
-  // so adapters can fetch new artists/venues in THIS deep run.
-  try {
-    stats.discovery = await runDiscovery(prisma, {
-      collaboratorMentions: [],
-      scanExternal: true,
-    });
-  } catch (err) {
-    console.warn(
-      "[ingest] pre-discovery failed:",
-      err instanceof Error ? err.message : err,
-    );
+    // Pre-poll discovery: lineup + press → promote handles → ensure Dj rows
+    // so adapters can fetch new artists/venues in THIS deep run.
+    try {
+      stats.discovery = await runDiscovery(prisma, {
+        collaboratorMentions: [],
+        scanExternal: true,
+      });
+    } catch (err) {
+      console.warn(
+        "[ingest] pre-discovery failed:",
+        err instanceof Error ? err.message : err,
+      );
+    }
   }
 
   for (const adapter of adapters) {
@@ -733,33 +742,35 @@ export async function runIngest(
   }
 
   // Post-poll discovery: fold B2B/coplay signals, re-promote, refresh graph.
-  try {
-    const after = await runDiscovery(prisma, {
-      collaboratorMentions,
-      scanExternal: false,
-    });
-    stats.discovery = stats.discovery
-      ? {
-          ...after,
-          newlyQueued: (stats.discovery.newlyQueued ?? 0) + after.newlyQueued,
-          promoted: (stats.discovery.promoted ?? 0) + after.promoted,
-          lineupHits: stats.discovery.lineupHits ?? after.lineupHits,
-          pressHits: stats.discovery.pressHits ?? after.pressHits,
-          djsEnsured: (stats.discovery.djsEnsured ?? 0) + after.djsEnsured,
-          venuesEnsured:
-            (stats.discovery.venuesEnsured ?? 0) + (after.venuesEnsured ?? 0),
-        }
-      : after;
-  } catch (err) {
-    console.warn(
-      "[ingest] discovery failed:",
-      err instanceof Error ? err.message : err,
-    );
+  if (!lean) {
+    try {
+      const after = await runDiscovery(prisma, {
+        collaboratorMentions,
+        scanExternal: false,
+      });
+      stats.discovery = stats.discovery
+        ? {
+            ...after,
+            newlyQueued: (stats.discovery.newlyQueued ?? 0) + after.newlyQueued,
+            promoted: (stats.discovery.promoted ?? 0) + after.promoted,
+            lineupHits: stats.discovery.lineupHits ?? after.lineupHits,
+            pressHits: stats.discovery.pressHits ?? after.pressHits,
+            djsEnsured: (stats.discovery.djsEnsured ?? 0) + after.djsEnsured,
+            venuesEnsured:
+              (stats.discovery.venuesEnsured ?? 0) + (after.venuesEnsured ?? 0),
+          }
+        : after;
+    } catch (err) {
+      console.warn(
+        "[ingest] discovery failed:",
+        err instanceof Error ? err.message : err,
+      );
+    }
   }
 
   // Clear dead guessed social/website URLs; apply curated label/venue fixes.
   // CI deep runs verify once in the workflow step — skip the duplicate here.
-  if (process.env.INGEST_SKIP_VERIFY === "1") {
+  if (process.env.INGEST_SKIP_VERIFY === "1" || lean) {
     console.log("[ingest] skipping verify-urls (workflow will run it once)");
   } else {
     try {
@@ -773,13 +784,15 @@ export async function runIngest(
   }
 
   // Harvest more socials / set candidates / Beatport links from entity websites.
-  try {
-    await scanEntityUrls(prisma);
-  } catch (err) {
-    console.warn(
-      "[ingest] scan-urls failed:",
-      err instanceof Error ? err.message : err,
-    );
+  if (!lean) {
+    try {
+      await scanEntityUrls(prisma);
+    } catch (err) {
+      console.warn(
+        "[ingest] scan-urls failed:",
+        err instanceof Error ? err.message : err,
+      );
+    }
   }
 
   // Copy primary DJ artwork onto sets still missing a thumb (cheap, no API).

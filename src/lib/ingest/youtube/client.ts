@@ -383,6 +383,80 @@ export function extractVideoId(input: string): string | null {
   return null;
 }
 
+/** Parse YouTube Data API ISO-8601 duration (PT#H#M#S) → seconds. */
+function parseIso8601Duration(iso: string): number {
+  const m = /^PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?$/.exec(iso);
+  if (!m) return 0;
+  return (
+    (Number(m[1] || 0) || 0) * 3600 +
+    (Number(m[2] || 0) || 0) * 60 +
+    (Number(m[3] || 0) || 0)
+  );
+}
+
+/**
+ * Fallback when watch HTML is 429/bot-walled. Needs YOUTUBE_API_KEY.
+ * No Music credits / related videos — description tracklist still works.
+ */
+async function fetchWatchMetaViaDataApi(
+  videoId: string,
+): Promise<YtWatchMeta | null> {
+  const key = process.env.YOUTUBE_API_KEY?.trim();
+  if (!key) return null;
+  const url = new URL("https://www.googleapis.com/youtube/v3/videos");
+  url.searchParams.set("part", "snippet,contentDetails");
+  url.searchParams.set("id", videoId);
+  url.searchParams.set("key", key);
+  const res = await fetch(url, { signal: AbortSignal.timeout(20_000) });
+  if (!res.ok) {
+    console.warn(`[youtube] Data API HTTP ${res.status} for ${videoId}`);
+    return null;
+  }
+  const data = (await res.json()) as {
+    items?: Array<{
+      snippet?: {
+        title?: string;
+        channelTitle?: string;
+        channelId?: string;
+        description?: string;
+        publishedAt?: string;
+        thumbnails?: Record<string, { url?: string; width?: number }>;
+      };
+      contentDetails?: { duration?: string };
+    }>;
+  };
+  const item = data.items?.[0];
+  const title = item?.snippet?.title?.trim();
+  if (!item?.snippet || !title) return null;
+  const sn = item.snippet;
+  const thumbs = sn.thumbnails
+    ? Object.values(sn.thumbnails).map((t) => ({
+        url: t.url,
+        width: t.width,
+      }))
+    : [];
+  const durationSec = parseIso8601Duration(item.contentDetails?.duration || "");
+  const publishedAt = sn.publishedAt ? new Date(sn.publishedAt) : null;
+  return {
+    videoId,
+    title,
+    channel: (sn.channelTitle || "").trim(),
+    channelId:
+      typeof sn.channelId === "string" && sn.channelId.startsWith("UC")
+        ? sn.channelId
+        : null,
+    channelHandle: null,
+    durationSec: durationSec || 30 * 60,
+    description: sn.description || "",
+    publishedAt:
+      publishedAt && !Number.isNaN(publishedAt.getTime()) ? publishedAt : null,
+    musicCredits: [],
+    relatedVideos: [],
+    watchUrl: `https://www.youtube.com/watch?v=${videoId}`,
+    imageUrl: pickYoutubeThumbnail(videoId, thumbs),
+  };
+}
+
 export async function fetchWatchMeta(videoIdOrUrl: string): Promise<YtWatchMeta> {
   const videoId = extractVideoId(videoIdOrUrl);
   if (!videoId) throw new Error(`Invalid YouTube id/url: ${videoIdOrUrl}`);
@@ -396,7 +470,18 @@ export async function fetchWatchMeta(videoIdOrUrl: string): Promise<YtWatchMeta>
     },
     signal: AbortSignal.timeout(25_000),
   });
-  if (!res.ok) throw new Error(`YouTube watch HTTP ${res.status}`);
+  if (!res.ok) {
+    if (res.status === 429 || res.status === 403) {
+      const viaApi = await fetchWatchMetaViaDataApi(videoId);
+      if (viaApi) {
+        console.warn(
+          `[youtube] watch HTTP ${res.status} — used Data API fallback for ${videoId}`,
+        );
+        return viaApi;
+      }
+    }
+    throw new Error(`YouTube watch HTTP ${res.status}`);
+  }
   const html = await res.text();
 
   const player = extractJsonAssign(html, "ytInitialPlayerResponse") as Record<
