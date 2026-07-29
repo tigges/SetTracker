@@ -53,8 +53,21 @@ export async function applyCuratedDjImages(
         });
       }
     }
-    await prisma.dj.delete({ where: { id: from.id } });
-    merged += 1;
+    // Series also FK to Dj — reassign before delete (P2003 otherwise).
+    await prisma.series.updateMany({
+      where: { djId: from.id },
+      data: { djId: to.id },
+    });
+    const remainingLinks = await prisma.setArtist.count({
+      where: { djId: from.id },
+    });
+    const remainingSeries = await prisma.series.count({
+      where: { djId: from.id },
+    });
+    if (remainingLinks === 0 && remainingSeries === 0) {
+      await prisma.dj.delete({ where: { id: from.id } });
+      merged += 1;
+    }
   }
 
   for (const [slug, imageUrl] of Object.entries(KNOWN_DJ_IMAGES)) {
