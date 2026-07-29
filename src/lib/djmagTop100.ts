@@ -1,30 +1,19 @@
 /**
  * DJ Mag Top 100 DJs (seeded chart year) — shared by enrich demand proxy
  * and transparent home-feed spotlight ordering.
+ *
+ * Uses a static JSON import (not node:fs) so server modules stay NFT-safe
+ * and nothing in this graph can leak into the client bundle via accident.
  */
 
-import { existsSync, readFileSync } from "node:fs";
-import { join } from "node:path";
+import raw from "../../data/artist-seeds/djmag-top100-djs-2025.json";
 
 /** DJ Mag Top 100 slug → chart rank (1 = #1). */
 export function loadDjMagTop100RankBySlug(): Map<string, number> {
-  const path = join(
-    process.cwd(),
-    "data",
-    "artist-seeds",
-    "djmag-top100-djs-2025.json",
-  );
   const out = new Map<string, number>();
-  if (!existsSync(path)) return out;
-  try {
-    const raw = JSON.parse(readFileSync(path, "utf8")) as {
-      djs?: Array<{ slug?: string; rank?: number }>;
-    };
-    for (const d of raw.djs ?? []) {
-      if (d.slug && typeof d.rank === "number") out.set(d.slug, d.rank);
-    }
-  } catch {
-    /* ignore */
+  const djs = (raw as { djs?: Array<{ slug?: string; rank?: number }> }).djs ?? [];
+  for (const d of djs) {
+    if (d.slug && typeof d.rank === "number") out.set(d.slug, d.rank);
   }
   return out;
 }

@@ -4,9 +4,9 @@ import { loadDjMagFestivalRankBySlug } from "./djmagFestivalRanks";
 import { loadDjMagTop100RankBySlug } from "./djmagTop100";
 import {
   compareFeedPriority,
-  resolveFeedRanks,
   resolveVenueTier,
 } from "./feedPriority";
+import { resolveFeedRanks } from "./feedPriorityResolve";
 
 describe("feedPriority complete → Top 100 → festivals", () => {
   it("loads DJ and festival chart ranks (with event aliases)", () => {

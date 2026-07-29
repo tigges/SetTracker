@@ -1,5 +1,8 @@
 /**
- * Transparent home-feed ranking.
+ * Transparent home-feed ranking — client-safe helpers.
+ *
+ * Rank *resolution* (chart JSON) lives in `feedPriorityResolve.ts` so
+ * SetCard / SetFeed never pull seed data or Node builtins into the browser.
  *
  * Within This week / Earlier we sort:
  *   1) Tracklist completeness (ok → thin → severe)
@@ -7,18 +10,9 @@
  *   3) DJ Mag Top 100 Festivals (linked event; lower rank first)
  *   4) Venue class: festival → club → livestream → radio → other
  *   5) Recency
- *
- * Prefer Event.kind over Set.type for venue class (Set.type over-labels
- * many YouTube uploads as "festival"). No schema changes — ranks come from
- * JSON seeds + density from durationSec/trackCount.
  */
 
-import { loadDjMagFestivalRankBySlug } from "./djmagFestivalRanks";
-import { loadDjMagTop100RankBySlug } from "./djmagTop100";
-import {
-  assessSetDensity,
-  type DensitySeverity,
-} from "./setDensity";
+import type { DensitySeverity } from "./setDensity";
 
 export type VenueTier =
   | "festival"
@@ -59,19 +53,6 @@ const VENUE_RANK: Record<VenueTier, number> = {
   other: 4,
 };
 
-let cachedTop100: Map<string, number> | null = null;
-let cachedFestivals: Map<string, number> | null = null;
-
-function top100Ranks(): Map<string, number> {
-  if (!cachedTop100) cachedTop100 = loadDjMagTop100RankBySlug();
-  return cachedTop100;
-}
-
-function festivalRanks(): Map<string, number> {
-  if (!cachedFestivals) cachedFestivals = loadDjMagFestivalRankBySlug();
-  return cachedFestivals;
-}
-
 /** Map Event.kind (preferred) or Set.type fallback → venue tier. */
 export function resolveVenueTier(
   eventKind?: string | null,
@@ -85,44 +66,6 @@ export function resolveVenueTier(
   if (t === "festival") return "festival";
   if (t === "radio") return "radio";
   return "other";
-}
-
-export function resolveFeedRanks(opts: {
-  primaryDjSlug?: string | null;
-  eventSlug?: string | null;
-  eventKind?: string | null;
-  setType?: string | null;
-  durationSec: number;
-  trackCount: number;
-}): {
-  densitySeverity: DensitySeverity;
-  top100Rank: number | null;
-  festivalRank: number | null;
-  venueTier: VenueTier;
-  /** Primary card label — Top 100 DJ wins over festival badge when both apply. */
-  spotlight: FeedSpotlight | null;
-} {
-  const density = assessSetDensity({
-    durationSec: opts.durationSec,
-    playCount: opts.trackCount,
-  });
-  const djSlug = opts.primaryDjSlug?.trim() || "";
-  const top100Rank = djSlug ? (top100Ranks().get(djSlug) ?? null) : null;
-  const evSlug = opts.eventSlug?.trim() || "";
-  const festivalRank = evSlug ? (festivalRanks().get(evSlug) ?? null) : null;
-  const venueTier = resolveVenueTier(opts.eventKind, opts.setType);
-
-  let spotlight: FeedSpotlight | null = null;
-  if (top100Rank != null) spotlight = "top100";
-  else if (festivalRank != null) spotlight = "top-festival";
-
-  return {
-    densitySeverity: density.severity,
-    top100Rank,
-    festivalRank,
-    venueTier,
-    spotlight,
-  };
 }
 
 export type FeedPriorityFields = {
