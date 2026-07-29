@@ -25,6 +25,14 @@ import { eventSocialPayload, resolveEvent } from "./events";
 import { scanEntityUrls } from "./scanEntityUrls";
 import { verifyStoredSocialUrls } from "./verifyUrls";
 
+/** Orphan event slugs that should collapse onto a known festival/club. */
+const EVENT_SLUG_REMAP: Record<string, string> = {
+  "tomorrowland-belgium": "Tomorrowland",
+  "tomorrowland-belgium-2026": "Tomorrowland",
+  "edc-las-vegas": "EDC Las Vegas",
+  "ultra-music-festival": "Ultra Music Festival",
+};
+
 function parseHearthisPath(
   url: string,
 ): { user: string; track: string } | null {
@@ -312,7 +320,11 @@ export async function runIngest(
         where: { id: existing.id },
         data: {
           name: existing.name || canon.name,
-          kind: existing.kind || canon.kind,
+          // Prefer canonical festival/club kind over orphan "event".
+          kind:
+            canon.kind && canon.kind !== "event"
+              ? canon.kind
+              : existing.kind || canon.kind,
           location: existing.location ?? canon.location ?? null,
           website: existing.website ?? socials.website ?? null,
           soundcloud: existing.soundcloud ?? socials.soundcloud ?? null,
@@ -868,7 +880,66 @@ export async function runIngest(
     );
   }
 
+  try {
+    const n = await backfillKnownEventAliases(prisma);
+    if (n) console.log(`[ingest] event alias remap: ${n}`);
+  } catch (err) {
+    console.warn(
+      "[ingest] event alias remap failed:",
+      err instanceof Error ? err.message : err,
+    );
+  }
+
   return stats;
+}
+
+/** Collapse orphan event rows (Tomorrowland Belgium → tomorrowland, etc.). */
+export async function backfillKnownEventAliases(
+  prisma: PrismaClient,
+): Promise<number> {
+  let moved = 0;
+  for (const [orphanSlug, canonName] of Object.entries(EVENT_SLUG_REMAP)) {
+    const orphan = await prisma.event.findUnique({
+      where: { slug: orphanSlug },
+      select: { id: true },
+    });
+    if (!orphan) continue;
+    const canon = resolveEvent(canonName);
+    if (canon.slug === orphanSlug) continue;
+    let target = await prisma.event.findUnique({ where: { slug: canon.slug } });
+    if (!target) {
+      const socials = eventSocialPayload(canon);
+      target = await prisma.event.create({
+        data: {
+          slug: canon.slug,
+          name: canon.name,
+          kind: canon.kind,
+          location: canon.location ?? null,
+          website: socials.website ?? null,
+          soundcloud: socials.soundcloud ?? null,
+          instagram: socials.instagram ?? null,
+          twitter: socials.twitter ?? null,
+        },
+      });
+    } else if (target.kind === "event" && canon.kind !== "event") {
+      target = await prisma.event.update({
+        where: { id: target.id },
+        data: { kind: canon.kind, name: canon.name },
+      });
+    }
+    const res = await prisma.set.updateMany({
+      where: { eventId: orphan.id },
+      data: { eventId: target.id },
+    });
+    moved += res.count;
+    const stillLinked = await prisma.set.count({
+      where: { eventId: orphan.id },
+    });
+    if (stillLinked === 0) {
+      await prisma.event.delete({ where: { id: orphan.id } }).catch(() => {});
+    }
+  }
+  return moved;
 }
 
 /** Fill Set.playbackUrl from sourceUrl / hearthis API when missing. */

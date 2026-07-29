@@ -36,5 +36,11 @@ assert.equal(
 assert.equal(resolveEvent("Dreamstate SoCal").slug, "dreamstate");
 assert.equal(inferFestivalEvent("Random Club Night"), null);
 assert.equal(resolveEvent("Djoon").kind, "club");
+assert.equal(resolveEvent("Tomorrowland Belgium").slug, "tomorrowland");
+assert.equal(resolveEvent("Tomorrowland Belgium").kind, "festival");
+assert.equal(
+  inferFestivalEvent("Mike Williams WE2 | Tomorrowland 2026")?.slug,
+  "tomorrowland",
+);
 
 console.log("events.test.ts ok");

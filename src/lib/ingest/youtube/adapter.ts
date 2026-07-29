@@ -209,16 +209,23 @@ async function curatedToHit(src: YoutubeSetSource): Promise<YtHit | null> {
   const title = (src.title || meta.title).trim();
   const sourceSlug = `yt-${meta.videoId}`.slice(0, 120);
   const { primary, collaborators } = artistsForSet(title, src.primaryArtist);
+  // Prefer known festival/club from title or curated eventName (not raw
+  // "Tomorrowland Belgium" orphans with kind=event).
+  const festival =
+    inferFestivalEvent(title) ||
+    (src.eventName ? inferFestivalEvent(src.eventName) : null);
 
   const raw: RawSet = {
     sourceSlug,
     title,
-    type: src.type ?? "soundcloud",
+    type: src.type ?? (festival?.kind === "festival" ? "festival" : "soundcloud"),
     genre: src.genre,
     primaryArtist: withDescriptionSocials(primary, meta.description),
     collaborators,
     seriesName: src.seriesName,
-    eventName: src.eventName,
+    eventName: festival?.name ?? src.eventName,
+    eventKind: festival?.kind,
+    eventLocation: festival?.location,
     publishedAt: meta.publishedAt ?? new Date(),
     durationSec,
     sourceName: "YouTube",

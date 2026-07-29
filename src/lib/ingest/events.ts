@@ -245,6 +245,12 @@ const ALIAS_TO_SLUG: Record<string, string> = {
   "burning-man": "burning-man",
   burningman: "burning-man",
   "burning-man-festival": "burning-man",
+  tomorrowland: "tomorrowland",
+  "tomorrowland-belgium": "tomorrowland",
+  "tomorrowland-belgium-2026": "tomorrowland",
+  "tomorrowland-winter": "tomorrowland",
+  "tomorrowland-brasil": "tomorrowland",
+  "tomorrowland-brazil": "tomorrowland",
 };
 
 function keyOf(name: string): string {
@@ -260,6 +266,16 @@ export function resolveEvent(
   name: string,
   opts?: { kind?: string; location?: string },
 ): CanonicalEvent {
+  // Title / display-name heuristics first (e.g. "Tomorrowland Belgium").
+  const inferred = inferFestivalEvent(name);
+  if (inferred) {
+    return {
+      ...inferred,
+      kind: opts?.kind || inferred.kind,
+      location: opts?.location || inferred.location,
+    };
+  }
+
   const key = keyOf(name);
   const slug = ALIAS_TO_SLUG[key] ?? key;
   const known = KNOWN_EVENTS[slug];
