@@ -1,114 +1,158 @@
 /**
- * Transparent home-feed spotlight ordering.
+ * Transparent home-feed ranking.
  *
- * Within each age section (This week / Earlier) we float:
- *   1) Bass house selection — curated roster + SC shows tagged Bass House
- *   2) DJ Mag Top 100 primary artists (chart seed)
- * then leave everyone else in publishedAt order.
+ * Within This week / Earlier we sort:
+ *   1) Tracklist completeness (ok → thin → severe)
+ *   2) DJ Mag Top 100 DJs (lower chart rank first)
+ *   3) DJ Mag Top 100 Festivals (linked event; lower rank first)
+ *   4) Venue class: festival → club → livestream → radio → other
+ *   5) Recency
  *
- * Pagination stays chronological so old spotlight sets cannot starve fresh
- * non-spotlight uploads. Reasons are attached on FeedItem for card labels.
+ * Prefer Event.kind over Set.type for venue class (Set.type over-labels
+ * many YouTube uploads as "festival"). No schema changes — ranks come from
+ * JSON seeds + density from durationSec/trackCount.
  */
 
+import { loadDjMagFestivalRankBySlug } from "./djmagFestivalRanks";
 import { loadDjMagTop100RankBySlug } from "./djmagTop100";
-import { normalizeGenre } from "./genre";
-import { ARTIST_ROSTER_CURATED } from "./ingest/roster";
-import { SOUNDCLOUD_SHOWS } from "./ingest/soundcloud/shows";
-import { slugify } from "./ingest/types";
+import {
+  assessSetDensity,
+  type DensitySeverity,
+} from "./setDensity";
 
-export type FeedSpotlight = "bass-house" | "top100";
+export type VenueTier =
+  | "festival"
+  | "club"
+  | "livestream"
+  | "radio"
+  | "other";
+
+export type FeedSpotlight = "top100" | "top-festival";
 
 export const FEED_SPOTLIGHT_META: Record<
   FeedSpotlight,
   { label: string; short: string; title: string }
 > = {
-  "bass-house": {
-    short: "Bass house",
-    label: "Bass house pick",
-    title:
-      "Bass house selection — curated roster/SC show artist, or set genre Bass House",
-  },
   top100: {
     short: "Top 100",
     label: "DJ Mag Top 100",
-    title: "Primary artist is on the DJ Mag Top 100 DJs 2025 chart",
+    title: "Primary artist is on the DJ Mag Top 100 DJs chart",
+  },
+  "top-festival": {
+    short: "Festival",
+    label: "Top festival",
+    title: "Set is linked to a DJ Mag Top 100 Festival",
   },
 };
 
-/** Lower rank sorts first. */
-export function feedSpotlightRank(
-  spotlight: FeedSpotlight | null | undefined,
-): number {
-  if (spotlight === "bass-house") return 0;
-  if (spotlight === "top100") return 1;
-  return 2;
-}
+const DENSITY_RANK: Record<DensitySeverity, number> = {
+  ok: 0,
+  thin: 1,
+  severe: 2,
+};
 
-let cachedBassHouse: Set<string> | null = null;
+const VENUE_RANK: Record<VenueTier, number> = {
+  festival: 0,
+  club: 1,
+  livestream: 2,
+  radio: 3,
+  other: 4,
+};
+
 let cachedTop100: Map<string, number> | null = null;
-
-/** Curated bass-house DJ slugs (explicit selection — not every Bass House genre row). */
-export function bassHouseSelectionSlugs(): Set<string> {
-  if (cachedBassHouse) return cachedBassHouse;
-  const out = new Set<string>();
-  for (const a of ARTIST_ROSTER_CURATED) {
-    if (/^bass house$/i.test(a.genre.trim())) {
-      out.add(slugify(a.name));
-    }
-  }
-  for (const show of SOUNDCLOUD_SHOWS) {
-    if (/^bass house$/i.test(show.genre.trim())) {
-      out.add(show.primaryArtist.slug);
-    }
-  }
-  cachedBassHouse = out;
-  return out;
-}
+let cachedFestivals: Map<string, number> | null = null;
 
 function top100Ranks(): Map<string, number> {
   if (!cachedTop100) cachedTop100 = loadDjMagTop100RankBySlug();
   return cachedTop100;
 }
 
-/**
- * Resolve a single transparent spotlight reason for a set.
- * Bass house selection wins when an artist is also on the Top 100.
- */
-export function resolveFeedSpotlight(opts: {
-  primaryDjSlug?: string | null;
-  genre?: string | null;
-}): { spotlight: FeedSpotlight | null; top100Rank: number | null } {
-  const slug = opts.primaryDjSlug?.trim() || "";
-  const rank = slug ? (top100Ranks().get(slug) ?? null) : null;
-  const bassGenre = normalizeGenre(opts.genre) === "Bass House";
-  const bassArtist = Boolean(slug && bassHouseSelectionSlugs().has(slug));
+function festivalRanks(): Map<string, number> {
+  if (!cachedFestivals) cachedFestivals = loadDjMagFestivalRankBySlug();
+  return cachedFestivals;
+}
 
-  if (bassArtist || bassGenre) {
-    return { spotlight: "bass-house", top100Rank: rank };
+/** Map Event.kind (preferred) or Set.type fallback → venue tier. */
+export function resolveVenueTier(
+  eventKind?: string | null,
+  setType?: string | null,
+): VenueTier {
+  const k = (eventKind || "").toLowerCase();
+  if (k === "festival" || k === "club" || k === "livestream" || k === "radio") {
+    return k;
   }
-  if (rank != null) return { spotlight: "top100", top100Rank: rank };
-  return { spotlight: null, top100Rank: null };
+  const t = (setType || "").toLowerCase();
+  if (t === "festival") return "festival";
+  if (t === "radio") return "radio";
+  return "other";
+}
+
+export function resolveFeedRanks(opts: {
+  primaryDjSlug?: string | null;
+  eventSlug?: string | null;
+  eventKind?: string | null;
+  setType?: string | null;
+  durationSec: number;
+  trackCount: number;
+}): {
+  densitySeverity: DensitySeverity;
+  top100Rank: number | null;
+  festivalRank: number | null;
+  venueTier: VenueTier;
+  /** Primary card label — Top 100 DJ wins over festival badge when both apply. */
+  spotlight: FeedSpotlight | null;
+} {
+  const density = assessSetDensity({
+    durationSec: opts.durationSec,
+    playCount: opts.trackCount,
+  });
+  const djSlug = opts.primaryDjSlug?.trim() || "";
+  const top100Rank = djSlug ? (top100Ranks().get(djSlug) ?? null) : null;
+  const evSlug = opts.eventSlug?.trim() || "";
+  const festivalRank = evSlug ? (festivalRanks().get(evSlug) ?? null) : null;
+  const venueTier = resolveVenueTier(opts.eventKind, opts.setType);
+
+  let spotlight: FeedSpotlight | null = null;
+  if (top100Rank != null) spotlight = "top100";
+  else if (festivalRank != null) spotlight = "top-festival";
+
+  return {
+    densitySeverity: density.severity,
+    top100Rank,
+    festivalRank,
+    venueTier,
+    spotlight,
+  };
 }
 
 export type FeedPriorityFields = {
-  spotlight?: FeedSpotlight | null;
+  densitySeverity?: DensitySeverity | null;
   top100Rank?: number | null;
+  festivalRank?: number | null;
+  venueTier?: VenueTier | null;
   publishedAt: Date | string;
 };
 
-/** Within an age section: spotlight tier → Top 100 chart rank → recency. */
+/** Within an age section — complete → Top 100 DJ → top festival → venue → date. */
 export function compareFeedPriority(
   a: FeedPriorityFields,
   b: FeedPriorityFields,
 ): number {
-  const tier = feedSpotlightRank(a.spotlight) - feedSpotlightRank(b.spotlight);
-  if (tier !== 0) return tier;
+  const da = DENSITY_RANK[a.densitySeverity ?? "ok"];
+  const db = DENSITY_RANK[b.densitySeverity ?? "ok"];
+  if (da !== db) return da - db;
 
-  if (a.spotlight === "top100" || b.spotlight === "top100") {
-    const ar = a.top100Rank ?? 999;
-    const br = b.top100Rank ?? 999;
-    if (ar !== br) return ar - br;
-  }
+  const ta = a.top100Rank ?? 999;
+  const tb = b.top100Rank ?? 999;
+  if (ta !== tb) return ta - tb;
+
+  const fa = a.festivalRank ?? 999;
+  const fb = b.festivalRank ?? 999;
+  if (fa !== fb) return fa - fb;
+
+  const va = VENUE_RANK[a.venueTier ?? "other"];
+  const vb = VENUE_RANK[b.venueTier ?? "other"];
+  if (va !== vb) return va - vb;
 
   return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime();
 }

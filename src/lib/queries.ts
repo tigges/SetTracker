@@ -11,7 +11,7 @@ import {
   relatedSlugsFor,
   venueArtistSlugs,
 } from "@/lib/ingest/discovery/relations";
-import { resolveFeedSpotlight } from "@/lib/feedPriority";
+import { resolveFeedRanks } from "@/lib/feedPriority";
 import { isBrowseReadySet } from "@/lib/setBrowse";
 import { isBrowseReadyVenue, isVenueListed } from "@/lib/venueBrowse";
 import type { IdStatus } from "@/lib/status";
@@ -81,9 +81,14 @@ export async function getFeed() {
     .map((s) => {
       const primary = s.artists.find((a) => a.isPrimary) ?? s.artists[0];
       const tally = tallies.get(s.id);
-      const { spotlight, top100Rank } = resolveFeedSpotlight({
+      const trackCount = tally?.trackCount ?? 0;
+      const ranks = resolveFeedRanks({
         primaryDjSlug: primary?.dj.slug,
-        genre: s.genre,
+        eventSlug: s.event?.slug,
+        eventKind: s.event?.kind,
+        setType: s.type,
+        durationSec: s.durationSec,
+        trackCount,
       });
       return {
         id: s.id,
@@ -98,6 +103,8 @@ export async function getFeed() {
         cover: s.cover,
         imageUrl: s.imageUrl,
         eventName: s.event?.name ?? null,
+        eventSlug: s.event?.slug ?? null,
+        eventKind: s.event?.kind ?? null,
         seriesName: s.series?.name ?? null,
         primaryDj: primary
           ? {
@@ -110,11 +117,14 @@ export async function getFeed() {
         collaborators: s.artists
           .filter((a) => !a.isPrimary)
           .map((a) => ({ name: a.dj.name, slug: a.dj.slug })),
-        trackCount: tally?.trackCount ?? 0,
+        trackCount,
         statusCounts: tally?.counts ?? emptyCounts(),
-        /** Transparent feed boost reason — see `feedPriority.ts`. */
-        spotlight,
-        top100Rank,
+        /** Transparent feed ranks — see `feedPriority.ts`. */
+        spotlight: ranks.spotlight,
+        top100Rank: ranks.top100Rank,
+        festivalRank: ranks.festivalRank,
+        venueTier: ranks.venueTier,
+        densitySeverity: ranks.densitySeverity,
       };
     })
     .filter((s) =>
@@ -818,6 +828,15 @@ export async function getVenueBySlug(slug: string) {
     sets: event.sets.map((s) => {
       const prim = s.artists.find((a) => a.isPrimary) ?? s.artists[0];
       const tally = tallies.get(s.id);
+      const trackCount = tally?.trackCount ?? 0;
+      const ranks = resolveFeedRanks({
+        primaryDjSlug: prim?.dj.slug,
+        eventSlug: event.slug,
+        eventKind: event.kind,
+        setType: s.type,
+        durationSec: s.durationSec,
+        trackCount,
+      });
       return {
         id: s.id,
         slug: s.slug,
@@ -839,16 +858,19 @@ export async function getVenueBySlug(slug: string) {
         collaborators: s.artists
           .filter((a) => !a.isPrimary)
           .map((a) => ({ name: a.dj.name, slug: a.dj.slug })),
-        trackCount: tally?.trackCount ?? 0,
+        trackCount,
         statusCounts: tally?.counts ?? emptyCounts(),
         sourceName: s.sourceName,
         cover: s.cover,
         eventName: event.name,
+        eventSlug: event.slug,
+        eventKind: event.kind,
         seriesName: null,
-        ...resolveFeedSpotlight({
-          primaryDjSlug: prim?.dj.slug,
-          genre: s.genre,
-        }),
+        spotlight: ranks.spotlight,
+        top100Rank: ranks.top100Rank,
+        festivalRank: ranks.festivalRank,
+        venueTier: ranks.venueTier,
+        densitySeverity: ranks.densitySeverity,
       } satisfies FeedItem;
     }),
   };

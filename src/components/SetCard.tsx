@@ -17,9 +17,6 @@ import type { FeedItem } from "@/lib/queries";
 export function SetCard({ set }: { set: FeedItem }) {
   const type = SET_TYPE_META[set.type] ?? { label: set.type, glyph: "•" };
   const accent = set.primaryDj?.accent ?? "var(--brand)";
-  const spotlight = set.spotlight
-    ? FEED_SPOTLIGHT_META[set.spotlight]
-    : null;
   const djLine =
     (set.primaryDj?.name ?? "Unknown") +
     (set.collaborators.length > 0
@@ -62,19 +59,20 @@ export function SetCard({ set }: { set: FeedItem }) {
               {type.label}
             </span>
             {set.genre && <span className="eyebrow truncate">· {set.genre}</span>}
-            {spotlight && (
+            {set.top100Rank != null && (
               <span
                 className="eyebrow truncate text-muted2"
-                title={
-                  set.spotlight === "top100" && set.top100Rank != null
-                    ? `${spotlight.title} (#${set.top100Rank})`
-                    : spotlight.title
-                }
+                title={FEED_SPOTLIGHT_META.top100.title}
               >
-                · {spotlight.short}
-                {set.spotlight === "top100" && set.top100Rank != null
-                  ? ` #${set.top100Rank}`
-                  : ""}
+                · Top 100 #{set.top100Rank}
+              </span>
+            )}
+            {set.festivalRank != null && (
+              <span
+                className="eyebrow truncate text-muted2"
+                title={FEED_SPOTLIGHT_META["top-festival"].title}
+              >
+                · Festival #{set.festivalRank}
               </span>
             )}
           </div>
