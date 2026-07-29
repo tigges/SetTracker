@@ -11,6 +11,7 @@ import {
   relatedSlugsFor,
   venueArtistSlugs,
 } from "@/lib/ingest/discovery/relations";
+import { resolveFeedSpotlight } from "@/lib/feedPriority";
 import { isBrowseReadySet } from "@/lib/setBrowse";
 import { isBrowseReadyVenue, isVenueListed } from "@/lib/venueBrowse";
 import type { IdStatus } from "@/lib/status";
@@ -80,6 +81,9 @@ export async function getFeed() {
     .map((s) => {
       const primary = s.artists.find((a) => a.isPrimary) ?? s.artists[0];
       const tally = tallies.get(s.id);
+      const { spotlight, top100Rank } = resolveFeedSpotlight({
+        primaryDjSlug: primary?.dj.slug,
+      });
       return {
         id: s.id,
         slug: s.slug,
@@ -107,6 +111,9 @@ export async function getFeed() {
           .map((a) => ({ name: a.dj.name, slug: a.dj.slug })),
         trackCount: tally?.trackCount ?? 0,
         statusCounts: tally?.counts ?? emptyCounts(),
+        /** Transparent feed boost reason — see `feedPriority.ts`. */
+        spotlight,
+        top100Rank,
       };
     })
     .filter((s) =>
@@ -837,6 +844,7 @@ export async function getVenueBySlug(slug: string) {
         cover: s.cover,
         eventName: event.name,
         seriesName: null,
+        ...resolveFeedSpotlight({ primaryDjSlug: prim?.dj.slug }),
       } satisfies FeedItem;
     }),
   };

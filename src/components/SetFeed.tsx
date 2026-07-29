@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { SetCard } from "@/components/SetCard";
+import { compareFeedPriority } from "@/lib/feedPriority";
 import type { FeedItem } from "@/lib/queries";
 
 const TYPES = [
@@ -50,14 +51,31 @@ export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }
     setVisible(PAGE_SIZE);
   }, [type, genre]);
 
-  const shown = filtered.slice(0, visible);
-  const thisWeek = shown.filter((s) => within7Days(s.publishedAt));
-  const earlier = shown.filter((s) => !within7Days(s.publishedAt));
-  const remaining = filtered.length - shown.length;
+  // Chronological pagination (keeps recent non-spotlight sets visible), then
+  // re-order within each age section so spotlight picks float to the top.
+  const { shown, thisWeek, earlier, remaining } = useMemo(() => {
+    const page = filtered.slice(0, visible);
+    return {
+      shown: page,
+      thisWeek: page
+        .filter((s) => within7Days(s.publishedAt))
+        .sort(compareFeedPriority),
+      earlier: page
+        .filter((s) => !within7Days(s.publishedAt))
+        .sort(compareFeedPriority),
+      remaining: filtered.length - page.length,
+    };
+  }, [filtered, visible]);
 
   return (
     <div>
       <div className="mb-6 space-y-4">
+        <p className="text-[12px] text-muted2">
+          Within each section,{" "}
+          <span className="text-muted">bass house picks</span> and{" "}
+          <span className="text-muted">DJ Mag Top 100</span> float first —
+          everyone else stays newest-first.
+        </p>
         <div>
           <p className="mb-1.5 mono text-[10px] uppercase tracking-[0.14em] text-muted2">
             Category

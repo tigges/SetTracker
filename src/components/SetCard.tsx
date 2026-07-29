@@ -10,12 +10,16 @@ import {
   fmtDuration,
   fmtRelative,
 } from "@/lib/status";
+import { FEED_SPOTLIGHT_META } from "@/lib/feedPriority";
 import { setDisplayThumb } from "@/lib/setBrowse";
 import type { FeedItem } from "@/lib/queries";
 
 export function SetCard({ set }: { set: FeedItem }) {
   const type = SET_TYPE_META[set.type] ?? { label: set.type, glyph: "•" };
   const accent = set.primaryDj?.accent ?? "var(--brand)";
+  const spotlight = set.spotlight
+    ? FEED_SPOTLIGHT_META[set.spotlight]
+    : null;
   const djLine =
     (set.primaryDj?.name ?? "Unknown") +
     (set.collaborators.length > 0
@@ -58,6 +62,21 @@ export function SetCard({ set }: { set: FeedItem }) {
               {type.label}
             </span>
             {set.genre && <span className="eyebrow truncate">· {set.genre}</span>}
+            {spotlight && (
+              <span
+                className="eyebrow truncate text-muted2"
+                title={
+                  set.spotlight === "top100" && set.top100Rank != null
+                    ? `${spotlight.title} (#${set.top100Rank})`
+                    : spotlight.title
+                }
+              >
+                · {spotlight.short}
+                {set.spotlight === "top100" && set.top100Rank != null
+                  ? ` #${set.top100Rank}`
+                  : ""}
+              </span>
+            )}
           </div>
           <h3 className="mt-1 truncate text-[15px] font-semibold leading-tight text-ink">
             {djLine}
