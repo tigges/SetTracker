@@ -22,6 +22,9 @@ export const DJ_SLUG_ALIASES: Record<string, string> = {
   "odd-mob-live-set-at-tivoli-brisbane": "odd-mob",
   "james-hype-live": "james-hype",
   "sara-landry-live": "sara-landry",
+  "defected-virtual-festival-4-0": "dom-dolla",
+  "the-sydney-social-podcast-3": "dom-dolla",
+  "best-of-2023-mixtape": "insomniac",
 };
 
 export function canonicalDjSlug(slug: string): string {

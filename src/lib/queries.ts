@@ -249,6 +249,13 @@ export async function getDjBySlug(slug: string) {
     include: { series: { include: { _count: { select: { sets: true } } } } },
   });
   if (!dj) return null;
+  // Festival / stage / radio-series accidents must not render as DJ profiles.
+  if (
+    isJunkArtistName(dj.name) ||
+    /^view-artist-details-for-/.test(dj.slug)
+  ) {
+    return null;
+  }
 
   const setArtists = await prisma.setArtist.findMany({
     where: { djId: dj.id },
@@ -708,15 +715,23 @@ export type LabelProfile = NonNullable<Awaited<ReturnType<typeof getLabelBySlug>
 export async function getAllDjSlugs() {
   // Pages export size cliff (~1–2GB): skip discovery stub DJs with no sets.
   // Always keep social-pinned brand DJs even before their first set lands.
+  // Never export festival / stage / radio-series rows mistaken for artists.
   const { DJ_SOCIAL_PINS } = await import("@/lib/ingest/djSocialPins.data");
-  const pinned = DJ_SOCIAL_PINS.map((p) => p.slug);
+  const pinned = new Set(DJ_SOCIAL_PINS.map((p) => p.slug));
   const rows = await prisma.dj.findMany({
     where: {
-      OR: [{ sets: { some: {} } }, { slug: { in: pinned } }],
+      OR: [{ sets: { some: {} } }, { slug: { in: [...pinned] } }],
     },
-    select: { slug: true },
+    select: { slug: true, name: true },
   });
-  return rows.map((r) => r.slug);
+  return rows
+    .filter(
+      (r) =>
+        pinned.has(r.slug) ||
+        (!isJunkArtistName(r.name) &&
+          !/^view-artist-details-for-/.test(r.slug)),
+    )
+    .map((r) => r.slug);
 }
 
 // ---------------------------------------------------------------------------

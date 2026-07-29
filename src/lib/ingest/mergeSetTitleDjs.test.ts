@@ -36,4 +36,15 @@ describe("resolveCanonicalFromSetTitleDj", () => {
       { slug: "insomniac", name: "INSOMNIAC" },
     );
   });
+
+  it("folds Defected Virtual Festival onto Dom Dolla via set title", () => {
+    assert.deepEqual(
+      resolveCanonicalFromSetTitleDj(
+        "Defected Virtual Festival 4.0",
+        "defected-virtual-festival-4-0",
+        ["Defected Virtual Festival 4.0 - Dom Dolla"],
+      ),
+      { slug: "dom-dolla", name: "Dom Dolla" },
+    );
+  });
 });

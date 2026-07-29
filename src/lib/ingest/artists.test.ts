@@ -134,5 +134,19 @@ assert.equal(
   ),
   "Charlotte de Witte",
 );
+assert.equal(
+  performingCreditFromTitle("Defected Virtual Festival 4.0 - Dom Dolla"),
+  "Dom Dolla",
+);
+assert.equal(
+  performingCreditFromTitle(
+    "Defected TV - MIAMI WMC 2010 presented by Erick Morillo",
+  ),
+  "Erick Morillo",
+);
+assert.equal(
+  performingCreditFromTitle("Sunk Afinity Sessions by Japhet Be"),
+  "Japhet Be",
+);
 
 console.log("artists.test.ts ok");
