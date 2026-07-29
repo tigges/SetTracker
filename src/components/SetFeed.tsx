@@ -53,10 +53,9 @@ export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }
 
   // Chronological pagination (keeps recent non-spotlight sets visible), then
   // re-order within each age section so spotlight picks float to the top.
-  const { shown, thisWeek, earlier, remaining } = useMemo(() => {
+  const { thisWeek, earlier, remaining } = useMemo(() => {
     const page = filtered.slice(0, visible);
     return {
-      shown: page,
       thisWeek: page
         .filter((s) => within7Days(s.publishedAt))
         .sort(compareFeedPriority),

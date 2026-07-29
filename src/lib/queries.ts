@@ -83,6 +83,7 @@ export async function getFeed() {
       const tally = tallies.get(s.id);
       const { spotlight, top100Rank } = resolveFeedSpotlight({
         primaryDjSlug: primary?.dj.slug,
+        genre: s.genre,
       });
       return {
         id: s.id,
@@ -844,7 +845,10 @@ export async function getVenueBySlug(slug: string) {
         cover: s.cover,
         eventName: event.name,
         seriesName: null,
-        ...resolveFeedSpotlight({ primaryDjSlug: prim?.dj.slug }),
+        ...resolveFeedSpotlight({
+          primaryDjSlug: prim?.dj.slug,
+          genre: s.genre,
+        }),
       } satisfies FeedItem;
     }),
   };

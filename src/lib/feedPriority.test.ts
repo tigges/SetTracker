@@ -21,10 +21,14 @@ describe("feedPriority", () => {
   });
 
   it("prefers bass house selection over Top 100 for dual members", () => {
-    // Liu is Bass House on roster and also appears on some charts; AC Slater
-    // is selection-only. Guetta is Top 100 only.
     const bass = resolveFeedSpotlight({ primaryDjSlug: "ac-slater" });
     assert.equal(bass.spotlight, "bass-house");
+
+    const byGenre = resolveFeedSpotlight({
+      primaryDjSlug: "unknown-dj",
+      genre: "Bass House",
+    });
+    assert.equal(byGenre.spotlight, "bass-house");
 
     const chart = resolveFeedSpotlight({ primaryDjSlug: "david-guetta" });
     assert.equal(chart.spotlight, "top100");

@@ -11,6 +11,7 @@
  */
 
 import { loadDjMagTop100RankBySlug } from "./djmagTop100";
+import { normalizeGenre } from "./genre";
 import { ARTIST_ROSTER_CURATED } from "./ingest/roster";
 import { SOUNDCLOUD_SHOWS } from "./ingest/soundcloud/shows";
 import { slugify } from "./ingest/types";
@@ -24,7 +25,8 @@ export const FEED_SPOTLIGHT_META: Record<
   "bass-house": {
     short: "Bass house",
     label: "Bass house pick",
-    title: "Curated bass house artist / show (roster + SoundCloud selection)",
+    title:
+      "Bass house selection — curated roster/SC show artist, or set genre Bass House",
   },
   top100: {
     short: "Top 100",
@@ -74,20 +76,16 @@ function top100Ranks(): Map<string, number> {
  */
 export function resolveFeedSpotlight(opts: {
   primaryDjSlug?: string | null;
-  /** Optional chart rank for secondary Top 100 ordering */
-  top100Rank?: number | null;
+  genre?: string | null;
 }): { spotlight: FeedSpotlight | null; top100Rank: number | null } {
   const slug = opts.primaryDjSlug?.trim() || "";
-  if (!slug) return { spotlight: null, top100Rank: null };
+  const rank = slug ? (top100Ranks().get(slug) ?? null) : null;
+  const bassGenre = normalizeGenre(opts.genre) === "Bass House";
+  const bassArtist = Boolean(slug && bassHouseSelectionSlugs().has(slug));
 
-  if (bassHouseSelectionSlugs().has(slug)) {
-    return {
-      spotlight: "bass-house",
-      top100Rank: top100Ranks().get(slug) ?? null,
-    };
+  if (bassArtist || bassGenre) {
+    return { spotlight: "bass-house", top100Rank: rank };
   }
-
-  const rank = top100Ranks().get(slug);
   if (rank != null) return { spotlight: "top100", top100Rank: rank };
   return { spotlight: null, top100Rank: null };
 }
