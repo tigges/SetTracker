@@ -12,7 +12,7 @@ export type BandcampReleaseSource = {
   url: string;
   primaryArtist?: RawArtist;
   genre?: string;
-  type?: "radio" | "festival" | "soundcloud";
+  type?: "radio" | "festival" | "soundcloud" | "mix";
 };
 
 function dj(name: string, extra: Partial<RawArtist> = {}): RawArtist {

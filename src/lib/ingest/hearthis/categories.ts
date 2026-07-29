@@ -24,4 +24,5 @@ export const HEARTHIS_MIN_DURATION_SEC = 25 * 60;
  * Cap hearthis sets per ingest run (Pages build budget).
  * Prefer uploads that already carry a tracklist signal.
  */
-export const HEARTHIS_MAX_SETS = Number(process.env.HEARTHIS_MAX_SETS ?? 40);
+/** Niche supplement — keep low so SC/YT dominate discovery volume. */
+export const HEARTHIS_MAX_SETS = Number(process.env.HEARTHIS_MAX_SETS ?? 12);

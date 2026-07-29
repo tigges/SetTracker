@@ -39,6 +39,9 @@ export type HtTrack = {
   comment_count?: string | number;
   /** Featured on hearthis — often has a filled playlist cue table. */
   is_featured?: boolean | number | string;
+  /** Optional store / mirror link (sometimes a SC/YT track URL). */
+  buy_link?: string | null;
+  buy_link_title?: string | null;
   user?: HtUser;
 };
 
