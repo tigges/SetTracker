@@ -10,6 +10,7 @@ import {
   fmtDuration,
   fmtRelative,
 } from "@/lib/status";
+import { FEED_SPOTLIGHT_META } from "@/lib/feedPriority";
 import { setDisplayThumb } from "@/lib/setBrowse";
 import type { FeedItem } from "@/lib/queries";
 
@@ -58,6 +59,22 @@ export function SetCard({ set }: { set: FeedItem }) {
               {type.label}
             </span>
             {set.genre && <span className="eyebrow truncate">· {set.genre}</span>}
+            {set.top100Rank != null && (
+              <span
+                className="eyebrow truncate text-muted2"
+                title={FEED_SPOTLIGHT_META.top100.title}
+              >
+                · Top 100 #{set.top100Rank}
+              </span>
+            )}
+            {set.festivalRank != null && (
+              <span
+                className="eyebrow truncate text-muted2"
+                title={FEED_SPOTLIGHT_META["top-festival"].title}
+              >
+                · Festival #{set.festivalRank}
+              </span>
+            )}
           </div>
           <h3 className="mt-1 truncate text-[15px] font-semibold leading-tight text-ink">
             {djLine}

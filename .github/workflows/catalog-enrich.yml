@@ -109,9 +109,12 @@ jobs:
           ACRCLOUD_SAMPLE_SEC: "12"
           # Denser probes during trial (was 90).
           ACRCLOUD_STEP_SEC: "60"
+          # Cap per set so a long open-to-close cannot burn the whole run.
+          ACRCLOUD_MAX_PROBES_PER_SET: "20"
           ACRCLOUD_MIN_SCORE: "70"
           ACRCLOUD_MIN_IDENTIFIED: "4"
           # Prefer SC/hearthis progressive; YT left off (bot walls / ToS).
+          # Homepage YT empties need fingerprint seeds or a SC mirror.
           ACRCLOUD_ALLOW_YOUTUBE: "0"
         run: npm run enrich:fingerprint
 

@@ -10,6 +10,11 @@ import { runCrosslinkDiscovery, type HandleReport } from "./discovery/crosslink"
 import { runDiscovery, type DiscoveryStats } from "./discovery/run";
 import { hashRawSetContent } from "./hash";
 import { fetchTrackDetail, sleep as htSleep } from "./hearthis/client";
+import {
+  preferPlaybackUrl,
+  preferredExternalPlaybackFromText,
+  resolveSoundCloudTrackUrl,
+} from "./hearthis/playback";
 import { adapters as defaultAdapters } from "./sources";
 import { ensureGenre, normalizeGenre } from "../genre";
 import { rosterGenreForArtist } from "./roster";
@@ -19,6 +24,14 @@ import { canonicalDjSlug } from "./djSlugAliases";
 import { eventSocialPayload, resolveEvent } from "./events";
 import { scanEntityUrls } from "./scanEntityUrls";
 import { verifyStoredSocialUrls } from "./verifyUrls";
+
+/** Orphan event slugs that should collapse onto a known festival/club. */
+const EVENT_SLUG_REMAP: Record<string, string> = {
+  "tomorrowland-belgium": "Tomorrowland",
+  "tomorrowland-belgium-2026": "Tomorrowland",
+  "edc-las-vegas": "EDC Las Vegas",
+  "ultra-music-festival": "Ultra Music Festival",
+};
 
 function parseHearthisPath(
   url: string,
@@ -307,7 +320,11 @@ export async function runIngest(
         where: { id: existing.id },
         data: {
           name: existing.name || canon.name,
-          kind: existing.kind || canon.kind,
+          // Prefer canonical festival/club kind over orphan "event".
+          kind:
+            canon.kind && canon.kind !== "event"
+              ? canon.kind
+              : existing.kind || canon.kind,
           location: existing.location ?? canon.location ?? null,
           website: existing.website ?? socials.website ?? null,
           soundcloud: existing.soundcloud ?? socials.soundcloud ?? null,
@@ -581,10 +598,26 @@ export async function runIngest(
           existing.genre,
           rosterGenreForArtist(raw.primaryArtist.name),
         );
-        if ((existing.genre ?? null) !== softGenre) {
+        const softPlayback = preferPlaybackUrl(
+          raw.playbackUrl,
+          existing.playbackUrl,
+        );
+        const softPatch: {
+          genre?: string | null;
+          type?: string;
+          playbackUrl?: string | null;
+        } = {};
+        if ((existing.genre ?? null) !== softGenre) softPatch.genre = softGenre;
+        // Allow type/playback upgrades on hash skip (e.g. hearthis "soundcloud" → "mix",
+        // or hearthis embed → linked SC/YT audio) without rewriting the tracklist.
+        if (raw.type && existing.type !== raw.type) softPatch.type = raw.type;
+        if (softPlayback && softPlayback !== existing.playbackUrl) {
+          softPatch.playbackUrl = softPlayback;
+        }
+        if (Object.keys(softPatch).length) {
           await prisma.set.update({
             where: { id: existing.id },
-            data: { genre: softGenre },
+            data: softPatch,
           });
         }
         stats.skippedSets += 1;
@@ -608,11 +641,13 @@ export async function runIngest(
           cover: raw.cover,
           sourceHash,
           ...(() => {
-            const next =
-              raw.playbackUrl ||
-              (!existing.playbackUrl
-                ? playbackUrlFromSource(raw.sourceName, raw.sourceUrl)
-                : null);
+            const derived = !existing.playbackUrl
+              ? playbackUrlFromSource(raw.sourceName, raw.sourceUrl)
+              : null;
+            const next = preferPlaybackUrl(
+              raw.playbackUrl ?? derived,
+              existing.playbackUrl,
+            );
             return next ? { playbackUrl: next } : {};
           })(),
           ...(raw.imageUrl && !existing.imageUrl
@@ -834,7 +869,77 @@ export async function runIngest(
     );
   }
 
+  // hearthis: fix misleading SoundCloud badges + upgrade linked SC/YT audio.
+  try {
+    const n = await backfillHearthisTypeAndPlayback(prisma);
+    if (n) console.log(`[ingest] hearthis type/playback backfill: ${n}`);
+  } catch (err) {
+    console.warn(
+      "[ingest] hearthis type/playback backfill failed:",
+      err instanceof Error ? err.message : err,
+    );
+  }
+
+  try {
+    const n = await backfillKnownEventAliases(prisma);
+    if (n) console.log(`[ingest] event alias remap: ${n}`);
+  } catch (err) {
+    console.warn(
+      "[ingest] event alias remap failed:",
+      err instanceof Error ? err.message : err,
+    );
+  }
+
   return stats;
+}
+
+/** Collapse orphan event rows (Tomorrowland Belgium → tomorrowland, etc.). */
+export async function backfillKnownEventAliases(
+  prisma: PrismaClient,
+): Promise<number> {
+  let moved = 0;
+  for (const [orphanSlug, canonName] of Object.entries(EVENT_SLUG_REMAP)) {
+    const orphan = await prisma.event.findUnique({
+      where: { slug: orphanSlug },
+      select: { id: true },
+    });
+    if (!orphan) continue;
+    const canon = resolveEvent(canonName);
+    if (canon.slug === orphanSlug) continue;
+    let target = await prisma.event.findUnique({ where: { slug: canon.slug } });
+    if (!target) {
+      const socials = eventSocialPayload(canon);
+      target = await prisma.event.create({
+        data: {
+          slug: canon.slug,
+          name: canon.name,
+          kind: canon.kind,
+          location: canon.location ?? null,
+          website: socials.website ?? null,
+          soundcloud: socials.soundcloud ?? null,
+          instagram: socials.instagram ?? null,
+          twitter: socials.twitter ?? null,
+        },
+      });
+    } else if (target.kind === "event" && canon.kind !== "event") {
+      target = await prisma.event.update({
+        where: { id: target.id },
+        data: { kind: canon.kind, name: canon.name },
+      });
+    }
+    const res = await prisma.set.updateMany({
+      where: { eventId: orphan.id },
+      data: { eventId: target.id },
+    });
+    moved += res.count;
+    const stillLinked = await prisma.set.count({
+      where: { eventId: orphan.id },
+    });
+    if (stillLinked === 0) {
+      await prisma.event.delete({ where: { id: orphan.id } }).catch(() => {});
+    }
+  }
+  return moved;
 }
 
 /** Fill Set.playbackUrl from sourceUrl / hearthis API when missing. */
@@ -871,4 +976,84 @@ export async function backfillPlaybackUrls(
     filled += 1;
   }
   return filled;
+}
+
+/**
+ * Correct hearthis rows that were typed as SoundCloud, and prefer SC/YT
+ * playback when the hearthis description/buy_link points at a real track.
+ */
+export async function backfillHearthisTypeAndPlayback(
+  prisma: PrismaClient,
+  limit = 60,
+): Promise<number> {
+  // Fast path: hearthis-native audio must not wear a SoundCloud badge.
+  const relabeled = await prisma.set.updateMany({
+    where: {
+      sourceName: "hearthis.at",
+      type: "soundcloud",
+      OR: [
+        { playbackUrl: null },
+        { playbackUrl: { contains: "hearthis.at" } },
+      ],
+    },
+    data: { type: "mix" },
+  });
+
+  const rows = await prisma.set.findMany({
+    where: {
+      sourceName: "hearthis.at",
+      OR: [
+        { playbackUrl: null },
+        { playbackUrl: { contains: "hearthis.at" } },
+      ],
+    },
+    select: {
+      id: true,
+      type: true,
+      sourceUrl: true,
+      playbackUrl: true,
+    },
+    orderBy: { publishedAt: "desc" },
+    take: limit,
+  });
+
+  let upgraded = 0;
+  for (const s of rows) {
+    if (!s.sourceUrl) continue;
+    const ht = parseHearthisPath(s.sourceUrl);
+    if (!ht) continue;
+    try {
+      const detail = await fetchTrackDetail(ht.user, ht.track);
+      await htSleep(100);
+      const external = preferredExternalPlaybackFromText(
+        detail.description,
+        detail.buy_link,
+      );
+      let next: string | null = null;
+      if (external?.host === "soundcloud") {
+        next = await resolveSoundCloudTrackUrl(external.playbackUrl);
+      } else if (external?.host === "youtube") {
+        next = external.playbackUrl;
+      }
+      const preferred = preferPlaybackUrl(next, s.playbackUrl);
+      if (!preferred || preferred === s.playbackUrl) continue;
+
+      const patch: { playbackUrl: string; type?: string } = {
+        playbackUrl: preferred,
+      };
+      // Promote Mix → SoundCloud only when audio actually moves to SC.
+      if (
+        /soundcloud\.com\//i.test(preferred) &&
+        (s.type === "mix" || s.type === "soundcloud")
+      ) {
+        patch.type = "soundcloud";
+      }
+      await prisma.set.update({ where: { id: s.id }, data: patch });
+      upgraded += 1;
+    } catch {
+      /* leave row */
+    }
+  }
+
+  return relabeled.count + upgraded;
 }

@@ -254,7 +254,7 @@ async function main() {
   type SetDef = {
     slug: string;
     title: string;
-    type: "radio" | "festival" | "soundcloud";
+    type: "radio" | "festival" | "soundcloud" | "mix";
     primary: string;
     collaborators?: string[];
     event?: string;
