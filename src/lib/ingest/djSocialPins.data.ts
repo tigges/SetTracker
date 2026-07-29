@@ -952,4 +952,15 @@ export const DJ_SOCIAL_PINS: DjSocialPin[] = [
     website: "https://djmag.com/top100djs/2025/42/marshmello",
     bio: "Future Bass. SC marshmellomusic, YT channel UCEdvpU2pFRCVqU6yIPyTpMQ.",
   },
+  // Night Owl / Insomniac series host (mega-mix episodes attribute here).
+  {
+    slug: "insomniac",
+    name: "INSOMNIAC",
+    accent: "#ff2d55",
+    soundcloud: "https://soundcloud.com/insomniacevents",
+    youtube: "https://www.youtube.com/@insomniac",
+    instagram: "https://www.instagram.com/insomniac/",
+    website: "https://www.insomniac.com/",
+    bio: "Insomniac Events / Night Owl Radio. Festival mega-mix episodes attribute to this series host.",
+  },
 ];

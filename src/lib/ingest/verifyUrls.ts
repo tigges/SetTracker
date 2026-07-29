@@ -16,6 +16,7 @@ import { ensureDiscoveredDjs } from "./discovery/ensureDjs";
 import { applyCuratedDjImages } from "../thumbs/djImages";
 import { applyCuratedEventImages } from "../thumbs/eventImages";
 import { mergeSplitAtomicActs } from "./mergeAtomicActs";
+import { mergeSetTitleDjs } from "./mergeSetTitleDjs";
 import { applyDjSocialPins } from "./djSocialPins";
 import { KNOWN_EVENTS } from "./events";
 
@@ -126,6 +127,15 @@ export async function applyKnownUrlFixes(prisma: PrismaClient): Promise<number> 
   if (atomic.setsRelinked || atomic.junkRemoved) {
     console.log(
       `[verify-urls] atomic duos relinked=${atomic.setsRelinked} junkRemoved=${atomic.junkRemoved}`,
+    );
+  }
+
+  // Set-title accidents ("Odd Mob at Seismic…", "Dom Dolla // …", mega-mixes).
+  const setTitle = await mergeSetTitleDjs(prisma);
+  n += setTitle.setsRelinked + setTitle.junkRemoved;
+  if (setTitle.setsRelinked || setTitle.junkRemoved || setTitle.ensured) {
+    console.log(
+      `[verify-urls] set-title DJs scanned=${setTitle.scanned} relinked=${setTitle.setsRelinked} removed=${setTitle.junkRemoved} ensured=${setTitle.ensured}`,
     );
   }
 

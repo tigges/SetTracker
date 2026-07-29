@@ -9,4 +9,15 @@ describe("djSlugAliases", () => {
     assert.equal(canonicalDjSlug("gentlemens-groove"), "gentlemens-groove");
     assert.equal(canonicalDjSlug("chris-lorenzo"), "chris-lorenzo");
   });
+
+  it("folds Dom Dolla / Odd Mob set-title slug accidents", () => {
+    assert.equal(
+      canonicalDjSlug("dom-dolla-dancefloor-currency"),
+      "dom-dolla",
+    );
+    assert.equal(
+      canonicalDjSlug("odd-mob-at-seismic-dance-event-8-0"),
+      "odd-mob",
+    );
+  });
 });

@@ -1,0 +1,39 @@
+import assert from "node:assert/strict";
+import { describe, it } from "node:test";
+import { resolveCanonicalFromSetTitleDj } from "./mergeSetTitleDjs";
+
+describe("resolveCanonicalFromSetTitleDj", () => {
+  it("folds Dom Dolla set-title accidents onto dom-dolla", () => {
+    assert.deepEqual(
+      resolveCanonicalFromSetTitleDj(
+        "Dom Dolla // Dancefloor Currency",
+        "dom-dolla-dancefloor-currency",
+      ),
+      { slug: "dom-dolla", name: "Dom Dolla" },
+    );
+    assert.deepEqual(
+      resolveCanonicalFromSetTitleDj("Dom Dolla Warm Up", "dom-dolla-warm-up"),
+      { slug: "dom-dolla", name: "Dom Dolla" },
+    );
+  });
+
+  it("folds Odd Mob venue titles onto odd-mob", () => {
+    assert.deepEqual(
+      resolveCanonicalFromSetTitleDj(
+        "Odd Mob at Seismic Dance Event 8.0",
+        "odd-mob-at-seismic-dance-event-8-0",
+      ),
+      { slug: "odd-mob", name: "Odd Mob" },
+    );
+  });
+
+  it("sends festival mega-mix Night Owl crumbs to INSOMNIAC", () => {
+    assert.deepEqual(
+      resolveCanonicalFromSetTitleDj(
+        "Day Trip Festival 2024 Mega-Mix",
+        "day-trip-festival-2024-mega-mix",
+      ),
+      { slug: "insomniac", name: "INSOMNIAC" },
+    );
+  });
+});

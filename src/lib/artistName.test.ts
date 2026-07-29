@@ -44,5 +44,14 @@ assert.equal(isJunkArtistName("Afro House"), true);
 assert.equal(isJunkArtistName("Tech House"), true);
 assert.equal(sanitizeArtistName("Afro House"), null);
 assert.equal(isJunkArtistName("House"), true);
+assert.equal(isJunkArtistName("Day Trip Festival 2024 Mega-Mix"), true);
+assert.equal(isJunkArtistName("Dom Dolla // Dancefloor Currency"), true);
+assert.equal(
+  isJunkArtistName("Odd Mob at Seismic Dance Event 8.0"),
+  true,
+);
+assert.equal(isJunkArtistName("Dom Dolla Warm Up"), true);
+assert.equal(isJunkArtistName("Odd Mob"), false);
+assert.equal(isJunkArtistName("Dom Dolla"), false);
 
 console.log("artistName.test.ts ok");
