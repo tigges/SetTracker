@@ -1,11 +1,17 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { PopularRails } from "@/components/PopularRails";
 import { SetCard } from "@/components/SetCard";
 import {
   compareFeedPriority,
   pickRadarPicks,
 } from "@/lib/feedPriority";
+import {
+  popularDjsThisWeek,
+  popularSetsThisWeek,
+  popularVenuesThisWeek,
+} from "@/lib/popularity";
 import type { FeedItem } from "@/lib/queries";
 
 const TYPES = [
@@ -16,9 +22,9 @@ const TYPES = [
   { id: "mix", label: "Mix" },
 ] as const;
 
-/** First two homepage clusters — 3×3 on desktop. */
+/** Homepage clusters — 3×3 on desktop. */
 const CLUSTER = 9;
-/** Deep-catalog page size after the two spotlight clusters. */
+/** Deep-catalog page size after the spotlight clusters. */
 const PAGE_SIZE = 18;
 
 function within7Days(d: Date | string): boolean {
@@ -59,7 +65,9 @@ function matchesGenre(s: FeedItem, genre: string): boolean {
 }
 
 /**
- * Homepage feed: New this week (9) → Radar picks (9, diversified) → deep catalog.
+ * Homepage feed:
+ * New this week → Popular this week → In-demand DJs / Top venues →
+ * Radar picks → Deep catalog.
  */
 export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }) {
   const [type, setType] = useState("all");
@@ -82,12 +90,28 @@ export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }
     );
   }, [feed, type, genre]);
 
-  const { newWeek, radarPicks, deepShown, deepRemaining } = useMemo(() => {
+  const {
+    newWeek,
+    popularWeek,
+    popularDjs,
+    popularVenues,
+    radarPicks,
+    deepShown,
+    deepRemaining,
+  } = useMemo(() => {
     const weekAll = filtered
       .filter((s) => within7Days(s.publishedAt))
       .sort(compareFeedPriority);
     const newWeek = weekAll.slice(0, CLUSTER);
     const used = new Set(newWeek.map((s) => s.id));
+
+    const popularWeek = popularSetsThisWeek(filtered, CLUSTER).filter(
+      (s) => !used.has(s.id),
+    );
+    for (const s of popularWeek) used.add(s.id);
+
+    const popularDjs = popularDjsThisWeek(filtered, CLUSTER);
+    const popularVenues = popularVenuesThisWeek(filtered, CLUSTER);
 
     const rest = filtered.filter((s) => !used.has(s.id));
     const preferred = rest.filter(isRadarCandidate);
@@ -106,6 +130,9 @@ export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }
     const deepShown = deepAll.slice(0, visible);
     return {
       newWeek,
+      popularWeek,
+      popularDjs,
+      popularVenues,
       radarPicks,
       deepShown,
       deepRemaining: deepAll.length - deepShown.length,
@@ -173,6 +200,10 @@ export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }
           {newWeek.length > 0 && (
             <Section title="New this week" sets={newWeek} />
           )}
+          {popularWeek.length > 0 && (
+            <Section title="Popular this week" sets={popularWeek} />
+          )}
+          <PopularRails djs={popularDjs} venues={popularVenues} />
           {radarPicks.length > 0 && (
             <Section title="Radar picks" sets={radarPicks} />
           )}

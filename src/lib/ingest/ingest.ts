@@ -1,5 +1,10 @@
 import type { PrismaClient } from "@prisma/client";
 import { sanitizeArtistName } from "../artistName";
+import {
+  isBrandHostArtist,
+  isBrandHostSlug,
+  isBrandSeriesSlug,
+} from "../brandHosts";
 import { hearthisEmbedUrl, playbackUrlFromSource } from "../playback";
 import { djSocialsFromKnown, labelSocials } from "../social";
 import { ARTIST_ROSTER } from "./roster";
@@ -123,6 +128,10 @@ export async function runIngest(
     // otherwise derive from the sanitized display name. Fold known aliases
     // (gentlemen-s-groove → gentlemens-groove) onto the curated profile.
     const slug = canonicalDjSlug(raw.slug?.trim() || slugify(name));
+    // Brand hosts belong on Series/Event — never create or refresh Dj rows.
+    if (isBrandHostSlug(slug) || isBrandHostArtist({ slug, name })) {
+      return null;
+    }
     if (djCache.has(slug)) return djCache.get(slug)!;
     const roster = ARTIST_ROSTER.find(
       (a) =>
@@ -351,13 +360,31 @@ export async function runIngest(
 
   async function upsertSeries(
     name: string | undefined,
-    djId: string,
+    djId?: string | null,
   ): Promise<string | null> {
     if (!name) return null;
     const slug = slugify(name);
+    // Brand shows (Night Owl, Metronome, …) stay hostless — guests vary per ep.
+    const hostId = isBrandSeriesSlug(slug) ? null : djId ?? null;
     const existing = await prisma.series.findUnique({ where: { slug } });
-    if (existing) return existing.id;
-    const created = await prisma.series.create({ data: { slug, name, djId } });
+    if (existing) {
+      if (isBrandSeriesSlug(slug) && existing.djId) {
+        await prisma.series.update({
+          where: { id: existing.id },
+          data: { djId: null },
+        });
+      } else if (!existing.djId && hostId) {
+        // Soft-fill host when a real DJ later claims an unhosted artist series.
+        await prisma.series.update({
+          where: { id: existing.id },
+          data: { djId: hostId },
+        });
+      }
+      return existing.id;
+    }
+    const created = await prisma.series.create({
+      data: { slug, name, ...(hostId ? { djId: hostId } : {}) },
+    });
     return created.id;
   }
 
@@ -514,13 +541,13 @@ export async function runIngest(
 
   async function syncSetArtists(
     setId: string,
-    primaryDjId: string,
+    primaryDjId: string | null,
     collaboratorIds: string[],
   ): Promise<void> {
     const desired = new Map<string, boolean>();
-    desired.set(primaryDjId, true);
+    if (primaryDjId) desired.set(primaryDjId, true);
     for (const id of collaboratorIds) {
-      if (id === primaryDjId) continue;
+      if (primaryDjId && id === primaryDjId) continue;
       if (!desired.has(id)) desired.set(id, false);
     }
 
@@ -570,20 +597,34 @@ export async function runIngest(
     }
     noteCollaborators(raw);
 
-    const primaryDjId = await upsertDj(raw.primaryArtist);
-    if (!primaryDjId) {
-      stats.skippedSets += 1;
-      return;
-    }
+    // Brand hosts are not Dj primaries — series/event carry the host credit.
+    const primaryDjId = raw.primaryArtist
+      ? await upsertDj(raw.primaryArtist)
+      : null;
     const collaboratorIds: string[] = [];
     for (const c of raw.collaborators ?? []) {
       const id = await upsertDj(c);
       if (id) collaboratorIds.push(id);
     }
 
+    const eventId = await upsertEvent(
+      raw.eventName,
+      raw.eventKind,
+      raw.eventLocation,
+    );
+    const seriesId = await upsertSeries(raw.seriesName, primaryDjId);
+
+    // Need a performing DJ, series, or event — otherwise nothing to attribute.
+    if (!primaryDjId && !seriesId && !eventId) {
+      stats.skippedSets += 1;
+      return;
+    }
+
     const setGenre = ensureGenre(
       raw.genre,
-      rosterGenreForArtist(raw.primaryArtist.name),
+      raw.primaryArtist
+        ? rosterGenreForArtist(raw.primaryArtist.name)
+        : undefined,
       existing?.genre,
     );
 
@@ -591,12 +632,26 @@ export async function runIngest(
       if (existing.sourceHash && existing.sourceHash === sourceHash) {
         // Still refresh artist linkage (b2b backfill) even when tracklist is unchanged.
         await syncSetArtists(existing.id, primaryDjId, collaboratorIds);
+        if (!existing.eventId && eventId) {
+          await prisma.set.update({
+            where: { id: existing.id },
+            data: { eventId },
+          });
+        }
+        if (!existing.seriesId && seriesId) {
+          await prisma.set.update({
+            where: { id: existing.id },
+            data: { seriesId },
+          });
+        }
         // Soft-normalize / fill genre without re-pulling the tracklist.
         // Never wipe a good genre with null; prefer incoming only when parseable.
         const softGenre = ensureGenre(
           normalizeGenre(raw.genre) ?? undefined,
           existing.genre,
-          rosterGenreForArtist(raw.primaryArtist.name),
+          raw.primaryArtist
+            ? rosterGenreForArtist(raw.primaryArtist.name)
+            : undefined,
         );
         const softPlayback = preferPlaybackUrl(
           raw.playbackUrl,
@@ -656,6 +711,15 @@ export async function runIngest(
         },
       });
       await syncSetArtists(existing.id, primaryDjId, collaboratorIds);
+      const refreshMeta: { eventId?: string; seriesId?: string } = {};
+      if (!existing.eventId && eventId) refreshMeta.eventId = eventId;
+      if (!existing.seriesId && seriesId) refreshMeta.seriesId = seriesId;
+      if (Object.keys(refreshMeta).length) {
+        await prisma.set.update({
+          where: { id: existing.id },
+          data: refreshMeta,
+        });
+      }
       await replacePlays(existing.id, plays, setGenre);
       stats.refreshedSets += 1;
       console.log(
@@ -664,9 +728,6 @@ export async function runIngest(
       );
       return;
     }
-
-    const eventId = await upsertEvent(raw.eventName, raw.eventKind, raw.eventLocation);
-    const seriesId = await upsertSeries(raw.seriesName, primaryDjId);
 
     const set = await prisma.set.create({
       data: {

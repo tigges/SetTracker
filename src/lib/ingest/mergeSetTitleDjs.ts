@@ -5,13 +5,20 @@
  *   "Odd Mob at Seismic…" → odd-mob
  *   "Dom Dolla // Dancefloor Currency" → dom-dolla
  *   "Defected Virtual Festival 4.0" (set: … - Dom Dolla) → dom-dolla
- *   "Day Trip Festival 2024 Mega-Mix" (Night Owl) → insomniac
+ *   "Day Trip Festival 2024 Mega-Mix" (Night Owl) → series/event only
  *
  * Never invents social URLs — only relinks SetArtist + deletes empty junk.
+ * Brand hosts (INSOMNIAC, …) are stripped from SetArtist; attribution stays
+ * on Series / Event.
  */
 
 import type { PrismaClient } from "@prisma/client";
 import { isJunkArtistName, sanitizeArtistName } from "../artistName";
+import {
+  BRAND_HOST_SLUGS,
+  BRAND_SERIES_SLUGS,
+  isBrandHostSlug,
+} from "../brandHosts";
 import {
   looksLikeEventOrSeriesCredit,
   performingCreditFromTitle,
@@ -25,6 +32,7 @@ export type MergeSetTitleStats = {
   setsRelinked: number;
   junkRemoved: number;
   ensured: number;
+  brandHostsStripped: number;
 };
 
 /** Explicit slug → canonical when heuristics are ambiguous. */
@@ -50,13 +58,33 @@ const EXPLICIT_ALIAS: Record<string, string> = {
   "mochakk-at-plaza-de-espana-in-sevilla-spain-for-cercle": "mochakk",
   "folamour-at-cathedrale-saint-pierre-in-geneva-switzerland-for-cercle":
     "folamour",
-  "best-of-2023-mixtape": "insomniac",
 };
 
 const MEGA_MIX =
   /\bmega[-\s]?mix\b|\bfestival\s+\d{4}\b.*\bmix\b|\bmix\s*$/i;
 const PODCAST_EP =
   /\bpodcast\b|\bdownload\s+now\b|\bnight\s*owl\s*radio\b/i;
+
+/** Mega-mix / NOR crumbs with no performing artist → unlink, keep series/event. */
+function isSeriesOnlyHostCrumb(
+  name: string,
+  slug: string,
+  setTitles: string[],
+): boolean {
+  if (
+    MEGA_MIX.test(name) ||
+    /mega-mix/.test(slug) ||
+    /night\s*owl/i.test(name) ||
+    setTitles.some((t) => /night\s*owl\s*radio/i.test(t))
+  ) {
+    if (
+      !/\b(dom\s*dolla|odd\s*mob|charlotte|fisher|cloonee|guetta)\b/i.test(name)
+    ) {
+      return true;
+    }
+  }
+  return false;
+}
 
 function looksLikeSetTitleDj(name: string, slug: string): boolean {
   if (EXPLICIT_ALIAS[slug]) return true;
@@ -86,7 +114,7 @@ function resolveFromTitleText(
 
 /**
  * Infer the real artist slug for a bogus DJ name.
- * Night Owl / festival mega-mixes → insomniac (series host).
+ * Night Owl / festival mega-mixes with no guest → null (series/event only).
  * Prefer parsing owned set titles when the Dj.name itself is an event.
  */
 export function resolveCanonicalFromSetTitleDj(
@@ -96,27 +124,19 @@ export function resolveCanonicalFromSetTitleDj(
 ): { slug: string; name: string } | null {
   if (EXPLICIT_ALIAS[slug]) {
     const target = EXPLICIT_ALIAS[slug]!;
+    if (isBrandHostSlug(target)) return null;
     return { slug: target, name: displayNameForSlug(target, name) };
   }
 
   // Prefer artist parsed from the actual set title(s).
   for (const title of setTitles) {
     const fromTitle = resolveFromTitleText(title, slug);
-    if (fromTitle) return fromTitle;
+    if (fromTitle && !isBrandHostSlug(fromTitle.slug)) return fromTitle;
   }
 
-  // Festival mega-mix / Night Owl episode crumbs are series content.
-  if (
-    MEGA_MIX.test(name) ||
-    /mega-mix/.test(slug) ||
-    /night\s*owl/i.test(name) ||
-    setTitles.some((t) => /night\s*owl\s*radio/i.test(t))
-  ) {
-    if (
-      !/\b(dom\s*dolla|odd\s*mob|charlotte|fisher|cloonee|guetta)\b/i.test(name)
-    ) {
-      return { slug: "insomniac", name: "INSOMNIAC" };
-    }
+  // Festival mega-mix / Night Owl crumbs → no Dj primary.
+  if (isSeriesOnlyHostCrumb(name, slug, setTitles)) {
+    return null;
   }
 
   if (
@@ -127,7 +147,7 @@ export function resolveCanonicalFromSetTitleDj(
   }
 
   const fromName = resolveFromTitleText(name, slug);
-  if (fromName) return fromName;
+  if (fromName && !isBrandHostSlug(fromName.slug)) return fromName;
 
   // Last resort: left of // or "at"
   const credit = tidyPerformingCredit(
@@ -142,7 +162,7 @@ export function resolveCanonicalFromSetTitleDj(
   );
   if (!fallback) return null;
   const s = canonicalDjSlug(slugify(fallback));
-  if (s === slug) return null;
+  if (s === slug || isBrandHostSlug(s)) return null;
   return { slug: s, name: fallback };
 }
 
@@ -158,7 +178,6 @@ function displayNameForSlug(slug: string, fallbackName: string): string {
   const known: Record<string, string> = {
     "dom-dolla": "Dom Dolla",
     "odd-mob": "Odd Mob",
-    insomniac: "INSOMNIAC",
     "james-hype": "James Hype",
     "sara-landry": "Sara Landry",
     "tape-b": "Tape B",
@@ -170,6 +189,43 @@ function displayNameForSlug(slug: string, fallbackName: string): string {
     folamour: "Folamour",
   };
   return known[slug] ?? fallbackName;
+}
+
+/** Drop SetArtist links to brand hosts; clear series ownership on those DJs. */
+async function stripBrandHostPrimaries(
+  prisma: PrismaClient,
+): Promise<number> {
+  // Brand shows must not appear on a guest DJ's profile as "their" series.
+  await prisma.series.updateMany({
+    where: { slug: { in: [...BRAND_SERIES_SLUGS] } },
+    data: { djId: null },
+  });
+
+  const hosts = await prisma.dj.findMany({
+    where: { slug: { in: [...BRAND_HOST_SLUGS] } },
+    select: { id: true, slug: true },
+  });
+  let stripped = 0;
+  for (const host of hosts) {
+    const deleted = await prisma.setArtist.deleteMany({
+      where: { djId: host.id },
+    });
+    stripped += deleted.count;
+    await prisma.series.updateMany({
+      where: { djId: host.id },
+      data: { djId: null },
+    });
+    const remainingLinks = await prisma.setArtist.count({
+      where: { djId: host.id },
+    });
+    const remainingSeries = await prisma.series.count({
+      where: { djId: host.id },
+    });
+    if (remainingLinks === 0 && remainingSeries === 0) {
+      await prisma.dj.delete({ where: { id: host.id } }).catch(() => null);
+    }
+  }
+  return stripped;
 }
 
 async function ensureDj(
@@ -262,6 +318,8 @@ export async function mergeSetTitleDjs(
   let junkRemoved = 0;
   let ensured = 0;
 
+  const brandHostsStripped = await stripBrandHostPrimaries(prisma);
+
   const candidates = await prisma.dj.findMany({
     select: {
       id: true,
@@ -272,12 +330,11 @@ export async function mergeSetTitleDjs(
   });
 
   for (const dj of candidates) {
+    if (isBrandHostSlug(dj.slug)) continue;
     if (!looksLikeSetTitleDj(dj.name, dj.slug)) continue;
     // Never merge away a curated/pinned short slug that is already canonical.
     if (
-      ["dom-dolla", "odd-mob", "insomniac", "james-hype", "sara-landry"].includes(
-        dj.slug,
-      )
+      ["dom-dolla", "odd-mob", "james-hype", "sara-landry"].includes(dj.slug)
     ) {
       continue;
     }
@@ -286,7 +343,7 @@ export async function mergeSetTitleDjs(
 
     const owned = await prisma.set.findMany({
       where: { artists: { some: { djId: dj.id } } },
-      select: { title: true },
+      select: { id: true, title: true },
     });
     const setTitles = owned.map((s) => s.title);
 
@@ -296,11 +353,37 @@ export async function mergeSetTitleDjs(
       setTitles,
     );
     if (!target || target.slug === dj.slug) {
+      // Series-only crumbs: drop SetArtist links, keep series/event on the set.
+      if (isSeriesOnlyHostCrumb(dj.name, dj.slug, setTitles)) {
+        const n = await prisma.setArtist.deleteMany({
+          where: { djId: dj.id },
+        });
+        setsRelinked += n.count;
+        await prisma.series.updateMany({
+          where: { djId: dj.id },
+          data: { djId: null },
+        });
+        const remaining = await prisma.setArtist.count({
+          where: { djId: dj.id },
+        });
+        const remainingSeries = await prisma.series.count({
+          where: { djId: dj.id },
+        });
+        if (remaining === 0 && remainingSeries === 0) {
+          await prisma.dj.delete({ where: { id: dj.id } }).catch(() => null);
+          junkRemoved += 1;
+        }
+        continue;
+      }
       // Empty junk with no resolvable artist — delete if no sets.
       if (dj._count.sets === 0) {
         await prisma.dj.delete({ where: { id: dj.id } }).catch(() => null);
         junkRemoved += 1;
       }
+      continue;
+    }
+
+    if (isBrandHostSlug(target.slug)) {
       continue;
     }
 
@@ -320,7 +403,7 @@ export async function mergeSetTitleDjs(
       setsRelinked += 1;
     }
 
-    // Series FK can block delete — reassign first.
+    // Series FK can block delete — reassign first (or clear for brand series).
     await prisma.series.updateMany({
       where: { djId: dj.id },
       data: { djId: canonicalId },
@@ -336,5 +419,5 @@ export async function mergeSetTitleDjs(
     }
   }
 
-  return { scanned, setsRelinked, junkRemoved, ensured };
+  return { scanned, setsRelinked, junkRemoved, ensured, brandHostsStripped };
 }

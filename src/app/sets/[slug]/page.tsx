@@ -6,6 +6,7 @@ import { SetExport } from "@/components/SetExport";
 import { SetPlayer } from "@/components/SetPlayer";
 import { SetTimeline } from "@/components/SetTimeline";
 import { StatusLegend } from "@/components/StatusBits";
+import { setHostHeadline } from "@/lib/brandHosts";
 import { detectPlaybackHost } from "@/lib/playback";
 import { assessSetDensity } from "@/lib/setDensity";
 import { SET_TYPE_META, fmtDate, fmtDuration } from "@/lib/status";
@@ -28,6 +29,13 @@ export default async function SetPage({
 
   const type = SET_TYPE_META[set.type] ?? { label: set.type, glyph: "•" };
   const accent = set.primaryDj?.accent ?? "var(--brand)";
+  const hostLine = setHostHeadline({
+    title: set.title,
+    primaryDj: set.primaryDj,
+    collaborators: set.artists.filter((a) => !a.isPrimary),
+    seriesName: set.series?.name,
+    eventName: set.event?.name,
+  });
   const density = assessSetDensity({
     durationSec: set.durationSec,
     playCount: set.plays.length,
@@ -47,7 +55,7 @@ export default async function SetPage({
         <div className="relative flex-none">
           <EntityThumb
             src={set.imageUrl}
-            label={set.primaryDj?.name ?? set.title}
+            label={hostLine}
             accent={accent}
             size={80}
             radius={16}
@@ -90,18 +98,22 @@ export default async function SetPage({
           </h1>
 
           <div className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-[14px]">
-            {set.artists.map((a, i) => (
-              <span key={a.slug} className="flex items-center gap-2">
-                {i > 0 && <span className="text-muted2">b2b</span>}
-                <Link
-                  href={`/djs/${a.slug}`}
-                  className="font-semibold transition-colors hover:underline"
-                  style={{ color: a.accent }}
-                >
-                  {a.name}
-                </Link>
-              </span>
-            ))}
+            {set.artists.length > 0 ? (
+              set.artists.map((a, i) => (
+                <span key={a.slug} className="flex items-center gap-2">
+                  {i > 0 && <span className="text-muted2">b2b</span>}
+                  <Link
+                    href={`/djs/${a.slug}`}
+                    className="font-semibold transition-colors hover:underline"
+                    style={{ color: a.accent }}
+                  >
+                    {a.name}
+                  </Link>
+                </span>
+              ))
+            ) : (
+              <span className="font-semibold text-muted">{hostLine}</span>
+            )}
           </div>
 
           <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-[12px] text-muted2">

@@ -53,7 +53,11 @@ export type RawSet = {
   /** Platform / format hint for filters — not the discovery host. */
   type: "radio" | "festival" | "soundcloud" | "mix";
   genre?: string;
-  primaryArtist: RawArtist;
+  /**
+   * Performing DJ when known. Optional for brand-hosted series/festival
+   * mega-mixes (Night Owl, Insomniac Mixes) that attribute via series/event.
+   */
+  primaryArtist?: RawArtist | null;
   collaborators?: RawArtist[];
   eventName?: string;
   eventKind?: string;
