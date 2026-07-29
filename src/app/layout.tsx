@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { BrandMark } from "@/components/BrandMark";
 import { GlobalSearch } from "@/components/GlobalSearch";
 import { SiteNav } from "@/components/SiteNav";
 import { StatusLegend } from "@/components/StatusBits";
@@ -29,19 +29,8 @@ export default async function RootLayout({
     >
       <body className="min-h-full">
         <header className="sticky top-0 z-30 border-b border-line bg-bg/80 backdrop-blur-md">
-          <div className="mx-auto flex h-14 max-w-6xl items-center gap-3 px-5 sm:gap-6">
-            <Link href="/" className="flex flex-none items-center gap-2">
-              <span
-                className="grid h-6 w-6 place-items-center rounded-[6px] text-[13px] font-black text-bg"
-                style={{ background: "var(--brand-strong)" }}
-              >
-                R
-              </span>
-              <span className="text-[15px] font-extrabold tracking-tight">
-                SET<span className="text-brand">RADAR</span>
-                <span className="text-muted2">.ai</span>
-              </span>
-            </Link>
+          <div className="mx-auto flex h-16 max-w-6xl items-center gap-3 px-5 sm:gap-6">
+            <BrandMark />
             <SiteNav />
             <div className="ml-auto flex flex-none items-center gap-2 sm:gap-3">
               <GlobalSearch items={searchIndex} />

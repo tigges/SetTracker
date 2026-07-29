@@ -23,10 +23,10 @@
   --muted: #99a0ac;
   --muted-2: #616873;
 
-  /* signature Beatport-inspired green (brand + interactive) */
-  --brand: #00f0a0;
-  --brand-strong: #01ff95;
-  --brand-dim: #07c07a;
+  /* Brand mint — sits with amber/teal/magenta status chrome (less neon) */
+  --brand: #3dcea0;
+  --brand-strong: #5ee0b4;
+  --brand-dim: #2a9f78;
 
   /* status palette (tuned to sit together, distinct from brand green) */
   --amber: #ffb020;
@@ -64,7 +64,11 @@ html {
 
 body {
   background:
-    radial-gradient(1100px 520px at 90% -15%, rgba(0, 240, 160, 0.05), transparent 62%),
+    radial-gradient(
+      1100px 520px at 90% -15%,
+      color-mix(in srgb, var(--brand) 7%, transparent),
+      transparent 62%
+    ),
     var(--bg);
   color: var(--ink);
   font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
