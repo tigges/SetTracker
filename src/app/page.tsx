@@ -7,10 +7,9 @@ export default async function Home() {
 
   return (
     <div>
-      <div className="mb-8">
-        <p className="eyebrow">setradar.ai · house set database</p>
-        <h1 className="mt-1 text-3xl font-extrabold tracking-tight">Sets</h1>
-        <div className="mt-4 lg:hidden">
+      <div className="mb-6">
+        <h1 className="text-3xl font-extrabold tracking-tight">House Sets</h1>
+        <div className="mt-3 lg:hidden">
           <StatusLegend />
         </div>
       </div>

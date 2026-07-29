@@ -2,12 +2,11 @@
 
 import { useMemo, useState } from "react";
 import { SetCard } from "@/components/SetCard";
-import { StatusBar } from "@/components/StatusBits";
 import {
   compareFeedPriority,
   pickRadarPicks,
 } from "@/lib/feedPriority";
-import type { FeedItem, StatusCounts } from "@/lib/queries";
+import type { FeedItem } from "@/lib/queries";
 
 const TYPES = [
   { id: "all", label: "All" },
@@ -57,37 +56,6 @@ function matchesGenre(s: FeedItem, genre: string): boolean {
   if (genre === "all") return true;
   if (s.genres?.some((g) => g === genre)) return true;
   return s.genre === genre;
-}
-
-function emptyCounts(): StatusCounts {
-  return {
-    identified: 0,
-    unresolved_id: 0,
-    community_resolved: 0,
-    unparsed: 0,
-  };
-}
-
-function sumStatus(sets: FeedItem[]): StatusCounts {
-  const out = emptyCounts();
-  for (const s of sets) {
-    const c = s.statusCounts;
-    out.identified += c.identified ?? 0;
-    out.unresolved_id += c.unresolved_id ?? 0;
-    out.community_resolved += c.community_resolved ?? 0;
-    out.unparsed += c.unparsed ?? 0;
-  }
-  return out;
-}
-
-function identifiedPct(counts: StatusCounts): number | null {
-  const total =
-    (counts.identified ?? 0) +
-    (counts.unresolved_id ?? 0) +
-    (counts.community_resolved ?? 0) +
-    (counts.unparsed ?? 0);
-  if (total === 0) return null;
-  return Math.round(((counts.identified ?? 0) / total) * 100);
 }
 
 /**
@@ -230,31 +198,15 @@ export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }
 }
 
 function Section({ title, sets }: { title: string; sets: FeedItem[] }) {
-  const counts = useMemo(() => sumStatus(sets), [sets]);
-  const pct = identifiedPct(counts);
-
   return (
     <section className="mb-10">
-      <div className="mb-3 flex flex-wrap items-end justify-between gap-3">
-        <div className="flex items-baseline gap-3">
-          <h2 className="text-[13px] font-semibold uppercase tracking-[0.14em] text-muted">
-            {title}
-          </h2>
-          <span className="mono text-[12px] text-muted2">{sets.length}</span>
-        </div>
-        <div className="w-full max-w-[220px] sm:w-56">
-          <div className="mb-1 flex items-center justify-between gap-2">
-            <span className="mono text-[10px] uppercase tracking-[0.12em] text-muted2">
-              ID health
-            </span>
-            {pct != null && (
-              <span className="mono text-[11px] text-muted">{pct}% id</span>
-            )}
-          </div>
-          <StatusBar counts={counts} height={5} />
-        </div>
+      <div className="mb-4 flex items-baseline gap-3">
+        <h2 className="text-[13px] font-semibold uppercase tracking-[0.14em] text-muted">
+          {title}
+        </h2>
+        <span className="mono text-[12px] text-muted2">{sets.length}</span>
+        <div className="h-px flex-1 bg-line" />
       </div>
-      <div className="mb-4 h-px bg-line" />
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {sets.map((s) => (
           <SetCard key={s.id} set={s} />
