@@ -37,7 +37,11 @@ function loadRosterGraduates(): ArtistRosterEntry[] {
   try {
     const path =
       process.env.ROSTER_GRADUATES_PATH ||
-      join(process.cwd(), "data", "roster-graduates.json");
+      join(
+        /* turbopackIgnore: true */ process.cwd(),
+        "data",
+        "roster-graduates.json",
+      );
     const parsed = JSON.parse(readFileSync(path, "utf8")) as {
       artists?: ArtistRosterEntry[];
     };

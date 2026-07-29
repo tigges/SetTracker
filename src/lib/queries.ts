@@ -11,7 +11,7 @@ import {
   relatedSlugsFor,
   venueArtistSlugs,
 } from "@/lib/ingest/discovery/relations";
-import { resolveFeedRanks } from "@/lib/feedPriority";
+import { resolveFeedRanks } from "@/lib/feedPriorityResolve";
 import { isBrowseReadySet } from "@/lib/setBrowse";
 import { isBrowseReadyVenue, isVenueListed } from "@/lib/venueBrowse";
 import type { IdStatus } from "@/lib/status";
@@ -708,7 +708,7 @@ export type LabelProfile = NonNullable<Awaited<ReturnType<typeof getLabelBySlug>
 export async function getAllDjSlugs() {
   // Pages export size cliff (~1–2GB): skip discovery stub DJs with no sets.
   // Always keep social-pinned brand DJs even before their first set lands.
-  const { DJ_SOCIAL_PINS } = await import("@/lib/ingest/djSocialPins");
+  const { DJ_SOCIAL_PINS } = await import("@/lib/ingest/djSocialPins.data");
   const pinned = DJ_SOCIAL_PINS.map((p) => p.slug);
   const rows = await prisma.dj.findMany({
     where: {
