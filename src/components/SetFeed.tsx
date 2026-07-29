@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { SetCard } from "@/components/SetCard";
+import { compareFeedPriority } from "@/lib/feedPriority";
 import type { FeedItem } from "@/lib/queries";
 
 const TYPES = [
@@ -51,14 +52,36 @@ export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }
     setVisible(PAGE_SIZE);
   }, [type, genre]);
 
-  const shown = filtered.slice(0, visible);
-  const thisWeek = shown.filter((s) => within7Days(s.publishedAt));
-  const earlier = shown.filter((s) => !within7Days(s.publishedAt));
-  const remaining = filtered.length - shown.length;
+  // Rank full age buckets first (complete tracklists / Top 100 / top festivals),
+  // then paginate so empty recent cards cannot fill the first page.
+  const { thisWeek, earlier, remaining } = useMemo(() => {
+    const weekAll = filtered
+      .filter((s) => within7Days(s.publishedAt))
+      .sort(compareFeedPriority);
+    const earlierAll = filtered
+      .filter((s) => !within7Days(s.publishedAt))
+      .sort(compareFeedPriority);
+    const weekShown = weekAll.slice(0, visible);
+    const earlierBudget = Math.max(0, visible - weekAll.length);
+    const earlierShown = earlierAll.slice(0, earlierBudget);
+    return {
+      thisWeek: weekShown,
+      earlier: earlierShown,
+      remaining:
+        weekAll.length + earlierAll.length - weekShown.length - earlierShown.length,
+    };
+  }, [filtered, visible]);
 
   return (
     <div>
       <div className="mb-6 space-y-4">
+        <p className="text-[12px] text-muted2">
+          Sorted by{" "}
+          <span className="text-muted">complete tracklists</span>, then{" "}
+          <span className="text-muted">DJ Mag Top 100</span>, then{" "}
+          <span className="text-muted">top festivals</span>
+          {" "}(festival → club → radio).
+        </p>
         <div>
           <p className="mb-1.5 mono text-[10px] uppercase tracking-[0.14em] text-muted2">
             Category

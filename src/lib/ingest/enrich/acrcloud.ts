@@ -36,13 +36,13 @@
 
 import { createHmac } from "node:crypto";
 import { execFile } from "node:child_process";
-import { existsSync, readFileSync } from "node:fs";
 import { mkdtemp, readFile, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { promisify } from "node:util";
 import type { PrismaClient } from "@prisma/client";
 import { sanitizeArtistName } from "../../artistName";
+import { loadDjMagTop100RankBySlug } from "../../djmagTop100";
 import { normalizeGenre } from "../../genre";
 import { detectPlaybackHost, type PlaybackHost } from "../../playback";
 import {
@@ -59,6 +59,8 @@ import {
 import { ARTIST_ROSTER } from "../roster";
 import { getSoundCloudClientId, scGet, type ScTrack } from "../soundcloud/client";
 import { slugify } from "../types";
+
+export { loadDjMagTop100RankBySlug } from "../../djmagTop100";
 
 const WEEK_MS = 7 * 24 * 60 * 60 * 1000;
 const DENSITY_SEVERITY_RANK: Record<DensitySeverity, number> = {
@@ -127,29 +129,6 @@ export type SparseSetCandidate = {
   densitySeverity: DensitySeverity;
   publishedAtMs: number;
 };
-
-/** DJ Mag Top 100 slug → rank (demand proxy until we have real viewership). */
-export function loadDjMagTop100RankBySlug(): Map<string, number> {
-  const path = join(
-    process.cwd(),
-    "data",
-    "artist-seeds",
-    "djmag-top100-djs-2025.json",
-  );
-  const out = new Map<string, number>();
-  if (!existsSync(path)) return out;
-  try {
-    const raw = JSON.parse(readFileSync(path, "utf8")) as {
-      djs?: Array<{ slug?: string; rank?: number }>;
-    };
-    for (const d of raw.djs ?? []) {
-      if (d.slug && typeof d.rank === "number") out.set(d.slug, d.rank);
-    }
-  } catch {
-    /* ignore */
-  }
-  return out;
-}
 
 function rosterHighPrioritySlugs(): Set<string> {
   const out = new Set<string>();
