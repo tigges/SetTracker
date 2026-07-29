@@ -3,7 +3,10 @@
 import { useMemo, useState } from "react";
 import { SetCard } from "@/components/SetCard";
 import { StatusBar } from "@/components/StatusBits";
-import { compareFeedPriority } from "@/lib/feedPriority";
+import {
+  compareFeedPriority,
+  pickRadarPicks,
+} from "@/lib/feedPriority";
 import type { FeedItem, StatusCounts } from "@/lib/queries";
 
 const TYPES = [
@@ -23,13 +26,24 @@ function within7Days(d: Date | string): boolean {
   return Date.now() - new Date(d).getTime() < 7 * 24 * 60 * 60 * 1000;
 }
 
-/** Chart / complete sets for the Radar picks cluster. */
+/** Chart / complete / festival-linked sets for the Radar pool. */
 function isRadarCandidate(s: FeedItem): boolean {
   return (
     s.densitySeverity === "ok" ||
     s.top100Rank != null ||
     s.festivalRank != null
   );
+}
+
+function identifiedRatio(s: FeedItem): number {
+  const c = s.statusCounts;
+  const total =
+    (c.identified ?? 0) +
+    (c.unresolved_id ?? 0) +
+    (c.community_resolved ?? 0) +
+    (c.unparsed ?? 0);
+  if (total === 0) return 0;
+  return (c.identified ?? 0) / total;
 }
 
 const chip = (active: boolean) =>
@@ -77,8 +91,7 @@ function identifiedPct(counts: StatusCounts): number | null {
 }
 
 /**
- * Homepage feed: New this week (9) → Radar picks (9) → deep catalog + load more.
- * Filters apply across all clusters. Ranking unchanged (complete → Top 100 → festivals).
+ * Homepage feed: New this week (9) → Radar picks (9, diversified) → deep catalog.
  */
 export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }) {
   const [type, setType] = useState("all");
@@ -108,13 +121,15 @@ export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }
     const newWeek = weekAll.slice(0, CLUSTER);
     const used = new Set(newWeek.map((s) => s.id));
 
-    const rest = filtered
-      .filter((s) => !used.has(s.id))
-      .sort(compareFeedPriority);
-
+    const rest = filtered.filter((s) => !used.has(s.id));
     const preferred = rest.filter(isRadarCandidate);
     const filler = rest.filter((s) => !isRadarCandidate(s));
-    const radarPicks = [...preferred, ...filler].slice(0, CLUSTER);
+    const pool = [...preferred, ...filler].map((s) => ({
+      ...s,
+      primaryDjSlug: s.primaryDj?.slug ?? null,
+      identifiedRatio: identifiedRatio(s),
+    }));
+    const radarPicks = pickRadarPicks(pool, CLUSTER);
     for (const s of radarPicks) used.add(s.id);
 
     const deepAll = filtered
@@ -132,12 +147,6 @@ export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }
   return (
     <div>
       <div className="mb-6 space-y-4">
-        <p className="text-[12px] text-muted2">
-          Clusters:{" "}
-          <span className="text-muted">new this week</span>, then{" "}
-          <span className="text-muted">radar picks</span> (complete / Top 100 /
-          top festivals), then the deep catalog.
-        </p>
         <div>
           <p className="mb-1.5 mono text-[10px] uppercase tracking-[0.14em] text-muted2">
             Category
@@ -194,25 +203,13 @@ export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }
       ) : (
         <>
           {newWeek.length > 0 && (
-            <Section
-              title="New this week"
-              blurb="Fresh uploads — ranked by tracklist completeness"
-              sets={newWeek}
-            />
+            <Section title="New this week" sets={newWeek} />
           )}
           {radarPicks.length > 0 && (
-            <Section
-              title="Radar picks"
-              blurb="Complete tracklists, DJ Mag Top 100, and top festivals"
-              sets={radarPicks}
-            />
+            <Section title="Radar picks" sets={radarPicks} />
           )}
           {deepShown.length > 0 && (
-            <Section
-              title="Deep catalog"
-              blurb="Earlier sets — same ranking, load more below"
-              sets={deepShown}
-            />
+            <Section title="Deep catalog" sets={deepShown} />
           )}
           {deepRemaining > 0 && (
             <div className="flex justify-center pb-4">
@@ -232,29 +229,18 @@ export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }
   );
 }
 
-function Section({
-  title,
-  blurb,
-  sets,
-}: {
-  title: string;
-  blurb: string;
-  sets: FeedItem[];
-}) {
+function Section({ title, sets }: { title: string; sets: FeedItem[] }) {
   const counts = useMemo(() => sumStatus(sets), [sets]);
   const pct = identifiedPct(counts);
 
   return (
     <section className="mb-10">
       <div className="mb-3 flex flex-wrap items-end justify-between gap-3">
-        <div className="min-w-0">
-          <div className="flex items-baseline gap-3">
-            <h2 className="text-[13px] font-semibold uppercase tracking-[0.14em] text-muted">
-              {title}
-            </h2>
-            <span className="mono text-[12px] text-muted2">{sets.length}</span>
-          </div>
-          <p className="mt-1 text-[12px] text-muted2">{blurb}</p>
+        <div className="flex items-baseline gap-3">
+          <h2 className="text-[13px] font-semibold uppercase tracking-[0.14em] text-muted">
+            {title}
+          </h2>
+          <span className="mono text-[12px] text-muted2">{sets.length}</span>
         </div>
         <div className="w-full max-w-[220px] sm:w-56">
           <div className="mb-1 flex items-center justify-between gap-2">
