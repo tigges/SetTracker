@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import {
   acrSignature,
   compareSparseSetCandidates,
+  homepageEnrichBoost,
   loadDjMagTop100RankBySlug,
   mapAcrMusicHit,
   planGapProbes,
@@ -107,6 +108,9 @@ function cand(
     playCount: 0,
     unresolvedCount: 0,
     popularityRank: 999,
+    homepageBoost: 0,
+    densitySeverity: "ok",
+    publishedAtMs: 0,
     ...partial,
   };
 }
@@ -120,6 +124,49 @@ const ranked = [
 assert.deepEqual(
   ranked.map((c) => c.id),
   ["chart", "host-sc", "long-tail", "host-yt"],
+);
+
+// Homepage-visible empty Top 100 beats archive ID-comment spam.
+const homepageFirst = [
+  cand({
+    id: "old-spam",
+    unresolvedCount: 40,
+    popularityRank: 5,
+    homepageBoost: 0,
+    densitySeverity: "thin",
+    publishedAtMs: Date.now() - 40 * 864e5,
+  }),
+  cand({
+    id: "home-empty",
+    unresolvedCount: 0,
+    popularityRank: 50,
+    homepageBoost: 3,
+    densitySeverity: "severe",
+    playCount: 0,
+    publishedAtMs: Date.now() - 864e5,
+  }),
+].sort(compareSparseSetCandidates);
+assert.equal(homepageFirst[0]!.id, "home-empty");
+
+assert.equal(
+  homepageEnrichBoost({
+    publishedAt: new Date(),
+    primaryDjSlug: "korolova",
+    genre: "Melodic Techno",
+    densitySeverity: "severe",
+    top100,
+  }),
+  3,
+);
+assert.equal(
+  homepageEnrichBoost({
+    publishedAt: new Date(Date.now() - 40 * 864e5),
+    primaryDjSlug: "unknown-local",
+    genre: "House",
+    densitySeverity: "ok",
+    top100,
+  }),
+  0,
 );
 
 console.log("acrcloud.test.ts ok");
