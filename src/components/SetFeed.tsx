@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { SetCard } from "@/components/SetCard";
+import { StatusBar } from "@/components/StatusBits";
 import { compareFeedPriority } from "@/lib/feedPriority";
-import type { FeedItem } from "@/lib/queries";
+import type { FeedItem, StatusCounts } from "@/lib/queries";
 
 const TYPES = [
   { id: "all", label: "All" },
@@ -13,11 +14,22 @@ const TYPES = [
   { id: "mix", label: "Mix" },
 ] as const;
 
-/** 18 = 6 rows × 3 columns on desktop — enough context without drowning the page. */
+/** First two homepage clusters — 3×3 on desktop. */
+const CLUSTER = 9;
+/** Deep-catalog page size after the two spotlight clusters. */
 const PAGE_SIZE = 18;
 
 function within7Days(d: Date | string): boolean {
   return Date.now() - new Date(d).getTime() < 7 * 24 * 60 * 60 * 1000;
+}
+
+/** Chart / complete sets for the Radar picks cluster. */
+function isRadarCandidate(s: FeedItem): boolean {
+  return (
+    s.densitySeverity === "ok" ||
+    s.top100Rank != null ||
+    s.festivalRank != null
+  );
 }
 
 const chip = (active: boolean) =>
@@ -33,14 +45,55 @@ function matchesGenre(s: FeedItem, genre: string): boolean {
   return s.genre === genre;
 }
 
+function emptyCounts(): StatusCounts {
+  return {
+    identified: 0,
+    unresolved_id: 0,
+    community_resolved: 0,
+    unparsed: 0,
+  };
+}
+
+function sumStatus(sets: FeedItem[]): StatusCounts {
+  const out = emptyCounts();
+  for (const s of sets) {
+    const c = s.statusCounts;
+    out.identified += c.identified ?? 0;
+    out.unresolved_id += c.unresolved_id ?? 0;
+    out.community_resolved += c.community_resolved ?? 0;
+    out.unparsed += c.unparsed ?? 0;
+  }
+  return out;
+}
+
+function identifiedPct(counts: StatusCounts): number | null {
+  const total =
+    (counts.identified ?? 0) +
+    (counts.unresolved_id ?? 0) +
+    (counts.community_resolved ?? 0) +
+    (counts.unparsed ?? 0);
+  if (total === 0) return null;
+  return Math.round(((counts.identified ?? 0) / total) * 100);
+}
+
 /**
- * Client feed: category + genre filters + "Load more" pagination over the full
- * static catalog (GitHub Pages has no server API).
+ * Homepage feed: New this week (9) → Radar picks (9) → deep catalog + load more.
+ * Filters apply across all clusters. Ranking unchanged (complete → Top 100 → festivals).
  */
 export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }) {
   const [type, setType] = useState("all");
   const [genre, setGenre] = useState("all");
   const [visible, setVisible] = useState(PAGE_SIZE);
+
+  function selectType(next: string) {
+    setType(next);
+    setVisible(PAGE_SIZE);
+  }
+
+  function selectGenre(next: string) {
+    setGenre(next);
+    setVisible(PAGE_SIZE);
+  }
 
   const filtered = useMemo(() => {
     return feed.filter(
@@ -48,27 +101,31 @@ export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }
     );
   }, [feed, type, genre]);
 
-  useEffect(() => {
-    setVisible(PAGE_SIZE);
-  }, [type, genre]);
-
-  // Rank full age buckets first (complete tracklists / Top 100 / top festivals),
-  // then paginate so empty recent cards cannot fill the first page.
-  const { thisWeek, earlier, remaining } = useMemo(() => {
+  const { newWeek, radarPicks, deepShown, deepRemaining } = useMemo(() => {
     const weekAll = filtered
       .filter((s) => within7Days(s.publishedAt))
       .sort(compareFeedPriority);
-    const earlierAll = filtered
-      .filter((s) => !within7Days(s.publishedAt))
+    const newWeek = weekAll.slice(0, CLUSTER);
+    const used = new Set(newWeek.map((s) => s.id));
+
+    const rest = filtered
+      .filter((s) => !used.has(s.id))
       .sort(compareFeedPriority);
-    const weekShown = weekAll.slice(0, visible);
-    const earlierBudget = Math.max(0, visible - weekAll.length);
-    const earlierShown = earlierAll.slice(0, earlierBudget);
+
+    const preferred = rest.filter(isRadarCandidate);
+    const filler = rest.filter((s) => !isRadarCandidate(s));
+    const radarPicks = [...preferred, ...filler].slice(0, CLUSTER);
+    for (const s of radarPicks) used.add(s.id);
+
+    const deepAll = filtered
+      .filter((s) => !used.has(s.id))
+      .sort(compareFeedPriority);
+    const deepShown = deepAll.slice(0, visible);
     return {
-      thisWeek: weekShown,
-      earlier: earlierShown,
-      remaining:
-        weekAll.length + earlierAll.length - weekShown.length - earlierShown.length,
+      newWeek,
+      radarPicks,
+      deepShown,
+      deepRemaining: deepAll.length - deepShown.length,
     };
   }, [filtered, visible]);
 
@@ -76,11 +133,10 @@ export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }
     <div>
       <div className="mb-6 space-y-4">
         <p className="text-[12px] text-muted2">
-          Sorted by{" "}
-          <span className="text-muted">complete tracklists</span>, then{" "}
-          <span className="text-muted">DJ Mag Top 100</span>, then{" "}
-          <span className="text-muted">top festivals</span>
-          {" "}(festival → club → radio).
+          Clusters:{" "}
+          <span className="text-muted">new this week</span>, then{" "}
+          <span className="text-muted">radar picks</span> (complete / Top 100 /
+          top festivals), then the deep catalog.
         </p>
         <div>
           <p className="mb-1.5 mono text-[10px] uppercase tracking-[0.14em] text-muted2">
@@ -91,7 +147,7 @@ export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }
               <button
                 key={t.id}
                 type="button"
-                onClick={() => setType(t.id)}
+                onClick={() => selectType(t.id)}
                 className={chip(type === t.id)}
               >
                 {t.label}
@@ -111,7 +167,7 @@ export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }
             <div className="scroll-thin flex flex-nowrap gap-1.5 overflow-x-auto pb-1">
               <button
                 type="button"
-                onClick={() => setGenre("all")}
+                onClick={() => selectGenre("all")}
                 className={chip(genre === "all")}
               >
                 All
@@ -120,7 +176,7 @@ export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }
                 <button
                   key={g}
                   type="button"
-                  onClick={() => setGenre(g)}
+                  onClick={() => selectGenre(g)}
                   className={`${chip(genre === g)} whitespace-nowrap`}
                 >
                   {g}
@@ -137,28 +193,36 @@ export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }
         </p>
       ) : (
         <>
-          {thisWeek.length > 0 && (
-            <Section title="This week" count={thisWeek.length}>
-              {thisWeek.map((s) => (
-                <SetCard key={s.id} set={s} />
-              ))}
-            </Section>
+          {newWeek.length > 0 && (
+            <Section
+              title="New this week"
+              blurb="Fresh uploads — ranked by tracklist completeness"
+              sets={newWeek}
+            />
           )}
-          {earlier.length > 0 && (
-            <Section title="Earlier" count={earlier.length}>
-              {earlier.map((s) => (
-                <SetCard key={s.id} set={s} />
-              ))}
-            </Section>
+          {radarPicks.length > 0 && (
+            <Section
+              title="Radar picks"
+              blurb="Complete tracklists, DJ Mag Top 100, and top festivals"
+              sets={radarPicks}
+            />
           )}
-          {remaining > 0 && (
+          {deepShown.length > 0 && (
+            <Section
+              title="Deep catalog"
+              blurb="Earlier sets — same ranking, load more below"
+              sets={deepShown}
+            />
+          )}
+          {deepRemaining > 0 && (
             <div className="flex justify-center pb-4">
               <button
                 type="button"
                 onClick={() => setVisible((n) => n + PAGE_SIZE)}
                 className="rounded-full border border-line px-5 py-2 text-[13px] text-muted transition-colors hover:border-brand hover:text-brand"
               >
-                Load more · {Math.min(PAGE_SIZE, remaining)} of {remaining} left
+                Load more · {Math.min(PAGE_SIZE, deepRemaining)} of{" "}
+                {deepRemaining} left
               </button>
             </div>
           )}
@@ -170,24 +234,45 @@ export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }
 
 function Section({
   title,
-  count,
-  children,
+  blurb,
+  sets,
 }: {
   title: string;
-  count: number;
-  children: React.ReactNode;
+  blurb: string;
+  sets: FeedItem[];
 }) {
+  const counts = useMemo(() => sumStatus(sets), [sets]);
+  const pct = identifiedPct(counts);
+
   return (
     <section className="mb-10">
-      <div className="mb-4 flex items-baseline gap-3">
-        <h2 className="text-[13px] font-semibold uppercase tracking-[0.14em] text-muted">
-          {title}
-        </h2>
-        <span className="mono text-[12px] text-muted2">{count}</span>
-        <div className="h-px flex-1 bg-line" />
+      <div className="mb-3 flex flex-wrap items-end justify-between gap-3">
+        <div className="min-w-0">
+          <div className="flex items-baseline gap-3">
+            <h2 className="text-[13px] font-semibold uppercase tracking-[0.14em] text-muted">
+              {title}
+            </h2>
+            <span className="mono text-[12px] text-muted2">{sets.length}</span>
+          </div>
+          <p className="mt-1 text-[12px] text-muted2">{blurb}</p>
+        </div>
+        <div className="w-full max-w-[220px] sm:w-56">
+          <div className="mb-1 flex items-center justify-between gap-2">
+            <span className="mono text-[10px] uppercase tracking-[0.12em] text-muted2">
+              ID health
+            </span>
+            {pct != null && (
+              <span className="mono text-[11px] text-muted">{pct}% id</span>
+            )}
+          </div>
+          <StatusBar counts={counts} height={5} />
+        </div>
       </div>
+      <div className="mb-4 h-px bg-line" />
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {children}
+        {sets.map((s) => (
+          <SetCard key={s.id} set={s} />
+        ))}
       </div>
     </section>
   );
