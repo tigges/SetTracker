@@ -42,6 +42,10 @@ import {
   sleep,
   type HtTrack,
 } from "./client";
+import {
+  preferredExternalPlaybackFromText,
+  resolveSoundCloudTrackUrl,
+} from "./playback";
 import { playlistEntriesToPlays } from "./playlist";
 
 const ACCENTS = [
@@ -84,12 +88,37 @@ function hasTracklistSignal(description: string | null | undefined): boolean {
   return dashLines.length >= 3;
 }
 
-function setTypeFor(title: string): RawSet["type"] {
+function setTypeFor(
+  title: string,
+  playbackHost?: "soundcloud" | "youtube" | "hearthis",
+): RawSet["type"] {
   if (/\b(festival|open air|boiler|creamfields|ultra|edc)\b/i.test(title)) {
     return "festival";
   }
   if (/\b(radio|broadcast|show\s*#?\d+)\b/i.test(title)) return "radio";
-  return "soundcloud";
+  // Only label SoundCloud when audio actually plays there — hearthis-native
+  // uploads used to default to "soundcloud" and polluted the SC filter.
+  if (playbackHost === "soundcloud") return "soundcloud";
+  return "mix";
+}
+
+async function resolvePreferredPlayback(
+  description: string,
+  buyLink: string | null | undefined,
+  hearthisFallback: string | undefined,
+): Promise<{ playbackUrl: string | undefined; host: "soundcloud" | "youtube" | "hearthis" }> {
+  const external = preferredExternalPlaybackFromText(description, buyLink);
+  if (external?.host === "soundcloud") {
+    const resolved = await resolveSoundCloudTrackUrl(external.playbackUrl);
+    if (resolved) return { playbackUrl: resolved, host: "soundcloud" };
+  }
+  if (external?.host === "youtube") {
+    return { playbackUrl: external.playbackUrl, host: "youtube" };
+  }
+  return {
+    playbackUrl: hearthisFallback,
+    host: "hearthis",
+  };
 }
 
 /** Build a RawSet from a hearthis track (+ category genre fallback). */
@@ -182,8 +211,15 @@ export async function trackToRawSet(
     track.permalink_url ||
     `https://hearthis.at/${userPermalink}/${trackPermalink}/`;
   const trackId = detail.id ?? track.id;
-  // Embed the original hearthis audio host (not a guessed SC mirror).
-  const playbackUrl = trackId != null ? hearthisEmbedUrl(trackId) : undefined;
+  // Prefer explicit SC/YT track links from description/buy_link; otherwise
+  // embed hearthis. Never invent a SoundCloud mirror from the artist name.
+  const hearthisPlayback =
+    trackId != null ? hearthisEmbedUrl(trackId) : undefined;
+  const { playbackUrl, host: playbackHost } = await resolvePreferredPlayback(
+    description,
+    detail.buy_link ?? track.buy_link,
+    hearthisPlayback,
+  );
 
   const artistImage = pickHearthisImage(
     detail.user?.avatar_url_retina,
@@ -217,13 +253,14 @@ export async function trackToRawSet(
   const raw: RawSet = {
     sourceSlug,
     title,
-    type: setTypeFor(title),
+    type: setTypeFor(title, playbackHost),
     genre: (detail.genre || track.genre || category.genre || "House").trim(),
     primaryArtist: withDescriptionSocials(primary, description),
     collaborators,
     seriesName,
     publishedAt: publishedAtOf(detail),
     durationSec,
+    // Discovery / tracklist host stays hearthis even when audio is SC/YT.
     sourceName: "hearthis.at",
     sourceUrl,
     playbackUrl,
@@ -342,14 +379,16 @@ export function createHearthisAdapter(
       }
 
       const ranked = [...byId.values()].sort((a, b) => b.score - a.score);
-      // Always keep tracklist-bearing uploads first, then fill to max.
+      // Prefer tracklist-bearing uploads. Category browse without a TL signal
+      // is skipped (niche filler); curated artist accounts may still qualify.
       const withTl = ranked.filter((c) =>
         hasTracklistSignal(c.track.description),
       );
-      const withoutTl = ranked.filter(
-        (c) => !hasTracklistSignal(c.track.description),
+      const curatedNoTl = ranked.filter(
+        (c) =>
+          !hasTracklistSignal(c.track.description) && Boolean(c.preferredPrimary),
       );
-      const selected = [...withTl, ...withoutTl].slice(0, HEARTHIS_MAX_SETS);
+      const selected = [...withTl, ...curatedNoTl].slice(0, HEARTHIS_MAX_SETS);
 
       const out: RawSet[] = [];
       const seen = new Set<string>();

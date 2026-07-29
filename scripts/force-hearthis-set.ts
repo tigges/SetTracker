@@ -13,6 +13,10 @@ import {
 import { parseDescriptionTracklist } from "../src/lib/ingest/soundcloud/parseTracklist";
 import { slugify, type RawSet, type SourceAdapter } from "../src/lib/ingest/types";
 import { hearthisEmbedUrl } from "../src/lib/playback";
+import {
+  preferredExternalPlaybackFromText,
+  resolveSoundCloudTrackUrl,
+} from "../src/lib/ingest/hearthis/playback";
 
 const prisma = new PrismaClient();
 
@@ -34,10 +38,27 @@ async function buildRaw(user: string, track: string): Promise<RawSet> {
   const sourceSlug = `ht-${user}-${slugify(track)}`.slice(0, 120);
   const sourceUrl =
     detail.permalink_url || `https://hearthis.at/${user}/${track}/`;
+  const htPlay =
+    detail.id != null ? hearthisEmbedUrl(detail.id) : undefined;
+  const external = preferredExternalPlaybackFromText(
+    detail.description,
+    detail.buy_link,
+  );
+  let playbackUrl = htPlay;
+  let type: RawSet["type"] = "mix";
+  if (external?.host === "soundcloud") {
+    playbackUrl =
+      (await resolveSoundCloudTrackUrl(external.playbackUrl)) ?? htPlay;
+    if (playbackUrl && /soundcloud\.com\//i.test(playbackUrl)) {
+      type = "soundcloud";
+    }
+  } else if (external?.host === "youtube") {
+    playbackUrl = external.playbackUrl;
+  }
   const raw: RawSet = {
     sourceSlug,
     title,
-    type: "soundcloud",
+    type,
     genre: (detail.genre || "House").trim(),
     primaryArtist: primary,
     collaborators,
@@ -47,8 +68,7 @@ async function buildRaw(user: string, track: string): Promise<RawSet> {
     durationSec,
     sourceName: "hearthis.at",
     sourceUrl,
-    playbackUrl:
-      detail.id != null ? hearthisEmbedUrl(detail.id) : undefined,
+    playbackUrl,
     cover: "#ff7a45",
     plays,
   };

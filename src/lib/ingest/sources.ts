@@ -100,27 +100,28 @@ function withOptionalSynthetic(base: SourceAdapter[]): SourceAdapter[] {
 }
 
 /**
- * Primary pipeline:
+ * Primary pipeline (SC/YT first — hearthis is a niche tracklist supplement):
  * - SoundCloud curated shows + playlists (anonymous client_id)
- * - Insomniac Night Owl Radio + /music/mixes (SC/YT audio + Insomniac tracklists)
- * - hearthis.at house-family categories (public api-v2)
  * - YouTube curated sets + venue channels (description + Music credits)
  * - DJ Mag Live Sets (djmag.com/livesets index → YT playback + tracklists)
- * - Bandcamp curated tracks/albums
+ * - Insomniac Night Owl Radio + /music/mixes (SC/YT audio + Insomniac tracklists)
  * - Boiler Room sessions (boilerroom.tv provenance + SC/YT playback)
+ * - Bandcamp curated tracks/albums
+ * - hearthis.at house categories / curated artists (low volume; prefer TL cues;
+ *   keep hearthis as source, prefer linked SC/YT for playback when present)
  *
  * Filter with INGEST_ADAPTERS=youtube,soundcloud (comma list of adapter ids)
  * for light deploy hooks (e.g. curated YouTube only).
  */
 const ALL_ADAPTERS: SourceAdapter[] = withOptionalSynthetic([
   soundcloudAdapter,
-  insomniacNorAdapter,
-  insomniacMixesAdapter,
-  hearthisAdapter,
   youtubeAdapter,
   djmagLivesetsAdapter,
-  bandcampAdapter,
+  insomniacNorAdapter,
+  insomniacMixesAdapter,
   boilerroomAdapter,
+  bandcampAdapter,
+  hearthisAdapter,
 ]);
 
 function selectedAdapters(): SourceAdapter[] {

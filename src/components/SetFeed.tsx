@@ -9,6 +9,7 @@ const TYPES = [
   { id: "radio", label: "Radio" },
   { id: "festival", label: "Festival" },
   { id: "soundcloud", label: "SoundCloud" },
+  { id: "mix", label: "Mix" },
 ] as const;
 
 /** 18 = 6 rows × 3 columns on desktop — enough context without drowning the page. */

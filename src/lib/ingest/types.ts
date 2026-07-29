@@ -50,7 +50,8 @@ export type RawPlay = {
 export type RawSet = {
   sourceSlug: string; // stable id from the source → becomes set.slug
   title: string;
-  type: "radio" | "festival" | "soundcloud";
+  /** Platform / format hint for filters — not the discovery host. */
+  type: "radio" | "festival" | "soundcloud" | "mix";
   genre?: string;
   primaryArtist: RawArtist;
   collaborators?: RawArtist[];
