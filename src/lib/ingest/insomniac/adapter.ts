@@ -76,22 +76,16 @@ function isNightOwlTrack(track: ScTrack): boolean {
 }
 
 function guestsFromTitle(title: string): {
-  primary: RawArtist;
+  primary: RawArtist | null;
   collaborators: RawArtist[];
 } {
-  const host: RawArtist = {
-    name: "INSOMNIAC",
-    slug: "insomniac",
-    accent: ACCENT,
-  };
   const ft = title.match(/\bft\.?\s+(.+)$/i)?.[1]?.trim();
+  // No guest / festival mega-mix → series + event host only (not a fake Dj).
   if (!ft) {
-    return { primary: host, collaborators: [] };
+    return { primary: null, collaborators: [] };
   }
-  // Festival mega-mix / venue compilation episodes are series content —
-  // never create a Dj from "Day Trip Festival 2024 Mega-Mix".
   if (/\bmega[-\s]?mix\b/i.test(ft) || /\bfestival\b.*\b\d{4}\b/i.test(ft)) {
-    return { primary: host, collaborators: [] };
+    return { primary: null, collaborators: [] };
   }
   const parts = ft
     .split(/\s+and\s+/i)
@@ -210,6 +204,7 @@ async function episodeToRawSet(
 
   const title = (scTrack?.title || titleFromInsomniacHtml(html, slug)).trim();
   const { primary, collaborators } = guestsFromTitle(title);
+  // Guest episodes keep a performing primary; mega-mixes attribute via series/event.
   const playbackUrl =
     scTrack?.permalink_url ||
     (scPermalink
@@ -237,12 +232,14 @@ async function episodeToRawSet(
       : /\b(bass|dubstep|riddim)\b/i.test(title)
         ? "Bass House"
         : "House",
-    primaryArtist: { ...primary, accent: primary.accent || ACCENT },
+    primaryArtist: primary
+      ? { ...primary, accent: primary.accent || ACCENT }
+      : null,
     collaborators,
     seriesName: "Night Owl Radio",
     eventName: festival?.name ?? "Insomniac",
-    eventKind: festival?.kind ?? "festival",
-    eventLocation: festival?.location ?? "Los Angeles, US",
+    eventKind: festival?.kind ?? (festival ? "festival" : "livestream"),
+    eventLocation: festival?.location ?? undefined,
     publishedAt: Number.isNaN(publishedAt.getTime()) ? new Date() : publishedAt,
     durationSec,
     sourceName: "Insomniac",

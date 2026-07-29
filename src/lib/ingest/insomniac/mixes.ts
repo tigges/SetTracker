@@ -49,7 +49,20 @@ function titleCaseWords(s: string): string {
     .join(" ");
 }
 
-export function artistFromMixPage(title: string, slug: string): RawArtist {
+/** Performing artist when parseable; null → series/event host only. */
+export function artistFromMixPage(
+  title: string,
+  slug: string,
+): RawArtist | null {
+  // Compilations / brand mixtapes — no performing primary.
+  if (
+    /\bbest\s+of\b/i.test(title) ||
+    /\bmixtape\b/i.test(title) ||
+    /\bmega[-\s]?mix\b/i.test(title) ||
+    /^best-of-/i.test(slug)
+  ) {
+    return null;
+  }
   const metro = title.match(/Metronome\s*#?\s*\d+\s*[:\-–—]\s*(.+)$/i);
   if (metro?.[1]) {
     const name = metro[1].trim();
@@ -58,7 +71,13 @@ export function artistFromMixPage(title: string, slug: string): RawArtist {
   const verbSplit = title.split(
     /\s+(Showcases|Brings|Rinses|Sends|Lets|Combines|Closes|Rumbl)/i,
   );
-  if (verbSplit[0] && verbSplit[0].length >= 2 && verbSplit[0].length <= 48) {
+  // Only trust verb-split when a verb actually matched (length > 1).
+  if (
+    verbSplit.length > 1 &&
+    verbSplit[0] &&
+    verbSplit[0].length >= 2 &&
+    verbSplit[0].length <= 48
+  ) {
     const name = verbSplit[0].trim();
     return { name, slug: slugify(name), accent: ACCENT };
   }
@@ -67,7 +86,7 @@ export function artistFromMixPage(title: string, slug: string): RawArtist {
     const name = titleCaseWords(m[1].replace(/-/g, " "));
     return { name, slug: slugify(name), accent: ACCENT };
   }
-  return { name: "INSOMNIAC", slug: "insomniac", accent: ACCENT };
+  return null;
 }
 
 function durationSecOf(track: ScTrack | null, rows: number): number {

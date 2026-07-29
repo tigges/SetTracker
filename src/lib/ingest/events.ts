@@ -124,6 +124,8 @@ export const KNOWN_EVENTS: Record<string, CanonicalEvent> = {
     name: "Insomniac",
     kind: "livestream",
     website: "https://www.insomniac.com/",
+    soundcloud: "https://soundcloud.com/insomniacevents",
+    instagram: "https://www.instagram.com/insomniac/",
   },
   "nocturnal-wonderland": {
     slug: "nocturnal-wonderland",

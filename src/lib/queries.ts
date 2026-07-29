@@ -1,4 +1,5 @@
 import { isJunkArtistName } from "@/lib/artistName";
+import { isBrandHostSlug } from "@/lib/brandHosts";
 import { isBrowseReadyDj } from "@/lib/djBrowse";
 import { prisma } from "@/lib/db";
 import {
@@ -105,6 +106,7 @@ export async function getFeed() {
         eventName: s.event?.name ?? null,
         eventSlug: s.event?.slug ?? null,
         eventKind: s.event?.kind ?? null,
+        eventImageUrl: s.event?.imageUrl ?? null,
         seriesName: s.series?.name ?? null,
         primaryDj: primary
           ? {
@@ -115,7 +117,7 @@ export async function getFeed() {
             }
           : null,
         collaborators: s.artists
-          .filter((a) => !a.isPrimary)
+          .filter((a) => !a.isPrimary && !isBrandHostSlug(a.dj.slug))
           .map((a) => ({ name: a.dj.name, slug: a.dj.slug })),
         trackCount,
         statusCounts: tally?.counts ?? emptyCounts(),
@@ -131,7 +133,9 @@ export async function getFeed() {
       isBrowseReadySet({
         imageUrl: s.imageUrl,
         primaryDjImageUrl: s.primaryDj?.imageUrl,
+        eventImageUrl: s.eventImageUrl,
         primaryDjName: s.primaryDj?.name,
+        primaryDjSlug: s.primaryDj?.slug,
       }),
     );
 }
@@ -173,25 +177,34 @@ export async function getSetBySlug(slug: string) {
     sourceUrl: set.sourceUrl,
     playbackUrl: set.playbackUrl ?? set.sourceUrl,
     cover: set.cover,
-    imageUrl: set.imageUrl ?? primary?.dj.imageUrl ?? null,
+    imageUrl:
+      set.imageUrl ??
+      (primary && !isBrandHostSlug(primary.dj.slug)
+        ? primary.dj.imageUrl
+        : null) ??
+      set.event?.imageUrl ??
+      null,
     event: set.event,
     series: set.series,
-    primaryDj: primary?.dj
-      ? {
-          id: primary.dj.id,
-          name: primary.dj.name,
-          slug: primary.dj.slug,
-          accent: primary.dj.accent,
-          imageUrl: primary.dj.imageUrl,
-        }
-      : null,
-    artists: set.artists.map((a) => ({
-      name: a.dj.name,
-      slug: a.dj.slug,
-      accent: a.dj.accent,
-      imageUrl: a.dj.imageUrl,
-      isPrimary: a.isPrimary,
-    })),
+    primaryDj:
+      primary?.dj && !isBrandHostSlug(primary.dj.slug)
+        ? {
+            id: primary.dj.id,
+            name: primary.dj.name,
+            slug: primary.dj.slug,
+            accent: primary.dj.accent,
+            imageUrl: primary.dj.imageUrl,
+          }
+        : null,
+    artists: set.artists
+      .filter((a) => !isBrandHostSlug(a.dj.slug))
+      .map((a) => ({
+        name: a.dj.name,
+        slug: a.dj.slug,
+        accent: a.dj.accent,
+        imageUrl: a.dj.imageUrl,
+        isPrimary: a.isPrimary,
+      })),
     statusCounts: tallyStatuses(set.plays),
     plays: set.plays.map((p) => {
       const resolved = p.idTrack?.resolvedTrack ?? null;
@@ -249,8 +262,9 @@ export async function getDjBySlug(slug: string) {
     include: { series: { include: { _count: { select: { sets: true } } } } },
   });
   if (!dj) return null;
-  // Festival / stage / radio-series accidents must not render as DJ profiles.
+  // Festival / stage / radio-series / brand hosts must not render as DJ profiles.
   if (
+    isBrandHostSlug(dj.slug) ||
     isJunkArtistName(dj.name) ||
     /^view-artist-details-for-/.test(dj.slug)
   ) {
@@ -544,6 +558,7 @@ export async function getDjList(): Promise<DjListItem[]> {
       d.soundcloud || d.youtube || d.instagram || d.twitter || d.website,
     );
     const isJunk =
+      isBrandHostSlug(d.slug) ||
       isJunkArtistName(d.name) ||
       /^view-artist-details-for-/.test(d.slug);
     const plays = playAgg.get(d.id) ?? {
@@ -714,10 +729,12 @@ export type LabelProfile = NonNullable<Awaited<ReturnType<typeof getLabelBySlug>
 
 export async function getAllDjSlugs() {
   // Pages export size cliff (~1–2GB): skip discovery stub DJs with no sets.
-  // Always keep social-pinned brand DJs even before their first set lands.
-  // Never export festival / stage / radio-series rows mistaken for artists.
+  // Always keep social-pinned artist DJs even before their first set lands.
+  // Never export festival / stage / radio-series / brand-host rows as artists.
   const { DJ_SOCIAL_PINS } = await import("@/lib/ingest/djSocialPins.data");
-  const pinned = new Set(DJ_SOCIAL_PINS.map((p) => p.slug));
+  const pinned = new Set(
+    DJ_SOCIAL_PINS.map((p) => p.slug).filter((s) => !isBrandHostSlug(s)),
+  );
   const rows = await prisma.dj.findMany({
     where: {
       OR: [{ sets: { some: {} } }, { slug: { in: [...pinned] } }],
@@ -727,9 +744,10 @@ export async function getAllDjSlugs() {
   return rows
     .filter(
       (r) =>
-        pinned.has(r.slug) ||
-        (!isJunkArtistName(r.name) &&
-          !/^view-artist-details-for-/.test(r.slug)),
+        !isBrandHostSlug(r.slug) &&
+        (pinned.has(r.slug) ||
+          (!isJunkArtistName(r.name) &&
+            !/^view-artist-details-for-/.test(r.slug))),
     )
     .map((r) => r.slug);
 }
@@ -880,6 +898,7 @@ export async function getVenueBySlug(slug: string) {
         eventName: event.name,
         eventSlug: event.slug,
         eventKind: event.kind,
+        eventImageUrl: event.imageUrl ?? null,
         seriesName: null,
         spotlight: ranks.spotlight,
         top100Rank: ranks.top100Rank,

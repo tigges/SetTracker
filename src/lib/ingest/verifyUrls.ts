@@ -132,10 +132,18 @@ export async function applyKnownUrlFixes(prisma: PrismaClient): Promise<number> 
 
   // Set-title accidents ("Odd Mob at Seismic…", "Dom Dolla // …", mega-mixes).
   const setTitle = await mergeSetTitleDjs(prisma);
-  n += setTitle.setsRelinked + setTitle.junkRemoved;
-  if (setTitle.setsRelinked || setTitle.junkRemoved || setTitle.ensured) {
+  n +=
+    setTitle.setsRelinked +
+    setTitle.junkRemoved +
+    setTitle.brandHostsStripped;
+  if (
+    setTitle.setsRelinked ||
+    setTitle.junkRemoved ||
+    setTitle.ensured ||
+    setTitle.brandHostsStripped
+  ) {
     console.log(
-      `[verify-urls] set-title DJs scanned=${setTitle.scanned} relinked=${setTitle.setsRelinked} removed=${setTitle.junkRemoved} ensured=${setTitle.ensured}`,
+      `[verify-urls] set-title DJs scanned=${setTitle.scanned} relinked=${setTitle.setsRelinked} removed=${setTitle.junkRemoved} ensured=${setTitle.ensured} brandHosts=${setTitle.brandHostsStripped}`,
     );
   }
 

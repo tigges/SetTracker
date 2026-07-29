@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { EntityThumb } from "@/components/EntityThumb";
 import { StatusBar } from "@/components/StatusBits";
+import { setHostHeadline } from "@/lib/brandHosts";
 import {
   SET_TYPE_META,
   fmtDate,
@@ -17,14 +18,18 @@ import type { FeedItem } from "@/lib/queries";
 export function SetCard({ set }: { set: FeedItem }) {
   const type = SET_TYPE_META[set.type] ?? { label: set.type, glyph: "•" };
   const accent = set.primaryDj?.accent ?? "var(--brand)";
-  const djLine =
-    (set.primaryDj?.name ?? "Unknown") +
-    (set.collaborators.length > 0
-      ? ` b2b ${set.collaborators.map((c) => c.name).join(", ")}`
-      : "");
+  const headline = setHostHeadline({
+    title: set.title,
+    primaryDj: set.primaryDj,
+    collaborators: set.collaborators,
+    seriesName: set.seriesName,
+    eventName: set.eventName,
+  });
   const thumb = setDisplayThumb({
     imageUrl: set.imageUrl,
     primaryDjImageUrl: set.primaryDj?.imageUrl,
+    eventImageUrl: set.eventImageUrl,
+    primaryDjSlug: set.primaryDj?.slug,
   });
   const [thumbFailed, setThumbFailed] = useState(false);
 
@@ -40,7 +45,7 @@ export function SetCard({ set }: { set: FeedItem }) {
         <div className="relative flex-none">
           <EntityThumb
             src={thumb}
-            label={set.primaryDj?.name ?? set.title}
+            label={headline}
             accent={accent}
             size={48}
             radius={12}
@@ -77,7 +82,7 @@ export function SetCard({ set }: { set: FeedItem }) {
             )}
           </div>
           <h3 className="mt-1 truncate text-[15px] font-semibold leading-tight text-ink">
-            {djLine}
+            {headline}
           </h3>
           <p className="mt-0.5 truncate text-[13px] text-muted">{set.title}</p>
         </div>

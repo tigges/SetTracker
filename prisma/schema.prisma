@@ -38,12 +38,13 @@ model Dj {
 }
 
 // A recurring show / mix series (e.g. a weekly radio show).
+// djId is optional — brand-hosted series (Night Owl, Metronome) are not Dj-owned.
 model Series {
   id     String @id @default(cuid())
   slug   String @unique
   name   String
-  djId   String
-  dj     Dj     @relation(fields: [djId], references: [id])
+  djId   String?
+  dj     Dj?    @relation(fields: [djId], references: [id])
   sets   Set[]
 
   @@index([djId])

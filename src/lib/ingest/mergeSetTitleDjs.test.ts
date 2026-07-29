@@ -27,13 +27,13 @@ describe("resolveCanonicalFromSetTitleDj", () => {
     );
   });
 
-  it("sends festival mega-mix Night Owl crumbs to INSOMNIAC", () => {
-    assert.deepEqual(
+  it("leaves festival mega-mix Night Owl crumbs as series-only (no Dj)", () => {
+    assert.equal(
       resolveCanonicalFromSetTitleDj(
         "Day Trip Festival 2024 Mega-Mix",
         "day-trip-festival-2024-mega-mix",
       ),
-      { slug: "insomniac", name: "INSOMNIAC" },
+      null,
     );
   });
 
