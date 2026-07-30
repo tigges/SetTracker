@@ -84,8 +84,9 @@ export const KNOWN_EVENTS: Record<string, CanonicalEvent> = {
     kind: "festival",
     location: "Boom, Belgium",
     website: "https://www.tomorrowland.com/",
+    soundcloud: "https://soundcloud.com/tomorrowland",
     // Lineup page scanned every deep ingest (CDN + HTML + seed fallback).
-    // See discovery/lineupSources.ts
+    // See discovery/lineupSources.ts — Relive YT playlist + SC in festivalDrops.
   },
   "burning-man": {
     slug: "burning-man",

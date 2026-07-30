@@ -72,6 +72,7 @@ export async function getFeed() {
     include: {
       artists: { include: { dj: true }, orderBy: { isPrimary: "desc" } },
       event: true,
+      edition: true,
       series: true,
     },
   });
@@ -107,6 +108,10 @@ export async function getFeed() {
         eventSlug: s.event?.slug ?? null,
         eventKind: s.event?.kind ?? null,
         eventImageUrl: s.event?.imageUrl ?? null,
+        editionSlug: s.edition?.slug ?? null,
+        editionYear: s.edition?.year ?? null,
+        editionLabel: s.edition?.label ?? null,
+        editionEndsAt: s.edition?.endsAt ?? null,
         seriesName: s.series?.name ?? null,
         primaryDj: primary
           ? {
@@ -899,6 +904,10 @@ export async function getVenueBySlug(slug: string) {
         eventSlug: event.slug,
         eventKind: event.kind,
         eventImageUrl: event.imageUrl ?? null,
+        editionSlug: null,
+        editionYear: null,
+        editionLabel: null,
+        editionEndsAt: null,
         seriesName: null,
         spotlight: ranks.spotlight,
         top100Rank: ranks.top100Rank,

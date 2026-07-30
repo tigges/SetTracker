@@ -8,6 +8,7 @@ import {
   type RadarPickFields,
 } from "@/lib/feedPriority";
 import { isBrandHostSlug } from "@/lib/brandHosts";
+import { isFestivalSeasonSet } from "@/lib/ingest/festivalDrops";
 import type { FeedItem } from "@/lib/queries";
 
 const DAY_MS = 24 * 60 * 60 * 1000;
@@ -105,6 +106,32 @@ export type PopularVenueRail = {
   setCount: number;
   score: number;
 };
+
+/**
+ * Sets from festivals whose edition just ended (or recent festival uploads
+ * during a post-weekend boost window). Diversified like Radar.
+ */
+export function festivalSeasonSets(
+  feed: FeedItem[],
+  limit = 9,
+  nowMs = Date.now(),
+): FeedItem[] {
+  const pool = feed
+    .filter((s) =>
+      isFestivalSeasonSet(
+        {
+          eventSlug: s.eventSlug,
+          editionEndsAt: s.editionEndsAt,
+          publishedAt: s.publishedAt,
+          type: s.type,
+        },
+        21,
+        nowMs,
+      ),
+    )
+    .map(toRadarFields);
+  return pickRadarPicks(pool, limit, nowMs);
+}
 
 /** Aggregate week sets by event / venue. */
 export function popularVenuesThisWeek(

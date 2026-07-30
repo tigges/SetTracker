@@ -103,9 +103,13 @@ export const YOUTUBE_VENUES: YoutubeVenueChannel[] = [
     eventSlug: "tomorrowland",
     genre: "House",
     accent: "#7b2cbf",
-    limit: VENUE_LIMIT,
+    // Deeper poll after festival weekend (Relive dumps) — see festivalDrops.
+    limit: Math.max(
+      VENUE_LIMIT,
+      Number(process.env.TOMORROWLAND_YT_VENUE_LIMIT || 80),
+    ),
     minDurationSec: 35 * 60,
-    titleMatch: /\b(tomorrowland|live|set|mainstage|freedom)\b/i,
+    titleMatch: /\b(tomorrowland|live|set|mainstage|freedom|belgium|weekend)\b/i,
   },
   {
     channel: "@insomniac",

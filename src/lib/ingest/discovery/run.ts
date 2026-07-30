@@ -49,6 +49,7 @@ export type DiscoveryStats = {
 function seedSlugs(): Set<string> {
   const s = new Set<string>();
   for (const show of SOUNDCLOUD_SHOWS) {
+    if (!show.primaryArtist) continue;
     s.add(show.primaryArtist.slug || slugify(show.primaryArtist.name));
   }
   for (const v of YOUTUBE_SETS) {

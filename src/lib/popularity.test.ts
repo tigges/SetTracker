@@ -23,6 +23,10 @@ function item(partial: Partial<FeedItem> & { id: string; slug: string }): FeedIt
     eventSlug: null,
     eventKind: null,
     eventImageUrl: null,
+    editionSlug: null,
+    editionYear: null,
+    editionLabel: null,
+    editionEndsAt: null,
     seriesName: null,
     primaryDj: {
       name: "Dom Dolla",

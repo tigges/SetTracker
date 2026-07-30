@@ -8,6 +8,7 @@ import {
   pickRadarPicks,
 } from "@/lib/feedPriority";
 import {
+  festivalSeasonSets,
   popularDjsThisWeek,
   popularSetsThisWeek,
   popularVenuesThisWeek,
@@ -92,6 +93,7 @@ export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }
 
   const {
     newWeek,
+    festivalSeason,
     popularWeek,
     popularDjs,
     popularVenues,
@@ -104,6 +106,11 @@ export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }
       .sort(compareFeedPriority);
     const newWeek = weekAll.slice(0, CLUSTER);
     const used = new Set(newWeek.map((s) => s.id));
+
+    const festivalSeason = festivalSeasonSets(filtered, CLUSTER).filter(
+      (s) => !used.has(s.id),
+    );
+    for (const s of festivalSeason) used.add(s.id);
 
     const popularWeek = popularSetsThisWeek(filtered, CLUSTER).filter(
       (s) => !used.has(s.id),
@@ -130,6 +137,7 @@ export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }
     const deepShown = deepAll.slice(0, visible);
     return {
       newWeek,
+      festivalSeason,
       popularWeek,
       popularDjs,
       popularVenues,
@@ -199,6 +207,9 @@ export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }
         <>
           {newWeek.length > 0 && (
             <Section title="New this week" sets={newWeek} />
+          )}
+          {festivalSeason.length > 0 && (
+            <Section title="Festival season" sets={festivalSeason} />
           )}
           {popularWeek.length > 0 && (
             <Section title="Popular this week" sets={popularWeek} />
