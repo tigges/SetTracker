@@ -3,7 +3,7 @@
  * Rule: embed the original audio host — never prefer a mirror brand.
  */
 
-export type PlaybackHost = "soundcloud" | "hearthis" | "youtube";
+export type PlaybackHost = "soundcloud" | "hearthis" | "youtube" | "mixcloud";
 
 export type PlaybackTarget = {
   host: PlaybackHost;
@@ -47,10 +47,32 @@ export function detectPlaybackHost(
     ) {
       return "youtube";
     }
+    if (host === "mixcloud.com") {
+      return "mixcloud";
+    }
   } catch {
     return null;
   }
   return null;
+}
+
+/** Canonical Mixcloud show URL → widget iframe src. */
+export function mixcloudEmbedSrc(url: string): string | null {
+  try {
+    const u = new URL(url);
+    if (u.hostname.replace(/^www\./, "").toLowerCase() !== "mixcloud.com") {
+      return null;
+    }
+    const parts = u.pathname.split("/").filter(Boolean);
+    if (parts.length < 2 || parts[0] === "widget") return null;
+    const feed = `/${parts[0]}/${parts[1]}/`;
+    return (
+      `https://www.mixcloud.com/widget/iframe/?hide_cover=1&light=1&feed=` +
+      encodeURIComponent(feed)
+    );
+  } catch {
+    return null;
+  }
 }
 
 function youtubeId(url: string): string | null {
@@ -91,6 +113,7 @@ const HOST_LABEL: Record<PlaybackHost, string> = {
   soundcloud: "SoundCloud",
   hearthis: "hearthis.at",
   youtube: "YouTube",
+  mixcloud: "Mixcloud",
 };
 
 /**
@@ -149,6 +172,18 @@ export function resolvePlaybackTarget(
     };
   }
 
+  if (host === "mixcloud") {
+    const embedSrc = mixcloudEmbedSrc(url);
+    if (!embedSrc) return null;
+    return {
+      host,
+      label: HOST_LABEL[host],
+      embedSrc,
+      openUrl: url.replace(/\?.*$/, "").replace(/\/?$/, "/"),
+      embedHeight: 120,
+    };
+  }
+
   return null;
 }
 
@@ -162,7 +197,9 @@ export function playbackUrlFromSource(
 ): string | null {
   if (!sourceUrl) return null;
   const host = detectPlaybackHost(sourceUrl);
-  if (host === "soundcloud" || host === "youtube") return sourceUrl;
+  if (host === "soundcloud" || host === "youtube" || host === "mixcloud") {
+    return sourceUrl;
+  }
   if (host === "hearthis" && hearthisEmbedId(sourceUrl)) return sourceUrl;
   // Native hearthis page — need ingest-time embed URL with track id.
   if (sourceName === "SoundCloud" || sourceName === "YouTube") return sourceUrl;

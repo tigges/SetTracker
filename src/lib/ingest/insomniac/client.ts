@@ -186,32 +186,99 @@ export function titleFromInsomniacHtml(html: string, fallbackSlug: string): stri
 }
 
 export function publishedAtFromInsomniacHtml(html: string): Date | null {
-  const m =
+  const meta =
     html.match(
       /property=["']article:published_time["']\s+content=["']([^"']+)["']/i,
     ) || html.match(/datetime=["']([^"']+)["']/i);
-  if (!m?.[1]) return null;
-  const d = new Date(m[1]);
-  return Number.isNaN(d.getTime()) ? null : d;
+  if (meta?.[1]) {
+    const d = new Date(meta[1]);
+    if (!Number.isNaN(d.getTime())) return d;
+  }
+
+  // Editorial pages often only show "Nov 07, 2018" in page-header__meta.
+  const header = html.match(
+    /page-header__meta[\s\S]{0,500}?<span>\s*([A-Z][a-z]{2}\s+\d{1,2},\s+20\d{2})\s*<\/span>/i,
+  );
+  if (header?.[1]) {
+    const d = new Date(`${header[1]} UTC`);
+    if (!Number.isNaN(d.getTime())) return d;
+  }
+
+  // Fallback: WordPress upload path in og:image (/uploads/2018/11/07…).
+  const og = html.match(
+    /\/uploads\/(20\d{2})\/(\d{2})\/(\d{2})\d*\//i,
+  );
+  if (og) {
+    const d = new Date(
+      Date.UTC(Number(og[1]), Number(og[2]) - 1, Number(og[3]), 12),
+    );
+    if (!Number.isNaN(d.getTime())) return d;
+  }
+
+  return null;
 }
 
+/**
+ * YouTube watch URL from the *music* embed only.
+ * Site chrome / commented promo trailers (e.g. EDC 2021) must not become playback.
+ */
 export function youtubeWatchFromHtml(html: string): string | null {
-  const m = html.match(
-    /youtube\.com\/embed\/([a-zA-Z0-9_-]{6,})/i,
-  );
-  if (!m?.[1] || m[1].includes("{")) return null;
+  const stripped = html.replace(/<!--[\s\S]*?-->/g, " ");
+  const region = stripped.match(
+    /class=["'][^"']*music-embed[^"']*["'][\s\S]{0,4000}/i,
+  )?.[0];
+  if (!region) return null;
+  const m = region.match(/youtube\.com\/embed\/([a-zA-Z0-9_-]{6,})/i);
+  if (!m?.[1] || /[{}]/.test(m[1])) return null;
   return `https://www.youtube.com/watch?v=${m[1]}`;
+}
+
+/**
+ * Mixcloud permalink from Insomniac music-embed widgets (often lazy-loaded).
+ * Example feed: %2Finsomniacevents%2Fdon-diablo-edc-orlando-2018-mix%2F
+ */
+export function mixcloudUrlFromHtml(html: string): string | null {
+  const region =
+    html.match(/class=["'][^"']*music-embed[^"']*["'][\s\S]{0,4000}/i)?.[0] ??
+    html;
+
+  const feedParam =
+    region.match(
+      /mixcloud\.com\/widget\/iframe\/\?[^"'>\s]*?feed=([^"'&\s]+)/i,
+    ) ||
+    region.match(
+      /mixcloud\.com\/widget\/iframe\/[^"'>\s]*feed%3D([^"'&\s]+)/i,
+    );
+  if (feedParam?.[1]) {
+    const path = decodeURIComponent(feedParam[1].replace(/&#038;/g, "&"))
+      .replace(/^\/+/, "")
+      .replace(/\/+$/, "");
+    if (/^[a-z0-9_-]+\/[a-z0-9_-]+$/i.test(path)) {
+      return `https://www.mixcloud.com/${path.toLowerCase()}/`;
+    }
+  }
+
+  const direct = region.match(
+    /https?:\/\/(?:www\.)?mixcloud\.com\/([a-z0-9_-]+\/[a-z0-9_-]+)\/?/i,
+  );
+  if (direct?.[1] && !/^widget\//i.test(direct[1])) {
+    return `https://www.mixcloud.com/${direct[1].toLowerCase()}/`;
+  }
+  return null;
 }
 
 /** Prefer track-level SC URLs over bare profile links. */
 export function soundcloudTrackUrlFromHtml(html: string): string | null {
-  const track = html.match(
+  const region =
+    html.match(/class=["'][^"']*music-embed[^"']*["'][\s\S]{0,4000}/i)?.[0] ??
+    html;
+  const track = region.match(
     /https?:\/\/(?:w\.)?soundcloud\.com\/([a-z0-9_-]+\/[a-z0-9\-]+)(?:[?"'\s]|\/|$)/i,
   );
   if (track?.[1] && !/\/sets\//i.test(track[1])) {
     return `https://soundcloud.com/${track[1].toLowerCase()}`;
   }
-  const api = html.match(/api\.soundcloud\.com\/tracks\/(\d+)/i);
+  const api = region.match(/api\.soundcloud\.com\/tracks\/(\d+)/i);
   if (api?.[1]) return `https://api.soundcloud.com/tracks/${api[1]}`;
   return null;
 }

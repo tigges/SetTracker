@@ -17,6 +17,7 @@ import { applyCuratedDjImages } from "../thumbs/djImages";
 import { applyCuratedEventImages } from "../thumbs/eventImages";
 import { mergeSplitAtomicActs } from "./mergeAtomicActs";
 import { mergeSetTitleDjs } from "./mergeSetTitleDjs";
+import { repairInsomniacMixPlayback } from "./insomniac/repairMixPlayback";
 import { applyDjSocialPins } from "./djSocialPins";
 import { KNOWN_EVENTS } from "./events";
 
@@ -144,6 +145,15 @@ export async function applyKnownUrlFixes(prisma: PrismaClient): Promise<number> 
   ) {
     console.log(
       `[verify-urls] set-title DJs scanned=${setTitle.scanned} relinked=${setTitle.setsRelinked} removed=${setTitle.junkRemoved} ensured=${setTitle.ensured} brandHosts=${setTitle.brandHostsStripped}`,
+    );
+  }
+
+  // Insomniac mixes: replace chrome YouTube trailers with Mixcloud/SC; fix crawl dates.
+  const mixRepair = await repairInsomniacMixPlayback(prisma);
+  n += mixRepair.playbackFixed + mixRepair.dateFixed;
+  if (mixRepair.playbackFixed || mixRepair.dateFixed) {
+    console.log(
+      `[verify-urls] insomniac mixes scanned=${mixRepair.scanned} playback=${mixRepair.playbackFixed} dates=${mixRepair.dateFixed}`,
     );
   }
 

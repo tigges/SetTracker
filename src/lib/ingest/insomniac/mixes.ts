@@ -15,6 +15,7 @@ import {
   fetchInsomniacHtml,
   fetchMusicSectionSlugs,
   insomniacMusicUrl,
+  mixcloudUrlFromHtml,
   publishedAtFromInsomniacHtml,
   soundcloudTrackUrlFromHtml,
   titleFromInsomniacHtml,
@@ -101,6 +102,10 @@ function durationSecOf(track: ScTrack | null, rows: number): number {
 async function resolvePlayback(
   html: string,
 ): Promise<{ playbackUrl: string; scTrack: ScTrack | null }> {
+  // Prefer the music-embed host (Mixcloud / SC). Never scrape site-chrome YouTube.
+  const mixcloud = mixcloudUrlFromHtml(html);
+  if (mixcloud) return { playbackUrl: mixcloud, scTrack: null };
+
   const scUrl = soundcloudTrackUrlFromHtml(html);
   if (scUrl && !/soundcloud\.com\/[a-z0-9_-]+\/?$/i.test(scUrl)) {
     try {
@@ -118,6 +123,15 @@ async function resolvePlayback(
   const yt = youtubeWatchFromHtml(html);
   if (yt) return { playbackUrl: yt, scTrack: null };
   return { playbackUrl: "", scTrack: null };
+}
+
+/** Last-resort publish date from a year in the title — never "now". */
+function publishedAtFromTitleYear(title: string): Date | null {
+  const y = title.match(/\b(20\d{2})\b/)?.[1];
+  if (!y) return null;
+  const year = Number(y);
+  if (year < 2005 || year > new Date().getUTCFullYear() + 1) return null;
+  return new Date(Date.UTC(year, 0, 15, 12));
 }
 
 async function mixToRawSet(slug: string): Promise<RawSet | null> {
@@ -139,12 +153,17 @@ async function mixToRawSet(slug: string): Promise<RawSet | null> {
 
   const plays = rowsToPlays(rows, durationSec);
   const festival = inferFestivalEvent(title);
-  const publishedAt =
-    publishedAtFromInsomniacHtml(html) ||
-    (scTrack?.display_date || scTrack?.created_at
+  const fromPage = publishedAtFromInsomniacHtml(html);
+  const fromSc =
+    scTrack?.display_date || scTrack?.created_at
       ? new Date(scTrack.display_date || scTrack.created_at || "")
-      : null) ||
-    new Date();
+      : null;
+  const publishedAt =
+    fromPage ||
+    (fromSc && !Number.isNaN(fromSc.getTime()) ? fromSc : null) ||
+    publishedAtFromTitleYear(title);
+  // Never invent "now" — that falsely ranks archive mixes as New this week.
+  if (!publishedAt) return null;
 
   const seriesName = /^metronome-/i.test(slug)
     ? "Metronome"
@@ -153,7 +172,11 @@ async function mixToRawSet(slug: string): Promise<RawSet | null> {
   const raw: RawSet = {
     sourceSlug: `insm-mix-${slug}`.slice(0, 120),
     title,
-    type: /soundcloud\.com/i.test(playbackUrl) ? "soundcloud" : "festival",
+    type: /mixcloud\.com/i.test(playbackUrl)
+      ? "mix"
+      : /soundcloud\.com/i.test(playbackUrl)
+        ? "soundcloud"
+        : "festival",
     genre: /\b(trance|dreamstate)\b/i.test(title)
       ? "Trance"
       : /\b(bass|dubstep|riddim)\b/i.test(title)
@@ -165,7 +188,7 @@ async function mixToRawSet(slug: string): Promise<RawSet | null> {
     eventName: festival?.name ?? "Insomniac",
     eventKind: festival?.kind ?? "livestream",
     eventLocation: festival?.location,
-    publishedAt: Number.isNaN(publishedAt.getTime()) ? new Date() : publishedAt,
+    publishedAt,
     durationSec,
     sourceName: "Insomniac",
     sourceUrl,

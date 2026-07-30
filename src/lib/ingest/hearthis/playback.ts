@@ -96,7 +96,9 @@ export async function resolveSoundCloudTrackUrl(
  */
 export function playbackHostRank(url: string | null | undefined): number {
   if (!url) return 0;
-  if (/soundcloud\.com\//i.test(url)) return 3;
+  if (/soundcloud\.com\//i.test(url)) return 4;
+  // Mixcloud show embeds beat site-chrome YouTube trailers.
+  if (/mixcloud\.com\//i.test(url)) return 3;
   if (/youtu\.be\/|youtube\.com\//i.test(url)) return 2;
   if (/hearthis\.at\//i.test(url)) return 1;
   return 0;
