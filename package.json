@@ -1,6 +1,6 @@
 {
   "name": "setradar",
-  "version": "0.2.56",
+  "version": "0.2.57",
   "private": true,
   "prisma": {
     "seed": "tsx prisma/seed.ts"
@@ -31,7 +31,8 @@
     "enrich:djmag-festivals": "tsx scripts/enrich-djmag-festivals.ts",
     "enrich:djmag-djs": "tsx scripts/enrich-djmag-djs.ts",
     "audit:top100": "tsx scripts/audit-top100-coverage.ts",
-    "audit:homepage-sparse": "tsx scripts/audit-homepage-sparse.ts"
+    "audit:homepage-sparse": "tsx scripts/audit-homepage-sparse.ts",
+    "audit:unresolved-priority": "tsx scripts/audit-unresolved-priority.ts"
   },
   "dependencies": {
     "@prisma/client": "^6.19.3",

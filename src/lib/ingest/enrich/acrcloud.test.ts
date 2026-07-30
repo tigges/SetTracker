@@ -3,6 +3,7 @@ import {
   acrSignature,
   compareSparseSetCandidates,
   homepageEnrichBoost,
+  isUnresolvedDetectPriority,
   loadDjMagTop100RankBySlug,
   mapAcrMusicHit,
   planGapProbes,
@@ -46,7 +47,7 @@ assert.equal(
 assert.equal(rankPlaybackHost("soundcloud", false), 0);
 assert.equal(rankPlaybackHost("hearthis", false), 1);
 assert.equal(rankPlaybackHost("youtube", false), null);
-assert.equal(rankPlaybackHost("youtube", true), 2);
+assert.equal(rankPlaybackHost("youtube", true), 3);
 assert.equal(rankPlaybackHost(null, true), null);
 
 // --- gap probes ---
@@ -168,5 +169,85 @@ assert.equal(
   }),
   0,
 );
+
+// Pink IDs on Top 20 / recent festival beat generic sparse sets.
+assert.equal(
+  homepageEnrichBoost({
+    publishedAt: new Date(),
+    primaryDjSlug: "charlotte-de-witte",
+    genre: "Techno",
+    densitySeverity: "ok",
+    top100,
+    unresolvedCount: 12,
+  }),
+  4,
+);
+assert.equal(
+  homepageEnrichBoost({
+    publishedAt: new Date(),
+    primaryDjSlug: "unknown-local",
+    genre: "House",
+    densitySeverity: "ok",
+    top100,
+    unresolvedCount: 8,
+    isFestival: true,
+  }),
+  4,
+);
+assert.equal(
+  isUnresolvedDetectPriority({
+    unresolvedCount: 5,
+    top100Rank: 9,
+  }),
+  true,
+);
+assert.equal(
+  isUnresolvedDetectPriority({
+    unresolvedCount: 5,
+    top100Rank: 50,
+    isFestival: false,
+  }),
+  false,
+);
+
+const pinkFestivalFirst = [
+  cand({
+    id: "sparse-generic",
+    unresolvedCount: 0,
+    popularityRank: 999,
+    homepageBoost: 2,
+    densitySeverity: "severe",
+  }),
+  cand({
+    id: "edc-pink",
+    unresolvedCount: 18,
+    popularityRank: 40,
+    homepageBoost: 4,
+    densitySeverity: "ok",
+    host: "youtube",
+  }),
+].sort(compareSparseSetCandidates);
+// SoundCloud still preferred by host, but among mixed hosts boost matters after host.
+assert.equal(pinkFestivalFirst[0]!.id, "sparse-generic");
+assert.equal(pinkFestivalFirst[1]!.id, "edc-pink");
+
+const pinkScFirst = [
+  cand({
+    id: "generic-sc",
+    unresolvedCount: 0,
+    homepageBoost: 2,
+    densitySeverity: "severe",
+    host: "soundcloud",
+  }),
+  cand({
+    id: "top20-pink-sc",
+    unresolvedCount: 10,
+    homepageBoost: 4,
+    popularityRank: 3,
+    densitySeverity: "ok",
+    host: "soundcloud",
+  }),
+].sort(compareSparseSetCandidates);
+assert.equal(pinkScFirst[0]!.id, "top20-pink-sc");
 
 console.log("acrcloud.test.ts ok");

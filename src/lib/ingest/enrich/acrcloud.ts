@@ -29,6 +29,8 @@
  *   ACRCLOUD_MIN_SCORE      accept identified hits ≥ this (default 70)
  *   ACRCLOUD_MIN_IDENTIFIED skip sets with ≥ N strong IDs (default 4)
  *   ACRCLOUD_ALLOW_YOUTUBE=1  allow YT playback (default off — bot walls)
+ *   ACRCLOUD_ALLOW_YOUTUBE_PRIORITY=0  disable YT for Top 20 / festival
+ *     unresolved targets (default on — EDC Relive etc. are often YT-only)
  *   ACRCLOUD_DRY_RUN=1      resolve + probe but do not write DB
  *
  * Hook: `npm run enrich:fingerprint` from catalog-enrich.yml (after thumbs/MB).
@@ -56,13 +58,24 @@ import {
   parseHearthisUrl,
   type HtTrack,
 } from "../hearthis/client";
+import { isFestivalSeasonSet } from "../festivalDrops";
 import { ARTIST_ROSTER } from "../roster";
 import { getSoundCloudClientId, scGet, type ScTrack } from "../soundcloud/client";
 import { slugify } from "../types";
+import {
+  isUnresolvedDetectPriority,
+  TOP_DJ_UNRESOLVED_PRIORITY,
+} from "../../unresolvedPriority";
 
 export { loadDjMagTop100RankBySlug } from "../../djmagTop100";
+export {
+  isUnresolvedDetectPriority,
+  TOP_DJ_UNRESOLVED_PRIORITY,
+} from "../../unresolvedPriority";
 
 const WEEK_MS = 7 * 24 * 60 * 60 * 1000;
+/** Festival Relive dumps often land weeks after the weekend. */
+const FESTIVAL_DETECT_MS = 45 * 24 * 60 * 60 * 1000;
 const DENSITY_SEVERITY_RANK: Record<DensitySeverity, number> = {
   severe: 0,
   thin: 1,
@@ -154,10 +167,11 @@ export function popularityRankForDjSlug(
 
 /**
  * Homepage / product urgency for fingerprint enrich.
- * Aligns the ACR queue with sets people actually see (This week × Top 100 /
- * Bass House), not archive ID-comment spam.
+ * Aligns the ACR queue with sets people actually see — especially pink
+ * unresolved IDs on recent festival sets and Top 20 DJs.
  *
- * 3 — recent + product spotlight + severe density (empty/thin homepage heroes)
+ * 4 — unresolved IDs on Top 20 / festival (recent or festival Relive window)
+ * 3 — unresolved on Top 20 / festival (older), or recent spotlight + severe
  * 2 — recent + (spotlight or severe)
  * 1 — older spotlight that is still thin/severe
  * 0 — everything else
@@ -169,16 +183,29 @@ export function homepageEnrichBoost(opts: {
   densitySeverity: DensitySeverity;
   top100: Map<string, number>;
   nowMs?: number;
+  unresolvedCount?: number;
+  isFestival?: boolean;
+  festivalSeason?: boolean;
 }): number {
   const now = opts.nowMs ?? Date.now();
   const ageMs = now - opts.publishedAt.getTime();
   const recent = ageMs >= 0 && ageMs < WEEK_MS;
+  const festWindow = ageMs >= 0 && ageMs < FESTIVAL_DETECT_MS;
   const slug = opts.primaryDjSlug?.trim() || "";
+  const chartRank = slug ? opts.top100.get(slug) : undefined;
+  const top20 =
+    chartRank != null && chartRank <= TOP_DJ_UNRESOLVED_PRIORITY;
   const spotlight =
-    (slug ? opts.top100.has(slug) : false) ||
-    normalizeGenre(opts.genre) === "Bass House";
+    chartRank != null || normalizeGenre(opts.genre) === "Bass House";
   const severe = opts.densitySeverity === "severe";
   const thinOrWorse = opts.densitySeverity !== "ok";
+  const hasUnresolved = (opts.unresolvedCount ?? 0) > 0;
+  const festFocus = Boolean(opts.isFestival || opts.festivalSeason);
+
+  if (hasUnresolved && (top20 || festFocus)) {
+    if (recent || (festFocus && festWindow)) return 4;
+    return 3;
+  }
 
   if (recent && spotlight && severe) return 3;
   if (recent && (spotlight || severe)) return 2;
@@ -229,6 +256,13 @@ function numEnv(name: string, fallback: number): number {
 
 function boolEnv(name: string): boolean {
   return process.env[name] === "1";
+}
+
+/** Env flag that defaults on unless explicitly set to "0". */
+function boolEnvDefaultOn(name: string): boolean {
+  const v = process.env[name];
+  if (v === undefined || v === "") return true;
+  return v === "1";
 }
 
 /** HMAC-SHA1 signature for ACRCloud Identify Protocol V1. */
@@ -593,7 +627,8 @@ export async function acrIdentify(
 /**
  * Sets that are good fingerprint candidates: have playback, thin tracklist.
  * Prefers SoundCloud / hearthis over YouTube, then homepage-visible sparse
- * sets (This week × Top 100 / Bass House), then density / chart demand.
+ * sets — especially unresolved (pink) IDs on Top 20 DJs / recent festivals.
+ * YouTube is allowed for those priority targets by default.
  */
 export async function selectSparseSetsForFingerprint(
   prisma: PrismaClient,
@@ -603,6 +638,9 @@ export async function selectSparseSetsForFingerprint(
   const minIdentified =
     opts.minIdentifiedToSkip ?? numEnv("ACRCLOUD_MIN_IDENTIFIED", 4);
   const allowYoutube = opts.allowYoutube ?? boolEnv("ACRCLOUD_ALLOW_YOUTUBE");
+  const allowYoutubePriority = boolEnvDefaultOn(
+    "ACRCLOUD_ALLOW_YOUTUBE_PRIORITY",
+  );
   const top100 = loadDjMagTop100RankBySlug();
   const rosterHigh = rosterHighPrioritySlugs();
   const nowMs = Date.now();
@@ -620,6 +658,7 @@ export async function selectSparseSetsForFingerprint(
       durationSec: true,
       publishedAt: true,
       genre: true,
+      type: true,
       plays: {
         select: { idStatus: true, provenance: true },
       },
@@ -628,6 +667,8 @@ export async function selectSparseSetsForFingerprint(
         take: 1,
         select: { dj: { select: { slug: true } } },
       },
+      event: { select: { slug: true, kind: true } },
+      edition: { select: { endsAt: true } },
     },
   });
 
@@ -635,9 +676,6 @@ export async function selectSparseSetsForFingerprint(
   for (const row of rows) {
     const playbackUrl = row.playbackUrl?.trim();
     if (!playbackUrl) continue;
-    const host = detectPlaybackHost(playbackUrl);
-    const rank = rankPlaybackHost(host, allowYoutube);
-    if (rank == null || !host) continue;
 
     const identifiedStrong = row.plays.filter(
       (p) =>
@@ -656,6 +694,33 @@ export async function selectSparseSetsForFingerprint(
     if (identifiedStrong >= expectedFloor && unresolvedCount === 0) continue;
 
     const primarySlug = row.artists[0]?.dj.slug;
+    const top100Rank = primarySlug ? (top100.get(primarySlug) ?? null) : null;
+    const isFestival =
+      row.type === "festival" || row.event?.kind === "festival";
+    const festivalSeason = isFestivalSeasonSet(
+      {
+        eventSlug: row.event?.slug,
+        editionEndsAt: row.edition?.endsAt ?? null,
+        publishedAt: row.publishedAt,
+        type: row.type,
+      },
+      45,
+      nowMs,
+    );
+    const priorityTarget = isUnresolvedDetectPriority({
+      unresolvedCount,
+      top100Rank,
+      isFestival,
+      festivalSeason,
+    });
+
+    const host = detectPlaybackHost(playbackUrl);
+    const rank = rankPlaybackHost(
+      host,
+      allowYoutube || (allowYoutubePriority && priorityTarget),
+    );
+    if (rank == null || !host) continue;
+
     const density = assessSetDensity({
       durationSec: row.durationSec,
       playCount: row.plays.length,
@@ -677,6 +742,9 @@ export async function selectSparseSetsForFingerprint(
         densitySeverity: density.severity,
         top100,
         nowMs,
+        unresolvedCount,
+        isFestival,
+        festivalSeason,
       }),
       densitySeverity: density.severity,
       publishedAtMs: row.publishedAt.getTime(),
@@ -689,8 +757,8 @@ export async function selectSparseSetsForFingerprint(
 }
 
 /**
- * Sort: host → homepage urgency → density severity → chart/roster demand →
- * capped unresolved cues → sparsity → recency.
+ * Sort: host → detect urgency (Top 20 / festival pink IDs) → density →
+ * chart/roster demand → capped unresolved cues → sparsity → recency.
  */
 export function compareSparseSetCandidates(
   a: SparseSetCandidate,

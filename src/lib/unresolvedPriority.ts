@@ -1,0 +1,21 @@
+/**
+ * Client-safe helpers for prioritizing unidentified (pink) track IDs.
+ * Used by fingerprint enrich queue scoring and /stats.
+ */
+
+/** DJ Mag ranks 1–20 get unresolved-ID detection priority. */
+export const TOP_DJ_UNRESOLVED_PRIORITY = 20;
+
+/** True when a set should be prioritized for pink-ID detection. */
+export function isUnresolvedDetectPriority(opts: {
+  unresolvedCount: number;
+  top100Rank?: number | null;
+  isFestival?: boolean;
+  festivalSeason?: boolean;
+}): boolean {
+  if (opts.unresolvedCount < 1) return false;
+  const top20 =
+    opts.top100Rank != null &&
+    opts.top100Rank <= TOP_DJ_UNRESOLVED_PRIORITY;
+  return top20 || Boolean(opts.isFestival || opts.festivalSeason);
+}

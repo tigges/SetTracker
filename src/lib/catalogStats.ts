@@ -1,5 +1,11 @@
 import { getDjList, type DjListItem } from "@/lib/queries";
 import { prisma } from "@/lib/db";
+import { loadDjMagTop100RankBySlug } from "@/lib/djmagTop100";
+import { isFestivalSeasonSet } from "@/lib/ingest/festivalDrops";
+import {
+  isUnresolvedDetectPriority,
+  TOP_DJ_UNRESOLVED_PRIORITY,
+} from "@/lib/unresolvedPriority";
 import {
   assessSetDensity,
   DENSITY_MIN_DURATION_SEC,
@@ -56,6 +62,9 @@ export type StatsUnresolvedId = {
   playCount: number;
   setSlug: string | null;
   setTitle: string | null;
+  /** Present on priority queue rows (Top 20 / festival). */
+  reason?: string | null;
+  top100Rank?: number | null;
 };
 
 export type StatsSparseSet = {
@@ -160,6 +169,8 @@ export type CatalogStats = {
   sparseSets: StatsSparseSet[];
   /** Hottest unresolved ID labels (community resolve queue). */
   topUnresolvedIds: StatsUnresolvedId[];
+  /** Pink IDs on recent festival sets / Top 20 DJs — fingerprint priority. */
+  priorityUnresolvedIds: StatsUnresolvedId[];
 };
 
 function toStatsRow(d: DjListItem): StatsDjRow {
@@ -348,9 +359,25 @@ export async function getCatalogStats(): Promise<CatalogStats> {
         label: true,
         suspectedArtist: true,
         plays: {
-          take: 1,
+          take: 3,
           orderBy: { position: "asc" },
-          select: { set: { select: { slug: true, title: true } } },
+          select: {
+            set: {
+              select: {
+                slug: true,
+                title: true,
+                type: true,
+                publishedAt: true,
+                event: { select: { slug: true, kind: true } },
+                edition: { select: { endsAt: true } },
+                artists: {
+                  where: { isPrimary: true },
+                  take: 1,
+                  select: { dj: { select: { slug: true } } },
+                },
+              },
+            },
+          },
         },
         _count: { select: { plays: true } },
       },
@@ -468,6 +495,9 @@ export async function getCatalogStats(): Promise<CatalogStats> {
       playbackHost: playbackHost(s.playbackUrl),
     }));
 
+  const top100 = loadDjMagTop100RankBySlug();
+  const nowMs = Date.now();
+
   const topUnresolvedIds: StatsUnresolvedId[] = unresolvedIdRows
     .map((r) => ({
       id: r.id,
@@ -480,6 +510,64 @@ export async function getCatalogStats(): Promise<CatalogStats> {
     .sort(
       (a, b) =>
         b.playCount - a.playCount || a.label.localeCompare(b.label),
+    )
+    .slice(0, 40);
+
+  const priorityUnresolvedIds: StatsUnresolvedId[] = unresolvedIdRows
+    .map((r) => {
+      let best: StatsUnresolvedId | null = null;
+      for (const play of r.plays) {
+        const set = play.set;
+        if (!set) continue;
+        const djSlug = set.artists[0]?.dj.slug;
+        const top100Rank = djSlug ? (top100.get(djSlug) ?? null) : null;
+        const isFestival =
+          set.type === "festival" || set.event?.kind === "festival";
+        const festivalSeason = isFestivalSeasonSet(
+          {
+            eventSlug: set.event?.slug,
+            editionEndsAt: set.edition?.endsAt ?? null,
+            publishedAt: set.publishedAt,
+            type: set.type,
+          },
+          45,
+          nowMs,
+        );
+        if (
+          !isUnresolvedDetectPriority({
+            unresolvedCount: 1,
+            top100Rank,
+            isFestival,
+            festivalSeason,
+          })
+        ) {
+          continue;
+        }
+        const reasonParts: string[] = [];
+        if (top100Rank != null && top100Rank <= TOP_DJ_UNRESOLVED_PRIORITY) {
+          reasonParts.push(`Top ${TOP_DJ_UNRESOLVED_PRIORITY} #${top100Rank}`);
+        }
+        if (isFestival || festivalSeason) reasonParts.push("festival");
+        best = {
+          id: r.id,
+          label: r.label,
+          suspectedArtist: r.suspectedArtist,
+          playCount: r._count.plays,
+          setSlug: set.slug,
+          setTitle: set.title,
+          reason: reasonParts.join(" · ") || null,
+          top100Rank,
+        };
+        break;
+      }
+      return best;
+    })
+    .filter((r): r is StatsUnresolvedId => r != null)
+    .sort(
+      (a, b) =>
+        (a.top100Rank ?? 999) - (b.top100Rank ?? 999) ||
+        b.playCount - a.playCount ||
+        a.label.localeCompare(b.label),
     )
     .slice(0, 40);
 
@@ -591,5 +679,6 @@ export async function getCatalogStats(): Promise<CatalogStats> {
     density,
     sparseSets,
     topUnresolvedIds,
+    priorityUnresolvedIds,
   };
 }

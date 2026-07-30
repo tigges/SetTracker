@@ -113,9 +113,11 @@ jobs:
           ACRCLOUD_MAX_PROBES_PER_SET: "20"
           ACRCLOUD_MIN_SCORE: "70"
           ACRCLOUD_MIN_IDENTIFIED: "4"
-          # Prefer SC/hearthis progressive; YT left off (bot walls / ToS).
-          # Homepage YT empties need fingerprint seeds or a SC mirror.
+          # Prefer SC/hearthis progressive; YT left off globally.
+          # Priority YT (Top 20 / festival pink IDs) stays on by default in code
+          # via ACRCLOUD_ALLOW_YOUTUBE_PRIORITY (EDC Relive etc.).
           ACRCLOUD_ALLOW_YOUTUBE: "0"
+          ACRCLOUD_ALLOW_YOUTUBE_PRIORITY: "1"
         run: npm run enrich:fingerprint
 
       - name: Save enriched catalog DB
