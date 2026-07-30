@@ -45,6 +45,9 @@ assert.equal(isJunkArtistName("Tech House"), true);
 assert.equal(sanitizeArtistName("Afro House"), null);
 assert.equal(isJunkArtistName("House"), true);
 assert.equal(isJunkArtistName("Day Trip Festival 2024 Mega-Mix"), true);
+assert.equal(isJunkArtistName("OMNOM EDC Las Vegas 2024"), true);
+assert.equal(isJunkArtistName("OMNOM"), false);
+assert.equal(isJunkArtistName("Artist Tomorrowland 2026"), true);
 assert.equal(isJunkArtistName("Dom Dolla // Dancefloor Currency"), true);
 assert.equal(
   isJunkArtistName("Odd Mob at Seismic Dance Event 8.0"),

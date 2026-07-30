@@ -82,6 +82,18 @@ export function isJunkArtistName(name: string): boolean {
   }
   // Festival stages mistaken for artists ("Freedom Stage", "Mainstage")
   if (/\bstages?\s*$/i.test(n) || /^main\s*stage$/i.test(n)) return true;
+  // Set-title crumbs: "OMNOM EDC Las Vegas 2024", "Artist Tomorrowland 2026"
+  if (
+    /\b(19|20)\d{2}\s*$/.test(n) &&
+    /\b(edc|tomorrowland|ultra|coachella|lollapalooza|parookaville|burning\s*man|hard\s*summer|dreamstate|awakenings|nocturnal|escape|countdown)\b/i.test(
+      n,
+    )
+  ) {
+    return true;
+  }
+  if (/\bedc\s+(las\s*vegas|mexico|orlando|china|korea)\b/i.test(n)) {
+    return true;
+  }
   // Genre tags are not people ("Afro House", "Tech House")
   if (isGenreOnlyName(n)) return true;
   return false;
