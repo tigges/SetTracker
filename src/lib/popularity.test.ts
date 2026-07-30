@@ -88,11 +88,12 @@ describe("popularity rails", () => {
     assert.ok(!popular.some((s) => s.id === "old"));
   });
 
-  it("aggregates DJs and skips brand hosts", () => {
+  it("aggregates Top 100 DJs and skips brand hosts + hobbyists", () => {
     const feed = [
       item({
         id: "1",
         slug: "s1",
+        top100Rank: null,
         primaryDj: {
           name: "INSOMNIAC",
           slug: "insomniac",
@@ -101,8 +102,20 @@ describe("popularity rails", () => {
         },
       }),
       item({
+        id: "hobby",
+        slug: "hobby",
+        top100Rank: null,
+        primaryDj: {
+          name: "DJ Tito",
+          slug: "tito-dj",
+          accent: "#0",
+          imageUrl: "https://example.com/t.jpg",
+        },
+      }),
+      item({
         id: "2",
         slug: "s2",
+        top100Rank: 41,
         primaryDj: {
           name: "Dom Dolla",
           slug: "dom-dolla",
@@ -113,6 +126,7 @@ describe("popularity rails", () => {
       item({
         id: "3",
         slug: "s3",
+        top100Rank: 41,
         primaryDj: {
           name: "Dom Dolla",
           slug: "dom-dolla",
@@ -125,6 +139,38 @@ describe("popularity rails", () => {
     assert.equal(djs.length, 1);
     assert.equal(djs[0]?.slug, "dom-dolla");
     assert.equal(djs[0]?.setCount, 2);
+  });
+
+  it("excludes non–Top 100 DJs from the in-demand rail", () => {
+    const feed = [
+      item({
+        id: "1",
+        slug: "s1",
+        top100Rank: null,
+        primaryDj: {
+          name: "Enrico Pacca",
+          slug: "enrico-pacca",
+          accent: "#1",
+          imageUrl: "https://example.com/e.jpg",
+        },
+      }),
+      item({
+        id: "2",
+        slug: "s2",
+        top100Rank: 9,
+        primaryDj: {
+          name: "Charlotte de Witte",
+          slug: "charlotte-de-witte",
+          accent: "#2",
+          imageUrl: "https://example.com/c.jpg",
+        },
+      }),
+    ];
+    const djs = popularDjsThisWeek(feed, 9);
+    assert.deepEqual(
+      djs.map((d) => d.slug),
+      ["charlotte-de-witte"],
+    );
   });
 
   it("aggregates venues by event slug", () => {
