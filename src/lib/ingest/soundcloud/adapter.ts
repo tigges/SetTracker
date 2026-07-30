@@ -14,7 +14,7 @@
 import { normalizeGenre } from "../../genre";
 import { artistsForSet } from "../artists";
 import { promotedSoundcloudPermalinks } from "../discovery/run";
-import { inferFestivalEvent } from "../events";
+import { inferFestivalEvent, KNOWN_EVENTS } from "../events";
 import { hashRawSetContent } from "../hash";
 import { slugify, type RawSet, type SourceAdapter } from "../types";
 import { withDescriptionSocials } from "../youtube/client";
@@ -66,7 +66,7 @@ function publishedAtOf(track: ScTrack): Date {
 }
 
 function coverOf(track: ScTrack, show: SoundCloudShow): string {
-  return show.primaryArtist.accent ?? ACCENT_FALLBACK;
+  return show.primaryArtist?.accent ?? ACCENT_FALLBACK;
 }
 
 /** Prefer larger SC artwork variants when the API returns -large. */
@@ -80,7 +80,8 @@ function scImageUrl(url?: string | null): string | undefined {
 
 function setTypeFor(track: ScTrack, show: SoundCloudShow): RawSet["type"] {
   const title = track.title || "";
-  if (/\b(festival|edc|ultra|parookaville|boiler\s*room)\b/i.test(title)) {
+  if (show.eventSlug || show.type === "festival") return "festival";
+  if (/\b(festival|edc|ultra|parookaville|boiler\s*room|tomorrowland)\b/i.test(title)) {
     return "festival";
   }
   if (show.type === "radio" || /\bradio\b/i.test(title)) return "radio";
@@ -130,13 +131,19 @@ async function trackToRawSet(
   const setImage =
     scImageUrl(track.artwork_url) ||
     artistImage ||
-    show.primaryArtist.imageUrl;
-  const preferredPrimary = {
-    ...show.primaryArtist,
-    imageUrl: show.primaryArtist.imageUrl || artistImage,
-  };
+    show.primaryArtist?.imageUrl;
+  // Venue brands (Tomorrowland) omit preferred primary — infer DJ from title.
+  const preferredPrimary = show.primaryArtist
+    ? {
+        ...show.primaryArtist,
+        imageUrl: show.primaryArtist.imageUrl || artistImage,
+      }
+    : undefined;
   const { primary, collaborators } = artistsForSet(title, preferredPrimary);
-  const festival = inferFestivalEvent(title);
+  const channelEvent = show.eventSlug
+    ? KNOWN_EVENTS[show.eventSlug]
+    : undefined;
+  const festival = inferFestivalEvent(title) || channelEvent || null;
   const raw: RawSet = {
     sourceSlug,
     title,

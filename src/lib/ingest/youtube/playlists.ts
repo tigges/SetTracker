@@ -93,6 +93,18 @@ export const YOUTUBE_PLAYLISTS: YoutubePlaylistSource[] = [
     titleMatch:
       /\b(biscits|dj\s*set|live|set|stream|inflight|nocturnal|academy|space|defected|insomniac|mad\s*decent|exchange|kings?\s*hall|daytrip|in\s+the\s+loop|ready\s*2\s*dance)\b/i,
   },
+  {
+    // Official Tomorrowland Belgium Relive full sets (YT playlist from Relive article)
+    playlist: "PLeeZgE3_zp1w",
+    seriesName: "Tomorrowland Relive",
+    eventSlug: "tomorrowland",
+    genre: "House",
+    accent: "#7b2cbf",
+    limit: Math.max(PL_LIMIT, Number(process.env.TOMORROWLAND_YT_PL_LIMIT || 80)),
+    minDurationSec: 35 * 60,
+    titleMatch:
+      /\b(tomorrowland|live|set|mainstage|freedom|belgium|weekend)\b/i,
+  },
 ];
 
 /** Adapt a playlist source to the venue candidate helpers. */

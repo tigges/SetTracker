@@ -78,6 +78,23 @@ model Event {
   twitter    String?
   imageUrl   String?
   sets       Set[]
+  editions   EventEdition[]
+}
+
+// A dated edition of a festival brand (Tomorrowland Belgium 2026, EDC LV 2025).
+model EventEdition {
+  id        String    @id @default(cuid())
+  slug      String    @unique
+  eventId   String
+  event     Event     @relation(fields: [eventId], references: [id])
+  year      Int
+  label     String? // Belgium | Winter | Miami | Las Vegas | …
+  startsAt  DateTime?
+  endsAt    DateTime?
+  sets      Set[]
+
+  @@index([eventId, year])
+  @@index([endsAt])
 }
 
 // A released, identified track (the playable unit in a set — not the release).
@@ -158,6 +175,10 @@ model Set {
 
   eventId     String?
   event       Event?   @relation(fields: [eventId], references: [id])
+  editionId   String?
+  edition     EventEdition? @relation(fields: [editionId], references: [id])
+  /** Best-effort performance / edition date (not upload time). */
+  performedAt DateTime?
   seriesId    String?
   series      Series?  @relation(fields: [seriesId], references: [id])
 
@@ -170,6 +191,7 @@ model Set {
   @@index([genre])
   @@index([type])
   @@index([eventId])
+  @@index([editionId])
   @@index([seriesId])
 }
 

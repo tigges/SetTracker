@@ -15,13 +15,19 @@ export type SoundCloudShow = {
   userId: number;
   /** Display / series label for logs */
   label: string;
-  primaryArtist: RawArtist;
+  /**
+   * Preferred performing DJ when the account is artist-owned.
+   * Omit for festival venue brands (Tomorrowland) — infer DJ from title.
+   */
+  primaryArtist?: RawArtist;
   /** Default genre when the track doesn't provide one */
   genre: string;
   /** Default set type */
   type: "radio" | "festival" | "soundcloud";
   /** Optional fixed series name (else inferred from title) */
   seriesName?: string;
+  /** Canonical Event slug when this account is a festival/media brand. */
+  eventSlug?: string;
   /**
    * Minimum duration to treat an upload as a "set".
    * Shorter uploads still qualify if `titleMatch` hits.
@@ -245,6 +251,20 @@ export const SOUNDCLOUD_SHOWS: SoundCloudShow[] = [
     minDurationSec: 35 * 60,
     titleMatch: /\b(live|mix|set|radio|b2b|experts only)\b/i,
     limit: 20,
+  },
+  {
+    // Official Tomorrowland SC — Friendship / Academy / Euphoria mixes + lives.
+    permalink: "tomorrowland",
+    userId: 243635960,
+    label: "Tomorrowland",
+    genre: "House",
+    type: "festival",
+    seriesName: "Tomorrowland",
+    eventSlug: "tomorrowland",
+    minDurationSec: 45 * 60,
+    titleMatch:
+      /\b(friendship|academy|euphoria|mix|live|set|tomorrowland|one\s*world)\b/i,
+    limit: Math.max(40, Number(process.env.TOMORROWLAND_SC_LIMIT || 60)),
   },
 
   // -------------------- Profile lives (not /sets album tabs) --------------------

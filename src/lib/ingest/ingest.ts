@@ -27,6 +27,11 @@ import { allocateTrackSlug, trackSlugBase } from "../tracks/slug";
 import { slugify, type RawArtist, type RawPlay, type RawSet, type SourceAdapter } from "./types";
 import { canonicalDjSlug } from "./djSlugAliases";
 import { eventSocialPayload, resolveEvent } from "./events";
+import { matchEditionSeed, recentlyEndedEditions } from "./festivalDrops";
+import {
+  backfillSetEditions,
+  ensureFestivalEditions,
+} from "./setEditions";
 import { scanEntityUrls } from "./scanEntityUrls";
 import { verifyStoredSocialUrls } from "./verifyUrls";
 
@@ -358,6 +363,63 @@ export async function runIngest(
     return created.id;
   }
 
+  /** Ensure curated EventEdition rows exist; return id for a set title. */
+  async function upsertEditionForSet(
+    eventId: string | null,
+    eventSlug: string | null | undefined,
+    title: string,
+    publishedAt: Date,
+  ): Promise<{ editionId: string | null; performedAt: Date | null }> {
+    if (!eventId || !eventSlug) {
+      return { editionId: null, performedAt: null };
+    }
+    const seed = matchEditionSeed(eventSlug, title, publishedAt);
+    if (!seed) return { editionId: null, performedAt: null };
+
+    const startsAt = new Date(`${seed.startsAt}T12:00:00Z`);
+    const endsAt = new Date(`${seed.endsAt}T23:59:59Z`);
+    const existing = await prisma.eventEdition.findUnique({
+      where: { slug: seed.slug },
+    });
+    if (existing) {
+      return {
+        editionId: existing.id,
+        performedAt: existing.endsAt ?? endsAt,
+      };
+    }
+    const created = await prisma.eventEdition.create({
+      data: {
+        slug: seed.slug,
+        eventId,
+        year: seed.year,
+        label: seed.label ?? null,
+        startsAt,
+        endsAt,
+      },
+    });
+    return { editionId: created.id, performedAt: endsAt };
+  }
+
+  async function reportFestivalGaps(): Promise<void> {
+    const recent = recentlyEndedEditions(21);
+    for (const ed of recent) {
+      const row = await prisma.eventEdition.findUnique({
+        where: { slug: ed.slug },
+        include: { _count: { select: { sets: true } }, event: true },
+      });
+      const count = row?._count.sets ?? 0;
+      if (count < 8) {
+        console.warn(
+          `[ingest] festival gap: ${ed.slug} has ${count} sets after ${ed.endsAt} — check Relive playlist / SC / channel poll`,
+        );
+      } else {
+        console.log(
+          `[ingest] festival coverage: ${ed.slug} → ${count} sets`,
+        );
+      }
+    }
+  }
+
   async function upsertSeries(
     name: string | undefined,
     djId?: string | null,
@@ -612,6 +674,18 @@ export async function runIngest(
       raw.eventKind,
       raw.eventLocation,
     );
+    const eventSlug = raw.eventName
+      ? resolveEvent(raw.eventName, {
+          kind: raw.eventKind,
+          location: raw.eventLocation,
+        }).slug
+      : null;
+    const { editionId, performedAt } = await upsertEditionForSet(
+      eventId,
+      eventSlug,
+      raw.title,
+      raw.publishedAt,
+    );
     const seriesId = await upsertSeries(raw.seriesName, primaryDjId);
 
     // Need a performing DJ, series, or event — otherwise nothing to attribute.
@@ -632,16 +706,22 @@ export async function runIngest(
       if (existing.sourceHash && existing.sourceHash === sourceHash) {
         // Still refresh artist linkage (b2b backfill) even when tracklist is unchanged.
         await syncSetArtists(existing.id, primaryDjId, collaboratorIds);
-        if (!existing.eventId && eventId) {
-          await prisma.set.update({
-            where: { id: existing.id },
-            data: { eventId },
-          });
+        const softLink: {
+          eventId?: string;
+          seriesId?: string;
+          editionId?: string;
+          performedAt?: Date;
+        } = {};
+        if (!existing.eventId && eventId) softLink.eventId = eventId;
+        if (!existing.seriesId && seriesId) softLink.seriesId = seriesId;
+        if (!existing.editionId && editionId) softLink.editionId = editionId;
+        if (!existing.performedAt && performedAt) {
+          softLink.performedAt = performedAt;
         }
-        if (!existing.seriesId && seriesId) {
+        if (Object.keys(softLink).length) {
           await prisma.set.update({
             where: { id: existing.id },
-            data: { seriesId },
+            data: softLink,
           });
         }
         // Soft-normalize / fill genre without re-pulling the tracklist.
@@ -711,9 +791,18 @@ export async function runIngest(
         },
       });
       await syncSetArtists(existing.id, primaryDjId, collaboratorIds);
-      const refreshMeta: { eventId?: string; seriesId?: string } = {};
+      const refreshMeta: {
+        eventId?: string;
+        seriesId?: string;
+        editionId?: string;
+        performedAt?: Date;
+      } = {};
       if (!existing.eventId && eventId) refreshMeta.eventId = eventId;
       if (!existing.seriesId && seriesId) refreshMeta.seriesId = seriesId;
+      if (!existing.editionId && editionId) refreshMeta.editionId = editionId;
+      if (!existing.performedAt && performedAt) {
+        refreshMeta.performedAt = performedAt;
+      }
       if (Object.keys(refreshMeta).length) {
         await prisma.set.update({
           where: { id: existing.id },
@@ -747,6 +836,8 @@ export async function runIngest(
         imageUrl: raw.imageUrl ?? null,
         sourceHash,
         eventId,
+        editionId,
+        performedAt,
         seriesId,
       },
     });
@@ -761,6 +852,18 @@ export async function runIngest(
   const lean = process.env.INGEST_LEAN === "1";
   if (lean) {
     console.log("[ingest] lean mode — skipping crosslink/catalog-socials/discovery");
+  }
+
+  try {
+    const editions = await ensureFestivalEditions(prisma);
+    if (editions) {
+      console.log(`[ingest] festival editions seeded: ${editions}`);
+    }
+  } catch (err) {
+    console.warn(
+      "[ingest] festival editions:",
+      err instanceof Error ? err.message : err,
+    );
   }
 
   // Cross-link handles before polling so newly resolved SC/YT seeds are used.
@@ -947,6 +1050,25 @@ export async function runIngest(
   } catch (err) {
     console.warn(
       "[ingest] event alias remap failed:",
+      err instanceof Error ? err.message : err,
+    );
+  }
+
+  try {
+    const linked = await backfillSetEditions(prisma);
+    if (linked) console.log(`[ingest] set editions linked: ${linked}`);
+  } catch (err) {
+    console.warn(
+      "[ingest] set editions backfill failed:",
+      err instanceof Error ? err.message : err,
+    );
+  }
+
+  try {
+    await reportFestivalGaps();
+  } catch (err) {
+    console.warn(
+      "[ingest] festival gap report failed:",
       err instanceof Error ? err.message : err,
     );
   }

@@ -20,6 +20,7 @@ import { mergeSetTitleDjs } from "./mergeSetTitleDjs";
 import { repairInsomniacMixPlayback } from "./insomniac/repairMixPlayback";
 import { applyDjSocialPins } from "./djSocialPins";
 import { KNOWN_EVENTS } from "./events";
+import { backfillSetEditions } from "./setEditions";
 
 export type VerifyStats = {
   checked: number;
@@ -154,6 +155,20 @@ export async function applyKnownUrlFixes(prisma: PrismaClient): Promise<number> 
   if (mixRepair.playbackFixed || mixRepair.dateFixed) {
     console.log(
       `[verify-urls] insomniac mixes scanned=${mixRepair.scanned} playback=${mixRepair.playbackFixed} dates=${mixRepair.dateFixed}`,
+    );
+  }
+
+  // Link festival sets to curated EventEdition windows (TML / Ultra / EDC).
+  try {
+    const editions = await backfillSetEditions(prisma);
+    n += editions;
+    if (editions) {
+      console.log(`[verify-urls] set editions linked: ${editions}`);
+    }
+  } catch (err) {
+    console.warn(
+      "[verify-urls] set editions:",
+      err instanceof Error ? err.message : err,
     );
   }
 

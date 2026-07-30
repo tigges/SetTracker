@@ -110,7 +110,23 @@ export function performingCreditFromTitle(title: string): string {
     .replace(/[⠶✦★☆●◆]/g, " ")
     .replace(/\s+/g, " ")
     .trim();
-  let m = cleaned.match(/^(.+?)\s+live\s+(?:at|from|@)\s+/i);
+  // Tomorrowland Friendship Mix with Sara Landry - July, 2026
+  let m = cleaned.match(
+    /\bfriendship\s+mix\s+with\s+(.+?)(?:\s*[-–—|,]|\s+july|\s+june|\s+may|\s+april|\s+august|\s*$)/i,
+  );
+  if (m?.[1]) return tidyPerformingCredit(m[1]!);
+  // Hardwell presents Euphoria - July, 2026
+  m = cleaned.match(/^(.+?)\s+presents\b/i);
+  if (m?.[1] && !looksLikeEventOrSeriesCredit(m[1]!)) {
+    return tidyPerformingCredit(m[1]!);
+  }
+  // Academy Student Mix: David Herrlich / JBL Academy Mix: …
+  m = cleaned.match(/\b(?:student\s+)?mix:\s*(.+?)(?:\s*[-–—]|\s*$)/i);
+  if (m?.[1] && !looksLikeEventOrSeriesCredit(m[1]!)) {
+    const head = m[1]!.split(/\s*(?:,|\sand\s+)\s*/)[0]!;
+    return tidyPerformingCredit(head);
+  }
+  m = cleaned.match(/^(.+?)\s+live\s+(?:at|from|@)\s+/i);
   if (m) return tidyPerformingCredit(m[1]!);
   m = cleaned.match(/^(.+?)\s+@\s+/);
   if (m) return tidyPerformingCredit(m[1]!);
@@ -267,7 +283,16 @@ export function artistsForSet(
 
   if (!preferredPrimary) return split;
 
+  // Festival brand accounts must not stick as the performing DJ.
   const prefSlug = preferredPrimary.slug || slugify(preferredPrimary.name);
+  if (
+    looksLikeEventOrSeriesCredit(preferredPrimary.name) ||
+    /\b(tomorrowland|insomniac|boiler\s*room|ultra)\b/i.test(
+      preferredPrimary.name,
+    )
+  ) {
+    return split;
+  }
   const primary: RawArtist = {
     ...preferredPrimary,
     slug: prefSlug,
