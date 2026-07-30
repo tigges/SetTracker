@@ -9,6 +9,7 @@ import {
 } from "@/lib/genre";
 import { CURATED_LABEL_SLUGS } from "@/lib/ingest/curatedLabels";
 import { relatedSlugsFor } from "@/lib/ingest/discovery/relations";
+import { compareFeedPriority } from "@/lib/feedPriority";
 import { resolveFeedRanks } from "@/lib/feedPriorityResolve";
 import { isBrowseReadySet } from "@/lib/setBrowse";
 import { isBrowseReadyVenue, isVenueListed } from "@/lib/venueBrowse";
@@ -833,7 +834,13 @@ export async function getVenueBySlug(slug: string) {
   // thin stubs (no set / no handle) that bloated festival pages.
   const lineupBySlug = new Map<
     string,
-    { slug: string; name: string; accent: string; imageUrl: string | null }
+    {
+      slug: string;
+      name: string;
+      accent: string;
+      imageUrl: string | null;
+      top100Rank: number | null;
+    }
   >();
   for (const s of event.sets) {
     for (const a of s.artists) {
@@ -842,32 +849,33 @@ export async function getVenueBySlug(slug: string) {
       if (isJunkArtistName(dj.name)) continue;
       if (/^view-artist-details-for-/.test(dj.slug)) continue;
       if (isBrandHostSlug(dj.slug)) continue;
+      const ranks = resolveFeedRanks({
+        primaryDjSlug: dj.slug,
+        eventSlug: event.slug,
+        eventKind: event.kind,
+        setType: s.type,
+        durationSec: s.durationSec,
+        trackCount: tallies.get(s.id)?.trackCount ?? 0,
+      });
       lineupBySlug.set(dj.slug, {
         slug: dj.slug,
         name: dj.name,
         accent: dj.accent,
         imageUrl: dj.imageUrl,
+        top100Rank: ranks.top100Rank,
       });
     }
   }
-  const lineupArtists = [...lineupBySlug.values()].sort((a, b) =>
-    a.name.localeCompare(b.name),
-  );
+  const lineupArtists = [...lineupBySlug.values()]
+    .sort(
+      (a, b) =>
+        (a.top100Rank ?? 999) - (b.top100Rank ?? 999) ||
+        a.name.localeCompare(b.name),
+    )
+    .map(({ top100Rank: _rank, ...rest }) => rest);
 
-  return {
-    slug: event.slug,
-    name: event.name,
-    kind: event.kind,
-    location: event.location,
-    socials: {
-      website: event.website,
-      soundcloud: event.soundcloud,
-      instagram: event.instagram,
-      twitter: event.twitter,
-    },
-    lineupArtists,
-    setCount: event.sets.length,
-    sets: event.sets.map((s) => {
+  const sets = event.sets
+    .map((s) => {
       const prim = s.artists.find((a) => a.isPrimary) ?? s.artists[0];
       const tally = tallies.get(s.id);
       const trackCount = tally?.trackCount ?? 0;
@@ -919,7 +927,25 @@ export async function getVenueBySlug(slug: string) {
         venueTier: ranks.venueTier,
         densitySeverity: ranks.densitySeverity,
       } satisfies FeedItem;
-    }),
+    })
+    // Complete tracklists → DJ Mag Top 100 → festival chart → recency
+    // (same transparent order as the home feed sections).
+    .sort(compareFeedPriority);
+
+  return {
+    slug: event.slug,
+    name: event.name,
+    kind: event.kind,
+    location: event.location,
+    socials: {
+      website: event.website,
+      soundcloud: event.soundcloud,
+      instagram: event.instagram,
+      twitter: event.twitter,
+    },
+    lineupArtists,
+    setCount: event.sets.length,
+    sets,
   };
 }
 
