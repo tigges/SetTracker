@@ -4,8 +4,8 @@
  * Rank *resolution* (chart JSON) lives in `feedPriorityResolve.ts` so
  * SetCard / SetFeed never pull seed data or Node builtins into the browser.
  *
- * Within This week / Earlier we sort:
- *   1) Tracklist completeness (ok → thin → severe)
+ * Within This week / Earlier — and on event/festival profile grids — we sort:
+ *   1) Tracklist completeness (ok → thin → severe; empty last)
  *   2) DJ Mag Top 100 DJs (lower chart rank first)
  *   3) DJ Mag Top 100 Festivals (linked event; lower rank first)
  *   4) Venue class: festival → club → livestream → radio → other
