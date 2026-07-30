@@ -8,10 +8,7 @@ import {
   normalizeGenreList,
 } from "@/lib/genre";
 import { CURATED_LABEL_SLUGS } from "@/lib/ingest/curatedLabels";
-import {
-  relatedSlugsFor,
-  venueArtistSlugs,
-} from "@/lib/ingest/discovery/relations";
+import { relatedSlugsFor } from "@/lib/ingest/discovery/relations";
 import { resolveFeedRanks } from "@/lib/feedPriorityResolve";
 import { isBrowseReadySet } from "@/lib/setBrowse";
 import { isBrowseReadyVenue, isVenueListed } from "@/lib/venueBrowse";
@@ -832,23 +829,30 @@ export async function getVenueBySlug(slug: string) {
 
   const tallies = await statusCountsBySetIds(event.sets.map((s) => s.id));
 
-  const lineupSlugs = venueArtistSlugs(event.slug);
-  const lineupRows = lineupSlugs.length
-    ? await prisma.dj.findMany({
-        where: { slug: { in: lineupSlugs } },
-        select: { slug: true, name: true, accent: true, imageUrl: true },
-      })
-    : [];
-  const lineupOrder = new Map(lineupSlugs.map((s, i) => [s, i]));
-  const lineupArtists = lineupRows
-    .filter(
-      (a) =>
-        !isJunkArtistName(a.name) &&
-        !/^view-artist-details-for-/.test(a.slug),
-    )
-    .sort(
-      (a, b) => (lineupOrder.get(a.slug) ?? 99) - (lineupOrder.get(b.slug) ?? 99),
-    );
+  // Only artists with a set at this event — skip official lineup dumps of
+  // thin stubs (no set / no handle) that bloated festival pages.
+  const lineupBySlug = new Map<
+    string,
+    { slug: string; name: string; accent: string; imageUrl: string | null }
+  >();
+  for (const s of event.sets) {
+    for (const a of s.artists) {
+      const dj = a.dj;
+      if (lineupBySlug.has(dj.slug)) continue;
+      if (isJunkArtistName(dj.name)) continue;
+      if (/^view-artist-details-for-/.test(dj.slug)) continue;
+      if (isBrandHostSlug(dj.slug)) continue;
+      lineupBySlug.set(dj.slug, {
+        slug: dj.slug,
+        name: dj.name,
+        accent: dj.accent,
+        imageUrl: dj.imageUrl,
+      });
+    }
+  }
+  const lineupArtists = [...lineupBySlug.values()].sort((a, b) =>
+    a.name.localeCompare(b.name),
+  );
 
   return {
     slug: event.slug,
