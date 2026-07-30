@@ -166,19 +166,22 @@ function SparseSetList({ rows }: { rows: StatsSparseSet[] }) {
   );
 }
 
-function UnresolvedIdList({ rows }: { rows: StatsUnresolvedId[] }) {
+function UnresolvedIdList({
+  rows,
+  title,
+  blurb,
+}: {
+  rows: StatsUnresolvedId[];
+  title: string;
+  blurb: string;
+}) {
   const shown = rows.slice(0, 40);
   return (
     <section>
       <div className="mb-3 flex items-baseline justify-between gap-3">
         <div>
-          <h2 className="text-lg font-bold tracking-tight">
-            Unresolved IDs · resolve queue
-          </h2>
-          <p className="mt-0.5 text-[13px] text-muted2">
-            Hottest open ID labels — community Suggest ID →{" "}
-            <span className="mono">data/resolutions.json</span>.
-          </p>
+          <h2 className="text-lg font-bold tracking-tight">{title}</h2>
+          <p className="mt-0.5 text-[13px] text-muted2">{blurb}</p>
         </div>
         <span className="mono text-[12px] text-muted2">{rows.length}</span>
       </div>
@@ -200,6 +203,11 @@ function UnresolvedIdList({ rows }: { rows: StatsUnresolvedId[] }) {
                     >
                       {row.setTitle}
                     </Link>
+                  ) : null}
+                  {row.reason ? (
+                    <span className="mono mt-0.5 block text-[11px] text-muted2">
+                      {row.reason}
+                    </span>
                   ) : null}
                 </div>
                 <span className="mono shrink-0 text-[12px] text-muted2">
@@ -513,7 +521,17 @@ export default async function StatsPage() {
       <div className="space-y-12">
         <SparseSetList rows={s.sparseSets} />
 
-        <UnresolvedIdList rows={s.topUnresolvedIds} />
+        <UnresolvedIdList
+          title="Priority unresolved · festival / Top 20"
+          blurb="Pink IDs on recent festival sets and DJ Mag Top 20 — fingerprint enrich + community resolve first."
+          rows={s.priorityUnresolvedIds}
+        />
+
+        <UnresolvedIdList
+          title="Unresolved IDs · resolve queue"
+          blurb="Hottest open ID labels — community Suggest ID → data/resolutions.json."
+          rows={s.topUnresolvedIds}
+        />
 
         <DjGapList
           title="Missing handles · has sets"
