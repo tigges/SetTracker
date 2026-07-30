@@ -214,12 +214,15 @@ async function episodeToRawSet(
         : undefined);
   if (!playbackUrl) return null;
 
-  const publishedAt =
-    (scTrack?.display_date || scTrack?.created_at
+  const fromSc =
+    scTrack?.display_date || scTrack?.created_at
       ? new Date(scTrack.display_date || scTrack.created_at || "")
-      : null) ||
-    publishedAtFromInsomniacHtml(html) ||
-    new Date();
+      : null;
+  const publishedAt =
+    (fromSc && !Number.isNaN(fromSc.getTime()) ? fromSc : null) ||
+    publishedAtFromInsomniacHtml(html);
+  // Never invent ingest-time "now" — archive episodes would rank as New.
+  if (!publishedAt) return null;
 
   const festival = inferFestivalEvent(title);
 
@@ -240,7 +243,7 @@ async function episodeToRawSet(
     eventName: festival?.name ?? "Insomniac",
     eventKind: festival?.kind ?? (festival ? "festival" : "livestream"),
     eventLocation: festival?.location ?? undefined,
-    publishedAt: Number.isNaN(publishedAt.getTime()) ? new Date() : publishedAt,
+    publishedAt,
     durationSec,
     sourceName: "Insomniac",
     sourceUrl,

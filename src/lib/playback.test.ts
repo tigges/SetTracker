@@ -10,6 +10,12 @@ assert.equal(detectPlaybackHost("https://soundcloud.com/a/b"), "soundcloud");
 assert.equal(detectPlaybackHost("https://hearthis.at/a/b/"), "hearthis");
 assert.equal(detectPlaybackHost("https://www.youtube.com/watch?v=abc"), "youtube");
 assert.equal(detectPlaybackHost("https://youtu.be/abc"), "youtube");
+assert.equal(
+  detectPlaybackHost(
+    "https://www.mixcloud.com/insomniacevents/don-diablo-edc-orlando-2018-mix/",
+  ),
+  "mixcloud",
+);
 assert.equal(detectPlaybackHost("https://example.com"), null);
 
 assert.equal(
@@ -41,6 +47,14 @@ assert.equal(
 const yt = resolvePlaybackTarget("https://youtu.be/dQw4w9WgXcQ");
 assert.ok(yt);
 assert.ok(yt!.embedSrc.includes("/embed/dQw4w9WgXcQ"));
+
+const mc = resolvePlaybackTarget(
+  "https://www.mixcloud.com/insomniacevents/don-diablo-edc-orlando-2018-mix/",
+);
+assert.ok(mc);
+assert.equal(mc!.host, "mixcloud");
+assert.ok(mc!.embedSrc.includes("mixcloud.com/widget/iframe"));
+assert.ok(mc!.embedSrc.includes("don-diablo-edc-orlando-2018-mix"));
 
 assert.equal(
   playbackUrlFromSource("SoundCloud", "https://soundcloud.com/a/b"),

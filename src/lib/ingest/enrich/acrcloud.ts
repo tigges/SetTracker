@@ -84,7 +84,8 @@ const STRONG_PROVENANCE = new Set([
 const HOST_PREF: Record<PlaybackHost, number> = {
   soundcloud: 0,
   hearthis: 1,
-  youtube: 2,
+  mixcloud: 2,
+  youtube: 3,
 };
 
 export type AcrEnrichStats = {
