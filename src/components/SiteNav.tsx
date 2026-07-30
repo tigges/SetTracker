@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 const LINKS = [
   { href: "/", label: "Sets" },
   { href: "/djs", label: "DJs" },
-  { href: "/venues", label: "Venues" },
+  { href: "/events", label: "Events" },
   { href: "/tracks", label: "Tracks" },
   { href: "/stats", label: "Stats" },
 ] as const;
@@ -15,9 +15,12 @@ function isActive(pathname: string, href: string): boolean {
   if (href === "/") {
     return pathname === "/" || pathname.startsWith("/sets");
   }
-  // Labels live under the Venues page section; keep Venues lit on /labels.
-  if (href === "/venues") {
+  // Labels live under the Events page section; keep Events lit on /labels
+  // and legacy /venues redirects.
+  if (href === "/events") {
     return (
+      pathname === "/events" ||
+      pathname.startsWith("/events/") ||
       pathname === "/venues" ||
       pathname.startsWith("/venues/") ||
       pathname === "/labels" ||

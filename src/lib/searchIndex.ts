@@ -127,7 +127,7 @@ export async function getSearchIndex(): Promise<SearchIndexItem[]> {
       subtitle: [v.location, v.kind, v._count.sets ? `${v._count.sets} sets` : null]
         .filter(Boolean)
         .join(" · "),
-      href: `/venues/${v.slug}`,
+      href: `/events/${v.slug}`,
       keywords: [v.website, "edc"].filter(Boolean).join(" "),
     });
   }

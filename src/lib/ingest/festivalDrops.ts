@@ -74,9 +74,86 @@ export const FESTIVAL_EDITION_SEEDS: FestivalEditionSeed[] = [
     startsAt: "2025-05-16",
     endsAt: "2025-05-18",
   },
+  // Parookaville 2026 — set dates in tracklists1001/festival2026.ts (2026-07-19).
+  {
+    eventSlug: "parookaville",
+    slug: "parookaville-2026",
+    year: 2026,
+    label: "Germany",
+    startsAt: "2026-07-17",
+    endsAt: "2026-07-19",
+  },
+  // Coachella two-weekend windows (Indio).
+  {
+    eventSlug: "coachella",
+    slug: "coachella-2026",
+    year: 2026,
+    label: "Indio",
+    startsAt: "2026-04-10",
+    endsAt: "2026-04-19",
+  },
+  {
+    eventSlug: "coachella",
+    slug: "coachella-2025",
+    year: 2025,
+    label: "Indio",
+    startsAt: "2025-04-11",
+    endsAt: "2025-04-20",
+  },
+  // HARD Summer — Hollywood Park weekends.
+  {
+    eventSlug: "hard-summer",
+    slug: "hard-summer-2026",
+    year: 2026,
+    label: "Los Angeles",
+    startsAt: "2026-08-01",
+    endsAt: "2026-08-02",
+  },
+  {
+    eventSlug: "hard-summer",
+    slug: "hard-summer-2025",
+    year: 2025,
+    label: "Los Angeles",
+    startsAt: "2025-08-02",
+    endsAt: "2025-08-03",
+  },
+  // Burning Man — Black Rock City (Labor Day week).
+  {
+    eventSlug: "burning-man",
+    slug: "burning-man-2026",
+    year: 2026,
+    label: "Black Rock City",
+    startsAt: "2026-08-30",
+    endsAt: "2026-09-07",
+  },
+  {
+    eventSlug: "burning-man",
+    slug: "burning-man-2025",
+    year: 2025,
+    label: "Black Rock City",
+    startsAt: "2025-08-24",
+    endsAt: "2025-09-01",
+  },
+  // Dreamstate SoCal — NOS Events Center weekend.
+  {
+    eventSlug: "dreamstate",
+    slug: "dreamstate-2025",
+    year: 2025,
+    label: "SoCal",
+    startsAt: "2025-11-21",
+    endsAt: "2025-11-23",
+  },
 ];
 
 const DAY_MS = 24 * 60 * 60 * 1000;
+
+/** Default deeper poll when an edition is in the post-weekend drop window. */
+export const FESTIVAL_DROP_YT_LIMIT = Number(
+  process.env.FESTIVAL_DROP_YT_LIMIT || 100,
+);
+export const FESTIVAL_DROP_SC_LIMIT = Number(
+  process.env.FESTIVAL_DROP_SC_LIMIT || 100,
+);
 
 /** Editions whose weekend ended in the last `withinDays` (set-drop window). */
 export function recentlyEndedEditions(
@@ -96,6 +173,34 @@ export function festivalDropBoostActive(nowMs = Date.now()): boolean {
   return recentlyEndedEditions(21, nowMs).length > 0;
 }
 
+/** True when this event brand has an edition in the drop window. */
+export function eventInDropWindow(
+  eventSlug: string,
+  withinDays = 21,
+  nowMs = Date.now(),
+): boolean {
+  return recentlyEndedEditions(withinDays, nowMs).some(
+    (e) => e.eventSlug === eventSlug,
+  );
+}
+
+/**
+ * Raise poll depth for sources tied to a festival currently in its
+ * post-weekend Relive / upload dump window. Base limit otherwise.
+ */
+export function festivalSourcePollLimit(
+  eventSlug: string | undefined | null,
+  baseLimit: number,
+  boostLimit: number = FESTIVAL_DROP_YT_LIMIT,
+  withinDays = 21,
+  nowMs = Date.now(),
+): number {
+  if (!eventSlug || !eventInDropWindow(eventSlug, withinDays, nowMs)) {
+    return baseLimit;
+  }
+  return Math.max(baseLimit, boostLimit);
+}
+
 /**
  * Infer edition year (+ optional winter/belgium hint) from a set title.
  */
@@ -111,6 +216,9 @@ export function editionHintsFromTitle(title: string): {
   else if (/\bmiami\b/i.test(title)) labelHint = "Miami";
   else if (/\blas\s*vegas\b|\bedc\s*lv\b/i.test(title)) labelHint = "Las Vegas";
   else if (/\borlando\b/i.test(title)) labelHint = "Orlando";
+  else if (/\bindio\b/i.test(title)) labelHint = "Indio";
+  else if (/\bsocal\b|\bsan\s*bernardino\b/i.test(title)) labelHint = "SoCal";
+  else if (/\bgermany\b|\bweeze\b/i.test(title)) labelHint = "Germany";
   return {
     year:
       year != null && year >= 2005 && year <= new Date().getUTCFullYear() + 1

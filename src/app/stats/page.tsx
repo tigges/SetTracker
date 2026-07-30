@@ -295,7 +295,7 @@ export default async function StatsPage() {
           <Stat label="Tracks" value={s.totals.tracks} />
           <Stat label="Plays" value={s.totals.plays} />
           <Stat label="Labels" value={s.totals.labels} />
-          <Stat label="Venues" value={s.totals.venues} />
+          <Stat label="Events" value={s.totals.venues} />
         </div>
       </section>
 

@@ -16,6 +16,10 @@ import {
 } from "../discovery/run";
 import { inferFestivalEvent, KNOWN_EVENTS } from "../events";
 import {
+  FESTIVAL_DROP_YT_LIMIT,
+  festivalSourcePollLimit,
+} from "../festivalDrops";
+import {
   fingerprintRowsToPlays,
   mergeFingerprintPlays,
   type FingerprintSeedRow,
@@ -513,7 +517,12 @@ async function pollPlaylistVideos(
   const venue = playlistAsVenue(pl);
   let ids: string[] = [];
   try {
-    ids = await fetchPlaylistVideoIds(pl.playlist, pl.limit ?? 30);
+    const plLimit = festivalSourcePollLimit(
+      pl.eventSlug,
+      pl.limit ?? 30,
+      FESTIVAL_DROP_YT_LIMIT,
+    );
+    ids = await fetchPlaylistVideoIds(pl.playlist, plLimit);
     console.log(
       `[youtube] playlist ${pl.seriesName}: ${ids.length} video ids`,
     );
@@ -601,10 +610,15 @@ export function createYoutubeAdapter(
       }
 
       for (const venue of venues) {
+        const venueLimit = festivalSourcePollLimit(
+          venue.eventSlug,
+          venue.limit ?? 8,
+          FESTIVAL_DROP_YT_LIMIT,
+        );
         await pollChannelVideos(
           venue.seriesName,
           venue.channel,
-          venue.limit ?? 8,
+          venueLimit,
           seen,
           (id) => venueVideoToHit(id, venue),
           out,

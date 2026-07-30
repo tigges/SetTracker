@@ -141,6 +141,7 @@ jobs:
           test ! -d out/server
           test -d out/sets
           test -d out/djs
+          test -d out/events
           test -d out/venues
           SET_PAGES=$(find out/sets -mindepth 1 -maxdepth 1 -type d ! -name '_placeholder' | wc -l)
           DJ_PAGES=$(find out/djs -mindepth 1 -maxdepth 1 -type d ! -name '_placeholder' | wc -l)

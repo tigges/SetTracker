@@ -5,6 +5,10 @@
  * Prefer official show / DJ accounts — not competitor databases.
  */
 
+import {
+  FESTIVAL_DROP_SC_LIMIT,
+  festivalSourcePollLimit,
+} from "../festivalDrops";
 import { ARTIST_ROSTER } from "../roster";
 import type { RawArtist } from "../types";
 import { slugify } from "../types";
@@ -264,7 +268,8 @@ export const SOUNDCLOUD_SHOWS: SoundCloudShow[] = [
     minDurationSec: 45 * 60,
     titleMatch:
       /\b(friendship|academy|euphoria|mix|live|set|tomorrowland|one\s*world)\b/i,
-    limit: Math.max(40, Number(process.env.TOMORROWLAND_SC_LIMIT || 60)),
+    // Base poll; festivalDrops phase-boosts after Belgium weekend.
+    limit: Number(process.env.TOMORROWLAND_SC_LIMIT || 40),
   },
 
   // -------------------- Profile lives (not /sets album tabs) --------------------
@@ -333,11 +338,19 @@ export function rosterSoundcloudShows(): SoundCloudShow[] {
 }
 
 export function allSoundcloudShows(): SoundCloudShow[] {
-  // Raise poll depth on the static list for "scan all sets" passes.
-  const boosted = SOUNDCLOUD_SHOWS.map((s) => ({
-    ...s,
-    limit: Math.max(s.limit ?? 20, SC_DEEP_LIMIT),
-  }));
+  // Raise poll depth on the static list for "scan all sets" passes,
+  // then phase-boost festival brands in a post-weekend drop window.
+  const boosted = SOUNDCLOUD_SHOWS.map((s) => {
+    const base = Math.max(s.limit ?? 20, SC_DEEP_LIMIT);
+    return {
+      ...s,
+      limit: festivalSourcePollLimit(
+        s.eventSlug,
+        base,
+        FESTIVAL_DROP_SC_LIMIT,
+      ),
+    };
+  });
   return [...boosted, ...rosterSoundcloudShows()];
 }
 
