@@ -67,7 +67,7 @@ function matchesGenre(s: FeedItem, genre: string): boolean {
 
 /**
  * Homepage feed:
- * New this week → Popular this week → In-demand DJs (Top 100) / Top venues →
+ * New this week → Popular this week → In-demand DJs (Top 100) / Top events →
  * Radar picks → Deep catalog.
  */
 export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }) {

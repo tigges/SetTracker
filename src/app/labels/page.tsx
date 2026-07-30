@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 
-/** Labels directory lives at the bottom of Venues. */
+/** Labels directory lives at the bottom of Events. */
 export default function LabelsIndexRedirect() {
-  redirect("/venues#labels");
+  redirect("/events#labels");
 }

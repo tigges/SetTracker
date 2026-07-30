@@ -100,7 +100,8 @@ export const YOUTUBE_PLAYLISTS: YoutubePlaylistSource[] = [
     eventSlug: "tomorrowland",
     genre: "House",
     accent: "#7b2cbf",
-    limit: Math.max(PL_LIMIT, Number(process.env.TOMORROWLAND_YT_PL_LIMIT || 80)),
+    // Base poll; festivalDrops phase-boosts during Relive dump window.
+    limit: Number(process.env.TOMORROWLAND_YT_PL_LIMIT || PL_LIMIT),
     minDurationSec: 35 * 60,
     titleMatch:
       /\b(tomorrowland|live|set|mainstage|freedom|belgium|weekend)\b/i,

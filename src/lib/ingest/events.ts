@@ -88,6 +88,13 @@ export const KNOWN_EVENTS: Record<string, CanonicalEvent> = {
     // Lineup page scanned every deep ingest (CDN + HTML + seed fallback).
     // See discovery/lineupSources.ts — Relive YT playlist + SC in festivalDrops.
   },
+  parookaville: {
+    slug: "parookaville",
+    name: "Parookaville",
+    kind: "festival",
+    location: "Weeze, Germany",
+    website: "https://parookaville.com/",
+  },
   "burning-man": {
     slug: "burning-man",
     name: "Burning Man",
@@ -254,6 +261,8 @@ const ALIAS_TO_SLUG: Record<string, string> = {
   "tomorrowland-winter": "tomorrowland",
   "tomorrowland-brasil": "tomorrowland",
   "tomorrowland-brazil": "tomorrowland",
+  parookaville: "parookaville",
+  "parookaville-festival": "parookaville",
 };
 
 function keyOf(name: string): string {
@@ -321,6 +330,7 @@ export function inferFestivalEvent(title: string): CanonicalEvent | null {
     return KNOWN_EVENTS["hard-summer"];
   }
   if (/\btomorrowland\b/i.test(t)) return KNOWN_EVENTS.tomorrowland;
+  if (/\bparookaville\b/i.test(t)) return KNOWN_EVENTS.parookaville;
   if (/\bburning\s*man\b/i.test(t)) return KNOWN_EVENTS["burning-man"];
   if (/\bcoachella\b/i.test(t)) return KNOWN_EVENTS.coachella;
   if (/\blollapalooza\b/i.test(t)) return KNOWN_EVENTS.lollapalooza;

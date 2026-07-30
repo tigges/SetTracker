@@ -3,6 +3,7 @@
  */
 
 import type { PrismaClient } from "@prisma/client";
+import { KNOWN_EVENTS } from "./events";
 import {
   FESTIVAL_EDITION_SEEDS,
   matchEditionSeed,
@@ -13,10 +14,26 @@ export async function ensureFestivalEditions(
 ): Promise<number> {
   let n = 0;
   for (const seed of FESTIVAL_EDITION_SEEDS) {
-    const event = await prisma.event.findUnique({
+    let event = await prisma.event.findUnique({
       where: { slug: seed.eventSlug },
     });
-    if (!event) continue;
+    // Ops brain: create curated festival brands before any set lands.
+    if (!event) {
+      const canon = KNOWN_EVENTS[seed.eventSlug];
+      if (!canon) continue;
+      event = await prisma.event.create({
+        data: {
+          slug: canon.slug,
+          name: canon.name,
+          kind: canon.kind,
+          location: canon.location ?? null,
+          website: canon.website ?? null,
+          soundcloud: canon.soundcloud ?? null,
+          instagram: canon.instagram ?? null,
+          twitter: canon.twitter ?? null,
+        },
+      });
+    }
     const existing = await prisma.eventEdition.findUnique({
       where: { slug: seed.slug },
     });

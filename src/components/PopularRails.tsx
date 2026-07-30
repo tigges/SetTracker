@@ -32,12 +32,12 @@ export function PopularRails({
       )}
       {venues.length > 0 && (
         <EntityRail
-          title="Top venues"
+          title="Top events"
           count={venues.length}
-          href="/venues"
+          href="/events"
           items={venues.map((v) => ({
             key: v.slug,
-            href: `/venues/${v.slug}`,
+            href: `/events/${v.slug}`,
             label: v.name,
             meta: `${v.setCount} set${v.setCount === 1 ? "" : "s"} this week`,
             imageUrl: v.imageUrl,

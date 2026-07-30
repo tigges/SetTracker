@@ -84,7 +84,7 @@ export default async function SetPage({
             {set.series && <span className="eyebrow">{set.series.name}</span>}
             {set.event && (
               <Link
-                href={`/venues/${set.event.slug}`}
+                href={`/events/${set.event.slug}`}
                 className="eyebrow transition-colors hover:text-ink"
               >
                 {set.event.name}

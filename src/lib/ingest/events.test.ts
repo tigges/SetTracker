@@ -42,5 +42,11 @@ assert.equal(
   inferFestivalEvent("Mike Williams WE2 | Tomorrowland 2026")?.slug,
   "tomorrowland",
 );
+assert.equal(
+  inferFestivalEvent("MARTEN HØRGER @ Mainstage, Parookaville 2026")?.slug,
+  "parookaville",
+);
+assert.equal(resolveEvent("Parookaville").slug, "parookaville");
+assert.equal(resolveEvent("Parookaville").website, "https://parookaville.com/");
 
 console.log("events.test.ts ok");

@@ -7,7 +7,7 @@ import type { SearchIndexItem } from "@/lib/searchIndex";
 const KIND_LABEL: Record<SearchIndexItem["kind"], string> = {
   set: "Set",
   dj: "DJ",
-  venue: "Venue",
+  venue: "Event",
   label: "Label",
   track: "Track",
 };
@@ -82,7 +82,7 @@ export function GlobalSearch({ items }: { items: SearchIndexItem[] }) {
   return (
     <div ref={root} className="relative w-full max-w-[16rem] sm:max-w-[18rem]">
       <label className="sr-only" htmlFor="global-search">
-        Search sets, DJs, venues, tracks
+        Search sets, DJs, events, tracks
       </label>
       <input
         ref={input}

@@ -27,7 +27,11 @@ import { allocateTrackSlug, trackSlugBase } from "../tracks/slug";
 import { slugify, type RawArtist, type RawPlay, type RawSet, type SourceAdapter } from "./types";
 import { canonicalDjSlug } from "./djSlugAliases";
 import { eventSocialPayload, resolveEvent } from "./events";
-import { matchEditionSeed, recentlyEndedEditions } from "./festivalDrops";
+import {
+  festivalDropBoostActive,
+  matchEditionSeed,
+  recentlyEndedEditions,
+} from "./festivalDrops";
 import {
   backfillSetEditions,
   ensureFestivalEditions,
@@ -858,6 +862,14 @@ export async function runIngest(
     const editions = await ensureFestivalEditions(prisma);
     if (editions) {
       console.log(`[ingest] festival editions seeded: ${editions}`);
+    }
+    const dropEds = recentlyEndedEditions(21);
+    if (festivalDropBoostActive() && dropEds.length) {
+      console.log(
+        `[ingest] festival drop boost active: ${dropEds
+          .map((e) => e.slug)
+          .join(", ")}`,
+      );
     }
   } catch (err) {
     console.warn(

@@ -758,7 +758,7 @@ export async function getAllDjSlugs() {
 }
 
 // ---------------------------------------------------------------------------
-// Venues (Event entities — festivals, clubs, livestream channels)
+// Events directory (Prisma Event — festivals, clubs, livestream channels)
 // Kept separate from DJs / Labels / DJ Series.
 // ---------------------------------------------------------------------------
 export async function getVenues() {

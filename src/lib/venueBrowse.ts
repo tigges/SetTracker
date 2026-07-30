@@ -1,7 +1,7 @@
 /**
- * Display policy for the Venues directory.
+ * Display policy for the Events directory (/events; legacy /venues redirects).
  * Ingest / DJ Mag still store curated clubs & festivals with a website even
- * before sets are linked; browse puts those below venues that already have sets.
+ * before sets are linked; browse puts those below events that already have sets.
  */
 
 export type VenueBrowseSignals = {
@@ -22,7 +22,7 @@ export function isDirectoryVenue(v: VenueBrowseSignals): boolean {
   return v.setCount < 1 && Boolean(v.website?.trim());
 }
 
-/** Listed anywhere on /venues (primary or directory). */
+/** Listed anywhere on /events (primary or directory). */
 export function isVenueListed(v: VenueBrowseSignals): boolean {
   return isBrowseReadyVenue(v) || isDirectoryVenue(v);
 }

@@ -1,6 +1,8 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import {
+  eventInDropWindow,
+  festivalSourcePollLimit,
   isFestivalSeasonSet,
   matchEditionSeed,
   recentlyEndedEditions,
@@ -25,10 +27,20 @@ describe("festivalDrops", () => {
     assert.equal(seed?.slug, "tomorrowland-2026-winter");
   });
 
+  it("matches Parookaville 2026", () => {
+    const seed = matchEditionSeed(
+      "parookaville",
+      "MARTEN HØRGER @ Mainstage, Parookaville 2026",
+      new Date("2026-07-20"),
+    );
+    assert.equal(seed?.slug, "parookaville-2026");
+  });
+
   it("flags recently ended editions for season rail", () => {
     const now = Date.parse("2026-07-30T12:00:00Z");
     const recent = recentlyEndedEditions(21, now);
     assert.ok(recent.some((e) => e.slug === "tomorrowland-2026-belgium"));
+    assert.ok(recent.some((e) => e.slug === "parookaville-2026"));
     assert.equal(
       isFestivalSeasonSet(
         {
@@ -42,5 +54,20 @@ describe("festivalDrops", () => {
       ),
       true,
     );
+  });
+
+  it("phase-boosts poll limits only in drop window", () => {
+    const now = Date.parse("2026-07-30T12:00:00Z");
+    assert.equal(eventInDropWindow("tomorrowland", 21, now), true);
+    assert.equal(eventInDropWindow("ultra-miami", 21, now), false);
+    assert.equal(
+      festivalSourcePollLimit("tomorrowland", 40, 100, 21, now),
+      100,
+    );
+    assert.equal(
+      festivalSourcePollLimit("ultra-miami", 40, 100, 21, now),
+      40,
+    );
+    assert.equal(festivalSourcePollLimit(undefined, 40, 100, 21, now), 40);
   });
 });
