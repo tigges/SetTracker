@@ -4,15 +4,19 @@
  * Rank *resolution* (chart JSON) lives in `feedPriorityResolve.ts` so
  * SetCard / SetFeed never pull seed data or Node builtins into the browser.
  *
- * Within This week / Earlier — and on event/festival profile grids — we sort:
+ * Within This week / Earlier we sort:
  *   1) Tracklist completeness (ok → thin → severe; empty last)
  *   2) DJ Mag Top 100 DJs (lower chart rank first)
  *   3) DJ Mag Top 100 Festivals (linked event; lower rank first)
  *   4) Venue class: festival → club → livestream → radio → other
  *   5) Recency
+ *
+ * Event/festival profile grids use `compareEventSetPriority` — same stack,
+ * plus ID quality so all-pink (unresolved) tracklists rank below identified.
  */
 
 import type { DensitySeverity } from "./setDensity";
+import type { IdStatus } from "./status";
 
 export type VenueTier =
   | "festival"
@@ -96,6 +100,68 @@ export function compareFeedPriority(
   const va = VENUE_RANK[a.venueTier ?? "other"];
   const vb = VENUE_RANK[b.venueTier ?? "other"];
   if (va !== vb) return va - vb;
+
+  return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime();
+}
+
+export type StatusCountFields = Partial<Record<IdStatus, number>> | null | undefined;
+
+/** Identified + community-resolved play count (orange / teal on the status bar). */
+export function resolvedIdCount(counts: StatusCountFields): number {
+  if (!counts) return 0;
+  return (counts.identified ?? 0) + (counts.community_resolved ?? 0);
+}
+
+/**
+ * ID quality bucket for event grids:
+ *   0 = has identified / community-resolved tracks
+ *   1 = tracklist present but only unresolved / unparsed (all-pink/grey)
+ *   2 = empty tracklist
+ */
+export function idQualityTier(
+  counts: StatusCountFields,
+  trackCount = 0,
+): 0 | 1 | 2 {
+  if (resolvedIdCount(counts) > 0) return 0;
+  if (trackCount > 0) return 1;
+  return 2;
+}
+
+export type EventSetPriorityFields = FeedPriorityFields & {
+  statusCounts?: StatusCountFields;
+  trackCount?: number | null;
+};
+
+/**
+ * Event profile grids: completeness → ID quality → Top 100 → festival → date.
+ * Deprioritizes all-pink unresolved tracklists below sets with real IDs.
+ */
+export function compareEventSetPriority(
+  a: EventSetPriorityFields,
+  b: EventSetPriorityFields,
+): number {
+  const da = DENSITY_RANK[a.densitySeverity ?? "ok"];
+  const db = DENSITY_RANK[b.densitySeverity ?? "ok"];
+  if (da !== db) return da - db;
+
+  const qa = idQualityTier(a.statusCounts, a.trackCount ?? 0);
+  const qb = idQualityTier(b.statusCounts, b.trackCount ?? 0);
+  if (qa !== qb) return qa - qb;
+
+  // Among identified sets, more resolved IDs first.
+  if (qa === 0) {
+    const ia = resolvedIdCount(a.statusCounts);
+    const ib = resolvedIdCount(b.statusCounts);
+    if (ia !== ib) return ib - ia;
+  }
+
+  const ta = a.top100Rank ?? 999;
+  const tb = b.top100Rank ?? 999;
+  if (ta !== tb) return ta - tb;
+
+  const fa = a.festivalRank ?? 999;
+  const fb = b.festivalRank ?? 999;
+  if (fa !== fb) return fa - fb;
 
   return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime();
 }

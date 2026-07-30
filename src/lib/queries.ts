@@ -9,7 +9,10 @@ import {
 } from "@/lib/genre";
 import { CURATED_LABEL_SLUGS } from "@/lib/ingest/curatedLabels";
 import { relatedSlugsFor } from "@/lib/ingest/discovery/relations";
-import { compareFeedPriority } from "@/lib/feedPriority";
+import {
+  compareEventSetPriority,
+  resolvedIdCount,
+} from "@/lib/feedPriority";
 import { resolveFeedRanks } from "@/lib/feedPriorityResolve";
 import { isBrowseReadySet } from "@/lib/setBrowse";
 import { isBrowseReadyVenue, isVenueListed } from "@/lib/venueBrowse";
@@ -830,8 +833,8 @@ export async function getVenueBySlug(slug: string) {
 
   const tallies = await statusCountsBySetIds(event.sets.map((s) => s.id));
 
-  // Only artists with a set at this event — skip official lineup dumps of
-  // thin stubs (no set / no handle) that bloated festival pages.
+  // Artists who have at least one set here with identified / community IDs —
+  // not empty shells or all-pink unresolved tracklists.
   const lineupBySlug = new Map<
     string,
     {
@@ -843,6 +846,8 @@ export async function getVenueBySlug(slug: string) {
     }
   >();
   for (const s of event.sets) {
+    const counts = tallies.get(s.id)?.counts;
+    if (resolvedIdCount(counts) < 1) continue;
     for (const a of s.artists) {
       const dj = a.dj;
       if (lineupBySlug.has(dj.slug)) continue;
@@ -928,9 +933,8 @@ export async function getVenueBySlug(slug: string) {
         densitySeverity: ranks.densitySeverity,
       } satisfies FeedItem;
     })
-    // Complete tracklists → DJ Mag Top 100 → festival chart → recency
-    // (same transparent order as the home feed sections).
-    .sort(compareFeedPriority);
+    // Completeness → identified IDs → Top 100 → festival → recency.
+    .sort(compareEventSetPriority);
 
   return {
     slug: event.slug,
