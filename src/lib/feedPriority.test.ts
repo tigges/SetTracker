@@ -3,7 +3,9 @@ import { describe, it } from "node:test";
 import { loadDjMagFestivalRankBySlug } from "./djmagFestivalRanks";
 import { loadDjMagTop100RankBySlug } from "./djmagTop100";
 import {
+  compareEventSetPriority,
   compareFeedPriority,
+  idQualityTier,
   pickRadarPicks,
   radarPickScore,
   resolveVenueTier,
@@ -93,6 +95,49 @@ describe("feedPriority complete → Top 100 → festivals", () => {
     assert.equal(sorted[2]?.festivalRank, 1);
     assert.equal(sorted[3]?.venueTier, "radio");
     assert.equal(sorted[4]?.densitySeverity, "severe");
+  });
+
+  it("event grids prefer identified IDs over all-pink unresolved", () => {
+    assert.equal(
+      idQualityTier({ identified: 10, unresolved_id: 2 }, 12),
+      0,
+    );
+    assert.equal(idQualityTier({ unresolved_id: 20 }, 20), 1);
+    assert.equal(idQualityTier({}, 0), 2);
+
+    const sorted = [
+      {
+        // Dom Dolla-style: tracks but all unresolved
+        densitySeverity: "ok" as const,
+        top100Rank: 5,
+        festivalRank: 2,
+        publishedAt: "2026-07-28T00:00:00.000Z",
+        trackCount: 20,
+        statusCounts: { unresolved_id: 20 },
+      },
+      {
+        // empty shell
+        densitySeverity: "severe" as const,
+        top100Rank: 1,
+        festivalRank: 2,
+        publishedAt: "2026-07-29T00:00:00.000Z",
+        trackCount: 0,
+        statusCounts: {},
+      },
+      {
+        // Charlotte-style: mostly identified
+        densitySeverity: "ok" as const,
+        top100Rank: 9,
+        festivalRank: 2,
+        publishedAt: "2026-07-20T00:00:00.000Z",
+        trackCount: 18,
+        statusCounts: { identified: 15, unresolved_id: 3 },
+      },
+    ].sort(compareEventSetPriority);
+
+    assert.equal(sorted[0]?.top100Rank, 9);
+    assert.equal(sorted[1]?.top100Rank, 5);
+    assert.equal(sorted[2]?.densitySeverity, "severe");
   });
 
   it("among equal Top 100, better festival rank and festival>club", () => {

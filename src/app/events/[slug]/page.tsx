@@ -46,7 +46,7 @@ export default async function EventPage({
       {event.lineupArtists.length > 0 && (
         <section className="mb-8">
           <h2 className="mb-3 text-[13px] font-semibold uppercase tracking-[0.14em] text-muted">
-            Artists with sets
+            Artists with IDs
           </h2>
           <div className="flex flex-wrap gap-2">
             {event.lineupArtists.map((a) => (
