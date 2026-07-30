@@ -61,7 +61,11 @@ export type PopularDjRail = {
   score: number;
 };
 
-/** Aggregate week sets by performing DJ (skips brand hosts). */
+/**
+ * Aggregate week sets by performing DJ.
+ * Until discovery quality is solid, only DJ Mag Top 100 DJs appear —
+ * recent upload volume alone surfaces hobby / mis-attributed profiles.
+ */
 export function popularDjsThisWeek(
   feed: FeedItem[],
   limit = 9,
@@ -69,10 +73,13 @@ export function popularDjsThisWeek(
 ): PopularDjRail[] {
   const week = feed.filter((s) => withinDays(s.publishedAt, 7, nowMs));
   const bySlug = new Map<string, PopularDjRail>();
+  const chartRank = new Map<string, number>();
 
   for (const s of week) {
     const dj = s.primaryDj;
     if (!dj || isBrandHostSlug(dj.slug)) continue;
+    // Gate on chart membership (resolved on FeedItem via djmag-top100 seeds).
+    if (s.top100Rank == null) continue;
     const score = radarPickScore(toRadarFields(s), nowMs);
     const row = bySlug.get(dj.slug);
     if (!row) {
@@ -84,16 +91,24 @@ export function popularDjsThisWeek(
         setCount: 1,
         score,
       });
+      chartRank.set(dj.slug, s.top100Rank);
     } else {
       row.setCount += 1;
       row.score += score;
       if (!row.imageUrl && dj.imageUrl) row.imageUrl = dj.imageUrl;
+      const prev = chartRank.get(dj.slug) ?? s.top100Rank;
+      if (s.top100Rank < prev) chartRank.set(dj.slug, s.top100Rank);
     }
   }
 
   return [...bySlug.values()]
     .filter((d) => d.imageUrl?.trim())
-    .sort((a, b) => b.score - a.score || b.setCount - a.setCount)
+    .sort(
+      (a, b) =>
+        b.score - a.score ||
+        b.setCount - a.setCount ||
+        (chartRank.get(a.slug) ?? 999) - (chartRank.get(b.slug) ?? 999),
+    )
     .slice(0, limit);
 }
 
