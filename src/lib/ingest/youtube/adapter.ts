@@ -18,6 +18,7 @@ import { inferFestivalEvent, KNOWN_EVENTS } from "../events";
 import {
   FESTIVAL_DROP_YT_LIMIT,
   festivalSourcePollLimit,
+  INSOMNIAC_FESTIVAL_EVENT_SLUGS,
 } from "../festivalDrops";
 import {
   fingerprintRowsToPlays,
@@ -610,8 +611,12 @@ export function createYoutubeAdapter(
       }
 
       for (const venue of venues) {
+        const boostSlugs =
+          venue.eventSlug === "insomniac"
+            ? INSOMNIAC_FESTIVAL_EVENT_SLUGS
+            : venue.eventSlug;
         const venueLimit = festivalSourcePollLimit(
-          venue.eventSlug,
+          boostSlugs,
           venue.limit ?? 8,
           FESTIVAL_DROP_YT_LIMIT,
         );

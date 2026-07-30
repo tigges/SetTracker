@@ -8,6 +8,7 @@
 import {
   FESTIVAL_DROP_SC_LIMIT,
   festivalSourcePollLimit,
+  INSOMNIAC_FESTIVAL_EVENT_SLUGS,
 } from "../festivalDrops";
 import { ARTIST_ROSTER } from "../roster";
 import type { RawArtist } from "../types";
@@ -342,10 +343,16 @@ export function allSoundcloudShows(): SoundCloudShow[] {
   // then phase-boost festival brands in a post-weekend drop window.
   const boosted = SOUNDCLOUD_SHOWS.map((s) => {
     const base = Math.max(s.limit ?? 20, SC_DEEP_LIMIT);
+    const boostSlugs =
+      s.eventSlug === "insomniac"
+        ? INSOMNIAC_FESTIVAL_EVENT_SLUGS
+        : s.permalink === "hardfest" || s.eventSlug === "hard-summer"
+          ? "hard-summer"
+          : s.eventSlug;
     return {
       ...s,
       limit: festivalSourcePollLimit(
-        s.eventSlug,
+        boostSlugs,
         base,
         FESTIVAL_DROP_SC_LIMIT,
       ),

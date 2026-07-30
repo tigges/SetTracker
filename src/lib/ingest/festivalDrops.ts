@@ -143,6 +143,72 @@ export const FESTIVAL_EDITION_SEEDS: FestivalEditionSeed[] = [
     startsAt: "2025-11-21",
     endsAt: "2025-11-23",
   },
+  {
+    eventSlug: "dreamstate",
+    slug: "dreamstate-2026",
+    year: 2026,
+    label: "SoCal",
+    startsAt: "2026-11-20",
+    endsAt: "2026-11-22",
+  },
+  // Insomniac SoCal classics — curated weekend windows.
+  {
+    eventSlug: "nocturnal-wonderland",
+    slug: "nocturnal-wonderland-2025",
+    year: 2025,
+    label: "SoCal",
+    startsAt: "2025-09-13",
+    endsAt: "2025-09-14",
+  },
+  {
+    eventSlug: "beyond-wonderland",
+    slug: "beyond-wonderland-2026",
+    year: 2026,
+    label: "SoCal",
+    startsAt: "2026-03-20",
+    endsAt: "2026-03-21",
+  },
+  {
+    eventSlug: "beyond-wonderland",
+    slug: "beyond-wonderland-2025",
+    year: 2025,
+    label: "SoCal",
+    startsAt: "2025-03-21",
+    endsAt: "2025-03-22",
+  },
+  {
+    eventSlug: "escape-halloween",
+    slug: "escape-halloween-2025",
+    year: 2025,
+    label: "SoCal",
+    startsAt: "2025-10-24",
+    endsAt: "2025-10-25",
+  },
+  {
+    eventSlug: "countdown-nye",
+    slug: "countdown-nye-2025",
+    year: 2025,
+    label: "SoCal",
+    startsAt: "2025-12-30",
+    endsAt: "2026-01-01",
+  },
+  // Lollapalooza Chicago.
+  {
+    eventSlug: "lollapalooza",
+    slug: "lollapalooza-2026",
+    year: 2026,
+    label: "Chicago",
+    startsAt: "2026-07-30",
+    endsAt: "2026-08-02",
+  },
+  {
+    eventSlug: "lollapalooza",
+    slug: "lollapalooza-2025",
+    year: 2025,
+    label: "Chicago",
+    startsAt: "2025-07-31",
+    endsAt: "2025-08-03",
+  },
 ];
 
 const DAY_MS = 24 * 60 * 60 * 1000;
@@ -185,17 +251,37 @@ export function eventInDropWindow(
 }
 
 /**
+ * Insomniac brand channel covers multiple festival editions — boost when
+ * any of these are in the post-weekend drop window.
+ */
+export const INSOMNIAC_FESTIVAL_EVENT_SLUGS = [
+  "edc-lv",
+  "hard-summer",
+  "nocturnal-wonderland",
+  "beyond-wonderland",
+  "escape-halloween",
+  "countdown-nye",
+  "dreamstate",
+] as const;
+
+/**
  * Raise poll depth for sources tied to a festival currently in its
  * post-weekend Relive / upload dump window. Base limit otherwise.
+ * Pass multiple slugs for brand channels (e.g. Insomniac).
  */
 export function festivalSourcePollLimit(
-  eventSlug: string | undefined | null,
+  eventSlug: string | readonly string[] | undefined | null,
   baseLimit: number,
   boostLimit: number = FESTIVAL_DROP_YT_LIMIT,
   withinDays = 21,
   nowMs = Date.now(),
 ): number {
-  if (!eventSlug || !eventInDropWindow(eventSlug, withinDays, nowMs)) {
+  const slugs = Array.isArray(eventSlug)
+    ? eventSlug
+    : eventSlug
+      ? [eventSlug]
+      : [];
+  if (!slugs.some((s) => eventInDropWindow(s, withinDays, nowMs))) {
     return baseLimit;
   }
   return Math.max(baseLimit, boostLimit);
@@ -219,6 +305,7 @@ export function editionHintsFromTitle(title: string): {
   else if (/\bindio\b/i.test(title)) labelHint = "Indio";
   else if (/\bsocal\b|\bsan\s*bernardino\b/i.test(title)) labelHint = "SoCal";
   else if (/\bgermany\b|\bweeze\b/i.test(title)) labelHint = "Germany";
+  else if (/\bchicago\b|\bgrant\s*park\b/i.test(title)) labelHint = "Chicago";
   return {
     year:
       year != null && year >= 2005 && year <= new Date().getUTCFullYear() + 1

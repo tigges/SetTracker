@@ -70,4 +70,13 @@ describe("festivalDrops", () => {
     );
     assert.equal(festivalSourcePollLimit(undefined, 40, 100, 21, now), 40);
   });
+
+  it("matches Lollapalooza Chicago 2026", () => {
+    const seed = matchEditionSeed(
+      "lollapalooza",
+      "Artist | Lollapalooza Chicago 2026",
+      new Date("2026-08-03"),
+    );
+    assert.equal(seed?.slug, "lollapalooza-2026");
+  });
 });
