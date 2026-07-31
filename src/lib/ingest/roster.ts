@@ -283,7 +283,7 @@ export const ARTIST_ROSTER_CURATED: ArtistRosterEntry[] = [
     accent: "#c56cff",
     youtube: { handle: "@WaxMotif", status: "ok" },
     soundcloud: { permalink: "waxmotif", userId: 11978, status: "ok" },
-    priority: "normal",
+    priority: "high",
   },
   {
     name: "John Summit",
@@ -292,7 +292,7 @@ export const ARTIST_ROSTER_CURATED: ArtistRosterEntry[] = [
     homeCity: "Chicago, US",
     youtube: { handle: "@johnsummit", status: "ok" },
     soundcloud: { permalink: "johnsummit", userId: 173854108, status: "ok" },
-    priority: "normal",
+    priority: "high",
   },
   {
     name: "Cloonee",
@@ -300,7 +300,7 @@ export const ARTIST_ROSTER_CURATED: ArtistRosterEntry[] = [
     accent: "#f08a3d",
     youtube: { handle: "@cloonee", status: "ok" },
     soundcloud: { permalink: "cloonee", userId: 78975954, status: "ok" },
-    priority: "normal",
+    priority: "high",
   },
   {
     name: "Gorgon City",
@@ -407,7 +407,7 @@ export const ARTIST_ROSTER_CURATED: ArtistRosterEntry[] = [
     accent: "#adb5bd",
     youtube: { handle: "@PAWSA", status: "ok" },
     soundcloud: { permalink: "pawsa", userId: 2265457, status: "ok" },
-    priority: "normal",
+    priority: "high",
   },
   {
     name: "Bleu Clair",
@@ -595,7 +595,8 @@ export const ARTIST_ROSTER_CURATED: ArtistRosterEntry[] = [
       "https://www.beatport.com/artist/ac-slater/52351",
       "https://www.insomniac.com/music/artists/ac-slater/",
     ],
-    priority: "normal",
+    // Similar Bass House cluster with Marten Horger / bradeazy.
+    priority: "high",
   },
   {
     name: "Marten Horger",
@@ -868,7 +869,8 @@ export const ARTIST_ROSTER_CURATED: ArtistRosterEntry[] = [
       "https://open.spotify.com/artist/4qLwtWhlhyAoQ4S9mSrDW9",
       "https://www.youtube.com/watch?v=ObiAocVMTyo",
     ],
-    priority: "normal",
+    // Similar to CID / Chris Lorenzo / SIDEPIECE tech-house cluster.
+    priority: "high",
   },
   {
     name: "Westend",
@@ -887,7 +889,8 @@ export const ARTIST_ROSTER_CURATED: ArtistRosterEntry[] = [
       "https://www.youtube.com/@itsthewestend",
       "https://www.beatport.com/artist/westend/576028",
     ],
-    priority: "normal",
+    // Similar to Dom Dolla / Mau P / Chris Lake festival tech house.
+    priority: "high",
   },
   {
     name: "Sara Landry",
