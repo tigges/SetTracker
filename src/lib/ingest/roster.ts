@@ -1113,6 +1113,53 @@ export const ARTIST_ROSTER_CURATED: ArtistRosterEntry[] = [
     priority: "high",
   },
   {
+    // Verified 2026-07-31 from YT About — SC lo-freq-1 (not empty lostfrequencies).
+    name: "Lost Frequencies",
+    genre: "Melodic House",
+    accent: "#4cc9f0",
+    homeCity: "Belgium",
+    youtube: { handle: "@LostFrequencies", status: "ok" },
+    soundcloud: {
+      permalink: "lo-freq-1",
+      userId: 29986752,
+      status: "ok",
+    },
+    website: "https://lostfrequencies.com/",
+    socials: [
+      "https://www.youtube.com/@LostFrequencies",
+      "https://soundcloud.com/lo-freq-1",
+      "https://instagram.com/lostfrequencies",
+      "https://tiktok.com/@lostfrequencies",
+      "https://facebook.com/LostFrequenciesMusic",
+      "https://x.com/lfrequencies",
+    ],
+    priority: "high",
+  },
+  {
+    // Verified 2026-07-31 from YT About — artist SC maddixmusic (not Extatic label).
+    name: "Maddix",
+    genre: "Techno",
+    accent: "#7b2cbf",
+    homeCity: "Utrecht, Netherlands",
+    youtube: { handle: "@maddixmusic", status: "ok" },
+    soundcloud: {
+      permalink: "maddixmusic",
+      userId: 119258,
+      status: "ok",
+      note: "not extaticrecords (label account)",
+    },
+    website: "https://maddixmusic.com",
+    socials: [
+      "https://www.youtube.com/@maddixmusic",
+      "https://soundcloud.com/maddixmusic",
+      "https://instagram.com/maddixmusic",
+      "https://tiktok.com/@maddixmusic",
+      "https://twitter.com/MaddixMusic",
+      "https://facebook.com/maddixmusic",
+    ],
+    priority: "high",
+  },
+  {
     name: "Swedish House Mafia",
     genre: "House",
     accent: "#212529",

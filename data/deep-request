@@ -1,4 +1,4 @@
 # Bump the timestamp below (and merge to main) to start Catalog deep refresh.
 # Used when workflow_dispatch is unavailable to the actor.
-requestedAt: 2026-07-31T23:05:00Z
-reason: Top 100 verified SC/YT pins (Fred again, SHM, Joel Corry, Snake, ATB, Nico, GORDO, Le Twins, Mariana Bo) + roster deep-scan
+requestedAt: 2026-07-31T23:10:00Z
+reason: Maddix SC maddixmusic + Lost Frequencies YT @LostFrequencies pins; roster deep-scan
