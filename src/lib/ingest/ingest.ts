@@ -47,6 +47,29 @@ const EVENT_SLUG_REMAP: Record<string, string> = {
   "ultra-music-festival": "Ultra Music Festival",
 };
 
+/**
+ * Prisma's query engine JSON-encodes string args — incomplete `\x` / `\u`
+ * sequences in tracklist text crash with "unexpected end of hex escape".
+ */
+function sanitizeDbText(
+  value: string | null | undefined,
+  fallback = "",
+): string {
+  if (value == null) return fallback;
+  let t = String(value)
+    .replace(/\u0000/g, "")
+    .replace(/[\u0001-\u0008\u000B\u000C\u000E-\u001F]/g, " ");
+  // Drop lone/incomplete escapes that break Prisma JSON encoding.
+  t = t.replace(/\\x(?![0-9a-fA-F]{2})/gi, "");
+  t = t.replace(/\\u(?![0-9a-fA-F]{4})/gi, "");
+  t = t.replace(
+    /\\(?![\\/"bfnrt]|u[0-9a-fA-F]{4}|x[0-9a-fA-F]{2})/gi,
+    "",
+  );
+  t = t.trim();
+  return t || fallback;
+}
+
 function parseHearthisPath(
   url: string,
 ): { user: string; track: string } | null {
@@ -500,12 +523,13 @@ export async function runIngest(
           remixerName: p.remixerName,
           beatportUrl: p.beatportUrl,
         });
+        const idLabel = sanitizeDbText(p.idLabel, "ID - ID");
         const idTrack = await prisma.idTrack.create({
           data: {
-            label: p.idLabel ?? "ID - ID",
+            label: idLabel,
             status: "community_resolved",
             resolvedTrackId: trackId,
-            note: p.note ?? null,
+            note: sanitizeDbText(p.note) || null,
           },
         });
         await prisma.played.create({
@@ -513,15 +537,15 @@ export async function runIngest(
             ...base,
             trackId,
             idTrackId: idTrack.id,
-            rawText: p.idLabel ?? p.rawText,
+            rawText: sanitizeDbText(p.idLabel ?? p.rawText) || null,
           },
         });
       } else if (p.idStatus === "unresolved_id") {
         const idTrack = await prisma.idTrack.create({
           data: {
-            label: p.idLabel ?? "ID - ID",
-            suspectedArtist: p.suspectedArtist ?? null,
-            note: p.note ?? null,
+            label: sanitizeDbText(p.idLabel, "ID - ID"),
+            suspectedArtist: sanitizeDbText(p.suspectedArtist) || null,
+            note: sanitizeDbText(p.note) || null,
             status: "unresolved",
           },
         });
@@ -529,7 +553,7 @@ export async function runIngest(
           data: {
             ...base,
             idTrackId: idTrack.id,
-            rawText: p.idLabel ?? p.rawText,
+            rawText: sanitizeDbText(p.idLabel ?? p.rawText) || null,
           },
         });
       } else {
@@ -537,7 +561,7 @@ export async function runIngest(
           data: {
             ...base,
             idStatus: "unparsed",
-            rawText: p.rawText ?? null,
+            rawText: sanitizeDbText(p.rawText) || null,
           },
         });
       }
@@ -944,7 +968,16 @@ export async function runIngest(
       continue;
     }
     sets.sort((a, b) => a.publishedAt.getTime() - b.publishedAt.getTime());
-    for (const s of sets) await ingestSet(s);
+    for (const s of sets) {
+      try {
+        await ingestSet(s);
+      } catch (err) {
+        console.error(
+          `[ingest] ${adapter.label} set failed (${s.sourceSlug ?? s.title}):`,
+          err instanceof Error ? err.message : err,
+        );
+      }
+    }
     stats.bySource[adapter.id] = {
       new: stats.newSets - before.new,
       refreshed: stats.refreshedSets - before.refreshed,
