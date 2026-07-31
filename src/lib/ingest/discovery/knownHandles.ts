@@ -121,6 +121,30 @@ export const KNOWN_HANDLES: Record<string, HandleHint> = {
     genre: "Tech House",
     accent: "#ff6b35",
   },
+  "anti up": {
+    youtubeHandle: "@antiup",
+    soundcloudPermalink: "antiupmusic",
+    genre: "Tech House",
+    accent: "#ff006e",
+  },
+  antiup: {
+    youtubeHandle: "@antiup",
+    soundcloudPermalink: "antiupmusic",
+    genre: "Tech House",
+    accent: "#ff006e",
+  },
+  bradeazy: {
+    youtubeHandle: "@bradeazy",
+    soundcloudPermalink: "bradeazy",
+    genre: "Bass House",
+    accent: "#3aa0e0",
+  },
+  breazly: {
+    youtubeHandle: "@bradeazy",
+    soundcloudPermalink: "bradeazy",
+    genre: "Bass House",
+    accent: "#3aa0e0",
+  },
   pawsa: {
     youtubeHandle: "@PAWSA",
     soundcloudPermalink: "pawsa",
