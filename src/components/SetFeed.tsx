@@ -67,7 +67,7 @@ function matchesGenre(s: FeedItem, genre: string): boolean {
 
 /**
  * Homepage feed:
- * New this week → Popular this week → In-demand DJs (Top 100) / Top events →
+ * New this week → Popular sets → In-demand DJs (Top 100) / Top events →
  * Radar picks → Deep catalog.
  */
 export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }) {
@@ -212,7 +212,7 @@ export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }
             <Section title="Festival season" sets={festivalSeason} />
           )}
           {popularWeek.length > 0 && (
-            <Section title="Popular this week" sets={popularWeek} />
+            <Section title="Popular sets" sets={popularWeek} />
           )}
           <PopularRails djs={popularDjs} venues={popularVenues} />
           {radarPicks.length > 0 && (

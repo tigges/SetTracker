@@ -154,6 +154,57 @@ export const YOUTUBE_VENUES: YoutubeVenueChannel[] = [
     titleMatch:
       /\b(stereohype|live|livestream|guest mix|b2b|set|house\s*&\s*tech)\b/i,
   },
+  {
+    channel: "@umftv",
+    seriesName: "Ultra Music Festival",
+    eventSlug: "ultra-miami",
+    genre: "House",
+    accent: "#00a3e0",
+    limit: Math.max(VENUE_LIMIT, 50),
+    minDurationSec: 35 * 60,
+    titleMatch: /\b(ultra|umf|live|set|mainstage|resistance)\b/i,
+  },
+  {
+    channel: "@creamfields",
+    seriesName: "Creamfields",
+    eventSlug: "creamfields",
+    genre: "House",
+    accent: "#e8b923",
+    limit: VENUE_LIMIT,
+    minDurationSec: 35 * 60,
+    titleMatch: /\b(creamfields|live|set|steel|yard|stadium)\b/i,
+  },
+  {
+    channel: "@mysteryland",
+    seriesName: "Mysteryland",
+    eventSlug: "mysteryland",
+    genre: "House",
+    accent: "#7b2cbf",
+    limit: Math.min(VENUE_LIMIT, 30),
+    minDurationSec: 35 * 60,
+    titleMatch: /\b(mysteryland|live|set|mainstage)\b/i,
+  },
+  {
+    channel: "@awakenings",
+    seriesName: "Awakenings",
+    eventSlug: "awakenings",
+    genre: "Techno",
+    accent: "#111111",
+    limit: Math.min(VENUE_LIMIT, 35),
+    minDurationSec: 40 * 60,
+    titleMatch: /\b(awakenings|live|set|techno)\b/i,
+  },
+  {
+    // Official channel ID — handle @UNTOLD can drift; ID is stable.
+    channel: "https://www.youtube.com/channel/UCeDqemm8j1o4u90IHkC0h0w",
+    seriesName: "Untold Festival",
+    eventSlug: "untold",
+    genre: "House",
+    accent: "#9b5de5",
+    limit: Math.max(VENUE_LIMIT, 45),
+    minDurationSec: 35 * 60,
+    titleMatch: /\b(untold|live|set|mainstage|cluj)\b/i,
+  },
 ];
 
 const SKIP_TITLE =

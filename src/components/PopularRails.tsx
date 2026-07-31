@@ -39,7 +39,7 @@ export function PopularRails({
             key: v.slug,
             href: `/events/${v.slug}`,
             label: v.name,
-            meta: `${v.setCount} set${v.setCount === 1 ? "" : "s"} this week`,
+            meta: `${v.setCount} set${v.setCount === 1 ? "" : "s"} recently`,
             imageUrl: v.imageUrl,
             accent: v.accent,
           }))}

@@ -209,6 +209,119 @@ export const FESTIVAL_EDITION_SEEDS: FestivalEditionSeed[] = [
     startsAt: "2025-07-31",
     endsAt: "2025-08-03",
   },
+  // Chart-heavy European / UK festivals — Relive / official dumps.
+  {
+    eventSlug: "untold",
+    slug: "untold-2026",
+    year: 2026,
+    label: "Cluj-Napoca",
+    startsAt: "2026-08-06",
+    endsAt: "2026-08-09",
+  },
+  {
+    eventSlug: "untold",
+    slug: "untold-2025",
+    year: 2025,
+    label: "Cluj-Napoca",
+    startsAt: "2025-08-07",
+    endsAt: "2025-08-10",
+  },
+  {
+    eventSlug: "creamfields",
+    slug: "creamfields-2026",
+    year: 2026,
+    label: "Daresbury",
+    startsAt: "2026-08-20",
+    endsAt: "2026-08-23",
+  },
+  {
+    eventSlug: "creamfields",
+    slug: "creamfields-2025",
+    year: 2025,
+    label: "Daresbury",
+    startsAt: "2025-08-21",
+    endsAt: "2025-08-24",
+  },
+  {
+    eventSlug: "defqon1",
+    slug: "defqon1-2026",
+    year: 2026,
+    label: "Biddinghuizen",
+    startsAt: "2026-06-25",
+    endsAt: "2026-06-28",
+  },
+  {
+    eventSlug: "defqon1",
+    slug: "defqon1-2025",
+    year: 2025,
+    label: "Biddinghuizen",
+    startsAt: "2025-06-26",
+    endsAt: "2025-06-29",
+  },
+  {
+    eventSlug: "mysteryland",
+    slug: "mysteryland-2026",
+    year: 2026,
+    label: "Haarlemmermeer",
+    startsAt: "2026-07-04",
+    endsAt: "2026-07-05",
+  },
+  {
+    eventSlug: "mysteryland",
+    slug: "mysteryland-2025",
+    year: 2025,
+    label: "Haarlemmermeer",
+    startsAt: "2025-07-05",
+    endsAt: "2025-07-06",
+  },
+  {
+    eventSlug: "electric-love",
+    slug: "electric-love-2026",
+    year: 2026,
+    label: "Salzburg",
+    startsAt: "2026-07-09",
+    endsAt: "2026-07-11",
+  },
+  {
+    eventSlug: "electric-love",
+    slug: "electric-love-2025",
+    year: 2025,
+    label: "Salzburg",
+    startsAt: "2025-07-10",
+    endsAt: "2025-07-12",
+  },
+  {
+    eventSlug: "time-warp",
+    slug: "time-warp-2026",
+    year: 2026,
+    label: "Mannheim",
+    startsAt: "2026-04-03",
+    endsAt: "2026-04-05",
+  },
+  {
+    eventSlug: "awakenings",
+    slug: "awakenings-2026",
+    year: 2026,
+    label: "Spaarnwoude",
+    startsAt: "2026-07-11",
+    endsAt: "2026-07-12",
+  },
+  {
+    eventSlug: "parklife",
+    slug: "parklife-2026",
+    year: 2026,
+    label: "Manchester",
+    startsAt: "2026-06-06",
+    endsAt: "2026-06-07",
+  },
+  {
+    eventSlug: "parklife",
+    slug: "parklife-2025",
+    year: 2025,
+    label: "Manchester",
+    startsAt: "2025-06-07",
+    endsAt: "2025-06-08",
+  },
 ];
 
 const DAY_MS = 24 * 60 * 60 * 1000;
@@ -306,6 +419,12 @@ export function editionHintsFromTitle(title: string): {
   else if (/\bsocal\b|\bsan\s*bernardino\b/i.test(title)) labelHint = "SoCal";
   else if (/\bgermany\b|\bweeze\b/i.test(title)) labelHint = "Germany";
   else if (/\bchicago\b|\bgrant\s*park\b/i.test(title)) labelHint = "Chicago";
+  else if (/\bcluj\b|\btransylvania\b/i.test(title)) labelHint = "Cluj-Napoca";
+  else if (/\bdaresbury\b|\bwarrington\b/i.test(title)) labelHint = "Daresbury";
+  else if (/\bbiddinghuizen\b/i.test(title)) labelHint = "Biddinghuizen";
+  else if (/\bmannheim\b/i.test(title)) labelHint = "Mannheim";
+  else if (/\bsalzburg\b|\bplainfeld\b/i.test(title)) labelHint = "Salzburg";
+  else if (/\bmanchester\b|\bheaton\b/i.test(title)) labelHint = "Manchester";
   return {
     year:
       year != null && year >= 2005 && year <= new Date().getUTCFullYear() + 1

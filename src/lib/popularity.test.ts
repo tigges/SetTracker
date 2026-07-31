@@ -52,7 +52,7 @@ function item(partial: Partial<FeedItem> & { id: string; slug: string }): FeedIt
 }
 
 describe("popularity rails", () => {
-  it("ranks popular sets within the week window", () => {
+  it("ranks popular sets within the recent window", () => {
     const feed = [
       item({
         id: "1",
@@ -85,6 +85,26 @@ describe("popularity rails", () => {
     ];
     const popular = popularSetsThisWeek(feed, 9);
     assert.equal(popular[0]?.id, "1");
+    assert.ok(!popular.some((s) => s.id === "old"));
+  });
+
+  it("fills popular sets from the longer lookback when the rail is thin", () => {
+    const feed = [
+      item({
+        id: "mid",
+        slug: "mid",
+        publishedAt: new Date(Date.now() - 20 * 24 * 60 * 60 * 1000),
+        top100Rank: 1,
+      }),
+      item({
+        id: "old",
+        slug: "old",
+        publishedAt: new Date(Date.now() - 40 * 24 * 60 * 60 * 1000),
+        top100Rank: 1,
+      }),
+    ];
+    const popular = popularSetsThisWeek(feed, 9);
+    assert.ok(popular.some((s) => s.id === "mid"));
     assert.ok(!popular.some((s) => s.id === "old"));
   });
 
@@ -181,6 +201,7 @@ describe("popularity rails", () => {
         eventSlug: "ultra-miami",
         eventName: "Ultra Music Festival",
         eventKind: "festival",
+        festivalRank: 4,
       }),
       item({
         id: "2",
@@ -188,6 +209,7 @@ describe("popularity rails", () => {
         eventSlug: "ultra-miami",
         eventName: "Ultra Music Festival",
         eventKind: "festival",
+        festivalRank: 4,
         primaryDj: {
           name: "Other",
           slug: "other",
@@ -200,5 +222,44 @@ describe("popularity rails", () => {
     assert.equal(venues.length, 1);
     assert.equal(venues[0]?.slug, "ultra-miami");
     assert.equal(venues[0]?.setCount, 2);
+  });
+
+  it("prefers chart festivals over livestream brands on the events rail", () => {
+    const feed = [
+      item({
+        id: "1",
+        slug: "mix",
+        eventSlug: "mixmag",
+        eventName: "Mixmag",
+        eventKind: "livestream",
+        festivalRank: null,
+      }),
+      item({
+        id: "2",
+        slug: "tl",
+        eventSlug: "tomorrowland",
+        eventName: "Tomorrowland",
+        eventKind: "festival",
+        festivalRank: 1,
+      }),
+    ];
+    const venues = popularVenuesThisWeek(feed, 9);
+    assert.equal(venues[0]?.slug, "tomorrowland");
+  });
+
+  it("includes venues from the 28-day window", () => {
+    const feed = [
+      item({
+        id: "1",
+        slug: "s1",
+        publishedAt: new Date(Date.now() - 20 * 24 * 60 * 60 * 1000),
+        eventSlug: "creamfields",
+        eventName: "Creamfields",
+        eventKind: "festival",
+        festivalRank: 7,
+      }),
+    ];
+    const venues = popularVenuesThisWeek(feed, 9);
+    assert.equal(venues[0]?.slug, "creamfields");
   });
 });

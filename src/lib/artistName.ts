@@ -85,7 +85,7 @@ export function isJunkArtistName(name: string): boolean {
   // Set-title crumbs: "OMNOM EDC Las Vegas 2024", "Artist Tomorrowland 2026"
   if (
     /\b(19|20)\d{2}\s*$/.test(n) &&
-    /\b(edc|tomorrowland|ultra|coachella|lollapalooza|parookaville|burning\s*man|hard\s*summer|dreamstate|awakenings|nocturnal|escape|countdown)\b/i.test(
+    /\b(edc|tomorrowland|ultra|coachella|lollapalooza|parookaville|burning\s*man|hard\s*summer|dreamstate|awakenings|nocturnal|escape|countdown|creamfields|untold|mysteryland|defqon|parklife|time\s*warp)\b/i.test(
       n,
     )
   ) {

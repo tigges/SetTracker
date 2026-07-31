@@ -48,5 +48,13 @@ assert.equal(
 );
 assert.equal(resolveEvent("Parookaville").slug, "parookaville");
 assert.equal(resolveEvent("Parookaville").website, "https://parookaville.com/");
+assert.equal(inferFestivalEvent("Martin Garrix | Untold 2025")?.slug, "untold");
+assert.equal(
+  inferFestivalEvent("Dom Dolla live at Creamfields Steel Yard")?.slug,
+  "creamfields",
+);
+assert.equal(resolveEvent("Creamfields").website, "https://www.creamfields.com/");
+assert.equal(resolveEvent("Untold Festival").slug, "untold");
+assert.equal(inferFestivalEvent("B2B at Awakenings Festival")?.slug, "awakenings");
 
 console.log("events.test.ts ok");
