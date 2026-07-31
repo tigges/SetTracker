@@ -24,6 +24,17 @@ const CHART_TO_EVENT_SLUG: Record<string, string> = {
   "beyond-wonderland": "beyond-wonderland",
   "escape-halloween": "escape-halloween",
   "countdown-nye": "countdown-nye",
+  "untold-festival": "untold",
+  untold: "untold",
+  creamfields: "creamfields",
+  defqon1: "defqon1",
+  "electric-love": "electric-love",
+  parklife: "parklife",
+  "time-warp": "time-warp",
+  mysteryland: "mysteryland",
+  "awakenings-festival": "awakenings",
+  awakenings: "awakenings",
+  parookaville: "parookaville",
 };
 
 /** Event / chart slug → festival chart rank (1 = #1). */

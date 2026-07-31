@@ -206,6 +206,64 @@ export const KNOWN_EVENTS: Record<string, CanonicalEvent> = {
     soundcloud: "https://soundcloud.com/stereohypeglobal",
     instagram: "https://www.instagram.com/stereohype/",
   },
+  untold: {
+    slug: "untold",
+    name: "Untold Festival",
+    kind: "festival",
+    location: "Cluj-Napoca, Romania",
+    website: "https://untold.com/",
+    instagram: "https://www.instagram.com/untoldfestival/",
+  },
+  creamfields: {
+    slug: "creamfields",
+    name: "Creamfields",
+    kind: "festival",
+    location: "Daresbury, UK",
+    website: "https://www.creamfields.com/",
+    instagram: "https://www.instagram.com/creamfields/",
+  },
+  defqon1: {
+    slug: "defqon1",
+    name: "Defqon.1",
+    kind: "festival",
+    location: "Biddinghuizen, Netherlands",
+    website: "https://www.defqon1.nl/",
+  },
+  "electric-love": {
+    slug: "electric-love",
+    name: "Electric Love",
+    kind: "festival",
+    location: "Salzburg, Austria",
+    website: "https://www.electriclove.at/",
+  },
+  parklife: {
+    slug: "parklife",
+    name: "Parklife",
+    kind: "festival",
+    location: "Heaton Park, Manchester",
+    website: "https://www.parklife.uk.com/",
+  },
+  "time-warp": {
+    slug: "time-warp",
+    name: "Time Warp",
+    kind: "festival",
+    location: "Mannheim, Germany",
+    website: "https://www.time-warp.de/",
+  },
+  mysteryland: {
+    slug: "mysteryland",
+    name: "Mysteryland",
+    kind: "festival",
+    location: "Haarlemmermeer, Netherlands",
+    website: "https://mysteryland.id-t.com/",
+  },
+  awakenings: {
+    slug: "awakenings",
+    name: "Awakenings",
+    kind: "festival",
+    location: "Amsterdam, Netherlands",
+    website: "https://www.awakenings.nl/",
+  },
 };
 
 /** Alternate name/slug keys → canonical slug. */
@@ -263,6 +321,18 @@ const ALIAS_TO_SLUG: Record<string, string> = {
   "tomorrowland-brazil": "tomorrowland",
   parookaville: "parookaville",
   "parookaville-festival": "parookaville",
+  untold: "untold",
+  "untold-festival": "untold",
+  creamfields: "creamfields",
+  defqon1: "defqon1",
+  "defqon-1": "defqon1",
+  "electric-love": "electric-love",
+  parklife: "parklife",
+  "time-warp": "time-warp",
+  timewarp: "time-warp",
+  mysteryland: "mysteryland",
+  awakenings: "awakenings",
+  "awakenings-festival": "awakenings",
 };
 
 function keyOf(name: string): string {
@@ -351,6 +421,14 @@ export function inferFestivalEvent(title: string): CanonicalEvent | null {
   if (/\bushua[iï]a\b/i.test(t)) return KNOWN_EVENTS["ushuaia-ibiza"];
   if (/\bstereo\s*hype\b/i.test(t)) return KNOWN_EVENTS.stereohype;
   if (/\bdjoon\b|\bdjøøn\b/i.test(t)) return KNOWN_EVENTS.djoon;
+  if (/\buntold\b/i.test(t) && !/\bdubai\b/i.test(t)) return KNOWN_EVENTS.untold;
+  if (/\bcreamfields\b/i.test(t)) return KNOWN_EVENTS.creamfields;
+  if (/\bdefqon\.?\s*1\b/i.test(t)) return KNOWN_EVENTS.defqon1;
+  if (/\belectric\s*love\b/i.test(t)) return KNOWN_EVENTS["electric-love"];
+  if (/\bparklife\b/i.test(t)) return KNOWN_EVENTS.parklife;
+  if (/\btime\s*warp\b/i.test(t)) return KNOWN_EVENTS["time-warp"];
+  if (/\bmysteryland\b/i.test(t)) return KNOWN_EVENTS.mysteryland;
+  if (/\bawakenings\b/i.test(t)) return KNOWN_EVENTS.awakenings;
   // DJ Mag Top 100 Festivals / Clubs / other club listicles (not Mixmag.net).
   return (
     inferDjMagFestivalEvent(t) ??

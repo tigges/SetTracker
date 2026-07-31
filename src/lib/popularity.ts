@@ -13,6 +13,14 @@ import type { FeedItem } from "@/lib/queries";
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 
+/** Primary window for Popular sets (then fill from longer lookback). */
+export const POPULAR_SETS_LOOKBACK_DAYS = 14;
+export const POPULAR_SETS_FILL_DAYS = 28;
+/** Primary window for Top events (then fill from season lookback). */
+export const POPULAR_VENUES_LOOKBACK_DAYS = 28;
+export const POPULAR_VENUES_FILL_DAYS = 90;
+const RAIL_FILL_MIN = 6;
+
 export function withinDays(
   d: Date | string,
   days: number,
@@ -40,16 +48,48 @@ function toRadarFields(s: FeedItem): FeedItem & RadarPickFields {
   };
 }
 
-/** Top Radar-scored sets in the last N days (diversified like Radar picks). */
+function pickRecentSets(
+  feed: FeedItem[],
+  lookbackDays: number,
+  limit: number,
+  nowMs: number,
+  excludeIds?: Set<string>,
+): FeedItem[] {
+  const pool = feed
+    .filter(
+      (s) =>
+        withinDays(s.publishedAt, lookbackDays, nowMs) &&
+        !excludeIds?.has(s.id),
+    )
+    .map(toRadarFields);
+  return pickRadarPicks(pool, limit, nowMs);
+}
+
+/**
+ * Top Radar-scored sets recently (14d), with a 28d fill when the rail is thin.
+ * Diversified like Radar picks.
+ */
 export function popularSetsThisWeek(
   feed: FeedItem[],
   limit = 9,
   nowMs = Date.now(),
 ): FeedItem[] {
-  const week = feed
-    .filter((s) => withinDays(s.publishedAt, 7, nowMs))
-    .map(toRadarFields);
-  return pickRadarPicks(week, limit, nowMs);
+  const primary = pickRecentSets(
+    feed,
+    POPULAR_SETS_LOOKBACK_DAYS,
+    limit,
+    nowMs,
+  );
+  if (primary.length >= Math.min(limit, RAIL_FILL_MIN)) return primary;
+  const used = new Set(primary.map((s) => s.id));
+  const fill = pickRecentSets(
+    feed,
+    POPULAR_SETS_FILL_DAYS,
+    limit - primary.length,
+    nowMs,
+    used,
+  );
+  return [...primary, ...fill];
 }
 
 export type PopularDjRail = {
@@ -120,7 +160,111 @@ export type PopularVenueRail = {
   accent: string;
   setCount: number;
   score: number;
+  festivalRank?: number | null;
 };
+
+function venueKindBoost(kind: string | null | undefined): number {
+  if (kind === "festival") return 12;
+  if (kind === "conference") return 6;
+  if (kind === "club") return 4;
+  return 0;
+}
+
+function venueChartBoost(festivalRank: number | null | undefined): number {
+  if (festivalRank == null) return 0;
+  return Math.max(0, 36 - (festivalRank - 1) * 0.28);
+}
+
+function aggregateVenues(
+  sets: FeedItem[],
+  nowMs: number,
+): Map<string, PopularVenueRail> {
+  const bySlug = new Map<string, PopularVenueRail>();
+
+  for (const s of sets) {
+    if (!s.eventSlug || !s.eventName) continue;
+    const base = radarPickScore(toRadarFields(s), nowMs);
+    const row = bySlug.get(s.eventSlug);
+    if (!row) {
+      bySlug.set(s.eventSlug, {
+        slug: s.eventSlug,
+        name: s.eventName,
+        kind: s.eventKind,
+        imageUrl: s.eventImageUrl ?? s.imageUrl ?? s.primaryDj?.imageUrl ?? null,
+        accent: s.primaryDj?.accent ?? "var(--brand)",
+        setCount: 1,
+        score: base,
+        festivalRank: s.festivalRank ?? null,
+      });
+    } else {
+      row.setCount += 1;
+      row.score += base;
+      if (row.festivalRank == null && s.festivalRank != null) {
+        row.festivalRank = s.festivalRank;
+      } else if (
+        s.festivalRank != null &&
+        row.festivalRank != null &&
+        s.festivalRank < row.festivalRank
+      ) {
+        row.festivalRank = s.festivalRank;
+      }
+      if (!row.imageUrl) {
+        row.imageUrl =
+          s.eventImageUrl ?? s.imageUrl ?? s.primaryDj?.imageUrl ?? null;
+      }
+    }
+  }
+
+  for (const row of bySlug.values()) {
+    row.score +=
+      venueChartBoost(row.festivalRank) + venueKindBoost(row.kind) * row.setCount;
+  }
+
+  return bySlug;
+}
+
+function rankVenueRails(
+  bySlug: Map<string, PopularVenueRail>,
+  limit: number,
+  excludeSlugs?: Set<string>,
+): PopularVenueRail[] {
+  return [...bySlug.values()]
+    .filter((v) => v.setCount >= 1 && !excludeSlugs?.has(v.slug))
+    .sort(
+      (a, b) =>
+        b.score - a.score ||
+        b.setCount - a.setCount ||
+        (a.festivalRank ?? 999) - (b.festivalRank ?? 999),
+    )
+    .slice(0, limit);
+}
+
+/**
+ * Aggregate recent sets by event / venue (28d), preferring chart festivals.
+ * Fills from 90d when the rail would otherwise be thin.
+ */
+export function popularVenuesThisWeek(
+  feed: FeedItem[],
+  limit = 9,
+  nowMs = Date.now(),
+): PopularVenueRail[] {
+  const primarySets = feed.filter((s) =>
+    withinDays(s.publishedAt, POPULAR_VENUES_LOOKBACK_DAYS, nowMs),
+  );
+  const primary = rankVenueRails(aggregateVenues(primarySets, nowMs), limit);
+  if (primary.length >= Math.min(limit, RAIL_FILL_MIN)) return primary;
+
+  const used = new Set(primary.map((v) => v.slug));
+  const fillSets = feed.filter((s) =>
+    withinDays(s.publishedAt, POPULAR_VENUES_FILL_DAYS, nowMs),
+  );
+  const fill = rankVenueRails(
+    aggregateVenues(fillSets, nowMs),
+    limit - primary.length,
+    used,
+  );
+  return [...primary, ...fill];
+}
 
 /**
  * Sets from festivals whose edition just ended (or recent festival uploads
@@ -146,43 +290,4 @@ export function festivalSeasonSets(
     )
     .map(toRadarFields);
   return pickRadarPicks(pool, limit, nowMs);
-}
-
-/** Aggregate week sets by event / venue. */
-export function popularVenuesThisWeek(
-  feed: FeedItem[],
-  limit = 9,
-  nowMs = Date.now(),
-): PopularVenueRail[] {
-  const week = feed.filter((s) => withinDays(s.publishedAt, 7, nowMs));
-  const bySlug = new Map<string, PopularVenueRail>();
-
-  for (const s of week) {
-    if (!s.eventSlug || !s.eventName) continue;
-    const score = radarPickScore(toRadarFields(s), nowMs);
-    const row = bySlug.get(s.eventSlug);
-    if (!row) {
-      bySlug.set(s.eventSlug, {
-        slug: s.eventSlug,
-        name: s.eventName,
-        kind: s.eventKind,
-        imageUrl: s.eventImageUrl ?? s.imageUrl ?? s.primaryDj?.imageUrl ?? null,
-        accent: s.primaryDj?.accent ?? "var(--brand)",
-        setCount: 1,
-        score,
-      });
-    } else {
-      row.setCount += 1;
-      row.score += score;
-      if (!row.imageUrl) {
-        row.imageUrl =
-          s.eventImageUrl ?? s.imageUrl ?? s.primaryDj?.imageUrl ?? null;
-      }
-    }
-  }
-
-  return [...bySlug.values()]
-    .filter((v) => v.setCount >= 1)
-    .sort((a, b) => b.score - a.score || b.setCount - a.setCount)
-    .slice(0, limit);
 }
