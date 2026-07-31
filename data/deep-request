@@ -1,0 +1,4 @@
+# Bump the timestamp below (and merge to main) to start Catalog deep refresh.
+# Used when workflow_dispatch is unavailable to the actor.
+requestedAt: 2026-07-31T17:20:00Z
+reason: crawl anchor favorites (CID, Anti Up, bradeazy, …) then similar Tech House / Bass House channels
