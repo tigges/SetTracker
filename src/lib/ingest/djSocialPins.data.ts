@@ -989,4 +989,28 @@ export const DJ_SOCIAL_PINS: DjSocialPin[] = [
     website: "https://joelcorry.com",
     bio: "House. Official joelcorry.com — SC joelcorry, YT @JoelCorry, IG/X @joelcorry.",
   },
+  {
+    // Verified 2026-07-31 from YT About — artist SC is maddixmusic (not label extaticrecords).
+    slug: "maddix",
+    name: "Maddix",
+    accent: "#7b2cbf",
+    soundcloud: "https://soundcloud.com/maddixmusic",
+    youtube: "https://www.youtube.com/@maddixmusic",
+    instagram: "https://instagram.com/maddixmusic",
+    twitter: "https://twitter.com/MaddixMusic",
+    website: "https://maddixmusic.com",
+    bio: "Techno / rave. Official maddixmusic.com — SC maddixmusic (not Extatic label), YT/IG @maddixmusic, X @MaddixMusic.",
+  },
+  {
+    // Verified 2026-07-31 from YT About — keep lo-freq-1 (lostfrequencies has 0 tracks).
+    slug: "lost-frequencies",
+    name: "Lost Frequencies",
+    accent: "#4cc9f0",
+    soundcloud: "https://soundcloud.com/lo-freq-1",
+    youtube: "https://www.youtube.com/@LostFrequencies",
+    instagram: "https://instagram.com/lostfrequencies",
+    twitter: "https://x.com/lfrequencies",
+    website: "https://lostfrequencies.com/",
+    bio: "Melodic House. Official lostfrequencies.com — SC lo-freq-1, YT @LostFrequencies, IG @lostfrequencies, X @lfrequencies.",
+  },
 ];

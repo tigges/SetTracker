@@ -403,6 +403,18 @@ export const KNOWN_HANDLES: Record<string, HandleHint> = {
     genre: "Hard Techno",
     accent: "#d00000",
   },
+  maddix: {
+    youtubeHandle: "@maddixmusic",
+    soundcloudPermalink: "maddixmusic",
+    genre: "Techno",
+    accent: "#7b2cbf",
+  },
+  "lost frequencies": {
+    youtubeHandle: "@LostFrequencies",
+    soundcloudPermalink: "lo-freq-1",
+    genre: "Melodic House",
+    accent: "#4cc9f0",
+  },
 };
 
 export function hintForName(name: string): HandleHint | undefined {

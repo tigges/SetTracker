@@ -131,4 +131,11 @@ assert.match(bySlug["le-twins"]!.youtube!, /@letwinsdjs/i);
 assert.match(bySlug["mariana-bo"]!.soundcloud!, /borrego-s/);
 assert.match(bySlug.fantasm!.soundcloud!, /kenzo-meservey/);
 
+assert.ok(bySlug.maddix);
+assert.match(bySlug.maddix!.soundcloud!, /maddixmusic/);
+assert.match(bySlug.maddix!.youtube!, /@maddixmusic/i);
+assert.ok(bySlug["lost-frequencies"]);
+assert.match(bySlug["lost-frequencies"]!.soundcloud!, /lo-freq-1/);
+assert.match(bySlug["lost-frequencies"]!.youtube!, /@LostFrequencies/i);
+
 console.log("djSocialPins.test.ts ok");
