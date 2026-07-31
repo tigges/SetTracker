@@ -138,4 +138,25 @@ assert.ok(bySlug["lost-frequencies"]);
 assert.match(bySlug["lost-frequencies"]!.soundcloud!, /lo-freq-1/);
 assert.match(bySlug["lost-frequencies"]!.youtube!, /@LostFrequencies/i);
 
+const offRoster13 = [
+  ["martin-garrix", /martingarrix/, /@MartinGarrix/i],
+  ["don-diablo", /dondiablo/, /@DonDiablo/i],
+  ["steve-aoki", /steveaoki/, /@SteveAoki/i],
+  ["hardwell", /hardwell/, /@hardwell/i],
+  ["carl-cox", /carl-cox/, /@CarlCoxofficialTV/i],
+  ["eric-prydz", /eric-prydz/, /@ericprydz/i],
+  ["amelie-lens", /amelielens/, /@AmelieLens/i],
+  ["paul-van-dyk", /paulvandykofficial/, /@PaulvanDyk/i],
+  ["korolova", /korolovadj/, /@KOROLOVADJ/i],
+  ["kolsch", /kolsch/, /@KolschOfficial/i],
+  ["miss-monique", /alesia-arkusha/, /@djmissmonique/i],
+  ["ferry-corsten", /ferry-corsten/, /@FerryCorsten/i],
+  ["topic", /topicmusic/, /@topicmusictv/i],
+] as const;
+for (const [slug, sc, yt] of offRoster13) {
+  assert.ok(bySlug[slug], `missing pin ${slug}`);
+  assert.match(bySlug[slug]!.soundcloud!, sc);
+  assert.match(bySlug[slug]!.youtube!, yt);
+}
+
 console.log("djSocialPins.test.ts ok");

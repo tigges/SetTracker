@@ -415,6 +415,90 @@ export const KNOWN_HANDLES: Record<string, HandleHint> = {
     genre: "Melodic House",
     accent: "#4cc9f0",
   },
+  "martin garrix": {
+    youtubeHandle: "@MartinGarrix",
+    soundcloudPermalink: "martingarrix",
+    genre: "Big Room",
+    accent: "#ff9f1c",
+  },
+  "don diablo": {
+    youtubeHandle: "@DonDiablo",
+    soundcloudPermalink: "dondiablo",
+    genre: "Future House",
+    accent: "#ff006e",
+  },
+  "steve aoki": {
+    youtubeHandle: "@SteveAoki",
+    soundcloudPermalink: "steveaoki",
+    genre: "Electro House",
+    accent: "#3a86ff",
+  },
+  hardwell: {
+    youtubeHandle: "@hardwell",
+    soundcloudPermalink: "hardwell",
+    genre: "Big Room",
+    accent: "#ef233c",
+  },
+  "carl cox": {
+    youtubeHandle: "@CarlCoxofficialTV",
+    soundcloudPermalink: "carl-cox",
+    genre: "Techno",
+    accent: "#212529",
+  },
+  "eric prydz": {
+    youtubeHandle: "@ericprydz",
+    soundcloudPermalink: "eric-prydz",
+    genre: "Progressive House",
+    accent: "#7209b7",
+  },
+  "amelie lens": {
+    youtubeHandle: "@AmelieLens",
+    soundcloudPermalink: "amelielens",
+    genre: "Techno",
+    accent: "#d00000",
+  },
+  "paul van dyk": {
+    youtubeHandle: "@PaulvanDyk",
+    soundcloudPermalink: "paulvandykofficial",
+    genre: "Trance",
+    accent: "#00b4d8",
+  },
+  korolova: {
+    youtubeHandle: "@KOROLOVADJ",
+    soundcloudPermalink: "korolovadj",
+    genre: "Melodic Techno",
+    accent: "#f72585",
+  },
+  "kölsch": {
+    youtubeHandle: "@KolschOfficial",
+    soundcloudPermalink: "kolsch",
+    genre: "Melodic Techno",
+    accent: "#ffd60a",
+  },
+  kolsch: {
+    youtubeHandle: "@KolschOfficial",
+    soundcloudPermalink: "kolsch",
+    genre: "Melodic Techno",
+    accent: "#ffd60a",
+  },
+  "miss monique": {
+    youtubeHandle: "@djmissmonique",
+    soundcloudPermalink: "alesia-arkusha",
+    genre: "Melodic Techno",
+    accent: "#9b5de5",
+  },
+  "ferry corsten": {
+    youtubeHandle: "@FerryCorsten",
+    soundcloudPermalink: "ferry-corsten",
+    genre: "Trance",
+    accent: "#48cae4",
+  },
+  topic: {
+    youtubeHandle: "@topicmusictv",
+    soundcloudPermalink: "topicmusic",
+    genre: "Dance",
+    accent: "#fb8500",
+  },
 };
 
 export function hintForName(name: string): HandleHint | undefined {
