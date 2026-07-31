@@ -100,4 +100,35 @@ assert.match(
 );
 assert.match(bySlug.msendy!.website, /mixcloud\.com\/Msendy/i);
 
+for (const slug of [
+  "fred-again",
+  "swedish-house-mafia",
+  "joel-corry",
+  "dj-snake",
+  "atb",
+  "nico-moreno",
+  "gordo",
+  "le-twins",
+  "mariana-bo",
+  "fantasm",
+]) {
+  assert.ok(bySlug[slug], `missing pin ${slug}`);
+  assert.match(bySlug[slug]!.soundcloud!, /^https:\/\/soundcloud\.com\//);
+  assert.match(bySlug[slug]!.youtube!, /youtube\.com\//);
+}
+assert.match(bySlug["fred-again"]!.youtube!, /@Fredagainagain/i);
+assert.match(bySlug["fred-again"]!.soundcloud!, /fredagain/);
+assert.match(bySlug["swedish-house-mafia"]!.soundcloud!, /officialswedishhousemafia/);
+assert.match(bySlug["joel-corry"]!.soundcloud!, /joelcorry/);
+assert.match(bySlug["dj-snake"]!.soundcloud!, /soundcloud\.com\/djsnake/);
+assert.match(bySlug.atb!.soundcloud!, /atb-music/);
+assert.match(bySlug.atb!.youtube!, /@atb/i);
+assert.match(bySlug["nico-moreno"]!.soundcloud!, /nicomorenomusic/);
+assert.match(bySlug["nico-moreno"]!.youtube!, /@nicomoreno_music/i);
+assert.match(bySlug.gordo!.youtube!, /@gordoszn/i);
+assert.match(bySlug.gordo!.soundcloud!, /gordoszn/);
+assert.match(bySlug["le-twins"]!.youtube!, /@letwinsdjs/i);
+assert.match(bySlug["mariana-bo"]!.soundcloud!, /borrego-s/);
+assert.match(bySlug.fantasm!.soundcloud!, /kenzo-meservey/);
+
 console.log("djSocialPins.test.ts ok");
