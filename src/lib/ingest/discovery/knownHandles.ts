@@ -121,6 +121,30 @@ export const KNOWN_HANDLES: Record<string, HandleHint> = {
     genre: "Tech House",
     accent: "#ff6b35",
   },
+  "anti up": {
+    youtubeHandle: "@antiup",
+    soundcloudPermalink: "antiupmusic",
+    genre: "Tech House",
+    accent: "#ff006e",
+  },
+  antiup: {
+    youtubeHandle: "@antiup",
+    soundcloudPermalink: "antiupmusic",
+    genre: "Tech House",
+    accent: "#ff006e",
+  },
+  bradeazy: {
+    youtubeHandle: "@bradeazy",
+    soundcloudPermalink: "bradeazy",
+    genre: "Bass House",
+    accent: "#3aa0e0",
+  },
+  breazly: {
+    youtubeHandle: "@bradeazy",
+    soundcloudPermalink: "bradeazy",
+    genre: "Bass House",
+    accent: "#3aa0e0",
+  },
   pawsa: {
     youtubeHandle: "@PAWSA",
     soundcloudPermalink: "pawsa",
@@ -144,6 +168,24 @@ export const KNOWN_HANDLES: Record<string, HandleHint> = {
     soundcloudPermalink: "realmaup",
     genre: "Tech House",
     accent: "#118ab2",
+  },
+  cid: {
+    youtubeHandle: "@CIDmusic",
+    soundcloudPermalink: "cidmusic",
+    genre: "Tech House",
+    accent: "#45c7e0",
+  },
+  brandon: {
+    youtubeHandle: "@BRANDONSOUNDS",
+    soundcloudPermalink: "brandonsounds",
+    genre: "Tech House",
+    accent: "#ff5e5e",
+  },
+  "brandon (de)": {
+    youtubeHandle: "@BRANDONSOUNDS",
+    soundcloudPermalink: "brandonsounds",
+    genre: "Tech House",
+    accent: "#ff5e5e",
   },
   "black coffee": {
     youtubeHandle: "@realblackcoffee",
