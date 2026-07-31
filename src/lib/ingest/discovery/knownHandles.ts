@@ -145,6 +145,24 @@ export const KNOWN_HANDLES: Record<string, HandleHint> = {
     genre: "Tech House",
     accent: "#118ab2",
   },
+  cid: {
+    youtubeHandle: "@CIDmusic",
+    soundcloudPermalink: "cidmusic",
+    genre: "Tech House",
+    accent: "#45c7e0",
+  },
+  brandon: {
+    youtubeHandle: "@BRANDONSOUNDS",
+    soundcloudPermalink: "brandonsounds",
+    genre: "Tech House",
+    accent: "#ff5e5e",
+  },
+  "brandon (de)": {
+    youtubeHandle: "@BRANDONSOUNDS",
+    soundcloudPermalink: "brandonsounds",
+    genre: "Tech House",
+    accent: "#ff5e5e",
+  },
   "black coffee": {
     youtubeHandle: "@realblackcoffee",
     soundcloudPermalink: "realblackcoffee",
