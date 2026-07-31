@@ -22,6 +22,7 @@ import {
   fetchPlaylistTracks,
   fetchTrackComments,
   fetchUserTracks,
+  resolveTrack,
   resolveUser,
   sleep,
   type ScTrack,
@@ -51,6 +52,10 @@ import {
   isSetCandidate,
   type SoundCloudShow,
 } from "./shows";
+import {
+  SOUNDCLOUD_TRACK_SEEDS,
+  type SoundCloudTrackSeed,
+} from "./tracks";
 
 const ACCENT_FALLBACK = "#00f0a0";
 
@@ -252,6 +257,113 @@ async function playlistTrackToRawSet(
   return raw;
 }
 
+/**
+ * Curated single-track seed → RawSet (guestmixes on radio/label accounts).
+ * Always attributes to seed.primaryArtist; sourceSlug uses uploader permalink
+ * so it dedupes if the same URL later appears in a show/playlist poll.
+ */
+async function trackSeedToRawSet(
+  track: ScTrack,
+  seed: SoundCloudTrackSeed,
+): Promise<RawSet | null> {
+  const durationSec = durationSecOfTrack(track);
+  const title = (track.title || "").trim();
+  const min = seed.minDurationSec ?? 15 * 60;
+  if (!title || durationSec < min) return null;
+
+  const uploader = track.user?.permalink || "unknown";
+  const permalink = track.permalink || String(track.id);
+  const sourceSlug = `sc-${uploader}-${slugify(permalink)}`.slice(0, 120);
+  const sourceUrl =
+    track.permalink_url ||
+    `https://soundcloud.com/${uploader}/${permalink}`;
+
+  const fromDescription = parseDescriptionTracklist(
+    track.description,
+    durationSec,
+  );
+
+  let fromComments = parseTimedComments([], durationSec);
+  if ((track.comment_count ?? 0) > 0 && durationSec >= 15 * 60) {
+    try {
+      const comments = await fetchTrackComments(track.id, 200);
+      fromComments = parseTimedComments(comments, durationSec);
+      await sleep(120);
+    } catch (err) {
+      console.warn(
+        `[soundcloud] seed comments failed for ${sourceUrl}:`,
+        err instanceof Error ? err.message : err,
+      );
+    }
+  }
+
+  const plays = applyTracklist1001Seed(
+    sourceSlug,
+    mergeTracklistSignals(fromDescription, fromComments),
+  );
+  const artistImage = scImageUrl(track.user?.avatar_url);
+  const setImage = scImageUrl(track.artwork_url) || artistImage;
+  const preferredPrimary = {
+    ...seed.primaryArtist,
+    imageUrl: seed.primaryArtist.imageUrl || artistImage,
+  };
+  const { primary, collaborators } = artistsForSet(title, preferredPrimary);
+  const festival = inferFestivalEvent(title);
+  const raw: RawSet = {
+    sourceSlug,
+    title,
+    type: seed.type ?? setTypeFromTitle(title),
+    genre: normalizeGenre(track.genre) ?? seed.genre,
+    primaryArtist: withDescriptionSocials(primary, track.description),
+    collaborators,
+    seriesName: seed.seriesName,
+    eventName: festival?.name,
+    eventKind: festival?.kind,
+    eventLocation: festival?.location,
+    publishedAt: publishedAtOf(track),
+    durationSec,
+    sourceName: "SoundCloud",
+    sourceUrl,
+    playbackUrl: sourceUrl,
+    cover: seed.primaryArtist.accent ?? ACCENT_FALLBACK,
+    imageUrl: setImage,
+    plays,
+  };
+  raw.sourceHash = hashRawSetContent(raw);
+  return raw;
+}
+
+async function pollTrackSeeds(
+  seeds: SoundCloudTrackSeed[],
+  seen: Set<string>,
+  out: RawSet[],
+): Promise<void> {
+  for (const seed of seeds) {
+    try {
+      const track = await resolveTrack(seed.url);
+      await sleep(120);
+      const raw = await trackSeedToRawSet(track, seed);
+      if (!raw) {
+        console.warn(
+          `[soundcloud] seed skipped (duration/title): ${seed.url}`,
+        );
+        continue;
+      }
+      if (seen.has(raw.sourceSlug)) continue;
+      seen.add(raw.sourceSlug);
+      out.push(raw);
+      console.log(
+        `[soundcloud] +seed ${raw.sourceSlug} (${raw.plays.length} plays, ${raw.durationSec}s)`,
+      );
+    } catch (err) {
+      console.warn(
+        `[soundcloud] seed failed ${seed.url}:`,
+        err instanceof Error ? err.message : err,
+      );
+    }
+  }
+}
+
 async function pollPlaylistTracks(
   pl: SoundCloudPlaylistSource,
   seen: Set<string>,
@@ -336,11 +448,14 @@ async function withPromotedShows(
 export function createSoundCloudAdapter(
   shows: SoundCloudShow[] = allSoundcloudShows(),
   playlists: SoundCloudPlaylistSource[] = SOUNDCLOUD_PLAYLISTS,
+  trackSeeds: SoundCloudTrackSeed[] = SOUNDCLOUD_TRACK_SEEDS,
 ): SourceAdapter {
   /** Fast deploy: curated playlists only (skip per-user show polls). */
   const curatedOnly = process.env.SOUNDCLOUD_CURATED_ONLY === "1";
   /** Playlists on by default for deep + curated-only; set =0 to disable. */
   const includePlaylists = process.env.SOUNDCLOUD_CURATED_PLAYLISTS !== "0";
+  /** Single-track guestmix seeds (always on unless explicitly disabled). */
+  const includeTrackSeeds = process.env.SOUNDCLOUD_TRACK_SEEDS !== "0";
 
   return {
     id: "soundcloud",
@@ -353,6 +468,10 @@ export function createSoundCloudAdapter(
         for (const pl of playlists) {
           await pollPlaylistTracks(pl, seen, out);
         }
+      }
+
+      if (includeTrackSeeds) {
+        await pollTrackSeeds(trackSeeds, seen, out);
       }
 
       if (curatedOnly) {

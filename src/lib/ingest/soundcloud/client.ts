@@ -99,6 +99,24 @@ export async function resolveUser(permalinkOrUrl: string): Promise<ScUser> {
   return scGet<ScUser>(`/resolve?url=${encodeURIComponent(url)}`);
 }
 
+/** Resolve a public track URL (or numeric id) via api-v2. */
+export async function resolveTrack(trackUrlOrId: string): Promise<ScTrack> {
+  const raw = trackUrlOrId.trim();
+  if (/^\d+$/.test(raw)) {
+    return scGet<ScTrack>(`/tracks/${raw}`);
+  }
+  const url = raw.startsWith("http")
+    ? raw
+    : `https://soundcloud.com/${raw.replace(/^\//, "")}`;
+  const resolved = await scGet<ScTrack & { kind?: string }>(
+    `/resolve?url=${encodeURIComponent(url)}`,
+  );
+  if (resolved.kind && resolved.kind !== "track") {
+    throw new Error(`SoundCloud resolve is ${resolved.kind}, not track`);
+  }
+  return resolved;
+}
+
 export async function fetchUserTracks(
   userId: number,
   limit = 20,
