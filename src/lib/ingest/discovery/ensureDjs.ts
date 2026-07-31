@@ -113,7 +113,13 @@ export async function ensureDiscoveredDjs(
       continue;
     }
     const data: Record<string, unknown> = {};
-    if (!existing.soundcloud && socials.soundcloud) data.soundcloud = socials.soundcloud;
+    // Overwrite empty / homepage-stub SC (e.g. https://soundcloud.com with no path).
+    const scStub =
+      !existing.soundcloud?.trim() ||
+      /^https?:\/\/(www\.)?soundcloud\.com\/?$/i.test(
+        existing.soundcloud.trim(),
+      );
+    if (scStub && socials.soundcloud) data.soundcloud = socials.soundcloud;
     if (!existing.youtube && socials.youtube) data.youtube = socials.youtube;
     if (!existing.instagram && socials.instagram) data.instagram = socials.instagram;
     if (!existing.twitter && socials.twitter) data.twitter = socials.twitter;

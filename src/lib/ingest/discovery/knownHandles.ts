@@ -336,6 +336,73 @@ export const KNOWN_HANDLES: Record<string, HandleHint> = {
     genre: "Tech House",
     accent: "#06d6a0",
   },
+  // Verified 2026-07-31 from official YouTube About / social link blocks.
+  "fred again": {
+    youtubeHandle: "@Fredagainagain",
+    soundcloudPermalink: "fredagain",
+    genre: "House",
+    accent: "#adb5bd",
+  },
+  "fred again...": {
+    youtubeHandle: "@Fredagainagain",
+    soundcloudPermalink: "fredagain",
+    genre: "House",
+    accent: "#adb5bd",
+  },
+  "swedish house mafia": {
+    youtubeHandle: "@swedishhousemafia",
+    soundcloudPermalink: "officialswedishhousemafia",
+    genre: "House",
+    accent: "#212529",
+  },
+  "joel corry": {
+    youtubeHandle: "@JoelCorry",
+    soundcloudPermalink: "joelcorry",
+    genre: "House",
+    accent: "#4cc9f0",
+  },
+  "dj snake": {
+    youtubeHandle: "@DJSnake",
+    soundcloudPermalink: "djsnake",
+    genre: "Bass",
+    accent: "#80ffdb",
+  },
+  atb: {
+    youtubeHandle: "@atb",
+    soundcloudPermalink: "atb-music",
+    genre: "Trance",
+    accent: "#0077b6",
+  },
+  "nico moreno": {
+    youtubeHandle: "@nicomoreno_music",
+    soundcloudPermalink: "nicomorenomusic",
+    genre: "Hard Techno",
+    accent: "#d00000",
+  },
+  gordo: {
+    youtubeHandle: "@gordoszn",
+    soundcloudPermalink: "gordoszn",
+    genre: "Tech House",
+    accent: "#fb8500",
+  },
+  "le twins": {
+    youtubeHandle: "@letwinsdjs",
+    soundcloudPermalink: "le-twins-52553281",
+    genre: "Melodic Techno",
+    accent: "#8338ec",
+  },
+  "mariana bo": {
+    youtubeHandle: "@marianabo",
+    soundcloudPermalink: "borrego-s",
+    genre: "Hardstyle",
+    accent: "#e63946",
+  },
+  fantasm: {
+    youtubeHandle: "@fantasm_techno",
+    soundcloudPermalink: "kenzo-meservey",
+    genre: "Hard Techno",
+    accent: "#d00000",
+  },
 };
 
 export function hintForName(name: string): HandleHint | undefined {
