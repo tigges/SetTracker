@@ -566,11 +566,16 @@ export const ARTIST_ROSTER_CURATED: ArtistRosterEntry[] = [
     genre: "Tech House",
     accent: "#f77f00",
     homeCity: "UK",
-    youtube: { handle: "@chapterandversemusic", status: "ok" },
+    youtube: {
+      handle: "@chapterandversemusic",
+      status: "weak",
+      note: "releases / interview on YT; sets via curated SC guestmix seeds",
+    },
     soundcloud: {
       permalink: "chapterandverseofficial",
       userId: 701819711,
-      status: "ok",
+      status: "weak",
+      note: "profile is singles-only; sets via SOUNDCLOUD_TRACK_SEEDS",
     },
     socials: [
       "https://soundcloud.com/chapterandverseofficial",
@@ -781,14 +786,21 @@ export const ARTIST_ROSTER_CURATED: ArtistRosterEntry[] = [
   },
   {
     // Chris Lake + Chris Lorenzo project — anchor favorite.
+    // Official SC/YT are release clips only (no crawlable full sets yet).
+    // Coachella 2024 was livestream-only; no official archive on SC/YT.
     name: "Anti Up",
     genre: "Tech House",
     accent: "#ff006e",
-    youtube: { handle: "@antiup", status: "ok" },
+    youtube: {
+      handle: "@antiup",
+      status: "weak",
+      note: "shorts/clips only; full sets not on official channel",
+    },
     soundcloud: {
       permalink: "antiupmusic",
       userId: 399166893,
-      status: "ok",
+      status: "weak",
+      note: "singles/extended mixes only; no official long-form sets",
     },
     socials: [
       "https://www.youtube.com/@antiup",

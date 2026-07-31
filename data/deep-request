@@ -1,4 +1,4 @@
 # Bump the timestamp below (and merge to main) to start Catalog deep refresh.
 # Used when workflow_dispatch is unavailable to the actor.
-requestedAt: 2026-07-31T17:35:00Z
-reason: retry favorites deep crawl after IdTrack hex-escape sanitize fix
+requestedAt: 2026-07-31T19:20:00Z
+reason: Chapter & Verse curated SC guestmix seeds + Anti Up weak-handle notes after favorites deep
