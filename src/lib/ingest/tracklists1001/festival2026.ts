@@ -1661,6 +1661,82 @@ export const TL_CHRIS_LORENZO_TML_WE2_2026: FingerprintSeedRow[] =
   );
 
 /**
+ * Dimitri Vegas @ Mainstage, Tomorrowland Weekend 2, Belgium 2026-07-25
+ * 1001TL: https://1001.tl/ctd034t — operator console capture 2026-08-01
+ * (0/62 timed cues — evenly spaced across ~60m).
+ * No official solo Mainstage Relive yet (TML has B2B Nico Moreno only) —
+ * seed ready; do not wire fan uploads / wrong B2Bs.
+ */
+export const TL_DIMITRI_VEGAS_TML_WE2_2026: FingerprintSeedRow[] =
+  evenlySpaceRows(
+    [
+      { artist: "Mesto vs. Fallon", title: "Caramelle vs. Diet Coke (Bassjackers TECH BOUNCE Edit)" },
+      { artist: "Fallon", title: "Diet Coke" },
+      { artist: "Mesto", title: "Caramelle" },
+      { artist: "John Summit", title: "LIGHTS GO OUT (Bassjackers TECH BOUNCE Edit)" },
+      { artist: "Dimitri Vegas & Like Mike & Wolfpack", title: "Ocarina (TomorrowWorld Anthem)" },
+      { artist: "Ummet Ozcan", title: "Raise Your Hands (1, 2, 3 Jump Acappella)" },
+      { artist: "Hammer House", title: "The Jumper" },
+      { artist: "Timmy Trumpet ft. Savage", title: "Freaks (Dimitri Vegas & Like Mike Remix)" },
+      { artist: "Ray Volpe", title: "SONG REQUEST" },
+      { artist: "Dimitri Vegas & Like Mike & Martin Garrix", title: "Tremor (Sensation 2014 Anthem)" },
+      { artist: "AFROJACK & Martin Garrix", title: "Turn Up The Speakers" },
+      { artist: "Dimitri Vegas & Like Mike vs. Darren Styles", title: "Better Off Alone" },
+      { artist: "Justin Bieber ft. Nicki Minaj", title: "Beauty And A Beat" },
+      { artist: "Dimitri Vegas & Pat B ft. Sylver", title: "Turn The Tide" },
+      { artist: "ANOTR ft. 54 Ultra", title: "Talk To You" },
+      { artist: "Katy Perry vs. Coldplay vs. MGMT", title: "Firework Viva La Kids (DJs From Mars Mashup)" },
+      { artist: "Coldplay", title: "Viva La Vida" },
+      { artist: "MGMT", title: "Kids" },
+      { artist: "Katy Perry", title: "Firework (Acappella)" },
+      { artist: "Dimitri Vegas & Like Mike vs. Ummet Ozcan", title: "The Hum (Timmy Trumpet Remix)" },
+      { artist: "Blasterjaxx & Kate Ryan", title: "Désenchantée 3000" },
+      { artist: "Dimitri Vegas & Like Mike vs. Ummet Ozcan", title: "The Hum (Nico Moreno Remix)" },
+      { artist: "Dimitri Vegas & Like Mike & Marlon Hoffstadt & DJ Konik", title: "Makina Time" },
+      { artist: "Dimitri Vegas & Like Mike & Marlon Hoffstadt & DJ Konik", title: "Makina Time (Darren Styles Remix)" },
+      { artist: "Swedish House Mafia & John Martin vs. Avicii & Aloe Blacc", title: "Don't You Worry Child vs. Wake Me Up (Axwell Λ Ingrosso Mashup)" },
+      { artist: "Swedish House Mafia ft. John Martin", title: "Don't You Worry Child" },
+      { artist: "Avicii ft. Aloe Blacc", title: "Wake Me Up (Acappella)" },
+      { artist: "Avicii", title: "Levels" },
+      { artist: "Mightyfools", title: "Footrocker (Get Your, Get Your Hands Up Acappella)" },
+      { artist: "Showtek", title: "We Like To Party (Dimitri Vegas & Like Mike & Bassjackers Remix)" },
+      { artist: "Lady GaGa ft. Colby O'Donis", title: "Just Dance (Dimitri Vegas & MATTN Remix)" },
+      { artist: "Dimitri Vegas & Marlon Hoffstadt", title: "Parada De Techno" },
+      { artist: "Dimitri Vegas & Like Mike & Maddix & Da Hool ft. Kiki Solvej", title: "Meet Her At The Love Parade (Luca Agnelli Remix)" },
+      { artist: "Empire Of The Sun", title: "Walking On A Dream" },
+      { artist: "Bassjackers", title: "KIDS" },
+      { artist: "Dimitri Vegas & Like Mike vs. Nicky Romero vs. Justin Prime & Sandro Silva vs. Europe & Icona Pop & Charli XCX", title: "Everybody Clap vs. Raver Dome vs. The Final Countdown vs. I Love It" },
+      { artist: "Europe", title: "The Final Countdown" },
+      { artist: "Icona Pop ft. Charli xcx", title: "I Love It (Acappella)" },
+      { artist: "3 Are Legend & Justin Prime & Sandro Silva", title: "Raver Dome" },
+      { artist: "Dimitri Vegas & Like Mike vs. Nicky Romero", title: "Everybody Clap" },
+      { artist: "Dimitri Vegas & Like Mike vs. DVBBS & BORGEOUS", title: "Stampede" },
+      { artist: "Dimitri Vegas & Mark With a K", title: "Funky" },
+      { artist: "Rotterdam Terror Corps", title: "Raveworld" },
+      { artist: "Dimitri Vegas & Like Mike & Marc Acardipane & Bassjackers", title: "Stereo Murder (Per Pleks Remix)" },
+      { artist: "Dimitri Vegas & WINSON", title: "Flute" },
+      { artist: "Dimitri Vegas & Like Mike vs. VINAI", title: "Louder (Acappella)" },
+      { artist: "Dimitri Vegas & Like Mike & Bassjackers", title: "Axel F (Luca Agnelli Remix)" },
+      { artist: "HUGEL & SOLTO", title: "Jamaican (Bam Bam)" },
+      { artist: "Luca Agnelli", title: "Tokyo Drift" },
+      { artist: "M83", title: "Midnight City" },
+      { artist: "Alesso & OneRepublic", title: "If I Lose Myself" },
+      { artist: "Soft Cell", title: "Tainted Love" },
+      { artist: "Bountyhunter", title: "Woops (Dimitri Vegas & Junkie Kid Remix / BRANDON Remix)" },
+      { artist: "Bountyhunter", title: "Woops (Dimitri Vegas & Junkie Kid 2025 VIP Mix)" },
+      { artist: "Dimitri Vegas & Like Mike & Tiësto & W&W ft. Dido", title: "Thank You (Not So Bad) (Dimitri Vegas Edit)" },
+      { artist: "Dimitri Vegas & Like Mike & Tiësto & W&W ft. Dido", title: "Thank You (Not So Bad) (Darren Styles Remix)" },
+      { artist: "Dimitri Vegas & MOGUAI & Like Mike", title: "Mammoth (MANDY Remix)" },
+      { artist: "Rihanna", title: "Where Have You Been (Acappella)" },
+      { artist: "Dimitri Vegas & MOGUAI & Like Mike", title: "Mammoth (Ben Nicky & Dr Phunk Remix)" },
+      { artist: "Syndicate Of L.A.W.", title: "Right On Time (2000 Countdown The Holly Digit Acappella)" },
+      { artist: "Michael Sembello", title: "Maniac (Dimitri Vegas & Marlon Hoffstadt Remix)" },
+      { artist: "Dimitri Vegas & Like Mike", title: "Allein Allein" }
+    ],
+    3600,
+  );
+
+/**
  * Layton Giordani @ circuitGROUNDS closing, EDC Las Vegas 2025-05-16
  * Official SC: https://soundcloud.com/laytongiordani/layton-giordani-live-edc-las-vegas-circuit-grounds-closing-set-2025 (~59:40)
  * 1001TL: https://1001.tl/bt007st — operator console capture 2026-08-01

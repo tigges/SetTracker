@@ -9,6 +9,7 @@ import {
   TL_CLOONEE_EDC_LV_2022,
   TL_CLOONEE_PROSPA_DESTINO_2026,
   TL_DARUDE_EDC_LV_2026,
+  TL_DIMITRI_VEGAS_TML_WE2_2026,
   TL_DOM_DOLLA_EDC_LV_2023,
   TL_DOM_DOLLA_EDC_LV_2024,
   TL_ENRICO_SANGIULIANO_TML_WE2_2026,
@@ -560,6 +561,20 @@ assert.equal(chrisL[chrisL.length - 1]!.trackTitle, "House Every Weekend");
 assert.equal(
   Object.values(TRACKLIST_1001_BY_SOURCE_SLUG).includes(
     TL_CHRIS_LORENZO_TML_WE2_2026,
+  ),
+  false,
+);
+
+assertSeedClocks(TL_DIMITRI_VEGAS_TML_WE2_2026);
+const dvTml = tracklist1001RowsToPlays(TL_DIMITRI_VEGAS_TML_WE2_2026);
+assert.equal(dvTml.length, 62);
+assert.match(dvTml[0]!.trackTitle!, /Caramelle vs\. Diet Coke/);
+assert.equal(dvTml[dvTml.length - 1]!.trackTitle, "Allein Allein");
+// Solo Mainstage Relive not published yet — seed held (not B2B Nico Moreno).
+assert.equal(TRACKLIST_1001_BY_SOURCE_SLUG["yt-OTKgBZS8if0"], undefined);
+assert.equal(
+  Object.values(TRACKLIST_1001_BY_SOURCE_SLUG).includes(
+    TL_DIMITRI_VEGAS_TML_WE2_2026,
   ),
   false,
 );
