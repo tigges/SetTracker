@@ -1,4 +1,4 @@
 # Bump the timestamp below (and merge to main) to start Catalog deep refresh.
 # Used when workflow_dispatch is unavailable to the actor.
-requestedAt: 2026-08-01T05:50:00Z
-reason: EDC 1001 seeds Max Styler 2024 + Layton/Odd Mob/Cloonee/Wax Motif/etc
+requestedAt: 2026-08-01T05:55:00Z
+reason: EDC 1001 seeds Dom Dolla 2024 + Max Styler/Layton/Odd Mob/Cloonee/etc

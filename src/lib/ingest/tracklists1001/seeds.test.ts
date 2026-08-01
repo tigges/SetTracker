@@ -8,6 +8,7 @@ import {
   TL_CLOONEE_EDC_LV_2022,
   TL_CLOONEE_PROSPA_DESTINO_2026,
   TL_DARUDE_EDC_LV_2026,
+  TL_DOM_DOLLA_EDC_LV_2024,
   TL_LAYTON_GIORDANI_EDC_LV_2025_CLOSING,
   TL_MARTEN_HORGER_EDC_LV_2023,
   TL_MAX_STYLER_EDC_LV_2024,
@@ -224,6 +225,23 @@ for (const p of maxStyler) {
 assert.ok(
   TRACKLIST_1001_BY_SOURCE_SLUG["sc-maxstyler-max-styler-live-edc-vegas-2024"]!
     .length >= 18,
+);
+
+assertSeedClocks(TL_DOM_DOLLA_EDC_LV_2024);
+const dom = tracklist1001RowsToPlays(TL_DOM_DOLLA_EDC_LV_2024);
+assert.equal(dom.length, 35);
+assert.equal(dom[0]!.trackTitle, "girl$");
+assert.equal(dom[dom.length - 1]!.trackTitle, "CAVE");
+assert.equal(dom[dom.length - 1]!.timestamp, 64 * 60 + 17);
+let domPrev = -1;
+for (const p of dom) {
+  assert.ok(p.timestamp > domPrev, `Dom Dolla clocks must increase @ ${p.timestamp}`);
+  domPrev = p.timestamp;
+}
+assert.ok(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-domdolla-dom-dolla-live-edc-circuitgrounds-las-vegas-2024"
+  ]!.length >= 30,
 );
 
 console.log("tracklists1001/seeds.test.ts ok");

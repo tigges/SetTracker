@@ -1025,6 +1025,143 @@ export const TL_MAX_STYLER_EDC_LV_2024: FingerprintSeedRow[] = [
   },
 ];
 
+/**
+ * Dom Dolla @ circuitGROUNDS, EDC Las Vegas 2024-05-18
+ * (1001 URL year is 2024 — not the 2023 SC upload.)
+ * Official SC: https://soundcloud.com/domdolla/dom-dolla-live-edc-circuitgrounds-las-vegas-2024 (~61:21)
+ * 1001TL: https://1001.tl/24gpuclk — operator console capture 2026-08-01
+ * (27/35 timed cues; gaps interpolated).
+ */
+export const TL_DOM_DOLLA_EDC_LV_2024: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "Dom Dolla", title: "girl$" },
+  {
+    at: "4:17",
+    artist: "Solardo & Volaris ft. Camden Cox",
+    title: "Eyes",
+  },
+  {
+    at: "6:40",
+    artist: "Walker & Royce & Barney Bones",
+    title: "Cheap Thrills",
+  },
+  { at: "8:46", artist: "Dom Dolla", title: "You" },
+  {
+    at: "10:51",
+    artist: "Walker & Royce & Reggie Watts",
+    title: "Motivashun",
+  },
+  {
+    at: "13:14",
+    artist: "Phil Kieran vs. MK & Dom Dolla",
+    title: "Skyhook 2 vs. Rhyme Dust (Dom Dolla Edit)",
+  },
+  { at: "13:39", artist: "Phil Kieran", title: "Skyhook 2" },
+  { at: "14:04", artist: "MK & Dom Dolla", title: "Rhyme Dust" },
+  {
+    at: "14:28",
+    artist: "The Prodigy",
+    title: "Breathe (James Hype Edit)",
+  },
+  {
+    at: "16:05",
+    artist: "Odd Mob & OMNOM pres. HYPERBEAM",
+    title: "Okay Fine",
+  },
+  {
+    at: "20:51",
+    artist: "Zombie Nation",
+    title: "Kernkraft 400 (James Hype Remix)",
+  },
+  {
+    at: "21:50",
+    artist: "Loofy",
+    title: "Last Night (Anyma & Layton Giordani Remix)",
+  },
+  {
+    at: "23:28",
+    artist: "Dom Dolla & Nelly Furtado",
+    title: "Eat Your Man",
+  },
+  { at: "26:05", artist: "Nari & Milani", title: "Atom" },
+  { at: "26:52", artist: "Mia Mendi & TH;EN", title: "Collapsing Sky" },
+  { at: "27:53", artist: "Dom Dolla", title: "Take It" },
+  {
+    at: "28:54",
+    artist: "John Summit & HAYLA",
+    title: "Shiver (Luca Morris Remix)",
+  },
+  {
+    at: "30:52",
+    artist: "Max Styler & GENESI",
+    title: "See You Sweat",
+  },
+  { at: "32:24", artist: "Dom Dolla", title: "San Frandisco" },
+  {
+    at: "33:55",
+    artist: "Rebūke ft. Linska",
+    title: "Digital Dream",
+  },
+  {
+    at: "35:46",
+    artist: "Gotye ft. Kimbra",
+    title: "Somebody That I Used To Know (SIDEPIECE Treat)",
+  },
+  {
+    at: "38:42",
+    artist: "Congorock ft. Mr. Lexx",
+    title: "Babylon (Dom Dolla Edit)",
+  },
+  { at: "40:07", artist: "Faith Evans", title: "Love Like This" },
+  {
+    at: "41:36",
+    artist: "The Chemical Brothers",
+    title: "Hey Boy, Hey Girl (ARTBAT Remix)",
+  },
+  {
+    at: "43:46",
+    artist: "Aliyah's Interlude",
+    title: "IT GIRL (Everything Always Remix)",
+  },
+  { at: "45:58", artist: "HI-LO & Eli Brown", title: "Pyramid Rave" },
+  {
+    at: "47:41",
+    artist: "Technotronic",
+    title: "Pump Up The Jam (Acappella)",
+  },
+  {
+    at: "49:23",
+    artist: "Kendrick Lamar",
+    title: "Swimming Pools (Drank) (Danny Avila Remix)",
+  },
+  {
+    at: "52:29",
+    artist: "Dom Dolla",
+    title: "Saving Up (Odd Mob Remix)",
+  },
+  { at: "55:48", artist: "BYOR", title: "Thunder" },
+  {
+    at: "56:44",
+    artist: "Dom Dolla ft. Clementine Douglas",
+    title: "Miracle Maker",
+  },
+  {
+    at: "57:40",
+    artist: "Benny Benassi pres. The Biz",
+    title: "Satisfaction (MORRILL Edit)",
+  },
+  { at: "59:09", artist: "Tavatli", title: "FE!N" },
+  {
+    at: "1:02:05",
+    artist: "Dom Dolla & Nelly Furtado",
+    title: "Eat Your Man (Eli Brown Remix)",
+  },
+  {
+    at: "1:04:17",
+    artist: "Dom Dolla & Tove Lo",
+    title: "CAVE",
+  },
+];
+
 /** sourceSlug → curated 1001TL seed (SC / YT when live HTML is CF-blocked). */
 export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   string,
@@ -1043,6 +1180,8 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "sc-laytongiordani-layton-giordani-live-edc-las-vegas-circuit-grounds-closing-set-2025":
     TL_LAYTON_GIORDANI_EDC_LV_2025_CLOSING,
   "sc-maxstyler-max-styler-live-edc-vegas-2024": TL_MAX_STYLER_EDC_LV_2024,
+  "sc-domdolla-dom-dolla-live-edc-circuitgrounds-las-vegas-2024":
+    TL_DOM_DOLLA_EDC_LV_2024,
   "yt-yXHoHK_jQvc": TL_AHEE_LIQUID_STRANGER_EDC_LV_2026,
   "yt-dXBoIY65P8s": TL_DARUDE_EDC_LV_2026,
   "yt-c_sx3zum8Z0": TL_BLEU_CLAIR_EDC_LV_2023,
