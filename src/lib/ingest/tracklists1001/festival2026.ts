@@ -2061,6 +2061,68 @@ export const TL_ARMIN_VAN_BUUREN_YT_HOUSE_TML_2026: FingerprintSeedRow[] = [
 ];
 
 /**
+ * Korolova @ Captive Soul, Freedom Stage, Tomorrowland Weekend 2, Belgium 2026-07-26
+ * Official YT: https://www.youtube.com/watch?v=RLOghpXjuJI (~89:53)
+ * 1001TL: https://1001.tl/hjlt23k — operator console capture 2026-08-01
+ * (19/21 timed cues; missing clocks already lerped in capture).
+ */
+export const TL_KOROLOVA_TML_WE2_2026: FingerprintSeedRow[] = [
+  { at: "6:10", artist: "Argy & SOLANCE", title: "Window Shake" },
+  { at: "9:34", artist: "Jast", title: "Rhythm" },
+  { at: "12:52", artist: "Korolova & Switch Disco", title: "Empty Skies" },
+  { at: "16:31", artist: "GENESI", title: "94" },
+  {
+    at: "21:19",
+    artist: "Darude",
+    title: "Sandstorm (Cherry & Kostyn & UNDERMOON Remix)",
+  },
+  { at: "24:14", artist: "Volkoder & Korolova", title: "Waiting For You" },
+  { at: "28:26", artist: "Korolova & R3HAB", title: "Hi Hello" },
+  { at: "31:48", artist: "Korolova & JOA", title: "My Mind" },
+  {
+    at: "35:26",
+    artist: "Noir & Haze",
+    title: "Around (Seth Hills & Victor Garde Remix)",
+  },
+  {
+    at: "39:27",
+    artist: "Michael Calfan & Axwell & Bigfett vs. Empire Of The Sun",
+    title: "Resurrection vs. Walking On A Dream (Bigfett Mashup)",
+  },
+  {
+    at: "40:49",
+    artist: "Empire Of The Sun",
+    title: "Walking On A Dream (Acappella)",
+  },
+  {
+    at: "42:12",
+    artist: "Michael Calfan",
+    title: "Resurrection (Axwell Re-Cut Club Version / Bigfett Remix)",
+  },
+  { at: "43:34", artist: "KREAM & Korolova", title: "Annihilation" },
+  { at: "46:53", artist: "Korolova", title: "Another Life" },
+  { at: "51:05", artist: "Glowal & DREYA V", title: "Physique" },
+  {
+    at: "1:03:01",
+    artist: "Tiësto ft. BT",
+    title: "Love Comes Again (Zarka Remix)",
+  },
+  { at: "1:07:04", artist: "MORTEN & David Guetta", title: "La Révolution" },
+  {
+    at: "1:09:41",
+    artist: "Korolova & Go_A & Rokston ft. Monokate",
+    title: "Vorozhyla",
+  },
+  { at: "1:14:15", artist: "Carl Bee", title: "Suspicious" },
+  {
+    at: "1:20:20",
+    artist: "Agents Of Time & Korolova ft. Conor Ross",
+    title: "Made For Love",
+  },
+  { at: "1:25:14", artist: "Korolova ft. Clér Letiv", title: "Paradise" },
+];
+
+/**
  * Layton Giordani @ circuitGROUNDS closing, EDC Las Vegas 2025-05-16
  * Official SC: https://soundcloud.com/laytongiordani/layton-giordani-live-edc-las-vegas-circuit-grounds-closing-set-2025 (~59:40)
  * 1001TL: https://1001.tl/bt007st — operator console capture 2026-08-01
@@ -3047,6 +3109,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-gO03gfI_JF0": TL_AYYBO_ODD_MOB_TML_WE2_2026,
   "yt-PlArfyuzuqo": TL_JOHN_SUMMIT_TML_WE2_2026,
   "yt-I6QA_T-BS6o": TL_ARMIN_VAN_BUUREN_YT_HOUSE_TML_2026,
+  "yt-RLOghpXjuJI": TL_KOROLOVA_TML_WE2_2026,
 };
 
 /** Sanity: every seeded clock must parse. */

@@ -32,6 +32,7 @@ import {
   TL_JAMES_HYPE_TML_WE2_2026,
   TL_JOHN_SUMMIT_TML_WE2_2026,
   TL_KOLSCH_TML_WE2_2026,
+  TL_KOROLOVA_TML_WE2_2026,
   TL_MISS_MONIQUE_TML_WE2_2026,
   TL_NICKY_ROMERO_TML_WE2_2026,
   TL_ODD_MOB_TML_WE2_2026,
@@ -614,6 +615,22 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/2hsz5x4k/armin-van-buuren-youtube-house-tomorrowland-belgium-2026-07-25.html",
     tracklist1001: TL_ARMIN_VAN_BUUREN_YT_HOUSE_TML_2026,
+  },
+  {
+    // Tomorrowland official — Captive Soul / Freedom Stage WE2; 19/21 timed.
+    video: "https://www.youtube.com/watch?v=RLOghpXjuJI",
+    primaryArtist: dj("Korolova", {
+      accent: "#9b5de5",
+      homeCity: "Kyiv, UA",
+    }),
+    genre: "Melodic Techno",
+    type: "festival",
+    title: "Korolova WE2 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/hjlt23k/korolova-captive-soul-freedom-stage-tomorrowland-weekend-2-belgium-2026-07-26.html",
+    tracklist1001: TL_KOROLOVA_TML_WE2_2026,
   },
   {
     video: "https://www.youtube.com/watch?v=ObiAocVMTyo",

@@ -25,6 +25,7 @@ import {
   TL_JAMES_HYPE_TML_WE2_2026,
   TL_JOHN_SUMMIT_TML_WE2_2026,
   TL_KOLSCH_TML_WE2_2026,
+  TL_KOROLOVA_TML_WE2_2026,
   TL_LAYTON_GIORDANI_EDC_LV_2025_CLOSING,
   TL_MARTEN_HORGER_EDC_LV_2023,
   TL_MAX_STYLER_EDC_LV_2024,
@@ -665,5 +666,21 @@ assert.notEqual(
   TRACKLIST_1001_BY_SOURCE_SLUG["yt-tg_QLGpes0k"],
 );
 assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-I6QA_T-BS6o"]!.length >= 7);
+
+assertSeedClocks(TL_KOROLOVA_TML_WE2_2026);
+const korolova = tracklist1001RowsToPlays(TL_KOROLOVA_TML_WE2_2026);
+assert.equal(korolova.length, 21);
+assert.equal(korolova[0]!.trackTitle, "Window Shake");
+assert.equal(korolova[korolova.length - 1]!.trackTitle, "Paradise");
+assert.equal(korolova[korolova.length - 1]!.timestamp, 85 * 60 + 14);
+let korPrev = -1;
+for (const p of korolova) {
+  assert.ok(
+    p.timestamp >= korPrev,
+    `Korolova TML clocks must not go back @ ${p.timestamp}`,
+  );
+  korPrev = p.timestamp;
+}
+assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-RLOghpXjuJI"]!.length >= 21);
 
 console.log("tracklists1001/seeds.test.ts ok");
