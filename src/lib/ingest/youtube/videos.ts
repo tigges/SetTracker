@@ -21,6 +21,7 @@ import {
   TL_DARUDE_EDC_LV_2026,
   TL_MARTEN_HORGER_EDC_LV_2023,
   TL_MARTEN_HORGER_PAROOKAVILLE_2026,
+  TL_FUNK_TRIBU_EDC_LV_2026,
   TL_MATTY_RALPH_EDC_LV_2026,
   TL_NICO_MORENO_EDC_LV_2026,
   TL_PEGASSI_EDC_LV_2026,
@@ -378,6 +379,21 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/2hsk794t/matty-ralph-quantumvalley-edc-las-vegas-united-states-2026-05-15.html",
     tracklist1001: TL_MATTY_RALPH_EDC_LV_2026,
+  },
+  {
+    // Insomniac Relive — kineticFIELD; 10/10 timed cues from 1001 capture.
+    video: "https://www.youtube.com/watch?v=APt5j9Abwo8",
+    primaryArtist: dj("Funk Tribu", {
+      accent: "#ffbe0b",
+      homeCity: "IT",
+    }),
+    genre: "Techno",
+    type: "festival",
+    title: "Funk Tribu Live at EDC Las Vegas 2026 (Official Full Set)",
+    eventName: "EDC Las Vegas",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1lwpqyz1/funk-tribu-kineticfield-edc-las-vegas-united-states-2026-05-17.html",
+    tracklist1001: TL_FUNK_TRIBU_EDC_LV_2026,
   },
   {
     video: "https://www.youtube.com/watch?v=ObiAocVMTyo",

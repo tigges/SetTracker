@@ -10,6 +10,7 @@ import {
   TL_DARUDE_EDC_LV_2026,
   TL_DOM_DOLLA_EDC_LV_2023,
   TL_DOM_DOLLA_EDC_LV_2024,
+  TL_FUNK_TRIBU_EDC_LV_2026,
   TL_LAYTON_GIORDANI_EDC_LV_2025_CLOSING,
   TL_MARTEN_HORGER_EDC_LV_2023,
   TL_MAX_STYLER_EDC_LV_2024,
@@ -356,5 +357,18 @@ for (const p of matty) {
   mattyPrev = p.timestamp;
 }
 assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-FZ7pwlNdwBk"]!.length >= 12);
+
+assertSeedClocks(TL_FUNK_TRIBU_EDC_LV_2026);
+const funk = tracklist1001RowsToPlays(TL_FUNK_TRIBU_EDC_LV_2026);
+assert.equal(funk.length, 10);
+assert.equal(funk[0]!.trackTitle, "What Trance Feels Like");
+assert.equal(funk[0]!.timestamp, 7 * 60 + 20);
+assert.equal(funk[funk.length - 1]!.trackTitle, "Wicked With You");
+let funkPrev = -1;
+for (const p of funk) {
+  assert.ok(p.timestamp > funkPrev, `Funk Tribu clocks must increase @ ${p.timestamp}`);
+  funkPrev = p.timestamp;
+}
+assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-APt5j9Abwo8"]!.length >= 10);
 
 console.log("tracklists1001/seeds.test.ts ok");

@@ -1527,6 +1527,29 @@ export const TL_MATTY_RALPH_EDC_LV_2026: FingerprintSeedRow[] = [
 ];
 
 /**
+ * Funk Tribu @ kineticFIELD, EDC Las Vegas 2026-05-17
+ * Official YT: https://www.youtube.com/watch?v=APt5j9Abwo8 (~66:47)
+ * 1001TL: https://1001.tl/1lwpqyz1 — operator console capture 2026-08-01
+ * (10/10 timed cues).
+ */
+export const TL_FUNK_TRIBU_EDC_LV_2026: FingerprintSeedRow[] = [
+  { at: "7:20", artist: "Funk Tribu", title: "What Trance Feels Like" },
+  { at: "16:16", artist: "Funk Tribu", title: "reborn (alma)" },
+  { at: "24:07", artist: "Funk Tribu", title: "Speakers Blowing" },
+  { at: "27:45", artist: "Funk Tribu", title: "life (vida)" },
+  { at: "32:35", artist: "Funk Tribu", title: "this is the moment (cuerpo)" },
+  { at: "36:31", artist: "Funk Tribu", title: "Azul" },
+  { at: "44:32", artist: "Paul Johnson & Funk Tribu", title: "Get Get Down" },
+  { at: "51:51", artist: "Funk Tribu & Linds", title: "Shock" },
+  {
+    at: "55:42",
+    artist: "Funk Tribu & Dillistone",
+    title: "where are you taking me? (mente)",
+  },
+  { at: "59:54", artist: "Tom Carroll", title: "Wicked With You" },
+];
+
+/**
  * Sarah de Warren @ quantumVALLEY, EDC Las Vegas 2026-05-15
  * Official YT: https://www.youtube.com/watch?v=KIb3psOt9hI (~40:43)
  * 1001TL: https://1001.tl/1z031tz1 — operator console capture 2026-08-01
@@ -1631,6 +1654,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-yUA0Ht2PdG0": TL_PEGASSI_EDC_LV_2026,
   "yt-f_p6nfbrm0E": TL_NICO_MORENO_EDC_LV_2026,
   "yt-FZ7pwlNdwBk": TL_MATTY_RALPH_EDC_LV_2026,
+  "yt-APt5j9Abwo8": TL_FUNK_TRIBU_EDC_LV_2026,
 };
 
 /** Sanity: every seeded clock must parse. */
