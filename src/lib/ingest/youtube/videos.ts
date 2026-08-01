@@ -43,6 +43,7 @@ import {
   TL_SARA_LANDRY_TML_WE2_2026,
   TL_AFROJACK_R3HAB_TML_WE2_2026,
   TL_STEVE_AOKI_TML_WE2_2026,
+  TL_MIKE_WILLIAMS_TML_WE2_2026,
   TL_MISS_MONIQUE_TML_WE2_2026,
   TL_NICKY_ROMERO_TML_WE2_2026,
   TL_ODD_MOB_TML_WE2_2026,
@@ -392,6 +393,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
   },
   {
     // Insomniac Relive — circuitGROUNDS solo; 1001 cues untimed.
+    // Watch page may be private/LOGIN_REQUIRED; curated seed fallback applies.
     video: "https://www.youtube.com/watch?v=f_p6nfbrm0E",
     primaryArtist: dj("Nico Moreno", {
       accent: "#ff006e",
@@ -747,7 +749,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     }),
     genre: "Hard Dance",
     type: "festival",
-    title: "Dimitri Vegas B2B Nico Moreno WE2 | Tomorrowland 2026",
+    title: "Dimitri Vegas B2B Nico Moreno | Tomorrowland WE2 2026",
     seriesName: "Tomorrowland",
     eventName: "Tomorrowland Belgium",
     tracklist1001Url:
@@ -1353,6 +1355,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     eventName: "Tomorrowland Belgium",
   },
   {
+    // Tomorrowland official — Mainstage WE2; dense community TL (Music credits thin).
     video: "https://www.youtube.com/watch?v=WnjXXOZ8Te8",
     primaryArtist: dj("Mike Williams", { accent: "#e9c46a" }),
     genre: "Future House",
@@ -1360,6 +1363,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     title: "Mike Williams WE2 | Tomorrowland 2026",
     seriesName: "Tomorrowland",
     eventName: "Tomorrowland Belgium",
+    tracklist1001: TL_MIKE_WILLIAMS_TML_WE2_2026,
   },
   {
     video: "https://www.youtube.com/watch?v=4G2QlSLG0tI",

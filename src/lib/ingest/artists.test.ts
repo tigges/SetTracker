@@ -149,4 +149,26 @@ assert.equal(
   "Japhet Be",
 );
 
+// Tomorrowland "WE2" / "WE1" markers must not become artist-slug suffixes.
+assert.equal(tidyPerformingCredit("Nico Moreno WE2"), "Nico Moreno");
+assert.equal(
+  performingCreditFromTitle(
+    "Dimitri Vegas B2B Nico Moreno WE2 | Tomorrowland 2026",
+  ),
+  "Dimitri Vegas B2B Nico Moreno",
+);
+const dvNm = artistsForSet(
+  "Dimitri Vegas B2B Nico Moreno WE2 | Tomorrowland 2026",
+  { name: "Dimitri Vegas", slug: "dimitri-vegas", accent: "#e63946" },
+);
+assert.equal(dvNm.primary.slug, "dimitri-vegas");
+assert.equal(dvNm.collaborators.length, 1);
+assert.equal(dvNm.collaborators[0]?.name, "Nico Moreno");
+assert.equal(dvNm.collaborators[0]?.slug, "nico-moreno");
+const dvNmTitled = artistsForSet(
+  "Dimitri Vegas B2B Nico Moreno | Tomorrowland WE2 2026",
+  { name: "Dimitri Vegas", slug: "dimitri-vegas", accent: "#e63946" },
+);
+assert.equal(dvNmTitled.collaborators[0]?.slug, "nico-moreno");
+
 console.log("artists.test.ts ok");
