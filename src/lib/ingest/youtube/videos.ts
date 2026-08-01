@@ -21,6 +21,7 @@ import {
   TL_DARUDE_EDC_LV_2026,
   TL_MARTEN_HORGER_EDC_LV_2023,
   TL_MARTEN_HORGER_PAROOKAVILLE_2026,
+  TL_NICO_MORENO_EDC_LV_2026,
   TL_PEGASSI_EDC_LV_2026,
   TL_SARAH_DE_WARREN_EDC_LV_2026,
   TL_SOLOMUN_EDC_LV_2026,
@@ -346,6 +347,21 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/108mxtc9/pegassi-quantumvalley-edc-las-vegas-united-states-2026-05-15.html",
     tracklist1001: TL_PEGASSI_EDC_LV_2026,
+  },
+  {
+    // Insomniac Relive — circuitGROUNDS solo; 1001 cues untimed.
+    video: "https://www.youtube.com/watch?v=f_p6nfbrm0E",
+    primaryArtist: dj("Nico Moreno", {
+      accent: "#ff006e",
+      homeCity: "Berlin, DE",
+    }),
+    genre: "Hard Techno",
+    type: "festival",
+    title: "Nico Moreno Live at EDC Las Vegas 2026 (Official Full Set)",
+    eventName: "EDC Las Vegas",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2r6ym5qt/nico-moreno-circuitgrounds-edc-las-vegas-united-states-2026-05-15.html",
+    tracklist1001: TL_NICO_MORENO_EDC_LV_2026,
   },
   {
     video: "https://www.youtube.com/watch?v=ObiAocVMTyo",

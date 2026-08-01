@@ -14,6 +14,8 @@ import {
   TL_MARTEN_HORGER_EDC_LV_2023,
   TL_MAX_STYLER_EDC_LV_2024,
   TL_MARTEN_HORGER_PAROOKAVILLE_2026,
+  TL_NICO_MORENO_EDC_LV_2026,
+  TL_NICO_MORENO_HOLY_PRIEST_EDC_LV_2026,
   TL_ODD_MOB_EDC_LV_2025,
   TL_PEGASSI_EDC_LV_2026,
   TL_SARAH_DE_WARREN_EDC_LV_2026,
@@ -314,5 +316,28 @@ assert.equal(pegassi.length, 12);
 assert.equal(pegassi[0]!.trackTitle, "Heartless");
 assert.equal(pegassi[pegassi.length - 1]!.trackTitle, "Spectral Bells");
 assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-yUA0Ht2PdG0"]!.length >= 12);
+
+assertSeedClocks(TL_NICO_MORENO_EDC_LV_2026);
+const nico = tracklist1001RowsToPlays(TL_NICO_MORENO_EDC_LV_2026);
+assert.equal(nico.length, 40);
+assert.equal(nico[0]!.trackTitle, "See Me Coming");
+assert.match(nico[nico.length - 1]!.trackTitle!, /Died In Your Arms/);
+let nicoPrev = -1;
+for (const p of nico) {
+  assert.ok(p.timestamp > nicoPrev, `Nico clocks must increase @ ${p.timestamp}`);
+  nicoPrev = p.timestamp;
+}
+assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-f_p6nfbrm0E"]!.length >= 40);
+
+assertSeedClocks(TL_NICO_MORENO_HOLY_PRIEST_EDC_LV_2026);
+const nicoHp = tracklist1001RowsToPlays(TL_NICO_MORENO_HOLY_PRIEST_EDC_LV_2026);
+assert.equal(nicoHp.length, 47);
+assert.equal(nicoHp[0]!.trackTitle, "Overdose");
+assert.match(nicoHp[nicoHp.length - 1]!.trackTitle!, /Move Ma Body/);
+// B2B Relive not published officially yet — seed held, not slug-mapped.
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-nZS9gvjlPIs"],
+  undefined,
+);
 
 console.log("tracklists1001/seeds.test.ts ok");

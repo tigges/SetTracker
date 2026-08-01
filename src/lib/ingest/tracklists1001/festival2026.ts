@@ -1340,6 +1340,168 @@ export const TL_PEGASSI_EDC_LV_2026: FingerprintSeedRow[] = evenlySpaceRows(
 );
 
 /**
+ * Nico Moreno @ circuitGROUNDS, EDC Las Vegas 2026-05-15
+ * Official YT: https://www.youtube.com/watch?v=f_p6nfbrm0E (~61:20)
+ * 1001TL: https://1001.tl/2r6ym5qt — operator console capture 2026-08-01
+ * (0/40 timed cues — evenly spaced across Relive duration).
+ */
+export const TL_NICO_MORENO_EDC_LV_2026: FingerprintSeedRow[] = evenlySpaceRows(
+  [
+    { artist: "Nico Moreno & Samuel Moriero", title: "See Me Coming" },
+    { artist: "AREA ØNE & Jaimy Lorenzo", title: "The Anthem" },
+    {
+      artist: "Garcia Sauvage",
+      title: "La Vida Es Un Carnaval (Ephesis Remix)",
+    },
+    { artist: "Nik Sitz", title: "Bounce To The Sound" },
+    { artist: "Nico Moreno ft. Laren", title: "You Make Me Horny" },
+    { artist: "Malaa & Samuel Moriero", title: "F THE POLICE" },
+    { artist: "John Summit", title: "LIGHTS GO OUT (Salvyan Remix)" },
+    { artist: "Ali James", title: "Body To The Bass" },
+    { artist: "DEØZ & HYDER", title: "Partykiller" },
+    { artist: "Bruno Mars", title: "Locked Out Of Heaven (KAAI Remix)" },
+    { artist: "Lethyx Nekuia", title: "C'mon" },
+    { artist: "Bassjackers", title: "Brighter Days" },
+    { artist: "TJ (UK)", title: "Funky Beat" },
+    { artist: "Samuel Moriero", title: "INSIDE A SPIN" },
+    {
+      artist: "Mr. Polska & Natte Visstick & Vieze Asbak",
+      title: "POLSKA JUMPSTYLE (KAAI Remix)",
+    },
+    { artist: "Vortek's", title: "Devil Inside" },
+    { artist: "Ray Volpe", title: "SONG REQUEST (Creeds Remix)" },
+    { artist: "Warface & Nico Moreno", title: "2 Be High" },
+    { artist: "Zombie Nation", title: "Kernkraft 400 (Lunaticz Remix)" },
+    { artist: "Massano", title: "The Feeling (ACOR HT Rework)" },
+    {
+      artist: "BEAUZ",
+      title: "Ocho (BEAUZ & KEVU VIP / Laxter Hard Edit)",
+    },
+    { artist: "Nico Moreno ft. Laren", title: "You Make Me Horny" },
+    {
+      artist: "Bountyhunter",
+      title: "Woops (Dimitri Vegas & Junkie Kid Remix / BRANDON Remix)",
+    },
+    { artist: "REBHELL", title: "GETTING BAD" },
+    { artist: "DR. OBLITERANE", title: "DESTRUCTION" },
+    { artist: "Mental Theo & RAMØN", title: "HYPER RAVE" },
+    {
+      artist: "Daft Punk vs. Justice & Simian",
+      title: "Aerodynamic Friends (N4C & Gianni Di Bernardo Hard Remix)",
+    },
+    { artist: "Daft Punk", title: "Aerodynamic" },
+    { artist: "Justice vs. Simian", title: "We Are Your Friends" },
+    { artist: "Reyno", title: "Da Boy" },
+    { artist: "Darren Styles & TNT", title: "Be Somebody (Wasback Remix)" },
+    { artist: "GEWOONRAVES & MANEX & No-ID", title: "Vielleicht Vielleicht" },
+    { artist: "NEØKHIN", title: "WARZONE" },
+    { artist: "Anyma & Argy & Son Of Son", title: "Voices In My Head" },
+    { artist: "BLURREDMOVEMENT", title: "ROCK THAT BODY" },
+    { artist: "Ali James", title: "FKN BASS" },
+    { artist: "Shogun", title: "HARDCORE SOUND" },
+    {
+      artist: "M83",
+      title: "My Tears Are Becoming A Sea (Summit & RY X Emotional Schranz Edit)",
+    },
+    { artist: "Jaxxr", title: "Sugar Rush" },
+    {
+      artist: "Cutting Crew",
+      title: "(I Just) Died In Your Arms (DNNS Edit)",
+    },
+  ],
+  3680,
+);
+
+/**
+ * Nico Moreno & Holy Priest @ cosmicMEADOW, EDC Las Vegas 2026-05-17
+ * 1001TL: https://1001.tl/n56kgj1 — operator console capture 2026-08-01
+ * (0/47 timed cues — evenly spaced across ~60m festival slot).
+ * No official Insomniac Relive yet — seed ready; do not wire fan uploads.
+ */
+export const TL_NICO_MORENO_HOLY_PRIEST_EDC_LV_2026: FingerprintSeedRow[] =
+  evenlySpaceRows(
+    [
+      { artist: "Holy Priest & Nico Moreno", title: "Overdose" },
+      { artist: "Samuel Moriero", title: "Never Say" },
+      { artist: "DEØZ & HYDER", title: "Partykiller" },
+      { artist: "Holy Priest & Coone", title: "Get High" },
+      { artist: "Will Atkinson", title: "Marching Powder" },
+      { artist: "Holy Priest & CATALYST & Warface", title: "Hellfire" },
+      { artist: "Warface & Nico Moreno", title: "2 Be High" },
+      {
+        artist: "Warface & Nico Moreno",
+        title: "2 Be High (Holy Priest Remix)",
+      },
+      {
+        artist: "Skrillex & ISOxo",
+        title: "fuze (Nyroz & LWØ & FNRZ Hard Techno Edit)",
+      },
+      { artist: "Showtek", title: "FTS (Fuck The System)" },
+      { artist: "KAYZO & GRAVEDGR", title: "SQUARE 4" },
+      { artist: "Holy Priest & Manji", title: "No Balance" },
+      { artist: "Paulskye", title: "VIRUS" },
+      { artist: "Dark Matter & REVIVAN & WAYDH", title: "Fucking Feral" },
+      { artist: "KISTENBRÜGGER & KAAI", title: "Touch Me" },
+      { artist: "KAAI", title: "Brain Damage" },
+      { artist: "Ray Volpe", title: "SONG REQUEST (Creeds Remix)" },
+      { artist: "Linkin Park", title: "Numb (Trey Pearce Remix)" },
+      { artist: "Rekkt", title: "Coceen" },
+      { artist: "Manji", title: "Rage Power" },
+      { artist: "NMO", title: "ANOTHER LEVEL" },
+      { artist: "W&W & Hardwell & Lil Jon", title: "Live The Night" },
+      { artist: "Zatox", title: "Destroy" },
+      { artist: "Zatox & Holy Priest", title: "New Shit" },
+      {
+        artist: "GTA & Valentino Khan",
+        title: "Break Your Neck (Version 34 Remix)",
+      },
+      {
+        artist: "DVBBS & BORGEOUS",
+        title: "Tsunami (ROYAL Hard Techno Remix)",
+      },
+      { artist: "Klofama & SLVL", title: "S6TP" },
+      { artist: "ANTONYM", title: "Bass Go" },
+      {
+        artist: "Endymion & D-Fence",
+        title: "PSSY MTHRFCKRZ (Chaos Project & Sakyra Remix)",
+      },
+      { artist: "Coone & CATALYST", title: "FCK CRITICS" },
+      { artist: "Bruno Mars", title: "Locked Out Of Heaven (KAAI Remix)" },
+      { artist: "Warface", title: "Mashup 6.0 (Madmize Kick Edit)" },
+      { artist: "Gala", title: "Freed From Desire" },
+      { artist: "Linkin Park", title: "Numb" },
+      { artist: "Southstylers", title: "Pounding Senses" },
+      { artist: "Neophyte & Tha Playah", title: "Still Nr. 1" },
+      { artist: "Twenty One Pilots", title: "Stressed Out" },
+      { artist: "Holy Priest & Netherworld", title: "Holy Atlantis" },
+      {
+        artist: "Mr. Polska & Natte Visstick & Vieze Asbak",
+        title: "POLSKA JUMPSTYLE (KAAI Remix)",
+      },
+      {
+        artist:
+          "Darude & Subtronics vs. Rihanna vs. Ludwig Göransson vs. HOL! vs. Excision & Kai Wachi vs. LOUIEJAYXX vs. MashBit",
+        title:
+          "Sandstorm vs. Where Have You Been vs. Can You Hear The Music vs. COUNTRY RIDDIM vs. Demisaur vs. Error (GARVIN Edit)",
+      },
+      { artist: "Darude", title: "Sandstorm (Subtronics Edit)" },
+      { artist: "Rihanna", title: "Where Have You Been (Acappella)" },
+      {
+        artist: "Ludwig Göransson",
+        title: "Can You Hear The Music (Opphenheimer OST)",
+      },
+      { artist: "HOL!", title: "COUNTRY RIDDIM" },
+      { artist: "Excision & Kai Wachi", title: "Demisaur" },
+      { artist: "LOUIEJAYXX", title: "Error" },
+      {
+        artist: "Atmozfears & Demi Kanon",
+        title: "Move Ma Body (Kronos Remix)",
+      },
+    ],
+    3600,
+  );
+
+/**
  * Sarah de Warren @ quantumVALLEY, EDC Las Vegas 2026-05-15
  * Official YT: https://www.youtube.com/watch?v=KIb3psOt9hI (~40:43)
  * 1001TL: https://1001.tl/1z031tz1 — operator console capture 2026-08-01
@@ -1442,6 +1604,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-g1vH9C_o-vo": TL_SOLOMUN_EDC_LV_2026,
   "yt-KIb3psOt9hI": TL_SARAH_DE_WARREN_EDC_LV_2026,
   "yt-yUA0Ht2PdG0": TL_PEGASSI_EDC_LV_2026,
+  "yt-f_p6nfbrm0E": TL_NICO_MORENO_EDC_LV_2026,
 };
 
 /** Sanity: every seeded clock must parse. */
