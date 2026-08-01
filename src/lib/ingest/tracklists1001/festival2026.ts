@@ -287,14 +287,13 @@ export const TL_WESTEND_EDC_LV_2026: FingerprintSeedRow[] = (() => {
 /**
  * AHEE B2B Liquid Stranger @ bassPOD, EDC Las Vegas 2026
  * Official YT: https://www.youtube.com/watch?v=yXHoHK_jQvc (~59:45)
- * 1001TL operator screenshots 2026-08-01 (partial through ~track 20; more
+ * 1001TL operator screenshots 2026-08-01 (partial through ~track 46; more
  * cues expected). Skips bare ID / Artist–ID rows. w/ layers kept as rows.
- * Jungle Juice cue @ 13:30 on 1001 — not forced (would break even spacing
- * until the full timed list lands).
+ * Clocks: even space before/after Gunslinger @ 45:30 (1001 cue).
  */
 export const TL_AHEE_LIQUID_STRANGER_EDC_LV_2026: FingerprintSeedRow[] =
-  evenlySpaceRows(
-    [
+  (() => {
+    const before: Omit<FingerprintSeedRow, "at">[] = [
       { artist: "Liquid Stranger & AHEE", title: "Superstar" },
       {
         artist: "Skrillex & Damian Marley",
@@ -359,9 +358,69 @@ export const TL_AHEE_LIQUID_STRANGER_EDC_LV_2026: FingerprintSeedRow[] =
         artist: "Lil Wayne",
         title: "A Milli (Acappella)",
       },
-    ],
-    3585,
-  );
+      { artist: "Liquid Stranger & Flozone", title: "Lose It" },
+      {
+        artist: "AHEE & SØMETHING",
+        title: "The Action (WonkyWilla Remix)",
+      },
+      {
+        artist: "Flux Pavilion & Liquid Stranger & AHEE",
+        title: "Move Your Body",
+      },
+      {
+        artist: "Skrillex & Mr. Oizo ft. Missy Elliott",
+        title: "RATATA (ID Remix)",
+      },
+      {
+        artist: "Liquid Stranger ft. Crooked Bangs",
+        title: "Revolution (ID Remix)",
+      },
+      {
+        artist: "Megan Thee Stallion",
+        title: "Thot Shit (ID Remix)",
+      },
+      { artist: "Liquid Stranger & AHEE", title: "Space Whip" },
+      { artist: "AHEE", title: "Bass Hamster" },
+      { artist: "WODD", title: "Magic Pill" },
+      {
+        artist: "Levity ft. Dem Jointz",
+        title: "Flip It (ID Remix)",
+      },
+      {
+        artist: "Run The Jewels ft. Greg Nice & DJ Premier",
+        title: "Ooh La La (Acappella)",
+      },
+      {
+        artist: "t.A.T.u.",
+        title: "Not Gonna Get Us (Liquid Stranger Remix)",
+      },
+      {
+        artist: "Liquid Stranger ft. GG Magree",
+        title: "Faster And Faster (ID Remix)",
+      },
+      { artist: "Liquid Stranger & NEOTEK", title: "Microphone" },
+    ];
+    const after: Omit<FingerprintSeedRow, "at">[] = [
+      { artist: "bbno$", title: "it Boy (Acappella)" },
+      { artist: "Liquid Stranger & TVBOO", title: "Cracked" },
+    ];
+    const gunAt = 45 * 60 + 30;
+    const beforeSpaced = evenlySpaceRows(before, gunAt);
+    const afterSpaced = evenlySpaceRows(after, 3585 - gunAt).map((row) => {
+      const sec = parseClockToSec(row.at);
+      if (sec == null) return row;
+      return { ...row, at: formatClock(gunAt + sec) };
+    });
+    return [
+      ...beforeSpaced,
+      {
+        artist: "Liquid Stranger ft. Pistol Pete",
+        title: "Gunslinger (Bemah Flip)",
+        at: "45:30",
+      },
+      ...afterSpaced,
+    ];
+  })();
 
 /** sourceSlug → curated 1001TL seed (SC / YT when live HTML is CF-blocked). */
 export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<

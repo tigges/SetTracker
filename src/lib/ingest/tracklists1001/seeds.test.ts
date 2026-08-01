@@ -70,15 +70,23 @@ assert.ok(
 
 assertSeedClocks(TL_AHEE_LIQUID_STRANGER_EDC_LV_2026);
 const ahee = tracklist1001RowsToPlays(TL_AHEE_LIQUID_STRANGER_EDC_LV_2026);
-assert.ok(ahee.length >= 20);
+assert.ok(ahee.length >= 40);
 assert.equal(ahee[0]!.trackTitle, "Superstar");
-assert.equal(ahee[ahee.length - 1]!.trackTitle, "A Milli (Acappella)");
+assert.equal(ahee[ahee.length - 1]!.trackTitle, "Cracked");
 assert.ok(
   ahee.some((p) => p.trackTitle === "Jungle Juice"),
   "expected Jungle Juice from 1001 screenshots",
 );
 assert.ok(
-  TRACKLIST_1001_BY_SOURCE_SLUG["yt-yXHoHK_jQvc"]!.length >= 20,
+  ahee.some((p) => p.trackTitle === "Lose It"),
+  "expected Lose It from later screenshots",
+);
+const gunslinger = ahee.find(
+  (p) => p.trackTitle === "Gunslinger (Bemah Flip)",
+);
+assert.equal(gunslinger?.timestamp, 45 * 60 + 30);
+assert.ok(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-yXHoHK_jQvc"]!.length >= 40,
 );
 
 console.log("tracklists1001/seeds.test.ts ok");
