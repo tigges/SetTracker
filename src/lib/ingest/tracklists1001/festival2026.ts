@@ -5,6 +5,7 @@
 
 import type { FingerprintSeedRow } from "../fingerprint/seeds";
 import { parseClockToSec } from "../fingerprint/seeds";
+import { interpolateMissingClocks } from "./toSeed";
 
 function formatClock(sec: number): string {
   const s = Math.max(0, Math.floor(sec));
@@ -487,6 +488,88 @@ export const TL_DARUDE_EDC_LV_2026: FingerprintSeedRow[] = [
   },
 ];
 
+/**
+ * CID @ circuitGROUNDS, EDC Las Vegas 2017-06-18
+ * Official SC: https://soundcloud.com/cidmusic/cid-edc-lv-2017 (~59:02)
+ * 1001TL: https://1001.tl/qhdctfk — operator console capture 2026-08-01.
+ * Known 1001 cues kept; gaps interpolated (capture had broken i*90 fills).
+ */
+export const TL_CID_EDC_LV_2017: FingerprintSeedRow[] =
+  interpolateMissingClocks(
+    [
+      { at: "0:00", artist: "CID & Kaskade", title: "Sweet Memories" },
+      { artist: "Roulsen", title: "Rumble" },
+      {
+        artist: "Maroon 5 ft. Future",
+        title: "Cold (Acappella)",
+      },
+      {
+        at: "6:22",
+        artist: "Bruno Mars",
+        title: "Versace On The Floor (CID Remix)",
+      },
+      {
+        at: "9:15",
+        artist: "CID ft. Conrad Sewell",
+        title: "Secrets (BROHUG Remix)",
+      },
+      { at: "12:10", artist: "Madison Mars", title: "Doppler" },
+      {
+        artist: "Kaskade & Project 46 ft. Stef Lang",
+        title: "Last Chance",
+      },
+      {
+        at: "15:45",
+        artist: "Skrillex & Habstrakt",
+        title: "Chicken Soup",
+      },
+      { at: "17:58", artist: "CID", title: "Werk" },
+      {
+        artist: "JOYRYDE vs. Eric Prydz",
+        title: "Hot Drum vs. Pjanoo",
+      },
+      { artist: "Eric Prydz", title: "Pjanoo" },
+      { artist: "JOYRYDE", title: "Hot Drum" },
+      {
+        artist: "The Magician ft. Brayton Bowman",
+        title: "Shy (CID Remix)",
+      },
+      { at: "26:12", artist: "CID", title: "Creepin'" },
+      { artist: "BROHUG", title: "If I'm Wrong" },
+      {
+        at: "30:35",
+        artist: "Throttle",
+        title: "Hit The Road Jack (CAZZTEK Remix)",
+      },
+      { at: "33:13", artist: "Sikdope", title: "Snakes" },
+      {
+        at: "36:05",
+        artist: "CID ft. CeeLo Green",
+        title: "Believer (CID VIP Mix)",
+      },
+      { artist: "Kideko & George Kwali", title: "Crank It" },
+      {
+        at: "41:22",
+        artist: "Galantis & Hook N Sling",
+        title: "Love On Me (CID Remix)",
+      },
+      { artist: "Chris Lake", title: "I Want You" },
+      { artist: "Croatia Squad", title: "Hyper" },
+      { artist: "Tiësto & Sevenn", title: "BOOM" },
+      {
+        artist: "The Chainsmokers & Coldplay",
+        title: "Something Just Like This (Don Diablo Remix)",
+      },
+      {
+        at: "54:18",
+        artist: "Ummet Ozcan ft. Ambush",
+        title: "Bombjack",
+      },
+      { at: "57:17", artist: "Kaskade & CID", title: "Us" },
+    ],
+    3542,
+  );
+
 /** sourceSlug → curated 1001TL seed (SC / YT when live HTML is CF-blocked). */
 export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   string,
@@ -496,6 +579,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
     TL_CHARLOTTE_DE_WITTE_TML_WE1_2026,
   "sc-cloonee-clooneeb2bprospa": TL_CLOONEE_PROSPA_DESTINO_2026,
   "sc-itsthewestend-westend-live-edc-2026": TL_WESTEND_EDC_LV_2026,
+  "sc-cidmusic-cid-edc-lv-2017": TL_CID_EDC_LV_2017,
   "yt-yXHoHK_jQvc": TL_AHEE_LIQUID_STRANGER_EDC_LV_2026,
   "yt-dXBoIY65P8s": TL_DARUDE_EDC_LV_2026,
 };

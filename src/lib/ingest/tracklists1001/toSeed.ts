@@ -69,30 +69,68 @@ export function playsToCaptureRows(plays: RawPlay[]): CaptureRow[] {
   return out;
 }
 
-export function captureRowsToSeedRows(
+/**
+ * Fill missing cues by lerping between neighboring known clocks.
+ * Never invents `i * 90` placeholders (those break set order on partial
+ * 1001 cue lists).
+ */
+export function interpolateMissingClocks(
   rows: CaptureRow[],
-  opts: { evenlySpaceDurationSec?: number } = {},
+  durationSec: number,
 ): FingerprintSeedRow[] {
-  const timed = rows.filter((r) => r.at && parseClockToSec(r.at) != null);
-  if (
-    opts.evenlySpaceDurationSec != null &&
-    timed.length < Math.max(3, Math.floor(rows.length * 0.4))
-  ) {
-    const n = rows.length;
-    if (!n) return [];
-    const usable = Math.max(60, opts.evenlySpaceDurationSec - 45);
+  const n = rows.length;
+  if (!n) return [];
+
+  const secs: (number | null)[] = rows.map((r) =>
+    r.at != null ? parseClockToSec(r.at) : null,
+  );
+  const known = secs.filter((s): s is number => s != null).length;
+
+  if (known === 0) {
+    const usable = Math.max(60, durationSec - 45);
     const step = Math.max(45, Math.floor(usable / n));
     return rows.map((r, i) => ({
-      at: r.at && parseClockToSec(r.at) != null ? r.at : formatClock(20 + i * step),
+      at: formatClock(20 + i * step),
       artist: r.artist,
       title: r.title,
     }));
   }
+
+  if (secs[0] == null) secs[0] = 0;
+  if (secs[n - 1] == null) {
+    secs[n - 1] = Math.max(secs[0] ?? 0, durationSec - 30);
+  }
+
+  for (let i = 0; i < n; i++) {
+    if (secs[i] != null) continue;
+    let lo = i - 1;
+    while (lo >= 0 && secs[lo] == null) lo--;
+    let hi = i + 1;
+    while (hi < n && secs[hi] == null) hi++;
+    const loSec = lo >= 0 ? secs[lo]! : 0;
+    const hiSec = hi < n ? secs[hi]! : Math.max(loSec + 60, durationSec - 30);
+    const loI = lo >= 0 ? lo : -1;
+    const hiI = hi < n ? hi : n;
+    const t = (i - loI) / Math.max(1, hiI - loI);
+    secs[i] = Math.round(loSec + t * (hiSec - loSec));
+  }
+
+  for (let i = 1; i < n; i++) {
+    if (secs[i]! <= secs[i - 1]!) secs[i] = secs[i - 1]! + 1;
+  }
+
   return rows.map((r, i) => ({
-    at: r.at && parseClockToSec(r.at) != null ? r.at! : formatClock(i * 90),
+    at: formatClock(secs[i]!),
     artist: r.artist,
     title: r.title,
   }));
+}
+
+export function captureRowsToSeedRows(
+  rows: CaptureRow[],
+  opts: { evenlySpaceDurationSec?: number } = {},
+): FingerprintSeedRow[] {
+  return interpolateMissingClocks(rows, opts.evenlySpaceDurationSec ?? 3600);
 }
 
 /** Pretty-print a TS array literal for pasting into festival2026.ts. */

@@ -147,26 +147,41 @@
   }
 
   const timed = rows.filter((r) => r.at).length;
-  let seed = rows.map((r) => ({
-    at: r.at,
+  // Fill missing cues by lerping between known neighbors (never i*90 fakes).
+  const secs = rows.map((r) => (r.at ? parseCue(r.at) : null));
+  const n = rows.length;
+  if (timed === 0) {
+    const usable = Math.max(60, opts.durationSec - 45);
+    const step = Math.max(45, Math.floor(usable / n));
+    for (let i = 0; i < n; i++) secs[i] = 20 + i * step;
+  } else {
+    if (secs[0] == null) secs[0] = 0;
+    if (secs[n - 1] == null) {
+      secs[n - 1] = Math.max(secs[0] || 0, opts.durationSec - 30);
+    }
+    for (let i = 0; i < n; i++) {
+      if (secs[i] != null) continue;
+      let lo = i - 1;
+      while (lo >= 0 && secs[lo] == null) lo--;
+      let hi = i + 1;
+      while (hi < n && secs[hi] == null) hi++;
+      const loSec = lo >= 0 ? secs[lo] : 0;
+      const hiSec =
+        hi < n ? secs[hi] : Math.max(loSec + 60, opts.durationSec - 30);
+      const loI = lo >= 0 ? lo : -1;
+      const hiI = hi < n ? hi : n;
+      const t = (i - loI) / Math.max(1, hiI - loI);
+      secs[i] = Math.round(loSec + t * (hiSec - loSec));
+    }
+    for (let i = 1; i < n; i++) {
+      if (secs[i] <= secs[i - 1]) secs[i] = secs[i - 1] + 1;
+    }
+  }
+  const seed = rows.map((r, i) => ({
+    at: formatClock(secs[i]),
     artist: r.artist,
     title: r.title,
   }));
-
-  if (timed < Math.max(3, Math.floor(rows.length * 0.4))) {
-    const n = seed.length;
-    const usable = Math.max(60, opts.durationSec - 45);
-    const step = Math.max(45, Math.floor(usable / n));
-    seed = seed.map((r, i) => ({
-      ...r,
-      at: r.at || formatClock(20 + i * step),
-    }));
-  } else {
-    seed = seed.map((r, i) => ({
-      ...r,
-      at: r.at || formatClock(i * 90),
-    }));
-  }
 
   const pageTitle = (
     document.querySelector("h1")?.textContent ||

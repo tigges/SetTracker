@@ -1,7 +1,9 @@
 import assert from "node:assert/strict";
+import { parseClockToSec } from "../fingerprint/seeds";
 import {
   captureRowsToSeedRows,
   formatSeedTs,
+  interpolateMissingClocks,
   isBareIdRow,
   playsToCaptureRows,
   splitArtistTitle,
@@ -49,6 +51,27 @@ const spaced = captureRowsToSeedRows(
 );
 assert.equal(spaced.length, 2);
 assert.ok(spaced[0]!.at);
+
+const partial = interpolateMissingClocks(
+  [
+    { at: "0:00", artist: "A", title: "One" },
+    { artist: "B", title: "Two" },
+    { at: "6:00", artist: "C", title: "Three" },
+    { artist: "D", title: "Four" },
+    { at: "10:00", artist: "E", title: "Five" },
+  ],
+  600,
+);
+assert.equal(partial.length, 5);
+let prev = -1;
+for (const r of partial) {
+  const t = parseClockToSec(r.at)!;
+  assert.ok(t > prev, `clocks must increase: ${r.at}`);
+  prev = t;
+}
+assert.equal(partial[0]!.at, "0:00");
+assert.equal(partial[2]!.at, "6:00");
+assert.equal(partial[4]!.at, "10:00");
 
 const ts = formatSeedTs(spaced, {
   constName: "TL_TEST",

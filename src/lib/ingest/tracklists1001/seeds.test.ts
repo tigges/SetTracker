@@ -3,6 +3,7 @@ import { extract1001Urls } from "./parse";
 import {
   TL_AHEE_LIQUID_STRANGER_EDC_LV_2026,
   TL_CHARLOTTE_DE_WITTE_TML_WE1_2026,
+  TL_CID_EDC_LV_2017,
   TL_CLOONEE_PROSPA_DESTINO_2026,
   TL_DARUDE_EDC_LV_2026,
   TL_MARTEN_HORGER_EDC_LV_2023,
@@ -12,6 +13,7 @@ import {
   tracklist1001RowsToPlays,
 } from "./seeds";
 import { assertSeedClocks } from "./festival2026";
+import { parseClockToSec } from "../fingerprint/seeds";
 
 const urls = extract1001Urls(
   `Tracklist: https://1001.tl/vfff7hk\nAlso https://www.1001tracklists.com/tracklist/vfff7hk/foo.html`,
@@ -110,5 +112,20 @@ assert.ok(
   "08:26 on 1001 is Darude ID, not Nobody Listens",
 );
 assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-dXBoIY65P8s"]!.length >= 12);
+
+assertSeedClocks(TL_CID_EDC_LV_2017);
+const cid = tracklist1001RowsToPlays(TL_CID_EDC_LV_2017);
+assert.equal(cid.length, 26);
+assert.equal(cid[0]!.trackTitle, "Sweet Memories");
+assert.equal(cid[cid.length - 1]!.trackTitle, "Us");
+let cidPrev = -1;
+for (const p of cid) {
+  assert.ok(p.timestamp > cidPrev, `CID clocks must increase @ ${p.timestamp}`);
+  cidPrev = p.timestamp;
+}
+assert.equal(parseClockToSec("6:22"), cid[3]!.timestamp);
+assert.ok(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-cidmusic-cid-edc-lv-2017"]!.length >= 20,
+);
 
 console.log("tracklists1001/seeds.test.ts ok");
