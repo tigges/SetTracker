@@ -1900,6 +1900,23 @@ export const TL_AYYBO_ODD_MOB_TML_WE2_2026: FingerprintSeedRow[] = [
 ];
 
 /**
+ * Dyzen @ Planaxis Stage, Tomorrowland Weekend 2, Belgium 2026-07-25
+ * 1001TL: https://1001.tl/1muw64wk — operator console capture 2026-08-01
+ * (0/4 timed cues — evenly spaced across ~60m; thin/partial TL).
+ * No official Tomorrowland Relive yet — seed ready; do not wire clips.
+ * Note: not "Dyen b2b Maddix" (different artist / set).
+ */
+export const TL_DYZEN_TML_WE2_2026: FingerprintSeedRow[] = evenlySpaceRows(
+  [
+    { artist: "Maceo Plex", title: "Mutant Quasars" },
+    { artist: "sombr", title: "back to friends" },
+    { artist: "The Mamas & The Papas", title: "California Dreamin'" },
+    { artist: "Dyzen", title: "Try" },
+  ],
+  3600,
+);
+
+/**
  * Layton Giordani @ circuitGROUNDS closing, EDC Las Vegas 2025-05-16
  * Official SC: https://soundcloud.com/laytongiordani/layton-giordani-live-edc-las-vegas-circuit-grounds-closing-set-2025 (~59:40)
  * 1001TL: https://1001.tl/bt007st — operator console capture 2026-08-01

@@ -14,6 +14,7 @@ import {
   TL_DIMITRI_VEGAS_TML_WE2_2026,
   TL_DOM_DOLLA_EDC_LV_2023,
   TL_DOM_DOLLA_EDC_LV_2024,
+  TL_DYZEN_TML_WE2_2026,
   TL_ENRICO_SANGIULIANO_TML_WE2_2026,
   TL_FISHER_TML_WE2_2026,
   TL_FUNK_TRIBU_EDC_LV_2026,
@@ -621,5 +622,17 @@ for (const p of ayybo) {
   ayyboPrev = p.timestamp;
 }
 assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-gO03gfI_JF0"]!.length >= 30);
+
+assertSeedClocks(TL_DYZEN_TML_WE2_2026);
+const dyzen = tracklist1001RowsToPlays(TL_DYZEN_TML_WE2_2026);
+assert.equal(dyzen.length, 4);
+assert.equal(dyzen[0]!.trackTitle, "Mutant Quasars");
+assert.equal(dyzen[dyzen.length - 1]!.trackTitle, "Try");
+// Thin partial TL + no official Relive — held (not Dyen b2b Maddix).
+assert.equal(TRACKLIST_1001_BY_SOURCE_SLUG["yt-VABm0tIRn2U"], undefined);
+assert.equal(
+  Object.values(TRACKLIST_1001_BY_SOURCE_SLUG).includes(TL_DYZEN_TML_WE2_2026),
+  false,
+);
 
 console.log("tracklists1001/seeds.test.ts ok");
