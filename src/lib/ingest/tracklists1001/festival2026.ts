@@ -206,21 +206,24 @@ export const TL_CHARLOTTE_DE_WITTE_TML_WE1_2026: FingerprintSeedRow[] =
  * Westend @ cosmicMEADOW, EDC Las Vegas 2026-05-15
  * Official YT: https://www.youtube.com/watch?v=jQLWYc2UrFY (~59:12)
  * Official SC: https://soundcloud.com/itsthewestend/westend-live-edc-2026
- * 1001TL: https://1001.tl/xh6t5uk (CF-blocked in CI) — operator screenshot
- * capture 2026-08-01. Skips bare Westend ID. Known cues Like You A Lot
- * ~20:59 / Proper Education ~29:48 applied after even spacing.
+ * 1001TL: https://1001.tl/xh6t5uk — operator console capture 2026-08-01
+ * (1/26 DOM cues). Anchors: Like You A Lot @ 20:59 (1001), Proper Education
+ * @ 29:48 (screenshot); rest interpolated across ~59:12.
  */
-export const TL_WESTEND_EDC_LV_2026: FingerprintSeedRow[] = (() => {
-  const spaced = evenlySpaceRows(
+export const TL_WESTEND_EDC_LV_2026: FingerprintSeedRow[] =
+  interpolateMissingClocks(
     [
       {
-        artist: "Glass Petals ft. Sophiegraphy",
+        at: "0:00",
+        artist: "Glass Petals ft. Sophiegrophy",
         title: "We Stay Inside",
       },
       {
-        artist: "Diplo & SIDEPIECE vs Westend",
-        title: "On My Mind vs Freaky Time (Westend Mashup)",
+        artist: "Diplo & SIDEPIECE vs. Westend",
+        title: "On My Mind vs. Freaky Time (Westend Mashup)",
       },
+      { artist: "Diplo & SIDEPIECE", title: "On My Mind" },
+      { artist: "Westend", title: "Freaky Time" },
       {
         artist: "Prospa",
         title: "Don't Stop (Twin Diplomacy Remix)",
@@ -232,21 +235,32 @@ export const TL_WESTEND_EDC_LV_2026: FingerprintSeedRow[] = (() => {
       },
       { artist: "Westend ft. Hosanna", title: "Drum Death" },
       {
-        artist: "VNSSA, Sian & Sacha Robotti",
+        artist: "Westend ft. Hosanna",
+        title: "Drum Death (DENNETT Remix)",
+      },
+      {
+        artist: "VNSSA & Sian & Sacha Robotti",
         title: "Smalltown Girl",
       },
       { artist: "Westend & Dave Summer", title: "Love Spell" },
       {
+        at: "20:59",
         artist: "Vanrip & Truth x Lies ft. WEiRD GRRL",
         title: "Like You A Lot",
       },
       {
-        artist: "Dansyn vs Noizu & Westend & No/Me",
-        title: "Bang That vs Push To Start (Westend Edit)",
+        artist: "Dansyn vs. Noizu & Westend & No/Me",
+        title: "Bang That vs. Push To Start (Westend Edit)",
       },
+      {
+        artist: "Noizu & Westend ft. No/Me",
+        title: "Push To Start",
+      },
+      { artist: "Dansyn", title: "Bang That" },
       { artist: "Westend & Twin Diplomacy", title: "Sensational" },
       {
-        artist: "Eric Prydz vs Pink Floyd",
+        at: "29:48",
+        artist: "Eric Prydz vs. Pink Floyd",
         title: "Proper Education (Westend Edit)",
       },
       {
@@ -257,12 +271,16 @@ export const TL_WESTEND_EDC_LV_2026: FingerprintSeedRow[] = (() => {
         artist: "deadmau5 & Wolfgang Gartner",
         title: "Animal Rights (Westend Remix)",
       },
+      {
+        artist: "Richard Vission & Static Revenger ft. Luciana",
+        title: "I Like That (Acappella)",
+      },
       { artist: "Westend ft. Lizzy Land", title: "Surrender" },
       { artist: "BRANDON", title: "My Body Talks" },
       {
         artist: "Congorock ft. Mr. Lexx",
         title:
-          "Babylon (David Guetta & Marten Horger / Men Machine & KENZ Rework)",
+          "Babylon (David Guetta & MARTEN HØRGER pres. Men Machine & KENZ Rework)",
       },
       {
         artist: "Westend & Olivia Sebastianelli",
@@ -272,18 +290,10 @@ export const TL_WESTEND_EDC_LV_2026: FingerprintSeedRow[] = (() => {
         artist: "deadmau5 ft. Rob Swire",
         title: "Ghosts 'n' Stuff (Luke Alexander Remix)",
       },
-      { artist: "Westend", title: "Feels Better" },
+      { at: "59:12", artist: "Westend", title: "Feels Better" },
     ],
     3552,
   );
-  return spaced.map((row) => {
-    if (row.title === "Like You A Lot") return { ...row, at: "20:59" };
-    if (row.title === "Proper Education (Westend Edit)") {
-      return { ...row, at: "29:48" };
-    }
-    return row;
-  });
-})();
 
 /**
  * AHEE B2B Liquid Stranger @ bassPOD, EDC Las Vegas 2026

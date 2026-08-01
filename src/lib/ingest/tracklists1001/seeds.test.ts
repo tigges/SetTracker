@@ -65,18 +65,30 @@ assert.ok(
 
 assertSeedClocks(TL_WESTEND_EDC_LV_2026);
 const westend = tracklist1001RowsToPlays(TL_WESTEND_EDC_LV_2026);
-assert.ok(westend.length >= 18);
+assert.equal(westend.length, 26);
 assert.equal(westend[0]!.trackTitle, "We Stay Inside");
+assert.equal(westend[0]!.artistName, "Glass Petals ft. Sophiegrophy");
 assert.equal(westend[westend.length - 1]!.trackTitle, "Feels Better");
+assert.ok(
+  westend.some((p) => p.trackTitle === "Drum Death (DENNETT Remix)"),
+);
 const likeYou = westend.find((p) => p.trackTitle === "Like You A Lot");
 assert.equal(likeYou?.timestamp, 20 * 60 + 59);
 const proper = westend.find(
   (p) => p.trackTitle === "Proper Education (Westend Edit)",
 );
 assert.equal(proper?.timestamp, 29 * 60 + 48);
+let westPrev = -1;
+for (const p of westend) {
+  assert.ok(
+    p.timestamp > westPrev,
+    `Westend clocks must increase @ ${p.timestamp}`,
+  );
+  westPrev = p.timestamp;
+}
 assert.ok(
   TRACKLIST_1001_BY_SOURCE_SLUG["sc-itsthewestend-westend-live-edc-2026"]!
-    .length >= 18,
+    .length >= 24,
 );
 
 assertSeedClocks(TL_AHEE_LIQUID_STRANGER_EDC_LV_2026);
