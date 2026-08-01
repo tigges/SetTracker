@@ -763,6 +763,108 @@ export const TL_CLOONEE_EDC_LV_2022: FingerprintSeedRow[] = [
   { at: "58:53", artist: "Cloonee", title: "Sun Goes Down" },
 ];
 
+/**
+ * Odd Mob @ cosmicMEADOW, EDC Las Vegas 2025-05-17
+ * Official SC: https://soundcloud.com/oceanologymusic/odd-mob-live-at-edc-las-vegas-2025-cosmic-meadow-day-2-3 (~59:10)
+ * 1001TL: https://1001.tl/2cz5c0h1 — operator console capture 2026-08-01
+ * (19/29 timed cues; gaps interpolated).
+ */
+export const TL_ODD_MOB_EDC_LV_2025: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "Odd Mob ft. Ed Graves", title: "Vertigo" },
+  {
+    at: "3:10",
+    artist: "Tiësto & Odd Mob & GOODBOYS",
+    title: "Won't Be Possible",
+  },
+  {
+    at: "6:00",
+    artist: "Cloonee & InntRaw & Young M.A",
+    title: "Stephanie (Odd Mob Remix)",
+  },
+  {
+    at: "8:30",
+    artist: "Odd Mob",
+    title: "Dancing Boys, Dancing Girls",
+  },
+  { at: "11:40", artist: "TOYZZ", title: "SexyBack" },
+  {
+    at: "15:40",
+    artist: "ROB49",
+    title: "WTHELLY (Julian Jordan Remix)",
+  },
+  {
+    at: "18:20",
+    artist: "Odd Mob & OMNOM pres. HYPERBEAM",
+    title: "System",
+  },
+  { at: "19:55", artist: "Odd Mob", title: "LEFT TO RIGHT" },
+  {
+    at: "21:30",
+    artist: "SIDEPIECE & Bobby Shmurda",
+    title: "CASH OUT",
+  },
+  {
+    at: "24:00",
+    artist: "Adam Beyer & Green Velvet",
+    title: "Simulator (Odd Mob Remix)",
+  },
+  {
+    at: "25:15",
+    artist: "Fred again.. & Swedish House Mafia ft. Future",
+    title: "Turn On The Lights Again..",
+  },
+  {
+    at: "26:30",
+    artist: "Odd Mob ft. Lizzy Land",
+    title: "Never Alone",
+  },
+  { at: "30:00", artist: "Dom Dolla ft. Daya", title: "Dreamin" },
+  { at: "31:25", artist: "Space 92", title: "Orbit Motion" },
+  {
+    at: "32:50",
+    artist: "Kerri Chandler & Spank Rock",
+    title: "Planet Sonic vs. Bump (Odd Mob Edit)",
+  },
+  {
+    at: "36:10",
+    artist: "BYOR & Angel Janson",
+    title: "Saving It All",
+  },
+  { at: "37:07", artist: "Dom Dolla", title: "Saving Up" },
+  { at: "38:04", artist: "Lola Young", title: "Messy" },
+  {
+    at: "39:00",
+    artist: "John Summit & venbee",
+    title: "palm of my hands (Odd Mob Remix)",
+  },
+  { at: "41:05", artist: "33 Below", title: "Mash Up" },
+  {
+    at: "43:10",
+    artist: "Sean Paul & Odd Mob",
+    title: "Get Busy (Odd Mob Club Mix)",
+  },
+  {
+    at: "46:00",
+    artist: "Odd Mob & OMNOM pres. HYPERBEAM",
+    title: "Coming Up (It's Dare)",
+  },
+  {
+    at: "49:00",
+    artist: "Odd Mob",
+    title: "Don't Stop Make That Body Rock",
+  },
+  {
+    at: "51:40",
+    artist: "Basement Jaxx",
+    title: "Where's Your Head At? (OMNOM Flip)",
+  },
+  { at: "53:30", artist: "Odd Mob & OMNOM", title: "Losing Control" },
+  { at: "54:30", artist: "Odd Mob", title: "LEFT TO RIGHT" },
+  { at: "55:30", artist: "Odd Mob & OMNOM", title: "Losing Control" },
+  { at: "56:30", artist: "Combine & MYTHM", title: "OLD SCHOOL" },
+  { at: "59:30", artist: "Chris Lake & Ragie Ban", title: "Toxic" },
+];
+
 /** sourceSlug → curated 1001TL seed (SC / YT when live HTML is CF-blocked). */
 export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   string,
@@ -776,6 +878,8 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "sc-cidmusic-cid-edc-lv-2017": TL_CID_EDC_LV_2017,
   "sc-bleuclair-edclv2023": TL_BLEU_CLAIR_EDC_LV_2023,
   "sc-waxmotif-wax-motif-live-edc-2021": TL_WAX_MOTIF_EDC_LV_2021,
+  "sc-oceanologymusic-odd-mob-live-at-edc-las-vegas-2025-cosmic-meadow-day-2-3":
+    TL_ODD_MOB_EDC_LV_2025,
   "yt-yXHoHK_jQvc": TL_AHEE_LIQUID_STRANGER_EDC_LV_2026,
   "yt-dXBoIY65P8s": TL_DARUDE_EDC_LV_2026,
   "yt-c_sx3zum8Z0": TL_BLEU_CLAIR_EDC_LV_2023,

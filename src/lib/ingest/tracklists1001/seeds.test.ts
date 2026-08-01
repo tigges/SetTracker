@@ -10,6 +10,7 @@ import {
   TL_DARUDE_EDC_LV_2026,
   TL_MARTEN_HORGER_EDC_LV_2023,
   TL_MARTEN_HORGER_PAROOKAVILLE_2026,
+  TL_ODD_MOB_EDC_LV_2025,
   TL_WAX_MOTIF_EDC_LV_2021,
   TL_WESTEND_EDC_LV_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
@@ -174,6 +175,22 @@ for (const p of clooneeEdc) {
 }
 assert.ok(
   TRACKLIST_1001_BY_SOURCE_SLUG["sc-cloonee-cloonee-edc-2022"]!.length >= 14,
+);
+
+assertSeedClocks(TL_ODD_MOB_EDC_LV_2025);
+const oddMob = tracklist1001RowsToPlays(TL_ODD_MOB_EDC_LV_2025);
+assert.equal(oddMob.length, 29);
+assert.equal(oddMob[0]!.trackTitle, "Vertigo");
+assert.equal(oddMob[oddMob.length - 1]!.trackTitle, "Toxic");
+let omPrev = -1;
+for (const p of oddMob) {
+  assert.ok(p.timestamp > omPrev, `Odd Mob clocks must increase @ ${p.timestamp}`);
+  omPrev = p.timestamp;
+}
+assert.ok(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-oceanologymusic-odd-mob-live-at-edc-las-vegas-2025-cosmic-meadow-day-2-3"
+  ]!.length >= 25,
 );
 
 console.log("tracklists1001/seeds.test.ts ok");
