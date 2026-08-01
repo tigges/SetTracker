@@ -84,10 +84,12 @@ export function extract1001Urls(text: string | null | undefined): string[] {
   if (!text?.trim()) return [];
   const out: string[] = [];
   const seen = new Set<string>();
+  // Scheme optional — SC descriptions often say `Tracklist: 1001.tl/qhdctfk`.
   const re =
-    /https?:\/\/(?:1001\.tl\/[\w-]+|(?:www\.)?1001tracklists\.com\/tracklist\/[\w./-]+)/gi;
+    /(?:https?:\/\/)?(?:1001\.tl\/[\w-]+|(?:www\.)?1001tracklists\.com\/tracklist\/[\w./-]+)/gi;
   for (const m of text.matchAll(re)) {
-    const url = m[0]!.replace(/[),.]+$/, "");
+    let url = m[0]!.replace(/[),.]+$/, "");
+    if (!/^https?:\/\//i.test(url)) url = `https://${url}`;
     const key = url.toLowerCase();
     if (seen.has(key)) continue;
     seen.add(key);
