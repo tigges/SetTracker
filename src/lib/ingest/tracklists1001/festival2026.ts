@@ -1026,8 +1026,116 @@ export const TL_MAX_STYLER_EDC_LV_2024: FingerprintSeedRow[] = [
 ];
 
 /**
+ * Dom Dolla @ circuitGROUNDS, EDC Las Vegas 2023-05-20
+ * Official SC: https://soundcloud.com/domdolla/dom-dolla-live-edc-las-vegas-2023 (~71:26)
+ * 1001TL: https://1001.tl/1w0hwttk — operator console capture 2026-08-01
+ * (24/32 timed cues; gaps interpolated).
+ */
+export const TL_DOM_DOLLA_EDC_LV_2023: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "Afrojack", title: "Pacha On Acid" },
+  {
+    at: "0:45",
+    artist: "Who Da Funk ft. Jessica Eve",
+    title: "Shiny Disco Balls",
+  },
+  {
+    at: "1:30",
+    artist: "Chris Lake ft. Aatig",
+    title: "In The Yuma (Martin Ikin Remix)",
+  },
+  {
+    at: "3:20",
+    artist: "Da Hool",
+    title: "Meet Her At The Love Parade (Dom Dolla & Torren Foot Remix)",
+  },
+  {
+    at: "4:25",
+    artist: "Faithless",
+    title: "Insomnia (Acappella)",
+  },
+  {
+    at: "5:30",
+    artist: "CamelPhat & Dom Dolla",
+    title: "Hood No Riff",
+  },
+  { at: "7:20", artist: "Dom Dolla", title: "Take It" },
+  {
+    at: "9:10",
+    artist: "Walker & Royce & Nala",
+    title: "Not About You",
+  },
+  { at: "11:10", artist: "Odd Mob", title: "XTC" },
+  {
+    at: "12:30",
+    artist: "Nick Coleman",
+    title: "Faces Of Meth (Holmes John Remix)",
+  },
+  {
+    at: "14:10",
+    artist: "Fergie DJ",
+    title: "Here Comes That Sound",
+  },
+  { at: "16:10", artist: "Dom Dolla", title: "San Frandisco" },
+  {
+    at: "18:10",
+    artist: "Airwolf Paradise ft. Paul Johnson",
+    title: "Only Man",
+  },
+  { at: "21:37", artist: "Chris Lorenzo", title: "Every Morning" },
+  {
+    at: "23:55",
+    artist: "John Summit ft. HAYLA",
+    title: "Where You Are (Gorgon City Remix)",
+  },
+  { at: "27:30", artist: "Zonderling", title: "Variant" },
+  {
+    at: "29:30",
+    artist: "RÜFÜS DU SOL",
+    title: "Make It Happen (Dom Dolla Remix)",
+  },
+  { at: "33:08", artist: "Odd Mob", title: "Give You" },
+  { at: "34:28", artist: "Dom Dolla", title: "Take It" },
+  { at: "35:48", artist: "MK & Dom Dolla", title: "Rhyme Dust" },
+  {
+    at: "39:43",
+    artist: "Øostil & Juan Hansen",
+    title: "Drown (Massano Remix)",
+  },
+  {
+    at: "44:15",
+    artist: "Eric Prydz vs. Wankelmut & Emma Louise & MK",
+    title: "Pjanoo vs. My Head Is A Jungle (Hayden James Edit)",
+  },
+  { at: "45:37", artist: "Eric Prydz", title: "Pjanoo" },
+  {
+    at: "46:59",
+    artist: "Wankelmut & Emma Louise",
+    title: "My Head Is A Jungle (MK Remix)",
+  },
+  { at: "48:20", artist: "MEDUZA", title: "Friends" },
+  { at: "50:50", artist: "Mau P", title: "Your Mind Is Dirty" },
+  {
+    at: "54:20",
+    artist: "Walker & Royce & Glass Petals & ELOHIM",
+    title: "Stop Time",
+  },
+  { at: "56:35", artist: "Dom Dolla", title: "San Frandisco" },
+  { at: "1:00:18", artist: "Eli Brown", title: "Diamonds On My Mind" },
+  { at: "1:03:30", artist: "FOVOS", title: "Lollipop" },
+  {
+    at: "1:05:25",
+    artist: "Dom Dolla ft. Clementine Douglas",
+    title: "Miracle Maker",
+  },
+  {
+    at: "1:09:42",
+    artist: "MK & Dom Dolla",
+    title: "Rhyme Dust (Dimension Remix)",
+  },
+];
+
+/**
  * Dom Dolla @ circuitGROUNDS, EDC Las Vegas 2024-05-18
- * (1001 URL year is 2024 — not the 2023 SC upload.)
  * Official SC: https://soundcloud.com/domdolla/dom-dolla-live-edc-circuitgrounds-las-vegas-2024 (~61:21)
  * 1001TL: https://1001.tl/24gpuclk — operator console capture 2026-08-01
  * (27/35 timed cues; gaps interpolated).
@@ -1180,6 +1288,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "sc-laytongiordani-layton-giordani-live-edc-las-vegas-circuit-grounds-closing-set-2025":
     TL_LAYTON_GIORDANI_EDC_LV_2025_CLOSING,
   "sc-maxstyler-max-styler-live-edc-vegas-2024": TL_MAX_STYLER_EDC_LV_2024,
+  "sc-domdolla-dom-dolla-live-edc-las-vegas-2023": TL_DOM_DOLLA_EDC_LV_2023,
   "sc-domdolla-dom-dolla-live-edc-circuitgrounds-las-vegas-2024":
     TL_DOM_DOLLA_EDC_LV_2024,
   "yt-yXHoHK_jQvc": TL_AHEE_LIQUID_STRANGER_EDC_LV_2026,

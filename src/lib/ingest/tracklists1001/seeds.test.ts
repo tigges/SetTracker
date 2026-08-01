@@ -8,6 +8,7 @@ import {
   TL_CLOONEE_EDC_LV_2022,
   TL_CLOONEE_PROSPA_DESTINO_2026,
   TL_DARUDE_EDC_LV_2026,
+  TL_DOM_DOLLA_EDC_LV_2023,
   TL_DOM_DOLLA_EDC_LV_2024,
   TL_LAYTON_GIORDANI_EDC_LV_2025_CLOSING,
   TL_MARTEN_HORGER_EDC_LV_2023,
@@ -225,6 +226,26 @@ for (const p of maxStyler) {
 assert.ok(
   TRACKLIST_1001_BY_SOURCE_SLUG["sc-maxstyler-max-styler-live-edc-vegas-2024"]!
     .length >= 18,
+);
+
+assertSeedClocks(TL_DOM_DOLLA_EDC_LV_2023);
+const dom23 = tracklist1001RowsToPlays(TL_DOM_DOLLA_EDC_LV_2023);
+assert.equal(dom23.length, 32);
+assert.equal(dom23[0]!.trackTitle, "Pacha On Acid");
+assert.match(dom23[dom23.length - 1]!.trackTitle!, /Rhyme Dust/);
+assert.equal(dom23[dom23.length - 1]!.timestamp, 69 * 60 + 42);
+let dom23Prev = -1;
+for (const p of dom23) {
+  assert.ok(
+    p.timestamp > dom23Prev,
+    `Dom Dolla 2023 clocks must increase @ ${p.timestamp}`,
+  );
+  dom23Prev = p.timestamp;
+}
+assert.ok(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-domdolla-dom-dolla-live-edc-las-vegas-2023"
+  ]!.length >= 28,
 );
 
 assertSeedClocks(TL_DOM_DOLLA_EDC_LV_2024);
