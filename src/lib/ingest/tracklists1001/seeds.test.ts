@@ -15,6 +15,7 @@ import {
   TL_MAX_STYLER_EDC_LV_2024,
   TL_MARTEN_HORGER_PAROOKAVILLE_2026,
   TL_ODD_MOB_EDC_LV_2025,
+  TL_PEGASSI_EDC_LV_2026,
   TL_SARAH_DE_WARREN_EDC_LV_2026,
   TL_SOLOMUN_EDC_LV_2026,
   TL_WAX_MOTIF_EDC_LV_2021,
@@ -306,5 +307,12 @@ for (const p of sarah) {
   sarahPrev = p.timestamp;
 }
 assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-KIb3psOt9hI"]!.length >= 14);
+
+assertSeedClocks(TL_PEGASSI_EDC_LV_2026);
+const pegassi = tracklist1001RowsToPlays(TL_PEGASSI_EDC_LV_2026);
+assert.equal(pegassi.length, 12);
+assert.equal(pegassi[0]!.trackTitle, "Heartless");
+assert.equal(pegassi[pegassi.length - 1]!.trackTitle, "Spectral Bells");
+assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-yUA0Ht2PdG0"]!.length >= 12);
 
 console.log("tracklists1001/seeds.test.ts ok");

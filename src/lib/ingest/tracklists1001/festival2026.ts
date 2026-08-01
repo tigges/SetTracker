@@ -1316,6 +1316,30 @@ export const TL_SOLOMUN_EDC_LV_2026: FingerprintSeedRow[] = [
 ];
 
 /**
+ * Pegassi @ quantumVALLEY, EDC Las Vegas 2026-05-15
+ * Official YT: https://www.youtube.com/watch?v=yUA0Ht2PdG0 (~57:34)
+ * 1001TL: https://1001.tl/108mxtc9 — operator console capture 2026-08-01
+ * (0/12 timed cues — evenly spaced across ~57m).
+ */
+export const TL_PEGASSI_EDC_LV_2026: FingerprintSeedRow[] = evenlySpaceRows(
+  [
+    { artist: "Dave75", title: "Heartless" },
+    { artist: "Gaston Fiore", title: "Sense Of Risk" },
+    { artist: "Azzurro", title: "Let Me Bang" },
+    { artist: "Pegassi", title: "Upclose" },
+    { artist: "Charli xcx", title: "Constant Repeat" },
+    { artist: "Pegassi", title: "Yoyoyo" },
+    { artist: "Pegassi", title: "Like This" },
+    { artist: "Pegassi", title: "227kg" },
+    { artist: "Ueberrest", title: "Stay High" },
+    { artist: "Leechy & BR.ICKO", title: "In The Club" },
+    { artist: "GhÖsty", title: "Club Bound" },
+    { artist: "Pegassi", title: "Spectral Bells" },
+  ],
+  3454,
+);
+
+/**
  * Sarah de Warren @ quantumVALLEY, EDC Las Vegas 2026-05-15
  * Official YT: https://www.youtube.com/watch?v=KIb3psOt9hI (~40:43)
  * 1001TL: https://1001.tl/1z031tz1 — operator console capture 2026-08-01
@@ -1417,6 +1441,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-c_sx3zum8Z0": TL_BLEU_CLAIR_EDC_LV_2023,
   "yt-g1vH9C_o-vo": TL_SOLOMUN_EDC_LV_2026,
   "yt-KIb3psOt9hI": TL_SARAH_DE_WARREN_EDC_LV_2026,
+  "yt-yUA0Ht2PdG0": TL_PEGASSI_EDC_LV_2026,
 };
 
 /** Sanity: every seeded clock must parse. */
