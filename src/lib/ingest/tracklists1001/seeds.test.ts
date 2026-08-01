@@ -4,6 +4,7 @@ import {
   TL_AHEE_LIQUID_STRANGER_EDC_LV_2026,
   TL_BLEU_CLAIR_EDC_LV_2023,
   TL_CHARLOTTE_DE_WITTE_TML_WE1_2026,
+  TL_CHRIS_LORENZO_TML_WE2_2026,
   TL_CID_EDC_LV_2017,
   TL_CLOONEE_EDC_LV_2022,
   TL_CLOONEE_PROSPA_DESTINO_2026,
@@ -548,6 +549,19 @@ assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-yWZyIQtxoXU"]!.length >= 31);
 assert.equal(
   TRACKLIST_1001_BY_SOURCE_SLUG["yt-Py-GG74lLU8"],
   TRACKLIST_1001_BY_SOURCE_SLUG["yt-yWZyIQtxoXU"],
+);
+
+assertSeedClocks(TL_CHRIS_LORENZO_TML_WE2_2026);
+const chrisL = tracklist1001RowsToPlays(TL_CHRIS_LORENZO_TML_WE2_2026);
+assert.equal(chrisL.length, 10);
+assert.match(chrisL[0]!.trackTitle!, /Appetite/);
+assert.equal(chrisL[chrisL.length - 1]!.trackTitle, "House Every Weekend");
+// No official Relive yet — seed held, not slug-mapped.
+assert.equal(
+  Object.values(TRACKLIST_1001_BY_SOURCE_SLUG).includes(
+    TL_CHRIS_LORENZO_TML_WE2_2026,
+  ),
+  false,
 );
 
 console.log("tracklists1001/seeds.test.ts ok");

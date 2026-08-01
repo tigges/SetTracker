@@ -1617,6 +1617,50 @@ export const TL_HARDWELL_TML_WE2_2026: FingerprintSeedRow[] = [
 ];
 
 /**
+ * Chris Lorenzo @ The Great Library Stage, Tomorrowland Weekend 2, Belgium 2026-07-25
+ * 1001TL: https://1001.tl/2llc7mh9 — operator console capture 2026-08-01
+ * (0/10 timed cues — evenly spaced across ~60m).
+ * No official Tomorrowland/artist full-set Relive yet — seed ready; do not wire clips.
+ */
+export const TL_CHRIS_LORENZO_TML_WE2_2026: FingerprintSeedRow[] =
+  evenlySpaceRows(
+    [
+      { artist: "Chris Lorenzo", title: "Appetite (VIP)" },
+      {
+        artist: "Fatboy Slim",
+        title: "Right Here, Right Now (Acappella)",
+      },
+      { artist: "Chris Lorenzo ft. Chynna", title: "Bad Bitch" },
+      {
+        artist: "Cake",
+        title: "Short Skirt/Long Jacket (Anti Up Remix)",
+      },
+      { artist: "Chris Lorenzo & Kah-Lo", title: "In This Bih'" },
+      {
+        artist: "Chris Lake & Chris Lorenzo pres. Anti Up",
+        title: "I Cannot",
+      },
+      {
+        artist: "Bountyhunter",
+        title: "Woops (Dimitri Vegas & Junkie Kid Remix / BRANDON Remix)",
+      },
+      {
+        artist: "Chris Lorenzo & Paris Mitchell ft. Waxmaster",
+        title: "Hell Yeah!",
+      },
+      {
+        artist: "Chris Lorenzo & Max Styler & Audio Bullys",
+        title: "London's On Fire",
+      },
+      {
+        artist: "Chris Lake & Tony Romera",
+        title: "House Every Weekend",
+      },
+    ],
+    3600,
+  );
+
+/**
  * Layton Giordani @ circuitGROUNDS closing, EDC Las Vegas 2025-05-16
  * Official SC: https://soundcloud.com/laytongiordani/layton-giordani-live-edc-las-vegas-circuit-grounds-closing-set-2025 (~59:40)
  * 1001TL: https://1001.tl/bt007st — operator console capture 2026-08-01
