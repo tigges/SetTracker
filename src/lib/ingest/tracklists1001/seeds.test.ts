@@ -15,6 +15,7 @@ import {
   TL_MAX_STYLER_EDC_LV_2024,
   TL_MARTEN_HORGER_PAROOKAVILLE_2026,
   TL_ODD_MOB_EDC_LV_2025,
+  TL_SOLOMUN_EDC_LV_2026,
   TL_WAX_MOTIF_EDC_LV_2021,
   TL_WESTEND_EDC_LV_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
@@ -276,5 +277,18 @@ assert.ok(
     "sc-domdolla-dom-dolla-live-edc-circuitgrounds-las-vegas-2024"
   ]!.length >= 30,
 );
+
+assertSeedClocks(TL_SOLOMUN_EDC_LV_2026);
+const solomun = tracklist1001RowsToPlays(TL_SOLOMUN_EDC_LV_2026);
+assert.equal(solomun.length, 18);
+assert.equal(solomun[0]!.trackTitle, "Rumpta");
+assert.equal(solomun[solomun.length - 1]!.trackTitle, "Kinesphere");
+assert.equal(solomun[solomun.length - 1]!.timestamp, 85 * 60 + 40);
+let solPrev = -1;
+for (const p of solomun) {
+  assert.ok(p.timestamp > solPrev, `Solomun clocks must increase @ ${p.timestamp}`);
+  solPrev = p.timestamp;
+}
+assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-g1vH9C_o-vo"]!.length >= 16);
 
 console.log("tracklists1001/seeds.test.ts ok");

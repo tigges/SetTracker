@@ -1280,6 +1280,41 @@ export const TL_DOM_DOLLA_EDC_LV_2024: FingerprintSeedRow[] = [
   },
 ];
 
+/**
+ * Solomun @ circuitGROUNDS, EDC Las Vegas 2026-05-17
+ * Official YT: https://www.youtube.com/watch?v=g1vH9C_o-vo (~90:37)
+ * 1001TL: https://1001.tl/2lkyu9mk — operator console capture 2026-08-01
+ * (18/18 timed cues).
+ */
+export const TL_SOLOMUN_EDC_LV_2026: FingerprintSeedRow[] = [
+  { at: "1:30", artist: "Skrillex & Solomun", title: "Rumpta" },
+  { at: "8:51", artist: "Johannes Brecht", title: "All We Got" },
+  { at: "12:02", artist: "Blank Sense & FRANCO BA", title: "Goddamn" },
+  { at: "15:25", artist: "Deomid", title: "Put Up Your Hands" },
+  { at: "19:30", artist: "Catta", title: "La Isla" },
+  { at: "23:41", artist: "Solomun ft. Inéz", title: "Raider On The Storm" },
+  { at: "27:51", artist: "blaktone", title: "IDWIW" },
+  { at: "30:56", artist: "Drax Nelson", title: "Now Do It" },
+  { at: "35:00", artist: "Goom Gum", title: "Just Be Good To Me" },
+  { at: "39:34", artist: "SHAGY", title: "Rush Hour" },
+  { at: "43:26", artist: "Marco Strous", title: "Monkey Swag" },
+  { at: "50:00", artist: "Pablo Say", title: "Recognize" },
+  {
+    at: "53:30",
+    artist: "Public Domain",
+    title: "Operation Blade (Bass In The Place)",
+  },
+  { at: "56:40", artist: "New Order", title: "Confusion" },
+  { at: "59:30", artist: "DOUG!", title: "Master" },
+  {
+    at: "1:03:40",
+    artist: "The Killers",
+    title: "Somebody Told Me (Solomun Remix)",
+  },
+  { at: "1:22:30", artist: "Hudecek & Dave (US)", title: "Been That" },
+  { at: "1:25:40", artist: "Solomun", title: "Kinesphere" },
+];
+
 /** sourceSlug → curated 1001TL seed (SC / YT when live HTML is CF-blocked). */
 export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   string,
@@ -1304,6 +1339,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-yXHoHK_jQvc": TL_AHEE_LIQUID_STRANGER_EDC_LV_2026,
   "yt-dXBoIY65P8s": TL_DARUDE_EDC_LV_2026,
   "yt-c_sx3zum8Z0": TL_BLEU_CLAIR_EDC_LV_2023,
+  "yt-g1vH9C_o-vo": TL_SOLOMUN_EDC_LV_2026,
 };
 
 /** Sanity: every seeded clock must parse. */

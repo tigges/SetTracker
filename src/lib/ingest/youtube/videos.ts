@@ -21,6 +21,7 @@ import {
   TL_DARUDE_EDC_LV_2026,
   TL_MARTEN_HORGER_EDC_LV_2023,
   TL_MARTEN_HORGER_PAROOKAVILLE_2026,
+  TL_SOLOMUN_EDC_LV_2026,
   TL_WESTEND_EDC_LV_2026,
 } from "../tracklists1001/seeds";
 import type { RawArtist } from "../types";
@@ -269,6 +270,9 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     type: "festival",
     title: "Solomun Live at EDC Las Vegas 2026 (Official Full Set)",
     eventName: "EDC Las Vegas",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2lkyu9mk/solomun-circuitgrounds-edc-las-vegas-united-states-2026-05-17.html",
+    tracklist1001: TL_SOLOMUN_EDC_LV_2026,
   },
   {
     // Insomniac Relive — promo description only; 1001TL seed from screenshots.
