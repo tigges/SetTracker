@@ -287,7 +287,7 @@ export const TL_WESTEND_EDC_LV_2026: FingerprintSeedRow[] = (() => {
 /**
  * AHEE B2B Liquid Stranger @ bassPOD, EDC Las Vegas 2026
  * Official YT: https://www.youtube.com/watch?v=yXHoHK_jQvc (~59:45)
- * 1001TL operator screenshots 2026-08-01 (partial through ~track 46; more
+ * 1001TL operator screenshots 2026-08-01 (partial through ~track 56; more
  * cues expected). Skips bare ID / Artist–ID rows. w/ layers kept as rows.
  * Clocks: even space before/after Gunslinger @ 45:30 (1001 cue).
  */
@@ -403,6 +403,38 @@ export const TL_AHEE_LIQUID_STRANGER_EDC_LV_2026: FingerprintSeedRow[] =
     const after: Omit<FingerprintSeedRow, "at">[] = [
       { artist: "bbno$", title: "it Boy (Acappella)" },
       { artist: "Liquid Stranger & TVBOO", title: "Cracked" },
+      { artist: "Big Gigantic & AHEE", title: "Funk Rocket" },
+      { artist: "House Of Pain", title: "Jump Around" },
+      { artist: "AHEE & ProbCause", title: "Rainbow Funk" },
+      {
+        artist: "Liquid Stranger & ProbCause",
+        title: "Trailblazer (AHEE Remix)",
+      },
+      { artist: "Noisestorm", title: "Crab Rave" },
+      { artist: "OddKidOut & AHEE", title: "WONKY" },
+      {
+        artist: "Liquid Stranger ft. Warrior Queen & HARD KNOCK",
+        title: "Hydroplane (ID Remix)",
+      },
+      { artist: "Liquid Stranger", title: "Shake (ID Remix)" },
+      {
+        artist: "Dillon Francis & NGHTMRE",
+        title: "Another Dimension",
+      },
+      { artist: "AHEE", title: "Alien Invader" },
+      { artist: "TVBOO & AHEE", title: "Space Boat" },
+      {
+        artist: "Vengaboys",
+        title: "We Like To Party! (The Vengabus)",
+      },
+      {
+        artist: "Khia",
+        title: "My Neck, My Back (Lick It) (Acappella)",
+      },
+      {
+        artist: "NGHTMRE & Liquid Stranger ft. Mougleta",
+        title: "Restless (ID Remix)",
+      },
     ];
     const gunAt = 45 * 60 + 30;
     const beforeSpaced = evenlySpaceRows(before, gunAt);
