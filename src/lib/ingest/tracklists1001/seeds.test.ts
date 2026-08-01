@@ -11,6 +11,8 @@ import {
   TL_DOM_DOLLA_EDC_LV_2023,
   TL_DOM_DOLLA_EDC_LV_2024,
   TL_FUNK_TRIBU_EDC_LV_2026,
+  TL_HOLY_PRIEST_EDC_LV_2026,
+  TL_HOLY_PRIEST_TML_WE1_2026,
   TL_LAYTON_GIORDANI_EDC_LV_2025_CLOSING,
   TL_MARTEN_HORGER_EDC_LV_2023,
   TL_MAX_STYLER_EDC_LV_2024,
@@ -370,5 +372,28 @@ for (const p of funk) {
   funkPrev = p.timestamp;
 }
 assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-APt5j9Abwo8"]!.length >= 10);
+
+assertSeedClocks(TL_HOLY_PRIEST_EDC_LV_2026);
+const holyEdc = tracklist1001RowsToPlays(TL_HOLY_PRIEST_EDC_LV_2026);
+assert.equal(holyEdc.length, 39);
+assert.match(holyEdc[0]!.trackTitle!, /My Name Is/);
+assert.equal(holyEdc[holyEdc.length - 1]!.trackTitle, "IN ANOTHER LIFE");
+let holyPrev = -1;
+for (const p of holyEdc) {
+  assert.ok(
+    p.timestamp >= holyPrev,
+    `Holy Priest EDC clocks must not go back @ ${p.timestamp}`,
+  );
+  holyPrev = p.timestamp;
+}
+assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-D8eLxmifH4o"]!.length >= 39);
+
+assertSeedClocks(TL_HOLY_PRIEST_TML_WE1_2026);
+const holyTml = tracklist1001RowsToPlays(TL_HOLY_PRIEST_TML_WE1_2026);
+assert.equal(holyTml.length, 45);
+assert.equal(holyTml[0]!.trackTitle, "Ameno");
+assert.equal(holyTml[holyTml.length - 1]!.trackTitle, "Holy Atlantis");
+// No official TML Relive yet — seed held.
+assert.equal(TRACKLIST_1001_BY_SOURCE_SLUG["yt-OlNdG4SCPdQ"], undefined);
 
 console.log("tracklists1001/seeds.test.ts ok");

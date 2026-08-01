@@ -1413,6 +1413,198 @@ export const TL_NICO_MORENO_EDC_LV_2026: FingerprintSeedRow[] = evenlySpaceRows(
 );
 
 /**
+ * Holy Priest @ circuitGROUNDS, EDC Las Vegas 2026-05-15
+ * Official YT (artist): https://www.youtube.com/watch?v=D8eLxmifH4o (~54:09)
+ * 1001TL: https://1001.tl/gld216t — operator console capture 2026-08-01
+ * (39/39 timed cues).
+ */
+export const TL_HOLY_PRIEST_EDC_LV_2026: FingerprintSeedRow[] = [
+  { at: "0:04", artist: "Eminem", title: "My Name Is (Holy Priest Intro Edit)" },
+  { at: "0:33", artist: "Holy Priest & KISTENBRÜGGER", title: "Bad Boys" },
+  { at: "1:01", artist: "Holy Priest & Krowdexx", title: "BASS POWAH" },
+  { at: "3:17", artist: "Zatox", title: "Destroy" },
+  { at: "4:16", artist: "Zatox & Holy Priest", title: "New Shit" },
+  { at: "5:43", artist: "Holy Priest & CATALYST & Warface", title: "Hellfire" },
+  { at: "7:42", artist: "Holy Priest & Coone", title: "Get High" },
+  { at: "9:10", artist: "Holy Priest & Coone", title: "Get High (vANE Edit)" },
+  {
+    at: "9:38",
+    artist: "David Guetta ft. Chris Willis",
+    title: "Love Is Gone",
+  },
+  { at: "10:19", artist: "Revenja & Suttlek", title: "World Of Chaos" },
+  { at: "11:15", artist: "Holy Priest & Rekkt", title: "DOMINATION" },
+  { at: "15:21", artist: "Holy Priest & Netherworld", title: "Holy Atlantis" },
+  {
+    at: "16:42",
+    artist: "Holy Priest & Netherworld",
+    title: "Holy Atlantis (Krowdexx Edit)",
+  },
+  { at: "17:38", artist: "Holy Priest & Rebelion", title: "Ameno" },
+  { at: "19:36", artist: "KAAI", title: "We Come To Break" },
+  { at: "21:28", artist: "Holy Priest & Manji", title: "No Balance" },
+  {
+    at: "23:09",
+    artist: "Holy Priest & Manji",
+    title: "No Balance (UNVIZION Edit)",
+  },
+  { at: "23:32", artist: "Rooler", title: "KICK DAT BASS MF" },
+  { at: "25:33", artist: "Bountyhunter", title: "Woops (Anderex Edit)" },
+  { at: "27:02", artist: "Bloodlust & Holy Priest", title: "Hit The Floor" },
+  {
+    at: "28:09",
+    artist: "Bloodlust & Holy Priest",
+    title: "Hit The Floor (Kick Edit)",
+  },
+  { at: "28:56", artist: "Holy Priest & Krowdexx", title: "Freestyler" },
+  { at: "32:01", artist: "Samuel Moriero & Regain", title: "ORIGINAL FLOW" },
+  {
+    at: "33:47",
+    artist: "DJ Snake ft. Lil Jon",
+    title: "Turn Down For What (Crankdat Remix)",
+  },
+  {
+    at: "34:47",
+    artist: "DJ Snake ft. Lil Jon",
+    title: "Turn Down For What (Hammerhead Flip)",
+  },
+  { at: "35:14", artist: "Space Laces & Chee", title: "URBAN BEATS" },
+  {
+    at: "35:15",
+    artist: "MAKJ & Lil Jon",
+    title: "Let's Get F*cked Up (Acappella)",
+  },
+  {
+    at: "35:41",
+    artist: "Endymion & D-Fence",
+    title: "PSSY MTHRFCKRZ (Chaos Project & Sakyra Remix)",
+  },
+  { at: "36:32", artist: "Coone & CATALYST", title: "FCK CRITICS" },
+  { at: "38:15", artist: "DASSOG & vANE", title: "INSOMNIA" },
+  {
+    at: "39:44",
+    artist: "Milleniumkid & JBS",
+    title: "Vielleicht Vielleicht (elMefti & Holy Priest Remix)",
+  },
+  {
+    at: "41:22",
+    artist: "Milleniumkid & JBS",
+    title: "Vielleicht Vielleicht (D-Sturb Bootleg)",
+  },
+  {
+    at: "42:46",
+    artist: "Swedish House Mafia ft. John Martin",
+    title: "Save The World (Holy Priest Remix)",
+  },
+  {
+    at: "45:30",
+    artist: "Coolio & 1World & Holy Priest",
+    title: "Gangsta's Paradise",
+  },
+  {
+    at: "46:36",
+    artist: "Coolio & 1World & Holy Priest",
+    title: "Gangsta's Paradise (KENAI Edit)",
+  },
+  { at: "47:07", artist: "Cybergore & Mortis", title: "Torture" },
+  {
+    at: "47:58",
+    artist: "P!nk",
+    title: "Get The Party Started (Kronos Krypto Remix)",
+  },
+  {
+    at: "48:57",
+    artist: "Justin Bieber",
+    title: "Ghost (Act of Rage Bootleg)",
+  },
+  { at: "51:26", artist: "Krowdexx & Dimitri K", title: "IN ANOTHER LIFE" },
+];
+
+/**
+ * Holy Priest @ Freedom Stage, Tomorrowland Weekend 1, Belgium 2026-07-17
+ * 1001TL: https://1001.tl/20w2107t — operator console capture 2026-08-01
+ * (0/45 timed cues — evenly spaced across ~60m).
+ * No official Tomorrowland full-set Relive yet — seed ready; do not wire clips.
+ */
+export const TL_HOLY_PRIEST_TML_WE1_2026: FingerprintSeedRow[] = evenlySpaceRows(
+  [
+    { artist: "Holy Priest & Rebelion", title: "Ameno" },
+    { artist: "KAAI", title: "We Come To Break" },
+    { artist: "Holy Priest & Coone", title: "Get High" },
+    { artist: "Holy Priest & Coone", title: "Get High (vANE Edit)" },
+    { artist: "David Guetta ft. Chris Willis", title: "Love Is Gone" },
+    { artist: "Revenja & Suttlek", title: "World Of Chaos" },
+    { artist: "Holy Priest & Rekkt", title: "DOMINATION" },
+    {
+      artist: "Samuel Moriero & Warface & CATALYST",
+      title: "NOBODY LIKES",
+    },
+    { artist: "Teksa & Trypdø", title: "HARD RAVE" },
+    { artist: "Luke Noize", title: "Where's Your Head At?" },
+    { artist: "Dr. Rude", title: "Move Your Feet" },
+    {
+      artist: "Mr. Polska & Natte Visstick & Vieze Asbak",
+      title: "POLSKA JUMPSTYLE (RAV3ART Edit)",
+    },
+    { artist: "Holy Priest & Manji", title: "No Balance" },
+    { artist: "Holy Priest & CATALYST & Warface", title: "Hellfire" },
+    { artist: "Zatox", title: "Destroy" },
+    { artist: "Zatox & Holy Priest", title: "New Shit" },
+    {
+      artist: "Mr. Polska & Ski Aggu & Natte Visstick",
+      title: "Spring (Araysen & Dropixx Edit)",
+    },
+    { artist: "Lekkerfaces", title: "Lekkerside MF" },
+    { artist: "Jacidorex", title: "Riverside (NIJN Edit)" },
+    { artist: "Ali James", title: "Body To The Bass" },
+    { artist: "Samuel Moriero & Regain", title: "ORIGINAL FLOW" },
+    { artist: "BLURREDMOVEMENT", title: "HEADS WILL ROLL" },
+    { artist: "Bountyhunter", title: "Woops (Anderex Edit)" },
+    { artist: "Bloodlust & Holy Priest", title: "Hit The Floor" },
+    {
+      artist: "Bloodlust & Holy Priest",
+      title: "Hit The Floor (Kick Edit)",
+    },
+    { artist: "Restricted & Anderex", title: "Kick Drum Talk" },
+    { artist: "Holy Priest & KISTENBRÜGGER", title: "Bad Boys" },
+    { artist: "Holy Priest & Krowdexx", title: "BASS POWAH" },
+    {
+      artist: "Holy Priest & Krowdexx",
+      title: "BASS POWAH (Slowtempo Edit)",
+    },
+    { artist: "David Guetta ft. Sia", title: "Titanium (Afinity Remix)" },
+    {
+      artist: "David Guetta ft. Sia",
+      title: "Titanium (Rebelion Bootleg)",
+    },
+    { artist: "The Purge", title: "BACK TO BASICS" },
+    { artist: "TNT", title: "OMG" },
+    { artist: "TNT", title: "OMG (Unload Edit)" },
+    { artist: "KENAI", title: "LOSE YOUR MIND" },
+    { artist: "Groove Gangsters", title: "Funky Beats" },
+    { artist: "Vieze Asbak", title: "Spijkerbom" },
+    { artist: "Unresolved & Polish Punisher", title: "Funky Beats" },
+    {
+      artist: "Coolio & 1World & Holy Priest",
+      title: "Gangsta's Paradise",
+    },
+    { artist: "HOLY PRIEST & Barbz", title: "End Of The World" },
+    {
+      artist: "Milleniumkid & JBS",
+      title: "Vielleicht Vielleicht (elMefti & Holy Priest Remix)",
+    },
+    {
+      artist: "Milleniumkid & JBS",
+      title: "Vielleicht Vielleicht (D-Sturb Bootleg)",
+    },
+    { artist: "Darren Styles & TNT", title: "Hard Beat" },
+    { artist: "Vasto", title: "Party Till We Die" },
+    { artist: "Holy Priest & Netherworld", title: "Holy Atlantis" },
+  ],
+  3600,
+);
+
+/**
  * Nico Moreno & Holy Priest @ cosmicMEADOW, EDC Las Vegas 2026-05-17
  * 1001TL: https://1001.tl/n56kgj1 — operator console capture 2026-08-01
  * (0/47 timed cues — evenly spaced across ~60m festival slot).
@@ -1655,6 +1847,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-f_p6nfbrm0E": TL_NICO_MORENO_EDC_LV_2026,
   "yt-FZ7pwlNdwBk": TL_MATTY_RALPH_EDC_LV_2026,
   "yt-APt5j9Abwo8": TL_FUNK_TRIBU_EDC_LV_2026,
+  "yt-D8eLxmifH4o": TL_HOLY_PRIEST_EDC_LV_2026,
 };
 
 /** Sanity: every seeded clock must parse. */

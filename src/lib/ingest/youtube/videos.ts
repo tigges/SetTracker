@@ -22,6 +22,7 @@ import {
   TL_MARTEN_HORGER_EDC_LV_2023,
   TL_MARTEN_HORGER_PAROOKAVILLE_2026,
   TL_FUNK_TRIBU_EDC_LV_2026,
+  TL_HOLY_PRIEST_EDC_LV_2026,
   TL_MATTY_RALPH_EDC_LV_2026,
   TL_NICO_MORENO_EDC_LV_2026,
   TL_PEGASSI_EDC_LV_2026,
@@ -394,6 +395,21 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/1lwpqyz1/funk-tribu-kineticfield-edc-las-vegas-united-states-2026-05-17.html",
     tracklist1001: TL_FUNK_TRIBU_EDC_LV_2026,
+  },
+  {
+    // Artist upload (not Insomniac Relive) — full timed 1001 capture.
+    video: "https://www.youtube.com/watch?v=D8eLxmifH4o",
+    primaryArtist: dj("Holy Priest", {
+      accent: "#e63946",
+      homeCity: "DE",
+    }),
+    genre: "Hard Techno",
+    type: "festival",
+    title: "HOLY PRIEST | LIVE | EDC LAS VEGAS | CIRCUIT GROUNDS | 2026",
+    eventName: "EDC Las Vegas",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/gld216t/holy-priest-circuitgrounds-edc-las-vegas-united-states-2026-05-15.html",
+    tracklist1001: TL_HOLY_PRIEST_EDC_LV_2026,
   },
   {
     video: "https://www.youtube.com/watch?v=ObiAocVMTyo",
