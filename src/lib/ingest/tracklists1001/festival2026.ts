@@ -1234,6 +1234,70 @@ export const TL_JAMES_HYPE_TML_WE2_2026: FingerprintSeedRow[] = [
 ];
 
 /**
+ * James Hype @ Get Closer, Melkweg, Amsterdam Dance Event, Netherlands 2025-10-23
+ * Official YT: https://www.youtube.com/watch?v=QThaqlzSqLw (artist channel)
+ * 1001TL: https://1001.tl/1g6h49l1 — operator console capture 2026-08-01
+ * (33/51 timed cues; missing clocks already lerped in capture).
+ */
+export const TL_JAMES_HYPE_MELKWEG_ADE_2025: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "The Prodigy", title: "Smack My Bitch Up (James Hype Remix)" },
+  { at: "1:15", artist: "Tita Lau", title: "Bristol's In The House" },
+  { at: "2:30", artist: "Mau P", title: "Drugs From Amsterdam" },
+  { at: "3:30", artist: "C&C Music Factory", title: "Gonna Make You Sweat (Everybody Dance Now)" },
+  { at: "4:30", artist: "James Hype", title: "Rock Right Now" },
+  { at: "5:03", artist: "Mau P", title: "Drugs From Amsterdam" },
+  { at: "5:35", artist: "James Hype & Tita Lau", title: "Sound Technician" },
+  { at: "7:57", artist: "Fatboy Slim", title: "Star 69 (Acappella)" },
+  { at: "9:04", artist: "ID ID", title: "Party Loop" },
+  { at: "10:10", artist: "Klubbheads", title: "Superstar DJ" },
+  { at: "11:57", artist: "Da Hool", title: "Meet Her At The Love Parade (James Hype Edit)" },
+  { at: "13:44", artist: "James Hype ft. A.D.O.R.", title: "Behaviour" },
+  { at: "15:30", artist: "James Hype", title: "Hit That Switch" },
+  { at: "16:50", artist: "The Porn Kings", title: "Up To No Good" },
+  { at: "18:10", artist: "James Hype", title: "For Your Mind" },
+  { at: "20:15", artist: "Major Lazer & James Hype", title: "Number 1" },
+  { at: "21:18", artist: "Camisra & James Hype", title: "Let Me Show You" },
+  { at: "22:20", artist: "James Hype & Tita Lau", title: "More Of The Same" },
+  { at: "25:30", artist: "Charlie Sloth & Mazza L20 & Giggs", title: "Sleep (James Hype Remix)" },
+  { at: "28:45", artist: "Turbo Dubz", title: "Loozing Control" },
+  { at: "30:50", artist: "James Hype ft. Sam Harper & Bobby Harvey", title: "Waterfalls" },
+  { at: "33:30", artist: "The Good Men", title: "Give It Up (James Hype Edit)" },
+  {
+    at: "35:45",
+    artist: "Fred again.. & Swedish House Mafia ft. Future",
+    title: "Turn On The Lights Again..",
+  },
+  { at: "36:20", artist: "James Hype ft. Kelli-Leigh", title: "More Than Friends" },
+  { at: "36:55", artist: "Massano", title: "The Blaze (James Hype Remix)" },
+  { at: "37:30", artist: "James Hype", title: "Wild" },
+  { at: "39:05", artist: "Signum", title: "What You Got for Me (James Hype Edit)" },
+  { at: "40:40", artist: "Masters At Work", title: "Work (Acappella)" },
+  { at: "41:50", artist: "Dario Nu\u00f1ez & Javi Colina", title: "Sinsahoi" },
+  { at: "43:00", artist: "James Hype", title: "Dominator" },
+  { at: "46:30", artist: "Chocolate Puma ft. Shermanology", title: "Dub Of Boom" },
+  { at: "48:25", artist: "Corona", title: "The Rhythm Of The Night (Acappella)" },
+  { at: "50:20", artist: "James Hype", title: "Don't Wake Me Up" },
+  { at: "51:53", artist: "James Hype", title: "Don't Wake Me Up (VIP Mix)" },
+  { at: "53:25", artist: "Ryan Resso", title: "I Like It" },
+  { at: "55:10", artist: "MistaJam & EMEXL", title: "Boom Box" },
+  { at: "56:09", artist: "Public Domain", title: "Operation Blade (Bass In The Place)" },
+  { at: "57:07", artist: "Stretch & Vern pres. Maddog", title: "I'm Alive (Genix Remix)" },
+  { at: "1:01:04", artist: "Julio Bashmore", title: "Battle For Middle You" },
+  { at: "1:03:02", artist: "ATB", title: "9PM (Till I Come) (James Hype Edit)" },
+  { at: "1:05:00", artist: "Bad Legs & Shade K", title: "Basszilla" },
+  { at: "1:06:30", artist: "Volkoder", title: "Act Up (Bad Boy)" },
+  { at: "1:08:50", artist: "The Weeknd & Playboi Carti", title: "Timeless" },
+  { at: "1:10:10", artist: "James Hype", title: "East 2 West" },
+  { at: "1:11:30", artist: "James Hype & Miggy Dela Rosa", title: "Ferrari" },
+  { at: "1:14:55", artist: "James Hype", title: "Generator" },
+  { at: "1:17:10", artist: "James Hype", title: "Wembley" },
+  { at: "1:19:00", artist: "Drake & Central Cee", title: "Which One (James Hype Remix)" },
+  { at: "1:20:40", artist: "Sid Koans", title: "Hypnotize" },
+  { at: "1:22:35", artist: "Tita Lau", title: "Take Me Higher" },
+  { at: "1:26:05", artist: "James Hype", title: "Be Yourself" },
+];
+
+/**
  * Kölsch @ Mainstage, Tomorrowland Weekend 2, Belgium 2026-07-24
  * Official YT: https://www.youtube.com/watch?v=ra8NYbzPMnk (~59:06)
  * 1001TL: https://1001.tl/2u0sgrq9 — operator console capture 2026-08-01
@@ -3493,6 +3557,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-TsyGMhx8izw": TL_NICKY_ROMERO_TML_WE2_2026,
   "yt-B05MAbsCOLA": TL_NICKY_ROMERO_TML_WE2_2026,
   "yt-dmhUJYEdkKo": TL_JAMES_HYPE_TML_WE2_2026,
+  "yt-QThaqlzSqLw": TL_JAMES_HYPE_MELKWEG_ADE_2025,
   "yt-ra8NYbzPMnk": TL_KOLSCH_TML_WE2_2026,
   "yt-5AdQy7lCbN0": TL_STEVE_ANGELLO_TML_WE2_2026,
   "yt-mVB-gqggrCQ": TL_FISHER_TML_WE2_2026,

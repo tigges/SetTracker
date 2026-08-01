@@ -22,6 +22,7 @@ import {
   TL_HARDWELL_TML_WE2_2026,
   TL_HOLY_PRIEST_EDC_LV_2026,
   TL_HOLY_PRIEST_TML_WE1_2026,
+  TL_JAMES_HYPE_MELKWEG_ADE_2025,
   TL_JAMES_HYPE_TML_WE2_2026,
   TL_JOHN_SUMMIT_TML_WE2_2026,
   TL_KOLSCH_TML_WE2_2026,
@@ -497,6 +498,27 @@ for (const p of jhTml) {
   jhPrev = p.timestamp;
 }
 assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-dmhUJYEdkKo"]!.length >= 35);
+
+assertSeedClocks(TL_JAMES_HYPE_MELKWEG_ADE_2025);
+const jhMelkweg = tracklist1001RowsToPlays(TL_JAMES_HYPE_MELKWEG_ADE_2025);
+assert.equal(jhMelkweg.length, 51);
+assert.match(jhMelkweg[0]!.trackTitle!, /Smack My Bitch Up/);
+assert.equal(jhMelkweg[jhMelkweg.length - 1]!.trackTitle, "Be Yourself");
+assert.equal(jhMelkweg[jhMelkweg.length - 1]!.timestamp, 86 * 60 + 5);
+let jhMkPrev = -1;
+for (const p of jhMelkweg) {
+  assert.ok(
+    p.timestamp >= jhMkPrev,
+    `James Hype Melkweg clocks must not go back @ ${p.timestamp}`,
+  );
+  jhMkPrev = p.timestamp;
+}
+assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-QThaqlzSqLw"]!.length >= 51);
+// Distinct from TML WE2 Relive.
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-QThaqlzSqLw"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-dmhUJYEdkKo"],
+);
 
 assertSeedClocks(TL_KOLSCH_TML_WE2_2026);
 const kolsch = tracklist1001RowsToPlays(TL_KOLSCH_TML_WE2_2026);

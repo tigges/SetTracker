@@ -29,6 +29,7 @@ import {
   TL_ENRICO_SANGIULIANO_TML_WE2_2026,
   TL_FISHER_TML_WE2_2026,
   TL_HARDWELL_TML_WE2_2026,
+  TL_JAMES_HYPE_MELKWEG_ADE_2025,
   TL_JAMES_HYPE_TML_WE2_2026,
   TL_JOHN_SUMMIT_TML_WE2_2026,
   TL_KOLSCH_TML_WE2_2026,
@@ -206,6 +207,22 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     seriesName: "Get Closer",
     eventName: "Get Closer London",
     fingerprintPlays: FP_JAMES_HYPE_GET_CLOSER_LONDON_2,
+  },
+  {
+    // Artist upload — Get Closer Melkweg ADE; 33/51 timed (rest lerped).
+    video: "https://www.youtube.com/watch?v=QThaqlzSqLw",
+    primaryArtist: dj("James Hype", {
+      accent: "#ff3d6e",
+      homeCity: "Liverpool, UK",
+    }),
+    genre: "Tech House",
+    type: "club",
+    title: "James Hype, live @ Melkweg, Amsterdam",
+    seriesName: "Get Closer",
+    eventName: "Get Closer Melkweg ADE",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1g6h49l1/james-hype-get-closer-melkweg-amsterdam-dance-event-netherlands-2025-10-23.html",
+    tracklist1001: TL_JAMES_HYPE_MELKWEG_ADE_2025,
   },
   {
     video: "https://www.youtube.com/watch?v=i9cNYaOOdwA",
