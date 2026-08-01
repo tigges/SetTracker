@@ -29,6 +29,7 @@ import {
   TL_FISHER_TML_WE2_2026,
   TL_HARDWELL_TML_WE2_2026,
   TL_JAMES_HYPE_TML_WE2_2026,
+  TL_JOHN_SUMMIT_TML_WE2_2026,
   TL_KOLSCH_TML_WE2_2026,
   TL_MISS_MONIQUE_TML_WE2_2026,
   TL_NICKY_ROMERO_TML_WE2_2026,
@@ -580,6 +581,22 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/1qn93jz1/ayybo-odd-mob-crystal-garden-stage-tomorrowland-weekend-2-belgium-2026-07-25.html",
     tracklist1001: TL_AYYBO_ODD_MOB_TML_WE2_2026,
+  },
+  {
+    // Tomorrowland official — Crystal Garden WE2; 34/38 timed cues from 1001.
+    video: "https://www.youtube.com/watch?v=PlArfyuzuqo",
+    primaryArtist: dj("John Summit", {
+      accent: "#4cc9f0",
+      homeCity: "Chicago, US",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    title: "John Summit WE2 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2hsylb61/john-summit-crystal-garden-stage-tomorrowland-weekend-2-belgium-2026-07-25.html",
+    tracklist1001: TL_JOHN_SUMMIT_TML_WE2_2026,
   },
   {
     video: "https://www.youtube.com/watch?v=ObiAocVMTyo",

@@ -1917,6 +1917,113 @@ export const TL_DYZEN_TML_WE2_2026: FingerprintSeedRow[] = evenlySpaceRows(
 );
 
 /**
+ * John Summit @ Crystal Garden Stage, Tomorrowland Weekend 2, Belgium 2026-07-25
+ * Official YT: https://www.youtube.com/watch?v=PlArfyuzuqo (~2:00:29)
+ * 1001TL: https://1001.tl/2hsylb61 — operator console capture 2026-08-01
+ * (34/38 timed cues; missing clocks already lerped in capture).
+ */
+export const TL_JOHN_SUMMIT_TML_WE2_2026: FingerprintSeedRow[] = [
+  { at: "0:12", artist: "Walker & Royce & FENIK", title: "Utopia" },
+  { at: "5:27", artist: "NO STATIC", title: "F.D.A.U" },
+  { at: "8:08", artist: "John Summit & LAVINIA", title: "SHADOWS" },
+  { at: "11:25", artist: "BYOR & Mentum", title: "I Can Dance" },
+  { at: "13:27", artist: "Laherte", title: "Pump Up The Jam" },
+  {
+    at: "17:58",
+    artist: "Zakes Bantwini & Kasango",
+    title: "Osama (John Summit Remix)",
+  },
+  {
+    at: "20:19",
+    artist: "John Summit & Gorgon City ft. Rhys From The Sticks",
+    title: "Is Everybody Having Fun?",
+  },
+  { at: "23:19", artist: "John Summit ft. Inéz", title: "crystallized" },
+  {
+    at: "26:30",
+    artist: "John Summit & GUZ ft. Stevie Appleton",
+    title: "What A Life",
+  },
+  { at: "30:10", artist: "G-POL", title: "Proper Education" },
+  {
+    at: "36:31",
+    artist: "Delerium ft. Sarah McLachlan",
+    title: "Silence (John Summit Remix)",
+  },
+  {
+    at: "40:44",
+    artist: "John Summit & Absolutely",
+    title: "CYANIDE (John Summit Trance Remix)",
+  },
+  { at: "47:36", artist: "John Summit & HAYLA", title: "Shiver" },
+  {
+    at: "51:29",
+    artist: "Westend & Olivia Sebastianelli",
+    title: "The Ceiling",
+  },
+  { at: "54:00", artist: "Roddy Lima", title: "Shadows" },
+  {
+    at: "55:08",
+    artist: "John Summit ft. Inéz",
+    title: "light years (Matt Sassari Remix)",
+  },
+  {
+    at: "1:02:06",
+    artist: "Rihanna",
+    title: "Where Have You Been (John Summit & Wooli Edit)",
+  },
+  {
+    at: "1:05:01",
+    artist: "Cirez D & ALOK vs. Empire Of The Sun",
+    title: "On Off vs. We Are The People (ALOK Mashup)",
+  },
+  {
+    at: "1:06:12",
+    artist: "Empire Of The Sun",
+    title: "We Are The People (Acappella)",
+  },
+  { at: "1:07:23", artist: "Cirez D", title: "On Off (ALOK Edit)" },
+  { at: "1:08:34", artist: "LAWTON & Deckers", title: "Los Retratos" },
+  { at: "1:11:57", artist: "John Summit", title: "LIGHTS GO OUT" },
+  { at: "1:14:54", artist: "HILLS", title: "Lift Me Up" },
+  {
+    at: "1:17:08",
+    artist: "ANOTR ft. 54 Ultra",
+    title: "Talk To You (Eli Brown Bootleg)",
+  },
+  { at: "1:20:45", artist: "Mesto vs. Fallon", title: "Caramelle vs. Diet Coke" },
+  { at: "1:21:25", artist: "Fallon", title: "Diet Coke" },
+  { at: "1:22:06", artist: "Mesto", title: "Caramelle" },
+  {
+    at: "1:22:46",
+    artist: "John Summit & Absolutely",
+    title: "DON'T BELIEVE IT",
+  },
+  { at: "1:25:47", artist: "ACRAZE & Rello", title: "Pump That Body" },
+  { at: "1:28:51", artist: "David Guetta ft. Kid Cudi", title: "Memories" },
+  {
+    at: "1:34:34",
+    artist: "Green Velvet ft. Walter Philips",
+    title: "Shake And Pop (John Summit Remix)",
+  },
+  {
+    at: "1:38:15",
+    artist: "Everything But The Girl",
+    title: "Missing (John Summit Remix)",
+  },
+  { at: "1:41:53", artist: "John Summit & VLTRA (IT)", title: "Legacy" },
+  { at: "1:45:01", artist: "John Summit ft. HAYLA", title: "Where You Are" },
+  { at: "1:48:55", artist: "John Summit & GUZ", title: "Thin Line" },
+  { at: "1:51:47", artist: "Daft Punk", title: "One More Time (Acappella)" },
+  { at: "1:52:15", artist: "Modjo", title: "Lady (Hear Me Tonight)" },
+  {
+    at: "1:55:35",
+    artist: "John Summit & Sub Focus ft. Julia Church",
+    title: "Go Back (John Summit Remix)",
+  },
+];
+
+/**
  * Layton Giordani @ circuitGROUNDS closing, EDC Las Vegas 2025-05-16
  * Official SC: https://soundcloud.com/laytongiordani/layton-giordani-live-edc-las-vegas-circuit-grounds-closing-set-2025 (~59:40)
  * 1001TL: https://1001.tl/bt007st — operator console capture 2026-08-01
@@ -2901,6 +3008,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-yWZyIQtxoXU": TL_HARDWELL_TML_WE2_2026,
   "yt-Py-GG74lLU8": TL_HARDWELL_TML_WE2_2026,
   "yt-gO03gfI_JF0": TL_AYYBO_ODD_MOB_TML_WE2_2026,
+  "yt-PlArfyuzuqo": TL_JOHN_SUMMIT_TML_WE2_2026,
 };
 
 /** Sanity: every seeded clock must parse. */

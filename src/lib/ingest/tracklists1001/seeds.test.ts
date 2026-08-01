@@ -22,6 +22,7 @@ import {
   TL_HOLY_PRIEST_EDC_LV_2026,
   TL_HOLY_PRIEST_TML_WE1_2026,
   TL_JAMES_HYPE_TML_WE2_2026,
+  TL_JOHN_SUMMIT_TML_WE2_2026,
   TL_KOLSCH_TML_WE2_2026,
   TL_LAYTON_GIORDANI_EDC_LV_2025_CLOSING,
   TL_MARTEN_HORGER_EDC_LV_2023,
@@ -634,5 +635,21 @@ assert.equal(
   Object.values(TRACKLIST_1001_BY_SOURCE_SLUG).includes(TL_DYZEN_TML_WE2_2026),
   false,
 );
+
+assertSeedClocks(TL_JOHN_SUMMIT_TML_WE2_2026);
+const summit = tracklist1001RowsToPlays(TL_JOHN_SUMMIT_TML_WE2_2026);
+assert.equal(summit.length, 38);
+assert.equal(summit[0]!.trackTitle, "Utopia");
+assert.match(summit[summit.length - 1]!.trackTitle!, /Go Back/);
+assert.equal(summit[summit.length - 1]!.timestamp, 115 * 60 + 35);
+let summitPrev = -1;
+for (const p of summit) {
+  assert.ok(
+    p.timestamp >= summitPrev,
+    `John Summit TML clocks must not go back @ ${p.timestamp}`,
+  );
+  summitPrev = p.timestamp;
+}
+assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-PlArfyuzuqo"]!.length >= 38);
 
 console.log("tracklists1001/seeds.test.ts ok");
