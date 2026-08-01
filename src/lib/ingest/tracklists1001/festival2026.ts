@@ -2100,6 +2100,153 @@ export const TL_AYYBO_ODD_MOB_TML_WE2_2026: FingerprintSeedRow[] = [
 ];
 
 /**
+ * Mike Williams @ Mainstage, Tomorrowland Weekend 2, Belgium 2026-07-25
+ * Official YT: https://www.youtube.com/watch?v=WnjXXOZ8Te8 (~65:17)
+ * Community TL (edmliveset mirror of the set; 0 timed cues) — bare IDs dropped;
+ * evenly spaced across Relive duration. Dense seed replaces thin Music-credit stub.
+ */
+export const TL_MIKE_WILLIAMS_TML_WE2_2026: FingerprintSeedRow[] =
+  evenlySpaceRows(
+    [
+      {
+        artist: "Three Drives",
+        title: "Greece 2000 (Mike Williams Remix)",
+      },
+      {
+        artist: "Mike Williams & Mesto ft. Sasha Rangas",
+        title: "Wait Another Day",
+      },
+      {
+        artist:
+          "Axwell & Sebastian Ingrosso & Steve Angello & Laidback Luke ft. Deborah Cox",
+        title: "Leave The World Behind",
+      },
+      {
+        artist: "Nari & Milani",
+        title: "Atom (SQU4RE 2024 Edit)",
+      },
+      {
+        artist: "Sebastien Benett",
+        title: "Let Me See Those Hands (Acappella)",
+      },
+      {
+        artist: "Mike Williams & Brooks & WHAT EVA",
+        title: "Illusion",
+      },
+      { artist: "Spice Girls", title: "Wannabe" },
+      {
+        artist: "Mike Williams ft. DTale",
+        title: "Living On Video (VIP Mix)",
+      },
+      { artist: "Lucas & Steve", title: "Renegade Master" },
+      {
+        artist: "Mike Williams & Philip Strand",
+        title: "All My Life (In My Heart)",
+      },
+      { artist: "Avicii", title: "Levels (Acappella)" },
+      {
+        artist: "Lady GaGa ft. Colby O'Donis",
+        title: "Just Dance (ACRAZE Remix)",
+      },
+      { artist: "TOYZZ", title: "Midnight Trip" },
+      {
+        artist: "Mightyfools",
+        title: "Footrocker (Get Your, Get Your Hands Up Acappella)",
+      },
+      {
+        artist: "Florence + The Machine",
+        title: "You've Got The Love (Acappella)",
+      },
+      {
+        artist: "Steve Angello & Laidback Luke ft. Rowetta",
+        title: "Be",
+      },
+      { artist: "Tom Odell", title: "Another Love" },
+      {
+        artist: "Corey James & IMAN (SE)",
+        title: "Paranoia",
+      },
+      {
+        artist: "Mike Williams & Brooks",
+        title: "Drop The Pressure",
+      },
+      { artist: "Mike Williams & Oaks", title: "Better Now" },
+      {
+        artist: "Mike Williams & NOME.",
+        title: "Back To Life",
+      },
+      {
+        artist: "R3HAB & Mike Williams ft. Mary Jane Smith",
+        title: "Lullaby",
+      },
+      {
+        artist: "Fatima Yamaha",
+        title: "What's A Girl To Do",
+      },
+      { artist: "Mike Williams", title: "The System" },
+      { artist: "Faithless", title: "Insomnia" },
+      {
+        artist: "Cloonee & Prospa",
+        title: "Free Your Mind (Mike Williams Remix)",
+      },
+      {
+        artist: "Florence + The Machine",
+        title: "Spectrum (Say My Name) (Acappella)",
+      },
+      {
+        artist: "Mike Williams & Bruno Martini & Stephen Puth",
+        title: "Multiply",
+      },
+      {
+        artist: "Swedish House Mafia ft. John Martin",
+        title: "Save The World (Acappella)",
+      },
+      {
+        artist: "Swedish House Mafia & Knife Party ft. ADL",
+        title: "Antidote (Duer Remix)",
+      },
+      {
+        artist: "John Summit & Sub Focus ft. Julia Church",
+        title: "Go Back (Acappella)",
+      },
+      {
+        artist: "Mike Williams & Jaimes",
+        title: "Lose It All",
+      },
+      {
+        artist: "Mike Williams",
+        title: "The Beat (Mike Williams Techno Edit)",
+      },
+      {
+        artist: "Tiësto & Mike Williams",
+        title: "I Want You",
+      },
+      { artist: "Madonna", title: "Music (Acappella)" },
+      {
+        artist: "ANOTR ft. 54 Ultra",
+        title: "Talk To You (Hardwell Bootleg)",
+      },
+      {
+        artist: "Kate Ryan",
+        title: "Désenchantée (Mike Williams Remix)",
+      },
+      {
+        artist: "Porter Robinson ft. Bright Lights",
+        title: "Language",
+      },
+      {
+        artist: "Mike Williams ft. Moa Lisa",
+        title: "Make You Mine",
+      },
+      {
+        artist: "Mike Williams & Oaks",
+        title: "I'll Do It",
+      },
+    ],
+    3917,
+  );
+
+/**
  * Dyzen @ Planaxis Stage, Tomorrowland Weekend 2, Belgium 2026-07-25
  * 1001TL: https://1001.tl/1muw64wk — operator console capture 2026-08-01
  * (0/4 timed cues — evenly spaced across ~60m; thin/partial TL).
@@ -3881,6 +4028,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-8-J01-hcHfA": TL_STEVE_AOKI_TML_WE2_2026,
   "yt-DAOlnMYA3nU": TL_CYRIL_TML_WE2_2026,
   "yt-OTKgBZS8if0": TL_DIMITRI_VEGAS_NICO_MORENO_TML_WE2_2026,
+  "yt-WnjXXOZ8Te8": TL_MIKE_WILLIAMS_TML_WE2_2026,
   "yt-KVZlecHlVkg": TL_PUSH_TML_WE2_2026,
   "yt-BG3Lr9EdWVY": TL_BASSJACKERS_TML_WE2_2026,
   "yt-HWIratXF1Bo": TL_BHASKAR_TML_WE2_2026,

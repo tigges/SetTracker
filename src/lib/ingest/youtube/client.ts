@@ -533,7 +533,25 @@ export async function fetchWatchMeta(videoIdOrUrl: string): Promise<YtWatchMeta>
   // Never treat the watch page itself as a related target.
   const relatedFiltered = relatedVideos.filter((r) => r.videoId !== videoId);
 
-  if (!title) throw new Error(`YouTube metadata missing for ${videoId}`);
+  if (!title) {
+    // LOGIN_REQUIRED / private-ish player blobs often omit videoDetails.
+    // Data API (when keyed) still recovers public videos; oembed is next.
+    const viaApi = await fetchWatchMetaViaDataApi(videoId);
+    if (viaApi) {
+      console.warn(
+        `[youtube] player meta empty — used Data API fallback for ${videoId}`,
+      );
+      return viaApi;
+    }
+    const viaOembed = await fetchWatchMetaViaOembed(videoId);
+    if (viaOembed) {
+      console.warn(
+        `[youtube] player meta empty — used oEmbed fallback for ${videoId}`,
+      );
+      return viaOembed;
+    }
+    throw new Error(`YouTube metadata missing for ${videoId}`);
+  }
   if (!durationSec) {
     // Last resort so Music credits can still land with order-only cues.
     durationSec = Math.max(uniqueCredits.length * 180, 30 * 60);
@@ -553,6 +571,41 @@ export async function fetchWatchMeta(videoIdOrUrl: string): Promise<YtWatchMeta>
     watchUrl,
     imageUrl: pickYoutubeThumbnail(videoId, thumbnails),
   };
+}
+
+/** Public oEmbed — title/author when the watch HTML player blob is gated. */
+async function fetchWatchMetaViaOembed(
+  videoId: string,
+): Promise<YtWatchMeta | null> {
+  const url = new URL("https://www.youtube.com/oembed");
+  url.searchParams.set("url", `https://www.youtube.com/watch?v=${videoId}`);
+  url.searchParams.set("format", "json");
+  try {
+    const res = await fetch(url, { signal: AbortSignal.timeout(15_000) });
+    if (!res.ok) return null;
+    const data = (await res.json()) as {
+      title?: string;
+      author_name?: string;
+    };
+    const title = data.title?.trim();
+    if (!title) return null;
+    return {
+      videoId,
+      title,
+      channel: (data.author_name || "").trim(),
+      channelId: null,
+      channelHandle: null,
+      durationSec: 30 * 60,
+      description: "",
+      publishedAt: null,
+      musicCredits: [],
+      relatedVideos: [],
+      watchUrl: `https://www.youtube.com/watch?v=${videoId}`,
+      imageUrl: pickYoutubeThumbnail(videoId),
+    };
+  } catch {
+    return null;
+  }
 }
 
 /** Pull @handle from ownerProfileUrl / canonicalBaseUrl when present. */

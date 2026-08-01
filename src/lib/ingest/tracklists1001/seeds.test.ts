@@ -42,6 +42,7 @@ import {
   TL_MAX_STYLER_EDC_LV_2024,
   TL_MARTEN_HORGER_PAROOKAVILLE_2026,
   TL_MATTY_RALPH_EDC_LV_2026,
+  TL_MIKE_WILLIAMS_TML_WE2_2026,
   TL_MISS_MONIQUE_TML_WE2_2026,
   TL_NICKY_ROMERO_TML_WE2_2026,
   TL_NICO_MORENO_EDC_LV_2026,
@@ -639,6 +640,16 @@ assert.equal(
 assert.notEqual(
   TRACKLIST_1001_BY_SOURCE_SLUG["yt-OTKgBZS8if0"],
   TL_DIMITRI_VEGAS_TML_WE2_2026,
+);
+
+assertSeedClocks(TL_MIKE_WILLIAMS_TML_WE2_2026);
+const mikeW = tracklist1001RowsToPlays(TL_MIKE_WILLIAMS_TML_WE2_2026);
+assert.ok(mikeW.length >= 35);
+assert.match(mikeW[0]!.trackTitle!, /Greece 2000/);
+assert.match(mikeW[mikeW.length - 1]!.trackTitle!, /I.?ll Do It/i);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-WnjXXOZ8Te8"],
+  TL_MIKE_WILLIAMS_TML_WE2_2026,
 );
 
 assertSeedClocks(TL_CALVIN_HARRIS_TML_WE2_2026);

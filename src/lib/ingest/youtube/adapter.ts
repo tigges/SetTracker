@@ -20,9 +20,11 @@ import {
   festivalSourcePollLimit,
   INSOMNIAC_FESTIVAL_EVENT_SLUGS,
 } from "../festivalDrops";
+import { pickYoutubeThumbnail } from "../../thumbs/youtubeThumb";
 import {
   fingerprintRowsToPlays,
   mergeFingerprintPlays,
+  parseClockToSec,
   type FingerprintSeedRow,
 } from "../fingerprint/seeds";
 import { hashRawSetContent } from "../hash";
@@ -43,6 +45,7 @@ import {
   type YoutubeArtistChannel,
 } from "./artists";
 import {
+  extractVideoId,
   fetchChannelShelfDiscovery,
   fetchChannelVideoIdsDeep,
   fetchPlaylistVideoIds,
@@ -206,8 +209,47 @@ function relatedSeedIds(related: YtRelatedVideo[], limit: number): string[] {
   return out;
 }
 
+/** When watch meta is gated/private but we have a curated 1001 seed + title. */
+function curatedMetaFallback(
+  src: YoutubeSetSource,
+  seed: FingerprintSeedRow[],
+): YtWatchMeta {
+  const videoId = extractVideoId(src.video);
+  if (!videoId) throw new Error(`Invalid curated YouTube id/url: ${src.video}`);
+  let durationSec = 60 * 60;
+  for (const row of seed) {
+    const t = parseClockToSec(row.at);
+    if (t != null) durationSec = Math.max(durationSec, t + 60);
+  }
+  return {
+    videoId,
+    title: (src.title || src.primaryArtist.name).trim(),
+    channel: "",
+    channelId: null,
+    channelHandle: null,
+    durationSec,
+    description: src.tracklist1001Url ? `${src.tracklist1001Url}\n` : "",
+    publishedAt: null,
+    musicCredits: [],
+    relatedVideos: [],
+    watchUrl: `https://www.youtube.com/watch?v=${videoId}`,
+    imageUrl: pickYoutubeThumbnail(videoId),
+  };
+}
+
 async function curatedToHit(src: YoutubeSetSource): Promise<YtHit | null> {
-  const meta = await fetchWatchMeta(src.video);
+  let meta: YtWatchMeta;
+  try {
+    meta = await fetchWatchMeta(src.video);
+  } catch (err) {
+    const seed = src.tracklist1001;
+    if (!seed?.length || !src.title?.trim()) throw err;
+    meta = curatedMetaFallback(src, seed);
+    console.warn(
+      `[youtube] meta missing — curated seed fallback for ${meta.videoId}:`,
+      err instanceof Error ? err.message : err,
+    );
+  }
   const durationSec = meta.durationSec;
   if (durationSec < 10 * 60) {
     console.warn(

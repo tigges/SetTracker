@@ -50,6 +50,10 @@ export function tidyPerformingCredit(name: string): string {
     .replace(/\s+warm\s*ups?\b.*$/i, "")
     .replace(/\s+\(?\s*live\b.*$/i, "")
     .replace(/\s+tour\s*mix\b.*$/i, "")
+    // Tomorrowland weekend markers leaked into credits
+    // ("Nico Moreno WE2", "Odd Mob WE1") — never part of the artist name.
+    .replace(/\s+WE[12]\b.*$/i, "")
+    .replace(/\s+W[12]\b(?:\s|$)/i, " ")
     .replace(/\s*[|–—:-]+\s*$/g, "")
     .trim();
 }
