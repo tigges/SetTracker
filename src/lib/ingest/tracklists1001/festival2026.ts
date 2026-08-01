@@ -1873,6 +1873,64 @@ export const TL_SONNY_FODERA_TML_WE2_2026: FingerprintSeedRow[] =
   );
 
 /**
+ * Darren Styles @ The Great Library Stage, Tomorrowland Weekend 2, Belgium 2026-07-26
+ * 1001TL: https://1001.tl/2jqs739k — operator console capture 2026-08-01
+ * (0/33 timed cues — evenly spaced across ~60m).
+ * No official Tomorrowland Relive yet — seed ready; do not wire clips.
+ */
+export const TL_DARREN_STYLES_TML_WE2_2026: FingerprintSeedRow[] =
+  evenlySpaceRows(
+    [
+      { artist: "Darren Styles & TNT", title: "Be Somebody" },
+      { artist: "Darren Styles", title: "Pump This Party" },
+      { artist: "Icona Pop ft. Charli xcx", title: "I Love It (Acappella)" },
+      { artist: "Toneshifterz & Darren Styles", title: "Clarity" },
+      { artist: "Armin van Buuren ft. SACHA", title: "Set Me Free (Darren Styles Remix)" },
+      { artist: "Soft Cell", title: "Tainted Love" },
+      { artist: "Builder", title: "Her Voice (Headhunterz Remix / MISH Edit)" },
+      { artist: "David Guetta ft. Sia", title: "Titanium (Rebelion Bootleg)" },
+      { artist: "Scott Brown", title: "Technophobia (Darren Styles Remix)" },
+      { artist: "Darren Styles & TNT", title: "DLMD" },
+      { artist: "Tweekacore & Darren Styles", title: "Party Starter" },
+      { artist: "Darren Styles ft. MERYLL", title: "Miss You" },
+      {
+        artist: "Dimitri Vegas & Like Mike & Marlon Hoffstadt & DJ Konik",
+        title: "Makina Time (Darren Styles Remix)",
+      },
+      { artist: "Gammer", title: "The Drop" },
+      { artist: "Dimitri Vegas & Like Mike vs. Darren Styles", title: "Better Off Alone" },
+      { artist: "Darren Styles & TNT", title: "Wonder" },
+      { artist: "Brennan Heart & Ben Nicky ft. Maikki", title: "Make Some Noise" },
+      {
+        artist: "Darren Styles & TNT vs. Gala",
+        title: "Cornflakes vs. Freed From Desire (Darren Styles Mashup)",
+      },
+      { artist: "Darren Styles & TNT", title: "Cornflakes" },
+      { artist: "Gala", title: "Freed From Desire" },
+      { artist: "Mr. Polska & Natte Visstick & Vieze Asbak", title: "POLSKA JUMPSTYLE" },
+      {
+        artist: "MaRLo & Feenixpawl ft. Kamilla Bayrak",
+        title: "Lighter Than Air (Darren Styles Remix)",
+      },
+      { artist: "Darren Styles", title: "Us Against The World (Darren Styles VIP)" },
+      { artist: "Darren Styles & Gammer", title: "HOA" },
+      { artist: "Atmozfears & Demi Kanon", title: "Move Ma Body (Kronos Remix)" },
+      { artist: "M83", title: "Midnight City" },
+      { artist: "Alesso & OneRepublic", title: "If I Lose Myself" },
+      {
+        artist: "Porter Robinson & Bright Lights & Darren Styles vs. John O'Callaghan & Sarah Howells",
+        title: "Find Your Language (Darren Styles Mashup)",
+      },
+      { artist: "Porter Robinson ft. Bright Lights", title: "Language (Darren Styles Remix)" },
+      { artist: "John O'Callaghan ft. Sarah Howells", title: "Find Yourself (Acappella)" },
+      { artist: "Darren Styles & TNT", title: "Hard Beat" },
+      { artist: "Scooter", title: "The Logical Song" },
+      { artist: "Darren Styles", title: "Save Me (Rebelion Remix)" },
+    ],
+    3600,
+  );
+
+/**
  * AYYBO & Odd Mob @ Crystal Garden Stage, Tomorrowland Weekend 2, Belgium 2026-07-25
  * Official YT: https://www.youtube.com/watch?v=gO03gfI_JF0 (~90:17)
  * 1001TL: https://1001.tl/1qn93jz1 — operator console capture 2026-08-01

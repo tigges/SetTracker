@@ -23,6 +23,7 @@ import {
   TL_HOLY_PRIEST_EDC_LV_2026,
   TL_HOLY_PRIEST_TML_WE1_2026,
   TL_CYRIL_TML_WE2_2026,
+  TL_DARREN_STYLES_TML_WE2_2026,
   TL_JAMES_HYPE_MELKWEG_ADE_2025,
   TL_JAMES_HYPE_TML_WE2_2026,
   TL_JOHN_SUMMIT_TML_WE2_2026,
@@ -633,6 +634,19 @@ assert.match(sonny[sonny.length - 1]!.trackTitle!, /Celebration/);
 assert.equal(
   Object.values(TRACKLIST_1001_BY_SOURCE_SLUG).includes(
     TL_SONNY_FODERA_TML_WE2_2026,
+  ),
+  false,
+);
+
+assertSeedClocks(TL_DARREN_STYLES_TML_WE2_2026);
+const darrenStyles = tracklist1001RowsToPlays(TL_DARREN_STYLES_TML_WE2_2026);
+assert.equal(darrenStyles.length, 33);
+assert.equal(darrenStyles[0]!.trackTitle, "Be Somebody");
+assert.match(darrenStyles[darrenStyles.length - 1]!.trackTitle!, /Save Me/);
+// No official TML WE2 Relive yet — seed held, not slug-mapped.
+assert.equal(
+  Object.values(TRACKLIST_1001_BY_SOURCE_SLUG).includes(
+    TL_DARREN_STYLES_TML_WE2_2026,
   ),
   false,
 );
