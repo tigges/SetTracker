@@ -935,6 +935,75 @@ export const TL_ODD_MOB_TML_WE2_2026: FingerprintSeedRow[] = [
 ];
 
 /**
+ * Miss Monique @ Mainstage, Tomorrowland Weekend 2, Belgium 2026-07-24
+ * Official YT: https://www.youtube.com/watch?v=WhPtvotfYbc (~58:45)
+ * 1001TL: https://1001.tl/2u0sds71 — operator console capture 2026-08-01
+ * (20/20 timed cues).
+ */
+export const TL_MISS_MONIQUE_TML_WE2_2026: FingerprintSeedRow[] = [
+  { at: "0:12", artist: "Agents Of Time & Miss Monique", title: "Rajada" },
+  { at: "2:00", artist: "Miss Monique & Glowal", title: "Rollin'" },
+  {
+    at: "5:32",
+    artist: "HUGEL & SOLTO",
+    title: "Jamaican (Bam Bam) (Jast Remix)",
+  },
+  {
+    at: "8:15",
+    artist: "Miss Monique & Kapuchon & GLZ",
+    title: "Hot Sauce",
+  },
+  { at: "12:17", artist: "KENZ", title: "Blade" },
+  {
+    at: "15:20",
+    artist: "Bountyhunter",
+    title: "Woops (Dimitri Vegas & Junkie Kid Remix / BRANDON Remix)",
+  },
+  { at: "18:05", artist: "Cafius & Oliver Marshak", title: "The Beat" },
+  {
+    at: "21:38",
+    artist: "Miss Monique & P.O.U ft. Susie Ledge",
+    title: "Million Miles Away (VIP Remix)",
+  },
+  { at: "24:56", artist: "Addie Manson", title: "Acid Love" },
+  { at: "27:59", artist: "Kevin de Vries & Platero", title: "Man Like Me" },
+  {
+    at: "31:08",
+    artist: "David Guetta & Joachim Garraud ft. JD Davis",
+    title: "The World Is Mine (SLVR Remix)",
+  },
+  { at: "33:53", artist: "19:26 & Bittermind", title: "The Elevator" },
+  {
+    at: "36:19",
+    artist: "Miss Monique & GENESI & Carl Bee",
+    title: "Nomacita",
+  },
+  {
+    at: "39:39",
+    artist: "Miss Monique & Henri Bergmann & Mario Eighta",
+    title: "17",
+  },
+  { at: "43:09", artist: "ARTBAT ft. John Martin", title: "Coming Home" },
+  { at: "44:34", artist: "KASIA & Ayla", title: "Ayla" },
+  {
+    at: "47:01",
+    artist: "The Prodigy",
+    title: "No Good (Start The Dance) (Anyma & Stylo Remix)",
+  },
+  { at: "49:03", artist: "Argy & Omnya", title: "Aria (Omiki Remix)" },
+  {
+    at: "51:09",
+    artist: "Miss Monique & Volkoder",
+    title: "Girls On The Floor",
+  },
+  {
+    at: "54:16",
+    artist: "Miss Monique & Robbie Williams",
+    title: "Beauty In Us",
+  },
+];
+
+/**
  * Layton Giordani @ circuitGROUNDS closing, EDC Las Vegas 2025-05-16
  * Official SC: https://soundcloud.com/laytongiordani/layton-giordani-live-edc-las-vegas-circuit-grounds-closing-set-2025 (~59:40)
  * 1001TL: https://1001.tl/bt007st — operator console capture 2026-08-01
@@ -1908,6 +1977,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-APt5j9Abwo8": TL_FUNK_TRIBU_EDC_LV_2026,
   "yt-D8eLxmifH4o": TL_HOLY_PRIEST_EDC_LV_2026,
   "yt-2idboK_vTT8": TL_ODD_MOB_TML_WE2_2026,
+  "yt-WhPtvotfYbc": TL_MISS_MONIQUE_TML_WE2_2026,
 };
 
 /** Sanity: every seeded clock must parse. */

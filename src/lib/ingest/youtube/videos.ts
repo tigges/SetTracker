@@ -24,6 +24,7 @@ import {
   TL_FUNK_TRIBU_EDC_LV_2026,
   TL_HOLY_PRIEST_EDC_LV_2026,
   TL_MATTY_RALPH_EDC_LV_2026,
+  TL_MISS_MONIQUE_TML_WE2_2026,
   TL_ODD_MOB_TML_WE2_2026,
   TL_NICO_MORENO_EDC_LV_2026,
   TL_PEGASSI_EDC_LV_2026,
@@ -427,6 +428,22 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/qz04ypk/odd-mob-mainstage-tomorrowland-weekend-2-belgium-2026-07-26.html",
     tracklist1001: TL_ODD_MOB_TML_WE2_2026,
+  },
+  {
+    // Tomorrowland official — Mainstage WE2; 20/20 timed cues from 1001.
+    video: "https://www.youtube.com/watch?v=WhPtvotfYbc",
+    primaryArtist: dj("Miss Monique", {
+      accent: "#2a9d8f",
+      homeCity: "Kyiv, UA",
+    }),
+    genre: "Melodic Techno",
+    type: "festival",
+    title: "Miss Monique WE2 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2u0sds71/miss-monique-mainstage-tomorrowland-weekend-2-belgium-2026-07-24.html",
+    tracklist1001: TL_MISS_MONIQUE_TML_WE2_2026,
   },
   {
     video: "https://www.youtube.com/watch?v=ObiAocVMTyo",

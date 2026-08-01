@@ -18,6 +18,7 @@ import {
   TL_MAX_STYLER_EDC_LV_2024,
   TL_MARTEN_HORGER_PAROOKAVILLE_2026,
   TL_MATTY_RALPH_EDC_LV_2026,
+  TL_MISS_MONIQUE_TML_WE2_2026,
   TL_NICO_MORENO_EDC_LV_2026,
   TL_NICO_MORENO_HOLY_PRIEST_EDC_LV_2026,
   TL_ODD_MOB_EDC_LV_2025,
@@ -411,5 +412,20 @@ for (const p of oddMobTml) {
   omTmlPrev = p.timestamp;
 }
 assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-2idboK_vTT8"]!.length >= 18);
+
+assertSeedClocks(TL_MISS_MONIQUE_TML_WE2_2026);
+const missM = tracklist1001RowsToPlays(TL_MISS_MONIQUE_TML_WE2_2026);
+assert.equal(missM.length, 20);
+assert.equal(missM[0]!.trackTitle, "Rajada");
+assert.equal(missM[missM.length - 1]!.trackTitle, "Beauty In Us");
+let mmPrev = -1;
+for (const p of missM) {
+  assert.ok(
+    p.timestamp >= mmPrev,
+    `Miss Monique TML clocks must not go back @ ${p.timestamp}`,
+  );
+  mmPrev = p.timestamp;
+}
+assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-WhPtvotfYbc"]!.length >= 20);
 
 console.log("tracklists1001/seeds.test.ts ok");
