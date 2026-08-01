@@ -458,18 +458,16 @@ export const TL_AHEE_LIQUID_STRANGER_EDC_LV_2026: FingerprintSeedRow[] =
  * Darude @ quantumVALLEY, EDC Las Vegas 2026-05-15
  * Official YT: https://www.youtube.com/watch?v=dXBoIY65P8s (~56:22)
  * 1001TL: https://1001.tl/1v8whc0k (CF-blocked in CI)
- * Timed cues from community mirror of that list (skip bare IDs). Prefer
- * browser capture via scripts/capture-1001tl.console.js to refine.
+ * Operator screenshots 2026-08-01. Skips bare ID / Darude–ID rows.
  */
 export const TL_DARUDE_EDC_LV_2026: FingerprintSeedRow[] = [
-  { at: "0:00", artist: "Darude ft. AI AM", title: "Beautiful Alien" },
-  { at: "3:26", artist: "Robert Miles", title: "Children" },
   {
-    at: "8:26",
-    artist: "Darude, Gid Sedgwick & Cory Goldsmith",
-    title: "Nobody Listens (Cory Goldsmith Extended Remix)",
+    at: "0:00",
+    artist: "Darude ft. AI AM",
+    title: "Beautiful Alien (Boyan & Boyer Remix)",
   },
-  { at: "11:47", artist: "Tom Fall", title: "iRok" },
+  { at: "3:26", artist: "Robert Miles", title: "Children" },
+  { at: "11:47", artist: "Tom Fall", title: "iROK" },
   { at: "13:30", artist: "Darude", title: "Rush" },
   { at: "18:59", artist: "Kx5 ft. HAYLA", title: "Escape" },
   { at: "28:47", artist: "Darude", title: "Feel The Beat" },

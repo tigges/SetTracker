@@ -96,11 +96,19 @@ assert.ok(
 
 assertSeedClocks(TL_DARUDE_EDC_LV_2026);
 const darude = tracklist1001RowsToPlays(TL_DARUDE_EDC_LV_2026);
-assert.ok(darude.length >= 12);
-assert.equal(darude[0]!.trackTitle, "Beautiful Alien");
+assert.equal(darude.length, 12);
+assert.equal(
+  darude[0]!.trackTitle,
+  "Beautiful Alien (Boyan & Boyer Remix)",
+);
+assert.equal(darude[2]!.trackTitle, "iROK");
 assert.equal(darude[darude.length - 1]!.trackTitle, "Tell Me Why (Darude Remix)");
 const sandstorm = darude.find((p) => /Sandstorm/i.test(p.trackTitle || ""));
 assert.equal(sandstorm?.timestamp, 40 * 60);
+assert.ok(
+  !darude.some((p) => /Nobody Listens/i.test(p.trackTitle || "")),
+  "08:26 on 1001 is Darude ID, not Nobody Listens",
+);
 assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-dXBoIY65P8s"]!.length >= 12);
 
 console.log("tracklists1001/seeds.test.ts ok");
