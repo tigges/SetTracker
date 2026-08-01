@@ -735,6 +735,34 @@ export const TL_WAX_MOTIF_EDC_LV_2021: FingerprintSeedRow[] = [
   },
 ];
 
+/**
+ * Cloonee @ stereoBLOOM, EDC Las Vegas 2022-05-21
+ * Official SC: https://soundcloud.com/cloonee/cloonee-edc-2022 (~61:52)
+ * 1001TL: https://1001.tl/1r9qsbg1 — operator console capture 2026-08-01
+ * (14/15 timed cues).
+ */
+export const TL_CLOONEE_EDC_LV_2022: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "Cloonee", title: "Fine Night" },
+  { at: "6:05", artist: "Piero Pirupa", title: "Bass Club" },
+  { at: "10:18", artist: "Sante Sansone", title: "Looking For Something" },
+  { at: "11:48", artist: "Cloonee", title: "Lose Control" },
+  { at: "16:03", artist: "Jamie Coins", title: "Still Flexin'" },
+  {
+    at: "19:40",
+    artist: "Chris Lake ft. Alexis Roberts",
+    title: "Turn Off The Lights (Cloonee Remix)",
+  },
+  { at: "23:55", artist: "BeMore & Wøvex", title: "Ma Love" },
+  { at: "27:51", artist: "Shokë", title: "Coast To Coast" },
+  { at: "30:53", artist: "Chris Lake & Cloonee", title: "Nightmares" },
+  { at: "35:24", artist: "Trace", title: "G.L.A.M" },
+  { at: "38:53", artist: "Cloonee & Brisotti", title: "Tripasia" },
+  { at: "43:23", artist: "Cloonee & Wade", title: "Mi Amor" },
+  { at: "47:53", artist: "Yungness & Jaminn", title: "Backroom" },
+  { at: "50:23", artist: "Cloonee", title: "Love You Like That" },
+  { at: "58:53", artist: "Cloonee", title: "Sun Goes Down" },
+];
+
 /** sourceSlug → curated 1001TL seed (SC / YT when live HTML is CF-blocked). */
 export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   string,
@@ -743,6 +771,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "sc-charlottedewittemusic-charlotte-de-witte-at":
     TL_CHARLOTTE_DE_WITTE_TML_WE1_2026,
   "sc-cloonee-clooneeb2bprospa": TL_CLOONEE_PROSPA_DESTINO_2026,
+  "sc-cloonee-cloonee-edc-2022": TL_CLOONEE_EDC_LV_2022,
   "sc-itsthewestend-westend-live-edc-2026": TL_WESTEND_EDC_LV_2026,
   "sc-cidmusic-cid-edc-lv-2017": TL_CID_EDC_LV_2017,
   "sc-bleuclair-edclv2023": TL_BLEU_CLAIR_EDC_LV_2023,

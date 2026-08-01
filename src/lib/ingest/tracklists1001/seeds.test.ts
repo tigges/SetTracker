@@ -5,6 +5,7 @@ import {
   TL_BLEU_CLAIR_EDC_LV_2023,
   TL_CHARLOTTE_DE_WITTE_TML_WE1_2026,
   TL_CID_EDC_LV_2017,
+  TL_CLOONEE_EDC_LV_2022,
   TL_CLOONEE_PROSPA_DESTINO_2026,
   TL_DARUDE_EDC_LV_2026,
   TL_MARTEN_HORGER_EDC_LV_2023,
@@ -159,6 +160,20 @@ for (const p of wax) {
 assert.ok(
   TRACKLIST_1001_BY_SOURCE_SLUG["sc-waxmotif-wax-motif-live-edc-2021"]!
     .length >= 20,
+);
+
+assertSeedClocks(TL_CLOONEE_EDC_LV_2022);
+const clooneeEdc = tracklist1001RowsToPlays(TL_CLOONEE_EDC_LV_2022);
+assert.equal(clooneeEdc.length, 15);
+assert.equal(clooneeEdc[0]!.trackTitle, "Fine Night");
+assert.equal(clooneeEdc[clooneeEdc.length - 1]!.trackTitle, "Sun Goes Down");
+let cloPrev = -1;
+for (const p of clooneeEdc) {
+  assert.ok(p.timestamp > cloPrev, `Cloonee EDC clocks must increase @ ${p.timestamp}`);
+  cloPrev = p.timestamp;
+}
+assert.ok(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-cloonee-cloonee-edc-2022"]!.length >= 14,
 );
 
 console.log("tracklists1001/seeds.test.ts ok");
