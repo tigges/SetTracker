@@ -25,6 +25,7 @@ import {
   TL_HOLY_PRIEST_EDC_LV_2026,
   TL_MATTY_RALPH_EDC_LV_2026,
   TL_ENRICO_SANGIULIANO_TML_WE2_2026,
+  TL_FISHER_TML_WE2_2026,
   TL_JAMES_HYPE_TML_WE2_2026,
   TL_KOLSCH_TML_WE2_2026,
   TL_MISS_MONIQUE_TML_WE2_2026,
@@ -529,6 +530,22 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/1tfpw4qk/steve-angello-mainstage-tomorrowland-weekend-2-belgium-2026-07-24.html",
     tracklist1001: TL_STEVE_ANGELLO_TML_WE2_2026,
+  },
+  {
+    // Tomorrowland official — Freedom Stage WE2; 17/17 timed cues from 1001.
+    video: "https://www.youtube.com/watch?v=mVB-gqggrCQ",
+    primaryArtist: dj("FISHER", {
+      accent: "#ffba08",
+      homeCity: "Gold Coast, AU",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    title: "Fisher WE2 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/kd5wd49/fisher-freedom-stage-tomorrowland-weekend-2-belgium-2026-07-24.html",
+    tracklist1001: TL_FISHER_TML_WE2_2026,
   },
   {
     video: "https://www.youtube.com/watch?v=ObiAocVMTyo",

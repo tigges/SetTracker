@@ -11,6 +11,7 @@ import {
   TL_DOM_DOLLA_EDC_LV_2023,
   TL_DOM_DOLLA_EDC_LV_2024,
   TL_ENRICO_SANGIULIANO_TML_WE2_2026,
+  TL_FISHER_TML_WE2_2026,
   TL_FUNK_TRIBU_EDC_LV_2026,
   TL_HOLY_PRIEST_EDC_LV_2026,
   TL_HOLY_PRIEST_TML_WE1_2026,
@@ -512,5 +513,21 @@ for (const p of angello) {
   angelloPrev = p.timestamp;
 }
 assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-5AdQy7lCbN0"]!.length >= 41);
+
+assertSeedClocks(TL_FISHER_TML_WE2_2026);
+const fisher = tracklist1001RowsToPlays(TL_FISHER_TML_WE2_2026);
+assert.equal(fisher.length, 17);
+assert.match(fisher[0]!.trackTitle!, /It's That Time/);
+assert.match(fisher[fisher.length - 1]!.trackTitle!, /World, Hold On/);
+assert.equal(fisher[fisher.length - 1]!.timestamp, 77 * 60 + 25);
+let fisherPrev = -1;
+for (const p of fisher) {
+  assert.ok(
+    p.timestamp >= fisherPrev,
+    `FISHER TML clocks must not go back @ ${p.timestamp}`,
+  );
+  fisherPrev = p.timestamp;
+}
+assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-mVB-gqggrCQ"]!.length >= 17);
 
 console.log("tracklists1001/seeds.test.ts ok");

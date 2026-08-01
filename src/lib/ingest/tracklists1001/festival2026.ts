@@ -1458,6 +1458,52 @@ export const TL_STEVE_ANGELLO_TML_WE2_2026: FingerprintSeedRow[] = [
 ];
 
 /**
+ * FISHER @ Freedom Stage, Tomorrowland Weekend 2, Belgium 2026-07-24
+ * Official YT: https://www.youtube.com/watch?v=mVB-gqggrCQ (~81:44)
+ * 1001TL: https://1001.tl/kd5wd49 — operator console capture 2026-08-01
+ * (17/17 timed cues).
+ */
+export const TL_FISHER_TML_WE2_2026: FingerprintSeedRow[] = [
+  {
+    at: "0:12",
+    artist: "Marlon Hoffstadt aka DJ Daddy Trance",
+    title: "It's That Time (FISHER Remix)",
+  },
+  { at: "10:00", artist: "FISHER", title: "Stay" },
+  {
+    at: "13:40",
+    artist: "Chris Lake & Tony Romera",
+    title: "House Every Weekend",
+  },
+  { at: "17:52", artist: "IAN VII & JAVIIER", title: "Sink" },
+  { at: "20:18", artist: "FISHER", title: "Rain" },
+  { at: "28:12", artist: "GIORG", title: "Inside The Haus" },
+  { at: "33:40", artist: "FISHER ft. Kita Alexander", title: "Atmosphere" },
+  { at: "39:18", artist: "SIDEPIECE ft. 95 South", title: "Can I Ride" },
+  { at: "42:12", artist: "Green Velvet & Detlef", title: "Bounce UR Body" },
+  { at: "48:58", artist: "FISHER & Aatig", title: "Take It Off" },
+  { at: "53:00", artist: "Cloonee & Prospa", title: "Free Your Mind" },
+  { at: "1:01:50", artist: "Max Styler", title: "Body Shake" },
+  { at: "1:04:25", artist: "FISHER ft. Florence Arman", title: "What A Life" },
+  { at: "1:07:51", artist: "FISHER", title: "Losing It" },
+  {
+    at: "1:11:34",
+    artist: "Chris Lake & FISHER & Sante Sansone vs. Gotye ft. Kimbra",
+    title: "Somebody (2024)",
+  },
+  {
+    at: "1:14:49",
+    artist: "Marlon Hoffstadt & Coach Harrison",
+    title: "Daddy's In The Club (FISHER Remix)",
+  },
+  {
+    at: "1:17:25",
+    artist: "Bob Sinclar ft. Steve Edwards",
+    title: "World, Hold On (Children Of The Sky) (FISHER 2022 Rework)",
+  },
+];
+
+/**
  * Layton Giordani @ circuitGROUNDS closing, EDC Las Vegas 2025-05-16
  * Official SC: https://soundcloud.com/laytongiordani/layton-giordani-live-edc-las-vegas-circuit-grounds-closing-set-2025 (~59:40)
  * 1001TL: https://1001.tl/bt007st — operator console capture 2026-08-01
@@ -2438,6 +2484,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-dmhUJYEdkKo": TL_JAMES_HYPE_TML_WE2_2026,
   "yt-ra8NYbzPMnk": TL_KOLSCH_TML_WE2_2026,
   "yt-5AdQy7lCbN0": TL_STEVE_ANGELLO_TML_WE2_2026,
+  "yt-mVB-gqggrCQ": TL_FISHER_TML_WE2_2026,
 };
 
 /** Sanity: every seeded clock must parse. */
