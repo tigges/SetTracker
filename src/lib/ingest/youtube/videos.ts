@@ -15,9 +15,37 @@ import {
   type FingerprintSeedRow,
 } from "../fingerprint/seeds";
 import {
+  TL_AHEE_LIQUID_STRANGER_EDC_LV_2026,
+  TL_ARMIN_VAN_BUUREN_YT_HOUSE_TML_2026,
+  TL_AYYBO_ODD_MOB_TML_WE2_2026,
+  TL_BLEU_CLAIR_EDC_LV_2023,
   TL_CLOONEE_PROSPA_DESTINO_2026,
+  TL_DARUDE_EDC_LV_2026,
   TL_MARTEN_HORGER_EDC_LV_2023,
   TL_MARTEN_HORGER_PAROOKAVILLE_2026,
+  TL_FUNK_TRIBU_EDC_LV_2026,
+  TL_HOLY_PRIEST_EDC_LV_2026,
+  TL_MATTY_RALPH_EDC_LV_2026,
+  TL_ENRICO_SANGIULIANO_TML_WE2_2026,
+  TL_FISHER_TML_WE2_2026,
+  TL_HARDWELL_TML_WE2_2026,
+  TL_JAMES_HYPE_TML_WE2_2026,
+  TL_JOHN_SUMMIT_TML_WE2_2026,
+  TL_KOLSCH_TML_WE2_2026,
+  TL_KOROLOVA_TML_WE2_2026,
+  TL_LUCAS_STEVE_TML_WE2_2026,
+  TL_SARA_LANDRY_TML_WE2_2026,
+  TL_AFROJACK_R3HAB_TML_WE2_2026,
+  TL_STEVE_AOKI_TML_WE2_2026,
+  TL_MISS_MONIQUE_TML_WE2_2026,
+  TL_NICKY_ROMERO_TML_WE2_2026,
+  TL_ODD_MOB_TML_WE2_2026,
+  TL_STEVE_ANGELLO_TML_WE2_2026,
+  TL_NICO_MORENO_EDC_LV_2026,
+  TL_PEGASSI_EDC_LV_2026,
+  TL_SARAH_DE_WARREN_EDC_LV_2026,
+  TL_SOLOMUN_EDC_LV_2026,
+  TL_WESTEND_EDC_LV_2026,
 } from "../tracklists1001/seeds";
 import type { RawArtist } from "../types";
 import { slugify } from "../types";
@@ -42,6 +70,11 @@ export type YoutubeSetSource = {
    * Used when the upload only links 1001.tl and live HTML is Cloudflare-gated.
    */
   tracklist1001?: FingerprintSeedRow[];
+  /**
+   * Known 1001.tl / 1001tracklists.com URL when the YT description omits it
+   * (common on Insomniac Relives). Tried before falling back to seed rows.
+   */
+  tracklist1001Url?: string;
 };
 
 function dj(name: string, extra: Partial<RawArtist> = {}): RawArtist {
@@ -260,6 +293,412 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     type: "festival",
     title: "Solomun Live at EDC Las Vegas 2026 (Official Full Set)",
     eventName: "EDC Las Vegas",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2lkyu9mk/solomun-circuitgrounds-edc-las-vegas-united-states-2026-05-17.html",
+    tracklist1001: TL_SOLOMUN_EDC_LV_2026,
+  },
+  {
+    // Insomniac Relive — promo description only; 1001TL seed from screenshots.
+    video: "https://www.youtube.com/watch?v=jQLWYc2UrFY",
+    primaryArtist: dj("Westend", {
+      accent: "#f72585",
+      homeCity: "New York, US",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    title: "Westend Live at EDC Las Vegas 2026 (Official Full Set)",
+    eventName: "EDC Las Vegas",
+    tracklist1001: TL_WESTEND_EDC_LV_2026,
+  },
+  {
+    // Insomniac Relive — already in catalog via @insomniac; seed fills 0 plays.
+    video: "https://www.youtube.com/watch?v=yXHoHK_jQvc",
+    primaryArtist: dj("AHEE", {
+      accent: "#7b2cbf",
+      homeCity: "US",
+    }),
+    genre: "Bass",
+    type: "festival",
+    title: "AHEE B2B Liquid Stranger Live at EDC Las Vegas 2026 (Official Full Set)",
+    eventName: "EDC Las Vegas",
+    tracklist1001: TL_AHEE_LIQUID_STRANGER_EDC_LV_2026,
+  },
+  {
+    // Insomniac Relive — promo description; 1001 URL from operator (CF in CI).
+    video: "https://www.youtube.com/watch?v=dXBoIY65P8s",
+    primaryArtist: dj("Darude", {
+      accent: "#00b4d8",
+      homeCity: "Turku, FI",
+    }),
+    genre: "Trance",
+    type: "festival",
+    title: "Darude Live at EDC Las Vegas 2026 (Official Full Set)",
+    eventName: "EDC Las Vegas",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1v8whc0k/darude-quantumvalley-edc-las-vegas-united-states-2026-05-15.html",
+    tracklist1001: TL_DARUDE_EDC_LV_2026,
+  },
+  {
+    // Insomniac Relive — already in catalog via @insomniac; seed fills 0 plays.
+    video: "https://www.youtube.com/watch?v=KIb3psOt9hI",
+    primaryArtist: dj("Sarah de Warren", {
+      accent: "#c77dff",
+      homeCity: "US",
+    }),
+    genre: "Trance",
+    type: "festival",
+    title: "Sarah De Warren Live at EDC Las Vegas 2026 (Official Full Set)",
+    eventName: "EDC Las Vegas",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1z031tz1/sarah-de-warren-quantumvalley-edc-las-vegas-united-states-2026-05-15.html",
+    tracklist1001: TL_SARAH_DE_WARREN_EDC_LV_2026,
+  },
+  {
+    // Insomniac Relive — 1001 cues untimed; even-spaced from capture.
+    video: "https://www.youtube.com/watch?v=yUA0Ht2PdG0",
+    primaryArtist: dj("Pegassi", {
+      accent: "#80ed99",
+      homeCity: "EU",
+    }),
+    genre: "Techno",
+    type: "festival",
+    title: "Pegassi Live at EDC Las Vegas 2026 (Official Full Set)",
+    eventName: "EDC Las Vegas",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/108mxtc9/pegassi-quantumvalley-edc-las-vegas-united-states-2026-05-15.html",
+    tracklist1001: TL_PEGASSI_EDC_LV_2026,
+  },
+  {
+    // Insomniac Relive — circuitGROUNDS solo; 1001 cues untimed.
+    video: "https://www.youtube.com/watch?v=f_p6nfbrm0E",
+    primaryArtist: dj("Nico Moreno", {
+      accent: "#ff006e",
+      homeCity: "Berlin, DE",
+    }),
+    genre: "Hard Techno",
+    type: "festival",
+    title: "Nico Moreno Live at EDC Las Vegas 2026 (Official Full Set)",
+    eventName: "EDC Las Vegas",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2r6ym5qt/nico-moreno-circuitgrounds-edc-las-vegas-united-states-2026-05-15.html",
+    tracklist1001: TL_NICO_MORENO_EDC_LV_2026,
+  },
+  {
+    // Insomniac Relive — quantumVALLEY; 11/12 timed cues from 1001 capture.
+    video: "https://www.youtube.com/watch?v=FZ7pwlNdwBk",
+    primaryArtist: dj("Matty Ralph", {
+      accent: "#4cc9f0",
+      homeCity: "EU",
+    }),
+    genre: "Techno",
+    type: "festival",
+    title: "Matty Ralph Live at EDC Las Vegas 2026 (Official Full Set)",
+    eventName: "EDC Las Vegas",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2hsk794t/matty-ralph-quantumvalley-edc-las-vegas-united-states-2026-05-15.html",
+    tracklist1001: TL_MATTY_RALPH_EDC_LV_2026,
+  },
+  {
+    // Insomniac Relive — kineticFIELD; 10/10 timed cues from 1001 capture.
+    video: "https://www.youtube.com/watch?v=APt5j9Abwo8",
+    primaryArtist: dj("Funk Tribu", {
+      accent: "#ffbe0b",
+      homeCity: "IT",
+    }),
+    genre: "Techno",
+    type: "festival",
+    title: "Funk Tribu Live at EDC Las Vegas 2026 (Official Full Set)",
+    eventName: "EDC Las Vegas",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1lwpqyz1/funk-tribu-kineticfield-edc-las-vegas-united-states-2026-05-17.html",
+    tracklist1001: TL_FUNK_TRIBU_EDC_LV_2026,
+  },
+  {
+    // Artist upload (not Insomniac Relive) — full timed 1001 capture.
+    video: "https://www.youtube.com/watch?v=D8eLxmifH4o",
+    primaryArtist: dj("Holy Priest", {
+      accent: "#e63946",
+      homeCity: "DE",
+    }),
+    genre: "Hard Techno",
+    type: "festival",
+    title: "HOLY PRIEST | LIVE | EDC LAS VEGAS | CIRCUIT GROUNDS | 2026",
+    eventName: "EDC Las Vegas",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/gld216t/holy-priest-circuitgrounds-edc-las-vegas-united-states-2026-05-15.html",
+    tracklist1001: TL_HOLY_PRIEST_EDC_LV_2026,
+  },
+  {
+    // Tomorrowland official — Mainstage WE2; 13/18 timed cues from 1001.
+    video: "https://www.youtube.com/watch?v=2idboK_vTT8",
+    primaryArtist: dj("Odd Mob", {
+      accent: "#b8f200",
+      homeCity: "Brisbane, AU",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    title: "Odd Mob WE2 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/qz04ypk/odd-mob-mainstage-tomorrowland-weekend-2-belgium-2026-07-26.html",
+    tracklist1001: TL_ODD_MOB_TML_WE2_2026,
+  },
+  {
+    // Tomorrowland official — Mainstage WE2; 20/20 timed cues from 1001.
+    video: "https://www.youtube.com/watch?v=WhPtvotfYbc",
+    primaryArtist: dj("Miss Monique", {
+      accent: "#2a9d8f",
+      homeCity: "Kyiv, UA",
+    }),
+    genre: "Melodic Techno",
+    type: "festival",
+    title: "Miss Monique WE2 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2u0sds71/miss-monique-mainstage-tomorrowland-weekend-2-belgium-2026-07-24.html",
+    tracklist1001: TL_MISS_MONIQUE_TML_WE2_2026,
+  },
+  {
+    // Tomorrowland official — Freedom Stage WE2; 17/19 timed cues from 1001.
+    video: "https://www.youtube.com/watch?v=ubFrkYGGqo8",
+    primaryArtist: dj("Enrico Sangiuliano", {
+      accent: "#e9c46a",
+      homeCity: "Rimini, IT",
+    }),
+    genre: "Techno",
+    type: "festival",
+    title: "Enrico Sangiuliano WE2 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/16tnb0pk/enrico-sangiuliano-freedom-stage-tomorrowland-weekend-2-belgium-2026-07-24.html",
+    tracklist1001: TL_ENRICO_SANGIULIANO_TML_WE2_2026,
+  },
+  {
+    // Tomorrowland official — Mainstage WE2; dense mashup TL (28/76 timed).
+    video: "https://www.youtube.com/watch?v=TsyGMhx8izw",
+    primaryArtist: dj("Nicky Romero", {
+      accent: "#00bbf9",
+      homeCity: "Amerongen, NL",
+    }),
+    genre: "Progressive House",
+    type: "festival",
+    title: "Nicky Romero WE2 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/wkty6z9/nicky-romero-mainstage-tomorrowland-weekend-2-belgium-2026-07-24.html",
+    tracklist1001: TL_NICKY_ROMERO_TML_WE2_2026,
+  },
+  {
+    // Tomorrowland official — Freedom Stage WE2; 21/35 timed cues from 1001.
+    video: "https://www.youtube.com/watch?v=dmhUJYEdkKo",
+    primaryArtist: dj("James Hype", {
+      accent: "#ff006e",
+      homeCity: "Liverpool, UK",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    title: "James Hype WE2 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2b63zu8k/james-hype-freedom-stage-tomorrowland-weekend-2-belgium-2026-07-24.html",
+    tracklist1001: TL_JAMES_HYPE_TML_WE2_2026,
+  },
+  {
+    // Tomorrowland official — Mainstage WE2; 16/19 timed cues from 1001.
+    video: "https://www.youtube.com/watch?v=ra8NYbzPMnk",
+    primaryArtist: dj("Kölsch", {
+      accent: "#457b9d",
+      homeCity: "Copenhagen, DK",
+    }),
+    genre: "Melodic Techno",
+    type: "festival",
+    title: "Kölsch WE2 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2u0sgrq9/kolsch-mainstage-tomorrowland-weekend-2-belgium-2026-07-24.html",
+    tracklist1001: TL_KOLSCH_TML_WE2_2026,
+  },
+  {
+    // Tomorrowland official — Mainstage WE2; 20/41 timed cues from 1001.
+    video: "https://www.youtube.com/watch?v=5AdQy7lCbN0",
+    primaryArtist: dj("Steve Angello", {
+      accent: "#e63946",
+      homeCity: "Stockholm, SE",
+    }),
+    genre: "Progressive House",
+    type: "festival",
+    title: "Steve Angello WE2 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1tfpw4qk/steve-angello-mainstage-tomorrowland-weekend-2-belgium-2026-07-24.html",
+    tracklist1001: TL_STEVE_ANGELLO_TML_WE2_2026,
+  },
+  {
+    // Tomorrowland official — Freedom Stage WE2; 17/17 timed cues from 1001.
+    video: "https://www.youtube.com/watch?v=mVB-gqggrCQ",
+    primaryArtist: dj("FISHER", {
+      accent: "#ffba08",
+      homeCity: "Gold Coast, AU",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    title: "Fisher WE2 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/kd5wd49/fisher-freedom-stage-tomorrowland-weekend-2-belgium-2026-07-24.html",
+    tracklist1001: TL_FISHER_TML_WE2_2026,
+  },
+  {
+    // Tomorrowland official — Mainstage WE2 closing; also artist upload Py-GG74lLU8.
+    video: "https://www.youtube.com/watch?v=yWZyIQtxoXU",
+    primaryArtist: dj("Hardwell", {
+      accent: "#023e8a",
+      homeCity: "Breda, NL",
+    }),
+    genre: "Big Room",
+    type: "festival",
+    title: "Hardwell WE2 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/14y11rh1/hardwell-mainstage-tomorrowland-weekend-2-belgium-2026-07-24.html",
+    tracklist1001: TL_HARDWELL_TML_WE2_2026,
+  },
+  {
+    // Tomorrowland official — Crystal Garden WE2 B2B; 26/30 timed cues.
+    video: "https://www.youtube.com/watch?v=gO03gfI_JF0",
+    primaryArtist: dj("AYYBO", {
+      accent: "#ff006e",
+      homeCity: "US",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    title: "Ayybo b2b Odd Mob WE2 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1qn93jz1/ayybo-odd-mob-crystal-garden-stage-tomorrowland-weekend-2-belgium-2026-07-25.html",
+    tracklist1001: TL_AYYBO_ODD_MOB_TML_WE2_2026,
+  },
+  {
+    // Tomorrowland official — Crystal Garden WE2; 34/38 timed cues from 1001.
+    video: "https://www.youtube.com/watch?v=PlArfyuzuqo",
+    primaryArtist: dj("John Summit", {
+      accent: "#4cc9f0",
+      homeCity: "Chicago, US",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    title: "John Summit WE2 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2hsylb61/john-summit-crystal-garden-stage-tomorrowland-weekend-2-belgium-2026-07-25.html",
+    tracklist1001: TL_JOHN_SUMMIT_TML_WE2_2026,
+  },
+  {
+    // Artist upload — short YouTube House set (not Mainstage WE2 Relive).
+    video: "https://www.youtube.com/watch?v=I6QA_T-BS6o",
+    primaryArtist: dj("Armin van Buuren", {
+      accent: "#0077b6",
+      homeCity: "Leiden, NL",
+    }),
+    genre: "Trance",
+    type: "festival",
+    title: "Armin van Buuren live from the YouTube House at Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2hsz5x4k/armin-van-buuren-youtube-house-tomorrowland-belgium-2026-07-25.html",
+    tracklist1001: TL_ARMIN_VAN_BUUREN_YT_HOUSE_TML_2026,
+  },
+  {
+    // Tomorrowland official — Captive Soul / Freedom Stage WE2; 19/21 timed.
+    video: "https://www.youtube.com/watch?v=RLOghpXjuJI",
+    primaryArtist: dj("Korolova", {
+      accent: "#9b5de5",
+      homeCity: "Kyiv, UA",
+    }),
+    genre: "Melodic Techno",
+    type: "festival",
+    title: "Korolova WE2 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/hjlt23k/korolova-captive-soul-freedom-stage-tomorrowland-weekend-2-belgium-2026-07-26.html",
+    tracklist1001: TL_KOROLOVA_TML_WE2_2026,
+  },
+  {
+    // Tomorrowland official — Mainstage WE2; 25/54 timed (rest lerped in capture).
+    video: "https://www.youtube.com/watch?v=LE-byccuovI",
+    primaryArtist: dj("Lucas & Steve", {
+      accent: "#ffb703",
+      homeCity: "Maastricht, NL",
+    }),
+    genre: "Future House",
+    type: "festival",
+    title: "Lucas & Steve WE2 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/qz05s21/lucas-steve-mainstage-tomorrowland-weekend-2-belgium-2026-07-26.html",
+    tracklist1001: TL_LUCAS_STEVE_TML_WE2_2026,
+  },
+  {
+    // Tomorrowland official — Mainstage WE2; 17/17 timed.
+    video: "https://www.youtube.com/watch?v=aDAWctObTvI",
+    primaryArtist: dj("Sara Landry", {
+      accent: "#e63946",
+      homeCity: "Los Angeles, US",
+    }),
+    genre: "Hard Techno",
+    type: "festival",
+    title: "Sara Landry WE2 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2pcscu9t/sara-landry-mainstage-tomorrowland-weekend-2-belgium-2026-07-26.html",
+    tracklist1001: TL_SARA_LANDRY_TML_WE2_2026,
+  },
+  {
+    // Tomorrowland official — Mainstage WE2 B2B; 21/54 timed (rest lerped).
+    video: "https://www.youtube.com/watch?v=AjQeohYmg3A",
+    primaryArtist: dj("Afrojack", {
+      accent: "#ff9f1c",
+      homeCity: "Spijkenisse, NL",
+    }),
+    genre: "Big Room",
+    type: "festival",
+    title: "Afrojack b2b R3hab WE2 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2s55dyj1/afrojack-r3hab-mainstage-tomorrowland-weekend-2-belgium-2026-07-26.html",
+    tracklist1001: TL_AFROJACK_R3HAB_TML_WE2_2026,
+  },
+  {
+    // Tomorrowland official — Mainstage WE2; 0/26 timed → evenly spaced ~60m.
+    video: "https://www.youtube.com/watch?v=8-J01-hcHfA",
+    primaryArtist: dj("Steve Aoki", {
+      accent: "#00b4d8",
+      homeCity: "Miami, US",
+    }),
+    genre: "Electro House",
+    type: "festival",
+    title: "Steve Aoki WE2 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/rwtx921/steve-aoki-mainstage-tomorrowland-weekend-2-belgium-2026-07-26.html",
+    tracklist1001: TL_STEVE_AOKI_TML_WE2_2026,
   },
   {
     video: "https://www.youtube.com/watch?v=ObiAocVMTyo",
@@ -432,6 +871,9 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     type: "festival",
     title: "Bleu Clair live from EDC Las Vegas 2023",
     eventName: "EDC Las Vegas",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/283zdwmt/bleu-clair-stereobloom-edc-las-vegas-united-states-2023-05-19.html",
+    tracklist1001: TL_BLEU_CLAIR_EDC_LV_2023,
   },
   {
     video: "https://www.youtube.com/watch?v=_hdM8uJV1LM",
