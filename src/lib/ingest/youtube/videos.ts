@@ -26,6 +26,7 @@ import {
   TL_MATTY_RALPH_EDC_LV_2026,
   TL_ENRICO_SANGIULIANO_TML_WE2_2026,
   TL_FISHER_TML_WE2_2026,
+  TL_HARDWELL_TML_WE2_2026,
   TL_JAMES_HYPE_TML_WE2_2026,
   TL_KOLSCH_TML_WE2_2026,
   TL_MISS_MONIQUE_TML_WE2_2026,
@@ -546,6 +547,22 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/kd5wd49/fisher-freedom-stage-tomorrowland-weekend-2-belgium-2026-07-24.html",
     tracklist1001: TL_FISHER_TML_WE2_2026,
+  },
+  {
+    // Tomorrowland official — Mainstage WE2 closing; also artist upload Py-GG74lLU8.
+    video: "https://www.youtube.com/watch?v=yWZyIQtxoXU",
+    primaryArtist: dj("Hardwell", {
+      accent: "#023e8a",
+      homeCity: "Breda, NL",
+    }),
+    genre: "Big Room",
+    type: "festival",
+    title: "Hardwell WE2 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/14y11rh1/hardwell-mainstage-tomorrowland-weekend-2-belgium-2026-07-24.html",
+    tracklist1001: TL_HARDWELL_TML_WE2_2026,
   },
   {
     video: "https://www.youtube.com/watch?v=ObiAocVMTyo",

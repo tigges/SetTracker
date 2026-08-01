@@ -1504,6 +1504,119 @@ export const TL_FISHER_TML_WE2_2026: FingerprintSeedRow[] = [
 ];
 
 /**
+ * Hardwell @ Mainstage, Tomorrowland Weekend 2, Belgium 2026-07-24
+ * Official YT: https://www.youtube.com/watch?v=yWZyIQtxoXU (~59:10)
+ * Artist YT: https://www.youtube.com/watch?v=Py-GG74lLU8
+ * 1001TL: https://1001.tl/14y11rh1 — operator console capture 2026-08-01
+ * (27/31 timed cues; missing clocks already lerped in capture).
+ */
+export const TL_HARDWELL_TML_WE2_2026: FingerprintSeedRow[] = [
+  { at: "0:11", artist: "Hardwell & braev", title: "Believe" },
+  { at: "3:54", artist: "Hardwell & W&W", title: "Bangkok" },
+  {
+    at: "5:08",
+    artist: "Sebastian Ingrosso & Tommy Trash ft. John Martin",
+    title: "Reload (Acappella)",
+  },
+  { at: "7:16", artist: "Hardwell", title: "Spaceman" },
+  { at: "9:08", artist: "Michael Jackson", title: "Beat It (Acappella)" },
+  { at: "11:13", artist: "Hardwell & MAKJ", title: "Countdown 2026" },
+  {
+    at: "13:09",
+    artist: "Tim Berg ft. Amanda Wilson",
+    title: "Seek Bromance (Acappella)",
+  },
+  {
+    at: "14:08",
+    artist: "David Guetta & GLOWINTHEDARK ft. Harrison",
+    title: "Ain't A Party (Acappella)",
+  },
+  {
+    at: "15:17",
+    artist: "Mightyfools",
+    title: "Footrocker (Get Your, Get Your Hands Up Acappella)",
+  },
+  {
+    at: "15:29",
+    artist: "Dimitri Vegas & Like Mike & Martin Garrix",
+    title: "Tremor (Sensation 2014 Anthem) (3, 2, 1 Go Acappella)",
+  },
+  { at: "15:58", artist: "Rihanna", title: "Where Have You Been (Acappella)" },
+  {
+    at: "17:51",
+    artist: "DJ Sammy & Yanou ft. Do",
+    title: "Heaven (Hardwell Bootleg)",
+  },
+  { at: "21:58", artist: "Hardwell & W&W", title: "Turn Up The Bass" },
+  {
+    at: "23:21",
+    artist: "Icona Pop ft. Charli xcx",
+    title: "I Love It (Acappella)",
+  },
+  {
+    at: "25:10",
+    artist: "ANOTR ft. 54 Ultra",
+    title: "Talk To You (Hardwell Bootleg)",
+  },
+  {
+    at: "30:01",
+    artist: "Sebastian Ingrosso & Alesso ft. Ryan Tedder",
+    title: "Calling (Lose My Mind) (Hardwell & W&W Bootleg)",
+  },
+  { at: "33:07", artist: "Hardwell & Azteck & Dr Phunk", title: "LOW" },
+  {
+    at: "35:53",
+    artist: "Alice Deejay & Hardwell vs. Justin Bieber & Nicki Minaj",
+    title: "Beauty Off Alone (Hardwell Mashup)",
+  },
+  {
+    at: "37:25",
+    artist: "Justin Bieber ft. Nicki Minaj",
+    title: "Beauty And A Beat",
+  },
+  {
+    at: "38:58",
+    artist: "Alice Deejay",
+    title: "Better Off Alone (Hardwell Bootleg)",
+  },
+  { at: "40:30", artist: "Hardwell & Bassjackers", title: "Bang On The Drums" },
+  { at: "40:45", artist: "Masters At Work", title: "Work (Acappella)" },
+  {
+    at: "43:32",
+    artist: "Showtek & Justin Prime",
+    title: "Cannonball (Hardwell & W&W Remix)",
+  },
+  {
+    at: "43:34",
+    artist: "Hardwell ft. Amba Shepherd",
+    title: "Apollo (Acappella)",
+  },
+  {
+    at: "45:10",
+    artist: "DVBBS & BORGEOUS & Hardwell vs. KSHMR & Jarrad Kritzstein",
+    title: "Tsunami vs. Power (Hardwell Mashup)",
+  },
+  {
+    at: "45:40",
+    artist: "Hardwell & KSHMR ft. Jarrad Kritzstein",
+    title: "Power (Acappella)",
+  },
+  {
+    at: "46:11",
+    artist: "DVBBS & BORGEOUS",
+    title: "Tsunami (Hardwell Bootleg)",
+  },
+  { at: "46:41", artist: "Hardwell & Maddix", title: "AI CARALHO" },
+  { at: "49:40", artist: "4444 OF A KIND & Hardwell", title: "RE4SON" },
+  {
+    at: "53:14",
+    artist: "Hardwell & Sub Zero Project ft. Lil Jon",
+    title: "Brace For Impact",
+  },
+  { at: "55:06", artist: "Hardwell & Sound Rush", title: "IRIS" },
+];
+
+/**
  * Layton Giordani @ circuitGROUNDS closing, EDC Las Vegas 2025-05-16
  * Official SC: https://soundcloud.com/laytongiordani/layton-giordani-live-edc-las-vegas-circuit-grounds-closing-set-2025 (~59:40)
  * 1001TL: https://1001.tl/bt007st — operator console capture 2026-08-01
@@ -2485,6 +2598,8 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-ra8NYbzPMnk": TL_KOLSCH_TML_WE2_2026,
   "yt-5AdQy7lCbN0": TL_STEVE_ANGELLO_TML_WE2_2026,
   "yt-mVB-gqggrCQ": TL_FISHER_TML_WE2_2026,
+  "yt-yWZyIQtxoXU": TL_HARDWELL_TML_WE2_2026,
+  "yt-Py-GG74lLU8": TL_HARDWELL_TML_WE2_2026,
 };
 
 /** Sanity: every seeded clock must parse. */

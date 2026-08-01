@@ -13,6 +13,7 @@ import {
   TL_ENRICO_SANGIULIANO_TML_WE2_2026,
   TL_FISHER_TML_WE2_2026,
   TL_FUNK_TRIBU_EDC_LV_2026,
+  TL_HARDWELL_TML_WE2_2026,
   TL_HOLY_PRIEST_EDC_LV_2026,
   TL_HOLY_PRIEST_TML_WE1_2026,
   TL_JAMES_HYPE_TML_WE2_2026,
@@ -529,5 +530,24 @@ for (const p of fisher) {
   fisherPrev = p.timestamp;
 }
 assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-mVB-gqggrCQ"]!.length >= 17);
+
+assertSeedClocks(TL_HARDWELL_TML_WE2_2026);
+const hardwell = tracklist1001RowsToPlays(TL_HARDWELL_TML_WE2_2026);
+assert.equal(hardwell.length, 31);
+assert.equal(hardwell[0]!.trackTitle, "Believe");
+assert.equal(hardwell[hardwell.length - 1]!.trackTitle, "IRIS");
+let hwPrev = -1;
+for (const p of hardwell) {
+  assert.ok(
+    p.timestamp >= hwPrev,
+    `Hardwell TML clocks must not go back @ ${p.timestamp}`,
+  );
+  hwPrev = p.timestamp;
+}
+assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-yWZyIQtxoXU"]!.length >= 31);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-Py-GG74lLU8"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-yWZyIQtxoXU"],
+);
 
 console.log("tracklists1001/seeds.test.ts ok");
