@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { extract1001Urls } from "./parse";
 import {
+  TL_AHEE_LIQUID_STRANGER_EDC_LV_2026,
   TL_CHARLOTTE_DE_WITTE_TML_WE1_2026,
   TL_CLOONEE_PROSPA_DESTINO_2026,
   TL_MARTEN_HORGER_EDC_LV_2023,
@@ -65,6 +66,19 @@ assert.equal(proper?.timestamp, 29 * 60 + 48);
 assert.ok(
   TRACKLIST_1001_BY_SOURCE_SLUG["sc-itsthewestend-westend-live-edc-2026"]!
     .length >= 18,
+);
+
+assertSeedClocks(TL_AHEE_LIQUID_STRANGER_EDC_LV_2026);
+const ahee = tracklist1001RowsToPlays(TL_AHEE_LIQUID_STRANGER_EDC_LV_2026);
+assert.ok(ahee.length >= 20);
+assert.equal(ahee[0]!.trackTitle, "Superstar");
+assert.equal(ahee[ahee.length - 1]!.trackTitle, "A Milli (Acappella)");
+assert.ok(
+  ahee.some((p) => p.trackTitle === "Jungle Juice"),
+  "expected Jungle Juice from 1001 screenshots",
+);
+assert.ok(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-yXHoHK_jQvc"]!.length >= 20,
 );
 
 console.log("tracklists1001/seeds.test.ts ok");

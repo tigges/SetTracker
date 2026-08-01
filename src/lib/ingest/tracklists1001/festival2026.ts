@@ -284,7 +284,86 @@ export const TL_WESTEND_EDC_LV_2026: FingerprintSeedRow[] = (() => {
   });
 })();
 
-/** SoundCloud sourceSlug → curated 1001TL seed (official uploads only). */
+/**
+ * AHEE B2B Liquid Stranger @ bassPOD, EDC Las Vegas 2026
+ * Official YT: https://www.youtube.com/watch?v=yXHoHK_jQvc (~59:45)
+ * 1001TL operator screenshots 2026-08-01 (partial through ~track 20; more
+ * cues expected). Skips bare ID / Artist–ID rows. w/ layers kept as rows.
+ * Jungle Juice cue @ 13:30 on 1001 — not forced (would break even spacing
+ * until the full timed list lands).
+ */
+export const TL_AHEE_LIQUID_STRANGER_EDC_LV_2026: FingerprintSeedRow[] =
+  evenlySpaceRows(
+    [
+      { artist: "Liquid Stranger & AHEE", title: "Superstar" },
+      {
+        artist: "Skrillex & Damian Marley",
+        title: "Make It Bun Dem (Acappella)",
+      },
+      { artist: "Liquid Stranger & Champagne Drip", title: "Melt" },
+      { artist: "Flozone", title: "Break Up Song" },
+      { artist: "AHEE & Stylust", title: "Oxygen" },
+      {
+        artist: "REZZ vs. Aliyah's Interlude",
+        title: "Edge vs. IT GIRL (AHEE Edit)",
+      },
+      { artist: "Da Hool", title: "Meet Her At The Love Parade" },
+      { artist: "AHEE", title: "Brain Rot (VIP)" },
+      {
+        artist: "GRiZ ft. Subtronics",
+        title: "Griztronics (ID Remix)",
+      },
+      {
+        artist: "Baha Men",
+        title: "Who Let The Dogs Out (Acappella)",
+      },
+      {
+        artist: "Lil Jon ft. Three 6 Mafia",
+        title: "Act A Fool (Acappella)",
+      },
+      { artist: "Liquid Stranger & AHEE", title: "Hot Shot" },
+      { artist: "AHEE & SubDocta", title: "Fiyah" },
+      { artist: "AHEE", title: "Bug Eater (VIP)" },
+      {
+        artist: "Skrillex & The Doors",
+        title: "Breakin' A Sweat (It's Alright) (Acappella)",
+      },
+      {
+        artist: "Ganja White Night & Liquid Stranger",
+        title: "Jungle Juice",
+      },
+      {
+        artist: "Skrillex & Fred again.. & Flowdan",
+        title: "Rumble (Acappella)",
+      },
+      {
+        artist: "Benny Benassi pres. The Biz",
+        title: "Satisfaction (Acappella)",
+      },
+      {
+        artist: "The Pixies",
+        title: "Where Is My Mind? (AHEE Edit)",
+      },
+      {
+        artist: "Space Laces",
+        title: "Dominate (TYNAN Flip)",
+      },
+      { artist: "The Prodigy", title: "Breathe" },
+      {
+        artist: "Queen",
+        title: "We Will Rock You (Acappella)",
+      },
+      { artist: "AHEE", title: "Shock Rave" },
+      { artist: "Phibes", title: "Bassdrop" },
+      {
+        artist: "Lil Wayne",
+        title: "A Milli (Acappella)",
+      },
+    ],
+    3585,
+  );
+
+/** sourceSlug → curated 1001TL seed (SC / YT when live HTML is CF-blocked). */
 export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   string,
   FingerprintSeedRow[]
@@ -293,6 +372,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
     TL_CHARLOTTE_DE_WITTE_TML_WE1_2026,
   "sc-cloonee-clooneeb2bprospa": TL_CLOONEE_PROSPA_DESTINO_2026,
   "sc-itsthewestend-westend-live-edc-2026": TL_WESTEND_EDC_LV_2026,
+  "yt-yXHoHK_jQvc": TL_AHEE_LIQUID_STRANGER_EDC_LV_2026,
 };
 
 /** Sanity: every seeded clock must parse. */

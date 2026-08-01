@@ -15,6 +15,7 @@ import {
   type FingerprintSeedRow,
 } from "../fingerprint/seeds";
 import {
+  TL_AHEE_LIQUID_STRANGER_EDC_LV_2026,
   TL_CLOONEE_PROSPA_DESTINO_2026,
   TL_MARTEN_HORGER_EDC_LV_2023,
   TL_MARTEN_HORGER_PAROOKAVILLE_2026,
@@ -274,6 +275,19 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     title: "Westend Live at EDC Las Vegas 2026 (Official Full Set)",
     eventName: "EDC Las Vegas",
     tracklist1001: TL_WESTEND_EDC_LV_2026,
+  },
+  {
+    // Insomniac Relive — already in catalog via @insomniac; seed fills 0 plays.
+    video: "https://www.youtube.com/watch?v=yXHoHK_jQvc",
+    primaryArtist: dj("AHEE", {
+      accent: "#7b2cbf",
+      homeCity: "US",
+    }),
+    genre: "Bass",
+    type: "festival",
+    title: "AHEE B2B Liquid Stranger Live at EDC Las Vegas 2026 (Official Full Set)",
+    eventName: "EDC Las Vegas",
+    tracklist1001: TL_AHEE_LIQUID_STRANGER_EDC_LV_2026,
   },
   {
     video: "https://www.youtube.com/watch?v=ObiAocVMTyo",
