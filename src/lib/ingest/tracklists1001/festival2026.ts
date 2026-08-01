@@ -1737,6 +1737,49 @@ export const TL_DIMITRI_VEGAS_TML_WE2_2026: FingerprintSeedRow[] =
   );
 
 /**
+ * Calvin Harris @ Mainstage, Tomorrowland Weekend 2, Belgium 2026-07-25
+ * 1001TL: https://1001.tl/1z0j2zlk — operator console capture 2026-08-01
+ * (0/30 timed cues — evenly spaced across ~60m).
+ * No official Tomorrowland Relive yet — seed ready; do not wire fan uploads.
+ */
+export const TL_CALVIN_HARRIS_TML_WE2_2026: FingerprintSeedRow[] =
+  evenlySpaceRows(
+    [
+      { artist: "Calvin Harris", title: "C.U.B.A (Calvin Harris 2026 Remix)" },
+      { artist: "Florence + The Machine", title: "You've Got The Love (Acappella)" },
+      { artist: "Calvin Harris & Alesso & Hurts vs. Robert Miles", title: "Under Control vs. Children (Alesso Mashup)" },
+      { artist: "Robert Miles", title: "Children" },
+      { artist: "Calvin Harris & Alesso ft. Hurts", title: "Under Control" },
+      { artist: "Thomas Schumacher & A.D.H.S.", title: "Panic" },
+      { artist: "Calvin Harris ft. Ellie Goulding", title: "Outside (Calvin Harris 2025 Remix)" },
+      { artist: "L.P. Rhythm", title: "Versatile" },
+      { artist: "Calvin Harris ft. John Newman", title: "Blame" },
+      { artist: "Calvin Harris ft. John Newman", title: "Blame (Calvin Harris 2026 Remix)" },
+      { artist: "Calvin Harris ft. Ellie Goulding", title: "I Need Your Love (Calvin Harris Remix)" },
+      { artist: "Calvin Harris ft. Ayah Marar", title: "Thinking About You (Calvin Harris 2026 Remix)" },
+      { artist: "Calvin Harris", title: "Summer (Calvin Harris 2024 Remix)" },
+      { artist: "UMEK", title: "Collision Wall" },
+      { artist: "Calvin Harris ft. Ayah Marar", title: "Flashback" },
+      { artist: "Sebastian Ingrosso & Tommy Trash ft. John Martin", title: "Reload" },
+      { artist: "Basement Jaxx", title: "Where's Your Head At? (Acappella)" },
+      { artist: "Firebeatz", title: "Here We F*cking Go" },
+      { artist: "BrEaCh", title: "Jack (Acappella)" },
+      { artist: "Calvin Harris", title: "Feel So Close" },
+      { artist: "The Chemical Brothers", title: "Hey Boy, Hey Girl (Acappella)" },
+      { artist: "Rihanna", title: "Where Have You Been (Calvin Harris 2026 Remix)" },
+      { artist: "Florence + The Machine", title: "Spectrum (Say My Name) (Calvin Harris 2025 Remix)" },
+      { artist: "Calvin Harris ft. Clementine Douglas", title: "Blessings (Cassian Remix)" },
+      { artist: "Calvin Harris ft. Clementine Douglas", title: "Blessings" },
+      { artist: "Calvin Harris ft. Kelis", title: "Bounce (Calvin Harris Remix)" },
+      { artist: "Zombie Nation", title: "Kernkraft 400" },
+      { artist: "Rihanna ft. Calvin Harris", title: "We Found Love" },
+      { artist: "Calvin Harris", title: "I'm Not Alone (Calvin Harris 2019 Edit)" },
+      { artist: "Nari & Milani", title: "Atom (Blast Beat GO Acappella)" }
+    ],
+    3600,
+  );
+
+/**
  * Layton Giordani @ circuitGROUNDS closing, EDC Las Vegas 2025-05-16
  * Official SC: https://soundcloud.com/laytongiordani/layton-giordani-live-edc-las-vegas-circuit-grounds-closing-set-2025 (~59:40)
  * 1001TL: https://1001.tl/bt007st — operator console capture 2026-08-01

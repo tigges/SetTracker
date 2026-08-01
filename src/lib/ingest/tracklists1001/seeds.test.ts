@@ -3,6 +3,7 @@ import { extract1001Urls } from "./parse";
 import {
   TL_AHEE_LIQUID_STRANGER_EDC_LV_2026,
   TL_BLEU_CLAIR_EDC_LV_2023,
+  TL_CALVIN_HARRIS_TML_WE2_2026,
   TL_CHARLOTTE_DE_WITTE_TML_WE1_2026,
   TL_CHRIS_LORENZO_TML_WE2_2026,
   TL_CID_EDC_LV_2017,
@@ -575,6 +576,18 @@ assert.equal(TRACKLIST_1001_BY_SOURCE_SLUG["yt-OTKgBZS8if0"], undefined);
 assert.equal(
   Object.values(TRACKLIST_1001_BY_SOURCE_SLUG).includes(
     TL_DIMITRI_VEGAS_TML_WE2_2026,
+  ),
+  false,
+);
+
+assertSeedClocks(TL_CALVIN_HARRIS_TML_WE2_2026);
+const calvin = tracklist1001RowsToPlays(TL_CALVIN_HARRIS_TML_WE2_2026);
+assert.equal(calvin.length, 30);
+assert.match(calvin[0]!.trackTitle!, /C\.U\.B\.A/);
+assert.match(calvin[calvin.length - 1]!.trackTitle!, /Atom/);
+assert.equal(
+  Object.values(TRACKLIST_1001_BY_SOURCE_SLUG).includes(
+    TL_CALVIN_HARRIS_TML_WE2_2026,
   ),
   false,
 );
