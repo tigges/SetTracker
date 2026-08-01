@@ -1728,8 +1728,9 @@ export const TL_CHRIS_LORENZO_TML_WE2_2026: FingerprintSeedRow[] =
  * Dimitri Vegas @ Mainstage, Tomorrowland Weekend 2, Belgium 2026-07-25
  * 1001TL: https://1001.tl/ctd034t — operator console capture 2026-08-01
  * (0/62 timed cues — evenly spaced across ~60m).
- * No official solo Mainstage Relive yet (TML has B2B Nico Moreno only) —
- * seed ready; do not wire fan uploads / wrong B2Bs.
+ * No official solo Mainstage Relive yet — seed held.
+ * B2B Nico Moreno Great Library is TL_DIMITRI_VEGAS_NICO_MORENO_TML_WE2_2026
+ * (yt-OTKgBZS8if0); do not wire this solo seed to that Relive.
  */
 export const TL_DIMITRI_VEGAS_TML_WE2_2026: FingerprintSeedRow[] =
   evenlySpaceRows(
@@ -1799,6 +1800,83 @@ export const TL_DIMITRI_VEGAS_TML_WE2_2026: FingerprintSeedRow[] =
     ],
     3600,
   );
+
+/**
+ * Dimitri Vegas & Nico Moreno @ The Great Library Stage, Tomorrowland Weekend 2, Belgium 2026-07-26
+ * Official YT: https://www.youtube.com/watch?v=OTKgBZS8if0
+ * 1001TL: https://1001.tl/1091bm11 — operator console capture 2026-08-01
+ * (24/35 timed cues; missing clocks already lerped in capture).
+ * Distinct from held solo Mainstage seed TL_DIMITRI_VEGAS_TML_WE2_2026.
+ */
+export const TL_DIMITRI_VEGAS_NICO_MORENO_TML_WE2_2026: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "Yves Deruyter", title: "... Animals (Dimitri Vegas Remix)" },
+  { at: "1:38", artist: "The Maxx", title: "Cocaine (Acappella)" },
+  { at: "3:15", artist: "Hi-Gate", title: "Pitchin' (In Every Direction)" },
+  { at: "4:43", artist: "Revoxx", title: "Bassline Kick" },
+  { at: "6:11", artist: "Gigi D'Agostino", title: "Bla Bla Bla (HOREM Remix)" },
+  {
+    at: "8:11",
+    artist: "Dimitri Vegas & Like Mike & Maddix & Da Hool ft. Kiki Solvej",
+    title: "Meet Her At The Love Parade (Luca Agnelli Remix)",
+  },
+  { at: "10:16", artist: "Dimitri Vegas & Like Mike vs. Fantasm", title: "Pump This Party" },
+  {
+    at: "12:53",
+    artist: "Mr. Polska & Natte Visstick & Vieze Asbak",
+    title: "POLSKA JUMPSTYLE (KAAI Remix)",
+  },
+  { at: "14:30", artist: "APH\u00d8TIC", title: "Thalassophobia" },
+  {
+    at: "16:08",
+    artist: "Dimitri Vegas & Like Mike vs. Ummet Ozcan",
+    title: "The Hum (Nico Moreno Remix)",
+  },
+  { at: "17:50", artist: "Dimitri Vegas & Pat B ft. Sylver", title: "Turn The Tide" },
+  { at: "20:45", artist: "Revoxx", title: "Kickdrum Junkie" },
+  { at: "22:54", artist: "DVBBS & BORGEOUS", title: "Tsunami (ROYAL Hard Techno Remix)" },
+  { at: "24:18", artist: "UMEK", title: "Gatex (Dimitri Vegas Remix)" },
+  { at: "27:22", artist: "Rotterdam Terror Corps", title: "Raveworld" },
+  {
+    at: "28:45",
+    artist: "Dimitri Vegas & Like Mike & Marc Acardipane & Bassjackers",
+    title: "Stereo Murder (Per Pleks Remix)",
+  },
+  { at: "30:20", artist: "Zombie Nation", title: "Kernkraft 400 (Lunaticz Remix)" },
+  { at: "31:18", artist: "Massano", title: "The Feeling (ACOR HT Rework)" },
+  { at: "32:15", artist: "Marc Acardipane a.k.a. Pilldriver", title: "Pitch-Hiker" },
+  { at: "33:53", artist: "Fatboy Slim", title: "Right Here, Right Now" },
+  {
+    at: "35:30",
+    artist: "Bountyhunter",
+    title: "Woops (Dimitri Vegas & Junkie Kid Remix / BRANDON Remix)",
+  },
+  { at: "36:29", artist: "Bountyhunter", title: "Woops (Dimitri Vegas & Junkie Kid 2025 VIP Mix)" },
+  { at: "37:28", artist: "Jones & Stephenson", title: "The First Rebirth" },
+  { at: "38:27", artist: "Bountyhunter", title: "Woops (Anderex Edit)" },
+  { at: "39:26", artist: "Bountyhunter", title: "Woops" },
+  { at: "40:24", artist: "Linkin Park", title: "Numb (Trey Pearce Remix)" },
+  {
+    at: "42:29",
+    artist: "Dimitri Vegas & Like Mike & Marlon Hoffstadt & DJ Konik",
+    title: "Makina Time",
+  },
+  {
+    at: "43:46",
+    artist: "Dimitri Vegas & Like Mike & Marlon Hoffstadt & DJ Konik",
+    title: "Makina Time (Darren Styles Remix)",
+  },
+  { at: "45:03", artist: "Dimitri Vegas & Outsiders & DJ Isaac", title: "Face Down Ass Up" },
+  { at: "47:47", artist: "Nico Moreno ft. Laren", title: "You Make Me Horny" },
+  { at: "50:31", artist: "Dimitri Vegas & Mark With A K", title: "Funky" },
+  {
+    at: "53:03",
+    artist: "Michael Sembello",
+    title: "Maniac (Dimitri Vegas & Marlon Hoffstadt Remix)",
+  },
+  { at: "55:28", artist: "GRAVEDGR & Junkie Kid", title: "El Sistema" },
+  { at: "56:49", artist: "Sunbeam", title: "Outside World (Brennan Heart Remix)" },
+  { at: "59:43", artist: "Shogun", title: "HARDCORE SOUND" },
+];
 
 /**
  * Calvin Harris @ Mainstage, Tomorrowland Weekend 2, Belgium 2026-07-25
@@ -3666,6 +3744,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-AjQeohYmg3A": TL_AFROJACK_R3HAB_TML_WE2_2026,
   "yt-8-J01-hcHfA": TL_STEVE_AOKI_TML_WE2_2026,
   "yt-DAOlnMYA3nU": TL_CYRIL_TML_WE2_2026,
+  "yt-OTKgBZS8if0": TL_DIMITRI_VEGAS_NICO_MORENO_TML_WE2_2026,
 };
 
 /** Sanity: every seeded clock must parse. */
