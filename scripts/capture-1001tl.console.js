@@ -1,16 +1,19 @@
-/**
- * 1001Tracklists → setradar seed (run in your browser)
+/* setradar: 1001Tracklists -> TS seed
  *
- * PRACTICAL USE:
- *   1. Open a 1001 tracklist page (after it has fully loaded).
- *   2. Open DevTools → Console (Mac: Cmd+Option+J / Win: Ctrl+Shift+J).
- *   3. Paste this whole file and press Enter.
- *   4. The TS seed is copied to your clipboard (and logged).
- *   5. Paste into src/lib/ingest/tracklists1001/festival2026.ts and wire
- *      TRACKLIST_1001_BY_SOURCE_SLUG["yt-…"] or ["sc-…"].
+ * WRONG: typing   scripts/capture-1001tl.console.js   into the console
+ * RIGHT: paste the CONTENTS of this file (Select All in the editor, Copy)
  *
- * Optional one-liner before paste to set names:
- *   window.__SETRADAR_1001__ = { slug: "yt-yXHoHK_jQvc", name: "TL_AHEE_LIQUID_STRANGER_EDC_LV_2026", durationSec: 3585 };
+ * Steps:
+ *   1. Open the 1001 tracklist page (fully loaded).
+ *   2. Open this file in your editor / GitHub "Raw".
+ *   3. Select All -> Copy the whole file.
+ *   4. On the 1001 page: DevTools -> Console.
+ *      Chrome may say "don't paste code" -> type: allow pasting  then Enter.
+ *   5. Paste (Cmd/Ctrl+V) -> Enter.
+ *   6. Look for: [setradar 1001] Copied TS seed to clipboard.
+ *
+ * Optional before paste:
+ *   window.__SETRADAR_1001__ = { slug: "yt-dXBoIY65P8s", name: "TL_DARUDE_EDC_LV_2026", durationSec: 3382 };
  */
 (() => {
   const opts = Object.assign(
@@ -82,7 +85,6 @@
       "div.bItm.tlpItem, div.tlpItem, tr.tlpItem, .tlpItem",
     ),
   ];
-  // Fallback: classic spans scattered in the page
   const rows = [];
 
   if (items.length) {
@@ -93,13 +95,13 @@
       const cueRaw = textOf(el, ".cueValue, .cue, [class*='cueValue']");
       const fromMeta =
         metaContent(el, "name") ||
-        [
-          metaContent(el, "byArtist"),
-          metaContent(el, "name"),
-        ]
+        [metaContent(el, "byArtist"), metaContent(el, "name")]
           .filter(Boolean)
           .join(" - ");
-      const fromSpan = textOf(el, ".trackValue, span.trackValue, .tlpTog .trackValue");
+      const fromSpan = textOf(
+        el,
+        ".trackValue, span.trackValue, .tlpTog .trackValue",
+      );
       const rawTrack = fromMeta || fromSpan;
       if (!rawTrack) continue;
       const { artist, title } = splitArtistTitle(rawTrack);
@@ -115,12 +117,12 @@
   }
 
   if (!rows.length) {
-    // Last resort: walk .trackValue nodes and look nearby for cue / number
     for (const span of document.querySelectorAll(".trackValue")) {
       const rawTrack = span.textContent.replace(/\s+/g, " ").trim();
       if (!rawTrack) continue;
       const row =
-        span.closest(".bItm, .tlpItem, tr, li, div[id^='tlp']") || span.parentElement;
+        span.closest(".bItm, .tlpItem, tr, li, div[id^='tlp']") ||
+        span.parentElement;
       const cueEl = row && row.querySelector(".cueValue, .cue");
       const numEl = row && row.querySelector(".tracknumber_value");
       const cueRaw = cueEl ? cueEl.textContent.trim() : "";
@@ -151,7 +153,6 @@
     title: r.title,
   }));
 
-  // If almost no cues, space evenly across durationSec
   if (timed < Math.max(3, Math.floor(rows.length * 0.4))) {
     const n = seed.length;
     const usable = Math.max(60, opts.durationSec - 45);
@@ -181,8 +182,9 @@
     ` * ${location.href}`,
     opts.slug
       ? ` * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["${opts.slug}"] = ${opts.name}`
-      : " * Wire: TRACKLIST_1001_BY_SOURCE_SLUG[\"<yt-or-sc-slug>\"] = " + opts.name,
-    ` * Captured ${new Date().toISOString().slice(0, 10)} — provenance 1001tl.`,
+      : ' * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["<yt-or-sc-slug>"] = ' +
+        opts.name,
+    ` * Captured ${new Date().toISOString().slice(0, 10)} - provenance 1001tl.`,
     " */",
   ]
     .filter(Boolean)
@@ -214,7 +216,9 @@
       (err) => console.warn("[setradar 1001] Clipboard failed:", err),
     );
   } else {
-    console.warn("[setradar 1001] Clipboard API unavailable — copy from the log above.");
+    console.warn(
+      "[setradar 1001] Clipboard API unavailable - copy from the log above.",
+    );
   }
 
   return { summary, ts, rows: seed };
