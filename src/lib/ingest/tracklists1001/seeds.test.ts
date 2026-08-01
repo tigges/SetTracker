@@ -16,6 +16,14 @@ const urls = extract1001Urls(
 assert.equal(urls.length, 2);
 assert.match(urls[0]!, /1001\.tl\/vfff7hk/);
 
+const bare = extract1001Urls("Tracklist: 1001.tl/qhdctfk (CID EDC)");
+assert.equal(bare.length, 1);
+assert.equal(bare[0], "https://1001.tl/qhdctfk");
+
+const httpBare = extract1001Urls("TL http://1001.tl/24gpuclk");
+assert.equal(httpBare.length, 1);
+assert.match(httpBare[0]!, /1001\.tl\/24gpuclk/);
+
 const plays = tracklist1001RowsToPlays(TL_MARTEN_HORGER_EDC_LV_2023);
 assert.equal(plays.length, 23);
 assert.equal(plays[0]!.provenance, "1001tl");

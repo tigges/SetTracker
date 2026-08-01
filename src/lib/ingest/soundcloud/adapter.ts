@@ -27,7 +27,12 @@ import {
   sleep,
   type ScTrack,
 } from "./client";
-import { applyTracklist1001Seed } from "../tracklists1001/seeds";
+import { playsFromDescription1001Links } from "../tracklists1001/client";
+import {
+  applyTracklist1001Seed,
+  merge1001Plays,
+} from "../tracklists1001/seeds";
+import type { RawPlay } from "../types";
 import {
   mergeTracklistSignals,
   parseDescriptionTracklist,
@@ -62,6 +67,37 @@ const ACCENT_FALLBACK = "#00f0a0";
 function durationSecOf(track: ScTrack): number {
   const ms = track.full_duration ?? track.duration ?? 0;
   return Math.max(0, Math.round(ms / 1000));
+}
+
+/**
+ * Follow 1001.tl links in the SC description (same as YouTube adapter), then
+ * apply curated seed fallbacks keyed by sourceSlug.
+ */
+async function enrichScPlaysWith1001(
+  description: string | null | undefined,
+  sourceSlug: string,
+  base: RawPlay[],
+  durationSec: number,
+): Promise<RawPlay[]> {
+  let plays = base;
+  try {
+    const from1001 = await playsFromDescription1001Links(
+      description,
+      durationSec,
+    );
+    if (from1001.length) {
+      plays = merge1001Plays(plays, from1001);
+      console.log(
+        `[soundcloud] 1001tl ${sourceSlug}: ${from1001.length} plays from description link`,
+      );
+    }
+  } catch (err) {
+    console.warn(
+      `[soundcloud] 1001tl follow failed ${sourceSlug}:`,
+      err instanceof Error ? err.message : err,
+    );
+  }
+  return applyTracklist1001Seed(sourceSlug, plays);
 }
 
 function publishedAtOf(track: ScTrack): Date {
@@ -128,9 +164,11 @@ async function trackToRawSet(
     }
   }
 
-  const plays = applyTracklist1001Seed(
+  const plays = await enrichScPlaysWith1001(
+    track.description,
     sourceSlug,
     mergeTracklistSignals(fromDescription, fromComments),
+    durationSec,
   );
   const artistImage = scImageUrl(track.user?.avatar_url);
   const setImage =
@@ -225,7 +263,12 @@ async function playlistTrackToRawSet(
     }
   }
 
-  const plays = mergeTracklistSignals(fromDescription, fromComments);
+  const plays = await enrichScPlaysWith1001(
+    track.description,
+    sourceSlug,
+    mergeTracklistSignals(fromDescription, fromComments),
+    durationSec,
+  );
   const artistImage = scImageUrl(track.user?.avatar_url);
   const setImage = scImageUrl(track.artwork_url) || artistImage;
   const { primary, collaborators } = artistsForSet(title, undefined, {
@@ -297,9 +340,11 @@ async function trackSeedToRawSet(
     }
   }
 
-  const plays = applyTracklist1001Seed(
+  const plays = await enrichScPlaysWith1001(
+    track.description,
     sourceSlug,
     mergeTracklistSignals(fromDescription, fromComments),
+    durationSec,
   );
   const artistImage = scImageUrl(track.user?.avatar_url);
   const setImage = scImageUrl(track.artwork_url) || artistImage;
