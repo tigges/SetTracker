@@ -26,6 +26,7 @@ import {
   TL_MATTY_RALPH_EDC_LV_2026,
   TL_ENRICO_SANGIULIANO_TML_WE2_2026,
   TL_MISS_MONIQUE_TML_WE2_2026,
+  TL_NICKY_ROMERO_TML_WE2_2026,
   TL_ODD_MOB_TML_WE2_2026,
   TL_NICO_MORENO_EDC_LV_2026,
   TL_PEGASSI_EDC_LV_2026,
@@ -461,6 +462,22 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/16tnb0pk/enrico-sangiuliano-freedom-stage-tomorrowland-weekend-2-belgium-2026-07-24.html",
     tracklist1001: TL_ENRICO_SANGIULIANO_TML_WE2_2026,
+  },
+  {
+    // Tomorrowland official — Mainstage WE2; dense mashup TL (28/76 timed).
+    video: "https://www.youtube.com/watch?v=TsyGMhx8izw",
+    primaryArtist: dj("Nicky Romero", {
+      accent: "#00bbf9",
+      homeCity: "Amerongen, NL",
+    }),
+    genre: "Progressive House",
+    type: "festival",
+    title: "Nicky Romero WE2 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/wkty6z9/nicky-romero-mainstage-tomorrowland-weekend-2-belgium-2026-07-24.html",
+    tracklist1001: TL_NICKY_ROMERO_TML_WE2_2026,
   },
   {
     video: "https://www.youtube.com/watch?v=ObiAocVMTyo",

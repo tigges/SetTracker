@@ -1052,6 +1052,92 @@ export const TL_ENRICO_SANGIULIANO_TML_WE2_2026: FingerprintSeedRow[] = [
 ];
 
 /**
+ * Nicky Romero @ Mainstage, Tomorrowland Weekend 2, Belgium 2026-07-24
+ * Official YT: https://www.youtube.com/watch?v=TsyGMhx8izw (~59:50)
+ * Artist YT: https://www.youtube.com/watch?v=B05MAbsCOLA
+ * 1001TL: https://1001.tl/wkty6z9 — operator console capture 2026-08-01
+ * (28/76 timed cues; missing clocks already lerped in capture).
+ */
+export const TL_NICKY_ROMERO_TML_WE2_2026: FingerprintSeedRow[] = [
+  { at: "0:11", artist: "DubVision & Nicky Romero & Oaks vs. Calvin Harris & Disciples & Ina Wroldsen", title: "Live My Life vs. How Deep Is Your Love (Nicky Romero Mashup)" },
+  { at: "0:59", artist: "Calvin Harris & Disciples ft. Ina Wroldsen", title: "How Deep Is Your Love (Acappella)" },
+  { at: "1:48", artist: "DubVision & Nicky Romero & Oaks", title: "Live My Life" },
+  { at: "2:36", artist: "Martin Garrix & Matisse & Sadko & BARBZ vs. Sander van Doorn & DVBBS & Aleesia", title: "Butterflies vs. Gold Skies (Martin Garrix Mashup)" },
+  { at: "3:09", artist: "Sander van Doorn & Martin Garrix & DVBBS ft. Aleesia", title: "Gold Skies (Acappella)" },
+  { at: "3:43", artist: "Martin Garrix & Matisse & Sadko ft. BARBZ", title: "Butterflies" },
+  { at: "4:16", artist: "VIVID", title: "Gas" },
+  { at: "6:38", artist: "Calvin Harris ft. Florence Welch", title: "Sweet Nothing (Acappella)" },
+  { at: "9:00", artist: "John Summit & HAYLA", title: "Shiver (Cassian Remix)" },
+  { at: "9:55", artist: "Cirez D", title: "On Off (Kapuchon Edit)" },
+  { at: "10:50", artist: "Nicky Romero & SICK INDIVIDUALS vs. Alesso & Tove Lo", title: "Hold On vs. Heroes (We Could Be) (SunJay & Tyo Edit)" },
+  { at: "11:24", artist: "Alesso ft. Tove Lo", title: "Heroes (We Could Be) (Acappella)" },
+  { at: "11:59", artist: "Nicky Romero & SICK INDIVIDUALS", title: "Hold On" },
+  { at: "12:33", artist: "Nicky Romero & Deniz Koyu vs. Avicii & Sandro Cavazza", title: "Destiny vs. Without You (Nicky Romero Mashup)" },
+  { at: "13:22", artist: "Avicii ft. Sandro Cavazza", title: "Without You (Acappella)" },
+  { at: "14:11", artist: "Nicky Romero & Deniz Koyu ft. Alexander Tidebrink", title: "Destiny" },
+  { at: "15:00", artist: "Nicky Romero & SMACK vs. Eric Prydz & Tom Cane", title: "Generate vs. Funky Bitz (Nicky Romero Mashup)" },
+  { at: "15:36", artist: "Eric Prydz ft. Tom Cane", title: "Generate" },
+  { at: "16:13", artist: "Nicky Romero & SMACK", title: "Funky Bitz" },
+  { at: "16:49", artist: "The Temper Trap", title: "Sweet Disposition (John Summit & Silver Panda Remix)" },
+  { at: "18:40", artist: "AFROJACK & Martin Garrix & David Guetta & Amél vs. Rihanna", title: "Our Time vs. Right Now (Nicky Romero Mashup)" },
+  { at: "19:06", artist: "Rihanna ft. David Guetta", title: "Right Now (Acappella)" },
+  { at: "19:32", artist: "AFROJACK & Martin Garrix & David Guetta & Amél ft. Zack Hall", title: "Our Time" },
+  { at: "19:57", artist: "Mesto", title: "Listen To Me" },
+  { at: "20:40", artist: "Nicky Romero & Third ≡ Party vs. David Guetta & Benny Benassi vs. MAKJ & M35 vs. MEDUZA & GOODBOYS vs. Faithless vs. FISHER", title: "For The People vs. Satisfaction vs. GO vs. Piece Of Your Heart vs. Insomnia vs. You Little Beauty (Nicky Romero Mashup)" },
+  { at: "20:50", artist: "Faithless", title: "Insomnia" },
+  { at: "21:00", artist: "MAKJ & M35", title: "GO (It's Time To Go If You Don't Dig Techno Acappella)" },
+  { at: "21:10", artist: "FISHER", title: "You Little Beauty" },
+  { at: "21:21", artist: "MEDUZA ft. GOODBOYS", title: "Piece Of Your Heart" },
+  { at: "21:31", artist: "David Guetta vs. Benny Benassi", title: "Satisfaction" },
+  { at: "21:42", artist: "Nicky Romero & Third ≡ Party", title: "For The People" },
+  { at: "21:52", artist: "Matisse & Sadko & Vion Konger & Scrufizzer vs. Nicky Romero vs. Zedd & Foxes", title: "Pull Up vs. Toulouse vs. Clarity (Nicky Romero Mashup)" },
+  { at: "22:12", artist: "Nicky Romero", title: "Toulouse" },
+  { at: "22:32", artist: "Zedd ft. Foxes", title: "Clarity (Acappella)" },
+  { at: "22:52", artist: "Matisse & Sadko & Vion Konger ft. Scrufizzer", title: "Pull Up" },
+  { at: "23:12", artist: "Calvin Harris & Alesso ft. Hurts", title: "Under Control" },
+  { at: "24:45", artist: "Nicky Romero & Almero ft. Grace Barton", title: "Run To You" },
+  { at: "26:16", artist: "HUGEL & Imael Angel & Ultra Naté", title: "Movin' To The Sun" },
+  { at: "27:55", artist: "ABBA & HÄWK vs. Loud 'N Bright & Nicky Romero vs. Gala", title: "Gimme Gimme Gimme vs. To The Floor vs. Freed From Desire (Nicky Romero Mashup)" },
+  { at: "28:19", artist: "Gala", title: "Freed From Desire" },
+  { at: "28:43", artist: "ABBA", title: "Gimme! Gimme! Gimme! (A Man After Midnight) (HÄWK VIP Edit)" },
+  { at: "29:07", artist: "Loud 'N Bright", title: "To The Floor (Nicky Romero Edit)" },
+  { at: "29:30", artist: "Swedish House Mafia ft. Pharrell Williams", title: "One (Your Name)" },
+  { at: "30:28", artist: "Nicky Romero", title: "Freak" },
+  { at: "31:26", artist: "Nicky Romero", title: "Chase The Sun" },
+  { at: "33:23", artist: "Martin Garrix & Dua Lipa", title: "Scared To Be Lonely (Acappella)" },
+  { at: "35:20", artist: "Martin Garrix & Third ≡ Party vs. Nicky Romero & NERVO", title: "Carry You vs. Like Home (Nicky Romero Mashup)" },
+  { at: "35:45", artist: "Nicky Romero & NERVO", title: "Like Home (Acappella)" },
+  { at: "36:10", artist: "Martin Garrix & Third ≡ Party ft. Oaks & Declan J Donovan", title: "Carry You" },
+  { at: "36:35", artist: "Matisse & Sadko vs. Adele", title: "Himalaya vs. Rolling In The Deep (Matisse & Sadko Mashup)" },
+  { at: "37:15", artist: "Adele", title: "Rolling In The Deep (Acappella)" },
+  { at: "37:55", artist: "Matisse & Sadko", title: "Himalaya" },
+  { at: "38:35", artist: "ANOTR ft. 54 Ultra", title: "Talk To You" },
+  { at: "39:15", artist: "Nicky Romero ft. FORS", title: "Follow You" },
+  { at: "41:20", artist: "Nicky Romero & SICK INDIVIDUALS", title: "Who We Are" },
+  { at: "42:05", artist: "Axwell Λ Ingrosso ft. Trevor Guthrie", title: "Dreamer" },
+  { at: "42:50", artist: "Sebastian Ingrosso & Tommy Trash & John Martin vs. Swedish House Mafia vs. Justin Bieber & Nicki Minaj vs. Green Velvet & Nicky Romero", title: "Reload vs. Save The World vs. Beauty And A Beat vs. Flash (SunJay & Fuerte Tomorrowland Mashup)" },
+  { at: "43:15", artist: "Swedish House Mafia ft. John Martin", title: "Save The World" },
+  { at: "43:40", artist: "Sebastian Ingrosso & Tommy Trash & John Martin vs. Green Velvet & Nicky Romero", title: "Reload vs. Flash (Axwell Λ Ingrosso Mashup)" },
+  { at: "44:05", artist: "Justin Bieber ft. Nicki Minaj", title: "Beauty And A Beat" },
+  { at: "44:30", artist: "Third ≡ Party & Mark Roma", title: "Shut Up (Nicky Romero Edit)" },
+  { at: "44:55", artist: "Kid Cudi ft. MGMT & Ratatat & Steve Aoki vs. Dimitri Vegas & Like Mike & MOGUAI", title: "Pursuit Of Happiness vs. Mammoth (Dimitri Vegas & Like Mike Mashup)" },
+  { at: "45:48", artist: "Kid Cudi ft. MGMT & Ratatat", title: "Pursuit Of Happiness (Steve Aoki Remix)" },
+  { at: "46:42", artist: "Dimitri Vegas & MOGUAI & Like Mike", title: "Mammoth" },
+  { at: "47:35", artist: "Hardwell & Nicky Romero ft. MERYLL", title: "I Wanna Dance" },
+  { at: "48:48", artist: "Marlon Hoffstadt aka DJ Daddy Trance", title: "It's That Time" },
+  { at: "50:00", artist: "Matisse & Sadko vs. Nicky Romero & Vicetone & When We Are Wild", title: "Endless Sunrise vs. Let Me Feel (SunJay & Fuerte Mashup)" },
+  { at: "50:32", artist: "Nicky Romero & Vicetone ft. When We Are Wild", title: "Let Me Feel (Acappella)" },
+  { at: "51:05", artist: "Matisse & Sadko", title: "Endless Sunrise" },
+  { at: "51:37", artist: "Avicii ft. Simon Aldred", title: "Waiting For Love" },
+  { at: "52:13", artist: "Martin Garrix vs. Dimitri Vegas & Like Mike vs. Avicii ft. Simon Aldred", title: "Tremor vs. Waiting For Love (Martin Garrix Mashup)" },
+  { at: "52:49", artist: "Dimitri Vegas & Like Mike & Martin Garrix", title: "Tremor (Sensation 2014 Anthem)" },
+  { at: "53:25", artist: "Avicii ft. Simon Aldred", title: "Waiting For Love (Acappella)" },
+  { at: "54:00", artist: "Avicii & Nicky Romero ft. Noonie Bao", title: "I Could Be The One" },
+  { at: "56:45", artist: "Justice", title: "D.A.N.C.E. (Acappella)" },
+  { at: "59:30", artist: "Porter Robinson ft. Bright Lights", title: "Language" },
+];
+
+/**
  * Layton Giordani @ circuitGROUNDS closing, EDC Las Vegas 2025-05-16
  * Official SC: https://soundcloud.com/laytongiordani/layton-giordani-live-edc-las-vegas-circuit-grounds-closing-set-2025 (~59:40)
  * 1001TL: https://1001.tl/bt007st — operator console capture 2026-08-01
@@ -2027,6 +2113,8 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-2idboK_vTT8": TL_ODD_MOB_TML_WE2_2026,
   "yt-WhPtvotfYbc": TL_MISS_MONIQUE_TML_WE2_2026,
   "yt-ubFrkYGGqo8": TL_ENRICO_SANGIULIANO_TML_WE2_2026,
+  "yt-TsyGMhx8izw": TL_NICKY_ROMERO_TML_WE2_2026,
+  "yt-B05MAbsCOLA": TL_NICKY_ROMERO_TML_WE2_2026,
 };
 
 /** Sanity: every seeded clock must parse. */

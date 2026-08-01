@@ -20,6 +20,7 @@ import {
   TL_MARTEN_HORGER_PAROOKAVILLE_2026,
   TL_MATTY_RALPH_EDC_LV_2026,
   TL_MISS_MONIQUE_TML_WE2_2026,
+  TL_NICKY_ROMERO_TML_WE2_2026,
   TL_NICO_MORENO_EDC_LV_2026,
   TL_NICO_MORENO_HOLY_PRIEST_EDC_LV_2026,
   TL_ODD_MOB_EDC_LV_2025,
@@ -444,5 +445,24 @@ for (const p of enrico) {
   enricoPrev = p.timestamp;
 }
 assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-ubFrkYGGqo8"]!.length >= 19);
+
+assertSeedClocks(TL_NICKY_ROMERO_TML_WE2_2026);
+const nicky = tracklist1001RowsToPlays(TL_NICKY_ROMERO_TML_WE2_2026);
+assert.equal(nicky.length, 76);
+assert.match(nicky[0]!.trackTitle!, /Live My Life vs\. How Deep/);
+assert.equal(nicky[nicky.length - 1]!.trackTitle, "Language");
+let nickyPrev = -1;
+for (const p of nicky) {
+  assert.ok(
+    p.timestamp >= nickyPrev,
+    `Nicky Romero TML clocks must not go back @ ${p.timestamp}`,
+  );
+  nickyPrev = p.timestamp;
+}
+assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-TsyGMhx8izw"]!.length >= 76);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-B05MAbsCOLA"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-TsyGMhx8izw"],
+);
 
 console.log("tracklists1001/seeds.test.ts ok");
