@@ -10,6 +10,7 @@ import {
   TL_DARUDE_EDC_LV_2026,
   TL_LAYTON_GIORDANI_EDC_LV_2025_CLOSING,
   TL_MARTEN_HORGER_EDC_LV_2023,
+  TL_MAX_STYLER_EDC_LV_2024,
   TL_MARTEN_HORGER_PAROOKAVILLE_2026,
   TL_ODD_MOB_EDC_LV_2025,
   TL_WAX_MOTIF_EDC_LV_2021,
@@ -208,6 +209,21 @@ assert.ok(
   TRACKLIST_1001_BY_SOURCE_SLUG[
     "sc-laytongiordani-layton-giordani-live-edc-las-vegas-circuit-grounds-closing-set-2025"
   ]!.length >= 20,
+);
+
+assertSeedClocks(TL_MAX_STYLER_EDC_LV_2024);
+const maxStyler = tracklist1001RowsToPlays(TL_MAX_STYLER_EDC_LV_2024);
+assert.equal(maxStyler.length, 20);
+assert.equal(maxStyler[0]!.trackTitle, "Lights Out");
+assert.equal(maxStyler[maxStyler.length - 1]!.trackTitle, "Work It");
+let msPrev = -1;
+for (const p of maxStyler) {
+  assert.ok(p.timestamp > msPrev, `Max Styler clocks must increase @ ${p.timestamp}`);
+  msPrev = p.timestamp;
+}
+assert.ok(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-maxstyler-max-styler-live-edc-vegas-2024"]!
+    .length >= 18,
 );
 
 console.log("tracklists1001/seeds.test.ts ok");

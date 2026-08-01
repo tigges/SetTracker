@@ -956,6 +956,75 @@ export const TL_LAYTON_GIORDANI_EDC_LV_2025_CLOSING: FingerprintSeedRow[] = [
   },
 ];
 
+/**
+ * Max Styler @ stereoBLOOM, EDC Las Vegas 2024-05-17
+ * Official SC: https://soundcloud.com/maxstyler/max-styler-live-edc-vegas-2024 (~58:56)
+ * 1001TL: https://1001.tl/2syc45z9 — operator console capture 2026-08-01
+ * (16/20 timed cues; gaps interpolated).
+ */
+export const TL_MAX_STYLER_EDC_LV_2024: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "Max Styler", title: "Lights Out" },
+  { at: "4:00", artist: "Max Styler & Gorgon City", title: "Touch" },
+  { at: "7:00", artist: "Max Styler", title: "Time To Go" },
+  {
+    at: "11:00",
+    artist: "Max Styler vs. Tiga & Audion",
+    title: "Hypnotic vs. Let's Go Dancing (Max Styler Edit)",
+  },
+  {
+    at: "12:00",
+    artist: "Tiga vs. Audion",
+    title: "Let's Go Dancing (Acappella)",
+  },
+  { at: "13:00", artist: "Max Styler", title: "Hypnotic" },
+  {
+    at: "14:00",
+    artist: "Adam Ten & Maori",
+    title: "Spring Girl (Max Styler Remix)",
+  },
+  { at: "17:10", artist: "Arude", title: "Your Move" },
+  {
+    at: "20:25",
+    artist: "Westend & Max Styler",
+    title: "Rhythm Machine",
+  },
+  {
+    at: "24:05",
+    artist: "Max Styler & FRANCO BA",
+    title: "Rock The House",
+  },
+  { at: "27:45", artist: "Loofy", title: "Last Night" },
+  { at: "30:45", artist: "Max Styler", title: "Kiki" },
+  { at: "34:00", artist: "Cloonee", title: "Sippin' Yak" },
+  { at: "35:38", artist: "Clüb De Combat", title: "Exciter" },
+  {
+    at: "37:15",
+    artist: "Max Styler & Vintage Culture & Ali Love",
+    title: "Freaky 1",
+  },
+  {
+    at: "40:40",
+    artist: "Chris Lake & Green Velvet",
+    title: "Deceiver (Max Styler Remix)",
+  },
+  { at: "43:40", artist: "Max Styler", title: "Follow Me" },
+  {
+    at: "47:20",
+    artist: "Max Styler & GENESI",
+    title: "See You Sweat",
+  },
+  {
+    at: "52:10",
+    artist: "Pleasurekraft",
+    title: "Tarantula (Max Styler Remix)",
+  },
+  {
+    at: "55:40",
+    artist: "Dom Dolla & Max Styler",
+    title: "Work It",
+  },
+];
+
 /** sourceSlug → curated 1001TL seed (SC / YT when live HTML is CF-blocked). */
 export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   string,
@@ -973,6 +1042,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
     TL_ODD_MOB_EDC_LV_2025,
   "sc-laytongiordani-layton-giordani-live-edc-las-vegas-circuit-grounds-closing-set-2025":
     TL_LAYTON_GIORDANI_EDC_LV_2025_CLOSING,
+  "sc-maxstyler-max-styler-live-edc-vegas-2024": TL_MAX_STYLER_EDC_LV_2024,
   "yt-yXHoHK_jQvc": TL_AHEE_LIQUID_STRANGER_EDC_LV_2026,
   "yt-dXBoIY65P8s": TL_DARUDE_EDC_LV_2026,
   "yt-c_sx3zum8Z0": TL_BLEU_CLAIR_EDC_LV_2023,
