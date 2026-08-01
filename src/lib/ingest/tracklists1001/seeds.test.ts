@@ -9,6 +9,7 @@ import {
   TL_DARUDE_EDC_LV_2026,
   TL_MARTEN_HORGER_EDC_LV_2023,
   TL_MARTEN_HORGER_PAROOKAVILLE_2026,
+  TL_WAX_MOTIF_EDC_LV_2021,
   TL_WESTEND_EDC_LV_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   tracklist1001RowsToPlays,
@@ -144,5 +145,20 @@ for (const p of bleu) {
 }
 assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-c_sx3zum8Z0"]!.length >= 18);
 assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["sc-bleuclair-edclv2023"]!.length >= 18);
+
+assertSeedClocks(TL_WAX_MOTIF_EDC_LV_2021);
+const wax = tracklist1001RowsToPlays(TL_WAX_MOTIF_EDC_LV_2021);
+assert.equal(wax.length, 25);
+assert.equal(wax[0]!.trackTitle, "Pink Soldiers (Squid Game OST)");
+assert.equal(wax[wax.length - 1]!.trackTitle, "Need You");
+let waxPrev = -1;
+for (const p of wax) {
+  assert.ok(p.timestamp > waxPrev, `Wax Motif clocks must increase @ ${p.timestamp}`);
+  waxPrev = p.timestamp;
+}
+assert.ok(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-waxmotif-wax-motif-live-edc-2021"]!
+    .length >= 20,
+);
 
 console.log("tracklists1001/seeds.test.ts ok");

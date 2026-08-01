@@ -581,7 +581,7 @@ export const TL_BLEU_CLAIR_EDC_LV_2023: FingerprintSeedRow[] = [
   { at: "0:00", artist: "Bleu Clair", title: "Mean Sumthin" },
   {
     at: "6:45",
-    artist: "Chris Lake & Chris Lorenzo present Anti Up",
+    artist: "Chris Lake & Chris Lorenzo pres. Anti Up",
     title: "Right Now (Bleu Clair Remix)",
   },
 
@@ -641,6 +641,100 @@ export const TL_BLEU_CLAIR_EDC_LV_2023: FingerprintSeedRow[] = [
   { at: "59:30", artist: "Bleu Clair", title: "Mistake" },
 ];
 
+/**
+ * Wax Motif @ cosmicMEADOW, EDC Las Vegas 2021-10-24
+ * Official SC: https://soundcloud.com/waxmotif/wax-motif-live-edc-2021 (~57:33)
+ * 1001TL: https://1001.tl/2pzx4mbk — operator console capture 2026-08-01
+ * (25/25 timed cues).
+ */
+export const TL_WAX_MOTIF_EDC_LV_2021: FingerprintSeedRow[] = [
+  { at: "0:01", artist: "23", title: "Pink Soldiers (Squid Game OST)" },
+  {
+    at: "3:19",
+    artist: "Drake ft. Future & Young Thug",
+    title: "Way 2 Sexy (Valentino Khan Remix)",
+  },
+  {
+    at: "4:36",
+    artist: "J Balvin & Skrillex",
+    title: "In Da Getto (Chris Lorenzo Remix)",
+  },
+  { at: "7:48", artist: "Trikshaw", title: "Skylift" },
+  { at: "8:53", artist: "Malaa", title: "Who I Am" },
+  { at: "12:50", artist: "Nelly", title: "Hot In Herre" },
+  {
+    at: "16:50",
+    artist: "Chris Lorenzo ft. High Jinx",
+    title: "California Dreamin'",
+  },
+  {
+    at: "19:49",
+    artist: "Wax Motif & Shahay ft. Scrufizzer",
+    title: "Come Again",
+  },
+  {
+    at: "22:57",
+    artist: "Wax Motif",
+    title: "Keep Raving (Qlank Remix)",
+  },
+  { at: "26:00", artist: "Honey & Badger & Hooders", title: "Fuse" },
+  { at: "28:10", artist: "MPH", title: "Barrington" },
+  {
+    at: "29:29",
+    artist: "Wax Motif & ALRT & Nessly",
+    title: "Hard Street",
+  },
+  {
+    at: "31:21",
+    artist: "Chris Lake & Chris Lorenzo pres. Anti Up",
+    title: "Something's About To Go Down",
+  },
+  {
+    at: "33:35",
+    artist: "Matroda & Sage Armstrong & Rhiannon Roze",
+    title: "Ur Mind",
+  },
+  { at: "35:36", artist: "BassBoy", title: "Got A Groove" },
+  {
+    at: "37:44",
+    artist: "AC Slater & Chris Lorenzo",
+    title: "Fly With Us",
+  },
+  {
+    at: "39:18",
+    artist: "Taiki Nulight & Wax Motif ft. Scrufizzer",
+    title: "Skank N Flex",
+  },
+  { at: "41:04", artist: "Busta Rhymes", title: "Touch It" },
+  { at: "42:53", artist: "Wax Motif", title: "Wet" },
+  { at: "44:33", artist: "KOHMI", title: "San Francisco" },
+  {
+    at: "45:36",
+    artist: "AC Slater & Chris Lorenzo",
+    title: "Fly Kicks (Wax Motif Remix)",
+  },
+  {
+    at: "49:01",
+    artist: "Wax Motif ft. Diddy",
+    title: "Divided Souls",
+  },
+  {
+    at: "53:49",
+    artist: "RÜFÜS DU SOL",
+    title: "Innerbloom (H.O.S.H. Remix)",
+  },
+  {
+    at: "56:14",
+    artist: "Chris Lake & Chris Lorenzo pres. Anti Up",
+    title: "Shake",
+  },
+  {
+    at: "57:15",
+    artist: "Wax Motif & Phlegmatic Dogs",
+    title: "Need You",
+  },
+];
+
 /** sourceSlug → curated 1001TL seed (SC / YT when live HTML is CF-blocked). */
 export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   string,
@@ -652,6 +746,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "sc-itsthewestend-westend-live-edc-2026": TL_WESTEND_EDC_LV_2026,
   "sc-cidmusic-cid-edc-lv-2017": TL_CID_EDC_LV_2017,
   "sc-bleuclair-edclv2023": TL_BLEU_CLAIR_EDC_LV_2023,
+  "sc-waxmotif-wax-motif-live-edc-2021": TL_WAX_MOTIF_EDC_LV_2021,
   "yt-yXHoHK_jQvc": TL_AHEE_LIQUID_STRANGER_EDC_LV_2026,
   "yt-dXBoIY65P8s": TL_DARUDE_EDC_LV_2026,
   "yt-c_sx3zum8Z0": TL_BLEU_CLAIR_EDC_LV_2023,
