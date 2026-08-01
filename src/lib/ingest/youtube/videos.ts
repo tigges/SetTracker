@@ -24,6 +24,7 @@ import {
   TL_FUNK_TRIBU_EDC_LV_2026,
   TL_HOLY_PRIEST_EDC_LV_2026,
   TL_MATTY_RALPH_EDC_LV_2026,
+  TL_ODD_MOB_TML_WE2_2026,
   TL_NICO_MORENO_EDC_LV_2026,
   TL_PEGASSI_EDC_LV_2026,
   TL_SARAH_DE_WARREN_EDC_LV_2026,
@@ -410,6 +411,22 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/gld216t/holy-priest-circuitgrounds-edc-las-vegas-united-states-2026-05-15.html",
     tracklist1001: TL_HOLY_PRIEST_EDC_LV_2026,
+  },
+  {
+    // Tomorrowland official — Mainstage WE2; 13/18 timed cues from 1001.
+    video: "https://www.youtube.com/watch?v=2idboK_vTT8",
+    primaryArtist: dj("Odd Mob", {
+      accent: "#b8f200",
+      homeCity: "Brisbane, AU",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    title: "Odd Mob WE2 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/qz04ypk/odd-mob-mainstage-tomorrowland-weekend-2-belgium-2026-07-26.html",
+    tracklist1001: TL_ODD_MOB_TML_WE2_2026,
   },
   {
     video: "https://www.youtube.com/watch?v=ObiAocVMTyo",

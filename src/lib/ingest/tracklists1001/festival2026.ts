@@ -876,6 +876,65 @@ export const TL_ODD_MOB_EDC_LV_2025: FingerprintSeedRow[] = [
 ];
 
 /**
+ * Odd Mob @ Mainstage, Tomorrowland Weekend 2, Belgium 2026-07-26
+ * Official YT: https://www.youtube.com/watch?v=2idboK_vTT8 (~60:27)
+ * 1001TL: https://1001.tl/qz04ypk — operator console capture 2026-08-01
+ * (13/18 timed cues; missing clocks already lerped in capture).
+ */
+export const TL_ODD_MOB_TML_WE2_2026: FingerprintSeedRow[] = [
+  { at: "0:12", artist: "Odd Mob & GOODBOYS", title: "Undeniable" },
+  {
+    at: "3:55",
+    artist: "Chris Lake & Abel Balder",
+    title: "Ease My Mind (Odd Mob Remix)",
+  },
+  {
+    at: "3:56",
+    artist: "Etta James",
+    title: "Something's Got A Hold On Me (Acappella)",
+  },
+  { at: "8:04", artist: "Odd Mob", title: "How To Do It" },
+  {
+    at: "11:25",
+    artist: "Odd Mob ft. Luciana",
+    title: "Rock The Rhythm (I Like That)",
+  },
+  { at: "14:22", artist: "Michael Jackson", title: "Thriller (Odd Mob Edit)" },
+  { at: "21:07", artist: "Odd Mob ft. Lizzy Land", title: "Never Alone" },
+  { at: "24:14", artist: "Odd Mob", title: "LEFT TO RIGHT" },
+  {
+    at: "27:20",
+    artist: "Tiësto & Odd Mob & GOODBOYS",
+    title: "Won't Be Possible",
+  },
+  {
+    at: "33:35",
+    artist: "Odd Mob & OMNOM pres. HYPERBEAM",
+    title: "Coming Up (It's Dare)",
+  },
+  {
+    at: "36:45",
+    artist: "John Summit & venbee",
+    title: "palm of my hands (Odd Mob Remix)",
+  },
+  { at: "40:06", artist: "Mau P", title: "Like I Like It" },
+  {
+    at: "43:27",
+    artist: "50 Cent ft. Olivia",
+    title: "Candy Shop (Odd Mob Remix)",
+  },
+  {
+    at: "49:22",
+    artist: "Chris Lake",
+    title: "Lose My Mind (Walker & Royce Remix)",
+  },
+  { at: "51:14", artist: "Riton & Kah-Lo", title: "Fake ID" },
+  { at: "53:05", artist: "Odd Mob & OMNOM", title: "Losing Control" },
+  { at: "56:18", artist: "Trudge & CAIVA", title: "Shades Of Hesitation" },
+  { at: "59:30", artist: "Coco Star", title: "I Need A Miracle (Acappella)" },
+];
+
+/**
  * Layton Giordani @ circuitGROUNDS closing, EDC Las Vegas 2025-05-16
  * Official SC: https://soundcloud.com/laytongiordani/layton-giordani-live-edc-las-vegas-circuit-grounds-closing-set-2025 (~59:40)
  * 1001TL: https://1001.tl/bt007st — operator console capture 2026-08-01
@@ -1848,6 +1907,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-FZ7pwlNdwBk": TL_MATTY_RALPH_EDC_LV_2026,
   "yt-APt5j9Abwo8": TL_FUNK_TRIBU_EDC_LV_2026,
   "yt-D8eLxmifH4o": TL_HOLY_PRIEST_EDC_LV_2026,
+  "yt-2idboK_vTT8": TL_ODD_MOB_TML_WE2_2026,
 };
 
 /** Sanity: every seeded clock must parse. */

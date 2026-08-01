@@ -21,6 +21,7 @@ import {
   TL_NICO_MORENO_EDC_LV_2026,
   TL_NICO_MORENO_HOLY_PRIEST_EDC_LV_2026,
   TL_ODD_MOB_EDC_LV_2025,
+  TL_ODD_MOB_TML_WE2_2026,
   TL_PEGASSI_EDC_LV_2026,
   TL_SARAH_DE_WARREN_EDC_LV_2026,
   TL_SOLOMUN_EDC_LV_2026,
@@ -395,5 +396,20 @@ assert.equal(holyTml[0]!.trackTitle, "Ameno");
 assert.equal(holyTml[holyTml.length - 1]!.trackTitle, "Holy Atlantis");
 // No official TML Relive yet — seed held.
 assert.equal(TRACKLIST_1001_BY_SOURCE_SLUG["yt-OlNdG4SCPdQ"], undefined);
+
+assertSeedClocks(TL_ODD_MOB_TML_WE2_2026);
+const oddMobTml = tracklist1001RowsToPlays(TL_ODD_MOB_TML_WE2_2026);
+assert.equal(oddMobTml.length, 18);
+assert.equal(oddMobTml[0]!.trackTitle, "Undeniable");
+assert.match(oddMobTml[oddMobTml.length - 1]!.trackTitle!, /I Need A Miracle/);
+let omTmlPrev = -1;
+for (const p of oddMobTml) {
+  assert.ok(
+    p.timestamp >= omTmlPrev,
+    `Odd Mob TML clocks must not go back @ ${p.timestamp}`,
+  );
+  omTmlPrev = p.timestamp;
+}
+assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-2idboK_vTT8"]!.length >= 18);
 
 console.log("tracklists1001/seeds.test.ts ok");
