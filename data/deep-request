@@ -1,7 +1,8 @@
 # Bump the timestamp below (and merge to main) to start Catalog deep refresh.
 # Used when workflow_dispatch is unavailable to the actor.
-requestedAt: 2026-08-01T13:20:00Z
-reason: DV B2B Nico Moreno TML WE2 + CYRIL + James Hype Melkweg 1001 seeds
-Dimitri Vegas B2B Nico Moreno Great Library TML WE2 2026-07-26 — yt-OTKgBZS8if0 (35 cues, 1001 1091bm11)
-CYRIL Mainstage Tomorrowland WE2 2026-07-26 — yt-DAOlnMYA3nU (24 cues evenly spaced, 1001 l9zzj79)
-James Hype Get Closer Melkweg ADE 2025-10-23 — yt-QThaqlzSqLw (51 cues, 1001 1g6h49l1)
+requestedAt: 2026-08-01T13:30:00Z
+reason: Push Freedom Stage TML WE2 + prior Melkweg/CYRIL/DV B2B 1001 seeds
+Push Freedom Stage Tomorrowland WE2 2026-07-26 — yt-KVZlecHlVkg (16 cues, 1001 2c3yctl1)
+Dimitri Vegas B2B Nico Moreno Great Library TML WE2 — yt-OTKgBZS8if0
+CYRIL Mainstage Tomorrowland WE2 — yt-DAOlnMYA3nU
+James Hype Get Closer Melkweg ADE — yt-QThaqlzSqLw

@@ -25,6 +25,7 @@ import {
   TL_HOLY_PRIEST_TML_WE1_2026,
   TL_CYRIL_TML_WE2_2026,
   TL_DARREN_STYLES_TML_WE2_2026,
+  TL_PUSH_TML_WE2_2026,
   TL_JAMES_HYPE_MELKWEG_ADE_2025,
   TL_JAMES_HYPE_TML_WE2_2026,
   TL_JOHN_SUMMIT_TML_WE2_2026,
@@ -827,5 +828,21 @@ for (const p of cyril) {
   cyrilPrev = p.timestamp;
 }
 assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-DAOlnMYA3nU"]!.length >= 24);
+
+assertSeedClocks(TL_PUSH_TML_WE2_2026);
+const pushTml = tracklist1001RowsToPlays(TL_PUSH_TML_WE2_2026);
+assert.equal(pushTml.length, 16);
+assert.match(pushTml[0]!.trackTitle!, /Strange World/);
+assert.equal(pushTml[pushTml.length - 1]!.trackTitle, "Iguana Party");
+assert.equal(pushTml[pushTml.length - 1]!.timestamp, 55 * 60 + 36);
+let pushPrev = -1;
+for (const p of pushTml) {
+  assert.ok(
+    p.timestamp >= pushPrev,
+    `Push TML clocks must not go back @ ${p.timestamp}`,
+  );
+  pushPrev = p.timestamp;
+}
+assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-KVZlecHlVkg"]!.length >= 16);
 
 console.log("tracklists1001/seeds.test.ts ok");

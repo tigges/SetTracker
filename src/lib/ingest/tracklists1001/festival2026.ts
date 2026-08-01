@@ -2751,6 +2751,31 @@ export const TL_CYRIL_TML_WE2_2026: FingerprintSeedRow[] = evenlySpaceRows(
 );
 
 /**
+ * Push @ Freedom Stage, Tomorrowland Weekend 2, Belgium 2026-07-26
+ * Official YT: https://www.youtube.com/watch?v=KVZlecHlVkg
+ * 1001TL: https://1001.tl/2c3yctl1 — operator console capture 2026-08-01
+ * (16/16 timed cues).
+ */
+export const TL_PUSH_TML_WE2_2026: FingerprintSeedRow[] = [
+  { at: "0:12", artist: "M.I.K.E. pres. Push", title: "Strange World (2000 Remake)" },
+  { at: "4:17", artist: "Adam Beyer & Bart Skils", title: "Your Mind" },
+  { at: "5:36", artist: "KASIA", title: "Universal Nation" },
+  { at: "9:12", artist: "Transaphonic", title: "Milky Way" },
+  { at: "14:55", artist: "Plastic Boy", title: "Silver Bath (Charles D (USA) Remix)" },
+  { at: "18:16", artist: "Huvagen", title: "Don't Call Me" },
+  { at: "22:34", artist: "Push", title: "Drive By" },
+  { at: "26:03", artist: "Nemke", title: "Stampedo" },
+  { at: "30:06", artist: "Moonman & Ferry Corsten & Joris Voorn", title: "Don't Be Afraid" },
+  { at: "33:46", artist: "Adriatique & Elderbrook", title: "Lost In The Woods" },
+  { at: "37:43", artist: "Thomas Gandey & Glusko", title: "Conversations (Wehbba Remix)" },
+  { at: "41:52", artist: "Push", title: "Tronesque" },
+  { at: "44:29", artist: "Cassian & YOTTO & Da Hool", title: "Love Parade" },
+  { at: "47:44", artist: "M.I.K.E. Push & KAS:ST", title: "Strange World" },
+  { at: "52:05", artist: "Push", title: "Universal Nation (Bart Skils Remix)" },
+  { at: "55:36", artist: "Steve Brian & talkofthetown", title: "Iguana Party" },
+];
+
+/**
  * Layton Giordani @ circuitGROUNDS closing, EDC Las Vegas 2025-05-16
  * Official SC: https://soundcloud.com/laytongiordani/layton-giordani-live-edc-las-vegas-circuit-grounds-closing-set-2025 (~59:40)
  * 1001TL: https://1001.tl/bt007st — operator console capture 2026-08-01
@@ -3745,6 +3770,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-8-J01-hcHfA": TL_STEVE_AOKI_TML_WE2_2026,
   "yt-DAOlnMYA3nU": TL_CYRIL_TML_WE2_2026,
   "yt-OTKgBZS8if0": TL_DIMITRI_VEGAS_NICO_MORENO_TML_WE2_2026,
+  "yt-KVZlecHlVkg": TL_PUSH_TML_WE2_2026,
 };
 
 /** Sanity: every seeded clock must parse. */
