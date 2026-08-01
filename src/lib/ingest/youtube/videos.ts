@@ -31,6 +31,7 @@ import {
   TL_HARDWELL_TML_WE2_2026,
   TL_CYRIL_TML_WE2_2026,
   TL_DIMITRI_VEGAS_NICO_MORENO_TML_WE2_2026,
+  TL_BASSJACKERS_TML_WE2_2026,
   TL_PUSH_TML_WE2_2026,
   TL_JAMES_HYPE_MELKWEG_ADE_2025,
   TL_JAMES_HYPE_TML_WE2_2026,
@@ -767,6 +768,22 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/2c3yctl1/push-freedom-stage-tomorrowland-weekend-2-belgium-2026-07-26.html",
     tracklist1001: TL_PUSH_TML_WE2_2026,
+  },
+  {
+    // Tomorrowland official — Great Library WE2; 26/36 timed (rest lerped).
+    video: "https://www.youtube.com/watch?v=BG3Lr9EdWVY",
+    primaryArtist: dj("Bassjackers", {
+      accent: "#e63946",
+      homeCity: "Netherlands",
+    }),
+    genre: "Big Room",
+    type: "festival",
+    title: "Bassjackers WE2 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1muwkg71/bassjackers-the-great-library-stage-tomorrowland-weekend-2-belgium-2026-07-26.html",
+    tracklist1001: TL_BASSJACKERS_TML_WE2_2026,
   },
   {
     video: "https://www.youtube.com/watch?v=ObiAocVMTyo",

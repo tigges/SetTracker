@@ -2776,6 +2776,83 @@ export const TL_PUSH_TML_WE2_2026: FingerprintSeedRow[] = [
 ];
 
 /**
+ * Bassjackers @ The Great Library Stage, Tomorrowland Weekend 2, Belgium 2026-07-26
+ * Official YT: https://www.youtube.com/watch?v=BG3Lr9EdWVY
+ * 1001TL: https://1001.tl/1muwkg71 — operator console capture 2026-08-01
+ * (26/36 timed cues; missing clocks already lerped in capture).
+ */
+export const TL_BASSJACKERS_TML_WE2_2026: FingerprintSeedRow[] = [
+  { at: "0:11", artist: "Bassjackers & WUKONG & Evil Twiin", title: "Rave Baby" },
+  {
+    at: "1:17",
+    artist: "Mesto vs. Fallon",
+    title: "Caramelle vs. Diet Coke (Bassjackers TECH BOUNCE Edit)",
+  },
+  { at: "1:38", artist: "Fallon", title: "Diet Coke" },
+  { at: "2:00", artist: "Mesto", title: "Caramelle" },
+  {
+    at: "2:21",
+    artist: "Teriyaki Boyz vs. Gwen Stefani",
+    title: "Tokio Drift vs. Hollaback Girl (Macon 148 BPM Remix)",
+  },
+  { at: "3:29", artist: "Gwen Stefani", title: "Hollaback Girl" },
+  {
+    at: "4:38",
+    artist: "Teriyaki Boyz",
+    title: "Tokyo Drift (The Fast And The Furious: Tokyo Drift OST)",
+  },
+  { at: "5:46", artist: "Bassjackers & Charlie Sparks", title: "Jump Around" },
+  { at: "10:23", artist: "Bassjackers", title: "Fuego" },
+  { at: "12:38", artist: "Underworld", title: "Born Slippy" },
+  { at: "13:37", artist: "Luciid", title: "Bye Bye (NOVAH Remix)" },
+  {
+    at: "14:36",
+    artist: "Benny Benassi pres. The Biz",
+    title: "Satisfaction (BEAUZ Hard Techno Remix)",
+  },
+  { at: "15:51", artist: "Bassjackers", title: "Party People" },
+  { at: "18:43", artist: "Bassjackers", title: "GO MF GO" },
+  {
+    at: "21:30",
+    artist: "Bassjackers ft. Bellini",
+    title: "Samba De Janeiro (Dimitri Vegas & Like Mike Edit)",
+  },
+  {
+    at: "22:57",
+    artist: "Bassjackers & Stisema & Hula From The Outhere Brothers",
+    title: "Wiggle Wiggle",
+  },
+  { at: "25:18", artist: "Darren Styles & TNT", title: "Hard Beat" },
+  { at: "26:25", artist: "Bassjackers", title: "KIDS" },
+  { at: "29:34", artist: "Kelis", title: "Milkshake (LYNSY Bounce Edit)" },
+  { at: "30:50", artist: "Bassjackers & PRADA2000", title: "UZI" },
+  { at: "33:28", artist: "Klofama & SLVL", title: "S6TP" },
+  {
+    at: "35:12",
+    artist: "R\u00dcF\u00dcS DU SOL vs. Bassjackers",
+    title: "Innerbloom vs. Wake The F Up (Bassjackers Edit)",
+  },
+  { at: "36:15", artist: "R\u00dcF\u00dcS DU SOL", title: "Innerbloom" },
+  { at: "37:18", artist: "Bassjackers", title: "Wake The F Up" },
+  { at: "38:21", artist: "Bassjackers & Hannah Laing", title: "New Bass, New Kick" },
+  { at: "42:02", artist: "Bassjackers", title: "Bla Bla Bla" },
+  { at: "44:08", artist: "Bassjackers & Maddix", title: "Rave Is My Therapy" },
+  { at: "46:36", artist: "Diddy Dirty Money ft. Skylar Grey", title: "Coming Home" },
+  { at: "49:06", artist: "Hardwell & Bassjackers", title: "Bang On The Drums" },
+  { at: "51:51", artist: "Pharoahe Monch", title: "Simon Says (Bassjackers Bootleg)" },
+  { at: "53:09", artist: "Pharoahe Monch", title: "Simon Says" },
+  { at: "54:05", artist: "Justin Bieber", title: "Ghost" },
+  { at: "55:38", artist: "Sebastian Ingrosso & Alesso", title: "Calling" },
+  {
+    at: "57:11",
+    artist: "HARDSOK vs. Florence + The Machine",
+    title: "Forever vs. Spectrum (Say My Name) (Restricted Edit)",
+  },
+  { at: "58:21", artist: "Florence + The Machine", title: "Spectrum (Say My Name) (Acappella)" },
+  { at: "59:30", artist: "HARDSOK", title: "Forever" },
+];
+
+/**
  * Layton Giordani @ circuitGROUNDS closing, EDC Las Vegas 2025-05-16
  * Official SC: https://soundcloud.com/laytongiordani/layton-giordani-live-edc-las-vegas-circuit-grounds-closing-set-2025 (~59:40)
  * 1001TL: https://1001.tl/bt007st — operator console capture 2026-08-01
@@ -3771,6 +3848,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-DAOlnMYA3nU": TL_CYRIL_TML_WE2_2026,
   "yt-OTKgBZS8if0": TL_DIMITRI_VEGAS_NICO_MORENO_TML_WE2_2026,
   "yt-KVZlecHlVkg": TL_PUSH_TML_WE2_2026,
+  "yt-BG3Lr9EdWVY": TL_BASSJACKERS_TML_WE2_2026,
 };
 
 /** Sanity: every seeded clock must parse. */

@@ -25,6 +25,7 @@ import {
   TL_HOLY_PRIEST_TML_WE1_2026,
   TL_CYRIL_TML_WE2_2026,
   TL_DARREN_STYLES_TML_WE2_2026,
+  TL_BASSJACKERS_TML_WE2_2026,
   TL_PUSH_TML_WE2_2026,
   TL_JAMES_HYPE_MELKWEG_ADE_2025,
   TL_JAMES_HYPE_TML_WE2_2026,
@@ -844,5 +845,21 @@ for (const p of pushTml) {
   pushPrev = p.timestamp;
 }
 assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-KVZlecHlVkg"]!.length >= 16);
+
+assertSeedClocks(TL_BASSJACKERS_TML_WE2_2026);
+const bassjackers = tracklist1001RowsToPlays(TL_BASSJACKERS_TML_WE2_2026);
+assert.equal(bassjackers.length, 36);
+assert.equal(bassjackers[0]!.trackTitle, "Rave Baby");
+assert.equal(bassjackers[bassjackers.length - 1]!.trackTitle, "Forever");
+assert.equal(bassjackers[bassjackers.length - 1]!.timestamp, 59 * 60 + 30);
+let bjPrev = -1;
+for (const p of bassjackers) {
+  assert.ok(
+    p.timestamp >= bjPrev,
+    `Bassjackers TML clocks must not go back @ ${p.timestamp}`,
+  );
+  bjPrev = p.timestamp;
+}
+assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-BG3Lr9EdWVY"]!.length >= 36);
 
 console.log("tracklists1001/seeds.test.ts ok");
