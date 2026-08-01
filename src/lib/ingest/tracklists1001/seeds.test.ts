@@ -26,6 +26,7 @@ import {
   TL_CYRIL_TML_WE2_2026,
   TL_DARREN_STYLES_TML_WE2_2026,
   TL_BASSJACKERS_TML_WE2_2026,
+  TL_BHASKAR_TML_WE2_2026,
   TL_PUSH_TML_WE2_2026,
   TL_JAMES_HYPE_MELKWEG_ADE_2025,
   TL_JAMES_HYPE_TML_WE2_2026,
@@ -861,5 +862,21 @@ for (const p of bassjackers) {
   bjPrev = p.timestamp;
 }
 assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-BG3Lr9EdWVY"]!.length >= 36);
+
+assertSeedClocks(TL_BHASKAR_TML_WE2_2026);
+const bhaskar = tracklist1001RowsToPlays(TL_BHASKAR_TML_WE2_2026);
+assert.equal(bhaskar.length, 17);
+assert.match(bhaskar[0]!.trackTitle!, /Wonderful World/);
+assert.equal(bhaskar[bhaskar.length - 1]!.trackTitle, "Celebrate Life");
+assert.equal(bhaskar[bhaskar.length - 1]!.timestamp, 79 * 60);
+let bhPrev = -1;
+for (const p of bhaskar) {
+  assert.ok(
+    p.timestamp >= bhPrev,
+    `Bhaskar TML clocks must not go back @ ${p.timestamp}`,
+  );
+  bhPrev = p.timestamp;
+}
+assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-HWIratXF1Bo"]!.length >= 17);
 
 console.log("tracklists1001/seeds.test.ts ok");

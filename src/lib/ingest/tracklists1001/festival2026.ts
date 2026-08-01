@@ -2853,6 +2853,40 @@ export const TL_BASSJACKERS_TML_WE2_2026: FingerprintSeedRow[] = [
 ];
 
 /**
+ * Bhaskar @ Crystal Garden Stage, Tomorrowland Weekend 2, Belgium 2026-07-26
+ * Official YT: https://www.youtube.com/watch?v=HWIratXF1Bo
+ * 1001TL: https://1001.tl/15vvjgp1 — operator console capture 2026-08-01
+ * (15/17 timed cues; missing clocks already lerped in capture).
+ */
+export const TL_BHASKAR_TML_WE2_2026: FingerprintSeedRow[] = [
+  {
+    at: "0:12",
+    artist: "Axwell & Bob Sinclar ft. Ron Carrol",
+    title: "What A Wonderful World (Acappella)",
+  },
+  { at: "5:16", artist: "Cristian Viviano", title: "Gamma Project" },
+  { at: "10:20", artist: "Hardrive", title: "Deep Inside" },
+  { at: "12:50", artist: "Bhaskar & Curol", title: "Soul Gazing" },
+  { at: "17:10", artist: "Carolina Marquez", title: "The Killer's Song" },
+  { at: "21:00", artist: "Fancy Inc & ZARO", title: "Shout" },
+  { at: "25:15", artist: "Bhaskar & MOJJO", title: "Discoteka" },
+  { at: "30:05", artist: "Adam Ten & Rafael", title: "Beat Goes On" },
+  { at: "38:20", artist: "ALOK", title: "Around" },
+  {
+    at: "47:20",
+    artist: "Chus & Ceballos & Supernova",
+    title: "The Prophet (Andrew Meller Remix)",
+  },
+  { at: "49:00", artist: "Blu Cantrell", title: "Hit 'Em Up Style (Oops!)" },
+  { at: "50:40", artist: "Dillon Rune", title: "New Day" },
+  { at: "54:00", artist: "Lil' Louis", title: "French Kiss" },
+  { at: "57:50", artist: "R\u00dcF\u00dcS DU SOL", title: "On My Knees" },
+  { at: "1:07:00", artist: "Brunello", title: "The 11th Hour" },
+  { at: "1:15:40", artist: "Angel Heredia", title: "Stuffy" },
+  { at: "1:19:00", artist: "DJ Chus & Harry Romero", title: "Celebrate Life" },
+];
+
+/**
  * Layton Giordani @ circuitGROUNDS closing, EDC Las Vegas 2025-05-16
  * Official SC: https://soundcloud.com/laytongiordani/layton-giordani-live-edc-las-vegas-circuit-grounds-closing-set-2025 (~59:40)
  * 1001TL: https://1001.tl/bt007st — operator console capture 2026-08-01
@@ -3849,6 +3883,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-OTKgBZS8if0": TL_DIMITRI_VEGAS_NICO_MORENO_TML_WE2_2026,
   "yt-KVZlecHlVkg": TL_PUSH_TML_WE2_2026,
   "yt-BG3Lr9EdWVY": TL_BASSJACKERS_TML_WE2_2026,
+  "yt-HWIratXF1Bo": TL_BHASKAR_TML_WE2_2026,
 };
 
 /** Sanity: every seeded clock must parse. */
