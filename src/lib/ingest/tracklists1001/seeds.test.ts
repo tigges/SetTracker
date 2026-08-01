@@ -29,6 +29,7 @@ import {
   TL_LUCAS_STEVE_TML_WE2_2026,
   TL_SARA_LANDRY_TML_WE2_2026,
   TL_AFROJACK_R3HAB_TML_WE2_2026,
+  TL_STEVE_AOKI_TML_WE2_2026,
   TL_LAYTON_GIORDANI_EDC_LV_2025_CLOSING,
   TL_MARTEN_HORGER_EDC_LV_2023,
   TL_MAX_STYLER_EDC_LV_2024,
@@ -733,5 +734,21 @@ for (const p of afroR3) {
   arPrev = p.timestamp;
 }
 assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-AjQeohYmg3A"]!.length >= 54);
+
+assertSeedClocks(TL_STEVE_AOKI_TML_WE2_2026);
+const aoki = tracklist1001RowsToPlays(TL_STEVE_AOKI_TML_WE2_2026);
+assert.equal(aoki.length, 26);
+assert.equal(aoki[0]!.trackTitle, "Pursuit Of Happiness");
+assert.equal(aoki[0]!.timestamp, 20);
+assert.equal(aoki[aoki.length - 1]!.trackTitle, "Miss You");
+let aokiPrev = -1;
+for (const p of aoki) {
+  assert.ok(
+    p.timestamp >= aokiPrev,
+    `Steve Aoki TML clocks must not go back @ ${p.timestamp}`,
+  );
+  aokiPrev = p.timestamp;
+}
+assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-8-J01-hcHfA"]!.length >= 26);
 
 console.log("tracklists1001/seeds.test.ts ok");

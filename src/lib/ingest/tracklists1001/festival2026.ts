@@ -2459,6 +2459,62 @@ export const TL_AFROJACK_R3HAB_TML_WE2_2026: FingerprintSeedRow[] = [
 ];
 
 /**
+ * Steve Aoki @ Mainstage, Tomorrowland Weekend 2, Belgium 2026-07-26
+ * Official YT: https://www.youtube.com/watch?v=8-J01-hcHfA
+ * 1001TL: https://1001.tl/rwtx921 — operator console capture 2026-08-01
+ * (0/26 timed cues — evenly spaced across ~60m Mainstage slot).
+ */
+export const TL_STEVE_AOKI_TML_WE2_2026: FingerprintSeedRow[] = evenlySpaceRows(
+  [
+    { artist: "Kid Cudi ft. MGMT & Ratatat", title: "Pursuit Of Happiness" },
+    { artist: "Steve Aoki & Ely Oaks & SACHA", title: "Gravity" },
+    { artist: "Steve Aoki & Ely Oaks & SACHA", title: "Gravity (Hyro Remix)" },
+    { artist: "KitschKrieg ft. Shirin David & Blumengarten", title: "Gut Genug" },
+    { artist: "Steve Aoki & Reinier Zonneveld ft. Darla Jade", title: "On My Own" },
+    { artist: "Tim Berg", title: "Bromance (Stephen Hurtley Bootleg)" },
+    { artist: "Steve Aoki & Moxie", title: "I Love It When You Cry (Moxoki) (Acappella)" },
+    {
+      artist: "Laidback Luke & Steve Aoki ft. Lil Jon",
+      title: "Turbulence (Hyro & Antoine Delvig 2026 Remix)",
+    },
+    {
+      artist: "Steve Aoki & KAAZE ft. John Martin",
+      title: "Whole Again (Steve Aoki & Stephen Hurtley 2026 Remix)",
+    },
+    {
+      artist: "Justin Bieber ft. Nicki Minaj",
+      title: "Beauty And A Beat (Steve Aoki & TWIIG & LYNDO Remix)",
+    },
+    { artist: "Steve Aoki & Cascada", title: "Everytime We Touch" },
+    { artist: "Steve Aoki ft. ALNA", title: "Dare You To Love" },
+    { artist: "Steve Aoki ft. Alna", title: "Dare You To Love (Hyro Remix)" },
+    {
+      artist: "Steve Aoki & AutoErotique vs. Dimitri Vegas & Like Mike",
+      title: "Feedback (Steve Aoki & Stephen Hurtley 2026 Remix)",
+    },
+    { artist: "Linkin Park", title: "What I've Done (Acappella)" },
+    { artist: "AFROJACK & Steve Aoki ft. Miss Palmer", title: "No Beef" },
+    { artist: "Farruko ft. Victor Cardenas", title: "Pepas (Steve Aoki Remix)" },
+    { artist: "Farruko", title: "Madrid" },
+    { artist: "Farruko & Greeicy & Steve Aoki", title: "YAPAQUE" },
+    { artist: "Farruko & Greeicy & Steve Aoki", title: "YAPAQUE (Hyro Remix)" },
+    { artist: "3 Are Legend ft. Imogen Heap", title: "What You Say" },
+    { artist: "Steve Aoki & Sub Zero Project", title: "Promises" },
+    { artist: "Kid Cudi ft. MGMT & Ratatat", title: "Pursuit Of Happiness (Steve Aoki Remix)" },
+    {
+      artist: "Kid Cudi ft. MGMT & Ratatat",
+      title: "Pursuit Of Happiness (Steve Aoki Remix / Lonely Club VIP Remix)",
+    },
+    {
+      artist: "Lonely Club & Arash",
+      title: "Broken Angel (This Is Lonely Club) (Da Tweekaz Remix)",
+    },
+    { artist: "Oliver Tree & Robin Schulz", title: "Miss You" },
+  ],
+  3600,
+);
+
+/**
  * Layton Giordani @ circuitGROUNDS closing, EDC Las Vegas 2025-05-16
  * Official SC: https://soundcloud.com/laytongiordani/layton-giordani-live-edc-las-vegas-circuit-grounds-closing-set-2025 (~59:40)
  * 1001TL: https://1001.tl/bt007st — operator console capture 2026-08-01
@@ -3449,6 +3505,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-LE-byccuovI": TL_LUCAS_STEVE_TML_WE2_2026,
   "yt-aDAWctObTvI": TL_SARA_LANDRY_TML_WE2_2026,
   "yt-AjQeohYmg3A": TL_AFROJACK_R3HAB_TML_WE2_2026,
+  "yt-8-J01-hcHfA": TL_STEVE_AOKI_TML_WE2_2026,
 };
 
 /** Sanity: every seeded clock must parse. */
