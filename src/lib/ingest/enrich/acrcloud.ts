@@ -140,9 +140,25 @@ export type SparseSetCandidate = {
   popularityRank: number;
   /** Higher = more urgent for people looking at the homepage. */
   homepageBoost: number;
+  /**
+   * 1 when the set's event matches ACRCLOUD_EVENT_SLUGS (e.g. edc-lv focus run).
+   */
+  eventBoost: number;
   densitySeverity: DensitySeverity;
   publishedAtMs: number;
 };
+
+/** Optional comma/space-separated Event.slug focus list for enrich queue. */
+export function acrEventFocusSlugs(
+  raw: string | undefined = process.env.ACRCLOUD_EVENT_SLUGS,
+): Set<string> {
+  return new Set(
+    (raw ?? "")
+      .split(/[,\s]+/)
+      .map((s) => s.trim().toLowerCase())
+      .filter(Boolean),
+  );
+}
 
 function rosterHighPrioritySlugs(): Set<string> {
   const out = new Set<string>();
@@ -184,6 +200,8 @@ export function homepageEnrichBoost(opts: {
   top100: Map<string, number>;
   nowMs?: number;
   unresolvedCount?: number;
+  /** Total cue rows — 0 means Relive with no description/credits yet. */
+  playCount?: number;
   isFestival?: boolean;
   festivalSeason?: boolean;
 }): number {
@@ -201,6 +219,13 @@ export function homepageEnrichBoost(opts: {
   const thinOrWorse = opts.densitySeverity !== "ok";
   const hasUnresolved = (opts.unresolvedCount ?? 0) > 0;
   const festFocus = Boolean(opts.isFestival || opts.festivalSeason);
+  const emptyFestival = festFocus && (opts.playCount ?? 1) === 0;
+
+  // Empty festival Relives (EDC etc.) — no cues yet; fingerprint must create rows.
+  if (emptyFestival) {
+    if (recent || festWindow) return 4;
+    return 3;
+  }
 
   if (hasUnresolved && (top20 || festFocus)) {
     if (recent || (festFocus && festWindow)) return 4;
@@ -643,6 +668,7 @@ export async function selectSparseSetsForFingerprint(
   );
   const top100 = loadDjMagTop100RankBySlug();
   const rosterHigh = rosterHighPrioritySlugs();
+  const eventFocus = acrEventFocusSlugs();
   const nowMs = Date.now();
 
   // Full pool — the old take:500 silently dropped chart DJs outside rowid order.
@@ -707,11 +733,15 @@ export async function selectSparseSetsForFingerprint(
       45,
       nowMs,
     );
+    const sparseFestival =
+      isFestival &&
+      (row.plays.length === 0 || identifiedStrong < expectedFloor);
     const priorityTarget = isUnresolvedDetectPriority({
       unresolvedCount,
       top100Rank,
       isFestival,
       festivalSeason,
+      sparseFestival,
     });
 
     const host = detectPlaybackHost(playbackUrl);
@@ -725,6 +755,7 @@ export async function selectSparseSetsForFingerprint(
       durationSec: row.durationSec,
       playCount: row.plays.length,
     });
+    const eventSlug = row.event?.slug?.toLowerCase() ?? "";
     candidates.push({
       id: row.id,
       slug: row.slug,
@@ -743,9 +774,12 @@ export async function selectSparseSetsForFingerprint(
         top100,
         nowMs,
         unresolvedCount,
+        playCount: row.plays.length,
         isFestival,
         festivalSeason,
       }),
+      eventBoost:
+        eventFocus.size > 0 && eventSlug && eventFocus.has(eventSlug) ? 1 : 0,
       densitySeverity: density.severity,
       publishedAtMs: row.publishedAt.getTime(),
     });
@@ -757,7 +791,7 @@ export async function selectSparseSetsForFingerprint(
 }
 
 /**
- * Sort: host → detect urgency (Top 20 / festival pink IDs) → density →
+ * Sort: host → event focus → detect urgency (Top 20 / festival) → density →
  * chart/roster demand → capped unresolved cues → sparsity → recency.
  */
 export function compareSparseSetCandidates(
@@ -766,6 +800,9 @@ export function compareSparseSetCandidates(
 ): number {
   const ha = HOST_PREF[a.host] - HOST_PREF[b.host];
   if (ha !== 0) return ha;
+  if (a.eventBoost !== b.eventBoost) {
+    return b.eventBoost - a.eventBoost;
+  }
   if (a.homepageBoost !== b.homepageBoost) {
     return b.homepageBoost - a.homepageBoost;
   }

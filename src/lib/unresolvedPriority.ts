@@ -12,7 +12,15 @@ export function isUnresolvedDetectPriority(opts: {
   top100Rank?: number | null;
   isFestival?: boolean;
   festivalSeason?: boolean;
+  /**
+   * Festival (or season) sets with no/thin tracklists — still priority for
+   * YouTube Relive fingerprinting even when unresolvedCount is 0.
+   */
+  sparseFestival?: boolean;
 }): boolean {
+  if (opts.sparseFestival && (opts.isFestival || opts.festivalSeason)) {
+    return true;
+  }
   if (opts.unresolvedCount < 1) return false;
   const top20 =
     opts.top100Rank != null &&

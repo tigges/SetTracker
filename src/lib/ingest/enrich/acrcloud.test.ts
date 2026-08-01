@@ -110,6 +110,7 @@ function cand(
     unresolvedCount: 0,
     popularityRank: 999,
     homepageBoost: 0,
+    eventBoost: 0,
     densitySeverity: "ok",
     publishedAtMs: 0,
     ...partial,
@@ -209,6 +210,57 @@ assert.equal(
   }),
   false,
 );
+// Empty EDC Relive (0 cues) still gets YT fingerprint priority.
+assert.equal(
+  isUnresolvedDetectPriority({
+    unresolvedCount: 0,
+    isFestival: true,
+    sparseFestival: true,
+  }),
+  true,
+);
+assert.equal(
+  homepageEnrichBoost({
+    publishedAt: new Date(Date.now() - 10 * 864e5),
+    primaryDjSlug: "unknown-local",
+    genre: "Techno",
+    densitySeverity: "severe",
+    top100,
+    playCount: 0,
+    isFestival: true,
+  }),
+  4,
+  "empty festival within detect window",
+);
+assert.equal(
+  homepageEnrichBoost({
+    publishedAt: new Date(Date.now() - 120 * 864e5),
+    primaryDjSlug: "unknown-local",
+    genre: "Techno",
+    densitySeverity: "severe",
+    top100,
+    playCount: 0,
+    isFestival: true,
+  }),
+  3,
+  "empty festival outside detect window",
+);
+// Event-focus boost (ACRCLOUD_EVENT_SLUGS) beats same-host non-focus.
+const eventFocusFirst = [
+  cand({
+    id: "other-sc",
+    homepageBoost: 4,
+    eventBoost: 0,
+    host: "soundcloud",
+  }),
+  cand({
+    id: "edc-sc",
+    homepageBoost: 2,
+    eventBoost: 1,
+    host: "soundcloud",
+  }),
+].sort(compareSparseSetCandidates);
+assert.equal(eventFocusFirst[0]!.id, "edc-sc");
 
 const pinkFestivalFirst = [
   cand({
