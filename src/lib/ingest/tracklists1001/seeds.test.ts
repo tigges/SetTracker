@@ -8,6 +8,7 @@ import {
   TL_CLOONEE_EDC_LV_2022,
   TL_CLOONEE_PROSPA_DESTINO_2026,
   TL_DARUDE_EDC_LV_2026,
+  TL_LAYTON_GIORDANI_EDC_LV_2025_CLOSING,
   TL_MARTEN_HORGER_EDC_LV_2023,
   TL_MARTEN_HORGER_PAROOKAVILLE_2026,
   TL_ODD_MOB_EDC_LV_2025,
@@ -191,6 +192,22 @@ assert.ok(
   TRACKLIST_1001_BY_SOURCE_SLUG[
     "sc-oceanologymusic-odd-mob-live-at-edc-las-vegas-2025-cosmic-meadow-day-2-3"
   ]!.length >= 25,
+);
+
+assertSeedClocks(TL_LAYTON_GIORDANI_EDC_LV_2025_CLOSING);
+const layton = tracklist1001RowsToPlays(TL_LAYTON_GIORDANI_EDC_LV_2025_CLOSING);
+assert.equal(layton.length, 21);
+assert.match(layton[0]!.trackTitle!, /Scary Monsters/);
+assert.match(layton[layton.length - 1]!.trackTitle!, /Room For Happiness/);
+let layPrev = -1;
+for (const p of layton) {
+  assert.ok(p.timestamp >= layPrev, `Layton clocks must not go back @ ${p.timestamp}`);
+  layPrev = p.timestamp;
+}
+assert.ok(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-laytongiordani-layton-giordani-live-edc-las-vegas-circuit-grounds-closing-set-2025"
+  ]!.length >= 20,
 );
 
 console.log("tracklists1001/seeds.test.ts ok");

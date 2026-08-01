@@ -865,6 +865,97 @@ export const TL_ODD_MOB_EDC_LV_2025: FingerprintSeedRow[] = [
   { at: "59:30", artist: "Chris Lake & Ragie Ban", title: "Toxic" },
 ];
 
+/**
+ * Layton Giordani @ circuitGROUNDS closing, EDC Las Vegas 2025-05-16
+ * Official SC: https://soundcloud.com/laytongiordani/layton-giordani-live-edc-las-vegas-circuit-grounds-closing-set-2025 (~59:40)
+ * 1001TL: https://1001.tl/bt007st — operator console capture 2026-08-01
+ * (21/21 timed cues).
+ */
+export const TL_LAYTON_GIORDANI_EDC_LV_2025_CLOSING: FingerprintSeedRow[] = [
+  {
+    at: "3:10",
+    artist: "Skrillex",
+    title: "Scary Monsters And Nice Sprites (Layton Giordani Remix)",
+  },
+  { at: "3:54", artist: "Sikdope & Belle Sisoski", title: "RATS" },
+  {
+    at: "5:50",
+    artist: "Sharam",
+    title:
+      "PATT (Party All The Time) (Adam Beyer & Layton Giordani & Green Velvet Remix)",
+  },
+  { at: "9:07", artist: "ZHU", title: "Faded (Seth Hills Remix)" },
+  {
+    at: "11:45",
+    artist: "Layton Giordani & Green Velvet",
+    title: "When It Kicks",
+  },
+  { at: "14:55", artist: "Cirez D", title: "On Off" },
+  {
+    at: "15:48",
+    artist: "Chris Lake ft. Alexis Roberts",
+    title: "Turn Off The Lights",
+  },
+  {
+    at: "17:00",
+    artist: "David Guetta & Steve Aoki ft. Swae Lee & PnB Rock",
+    title: "My Life (Krupa Remix)",
+  },
+  {
+    at: "20:30",
+    artist: "Layton Giordani ft. Linney & Sarah de Warren",
+    title: "Act Of God",
+  },
+  { at: "24:30", artist: "Chris Avantgarde", title: "Energy" },
+  {
+    at: "28:00",
+    artist: "Dom Dolla",
+    title: "girl$ (Layton Giordani Remix)",
+  },
+  { at: "31:40", artist: "Neumann & Bendtsen", title: "Phantom Express" },
+  {
+    at: "31:41",
+    artist: "Tiga vs. Audion",
+    title: "Let's Go Dancing (Acappella)",
+  },
+  {
+    at: "34:10",
+    artist: "Shakedown",
+    title: "At Night (Anyma & Layton Giordani Remix)",
+  },
+  { at: "37:40", artist: "SCRIPT", title: "WTF" },
+  {
+    at: "40:50",
+    artist: "Max Styler & Three Drives",
+    title: "Greece 2000 (Max Styler Rework)",
+  },
+  {
+    at: "41:36",
+    artist: "Artemas",
+    title: "i like the way you kiss me",
+  },
+  {
+    at: "43:10",
+    artist: "Layton Giordani ft. LINNEY & Sarah de Warren",
+    title: "Act Of God (CamelPhat Remix)",
+  },
+  {
+    at: "47:30",
+    artist: "Loofy",
+    title: "Last Night (Anyma & Layton Giordani Remix)",
+  },
+  {
+    at: "51:30",
+    artist: "Fatima Yamaha",
+    title: "What's A Girl To Do (Layton Giordani Remix)",
+  },
+  {
+    at: "55:35",
+    artist: "Kaskade ft. Skylar Grey",
+    title: "Room For Happiness (Layton Giordani Remix)",
+  },
+];
+
 /** sourceSlug → curated 1001TL seed (SC / YT when live HTML is CF-blocked). */
 export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   string,
@@ -880,6 +971,8 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "sc-waxmotif-wax-motif-live-edc-2021": TL_WAX_MOTIF_EDC_LV_2021,
   "sc-oceanologymusic-odd-mob-live-at-edc-las-vegas-2025-cosmic-meadow-day-2-3":
     TL_ODD_MOB_EDC_LV_2025,
+  "sc-laytongiordani-layton-giordani-live-edc-las-vegas-circuit-grounds-closing-set-2025":
+    TL_LAYTON_GIORDANI_EDC_LV_2025_CLOSING,
   "yt-yXHoHK_jQvc": TL_AHEE_LIQUID_STRANGER_EDC_LV_2026,
   "yt-dXBoIY65P8s": TL_DARUDE_EDC_LV_2026,
   "yt-c_sx3zum8Z0": TL_BLEU_CLAIR_EDC_LV_2023,
