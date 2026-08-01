@@ -1502,6 +1502,31 @@ export const TL_NICO_MORENO_HOLY_PRIEST_EDC_LV_2026: FingerprintSeedRow[] =
   );
 
 /**
+ * Matty Ralph @ quantumVALLEY, EDC Las Vegas 2026-05-15
+ * Official YT: https://www.youtube.com/watch?v=FZ7pwlNdwBk (~59:00)
+ * 1001TL: https://1001.tl/2hsk794t — operator console capture 2026-08-01
+ * (11/12 timed cues).
+ */
+export const TL_MATTY_RALPH_EDC_LV_2026: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "Matty Ralph", title: "Move That Body" },
+  { at: "3:38", artist: "Matty Ralph", title: "NRG" },
+  { at: "8:46", artist: "Edo & THÜR", title: "All I Need" },
+  { at: "12:11", artist: "CTRL & Panteros666", title: "Fire II : Dragon Return" },
+  { at: "15:05", artist: "Matty Ralph", title: "No Whistle, No Party" },
+  { at: "23:02", artist: "Mauro Picotto", title: "Lizard (Matty Ralph Remix)" },
+  { at: "25:11", artist: "Matty Ralph & JOKESONYOU", title: "Heaven" },
+  { at: "34:09", artist: "LAWTON & Deckers", title: "Los Retratos" },
+  { at: "35:39", artist: "Niels van Gogh", title: "Pulverturm" },
+  { at: "40:06", artist: "Matty Ralph", title: "1999" },
+  {
+    at: "44:24",
+    artist: "The Roc Project ft. Tina Arena",
+    title: "Never (Filterheadz Luv Tina Remix / Matty Ralph Edit)",
+  },
+  { at: "55:55", artist: "Shugz", title: "Under The Lights" },
+];
+
+/**
  * Sarah de Warren @ quantumVALLEY, EDC Las Vegas 2026-05-15
  * Official YT: https://www.youtube.com/watch?v=KIb3psOt9hI (~40:43)
  * 1001TL: https://1001.tl/1z031tz1 — operator console capture 2026-08-01
@@ -1605,6 +1630,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-KIb3psOt9hI": TL_SARAH_DE_WARREN_EDC_LV_2026,
   "yt-yUA0Ht2PdG0": TL_PEGASSI_EDC_LV_2026,
   "yt-f_p6nfbrm0E": TL_NICO_MORENO_EDC_LV_2026,
+  "yt-FZ7pwlNdwBk": TL_MATTY_RALPH_EDC_LV_2026,
 };
 
 /** Sanity: every seeded clock must parse. */

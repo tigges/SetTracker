@@ -1,4 +1,4 @@
 # Bump the timestamp below (and merge to main) to start Catalog deep refresh.
 # Used when workflow_dispatch is unavailable to the actor.
-requestedAt: 2026-08-01T06:45:00Z
-reason: EDC 1001 seeds Nico Moreno circuitGROUNDS + Holy Priest B2B capture held
+requestedAt: 2026-08-01T06:50:00Z
+reason: EDC 1001 seeds Matty Ralph + Nico Moreno + prior Relive captures

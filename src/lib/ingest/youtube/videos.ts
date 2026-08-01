@@ -21,6 +21,7 @@ import {
   TL_DARUDE_EDC_LV_2026,
   TL_MARTEN_HORGER_EDC_LV_2023,
   TL_MARTEN_HORGER_PAROOKAVILLE_2026,
+  TL_MATTY_RALPH_EDC_LV_2026,
   TL_NICO_MORENO_EDC_LV_2026,
   TL_PEGASSI_EDC_LV_2026,
   TL_SARAH_DE_WARREN_EDC_LV_2026,
@@ -362,6 +363,21 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/2r6ym5qt/nico-moreno-circuitgrounds-edc-las-vegas-united-states-2026-05-15.html",
     tracklist1001: TL_NICO_MORENO_EDC_LV_2026,
+  },
+  {
+    // Insomniac Relive — quantumVALLEY; 11/12 timed cues from 1001 capture.
+    video: "https://www.youtube.com/watch?v=FZ7pwlNdwBk",
+    primaryArtist: dj("Matty Ralph", {
+      accent: "#4cc9f0",
+      homeCity: "EU",
+    }),
+    genre: "Techno",
+    type: "festival",
+    title: "Matty Ralph Live at EDC Las Vegas 2026 (Official Full Set)",
+    eventName: "EDC Las Vegas",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2hsk794t/matty-ralph-quantumvalley-edc-las-vegas-united-states-2026-05-15.html",
+    tracklist1001: TL_MATTY_RALPH_EDC_LV_2026,
   },
   {
     video: "https://www.youtube.com/watch?v=ObiAocVMTyo",

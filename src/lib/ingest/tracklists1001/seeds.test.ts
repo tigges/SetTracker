@@ -14,6 +14,7 @@ import {
   TL_MARTEN_HORGER_EDC_LV_2023,
   TL_MAX_STYLER_EDC_LV_2024,
   TL_MARTEN_HORGER_PAROOKAVILLE_2026,
+  TL_MATTY_RALPH_EDC_LV_2026,
   TL_NICO_MORENO_EDC_LV_2026,
   TL_NICO_MORENO_HOLY_PRIEST_EDC_LV_2026,
   TL_ODD_MOB_EDC_LV_2025,
@@ -339,5 +340,21 @@ assert.equal(
   TRACKLIST_1001_BY_SOURCE_SLUG["yt-nZS9gvjlPIs"],
   undefined,
 );
+
+assertSeedClocks(TL_MATTY_RALPH_EDC_LV_2026);
+const matty = tracklist1001RowsToPlays(TL_MATTY_RALPH_EDC_LV_2026);
+assert.equal(matty.length, 12);
+assert.equal(matty[0]!.trackTitle, "Move That Body");
+assert.equal(matty[matty.length - 1]!.trackTitle, "Under The Lights");
+assert.equal(matty[5]!.timestamp, 23 * 60 + 2);
+let mattyPrev = -1;
+for (const p of matty) {
+  assert.ok(
+    p.timestamp >= mattyPrev,
+    `Matty Ralph clocks must not go back @ ${p.timestamp}`,
+  );
+  mattyPrev = p.timestamp;
+}
+assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-FZ7pwlNdwBk"]!.length >= 12);
 
 console.log("tracklists1001/seeds.test.ts ok");
