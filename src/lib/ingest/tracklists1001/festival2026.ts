@@ -2286,6 +2286,56 @@ export const TL_LUCAS_STEVE_TML_WE2_2026: FingerprintSeedRow[] = [
 ];
 
 /**
+ * Sara Landry @ Mainstage, Tomorrowland Weekend 2, Belgium 2026-07-26
+ * Official YT: https://www.youtube.com/watch?v=aDAWctObTvI
+ * 1001TL: https://1001.tl/2pcscu9t — operator console capture 2026-08-01
+ * (17/17 timed cues).
+ */
+export const TL_SARA_LANDRY_TML_WE2_2026: FingerprintSeedRow[] = [
+  { at: "2:30", artist: "Akari", title: "Bring It Up" },
+  { at: "4:15", artist: "Wynter Gordon", title: "Dirty Talk" },
+  { at: "8:25", artist: "Sara Landry & Alt8", title: "Hands Up" },
+  { at: "12:10", artist: "Annie", title: "2 The Floor" },
+  { at: "13:30", artist: "Callush", title: "Delicious" },
+  { at: "18:40", artist: "Sara Landry & Alex Farell", title: "Angel Dust" },
+  {
+    at: "20:15",
+    artist: "Benny Benassi pres. The Biz",
+    title: "Satisfaction (BEAUZ Hard Techno Remix)",
+  },
+  { at: "21:30", artist: "Sara Landry", title: "Shake That" },
+  { at: "31:10", artist: "AREA ØNE", title: "Your Mind" },
+  {
+    at: "32:10",
+    artist: "Sara Landry & Nico Moreno",
+    title: "Because They Want Our Seat",
+  },
+  { at: "33:30", artist: "APHØTIC", title: "Thalassophobia" },
+  { at: "34:40", artist: "Golpe", title: "Master At Work" },
+  {
+    at: "36:15",
+    artist: "ISOxo",
+    title: "FUCK THE SPEAKERZ UP (Tylow Remix)",
+  },
+  {
+    at: "38:30",
+    artist: "Mr. Polska & Natte Visstick & Vieze Asbak",
+    title: "POLSKA JUMPSTYLE (KAAI Remix)",
+  },
+  { at: "39:58", artist: "Mosmoz", title: "Bassline Dealer" },
+  {
+    at: "44:16",
+    artist: "Ace Ventura",
+    title: "Rebirth (Blazy & Faders Remix)",
+  },
+  {
+    at: "51:17",
+    artist: "Spectra Sonics & Mirok",
+    title: "Modulation Depth",
+  },
+];
+
+/**
  * Layton Giordani @ circuitGROUNDS closing, EDC Las Vegas 2025-05-16
  * Official SC: https://soundcloud.com/laytongiordani/layton-giordani-live-edc-las-vegas-circuit-grounds-closing-set-2025 (~59:40)
  * 1001TL: https://1001.tl/bt007st — operator console capture 2026-08-01
@@ -3274,6 +3324,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-I6QA_T-BS6o": TL_ARMIN_VAN_BUUREN_YT_HOUSE_TML_2026,
   "yt-RLOghpXjuJI": TL_KOROLOVA_TML_WE2_2026,
   "yt-LE-byccuovI": TL_LUCAS_STEVE_TML_WE2_2026,
+  "yt-aDAWctObTvI": TL_SARA_LANDRY_TML_WE2_2026,
 };
 
 /** Sanity: every seeded clock must parse. */

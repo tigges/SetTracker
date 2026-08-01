@@ -34,6 +34,7 @@ import {
   TL_KOLSCH_TML_WE2_2026,
   TL_KOROLOVA_TML_WE2_2026,
   TL_LUCAS_STEVE_TML_WE2_2026,
+  TL_SARA_LANDRY_TML_WE2_2026,
   TL_MISS_MONIQUE_TML_WE2_2026,
   TL_NICKY_ROMERO_TML_WE2_2026,
   TL_ODD_MOB_TML_WE2_2026,
@@ -648,6 +649,22 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/qz05s21/lucas-steve-mainstage-tomorrowland-weekend-2-belgium-2026-07-26.html",
     tracklist1001: TL_LUCAS_STEVE_TML_WE2_2026,
+  },
+  {
+    // Tomorrowland official — Mainstage WE2; 17/17 timed.
+    video: "https://www.youtube.com/watch?v=aDAWctObTvI",
+    primaryArtist: dj("Sara Landry", {
+      accent: "#e63946",
+      homeCity: "Los Angeles, US",
+    }),
+    genre: "Hard Techno",
+    type: "festival",
+    title: "Sara Landry WE2 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2pcscu9t/sara-landry-mainstage-tomorrowland-weekend-2-belgium-2026-07-26.html",
+    tracklist1001: TL_SARA_LANDRY_TML_WE2_2026,
   },
   {
     video: "https://www.youtube.com/watch?v=ObiAocVMTyo",

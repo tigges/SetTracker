@@ -27,6 +27,7 @@ import {
   TL_KOLSCH_TML_WE2_2026,
   TL_KOROLOVA_TML_WE2_2026,
   TL_LUCAS_STEVE_TML_WE2_2026,
+  TL_SARA_LANDRY_TML_WE2_2026,
   TL_LAYTON_GIORDANI_EDC_LV_2025_CLOSING,
   TL_MARTEN_HORGER_EDC_LV_2023,
   TL_MAX_STYLER_EDC_LV_2024,
@@ -699,5 +700,21 @@ for (const p of lucasSteve) {
   lsPrev = p.timestamp;
 }
 assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-LE-byccuovI"]!.length >= 54);
+
+assertSeedClocks(TL_SARA_LANDRY_TML_WE2_2026);
+const saraLandry = tracklist1001RowsToPlays(TL_SARA_LANDRY_TML_WE2_2026);
+assert.equal(saraLandry.length, 17);
+assert.equal(saraLandry[0]!.trackTitle, "Bring It Up");
+assert.equal(saraLandry[saraLandry.length - 1]!.trackTitle, "Modulation Depth");
+assert.equal(saraLandry[saraLandry.length - 1]!.timestamp, 51 * 60 + 17);
+let slPrev = -1;
+for (const p of saraLandry) {
+  assert.ok(
+    p.timestamp >= slPrev,
+    `Sara Landry TML clocks must not go back @ ${p.timestamp}`,
+  );
+  slPrev = p.timestamp;
+}
+assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-aDAWctObTvI"]!.length >= 17);
 
 console.log("tracklists1001/seeds.test.ts ok");
