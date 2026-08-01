@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { extract1001Urls } from "./parse";
 import {
   TL_AHEE_LIQUID_STRANGER_EDC_LV_2026,
+  TL_BLEU_CLAIR_EDC_LV_2023,
   TL_CHARLOTTE_DE_WITTE_TML_WE1_2026,
   TL_CID_EDC_LV_2017,
   TL_CLOONEE_PROSPA_DESTINO_2026,
@@ -127,5 +128,21 @@ assert.equal(parseClockToSec("6:22"), cid[3]!.timestamp);
 assert.ok(
   TRACKLIST_1001_BY_SOURCE_SLUG["sc-cidmusic-cid-edc-lv-2017"]!.length >= 20,
 );
+
+assertSeedClocks(TL_BLEU_CLAIR_EDC_LV_2023);
+const bleu = tracklist1001RowsToPlays(TL_BLEU_CLAIR_EDC_LV_2023);
+assert.equal(bleu.length, 20);
+assert.equal(bleu[0]!.trackTitle, "Mean Sumthin");
+assert.equal(bleu[bleu.length - 1]!.trackTitle, "Mistake");
+let bleuPrev = -1;
+for (const p of bleu) {
+  assert.ok(
+    p.timestamp > bleuPrev,
+    `Bleu Clair clocks must increase @ ${p.timestamp}`,
+  );
+  bleuPrev = p.timestamp;
+}
+assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-c_sx3zum8Z0"]!.length >= 18);
+assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["sc-bleuclair-edclv2023"]!.length >= 18);
 
 console.log("tracklists1001/seeds.test.ts ok");

@@ -1,4 +1,4 @@
 # Bump the timestamp below (and merge to main) to start Catalog deep refresh.
 # Used when workflow_dispatch is unavailable to the actor.
-requestedAt: 2026-08-01T05:20:00Z
-reason: EDC Westend/AHEE/Darude/CID 1001 seeds + capture cue interpolate fix
+requestedAt: 2026-08-01T05:25:00Z
+reason: EDC 1001 seeds Westend/AHEE/Darude/CID/Bleu Clair + capture helpers

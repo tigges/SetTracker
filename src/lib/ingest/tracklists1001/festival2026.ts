@@ -570,6 +570,77 @@ export const TL_CID_EDC_LV_2017: FingerprintSeedRow[] =
     3542,
   );
 
+/**
+ * Bleu Clair @ stereoBLOOM, EDC Las Vegas 2023-05-19
+ * Official YT: https://www.youtube.com/watch?v=c_sx3zum8Z0 (~60:50)
+ * Official SC: https://soundcloud.com/bleuclair/edclv2023
+ * 1001TL: https://1001.tl/283zdwmt — operator console capture 2026-08-01
+ * (17/20 timed cues; gaps interpolated).
+ */
+export const TL_BLEU_CLAIR_EDC_LV_2023: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "Bleu Clair", title: "Mean Sumthin" },
+  {
+    at: "6:45",
+    artist: "Chris Lake & Chris Lorenzo present Anti Up",
+    title: "Right Now (Bleu Clair Remix)",
+  },
+
+  { at: "10:30", artist: "Bleu Clair & Dances", title: "Peanut Butter" },
+  {
+    at: "14:15",
+    artist: "Pitbull ft. Trina & Young Bo$$",
+    title: "Go Girl (Bleu Clair Edit)",
+  },
+  { at: "17:34", artist: "Bleu Clair", title: "Sand Dunes" },
+  {
+    at: "21:49",
+    artist: "Groove Armada",
+    title: "Superstylin' (Bleu Clair Edit)",
+  },
+  {
+    at: "25:34",
+    artist: "Bleu Clair & OOTORO ft. Chyra",
+    title: "Killer Bee",
+  },
+  { at: "28:49", artist: "Bleu Clair", title: "m.A.A.d City" },
+  { at: "32:04", artist: "Bleu Clair", title: "The Rhythm" },
+  {
+    at: "35:12",
+    artist: "Bleu Clair & OOTORO",
+    title: "Beat Like This (VIP)",
+  },
+  { at: "36:55", artist: "Bleu Clair ft. Jelita", title: "Have Me All" },
+  {
+    at: "38:42",
+    artist: "MK ft. Carla Munroe",
+    title: "17 (Bleu Clair Remix)",
+  },
+  { at: "42:12", artist: "Bleu Clair", title: "Samsara" },
+  {
+    at: "46:20",
+    artist: "Matroda & Bleu Clair",
+    title: "Disco Tool (VIP)",
+  },
+  {
+    at: "47:35",
+    artist: "Matroda & Bleu Clair",
+    title: "Disco Tool (OOTORO Remix)",
+  },
+  { at: "48:35", artist: "Bleu Clair", title: "Step Into It" },
+  { at: "51:57", artist: "Bleu Clair", title: "In My Mind" },
+  {
+    at: "57:17",
+    artist: "Bleu Clair",
+    title: "Mistake vs. Hyperspace (Bleu Clair Mashup)",
+  },
+  {
+    at: "58:24",
+    artist: "Bleu Clair ft. Teza Sumendra",
+    title: "Hyperspace",
+  },
+  { at: "59:30", artist: "Bleu Clair", title: "Mistake" },
+];
+
 /** sourceSlug → curated 1001TL seed (SC / YT when live HTML is CF-blocked). */
 export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   string,
@@ -580,8 +651,10 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "sc-cloonee-clooneeb2bprospa": TL_CLOONEE_PROSPA_DESTINO_2026,
   "sc-itsthewestend-westend-live-edc-2026": TL_WESTEND_EDC_LV_2026,
   "sc-cidmusic-cid-edc-lv-2017": TL_CID_EDC_LV_2017,
+  "sc-bleuclair-edclv2023": TL_BLEU_CLAIR_EDC_LV_2023,
   "yt-yXHoHK_jQvc": TL_AHEE_LIQUID_STRANGER_EDC_LV_2026,
   "yt-dXBoIY65P8s": TL_DARUDE_EDC_LV_2026,
+  "yt-c_sx3zum8Z0": TL_BLEU_CLAIR_EDC_LV_2023,
 };
 
 /** Sanity: every seeded clock must parse. */

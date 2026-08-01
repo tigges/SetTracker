@@ -16,6 +16,7 @@ import {
 } from "../fingerprint/seeds";
 import {
   TL_AHEE_LIQUID_STRANGER_EDC_LV_2026,
+  TL_BLEU_CLAIR_EDC_LV_2023,
   TL_CLOONEE_PROSPA_DESTINO_2026,
   TL_DARUDE_EDC_LV_2026,
   TL_MARTEN_HORGER_EDC_LV_2023,
@@ -481,6 +482,9 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     type: "festival",
     title: "Bleu Clair live from EDC Las Vegas 2023",
     eventName: "EDC Las Vegas",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/283zdwmt/bleu-clair-stereobloom-edc-las-vegas-united-states-2023-05-19.html",
+    tracklist1001: TL_BLEU_CLAIR_EDC_LV_2023,
   },
   {
     video: "https://www.youtube.com/watch?v=_hdM8uJV1LM",
