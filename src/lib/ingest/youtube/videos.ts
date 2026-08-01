@@ -18,6 +18,7 @@ import {
   TL_CLOONEE_PROSPA_DESTINO_2026,
   TL_MARTEN_HORGER_EDC_LV_2023,
   TL_MARTEN_HORGER_PAROOKAVILLE_2026,
+  TL_WESTEND_EDC_LV_2026,
 } from "../tracklists1001/seeds";
 import type { RawArtist } from "../types";
 import { slugify } from "../types";
@@ -260,6 +261,19 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     type: "festival",
     title: "Solomun Live at EDC Las Vegas 2026 (Official Full Set)",
     eventName: "EDC Las Vegas",
+  },
+  {
+    // Insomniac Relive — promo description only; 1001TL seed from screenshots.
+    video: "https://www.youtube.com/watch?v=jQLWYc2UrFY",
+    primaryArtist: dj("Westend", {
+      accent: "#f72585",
+      homeCity: "New York, US",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    title: "Westend Live at EDC Las Vegas 2026 (Official Full Set)",
+    eventName: "EDC Las Vegas",
+    tracklist1001: TL_WESTEND_EDC_LV_2026,
   },
   {
     video: "https://www.youtube.com/watch?v=ObiAocVMTyo",

@@ -5,6 +5,7 @@ import {
   TL_CLOONEE_PROSPA_DESTINO_2026,
   TL_MARTEN_HORGER_EDC_LV_2023,
   TL_MARTEN_HORGER_PAROOKAVILLE_2026,
+  TL_WESTEND_EDC_LV_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   tracklist1001RowsToPlays,
 } from "./seeds";
@@ -48,6 +49,22 @@ assert.ok(
   TRACKLIST_1001_BY_SOURCE_SLUG[
     "sc-charlottedewittemusic-charlotte-de-witte-at"
   ]!.length >= 8,
+);
+
+assertSeedClocks(TL_WESTEND_EDC_LV_2026);
+const westend = tracklist1001RowsToPlays(TL_WESTEND_EDC_LV_2026);
+assert.ok(westend.length >= 18);
+assert.equal(westend[0]!.trackTitle, "We Stay Inside");
+assert.equal(westend[westend.length - 1]!.trackTitle, "Feels Better");
+const likeYou = westend.find((p) => p.trackTitle === "Like You A Lot");
+assert.equal(likeYou?.timestamp, 20 * 60 + 59);
+const proper = westend.find(
+  (p) => p.trackTitle === "Proper Education (Westend Edit)",
+);
+assert.equal(proper?.timestamp, 29 * 60 + 48);
+assert.ok(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-itsthewestend-westend-live-edc-2026"]!
+    .length >= 18,
 );
 
 console.log("tracklists1001/seeds.test.ts ok");

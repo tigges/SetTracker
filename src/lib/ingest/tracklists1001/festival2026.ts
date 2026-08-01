@@ -201,6 +201,89 @@ export const TL_CHARLOTTE_DE_WITTE_TML_WE1_2026: FingerprintSeedRow[] =
     59 * 60 + 1,
   );
 
+/**
+ * Westend @ cosmicMEADOW, EDC Las Vegas 2026-05-15
+ * Official YT: https://www.youtube.com/watch?v=jQLWYc2UrFY (~59:12)
+ * Official SC: https://soundcloud.com/itsthewestend/westend-live-edc-2026
+ * 1001TL: https://1001.tl/xh6t5uk (CF-blocked in CI) — operator screenshot
+ * capture 2026-08-01. Skips bare Westend ID. Known cues Like You A Lot
+ * ~20:59 / Proper Education ~29:48 applied after even spacing.
+ */
+export const TL_WESTEND_EDC_LV_2026: FingerprintSeedRow[] = (() => {
+  const spaced = evenlySpaceRows(
+    [
+      {
+        artist: "Glass Petals ft. Sophiegraphy",
+        title: "We Stay Inside",
+      },
+      {
+        artist: "Diplo & SIDEPIECE vs Westend",
+        title: "On My Mind vs Freaky Time (Westend Mashup)",
+      },
+      {
+        artist: "Prospa",
+        title: "Don't Stop (Twin Diplomacy Remix)",
+      },
+      { artist: "BYOR & Mentum", title: "I Can Dance" },
+      {
+        artist: "Fake Blood",
+        title: "I Think I Like It (Westend Edit)",
+      },
+      { artist: "Westend ft. Hosanna", title: "Drum Death" },
+      {
+        artist: "VNSSA, Sian & Sacha Robotti",
+        title: "Smalltown Girl",
+      },
+      { artist: "Westend & Dave Summer", title: "Love Spell" },
+      {
+        artist: "Vanrip & Truth x Lies ft. WEiRD GRRL",
+        title: "Like You A Lot",
+      },
+      {
+        artist: "Dansyn vs Noizu & Westend & No/Me",
+        title: "Bang That vs Push To Start (Westend Edit)",
+      },
+      { artist: "Westend & Twin Diplomacy", title: "Sensational" },
+      {
+        artist: "Eric Prydz vs Pink Floyd",
+        title: "Proper Education (Westend Edit)",
+      },
+      {
+        artist: "Daft Punk",
+        title: "Around The World (Westend Edit)",
+      },
+      {
+        artist: "deadmau5 & Wolfgang Gartner",
+        title: "Animal Rights (Westend Remix)",
+      },
+      { artist: "Westend ft. Lizzy Land", title: "Surrender" },
+      { artist: "BRANDON", title: "My Body Talks" },
+      {
+        artist: "Congorock ft. Mr. Lexx",
+        title:
+          "Babylon (David Guetta & Marten Horger / Men Machine & KENZ Rework)",
+      },
+      {
+        artist: "Westend & Olivia Sebastianelli",
+        title: "The Ceiling",
+      },
+      {
+        artist: "deadmau5 ft. Rob Swire",
+        title: "Ghosts 'n' Stuff (Luke Alexander Remix)",
+      },
+      { artist: "Westend", title: "Feels Better" },
+    ],
+    3552,
+  );
+  return spaced.map((row) => {
+    if (row.title === "Like You A Lot") return { ...row, at: "20:59" };
+    if (row.title === "Proper Education (Westend Edit)") {
+      return { ...row, at: "29:48" };
+    }
+    return row;
+  });
+})();
+
 /** SoundCloud sourceSlug → curated 1001TL seed (official uploads only). */
 export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   string,
@@ -209,6 +292,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "sc-charlottedewittemusic-charlotte-de-witte-at":
     TL_CHARLOTTE_DE_WITTE_TML_WE1_2026,
   "sc-cloonee-clooneeb2bprospa": TL_CLOONEE_PROSPA_DESTINO_2026,
+  "sc-itsthewestend-westend-live-edc-2026": TL_WESTEND_EDC_LV_2026,
 };
 
 /** Sanity: every seeded clock must parse. */
