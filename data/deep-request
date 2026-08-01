@@ -1,4 +1,4 @@
 # Bump the timestamp below (and merge to main) to start Catalog deep refresh.
 # Used when workflow_dispatch is unavailable to the actor.
-requestedAt: 2026-08-01T07:50:00Z
-reason: Kölsch TML WE2 Mainstage 1001 seed + prior TML/EDC captures
+requestedAt: 2026-08-01T07:55:00Z
+reason: Steve Angello TML WE2 Mainstage 1001 seed + prior TML/EDC captures

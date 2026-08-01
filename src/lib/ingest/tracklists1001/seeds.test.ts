@@ -30,6 +30,7 @@ import {
   TL_PEGASSI_EDC_LV_2026,
   TL_SARAH_DE_WARREN_EDC_LV_2026,
   TL_SOLOMUN_EDC_LV_2026,
+  TL_STEVE_ANGELLO_TML_WE2_2026,
   TL_WAX_MOTIF_EDC_LV_2021,
   TL_WESTEND_EDC_LV_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
@@ -496,5 +497,20 @@ for (const p of kolsch) {
   kolschPrev = p.timestamp;
 }
 assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-ra8NYbzPMnk"]!.length >= 19);
+
+assertSeedClocks(TL_STEVE_ANGELLO_TML_WE2_2026);
+const angello = tracklist1001RowsToPlays(TL_STEVE_ANGELLO_TML_WE2_2026);
+assert.equal(angello.length, 41);
+assert.equal(angello[0]!.trackTitle, "Hooligans");
+assert.equal(angello[angello.length - 1]!.trackTitle, "Innerbloom");
+let angelloPrev = -1;
+for (const p of angello) {
+  assert.ok(
+    p.timestamp >= angelloPrev,
+    `Steve Angello TML clocks must not go back @ ${p.timestamp}`,
+  );
+  angelloPrev = p.timestamp;
+}
+assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-5AdQy7lCbN0"]!.length >= 41);
 
 console.log("tracklists1001/seeds.test.ts ok");

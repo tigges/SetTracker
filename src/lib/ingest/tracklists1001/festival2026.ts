@@ -1295,6 +1295,169 @@ export const TL_KOLSCH_TML_WE2_2026: FingerprintSeedRow[] = [
 ];
 
 /**
+ * Steve Angello @ Mainstage, Tomorrowland Weekend 2, Belgium 2026-07-24
+ * Official YT: https://www.youtube.com/watch?v=5AdQy7lCbN0 (~60:22)
+ * 1001TL: https://1001.tl/1tfpw4qk — operator console capture 2026-08-01
+ * (20/41 timed cues; missing clocks already lerped in capture).
+ */
+export const TL_STEVE_ANGELLO_TML_WE2_2026: FingerprintSeedRow[] = [
+  { at: "0:12", artist: "Steve Angello", title: "Hooligans" },
+  {
+    at: "3:30",
+    artist:
+      "Chicane & Axwell vs. Swedish House Mafia vs. Opus III vs. Rui Da Silva & Cassandra Fox",
+    title:
+      "Offshore vs. Greyhound vs. Fine Day vs. Touch Me (Swedish House Mafia Mashup)",
+  },
+  {
+    at: "4:00",
+    artist: "Rui Da Silva ft. Cassandra Fox",
+    title: "Touch Me (Acappella)",
+  },
+  { at: "4:30", artist: "Swedish House Mafia", title: "Greyhound" },
+  { at: "5:01", artist: "Opus III", title: "It's A Fine Day (Acappella)" },
+  { at: "5:31", artist: "Chicane", title: "Offshore '97" },
+  { at: "6:02", artist: "Chicane", title: "Offshore (Axwell Intro Mix)" },
+  {
+    at: "6:32",
+    artist: "Swedish House Mafia & Knife Party ft. ADL",
+    title: "Antidote (MPH Remix)",
+  },
+  {
+    at: "8:16",
+    artist: "Basement Jaxx",
+    title: "Where's Your Head At? (Steve Angello Remix)",
+  },
+  { at: "10:57", artist: "Faithless", title: "Insomnia" },
+  {
+    at: "12:58",
+    artist: "Steve Angello & Laidback Luke & Rowetta",
+    title: "Be vs. Show Me Love vs. Knas (Swedish House Mafia Mashup)",
+  },
+  {
+    at: "13:40",
+    artist: "Steve Angello & Laidback Luke ft. Rowetta",
+    title: "Be",
+  },
+  {
+    at: "14:21",
+    artist: "Steve Angello & Laidback Luke ft. Robin S",
+    title: "Show Me Love (Tool)",
+  },
+  { at: "15:03", artist: "Steve Angello", title: "Knas" },
+  {
+    at: "15:44",
+    artist: "Swedish House Mafia ft. Tinie Tempah",
+    title: "Miami 2 Ibiza",
+  },
+  {
+    at: "18:38",
+    artist: "Swedish House Mafia & Niki & The Dove",
+    title: "Lioness",
+  },
+  {
+    at: "21:49",
+    artist: "Swedish House Mafia",
+    title: "Wait So Long (Why Do I Have To)",
+  },
+  { at: "24:55", artist: "Avicii", title: "Levels" },
+  { at: "28:29", artist: "Kryder", title: "Eivissa" },
+  { at: "29:49", artist: "Swedish House Mafia", title: "Ray Of Solar" },
+  {
+    at: "31:08",
+    artist:
+      "Swedish House Mafia vs. Eurythmics & Steve Angello vs. Pharrell Williams",
+    title:
+      "One (Your Name) vs. Sweet Dreams (Swedish House Mafia Mashup)",
+  },
+  {
+    at: "32:11",
+    artist: "Eurythmics",
+    title: "Sweet Dreams (Are Made of This) (Steve Angello Remix)",
+  },
+  { at: "33:14", artist: "Swedish House Mafia", title: "One" },
+  {
+    at: "34:18",
+    artist: "Swedish House Mafia ft. Pharrell Williams",
+    title: "One (Your Name)",
+  },
+  {
+    at: "35:21",
+    artist: "M83 & Eric Prydz vs. The Temper Trap",
+    title: "Midnight City vs. Sweet Disposition (Steve Angello Mashup)",
+  },
+  {
+    at: "36:39",
+    artist: "The Temper Trap",
+    title: "Sweet Disposition (Acappella)",
+  },
+  {
+    at: "37:57",
+    artist: "M83",
+    title: "Midnight City (Eric Prydz Private Remix)",
+  },
+  {
+    at: "39:15",
+    artist: "Supermode & MEDUZA vs. Benwal",
+    title: "Tell Me Why vs. Dive (Steve Angello Mashup)",
+  },
+  { at: "40:20", artist: "Supermode", title: "Tell Me Why (MEDUZA Remix)" },
+  { at: "41:26", artist: "Benwal", title: "Dive" },
+  {
+    at: "42:31",
+    artist: "Swedish House Mafia & Connie Constance",
+    title: "Heaven Takes You Home (Swedish House Mafia Remake)",
+  },
+  {
+    at: "45:40",
+    artist: "Steve Angello ft. Dougy Mandagi from The Temper Trap",
+    title: "Wasted Love (Grum Remix)",
+  },
+  {
+    at: "47:53",
+    artist: "Swedish House Mafia ft. John Martin",
+    title: "Save The World (NC Edit)",
+  },
+  {
+    at: "48:27",
+    artist:
+      "Sebastian Ingrosso & Tommy Trash & John Martin vs. Green Velvet & Nicky Romero",
+    title: "Reload vs. Flash (Axwell Λ Ingrosso Mashup)",
+  },
+  {
+    at: "49:01",
+    artist: "Green Velvet",
+    title: "Flash (Nicky Romero Remix)",
+  },
+  {
+    at: "49:36",
+    artist: "Sebastian Ingrosso & Tommy Trash ft. John Martin",
+    title: "Reload (Vocal Mix)",
+  },
+  {
+    at: "50:10",
+    artist: "Swedish House Mafia ft. John Martin",
+    title: "Don't You Worry Child",
+  },
+  {
+    at: "52:50",
+    artist: "Swedish House Mafia & Lykke Li",
+    title: "Happiness Is So Sad",
+  },
+  {
+    at: "56:45",
+    artist: "RÜFÜS DU SOL vs. Steve Angello & Dimitri Vangelis & Wyman",
+    title: "Innerbloom vs. Payback (Steve Angello Mashup)",
+  },
+  {
+    at: "58:08",
+    artist: "Dimitri Vangelis & Wyman X Steve Angello",
+    title: "Payback",
+  },
+  { at: "59:30", artist: "RÜFÜS DU SOL", title: "Innerbloom" },
+];
+
+/**
  * Layton Giordani @ circuitGROUNDS closing, EDC Las Vegas 2025-05-16
  * Official SC: https://soundcloud.com/laytongiordani/layton-giordani-live-edc-las-vegas-circuit-grounds-closing-set-2025 (~59:40)
  * 1001TL: https://1001.tl/bt007st — operator console capture 2026-08-01
@@ -2274,6 +2437,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-B05MAbsCOLA": TL_NICKY_ROMERO_TML_WE2_2026,
   "yt-dmhUJYEdkKo": TL_JAMES_HYPE_TML_WE2_2026,
   "yt-ra8NYbzPMnk": TL_KOLSCH_TML_WE2_2026,
+  "yt-5AdQy7lCbN0": TL_STEVE_ANGELLO_TML_WE2_2026,
 };
 
 /** Sanity: every seeded clock must parse. */

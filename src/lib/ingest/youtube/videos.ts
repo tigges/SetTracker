@@ -30,6 +30,7 @@ import {
   TL_MISS_MONIQUE_TML_WE2_2026,
   TL_NICKY_ROMERO_TML_WE2_2026,
   TL_ODD_MOB_TML_WE2_2026,
+  TL_STEVE_ANGELLO_TML_WE2_2026,
   TL_NICO_MORENO_EDC_LV_2026,
   TL_PEGASSI_EDC_LV_2026,
   TL_SARAH_DE_WARREN_EDC_LV_2026,
@@ -512,6 +513,22 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/2u0sgrq9/kolsch-mainstage-tomorrowland-weekend-2-belgium-2026-07-24.html",
     tracklist1001: TL_KOLSCH_TML_WE2_2026,
+  },
+  {
+    // Tomorrowland official — Mainstage WE2; 20/41 timed cues from 1001.
+    video: "https://www.youtube.com/watch?v=5AdQy7lCbN0",
+    primaryArtist: dj("Steve Angello", {
+      accent: "#e63946",
+      homeCity: "Stockholm, SE",
+    }),
+    genre: "Progressive House",
+    type: "festival",
+    title: "Steve Angello WE2 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1tfpw4qk/steve-angello-mainstage-tomorrowland-weekend-2-belgium-2026-07-24.html",
+    tracklist1001: TL_STEVE_ANGELLO_TML_WE2_2026,
   },
   {
     video: "https://www.youtube.com/watch?v=ObiAocVMTyo",
