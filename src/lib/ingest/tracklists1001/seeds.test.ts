@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { extract1001Urls } from "./parse";
 import {
   TL_AHEE_LIQUID_STRANGER_EDC_LV_2026,
+  TL_AYYBO_ODD_MOB_TML_WE2_2026,
   TL_BLEU_CLAIR_EDC_LV_2023,
   TL_CALVIN_HARRIS_TML_WE2_2026,
   TL_CHARLOTTE_DE_WITTE_TML_WE1_2026,
@@ -604,5 +605,21 @@ assert.equal(
   ),
   false,
 );
+
+assertSeedClocks(TL_AYYBO_ODD_MOB_TML_WE2_2026);
+const ayybo = tracklist1001RowsToPlays(TL_AYYBO_ODD_MOB_TML_WE2_2026);
+assert.equal(ayybo.length, 30);
+assert.match(ayybo[0]!.trackTitle!, /Party Time/);
+assert.equal(ayybo[ayybo.length - 1]!.trackTitle, "Rock That Body");
+assert.equal(ayybo[ayybo.length - 1]!.timestamp, 88 * 60 + 20);
+let ayyboPrev = -1;
+for (const p of ayybo) {
+  assert.ok(
+    p.timestamp >= ayyboPrev,
+    `AYYBO Odd Mob TML clocks must not go back @ ${p.timestamp}`,
+  );
+  ayyboPrev = p.timestamp;
+}
+assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-gO03gfI_JF0"]!.length >= 30);
 
 console.log("tracklists1001/seeds.test.ts ok");

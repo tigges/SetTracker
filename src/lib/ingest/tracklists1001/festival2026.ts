@@ -1809,6 +1809,97 @@ export const TL_SONNY_FODERA_TML_WE2_2026: FingerprintSeedRow[] =
   );
 
 /**
+ * AYYBO & Odd Mob @ Crystal Garden Stage, Tomorrowland Weekend 2, Belgium 2026-07-25
+ * Official YT: https://www.youtube.com/watch?v=gO03gfI_JF0 (~90:17)
+ * 1001TL: https://1001.tl/1qn93jz1 — operator console capture 2026-08-01
+ * (26/30 timed cues; missing clocks already lerped in capture).
+ */
+export const TL_AYYBO_ODD_MOB_TML_WE2_2026: FingerprintSeedRow[] = [
+  {
+    at: "0:00",
+    artist: "Tiga & Chris Lake ft. Aatig",
+    title: "Party Time (AYYBO Remix)",
+  },
+  { at: "8:25", artist: "AYYBO ft. Preme", title: "Drench" },
+  { at: "10:25", artist: "Dodi & Toni B", title: "Vibe Check" },
+  { at: "12:25", artist: "Nadin", title: "Mr. Logan" },
+  { at: "15:13", artist: "Mau P", title: "Like I Like It" },
+  { at: "18:00", artist: "ZINGA", title: "Paradise Place" },
+  { at: "19:55", artist: "AYYBO", title: "Rizz" },
+  {
+    at: "21:20",
+    artist: "Azari & III",
+    title: "Hungry For The Power (Lucas Bahr Remix)",
+  },
+  { at: "25:00", artist: "Ohello", title: "The Potion" },
+  { at: "26:05", artist: "Cajmere", title: "Percolator (Acappella)" },
+  { at: "27:20", artist: "AYYBO", title: "Rizz" },
+  {
+    at: "28:45",
+    artist: "ATC",
+    title: "Around The World (La La La La La) (Odd Mob Remix)",
+  },
+  {
+    at: "33:05",
+    artist: "Michael Jackson",
+    title: "Wanna be Startin' Somethin' (Franco Lippi Tribute Remix)",
+  },
+  { at: "37:35", artist: "Ohio Players", title: "Love Rollercoaster" },
+  { at: "41:10", artist: "Bessey", title: "Cocaine" },
+  {
+    at: "44:25",
+    artist: "Odd Mob & Walker & Royce ft. Benni Ola",
+    title: "Can't Say Nah",
+  },
+  { at: "48:00", artist: "JACKSKI", title: "The Others" },
+  {
+    at: "52:00",
+    artist: "Tiësto & Odd Mob & GOODBOYS",
+    title: "Won't Be Possible",
+  },
+  { at: "54:25", artist: "Eminem", title: "Without Me (Gabss Edit)" },
+  {
+    at: "58:00",
+    artist: "Cake",
+    title: "Short Skirt/Long Jacket (Anti Up Remix)",
+  },
+  { at: "1:01:50", artist: "AYYBO & ero808", title: "HYPNOSIS (VIP)" },
+  { at: "1:05:30", artist: "AYYBO", title: "Rizz" },
+  {
+    at: "1:09:25",
+    artist: "Technotronic",
+    title: "Pump Up The Jam (AYYBO Edit)",
+  },
+  {
+    at: "1:11:18",
+    artist: "Destiny's Child",
+    title: "Lose My Breath (Acappella)",
+  },
+  {
+    at: "1:13:10",
+    artist: "Montell Jordan",
+    title: "This Is How We Do It (Odd Mob Loves California Edit)",
+  },
+  {
+    at: "1:15:55",
+    artist: "Odd Mob & OMNOM pres. HYPERBEAM",
+    title: "Take You There",
+  },
+  { at: "1:19:20", artist: "Tiga", title: "Woke" },
+  {
+    at: "1:22:30",
+    artist: "Wu-Tang Clan",
+    title: "Da Mystery Of Chessboxin' (Chau Edit)",
+  },
+  {
+    at: "1:25:15",
+    artist: "SIDEPIECE & Bobby Shmurda",
+    title: "CASH OUT (Odd Mob Remix)",
+  },
+  { at: "1:28:20", artist: "Black Eyed Peas", title: "Rock That Body" },
+];
+
+/**
  * Layton Giordani @ circuitGROUNDS closing, EDC Las Vegas 2025-05-16
  * Official SC: https://soundcloud.com/laytongiordani/layton-giordani-live-edc-las-vegas-circuit-grounds-closing-set-2025 (~59:40)
  * 1001TL: https://1001.tl/bt007st — operator console capture 2026-08-01
@@ -2792,6 +2883,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-mVB-gqggrCQ": TL_FISHER_TML_WE2_2026,
   "yt-yWZyIQtxoXU": TL_HARDWELL_TML_WE2_2026,
   "yt-Py-GG74lLU8": TL_HARDWELL_TML_WE2_2026,
+  "yt-gO03gfI_JF0": TL_AYYBO_ODD_MOB_TML_WE2_2026,
 };
 
 /** Sanity: every seeded clock must parse. */

@@ -16,6 +16,7 @@ import {
 } from "../fingerprint/seeds";
 import {
   TL_AHEE_LIQUID_STRANGER_EDC_LV_2026,
+  TL_AYYBO_ODD_MOB_TML_WE2_2026,
   TL_BLEU_CLAIR_EDC_LV_2023,
   TL_CLOONEE_PROSPA_DESTINO_2026,
   TL_DARUDE_EDC_LV_2026,
@@ -563,6 +564,22 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/14y11rh1/hardwell-mainstage-tomorrowland-weekend-2-belgium-2026-07-24.html",
     tracklist1001: TL_HARDWELL_TML_WE2_2026,
+  },
+  {
+    // Tomorrowland official — Crystal Garden WE2 B2B; 26/30 timed cues.
+    video: "https://www.youtube.com/watch?v=gO03gfI_JF0",
+    primaryArtist: dj("AYYBO", {
+      accent: "#ff006e",
+      homeCity: "US",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    title: "Ayybo b2b Odd Mob WE2 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1qn93jz1/ayybo-odd-mob-crystal-garden-stage-tomorrowland-weekend-2-belgium-2026-07-25.html",
+    tracklist1001: TL_AYYBO_ODD_MOB_TML_WE2_2026,
   },
   {
     video: "https://www.youtube.com/watch?v=ObiAocVMTyo",
