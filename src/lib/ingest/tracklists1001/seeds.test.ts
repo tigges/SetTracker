@@ -35,6 +35,7 @@ import {
   TL_PEGASSI_EDC_LV_2026,
   TL_SARAH_DE_WARREN_EDC_LV_2026,
   TL_SOLOMUN_EDC_LV_2026,
+  TL_SONNY_FODERA_TML_WE2_2026,
   TL_STEVE_ANGELLO_TML_WE2_2026,
   TL_WAX_MOTIF_EDC_LV_2021,
   TL_WESTEND_EDC_LV_2026,
@@ -588,6 +589,18 @@ assert.match(calvin[calvin.length - 1]!.trackTitle!, /Atom/);
 assert.equal(
   Object.values(TRACKLIST_1001_BY_SOURCE_SLUG).includes(
     TL_CALVIN_HARRIS_TML_WE2_2026,
+  ),
+  false,
+);
+
+assertSeedClocks(TL_SONNY_FODERA_TML_WE2_2026);
+const sonny = tracklist1001RowsToPlays(TL_SONNY_FODERA_TML_WE2_2026);
+assert.equal(sonny.length, 16);
+assert.equal(sonny[0]!.trackTitle, "Freed From Desire");
+assert.match(sonny[sonny.length - 1]!.trackTitle!, /Celebration/);
+assert.equal(
+  Object.values(TRACKLIST_1001_BY_SOURCE_SLUG).includes(
+    TL_SONNY_FODERA_TML_WE2_2026,
   ),
   false,
 );

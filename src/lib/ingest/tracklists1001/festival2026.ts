@@ -1780,6 +1780,35 @@ export const TL_CALVIN_HARRIS_TML_WE2_2026: FingerprintSeedRow[] =
   );
 
 /**
+ * Sonny Fodera @ The Great Library Stage, Tomorrowland Weekend 2, Belgium 2026-07-25
+ * 1001TL: https://1001.tl/1muw1md9 — operator console capture 2026-08-01
+ * (0/16 timed cues — evenly spaced across ~60m).
+ * No official Tomorrowland Relive yet — seed ready; do not wire clips.
+ */
+export const TL_SONNY_FODERA_TML_WE2_2026: FingerprintSeedRow[] =
+  evenlySpaceRows(
+    [
+      { artist: "Gala", title: "Freed From Desire" },
+      { artist: "ANOTR ft. 54 Ultra", title: "Talk To You" },
+      { artist: "Dean Turnley", title: "Actin' Tough (Sonny Fodera Edit)" },
+      { artist: "Peggy Gou", title: "(It Goes Like) Nanana (Sonny Fodera Remix)" },
+      { artist: "Ethan Walsh", title: "Look Good" },
+      { artist: "Crystal Waters", title: "Gypsy Woman (She's Homeless)" },
+      { artist: "Odd Mob", title: "LEFT TO RIGHT" },
+      { artist: "Sonny Fodera & Janai vs. Rebūke", title: "You & I vs. Along Came Polly (Sonny Fodera Edit)" },
+      { artist: "Sonny Fodera ft. Janai", title: "You & I" },
+      { artist: "Rebūke", title: "Along Came Polly" },
+      { artist: "Gotye ft. Kimbra", title: "Somebody That I Used To Know" },
+      { artist: "Jackie & AVIV SAB", title: "Sexy M.F." },
+      { artist: "Sonny Fodera & Janai", title: "Use Somebody" },
+      { artist: "Everything But The Girl", title: "Missing (Todd Terry Remix)" },
+      { artist: "Chris Stussy & S.A.M.", title: "Breather" },
+      { artist: "Supermini & Frankie Romano", title: "Celebration (Antdot & Maz Edit)" }
+    ],
+    3600,
+  );
+
+/**
  * Layton Giordani @ circuitGROUNDS closing, EDC Las Vegas 2025-05-16
  * Official SC: https://soundcloud.com/laytongiordani/layton-giordani-live-edc-las-vegas-circuit-grounds-closing-set-2025 (~59:40)
  * 1001TL: https://1001.tl/bt007st — operator console capture 2026-08-01
