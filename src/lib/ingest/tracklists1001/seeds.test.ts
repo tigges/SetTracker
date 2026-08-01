@@ -28,6 +28,7 @@ import {
   TL_KOROLOVA_TML_WE2_2026,
   TL_LUCAS_STEVE_TML_WE2_2026,
   TL_SARA_LANDRY_TML_WE2_2026,
+  TL_AFROJACK_R3HAB_TML_WE2_2026,
   TL_LAYTON_GIORDANI_EDC_LV_2025_CLOSING,
   TL_MARTEN_HORGER_EDC_LV_2023,
   TL_MAX_STYLER_EDC_LV_2024,
@@ -716,5 +717,21 @@ for (const p of saraLandry) {
   slPrev = p.timestamp;
 }
 assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-aDAWctObTvI"]!.length >= 17);
+
+assertSeedClocks(TL_AFROJACK_R3HAB_TML_WE2_2026);
+const afroR3 = tracklist1001RowsToPlays(TL_AFROJACK_R3HAB_TML_WE2_2026);
+assert.equal(afroR3.length, 54);
+assert.equal(afroR3[0]!.trackTitle, "Ultimate");
+assert.equal(afroR3[afroR3.length - 1]!.trackTitle, "Bangduck");
+assert.equal(afroR3[afroR3.length - 1]!.timestamp, 59 * 60 + 30);
+let arPrev = -1;
+for (const p of afroR3) {
+  assert.ok(
+    p.timestamp >= arPrev,
+    `AFROJACK R3HAB TML clocks must not go back @ ${p.timestamp}`,
+  );
+  arPrev = p.timestamp;
+}
+assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-AjQeohYmg3A"]!.length >= 54);
 
 console.log("tracklists1001/seeds.test.ts ok");

@@ -2336,6 +2336,129 @@ export const TL_SARA_LANDRY_TML_WE2_2026: FingerprintSeedRow[] = [
 ];
 
 /**
+ * AFROJACK & R3HAB @ Mainstage, Tomorrowland Weekend 2, Belgium 2026-07-26
+ * Official YT: https://www.youtube.com/watch?v=AjQeohYmg3A
+ * 1001TL: https://1001.tl/2s55dyj1 — operator console capture 2026-08-01
+ * (21/54 timed cues; missing clocks already lerped in capture).
+ */
+export const TL_AFROJACK_R3HAB_TML_WE2_2026: FingerprintSeedRow[] = [
+  { at: "0:12", artist: "R3HAB & Vion Konger & Skytech", title: "Ultimate" },
+  { at: "1:52", artist: "AFROJACK & Steve Aoki ft. Miss Palmer", title: "No Beef (Acappella)" },
+  { at: "3:31", artist: "Zombie Nation", title: "Kernkraft 400" },
+  { at: "3:46", artist: "Alesso", title: "Raise Your Head (Acappella)" },
+  { at: "4:01", artist: "AFROJACK & R3HAB", title: "Shockwave" },
+  {
+    at: "4:16",
+    artist: "David Guetta & GLOWINTHEDARK ft. Harrison",
+    title: "Ain't A Party (Let Me See Your Fuckin Hands Acappella)",
+  },
+  { at: "4:30", artist: "Vion Konger", title: "Funky Shit" },
+  { at: "5:10", artist: "Icona Pop ft. Charli xcx", title: "I Love It (Acappella)" },
+  {
+    at: "5:50",
+    artist: "Martin Garrix & R3HAB & Skytech vs. Empire Of The Sun",
+    title: "Voodoo vs. Walking On A Dream (Martin Garrix Mashup)",
+  },
+  { at: "6:47", artist: "Empire Of The Sun", title: "Walking On A Dream (Acappella)" },
+  { at: "7:44", artist: "Martin Garrix & R3HAB & Skytech", title: "Voodoo" },
+  { at: "8:40", artist: "R3HAB & Deorro", title: "Flashlight" },
+  {
+    at: "9:03",
+    artist: "Mightyfools",
+    title: "Footrocker (Get Your, Get Your Hands Up Acappella)",
+  },
+  { at: "9:26", artist: "R3HAB & KSHMR", title: "Karate" },
+  { at: "10:11", artist: "Corona", title: "The Rhythm Of The Night (Acappella)" },
+  { at: "10:55", artist: "AFROJACK & Bart B More", title: "Nothing But This" },
+  { at: "13:24", artist: "Tavatli", title: "FE!N" },
+  { at: "14:51", artist: "Tove Lo", title: "Habits (Stay High) (Acappella)" },
+  { at: "16:18", artist: "Korolova & R3HAB", title: "Hi Hello" },
+  { at: "19:07", artist: "ARTBAT & R3HAB", title: "The Sound" },
+  { at: "22:48", artist: "HUGEL & SOLTO", title: "Jamaican (Bam Bam) (Vion Konger Remix)" },
+  {
+    at: "24:03",
+    artist: "Sebastian Ingrosso & Tommy Trash ft. John Martin",
+    title: "Reload (Afrojack Edit)",
+  },
+  {
+    at: "25:18",
+    artist: "Swedish House Mafia ft. John Martin",
+    title: "Don't You Worry Child (Acappella)",
+  },
+  { at: "26:33", artist: "NLW & R3HAB ft. MC Ambush", title: "Let Me See Those Hands" },
+  { at: "27:48", artist: "Afrojack ft. Wrabel", title: "Ten Feet Tall" },
+  { at: "31:22", artist: "ANOTR ft. 54 Ultra", title: "Talk To You (AFROJACK Remix)" },
+  {
+    at: "33:13",
+    artist: "Mightyfools",
+    title: "Footrocker (Get Your, Get Your Hands Up Acappella)",
+  },
+  {
+    at: "35:04",
+    artist: "Pitbull ft. Ne-Yo & Afrojack & Nayer",
+    title: "Give Me Everything (Acappella)",
+  },
+  { at: "36:55", artist: "AFROJACK & Arti Prjct & SOFI TUKKER", title: "Adrenaline" },
+  { at: "39:50", artist: "David Guetta ft. Sia", title: "Titanium" },
+  { at: "40:29", artist: "Lazy Rich & Hot Mouth", title: "Flash" },
+  {
+    at: "41:08",
+    artist: "UMEK & Popof & Space 92 vs. Hardwell & Afrojack",
+    title: "Control vs. Hands Up (Hardwell Mashup)",
+  },
+  { at: "41:47", artist: "Hardwell & AFROJACK ft. MC Ambush", title: "Hands Up" },
+  { at: "42:27", artist: "UMEK & POPOF & Space 92", title: "Control" },
+  { at: "43:06", artist: "AFROJACK & Gil Glaze", title: "Allein" },
+  { at: "46:39", artist: "ARTBAT & R3HAB & Stylo & Eli & Dani ft. NAIIM", title: "Fight Machine" },
+  {
+    at: "47:20",
+    artist: "Pitbull ft. Lil Jon & will.i.am & Jermaine Dupri",
+    title: "Put Ya Fuckin Hands Up (Acappella)",
+  },
+  { at: "48:01", artist: "MAKJ & Lil Jon", title: "Let's Get F*cked Up (Acappella)" },
+  {
+    at: "48:43",
+    artist: "The Bloody Beetroots ft. Steve Aoki",
+    title: "Warp 1.9 (One, Two, Woop, Woop Acappella)",
+  },
+  {
+    at: "49:24",
+    artist: "AFROJACK & Martin Garrix",
+    title: "Turn Up The Speakers (AFROJACK Edit)",
+  },
+  { at: "50:20", artist: "Avicii ft. Simon Aldred", title: "Waiting For Love (Acappella)" },
+  { at: "51:16", artist: "AFROJACK & Martin Garrix", title: "Turn Up The Speakers" },
+  {
+    at: "52:12",
+    artist: "R3HAB & Skytech & Pupa Nas T & Kevin McKay ft. Denise Belfon & Fideles",
+    title: "Work",
+  },
+  {
+    at: "53:08",
+    artist: "AFROJACK & Martin Garrix",
+    title: "Turn Up The Speakers (Julian Jordan Remix)",
+  },
+  { at: "54:03", artist: "Jack \u00dc ft. Bunji Garlin & MX Prime", title: "Jungle Bae" },
+  { at: "54:29", artist: "R3HAB & VINAI", title: "How We Party" },
+  { at: "54:55", artist: "Major Lazer ft. Vybz Kartel", title: "Pon De Floor (Acappella)" },
+  {
+    at: "55:21",
+    artist: "Dimitri Vegas & Like Mike & W&W vs. The White Stripes",
+    title: "Arcade vs. Seven Nation Army (W&W Edit)",
+  },
+  { at: "55:50", artist: "The White Stripes", title: "Seven Nation Army" },
+  { at: "56:19", artist: "Dimitri Vegas & Like Mike vs. W&W", title: "Arcade" },
+  {
+    at: "56:48",
+    artist: "Dimitri Vegas & Like Mike & Martin Garrix",
+    title: "Tremor (Sensation 2014 Anthem) (3, 2, 1 Go Acappella)",
+  },
+  { at: "57:17", artist: "AFROJACK ft. Eva Simons", title: "Take Over Control" },
+  { at: "58:24", artist: "Avicii", title: "Levels" },
+  { at: "59:30", artist: "Afrojack", title: "Bangduck" },
+];
+
+/**
  * Layton Giordani @ circuitGROUNDS closing, EDC Las Vegas 2025-05-16
  * Official SC: https://soundcloud.com/laytongiordani/layton-giordani-live-edc-las-vegas-circuit-grounds-closing-set-2025 (~59:40)
  * 1001TL: https://1001.tl/bt007st — operator console capture 2026-08-01
@@ -3325,6 +3448,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-RLOghpXjuJI": TL_KOROLOVA_TML_WE2_2026,
   "yt-LE-byccuovI": TL_LUCAS_STEVE_TML_WE2_2026,
   "yt-aDAWctObTvI": TL_SARA_LANDRY_TML_WE2_2026,
+  "yt-AjQeohYmg3A": TL_AFROJACK_R3HAB_TML_WE2_2026,
 };
 
 /** Sanity: every seeded clock must parse. */
