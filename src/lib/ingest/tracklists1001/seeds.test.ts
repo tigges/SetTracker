@@ -10,6 +10,7 @@ import {
   TL_DARUDE_EDC_LV_2026,
   TL_DOM_DOLLA_EDC_LV_2023,
   TL_DOM_DOLLA_EDC_LV_2024,
+  TL_ENRICO_SANGIULIANO_TML_WE2_2026,
   TL_FUNK_TRIBU_EDC_LV_2026,
   TL_HOLY_PRIEST_EDC_LV_2026,
   TL_HOLY_PRIEST_TML_WE1_2026,
@@ -427,5 +428,21 @@ for (const p of missM) {
   mmPrev = p.timestamp;
 }
 assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-WhPtvotfYbc"]!.length >= 20);
+
+assertSeedClocks(TL_ENRICO_SANGIULIANO_TML_WE2_2026);
+const enrico = tracklist1001RowsToPlays(TL_ENRICO_SANGIULIANO_TML_WE2_2026);
+assert.equal(enrico.length, 19);
+assert.equal(enrico[0]!.trackTitle, "Escape Domo");
+assert.match(enrico[enrico.length - 1]!.trackTitle!, /Techno Code/);
+assert.equal(enrico[enrico.length - 1]!.timestamp, 78 * 60 + 35);
+let enricoPrev = -1;
+for (const p of enrico) {
+  assert.ok(
+    p.timestamp >= enricoPrev,
+    `Enrico TML clocks must not go back @ ${p.timestamp}`,
+  );
+  enricoPrev = p.timestamp;
+}
+assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-ubFrkYGGqo8"]!.length >= 19);
 
 console.log("tracklists1001/seeds.test.ts ok");

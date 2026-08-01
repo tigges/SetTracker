@@ -24,6 +24,7 @@ import {
   TL_FUNK_TRIBU_EDC_LV_2026,
   TL_HOLY_PRIEST_EDC_LV_2026,
   TL_MATTY_RALPH_EDC_LV_2026,
+  TL_ENRICO_SANGIULIANO_TML_WE2_2026,
   TL_MISS_MONIQUE_TML_WE2_2026,
   TL_ODD_MOB_TML_WE2_2026,
   TL_NICO_MORENO_EDC_LV_2026,
@@ -444,6 +445,22 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/2u0sds71/miss-monique-mainstage-tomorrowland-weekend-2-belgium-2026-07-24.html",
     tracklist1001: TL_MISS_MONIQUE_TML_WE2_2026,
+  },
+  {
+    // Tomorrowland official — Freedom Stage WE2; 17/19 timed cues from 1001.
+    video: "https://www.youtube.com/watch?v=ubFrkYGGqo8",
+    primaryArtist: dj("Enrico Sangiuliano", {
+      accent: "#e9c46a",
+      homeCity: "Rimini, IT",
+    }),
+    genre: "Techno",
+    type: "festival",
+    title: "Enrico Sangiuliano WE2 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/16tnb0pk/enrico-sangiuliano-freedom-stage-tomorrowland-weekend-2-belgium-2026-07-24.html",
+    tracklist1001: TL_ENRICO_SANGIULIANO_TML_WE2_2026,
   },
   {
     video: "https://www.youtube.com/watch?v=ObiAocVMTyo",

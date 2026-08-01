@@ -1004,6 +1004,54 @@ export const TL_MISS_MONIQUE_TML_WE2_2026: FingerprintSeedRow[] = [
 ];
 
 /**
+ * Enrico Sangiuliano @ Freedom Stage, Tomorrowland Weekend 2, Belgium 2026-07-24
+ * Official YT: https://www.youtube.com/watch?v=ubFrkYGGqo8 (~88:18)
+ * 1001TL: https://1001.tl/16tnb0pk — operator console capture 2026-08-01
+ * (17/19 timed cues; missing clocks already lerped in capture).
+ */
+export const TL_ENRICO_SANGIULIANO_TML_WE2_2026: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "Horacio Cruz", title: "Escape Domo" },
+  { at: "2:00", artist: "Chlär", title: "No Ceiling" },
+  { at: "4:00", artist: "Victor Ruiz", title: "Scorpio (HNGT Remix)" },
+  { at: "8:35", artist: "Remco Beekwilder", title: "Rhythm Pressure" },
+  { at: "11:00", artist: "Lewis Fautzi", title: "Nonlinear Form" },
+  { at: "12:45", artist: "Julian Jeweil", title: "Firework" },
+  { at: "15:20", artist: "Astral J", title: "Hhh! Shhh!" },
+  { at: "18:40", artist: "Enrico Sangiuliano", title: "Interconnection" },
+  { at: "27:30", artist: "LUSU", title: "Like This" },
+  { at: "31:15", artist: "JackRock", title: "Limerence" },
+  {
+    at: "39:50",
+    artist: "Enrico Sangiuliano",
+    title: "Order In Chaos (Reactive Mix)",
+  },
+  { at: "44:23", artist: "Bedrock", title: "Heaven Scent" },
+  { at: "48:55", artist: "Enrico Sangiuliano", title: "The Sound Of Space" },
+  { at: "53:35", artist: "Demon Noise", title: "Signals" },
+  {
+    at: "57:35",
+    artist: "Enrico Sangiuliano",
+    title: "Blooming Era (Sam Kitt Remix)",
+  },
+  { at: "1:01:30", artist: "Underworld", title: "Born Slippy (Nuxx)" },
+  {
+    at: "1:03:20",
+    artist: "Charlotte de Witte & Enrico Sangiuliano",
+    title: "Reflection",
+  },
+  {
+    at: "1:11:35",
+    artist: "Enrico Sangiuliano & GMS",
+    title: "Transcendence",
+  },
+  {
+    at: "1:18:35",
+    artist: "Enrico Sangiuliano",
+    title: "The Techno Code (Demon Noise Remix)",
+  },
+];
+
+/**
  * Layton Giordani @ circuitGROUNDS closing, EDC Las Vegas 2025-05-16
  * Official SC: https://soundcloud.com/laytongiordani/layton-giordani-live-edc-las-vegas-circuit-grounds-closing-set-2025 (~59:40)
  * 1001TL: https://1001.tl/bt007st — operator console capture 2026-08-01
@@ -1978,6 +2026,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-D8eLxmifH4o": TL_HOLY_PRIEST_EDC_LV_2026,
   "yt-2idboK_vTT8": TL_ODD_MOB_TML_WE2_2026,
   "yt-WhPtvotfYbc": TL_MISS_MONIQUE_TML_WE2_2026,
+  "yt-ubFrkYGGqo8": TL_ENRICO_SANGIULIANO_TML_WE2_2026,
 };
 
 /** Sanity: every seeded clock must parse. */
