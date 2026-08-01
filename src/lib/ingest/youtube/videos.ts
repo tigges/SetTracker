@@ -21,6 +21,7 @@ import {
   TL_DARUDE_EDC_LV_2026,
   TL_MARTEN_HORGER_EDC_LV_2023,
   TL_MARTEN_HORGER_PAROOKAVILLE_2026,
+  TL_SARAH_DE_WARREN_EDC_LV_2026,
   TL_SOLOMUN_EDC_LV_2026,
   TL_WESTEND_EDC_LV_2026,
 } from "../tracklists1001/seeds";
@@ -314,6 +315,21 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/1v8whc0k/darude-quantumvalley-edc-las-vegas-united-states-2026-05-15.html",
     tracklist1001: TL_DARUDE_EDC_LV_2026,
+  },
+  {
+    // Insomniac Relive — already in catalog via @insomniac; seed fills 0 plays.
+    video: "https://www.youtube.com/watch?v=KIb3psOt9hI",
+    primaryArtist: dj("Sarah de Warren", {
+      accent: "#c77dff",
+      homeCity: "US",
+    }),
+    genre: "Trance",
+    type: "festival",
+    title: "Sarah De Warren Live at EDC Las Vegas 2026 (Official Full Set)",
+    eventName: "EDC Las Vegas",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1z031tz1/sarah-de-warren-quantumvalley-edc-las-vegas-united-states-2026-05-15.html",
+    tracklist1001: TL_SARAH_DE_WARREN_EDC_LV_2026,
   },
   {
     video: "https://www.youtube.com/watch?v=ObiAocVMTyo",

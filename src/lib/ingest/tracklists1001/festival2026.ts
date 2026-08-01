@@ -1315,6 +1315,82 @@ export const TL_SOLOMUN_EDC_LV_2026: FingerprintSeedRow[] = [
   { at: "1:25:40", artist: "Solomun", title: "Kinesphere" },
 ];
 
+/**
+ * Sarah de Warren @ quantumVALLEY, EDC Las Vegas 2026-05-15
+ * Official YT: https://www.youtube.com/watch?v=KIb3psOt9hI (~40:43)
+ * 1001TL: https://1001.tl/1z031tz1 — operator console capture 2026-08-01
+ * (14/15 timed cues). Note: last cues run past the Relive duration.
+ */
+export const TL_SARAH_DE_WARREN_EDC_LV_2026: FingerprintSeedRow[] = [
+  {
+    at: "0:00",
+    artist: "ARTBAT & R3HAB & Stylo & Eli & Dani ft. NAIIM",
+    title: "Fight Machine",
+  },
+  { at: "0:01", artist: "Kaskade & Sarah de Warren", title: "UV" },
+  {
+    at: "2:17",
+    artist: "Layton Giordani ft. LINNEY & Sarah de Warren",
+    title: "Act Of God (CamelPhat Remix)",
+  },
+  {
+    at: "7:12",
+    artist: "Danny Avila ft. Sarah de Warren",
+    title: "Kiss Girls",
+  },
+  {
+    at: "10:55",
+    artist: "Anyma & LISA",
+    title: "Bad Angel (DJ KUBA & NEITAN Remix)",
+  },
+  {
+    at: "14:39",
+    artist: "Dom Dolla ft. Daya",
+    title: "Dreamin (Olly James Rework)",
+  },
+  {
+    at: "18:13",
+    artist: "Charlotte de Witte ft. CERES",
+    title: "Amor",
+  },
+  {
+    at: "20:10",
+    artist: "Yves Deruyter",
+    title: "Back To Earth (Daxson Rave Mix)",
+  },
+  { at: "26:40", artist: "Sarah de Warren", title: "What U Like" },
+  {
+    at: "29:20",
+    artist: "Olly James & Sarah de Warren",
+    title: "303 State",
+  },
+  {
+    at: "32:38",
+    artist: "Alice Deejay",
+    title: "Better Off Alone (Marie Vaunt Remix)",
+  },
+  {
+    at: "36:51",
+    artist: "Milio Ruando & Sarah de Warren",
+    title: "Never Look Back",
+  },
+  {
+    at: "40:49",
+    artist: "Nifra & Sarah De Warren",
+    title: "On Repeat",
+  },
+  {
+    at: "44:50",
+    artist: "Tao Andra & Sarah de Warren",
+    title: "God Gave Us Techno",
+  },
+  {
+    at: "48:43",
+    artist: "Culture Shock & Sarah de Warren",
+    title: "All The Things She Said (Culture Shock Version)",
+  },
+];
+
 /** sourceSlug → curated 1001TL seed (SC / YT when live HTML is CF-blocked). */
 export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   string,
@@ -1340,6 +1416,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-dXBoIY65P8s": TL_DARUDE_EDC_LV_2026,
   "yt-c_sx3zum8Z0": TL_BLEU_CLAIR_EDC_LV_2023,
   "yt-g1vH9C_o-vo": TL_SOLOMUN_EDC_LV_2026,
+  "yt-KIb3psOt9hI": TL_SARAH_DE_WARREN_EDC_LV_2026,
 };
 
 /** Sanity: every seeded clock must parse. */

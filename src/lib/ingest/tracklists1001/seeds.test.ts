@@ -15,6 +15,7 @@ import {
   TL_MAX_STYLER_EDC_LV_2024,
   TL_MARTEN_HORGER_PAROOKAVILLE_2026,
   TL_ODD_MOB_EDC_LV_2025,
+  TL_SARAH_DE_WARREN_EDC_LV_2026,
   TL_SOLOMUN_EDC_LV_2026,
   TL_WAX_MOTIF_EDC_LV_2021,
   TL_WESTEND_EDC_LV_2026,
@@ -290,5 +291,20 @@ for (const p of solomun) {
   solPrev = p.timestamp;
 }
 assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-g1vH9C_o-vo"]!.length >= 16);
+
+assertSeedClocks(TL_SARAH_DE_WARREN_EDC_LV_2026);
+const sarah = tracklist1001RowsToPlays(TL_SARAH_DE_WARREN_EDC_LV_2026);
+assert.equal(sarah.length, 15);
+assert.equal(sarah[0]!.trackTitle, "Fight Machine");
+assert.match(sarah[sarah.length - 1]!.trackTitle!, /All The Things She Said/);
+let sarahPrev = -1;
+for (const p of sarah) {
+  assert.ok(
+    p.timestamp >= sarahPrev,
+    `Sarah de Warren clocks must not go back @ ${p.timestamp}`,
+  );
+  sarahPrev = p.timestamp;
+}
+assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-KIb3psOt9hI"]!.length >= 14);
 
 console.log("tracklists1001/seeds.test.ts ok");
