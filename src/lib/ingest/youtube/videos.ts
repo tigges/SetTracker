@@ -29,6 +29,12 @@ import {
   TL_ENRICO_SANGIULIANO_TML_WE2_2026,
   TL_FISHER_TML_WE2_2026,
   TL_HARDWELL_TML_WE2_2026,
+  TL_CYRIL_TML_WE2_2026,
+  TL_DIMITRI_VEGAS_NICO_MORENO_TML_WE2_2026,
+  TL_BASSJACKERS_TML_WE2_2026,
+  TL_BHASKAR_TML_WE2_2026,
+  TL_PUSH_TML_WE2_2026,
+  TL_JAMES_HYPE_MELKWEG_ADE_2025,
   TL_JAMES_HYPE_TML_WE2_2026,
   TL_JOHN_SUMMIT_TML_WE2_2026,
   TL_KOLSCH_TML_WE2_2026,
@@ -206,6 +212,22 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     seriesName: "Get Closer",
     eventName: "Get Closer London",
     fingerprintPlays: FP_JAMES_HYPE_GET_CLOSER_LONDON_2,
+  },
+  {
+    // Artist upload — Get Closer Melkweg ADE; 33/51 timed (rest lerped).
+    video: "https://www.youtube.com/watch?v=QThaqlzSqLw",
+    primaryArtist: dj("James Hype", {
+      accent: "#ff3d6e",
+      homeCity: "Liverpool, UK",
+    }),
+    genre: "Tech House",
+    type: "club",
+    title: "James Hype, live @ Melkweg, Amsterdam",
+    seriesName: "Get Closer",
+    eventName: "Get Closer Melkweg ADE",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1g6h49l1/james-hype-get-closer-melkweg-amsterdam-dance-event-netherlands-2025-10-23.html",
+    tracklist1001: TL_JAMES_HYPE_MELKWEG_ADE_2025,
   },
   {
     video: "https://www.youtube.com/watch?v=i9cNYaOOdwA",
@@ -699,6 +721,86 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/rwtx921/steve-aoki-mainstage-tomorrowland-weekend-2-belgium-2026-07-26.html",
     tracklist1001: TL_STEVE_AOKI_TML_WE2_2026,
+  },
+  {
+    // Tomorrowland official — Mainstage WE2; 0/24 timed → evenly spaced ~60m.
+    video: "https://www.youtube.com/watch?v=DAOlnMYA3nU",
+    primaryArtist: dj("CYRIL", {
+      accent: "#f4a261",
+      homeCity: "Sydney, AU",
+    }),
+    genre: "Dance",
+    type: "festival",
+    title: "Cyril WE2 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/l9zzj79/cyril-mainstage-tomorrowland-weekend-2-belgium-2026-07-26.html",
+    tracklist1001: TL_CYRIL_TML_WE2_2026,
+  },
+  {
+    // Tomorrowland official — Great Library WE2 B2B; 24/35 timed (rest lerped).
+    video: "https://www.youtube.com/watch?v=OTKgBZS8if0",
+    primaryArtist: dj("Dimitri Vegas", {
+      accent: "#e63946",
+      homeCity: "Willebroek, BE",
+    }),
+    genre: "Hard Dance",
+    type: "festival",
+    title: "Dimitri Vegas B2B Nico Moreno WE2 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1091bm11/dimitri-vegas-nico-moreno-the-great-library-stage-tomorrowland-weekend-2-belgium-2026-07-26.html",
+    tracklist1001: TL_DIMITRI_VEGAS_NICO_MORENO_TML_WE2_2026,
+  },
+  {
+    // Tomorrowland official — Freedom Stage WE2; 16/16 timed.
+    video: "https://www.youtube.com/watch?v=KVZlecHlVkg",
+    primaryArtist: dj("Push", {
+      accent: "#7209b7",
+      homeCity: "Antwerp, BE",
+    }),
+    genre: "Trance",
+    type: "festival",
+    title: "Push only WE2 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2c3yctl1/push-freedom-stage-tomorrowland-weekend-2-belgium-2026-07-26.html",
+    tracklist1001: TL_PUSH_TML_WE2_2026,
+  },
+  {
+    // Tomorrowland official — Great Library WE2; 26/36 timed (rest lerped).
+    video: "https://www.youtube.com/watch?v=BG3Lr9EdWVY",
+    primaryArtist: dj("Bassjackers", {
+      accent: "#e63946",
+      homeCity: "Netherlands",
+    }),
+    genre: "Big Room",
+    type: "festival",
+    title: "Bassjackers WE2 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1muwkg71/bassjackers-the-great-library-stage-tomorrowland-weekend-2-belgium-2026-07-26.html",
+    tracklist1001: TL_BASSJACKERS_TML_WE2_2026,
+  },
+  {
+    // Tomorrowland official — Crystal Garden WE2; 15/17 timed (rest lerped).
+    video: "https://www.youtube.com/watch?v=HWIratXF1Bo",
+    primaryArtist: dj("Bhaskar", {
+      accent: "#f77f00",
+      homeCity: "Brazil",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    title: "Bhaskar WE2 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/15vvjgp1/bhaskar-crystal-garden-stage-tomorrowland-weekend-2-belgium-2026-07-26.html",
+    tracklist1001: TL_BHASKAR_TML_WE2_2026,
   },
   {
     video: "https://www.youtube.com/watch?v=ObiAocVMTyo",

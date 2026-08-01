@@ -12,6 +12,7 @@ import {
   TL_CLOONEE_EDC_LV_2022,
   TL_CLOONEE_PROSPA_DESTINO_2026,
   TL_DARUDE_EDC_LV_2026,
+  TL_DIMITRI_VEGAS_NICO_MORENO_TML_WE2_2026,
   TL_DIMITRI_VEGAS_TML_WE2_2026,
   TL_DOM_DOLLA_EDC_LV_2023,
   TL_DOM_DOLLA_EDC_LV_2024,
@@ -22,6 +23,12 @@ import {
   TL_HARDWELL_TML_WE2_2026,
   TL_HOLY_PRIEST_EDC_LV_2026,
   TL_HOLY_PRIEST_TML_WE1_2026,
+  TL_CYRIL_TML_WE2_2026,
+  TL_DARREN_STYLES_TML_WE2_2026,
+  TL_BASSJACKERS_TML_WE2_2026,
+  TL_BHASKAR_TML_WE2_2026,
+  TL_PUSH_TML_WE2_2026,
+  TL_JAMES_HYPE_MELKWEG_ADE_2025,
   TL_JAMES_HYPE_TML_WE2_2026,
   TL_JOHN_SUMMIT_TML_WE2_2026,
   TL_KOLSCH_TML_WE2_2026,
@@ -498,6 +505,27 @@ for (const p of jhTml) {
 }
 assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-dmhUJYEdkKo"]!.length >= 35);
 
+assertSeedClocks(TL_JAMES_HYPE_MELKWEG_ADE_2025);
+const jhMelkweg = tracklist1001RowsToPlays(TL_JAMES_HYPE_MELKWEG_ADE_2025);
+assert.equal(jhMelkweg.length, 51);
+assert.match(jhMelkweg[0]!.trackTitle!, /Smack My Bitch Up/);
+assert.equal(jhMelkweg[jhMelkweg.length - 1]!.trackTitle, "Be Yourself");
+assert.equal(jhMelkweg[jhMelkweg.length - 1]!.timestamp, 86 * 60 + 5);
+let jhMkPrev = -1;
+for (const p of jhMelkweg) {
+  assert.ok(
+    p.timestamp >= jhMkPrev,
+    `James Hype Melkweg clocks must not go back @ ${p.timestamp}`,
+  );
+  jhMkPrev = p.timestamp;
+}
+assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-QThaqlzSqLw"]!.length >= 51);
+// Distinct from TML WE2 Relive.
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-QThaqlzSqLw"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-dmhUJYEdkKo"],
+);
+
 assertSeedClocks(TL_KOLSCH_TML_WE2_2026);
 const kolsch = tracklist1001RowsToPlays(TL_KOLSCH_TML_WE2_2026);
 assert.equal(kolsch.length, 19);
@@ -581,13 +609,36 @@ const dvTml = tracklist1001RowsToPlays(TL_DIMITRI_VEGAS_TML_WE2_2026);
 assert.equal(dvTml.length, 62);
 assert.match(dvTml[0]!.trackTitle!, /Caramelle vs\. Diet Coke/);
 assert.equal(dvTml[dvTml.length - 1]!.trackTitle, "Allein Allein");
-// Solo Mainstage Relive not published yet — seed held (not B2B Nico Moreno).
-assert.equal(TRACKLIST_1001_BY_SOURCE_SLUG["yt-OTKgBZS8if0"], undefined);
+// Solo Mainstage Relive not published yet — seed held.
 assert.equal(
   Object.values(TRACKLIST_1001_BY_SOURCE_SLUG).includes(
     TL_DIMITRI_VEGAS_TML_WE2_2026,
   ),
   false,
+);
+
+assertSeedClocks(TL_DIMITRI_VEGAS_NICO_MORENO_TML_WE2_2026);
+const dvNm = tracklist1001RowsToPlays(TL_DIMITRI_VEGAS_NICO_MORENO_TML_WE2_2026);
+assert.equal(dvNm.length, 35);
+assert.match(dvNm[0]!.trackTitle!, /Animals/);
+assert.equal(dvNm[dvNm.length - 1]!.trackTitle, "HARDCORE SOUND");
+assert.equal(dvNm[dvNm.length - 1]!.timestamp, 59 * 60 + 43);
+let dvNmPrev = -1;
+for (const p of dvNm) {
+  assert.ok(
+    p.timestamp >= dvNmPrev,
+    `DV Nico Moreno TML clocks must not go back @ ${p.timestamp}`,
+  );
+  dvNmPrev = p.timestamp;
+}
+// B2B Great Library Relive — distinct from held solo Mainstage seed.
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-OTKgBZS8if0"],
+  TL_DIMITRI_VEGAS_NICO_MORENO_TML_WE2_2026,
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-OTKgBZS8if0"],
+  TL_DIMITRI_VEGAS_TML_WE2_2026,
 );
 
 assertSeedClocks(TL_CALVIN_HARRIS_TML_WE2_2026);
@@ -610,6 +661,19 @@ assert.match(sonny[sonny.length - 1]!.trackTitle!, /Celebration/);
 assert.equal(
   Object.values(TRACKLIST_1001_BY_SOURCE_SLUG).includes(
     TL_SONNY_FODERA_TML_WE2_2026,
+  ),
+  false,
+);
+
+assertSeedClocks(TL_DARREN_STYLES_TML_WE2_2026);
+const darrenStyles = tracklist1001RowsToPlays(TL_DARREN_STYLES_TML_WE2_2026);
+assert.equal(darrenStyles.length, 33);
+assert.equal(darrenStyles[0]!.trackTitle, "Be Somebody");
+assert.match(darrenStyles[darrenStyles.length - 1]!.trackTitle!, /Save Me/);
+// No official TML WE2 Relive yet — seed held, not slug-mapped.
+assert.equal(
+  Object.values(TRACKLIST_1001_BY_SOURCE_SLUG).includes(
+    TL_DARREN_STYLES_TML_WE2_2026,
   ),
   false,
 );
@@ -750,5 +814,69 @@ for (const p of aoki) {
   aokiPrev = p.timestamp;
 }
 assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-8-J01-hcHfA"]!.length >= 26);
+
+assertSeedClocks(TL_CYRIL_TML_WE2_2026);
+const cyril = tracklist1001RowsToPlays(TL_CYRIL_TML_WE2_2026);
+assert.equal(cyril.length, 24);
+assert.equal(cyril[0]!.trackTitle, "The Future");
+assert.equal(cyril[0]!.timestamp, 20);
+assert.match(cyril[cyril.length - 1]!.trackTitle!, /Power Of Love/);
+let cyrilPrev = -1;
+for (const p of cyril) {
+  assert.ok(
+    p.timestamp >= cyrilPrev,
+    `CYRIL TML clocks must not go back @ ${p.timestamp}`,
+  );
+  cyrilPrev = p.timestamp;
+}
+assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-DAOlnMYA3nU"]!.length >= 24);
+
+assertSeedClocks(TL_PUSH_TML_WE2_2026);
+const pushTml = tracklist1001RowsToPlays(TL_PUSH_TML_WE2_2026);
+assert.equal(pushTml.length, 16);
+assert.match(pushTml[0]!.trackTitle!, /Strange World/);
+assert.equal(pushTml[pushTml.length - 1]!.trackTitle, "Iguana Party");
+assert.equal(pushTml[pushTml.length - 1]!.timestamp, 55 * 60 + 36);
+let pushPrev = -1;
+for (const p of pushTml) {
+  assert.ok(
+    p.timestamp >= pushPrev,
+    `Push TML clocks must not go back @ ${p.timestamp}`,
+  );
+  pushPrev = p.timestamp;
+}
+assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-KVZlecHlVkg"]!.length >= 16);
+
+assertSeedClocks(TL_BASSJACKERS_TML_WE2_2026);
+const bassjackers = tracklist1001RowsToPlays(TL_BASSJACKERS_TML_WE2_2026);
+assert.equal(bassjackers.length, 36);
+assert.equal(bassjackers[0]!.trackTitle, "Rave Baby");
+assert.equal(bassjackers[bassjackers.length - 1]!.trackTitle, "Forever");
+assert.equal(bassjackers[bassjackers.length - 1]!.timestamp, 59 * 60 + 30);
+let bjPrev = -1;
+for (const p of bassjackers) {
+  assert.ok(
+    p.timestamp >= bjPrev,
+    `Bassjackers TML clocks must not go back @ ${p.timestamp}`,
+  );
+  bjPrev = p.timestamp;
+}
+assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-BG3Lr9EdWVY"]!.length >= 36);
+
+assertSeedClocks(TL_BHASKAR_TML_WE2_2026);
+const bhaskar = tracklist1001RowsToPlays(TL_BHASKAR_TML_WE2_2026);
+assert.equal(bhaskar.length, 17);
+assert.match(bhaskar[0]!.trackTitle!, /Wonderful World/);
+assert.equal(bhaskar[bhaskar.length - 1]!.trackTitle, "Celebrate Life");
+assert.equal(bhaskar[bhaskar.length - 1]!.timestamp, 79 * 60);
+let bhPrev = -1;
+for (const p of bhaskar) {
+  assert.ok(
+    p.timestamp >= bhPrev,
+    `Bhaskar TML clocks must not go back @ ${p.timestamp}`,
+  );
+  bhPrev = p.timestamp;
+}
+assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-HWIratXF1Bo"]!.length >= 17);
 
 console.log("tracklists1001/seeds.test.ts ok");

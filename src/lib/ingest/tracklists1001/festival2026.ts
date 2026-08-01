@@ -1234,6 +1234,70 @@ export const TL_JAMES_HYPE_TML_WE2_2026: FingerprintSeedRow[] = [
 ];
 
 /**
+ * James Hype @ Get Closer, Melkweg, Amsterdam Dance Event, Netherlands 2025-10-23
+ * Official YT: https://www.youtube.com/watch?v=QThaqlzSqLw (artist channel)
+ * 1001TL: https://1001.tl/1g6h49l1 — operator console capture 2026-08-01
+ * (33/51 timed cues; missing clocks already lerped in capture).
+ */
+export const TL_JAMES_HYPE_MELKWEG_ADE_2025: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "The Prodigy", title: "Smack My Bitch Up (James Hype Remix)" },
+  { at: "1:15", artist: "Tita Lau", title: "Bristol's In The House" },
+  { at: "2:30", artist: "Mau P", title: "Drugs From Amsterdam" },
+  { at: "3:30", artist: "C&C Music Factory", title: "Gonna Make You Sweat (Everybody Dance Now)" },
+  { at: "4:30", artist: "James Hype", title: "Rock Right Now" },
+  { at: "5:03", artist: "Mau P", title: "Drugs From Amsterdam" },
+  { at: "5:35", artist: "James Hype & Tita Lau", title: "Sound Technician" },
+  { at: "7:57", artist: "Fatboy Slim", title: "Star 69 (Acappella)" },
+  { at: "9:04", artist: "ID ID", title: "Party Loop" },
+  { at: "10:10", artist: "Klubbheads", title: "Superstar DJ" },
+  { at: "11:57", artist: "Da Hool", title: "Meet Her At The Love Parade (James Hype Edit)" },
+  { at: "13:44", artist: "James Hype ft. A.D.O.R.", title: "Behaviour" },
+  { at: "15:30", artist: "James Hype", title: "Hit That Switch" },
+  { at: "16:50", artist: "The Porn Kings", title: "Up To No Good" },
+  { at: "18:10", artist: "James Hype", title: "For Your Mind" },
+  { at: "20:15", artist: "Major Lazer & James Hype", title: "Number 1" },
+  { at: "21:18", artist: "Camisra & James Hype", title: "Let Me Show You" },
+  { at: "22:20", artist: "James Hype & Tita Lau", title: "More Of The Same" },
+  { at: "25:30", artist: "Charlie Sloth & Mazza L20 & Giggs", title: "Sleep (James Hype Remix)" },
+  { at: "28:45", artist: "Turbo Dubz", title: "Loozing Control" },
+  { at: "30:50", artist: "James Hype ft. Sam Harper & Bobby Harvey", title: "Waterfalls" },
+  { at: "33:30", artist: "The Good Men", title: "Give It Up (James Hype Edit)" },
+  {
+    at: "35:45",
+    artist: "Fred again.. & Swedish House Mafia ft. Future",
+    title: "Turn On The Lights Again..",
+  },
+  { at: "36:20", artist: "James Hype ft. Kelli-Leigh", title: "More Than Friends" },
+  { at: "36:55", artist: "Massano", title: "The Blaze (James Hype Remix)" },
+  { at: "37:30", artist: "James Hype", title: "Wild" },
+  { at: "39:05", artist: "Signum", title: "What You Got for Me (James Hype Edit)" },
+  { at: "40:40", artist: "Masters At Work", title: "Work (Acappella)" },
+  { at: "41:50", artist: "Dario Nu\u00f1ez & Javi Colina", title: "Sinsahoi" },
+  { at: "43:00", artist: "James Hype", title: "Dominator" },
+  { at: "46:30", artist: "Chocolate Puma ft. Shermanology", title: "Dub Of Boom" },
+  { at: "48:25", artist: "Corona", title: "The Rhythm Of The Night (Acappella)" },
+  { at: "50:20", artist: "James Hype", title: "Don't Wake Me Up" },
+  { at: "51:53", artist: "James Hype", title: "Don't Wake Me Up (VIP Mix)" },
+  { at: "53:25", artist: "Ryan Resso", title: "I Like It" },
+  { at: "55:10", artist: "MistaJam & EMEXL", title: "Boom Box" },
+  { at: "56:09", artist: "Public Domain", title: "Operation Blade (Bass In The Place)" },
+  { at: "57:07", artist: "Stretch & Vern pres. Maddog", title: "I'm Alive (Genix Remix)" },
+  { at: "1:01:04", artist: "Julio Bashmore", title: "Battle For Middle You" },
+  { at: "1:03:02", artist: "ATB", title: "9PM (Till I Come) (James Hype Edit)" },
+  { at: "1:05:00", artist: "Bad Legs & Shade K", title: "Basszilla" },
+  { at: "1:06:30", artist: "Volkoder", title: "Act Up (Bad Boy)" },
+  { at: "1:08:50", artist: "The Weeknd & Playboi Carti", title: "Timeless" },
+  { at: "1:10:10", artist: "James Hype", title: "East 2 West" },
+  { at: "1:11:30", artist: "James Hype & Miggy Dela Rosa", title: "Ferrari" },
+  { at: "1:14:55", artist: "James Hype", title: "Generator" },
+  { at: "1:17:10", artist: "James Hype", title: "Wembley" },
+  { at: "1:19:00", artist: "Drake & Central Cee", title: "Which One (James Hype Remix)" },
+  { at: "1:20:40", artist: "Sid Koans", title: "Hypnotize" },
+  { at: "1:22:35", artist: "Tita Lau", title: "Take Me Higher" },
+  { at: "1:26:05", artist: "James Hype", title: "Be Yourself" },
+];
+
+/**
  * Kölsch @ Mainstage, Tomorrowland Weekend 2, Belgium 2026-07-24
  * Official YT: https://www.youtube.com/watch?v=ra8NYbzPMnk (~59:06)
  * 1001TL: https://1001.tl/2u0sgrq9 — operator console capture 2026-08-01
@@ -1664,8 +1728,9 @@ export const TL_CHRIS_LORENZO_TML_WE2_2026: FingerprintSeedRow[] =
  * Dimitri Vegas @ Mainstage, Tomorrowland Weekend 2, Belgium 2026-07-25
  * 1001TL: https://1001.tl/ctd034t — operator console capture 2026-08-01
  * (0/62 timed cues — evenly spaced across ~60m).
- * No official solo Mainstage Relive yet (TML has B2B Nico Moreno only) —
- * seed ready; do not wire fan uploads / wrong B2Bs.
+ * No official solo Mainstage Relive yet — seed held.
+ * B2B Nico Moreno Great Library is TL_DIMITRI_VEGAS_NICO_MORENO_TML_WE2_2026
+ * (yt-OTKgBZS8if0); do not wire this solo seed to that Relive.
  */
 export const TL_DIMITRI_VEGAS_TML_WE2_2026: FingerprintSeedRow[] =
   evenlySpaceRows(
@@ -1737,6 +1802,83 @@ export const TL_DIMITRI_VEGAS_TML_WE2_2026: FingerprintSeedRow[] =
   );
 
 /**
+ * Dimitri Vegas & Nico Moreno @ The Great Library Stage, Tomorrowland Weekend 2, Belgium 2026-07-26
+ * Official YT: https://www.youtube.com/watch?v=OTKgBZS8if0
+ * 1001TL: https://1001.tl/1091bm11 — operator console capture 2026-08-01
+ * (24/35 timed cues; missing clocks already lerped in capture).
+ * Distinct from held solo Mainstage seed TL_DIMITRI_VEGAS_TML_WE2_2026.
+ */
+export const TL_DIMITRI_VEGAS_NICO_MORENO_TML_WE2_2026: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "Yves Deruyter", title: "... Animals (Dimitri Vegas Remix)" },
+  { at: "1:38", artist: "The Maxx", title: "Cocaine (Acappella)" },
+  { at: "3:15", artist: "Hi-Gate", title: "Pitchin' (In Every Direction)" },
+  { at: "4:43", artist: "Revoxx", title: "Bassline Kick" },
+  { at: "6:11", artist: "Gigi D'Agostino", title: "Bla Bla Bla (HOREM Remix)" },
+  {
+    at: "8:11",
+    artist: "Dimitri Vegas & Like Mike & Maddix & Da Hool ft. Kiki Solvej",
+    title: "Meet Her At The Love Parade (Luca Agnelli Remix)",
+  },
+  { at: "10:16", artist: "Dimitri Vegas & Like Mike vs. Fantasm", title: "Pump This Party" },
+  {
+    at: "12:53",
+    artist: "Mr. Polska & Natte Visstick & Vieze Asbak",
+    title: "POLSKA JUMPSTYLE (KAAI Remix)",
+  },
+  { at: "14:30", artist: "APH\u00d8TIC", title: "Thalassophobia" },
+  {
+    at: "16:08",
+    artist: "Dimitri Vegas & Like Mike vs. Ummet Ozcan",
+    title: "The Hum (Nico Moreno Remix)",
+  },
+  { at: "17:50", artist: "Dimitri Vegas & Pat B ft. Sylver", title: "Turn The Tide" },
+  { at: "20:45", artist: "Revoxx", title: "Kickdrum Junkie" },
+  { at: "22:54", artist: "DVBBS & BORGEOUS", title: "Tsunami (ROYAL Hard Techno Remix)" },
+  { at: "24:18", artist: "UMEK", title: "Gatex (Dimitri Vegas Remix)" },
+  { at: "27:22", artist: "Rotterdam Terror Corps", title: "Raveworld" },
+  {
+    at: "28:45",
+    artist: "Dimitri Vegas & Like Mike & Marc Acardipane & Bassjackers",
+    title: "Stereo Murder (Per Pleks Remix)",
+  },
+  { at: "30:20", artist: "Zombie Nation", title: "Kernkraft 400 (Lunaticz Remix)" },
+  { at: "31:18", artist: "Massano", title: "The Feeling (ACOR HT Rework)" },
+  { at: "32:15", artist: "Marc Acardipane a.k.a. Pilldriver", title: "Pitch-Hiker" },
+  { at: "33:53", artist: "Fatboy Slim", title: "Right Here, Right Now" },
+  {
+    at: "35:30",
+    artist: "Bountyhunter",
+    title: "Woops (Dimitri Vegas & Junkie Kid Remix / BRANDON Remix)",
+  },
+  { at: "36:29", artist: "Bountyhunter", title: "Woops (Dimitri Vegas & Junkie Kid 2025 VIP Mix)" },
+  { at: "37:28", artist: "Jones & Stephenson", title: "The First Rebirth" },
+  { at: "38:27", artist: "Bountyhunter", title: "Woops (Anderex Edit)" },
+  { at: "39:26", artist: "Bountyhunter", title: "Woops" },
+  { at: "40:24", artist: "Linkin Park", title: "Numb (Trey Pearce Remix)" },
+  {
+    at: "42:29",
+    artist: "Dimitri Vegas & Like Mike & Marlon Hoffstadt & DJ Konik",
+    title: "Makina Time",
+  },
+  {
+    at: "43:46",
+    artist: "Dimitri Vegas & Like Mike & Marlon Hoffstadt & DJ Konik",
+    title: "Makina Time (Darren Styles Remix)",
+  },
+  { at: "45:03", artist: "Dimitri Vegas & Outsiders & DJ Isaac", title: "Face Down Ass Up" },
+  { at: "47:47", artist: "Nico Moreno ft. Laren", title: "You Make Me Horny" },
+  { at: "50:31", artist: "Dimitri Vegas & Mark With A K", title: "Funky" },
+  {
+    at: "53:03",
+    artist: "Michael Sembello",
+    title: "Maniac (Dimitri Vegas & Marlon Hoffstadt Remix)",
+  },
+  { at: "55:28", artist: "GRAVEDGR & Junkie Kid", title: "El Sistema" },
+  { at: "56:49", artist: "Sunbeam", title: "Outside World (Brennan Heart Remix)" },
+  { at: "59:43", artist: "Shogun", title: "HARDCORE SOUND" },
+];
+
+/**
  * Calvin Harris @ Mainstage, Tomorrowland Weekend 2, Belgium 2026-07-25
  * 1001TL: https://1001.tl/1z0j2zlk — operator console capture 2026-08-01
  * (0/30 timed cues — evenly spaced across ~60m).
@@ -1804,6 +1946,64 @@ export const TL_SONNY_FODERA_TML_WE2_2026: FingerprintSeedRow[] =
       { artist: "Everything But The Girl", title: "Missing (Todd Terry Remix)" },
       { artist: "Chris Stussy & S.A.M.", title: "Breather" },
       { artist: "Supermini & Frankie Romano", title: "Celebration (Antdot & Maz Edit)" }
+    ],
+    3600,
+  );
+
+/**
+ * Darren Styles @ The Great Library Stage, Tomorrowland Weekend 2, Belgium 2026-07-26
+ * 1001TL: https://1001.tl/2jqs739k — operator console capture 2026-08-01
+ * (0/33 timed cues — evenly spaced across ~60m).
+ * No official Tomorrowland Relive yet — seed ready; do not wire clips.
+ */
+export const TL_DARREN_STYLES_TML_WE2_2026: FingerprintSeedRow[] =
+  evenlySpaceRows(
+    [
+      { artist: "Darren Styles & TNT", title: "Be Somebody" },
+      { artist: "Darren Styles", title: "Pump This Party" },
+      { artist: "Icona Pop ft. Charli xcx", title: "I Love It (Acappella)" },
+      { artist: "Toneshifterz & Darren Styles", title: "Clarity" },
+      { artist: "Armin van Buuren ft. SACHA", title: "Set Me Free (Darren Styles Remix)" },
+      { artist: "Soft Cell", title: "Tainted Love" },
+      { artist: "Builder", title: "Her Voice (Headhunterz Remix / MISH Edit)" },
+      { artist: "David Guetta ft. Sia", title: "Titanium (Rebelion Bootleg)" },
+      { artist: "Scott Brown", title: "Technophobia (Darren Styles Remix)" },
+      { artist: "Darren Styles & TNT", title: "DLMD" },
+      { artist: "Tweekacore & Darren Styles", title: "Party Starter" },
+      { artist: "Darren Styles ft. MERYLL", title: "Miss You" },
+      {
+        artist: "Dimitri Vegas & Like Mike & Marlon Hoffstadt & DJ Konik",
+        title: "Makina Time (Darren Styles Remix)",
+      },
+      { artist: "Gammer", title: "The Drop" },
+      { artist: "Dimitri Vegas & Like Mike vs. Darren Styles", title: "Better Off Alone" },
+      { artist: "Darren Styles & TNT", title: "Wonder" },
+      { artist: "Brennan Heart & Ben Nicky ft. Maikki", title: "Make Some Noise" },
+      {
+        artist: "Darren Styles & TNT vs. Gala",
+        title: "Cornflakes vs. Freed From Desire (Darren Styles Mashup)",
+      },
+      { artist: "Darren Styles & TNT", title: "Cornflakes" },
+      { artist: "Gala", title: "Freed From Desire" },
+      { artist: "Mr. Polska & Natte Visstick & Vieze Asbak", title: "POLSKA JUMPSTYLE" },
+      {
+        artist: "MaRLo & Feenixpawl ft. Kamilla Bayrak",
+        title: "Lighter Than Air (Darren Styles Remix)",
+      },
+      { artist: "Darren Styles", title: "Us Against The World (Darren Styles VIP)" },
+      { artist: "Darren Styles & Gammer", title: "HOA" },
+      { artist: "Atmozfears & Demi Kanon", title: "Move Ma Body (Kronos Remix)" },
+      { artist: "M83", title: "Midnight City" },
+      { artist: "Alesso & OneRepublic", title: "If I Lose Myself" },
+      {
+        artist: "Porter Robinson & Bright Lights & Darren Styles vs. John O'Callaghan & Sarah Howells",
+        title: "Find Your Language (Darren Styles Mashup)",
+      },
+      { artist: "Porter Robinson ft. Bright Lights", title: "Language (Darren Styles Remix)" },
+      { artist: "John O'Callaghan ft. Sarah Howells", title: "Find Yourself (Acappella)" },
+      { artist: "Darren Styles & TNT", title: "Hard Beat" },
+      { artist: "Scooter", title: "The Logical Song" },
+      { artist: "Darren Styles", title: "Save Me (Rebelion Remix)" },
     ],
     3600,
   );
@@ -2513,6 +2713,178 @@ export const TL_STEVE_AOKI_TML_WE2_2026: FingerprintSeedRow[] = evenlySpaceRows(
   ],
   3600,
 );
+
+/**
+ * CYRIL @ Mainstage, Tomorrowland Weekend 2, Belgium 2026-07-26
+ * Official YT: https://www.youtube.com/watch?v=DAOlnMYA3nU
+ * 1001TL: https://1001.tl/l9zzj79 — operator console capture 2026-08-01
+ * (0/24 timed cues — evenly spaced across ~60m Mainstage slot).
+ */
+export const TL_CYRIL_TML_WE2_2026: FingerprintSeedRow[] = evenlySpaceRows(
+  [
+    { artist: "Dansyn & J\u00d8RD", title: "The Future" },
+    { artist: "Calvin Harris & Jazzy", title: "Satisfy" },
+    { artist: "Jonas Blue & Malive", title: "Edge Of Desire" },
+    { artist: "SIDEPIECE ft. 95 South", title: "Can I Ride" },
+    { artist: "Bob Sinclar ft. Gary Pine", title: "Love Generation (CYRIL Remix)" },
+    { artist: "Tony Dark Eyes", title: "Perfect" },
+    { artist: "CYRIL & maryjo", title: "Still Into You" },
+    { artist: "Alice Deejay", title: "Better Off Alone (CYRIL Remix)" },
+    { artist: "Tove Lo", title: "Habits (CYRIL Remix)" },
+    { artist: "Tita Lau & James Hurr", title: "Sweat" },
+    { artist: "Benny Benassi & Dualit\u00e9", title: "California Dreamin'" },
+    { artist: "KETTAMA", title: "Comes and Goes (Dom Dolla Remix)" },
+    { artist: "CYRIL & Kelland ft. Nate Dogg", title: "I Got Love" },
+    { artist: "CYRIL ft. Wudhouse", title: "Feel It (Oh My Days)" },
+    { artist: "Kanye West ft. Rihanna", title: "All Of The Lights (CYRIL Remix)" },
+    { artist: "CYRIL & BLR", title: "Good Morning Angels" },
+    { artist: "Disturbed", title: "The Sound Of Silence (CYRIL Remix)" },
+    { artist: "TOBEHONEST", title: "Pipe Down" },
+    { artist: "Tim Berg ft. Amanda Wilson", title: "Seek Bromance (CYRIL Remix)" },
+    { artist: "CYRIL & MOONLGHT & The La's", title: "There She Goes" },
+    { artist: "CYRIL", title: "Stumblin' In" },
+    { artist: "CYRIL & James Blunt", title: "Tears Dry Tonight" },
+    { artist: "Robin Schulz & CYRIL ft. Sam Martin", title: "World Gone Wild" },
+    { artist: "C\u00e9line Dion", title: "The Power Of Love (CYRIL Remix)" },
+  ],
+  3600,
+);
+
+/**
+ * Push @ Freedom Stage, Tomorrowland Weekend 2, Belgium 2026-07-26
+ * Official YT: https://www.youtube.com/watch?v=KVZlecHlVkg
+ * 1001TL: https://1001.tl/2c3yctl1 — operator console capture 2026-08-01
+ * (16/16 timed cues).
+ */
+export const TL_PUSH_TML_WE2_2026: FingerprintSeedRow[] = [
+  { at: "0:12", artist: "M.I.K.E. pres. Push", title: "Strange World (2000 Remake)" },
+  { at: "4:17", artist: "Adam Beyer & Bart Skils", title: "Your Mind" },
+  { at: "5:36", artist: "KASIA", title: "Universal Nation" },
+  { at: "9:12", artist: "Transaphonic", title: "Milky Way" },
+  { at: "14:55", artist: "Plastic Boy", title: "Silver Bath (Charles D (USA) Remix)" },
+  { at: "18:16", artist: "Huvagen", title: "Don't Call Me" },
+  { at: "22:34", artist: "Push", title: "Drive By" },
+  { at: "26:03", artist: "Nemke", title: "Stampedo" },
+  { at: "30:06", artist: "Moonman & Ferry Corsten & Joris Voorn", title: "Don't Be Afraid" },
+  { at: "33:46", artist: "Adriatique & Elderbrook", title: "Lost In The Woods" },
+  { at: "37:43", artist: "Thomas Gandey & Glusko", title: "Conversations (Wehbba Remix)" },
+  { at: "41:52", artist: "Push", title: "Tronesque" },
+  { at: "44:29", artist: "Cassian & YOTTO & Da Hool", title: "Love Parade" },
+  { at: "47:44", artist: "M.I.K.E. Push & KAS:ST", title: "Strange World" },
+  { at: "52:05", artist: "Push", title: "Universal Nation (Bart Skils Remix)" },
+  { at: "55:36", artist: "Steve Brian & talkofthetown", title: "Iguana Party" },
+];
+
+/**
+ * Bassjackers @ The Great Library Stage, Tomorrowland Weekend 2, Belgium 2026-07-26
+ * Official YT: https://www.youtube.com/watch?v=BG3Lr9EdWVY
+ * 1001TL: https://1001.tl/1muwkg71 — operator console capture 2026-08-01
+ * (26/36 timed cues; missing clocks already lerped in capture).
+ */
+export const TL_BASSJACKERS_TML_WE2_2026: FingerprintSeedRow[] = [
+  { at: "0:11", artist: "Bassjackers & WUKONG & Evil Twiin", title: "Rave Baby" },
+  {
+    at: "1:17",
+    artist: "Mesto vs. Fallon",
+    title: "Caramelle vs. Diet Coke (Bassjackers TECH BOUNCE Edit)",
+  },
+  { at: "1:38", artist: "Fallon", title: "Diet Coke" },
+  { at: "2:00", artist: "Mesto", title: "Caramelle" },
+  {
+    at: "2:21",
+    artist: "Teriyaki Boyz vs. Gwen Stefani",
+    title: "Tokio Drift vs. Hollaback Girl (Macon 148 BPM Remix)",
+  },
+  { at: "3:29", artist: "Gwen Stefani", title: "Hollaback Girl" },
+  {
+    at: "4:38",
+    artist: "Teriyaki Boyz",
+    title: "Tokyo Drift (The Fast And The Furious: Tokyo Drift OST)",
+  },
+  { at: "5:46", artist: "Bassjackers & Charlie Sparks", title: "Jump Around" },
+  { at: "10:23", artist: "Bassjackers", title: "Fuego" },
+  { at: "12:38", artist: "Underworld", title: "Born Slippy" },
+  { at: "13:37", artist: "Luciid", title: "Bye Bye (NOVAH Remix)" },
+  {
+    at: "14:36",
+    artist: "Benny Benassi pres. The Biz",
+    title: "Satisfaction (BEAUZ Hard Techno Remix)",
+  },
+  { at: "15:51", artist: "Bassjackers", title: "Party People" },
+  { at: "18:43", artist: "Bassjackers", title: "GO MF GO" },
+  {
+    at: "21:30",
+    artist: "Bassjackers ft. Bellini",
+    title: "Samba De Janeiro (Dimitri Vegas & Like Mike Edit)",
+  },
+  {
+    at: "22:57",
+    artist: "Bassjackers & Stisema & Hula From The Outhere Brothers",
+    title: "Wiggle Wiggle",
+  },
+  { at: "25:18", artist: "Darren Styles & TNT", title: "Hard Beat" },
+  { at: "26:25", artist: "Bassjackers", title: "KIDS" },
+  { at: "29:34", artist: "Kelis", title: "Milkshake (LYNSY Bounce Edit)" },
+  { at: "30:50", artist: "Bassjackers & PRADA2000", title: "UZI" },
+  { at: "33:28", artist: "Klofama & SLVL", title: "S6TP" },
+  {
+    at: "35:12",
+    artist: "R\u00dcF\u00dcS DU SOL vs. Bassjackers",
+    title: "Innerbloom vs. Wake The F Up (Bassjackers Edit)",
+  },
+  { at: "36:15", artist: "R\u00dcF\u00dcS DU SOL", title: "Innerbloom" },
+  { at: "37:18", artist: "Bassjackers", title: "Wake The F Up" },
+  { at: "38:21", artist: "Bassjackers & Hannah Laing", title: "New Bass, New Kick" },
+  { at: "42:02", artist: "Bassjackers", title: "Bla Bla Bla" },
+  { at: "44:08", artist: "Bassjackers & Maddix", title: "Rave Is My Therapy" },
+  { at: "46:36", artist: "Diddy Dirty Money ft. Skylar Grey", title: "Coming Home" },
+  { at: "49:06", artist: "Hardwell & Bassjackers", title: "Bang On The Drums" },
+  { at: "51:51", artist: "Pharoahe Monch", title: "Simon Says (Bassjackers Bootleg)" },
+  { at: "53:09", artist: "Pharoahe Monch", title: "Simon Says" },
+  { at: "54:05", artist: "Justin Bieber", title: "Ghost" },
+  { at: "55:38", artist: "Sebastian Ingrosso & Alesso", title: "Calling" },
+  {
+    at: "57:11",
+    artist: "HARDSOK vs. Florence + The Machine",
+    title: "Forever vs. Spectrum (Say My Name) (Restricted Edit)",
+  },
+  { at: "58:21", artist: "Florence + The Machine", title: "Spectrum (Say My Name) (Acappella)" },
+  { at: "59:30", artist: "HARDSOK", title: "Forever" },
+];
+
+/**
+ * Bhaskar @ Crystal Garden Stage, Tomorrowland Weekend 2, Belgium 2026-07-26
+ * Official YT: https://www.youtube.com/watch?v=HWIratXF1Bo
+ * 1001TL: https://1001.tl/15vvjgp1 — operator console capture 2026-08-01
+ * (15/17 timed cues; missing clocks already lerped in capture).
+ */
+export const TL_BHASKAR_TML_WE2_2026: FingerprintSeedRow[] = [
+  {
+    at: "0:12",
+    artist: "Axwell & Bob Sinclar ft. Ron Carrol",
+    title: "What A Wonderful World (Acappella)",
+  },
+  { at: "5:16", artist: "Cristian Viviano", title: "Gamma Project" },
+  { at: "10:20", artist: "Hardrive", title: "Deep Inside" },
+  { at: "12:50", artist: "Bhaskar & Curol", title: "Soul Gazing" },
+  { at: "17:10", artist: "Carolina Marquez", title: "The Killer's Song" },
+  { at: "21:00", artist: "Fancy Inc & ZARO", title: "Shout" },
+  { at: "25:15", artist: "Bhaskar & MOJJO", title: "Discoteka" },
+  { at: "30:05", artist: "Adam Ten & Rafael", title: "Beat Goes On" },
+  { at: "38:20", artist: "ALOK", title: "Around" },
+  {
+    at: "47:20",
+    artist: "Chus & Ceballos & Supernova",
+    title: "The Prophet (Andrew Meller Remix)",
+  },
+  { at: "49:00", artist: "Blu Cantrell", title: "Hit 'Em Up Style (Oops!)" },
+  { at: "50:40", artist: "Dillon Rune", title: "New Day" },
+  { at: "54:00", artist: "Lil' Louis", title: "French Kiss" },
+  { at: "57:50", artist: "R\u00dcF\u00dcS DU SOL", title: "On My Knees" },
+  { at: "1:07:00", artist: "Brunello", title: "The 11th Hour" },
+  { at: "1:15:40", artist: "Angel Heredia", title: "Stuffy" },
+  { at: "1:19:00", artist: "DJ Chus & Harry Romero", title: "Celebrate Life" },
+];
 
 /**
  * Layton Giordani @ circuitGROUNDS closing, EDC Las Vegas 2025-05-16
@@ -3493,6 +3865,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-TsyGMhx8izw": TL_NICKY_ROMERO_TML_WE2_2026,
   "yt-B05MAbsCOLA": TL_NICKY_ROMERO_TML_WE2_2026,
   "yt-dmhUJYEdkKo": TL_JAMES_HYPE_TML_WE2_2026,
+  "yt-QThaqlzSqLw": TL_JAMES_HYPE_MELKWEG_ADE_2025,
   "yt-ra8NYbzPMnk": TL_KOLSCH_TML_WE2_2026,
   "yt-5AdQy7lCbN0": TL_STEVE_ANGELLO_TML_WE2_2026,
   "yt-mVB-gqggrCQ": TL_FISHER_TML_WE2_2026,
@@ -3506,6 +3879,11 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-aDAWctObTvI": TL_SARA_LANDRY_TML_WE2_2026,
   "yt-AjQeohYmg3A": TL_AFROJACK_R3HAB_TML_WE2_2026,
   "yt-8-J01-hcHfA": TL_STEVE_AOKI_TML_WE2_2026,
+  "yt-DAOlnMYA3nU": TL_CYRIL_TML_WE2_2026,
+  "yt-OTKgBZS8if0": TL_DIMITRI_VEGAS_NICO_MORENO_TML_WE2_2026,
+  "yt-KVZlecHlVkg": TL_PUSH_TML_WE2_2026,
+  "yt-BG3Lr9EdWVY": TL_BASSJACKERS_TML_WE2_2026,
+  "yt-HWIratXF1Bo": TL_BHASKAR_TML_WE2_2026,
 };
 
 /** Sanity: every seeded clock must parse. */
