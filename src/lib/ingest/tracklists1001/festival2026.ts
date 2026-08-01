@@ -1138,6 +1138,102 @@ export const TL_NICKY_ROMERO_TML_WE2_2026: FingerprintSeedRow[] = [
 ];
 
 /**
+ * James Hype @ Freedom Stage, Tomorrowland Weekend 2, Belgium 2026-07-24
+ * Official YT: https://www.youtube.com/watch?v=dmhUJYEdkKo (~58:27)
+ * 1001TL: https://1001.tl/2b63zu8k — operator console capture 2026-08-01
+ * (21/35 timed cues; missing clocks already lerped in capture).
+ */
+export const TL_JAMES_HYPE_TML_WE2_2026: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "Kanye West", title: "Power (Acappella)" },
+  { at: "2:06", artist: "Azari & III", title: "Hungry For The Power" },
+  {
+    at: "4:12",
+    artist: "James Hype ft. Sam Harper & Bobby Harvey",
+    title: "Waterfalls",
+  },
+  { at: "6:00", artist: "Alex Culross & EJECA", title: "Rhythm Of The House" },
+  { at: "7:05", artist: "Prospa & Murda Beatz", title: "Baby" },
+  {
+    at: "8:10",
+    artist: "Michael Jackson",
+    title: "Billie Jean (James Hype Remix)",
+  },
+  { at: "11:00", artist: "James Hype & Volkoder", title: "One, Two, Three" },
+  { at: "12:45", artist: "The Notorious B.I.G.", title: "Big Poppa" },
+  { at: "14:30", artist: "James Hype ft. ANTICALM", title: "For The Music" },
+  { at: "17:35", artist: "James Hype & Miggy Dela Rosa", title: "Ferrari" },
+  {
+    at: "20:40",
+    artist: "Indeep",
+    title: "Last Night A Dj Saved My Life (James Hype Remix)",
+  },
+  { at: "22:50", artist: "Alice Deejay", title: "Better Off Alone" },
+  { at: "22:51", artist: "James Hype", title: "The Flow" },
+  { at: "24:30", artist: "James Hype", title: "Start The Dance" },
+  {
+    at: "27:30",
+    artist: "HAVEN. ft. Kaitlin Aragon",
+    title: "I Run (James Hype Remix)",
+  },
+  {
+    at: "29:20",
+    artist: "Childish Gambino",
+    title: "Redbone (James Hype Remix)",
+  },
+  {
+    at: "31:30",
+    artist: "The Prodigy",
+    title: "Smack My Bitch Up (James Hype Edit)",
+  },
+  {
+    at: "31:31",
+    artist: "Criminal Element Orchestra",
+    title: "Put The Needle To The Record",
+  },
+  {
+    at: "33:15",
+    artist: "Pupa Nas T & James Hype ft. Denise Belfon",
+    title: "Work",
+  },
+  { at: "34:00", artist: "James Hype & Tita Lau", title: "The Record" },
+  { at: "35:23", artist: "Run DMC", title: "It's Like That (Acappella)" },
+  {
+    at: "36:46",
+    artist: "Patrick Topping & Rebūke ft. ×1-1+1",
+    title: "People Dancing",
+  },
+  { at: "37:13", artist: "Da Hool", title: "Meet Her At The Love Parade" },
+  { at: "39:20", artist: "Ayla", title: "Ayla (James Hype Edit)" },
+  { at: "40:07", artist: "Age Of Love", title: "The Age Of Love" },
+  { at: "40:54", artist: "Snap!", title: "Rhythm Is A Dancer (Acappella)" },
+  { at: "41:40", artist: "James Hype & Tita Lau", title: "Action" },
+  {
+    at: "43:14",
+    artist: "Delerium ft. Sarah McLachlan",
+    title: "Silence (Acappella)",
+  },
+  {
+    at: "44:48",
+    artist: "ATB",
+    title: "9PM (Till I Come) (James Hype Edit)",
+  },
+  {
+    at: "46:22",
+    artist: "Frankie Knuckles pres. Marshall Jefferson",
+    title: "Move Your Body (Acappella)",
+  },
+  { at: "47:56", artist: "James Hype", title: "Reprise" },
+  { at: "49:30", artist: "Volkoder", title: "My House" },
+  {
+    at: "51:06",
+    artist: "Soulsearcher",
+    title: "Can't Get Enough (Acappella)",
+  },
+  { at: "52:42", artist: "Cirez D", title: "On Off" },
+  { at: "54:18", artist: "James Hype", title: "Confession" },
+];
+
+/**
  * Layton Giordani @ circuitGROUNDS closing, EDC Las Vegas 2025-05-16
  * Official SC: https://soundcloud.com/laytongiordani/layton-giordani-live-edc-las-vegas-circuit-grounds-closing-set-2025 (~59:40)
  * 1001TL: https://1001.tl/bt007st — operator console capture 2026-08-01
@@ -2115,6 +2211,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-ubFrkYGGqo8": TL_ENRICO_SANGIULIANO_TML_WE2_2026,
   "yt-TsyGMhx8izw": TL_NICKY_ROMERO_TML_WE2_2026,
   "yt-B05MAbsCOLA": TL_NICKY_ROMERO_TML_WE2_2026,
+  "yt-dmhUJYEdkKo": TL_JAMES_HYPE_TML_WE2_2026,
 };
 
 /** Sanity: every seeded clock must parse. */

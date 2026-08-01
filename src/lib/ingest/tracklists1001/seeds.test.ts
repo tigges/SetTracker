@@ -14,6 +14,7 @@ import {
   TL_FUNK_TRIBU_EDC_LV_2026,
   TL_HOLY_PRIEST_EDC_LV_2026,
   TL_HOLY_PRIEST_TML_WE1_2026,
+  TL_JAMES_HYPE_TML_WE2_2026,
   TL_LAYTON_GIORDANI_EDC_LV_2025_CLOSING,
   TL_MARTEN_HORGER_EDC_LV_2023,
   TL_MAX_STYLER_EDC_LV_2024,
@@ -464,5 +465,20 @@ assert.equal(
   TRACKLIST_1001_BY_SOURCE_SLUG["yt-B05MAbsCOLA"],
   TRACKLIST_1001_BY_SOURCE_SLUG["yt-TsyGMhx8izw"],
 );
+
+assertSeedClocks(TL_JAMES_HYPE_TML_WE2_2026);
+const jhTml = tracklist1001RowsToPlays(TL_JAMES_HYPE_TML_WE2_2026);
+assert.equal(jhTml.length, 35);
+assert.match(jhTml[0]!.trackTitle!, /Power/);
+assert.equal(jhTml[jhTml.length - 1]!.trackTitle, "Confession");
+let jhPrev = -1;
+for (const p of jhTml) {
+  assert.ok(
+    p.timestamp >= jhPrev,
+    `James Hype TML clocks must not go back @ ${p.timestamp}`,
+  );
+  jhPrev = p.timestamp;
+}
+assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-dmhUJYEdkKo"]!.length >= 35);
 
 console.log("tracklists1001/seeds.test.ts ok");
