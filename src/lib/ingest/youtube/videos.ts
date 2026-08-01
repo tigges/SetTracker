@@ -221,7 +221,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
       homeCity: "Liverpool, UK",
     }),
     genre: "Tech House",
-    type: "club",
+    type: "festival",
     title: "James Hype, live @ Melkweg, Amsterdam",
     seriesName: "Get Closer",
     eventName: "Get Closer Melkweg ADE",
