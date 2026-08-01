@@ -1234,6 +1234,67 @@ export const TL_JAMES_HYPE_TML_WE2_2026: FingerprintSeedRow[] = [
 ];
 
 /**
+ * Kölsch @ Mainstage, Tomorrowland Weekend 2, Belgium 2026-07-24
+ * Official YT: https://www.youtube.com/watch?v=ra8NYbzPMnk (~59:06)
+ * 1001TL: https://1001.tl/2u0sgrq9 — operator console capture 2026-08-01
+ * (16/19 timed cues; missing clocks already lerped in capture).
+ * Note: last cue @ 59:30 slightly past Relive duration.
+ */
+export const TL_KOLSCH_TML_WE2_2026: FingerprintSeedRow[] = [
+  { at: "4:31", artist: "CamelPhat & Kölsch", title: "Waste My Time" },
+  { at: "8:27", artist: "M.A.N.D.Y. vs. Booka Shade", title: "Body Language" },
+  {
+    at: "10:20",
+    artist: "Patrick Topping",
+    title: "Be Sharp Say Nowt (Kölsch Remix)",
+  },
+  {
+    at: "13:16",
+    artist: "The Verve",
+    title: "Bittersweet Symphony (Kölsch Remix)",
+  },
+  { at: "14:59", artist: "Kölsch", title: "Picasso" },
+  {
+    at: "19:33",
+    artist: "The Temper Trap",
+    title: "Sweet Disposition (Kölsch Remix)",
+  },
+  {
+    at: "24:26",
+    artist: "Benny Benassi pres. The Biz",
+    title: "Satisfaction (Kölsch Remix)",
+  },
+  { at: "26:34", artist: "Butch", title: "Countach (Kölsch Remix)" },
+  {
+    at: "28:21",
+    artist: "Danny Tenaglia ft. Celeda",
+    title: "Music Is The Answer (Dancin' And Prancin')",
+  },
+  {
+    at: "29:02",
+    artist: "Kölsch ft. Gregor Schwellenbach",
+    title: "Cassiopeia",
+  },
+  { at: "33:46", artist: "ROSALÍA & Björk & Yves Tumor", title: "Berghain" },
+  { at: "35:11", artist: "Armin van Buuren & Camisra", title: "Let Me Show You" },
+  { at: "36:36", artist: "Masters At Work", title: "Work" },
+  { at: "39:13", artist: "Kölsch", title: "Grey" },
+  { at: "41:47", artist: "Julian Jeweil", title: "Derbouka" },
+  { at: "44:56", artist: "ENUR ft. Natasja", title: "Calabria" },
+  { at: "48:04", artist: "Kölsch", title: "Loreley" },
+  {
+    at: "52:19",
+    artist: "Kölsch ft. Troels Abrahamsen",
+    title: "All That Matters (ARTBAT Remix)",
+  },
+  {
+    at: "59:30",
+    artist: "Kölsch ft. Troels Abrahamsen",
+    title: "All that Matters (Symphony of Unity - strings reimagined)",
+  },
+];
+
+/**
  * Layton Giordani @ circuitGROUNDS closing, EDC Las Vegas 2025-05-16
  * Official SC: https://soundcloud.com/laytongiordani/layton-giordani-live-edc-las-vegas-circuit-grounds-closing-set-2025 (~59:40)
  * 1001TL: https://1001.tl/bt007st — operator console capture 2026-08-01
@@ -2212,6 +2273,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-TsyGMhx8izw": TL_NICKY_ROMERO_TML_WE2_2026,
   "yt-B05MAbsCOLA": TL_NICKY_ROMERO_TML_WE2_2026,
   "yt-dmhUJYEdkKo": TL_JAMES_HYPE_TML_WE2_2026,
+  "yt-ra8NYbzPMnk": TL_KOLSCH_TML_WE2_2026,
 };
 
 /** Sanity: every seeded clock must parse. */

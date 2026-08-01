@@ -15,6 +15,7 @@ import {
   TL_HOLY_PRIEST_EDC_LV_2026,
   TL_HOLY_PRIEST_TML_WE1_2026,
   TL_JAMES_HYPE_TML_WE2_2026,
+  TL_KOLSCH_TML_WE2_2026,
   TL_LAYTON_GIORDANI_EDC_LV_2025_CLOSING,
   TL_MARTEN_HORGER_EDC_LV_2023,
   TL_MAX_STYLER_EDC_LV_2024,
@@ -480,5 +481,20 @@ for (const p of jhTml) {
   jhPrev = p.timestamp;
 }
 assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-dmhUJYEdkKo"]!.length >= 35);
+
+assertSeedClocks(TL_KOLSCH_TML_WE2_2026);
+const kolsch = tracklist1001RowsToPlays(TL_KOLSCH_TML_WE2_2026);
+assert.equal(kolsch.length, 19);
+assert.equal(kolsch[0]!.trackTitle, "Waste My Time");
+assert.match(kolsch[kolsch.length - 1]!.trackTitle!, /All that Matters/i);
+let kolschPrev = -1;
+for (const p of kolsch) {
+  assert.ok(
+    p.timestamp >= kolschPrev,
+    `Kölsch TML clocks must not go back @ ${p.timestamp}`,
+  );
+  kolschPrev = p.timestamp;
+}
+assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-ra8NYbzPMnk"]!.length >= 19);
 
 console.log("tracklists1001/seeds.test.ts ok");
