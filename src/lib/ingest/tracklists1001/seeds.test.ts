@@ -26,6 +26,7 @@ import {
   TL_JOHN_SUMMIT_TML_WE2_2026,
   TL_KOLSCH_TML_WE2_2026,
   TL_KOROLOVA_TML_WE2_2026,
+  TL_LUCAS_STEVE_TML_WE2_2026,
   TL_LAYTON_GIORDANI_EDC_LV_2025_CLOSING,
   TL_MARTEN_HORGER_EDC_LV_2023,
   TL_MAX_STYLER_EDC_LV_2024,
@@ -682,5 +683,21 @@ for (const p of korolova) {
   korPrev = p.timestamp;
 }
 assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-RLOghpXjuJI"]!.length >= 21);
+
+assertSeedClocks(TL_LUCAS_STEVE_TML_WE2_2026);
+const lucasSteve = tracklist1001RowsToPlays(TL_LUCAS_STEVE_TML_WE2_2026);
+assert.equal(lucasSteve.length, 54);
+assert.equal(lucasSteve[0]!.trackTitle, "Free Your Mind");
+assert.match(lucasSteve[lucasSteve.length - 1]!.trackTitle!, /Save The World/);
+assert.equal(lucasSteve[lucasSteve.length - 1]!.timestamp, 59 * 60 + 30);
+let lsPrev = -1;
+for (const p of lucasSteve) {
+  assert.ok(
+    p.timestamp >= lsPrev,
+    `Lucas & Steve TML clocks must not go back @ ${p.timestamp}`,
+  );
+  lsPrev = p.timestamp;
+}
+assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-LE-byccuovI"]!.length >= 54);
 
 console.log("tracklists1001/seeds.test.ts ok");
