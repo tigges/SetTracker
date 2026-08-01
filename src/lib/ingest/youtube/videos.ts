@@ -16,6 +16,7 @@ import {
 } from "../fingerprint/seeds";
 import {
   TL_AHEE_LIQUID_STRANGER_EDC_LV_2026,
+  TL_ARMIN_VAN_BUUREN_YT_HOUSE_TML_2026,
   TL_AYYBO_ODD_MOB_TML_WE2_2026,
   TL_BLEU_CLAIR_EDC_LV_2023,
   TL_CLOONEE_PROSPA_DESTINO_2026,
@@ -597,6 +598,22 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/2hsylb61/john-summit-crystal-garden-stage-tomorrowland-weekend-2-belgium-2026-07-25.html",
     tracklist1001: TL_JOHN_SUMMIT_TML_WE2_2026,
+  },
+  {
+    // Artist upload — short YouTube House set (not Mainstage WE2 Relive).
+    video: "https://www.youtube.com/watch?v=I6QA_T-BS6o",
+    primaryArtist: dj("Armin van Buuren", {
+      accent: "#0077b6",
+      homeCity: "Leiden, NL",
+    }),
+    genre: "Trance",
+    type: "festival",
+    title: "Armin van Buuren live from the YouTube House at Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2hsz5x4k/armin-van-buuren-youtube-house-tomorrowland-belgium-2026-07-25.html",
+    tracklist1001: TL_ARMIN_VAN_BUUREN_YT_HOUSE_TML_2026,
   },
   {
     video: "https://www.youtube.com/watch?v=ObiAocVMTyo",

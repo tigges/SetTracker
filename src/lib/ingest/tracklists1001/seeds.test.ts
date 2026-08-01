@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { extract1001Urls } from "./parse";
 import {
   TL_AHEE_LIQUID_STRANGER_EDC_LV_2026,
+  TL_ARMIN_VAN_BUUREN_YT_HOUSE_TML_2026,
   TL_AYYBO_ODD_MOB_TML_WE2_2026,
   TL_BLEU_CLAIR_EDC_LV_2023,
   TL_CALVIN_HARRIS_TML_WE2_2026,
@@ -651,5 +652,18 @@ for (const p of summit) {
   summitPrev = p.timestamp;
 }
 assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-PlArfyuzuqo"]!.length >= 38);
+
+assertSeedClocks(TL_ARMIN_VAN_BUUREN_YT_HOUSE_TML_2026);
+const arminYt = tracklist1001RowsToPlays(TL_ARMIN_VAN_BUUREN_YT_HOUSE_TML_2026);
+assert.equal(arminYt.length, 7);
+assert.match(arminYt[0]!.trackTitle!, /Everlasting/);
+assert.match(arminYt[arminYt.length - 1]!.trackTitle!, /Blah Blah Blah/);
+assert.equal(arminYt[arminYt.length - 1]!.timestamp, 11 * 60);
+// Distinct from Mainstage WE2 Relive.
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-I6QA_T-BS6o"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-tg_QLGpes0k"],
+);
+assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-I6QA_T-BS6o"]!.length >= 7);
 
 console.log("tracklists1001/seeds.test.ts ok");

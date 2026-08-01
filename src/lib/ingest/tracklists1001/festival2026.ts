@@ -2024,6 +2024,43 @@ export const TL_JOHN_SUMMIT_TML_WE2_2026: FingerprintSeedRow[] = [
 ];
 
 /**
+ * Armin van Buuren @ YouTube House, Tomorrowland, Belgium 2026-07-25
+ * Official YT (artist): https://www.youtube.com/watch?v=I6QA_T-BS6o (~13:33)
+ * 1001TL: https://1001.tl/2hsz5x4k — operator console capture 2026-08-01
+ * (4/7 timed cues; missing clocks already lerped in capture).
+ * Short YouTube House set — distinct from Mainstage WE2 (yt-tg_QLGpes0k).
+ */
+export const TL_ARMIN_VAN_BUUREN_YT_HOUSE_TML_2026: FingerprintSeedRow[] = [
+  {
+    at: "0:00",
+    artist: "Armin van Buuren ft. SACHA",
+    title: "Everlasting (Rising Star Remix)",
+  },
+  { at: "2:30", artist: "Armin van Buuren ft. SACHA", title: "Set Me Free" },
+  {
+    at: "4:25",
+    artist: "Armin van Buuren & Alle Farben ft. ROSY",
+    title: "Lost In Time",
+  },
+  {
+    at: "8:15",
+    artist: "Hi Profile vs. Armin van Buuren vs. Vini Vici ft. Hilight Tribe",
+    title: "The Ghost vs. Great Spirit (Vini Vici Mashup)",
+  },
+  {
+    at: "9:10",
+    artist: "Armin van Buuren vs. Vini Vici ft. Hilight Tribe",
+    title: "Great Spirit",
+  },
+  { at: "10:05", artist: "Hi Profile", title: "The Ghost" },
+  {
+    at: "11:00",
+    artist: "Armin van Buuren",
+    title: "Blah Blah Blah (Lilly Palmer Remix)",
+  },
+];
+
+/**
  * Layton Giordani @ circuitGROUNDS closing, EDC Las Vegas 2025-05-16
  * Official SC: https://soundcloud.com/laytongiordani/layton-giordani-live-edc-las-vegas-circuit-grounds-closing-set-2025 (~59:40)
  * 1001TL: https://1001.tl/bt007st — operator console capture 2026-08-01
@@ -3009,6 +3046,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-Py-GG74lLU8": TL_HARDWELL_TML_WE2_2026,
   "yt-gO03gfI_JF0": TL_AYYBO_ODD_MOB_TML_WE2_2026,
   "yt-PlArfyuzuqo": TL_JOHN_SUMMIT_TML_WE2_2026,
+  "yt-I6QA_T-BS6o": TL_ARMIN_VAN_BUUREN_YT_HOUSE_TML_2026,
 };
 
 /** Sanity: every seeded clock must parse. */
