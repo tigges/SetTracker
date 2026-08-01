@@ -1,4 +1,4 @@
 # Bump the timestamp below (and merge to main) to start Catalog deep refresh.
 # Used when workflow_dispatch is unavailable to the actor.
-requestedAt: 2026-08-01T04:50:00Z
-reason: Westend + AHEE B2B Liquid Stranger EDC LV 2026 YT curated + 1001TL screenshot seeds
+requestedAt: 2026-08-01T05:05:00Z
+reason: EDC LV 2026 Westend/AHEE/Darude YT + 1001TL seeds; 1001 capture helpers

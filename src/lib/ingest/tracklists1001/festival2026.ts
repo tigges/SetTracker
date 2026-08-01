@@ -454,6 +454,41 @@ export const TL_AHEE_LIQUID_STRANGER_EDC_LV_2026: FingerprintSeedRow[] =
     ];
   })();
 
+/**
+ * Darude @ quantumVALLEY, EDC Las Vegas 2026-05-15
+ * Official YT: https://www.youtube.com/watch?v=dXBoIY65P8s (~56:22)
+ * 1001TL: https://1001.tl/1v8whc0k (CF-blocked in CI)
+ * Timed cues from community mirror of that list (skip bare IDs). Prefer
+ * browser capture via scripts/capture-1001tl.console.js to refine.
+ */
+export const TL_DARUDE_EDC_LV_2026: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "Darude ft. AI AM", title: "Beautiful Alien" },
+  { at: "3:26", artist: "Robert Miles", title: "Children" },
+  {
+    at: "8:26",
+    artist: "Darude, Gid Sedgwick & Cory Goldsmith",
+    title: "Nobody Listens (Cory Goldsmith Extended Remix)",
+  },
+  { at: "11:47", artist: "Tom Fall", title: "iRok" },
+  { at: "13:30", artist: "Darude", title: "Rush" },
+  { at: "18:59", artist: "Kx5 ft. HAYLA", title: "Escape" },
+  { at: "28:47", artist: "Darude", title: "Feel The Beat" },
+  { at: "30:00", artist: "Darude", title: "You" },
+  { at: "32:05", artist: "Darude & Mashd N Kutcher", title: "Hype" },
+  { at: "36:06", artist: "Darude", title: "Endless Wave" },
+  {
+    at: "40:00",
+    artist: "Darude",
+    title: "Sandstorm (Storm 25 Remix)",
+  },
+  { at: "46:20", artist: "Darude", title: "Bitter Sweet" },
+  {
+    at: "49:44",
+    artist: "Supermode",
+    title: "Tell Me Why (Darude Remix)",
+  },
+];
+
 /** sourceSlug → curated 1001TL seed (SC / YT when live HTML is CF-blocked). */
 export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   string,
@@ -464,6 +499,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "sc-cloonee-clooneeb2bprospa": TL_CLOONEE_PROSPA_DESTINO_2026,
   "sc-itsthewestend-westend-live-edc-2026": TL_WESTEND_EDC_LV_2026,
   "yt-yXHoHK_jQvc": TL_AHEE_LIQUID_STRANGER_EDC_LV_2026,
+  "yt-dXBoIY65P8s": TL_DARUDE_EDC_LV_2026,
 };
 
 /** Sanity: every seeded clock must parse. */

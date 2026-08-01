@@ -17,6 +17,7 @@ import {
 import {
   TL_AHEE_LIQUID_STRANGER_EDC_LV_2026,
   TL_CLOONEE_PROSPA_DESTINO_2026,
+  TL_DARUDE_EDC_LV_2026,
   TL_MARTEN_HORGER_EDC_LV_2023,
   TL_MARTEN_HORGER_PAROOKAVILLE_2026,
   TL_WESTEND_EDC_LV_2026,
@@ -44,6 +45,11 @@ export type YoutubeSetSource = {
    * Used when the upload only links 1001.tl and live HTML is Cloudflare-gated.
    */
   tracklist1001?: FingerprintSeedRow[];
+  /**
+   * Known 1001.tl / 1001tracklists.com URL when the YT description omits it
+   * (common on Insomniac Relives). Tried before falling back to seed rows.
+   */
+  tracklist1001Url?: string;
 };
 
 function dj(name: string, extra: Partial<RawArtist> = {}): RawArtist {
@@ -288,6 +294,21 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     title: "AHEE B2B Liquid Stranger Live at EDC Las Vegas 2026 (Official Full Set)",
     eventName: "EDC Las Vegas",
     tracklist1001: TL_AHEE_LIQUID_STRANGER_EDC_LV_2026,
+  },
+  {
+    // Insomniac Relive — promo description; 1001 URL from operator (CF in CI).
+    video: "https://www.youtube.com/watch?v=dXBoIY65P8s",
+    primaryArtist: dj("Darude", {
+      accent: "#00b4d8",
+      homeCity: "Turku, FI",
+    }),
+    genre: "Trance",
+    type: "festival",
+    title: "Darude Live at EDC Las Vegas 2026 (Official Full Set)",
+    eventName: "EDC Las Vegas",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1v8whc0k/darude-quantumvalley-edc-las-vegas-united-states-2026-05-15.html",
+    tracklist1001: TL_DARUDE_EDC_LV_2026,
   },
   {
     video: "https://www.youtube.com/watch?v=ObiAocVMTyo",

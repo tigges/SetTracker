@@ -27,7 +27,10 @@ import {
 } from "../fingerprint/seeds";
 import { hashRawSetContent } from "../hash";
 import { parseDescriptionTracklist } from "../soundcloud/parseTracklist";
-import { playsFromDescription1001Links } from "../tracklists1001/client";
+import {
+  playsFrom1001Urls,
+  playsFromDescription1001Links,
+} from "../tracklists1001/client";
 import {
   merge1001Plays,
   TRACKLIST_1001_BY_SOURCE_SLUG,
@@ -150,11 +153,16 @@ async function enrichWith1001Tracklist(
   meta: YtWatchMeta,
   base: RawPlay[],
   seed?: FingerprintSeedRow[],
+  extraUrls?: string[],
 ): Promise<RawPlay[]> {
   let from1001 = await playsFromDescription1001Links(
     meta.description,
     meta.durationSec,
   );
+  if (from1001.length < 5 && extraUrls?.length) {
+    const fromUrls = await playsFrom1001Urls(extraUrls, meta.durationSec);
+    if (fromUrls.length > from1001.length) from1001 = fromUrls;
+  }
   const slugSeed =
     TRACKLIST_1001_BY_SOURCE_SLUG[`yt-${meta.videoId}`.slice(0, 120)];
   const effectiveSeed =
@@ -209,7 +217,12 @@ async function curatedToHit(src: YoutubeSetSource): Promise<YtHit | null> {
   }
 
   let plays = playsFromMeta(meta);
-  plays = await enrichWith1001Tracklist(meta, plays, src.tracklist1001);
+  plays = await enrichWith1001Tracklist(
+    meta,
+    plays,
+    src.tracklist1001,
+    src.tracklist1001Url ? [src.tracklist1001Url] : undefined,
+  );
   if (src.fingerprintPlays?.length) {
     plays = mergeFingerprintPlays(
       plays,

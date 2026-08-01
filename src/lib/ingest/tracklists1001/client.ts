@@ -50,16 +50,12 @@ export async function fetch1001TracklistPlays(
   return parse1001TracklistHtml(html, durationSec);
 }
 
-/**
- * Find 1001TL links in a description and return the densest parsed tracklist.
- */
-export async function playsFromDescription1001Links(
-  description: string | null | undefined,
+/** Fetch several 1001 URLs; return the densest parsed tracklist. */
+export async function playsFrom1001Urls(
+  urls: string[],
   durationSec: number,
 ): Promise<RawPlay[]> {
-  const urls = extract1001Urls(description);
   if (!urls.length) return [];
-
   let best: RawPlay[] = [];
   for (const url of urls.slice(0, 3)) {
     try {
@@ -73,4 +69,14 @@ export async function playsFromDescription1001Links(
     }
   }
   return best;
+}
+
+/**
+ * Find 1001TL links in a description and return the densest parsed tracklist.
+ */
+export async function playsFromDescription1001Links(
+  description: string | null | undefined,
+  durationSec: number,
+): Promise<RawPlay[]> {
+  return playsFrom1001Urls(extract1001Urls(description), durationSec);
 }
