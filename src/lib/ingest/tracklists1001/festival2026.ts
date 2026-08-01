@@ -2579,6 +2579,42 @@ export const TL_STEVE_AOKI_TML_WE2_2026: FingerprintSeedRow[] = evenlySpaceRows(
 );
 
 /**
+ * CYRIL @ Mainstage, Tomorrowland Weekend 2, Belgium 2026-07-26
+ * Official YT: https://www.youtube.com/watch?v=DAOlnMYA3nU
+ * 1001TL: https://1001.tl/l9zzj79 — operator console capture 2026-08-01
+ * (0/24 timed cues — evenly spaced across ~60m Mainstage slot).
+ */
+export const TL_CYRIL_TML_WE2_2026: FingerprintSeedRow[] = evenlySpaceRows(
+  [
+    { artist: "Dansyn & J\u00d8RD", title: "The Future" },
+    { artist: "Calvin Harris & Jazzy", title: "Satisfy" },
+    { artist: "Jonas Blue & Malive", title: "Edge Of Desire" },
+    { artist: "SIDEPIECE ft. 95 South", title: "Can I Ride" },
+    { artist: "Bob Sinclar ft. Gary Pine", title: "Love Generation (CYRIL Remix)" },
+    { artist: "Tony Dark Eyes", title: "Perfect" },
+    { artist: "CYRIL & maryjo", title: "Still Into You" },
+    { artist: "Alice Deejay", title: "Better Off Alone (CYRIL Remix)" },
+    { artist: "Tove Lo", title: "Habits (CYRIL Remix)" },
+    { artist: "Tita Lau & James Hurr", title: "Sweat" },
+    { artist: "Benny Benassi & Dualit\u00e9", title: "California Dreamin'" },
+    { artist: "KETTAMA", title: "Comes and Goes (Dom Dolla Remix)" },
+    { artist: "CYRIL & Kelland ft. Nate Dogg", title: "I Got Love" },
+    { artist: "CYRIL ft. Wudhouse", title: "Feel It (Oh My Days)" },
+    { artist: "Kanye West ft. Rihanna", title: "All Of The Lights (CYRIL Remix)" },
+    { artist: "CYRIL & BLR", title: "Good Morning Angels" },
+    { artist: "Disturbed", title: "The Sound Of Silence (CYRIL Remix)" },
+    { artist: "TOBEHONEST", title: "Pipe Down" },
+    { artist: "Tim Berg ft. Amanda Wilson", title: "Seek Bromance (CYRIL Remix)" },
+    { artist: "CYRIL & MOONLGHT & The La's", title: "There She Goes" },
+    { artist: "CYRIL", title: "Stumblin' In" },
+    { artist: "CYRIL & James Blunt", title: "Tears Dry Tonight" },
+    { artist: "Robin Schulz & CYRIL ft. Sam Martin", title: "World Gone Wild" },
+    { artist: "C\u00e9line Dion", title: "The Power Of Love (CYRIL Remix)" },
+  ],
+  3600,
+);
+
+/**
  * Layton Giordani @ circuitGROUNDS closing, EDC Las Vegas 2025-05-16
  * Official SC: https://soundcloud.com/laytongiordani/layton-giordani-live-edc-las-vegas-circuit-grounds-closing-set-2025 (~59:40)
  * 1001TL: https://1001.tl/bt007st — operator console capture 2026-08-01
@@ -3571,6 +3607,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-aDAWctObTvI": TL_SARA_LANDRY_TML_WE2_2026,
   "yt-AjQeohYmg3A": TL_AFROJACK_R3HAB_TML_WE2_2026,
   "yt-8-J01-hcHfA": TL_STEVE_AOKI_TML_WE2_2026,
+  "yt-DAOlnMYA3nU": TL_CYRIL_TML_WE2_2026,
 };
 
 /** Sanity: every seeded clock must parse. */

@@ -22,6 +22,7 @@ import {
   TL_HARDWELL_TML_WE2_2026,
   TL_HOLY_PRIEST_EDC_LV_2026,
   TL_HOLY_PRIEST_TML_WE1_2026,
+  TL_CYRIL_TML_WE2_2026,
   TL_JAMES_HYPE_MELKWEG_ADE_2025,
   TL_JAMES_HYPE_TML_WE2_2026,
   TL_JOHN_SUMMIT_TML_WE2_2026,
@@ -772,5 +773,21 @@ for (const p of aoki) {
   aokiPrev = p.timestamp;
 }
 assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-8-J01-hcHfA"]!.length >= 26);
+
+assertSeedClocks(TL_CYRIL_TML_WE2_2026);
+const cyril = tracklist1001RowsToPlays(TL_CYRIL_TML_WE2_2026);
+assert.equal(cyril.length, 24);
+assert.equal(cyril[0]!.trackTitle, "The Future");
+assert.equal(cyril[0]!.timestamp, 20);
+assert.match(cyril[cyril.length - 1]!.trackTitle!, /Power Of Love/);
+let cyrilPrev = -1;
+for (const p of cyril) {
+  assert.ok(
+    p.timestamp >= cyrilPrev,
+    `CYRIL TML clocks must not go back @ ${p.timestamp}`,
+  );
+  cyrilPrev = p.timestamp;
+}
+assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-DAOlnMYA3nU"]!.length >= 24);
 
 console.log("tracklists1001/seeds.test.ts ok");

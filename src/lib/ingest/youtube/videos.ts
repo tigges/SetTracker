@@ -29,6 +29,7 @@ import {
   TL_ENRICO_SANGIULIANO_TML_WE2_2026,
   TL_FISHER_TML_WE2_2026,
   TL_HARDWELL_TML_WE2_2026,
+  TL_CYRIL_TML_WE2_2026,
   TL_JAMES_HYPE_MELKWEG_ADE_2025,
   TL_JAMES_HYPE_TML_WE2_2026,
   TL_JOHN_SUMMIT_TML_WE2_2026,
@@ -716,6 +717,22 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/rwtx921/steve-aoki-mainstage-tomorrowland-weekend-2-belgium-2026-07-26.html",
     tracklist1001: TL_STEVE_AOKI_TML_WE2_2026,
+  },
+  {
+    // Tomorrowland official — Mainstage WE2; 0/24 timed → evenly spaced ~60m.
+    video: "https://www.youtube.com/watch?v=DAOlnMYA3nU",
+    primaryArtist: dj("CYRIL", {
+      accent: "#f4a261",
+      homeCity: "Sydney, AU",
+    }),
+    genre: "Dance",
+    type: "festival",
+    title: "Cyril WE2 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/l9zzj79/cyril-mainstage-tomorrowland-weekend-2-belgium-2026-07-26.html",
+    tracklist1001: TL_CYRIL_TML_WE2_2026,
   },
   {
     video: "https://www.youtube.com/watch?v=ObiAocVMTyo",
