@@ -56,5 +56,17 @@ assert.equal(
 assert.equal(resolveEvent("Creamfields").website, "https://www.creamfields.com/");
 assert.equal(resolveEvent("Untold Festival").slug, "untold");
 assert.equal(inferFestivalEvent("B2B at Awakenings Festival")?.slug, "awakenings");
+assert.equal(
+  inferFestivalEvent("Kevin de Vries - Zurich Street Parade 2025 - ARTE Concert")
+    ?.slug,
+  "street-parade",
+);
+assert.equal(resolveEvent("Street Parade").slug, "street-parade");
+assert.equal(resolveEvent("Street Parade").kind, "festival");
+assert.equal(
+  resolveEvent("Zürich Street Parade").website,
+  "https://www.streetparade.com/",
+);
+assert.equal(resolveEvent("streetparade").slug, "street-parade");
 
 console.log("events.test.ts ok");

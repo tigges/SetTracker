@@ -1,5 +1,4 @@
 # Bump the timestamp below (and merge to main) to start Catalog deep refresh.
 # Used when workflow_dispatch is unavailable to the actor.
-requestedAt: 2026-08-01T17:20:00Z
-reason: Redeploy v0.2.71 after Melkweg type fix; deep refresh for Melkweg/TML WE2 1001 seeds
-James Hype Melkweg ADE + CYRIL + Push + Bassjackers + Bhaskar + DV B2B Nico Moreno TML WE2 seeds
+requestedAt: 2026-08-08T15:50:00Z
+reason: Add Zürich Street Parade event + ARTE Concert 2025 curated sets (v0.2.72)

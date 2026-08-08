@@ -264,6 +264,14 @@ export const KNOWN_EVENTS: Record<string, CanonicalEvent> = {
     location: "Amsterdam, Netherlands",
     website: "https://www.awakenings.nl/",
   },
+  "street-parade": {
+    slug: "street-parade",
+    name: "Street Parade",
+    kind: "festival",
+    location: "Zürich, Switzerland",
+    website: "https://www.streetparade.com/",
+    instagram: "https://www.instagram.com/streetparade/",
+  },
 };
 
 /** Alternate name/slug keys → canonical slug. */
@@ -333,6 +341,11 @@ const ALIAS_TO_SLUG: Record<string, string> = {
   mysteryland: "mysteryland",
   awakenings: "awakenings",
   "awakenings-festival": "awakenings",
+  "street-parade": "street-parade",
+  streetparade: "street-parade",
+  "zurich-street-parade": "street-parade",
+  "zuerich-street-parade": "street-parade",
+  "zurcher-street-parade": "street-parade",
 };
 
 function keyOf(name: string): string {
@@ -429,6 +442,7 @@ export function inferFestivalEvent(title: string): CanonicalEvent | null {
   if (/\btime\s*warp\b/i.test(t)) return KNOWN_EVENTS["time-warp"];
   if (/\bmysteryland\b/i.test(t)) return KNOWN_EVENTS.mysteryland;
   if (/\bawakenings\b/i.test(t)) return KNOWN_EVENTS.awakenings;
+  if (/\bstreet\s*parade\b/i.test(t)) return KNOWN_EVENTS["street-parade"];
   // DJ Mag Top 100 Festivals / Clubs / other club listicles (not Mixmag.net).
   return (
     inferDjMagFestivalEvent(t) ??
