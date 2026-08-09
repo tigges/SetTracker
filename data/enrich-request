@@ -1,4 +1,4 @@
 # Bump the timestamp below (and merge to main) to start Catalog enrich.
 # Used when workflow_dispatch is unavailable to the actor.
-requestedAt: 2026-08-01T00:15:00Z
-reason: Identify EDC Las Vegas sets/tracks via ACRCloud (event focus edc-lv; sparse festival YT Relives)
+requestedAt: 2026-08-09T09:20:00Z
+reason: ACRCloud fingerprint Street Parade ARTE 2025 sets (event focus street-parade; YouTube allowed)

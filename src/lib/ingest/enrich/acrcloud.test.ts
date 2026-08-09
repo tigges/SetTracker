@@ -262,6 +262,25 @@ const eventFocusFirst = [
 ].sort(compareSparseSetCandidates);
 assert.equal(eventFocusFirst[0]!.id, "edc-sc");
 
+// Focused YT festival (Street Parade ARTE) must beat non-focus SoundCloud.
+const eventFocusBeatsHost = [
+  cand({
+    id: "other-sc",
+    homepageBoost: 4,
+    eventBoost: 0,
+    host: "soundcloud",
+    densitySeverity: "severe",
+  }),
+  cand({
+    id: "street-parade-yt",
+    homepageBoost: 2,
+    eventBoost: 1,
+    host: "youtube",
+    densitySeverity: "severe",
+  }),
+].sort(compareSparseSetCandidates);
+assert.equal(eventFocusBeatsHost[0]!.id, "street-parade-yt");
+
 const pinkFestivalFirst = [
   cand({
     id: "sparse-generic",
@@ -279,7 +298,7 @@ const pinkFestivalFirst = [
     host: "youtube",
   }),
 ].sort(compareSparseSetCandidates);
-// SoundCloud still preferred by host, but among mixed hosts boost matters after host.
+// Without event focus, SoundCloud still preferred by host.
 assert.equal(pinkFestivalFirst[0]!.id, "sparse-generic");
 assert.equal(pinkFestivalFirst[1]!.id, "edc-pink");
 
