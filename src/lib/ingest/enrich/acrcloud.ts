@@ -791,18 +791,21 @@ export async function selectSparseSetsForFingerprint(
 }
 
 /**
- * Sort: host → event focus → detect urgency (Top 20 / festival) → density →
+ * Sort: event focus → host → detect urgency (Top 20 / festival) → density →
  * chart/roster demand → capped unresolved cues → sparsity → recency.
+ *
+ * Event focus (ACRCLOUD_EVENT_SLUGS) beats host preference so a YT-only
+ * festival run (e.g. Street Parade ARTE) is not starved by SoundCloud filler.
  */
 export function compareSparseSetCandidates(
   a: SparseSetCandidate,
   b: SparseSetCandidate,
 ): number {
-  const ha = HOST_PREF[a.host] - HOST_PREF[b.host];
-  if (ha !== 0) return ha;
   if (a.eventBoost !== b.eventBoost) {
     return b.eventBoost - a.eventBoost;
   }
+  const ha = HOST_PREF[a.host] - HOST_PREF[b.host];
+  if (ha !== 0) return ha;
   if (a.homepageBoost !== b.homepageBoost) {
     return b.homepageBoost - a.homepageBoost;
   }
