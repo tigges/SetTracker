@@ -3828,6 +3828,49 @@ export const TL_SARAH_DE_WARREN_EDC_LV_2026: FingerprintSeedRow[] = [
   },
 ];
 
+/**
+ * Deborah de Luca @ Opera Stage, Street Parade Zürich 2025-08-09
+ * Official YT: https://www.youtube.com/watch?v=7cK7rhYXbh8 (~55m)
+ * 1001TL: https://1001.tl/qwxcs1k — mobile screenshot starter (2026-08-10):
+ * first 8 identified tracks only; bare ID rows skipped. Evenly spaced until
+ * a full timed capture lands.
+ */
+export const TL_DEBORAH_STREET_PARADE_2025: FingerprintSeedRow[] =
+  evenlySpaceRows(
+    [
+      {
+        artist: "Papatinho",
+        title: "Baila, Vini (Deborah De Luca Remix)",
+      },
+      {
+        artist: "Frank 'O' Moiraghi & Deborah De Luca",
+        title: "Feel My Body",
+      },
+      { artist: "BIIA", title: "Angelo" },
+      {
+        artist: "Bountyhunter",
+        title: "Woops (Dimitri Vegas & Junkie Kid Remix)",
+      },
+      {
+        artist: "Mo-Do",
+        title: "Eins Zwei Polizei (Deborah De Luca Remix)",
+      },
+      {
+        artist: "Giorgia Angiuli",
+        title: "Peruvian Bounce (Deborah De Luca Remix)",
+      },
+      {
+        artist: "Evanescence",
+        title: "Bring Me To Life (Deborah De Luca Remix)",
+      },
+      {
+        artist: "Gigi D'Agostino",
+        title: "Bla Bla Bla (ID Remix)",
+      },
+    ],
+    3319,
+  );
+
 /** sourceSlug → curated 1001TL seed (SC / YT when live HTML is CF-blocked). */
 export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   string,
@@ -3884,6 +3927,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-KVZlecHlVkg": TL_PUSH_TML_WE2_2026,
   "yt-BG3Lr9EdWVY": TL_BASSJACKERS_TML_WE2_2026,
   "yt-HWIratXF1Bo": TL_BHASKAR_TML_WE2_2026,
+  "yt-7cK7rhYXbh8": TL_DEBORAH_STREET_PARADE_2025,
 };
 
 /** Sanity: every seeded clock must parse. */

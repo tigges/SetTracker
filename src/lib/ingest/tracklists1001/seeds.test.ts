@@ -12,6 +12,7 @@ import {
   TL_CLOONEE_EDC_LV_2022,
   TL_CLOONEE_PROSPA_DESTINO_2026,
   TL_DARUDE_EDC_LV_2026,
+  TL_DEBORAH_STREET_PARADE_2025,
   TL_DIMITRI_VEGAS_NICO_MORENO_TML_WE2_2026,
   TL_DIMITRI_VEGAS_TML_WE2_2026,
   TL_DOM_DOLLA_EDC_LV_2023,
@@ -878,5 +879,12 @@ for (const p of bhaskar) {
   bhPrev = p.timestamp;
 }
 assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-HWIratXF1Bo"]!.length >= 17);
+
+assertSeedClocks(TL_DEBORAH_STREET_PARADE_2025);
+const deborahSp = tracklist1001RowsToPlays(TL_DEBORAH_STREET_PARADE_2025);
+assert.equal(deborahSp.length, 8);
+assert.match(deborahSp[0]!.trackTitle!, /Baila/);
+assert.match(deborahSp[deborahSp.length - 1]!.trackTitle!, /Bla Bla Bla/);
+assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-7cK7rhYXbh8"]!.length >= 8);
 
 console.log("tracklists1001/seeds.test.ts ok");
