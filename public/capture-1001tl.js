@@ -1,16 +1,12 @@
-/* setradar: 1001Tracklists -> TS seed
+/* setradar: 1001Tracklists → TS seed (mobile bookmarklet + desktop)
  *
- * Desktop console:
- *   1. Open the 1001 tracklist page (fully loaded).
- *   2. Open this file → Select All → Copy.
- *   3. DevTools → Console → type: allow pasting → Enter → Paste → Enter.
- *   4. Overlay appears — Copy seed (or Select all).
+ * Bookmarklet (short — loads this file):
+ *   javascript:(function(){var s=document.createElement("script");s.src="https://tigges.github.io/SetTracker/capture-1001tl.js?t="+Date.now();document.documentElement.appendChild(s)})();
  *
- * Mobile bookmarklet: https://tigges.github.io/SetTracker/capture-1001/
- * (hosts public/capture-1001tl.js — keep this file in sync).
+ * Optional query on this script URL:
+ *   ?slug=yt-7cK7rhYXbh8&name=TL_DEBORAH_STREET_PARADE_2025&durationSec=3600
  *
- * Optional before paste:
- *   window.__SETRADAR_1001__ = { slug: "yt-7cK7rhYXbh8", name: "TL_DEBORAH_STREET_PARADE_2025" };
+ * Desktop console: paste scripts/capture-1001tl.console.js instead (same logic).
  */
 (function () {
   "use strict";
