@@ -179,7 +179,7 @@
           function () {
             try {
               ok = document.execCommand("copy");
-            } catch (e) {}
+            } catch (_e) {}
             copyBtn.textContent = ok ? "Copied ✓" : "Select → Copy";
           },
         );
@@ -187,7 +187,7 @@
       }
       try {
         ok = document.execCommand("copy");
-      } catch (e) {}
+      } catch (_e) {}
       copyBtn.textContent = ok ? "Copied ✓" : "Select → Copy";
     };
 
