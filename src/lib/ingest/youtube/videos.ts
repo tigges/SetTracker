@@ -32,6 +32,7 @@ import {
   TL_CYRIL_TML_WE2_2026,
   TL_DIMITRI_VEGAS_NICO_MORENO_TML_WE2_2026,
   TL_DIMITRI_VEGAS_TML_WE2_2026,
+  TL_DOM_DOLLA_ALLIANZ_SYDNEY,
   TL_BASSJACKERS_TML_WE2_2026,
   TL_BHASKAR_TML_WE2_2026,
   TL_PUSH_TML_WE2_2026,
@@ -229,6 +230,21 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/1g6h49l1/james-hype-get-closer-melkweg-amsterdam-dance-event-netherlands-2025-10-23.html",
     tracklist1001: TL_JAMES_HYPE_MELKWEG_ADE_2025,
+  },
+  {
+    // Artist-channel full set — Allianz Stadium Sydney; 1001.tl/jf3kd41 timed capture.
+    video: "https://www.youtube.com/watch?v=4Lqyh7cWRxQ",
+    primaryArtist: dj("Dom Dolla", {
+      accent: "#00bbf9",
+      homeCity: "Melbourne, AU",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    title: "Dom Dolla @ Allianz Stadium Sydney",
+    eventName: "Allianz Stadium Sydney",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/jf3kd41/dom-dolla-allianz-stadium-sydney-australia-2025-12-20.html",
+    tracklist1001: TL_DOM_DOLLA_ALLIANZ_SYDNEY,
   },
   {
     video: "https://www.youtube.com/watch?v=i9cNYaOOdwA",

@@ -19,6 +19,7 @@ import {
   TL_ADIEL_STREET_PARADE_2025,
   TL_DIMITRI_VEGAS_NICO_MORENO_TML_WE2_2026,
   TL_DIMITRI_VEGAS_TML_WE2_2026,
+  TL_DOM_DOLLA_ALLIANZ_SYDNEY,
   TL_DOM_DOLLA_EDC_LV_2023,
   TL_DOM_DOLLA_EDC_LV_2024,
   TL_DYZEN_TML_WE2_2026,
@@ -318,6 +319,28 @@ assert.ok(
   TRACKLIST_1001_BY_SOURCE_SLUG[
     "sc-domdolla-dom-dolla-live-edc-circuitgrounds-las-vegas-2024"
   ]!.length >= 30,
+);
+
+assertSeedClocks(TL_DOM_DOLLA_ALLIANZ_SYDNEY);
+const domSyd = tracklist1001RowsToPlays(TL_DOM_DOLLA_ALLIANZ_SYDNEY);
+assert.equal(domSyd.length, 58);
+assert.match(domSyd[0]!.trackTitle!, /Pyramids/);
+assert.equal(
+  domSyd[domSyd.length - 1]!.trackTitle,
+  "Rhyme Dust (Dimension Remix)",
+);
+assert.equal(domSyd[domSyd.length - 1]!.timestamp, 118 * 60 + 11);
+let domSydPrev = -1;
+for (const p of domSyd) {
+  assert.ok(
+    p.timestamp > domSydPrev,
+    `Dom Dolla Allianz Sydney clocks must increase @ ${p.timestamp}`,
+  );
+  domSydPrev = p.timestamp;
+}
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-4Lqyh7cWRxQ"],
+  TL_DOM_DOLLA_ALLIANZ_SYDNEY,
 );
 
 assertSeedClocks(TL_SOLOMUN_EDC_LV_2026);

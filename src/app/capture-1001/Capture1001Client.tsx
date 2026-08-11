@@ -20,7 +20,7 @@ function search1001(...parts: string[]): string {
   return `https://www.google.com/search?q=${encodeURIComponent(q)}`;
 }
 
-/** Batch 1 (Deborah → Adiel) is wired — next ten capture targets. */
+/** Dom Dolla Allianz Sydney wired — remaining capture targets. */
 const NEXT_CAPTURES: Preset[] = [
   {
     label: "PAN-POT · Street Parade",
@@ -83,13 +83,6 @@ const NEXT_CAPTURES: Preset[] = [
     slug: "yt--UOMvxh4MYU",
     name: "TL_PEGGY_GOU_CERCLE_LILLE",
     url: search1001("peggy gou", "cercle", "lille", "palais"),
-    openLabel: "Find 1001",
-  },
-  {
-    label: "Dom Dolla · Allianz Stadium Sydney",
-    slug: "yt-4Lqyh7cWRxQ",
-    name: "TL_DOM_DOLLA_ALLIANZ_SYDNEY",
-    url: search1001("dom dolla", "allianz", "sydney"),
     openLabel: "Find 1001",
   },
   {
