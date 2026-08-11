@@ -3283,6 +3283,73 @@ export const TL_DOM_DOLLA_EDC_LV_2024: FingerprintSeedRow[] = [
 ];
 
 /**
+ * Dom Dolla @ Allianz Stadium Sydney, Australia 2025-12-20
+ * Official YT (artist): https://www.youtube.com/watch?v=4Lqyh7cWRxQ
+ * 1001TL: https://1001.tl/jf3kd41 — operator bookmarklet capture 2026-08-11
+ * (58/58 timed cues).
+ */
+export const TL_DOM_DOLLA_ALLIANZ_SYDNEY: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "Frank Ocean", title: "Pyramids (Luke Alexander Remix)" },
+  { at: "2:50", artist: "ESSE vs. Dom Dolla", title: "Work It vs. Take It (Dom Dolla Mashup)" },
+  { at: "3:34", artist: "Dom Dolla", title: "Take It" },
+  { at: "4:18", artist: "ESSE", title: "Work It" },
+  { at: "5:02", artist: "Dom Dolla", title: "San Frandisco" },
+  { at: "7:00", artist: "Marco Strous", title: "Monkey Swag" },
+  { at: "8:42", artist: "Max Styler", title: "You & Me (Vintage Culture Remix)" },
+  { at: "8:50", artist: "Dom Dolla ft. Clementine Douglas", title: "Miracle Maker" },
+  { at: "10:35", artist: "Aliyah's Interlude", title: "IT GIRL (Everything Always Remix)" },
+  { at: "12:46", artist: "Dom Dolla", title: "girl$ (Layton Giordani Remix)" },
+  { at: "15:03", artist: "Laherte", title: "Pump Up The Jam" },
+  { at: "16:35", artist: "Torren Foot ft. rhys from the sticks", title: "DANCE" },
+  { at: "19:14", artist: "Sheck Wes", title: "Mo Bamba (HNTR Remix)" },
+  { at: "21:39", artist: "Puretone", title: "Addicted To Bass (Dom Dolla Relapse)" },
+  { at: "25:14", artist: "Michael Jackson vs. Disclosure", title: "Thriller vs. She's Gone, Dance On (JAMØ (USA) Edit)" },
+  { at: "26:16", artist: "Disclosure", title: "She's Gone, Dance On" },
+  { at: "27:18", artist: "Michael Jackson", title: "Thriller" },
+  { at: "28:20", artist: "Walker & Royce & VNSSA", title: "Activate" },
+  { at: "29:32", artist: "Tiga & Eli Brown", title: "Bugatti" },
+  { at: "30:55", artist: "Da Hool", title: "Meet Her At The Love Parade (Dom Dolla & Torren Foot Remix)" },
+  { at: "31:26", artist: "Faithless", title: "Insomnia (Acappella)" },
+  { at: "32:54", artist: "Garbage", title: "Cherry Lips (Go Baby Go!) (Dom Dolla Remix)" },
+  { at: "35:04", artist: "Dom Dolla ft. Daya", title: "Dreamin (Anyma Remix)" },
+  { at: "37:01", artist: "KENZ", title: "Rake It Up" },
+  { at: "39:40", artist: "TJR", title: "Funky Vodka" },
+  { at: "41:57", artist: "Walker & Royce", title: "Magic Carpet" },
+  { at: "43:53", artist: "SOSA", title: "Be Without You" },
+  { at: "44:34", artist: "Sidney Samson", title: "Riverside (Acappella)" },
+  { at: "45:12", artist: "Prospa", title: "Don't Stop (SCRIPT Remix)" },
+  { at: "46:44", artist: "Dom Dolla & Fcukers", title: "Perfect For Me" },
+  { at: "49:52", artist: "Yeah Yeah Yeahs", title: "Heads Will Roll (A-Trak Remix)" },
+  { at: "52:20", artist: "Mesto", title: "Listen To Me" },
+  { at: "54:15", artist: "Dom Dolla & Nelly Furtado", title: "Eat Your Man" },
+  { at: "56:11", artist: "Linska ft. Riko Dan", title: "World & Back" },
+  { at: "58:35", artist: "Dom Dolla & Nathan Nicholson", title: "No Room For A Saint (From F1® The Movie) (Walker & Royce Remix)" },
+  { at: "1:02:29", artist: "Sonny Fodera & Dom Dolla", title: "Moving Blind (Gorgon City Remix)" },
+  { at: "1:04:11", artist: "Cloonee & Funkdoobiest", title: "X-Rated (Devault Remix)" },
+  { at: "1:06:49", artist: "ATB", title: "9PM (Till I Come) (James Hype Edit)" },
+  { at: "1:08:02", artist: "RÜFÜS DU SOL", title: "Make It Happen (Dom Dolla Remix)" },
+  { at: "1:10:01", artist: "Drake", title: "NOKIA (Kelland Remix)" },
+  { at: "1:11:56", artist: "AFROJACK & Lucas & Steve", title: "Control" },
+  { at: "1:14:13", artist: "Dom Dolla ft. Mansionair", title: "Strangers (Tinlicker Remix)" },
+  { at: "1:18:33", artist: "MK & Dom Dolla", title: "Rhyme Dust" },
+  { at: "1:22:21", artist: "Dom Dolla & Tiga", title: "Don't Worry Baby" },
+  { at: "1:25:59", artist: "Dom Dolla & Go Freek", title: "Define" },
+  { at: "1:30:28", artist: "Dom Dolla ft. Clementine Douglas", title: "Miracle Maker" },
+  { at: "1:34:54", artist: "Dom Dolla", title: "Saving Up" },
+  { at: "1:38:52", artist: "SpiderBait", title: "Black Betty (Dom Dolla Remix)" },
+  { at: "1:41:11", artist: "Age Of Love", title: "The Age Of Love (Charlotte de Witte & Enrico Sangiuliano Remix)" },
+  { at: "1:44:30", artist: "Calvin Harris", title: "I'm Not Alone (Oliver Heldens & Centre Court Remix)" },
+  { at: "1:46:53", artist: "PEEKABOO", title: "Riddle" },
+  { at: "1:48:02", artist: "Public Domain", title: "Operation Blade (Bass In The Place)" },
+  { at: "1:50:09", artist: "D-Jastic", title: "Up To No Good" },
+  { at: "1:53:30", artist: "Dom Dolla & Tove Lo", title: "CAVE" },
+  { at: "1:54:57", artist: "Bou & Turno & Gino & Audit", title: "SHNB" },
+  { at: "1:55:41", artist: "Beyoncé ft. JAY Z", title: "Crazy In Love (Pola & Bryson Bootleg)" },
+  { at: "1:57:28", artist: "MK & Dom Dolla", title: "Rhyme Dust (Dimension Remix / Darren Styles & GRVITY 4/4 Edit)" },
+  { at: "1:58:11", artist: "MK & Dom Dolla", title: "Rhyme Dust (Dimension Remix)" },
+];
+
+/**
  * Solomun @ circuitGROUNDS, EDC Las Vegas 2026-05-17
  * Official YT: https://www.youtube.com/watch?v=g1vH9C_o-vo (~90:37)
  * 1001TL: https://1001.tl/2lkyu9mk — operator console capture 2026-08-01
@@ -4106,6 +4173,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "sc-domdolla-dom-dolla-live-edc-las-vegas-2023": TL_DOM_DOLLA_EDC_LV_2023,
   "sc-domdolla-dom-dolla-live-edc-circuitgrounds-las-vegas-2024":
     TL_DOM_DOLLA_EDC_LV_2024,
+  "yt-4Lqyh7cWRxQ": TL_DOM_DOLLA_ALLIANZ_SYDNEY,
   "yt-yXHoHK_jQvc": TL_AHEE_LIQUID_STRANGER_EDC_LV_2026,
   "yt-dXBoIY65P8s": TL_DARUDE_EDC_LV_2026,
   "yt-c_sx3zum8Z0": TL_BLEU_CLAIR_EDC_LV_2023,
