@@ -55,6 +55,7 @@ import {
   TL_ODD_MOB_TML_WE2_2026,
   TL_PEGASSI_EDC_LV_2026,
   TL_SARAH_DE_WARREN_EDC_LV_2026,
+  TL_SOLOMUN_ALLY_PALLY_2026,
   TL_SOLOMUN_EDC_LV_2026,
   TL_SONNY_FODERA_TML_WE2_2026,
   TL_STEVE_ANGELLO_TML_WE2_2026,
@@ -332,6 +333,32 @@ for (const p of solomun) {
   solPrev = p.timestamp;
 }
 assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-g1vH9C_o-vo"]!.length >= 16);
+
+assertSeedClocks(TL_SOLOMUN_ALLY_PALLY_2026);
+const solomunAlly = tracklist1001RowsToPlays(TL_SOLOMUN_ALLY_PALLY_2026);
+assert.equal(solomunAlly.length, 29);
+assert.equal(solomunAlly[0]!.trackTitle, "Acid");
+assert.equal(
+  solomunAlly[solomunAlly.length - 1]!.trackTitle,
+  "Tout Le Monde Est Fou",
+);
+assert.equal(solomunAlly[solomunAlly.length - 1]!.timestamp, 2 * 3600 + 37 * 60);
+let solAllyPrev = -1;
+for (const p of solomunAlly) {
+  assert.ok(
+    p.timestamp > solAllyPrev,
+    `Solomun Ally Pally clocks must increase @ ${p.timestamp}`,
+  );
+  solAllyPrev = p.timestamp;
+}
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-S46Bs4pZ_I4"],
+  TL_SOLOMUN_ALLY_PALLY_2026,
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-g1vH9C_o-vo"],
+  TL_SOLOMUN_ALLY_PALLY_2026,
+);
 
 assertSeedClocks(TL_SARAH_DE_WARREN_EDC_LV_2026);
 const sarah = tracklist1001RowsToPlays(TL_SARAH_DE_WARREN_EDC_LV_2026);

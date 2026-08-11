@@ -51,6 +51,7 @@ import {
   TL_NICO_MORENO_EDC_LV_2026,
   TL_PEGASSI_EDC_LV_2026,
   TL_SARAH_DE_WARREN_EDC_LV_2026,
+  TL_SOLOMUN_ALLY_PALLY_2026,
   TL_SOLOMUN_EDC_LV_2026,
   TL_WESTEND_EDC_LV_2026,
 } from "../tracklists1001/seeds";
@@ -319,6 +320,21 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/2lkyu9mk/solomun-circuitgrounds-edc-las-vegas-united-states-2026-05-17.html",
     tracklist1001: TL_SOLOMUN_EDC_LV_2026,
+  },
+  {
+    // Artist upload — Alexandra Palace London; 1001.tl/fn4hckk timed capture.
+    video: "https://www.youtube.com/watch?v=S46Bs4pZ_I4",
+    primaryArtist: dj("Solomun", {
+      accent: "#f0e6d8",
+      homeCity: "Hamburg, DE",
+    }),
+    genre: "Melodic House",
+    type: "festival",
+    title: "Solomun @ Alexandra Palace London 2026",
+    eventName: "Alexandra Palace",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/fn4hckk/solomun-alexandra-palace-london-united-kingdom-2026-02-07.html",
+    tracklist1001: TL_SOLOMUN_ALLY_PALLY_2026,
   },
   {
     // Insomniac Relive — promo description only; 1001TL seed from screenshots.
