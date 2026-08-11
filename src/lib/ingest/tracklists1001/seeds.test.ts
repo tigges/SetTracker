@@ -13,6 +13,7 @@ import {
   TL_CLOONEE_PROSPA_DESTINO_2026,
   TL_DARUDE_EDC_LV_2026,
   TL_DEBORAH_STREET_PARADE_2025,
+  TL_KEVIN_DE_VRIES_STREET_PARADE_2025,
   TL_DIMITRI_VEGAS_NICO_MORENO_TML_WE2_2026,
   TL_DIMITRI_VEGAS_TML_WE2_2026,
   TL_DOM_DOLLA_EDC_LV_2023,
@@ -886,5 +887,14 @@ assert.equal(deborahSp.length, 8);
 assert.match(deborahSp[0]!.trackTitle!, /Baila/);
 assert.match(deborahSp[deborahSp.length - 1]!.trackTitle!, /Bla Bla Bla/);
 assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-7cK7rhYXbh8"]!.length >= 8);
+
+assertSeedClocks(TL_KEVIN_DE_VRIES_STREET_PARADE_2025);
+const kevinSp = tracklist1001RowsToPlays(TL_KEVIN_DE_VRIES_STREET_PARADE_2025);
+assert.equal(kevinSp.length, 21);
+assert.match(kevinSp[0]!.trackTitle!, /Before You Go/);
+assert.match(kevinSp[kevinSp.length - 1]!.trackTitle!, /Sex On Fire/);
+assert.equal(kevinSp[0]!.timestamp, 0);
+assert.ok(kevinSp[kevinSp.length - 1]!.timestamp < 2 * 3600);
+assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-S5qAspu0AbI"]!.length >= 21);
 
 console.log("tracklists1001/seeds.test.ts ok");
