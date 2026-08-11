@@ -3939,6 +3939,161 @@ export const TL_DEBORAH_STREET_PARADE_2025: FingerprintSeedRow[] = [
   { at: "52:08", artist: "Gigi D'Agostino", title: "Bla Bla Bla" },
 ];
 
+/**
+ * Kölsch @ Opera Stage, Street Parade Zürich, Switzerland 2025-08-09
+ * Official YT: https://www.youtube.com/watch?v=pLldXE5OyCM
+ * https://www.1001tracklists.com/tracklist/1sftkmb9/kolsch-opera-stage-street-parade-zurich-switzerland-2025-08-09.html
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-pLldXE5OyCM"] = TL_KOLSCH_STREET_PARADE_2025
+ * Captured 2026-08-11 - provenance 1001tl.
+ * Capture clocks were corrupt after ~47m (jumped to 2:24:xx); titles kept,
+ * clocks evenly re-spaced across ~87m (sibling ARTE set length).
+ */
+export const TL_KOLSCH_STREET_PARADE_2025: FingerprintSeedRow[] =
+  evenlySpaceRows(
+    [
+      { artist: "TasteXperience", title: "Summersault" },
+      { artist: "NU ft. Jo.Ke", title: "Who Loves The Sun" },
+      { artist: "ACRAZE & Westend", title: "Apple Cider" },
+      { artist: "Kölsch", title: "Kinema" },
+      { artist: "Adriatique & Argy", title: "RACER" },
+      { artist: "CamelPhat & Kölsch", title: "Waste My Time" },
+      { artist: "Butch", title: "Countach (Kölsch Remix)" },
+      {
+        artist: "Danny Tenaglia ft. Celeda",
+        title: "Music Is The Answer (Dancin' And Prancin') (Acappella)",
+      },
+      { artist: "Mory Kanté", title: "Yeke Yeke (Hardfloor Dub)" },
+      { artist: "Krystal Klear", title: "Offenbach" },
+      {
+        artist: "Hilit Kolet ft. Juliet Mendoza",
+        title: "Sunbed Tripper",
+      },
+      { artist: "Kölsch", title: "Opa" },
+      { artist: "Age Of Love", title: "The Age Of Love (Kölsch Edit)" },
+      { artist: "Kölsch", title: "All Week (Kölsch VIP Mix)" },
+      {
+        artist: "Skrillex & Boys Noize ft. Opus III",
+        title: "Fine Day Anthem",
+      },
+      { artist: "Kölsch", title: "Loreley (deadmau5 Remix)" },
+      { artist: "Kölsch & Kevin de Vries", title: "Gate" },
+      { artist: "Kölsch", title: "Grey" },
+      { artist: "Tiga", title: "Mind Dimension" },
+      { artist: "Nirvana", title: "Smells Like Teen Spirit" },
+      { artist: "Kölsch", title: "Der Alte" },
+      {
+        artist: "London Grammar",
+        title: "Hell To The Liars (Kölsch Remix)",
+      },
+      {
+        artist: "Kölsch ft. Troels Abrahamsen",
+        title: "All That Matters (ARTBAT Remix)",
+      },
+      { artist: "Lutzenkirchen", title: "3 Tage Wach" },
+    ],
+    5220,
+  );
+
+/**
+ * Massano @ Opera Stage, Street Parade Zürich, Switzerland 2025-08-09
+ * Official YT: https://www.youtube.com/watch?v=fYM9DlFLwKw
+ * https://www.1001tracklists.com/tracklist/19jyprbt/massano-opera-stage-street-parade-zurich-switzerland-2025-08-09.html
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-fYM9DlFLwKw"] = TL_MASSANO_STREET_PARADE_2025
+ * Captured 2026-08-11 - provenance 1001tl.
+ */
+export const TL_MASSANO_STREET_PARADE_2025: FingerprintSeedRow[] = [
+  { at: "0:57", artist: "Read The News", title: "Higher" },
+  { at: "4:36", artist: "Notre Dame", title: "Everytime" },
+  { at: "7:05", artist: "Millforlife X Ali Bakgor X RHYU", title: "AWEYAWA!" },
+  { at: "13:45", artist: "Rafael", title: "U Make Me" },
+  {
+    at: "17:03",
+    artist: "Matt Sassari & CHRSTPHR ft. Barbatuques",
+    title: "Baiana",
+  },
+  { at: "20:20", artist: "Massano", title: "Funk" },
+  {
+    at: "23:23",
+    artist: "Fatboy Slim",
+    title: "Right Here, Right Now (Massano & David Lindmer Remix)",
+  },
+  { at: "25:57", artist: "Argy & Massano", title: "Wait" },
+  {
+    at: "30:01",
+    artist: "Anyma & Adam Sellouk ft. Carly Gibert",
+    title: "Girls MIA",
+  },
+  { at: "32:48", artist: "Cassian & YOTTO & Da Hool", title: "Love Parade" },
+  {
+    at: "34:37",
+    artist: "The Chemical Brothers",
+    title: "Do It Again (Massano Remix)",
+  },
+  { at: "41:58", artist: "SLVR", title: "Music 4 Ur Body" },
+  {
+    at: "44:45",
+    artist: "Stylo & Eli & Dani ft. Flauwher",
+    title: "Supersonic",
+  },
+  {
+    at: "47:35",
+    artist: "Yeah Yeah Yeahs",
+    title: "Heads Will Roll (Massano & Matt Guy Remix)",
+  },
+  { at: "52:22", artist: "Adam Sellouk & Paradoks", title: "Cloud 9" },
+  { at: "57:12", artist: "Goom Gum & RDNK", title: "It's Time To Get High" },
+  { at: "59:00", artist: "Massano", title: "Do It To Me" },
+  {
+    at: "1:01:47",
+    artist: "Øostil & Juan Hansen",
+    title: "Drown (Massano 2026 Private Edit)",
+  },
+  {
+    at: "1:08:53",
+    artist: "Massano",
+    title: "The Feeling (2025 Private Edit)",
+  },
+  {
+    at: "1:12:26",
+    artist: "Massano ft. Darla Jade",
+    title: "Something In The Water",
+  },
+  {
+    at: "1:17:32",
+    artist: "ARTBAT & David Guetta ft. Gotye",
+    title: "Somebody That I Used To Know",
+  },
+  {
+    at: "1:21:21",
+    artist: "Anyma & Massano ft. Nathan Nicholson",
+    title: "Angel In The Dark",
+  },
+  { at: "1:24:41", artist: "Massano & Stephan Bodzin", title: "Afterglow" },
+];
+
+/**
+ * Adiel @ Opera Stage, Street Parade Zürich, Switzerland 2025-08-09
+ * Official YT: https://www.youtube.com/watch?v=tuqAdrbkYZk
+ * https://www.1001tracklists.com/tracklist/2uwhr4bt/adiel-opera-stage-street-parade-zurich-switzerland-2025-08-09.html
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-tuqAdrbkYZk"] = TL_ADIEL_STREET_PARADE_2025
+ * Captured 2026-08-11 - provenance 1001tl.
+ */
+export const TL_ADIEL_STREET_PARADE_2025: FingerprintSeedRow[] = [
+  { at: "0:20", artist: "Benjamin Damage", title: "010x (Hardspace Remix)" },
+  { at: "4:53", artist: "Marcal", title: "Glasshouse" },
+  { at: "9:26", artist: "Stipp & Alec Dienaar", title: "H-Tool 4" },
+  { at: "13:59", artist: "Ploy", title: "Admirer" },
+  { at: "18:32", artist: "OUTER909", title: "Purga Murga" },
+  { at: "23:05", artist: "Da Hool", title: "Meet Her At The Love Parade" },
+  { at: "27:38", artist: "ENNIO", title: "Takashi Miike" },
+  { at: "32:11", artist: "Sharpside", title: "Space Cruising" },
+  { at: "36:44", artist: "Fank & Disguised", title: "Sanity Mask" },
+  { at: "41:17", artist: "X-Filter ft. DJ H.S.", title: "Come On" },
+  { at: "45:50", artist: "DJ Europarking & Dollkraut", title: "20inch Chrome" },
+  { at: "50:23", artist: "Storm", title: "Storm" },
+  { at: "54:56", artist: "Adiel", title: "Nightride" },
+];
+
 /** sourceSlug → curated 1001TL seed (SC / YT when live HTML is CF-blocked). */
 export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   string,
@@ -3997,6 +4152,9 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-HWIratXF1Bo": TL_BHASKAR_TML_WE2_2026,
   "yt-7cK7rhYXbh8": TL_DEBORAH_STREET_PARADE_2025,
   "yt-S5qAspu0AbI": TL_KEVIN_DE_VRIES_STREET_PARADE_2025,
+  "yt-pLldXE5OyCM": TL_KOLSCH_STREET_PARADE_2025,
+  "yt-fYM9DlFLwKw": TL_MASSANO_STREET_PARADE_2025,
+  "yt-tuqAdrbkYZk": TL_ADIEL_STREET_PARADE_2025,
 };
 
 /** Sanity: every seeded clock must parse. */

@@ -14,6 +14,9 @@ import {
   TL_DARUDE_EDC_LV_2026,
   TL_DEBORAH_STREET_PARADE_2025,
   TL_KEVIN_DE_VRIES_STREET_PARADE_2025,
+  TL_KOLSCH_STREET_PARADE_2025,
+  TL_MASSANO_STREET_PARADE_2025,
+  TL_ADIEL_STREET_PARADE_2025,
   TL_DIMITRI_VEGAS_NICO_MORENO_TML_WE2_2026,
   TL_DIMITRI_VEGAS_TML_WE2_2026,
   TL_DOM_DOLLA_EDC_LV_2023,
@@ -896,5 +899,27 @@ assert.match(kevinSp[kevinSp.length - 1]!.trackTitle!, /Sex On Fire/);
 assert.equal(kevinSp[0]!.timestamp, 0);
 assert.ok(kevinSp[kevinSp.length - 1]!.timestamp < 2 * 3600);
 assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-S5qAspu0AbI"]!.length >= 21);
+
+assertSeedClocks(TL_KOLSCH_STREET_PARADE_2025);
+const kolschSp = tracklist1001RowsToPlays(TL_KOLSCH_STREET_PARADE_2025);
+assert.equal(kolschSp.length, 24);
+assert.equal(kolschSp[0]!.trackTitle, "Summersault");
+assert.equal(kolschSp[kolschSp.length - 1]!.trackTitle, "3 Tage Wach");
+assert.ok(kolschSp[kolschSp.length - 1]!.timestamp < 2 * 3600);
+assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-pLldXE5OyCM"]!.length >= 24);
+
+assertSeedClocks(TL_MASSANO_STREET_PARADE_2025);
+const massanoSp = tracklist1001RowsToPlays(TL_MASSANO_STREET_PARADE_2025);
+assert.equal(massanoSp.length, 23);
+assert.equal(massanoSp[0]!.trackTitle, "Higher");
+assert.equal(massanoSp[massanoSp.length - 1]!.trackTitle, "Afterglow");
+assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-fYM9DlFLwKw"]!.length >= 23);
+
+assertSeedClocks(TL_ADIEL_STREET_PARADE_2025);
+const adielSp = tracklist1001RowsToPlays(TL_ADIEL_STREET_PARADE_2025);
+assert.equal(adielSp.length, 13);
+assert.match(adielSp[0]!.trackTitle!, /010x/);
+assert.equal(adielSp[adielSp.length - 1]!.trackTitle, "Nightride");
+assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-tuqAdrbkYZk"]!.length >= 13);
 
 console.log("tracklists1001/seeds.test.ts ok");
