@@ -1100,6 +1100,21 @@ export async function runIngest(
   }
 
   try {
+    const { backfillSetEventsFromTitles } = await import("./backfillSetEvents");
+    const ev = await backfillSetEventsFromTitles(prisma);
+    if (ev.attached) {
+      console.log(
+        `[ingest] event title backfill: ${ev.attached}/${ev.scanned}`,
+      );
+    }
+  } catch (err) {
+    console.warn(
+      "[ingest] event title backfill failed:",
+      err instanceof Error ? err.message : err,
+    );
+  }
+
+  try {
     const linked = await backfillSetEditions(prisma);
     if (linked) console.log(`[ingest] set editions linked: ${linked}`);
   } catch (err) {

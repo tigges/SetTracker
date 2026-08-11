@@ -5,18 +5,13 @@ import { useMemo, useState } from "react";
 const LIVE_SCRIPT =
   "https://tigges.github.io/SetTracker/capture-1001tl.js";
 
-type Preset = {
+export type CapturePreset = {
   label: string;
   slug: string;
   name: string;
-  /** Google / 1001 search when the shortlink is unknown. */
   searchUrl: string;
+  reason?: string;
 };
-
-function search1001(...parts: string[]): string {
-  const q = [...parts, "site:1001tracklists.com"].join(" ");
-  return `https://www.google.com/search?q=${encodeURIComponent(q)}`;
-}
 
 /** `yt-<videoId>` → watch URL (handles ids that start with `-`). */
 function youtubeFromSlug(slug: string): string {
@@ -24,111 +19,10 @@ function youtubeFromSlug(slug: string): string {
   return `https://www.youtube.com/watch?v=${id}`;
 }
 
-/**
- * Next 10 capture assists (YT-first).
- * Recently wired & removed: Dom Dolla Allianz, FISHER WE1, Massano Freedom,
- * Eric Prydz Ultra, Solomun Ally Pally, Street Parade Deborah→Adiel.
- */
-const NEXT_CAPTURES: Preset[] = [
-  {
-    label: "PAN-POT · Street Parade",
-    slug: "yt-LpFxQmtEeAA",
-    name: "TL_PAN_POT_STREET_PARADE_2025",
-    searchUrl: search1001(
-      "pan-pot",
-      "opera stage",
-      "street parade",
-      "zurich",
-      "2025-08-09",
-    ),
-  },
-  {
-    label: "HoneyLuv · Street Parade",
-    slug: "yt-WTN5ru2ceRE",
-    name: "TL_HONEYLUV_STREET_PARADE_2025",
-    searchUrl: search1001(
-      "honeyluv",
-      "street parade",
-      "zurich",
-      "2025-08-09",
-    ),
-  },
-  {
-    label: "Zamna Soundsystem · Street Parade",
-    slug: "yt-1Mp9Pl6YgDM",
-    name: "TL_ZAMNA_STREET_PARADE_2025",
-    searchUrl: search1001(
-      "zamna",
-      "street parade",
-      "zurich",
-      "2025-08-09",
-    ),
-  },
-  {
-    label: "Plastik Funk · Nature One",
-    slug: "yt-apu-wnvlrqs",
-    name: "TL_PLASTIK_FUNK_NATURE_ONE_2025",
-    searchUrl: search1001("plastik funk", "nature one", "2025", "arte"),
-  },
-  {
-    label: "Mike Williams · Tomorrowland WE2",
-    slug: "yt-WnjXXOZ8Te8",
-    name: "TL_MIKE_WILLIAMS_TML_WE2_2026",
-    searchUrl: search1001(
-      "mike williams",
-      "tomorrowland",
-      "weekend 2",
-      "2026",
-    ),
-  },
-  {
-    label: "Peggy Gou · Cercle Lille",
-    slug: "yt--UOMvxh4MYU",
-    name: "TL_PEGGY_GOU_CERCLE_LILLE",
-    searchUrl: search1001("peggy gou", "cercle", "lille", "palais"),
-  },
-  {
-    label: "Boris Brejcha · Tomorrowland WE1",
-    slug: "yt-NpL_bT5vgmU",
-    name: "TL_BORIS_BREJCHA_TML_WE1_2026",
-    searchUrl: search1001(
-      "boris brejcha",
-      "mainstage",
-      "tomorrowland",
-      "weekend 1",
-      "2026",
-    ),
-  },
-  {
-    label: "Sebastian Ingrosso · Tomorrowland WE2",
-    slug: "yt-g4vR2VlhNtk",
-    name: "TL_SEBASTIAN_INGROSSO_TML_WE2_2026",
-    searchUrl: search1001(
-      "sebastian ingrosso",
-      "tomorrowland",
-      "weekend 2",
-      "2026",
-    ),
-  },
-  {
-    label: "Miss Monique · BIORHYTHM",
-    slug: "yt-1LpQZ5GTRDg",
-    name: "TL_MISS_MONIQUE_BIORHYTHM",
-    searchUrl: search1001("miss monique", "biorhythm"),
-  },
-  {
-    label: "John Summit · Lollapalooza",
-    slug: "yt-9TKqqBCmDHA",
-    name: "TL_JOHN_SUMMIT_LOLLAPALOOZA",
-    searchUrl: search1001("john summit", "lollapalooza"),
-  },
-];
-
-function bookmarkletFor(scriptBase: string, preset?: Preset): string {
+function bookmarkletFor(scriptBase: string, preset?: CapturePreset): string {
   const qs = preset
     ? `?slug=${encodeURIComponent(preset.slug)}&name=${encodeURIComponent(preset.name)}&t=`
     : "?t=";
-  // Date.now() is concatenated in the bookmarklet so phones always load a fresh script.
   return `javascript:(function(){var s=document.createElement("script");s.src="${scriptBase}${qs}"+Date.now();document.documentElement.appendChild(s)})();`;
 }
 
@@ -153,11 +47,14 @@ async function copyText(text: string): Promise<boolean> {
   }
 }
 
-export function Capture1001Client() {
+export function Capture1001Client({
+  presets,
+}: {
+  presets: CapturePreset[];
+}) {
   const scriptUrl = useMemo(() => {
     if (typeof window === "undefined") return LIVE_SCRIPT;
     const base = (process.env.NEXT_PUBLIC_BASE_PATH || "").replace(/\/$/, "");
-    // Prefer same-origin script when opened from Pages / local export.
     if (window.location.hostname === "tigges.github.io" || base) {
       return `${window.location.origin}${base}/capture-1001tl.js`;
     }
@@ -193,7 +90,6 @@ export function Capture1001Client() {
             href={generic}
             className="rounded-md border border-line px-3 py-2 text-[13px] font-bold text-ink"
             onClick={(e) => {
-              // Prevent navigation; desktop users can drag this link to bookmarks.
               e.preventDefault();
               onCopy("bookmarklet", generic);
             }}
@@ -232,13 +128,15 @@ export function Capture1001Client() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-lg font-extrabold tracking-tight">Next 10 captures</h2>
+        <h2 className="text-lg font-extrabold tracking-tight">
+          Next {presets.length} captures
+        </h2>
         <p className="text-[14px] text-muted">
-          Official YouTube first, then 1001, then the preset bookmarklet (slug
-          filled).
+          Auto-ranked from Street Parade gaps, Top100 thin/missing tracks, and
+          density-severe YouTube sets. Official YouTube first.
         </p>
         <ol className="divide-y divide-line border-y border-line">
-          {NEXT_CAPTURES.map((p, i) => (
+          {presets.map((p, i) => (
             <li
               key={p.slug}
               className="flex flex-col gap-2 py-3 sm:flex-row sm:items-center sm:justify-between"
@@ -248,7 +146,10 @@ export function Capture1001Client() {
                   <span className="mono text-muted2 mr-2">{i + 1}.</span>
                   {p.label}
                 </div>
-                <div className="mono text-[11px] text-muted2">{p.slug}</div>
+                <div className="mono text-[11px] text-muted2">
+                  {p.slug}
+                  {p.reason ? ` · ${p.reason}` : ""}
+                </div>
               </div>
               <div className="flex flex-wrap gap-2">
                 <a

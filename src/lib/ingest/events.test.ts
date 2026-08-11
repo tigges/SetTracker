@@ -68,5 +68,10 @@ assert.equal(
   "https://www.streetparade.com/",
 );
 assert.equal(resolveEvent("streetparade").slug, "street-parade");
+assert.equal(
+  inferFestivalEvent("Plastik Funk - Nature One 2025 - ARTE Concert")?.slug,
+  "nature-one",
+);
+assert.equal(resolveEvent("Nature One").slug, "nature-one");
 
 console.log("events.test.ts ok");

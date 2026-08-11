@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
-import { Capture1001Client } from "./Capture1001Client";
+import {
+  Capture1001Client,
+  type CapturePreset,
+} from "./Capture1001Client";
+import nextCaptures from "../../../data/crosscheck/next-captures.json";
 
 export const metadata: Metadata = {
   title: "Capture 1001 — setradar.ai",
@@ -8,6 +12,8 @@ export const metadata: Metadata = {
 };
 
 export default function Capture1001Page() {
+  const presets = (nextCaptures.presets ?? []) as CapturePreset[];
+
   return (
     <div className="mx-auto max-w-2xl space-y-6">
       <header className="space-y-2">
@@ -22,7 +28,7 @@ export default function Capture1001Page() {
           then run the bookmarklet to copy a timed seed and paste it into chat.
         </p>
       </header>
-      <Capture1001Client />
+      <Capture1001Client presets={presets} />
     </div>
   );
 }

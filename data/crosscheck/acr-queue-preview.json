@@ -1,0 +1,367 @@
+{
+  "generatedAt": "2026-08-11T18:59:00.393Z",
+  "note": "Severity + host-ranked preview for ACRCloud (SC/hearthis first). Live enrich still uses Prisma.",
+  "limit": 40,
+  "queue": [
+    {
+      "rank": 1,
+      "slug": "sc-robin-schulz-robin-schulz-dj-set-live-pacha-ibiza",
+      "title": "Robin Schulz DJ Set live @Pacha, Ibiza",
+      "primaryDj": "Robin Schulz",
+      "severity": "severe",
+      "playCount": 1,
+      "hostRank": 0
+    },
+    {
+      "rank": 2,
+      "slug": "sc-meduzamusic-meduza-dj-set",
+      "title": "MEDUZA @ Stereo Montreal May 16 2026 - 9 Hrs Set Open to Close",
+      "primaryDj": "MEDUZA",
+      "severity": "severe",
+      "playCount": 6,
+      "hostRank": 0
+    },
+    {
+      "rank": 3,
+      "slug": "sc-marten-horger-tomorrowland-mainstage-2023",
+      "title": "MARTEN HØRGER - TOMORROWLAND MAINSTAGE 2023",
+      "primaryDj": "Marten Horger",
+      "severity": "severe",
+      "playCount": 1,
+      "hostRank": 0
+    },
+    {
+      "rank": 4,
+      "slug": "sc-meduzamusic-aeterna-radio-012-with-genesi",
+      "title": "Aeterna Radio 012 with GENESI guestmix",
+      "primaryDj": "MEDUZA",
+      "severity": "severe",
+      "playCount": 1,
+      "hostRank": 0
+    },
+    {
+      "rank": 5,
+      "slug": "sc-itsthewestend-westend-live-carpe-diem-croatia",
+      "title": "Westend - Live @ Carpe Diem Croatia",
+      "primaryDj": "Westend",
+      "severity": "severe",
+      "playCount": 2,
+      "hostRank": 0
+    },
+    {
+      "rank": 6,
+      "slug": "sc-meduzamusic-aeterna-radio-007",
+      "title": "Aeterna Radio 007 with DONT BLINK guestmix",
+      "primaryDj": "MEDUZA",
+      "severity": "severe",
+      "playCount": 1,
+      "hostRank": 0
+    },
+    {
+      "rank": 7,
+      "slug": "sc-meduzamusic-aeterna-radio-014-with-broken",
+      "title": "Aeterna Radio 014 with Broken Hill Guestmix",
+      "primaryDj": "MEDUZA",
+      "severity": "severe",
+      "playCount": 1,
+      "hostRank": 0
+    },
+    {
+      "rank": 8,
+      "slug": "sc-dimitrivegasandlikemike-smash-the-house-radio-ep-664",
+      "title": "Smash The House Radio ep. 664",
+      "primaryDj": "Dimitri Vegas & Like Mike",
+      "severity": "severe",
+      "playCount": 1,
+      "hostRank": 0
+    },
+    {
+      "rank": 9,
+      "slug": "sc-dimitrivegasandlikemike-smash-the-house-radio-ep-680",
+      "title": "Smash The House Radio ep. 680",
+      "primaryDj": "Dimitri Vegas & Like Mike",
+      "severity": "severe",
+      "playCount": 1,
+      "hostRank": 0
+    },
+    {
+      "rank": 10,
+      "slug": "sc-korolovadj-korolova-captive-soul-95",
+      "title": "Korolova - Captive Soul 95",
+      "primaryDj": "Korolova",
+      "severity": "severe",
+      "playCount": 1,
+      "hostRank": 0
+    },
+    {
+      "rank": 11,
+      "slug": "sc-korolovadj-korolova-captive-soul-89",
+      "title": "Korolova - Captive Soul 89",
+      "primaryDj": "Korolova",
+      "severity": "severe",
+      "playCount": 1,
+      "hostRank": 0
+    },
+    {
+      "rank": 12,
+      "slug": "sc-korolovadj-korolova-captive-soul-91",
+      "title": "Korolova - Captive Soul 91",
+      "primaryDj": "Korolova",
+      "severity": "severe",
+      "playCount": 1,
+      "hostRank": 0
+    },
+    {
+      "rank": 13,
+      "slug": "sc-hannahlaingdj-r1-residency-hannah-laing-a-nod-to-the-90s",
+      "title": "R1 Residency Hannah Laing - A Nod To The 90s",
+      "primaryDj": "Hannah Laing",
+      "severity": "severe",
+      "playCount": 2,
+      "hostRank": 0
+    },
+    {
+      "rank": 14,
+      "slug": "sc-korolovadj-korolova-captive-soul-92",
+      "title": "Korolova - Captive Soul 92",
+      "primaryDj": "Korolova",
+      "severity": "severe",
+      "playCount": 1,
+      "hostRank": 0
+    },
+    {
+      "rank": 15,
+      "slug": "sc-dimitrivegasandlikemike-smash-the-house-radio-ep-652",
+      "title": "Smash The House Radio ep. 652",
+      "primaryDj": "Dimitri Vegas & Like Mike",
+      "severity": "severe",
+      "playCount": 1,
+      "hostRank": 0
+    },
+    {
+      "rank": 16,
+      "slug": "sc-dimitrivegasandlikemike-smash-the-house-radio-ep-651",
+      "title": "Smash The House Radio ep. 651",
+      "primaryDj": "Dimitri Vegas & Like Mike",
+      "severity": "severe",
+      "playCount": 1,
+      "hostRank": 0
+    },
+    {
+      "rank": 17,
+      "slug": "sc-meduzamusic-aeterna-radio-02",
+      "title": "Aeterna Radio 002",
+      "primaryDj": "MEDUZA",
+      "severity": "severe",
+      "playCount": 1,
+      "hostRank": 0
+    },
+    {
+      "rank": 18,
+      "slug": "sc-korolovadj-korolova-captive-soul-97",
+      "title": "Korolova - Captive Soul 97",
+      "primaryDj": "Korolova",
+      "severity": "severe",
+      "playCount": 1,
+      "hostRank": 0
+    },
+    {
+      "rank": 19,
+      "slug": "sc-dimitrivegasandlikemike-smash-the-house-radio-ep-672",
+      "title": "Smash The House Radio ep. 672",
+      "primaryDj": "Dimitri Vegas & Like Mike",
+      "severity": "severe",
+      "playCount": 1,
+      "hostRank": 0
+    },
+    {
+      "rank": 20,
+      "slug": "sc-dimitrivegasandlikemike-smash-the-house-radio-ep-677",
+      "title": "Smash The House Radio ep. 677",
+      "primaryDj": "Dimitri Vegas & Like Mike",
+      "severity": "severe",
+      "playCount": 1,
+      "hostRank": 0
+    },
+    {
+      "rank": 21,
+      "slug": "sc-dimitrivegasandlikemike-smash-the-house-radio-ep-650",
+      "title": "Smash The House Radio ep. 650",
+      "primaryDj": "Dimitri Vegas & Like Mike",
+      "severity": "severe",
+      "playCount": 1,
+      "hostRank": 0
+    },
+    {
+      "rank": 22,
+      "slug": "sc-hardwell-hardwell-on-air-531",
+      "title": "Hardwell On Air 531",
+      "primaryDj": "Hardwell",
+      "severity": "severe",
+      "playCount": 1,
+      "hostRank": 0
+    },
+    {
+      "rank": 23,
+      "slug": "sc-meduzamusic-radioshow-january-2025",
+      "title": "Radioshow January 2025 with GENESI guestmix",
+      "primaryDj": "MEDUZA",
+      "severity": "severe",
+      "playCount": 1,
+      "hostRank": 0
+    },
+    {
+      "rank": 24,
+      "slug": "sc-dimitrivegasandlikemike-smash-the-house-radio-ep-686",
+      "title": "Smash The House Radio ep. 686",
+      "primaryDj": "Dimitri Vegas & Like Mike",
+      "severity": "severe",
+      "playCount": 1,
+      "hostRank": 0
+    },
+    {
+      "rank": 25,
+      "slug": "sc-korolovadj-korolova-captive-soul-88",
+      "title": "Korolova - Captive Soul 88",
+      "primaryDj": "Korolova",
+      "severity": "severe",
+      "playCount": 1,
+      "hostRank": 0
+    },
+    {
+      "rank": 26,
+      "slug": "sc-dimitrivegasandlikemike-smash-the-house-radio-ep-660",
+      "title": "Smash The House Radio ep. 660",
+      "primaryDj": "Dimitri Vegas & Like Mike",
+      "severity": "severe",
+      "playCount": 1,
+      "hostRank": 0
+    },
+    {
+      "rank": 27,
+      "slug": "sc-acslater-kendoll-hi8-tour-special-guest-mix",
+      "title": "Kendoll - Hi8 Tour Special Guest Mix",
+      "primaryDj": "AC Slater",
+      "severity": "severe",
+      "playCount": 1,
+      "hostRank": 0
+    },
+    {
+      "rank": 28,
+      "slug": "sc-realmaup-xxx-radio-178",
+      "title": "XXX Radio #178",
+      "primaryDj": "Mau P",
+      "severity": "severe",
+      "playCount": 1,
+      "hostRank": 0
+    },
+    {
+      "rank": 29,
+      "slug": "sc-meduzamusic-lesgo-guestmix",
+      "title": "Radioshow February 2025 with Lesgo guestmix",
+      "primaryDj": "MEDUZA",
+      "severity": "severe",
+      "playCount": 1,
+      "hostRank": 0
+    },
+    {
+      "rank": 30,
+      "slug": "sc-acslater-liveatl",
+      "title": "AC Slater Live @ Warehouse Party in Atlanta June 2026",
+      "primaryDj": "AC Slater",
+      "severity": "severe",
+      "playCount": 2,
+      "hostRank": 0
+    },
+    {
+      "rank": 31,
+      "slug": "sc-sidepiece-sidepiece-the-concourse-project-in-austin-tx-nye-2025",
+      "title": "SIDEPIECE @ The Concourse Project in Austin, TX. NYE 2025",
+      "primaryDj": "SIDEPIECE",
+      "severity": "severe",
+      "playCount": 2,
+      "hostRank": 0
+    },
+    {
+      "rank": 32,
+      "slug": "sc-meduzamusic-aeterna-radio-04-with-helang-guestmix",
+      "title": "Aeterna Radio 004 with HELANG guestmix",
+      "primaryDj": "MEDUZA",
+      "severity": "severe",
+      "playCount": 1,
+      "hostRank": 0
+    },
+    {
+      "rank": 33,
+      "slug": "sc-meduzamusic-aeterna-radio-carl-bee",
+      "title": "Aeterna Radio 006 with Carl Bee guestmix",
+      "primaryDj": "MEDUZA",
+      "severity": "severe",
+      "playCount": 1,
+      "hostRank": 0
+    },
+    {
+      "rank": 34,
+      "slug": "sc-meduzamusic-hostallatorre-live",
+      "title": "MEDUZA³ Live in Ibiza - End Of Summer Set 2025 @ Hostal La Torre",
+      "primaryDj": "MEDUZA",
+      "severity": "severe",
+      "playCount": 1,
+      "hostRank": 0
+    },
+    {
+      "rank": 35,
+      "slug": "sc-korolovadj-korolova-live-snowattack",
+      "title": "KOROLOVA - LIVE @ Snowattack, Les2Alpes France",
+      "primaryDj": "Korolova",
+      "severity": "severe",
+      "playCount": 1,
+      "hostRank": 0
+    },
+    {
+      "rank": 36,
+      "slug": "sc-hannah_wants-space-miami-0726",
+      "title": "DJ set at Space Miami - 3 July 2026",
+      "primaryDj": "Hannah Wants",
+      "severity": "severe",
+      "playCount": 4,
+      "hostRank": 0
+    },
+    {
+      "rank": 37,
+      "slug": "sc-sidepiece-sidepiece-b2b-westend-daytrip",
+      "title": "SIDEPIECE b2b Westend  @ Daytrip 2026",
+      "primaryDj": "SIDEPIECE",
+      "severity": "severe",
+      "playCount": 2,
+      "hostRank": 0
+    },
+    {
+      "rank": 38,
+      "slug": "sc-hannah_wants-mixtape-0522",
+      "title": "Mixtape 0522",
+      "primaryDj": "Hannah Wants",
+      "severity": "severe",
+      "playCount": 2,
+      "hostRank": 0
+    },
+    {
+      "rank": 39,
+      "slug": "sc-meduzamusic-meduza-club-space",
+      "title": "MEDUZA @ Club Space, Miami, 24-10-19",
+      "primaryDj": "MEDUZA",
+      "severity": "severe",
+      "playCount": 6,
+      "hostRank": 0
+    },
+    {
+      "rank": 40,
+      "slug": "sc-itsthewestend-westend-live-academy-in-los-angeles-ca",
+      "title": "Westend - Live @ Academy in Los Angeles, CA (Open to Close Set)",
+      "primaryDj": "Westend",
+      "severity": "severe",
+      "playCount": 8,
+      "hostRank": 0
+    }
+  ]
+}

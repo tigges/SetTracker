@@ -1,0 +1,218 @@
+{
+  "generatedAt": "2026-08-11T18:59:00.780Z",
+  "graduatesCount": 0,
+  "graduatesUpdatedAt": null,
+  "readyToGraduate": [
+    {
+      "name": "Tita Lau",
+      "slug": "tita-lau",
+      "score": 125,
+      "youtube": "@TitaLau",
+      "soundcloud": "titalau"
+    },
+    {
+      "name": "Prospa",
+      "slug": "prospa",
+      "score": 85,
+      "youtube": "@ProspaUK",
+      "soundcloud": "prospa"
+    },
+    {
+      "name": "Chris Lake",
+      "slug": "chris-lake",
+      "score": 60,
+      "youtube": "@ChrisLake",
+      "soundcloud": "chrislake"
+    },
+    {
+      "name": "FISHER",
+      "slug": "fisher",
+      "score": 60,
+      "youtube": "@fisher",
+      "soundcloud": "fish-tales"
+    },
+    {
+      "name": "Hannah Laing",
+      "slug": "hannah-laing",
+      "score": 60,
+      "youtube": "@HannahLaingDJ",
+      "soundcloud": "hannahlaingdj"
+    },
+    {
+      "name": "James Hype",
+      "slug": "james-hype",
+      "score": 60,
+      "youtube": "@JamesHype",
+      "soundcloud": "jameshype"
+    },
+    {
+      "name": "Oliver Heldens",
+      "slug": "oliver-heldens",
+      "score": 60,
+      "youtube": "@OliverHeldens",
+      "soundcloud": "oliverheldens"
+    },
+    {
+      "name": "Vintage Culture",
+      "slug": "vintage-culture",
+      "score": 60,
+      "youtube": "@VintageCulture",
+      "soundcloud": "vintageculturemusic"
+    },
+    {
+      "name": "BISCITS",
+      "slug": "biscits",
+      "score": 50,
+      "youtube": "@Biscits",
+      "soundcloud": "biscits"
+    },
+    {
+      "name": "Black Coffee",
+      "slug": "black-coffee",
+      "score": 50,
+      "youtube": "@realblackcoffee",
+      "soundcloud": "realblackcoffee"
+    },
+    {
+      "name": "Bleu Clair",
+      "slug": "bleu-clair",
+      "score": 50,
+      "youtube": "@bleuclairmusic",
+      "soundcloud": "bleuclair"
+    },
+    {
+      "name": "Dom Dolla",
+      "slug": "dom-dolla",
+      "score": 50,
+      "youtube": "@domdolla",
+      "soundcloud": "domdolla"
+    },
+    {
+      "name": "Gorgon City",
+      "slug": "gorgon-city",
+      "score": 50,
+      "youtube": "@GorgonCity",
+      "soundcloud": "gorgon-city"
+    },
+    {
+      "name": "John Summit",
+      "slug": "john-summit",
+      "score": 50,
+      "youtube": "@johnsummit",
+      "soundcloud": "johnsummit"
+    },
+    {
+      "name": "Marten Horger",
+      "slug": "marten-horger",
+      "score": 50,
+      "youtube": "@MartenHorger",
+      "soundcloud": "marten-horger"
+    },
+    {
+      "name": "Mau P",
+      "slug": "mau-p",
+      "score": 50,
+      "youtube": "@maupmusic",
+      "soundcloud": "realmaup"
+    },
+    {
+      "name": "Max Styler",
+      "slug": "max-styler",
+      "score": 50,
+      "youtube": "@MaxStyler",
+      "soundcloud": "maxstyler"
+    },
+    {
+      "name": "MEDUZA",
+      "slug": "meduza",
+      "score": 50,
+      "youtube": "@meduzamusic",
+      "soundcloud": "meduzamusic"
+    },
+    {
+      "name": "Robin Schulz",
+      "slug": "robin-schulz",
+      "score": 50,
+      "youtube": "@robinschulz",
+      "soundcloud": "robin-schulz"
+    },
+    {
+      "name": "SIDEPIECE",
+      "slug": "sidepiece",
+      "score": 50,
+      "youtube": "@youasidepiece",
+      "soundcloud": "sidepiece"
+    },
+    {
+      "name": "Walker & Royce",
+      "slug": "walker-royce",
+      "score": 50,
+      "youtube": "@WalkerAndRoyce",
+      "soundcloud": "walker-and-royce"
+    },
+    {
+      "name": "Keinemusik",
+      "slug": "keinemusik",
+      "score": 45,
+      "youtube": "@keinemusik",
+      "soundcloud": "keinemusik"
+    },
+    {
+      "name": "PAWSA",
+      "slug": "pawsa",
+      "score": 45,
+      "youtube": "@PAWSA",
+      "soundcloud": "pawsa"
+    },
+    {
+      "name": "Sammy Virji",
+      "slug": "sammy-virji",
+      "score": 45,
+      "youtube": "@SammyVirji",
+      "soundcloud": "sammyvirji"
+    },
+    {
+      "name": "Wax Motif",
+      "slug": "wax-motif",
+      "score": 45,
+      "youtube": "@WaxMotif",
+      "soundcloud": "waxmotif"
+    },
+    {
+      "name": "AC Slater",
+      "slug": "ac-slater",
+      "score": 40,
+      "youtube": "@acslater",
+      "soundcloud": "acslater"
+    },
+    {
+      "name": "BIJOU",
+      "slug": "bijou",
+      "score": 40,
+      "youtube": "@BIJOU",
+      "soundcloud": "bijou"
+    },
+    {
+      "name": "Chapter & Verse",
+      "slug": "chapter-verse",
+      "score": 40,
+      "youtube": "@chapterandversemusic",
+      "soundcloud": "chapterandverseofficial"
+    },
+    {
+      "name": "Cloonee",
+      "slug": "cloonee",
+      "score": 40,
+      "youtube": "@cloonee",
+      "soundcloud": "cloonee"
+    },
+    {
+      "name": "Solomun",
+      "slug": "solomun",
+      "score": 40,
+      "youtube": "@solomunmusic",
+      "soundcloud": "solomun"
+    }
+  ],
+  "note": "Deep workflow runs npm run graduate-roster into Actions cache. Commit data/roster-graduates.json when graduates should land in git roster."
+}

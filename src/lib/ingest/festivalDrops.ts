@@ -322,6 +322,22 @@ export const FESTIVAL_EDITION_SEEDS: FestivalEditionSeed[] = [
     startsAt: "2025-06-07",
     endsAt: "2025-06-08",
   },
+  {
+    eventSlug: "street-parade",
+    slug: "street-parade-2025",
+    year: 2025,
+    label: "Zürich",
+    startsAt: "2025-08-09",
+    endsAt: "2025-08-09",
+  },
+  {
+    eventSlug: "nature-one",
+    slug: "nature-one-2025",
+    year: 2025,
+    label: "Germany",
+    startsAt: "2025-08-01",
+    endsAt: "2025-08-03",
+  },
 ];
 
 const DAY_MS = 24 * 60 * 60 * 1000;

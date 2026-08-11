@@ -272,6 +272,13 @@ export const KNOWN_EVENTS: Record<string, CanonicalEvent> = {
     website: "https://www.streetparade.com/",
     instagram: "https://www.instagram.com/streetparade/",
   },
+  "nature-one": {
+    slug: "nature-one",
+    name: "Nature One",
+    kind: "festival",
+    location: "Germany",
+    website: "https://www.nature-one.de/",
+  },
 };
 
 /** Alternate name/slug keys → canonical slug. */
@@ -346,6 +353,8 @@ const ALIAS_TO_SLUG: Record<string, string> = {
   "zurich-street-parade": "street-parade",
   "zuerich-street-parade": "street-parade",
   "zurcher-street-parade": "street-parade",
+  "nature-one": "nature-one",
+  natureone: "nature-one",
 };
 
 function keyOf(name: string): string {
@@ -443,6 +452,7 @@ export function inferFestivalEvent(title: string): CanonicalEvent | null {
   if (/\bmysteryland\b/i.test(t)) return KNOWN_EVENTS.mysteryland;
   if (/\bawakenings\b/i.test(t)) return KNOWN_EVENTS.awakenings;
   if (/\bstreet\s*parade\b/i.test(t)) return KNOWN_EVENTS["street-parade"];
+  if (/\bnature\s*one\b/i.test(t)) return KNOWN_EVENTS["nature-one"];
   // DJ Mag Top 100 Festivals / Clubs / other club listicles (not Mixmag.net).
   return (
     inferDjMagFestivalEvent(t) ??
