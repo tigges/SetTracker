@@ -100,19 +100,6 @@ const NEXT_CAPTURES: Preset[] = [
     openLabel: "Find 1001",
   },
   {
-    label: "FISHER · Tomorrowland Mainstage WE1",
-    slug: "yt-4985f9Rfxx0",
-    name: "TL_FISHER_TML_WE1_2026",
-    url: search1001(
-      "fisher",
-      "mainstage",
-      "tomorrowland",
-      "weekend 1",
-      "2026",
-    ),
-    openLabel: "Find 1001",
-  },
-  {
     label: "Boris Brejcha · Tomorrowland WE1",
     slug: "yt-NpL_bT5vgmU",
     name: "TL_BORIS_BREJCHA_TML_WE1_2026",

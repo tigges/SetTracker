@@ -1522,6 +1522,40 @@ export const TL_STEVE_ANGELLO_TML_WE2_2026: FingerprintSeedRow[] = [
 ];
 
 /**
+ * FISHER @ Mainstage, Tomorrowland Weekend 1, Belgium 2026-07-18
+ * Official YT: https://www.youtube.com/watch?v=4985f9Rfxx0
+ * 1001TL: https://1001.tl/2jqqmqsk — operator bookmarklet capture 2026-08-11
+ * (25/25 timed cues). Distinct from Freedom Stage WE2 (yt-mVB-gqggrCQ).
+ */
+export const TL_FISHER_TML_WE1_2026: FingerprintSeedRow[] = [
+  { at: "0:12", artist: "Marlon Hoffstadt aka DJ Daddy Trance", title: "It's That Time (FISHER Remix)" },
+  { at: "4:10", artist: "OutKast", title: "Ms. Jackson (N2N & Avilo Edit)" },
+  { at: "5:10", artist: "IAN VII & JAVIIER", title: "Sink" },
+  { at: "6:53", artist: "Skylark", title: "That's More Like It" },
+  { at: "8:00", artist: "FISHER ft. Florence Arman", title: "What A Life" },
+  { at: "9:27", artist: "ESSED", title: "Let's Party" },
+  { at: "10:43", artist: "Us Two & Franksy", title: "Simulation" },
+  { at: "13:30", artist: "FISHER ft. Kita Alexander", title: "Atmosphere" },
+  { at: "15:10", artist: "Chris Lake & Tony Romera", title: "House Every Weekend" },
+  { at: "16:50", artist: "Zombie Nation", title: "Kernkraft 400 (Broken Hill & Oliver Marshak Remix)" },
+  { at: "18:20", artist: "Drake", title: "Janice STFU (HILLS Remix)" },
+  { at: "19:55", artist: "FISHER & Tones and I", title: "Favour" },
+  { at: "21:25", artist: "Chris Lake & FISHER & Sante Sansone vs. Gotye ft. Kimbra", title: "Somebody (2024)" },
+  { at: "24:28", artist: "Marlon Hoffstadt & Coach Harrison", title: "Daddy's In The Club (FISHER Remix)" },
+  { at: "27:28", artist: "Dominica", title: "Gotta Let You Go (3Beat Remix)" },
+  { at: "28:28", artist: "FISHER", title: "Stay" },
+  { at: "30:22", artist: "ANOTR ft. 54 Ultra", title: "Talk To You" },
+  { at: "33:49", artist: "FISHER", title: "Rain" },
+  { at: "35:20", artist: "Bob Sinclar ft. Steve Edwards", title: "World, Hold On (Children Of The Sky) (FISHER 2022 Rework)" },
+  { at: "39:16", artist: "FISHER", title: "Losing It" },
+  { at: "43:00", artist: "Daft Punk", title: "One More Time (Valmer Edit)" },
+  { at: "46:10", artist: "NIIKO X SWAE", title: "3D" },
+  { at: "48:28", artist: "FISHER & Aatig", title: "Take It Off" },
+  { at: "52:31", artist: "Cloonee & Prospa", title: "Free Your Mind" },
+  { at: "55:49", artist: "Avicii", title: "Levels" },
+];
+
+/**
  * FISHER @ Freedom Stage, Tomorrowland Weekend 2, Belgium 2026-07-24
  * Official YT: https://www.youtube.com/watch?v=mVB-gqggrCQ (~81:44)
  * 1001TL: https://1001.tl/kd5wd49 — operator console capture 2026-08-01
@@ -4125,6 +4159,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-QThaqlzSqLw": TL_JAMES_HYPE_MELKWEG_ADE_2025,
   "yt-ra8NYbzPMnk": TL_KOLSCH_TML_WE2_2026,
   "yt-5AdQy7lCbN0": TL_STEVE_ANGELLO_TML_WE2_2026,
+  "yt-4985f9Rfxx0": TL_FISHER_TML_WE1_2026,
   "yt-mVB-gqggrCQ": TL_FISHER_TML_WE2_2026,
   "yt-yWZyIQtxoXU": TL_HARDWELL_TML_WE2_2026,
   "yt-Py-GG74lLU8": TL_HARDWELL_TML_WE2_2026,

@@ -23,6 +23,7 @@ import {
   TL_DOM_DOLLA_EDC_LV_2024,
   TL_DYZEN_TML_WE2_2026,
   TL_ENRICO_SANGIULIANO_TML_WE2_2026,
+  TL_FISHER_TML_WE1_2026,
   TL_FISHER_TML_WE2_2026,
   TL_FUNK_TRIBU_EDC_LV_2026,
   TL_HARDWELL_TML_WE2_2026,
@@ -560,6 +561,29 @@ for (const p of angello) {
   angelloPrev = p.timestamp;
 }
 assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-5AdQy7lCbN0"]!.length >= 41);
+
+assertSeedClocks(TL_FISHER_TML_WE1_2026);
+const fisherWe1 = tracklist1001RowsToPlays(TL_FISHER_TML_WE1_2026);
+assert.equal(fisherWe1.length, 25);
+assert.match(fisherWe1[0]!.trackTitle!, /It's That Time/);
+assert.equal(fisherWe1[fisherWe1.length - 1]!.trackTitle, "Levels");
+assert.equal(fisherWe1[fisherWe1.length - 1]!.timestamp, 55 * 60 + 49);
+let fisherWe1Prev = -1;
+for (const p of fisherWe1) {
+  assert.ok(
+    p.timestamp > fisherWe1Prev,
+    `FISHER TML WE1 clocks must increase @ ${p.timestamp}`,
+  );
+  fisherWe1Prev = p.timestamp;
+}
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-4985f9Rfxx0"],
+  TL_FISHER_TML_WE1_2026,
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-mVB-gqggrCQ"],
+  TL_FISHER_TML_WE1_2026,
+);
 
 assertSeedClocks(TL_FISHER_TML_WE2_2026);
 const fisher = tracklist1001RowsToPlays(TL_FISHER_TML_WE2_2026);
