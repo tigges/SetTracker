@@ -3829,47 +3829,47 @@ export const TL_SARAH_DE_WARREN_EDC_LV_2026: FingerprintSeedRow[] = [
 ];
 
 /**
- * Deborah de Luca @ Opera Stage, Street Parade Zürich 2025-08-09
+ * Deborah De Luca @ Opera Stage, Street Parade Zürich, Switzerland 2025-08-09
  * Official YT: https://www.youtube.com/watch?v=7cK7rhYXbh8 (~55m)
- * 1001TL: https://1001.tl/qwxcs1k — mobile screenshot starter (2026-08-10):
- * first 8 identified tracks only; bare ID rows skipped. Evenly spaced until
- * a full timed capture lands.
+ * https://www.1001tracklists.com/tracklist/qwxcs1k/deborah-de-luca-opera-stage-street-parade-zurich-switzerland-2025-08-09.html
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-7cK7rhYXbh8"] = TL_DEBORAH_STREET_PARADE_2025
+ * Captured 2026-08-11 - provenance 1001tl.
+ * 8 identified tracks (bare ID rows skipped); clocks spaced when 1001 had no cues.
  */
-export const TL_DEBORAH_STREET_PARADE_2025: FingerprintSeedRow[] =
-  evenlySpaceRows(
-    [
-      {
-        artist: "Papatinho",
-        title: "Baila, Vini (Deborah De Luca Remix)",
-      },
-      {
-        artist: "Frank 'O' Moiraghi & Deborah De Luca",
-        title: "Feel My Body",
-      },
-      { artist: "BIIA", title: "Angelo" },
-      {
-        artist: "Bountyhunter",
-        title: "Woops (Dimitri Vegas & Junkie Kid Remix)",
-      },
-      {
-        artist: "Mo-Do",
-        title: "Eins Zwei Polizei (Deborah De Luca Remix)",
-      },
-      {
-        artist: "Giorgia Angiuli",
-        title: "Peruvian Bounce (Deborah De Luca Remix)",
-      },
-      {
-        artist: "Evanescence",
-        title: "Bring Me To Life (Deborah De Luca Remix)",
-      },
-      {
-        artist: "Gigi D'Agostino",
-        title: "Bla Bla Bla (ID Remix)",
-      },
-    ],
-    3319,
-  );
+export const TL_DEBORAH_STREET_PARADE_2025: FingerprintSeedRow[] = [
+  {
+    at: "0:20",
+    artist: "Papatinho",
+    title: "Baila, Vini (Deborah De Luca Remix)",
+  },
+  {
+    at: "7:44",
+    artist: "Frank 'O' Moiraghi & Deborah De Luca",
+    title: "Feel My Body",
+  },
+  { at: "15:08", artist: "BIIA", title: "Angelo" },
+  {
+    at: "22:32",
+    artist: "Bountyhunter",
+    title: "Woops (Dimitri Vegas & Junkie Kid Remix)",
+  },
+  {
+    at: "29:56",
+    artist: "Mo-Do",
+    title: "Eins Zwei Polizei (Deborah De Luca Remix)",
+  },
+  {
+    at: "37:20",
+    artist: "Giorgia Angiuli",
+    title: "Peruvian Bounce (Deborah De Luca Remix)",
+  },
+  {
+    at: "44:44",
+    artist: "Evanescence",
+    title: "Bring Me To Life (Deborah De Luca Remix)",
+  },
+  { at: "52:08", artist: "Gigi D'Agostino", title: "Bla Bla Bla" },
+];
 
 /** sourceSlug → curated 1001TL seed (SC / YT when live HTML is CF-blocked). */
 export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
