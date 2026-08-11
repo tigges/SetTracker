@@ -611,15 +611,16 @@ assert.equal(
 
 assertSeedClocks(TL_DIMITRI_VEGAS_TML_WE2_2026);
 const dvTml = tracklist1001RowsToPlays(TL_DIMITRI_VEGAS_TML_WE2_2026);
-assert.equal(dvTml.length, 62);
+assert.equal(dvTml.length, 65);
 assert.match(dvTml[0]!.trackTitle!, /Caramelle vs\. Diet Coke/);
 assert.equal(dvTml[dvTml.length - 1]!.trackTitle, "Allein Allein");
-// Solo Mainstage Relive not published yet — seed held.
 assert.equal(
-  Object.values(TRACKLIST_1001_BY_SOURCE_SLUG).includes(
-    TL_DIMITRI_VEGAS_TML_WE2_2026,
-  ),
-  false,
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-3o0T4z6oT4Y"],
+  TL_DIMITRI_VEGAS_TML_WE2_2026,
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-OTKgBZS8if0"],
+  TL_DIMITRI_VEGAS_TML_WE2_2026,
 );
 
 assertSeedClocks(TL_DIMITRI_VEGAS_NICO_MORENO_TML_WE2_2026);

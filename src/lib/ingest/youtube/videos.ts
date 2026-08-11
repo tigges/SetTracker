@@ -31,6 +31,7 @@ import {
   TL_HARDWELL_TML_WE2_2026,
   TL_CYRIL_TML_WE2_2026,
   TL_DIMITRI_VEGAS_NICO_MORENO_TML_WE2_2026,
+  TL_DIMITRI_VEGAS_TML_WE2_2026,
   TL_BASSJACKERS_TML_WE2_2026,
   TL_BHASKAR_TML_WE2_2026,
   TL_PUSH_TML_WE2_2026,
@@ -737,6 +738,22 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/l9zzj79/cyril-mainstage-tomorrowland-weekend-2-belgium-2026-07-26.html",
     tracklist1001: TL_CYRIL_TML_WE2_2026,
+  },
+  {
+    // Artist-channel full set — Mainstage WE2 solo; 1001.tl/1j3n0l69 timed capture.
+    video: "https://www.youtube.com/watch?v=3o0T4z6oT4Y",
+    primaryArtist: dj("Dimitri Vegas", {
+      accent: "#e63946",
+      homeCity: "Willebroek, BE",
+    }),
+    genre: "Hard Dance",
+    type: "festival",
+    title: "Dimitri Vegas Mainstage WE2 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1j3n0l69/dimitri-vegas-mainstage-tomorrowland-weekend-2-belgium-2026-07-25.html",
+    tracklist1001: TL_DIMITRI_VEGAS_TML_WE2_2026,
   },
   {
     // Tomorrowland official — Great Library WE2 B2B; 24/35 timed (rest lerped).
