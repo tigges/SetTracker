@@ -16,13 +16,17 @@ import {
   TL_KEVIN_DE_VRIES_STREET_PARADE_2025,
   TL_KOLSCH_STREET_PARADE_2025,
   TL_MASSANO_STREET_PARADE_2025,
+  TL_MASSANO_TML_WE2_2026,
   TL_ADIEL_STREET_PARADE_2025,
   TL_DIMITRI_VEGAS_NICO_MORENO_TML_WE2_2026,
   TL_DIMITRI_VEGAS_TML_WE2_2026,
+  TL_DOM_DOLLA_ALLIANZ_SYDNEY,
   TL_DOM_DOLLA_EDC_LV_2023,
   TL_DOM_DOLLA_EDC_LV_2024,
   TL_DYZEN_TML_WE2_2026,
   TL_ENRICO_SANGIULIANO_TML_WE2_2026,
+  TL_ERIC_PRYDZ_ULTRA_MIAMI_2026,
+  TL_FISHER_TML_WE1_2026,
   TL_FISHER_TML_WE2_2026,
   TL_FUNK_TRIBU_EDC_LV_2026,
   TL_HARDWELL_TML_WE2_2026,
@@ -55,6 +59,7 @@ import {
   TL_ODD_MOB_TML_WE2_2026,
   TL_PEGASSI_EDC_LV_2026,
   TL_SARAH_DE_WARREN_EDC_LV_2026,
+  TL_SOLOMUN_ALLY_PALLY_2026,
   TL_SOLOMUN_EDC_LV_2026,
   TL_SONNY_FODERA_TML_WE2_2026,
   TL_STEVE_ANGELLO_TML_WE2_2026,
@@ -320,6 +325,28 @@ assert.ok(
   ]!.length >= 30,
 );
 
+assertSeedClocks(TL_DOM_DOLLA_ALLIANZ_SYDNEY);
+const domSyd = tracklist1001RowsToPlays(TL_DOM_DOLLA_ALLIANZ_SYDNEY);
+assert.equal(domSyd.length, 58);
+assert.match(domSyd[0]!.trackTitle!, /Pyramids/);
+assert.equal(
+  domSyd[domSyd.length - 1]!.trackTitle,
+  "Rhyme Dust (Dimension Remix)",
+);
+assert.equal(domSyd[domSyd.length - 1]!.timestamp, 118 * 60 + 11);
+let domSydPrev = -1;
+for (const p of domSyd) {
+  assert.ok(
+    p.timestamp > domSydPrev,
+    `Dom Dolla Allianz Sydney clocks must increase @ ${p.timestamp}`,
+  );
+  domSydPrev = p.timestamp;
+}
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-4Lqyh7cWRxQ"],
+  TL_DOM_DOLLA_ALLIANZ_SYDNEY,
+);
+
 assertSeedClocks(TL_SOLOMUN_EDC_LV_2026);
 const solomun = tracklist1001RowsToPlays(TL_SOLOMUN_EDC_LV_2026);
 assert.equal(solomun.length, 18);
@@ -332,6 +359,32 @@ for (const p of solomun) {
   solPrev = p.timestamp;
 }
 assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-g1vH9C_o-vo"]!.length >= 16);
+
+assertSeedClocks(TL_SOLOMUN_ALLY_PALLY_2026);
+const solomunAlly = tracklist1001RowsToPlays(TL_SOLOMUN_ALLY_PALLY_2026);
+assert.equal(solomunAlly.length, 29);
+assert.equal(solomunAlly[0]!.trackTitle, "Acid");
+assert.equal(
+  solomunAlly[solomunAlly.length - 1]!.trackTitle,
+  "Tout Le Monde Est Fou",
+);
+assert.equal(solomunAlly[solomunAlly.length - 1]!.timestamp, 2 * 3600 + 37 * 60);
+let solAllyPrev = -1;
+for (const p of solomunAlly) {
+  assert.ok(
+    p.timestamp > solAllyPrev,
+    `Solomun Ally Pally clocks must increase @ ${p.timestamp}`,
+  );
+  solAllyPrev = p.timestamp;
+}
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-S46Bs4pZ_I4"],
+  TL_SOLOMUN_ALLY_PALLY_2026,
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-g1vH9C_o-vo"],
+  TL_SOLOMUN_ALLY_PALLY_2026,
+);
 
 assertSeedClocks(TL_SARAH_DE_WARREN_EDC_LV_2026);
 const sarah = tracklist1001RowsToPlays(TL_SARAH_DE_WARREN_EDC_LV_2026);
@@ -561,6 +614,29 @@ for (const p of angello) {
 }
 assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-5AdQy7lCbN0"]!.length >= 41);
 
+assertSeedClocks(TL_FISHER_TML_WE1_2026);
+const fisherWe1 = tracklist1001RowsToPlays(TL_FISHER_TML_WE1_2026);
+assert.equal(fisherWe1.length, 25);
+assert.match(fisherWe1[0]!.trackTitle!, /It's That Time/);
+assert.equal(fisherWe1[fisherWe1.length - 1]!.trackTitle, "Levels");
+assert.equal(fisherWe1[fisherWe1.length - 1]!.timestamp, 55 * 60 + 49);
+let fisherWe1Prev = -1;
+for (const p of fisherWe1) {
+  assert.ok(
+    p.timestamp > fisherWe1Prev,
+    `FISHER TML WE1 clocks must increase @ ${p.timestamp}`,
+  );
+  fisherWe1Prev = p.timestamp;
+}
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-4985f9Rfxx0"],
+  TL_FISHER_TML_WE1_2026,
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-mVB-gqggrCQ"],
+  TL_FISHER_TML_WE1_2026,
+);
+
 assertSeedClocks(TL_FISHER_TML_WE2_2026);
 const fisher = tracklist1001RowsToPlays(TL_FISHER_TML_WE2_2026);
 assert.equal(fisher.length, 17);
@@ -576,6 +652,29 @@ for (const p of fisher) {
   fisherPrev = p.timestamp;
 }
 assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-mVB-gqggrCQ"]!.length >= 17);
+
+assertSeedClocks(TL_MASSANO_TML_WE2_2026);
+const massanoTml = tracklist1001RowsToPlays(TL_MASSANO_TML_WE2_2026);
+assert.equal(massanoTml.length, 17);
+assert.equal(massanoTml[0]!.trackTitle, "Underground");
+assert.equal(massanoTml[massanoTml.length - 1]!.trackTitle, "Angel In The Dark");
+assert.equal(massanoTml[massanoTml.length - 1]!.timestamp, 55 * 60 + 35);
+let massanoTmlPrev = -1;
+for (const p of massanoTml) {
+  assert.ok(
+    p.timestamp > massanoTmlPrev,
+    `Massano TML WE2 clocks must increase @ ${p.timestamp}`,
+  );
+  massanoTmlPrev = p.timestamp;
+}
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-eeNljOHahxY"],
+  TL_MASSANO_TML_WE2_2026,
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-fYM9DlFLwKw"],
+  TL_MASSANO_TML_WE2_2026,
+);
 
 assertSeedClocks(TL_HARDWELL_TML_WE2_2026);
 const hardwell = tracklist1001RowsToPlays(TL_HARDWELL_TML_WE2_2026);
@@ -884,6 +983,25 @@ for (const p of bhaskar) {
   bhPrev = p.timestamp;
 }
 assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-HWIratXF1Bo"]!.length >= 17);
+
+assertSeedClocks(TL_ERIC_PRYDZ_ULTRA_MIAMI_2026);
+const prydzUltra = tracklist1001RowsToPlays(TL_ERIC_PRYDZ_ULTRA_MIAMI_2026);
+assert.equal(prydzUltra.length, 31);
+assert.equal(prydzUltra[0]!.trackTitle, "Heavy");
+assert.match(prydzUltra[prydzUltra.length - 1]!.trackTitle!, /Midnight City/);
+assert.equal(prydzUltra[prydzUltra.length - 1]!.timestamp, 112 * 60);
+let prydzPrev = -1;
+for (const p of prydzUltra) {
+  assert.ok(
+    p.timestamp > prydzPrev,
+    `Eric Prydz Ultra clocks must increase @ ${p.timestamp}`,
+  );
+  prydzPrev = p.timestamp;
+}
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-hU-z3iV0LOg"],
+  TL_ERIC_PRYDZ_ULTRA_MIAMI_2026,
+);
 
 assertSeedClocks(TL_DEBORAH_STREET_PARADE_2025);
 const deborahSp = tracklist1001RowsToPlays(TL_DEBORAH_STREET_PARADE_2025);

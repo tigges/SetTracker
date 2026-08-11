@@ -27,11 +27,15 @@ import {
   TL_HOLY_PRIEST_EDC_LV_2026,
   TL_MATTY_RALPH_EDC_LV_2026,
   TL_ENRICO_SANGIULIANO_TML_WE2_2026,
+  TL_ERIC_PRYDZ_ULTRA_MIAMI_2026,
+  TL_FISHER_TML_WE1_2026,
   TL_FISHER_TML_WE2_2026,
+  TL_MASSANO_TML_WE2_2026,
   TL_HARDWELL_TML_WE2_2026,
   TL_CYRIL_TML_WE2_2026,
   TL_DIMITRI_VEGAS_NICO_MORENO_TML_WE2_2026,
   TL_DIMITRI_VEGAS_TML_WE2_2026,
+  TL_DOM_DOLLA_ALLIANZ_SYDNEY,
   TL_BASSJACKERS_TML_WE2_2026,
   TL_BHASKAR_TML_WE2_2026,
   TL_PUSH_TML_WE2_2026,
@@ -51,6 +55,7 @@ import {
   TL_NICO_MORENO_EDC_LV_2026,
   TL_PEGASSI_EDC_LV_2026,
   TL_SARAH_DE_WARREN_EDC_LV_2026,
+  TL_SOLOMUN_ALLY_PALLY_2026,
   TL_SOLOMUN_EDC_LV_2026,
   TL_WESTEND_EDC_LV_2026,
 } from "../tracklists1001/seeds";
@@ -231,6 +236,21 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_JAMES_HYPE_MELKWEG_ADE_2025,
   },
   {
+    // Artist-channel full set — Allianz Stadium Sydney; 1001.tl/jf3kd41 timed capture.
+    video: "https://www.youtube.com/watch?v=4Lqyh7cWRxQ",
+    primaryArtist: dj("Dom Dolla", {
+      accent: "#00bbf9",
+      homeCity: "Melbourne, AU",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    title: "Dom Dolla @ Allianz Stadium Sydney",
+    eventName: "Allianz Stadium Sydney",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/jf3kd41/dom-dolla-allianz-stadium-sydney-australia-2025-12-20.html",
+    tracklist1001: TL_DOM_DOLLA_ALLIANZ_SYDNEY,
+  },
+  {
     video: "https://www.youtube.com/watch?v=i9cNYaOOdwA",
     primaryArtist: dj("James Hype", {
       accent: "#ff3d6e",
@@ -319,6 +339,21 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/2lkyu9mk/solomun-circuitgrounds-edc-las-vegas-united-states-2026-05-17.html",
     tracklist1001: TL_SOLOMUN_EDC_LV_2026,
+  },
+  {
+    // Artist upload — Alexandra Palace London; 1001.tl/fn4hckk timed capture.
+    video: "https://www.youtube.com/watch?v=S46Bs4pZ_I4",
+    primaryArtist: dj("Solomun", {
+      accent: "#f0e6d8",
+      homeCity: "Hamburg, DE",
+    }),
+    genre: "Melodic House",
+    type: "festival",
+    title: "Solomun @ Alexandra Palace London 2026",
+    eventName: "Alexandra Palace",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/fn4hckk/solomun-alexandra-palace-london-united-kingdom-2026-02-07.html",
+    tracklist1001: TL_SOLOMUN_ALLY_PALLY_2026,
   },
   {
     // Insomniac Relive — promo description only; 1001TL seed from screenshots.
@@ -564,6 +599,22 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_STEVE_ANGELLO_TML_WE2_2026,
   },
   {
+    // Artist / Relive — Mainstage WE1; 1001.tl/2jqqmqsk timed capture.
+    video: "https://www.youtube.com/watch?v=4985f9Rfxx0",
+    primaryArtist: dj("FISHER", {
+      accent: "#ffba08",
+      homeCity: "Gold Coast, AU",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    title: "Fisher Mainstage WE1 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2jqqmqsk/fisher-mainstage-tomorrowland-weekend-1-belgium-2026-07-18.html",
+    tracklist1001: TL_FISHER_TML_WE1_2026,
+  },
+  {
     // Tomorrowland official — Freedom Stage WE2; 17/17 timed cues from 1001.
     video: "https://www.youtube.com/watch?v=mVB-gqggrCQ",
     primaryArtist: dj("FISHER", {
@@ -578,6 +629,19 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/kd5wd49/fisher-freedom-stage-tomorrowland-weekend-2-belgium-2026-07-24.html",
     tracklist1001: TL_FISHER_TML_WE2_2026,
+  },
+  {
+    // Official Relive — Freedom Stage WE2; 1001.tl/116uj1x1 timed capture.
+    video: "https://www.youtube.com/watch?v=eeNljOHahxY",
+    primaryArtist: dj("Massano", { accent: "#8338ec" }),
+    genre: "Melodic Techno",
+    type: "festival",
+    title: "Massano Freedom WE2 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/116uj1x1/massano-freedom-stage-tomorrowland-weekend-2-belgium-2026-07-25.html",
+    tracklist1001: TL_MASSANO_TML_WE2_2026,
   },
   {
     // Tomorrowland official — Mainstage WE2 closing; also artist upload Py-GG74lLU8.
@@ -1028,6 +1092,16 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     eventName: "Dekmantel Festival",
   },
   {
+    // Official Cercle — capture queued (yt--UOMvxh4MYU).
+    video: "https://www.youtube.com/watch?v=-UOMvxh4MYU",
+    primaryArtist: dj("Peggy Gou", { accent: "#e63946" }),
+    genre: "House",
+    type: "festival",
+    title: "Peggy Gou at Palais des Beaux-Arts, Lille for Cercle",
+    seriesName: "Cercle",
+    eventName: "Palais des Beaux-Arts Lille",
+  },
+  {
     video: "https://www.youtube.com/watch?v=uqf0mOngpIk",
     primaryArtist: dj("FISHER", {
       accent: "#00c2ff",
@@ -1275,6 +1349,44 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     eventName: "Tomorrowland Belgium",
   },
   {
+    // Official Relive — Mainstage WE1; capture queued (yt-NpL_bT5vgmU).
+    video: "https://www.youtube.com/watch?v=NpL_bT5vgmU",
+    primaryArtist: dj("Boris Brejcha", { accent: "#ff006e" }),
+    genre: "Techno",
+    type: "festival",
+    title: "Boris Brejcha Mainstage WE1 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+  },
+  {
+    // Official Relive — capture queued (yt-g4vR2VlhNtk).
+    video: "https://www.youtube.com/watch?v=g4vR2VlhNtk",
+    primaryArtist: dj("Sebastian Ingrosso", { accent: "#4361ee" }),
+    genre: "Progressive House",
+    type: "festival",
+    title: "Sebastian Ingrosso WE2 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+  },
+  {
+    // Artist upload — capture queued (yt-1LpQZ5GTRDg).
+    video: "https://www.youtube.com/watch?v=1LpQZ5GTRDg",
+    primaryArtist: dj("Miss Monique", { accent: "#9b5de5" }),
+    genre: "Melodic Techno",
+    type: "festival",
+    title: "Miss Monique · BIORHYTHM",
+    seriesName: "BIORHYTHM",
+  },
+  {
+    // Artist upload — capture queued (yt-9TKqqBCmDHA).
+    video: "https://www.youtube.com/watch?v=9TKqqBCmDHA",
+    primaryArtist: dj("John Summit", { accent: "#4cc9f0" }),
+    genre: "Tech House",
+    type: "festival",
+    title: "John Summit · Lollapalooza",
+    eventName: "Lollapalooza",
+  },
+  {
     video: "https://www.youtube.com/watch?v=NqX1Fn6MBf0",
     primaryArtist: dj("HUGEL", { accent: "#06d6a0" }),
     genre: "Melodic House",
@@ -1282,6 +1394,21 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     title: "Hugel WE2 | Tomorrowland 2025",
     seriesName: "Tomorrowland",
     eventName: "Tomorrowland Belgium",
+  },
+  {
+    // Artist upload — Resistance Megastructure Ultra Miami 2026; 1001.tl/qy9yyy9 timed.
+    video: "https://www.youtube.com/watch?v=hU-z3iV0LOg",
+    primaryArtist: dj("Eric Prydz", {
+      accent: "#7209b7",
+      homeCity: "Sweden",
+    }),
+    genre: "Progressive House",
+    type: "festival",
+    title: "Eric Prydz Live @ Ultra Music Festival Miami 2026",
+    eventName: "Ultra Music Festival",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/qy9yyy9/eric-prydz-resistance-megastructure-ultra-music-festival-miami-united-states-2026-03-27.html",
+    tracklist1001: TL_ERIC_PRYDZ_ULTRA_MIAMI_2026,
   },
   {
     video: "https://www.youtube.com/watch?v=zmLIxKpgEPw",

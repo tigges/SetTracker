@@ -1522,6 +1522,40 @@ export const TL_STEVE_ANGELLO_TML_WE2_2026: FingerprintSeedRow[] = [
 ];
 
 /**
+ * FISHER @ Mainstage, Tomorrowland Weekend 1, Belgium 2026-07-18
+ * Official YT: https://www.youtube.com/watch?v=4985f9Rfxx0
+ * 1001TL: https://1001.tl/2jqqmqsk — operator bookmarklet capture 2026-08-11
+ * (25/25 timed cues). Distinct from Freedom Stage WE2 (yt-mVB-gqggrCQ).
+ */
+export const TL_FISHER_TML_WE1_2026: FingerprintSeedRow[] = [
+  { at: "0:12", artist: "Marlon Hoffstadt aka DJ Daddy Trance", title: "It's That Time (FISHER Remix)" },
+  { at: "4:10", artist: "OutKast", title: "Ms. Jackson (N2N & Avilo Edit)" },
+  { at: "5:10", artist: "IAN VII & JAVIIER", title: "Sink" },
+  { at: "6:53", artist: "Skylark", title: "That's More Like It" },
+  { at: "8:00", artist: "FISHER ft. Florence Arman", title: "What A Life" },
+  { at: "9:27", artist: "ESSED", title: "Let's Party" },
+  { at: "10:43", artist: "Us Two & Franksy", title: "Simulation" },
+  { at: "13:30", artist: "FISHER ft. Kita Alexander", title: "Atmosphere" },
+  { at: "15:10", artist: "Chris Lake & Tony Romera", title: "House Every Weekend" },
+  { at: "16:50", artist: "Zombie Nation", title: "Kernkraft 400 (Broken Hill & Oliver Marshak Remix)" },
+  { at: "18:20", artist: "Drake", title: "Janice STFU (HILLS Remix)" },
+  { at: "19:55", artist: "FISHER & Tones and I", title: "Favour" },
+  { at: "21:25", artist: "Chris Lake & FISHER & Sante Sansone vs. Gotye ft. Kimbra", title: "Somebody (2024)" },
+  { at: "24:28", artist: "Marlon Hoffstadt & Coach Harrison", title: "Daddy's In The Club (FISHER Remix)" },
+  { at: "27:28", artist: "Dominica", title: "Gotta Let You Go (3Beat Remix)" },
+  { at: "28:28", artist: "FISHER", title: "Stay" },
+  { at: "30:22", artist: "ANOTR ft. 54 Ultra", title: "Talk To You" },
+  { at: "33:49", artist: "FISHER", title: "Rain" },
+  { at: "35:20", artist: "Bob Sinclar ft. Steve Edwards", title: "World, Hold On (Children Of The Sky) (FISHER 2022 Rework)" },
+  { at: "39:16", artist: "FISHER", title: "Losing It" },
+  { at: "43:00", artist: "Daft Punk", title: "One More Time (Valmer Edit)" },
+  { at: "46:10", artist: "NIIKO X SWAE", title: "3D" },
+  { at: "48:28", artist: "FISHER & Aatig", title: "Take It Off" },
+  { at: "52:31", artist: "Cloonee & Prospa", title: "Free Your Mind" },
+  { at: "55:49", artist: "Avicii", title: "Levels" },
+];
+
+/**
  * FISHER @ Freedom Stage, Tomorrowland Weekend 2, Belgium 2026-07-24
  * Official YT: https://www.youtube.com/watch?v=mVB-gqggrCQ (~81:44)
  * 1001TL: https://1001.tl/kd5wd49 — operator console capture 2026-08-01
@@ -1565,6 +1599,32 @@ export const TL_FISHER_TML_WE2_2026: FingerprintSeedRow[] = [
     artist: "Bob Sinclar ft. Steve Edwards",
     title: "World, Hold On (Children Of The Sky) (FISHER 2022 Rework)",
   },
+];
+
+/**
+ * Massano @ Freedom Stage, Tomorrowland Weekend 2, Belgium 2026-07-25
+ * Official YT: https://www.youtube.com/watch?v=eeNljOHahxY
+ * 1001TL: https://1001.tl/116uj1x1 — operator bookmarklet capture 2026-08-11
+ * (17/17 timed cues). Distinct from Street Parade (yt-fYM9DlFLwKw).
+ */
+export const TL_MASSANO_TML_WE2_2026: FingerprintSeedRow[] = [
+  { at: "0:12", artist: "Massano & Humans Musik", title: "Underground" },
+  { at: "2:30", artist: "The KLF", title: "What Time Is Love? (Massano & David Lindmer Remix)" },
+  { at: "5:45", artist: "Massano & Ugo Banchi", title: "Wanna Dance" },
+  { at: "9:00", artist: "Argy & Massano", title: "Wait" },
+  { at: "12:01", artist: "Fatboy Slim", title: "Rockafeller Skank (Massano & Un:said Remix)" },
+  { at: "15:25", artist: "Massano ft. Ekko", title: "Accelerate" },
+  { at: "19:10", artist: "Massano & Silver Panda", title: "Pa Ca" },
+  { at: "22:00", artist: "The Chemical Brothers", title: "Do It Again (Massano Remix)" },
+  { at: "25:15", artist: "Massano & Glowal", title: "Future Generation" },
+  { at: "31:20", artist: "Massano", title: "Back Home" },
+  { at: "35:05", artist: "Green Velvet & Harvard Bass", title: "Lazer Beams (Adam Beyer & Massano Remix)" },
+  { at: "38:10", artist: "Massano ft. Franksy", title: "Electrified" },
+  { at: "41:10", artist: "Yeah Yeah Yeahs", title: "Heads Will Roll (Massano & Matt Guy Remix)" },
+  { at: "44:20", artist: "Massano", title: "The Feeling (2025 Private Edit)" },
+  { at: "47:55", artist: "Massano", title: "Numb" },
+  { at: "51:45", artist: "Massano", title: "Beyond Today" },
+  { at: "55:35", artist: "Anyma & Massano ft. Nathan Nicholson", title: "Angel In The Dark" },
 ];
 
 /**
@@ -3283,6 +3343,73 @@ export const TL_DOM_DOLLA_EDC_LV_2024: FingerprintSeedRow[] = [
 ];
 
 /**
+ * Dom Dolla @ Allianz Stadium Sydney, Australia 2025-12-20
+ * Official YT (artist): https://www.youtube.com/watch?v=4Lqyh7cWRxQ
+ * 1001TL: https://1001.tl/jf3kd41 — operator bookmarklet capture 2026-08-11
+ * (58/58 timed cues).
+ */
+export const TL_DOM_DOLLA_ALLIANZ_SYDNEY: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "Frank Ocean", title: "Pyramids (Luke Alexander Remix)" },
+  { at: "2:50", artist: "ESSE vs. Dom Dolla", title: "Work It vs. Take It (Dom Dolla Mashup)" },
+  { at: "3:34", artist: "Dom Dolla", title: "Take It" },
+  { at: "4:18", artist: "ESSE", title: "Work It" },
+  { at: "5:02", artist: "Dom Dolla", title: "San Frandisco" },
+  { at: "7:00", artist: "Marco Strous", title: "Monkey Swag" },
+  { at: "8:42", artist: "Max Styler", title: "You & Me (Vintage Culture Remix)" },
+  { at: "8:50", artist: "Dom Dolla ft. Clementine Douglas", title: "Miracle Maker" },
+  { at: "10:35", artist: "Aliyah's Interlude", title: "IT GIRL (Everything Always Remix)" },
+  { at: "12:46", artist: "Dom Dolla", title: "girl$ (Layton Giordani Remix)" },
+  { at: "15:03", artist: "Laherte", title: "Pump Up The Jam" },
+  { at: "16:35", artist: "Torren Foot ft. rhys from the sticks", title: "DANCE" },
+  { at: "19:14", artist: "Sheck Wes", title: "Mo Bamba (HNTR Remix)" },
+  { at: "21:39", artist: "Puretone", title: "Addicted To Bass (Dom Dolla Relapse)" },
+  { at: "25:14", artist: "Michael Jackson vs. Disclosure", title: "Thriller vs. She's Gone, Dance On (JAMØ (USA) Edit)" },
+  { at: "26:16", artist: "Disclosure", title: "She's Gone, Dance On" },
+  { at: "27:18", artist: "Michael Jackson", title: "Thriller" },
+  { at: "28:20", artist: "Walker & Royce & VNSSA", title: "Activate" },
+  { at: "29:32", artist: "Tiga & Eli Brown", title: "Bugatti" },
+  { at: "30:55", artist: "Da Hool", title: "Meet Her At The Love Parade (Dom Dolla & Torren Foot Remix)" },
+  { at: "31:26", artist: "Faithless", title: "Insomnia (Acappella)" },
+  { at: "32:54", artist: "Garbage", title: "Cherry Lips (Go Baby Go!) (Dom Dolla Remix)" },
+  { at: "35:04", artist: "Dom Dolla ft. Daya", title: "Dreamin (Anyma Remix)" },
+  { at: "37:01", artist: "KENZ", title: "Rake It Up" },
+  { at: "39:40", artist: "TJR", title: "Funky Vodka" },
+  { at: "41:57", artist: "Walker & Royce", title: "Magic Carpet" },
+  { at: "43:53", artist: "SOSA", title: "Be Without You" },
+  { at: "44:34", artist: "Sidney Samson", title: "Riverside (Acappella)" },
+  { at: "45:12", artist: "Prospa", title: "Don't Stop (SCRIPT Remix)" },
+  { at: "46:44", artist: "Dom Dolla & Fcukers", title: "Perfect For Me" },
+  { at: "49:52", artist: "Yeah Yeah Yeahs", title: "Heads Will Roll (A-Trak Remix)" },
+  { at: "52:20", artist: "Mesto", title: "Listen To Me" },
+  { at: "54:15", artist: "Dom Dolla & Nelly Furtado", title: "Eat Your Man" },
+  { at: "56:11", artist: "Linska ft. Riko Dan", title: "World & Back" },
+  { at: "58:35", artist: "Dom Dolla & Nathan Nicholson", title: "No Room For A Saint (From F1® The Movie) (Walker & Royce Remix)" },
+  { at: "1:02:29", artist: "Sonny Fodera & Dom Dolla", title: "Moving Blind (Gorgon City Remix)" },
+  { at: "1:04:11", artist: "Cloonee & Funkdoobiest", title: "X-Rated (Devault Remix)" },
+  { at: "1:06:49", artist: "ATB", title: "9PM (Till I Come) (James Hype Edit)" },
+  { at: "1:08:02", artist: "RÜFÜS DU SOL", title: "Make It Happen (Dom Dolla Remix)" },
+  { at: "1:10:01", artist: "Drake", title: "NOKIA (Kelland Remix)" },
+  { at: "1:11:56", artist: "AFROJACK & Lucas & Steve", title: "Control" },
+  { at: "1:14:13", artist: "Dom Dolla ft. Mansionair", title: "Strangers (Tinlicker Remix)" },
+  { at: "1:18:33", artist: "MK & Dom Dolla", title: "Rhyme Dust" },
+  { at: "1:22:21", artist: "Dom Dolla & Tiga", title: "Don't Worry Baby" },
+  { at: "1:25:59", artist: "Dom Dolla & Go Freek", title: "Define" },
+  { at: "1:30:28", artist: "Dom Dolla ft. Clementine Douglas", title: "Miracle Maker" },
+  { at: "1:34:54", artist: "Dom Dolla", title: "Saving Up" },
+  { at: "1:38:52", artist: "SpiderBait", title: "Black Betty (Dom Dolla Remix)" },
+  { at: "1:41:11", artist: "Age Of Love", title: "The Age Of Love (Charlotte de Witte & Enrico Sangiuliano Remix)" },
+  { at: "1:44:30", artist: "Calvin Harris", title: "I'm Not Alone (Oliver Heldens & Centre Court Remix)" },
+  { at: "1:46:53", artist: "PEEKABOO", title: "Riddle" },
+  { at: "1:48:02", artist: "Public Domain", title: "Operation Blade (Bass In The Place)" },
+  { at: "1:50:09", artist: "D-Jastic", title: "Up To No Good" },
+  { at: "1:53:30", artist: "Dom Dolla & Tove Lo", title: "CAVE" },
+  { at: "1:54:57", artist: "Bou & Turno & Gino & Audit", title: "SHNB" },
+  { at: "1:55:41", artist: "Beyoncé ft. JAY Z", title: "Crazy In Love (Pola & Bryson Bootleg)" },
+  { at: "1:57:28", artist: "MK & Dom Dolla", title: "Rhyme Dust (Dimension Remix / Darren Styles & GRVITY 4/4 Edit)" },
+  { at: "1:58:11", artist: "MK & Dom Dolla", title: "Rhyme Dust (Dimension Remix)" },
+];
+
+/**
  * Solomun @ circuitGROUNDS, EDC Las Vegas 2026-05-17
  * Official YT: https://www.youtube.com/watch?v=g1vH9C_o-vo (~90:37)
  * 1001TL: https://1001.tl/2lkyu9mk — operator console capture 2026-08-01
@@ -3315,6 +3442,44 @@ export const TL_SOLOMUN_EDC_LV_2026: FingerprintSeedRow[] = [
   },
   { at: "1:22:30", artist: "Hudecek & Dave (US)", title: "Been That" },
   { at: "1:25:40", artist: "Solomun", title: "Kinesphere" },
+];
+
+/**
+ * Solomun @ Alexandra Palace London, United Kingdom 2026-02-07
+ * Official YT: https://www.youtube.com/watch?v=S46Bs4pZ_I4
+ * 1001TL: https://1001.tl/fn4hckk — operator bookmarklet capture 2026-08-11
+ * (29/29 timed cues). Distinct from EDC LV (yt-g1vH9C_o-vo).
+ */
+export const TL_SOLOMUN_ALLY_PALLY_2026: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "Bruno Furlan", title: "Acid" },
+  { at: "4:30", artist: "Skrillex & Solomun", title: "Rumpta" },
+  { at: "10:00", artist: "Solomun ft. ÄTNA", title: "Tuk Tuk" },
+  { at: "15:04", artist: "Solomun ft. Inéz", title: "Raider On The Storm" },
+  { at: "20:45", artist: "Indie Elephant", title: "Cusp Generation" },
+  { at: "25:40", artist: "Osmosis Jones", title: "Hot In The Party" },
+  { at: "31:00", artist: "Broken Hill", title: "Rock It Like" },
+  { at: "36:00", artist: "Glowal", title: "Bass breaker" },
+  { at: "41:30", artist: "Goom Gum", title: "Just Be Good To Me" },
+  { at: "45:45", artist: "Pablo Say", title: "Dance Groove" },
+  { at: "50:15", artist: "AKKI (DE)", title: "Take Me Away" },
+  { at: "55:20", artist: "Solomun", title: "Don't Give Up" },
+  { at: "1:00:25", artist: "Jamie xx ft. Romy & Oliver Sim", title: "Waited All Night (Solomun Remix v11)" },
+  { at: "1:04:45", artist: "Dark Heart", title: "Go Go" },
+  { at: "1:08:00", artist: "Addie Manson", title: "Afterhours" },
+  { at: "1:12:00", artist: "Blank Sense & FRANCO BA", title: "Goddamn" },
+  { at: "1:16:20", artist: "The Notorious B.I.G. ft. Bone Thugs-N-Harmony", title: "Notorious Thugs (Solomun Remix)" },
+  { at: "1:21:50", artist: "Max Styler ft. Ad-Apt", title: "One More (Solomun Remix)" },
+  { at: "1:26:14", artist: "Public Domain", title: "Operation Blade (Bass In The Place)" },
+  { at: "1:35:40", artist: "Leblanc", title: "Strings Anthem" },
+  { at: "1:40:00", artist: "K.I.Z", title: "Samstag Ist Krieg (Solomun Remix)" },
+  { at: "1:47:40", artist: "Luca Luper & Karmon", title: "Frequency" },
+  { at: "1:52:00", artist: "PUNX", title: "The Rock" },
+  { at: "1:56:40", artist: "Fat Cosmoe & Luca Luper", title: "I Know My Name" },
+  { at: "2:01:10", artist: "Mia Mendi & Skuro (IT)", title: "Angel Wings" },
+  { at: "2:06:00", artist: "Sam Collins & ESSED", title: "Going Up" },
+  { at: "2:09:30", artist: "Yost Koen", title: "Sympathy" },
+  { at: "2:30:35", artist: "Solomun ft. Antony Szmierek", title: "Life Affirmer" },
+  { at: "2:37:00", artist: "Solomun & Jain", title: "Tout Le Monde Est Fou" },
 ];
 
 /**
@@ -3888,6 +4053,46 @@ export const TL_KEVIN_DE_VRIES_STREET_PARADE_2025: FingerprintSeedRow[] = [
 ];
 
 /**
+ * Eric Prydz @ Resistance Megastructure, Ultra Music Festival Miami, United States 2026-03-27
+ * Official YT: https://www.youtube.com/watch?v=hU-z3iV0LOg
+ * 1001TL: https://1001.tl/qy9yyy9 — operator bookmarklet capture 2026-08-11
+ * (31/31 timed cues).
+ */
+export const TL_ERIC_PRYDZ_ULTRA_MIAMI_2026: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "Eric Prydz", title: "Heavy" },
+  { at: "4:40", artist: "Pryda", title: "History Toronto 2025 ID (Working Title)" },
+  { at: "11:00", artist: "Cirez D", title: "Tech One (Working Title)" },
+  { at: "17:00", artist: "The Drill", title: "The Drill (Eric Prydz Edit)" },
+  { at: "19:45", artist: "Cevin Fisher", title: "The Way We Used To (Acappella)" },
+  { at: "22:30", artist: "Pryda", title: "Sonar Barcelona 2025 ID (Working Title)" },
+  { at: "29:30", artist: "Cirez D", title: "Voided" },
+  { at: "33:00", artist: "Cirez D vs. Green Velvet & Harvard Bass", title: "On Off Lazer Beams (Eric Prydz Edit)" },
+  { at: "33:50", artist: "Cirez D", title: "On Off" },
+  { at: "34:40", artist: "Green Velvet & Harvard Bass", title: "Lazer Beams" },
+  { at: "35:30", artist: "Josh Wink", title: "Higher State Of Consciousness (Eric Prydz Private Remix)" },
+  { at: "39:00", artist: "Pryda", title: "INOX 2009 ID 01 (Working Title)" },
+  { at: "43:00", artist: "New Order & Eric Prydz vs. Daft Punk", title: "Blue Monday vs. Harder, Better, Faster, Stronger (Eric Prydz Mashup)" },
+  { at: "44:20", artist: "New Order", title: "Blue Monday (Eric Prydz Remix)" },
+  { at: "45:40", artist: "Daft Punk", title: "Harder, Better, Faster, Stronger (Eric Prydz Remix)" },
+  { at: "47:00", artist: "Thomas Gold & Francesco Diaz & Young Rebels", title: "Don't You Want Me (Dave Spoon Remix)" },
+  { at: "52:40", artist: "Plasmic Honey", title: "Dance Slut" },
+  { at: "54:17", artist: "The Chemical Brothers", title: "Hey Boy, Hey Girl (Acappella)" },
+  { at: "55:54", artist: "Faze Action", title: "In The Trees (Carl Craig C2 Remix 1)" },
+  { at: "57:30", artist: "Pryda", title: "Elements" },
+  { at: "1:06:00", artist: "Pryda", title: "Linked" },
+  { at: "1:11:00", artist: "Eric Prydz vs. Pink Floyd", title: "Proper Education" },
+  { at: "1:18:00", artist: "Paolo Mojo & Eric Prydz vs. Yazoo", title: "1983 vs. Situation (Eric Prydz Mashup)" },
+  { at: "1:20:10", artist: "Paolo Mojo", title: "1983 (Eric Prydz Remix)" },
+  { at: "1:22:20", artist: "Yazoo", title: "Situation (Eric Prydz Bootleg)" },
+  { at: "1:24:30", artist: "Eric Prydz", title: "Liberate" },
+  { at: "1:29:00", artist: "Eric Prydz", title: "Collider" },
+  { at: "1:34:00", artist: "Eric Prydz ft. Tom Cane", title: "Generate (EPIC Interlude Mix)" },
+  { at: "1:38:30", artist: "Pryda", title: "Project Prayer" },
+  { at: "1:43:00", artist: "Eric Prydz", title: "Opus" },
+  { at: "1:52:00", artist: "M83", title: "Midnight City (Eric Prydz Private Remix)" },
+];
+
+/**
  * Deborah De Luca @ Opera Stage, Street Parade Zürich, Switzerland 2025-08-09
  * Official YT: https://www.youtube.com/watch?v=7cK7rhYXbh8 (~55m)
  * https://www.1001tracklists.com/tracklist/qwxcs1k/deborah-de-luca-opera-stage-street-parade-zurich-switzerland-2025-08-09.html
@@ -4106,10 +4311,12 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "sc-domdolla-dom-dolla-live-edc-las-vegas-2023": TL_DOM_DOLLA_EDC_LV_2023,
   "sc-domdolla-dom-dolla-live-edc-circuitgrounds-las-vegas-2024":
     TL_DOM_DOLLA_EDC_LV_2024,
+  "yt-4Lqyh7cWRxQ": TL_DOM_DOLLA_ALLIANZ_SYDNEY,
   "yt-yXHoHK_jQvc": TL_AHEE_LIQUID_STRANGER_EDC_LV_2026,
   "yt-dXBoIY65P8s": TL_DARUDE_EDC_LV_2026,
   "yt-c_sx3zum8Z0": TL_BLEU_CLAIR_EDC_LV_2023,
   "yt-g1vH9C_o-vo": TL_SOLOMUN_EDC_LV_2026,
+  "yt-S46Bs4pZ_I4": TL_SOLOMUN_ALLY_PALLY_2026,
   "yt-KIb3psOt9hI": TL_SARAH_DE_WARREN_EDC_LV_2026,
   "yt-yUA0Ht2PdG0": TL_PEGASSI_EDC_LV_2026,
   "yt-f_p6nfbrm0E": TL_NICO_MORENO_EDC_LV_2026,
@@ -4125,7 +4332,9 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-QThaqlzSqLw": TL_JAMES_HYPE_MELKWEG_ADE_2025,
   "yt-ra8NYbzPMnk": TL_KOLSCH_TML_WE2_2026,
   "yt-5AdQy7lCbN0": TL_STEVE_ANGELLO_TML_WE2_2026,
+  "yt-4985f9Rfxx0": TL_FISHER_TML_WE1_2026,
   "yt-mVB-gqggrCQ": TL_FISHER_TML_WE2_2026,
+  "yt-eeNljOHahxY": TL_MASSANO_TML_WE2_2026,
   "yt-yWZyIQtxoXU": TL_HARDWELL_TML_WE2_2026,
   "yt-Py-GG74lLU8": TL_HARDWELL_TML_WE2_2026,
   "yt-gO03gfI_JF0": TL_AYYBO_ODD_MOB_TML_WE2_2026,
@@ -4142,6 +4351,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-KVZlecHlVkg": TL_PUSH_TML_WE2_2026,
   "yt-BG3Lr9EdWVY": TL_BASSJACKERS_TML_WE2_2026,
   "yt-HWIratXF1Bo": TL_BHASKAR_TML_WE2_2026,
+  "yt-hU-z3iV0LOg": TL_ERIC_PRYDZ_ULTRA_MIAMI_2026,
   "yt-7cK7rhYXbh8": TL_DEBORAH_STREET_PARADE_2025,
   "yt-S5qAspu0AbI": TL_KEVIN_DE_VRIES_STREET_PARADE_2025,
   "yt-pLldXE5OyCM": TL_KOLSCH_STREET_PARADE_2025,

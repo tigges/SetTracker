@@ -20,7 +20,10 @@ function search1001(...parts: string[]): string {
   return `https://www.google.com/search?q=${encodeURIComponent(q)}`;
 }
 
-/** Batch 1 (Deborah → Adiel) is wired — next ten capture targets. */
+/**
+ * Wired recently (removed from queue): Dom Dolla Allianz, FISHER WE1,
+ * Massano Freedom, Eric Prydz Ultra, Solomun Ally Pally (+ earlier SP batch).
+ */
 const NEXT_CAPTURES: Preset[] = [
   {
     label: "PAN-POT · Street Parade",
@@ -86,25 +89,11 @@ const NEXT_CAPTURES: Preset[] = [
     openLabel: "Find 1001",
   },
   {
-    label: "Dom Dolla · Allianz Stadium Sydney",
-    slug: "yt-4Lqyh7cWRxQ",
-    name: "TL_DOM_DOLLA_ALLIANZ_SYDNEY",
-    url: search1001("dom dolla", "allianz", "sydney"),
-    openLabel: "Find 1001",
-  },
-  {
-    label: "Eric Prydz · Ultra Miami 2026",
-    slug: "yt-hU-z3iV0LOg",
-    name: "TL_ERIC_PRYDZ_ULTRA_MIAMI_2026",
-    url: search1001("eric prydz", "ultra", "miami", "2026", "resistance"),
-    openLabel: "Find 1001",
-  },
-  {
-    label: "FISHER · Tomorrowland Mainstage WE1",
-    slug: "yt-4985f9Rfxx0",
-    name: "TL_FISHER_TML_WE1_2026",
+    label: "Boris Brejcha · Tomorrowland WE1",
+    slug: "yt-NpL_bT5vgmU",
+    name: "TL_BORIS_BREJCHA_TML_WE1_2026",
     url: search1001(
-      "fisher",
+      "boris brejcha",
       "mainstage",
       "tomorrowland",
       "weekend 1",
@@ -113,15 +102,29 @@ const NEXT_CAPTURES: Preset[] = [
     openLabel: "Find 1001",
   },
   {
-    label: "Boris Brejcha · Tomorrowland WE1",
-    slug: "yt-NpL_bT5vgmU",
-    name: "TL_BORIS_BREJCHA_TML_WE1_2026",
+    label: "Sebastian Ingrosso · Tomorrowland WE2",
+    slug: "yt-g4vR2VlhNtk",
+    name: "TL_SEBASTIAN_INGROSSO_TML_WE2_2026",
     url: search1001(
-      "boris brejcha",
+      "sebastian ingrosso",
       "tomorrowland",
-      "weekend 1",
+      "weekend 2",
       "2026",
     ),
+    openLabel: "Find 1001",
+  },
+  {
+    label: "Miss Monique · BIORHYTHM",
+    slug: "yt-1LpQZ5GTRDg",
+    name: "TL_MISS_MONIQUE_BIORHYTHM",
+    url: search1001("miss monique", "biorhythm"),
+    openLabel: "Find 1001",
+  },
+  {
+    label: "John Summit · Lollapalooza",
+    slug: "yt-9TKqqBCmDHA",
+    name: "TL_JOHN_SUMMIT_LOLLAPALOOZA",
+    url: search1001("john summit", "lollapalooza"),
     openLabel: "Find 1001",
   },
 ];
@@ -224,8 +227,8 @@ export function Capture1001Client() {
       <section className="space-y-3">
         <h2 className="text-lg font-extrabold tracking-tight">Next 10 captures</h2>
         <p className="text-[14px] text-muted">
-          Street Parade batch 1 (Deborah → Adiel) is wired. Copy a preset
-          bookmarklet (slug filled), open/find the 1001 page, then run it.
+          Start from the official YouTube set, find its 1001 page, then run
+          the preset bookmarklet (slug filled) and paste the seed back here.
         </p>
         <ul className="divide-y divide-line border-y border-line">
           {NEXT_CAPTURES.map((p) => (
