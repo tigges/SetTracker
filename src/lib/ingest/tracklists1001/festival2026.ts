@@ -3829,6 +3829,74 @@ export const TL_SARAH_DE_WARREN_EDC_LV_2026: FingerprintSeedRow[] = [
 ];
 
 /**
+ * Kevin de Vries @ Opera Stage, Street Parade Zürich, Switzerland 2025-08-09
+ * Official YT: https://www.youtube.com/watch?v=S5qAspu0AbI (~1h27m)
+ * https://www.1001tracklists.com/tracklist/m5qj71t/kevin-de-vries-opera-stage-street-parade-zurich-switzerland-2025-08-09.html
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-S5qAspu0AbI"] = TL_KEVIN_DE_VRIES_STREET_PARADE_2025
+ * Captured 2026-08-11 - provenance 1001tl.
+ * 1001 cues were absolute stage clocks (from 3:33:44); rebased to set start.
+ */
+export const TL_KEVIN_DE_VRIES_STREET_PARADE_2025: FingerprintSeedRow[] = [
+  {
+    at: "0:00",
+    artist: "Kevin de Vries & Dimitri Vangelis & Wyman ft. Luxtides",
+    title: "Before You Go",
+  },
+  { at: "4:06", artist: "Kevin de Vries & Jast", title: "Born Like That" },
+  { at: "12:44", artist: "Max Styler & Deomid", title: "Get Down" },
+  { at: "17:34", artist: "JOA", title: "No Games" },
+  { at: "20:06", artist: "Cassian & YOTTO & Da Hool", title: "Love Parade" },
+  {
+    at: "23:25",
+    artist: "Anyma & Adam Sellouk ft. Carly Gibert",
+    title: "Girls MIA",
+  },
+  {
+    at: "26:58",
+    artist: "Fred again.. & Skepta & PlaqueBoyMax",
+    title: "Victory Lap (Adam Sellouk & YLM Remix)",
+  },
+  { at: "30:47", artist: "Mau P", title: "TESLA" },
+  { at: "34:06", artist: "Alexander Delanois", title: "This One" },
+  { at: "38:09", artist: "Glowal & SYNTHËTIX", title: "Killaz" },
+  { at: "41:48", artist: "Jast", title: "Move" },
+  { at: "46:31", artist: "Vintage Culture", title: "Do You" },
+  {
+    at: "49:50",
+    artist: "Travis Scott ft. Rob49 & 21 Savage",
+    title: "Topia Twins (Kevin de Vries & Belladonna Remix)",
+  },
+  { at: "53:45", artist: "Kevin de Vries & Mau P", title: "Metro" },
+  {
+    at: "59:59",
+    artist: "Calvin Harris ft. Clementine Douglas",
+    title: "Blessings (Cassian Remix)",
+  },
+  { at: "1:03:19", artist: "Kevin de Vries & Cassian", title: "Payback" },
+  {
+    at: "1:09:39",
+    artist: "CamelPhat & Kölsch",
+    title: "Waste My Time (Chris Avantgarde Remix)",
+  },
+  {
+    at: "1:11:26",
+    artist: "Swedish House Mafia ft. John Martin",
+    title: "Don't You Worry Child (Acappella)",
+  },
+  {
+    at: "1:13:12",
+    artist: "The Prodigy",
+    title: "No Good (Start The Dance) (Jast Remix)",
+  },
+  { at: "1:17:32", artist: "Goom Gum & RDNK", title: "It's Time To Get High" },
+  {
+    at: "1:21:37",
+    artist: "Kings Of Leon",
+    title: "Sex On Fire (Kevin de Vries & Dimitri Vangelis & Wyman Remix)",
+  },
+];
+
+/**
  * Deborah De Luca @ Opera Stage, Street Parade Zürich, Switzerland 2025-08-09
  * Official YT: https://www.youtube.com/watch?v=7cK7rhYXbh8 (~55m)
  * https://www.1001tracklists.com/tracklist/qwxcs1k/deborah-de-luca-opera-stage-street-parade-zurich-switzerland-2025-08-09.html
@@ -3928,6 +3996,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-BG3Lr9EdWVY": TL_BASSJACKERS_TML_WE2_2026,
   "yt-HWIratXF1Bo": TL_BHASKAR_TML_WE2_2026,
   "yt-7cK7rhYXbh8": TL_DEBORAH_STREET_PARADE_2025,
+  "yt-S5qAspu0AbI": TL_KEVIN_DE_VRIES_STREET_PARADE_2025,
 };
 
 /** Sanity: every seeded clock must parse. */
