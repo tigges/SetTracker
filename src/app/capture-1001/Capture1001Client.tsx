@@ -9,10 +9,8 @@ type Preset = {
   label: string;
   slug: string;
   name: string;
-  /** Direct 1001.tl / tracklist URL, or a search page when unknown. */
-  url: string;
-  /** Button label for the open link (default Open 1001). */
-  openLabel?: string;
+  /** Google / 1001 search when the shortlink is unknown. */
+  searchUrl: string;
 };
 
 function search1001(...parts: string[]): string {
@@ -20,112 +18,109 @@ function search1001(...parts: string[]): string {
   return `https://www.google.com/search?q=${encodeURIComponent(q)}`;
 }
 
+/** `yt-<videoId>` → watch URL (handles ids that start with `-`). */
+function youtubeFromSlug(slug: string): string {
+  const id = slug.startsWith("yt-") ? slug.slice(3) : slug;
+  return `https://www.youtube.com/watch?v=${id}`;
+}
+
 /**
- * Wired recently (removed from queue): Dom Dolla Allianz, FISHER WE1,
- * Massano Freedom, Eric Prydz Ultra, Solomun Ally Pally (+ earlier SP batch).
+ * Next 10 capture assists (YT-first).
+ * Recently wired & removed: Dom Dolla Allianz, FISHER WE1, Massano Freedom,
+ * Eric Prydz Ultra, Solomun Ally Pally, Street Parade Deborah→Adiel.
  */
 const NEXT_CAPTURES: Preset[] = [
   {
     label: "PAN-POT · Street Parade",
     slug: "yt-LpFxQmtEeAA",
     name: "TL_PAN_POT_STREET_PARADE_2025",
-    url: search1001(
+    searchUrl: search1001(
       "pan-pot",
       "opera stage",
       "street parade",
       "zurich",
       "2025-08-09",
     ),
-    openLabel: "Find 1001",
   },
   {
     label: "HoneyLuv · Street Parade",
     slug: "yt-WTN5ru2ceRE",
     name: "TL_HONEYLUV_STREET_PARADE_2025",
-    url: search1001(
+    searchUrl: search1001(
       "honeyluv",
       "street parade",
       "zurich",
       "2025-08-09",
     ),
-    openLabel: "Find 1001",
   },
   {
     label: "Zamna Soundsystem · Street Parade",
     slug: "yt-1Mp9Pl6YgDM",
     name: "TL_ZAMNA_STREET_PARADE_2025",
-    url: search1001(
+    searchUrl: search1001(
       "zamna",
       "street parade",
       "zurich",
       "2025-08-09",
     ),
-    openLabel: "Find 1001",
   },
   {
     label: "Plastik Funk · Nature One",
     slug: "yt-apu-wnvlrqs",
     name: "TL_PLASTIK_FUNK_NATURE_ONE_2025",
-    url: search1001("plastik funk", "nature one", "2025", "arte"),
-    openLabel: "Find 1001",
+    searchUrl: search1001("plastik funk", "nature one", "2025", "arte"),
   },
   {
     label: "Mike Williams · Tomorrowland WE2",
     slug: "yt-WnjXXOZ8Te8",
     name: "TL_MIKE_WILLIAMS_TML_WE2_2026",
-    url: search1001(
+    searchUrl: search1001(
       "mike williams",
       "tomorrowland",
       "weekend 2",
       "2026",
     ),
-    openLabel: "Find 1001",
   },
   {
     label: "Peggy Gou · Cercle Lille",
     slug: "yt--UOMvxh4MYU",
     name: "TL_PEGGY_GOU_CERCLE_LILLE",
-    url: search1001("peggy gou", "cercle", "lille", "palais"),
-    openLabel: "Find 1001",
+    searchUrl: search1001("peggy gou", "cercle", "lille", "palais"),
   },
   {
     label: "Boris Brejcha · Tomorrowland WE1",
     slug: "yt-NpL_bT5vgmU",
     name: "TL_BORIS_BREJCHA_TML_WE1_2026",
-    url: search1001(
+    searchUrl: search1001(
       "boris brejcha",
       "mainstage",
       "tomorrowland",
       "weekend 1",
       "2026",
     ),
-    openLabel: "Find 1001",
   },
   {
     label: "Sebastian Ingrosso · Tomorrowland WE2",
     slug: "yt-g4vR2VlhNtk",
     name: "TL_SEBASTIAN_INGROSSO_TML_WE2_2026",
-    url: search1001(
+    searchUrl: search1001(
       "sebastian ingrosso",
       "tomorrowland",
       "weekend 2",
       "2026",
     ),
-    openLabel: "Find 1001",
   },
   {
     label: "Miss Monique · BIORHYTHM",
     slug: "yt-1LpQZ5GTRDg",
     name: "TL_MISS_MONIQUE_BIORHYTHM",
-    url: search1001("miss monique", "biorhythm"),
-    openLabel: "Find 1001",
+    searchUrl: search1001("miss monique", "biorhythm"),
   },
   {
     label: "John Summit · Lollapalooza",
     slug: "yt-9TKqqBCmDHA",
     name: "TL_JOHN_SUMMIT_LOLLAPALOOZA",
-    url: search1001("john summit", "lollapalooza"),
-    openLabel: "Find 1001",
+    searchUrl: search1001("john summit", "lollapalooza"),
   },
 ];
 
@@ -215,43 +210,66 @@ export function Capture1001Client() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-lg font-extrabold tracking-tight">2. Open 1001 → run</h2>
+        <h2 className="text-lg font-extrabold tracking-tight">2. YouTube → 1001 → capture</h2>
         <ol className="list-decimal space-y-2 pl-5 text-[14px] text-muted">
-          <li>Open a 1001 tracklist (fully loaded).</li>
-          <li>Tap your <span className="text-ink">setradar 1001 capture</span> bookmark.</li>
-          <li>Overlay appears → <span className="text-ink">Copy seed</span>.</li>
-          <li>Paste the seed back into the setradar chat.</li>
+          <li>
+            Open the official YouTube set (<span className="text-ink">Open YT</span>).
+          </li>
+          <li>
+            Find its 1001 page (description link, or{" "}
+            <span className="text-ink">Find 1001</span>).
+          </li>
+          <li>
+            On the 1001 page, tap{" "}
+            <span className="text-ink">setradar 1001 capture</span> (or the
+            preset <span className="text-ink">Copy capture</span> bookmark).
+          </li>
+          <li>
+            Overlay → <span className="text-ink">Copy seed</span> → paste into
+            setradar chat.
+          </li>
         </ol>
       </section>
 
       <section className="space-y-3">
         <h2 className="text-lg font-extrabold tracking-tight">Next 10 captures</h2>
         <p className="text-[14px] text-muted">
-          Start from the official YouTube set, find its 1001 page, then run
-          the preset bookmarklet (slug filled) and paste the seed back here.
+          Official YouTube first, then 1001, then the preset bookmarklet (slug
+          filled).
         </p>
-        <ul className="divide-y divide-line border-y border-line">
-          {NEXT_CAPTURES.map((p) => (
+        <ol className="divide-y divide-line border-y border-line">
+          {NEXT_CAPTURES.map((p, i) => (
             <li
               key={p.slug}
               className="flex flex-col gap-2 py-3 sm:flex-row sm:items-center sm:justify-between"
             >
               <div className="min-w-0">
-                <div className="font-bold text-ink">{p.label}</div>
+                <div className="font-bold text-ink">
+                  <span className="mono text-muted2 mr-2">{i + 1}.</span>
+                  {p.label}
+                </div>
                 <div className="mono text-[11px] text-muted2">{p.slug}</div>
               </div>
               <div className="flex flex-wrap gap-2">
                 <a
-                  href={p.url}
+                  href={youtubeFromSlug(p.slug)}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="rounded-md bg-ink px-3 py-2 text-[13px] font-bold text-bg"
+                >
+                  Open YT
+                </a>
+                <a
+                  href={p.searchUrl}
                   target="_blank"
                   rel="noreferrer"
                   className="rounded-md border border-line px-3 py-2 text-[13px] font-bold"
                 >
-                  {p.openLabel ?? "Open 1001"}
+                  Find 1001
                 </a>
                 <button
                   type="button"
-                  className="rounded-md bg-ink px-3 py-2 text-[13px] font-bold text-bg"
+                  className="rounded-md border border-line px-3 py-2 text-[13px] font-bold"
                   onClick={() =>
                     onCopy(p.label, bookmarkletFor(scriptUrl, p))
                   }
@@ -261,7 +279,7 @@ export function Capture1001Client() {
               </div>
             </li>
           ))}
-        </ul>
+        </ol>
       </section>
     </div>
   );

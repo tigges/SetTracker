@@ -18,9 +18,8 @@ export default function Capture1001Page() {
           Capture 1001 on mobile
         </h1>
         <p className="text-[15px] text-muted">
-          YouTube fingerprinting is blocked in CI. Use this bookmarklet on a
-          1001Tracklists page to copy a timed seed, then paste it into chat to
-          wire the set.
+          Start from the official YouTube set, find its 1001Tracklists page,
+          then run the bookmarklet to copy a timed seed and paste it into chat.
         </p>
       </header>
       <Capture1001Client />
