@@ -104,21 +104,18 @@ jobs:
         if: steps.acr.outputs.configured == '1'
         env:
           ACRCLOUD_ENABLED: "1"
-          # Trial burn: raise from 12 → 40 sets/run (operator OK to use daily/trial limits).
+          # Severity-ranked sparse queue (SC/hearthis first via compareSparseSetCandidates).
           ACRCLOUD_SET_LIMIT: "40"
           ACRCLOUD_SAMPLE_SEC: "12"
-          # Denser probes during trial (was 90).
           ACRCLOUD_STEP_SEC: "60"
-          # Cap per set so a long open-to-close cannot burn the whole run.
           ACRCLOUD_MAX_PROBES_PER_SET: "20"
           ACRCLOUD_MIN_SCORE: "70"
           ACRCLOUD_MIN_IDENTIFIED: "4"
-          # Street Parade ARTE sets are YT-only — allow YouTube for this focus run.
-          # Prefer SC/hearthis when both exist; priority YT still covers sparse festivals.
-          ACRCLOUD_ALLOW_YOUTUBE: "1"
+          # Prefer SC/hearthis streams; allow YT only for Top100 / festival priority.
+          ACRCLOUD_ALLOW_YOUTUBE: "0"
           ACRCLOUD_ALLOW_YOUTUBE_PRIORITY: "1"
-          # Focus this enrich on Zürich Street Parade (clear after coverage improves).
-          ACRCLOUD_EVENT_SLUGS: "street-parade"
+          # Multi-event focus (density + Top100 gaps) — not Street Parade-only.
+          ACRCLOUD_EVENT_SLUGS: "street-parade,tomorrowland,ultra-miami,edc-lv,nature-one"
         run: npm run enrich:fingerprint
 
       - name: Save enriched catalog DB

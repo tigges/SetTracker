@@ -157,12 +157,41 @@ jobs:
       - name: Cross-check set tracklist density
         run: npm run crosscheck:set-density
 
+      - name: Soft-attach events from set titles
+        run: npm run backfill:set-events
+        continue-on-error: true
+
+      - name: Audit Top100 completeness
+        run: npm run audit:top100
+        continue-on-error: true
+
+      - name: Rebuild next-captures + held Relive watch + ACR preview
+        run: |
+          npm run build:next-captures
+          npm run preview:acr-queue
+          npx tsx scripts/report-roster-graduates.ts
+
       - name: Upload set-density report
         uses: actions/upload-artifact@v4
         with:
           name: set-density
-          path: data/crosscheck/set-density.json
+          path: |
+            data/crosscheck/set-density.json
+            data/crosscheck/next-captures.json
+            data/crosscheck/held-relive-watch.json
+            data/crosscheck/acr-queue-preview.json
+            data/crosscheck/roster-graduate-report.json
+            data/crosscheck/top100-coverage.json
           if-no-files-found: warn
+
+      - name: Catalog social fill (null-only)
+        env:
+          CATALOG_YT_SOCIALS_LIMIT: "40"
+          CATALOG_SC_SOCIALS_LIMIT: "40"
+        run: |
+          npm run catalog-yt-socials || true
+          npm run catalog-sc-socials || true
+        continue-on-error: true
 
       - name: Save catalog DB
         uses: actions/cache/save@v4
