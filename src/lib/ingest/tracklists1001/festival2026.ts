@@ -3445,6 +3445,44 @@ export const TL_SOLOMUN_EDC_LV_2026: FingerprintSeedRow[] = [
 ];
 
 /**
+ * Solomun @ Alexandra Palace London, United Kingdom 2026-02-07
+ * Official YT: https://www.youtube.com/watch?v=S46Bs4pZ_I4
+ * 1001TL: https://1001.tl/fn4hckk — operator bookmarklet capture 2026-08-11
+ * (29/29 timed cues). Distinct from EDC LV (yt-g1vH9C_o-vo).
+ */
+export const TL_SOLOMUN_ALLY_PALLY_2026: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "Bruno Furlan", title: "Acid" },
+  { at: "4:30", artist: "Skrillex & Solomun", title: "Rumpta" },
+  { at: "10:00", artist: "Solomun ft. ÄTNA", title: "Tuk Tuk" },
+  { at: "15:04", artist: "Solomun ft. Inéz", title: "Raider On The Storm" },
+  { at: "20:45", artist: "Indie Elephant", title: "Cusp Generation" },
+  { at: "25:40", artist: "Osmosis Jones", title: "Hot In The Party" },
+  { at: "31:00", artist: "Broken Hill", title: "Rock It Like" },
+  { at: "36:00", artist: "Glowal", title: "Bass breaker" },
+  { at: "41:30", artist: "Goom Gum", title: "Just Be Good To Me" },
+  { at: "45:45", artist: "Pablo Say", title: "Dance Groove" },
+  { at: "50:15", artist: "AKKI (DE)", title: "Take Me Away" },
+  { at: "55:20", artist: "Solomun", title: "Don't Give Up" },
+  { at: "1:00:25", artist: "Jamie xx ft. Romy & Oliver Sim", title: "Waited All Night (Solomun Remix v11)" },
+  { at: "1:04:45", artist: "Dark Heart", title: "Go Go" },
+  { at: "1:08:00", artist: "Addie Manson", title: "Afterhours" },
+  { at: "1:12:00", artist: "Blank Sense & FRANCO BA", title: "Goddamn" },
+  { at: "1:16:20", artist: "The Notorious B.I.G. ft. Bone Thugs-N-Harmony", title: "Notorious Thugs (Solomun Remix)" },
+  { at: "1:21:50", artist: "Max Styler ft. Ad-Apt", title: "One More (Solomun Remix)" },
+  { at: "1:26:14", artist: "Public Domain", title: "Operation Blade (Bass In The Place)" },
+  { at: "1:35:40", artist: "Leblanc", title: "Strings Anthem" },
+  { at: "1:40:00", artist: "K.I.Z", title: "Samstag Ist Krieg (Solomun Remix)" },
+  { at: "1:47:40", artist: "Luca Luper & Karmon", title: "Frequency" },
+  { at: "1:52:00", artist: "PUNX", title: "The Rock" },
+  { at: "1:56:40", artist: "Fat Cosmoe & Luca Luper", title: "I Know My Name" },
+  { at: "2:01:10", artist: "Mia Mendi & Skuro (IT)", title: "Angel Wings" },
+  { at: "2:06:00", artist: "Sam Collins & ESSED", title: "Going Up" },
+  { at: "2:09:30", artist: "Yost Koen", title: "Sympathy" },
+  { at: "2:30:35", artist: "Solomun ft. Antony Szmierek", title: "Life Affirmer" },
+  { at: "2:37:00", artist: "Solomun & Jain", title: "Tout Le Monde Est Fou" },
+];
+
+/**
  * Pegassi @ quantumVALLEY, EDC Las Vegas 2026-05-15
  * Official YT: https://www.youtube.com/watch?v=yUA0Ht2PdG0 (~57:34)
  * 1001TL: https://1001.tl/108mxtc9 — operator console capture 2026-08-01
@@ -4278,6 +4316,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-dXBoIY65P8s": TL_DARUDE_EDC_LV_2026,
   "yt-c_sx3zum8Z0": TL_BLEU_CLAIR_EDC_LV_2023,
   "yt-g1vH9C_o-vo": TL_SOLOMUN_EDC_LV_2026,
+  "yt-S46Bs4pZ_I4": TL_SOLOMUN_ALLY_PALLY_2026,
   "yt-KIb3psOt9hI": TL_SARAH_DE_WARREN_EDC_LV_2026,
   "yt-yUA0Ht2PdG0": TL_PEGASSI_EDC_LV_2026,
   "yt-f_p6nfbrm0E": TL_NICO_MORENO_EDC_LV_2026,
