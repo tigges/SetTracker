@@ -9,39 +9,74 @@ type Preset = {
   label: string;
   slug: string;
   name: string;
+  /** Direct 1001.tl / tracklist URL, or a search page when unknown. */
   url: string;
+  /** Button label for the open link (default Open 1001). */
+  openLabel?: string;
 };
 
-const STREET_PARADE: Preset[] = [
+function search1001(...parts: string[]): string {
+  const q = [...parts, "site:1001tracklists.com"].join(" ");
+  return `https://www.google.com/search?q=${encodeURIComponent(q)}`;
+}
+
+/** Batch 1 (Deborah → Adiel) is wired — these are the next five to capture. */
+const NEXT_CAPTURES: Preset[] = [
   {
-    label: "Deborah de Luca",
-    slug: "yt-7cK7rhYXbh8",
-    name: "TL_DEBORAH_STREET_PARADE_2025",
-    url: "https://1001.tl/qwxcs1k",
+    label: "PAN-POT · Street Parade",
+    slug: "yt-LpFxQmtEeAA",
+    name: "TL_PAN_POT_STREET_PARADE_2025",
+    url: search1001(
+      "pan-pot",
+      "opera stage",
+      "street parade",
+      "zurich",
+      "2025-08-09",
+    ),
+    openLabel: "Find 1001",
   },
   {
-    label: "Kevin de Vries",
-    slug: "yt-S5qAspu0AbI",
-    name: "TL_KEVIN_DE_VRIES_STREET_PARADE_2025",
-    url: "https://1001.tl/m5qj71t",
+    label: "HoneyLuv · Street Parade",
+    slug: "yt-WTN5ru2ceRE",
+    name: "TL_HONEYLUV_STREET_PARADE_2025",
+    url: search1001(
+      "honeyluv",
+      "street parade",
+      "zurich",
+      "2025-08-09",
+    ),
+    openLabel: "Find 1001",
   },
   {
-    label: "Kölsch",
-    slug: "yt-pLldXE5OyCM",
-    name: "TL_KOLSCH_STREET_PARADE_2025",
-    url: "https://1001.tl/1sftkmb9",
+    label: "Zamna Soundsystem · Street Parade",
+    slug: "yt-1Mp9Pl6YgDM",
+    name: "TL_ZAMNA_STREET_PARADE_2025",
+    url: search1001(
+      "zamna",
+      "street parade",
+      "zurich",
+      "2025-08-09",
+    ),
+    openLabel: "Find 1001",
   },
   {
-    label: "Massano",
-    slug: "yt-fYM9DlFLwKw",
-    name: "TL_MASSANO_STREET_PARADE_2025",
-    url: "https://1001.tl/19jyprbt",
+    label: "Plastik Funk · Nature One",
+    slug: "yt-apu-wnvlrqs",
+    name: "TL_PLASTIK_FUNK_NATURE_ONE_2025",
+    url: search1001("plastik funk", "nature one", "2025", "arte"),
+    openLabel: "Find 1001",
   },
   {
-    label: "Adiel",
-    slug: "yt-tuqAdrbkYZk",
-    name: "TL_ADIEL_STREET_PARADE_2025",
-    url: "https://1001.tl/2uwhr4bt",
+    label: "Mike Williams · Tomorrowland WE2",
+    slug: "yt-WnjXXOZ8Te8",
+    name: "TL_MIKE_WILLIAMS_TML_WE2_2026",
+    url: search1001(
+      "mike williams",
+      "tomorrowland",
+      "weekend 2",
+      "2026",
+    ),
+    openLabel: "Find 1001",
   },
 ];
 
@@ -141,15 +176,13 @@ export function Capture1001Client() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-lg font-extrabold tracking-tight">
-          Street Parade shortcuts
-        </h2>
+        <h2 className="text-lg font-extrabold tracking-tight">Next 5 captures</h2>
         <p className="text-[14px] text-muted">
-          Copy a preset bookmarklet (slug already filled), open the 1001 link,
-          then run it.
+          Street Parade batch 1 (Deborah → Adiel) is wired. Copy a preset
+          bookmarklet (slug filled), open/find the 1001 page, then run it.
         </p>
         <ul className="divide-y divide-line border-y border-line">
-          {STREET_PARADE.map((p) => (
+          {NEXT_CAPTURES.map((p) => (
             <li
               key={p.slug}
               className="flex flex-col gap-2 py-3 sm:flex-row sm:items-center sm:justify-between"
@@ -165,7 +198,7 @@ export function Capture1001Client() {
                   rel="noreferrer"
                   className="rounded-md border border-line px-3 py-2 text-[13px] font-bold"
                 >
-                  Open 1001
+                  {p.openLabel ?? "Open 1001"}
                 </a>
                 <button
                   type="button"
