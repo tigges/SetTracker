@@ -16,6 +16,7 @@ import {
   TL_KEVIN_DE_VRIES_STREET_PARADE_2025,
   TL_KOLSCH_STREET_PARADE_2025,
   TL_MASSANO_STREET_PARADE_2025,
+  TL_MASSANO_TML_WE2_2026,
   TL_ADIEL_STREET_PARADE_2025,
   TL_DIMITRI_VEGAS_NICO_MORENO_TML_WE2_2026,
   TL_DIMITRI_VEGAS_TML_WE2_2026,
@@ -576,6 +577,29 @@ for (const p of fisher) {
   fisherPrev = p.timestamp;
 }
 assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-mVB-gqggrCQ"]!.length >= 17);
+
+assertSeedClocks(TL_MASSANO_TML_WE2_2026);
+const massanoTml = tracklist1001RowsToPlays(TL_MASSANO_TML_WE2_2026);
+assert.equal(massanoTml.length, 17);
+assert.equal(massanoTml[0]!.trackTitle, "Underground");
+assert.equal(massanoTml[massanoTml.length - 1]!.trackTitle, "Angel In The Dark");
+assert.equal(massanoTml[massanoTml.length - 1]!.timestamp, 55 * 60 + 35);
+let massanoTmlPrev = -1;
+for (const p of massanoTml) {
+  assert.ok(
+    p.timestamp > massanoTmlPrev,
+    `Massano TML WE2 clocks must increase @ ${p.timestamp}`,
+  );
+  massanoTmlPrev = p.timestamp;
+}
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-eeNljOHahxY"],
+  TL_MASSANO_TML_WE2_2026,
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-fYM9DlFLwKw"],
+  TL_MASSANO_TML_WE2_2026,
+);
 
 assertSeedClocks(TL_HARDWELL_TML_WE2_2026);
 const hardwell = tracklist1001RowsToPlays(TL_HARDWELL_TML_WE2_2026);
