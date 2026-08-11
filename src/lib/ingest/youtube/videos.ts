@@ -27,11 +27,8 @@ import {
   TL_HOLY_PRIEST_EDC_LV_2026,
   TL_MATTY_RALPH_EDC_LV_2026,
   TL_ENRICO_SANGIULIANO_TML_WE2_2026,
-<<<<<<< HEAD
-  TL_FISHER_TML_WE1_2026,
-=======
   TL_ERIC_PRYDZ_ULTRA_MIAMI_2026,
->>>>>>> origin/cursor/eric-prydz-ultra-miami-356d
+  TL_FISHER_TML_WE1_2026,
   TL_FISHER_TML_WE2_2026,
   TL_MASSANO_TML_WE2_2026,
   TL_HARDWELL_TML_WE2_2026,
@@ -1095,6 +1092,16 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     eventName: "Dekmantel Festival",
   },
   {
+    // Official Cercle — capture queued (yt--UOMvxh4MYU).
+    video: "https://www.youtube.com/watch?v=-UOMvxh4MYU",
+    primaryArtist: dj("Peggy Gou", { accent: "#e63946" }),
+    genre: "House",
+    type: "festival",
+    title: "Peggy Gou at Palais des Beaux-Arts, Lille for Cercle",
+    seriesName: "Cercle",
+    eventName: "Palais des Beaux-Arts Lille",
+  },
+  {
     video: "https://www.youtube.com/watch?v=uqf0mOngpIk",
     primaryArtist: dj("FISHER", {
       accent: "#00c2ff",
@@ -1340,6 +1347,44 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     title: "Boris Brejcha WE2 | Tomorrowland 2024",
     seriesName: "Tomorrowland",
     eventName: "Tomorrowland Belgium",
+  },
+  {
+    // Official Relive — Mainstage WE1; capture queued (yt-NpL_bT5vgmU).
+    video: "https://www.youtube.com/watch?v=NpL_bT5vgmU",
+    primaryArtist: dj("Boris Brejcha", { accent: "#ff006e" }),
+    genre: "Techno",
+    type: "festival",
+    title: "Boris Brejcha Mainstage WE1 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+  },
+  {
+    // Official Relive — capture queued (yt-g4vR2VlhNtk).
+    video: "https://www.youtube.com/watch?v=g4vR2VlhNtk",
+    primaryArtist: dj("Sebastian Ingrosso", { accent: "#4361ee" }),
+    genre: "Progressive House",
+    type: "festival",
+    title: "Sebastian Ingrosso WE2 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+  },
+  {
+    // Artist upload — capture queued (yt-1LpQZ5GTRDg).
+    video: "https://www.youtube.com/watch?v=1LpQZ5GTRDg",
+    primaryArtist: dj("Miss Monique", { accent: "#9b5de5" }),
+    genre: "Melodic Techno",
+    type: "festival",
+    title: "Miss Monique · BIORHYTHM",
+    seriesName: "BIORHYTHM",
+  },
+  {
+    // Artist upload — capture queued (yt-9TKqqBCmDHA).
+    video: "https://www.youtube.com/watch?v=9TKqqBCmDHA",
+    primaryArtist: dj("John Summit", { accent: "#4cc9f0" }),
+    genre: "Tech House",
+    type: "festival",
+    title: "John Summit · Lollapalooza",
+    eventName: "Lollapalooza",
   },
   {
     video: "https://www.youtube.com/watch?v=NqX1Fn6MBf0",
