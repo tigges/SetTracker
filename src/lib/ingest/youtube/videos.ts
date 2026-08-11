@@ -29,6 +29,7 @@ import {
   TL_ENRICO_SANGIULIANO_TML_WE2_2026,
   TL_FISHER_TML_WE1_2026,
   TL_FISHER_TML_WE2_2026,
+  TL_MASSANO_TML_WE2_2026,
   TL_HARDWELL_TML_WE2_2026,
   TL_CYRIL_TML_WE2_2026,
   TL_DIMITRI_VEGAS_NICO_MORENO_TML_WE2_2026,
@@ -611,6 +612,19 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/kd5wd49/fisher-freedom-stage-tomorrowland-weekend-2-belgium-2026-07-24.html",
     tracklist1001: TL_FISHER_TML_WE2_2026,
+  },
+  {
+    // Official Relive — Freedom Stage WE2; 1001.tl/116uj1x1 timed capture.
+    video: "https://www.youtube.com/watch?v=eeNljOHahxY",
+    primaryArtist: dj("Massano", { accent: "#8338ec" }),
+    genre: "Melodic Techno",
+    type: "festival",
+    title: "Massano Freedom WE2 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/116uj1x1/massano-freedom-stage-tomorrowland-weekend-2-belgium-2026-07-25.html",
+    tracklist1001: TL_MASSANO_TML_WE2_2026,
   },
   {
     // Tomorrowland official — Mainstage WE2 closing; also artist upload Py-GG74lLU8.

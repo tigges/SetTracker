@@ -1602,6 +1602,32 @@ export const TL_FISHER_TML_WE2_2026: FingerprintSeedRow[] = [
 ];
 
 /**
+ * Massano @ Freedom Stage, Tomorrowland Weekend 2, Belgium 2026-07-25
+ * Official YT: https://www.youtube.com/watch?v=eeNljOHahxY
+ * 1001TL: https://1001.tl/116uj1x1 — operator bookmarklet capture 2026-08-11
+ * (17/17 timed cues). Distinct from Street Parade (yt-fYM9DlFLwKw).
+ */
+export const TL_MASSANO_TML_WE2_2026: FingerprintSeedRow[] = [
+  { at: "0:12", artist: "Massano & Humans Musik", title: "Underground" },
+  { at: "2:30", artist: "The KLF", title: "What Time Is Love? (Massano & David Lindmer Remix)" },
+  { at: "5:45", artist: "Massano & Ugo Banchi", title: "Wanna Dance" },
+  { at: "9:00", artist: "Argy & Massano", title: "Wait" },
+  { at: "12:01", artist: "Fatboy Slim", title: "Rockafeller Skank (Massano & Un:said Remix)" },
+  { at: "15:25", artist: "Massano ft. Ekko", title: "Accelerate" },
+  { at: "19:10", artist: "Massano & Silver Panda", title: "Pa Ca" },
+  { at: "22:00", artist: "The Chemical Brothers", title: "Do It Again (Massano Remix)" },
+  { at: "25:15", artist: "Massano & Glowal", title: "Future Generation" },
+  { at: "31:20", artist: "Massano", title: "Back Home" },
+  { at: "35:05", artist: "Green Velvet & Harvard Bass", title: "Lazer Beams (Adam Beyer & Massano Remix)" },
+  { at: "38:10", artist: "Massano ft. Franksy", title: "Electrified" },
+  { at: "41:10", artist: "Yeah Yeah Yeahs", title: "Heads Will Roll (Massano & Matt Guy Remix)" },
+  { at: "44:20", artist: "Massano", title: "The Feeling (2025 Private Edit)" },
+  { at: "47:55", artist: "Massano", title: "Numb" },
+  { at: "51:45", artist: "Massano", title: "Beyond Today" },
+  { at: "55:35", artist: "Anyma & Massano ft. Nathan Nicholson", title: "Angel In The Dark" },
+];
+
+/**
  * Hardwell @ Mainstage, Tomorrowland Weekend 2, Belgium 2026-07-24
  * Official YT: https://www.youtube.com/watch?v=yWZyIQtxoXU (~59:10)
  * Artist YT: https://www.youtube.com/watch?v=Py-GG74lLU8
@@ -4229,6 +4255,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-5AdQy7lCbN0": TL_STEVE_ANGELLO_TML_WE2_2026,
   "yt-4985f9Rfxx0": TL_FISHER_TML_WE1_2026,
   "yt-mVB-gqggrCQ": TL_FISHER_TML_WE2_2026,
+  "yt-eeNljOHahxY": TL_MASSANO_TML_WE2_2026,
   "yt-yWZyIQtxoXU": TL_HARDWELL_TML_WE2_2026,
   "yt-Py-GG74lLU8": TL_HARDWELL_TML_WE2_2026,
   "yt-gO03gfI_JF0": TL_AYYBO_ODD_MOB_TML_WE2_2026,
