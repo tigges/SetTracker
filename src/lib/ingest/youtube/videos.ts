@@ -27,7 +27,11 @@ import {
   TL_HOLY_PRIEST_EDC_LV_2026,
   TL_MATTY_RALPH_EDC_LV_2026,
   TL_ENRICO_SANGIULIANO_TML_WE2_2026,
+<<<<<<< HEAD
   TL_FISHER_TML_WE1_2026,
+=======
+  TL_ERIC_PRYDZ_ULTRA_MIAMI_2026,
+>>>>>>> origin/cursor/eric-prydz-ultra-miami-356d
   TL_FISHER_TML_WE2_2026,
   TL_MASSANO_TML_WE2_2026,
   TL_HARDWELL_TML_WE2_2026,
@@ -1329,6 +1333,21 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     title: "Hugel WE2 | Tomorrowland 2025",
     seriesName: "Tomorrowland",
     eventName: "Tomorrowland Belgium",
+  },
+  {
+    // Artist upload — Resistance Megastructure Ultra Miami 2026; 1001.tl/qy9yyy9 timed.
+    video: "https://www.youtube.com/watch?v=hU-z3iV0LOg",
+    primaryArtist: dj("Eric Prydz", {
+      accent: "#7209b7",
+      homeCity: "Sweden",
+    }),
+    genre: "Progressive House",
+    type: "festival",
+    title: "Eric Prydz Live @ Ultra Music Festival Miami 2026",
+    eventName: "Ultra Music Festival",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/qy9yyy9/eric-prydz-resistance-megastructure-ultra-music-festival-miami-united-states-2026-03-27.html",
+    tracklist1001: TL_ERIC_PRYDZ_ULTRA_MIAMI_2026,
   },
   {
     video: "https://www.youtube.com/watch?v=zmLIxKpgEPw",

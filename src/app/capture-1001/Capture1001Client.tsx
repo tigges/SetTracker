@@ -86,10 +86,30 @@ const NEXT_CAPTURES: Preset[] = [
     openLabel: "Find 1001",
   },
   {
+<<<<<<< HEAD
     label: "Eric Prydz · Ultra Miami 2026",
     slug: "yt-hU-z3iV0LOg",
     name: "TL_ERIC_PRYDZ_ULTRA_MIAMI_2026",
     url: search1001("eric prydz", "ultra", "miami", "2026", "resistance"),
+=======
+    label: "Dom Dolla · Allianz Stadium Sydney",
+    slug: "yt-4Lqyh7cWRxQ",
+    name: "TL_DOM_DOLLA_ALLIANZ_SYDNEY",
+    url: search1001("dom dolla", "allianz", "sydney"),
+    openLabel: "Find 1001",
+  },
+  {
+    label: "FISHER · Tomorrowland Mainstage WE1",
+    slug: "yt-4985f9Rfxx0",
+    name: "TL_FISHER_TML_WE1_2026",
+    url: search1001(
+      "fisher",
+      "mainstage",
+      "tomorrowland",
+      "weekend 1",
+      "2026",
+    ),
+>>>>>>> origin/cursor/eric-prydz-ultra-miami-356d
     openLabel: "Find 1001",
   },
   {
