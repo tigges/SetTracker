@@ -20,7 +20,7 @@ function search1001(...parts: string[]): string {
   return `https://www.google.com/search?q=${encodeURIComponent(q)}`;
 }
 
-/** Batch 1 (Deborah → Adiel) is wired — these are the next five to capture. */
+/** Batch 1 (Deborah → Adiel) is wired — next ten capture targets. */
 const NEXT_CAPTURES: Preset[] = [
   {
     label: "PAN-POT · Street Parade",
@@ -74,6 +74,52 @@ const NEXT_CAPTURES: Preset[] = [
       "mike williams",
       "tomorrowland",
       "weekend 2",
+      "2026",
+    ),
+    openLabel: "Find 1001",
+  },
+  {
+    label: "Peggy Gou · Cercle Lille",
+    slug: "yt--UOMvxh4MYU",
+    name: "TL_PEGGY_GOU_CERCLE_LILLE",
+    url: search1001("peggy gou", "cercle", "lille", "palais"),
+    openLabel: "Find 1001",
+  },
+  {
+    label: "Dom Dolla · Allianz Stadium Sydney",
+    slug: "yt-4Lqyh7cWRxQ",
+    name: "TL_DOM_DOLLA_ALLIANZ_SYDNEY",
+    url: search1001("dom dolla", "allianz", "sydney"),
+    openLabel: "Find 1001",
+  },
+  {
+    label: "Eric Prydz · Ultra Miami 2026",
+    slug: "yt-hU-z3iV0LOg",
+    name: "TL_ERIC_PRYDZ_ULTRA_MIAMI_2026",
+    url: search1001("eric prydz", "ultra", "miami", "2026", "resistance"),
+    openLabel: "Find 1001",
+  },
+  {
+    label: "FISHER · Tomorrowland Mainstage WE1",
+    slug: "yt-4985f9Rfxx0",
+    name: "TL_FISHER_TML_WE1_2026",
+    url: search1001(
+      "fisher",
+      "mainstage",
+      "tomorrowland",
+      "weekend 1",
+      "2026",
+    ),
+    openLabel: "Find 1001",
+  },
+  {
+    label: "Boris Brejcha · Tomorrowland WE1",
+    slug: "yt-NpL_bT5vgmU",
+    name: "TL_BORIS_BREJCHA_TML_WE1_2026",
+    url: search1001(
+      "boris brejcha",
+      "tomorrowland",
+      "weekend 1",
       "2026",
     ),
     openLabel: "Find 1001",
@@ -176,7 +222,7 @@ export function Capture1001Client() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-lg font-extrabold tracking-tight">Next 5 captures</h2>
+        <h2 className="text-lg font-extrabold tracking-tight">Next 10 captures</h2>
         <p className="text-[14px] text-muted">
           Street Parade batch 1 (Deborah → Adiel) is wired. Copy a preset
           bookmarklet (slug filled), open/find the 1001 page, then run it.
