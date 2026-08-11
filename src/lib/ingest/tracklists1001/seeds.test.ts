@@ -23,6 +23,7 @@ import {
   TL_DOM_DOLLA_EDC_LV_2024,
   TL_DYZEN_TML_WE2_2026,
   TL_ENRICO_SANGIULIANO_TML_WE2_2026,
+  TL_ERIC_PRYDZ_ULTRA_MIAMI_2026,
   TL_FISHER_TML_WE2_2026,
   TL_FUNK_TRIBU_EDC_LV_2026,
   TL_HARDWELL_TML_WE2_2026,
@@ -884,6 +885,25 @@ for (const p of bhaskar) {
   bhPrev = p.timestamp;
 }
 assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-HWIratXF1Bo"]!.length >= 17);
+
+assertSeedClocks(TL_ERIC_PRYDZ_ULTRA_MIAMI_2026);
+const prydzUltra = tracklist1001RowsToPlays(TL_ERIC_PRYDZ_ULTRA_MIAMI_2026);
+assert.equal(prydzUltra.length, 31);
+assert.equal(prydzUltra[0]!.trackTitle, "Heavy");
+assert.match(prydzUltra[prydzUltra.length - 1]!.trackTitle!, /Midnight City/);
+assert.equal(prydzUltra[prydzUltra.length - 1]!.timestamp, 112 * 60);
+let prydzPrev = -1;
+for (const p of prydzUltra) {
+  assert.ok(
+    p.timestamp > prydzPrev,
+    `Eric Prydz Ultra clocks must increase @ ${p.timestamp}`,
+  );
+  prydzPrev = p.timestamp;
+}
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-hU-z3iV0LOg"],
+  TL_ERIC_PRYDZ_ULTRA_MIAMI_2026,
+);
 
 assertSeedClocks(TL_DEBORAH_STREET_PARADE_2025);
 const deborahSp = tracklist1001RowsToPlays(TL_DEBORAH_STREET_PARADE_2025);

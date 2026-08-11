@@ -3888,6 +3888,46 @@ export const TL_KEVIN_DE_VRIES_STREET_PARADE_2025: FingerprintSeedRow[] = [
 ];
 
 /**
+ * Eric Prydz @ Resistance Megastructure, Ultra Music Festival Miami, United States 2026-03-27
+ * Official YT: https://www.youtube.com/watch?v=hU-z3iV0LOg
+ * 1001TL: https://1001.tl/qy9yyy9 — operator bookmarklet capture 2026-08-11
+ * (31/31 timed cues).
+ */
+export const TL_ERIC_PRYDZ_ULTRA_MIAMI_2026: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "Eric Prydz", title: "Heavy" },
+  { at: "4:40", artist: "Pryda", title: "History Toronto 2025 ID (Working Title)" },
+  { at: "11:00", artist: "Cirez D", title: "Tech One (Working Title)" },
+  { at: "17:00", artist: "The Drill", title: "The Drill (Eric Prydz Edit)" },
+  { at: "19:45", artist: "Cevin Fisher", title: "The Way We Used To (Acappella)" },
+  { at: "22:30", artist: "Pryda", title: "Sonar Barcelona 2025 ID (Working Title)" },
+  { at: "29:30", artist: "Cirez D", title: "Voided" },
+  { at: "33:00", artist: "Cirez D vs. Green Velvet & Harvard Bass", title: "On Off Lazer Beams (Eric Prydz Edit)" },
+  { at: "33:50", artist: "Cirez D", title: "On Off" },
+  { at: "34:40", artist: "Green Velvet & Harvard Bass", title: "Lazer Beams" },
+  { at: "35:30", artist: "Josh Wink", title: "Higher State Of Consciousness (Eric Prydz Private Remix)" },
+  { at: "39:00", artist: "Pryda", title: "INOX 2009 ID 01 (Working Title)" },
+  { at: "43:00", artist: "New Order & Eric Prydz vs. Daft Punk", title: "Blue Monday vs. Harder, Better, Faster, Stronger (Eric Prydz Mashup)" },
+  { at: "44:20", artist: "New Order", title: "Blue Monday (Eric Prydz Remix)" },
+  { at: "45:40", artist: "Daft Punk", title: "Harder, Better, Faster, Stronger (Eric Prydz Remix)" },
+  { at: "47:00", artist: "Thomas Gold & Francesco Diaz & Young Rebels", title: "Don't You Want Me (Dave Spoon Remix)" },
+  { at: "52:40", artist: "Plasmic Honey", title: "Dance Slut" },
+  { at: "54:17", artist: "The Chemical Brothers", title: "Hey Boy, Hey Girl (Acappella)" },
+  { at: "55:54", artist: "Faze Action", title: "In The Trees (Carl Craig C2 Remix 1)" },
+  { at: "57:30", artist: "Pryda", title: "Elements" },
+  { at: "1:06:00", artist: "Pryda", title: "Linked" },
+  { at: "1:11:00", artist: "Eric Prydz vs. Pink Floyd", title: "Proper Education" },
+  { at: "1:18:00", artist: "Paolo Mojo & Eric Prydz vs. Yazoo", title: "1983 vs. Situation (Eric Prydz Mashup)" },
+  { at: "1:20:10", artist: "Paolo Mojo", title: "1983 (Eric Prydz Remix)" },
+  { at: "1:22:20", artist: "Yazoo", title: "Situation (Eric Prydz Bootleg)" },
+  { at: "1:24:30", artist: "Eric Prydz", title: "Liberate" },
+  { at: "1:29:00", artist: "Eric Prydz", title: "Collider" },
+  { at: "1:34:00", artist: "Eric Prydz ft. Tom Cane", title: "Generate (EPIC Interlude Mix)" },
+  { at: "1:38:30", artist: "Pryda", title: "Project Prayer" },
+  { at: "1:43:00", artist: "Eric Prydz", title: "Opus" },
+  { at: "1:52:00", artist: "M83", title: "Midnight City (Eric Prydz Private Remix)" },
+];
+
+/**
  * Deborah De Luca @ Opera Stage, Street Parade Zürich, Switzerland 2025-08-09
  * Official YT: https://www.youtube.com/watch?v=7cK7rhYXbh8 (~55m)
  * https://www.1001tracklists.com/tracklist/qwxcs1k/deborah-de-luca-opera-stage-street-parade-zurich-switzerland-2025-08-09.html
@@ -4142,6 +4182,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-KVZlecHlVkg": TL_PUSH_TML_WE2_2026,
   "yt-BG3Lr9EdWVY": TL_BASSJACKERS_TML_WE2_2026,
   "yt-HWIratXF1Bo": TL_BHASKAR_TML_WE2_2026,
+  "yt-hU-z3iV0LOg": TL_ERIC_PRYDZ_ULTRA_MIAMI_2026,
   "yt-7cK7rhYXbh8": TL_DEBORAH_STREET_PARADE_2025,
   "yt-S5qAspu0AbI": TL_KEVIN_DE_VRIES_STREET_PARADE_2025,
   "yt-pLldXE5OyCM": TL_KOLSCH_STREET_PARADE_2025,
