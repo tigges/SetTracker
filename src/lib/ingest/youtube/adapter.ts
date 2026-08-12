@@ -53,6 +53,7 @@ import {
   type YtRelatedVideo,
   type YtWatchMeta,
 } from "./client";
+import { isRedundantRelive } from "../reliveWatch";
 import {
   playlistAsVenue,
   YOUTUBE_PLAYLISTS,
@@ -560,6 +561,24 @@ async function pollPlaylistVideos(
       await sleep(200);
       if (!hit || seen.has(hit.raw.sourceSlug)) continue;
       seen.add(hit.raw.sourceSlug);
+      const artistSlug = hit.raw.primaryArtist?.slug;
+      if (
+        artistSlug &&
+        isRedundantRelive(
+          hit.raw.title,
+          artistSlug,
+          out.flatMap((s) =>
+            s.primaryArtist?.slug
+              ? [{ title: s.title, artistSlug: s.primaryArtist.slug }]
+              : [],
+          ),
+        )
+      ) {
+        console.log(
+          `[youtube] skip redundant Relive ${id}: ${hit.raw.title}`,
+        );
+        continue;
+      }
       out.push(hit.raw);
       for (const rid of relatedSeedIds(hit.related, RELATED_PER_VIDEO)) {
         if (relatedQueue.length >= RELATED_GLOBAL_CAP) break;

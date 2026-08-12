@@ -8,11 +8,51 @@ import {
   buildHeldReliveWatch,
   buildNextCaptures,
 } from "../src/lib/ingest/nextCaptures";
+import { extractVideoId } from "../src/lib/ingest/youtube/client";
+import { YOUTUBE_SETS } from "../src/lib/ingest/youtube/videos";
+import { TRACKLIST_1001_BY_SOURCE_SLUG } from "../src/lib/ingest/tracklists1001/festival2026";
+import { slugify } from "../src/lib/ingest/types";
+import {
+  buildLiveReliveWatch,
+  reliveDedupeKey,
+} from "../src/lib/ingest/reliveWatch";
 
-function main() {
+async function main() {
   const cwd = process.cwd();
-  const presets = buildNextCaptures({ cwd, limit: 10 });
-  const held = buildHeldReliveWatch();
+  const curatedVideoIds = new Set<string>();
+  const existingKeys = new Set<string>();
+  for (const s of YOUTUBE_SETS) {
+    const id = extractVideoId(s.video);
+    if (id) curatedVideoIds.add(id);
+    const k = reliveDedupeKey(s.title || "", slugify(s.primaryArtist.name));
+    if (k) existingKeys.add(k);
+  }
+
+  let live;
+  try {
+    live = await buildLiveReliveWatch({
+      curatedVideoIds,
+      mappedSlugs: new Set(Object.keys(TRACKLIST_1001_BY_SOURCE_SLUG)),
+      existingKeys,
+    });
+  } catch (err) {
+    console.warn(
+      "[next-captures] Relive playlist fetch failed:",
+      err instanceof Error ? err.message : err,
+    );
+    live = null;
+  }
+
+  const presets = buildNextCaptures({
+    cwd,
+    limit: 10,
+    extra: live?.unwiredOfficial ?? [],
+  });
+  const held = live ?? {
+    ...buildHeldReliveWatch(),
+    playlists: [],
+    unwiredOfficial: [],
+  };
   const outDir = join(cwd, "data/crosscheck");
   mkdirSync(outDir, { recursive: true });
 

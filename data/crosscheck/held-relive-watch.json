@@ -1,5 +1,12 @@
 {
-  "generatedAt": "2026-08-12T01:45:32.677Z",
+  "generatedAt": "2026-08-12T16:18:33.019Z",
+  "playlists": [
+    {
+      "id": "PLeeZgE3_zp1w",
+      "seriesName": "Tomorrowland Relive",
+      "videos": 125
+    }
+  ],
   "held": [
     {
       "name": "Calvin Harris · TML WE2",
@@ -42,6 +49,78 @@
       "searchUrl": "https://www.google.com/search?q=holy%20priest%20tomorrowland%20weekend%201%202026%20relive%20youtube%20site%3A1001tracklists.com",
       "status": "waiting",
       "note": "Do not wire fan clips — wait for official Tomorrowland/artist Relive."
+    }
+  ],
+  "unwiredOfficial": [
+    {
+      "label": "Martin Garrix WE2 | Tomorrowland 2026",
+      "slug": "yt-BUsCIK_kh_A",
+      "name": "TL_MARTIN_GARRIX_TML_WE2",
+      "searchUrl": "https://www.google.com/search?q=Martin%20Garrix%20tomorrowland%202026%20site%3A1001tracklists.com",
+      "reason": "relive:official-unwired"
+    },
+    {
+      "label": "The Chainsmokers WE1 | Tomorrowland 2026",
+      "slug": "yt-1lqmFLr-SkA",
+      "name": "TL_THE_CHAINSMOKERS_TML_WE1",
+      "searchUrl": "https://www.google.com/search?q=The%20Chainsmokers%20tomorrowland%202026%20site%3A1001tracklists.com",
+      "reason": "relive:official-unwired"
+    },
+    {
+      "label": "Alesso | Tomorrowland 2026 (Freedom Stage Weekend 2) [Full DJ Live Set]",
+      "slug": "yt-fhiZ1Rj9o-A",
+      "name": "TL_ALESSO_TML_WE2",
+      "searchUrl": "https://www.google.com/search?q=Alesso%20tomorrowland%202026%20site%3A1001tracklists.com",
+      "reason": "relive:official-unwired"
+    },
+    {
+      "label": "Armin van Buuren WE2 | Tomorrowland 2026",
+      "slug": "yt-tg_QLGpes0k",
+      "name": "TL_ARMIN_VAN_BUUREN_TML_WE2",
+      "searchUrl": "https://www.google.com/search?q=Armin%20van%20Buuren%20tomorrowland%202026%20site%3A1001tracklists.com",
+      "reason": "relive:official-unwired"
+    },
+    {
+      "label": "Armin van Buuren WE1 | Tomorrowland 2026",
+      "slug": "yt-pwXGm4HEQdo",
+      "name": "TL_ARMIN_VAN_BUUREN_TML_WE1",
+      "searchUrl": "https://www.google.com/search?q=Armin%20van%20Buuren%20tomorrowland%202026%20site%3A1001tracklists.com",
+      "reason": "relive:official-unwired"
+    },
+    {
+      "label": "Alesso | Tomorrowland 2026 (Mainstage Weekend 1) [Full DJ Live Set]",
+      "slug": "yt-TidwOi0NMI0",
+      "name": "TL_ALESSO_TML_WE1",
+      "searchUrl": "https://www.google.com/search?q=Alesso%20tomorrowland%202026%20site%3A1001tracklists.com",
+      "reason": "relive:official-unwired"
+    },
+    {
+      "label": "ILLENIUM WE1 | Tomorrowland 2026",
+      "slug": "yt-E1WH0nvaxAw",
+      "name": "TL_ILLENIUM_TML_WE1",
+      "searchUrl": "https://www.google.com/search?q=Illenium%20tomorrowland%202026%20site%3A1001tracklists.com",
+      "reason": "relive:official-unwired"
+    },
+    {
+      "label": "Chase & Status (DJ set) WE2 | Tomorrowland 2026",
+      "slug": "yt-jSJEkiV3cCs",
+      "name": "TL_CHASE_STATUS_TML_WE2",
+      "searchUrl": "https://www.google.com/search?q=Chase%20%26%20Status%20tomorrowland%202026%20site%3A1001tracklists.com",
+      "reason": "relive:official-unwired"
+    },
+    {
+      "label": "Oliver Heldens WE1 | Tomorrowland 2026",
+      "slug": "yt-2i3XOxbp54U",
+      "name": "TL_OLIVER_HELDENS_TML_WE1",
+      "searchUrl": "https://www.google.com/search?q=Oliver%20Heldens%20tomorrowland%202026%20site%3A1001tracklists.com",
+      "reason": "relive:official-unwired"
+    },
+    {
+      "label": "Netsky WE1 | Tomorrowland 2026",
+      "slug": "yt-_e1H9pkcjsQ",
+      "name": "TL_NETSKY_TML_WE1",
+      "searchUrl": "https://www.google.com/search?q=Netsky%20tomorrowland%202026%20site%3A1001tracklists.com",
+      "reason": "relive:official-unwired"
     }
   ]
 }

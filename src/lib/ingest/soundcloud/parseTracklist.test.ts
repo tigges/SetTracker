@@ -163,4 +163,21 @@ assert.equal(coachella[2]!.artistName, "Skrillex, ISOxo");
 assert.equal(coachella[2]!.trackTitle, "fuze");
 assert.equal(coachella[3]!.trackTitle, "Born To Run");
 
+const peggyCercle = parseDescriptionTracklist(
+  `Peggy Gou for Cercle
+00:00 Ebi - San
+02:55 ID - ID
+05:33 Commix - Satellite Song (Underground Resistance Remix)
+08:20 Woody McBride - Darrin Houston
+JOIN THE CERCLE COMMUNITY`,
+  3600,
+  "youtube",
+);
+assert.ok(peggyCercle.length >= 3);
+assert.equal(peggyCercle[0]!.artistName, "Ebi");
+assert.equal(peggyCercle[0]!.trackTitle, "San");
+assert.equal(peggyCercle[0]!.timestamp, 0);
+assert.equal(peggyCercle[1]!.idStatus, "unresolved_id");
+assert.equal(peggyCercle[2]!.artistName, "Commix");
+
 console.log("parseTracklist.test.ts ok");

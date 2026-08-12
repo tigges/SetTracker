@@ -94,14 +94,14 @@ export const YOUTUBE_PLAYLISTS: YoutubePlaylistSource[] = [
       /\b(biscits|dj\s*set|live|set|stream|inflight|nocturnal|academy|space|defected|insomniac|mad\s*decent|exchange|kings?\s*hall|daytrip|in\s+the\s+loop|ready\s*2\s*dance)\b/i,
   },
   {
-    // Official Tomorrowland Belgium Relive full sets (YT playlist from Relive article)
+    // Official Tomorrowland Belgium Relive full sets (YT playlist from Relive article).
+    // 2026 dump is 125+ videos — keep the base cap above one HTML page (~100).
     playlist: "PLeeZgE3_zp1w",
     seriesName: "Tomorrowland Relive",
     eventSlug: "tomorrowland",
     genre: "House",
     accent: "#7b2cbf",
-    // Base poll; festivalDrops phase-boosts during Relive dump window.
-    limit: Number(process.env.TOMORROWLAND_YT_PL_LIMIT || PL_LIMIT),
+    limit: Number(process.env.TOMORROWLAND_YT_PL_LIMIT || 160),
     minDurationSec: 35 * 60,
     titleMatch:
       /\b(tomorrowland|live|set|mainstage|freedom|belgium|weekend)\b/i,
@@ -131,4 +131,9 @@ export function isPlaylistSetCandidate(
   pl: YoutubePlaylistSource,
 ): boolean {
   return isVenueSetCandidate(title, durationSec, playlistAsVenue(pl));
+}
+
+/** Festival Relive playlists (official dumps — not artist-owned mix lists). */
+export function officialRelivePlaylists(): YoutubePlaylistSource[] {
+  return YOUTUBE_PLAYLISTS.filter((p) => /relive/i.test(p.seriesName));
 }

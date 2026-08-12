@@ -28,6 +28,13 @@ export type YtRelatedVideo = {
   shelf?: string | null;
 };
 
+/** Playlist row from lockupViewModel (current YT playlist HTML). */
+export type YtPlaylistEntry = {
+  videoId: string;
+  title: string;
+  channel: string | null;
+};
+
 export type YtSimilarChannel = {
   handle: string;
   name: string;
@@ -144,6 +151,33 @@ function walkMusicCredits(obj: unknown, out: YtMusicCredit[]): void {
     }
   }
   for (const v of Object.values(o)) walkMusicCredits(v, out);
+}
+
+function lockupTitle(node: Record<string, unknown>): string | null {
+  const md = node.metadata as Record<string, unknown> | undefined;
+  const lmd = md?.lockupMetadataViewModel as Record<string, unknown> | undefined;
+  return (
+    textOf(lmd?.title) ||
+    textOf(node.title) ||
+    (typeof node.title === "string" ? node.title : null)
+  );
+}
+
+function lockupChannel(node: Record<string, unknown>): string | null {
+  const md = node.metadata as Record<string, unknown> | undefined;
+  const lmd = md?.lockupMetadataViewModel as Record<string, unknown> | undefined;
+  const avatar = lmd?.image as Record<string, unknown> | undefined;
+  const deco = avatar?.decoratedAvatarViewModel as Record<string, unknown> | undefined;
+  const a11y = typeof deco?.a11yLabel === "string" ? deco.a11yLabel : null;
+  const fromA11y = a11y?.match(/^Go to channel\s+(.+)$/i)?.[1]?.trim();
+  if (fromA11y) return fromA11y;
+  return (
+    textOf(node.shortBylineText) ||
+    textOf(node.longBylineText) ||
+    textOf(node.subtitle) ||
+    fromA11y ||
+    null
+  );
 }
 
 function videoIdFromNode(node: Record<string, unknown>): string | null {
@@ -275,15 +309,10 @@ export function collectRelatedVideos(
       const id = videoIdFromNode(node);
       if (!id) continue;
       const title =
-        textOf(node.title) ||
-        (typeof node.title === "string" ? node.title : null) ||
+        lockupTitle(node) ||
         textOf(node.metadata) ||
         null;
-      const channel =
-        textOf(node.shortBylineText) ||
-        textOf(node.longBylineText) ||
-        textOf(node.subtitle) ||
-        null;
+      const channel = lockupChannel(node);
       push(id, title, channel, nextShelf ?? shelfHint);
     }
 
@@ -291,6 +320,42 @@ export function collectRelatedVideos(
   };
 
   walk(root, shelfHint);
+  return out;
+}
+
+/**
+ * Playlist rows from current YouTube lockupViewModel cards (title lives under
+ * metadata.lockupMetadataViewModel.title.content, not renderer.title).
+ */
+export function collectLockupEntries(root: unknown): YtPlaylistEntry[] {
+  const out: YtPlaylistEntry[] = [];
+  const seen = new Set<string>();
+  const walk = (obj: unknown): void => {
+    if (!obj) return;
+    if (Array.isArray(obj)) {
+      for (const x of obj) walk(x);
+      return;
+    }
+    if (typeof obj !== "object") return;
+    const o = obj as Record<string, unknown>;
+    if (o.lockupViewModel && typeof o.lockupViewModel === "object") {
+      const node = o.lockupViewModel as Record<string, unknown>;
+      const id =
+        typeof node.contentId === "string" && /^[\w-]{11}$/.test(node.contentId)
+          ? node.contentId
+          : videoIdFromNode(node);
+      if (id && !seen.has(id)) {
+        seen.add(id);
+        out.push({
+          videoId: id,
+          title: (lockupTitle(node) || "").trim(),
+          channel: lockupChannel(node),
+        });
+      }
+    }
+    for (const v of Object.values(o)) walk(v);
+  };
+  walk(root);
   return out;
 }
 
@@ -695,7 +760,7 @@ async function fetchChannelTabHtml(url: string): Promise<string> {
 async function browseContinuation(
   apiKey: string,
   continuation: string,
-): Promise<{ ids: string[]; next: string | null }> {
+): Promise<{ ids: string[]; next: string | null; json: unknown | null }> {
   const res = await fetch(
     `https://www.youtube.com/youtubei/v1/browse?prettyPrint=false&key=${apiKey}`,
     {
@@ -719,12 +784,26 @@ async function browseContinuation(
       signal: AbortSignal.timeout(25_000),
     },
   );
-  if (!res.ok) return { ids: [], next: null };
+  if (!res.ok) return { ids: [], next: null, json: null };
   const text = await res.text();
-  const ids = [...text.matchAll(/"videoId":"([\w-]{11})"/g)].map((m) => m[1]);
+  let json: unknown | null = null;
+  try {
+    json = JSON.parse(text) as unknown;
+  } catch {
+    json = null;
+  }
+  const fromLockup = json ? collectLockupEntries(json) : [];
+  const fromRegex = [...text.matchAll(/"videoId":"([\w-]{11})"/g)].map(
+    (m) => m[1]!,
+  );
+  const ids = uniqueIds(
+    [...fromLockup.map((e) => e.videoId), ...fromRegex],
+    fromLockup.length + fromRegex.length,
+    new Set(),
+  );
   const next =
     text.match(/"continuationCommand":\{"token":"([^"]+)"/)?.[1] ?? null;
-  return { ids, next };
+  return { ids, next, json };
 }
 
 /**
@@ -745,18 +824,81 @@ export async function fetchChannelVideoIds(
 /**
  * Video IDs from a public playlist (no API key).
  * Accepts a full playlist URL or bare `PL…` / `UU…` list id.
+ * Paginates Innertube continuations so Relive dumps (100+ videos) are complete.
  */
 export async function fetchPlaylistVideoIds(
   playlistIdOrUrl: string,
   limit = 40,
 ): Promise<string[]> {
+  return (await fetchPlaylistEntries(playlistIdOrUrl, limit)).map(
+    (e) => e.videoId,
+  );
+}
+
+/**
+ * Playlist rows with titles (lockupViewModel). Same pagination as
+ * {@link fetchPlaylistVideoIds}.
+ */
+export async function fetchPlaylistEntries(
+  playlistIdOrUrl: string,
+  limit = 40,
+): Promise<YtPlaylistEntry[]> {
   const raw = playlistIdOrUrl.trim();
   const id = raw.match(/[?&]list=([A-Za-z0-9_-]+)/)?.[1] || raw;
   if (!id || id.length < 10) return [];
   const url = `https://www.youtube.com/playlist?list=${encodeURIComponent(id)}`;
   const html = await fetchChannelTabHtml(url);
-  const ids = [...html.matchAll(/"videoId":"([\w-]{11})"/g)].map((m) => m[1]!);
-  return uniqueIds(ids, limit, new Set());
+  const initial = extractJsonAssign(html, "ytInitialData");
+  const seen = new Set<string>();
+  const out: YtPlaylistEntry[] = [];
+  const take = (entries: YtPlaylistEntry[]) => {
+    for (const e of entries) {
+      if (seen.has(e.videoId)) continue;
+      seen.add(e.videoId);
+      out.push(e);
+      if (out.length >= limit) return;
+    }
+  };
+  if (initial) take(collectLockupEntries(initial));
+  if (out.length === 0) {
+    const ids = [...html.matchAll(/"videoId":"([\w-]{11})"/g)].map((m) => m[1]!);
+    take(uniqueIds(ids, limit, new Set()).map((videoId) => ({
+      videoId,
+      title: "",
+      channel: null,
+    })));
+  }
+  const apiKey = html.match(/"INNERTUBE_API_KEY":"([^"]+)"/)?.[1] ?? null;
+  let continuation =
+    html.match(/"continuationCommand":\{"token":"([^"]+)"/)?.[1] ?? null;
+  let pages = 0;
+  const maxPages = Number(process.env.YOUTUBE_PLAYLIST_CONTINUATION_PAGES || 8);
+  while (apiKey && continuation && out.length < limit && pages < maxPages) {
+    pages += 1;
+    try {
+      const page = await browseContinuation(apiKey, continuation);
+      await sleep(150);
+      const fromLockup = page.json ? collectLockupEntries(page.json) : [];
+      const pageEntries =
+        fromLockup.length > 0
+          ? fromLockup
+          : page.ids.map((videoId) => ({
+              videoId,
+              title: "",
+              channel: null as string | null,
+            }));
+      if (pageEntries.length === 0) break;
+      take(pageEntries);
+      continuation = page.next;
+    } catch (err) {
+      console.warn(
+        `[youtube] playlist continuation failed:`,
+        err instanceof Error ? err.message : err,
+      );
+      break;
+    }
+  }
+  return out.slice(0, limit);
 }
 
 /**

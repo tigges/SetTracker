@@ -116,6 +116,10 @@ assert.ok(
     "sc-charlottedewittemusic-charlotte-de-witte-at"
   ]!.length >= 8,
 );
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-uMgz40hvySQ"],
+  TL_CHARLOTTE_DE_WITTE_TML_WE1_2026,
+);
 
 assertSeedClocks(TL_WESTEND_EDC_LV_2026);
 const westend = tracklist1001RowsToPlays(TL_WESTEND_EDC_LV_2026);

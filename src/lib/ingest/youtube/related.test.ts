@@ -1,6 +1,10 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { collectRelatedVideos, collectSimilarChannels } from "./client";
+import {
+  collectRelatedVideos,
+  collectSimilarChannels,
+  collectLockupEntries,
+} from "./client";
 
 describe("collectRelatedVideos", () => {
   it("pulls compact + end-screen video ids and shelf labels", () => {
@@ -51,6 +55,35 @@ describe("collectRelatedVideos", () => {
     assert.ok(related.some((r) => r.videoId === "CCCCCCCCCCC"));
   });
 
+  it("reads lockupViewModel playlist titles", () => {
+    const root = {
+      contents: {
+        lockupViewModel: {
+          contentId: "BUsCIK_kh_A",
+          contentType: "LOCKUP_CONTENT_TYPE_VIDEO",
+          metadata: {
+            lockupMetadataViewModel: {
+              title: { content: "Martin Garrix WE2 | Tomorrowland 2026" },
+              image: {
+                decoratedAvatarViewModel: {
+                  a11yLabel: "Go to channel Tomorrowland",
+                },
+              },
+            },
+          },
+        },
+      },
+    };
+    const related = collectRelatedVideos(root);
+    assert.equal(related.length, 1);
+    assert.equal(related[0]!.videoId, "BUsCIK_kh_A");
+    assert.equal(related[0]!.title, "Martin Garrix WE2 | Tomorrowland 2026");
+    assert.equal(related[0]!.channel, "Tomorrowland");
+    const lockups = collectLockupEntries(root);
+    assert.equal(lockups.length, 1);
+    assert.equal(lockups[0]!.title, "Martin Garrix WE2 | Tomorrowland 2026");
+  });
+
   it("captures spotlight shelf videos", () => {
     const root = {
       shelf: {
@@ -65,8 +98,8 @@ describe("collectRelatedVideos", () => {
     };
     const related = collectRelatedVideos(root);
     assert.equal(related.length, 1);
-    assert.equal(related[0].videoId, "SPOTLIGHT01");
-    assert.match(related[0].shelf || "", /spotlight/i);
+    assert.equal(related[0]!.videoId, "SPOTLIGHT01");
+    assert.match(related[0]!.shelf || "", /spotlight/i);
   });
 });
 

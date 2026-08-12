@@ -106,6 +106,10 @@ const TOP_100: [name: string, genre: string][] = [
   ["NGHTMRE", "Trap"],
 ];
 
+export function top100DjNames(): string[] {
+  return TOP_100.map(([name]) => name);
+}
+
 const TITLE_POOL = [
   "Momentum", "Vertex", "Afterglow", "Lowend", "Pyramid", "Overload",
   "Nightfall", "Cascade", "Voltage", "Sacrifice", "Mirage", "Tremor",

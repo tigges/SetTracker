@@ -19,6 +19,7 @@ import {
   TL_ARMIN_VAN_BUUREN_YT_HOUSE_TML_2026,
   TL_AYYBO_ODD_MOB_TML_WE2_2026,
   TL_BLEU_CLAIR_EDC_LV_2023,
+  TL_CHARLOTTE_DE_WITTE_TML_WE1_2026,
   TL_CLOONEE_PROSPA_DESTINO_2026,
   TL_DARUDE_EDC_LV_2026,
   TL_MARTEN_HORGER_EDC_LV_2023,
@@ -621,6 +622,21 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_FISHER_TML_WE1_2026,
   },
   {
+    // Official Tomorrowland Relive — Mainstage WE1. Same 1001 seed as the
+    // SoundCloud upload (sc-charlottedewittemusic-charlotte-de-witte-at).
+    video: "https://www.youtube.com/watch?v=uMgz40hvySQ",
+    primaryArtist: dj("Charlotte de Witte", {
+      accent: "#e0e0e0",
+      homeCity: "Belgium",
+    }),
+    genre: "Techno",
+    type: "festival",
+    title: "Charlotte de Witte WE1 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001: TL_CHARLOTTE_DE_WITTE_TML_WE1_2026,
+  },
+  {
     // Tomorrowland official — Freedom Stage WE2; 17/17 timed cues from 1001.
     // Official full-set upload (prior id mVB-gqggrCQ replaced 2026-08-12).
     video: "https://www.youtube.com/watch?v=Uq1WP8v3U4o",
@@ -1099,7 +1115,8 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     eventName: "Dekmantel Festival",
   },
   {
-    // Official Cercle (2018) — archive set; prefer capturing EDC LV 2026 first.
+    // Official Cercle (2018) — timed tracklist in the description (provenance
+    // youtube). 1001 seed still pending; capture after EDC 2026.
     video: "https://www.youtube.com/watch?v=-UOMvxh4MYU",
     primaryArtist: dj("Peggy Gou", { accent: "#e63946" }),
     genre: "House",
@@ -1122,7 +1139,8 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     eventName: "Coachella",
   },
   {
-    // Official Relive — Circuit Grounds; 1001 URL known, seed pending capture.
+    // Circuit Grounds 2026 — current YT is a third-party upload (Joseph Montano),
+    // not Insomniac Relive. 1001 URL known; seed pending console capture.
     video: "https://www.youtube.com/watch?v=CMhFNEo0glw",
     primaryArtist: dj("Peggy Gou", { accent: "#e63946" }),
     genre: "House",
