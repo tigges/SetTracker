@@ -146,7 +146,11 @@ async function main() {
   let fsLine = "file-scan: not configured (set ACRCLOUD_FS_TOKEN + ACRCLOUD_FS_CONTAINER_ID)";
   const fsCfg = fileScanConfig();
   if (fsCfg) {
-    const fsUrl = "https://www.youtube.com/watch?v=g4vR2VlhNtk"; // Ingrosso TML WE2
+    // Short known track (~3.5m) so the server-side scan completes fast and
+    // gives a definitive pipeline answer; long festival sets take much longer.
+    const fsUrl =
+      process.env.ACRCLOUD_FS_TEST_URL ||
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
     console.log("\n=== C) File Scanning (server-side) ===");
     // Always list the containers this token can see, so a wrong id/region is
     // obvious ("Invalid Container").
@@ -171,8 +175,8 @@ async function main() {
     console.log(`scanning ${fsUrl} (container ${fsCfg.containerId}) …`);
     try {
       const scanHits = await scanYoutube(fsCfg, fsUrl, {
-        timeoutMs: Number(process.env.ACRCLOUD_FS_TIMEOUT_MS || 1_200_000),
-        pollMs: Number(process.env.ACRCLOUD_FS_POLL_MS || 20_000),
+        timeoutMs: Number(process.env.ACRCLOUD_FS_TIMEOUT_MS || 480_000),
+        pollMs: Number(process.env.ACRCLOUD_FS_POLL_MS || 15_000),
       });
       if (scanHits == null) {
         fsLine = "file-scan: submit/poll FAILED (token/container/region?)";

@@ -204,7 +204,54 @@ export function parseScanHits(file: FsFile, minScore: number): ScanHit[] {
   return out;
 }
 
-/** Submit + poll a YouTube URL until ready; return parsed hits (or null). */
+/** List container files (one page) with results. */
+async function listContainerFiles(
+  cfg: FileScanConfig,
+  page: number,
+): Promise<FsFile[] | null> {
+  const res = await fetch(
+    `${cfg.base}/api/fs-containers/${cfg.containerId}/files?with_result=1&page=${page}&per_page=50`,
+    {
+      headers: {
+        Authorization: `Bearer ${cfg.token}`,
+        Accept: "application/json",
+      },
+      signal: AbortSignal.timeout(30_000),
+    },
+  ).catch(() => null);
+  if (!res) return null;
+  if (!res.ok) {
+    console.warn(`[acr-fs] list HTTP ${res.status}`);
+    return null;
+  }
+  try {
+    const json = (await res.json()) as { data?: FsFile[] };
+    return json.data ?? [];
+  } catch {
+    return null;
+  }
+}
+
+/** Find a file in the container by its id (across pages). */
+async function findFileById(
+  cfg: FileScanConfig,
+  fileId: string,
+): Promise<FsFile | null> {
+  for (let page = 1; page <= 10; page++) {
+    const files = await listContainerFiles(cfg, page);
+    if (!files) return null;
+    const match = files.find((f) => String((f as { id?: unknown }).id) === fileId);
+    if (match) return match;
+    if (files.length < 50) break;
+  }
+  return null;
+}
+
+/**
+ * Submit + poll a YouTube URL until ready; return parsed hits (or null).
+ * Polls the documented LIST endpoint (single-file GET shape is unreliable) and
+ * logs observed state so stalls are visible.
+ */
 export async function scanYoutube(
   cfg: FileScanConfig,
   url: string,
@@ -214,12 +261,21 @@ export async function scanYoutube(
   const timeoutMs = opts.timeoutMs ?? numEnv("ACRCLOUD_FS_TIMEOUT_MS", 600_000);
   const fileId = await submitPlatformScan(cfg, url);
   if (!fileId) return null;
+  console.log(`[acr-fs] submitted file ${fileId} for ${url}`);
   const deadline = Date.now() + timeoutMs;
+  let lastState: number | null = null;
   while (Date.now() < deadline) {
     await new Promise((r) => setTimeout(r, pollMs));
-    const file = await getScanFile(cfg, fileId);
-    if (!file) continue;
+    const file = await findFileById(cfg, fileId);
+    if (!file) {
+      console.log(`[acr-fs] file ${fileId} not yet listed …`);
+      continue;
+    }
     const state = Number(file.state);
+    if (state !== lastState) {
+      console.log(`[acr-fs] file ${fileId} state=${state}`);
+      lastState = state;
+    }
     if (state === 1) return parseScanHits(file, cfg.minScore);
     if (state === -1) return []; // ready, no matches
     if (state === -2 || state === -3) {
