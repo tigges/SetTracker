@@ -145,7 +145,7 @@ the same way. Writes `Played` rows with `provenance: fingerprint` into
 | `ACRCLOUD_ACCESS_KEY` / `ACRCLOUD_ACCESS_SECRET` | Project credentials |
 | `ACRCLOUD_SET_LIMIT` | Max sets per run (default 5) |
 | `ACRCLOUD_SAMPLE_SEC` / `ACRCLOUD_STEP_SEC` | Clip length / spacing (12 / 90) |
-| `ACRCLOUD_MIN_SCORE` | Accept identified hits ≥ score (default 70) |
+| `ACRCLOUD_MIN_SCORE` | Accept identified hits ≥ score (default 55; YT clips score lower) |
 | `ACRCLOUD_ALLOW_YOUTUBE=1` | Allow all YT sets (default off) |
 | `ACRCLOUD_ALLOW_YOUTUBE_PRIORITY=1` | YT for Top20 / festival sparse (default on) |
 | `ACRCLOUD_YT_DLP=0` | Disable yt-dlp YouTube sampling |

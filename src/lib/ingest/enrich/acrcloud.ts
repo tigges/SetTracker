@@ -26,7 +26,10 @@
  *   ACRCLOUD_SET_LIMIT      max sets per enrich run (default 5)
  *   ACRCLOUD_SAMPLE_SEC     clip length per probe (default 12)
  *   ACRCLOUD_STEP_SEC       spacing between probes (default 90)
- *   ACRCLOUD_MIN_SCORE      accept identified hits ≥ this (default 70)
+ *   ACRCLOUD_MIN_SCORE      accept identified hits ≥ this (default 55).
+ *     yt-dlp-sourced YouTube clips score lower than studio audio — a clean
+ *     control track (Never Gonna Give You Up) only scored ~64 from a 12s YT
+ *     clip, so 70 silently rejected real hits. 55 is the balanced floor.
  *   ACRCLOUD_MIN_IDENTIFIED skip sets with ≥ N strong IDs (default 4)
  *   ACRCLOUD_ALLOW_YOUTUBE=1  allow all YT playback (default off)
  *   ACRCLOUD_ALLOW_YOUTUBE_PRIORITY=0  disable YT for Top 20 / festival
@@ -474,6 +477,12 @@ export async function sampleClipFromYoutube(
   const outTpl = join(dir, "clip.%(ext)s");
   const section = ytDlpSectionRange(offsetSec, sampleSec);
   const cookiePath = (process.env.ACRCLOUD_YTDLP_COOKIES || "").trim();
+  // YouTube bot-walls burst requests ("Sign in to confirm you're not a bot")
+  // even with cookies. Rotate to clients that still serve formats, add retries
+  // + request pacing so successive probes in a set don't get throttled.
+  const playerClients = (
+    process.env.ACRCLOUD_YT_PLAYER_CLIENTS || "web_safari,web,tv"
+  ).trim();
   const args = [
     "--no-playlist",
     "--no-warnings",
@@ -482,6 +491,16 @@ export async function sampleClipFromYoutube(
     "--download-sections",
     section,
     "--force-keyframes-at-cuts",
+    "--extractor-args",
+    `youtube:player_client=${playerClients}`,
+    "--retries",
+    "5",
+    "--fragment-retries",
+    "5",
+    "--extractor-retries",
+    "3",
+    "--sleep-requests",
+    process.env.ACRCLOUD_YT_SLEEP_REQUESTS || "1.5",
     "-x",
     "--audio-format",
     "mp3",
@@ -1327,7 +1346,7 @@ export async function enrichSparseSetsWithAcrCloud(
 
   const sampleSec = opts.sampleSec ?? numEnv("ACRCLOUD_SAMPLE_SEC", 12);
   const stepSec = opts.stepSec ?? numEnv("ACRCLOUD_STEP_SEC", 90);
-  const minScore = opts.minScore ?? numEnv("ACRCLOUD_MIN_SCORE", 70);
+  const minScore = opts.minScore ?? numEnv("ACRCLOUD_MIN_SCORE", 55);
   const dryRun = opts.dryRun ?? boolEnv("ACRCLOUD_DRY_RUN");
   const allowYoutube = opts.allowYoutube ?? boolEnv("ACRCLOUD_ALLOW_YOUTUBE");
   const maxProbesPerSet =

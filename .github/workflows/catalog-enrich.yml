@@ -164,7 +164,9 @@ jobs:
           ACRCLOUD_SAMPLE_SEC: "12"
           ACRCLOUD_STEP_SEC: "60"
           ACRCLOUD_MAX_PROBES_PER_SET: ${{ steps.mode.outputs.max_probes }}
-          ACRCLOUD_MIN_SCORE: "70"
+          # yt-dlp-sourced YT clips score lower than studio audio (a clean
+          # control only hit ~64) — 70 rejected real hits; 55 is the floor.
+          ACRCLOUD_MIN_SCORE: "55"
           ACRCLOUD_MIN_IDENTIFIED: "4"
           # Prefer SC/hearthis streams; YT via yt-dlp for Top100 / festival priority.
           ACRCLOUD_ALLOW_YOUTUBE: "0"
