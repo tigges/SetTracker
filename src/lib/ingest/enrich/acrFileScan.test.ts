@@ -82,4 +82,88 @@ assert.equal(hits[1]!.offsetSec, 30);
 assert.equal(hits[1]!.hit.artist, "Incubus");
 assert.equal(hits[1]!.hit.isrc, "USSM10312757");
 
+// omitted score (File Scanning docs: score is optional) still counts
+const noScore = parseScanHits(
+  {
+    results: {
+      music: [
+        {
+          offset: 0,
+          result: {
+            title: "Never Gonna Give You Up",
+            artists: [{ name: "Rick Astley" }],
+          },
+        },
+      ],
+    },
+  },
+  55,
+);
+assert.equal(noScore.length, 1);
+assert.equal(noScore[0]!.hit.score, 100);
+assert.equal(noScore[0]!.hit.artist, "Rick Astley");
+
+// string score + artists string
+const stringy = parseScanHits(
+  {
+    results: {
+      music: [
+        {
+          offset: 12,
+          result: {
+            title: "Hello",
+            artists: "Adele",
+            score: "92",
+          },
+        },
+      ],
+    },
+  },
+  55,
+);
+assert.equal(stringy.length, 1);
+assert.equal(stringy[0]!.hit.score, 92);
+assert.equal(stringy[0]!.hit.artist, "Adele");
+
+// result as JSON string
+const asJson = parseScanHits(
+  {
+    results: {
+      music: [
+        {
+          offset: 0,
+          result: JSON.stringify({
+            title: "Millones",
+            score: 100,
+            artists: [{ name: "Camilo" }],
+          }),
+        },
+      ],
+    },
+  },
+  55,
+);
+assert.equal(asJson.length, 1);
+assert.equal(asJson[0]!.hit.title, "Millones");
+
+// flattened row (title on the music item, no nested result)
+const flat = parseScanHits(
+  {
+    results: {
+      music: [
+        {
+          offset: 5,
+          title: "Efecto",
+          artists: [{ name: "Bad Bunny" }],
+          score: 88,
+        },
+      ],
+    },
+  },
+  55,
+);
+assert.equal(flat.length, 1);
+assert.equal(flat[0]!.offsetSec, 5);
+assert.equal(flat[0]!.hit.artist, "Bad Bunny");
+
 console.log("acrFileScan.test.ts ok");

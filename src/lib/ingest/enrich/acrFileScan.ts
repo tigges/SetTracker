@@ -79,14 +79,42 @@ export function youtubeWatchUrl(playbackUrlOrSlug: string): string | null {
   return `https://www.youtube.com/watch?v=${id}`;
 }
 
+type FsMusicRow = {
+  offset?: number;
+  result?: unknown;
+  title?: string;
+  score?: number | string;
+  artists?: unknown;
+  artist?: string;
+};
+
 type FsFile = {
   id?: string | number;
   state?: number;
   duration?: number;
   results?: {
-    music?: Array<{ offset?: number; result?: unknown }>;
+    music?: FsMusicRow[];
   };
 };
+
+/** Unwrap File Scanning `music[]` rows: nested `result`, JSON string, or flat hit. */
+export function fileScanMusicPayload(row: FsMusicRow): unknown {
+  const raw = row?.result;
+  if (raw == null) return row;
+  if (typeof raw === "string") {
+    try {
+      return JSON.parse(raw);
+    } catch {
+      return raw;
+    }
+  }
+  if (Array.isArray(raw)) return raw[0];
+  if (raw && typeof raw === "object" && "music" in raw) {
+    const nested = (raw as { music?: unknown }).music;
+    if (Array.isArray(nested)) return nested[0];
+  }
+  return raw;
+}
 
 /**
  * List File Scanning containers visible to a token across all regions.
@@ -203,9 +231,16 @@ export function parseScanHits(file: FsFile, minScore: number): ScanHit[] {
   const music = file.results?.music ?? [];
   const out: ScanHit[] = [];
   for (const m of music) {
-    const hit = mapAcrMusicHit(m.result);
-    if (!hit || hit.score < minScore) continue;
-    out.push({ offsetSec: Math.max(0, Math.floor(Number(m.offset) || 0)), hit });
+    const hit = mapAcrMusicHit(fileScanMusicPayload(m));
+    if (!hit) continue;
+    // File Scanning docs: score is optional (title + artists are required).
+    // ACR already accepted the match — don't drop a real hit with score omitted.
+    const score = hit.score > 0 ? hit.score : 100;
+    if (score < minScore) continue;
+    out.push({
+      offsetSec: Math.max(0, Math.floor(Number(m.offset) || 0)),
+      hit: { ...hit, score },
+    });
   }
   out.sort((a, b) => a.offsetSec - b.offsetSec);
   return out;
@@ -289,6 +324,7 @@ export async function scanYoutube(
       console.log(
         `[acr-fs] ready: results keys=[${keys.join(",")}] music=${musicLen}`,
       );
+      const hits = parseScanHits(file, cfg.minScore);
       if (musicLen === 0) {
         // Help diagnose empty results (e.g. container missing the Music DB).
         try {
@@ -296,8 +332,15 @@ export async function scanYoutube(
             `[acr-fs] raw results: ${JSON.stringify(file.results).slice(0, 400)}`,
           );
         } catch {}
+      } else if (hits.length === 0) {
+        try {
+          const first = file.results?.music?.[0];
+          console.log(
+            `[acr-fs] dropped ${musicLen} music row(s) (minScore ${cfg.minScore}): ${JSON.stringify(first).slice(0, 600)}`,
+          );
+        } catch {}
       }
-      return parseScanHits(file, cfg.minScore);
+      return hits;
     }
     if (state === -1) return []; // ready, no matches
     if (state === -2 || state === -3) {

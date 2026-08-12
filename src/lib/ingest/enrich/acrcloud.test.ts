@@ -38,6 +38,22 @@ assert.equal(hit!.isrc, "GBXXXX000000");
 assert.equal(mapAcrMusicHit({ title: "x" }), null);
 assert.equal(mapAcrMusicHit(null), null);
 
+const stringScore = mapAcrMusicHit({
+  title: "Hello",
+  score: "73",
+  artists: [{ name: "Adele" }],
+});
+assert.ok(stringScore);
+assert.equal(stringScore!.score, 73);
+
+const stringArtists = mapAcrMusicHit({
+  title: "Hello",
+  score: 90,
+  artists: "Adele",
+});
+assert.ok(stringArtists);
+assert.equal(stringArtists!.artist, "Adele");
+
 // junk artist rejected
 assert.equal(
   mapAcrMusicHit({ title: "Track", artists: [{ name: "Click here" }], score: 99 }),

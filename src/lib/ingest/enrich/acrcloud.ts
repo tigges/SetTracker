@@ -317,31 +317,50 @@ export function acrSignature(
   return createHmac("sha1", accessSecret).update(stringToSign).digest("base64");
 }
 
+function artistFromAcrFields(m: {
+  artist?: unknown;
+  artists?: unknown;
+}): string {
+  if (typeof m.artists === "string") return m.artists.trim();
+  if (Array.isArray(m.artists)) {
+    return m.artists
+      .map((a) =>
+        a && typeof a === "object" && "name" in a
+          ? String((a as { name?: unknown }).name ?? "").trim()
+          : typeof a === "string"
+            ? a.trim()
+            : "",
+      )
+      .filter(Boolean)
+      .join(", ");
+  }
+  if (typeof m.artist === "string") return m.artist.trim();
+  return "";
+}
+
 /** Map ACRCloud music hit → normalized fields. */
 export function mapAcrMusicHit(raw: unknown): AcrHit | null {
   if (!raw || typeof raw !== "object") return null;
   const m = raw as {
     title?: string;
-    score?: number;
+    score?: number | string;
     label?: string;
-    artists?: Array<{ name?: string }>;
+    artist?: string;
+    artists?: Array<{ name?: string }> | string;
     external_ids?: { isrc?: string };
   };
   const title = m.title?.trim();
-  const artist =
-    m.artists
-      ?.map((a) => a.name?.trim())
-      .filter(Boolean)
-      .join(", ") || "";
+  const artist = artistFromAcrFields(m);
   if (!title || !artist) return null;
   const cleaned = sanitizeArtistName(artist);
   if (!cleaned) return null;
+  const scoreNum = Number(m.score);
   return {
     artist: cleaned,
     title,
     label: m.label?.trim() || undefined,
     isrc: m.external_ids?.isrc?.trim() || undefined,
-    score: typeof m.score === "number" ? m.score : 0,
+    score: Number.isFinite(scoreNum) ? scoreNum : 0,
   };
 }
 
