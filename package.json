@@ -1,6 +1,6 @@
 {
   "name": "setradar",
-  "version": "0.2.106",
+  "version": "0.2.107",
   "private": true,
   "prisma": {
     "seed": "tsx prisma/seed.ts"
@@ -23,6 +23,7 @@
     "scan-urls": "tsx prisma/scan-urls.ts",
     "thumbs": "tsx prisma/thumbs.ts",
     "enrich:fingerprint": "tsx prisma/enrich-fingerprint.ts",
+    "enrich:filescan": "tsx prisma/enrich-file-scan.ts",
     "graduate-roster": "tsx prisma/graduate-roster.ts",
     "normalize-genres": "tsx prisma/normalize-genres.ts",
     "crosscheck:beatportal-house-2025": "tsx scripts/crosscheck-beatportal-house-2025.ts",
