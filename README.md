@@ -116,11 +116,18 @@ is in `.env` (`DATABASE_URL="file:./dev.db"`).
 
 ## Deploy (GitHub Pages)
 
-The app publishes as a fully static site. `.github/workflows/deploy-pages.yml`:
+The app publishes as a fully static site. **`deploy-pages.yml` is the single
+deployer** — the only workflow that builds + publishes Pages. Producers save the
+catalog DB cache and dispatch it:
 
-- **push to `main`** — fast path (no crawl): restore cached catalog DB → export → deploy
-- **6h cron / manual `deep`** — crawl + thumbs, save DB cache, then deploy
-- **weekly `catalog-enrich`** — full thumbs + MusicBrainz + ACRCloud fingerprint gap-fill
+- **push to `main`** — fast path (no crawl): restore cached catalog DB → light curated ingest → export → deploy
+- **6h cron / manual `deep`** (`catalog-deep.yml`) — crawl → save DB cache → dispatch deploy
+- **`catalog-enrich.yml`** — thumbs/MB + ACRCloud gap-fill → save DB cache → dispatch deploy
+
+**Enrich modes** (`catalog-enrich.yml`): `full` (weekly cron; thumbs + MusicBrainz
++ deep ACR 40×20), `acr` (priority ACR only, no thumbs, 15×12; also the
+`data/enrich-request` push default), `smoke` (tiny ACR check 4×5 — verify
+creds/cookies). Each mode runs in its own concurrency lane.
 
 ### ACRCloud fingerprint enrich
 
