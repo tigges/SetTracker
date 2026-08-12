@@ -1,0 +1,75 @@
+name: ACRCloud diagnose
+
+# End-to-end ACR Identify check (independent of the sparse-set queue):
+#   A) known-track control via yt-dlp → ffmpeg → Identify (proves the pipeline)
+#   B) real Relive probes at known commercial-track offsets (live-set hit-rate)
+# Trigger: manual, or bump data/acr-diagnose-request on main.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "data/acr-diagnose-request"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: catalog-acr-diagnose
+  cancel-in-progress: true
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Install ffmpeg + yt-dlp
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+          python3 -m pip install -q -U yt-dlp
+
+      - name: Check ACRCloud secrets
+        id: acr
+        env:
+          ACRCLOUD_HOST: ${{ secrets.ACRCLOUD_HOST }}
+          ACRCLOUD_ACCESS_KEY: ${{ secrets.ACRCLOUD_ACCESS_KEY }}
+          ACRCLOUD_ACCESS_SECRET: ${{ secrets.ACRCLOUD_ACCESS_SECRET }}
+        run: |
+          HOST=$(printf '%s' "$ACRCLOUD_HOST" | tr -d '\r' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
+          KEY=$(printf '%s' "$ACRCLOUD_ACCESS_KEY" | tr -d '\r' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
+          SECRET=$(printf '%s' "$ACRCLOUD_ACCESS_SECRET" | tr -d '\r' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
+          echo "host_len=${#HOST} key_len=${#KEY} secret_len=${#SECRET}"
+          if [ -z "$HOST" ] || [ -z "$KEY" ] || [ -z "$SECRET" ]; then
+            echo "::error::ACRCloud secrets missing"
+            exit 1
+          fi
+          {
+            echo "ACRCLOUD_HOST=$HOST"
+            echo "ACRCLOUD_ACCESS_KEY=$KEY"
+            echo "ACRCLOUD_ACCESS_SECRET=$SECRET"
+          } >> "$GITHUB_ENV"
+
+      - name: Optional YouTube cookies for yt-dlp
+        env:
+          YT_COOKIES: ${{ secrets.ACRCLOUD_YTDLP_COOKIES }}
+        run: |
+          if [ -n "$YT_COOKIES" ]; then
+            printf '%s\n' "$YT_COOKIES" > "$RUNNER_TEMP/yt-cookies.txt"
+            echo "ACRCLOUD_YTDLP_COOKIES=$RUNNER_TEMP/yt-cookies.txt" >> "$GITHUB_ENV"
+            echo "YouTube cookies present for yt-dlp."
+          else
+            echo "::warning::No ACRCLOUD_YTDLP_COOKIES secret — YouTube sampling will likely hit bot walls."
+          fi
+
+      - name: Run ACR diagnostic
+        env:
+          ACRCLOUD_ENABLED: "1"
+        run: npx tsx scripts/acr-diagnose.ts
