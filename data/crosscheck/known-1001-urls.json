@@ -1,6 +1,6 @@
 {
-  "note": "Operator-collected 1001Tracklists URLs for next-capture queue. Fill tracklistUrl on PRIORITY_CAPTURES + rebuild next-captures when wiring.",
-  "updatedAt": "2026-08-12T04:56:00.000Z",
+  "note": "Operator-collected 1001Tracklists URLs for next-capture queue. Seeds still pending desktop console capture.",
+  "updatedAt": "2026-08-12T05:04:00.000Z",
   "urls": [
     {
       "label": "PAN-POT · Street Parade",
@@ -29,6 +29,64 @@
       "name": "TL_PEGGY_GOU_EDC_LV_2026",
       "tracklistUrl": "https://www.1001tracklists.com/tracklist/yf1fdtk/peggy-gou-kislashki-circuitgrounds-edc-las-vegas-united-states-2026-05-16.html",
       "youtubeUrl": "https://youtu.be/CMhFNEo0glw"
+    },
+    {
+      "label": "Zamna Soundsystem · Street Parade",
+      "slug": "yt-1Mp9Pl6YgDM",
+      "name": "TL_ZAMNA_STREET_PARADE_2025",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/122kgd91/zamna-soundsystem-center-stage-street-parade-zurich-switzerland-2025-08-09.html",
+      "youtubeUrl": "https://www.youtube.com/watch?v=1Mp9Pl6YgDM"
+    },
+    {
+      "label": "Plastik Funk · Nature One",
+      "slug": "yt-dEX8Y8Mzkok",
+      "name": "TL_PLASTIK_FUNK_NATURE_ONE_2025",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/1v75qbbt/plastik-funk-open-air-floor-nature-one-germany-2025-08-01.html",
+      "youtubeUrl": "https://www.youtube.com/watch?v=dEX8Y8Mzkok"
+    },
+    {
+      "label": "Mike Williams · Tomorrowland WE2",
+      "slug": "yt-WnjXXOZ8Te8",
+      "name": "TL_MIKE_WILLIAMS_TML_WE2_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/132ft5h9/mike-williams-mainstage-tomorrowland-weekend-2-belgium-2026-07-25.html",
+      "youtubeUrl": "https://www.youtube.com/watch?v=WnjXXOZ8Te8"
+    },
+    {
+      "label": "Boris Brejcha · Tomorrowland WE1",
+      "slug": "yt-NpL_bT5vgmU",
+      "name": "TL_BORIS_BREJCHA_TML_WE1_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/yfd6329/boris-brejcha-mainstage-tomorrowland-weekend-1-belgium-2026-07-18.html",
+      "youtubeUrl": "https://www.youtube.com/watch?v=NpL_bT5vgmU"
+    },
+    {
+      "label": "Sebastian Ingrosso · Tomorrowland WE2",
+      "slug": "yt-g4vR2VlhNtk",
+      "name": "TL_SEBASTIAN_INGROSSO_TML_WE2_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/1407jy99/sebastian-ingrosso-freedom-stage-tomorrowland-weekend-2-belgium-2026-07-25.html",
+      "youtubeUrl": "https://www.youtube.com/watch?v=g4vR2VlhNtk"
+    },
+    {
+      "label": "Miss Monique · BIORHYTHM (TML WE1 Freedom)",
+      "slug": "yt-1LpQZ5GTRDg",
+      "name": "TL_MISS_MONIQUE_BIORHYTHM",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/l9y8bm9/miss-monique-biorhythm-freedom-stage-tomorrowland-weekend-1-belgium-2026-07-17.html",
+      "youtubeUrl": "https://www.youtube.com/watch?v=1LpQZ5GTRDg"
+    },
+    {
+      "label": "John Summit · Lollapalooza Chicago",
+      "slug": "yt-9TKqqBCmDHA",
+      "name": "TL_JOHN_SUMMIT_LOLLAPALOOZA",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/dr6kbf9/john-summit-bud-light-stage-lollapalooza-united-states-chicago-2026-07-30.html",
+      "youtubeUrl": "https://www.youtube.com/watch?v=9TKqqBCmDHA"
+    }
+  ],
+  "stillMissing1001": [
+    {
+      "label": "Peggy Gou · Cercle Lille",
+      "slug": "yt--UOMvxh4MYU",
+      "name": "TL_PEGGY_GOU_CERCLE_LILLE",
+      "youtubeUrl": "https://www.youtube.com/watch?v=-UOMvxh4MYU",
+      "searchHint": "peggy gou cercle lille palais site:1001tracklists.com"
     }
   ]
 }
