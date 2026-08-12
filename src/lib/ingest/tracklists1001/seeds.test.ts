@@ -65,6 +65,12 @@ import {
   TL_STEVE_ANGELLO_TML_WE2_2026,
   TL_WAX_MOTIF_EDC_LV_2021,
   TL_WESTEND_EDC_LV_2026,
+  TL_BORIS_BREJCHA_TML_WE1_2026,
+  TL_MIKE_WILLIAMS_TML_WE2_2026,
+  TL_MISS_MONIQUE_BIORHYTHM,
+  TL_PLASTIK_FUNK_NATURE_ONE_2025,
+  TL_SEBASTIAN_INGROSSO_TML_WE2_2026,
+  TL_ZAMNA_STREET_PARADE_2025,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   tracklist1001RowsToPlays,
 } from "./seeds";
@@ -1040,5 +1046,65 @@ assert.equal(adielSp.length, 13);
 assert.match(adielSp[0]!.trackTitle!, /010x/);
 assert.equal(adielSp[adielSp.length - 1]!.trackTitle, "Nightride");
 assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-tuqAdrbkYZk"]!.length >= 13);
+
+// --- Captured 2026-08-12 batch (Miss Monique BIORHYTHM, Ingrosso, Boris, Mike Williams, Plastik Funk, Zamna) ---
+assertSeedClocks(TL_MISS_MONIQUE_BIORHYTHM);
+const mmBio = tracklist1001RowsToPlays(TL_MISS_MONIQUE_BIORHYTHM);
+assert.equal(mmBio.length, 22);
+assert.match(mmBio[0]!.trackTitle!, /Concorde/);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-1LpQZ5GTRDg"],
+  TL_MISS_MONIQUE_BIORHYTHM,
+);
+// Distinct from Mainstage WE2.
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-1LpQZ5GTRDg"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-WhPtvotfYbc"],
+);
+
+assertSeedClocks(TL_SEBASTIAN_INGROSSO_TML_WE2_2026);
+const ingrosso = tracklist1001RowsToPlays(TL_SEBASTIAN_INGROSSO_TML_WE2_2026);
+assert.ok(ingrosso.length >= 30);
+assert.match(ingrosso[0]!.trackTitle!, /Miami 2 Ibiza/);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-g4vR2VlhNtk"],
+  TL_SEBASTIAN_INGROSSO_TML_WE2_2026,
+);
+
+assertSeedClocks(TL_BORIS_BREJCHA_TML_WE1_2026);
+const boris = tracklist1001RowsToPlays(TL_BORIS_BREJCHA_TML_WE1_2026);
+assert.equal(boris.length, 13);
+assert.match(boris[0]!.trackTitle!, /Cello Tears/);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-NpL_bT5vgmU"],
+  TL_BORIS_BREJCHA_TML_WE1_2026,
+);
+
+assertSeedClocks(TL_MIKE_WILLIAMS_TML_WE2_2026);
+const mikeW = tracklist1001RowsToPlays(TL_MIKE_WILLIAMS_TML_WE2_2026);
+assert.ok(mikeW.length >= 30);
+assert.match(mikeW[0]!.trackTitle!, /Greece 2000/);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-WnjXXOZ8Te8"],
+  TL_MIKE_WILLIAMS_TML_WE2_2026,
+);
+
+assertSeedClocks(TL_PLASTIK_FUNK_NATURE_ONE_2025);
+const plastik = tracklist1001RowsToPlays(TL_PLASTIK_FUNK_NATURE_ONE_2025);
+assert.equal(plastik.length, 31);
+assert.match(plastik[0]!.trackTitle!, /Dopamine/);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-dEX8Y8Mzkok"],
+  TL_PLASTIK_FUNK_NATURE_ONE_2025,
+);
+
+assertSeedClocks(TL_ZAMNA_STREET_PARADE_2025);
+const zamna = tracklist1001RowsToPlays(TL_ZAMNA_STREET_PARADE_2025);
+assert.equal(zamna.length, 18);
+assert.match(zamna[0]!.trackTitle!, /Use Somebody/);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-1Mp9Pl6YgDM"],
+  TL_ZAMNA_STREET_PARADE_2025,
+);
 
 console.log("tracklists1001/seeds.test.ts ok");

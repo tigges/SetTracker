@@ -4290,6 +4290,218 @@ export const TL_ADIEL_STREET_PARADE_2025: FingerprintSeedRow[] = [
   { at: "54:56", artist: "Adiel", title: "Nightride" },
 ];
 
+/**
+ * Miss Monique @ BIORHYTHM, Freedom Stage, Tomorrowland Weekend 1, Belgium 2026-07-17
+ * https://www.1001tracklists.com/tracklist/l9y8bm9/miss-monique-biorhythm-freedom-stage-tomorrowland-weekend-1-belgium-2026-07-17.html
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-1LpQZ5GTRDg"] = TL_MISS_MONIQUE_BIORHYTHM
+ * Captured 2026-08-12 - provenance 1001tl. Distinct from Mainstage WE2
+ * (TL_MISS_MONIQUE_TML_WE2_2026, yt-WhPtvotfYbc).
+ */
+export const TL_MISS_MONIQUE_BIORHYTHM: FingerprintSeedRow[] = [
+  { at: "0:12", artist: "Miss Monique", title: "Concorde (Alternative Version)" },
+  { at: "3:51", artist: "BAUS & TimiR", title: "Miles Uphill" },
+  { at: "7:19", artist: "Kevin de Vries & Cyantist", title: "Sempre Sei" },
+  { at: "11:18", artist: "Miss Monique & Paradoks", title: "Undertone" },
+  { at: "14:49", artist: "Miss Monique & Kapuchon & GLZ", title: "Hot Sauce" },
+  { at: "18:53", artist: "Cafius & Oliver Marshak", title: "The Beat" },
+  { at: "23:07", artist: "Noir & Haze", title: "Around (Seth Hills & Victor Garde Remix)" },
+  { at: "27:12", artist: "Miss Monique & GENESI & Carl Bee", title: "Nomacita" },
+  { at: "30:50", artist: "Miss Monique & Volkoder", title: "Girls On The Floor" },
+  { at: "33:50", artist: "Jast", title: "Make You Say" },
+  { at: "37:55", artist: "Anyma & 19:26 & Baset", title: "Prophecy" },
+  { at: "41:17", artist: "Empire Of The Sun", title: "Alive (ALOK Remix)" },
+  { at: "43:38", artist: "Miss Monique & Glowal", title: "Rollin'" },
+  { at: "47:21", artist: "Jast & Enzo Gauthier", title: "Tikitah" },
+  { at: "50:49", artist: "Argy & SOLANCE", title: "Window Shake" },
+  { at: "56:46", artist: "Agents Of Time & Miss Monique", title: "Rajada" },
+  { at: "1:01:06", artist: "Miss Monique & Henri Bergmann & Mario Eighta", title: "17" },
+  { at: "1:04:54", artist: "Dominik Gehringer & Victor Garde ft. Anticalm", title: "On Lock" },
+  { at: "1:07:58", artist: "Age Of Love", title: "The Age Of Love (Dave Summer Edit)" },
+  { at: "1:11:11", artist: "Carl Bee", title: "Time To End" },
+  { at: "1:15:49", artist: "JOA & James Carter", title: "Don't Wake Us Up" },
+  { at: "1:19:24", artist: "8Kays & Enzo Gauthier & Julian James", title: "Aeternum" },
+];
+/**
+ * Sebastian Ingrosso @ Freedom Stage, Tomorrowland Weekend 2, Belgium 2026-07-25
+ * https://www.1001tracklists.com/tracklist/1407jy99/sebastian-ingrosso-freedom-stage-tomorrowland-weekend-2-belgium-2026-07-25.html
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-g4vR2VlhNtk"] = TL_SEBASTIAN_INGROSSO_TML_WE2_2026
+ * Captured 2026-08-12 - provenance 1001tl.
+ */
+export const TL_SEBASTIAN_INGROSSO_TML_WE2_2026: FingerprintSeedRow[] = [
+  { at: "0:11", artist: "Swedish House Mafia ft. Tinie Tempah", title: "Miami 2 Ibiza" },
+  { at: "3:54", artist: "Cloonee & Prospa", title: "Free Your Mind (James Poole Edit)" },
+  { at: "5:38", artist: "deadmau5", title: "Strobe (DBL Flip)" },
+  { at: "6:58", artist: "Coldplay", title: "Every Teardrop Is A Waterfall (Acappella)" },
+  { at: "8:18", artist: "Swedish House Mafia", title: "Greyhound" },
+  { at: "9:50", artist: "Rui Da Silva ft. Cassandra Fox", title: "Touch Me (Acappella)" },
+  { at: "11:22", artist: "Roger Sanchez", title: "Another Chance (DubVision Remix)" },
+  { at: "14:30", artist: "Swedish House Mafia", title: "Wait So Long (Why Do I Have To)" },
+  { at: "17:53", artist: "Swedish House Mafia & Knife Party ft. ADL", title: "Antidote (MPH Remix)" },
+  { at: "19:57", artist: "Swedish House Mafia", title: "Ray Of Solar" },
+  { at: "21:18", artist: "Fred again.. & Swedish House Mafia ft. Future", title: "Turn On The Lights Again.." },
+  { at: "22:38", artist: "Alfred Newman", title: "20th Century Fox Fanfare" },
+  { at: "23:00", artist: "Travis Scott ft. Playboi Carti", title: "FE!N" },
+  { at: "24:33", artist: "Steve Angello & Dimitri Vangelis & Wyman vs. Axwell Λ Ingrosso & Kristoffer Fogelmark", title: "Payback vs. More Than You Know (Swedish House Mafia Mashup)" },
+  { at: "25:49", artist: "Dimitri Vangelis & Wyman X Steve Angello", title: "Payback" },
+  { at: "27:05", artist: "Axwell Λ Ingrosso", title: "More Than You Know (Acappella)" },
+  { at: "28:20", artist: "Booka Shade vs. Ivan Gough & Feenixpawl & Axwell ft. Georgi Kay", title: "Love Inc vs. In My Mind (Axwell Mashup)" },
+  { at: "28:47", artist: "Ivan Gough & Feenixpawl ft. Georgi Kay", title: "In My Mind (Axwell Mix)" },
+  { at: "29:14", artist: "Booka Shade", title: "Love Inc" },
+  { at: "29:41", artist: "Axwell Λ Ingrosso ft. Trevor Guthrie", title: "Dreamer" },
+  { at: "30:08", artist: "M83 & Eric Prydz vs. The Temper Trap", title: "Midnight City vs. Sweet Disposition (Steve Angello Mashup)" },
+  { at: "31:16", artist: "The Temper Trap", title: "Sweet Disposition (Acappella)" },
+  { at: "32:24", artist: "M83", title: "Midnight City (Eric Prydz Private Remix)" },
+  { at: "33:31", artist: "Sebastian Ingrosso & Céline Dion vs. Coldplay", title: "A New Day vs. A Sky Full Of Stars (Alesso Mashup)" },
+  { at: "34:06", artist: "Coldplay", title: "A Sky Full Of Stars (Acappella)" },
+  { at: "34:41", artist: "Sebastian Ingrosso ft. Céline Dion", title: "A New Day" },
+  { at: "35:15", artist: "Swedish House Mafia ft. John Martin", title: "Save The World (NC Edit)" },
+  { at: "37:44", artist: "Sebastian Ingrosso & Tommy Trash ft. John Martin", title: "Reload (Vocal Mix)" },
+  { at: "40:13", artist: "Swedish House Mafia ft. John Martin", title: "Don't You Worry Child" },
+  { at: "42:45", artist: "Modjo", title: "Lady (Hear Me Tonight)" },
+  { at: "45:16", artist: "Swedish House Mafia & Connie Constance", title: "Heaven Takes You Home (Swedish House Mafia Remake)" },
+  { at: "47:04", artist: "Sebastian Ingrosso vs. Alesso & Ryan Tedder vs. Candi Staton vs. Whitney Houston", title: "Laktos is Calling vs. You Got The Love vs. I Wanna Dance With Somebody (Sebastian Ingrosso Re-Edit)" },
+  { at: "48:10", artist: "Sebastian Ingrosso", title: "Laktos" },
+  { at: "49:16", artist: "Sebastian Ingrosso & Alesso ft. Ryan Tedder", title: "Calling (Lose My Mind)" },
+  { at: "50:22", artist: "Whitney Houston", title: "I Wanna Dance with Somebody (Who Loves Me)" },
+  { at: "51:28", artist: "Candi Staton", title: "You Got The Love" },
+  { at: "52:35", artist: "Swedish House Mafia ft. Pharrell Williams", title: "One (Your Name)" },
+  { at: "53:41", artist: "Swedish House Mafia & Lykke Li", title: "Happiness Is So Sad" },
+];
+/**
+ * Boris Brejcha @ Mainstage, Tomorrowland Weekend 1, Belgium 2026-07-18
+ * https://www.1001tracklists.com/tracklist/yfd6329/boris-brejcha-mainstage-tomorrowland-weekend-1-belgium-2026-07-18.html
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-NpL_bT5vgmU"] = TL_BORIS_BREJCHA_TML_WE1_2026
+ * Captured 2026-08-12 - provenance 1001tl.
+ */
+export const TL_BORIS_BREJCHA_TML_WE1_2026: FingerprintSeedRow[] = [
+  { at: "0:12", artist: "Boris Brejcha", title: "Cello Tears" },
+  { at: "4:10", artist: "Boris Brejcha", title: "Last Call" },
+  { at: "9:30", artist: "Boris Brejcha", title: "Endor" },
+  { at: "14:00", artist: "Boris Brejcha", title: "Midnight Bells" },
+  { at: "19:30", artist: "Boris Brejcha", title: "Concussion" },
+  { at: "24:40", artist: "Boris Brejcha", title: "Maya" },
+  { at: "29:30", artist: "Moby", title: "In This World (Boris Brejcha Remix)" },
+  { at: "33:30", artist: "Boris Brejcha", title: "Bad Girl" },
+  { at: "38:50", artist: "Boris Brejcha & MC Flipside", title: "Dirty Beat" },
+  { at: "43:00", artist: "Boris Brejcha", title: "Stay Close" },
+  { at: "46:00", artist: "Boris Brejcha & Chemutai Sage", title: "Don't Stress Your Mind" },
+  { at: "49:30", artist: "Boris Brejcha", title: "Into The Blue" },
+  { at: "57:20", artist: "Boris Brejcha & Chemutai Sage", title: "Alicante" },
+];
+/**
+ * Mike Williams @ Mainstage, Tomorrowland Weekend 2, Belgium 2026-07-25
+ * https://www.1001tracklists.com/tracklist/132ft5h9/mike-williams-mainstage-tomorrowland-weekend-2-belgium-2026-07-25.html
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-WnjXXOZ8Te8"] = TL_MIKE_WILLIAMS_TML_WE2_2026
+ * Captured 2026-08-12 - provenance 1001tl.
+ */
+export const TL_MIKE_WILLIAMS_TML_WE2_2026: FingerprintSeedRow[] = [
+  { at: "0:12", artist: "Mike Williams & Three Drives & ANTICALM", title: "Greece 2000" },
+  { at: "1:21", artist: "Mike Williams & Mesto ft. Sasha Rangas", title: "Wait Another Day" },
+  { at: "2:30", artist: "Axwell & Sebastian Ingrosso & Steve Angello & Laidback Luke ft. Deborah Cox", title: "Leave The World Behind" },
+  { at: "4:40", artist: "Nari & Milani", title: "Atom (SQU4RE 2024 Edit)" },
+  { at: "5:10", artist: "Sebastien Benett", title: "Let Me See Those Hands (Acappella)" },
+  { at: "5:40", artist: "Mike Williams & Brooks & WHAT EVA", title: "Illusion" },
+  { at: "6:54", artist: "Spice Girls", title: "Wannabe" },
+  { at: "7:59", artist: "Mike Williams ft. DTale", title: "Living On Video (VIP Mix)" },
+  { at: "9:56", artist: "Lucas & Steve", title: "Renegade Master" },
+  { at: "11:53", artist: "Mike Williams & Philip Strand", title: "All My Life (In My Heart)" },
+  { at: "12:37", artist: "Avicii", title: "Levels (Acappella)" },
+  { at: "13:20", artist: "Lady GaGa ft. Colby O'Donis", title: "Just Dance (ACRAZE Remix)" },
+  { at: "14:50", artist: "TOYZZ", title: "Midnight Trip" },
+  { at: "16:37", artist: "Mightyfools", title: "Footrocker (Get Your, Get Your Hands Up Acappella)" },
+  { at: "18:24", artist: "Florence + The Machine", title: "You've Got The Love (Acappella)" },
+  { at: "20:11", artist: "Steve Angello & Laidback Luke ft. Rowetta", title: "Be" },
+  { at: "22:18", artist: "Tom Odell", title: "Another Love" },
+  { at: "23:20", artist: "Corey James & IMAN", title: "Paranoia" },
+  { at: "24:21", artist: "Mike Williams & Brooks", title: "Drop The Pressure" },
+  { at: "26:02", artist: "Sebastien Benett", title: "Let Me See Those Hands (Acappella)" },
+  { at: "27:44", artist: "Mike Williams & Oaks", title: "Better Now" },
+  { at: "29:25", artist: "Mike Williams & NOME.", title: "Back To Life" },
+  { at: "31:05", artist: "R3HAB & Mike Williams ft. Mary Jane Smith", title: "Lullaby" },
+  { at: "32:45", artist: "Fatima Yamaha", title: "What's A Girl To Do" },
+  { at: "33:50", artist: "Mike Williams", title: "The System" },
+  { at: "35:45", artist: "Faithless", title: "Insomnia" },
+  { at: "37:40", artist: "Cloonee & Prospa", title: "Free Your Mind (Mike Williams Remix)" },
+  { at: "39:35", artist: "Florence + The Machine", title: "Spectrum (Say My Name) (Acappella)" },
+  { at: "41:29", artist: "Mike Williams & Bruno Martini & Stephen Puth", title: "Multiply" },
+  { at: "43:57", artist: "Swedish House Mafia ft. John Martin", title: "Save The World (Acappella)" },
+  { at: "46:24", artist: "Swedish House Mafia & Knife Party ft. ADL", title: "Antidote (Duer Remix)" },
+  { at: "48:21", artist: "John Summit & Sub Focus ft. Julia Church", title: "Go Back (Acappella)" },
+  { at: "50:17", artist: "Mike Williams & Jaimes", title: "Lose It All" },
+  { at: "54:26", artist: "Mike Williams", title: "The Beat (Mike Williams Techno Edit)" },
+  { at: "55:21", artist: "Tiësto & Mike Williams", title: "I Want You" },
+  { at: "56:16", artist: "Madonna", title: "Music (Acappella)" },
+  { at: "57:10", artist: "ANOTR ft. 54 Ultra", title: "Talk To You (Hardwell Bootleg)" },
+  { at: "59:12", artist: "Kate Ryan", title: "Désenchantée (Mike Williams Remix)" },
+  { at: "1:00:25", artist: "Porter Robinson ft. Bright Lights", title: "Language" },
+  { at: "1:01:34", artist: "Mike Williams ft. Moa Lisa", title: "Make You Mine" },
+  { at: "1:02:42", artist: "Mike Williams & Oaks", title: "I'll Do It" },
+];
+/**
+ * Plastik Funk @ Open Air Floor, Nature One, Germany 2025-08-01
+ * https://www.1001tracklists.com/tracklist/1v75qbbt/plastik-funk-open-air-floor-nature-one-germany-2025-08-01.html
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-dEX8Y8Mzkok"] = TL_PLASTIK_FUNK_NATURE_ONE_2025
+ * Captured 2026-08-12 - provenance 1001tl.
+ */
+export const TL_PLASTIK_FUNK_NATURE_ONE_2025: FingerprintSeedRow[] = [
+  { at: "5:00", artist: "MistaJam & Katy Tiz", title: "Dopamine" },
+  { at: "8:00", artist: "MORTEN & David Guetta ft. Fedde Le Grand", title: "Night In Detroit" },
+  { at: "11:00", artist: "Chris Lorenzo & Max Styler & Audio Bullys", title: "London's On Fire" },
+  { at: "13:00", artist: "Biscits", title: "Freak" },
+  { at: "16:00", artist: "Max Styler & Clüb De Combat", title: "On Repeat" },
+  { at: "18:00", artist: "Brett Allen ft. Pure Cold", title: "Da Dip" },
+  { at: "19:00", artist: "The Temper Trap", title: "Sweet Disposition (ARTBAT Remix)" },
+  { at: "22:00", artist: "Niko The Kid & Benson ft. Yo Majesty", title: "FTS" },
+  { at: "27:00", artist: "CID", title: "Party Jumpin'" },
+  { at: "29:00", artist: "Cloonee & InntRaw & Young M.A", title: "Stephanie (HNTR Remix)" },
+  { at: "31:00", artist: "OKAYVAL", title: "Techno Sh" },
+  { at: "35:00", artist: "Plastik Funk & Esox ft. Tara McDonald", title: "Looking At You" },
+  { at: "37:00", artist: "Plastik Funk & 3NRGY & Esox", title: "Loco" },
+  { at: "41:00", artist: "BROHUG", title: "Guerilla" },
+  { at: "43:00", artist: "Plastik Funk & TUJAMO", title: "WHO" },
+  { at: "45:00", artist: "Mike Candys", title: "Make Some Noise" },
+  { at: "47:00", artist: "Alice Deejay", title: "Better Off Alone" },
+  { at: "48:00", artist: "HÄWK & Riccardo Falconelli", title: "Happy" },
+  { at: "49:00", artist: "Tiësto & Mesto", title: "Can't Get Enough" },
+  { at: "53:00", artist: "Plastik Funk & Going Deeper", title: "So High (Plastik Funk & Esox Remix)" },
+  { at: "54:00", artist: "John Newman", title: "Love Me Again" },
+  { at: "55:00", artist: "Mike Candys", title: "Body Rock" },
+  { at: "56:00", artist: "Plastik Funk & Liu & Toxic Joy & Bellini", title: "Samba De Janeiro (Carnaval Mix)" },
+  { at: "59:00", artist: "AFROJACK ft. Ally Brooke", title: "All Night (DubVision Remix)" },
+  { at: "1:06:00", artist: "OwnBuzz", title: "Booyah Bounce" },
+  { at: "1:10:00", artist: "Dillon Francis & MARTEN HØRGER", title: "Cut The Midrange" },
+  { at: "1:13:00", artist: "Mike Candys", title: "Crash The Party" },
+  { at: "1:16:00", artist: "John Summit & Gorgon City ft. Rhys From The Sticks", title: "Is Everybody Having Fun?" },
+  { at: "1:17:00", artist: "Danny Avila & Sam WOLFE & HNTR ft. Rome Fortune", title: "YES B!TCH" },
+  { at: "1:19:00", artist: "Shakedown", title: "At Night (Anyma & Layton Giordani Remix)" },
+  { at: "1:23:00", artist: "SIDEPIECE & Bobby Shmurda", title: "CASH OUT" },
+];
+/**
+ * Zamna Soundsystem @ Center Stage, Street Parade Zürich, Switzerland 2025-08-09
+ * https://www.1001tracklists.com/tracklist/122kgd91/zamna-soundsystem-center-stage-street-parade-zurich-switzerland-2025-08-09.html
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-1Mp9Pl6YgDM"] = TL_ZAMNA_STREET_PARADE_2025
+ * Captured 2026-08-12 - provenance 1001tl.
+ */
+export const TL_ZAMNA_STREET_PARADE_2025: FingerprintSeedRow[] = [
+  { at: "0:52", artist: "Kings Of Leon", title: "Use Somebody" },
+  { at: "6:40", artist: "Adam Sellouk & Pedroz", title: "Fuel" },
+  { at: "9:55", artist: "Kevin de Vries & Jast", title: "Born Like That" },
+  { at: "14:02", artist: "WILL K", title: "F*CK FAME" },
+  { at: "18:34", artist: "ARTBAT & KAS:ST & Losless", title: "Pull Out" },
+  { at: "26:34", artist: "Shakedown", title: "At Night (Anyma & Layton Giordani Remix)" },
+  { at: "30:01", artist: "R3HAB & Skytech & Pupa Nas T & Kevin McKay ft. Denise Belfon & Fideles", title: "Work" },
+  { at: "33:37", artist: "Post Malone ft. 21 Savage", title: "Rockstar" },
+  { at: "38:24", artist: "Rufus & Chaka Khan", title: "Ain't Nobody (Zamna Soundsystem Remix)" },
+  { at: "43:37", artist: "WILL K", title: "Don't Worry" },
+  { at: "47:16", artist: "SOEL", title: "ID (Losless Remix)" },
+  { at: "51:57", artist: "Anyma & SCRIPT", title: "In My Mind (Adam Sellouk Remix)" },
+  { at: "55:47", artist: "Felix Da Housecat ft. Miss Kittin", title: "Silver Screen Shower Scene (Alexander Delanois Private Mix)" },
+  { at: "1:02:25", artist: "Joshlane", title: "System Overload" },
+  { at: "1:06:38", artist: "Zombie Nation", title: "Kernkraft 400 (Ivory Remix)" },
+  { at: "1:15:33", artist: "MoBlack & Benja & Franc Fala ft. Salif Keïta & Cesária Évora", title: "Yamore (Zamna Soundsystem Remix)" },
+  { at: "1:19:51", artist: "Rockwell", title: "Somebody's Watching Me (Zamna Soundsystem Remix)" },
+  { at: "1:24:32", artist: "Tom Odell", title: "Another Love" },
+];
 /** sourceSlug → curated 1001TL seed (SC / YT when live HTML is CF-blocked). */
 export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   string,
@@ -4357,6 +4569,12 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-pLldXE5OyCM": TL_KOLSCH_STREET_PARADE_2025,
   "yt-fYM9DlFLwKw": TL_MASSANO_STREET_PARADE_2025,
   "yt-tuqAdrbkYZk": TL_ADIEL_STREET_PARADE_2025,
+  "yt-1Mp9Pl6YgDM": TL_ZAMNA_STREET_PARADE_2025,
+  "yt-1LpQZ5GTRDg": TL_MISS_MONIQUE_BIORHYTHM,
+  "yt-g4vR2VlhNtk": TL_SEBASTIAN_INGROSSO_TML_WE2_2026,
+  "yt-NpL_bT5vgmU": TL_BORIS_BREJCHA_TML_WE1_2026,
+  "yt-WnjXXOZ8Te8": TL_MIKE_WILLIAMS_TML_WE2_2026,
+  "yt-dEX8Y8Mzkok": TL_PLASTIK_FUNK_NATURE_ONE_2025,
 };
 
 /** Sanity: every seeded clock must parse. */

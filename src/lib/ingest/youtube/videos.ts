@@ -38,6 +38,12 @@ import {
   TL_DOM_DOLLA_ALLIANZ_SYDNEY,
   TL_BASSJACKERS_TML_WE2_2026,
   TL_BHASKAR_TML_WE2_2026,
+  TL_BORIS_BREJCHA_TML_WE1_2026,
+  TL_MIKE_WILLIAMS_TML_WE2_2026,
+  TL_MISS_MONIQUE_BIORHYTHM,
+  TL_PLASTIK_FUNK_NATURE_ONE_2025,
+  TL_SEBASTIAN_INGROSSO_TML_WE2_2026,
+  TL_ZAMNA_STREET_PARADE_2025,
   TL_PUSH_TML_WE2_2026,
   TL_JAMES_HYPE_MELKWEG_ADE_2025,
   TL_JAMES_HYPE_TML_WE2_2026,
@@ -1373,6 +1379,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     eventName: "Tomorrowland Belgium",
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/yfd6329/boris-brejcha-mainstage-tomorrowland-weekend-1-belgium-2026-07-18.html",
+    tracklist1001: TL_BORIS_BREJCHA_TML_WE1_2026,
   },
   {
     // Official Relive — Freedom WE2; 1001 URL known, seed pending capture.
@@ -1385,6 +1392,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     eventName: "Tomorrowland Belgium",
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/1407jy99/sebastian-ingrosso-freedom-stage-tomorrowland-weekend-2-belgium-2026-07-25.html",
+    tracklist1001: TL_SEBASTIAN_INGROSSO_TML_WE2_2026,
   },
   {
     // BIORHYTHM @ Freedom Stage TML WE1; 1001 URL known, seed pending.
@@ -1398,6 +1406,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     eventName: "Tomorrowland Belgium",
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/l9y8bm9/miss-monique-biorhythm-freedom-stage-tomorrowland-weekend-1-belgium-2026-07-17.html",
+    tracklist1001: TL_MISS_MONIQUE_BIORHYTHM,
   },
   {
     // Bud Light Stage Chicago; 1001 URL known, seed pending capture.
@@ -1530,6 +1539,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     eventName: "Tomorrowland Belgium",
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/132ft5h9/mike-williams-mainstage-tomorrowland-weekend-2-belgium-2026-07-25.html",
+    tracklist1001: TL_MIKE_WILLIAMS_TML_WE2_2026,
   },
   {
     video: "https://www.youtube.com/watch?v=4G2QlSLG0tI",
@@ -1617,6 +1627,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     eventName: "Nature One",
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/1v75qbbt/plastik-funk-open-air-floor-nature-one-germany-2025-08-01.html",
+    tracklist1001: TL_PLASTIK_FUNK_NATURE_ONE_2025,
   },
   // --- Zürich Street Parade (ARTE Concert official full sets) ---
   {
@@ -1708,6 +1719,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     eventName: "Street Parade",
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/122kgd91/zamna-soundsystem-center-stage-street-parade-zurich-switzerland-2025-08-09.html",
+    tracklist1001: TL_ZAMNA_STREET_PARADE_2025,
   },
 
   {
