@@ -89,6 +89,13 @@ setradar.ai.
   YouTube Relives (Top20 / festival priority by default) use `yt-dlp
   --download-sections` for short clips, then the same Identify path
   (`ACRCLOUD_ALLOW_YOUTUBE_PRIORITY=1`; full YT with `ACRCLOUD_ALLOW_YOUTUBE=1`).
+  **Diagnostic (`npm run` via `catalog-acr-diagnose.yml`):** control track HITs
+  at score ~64, so `ACRCLOUD_MIN_SCORE=55` (70 rejected real YT hits).
+  **CI caveat:** GitHub Actions datacenter IPs get YouTube bot-walled ("Sign in
+  to confirm you're not a bot") even WITH `ACRCLOUD_YTDLP_COOKIES`; only very
+  popular videos slip through. Reliable YT fingerprinting needs a residential IP
+  (operator machine) or ACRCloud **File Scanning** (server-side URL fetch).
+  SC/hearthis Identify is unaffected.
   Fills timeline gaps only with `provenance: "fingerprint"`; never overwrites
   `sourceUrl` / `sourceName`. Prefers SC/hearthis over YT. On success, enrich
   dispatches a fast Pages deploy. Agents cannot set repo secrets or (usually)
