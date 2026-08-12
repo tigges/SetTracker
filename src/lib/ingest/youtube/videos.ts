@@ -1660,6 +1660,8 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     title: "PAN-POT - Zurich Street Parade 2025 - ARTE Concert",
     seriesName: "ARTE Concert",
     eventName: "Street Parade",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1sftnn01/pan-pot-opera-stage-street-parade-zurich-switzerland-2025-08-09.html",
   },
   {
     video: "https://www.youtube.com/watch?v=WTN5ru2ceRE",
@@ -1669,6 +1671,8 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     title: "HoneyLuv - Zurich Street Parade 2025 - ARTE Concert",
     seriesName: "ARTE Concert",
     eventName: "Street Parade",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2ncvv7l1/honeyluv-center-stage-street-parade-zurich-switzerland-2025-08-09.html",
   },
   {
     // Official ANTS / Ushuaïa upload; 1001 URL known — seed pending console capture.
