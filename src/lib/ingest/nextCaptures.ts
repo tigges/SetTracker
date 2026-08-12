@@ -61,6 +61,15 @@ export const PRIORITY_CAPTURES: CapturePreset[] = [
     reason: "priority:street-parade-gap",
   },
   {
+    label: "HoneyLuv · ANTS Ushuaïa",
+    slug: "yt-sLtNC21myWM",
+    name: "TL_HONEYLUV_ANTS_USHUAIA_2026",
+    searchUrl: search1001("honeyluv", "ants", "ushuaia", "2026-06-17"),
+    tracklistUrl:
+      "https://www.1001tracklists.com/tracklist/9xkrf91/honeyluv-ants-ushuaia-ibiza-spain-2026-06-17.html",
+    reason: "priority:known-1001-url",
+  },
+  {
     label: "Zamna Soundsystem · Street Parade",
     slug: "yt-1Mp9Pl6YgDM",
     name: "TL_ZAMNA_STREET_PARADE_2025",

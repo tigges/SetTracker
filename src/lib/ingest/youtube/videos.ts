@@ -1646,6 +1646,18 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     eventName: "Street Parade",
   },
   {
+    // Official ANTS / Ushuaïa upload; 1001 URL known — seed pending console capture.
+    video: "https://www.youtube.com/watch?v=sLtNC21myWM",
+    primaryArtist: dj("HoneyLuv", { accent: "#ff006e" }),
+    genre: "Tech House",
+    type: "festival",
+    title: "HoneyLuv @ ANTS Ushuaïa Ibiza 2026-06-17",
+    seriesName: "ANTS",
+    eventName: "Ushuaïa Ibiza",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/9xkrf91/honeyluv-ants-ushuaia-ibiza-spain-2026-06-17.html",
+  },
+  {
     video: "https://www.youtube.com/watch?v=tuqAdrbkYZk",
     primaryArtist: dj("Adiel", { accent: "#fb8500" }),
     genre: "Techno",

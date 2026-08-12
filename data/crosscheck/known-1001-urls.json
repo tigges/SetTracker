@@ -1,25 +1,27 @@
 {
   "note": "Operator-collected 1001Tracklists URLs for next-capture queue. Fill tracklistUrl on PRIORITY_CAPTURES + rebuild next-captures when wiring.",
-  "updatedAt": "2026-08-12T04:53:00.000Z",
+  "updatedAt": "2026-08-12T04:54:00.000Z",
   "urls": [
     {
       "label": "PAN-POT · Street Parade",
       "slug": "yt-LpFxQmtEeAA",
       "name": "TL_PAN_POT_STREET_PARADE_2025",
-      "tracklistUrl": "https://www.1001tracklists.com/tracklist/1sftnn01/pan-pot-opera-stage-street-parade-zurich-switzerland-2025-08-09.html"
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/1sftnn01/pan-pot-opera-stage-street-parade-zurich-switzerland-2025-08-09.html",
+      "youtubeUrl": "https://www.youtube.com/watch?v=LpFxQmtEeAA"
     },
     {
       "label": "HoneyLuv · Street Parade",
       "slug": "yt-WTN5ru2ceRE",
       "name": "TL_HONEYLUV_STREET_PARADE_2025",
-      "tracklistUrl": "https://www.1001tracklists.com/tracklist/2ncvv7l1/honeyluv-center-stage-street-parade-zurich-switzerland-2025-08-09.html"
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/2ncvv7l1/honeyluv-center-stage-street-parade-zurich-switzerland-2025-08-09.html",
+      "youtubeUrl": "https://www.youtube.com/watch?v=WTN5ru2ceRE"
     },
     {
       "label": "HoneyLuv · ANTS Ushuaïa Ibiza 2026-06-17",
-      "slug": null,
+      "slug": "yt-sLtNC21myWM",
       "name": "TL_HONEYLUV_ANTS_USHUAIA_2026",
       "tracklistUrl": "https://www.1001tracklists.com/tracklist/9xkrf91/honeyluv-ants-ushuaia-ibiza-spain-2026-06-17.html",
-      "note": "No curated YT slug yet (distinct from DJ Mag HoneyLuv B2B TSHA LZ2nM5yj2Q4). Parked until official video is wired."
+      "youtubeUrl": "https://youtu.be/sLtNC21myWM"
     }
   ]
 }
