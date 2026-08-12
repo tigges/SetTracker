@@ -616,7 +616,8 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
   },
   {
     // Tomorrowland official — Freedom Stage WE2; 17/17 timed cues from 1001.
-    video: "https://www.youtube.com/watch?v=mVB-gqggrCQ",
+    // Official full-set upload (prior id mVB-gqggrCQ replaced 2026-08-12).
+    video: "https://www.youtube.com/watch?v=Uq1WP8v3U4o",
     primaryArtist: dj("FISHER", {
       accent: "#ffba08",
       homeCity: "Gold Coast, AU",

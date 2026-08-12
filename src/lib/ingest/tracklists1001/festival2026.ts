@@ -1525,7 +1525,7 @@ export const TL_STEVE_ANGELLO_TML_WE2_2026: FingerprintSeedRow[] = [
  * FISHER @ Mainstage, Tomorrowland Weekend 1, Belgium 2026-07-18
  * Official YT: https://www.youtube.com/watch?v=4985f9Rfxx0
  * 1001TL: https://1001.tl/2jqqmqsk — operator bookmarklet capture 2026-08-11
- * (25/25 timed cues). Distinct from Freedom Stage WE2 (yt-mVB-gqggrCQ).
+ * (25/25 timed cues). Distinct from Freedom Stage WE2 (yt-Uq1WP8v3U4o).
  */
 export const TL_FISHER_TML_WE1_2026: FingerprintSeedRow[] = [
   { at: "0:12", artist: "Marlon Hoffstadt aka DJ Daddy Trance", title: "It's That Time (FISHER Remix)" },
@@ -1557,7 +1557,7 @@ export const TL_FISHER_TML_WE1_2026: FingerprintSeedRow[] = [
 
 /**
  * FISHER @ Freedom Stage, Tomorrowland Weekend 2, Belgium 2026-07-24
- * Official YT: https://www.youtube.com/watch?v=mVB-gqggrCQ (~81:44)
+ * Official YT: https://www.youtube.com/watch?v=Uq1WP8v3U4o (~81:44)
  * 1001TL: https://1001.tl/kd5wd49 — operator console capture 2026-08-01
  * (17/17 timed cues).
  */
@@ -4333,7 +4333,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-ra8NYbzPMnk": TL_KOLSCH_TML_WE2_2026,
   "yt-5AdQy7lCbN0": TL_STEVE_ANGELLO_TML_WE2_2026,
   "yt-4985f9Rfxx0": TL_FISHER_TML_WE1_2026,
-  "yt-mVB-gqggrCQ": TL_FISHER_TML_WE2_2026,
+  "yt-Uq1WP8v3U4o": TL_FISHER_TML_WE2_2026,
   "yt-eeNljOHahxY": TL_MASSANO_TML_WE2_2026,
   "yt-yWZyIQtxoXU": TL_HARDWELL_TML_WE2_2026,
   "yt-Py-GG74lLU8": TL_HARDWELL_TML_WE2_2026,
