@@ -124,20 +124,25 @@ The app publishes as a fully static site. `.github/workflows/deploy-pages.yml`:
 
 ### ACRCloud fingerprint enrich
 
-`npm run enrich:fingerprint` samples SoundCloud / hearthis playback (YouTube
-opt-in) and identifies clips via ACRCloud. Writes `Played` rows with
-`provenance: fingerprint` into **timeline gaps only** — never overwrites
+`npm run enrich:fingerprint` samples SoundCloud / hearthis playback and
+identifies clips via ACRCloud. For **YouTube** (Top 100 / festival priority by
+default), short clips are cut with `yt-dlp --download-sections` then identified
+the same way. Writes `Played` rows with `provenance: fingerprint` into
+**timeline gaps only** — never overwrites
 `sourceUrl` / `sourceName`, never scrapes AudioScout / TrackId / 1001TL.
 
 | Env | Effect |
 | --- | --- |
 | `ACRCLOUD_ENABLED=1` | Hard gate (no network without this) |
-| `ACRCLOUD_HOST` | Identify host, e.g. `identify-eu-west-1.acrcloud.com` |
+| `ACRCLOUD_HOST` | Identify host, e.g. `[REDACTED]` |
 | `ACRCLOUD_ACCESS_KEY` / `ACRCLOUD_ACCESS_SECRET` | Project credentials |
 | `ACRCLOUD_SET_LIMIT` | Max sets per run (default 5) |
 | `ACRCLOUD_SAMPLE_SEC` / `ACRCLOUD_STEP_SEC` | Clip length / spacing (12 / 90) |
 | `ACRCLOUD_MIN_SCORE` | Accept identified hits ≥ score (default 70) |
-| `ACRCLOUD_ALLOW_YOUTUBE=1` | Allow YT playback (default off) |
+| `ACRCLOUD_ALLOW_YOUTUBE=1` | Allow all YT sets (default off) |
+| `ACRCLOUD_ALLOW_YOUTUBE_PRIORITY=1` | YT for Top20 / festival sparse (default on) |
+| `ACRCLOUD_YT_DLP=0` | Disable yt-dlp YouTube sampling |
+| `ACRCLOUD_YTDLP_COOKIES` | Path to Netscape cookies.txt (bot wall bypass) |
 
 **Secrets (Settings → Secrets and variables → Actions):**
 
@@ -146,6 +151,7 @@ opt-in) and identifies clips via ACRCloud. Writes `Played` rows with
 | `ACRCLOUD_HOST` | `identify-eu-west-1.acrcloud.com` |
 | `ACRCLOUD_ACCESS_KEY` | project access key |
 | `ACRCLOUD_ACCESS_SECRET` | project access secret |
+| `ACRCLOUD_YTDLP_COOKIES` | optional Netscape `cookies.txt` for YouTube |
 
 Then run **Actions → Catalog enrich (weekly) → Run workflow**. Missing credentials → safe no-op (warning in the log). A successful enrich dispatches a fast Pages deploy so new fingerprint IDs go live.
 

@@ -28,9 +28,14 @@
  *   ACRCLOUD_STEP_SEC       spacing between probes (default 90)
  *   ACRCLOUD_MIN_SCORE      accept identified hits ≥ this (default 70)
  *   ACRCLOUD_MIN_IDENTIFIED skip sets with ≥ N strong IDs (default 4)
- *   ACRCLOUD_ALLOW_YOUTUBE=1  allow YT playback (default off — bot walls)
+ *   ACRCLOUD_ALLOW_YOUTUBE=1  allow all YT playback (default off)
  *   ACRCLOUD_ALLOW_YOUTUBE_PRIORITY=0  disable YT for Top 20 / festival
  *     unresolved targets (default on — EDC Relive etc. are often YT-only)
+ *   ACRCLOUD_YT_DLP=0       force-disable yt-dlp sampling (default: use when
+ *     yt-dlp is on PATH). YouTube has no anonymous progressive URL — clips
+ *     are cut with yt-dlp --download-sections, then Identify as usual.
+ *   ACRCLOUD_YTDLP_COOKIES  path to Netscape cookies.txt (optional; needed when
+ *     YouTube returns “Sign in to confirm you’re not a bot”).
  *   ACRCLOUD_DRY_RUN=1      resolve + probe but do not write DB
  *
  * Hook: `npm run enrich:fingerprint` from catalog-enrich.yml (after thumbs/MB).
@@ -38,7 +43,7 @@
 
 import { createHmac } from "node:crypto";
 import { execFile } from "node:child_process";
-import { mkdtemp, readFile, rm } from "node:fs/promises";
+import { mkdtemp, readFile, readdir, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { promisify } from "node:util";
@@ -415,8 +420,119 @@ export async function resolvePlaybackStream(
   if (host === "hearthis") {
     return resolveHearthisStream(playbackUrl);
   }
-  // YouTube: no stable anonymous progressive URL without yt-dlp — skip.
+  // YouTube: no anonymous progressive URL — sampling uses yt-dlp separately.
   return null;
+}
+
+let ytDlpCached: boolean | null = null;
+
+/** True when yt-dlp is on PATH and not disabled via ACRCLOUD_YT_DLP=0. */
+export async function ytDlpAvailable(): Promise<boolean> {
+  if (process.env.ACRCLOUD_YT_DLP === "0") return false;
+  if (ytDlpCached != null) return ytDlpCached;
+  try {
+    await execFileAsync("yt-dlp", ["--version"], { timeout: 5_000 });
+    ytDlpCached = true;
+  } catch {
+    ytDlpCached = false;
+  }
+  return ytDlpCached;
+}
+
+/** Reset cached yt-dlp probe (tests). */
+export function resetYtDlpAvailableCache(): void {
+  ytDlpCached = null;
+}
+
+/**
+ * yt-dlp `--download-sections` time range (`*START-END`, seconds).
+ * Adds a small pad so Identify gets a full sampleSec of audio.
+ */
+export function ytDlpSectionRange(
+  offsetSec: number,
+  sampleSec: number,
+): string {
+  const start = Math.max(0, Math.floor(offsetSec));
+  const end = start + Math.max(1, Math.ceil(sampleSec));
+  return `*${start}-${end}`;
+}
+
+/**
+ * Cut a short mono mp3 from a YouTube watch URL via yt-dlp (+ ffmpeg post).
+ * Uses --download-sections so we never pull the full Relive.
+ */
+export async function sampleClipFromYoutube(
+  pageUrl: string,
+  offsetSec: number,
+  sampleSec: number,
+): Promise<Buffer | null> {
+  if (!(await ytDlpAvailable())) {
+    console.warn("[acrcloud] yt-dlp not available — cannot sample YouTube");
+    return null;
+  }
+  const dir = await mkdtemp(join(tmpdir(), "setradar-acr-yt-"));
+  const outTpl = join(dir, "clip.%(ext)s");
+  const section = ytDlpSectionRange(offsetSec, sampleSec);
+  const cookiePath = (process.env.ACRCLOUD_YTDLP_COOKIES || "").trim();
+  const args = [
+    "--no-playlist",
+    "--no-warnings",
+    "-f",
+    "bestaudio/best",
+    "--download-sections",
+    section,
+    "--force-keyframes-at-cuts",
+    "-x",
+    "--audio-format",
+    "mp3",
+    "--audio-quality",
+    "5",
+    "-o",
+    outTpl,
+  ];
+  if (cookiePath) {
+    args.push("--cookies", cookiePath);
+  }
+  args.push(pageUrl);
+  try {
+    await execFileAsync("yt-dlp", args, {
+      timeout: 180_000,
+      maxBuffer: 8 * 1024 * 1024,
+    });
+    const files = await readdir(dir);
+    const mp3 = files.find((f) => f.endsWith(".mp3"));
+    if (!mp3) {
+      console.warn(
+        `[acrcloud] yt-dlp produced no mp3 @${offsetSec}s for ${pageUrl}`,
+      );
+      return null;
+    }
+    const buf = await readFile(join(dir, mp3));
+    if (buf.length < 1000) return null;
+    return buf;
+  } catch (err) {
+    console.warn(
+      `[acrcloud] yt-dlp sample @${offsetSec}s failed:`,
+      err instanceof Error ? err.message : err,
+    );
+    return null;
+  } finally {
+    await rm(dir, { recursive: true, force: true }).catch(() => {});
+  }
+}
+
+/** Sample a clip for ACR Identify from the candidate's playback host. */
+export async function sampleClipForCandidate(
+  candidate: Pick<SparseSetCandidate, "host" | "playbackUrl">,
+  streamUrl: string | null,
+  offsetSec: number,
+  sampleSec: number,
+): Promise<Buffer | null> {
+  if (candidate.host === "youtube") {
+    return sampleClipFromYoutube(candidate.playbackUrl, offsetSec, sampleSec);
+  }
+  if (!streamUrl) return null;
+  return sampleClipFromStream(streamUrl, offsetSec, sampleSec);
 }
 
 async function resolveSoundCloudStream(
@@ -930,14 +1046,27 @@ async function enrichOneSet(
     >
   >,
 ): Promise<{ probed: number; identified: number; unresolved: number }> {
-  const stream = await resolvePlaybackStream(candidate.playbackUrl, {
-    allowYoutube: opts.allowYoutube,
-  });
-  if (!stream) {
-    console.log(
-      `[acrcloud] skip ${candidate.slug}: no stream (${candidate.host})`,
-    );
-    return { probed: 0, identified: 0, unresolved: 0 };
+  // YouTube: selection already applied allow/priority policy. Clips come from
+  // yt-dlp (no progressive stream URL). SC/hearthis still need a stream.
+  let streamUrl: string | null = null;
+  if (candidate.host === "youtube") {
+    if (!(await ytDlpAvailable())) {
+      console.log(
+        `[acrcloud] skip ${candidate.slug}: YouTube needs yt-dlp on PATH`,
+      );
+      return { probed: 0, identified: 0, unresolved: 0 };
+    }
+  } else {
+    const stream = await resolvePlaybackStream(candidate.playbackUrl, {
+      allowYoutube: opts.allowYoutube,
+    });
+    if (!stream) {
+      console.log(
+        `[acrcloud] skip ${candidate.slug}: no stream (${candidate.host})`,
+      );
+      return { probed: 0, identified: 0, unresolved: 0 };
+    }
+    streamUrl = stream.streamUrl;
   }
 
   const set = await prisma.set.findUnique({
@@ -977,8 +1106,9 @@ async function enrichOneSet(
     .slice(0, 8);
   for (const play of unresolvedPlays) {
     if (probed >= opts.maxProbesPerSet) break;
-    const clip = await sampleClipFromStream(
-      stream.streamUrl,
+    const clip = await sampleClipForCandidate(
+      candidate,
+      streamUrl,
       play.timestamp,
       opts.sampleSec,
     );
@@ -1064,8 +1194,9 @@ async function enrichOneSet(
       continue;
     }
 
-    const clip = await sampleClipFromStream(
-      stream.streamUrl,
+    const clip = await sampleClipForCandidate(
+      candidate,
+      streamUrl,
       plan.offsetSec,
       opts.sampleSec,
     );

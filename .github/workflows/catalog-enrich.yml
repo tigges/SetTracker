@@ -95,9 +95,25 @@ jobs:
             echo "::warning::ACRCLOUD_HOST / ACRCLOUD_ACCESS_KEY / ACRCLOUD_ACCESS_SECRET not set. Fingerprint enrich will no-op. Add them under Settings → Secrets and variables → Actions, then re-run this workflow."
           fi
 
-      - name: Install ffmpeg
+      - name: Install ffmpeg + yt-dlp
         if: steps.acr.outputs.configured == '1'
-        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+          # yt-dlp cuts short YouTube Relive clips for ACR Identify (no full download).
+          python3 -m pip install -q -U yt-dlp
+
+      - name: Optional YouTube cookies for yt-dlp
+        if: steps.acr.outputs.configured == '1'
+        env:
+          YT_COOKIES: ${{ secrets.ACRCLOUD_YTDLP_COOKIES }}
+        run: |
+          if [ -n "$YT_COOKIES" ]; then
+            printf '%s\n' "$YT_COOKIES" > "$RUNNER_TEMP/yt-cookies.txt"
+            echo "ACRCLOUD_YTDLP_COOKIES=$RUNNER_TEMP/yt-cookies.txt" >> "$GITHUB_ENV"
+            echo "YouTube cookies present for yt-dlp."
+          else
+            echo "::notice::No ACRCLOUD_YTDLP_COOKIES secret — YT sampling may hit bot walls. Export cookies.txt from a logged-in browser and add as that secret."
+          fi
 
       - name: ACRCloud fingerprint enrich
         id: fingerprint
@@ -111,7 +127,7 @@ jobs:
           ACRCLOUD_MAX_PROBES_PER_SET: "20"
           ACRCLOUD_MIN_SCORE: "70"
           ACRCLOUD_MIN_IDENTIFIED: "4"
-          # Prefer SC/hearthis streams; allow YT only for Top100 / festival priority.
+          # Prefer SC/hearthis streams; YT via yt-dlp for Top100 / festival priority.
           ACRCLOUD_ALLOW_YOUTUBE: "0"
           ACRCLOUD_ALLOW_YOUTUBE_PRIORITY: "1"
           # Multi-event focus (density + Top100 gaps) — not Street Parade-only.
