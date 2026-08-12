@@ -633,7 +633,7 @@ assert.equal(
   TL_FISHER_TML_WE1_2026,
 );
 assert.notEqual(
-  TRACKLIST_1001_BY_SOURCE_SLUG["yt-mVB-gqggrCQ"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-Uq1WP8v3U4o"],
   TL_FISHER_TML_WE1_2026,
 );
 
@@ -651,7 +651,7 @@ for (const p of fisher) {
   );
   fisherPrev = p.timestamp;
 }
-assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-mVB-gqggrCQ"]!.length >= 17);
+assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-Uq1WP8v3U4o"]!.length >= 17);
 
 assertSeedClocks(TL_MASSANO_TML_WE2_2026);
 const massanoTml = tracklist1001RowsToPlays(TL_MASSANO_TML_WE2_2026);
