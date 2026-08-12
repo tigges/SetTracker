@@ -1,13 +1,27 @@
-name: Catalog enrich (weekly)
+name: Catalog enrich
 
-# Full artwork refresh + MusicBrainz + ACRCloud fingerprint gap-fill.
-# Kept off the 6-hour deep path. After a successful enrich, triggers a fast
-# Pages deploy so fingerprint IDs ship without waiting for the next push.
+# Artwork / MusicBrainz + ACRCloud fingerprint gap-fill in selectable modes so
+# a quick "did YT ACR work?" run does not cost the full 2.5h weekly pass:
+#   full  — thumbs + MusicBrainz + deep ACR (40 sets × 20 probes)  [weekly]
+#   acr   — priority ACR only, no thumbs (15 sets × 12 probes)     [enrich-request / manual]
+#   smoke — tiny ACR check, no thumbs (4 sets × 5 probes)          [manual: creds/cookies]
+# After a successful enrich, dispatches deploy-pages so IDs ship without a push.
 on:
   schedule:
     - cron: "30 4 * * 1"
   workflow_dispatch:
-  # Agents often lack workflow_dispatch; bump data/enrich-request on main to start.
+    inputs:
+      mode:
+        description: "full (thumbs+MB+deep ACR) | acr (priority ACR only) | smoke (tiny ACR check)"
+        required: true
+        default: "acr"
+        type: choice
+        options:
+          - acr
+          - smoke
+          - full
+  # Agents often lack workflow_dispatch; bump data/enrich-request on main to start
+  # an `acr` (fast) run.
   push:
     branches: [main]
     paths:
@@ -17,8 +31,10 @@ permissions:
   contents: read
   actions: write
 
+# Separate lanes per mode so a quick smoke/acr check never queues behind a
+# long-running weekly `full` pass (and vice versa).
 concurrency:
-  group: catalog-enrich
+  group: catalog-enrich-${{ github.event.inputs.mode || (github.event_name == 'push' && 'acr') || 'full' }}
   cancel-in-progress: false
 
 jobs:
@@ -37,6 +53,27 @@ jobs:
 
       - name: Generate Prisma client
         run: npx prisma generate
+
+      - name: Resolve enrich mode
+        id: mode
+        run: |
+          set -euo pipefail
+          case "${{ github.event_name }}" in
+            workflow_dispatch) MODE="${{ inputs.mode }}" ;;
+            push)              MODE="acr" ;;    # data/enrich-request bump = fast ACR
+            *)                 MODE="full" ;;   # weekly schedule = full pass
+          esac
+          case "$MODE" in
+            smoke) SET_LIMIT=4;  MAX_PROBES=5;  DO_THUMBS=0 ;;
+            acr)   SET_LIMIT=15; MAX_PROBES=12; DO_THUMBS=0 ;;
+            full)  SET_LIMIT=40; MAX_PROBES=20; DO_THUMBS=1 ;;
+            *)     echo "::error::Unknown mode '$MODE'"; exit 1 ;;
+          esac
+          echo "mode=$MODE"           >> "$GITHUB_OUTPUT"
+          echo "set_limit=$SET_LIMIT" >> "$GITHUB_OUTPUT"
+          echo "max_probes=$MAX_PROBES" >> "$GITHUB_OUTPUT"
+          echo "do_thumbs=$DO_THUMBS" >> "$GITHUB_OUTPUT"
+          echo "Enrich mode=$MODE (sets=$SET_LIMIT probes=$MAX_PROBES thumbs=$DO_THUMBS)"
 
       - name: Restore catalog DB
         id: dbcache
@@ -62,6 +99,7 @@ jobs:
           fi
 
       - name: Full thumbs + MusicBrainz
+        if: steps.mode.outputs.do_thumbs == '1'
         env:
           THUMBS_DELAY_MS: "120"
           THUMBS_NULL_ONLY: "0"
@@ -121,10 +159,11 @@ jobs:
         env:
           ACRCLOUD_ENABLED: "1"
           # Severity-ranked sparse queue (SC/hearthis first via compareSparseSetCandidates).
-          ACRCLOUD_SET_LIMIT: "40"
+          # Budgets scale with mode (smoke < acr < full) so quick checks stay cheap.
+          ACRCLOUD_SET_LIMIT: ${{ steps.mode.outputs.set_limit }}
           ACRCLOUD_SAMPLE_SEC: "12"
           ACRCLOUD_STEP_SEC: "60"
-          ACRCLOUD_MAX_PROBES_PER_SET: "20"
+          ACRCLOUD_MAX_PROBES_PER_SET: ${{ steps.mode.outputs.max_probes }}
           ACRCLOUD_MIN_SCORE: "70"
           ACRCLOUD_MIN_IDENTIFIED: "4"
           # Prefer SC/hearthis streams; YT via yt-dlp for Top100 / festival priority.
@@ -140,8 +179,9 @@ jobs:
           path: prisma/dev.db
           key: setradar-db-${{ github.run_id }}
 
-      # Ship fingerprint IDs to Pages without waiting for the next code push.
-      - name: Trigger fast Pages deploy
+      # Single deployer: hand off to deploy-pages.yml (restores the saved DB,
+      # builds, publishes). Ships fingerprint IDs without waiting for a push.
+      - name: Dispatch Pages deploy
         if: success()
         uses: actions/github-script@v7
         with:
@@ -153,4 +193,4 @@ jobs:
               ref: context.ref,
               inputs: { mode: 'fast' },
             });
-            core.info('Dispatched Deploy to GitHub Pages (fast).');
+            core.info('Dispatched Deploy to GitHub Pages (fast) after enrich (mode=${{ steps.mode.outputs.mode }}).');

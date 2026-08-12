@@ -1,6 +1,9 @@
 name: Deploy to GitHub Pages
 
-# Push = fast path only (restore cached catalog, no crawl).
+# Single deployer: the ONLY workflow that builds + publishes Pages.
+# Producers (catalog-deep, catalog-enrich) save the DB cache then dispatch this
+# workflow — they no longer build/deploy themselves.
+# Push = fast path (restore cached catalog + light curated ingest, no crawl).
 # Deep catalog refresh lives in catalog-deep.yml (separate concurrency group).
 on:
   push:
