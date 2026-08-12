@@ -9,6 +9,7 @@ import {
   planGapProbes,
   popularityRankForDjSlug,
   rankPlaybackHost,
+  ytDlpSectionRange,
   type SparseSetCandidate,
 } from "./acrcloud";
 
@@ -320,5 +321,11 @@ const pinkScFirst = [
   }),
 ].sort(compareSparseSetCandidates);
 assert.equal(pinkScFirst[0]!.id, "top20-pink-sc");
+
+// --- yt-dlp section ranges ---
+assert.equal(ytDlpSectionRange(90, 12), "*90-102");
+assert.equal(ytDlpSectionRange(0, 12), "*0-12");
+assert.equal(ytDlpSectionRange(-5, 12), "*0-12");
+assert.equal(ytDlpSectionRange(100.7, 12.2), "*100-113");
 
 console.log("acrcloud.test.ts ok");
