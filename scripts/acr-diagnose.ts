@@ -171,7 +171,8 @@ async function main() {
     console.log(`scanning ${fsUrl} (container ${fsCfg.containerId}) …`);
     try {
       const scanHits = await scanYoutube(fsCfg, fsUrl, {
-        timeoutMs: Number(process.env.ACRCLOUD_FS_TIMEOUT_MS || 420_000),
+        timeoutMs: Number(process.env.ACRCLOUD_FS_TIMEOUT_MS || 1_200_000),
+        pollMs: Number(process.env.ACRCLOUD_FS_POLL_MS || 20_000),
       });
       if (scanHits == null) {
         fsLine = "file-scan: submit/poll FAILED (token/container/region?)";

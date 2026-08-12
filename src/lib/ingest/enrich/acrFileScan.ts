@@ -300,13 +300,30 @@ export async function applyScanHitsToSet(
 
 export type FileScanStats = {
   enabled: boolean;
-  scanned: number;
+  submitted: number;
+  ready: number;
   identified: number;
   skipped: string;
 };
 
+function videoIdFromSlug(slug: string): string | null {
+  const id = slug.startsWith("yt-") ? slug.slice(3) : slug;
+  return /^[A-Za-z0-9_-]{11}$/.test(id) ? id : null;
+}
+
+/** file.uri is `youtube:video:{id}` for platform scans. */
+function videoIdFromUri(uri: unknown): string | null {
+  const m = String(uri ?? "").match(/youtube:video:([A-Za-z0-9_-]{11})/);
+  return m ? m[1]! : null;
+}
+
 /**
  * Scan sparse YouTube sets via File Scanning. Safe no-op when unconfigured.
+ *
+ * Batch model: File Scanning is async and scans server-side in parallel, so we
+ * submit all targets first, then poll the container's file list until each is
+ * ready — far better than blocking ~10–20 min per set sequentially. Results
+ * persist in the container, so a later run can still collect stragglers.
  */
 export async function enrichYoutubeSetsWithFileScan(
   prisma: PrismaClient,
@@ -315,15 +332,17 @@ export async function enrichYoutubeSetsWithFileScan(
   if (!cfg) {
     return {
       enabled: false,
-      scanned: 0,
+      submitted: 0,
+      ready: 0,
       identified: 0,
       skipped: "ACRCLOUD_FS_TOKEN / ACRCLOUD_FS_CONTAINER_ID not set",
     };
   }
   const setLimit = numEnv("ACRCLOUD_FS_SET_LIMIT", 10);
   const dryRun = process.env.ACRCLOUD_FS_DRY_RUN === "1";
+  const pollMs = numEnv("ACRCLOUD_FS_POLL_MS", 20_000);
+  const timeoutMs = numEnv("ACRCLOUD_FS_TIMEOUT_MS", 1_500_000); // 25m default
 
-  // Reuse the severity-ranked queue, then keep only YouTube-playback sets.
   const all = await selectSparseSetsForFingerprint(prisma, {
     setLimit: setLimit * 6,
     allowYoutube: true,
@@ -333,43 +352,128 @@ export async function enrichYoutubeSetsWithFileScan(
     .slice(0, setLimit);
 
   console.log(
-    `[acr-fs] ${ytOnly.length} YouTube sets to scan (base ${cfg.base}, ` +
+    `[acr-fs] ${ytOnly.length} YouTube sets (base ${cfg.base}, ` +
       `container ${cfg.containerId}, minScore ${cfg.minScore})` +
       (dryRun ? " (dry-run)" : ""),
   );
-
-  let scanned = 0;
-  let identified = 0;
-  for (const c of ytOnly) {
-    const url = youtubeWatchUrl(c.playbackUrl);
-    if (!url) continue;
-    console.log(`[acr-fs] scanning ${c.slug} → ${url}`);
-    const hits = await scanYoutube(cfg, url);
-    scanned += 1;
-    if (!hits || hits.length === 0) {
-      console.log(`[acr-fs] ${c.slug}: no matches`);
-      continue;
-    }
-    const genre = await prisma.set
-      .findUnique({ where: { id: c.id }, select: { genre: true } })
-      .then((s) => s?.genre ?? null);
-    const { written, skipped } = await applyScanHitsToSet(
-      prisma,
-      c.id,
-      genre,
-      hits,
-      { dryRun },
-    );
-    identified += written;
-    console.log(
-      `[acr-fs] ${c.slug}: ${written} written, ${skipped} skipped (${hits.length} hits)`,
-    );
+  if (ytOnly.length === 0) {
+    return {
+      enabled: true,
+      submitted: 0,
+      ready: 0,
+      identified: 0,
+      skipped: "no sparse YouTube candidates",
+    };
   }
 
+  // Phase A — submit every target (quick POSTs). Track by video id.
+  const byVideo = new Map<
+    string,
+    { candidate: SparseSetCandidate; fileId: string | null; done: boolean }
+  >();
+  let submitted = 0;
+  for (const c of ytOnly) {
+    const videoId = videoIdFromSlug(c.slug);
+    const url = youtubeWatchUrl(c.playbackUrl);
+    if (!videoId || !url) continue;
+    const fileId = await submitPlatformScan(cfg, url);
+    byVideo.set(videoId, { candidate: c, fileId, done: false });
+    if (fileId) submitted += 1;
+    console.log(
+      `[acr-fs] submit ${c.slug} → ${fileId ? `file ${fileId}` : "FAILED"}`,
+    );
+  }
+  if (submitted === 0) {
+    return {
+      enabled: true,
+      submitted: 0,
+      ready: 0,
+      identified: 0,
+      skipped: "all submits failed (token/container/region?)",
+    };
+  }
+
+  // Phase B — poll the container's file list until targets are ready.
+  let ready = 0;
+  let identified = 0;
+  const deadline = Date.now() + timeoutMs;
+  const genreCache = new Map<string, string | null>();
+
+  while (Date.now() < deadline) {
+    await new Promise((r) => setTimeout(r, pollMs));
+    let page = 1;
+    let sawFull = true;
+    while (sawFull && page <= 10) {
+      const res = await fetch(
+        `${cfg.base}/api/fs-containers/${cfg.containerId}/files?with_result=1&page=${page}&per_page=50`,
+        {
+          headers: {
+            Authorization: `Bearer ${cfg.token}`,
+            Accept: "application/json",
+          },
+          signal: AbortSignal.timeout(30_000),
+        },
+      ).catch(() => null);
+      if (!res || !res.ok) break;
+      const json = (await res.json()) as { data?: FsFile[] };
+      const files = json.data ?? [];
+      sawFull = files.length === 50;
+      page += 1;
+      for (const file of files) {
+        const vid = videoIdFromUri((file as { uri?: unknown }).uri);
+        if (!vid) continue;
+        const target = byVideo.get(vid);
+        if (!target || target.done) continue;
+        const state = Number(file.state);
+        if (state === 0) continue; // still processing
+        target.done = true;
+        ready += 1;
+        if (state !== 1) {
+          console.log(
+            `[acr-fs] ${target.candidate.slug}: state=${state} (no result)`,
+          );
+          continue;
+        }
+        const hits = parseScanHits(file, cfg.minScore);
+        if (hits.length === 0) {
+          console.log(`[acr-fs] ${target.candidate.slug}: ready, no matches`);
+          continue;
+        }
+        if (!genreCache.has(target.candidate.id)) {
+          const s = await prisma.set.findUnique({
+            where: { id: target.candidate.id },
+            select: { genre: true },
+          });
+          genreCache.set(target.candidate.id, s?.genre ?? null);
+        }
+        const { written, skipped } = await applyScanHitsToSet(
+          prisma,
+          target.candidate.id,
+          genreCache.get(target.candidate.id),
+          hits,
+          { dryRun },
+        );
+        identified += written;
+        console.log(
+          `[acr-fs] ${target.candidate.slug}: ${written} written, ${skipped} skipped (${hits.length} hits)`,
+        );
+      }
+    }
+    const pending = [...byVideo.values()].filter((v) => v.fileId && !v.done);
+    if (pending.length === 0) break;
+    console.log(`[acr-fs] waiting on ${pending.length} scan(s) still processing …`);
+  }
+
+  const stillPending = [...byVideo.values()].filter(
+    (v) => v.fileId && !v.done,
+  ).length;
   return {
     enabled: true,
-    scanned,
+    submitted,
+    ready,
     identified,
-    skipped: ytOnly.length === 0 ? "no sparse YouTube candidates" : "",
+    skipped: stillPending
+      ? `${stillPending} scan(s) still processing (results persist; next run collects)`
+      : "",
   };
 }
