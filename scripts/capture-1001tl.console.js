@@ -225,6 +225,12 @@
     ),
   );
   var rows = [];
+  var stats = {
+    items: items.length,
+    trackValues: document.querySelectorAll(".trackValue").length,
+    bareIdSkipped: 0,
+    emptyRaw: 0,
+  };
 
   if (items.length) {
     for (var i = 0; i < items.length; i++) {
@@ -243,9 +249,15 @@
         ".trackValue, span.trackValue, .tlpTog .trackValue",
       );
       var rawTrack = fromMeta || fromSpan;
-      if (!rawTrack) continue;
+      if (!rawTrack) {
+        stats.emptyRaw++;
+        continue;
+      }
       var split = splitArtistTitle(rawTrack);
-      if (opts.skipBareId && isBareId(split.artist, split.title)) continue;
+      if (opts.skipBareId && isBareId(split.artist, split.title)) {
+        stats.bareIdSkipped++;
+        continue;
+      }
       rows.push({
         num: numRaw,
         withPrev: /^w\/?$/i.test(numRaw),
@@ -270,7 +282,10 @@
       var cue2 = cueEl ? cueEl.textContent.trim() : "";
       var num2 = numEl ? numEl.textContent.trim() : "";
       var split2 = splitArtistTitle(raw);
-      if (opts.skipBareId && isBareId(split2.artist, split2.title)) continue;
+      if (opts.skipBareId && isBareId(split2.artist, split2.title)) {
+        stats.bareIdSkipped++;
+        continue;
+      }
       rows.push({
         num: num2,
         withPrev: /^w\/?$/i.test(num2),
@@ -282,9 +297,44 @@
   }
 
   if (!rows.length) {
-    window.alert(
-      "setradar 1001: no tracks found. Wait for the list to finish loading, then run again.",
-    );
+    var onTracklist = /\/tracklist\//i.test(location.pathname || "");
+    var why;
+    if (!onTracklist) {
+      why =
+        "URL is not a /tracklist/… page (search/DJ/source pages have no rows). Open the set’s tracklist URL first.";
+    } else if (stats.items === 0 && stats.trackValues === 0) {
+      why =
+        "DOM has 0 .tlpItem / .trackValue — scroll the list fully, dismiss login/cookie walls, wait for load, then re-run.";
+    } else if (stats.bareIdSkipped > 0) {
+      why =
+        "Found " +
+        stats.bareIdSkipped +
+        " bare ID row(s) only (skipped). Re-run with: window.__SETRADAR_1001__.skipBareId = false";
+    } else {
+      why =
+        "Rows present but no parseable titles (items=" +
+        stats.items +
+        ", trackValue=" +
+        stats.trackValues +
+        ", emptyRaw=" +
+        stats.emptyRaw +
+        ").";
+    }
+    var diag =
+      "setradar 1001: no tracks found.\n\n" +
+      why +
+      "\n\nurl: " +
+      String(location.href).slice(0, 160) +
+      "\n.tlpItem=" +
+      stats.items +
+      " .trackValue=" +
+      stats.trackValues +
+      " bareIdSkipped=" +
+      stats.bareIdSkipped;
+    try {
+      console.warn(diag, stats);
+    } catch (_e) {}
+    window.alert(diag);
     return;
   }
 
