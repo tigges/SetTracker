@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import {
   isPlaylistSetCandidate,
+  officialRelivePlaylists,
   YOUTUBE_PLAYLISTS,
 } from "./playlists";
 
@@ -54,5 +55,13 @@ assert.equal(
   isPlaylistSetCandidate("Biscits - Crush (Live @ EDC Vegas)", 259, biscitsLive),
   false,
 );
+
+const tmlRelive = YOUTUBE_PLAYLISTS.find((p) =>
+  /relive/i.test(p.seriesName),
+)!;
+assert.ok(tmlRelive);
+assert.ok((tmlRelive.limit ?? 0) >= 120);
+assert.equal(officialRelivePlaylists().length, 1);
+assert.equal(officialRelivePlaylists()[0]!.playlist, tmlRelive.playlist);
 
 console.log("playlists.test.ts ok");

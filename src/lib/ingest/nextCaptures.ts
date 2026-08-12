@@ -85,81 +85,6 @@ export const PRIORITY_CAPTURES: CapturePreset[] = [
     reason: "priority:known-1001-url",
   },
   {
-    label: "Zamna Soundsystem · Street Parade",
-    slug: "yt-1Mp9Pl6YgDM",
-    name: "TL_ZAMNA_STREET_PARADE_2025",
-    searchUrl: search1001(
-      "zamna",
-      "street parade",
-      "zurich",
-      "2025-08-09",
-    ),
-    tracklistUrl:
-      "https://www.1001tracklists.com/tracklist/122kgd91/zamna-soundsystem-center-stage-street-parade-zurich-switzerland-2025-08-09.html",
-    reason: "priority:street-parade-gap",
-  },
-  {
-    label: "Plastik Funk · Nature One",
-    slug: "yt-dEX8Y8Mzkok",
-    name: "TL_PLASTIK_FUNK_NATURE_ONE_2025",
-    searchUrl: search1001("plastik funk", "nature one", "2025"),
-    tracklistUrl:
-      "https://www.1001tracklists.com/tracklist/1v75qbbt/plastik-funk-open-air-floor-nature-one-germany-2025-08-01.html",
-    reason: "priority:top100-missing-tracks",
-  },
-  {
-    label: "Mike Williams · Tomorrowland WE2",
-    slug: "yt-WnjXXOZ8Te8",
-    name: "TL_MIKE_WILLIAMS_TML_WE2_2026",
-    searchUrl: search1001(
-      "mike williams",
-      "tomorrowland",
-      "weekend 2",
-      "2026",
-    ),
-    tracklistUrl:
-      "https://www.1001tracklists.com/tracklist/132ft5h9/mike-williams-mainstage-tomorrowland-weekend-2-belgium-2026-07-25.html",
-    reason: "priority:top100-missing-tracks",
-  },
-  {
-    label: "Boris Brejcha · Tomorrowland WE1",
-    slug: "yt-NpL_bT5vgmU",
-    name: "TL_BORIS_BREJCHA_TML_WE1_2026",
-    searchUrl: search1001(
-      "boris brejcha",
-      "mainstage",
-      "tomorrowland",
-      "weekend 1",
-      "2026",
-    ),
-    tracklistUrl:
-      "https://www.1001tracklists.com/tracklist/yfd6329/boris-brejcha-mainstage-tomorrowland-weekend-1-belgium-2026-07-18.html",
-    reason: "priority:top100-thin",
-  },
-  {
-    label: "Sebastian Ingrosso · Tomorrowland WE2",
-    slug: "yt-g4vR2VlhNtk",
-    name: "TL_SEBASTIAN_INGROSSO_TML_WE2_2026",
-    searchUrl: search1001(
-      "sebastian ingrosso",
-      "tomorrowland",
-      "weekend 2",
-      "2026",
-    ),
-    tracklistUrl:
-      "https://www.1001tracklists.com/tracklist/1407jy99/sebastian-ingrosso-freedom-stage-tomorrowland-weekend-2-belgium-2026-07-25.html",
-    reason: "priority:official-relive",
-  },
-  {
-    label: "Miss Monique · BIORHYTHM",
-    slug: "yt-1LpQZ5GTRDg",
-    name: "TL_MISS_MONIQUE_BIORHYTHM",
-    searchUrl: search1001("miss monique", "biorhythm"),
-    tracklistUrl:
-      "https://www.1001tracklists.com/tracklist/l9y8bm9/miss-monique-biorhythm-freedom-stage-tomorrowland-weekend-1-belgium-2026-07-17.html",
-    reason: "priority:artist-upload",
-  },
-  {
     label: "John Summit · Lollapalooza",
     slug: "yt-9TKqqBCmDHA",
     name: "TL_JOHN_SUMMIT_LOLLAPALOOZA",
@@ -308,7 +233,7 @@ function loadTop100Gaps(cwd: string): { slug: string; name: string; tracks: numb
  * that aren't already 1001-mapped.
  */
 export function buildNextCaptures(
-  opts: { cwd?: string; limit?: number } = {},
+  opts: { cwd?: string; limit?: number; extra?: CapturePreset[] } = {},
 ): CapturePreset[] {
   const cwd = opts.cwd ?? process.cwd();
   const limit = opts.limit ?? 10;
@@ -324,6 +249,7 @@ export function buildNextCaptures(
   };
 
   for (const p of PRIORITY_CAPTURES) push(p);
+  for (const p of opts.extra ?? []) push(p);
 
   // Prefer density gaps whose primary DJ is Top100 thin/missing.
   const topGaps = loadTop100Gaps(cwd);

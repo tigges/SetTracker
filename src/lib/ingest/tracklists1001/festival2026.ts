@@ -4509,6 +4509,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
 > = {
   "sc-charlottedewittemusic-charlotte-de-witte-at":
     TL_CHARLOTTE_DE_WITTE_TML_WE1_2026,
+  "yt-uMgz40hvySQ": TL_CHARLOTTE_DE_WITTE_TML_WE1_2026,
   "sc-cloonee-clooneeb2bprospa": TL_CLOONEE_PROSPA_DESTINO_2026,
   "sc-cloonee-cloonee-edc-2022": TL_CLOONEE_EDC_LV_2022,
   "sc-itsthewestend-westend-live-edc-2026": TL_WESTEND_EDC_LV_2026,
