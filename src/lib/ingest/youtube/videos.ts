@@ -1111,6 +1111,17 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
       "https://www.1001tracklists.com/tracklist/260tzmnk/peggy-gou-palais-des-beaux-arts-lille-france-cercle-2018-12-03.html",
   },
   {
+    // Official Coachella upload — timed tracklist in the description (17 tracks,
+    // provenance youtube). Stylized as ¥ØU$UK€ ¥UK1MAT$U.
+    video: "https://www.youtube.com/watch?v=IP9v-2nEA2E",
+    primaryArtist: dj("Yousuke Yukimatsu", { accent: "#e76f51" }),
+    genre: "Electronic",
+    type: "festival",
+    title: "Yousuke Yukimatsu - Coachella 2026 (Full Set - Weekend 2)",
+    seriesName: "Coachella",
+    eventName: "Coachella",
+  },
+  {
     // Official Relive — Circuit Grounds; 1001 URL known, seed pending capture.
     video: "https://www.youtube.com/watch?v=CMhFNEo0glw",
     primaryArtist: dj("Peggy Gou", { accent: "#e63946" }),

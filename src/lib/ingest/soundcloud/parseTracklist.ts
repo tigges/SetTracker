@@ -13,7 +13,24 @@ import type { Provenance } from "../../status";
 import type { RawPlay } from "../types";
 
 const TS_PREFIX =
-  /^(?:\[?(\d{1,2}):(\d{2})(?::(\d{2}))?\]?|\(?(\d{1,2}):(\d{2})(?::(\d{2}))?\)?)\s*[-–—.]?\s*/;
+  /^(?:\[?(\d{1,2}):(\d{2})(?::(\d{2}))?\]?|\(?(\d{1,2}):(\d{2})(?::(\d{2}))?\)?)\s*[-–—.:]?\s*/;
+
+/** Strip matching wrapping quotes: "Title" / 'Title' / “Title” / ‘Title’. */
+function stripWrappingQuotes(s: string): string {
+  const t = s.trim();
+  const pairs: [string, string][] = [
+    ['"', '"'],
+    ["'", "'"],
+    ["\u201c", "\u201d"],
+    ["\u2018", "\u2019"],
+  ];
+  for (const [open, close] of pairs) {
+    if (t.length >= 2 && t.startsWith(open) && t.endsWith(close)) {
+      return t.slice(1, -1).trim();
+    }
+  }
+  return t;
+}
 
 /** Trailing cue: "1. Artist - Title 00:39" / "... (12:05)" */
 const TS_SUFFIX =
@@ -130,7 +147,9 @@ function classifyLine(
 
   // Venue-style "00:00:00 Song Title" with no artist credit
   if (looseTitle) {
-    const trackTitle = line.replace(/\s*[-–—]\s*$/, "").trim();
+    const trackTitle = stripWrappingQuotes(
+      line.replace(/\s*[-–—]\s*$/, "").trim(),
+    );
     if (!trackTitle) return null;
     return {
       ...base,
@@ -169,8 +188,8 @@ function classifyLine(
   // Artist - Title
   const parts = line.split(/\s[-–—]\s/);
   if (parts.length >= 2) {
-    const artistName = parts[0].trim();
-    const trackTitle = parts.slice(1).join(" - ").trim();
+    const artistName = stripWrappingQuotes(parts[0].trim());
+    const trackTitle = stripWrappingQuotes(parts.slice(1).join(" - ").trim());
     if (artistName && trackTitle && !/^https?:/i.test(trackTitle)) {
       // If title still screams ID, keep unresolved
       if (/^id\b/i.test(trackTitle)) {

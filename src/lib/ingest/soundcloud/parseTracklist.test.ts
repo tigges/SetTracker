@@ -142,4 +142,25 @@ assert.equal(plugUglies[0]!.provenance, "hearthis");
 assert.ok(plugUglies[6]!.timestamp <= plugUglies[7]!.timestamp);
 assert.ok(plugUglies[7]!.timestamp <= plugUglies[8]!.timestamp);
 
+// Coachella-style description: "MM:SS: Artist - \"Title\"" (colon after
+// timestamp + quoted title). Artist must survive; quotes must be stripped.
+const coachella = parseDescriptionTracklist(
+  `0:00: Aerosmith - "Eat The Rich"
+13:00: Fred again.. x The Blessed Madonna - "Marea (We've Lost Dancing)"
+45:33: Skrillex, ISOxo - "fuze"
+50:45: Bruce Springsteen - "Born To Run"`,
+  52 * 60 + 30,
+  "youtube",
+);
+assert.equal(coachella.length, 4);
+assert.equal(coachella[0]!.artistName, "Aerosmith");
+assert.equal(coachella[0]!.trackTitle, "Eat The Rich");
+assert.equal(coachella[0]!.timestamp, 0);
+assert.equal(coachella[1]!.artistName, "Fred again.. x The Blessed Madonna");
+assert.equal(coachella[1]!.trackTitle, "Marea (We've Lost Dancing)");
+assert.equal(coachella[1]!.timestamp, 13 * 60);
+assert.equal(coachella[2]!.artistName, "Skrillex, ISOxo");
+assert.equal(coachella[2]!.trackTitle, "fuze");
+assert.equal(coachella[3]!.trackTitle, "Born To Run");
+
 console.log("parseTracklist.test.ts ok");
