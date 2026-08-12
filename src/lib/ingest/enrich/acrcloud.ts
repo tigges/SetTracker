@@ -477,12 +477,14 @@ export async function sampleClipFromYoutube(
   const outTpl = join(dir, "clip.%(ext)s");
   const section = ytDlpSectionRange(offsetSec, sampleSec);
   const cookiePath = (process.env.ACRCLOUD_YTDLP_COOKIES || "").trim();
-  // YouTube bot-walls burst requests ("Sign in to confirm you're not a bot")
-  // even with cookies. Rotate to clients that still serve formats, add retries
-  // + request pacing so successive probes in a set don't get throttled.
-  const playerClients = (
-    process.env.ACRCLOUD_YT_PLAYER_CLIENTS || "web_safari,web,tv"
-  ).trim();
+  // Retries + request pacing help with transient throttling. NOTE: YouTube
+  // bot-walls ("Sign in to confirm you're not a bot") are driven mainly by the
+  // caller IP — GitHub Actions datacenter IPs get blocked even WITH valid
+  // cookies, so CI YouTube sampling is unreliable. Prefer running from a
+  // residential IP, or use ACRCloud File Scanning (server-side fetch).
+  // player_client rotation is opt-in only (some clients break format
+  // selection, e.g. web_safari → "Requested format is not available").
+  const playerClients = (process.env.ACRCLOUD_YT_PLAYER_CLIENTS || "").trim();
   const args = [
     "--no-playlist",
     "--no-warnings",
@@ -491,8 +493,6 @@ export async function sampleClipFromYoutube(
     "--download-sections",
     section,
     "--force-keyframes-at-cuts",
-    "--extractor-args",
-    `youtube:player_client=${playerClients}`,
     "--retries",
     "5",
     "--fragment-retries",
@@ -509,6 +509,9 @@ export async function sampleClipFromYoutube(
     "-o",
     outTpl,
   ];
+  if (playerClients) {
+    args.push("--extractor-args", `youtube:player_client=${playerClients}`);
+  }
   if (cookiePath) {
     args.push("--cookies", cookiePath);
   }
