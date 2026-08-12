@@ -25,6 +25,10 @@ import {
   ytDlpAvailable,
   type AcrHit,
 } from "../src/lib/ingest/enrich/acrcloud";
+import {
+  fileScanConfig,
+  scanYoutube,
+} from "../src/lib/ingest/enrich/acrFileScan";
 
 type Probe = {
   label: string;
@@ -136,11 +140,40 @@ async function main() {
   const controlHit = control.ok && /score \d/.test(control.detail) && !/no match/.test(control.detail);
   const reliveHits = results.filter((r) => r.ok && !/no match/.test(r.detail)).length;
 
+  // C) File Scanning — server-side scan of ONE real Relive that yt-dlp cannot
+  // fetch from CI. Proves the FS credentials + pipeline bypass the bot wall.
+  let fsLine = "file-scan: not configured (set ACRCLOUD_FS_TOKEN + ACRCLOUD_FS_CONTAINER_ID)";
+  const fsCfg = fileScanConfig();
+  if (fsCfg) {
+    const fsUrl = "https://www.youtube.com/watch?v=g4vR2VlhNtk"; // Ingrosso TML WE2
+    console.log("\n=== C) File Scanning (server-side) ===");
+    console.log(`scanning ${fsUrl} (container ${fsCfg.containerId}) …`);
+    try {
+      const scanHits = await scanYoutube(fsCfg, fsUrl, {
+        timeoutMs: Number(process.env.ACRCLOUD_FS_TIMEOUT_MS || 420_000),
+      });
+      if (scanHits == null) {
+        fsLine = "file-scan: submit/poll FAILED (token/container/region?)";
+      } else {
+        fsLine = `file-scan: ${scanHits.length} tracks identified`;
+        for (const h of scanHits.slice(0, 5)) {
+          console.log(
+            `  ${String(h.offsetSec).padStart(5)}s  ${h.hit.artist} — ${h.hit.title} (${h.hit.score})`,
+          );
+        }
+      }
+    } catch (err) {
+      fsLine = `file-scan: ERROR ${err instanceof Error ? err.message : String(err)}`;
+    }
+    console.log(fsLine);
+  }
+
   const summary = [
     "",
     "=== SUMMARY ===",
     `control: ${controlHit ? "HIT ✓ (pipeline works)" : "MISS ✗"}`,
-    `relive:  ${reliveHits}/${RELIVE_PROBES.length} clips identified`,
+    `relive:  ${reliveHits}/${RELIVE_PROBES.length} clips identified (yt-dlp path)`,
+    fsLine,
   ];
   console.log(summary.join("\n"));
 
@@ -154,7 +187,8 @@ async function main() {
         "",
         `- yt-dlp: ${hasYtDlp} · cookies: ${hasCookies}`,
         `- **control**: ${controlHit ? "HIT ✓" : "MISS ✗"} — ${control.detail}`,
-        `- **relive**: ${reliveHits}/${RELIVE_PROBES.length} identified`,
+        `- **relive**: ${reliveHits}/${RELIVE_PROBES.length} identified (yt-dlp)`,
+        `- **${fsLine}**`,
         "",
         ...results.map((r) => `  - ${r.label}: ${r.detail}`),
         "",

@@ -72,4 +72,8 @@ jobs:
       - name: Run ACR diagnostic
         env:
           ACRCLOUD_ENABLED: "1"
+          # File Scanning (server-side YouTube) — no-op unless these are set.
+          ACRCLOUD_FS_TOKEN: ${{ secrets.ACRCLOUD_FS_TOKEN }}
+          ACRCLOUD_FS_CONTAINER_ID: ${{ secrets.ACRCLOUD_FS_CONTAINER_ID }}
+          ACRCLOUD_FS_REGION: ${{ secrets.ACRCLOUD_FS_REGION }}
         run: npx tsx scripts/acr-diagnose.ts
