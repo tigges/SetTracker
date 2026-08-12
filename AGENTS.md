@@ -70,12 +70,21 @@ setradar.ai.
   no crawl** (restore cached `prisma/dev.db` → build → deploy, ~minutes);
   **cron/manual `deep` = full ingest + thumbs + cache DB**. Repo Pages Source
   must be **GitHub Actions** (not branch/`/`), or GitHub race-serves this README.
+  **Single deployer:** `deploy-pages.yml` is the ONLY workflow that builds +
+  publishes Pages. `catalog-deep` and `catalog-enrich` save the DB cache then
+  **dispatch** `deploy-pages` (they no longer self-build). To ship, producers
+  hand off; to fix the build, edit one workflow.
 - **Artwork thumbnails:** `npm run thumbs` fills null `imageUrl` on Dj / Label /
  Track / Set via the Deezer Search API (no key). Idempotent; skips rows that
  already have art. Sets fall back to the primary DJ image. The Pages workflow
  runs this after ingest. UI uses `EntityThumb` with monogram fallback.
-- **Fingerprint enrich:** `npm run enrich:fingerprint` (weekly / dispatch
-  `catalog-enrich.yml` after thumbs/MB). Samples SC/hearthis `playbackUrl`
+- **Fingerprint enrich:** `npm run enrich:fingerprint` via `catalog-enrich.yml`
+  in **modes** (workflow_dispatch `mode`, or `data/enrich-request` bump = `acr`):
+  `full` (weekly cron — thumbs + MusicBrainz + deep ACR 40×20),
+  `acr` (priority ACR only, no thumbs, 15×12),
+  `smoke` (tiny ACR check, 4×5 — verify creds/cookies). Modes run in separate
+  concurrency lanes so a quick check never queues behind the weekly `full`.
+  Samples SC/hearthis `playbackUrl`
   via ffmpeg → ACRCloud Identify (`ACRCLOUD_*` secrets + `ACRCLOUD_ENABLED=1`).
   YouTube Relives (Top20 / festival priority by default) use `yt-dlp
   --download-sections` for short clips, then the same Identify path
