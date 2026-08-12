@@ -1,4 +1,4 @@
 # Bump the timestamp below (and merge to main) to start Catalog deep refresh.
 # Used when workflow_dispatch is unavailable to the actor.
-requestedAt: 2026-08-11T19:00:00Z
-reason: Catalog automation v0.2.89 — next-captures, event backfill, festival editions, ACR severity queue
+requestedAt: 2026-08-12T01:50:00Z
+reason: Fix Plastik Funk Nature One official YT (yt-dEX8Y8Mzkok replaces dead apu-wnvlrqs, v0.2.90)

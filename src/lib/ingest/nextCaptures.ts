@@ -68,9 +68,9 @@ export const PRIORITY_CAPTURES: CapturePreset[] = [
   },
   {
     label: "Plastik Funk · Nature One",
-    slug: "yt-apu-wnvlrqs",
+    slug: "yt-dEX8Y8Mzkok",
     name: "TL_PLASTIK_FUNK_NATURE_ONE_2025",
-    searchUrl: search1001("plastik funk", "nature one", "2025", "arte"),
+    searchUrl: search1001("plastik funk", "nature one", "2025"),
     reason: "priority:top100-missing-tracks",
   },
   {
