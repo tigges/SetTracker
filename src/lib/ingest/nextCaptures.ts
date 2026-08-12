@@ -70,6 +70,21 @@ export const PRIORITY_CAPTURES: CapturePreset[] = [
     reason: "priority:known-1001-url",
   },
   {
+    label: "Peggy Gou · EDC Las Vegas",
+    slug: "yt-CMhFNEo0glw",
+    name: "TL_PEGGY_GOU_EDC_LV_2026",
+    searchUrl: search1001(
+      "peggy gou",
+      "circuitgrounds",
+      "edc",
+      "las vegas",
+      "2026-05-16",
+    ),
+    tracklistUrl:
+      "https://www.1001tracklists.com/tracklist/yf1fdtk/peggy-gou-kislashki-circuitgrounds-edc-las-vegas-united-states-2026-05-16.html",
+    reason: "priority:known-1001-url",
+  },
+  {
     label: "Zamna Soundsystem · Street Parade",
     slug: "yt-1Mp9Pl6YgDM",
     name: "TL_ZAMNA_STREET_PARADE_2025",

@@ -1,6 +1,6 @@
 {
   "note": "Operator-collected 1001Tracklists URLs for next-capture queue. Fill tracklistUrl on PRIORITY_CAPTURES + rebuild next-captures when wiring.",
-  "updatedAt": "2026-08-12T04:54:00.000Z",
+  "updatedAt": "2026-08-12T04:56:00.000Z",
   "urls": [
     {
       "label": "PAN-POT · Street Parade",
@@ -22,6 +22,13 @@
       "name": "TL_HONEYLUV_ANTS_USHUAIA_2026",
       "tracklistUrl": "https://www.1001tracklists.com/tracklist/9xkrf91/honeyluv-ants-ushuaia-ibiza-spain-2026-06-17.html",
       "youtubeUrl": "https://youtu.be/sLtNC21myWM"
+    },
+    {
+      "label": "Peggy Gou · EDC Las Vegas Circuit Grounds 2026-05-16",
+      "slug": "yt-CMhFNEo0glw",
+      "name": "TL_PEGGY_GOU_EDC_LV_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/yf1fdtk/peggy-gou-kislashki-circuitgrounds-edc-las-vegas-united-states-2026-05-16.html",
+      "youtubeUrl": "https://youtu.be/CMhFNEo0glw"
     }
   ]
 }

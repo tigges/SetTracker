@@ -1092,7 +1092,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     eventName: "Dekmantel Festival",
   },
   {
-    // Official Cercle — capture queued (yt--UOMvxh4MYU).
+    // Official Cercle — capture queued (yt--UOMvxh4MYU); 1001 URL still TBD.
     video: "https://www.youtube.com/watch?v=-UOMvxh4MYU",
     primaryArtist: dj("Peggy Gou", { accent: "#e63946" }),
     genre: "House",
@@ -1100,6 +1100,17 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     title: "Peggy Gou at Palais des Beaux-Arts, Lille for Cercle",
     seriesName: "Cercle",
     eventName: "Palais des Beaux-Arts Lille",
+  },
+  {
+    // Official Relive — Circuit Grounds; 1001 URL known, seed pending capture.
+    video: "https://www.youtube.com/watch?v=CMhFNEo0glw",
+    primaryArtist: dj("Peggy Gou", { accent: "#e63946" }),
+    genre: "House",
+    type: "festival",
+    title: "Peggy Gou Live at EDC Las Vegas 2026 (Official Full Set)",
+    eventName: "EDC Las Vegas",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/yf1fdtk/peggy-gou-kislashki-circuitgrounds-edc-las-vegas-united-states-2026-05-16.html",
   },
   {
     video: "https://www.youtube.com/watch?v=uqf0mOngpIk",
