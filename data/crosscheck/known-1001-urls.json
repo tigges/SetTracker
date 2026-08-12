@@ -1,6 +1,6 @@
 {
-  "note": "Operator-collected 1001Tracklists URLs for next-capture queue. Seeds still pending desktop console capture.",
-  "updatedAt": "2026-08-12T05:04:00.000Z",
+  "note": "Operator-collected 1001Tracklists URLs. Prefer capturing recent sets (2025–2026) before archive Cercle 2018. Seeds pending desktop console capture.",
+  "updatedAt": "2026-08-12T05:18:00.000Z",
   "urls": [
     {
       "label": "PAN-POT · Street Parade",
@@ -28,7 +28,8 @@
       "slug": "yt-CMhFNEo0glw",
       "name": "TL_PEGGY_GOU_EDC_LV_2026",
       "tracklistUrl": "https://www.1001tracklists.com/tracklist/yf1fdtk/peggy-gou-kislashki-circuitgrounds-edc-las-vegas-united-states-2026-05-16.html",
-      "youtubeUrl": "https://youtu.be/CMhFNEo0glw"
+      "youtubeUrl": "https://youtu.be/CMhFNEo0glw",
+      "priority": "high"
     },
     {
       "label": "Zamna Soundsystem · Street Parade",
@@ -78,15 +79,16 @@
       "name": "TL_JOHN_SUMMIT_LOLLAPALOOZA",
       "tracklistUrl": "https://www.1001tracklists.com/tracklist/dr6kbf9/john-summit-bud-light-stage-lollapalooza-united-states-chicago-2026-07-30.html",
       "youtubeUrl": "https://www.youtube.com/watch?v=9TKqqBCmDHA"
-    }
-  ],
-  "stillMissing1001": [
+    },
     {
-      "label": "Peggy Gou · Cercle Lille",
+      "label": "Peggy Gou · Cercle Lille 2018-12-03",
       "slug": "yt--UOMvxh4MYU",
       "name": "TL_PEGGY_GOU_CERCLE_LILLE",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/260tzmnk/peggy-gou-palais-des-beaux-arts-lille-france-cercle-2018-12-03.html",
       "youtubeUrl": "https://www.youtube.com/watch?v=-UOMvxh4MYU",
-      "searchHint": "peggy gou cercle lille palais site:1001tracklists.com"
+      "priority": "low",
+      "note": "Archive official Cercle — capture after EDC 2026"
     }
-  ]
+  ],
+  "stillMissing1001": []
 }

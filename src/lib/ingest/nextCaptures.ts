@@ -122,13 +122,6 @@ export const PRIORITY_CAPTURES: CapturePreset[] = [
     reason: "priority:top100-missing-tracks",
   },
   {
-    label: "Peggy Gou · Cercle Lille",
-    slug: "yt--UOMvxh4MYU",
-    name: "TL_PEGGY_GOU_CERCLE_LILLE",
-    searchUrl: search1001("peggy gou", "cercle", "lille", "palais"),
-    reason: "priority:top100-thin",
-  },
-  {
     label: "Boris Brejcha · Tomorrowland WE1",
     slug: "yt-NpL_bT5vgmU",
     name: "TL_BORIS_BREJCHA_TML_WE1_2026",
@@ -174,6 +167,16 @@ export const PRIORITY_CAPTURES: CapturePreset[] = [
     tracklistUrl:
       "https://www.1001tracklists.com/tracklist/dr6kbf9/john-summit-bud-light-stage-lollapalooza-united-states-chicago-2026-07-30.html",
     reason: "priority:festival-set",
+  },
+  {
+    // Official Cercle upload from 2018 — keep wired, capture after recent Peggy (EDC 2026).
+    label: "Peggy Gou · Cercle Lille (2018)",
+    slug: "yt--UOMvxh4MYU",
+    name: "TL_PEGGY_GOU_CERCLE_LILLE",
+    searchUrl: search1001("peggy gou", "cercle", "lille", "palais"),
+    tracklistUrl:
+      "https://www.1001tracklists.com/tracklist/260tzmnk/peggy-gou-palais-des-beaux-arts-lille-france-cercle-2018-12-03.html",
+    reason: "archive:official-cercle-2018",
   },
 ];
 

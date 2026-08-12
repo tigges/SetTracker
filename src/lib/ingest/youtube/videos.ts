@@ -1092,7 +1092,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     eventName: "Dekmantel Festival",
   },
   {
-    // Official Cercle — capture queued (yt--UOMvxh4MYU); 1001 URL still TBD.
+    // Official Cercle (2018) — archive set; prefer capturing EDC LV 2026 first.
     video: "https://www.youtube.com/watch?v=-UOMvxh4MYU",
     primaryArtist: dj("Peggy Gou", { accent: "#e63946" }),
     genre: "House",
@@ -1100,6 +1100,8 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     title: "Peggy Gou at Palais des Beaux-Arts, Lille for Cercle",
     seriesName: "Cercle",
     eventName: "Palais des Beaux-Arts Lille",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/260tzmnk/peggy-gou-palais-des-beaux-arts-lille-france-cercle-2018-12-03.html",
   },
   {
     // Official Relive — Circuit Grounds; 1001 URL known, seed pending capture.
