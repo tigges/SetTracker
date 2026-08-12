@@ -93,9 +93,15 @@ setradar.ai.
   at score ~64, so `ACRCLOUD_MIN_SCORE=55` (70 rejected real YT hits).
   **CI caveat:** GitHub Actions datacenter IPs get YouTube bot-walled ("Sign in
   to confirm you're not a bot") even WITH `ACRCLOUD_YTDLP_COOKIES`; only very
-  popular videos slip through. Reliable YT fingerprinting needs a residential IP
-  (operator machine) or ACRCloud **File Scanning** (server-side URL fetch).
-  SC/hearthis Identify is unaffected.
+  popular videos slip through. SC/hearthis Identify is unaffected.
+- **File Scanning (YouTube, CI-safe):** `npm run enrich:filescan`
+  (`src/lib/ingest/enrich/acrFileScan.ts`; step in `catalog-enrich.yml`).
+  Server-side — POST the YouTube URL to an ACRCloud **File Scanning** container;
+  ACR downloads + fingerprints the whole video and returns matched tracks with
+  offsets, bypassing the CI bot wall. Writes the same `provenance: "fingerprint"`
+  gap-fill rows (never overwrites source). Operator secrets: `ACRCLOUD_FS_TOKEN`
+  (Console API bearer) + `ACRCLOUD_FS_CONTAINER_ID` (+ optional
+  `ACRCLOUD_FS_REGION`, default eu-west-1). No-op unless configured.
   Fills timeline gaps only with `provenance: "fingerprint"`; never overwrites
   `sourceUrl` / `sourceName`. Prefers SC/hearthis over YT. On success, enrich
   dispatches a fast Pages deploy. Agents cannot set repo secrets or (usually)

@@ -175,6 +175,19 @@ jobs:
           ACRCLOUD_EVENT_SLUGS: "street-parade,tomorrowland,ultra-miami,edc-lv,nature-one"
         run: npm run enrich:fingerprint
 
+      # Server-side YouTube fingerprinting (no yt-dlp / cookies / CI bot walls).
+      # No-op unless ACRCLOUD_FS_TOKEN + ACRCLOUD_FS_CONTAINER_ID secrets exist.
+      - name: ACRCloud File Scanning (YouTube)
+        id: filescan
+        if: steps.acr.outputs.configured == '1'
+        env:
+          ACRCLOUD_FS_TOKEN: ${{ secrets.ACRCLOUD_FS_TOKEN }}
+          ACRCLOUD_FS_CONTAINER_ID: ${{ secrets.ACRCLOUD_FS_CONTAINER_ID }}
+          ACRCLOUD_FS_REGION: ${{ secrets.ACRCLOUD_FS_REGION }}
+          ACRCLOUD_FS_MIN_SCORE: "55"
+          ACRCLOUD_FS_SET_LIMIT: ${{ steps.mode.outputs.set_limit }}
+        run: npm run enrich:filescan
+
       - name: Save enriched catalog DB
         uses: actions/cache/save@v4
         with:

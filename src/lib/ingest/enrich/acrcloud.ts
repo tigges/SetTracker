@@ -968,7 +968,7 @@ export function compareSparseSetCandidates(
   return b.durationSec - a.durationSec;
 }
 
-async function upsertFingerprintTrack(
+export async function upsertFingerprintTrack(
   prisma: PrismaClient,
   hit: AcrHit,
   setGenre: string | null | undefined,
@@ -1042,7 +1042,7 @@ async function upsertFingerprintTrack(
   return created.id;
 }
 
-async function nextPlayPosition(
+export async function nextPlayPosition(
   prisma: PrismaClient,
   setId: string,
 ): Promise<number> {

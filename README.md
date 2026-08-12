@@ -151,6 +151,28 @@ the same way. Writes `Played` rows with `provenance: fingerprint` into
 | `ACRCLOUD_YT_DLP=0` | Disable yt-dlp YouTube sampling |
 | `ACRCLOUD_YTDLP_COOKIES` | Path to Netscape cookies.txt (bot wall bypass) |
 
+#### YouTube via File Scanning (recommended for CI)
+
+yt-dlp sampling from GitHub Actions hits YouTube bot walls (datacenter IPs) even
+with cookies. **ACRCloud File Scanning** offloads the download+scan to ACRCloud's
+own servers — we POST the YouTube URL, ACR fingerprints the whole video and
+returns every matched track with an offset. `npm run enrich:filescan` (and a
+step in `catalog-enrich.yml`) scans sparse YouTube sets this way; writes the same
+`provenance: fingerprint` gap-fill rows. No-op unless configured.
+
+| Env | Effect |
+| --- | --- |
+| `ACRCLOUD_FS_TOKEN` | Console API bearer token (File Scanning) |
+| `ACRCLOUD_FS_CONTAINER_ID` | File Scanning container id |
+| `ACRCLOUD_FS_REGION` | `eu-west-1` (default) / `us-west-2` / `ap-southeast-1` |
+| `ACRCLOUD_FS_MIN_SCORE` | Accept hits ≥ score (default 55) |
+| `ACRCLOUD_FS_SET_LIMIT` | Max YouTube sets per run (default 10) |
+
+**Setup:** in the ACRCloud console create a **File Scanning** project/container
+(enable Audio Fingerprint), copy its **container id** and a **Console API access
+token**, then add `ACRCLOUD_FS_TOKEN` / `ACRCLOUD_FS_CONTAINER_ID` (+ region)
+as repo secrets.
+
 **Secrets (Settings → Secrets and variables → Actions):**
 
 | Secret | Example |
@@ -159,6 +181,9 @@ the same way. Writes `Played` rows with `provenance: fingerprint` into
 | `ACRCLOUD_ACCESS_KEY` | project access key |
 | `ACRCLOUD_ACCESS_SECRET` | project access secret |
 | `ACRCLOUD_YTDLP_COOKIES` | optional Netscape `cookies.txt` for YouTube |
+| `ACRCLOUD_FS_TOKEN` | File Scanning Console API token (YouTube) |
+| `ACRCLOUD_FS_CONTAINER_ID` | File Scanning container id |
+| `ACRCLOUD_FS_REGION` | optional container region (default `eu-west-1`) |
 
 Then run **Actions → Catalog enrich (weekly) → Run workflow**. Missing credentials → safe no-op (warning in the log). A successful enrich dispatches a fast Pages deploy so new fingerprint IDs go live.
 
