@@ -1581,11 +1581,13 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     eventName: "Tomorrowland Belgium",
   },
   {
-    video: "https://www.youtube.com/watch?v=apu-wnvlrqs",
+    // Official Nature One channel — prior id apu-wnvlrqs is dead/unavailable.
+    video: "https://www.youtube.com/watch?v=dEX8Y8Mzkok",
     primaryArtist: dj("Plastik Funk", { accent: "#06d6a0" }),
     genre: "House",
     type: "festival",
-    title: "Plastik Funk - Nature One 2025 - ARTE Concert",
+    title: "Plastik Funk at NATURE ONE 2025",
+    seriesName: "Nature One",
     eventName: "Nature One",
   },
   // --- Zürich Street Parade (ARTE Concert official full sets) ---
