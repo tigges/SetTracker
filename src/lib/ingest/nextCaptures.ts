@@ -18,6 +18,8 @@ export type CapturePreset = {
   slug: string;
   name: string;
   searchUrl: string;
+  /** Known 1001 tracklist page (preferred over searchUrl when set). */
+  tracklistUrl?: string;
   /** Why this row was queued */
   reason?: string;
 };
@@ -40,6 +42,8 @@ export const PRIORITY_CAPTURES: CapturePreset[] = [
       "zurich",
       "2025-08-09",
     ),
+    tracklistUrl:
+      "https://www.1001tracklists.com/tracklist/1sftnn01/pan-pot-opera-stage-street-parade-zurich-switzerland-2025-08-09.html",
     reason: "priority:street-parade-gap",
   },
   {
@@ -52,7 +56,33 @@ export const PRIORITY_CAPTURES: CapturePreset[] = [
       "zurich",
       "2025-08-09",
     ),
+    tracklistUrl:
+      "https://www.1001tracklists.com/tracklist/2ncvv7l1/honeyluv-center-stage-street-parade-zurich-switzerland-2025-08-09.html",
     reason: "priority:street-parade-gap",
+  },
+  {
+    label: "HoneyLuv · ANTS Ushuaïa",
+    slug: "yt-sLtNC21myWM",
+    name: "TL_HONEYLUV_ANTS_USHUAIA_2026",
+    searchUrl: search1001("honeyluv", "ants", "ushuaia", "2026-06-17"),
+    tracklistUrl:
+      "https://www.1001tracklists.com/tracklist/9xkrf91/honeyluv-ants-ushuaia-ibiza-spain-2026-06-17.html",
+    reason: "priority:known-1001-url",
+  },
+  {
+    label: "Peggy Gou · EDC Las Vegas",
+    slug: "yt-CMhFNEo0glw",
+    name: "TL_PEGGY_GOU_EDC_LV_2026",
+    searchUrl: search1001(
+      "peggy gou",
+      "circuitgrounds",
+      "edc",
+      "las vegas",
+      "2026-05-16",
+    ),
+    tracklistUrl:
+      "https://www.1001tracklists.com/tracklist/yf1fdtk/peggy-gou-kislashki-circuitgrounds-edc-las-vegas-united-states-2026-05-16.html",
+    reason: "priority:known-1001-url",
   },
   {
     label: "Zamna Soundsystem · Street Parade",
@@ -64,6 +94,8 @@ export const PRIORITY_CAPTURES: CapturePreset[] = [
       "zurich",
       "2025-08-09",
     ),
+    tracklistUrl:
+      "https://www.1001tracklists.com/tracklist/122kgd91/zamna-soundsystem-center-stage-street-parade-zurich-switzerland-2025-08-09.html",
     reason: "priority:street-parade-gap",
   },
   {
@@ -71,6 +103,8 @@ export const PRIORITY_CAPTURES: CapturePreset[] = [
     slug: "yt-dEX8Y8Mzkok",
     name: "TL_PLASTIK_FUNK_NATURE_ONE_2025",
     searchUrl: search1001("plastik funk", "nature one", "2025"),
+    tracklistUrl:
+      "https://www.1001tracklists.com/tracklist/1v75qbbt/plastik-funk-open-air-floor-nature-one-germany-2025-08-01.html",
     reason: "priority:top100-missing-tracks",
   },
   {
@@ -83,14 +117,9 @@ export const PRIORITY_CAPTURES: CapturePreset[] = [
       "weekend 2",
       "2026",
     ),
+    tracklistUrl:
+      "https://www.1001tracklists.com/tracklist/132ft5h9/mike-williams-mainstage-tomorrowland-weekend-2-belgium-2026-07-25.html",
     reason: "priority:top100-missing-tracks",
-  },
-  {
-    label: "Peggy Gou · Cercle Lille",
-    slug: "yt--UOMvxh4MYU",
-    name: "TL_PEGGY_GOU_CERCLE_LILLE",
-    searchUrl: search1001("peggy gou", "cercle", "lille", "palais"),
-    reason: "priority:top100-thin",
   },
   {
     label: "Boris Brejcha · Tomorrowland WE1",
@@ -103,6 +132,8 @@ export const PRIORITY_CAPTURES: CapturePreset[] = [
       "weekend 1",
       "2026",
     ),
+    tracklistUrl:
+      "https://www.1001tracklists.com/tracklist/yfd6329/boris-brejcha-mainstage-tomorrowland-weekend-1-belgium-2026-07-18.html",
     reason: "priority:top100-thin",
   },
   {
@@ -115,6 +146,8 @@ export const PRIORITY_CAPTURES: CapturePreset[] = [
       "weekend 2",
       "2026",
     ),
+    tracklistUrl:
+      "https://www.1001tracklists.com/tracklist/1407jy99/sebastian-ingrosso-freedom-stage-tomorrowland-weekend-2-belgium-2026-07-25.html",
     reason: "priority:official-relive",
   },
   {
@@ -122,6 +155,8 @@ export const PRIORITY_CAPTURES: CapturePreset[] = [
     slug: "yt-1LpQZ5GTRDg",
     name: "TL_MISS_MONIQUE_BIORHYTHM",
     searchUrl: search1001("miss monique", "biorhythm"),
+    tracklistUrl:
+      "https://www.1001tracklists.com/tracklist/l9y8bm9/miss-monique-biorhythm-freedom-stage-tomorrowland-weekend-1-belgium-2026-07-17.html",
     reason: "priority:artist-upload",
   },
   {
@@ -129,7 +164,19 @@ export const PRIORITY_CAPTURES: CapturePreset[] = [
     slug: "yt-9TKqqBCmDHA",
     name: "TL_JOHN_SUMMIT_LOLLAPALOOZA",
     searchUrl: search1001("john summit", "lollapalooza"),
+    tracklistUrl:
+      "https://www.1001tracklists.com/tracklist/dr6kbf9/john-summit-bud-light-stage-lollapalooza-united-states-chicago-2026-07-30.html",
     reason: "priority:festival-set",
+  },
+  {
+    // Official Cercle upload from 2018 — keep wired, capture after recent Peggy (EDC 2026).
+    label: "Peggy Gou · Cercle Lille (2018)",
+    slug: "yt--UOMvxh4MYU",
+    name: "TL_PEGGY_GOU_CERCLE_LILLE",
+    searchUrl: search1001("peggy gou", "cercle", "lille", "palais"),
+    tracklistUrl:
+      "https://www.1001tracklists.com/tracklist/260tzmnk/peggy-gou-palais-des-beaux-arts-lille-france-cercle-2018-12-03.html",
+    reason: "archive:official-cercle-2018",
   },
 ];
 

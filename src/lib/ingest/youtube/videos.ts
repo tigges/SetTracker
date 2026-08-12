@@ -1092,7 +1092,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     eventName: "Dekmantel Festival",
   },
   {
-    // Official Cercle — capture queued (yt--UOMvxh4MYU).
+    // Official Cercle (2018) — archive set; prefer capturing EDC LV 2026 first.
     video: "https://www.youtube.com/watch?v=-UOMvxh4MYU",
     primaryArtist: dj("Peggy Gou", { accent: "#e63946" }),
     genre: "House",
@@ -1100,6 +1100,19 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     title: "Peggy Gou at Palais des Beaux-Arts, Lille for Cercle",
     seriesName: "Cercle",
     eventName: "Palais des Beaux-Arts Lille",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/260tzmnk/peggy-gou-palais-des-beaux-arts-lille-france-cercle-2018-12-03.html",
+  },
+  {
+    // Official Relive — Circuit Grounds; 1001 URL known, seed pending capture.
+    video: "https://www.youtube.com/watch?v=CMhFNEo0glw",
+    primaryArtist: dj("Peggy Gou", { accent: "#e63946" }),
+    genre: "House",
+    type: "festival",
+    title: "Peggy Gou Live at EDC Las Vegas 2026 (Official Full Set)",
+    eventName: "EDC Las Vegas",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/yf1fdtk/peggy-gou-kislashki-circuitgrounds-edc-las-vegas-united-states-2026-05-16.html",
   },
   {
     video: "https://www.youtube.com/watch?v=uqf0mOngpIk",
@@ -1349,7 +1362,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     eventName: "Tomorrowland Belgium",
   },
   {
-    // Official Relive — Mainstage WE1; capture queued (yt-NpL_bT5vgmU).
+    // Official Relive — Mainstage WE1; 1001 URL known, seed pending capture.
     video: "https://www.youtube.com/watch?v=NpL_bT5vgmU",
     primaryArtist: dj("Boris Brejcha", { accent: "#ff006e" }),
     genre: "Techno",
@@ -1357,9 +1370,11 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     title: "Boris Brejcha Mainstage WE1 | Tomorrowland 2026",
     seriesName: "Tomorrowland",
     eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/yfd6329/boris-brejcha-mainstage-tomorrowland-weekend-1-belgium-2026-07-18.html",
   },
   {
-    // Official Relive — capture queued (yt-g4vR2VlhNtk).
+    // Official Relive — Freedom WE2; 1001 URL known, seed pending capture.
     video: "https://www.youtube.com/watch?v=g4vR2VlhNtk",
     primaryArtist: dj("Sebastian Ingrosso", { accent: "#4361ee" }),
     genre: "Progressive House",
@@ -1367,24 +1382,32 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     title: "Sebastian Ingrosso WE2 | Tomorrowland 2026",
     seriesName: "Tomorrowland",
     eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1407jy99/sebastian-ingrosso-freedom-stage-tomorrowland-weekend-2-belgium-2026-07-25.html",
   },
   {
-    // Artist upload — capture queued (yt-1LpQZ5GTRDg).
+    // BIORHYTHM @ Freedom Stage TML WE1; 1001 URL known, seed pending.
+    // Distinct from Miss Monique Mainstage WE2 (yt + TL_MISS_MONIQUE_TML_WE2_2026).
     video: "https://www.youtube.com/watch?v=1LpQZ5GTRDg",
     primaryArtist: dj("Miss Monique", { accent: "#9b5de5" }),
     genre: "Melodic Techno",
     type: "festival",
-    title: "Miss Monique · BIORHYTHM",
+    title: "Miss Monique · BIORHYTHM Freedom WE1 | Tomorrowland 2026",
     seriesName: "BIORHYTHM",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/l9y8bm9/miss-monique-biorhythm-freedom-stage-tomorrowland-weekend-1-belgium-2026-07-17.html",
   },
   {
-    // Artist upload — capture queued (yt-9TKqqBCmDHA).
+    // Bud Light Stage Chicago; 1001 URL known, seed pending capture.
     video: "https://www.youtube.com/watch?v=9TKqqBCmDHA",
     primaryArtist: dj("John Summit", { accent: "#4cc9f0" }),
     genre: "Tech House",
     type: "festival",
-    title: "John Summit · Lollapalooza",
+    title: "John Summit · Lollapalooza Chicago 2026",
     eventName: "Lollapalooza",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/dr6kbf9/john-summit-bud-light-stage-lollapalooza-united-states-chicago-2026-07-30.html",
   },
   {
     video: "https://www.youtube.com/watch?v=NqX1Fn6MBf0",
@@ -1504,6 +1527,8 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     title: "Mike Williams WE2 | Tomorrowland 2026",
     seriesName: "Tomorrowland",
     eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/132ft5h9/mike-williams-mainstage-tomorrowland-weekend-2-belgium-2026-07-25.html",
   },
   {
     video: "https://www.youtube.com/watch?v=4G2QlSLG0tI",
@@ -1589,6 +1614,8 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     title: "Plastik Funk at NATURE ONE 2025",
     seriesName: "Nature One",
     eventName: "Nature One",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1v75qbbt/plastik-funk-open-air-floor-nature-one-germany-2025-08-01.html",
   },
   // --- Zürich Street Parade (ARTE Concert official full sets) ---
   {
@@ -1635,6 +1662,8 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     title: "PAN-POT - Zurich Street Parade 2025 - ARTE Concert",
     seriesName: "ARTE Concert",
     eventName: "Street Parade",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1sftnn01/pan-pot-opera-stage-street-parade-zurich-switzerland-2025-08-09.html",
   },
   {
     video: "https://www.youtube.com/watch?v=WTN5ru2ceRE",
@@ -1644,6 +1673,20 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     title: "HoneyLuv - Zurich Street Parade 2025 - ARTE Concert",
     seriesName: "ARTE Concert",
     eventName: "Street Parade",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2ncvv7l1/honeyluv-center-stage-street-parade-zurich-switzerland-2025-08-09.html",
+  },
+  {
+    // Official ANTS / Ushuaïa upload; 1001 URL known — seed pending console capture.
+    video: "https://www.youtube.com/watch?v=sLtNC21myWM",
+    primaryArtist: dj("HoneyLuv", { accent: "#ff006e" }),
+    genre: "Tech House",
+    type: "festival",
+    title: "HoneyLuv @ ANTS Ushuaïa Ibiza 2026-06-17",
+    seriesName: "ANTS",
+    eventName: "Ushuaïa Ibiza",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/9xkrf91/honeyluv-ants-ushuaia-ibiza-spain-2026-06-17.html",
   },
   {
     video: "https://www.youtube.com/watch?v=tuqAdrbkYZk",
@@ -1662,6 +1705,8 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     title: "Zamna Soundsystem - Zurich Street Parade 2025 - ARTE Concert",
     seriesName: "ARTE Concert",
     eventName: "Street Parade",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/122kgd91/zamna-soundsystem-center-stage-street-parade-zurich-switzerland-2025-08-09.html",
   },
 
   {
