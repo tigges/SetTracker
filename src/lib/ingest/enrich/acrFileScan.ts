@@ -141,7 +141,14 @@ export async function submitPlatformScan(
         "Content-Type": "application/json",
         Accept: "application/json",
       },
-      body: JSON.stringify({ data_type: "platforms", url }),
+      // engine 1 = Audio Fingerprint (music recognition). Force it so a
+      // container defaulting to AI-detection (engine 5) still fingerprints —
+      // the container must still have the ACRCloud Music bucket attached.
+      body: JSON.stringify({
+        data_type: "platforms",
+        url,
+        engine: Number(process.env.ACRCLOUD_FS_ENGINE || 1) || 1,
+      }),
       signal: AbortSignal.timeout(30_000),
     },
   );

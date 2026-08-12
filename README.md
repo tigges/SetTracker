@@ -169,9 +169,12 @@ step in `catalog-enrich.yml`) scans sparse YouTube sets this way; writes the sam
 | `ACRCLOUD_FS_SET_LIMIT` | Max YouTube sets per run (default 10) |
 
 **Setup:** in the ACRCloud console create a **File Scanning** project/container
-(enable Audio Fingerprint), copy its **container id** and a **Console API access
-token**, then add `ACRCLOUD_FS_TOKEN` / `ACRCLOUD_FS_CONTAINER_ID` (+ region)
-as repo secrets.
+with the **Music Recognition (Audio Fingerprint)** engine attached to the
+ACRCloud **Music** bucket — **not** the *AI-Generated Music Detection* engine
+(that returns an `ai_detection` verdict and an empty `music[]`, so 0 tracks).
+Copy its **container id** and a **Console API access token**, then add
+`ACRCLOUD_FS_TOKEN` / `ACRCLOUD_FS_CONTAINER_ID` (+ region) as repo secrets.
+Our submit forces `engine=1` (audio fingerprint; override `ACRCLOUD_FS_ENGINE`).
 
 **Secrets (Settings → Secrets and variables → Actions):**
 
