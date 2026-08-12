@@ -1,0 +1,12 @@
+{
+  "note": "Operator-collected 1001Tracklists URLs for next-capture queue. Fill tracklistUrl on PRIORITY_CAPTURES + rebuild next-captures when wiring.",
+  "updatedAt": "2026-08-12T04:44:00.000Z",
+  "urls": [
+    {
+      "label": "PAN-POT · Street Parade",
+      "slug": "yt-LpFxQmtEeAA",
+      "name": "TL_PAN_POT_STREET_PARADE_2025",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/1sftnn01/pan-pot-opera-stage-street-parade-zurich-switzerland-2025-08-09.html"
+    }
+  ]
+}

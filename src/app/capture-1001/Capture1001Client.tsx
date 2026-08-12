@@ -10,6 +10,8 @@ export type CapturePreset = {
   slug: string;
   name: string;
   searchUrl: string;
+  /** Known 1001 tracklist page (preferred over searchUrl when set). */
+  tracklistUrl?: string;
   reason?: string;
 };
 
@@ -160,14 +162,25 @@ export function Capture1001Client({
                 >
                   Open YT
                 </a>
-                <a
-                  href={p.searchUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="rounded-md border border-line px-3 py-2 text-[13px] font-bold"
-                >
-                  Find 1001
-                </a>
+                {p.tracklistUrl ? (
+                  <a
+                    href={p.tracklistUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="rounded-md border border-line px-3 py-2 text-[13px] font-bold"
+                  >
+                    Open 1001
+                  </a>
+                ) : (
+                  <a
+                    href={p.searchUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="rounded-md border border-line px-3 py-2 text-[13px] font-bold"
+                  >
+                    Find 1001
+                  </a>
+                )}
                 <button
                   type="button"
                   className="rounded-md border border-line px-3 py-2 text-[13px] font-bold"

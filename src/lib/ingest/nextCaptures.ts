@@ -18,6 +18,8 @@ export type CapturePreset = {
   slug: string;
   name: string;
   searchUrl: string;
+  /** Known 1001 tracklist page (preferred over searchUrl when set). */
+  tracklistUrl?: string;
   /** Why this row was queued */
   reason?: string;
 };
@@ -40,6 +42,8 @@ export const PRIORITY_CAPTURES: CapturePreset[] = [
       "zurich",
       "2025-08-09",
     ),
+    tracklistUrl:
+      "https://www.1001tracklists.com/tracklist/1sftnn01/pan-pot-opera-stage-street-parade-zurich-switzerland-2025-08-09.html",
     reason: "priority:street-parade-gap",
   },
   {
