@@ -276,7 +276,22 @@ export async function scanYoutube(
       console.log(`[acr-fs] file ${fileId} state=${state}`);
       lastState = state;
     }
-    if (state === 1) return parseScanHits(file, cfg.minScore);
+    if (state === 1) {
+      const musicLen = file.results?.music?.length ?? 0;
+      const keys = file.results ? Object.keys(file.results) : [];
+      console.log(
+        `[acr-fs] ready: results keys=[${keys.join(",")}] music=${musicLen}`,
+      );
+      if (musicLen === 0) {
+        // Help diagnose empty results (e.g. container missing the Music DB).
+        try {
+          console.log(
+            `[acr-fs] raw results: ${JSON.stringify(file.results).slice(0, 400)}`,
+          );
+        } catch {}
+      }
+      return parseScanHits(file, cfg.minScore);
+    }
     if (state === -1) return []; // ready, no matches
     if (state === -2 || state === -3) {
       console.warn(`[acr-fs] scan error state=${state} for ${url}`);
