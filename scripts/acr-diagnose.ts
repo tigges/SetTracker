@@ -27,6 +27,7 @@ import {
 } from "../src/lib/ingest/enrich/acrcloud";
 import {
   fileScanConfig,
+  listFileScanContainers,
   scanYoutube,
 } from "../src/lib/ingest/enrich/acrFileScan";
 
@@ -147,6 +148,26 @@ async function main() {
   if (fsCfg) {
     const fsUrl = "https://www.youtube.com/watch?v=g4vR2VlhNtk"; // Ingrosso TML WE2
     console.log("\n=== C) File Scanning (server-side) ===");
+    // Always list the containers this token can see, so a wrong id/region is
+    // obvious ("Invalid Container").
+    try {
+      const containers = await listFileScanContainers(fsCfg.token);
+      if (containers.length === 0) {
+        console.log(
+          "  token sees NO File Scanning containers in eu-west-1/us-west-2/ap-southeast-1 — check token/plan",
+        );
+      } else {
+        console.log("  containers visible to this token:");
+        for (const c of containers) {
+          const mark = c.id === fsCfg.containerId ? " <- configured" : "";
+          console.log(
+            `    region=${c.region} id=${c.id} name="${c.name}"${mark}`,
+          );
+        }
+      }
+    } catch (e) {
+      console.log(`  container list failed: ${e instanceof Error ? e.message : e}`);
+    }
     console.log(`scanning ${fsUrl} (container ${fsCfg.containerId}) …`);
     try {
       const scanHits = await scanYoutube(fsCfg, fsUrl, {

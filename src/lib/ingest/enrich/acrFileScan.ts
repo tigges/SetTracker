@@ -88,6 +88,45 @@ type FsFile = {
   };
 };
 
+/**
+ * List File Scanning containers visible to a token across all regions.
+ * Used by the diagnostic to reveal the correct container id + region when a
+ * configured id is rejected ("Invalid Container").
+ */
+export async function listFileScanContainers(
+  token: string,
+): Promise<Array<{ region: string; base: string; id: string; name: string }>> {
+  const out: Array<{ region: string; base: string; id: string; name: string }> =
+    [];
+  for (const [region, base] of Object.entries(REGION_BASE)) {
+    try {
+      const res = await fetch(`${base}/api/fs-containers?page=1&per_page=50`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: "application/json",
+        },
+        signal: AbortSignal.timeout(20_000),
+      });
+      if (!res.ok) continue;
+      const json = (await res.json()) as {
+        data?: Array<{ id?: string | number; name?: string }>;
+      };
+      for (const c of json.data ?? []) {
+        if (c?.id == null) continue;
+        out.push({
+          region,
+          base,
+          id: String(c.id),
+          name: String(c.name ?? ""),
+        });
+      }
+    } catch {
+      // ignore region errors
+    }
+  }
+  return out;
+}
+
 /** Submit a YouTube URL to the container. Returns the created file id. */
 export async function submitPlatformScan(
   cfg: FileScanConfig,
