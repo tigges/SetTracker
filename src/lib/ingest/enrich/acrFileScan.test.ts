@@ -1,9 +1,12 @@
 import assert from "node:assert/strict";
 import {
   fileScanConfig,
+  isHeldFileScanTarget,
   parseScanHits,
+  youtubeFileScanQueue,
   youtubeWatchUrl,
 } from "./acrFileScan";
+import type { SparseSetCandidate } from "./acrcloud";
 
 // --- youtubeWatchUrl ---
 assert.equal(
@@ -165,5 +168,93 @@ const flat = parseScanHits(
 assert.equal(flat.length, 1);
 assert.equal(flat[0]!.offsetSec, 5);
 assert.equal(flat[0]!.hit.artist, "Bad Bunny");
+
+function fsCand(
+  partial: Partial<SparseSetCandidate> & Pick<SparseSetCandidate, "id">,
+): SparseSetCandidate {
+  return {
+    slug: partial.id,
+    playbackUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    durationSec: 3600,
+    host: "youtube",
+    identifiedStrong: 0,
+    playCount: 0,
+    unresolvedCount: 0,
+    popularityRank: 999,
+    homepageBoost: 0,
+    eventBoost: 0,
+    densitySeverity: "severe",
+    publishedAtMs: 0,
+    ...partial,
+  };
+}
+
+assert.equal(
+  isHeldFileScanTarget({ primaryDjSlug: "calvin-harris" }),
+  true,
+  "held DJ slug",
+);
+assert.equal(
+  isHeldFileScanTarget({ title: "Chris Lorenzo | Tomorrowland Weekend 2" }),
+  true,
+  "held title",
+);
+assert.equal(
+  isHeldFileScanTarget({ primaryDjSlug: "holy-priest" }),
+  true,
+);
+assert.equal(
+  isHeldFileScanTarget({ primaryDjSlug: "martin-garrix" }),
+  false,
+);
+assert.equal(
+  isHeldFileScanTarget({ title: "Alesso | Tomorrowland Relive" }),
+  false,
+);
+
+// Identify ranking puts SC first; a mixed slice would drop YT. File Scanning
+// must filter YouTube before slicing so Relives still enter the queue.
+const mixedCrowd = [
+  ...Array.from({ length: 80 }, (_, i) =>
+    fsCand({
+      id: `sc-radio-${i}`,
+      host: "soundcloud",
+      playbackUrl: "https://soundcloud.com/x/y",
+    }),
+  ),
+  fsCand({ id: "yt-BUsCIK_kh_A", slug: "yt-BUsCIK_kh_A" }),
+  fsCand({ id: "yt-1lqmFLr-SkA", slug: "yt-1lqmFLr-SkA" }),
+  fsCand({
+    id: "yt-held",
+    slug: "yt-heldfanclip1",
+    primaryDjSlug: "calvin-harris",
+    title: "Calvin Harris Tomorrowland WE2",
+  }),
+  fsCand({ id: "yt-fhiZ1Rj9o-A", slug: "yt-fhiZ1Rj9o-A" }),
+];
+const queue = youtubeFileScanQueue(mixedCrowd, 15);
+assert.deepEqual(
+  queue.map((c) => c.slug),
+  ["yt-BUsCIK_kh_A", "yt-1lqmFLr-SkA", "yt-fhiZ1Rj9o-A"],
+);
+assert.equal(
+  queue.some((c) => c.host !== "youtube"),
+  false,
+);
+assert.equal(
+  queue.some((c) => c.primaryDjSlug === "calvin-harris"),
+  false,
+);
+
+const capped = youtubeFileScanQueue(
+  [
+    fsCand({ id: "yt-aaaaaaa1111", slug: "yt-aaaaaaa1111" }),
+    fsCand({ id: "yt-bbbbbbb2222", slug: "yt-bbbbbbb2222" }),
+    fsCand({ id: "yt-ccccccc3333", slug: "yt-ccccccc3333" }),
+  ],
+  2,
+);
+assert.equal(capped.length, 2);
+assert.equal(youtubeFileScanQueue(mixedCrowd, 0).length, 0);
 
 console.log("acrFileScan.test.ts ok");

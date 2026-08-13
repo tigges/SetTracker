@@ -98,12 +98,14 @@ empty `PAGES_BASE_PATH`). The github.io `/SetTracker` path is a redirect.
   (`src/lib/ingest/enrich/acrFileScan.ts`; step in `catalog-enrich.yml`).
   Server-side — POST the YouTube URL to an ACRCloud **File Scanning** container;
   ACR downloads + fingerprints the whole video and returns matched tracks with
-  offsets, bypassing the CI bot wall. Writes the same `provenance: "fingerprint"`
-  gap-fill rows (never overwrites source). Operator secrets: `ACRCLOUD_FS_TOKEN`
+  offsets, bypassing the CI bot wall. Uses a YouTube-only sparse queue (does
+  not share Identify's SC-first ranking) and skips held Relives. Writes the
+  same `provenance: "fingerprint"` gap-fill rows (never overwrites source).
+  Operator secrets: `ACRCLOUD_FS_TOKEN`
   (Console API bearer) + `ACRCLOUD_FS_CONTAINER_ID` (+ optional
   `ACRCLOUD_FS_REGION`, default eu-west-1). No-op unless configured.
   Fills timeline gaps only with `provenance: "fingerprint"`; never overwrites
-  `sourceUrl` / `sourceName`. Prefers SC/hearthis over YT. On success, enrich
+  `sourceUrl` / `sourceName`. On success, enrich
   dispatches a fast Pages deploy. Agents cannot set repo secrets or (usually)
   dispatch workflows — operator adds `ACRCLOUD_HOST` / `ACCESS_KEY` /
   `ACCESS_SECRET` under Settings → Secrets, then runs Catalog enrich. Manual

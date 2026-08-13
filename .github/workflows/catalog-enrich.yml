@@ -176,6 +176,8 @@ jobs:
         run: npm run enrich:fingerprint
 
       # Server-side YouTube fingerprinting (no yt-dlp / cookies / CI bot walls).
+      # YouTube-only sparse queue — does not share Identify's SC-first ranking,
+      # so TML radio/academy mixes cannot crowd Relives out of the slice.
       # No-op unless ACRCLOUD_FS_TOKEN + ACRCLOUD_FS_CONTAINER_ID secrets exist.
       - name: ACRCloud File Scanning (YouTube)
         id: filescan
@@ -186,6 +188,8 @@ jobs:
           ACRCLOUD_FS_REGION: ${{ secrets.ACRCLOUD_FS_REGION }}
           ACRCLOUD_FS_MIN_SCORE: "55"
           ACRCLOUD_FS_SET_LIMIT: ${{ steps.mode.outputs.set_limit }}
+          # Same festival focus as Identify so Relives at those events rank first.
+          ACRCLOUD_EVENT_SLUGS: "street-parade,tomorrowland,ultra-miami,edc-lv,nature-one"
         run: npm run enrich:filescan
 
       - name: Save enriched catalog DB

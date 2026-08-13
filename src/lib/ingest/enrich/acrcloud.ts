@@ -127,6 +127,11 @@ export type AcrEnrichOptions = {
   minScore?: number;
   dryRun?: boolean;
   allowYoutube?: boolean;
+  /**
+   * Restrict the sparse queue to one playback host. File Scanning passes
+   * `"youtube"` so SoundCloud radio cannot crowd Relives out of the slice.
+   */
+  host?: PlaybackHost;
   /** Cap ACR identify calls per set (resolve cues + gap probes). */
   maxProbesPerSet?: number;
 };
@@ -137,6 +142,8 @@ export type SparseSetCandidate = {
   playbackUrl: string;
   durationSec: number;
   host: PlaybackHost;
+  title?: string;
+  primaryDjSlug?: string | null;
   identifiedStrong: number;
   playCount: number;
   /** Unresolved ID rows on this set (comment/description IDs). */
@@ -811,6 +818,7 @@ export async function acrIdentify(
  * Prefers SoundCloud / hearthis over YouTube, then homepage-visible sparse
  * sets — especially unresolved (pink) IDs on Top 20 DJs / recent festivals.
  * YouTube is allowed for those priority targets by default.
+ * Pass `host: "youtube"` to build a YouTube-only queue (File Scanning).
  */
 export async function selectSparseSetsForFingerprint(
   prisma: PrismaClient,
@@ -819,7 +827,11 @@ export async function selectSparseSetsForFingerprint(
   const setLimit = opts.setLimit ?? numEnv("ACRCLOUD_SET_LIMIT", 5);
   const minIdentified =
     opts.minIdentifiedToSkip ?? numEnv("ACRCLOUD_MIN_IDENTIFIED", 4);
-  const allowYoutube = opts.allowYoutube ?? boolEnv("ACRCLOUD_ALLOW_YOUTUBE");
+  const hostFilter = opts.host;
+  const allowYoutube =
+    hostFilter === "youtube"
+      ? true
+      : (opts.allowYoutube ?? boolEnv("ACRCLOUD_ALLOW_YOUTUBE"));
   const allowYoutubePriority = boolEnvDefaultOn(
     "ACRCLOUD_ALLOW_YOUTUBE_PRIORITY",
   );
@@ -837,6 +849,7 @@ export async function selectSparseSetsForFingerprint(
     select: {
       id: true,
       slug: true,
+      title: true,
       playbackUrl: true,
       durationSec: true,
       publishedAt: true,
@@ -902,6 +915,7 @@ export async function selectSparseSetsForFingerprint(
     });
 
     const host = detectPlaybackHost(playbackUrl);
+    if (hostFilter && host !== hostFilter) continue;
     const rank = rankPlaybackHost(
       host,
       allowYoutube || (allowYoutubePriority && priorityTarget),
@@ -916,9 +930,11 @@ export async function selectSparseSetsForFingerprint(
     candidates.push({
       id: row.id,
       slug: row.slug,
+      title: row.title,
       playbackUrl,
       durationSec: row.durationSec,
       host,
+      primaryDjSlug: primarySlug ?? null,
       identifiedStrong,
       playCount: row.plays.length,
       unresolvedCount,
