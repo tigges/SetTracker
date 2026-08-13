@@ -1,7 +1,7 @@
 /* setradar: 1001Tracklists → TS seed (mobile bookmarklet + desktop)
  *
  * Bookmarklet (short — loads this file):
- *   javascript:(function(){var s=document.createElement("script");s.src="https://tigges.github.io/SetTracker/capture-1001tl.js?t="+Date.now();document.documentElement.appendChild(s)})();
+ *   javascript:(function(){var s=document.createElement("script");s.src="https://setradar.ai/capture-1001tl.js?t="+Date.now();document.documentElement.appendChild(s)})();
  *
  * Optional query on this script URL:
  *   ?slug=yt-7cK7rhYXbh8&name=TL_DEBORAH_STREET_PARADE_2025&durationSec=3600

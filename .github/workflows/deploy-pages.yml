@@ -129,7 +129,9 @@ jobs:
       - name: Build static export
         env:
           GITHUB_PAGES: "true"
-          PAGES_BASE_PATH: "/SetTracker"
+          # Custom domain (setradar.ai) is served at the domain root.
+          # `/SetTracker` prefixes make CSS/JS 404 on the apex.
+          PAGES_BASE_PATH: ""
           # Footer counter — bump package.json version on every release.
           NEXT_PUBLIC_APP_VERSION: ${{ steps.app_version.outputs.version }}
           NEXT_PUBLIC_GIT_SHA: ${{ github.sha }}
@@ -140,6 +142,10 @@ jobs:
           test -f out/index.html
           grep -qi "setradar" out/index.html
           grep -qi "SETRADAR" out/index.html
+          if grep -q '/SetTracker/_next' out/index.html; then
+            echo "::error::Export still prefixes /SetTracker — setradar.ai would load unstyled"
+            exit 1
+          fi
           test ! -d out/cache
           test ! -d out/server
           test -d out/sets
