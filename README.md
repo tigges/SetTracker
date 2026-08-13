@@ -157,7 +157,9 @@ yt-dlp sampling from GitHub Actions hits YouTube bot walls (datacenter IPs) even
 with cookies. **ACRCloud File Scanning** offloads the download+scan to ACRCloud's
 own servers — we POST the YouTube URL, ACR fingerprints the whole video and
 returns every matched track with an offset. `npm run enrich:filescan` (and a
-step in `catalog-enrich.yml`) scans sparse YouTube sets this way; writes the same
+step in `catalog-enrich.yml`) scans a **YouTube-only** sparse queue this way
+(Identify keeps SoundCloud/hearthis first; File Scanning does not share that
+ranking). Held Relives on the fan-clip watch list are skipped. Writes the same
 `provenance: fingerprint` gap-fill rows. No-op unless configured.
 
 | Env | Effect |
@@ -167,6 +169,7 @@ step in `catalog-enrich.yml`) scans sparse YouTube sets this way; writes the sam
 | `ACRCLOUD_FS_REGION` | `eu-west-1` (default) / `us-west-2` / `ap-southeast-1` |
 | `ACRCLOUD_FS_MIN_SCORE` | Accept hits ≥ score (default 55) |
 | `ACRCLOUD_FS_SET_LIMIT` | Max YouTube sets per run (default 10) |
+| `ACRCLOUD_EVENT_SLUGS` | Festival focus (same list as Identify; Relives at those events rank first) |
 
 **Setup:** in the ACRCloud console create a **File Scanning** project/container
 with the **Music Recognition (Audio Fingerprint)** engine attached to the

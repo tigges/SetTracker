@@ -9,9 +9,12 @@
  * video, and returns every matched track with an offset. No caller-IP problem.
  *
  * This complements — does not replace — the Identify path in `acrcloud.ts`
- * (still best for SoundCloud / hearthis streams). Same rules apply: writes
- * `provenance: "fingerprint"` into timeline gaps only, never overwrites
- * `sourceUrl` / `sourceName`, never deletes stronger source rows.
+ * (still best for SoundCloud / hearthis streams). File Scanning uses a
+ * **YouTube-only** sparse queue so Tomorrowland radio / academy mixes cannot
+ * crowd Relives out of the slice. Held Relives (fan-clip watch list) are
+ * skipped. Same write rules: `provenance: "fingerprint"` into timeline gaps
+ * only, never overwrites `sourceUrl` / `sourceName`, never deletes stronger
+ * source rows.
  *
  * Console API (bearer token), NOT the HMAC Identify signature.
  *   ACRCLOUD_FS_TOKEN         Console access token (Bearer)
@@ -26,6 +29,7 @@
  */
 import type { PrismaClient } from "@prisma/client";
 import { detectPlaybackHost } from "../../playback";
+import { HELD_RELIVE_WATCH } from "../nextCaptures";
 import {
   mapAcrMusicHit,
   nextPlayPosition,
@@ -432,6 +436,36 @@ function videoIdFromSlug(slug: string): string | null {
   return /^[A-Za-z0-9_-]{11}$/.test(id) ? id : null;
 }
 
+/**
+ * Skip File Scanning for held Relives (Calvin Harris / Chris Lorenzo / …)
+ * until an official upload is wired. Matches DJ slug or set title.
+ */
+export function isHeldFileScanTarget(opts: {
+  title?: string | null;
+  primaryDjSlug?: string | null;
+}): boolean {
+  const hay = [opts.title ?? "", (opts.primaryDjSlug ?? "").replace(/-/g, " ")]
+    .join(" ")
+    .trim();
+  if (!hay) return false;
+  return HELD_RELIVE_WATCH.some((h) => h.match.test(hay));
+}
+
+/**
+ * File Scanning queue: YouTube only, held Relives out, then slice.
+ * Identify keeps SoundCloud-first ranking; this path must not share it.
+ */
+export function youtubeFileScanQueue(
+  candidates: SparseSetCandidate[],
+  setLimit: number,
+): SparseSetCandidate[] {
+  const limit = Number.isFinite(setLimit) && setLimit > 0 ? setLimit : 0;
+  return candidates
+    .filter((c) => c.host === "youtube")
+    .filter((c) => !isHeldFileScanTarget(c))
+    .slice(0, limit);
+}
+
 /** file.uri is `youtube:video:{id}` for platform scans. */
 function videoIdFromUri(uri: unknown): string | null {
   const m = String(uri ?? "").match(/youtube:video:([A-Za-z0-9_-]{11})/);
@@ -464,16 +498,18 @@ export async function enrichYoutubeSetsWithFileScan(
   const pollMs = numEnv("ACRCLOUD_FS_POLL_MS", 20_000);
   const timeoutMs = numEnv("ACRCLOUD_FS_TIMEOUT_MS", 1_500_000); // 25m default
 
-  const all = await selectSparseSetsForFingerprint(prisma, {
-    setLimit: setLimit * 6,
+  // YouTube-only pool (over-fetch a little so held Relives can be dropped).
+  const pooled = await selectSparseSetsForFingerprint(prisma, {
+    setLimit: Math.max(setLimit * 3, setLimit),
     allowYoutube: true,
+    host: "youtube",
   });
-  const ytOnly: SparseSetCandidate[] = all
-    .filter((c) => c.host === "youtube")
-    .slice(0, setLimit);
+  const heldSkip = pooled.filter((c) => isHeldFileScanTarget(c)).length;
+  const ytOnly = youtubeFileScanQueue(pooled, setLimit);
 
   console.log(
-    `[acr-fs] ${ytOnly.length} YouTube sets (base ${cfg.base}, ` +
+    `[acr-fs] ${ytOnly.length} YouTube sets (pooled ${pooled.length}, ` +
+      `held-skip ${heldSkip}, base ${cfg.base}, ` +
       `container ${cfg.containerId}, minScore ${cfg.minScore})` +
       (dryRun ? " (dry-run)" : ""),
   );
