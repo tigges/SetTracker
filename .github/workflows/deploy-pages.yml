@@ -146,6 +146,8 @@ jobs:
             echo "::error::Export still prefixes /SetTracker — setradar.ai would load unstyled"
             exit 1
           fi
+          test -f out/SetTracker/index.html
+          grep -qi "location.replace" out/SetTracker/index.html
           test ! -d out/cache
           test ! -d out/server
           test -d out/sets
