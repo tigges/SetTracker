@@ -7,12 +7,10 @@ import {
 } from "./nextCaptures";
 import { TRACKLIST_1001_BY_SOURCE_SLUG } from "./tracklists1001/festival2026";
 
-assert.ok(PRIORITY_CAPTURES.length >= 6);
 assert.ok(PRIORITY_CAPTURES.length <= 12);
 assert.ok(search1001("fisher").includes("1001tracklists.com"));
 
 const presets = buildNextCaptures({ limit: 10 });
-assert.ok(presets.length >= 6);
 assert.ok(presets.length <= 10);
 
 // Already-wired Dom Dolla / Prydz / Zamna must not appear.

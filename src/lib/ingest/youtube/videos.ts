@@ -65,6 +65,16 @@ import {
   TL_SOLOMUN_ALLY_PALLY_2026,
   TL_SOLOMUN_EDC_LV_2026,
   TL_WESTEND_EDC_LV_2026,
+  TL_ALESSO_TML_WE2_2026,
+  TL_ARMIN_VAN_BUUREN_TML_WE2_2026,
+  TL_HONEYLUV_ANTS_USHUAIA_2026,
+  TL_HONEYLUV_STREET_PARADE_2025,
+  TL_JOHN_SUMMIT_LOLLAPALOOZA,
+  TL_MARTIN_GARRIX_TML_WE2_2026,
+  TL_PAN_POT_STREET_PARADE_2025,
+  TL_PEGGY_GOU_CERCLE_LILLE,
+  TL_PEGGY_GOU_EDC_LV_2026,
+  TL_THE_CHAINSMOKERS_TML_WE1_2026,
 } from "../tracklists1001/seeds";
 import type { RawArtist } from "../types";
 import { slugify } from "../types";
@@ -731,6 +741,67 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_ARMIN_VAN_BUUREN_YT_HOUSE_TML_2026,
   },
   {
+    // Tomorrowland official Relive — Mainstage WE2.
+    video: "https://www.youtube.com/watch?v=tg_QLGpes0k",
+    primaryArtist: dj("Armin van Buuren", {
+      accent: "#0077b6",
+      homeCity: "Leiden, NL",
+    }),
+    genre: "Trance",
+    type: "festival",
+    title: "Armin van Buuren WE2 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2s558yl9/armin-van-buuren-mainstage-tomorrowland-weekend-2-belgium-2026-07-25.html",
+    tracklist1001: TL_ARMIN_VAN_BUUREN_TML_WE2_2026,
+  },
+  {
+    // Tomorrowland official Relive — Mainstage WE2.
+    video: "https://www.youtube.com/watch?v=BUsCIK_kh_A",
+    primaryArtist: dj("Martin Garrix", {
+      accent: "#00d4ff",
+      homeCity: "Amsterdam, NL",
+    }),
+    genre: "Progressive House",
+    type: "festival",
+    title: "Martin Garrix WE2 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/25k3ynk9/martin-garrix-mainstage-tomorrowland-weekend-2-belgium-2026-07-26.html",
+    tracklist1001: TL_MARTIN_GARRIX_TML_WE2_2026,
+  },
+  {
+    // Tomorrowland official Relive — Mainstage WE1.
+    video: "https://www.youtube.com/watch?v=1lqmFLr-SkA",
+    primaryArtist: dj("The Chainsmokers", { accent: "#4cc9f0" }),
+    genre: "Future Bass",
+    type: "festival",
+    title: "The Chainsmokers WE1 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1ucg9n01/the-chainsmokers-mainstage-tomorrowland-weekend-1-belgium-2026-07-17.html",
+    tracklist1001: TL_THE_CHAINSMOKERS_TML_WE1_2026,
+  },
+  {
+    // Tomorrowland official Relive — Freedom Stage WE2.
+    video: "https://www.youtube.com/watch?v=fhiZ1Rj9o-A",
+    primaryArtist: dj("Alesso", {
+      accent: "#4895ef",
+      homeCity: "Stockholm, SE",
+    }),
+    genre: "Progressive House",
+    type: "festival",
+    title: "Alesso WE2 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1pqh5ymk/alesso-freedom-stage-tomorrowland-weekend-2-belgium-2026-07-24.html",
+    tracklist1001: TL_ALESSO_TML_WE2_2026,
+  },
+  {
     // Tomorrowland official — Captive Soul / Freedom Stage WE2; 19/21 timed.
     video: "https://www.youtube.com/watch?v=RLOghpXjuJI",
     primaryArtist: dj("Korolova", {
@@ -1115,8 +1186,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     eventName: "Dekmantel Festival",
   },
   {
-    // Official Cercle (2018) — timed tracklist in the description (provenance
-    // youtube). 1001 seed still pending; capture after EDC 2026.
+    // Official Cercle (2018) — 1001 seed captured 2026-08-13.
     video: "https://www.youtube.com/watch?v=-UOMvxh4MYU",
     primaryArtist: dj("Peggy Gou", { accent: "#e63946" }),
     genre: "House",
@@ -1126,6 +1196,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     eventName: "Palais des Beaux-Arts Lille",
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/260tzmnk/peggy-gou-palais-des-beaux-arts-lille-france-cercle-2018-12-03.html",
+    tracklist1001: TL_PEGGY_GOU_CERCLE_LILLE,
   },
   {
     // Official Coachella upload — timed tracklist in the description (17 tracks,
@@ -1139,8 +1210,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     eventName: "Coachella",
   },
   {
-    // Circuit Grounds 2026 — current YT is a third-party upload (Joseph Montano),
-    // not Insomniac Relive. 1001 URL known; seed pending console capture.
+    // Circuit Grounds 2026 — third-party YT (Joseph Montano); 1001 captured.
     video: "https://www.youtube.com/watch?v=CMhFNEo0glw",
     primaryArtist: dj("Peggy Gou", { accent: "#e63946" }),
     genre: "House",
@@ -1149,6 +1219,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     eventName: "EDC Las Vegas",
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/yf1fdtk/peggy-gou-kislashki-circuitgrounds-edc-las-vegas-united-states-2026-05-16.html",
+    tracklist1001: TL_PEGGY_GOU_EDC_LV_2026,
   },
   {
     video: "https://www.youtube.com/watch?v=uqf0mOngpIk",
@@ -1438,7 +1509,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_MISS_MONIQUE_BIORHYTHM,
   },
   {
-    // Bud Light Stage Chicago; 1001 URL known, seed pending capture.
+    // Bud Light Stage Chicago; 1001 captured 2026-08-13.
     video: "https://www.youtube.com/watch?v=9TKqqBCmDHA",
     primaryArtist: dj("John Summit", { accent: "#4cc9f0" }),
     genre: "Tech House",
@@ -1447,6 +1518,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     eventName: "Lollapalooza",
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/dr6kbf9/john-summit-bud-light-stage-lollapalooza-united-states-chicago-2026-07-30.html",
+    tracklist1001: TL_JOHN_SUMMIT_LOLLAPALOOZA,
   },
   {
     video: "https://www.youtube.com/watch?v=NqX1Fn6MBf0",
@@ -1705,6 +1777,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     eventName: "Street Parade",
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/1sftnn01/pan-pot-opera-stage-street-parade-zurich-switzerland-2025-08-09.html",
+    tracklist1001: TL_PAN_POT_STREET_PARADE_2025,
   },
   {
     video: "https://www.youtube.com/watch?v=WTN5ru2ceRE",
@@ -1716,9 +1789,10 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     eventName: "Street Parade",
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/2ncvv7l1/honeyluv-center-stage-street-parade-zurich-switzerland-2025-08-09.html",
+    tracklist1001: TL_HONEYLUV_STREET_PARADE_2025,
   },
   {
-    // Official ANTS / Ushuaïa upload; 1001 URL known — seed pending console capture.
+    // Official ANTS / Ushuaïa upload; 1001 captured 2026-08-13.
     video: "https://www.youtube.com/watch?v=sLtNC21myWM",
     primaryArtist: dj("HoneyLuv", { accent: "#ff006e" }),
     genre: "Tech House",
@@ -1728,6 +1802,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     eventName: "Ushuaïa Ibiza",
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/9xkrf91/honeyluv-ants-ushuaia-ibiza-spain-2026-06-17.html",
+    tracklist1001: TL_HONEYLUV_ANTS_USHUAIA_2026,
   },
   {
     video: "https://www.youtube.com/watch?v=tuqAdrbkYZk",

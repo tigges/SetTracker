@@ -29,81 +29,8 @@ export function search1001(...parts: string[]): string {
   return `https://www.google.com/search?q=${encodeURIComponent(q)}`;
 }
 
-/** Hand-curated high-value assists (official YT, 1001 TBD). */
-export const PRIORITY_CAPTURES: CapturePreset[] = [
-  {
-    label: "PAN-POT · Street Parade",
-    slug: "yt-LpFxQmtEeAA",
-    name: "TL_PAN_POT_STREET_PARADE_2025",
-    searchUrl: search1001(
-      "pan-pot",
-      "opera stage",
-      "street parade",
-      "zurich",
-      "2025-08-09",
-    ),
-    tracklistUrl:
-      "https://www.1001tracklists.com/tracklist/1sftnn01/pan-pot-opera-stage-street-parade-zurich-switzerland-2025-08-09.html",
-    reason: "priority:street-parade-gap",
-  },
-  {
-    label: "HoneyLuv · Street Parade",
-    slug: "yt-WTN5ru2ceRE",
-    name: "TL_HONEYLUV_STREET_PARADE_2025",
-    searchUrl: search1001(
-      "honeyluv",
-      "street parade",
-      "zurich",
-      "2025-08-09",
-    ),
-    tracklistUrl:
-      "https://www.1001tracklists.com/tracklist/2ncvv7l1/honeyluv-center-stage-street-parade-zurich-switzerland-2025-08-09.html",
-    reason: "priority:street-parade-gap",
-  },
-  {
-    label: "HoneyLuv · ANTS Ushuaïa",
-    slug: "yt-sLtNC21myWM",
-    name: "TL_HONEYLUV_ANTS_USHUAIA_2026",
-    searchUrl: search1001("honeyluv", "ants", "ushuaia", "2026-06-17"),
-    tracklistUrl:
-      "https://www.1001tracklists.com/tracklist/9xkrf91/honeyluv-ants-ushuaia-ibiza-spain-2026-06-17.html",
-    reason: "priority:known-1001-url",
-  },
-  {
-    label: "Peggy Gou · EDC Las Vegas",
-    slug: "yt-CMhFNEo0glw",
-    name: "TL_PEGGY_GOU_EDC_LV_2026",
-    searchUrl: search1001(
-      "peggy gou",
-      "circuitgrounds",
-      "edc",
-      "las vegas",
-      "2026-05-16",
-    ),
-    tracklistUrl:
-      "https://www.1001tracklists.com/tracklist/yf1fdtk/peggy-gou-kislashki-circuitgrounds-edc-las-vegas-united-states-2026-05-16.html",
-    reason: "priority:known-1001-url",
-  },
-  {
-    label: "John Summit · Lollapalooza",
-    slug: "yt-9TKqqBCmDHA",
-    name: "TL_JOHN_SUMMIT_LOLLAPALOOZA",
-    searchUrl: search1001("john summit", "lollapalooza"),
-    tracklistUrl:
-      "https://www.1001tracklists.com/tracklist/dr6kbf9/john-summit-bud-light-stage-lollapalooza-united-states-chicago-2026-07-30.html",
-    reason: "priority:festival-set",
-  },
-  {
-    // Official Cercle upload from 2018 — keep wired, capture after recent Peggy (EDC 2026).
-    label: "Peggy Gou · Cercle Lille (2018)",
-    slug: "yt--UOMvxh4MYU",
-    name: "TL_PEGGY_GOU_CERCLE_LILLE",
-    searchUrl: search1001("peggy gou", "cercle", "lille", "palais"),
-    tracklistUrl:
-      "https://www.1001tracklists.com/tracklist/260tzmnk/peggy-gou-palais-des-beaux-arts-lille-france-cercle-2018-12-03.html",
-    reason: "archive:official-cercle-2018",
-  },
-];
+/** Hand-curated high-value assists (official YT, 1001 TBD). Empty when wired. */
+export const PRIORITY_CAPTURES: CapturePreset[] = [];
 
 /** Held 1001 seeds waiting on official Relive — do not queue fan clips. */
 export const HELD_RELIVE_WATCH: {
