@@ -41,6 +41,7 @@ describe("feedPriority complete → Top 100 → festivals", () => {
     assert.equal(ranks.densitySeverity, "ok");
     assert.equal(ranks.top100Rank, 72);
     assert.equal(ranks.festivalRank, 1);
+    assert.equal(ranks.clubRank, null);
     assert.equal(ranks.venueTier, "festival");
     assert.equal(ranks.spotlight, "top100");
   });

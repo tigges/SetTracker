@@ -80,6 +80,14 @@ export function SetCard({ set }: { set: FeedItem }) {
                 · Festival #{set.festivalRank}
               </span>
             )}
+            {set.festivalRank == null && set.clubRank != null && (
+              <span
+                className="eyebrow truncate text-muted2"
+                title={FEED_SPOTLIGHT_META["top-club"].title}
+              >
+                · Club #{set.clubRank}
+              </span>
+            )}
           </div>
           <h3 className="mt-1 truncate text-[15px] font-semibold leading-tight text-ink">
             {headline}

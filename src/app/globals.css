@@ -143,3 +143,34 @@ a {
 ::selection {
   background: color-mix(in srgb, var(--brand) 30%, transparent);
 }
+
+/* Top 100 Atlas map (SVG land + pins) */
+.atlas-land {
+  fill: #1a2230;
+  stroke: #2a3444;
+  stroke-width: 0.35;
+}
+.atlas-pin {
+  cursor: pointer;
+  stroke: #07090d;
+  stroke-width: 0.35;
+}
+.atlas-pin-festival {
+  fill: var(--amber);
+}
+.atlas-pin-club {
+  fill: var(--teal);
+}
+.atlas-halo {
+  fill: none;
+  stroke-width: 0.9;
+  opacity: 0.8;
+}
+.atlas-pin-festival.atlas-halo,
+.atlas-halo.atlas-pin-festival {
+  stroke: var(--amber);
+}
+.atlas-pin-club.atlas-halo,
+.atlas-halo.atlas-pin-club {
+  stroke: var(--teal);
+}

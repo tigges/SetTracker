@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { EntityThumb } from "@/components/EntityThumb";
 import { ExpandableCardGrid } from "@/components/ExpandableCardGrid";
+import { atlasVenueBySlug } from "@/lib/atlas/seed";
 import { getLabels, getVenues } from "@/lib/queries";
 
 /** Default Labels / Directory preview — ~4 rows on a 3-col desktop grid. */
@@ -35,7 +36,13 @@ const SECTIONS: Array<{
 
 type EventRow = Awaited<ReturnType<typeof getVenues>>[number];
 
-function EventCard({ v }: { v: EventRow }) {
+function EventCard({
+  v,
+  rank,
+}: {
+  v: EventRow;
+  rank?: number | null;
+}) {
   return (
     <Link
       href={`/events/${v.slug}`}
@@ -54,6 +61,7 @@ function EventCard({ v }: { v: EventRow }) {
           {v.name}
         </div>
         <div className="mono text-[12px] text-muted2">
+          {rank != null ? `#${rank} · ` : ""}
           {v.setCount} sets
           {v.location ? ` · ${v.location}` : ""}
           {v.website ? " · www" : ""}
@@ -85,6 +93,7 @@ function bucketByKind(events: EventRow[]) {
 
 export default async function EventsPage() {
   const [events, labels] = await Promise.all([getVenues(), getLabels()]);
+  const chart = atlasVenueBySlug();
   const withSets = events.filter((v) => v.isBrowseReady);
   const directory = events.filter((v) => !v.isBrowseReady);
   const buckets = bucketByKind(withSets);
@@ -96,7 +105,10 @@ export default async function EventsPage() {
         <h1 className="mt-1 text-3xl font-extrabold tracking-tight">Events</h1>
         <p className="mt-2 max-w-2xl text-[14px] text-muted">
           Festivals, clubs, and livestream channels with sets first — curated
-          directory stubs without sets stay below.
+          directory stubs without sets stay below.{" "}
+          <Link href="/atlas" className="text-brand hover:text-brandstrong">
+            Map the 2026 Top 100 →
+          </Link>
         </p>
       </div>
 
@@ -117,7 +129,11 @@ export default async function EventsPage() {
               </div>
               <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
                 {section.items.map((v) => (
-                  <EventCard key={v.id} v={v} />
+                  <EventCard
+                    key={v.id}
+                    v={v}
+                    rank={chart.get(v.slug)?.rank}
+                  />
                 ))}
               </div>
             </section>
@@ -192,7 +208,11 @@ export default async function EventsPage() {
               previewCount={DIRECTORY_PREVIEW}
               moreLabel="events"
               items={directory.map((v) => (
-                <EventCard key={v.id} v={v} />
+                <EventCard
+                  key={v.id}
+                  v={v}
+                  rank={chart.get(v.slug)?.rank}
+                />
               ))}
             />
           </section>

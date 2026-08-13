@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/db";
+import { atlasVenueBySlug } from "@/lib/atlas/seed";
 import { normalizeGenre } from "@/lib/genre";
 import { getDjList } from "@/lib/queries";
 import { isBrowseReadySet } from "@/lib/setBrowse";
@@ -77,7 +78,15 @@ export async function getSearchIndex(): Promise<SearchIndexItem[]> {
       })
     : [];
 
-  const items: SearchIndexItem[] = [];
+  const items: SearchIndexItem[] = [
+    {
+      kind: "venue",
+      title: "Top 100 Atlas",
+      subtitle: "DJ Mag clubs & festivals 2026",
+      href: "/atlas",
+      keywords: "map dj mag top 100 clubs festivals atlas",
+    },
+  ];
 
   for (const s of sets) {
     const primary = s.artists[0]?.dj;
@@ -117,10 +126,12 @@ export async function getSearchIndex(): Promise<SearchIndexItem[]> {
     });
   }
 
+  const chart = atlasVenueBySlug();
   for (const v of venues) {
     // Keep curated venues (e.g. EDC with website) searchable even if crawl
     // hasn't re-attached sets yet.
     if (v._count.sets === 0 && !v.website) continue;
+    const atlas = chart.get(v.slug);
     items.push({
       kind: "venue",
       title: v.name,
@@ -128,7 +139,13 @@ export async function getSearchIndex(): Promise<SearchIndexItem[]> {
         .filter(Boolean)
         .join(" · "),
       href: `/events/${v.slug}`,
-      keywords: [v.website, "edc"].filter(Boolean).join(" "),
+      keywords: [
+        v.website,
+        "edc",
+        atlas ? `top 100 #${atlas.rank} ${atlas.kind} ${atlas.city} ${atlas.country}` : null,
+      ]
+        .filter(Boolean)
+        .join(" "),
     });
   }
 

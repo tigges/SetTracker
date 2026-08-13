@@ -25,7 +25,7 @@ export type VenueTier =
   | "radio"
   | "other";
 
-export type FeedSpotlight = "top100" | "top-festival";
+export type FeedSpotlight = "top100" | "top-festival" | "top-club";
 
 export const FEED_SPOTLIGHT_META: Record<
   FeedSpotlight,
@@ -40,6 +40,11 @@ export const FEED_SPOTLIGHT_META: Record<
     short: "Festival",
     label: "Top festival",
     title: "Set is linked to a DJ Mag Top 100 Festival",
+  },
+  "top-club": {
+    short: "Club",
+    label: "Top club",
+    title: "Set is linked to a DJ Mag Top 100 Club",
   },
 };
 
@@ -76,6 +81,7 @@ export type FeedPriorityFields = {
   densitySeverity?: DensitySeverity | null;
   top100Rank?: number | null;
   festivalRank?: number | null;
+  clubRank?: number | null;
   venueTier?: VenueTier | null;
   publishedAt: Date | string;
 };
@@ -96,6 +102,10 @@ export function compareFeedPriority(
   const fa = a.festivalRank ?? 999;
   const fb = b.festivalRank ?? 999;
   if (fa !== fb) return fa - fb;
+
+  const ca = a.clubRank ?? 999;
+  const cb = b.clubRank ?? 999;
+  if (ca !== cb) return ca - cb;
 
   const va = VENUE_RANK[a.venueTier ?? "other"];
   const vb = VENUE_RANK[b.venueTier ?? "other"];
@@ -163,6 +173,10 @@ export function compareEventSetPriority(
   const fb = b.festivalRank ?? 999;
   if (fa !== fb) return fa - fb;
 
+  const ca = a.clubRank ?? 999;
+  const cb = b.clubRank ?? 999;
+  if (ca !== cb) return ca - cb;
+
   return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime();
 }
 
@@ -194,6 +208,9 @@ export function radarPickScore(s: RadarPickFields, nowMs = Date.now()): number {
   }
   if (s.festivalRank != null) {
     score += Math.max(0, 22 - (s.festivalRank - 1) * 0.12);
+  }
+  if (s.clubRank != null) {
+    score += Math.max(0, 18 - (s.clubRank - 1) * 0.12);
   }
 
   if (s.venueTier === "festival") score += 12;

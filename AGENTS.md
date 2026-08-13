@@ -66,6 +66,9 @@ empty `PAGES_BASE_PATH`). The github.io `/SetTracker` path is a redirect.
   `INGEST_SYNTHETIC=1`, `SOUNDCLOUD_CLIENT_ID`. **1001Tracklists:** follow
   `1001.tl` / tracklist URLs already linked from a source description (or
   curated browser-capture seeds) — do **not** site-crawl or invent URLs.
+  **Atlas:** `/atlas` maps DJ Mag Top 100 Clubs & Festivals 2026
+  (`data/venue-seeds/djmag-atlas-2026.json` lat/lng + YoY). Pins link to
+  `/events/{slug}` when the catalog has the venue.
   Pages: **push =
   no crawl** (restore cached `prisma/dev.db` → build → deploy, ~minutes);
   **cron/manual `deep` = full ingest + thumbs + cache DB**. Repo Pages Source

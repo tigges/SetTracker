@@ -161,6 +161,7 @@ export type PopularVenueRail = {
   setCount: number;
   score: number;
   festivalRank?: number | null;
+  clubRank?: number | null;
 };
 
 function venueKindBoost(kind: string | null | undefined): number {
@@ -170,9 +171,9 @@ function venueKindBoost(kind: string | null | undefined): number {
   return 0;
 }
 
-function venueChartBoost(festivalRank: number | null | undefined): number {
-  if (festivalRank == null) return 0;
-  return Math.max(0, 36 - (festivalRank - 1) * 0.28);
+function venueChartBoost(chartRank: number | null | undefined): number {
+  if (chartRank == null) return 0;
+  return Math.max(0, 36 - (chartRank - 1) * 0.28);
 }
 
 function aggregateVenues(
@@ -195,6 +196,7 @@ function aggregateVenues(
         setCount: 1,
         score: base,
         festivalRank: s.festivalRank ?? null,
+        clubRank: s.clubRank ?? null,
       });
     } else {
       row.setCount += 1;
@@ -208,6 +210,15 @@ function aggregateVenues(
       ) {
         row.festivalRank = s.festivalRank;
       }
+      if (row.clubRank == null && s.clubRank != null) {
+        row.clubRank = s.clubRank;
+      } else if (
+        s.clubRank != null &&
+        row.clubRank != null &&
+        s.clubRank < row.clubRank
+      ) {
+        row.clubRank = s.clubRank;
+      }
       if (!row.imageUrl) {
         row.imageUrl =
           s.eventImageUrl ?? s.imageUrl ?? s.primaryDj?.imageUrl ?? null;
@@ -217,7 +228,8 @@ function aggregateVenues(
 
   for (const row of bySlug.values()) {
     row.score +=
-      venueChartBoost(row.festivalRank) + venueKindBoost(row.kind) * row.setCount;
+      venueChartBoost(row.festivalRank ?? row.clubRank) +
+      venueKindBoost(row.kind) * row.setCount;
   }
 
   return bySlug;
@@ -234,7 +246,8 @@ function rankVenueRails(
       (a, b) =>
         b.score - a.score ||
         b.setCount - a.setCount ||
-        (a.festivalRank ?? 999) - (b.festivalRank ?? 999),
+        (a.festivalRank ?? a.clubRank ?? 999) -
+        (b.festivalRank ?? b.clubRank ?? 999),
     )
     .slice(0, limit);
 }

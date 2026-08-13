@@ -131,6 +131,7 @@ export async function getFeed() {
         spotlight: ranks.spotlight,
         top100Rank: ranks.top100Rank,
         festivalRank: ranks.festivalRank,
+        clubRank: ranks.clubRank,
         venueTier: ranks.venueTier,
         densitySeverity: ranks.densitySeverity,
       };
@@ -929,6 +930,7 @@ export async function getVenueBySlug(slug: string) {
         spotlight: ranks.spotlight,
         top100Rank: ranks.top100Rank,
         festivalRank: ranks.festivalRank,
+        clubRank: ranks.clubRank,
         venueTier: ranks.venueTier,
         densitySeverity: ranks.densitySeverity,
       } satisfies FeedItem;

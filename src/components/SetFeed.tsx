@@ -31,7 +31,8 @@ function isRadarCandidate(s: FeedItem): boolean {
   return (
     s.densitySeverity === "ok" ||
     s.top100Rank != null ||
-    s.festivalRank != null
+    s.festivalRank != null ||
+    s.clubRank != null
   );
 }
 

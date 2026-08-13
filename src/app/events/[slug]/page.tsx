@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import { ExpandableChipRow } from "@/components/ExpandableChipRow";
 import { SetCard } from "@/components/SetCard";
 import { SocialLinks } from "@/components/SocialLinks";
+import { ATLAS_YEAR, lookupAtlasVenue } from "@/lib/atlas/seed";
+import { chartKicker } from "@/lib/atlas/mapMath";
 import { getAllVenueSlugs, getVenueBySlug } from "@/lib/queries";
 
 /** Keep the first viewport light — expand for the rest. */
@@ -22,24 +24,43 @@ export default async function EventPage({
   const { slug } = await params;
   const event = await getVenueBySlug(slug);
   if (!event) notFound();
+  const chart = lookupAtlasVenue(event.slug);
+  const place = chart?.loc || event.location;
 
   return (
     <div>
-      <Link
-        href="/events"
-        className="mono text-[12px] text-muted2 transition-colors hover:text-ink"
-      >
-        ← Events
-      </Link>
+      <div className="flex flex-wrap items-center gap-3">
+        <Link
+          href="/events"
+          className="mono text-[12px] text-muted2 transition-colors hover:text-ink"
+        >
+          ← Events
+        </Link>
+        {chart ? (
+          <Link
+            href={`/atlas#${chart.slug}`}
+            className="mono text-[12px] text-muted2 transition-colors hover:text-ink"
+          >
+            Atlas
+          </Link>
+        ) : null}
+      </div>
 
       <div className="mt-4 mb-8">
         <p className="eyebrow">Event</p>
         <h1 className="mt-1 text-3xl font-extrabold tracking-tight">
           {event.name}
         </h1>
+        {chart ? (
+          <p className="mt-1 text-[13px] text-muted">
+            DJ Mag Top 100 {chartKicker(chart.kind, chart.rank)} {ATLAS_YEAR}
+            {" · "}
+            {chart.change} vs {ATLAS_YEAR - 1}
+          </p>
+        ) : null}
         <p className="mt-2 text-[14px] text-muted">
           <span className="mono">{event.setCount}</span> sets
-          {event.location ? ` · ${event.location}` : ""}
+          {place ? ` · ${place}` : ""}
           {event.kind ? ` · ${event.kind}` : ""}
         </p>
         <div className="mt-3">
