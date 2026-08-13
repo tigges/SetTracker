@@ -1,12 +1,14 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { GenreFilter } from "@/components/GenreFilter";
 import { PopularRails } from "@/components/PopularRails";
 import { SetCard } from "@/components/SetCard";
 import {
   compareFeedPriority,
   pickRadarPicks,
 } from "@/lib/feedPriority";
+import { setMatchesGenreFilter } from "@/lib/genreFamilies";
 import {
   festivalSeasonSets,
   popularDjsThisWeek,
@@ -14,14 +16,6 @@ import {
   popularVenuesThisWeek,
 } from "@/lib/popularity";
 import type { FeedItem } from "@/lib/queries";
-
-const TYPES = [
-  { id: "all", label: "All" },
-  { id: "radio", label: "Radio" },
-  { id: "festival", label: "Festival" },
-  { id: "soundcloud", label: "SoundCloud" },
-  { id: "mix", label: "Mix" },
-] as const;
 
 /** Homepage clusters — 3×3 on desktop. */
 const CLUSTER = 9;
@@ -52,33 +46,14 @@ function identifiedRatio(s: FeedItem): number {
   return (c.identified ?? 0) / total;
 }
 
-const chip = (active: boolean) =>
-  `rounded-full border px-3 py-1 text-[12px] transition-colors ${
-    active
-      ? "border-brand bg-[color:var(--brand)]/10 text-brand"
-      : "border-line text-muted hover:border-muted2 hover:text-ink"
-  }`;
-
-function matchesGenre(s: FeedItem, genre: string): boolean {
-  if (genre === "all") return true;
-  if (s.genres?.some((g) => g === genre)) return true;
-  return s.genre === genre;
-}
-
 /**
  * Homepage feed:
  * New this week → Popular sets → In-demand DJs (Top 100) / Top events →
  * Radar picks → Deep catalog.
  */
 export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }) {
-  const [type, setType] = useState("all");
   const [genre, setGenre] = useState("all");
   const [visible, setVisible] = useState(PAGE_SIZE);
-
-  function selectType(next: string) {
-    setType(next);
-    setVisible(PAGE_SIZE);
-  }
 
   function selectGenre(next: string) {
     setGenre(next);
@@ -86,10 +61,8 @@ export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }
   }
 
   const filtered = useMemo(() => {
-    return feed.filter(
-      (s) => (type === "all" || s.type === type) && matchesGenre(s, genre),
-    );
-  }, [feed, type, genre]);
+    return feed.filter((s) => setMatchesGenreFilter(s, genre));
+  }, [feed, genre]);
 
   const {
     newWeek,
@@ -149,54 +122,11 @@ export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }
 
   return (
     <div>
-      <div className="mb-6 space-y-4">
-        <div>
-          <p className="mb-1.5 mono text-[10px] uppercase tracking-[0.14em] text-muted2">
-            Category
-          </p>
-          <div className="flex flex-wrap items-center gap-1.5">
-            {TYPES.map((t) => (
-              <button
-                key={t.id}
-                type="button"
-                onClick={() => selectType(t.id)}
-                className={chip(type === t.id)}
-              >
-                {t.label}
-              </button>
-            ))}
-            <span className="mono ml-1 text-[12px] text-muted2">
-              {filtered.length} sets
-            </span>
-          </div>
-        </div>
-
-        {genres.length > 0 && (
-          <div>
-            <p className="mb-1.5 mono text-[10px] uppercase tracking-[0.14em] text-muted2">
-              Genre
-            </p>
-            <div className="scroll-thin flex flex-nowrap gap-1.5 overflow-x-auto pb-1">
-              <button
-                type="button"
-                onClick={() => selectGenre("all")}
-                className={chip(genre === "all")}
-              >
-                All
-              </button>
-              {genres.map((g) => (
-                <button
-                  key={g}
-                  type="button"
-                  onClick={() => selectGenre(g)}
-                  className={`${chip(genre === g)} whitespace-nowrap`}
-                >
-                  {g}
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
+      <div className="mb-6 flex items-center justify-between gap-3">
+        <span className="mono text-[12px] text-muted2">
+          {filtered.length} sets
+        </span>
+        <GenreFilter genres={genres} value={genre} onChange={selectGenre} />
       </div>
 
       {filtered.length === 0 ? (
