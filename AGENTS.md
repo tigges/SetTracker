@@ -8,8 +8,8 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 setradar.ai (package name `setradar`) is a single Next.js 16 app (App Router +
 Turbopack) backed by Prisma 6 on SQLite. There is only one service to run.
-GitHub Pages still deploys at `/SetTracker` (repo path); product brand is
-setradar.ai.
+GitHub Pages deploys the static export at https://setradar.ai/ (custom domain,
+empty `PAGES_BASE_PATH`). The github.io `/SetTracker` path is a redirect.
 
 - **Run the app:** `npm run dev` (Turbopack, http://localhost:3000). Dev output
   goes to `.next/dev` in Next 16.

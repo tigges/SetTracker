@@ -5,7 +5,7 @@ episodes, festival sets and SoundCloud mixes; every track row carries a
 **status** and **provenance** so you can see what's identified and what's still
 an ID.
 
-> Live app: https://tigges.github.io/SetTracker/
+> Live app: https://setradar.ai/
 >
 > **Pages setup (required):** Repo → Settings → Pages → **Source = GitHub Actions**
 > (not “Deploy from a branch”). If Source is the `main` branch root, GitHub
@@ -195,10 +195,13 @@ ships with empty `/sets/[slug]` routes.
 
 ```bash
 # reproduce the static export locally → writes to out/
+# Custom domain (setradar.ai) is served at the domain root:
+GITHUB_PAGES=true PAGES_BASE_PATH= npm run build
+# github.io project path only:
 GITHUB_PAGES=true PAGES_BASE_PATH=/SetTracker npm run build
 ```
 
-The Pages build sets `output: "export"` with `basePath=/SetTracker` (the GitHub
-repo subpath — product brand is setradar.ai; the path is unchanged until the
-repo/domain is renamed). Local dev and `next start` are unaffected — the export
-only activates when `GITHUB_PAGES=true`.
+The Pages workflow sets `output: "export"` with an empty `basePath` so
+https://setradar.ai/ loads CSS/JS from `/_next/…`. A `/SetTracker` prefix
+404s those assets on the custom domain (unstyled HTML). Local `next dev` /
+`next start` are unaffected — the export only activates when `GITHUB_PAGES=true`.

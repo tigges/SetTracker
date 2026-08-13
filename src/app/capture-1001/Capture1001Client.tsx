@@ -2,8 +2,7 @@
 
 import { useMemo, useState } from "react";
 
-const LIVE_SCRIPT =
-  "https://tigges.github.io/SetTracker/capture-1001tl.js";
+const LIVE_SCRIPT = "https://setradar.ai/capture-1001tl.js";
 
 export type CapturePreset = {
   label: string;
@@ -57,10 +56,7 @@ export function Capture1001Client({
   const scriptUrl = useMemo(() => {
     if (typeof window === "undefined") return LIVE_SCRIPT;
     const base = (process.env.NEXT_PUBLIC_BASE_PATH || "").replace(/\/$/, "");
-    if (window.location.hostname === "tigges.github.io" || base) {
-      return `${window.location.origin}${base}/capture-1001tl.js`;
-    }
-    return LIVE_SCRIPT;
+    return `${window.location.origin}${base}/capture-1001tl.js`;
   }, []);
 
   const [status, setStatus] = useState<string>("");
