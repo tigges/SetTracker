@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-12T16:18:33.019Z",
+  "generatedAt": "2026-08-13T15:08:03.334Z",
   "playlists": [
     {
       "id": "PLeeZgE3_zp1w",
@@ -53,34 +53,6 @@
   ],
   "unwiredOfficial": [
     {
-      "label": "Martin Garrix WE2 | Tomorrowland 2026",
-      "slug": "yt-BUsCIK_kh_A",
-      "name": "TL_MARTIN_GARRIX_TML_WE2",
-      "searchUrl": "https://www.google.com/search?q=Martin%20Garrix%20tomorrowland%202026%20site%3A1001tracklists.com",
-      "reason": "relive:official-unwired"
-    },
-    {
-      "label": "The Chainsmokers WE1 | Tomorrowland 2026",
-      "slug": "yt-1lqmFLr-SkA",
-      "name": "TL_THE_CHAINSMOKERS_TML_WE1",
-      "searchUrl": "https://www.google.com/search?q=The%20Chainsmokers%20tomorrowland%202026%20site%3A1001tracklists.com",
-      "reason": "relive:official-unwired"
-    },
-    {
-      "label": "Alesso | Tomorrowland 2026 (Freedom Stage Weekend 2) [Full DJ Live Set]",
-      "slug": "yt-fhiZ1Rj9o-A",
-      "name": "TL_ALESSO_TML_WE2",
-      "searchUrl": "https://www.google.com/search?q=Alesso%20tomorrowland%202026%20site%3A1001tracklists.com",
-      "reason": "relive:official-unwired"
-    },
-    {
-      "label": "Armin van Buuren WE2 | Tomorrowland 2026",
-      "slug": "yt-tg_QLGpes0k",
-      "name": "TL_ARMIN_VAN_BUUREN_TML_WE2",
-      "searchUrl": "https://www.google.com/search?q=Armin%20van%20Buuren%20tomorrowland%202026%20site%3A1001tracklists.com",
-      "reason": "relive:official-unwired"
-    },
-    {
       "label": "Armin van Buuren WE1 | Tomorrowland 2026",
       "slug": "yt-pwXGm4HEQdo",
       "name": "TL_ARMIN_VAN_BUUREN_TML_WE1",
@@ -120,6 +92,13 @@
       "slug": "yt-_e1H9pkcjsQ",
       "name": "TL_NETSKY_TML_WE1",
       "searchUrl": "https://www.google.com/search?q=Netsky%20tomorrowland%202026%20site%3A1001tracklists.com",
+      "reason": "relive:official-unwired"
+    },
+    {
+      "label": "I Hate Models WE1 | Tomorrowland 2026",
+      "slug": "yt-zMW5SQPS1cY",
+      "name": "TL_I_HATE_MODELS_TML_WE1",
+      "searchUrl": "https://www.google.com/search?q=I%20Hate%20Models%20tomorrowland%202026%20site%3A1001tracklists.com",
       "reason": "relive:official-unwired"
     }
   ]
