@@ -145,15 +145,20 @@ a {
 }
 
 /* Top 100 Atlas map (SVG land + pins) */
+.atlas-map {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
 .atlas-land {
-  fill: #1a2230;
-  stroke: #2a3444;
+  fill: #2c3a4d;
+  stroke: #3d4d64;
   stroke-width: 0.35;
 }
 .atlas-pin {
   cursor: pointer;
   stroke: #07090d;
-  stroke-width: 0.35;
+  stroke-width: 0.45;
 }
 .atlas-pin-festival {
   fill: var(--amber);

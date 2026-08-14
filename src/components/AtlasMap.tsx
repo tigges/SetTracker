@@ -127,7 +127,7 @@ export function AtlasMap({
 
     function size() {
       const r = svg!.getBoundingClientRect();
-      return { w: r.width || 1, h: r.height || 1 };
+      return { w: Math.max(1, r.width), h: Math.max(1, r.height) };
     }
 
     function applyView() {
@@ -461,7 +461,7 @@ export function AtlasMap({
           </div>
         </aside>
 
-        <div className="relative min-h-[420px] bg-[#07090d]">
+        <div className="relative h-[min(70vh,720px)] min-h-[480px] bg-[#07090d]">
           <button
             type="button"
             className="absolute top-3 left-3 z-10 rounded-md border border-line bg-panel/90 px-2 py-1 text-[12px] text-muted lg:hidden"
@@ -473,7 +473,9 @@ export function AtlasMap({
             ref={svgRef}
             role="img"
             aria-label={`Map of DJ Mag Top 100 clubs and festivals ${year}`}
-            className="atlas-map h-full min-h-[420px] w-full cursor-grab touch-none"
+            viewBox="50 80 900 560"
+            preserveAspectRatio="xMidYMid slice"
+            className="atlas-map absolute inset-0 h-full w-full cursor-grab touch-none"
           >
             <rect width="1000" height="1000" x="-200" y="-200" fill="#07090d" />
             <path d={WORLD_LAND_PATH} className="atlas-land" />
