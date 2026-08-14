@@ -81,9 +81,13 @@ empty `PAGES_BASE_PATH`). The github.io `/SetTracker` path is a redirect.
   thumbs + cache DB**. Repo Pages Source must be **GitHub Actions** (not
   branch/`/`), or GitHub race-serves this README.
   **Single deployer:** `deploy-pages.yml` is the ONLY workflow that builds +
-  publishes Pages. `catalog-deep` and `catalog-enrich` save the DB cache then
-  **dispatch** `deploy-pages` (they no longer self-build). To ship, producers
-  hand off; to fix the build, edit one workflow.
+  publishes Pages. Overnight chain: `catalog-deep` saves the DB then
+  **dispatches `catalog-enrich` `full`** (thumbs + MusicBrainz + ACR +
+  filescan + LLM). Enrich then dispatches Pages. Do not run deep and
+  enrich in parallel — both write `prisma/dev.db` cache. Bump
+  `data/deep-request` to start the chain; `data/enrich-full-request` starts
+  full enrich alone; `data/enrich-request` is the fast `acr` pass. To ship,
+  producers hand off; to fix the build, edit one workflow.
 - **LLM handle research:** `npm run research:handles` (catalog-deep + enrich
   `full`, or dedicated `catalog-llm-research.yml`). Claude (`CLAUDE_AGENT_API`
   or `ANTHROPIC_API_KEY`) and/or Gemini (`GEMINI_API_KEY` from

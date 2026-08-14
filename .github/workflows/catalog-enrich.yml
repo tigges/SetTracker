@@ -20,12 +20,14 @@ on:
           - acr
           - smoke
           - full
-  # Agents often lack workflow_dispatch; bump data/enrich-request on main to start
-  # an `acr` (fast) run.
+  # Agents often lack workflow_dispatch; bump on main to start:
+  #   data/enrich-request      → acr (fast)
+  #   data/enrich-full-request → full (thumbs + MB + deep ACR + filescan)
   push:
     branches: [main]
     paths:
       - "data/enrich-request"
+      - "data/enrich-full-request"
 
 permissions:
   contents: read
@@ -34,7 +36,7 @@ permissions:
 # Separate lanes per mode so a quick smoke/acr check never queues behind a
 # long-running weekly `full` pass (and vice versa).
 concurrency:
-  group: catalog-enrich-${{ github.event.inputs.mode || (github.event_name == 'push' && 'acr') || 'full' }}
+  group: catalog-enrich-${{ github.event.inputs.mode || (github.event_name == 'schedule' && 'full') || (github.event_name == 'push' && contains(toJson(github.event.head_commit), 'data/enrich-full-request') && 'full') || (github.event_name == 'push' && 'acr') || 'full' }}
   cancel-in-progress: false
 
 jobs:
@@ -60,7 +62,15 @@ jobs:
           set -euo pipefail
           case "${{ github.event_name }}" in
             workflow_dispatch) MODE="${{ inputs.mode }}" ;;
-            push)              MODE="acr" ;;    # data/enrich-request bump = fast ACR
+            push)
+              # Prefer full when that request file is in the push.
+              if git diff --name-only "${{ github.event.before }}" "${{ github.sha }}" \
+                | grep -qx 'data/enrich-full-request'; then
+                MODE="full"
+              else
+                MODE="acr"
+              fi
+              ;;
             *)                 MODE="full" ;;   # weekly schedule = full pass
           esac
           case "$MODE" in

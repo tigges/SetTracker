@@ -231,10 +231,10 @@ jobs:
             data/soundcloud-poll-state.json
           key: setradar-discovery-${{ github.run_id }}
 
-      # Single deployer: hand the refreshed catalog to deploy-pages.yml (which
-      # restores the just-saved DB cache, builds, and publishes). Keeps all
-      # Pages build/verify/deploy logic in one workflow.
-      - name: Dispatch Pages deploy
+      # Do not dispatch Pages here in parallel with enrich — both write
+      # prisma/dev.db cache and the last save wins (fingerprint IDs get lost).
+      # Chain: deep → enrich full → deploy-pages (enrich already dispatches).
+      - name: Dispatch full catalog enrich
         if: success()
         uses: actions/github-script@v7
         with:
@@ -242,8 +242,8 @@ jobs:
             await github.rest.actions.createWorkflowDispatch({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              workflow_id: 'deploy-pages.yml',
+              workflow_id: 'catalog-enrich.yml',
               ref: context.ref,
-              inputs: { mode: 'fast' },
+              inputs: { mode: 'full' },
             });
-            core.info('Dispatched Deploy to GitHub Pages (fast) after deep crawl.');
+            core.info('Dispatched Catalog enrich (full) after deep crawl.');

@@ -124,13 +124,13 @@ deployer** — the only workflow that builds + publishes Pages. Producers save t
 catalog DB cache and dispatch it:
 
 - **push to `main`** — fast path: restore cached catalog DB → apply pins → export → deploy. Curated YouTube/SoundCloud ingest runs only when seed/adapter/roster files changed (or `ingest=force`). Request-file bumps (`data/deep-request`, …) do not start a Pages build.
-- **6h cron / manual `deep`** (`catalog-deep.yml`) — crawl → save DB cache → dispatch deploy
-- **`catalog-enrich.yml`** — thumbs/MB + ACRCloud gap-fill → save DB cache → dispatch deploy
+- **6h cron / manual `deep`** (`catalog-deep.yml`) — crawl → save DB cache → dispatch **enrich `full`** (not Pages; avoids a DB-cache race)
+- **`catalog-enrich.yml`** — thumbs/MB + ACRCloud + File Scanning → save DB cache → dispatch deploy
 
-**Enrich modes** (`catalog-enrich.yml`): `full` (weekly cron; thumbs + MusicBrainz
-+ deep ACR 40×20), `acr` (priority ACR only, no thumbs, 15×12; also the
+**Enrich modes** (`catalog-enrich.yml`): `full` (weekly cron, after deep, or `data/enrich-full-request`; thumbs + MusicBrainz
++ deep ACR 40×20 + filescan + LLM), `acr` (priority ACR only, no thumbs, 15×12; also the
 `data/enrich-request` push default), `smoke` (tiny ACR check 4×5 — verify
-creds/cookies). Each mode runs in its own concurrency lane.
+creds/cookies). Each mode runs in its own concurrency lane. Do not start deep and enrich at the same time.
 
 ### ACRCloud fingerprint enrich
 

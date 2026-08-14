@@ -15,6 +15,7 @@ on:
       # A push here must not also start a 45-min ingest+export.
       - "data/deep-request"
       - "data/enrich-request"
+      - "data/enrich-full-request"
       - "data/llm-request"
       - "data/db-export-request"
       - "data/acr-diagnose-request"
