@@ -9,6 +9,7 @@ import {
 } from "@/lib/genre";
 import { CURATED_LABEL_SLUGS } from "@/lib/ingest/curatedLabels";
 import { relatedSlugsFor } from "@/lib/ingest/discovery/relations";
+import { aliasSlugsFor, resolveSetSlug } from "@/lib/ingest/sourceRemaps";
 import {
   compareEventSetPriority,
   resolvedIdCount,
@@ -152,22 +153,33 @@ export type FeedItem = Awaited<ReturnType<typeof getFeed>>[number];
 // ---------------------------------------------------------------------------
 // Set detail
 // ---------------------------------------------------------------------------
-export async function getSetBySlug(slug: string) {
-  const set = await prisma.set.findUnique({
-    where: { slug },
+const SET_DETAIL_INCLUDE = {
+  artists: { include: { dj: true }, orderBy: { isPrimary: "desc" as const } },
+  event: true,
+  series: true,
+  plays: {
+    orderBy: { position: "asc" as const },
     include: {
-      artists: { include: { dj: true }, orderBy: { isPrimary: "desc" } },
-      event: true,
-      series: true,
-      plays: {
-        orderBy: { position: "asc" },
-        include: {
-          track: { include: { label: true } },
-          idTrack: { include: { resolvedTrack: { include: { label: true } } } },
-        },
-      },
+      track: { include: { label: true } },
+      idTrack: { include: { resolvedTrack: { include: { label: true } } } },
     },
+  },
+} as const;
+
+export async function getSetBySlug(slug: string) {
+  let set = await prisma.set.findUnique({
+    where: { slug },
+    include: SET_DETAIL_INCLUDE,
   });
+  if (!set) {
+    const mapped = resolveSetSlug(slug);
+    if (mapped !== slug) {
+      set = await prisma.set.findUnique({
+        where: { slug: mapped },
+        include: SET_DETAIL_INCLUDE,
+      });
+    }
+  }
   if (!set) return null;
 
   const primary = set.artists.find((a) => a.isPrimary) ?? set.artists[0];
@@ -598,7 +610,7 @@ export async function getDjList(): Promise<DjListItem[]> {
 
 export async function getAllSetSlugs() {
   const rows = await prisma.set.findMany({ select: { slug: true } });
-  return rows.map((r) => r.slug);
+  return aliasSlugsFor(rows.map((r) => r.slug));
 }
 
 export async function getGenres() {

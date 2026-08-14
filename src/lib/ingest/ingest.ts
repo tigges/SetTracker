@@ -26,7 +26,9 @@ import { rosterGenreForArtist } from "./roster";
 import { allocateTrackSlug, trackSlugBase } from "../tracks/slug";
 import { slugify, type RawArtist, type RawPlay, type RawSet, type SourceAdapter } from "./types";
 import { canonicalDjSlug } from "./djSlugAliases";
-import { eventSocialPayload, resolveEvent } from "./events";
+import { curatedEventSocialPatch } from "./eventSocials";
+import { eventSocialPayload, KNOWN_EVENTS, resolveEvent } from "./events";
+import { previousSlugsFor } from "./sourceRemaps";
 import {
   festivalDropBoostActive,
   matchEditionSeed,
@@ -353,6 +355,7 @@ export async function runIngest(
     if (!name) return null;
     const canon = resolveEvent(name, { kind, location });
     const socials = eventSocialPayload(canon);
+    const curated = KNOWN_EVENTS[canon.slug];
     const existing = await prisma.event.findUnique({
       where: { slug: canon.slug },
     });
@@ -367,10 +370,14 @@ export async function runIngest(
               ? canon.kind
               : existing.kind || canon.kind,
           location: existing.location ?? canon.location ?? null,
-          website: existing.website ?? socials.website ?? null,
-          soundcloud: existing.soundcloud ?? socials.soundcloud ?? null,
-          instagram: existing.instagram ?? socials.instagram ?? null,
-          twitter: existing.twitter ?? socials.twitter ?? null,
+          ...(curated
+            ? curatedEventSocialPatch(curated)
+            : {
+                website: existing.website ?? socials.website ?? null,
+                soundcloud: existing.soundcloud ?? socials.soundcloud ?? null,
+                instagram: existing.instagram ?? socials.instagram ?? null,
+                twitter: existing.twitter ?? socials.twitter ?? null,
+              }),
         },
       });
       return existing.id;
@@ -674,9 +681,17 @@ export async function runIngest(
   async function ingestSet(raw: RawSet): Promise<void> {
     stats.scannedSets += 1;
     const sourceHash = raw.sourceHash ?? hashRawSetContent(raw);
-    const existing = await prisma.set.findUnique({
-      where: { slug: raw.sourceSlug },
-    });
+    const existing =
+      (await prisma.set.findUnique({
+        where: { slug: raw.sourceSlug },
+      })) ??
+      (await (async () => {
+        for (const prev of previousSlugsFor(raw.sourceSlug)) {
+          const row = await prisma.set.findUnique({ where: { slug: prev } });
+          if (row) return row;
+        }
+        return null;
+      })());
 
     const playSignal = raw.plays.filter(
       (p) => p.idStatus === "identified" || p.idStatus === "community_resolved",
@@ -766,10 +781,16 @@ export async function runIngest(
           existing.playbackUrl,
         );
         const softPatch: {
+          slug?: string;
           genre?: string | null;
           type?: string;
           playbackUrl?: string | null;
+          sourceUrl?: string | null;
         } = {};
+        if (existing.slug !== raw.sourceSlug) {
+          softPatch.slug = raw.sourceSlug;
+          if (raw.sourceUrl) softPatch.sourceUrl = raw.sourceUrl;
+        }
         if ((existing.genre ?? null) !== softGenre) softPatch.genre = softGenre;
         // Allow type/playback upgrades on hash skip (e.g. hearthis "soundcloud" → "mix",
         // or hearthis embed → linked SC/YT audio) without rewriting the tracklist.
@@ -794,6 +815,7 @@ export async function runIngest(
       await prisma.set.update({
         where: { id: existing.id },
         data: {
+          ...(existing.slug !== raw.sourceSlug ? { slug: raw.sourceSlug } : {}),
           title: raw.title,
           type: raw.type,
           genre: setGenre,

@@ -67,6 +67,12 @@ assert.equal(
   resolveEvent("Zürich Street Parade").website,
   "https://www.streetparade.com/",
 );
+assert.equal(
+  resolveEvent("Street Parade").instagram,
+  "https://www.instagram.com/streetparade/",
+);
+assert.equal(resolveEvent("Street Parade").soundcloud, undefined);
+assert.equal(resolveEvent("Street Parade").twitter, undefined);
 assert.equal(resolveEvent("streetparade").slug, "street-parade");
 assert.equal(
   inferFestivalEvent("Plastik Funk - Nature One 2025 - ARTE Concert")?.slug,

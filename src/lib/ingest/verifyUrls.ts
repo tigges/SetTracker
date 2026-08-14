@@ -19,8 +19,14 @@ import { mergeSplitAtomicActs } from "./mergeAtomicActs";
 import { mergeSetTitleDjs } from "./mergeSetTitleDjs";
 import { repairInsomniacMixPlayback } from "./insomniac/repairMixPlayback";
 import { applyDjSocialPins } from "./djSocialPins";
+import {
+  curatedEventSocialPatch,
+  eventSocialCleanupPatch,
+  loadArtistSocialKeys,
+} from "./eventSocials";
 import { KNOWN_EVENTS } from "./events";
 import { backfillSetEditions } from "./setEditions";
+import { applySetSourceRemaps } from "./sourceRemaps";
 
 export type VerifyStats = {
   checked: number;
@@ -123,6 +129,13 @@ export async function applyKnownUrlFixes(prisma: PrismaClient): Promise<number> 
   // Brand DJ social pins (BISCITS, Guetta, FISHER, ARTBAT, …).
   n += await applyDjSocialPins(prisma);
 
+  // Retired YouTube Relives (private Fisher WE2 → public re-upload).
+  const remaps = await applySetSourceRemaps(prisma);
+  n += remaps;
+  if (remaps) {
+    console.log(`[verify-urls] set source remaps: ${remaps}`);
+  }
+
   // Walker & Royce etc. — fold false b2b half-name Dj rows onto the duo.
   const atomic = await mergeSplitAtomicActs(prisma);
   n += atomic.setsRelinked + atomic.junkRemoved;
@@ -189,10 +202,7 @@ export async function applyKnownUrlFixes(prisma: PrismaClient): Promise<number> 
           name: ev.name,
           kind: ev.kind,
           location: ev.location ?? null,
-          website: ev.website ?? null,
-          soundcloud: ev.soundcloud ?? null,
-          instagram: ev.instagram ?? null,
-          twitter: ev.twitter ?? null,
+          ...curatedEventSocialPatch(ev),
         },
       });
       n += 1;
@@ -201,13 +211,33 @@ export async function applyKnownUrlFixes(prisma: PrismaClient): Promise<number> 
     await prisma.event.update({
       where: { id: existing.id },
       data: {
-        website: ev.website ?? existing.website,
-        soundcloud: ev.soundcloud ?? existing.soundcloud,
-        instagram: ev.instagram ?? existing.instagram,
-        twitter: ev.twitter ?? existing.twitter,
+        ...curatedEventSocialPatch(ev),
         location: existing.location ?? ev.location ?? null,
       },
     });
+    n += 1;
+  }
+
+  // Drop lineup-artist socials scraped onto Event rows (Street Parade ← Adam Beyer, …).
+  const artistKeys = await loadArtistSocialKeys(prisma);
+  const eventRows = await prisma.event.findMany({
+    select: {
+      id: true,
+      slug: true,
+      name: true,
+      soundcloud: true,
+      instagram: true,
+      twitter: true,
+    },
+  });
+  for (const e of eventRows) {
+    const patch = eventSocialCleanupPatch(
+      e,
+      artistKeys,
+      KNOWN_EVENTS[e.slug],
+    );
+    if (Object.keys(patch).length === 0) continue;
+    await prisma.event.update({ where: { id: e.id }, data: patch });
     n += 1;
   }
 

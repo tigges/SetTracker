@@ -649,6 +649,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
   {
     // Tomorrowland official — Freedom Stage WE2; 17/17 timed cues from 1001.
     // Official full-set upload (prior id mVB-gqggrCQ replaced 2026-08-12).
+    // SET_SOURCE_REMAPS folds the private slug so /sets/yt-mVB-gqggrCQ/ still resolves.
     video: "https://www.youtube.com/watch?v=Uq1WP8v3U4o",
     primaryArtist: dj("FISHER", {
       accent: "#ffba08",

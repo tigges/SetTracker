@@ -11,6 +11,11 @@ import type { PrismaClient } from "@prisma/client";
 import { djSocialsFromKnown } from "../social";
 import { ARTIST_ROSTER } from "./roster";
 import { expandAllLinkHubs, isLinkHub } from "./discovery/linkHubs";
+import {
+  curatedEventSocialPatch,
+  eventMayClaimSocialUrl,
+  loadArtistSocialKeys,
+} from "./eventSocials";
 import { KNOWN_EVENTS } from "./events";
 import { slugify } from "./types";
 
@@ -124,7 +129,7 @@ function classify(url: string): {
 
 type FillTarget =
   | { kind: "dj"; id: string }
-  | { kind: "event"; id: string }
+  | { kind: "event"; id: string; name: string }
   | { kind: "label"; id: string };
 
 async function fillSocial(
@@ -134,12 +139,20 @@ async function fillSocial(
   url: string,
   current: Record<string, string | null | undefined>,
   stats: ScanStats,
+  artistKeys: Set<string>,
 ): Promise<void> {
   if (current[field]) return;
   // Prefer first-party website over another hub if we already have a hub.
   if (field === "website" && current.website) return;
   // Labels / events have no youtube column — only fill on Dj.
   if (field === "youtube" && target.kind !== "dj") return;
+  if (
+    target.kind === "event" &&
+    (field === "soundcloud" || field === "instagram" || field === "twitter") &&
+    !eventMayClaimSocialUrl(target.name, url, artistKeys)
+  ) {
+    return;
+  }
   const data = { [field]: url };
   if (target.kind === "dj") {
     await prisma.dj.update({ where: { id: target.id }, data });
@@ -163,6 +176,7 @@ async function scanPage(
     beatport: Set<string>;
     htmlText: string;
   },
+  artistKeys: Set<string>,
 ): Promise<void> {
   const html = await fetchHtml(pageUrl);
   if (!html) return;
@@ -181,7 +195,7 @@ async function scanPage(
       c.field === "instagram" ||
       c.field === "twitter"
     ) {
-      await fillSocial(prisma, target, c.field, url, current, stats);
+      await fillSocial(prisma, target, c.field, url, current, stats, artistKeys);
     } else if (
       c.field === "website" &&
       !current.website &&
@@ -255,20 +269,14 @@ export async function scanEntityUrls(prisma: PrismaClient): Promise<ScanStats> {
           name: ev.name,
           kind: ev.kind,
           location: ev.location ?? null,
-          website: ev.website ?? null,
-          soundcloud: ev.soundcloud ?? null,
-          instagram: ev.instagram ?? null,
-          twitter: ev.twitter ?? null,
+          ...curatedEventSocialPatch(ev),
         },
       });
     } else {
       await prisma.event.update({
         where: { id: existing.id },
         data: {
-          website: existing.website ?? ev.website ?? null,
-          soundcloud: existing.soundcloud ?? ev.soundcloud ?? null,
-          instagram: existing.instagram ?? ev.instagram ?? null,
-          twitter: existing.twitter ?? ev.twitter ?? null,
+          ...curatedEventSocialPatch(ev),
           location: existing.location ?? ev.location ?? null,
           name: existing.name || ev.name,
         },
@@ -276,10 +284,13 @@ export async function scanEntityUrls(prisma: PrismaClient): Promise<ScanStats> {
     }
   }
 
+  const artistKeys = await loadArtistSocialKeys(prisma);
+
   const events = await prisma.event.findMany({
     select: {
       id: true,
       slug: true,
+      name: true,
       website: true,
       soundcloud: true,
       instagram: true,
@@ -297,11 +308,12 @@ export async function scanEntityUrls(prisma: PrismaClient): Promise<ScanStats> {
     };
     await scanPage(
       prisma,
-      { kind: "event", id: e.id },
+      { kind: "event", id: e.id, name: e.name },
       e.website,
       current,
       stats,
       bag,
+      artistKeys,
     );
     for (const name of rosterMentions(bag.htmlText)) mentioned.add(name);
   }
@@ -334,6 +346,7 @@ export async function scanEntityUrls(prisma: PrismaClient): Promise<ScanStats> {
       current,
       stats,
       bag,
+      artistKeys,
     );
   }
 
@@ -361,6 +374,7 @@ export async function scanEntityUrls(prisma: PrismaClient): Promise<ScanStats> {
       current,
       stats,
       bag,
+      artistKeys,
     );
   }
 
