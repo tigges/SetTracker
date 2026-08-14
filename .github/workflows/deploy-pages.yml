@@ -3,11 +3,24 @@ name: Deploy to GitHub Pages
 # Single deployer: the ONLY workflow that builds + publishes Pages.
 # Producers (catalog-deep, catalog-enrich) save the DB cache then dispatch this
 # workflow — they no longer build/deploy themselves.
-# Push = fast path (restore cached catalog + light curated ingest, no crawl).
+# Push = restore cached catalog → apply pins → static export. Curated
+# YouTube/SoundCloud ingest runs only when catalog source files changed
+# (or ingest=force). Dispatch from deep/enrich never re-polls.
 # Deep catalog refresh lives in catalog-deep.yml (separate concurrency group).
 on:
   push:
     branches: [main]
+    paths-ignore:
+      # These bumps start producer workflows that dispatch us when done.
+      # A push here must not also start a 45-min ingest+export.
+      - "data/deep-request"
+      - "data/enrich-request"
+      - "data/llm-request"
+      - "data/db-export-request"
+      - "data/acr-diagnose-request"
+      - "data/acr-smoke-request"
+      - "**/*.md"
+      - ".github/workflows/catalog-*.yml"
   workflow_dispatch:
     inputs:
       mode:
@@ -17,6 +30,15 @@ on:
         type: choice
         options:
           - fast
+      ingest:
+        description: "Curated YT/SC poll (auto skips when sources unchanged; dispatch skips)"
+        required: false
+        default: "auto"
+        type: choice
+        options:
+          - auto
+          - skip
+          - force
 
 permissions:
   contents: read
@@ -86,9 +108,40 @@ jobs:
             exit 1
           fi
 
+      # Curated ingest is the expensive "detection" (12–33 min of YT/SC/1001).
+      # Skip it unless a seed/adapter/roster file changed, or ingest=force.
+      - name: Decide curated ingest
+        id: need_ingest
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          BEFORE_SHA: ${{ github.event.before }}
+          PAGES_INGEST: ${{ github.event.inputs.ingest || 'auto' }}
+        run: |
+          set -euo pipefail
+          LIST=$(mktemp)
+          NO_PREV=""
+          if [ "$EVENT_NAME" = "push" ]; then
+            if [ -z "${BEFORE_SHA:-}" ] || [ "$BEFORE_SHA" = "0000000000000000000000000000000000000000" ]; then
+              NO_PREV="--no-previous-sha"
+            else
+              git fetch --depth=1 origin "$BEFORE_SHA" || true
+              git diff --name-only "$BEFORE_SHA" "${{ github.sha }}" > "$LIST" || true
+              echo "Changed files vs $BEFORE_SHA:"
+              cat "$LIST" || true
+            fi
+          fi
+          npx tsx scripts/pages-need-curated-ingest.ts \
+            --event "$EVENT_NAME" \
+            --ingest "$PAGES_INGEST" \
+            --changed-file-list "$LIST" \
+            $NO_PREV | tee /tmp/need-ingest.txt
+          grep -E '^(run|reason)=' /tmp/need-ingest.txt >> "$GITHUB_OUTPUT"
+          echo "need_ingest=$(grep '^run=' /tmp/need-ingest.txt | cut -d= -f2)"
+
       # Light curated ingest so new sample sets land without catalog-deep:
       # YouTube watch-list + SoundCloud playlists (e.g. Lift Sets / Dom Dolla Live).
       - name: Ingest curated YouTube + SoundCloud playlists
+        if: steps.need_ingest.outputs.run == '1'
         env:
           INGEST_ADAPTERS: "youtube,soundcloud"
           YOUTUBE_CURATED_ONLY: "1"
@@ -99,6 +152,7 @@ jobs:
         run: npm run ingest
 
       - name: Fill missing thumbs only
+        if: steps.need_ingest.outputs.run == '1'
         env:
           THUMBS_DELAY_MS: "80"
           THUMBS_NULL_ONLY: "1"
@@ -110,12 +164,22 @@ jobs:
           VERIFY_URLS_CURATED_ONLY: "1"
         run: npm run verify-urls
 
-      # Keep the cache key warm after light enrich (catalog-deep remains the heavy writer).
+      # Keep the cache key warm after pins / optional ingest
+      # (catalog-deep remains the heavy writer).
       - name: Re-save catalog DB
         uses: actions/cache/save@v4
         with:
           path: prisma/dev.db
           key: setradar-db-${{ github.run_id }}
+
+      - name: Restore Next.js compile cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .next/cache
+          key: setradar-next-${{ hashFiles('package-lock.json') }}-${{ github.sha }}
+          restore-keys: |
+            setradar-next-${{ hashFiles('package-lock.json') }}-
+            setradar-next-
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
@@ -126,6 +190,9 @@ jobs:
         id: app_version
         run: echo "version=$(node -p "require('./package.json').version")" >> "$GITHUB_OUTPUT"
 
+      # GitHub Pages is a full snapshot. Next `output: "export"` has no ISR,
+      # so every ship still regenerates set/dj/track HTML (~8 min). Compile
+      # cache above only speeds bundling; it cannot skip unchanged routes.
       - name: Build static export
         env:
           GITHUB_PAGES: "true"
@@ -200,6 +267,13 @@ jobs:
             echo "::error::Export still $RAW bytes (Pages unpack limit 10GB)."
             exit 1
           fi
+
+      - name: Save Next.js compile cache
+        if: success()
+        uses: actions/cache/save@v4
+        with:
+          path: .next/cache
+          key: setradar-next-${{ hashFiles('package-lock.json') }}-${{ github.sha }}
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3

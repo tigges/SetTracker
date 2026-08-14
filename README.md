@@ -123,7 +123,7 @@ The app publishes as a fully static site. **`deploy-pages.yml` is the single
 deployer** — the only workflow that builds + publishes Pages. Producers save the
 catalog DB cache and dispatch it:
 
-- **push to `main`** — fast path (no crawl): restore cached catalog DB → light curated ingest → export → deploy
+- **push to `main`** — fast path: restore cached catalog DB → apply pins → export → deploy. Curated YouTube/SoundCloud ingest runs only when seed/adapter/roster files changed (or `ingest=force`). Request-file bumps (`data/deep-request`, …) do not start a Pages build.
 - **6h cron / manual `deep`** (`catalog-deep.yml`) — crawl → save DB cache → dispatch deploy
 - **`catalog-enrich.yml`** — thumbs/MB + ACRCloud gap-fill → save DB cache → dispatch deploy
 

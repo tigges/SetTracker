@@ -71,10 +71,15 @@ empty `PAGES_BASE_PATH`). The github.io `/SetTracker` path is a redirect.
   2025 (`data/artist-seeds/djmag-atlas-djs-2025.json`). Venue pins link to
   `/events/{slug}`; DJ pins link to `/djs/{slug}`. Country-level DJs
   spiral-spread; Claptone is list-only (`nomap`).
-  Pages: **push =
-  no crawl** (restore cached `prisma/dev.db` → build → deploy, ~minutes);
-  **cron/manual `deep` = full ingest + thumbs + cache DB**. Repo Pages Source
-  must be **GitHub Actions** (not branch/`/`), or GitHub race-serves this README.
+  Pages: **push = no crawl** unless curated catalog sources changed
+  (`soundcloud/`, `youtube/`, `tracklists1001/`, roster, …). Default path:
+  restore cached `prisma/dev.db` → `verify-urls` (pins/remaps) → static
+  export → deploy (~minutes). New SC/YT/1001 seeds on the same push still
+  run the light curated ingest. `catalog-deep` / enrich **dispatch** this
+  workflow and never re-poll. Next `output: "export"` still regenerates
+  all HTML (no ISR on GitHub Pages). **cron/manual `deep` = full ingest +
+  thumbs + cache DB**. Repo Pages Source must be **GitHub Actions** (not
+  branch/`/`), or GitHub race-serves this README.
   **Single deployer:** `deploy-pages.yml` is the ONLY workflow that builds +
   publishes Pages. `catalog-deep` and `catalog-enrich` save the DB cache then
   **dispatch** `deploy-pages` (they no longer self-build). To ship, producers
@@ -93,7 +98,8 @@ empty `PAGES_BASE_PATH`). The github.io `/SetTracker` path is a redirect.
 - **Artwork thumbnails:** `npm run thumbs` fills null `imageUrl` on Dj / Label /
  Track / Set via the Deezer Search API (no key). Idempotent; skips rows that
  already have art. Sets fall back to the primary DJ image. The Pages workflow
- runs this after ingest. UI uses `EntityThumb` with monogram fallback.
+ runs this only after a curated ingest on that deploy. UI uses `EntityThumb`
+ with monogram fallback.
 - **Fingerprint enrich:** `npm run enrich:fingerprint` via `catalog-enrich.yml`
   in **modes** (workflow_dispatch `mode`, or `data/enrich-request` bump = `acr`):
   `full` (weekly cron — thumbs + MusicBrainz + deep ACR 40×20),
