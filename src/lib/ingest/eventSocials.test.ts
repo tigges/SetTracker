@@ -28,6 +28,14 @@ assert.equal(
   "instagram:streetparade",
 );
 assert.equal(
+  socialProfileKey("https://www.youtube.com/@fisher"),
+  "youtube:fisher",
+);
+assert.equal(
+  socialProfileKey("https://www.youtube.com/watch?v=Uq1WP8v3U4o"),
+  null,
+);
+assert.equal(
   socialProfileKey("https://soundcloud.com/adambeyer/some-track"),
   null,
 );

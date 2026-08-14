@@ -232,6 +232,7 @@ async function harvestRejectedEventSocials(
       id: true,
       name: true,
       soundcloud: true,
+      youtube: true,
       instagram: true,
       twitter: true,
     },

@@ -195,6 +195,15 @@ Our submit forces `engine=1` (audio fingerprint; override `ACRCLOUD_FS_ENGINE`).
 | `ACRCLOUD_FS_TOKEN` | File Scanning Console API token (YouTube) |
 | `ACRCLOUD_FS_CONTAINER_ID` | File Scanning container id |
 | `ACRCLOUD_FS_REGION` | optional container region (default `eu-west-1`) |
+| `ANTHROPIC_API_KEY` | optional Claude key for DJ handle research |
+| `GEMINI_API_KEY` | optional Gemini key (preferred — Google Search grounding) |
+
+**LLM handle research** (`npm run research:handles`): Claude and/or Gemini
+propose official SC/YT/IG/X/websites for DJs that already have sets but no
+handle. Proposals are **never written raw** — the URL must be a profile, the
+handle must overlap the DJ name, it must be live, and it must not belong to
+another catalog DJ. Missing keys → safe no-op. Runs on catalog-deep and
+weekly enrich `full`. Reports: `data/crosscheck/llm-handle-research.json`.
 
 Then run **Actions → Catalog enrich (weekly) → Run workflow**. Missing credentials → safe no-op (warning in the log). A successful enrich dispatches a fast Pages deploy so new fingerprint IDs go live.
 

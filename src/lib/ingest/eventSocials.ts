@@ -86,6 +86,15 @@ export function socialProfileKey(
     }
     if (host === "instagram.com") return `instagram:${handle}`;
     if (host === "x.com") return `twitter:${handle}`;
+    if (host === "youtube.com") {
+      if (parts[0] === "watch" || parts[0] === "embed" || parts[0] === "shorts") {
+        return null;
+      }
+      if (parts[0]?.startsWith("@")) {
+        return `youtube:${parts[0].slice(1).toLowerCase()}`;
+      }
+      return null;
+    }
     return null;
   } catch {
     return null;
@@ -185,11 +194,16 @@ export function handleMatchesArtist(handle: string, artistName: string): boolean
 
 export function socialFieldFromUrl(
   url: string,
-): "soundcloud" | "instagram" | "twitter" | null {
+): "soundcloud" | "instagram" | "twitter" | "youtube" | null {
   const key = socialProfileKey(url);
   if (!key) return null;
   const net = key.split(":")[0];
-  if (net === "soundcloud" || net === "instagram" || net === "twitter") {
+  if (
+    net === "soundcloud" ||
+    net === "instagram" ||
+    net === "twitter" ||
+    net === "youtube"
+  ) {
     return net;
   }
   return null;

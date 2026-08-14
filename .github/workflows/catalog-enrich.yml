@@ -192,6 +192,16 @@ jobs:
           ACRCLOUD_EVENT_SLUGS: "street-parade,tomorrowland,ultra-miami,edc-lv,nature-one"
         run: npm run enrich:filescan
 
+      - name: LLM handle research
+        if: steps.mode.outputs.do_thumbs == '1'
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          LLM_RESEARCH_LIMIT: "12"
+          LLM_QUALITY: "1"
+        run: npm run research:handles
+        continue-on-error: true
+
       - name: Save enriched catalog DB
         uses: actions/cache/save@v4
         with:
