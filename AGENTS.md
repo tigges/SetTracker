@@ -102,7 +102,10 @@ empty `PAGES_BASE_PATH`). The github.io `/SetTracker` path is a redirect.
   Server-side — POST the YouTube URL to an ACRCloud **File Scanning** container;
   ACR downloads + fingerprints the whole video and returns matched tracks with
   offsets, bypassing the CI bot wall. Uses a YouTube-only sparse queue (does
-  not share Identify's SC-first ranking) and skips held Relives. Writes the
+  not share Identify's SC-first ranking) and skips held Relives. Reuses files
+  already in the ACR container (no second POST of the same YouTube URL).
+  Identify records grey `acr-miss` rows so the same offset is not re-probed.
+  Writes the
   same `provenance: "fingerprint"` gap-fill rows (never overwrites source).
   Operator secrets: `ACRCLOUD_FS_TOKEN`
   (Console API bearer) + `ACRCLOUD_FS_CONTAINER_ID` (+ optional

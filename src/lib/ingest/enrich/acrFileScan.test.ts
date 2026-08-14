@@ -1,9 +1,11 @@
 import assert from "node:assert/strict";
 import {
+  fileScanActionForVideo,
   fileScanConfig,
   isHeldFileScanTarget,
   parseScanHits,
   youtubeFileScanQueue,
+  youtubeVideoIdFromFsUri,
   youtubeWatchUrl,
 } from "./acrFileScan";
 import type { SparseSetCandidate } from "./acrcloud";
@@ -256,5 +258,23 @@ const capped = youtubeFileScanQueue(
 );
 assert.equal(capped.length, 2);
 assert.equal(youtubeFileScanQueue(mixedCrowd, 0).length, 0);
+
+assert.equal(
+  youtubeVideoIdFromFsUri("youtube:video:BUsCIK_kh_A"),
+  "BUsCIK_kh_A",
+);
+assert.equal(youtubeVideoIdFromFsUri("https://youtu.be/BUsCIK_kh_A"), null);
+
+const known = new Map([
+  ["BUsCIK_kh_A", { fileId: "42", state: 1 }],
+]);
+assert.deepEqual(fileScanActionForVideo("BUsCIK_kh_A", known), {
+  action: "reuse",
+  fileId: "42",
+  state: 1,
+});
+assert.deepEqual(fileScanActionForVideo("1lqmFLr-SkA", known), {
+  action: "submit",
+});
 
 console.log("acrFileScan.test.ts ok");

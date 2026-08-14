@@ -162,7 +162,9 @@ own servers — we POST the YouTube URL, ACR fingerprints the whole video and
 returns every matched track with an offset. `npm run enrich:filescan` (and a
 step in `catalog-enrich.yml`) scans a **YouTube-only** sparse queue this way
 (Identify keeps SoundCloud/hearthis first; File Scanning does not share that
-ranking). Held Relives on the fan-clip watch list are skipped. Writes the same
+ranking). Held Relives on the fan-clip watch list are skipped. Already-scanned
+YouTube files in the ACR container are reused (no re-submit). Identify writes
+grey `acr-miss` rows so the same offset is not probed again. Writes the same
 `provenance: fingerprint` gap-fill rows. No-op unless configured.
 
 | Env | Effect |

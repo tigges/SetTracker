@@ -6,6 +6,7 @@ import {
   isUnresolvedDetectPriority,
   loadDjMagTop100RankBySlug,
   mapAcrMusicHit,
+  hasRemainingAcrWork,
   planGapProbes,
   popularityRankForDjSlug,
   rankPlaybackHost,
@@ -96,6 +97,54 @@ const open = planGapProbes(
 const at90 = open.find((p) => p.offsetSec === 90);
 assert.ok(at90);
 assert.equal(at90!.isGap, false);
+
+// Fingerprint miss (grey unparsed) also blocks so we do not re-Identify.
+const missed = planGapProbes(
+  400,
+  [{ timestamp: 180, provenance: "fingerprint", idStatus: "unparsed" }],
+  90,
+  12,
+);
+assert.equal(missed.find((p) => p.offsetSec === 180)?.isGap, false);
+assert.equal(
+  hasRemainingAcrWork({
+    durationSec: 400,
+    plays: [{ timestamp: 180, provenance: "fingerprint", idStatus: "unparsed" }],
+    unresolvedCount: 0,
+    stepSec: 90,
+    sampleSec: 12,
+  }),
+  true,
+  "other grid slots still open",
+);
+assert.equal(
+  hasRemainingAcrWork({
+    durationSec: 200,
+    plays: [
+      { timestamp: 90, provenance: "fingerprint", idStatus: "unparsed" },
+      { timestamp: 180, provenance: "fingerprint", idStatus: "identified" },
+    ],
+    unresolvedCount: 0,
+    stepSec: 90,
+    sampleSec: 12,
+  }),
+  false,
+  "exhausted grid + no unresolved cues → skip set",
+);
+assert.equal(
+  hasRemainingAcrWork({
+    durationSec: 200,
+    plays: [
+      { timestamp: 90, provenance: "fingerprint", idStatus: "unparsed" },
+      { timestamp: 180, provenance: "fingerprint", idStatus: "identified" },
+    ],
+    unresolvedCount: 2,
+    stepSec: 90,
+    sampleSec: 12,
+  }),
+  true,
+  "unresolved cues still worth a resolve pass",
+);
 
 // --- demand proxy (DJ Mag Top 100) ---
 const top100 = loadDjMagTop100RankBySlug();
