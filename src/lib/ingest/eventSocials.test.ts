@@ -69,6 +69,14 @@ assert.equal(
 assert.equal(
   eventMayClaimSocialUrl(
     "Street Parade",
+    "https://x.com/streetparadeZH",
+    emptyArtists,
+  ),
+  true,
+);
+assert.equal(
+  eventMayClaimSocialUrl(
+    "Street Parade",
     "https://soundcloud.com/adambeyer",
     new Set(["soundcloud:adambeyer"]),
   ),
@@ -80,7 +88,7 @@ const curated = curatedEventSocialPatch(street);
 assert.equal(curated.website, "https://www.streetparade.com/");
 assert.equal(curated.instagram, "https://www.instagram.com/streetparade/");
 assert.equal(curated.soundcloud, null);
-assert.equal(curated.twitter, null);
+assert.equal(curated.twitter, "https://x.com/streetparadeZH");
 
 const dirty = eventSocialCleanupPatch(
   {
@@ -93,7 +101,7 @@ const dirty = eventSocialCleanupPatch(
   street,
 );
 assert.equal(dirty.soundcloud, null);
-assert.equal(dirty.twitter, null);
+assert.equal(dirty.twitter, "https://x.com/streetparadeZH");
 assert.equal(dirty.instagram, undefined);
 
 const scraped = eventSocialCleanupPatch(

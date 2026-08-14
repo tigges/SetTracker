@@ -271,7 +271,8 @@ export const KNOWN_EVENTS: Record<string, CanonicalEvent> = {
     location: "Zürich, Switzerland",
     website: "https://www.streetparade.com/",
     instagram: "https://www.instagram.com/streetparade/",
-    // No official SC / X — lineup artist profiles on the site must not fill these.
+    twitter: "https://x.com/streetparadeZH",
+    // No official SoundCloud — the site's first SC links are lineup artists.
   },
   "nature-one": {
     slug: "nature-one",
