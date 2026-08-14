@@ -1019,9 +1019,9 @@ export async function getTracks(limit = 120) {
     .filter((x): x is NonNullable<typeof x> => !!x);
 }
 
-/** Cap static track pages so GitHub Pages artifacts stay deployable. */
+/** Cap static track pages so GitHub Pages stays under the 10GB unpack limit. */
 const TRACK_STATIC_EXPORT_CAP = Number(
-  process.env.TRACK_STATIC_EXPORT_CAP || 1200,
+  process.env.TRACK_STATIC_EXPORT_CAP || 400,
 );
 
 export async function getAllTrackSlugs() {

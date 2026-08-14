@@ -158,28 +158,48 @@ jobs:
           DJ_PAGES=$(find out/djs -mindepth 1 -maxdepth 1 -type d ! -name '_placeholder' | wc -l)
           TRACK_PAGES=$(find out/tracks -mindepth 1 -maxdepth 1 -type d ! -name '_placeholder' 2>/dev/null | wc -l)
           echo "Exported set pages: $SET_PAGES dj=$DJ_PAGES track=$TRACK_PAGES"
-          du -sh out
+          du -sh out out/sets out/djs out/tracks out/events out/venues out/_next 2>/dev/null || true
           if [ "$SET_PAGES" -lt 50 ]; then
             echo "::error::Export only has $SET_PAGES set pages — refusing to deploy a wiped catalog."
             exit 1
           fi
 
-      # GitHub Pages rejects symlinks and hard links. Next 16 export can emit
-      # both. `cp -aL` follows symlinks but keeps hard links — that failed
-      # deploy with a 1.85GB artifact that previously published. rsync copies
-      # real bytes. Raw `out/` is multi-GB HTML; the uploaded zip is smaller
-      # — do not gate on uncompressed du (that blocked #61).
-      - name: Flatten links in export
+      # GitHub Pages unpacks the artifact and rejects >10GB (or leftover
+      # symlinks/hard links). Next 16 static export was 10.77GB / 1.85GB zip —
+      # just over the unpack cap. Drop the duplicate full-tree RSC copy first;
+      # if still over, drop remaining page `.txt` payloads (HTML still serves).
+      - name: Slim export under Pages 10GB unpack limit
         run: |
+          set -euo pipefail
+          echo "Before slim:"
+          du -sh out out/sets out/djs out/tracks 2>/dev/null || true
+          FULL=$(find out -name '__next._full.txt' | wc -l)
+          find out -name '__next._full.txt' -delete
+          echo "Removed $FULL __next._full.txt copies"
           RAW=$(du -sb out | awk '{print $1}')
+          echo "After _full drop: $RAW bytes"
+          if [ "$RAW" -gt 9200000000 ]; then
+            TXT=$(find out -name '*.txt' ! -path 'out/_next/*' | wc -l)
+            find out -name '*.txt' ! -path 'out/_next/*' -delete
+            echo "Still over 9.2GB — removed $TXT RSC .txt payloads"
+          fi
           LINKS=$(find out -type l | wc -l)
           HARDS=$(find out -type f -links +1 | wc -l)
-          echo "Export raw bytes=$RAW symlinks=$LINKS hardlinked_files=$HARDS"
-          tmp=$(mktemp -d)
-          rsync -a --copy-links --no-hard-links out/ "$tmp/"
-          rm -rf out
-          mv "$tmp" out
-          echo "Flattened export bytes=$(du -sb out | awk '{print $1}') hardlinked_files=$(find out -type f -links +1 | wc -l)"
+          RAW=$(du -sb out | awk '{print $1}')
+          echo "Slim export bytes=$RAW symlinks=$LINKS hardlinked_files=$HARDS"
+          du -sh out out/sets out/djs out/tracks 2>/dev/null || true
+          if [ "$LINKS" -gt 0 ] || [ "$HARDS" -gt 0 ]; then
+            tmp=$(mktemp -d)
+            rsync -a --copy-links --no-hard-links out/ "$tmp/"
+            rm -rf out
+            mv "$tmp" out
+            RAW=$(du -sb out | awk '{print $1}')
+            echo "Flattened export bytes=$RAW"
+          fi
+          if [ "$RAW" -gt 10000000000 ]; then
+            echo "::error::Export still $RAW bytes (Pages unpack limit 10GB)."
+            exit 1
+          fi
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
