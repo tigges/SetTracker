@@ -8,6 +8,8 @@
  *   4) it is not already owned by a different catalog DJ.
  *
  * No-op when CLAUDE_AGENT_API / ANTHROPIC_API_KEY / GEMINI_API_KEY are unset.
+ * GEMINI_API_KEY is an AI Studio / Google AI key (generativelanguage.googleapis.com).
+ * gemini.google.com/app is the consumer chat UI and cannot be called from CI.
  */
 
 import { mkdirSync, writeFileSync } from "node:fs";
