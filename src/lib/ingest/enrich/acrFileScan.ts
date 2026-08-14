@@ -278,6 +278,26 @@ async function listContainerFiles(
   }
 }
 
+/** Index YouTube video ids already in the File Scanning container. */
+export async function listKnownFsVideos(
+  cfg: FileScanConfig,
+): Promise<Map<string, KnownFsFile & { file: FsFile }>> {
+  const out = new Map<string, KnownFsFile & { file: FsFile }>();
+  for (let page = 1; page <= 10; page++) {
+    const files = await listContainerFiles(cfg, page);
+    if (!files) break;
+    for (const file of files) {
+      const vid = youtubeVideoIdFromFsUri((file as { uri?: unknown }).uri);
+      if (!vid) continue;
+      const fileId = String((file as { id?: unknown }).id ?? "");
+      if (!fileId) continue;
+      out.set(vid, { fileId, state: Number(file.state), file });
+    }
+    if (files.length < 50) break;
+  }
+  return out;
+}
+
 /** Find a file in the container by its id (across pages). */
 async function findFileById(
   cfg: FileScanConfig,
@@ -467,9 +487,21 @@ export function youtubeFileScanQueue(
 }
 
 /** file.uri is `youtube:video:{id}` for platform scans. */
-function videoIdFromUri(uri: unknown): string | null {
+export function youtubeVideoIdFromFsUri(uri: unknown): string | null {
   const m = String(uri ?? "").match(/youtube:video:([A-Za-z0-9_-]{11})/);
   return m ? m[1]! : null;
+}
+
+export type KnownFsFile = { fileId: string; state: number };
+
+/** Reuse a container file instead of POSTing the same YouTube URL again. */
+export function fileScanActionForVideo(
+  videoId: string,
+  known: Map<string, KnownFsFile>,
+): { action: "submit" } | { action: "reuse"; fileId: string; state: number } {
+  const hit = known.get(videoId);
+  if (hit?.fileId) return { action: "reuse", fileId: hit.fileId, state: hit.state };
+  return { action: "submit" };
 }
 
 /**
@@ -523,16 +555,71 @@ export async function enrichYoutubeSetsWithFileScan(
     };
   }
 
-  // Phase A — submit every target (quick POSTs). Track by video id.
+  // Phase A — reuse files already in the container; submit only new videos.
+  const known = await listKnownFsVideos(cfg);
   const byVideo = new Map<
     string,
     { candidate: SparseSetCandidate; fileId: string | null; done: boolean }
   >();
   let submitted = 0;
+  let reused = 0;
+  let ready = 0;
+  let identified = 0;
+  const genreCache = new Map<string, string | null>();
+
+  const applyReady = async (
+    slug: string,
+    setId: string,
+    file: FsFile,
+  ): Promise<void> => {
+    const hits = parseScanHits(file, cfg.minScore);
+    if (hits.length === 0) {
+      console.log(`[acr-fs] ${slug}: ready, no matches`);
+      return;
+    }
+    if (!genreCache.has(setId)) {
+      const s = await prisma.set.findUnique({
+        where: { id: setId },
+        select: { genre: true },
+      });
+      genreCache.set(setId, s?.genre ?? null);
+    }
+    const { written, skipped } = await applyScanHitsToSet(
+      prisma,
+      setId,
+      genreCache.get(setId),
+      hits,
+      { dryRun },
+    );
+    identified += written;
+    console.log(
+      `[acr-fs] ${slug}: ${written} written, ${skipped} skipped (${hits.length} hits)`,
+    );
+  };
+
   for (const c of ytOnly) {
     const videoId = videoIdFromSlug(c.slug);
     const url = youtubeWatchUrl(c.playbackUrl);
     if (!videoId || !url) continue;
+    const existing = known.get(videoId);
+    if (existing) {
+      reused += 1;
+      const done = existing.state !== 0;
+      byVideo.set(videoId, { candidate: c, fileId: existing.fileId, done });
+      if (existing.state === 1) {
+        ready += 1;
+        await applyReady(c.slug, c.id, existing.file);
+      } else if (existing.state !== 0) {
+        console.log(
+          `[acr-fs] reuse ${c.slug} file ${existing.fileId} state=${existing.state} (no re-submit)`,
+        );
+      } else {
+        console.log(
+          `[acr-fs] reuse ${c.slug} file ${existing.fileId} (still processing, no re-submit)`,
+        );
+      }
+      continue;
+    }
     const fileId = await submitPlatformScan(cfg, url);
     byVideo.set(videoId, { candidate: c, fileId, done: false });
     if (fileId) submitted += 1;
@@ -540,21 +627,33 @@ export async function enrichYoutubeSetsWithFileScan(
       `[acr-fs] submit ${c.slug} → ${fileId ? `file ${fileId}` : "FAILED"}`,
     );
   }
-  if (submitted === 0) {
+  console.log(
+    `[acr-fs] submit ${submitted} new, reuse ${reused} already in container`,
+  );
+  if (submitted === 0 && reused === 0) {
     return {
       enabled: true,
       submitted: 0,
-      ready: 0,
-      identified: 0,
+      ready,
+      identified,
       skipped: "all submits failed (token/container/region?)",
     };
   }
 
-  // Phase B — poll the container's file list until targets are ready.
-  let ready = 0;
-  let identified = 0;
+  // Phase B — poll only files that are still processing (new submits + reused in-flight).
+  const inflight = [...byVideo.values()].filter((v) => v.fileId && !v.done);
+  if (inflight.length === 0) {
+    return {
+      enabled: true,
+      submitted,
+      ready,
+      identified,
+      skipped: reused
+        ? `reused ${reused} already-scanned YouTube file(s); no re-submit`
+        : "",
+    };
+  }
   const deadline = Date.now() + timeoutMs;
-  const genreCache = new Map<string, string | null>();
 
   while (Date.now() < deadline) {
     await new Promise((r) => setTimeout(r, pollMs));
@@ -577,7 +676,7 @@ export async function enrichYoutubeSetsWithFileScan(
       sawFull = files.length === 50;
       page += 1;
       for (const file of files) {
-        const vid = videoIdFromUri((file as { uri?: unknown }).uri);
+        const vid = youtubeVideoIdFromFsUri((file as { uri?: unknown }).uri);
         if (!vid) continue;
         const target = byVideo.get(vid);
         if (!target || target.done) continue;
@@ -591,29 +690,7 @@ export async function enrichYoutubeSetsWithFileScan(
           );
           continue;
         }
-        const hits = parseScanHits(file, cfg.minScore);
-        if (hits.length === 0) {
-          console.log(`[acr-fs] ${target.candidate.slug}: ready, no matches`);
-          continue;
-        }
-        if (!genreCache.has(target.candidate.id)) {
-          const s = await prisma.set.findUnique({
-            where: { id: target.candidate.id },
-            select: { genre: true },
-          });
-          genreCache.set(target.candidate.id, s?.genre ?? null);
-        }
-        const { written, skipped } = await applyScanHitsToSet(
-          prisma,
-          target.candidate.id,
-          genreCache.get(target.candidate.id),
-          hits,
-          { dryRun },
-        );
-        identified += written;
-        console.log(
-          `[acr-fs] ${target.candidate.slug}: ${written} written, ${skipped} skipped (${hits.length} hits)`,
-        );
+        await applyReady(target.candidate.slug, target.candidate.id, file);
       }
     }
     const pending = [...byVideo.values()].filter((v) => v.fileId && !v.done);

@@ -402,6 +402,29 @@ export function planGapProbes(
   return plans;
 }
 
+/**
+ * True when Identify still has work: unresolved cues, or gap-grid slots
+ * that are not already blocked by a hit *or* a recorded miss.
+ * Prevents the same first N offsets from being re-probed every enrich run.
+ */
+export function hasRemainingAcrWork(opts: {
+  durationSec: number;
+  plays: ExistingPlayMark[];
+  unresolvedCount: number;
+  stepSec?: number;
+  sampleSec?: number;
+}): boolean {
+  if (opts.unresolvedCount > 0) return true;
+  const stepSec = opts.stepSec ?? 90;
+  const sampleSec = opts.sampleSec ?? 12;
+  return planGapProbes(
+    opts.durationSec,
+    opts.plays,
+    stepSec,
+    sampleSec,
+  ).some((p) => p.isGap);
+}
+
 /** Prefer SoundCloud / hearthis; YouTube last (or excluded). */
 export function rankPlaybackHost(
   host: PlaybackHost | null,
@@ -856,7 +879,7 @@ export async function selectSparseSetsForFingerprint(
       genre: true,
       type: true,
       plays: {
-        select: { idStatus: true, provenance: true },
+        select: { idStatus: true, provenance: true, timestamp: true },
       },
       artists: {
         where: { isPrimary: true },
@@ -888,6 +911,15 @@ export async function selectSparseSetsForFingerprint(
       Math.floor(row.durationSec / (8 * 60)), // at least ~7.5 tracks/hour identified
     );
     if (identifiedStrong >= expectedFloor && unresolvedCount === 0) continue;
+    if (
+      !hasRemainingAcrWork({
+        durationSec: row.durationSec,
+        plays: row.plays,
+        unresolvedCount,
+      })
+    ) {
+      continue;
+    }
 
     const primarySlug = row.artists[0]?.dj.slug;
     const top100Rank = primarySlug ? (top100.get(primarySlug) ?? null) : null;
@@ -1077,6 +1109,26 @@ export async function upsertFingerprintTrack(
   return created.id;
 }
 
+/** Grey fingerprint miss — blocks the gap grid without counting as unresolved. */
+async function recordFingerprintMiss(
+  prisma: PrismaClient,
+  setId: string,
+  offsetSec: number,
+  reason: string,
+): Promise<void> {
+  const position = await nextPlayPosition(prisma, setId);
+  await prisma.played.create({
+    data: {
+      setId,
+      position,
+      timestamp: offsetSec,
+      idStatus: "unparsed",
+      provenance: "fingerprint",
+      rawText: `acr-miss @ ${fmtTimestamp(offsetSec)}: ${reason}`.slice(0, 240),
+    },
+  });
+}
+
 export async function nextPlayPosition(
   prisma: PrismaClient,
   setId: string,
@@ -1138,6 +1190,7 @@ async function enrichOneSet(
           provenance: true,
           idStatus: true,
           idTrackId: true,
+          idTrack: { select: { note: true } },
         },
       },
     },
@@ -1159,6 +1212,7 @@ async function enrichOneSet(
   // 1) Resolve existing unresolved_id cues at their timestamps (Top 100 path).
   const unresolvedPlays = set.plays
     .filter((p) => p.idStatus === "unresolved_id")
+    .filter((p) => !/acr-miss/i.test(p.idTrack?.note ?? ""))
     .sort((a, b) => a.timestamp - b.timestamp)
     .slice(0, 8);
   for (const play of unresolvedPlays) {
@@ -1176,10 +1230,26 @@ async function enrichOneSet(
       console.warn(
         `[acrcloud] resolve fail ${candidate.slug}@${play.timestamp}: ${result.error}`,
       );
+      if (!opts.dryRun && play.idTrackId) {
+        await prisma.idTrack.update({
+          where: { id: play.idTrackId },
+          data: { note: `acr-miss: ${result.error}` },
+        });
+      }
       continue;
     }
     if (!result.hit || result.hit.score < opts.minScore) {
       unresolved += 1;
+      if (!opts.dryRun && play.idTrackId) {
+        await prisma.idTrack.update({
+          where: { id: play.idTrackId },
+          data: {
+            note: result.hit
+              ? `acr-miss: weak score ${result.hit.score}`
+              : "acr-miss: no ACRCloud match",
+          },
+        });
+      }
       continue;
     }
     identified += 1;
@@ -1265,6 +1335,20 @@ async function enrichOneSet(
       console.warn(
         `[acrcloud] identify fail ${candidate.slug}@${plan.offsetSec}: ${result.error}`,
       );
+      // Record the miss so the next run advances past this offset.
+      if (!opts.dryRun) {
+        await recordFingerprintMiss(
+          prisma,
+          candidate.id,
+          plan.offsetSec,
+          result.error,
+        );
+      }
+      marks.push({
+        timestamp: plan.offsetSec,
+        provenance: "fingerprint",
+        idStatus: "unparsed",
+      });
       continue;
     }
 
@@ -1273,6 +1357,7 @@ async function enrichOneSet(
       unresolved += 1;
       // Default: do not write weak gap rows — they inflate unresolvedCount and
       // crowd the next enrich queue. Opt in with ACRCLOUD_WRITE_WEAK_GAPS=1.
+      // Always record a grey miss so we do not re-Identify the same offset.
       if (!opts.dryRun && writeWeakGaps) {
         const idLabel = `ID @ ${tsLabel} (fingerprint weak)`;
         const idTrack = await prisma.idTrack.create({
@@ -1296,11 +1381,20 @@ async function enrichOneSet(
             idTrackId: idTrack.id,
           },
         });
+      } else if (!opts.dryRun) {
+        await recordFingerprintMiss(
+          prisma,
+          candidate.id,
+          plan.offsetSec,
+          result.hit
+            ? `weak score ${result.hit.score}`
+            : "no ACRCloud match",
+        );
       }
       marks.push({
         timestamp: plan.offsetSec,
         provenance: "fingerprint",
-        idStatus: "unresolved_id",
+        idStatus: writeWeakGaps ? "unresolved_id" : "unparsed",
       });
       continue;
     }
