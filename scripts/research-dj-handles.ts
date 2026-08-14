@@ -1,6 +1,6 @@
 /**
  * Claude / Gemini handle research + quality notes.
- * No-op without ANTHROPIC_API_KEY / GEMINI_API_KEY.
+ * No-op without CLAUDE_AGENT_API / ANTHROPIC_API_KEY / GEMINI_API_KEY.
  *
  *   npm run research:handles
  *   LLM_RESEARCH_APPLY=0 npm run research:handles   # report only

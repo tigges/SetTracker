@@ -194,9 +194,10 @@ jobs:
           npm run catalog-sc-socials || true
 
       # Claude / Gemini propose handles; we only write live URLs that match the DJ name.
-      # No-op when ANTHROPIC_API_KEY / GEMINI_API_KEY are unset.
+      # No-op when CLAUDE_AGENT_API / GEMINI_API_KEY are unset.
       - name: LLM handle research
         env:
+          CLAUDE_AGENT_API: ${{ secrets.CLAUDE_AGENT_API }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           LLM_RESEARCH_LIMIT: "16"

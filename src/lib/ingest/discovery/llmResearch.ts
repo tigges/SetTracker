@@ -7,7 +7,7 @@
  *   3) the URL is live (or soft-gated),
  *   4) it is not already owned by a different catalog DJ.
  *
- * No-op when ANTHROPIC_API_KEY / GEMINI_API_KEY are unset.
+ * No-op when CLAUDE_AGENT_API / ANTHROPIC_API_KEY / GEMINI_API_KEY are unset.
  */
 
 import { mkdirSync, writeFileSync } from "node:fs";
@@ -62,11 +62,19 @@ export type ResearchStats = {
 
 const TIMEOUT_MS = 45_000;
 
+/** Repo secret is `CLAUDE_AGENT_API`; `ANTHROPIC_API_KEY` is an alias. */
+export function claudeApiKey(
+  env: Record<string, string | undefined> = process.env,
+): string | null {
+  const key = env.CLAUDE_AGENT_API?.trim() || env.ANTHROPIC_API_KEY?.trim();
+  return key || null;
+}
+
 export function detectLlmProvider(
   env: Record<string, string | undefined> = process.env,
 ): LlmProvider | null {
   const want = (env.LLM_RESEARCH_PROVIDER || "auto").toLowerCase();
-  const claude = Boolean(env.ANTHROPIC_API_KEY?.trim());
+  const claude = Boolean(claudeApiKey(env));
   const gemini = Boolean(
     env.GEMINI_API_KEY?.trim() || env.GOOGLE_API_KEY?.trim(),
   );
@@ -102,7 +110,8 @@ Context: ${context || "none"}`;
 }
 
 async function callClaude(prompt: string): Promise<string> {
-  const key = process.env.ANTHROPIC_API_KEY!.trim();
+  const key = claudeApiKey();
+  if (!key) throw new Error("CLAUDE_AGENT_API / ANTHROPIC_API_KEY missing");
   const model = process.env.ANTHROPIC_MODEL || "claude-sonnet-4-5";
   const res = await fetch("https://api.anthropic.com/v1/messages", {
     method: "POST",
@@ -309,7 +318,7 @@ export async function runLlmHandleResearch(
   };
   if (!provider) {
     console.log(
-      "[llm-research] skipped (set ANTHROPIC_API_KEY and/or GEMINI_API_KEY)",
+      "[llm-research] skipped (set CLAUDE_AGENT_API and/or GEMINI_API_KEY)",
     );
     return stats;
   }

@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import {
+  claudeApiKey,
   detectLlmProvider,
   evaluateProposedUrl,
   parseLlmJson,
@@ -13,9 +14,16 @@ Here you go
 assert.equal(parsed?.soundcloud, "https://soundcloud.com/adambeyer");
 assert.equal(parsed?.confidence, "high");
 
+assert.equal(claudeApiKey({}), null);
+assert.equal(claudeApiKey({ CLAUDE_AGENT_API: "sk-ant-repo" }), "sk-ant-repo");
+assert.equal(claudeApiKey({ ANTHROPIC_API_KEY: "sk-ant-alias" }), "sk-ant-alias");
 assert.equal(detectLlmProvider({}), null);
 assert.equal(
   detectLlmProvider({ ANTHROPIC_API_KEY: "sk-ant-x" }),
+  "claude",
+);
+assert.equal(
+  detectLlmProvider({ CLAUDE_AGENT_API: "sk-ant-repo" }),
   "claude",
 );
 assert.equal(

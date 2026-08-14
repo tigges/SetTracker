@@ -80,7 +80,7 @@ empty `PAGES_BASE_PATH`). The github.io `/SetTracker` path is a redirect.
   **dispatch** `deploy-pages` (they no longer self-build). To ship, producers
   hand off; to fix the build, edit one workflow.
 - **LLM handle research:** `npm run research:handles` (catalog-deep + enrich
-  `full`). Claude (`ANTHROPIC_API_KEY`) and/or Gemini (`GEMINI_API_KEY`,
+  `full`). Claude (`CLAUDE_AGENT_API` or `ANTHROPIC_API_KEY`) and/or Gemini (`GEMINI_API_KEY`,
   preferred — Search grounding) propose official socials for DJs that have
   sets but no handle. **Verify-then-write:** live profile URL + handle matches
   the DJ name + not owned by another Dj. Never invents `@slug` guesses. No-op

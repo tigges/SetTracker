@@ -195,7 +195,8 @@ Our submit forces `engine=1` (audio fingerprint; override `ACRCLOUD_FS_ENGINE`).
 | `ACRCLOUD_FS_TOKEN` | File Scanning Console API token (YouTube) |
 | `ACRCLOUD_FS_CONTAINER_ID` | File Scanning container id |
 | `ACRCLOUD_FS_REGION` | optional container region (default `eu-west-1`) |
-| `ANTHROPIC_API_KEY` | optional Claude key for DJ handle research |
+| `CLAUDE_AGENT_API` | Claude API key for DJ handle research |
+| `ANTHROPIC_API_KEY` | optional alias for the same Claude key |
 | `GEMINI_API_KEY` | optional Gemini key (preferred — Google Search grounding) |
 
 **LLM handle research** (`npm run research:handles`): Claude and/or Gemini

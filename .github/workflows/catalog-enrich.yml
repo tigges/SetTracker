@@ -195,6 +195,7 @@ jobs:
       - name: LLM handle research
         if: steps.mode.outputs.do_thumbs == '1'
         env:
+          CLAUDE_AGENT_API: ${{ secrets.CLAUDE_AGENT_API }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           LLM_RESEARCH_LIMIT: "12"
