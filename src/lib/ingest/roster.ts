@@ -2057,6 +2057,21 @@ export const ARTIST_ROSTER_CURATED: ArtistRosterEntry[] = [
     soundcloud: { permalink: "marlonhoffstadt", status: "ok" },
     priority: "high",
   },
+  {
+    name: "1788-L",
+    genre: "Riddim",
+    accent: "#c1121f",
+    homeCity: "United States",
+    youtube: { handle: "@1788L", status: "ok" },
+    website: "https://1788-l.com",
+    socials: [
+      "https://www.youtube.com/@1788L",
+      "https://instagram.com/1788_l",
+      "https://twitter.com/l_1788",
+      "https://open.spotify.com/artist/7oB4pCSzvvRtZka6DxXUfN",
+    ],
+    priority: "normal",
+  },
 ];
 
 /**

@@ -1146,4 +1146,15 @@ export const DJ_SOCIAL_PINS: DjSocialPin[] = [
     website: "https://www.topic-music.com/",
     bio: "Dance. Official topic-music.com — SC topicmusic, YT @topicmusictv.",
   },
+  {
+    slug: "1788-l",
+    name: "1788-L",
+    accent: "#c1121f",
+    soundcloud: null,
+    youtube: "https://www.youtube.com/@1788L",
+    instagram: "https://www.instagram.com/1788_l/",
+    twitter: "https://x.com/l_1788",
+    website: "https://1788-l.com",
+    bio: "Riddim. United States. Official 1788-l.com — YT @1788L, IG @1788_l, X @l_1788. No official SoundCloud.",
+  },
 ];
