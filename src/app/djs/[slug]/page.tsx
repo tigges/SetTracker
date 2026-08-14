@@ -4,6 +4,8 @@ import { getDjBySlug, getAllDjSlugs } from "@/lib/queries";
 import { EntityThumb } from "@/components/EntityThumb";
 import { StatusBar, StatusLegend } from "@/components/StatusBits";
 import { SocialLinks } from "@/components/SocialLinks";
+import { ATLAS_DJ_YEAR, lookupAtlasDj } from "@/lib/atlas/seed";
+import { chartKicker } from "@/lib/atlas/mapMath";
 import {
   PROVENANCE_META,
   SET_TYPE_META,
@@ -51,18 +53,29 @@ export default async function DjPage({
   if (!dj) notFound();
 
   const accent = dj.accent;
+  const chart = lookupAtlasDj(dj.slug);
   const provTotal =
     Object.values(dj.provenance).reduce((a, b) => a + b, 0) || 1;
   const maxPlays = dj.mostPlayed[0]?.count ?? 1;
 
   return (
     <div>
-      <Link
-        href="/djs"
-        className="mono text-[12px] text-muted2 transition-colors hover:text-ink"
-      >
-        ← DJs
-      </Link>
+      <div className="flex flex-wrap items-center gap-3">
+        <Link
+          href="/djs"
+          className="mono text-[12px] text-muted2 transition-colors hover:text-ink"
+        >
+          ← DJs
+        </Link>
+        {chart ? (
+          <Link
+            href={`/atlas#${chart.slug}`}
+            className="mono text-[12px] text-muted2 transition-colors hover:text-ink"
+          >
+            Atlas
+          </Link>
+        ) : null}
+      </div>
 
       {/* hero */}
       <div
@@ -84,6 +97,11 @@ export default async function DjPage({
               DJ profile
             </p>
             <h1 className="text-3xl font-extrabold tracking-tight">{dj.name}</h1>
+            {chart ? (
+              <p className="mt-1 text-[13px] text-muted">
+                DJ Mag Top 100 {chartKicker("dj", chart.rank, ATLAS_DJ_YEAR)}
+              </p>
+            ) : null}
             <p className="mt-1 text-[13px] text-muted">
               {dj.homeCity}
               {dj.homeCity && dj.totals ? " · " : ""}

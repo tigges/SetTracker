@@ -32,6 +32,7 @@
   --amber: #ffb020;
   --magenta: #ff4d8d;
   --teal: #29c7dd;
+  --violet: #c08bff;
   --grey: #6b7280;
 
   --accent: var(--brand);
@@ -52,6 +53,7 @@
   --color-amber: var(--amber);
   --color-magenta: var(--magenta);
   --color-teal: var(--teal);
+  --color-violet: var(--violet);
   --color-grey: var(--grey);
 
   --font-sans: var(--font-geist-sans);
@@ -166,6 +168,9 @@ a {
 .atlas-pin-club {
   fill: var(--teal);
 }
+.atlas-pin-dj {
+  fill: var(--violet);
+}
 .atlas-halo {
   fill: none;
   stroke-width: 0.9;
@@ -178,4 +183,8 @@ a {
 .atlas-pin-club.atlas-halo,
 .atlas-halo.atlas-pin-club {
   stroke: var(--teal);
+}
+.atlas-pin-dj.atlas-halo,
+.atlas-halo.atlas-pin-dj {
+  stroke: var(--violet);
 }

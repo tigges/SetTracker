@@ -82,9 +82,9 @@ export async function getSearchIndex(): Promise<SearchIndexItem[]> {
     {
       kind: "venue",
       title: "Top 100 Atlas",
-      subtitle: "DJ Mag clubs & festivals 2026",
+      subtitle: "DJ Mag clubs & festivals 2026, DJs 2025",
       href: "/atlas",
-      keywords: "map dj mag top 100 clubs festivals atlas",
+      keywords: "map dj mag top 100 clubs festivals djs atlas",
     },
   ];
 

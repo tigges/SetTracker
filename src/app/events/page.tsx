@@ -107,7 +107,7 @@ export default async function EventsPage() {
           Festivals, clubs, and livestream channels with sets first — curated
           directory stubs without sets stay below.{" "}
           <Link href="/atlas" className="text-brand hover:text-brandstrong">
-            Map the 2026 Top 100 →
+            Map the Top 100 →
           </Link>
         </p>
       </div>

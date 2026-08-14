@@ -1,27 +1,38 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import {
+  atlasAccent,
   atlasCities,
   atlasCountries,
+  atlasPinClass,
   chartKicker,
   filterAtlasPins,
+  flyToSpan,
   projectMercator,
+  spreadCoincidentPins,
   type AtlasPin,
 } from "./atlas/mapMath";
 import {
+  ATLAS_DJ_YEAR,
   ATLAS_YEAR,
+  atlasPins,
+  atlasPinsFromDjs,
   atlasPinsFromVenues,
+  loadAtlasDjs,
   loadAtlasVenues,
+  lookupAtlasDj,
   lookupAtlasVenue,
 } from "./atlas/seed";
 import { loadDjMagClubRankBySlug } from "./djmagClubRanks";
 import { loadDjMagFestivalRankBySlug } from "./djmagFestivalRanks";
+import { loadDjMagTop100RankBySlug } from "./djmagTop100";
 import { resolveFeedRanks } from "./feedPriorityResolve";
 
 function pin(partial: Partial<AtlasPin> & Pick<AtlasPin, "id" | "name">): AtlasPin {
   return {
     kind: "club",
     rank: 1,
+    year: 2026,
     slug: "x",
     chartSlug: "x",
     city: "Ibiza",
@@ -31,6 +42,10 @@ function pin(partial: Partial<AtlasPin> & Pick<AtlasPin, "id" | "name">): AtlasP
     lng: 1.4,
     change: "Non-mover",
     approx: false,
+    src: null,
+    note: null,
+    prec: null,
+    nomap: false,
     x: 0,
     y: 0,
     setCount: 0,
@@ -98,6 +113,7 @@ describe("DJ Mag 2026 atlas seed", () => {
     assert.equal(tml?.href, "/events/tomorrowland");
     assert.equal(tml?.setCount, 12);
     assert.equal(tml?.imageUrl, "/t.jpg");
+    assert.equal(tml?.year, 2026);
     const missing = pins.find((p) => p.slug === "greenvalley");
     assert.equal(missing?.href, null);
     assert.equal(missing?.setCount, 0);
@@ -122,14 +138,28 @@ describe("DJ Mag 2026 atlas seed", () => {
         country: "Spain",
         loc: "Madrid, Spain",
       }),
+      pin({
+        id: "d1",
+        name: "David Guetta",
+        kind: "dj",
+        year: 2025,
+        city: "Paris",
+        country: "France",
+        loc: "Paris, France",
+        src: "Paris, France",
+      }),
     ];
     assert.equal(
       filterAtlasPins(pins, { type: "club", q: "", country: "", city: "" }).length,
       2,
     );
     assert.equal(
+      filterAtlasPins(pins, { type: "dj", q: "", country: "", city: "" }).map((p) => p.name).join(),
+      "David Guetta",
+    );
+    assert.equal(
       filterAtlasPins(pins, {
-        type: "both",
+        type: "all",
         q: "ibiza",
         country: "",
         city: "",
@@ -138,17 +168,103 @@ describe("DJ Mag 2026 atlas seed", () => {
     );
     assert.equal(
       filterAtlasPins(pins, {
-        type: "both",
+        type: "all",
+        q: "guetta",
+        country: "",
+        city: "",
+      }).map((p) => p.id).join(),
+      "d1",
+    );
+    assert.equal(
+      filterAtlasPins(pins, {
+        type: "all",
         q: "",
         country: "Spain",
         city: "Madrid",
       }).map((p) => p.name).join(),
       "Fabrik",
     );
-    assert.deepEqual(atlasCountries(pins), ["Belgium", "Spain"]);
+    assert.deepEqual(atlasCountries(pins), ["Belgium", "France", "Spain"]);
     assert.deepEqual(atlasCities(pins, "Spain"), ["Ibiza", "Madrid"]);
     assert.equal(chartKicker("festival", 1), "Festival · No. 1");
     assert.equal(chartKicker("club", 4), "Club · No. 4");
+    assert.equal(chartKicker("dj", 1, 2025), "DJ · No. 1 · 2025");
+    assert.equal(atlasAccent("dj"), "var(--violet)");
+    assert.equal(atlasPinClass("dj"), "atlas-pin-dj");
+  });
+});
+
+describe("DJ Mag 2025 atlas DJs", () => {
+  it("covers ranks 1–100 and joins catalog slugs", () => {
+    const rows = loadAtlasDjs();
+    assert.equal(ATLAS_DJ_YEAR, 2025);
+    assert.equal(rows.length, 100);
+    assert.deepEqual(
+      rows.map((d) => d.rank).sort((a, b) => a - b),
+      Array.from({ length: 100 }, (_, i) => i + 1),
+    );
+
+    const guetta = lookupAtlasDj("david-guetta");
+    assert.equal(guetta?.rank, 1);
+    assert.equal(guetta?.name, "David Guetta");
+    assert.equal(guetta?.prec, "city");
+    assert.equal(guetta?.nomap, false);
+    assert.equal(guetta?.country, "France");
+
+    const claptone = lookupAtlasDj("claptone");
+    assert.equal(claptone?.rank, 30);
+    assert.equal(claptone?.nomap, true);
+    assert.ok(claptone?.note?.toLowerCase().includes("undisclosed"));
+
+    const countryPins = rows.filter((d) => d.prec === "country" && !d.nomap);
+    assert.ok(countryPins.length >= 60, "most DJs are country-level");
+    assert.ok(
+      rows.every((d) => Number.isFinite(d.lat) && Number.isFinite(d.lng)),
+    );
+
+    const chart = loadDjMagTop100RankBySlug();
+    assert.equal(chart.get("david-guetta"), 1);
+    for (const d of rows) {
+      assert.equal(chart.get(d.slug), d.rank, d.slug);
+    }
+
+    const pins = atlasPinsFromDjs(rows, new Map([
+      ["david-guetta", { slug: "david-guetta", setCount: 4, imageUrl: "/g.jpg" }],
+    ]));
+    const g = pins.find((p) => p.slug === "david-guetta");
+    assert.equal(g?.href, "/djs/david-guetta");
+    assert.equal(g?.setCount, 4);
+    assert.equal(g?.year, 2025);
+    const missing = pins.find((p) => p.slug === "claptone");
+    assert.equal(missing?.href, null);
+    assert.equal(missing?.nomap, true);
+  });
+
+  it("spirals stacked country pins and skips nomap on the combined map", () => {
+    const stacked = spreadCoincidentPins([
+      { x: 10, y: 10 },
+      { x: 10, y: 10 },
+      { x: 10, y: 10, nomap: true },
+    ]);
+    assert.equal(stacked[0].x, 10);
+    assert.notEqual(stacked[1].x, 10);
+    assert.equal(stacked[2].x, 10);
+
+    const pins = atlasPins(
+      loadAtlasVenues(),
+      loadAtlasDjs(),
+      new Map(),
+      new Map(),
+    );
+    assert.equal(pins.length, 300);
+    assert.equal(pins.filter((p) => p.kind === "dj").length, 100);
+    const nl = pins.filter(
+      (p) => p.kind === "dj" && p.country === "Netherlands" && !p.nomap,
+    );
+    const keys = new Set(nl.map((p) => `${p.x.toFixed(2)}/${p.y.toFixed(2)}`));
+    assert.equal(keys.size, nl.length, "Dutch DJs must not share one pixel");
+    assert.equal(flyToSpan({ kind: "dj", prec: "country", nomap: false }), 240);
+    assert.equal(flyToSpan({ kind: "festival", prec: null, nomap: false }), 80);
   });
 });
 
