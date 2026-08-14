@@ -3,12 +3,15 @@
  * (keeps the map bundle from pulling Node seed graphs).
  */
 
-export type AtlasKind = "festival" | "club";
+export type AtlasKind = "festival" | "club" | "dj";
+
+export type AtlasPrec = "city" | "country";
 
 export type AtlasPin = {
   id: string;
   kind: AtlasKind;
   rank: number;
+  year: number;
   slug: string;
   chartSlug: string;
   name: string;
@@ -19,6 +22,10 @@ export type AtlasPin = {
   lng: number;
   change: string;
   approx: boolean;
+  src: string | null;
+  note: string | null;
+  prec: AtlasPrec | null;
+  nomap: boolean;
   x: number;
   y: number;
   setCount: number;
@@ -26,7 +33,7 @@ export type AtlasPin = {
   href: string | null;
 };
 
-export type AtlasTypeFilter = "both" | "festival" | "club";
+export type AtlasTypeFilter = "all" | "festival" | "club" | "dj";
 
 export type AtlasFilter = {
   type: AtlasTypeFilter;
@@ -54,11 +61,11 @@ export function filterAtlasPins(
 ): AtlasPin[] {
   const q = f.q.trim().toLowerCase();
   return pins.filter((p) => {
-    if (f.type !== "both" && p.kind !== f.type) return false;
+    if (f.type !== "all" && p.kind !== f.type) return false;
     if (f.country && p.country !== f.country) return false;
     if (f.city && p.city !== f.city) return false;
     if (!q) return true;
-    const hay = `${p.name} ${p.loc} ${p.city} ${p.country}`.toLowerCase();
+    const hay = `${p.name} ${p.loc} ${p.city} ${p.country} ${p.src ?? ""}`.toLowerCase();
     return hay.includes(q);
   });
 }
@@ -72,11 +79,63 @@ export function atlasCountries(pins: AtlasPin[]): string[] {
 export function atlasCities(pins: AtlasPin[], country: string): string[] {
   if (!country) return [];
   return [
-    ...new Set(pins.filter((p) => p.country === country).map((p) => p.city)),
+    ...new Set(
+      pins
+        .filter((p) => p.country === country && p.city)
+        .map((p) => p.city),
+    ),
   ].sort((a, b) => a.localeCompare(b));
 }
 
-export function chartKicker(kind: AtlasKind, rank: number): string {
-  const poll = kind === "festival" ? "Festival" : "Club";
-  return `${poll} · No. ${rank}`;
+export function chartKicker(
+  kind: AtlasKind,
+  rank: number,
+  year?: number,
+): string {
+  const poll =
+    kind === "festival" ? "Festival" : kind === "club" ? "Club" : "DJ";
+  const base = `${poll} · No. ${rank}`;
+  return year != null ? `${base} · ${year}` : base;
+}
+
+export function atlasAccent(kind: AtlasKind): string {
+  if (kind === "festival") return "var(--amber)";
+  if (kind === "club") return "var(--teal)";
+  return "var(--violet)";
+}
+
+export function atlasPinClass(kind: AtlasKind): string {
+  return `atlas-pin-${kind}`;
+}
+
+/**
+ * Country-level DJs share one centroid. Fan coincident points onto a
+ * golden-angle spiral so each pin stays clickable.
+ */
+export function spreadCoincidentPins<T extends { x: number; y: number; nomap?: boolean }>(
+  pins: T[],
+): T[] {
+  const bucket = new Map<string, T[]>();
+  for (const p of pins) {
+    if (p.nomap) continue;
+    const key = `${p.x.toFixed(2)}/${p.y.toFixed(2)}`;
+    const group = bucket.get(key);
+    if (group) group.push(p);
+    else bucket.set(key, [p]);
+  }
+  for (const group of bucket.values()) {
+    if (group.length < 2) continue;
+    group.forEach((p, i) => {
+      const a = i * 2.399963;
+      const rad = 1.2 * Math.sqrt(i);
+      p.x += Math.cos(a) * rad;
+      p.y += Math.sin(a) * rad;
+    });
+  }
+  return pins;
+}
+
+export function flyToSpan(p: Pick<AtlasPin, "kind" | "prec" | "nomap">): number {
+  if (p.kind === "dj" && p.prec === "country") return 240;
+  return 80;
 }

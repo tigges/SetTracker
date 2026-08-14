@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { DjList } from "@/components/DjList";
 import { getDjList } from "@/lib/queries";
 
@@ -13,7 +14,10 @@ export default async function DjsPage() {
           {djs.filter((d) => d.isBrowseReady).length} artists ready to browse
           ({djs.length} stored). Ingest keeps every discovery; Browse hides
           profiles without a handle, empty tracklists, thin title-parse dupes,
-          and missing artwork unless the catalog is already deep.
+          and missing artwork unless the catalog is already deep.{" "}
+          <Link href="/atlas" className="text-brand hover:text-brandstrong">
+            Map the Top 100 →
+          </Link>
         </p>
       </div>
 

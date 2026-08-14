@@ -49,8 +49,8 @@ Provenance per row: `1001TL parse`, `SoundCloud parse`, `fingerprint`, `communit
 3. **DJ profile** (`/djs/[slug]`) — series, recent sets, most-played tracks,
    collaborators and source health.
 4. **Events** (`/events`, `/events/[slug]`) — festivals, clubs, livestreams.
-5. **Top 100 Atlas** (`/atlas`) — DJ Mag 2026 clubs & festivals on a world map,
-   linked to catalog sets.
+5. **Top 100 Atlas** (`/atlas`) — DJ Mag 2026 clubs & festivals plus 2025 DJs
+   on a world map, linked to catalog sets and DJ profiles.
 6. **Labels** (`/labels`, `/labels/[slug]`) — imprint index and profiles.
 
 ## Getting started

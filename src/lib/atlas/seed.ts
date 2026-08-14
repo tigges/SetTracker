@@ -1,10 +1,17 @@
 /**
- * DJ Mag Top 100 Clubs & Festivals 2026 — geocoded atlas seed.
+ * DJ Mag Top 100 Clubs & Festivals 2026 + DJs 2025 — geocoded atlas seed.
  * Static JSON import (no node:fs) so Next static export stays NFT-safe.
  */
 
-import raw from "../../../data/venue-seeds/djmag-atlas-2026.json";
-import { projectMercator, type AtlasKind, type AtlasPin } from "./mapMath";
+import venueRaw from "../../../data/venue-seeds/djmag-atlas-2026.json";
+import djRaw from "../../../data/artist-seeds/djmag-atlas-djs-2025.json";
+import {
+  projectMercator,
+  spreadCoincidentPins,
+  type AtlasKind,
+  type AtlasPin,
+  type AtlasPrec,
+} from "./mapMath";
 
 export type AtlasVenue = {
   kind: AtlasKind;
@@ -23,20 +30,48 @@ export type AtlasVenue = {
   website?: string;
 };
 
-type AtlasFile = {
+export type AtlasDj = {
+  rank: number;
+  slug: string;
+  name: string;
+  city: string;
+  country: string;
+  src: string;
+  lat: number;
+  lng: number;
+  prec: AtlasPrec | null;
+  note: string | null;
+  nomap: boolean;
+  djmagUrl?: string;
+  website?: string;
+};
+
+type VenueFile = {
   year?: number;
   venues?: AtlasVenue[];
 };
 
-const data = raw as AtlasFile;
+type DjFile = {
+  year?: number;
+  djs?: AtlasDj[];
+};
 
-export const ATLAS_YEAR = data.year ?? 2026;
+const venues = venueRaw as VenueFile;
+const djs = djRaw as DjFile;
+
+export const ATLAS_YEAR = venues.year ?? 2026;
+export const ATLAS_DJ_YEAR = djs.year ?? 2025;
 
 export function loadAtlasVenues(): AtlasVenue[] {
-  return data.venues ?? [];
+  return venues.venues ?? [];
+}
+
+export function loadAtlasDjs(): AtlasDj[] {
+  return djs.djs ?? [];
 }
 
 let slugIndex: Map<string, AtlasVenue> | null = null;
+let djSlugIndex: Map<string, AtlasDj> | null = null;
 
 /** Catalog slug and chart slug both resolve to the same row. */
 export function atlasVenueBySlug(): Map<string, AtlasVenue> {
@@ -56,20 +91,34 @@ export function lookupAtlasVenue(slug: string): AtlasVenue | null {
   return atlasVenueBySlug().get(key) ?? null;
 }
 
+export function atlasDjBySlug(): Map<string, AtlasDj> {
+  if (djSlugIndex) return djSlugIndex;
+  const out = new Map<string, AtlasDj>();
+  for (const d of loadAtlasDjs()) out.set(d.slug, d);
+  djSlugIndex = out;
+  return out;
+}
+
+export function lookupAtlasDj(slug: string): AtlasDj | null {
+  const key = slug.trim();
+  if (!key) return null;
+  return atlasDjBySlug().get(key) ?? null;
+}
+
+type CatalogRow = { slug: string; setCount: number; imageUrl: string | null };
+
 export function atlasPinsFromVenues(
-  venues: AtlasVenue[],
-  catalog: Map<
-    string,
-    { slug: string; setCount: number; imageUrl: string | null }
-  >,
+  rows: AtlasVenue[],
+  catalog: Map<string, CatalogRow>,
 ): AtlasPin[] {
-  return venues.map((v) => {
+  return rows.map((v) => {
     const ev = catalog.get(v.slug) ?? catalog.get(v.chartSlug);
     const { x, y } = projectMercator(v.lng, v.lat);
     return {
       id: `${v.kind}:${v.slug}`,
       kind: v.kind,
       rank: v.rank,
+      year: ATLAS_YEAR,
       slug: ev?.slug ?? v.slug,
       chartSlug: v.chartSlug,
       name: v.name,
@@ -80,6 +129,10 @@ export function atlasPinsFromVenues(
       lng: v.lng,
       change: v.change,
       approx: v.approx,
+      src: null,
+      note: null,
+      prec: null,
+      nomap: false,
       x,
       y,
       setCount: ev?.setCount ?? 0,
@@ -87,4 +140,52 @@ export function atlasPinsFromVenues(
       href: ev ? `/events/${ev.slug}` : null,
     };
   });
+}
+
+export function atlasPinsFromDjs(
+  rows: AtlasDj[],
+  catalog: Map<string, CatalogRow>,
+): AtlasPin[] {
+  return rows.map((d) => {
+    const ev = catalog.get(d.slug);
+    const { x, y } = projectMercator(d.lng, d.lat);
+    const loc = d.city ? `${d.city}, ${d.country}` : d.country;
+    return {
+      id: `dj:${d.slug}`,
+      kind: "dj",
+      rank: d.rank,
+      year: ATLAS_DJ_YEAR,
+      slug: ev?.slug ?? d.slug,
+      chartSlug: d.slug,
+      name: d.name,
+      city: d.city,
+      country: d.country,
+      loc,
+      lat: d.lat,
+      lng: d.lng,
+      change: "",
+      approx: d.prec === "country",
+      src: d.src || null,
+      note: d.note,
+      prec: d.prec,
+      nomap: d.nomap,
+      x,
+      y,
+      setCount: ev?.setCount ?? 0,
+      imageUrl: ev?.imageUrl ?? null,
+      href: ev ? `/djs/${ev.slug}` : null,
+    };
+  });
+}
+
+export function atlasPins(
+  venueRows: AtlasVenue[],
+  djRows: AtlasDj[],
+  events: Map<string, CatalogRow>,
+  catalogDjs: Map<string, CatalogRow>,
+): AtlasPin[] {
+  return spreadCoincidentPins([
+    ...atlasPinsFromVenues(venueRows, events),
+    ...atlasPinsFromDjs(djRows, catalogDjs),
+  ]);
 }

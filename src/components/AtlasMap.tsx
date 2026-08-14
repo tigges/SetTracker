@@ -12,10 +12,13 @@ import {
 import { EntityThumb } from "@/components/EntityThumb";
 import { WORLD_LAND_PATH } from "@/lib/atlas/worldLandPath";
 import {
+  atlasAccent,
   atlasCities,
   atlasCountries,
+  atlasPinClass,
   chartKicker,
   filterAtlasPins,
+  flyToSpan,
   type AtlasFilter,
   type AtlasPin,
   type AtlasTypeFilter,
@@ -74,19 +77,31 @@ function flyToPin(
   requestAnimationFrame(step);
 }
 
+function placeLine(p: AtlasPin): string {
+  const place = p.city ? `${p.city}, ${p.country}` : p.country;
+  return p.setCount ? `${place} · ${p.setCount} sets` : place;
+}
+
+function cardCaveat(p: AtlasPin): string {
+  if (p.kind === "dj") {
+    return [p.note, !p.nomap && p.prec === "country" ? "Country-level pin" : null]
+      .filter(Boolean)
+      .join(" · ");
+  }
+  return p.approx ? "Approximate pin — no fixed venue" : "";
+}
+
 export function AtlasMap({
   pins,
-  year,
 }: {
   pins: AtlasPin[];
-  year: number;
 }) {
   const svgRef = useRef<SVGSVGElement>(null);
   const viewRef = useRef<View>({ ...INITIAL_VIEW });
   const flewHash = useRef(false);
   const hash = useSyncExternalStore(subscribeHash, getHash, getServerHash);
   const [filter, setFilter] = useState<AtlasFilter>({
-    type: "both",
+    type: "all",
     q: "",
     country: "",
     city: "",
@@ -95,6 +110,7 @@ export function AtlasMap({
   const [listOpen, setListOpen] = useState(true);
 
   const hits = useMemo(() => filterAtlasPins(pins, filter), [pins, filter]);
+  const mappedHits = useMemo(() => hits.filter((p) => !p.nomap), [hits]);
   const selected =
     pins.find((p) => p.id === clickedId) ??
     pins.find((p) => hash !== "" && pinMatchesHash(p, hash)) ??
@@ -143,7 +159,7 @@ export function AtlasMap({
       if (vb.every(Number.isFinite)) {
         svg!.setAttribute("viewBox", vb.map((n) => n.toFixed(2)).join(" "));
       }
-      const r = Math.max(1.8, view.span * 0.0065);
+      const r = Math.max(0.9, view.span * 0.0052);
       svg!.querySelectorAll<SVGCircleElement>(".atlas-pin").forEach((c) => {
         c.setAttribute("r", r.toFixed(2));
       });
@@ -226,15 +242,22 @@ export function AtlasMap({
     const match = pins.find((p) => pinMatchesHash(p, hash));
     if (!match) return;
     flewHash.current = true;
-    flyToPin(svgRef.current as SvgWithView | null, viewRef.current, match);
+    if (!match.nomap) {
+      flyToPin(
+        svgRef.current as SvgWithView | null,
+        viewRef.current,
+        match,
+        flyToSpan(match),
+      );
+    }
   }, [hash, pins]);
 
   function fitHits() {
-    if (!hits.length) return;
+    if (!mappedHits.length) return;
     const svg = svgRef.current;
     if (!svg) return;
-    const xs = hits.map((d) => d.x);
-    const ys = hits.map((d) => d.y);
+    const xs = mappedHits.map((d) => d.x);
+    const ys = mappedHits.map((d) => d.y);
     const minX = Math.min(...xs);
     const maxX = Math.max(...xs);
     const minY = Math.min(...ys);
@@ -257,7 +280,7 @@ export function AtlasMap({
   function resetView() {
     Object.assign(viewRef.current, INITIAL_VIEW);
     (svgRef.current as SvgWithView | null)?.__applyView?.();
-    setFilter({ type: "both", q: "", country: "", city: "" });
+    setFilter({ type: "all", q: "", country: "", city: "" });
     setClickedId(null);
     if (typeof window !== "undefined" && window.location.hash) {
       history.replaceState(null, "", window.location.pathname + window.location.search);
@@ -265,12 +288,25 @@ export function AtlasMap({
     }
   }
 
+  function zoomBy(factor: number) {
+    const view = viewRef.current;
+    view.span = Math.max(2.2, Math.min(1400, view.span * factor));
+    (svgRef.current as SvgWithView | null)?.__applyView?.();
+  }
+
   function selectPin(p: AtlasPin) {
     setClickedId(p.id);
     if (typeof window !== "undefined") {
       history.replaceState(null, "", `#${p.slug}`);
     }
-    flyToPin(svgRef.current as SvgWithView | null, viewRef.current, p);
+    if (!p.nomap) {
+      flyToPin(
+        svgRef.current as SvgWithView | null,
+        viewRef.current,
+        p,
+        flyToSpan(p),
+      );
+    }
   }
 
   function setType(type: AtlasTypeFilter) {
@@ -283,12 +319,11 @@ export function AtlasMap({
         <div>
           <p className="eyebrow">DJ Mag reader polls</p>
           <h1 className="mt-1 text-3xl font-extrabold tracking-tight">
-            Top 100 Atlas{" "}
-            <span className="text-muted2">/ {year}</span>
+            Top 100 Atlas
           </h1>
           <p className="mt-2 max-w-2xl text-[14px] text-muted">
-            Every club and festival on the 2026 charts, mapped — linked to
-            setradar sets when the catalog has them.
+            Clubs &amp; festivals 2026, DJs 2025 — mapped and linked to
+            setradar when the catalog has them.
           </p>
         </div>
         <div className="flex gap-4 text-[12px] text-muted">
@@ -299,6 +334,10 @@ export function AtlasMap({
           <span className="inline-flex items-center gap-1.5">
             <i className="inline-block h-2.5 w-2.5 rounded-full bg-teal" />
             Clubs
+          </span>
+          <span className="inline-flex items-center gap-1.5">
+            <i className="inline-block h-2.5 w-2.5 rounded-full bg-violet" />
+            DJs
           </span>
         </div>
       </div>
@@ -313,9 +352,10 @@ export function AtlasMap({
             <div className="flex overflow-hidden rounded-lg border border-line">
               {(
                 [
-                  ["both", "Both"],
-                  ["festival", "Festivals"],
+                  ["all", "All"],
+                  ["festival", "Fests"],
                   ["club", "Clubs"],
+                  ["dj", "DJs"],
                 ] as const
               ).map(([value, label]) => (
                 <button
@@ -323,7 +363,7 @@ export function AtlasMap({
                   type="button"
                   aria-pressed={filter.type === value}
                   onClick={() => setType(value)}
-                  className={`flex-1 px-2 py-1.5 text-[12px] font-medium ${
+                  className={`flex-1 px-1 py-1.5 text-[11px] font-medium ${
                     filter.type === value
                       ? "bg-panel2 text-ink"
                       : "text-muted hover:text-ink"
@@ -340,7 +380,7 @@ export function AtlasMap({
                 onChange={(e) =>
                   setFilter((f) => ({ ...f, q: e.target.value }))
                 }
-                placeholder="Name or place"
+                placeholder="Tomorrowland, Berghain, Guetta"
                 className="rounded-md border border-line bg-bg px-2.5 py-1.5 text-[13px] text-ink"
               />
             </label>
@@ -415,7 +455,7 @@ export function AtlasMap({
             ) : (
               hits
                 .slice()
-                .sort((a, b) => a.rank - b.rank || a.name.localeCompare(b.name))
+                .sort((a, b) => a.rank - b.rank || a.kind.localeCompare(b.kind) || a.name.localeCompare(b.name))
                 .map((p) => (
                   <button
                     key={p.id}
@@ -429,10 +469,7 @@ export function AtlasMap({
                     }`}
                     style={
                       {
-                        "--pin":
-                          p.kind === "festival"
-                            ? "var(--amber)"
-                            : "var(--teal)",
+                        "--pin": atlasAccent(p.kind),
                       } as CSSProperties
                     }
                   >
@@ -447,8 +484,7 @@ export function AtlasMap({
                         {p.name}
                       </span>
                       <span className="block truncate text-[11px] text-muted2">
-                        {p.city}, {p.country}
-                        {p.setCount ? ` · ${p.setCount} sets` : ""}
+                        {placeLine(p)}
                       </span>
                       <span className="mt-1 block h-0.5 overflow-hidden rounded-sm bg-line">
                         <i
@@ -474,20 +510,38 @@ export function AtlasMap({
           >
             {listOpen ? "Hide list" : "Show list"}
           </button>
+          <div className="absolute top-3 right-3 z-10 grid gap-1.5">
+            <button
+              type="button"
+              aria-label="Zoom in"
+              onClick={() => zoomBy(1 / 1.6)}
+              className="grid h-8 w-8 place-items-center rounded-md border border-line bg-panel/90 text-[16px] text-ink hover:bg-panel2"
+            >
+              +
+            </button>
+            <button
+              type="button"
+              aria-label="Zoom out"
+              onClick={() => zoomBy(1.6)}
+              className="grid h-8 w-8 place-items-center rounded-md border border-line bg-panel/90 text-[16px] text-ink hover:bg-panel2"
+            >
+              −
+            </button>
+          </div>
           <svg
             ref={svgRef}
             role="img"
-            aria-label={`Map of DJ Mag Top 100 clubs and festivals ${year}`}
+            aria-label="Map of DJ Mag Top 100 clubs, festivals, and DJs"
             viewBox="50 80 900 560"
             preserveAspectRatio="xMidYMid slice"
             className="atlas-map absolute inset-0 h-full w-full cursor-grab touch-none"
           >
             <rect width="1000" height="1000" x="-200" y="-200" fill="#07090d" />
             <path d={WORLD_LAND_PATH} className="atlas-land" />
-            {hits.map((p) => (
+            {mappedHits.map((p) => (
               <circle
                 key={p.id}
-                className={`atlas-pin ${p.kind === "festival" ? "atlas-pin-festival" : "atlas-pin-club"}`}
+                className={`atlas-pin ${atlasPinClass(p.kind)}`}
                 cx={p.x}
                 cy={p.y}
                 r={4}
@@ -498,9 +552,9 @@ export function AtlasMap({
                 }}
               />
             ))}
-            {selected && hits.some((h) => h.id === selected.id) ? (
+            {selected && mappedHits.some((h) => h.id === selected.id) ? (
               <circle
-                className={`atlas-halo ${selected.kind === "festival" ? "atlas-pin-festival" : "atlas-pin-club"}`}
+                className={`atlas-halo ${atlasPinClass(selected.kind)}`}
                 cx={selected.x}
                 cy={selected.y}
                 r={10}
@@ -515,11 +569,7 @@ export function AtlasMap({
                 <EntityThumb
                   src={selected.imageUrl}
                   label={selected.name}
-                  accent={
-                    selected.kind === "festival"
-                      ? "var(--amber)"
-                      : "var(--teal)"
-                  }
+                  accent={atlasAccent(selected.kind)}
                   size={56}
                   radius={10}
                   monogram={
@@ -528,26 +578,41 @@ export function AtlasMap({
                   }
                 />
                 <div className="min-w-0 flex-1">
-                  <p className="eyebrow" style={{ color: selected.kind === "festival" ? "var(--amber)" : "var(--teal)" }}>
-                    {chartKicker(selected.kind, selected.rank)}
+                  <p className="eyebrow" style={{ color: atlasAccent(selected.kind) }}>
+                    {chartKicker(selected.kind, selected.rank, selected.year)}
                   </p>
                   <h2 className="mt-0.5 truncate text-[16px] font-semibold text-ink">
                     {selected.name}
                   </h2>
-                  <p className="truncate text-[12px] text-muted">{selected.loc}</p>
-                  <p className="mt-1 text-[12px] text-muted2">
-                    {selected.change} vs {year - 1}
-                    {selected.approx ? " · approximate pin" : ""}
-                    {selected.setCount
-                      ? ` · ${selected.setCount} sets`
-                      : " · no sets yet"}
+                  <p className="truncate text-[12px] text-muted">
+                    {selected.kind === "dj" && selected.src
+                      ? `From: ${selected.src}`
+                      : selected.loc}
                   </p>
+                  <p className="mt-1 text-[12px] text-muted2">
+                    {selected.kind === "dj"
+                      ? selected.setCount
+                        ? `${selected.setCount} sets`
+                        : "no sets yet"
+                      : `${selected.change} vs ${selected.year - 1}${
+                          selected.approx ? " · approximate pin" : ""
+                        }${
+                          selected.setCount
+                            ? ` · ${selected.setCount} sets`
+                            : " · no sets yet"
+                        }`}
+                  </p>
+                  {cardCaveat(selected) ? (
+                    <p className="mt-1 text-[11px] text-muted2">
+                      {cardCaveat(selected)}
+                    </p>
+                  ) : null}
                   {selected.href ? (
                     <Link
                       href={selected.href}
                       className="mt-2 inline-block text-[12px] text-brand hover:text-brandstrong"
                     >
-                      Open event →
+                      {selected.kind === "dj" ? "Open DJ →" : "Open event →"}
                     </Link>
                   ) : (
                     <p className="mt-2 text-[12px] text-muted2">
