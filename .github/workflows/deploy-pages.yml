@@ -164,21 +164,22 @@ jobs:
             exit 1
           fi
 
-      # GitHub Pages rejects symlinks. Raw `out/` is multi-GB HTML; the uploaded
-      # zip is much smaller — do not gate on uncompressed du (that blocked #61).
-      - name: Flatten symlinks in export
+      # GitHub Pages rejects symlinks and hard links. Next 16 export can emit
+      # both. `cp -aL` follows symlinks but keeps hard links — that failed
+      # deploy with a 1.85GB artifact that previously published. rsync copies
+      # real bytes. Raw `out/` is multi-GB HTML; the uploaded zip is smaller
+      # — do not gate on uncompressed du (that blocked #61).
+      - name: Flatten links in export
         run: |
           RAW=$(du -sb out | awk '{print $1}')
-          echo "Export raw bytes=$RAW"
-          if find out -type l | grep -q .; then
-            echo "Flattening symlinks in out/"
-            tmp=$(mktemp -d)
-            cp -aL out/. "$tmp/"
-            rm -rf out
-            mv "$tmp" out
-          else
-            echo "No symlinks in out/"
-          fi
+          LINKS=$(find out -type l | wc -l)
+          HARDS=$(find out -type f -links +1 | wc -l)
+          echo "Export raw bytes=$RAW symlinks=$LINKS hardlinked_files=$HARDS"
+          tmp=$(mktemp -d)
+          rsync -a --copy-links --no-hard-links out/ "$tmp/"
+          rm -rf out
+          mv "$tmp" out
+          echo "Flattened export bytes=$(du -sb out | awk '{print $1}') hardlinked_files=$(find out -type f -links +1 | wc -l)"
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
