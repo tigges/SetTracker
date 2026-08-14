@@ -197,7 +197,7 @@ Our submit forces `engine=1` (audio fingerprint; override `ACRCLOUD_FS_ENGINE`).
 | `ACRCLOUD_FS_REGION` | optional container region (default `eu-west-1`) |
 | `CLAUDE_AGENT_API` | Claude API key for DJ handle research |
 | `ANTHROPIC_API_KEY` | optional alias for the same Claude key |
-| `GEMINI_API_KEY` | optional Gemini **API** key (preferred — Google Search grounding) |
+| `GEMINI_API_KEY` | Gemini **API** key from [AI Studio](https://aistudio.google.com/apikey) (preferred — Search grounding). Aliases: `GEMINI_AGENT_API`, `GEMINI`, `GOOGLE_API_KEY` |
 
 **LLM handle research** (`npm run research:handles`): Claude and/or Gemini
 propose official SC/YT/IG/X/websites for DJs that already have sets but no
@@ -209,7 +209,12 @@ weekly enrich `full`. Reports: `data/crosscheck/llm-handle-research.json`.
 `https://gemini.google.com/app` is the consumer chat UI — Actions cannot
 call it. Gemini in CI needs a key from
 [Google AI Studio](https://aistudio.google.com/apikey) stored as
-`GEMINI_API_KEY`. Claude already runs from `CLAUDE_AGENT_API`.
+`GEMINI_API_KEY` (aliases `GEMINI_AGENT_API` / `GEMINI` / `GOOGLE_API_KEY`
+also work). Claude already runs from `CLAUDE_AGENT_API`.
+
+Dedicated run: **Actions → Catalog LLM research**, or bump `data/llm-request`
+on `main` (same pattern as `data/enrich-request`). Also runs on catalog-deep
+and weekly enrich `full`.
 
 Then run **Actions → Catalog enrich (weekly) → Run workflow**. Missing credentials → safe no-op (warning in the log). A successful enrich dispatches a fast Pages deploy so new fingerprint IDs go live.
 

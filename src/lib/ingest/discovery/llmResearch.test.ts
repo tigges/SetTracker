@@ -3,6 +3,7 @@ import {
   claudeApiKey,
   detectLlmProvider,
   evaluateProposedUrl,
+  geminiApiKey,
   parseLlmJson,
 } from "./llmResearch";
 
@@ -26,10 +27,15 @@ assert.equal(
   detectLlmProvider({ CLAUDE_AGENT_API: "sk-ant-repo" }),
   "claude",
 );
+assert.equal(geminiApiKey({}), null);
+assert.equal(geminiApiKey({ GEMINI_API_KEY: "g-studio" }), "g-studio");
+assert.equal(geminiApiKey({ GEMINI_AGENT_API: "g-agent" }), "g-agent");
+assert.equal(geminiApiKey({ GEMINI: "g-short" }), "g-short");
 assert.equal(
   detectLlmProvider({ GEMINI_API_KEY: "g", ANTHROPIC_API_KEY: "c" }),
   "gemini",
 );
+assert.equal(detectLlmProvider({ GEMINI: "g-short" }), "gemini");
 assert.equal(
   detectLlmProvider({
     ANTHROPIC_API_KEY: "c",

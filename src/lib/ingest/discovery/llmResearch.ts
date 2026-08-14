@@ -72,14 +72,27 @@ export function claudeApiKey(
   return key || null;
 }
 
+/**
+ * Repo secret is `GEMINI_API_KEY` (AI Studio).
+ * Also accepts GEMINI_AGENT_API / GEMINI / GOOGLE_API_KEY.
+ */
+export function geminiApiKey(
+  env: Record<string, string | undefined> = process.env,
+): string | null {
+  const key =
+    env.GEMINI_API_KEY?.trim() ||
+    env.GEMINI_AGENT_API?.trim() ||
+    env.GEMINI?.trim() ||
+    env.GOOGLE_API_KEY?.trim();
+  return key || null;
+}
+
 export function detectLlmProvider(
   env: Record<string, string | undefined> = process.env,
 ): LlmProvider | null {
   const want = (env.LLM_RESEARCH_PROVIDER || "auto").toLowerCase();
   const claude = Boolean(claudeApiKey(env));
-  const gemini = Boolean(
-    env.GEMINI_API_KEY?.trim() || env.GOOGLE_API_KEY?.trim(),
-  );
+  const gemini = Boolean(geminiApiKey(env));
   if (want === "claude") return claude ? "claude" : null;
   if (want === "gemini") return gemini ? "gemini" : null;
   // Gemini first: Google Search grounding beats unaided guesses.
@@ -139,11 +152,7 @@ async function callClaude(prompt: string): Promise<string> {
 }
 
 async function callGemini(prompt: string): Promise<string> {
-  const key = (
-    process.env.GEMINI_API_KEY ||
-    process.env.GOOGLE_API_KEY ||
-    ""
-  ).trim();
+  const key = geminiApiKey() || "";
   const model = process.env.GEMINI_MODEL || "gemini-2.5-flash";
   const url =
     `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent` +

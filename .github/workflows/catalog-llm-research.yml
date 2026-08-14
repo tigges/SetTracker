@@ -1,0 +1,124 @@
+name: Catalog LLM research
+
+# Claude / Gemini handle research against the cached catalog.
+# Preferred provider is Gemini when GEMINI_API_KEY (or an alias) is set.
+# Agents often lack workflow_dispatch; bump data/llm-request on main to start.
+on:
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: "Max DJs to research this run"
+        required: false
+        default: "24"
+        type: string
+  push:
+    branches: [main]
+    paths:
+      - "data/llm-request"
+
+permissions:
+  contents: read
+  actions: write
+
+concurrency:
+  group: catalog
+  cancel-in-progress: false
+
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate Prisma client
+        run: npx prisma generate
+
+      - name: Restore catalog DB
+        id: dbcache
+        uses: actions/cache/restore@v4
+        with:
+          path: prisma/dev.db
+          key: setradar-db-${{ github.run_id }}
+          restore-keys: |
+            setradar-db-
+
+      - name: Require catalog
+        run: |
+          if [ ! -f prisma/dev.db ]; then
+            echo "::error::No catalog DB in cache. Run Catalog deep refresh first."
+            exit 1
+          fi
+          npx prisma migrate deploy
+          SETS=$(python3 -c "import sqlite3; print(sqlite3.connect('prisma/dev.db').execute('select count(*) from \"Set\"').fetchone()[0])")
+          echo "Catalog sets=$SETS"
+          if [ "${SETS:-0}" -lt 50 ]; then
+            echo "::error::Catalog too small ($SETS)."
+            exit 1
+          fi
+
+      - name: Check LLM secrets
+        id: keys
+        env:
+          CLAUDE_AGENT_API: ${{ secrets.CLAUDE_AGENT_API }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY || secrets.GEMINI_AGENT_API || secrets.GEMINI || secrets.GOOGLE_API_KEY }}
+        run: |
+          set -euo pipefail
+          GEMINI=$(printf '%s' "$GEMINI_API_KEY" | tr -d '\r' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
+          CLAUDE=$(printf '%s' "${CLAUDE_AGENT_API:-$ANTHROPIC_API_KEY}" | tr -d '\r' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
+          echo "gemini_key_len=${#GEMINI} claude_key_len=${#CLAUDE}"
+          if [ -z "$GEMINI" ] && [ -z "$CLAUDE" ]; then
+            echo "::error::Set GEMINI_API_KEY (AI Studio) and/or CLAUDE_AGENT_API."
+            exit 1
+          fi
+          if [ -n "$GEMINI" ]; then
+            echo "provider=gemini" >> "$GITHUB_OUTPUT"
+          else
+            echo "provider=claude" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: LLM handle research
+        env:
+          CLAUDE_AGENT_API: ${{ secrets.CLAUDE_AGENT_API }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY || secrets.GEMINI_AGENT_API || secrets.GEMINI || secrets.GOOGLE_API_KEY }}
+          LLM_RESEARCH_LIMIT: ${{ github.event.inputs.limit || '24' }}
+          LLM_QUALITY: "1"
+        run: npm run research:handles
+
+      - name: Upload LLM research report
+        uses: actions/upload-artifact@v4
+        with:
+          name: llm-research
+          path: |
+            data/crosscheck/llm-handle-research.json
+            data/crosscheck/llm-quality-check.json
+          if-no-files-found: warn
+
+      - name: Save catalog DB
+        uses: actions/cache/save@v4
+        with:
+          path: prisma/dev.db
+          key: setradar-db-${{ github.run_id }}
+
+      - name: Dispatch Pages deploy
+        if: success()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: 'deploy-pages.yml',
+              ref: context.ref,
+              inputs: { mode: 'fast' },
+            });
+            core.info('Dispatched Deploy to GitHub Pages (fast) after LLM research.');
