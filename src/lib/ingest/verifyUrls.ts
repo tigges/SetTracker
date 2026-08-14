@@ -26,6 +26,8 @@ import {
 } from "./eventSocials";
 import { KNOWN_EVENTS } from "./events";
 import { backfillSetEditions } from "./setEditions";
+import { fillDjHandlesFromKnown, fillDjWebsitesFromWikidata } from "./discovery/fillDjHandles";
+import { discoverCuratedReliveRemaps } from "./reliveWatch";
 import { applySetSourceRemaps } from "./sourceRemaps";
 
 export type VerifyStats = {
@@ -130,7 +132,8 @@ export async function applyKnownUrlFixes(prisma: PrismaClient): Promise<number> 
   n += await applyDjSocialPins(prisma);
 
   // Retired YouTube Relives (private Fisher WE2 → public re-upload).
-  const remaps = await applySetSourceRemaps(prisma);
+  const discovered = await discoverCuratedReliveRemaps(prisma);
+  const remaps = await applySetSourceRemaps(prisma, discovered);
   n += remaps;
   if (remaps) {
     console.log(`[verify-urls] set source remaps: ${remaps}`);
@@ -259,7 +262,13 @@ export async function applyKnownUrlFixes(prisma: PrismaClient): Promise<number> 
   }
 
   // Persist roster + high-signal discovered artists as Dj rows (Guetta, etc.).
-  await ensureDiscoveredDjs(prisma);
+  // Also drops handle-less / set-less lineup stubs so /djs stays browseable.
+  const ensured = await ensureDiscoveredDjs(prisma);
+  n += ensured.created + ensured.updated + ensured.purged;
+  n += await fillDjHandlesFromKnown(prisma);
+  if (process.env.VERIFY_URLS_CURATED_ONLY !== "1") {
+    n += await fillDjWebsitesFromWikidata(prisma, { limit: 20 });
+  }
 
   // Industry context: DJ Mag Top 100 Clubs / Festivals / DJs + club listicles.
   // Mixmag.net is not crawled (Mixmag = YouTube venue only).

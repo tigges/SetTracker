@@ -7,6 +7,7 @@
  */
 
 import type { PrismaClient } from "@prisma/client";
+import { socialHandle } from "../social";
 import { DJ_SOCIAL_PINS } from "./djSocialPins.data";
 import type { CanonicalEvent } from "./events";
 
@@ -174,6 +175,32 @@ export function isArtistOwnedSocial(
  * Rejects known DJ profiles and handles that do not overlap the event name
  * (lineup pages list artist accounts first).
  */
+/** Compact handle vs artist name (adambeyer ↔ Adam Beyer). Never guesses IG/X. */
+export function handleMatchesArtist(handle: string, artistName: string): boolean {
+  const h = handle.toLowerCase().replace(/^@/, "").replace(/[_-]/g, "");
+  const compact = socialHandle(artistName);
+  if (!h || !compact || compact.length < 4) return false;
+  return h === compact || h.startsWith(compact) || compact.startsWith(h);
+}
+
+export function socialFieldFromUrl(
+  url: string,
+): "soundcloud" | "instagram" | "twitter" | null {
+  const key = socialProfileKey(url);
+  if (!key) return null;
+  const net = key.split(":")[0];
+  if (net === "soundcloud" || net === "instagram" || net === "twitter") {
+    return net;
+  }
+  return null;
+}
+
+export function djMayClaimSocialUrl(djName: string, url: string): boolean {
+  const key = socialProfileKey(url);
+  if (!key) return false;
+  return handleMatchesArtist(key.split(":")[1] ?? "", djName);
+}
+
 export function eventMayClaimSocialUrl(
   eventName: string,
   url: string,

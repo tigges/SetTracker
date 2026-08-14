@@ -13,8 +13,10 @@ import { ARTIST_ROSTER } from "./roster";
 import { expandAllLinkHubs, isLinkHub } from "./discovery/linkHubs";
 import {
   curatedEventSocialPatch,
+  djMayClaimSocialUrl,
   eventMayClaimSocialUrl,
   loadArtistSocialKeys,
+  socialFieldFromUrl,
 } from "./eventSocials";
 import { KNOWN_EVENTS } from "./events";
 import { slugify } from "./types";
@@ -140,6 +142,7 @@ async function fillSocial(
   current: Record<string, string | null | undefined>,
   stats: ScanStats,
   artistKeys: Set<string>,
+  rejectedEventSocials?: string[],
 ): Promise<void> {
   if (current[field]) return;
   // Prefer first-party website over another hub if we already have a hub.
@@ -151,6 +154,7 @@ async function fillSocial(
     (field === "soundcloud" || field === "instagram" || field === "twitter") &&
     !eventMayClaimSocialUrl(target.name, url, artistKeys)
   ) {
+    rejectedEventSocials?.push(url);
     return;
   }
   const data = { [field]: url };
@@ -175,6 +179,7 @@ async function scanPage(
     setCandidates: Set<string>;
     beatport: Set<string>;
     htmlText: string;
+    rejectedEventSocials: string[];
   },
   artistKeys: Set<string>,
 ): Promise<void> {
@@ -195,7 +200,16 @@ async function scanPage(
       c.field === "instagram" ||
       c.field === "twitter"
     ) {
-      await fillSocial(prisma, target, c.field, url, current, stats, artistKeys);
+      await fillSocial(
+        prisma,
+        target,
+        c.field,
+        url,
+        current,
+        stats,
+        artistKeys,
+        bag.rejectedEventSocials,
+      );
     } else if (
       c.field === "website" &&
       !current.website &&
@@ -203,6 +217,36 @@ async function scanPage(
     ) {
       // Keep the curated official site; don't overwrite with random outbound.
     }
+  }
+}
+
+/** Lineup-artist socials scraped off an event site → matching Dj fill-null. */
+async function harvestRejectedEventSocials(
+  prisma: PrismaClient,
+  urls: string[],
+  stats: ScanStats,
+): Promise<void> {
+  if (!urls.length) return;
+  const djs = await prisma.dj.findMany({
+    select: {
+      id: true,
+      name: true,
+      soundcloud: true,
+      instagram: true,
+      twitter: true,
+    },
+  });
+  for (const url of [...new Set(urls)]) {
+    const field = socialFieldFromUrl(url);
+    if (!field) continue;
+    const match = djs.find((d) => djMayClaimSocialUrl(d.name, url));
+    if (!match || match[field]) continue;
+    await prisma.dj.update({
+      where: { id: match.id },
+      data: { [field]: url },
+    });
+    match[field] = url;
+    stats.socialFills += 1;
   }
 }
 
@@ -299,7 +343,12 @@ export async function scanEntityUrls(prisma: PrismaClient): Promise<ScanStats> {
   });
   for (const e of events) {
     if (!e.website) continue;
-    const bag = { setCandidates, beatport, htmlText: "" };
+    const bag = {
+      setCandidates,
+      beatport,
+      htmlText: "",
+      rejectedEventSocials: [] as string[],
+    };
     const current: Record<string, string | null | undefined> = {
       website: e.website,
       soundcloud: e.soundcloud,
@@ -316,6 +365,7 @@ export async function scanEntityUrls(prisma: PrismaClient): Promise<ScanStats> {
       artistKeys,
     );
     for (const name of rosterMentions(bag.htmlText)) mentioned.add(name);
+    await harvestRejectedEventSocials(prisma, bag.rejectedEventSocials, stats);
   }
 
   const djs = await prisma.dj.findMany({
@@ -331,7 +381,12 @@ export async function scanEntityUrls(prisma: PrismaClient): Promise<ScanStats> {
   });
   for (const d of djs) {
     if (!d.website) continue;
-    const bag = { setCandidates, beatport, htmlText: "" };
+    const bag = {
+      setCandidates,
+      beatport,
+      htmlText: "",
+      rejectedEventSocials: [] as string[],
+    };
     const current: Record<string, string | null | undefined> = {
       website: d.website,
       soundcloud: d.soundcloud,
@@ -360,7 +415,12 @@ export async function scanEntityUrls(prisma: PrismaClient): Promise<ScanStats> {
   });
   for (const l of labels) {
     if (!l.website) continue;
-    const bag = { setCandidates, beatport, htmlText: "" };
+    const bag = {
+      setCandidates,
+      beatport,
+      htmlText: "",
+      rejectedEventSocials: [] as string[],
+    };
     const current: Record<string, string | null | undefined> = {
       website: l.website,
       soundcloud: l.soundcloud,

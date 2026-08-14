@@ -3,8 +3,10 @@ import { KNOWN_EVENTS } from "./events";
 import {
   artistSocialKeysFromPins,
   curatedEventSocialPatch,
+  djMayClaimSocialUrl,
   eventMayClaimSocialUrl,
   eventSocialCleanupPatch,
+  handleMatchesArtist,
   handleMatchesEvent,
   socialProfileKey,
 } from "./eventSocials";
@@ -37,6 +39,18 @@ assert.equal(handleMatchesEvent("andreaoliva1", "Street Parade"), false);
 assert.equal(handleMatchesEvent("ultra", "Ultra Music Festival"), true);
 assert.equal(handleMatchesEvent("edc_lasvegas", "EDC Las Vegas"), true);
 assert.equal(handleMatchesEvent("hardfest", "HARD Summer"), true);
+
+assert.equal(handleMatchesArtist("adambeyer", "Adam Beyer"), true);
+assert.equal(handleMatchesArtist("andreaoliva1", "Andrea Oliva"), true);
+assert.equal(handleMatchesArtist("adambeyer", "Street Parade"), false);
+assert.equal(
+  djMayClaimSocialUrl("Adam Beyer", "https://soundcloud.com/adambeyer"),
+  true,
+);
+assert.equal(
+  djMayClaimSocialUrl("FISHER", "https://soundcloud.com/adambeyer"),
+  false,
+);
 
 const pins = artistSocialKeysFromPins();
 assert.ok(pins.has("instagram:realadambeyer"));

@@ -1,6 +1,6 @@
 {
   "name": "setradar",
-  "version": "0.2.122",
+  "version": "0.2.123",
   "private": true,
   "prisma": {
     "seed": "tsx prisma/seed.ts"
@@ -34,6 +34,7 @@
     "audit:top100": "tsx scripts/audit-top100-coverage.ts",
     "audit:homepage-sparse": "tsx scripts/audit-homepage-sparse.ts",
     "audit:unresolved-priority": "tsx scripts/audit-unresolved-priority.ts",
+    "audit:event-socials": "tsx scripts/audit-event-socials.ts",
     "build:next-captures": "tsx scripts/build-next-captures.ts",
     "watch:held-relives": "tsx scripts/watch-held-relives.ts",
     "preview:acr-queue": "tsx scripts/preview-acr-queue.ts",

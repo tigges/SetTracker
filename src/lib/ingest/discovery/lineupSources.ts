@@ -30,6 +30,13 @@ export const LINEUP_SOURCES: LineupSource[] = [
     weight: 36,
   },
   {
+    eventSlug: "street-parade",
+    eventName: "Street Parade",
+    website: "https://www.streetparade.com/",
+    lineupUrl: "https://www.streetparade.com/",
+    weight: 28,
+  },
+  {
     eventSlug: "edc-lv",
     eventName: "EDC Las Vegas",
     website: "https://lasvegas.edc.com/",

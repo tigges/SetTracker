@@ -6,6 +6,7 @@ import {
   matchUnwiredOfficialRelives,
   reliveDedupeKey,
   reliveEditionToken,
+  remapsFromCuratedRelives,
 } from "./reliveWatch";
 import { HELD_RELIVE_WATCH } from "./nextCaptures";
 
@@ -105,5 +106,44 @@ assert.equal(
 );
 assert.ok(!unwired.some((p) => p.slug === "yt-DuXXMZLfAkQ"));
 assert.ok(unwired.every((p) => p.reason === "relive:official-unwired"));
+
+const fisherRemaps = remapsFromCuratedRelives(
+  [
+    {
+      slug: "yt-mVB-gqggrCQ",
+      title: "Fisher WE2 | Tomorrowland 2026",
+      artistSlug: "fisher",
+    },
+  ],
+  [
+    {
+      videoId: "Uq1WP8v3U4o",
+      title: "FISHER LIVE FROM TOMORROWLAND FREEDOM STAGE WEEKEND 2",
+      artistSlug: "fisher",
+    },
+  ],
+);
+assert.equal(fisherRemaps.length, 1);
+assert.equal(fisherRemaps[0]!.fromSlug, "yt-mVB-gqggrCQ");
+assert.equal(fisherRemaps[0]!.toSlug, "yt-Uq1WP8v3U4o");
+assert.deepEqual(
+  remapsFromCuratedRelives(
+    [
+      {
+        slug: "yt-Uq1WP8v3U4o",
+        title: "Fisher WE2 | Tomorrowland 2026",
+        artistSlug: "fisher",
+      },
+    ],
+    [
+      {
+        videoId: "Uq1WP8v3U4o",
+        title: "FISHER LIVE FROM TOMORROWLAND FREEDOM STAGE WEEKEND 2",
+        artistSlug: "fisher",
+      },
+    ],
+  ),
+  [],
+);
 
 console.log("reliveWatch.test.ts ok");

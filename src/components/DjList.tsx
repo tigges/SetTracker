@@ -65,11 +65,12 @@ function handleBits(d: DjListItem): string {
 }
 
 /**
- * DJ directory with a default Browse view (handle + sets + tracklist + art).
- * QA chips still expose the full stored catalog for cleanup.
+ * DJ directory defaults to browse-ready artists.
+ * Catalog QA chips stay folded away until the stored catalog is cleaner.
  */
 export function DjList({ djs }: { djs: DjListItem[] }) {
   const [filter, setFilter] = useState<FilterId>("browse");
+  const [showQa, setShowQa] = useState(false);
 
   const filtered = useMemo(
     () => djs.filter((d) => matches(d, filter)),
@@ -113,23 +114,39 @@ export function DjList({ djs }: { djs: DjListItem[] }) {
   return (
     <div>
       <div className="mb-6">
-        <p className="mb-1.5 mono text-[10px] uppercase tracking-[0.14em] text-muted2">
-          Directory filter
-        </p>
+        <div className="mb-1.5 flex flex-wrap items-center gap-3">
+          <p className="mono text-[10px] uppercase tracking-[0.14em] text-muted2">
+            {showQa ? "Catalog QA" : "Directory"}
+          </p>
+          <button
+            type="button"
+            onClick={() => {
+              setShowQa((v) => {
+                if (v) setFilter("browse");
+                return !v;
+              });
+            }}
+            className="mono text-[11px] text-muted2 underline decoration-dotted underline-offset-2 hover:text-ink"
+          >
+            {showQa ? "Hide QA filters" : "Catalog QA"}
+          </button>
+        </div>
         <div className="flex flex-wrap items-center gap-1.5">
-          {FILTERS.map((f) => (
-            <button
-              key={f.id}
-              type="button"
-              onClick={() => setFilter(f.id)}
-              className={chip(filter === f.id)}
-            >
-              {f.label}
-              <span className="mono ml-1.5 text-[11px] opacity-70">
-                {counts[f.id]}
-              </span>
-            </button>
-          ))}
+          {(showQa ? FILTERS : FILTERS.filter((f) => f.id === "browse")).map(
+            (f) => (
+              <button
+                key={f.id}
+                type="button"
+                onClick={() => setFilter(f.id)}
+                className={chip(filter === f.id)}
+              >
+                {f.label}
+                <span className="mono ml-1.5 text-[11px] opacity-70">
+                  {counts[f.id]}
+                </span>
+              </button>
+            ),
+          )}
           <span className="mono ml-1 text-[12px] text-muted2">
             {filtered.length} shown
           </span>

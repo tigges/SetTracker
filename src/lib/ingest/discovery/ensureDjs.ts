@@ -6,6 +6,7 @@
 import type { PrismaClient } from "@prisma/client";
 import { isJunkArtistName, sanitizeArtistName } from "../../artistName";
 import { djSocialsFromKnown } from "../../social";
+import { DJ_SOCIAL_PINS } from "../djSocialPins.data";
 import { ARTIST_ROSTER } from "../roster";
 import { slugify } from "../types";
 import { hintForName } from "./knownHandles";
@@ -21,6 +22,26 @@ const ACCENTS = [
   "#c56cff",
   "#ff6f5e",
 ];
+
+/** Persist a stub only when it can become browse-ready (handle) or is curated. */
+export function shouldPersistDjStub(opts: {
+  isRoster?: boolean;
+  isPromoted?: boolean;
+  soundcloud?: string | null;
+  youtube?: string | null;
+  instagram?: string | null;
+  twitter?: string | null;
+  website?: string | null;
+}): boolean {
+  if (opts.isRoster || opts.isPromoted) return true;
+  return Boolean(
+    opts.soundcloud ||
+      opts.youtube ||
+      opts.instagram ||
+      opts.twitter ||
+      opts.website,
+  );
+}
 
 function accentFor(slug: string, preferred?: string): string {
   if (preferred) return preferred;
@@ -64,7 +85,13 @@ export async function ensureDiscoveredDjs(
     });
   }
 
+  const rosterSlugs = new Set(
+    [...stubs.keys()],
+  );
   const file = loadCandidates();
+  const promotedSlugs = new Set(
+    file.candidates.filter((c) => c.status === "promoted").map((c) => c.slug),
+  );
   for (const c of file.candidates) {
     if (c.status !== "promoted" && c.status !== "queued") continue;
     if (c.score < 25 && c.status !== "promoted") continue;
@@ -99,6 +126,15 @@ export async function ensureDiscoveredDjs(
     });
     const existing = await prisma.dj.findUnique({ where: { slug: stub.slug } });
     if (!existing) {
+      if (
+        !shouldPersistDjStub({
+          isRoster: rosterSlugs.has(stub.slug),
+          isPromoted: promotedSlugs.has(stub.slug),
+          ...socials,
+        })
+      ) {
+        continue;
+      }
       await prisma.dj.create({
         data: {
           slug: stub.slug,
@@ -131,7 +167,7 @@ export async function ensureDiscoveredDjs(
     }
   }
 
-  const purged = await purgeJunkDjs(prisma);
+  const purged = (await purgeJunkDjs(prisma)) + (await purgeThinDjStubs(prisma));
 
   console.log(
     `[ensure-djs] created=${created} updated=${updated} purged=${purged}`,
@@ -162,5 +198,49 @@ async function purgeJunkDjs(prisma: PrismaClient): Promise<number> {
   const result = await prisma.dj.deleteMany({
     where: { id: { in: junkIds } },
   });
+  return result.count;
+}
+
+/**
+ * Drop handle-less, set-less stubs created from lineup/press/coplay names.
+ * Curated roster + social pins stay. Candidates remain in artist-candidates.json.
+ */
+export async function purgeThinDjStubs(prisma: PrismaClient): Promise<number> {
+  const keep = new Set<string>([
+    ...ARTIST_ROSTER.map((a) => slugify(a.name)),
+    ...DJ_SOCIAL_PINS.map((p) => p.slug),
+  ]);
+  const rows = await prisma.dj.findMany({
+    select: {
+      id: true,
+      slug: true,
+      soundcloud: true,
+      youtube: true,
+      instagram: true,
+      twitter: true,
+      website: true,
+      _count: { select: { sets: true, series: true } },
+    },
+  });
+  const thinIds = rows
+    .filter(
+      (d) =>
+        !keep.has(d.slug) &&
+        d._count.sets === 0 &&
+        d._count.series === 0 &&
+        !d.soundcloud &&
+        !d.youtube &&
+        !d.instagram &&
+        !d.twitter &&
+        !d.website,
+    )
+    .map((d) => d.id);
+  if (!thinIds.length) return 0;
+  const result = await prisma.dj.deleteMany({
+    where: { id: { in: thinIds } },
+  });
+  if (result.count) {
+    console.log(`[ensure-djs] purged ${result.count} thin stubs (no handle, no sets)`);
+  }
   return result.count;
 }

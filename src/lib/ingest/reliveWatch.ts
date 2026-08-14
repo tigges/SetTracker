@@ -7,18 +7,21 @@
  * yet curated / 1001-mapped. Never follows fan clips.
  */
 
+import type { PrismaClient } from "@prisma/client";
 import {
   HELD_RELIVE_WATCH,
   search1001,
   type CapturePreset,
 } from "./nextCaptures";
+import type { SetSourceRemap } from "./sourceRemaps";
+import { slugify } from "./types";
 import { officialRelivePlaylists } from "./youtube/playlists";
 import {
+  extractVideoId,
   fetchPlaylistEntries,
   type YtPlaylistEntry,
 } from "./youtube/client";
 import { top100DjNames } from "./topDjs";
-import { slugify } from "./types";
 
 export type HeldReliveHit = {
   name: string;
@@ -101,6 +104,76 @@ export function artistFromReliveTitle(
     if (re.test(t) && (!best || name.length > best.length)) best = name;
   }
   return best;
+}
+
+/**
+ * When a curated Relive seed moves to a new video id (private → re-upload),
+ * emit a slug remap for the retired `yt-{oldId}` row.
+ */
+export function remapsFromCuratedRelives(
+  dbSets: { slug: string; title: string; artistSlug: string }[],
+  curated: { videoId: string; title: string; artistSlug: string }[],
+): SetSourceRemap[] {
+  const curatedByKey = new Map<string, { videoId: string; title: string }>();
+  for (const c of curated) {
+    const key = reliveDedupeKey(c.title, c.artistSlug);
+    if (!key) continue;
+    curatedByKey.set(key, { videoId: c.videoId, title: c.title });
+  }
+  const out: SetSourceRemap[] = [];
+  const seen = new Set<string>();
+  for (const s of dbSets) {
+    if (!s.slug.startsWith("yt-")) continue;
+    const oldId = s.slug.slice(3);
+    const key = reliveDedupeKey(s.title, s.artistSlug);
+    if (!key) continue;
+    const next = curatedByKey.get(key);
+    if (!next || next.videoId === oldId) continue;
+    const fromSlug = `yt-${oldId}`;
+    const toSlug = `yt-${next.videoId}`;
+    const k = `${fromSlug}→${toSlug}`;
+    if (seen.has(k)) continue;
+    seen.add(k);
+    out.push({
+      fromSlug,
+      toSlug,
+      sourceUrl: `https://www.youtube.com/watch?v=${next.videoId}`,
+      playbackUrl: `https://www.youtube.com/watch?v=${next.videoId}`,
+      note: `Curated Relive replaced ${oldId} (${s.title}).`,
+    });
+  }
+  return out;
+}
+
+/** Compare catalog `yt-*` rows to curated YOUTUBE_SETS (no network). */
+export async function discoverCuratedReliveRemaps(
+  prisma: PrismaClient,
+): Promise<SetSourceRemap[]> {
+  const { YOUTUBE_SETS } = await import("./youtube/videos");
+  const curated = YOUTUBE_SETS.map((s) => ({
+    videoId: extractVideoId(s.video) ?? "",
+    title: s.title || s.primaryArtist.name,
+    artistSlug: slugify(s.primaryArtist.name),
+  })).filter((c) => c.videoId);
+  const dbSets = await prisma.set.findMany({
+    where: { slug: { startsWith: "yt-" } },
+    select: {
+      slug: true,
+      title: true,
+      artists: {
+        where: { isPrimary: true },
+        select: { dj: { select: { slug: true } } },
+      },
+    },
+  });
+  return remapsFromCuratedRelives(
+    dbSets.map((s) => ({
+      slug: s.slug,
+      title: s.title,
+      artistSlug: s.artists[0]?.dj.slug ?? "",
+    })),
+    curated,
+  );
 }
 
 export function matchHeldRelives(

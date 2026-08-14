@@ -52,9 +52,17 @@ export function aliasSlugsFor(slugs: string[]): string[] {
 
 export async function applySetSourceRemaps(
   prisma: PrismaClient,
+  extra: SetSourceRemap[] = [],
 ): Promise<number> {
   let n = 0;
-  for (const r of SET_SOURCE_REMAPS) {
+  const seen = new Set<string>();
+  const list = [...SET_SOURCE_REMAPS, ...extra].filter((r) => {
+    const k = `${r.fromSlug}→${r.toSlug}`;
+    if (seen.has(k)) return false;
+    seen.add(k);
+    return true;
+  });
+  for (const r of list) {
     const from = await prisma.set.findUnique({ where: { slug: r.fromSlug } });
     const to = await prisma.set.findUnique({ where: { slug: r.toSlug } });
     const urls = {

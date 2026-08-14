@@ -5,6 +5,11 @@ import { linkCohort, loadRelations, relatedSlugsFor } from "./relations";
 import type { RelationFile } from "./types";
 
 assert.ok(LINEUP_SOURCES.some((s) => s.eventSlug === "tomorrowland"));
+assert.ok(LINEUP_SOURCES.some((s) => s.eventSlug === "street-parade"));
+assert.equal(
+  LINEUP_SOURCES.find((s) => s.eventSlug === "street-parade")?.website,
+  "https://www.streetparade.com/",
+);
 assert.ok(
   LINEUP_SOURCES.find((s) => s.eventSlug === "tomorrowland")?.lineupUrl?.includes(
     "line-up",
