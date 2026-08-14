@@ -134,16 +134,21 @@ export function AtlasMap({
       const { w, h } = size();
       view.span = Math.max(2.2, Math.min(1400, view.span));
       const spanY = view.span * (h / w);
-      svg!.setAttribute(
-        "viewBox",
-        `${view.cx - view.span / 2} ${view.cy - spanY / 2} ${view.span} ${spanY}`,
-      );
-      const r = Math.max(0.9, view.span * 0.0052);
+      const vb = [
+        view.cx - view.span / 2,
+        view.cy - spanY / 2,
+        view.span,
+        spanY,
+      ];
+      if (vb.every(Number.isFinite)) {
+        svg!.setAttribute("viewBox", vb.map((n) => n.toFixed(2)).join(" "));
+      }
+      const r = Math.max(1.8, view.span * 0.0065);
       svg!.querySelectorAll<SVGCircleElement>(".atlas-pin").forEach((c) => {
-        c.setAttribute("r", String(r));
+        c.setAttribute("r", r.toFixed(2));
       });
       const halo = svg!.querySelector(".atlas-halo");
-      if (halo) halo.setAttribute("r", String(r * 2.6));
+      if (halo) halo.setAttribute("r", (r * 2.6).toFixed(2));
     }
 
     function scheduleView() {
