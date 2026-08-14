@@ -12,6 +12,8 @@ export const KNOWN_DJ_IMAGES: Record<string, string> = {
   "gentlemens-groove": "/artists/gentlemens-groove.png",
   // Accidental slugify("Gentlemen's Groove") variant — pin logo until merge.
   "gentlemen-s-groove": "/artists/gentlemens-groove.png",
+  // Official Deezer artist portrait (id 14043917).
+  "1788-l": "/artists/1788-l.jpg",
 };
 
 /**

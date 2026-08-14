@@ -499,6 +499,11 @@ export const KNOWN_HANDLES: Record<string, HandleHint> = {
     genre: "Dance",
     accent: "#fb8500",
   },
+  "1788-l": {
+    youtubeHandle: "@1788L",
+    genre: "Riddim",
+    accent: "#c1121f",
+  },
 };
 
 export function hintForName(name: string): HandleHint | undefined {

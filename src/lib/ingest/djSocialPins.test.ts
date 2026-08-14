@@ -1,5 +1,7 @@
 import assert from "node:assert/strict";
+import { hintForName } from "./discovery/knownHandles";
 import { DJ_SOCIAL_PINS } from "./djSocialPins";
+import { slugify } from "./types";
 
 const bySlug = Object.fromEntries(DJ_SOCIAL_PINS.map((p) => [p.slug, p]));
 
@@ -158,5 +160,16 @@ for (const [slug, sc, yt] of offRoster13) {
   assert.match(bySlug[slug]!.soundcloud!, sc);
   assert.match(bySlug[slug]!.youtube!, yt);
 }
+
+assert.ok(bySlug["1788-l"], "missing pin 1788-l");
+assert.equal(bySlug["1788-l"]!.name, "1788-L");
+assert.equal(bySlug["1788-l"]!.soundcloud, null);
+assert.match(bySlug["1788-l"]!.youtube!, /youtube\.com\/@1788L/);
+assert.match(bySlug["1788-l"]!.instagram!, /instagram\.com\/1788_l/);
+assert.match(bySlug["1788-l"]!.twitter!, /(?:twitter|x)\.com\/l_1788/);
+assert.match(bySlug["1788-l"]!.website, /1788-l\.com/);
+assert.equal(slugify("1788-L"), "1788-l");
+assert.equal(hintForName("1788-L")?.youtubeHandle, "@1788L");
+assert.equal(hintForName("1788-l")?.youtubeHandle, "@1788L");
 
 console.log("djSocialPins.test.ts ok");
