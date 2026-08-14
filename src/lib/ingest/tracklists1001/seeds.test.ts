@@ -81,6 +81,7 @@ import {
   TL_PEGGY_GOU_CERCLE_LILLE,
   TL_PEGGY_GOU_EDC_LV_2026,
   TL_THE_CHAINSMOKERS_TML_WE1_2026,
+  TL_SIDEPIECE_Lollapalooza_Perry_Stage_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   tracklist1001RowsToPlays,
 } from "./seeds";
@@ -1199,5 +1200,25 @@ assert.notEqual(
   TRACKLIST_1001_BY_SOURCE_SLUG["yt-I6QA_T-BS6o"],
   TRACKLIST_1001_BY_SOURCE_SLUG["yt-tg_QLGpes0k"],
 );
+
+assertSeedClocks(TL_SIDEPIECE_Lollapalooza_Perry_Stage_2026);
+assert.equal(TL_SIDEPIECE_Lollapalooza_Perry_Stage_2026.length, 18);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-sidepiece-sidepiece-lollapalooza-perry"],
+  TL_SIDEPIECE_Lollapalooza_Perry_Stage_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "https://soundcloud.com/sidepiece/sidepiece-lollapalooza-perry"
+  ],
+  undefined,
+);
+const sidepiecePlays = tracklist1001RowsToPlays(
+  TL_SIDEPIECE_Lollapalooza_Perry_Stage_2026,
+);
+assert.equal(sidepiecePlays.length, 18);
+assert.equal(sidepiecePlays[0]?.provenance, "1001tl");
+assert.equal(sidepiecePlays[0]?.artistName, "Bobby Shmurda");
+assert.equal(sidepiecePlays[8]?.trackTitle, "Can I Ride");
 
 console.log("tracklists1001/seeds.test.ts ok");

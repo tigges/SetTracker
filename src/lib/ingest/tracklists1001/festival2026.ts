@@ -18,6 +18,7 @@ import {
   TL_PEGGY_GOU_EDC_LV_2026,
   TL_THE_CHAINSMOKERS_TML_WE1_2026,
 } from "./festivalCaptures20260813";
+import { TL_SIDEPIECE_Lollapalooza_Perry_Stage_2026 } from "./festivalCaptures20260814";
 
 export {
   TL_ALESSO_TML_WE2_2026,
@@ -30,6 +31,7 @@ export {
   TL_PEGGY_GOU_CERCLE_LILLE,
   TL_PEGGY_GOU_EDC_LV_2026,
   TL_THE_CHAINSMOKERS_TML_WE1_2026,
+  TL_SIDEPIECE_Lollapalooza_Perry_Stage_2026,
 };
 
 function formatClock(sec: number): string {
@@ -4611,6 +4613,8 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-1lqmFLr-SkA": TL_THE_CHAINSMOKERS_TML_WE1_2026,
   "yt-fhiZ1Rj9o-A": TL_ALESSO_TML_WE2_2026,
   "yt-tg_QLGpes0k": TL_ARMIN_VAN_BUUREN_TML_WE2_2026,
+  "sc-sidepiece-sidepiece-lollapalooza-perry":
+    TL_SIDEPIECE_Lollapalooza_Perry_Stage_2026,
 };
 
 /** Sanity: every seeded clock must parse. */

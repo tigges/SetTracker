@@ -47,4 +47,15 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     type: "radio",
     minDurationSec: 30 * 60,
   },
+  {
+    // Official SIDEPIECE upload; 1001TL wired via
+    // sc-sidepiece-sidepiece-lollapalooza-perry.
+    url: "https://soundcloud.com/sidepiece/sidepiece-lollapalooza-perry",
+    primaryArtist: dj("SIDEPIECE", {
+      accent: "#fee440",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    minDurationSec: 15 * 60,
+  },
 ];

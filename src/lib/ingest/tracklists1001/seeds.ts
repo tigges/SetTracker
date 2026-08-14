@@ -96,6 +96,7 @@ export {
   TL_PEGGY_GOU_CERCLE_LILLE,
   TL_PEGGY_GOU_EDC_LV_2026,
   TL_THE_CHAINSMOKERS_TML_WE1_2026,
+  TL_SIDEPIECE_Lollapalooza_Perry_Stage_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   evenlySpaceRows,
 } from "./festival2026";
