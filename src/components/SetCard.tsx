@@ -31,10 +31,16 @@ export function SetCard({ set }: { set: FeedItem }) {
     eventImageUrl: set.eventImageUrl,
     primaryDjSlug: set.primaryDj?.slug,
   });
-  const [thumbFailed, setThumbFailed] = useState(false);
-
-  // No monogram tiles in the feed — hide until artwork resolves / loads.
-  if (!thumb || thumbFailed) return null;
+  const identified = set.statusCounts.identified ?? 0;
+  const unresolved = set.statusCounts.unresolved_id ?? 0;
+  const community = set.statusCounts.community_resolved ?? 0;
+  const statusHint = [
+    identified ? `${identified} ID` : null,
+    unresolved ? `${unresolved} ?` : null,
+    community ? `${community} ✓` : null,
+  ]
+    .filter(Boolean)
+    .join(" · ");
 
   return (
     <Link
@@ -44,7 +50,7 @@ export function SetCard({ set }: { set: FeedItem }) {
       <div className="flex items-start gap-3">
         <div className="relative flex-none">
           <EntityThumb
-            src={thumb}
+            src={thumbFailed ? null : thumb}
             label={headline}
             accent={accent}
             size={48}
@@ -98,8 +104,14 @@ export function SetCard({ set }: { set: FeedItem }) {
 
       <div className="mt-auto space-y-2">
         <StatusBar counts={set.statusCounts} />
+        {statusHint ? (
+          <p className="sr-only">{statusHint}</p>
+        ) : null}
         <div className="flex items-center justify-between text-[12px] text-muted2">
-          <span className="mono">{set.trackCount} tracks</span>
+          <span className="mono" title={statusHint || undefined}>
+            {set.trackCount} tracks
+            {unresolved ? ` · ${unresolved}?` : ""}
+          </span>
           <span className="mono">{fmtDuration(set.durationSec)}</span>
           <span className="mono" title={fmtDate(set.publishedAt)}>
             {fmtRelative(set.publishedAt)}

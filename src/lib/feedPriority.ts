@@ -281,3 +281,48 @@ export function pickRadarPicks<T extends RadarPickFields>(
 
   return out;
 }
+
+/** Collapse "Friendship Mix" festival + mix dupes from the same DJ. */
+export function nearDuplicateKey(
+  title: string,
+  djSlug?: string | null,
+): string {
+  const t = title
+    .toLowerCase()
+    .replace(/\[[^\]]*]/g, " ")
+    .replace(/\b20\d{2}\b/g, " ")
+    .replace(/\bwe\s*[12]\b/g, " ")
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
+  return `${(djSlug || "").toLowerCase()}|${t}`;
+}
+
+export function dedupeNearDuplicates<
+  T extends { id: string; title: string; primaryDjSlug?: string | null },
+>(items: T[]): T[] {
+  const seen = new Set<string>();
+  const out: T[] = [];
+  for (const s of items) {
+    const key = nearDuplicateKey(s.title, s.primaryDjSlug);
+    if (seen.has(key)) continue;
+    seen.add(key);
+    out.push(s);
+  }
+  return out;
+}
+
+/** Walk a pre-sorted list and keep at most N cards per primary DJ. */
+export function diversifyByArtist<
+  T extends { id: string; primaryDjSlug?: string | null },
+>(items: T[], maxPerDj = 1): T[] {
+  const counts = new Map<string, number>();
+  const out: T[] = [];
+  for (const s of items) {
+    const key = (s.primaryDjSlug || "").trim() || `id:${s.id}`;
+    const n = counts.get(key) ?? 0;
+    if (n >= maxPerDj) continue;
+    counts.set(key, n + 1);
+    out.push(s);
+  }
+  return out;
+}

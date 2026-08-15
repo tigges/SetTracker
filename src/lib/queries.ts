@@ -144,6 +144,9 @@ export async function getFeed() {
         eventImageUrl: s.eventImageUrl,
         primaryDjName: s.primaryDj?.name,
         primaryDjSlug: s.primaryDj?.slug,
+        title: s.title,
+        trackCount: s.trackCount,
+        durationSec: s.durationSec,
       }),
     );
 }

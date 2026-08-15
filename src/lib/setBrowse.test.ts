@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { isBrowseReadySet, setDisplayThumb } from "./setBrowse";
+import { isBrowseReadySet, isEmptyOrPreviewSet, setDisplayThumb } from "./setBrowse";
 
 describe("setBrowse", () => {
   it("prefers set cover over DJ portrait", () => {
@@ -49,6 +49,30 @@ describe("setBrowse", () => {
         primaryDjName: "Black Coffee",
       }),
       true,
+    );
+  });
+
+  it("hides empty and [Preview] sets when counts are known", () => {
+    assert.equal(isEmptyOrPreviewSet({ trackCount: 0, title: "ASOT Mix 2" }), true);
+    assert.equal(
+      isEmptyOrPreviewSet({
+        title: "A State of Trance 2026 - Mix 2 [Preview]",
+        trackCount: 3,
+        durationSec: 600,
+      }),
+      true,
+    );
+    assert.equal(
+      isEmptyOrPreviewSet({ title: "Tomorrowland 2026", trackCount: 20 }),
+      false,
+    );
+    assert.equal(
+      isBrowseReadySet({
+        imageUrl: "https://example.com/set.jpg",
+        title: "ASOT Mix 2 [Preview]",
+        trackCount: 0,
+      }),
+      false,
     );
   });
 });
