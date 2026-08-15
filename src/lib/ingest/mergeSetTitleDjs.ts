@@ -17,6 +17,7 @@ import {
   extraArtistsFromCombinedName,
   isJunkArtistName,
   isMonthYearArtistName,
+  parseShowWithGuestCredit,
   sanitizeArtistName,
 } from "../artistName";
 import {
@@ -142,6 +143,13 @@ export function resolveCanonicalFromSetTitleDj(
     const target = EXPLICIT_ALIAS[slug]!;
     if (isBrandHostSlug(target)) return null;
     return { slug: target, name: displayNameForSlug(target, name) };
+  }
+
+  // Combined Dj.name ("Show with Artist", "Goodboys Present") wins over a
+  // noisy owned title that can flip to a leftover ("Club Mix").
+  if (parseShowWithGuestCredit(name) || /\bpresents?\s*$/i.test(name)) {
+    const fromOwn = resolveFromTitleText(name, slug);
+    if (fromOwn && !isBrandHostSlug(fromOwn.slug)) return fromOwn;
   }
 
   // Prefer artist parsed from the actual set title(s).

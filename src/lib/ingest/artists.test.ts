@@ -197,4 +197,9 @@ const moon = splitArtistsFromSetTitle("Full Moon with Timmy Trumpet");
 assert.equal(moon.primary.name, "Timmy Trumpet");
 assert.equal(moon.collaborators.length, 0);
 
+assert.equal(
+  performingCreditFromTitle("Goodboys Present — Club Mix"),
+  "Goodboys",
+);
+
 console.log("artists.test.ts ok");

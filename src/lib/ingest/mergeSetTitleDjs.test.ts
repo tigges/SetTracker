@@ -96,5 +96,13 @@ describe("resolveCanonicalFromSetTitleDj", () => {
       resolveCanonicalFromSetTitleDj("Goodboys Present", "goodboys-present"),
       { slug: "goodboys", name: "Goodboys" },
     );
+    assert.deepEqual(
+      resolveCanonicalFromSetTitleDj(
+        "Goodboys Present",
+        "goodboys-present",
+        ["Goodboys Present — Club Mix"],
+      ),
+      { slug: "goodboys", name: "Goodboys" },
+    );
   });
 });

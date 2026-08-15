@@ -8,6 +8,7 @@
 import {
   isMonthYearArtistName,
   looksLikeShowSeriesPrefix,
+  sanitizeArtistName,
 } from "../artistName";
 import { shieldAtomicActs } from "./atomicActs";
 import { slugify, type RawArtist } from "./types";
@@ -157,6 +158,10 @@ export function performingCreditFromTitle(title: string): string {
   if (m) {
     const left = m[1]!.trim();
     const right = m[2]!.trim();
+    const leftArtist = sanitizeArtistName(left);
+    if (leftArtist && !looksLikeEventOrSeriesCredit(leftArtist)) {
+      return tidyPerformingCredit(leftArtist);
+    }
     if (looksLikeEventOrSeriesCredit(left)) {
       const presented = artistFromPresentedBy(right);
       if (presented) return presented;
