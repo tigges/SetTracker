@@ -154,6 +154,17 @@ a {
   margin-top: -2rem;
 }
 
+/* Desktop stage must have a definite height AND a 1fr row that can
+   shrink (minmax(0,1fr)). Default grid min-height:auto lets the
+   300-row list stretch the row; the SVG then grows thousands of
+   pixels tall and the land silhouette sits below the fold. */
+@media (min-width: 1024px) {
+  .atlas-stage {
+    height: min(70vh, 720px);
+    grid-template-rows: minmax(0, 1fr);
+  }
+}
+
 /* Top 100 Atlas map (SVG land + pins) */
 .atlas-map {
   display: block;
