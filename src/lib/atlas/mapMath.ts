@@ -31,6 +31,9 @@ export type AtlasPin = {
   setCount: number;
   imageUrl: string | null;
   href: string | null;
+  instagram?: string | null;
+  soundcloud?: string | null;
+  youtube?: string | null;
 };
 
 export type AtlasTypeFilter = "all" | "festival" | "club" | "dj";

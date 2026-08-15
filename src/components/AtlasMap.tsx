@@ -477,9 +477,52 @@ export function AtlasMap({
                     </Link>
                   ) : (
                     <p className="mt-2 text-[12px] text-muted2">
-                      Not in the catalog yet.
+                      Not in the catalog yet.{" "}
+                      <Link
+                        href={`/capture-1001?q=${encodeURIComponent(selected.name)}`}
+                        className="text-brand hover:text-brandstrong"
+                      >
+                        Queue a 1001 capture →
+                      </Link>
                     </p>
                   )}
+                  {selected.kind === "dj" &&
+                  (selected.instagram ||
+                    selected.soundcloud ||
+                    selected.youtube) ? (
+                    <p className="mt-2 flex flex-wrap gap-2 text-[11px]">
+                      {selected.instagram ? (
+                        <a
+                          href={selected.instagram}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-muted hover:text-ink"
+                        >
+                          Instagram
+                        </a>
+                      ) : null}
+                      {selected.soundcloud ? (
+                        <a
+                          href={selected.soundcloud}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-muted hover:text-ink"
+                        >
+                          SoundCloud
+                        </a>
+                      ) : null}
+                      {selected.youtube ? (
+                        <a
+                          href={selected.youtube}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-muted hover:text-ink"
+                        >
+                          YouTube
+                        </a>
+                      ) : null}
+                    </p>
+                  ) : null}
                 </div>
               </div>
             </div>
