@@ -5,6 +5,7 @@
 
 import venueRaw from "../../../data/venue-seeds/djmag-atlas-2026.json";
 import djRaw from "../../../data/artist-seeds/djmag-atlas-djs-2025.json";
+import { DJ_SOCIAL_PINS } from "../ingest/djSocialPins.data";
 import {
   projectMercator,
   spreadCoincidentPins,
@@ -12,6 +13,8 @@ import {
   type AtlasPin,
   type AtlasPrec,
 } from "./mapMath";
+
+const DJ_SOCIAL_BY_SLUG = new Map(DJ_SOCIAL_PINS.map((p) => [p.slug, p]));
 
 export type AtlasVenue = {
   kind: AtlasKind;
@@ -148,6 +151,7 @@ export function atlasPinsFromDjs(
 ): AtlasPin[] {
   return rows.map((d) => {
     const ev = catalog.get(d.slug);
+    const social = DJ_SOCIAL_BY_SLUG.get(d.slug);
     const { x, y } = projectMercator(d.lng, d.lat);
     const loc = d.city ? `${d.city}, ${d.country}` : d.country;
     return {
@@ -174,6 +178,9 @@ export function atlasPinsFromDjs(
       setCount: ev?.setCount ?? 0,
       imageUrl: ev?.imageUrl ?? null,
       href: ev ? `/djs/${ev.slug}` : null,
+      instagram: social?.instagram ?? null,
+      soundcloud: social?.soundcloud ?? null,
+      youtube: social?.youtube ?? null,
     };
   });
 }

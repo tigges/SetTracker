@@ -3,7 +3,8 @@ import Link from "next/link";
 import { EntityThumb } from "@/components/EntityThumb";
 import { ExpandableCardGrid } from "@/components/ExpandableCardGrid";
 import { atlasVenueBySlug } from "@/lib/atlas/seed";
-import { getVenues } from "@/lib/queries";
+import { editionLabel } from "@/lib/ingest/festivalDrops";
+import { getFestivalEditionBoard, getVenues } from "@/lib/queries";
 import { pageMeta } from "@/lib/site";
 
 export const metadata: Metadata = pageMeta({
@@ -99,8 +100,17 @@ function bucketByKind(events: EventRow[]) {
   return buckets;
 }
 
+const BUCKET_COPY: Record<string, string> = {
+  current: "On now",
+  upcoming: "Upcoming",
+  recent: "Just ended",
+};
+
 export default async function EventsPage() {
-  const events = await getVenues();
+  const [events, board] = await Promise.all([
+    getVenues(),
+    getFestivalEditionBoard(),
+  ]);
   const chart = atlasVenueBySlug();
   const withSets = events.filter((v) => v.isBrowseReady);
   const directory = events.filter((v) => !v.isBrowseReady);
@@ -115,6 +125,69 @@ export default async function EventsPage() {
           Festivals, clubs, and livestream channels with sets in the catalog.
           Directory stubs without sets stay below.
         </p>
+        {board.calendar.length > 0 ? (
+          <section className="mt-6 space-y-3">
+            <div className="flex items-baseline justify-between gap-3">
+              <div>
+                <h2 className="text-lg font-bold tracking-tight">
+                  Festival editions
+                </h2>
+                <p className="mt-0.5 text-[13px] text-muted2">
+                  Curated weekend windows — Relive dumps land after the close.
+                </p>
+              </div>
+              <span className="mono text-[12px] text-muted2">
+                {board.calendar.length}
+              </span>
+            </div>
+            <ul className="divide-y divide-line border-y border-line">
+              {board.calendar.map((e) => {
+                const gap = board.gaps.find((g) => g.edition.slug === e.slug);
+                const name = board.names.get(e.eventSlug);
+                return (
+                  <li
+                    key={e.slug}
+                    className="flex flex-col gap-1 py-3 sm:flex-row sm:items-baseline sm:justify-between"
+                  >
+                    <span>
+                      <Link
+                        href={`/events/${e.eventSlug}`}
+                        className="font-semibold text-ink hover:underline"
+                      >
+                        {name ?? editionLabel(e)}
+                      </Link>
+                      {name ? (
+                        <span className="text-muted">
+                          {" "}
+                          · {e.year}
+                          {e.label ? ` ${e.label}` : ""}
+                        </span>
+                      ) : null}
+                      <span className="mono ml-2 text-[11px] text-muted2">
+                        {BUCKET_COPY[e.bucket] ?? e.bucket}
+                      </span>
+                    </span>
+                    <span className="mono text-[12px] text-muted2">
+                      {e.startsAt} – {e.endsAt}
+                      {gap ? (
+                        <>
+                          {" · "}
+                          <Link
+                            href={`/capture-1001?q=${encodeURIComponent(name ?? editionLabel(e))}`}
+                            className="text-brand hover:underline"
+                          >
+                            capture gap
+                          </Link>
+                        </>
+                      ) : null}
+                    </span>
+                  </li>
+                );
+              })}
+            </ul>
+          </section>
+        ) : null}
+
         <Link
           href="/atlas"
           className="card mt-5 flex items-center justify-between gap-3 p-4 transition-colors hover:border-[color:var(--muted2)]"

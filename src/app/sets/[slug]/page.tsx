@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getSetBySlug, getAllSetSlugs } from "@/lib/queries";
+import { getSetBySlug, getAllSetSlugs, getRelatedSets } from "@/lib/queries";
 import { EntityThumb } from "@/components/EntityThumb";
 import { SetExport } from "@/components/SetExport";
 import { SetListen } from "@/components/SetListen";
@@ -46,7 +46,10 @@ export default async function SetPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const set = await getSetBySlug(slug);
+  const [set, related] = await Promise.all([
+    getSetBySlug(slug),
+    getRelatedSets(slug),
+  ]);
   if (!set) notFound();
 
   const type = SET_TYPE_META[set.type] ?? { label: set.type, glyph: "•" };
@@ -104,7 +107,14 @@ export default async function SetPage({
                 {set.genre}
               </span>
             )}
-            {set.series && <span className="eyebrow">{set.series.name}</span>}
+            {set.series && (
+              <Link
+                href={`/search?q=${encodeURIComponent(set.series.name)}`}
+                className="eyebrow transition-colors hover:text-ink"
+              >
+                {set.series.name}
+              </Link>
+            )}
             {set.event && (
               <Link
                 href={`/events/${set.event.slug}`}
@@ -250,6 +260,42 @@ export default async function SetPage({
         setGenre={set.genre}
         setSourceUrl={set.sourceUrl}
       />
+
+      {related.length > 0 ? (
+        <section className="mt-10">
+          <div className="mb-4 flex items-baseline gap-3">
+            <h2 className="text-[13px] font-semibold uppercase tracking-[0.14em] text-muted">
+              Related sets
+            </h2>
+            <span className="mono text-[12px] text-muted2">{related.length}</span>
+            <div className="h-px flex-1 bg-line" />
+          </div>
+          <ul className="divide-y divide-line border-y border-line">
+            {related.map((r) => (
+              <li key={r.slug}>
+                <Link
+                  href={`/sets/${r.slug}`}
+                  className="flex flex-col gap-1 py-3 sm:flex-row sm:items-baseline sm:justify-between"
+                >
+                  <span className="min-w-0">
+                    <span className="block truncate text-[14px] font-semibold text-ink">
+                      {r.title}
+                    </span>
+                    <span className="mono text-[11px] text-muted2">
+                      {r.reasonLabel}
+                      {r.eventName ? ` · ${r.eventName}` : ""}
+                      {r.primaryDj ? ` · ${r.primaryDj.name}` : ""}
+                    </span>
+                  </span>
+                  <span className="mono flex-none text-[12px] text-muted2">
+                    {fmtDate(r.publishedAt)} · {r.trackCount} tracks
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
     </div>
     </SetListen>
   );

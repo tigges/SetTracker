@@ -68,10 +68,22 @@ export default function RootLayout({
 
         <footer className="mx-auto max-w-6xl px-5 pb-10 pt-4">
           <div className="flex flex-wrap items-center justify-between gap-2 border-t border-line pt-5 text-[12px] text-muted2">
-            <span>
-              {SITE_NAME} · {SITE_TAGLINE} ·{" "}
+            <span className="flex flex-wrap items-center gap-x-2 gap-y-1">
+              <span>
+                {SITE_NAME} · {SITE_TAGLINE}
+              </span>
+              <span aria-hidden="true">·</span>
               <Link href="/about" className="underline decoration-dotted underline-offset-2 hover:text-ink">
                 About
+              </Link>
+              <Link href="/atlas" className="underline decoration-dotted underline-offset-2 hover:text-ink">
+                Atlas
+              </Link>
+              <Link href="/stats" className="underline decoration-dotted underline-offset-2 hover:text-ink">
+                Stats
+              </Link>
+              <Link href="/search" className="underline decoration-dotted underline-offset-2 hover:text-ink">
+                Search
               </Link>
             </span>
             <span className="mono text-[11px]" title="Build version">

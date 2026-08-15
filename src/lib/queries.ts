@@ -16,6 +16,11 @@ import {
   resolvedIdCount,
 } from "@/lib/feedPriority";
 import { resolveFeedRanks } from "@/lib/feedPriorityResolve";
+import {
+  editionCalendar,
+  editionGapReport,
+} from "@/lib/ingest/festivalDrops";
+import { pickRelatedSets } from "@/lib/relatedSets";
 import { isBrowseReadySet, isEmptyOrPreviewSet } from "@/lib/setBrowse";
 import { isBrowseReadyVenue, isVenueListed } from "@/lib/venueBrowse";
 import type { IdStatus } from "@/lib/status";
@@ -277,6 +282,138 @@ export async function getSetBySlug(slug: string) {
 
 export type SetDetail = NonNullable<Awaited<ReturnType<typeof getSetBySlug>>>;
 export type PlayRow = SetDetail["plays"][number];
+
+const RELATED_REASON = {
+  event: "Same event",
+  series: "Same series",
+  dj: "Same DJ",
+} as const;
+
+/** Nearby sets on the same event, series, or primary DJ. */
+export async function getRelatedSets(slug: string, limit = 6) {
+  const set = await prisma.set.findUnique({
+    where: { slug },
+    select: {
+      id: true,
+      slug: true,
+      eventId: true,
+      seriesId: true,
+      event: { select: { slug: true } },
+      series: { select: { slug: true } },
+      artists: {
+        where: { isPrimary: true },
+        take: 1,
+        select: { dj: { select: { slug: true } } },
+      },
+    },
+  });
+  if (!set) return [];
+
+  const primaryDjSlug = set.artists[0]?.dj.slug ?? null;
+  const or = [
+    set.eventId ? { eventId: set.eventId } : null,
+    set.seriesId ? { seriesId: set.seriesId } : null,
+    primaryDjSlug
+      ? { artists: { some: { isPrimary: true, dj: { slug: primaryDjSlug } } } }
+      : null,
+  ].filter((x): x is NonNullable<typeof x> => x != null);
+  if (!or.length) return [];
+
+  const candidates = await prisma.set.findMany({
+    where: { id: { not: set.id }, OR: or },
+    take: 40,
+    orderBy: { publishedAt: "desc" },
+    select: {
+      slug: true,
+      title: true,
+      publishedAt: true,
+      durationSec: true,
+      _count: { select: { plays: true } },
+      event: { select: { slug: true, name: true } },
+      series: { select: { slug: true, name: true } },
+      artists: {
+        where: { isPrimary: true },
+        take: 1,
+        select: { dj: { select: { slug: true, name: true, accent: true } } },
+      },
+    },
+  });
+
+  const picked = pickRelatedSets(
+    {
+      slug: set.slug,
+      eventSlug: set.event?.slug,
+      seriesSlug: set.series?.slug,
+      primaryDjSlug,
+    },
+    candidates.map((c) => ({
+      slug: c.slug,
+      title: c.title,
+      publishedAt: c.publishedAt,
+      trackCount: c._count.plays,
+      durationSec: c.durationSec,
+      eventSlug: c.event?.slug,
+      seriesSlug: c.series?.slug,
+      primaryDjSlug: c.artists[0]?.dj.slug ?? null,
+    })),
+    limit,
+  );
+
+  return picked.map(({ item, reason }) => {
+    const raw = candidates.find((c) => c.slug === item.slug)!;
+    const dj = raw.artists[0]?.dj ?? null;
+    return {
+      slug: raw.slug,
+      title: raw.title,
+      publishedAt: raw.publishedAt,
+      durationSec: raw.durationSec,
+      trackCount: raw._count.plays,
+      reason,
+      reasonLabel: RELATED_REASON[reason],
+      eventName: raw.event?.name ?? null,
+      seriesName: raw.series?.name ?? null,
+      primaryDj: dj
+        ? { slug: dj.slug, name: dj.name, accent: dj.accent }
+        : null,
+    };
+  });
+}
+
+export type RelatedSetItem = Awaited<ReturnType<typeof getRelatedSets>>[number];
+
+/** Curated festival edition windows + catalog gaps for the Events page. */
+export async function getFestivalEditionBoard(nowMs = Date.now()) {
+  const calendar = editionCalendar(nowMs).filter((e) => e.bucket !== "past");
+  const slugs = [...new Set(calendar.map((e) => e.eventSlug))];
+  const [events, sets] = slugs.length
+    ? await Promise.all([
+        prisma.event.findMany({
+          where: { slug: { in: slugs } },
+          select: { slug: true, name: true },
+        }),
+        prisma.set.findMany({
+          where: { event: { slug: { in: slugs } } },
+          select: {
+            publishedAt: true,
+            durationSec: true,
+            event: { select: { slug: true } },
+            _count: { select: { plays: true } },
+          },
+        }),
+      ])
+    : [[], []];
+  const names = new Map(events.map((e) => [e.slug, e.name]));
+  const gaps = editionGapReport(
+    sets.map((s) => ({
+      eventSlug: s.event?.slug,
+      publishedAt: s.publishedAt,
+      trackCount: s._count.plays,
+      durationSec: s.durationSec,
+    })),
+    nowMs,
+  );
+  return { calendar, gaps, names };
+}
 
 // ---------------------------------------------------------------------------
 // DJ profile hub

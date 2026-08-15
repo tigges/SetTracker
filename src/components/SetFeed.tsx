@@ -61,6 +61,7 @@ function identifiedRatio(s: FeedItem): number {
  */
 export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }) {
   const [genre, setGenre] = useState("all");
+  const [completeOnly, setCompleteOnly] = useState(false);
   const [visible, setVisible] = useState(PAGE_SIZE);
 
   function selectGenre(next: string) {
@@ -72,9 +73,10 @@ export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }
     return dedupeNearDuplicates(
       feed
         .filter((s) => setMatchesGenreFilter(s, genre))
+        .filter((s) => !completeOnly || isCompleteTracklist(s))
         .map((s) => ({ ...s, primaryDjSlug: s.primaryDj?.slug ?? null })),
     );
-  }, [feed, genre]);
+  }, [feed, genre, completeOnly]);
 
   const {
     newWeek,
@@ -148,11 +150,28 @@ export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }
 
   return (
     <div>
-      <div className="mb-6 flex items-center justify-between gap-3">
+      <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
         <span className="mono text-[12px] text-muted2">
           {filtered.length} sets
         </span>
-        <GenreFilter genres={genres} value={genre} onChange={selectGenre} />
+        <div className="flex flex-wrap items-center gap-2">
+          <button
+            type="button"
+            aria-pressed={completeOnly}
+            onClick={() => {
+              setCompleteOnly((v) => !v);
+              setVisible(PAGE_SIZE);
+            }}
+            className={`rounded-full border px-3 py-1 text-[12px] ${
+              completeOnly
+                ? "border-brand text-brand"
+                : "border-line text-muted hover:border-[color:var(--muted2)]"
+            }`}
+          >
+            Complete only
+          </button>
+          <GenreFilter genres={genres} value={genre} onChange={selectGenre} />
+        </div>
       </div>
 
       {filtered.length === 0 ? (
