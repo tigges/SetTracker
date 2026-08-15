@@ -236,6 +236,16 @@ export const KNOWN_LABEL_SOCIALS: Record<
     website: "https://www.ministryofsound.com/",
     soundcloud: "https://soundcloud.com/ministryofsound",
   },
+  dimmak: {
+    website: "https://www.dimmak.com/",
+    soundcloud: "https://soundcloud.com/dimmakrecords",
+    instagram: "https://www.instagram.com/dimmak/",
+  },
+  "dim-mak": {
+    website: "https://www.dimmak.com/",
+    soundcloud: "https://soundcloud.com/dimmakrecords",
+    instagram: "https://www.instagram.com/dimmak/",
+  },
   dirtybird: {
     website: "https://dirtybirdrecords.com/",
     soundcloud: "https://soundcloud.com/dirtybird",

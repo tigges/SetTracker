@@ -88,6 +88,8 @@ export const CURATED_LABELS: CuratedLabel[] = withColors([
   { name: "Deadbeats", slug: "deadbeats", color: "#b48cff" },
   { name: "mau5trap", slug: "mau5trap", color: "#00ff9c" },
   { name: "Owsla", slug: "owsla", color: "#f5a623" },
+  // Steve Aoki's imprint — official dimmak.com
+  { name: "Dim Mak", slug: "dim-mak", color: "#e31c23" },
   { name: "Astralwerks", slug: "astralwerks", color: "#c6cfda" },
   { name: "Kompakt", slug: "kompakt", color: "#ff7a45" },
   { name: "Relief Records", slug: "relief-records", color: "#4bd0c0" },
