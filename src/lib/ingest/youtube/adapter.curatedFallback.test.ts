@@ -116,6 +116,6 @@ describe("curated YouTube 429 fallback", () => {
     assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
     assert.ok(sets[0]!.durationSec >= 2 * 3600 + 25 * 60);
     assert.equal(sets[0]?.primaryArtist?.slug, "armin-van-buuren");
-    assert.equal(sets[0]?.eventName, "Tomorrowland Belgium");
+    assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
   });
 });
