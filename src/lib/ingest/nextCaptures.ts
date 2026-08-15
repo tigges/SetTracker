@@ -182,6 +182,8 @@ export type CaptureNeedRow = {
   top100Rank: number | null;
   isFestival: boolean;
   festivalSeason: boolean;
+  /** Event brand is in an edition-gap window (few complete Relives). */
+  editionGap?: boolean;
   density: DensitySeverity;
   watchUrl?: string;
   /** Known 1001 page from a curated YT seed (not yet captured as a seed). */
@@ -239,6 +241,7 @@ export function skipCaptureNeed(
 export function scoreCaptureNeed(row: CaptureNeedRow, nowMs = Date.now()): number {
   let s = 0;
   if (row.festivalSeason) s += 120;
+  if (row.editionGap) s += 35;
   if (row.top100Rank != null) {
     s += row.top100Rank <= 20 ? 90 : 45;
     s += Math.max(0, 25 - row.top100Rank);
@@ -270,6 +273,7 @@ export function captureReason(row: CaptureNeedRow): string {
     return "YT/SC in · 1001 URL known · no seed";
   }
   if (row.festivalSeason) return "festival season · find 1001";
+  if (row.editionGap) return "edition gap · find 1001";
   if (row.density === "severe") return "thin tracklist · capture 1001";
   if (row.density === "thin") return "thin tracklist · capture 1001";
   if (row.top100Rank != null && row.top100Rank <= 20) return "Top 20 · no 1001 seed";

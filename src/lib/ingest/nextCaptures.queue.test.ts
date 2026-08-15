@@ -80,6 +80,11 @@ assert.ok(
   scoreCaptureNeed(recentEmpty, now) > scoreCaptureNeed(oldGuetta, now),
   "recent TML gap must outrank a 2017 Ultra leftover",
 );
+assert.ok(
+  scoreCaptureNeed({ ...recentEmpty, editionGap: true }, now) >
+    scoreCaptureNeed(recentEmpty, now),
+  "edition-gap rows get a capture boost",
+);
 
 const queue = buildCaptureQueueFromNeeds([oldGuetta, recentEmpty], {
   limit: 10,

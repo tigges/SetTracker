@@ -1,6 +1,9 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import {
+  editionCalendar,
+  editionGapReport,
+  editionLabel,
   eventInDropWindow,
   festivalSourcePollLimit,
   isFestivalSeasonSet,
@@ -83,6 +86,51 @@ describe("festivalDrops", () => {
       40,
     );
     assert.equal(festivalSourcePollLimit(undefined, 40, 100, 21, now), 40);
+  });
+
+  it("buckets current / upcoming / recent editions", () => {
+    const now = Date.parse("2026-08-15T12:00:00Z");
+    const cal = editionCalendar(now);
+    assert.equal(
+      cal.find((e) => e.slug === "untold-2026")?.bucket,
+      "recent",
+    );
+    assert.equal(
+      cal.find((e) => e.slug === "creamfields-2026")?.bucket,
+      "upcoming",
+    );
+    assert.equal(
+      cal.find((e) => e.slug === "hard-summer-2026")?.bucket,
+      "recent",
+    );
+    assert.equal(
+      cal.find((e) => e.slug === "ultra-miami-2025")?.bucket,
+      "past",
+    );
+    assert.match(editionLabel(cal.find((e) => e.slug === "untold-2026")!), /Untold/);
+  });
+
+  it("flags recent editions with thin catalog coverage", () => {
+    const now = Date.parse("2026-08-15T12:00:00Z");
+    const gaps = editionGapReport(
+      [
+        {
+          eventSlug: "untold",
+          publishedAt: "2026-08-10",
+          trackCount: 2,
+          durationSec: 3600,
+        },
+        {
+          eventSlug: "creamfields",
+          publishedAt: "2026-08-22",
+          trackCount: 40,
+          durationSec: 5400,
+        },
+      ],
+      now,
+    );
+    assert.ok(gaps.some((g) => g.edition.slug === "untold-2026"));
+    assert.ok(!gaps.some((g) => g.edition.slug === "creamfields-2026"));
   });
 
   it("matches Lollapalooza Chicago 2026", () => {

@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
 
 const LIVE_SCRIPT = "https://setradar.ai/capture-1001tl.js";
 
@@ -66,8 +67,22 @@ export function Capture1001Client({
     return `${window.location.origin}${base}/capture-1001tl.js`;
   }, []);
 
+  const params = useSearchParams();
+  const [query, setQuery] = useState(() => params.get("q") ?? "");
   const [status, setStatus] = useState<string>("");
   const generic = bookmarkletFor(scriptUrl);
+  const filtered = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    if (!q) return presets;
+    return presets.filter((p) =>
+      `${p.label} ${p.slug} ${p.reason ?? ""} ${p.name}`
+        .toLowerCase()
+        .includes(q),
+    );
+  }, [presets, query]);
+  const find1001 = query.trim()
+    ? `https://www.google.com/search?q=${encodeURIComponent(`${query.trim()} site:1001tracklists.com`)}`
+    : "";
 
   async function onCopy(label: string, text: string) {
     const ok = await copyText(text);
@@ -141,20 +156,49 @@ export function Capture1001Client({
 
       <section className="space-y-3">
         <h2 className="text-lg font-extrabold tracking-tight">
-          Next {presets.length} captures
+          Next{" "}
+          {query.trim()
+            ? `${filtered.length} of ${presets.length}`
+            : presets.length}{" "}
+          captures
         </h2>
         <p className="text-[14px] text-muted">
           Workbench only — YT/SC already in the catalog, 1001 seed still
           missing. Official Relives and known 1001 URLs first. Wired slugs drop
           off automatically. CI never fetches 1001.
         </p>
+        <label className="block">
+          <span className="sr-only">Filter queue</span>
+          <input
+            type="search"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Filter by artist or set…"
+            className="w-full rounded-md border border-line bg-panel px-3 py-2 text-[14px] text-ink outline-none focus:border-brand"
+          />
+        </label>
         {generatedAt ? (
           <p className="mono text-[11px] text-muted2">
             Queue built {generatedAt.slice(0, 16).replace("T", " ")} UTC
           </p>
         ) : null}
+        {filtered.length === 0 ? (
+          <p className="text-[14px] text-muted">
+            No queued gap matches “{query.trim()}”.{" "}
+            {find1001 ? (
+              <a
+                href={find1001}
+                target="_blank"
+                rel="noreferrer"
+                className="text-brand hover:underline"
+              >
+                Find 1001
+              </a>
+            ) : null}
+          </p>
+        ) : null}
         <ol className="divide-y divide-line border-y border-line">
-          {presets.map((p, i) => (
+          {filtered.map((p, i) => (
             <li
               key={p.slug}
               className="flex flex-col gap-2 py-3 sm:flex-row sm:items-center sm:justify-between"

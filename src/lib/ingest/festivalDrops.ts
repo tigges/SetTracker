@@ -2,7 +2,9 @@
  * Official festival drop sources + curated edition windows.
  *
  * Phase 0–1: YT Relive playlists / SC venue accounts / deeper channel polls.
- * Phase 2–4: edition calendar, post-weekend boost, gap reporting.
+ * Phase 2: edition calendar (Events page).
+ * Phase 3: post-weekend poll + Festival season rail boost.
+ * Phase 4: gap reporting → capture-1001 scoring.
  */
 
 export type FestivalEditionSeed = {
@@ -518,4 +520,137 @@ export function isFestivalSeasonSet(
   );
   if (!boost) return false;
   return nowMs - new Date(s.publishedAt).getTime() < withinDays * DAY_MS;
+}
+
+const EVENT_BRAND_LABEL: Record<string, string> = {
+  tomorrowland: "Tomorrowland",
+  "ultra-miami": "Ultra Miami",
+  "edc-lv": "EDC Las Vegas",
+  parookaville: "Parookaville",
+  coachella: "Coachella",
+  "hard-summer": "HARD Summer",
+  "burning-man": "Burning Man",
+  dreamstate: "Dreamstate",
+  "nocturnal-wonderland": "Nocturnal Wonderland",
+  "beyond-wonderland": "Beyond Wonderland",
+  "escape-halloween": "Escape Halloween",
+  "countdown-nye": "Countdown NYE",
+  lollapalooza: "Lollapalooza",
+  untold: "Untold",
+  creamfields: "Creamfields",
+  defqon1: "Defqon.1",
+  mysteryland: "Mysteryland",
+  "electric-love": "Electric Love",
+  "time-warp": "Time Warp",
+  awakenings: "Awakenings",
+  parklife: "Parklife",
+  "street-parade": "Street Parade",
+  "nature-one": "Nature One",
+};
+
+export function editionBrandLabel(eventSlug: string): string {
+  if (EVENT_BRAND_LABEL[eventSlug]) return EVENT_BRAND_LABEL[eventSlug]!;
+  return eventSlug
+    .split("-")
+    .map((w) => (w ? w[0]!.toUpperCase() + w.slice(1) : w))
+    .join(" ");
+}
+
+export function editionLabel(e: FestivalEditionSeed): string {
+  return [editionBrandLabel(e.eventSlug), String(e.year), e.label]
+    .filter(Boolean)
+    .join(" · ");
+}
+
+export type EditionCalendarBucket = "current" | "upcoming" | "recent" | "past";
+
+export type EditionCalendarRow = FestivalEditionSeed & {
+  bucket: EditionCalendarBucket;
+};
+
+/** Bucket curated editions relative to now (upcoming = next `upcomingDays`). */
+export function editionCalendar(
+  nowMs = Date.now(),
+  opts?: { upcomingDays?: number; recentDays?: number },
+): EditionCalendarRow[] {
+  const upcomingDays = opts?.upcomingDays ?? 180;
+  const recentDays = opts?.recentDays ?? 45;
+  return FESTIVAL_EDITION_SEEDS.map((e) => {
+    const start = Date.parse(`${e.startsAt}T00:00:00Z`);
+    const end = Date.parse(`${e.endsAt}T23:59:59Z`);
+    let bucket: EditionCalendarBucket = "past";
+    if (Number.isFinite(start) && Number.isFinite(end)) {
+      if (nowMs >= start && nowMs <= end) bucket = "current";
+      else if (nowMs < start && start - nowMs <= upcomingDays * DAY_MS) {
+        bucket = "upcoming";
+      } else if (nowMs > end && nowMs - end <= recentDays * DAY_MS) {
+        bucket = "recent";
+      }
+    }
+    return { ...e, bucket };
+  }).sort(
+    (a, b) => Date.parse(a.startsAt) - Date.parse(b.startsAt),
+  );
+}
+
+export type EditionCatalogSet = {
+  eventSlug?: string | null;
+  publishedAt: Date | string;
+  trackCount: number;
+  durationSec: number;
+};
+
+export type EditionGapRow = {
+  edition: FestivalEditionSeed;
+  setCount: number;
+  completeCount: number;
+  gap: boolean;
+};
+
+/**
+ * Editions that have started (or just ended) with fewer than `minComplete`
+ * dense tracklists in the catalog — feed capture scoring / Events UI.
+ */
+export function editionGapReport(
+  catalog: EditionCatalogSet[],
+  nowMs = Date.now(),
+  opts?: { recentDays?: number; minComplete?: number },
+): EditionGapRow[] {
+  const recentDays = opts?.recentDays ?? 45;
+  const minComplete = opts?.minComplete ?? 3;
+  const windowed = FESTIVAL_EDITION_SEEDS.filter((e) => {
+    const start = Date.parse(`${e.startsAt}T00:00:00Z`);
+    const end = Date.parse(`${e.endsAt}T23:59:59Z`);
+    if (!Number.isFinite(start) || !Number.isFinite(end)) return false;
+    return nowMs >= start && nowMs - end <= recentDays * DAY_MS;
+  });
+  return windowed
+    .map((edition) => {
+      const start = Date.parse(`${edition.startsAt}T00:00:00Z`);
+      const end = Date.parse(`${edition.endsAt}T23:59:59Z`) + 45 * DAY_MS;
+      const sets = catalog.filter((s) => {
+        if (s.eventSlug !== edition.eventSlug) return false;
+        const t = new Date(s.publishedAt).getTime();
+        return t >= start && t <= end;
+      });
+      const completeCount = sets.filter(
+        (s) => s.trackCount >= 12 && s.durationSec >= 20 * 60,
+      ).length;
+      return {
+        edition,
+        setCount: sets.length,
+        completeCount,
+        gap: completeCount < minComplete,
+      };
+    })
+    .filter((r) => r.gap);
+}
+
+export function editionGapEventSlugs(
+  catalog: EditionCatalogSet[],
+  nowMs = Date.now(),
+): Set<string> {
+  return new Set(
+    editionGapReport(catalog, nowMs).map((r) => r.edition.eventSlug),
+  );
 }

@@ -242,13 +242,14 @@ export default async function DjPage({
             <Panel title="Series" meta={`${dj.series.length}`}>
               <div className="flex flex-wrap gap-2">
                 {dj.series.map((s) => (
-                  <span
+                  <Link
                     key={s.slug}
-                    className="rounded-full border border-line bg-panel px-3 py-1 text-[12px]"
+                    href={`/search?q=${encodeURIComponent(s.name)}`}
+                    className="rounded-full border border-line bg-panel px-3 py-1 text-[12px] transition-colors hover:border-[color:var(--muted2)] hover:text-ink"
                   >
                     {s.name}
                     <span className="mono ml-1.5 text-muted2">{s.setCount}</span>
-                  </span>
+                  </Link>
                 ))}
               </div>
             </Panel>

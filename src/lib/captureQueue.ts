@@ -3,7 +3,10 @@
  */
 import { prisma } from "@/lib/db";
 import { loadDjMagTop100RankBySlug } from "@/lib/djmagTop100";
-import { isFestivalSeasonSet } from "@/lib/ingest/festivalDrops";
+import {
+  editionGapEventSlugs,
+  isFestivalSeasonSet,
+} from "@/lib/ingest/festivalDrops";
 import {
   buildCaptureQueueFromNeeds,
   type CaptureNeedRow,
@@ -50,6 +53,16 @@ export async function getCaptureQueue(
     },
   });
 
+  const gapEvents = editionGapEventSlugs(
+    sets.map((s) => ({
+      eventSlug: s.event?.slug,
+      publishedAt: s.publishedAt,
+      trackCount: s.plays.length,
+      durationSec: s.durationSec,
+    })),
+    nowMs,
+  );
+
   const rows: CaptureNeedRow[] = sets.map((s) => {
     const playCount = s.plays.length;
     const plays1001 = s.plays.filter((p) => p.provenance === "1001tl").length;
@@ -70,6 +83,7 @@ export async function getCaptureQueue(
       identifiedStrong,
       top100Rank: primary?.slug ? (top100.get(primary.slug) ?? null) : null,
       isFestival,
+      editionGap: Boolean(s.event?.slug && gapEvents.has(s.event.slug)),
       festivalSeason: isFestivalSeasonSet(
         {
           eventSlug: s.event?.slug,

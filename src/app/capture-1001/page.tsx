@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { getCaptureQueue } from "@/lib/captureQueue";
 import {
   Capture1001Client,
@@ -49,7 +50,9 @@ export default async function Capture1001Page() {
           ), copy the seed.
         </p>
       </header>
-      <Capture1001Client presets={presets} generatedAt={generatedAt} />
+      <Suspense fallback={null}>
+        <Capture1001Client presets={presets} generatedAt={generatedAt} />
+      </Suspense>
     </div>
   );
 }
