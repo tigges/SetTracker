@@ -54,6 +54,7 @@ import {
   TL_LUCAS_STEVE_TML_WE2_2026,
   TL_SARA_LANDRY_TML_WE2_2026,
   TL_AFROJACK_R3HAB_TML_WE2_2026,
+  TL_STEVE_AOKI_TML_FRIENDSHIP_MIX_2026,
   TL_STEVE_AOKI_TML_WE2_2026,
   TL_MISS_MONIQUE_TML_WE2_2026,
   TL_NICKY_ROMERO_TML_WE2_2026,
@@ -881,6 +882,22 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/rwtx921/steve-aoki-mainstage-tomorrowland-weekend-2-belgium-2026-07-26.html",
     tracklist1001: TL_STEVE_AOKI_TML_WE2_2026,
+  },
+  {
+    // Tomorrowland official Friendship Mix; timed 1001 capture.
+    video: "https://www.youtube.com/watch?v=hgbAN8NFNu0",
+    primaryArtist: dj("Steve Aoki", {
+      accent: "#00b4d8",
+      homeCity: "Miami, US",
+    }),
+    genre: "Electro House",
+    type: "mix",
+    title: "Steve Aoki - Tomorrowland Friendship Mix 2026-08-13",
+    seriesName: "Tomorrowland Friendship Mix",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1x5044dt/steve-aoki-tomorrowland-friendship-mix-2026-08-13.html",
+    tracklist1001: TL_STEVE_AOKI_TML_FRIENDSHIP_MIX_2026,
   },
   {
     // Tomorrowland official — Mainstage WE2; 0/24 timed → evenly spaced ~60m.

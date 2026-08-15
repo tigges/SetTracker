@@ -19,6 +19,10 @@ import {
   TL_THE_CHAINSMOKERS_TML_WE1_2026,
 } from "./festivalCaptures20260813";
 import { TL_SIDEPIECE_Lollapalooza_Perry_Stage_2026 } from "./festivalCaptures20260814";
+import {
+  TL_MARTEN_HORGER_TML_LIBRARY_WE1_2023,
+  TL_STEVE_AOKI_TML_FRIENDSHIP_MIX_2026,
+} from "./festivalCaptures20260815";
 
 export {
   TL_ALESSO_TML_WE2_2026,
@@ -32,6 +36,8 @@ export {
   TL_PEGGY_GOU_EDC_LV_2026,
   TL_THE_CHAINSMOKERS_TML_WE1_2026,
   TL_SIDEPIECE_Lollapalooza_Perry_Stage_2026,
+  TL_MARTEN_HORGER_TML_LIBRARY_WE1_2023,
+  TL_STEVE_AOKI_TML_FRIENDSHIP_MIX_2026,
 };
 
 function formatClock(sec: number): string {
@@ -4615,6 +4621,11 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-tg_QLGpes0k": TL_ARMIN_VAN_BUUREN_TML_WE2_2026,
   "sc-sidepiece-sidepiece-lollapalooza-perry":
     TL_SIDEPIECE_Lollapalooza_Perry_Stage_2026,
+  "yt-hgbAN8NFNu0": TL_STEVE_AOKI_TML_FRIENDSHIP_MIX_2026,
+  "sc-tomorrowland-tomorrowland-friendship-mix-steve-aoki-august-2026":
+    TL_STEVE_AOKI_TML_FRIENDSHIP_MIX_2026,
+  "sc-marten-horger-tomorrowland-mainstage-2023":
+    TL_MARTEN_HORGER_TML_LIBRARY_WE1_2023,
 };
 
 /** Sanity: every seeded clock must parse. */

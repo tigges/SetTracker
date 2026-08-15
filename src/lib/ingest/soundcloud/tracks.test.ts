@@ -24,4 +24,16 @@ assert.equal(
   "sc-sidepiece-sidepiece-lollapalooza-perry",
 );
 
+const horgerTml = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url === "https://soundcloud.com/marten-horger/tomorrowland-mainstage-2023",
+);
+assert.ok(horgerTml);
+assert.equal(horgerTml.primaryArtist.name, "Marten Horger");
+assert.equal(horgerTml.type, "festival");
+assert.equal(
+  `sc-marten-horger-${slugify("tomorrowland-mainstage-2023")}`,
+  "sc-marten-horger-tomorrowland-mainstage-2023",
+);
+
 console.log("soundcloud/tracks.test.ts ok");

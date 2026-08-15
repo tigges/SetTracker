@@ -82,6 +82,8 @@ import {
   TL_PEGGY_GOU_EDC_LV_2026,
   TL_THE_CHAINSMOKERS_TML_WE1_2026,
   TL_SIDEPIECE_Lollapalooza_Perry_Stage_2026,
+  TL_MARTEN_HORGER_TML_LIBRARY_WE1_2023,
+  TL_STEVE_AOKI_TML_FRIENDSHIP_MIX_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   tracklist1001RowsToPlays,
 } from "./seeds";
@@ -1220,5 +1222,46 @@ assert.equal(sidepiecePlays.length, 18);
 assert.equal(sidepiecePlays[0]?.provenance, "1001tl");
 assert.equal(sidepiecePlays[0]?.artistName, "Bobby Shmurda");
 assert.equal(sidepiecePlays[8]?.trackTitle, "Can I Ride");
+
+assertSeedClocks(TL_STEVE_AOKI_TML_FRIENDSHIP_MIX_2026);
+assert.equal(TL_STEVE_AOKI_TML_FRIENDSHIP_MIX_2026.length, 27);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-hgbAN8NFNu0"],
+  TL_STEVE_AOKI_TML_FRIENDSHIP_MIX_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-tomorrowland-tomorrowland-friendship-mix-steve-aoki-august-2026"
+  ],
+  TL_STEVE_AOKI_TML_FRIENDSHIP_MIX_2026,
+);
+const aokiMix = tracklist1001RowsToPlays(TL_STEVE_AOKI_TML_FRIENDSHIP_MIX_2026);
+assert.equal(aokiMix.length, 27);
+assert.equal(aokiMix[0]?.provenance, "1001tl");
+assert.equal(aokiMix[0]?.timestamp, 10);
+assert.equal(aokiMix[0]?.trackTitle, "Pursuit Of Happiness");
+assert.equal(aokiMix[26]?.trackTitle, "Put It In Reverse");
+assert.equal(aokiMix[26]?.timestamp, 59 * 60 + 30);
+
+assertSeedClocks(TL_MARTEN_HORGER_TML_LIBRARY_WE1_2023);
+assert.equal(TL_MARTEN_HORGER_TML_LIBRARY_WE1_2023.length, 20);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-marten-horger-tomorrowland-mainstage-2023"],
+  TL_MARTEN_HORGER_TML_LIBRARY_WE1_2023,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "SC-https://soundcloud.com/marten-horger/tomorrowland-mainstage-2023"
+  ],
+  undefined,
+);
+const horgerLib = tracklist1001RowsToPlays(
+  TL_MARTEN_HORGER_TML_LIBRARY_WE1_2023,
+);
+assert.equal(horgerLib.length, 20);
+assert.equal(horgerLib[0]?.provenance, "1001tl");
+assert.equal(horgerLib[0]?.trackTitle, "The Calling");
+assert.equal(horgerLib[19]?.trackTitle, "You Don't");
+assert.equal(horgerLib[19]?.timestamp, 60 * 60 + 48);
 
 console.log("tracklists1001/seeds.test.ts ok");

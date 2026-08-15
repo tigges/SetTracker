@@ -58,4 +58,16 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     type: "festival",
     minDurationSec: 15 * 60,
   },
+  {
+    // Official Horger upload; 1001TL wired via
+    // sc-marten-horger-tomorrowland-mainstage-2023.
+    url: "https://soundcloud.com/marten-horger/tomorrowland-mainstage-2023",
+    primaryArtist: dj("Marten Horger", {
+      accent: "#ff7a45",
+      homeCity: "Berlin, DE",
+    }),
+    genre: "Bass House",
+    type: "festival",
+    minDurationSec: 15 * 60,
+  },
 ];
