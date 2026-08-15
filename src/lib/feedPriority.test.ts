@@ -7,6 +7,7 @@ import {
   compareFeedPriority,
   dedupeNearDuplicates,
   diversifyByArtist,
+  diversifyBySeries,
   idQualityTier,
   nearDuplicateKey,
   pickRadarPicks,
@@ -275,6 +276,21 @@ describe("feedPriority complete → Top 100 → festivals", () => {
     ]);
     assert.equal(kept.length, 1);
     assert.equal(kept[0]!.id, "a");
+  });
+
+  it("caps cards per series host", () => {
+    const out = diversifyBySeries(
+      [
+        { id: "1", seriesName: "Gentlemen's Groove" },
+        { id: "2", seriesName: "Gentlemen's Groove" },
+        { id: "3", seriesName: "Night Owl Radio" },
+      ],
+      1,
+    );
+    assert.deepEqual(
+      out.map((s) => s.id),
+      ["1", "3"],
+    );
   });
 
   it("caps cards per artist", () => {
