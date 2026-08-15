@@ -23,10 +23,12 @@ import {
 import {
   fingerprintRowsToPlays,
   mergeFingerprintPlays,
+  parseClockToSec,
   type FingerprintSeedRow,
 } from "../fingerprint/seeds";
 import { hashRawSetContent } from "../hash";
 import { parseDescriptionTracklist } from "../soundcloud/parseTracklist";
+import { pickYoutubeThumbnail } from "../../thumbs/youtubeThumb";
 import {
   playsFrom1001Urls,
   playsFromDescription1001Links,
@@ -43,6 +45,7 @@ import {
   type YoutubeArtistChannel,
 } from "./artists";
 import {
+  extractVideoId,
   fetchChannelShelfDiscovery,
   fetchChannelVideoIdsDeep,
   fetchPlaylistVideoIds,
@@ -207,9 +210,70 @@ function relatedSeedIds(related: YtRelatedVideo[], limit: number): string[] {
   return out;
 }
 
+function lastSeedClockSec(rows: FingerprintSeedRow[] | undefined): number {
+  if (!rows?.length) return 0;
+  let last = 0;
+  for (const row of rows) {
+    const sec = parseClockToSec(row.at);
+    if (sec != null && sec > last) last = sec;
+  }
+  return last;
+}
+
+/**
+ * CI datacenter IPs often get YouTube watch HTTP 429 (no Data API key).
+ * Curated seeds already have title + 1001/fingerprint cues — land the set
+ * from those instead of dropping the page.
+ */
+export function watchMetaFromCuratedSeed(
+  src: YoutubeSetSource,
+): YtWatchMeta | null {
+  const videoId = extractVideoId(src.video);
+  const title = src.title?.trim();
+  if (!videoId || !title) return null;
+  const slugSeed = TRACKLIST_1001_BY_SOURCE_SLUG[`yt-${videoId}`.slice(0, 120)];
+  const lastCue = Math.max(
+    lastSeedClockSec(src.tracklist1001),
+    lastSeedClockSec(src.fingerprintPlays),
+    lastSeedClockSec(slugSeed),
+  );
+  const durationSec = lastCue > 0 ? lastCue + 180 : 60 * 60;
+  return {
+    videoId,
+    title,
+    channel: src.primaryArtist.name,
+    channelId: null,
+    channelHandle: null,
+    durationSec,
+    description: src.tracklist1001Url ?? "",
+    publishedAt: null,
+    musicCredits: [],
+    relatedVideos: [],
+    watchUrl: `https://www.youtube.com/watch?v=${videoId}`,
+    imageUrl: pickYoutubeThumbnail(videoId, []),
+  };
+}
+
+function extendDurationFromPlays(durationSec: number, plays: RawPlay[]): number {
+  const last = plays.reduce((max, p) => Math.max(max, p.timestamp || 0), 0);
+  return last > 0 ? Math.max(durationSec, last + 180) : durationSec;
+}
+
 async function curatedToHit(src: YoutubeSetSource): Promise<YtHit | null> {
-  const meta = await fetchWatchMeta(src.video);
-  const durationSec = meta.durationSec;
+  let meta: YtWatchMeta;
+  try {
+    meta = await fetchWatchMeta(src.video);
+  } catch (err) {
+    const fallback = watchMetaFromCuratedSeed(src);
+    if (!fallback) throw err;
+    console.warn(
+      `[youtube] watch failed for ${src.video}: ${
+        err instanceof Error ? err.message : err
+      } — used curated seed fallback`,
+    );
+    meta = fallback;
+  }
+  let durationSec = meta.durationSec;
   if (durationSec < 10 * 60) {
     console.warn(
       `[youtube] skip ${meta.videoId}: duration ${durationSec}s too short`,
@@ -230,6 +294,7 @@ async function curatedToHit(src: YoutubeSetSource): Promise<YtHit | null> {
       fingerprintRowsToPlays(src.fingerprintPlays),
     );
   }
+  durationSec = extendDurationFromPlays(durationSec, plays);
   const title = (src.title || meta.title).trim();
   const sourceSlug = `yt-${meta.videoId}`.slice(0, 120);
   const { primary, collaborators } = artistsForSet(title, src.primaryArtist);
