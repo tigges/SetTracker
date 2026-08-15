@@ -26,7 +26,9 @@ describe("curatedLabels", () => {
     assert.ok(CURATED_LABEL_SLUGS.has("steel-city-dance-discs"));
     assert.ok(CURATED_LABEL_SLUGS.has("soulfuric-trax"));
     assert.ok(CURATED_LABEL_SLUGS.has("you-me-records"));
+    assert.ok(CURATED_LABEL_SLUGS.has("dim-mak"));
     assert.equal(slugify("You&Me Records"), "you-me-records");
+    assert.equal(slugify("Dim Mak"), "dim-mak");
   });
 
   it("skips major-label noise from the chart dump", () => {

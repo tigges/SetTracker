@@ -9,6 +9,15 @@ assert.equal(
 assert.ok(
   labelSocials("STEREOHYPE").soundcloud?.includes("stereohypeglobal"),
 );
+assert.equal(labelSocials("Dim Mak").website, "https://www.dimmak.com/");
+assert.equal(
+  labelSocials("dim-mak").soundcloud,
+  "https://soundcloud.com/dimmakrecords",
+);
+assert.equal(
+  labelSocials("Dim Mak").instagram,
+  "https://www.instagram.com/dimmak/",
+);
 assert.ok(KNOWN_EVENTS.stereohype.instagram?.includes("stereohype"));
 
 console.log("events.stereohype.test.ts ok");
