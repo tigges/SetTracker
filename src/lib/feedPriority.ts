@@ -283,18 +283,32 @@ export function pickRadarPicks<T extends RadarPickFields>(
 }
 
 /** Collapse "Friendship Mix" festival + mix dupes from the same DJ. */
+const MONTH =
+  /\b(jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|jun(?:e)?|jul(?:y)?|aug(?:ust)?|sep(?:t(?:ember)?)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)\b/g;
+
 export function nearDuplicateKey(
   title: string,
   djSlug?: string | null,
 ): string {
-  const t = title
+  const slug = (djSlug || "").toLowerCase();
+  const artist = slug.replace(/-/g, " ").trim();
+  let t = title
     .toLowerCase()
     .replace(/\[[^\]]*]/g, " ")
     .replace(/\b20\d{2}\b/g, " ")
     .replace(/\bwe\s*[12]\b/g, " ")
-    .replace(/[^a-z0-9]+/g, " ")
+    .replace(MONTH, " ")
+    .replace(/[^a-z0-9]+/g, " ");
+  if (artist) {
+    t = t.replace(new RegExp(`\\b${artist.replace(/\s+/g, "\\s+")}\\b`, "g"), " ");
+  }
+  t = t
+    .replace(/\b(with|ft|feat|featuring)\b/g, " ")
+    .replace(/\b\d{1,2}\b/g, " ")
+    .replace(/\s+/g, " ")
     .trim();
-  return `${(djSlug || "").toLowerCase()}|${t}`;
+  const words = t.split(" ").filter(Boolean).sort().join(" ");
+  return `${slug}|${words}`;
 }
 
 export function dedupeNearDuplicates<

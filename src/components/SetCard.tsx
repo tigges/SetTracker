@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import { EntityThumb } from "@/components/EntityThumb";
 import { StatusBar } from "@/components/StatusBits";
@@ -50,12 +49,11 @@ export function SetCard({ set }: { set: FeedItem }) {
       <div className="flex items-start gap-3">
         <div className="relative flex-none">
           <EntityThumb
-            src={thumbFailed ? null : thumb}
+            src={thumb}
             label={headline}
             accent={accent}
             size={48}
             radius={12}
-            onImageError={() => setThumbFailed(true)}
           />
           <span
             className="absolute -bottom-1 -right-1 grid h-5 w-5 place-items-center rounded-md border border-line bg-bg text-[10px] text-muted"

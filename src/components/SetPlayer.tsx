@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSetListen } from "@/components/SetListen";
 import { resolvePlaybackTarget } from "@/lib/playback";
 
@@ -24,11 +24,9 @@ export function SetPlayer({
     startSec,
     autoplay: seeking,
   });
-  const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    if (seeking) setOpen(true);
-  }, [seeking, seekNonce]);
+  const [userOpen, setUserOpen] = useState(false);
+  const [dismissedNonce, setDismissedNonce] = useState(0);
+  const open = userOpen || (seeking && seekNonce !== dismissedNonce);
 
   if (!target) return null;
 
@@ -37,7 +35,14 @@ export function SetPlayer({
       <div className="flex flex-wrap items-center gap-2 px-3 py-2.5">
         <button
           type="button"
-          onClick={() => setOpen((v) => !v)}
+          onClick={() => {
+            if (open) {
+              setUserOpen(false);
+              setDismissedNonce(seekNonce);
+            } else {
+              setUserOpen(true);
+            }
+          }}
           className="inline-flex items-center gap-2 rounded-full border border-line px-3 py-1 text-[12px] font-medium text-ink transition-colors hover:border-[color:var(--muted2)]"
         >
           <span aria-hidden>{open ? "▾" : "▶"}</span>
