@@ -14,6 +14,7 @@
 
 import type { PrismaClient } from "@prisma/client";
 import {
+  extraArtistsFromCombinedName,
   isJunkArtistName,
   isMonthYearArtistName,
   sanitizeArtistName,
@@ -418,6 +419,23 @@ export async function mergeSetTitleDjs(
     });
     for (const { setId } of links) {
       await relinkSetPrimary(prisma, setId, canonicalId, dj.id);
+      for (const extra of extraArtistsFromCombinedName(dj.name)) {
+        const extraName = sanitizeArtistName(extra) ?? extra.trim();
+        const extraSlug = canonicalDjSlug(slugify(extraName));
+        if (!extraSlug || extraSlug === target.slug || isBrandHostSlug(extraSlug)) {
+          continue;
+        }
+        const extraDj = await ensureDj(prisma, extraSlug, extraName);
+        if (extraDj.created) ensured += 1;
+        const existing = await prisma.setArtist.findUnique({
+          where: { setId_djId: { setId, djId: extraDj.id } },
+        });
+        if (!existing) {
+          await prisma.setArtist.create({
+            data: { setId, djId: extraDj.id, isPrimary: false },
+          });
+        }
+      }
       setsRelinked += 1;
     }
 

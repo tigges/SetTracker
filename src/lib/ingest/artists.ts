@@ -5,7 +5,10 @@
  * `atomicActs` so they stay one credit — not Walker b2b Royce.
  */
 
-import { isMonthYearArtistName } from "../artistName";
+import {
+  isMonthYearArtistName,
+  looksLikeShowSeriesPrefix,
+} from "../artistName";
 import { shieldAtomicActs } from "./atomicActs";
 import { slugify, type RawArtist } from "./types";
 
@@ -19,6 +22,7 @@ function normalizeCollabSeparators(input: string): string {
     .replace(/\s+b2b\.?\s+/gi, " b2b ")
     .replace(/\s+vs\.?\s+/gi, " b2b ")
     .replace(/\s+x\s+/gi, " b2b ")
+    .replace(/\s+and\s+/gi, " b2b ")
     .replace(/\s+[&+]\s+/g, " b2b ")
     .replace(/\s+feat\.?\s+/gi, " feat ")
     .replace(/\s+ft\.?\s+/gi, " feat ")
@@ -80,7 +84,8 @@ export function looksLikeEventOrSeriesCredit(name: string): boolean {
     /\bpresents\b/i.test(n) ||
     /\bvirtual\s+festival\b/i.test(n) ||
     /\btomorrowland\b/i.test(n) ||
-    /\blive\s*$/i.test(n)
+    /\blive\s*$/i.test(n) ||
+    looksLikeShowSeriesPrefix(n)
   );
 }
 
@@ -114,11 +119,14 @@ export function performingCreditFromTitle(title: string): string {
     .replace(/[⠶✦★☆●◆]/g, " ")
     .replace(/\s+/g, " ")
     .trim();
-  // Tomorrowland Friendship Mix with Sara Landry - July, 2026
+  // "Full Moon with Timmy Trumpet" / "Group Therapy 674 with Above & Beyond…"
+  // Also covers Tomorrowland Friendship Mix with Sara Landry - July, 2026
   let m = cleaned.match(
-    /\bfriendship\s+mix\s+with\s+(.+?)(?:\s*[-–—|,]|\s+july|\s+june|\s+may|\s+april|\s+august|\s*$)/i,
+    /^(.+?)\s+with\s+(.+?)(?:\s*[-–—|,]|\s+july|\s+june|\s+may|\s+april|\s+august|\s*$)/i,
   );
-  if (m?.[1]) return tidyPerformingCredit(m[1]!);
+  if (m?.[1] && m[2] && looksLikeShowSeriesPrefix(m[1].trim())) {
+    return tidyPerformingCredit(m[2]!);
+  }
   // Hardwell presents Euphoria - July, 2026
   m = cleaned.match(/^(.+?)\s+presents\b/i);
   if (m?.[1] && !looksLikeEventOrSeriesCredit(m[1]!)) {
@@ -261,7 +269,7 @@ export function splitArtistsFromSetTitle(
 function hasCollabToken(credit: string): boolean {
   // Ignore `&` inside shielded duo names (Walker & Royce, …).
   const { text } = shieldAtomicActs(credit);
-  return /\b(b2b|vs\.?|feat\.?|ft\.?|mixed\s+by)\b|\sx\s|[&+]/i.test(text);
+  return /\b(b2b|vs\.?|feat\.?|ft\.?|mixed\s+by|and)\b|\sx\s|[&+]/i.test(text);
 }
 
 /** "Brand Mixed By A & B [#001]" → guest mixer names. */

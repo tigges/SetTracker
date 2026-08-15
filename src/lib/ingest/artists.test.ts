@@ -172,4 +172,29 @@ assert.notEqual(
   "June, 2026",
 );
 
+assert.equal(
+  performingCreditFromTitle("Full Moon with Timmy Trumpet"),
+  "Timmy Trumpet",
+);
+assert.equal(
+  performingCreditFromTitle(
+    "Group Therapy 674 with Above & Beyond and Max Graham",
+  ),
+  "Above & Beyond and Max Graham",
+);
+
+const gt = splitArtistsFromSetTitle(
+  "Group Therapy 674 with Above & Beyond and Max Graham",
+);
+assert.equal(gt.primary.name, "Above & Beyond");
+assert.equal(gt.primary.slug, "above-beyond");
+assert.deepEqual(
+  gt.collaborators.map((c) => c.name),
+  ["Max Graham"],
+);
+
+const moon = splitArtistsFromSetTitle("Full Moon with Timmy Trumpet");
+assert.equal(moon.primary.name, "Timmy Trumpet");
+assert.equal(moon.collaborators.length, 0);
+
 console.log("artists.test.ts ok");

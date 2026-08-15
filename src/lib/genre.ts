@@ -38,6 +38,7 @@ export const CANONICAL_GENRES = [
   "Nu-Disco",
   "Melodic Bass",
   "Melodic Dubstep",
+  "Gqom",
 ] as const;
 
 export type CanonicalGenre = (typeof CANONICAL_GENRES)[number];
@@ -119,6 +120,8 @@ const SYNONYMS: Record<string, CanonicalGenre> = {
   "nu-disco": "Nu-Disco",
   "melodic bass": "Melodic Bass",
   "melodic dubstep": "Melodic Dubstep",
+  gqom: "Gqom",
+  "gqom house": "Gqom",
   // Vague / marketing → nearest music genre
   dance: "House",
   edm: "House",

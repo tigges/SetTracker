@@ -71,7 +71,7 @@ export const GENRE_FAMILIES: readonly GenreFamily[] = [
   {
     id: "other",
     label: "Other",
-    members: ["Hip Hop", "Nu-Disco", "Big Room"],
+    members: ["Hip Hop", "Nu-Disco", "Big Room", "Gqom"],
   },
 ] as const;
 

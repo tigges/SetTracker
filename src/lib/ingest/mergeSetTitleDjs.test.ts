@@ -76,4 +76,25 @@ describe("resolveCanonicalFromSetTitleDj", () => {
       null,
     );
   });
+
+  it("folds show-with-guest DJ names onto the performing artist", () => {
+    assert.deepEqual(
+      resolveCanonicalFromSetTitleDj(
+        "Full Moon with Timmy Trumpet",
+        "full-moon-with-timmy-trumpet",
+      ),
+      { slug: "timmy-trumpet", name: "Timmy Trumpet" },
+    );
+    assert.deepEqual(
+      resolveCanonicalFromSetTitleDj(
+        "Group Therapy 674 with Above & Beyond and Max Graham",
+        "group-therapy-674-with-above-beyond-and-max-graham",
+      ),
+      { slug: "above-beyond", name: "Above & Beyond" },
+    );
+    assert.deepEqual(
+      resolveCanonicalFromSetTitleDj("Goodboys Present", "goodboys-present"),
+      { slug: "goodboys", name: "Goodboys" },
+    );
+  });
 });

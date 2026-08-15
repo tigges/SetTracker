@@ -1,5 +1,9 @@
 import assert from "node:assert/strict";
-import { isJunkArtistName, sanitizeArtistName } from "./artistName";
+import {
+  extraArtistsFromCombinedName,
+  isJunkArtistName,
+  sanitizeArtistName,
+} from "./artistName";
 
 assert.equal(
   sanitizeArtistName("view artist details for Dead X"),
@@ -73,5 +77,46 @@ assert.equal(sanitizeArtistName("David Guetta WE2"), "David Guetta");
 assert.equal(sanitizeArtistName("Fisher Mainstage WE1"), "Fisher");
 assert.equal(sanitizeArtistName("June, 2026"), null);
 assert.equal(sanitizeArtistName("July, 2026"), null);
+
+assert.equal(isJunkArtistName("Full Moon with Timmy Trumpet"), true);
+assert.equal(isJunkArtistName("Timmy Trumpet"), false);
+assert.equal(
+  isJunkArtistName(
+    "Group Therapy 674 with Above & Beyond and Max Graham",
+  ),
+  true,
+);
+assert.equal(isJunkArtistName("Above & Beyond"), false);
+assert.equal(isJunkArtistName("Max Graham"), false);
+assert.equal(isJunkArtistName("Goodboys Present"), true);
+assert.equal(isJunkArtistName("Goodboys"), false);
+assert.equal(isJunkArtistName("Ginger)"), true);
+assert.equal(isJunkArtistName("Gaydio Mixes"), true);
+assert.equal(isJunkArtistName("Gqom"), true);
+
+assert.equal(
+  sanitizeArtistName("Full Moon with Timmy Trumpet"),
+  "Timmy Trumpet",
+);
+assert.equal(
+  sanitizeArtistName(
+    "Group Therapy 674 with Above & Beyond and Max Graham",
+  ),
+  "Above & Beyond",
+);
+assert.equal(sanitizeArtistName("Goodboys Present"), "Goodboys");
+assert.equal(sanitizeArtistName("Ginger)"), "Ginger");
+assert.equal(sanitizeArtistName("Gaydio Mixes"), null);
+assert.equal(sanitizeArtistName("Gqom"), null);
+assert.deepEqual(
+  extraArtistsFromCombinedName(
+    "Group Therapy 674 with Above & Beyond and Max Graham",
+  ),
+  ["Max Graham"],
+);
+assert.deepEqual(
+  extraArtistsFromCombinedName("Full Moon with Timmy Trumpet"),
+  [],
+);
 
 console.log("artistName.test.ts ok");
