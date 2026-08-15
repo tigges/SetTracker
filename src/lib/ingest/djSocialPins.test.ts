@@ -161,6 +161,73 @@ for (const [slug, sc, yt] of offRoster13) {
   assert.match(bySlug[slug]!.youtube!, yt);
 }
 
+// Top 100 IG harvest — official-site / YouTube About only (section 1).
+const igHarvest = [
+  ["martin-garrix", /instagram\.com\/martingarrix/],
+  ["timmy-trumpet", /instagram\.com\/timmytrumpet/],
+  ["peggy-gou", /instagram\.com\/peggygou_/],
+  ["don-diablo", /instagram\.com\/dondiablo/],
+  ["hardwell", /instagram\.com\/hardwell/],
+  ["calvin-harris", /instagram\.com\/calvinharris/],
+  ["w-w", /instagram\.com\/wandwmusic/],
+  ["tiesto", /instagram\.com\/tiesto/],
+  ["reinier-zonneveld", /instagram\.com\/reinierzonneveld/],
+  ["kshmr", /instagram\.com\/kshmr/],
+  ["alan-walker", /instagram\.com\/alanwalkermusic/],
+  ["jamie-jones", /instagram\.com\/jamiejonesmusic/],
+  ["r3hab", /instagram\.com\/r3hab/],
+  ["nicky-romero", /instagram\.com\/nickyromero/],
+  ["claptone", /instagram\.com\/claptone\.official/],
+  ["vini-vici", /instagram\.com\/vinivicimusic/],
+  ["eric-prydz", /instagram\.com\/ericprydz/],
+  ["paul-van-dyk", /instagram\.com\/paulvandyk/],
+  ["marshmello", /instagram\.com\/marshmello/],
+  ["the-martinez-brothers", /instagram\.com\/themartinezbros/],
+  ["zedd", /instagram\.com\/zedd/],
+  ["bassjackers", /instagram\.com\/bassjackers/],
+  ["john-summit", /instagram\.com\/johnsummit/],
+  ["michael-bibi", /instagram\.com\/michael_bibi_/],
+  ["boris-brejcha", /instagram\.com\/borisbrejcha/],
+  ["korolova", /instagram\.com\/korolova\.dj/],
+  ["alesso", /instagram\.com\/alesso/],
+  ["hugel", /instagram\.com\/hugelthug/],
+  ["mochakk", /instagram\.com\/mochakk/],
+  ["nora-en-pure", /instagram\.com\/noraenpure/],
+  ["kolsch", /instagram\.com\/kolschofficial/],
+  ["lucas-steve", /instagram\.com\/lucasandsteve/],
+  ["the-chainsmokers", /instagram\.com\/thechainsmokers/],
+  ["mike-williams", /instagram\.com\/mikewilliams/],
+  ["kaaze", /instagram\.com\/iamkaaze/],
+  ["burak-yeter", /instagram\.com\/burakyeter/],
+  ["chris-stussy", /instagram\.com\/chrisstussydj/],
+  ["deadmau5", /instagram\.com\/deadmau5/],
+  ["wukong", /instagram\.com\/wukongmusic/],
+  ["fedde-le-grand", /instagram\.com\/feddelegrand/],
+  ["ferry-corsten", /instagram\.com\/ferrycorsten/],
+  ["plastik-funk", /instagram\.com\/plastikfunk/],
+  ["b-jones", /instagram\.com\/bjonesdj/],
+  ["giuseppe-ottaviani", /instagram\.com\/giuseppeottaviani/],
+  ["cuebrick", /instagram\.com\/cuebrick_dj/],
+  ["fantasm", /instagram\.com\/fantasm_techno/],
+  ["faustix", /instagram\.com\/faustix/],
+  ["honey-dijon", /instagram\.com\/honeydijon/],
+  ["topic", /instagram\.com\/topic/],
+  ["marlon-hoffstadt", /instagram\.com\/marlonhoffstadt/],
+] as const;
+for (const [slug, ig] of igHarvest) {
+  assert.ok(bySlug[slug], `missing pin ${slug}`);
+  assert.match(bySlug[slug]!.instagram!, ig);
+}
+assert.match(bySlug["john-summit"]!.website, /johnsummitmusic\.com/);
+assert.match(bySlug["john-summit"]!.twitter!, /johnsummit/);
+assert.match(bySlug["alan-walker"]!.website, /alanwalker\.com/);
+assert.match(bySlug.kshmr!.website, /welcometokshmr\.com/);
+assert.match(bySlug.claptone!.website, /claptone\.com/);
+assert.match(bySlug.alesso!.website, /alessoworld\.com/);
+assert.match(bySlug["michael-bibi"]!.website, /michaelbibi\.com/);
+assert.match(bySlug["boris-brejcha"]!.website, /borisbrejcha\.de/);
+assert.equal(bySlug["steve-aoki"]!.instagram, null);
+
 assert.ok(bySlug["1788-l"], "missing pin 1788-l");
 assert.equal(bySlug["1788-l"]!.name, "1788-L");
 assert.equal(bySlug["1788-l"]!.soundcloud, null);
