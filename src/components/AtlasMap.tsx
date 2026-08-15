@@ -19,13 +19,13 @@ import {
   atlasPinClass,
   chartKicker,
   filterAtlasPins,
+  ATLAS_INITIAL_VIEW,
+  atlasViewBox,
   flyToSpan,
   type AtlasFilter,
   type AtlasPin,
   type AtlasTypeFilter,
 } from "@/lib/atlas/mapMath";
-
-const INITIAL_VIEW = { cx: 500, cy: 430, span: 900 };
 
 type View = { cx: number; cy: number; span: number };
 
@@ -113,7 +113,7 @@ export function AtlasMap({
   pins: AtlasPin[];
 }) {
   const svgRef = useRef<SVGSVGElement>(null);
-  const viewRef = useRef<View>({ ...INITIAL_VIEW });
+  const viewRef = useRef<View>({ ...ATLAS_INITIAL_VIEW });
   const flewHash = useRef(false);
   const hash = useSyncExternalStore(subscribeHash, getHash, getServerHash);
   const urlQ = useSyncExternalStore(subscribeSearch, getSearchQ, getServerSearchQ);
@@ -172,14 +172,8 @@ export function AtlasMap({
 
     function applyView() {
       const { w, h } = size();
-      view.span = Math.max(2.2, Math.min(1400, view.span));
-      const spanY = view.span * (h / w);
-      const vb = [
-        view.cx - view.span / 2,
-        view.cy - spanY / 2,
-        view.span,
-        spanY,
-      ];
+      const vb = atlasViewBox(view, w, h);
+      view.span = vb[2];
       if (vb.every(Number.isFinite)) {
         svg!.setAttribute("viewBox", vb.map((n) => n.toFixed(2)).join(" "));
       }
@@ -311,7 +305,7 @@ export function AtlasMap({
   }
 
   function resetView() {
-    Object.assign(viewRef.current, INITIAL_VIEW);
+    Object.assign(viewRef.current, ATLAS_INITIAL_VIEW);
     (svgRef.current as SvgWithView | null)?.__applyView?.();
     setFilter((f) => ({ type: "all", q: f.q, country: "", city: "" }));
     setClickedId(null);
@@ -383,8 +377,8 @@ export function AtlasMap({
         </div>
       </div>
 
-      <div className="atlas-stage relative overflow-hidden bg-panel lg:mx-5 lg:mb-5 lg:grid lg:min-h-[min(70vh,720px)] lg:grid-cols-[minmax(240px,300px)_1fr] lg:rounded-xl lg:border lg:border-line">
-        <div className="relative order-1 h-[calc(100dvh-4rem)] min-h-[320px] bg-[#07090d] lg:order-2 lg:h-auto lg:min-h-[min(70vh,720px)]">
+      <div className="atlas-stage relative overflow-hidden bg-panel lg:mx-5 lg:mb-5 lg:grid lg:h-[min(70vh,720px)] lg:grid-cols-[minmax(240px,300px)_minmax(0,1fr)] lg:rounded-xl lg:border lg:border-line">
+        <div className="relative order-1 h-[calc(100dvh-4rem)] min-h-[320px] bg-[#07090d] lg:order-2 lg:h-full lg:min-h-0">
           <h1 className="pointer-events-none absolute top-3 left-1/2 z-10 -translate-x-1/2 text-[13px] font-semibold text-ink/90 lg:hidden">
             Top 100 Atlas
           </h1>
@@ -491,9 +485,9 @@ export function AtlasMap({
         </div>
 
         <aside
-          className={`z-20 flex min-h-0 flex-col border-line bg-panel lg:order-1 lg:border-r ${
+          className={`z-20 flex min-h-0 flex-col border-line bg-panel lg:order-1 lg:h-full lg:border-r ${
             listOpen
-              ? "absolute inset-x-0 bottom-0 max-h-[55dvh] rounded-t-xl border-t shadow-lg shadow-black/40 lg:static lg:max-h-none lg:rounded-none lg:border-t-0 lg:shadow-none"
+              ? "absolute inset-x-0 bottom-0 max-h-[55dvh] rounded-t-xl border-t shadow-lg shadow-black/40 lg:static lg:max-h-full lg:rounded-none lg:border-t-0 lg:shadow-none"
               : "hidden lg:flex"
           }`}
         >
