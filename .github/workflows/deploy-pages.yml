@@ -109,8 +109,9 @@ jobs:
             exit 1
           fi
 
-      # Curated ingest is the expensive "detection" (12–33 min of YT/SC/1001).
-      # Skip it unless a seed/adapter/roster file changed, or ingest=force.
+      # Curated ingest is the expensive "detection" (YT/SC watch + thumbs).
+      # 1001 live HTML is never fetched here (Cloudflare). Seeds only.
+      # Skip ingest unless a seed/adapter/roster file changed, or ingest=force.
       - name: Decide curated ingest
         id: need_ingest
         env:
@@ -141,6 +142,7 @@ jobs:
 
       # Light curated ingest so new sample sets land without catalog-deep:
       # YouTube watch-list + SoundCloud playlists (e.g. Lift Sets / Dom Dolla Live).
+      # Do not set INGEST_ALLOW_1001_FETCH — CI cannot read 1001tracklists.com.
       - name: Ingest curated YouTube + SoundCloud playlists
         if: steps.need_ingest.outputs.run == '1'
         env:

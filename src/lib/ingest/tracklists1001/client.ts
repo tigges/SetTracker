@@ -1,12 +1,21 @@
 /**
  * Follow 1001.tl / 1001tracklists.com links from set descriptions.
  *
- * Live HTML is often Cloudflare-gated from datacenter IPs — callers should
- * fall back to curated seeds when this returns [].
+ * Live HTML is Cloudflare-gated from GitHub Actions / Cursor / most
+ * datacenter IPs. Default: do not fetch. Apply committed browser-capture
+ * seeds instead (`tracklists1001/`). Opt in on a human laptop with
+ * `INGEST_ALLOW_1001_FETCH=1`.
  */
 
 import { extract1001Urls, parse1001TracklistHtml } from "./parse";
 import type { RawPlay } from "../types";
+
+/** Live 1001 GET — off unless an operator explicitly opts in. */
+export function allow1001LiveFetch(): boolean {
+  return process.env.INGEST_ALLOW_1001_FETCH === "1";
+}
+
+let skipLogged = false;
 
 const UA =
   "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36";
@@ -56,6 +65,15 @@ export async function playsFrom1001Urls(
   durationSec: number,
 ): Promise<RawPlay[]> {
   if (!urls.length) return [];
+  if (!allow1001LiveFetch()) {
+    if (!skipLogged) {
+      skipLogged = true;
+      console.log(
+        "[1001tl] skip live fetch — use scripts/capture-1001tl.console.js; set INGEST_ALLOW_1001_FETCH=1 to enable",
+      );
+    }
+    return [];
+  }
   let best: RawPlay[] = [];
   for (const url of urls.slice(0, 3)) {
     try {
