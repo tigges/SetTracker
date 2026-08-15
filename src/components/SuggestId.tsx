@@ -3,10 +3,9 @@
 import { useState } from "react";
 
 /**
- * Minimal community ID wedge for the static site:
- * - Collect a suggested artist/title for an unresolved/unparsed row
- * - Open a prefilled GitHub issue for maintainers
- * - Show a resolutions.json snippet to paste into data/resolutions.json
+ * Community ID wedge for the static site:
+ * copy a resolutions.json snippet (no GitHub account required),
+ * or email it. Optional GitHub issue for maintainers who already have one.
  *
  * Applied resolutions are merged at ingest/build time (see applyResolutions).
  */
@@ -24,14 +23,30 @@ export function SuggestIdButton({
   const [open, setOpen] = useState(false);
   const [artist, setArtist] = useState("");
   const [title, setTitle] = useState("");
+  const [copied, setCopied] = useState(false);
 
+  const ready = Boolean(artist.trim() && title.trim());
   const snippet = {
     setSlug,
     position,
     trackTitle: title.trim(),
     artistName: artist.trim(),
-    suggestedBy: "github-issue",
+    suggestedBy: "suggest-id",
   };
+  const snippetText = JSON.stringify(snippet, null, 2);
+  const mailBody = [
+    `Set: ${setSlug}`,
+    `Position: ${position}`,
+    `Timestamp: ${timestamp}s`,
+    `Current row: ${currentLabel}`,
+    `Suggested: ${artist.trim()} – ${title.trim()}`,
+    ``,
+    `resolutions.json entry:`,
+    snippetText,
+  ].join("\n");
+  const mailUrl = `mailto:?subject=${encodeURIComponent(
+    `setradar ID: ${setSlug} #${position}`,
+  )}&body=${encodeURIComponent(mailBody)}`;
 
   const issueUrl = (() => {
     const q = new URLSearchParams();
@@ -52,14 +67,23 @@ export function SuggestIdButton({
         ``,
         `### resolutions.json entry`,
         "```json",
-        JSON.stringify(snippet, null, 2),
+        snippetText,
         "```",
-        ``,
-        `Paste into \`data/resolutions.json\` and redeploy to apply.`,
       ].join("\n"),
     );
     return `https://github.com/tigges/SetTracker/issues/new?${q.toString()}`;
   })();
+
+  async function copySnippet() {
+    if (!ready) return;
+    try {
+      await navigator.clipboard.writeText(snippetText);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1600);
+    } catch {
+      setCopied(false);
+    }
+  }
 
   return (
     <div className="relative flex-none" onClick={(e) => e.stopPropagation()}>
@@ -95,26 +119,48 @@ export function SuggestIdButton({
               placeholder="Rampage"
             />
           </label>
-          <div className="flex items-center gap-1.5">
-            <a
-              href={artist.trim() && title.trim() ? issueUrl : undefined}
-              target="_blank"
-              rel="noreferrer"
-              aria-disabled={!artist.trim() || !title.trim()}
-              className={`flex-1 rounded-md px-2 py-1 text-center text-[11px] font-semibold ${
-                artist.trim() && title.trim()
+          <div className="flex flex-col gap-1.5">
+            <button
+              type="button"
+              disabled={!ready}
+              onClick={() => void copySnippet()}
+              className={`rounded-md px-2 py-1 text-center text-[11px] font-semibold ${
+                ready
                   ? "bg-brand text-bg hover:opacity-90"
                   : "cursor-not-allowed bg-linesoft text-muted2"
               }`}
+            >
+              {copied ? "Copied" : "Copy suggestion"}
+            </button>
+            <a
+              href={ready ? mailUrl : undefined}
+              aria-disabled={!ready}
+              className={`rounded-md border border-line px-2 py-1 text-center text-[11px] ${
+                ready ? "text-ink hover:border-brand" : "pointer-events-none text-muted2"
+              }`}
               onClick={(e) => {
-                if (!artist.trim() || !title.trim()) e.preventDefault();
+                if (!ready) e.preventDefault();
               }}
             >
-              Open issue
+              Email suggestion
+            </a>
+            <a
+              href={ready ? issueUrl : undefined}
+              target="_blank"
+              rel="noreferrer"
+              aria-disabled={!ready}
+              className={`text-center text-[10px] ${
+                ready ? "text-muted2 hover:text-ink" : "pointer-events-none text-muted2"
+              }`}
+              onClick={(e) => {
+                if (!ready) e.preventDefault();
+              }}
+            >
+              Or open a GitHub issue
             </a>
             <button
               type="button"
-              className="rounded-md border border-line px-2 py-1 text-[11px] text-muted hover:text-ink"
+              className="text-[10px] text-muted hover:text-ink"
               onClick={() => setOpen(false)}
             >
               Close

@@ -11,6 +11,7 @@ import {
   isStrongIdentifiedPlay,
   watchUrlForSlug,
 } from "@/lib/ingest/nextCaptures";
+import { curated1001UrlBySourceSlug } from "@/lib/ingest/youtube/videos";
 import { assessSetDensity } from "@/lib/setDensity";
 
 export type CaptureQueue = {
@@ -19,10 +20,11 @@ export type CaptureQueue = {
 };
 
 export async function getCaptureQueue(
-  limit = 12,
+  limit = 20,
   extra: CapturePreset[] = [],
 ): Promise<CaptureQueue> {
   const top100 = loadDjMagTop100RankBySlug();
+  const known1001 = curated1001UrlBySourceSlug();
   const nowMs = Date.now();
 
   const sets = await prisma.set.findMany({
@@ -83,6 +85,7 @@ export async function getCaptureQueue(
         playCount,
       }).severity,
       watchUrl: watchUrlForSlug(s.slug, s.playbackUrl),
+      tracklistUrl: known1001[s.slug],
     };
   });
 

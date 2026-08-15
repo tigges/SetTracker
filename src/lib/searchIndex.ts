@@ -2,6 +2,7 @@ import { prisma } from "@/lib/db";
 import { atlasVenueBySlug } from "@/lib/atlas/seed";
 import { normalizeGenre } from "@/lib/genre";
 import { getDjList } from "@/lib/queries";
+import { nearDuplicateKey } from "@/lib/feedPriority";
 import { isBrowseReadySet } from "@/lib/setBrowse";
 import { displayCity } from "@/lib/displayCity";
 import { ensureTrackSlugs } from "@/lib/tracks/ensureSlugs";
@@ -31,7 +32,7 @@ export async function getSearchIndex(): Promise<SearchIndexItem[]> {
         artists: {
           where: { isPrimary: true },
           take: 1,
-          include: { dj: { select: { name: true, imageUrl: true } } },
+          include: { dj: { select: { name: true, slug: true, imageUrl: true } } },
         },
         _count: { select: { plays: true } },
       },
@@ -91,6 +92,7 @@ export async function getSearchIndex(): Promise<SearchIndexItem[]> {
     },
   ];
 
+  const seenSetKeys = new Set<string>();
   for (const s of sets) {
     const primary = s.artists[0]?.dj;
     if (
@@ -105,6 +107,9 @@ export async function getSearchIndex(): Promise<SearchIndexItem[]> {
     ) {
       continue;
     }
+    const dupeKey = nearDuplicateKey(s.title, primary?.slug);
+    if (seenSetKeys.has(dupeKey)) continue;
+    seenSetKeys.add(dupeKey);
     const dj = primary?.name;
     const genre = normalizeGenre(s.genre);
     items.push({

@@ -13,6 +13,7 @@ import {
 import { setMatchesGenreFilter } from "@/lib/genreFamilies";
 import {
   festivalSeasonSets,
+  isCompleteTracklist,
   popularDjsThisWeek,
   popularSetsThisWeek,
   popularVenuesThisWeek,
@@ -30,11 +31,12 @@ function within7Days(d: Date | string): boolean {
 
 /** Chart / complete / festival-linked sets for the Radar pool. */
 function isRadarCandidate(s: FeedItem): boolean {
+  if (!isCompleteTracklist(s)) return false;
   return (
-    s.densitySeverity === "ok" ||
     s.top100Rank != null ||
     s.festivalRank != null ||
-    s.clubRank != null
+    s.clubRank != null ||
+    s.densitySeverity === "ok"
   );
 }
 
@@ -82,7 +84,9 @@ export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }
     deepRemaining,
   } = useMemo(() => {
     const weekAll = diversifyByArtist(
-      filtered.filter((s) => within7Days(s.publishedAt)).sort(compareFeedPriority),
+      filtered
+        .filter((s) => isCompleteTracklist(s) && within7Days(s.publishedAt))
+        .sort(compareFeedPriority),
       2,
     );
     const newWeek = weekAll.slice(0, CLUSTER);

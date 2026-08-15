@@ -111,23 +111,30 @@ export function Capture1001Client({
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-lg font-extrabold tracking-tight">2. YouTube → 1001 → capture</h2>
+        <h2 className="text-lg font-extrabold tracking-tight">2. Open 1001 → capture</h2>
         <ol className="list-decimal space-y-2 pl-5 text-[14px] text-muted">
           <li>
-            Open the official YouTube set (<span className="text-ink">Open YT</span>).
+            Confirm the official set is already on setradar (
+            <span className="text-ink">Open YT</span> /{" "}
+            <span className="text-ink">Open SC</span>).
           </li>
           <li>
-            Find its 1001 page (description link, or{" "}
-            <span className="text-ink">Find 1001</span>).
+            Open the known 1001 page (<span className="text-ink">Open 1001</span>
+            ) or search (<span className="text-ink">Find 1001</span>).
           </li>
           <li>
-            On the 1001 page, tap{" "}
-            <span className="text-ink">setradar 1001 capture</span> (or the
-            preset <span className="text-ink">Copy capture</span> bookmark).
+            On that 1001 page, run the bookmarklet or paste{" "}
+            <span className="mono text-[12px] text-ink">
+              scripts/capture-1001tl.console.js
+            </span>{" "}
+            in DevTools.
           </li>
           <li>
-            Overlay → <span className="text-ink">Copy seed</span> → paste into
-            setradar chat.
+            Overlay → <span className="text-ink">Copy seed</span> → commit under{" "}
+            <span className="mono text-[12px] text-ink">
+              src/lib/ingest/tracklists1001/
+            </span>
+            .
           </li>
         </ol>
       </section>
@@ -137,9 +144,9 @@ export function Capture1001Client({
           Next {presets.length} captures
         </h2>
         <p className="text-[14px] text-muted">
-          Ranked at site build from the live catalog: recent festivals, Top 100
-          DJs, and thin or empty sets that still lack a 1001 capture. Official
-          Relives first. Already-wired slugs drop off automatically.
+          Workbench only — YT/SC already in the catalog, 1001 seed still
+          missing. Official Relives and known 1001 URLs first. Wired slugs drop
+          off automatically. CI never fetches 1001.
         </p>
         {generatedAt ? (
           <p className="mono text-[11px] text-muted2">

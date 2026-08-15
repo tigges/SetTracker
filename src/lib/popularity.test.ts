@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import {
+  festivalSeasonSets,
   popularDjsThisWeek,
   popularSetsThisWeek,
   popularVenuesThisWeek,
@@ -245,6 +246,38 @@ describe("popularity rails", () => {
     ];
     const venues = popularVenuesThisWeek(feed, 9);
     assert.equal(venues[0]?.slug, "tomorrowland");
+  });
+
+  it("keeps thin tracklists off popular and festival rails", () => {
+    const now = Date.parse("2026-07-30T12:00:00Z");
+    const feed = [
+      item({
+        id: "thin",
+        slug: "thin",
+        densitySeverity: "severe",
+        top100Rank: 1,
+        eventSlug: "tomorrowland",
+        editionEndsAt: new Date("2026-07-26T23:59:59Z"),
+        publishedAt: new Date("2026-07-28"),
+        type: "festival",
+      }),
+      item({
+        id: "ok",
+        slug: "ok",
+        densitySeverity: "ok",
+        top100Rank: 8,
+        eventSlug: "tomorrowland",
+        editionEndsAt: new Date("2026-07-26T23:59:59Z"),
+        publishedAt: new Date("2026-07-28"),
+        type: "festival",
+      }),
+    ];
+    const popular = popularSetsThisWeek(feed, 9, now);
+    assert.ok(popular.some((s) => s.id === "ok"));
+    assert.ok(!popular.some((s) => s.id === "thin"));
+    const season = festivalSeasonSets(feed, 9, now);
+    assert.ok(season.some((s) => s.id === "ok"));
+    assert.ok(!season.some((s) => s.id === "thin"));
   });
 
   it("includes venues from the 28-day window", () => {

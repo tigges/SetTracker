@@ -82,13 +82,15 @@ function placeLine(p: AtlasPin): string {
   return p.setCount ? `${place} · ${p.setCount} sets` : place;
 }
 
-function cardCaveat(p: AtlasPin): string {
+function cardMeta(p: AtlasPin): string {
+  const rank = chartKicker(p.kind, p.rank, p.year);
   if (p.kind === "dj") {
-    return [p.note, !p.nomap && p.prec === "country" ? "Country-level pin" : null]
-      .filter(Boolean)
-      .join(" · ");
+    const sets = p.setCount ? `${p.setCount} sets` : "no sets yet";
+    return `${rank} · ${sets}`;
   }
-  return p.approx ? "Approximate pin — no fixed venue" : "";
+  const yoy = p.change ? `${p.change} vs ${p.year - 1}` : null;
+  const sets = p.setCount ? `${p.setCount} sets` : "no sets yet";
+  return [rank, yoy, sets].filter(Boolean).join(" · ");
 }
 
 export function AtlasMap({
@@ -578,34 +580,14 @@ export function AtlasMap({
                   }
                 />
                 <div className="min-w-0 flex-1">
-                  <p className="eyebrow" style={{ color: atlasAccent(selected.kind) }}>
-                    {chartKicker(selected.kind, selected.rank, selected.year)}
-                  </p>
-                  <h2 className="mt-0.5 truncate text-[16px] font-semibold text-ink">
+                  <h2 className="truncate text-[16px] font-semibold text-ink">
                     {selected.name}
                   </h2>
-                  <p className="truncate text-[12px] text-muted">
-                    {selected.kind === "dj" && selected.src
-                      ? `From: ${selected.src}`
-                      : selected.loc}
+                  <p className="mt-0.5 text-[12px] text-muted">
+                    {cardMeta(selected)}
                   </p>
-                  <p className="mt-1 text-[12px] text-muted2">
-                    {selected.kind === "dj"
-                      ? selected.setCount
-                        ? `${selected.setCount} sets`
-                        : "no sets yet"
-                      : `${selected.change} vs ${selected.year - 1}${
-                          selected.approx ? " · approximate pin" : ""
-                        }${
-                          selected.setCount
-                            ? ` · ${selected.setCount} sets`
-                            : " · no sets yet"
-                        }`}
-                  </p>
-                  {cardCaveat(selected) ? (
-                    <p className="mt-1 text-[11px] text-muted2">
-                      {cardCaveat(selected)}
-                    </p>
+                  {selected.loc ? (
+                    <p className="truncate text-[12px] text-muted2">{selected.loc}</p>
                   ) : null}
                   {selected.href ? (
                     <Link
@@ -616,7 +598,7 @@ export function AtlasMap({
                     </Link>
                   ) : (
                     <p className="mt-2 text-[12px] text-muted2">
-                      Not in the catalog yet — appears after a deep ingest.
+                      Not in the catalog yet.
                     </p>
                   )}
                 </div>

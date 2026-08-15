@@ -20,7 +20,7 @@ export default async function Capture1001Page() {
   let presets: CapturePreset[] = extras.slice(0, 12);
   let generatedAt = String(nextCaptures.generatedAt ?? "");
   try {
-    const queue = await getCaptureQueue(12, extras);
+    const queue = await getCaptureQueue(20, extras);
     if (queue.presets.length) {
       presets = queue.presets;
       generatedAt = queue.generatedAt;
@@ -39,9 +39,14 @@ export default async function Capture1001Page() {
           Capture 1001 on mobile
         </h1>
         <p className="text-[15px] text-muted">
-          Start from the official YouTube or SoundCloud set, find its
-          1001Tracklists page, then run the bookmarklet to copy a timed seed
-          and paste it into chat.
+          YouTube and SoundCloud are already ingested. 1001Tracklists blocks
+          CI — capture timed cues here in a browser, then commit the seed.
+          Prefer rows marked <span className="text-ink">1001 URL known</span>:
+          open that page, run the bookmarklet (or paste{" "}
+          <span className="mono text-[12px]">
+            scripts/capture-1001tl.console.js
+          </span>
+          ), copy the seed.
         </p>
       </header>
       <Capture1001Client presets={presets} generatedAt={generatedAt} />

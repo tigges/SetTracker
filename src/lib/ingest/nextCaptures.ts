@@ -184,6 +184,8 @@ export type CaptureNeedRow = {
   festivalSeason: boolean;
   density: DensitySeverity;
   watchUrl?: string;
+  /** Known 1001 page from a curated YT seed (not yet captured as a seed). */
+  tracklistUrl?: string;
 };
 
 export function captureHost(
@@ -264,12 +266,15 @@ export function scoreCaptureNeed(row: CaptureNeedRow, nowMs = Date.now()): numbe
 }
 
 export function captureReason(row: CaptureNeedRow): string {
-  if (row.festivalSeason) return "festival-season";
-  if (row.density === "severe") return "density:severe";
-  if (row.density === "thin") return "density:thin";
-  if (row.top100Rank != null && row.top100Rank <= 20) return "top20-gap";
-  if (row.isFestival) return "festival-gap";
-  return "catalog-gap";
+  if (row.tracklistUrl && row.plays1001 < 12) {
+    return "YT/SC in · 1001 URL known · no seed";
+  }
+  if (row.festivalSeason) return "festival season · find 1001";
+  if (row.density === "severe") return "thin tracklist · capture 1001";
+  if (row.density === "thin") return "thin tracklist · capture 1001";
+  if (row.top100Rank != null && row.top100Rank <= 20) return "Top 20 · no 1001 seed";
+  if (row.isFestival) return "festival · no 1001 seed";
+  return "catalog gap · no 1001 seed";
 }
 
 export function presetFromNeed(row: CaptureNeedRow): CapturePreset {
@@ -282,6 +287,7 @@ export function presetFromNeed(row: CaptureNeedRow): CapturePreset {
       row.primaryDj || row.title,
       row.title.replace(/\|/g, " ").slice(0, 50),
     ),
+    tracklistUrl: row.tracklistUrl,
     reason: captureReason(row),
     watchUrl: row.watchUrl || watchUrlForSlug(row.slug),
     host,
@@ -293,7 +299,7 @@ export function buildCaptureQueueFromNeeds(
   rows: CaptureNeedRow[],
   opts: { limit?: number; extra?: CapturePreset[]; nowMs?: number } = {},
 ): CapturePreset[] {
-  const limit = opts.limit ?? 12;
+  const limit = opts.limit ?? 20;
   const mapped = mappedSlugs();
   const nowMs = opts.nowMs ?? Date.now();
   const seen = new Set<string>();

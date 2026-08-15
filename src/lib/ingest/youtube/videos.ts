@@ -1991,3 +1991,19 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     eventName: "Sacré Paris",
   },
 ];
+
+/** Known 1001 pages on curated YT seeds — for the operator capture queue. */
+export function curated1001UrlBySourceSlug(): Record<string, string> {
+  const out: Record<string, string> = {};
+  for (const src of YOUTUBE_SETS) {
+    if (!src.tracklist1001Url) continue;
+    let id: string | null = null;
+    try {
+      id = new URL(src.video).searchParams.get("v");
+    } catch {
+      id = null;
+    }
+    if (id) out[`yt-${id}`.slice(0, 120)] = src.tracklist1001Url;
+  }
+  return out;
+}

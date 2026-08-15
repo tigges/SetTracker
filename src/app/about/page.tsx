@@ -52,8 +52,10 @@ export default function AboutPage() {
 
       <h2 className="mt-10 text-lg font-bold tracking-tight">Suggest an ID</h2>
       <p className="mt-3 text-[14px] leading-relaxed text-muted">
-        On unresolved or unparsed rows, Suggest ID opens a GitHub issue with a
-        snippet for maintainers. Approved entries land on the next ingest.
+        On unresolved or unparsed rows, Suggest ID copies a snippet you can
+        email — no GitHub account required. Maintainers paste it into{" "}
+        <span className="mono text-[12px]">data/resolutions.json</span> and the
+        next ingest applies it.
       </p>
 
       <p className="mt-10 text-[14px] text-muted">
