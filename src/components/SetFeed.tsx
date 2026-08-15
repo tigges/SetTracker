@@ -8,12 +8,15 @@ import {
   compareFeedPriority,
   dedupeNearDuplicates,
   diversifyByArtist,
+  diversifyBySeries,
   pickRadarPicks,
 } from "@/lib/feedPriority";
 import { setMatchesGenreFilter } from "@/lib/genreFamilies";
 import {
   festivalSeasonSets,
   isCompleteTracklist,
+  isFestivalStorySet,
+  MIN_RAIL_SHOW,
   popularDjsThisWeek,
   popularSetsThisWeek,
   popularVenuesThisWeek,
@@ -85,21 +88,28 @@ export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }
   } = useMemo(() => {
     const weekAll = diversifyByArtist(
       filtered
-        .filter((s) => isCompleteTracklist(s) && within7Days(s.publishedAt))
+        .filter(
+          (s) =>
+            isCompleteTracklist(s) &&
+            within7Days(s.publishedAt) &&
+            !isFestivalStorySet(s),
+        )
         .sort(compareFeedPriority),
       2,
     );
     const newWeek = weekAll.slice(0, CLUSTER);
     const used = new Set(newWeek.map((s) => s.id));
 
-    const festivalSeason = festivalSeasonSets(filtered, CLUSTER).filter(
+    let festivalSeason = festivalSeasonSets(filtered, CLUSTER).filter(
       (s) => !used.has(s.id),
     );
+    if (festivalSeason.length < MIN_RAIL_SHOW) festivalSeason = [];
     for (const s of festivalSeason) used.add(s.id);
 
-    const popularWeek = popularSetsThisWeek(filtered, CLUSTER).filter(
+    let popularWeek = popularSetsThisWeek(filtered, CLUSTER).filter(
       (s) => !used.has(s.id),
     );
+    if (popularWeek.length < MIN_RAIL_SHOW) popularWeek = [];
     for (const s of popularWeek) used.add(s.id);
 
     const popularDjs = popularDjsThisWeek(filtered, CLUSTER);
@@ -116,8 +126,11 @@ export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }
     const radarPicks = pickRadarPicks(pool, CLUSTER);
     for (const s of radarPicks) used.add(s.id);
 
-    const deepAll = diversifyByArtist(
-      filtered.filter((s) => !used.has(s.id)).sort(compareFeedPriority),
+    const deepAll = diversifyBySeries(
+      diversifyByArtist(
+        filtered.filter((s) => !used.has(s.id)).sort(compareFeedPriority),
+        1,
+      ),
       1,
     );
     const deepShown = deepAll.slice(0, visible);
@@ -157,7 +170,12 @@ export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }
           {popularWeek.length > 0 && (
             <Section title="Popular sets" sets={popularWeek} />
           )}
-          <PopularRails djs={popularDjs} venues={popularVenues} />
+          <PopularRails
+            djs={popularDjs.length >= MIN_RAIL_SHOW ? popularDjs : []}
+            venues={
+              popularVenues.length >= MIN_RAIL_SHOW ? popularVenues : []
+            }
+          />
           {radarPicks.length > 0 && (
             <Section title="Radar picks" sets={radarPicks} />
           )}

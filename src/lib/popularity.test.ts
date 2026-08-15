@@ -2,6 +2,8 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import {
   festivalSeasonSets,
+  isFestivalStorySet,
+  MIN_RAIL_SHOW,
   popularDjsThisWeek,
   popularSetsThisWeek,
   popularVenuesThisWeek,
@@ -18,6 +20,8 @@ function item(partial: Partial<FeedItem> & { id: string; slug: string }): FeedIt
     publishedAt: new Date(now - 2 * 24 * 60 * 60 * 1000),
     durationSec: 3600,
     sourceName: "test",
+    sourceUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    playbackUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
     cover: "#fff",
     imageUrl: "https://example.com/a.jpg",
     eventName: null,
@@ -278,6 +282,29 @@ describe("popularity rails", () => {
     const season = festivalSeasonSets(feed, 9, now);
     assert.ok(season.some((s) => s.id === "ok"));
     assert.ok(!season.some((s) => s.id === "thin"));
+  });
+
+  it("treats recent festival Relives as festival-story, not new-week", () => {
+    const now = Date.parse("2026-07-30T12:00:00Z");
+    const fest = item({
+      id: "tl",
+      slug: "tl",
+      eventSlug: "tomorrowland",
+      editionEndsAt: new Date("2026-07-26T23:59:59Z"),
+      publishedAt: new Date("2026-07-28"),
+      type: "festival",
+    });
+    const radio = item({
+      id: "radio",
+      slug: "radio",
+      type: "radio",
+      eventSlug: null,
+      editionEndsAt: null,
+      venueTier: "radio",
+    });
+    assert.equal(isFestivalStorySet(fest, now), true);
+    assert.equal(isFestivalStorySet(radio, now), false);
+    assert.equal(MIN_RAIL_SHOW, 3);
   });
 
   it("includes venues from the 28-day window", () => {

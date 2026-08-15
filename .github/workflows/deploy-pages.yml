@@ -3,9 +3,9 @@ name: Deploy to GitHub Pages
 # Single deployer: the ONLY workflow that builds + publishes Pages.
 # Producers (catalog-deep, catalog-enrich) save the DB cache then dispatch this
 # workflow — they no longer build/deploy themselves.
-# Push = restore cached catalog → apply pins → static export. Curated
-# YouTube/SoundCloud ingest runs only when catalog source files changed
-# (or ingest=force). Dispatch from deep/enrich never re-polls.
+# Push = restore cached catalog → apply pins → static export. Never
+# re-polls YouTube/SoundCloud on push (catalog-deep does). ingest=force
+# is the only Pages crawl. Dispatch from deep/enrich never re-polls.
 # Deep catalog refresh lives in catalog-deep.yml (separate concurrency group).
 on:
   push:
@@ -111,7 +111,7 @@ jobs:
 
       # Curated ingest is the expensive "detection" (YT/SC watch + thumbs).
       # 1001 live HTML is never fetched here (Cloudflare). Seeds only.
-      # Skip ingest unless a seed/adapter/roster file changed, or ingest=force.
+      # Push / dispatch never ingest. Only ingest=force re-polls.
       - name: Decide curated ingest
         id: need_ingest
         env:

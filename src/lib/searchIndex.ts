@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/db";
+import { atlasSearchItems } from "@/lib/atlas/searchItems";
 import { atlasVenueBySlug } from "@/lib/atlas/seed";
 import { normalizeGenre } from "@/lib/genre";
 import { getDjList } from "@/lib/queries";
@@ -8,7 +9,7 @@ import { displayCity } from "@/lib/displayCity";
 import { ensureTrackSlugs } from "@/lib/tracks/ensureSlugs";
 
 export type SearchIndexItem = {
-  kind: "set" | "dj" | "venue" | "label" | "track";
+  kind: "set" | "dj" | "venue" | "label" | "track" | "atlas";
   title: string;
   subtitle?: string | null;
   href: string;
@@ -84,12 +85,13 @@ export async function getSearchIndex(): Promise<SearchIndexItem[]> {
 
   const items: SearchIndexItem[] = [
     {
-      kind: "venue",
+      kind: "atlas",
       title: "Top 100 Atlas",
       subtitle: "DJ Mag clubs & festivals 2026, DJs 2025",
       href: "/atlas",
       keywords: "map dj mag top 100 clubs festivals djs atlas",
     },
+    ...atlasSearchItems(),
   ];
 
   const seenSetKeys = new Set<string>();

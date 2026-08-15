@@ -329,12 +329,28 @@ export function dedupeNearDuplicates<
 export function diversifyByArtist<
   T extends { id: string; primaryDjSlug?: string | null },
 >(items: T[], maxPerDj = 1): T[] {
+  return diversifyByKey(items, (s) => s.primaryDjSlug, maxPerDj);
+}
+
+/** Cap repeating series hosts (e.g. Gentlemen's Groove) in Deep catalog. */
+export function diversifyBySeries<
+  T extends { id: string; seriesName?: string | null },
+>(items: T[], maxPerSeries = 1): T[] {
+  return diversifyByKey(items, (s) => s.seriesName, maxPerSeries);
+}
+
+function diversifyByKey<T extends { id: string }>(
+  items: T[],
+  keyOf: (item: T) => string | null | undefined,
+  maxPer: number,
+): T[] {
   const counts = new Map<string, number>();
   const out: T[] = [];
   for (const s of items) {
-    const key = (s.primaryDjSlug || "").trim() || `id:${s.id}`;
+    const raw = (keyOf(s) || "").trim();
+    const key = raw || `id:${s.id}`;
     const n = counts.get(key) ?? 0;
-    if (n >= maxPerDj) continue;
+    if (n >= maxPer) continue;
     counts.set(key, n + 1);
     out.push(s);
   }
