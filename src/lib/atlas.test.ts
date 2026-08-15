@@ -1,15 +1,18 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import {
+  ATLAS_INITIAL_VIEW,
   atlasAccent,
   atlasCities,
   atlasCountries,
   atlasPinClass,
+  atlasViewBox,
   chartKicker,
   filterAtlasPins,
   flyToSpan,
   projectMercator,
   spreadCoincidentPins,
+  viewBoxContains,
   type AtlasPin,
 } from "./atlas/mapMath";
 import {
@@ -265,6 +268,19 @@ describe("DJ Mag 2025 atlas DJs", () => {
     assert.equal(keys.size, nl.length, "Dutch DJs must not share one pixel");
     assert.equal(flyToSpan({ kind: "dj", prec: "country", nomap: false }), 240);
     assert.equal(flyToSpan({ kind: "festival", prec: null, nomap: false }), 80);
+  });
+
+  it("default world view keeps land and Top 100 pins in a desktop pane", () => {
+    const vb = atlasViewBox(ATLAS_INITIAL_VIEW, 900, 560);
+    assert.deepEqual(
+      vb.map((n) => Math.round(n)),
+      [50, 150, 900, 560],
+    );
+    const boom = projectMercator(4.37, 51.09);
+    const split = projectMercator(16.44, 43.51);
+    assert.ok(viewBoxContains(vb, boom.x, boom.y), "Tomorrowland in default frame");
+    assert.ok(viewBoxContains(vb, split.x, split.y), "Ultra Europe in default frame");
+    assert.ok(viewBoxContains(vb, 500, 430), "frame center is on the land path");
   });
 });
 

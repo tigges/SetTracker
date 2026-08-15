@@ -42,6 +42,30 @@ export type AtlasFilter = {
   city: string;
 };
 
+/** Default world frame (SVG units). Must stay near the 0..1000 land path. */
+export const ATLAS_INITIAL_VIEW = { cx: 500, cy: 430, span: 900 };
+
+/** ViewBox `[x, y, w, h]` for a pane size. Span is width; height follows aspect. */
+export function atlasViewBox(
+  view: { cx: number; cy: number; span: number },
+  width: number,
+  height: number,
+): [number, number, number, number] {
+  const w = Math.max(1, width);
+  const h = Math.max(1, height);
+  const span = Math.max(2.2, Math.min(1400, view.span));
+  const spanY = span * (h / w);
+  return [view.cx - span / 2, view.cy - spanY / 2, span, spanY];
+}
+
+export function viewBoxContains(
+  vb: [number, number, number, number],
+  x: number,
+  y: number,
+): boolean {
+  return x >= vb[0] && x <= vb[0] + vb[2] && y >= vb[1] && y <= vb[1] + vb[3];
+}
+
 /** Web Mercator onto the 0..1000 land path used by WORLD_LAND_PATH. */
 export function projectMercator(
   lon: number,
