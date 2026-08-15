@@ -9,6 +9,7 @@ import { YOUTUBE_SETS } from "./videos";
 const ASOT = YOUTUBE_SETS.find((s) => s.video.includes("bxb6Tglooc4"));
 const MEN_MACHINE = YOUTUBE_SETS.find((s) => s.video.includes("NTLDGnoWIRg"));
 const AOKI = YOUTUBE_SETS.find((s) => s.video.includes("hgbAN8NFNu0"));
+const ARMIN_FREEDOM = YOUTUBE_SETS.find((s) => s.video.includes("pwXGm4HEQdo"));
 
 describe("watchMetaFromCuratedSeed", () => {
   it("builds ASOT 1290 meta from the curated 1001 capture", () => {
@@ -21,6 +22,17 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.match(meta.imageUrl, /bxb6Tglooc4/);
     // Last cue 1:57:45 + 180s pad.
     assert.equal(meta.durationSec, 1 * 3600 + 57 * 60 + 45 + 180);
+  });
+
+  it("builds Armin Freedom WE1 meta from the curated 1001 capture", () => {
+    assert.ok(ARMIN_FREEDOM);
+    const meta = watchMetaFromCuratedSeed(ARMIN_FREEDOM);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "pwXGm4HEQdo");
+    assert.match(meta.title, /Freedom WE1/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=pwXGm4HEQdo");
+    // Last cue 2:25:22 + 180s pad.
+    assert.equal(meta.durationSec, 2 * 3600 + 25 * 60 + 22 + 180);
   });
 
   it("returns null without a title or video id", () => {
@@ -91,5 +103,19 @@ describe("curated YouTube 429 fallback", () => {
     assert.ok(aoki.plays.length >= 20);
     assert.equal(men.primaryArtist?.slug, "men-machine");
     assert.equal(aoki.primaryArtist?.slug, "steve-aoki");
+  });
+
+  it("lands Armin Freedom WE1 from the 1001 seed when watch is 429", async () => {
+    assert.ok(ARMIN_FREEDOM);
+    const adapter = createYoutubeAdapter([ARMIN_FREEDOM], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-pwXGm4HEQdo");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 67);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 2 * 3600 + 25 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "armin-van-buuren");
+    assert.equal(sets[0]?.eventName, "Tomorrowland Belgium");
   });
 });

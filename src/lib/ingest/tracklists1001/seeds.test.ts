@@ -85,6 +85,7 @@ import {
   TL_MARTEN_HORGER_TML_LIBRARY_WE1_2023,
   TL_MEN_MACHINE_1001_EXCLUSIVE_2026,
   TL_ARMIN_OTTAVIANI_ASOT_1290_2026,
+  TL_ARMIN_VAN_BUUREN_TML_WE1_FREEDOM_2026,
   TL_STEVE_AOKI_TML_FRIENDSHIP_MIX_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   tracklist1001RowsToPlays,
@@ -1310,5 +1311,30 @@ assert.equal(asot1290[0]?.trackTitle, "Awake");
 assert.equal(asot1290[15]?.artistName, "Giuseppe Ottaviani & Ilan Bluestone");
 assert.equal(asot1290[40]?.trackTitle, "Lazer Beams (Adam Beyer & Massano Remix)");
 assert.equal(asot1290[40]?.timestamp, 60 * 60 + 57 * 60 + 45);
+
+assertSeedClocks(TL_ARMIN_VAN_BUUREN_TML_WE1_FREEDOM_2026);
+assert.equal(TL_ARMIN_VAN_BUUREN_TML_WE1_FREEDOM_2026.length, 67);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-pwXGm4HEQdo"],
+  TL_ARMIN_VAN_BUUREN_TML_WE1_FREEDOM_2026,
+);
+const arminFreedom = tracklist1001RowsToPlays(
+  TL_ARMIN_VAN_BUUREN_TML_WE1_FREEDOM_2026,
+);
+assert.equal(arminFreedom.length, 67);
+assert.equal(arminFreedom[0]?.provenance, "1001tl");
+assert.equal(arminFreedom[0]?.timestamp, 12);
+assert.equal(
+  arminFreedom[0]?.trackTitle,
+  "No Mercy vs. The Age Of Love (Armin van Buuren Mashup)",
+);
+assert.equal(arminFreedom[66]?.trackTitle, "Set Me Free (VIP Mix)");
+assert.equal(arminFreedom[66]?.timestamp, 2 * 3600 + 25 * 60 + 22);
+for (let i = 1; i < arminFreedom.length; i++) {
+  assert.ok(
+    (arminFreedom[i]!.timestamp ?? 0) > (arminFreedom[i - 1]!.timestamp ?? 0),
+    `clocks must increase at index ${i}`,
+  );
+}
 
 console.log("tracklists1001/seeds.test.ts ok");
