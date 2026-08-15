@@ -1,7 +1,7 @@
 /**
- * Fast Pages deploys should not re-poll YouTube / SoundCloud unless a
- * curated catalog source actually changed. Pins, remaps, and UI ships
- * apply from the cached DB + verify-urls.
+ * Pages ship never polls. Catalog-deep crawls; enrich fingerprints.
+ * `ingest=force` is the only Pages re-poll. Path helpers stay so
+ * operators can see which files *would* have tripped the old auto path.
  */
 
 export type CuratedIngestMode = "auto" | "skip" | "force";
@@ -50,18 +50,15 @@ export function decideCuratedIngest(opts: {
     return { run: false, reason: "ingest=skip" };
   }
 
-  // catalog-deep / enrich / manual fast already have a current cached DB.
-  if (opts.eventName === "workflow_dispatch") {
+  // Ship is restore + export. Catalog-deep polls; enrich fingerprints.
+  // `ingest=force` is the only way a Pages job re-crawls.
+  if (opts.eventName === "workflow_dispatch" || opts.eventName === "push") {
     return {
       run: false,
-      reason: "workflow_dispatch uses cached catalog (no curated re-poll)",
-    };
-  }
-
-  if (opts.hasPreviousSha === false) {
-    return {
-      run: true,
-      reason: "no previous SHA; run curated ingest to be safe",
+      reason:
+        opts.eventName === "push"
+          ? "push ships cached catalog (catalog-deep polls)"
+          : "workflow_dispatch uses cached catalog (no curated re-poll)",
     };
   }
 

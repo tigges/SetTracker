@@ -66,14 +66,23 @@ const seedPush = decideCuratedIngest({
     "src/lib/ingest/tracklists1001/festival2026.ts",
   ],
 });
-assert.equal(seedPush.run, true);
-assert.match(seedPush.reason, /soundcloud\/tracks\.ts/);
+assert.equal(seedPush.run, false);
+assert.match(seedPush.reason, /cached catalog/);
 
 assert.equal(
   decideCuratedIngest({
     eventName: "push",
     changedFiles: [],
     hasPreviousSha: false,
+  }).run,
+  false,
+);
+
+assert.equal(
+  decideCuratedIngest({
+    eventName: "push",
+    mode: "force",
+    changedFiles: [],
   }).run,
   true,
 );
