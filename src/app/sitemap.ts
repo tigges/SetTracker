@@ -7,6 +7,9 @@ import {
 } from "@/lib/queries";
 import { SITE_URL } from "@/lib/site";
 
+// Required for `output: "export"` — Next compiles sitemap.ts to a GET route.
+export const dynamic = "force-static";
+
 function loc(path: string): string {
   return `${SITE_URL}${path}`;
 }
