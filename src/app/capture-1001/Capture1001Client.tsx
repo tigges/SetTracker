@@ -12,12 +12,17 @@ export type CapturePreset = {
   /** Known 1001 tracklist page (preferred over searchUrl when set). */
   tracklistUrl?: string;
   reason?: string;
+  watchUrl?: string;
+  host?: "youtube" | "soundcloud";
 };
 
-/** `yt-<videoId>` → watch URL (handles ids that start with `-`). */
-function youtubeFromSlug(slug: string): string {
-  const id = slug.startsWith("yt-") ? slug.slice(3) : slug;
-  return `https://www.youtube.com/watch?v=${id}`;
+/** Official playback for a catalog slug. */
+function watchFromPreset(p: CapturePreset): string {
+  if (p.watchUrl) return p.watchUrl;
+  if (p.slug.startsWith("yt-")) {
+    return `https://www.youtube.com/watch?v=${p.slug.slice(3)}`;
+  }
+  return "";
 }
 
 function bookmarkletFor(scriptBase: string, preset?: CapturePreset): string {
@@ -50,8 +55,10 @@ async function copyText(text: string): Promise<boolean> {
 
 export function Capture1001Client({
   presets,
+  generatedAt,
 }: {
   presets: CapturePreset[];
+  generatedAt?: string;
 }) {
   const scriptUrl = useMemo(() => {
     if (typeof window === "undefined") return LIVE_SCRIPT;
@@ -130,9 +137,15 @@ export function Capture1001Client({
           Next {presets.length} captures
         </h2>
         <p className="text-[14px] text-muted">
-          Auto-ranked from Street Parade gaps, Top100 thin/missing tracks, and
-          density-severe YouTube sets. Official YouTube first.
+          Ranked at site build from the live catalog: recent festivals, Top 100
+          DJs, and thin or empty sets that still lack a 1001 capture. Official
+          Relives first. Already-wired slugs drop off automatically.
         </p>
+        {generatedAt ? (
+          <p className="mono text-[11px] text-muted2">
+            Queue built {generatedAt.slice(0, 16).replace("T", " ")} UTC
+          </p>
+        ) : null}
         <ol className="divide-y divide-line border-y border-line">
           {presets.map((p, i) => (
             <li
@@ -150,14 +163,18 @@ export function Capture1001Client({
                 </div>
               </div>
               <div className="flex flex-wrap gap-2">
-                <a
-                  href={youtubeFromSlug(p.slug)}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="rounded-md bg-ink px-3 py-2 text-[13px] font-bold text-bg"
-                >
-                  Open YT
-                </a>
+                {watchFromPreset(p) ? (
+                  <a
+                    href={watchFromPreset(p)}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="rounded-md bg-ink px-3 py-2 text-[13px] font-bold text-bg"
+                  >
+                    {p.host === "soundcloud" || p.slug.startsWith("sc-")
+                      ? "Open SC"
+                      : "Open YT"}
+                  </a>
+                ) : null}
                 {p.tracklistUrl ? (
                   <a
                     href={p.tracklistUrl}

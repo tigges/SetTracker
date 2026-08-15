@@ -43,11 +43,22 @@ async function main() {
     live = null;
   }
 
-  const presets = buildNextCaptures({
+  const extra = live?.unwiredOfficial ?? [];
+  let presets = buildNextCaptures({
     cwd,
-    limit: 10,
-    extra: live?.unwiredOfficial ?? [],
+    limit: 12,
+    extra,
   });
+  try {
+    const { getCaptureQueue } = await import("../src/lib/captureQueue");
+    const liveQueue = await getCaptureQueue(12, extra);
+    if (liveQueue.presets.length) presets = liveQueue.presets;
+  } catch (err) {
+    console.warn(
+      "[next-captures] catalog queue unavailable, using offline reports:",
+      err instanceof Error ? err.message : err,
+    );
+  }
   const held = live ?? {
     ...buildHeldReliveWatch(),
     playlists: [],
