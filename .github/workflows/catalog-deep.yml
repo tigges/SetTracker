@@ -101,6 +101,7 @@ jobs:
 
       - name: Deep crawl (incremental)
         env:
+          # 1001 live HTML stays off (Cloudflare). Seeds + capture script only.
           INGEST_SKIP_VERIFY: "1"
           YOUTUBE_ARTIST_VIDEO_LIMIT: "30"
           YOUTUBE_ARTIST_VIDEO_LIMIT_HIGH: "60"

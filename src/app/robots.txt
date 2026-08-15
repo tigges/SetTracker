@@ -1,0 +1,6 @@
+User-Agent: *
+Allow: /
+Disallow: /capture-1001
+Disallow: /capture-1001/
+
+Sitemap: https://www.setradar.ai/sitemap.xml

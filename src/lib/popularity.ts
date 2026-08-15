@@ -40,6 +40,11 @@ function identifiedRatio(s: FeedItem): number {
   return (c.identified ?? 0) / total;
 }
 
+/** Spotlight rails hide incomplete parses; Deep catalog still lists them. */
+export function isCompleteTracklist(s: FeedItem): boolean {
+  return (s.densitySeverity ?? "ok") === "ok";
+}
+
 function toRadarFields(s: FeedItem): FeedItem & RadarPickFields {
   return {
     ...s,
@@ -58,6 +63,7 @@ function pickRecentSets(
   const pool = feed
     .filter(
       (s) =>
+        isCompleteTracklist(s) &&
         withinDays(s.publishedAt, lookbackDays, nowMs) &&
         !excludeIds?.has(s.id),
     )
@@ -289,17 +295,19 @@ export function festivalSeasonSets(
   nowMs = Date.now(),
 ): FeedItem[] {
   const pool = feed
-    .filter((s) =>
-      isFestivalSeasonSet(
-        {
-          eventSlug: s.eventSlug,
-          editionEndsAt: s.editionEndsAt,
-          publishedAt: s.publishedAt,
-          type: s.type,
-        },
-        21,
-        nowMs,
-      ),
+    .filter(
+      (s) =>
+        isCompleteTracklist(s) &&
+        isFestivalSeasonSet(
+          {
+            eventSlug: s.eventSlug,
+            editionEndsAt: s.editionEndsAt,
+            publishedAt: s.publishedAt,
+            type: s.type,
+          },
+          21,
+          nowMs,
+        ),
     )
     .map(toRadarFields);
   return pickRadarPicks(pool, limit, nowMs);
