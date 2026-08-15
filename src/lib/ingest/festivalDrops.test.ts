@@ -54,6 +54,20 @@ describe("festivalDrops", () => {
       ),
       true,
     );
+    assert.equal(
+      isFestivalSeasonSet(
+        {
+          eventSlug: "holy-ship",
+          editionEndsAt: new Date("2026-07-26T23:59:59Z"),
+          publishedAt: new Date("2019-01-10"),
+          type: "festival",
+        },
+        21,
+        now,
+      ),
+      false,
+      "old uploads stay out of Festival season even if editionEndsAt is current",
+    );
   });
 
   it("phase-boosts poll limits only in drop window", () => {

@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import { EntityThumb } from "@/components/EntityThumb";
 import { StatusBar } from "@/components/StatusBits";
@@ -31,10 +30,16 @@ export function SetCard({ set }: { set: FeedItem }) {
     eventImageUrl: set.eventImageUrl,
     primaryDjSlug: set.primaryDj?.slug,
   });
-  const [thumbFailed, setThumbFailed] = useState(false);
-
-  // No monogram tiles in the feed — hide until artwork resolves / loads.
-  if (!thumb || thumbFailed) return null;
+  const identified = set.statusCounts.identified ?? 0;
+  const unresolved = set.statusCounts.unresolved_id ?? 0;
+  const community = set.statusCounts.community_resolved ?? 0;
+  const statusHint = [
+    identified ? `${identified} ID` : null,
+    unresolved ? `${unresolved} ?` : null,
+    community ? `${community} ✓` : null,
+  ]
+    .filter(Boolean)
+    .join(" · ");
 
   return (
     <Link
@@ -49,7 +54,6 @@ export function SetCard({ set }: { set: FeedItem }) {
             accent={accent}
             size={48}
             radius={12}
-            onImageError={() => setThumbFailed(true)}
           />
           <span
             className="absolute -bottom-1 -right-1 grid h-5 w-5 place-items-center rounded-md border border-line bg-bg text-[10px] text-muted"
@@ -98,8 +102,14 @@ export function SetCard({ set }: { set: FeedItem }) {
 
       <div className="mt-auto space-y-2">
         <StatusBar counts={set.statusCounts} />
+        {statusHint ? (
+          <p className="sr-only">{statusHint}</p>
+        ) : null}
         <div className="flex items-center justify-between text-[12px] text-muted2">
-          <span className="mono">{set.trackCount} tracks</span>
+          <span className="mono" title={statusHint || undefined}>
+            {set.trackCount} tracks
+            {unresolved ? ` · ${unresolved}?` : ""}
+          </span>
           <span className="mono">{fmtDuration(set.durationSec)}</span>
           <span className="mono" title={fmtDate(set.publishedAt)}>
             {fmtRelative(set.publishedAt)}

@@ -1,6 +1,14 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { DjList } from "@/components/DjList";
 import { getDjList } from "@/lib/queries";
+import { pageMeta } from "@/lib/site";
+
+export const metadata: Metadata = pageMeta({
+  title: "DJs",
+  description: "Artists with a handle, a set, a tracklist, and artwork.",
+  path: "/djs",
+});
 
 export default async function DjsPage() {
   const djs = await getDjList();

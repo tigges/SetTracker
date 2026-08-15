@@ -20,7 +20,24 @@ export type SetBrowseSignals = {
   primaryDjName?: string | null | undefined;
   /** Primary DJ slug — brand hosts are allowed when host art exists. */
   primaryDjSlug?: string | null | undefined;
+  title?: string | null | undefined;
+  trackCount?: number | null | undefined;
+  durationSec?: number | null | undefined;
 };
+
+/** Album previews and unparsed shells — hide from browse / search / feed. */
+export function isEmptyOrPreviewSet(s: {
+  title?: string | null;
+  trackCount?: number | null;
+  durationSec?: number | null;
+}): boolean {
+  if (s.trackCount != null && s.trackCount <= 0) return true;
+  const title = s.title ?? "";
+  if (/\[preview\]|\(preview\)/i.test(title)) return true;
+  const dur = s.durationSec ?? 0;
+  if (/\bpreview\b/i.test(title) && dur > 0 && dur <= 12 * 60) return true;
+  return false;
+}
 
 /** Effective thumbnail used by SetCard (set cover, else DJ, else event). */
 export function setDisplayThumb(s: SetBrowseSignals): string | null {
@@ -41,5 +58,6 @@ export function isBrowseReadySet(s: SetBrowseSignals): boolean {
   ) {
     return false;
   }
+  if (isEmptyOrPreviewSet(s)) return false;
   return setDisplayThumb(s) != null;
 }

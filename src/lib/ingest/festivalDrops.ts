@@ -504,7 +504,10 @@ export function isFestivalSeasonSet(
     const end = new Date(s.editionEndsAt).getTime();
     if (Number.isFinite(end)) {
       const age = nowMs - end;
-      return age >= -2 * DAY_MS && age <= withinDays * DAY_MS;
+      const inWindow = age >= -2 * DAY_MS && age <= withinDays * DAY_MS;
+      if (!inWindow) return false;
+      // Don't promote archive uploads remapped onto this edition.
+      return nowMs - new Date(s.publishedAt).getTime() < 45 * DAY_MS;
     }
   }
   // Fallback without edition: festival-type + known brand + recent publish

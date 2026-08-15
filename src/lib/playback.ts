@@ -122,7 +122,11 @@ const HOST_LABEL: Record<PlaybackHost, string> = {
  */
 export function resolvePlaybackTarget(
   playbackUrl: string | null | undefined,
-  opts: { sourceUrl?: string | null } = {},
+  opts: {
+    sourceUrl?: string | null;
+    startSec?: number | null;
+    autoplay?: boolean;
+  } = {},
 ): PlaybackTarget | null {
   const url = playbackUrl?.trim();
   if (!url) return null;
@@ -135,9 +139,13 @@ export function resolvePlaybackTarget(
       url.includes("w.soundcloud.com") && opts.sourceUrl
         ? opts.sourceUrl
         : url;
+    const start = opts.startSec != null && opts.startSec > 0
+      ? `#t=${Math.floor(opts.startSec)}`
+      : "";
     const embedSrc =
-      `https://w.soundcloud.com/player/?url=${encodeURIComponent(page)}` +
-      `&color=%2300ff9c&auto_play=false&hide_related=true&show_comments=false` +
+      `https://w.soundcloud.com/player/?url=${encodeURIComponent(page + start)}` +
+      `&color=%2300ff9c&auto_play=${opts.autoplay ? "true" : "false"}` +
+      `&hide_related=true&show_comments=false` +
       `&show_user=true&show_reposts=false&show_teaser=false&visual=false`;
     return {
       host,
@@ -163,10 +171,15 @@ export function resolvePlaybackTarget(
   if (host === "youtube") {
     const id = youtubeId(url);
     if (!id) return null;
+    const start =
+      opts.startSec != null && opts.startSec > 0
+        ? `&start=${Math.floor(opts.startSec)}`
+        : "";
+    const autoplay = opts.autoplay ? "&autoplay=1" : "";
     return {
       host,
       label: HOST_LABEL[host],
-      embedSrc: `https://www.youtube.com/embed/${id}?rel=0`,
+      embedSrc: `https://www.youtube.com/embed/${id}?rel=0${start}${autoplay}`,
       openUrl: opts.sourceUrl || `https://www.youtube.com/watch?v=${id}`,
       embedHeight: 360,
     };

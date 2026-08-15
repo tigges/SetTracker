@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { AtlasMap } from "@/components/AtlasMap";
 import {
   atlasPins,
@@ -5,12 +6,14 @@ import {
   loadAtlasVenues,
 } from "@/lib/atlas/seed";
 import { getDjList, getVenues } from "@/lib/queries";
+import { pageMeta } from "@/lib/site";
 
-export const metadata = {
-  title: "Top 100 Atlas — setradar.ai",
+export const metadata: Metadata = pageMeta({
+  title: "Atlas",
   description:
     "DJ Mag Top 100 Clubs and Festivals 2026 plus Top 100 DJs 2025, mapped and linked to setradar.",
-};
+  path: "/atlas",
+});
 
 export default async function AtlasPage() {
   const [events, djs] = await Promise.all([getVenues(), getDjList()]);

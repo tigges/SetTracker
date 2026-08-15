@@ -6,6 +6,8 @@ import { PopularRails } from "@/components/PopularRails";
 import { SetCard } from "@/components/SetCard";
 import {
   compareFeedPriority,
+  dedupeNearDuplicates,
+  diversifyByArtist,
   pickRadarPicks,
 } from "@/lib/feedPriority";
 import { setMatchesGenreFilter } from "@/lib/genreFamilies";
@@ -62,7 +64,11 @@ export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }
   }
 
   const filtered = useMemo(() => {
-    return feed.filter((s) => setMatchesGenreFilter(s, genre));
+    return dedupeNearDuplicates(
+      feed
+        .filter((s) => setMatchesGenreFilter(s, genre))
+        .map((s) => ({ ...s, primaryDjSlug: s.primaryDj?.slug ?? null })),
+    );
   }, [feed, genre]);
 
   const {
@@ -75,9 +81,10 @@ export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }
     deepShown,
     deepRemaining,
   } = useMemo(() => {
-    const weekAll = filtered
-      .filter((s) => within7Days(s.publishedAt))
-      .sort(compareFeedPriority);
+    const weekAll = diversifyByArtist(
+      filtered.filter((s) => within7Days(s.publishedAt)).sort(compareFeedPriority),
+      2,
+    );
     const newWeek = weekAll.slice(0, CLUSTER);
     const used = new Set(newWeek.map((s) => s.id));
 
@@ -105,9 +112,10 @@ export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }
     const radarPicks = pickRadarPicks(pool, CLUSTER);
     for (const s of radarPicks) used.add(s.id);
 
-    const deepAll = filtered
-      .filter((s) => !used.has(s.id))
-      .sort(compareFeedPriority);
+    const deepAll = diversifyByArtist(
+      filtered.filter((s) => !used.has(s.id)).sort(compareFeedPriority),
+      1,
+    );
     const deepShown = deepAll.slice(0, visible);
     return {
       newWeek,

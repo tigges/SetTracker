@@ -1,14 +1,17 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getSetBySlug, getAllSetSlugs } from "@/lib/queries";
 import { EntityThumb } from "@/components/EntityThumb";
 import { SetExport } from "@/components/SetExport";
+import { SetListen } from "@/components/SetListen";
 import { SetPlayer } from "@/components/SetPlayer";
 import { SetTimeline } from "@/components/SetTimeline";
 import { StatusLegend } from "@/components/StatusBits";
 import { setHostHeadline } from "@/lib/brandHosts";
 import { detectPlaybackHost } from "@/lib/playback";
 import { assessSetDensity } from "@/lib/setDensity";
+import { pageMeta } from "@/lib/site";
 import { SET_TYPE_META, fmtDate, fmtDuration } from "@/lib/status";
 
 export async function generateStaticParams() {
@@ -16,6 +19,25 @@ export async function generateStaticParams() {
   // Next.js `output: "export"` errors if a dynamic route returns no params.
   if (slugs.length === 0) return [{ slug: "_placeholder" }];
   return slugs.map((slug) => ({ slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const set = await getSetBySlug(slug);
+  if (!set) return { title: "Set" };
+  const artists = set.artists.map((a) => a.name).join(" b2b ");
+  return pageMeta({
+    title: set.title,
+    description: [artists, set.event?.name, fmtDate(set.publishedAt), `${set.plays.length} tracks`]
+      .filter(Boolean)
+      .join(" · "),
+    path: `/sets/${set.slug}`,
+    image: set.imageUrl,
+  });
 }
 
 export default async function SetPage({
@@ -42,6 +64,7 @@ export default async function SetPage({
   });
 
   return (
+    <SetListen>
     <div>
       <Link
         href="/"
@@ -228,5 +251,6 @@ export default async function SetPage({
         setSourceUrl={set.sourceUrl}
       />
     </div>
+    </SetListen>
   );
 }

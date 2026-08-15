@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import { EntityThumb } from "@/components/EntityThumb";
+import { displayCity } from "@/lib/displayCity";
 import type { DjListItem } from "@/lib/queries";
 
 const FILTERS = [
@@ -175,7 +176,10 @@ export function DjList({ djs }: { djs: DjListItem[] }) {
                   {dj.name}
                 </div>
                 <div className="truncate text-[12px] text-muted2">
-                  {dj.homeCity ? `${dj.homeCity} · ` : ""}
+                  {(() => {
+                    const city = displayCity(dj.homeCity);
+                    return city ? `${city} · ` : "";
+                  })()}
                   {dj.setCount} {dj.setCount === 1 ? "set" : "sets"}
                   {" · "}
                   {handleBits(dj)}

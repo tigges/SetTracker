@@ -1,14 +1,32 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getAllLabelSlugs, getLabelBySlug } from "@/lib/queries";
 import { EntityThumb } from "@/components/EntityThumb";
 import { SocialLinks } from "@/components/SocialLinks";
+import { pageMeta } from "@/lib/site";
 import { SET_TYPE_META, fmtDate, fmtDuration, fmtRelative } from "@/lib/status";
 
 export async function generateStaticParams() {
   const slugs = await getAllLabelSlugs();
   if (slugs.length === 0) return [{ slug: "_placeholder" }];
   return slugs.map((slug) => ({ slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const label = await getLabelBySlug(slug);
+  if (!label) return { title: "Label" };
+  return pageMeta({
+    title: label.name,
+    description: `${label.trackCount} tracks · ${label.setCount} sets`,
+    path: `/labels/${label.slug}`,
+    image: label.imageUrl,
+  });
 }
 
 function Panel({
@@ -48,10 +66,10 @@ export default async function LabelPage({
   return (
     <div>
       <Link
-        href="/events#labels"
+        href="/labels"
         className="mono text-[12px] text-muted2 transition-colors hover:text-ink"
       >
-        ← Events · Labels
+        ← Labels
       </Link>
 
       <div

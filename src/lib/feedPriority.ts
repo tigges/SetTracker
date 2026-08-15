@@ -281,3 +281,62 @@ export function pickRadarPicks<T extends RadarPickFields>(
 
   return out;
 }
+
+/** Collapse "Friendship Mix" festival + mix dupes from the same DJ. */
+const MONTH =
+  /\b(jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|jun(?:e)?|jul(?:y)?|aug(?:ust)?|sep(?:t(?:ember)?)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)\b/g;
+
+export function nearDuplicateKey(
+  title: string,
+  djSlug?: string | null,
+): string {
+  const slug = (djSlug || "").toLowerCase();
+  const artist = slug.replace(/-/g, " ").trim();
+  let t = title
+    .toLowerCase()
+    .replace(/\[[^\]]*]/g, " ")
+    .replace(/\b20\d{2}\b/g, " ")
+    .replace(/\bwe\s*[12]\b/g, " ")
+    .replace(MONTH, " ")
+    .replace(/[^a-z0-9]+/g, " ");
+  if (artist) {
+    t = t.replace(new RegExp(`\\b${artist.replace(/\s+/g, "\\s+")}\\b`, "g"), " ");
+  }
+  t = t
+    .replace(/\b(with|ft|feat|featuring)\b/g, " ")
+    .replace(/\b\d{1,2}\b/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  const words = t.split(" ").filter(Boolean).sort().join(" ");
+  return `${slug}|${words}`;
+}
+
+export function dedupeNearDuplicates<
+  T extends { id: string; title: string; primaryDjSlug?: string | null },
+>(items: T[]): T[] {
+  const seen = new Set<string>();
+  const out: T[] = [];
+  for (const s of items) {
+    const key = nearDuplicateKey(s.title, s.primaryDjSlug);
+    if (seen.has(key)) continue;
+    seen.add(key);
+    out.push(s);
+  }
+  return out;
+}
+
+/** Walk a pre-sorted list and keep at most N cards per primary DJ. */
+export function diversifyByArtist<
+  T extends { id: string; primaryDjSlug?: string | null },
+>(items: T[], maxPerDj = 1): T[] {
+  const counts = new Map<string, number>();
+  const out: T[] = [];
+  for (const s of items) {
+    const key = (s.primaryDjSlug || "").trim() || `id:${s.id}`;
+    const n = counts.get(key) ?? 0;
+    if (n >= maxPerDj) continue;
+    counts.set(key, n + 1);
+    out.push(s);
+  }
+  return out;
+}

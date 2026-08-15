@@ -1,11 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import { useSetListen } from "@/components/SetListen";
 import { resolvePlaybackTarget } from "@/lib/playback";
 
 /**
  * Collapsed-by-default on-site player for the original audio host.
- * No autoplay; falls back to outbound link when embed is unavailable.
+ * No autoplay unless a timeline cue seeks into the set.
  */
 export function SetPlayer({
   playbackUrl,
@@ -14,8 +15,18 @@ export function SetPlayer({
   playbackUrl?: string | null;
   sourceUrl?: string | null;
 }) {
-  const target = resolvePlaybackTarget(playbackUrl, { sourceUrl });
-  const [open, setOpen] = useState(false);
+  const listen = useSetListen();
+  const startSec = listen?.startSec ?? null;
+  const seekNonce = listen?.seekNonce ?? 0;
+  const seeking = seekNonce > 0;
+  const target = resolvePlaybackTarget(playbackUrl, {
+    sourceUrl,
+    startSec,
+    autoplay: seeking,
+  });
+  const [userOpen, setUserOpen] = useState(false);
+  const [dismissedNonce, setDismissedNonce] = useState(0);
+  const open = userOpen || (seeking && seekNonce !== dismissedNonce);
 
   if (!target) return null;
 
@@ -24,7 +35,14 @@ export function SetPlayer({
       <div className="flex flex-wrap items-center gap-2 px-3 py-2.5">
         <button
           type="button"
-          onClick={() => setOpen((v) => !v)}
+          onClick={() => {
+            if (open) {
+              setUserOpen(false);
+              setDismissedNonce(seekNonce);
+            } else {
+              setUserOpen(true);
+            }
+          }}
           className="inline-flex items-center gap-2 rounded-full border border-line px-3 py-1 text-[12px] font-medium text-ink transition-colors hover:border-[color:var(--muted2)]"
         >
           <span aria-hidden>{open ? "▾" : "▶"}</span>
@@ -44,6 +62,7 @@ export function SetPlayer({
       {open && (
         <div className="border-t border-line bg-bg/40 px-2 pb-2 pt-2 sm:px-3">
           <iframe
+            key={`${target.embedSrc}-${seekNonce}`}
             title={`${target.label} player`}
             src={target.embedSrc}
             width="100%"

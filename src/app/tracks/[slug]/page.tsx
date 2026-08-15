@@ -1,7 +1,9 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { EntityThumb } from "@/components/EntityThumb";
 import { getAllTrackSlugs, getTrackBySlug } from "@/lib/queries";
+import { pageMeta } from "@/lib/site";
 import { beatportSearchUrl, spotifySearchUrl } from "@/lib/trackMeta";
 import {
   SET_TYPE_META,
@@ -15,6 +17,22 @@ export async function generateStaticParams() {
   const slugs = await getAllTrackSlugs();
   if (slugs.length === 0) return [{ slug: "_placeholder" }];
   return slugs.map((slug) => ({ slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const track = await getTrackBySlug(slug);
+  if (!track) return { title: "Track" };
+  return pageMeta({
+    title: `${track.artistName} – ${track.title}`,
+    description: `Played in ${track.setCount} sets (${track.playCount} plays).`,
+    path: `/tracks/${track.slug}`,
+    image: track.imageUrl,
+  });
 }
 
 function Panel({

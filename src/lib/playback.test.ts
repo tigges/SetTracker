@@ -47,6 +47,19 @@ assert.equal(
 const yt = resolvePlaybackTarget("https://youtu.be/dQw4w9WgXcQ");
 assert.ok(yt);
 assert.ok(yt!.embedSrc.includes("/embed/dQw4w9WgXcQ"));
+const ytSeek = resolvePlaybackTarget("https://youtu.be/dQw4w9WgXcQ", {
+  startSec: 93,
+  autoplay: true,
+});
+assert.ok(ytSeek!.embedSrc.includes("start=93"));
+assert.ok(ytSeek!.embedSrc.includes("autoplay=1"));
+
+const scSeek = resolvePlaybackTarget("https://soundcloud.com/cloonee/edc-orlando", {
+  startSec: 40,
+  autoplay: true,
+});
+assert.ok(scSeek!.embedSrc.includes("auto_play=true"));
+assert.ok(decodeURIComponent(scSeek!.embedSrc).includes("#t=40"));
 
 const mc = resolvePlaybackTarget(
   "https://www.mixcloud.com/insomniacevents/don-diablo-edc-orlando-2018-mix/",

@@ -120,12 +120,16 @@ export function listenLinks(
 
 export function fmtDate(d: Date | string): string {
   const date = typeof d === "string" ? new Date(d) : d;
-  return date.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+  return date.toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
 }
 
-export function fmtRelative(d: Date | string): string {
+export function fmtRelative(d: Date | string, nowMs = Date.now()): string {
   const date = typeof d === "string" ? new Date(d) : d;
-  const diff = Date.now() - date.getTime();
+  const diff = nowMs - date.getTime();
   const day = 24 * 60 * 60 * 1000;
   const days = Math.floor(diff / day);
   if (days <= 0) return "today";
@@ -134,7 +138,9 @@ export function fmtRelative(d: Date | string): string {
   const weeks = Math.floor(days / 7);
   if (weeks < 5) return `${weeks}w ago`;
   const months = Math.floor(days / 30);
-  return `${months}mo ago`;
+  if (months < 12) return `${months}mo ago`;
+  const years = Math.floor(days / 365);
+  return years === 1 ? "1y ago" : `${years}y ago`;
 }
 
 export const SET_TYPE_META: Record<

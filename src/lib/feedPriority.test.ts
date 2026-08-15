@@ -5,7 +5,10 @@ import { loadDjMagTop100RankBySlug } from "./djmagTop100";
 import {
   compareEventSetPriority,
   compareFeedPriority,
+  dedupeNearDuplicates,
+  diversifyByArtist,
   idQualityTier,
+  nearDuplicateKey,
   pickRadarPicks,
   radarPickScore,
   resolveVenueTier,
@@ -247,6 +250,45 @@ describe("feedPriority complete → Top 100 → festivals", () => {
       picks.find((p) => p.primaryDjSlug === "david-guetta")?.id,
       "g24",
       "keeps the more recent Guetta Ultra, not 2015",
+    );
+  });
+
+  it("dedupes near-duplicate titles from the same DJ", () => {
+    assert.equal(
+      nearDuplicateKey(
+        "Tomorrowland Friendship Mix with Steve Aoki - August, 2026",
+        "steve-aoki",
+      ),
+      nearDuplicateKey("Steve Aoki - Tomorrowland Friendship Mix 2026-08-13", "steve-aoki"),
+    );
+    const kept = dedupeNearDuplicates([
+      {
+        id: "a",
+        title: "Tomorrowland Friendship Mix with Steve Aoki - August, 2026",
+        primaryDjSlug: "steve-aoki",
+      },
+      {
+        id: "b",
+        title: "Steve Aoki - Tomorrowland Friendship Mix 2026-08-13",
+        primaryDjSlug: "steve-aoki",
+      },
+    ]);
+    assert.equal(kept.length, 1);
+    assert.equal(kept[0]!.id, "a");
+  });
+
+  it("caps cards per artist", () => {
+    const out = diversifyByArtist(
+      [
+        { id: "1", primaryDjSlug: "david-guetta" },
+        { id: "2", primaryDjSlug: "david-guetta" },
+        { id: "3", primaryDjSlug: "alok" },
+      ],
+      1,
+    );
+    assert.deepEqual(
+      out.map((s) => s.id),
+      ["1", "3"],
     );
   });
 });
