@@ -10,6 +10,7 @@ const ASOT = YOUTUBE_SETS.find((s) => s.video.includes("bxb6Tglooc4"));
 const MEN_MACHINE = YOUTUBE_SETS.find((s) => s.video.includes("NTLDGnoWIRg"));
 const AOKI = YOUTUBE_SETS.find((s) => s.video.includes("hgbAN8NFNu0"));
 const ARMIN_FREEDOM = YOUTUBE_SETS.find((s) => s.video.includes("pwXGm4HEQdo"));
+const DOM_CREAMFIELDS = YOUTUBE_SETS.find((s) => s.video.includes("NblVVOwQRqw"));
 
 describe("watchMetaFromCuratedSeed", () => {
   it("builds ASOT 1290 meta from the curated 1001 capture", () => {
@@ -33,6 +34,16 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=pwXGm4HEQdo");
     // Last cue 2:25:22 + 180s pad.
     assert.equal(meta.durationSec, 2 * 3600 + 25 * 60 + 22 + 180);
+  });
+
+  it("builds Dom Dolla Creamfields meta from the curated 1001 capture", () => {
+    assert.ok(DOM_CREAMFIELDS);
+    const meta = watchMetaFromCuratedSeed(DOM_CREAMFIELDS);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "NblVVOwQRqw");
+    assert.match(meta.title, /Creamfields 2025/i);
+    // Last cue 1:27:04 + 180s pad.
+    assert.equal(meta.durationSec, 1 * 3600 + 27 * 60 + 4 + 180);
   });
 
   it("returns null without a title or video id", () => {
@@ -117,5 +128,19 @@ describe("curated YouTube 429 fallback", () => {
     assert.ok(sets[0]!.durationSec >= 2 * 3600 + 25 * 60);
     assert.equal(sets[0]?.primaryArtist?.slug, "armin-van-buuren");
     assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
+  });
+
+  it("lands Dom Dolla Creamfields Steel Yard from the 1001 seed when watch is 429", async () => {
+    assert.ok(DOM_CREAMFIELDS);
+    const adapter = createYoutubeAdapter([DOM_CREAMFIELDS], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-NblVVOwQRqw");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 46);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 60 * 60 + 27 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "dom-dolla");
+    assert.match(String(sets[0]?.eventName ?? ""), /Creamfields/i);
   });
 });
