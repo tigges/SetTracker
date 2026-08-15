@@ -21,6 +21,7 @@ import {
 import { TL_SIDEPIECE_Lollapalooza_Perry_Stage_2026 } from "./festivalCaptures20260814";
 import {
   TL_MARTEN_HORGER_TML_LIBRARY_WE1_2023,
+  TL_MEN_MACHINE_1001_EXCLUSIVE_2026,
   TL_STEVE_AOKI_TML_FRIENDSHIP_MIX_2026,
 } from "./festivalCaptures20260815";
 
@@ -37,6 +38,7 @@ export {
   TL_THE_CHAINSMOKERS_TML_WE1_2026,
   TL_SIDEPIECE_Lollapalooza_Perry_Stage_2026,
   TL_MARTEN_HORGER_TML_LIBRARY_WE1_2023,
+  TL_MEN_MACHINE_1001_EXCLUSIVE_2026,
   TL_STEVE_AOKI_TML_FRIENDSHIP_MIX_2026,
 };
 
@@ -4628,6 +4630,9 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
     TL_STEVE_AOKI_TML_FRIENDSHIP_MIX_2026,
   "sc-marten-horger-tomorrowland-mainstage-2023":
     TL_MARTEN_HORGER_TML_LIBRARY_WE1_2023,
+  "yt-NTLDGnoWIRg": TL_MEN_MACHINE_1001_EXCLUSIVE_2026,
+  "sc-1001tracklists-men-machine-exclusive-mix-2026":
+    TL_MEN_MACHINE_1001_EXCLUSIVE_2026,
 };
 
 /** Sanity: every seeded clock must parse. */

@@ -56,6 +56,7 @@ import {
   TL_AFROJACK_R3HAB_TML_WE2_2026,
   TL_STEVE_AOKI_TML_FRIENDSHIP_MIX_2026,
   TL_STEVE_AOKI_TML_WE2_2026,
+  TL_MEN_MACHINE_1001_EXCLUSIVE_2026,
   TL_MISS_MONIQUE_TML_WE2_2026,
   TL_NICKY_ROMERO_TML_WE2_2026,
   TL_ODD_MOB_TML_WE2_2026,
@@ -914,6 +915,23 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/1x5044dt/steve-aoki-tomorrowland-friendship-mix-2026-08-13.html",
     tracklist1001: TL_STEVE_AOKI_TML_FRIENDSHIP_MIX_2026,
+  },
+  {
+    // 1001Tracklists Exclusive Mix; timed 1001 capture. SC mirror on
+    // 1001tracklists/men-machine-exclusive-mix-2026 (same list).
+    video: "https://www.youtube.com/watch?v=NTLDGnoWIRg",
+    primaryArtist: dj("Men Machine", {
+      accent: "#ff4d6d",
+      homeCity: "Paris / Berlin",
+    }),
+    genre: "Bass House",
+    type: "mix",
+    title:
+      "David Guetta & Marten Horger pres. Men Machine - 1001Tracklists Exclusive Mix 2026-06-22",
+    seriesName: "1001Tracklists Exclusive Mix",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2r75jgsk/david-guetta-marten-horger-pres.-men-machine-1001tracklists-exclusive-mix-2026-06-22.html",
+    tracklist1001: TL_MEN_MACHINE_1001_EXCLUSIVE_2026,
   },
   {
     // Tomorrowland official — Mainstage WE2; 0/24 timed → evenly spaced ~60m.

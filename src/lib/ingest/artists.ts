@@ -59,6 +59,8 @@ export function tidyPerformingCredit(name: string): string {
     .replace(/\s+WE\s*[12]\s*$/i, "")
     .replace(/\s+weekend\s*[12]\s*$/i, "")
     .replace(/\s+(main\s*stage|mainstage)\s*$/i, "")
+    // "Guetta & Horger pres. Men Machine" → presenters (project is preferred primary)
+    .replace(/\s+pres(?:ents?|\.)\s+.+$/i, "")
     .replace(/\s*[|–—:-]+\s*$/g, "")
     .trim();
 }
@@ -128,8 +130,8 @@ export function performingCreditFromTitle(title: string): string {
   if (m?.[1] && m[2] && looksLikeShowSeriesPrefix(m[1].trim())) {
     return tidyPerformingCredit(m[2]!);
   }
-  // Hardwell presents Euphoria - July, 2026
-  m = cleaned.match(/^(.+?)\s+presents\b/i);
+  // Hardwell presents Euphoria / Guetta & Horger pres. Men Machine
+  m = cleaned.match(/^(.+?)\s+pres(?:ents?|\.)(?:\s+|$)/i);
   if (m?.[1] && !looksLikeEventOrSeriesCredit(m[1]!)) {
     return tidyPerformingCredit(m[1]!);
   }

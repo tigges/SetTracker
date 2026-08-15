@@ -202,4 +202,20 @@ assert.equal(
   "Goodboys",
 );
 
+assert.equal(
+  performingCreditFromTitle(
+    "David Guetta & Marten Horger pres. Men Machine - 1001Tracklists Exclusive Mix 2026-06-22",
+  ),
+  "David Guetta & Marten Horger",
+);
+const menMachineSet = artistsForSet(
+  "David Guetta & Marten Horger pres. Men Machine - 1001Tracklists Exclusive Mix 2026-06-22",
+  { name: "Men Machine", slug: "men-machine", accent: "#ff4d6d" },
+);
+assert.equal(menMachineSet.primary.slug, "men-machine");
+assert.deepEqual(
+  menMachineSet.collaborators.map((c) => c.slug),
+  ["david-guetta", "marten-horger"],
+);
+
 console.log("artists.test.ts ok");

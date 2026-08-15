@@ -100,3 +100,31 @@ export const TL_MARTEN_HORGER_TML_LIBRARY_WE1_2023: FingerprintSeedRow[] = [
   { at: "56:13", artist: "MARTEN HØRGER", title: "Love All Night" },
   { at: "1:00:48", artist: "MARTEN HØRGER & Neon Steve", title: "You Don't" },
 ];
+
+/**
+ * David Guetta & MARTEN HØRGER pres. Men Machine - 1001Tracklists Exclusive Mix 2026-06-22
+ * https://www.1001tracklists.com/tracklist/2r75jgsk/david-guetta-marten-horger-pres.-men-machine-1001tracklists-exclusive-mix-2026-06-22.html
+ * Official YT: https://youtu.be/NTLDGnoWIRg
+ * Official SC: https://soundcloud.com/1001tracklists/men-machine-exclusive-mix-2026
+ * Mixcloud mirror: https://www.mixcloud.com/1001Tracklists/david-gueta-marten-hørger-pres-men-machine-1001tracklists-exclusive-mix/
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-NTLDGnoWIRg"]
+ * Also: sc-1001tracklists-men-machine-exclusive-mix-2026
+ * Captured 2026-08-15 - provenance 1001tl.
+ */
+export const TL_MEN_MACHINE_1001_EXCLUSIVE_2026: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "David Guetta & MARTEN HØRGER pres. Men Machine", title: "The Past, The Present, The Future" },
+  { at: "7:15", artist: "MGMT", title: "Kids (Men Machine Rework)" },
+  { at: "10:22", artist: "Soulwax", title: "E Talking (Westend Edit)" },
+  { at: "13:45", artist: "KENZ", title: "Rake It Up" },
+  { at: "16:36", artist: "David Guetta & MARTEN HØRGER pres. Men Machine & Snap!", title: "PWR" },
+  { at: "19:38", artist: "Kid Cudi ft. MGMT & Ratatat", title: "Pursuit Of Happiness (MEDUN Remix)" },
+  { at: "22:30", artist: "Westend & Olivia Sebastianelli", title: "The Ceiling" },
+  { at: "24:30", artist: "Congorock ft. Mr. Lexx", title: "Babylon (David Guetta & MARTEN HØRGER pres. Men Machine & KENZ Rework)" },
+  { at: "28:20", artist: "Layton Giordani ft. AR/CO", title: "She's A Devil" },
+  { at: "31:48", artist: "Notre Dame", title: "No Rules" },
+  { at: "35:10", artist: "Breaking Beattz & Almanac", title: "People In The House" },
+  { at: "36:45", artist: "Max Styler & Vintage Culture & Ali Love", title: "Freaky 1" },
+  { at: "40:40", artist: "Dubdogz & FEZZO & Zaark", title: "How Does It Feel" },
+  { at: "45:05", artist: "David Guetta & MARTEN HØRGER pres. Men Machine", title: "Hey You" },
+  { at: "48:53", artist: "David Guetta & MARTEN HØRGER pres. Men Machine ft. Vitalic", title: "Engage" },
+];

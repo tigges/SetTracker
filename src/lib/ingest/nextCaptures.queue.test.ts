@@ -87,5 +87,13 @@ const queue = buildCaptureQueueFromNeeds([oldGuetta, recentEmpty], {
 });
 assert.equal(queue[0]?.slug, "yt-recent-empty");
 assert.ok(!queue.some((p) => p.slug === "yt-hgbAN8NFNu0"));
+assert.equal(
+  skipCaptureNeed(
+    row({ slug: "yt-NTLDGnoWIRg", title: "Men Machine Exclusive Mix" }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
 
 console.log("nextCaptures.queue.test.ts ok");

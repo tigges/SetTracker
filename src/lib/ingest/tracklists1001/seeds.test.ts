@@ -83,6 +83,7 @@ import {
   TL_THE_CHAINSMOKERS_TML_WE1_2026,
   TL_SIDEPIECE_Lollapalooza_Perry_Stage_2026,
   TL_MARTEN_HORGER_TML_LIBRARY_WE1_2023,
+  TL_MEN_MACHINE_1001_EXCLUSIVE_2026,
   TL_STEVE_AOKI_TML_FRIENDSHIP_MIX_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   tracklist1001RowsToPlays,
@@ -1267,5 +1268,31 @@ assert.equal(horgerLib[0]?.provenance, "1001tl");
 assert.equal(horgerLib[0]?.trackTitle, "The Calling");
 assert.equal(horgerLib[19]?.trackTitle, "You Don't");
 assert.equal(horgerLib[19]?.timestamp, 60 * 60 + 48);
+
+assertSeedClocks(TL_MEN_MACHINE_1001_EXCLUSIVE_2026);
+assert.equal(TL_MEN_MACHINE_1001_EXCLUSIVE_2026.length, 15);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-NTLDGnoWIRg"],
+  TL_MEN_MACHINE_1001_EXCLUSIVE_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-1001tracklists-men-machine-exclusive-mix-2026"
+  ],
+  TL_MEN_MACHINE_1001_EXCLUSIVE_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "https://soundcloud.com/1001tracklists/men-machine-exclusive-mix-2026"
+  ],
+  undefined,
+);
+const menMachine = tracklist1001RowsToPlays(TL_MEN_MACHINE_1001_EXCLUSIVE_2026);
+assert.equal(menMachine.length, 15);
+assert.equal(menMachine[0]?.provenance, "1001tl");
+assert.equal(menMachine[0]?.timestamp, 0);
+assert.equal(menMachine[0]?.trackTitle, "The Past, The Present, The Future");
+assert.equal(menMachine[14]?.trackTitle, "Engage");
+assert.equal(menMachine[14]?.timestamp, 48 * 60 + 53);
 
 console.log("tracklists1001/seeds.test.ts ok");
