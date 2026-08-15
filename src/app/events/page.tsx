@@ -1,11 +1,19 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { EntityThumb } from "@/components/EntityThumb";
 import { ExpandableCardGrid } from "@/components/ExpandableCardGrid";
 import { atlasVenueBySlug } from "@/lib/atlas/seed";
-import { getLabels, getVenues } from "@/lib/queries";
+import { getVenues } from "@/lib/queries";
+import { pageMeta } from "@/lib/site";
 
-/** Default Labels / Directory preview — ~4 rows on a 3-col desktop grid. */
-const LABELS_PREVIEW = 12;
+export const metadata: Metadata = pageMeta({
+  title: "Events",
+  description:
+    "Festivals, clubs, and livestream channels with DJ sets in the catalog.",
+  path: "/events",
+});
+
+/** Default Directory preview — ~4 rows on a 3-col desktop grid. */
 const DIRECTORY_PREVIEW = 12;
 
 const SECTIONS: Array<{
@@ -92,7 +100,7 @@ function bucketByKind(events: EventRow[]) {
 }
 
 export default async function EventsPage() {
-  const [events, labels] = await Promise.all([getVenues(), getLabels()]);
+  const events = await getVenues();
   const chart = atlasVenueBySlug();
   const withSets = events.filter((v) => v.isBrowseReady);
   const directory = events.filter((v) => !v.isBrowseReady);
@@ -140,54 +148,6 @@ export default async function EventsPage() {
           ),
         )}
 
-        <section id="labels">
-          <div className="mb-3 flex items-baseline justify-between gap-3">
-            <div>
-              <h2 className="text-lg font-bold tracking-tight">Labels</h2>
-              <p className="mt-0.5 text-[13px] text-muted2">
-                Curated dance imprints plus labels from tracklists — sorted by
-                how many sets feature their releases.
-              </p>
-            </div>
-            <span className="mono text-[12px] text-muted2">{labels.length}</span>
-          </div>
-          {labels.length === 0 ? (
-            <p className="text-[13px] text-muted2">No labels yet.</p>
-          ) : (
-            <ExpandableCardGrid
-              previewCount={LABELS_PREVIEW}
-              moreLabel="labels"
-              items={labels.map((l) => {
-                const color = l.color ?? "var(--brand)";
-                return (
-                  <Link
-                    key={l.id}
-                    href={`/labels/${l.slug}`}
-                    className="card flex items-center gap-3 p-4 transition-colors hover:border-[color:var(--muted2)]"
-                  >
-                    <EntityThumb
-                      src={l.imageUrl}
-                      label={l.name}
-                      accent={color}
-                      size={44}
-                      radius={12}
-                      monogram={l.name.slice(0, 2).toUpperCase()}
-                    />
-                    <div className="min-w-0 flex-1">
-                      <div className="truncate text-[15px] font-semibold text-ink">
-                        {l.name}
-                      </div>
-                      <div className="mono text-[12px] text-muted2">
-                        {l.trackCount} tracks · {l.setCount} sets
-                      </div>
-                    </div>
-                  </Link>
-                );
-              })}
-            />
-          )}
-        </section>
-
         {directory.length > 0 ? (
           <section id="directory">
             <div className="mb-3 flex items-baseline justify-between gap-3">
@@ -219,7 +179,7 @@ export default async function EventsPage() {
         ) : null}
       </div>
 
-      {withSets.length === 0 && labels.length === 0 && directory.length === 0 && (
+      {withSets.length === 0 && directory.length === 0 && (
         <p className="py-16 text-center text-[14px] text-muted2">
           No events with sets yet — they appear after a deep ingest.
         </p>

@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSetListen } from "@/components/SetListen";
 import { resolvePlaybackTarget } from "@/lib/playback";
 
 /**
  * Collapsed-by-default on-site player for the original audio host.
- * No autoplay; falls back to outbound link when embed is unavailable.
+ * No autoplay unless a timeline cue seeks into the set.
  */
 export function SetPlayer({
   playbackUrl,
@@ -14,8 +15,20 @@ export function SetPlayer({
   playbackUrl?: string | null;
   sourceUrl?: string | null;
 }) {
-  const target = resolvePlaybackTarget(playbackUrl, { sourceUrl });
+  const listen = useSetListen();
+  const startSec = listen?.startSec ?? null;
+  const seekNonce = listen?.seekNonce ?? 0;
+  const seeking = seekNonce > 0;
+  const target = resolvePlaybackTarget(playbackUrl, {
+    sourceUrl,
+    startSec,
+    autoplay: seeking,
+  });
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (seeking) setOpen(true);
+  }, [seeking, seekNonce]);
 
   if (!target) return null;
 
@@ -44,6 +57,7 @@ export function SetPlayer({
       {open && (
         <div className="border-t border-line bg-bg/40 px-2 pb-2 pt-2 sm:px-3">
           <iframe
+            key={`${target.embedSrc}-${seekNonce}`}
             title={`${target.label} player`}
             src={target.embedSrc}
             width="100%"

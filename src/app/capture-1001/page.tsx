@@ -7,9 +7,10 @@ import {
 import nextCaptures from "../../../data/crosscheck/next-captures.json";
 
 export const metadata: Metadata = {
-  title: "Capture 1001 — setradar.ai",
+  title: "Capture 1001",
   description:
     "Mobile bookmarklet to capture 1001Tracklists seeds for setradar.ai.",
+  robots: { index: false, follow: false },
 };
 
 export default async function Capture1001Page() {

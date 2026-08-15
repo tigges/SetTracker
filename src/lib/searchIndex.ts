@@ -3,6 +3,7 @@ import { atlasVenueBySlug } from "@/lib/atlas/seed";
 import { normalizeGenre } from "@/lib/genre";
 import { getDjList } from "@/lib/queries";
 import { isBrowseReadySet } from "@/lib/setBrowse";
+import { displayCity } from "@/lib/displayCity";
 import { ensureTrackSlugs } from "@/lib/tracks/ensureSlugs";
 
 export type SearchIndexItem = {
@@ -24,6 +25,7 @@ export async function getSearchIndex(): Promise<SearchIndexItem[]> {
         title: true,
         genre: true,
         imageUrl: true,
+        durationSec: true,
         event: { select: { name: true } },
         series: { select: { name: true } },
         artists: {
@@ -31,6 +33,7 @@ export async function getSearchIndex(): Promise<SearchIndexItem[]> {
           take: 1,
           include: { dj: { select: { name: true, imageUrl: true } } },
         },
+        _count: { select: { plays: true } },
       },
       orderBy: { publishedAt: "desc" },
     }),
@@ -95,6 +98,9 @@ export async function getSearchIndex(): Promise<SearchIndexItem[]> {
         imageUrl: s.imageUrl,
         primaryDjImageUrl: primary?.imageUrl,
         primaryDjName: primary?.name,
+        title: s.title,
+        trackCount: s._count.plays,
+        durationSec: s.durationSec,
       })
     ) {
       continue;
@@ -120,7 +126,7 @@ export async function getSearchIndex(): Promise<SearchIndexItem[]> {
     items.push({
       kind: "dj",
       title: d.name,
-      subtitle: [d.homeCity, `${d.setCount} sets`].filter(Boolean).join(" · "),
+      subtitle: [displayCity(d.homeCity), `${d.setCount} sets`].filter(Boolean).join(" · "),
       href: `/djs/${d.slug}`,
       keywords: d.website ?? undefined,
     });

@@ -1,6 +1,14 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { EntityThumb } from "@/components/EntityThumb";
 import { getTracks } from "@/lib/queries";
+import { pageMeta } from "@/lib/site";
+
+export const metadata: Metadata = pageMeta({
+  title: "Tracks",
+  description: "Most-played identified tracks across the setradar catalog.",
+  path: "/tracks",
+});
 
 export default async function TracksPage() {
   const tracks = await getTracks(160);

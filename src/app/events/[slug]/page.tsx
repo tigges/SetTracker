@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ExpandableChipRow } from "@/components/ExpandableChipRow";
@@ -6,6 +7,7 @@ import { SocialLinks } from "@/components/SocialLinks";
 import { ATLAS_YEAR, lookupAtlasVenue } from "@/lib/atlas/seed";
 import { chartKicker } from "@/lib/atlas/mapMath";
 import { getAllVenueSlugs, getVenueBySlug } from "@/lib/queries";
+import { pageMeta } from "@/lib/site";
 
 /** Keep the first viewport light — expand for the rest. */
 const ARTIST_CHIP_PREVIEW = 12;
@@ -14,6 +16,25 @@ export async function generateStaticParams() {
   const slugs = await getAllVenueSlugs();
   if (slugs.length === 0) return [{ slug: "_placeholder" }];
   return slugs.map((slug) => ({ slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const event = await getVenueBySlug(slug);
+  if (!event) return { title: "Event" };
+  const chart = lookupAtlasVenue(event.slug);
+  const place = chart?.loc || event.location;
+  return pageMeta({
+    title: event.name,
+    description: [place, event.kind, `${event.setCount} sets`]
+      .filter(Boolean)
+      .join(" · "),
+    path: `/events/${event.slug}`,
+  });
 }
 
 export default async function EventPage({

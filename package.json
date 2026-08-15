@@ -1,13 +1,15 @@
 {
   "name": "setradar",
-  "version": "0.2.130",
+  "version": "0.2.131",
   "private": true,
   "prisma": {
     "seed": "tsx prisma/seed.ts"
   },
   "scripts": {
     "dev": "next dev",
+    "predev": "tsx scripts/write-search-index.ts",
     "build": "next build",
+    "prebuild": "tsx scripts/write-search-index.ts",
     "start": "next start",
     "lint": "eslint",
     "db:migrate": "prisma migrate dev",

@@ -8,7 +8,6 @@ const LINKS = [
   { href: "/djs", label: "DJs" },
   { href: "/events", label: "Events" },
   { href: "/atlas", label: "Atlas" },
-  { href: "/tracks", label: "Tracks" },
   { href: "/stats", label: "Stats" },
 ] as const;
 
@@ -16,16 +15,12 @@ function isActive(pathname: string, href: string): boolean {
   if (href === "/") {
     return pathname === "/" || pathname.startsWith("/sets");
   }
-  // Labels live under the Events page section; keep Events lit on /labels
-  // and legacy /venues redirects.
   if (href === "/events") {
     return (
       pathname === "/events" ||
       pathname.startsWith("/events/") ||
       pathname === "/venues" ||
-      pathname.startsWith("/venues/") ||
-      pathname === "/labels" ||
-      pathname.startsWith("/labels/")
+      pathname.startsWith("/venues/")
     );
   }
   return pathname === href || pathname.startsWith(`${href}/`);

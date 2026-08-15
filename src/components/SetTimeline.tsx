@@ -15,6 +15,7 @@ import {
   type Provenance,
 } from "@/lib/status";
 import type { PlayRow } from "@/lib/queries";
+import { useSetSeek } from "@/components/SetListen";
 
 const DENSITY_KEY = "setradar.tracklistDensity";
 const densityListeners = new Set<() => void>();
@@ -58,6 +59,7 @@ export function SetTimeline({
   /** Real upload URL — used for SC listen pill instead of search guesses. */
   setSourceUrl?: string | null;
 }) {
+  const seek = useSetSeek();
   const [activeId, setActiveId] = useState<string | null>(plays[0]?.id ?? null);
   const [flashId, setFlashId] = useState<string | null>(null);
   const [hoverId, setHoverId] = useState<string | null>(null);
@@ -91,6 +93,8 @@ export function SetTimeline({
     if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
     setFlashId(null);
     requestAnimationFrame(() => setFlashId(id));
+    const play = plays.find((p) => p.id === id);
+    if (play && seek) seek(play.timestamp);
   }
 
   const caption = plays.find((p) => p.id === (hoverId ?? activeId));

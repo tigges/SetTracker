@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getDjBySlug, getAllDjSlugs } from "@/lib/queries";
@@ -6,6 +7,8 @@ import { StatusBar, StatusLegend } from "@/components/StatusBits";
 import { SocialLinks } from "@/components/SocialLinks";
 import { ATLAS_DJ_YEAR, lookupAtlasDj } from "@/lib/atlas/seed";
 import { chartKicker } from "@/lib/atlas/mapMath";
+import { displayCity } from "@/lib/displayCity";
+import { pageMeta } from "@/lib/site";
 import {
   PROVENANCE_META,
   SET_TYPE_META,
@@ -19,6 +22,25 @@ export async function generateStaticParams() {
   const slugs = await getAllDjSlugs();
   if (slugs.length === 0) return [{ slug: "_placeholder" }];
   return slugs.map((slug) => ({ slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const dj = await getDjBySlug(slug);
+  if (!dj) return { title: "DJ" };
+  const city = displayCity(dj.homeCity);
+  return pageMeta({
+    title: dj.name,
+    description: [city, `${dj.totals.sets} sets`, `${dj.totals.tracks} tracks logged`]
+      .filter(Boolean)
+      .join(" · "),
+    path: `/djs/${dj.slug}`,
+    image: dj.imageUrl,
+  });
 }
 
 function Panel({
@@ -53,6 +75,7 @@ export default async function DjPage({
   if (!dj) notFound();
 
   const accent = dj.accent;
+  const city = displayCity(dj.homeCity);
   const chart = lookupAtlasDj(dj.slug);
   const provTotal =
     Object.values(dj.provenance).reduce((a, b) => a + b, 0) || 1;
@@ -103,8 +126,8 @@ export default async function DjPage({
               </p>
             ) : null}
             <p className="mt-1 text-[13px] text-muted">
-              {dj.homeCity}
-              {dj.homeCity && dj.totals ? " · " : ""}
+              {city}
+              {city && dj.totals ? " · " : ""}
               <span className="mono">{dj.totals.sets}</span> sets ·{" "}
               <span className="mono">{dj.totals.tracks}</span> tracks logged
             </p>

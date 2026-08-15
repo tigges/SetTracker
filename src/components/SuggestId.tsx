@@ -120,11 +120,6 @@ export function SuggestIdButton({
               Close
             </button>
           </div>
-          {artist.trim() && title.trim() && (
-            <pre className="mt-2 max-h-24 overflow-auto rounded-md bg-bg2 p-1.5 text-[9px] text-muted2">
-              {JSON.stringify(snippet, null, 2)}
-            </pre>
-          )}
         </div>
       )}
     </div>
