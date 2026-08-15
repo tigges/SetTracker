@@ -49,6 +49,19 @@ assert.equal(
   "sc-1001tracklists-men-machine-exclusive-mix-2026",
 );
 
+const domCreamSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url ===
+    "https://soundcloud.com/domdolla/dom-dolla-live-creamfields-steel-yard-2025",
+);
+assert.ok(domCreamSc);
+assert.equal(domCreamSc.primaryArtist.name, "Dom Dolla");
+assert.equal(domCreamSc.type, "festival");
+assert.equal(
+  `sc-domdolla-${slugify("dom-dolla-live-creamfields-steel-yard-2025")}`,
+  "sc-domdolla-dom-dolla-live-creamfields-steel-yard-2025",
+);
+
 const gdjbSc = SOUNDCLOUD_TRACK_SEEDS.find(
   (s) => s.url === "https://soundcloud.com/markusschulz/gdjb-aug132026",
 );

@@ -84,6 +84,18 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     minDurationSec: 15 * 60,
   },
   {
+    // Official Dom Dolla upload; 1001TL wired via
+    // sc-domdolla-dom-dolla-live-creamfields-steel-yard-2025 (same list as yt-NblVVOwQRqw).
+    url: "https://soundcloud.com/domdolla/dom-dolla-live-creamfields-steel-yard-2025",
+    primaryArtist: dj("Dom Dolla", {
+      accent: "#00bbf9",
+      homeCity: "Melbourne, AU",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    minDurationSec: 15 * 60,
+  },
+  {
     // Official GDJB upload; 1001TL wired via
     // sc-markusschulz-gdjb-aug132026 (same list as yt-WWnLYZrh6kw).
     url: "https://soundcloud.com/markusschulz/gdjb-aug132026",
