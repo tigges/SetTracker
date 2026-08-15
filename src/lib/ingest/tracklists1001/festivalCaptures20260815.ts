@@ -128,3 +128,54 @@ export const TL_MEN_MACHINE_1001_EXCLUSIVE_2026: FingerprintSeedRow[] = [
   { at: "45:05", artist: "David Guetta & MARTEN HØRGER pres. Men Machine", title: "Hey You" },
   { at: "48:53", artist: "David Guetta & MARTEN HØRGER pres. Men Machine ft. Vitalic", title: "Engage" },
 ];
+
+/**
+ * Armin van Buuren & Giuseppe Ottaviani - A State Of Trance 1290 2026-08-13
+ * https://www.1001tracklists.com/tracklist/p3j7nb9/armin-van-buuren-giuseppe-ottaviani-a-state-of-trance-1290-2026-08-13.html
+ * Official YT: https://youtu.be/bxb6Tglooc4
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-bxb6Tglooc4"]
+ * Captured 2026-08-15 - provenance 1001tl.
+ */
+export const TL_ARMIN_OTTAVIANI_ASOT_1290_2026: FingerprintSeedRow[] = [
+  { at: "0:45", artist: "Armin van Buuren", title: "Awake" },
+  { at: "6:23", artist: "Armin van Buuren & JOA", title: "Heavy (DJ KUBA & NEITAN Remix)" },
+  { at: "9:27", artist: "Armin van Buuren & Alle Farben ft. ROSY", title: "Lost In Time" },
+  { at: "13:26", artist: "Armin van Buuren & Skytech vs. Empire Of The Sun", title: "Walking On A Dream (DJ Arman Aveiru She A Freak Edit)" },
+  { at: "16:34", artist: "Armin van Buuren & Adam Beyer", title: "No Mercy" },
+  { at: "19:15", artist: "David Guetta vs. Benny Benassi", title: "Satisfaction (with KASIA, Moonphazes, Majewski) (Remix)" },
+  { at: "21:07", artist: "Armin van Buuren & Andrew Bayer", title: "Serendipity (Leo Reyes Remix)" },
+  { at: "23:21", artist: "ARTBAT & SIX40TWO", title: "Take You There" },
+  { at: "26:17", artist: "Armin van Buuren & Silver Panda", title: "Here In My Arms (Enjoy The Silence)" },
+  { at: "29:44", artist: "Armin van Buuren & Argy ft. Marlo Rex", title: "Like A Child" },
+  { at: "32:35", artist: "Armin van Buuren & Arkham Knights vs. Alex M.O.R.P.H. vs. Luky Lou", title: "Communication vs. Running For Peace vs. Sweet Escape (Armin van Buuren Mashup)" },
+  { at: "36:08", artist: "Armin van Buuren & Richard Durand & Dicosis", title: "Always You (ASOT 2026 ELEVATION Anthem)" },
+  { at: "39:51", artist: "Argy & Paul Oakenfold & Planet Perfecto Knights", title: "ResuRection" },
+  { at: "41:22", artist: "Armin van Buuren & Hardwell", title: "Follow The Light" },
+  { at: "45:13", artist: "Armin van Buuren ft. SACHA", title: "Everlasting (Rising Star Remix)" },
+  { at: "49:27", artist: "Giuseppe Ottaviani & Ilan Bluestone", title: "Together Again" },
+  { at: "52:01", artist: "Armin van Buuren", title: "Sonic Samba (Rising Star Remix)" },
+  { at: "53:29", artist: "Armin van Buuren ft. Anne Gudrun", title: "Love Is A Drug" },
+  { at: "54:57", artist: "Armin van Buuren", title: "I Live For That Energy (ASOT 800 Theme) (Dan Harrison Remix)" },
+  { at: "57:30", artist: "Ahmed Helmy & Doppenberg pres. HEL:BRG vs. Armin van Buuren & Susana & Talla 2XLC", title: "Break It Down vs. Shivers (Armin van Buuren Mashup)" },
+  { at: "1:00:12", artist: "Franky Rizardo", title: "Shinjuku (DJ KUBA & NEITAN Remix)" },
+  { at: "1:02:33", artist: "Armin van Buuren ft. Christian Burns", title: "This Light Between Us (Roman Messer & Somnia Remix)" },
+  { at: "1:05:32", artist: "Richard Durand & RinatNevo", title: "Goodbye My Love" },
+  { at: "1:09:44", artist: "HI-LO vs. Armin van Buuren & Martin Garrix & Libby Whitehouse vs. Ørjan Nilsen", title: "United In Trance vs. Sleepless Nights vs. Amsterdam (Armin van Buuren Mashup)" },
+  { at: "1:12:29", artist: "Armin van Buuren ft. Sharon Den Adel", title: "In And Out Of Love (Ben Hemsley Remix)" },
+  { at: "1:15:03", artist: "Armin van Buuren ft. Trevor Guthrie", title: "This Is What It Feels Like (Benwal Remix)" },
+  { at: "1:17:56", artist: "Armin van Buuren & Hannah Laing & Wippenberg", title: "U Got 2 Know" },
+  { at: "1:20:33", artist: "Armin van Buuren ft. Mary Jensen", title: "Go All Night" },
+  { at: "1:24:07", artist: "Armin van Buuren vs. Maddix & Leila K", title: "Blah Blah Blah (DJ Arman Aveiru Open Sesame Edit)" },
+  { at: "1:26:31", artist: "Armin van Buuren ft. SACHA", title: "Set Me Free (Rising Star Remix)" },
+  { at: "1:29:08", artist: "Armin van Buuren ft. SACHA", title: "Set Me Free (VIP Mix)" },
+  { at: "1:31:45", artist: "Anyma & OTTAGON", title: "Unstoppable" },
+  { at: "1:34:35", artist: "ARTBAT & Giuseppe Ottaviani & Conor Ross", title: "Break The Loop" },
+  { at: "1:38:20", artist: "Orkidea", title: "Forward Forever (OTTAGON Retouch)" },
+  { at: "1:42:07", artist: "Giuseppe Ottaviani & Hypaton", title: "Soundboy" },
+  { at: "1:45:07", artist: "Anyma & Joji", title: "Beautiful (OTTAGON Remix)" },
+  { at: "1:49:25", artist: "Mark Roma", title: "What Is On Your Mind (Giuseppe Ottaviani Edit)" },
+  { at: "1:50:50", artist: "Max Styler & Three Drives", title: "Greece 2000 (Max Styler Rework)" },
+  { at: "1:52:15", artist: "ARTBAT & R3HAB & Stylo & Eli & Dani ft. NAIIM", title: "Fight Machine" },
+  { at: "1:54:35", artist: "Giuseppe Ottaviani & Andrew Rayel ft. Alessia Labate", title: "How Do We Know" },
+  { at: "1:57:45", artist: "Green Velvet & Harvard Bass", title: "Lazer Beams (Adam Beyer & Massano Remix)" },
+];

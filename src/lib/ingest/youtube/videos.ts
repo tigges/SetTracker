@@ -57,6 +57,7 @@ import {
   TL_STEVE_AOKI_TML_FRIENDSHIP_MIX_2026,
   TL_STEVE_AOKI_TML_WE2_2026,
   TL_MEN_MACHINE_1001_EXCLUSIVE_2026,
+  TL_ARMIN_OTTAVIANI_ASOT_1290_2026,
   TL_MISS_MONIQUE_TML_WE2_2026,
   TL_NICKY_ROMERO_TML_WE2_2026,
   TL_ODD_MOB_TML_WE2_2026,
@@ -758,6 +759,22 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/2s558yl9/armin-van-buuren-mainstage-tomorrowland-weekend-2-belgium-2026-07-25.html",
     tracklist1001: TL_ARMIN_VAN_BUUREN_TML_WE2_2026,
+  },
+  {
+    // ASOT 1290 radio episode; timed 1001 capture.
+    video: "https://www.youtube.com/watch?v=bxb6Tglooc4",
+    primaryArtist: dj("Armin van Buuren", {
+      accent: "#0077b6",
+      homeCity: "Leiden, NL",
+    }),
+    genre: "Trance",
+    type: "radio",
+    title:
+      "Armin van Buuren & Giuseppe Ottaviani - A State Of Trance 1290 2026-08-13",
+    seriesName: "A State of Trance",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/p3j7nb9/armin-van-buuren-giuseppe-ottaviani-a-state-of-trance-1290-2026-08-13.html",
+    tracklist1001: TL_ARMIN_OTTAVIANI_ASOT_1290_2026,
   },
   {
     // Tomorrowland official Relive — Mainstage WE2.

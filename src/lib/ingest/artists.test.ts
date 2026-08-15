@@ -218,4 +218,14 @@ assert.deepEqual(
   ["david-guetta", "marten-horger"],
 );
 
+const asot1290Set = artistsForSet(
+  "Armin van Buuren & Giuseppe Ottaviani - A State Of Trance 1290 2026-08-13",
+  { name: "Armin van Buuren", slug: "armin-van-buuren", accent: "#0077b6" },
+);
+assert.equal(asot1290Set.primary.slug, "armin-van-buuren");
+assert.deepEqual(
+  asot1290Set.collaborators.map((c) => c.slug),
+  ["giuseppe-ottaviani"],
+);
+
 console.log("artists.test.ts ok");

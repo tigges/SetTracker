@@ -84,6 +84,7 @@ import {
   TL_SIDEPIECE_Lollapalooza_Perry_Stage_2026,
   TL_MARTEN_HORGER_TML_LIBRARY_WE1_2023,
   TL_MEN_MACHINE_1001_EXCLUSIVE_2026,
+  TL_ARMIN_OTTAVIANI_ASOT_1290_2026,
   TL_STEVE_AOKI_TML_FRIENDSHIP_MIX_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   tracklist1001RowsToPlays,
@@ -1294,5 +1295,20 @@ assert.equal(menMachine[0]?.timestamp, 0);
 assert.equal(menMachine[0]?.trackTitle, "The Past, The Present, The Future");
 assert.equal(menMachine[14]?.trackTitle, "Engage");
 assert.equal(menMachine[14]?.timestamp, 48 * 60 + 53);
+
+assertSeedClocks(TL_ARMIN_OTTAVIANI_ASOT_1290_2026);
+assert.equal(TL_ARMIN_OTTAVIANI_ASOT_1290_2026.length, 41);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-bxb6Tglooc4"],
+  TL_ARMIN_OTTAVIANI_ASOT_1290_2026,
+);
+const asot1290 = tracklist1001RowsToPlays(TL_ARMIN_OTTAVIANI_ASOT_1290_2026);
+assert.equal(asot1290.length, 41);
+assert.equal(asot1290[0]?.provenance, "1001tl");
+assert.equal(asot1290[0]?.timestamp, 45);
+assert.equal(asot1290[0]?.trackTitle, "Awake");
+assert.equal(asot1290[15]?.artistName, "Giuseppe Ottaviani & Ilan Bluestone");
+assert.equal(asot1290[40]?.trackTitle, "Lazer Beams (Adam Beyer & Massano Remix)");
+assert.equal(asot1290[40]?.timestamp, 60 * 60 + 57 * 60 + 45);
 
 console.log("tracklists1001/seeds.test.ts ok");
