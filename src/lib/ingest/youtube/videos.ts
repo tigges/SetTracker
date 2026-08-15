@@ -61,6 +61,7 @@ import {
   TL_ARMIN_VAN_BUUREN_TML_WE1_FREEDOM_2026,
   TL_DOM_DOLLA_CREAMFIELDS_STEEL_YARD_2025,
   TL_MARLON_HOFFSTADT_COACHELLA_WE2_2026,
+  TL_MARKUS_SCHULZ_AND_JEROME_ISMA_AE_GDJB_2026,
   TL_MISS_MONIQUE_TML_WE2_2026,
   TL_NICKY_ROMERO_TML_WE2_2026,
   TL_ODD_MOB_TML_WE2_2026,
@@ -810,6 +811,23 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/p3j7nb9/armin-van-buuren-giuseppe-ottaviani-a-state-of-trance-1290-2026-08-13.html",
     tracklist1001: TL_ARMIN_OTTAVIANI_ASOT_1290_2026,
+  },
+  {
+    // Official GDJB radio episode; timed 1001 capture. SC twin:
+    // sc-markusschulz-gdjb-aug132026.
+    video: "https://www.youtube.com/watch?v=WWnLYZrh6kw",
+    primaryArtist: dj("Markus Schulz", {
+      accent: "#4895ef",
+      homeCity: "Miami, US",
+    }),
+    genre: "Trance",
+    type: "radio",
+    title:
+      "Markus Schulz & Jerome Isma-Ae - Global DJ Broadcast 2026-08-13", // pragma: allowlist secret
+    seriesName: "Global DJ Broadcast", // pragma: allowlist secret
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2llgr4u1/markus-schulz-jerome-isma-ae-global-dj-broadcast-2026-08-13.html", // pragma: allowlist secret
+    tracklist1001: TL_MARKUS_SCHULZ_AND_JEROME_ISMA_AE_GDJB_2026,
   },
   {
     // Tomorrowland official Relive — Mainstage WE2.

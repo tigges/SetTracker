@@ -62,4 +62,16 @@ assert.equal(
   "sc-domdolla-dom-dolla-live-creamfields-steel-yard-2025",
 );
 
+const gdjbSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) => s.url === "https://soundcloud.com/markusschulz/gdjb-aug132026",
+);
+assert.ok(gdjbSc);
+assert.equal(gdjbSc.primaryArtist.name, "Markus Schulz");
+assert.equal(gdjbSc.type, "radio");
+assert.equal(gdjbSc.seriesName, "Global DJ Broadcast"); // pragma: allowlist secret
+assert.equal(
+  `sc-markusschulz-${slugify("gdjb-aug132026")}`,
+  "sc-markusschulz-gdjb-aug132026",
+);
+
 console.log("soundcloud/tracks.test.ts ok");

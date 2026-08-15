@@ -88,6 +88,7 @@ import {
   TL_ARMIN_VAN_BUUREN_TML_WE1_FREEDOM_2026,
   TL_DOM_DOLLA_CREAMFIELDS_STEEL_YARD_2025,
   TL_MARLON_HOFFSTADT_COACHELLA_WE2_2026,
+  TL_MARKUS_SCHULZ_AND_JEROME_ISMA_AE_GDJB_2026,
   TL_STEVE_AOKI_TML_FRIENDSHIP_MIX_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   tracklist1001RowsToPlays,
@@ -1392,6 +1393,44 @@ for (let i = 1; i < marlonCoachella.length; i++) {
   assert.ok(
     (marlonCoachella[i]!.timestamp ?? 0) >
       (marlonCoachella[i - 1]!.timestamp ?? 0),
+    `clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_MARKUS_SCHULZ_AND_JEROME_ISMA_AE_GDJB_2026);
+assert.equal(
+  TL_MARKUS_SCHULZ_AND_JEROME_ISMA_AE_GDJB_2026.length,
+  31,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-WWnLYZrh6kw"],
+  TL_MARKUS_SCHULZ_AND_JEROME_ISMA_AE_GDJB_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-markusschulz-gdjb-aug132026"],
+  TL_MARKUS_SCHULZ_AND_JEROME_ISMA_AE_GDJB_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "https://soundcloud.com/markusschulz/gdjb-aug132026"
+  ],
+  undefined,
+);
+const gdjb = tracklist1001RowsToPlays(
+  TL_MARKUS_SCHULZ_AND_JEROME_ISMA_AE_GDJB_2026,
+);
+assert.equal(gdjb.length, 31);
+assert.equal(gdjb[0]?.provenance, "1001tl");
+assert.equal(gdjb[0]?.timestamp, 33);
+assert.equal(gdjb[0]?.trackTitle, "The Answer");
+assert.equal(
+  gdjb[30]?.trackTitle,
+  "Sparks In The Night (Ciaran McAuley Remix)",
+);
+assert.equal(gdjb[30]?.timestamp, 1 * 3600 + 56 * 60 + 31);
+for (let i = 1; i < gdjb.length; i++) {
+  assert.ok(
+    (gdjb[i]!.timestamp ?? 0) > (gdjb[i - 1]!.timestamp ?? 0),
     `clocks must increase at index ${i}`,
   );
 }

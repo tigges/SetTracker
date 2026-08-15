@@ -14,6 +14,7 @@ const DOM_CREAMFIELDS = YOUTUBE_SETS.find((s) => s.video.includes("NblVVOwQRqw")
 const MARLON_COACHELLA = YOUTUBE_SETS.find((s) =>
   s.video.includes("vpf4LLy42Zc"),
 );
+const GDJB = YOUTUBE_SETS.find((s) => s.video.includes("WWnLYZrh6kw"));
 
 describe("watchMetaFromCuratedSeed", () => {
   it("builds ASOT 1290 meta from the curated 1001 capture", () => {
@@ -57,6 +58,17 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.match(meta.title, /Coachella 2026/i);
     // Last cue 55:48 + 180s pad.
     assert.equal(meta.durationSec, 55 * 60 + 48 + 180);
+  });
+
+  it("builds Markus Schulz GDJB meta from the curated 1001 capture", () => {
+    assert.ok(GDJB);
+    const meta = watchMetaFromCuratedSeed(GDJB);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "WWnLYZrh6kw");
+    assert.match(meta.title, /Global DJ Broadcast/i); // pragma: allowlist secret
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=WWnLYZrh6kw");
+    // Last cue 1:56:31 + 180s pad.
+    assert.equal(meta.durationSec, 1 * 3600 + 56 * 60 + 31 + 180);
   });
 
   it("returns null without a title or video id", () => {
@@ -169,5 +181,21 @@ describe("curated YouTube 429 fallback", () => {
     assert.ok(sets[0]!.durationSec >= 55 * 60);
     assert.equal(sets[0]?.primaryArtist?.slug, "marlon-hoffstadt");
     assert.match(String(sets[0]?.eventName ?? ""), /Coachella/i);
+  });
+
+  it("lands Markus Schulz GDJB from the 1001 seed when watch is 429", async () => {
+    assert.ok(GDJB);
+    const adapter = createYoutubeAdapter([GDJB], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-WWnLYZrh6kw");
+    assert.equal(sets[0]!.type, "radio");
+    assert.ok(sets[0]!.plays.length >= 31);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 1 * 3600 + 56 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "markus-schulz");
+    assert.ok(
+      sets[0]?.collaborators?.some((c) => c.slug === "jerome-isma-ae"),
+    );
   });
 });
