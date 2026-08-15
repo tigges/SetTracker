@@ -257,3 +257,46 @@ export const TL_ARMIN_VAN_BUUREN_TML_WE1_FREEDOM_2026: FingerprintSeedRow[] = [
   { at: "2:21:55", artist: "Armin van Buuren ft. SACHA", title: "Set Me Free (Rising Star Remix)" },
   { at: "2:25:22", artist: "Armin van Buuren ft. SACHA", title: "Set Me Free (VIP Mix)" },
 ];
+
+/**
+ * Markus Schulz & Jerome Isma-Ae - GDJB 2026-08-13
+ * https://1001.tl/2llgr4u1
+ * Official YT: https://youtu.be/WWnLYZrh6kw
+ * Official SC: https://soundcloud.com/markusschulz/gdjb-aug132026
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-WWnLYZrh6kw"]
+ * Also: sc-markusschulz-gdjb-aug132026
+ * Captured 2026-08-15 - provenance 1001tl.
+ */
+export const TL_MARKUS_SCHULZ_AND_JEROME_ISMA_AE_GDJB_2026: FingerprintSeedRow[] = [
+  { at: "0:33", artist: "Weska & Charles D (USA)", title: "The Answer" },
+  { at: "4:36", artist: "Jochem Hamerling", title: "Natural Flow (Hobin Rude Remix)" },
+  { at: "7:36", artist: "Tim Clark", title: "When I Think Of You" },
+  { at: "11:51", artist: "Jaytech", title: "La Presencia" },
+  { at: "15:34", artist: "Victor Ruiz", title: "Running" },
+  { at: "19:03", artist: "Mike EFEX pres. Sun Theory", title: "Dream Of Lights" },
+  { at: "22:09", artist: "Guy J", title: "Piece Of Cake" },
+  { at: "25:51", artist: "Christian Smith", title: "Golden Point" },
+  { at: "30:16", artist: "biskuwi", title: "Eilu" },
+  { at: "34:42", artist: "Markus Schulz ft. RVYM", title: "Dive" },
+  { at: "39:20", artist: "ReDub", title: "Shorelines" },
+  { at: "42:01", artist: "Darren Tate", title: "Return Of The Vries" },
+  { at: "45:56", artist: "Booka Shade", title: "Broken Glass (Helsloot Remix)" },
+  { at: "49:50", artist: "Tiësto ft. Olivia Sebastianelli", title: "Don't Lose Your Head" },
+  { at: "53:00", artist: "Elias Erium", title: "The Predictor" },
+  { at: "56:26", artist: "William Orbit", title: "Barber's Adagio For Strings (Ferry Corsten Remix)" },
+  { at: "1:00:50", artist: "Zuccasam", title: "Prophet" },
+  { at: "1:06:37", artist: "KAZKO & Supacooks", title: "Machu Picchu" },
+  { at: "1:10:33", artist: "Michael A & Seyah", title: "Otherside" },
+  { at: "1:15:19", artist: "Matt Oliver & Teclas", title: "Silent Bloom" },
+  { at: "1:20:05", artist: "Tps", title: "Midnight Drivers" },
+  { at: "1:24:48", artist: "Ziger & Mind Conspiracy", title: "Pink Cadillac" },
+  { at: "1:29:47", artist: "Zuccasam", title: "Far Cry" },
+  { at: "1:31:22", artist: "Armin van Buuren & Silver Panda", title: "Here In My Arms (Enjoy The Silence)" },
+  { at: "1:35:10", artist: "Timmo", title: "Resonance (Cafius Remix)" },
+  { at: "1:38:18", artist: "Veerus", title: "Back To The Old School" },
+  { at: "1:41:23", artist: "Mr Sam", title: "Lyteo (BLR Remix)" },
+  { at: "1:44:15", artist: "Nemke", title: "Maia" },
+  { at: "1:48:35", artist: "The Quest", title: "Round Trip" },
+  { at: "1:52:34", artist: "Giuseppe Ottaviani & Dicosis", title: "Run Away" },
+  { at: "1:56:31", artist: "Elysian", title: "Sparks In The Night (Ciaran McAuley Remix)" },
+];

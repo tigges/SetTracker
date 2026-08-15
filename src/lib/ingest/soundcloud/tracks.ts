@@ -83,4 +83,17 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     type: "mix",
     minDurationSec: 15 * 60,
   },
+  {
+    // Official GDJB upload; 1001TL wired via
+    // sc-markusschulz-gdjb-aug132026 (same list as yt-WWnLYZrh6kw).
+    url: "https://soundcloud.com/markusschulz/gdjb-aug132026",
+    primaryArtist: dj("Markus Schulz", {
+      accent: "#4895ef",
+      homeCity: "Miami, US",
+    }),
+    genre: "Trance",
+    seriesName: "Global DJ Broadcast", // pragma: allowlist secret
+    type: "radio",
+    minDurationSec: 30 * 60,
+  },
 ];
