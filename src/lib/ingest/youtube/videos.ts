@@ -60,6 +60,7 @@ import {
   TL_ARMIN_OTTAVIANI_ASOT_1290_2026,
   TL_ARMIN_VAN_BUUREN_TML_WE1_FREEDOM_2026,
   TL_DOM_DOLLA_CREAMFIELDS_STEEL_YARD_2025,
+  TL_MARLON_HOFFSTADT_COACHELLA_WE2_2026,
   TL_MISS_MONIQUE_TML_WE2_2026,
   TL_NICKY_ROMERO_TML_WE2_2026,
   TL_ODD_MOB_TML_WE2_2026,
@@ -1311,6 +1312,22 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     title: "Yousuke Yukimatsu - Coachella 2026 (Full Set - Weekend 2)",
     seriesName: "Coachella",
     eventName: "Coachella",
+  },
+  {
+    // Official Coachella Relive — Sahara WE2; timed 1001 capture.
+    video: "https://www.youtube.com/watch?v=vpf4LLy42Zc",
+    primaryArtist: dj("Marlon Hoffstadt", {
+      accent: "#c77dff",
+      homeCity: "Berlin, DE",
+    }),
+    genre: "Hard Dance",
+    type: "festival",
+    title: "Marlon Hoffstadt Sahara WE2 | Coachella 2026",
+    seriesName: "Coachella",
+    eventName: "Coachella",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1lwj1r59/marlon-hoffstadt-sahara-coachella-festival-weekend-2-united-states-2026-04-17.html",
+    tracklist1001: TL_MARLON_HOFFSTADT_COACHELLA_WE2_2026,
   },
   {
     // Circuit Grounds 2026 — third-party YT (Joseph Montano); 1001 captured.

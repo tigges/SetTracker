@@ -87,6 +87,7 @@ import {
   TL_ARMIN_OTTAVIANI_ASOT_1290_2026,
   TL_ARMIN_VAN_BUUREN_TML_WE1_FREEDOM_2026,
   TL_DOM_DOLLA_CREAMFIELDS_STEEL_YARD_2025,
+  TL_MARLON_HOFFSTADT_COACHELLA_WE2_2026,
   TL_STEVE_AOKI_TML_FRIENDSHIP_MIX_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   tracklist1001RowsToPlays,
@@ -1368,6 +1369,29 @@ assert.equal(domCream[45]?.timestamp, 60 * 60 + 27 * 60 + 4);
 for (let i = 1; i < domCream.length; i++) {
   assert.ok(
     (domCream[i]!.timestamp ?? 0) > (domCream[i - 1]!.timestamp ?? 0),
+    `clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_MARLON_HOFFSTADT_COACHELLA_WE2_2026);
+assert.equal(TL_MARLON_HOFFSTADT_COACHELLA_WE2_2026.length, 15);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-vpf4LLy42Zc"],
+  TL_MARLON_HOFFSTADT_COACHELLA_WE2_2026,
+);
+const marlonCoachella = tracklist1001RowsToPlays(
+  TL_MARLON_HOFFSTADT_COACHELLA_WE2_2026,
+);
+assert.equal(marlonCoachella.length, 15);
+assert.equal(marlonCoachella[0]?.provenance, "1001tl");
+assert.equal(marlonCoachella[0]?.timestamp, 0);
+assert.equal(marlonCoachella[0]?.trackTitle, "Stomp Your Feet");
+assert.equal(marlonCoachella[14]?.trackTitle, "Memories (Marlon Hoffstadt Edit)");
+assert.equal(marlonCoachella[14]?.timestamp, 55 * 60 + 48);
+for (let i = 1; i < marlonCoachella.length; i++) {
+  assert.ok(
+    (marlonCoachella[i]!.timestamp ?? 0) >
+      (marlonCoachella[i - 1]!.timestamp ?? 0),
     `clocks must increase at index ${i}`,
   );
 }
