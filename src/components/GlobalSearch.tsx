@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { ATLAS_QUERY_EVENT } from "@/lib/atlas/searchItems";
 import { mediaUrl } from "@/lib/mediaUrl";
 import type { SearchIndexItem } from "@/lib/searchIndex";
 
@@ -12,13 +13,23 @@ const KIND_LABEL: Record<SearchIndexItem["kind"], string> = {
   venue: "Event",
   label: "Label",
   track: "Track",
+  atlas: "Atlas",
 };
 
-const KIND_FILTERS: Array<"all" | SearchIndexItem["kind"]> = [
+const HEADER_KIND_FILTERS: Array<"all" | SearchIndexItem["kind"]> = [
   "all",
   "set",
   "dj",
   "venue",
+  "atlas",
+];
+
+const PAGE_KIND_FILTERS: Array<"all" | SearchIndexItem["kind"]> = [
+  "all",
+  "set",
+  "dj",
+  "venue",
+  "atlas",
   "label",
   "track",
 ];
@@ -66,6 +77,9 @@ export function GlobalSearch({
   embedded?: boolean;
 }) {
   const router = useRouter();
+  const pathname = usePathname() || "/";
+  const onAtlas = pathname === "/atlas" || pathname.startsWith("/atlas/");
+  const kindFilters = embedded ? PAGE_KIND_FILTERS : HEADER_KIND_FILTERS;
   const [q, setQ] = useState(initialQuery);
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(0);
@@ -83,12 +97,16 @@ export function GlobalSearch({
     if (query.length < 2) return [];
     return items
       .filter((item) => kind === "all" || item.kind === kind)
-      .map((item) => ({ item, s: score(item, query) }))
+      .map((item) => {
+        let s = score(item, query);
+        if (onAtlas && item.kind === "atlas") s += 20;
+        return { item, s };
+      })
       .filter((x) => x.s > 0)
       .sort((a, b) => b.s - a.s || a.item.title.localeCompare(b.item.title))
       .slice(0, embedded ? 40 : 12)
       .map((x) => x.item);
-  }, [items, q, kind, embedded]);
+  }, [items, q, kind, embedded, onAtlas]);
 
   useEffect(() => {
     function onDoc(e: MouseEvent) {
@@ -128,9 +146,15 @@ export function GlobalSearch({
         autoComplete="off"
         spellCheck={false}
         onChange={(e) => {
-          setQ(e.target.value);
+          const next = e.target.value;
+          setQ(next);
           setActive(0);
           setOpen(true);
+          if (onAtlas && typeof window !== "undefined") {
+            window.dispatchEvent(
+              new CustomEvent(ATLAS_QUERY_EVENT, { detail: next }),
+            );
+          }
         }}
         onFocus={() => {
           setOpen(true);
@@ -153,7 +177,7 @@ export function GlobalSearch({
               router.push(results[active].href);
               setOpen(false);
               if (!embedded) setQ("");
-            } else if (q.trim().length >= 2 && !embedded) {
+            } else if (q.trim().length >= 2 && !embedded && !onAtlas) {
               router.push(`/search?q=${encodeURIComponent(q.trim())}`);
               setOpen(false);
             }
@@ -170,7 +194,7 @@ export function GlobalSearch({
 
   const filters = (
     <div className={`flex flex-wrap gap-1 ${embedded ? "mb-3" : "border-b border-line px-2 py-1.5"}`}>
-      {KIND_FILTERS.map((k) => (
+      {kindFilters.map((k) => (
         <button
           key={k}
           type="button"

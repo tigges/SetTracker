@@ -112,12 +112,24 @@ export default async function EventsPage() {
         <p className="eyebrow">Places &amp; platforms</p>
         <h1 className="mt-1 text-3xl font-extrabold tracking-tight">Events</h1>
         <p className="mt-2 max-w-2xl text-[14px] text-muted">
-          Festivals, clubs, and livestream channels with sets first — curated
-          directory stubs without sets stay below.{" "}
-          <Link href="/atlas" className="text-brand hover:text-brandstrong">
-            Map the Top 100 →
-          </Link>
+          Festivals, clubs, and livestream channels with sets in the catalog.
+          Directory stubs without sets stay below.
         </p>
+        <Link
+          href="/atlas"
+          className="card mt-5 flex items-center justify-between gap-3 p-4 transition-colors hover:border-[color:var(--muted2)]"
+        >
+          <span>
+            <span className="eyebrow">DJ Mag charts</span>
+            <span className="mt-1 block text-[16px] font-semibold text-ink">
+              Map the Top 100
+            </span>
+            <span className="mt-0.5 block text-[13px] text-muted">
+              Clubs, festivals, and DJs — search from the header.
+            </span>
+          </span>
+          <span className="text-[13px] text-brand">Atlas →</span>
+        </Link>
       </div>
 
       <div className="space-y-10">

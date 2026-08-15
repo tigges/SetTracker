@@ -10,6 +10,7 @@ import {
   type CSSProperties,
 } from "react";
 import { EntityThumb } from "@/components/EntityThumb";
+import { ATLAS_QUERY_EVENT } from "@/lib/atlas/searchItems";
 import { WORLD_LAND_PATH } from "@/lib/atlas/worldLandPath";
 import {
   atlasAccent,
@@ -38,6 +39,19 @@ function getHash() {
 }
 
 function getServerHash() {
+  return "";
+}
+
+function subscribeSearch(onStoreChange: () => void) {
+  window.addEventListener("popstate", onStoreChange);
+  return () => window.removeEventListener("popstate", onStoreChange);
+}
+
+function getSearchQ() {
+  return new URLSearchParams(window.location.search).get("q") ?? "";
+}
+
+function getServerSearchQ() {
   return "";
 }
 
@@ -102,6 +116,7 @@ export function AtlasMap({
   const viewRef = useRef<View>({ ...INITIAL_VIEW });
   const flewHash = useRef(false);
   const hash = useSyncExternalStore(subscribeHash, getHash, getServerHash);
+  const urlQ = useSyncExternalStore(subscribeSearch, getSearchQ, getServerSearchQ);
   const [filter, setFilter] = useState<AtlasFilter>({
     type: "all",
     q: "",
@@ -109,9 +124,16 @@ export function AtlasMap({
     city: "",
   });
   const [clickedId, setClickedId] = useState<string | null>(null);
-  const [listOpen, setListOpen] = useState(true);
+  const [listOpen, setListOpen] = useState(false);
 
-  const hits = useMemo(() => filterAtlasPins(pins, filter), [pins, filter]);
+  const activeFilter = {
+    ...filter,
+    q: filter.q || urlQ,
+  };
+  const hits = useMemo(
+    () => filterAtlasPins(pins, { ...filter, q: filter.q || urlQ }),
+    [pins, filter, urlQ],
+  );
   const mappedHits = useMemo(() => hits.filter((p) => !p.nomap), [hits]);
   const selected =
     pins.find((p) => p.id === clickedId) ??
@@ -240,6 +262,15 @@ export function AtlasMap({
   }, [hits, selectedId]);
 
   useEffect(() => {
+    function onQuery(e: Event) {
+      const q = (e as CustomEvent<string>).detail ?? "";
+      setFilter((f) => ({ ...f, q }));
+    }
+    window.addEventListener(ATLAS_QUERY_EVENT, onQuery);
+    return () => window.removeEventListener(ATLAS_QUERY_EVENT, onQuery);
+  }, []);
+
+  useEffect(() => {
     if (flewHash.current || !hash) return;
     const match = pins.find((p) => pinMatchesHash(p, hash));
     if (!match) return;
@@ -282,7 +313,7 @@ export function AtlasMap({
   function resetView() {
     Object.assign(viewRef.current, INITIAL_VIEW);
     (svgRef.current as SvgWithView | null)?.__applyView?.();
-    setFilter({ type: "all", q: "", country: "", city: "" });
+    setFilter((f) => ({ type: "all", q: f.q, country: "", city: "" }));
     setClickedId(null);
     if (typeof window !== "undefined" && window.location.hash) {
       history.replaceState(null, "", window.location.pathname + window.location.search);
@@ -315,17 +346,25 @@ export function AtlasMap({
     setFilter((f) => ({ ...f, type }));
   }
 
+  const listRows = hits
+    .slice()
+    .sort(
+      (a, b) =>
+        a.rank - b.rank ||
+        a.kind.localeCompare(b.kind) ||
+        a.name.localeCompare(b.name),
+    );
+
   return (
-    <div className="atlas-shell">
-      <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
+    <div className="atlas-bleed">
+      <div className="hidden items-end justify-between gap-3 px-5 pb-3 pt-5 lg:flex">
         <div>
           <p className="eyebrow">DJ Mag reader polls</p>
           <h1 className="mt-1 text-3xl font-extrabold tracking-tight">
             Top 100 Atlas
           </h1>
           <p className="mt-2 max-w-2xl text-[14px] text-muted">
-            Clubs &amp; festivals 2026, DJs 2025 — mapped and linked to
-            setradar when the catalog has them.
+            Clubs &amp; festivals 2026, DJs 2025 — search from the header.
           </p>
         </div>
         <div className="flex gap-4 text-[12px] text-muted">
@@ -344,167 +383,11 @@ export function AtlasMap({
         </div>
       </div>
 
-      <div className="grid min-h-[min(70vh,720px)] overflow-hidden rounded-xl border border-line bg-panel lg:grid-cols-[minmax(240px,300px)_1fr]">
-        <aside
-          className={`flex min-h-0 flex-col border-line lg:border-r ${
-            listOpen ? "" : "hidden lg:flex"
-          }`}
-        >
-          <div className="grid gap-3 border-b border-line p-3">
-            <div className="flex overflow-hidden rounded-lg border border-line">
-              {(
-                [
-                  ["all", "All"],
-                  ["festival", "Fests"],
-                  ["club", "Clubs"],
-                  ["dj", "DJs"],
-                ] as const
-              ).map(([value, label]) => (
-                <button
-                  key={value}
-                  type="button"
-                  aria-pressed={filter.type === value}
-                  onClick={() => setType(value)}
-                  className={`flex-1 px-1 py-1.5 text-[11px] font-medium ${
-                    filter.type === value
-                      ? "bg-panel2 text-ink"
-                      : "text-muted hover:text-ink"
-                  }`}
-                >
-                  {label}
-                </button>
-              ))}
-            </div>
-            <label className="grid gap-1">
-              <span className="eyebrow">Search</span>
-              <input
-                value={filter.q}
-                onChange={(e) =>
-                  setFilter((f) => ({ ...f, q: e.target.value }))
-                }
-                placeholder="Tomorrowland, Berghain, Guetta"
-                className="rounded-md border border-line bg-bg px-2.5 py-1.5 text-[13px] text-ink"
-              />
-            </label>
-            <div className="grid grid-cols-2 gap-2">
-              <label className="grid gap-1">
-                <span className="eyebrow">Country</span>
-                <select
-                  value={filter.country}
-                  onChange={(e) =>
-                    setFilter((f) => ({
-                      ...f,
-                      country: e.target.value,
-                      city: "",
-                    }))
-                  }
-                  className="rounded-md border border-line bg-bg px-2 py-1.5 text-[13px] text-ink"
-                >
-                  <option value="">All</option>
-                  {countries.map((c) => (
-                    <option key={c} value={c}>
-                      {c}
-                    </option>
-                  ))}
-                </select>
-              </label>
-              <label className="grid gap-1">
-                <span className="eyebrow">City</span>
-                <select
-                  value={filter.city}
-                  disabled={!filter.country}
-                  onChange={(e) =>
-                    setFilter((f) => ({ ...f, city: e.target.value }))
-                  }
-                  className="rounded-md border border-line bg-bg px-2 py-1.5 text-[13px] text-ink disabled:opacity-40"
-                >
-                  <option value="">All</option>
-                  {cities.map((c) => (
-                    <option key={c} value={c}>
-                      {c}
-                    </option>
-                  ))}
-                </select>
-              </label>
-            </div>
-            <div className="flex items-center gap-2 text-[12px] text-muted">
-              <strong className="mono font-medium text-ink">
-                {hits.length}
-              </strong>
-              of {pins.length}
-              <span className="flex-1" />
-              <button
-                type="button"
-                onClick={fitHits}
-                className="underline decoration-line underline-offset-2 hover:text-ink"
-              >
-                Zoom
-              </button>
-              <button
-                type="button"
-                onClick={resetView}
-                className="underline decoration-line underline-offset-2 hover:text-ink"
-              >
-                Reset
-              </button>
-            </div>
-          </div>
-          <div className="min-h-0 flex-1 overflow-y-auto scroll-thin py-1">
-            {hits.length === 0 ? (
-              <p className="px-4 py-8 text-[13px] text-muted">
-                No venues match those filters.
-              </p>
-            ) : (
-              hits
-                .slice()
-                .sort((a, b) => a.rank - b.rank || a.kind.localeCompare(b.kind) || a.name.localeCompare(b.name))
-                .map((p) => (
-                  <button
-                    key={p.id}
-                    type="button"
-                    data-on={selectedId === p.id ? "true" : undefined}
-                    onClick={() => selectPin(p)}
-                    className={`grid w-full grid-cols-[36px_1fr] items-center gap-2 border-l-2 px-3 py-2 text-left ${
-                      selectedId === p.id
-                        ? "border-[color:var(--pin)] bg-panel2"
-                        : "border-transparent hover:bg-panel2"
-                    }`}
-                    style={
-                      {
-                        "--pin": atlasAccent(p.kind),
-                      } as CSSProperties
-                    }
-                  >
-                    <span
-                      className="mono text-right text-[12px]"
-                      style={{ color: "var(--pin)" }}
-                    >
-                      {p.rank}
-                    </span>
-                    <span className="min-w-0">
-                      <span className="block truncate text-[13px] font-medium text-ink">
-                        {p.name}
-                      </span>
-                      <span className="block truncate text-[11px] text-muted2">
-                        {placeLine(p)}
-                      </span>
-                      <span className="mt-1 block h-0.5 overflow-hidden rounded-sm bg-line">
-                        <i
-                          className="block h-full"
-                          style={{
-                            width: `${101 - p.rank}%`,
-                            background: "var(--pin)",
-                          }}
-                        />
-                      </span>
-                    </span>
-                  </button>
-                ))
-            )}
-          </div>
-        </aside>
-
-        <div className="relative h-[min(70vh,720px)] min-h-[480px] bg-[#07090d]">
+      <div className="atlas-stage relative overflow-hidden bg-panel lg:mx-5 lg:mb-5 lg:grid lg:min-h-[min(70vh,720px)] lg:grid-cols-[minmax(240px,300px)_1fr] lg:rounded-xl lg:border lg:border-line">
+        <div className="relative order-1 h-[calc(100dvh-4rem)] min-h-[320px] bg-[#07090d] lg:order-2 lg:h-auto lg:min-h-[min(70vh,720px)]">
+          <h1 className="pointer-events-none absolute top-3 left-1/2 z-10 -translate-x-1/2 text-[13px] font-semibold text-ink/90 lg:hidden">
+            Top 100 Atlas
+          </h1>
           <button
             type="button"
             className="absolute top-3 left-3 z-10 rounded-md border border-line bg-panel/90 px-2 py-1 text-[12px] text-muted lg:hidden"
@@ -606,6 +489,154 @@ export function AtlasMap({
             </div>
           ) : null}
         </div>
+
+        <aside
+          className={`z-20 flex min-h-0 flex-col border-line bg-panel lg:order-1 lg:border-r ${
+            listOpen
+              ? "absolute inset-x-0 bottom-0 max-h-[55dvh] rounded-t-xl border-t shadow-lg shadow-black/40 lg:static lg:max-h-none lg:rounded-none lg:border-t-0 lg:shadow-none"
+              : "hidden lg:flex"
+          }`}
+        >
+          <div className="grid gap-3 border-b border-line p-3">
+            <div className="flex overflow-hidden rounded-lg border border-line">
+              {(
+                [
+                  ["all", "All"],
+                  ["festival", "Fests"],
+                  ["club", "Clubs"],
+                  ["dj", "DJs"],
+                ] as const
+              ).map(([value, label]) => (
+                <button
+                  key={value}
+                  type="button"
+                  aria-pressed={filter.type === value}
+                  onClick={() => setType(value)}
+                  className={`flex-1 px-1 py-1.5 text-[11px] font-medium ${
+                    filter.type === value
+                      ? "bg-panel2 text-ink"
+                      : "text-muted hover:text-ink"
+                  }`}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+            <div className="grid grid-cols-2 gap-2">
+              <label className="grid gap-1">
+                <span className="eyebrow">Country</span>
+                <select
+                  value={filter.country}
+                  onChange={(e) =>
+                    setFilter((f) => ({
+                      ...f,
+                      country: e.target.value,
+                      city: "",
+                    }))
+                  }
+                  className="rounded-md border border-line bg-bg px-2 py-1.5 text-[13px] text-ink"
+                >
+                  <option value="">All</option>
+                  {countries.map((c) => (
+                    <option key={c} value={c}>
+                      {c}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label className="grid gap-1">
+                <span className="eyebrow">City</span>
+                <select
+                  value={filter.city}
+                  disabled={!filter.country}
+                  onChange={(e) =>
+                    setFilter((f) => ({ ...f, city: e.target.value }))
+                  }
+                  className="rounded-md border border-line bg-bg px-2 py-1.5 text-[13px] text-ink disabled:opacity-40"
+                >
+                  <option value="">All</option>
+                  {cities.map((c) => (
+                    <option key={c} value={c}>
+                      {c}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            </div>
+            <div className="flex items-center gap-2 text-[12px] text-muted">
+              <strong className="mono font-medium text-ink">{hits.length}</strong>
+              of {pins.length}
+              {activeFilter.q ? (
+                <span className="truncate text-muted2">· “{activeFilter.q}”</span>
+              ) : null}
+              <span className="flex-1" />
+              <button
+                type="button"
+                onClick={fitHits}
+                className="underline decoration-line underline-offset-2 hover:text-ink"
+              >
+                Zoom
+              </button>
+              <button
+                type="button"
+                onClick={resetView}
+                className="underline decoration-line underline-offset-2 hover:text-ink"
+              >
+                Reset
+              </button>
+            </div>
+          </div>
+          <div className="min-h-0 flex-1 overflow-y-auto scroll-thin py-1">
+            {listRows.length === 0 ? (
+              <p className="px-4 py-8 text-[13px] text-muted">
+                No venues match those filters.
+              </p>
+            ) : (
+              listRows.map((p) => (
+                <button
+                  key={p.id}
+                  type="button"
+                  data-on={selectedId === p.id ? "true" : undefined}
+                  onClick={() => selectPin(p)}
+                  className={`grid w-full grid-cols-[36px_1fr] items-center gap-2 border-l-2 px-3 py-2 text-left ${
+                    selectedId === p.id
+                      ? "border-[color:var(--pin)] bg-panel2"
+                      : "border-transparent hover:bg-panel2"
+                  }`}
+                  style={
+                    {
+                      "--pin": atlasAccent(p.kind),
+                    } as CSSProperties
+                  }
+                >
+                  <span
+                    className="mono text-right text-[12px]"
+                    style={{ color: "var(--pin)" }}
+                  >
+                    {p.rank}
+                  </span>
+                  <span className="min-w-0">
+                    <span className="block truncate text-[13px] font-medium text-ink">
+                      {p.name}
+                    </span>
+                    <span className="block truncate text-[11px] text-muted2">
+                      {placeLine(p)}
+                    </span>
+                    <span className="mt-1 block h-0.5 overflow-hidden rounded-sm bg-line">
+                      <i
+                        className="block h-full"
+                        style={{
+                          width: `${101 - p.rank}%`,
+                          background: "var(--pin)",
+                        }}
+                      />
+                    </span>
+                  </span>
+                </button>
+              ))
+            )}
+          </div>
+        </aside>
       </div>
     </div>
   );
