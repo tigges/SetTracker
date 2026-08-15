@@ -2622,8 +2622,9 @@ export const TL_SARA_LANDRY_TML_WE2_2026: FingerprintSeedRow[] = [
 /**
  * AFROJACK & R3HAB @ Mainstage, Tomorrowland Weekend 2, Belgium 2026-07-26
  * Official YT: https://www.youtube.com/watch?v=AjQeohYmg3A
- * 1001TL: https://1001.tl/2s55dyj1 — operator console capture 2026-08-01
- * (21/54 timed cues; missing clocks already lerped in capture).
+ * Also: https://youtu.be/lEIGnx7qLl0 (same 1001 list, 2026-08-15 recapture)
+ * 1001TL: https://1001.tl/2s55dyj1 — operator console capture 2026-08-01 / 2026-08-15
+ * (54 timed cues).
  */
 export const TL_AFROJACK_R3HAB_TML_WE2_2026: FingerprintSeedRow[] = [
   { at: "0:12", artist: "R3HAB & Vion Konger & Skytech", title: "Ultimate" },
@@ -4590,6 +4591,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-LE-byccuovI": TL_LUCAS_STEVE_TML_WE2_2026,
   "yt-aDAWctObTvI": TL_SARA_LANDRY_TML_WE2_2026,
   "yt-AjQeohYmg3A": TL_AFROJACK_R3HAB_TML_WE2_2026,
+  "yt-lEIGnx7qLl0": TL_AFROJACK_R3HAB_TML_WE2_2026,
   "yt-8-J01-hcHfA": TL_STEVE_AOKI_TML_WE2_2026,
   "yt-DAOlnMYA3nU": TL_CYRIL_TML_WE2_2026,
   "yt-OTKgBZS8if0": TL_DIMITRI_VEGAS_NICO_MORENO_TML_WE2_2026,

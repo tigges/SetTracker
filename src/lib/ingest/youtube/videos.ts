@@ -868,6 +868,22 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_AFROJACK_R3HAB_TML_WE2_2026,
   },
   {
+    // Same TML WE2 B2B, alternate official upload; same 1001 list.
+    video: "https://www.youtube.com/watch?v=lEIGnx7qLl0",
+    primaryArtist: dj("Afrojack", {
+      accent: "#ff9f1c",
+      homeCity: "Spijkenisse, NL",
+    }),
+    genre: "Big Room",
+    type: "festival",
+    title: "Afrojack b2b R3hab WE2 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2s55dyj1/afrojack-r3hab-mainstage-tomorrowland-weekend-2-belgium-2026-07-26.html",
+    tracklist1001: TL_AFROJACK_R3HAB_TML_WE2_2026,
+  },
+  {
     // Tomorrowland official — Mainstage WE2; 0/26 timed → evenly spaced ~60m.
     video: "https://www.youtube.com/watch?v=8-J01-hcHfA",
     primaryArtist: dj("Steve Aoki", {

@@ -926,6 +926,10 @@ for (const p of afroR3) {
   arPrev = p.timestamp;
 }
 assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-AjQeohYmg3A"]!.length >= 54);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-lEIGnx7qLl0"],
+  TL_AFROJACK_R3HAB_TML_WE2_2026,
+);
 
 assertSeedClocks(TL_STEVE_AOKI_TML_WE2_2026);
 const aoki = tracklist1001RowsToPlays(TL_STEVE_AOKI_TML_WE2_2026);
