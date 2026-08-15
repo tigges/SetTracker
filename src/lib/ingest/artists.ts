@@ -5,6 +5,11 @@
  * `atomicActs` so they stay one credit — not Walker b2b Royce.
  */
 
+import {
+  isMonthYearArtistName,
+  looksLikeShowSeriesPrefix,
+  sanitizeArtistName,
+} from "../artistName";
 import { shieldAtomicActs } from "./atomicActs";
 import { slugify, type RawArtist } from "./types";
 
@@ -18,6 +23,7 @@ function normalizeCollabSeparators(input: string): string {
     .replace(/\s+b2b\.?\s+/gi, " b2b ")
     .replace(/\s+vs\.?\s+/gi, " b2b ")
     .replace(/\s+x\s+/gi, " b2b ")
+    .replace(/\s+and\s+/gi, " b2b ")
     .replace(/\s+[&+]\s+/g, " b2b ")
     .replace(/\s+feat\.?\s+/gi, " feat ")
     .replace(/\s+ft\.?\s+/gi, " feat ")
@@ -50,6 +56,11 @@ export function tidyPerformingCredit(name: string): string {
     .replace(/\s+warm\s*ups?\b.*$/i, "")
     .replace(/\s+\(?\s*live\b.*$/i, "")
     .replace(/\s+tour\s*mix\b.*$/i, "")
+    .replace(/\s+WE\s*[12]\s*$/i, "")
+    .replace(/\s+weekend\s*[12]\s*$/i, "")
+    .replace(/\s+(main\s*stage|mainstage)\s*$/i, "")
+    // "Guetta & Horger pres. Men Machine" → presenters (project is preferred primary)
+    .replace(/\s+pres(?:ents?|\.)\s+.+$/i, "")
     .replace(/\s*[|–—:-]+\s*$/g, "")
     .trim();
 }
@@ -76,7 +87,8 @@ export function looksLikeEventOrSeriesCredit(name: string): boolean {
     /\bpresents\b/i.test(n) ||
     /\bvirtual\s+festival\b/i.test(n) ||
     /\btomorrowland\b/i.test(n) ||
-    /\blive\s*$/i.test(n)
+    /\blive\s*$/i.test(n) ||
+    looksLikeShowSeriesPrefix(n)
   );
 }
 
@@ -110,13 +122,16 @@ export function performingCreditFromTitle(title: string): string {
     .replace(/[⠶✦★☆●◆]/g, " ")
     .replace(/\s+/g, " ")
     .trim();
-  // Tomorrowland Friendship Mix with Sara Landry - July, 2026
+  // "Full Moon with Timmy Trumpet" / "Group Therapy 674 with Above & Beyond…"
+  // Also covers Tomorrowland Friendship Mix with Sara Landry - July, 2026
   let m = cleaned.match(
-    /\bfriendship\s+mix\s+with\s+(.+?)(?:\s*[-–—|,]|\s+july|\s+june|\s+may|\s+april|\s+august|\s*$)/i,
+    /^(.+?)\s+with\s+(.+?)(?:\s*[-–—|,]|\s+july|\s+june|\s+may|\s+april|\s+august|\s*$)/i,
   );
-  if (m?.[1]) return tidyPerformingCredit(m[1]!);
-  // Hardwell presents Euphoria - July, 2026
-  m = cleaned.match(/^(.+?)\s+presents\b/i);
+  if (m?.[1] && m[2] && looksLikeShowSeriesPrefix(m[1].trim())) {
+    return tidyPerformingCredit(m[2]!);
+  }
+  // Hardwell presents Euphoria / Guetta & Horger pres. Men Machine
+  m = cleaned.match(/^(.+?)\s+pres(?:ents?|\.)(?:\s+|$)/i);
   if (m?.[1] && !looksLikeEventOrSeriesCredit(m[1]!)) {
     return tidyPerformingCredit(m[1]!);
   }
@@ -145,6 +160,10 @@ export function performingCreditFromTitle(title: string): string {
   if (m) {
     const left = m[1]!.trim();
     const right = m[2]!.trim();
+    const leftArtist = sanitizeArtistName(left);
+    if (leftArtist && !looksLikeEventOrSeriesCredit(leftArtist)) {
+      return tidyPerformingCredit(leftArtist);
+    }
     if (looksLikeEventOrSeriesCredit(left)) {
       const presented = artistFromPresentedBy(right);
       if (presented) return presented;
@@ -152,12 +171,15 @@ export function performingCreditFromTitle(title: string): string {
       if (
         rightHead &&
         !looksLikeEventOrSeriesCredit(rightHead) &&
-        !/^\d{4}\b/.test(rightHead)
+        !/^\d{4}\b/.test(rightHead) &&
+        !isMonthYearArtistName(rightHead)
       ) {
         return tidyPerformingCredit(rightHead);
       }
+      // "Tomorrowland Friendship Mix - June, 2026" — date is not a DJ
+    } else {
+      return tidyPerformingCredit(left);
     }
-    return tidyPerformingCredit(left);
   }
   // Series titles: "Dom Dolla // Dancefloor Currency"
   m = cleaned.match(/^(.+?)\s+\/\/\s+/);
@@ -254,7 +276,7 @@ export function splitArtistsFromSetTitle(
 function hasCollabToken(credit: string): boolean {
   // Ignore `&` inside shielded duo names (Walker & Royce, …).
   const { text } = shieldAtomicActs(credit);
-  return /\b(b2b|vs\.?|feat\.?|ft\.?|mixed\s+by)\b|\sx\s|[&+]/i.test(text);
+  return /\b(b2b|vs\.?|feat\.?|ft\.?|mixed\s+by|and)\b|\sx\s|[&+]/i.test(text);
 }
 
 /** "Brand Mixed By A & B [#001]" → guest mixer names. */

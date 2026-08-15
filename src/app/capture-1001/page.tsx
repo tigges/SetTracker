@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getCaptureQueue } from "@/lib/captureQueue";
 import {
   Capture1001Client,
   type CapturePreset,
@@ -11,8 +12,21 @@ export const metadata: Metadata = {
     "Mobile bookmarklet to capture 1001Tracklists seeds for setradar.ai.",
 };
 
-export default function Capture1001Page() {
-  const presets = (nextCaptures.presets ?? []) as CapturePreset[];
+export default async function Capture1001Page() {
+  const extras = ((nextCaptures.presets ?? []) as CapturePreset[]).filter(
+    (p) => p.reason === "relive:official-unwired",
+  );
+  let presets: CapturePreset[] = extras.slice(0, 12);
+  let generatedAt = String(nextCaptures.generatedAt ?? "");
+  try {
+    const queue = await getCaptureQueue(12, extras);
+    if (queue.presets.length) {
+      presets = queue.presets;
+      generatedAt = queue.generatedAt;
+    }
+  } catch {
+    /* no catalog DB — keep Relive extras / committed snapshot */
+  }
 
   return (
     <div className="mx-auto max-w-2xl space-y-6">
@@ -24,11 +38,12 @@ export default function Capture1001Page() {
           Capture 1001 on mobile
         </h1>
         <p className="text-[15px] text-muted">
-          Start from the official YouTube set, find its 1001Tracklists page,
-          then run the bookmarklet to copy a timed seed and paste it into chat.
+          Start from the official YouTube or SoundCloud set, find its
+          1001Tracklists page, then run the bookmarklet to copy a timed seed
+          and paste it into chat.
         </p>
       </header>
-      <Capture1001Client presets={presets} />
+      <Capture1001Client presets={presets} generatedAt={generatedAt} />
     </div>
   );
 }

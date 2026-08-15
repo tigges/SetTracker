@@ -1,16 +1,14 @@
 /**
- * Build the operator "next 10 captures" queue from catalog gaps.
+ * Build the operator capture queue.
  *
- * Sources (offline, no DB required):
- * 1. Curated priority assists (Street Parade remainder, Relive captures)
- * 2. Top100 missing/thin tracks matched to curated YT slugs
- * 3. Density-severe YouTube sets not yet 1001-mapped
- *
- * Output consumed by /capture-1001 (server → client props).
+ * Offline JSON (set-density / top100 reports) is a fallback for CI scripts.
+ * The live /capture-1001 page ranks from the catalog DB at Pages build time
+ * so every deploy after deep/enrich shows current gaps.
  */
 
 import { readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
+import type { DensitySeverity } from "../setDensity";
 import { TRACKLIST_1001_BY_SOURCE_SLUG } from "./tracklists1001/festival2026";
 
 export type CapturePreset = {
@@ -22,6 +20,9 @@ export type CapturePreset = {
   tracklistUrl?: string;
   /** Why this row was queued */
   reason?: string;
+  /** Official playback (YT or SC). */
+  watchUrl?: string;
+  host?: "youtube" | "soundcloud";
 };
 
 export function search1001(...parts: string[]): string {
@@ -97,7 +98,7 @@ function mappedSlugs(): Set<string> {
   return new Set(Object.keys(TRACKLIST_1001_BY_SOURCE_SLUG));
 }
 
-function tlNameFromLabel(label: string): string {
+export function tlNameFromLabel(label: string): string {
   return (
     "TL_" +
     label
@@ -155,9 +156,186 @@ function loadTop100Gaps(cwd: string): { slug: string; name: string; tracks: numb
   }
 }
 
+const DAY_MS = 24 * 60 * 60 * 1000;
+const STRONG_ID = new Set([
+  "soundcloud",
+  "hearthis",
+  "youtube",
+  "insomniac",
+  "bandcamp",
+  "community",
+  "1001tl",
+]);
+
+export type CaptureNeedRow = {
+  slug: string;
+  title: string;
+  primaryDj: string;
+  primaryDjSlug?: string;
+  type: string;
+  eventSlug?: string | null;
+  publishedAt: Date | string;
+  durationSec: number;
+  playCount: number;
+  plays1001: number;
+  identifiedStrong: number;
+  top100Rank: number | null;
+  isFestival: boolean;
+  festivalSeason: boolean;
+  density: DensitySeverity;
+  watchUrl?: string;
+};
+
+export function captureHost(
+  slug: string,
+): "youtube" | "soundcloud" | null {
+  if (slug.startsWith("yt-")) return "youtube";
+  if (slug.startsWith("sc-")) return "soundcloud";
+  return null;
+}
+
+export function watchUrlForSlug(slug: string, playbackUrl?: string | null): string {
+  if (playbackUrl?.startsWith("http")) return playbackUrl;
+  if (slug.startsWith("yt-")) {
+    return `https://www.youtube.com/watch?v=${slug.slice(3)}`;
+  }
+  return "";
+}
+
+/** Skip shorts, already-wired lists, and stale low-value rows. */
+export function skipCaptureNeed(
+  row: CaptureNeedRow,
+  mapped: Set<string>,
+  nowMs = Date.now(),
+): string | null {
+  if (mapped.has(row.slug)) return "mapped";
+  if (!captureHost(row.slug)) return "host";
+  if (row.durationSec < 20 * 60) return "short";
+  if (/\bshorts?\b/i.test(row.title)) return "shorts";
+  if (row.plays1001 >= 12) return "has-1001";
+  const ageDays =
+    (nowMs - new Date(row.publishedAt).getTime()) / DAY_MS;
+  if (
+    ageDays > 400 &&
+    !row.festivalSeason &&
+    (row.top100Rank == null || row.top100Rank > 20)
+  ) {
+    return "stale";
+  }
+  if (
+    row.density === "ok" &&
+    row.playCount >= 8 &&
+    row.plays1001 === 0 &&
+    !row.festivalSeason &&
+    !(row.isFestival && row.top100Rank != null && ageDays <= 90)
+  ) {
+    return "already-dense";
+  }
+  return null;
+}
+
+export function scoreCaptureNeed(row: CaptureNeedRow, nowMs = Date.now()): number {
+  let s = 0;
+  if (row.festivalSeason) s += 120;
+  if (row.top100Rank != null) {
+    s += row.top100Rank <= 20 ? 90 : 45;
+    s += Math.max(0, 25 - row.top100Rank);
+  }
+  if (row.isFestival) s += 40;
+  if (row.slug.startsWith("yt-")) s += 15;
+  if (row.density === "severe") s += 50;
+  else if (row.density === "thin") s += 25;
+  if (row.playCount === 0) s += 20;
+  if (row.plays1001 === 0) s += 15;
+  const ageDays =
+    (nowMs - new Date(row.publishedAt).getTime()) / DAY_MS;
+  if (ageDays <= 21) s += 45;
+  else if (ageDays <= 90) s += 25;
+  else if (ageDays <= 365) s += 8;
+  const hay = `${row.title} ${row.eventSlug ?? ""}`;
+  if (
+    /tomorrowland|ultra|edc|street.?parade|lollapalooza|parookaville/i.test(
+      hay,
+    )
+  ) {
+    s += 20;
+  }
+  return s;
+}
+
+export function captureReason(row: CaptureNeedRow): string {
+  if (row.festivalSeason) return "festival-season";
+  if (row.density === "severe") return "density:severe";
+  if (row.density === "thin") return "density:thin";
+  if (row.top100Rank != null && row.top100Rank <= 20) return "top20-gap";
+  if (row.isFestival) return "festival-gap";
+  return "catalog-gap";
+}
+
+export function presetFromNeed(row: CaptureNeedRow): CapturePreset {
+  const host = captureHost(row.slug) ?? undefined;
+  return {
+    label: row.title.slice(0, 90),
+    slug: row.slug,
+    name: tlNameFromLabel(row.primaryDj || row.title),
+    searchUrl: search1001(
+      row.primaryDj || row.title,
+      row.title.replace(/\|/g, " ").slice(0, 50),
+    ),
+    reason: captureReason(row),
+    watchUrl: row.watchUrl || watchUrlForSlug(row.slug),
+    host,
+  };
+}
+
+/** Rank catalog gaps. Already-mapped slugs never appear. */
+export function buildCaptureQueueFromNeeds(
+  rows: CaptureNeedRow[],
+  opts: { limit?: number; extra?: CapturePreset[]; nowMs?: number } = {},
+): CapturePreset[] {
+  const limit = opts.limit ?? 12;
+  const mapped = mappedSlugs();
+  const nowMs = opts.nowMs ?? Date.now();
+  const seen = new Set<string>();
+  const out: CapturePreset[] = [];
+
+  const push = (p: CapturePreset) => {
+    if (seen.has(p.slug) || mapped.has(p.slug)) return;
+    if (out.length >= limit) return;
+    seen.add(p.slug);
+    out.push(p);
+  };
+
+  for (const p of PRIORITY_CAPTURES) push(p);
+  for (const p of opts.extra ?? []) push(p);
+
+  const ranked = rows
+    .filter((r) => !skipCaptureNeed(r, mapped, nowMs))
+    .map((r) => ({ row: r, score: scoreCaptureNeed(r, nowMs) }))
+    .sort(
+      (a, b) =>
+        b.score - a.score ||
+        new Date(b.row.publishedAt).getTime() -
+          new Date(a.row.publishedAt).getTime(),
+    );
+
+  for (const { row } of ranked) push(presetFromNeed(row));
+  return out.slice(0, limit);
+}
+
+export function isStrongIdentifiedPlay(p: {
+  idStatus: string;
+  provenance: string;
+}): boolean {
+  return (
+    (p.idStatus === "identified" || p.idStatus === "community_resolved") &&
+    STRONG_ID.has(p.provenance)
+  );
+}
+
 /**
  * Build up to `limit` capture presets, priority first, then density gaps
- * that aren't already 1001-mapped.
+ * that aren't already 1001-mapped. Offline fallback when no catalog DB.
  */
 export function buildNextCaptures(
   opts: { cwd?: string; limit?: number; extra?: CapturePreset[] } = {},

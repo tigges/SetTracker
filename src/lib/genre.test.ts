@@ -26,6 +26,8 @@ describe("normalizeGenre", () => {
     assert.equal(normalizeGenre("Big Room"), "Big Room");
     assert.equal(normalizeGenre("bigroom"), "Big Room");
     assert.equal(normalizeGenre("Melodic Techno"), "Melodic Techno");
+    assert.equal(normalizeGenre("gqom"), "Gqom");
+    assert.equal(normalizeGenre("Gqom"), "Gqom");
   });
 
   it("ensureGenre never returns null", () => {

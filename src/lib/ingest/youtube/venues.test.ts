@@ -99,5 +99,13 @@ assert.equal(
   ),
   "Lee Ann Roberts",
 );
+assert.equal(
+  artistFromVenueTitle("Armin van Buuren WE2 | Tomorrowland 2026"),
+  "Armin van Buuren",
+);
+assert.equal(
+  artistFromVenueTitle("Odd Mob WE2 | Tomorrowland 2026"),
+  "Odd Mob",
+);
 
 console.log("venues.test.ts ok");

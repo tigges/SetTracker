@@ -26,6 +26,12 @@ export const DJ_SLUG_ALIASES: Record<string, string> = {
   "the-sydney-social-podcast-3": "dom-dolla",
 };
 
+/** "armin-van-buuren-we1" / "odd-mob-we-2" → real artist slug. */
+export function foldWeekendEditionSlug(slug: string): string {
+  return slug.replace(/-we-?[12]$/i, "").replace(/-weekend-?[12]$/i, "");
+}
+
 export function canonicalDjSlug(slug: string): string {
-  return DJ_SLUG_ALIASES[slug] ?? slug;
+  const folded = foldWeekendEditionSlug(slug);
+  return DJ_SLUG_ALIASES[slug] ?? DJ_SLUG_ALIASES[folded] ?? folded;
 }

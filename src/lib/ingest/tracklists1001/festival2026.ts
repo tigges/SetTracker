@@ -19,6 +19,12 @@ import {
   TL_THE_CHAINSMOKERS_TML_WE1_2026,
 } from "./festivalCaptures20260813";
 import { TL_SIDEPIECE_Lollapalooza_Perry_Stage_2026 } from "./festivalCaptures20260814";
+import {
+  TL_ARMIN_OTTAVIANI_ASOT_1290_2026,
+  TL_MARTEN_HORGER_TML_LIBRARY_WE1_2023,
+  TL_MEN_MACHINE_1001_EXCLUSIVE_2026,
+  TL_STEVE_AOKI_TML_FRIENDSHIP_MIX_2026,
+} from "./festivalCaptures20260815";
 
 export {
   TL_ALESSO_TML_WE2_2026,
@@ -32,6 +38,10 @@ export {
   TL_PEGGY_GOU_EDC_LV_2026,
   TL_THE_CHAINSMOKERS_TML_WE1_2026,
   TL_SIDEPIECE_Lollapalooza_Perry_Stage_2026,
+  TL_MARTEN_HORGER_TML_LIBRARY_WE1_2023,
+  TL_MEN_MACHINE_1001_EXCLUSIVE_2026,
+  TL_ARMIN_OTTAVIANI_ASOT_1290_2026,
+  TL_STEVE_AOKI_TML_FRIENDSHIP_MIX_2026,
 };
 
 function formatClock(sec: number): string {
@@ -2616,8 +2626,9 @@ export const TL_SARA_LANDRY_TML_WE2_2026: FingerprintSeedRow[] = [
 /**
  * AFROJACK & R3HAB @ Mainstage, Tomorrowland Weekend 2, Belgium 2026-07-26
  * Official YT: https://www.youtube.com/watch?v=AjQeohYmg3A
- * 1001TL: https://1001.tl/2s55dyj1 — operator console capture 2026-08-01
- * (21/54 timed cues; missing clocks already lerped in capture).
+ * Also: https://youtu.be/lEIGnx7qLl0 (same 1001 list, 2026-08-15 recapture)
+ * 1001TL: https://1001.tl/2s55dyj1 — operator console capture 2026-08-01 / 2026-08-15
+ * (54 timed cues).
  */
 export const TL_AFROJACK_R3HAB_TML_WE2_2026: FingerprintSeedRow[] = [
   { at: "0:12", artist: "R3HAB & Vion Konger & Skytech", title: "Ultimate" },
@@ -4584,6 +4595,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-LE-byccuovI": TL_LUCAS_STEVE_TML_WE2_2026,
   "yt-aDAWctObTvI": TL_SARA_LANDRY_TML_WE2_2026,
   "yt-AjQeohYmg3A": TL_AFROJACK_R3HAB_TML_WE2_2026,
+  "yt-lEIGnx7qLl0": TL_AFROJACK_R3HAB_TML_WE2_2026,
   "yt-8-J01-hcHfA": TL_STEVE_AOKI_TML_WE2_2026,
   "yt-DAOlnMYA3nU": TL_CYRIL_TML_WE2_2026,
   "yt-OTKgBZS8if0": TL_DIMITRI_VEGAS_NICO_MORENO_TML_WE2_2026,
@@ -4615,6 +4627,15 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-tg_QLGpes0k": TL_ARMIN_VAN_BUUREN_TML_WE2_2026,
   "sc-sidepiece-sidepiece-lollapalooza-perry":
     TL_SIDEPIECE_Lollapalooza_Perry_Stage_2026,
+  "yt-hgbAN8NFNu0": TL_STEVE_AOKI_TML_FRIENDSHIP_MIX_2026,
+  "sc-tomorrowland-tomorrowland-friendship-mix-steve-aoki-august-2026":
+    TL_STEVE_AOKI_TML_FRIENDSHIP_MIX_2026,
+  "sc-marten-horger-tomorrowland-mainstage-2023":
+    TL_MARTEN_HORGER_TML_LIBRARY_WE1_2023,
+  "yt-NTLDGnoWIRg": TL_MEN_MACHINE_1001_EXCLUSIVE_2026,
+  "sc-1001tracklists-men-machine-exclusive-mix-2026":
+    TL_MEN_MACHINE_1001_EXCLUSIVE_2026,
+  "yt-bxb6Tglooc4": TL_ARMIN_OTTAVIANI_ASOT_1290_2026,
 };
 
 /** Sanity: every seeded clock must parse. */

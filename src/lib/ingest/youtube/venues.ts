@@ -254,6 +254,9 @@ function tidyArtist(name: string): string {
   return name
     .replace(/\s+/g, " ")
     .replace(/\s+b2b\s+/gi, " b2b ")
+    .replace(/\s+WE\s*[12]\s*$/i, "")
+    .replace(/\s+weekend\s*[12]\s*$/i, "")
+    .replace(/\s+(main\s*stage|mainstage)\s*$/i, "")
     .replace(
       /\s+(?:hard\s+|energetic\s+|groovy\s+|latin\s+|pumping\s+|fast-paced\s+)*(?:tech(?:no|[\s-]?house)|bass(?:line|\s*house)?|house|trance|psytrance|ukg|dubstep|drum\s*&\s*bass|acid)?\s*(?:dj\s*)?sets?\b.*$/i,
       "",

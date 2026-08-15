@@ -149,4 +149,83 @@ assert.equal(
   "Japhet Be",
 );
 
+assert.equal(
+  performingCreditFromTitle("Armin van Buuren WE2 | Tomorrowland 2026"),
+  "Armin van Buuren",
+);
+assert.equal(
+  performingCreditFromTitle("Odd Mob WE2 | Tomorrowland 2026"),
+  "Odd Mob",
+);
+assert.equal(
+  performingCreditFromTitle("Fisher Mainstage WE1 | Tomorrowland 2026"),
+  "Fisher",
+);
+assert.equal(
+  performingCreditFromTitle(
+    "Tomorrowland Friendship Mix with Steve Aoki - August, 2026",
+  ),
+  "Steve Aoki",
+);
+assert.notEqual(
+  performingCreditFromTitle("Tomorrowland Friendship Mix - June, 2026"),
+  "June, 2026",
+);
+
+assert.equal(
+  performingCreditFromTitle("Full Moon with Timmy Trumpet"),
+  "Timmy Trumpet",
+);
+assert.equal(
+  performingCreditFromTitle(
+    "Group Therapy 674 with Above & Beyond and Max Graham",
+  ),
+  "Above & Beyond and Max Graham",
+);
+
+const gt = splitArtistsFromSetTitle(
+  "Group Therapy 674 with Above & Beyond and Max Graham",
+);
+assert.equal(gt.primary.name, "Above & Beyond");
+assert.equal(gt.primary.slug, "above-beyond");
+assert.deepEqual(
+  gt.collaborators.map((c) => c.name),
+  ["Max Graham"],
+);
+
+const moon = splitArtistsFromSetTitle("Full Moon with Timmy Trumpet");
+assert.equal(moon.primary.name, "Timmy Trumpet");
+assert.equal(moon.collaborators.length, 0);
+
+assert.equal(
+  performingCreditFromTitle("Goodboys Present — Club Mix"),
+  "Goodboys",
+);
+
+assert.equal(
+  performingCreditFromTitle(
+    "David Guetta & Marten Horger pres. Men Machine - 1001Tracklists Exclusive Mix 2026-06-22",
+  ),
+  "David Guetta & Marten Horger",
+);
+const menMachineSet = artistsForSet(
+  "David Guetta & Marten Horger pres. Men Machine - 1001Tracklists Exclusive Mix 2026-06-22",
+  { name: "Men Machine", slug: "men-machine", accent: "#ff4d6d" },
+);
+assert.equal(menMachineSet.primary.slug, "men-machine");
+assert.deepEqual(
+  menMachineSet.collaborators.map((c) => c.slug),
+  ["david-guetta", "marten-horger"],
+);
+
+const asot1290Set = artistsForSet(
+  "Armin van Buuren & Giuseppe Ottaviani - A State Of Trance 1290 2026-08-13",
+  { name: "Armin van Buuren", slug: "armin-van-buuren", accent: "#0077b6" },
+);
+assert.equal(asot1290Set.primary.slug, "armin-van-buuren");
+assert.deepEqual(
+  asot1290Set.collaborators.map((c) => c.slug),
+  ["giuseppe-ottaviani"],
+);
+
 console.log("artists.test.ts ok");

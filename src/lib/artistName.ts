@@ -3,6 +3,7 @@
  * Keeps aria-label chrome and form-field text out of the DJ catalog.
  */
 
+import { shieldAtomicActs } from "./ingest/atomicActs";
 import { expandGenres, genreKey } from "./genre";
 
 /** True when the whole string is exactly one canonical genre (e.g. "Afro House"). */
@@ -24,10 +25,113 @@ const A11Y_PREFIXES = [
 const JUNK_NAME =
   /^(enter your (email|name|password|phone)|click here|learn more|read more|sign up|log ?in|subscribe|cookie|privacy|terms|navigation menu|menu|search|home|close|submit|loading|untitled|unknown|null|undefined|n\/?a)$/i;
 
+const MONTH_NAMES =
+  "january|february|march|april|may|june|july|august|september|october|november|december";
+
+const MONTH_YEAR_RE = new RegExp(
+  `^(${MONTH_NAMES}),?\\s+(19|20)\\d{2}$`,
+  "i",
+);
+
+const WEEKEND_EDITION_RE = /\s+WE\s*[12]\s*$/i;
+const WEEKEND_WORD_RE = /\s+weekend\s*[12]\s*$/i;
+
+const SHOW_WITH_RE = /^(.+?)\s+with\s+(.+)$/i;
+
+/** Radio / party / episode brands that get pasted as the DJ name. */
+const SHOW_SERIES_HINT =
+  /\b(radio|therapy|sessions?|podcast|residency|presents?|mixes?|invitation|takeover|exclusive|friendship\s+mix|full\s+moon|group\s+therapy|protocol\s+radio|a\s+state\s+of\s+trance|festival|lineup|episode|mixtape|virtual\s+festival|tomorrowland)\b/i;
+
+const UNSHIELDED_COLLAB_SPLIT = /\s+(?:and|b2b|vs\.?)\s+/i;
+
+/** "June, 2026" / "April 2026" — a calendar crumb, never a person. */
+export function isMonthYearArtistName(name: string): boolean {
+  return MONTH_YEAR_RE.test(name.replace(/\s+/g, " ").trim());
+}
+
+/**
+ * Drop Tomorrowland-style weekend / stage edition suffixes so
+ * "Armin van Buuren WE1" and "Fisher Mainstage WE2" fold to the artist.
+ */
+export function stripFestivalEditionSuffix(name: string): string {
+  return name
+    .replace(/\s+/g, " ")
+    .trim()
+    .replace(WEEKEND_EDITION_RE, "")
+    .replace(WEEKEND_WORD_RE, "")
+    .replace(/\s+(main\s*stage|mainstage)\s*$/i, "")
+    .trim();
+}
+
+/** True when the left side of "X with Y" is a show / series, not a person. */
+export function looksLikeShowSeriesPrefix(name: string): boolean {
+  const n = name.replace(/\s+/g, " ").trim();
+  if (!n) return false;
+  if (/\b\d{2,4}\b/.test(n) && /[a-z]/i.test(n)) return true;
+  return SHOW_SERIES_HINT.test(n);
+}
+
+/**
+ * Split a credit on `and` / `b2b` / `vs` after shielding atomic acts
+ * so "Above & Beyond and Max Graham" → ["Above & Beyond", "Max Graham"].
+ */
+export function splitUnshieldedCollabNames(name: string): string[] {
+  const n = name.replace(/\s+/g, " ").trim();
+  if (!n) return [];
+  const { text, restore } = shieldAtomicActs(n);
+  return text
+    .split(UNSHIELDED_COLLAB_SPLIT)
+    .map((part) => restore(part).replace(/\s+/g, " ").trim())
+    .filter((part) => part.length >= 2);
+}
+
+export type ShowWithGuestCredit = {
+  left: string;
+  leftIsShow: boolean;
+  guests: string[];
+};
+
+/**
+ * "Full Moon with Timmy Trumpet" /
+ * "Group Therapy 674 with Above & Beyond and Max Graham"
+ */
+export function parseShowWithGuestCredit(
+  name: string,
+): ShowWithGuestCredit | null {
+  const n = name.replace(/\s+/g, " ").trim();
+  const m = n.match(SHOW_WITH_RE);
+  if (!m?.[1] || !m[2]) return null;
+  const left = m[1].trim();
+  const guests = splitUnshieldedCollabNames(m[2].trim());
+  if (!left || guests.length === 0) return null;
+  return {
+    left,
+    leftIsShow: looksLikeShowSeriesPrefix(left),
+    guests,
+  };
+}
+
+/** Extra artists after the primary when a Dj.name is a combined credit. */
+export function extraArtistsFromCombinedName(name: string): string[] {
+  const parsed = parseShowWithGuestCredit(name);
+  if (parsed) {
+    return parsed.leftIsShow ? parsed.guests.slice(1) : parsed.guests;
+  }
+  return splitUnshieldedCollabNames(name).slice(1);
+}
+
+function hasUnshieldedCollab(name: string): boolean {
+  const { text } = shieldAtomicActs(name.replace(/\s+/g, " ").trim());
+  return SHOW_WITH_RE.test(text) || UNSHIELDED_COLLAB_SPLIT.test(text);
+}
+
 /** True when the string is UI chrome / form copy, not an artist. */
 export function isJunkArtistName(name: string): boolean {
   const n = name.replace(/\s+/g, " ").trim();
   if (!n) return true;
+  if (isMonthYearArtistName(n)) return true;
+  if (hasUnshieldedCollab(n)) return true;
+  if (WEEKEND_EDITION_RE.test(n) || WEEKEND_WORD_RE.test(n)) return true;
   if (A11Y_PREFIXES.some((re) => re.test(n))) return true;
   if (JUNK_NAME.test(n)) return true;
   if (/navigation menu$/i.test(n)) return true;
@@ -48,7 +152,8 @@ export function isJunkArtistName(name: string): boolean {
   if (/\bsessions?\b/i.test(n)) return true;
   if (/\btv\s*$/i.test(n)) return true;
   if (/\bepisode\b/i.test(n) || /\bmixtape\b/i.test(n)) return true;
-  if (/\bpresents\b/i.test(n)) return true;
+  if (/\bpresents\b/i.test(n) || /\bpresents?\s*$/i.test(n)) return true;
+  if (/\)+$/.test(n) && !n.includes("(")) return true;
   if (/\bfrom scratch\b/i.test(n)) return true;
   // "Artist at Venue / Festival …" should never be a Dj.name
   if (/\s+at\s+.+/i.test(n) && n.length > 24) return true;
@@ -58,7 +163,7 @@ export function isJunkArtistName(name: string): boolean {
   // UI scrape crumbs
   if (/\b(volume\s+control|main\s+navigation)\b/i.test(n)) return true;
   // Hearthis / SC channel titles mistaken for people ("Afro House Late Evening MIX")
-  if (/\bmix\s*$/i.test(n)) return true;
+  if (/\bmixes?\s*$/i.test(n)) return true;
   if (/\b(special\s+edition|hors\s+s[ée]rie)\b/i.test(n)) return true;
   if (/\b(late|early)\s+(evening|morning|night|afternoon)\b/i.test(n)) {
     return true;
@@ -118,6 +223,23 @@ export function sanitizeArtistName(raw: string): string | null {
 
   // Trailing live/dj-set crumbs from lineup cards
   n = n.replace(/\s+[–—|-]\s+(live|dj set|b2b).*$/i, "").trim();
+  // "Armin van Buuren WE1" → "Armin van Buuren" before junk reject
+  n = stripFestivalEditionSuffix(n);
+  // "Goodboys Present" → "Goodboys"
+  n = n.replace(/\s+presents?\s*$/i, "").trim();
+  // Scrape leftover: "Ginger)"
+  if (/\)+$/.test(n) && !n.includes("(")) n = n.replace(/\)+$/g, "").trim();
+  if (/^\(+/.test(n) && !n.includes(")")) n = n.replace(/^\(+/g, "").trim();
+
+  const withCredit = parseShowWithGuestCredit(n);
+  if (withCredit) {
+    n = withCredit.leftIsShow
+      ? (withCredit.guests[0] ?? "")
+      : withCredit.left;
+  } else {
+    const parts = splitUnshieldedCollabNames(n);
+    if (parts[0]) n = parts[0];
+  }
 
   if (n.length < 2 || n.length > 60) return null;
   if (!/[a-zA-Z]/.test(n)) return null;

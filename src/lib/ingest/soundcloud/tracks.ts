@@ -58,4 +58,29 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     type: "festival",
     minDurationSec: 15 * 60,
   },
+  {
+    // Official Horger upload; 1001TL wired via
+    // sc-marten-horger-tomorrowland-mainstage-2023.
+    url: "https://soundcloud.com/marten-horger/tomorrowland-mainstage-2023",
+    primaryArtist: dj("Marten Horger", {
+      accent: "#ff7a45",
+      homeCity: "Berlin, DE",
+    }),
+    genre: "Bass House",
+    type: "festival",
+    minDurationSec: 15 * 60,
+  },
+  {
+    // 1001Tracklists exclusive; 1001TL wired via
+    // sc-1001tracklists-men-machine-exclusive-mix-2026 (same list as yt-NTLDGnoWIRg).
+    url: "https://soundcloud.com/1001tracklists/men-machine-exclusive-mix-2026",
+    primaryArtist: dj("Men Machine", {
+      accent: "#ff4d6d",
+      homeCity: "Paris / Berlin",
+    }),
+    genre: "Bass House",
+    seriesName: "1001Tracklists Exclusive Mix",
+    type: "mix",
+    minDurationSec: 15 * 60,
+  },
 ];
