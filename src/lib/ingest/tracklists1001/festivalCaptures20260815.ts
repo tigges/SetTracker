@@ -257,3 +257,28 @@ export const TL_ARMIN_VAN_BUUREN_TML_WE1_FREEDOM_2026: FingerprintSeedRow[] = [
   { at: "2:21:55", artist: "Armin van Buuren ft. SACHA", title: "Set Me Free (Rising Star Remix)" },
   { at: "2:25:22", artist: "Armin van Buuren ft. SACHA", title: "Set Me Free (VIP Mix)" },
 ];
+
+/**
+ * Marlon Hoffstadt @ Sahara, Coachella Festival Weekend 2, United States 2026-04-17
+ * https://www.1001tracklists.com/tracklist/1lwj1r59/marlon-hoffstadt-sahara-coachella-festival-weekend-2-united-states-2026-04-17.html
+ * Official YT: https://youtu.be/vpf4LLy42Zc
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-vpf4LLy42Zc"]
+ * Captured 2026-08-15 - provenance 1001tl.
+ */
+export const TL_MARLON_HOFFSTADT_COACHELLA_WE2_2026: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "Hannah Laing & Marlon Hoffstadt ft. Caroline Roxy", title: "Stomp Your Feet" },
+  { at: "4:10", artist: "Marlon Hoffstadt & Coach Harrison", title: "Daddy's In The Club" },
+  { at: "7:17", artist: "Dimitri Vegas & Like Mike & Marlon Hoffstadt & DJ Konik", title: "Makina Time" },
+  { at: "10:11", artist: "The Prodigy", title: "No Good (Start The Dance) (Marlon Hoffstadt Rave Revival Edit)" },
+  { at: "17:15", artist: "Yeat", title: "COMË N GO (Marlon Hoffstadt Edit)" },
+  { at: "20:35", artist: "Marlon Hoffstadt", title: "Turn It Up" },
+  { at: "24:20", artist: "Marlon Hoffstadt ft. rhys from the sticks", title: "Come Up For Air" },
+  { at: "27:00", artist: "Marlon Hoffstadt aka DJ Daddy Trance", title: "I Got You" },
+  { at: "30:22", artist: "Marlon Hoffstadt & KI/KI", title: "Losing Control" },
+  { at: "33:00", artist: "ANOTR ft. 54 Ultra", title: "Talk To You (Anyma & Marlon Hoffstadt Edit)" },
+  { at: "35:25", artist: "Marlon Hoffstadt", title: "Breathe (Morgan Seatree & Marlon Hoffstadt Remix)" },
+  { at: "39:05", artist: "Justice vs. Simian", title: "We Are Your Friends (Marlon Hoffstadt Remix)" },
+  { at: "49:30", artist: "Marlon Hoffstadt", title: "Party People" },
+  { at: "53:00", artist: "Marlon Hoffstadt aka DJ Daddy Trance", title: "It's That Time" },
+  { at: "55:48", artist: "David Guetta ft. Kid Cudi", title: "Memories (Marlon Hoffstadt Edit)" },
+];

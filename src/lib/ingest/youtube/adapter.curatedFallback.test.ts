@@ -10,6 +10,9 @@ const ASOT = YOUTUBE_SETS.find((s) => s.video.includes("bxb6Tglooc4"));
 const MEN_MACHINE = YOUTUBE_SETS.find((s) => s.video.includes("NTLDGnoWIRg"));
 const AOKI = YOUTUBE_SETS.find((s) => s.video.includes("hgbAN8NFNu0"));
 const ARMIN_FREEDOM = YOUTUBE_SETS.find((s) => s.video.includes("pwXGm4HEQdo"));
+const MARLON_COACHELLA = YOUTUBE_SETS.find((s) =>
+  s.video.includes("vpf4LLy42Zc"),
+);
 
 describe("watchMetaFromCuratedSeed", () => {
   it("builds ASOT 1290 meta from the curated 1001 capture", () => {
@@ -33,6 +36,16 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=pwXGm4HEQdo");
     // Last cue 2:25:22 + 180s pad.
     assert.equal(meta.durationSec, 2 * 3600 + 25 * 60 + 22 + 180);
+  });
+
+  it("builds Marlon Hoffstadt Coachella WE2 meta from the curated 1001 capture", () => {
+    assert.ok(MARLON_COACHELLA);
+    const meta = watchMetaFromCuratedSeed(MARLON_COACHELLA);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "vpf4LLy42Zc");
+    assert.match(meta.title, /Coachella 2026/i);
+    // Last cue 55:48 + 180s pad.
+    assert.equal(meta.durationSec, 55 * 60 + 48 + 180);
   });
 
   it("returns null without a title or video id", () => {
@@ -117,5 +130,19 @@ describe("curated YouTube 429 fallback", () => {
     assert.ok(sets[0]!.durationSec >= 2 * 3600 + 25 * 60);
     assert.equal(sets[0]?.primaryArtist?.slug, "armin-van-buuren");
     assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
+  });
+
+  it("lands Marlon Hoffstadt Coachella WE2 from the 1001 seed when watch is 429", async () => {
+    assert.ok(MARLON_COACHELLA);
+    const adapter = createYoutubeAdapter([MARLON_COACHELLA], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-vpf4LLy42Zc");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 15);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 55 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "marlon-hoffstadt");
+    assert.match(String(sets[0]?.eventName ?? ""), /Coachella/i);
   });
 });
