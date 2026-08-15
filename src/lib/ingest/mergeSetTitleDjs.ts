@@ -13,7 +13,11 @@
  */
 
 import type { PrismaClient } from "@prisma/client";
-import { isJunkArtistName, sanitizeArtistName } from "../artistName";
+import {
+  isJunkArtistName,
+  isMonthYearArtistName,
+  sanitizeArtistName,
+} from "../artistName";
 import {
   BRAND_HOST_SLUGS,
   BRAND_SERIES_SLUGS,
@@ -95,6 +99,17 @@ function looksLikeSetTitleDj(name: string, slug: string): boolean {
   if (/\bwarm\s*up\b/i.test(name)) return true;
   if (/\b(live|tour\s*mix)\s*$/i.test(name)) return true;
   if (/\(\s*live/i.test(name)) return true;
+  if (/\s+WE\s*[12]\s*$/i.test(name) || /\s+weekend\s*[12]\s*$/i.test(name)) {
+    return true;
+  }
+  if (
+    isMonthYearArtistName(name) ||
+    /^(january|february|march|april|may|june|july|august|september|october|november|december)-20\d{2}$/i.test(
+      slug,
+    )
+  ) {
+    return true;
+  }
   if (looksLikeEventOrSeriesCredit(name)) return true;
   if (isJunkArtistName(name)) return true;
   return false;
@@ -353,8 +368,11 @@ export async function mergeSetTitleDjs(
       setTitles,
     );
     if (!target || target.slug === dj.slug) {
-      // Series-only crumbs: drop SetArtist links, keep series/event on the set.
-      if (isSeriesOnlyHostCrumb(dj.name, dj.slug, setTitles)) {
+      // Series-only crumbs / calendar names: drop SetArtist links, keep series/event.
+      if (
+        isSeriesOnlyHostCrumb(dj.name, dj.slug, setTitles) ||
+        isMonthYearArtistName(dj.name)
+      ) {
         const n = await prisma.setArtist.deleteMany({
           where: { djId: dj.id },
         });

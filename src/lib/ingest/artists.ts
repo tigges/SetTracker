@@ -5,6 +5,7 @@
  * `atomicActs` so they stay one credit — not Walker b2b Royce.
  */
 
+import { isMonthYearArtistName } from "../artistName";
 import { shieldAtomicActs } from "./atomicActs";
 import { slugify, type RawArtist } from "./types";
 
@@ -50,6 +51,9 @@ export function tidyPerformingCredit(name: string): string {
     .replace(/\s+warm\s*ups?\b.*$/i, "")
     .replace(/\s+\(?\s*live\b.*$/i, "")
     .replace(/\s+tour\s*mix\b.*$/i, "")
+    .replace(/\s+WE\s*[12]\s*$/i, "")
+    .replace(/\s+weekend\s*[12]\s*$/i, "")
+    .replace(/\s+(main\s*stage|mainstage)\s*$/i, "")
     .replace(/\s*[|–—:-]+\s*$/g, "")
     .trim();
 }
@@ -152,12 +156,15 @@ export function performingCreditFromTitle(title: string): string {
       if (
         rightHead &&
         !looksLikeEventOrSeriesCredit(rightHead) &&
-        !/^\d{4}\b/.test(rightHead)
+        !/^\d{4}\b/.test(rightHead) &&
+        !isMonthYearArtistName(rightHead)
       ) {
         return tidyPerformingCredit(rightHead);
       }
+      // "Tomorrowland Friendship Mix - June, 2026" — date is not a DJ
+    } else {
+      return tidyPerformingCredit(left);
     }
-    return tidyPerformingCredit(left);
   }
   // Series titles: "Dom Dolla // Dancefloor Currency"
   m = cleaned.match(/^(.+?)\s+\/\/\s+/);

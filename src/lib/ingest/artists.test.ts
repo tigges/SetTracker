@@ -149,4 +149,27 @@ assert.equal(
   "Japhet Be",
 );
 
+assert.equal(
+  performingCreditFromTitle("Armin van Buuren WE2 | Tomorrowland 2026"),
+  "Armin van Buuren",
+);
+assert.equal(
+  performingCreditFromTitle("Odd Mob WE2 | Tomorrowland 2026"),
+  "Odd Mob",
+);
+assert.equal(
+  performingCreditFromTitle("Fisher Mainstage WE1 | Tomorrowland 2026"),
+  "Fisher",
+);
+assert.equal(
+  performingCreditFromTitle(
+    "Tomorrowland Friendship Mix with Steve Aoki - August, 2026",
+  ),
+  "Steve Aoki",
+);
+assert.notEqual(
+  performingCreditFromTitle("Tomorrowland Friendship Mix - June, 2026"),
+  "June, 2026",
+);
+
 console.log("artists.test.ts ok");

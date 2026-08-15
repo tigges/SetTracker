@@ -20,4 +20,11 @@ describe("djSlugAliases", () => {
       "odd-mob",
     );
   });
+
+  it("folds festival weekend edition slugs onto the artist", () => {
+    assert.equal(canonicalDjSlug("armin-van-buuren-we1"), "armin-van-buuren");
+    assert.equal(canonicalDjSlug("odd-mob-we2"), "odd-mob");
+    assert.equal(canonicalDjSlug("david-guetta-we-2"), "david-guetta");
+    assert.equal(canonicalDjSlug("armin-van-buuren"), "armin-van-buuren");
+  });
 });

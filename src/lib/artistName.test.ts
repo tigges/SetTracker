@@ -62,4 +62,16 @@ assert.equal(isJunkArtistName("One World Radio"), true);
 assert.equal(isJunkArtistName("Defected TV"), true);
 assert.equal(sanitizeArtistName("Defected Virtual Festival 4.0"), null);
 
+assert.equal(isJunkArtistName("Armin van Buuren WE1"), true);
+assert.equal(isJunkArtistName("Odd Mob WE2"), true);
+assert.equal(isJunkArtistName("Armin van Buuren"), false);
+assert.equal(isJunkArtistName("June, 2026"), true);
+assert.equal(isJunkArtistName("April 2026"), true);
+assert.equal(isJunkArtistName("May, 2026"), true);
+assert.equal(sanitizeArtistName("Armin van Buuren WE1"), "Armin van Buuren");
+assert.equal(sanitizeArtistName("David Guetta WE2"), "David Guetta");
+assert.equal(sanitizeArtistName("Fisher Mainstage WE1"), "Fisher");
+assert.equal(sanitizeArtistName("June, 2026"), null);
+assert.equal(sanitizeArtistName("July, 2026"), null);
+
 console.log("artistName.test.ts ok");

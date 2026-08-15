@@ -24,10 +24,42 @@ const A11Y_PREFIXES = [
 const JUNK_NAME =
   /^(enter your (email|name|password|phone)|click here|learn more|read more|sign up|log ?in|subscribe|cookie|privacy|terms|navigation menu|menu|search|home|close|submit|loading|untitled|unknown|null|undefined|n\/?a)$/i;
 
+const MONTH_NAMES =
+  "january|february|march|april|may|june|july|august|september|october|november|december";
+
+const MONTH_YEAR_RE = new RegExp(
+  `^(${MONTH_NAMES}),?\\s+(19|20)\\d{2}$`,
+  "i",
+);
+
+const WEEKEND_EDITION_RE = /\s+WE\s*[12]\s*$/i;
+const WEEKEND_WORD_RE = /\s+weekend\s*[12]\s*$/i;
+
+/** "June, 2026" / "April 2026" — a calendar crumb, never a person. */
+export function isMonthYearArtistName(name: string): boolean {
+  return MONTH_YEAR_RE.test(name.replace(/\s+/g, " ").trim());
+}
+
+/**
+ * Drop Tomorrowland-style weekend / stage edition suffixes so
+ * "Armin van Buuren WE1" and "Fisher Mainstage WE2" fold to the artist.
+ */
+export function stripFestivalEditionSuffix(name: string): string {
+  return name
+    .replace(/\s+/g, " ")
+    .trim()
+    .replace(WEEKEND_EDITION_RE, "")
+    .replace(WEEKEND_WORD_RE, "")
+    .replace(/\s+(main\s*stage|mainstage)\s*$/i, "")
+    .trim();
+}
+
 /** True when the string is UI chrome / form copy, not an artist. */
 export function isJunkArtistName(name: string): boolean {
   const n = name.replace(/\s+/g, " ").trim();
   if (!n) return true;
+  if (isMonthYearArtistName(n)) return true;
+  if (WEEKEND_EDITION_RE.test(n) || WEEKEND_WORD_RE.test(n)) return true;
   if (A11Y_PREFIXES.some((re) => re.test(n))) return true;
   if (JUNK_NAME.test(n)) return true;
   if (/navigation menu$/i.test(n)) return true;
@@ -118,6 +150,8 @@ export function sanitizeArtistName(raw: string): string | null {
 
   // Trailing live/dj-set crumbs from lineup cards
   n = n.replace(/\s+[–—|-]\s+(live|dj set|b2b).*$/i, "").trim();
+  // "Armin van Buuren WE1" → "Armin van Buuren" before junk reject
+  n = stripFestivalEditionSuffix(n);
 
   if (n.length < 2 || n.length > 60) return null;
   if (!/[a-zA-Z]/.test(n)) return null;
