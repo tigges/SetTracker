@@ -59,6 +59,7 @@ import {
   TL_MEN_MACHINE_1001_EXCLUSIVE_2026,
   TL_ARMIN_OTTAVIANI_ASOT_1290_2026,
   TL_ARMIN_VAN_BUUREN_TML_WE1_FREEDOM_2026,
+  TL_DOM_DOLLA_CREAMFIELDS_STEEL_YARD_2025,
   TL_MARLON_HOFFSTADT_COACHELLA_WE2_2026,
   TL_MISS_MONIQUE_TML_WE2_2026,
   TL_NICKY_ROMERO_TML_WE2_2026,
@@ -271,6 +272,22 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/jf3kd41/dom-dolla-allianz-stadium-sydney-australia-2025-12-20.html",
     tracklist1001: TL_DOM_DOLLA_ALLIANZ_SYDNEY,
+  },
+  {
+    // Official Relive — Creamfields North Steel Yard 2025; timed 1001 capture.
+    video: "https://www.youtube.com/watch?v=NblVVOwQRqw",
+    primaryArtist: dj("Dom Dolla", {
+      accent: "#00bbf9",
+      homeCity: "Melbourne, AU",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    title: "Dom Dolla Steel Yard | Creamfields 2025",
+    seriesName: "Creamfields",
+    eventName: "Creamfields",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2uwn3mgk/dom-dolla-steel-yard-creamfields-north-united-kingdom-2025-08-23.html",
+    tracklist1001: TL_DOM_DOLLA_CREAMFIELDS_STEEL_YARD_2025,
   },
   {
     video: "https://www.youtube.com/watch?v=i9cNYaOOdwA",

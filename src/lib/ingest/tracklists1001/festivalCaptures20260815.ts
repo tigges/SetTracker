@@ -259,6 +259,64 @@ export const TL_ARMIN_VAN_BUUREN_TML_WE1_FREEDOM_2026: FingerprintSeedRow[] = [
 ];
 
 /**
+ * Dom Dolla @ Steel Yard, Creamfields North, United Kingdom 2025-08-23
+ * https://www.1001tracklists.com/tracklist/2uwn3mgk/dom-dolla-steel-yard-creamfields-north-united-kingdom-2025-08-23.html
+ * Official YT: https://youtu.be/NblVVOwQRqw
+ * Official SC: https://soundcloud.com/domdolla/dom-dolla-live-creamfields-steel-yard-2025
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-NblVVOwQRqw"]
+ * Also: sc-domdolla-dom-dolla-live-creamfields-steel-yard-2025
+ * Captured 2026-08-15 - provenance 1001tl.
+ */
+export const TL_DOM_DOLLA_CREAMFIELDS_STEEL_YARD_2025: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "Tigerblind", title: "It's About Time" },
+  { at: "1:46", artist: "Niko The Kid", title: "Say Goodbye" },
+  { at: "2:54", artist: "Dom Dolla", title: "San Frandisco" },
+  { at: "4:01", artist: "Max Styler", title: "Inferno" },
+  { at: "5:44", artist: "ESSE vs. Dom Dolla", title: "Work It vs. Take It (Dom Dolla Mashup)" },
+  { at: "6:42", artist: "Dom Dolla", title: "Take It" },
+  { at: "7:40", artist: "ESSE", title: "Work It" },
+  { at: "8:38", artist: "DONT BLINK", title: "HELL YEAH" },
+  { at: "10:36", artist: "Dom Dolla & Nelly Furtado", title: "Eat Your Man" },
+  { at: "12:32", artist: "TOYZZ", title: "Generation" },
+  { at: "14:14", artist: "HNTR", title: "Shook Ones, Pt. III" },
+  { at: "16:39", artist: "Fatima Yamaha", title: "What's A Girl To Do (Layton Giordani Remix)" },
+  { at: "19:39", artist: "Mesto", title: "Caramelle" },
+  { at: "20:41", artist: "Dom Dolla ft. Daya", title: "Dreamin" },
+  { at: "21:42", artist: "ESSE", title: "Voce" },
+  { at: "22:40", artist: "Jamie xx ft. The Avalanches", title: "All You Children" },
+  { at: "23:38", artist: "The Chemical Brothers", title: "Do It Again (Massano Remix)" },
+  { at: "25:33", artist: "Gorillaz ft. Tame Impala & Bootie Brown", title: "New Gold (Dom Dolla Remix)" },
+  { at: "28:41", artist: "Felix Da Housecat ft. Miss Kittin", title: "Silver Screen Shower Scene (Alexander Delanois Private Mix)" },
+  { at: "30:08", artist: "Daft Punk", title: "Around The World (Westend Edit)" },
+  { at: "33:01", artist: "Fred again.. x Da Hool", title: "Victory Lap (Kamino Unhinged Edit)" },
+  { at: "33:53", artist: "Da Hool", title: "Meet Her At The Love Parade" },
+  { at: "34:46", artist: "Fred again.. & Skepta & PlaqueBoyMax", title: "Victory Lap" },
+  { at: "35:38", artist: "RÜFÜS DU SOL", title: "Pressure (Kyle Watson Rechunk)" },
+  { at: "38:52", artist: "Andrew Meller", title: "Insomnia (Matt Sassari Remix)" },
+  { at: "42:13", artist: "Adam Beyer & Bart Skils", title: "Your Mind (HNTR Remix)" },
+  { at: "44:57", artist: "Tchami", title: "Adieu (Westend Edit)" },
+  { at: "47:35", artist: "DJ KUBA & NEITAN X Skytech", title: "I Want You (Wh0 Festival Remix)" },
+  { at: "50:14", artist: "Audio Bullys", title: "We Don't Care (SIDEPIECE Treat)" },
+  { at: "52:38", artist: "KlangKuenstler", title: "Jam Master Jack" },
+  { at: "53:07", artist: "Teriyaki Boyz", title: "Tokyo Drift (The Fast And The Furious: Tokyo Drift OST)" },
+  { at: "53:36", artist: "Tame Impala", title: "Let It Happen (OMNOM Remix)" },
+  { at: "56:44", artist: "Layton Giordani & Green Velvet", title: "When It Kicks" },
+  { at: "59:23", artist: "Dom Dolla", title: "Saving Up" },
+  { at: "1:02:30", artist: "Phil Kieran vs. MK & Dom Dolla", title: "Skyhook 2 vs. Rhyme Dust (Dom Dolla Edit)" },
+  { at: "1:04:02", artist: "Phil Kieran", title: "Skyhook 2" },
+  { at: "1:05:34", artist: "MK & Dom Dolla", title: "Rhyme Dust" },
+  { at: "1:07:05", artist: "Dom Dolla & Nathan Nicholson", title: "No Room For A Saint (From F1® The Movie) (Walker & Royce Remix)" },
+  { at: "1:11:14", artist: "Dom Dolla", title: "girl$" },
+  { at: "1:14:48", artist: "Dom Dolla ft. Clementine Douglas", title: "Miracle Maker (Maddix Edit)" },
+  { at: "1:18:10", artist: "Sidney Samson", title: "Riverside" },
+  { at: "1:20:05", artist: "Sonny Fodera & Dom Dolla", title: "Moving Blind (Gorgon City Remix)" },
+  { at: "1:22:00", artist: "Tiga", title: "Mind Dimension (Kamino Edit)" },
+  { at: "1:24:53", artist: "Will Easton", title: "Technic" },
+  { at: "1:25:59", artist: "Dom Dolla", title: "You" },
+  { at: "1:27:04", artist: "Adapter & FRANCO BA", title: "Malfunktion" },
+];
+
+/**
  * Marlon Hoffstadt @ Sahara, Coachella Festival Weekend 2, United States 2026-04-17
  * https://www.1001tracklists.com/tracklist/1lwj1r59/marlon-hoffstadt-sahara-coachella-festival-weekend-2-united-states-2026-04-17.html
  * Official YT: https://youtu.be/vpf4LLy42Zc
