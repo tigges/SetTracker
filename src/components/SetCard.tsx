@@ -12,6 +12,7 @@ import {
   fmtDuration,
   fmtRelative,
 } from "@/lib/status";
+import { FEED_SPOTLIGHT_META } from "@/lib/feedPriority";
 import { setDisplayThumb } from "@/lib/setBrowse";
 import type { FeedItem } from "@/lib/queries";
 
@@ -88,6 +89,14 @@ export function SetCard({ set }: { set: FeedItem }) {
           </p>
           {set.title !== headline ? (
             <p className="mt-0.5 truncate text-[12px] text-muted2">{set.title}</p>
+          ) : null}
+          {set.spotlight ? (
+            <p
+              className="mt-1 inline-block rounded-full border border-line px-2 py-0.5 text-[10px] font-medium uppercase tracking-[0.08em] text-muted"
+              title={FEED_SPOTLIGHT_META[set.spotlight].title}
+            >
+              {FEED_SPOTLIGHT_META[set.spotlight].short}
+            </p>
           ) : null}
         </div>
       </Link>
