@@ -328,6 +328,7 @@ export function AtlasMap({
   }
 
   function selectPin(p: AtlasPin) {
+    setListOpen(false);
     setClickedId(p.id);
     if (typeof window !== "undefined") {
       history.replaceState(null, "", `#${p.slug}`);

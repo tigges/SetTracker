@@ -277,13 +277,15 @@ export function GlobalSearch({
           ) : (
             list
           )}
-          <Link
-            href={`/search?q=${encodeURIComponent(q.trim())}`}
-            onClick={() => setOpen(false)}
-            className="block border-t border-line px-3 py-2 text-[11px] text-muted2 hover:text-ink"
-          >
-            All results →
-          </Link>
+          {onAtlas ? null : (
+            <Link
+              href={`/search?q=${encodeURIComponent(q.trim())}`}
+              onClick={() => setOpen(false)}
+              className="block border-t border-line px-3 py-2 text-[11px] text-muted2 hover:text-ink"
+            >
+              All results →
+            </Link>
+          )}
         </div>
       )}
     </div>
