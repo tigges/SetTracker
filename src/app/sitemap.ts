@@ -3,6 +3,7 @@ import {
   getAllDjSlugs,
   getAllLabelSlugs,
   getAllSetSlugs,
+  getAllTrackSlugs,
   getAllVenueSlugs,
 } from "@/lib/queries";
 import { SITE_URL } from "@/lib/site";
@@ -15,11 +16,12 @@ function loc(path: string): string {
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [sets, djs, events, labels] = await Promise.all([
+  const [sets, djs, events, labels, tracks] = await Promise.all([
     getAllSetSlugs(),
     getAllDjSlugs(),
     getAllVenueSlugs(),
     getAllLabelSlugs(),
+    getAllTrackSlugs(),
   ]);
 
   const staticPages: MetadataRoute.Sitemap = [
@@ -31,6 +33,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: loc("/about"), changeFrequency: "monthly", priority: 0.5 },
     { url: loc("/search"), changeFrequency: "weekly", priority: 0.4 },
     { url: loc("/labels"), changeFrequency: "monthly", priority: 0.3 },
+    { url: loc("/tracks"), changeFrequency: "weekly", priority: 0.3 },
   ];
 
   return [
@@ -60,6 +63,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       .filter((s) => s !== "_placeholder")
       .map((slug) => ({
         url: loc(`/labels/${slug}`),
+        changeFrequency: "monthly" as const,
+        priority: 0.3,
+      })),
+    ...tracks
+      .filter((s) => s !== "_placeholder")
+      .map((slug) => ({
+        url: loc(`/tracks/${slug}`),
         changeFrequency: "monthly" as const,
         priority: 0.3,
       })),

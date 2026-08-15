@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/site";
 import { SearchPageClient } from "./SearchPageClient";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Search",
   description: "Search setradar sets, DJs, events, labels, and tracks.",
-};
+  path: "/search",
+});
 
 export default function SearchPage() {
   return (

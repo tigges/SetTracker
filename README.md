@@ -1,9 +1,8 @@
 # setradar.ai
 
-A bass house DJ **set database** (MVP), branded as **setradar.ai**. Browse radio
-episodes, festival sets and SoundCloud mixes; every track row carries a
-**status** and **provenance** so you can see what's identified and what's still
-an ID.
+A DJ **set database**, branded as **setradar.ai**. Browse festival Relives,
+radio shows, and mixes; every track row carries a **status** and **provenance**
+so you can see what's identified and what's still an ID.
 
 > Live app: https://setradar.ai/
 >
@@ -12,9 +11,10 @@ an ID.
 > briefly serves this README as the site — that is the blank “Stack / Data model”
 > page, not the product.
 >
-> **Deploy speed:** pushes rebuild the site **without crawling** (uses the last
-> cached catalog DB, ~2–4 min). Full source crawls run on the 6h cron or via
-> Actions → Deploy → `deep`.
+> **Deploy speed:** pushes to `main` rebuild the site **without crawling**
+> (cached catalog DB, ~2 min). New 1001 seeds on `main` still need
+> **Actions → Deploy to GitHub Pages → `ingest: force`** to land in the live
+> HTML. Full crawls run on the overnight `catalog-deep` chain, not on push.
 
 ## Stack
 
@@ -42,16 +42,18 @@ Provenance per row: `1001TL parse`, `SoundCloud parse`, `fingerprint`, `communit
 
 ## Pages
 
-1. **Sets feed** (`/`) — time-grouped (This week / Earlier).
-2. **Set detail** (`/sets/[slug]`) — a horizontal **set strip** (segmented
-   timeline colored by track status); click a segment to jump to its tracklist
-   row.
-3. **DJ profile** (`/djs/[slug]`) — series, recent sets, most-played tracks,
-   collaborators and source health.
-4. **Events** (`/events`, `/events/[slug]`) — festivals, clubs, livestreams.
-5. **Top 100 Atlas** (`/atlas`) — DJ Mag 2026 clubs & festivals plus 2025 DJs
-   on a world map, linked to catalog sets and DJ profiles.
-6. **Labels** (`/labels`, `/labels/[slug]`) — imprint index and profiles.
+1. **Sets feed** (`/`) — New this week, Festival season, Popular, Radar picks,
+   then Deep catalog. **Complete only** hides thin stubs.
+2. **Set detail** (`/sets/[slug]`) — status timeline, export, related sets
+   (same event / series / DJ).
+3. **DJ profile** (`/djs/[slug]`) — series chips open Search, recent sets,
+   most-played tracks, collaborators, source health.
+4. **Events** (`/events`, `/events/[slug]`) — festivals, clubs, livestreams,
+   plus a curated festival-edition calendar with capture-gap links.
+5. **Atlas** (`/atlas`) — DJ Mag Top 100 clubs, festivals, and DJs. Header
+   search; empty pins link to `/capture-1001?q=…`.
+6. **Search / Stats / About** — catalog search, coverage, product notes.
+7. **Tracks / Labels** — still in the catalog and sitemap; not in the main nav.
 
 ## Getting started
 
@@ -123,7 +125,7 @@ The app publishes as a fully static site. **`deploy-pages.yml` is the single
 deployer** — the only workflow that builds + publishes Pages. Producers save the
 catalog DB cache and dispatch it:
 
-- **push to `main`** — fast path: restore cached catalog DB → apply pins → export → deploy. Curated YouTube/SoundCloud ingest runs only when seed/adapter/roster files changed (or `ingest=force`). Request-file bumps (`data/deep-request`, …) do not start a Pages build.
+- **push to `main`** — fast path: restore cached catalog DB → apply pins → export → deploy. **Never ingests** unless `ingest=force`. New 1001 / YT / SC seeds on the same push do **not** appear live until that force ingest. Request-file bumps (`data/deep-request`, …) do not start a Pages build. Do not bump `data/deep-request` for seed-only work.
 - **6h cron / manual `deep`** (`catalog-deep.yml`) — crawl → save DB cache → dispatch **enrich `full`** (not Pages; avoids a DB-cache race)
 - **`catalog-enrich.yml`** — thumbs/MB + ACRCloud + File Scanning → save DB cache → dispatch deploy
 

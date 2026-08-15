@@ -2,12 +2,13 @@ import type { Metadata } from "next";
 import { getFeed, getGenres } from "@/lib/queries";
 import { SetFeed } from "@/components/SetFeed";
 import { StatusLegend } from "@/components/StatusBits";
-import { SITE_DESCRIPTION } from "@/lib/site";
+import { pageMeta, SITE_DESCRIPTION } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Sets",
   description: SITE_DESCRIPTION,
-};
+  path: "/",
+});
 
 export default async function Home() {
   const [feed, genres] = await Promise.all([getFeed(), getGenres()]);

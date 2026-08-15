@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { StatusLegend } from "@/components/StatusBits";
+import { pageMeta } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "About",
   description:
     "What setradar.ai is: a DJ set database with tracklist IDs, provenance, and source health.",
-};
+  path: "/about",
+});
 
 export default function AboutPage() {
   return (
