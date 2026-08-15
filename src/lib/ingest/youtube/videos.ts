@@ -58,6 +58,7 @@ import {
   TL_STEVE_AOKI_TML_WE2_2026,
   TL_MEN_MACHINE_1001_EXCLUSIVE_2026,
   TL_ARMIN_OTTAVIANI_ASOT_1290_2026,
+  TL_ARMIN_VAN_BUUREN_TML_WE1_FREEDOM_2026,
   TL_MISS_MONIQUE_TML_WE2_2026,
   TL_NICKY_ROMERO_TML_WE2_2026,
   TL_ODD_MOB_TML_WE2_2026,
@@ -759,6 +760,22 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/2s558yl9/armin-van-buuren-mainstage-tomorrowland-weekend-2-belgium-2026-07-25.html",
     tracklist1001: TL_ARMIN_VAN_BUUREN_TML_WE2_2026,
+  },
+  {
+    // Tomorrowland official Relive — Freedom Stage WE1.
+    video: "https://www.youtube.com/watch?v=pwXGm4HEQdo",
+    primaryArtist: dj("Armin van Buuren", {
+      accent: "#0077b6",
+      homeCity: "Leiden, NL",
+    }),
+    genre: "Trance",
+    type: "festival",
+    title: "Armin van Buuren Freedom WE1 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/vmz5x4t/armin-van-buuren-freedom-stage-tomorrowland-weekend-1-belgium-2026-07-18.html",
+    tracklist1001: TL_ARMIN_VAN_BUUREN_TML_WE1_FREEDOM_2026,
   },
   {
     // ASOT 1290 radio episode; timed 1001 capture.
