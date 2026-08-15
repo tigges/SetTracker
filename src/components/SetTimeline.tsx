@@ -241,31 +241,26 @@ export function SetTimeline({
                   )}
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-2">
+                      <span
+                        className="truncate text-[14px] text-ink"
+                        style={
+                          p.idStatus === "unresolved_id"
+                            ? { color: "var(--magenta)" }
+                            : undefined
+                        }
+                      >
+                        {p.title}
+                      </span>
                       {p.trackSlug ? (
                         <Link
                           href={`/tracks/${p.trackSlug}`}
                           onClick={(e) => e.stopPropagation()}
-                          className="truncate text-[14px] text-ink transition-colors hover:text-brand"
-                          style={
-                            p.idStatus === "unresolved_id"
-                              ? { color: "var(--magenta)" }
-                              : undefined
-                          }
+                          className="mono flex-none text-[10px] text-muted2 transition-colors hover:text-brand"
+                          title="Open track page"
                         >
-                          {p.title}
+                          track
                         </Link>
-                      ) : (
-                        <span
-                          className="truncate text-[14px] text-ink"
-                          style={
-                            p.idStatus === "unresolved_id"
-                              ? { color: "var(--magenta)" }
-                              : undefined
-                          }
-                        >
-                          {p.title}
-                        </span>
-                      )}
+                      ) : null}
                       {p.mixName && !compact && (
                         <span
                           className="hidden truncate text-[11px] text-muted2 sm:inline"
