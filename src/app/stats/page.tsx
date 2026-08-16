@@ -14,7 +14,25 @@ export const metadata: Metadata = pageMeta({
   path: "/stats",
 });
 
-const PREVIEW = 8;
+const PREVIEW = 10;
+
+function MoreFold({
+  restCount,
+  children,
+}: {
+  restCount: number;
+  children: ReactNode;
+}) {
+  if (restCount <= 0) return null;
+  return (
+    <details className="mt-2">
+      <summary className="cursor-pointer text-[12px] text-muted hover:text-ink">
+        {restCount} more
+      </summary>
+      <div className="mt-1">{children}</div>
+    </details>
+  );
+}
 
 function pct(part: number, whole: number): string {
   if (whole <= 0) return "—";
@@ -92,9 +110,11 @@ function GapQueue({
   if (rows.length === 0) {
     return <p className="text-[13px] text-muted2">None in this queue.</p>;
   }
-  return (
+  const head = rows.slice(0, PREVIEW);
+  const rest = rows.slice(PREVIEW);
+  const list = (items: typeof rows) => (
     <ul className="divide-y divide-line border-y border-line">
-      {rows.map((row) => (
+      {items.map((row) => (
         <li key={row.slug} className="py-1.5">
           {row.hasSetPage ? (
             <Link
@@ -133,6 +153,12 @@ function GapQueue({
       ))}
     </ul>
   );
+  return (
+    <>
+      {list(head)}
+      <MoreFold restCount={rest.length}>{list(rest)}</MoreFold>
+    </>
+  );
 }
 
 function SetQueue({
@@ -145,45 +171,27 @@ function SetQueue({
   }
   const head = rows.slice(0, PREVIEW);
   const rest = rows.slice(PREVIEW);
+  const list = (items: typeof rows) => (
+    <ul className="divide-y divide-line border-y border-line">
+      {items.map((row) => (
+        <li key={row.slug} className="py-1.5">
+          <Link
+            href={`/sets/${row.slug}`}
+            className="text-[13px] font-semibold text-ink hover:underline"
+          >
+            {row.title}
+          </Link>
+          <div className="mono truncate text-[11px] text-muted2">
+            {row.meta}
+          </div>
+        </li>
+      ))}
+    </ul>
+  );
   return (
     <>
-      <ul className="divide-y divide-line border-y border-line">
-        {head.map((row) => (
-          <li key={row.slug} className="py-1.5">
-            <Link
-              href={`/sets/${row.slug}`}
-              className="text-[13px] font-semibold text-ink hover:underline"
-            >
-              {row.title}
-            </Link>
-            <div className="mono truncate text-[11px] text-muted2">
-              {row.meta}
-            </div>
-          </li>
-        ))}
-      </ul>
-      {rest.length > 0 ? (
-        <details className="mt-2">
-          <summary className="cursor-pointer text-[12px] text-muted hover:text-ink">
-            {rest.length} more
-          </summary>
-          <ul className="mt-1 divide-y divide-line border-y border-line">
-            {rest.map((row) => (
-              <li key={row.slug} className="py-1.5">
-                <Link
-                  href={`/sets/${row.slug}`}
-                  className="text-[13px] font-semibold text-ink hover:underline"
-                >
-                  {row.title}
-                </Link>
-                <div className="mono truncate text-[11px] text-muted2">
-                  {row.meta}
-                </div>
-              </li>
-            ))}
-          </ul>
-        </details>
-      ) : null}
+      {list(head)}
+      <MoreFold restCount={rest.length}>{list(rest)}</MoreFold>
     </>
   );
 }
@@ -202,52 +210,31 @@ function DjQueue({
     return <p className="text-[13px] text-muted2">None.</p>;
   }
   const head = rows.slice(0, PREVIEW);
-  const rest = rows.slice(PREVIEW, 40);
+  const rest = rows.slice(PREVIEW);
+  const list = (items: typeof rows) => (
+    <ul className="divide-y divide-line border-y border-line">
+      {items.map((d) => (
+        <li
+          key={d.slug}
+          className="flex items-baseline justify-between gap-2 py-1"
+        >
+          <Link
+            href={`/djs/${d.slug}`}
+            className="truncate text-[13px] font-semibold text-ink hover:underline"
+          >
+            {d.name}
+          </Link>
+          <span className="mono shrink-0 text-[11px] text-muted2">
+            {d.setCount}s · {d.playCount}p
+          </span>
+        </li>
+      ))}
+    </ul>
+  );
   return (
     <>
-      <ul className="divide-y divide-line border-y border-line">
-        {head.map((d) => (
-          <li
-            key={d.slug}
-            className="flex items-baseline justify-between gap-2 py-1"
-          >
-            <Link
-              href={`/djs/${d.slug}`}
-              className="truncate text-[13px] font-semibold text-ink hover:underline"
-            >
-              {d.name}
-            </Link>
-            <span className="mono shrink-0 text-[11px] text-muted2">
-              {d.setCount}s · {d.playCount}p
-            </span>
-          </li>
-        ))}
-      </ul>
-      {rest.length > 0 ? (
-        <details className="mt-1">
-          <summary className="cursor-pointer text-[12px] text-muted hover:text-ink">
-            {rest.length} more
-          </summary>
-          <ul className="mt-1 divide-y divide-line border-y border-line">
-            {rest.map((d) => (
-              <li
-                key={d.slug}
-                className="flex items-baseline justify-between gap-2 py-1"
-              >
-                <Link
-                  href={`/djs/${d.slug}`}
-                  className="truncate text-[13px] font-semibold text-ink hover:underline"
-                >
-                  {d.name}
-                </Link>
-                <span className="mono shrink-0 text-[11px] text-muted2">
-                  {d.setCount}s · {d.playCount}p
-                </span>
-              </li>
-            ))}
-          </ul>
-        </details>
-      ) : null}
+      {list(head)}
+      <MoreFold restCount={rest.length}>{list(rest)}</MoreFold>
     </>
   );
 }
@@ -383,32 +370,44 @@ export default async function StatsPage() {
             <h3 className="mb-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">
               Hottest unresolved labels
             </h3>
-            <ul className="divide-y divide-line border-y border-line">
-              {s.topUnresolvedIds.slice(0, PREVIEW).map((row) => (
-                <li
-                  key={row.id}
-                  className="flex items-baseline justify-between gap-3 py-1"
-                >
-                  <span className="min-w-0 truncate text-[13px] text-ink">
-                    {row.label}
-                    {row.setSlug ? (
-                      <>
-                        {" "}
-                        <Link
-                          href={`/sets/${row.setSlug}`}
-                          className="text-muted hover:underline"
-                        >
-                          {row.setTitle}
-                        </Link>
-                      </>
-                    ) : null}
-                  </span>
-                  <span className="mono shrink-0 text-[11px] text-muted2">
-                    {row.playCount}×
-                  </span>
-                </li>
-              ))}
-            </ul>
+            {(() => {
+              const head = s.topUnresolvedIds.slice(0, PREVIEW);
+              const rest = s.topUnresolvedIds.slice(PREVIEW);
+              const list = (items: typeof s.topUnresolvedIds) => (
+                <ul className="divide-y divide-line border-y border-line">
+                  {items.map((row) => (
+                    <li
+                      key={row.id}
+                      className="flex items-baseline justify-between gap-3 py-1"
+                    >
+                      <span className="min-w-0 truncate text-[13px] text-ink">
+                        {row.label}
+                        {row.setSlug ? (
+                          <>
+                            {" "}
+                            <Link
+                              href={`/sets/${row.setSlug}`}
+                              className="text-muted hover:underline"
+                            >
+                              {row.setTitle}
+                            </Link>
+                          </>
+                        ) : null}
+                      </span>
+                      <span className="mono shrink-0 text-[11px] text-muted2">
+                        {row.playCount}×
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              );
+              return (
+                <>
+                  {list(head)}
+                  <MoreFold restCount={rest.length}>{list(rest)}</MoreFold>
+                </>
+              );
+            })()}
           </div>
         ) : null}
       </QueueFold>
@@ -452,33 +451,45 @@ export default async function StatsPage() {
           count={board.gaps.length}
           hint="Curated editions still missing a dense Relive."
         >
-          <ul className="divide-y divide-line border-y border-line">
-            {board.gaps.map((g) => {
-              const name = board.names.get(g.edition.eventSlug);
-              const label = name
-                ? `${name} · ${g.edition.year}${g.edition.label ? ` ${g.edition.label}` : ""}`
-                : editionLabel(g.edition);
-              return (
-                <li
-                  key={g.edition.slug}
-                  className="flex items-baseline justify-between gap-3 py-1.5"
-                >
-                  <Link
-                    href={`/events/${g.edition.eventSlug}`}
-                    className="truncate text-[13px] font-semibold text-ink hover:underline"
-                  >
-                    {label}
-                  </Link>
-                  <Link
-                    href={`/capture-1001?q=${encodeURIComponent(name ?? editionLabel(g.edition))}`}
-                    className="mono shrink-0 text-[11px] text-brand hover:underline"
-                  >
-                    capture
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
+          {(() => {
+            const head = board.gaps.slice(0, PREVIEW);
+            const rest = board.gaps.slice(PREVIEW);
+            const list = (items: typeof board.gaps) => (
+              <ul className="divide-y divide-line border-y border-line">
+                {items.map((g) => {
+                  const name = board.names.get(g.edition.eventSlug);
+                  const label = name
+                    ? `${name} · ${g.edition.year}${g.edition.label ? ` ${g.edition.label}` : ""}`
+                    : editionLabel(g.edition);
+                  return (
+                    <li
+                      key={g.edition.slug}
+                      className="flex items-baseline justify-between gap-3 py-1.5"
+                    >
+                      <Link
+                        href={`/events/${g.edition.eventSlug}`}
+                        className="truncate text-[13px] font-semibold text-ink hover:underline"
+                      >
+                        {label}
+                      </Link>
+                      <Link
+                        href={`/capture-1001?q=${encodeURIComponent(name ?? editionLabel(g.edition))}`}
+                        className="mono shrink-0 text-[11px] text-brand hover:underline"
+                      >
+                        capture
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            );
+            return (
+              <>
+                {list(head)}
+                <MoreFold restCount={rest.length}>{list(rest)}</MoreFold>
+              </>
+            );
+          })()}
         </QueueFold>
       ) : null}
     </div>

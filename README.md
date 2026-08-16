@@ -61,7 +61,8 @@ Provenance per row: `1001TL parse`, `SoundCloud parse`, `fingerprint`, `communit
    chips are multi-select; pin tap selects (nearby stack listed); Hide ranks
    keeps the legend. Header search; empty pins link to `/capture-1001?q=…`.
 6. **Stats** (`/stats`) — operator catalog health (incomplete sets, needs IDs,
-   DJ gaps, festival capture gaps). Footer link only; not in the main nav.
+   DJ gaps, festival capture gaps). Queues show 10 rows, then **N more**.
+   Footer link only; not in the main nav.
 7. **Search / About** — catalog search and product notes.
 8. **Tracks / Labels** — still in the catalog and sitemap; not in the main nav.
 
