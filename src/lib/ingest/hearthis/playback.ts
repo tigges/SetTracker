@@ -100,7 +100,7 @@ export function playbackHostRank(url: string | null | undefined): number {
   // Mixcloud show embeds beat site-chrome YouTube trailers.
   if (/mixcloud\.com\//i.test(url)) return 3;
   if (/youtu\.be\/|youtube\.com\//i.test(url)) return 2;
-  if (/hearthis\.at\//i.test(url)) return 1;
+  // hearthis.at is tracklist-only — never a stored playback URL.
   return 0;
 }
 
@@ -110,7 +110,10 @@ export function preferPlaybackUrl(
 ): string | null {
   const a = incoming?.trim() || null;
   const b = existing?.trim() || null;
-  if (!a) return b;
-  if (!b) return a;
-  return playbackHostRank(a) >= playbackHostRank(b) ? a : b;
+  const rankA = playbackHostRank(a);
+  const rankB = playbackHostRank(b);
+  if (rankA === 0 && rankB === 0) return null;
+  if (rankA === 0) return b;
+  if (rankB === 0) return a;
+  return rankA >= rankB ? a : b;
 }

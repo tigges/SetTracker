@@ -1,6 +1,7 @@
 /**
  * On-site playback helpers.
- * Rule: embed the original audio host — never prefer a mirror brand.
+ * Embed SoundCloud / YouTube / Mixcloud only. hearthis.at is tracklist
+ * provenance — its app embed crashes mobile Safari and is not a player.
  */
 
 export type PlaybackHost = "soundcloud" | "hearthis" | "youtube" | "mixcloud";
@@ -94,21 +95,6 @@ function youtubeId(url: string): string | null {
   return null;
 }
 
-function hearthisEmbedId(url: string): string | null {
-  try {
-    const u = new URL(url);
-    const parts = u.pathname.split("/").filter(Boolean);
-    // /embed/{id}/… or app.hearthis.at/embed/{id}
-    const embedIdx = parts.indexOf("embed");
-    if (embedIdx >= 0 && parts[embedIdx + 1] && /^\d+$/.test(parts[embedIdx + 1]!)) {
-      return parts[embedIdx + 1]!;
-    }
-  } catch {
-    return null;
-  }
-  return null;
-}
-
 const HOST_LABEL: Record<PlaybackHost, string> = {
   soundcloud: "SoundCloud",
   hearthis: "hearthis.at",
@@ -156,17 +142,8 @@ export function resolvePlaybackTarget(
     };
   }
 
-  if (host === "hearthis") {
-    const id = hearthisEmbedId(url);
-    if (!id) return null; // page URL without id — not embeddable yet
-    return {
-      host,
-      label: HOST_LABEL[host],
-      embedSrc: hearthisEmbedUrl(id),
-      openUrl: opts.sourceUrl || url,
-      embedHeight: 150,
-    };
-  }
+  // hearthis.at: discovery / cues only. Never iframe app.hearthis.at.
+  if (host === "hearthis") return null;
 
   if (host === "youtube") {
     const id = youtubeId(url);
@@ -200,21 +177,36 @@ export function resolvePlaybackTarget(
   return null;
 }
 
+/** True when the URL can be embedded (never hearthis.at). */
+export function isPlayablePlaybackUrl(
+  url: string | null | undefined,
+): boolean {
+  const host = detectPlaybackHost(url);
+  return host === "soundcloud" || host === "youtube" || host === "mixcloud";
+}
+
+/**
+ * Public player URL: stored playback, else source, if either is embeddable.
+ * hearthis source links stay on the set as provenance, not as audio.
+ */
+export function playablePlaybackUrl(
+  playbackUrl?: string | null,
+  sourceUrl?: string | null,
+): string | null {
+  if (isPlayablePlaybackUrl(playbackUrl)) return playbackUrl!.trim();
+  if (isPlayablePlaybackUrl(sourceUrl)) return sourceUrl!.trim();
+  return null;
+}
+
 /**
  * When adapters omit playbackUrl, derive from source if source *is* the audio host.
- * hearthis page URLs are not sufficient (need numeric embed id).
+ * hearthis page / embed URLs are never playback.
  */
 export function playbackUrlFromSource(
   sourceName: string | null | undefined,
   sourceUrl: string | null | undefined,
 ): string | null {
   if (!sourceUrl) return null;
-  const host = detectPlaybackHost(sourceUrl);
-  if (host === "soundcloud" || host === "youtube" || host === "mixcloud") {
-    return sourceUrl;
-  }
-  if (host === "hearthis" && hearthisEmbedId(sourceUrl)) return sourceUrl;
-  // Native hearthis page — need ingest-time embed URL with track id.
-  if (sourceName === "SoundCloud" || sourceName === "YouTube") return sourceUrl;
+  if (isPlayablePlaybackUrl(sourceUrl)) return sourceUrl;
   return null;
 }

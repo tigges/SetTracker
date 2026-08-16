@@ -68,7 +68,8 @@ describe("hearthis preferred playback extractors", () => {
     const ht = "https://app.hearthis.at/embed/1/transparent_black/";
     assert.equal(preferPlaybackUrl(ht, sc), sc);
     assert.equal(preferPlaybackUrl(sc, ht), sc);
-    assert.equal(preferPlaybackUrl(null, ht), ht);
+    assert.equal(preferPlaybackUrl(null, ht), null);
+    assert.equal(preferPlaybackUrl(ht, null), null);
     assert.equal(preferPlaybackUrl(sc, null), sc);
   });
 });

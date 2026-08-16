@@ -5,8 +5,8 @@ import { useSetListen } from "@/components/SetListen";
 import { resolvePlaybackTarget } from "@/lib/playback";
 
 /**
- * Collapsed-by-default on-site player for the original audio host.
- * No autoplay unless a timeline cue seeks into the set.
+ * Collapsed-by-default on-site player (SoundCloud / YouTube / Mixcloud).
+ * hearthis.at is never embedded. No autoplay unless a timeline cue seeks.
  */
 export function SetPlayer({
   playbackUrl,

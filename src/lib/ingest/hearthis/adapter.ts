@@ -29,7 +29,6 @@ import {
   HEARTHIS_MIN_DURATION_SEC,
   type HearthisCategory,
 } from "./categories";
-import { hearthisEmbedUrl } from "../../playback";
 import type { RawArtist } from "../types";
 import {
   asInt,
@@ -90,7 +89,7 @@ function hasTracklistSignal(description: string | null | undefined): boolean {
 
 function setTypeFor(
   title: string,
-  playbackHost?: "soundcloud" | "youtube" | "hearthis",
+  playbackHost?: "soundcloud" | "youtube",
 ): RawSet["type"] {
   if (/\b(festival|open air|boiler|creamfields|ultra|edc)\b/i.test(title)) {
     return "festival";
@@ -105,8 +104,10 @@ function setTypeFor(
 async function resolvePreferredPlayback(
   description: string,
   buyLink: string | null | undefined,
-  hearthisFallback: string | undefined,
-): Promise<{ playbackUrl: string | undefined; host: "soundcloud" | "youtube" | "hearthis" }> {
+): Promise<{
+  playbackUrl: string | undefined;
+  host: "soundcloud" | "youtube" | undefined;
+}> {
   const external = preferredExternalPlaybackFromText(description, buyLink);
   if (external?.host === "soundcloud") {
     const resolved = await resolveSoundCloudTrackUrl(external.playbackUrl);
@@ -115,10 +116,7 @@ async function resolvePreferredPlayback(
   if (external?.host === "youtube") {
     return { playbackUrl: external.playbackUrl, host: "youtube" };
   }
-  return {
-    playbackUrl: hearthisFallback,
-    host: "hearthis",
-  };
+  return { playbackUrl: undefined, host: undefined };
 }
 
 /** Build a RawSet from a hearthis track (+ category genre fallback). */
@@ -210,15 +208,11 @@ export async function trackToRawSet(
     detail.permalink_url ||
     track.permalink_url ||
     `https://hearthis.at/${userPermalink}/${trackPermalink}/`;
-  const trackId = detail.id ?? track.id;
-  // Prefer explicit SC/YT track links from description/buy_link; otherwise
-  // embed hearthis. Never invent a SoundCloud mirror from the artist name.
-  const hearthisPlayback =
-    trackId != null ? hearthisEmbedUrl(trackId) : undefined;
+  // Prefer explicit SC/YT track links from description/buy_link.
+  // Never store hearthis as playback — the app embed crashes mobile Safari.
   const { playbackUrl, host: playbackHost } = await resolvePreferredPlayback(
     description,
     detail.buy_link ?? track.buy_link,
-    hearthisPlayback,
   );
 
   const artistImage = pickHearthisImage(

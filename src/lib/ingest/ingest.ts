@@ -6,7 +6,7 @@ import {
   isBrandHostSlug,
   isBrandSeriesSlug,
 } from "../brandHosts";
-import { hearthisEmbedUrl, playbackUrlFromSource } from "../playback";
+import { playbackUrlFromSource } from "../playback";
 import { djSocialsFromKnown, labelSocials } from "../social";
 import { ARTIST_ROSTER } from "./roster";
 import { parseTrackTitle } from "../trackMeta";
@@ -1239,7 +1239,7 @@ export async function backfillKnownEventAliases(
   return moved;
 }
 
-/** Fill Set.playbackUrl from sourceUrl / hearthis API when missing. */
+/** Fill Set.playbackUrl from a playable sourceUrl (SC / YT / Mixcloud). */
 export async function backfillPlaybackUrls(
   prisma: PrismaClient,
   limit = 80,
@@ -1252,19 +1252,7 @@ export async function backfillPlaybackUrls(
   });
   let filled = 0;
   for (const s of rows) {
-    let next = playbackUrlFromSource(s.sourceName, s.sourceUrl);
-    if (!next && s.sourceUrl) {
-      const ht = parseHearthisPath(s.sourceUrl);
-      if (ht) {
-        try {
-          const detail = await fetchTrackDetail(ht.user, ht.track);
-          if (detail.id != null) next = hearthisEmbedUrl(detail.id);
-          await htSleep(100);
-        } catch {
-          /* leave null */
-        }
-      }
-    }
+    const next = playbackUrlFromSource(s.sourceName, s.sourceUrl);
     if (!next) continue;
     await prisma.set.update({
       where: { id: s.id },
