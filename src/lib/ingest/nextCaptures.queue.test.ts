@@ -138,5 +138,50 @@ assert.equal(
   ),
   "mapped",
 );
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "yt-OVex0rm7ZR4",
+      title: "Vintage Culture @ Pacha Ibiza, Affairs (2026)",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "yt-6bJZPDKlq7o",
+      title: "Vintage Culture @ Sunset Yacht Party - New York City 2023",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "yt-OXwK0CSmXzY",
+      title: "Hardwell On Air 527 YEARMIX 2025",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "sc-hardwell-hardwell-on-air-527-yearmix",
+      title: "Hardwell On Air 527 YEARMIX 2025",
+      type: "radio",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
 
 console.log("nextCaptures.queue.test.ts ok");

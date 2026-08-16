@@ -109,3 +109,162 @@ export const TL_VINTAGE_CULTURE_SO_TRACK_BOA_2026: FingerprintSeedRow[] = [
   { at: "1:17:43", artist: "Vintage Culture & Fancy Inc", title: "In The Dark (Fancy Inc 2026 VIP Mix)" },
   { at: "1:17:44", artist: "ARTBAT & Vintage Culture", title: "She The Last One (Acappella)" },
 ];
+
+/**
+ * Vintage Culture @ Affairs, Pacha Ibiza, Spain 2026-06-23
+ * https://www.1001tracklists.com/tracklist/2vw827m1/vintage-culture-affairs-pacha-ibiza-spain-2026-06-23.html
+ * Official YT: https://youtu.be/OVex0rm7ZR4
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-OVex0rm7ZR4"]
+ * Captured 2026-08-16 — provenance 1001tl. Official script: 14 tracks, 13 cues.
+ * Opening cue untimed on 1001 → 0:00.
+ */
+export const TL_VINTAGE_CULTURE_PACHA_IBIZA_2026: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "OMRI. & Vintage Culture ft. Dafna Shilon", title: "I Need It" },
+  { at: "4:49", artist: "SCRIPT ft. MAGNUS (UK)", title: "Fever" },
+  { at: "9:29", artist: "Bhaskar & MOJJO", title: "Discoteka" },
+  { at: "15:15", artist: "Vylow & Dekho", title: "Handle That" },
+  { at: "19:25", artist: "Vintage Culture & Volkoder", title: "Best Move" },
+  { at: "23:54", artist: "Eugenio Fico", title: "It's Ladies' Night" },
+  { at: "36:10", artist: "Benito Bazar ft. Tinuade", title: "Back To Life (Vintage Culture & Vinter Remix)" },
+  { at: "41:22", artist: "Proudly People", title: "Block 727" },
+  { at: "46:05", artist: "Michael Gray", title: "Universe" },
+  { at: "49:17", artist: "Skylark", title: "That's More Like It" },
+  { at: "52:50", artist: "Max Styler & Vintage Culture & Ali Love", title: "Freaky 1" },
+  { at: "57:03", artist: "CamelPhat & Ali Love", title: "Compute" },
+  { at: "1:03:03", artist: "Talón", title: "Ride On Em" },
+  { at: "1:07:05", artist: "UMEK", title: "It Is Simple But It Works Like Fcuk" },
+];
+
+/**
+ * Vintage Culture @ Sunset Yacht Party, New York City, United States 2023-08-12
+ * https://www.1001tracklists.com/tracklist/1d6g4y99/vintage-culture-sunset-yacht-party-new-york-city-united-states-2023-08-12.html
+ * Official YT: https://youtu.be/6bJZPDKlq7o
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-6bJZPDKlq7o"]
+ * Captured 2026-08-16 — provenance 1001tl. Official script: 27 tracks, 26 cues.
+ * Opening cue untimed on 1001 → 0:00.
+ */
+export const TL_VINTAGE_CULTURE_NYC_YACHT_2023: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "Vintage Culture & Fideles ft. Be No Rain", title: "Fallen Leaf" },
+  { at: "5:00", artist: "Christian Burkhardt", title: "Delight" },
+  { at: "10:30", artist: "Gui Boratto ft. Lhana Marlet", title: "Drink In Paris (Vintage Culture Remix)" },
+  { at: "14:00", artist: "Franky Wah & Vintage Culture", title: "Alive (THEMBA Remix)" },
+  { at: "24:00", artist: "Vintage Culture & Bhaskar & Meca ft. The Vic", title: "Tina" },
+  { at: "28:30", artist: "Parallelle & Nicolas Masseyeff", title: "Renegade (Adam Ten & Mita Gami Remix)" },
+  { at: "33:00", artist: "RÜFÜS DU SOL", title: "New Sky" },
+  { at: "37:00", artist: "Dean Mickoski", title: "Losing Your Mind" },
+  { at: "41:00", artist: "DEPARTAMENTO", title: "Tears 4 Fears" },
+  { at: "46:00", artist: "Shouse & Dennis Ferrer & Seth Troxler", title: "(still) WON'T4GETU" },
+  { at: "50:00", artist: "Louie Vega & The Martinez Brothers ft. Marc E. Bassy", title: "Let It Go (Vintage Culture Remix)" },
+  { at: "55:00", artist: "Mochakk", title: "Jealous" },
+  { at: "1:00:00", artist: "Jamie Jones", title: "My Paradise (Vintage Culture Remix)" },
+  { at: "1:04:00", artist: "Marco Lys & Luca Garaboni", title: "Fourth Dimension" },
+  { at: "1:08:00", artist: "Malive & Linkage", title: "Pictures" },
+  { at: "1:12:00", artist: "Space Motion & Kashovski", title: "The Sun Can't Compare" },
+  { at: "1:16:00", artist: "Vintage Culture & Bruno Be & Öwnboss", title: "Intro" },
+  { at: "1:23:00", artist: "Bedouin", title: "Tijuana (Vintage Culture Remix)" },
+  { at: "1:31:00", artist: "Literatura", title: "Dream (Enoo Napa Remix)" },
+  { at: "1:33:00", artist: "Daniel Rateuke", title: "Marvelin" },
+  { at: "1:35:00", artist: "Fred again.. & Skrillex & Four Tet ft. Lil Baby", title: "Baby Again.." },
+  { at: "1:39:00", artist: "Matthias Tanzmann & Black Circle", title: "Masina" },
+  { at: "1:44:00", artist: "Vintage Culture & James Hype", title: "You Give Me A Feeling" },
+  { at: "1:53:00", artist: "Rob Anderson", title: "Cynthi (Rich NxT Remix)" },
+  { at: "1:56:00", artist: "HUGEL ft. Cumbiafrica", title: "El Sueno (Matt Sassari Edit)" },
+  { at: "1:59:00", artist: "Monolink", title: "The Prey (Gui Boratto & Vintage Culture Remix)" },
+  { at: "2:04:00", artist: "Adam Ten & Maori", title: "Spring Girl" },
+];
+
+/**
+ * Hardwell — Hardwell On Air 527 (Yearmix 2025) 2026-01-02
+ * https://www.1001tracklists.com/tracklist/1w5whv39/hardwell-hardwell-on-air-527-yearmix-2025-2026-01-02.html
+ * Official YT: https://youtu.be/OXwK0CSmXzY
+ * Official SC: https://soundcloud.com/hardwell/hardwell-on-air-527-yearmix
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-OXwK0CSmXzY"]
+ *       TRACKLIST_1001_BY_SOURCE_SLUG["sc-hardwell-hardwell-on-air-527-yearmix"]
+ * Captured 2026-08-16 — provenance 1001tl. Official script: 83 tracks, 31 timed
+ * cues; remaining mashup components interpolated so clocks increase.
+ */
+export const TL_HARDWELL_HOA_527_YEARMIX_2025: FingerprintSeedRow[] = [
+  { at: "0:58", artist: "Hardwell", title: "Sanctuary" },
+  { at: "3:15", artist: "Hardwell & Olly James", title: "Lights Out" },
+  { at: "4:50", artist: "Hardwell & Olly James vs. Hardwell vs. Tyla", title: "Flatline vs. Spaceman vs. Water (Hardwell Mashup)" },
+  { at: "5:16", artist: "Hardwell", title: "Spaceman" },
+  { at: "5:42", artist: "Hardwell & W&W", title: "Jumper (Acappella)" },
+  { at: "6:08", artist: "Hardwell & Olly James", title: "Flatline" },
+  { at: "6:34", artist: "Tyla", title: "Water" },
+  { at: "7:00", artist: "Zedd & Foxes vs. Domeno & Michael Sparks", title: "Clarity vs. Locked & Loaded (Hardwell Mashup)" },
+  { at: "7:33", artist: "Zedd ft. Foxes", title: "Clarity (Acappella)" },
+  { at: "8:07", artist: "Domeno & Michael Sparks", title: "Locked & Loaded (Domeno 2025 Rework)" },
+  { at: "8:40", artist: "Mightyfools & LUSSO vs. Sebastian Ingrosso & Alesso & Ryan Tedder", title: "Footrocker vs. Calling (Hardwell UMF 2025 Mashup)" },
+  { at: "9:10", artist: "Sebastian Ingrosso & Alesso ft. Ryan Tedder", title: "Calling (Lose My Mind) (Acappella)" },
+  { at: "9:40", artist: "Mightyfools", title: "Footrocker (LUSSO Remix)" },
+  { at: "10:09", artist: "Kazden & Cube Cartel & RT & Jasskall vs. Bob Sinclar vs. John Summit & HAYLA", title: "Thunder Shivers (Hardwell Mashup)" },
+  { at: "10:42", artist: "Bob Sinclar", title: "I Feel For You (Acappella)" },
+  { at: "11:15", artist: "John Summit & HAYLA", title: "Shiver" },
+  { at: "11:48", artist: "Kazden & Cube Cartel & RT ft. Jasskall", title: "Thunder" },
+  { at: "12:20", artist: "Julian Cross & FISION & Hardwell & AFROJACK vs. Cloonee & InntRaw & Young M.A vs. Kid Cudi & MGMT & Ratatat & Steve Aoki", title: "KUTMUG vs. Stephanie vs. Pursuit Of Happiness (Hardwell Mashup)" },
+  { at: "12:39", artist: "Kid Cudi ft. MGMT & Ratatat", title: "Pursuit Of Happiness (Steve Aoki Remix)" },
+  { at: "12:58", artist: "Cloonee & InntRaw & Young M.A", title: "Stephanie" },
+  { at: "13:18", artist: "Julian Cross & FISION", title: "KUTMUG (Hardwell & AFROJACK Edit)" },
+  { at: "13:37", artist: "Hardwell vs. Amba Shepherd", title: "Lift Off vs. Apollo (Hardwell Mashup)" },
+  { at: "14:08", artist: "Hardwell ft. Amba Shepherd", title: "Apollo (Acappella)" },
+  { at: "14:39", artist: "MAKJ & Henry Fong", title: "Encore (Get Your Hands Up Acappella)" },
+  { at: "15:10", artist: "Hardwell", title: "Lift Off" },
+  { at: "15:41", artist: "Armin van Buuren & Hardwell vs. Blasterjaxx", title: "Follow The Beat Of The Drum (Hardwell Mashup)" },
+  { at: "16:13", artist: "Chuck Nash", title: "Are You Ready (Make Some Noise) (Acappella)" },
+  { at: "16:45", artist: "Armin van Buuren & Hardwell", title: "Follow The Light" },
+  { at: "17:17", artist: "Hardwell & Blasterjaxx", title: "Beat Of The Drum" },
+  { at: "17:48", artist: "F.G. Noise vs. Justin Timberlake & Timbaland", title: "Take Me Home vs. SexyBack (Hardwell Mashup)" },
+  { at: "18:20", artist: "Justin Timberlake ft. Timbaland", title: "SexyBack (Acappella)" },
+  { at: "18:52", artist: "F.G. Noise", title: "Take Me Home" },
+  { at: "19:24", artist: "Swedish House Mafia & Knife Party & ADL vs. Matt Dybal & Alan Krevo", title: "Antidote vs. Move To The Rhythm (Hardwell UMF Europe 2025 Mashup)" },
+  { at: "20:02", artist: "Swedish House Mafia & Knife Party ft. ADL", title: "Antidote" },
+  { at: "20:40", artist: "Matt Dybal & Alan Krevo", title: "Move To The Rhythm" },
+  { at: "21:17", artist: "Hardwell & RYOS vs. Bruno Mars", title: "Rise Again vs. Locked Out Of Heaven (Hardwell Mashup)" },
+  { at: "22:02", artist: "Bruno Mars", title: "Locked Out Of Heaven (Acappella)" },
+  { at: "22:47", artist: "Hardwell & RYOS", title: "Rise Again" },
+  { at: "23:32", artist: "Matt Dybal & Alan Krevo vs. Coldplay", title: "Raveline vs. A Sky Full Of Stars (Hardwell UMF Europe 2025 Mashup)" },
+  { at: "23:59", artist: "Coldplay", title: "A Sky Full Of Stars (Acappella)" },
+  { at: "24:26", artist: "Matt Dybal & Alan Krevo", title: "Raveline" },
+  { at: "24:53", artist: "Mau P", title: "Drugs From Amsterdam" },
+  { at: "25:19", artist: "Hardwell ft. Jonathan Mendelsohn", title: "Echo (Domeno Remix)" },
+  { at: "27:22", artist: "Dannic & 2ACES vs. Kygo & Conrad Sewell", title: "Zenith vs. Firestone (Hardwell Mashup)" },
+  { at: "27:51", artist: "David Guetta & GLOWINTHEDARK ft. Harrison", title: "Ain't A Party (Acappella)" },
+  { at: "28:20", artist: "Kygo ft. Conrad Sewell", title: "Firestone (Acappella)" },
+  { at: "28:50", artist: "Dannic", title: "Zenith (2ACES Remix)" },
+  { at: "29:19", artist: "Dirty Signal vs. Hardwell & Blasterjaxx & Mitch Crown vs. Yeah Yeah Yeahs & A-Trak", title: "We All Move vs. Bigroom Never Dies vs. Heads Will Roll (Hardwell Mashup)" },
+  { at: "29:44", artist: "Yeah Yeah Yeahs", title: "Heads Will Roll (A-Trak Remix)" },
+  { at: "30:09", artist: "Hardwell & Blasterjaxx ft. Mitch Crown", title: "Bigroom Never Dies" },
+  { at: "30:35", artist: "Dirty Signal", title: "We All Move" },
+  { at: "31:00", artist: "JoeySuki & Kill The Buzz & Josh Le Tissier vs. Hardwell & Harrison vs. Martin Garrix & Bonn", title: "Life Is Calling vs. Earthquake vs. High On Life (Hardwell Mashup)" },
+  { at: "31:32", artist: "JoeySuki & Kill The Buzz", title: "Life Is Calling (Josh Le Tissier Remix)" },
+  { at: "32:04", artist: "Hardwell ft. Harrison", title: "Earthquake" },
+  { at: "32:36", artist: "Martin Garrix ft. Bonn", title: "High On Life" },
+  { at: "33:07", artist: "Steeper & ZYNØX vs. Alesso & Tove Lo", title: "Bassline Rumble vs. Heroes (We Could Be) (Hardwell Mashup)" },
+  { at: "33:45", artist: "Alesso ft. Tove Lo", title: "Heroes (We Could Be) (Acappella)" },
+  { at: "34:23", artist: "Steeper & ZYNØX", title: "Bassline Rumble" },
+  { at: "35:00", artist: "Robbie Mendez & 2ACES vs. Avicii & Aloe Blacc", title: "Flashback vs. Wake Me Up (Hardwell Mashup)" },
+  { at: "35:32", artist: "Zedd & Lucky Date ft. Ellie Goulding", title: "Fall Into The Sky (Everybody Fuckin Jump Acappella)" },
+  { at: "36:04", artist: "Avicii ft. Aloe Blacc", title: "Wake Me Up (Acappella)" },
+  { at: "36:36", artist: "Robbie Mendez & 2ACES", title: "Flashback" },
+  { at: "37:08", artist: "Agus Zack & Fønts vs. Calvin Harris & Disciples & Ina Wroldsen", title: "Gravity vs. How Deep Is Your Love (Hardwell Mashup)" },
+  { at: "37:41", artist: "Calvin Harris & Disciples ft. Ina Wroldsen", title: "How Deep Is Your Love (Acappella)" },
+  { at: "38:14", artist: "Agus Zack & Fønts", title: "Gravity" },
+  { at: "38:47", artist: "Hardwell & Maddix & Luciana vs. Roberto Molinaro & T78", title: "BOMBACID (Hardwell Smashup)" },
+  { at: "39:24", artist: "Hardwell & Maddix ft. Luciana", title: "ACID" },
+  { at: "40:02", artist: "T78 & Roberto Molinaro", title: "Bombacid" },
+  { at: "40:39", artist: "Hardwell & Vini Vici & MR.BLACK ft. Liquid Soul", title: "Crazy People 2026" },
+  { at: "42:12", artist: "VIVID & Sesco", title: "Hey DJ!" },
+  { at: "43:08", artist: "Hardwell ft. Sarah de Warren", title: "No Sleep (VIVID Remix)" },
+  { at: "45:19", artist: "MatricK vs. David Guetta & Kid Cudi", title: "We Are The Universe vs. Memories (Hardwell Mashup)" },
+  { at: "45:48", artist: "David Guetta ft. Kid Cudi", title: "Memories (Acappella)" },
+  { at: "46:17", artist: "Hardwell & MAKJ", title: "Countdown (Acappella)" },
+  { at: "46:46", artist: "MatricK", title: "We Are The Universe" },
+  { at: "47:14", artist: "Hardwell & Dyro", title: "Not Alone" },
+  { at: "48:42", artist: "Hardwell & Maddix ft. Villain", title: "Rave Till My Grave" },
+  { at: "50:23", artist: "DVBBS & BORGEOUS & Hardwell vs. KSHMR & Jarrad Kritzstein", title: "Tsunami vs. Power (Hardwell Mashup)" },
+  { at: "50:58", artist: "Hardwell & KSHMR ft. Jarrad Kritzstein", title: "Power (Acappella)" },
+  { at: "51:33", artist: "DVBBS & BORGEOUS", title: "Tsunami (Hardwell Bootleg)" },
+  { at: "52:07", artist: "Ghost Stories", title: "Ready Or Not" },
+  { at: "54:20", artist: "Hardwell & Atmozfears ft. JAiMES", title: "Hideaway" },
+  { at: "56:47", artist: "Hardwell & Sub Zero Project ft. Lil Jon", title: "Brace For Impact" },
+];

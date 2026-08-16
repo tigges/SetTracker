@@ -63,7 +63,10 @@ import {
   TL_MARLON_HOFFSTADT_COACHELLA_WE2_2026,
   TL_MARKUS_SCHULZ_AND_JEROME_ISMA_AE_GDJB_2026,
   TL_ALOK_TML_WE2_2026,
+  TL_HARDWELL_HOA_527_YEARMIX_2025,
   TL_VINTAGE_CULTURE_EDC_LV_NEON_2025,
+  TL_VINTAGE_CULTURE_NYC_YACHT_2023,
+  TL_VINTAGE_CULTURE_PACHA_IBIZA_2026,
   TL_VINTAGE_CULTURE_SO_TRACK_BOA_2026,
   TL_MISS_MONIQUE_TML_WE2_2026,
   TL_NICKY_ROMERO_TML_WE2_2026,
@@ -849,6 +852,22 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_MARKUS_SCHULZ_AND_JEROME_ISMA_AE_GDJB_2026,
   },
   {
+    // Official Hardwell On Air 527 Yearmix; timed 1001 capture. SC twin:
+    // sc-hardwell-hardwell-on-air-527-yearmix.
+    video: "https://www.youtube.com/watch?v=OXwK0CSmXzY",
+    primaryArtist: dj("Hardwell", {
+      accent: "#023e8a",
+      homeCity: "Breda, NL",
+    }),
+    genre: "Big Room",
+    type: "radio",
+    title: "Hardwell On Air 527 YEARMIX 2025",
+    seriesName: "Hardwell On Air",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1w5whv39/hardwell-hardwell-on-air-527-yearmix-2025-2026-01-02.html",
+    tracklist1001: TL_HARDWELL_HOA_527_YEARMIX_2025,
+  },
+  {
     // Tomorrowland official Relive — Mainstage WE2.
     video: "https://www.youtube.com/watch?v=BUsCIK_kh_A",
     primaryArtist: dj("Martin Garrix", {
@@ -1231,6 +1250,23 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     title: "Vintage Culture @ Pacha Ibiza, Affairs (2026)",
     seriesName: "Affairs",
     eventName: "Pacha Ibiza",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2vw827m1/vintage-culture-affairs-pacha-ibiza-spain-2026-06-23.html",
+    tracklist1001: TL_VINTAGE_CULTURE_PACHA_IBIZA_2026,
+  },
+  {
+    video: "https://www.youtube.com/watch?v=6bJZPDKlq7o",
+    primaryArtist: dj("Vintage Culture", {
+      accent: "#e85d04",
+      homeCity: "Brazil",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    title: "Vintage Culture @ Sunset Yacht Party - New York City 2023",
+    eventName: "Sunset Yacht Party",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1d6g4y99/vintage-culture-sunset-yacht-party-new-york-city-united-states-2023-08-12.html",
+    tracklist1001: TL_VINTAGE_CULTURE_NYC_YACHT_2023,
   },
   {
     video: "https://www.youtube.com/watch?v=xXRjglkAmq8",
