@@ -1,0 +1,150 @@
+{
+  "venueSlug": "eden",
+  "venueName": "Eden Ibiza",
+  "sourceUrl": "https://djtickets.com/venue/eden-ibiza",
+  "fetchedAt": "2026-08-16T14:57:55.352Z",
+  "nights": [
+    {
+      "title": "CUE WEEK 8",
+      "startsAt": "2026-08-16",
+      "sourceUrl": "https://djtickets.com/event/cue-week-8",
+      "ticketsUrl": "https://djtickets.com/event/cue-week-8",
+      "artists": [
+        "CUE WEEK 8"
+      ]
+    },
+    {
+      "title": "ACTIN´BAD WEEK 7 (Presented by Holler At Me)",
+      "startsAt": "2026-08-17",
+      "sourceUrl": "https://djtickets.com/event/actinbad-week-7-presented-holler-me",
+      "ticketsUrl": "https://djtickets.com/event/actinbad-week-7-presented-holler-me",
+      "artists": []
+    },
+    {
+      "title": "GARAGE NATION WEEK 3",
+      "startsAt": "2026-08-19",
+      "sourceUrl": "https://djtickets.com/event/garage-nation-week-3",
+      "ticketsUrl": "https://djtickets.com/event/garage-nation-week-3",
+      "artists": [
+        "GARAGE NATION WEEK 3"
+      ]
+    },
+    {
+      "title": "LA DISTURBIA CLOSING PARTY",
+      "startsAt": "2026-08-20",
+      "sourceUrl": "https://djtickets.com/event/la-disturbia-closing-party",
+      "ticketsUrl": "https://djtickets.com/event/la-disturbia-closing-party",
+      "artists": [
+        "LA DISTURBIA CLOSING PARTY"
+      ]
+    },
+    {
+      "title": "FIRE IN THE CLUB WEEK 12",
+      "startsAt": "2026-08-21",
+      "sourceUrl": "https://djtickets.com/event/fire-club-week-12",
+      "ticketsUrl": "https://djtickets.com/event/fire-club-week-12",
+      "artists": [
+        "FIRE IN THE CLUB WEEK 12"
+      ]
+    },
+    {
+      "title": "FUEGO WEEK 13",
+      "startsAt": "2026-08-22",
+      "sourceUrl": "https://djtickets.com/event/fuego-week-13",
+      "ticketsUrl": "https://djtickets.com/event/fuego-week-13",
+      "artists": [
+        "FUEGO WEEK 13"
+      ]
+    },
+    {
+      "title": "CUE WEEK 9",
+      "startsAt": "2026-08-23",
+      "sourceUrl": "https://djtickets.com/event/cue-week-9",
+      "ticketsUrl": "https://djtickets.com/event/cue-week-9",
+      "artists": [
+        "CUE WEEK 9"
+      ]
+    },
+    {
+      "title": "FIRE IN THE CLUB WEEK 13",
+      "startsAt": "2026-08-28",
+      "sourceUrl": "https://djtickets.com/event/fire-club-week-13",
+      "ticketsUrl": "https://djtickets.com/event/fire-club-week-13",
+      "artists": [
+        "FIRE IN THE CLUB WEEK 13"
+      ]
+    },
+    {
+      "title": "FIRE IN THE CLUB WEEK 11",
+      "startsAt": "2026-08-14",
+      "sourceUrl": "https://djtickets.com/event/fire-club-week-11",
+      "ticketsUrl": "https://djtickets.com/event/fire-club-week-11",
+      "artists": [
+        "FIRE IN THE CLUB WEEK 11"
+      ]
+    },
+    {
+      "title": "LA DISTURBIA WEEK 7",
+      "startsAt": "2026-08-13",
+      "sourceUrl": "https://djtickets.com/event/la-disturbia-week-7",
+      "ticketsUrl": "https://djtickets.com/event/la-disturbia-week-7",
+      "artists": [
+        "LA DISTURBIA WEEK 7"
+      ]
+    },
+    {
+      "title": "GARAGE NATION WEEK 2",
+      "startsAt": "2026-08-12",
+      "sourceUrl": "https://djtickets.com/event/garage-nation-week-2",
+      "ticketsUrl": "https://djtickets.com/event/garage-nation-week-2",
+      "artists": [
+        "GARAGE NATION WEEK 2"
+      ]
+    },
+    {
+      "title": "GALACTICA WEEK 12",
+      "startsAt": "2026-08-11",
+      "sourceUrl": "https://djtickets.com/event/galactica-week-12",
+      "ticketsUrl": "https://djtickets.com/event/galactica-week-12",
+      "artists": [
+        "GALACTICA WEEK 12"
+      ]
+    },
+    {
+      "title": "CUE WEEK 7",
+      "startsAt": "2026-08-09",
+      "sourceUrl": "https://djtickets.com/event/cue-week-7",
+      "ticketsUrl": "https://djtickets.com/event/cue-week-7",
+      "artists": [
+        "CUE WEEK 7"
+      ]
+    },
+    {
+      "title": "FUEGO WEEK 11",
+      "startsAt": "2026-08-08",
+      "sourceUrl": "https://djtickets.com/event/fuego-week-11",
+      "ticketsUrl": "https://djtickets.com/event/fuego-week-11",
+      "artists": [
+        "FUEGO WEEK 11"
+      ]
+    },
+    {
+      "title": "FIRE IN THE CLUB WEEK 10",
+      "startsAt": "2026-08-07",
+      "sourceUrl": "https://djtickets.com/event/fire-club-week-10",
+      "ticketsUrl": "https://djtickets.com/event/fire-club-week-10",
+      "artists": [
+        "FIRE IN THE CLUB WEEK 10"
+      ]
+    },
+    {
+      "title": "LA DISTURBIA WEEK 6",
+      "startsAt": "2026-08-06",
+      "sourceUrl": "https://djtickets.com/event/la-disturbia-week-6-0",
+      "ticketsUrl": "https://djtickets.com/event/la-disturbia-week-6-0",
+      "artists": [
+        "LA DISTURBIA WEEK 6"
+      ]
+    }
+  ]
+}

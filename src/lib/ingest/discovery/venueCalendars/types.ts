@@ -33,7 +33,8 @@ export type VenueCalendarParser =
   | "fabric"
   | "illuzion"
   | "bootshaus"
-  | "berghain";
+  | "berghain"
+  | "djtickets";
 
 export type VenueCalendarSource = {
   venueSlug: string;

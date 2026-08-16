@@ -418,6 +418,49 @@ export function parseBerghainHtml(html: string, pageUrl: string): VenueNightSeed
   return nights;
 }
 
+/**
+ * DJTickets venue listing cards: title + "Sun 16 Aug" + /event/{slug}.
+ * Ticket marketplace — only used when a club has no official calendar.
+ */
+export function parseDjticketsHtml(
+  html: string,
+  pageUrl: string,
+  defaultYear: number,
+): VenueNightSeed[] {
+  const nights: VenueNightSeed[] = [];
+  const cards = html.split(/<div class="cardm\b/);
+  for (const card of cards.slice(1)) {
+    const href = card.match(/href="(\/event\/[^"#?]+)"/i)?.[1];
+    const title = stripTags(
+      card.match(
+        /field--name-title[^>]*>([\s\S]*?)<\/div>/i,
+      )?.[1] ?? "",
+    );
+    const dateRaw =
+      card.match(
+        /<(?:span|div)[^>]*>\s*((?:Mon|Tue|Wed|Thu|Fri|Sat|Sun)\s+\d{1,2}\s+[A-Za-z]{3,9})\s*</i,
+      )?.[1] ?? "";
+    const startsAt = parseDayMonth(dateRaw, defaultYear);
+    if (!href || !title || !startsAt) continue;
+    if (/^(ushua[iï]a ibiza|eden ibiza|\[?unvrs\]?|pacha|h[iï] ibiza|amnesia)$/i.test(title)) {
+      continue;
+    }
+    const sourceUrl = absoluteUrl(href, pageUrl);
+    const billed = title
+      .replace(/\s+presents?\s+/i, ", ")
+      .replace(/\s+by\s+/i, ", ");
+    const artists = uniqueStrings(artistsFromLine(billed));
+    nights.push(
+      night(title, startsAt, {
+        sourceUrl,
+        ticketsUrl: sourceUrl,
+        artists,
+      })!,
+    );
+  }
+  return nights;
+}
+
 export function parseVenueCalendarHtml(
   source: VenueCalendarSource,
   html: string,
@@ -454,6 +497,9 @@ export function parseVenueCalendarHtml(
       break;
     case "berghain":
       nights = parseBerghainHtml(html, page);
+      break;
+    case "djtickets":
+      nights = parseDjticketsHtml(html, page, year);
       break;
     default:
       nights = parseJsonLdEvents(html, page);

@@ -7,6 +7,7 @@ import {
   parseAmnesiaHtml,
   parseBerghainHtml,
   parseBootshausHtml,
+  parseDjticketsHtml,
   parseFabricHtml,
   parseJsonLdEvents,
   parsePachaHtml,
@@ -54,6 +55,8 @@ describe("venue calendar sources", () => {
       "illuzion-phuket",
       "bootshaus",
       "berghain",
+      "ushuaia-ibiza",
+      "eden",
     ]);
     assert.ok(
       VENUE_CALENDAR_SOURCES.every((s) => s.calendarUrl.startsWith("https://")),
@@ -215,5 +218,23 @@ describe("berghain", () => {
     assert.ok(reef?.rooms?.some((r) => /berghain/i.test(r.name)));
     assert.ok(reef?.rooms?.some((r) => /panorama/i.test(r.name)));
     assert.ok(reef?.artists.some((a) => /alix perez/i.test(a)));
+  });
+});
+
+describe("djtickets", () => {
+  it("reads dated venue listing cards", () => {
+    const nights = parseDjticketsHtml(
+      fixture("djtickets.html"),
+      "https://djtickets.com/venue/ushuaia-ibiza",
+      2026,
+    );
+    assert.ok(nights.length >= 2);
+    const shm = nights.find((n) => /swedish house mafia/i.test(n.title));
+    assert.equal(shm?.startsAt, "2026-08-16");
+    assert.ok(shm?.artists.some((a) => /swedish house mafia/i.test(a)));
+    assert.match(shm?.sourceUrl ?? "", /djtickets\.com\/event\/swedish-house-mafia-5/);
+    const cue = nights.find((n) => /cue week 8/i.test(n.title));
+    assert.equal(cue?.startsAt, "2026-08-16");
+    assert.match(cue?.sourceUrl ?? "", /djtickets\.com\/event\/cue-week-8/);
   });
 });

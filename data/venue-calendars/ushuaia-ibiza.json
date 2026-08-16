@@ -1,0 +1,89 @@
+{
+  "venueSlug": "ushuaia-ibiza",
+  "venueName": "Ushuaïa Ibiza",
+  "sourceUrl": "https://djtickets.com/venue/ushuaia-ibiza",
+  "fetchedAt": "2026-08-16T14:57:54.823Z",
+  "nights": [
+    {
+      "title": "Swedish House Mafia",
+      "startsAt": "2026-08-16",
+      "sourceUrl": "https://djtickets.com/event/swedish-house-mafia-5",
+      "ticketsUrl": "https://djtickets.com/event/swedish-house-mafia-5",
+      "artists": [
+        "Swedish House Mafia"
+      ]
+    },
+    {
+      "title": "Calvin Harris",
+      "startsAt": "2026-08-14",
+      "sourceUrl": "https://djtickets.com/event/calvin-harris-34",
+      "ticketsUrl": "https://djtickets.com/event/calvin-harris-34",
+      "artists": [
+        "Calvin Harris"
+      ]
+    },
+    {
+      "title": "Martin Garrix",
+      "startsAt": "2026-08-13",
+      "sourceUrl": "https://djtickets.com/event/martin-garrix-19",
+      "ticketsUrl": "https://djtickets.com/event/martin-garrix-19",
+      "artists": [
+        "Martin Garrix"
+      ]
+    },
+    {
+      "title": "elrow",
+      "startsAt": "2026-08-12",
+      "sourceUrl": "https://djtickets.com/event/elrow-26",
+      "ticketsUrl": "https://djtickets.com/event/elrow-26",
+      "artists": [
+        "elrow"
+      ]
+    },
+    {
+      "title": "Calvin Harris",
+      "startsAt": "2026-08-11",
+      "sourceUrl": "https://djtickets.com/event/calvin-harris-33",
+      "ticketsUrl": "https://djtickets.com/event/calvin-harris-33",
+      "artists": [
+        "Calvin Harris"
+      ]
+    },
+    {
+      "title": "F*** ME I'M FAMOUS! by David Guetta",
+      "startsAt": "2026-08-10",
+      "sourceUrl": "https://djtickets.com/event/f-me-im-famous-david-guetta-23",
+      "ticketsUrl": "https://djtickets.com/event/f-me-im-famous-david-guetta-23",
+      "artists": [
+        "F*** ME I'M FAMOUS!, David Guetta"
+      ]
+    },
+    {
+      "title": "Swedish House Mafia",
+      "startsAt": "2026-08-09",
+      "sourceUrl": "https://djtickets.com/event/swedish-house-mafia-4",
+      "ticketsUrl": "https://djtickets.com/event/swedish-house-mafia-4",
+      "artists": [
+        "Swedish House Mafia"
+      ]
+    },
+    {
+      "title": "ANTS",
+      "startsAt": "2026-08-08",
+      "sourceUrl": "https://djtickets.com/event/ants-25",
+      "ticketsUrl": "https://djtickets.com/event/ants-25",
+      "artists": [
+        "ANTS"
+      ]
+    },
+    {
+      "title": "Calvin Harris",
+      "startsAt": "2026-08-07",
+      "sourceUrl": "https://djtickets.com/event/calvin-harris-32",
+      "ticketsUrl": "https://djtickets.com/event/calvin-harris-32",
+      "artists": [
+        "Calvin Harris"
+      ]
+    }
+  ]
+}

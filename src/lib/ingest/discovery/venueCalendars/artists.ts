@@ -16,7 +16,7 @@ export function cleanArtistToken(raw: string): string | null {
   if (!n || ROOM_OR_GENRE.test(n)) return null;
   if (/^in order of appearance$/i.test(n)) return null;
   if (/^\(?in order of appearance\)?$/i.test(n)) return null;
-  if (/^(bootshaus|amnesia|pacha|fabric|berghain|savaya|unvrs|h[iï] ibiza)$/i.test(n)) {
+  if (/^(bootshaus|amnesia|pacha|fabric|berghain|savaya|unvrs|h[iï] ibiza|ushua[iï]a|eden)$/i.test(n)) {
     return null;
   }
   if (/^(organization|person|place|event|musicevent|musicgroup|offer)$/i.test(n)) {

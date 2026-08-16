@@ -107,4 +107,28 @@ export const VENUE_CALENDAR_SOURCES: VenueCalendarSource[] = [
     seedFile: "berghain.json",
     weight: 30,
   },
+  // DJTickets is a ticket marketplace (not the club site). Use it only for
+  // catalog venues that have no official dated calendar scraper yet.
+  {
+    venueSlug: "ushuaia-ibiza",
+    venueName: "Ushuaïa Ibiza",
+    location: "Playa d'en Bossa, Ibiza",
+    website: "https://www.theushuaiaexperience.com/en/club",
+    calendarUrl: "https://djtickets.com/venue/ushuaia-ibiza",
+    parser: "djtickets",
+    seedFile: "ushuaia-ibiza.json",
+    defaultYear: 2026,
+    weight: 32,
+  },
+  {
+    venueSlug: "eden",
+    venueName: "Eden Ibiza",
+    location: "San Antonio, Ibiza",
+    website: "https://www.edenibiza.com/",
+    calendarUrl: "https://djtickets.com/venue/eden-ibiza",
+    parser: "djtickets",
+    seedFile: "eden.json",
+    defaultYear: 2026,
+    weight: 28,
+  },
 ];
