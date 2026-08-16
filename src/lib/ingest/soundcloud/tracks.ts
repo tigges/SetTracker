@@ -239,4 +239,18 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     type: "festival",
     minDurationSec: 30 * 60,
   },
+  {
+    // Official Eric Prydz upload; 1001TL wired via
+    // sc-eric-prydz-eric-prydz-presents-463760700
+    // (same list as yt-JLIYTueL4TI). Mixcloud is a mirror only.
+    url: "https://soundcloud.com/eric-prydz/eric-prydz-presents-463760700",
+    primaryArtist: dj("Eric Prydz", {
+      accent: "#7209b7",
+      homeCity: "Sweden",
+    }),
+    genre: "Progressive House",
+    seriesName: "Epic Radio",
+    type: "radio",
+    minDurationSec: 30 * 60,
+  },
 ];

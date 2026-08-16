@@ -826,3 +826,30 @@ export const TL_JAMES_HYPE_SYNC_MAGAZINE_LONDON_2025: FingerprintSeedRow[] = [
   { at: "1:55:06", artist: "Mr Jay", title: "Cafe Del Mar 2024" },
   { at: "1:55:07", artist: "James Hype ft. Kelli-Leigh", title: "More Than Friends" },
 ];
+
+/**
+ * Eric Prydz - Epic Radio 036 2026-08-06
+ * https://www.1001tracklists.com/tracklist/9xurh1t/eric-prydz-epic-radio-036-2026-08-06.html
+ * Official YT: https://youtu.be/JLIYTueL4TI
+ * Official SC: https://soundcloud.com/eric-prydz/eric-prydz-presents-463760700
+ * Mixcloud mirror: https://www.mixcloud.com/ericprydz-epicradio/epic-radio-036/
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-JLIYTueL4TI"]
+ *       TRACKLIST_1001_BY_SOURCE_SLUG["sc-eric-prydz-eric-prydz-presents-463760700"]
+ * Captured 2026-08-16 — provenance 1001tl. Official script: 13 tracks.
+ * Capture overlay used an invalid identifier (hyphens); constant renamed.
+ */
+export const TL_ERIC_PRYDZ_EPIC_RADIO_036_2026: FingerprintSeedRow[] = [
+  { at: "0:30", artist: "Cirez D", title: "Tha Bass Line" },
+  { at: "5:20", artist: "Cirez D", title: "The Trip" },
+  { at: "10:21", artist: "Cirez D", title: "Frequency 2024 ID 02 (Working Title)" },
+  { at: "14:03", artist: "Cirez D", title: "Twitter 2022 ID (Working Title)" },
+  { at: "19:51", artist: "Cirez D", title: "Sunrise Festival 2022 ID 02 (Working Title)" },
+  { at: "23:47", artist: "Cirez D", title: "Evacuate" },
+  { at: "29:56", artist: "Cirez D", title: "Ramafixation" },
+  { at: "35:43", artist: "Cirez D", title: "Amnesia Ibiza 2026 ID (Working Title)" },
+  { at: "40:24", artist: "Pryda", title: "Loveland 2022 ID 02 (Working Title)" },
+  { at: "44:49", artist: "Cirez D", title: "Womb Tokyo 2023 ID 01 (Working Title)" },
+  { at: "50:44", artist: "Cirez D", title: "Hi Ibiza Theater ID (Working Title)" },
+  { at: "53:41", artist: "Pryda", title: "The Return" },
+  { at: "59:10", artist: "Cirez D", title: "Control Freak" },
+];

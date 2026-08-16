@@ -210,4 +210,18 @@ assert.equal(
   "sc-jameshypethedj-sync-london-full-set",
 );
 
+const epic036Sc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url ===
+    "https://soundcloud.com/eric-prydz/eric-prydz-presents-463760700",
+);
+assert.ok(epic036Sc);
+assert.equal(epic036Sc.primaryArtist.name, "Eric Prydz");
+assert.equal(epic036Sc.type, "radio");
+assert.equal(epic036Sc.seriesName, "Epic Radio");
+assert.equal(
+  `sc-eric-prydz-${slugify("eric-prydz-presents-463760700")}`,
+  "sc-eric-prydz-eric-prydz-presents-463760700",
+);
+
 console.log("soundcloud/tracks.test.ts ok");

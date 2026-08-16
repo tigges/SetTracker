@@ -28,6 +28,7 @@ import {
   TL_HOLY_PRIEST_EDC_LV_2026,
   TL_MATTY_RALPH_EDC_LV_2026,
   TL_ENRICO_SANGIULIANO_TML_WE2_2026,
+  TL_ERIC_PRYDZ_EPIC_RADIO_036_2026,
   TL_ERIC_PRYDZ_ULTRA_MIAMI_2026,
   TL_FISHER_TML_WE1_2026,
   TL_FISHER_TML_WE2_2026,
@@ -939,6 +940,22 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/1cgr4nqk/korolova-captive-soul-098-2026-08-07.html",
     tracklist1001: TL_KOROLOVA_CAPTIVE_SOUL_098_2026,
+  },
+  {
+    // Official Epic Radio 036; timed 1001 capture (same list as SC).
+    // Mixcloud is a mirror only — do not wire mixcloud slugs.
+    video: "https://www.youtube.com/watch?v=JLIYTueL4TI",
+    primaryArtist: dj("Eric Prydz", {
+      accent: "#7209b7",
+      homeCity: "Sweden",
+    }),
+    genre: "Progressive House",
+    type: "radio",
+    title: "Eric Prydz presents EPIC Radio 036",
+    seriesName: "Epic Radio",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/9xurh1t/eric-prydz-epic-radio-036-2026-08-06.html",
+    tracklist1001: TL_ERIC_PRYDZ_EPIC_RADIO_036_2026,
   },
   {
     // Official Miss Monique upload; timed 1001 capture.

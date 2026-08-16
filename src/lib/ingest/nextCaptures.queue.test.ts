@@ -458,5 +458,29 @@ assert.equal(
   ),
   "mapped",
 );
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "yt-JLIYTueL4TI",
+      title: "Eric Prydz presents EPIC Radio 036",
+      type: "radio",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "sc-eric-prydz-eric-prydz-presents-463760700",
+      title: "Eric Prydz presents EPIC Radio 036",
+      type: "radio",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
 
 console.log("nextCaptures.queue.test.ts ok");

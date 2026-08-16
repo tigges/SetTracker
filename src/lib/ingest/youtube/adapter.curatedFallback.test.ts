@@ -37,6 +37,7 @@ const HANNAH_CF = YOUTUBE_SETS.find((s) => s.video.includes("arowbYnNFGY"));
 const PURIFIED_520 = YOUTUBE_SETS.find((s) => s.video.includes("8aDoUu4GDrc"));
 const CAPTIVE_098 = YOUTUBE_SETS.find((s) => s.video.includes("5JxfEjVdQFk"));
 const HYPE_SYNC = YOUTUBE_SETS.find((s) => s.video.includes("rLTCLSsqrXY"));
+const EPIC_036 = YOUTUBE_SETS.find((s) => s.video.includes("JLIYTueL4TI"));
 
 describe("watchMetaFromCuratedSeed", () => {
   it("builds ASOT 1290 meta from the curated 1001 capture", () => {
@@ -311,6 +312,17 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=rLTCLSsqrXY");
     // Last cue 1:55:07 + 180s pad.
     assert.equal(meta.durationSec, 1 * 3600 + 55 * 60 + 7 + 180);
+  });
+
+  it("builds Epic Radio 036 meta from the curated 1001 capture", () => {
+    assert.ok(EPIC_036);
+    const meta = watchMetaFromCuratedSeed(EPIC_036);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "JLIYTueL4TI");
+    assert.match(meta.title, /EPIC Radio 036/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=JLIYTueL4TI");
+    // Last cue 59:10 + 180s pad.
+    assert.equal(meta.durationSec, 59 * 60 + 10 + 180);
   });
 
   it("returns null without a title or video id", () => {
@@ -722,5 +734,19 @@ describe("curated YouTube 429 fallback", () => {
     assert.ok(sets[0]!.durationSec >= 1 * 3600 + 55 * 60);
     assert.equal(sets[0]?.primaryArtist?.slug, "james-hype");
     assert.match(String(sets[0]?.title ?? ""), /SYNC/i);
+  });
+
+  it("lands Epic Radio 036 from the 1001 seed when watch is 429", async () => {
+    assert.ok(EPIC_036);
+    const adapter = createYoutubeAdapter([EPIC_036], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-JLIYTueL4TI");
+    assert.equal(sets[0]!.type, "radio");
+    assert.ok(sets[0]!.plays.length >= 13);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 59 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "eric-prydz");
+    assert.equal(sets[0]?.seriesName, "Epic Radio");
   });
 });

@@ -92,6 +92,7 @@ import {
   TL_STEVE_AOKI_TML_FRIENDSHIP_MIX_2026,
   TL_ABOVE_AND_BEYOND_ESTIVA_GROUP_THERAPY_RADIO_690_2026,
   TL_ALOK_TML_WE2_2026,
+  TL_ERIC_PRYDZ_EPIC_RADIO_036_2026,
   TL_HANNAH_LAING_ZENLESS_ZONE_ZERO_CREAMFIELDS_2024,
   TL_HARDWELL_HOA_527_YEARMIX_2025,
   TL_JAMIE_JONES_HOT_ROBOT_RADIO_225,
@@ -1638,6 +1639,17 @@ assert.equal(
   isWiredTracklistSlug("sc-jameshypethedj-sync-london-full-set"),
   true,
 );
+assert.equal(isWiredTracklistSlug("yt-JLIYTueL4TI"), true);
+assert.equal(
+  isWiredTracklistSlug("sc-eric-prydz-eric-prydz-presents-463760700"),
+  true,
+);
+assert.equal(
+  isWiredTracklistSlug(
+    "mc-ericprydz-epicradio-epic-radio-036",
+  ),
+  false,
+);
 assert.equal(
   isWiredTracklistSlug(
     "sc-https://soundcloud.com/sashaofficial/sasha-eclipse-mix-12-8-26",
@@ -2021,6 +2033,30 @@ for (let i = 1; i < hypeSync.length; i++) {
   assert.ok(
     (hypeSync[i]!.timestamp ?? 0) > (hypeSync[i - 1]!.timestamp ?? 0),
     `James Hype SYNC London clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_ERIC_PRYDZ_EPIC_RADIO_036_2026);
+assert.equal(TL_ERIC_PRYDZ_EPIC_RADIO_036_2026.length, 13);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-JLIYTueL4TI"],
+  TL_ERIC_PRYDZ_EPIC_RADIO_036_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-eric-prydz-eric-prydz-presents-463760700"],
+  TL_ERIC_PRYDZ_EPIC_RADIO_036_2026,
+);
+const epic036 = tracklist1001RowsToPlays(TL_ERIC_PRYDZ_EPIC_RADIO_036_2026);
+assert.equal(epic036.length, 13);
+assert.equal(epic036[0]?.provenance, "1001tl");
+assert.equal(epic036[0]?.timestamp, 30);
+assert.equal(epic036[0]?.trackTitle, "Tha Bass Line");
+assert.equal(epic036[12]?.trackTitle, "Control Freak");
+assert.equal(epic036[12]?.timestamp, 59 * 60 + 10);
+for (let i = 1; i < epic036.length; i++) {
+  assert.ok(
+    (epic036[i]!.timestamp ?? 0) > (epic036[i - 1]!.timestamp ?? 0),
+    `Epic Radio 036 clocks must increase at index ${i}`,
   );
 }
 
