@@ -8,6 +8,7 @@
 
 import { isJunkArtistName } from "./artistName";
 import { isBrandHostSlug } from "./brandHosts";
+import { isGenreTagName } from "./genre";
 
 export type SetBrowseSignals = {
   /** Set cover URL (preferred). */
@@ -47,6 +48,7 @@ export function isNonCatalogSet(s: {
 }): boolean {
   const title = (s.title ?? "").replace(/\s+/g, " ").trim();
   if (!title) return false;
+  if (isGenreTagName(title)) return true;
   if (/\b(radio\s*)?shorts?\b/i.test(title)) return true;
   if (/\bfrom scratch\b/i.test(title)) return true;
   if (/\bmakes a\b/i.test(title) && /\btrack\b/i.test(title)) return true;

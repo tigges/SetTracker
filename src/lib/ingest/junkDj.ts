@@ -38,7 +38,12 @@ export function classifyJunkDj(name: string, slug = ""): JunkDjKind | null {
   }
   if (isStageArtistName(n)) return "stage";
   if (isRadioArtistName(n)) return "radio";
-  if (isJunkArtistName(n) || /^view-artist-details-for-/.test(slug)) {
+  const slugWords = slug.replace(/-/g, " ").trim();
+  if (
+    isJunkArtistName(n) ||
+    (slugWords && isJunkArtistName(slugWords)) ||
+    /^view-artist-details-for-/.test(slug)
+  ) {
     return "other";
   }
   return null;

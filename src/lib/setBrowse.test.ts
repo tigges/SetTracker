@@ -82,6 +82,11 @@ describe("setBrowse", () => {
   });
 
   it("rejects Shorts and produce-a-track tutorials", () => {
+    assert.equal(
+      isNonCatalogSet({ title: "House, Tech & Minimal: 12.03.22" }),
+      true,
+    );
+    assert.equal(isNonCatalogSet({ title: "Minimal" }), true);
     assert.equal(isNonCatalogSet({ title: "One World Radio Shorts" }), true);
     assert.equal(
       isNonCatalogSet({

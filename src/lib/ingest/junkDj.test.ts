@@ -18,8 +18,14 @@ describe("junkDj", () => {
     );
     assert.equal(classifyJunkDj("Dom Dolla"), null);
     assert.equal(classifyJunkDj("House, Tech"), "other");
+    assert.equal(classifyJunkDj("House, Tech & Minimal: 12.03.22"), "other");
+    assert.equal(
+      classifyJunkDj("House, Tech & Minimal: 12.03.22", "house-tech-minimal-12-03-22"),
+      "other",
+    );
     assert.equal(classifyJunkDj("Minimal"), "other");
     assert.equal(classifyJunkDj("Soweto Punk"), "other");
+    assert.equal(classifyJunkDj("Soweto: Soweto Punk"), "other");
   });
 
   it("maps Freedom Stage and TML mainstage titles onto Tomorrowland", () => {
