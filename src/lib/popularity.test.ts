@@ -4,6 +4,7 @@ import {
   festivalSeasonSets,
   isFestivalStorySet,
   MIN_RAIL_SHOW,
+  newThisWeekSets,
   popularDjsThisWeek,
   popularSetsThisWeek,
   popularVenuesThisWeek,
@@ -305,6 +306,50 @@ describe("popularity rails", () => {
     assert.equal(isFestivalStorySet(fest, now), true);
     assert.equal(isFestivalStorySet(radio, now), false);
     assert.equal(MIN_RAIL_SHOW, 3);
+    const week = newThisWeekSets([fest, radio], 9, now);
+    assert.ok(week.some((s) => s.id === "radio"));
+    assert.ok(!week.some((s) => s.id === "tl"));
+  });
+
+  it("fills New this week from 14 days when the 7-day pool is thin", () => {
+    const now = Date.parse("2026-08-16T12:00:00Z");
+    const feed = [
+      item({
+        id: "d10",
+        slug: "d10",
+        type: "radio",
+        eventSlug: null,
+        publishedAt: new Date("2026-08-06T00:00:00Z"),
+      }),
+    ];
+    const week = newThisWeekSets(feed, 9, now);
+    assert.ok(week.some((s) => s.id === "d10"));
+  });
+
+  it("caps festival season at two cards per event brand", () => {
+    const now = Date.parse("2026-07-30T12:00:00Z");
+    const feed = [1, 2, 3, 4].map((n) =>
+      item({
+        id: `tml-${n}`,
+        slug: `tml-${n}`,
+        title: `Artist ${n} | Tomorrowland 2026`,
+        eventSlug: n <= 2 ? "tomorrowland" : null,
+        editionEndsAt: new Date("2026-07-26T23:59:59Z"),
+        publishedAt: new Date("2026-07-28"),
+        type: "festival",
+        primaryDj: {
+          name: `A${n}`,
+          slug: `a-${n}`,
+          accent: "#1",
+          imageUrl: "https://example.com/a.jpg",
+        },
+      }),
+    );
+    const season = festivalSeasonSets(feed, 9, now);
+    assert.ok(season.length <= 2);
+    assert.ok(
+      season.every((s) => /tomorrowland/i.test(s.title) || s.eventSlug === "tomorrowland"),
+    );
   });
 
   it("includes venues from the 28-day window", () => {

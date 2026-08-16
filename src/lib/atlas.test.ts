@@ -5,10 +5,13 @@ import {
   atlasAccent,
   atlasCities,
   atlasCountries,
+  atlasClusterRadius,
   atlasPinClass,
   atlasPinIdFromTarget,
+  atlasPinsNear,
   atlasTapMoved,
   atlasViewBox,
+  toggleAtlasKind,
   chartKicker,
   filterAtlasPins,
   flyToSpan,
@@ -199,6 +202,38 @@ describe("DJ Mag 2026 atlas seed", () => {
     assert.equal(atlasTapMoved({ x: 0, y: 0 }, { x: 3, y: 3 }), false);
     assert.equal(atlasTapMoved({ x: 0, y: 0 }, { x: 10, y: 0 }), true);
     assert.equal(atlasPinIdFromTarget(null), null);
+    assert.deepEqual(
+      filterAtlasPins(pins, {
+        kinds: ["festival", "dj"],
+        q: "",
+        country: "",
+        city: "",
+      }).map((p) => p.id).sort(),
+      ["d1", "f1"],
+    );
+    assert.deepEqual(toggleAtlasKind(["festival", "club"], "dj"), [
+      "festival",
+      "club",
+      "dj",
+    ]);
+    assert.deepEqual(toggleAtlasKind(["festival", "club"], "club"), [
+      "festival",
+    ]);
+    assert.equal(
+      filterAtlasPins(pins, { kinds: [], q: "", country: "", city: "" }).length,
+      0,
+    );
+    const cluster = atlasPinsNear(
+      [
+        pin({ id: "a", name: "A", x: 10, y: 10 }),
+        pin({ id: "b", name: "B", x: 12, y: 10 }),
+        pin({ id: "c", name: "C", x: 80, y: 80 }),
+      ],
+      { x: 10, y: 10 },
+      5,
+    );
+    assert.deepEqual(cluster.map((p) => p.id), ["a", "b"]);
+    assert.ok(atlasClusterRadius(900) >= 6);
   });
 });
 
