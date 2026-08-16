@@ -1585,7 +1585,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     }),
     genre: "Hard Dance",
     type: "festival",
-    title: "MANDY B2B Negativ | Atmosphere Stage, Tomorrowland Weekend 1 2026",
+    title: "MANDY B2B NEGITIV | Atmosphere Stage, Tomorrowland Weekend 1 2026",
     seriesName: "Tomorrowland",
     eventName: "Tomorrowland Belgium",
     tracklist1001Url:

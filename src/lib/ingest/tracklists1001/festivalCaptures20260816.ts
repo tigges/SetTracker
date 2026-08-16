@@ -1527,7 +1527,7 @@ export const TL_W_AND_W_MAINSTAGE_PAROOKAVILLE_GERMANY_2026: FingerprintSeedRow[
  * Capture overlay used TL_MANDY_MANDY-Mondays_028_2026
  * (hyphen illegal); constant is TL_MANDY_MANDY_MONDAYS_028_2026.
  * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["sc-tomorrowland-mandy-mondays-august-2026"]
- * Distinct from yt-J7b0G4XX8pg (MANDY B2B Negativ Atmosphere TML WE1).
+ * Distinct from yt-J7b0G4XX8pg (MANDY B2B NEGITIV Atmosphere TML WE1).
  * Captured 2026-08-16 - provenance 1001tl.
  */
 export const TL_MANDY_MANDY_MONDAYS_028_2026: FingerprintSeedRow[] = [

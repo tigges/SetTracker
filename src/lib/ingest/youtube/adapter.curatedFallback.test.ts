@@ -1031,7 +1031,7 @@ describe("curated YouTube 429 fallback", () => {
     assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
     assert.ok(sets[0]!.durationSec >= 57 * 60);
     assert.equal(sets[0]?.primaryArtist?.slug, "mandy");
-    assert.ok(sets[0]?.collaborators?.some((c) => c.slug === "negativ"));
+    assert.ok(sets[0]?.collaborators?.some((c) => c.slug === "negitiv"));
     assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
   });
 

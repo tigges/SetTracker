@@ -509,6 +509,19 @@ export const KNOWN_HANDLES: Record<string, HandleHint> = {
     genre: "Riddim",
     accent: "#c1121f",
   },
+  negitiv: {
+    youtubeHandle: "@negitivofficial",
+    soundcloudPermalink: "negitivofficial",
+    genre: "Hard Techno",
+    accent: "#7b2cbf",
+  },
+  // 1001Tracklists credit spelling; official brand is NEGITIV.
+  negativ: {
+    youtubeHandle: "@negitivofficial",
+    soundcloudPermalink: "negitivofficial",
+    genre: "Hard Techno",
+    accent: "#7b2cbf",
+  },
 };
 
 export function hintForName(name: string): HandleHint | undefined {

@@ -2072,6 +2072,23 @@ export const ARTIST_ROSTER_CURATED: ArtistRosterEntry[] = [
     ],
     priority: "normal",
   },
+  {
+    name: "NEGITIV",
+    genre: "Hard Techno",
+    accent: "#7b2cbf",
+    homeCity: "Cologne, DE",
+    youtube: { handle: "@negitivofficial", status: "ok" },
+    soundcloud: { permalink: "negitivofficial", status: "ok" },
+    website: "https://negitiv.com",
+    socials: [
+      "https://www.youtube.com/@negitivofficial",
+      "https://soundcloud.com/negitivofficial",
+      "https://www.instagram.com/negitiv/",
+      "https://linktr.ee/negitiv",
+      "https://www.bcbfamily.com/artists/negitiv",
+    ],
+    priority: "normal",
+  },
 ];
 
 /**

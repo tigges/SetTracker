@@ -228,6 +228,15 @@ assert.match(bySlug["michael-bibi"]!.website, /michaelbibi\.com/);
 assert.match(bySlug["boris-brejcha"]!.website, /borisbrejcha\.de/);
 assert.equal(bySlug["steve-aoki"]!.instagram, null);
 
+assert.ok(bySlug.negitiv);
+assert.equal(bySlug.negitiv!.name, "NEGITIV");
+assert.match(bySlug.negitiv!.soundcloud!, /negitivofficial/);
+assert.match(bySlug.negitiv!.youtube!, /@negitivofficial/);
+assert.match(bySlug.negitiv!.instagram!, /instagram\.com\/negitiv/);
+assert.match(bySlug.negitiv!.website, /negitiv\.com/);
+assert.equal(hintForName("NEGITIV")?.youtubeHandle, "@negitivofficial");
+assert.equal(hintForName("Negativ")?.soundcloudPermalink, "negitivofficial");
+
 assert.ok(bySlug["1788-l"], "missing pin 1788-l");
 assert.equal(bySlug["1788-l"]!.name, "1788-L");
 assert.equal(bySlug["1788-l"]!.soundcloud, null);

@@ -1196,4 +1196,14 @@ export const DJ_SOCIAL_PINS: DjSocialPin[] = [
     website: "https://1788-l.com",
     bio: "Riddim. United States. Official 1788-l.com — YT @1788L, IG @1788_l, X @l_1788. No official SoundCloud.",
   },
+  {
+    slug: "negitiv",
+    name: "NEGITIV",
+    accent: "#7b2cbf",
+    soundcloud: "https://soundcloud.com/negitivofficial",
+    youtube: "https://www.youtube.com/@negitivofficial",
+    instagram: "https://www.instagram.com/negitiv/",
+    website: "https://negitiv.com",
+    bio: "Hard Techno. Cologne. Official negitiv.com — SC negitivofficial, YT @negitivofficial, IG @negitiv, booking BCB Family. 1001 sometimes credits Negativ.",
+  },
 ];
