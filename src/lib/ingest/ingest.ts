@@ -684,6 +684,11 @@ export async function runIngest(
 
   async function ingestSet(raw: RawSet): Promise<void> {
     stats.scannedSets += 1;
+    const seeded = applyTracklist1001Seed(raw.sourceSlug, raw.plays);
+    if (seeded !== raw.plays) {
+      raw.plays = seeded;
+      raw.sourceHash = hashRawSetContent(raw);
+    }
     let sourceHash = raw.sourceHash ?? hashRawSetContent(raw);
     const existing =
       (await prisma.set.findUnique({

@@ -47,6 +47,7 @@ import {
   resolveSoundCloudTrackUrl,
 } from "./playback";
 import { playlistEntriesToPlays } from "./playlist";
+import { applyTracklist1001Seed } from "../tracklists1001/seeds";
 
 const ACCENTS = [
   "#ff7a45",
@@ -261,7 +262,7 @@ export async function trackToRawSet(
     playbackUrl,
     cover: pickAccent(sourceSlug),
     imageUrl: setImage ?? undefined,
-    plays,
+    plays: applyTracklist1001Seed(sourceSlug, plays),
   };
   raw.sourceHash = hashRawSetContent(raw);
   return raw;
