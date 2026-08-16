@@ -92,13 +92,22 @@ import {
   TL_STEVE_AOKI_TML_FRIENDSHIP_MIX_2026,
   TL_ABOVE_AND_BEYOND_ESTIVA_GROUP_THERAPY_RADIO_690_2026,
   TL_ALOK_TML_WE2_2026,
+  TL_AMELIE_LENS_RADIO_SHOW_022_2026,
+  TL_BRADEAZY_LIVE_LOLLAPALOOZA_CHICAGO_2026,
+  TL_OLIVER_HELDENS_DAYBREAK_SESSION_TOMORROWLAND_WE1_2024,
+  TL_ERIC_PRYDZ_EPIC_RADIO_036_2026,
+  TL_HANNAH_LAING_ZENLESS_ZONE_ZERO_CREAMFIELDS_2024,
   TL_HARDWELL_HOA_527_YEARMIX_2025,
   TL_JAMIE_JONES_HOT_ROBOT_RADIO_225,
   TL_JAMIE_JONES_HOT_ROBOT_RADIO_239,
   TL_JOEL_CORRY_EDGE_NYC_2026,
+  TL_JAMES_HYPE_SYNC_MAGAZINE_LONDON_2025,
   TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026,
+  TL_KOROLOVA_CAPTIVE_SOUL_098_2026,
+  TL_MAX_STYLER_OPULENT_TEMPLE_BURNING_MAN_2024,
   TL_MISS_MONIQUE_IBIZA_SUNSET_YACHT_2026,
   TL_NICKY_ROMERO_PROTOCOL_RADIO_731,
+  TL_NORA_EN_PURE_PURIFIED_RADIO_520_2026,
   TL_REINIER_ZONNEVELD_AWAKENINGS_2025,
   TL_SASHA_ECLIPSE_MIX_2026,
   TL_TIESTO_PRISMATIC_032_2026,
@@ -1595,6 +1604,7 @@ assert.equal(
   ),
   true,
 );
+assert.equal(isWiredTracklistSlug("yt-SeKRNa26kug"), true);
 assert.equal(isWiredTracklistSlug("yt-soEFl73peVA"), true);
 assert.equal(isWiredTracklistSlug("sc-joelcorry-edgenyc"), true);
 assert.equal(isWiredTracklistSlug("yt-Rgx-wT9FDaE"), true);
@@ -1607,6 +1617,74 @@ assert.equal(isWiredTracklistSlug("yt-B05MAbsCOLA"), true);
 assert.equal(
   isWiredTracklistSlug("sc-sashaofficial-sasha-eclipse-mix-12-8-26"),
   true,
+);
+assert.equal(isWiredTracklistSlug("yt-k4Drn6AwAdk"), true);
+assert.equal(
+  isWiredTracklistSlug(
+    "sc-maxstyler-max-styler-live-opulent-temple-burning-man-2024",
+  ),
+  true,
+);
+assert.equal(isWiredTracklistSlug("yt-arowbYnNFGY"), true);
+assert.equal(
+  isWiredTracklistSlug("sc-hannahlaingdj-hannah-laing-creamfields-2024-audio"),
+  true,
+);
+assert.equal(isWiredTracklistSlug("yt-8aDoUu4GDrc"), true);
+assert.equal(isWiredTracklistSlug("sc-noraenpure-purified-520"), true);
+assert.equal(isWiredTracklistSlug("yt-5JxfEjVdQFk"), true);
+assert.equal(
+  isWiredTracklistSlug("sc-korolovadj-korolova-captive-soul-98"),
+  true,
+);
+assert.equal(isWiredTracklistSlug("yt-rLTCLSsqrXY"), true);
+assert.equal(
+  isWiredTracklistSlug("sc-jameshypethedj-sync-london-full-set"),
+  true,
+);
+assert.equal(isWiredTracklistSlug("yt-JLIYTueL4TI"), true);
+assert.equal(
+  isWiredTracklistSlug("sc-eric-prydz-eric-prydz-presents-463760700"),
+  true,
+);
+assert.equal(
+  isWiredTracklistSlug("sc-bradeazy-bradeazy-live-lollapalooza"),
+  true,
+);
+assert.equal(
+  isWiredTracklistSlug("sc-amelielens-amelie-lens-radio-show-022"),
+  true,
+);
+assert.equal(isWiredTracklistSlug("yt-wuMQeEJ3YnQ"), true);
+assert.equal(
+  isWiredTracklistSlug(
+    "sc-oliverheldens-oliver-heldens-daybreak-session-tomorrowland-weekend-1-2024",
+  ),
+  true,
+);
+assert.equal(
+  isWiredTracklistSlug(
+    "sc-https://soundcloud.com/bradeazy/bradeazy-live-lollapalooza",
+  ),
+  false,
+);
+assert.equal(
+  isWiredTracklistSlug(
+    "sc-https://soundcloud.com/amelielens/amelie-lens-radio-show-022",
+  ),
+  false,
+);
+assert.equal(
+  isWiredTracklistSlug(
+    "sc-https://soundcloud.com/oliverheldens/oliver-heldens-daybreak-session-tomorrowland-weekend-1-2024",
+  ),
+  false,
+);
+assert.equal(
+  isWiredTracklistSlug(
+    "mc-ericprydz-epicradio-epic-radio-036",
+  ),
+  false,
 );
 assert.equal(
   isWiredTracklistSlug(
@@ -1661,6 +1739,10 @@ assert.equal(
   TRACKLIST_1001_BY_SOURCE_SLUG[
     "sc-vintageculturemusic-vintage-culture-b2b-arodes-at-burning-man-2024"
   ],
+  TL_VINTAGE_CULTURE_ARODES_BURNING_MAN_2024,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-SeKRNa26kug"],
   TL_VINTAGE_CULTURE_ARODES_BURNING_MAN_2024,
 );
 const vcArodes = tracklist1001RowsToPlays(
@@ -1857,6 +1939,237 @@ for (let i = 1; i < hoa527.length; i++) {
   assert.ok(
     (hoa527[i]!.timestamp ?? 0) > (hoa527[i - 1]!.timestamp ?? 0),
     `Hardwell HOA 527 clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_MAX_STYLER_OPULENT_TEMPLE_BURNING_MAN_2024);
+assert.equal(TL_MAX_STYLER_OPULENT_TEMPLE_BURNING_MAN_2024.length, 28);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-k4Drn6AwAdk"],
+  TL_MAX_STYLER_OPULENT_TEMPLE_BURNING_MAN_2024,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-maxstyler-max-styler-live-opulent-temple-burning-man-2024"
+  ],
+  TL_MAX_STYLER_OPULENT_TEMPLE_BURNING_MAN_2024,
+);
+const maxStylerOt = tracklist1001RowsToPlays(
+  TL_MAX_STYLER_OPULENT_TEMPLE_BURNING_MAN_2024,
+);
+assert.equal(maxStylerOt.length, 28);
+assert.equal(maxStylerOt[0]?.provenance, "1001tl");
+assert.equal(maxStylerOt[0]?.timestamp, 0);
+assert.equal(maxStylerOt[0]?.trackTitle, "Freaky 1");
+assert.equal(maxStylerOt[27]?.trackTitle, "Lights Out");
+assert.equal(maxStylerOt[27]?.timestamp, 1 * 3600 + 25 * 60);
+for (let i = 1; i < maxStylerOt.length; i++) {
+  assert.ok(
+    (maxStylerOt[i]!.timestamp ?? 0) > (maxStylerOt[i - 1]!.timestamp ?? 0),
+    `Max Styler Opulent Temple clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_HANNAH_LAING_ZENLESS_ZONE_ZERO_CREAMFIELDS_2024);
+assert.equal(TL_HANNAH_LAING_ZENLESS_ZONE_ZERO_CREAMFIELDS_2024.length, 24);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-arowbYnNFGY"],
+  TL_HANNAH_LAING_ZENLESS_ZONE_ZERO_CREAMFIELDS_2024,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-hannahlaingdj-hannah-laing-creamfields-2024-audio"
+  ],
+  TL_HANNAH_LAING_ZENLESS_ZONE_ZERO_CREAMFIELDS_2024,
+);
+const hannahCf = tracklist1001RowsToPlays(
+  TL_HANNAH_LAING_ZENLESS_ZONE_ZERO_CREAMFIELDS_2024,
+);
+assert.equal(hannahCf.length, 24);
+assert.equal(hannahCf[0]?.provenance, "1001tl");
+assert.equal(hannahCf[0]?.timestamp, 0);
+assert.equal(hannahCf[0]?.trackTitle, "Ibizacore");
+assert.equal(hannahCf[23]?.trackTitle, "Good Love (Reinier Zonneveld Remix)");
+assert.equal(hannahCf[23]?.timestamp, 1 * 3600 + 21 * 60 + 44);
+for (let i = 1; i < hannahCf.length; i++) {
+  assert.ok(
+    (hannahCf[i]!.timestamp ?? 0) > (hannahCf[i - 1]!.timestamp ?? 0),
+    `Hannah Laing Creamfields clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_NORA_EN_PURE_PURIFIED_RADIO_520_2026);
+assert.equal(TL_NORA_EN_PURE_PURIFIED_RADIO_520_2026.length, 13);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-8aDoUu4GDrc"],
+  TL_NORA_EN_PURE_PURIFIED_RADIO_520_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-noraenpure-purified-520"],
+  TL_NORA_EN_PURE_PURIFIED_RADIO_520_2026,
+);
+const purified520 = tracklist1001RowsToPlays(
+  TL_NORA_EN_PURE_PURIFIED_RADIO_520_2026,
+);
+assert.equal(purified520.length, 13);
+assert.equal(purified520[0]?.provenance, "1001tl");
+assert.equal(purified520[0]?.timestamp, 89);
+assert.equal(purified520[0]?.trackTitle, "Shadows");
+assert.equal(purified520[12]?.trackTitle, "Mirage");
+assert.equal(purified520[12]?.timestamp, 57 * 60 + 54);
+for (let i = 1; i < purified520.length; i++) {
+  assert.ok(
+    (purified520[i]!.timestamp ?? 0) > (purified520[i - 1]!.timestamp ?? 0),
+    `Purified Radio 520 clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_KOROLOVA_CAPTIVE_SOUL_098_2026);
+assert.equal(TL_KOROLOVA_CAPTIVE_SOUL_098_2026.length, 15);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-5JxfEjVdQFk"],
+  TL_KOROLOVA_CAPTIVE_SOUL_098_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-korolovadj-korolova-captive-soul-98"],
+  TL_KOROLOVA_CAPTIVE_SOUL_098_2026,
+);
+const captive098 = tracklist1001RowsToPlays(TL_KOROLOVA_CAPTIVE_SOUL_098_2026);
+assert.equal(captive098.length, 15);
+assert.equal(captive098[0]?.provenance, "1001tl");
+assert.equal(captive098[0]?.timestamp, 103);
+assert.equal(captive098[0]?.trackTitle, "Buka");
+assert.equal(captive098[14]?.trackTitle, "Don't Wake Us Up");
+assert.equal(captive098[14]?.timestamp, 55 * 60 + 58);
+for (let i = 1; i < captive098.length; i++) {
+  assert.ok(
+    (captive098[i]!.timestamp ?? 0) > (captive098[i - 1]!.timestamp ?? 0),
+    `Captive Soul 098 clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_JAMES_HYPE_SYNC_MAGAZINE_LONDON_2025);
+assert.equal(TL_JAMES_HYPE_SYNC_MAGAZINE_LONDON_2025.length, 66);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-rLTCLSsqrXY"],
+  TL_JAMES_HYPE_SYNC_MAGAZINE_LONDON_2025,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-jameshypethedj-sync-london-full-set"],
+  TL_JAMES_HYPE_SYNC_MAGAZINE_LONDON_2025,
+);
+const hypeSync = tracklist1001RowsToPlays(TL_JAMES_HYPE_SYNC_MAGAZINE_LONDON_2025);
+assert.equal(hypeSync.length, 66);
+assert.equal(hypeSync[0]?.provenance, "1001tl");
+assert.equal(hypeSync[0]?.timestamp, 0);
+assert.equal(hypeSync[0]?.trackTitle, "Ferrari");
+assert.equal(hypeSync[65]?.trackTitle, "More Than Friends");
+assert.equal(hypeSync[65]?.timestamp, 1 * 3600 + 55 * 60 + 7);
+for (let i = 1; i < hypeSync.length; i++) {
+  assert.ok(
+    (hypeSync[i]!.timestamp ?? 0) > (hypeSync[i - 1]!.timestamp ?? 0),
+    `James Hype SYNC London clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_ERIC_PRYDZ_EPIC_RADIO_036_2026);
+assert.equal(TL_ERIC_PRYDZ_EPIC_RADIO_036_2026.length, 13);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-JLIYTueL4TI"],
+  TL_ERIC_PRYDZ_EPIC_RADIO_036_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-eric-prydz-eric-prydz-presents-463760700"],
+  TL_ERIC_PRYDZ_EPIC_RADIO_036_2026,
+);
+const epic036 = tracklist1001RowsToPlays(TL_ERIC_PRYDZ_EPIC_RADIO_036_2026);
+assert.equal(epic036.length, 13);
+assert.equal(epic036[0]?.provenance, "1001tl");
+assert.equal(epic036[0]?.timestamp, 30);
+assert.equal(epic036[0]?.trackTitle, "Tha Bass Line");
+assert.equal(epic036[12]?.trackTitle, "Control Freak");
+assert.equal(epic036[12]?.timestamp, 59 * 60 + 10);
+for (let i = 1; i < epic036.length; i++) {
+  assert.ok(
+    (epic036[i]!.timestamp ?? 0) > (epic036[i - 1]!.timestamp ?? 0),
+    `Epic Radio 036 clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_BRADEAZY_LIVE_LOLLAPALOOZA_CHICAGO_2026);
+assert.equal(TL_BRADEAZY_LIVE_LOLLAPALOOZA_CHICAGO_2026.length, 12);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-bradeazy-bradeazy-live-lollapalooza"],
+  TL_BRADEAZY_LIVE_LOLLAPALOOZA_CHICAGO_2026,
+);
+const bradeazyLolla = tracklist1001RowsToPlays(
+  TL_BRADEAZY_LIVE_LOLLAPALOOZA_CHICAGO_2026,
+);
+assert.equal(bradeazyLolla.length, 12);
+assert.equal(bradeazyLolla[0]?.provenance, "1001tl");
+assert.equal(bradeazyLolla[0]?.timestamp, 20);
+assert.equal(bradeazyLolla[0]?.trackTitle, "System Failed");
+assert.equal(bradeazyLolla[11]?.trackTitle, "Butterfly 2026");
+assert.equal(bradeazyLolla[11]?.timestamp, 54 * 60 + 36);
+for (let i = 1; i < bradeazyLolla.length; i++) {
+  assert.ok(
+    (bradeazyLolla[i]!.timestamp ?? 0) > (bradeazyLolla[i - 1]!.timestamp ?? 0),
+    `bradeazy Lollapalooza clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_AMELIE_LENS_RADIO_SHOW_022_2026);
+assert.equal(TL_AMELIE_LENS_RADIO_SHOW_022_2026.length, 16);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-amelielens-amelie-lens-radio-show-022"],
+  TL_AMELIE_LENS_RADIO_SHOW_022_2026,
+);
+const amelie022 = tracklist1001RowsToPlays(TL_AMELIE_LENS_RADIO_SHOW_022_2026);
+assert.equal(amelie022.length, 16);
+assert.equal(amelie022[0]?.provenance, "1001tl");
+assert.equal(amelie022[0]?.timestamp, 20);
+assert.equal(amelie022[0]?.trackTitle, "Zen Meteor");
+assert.equal(amelie022[15]?.trackTitle, "Storkens Vej");
+assert.equal(amelie022[15]?.timestamp, 55 * 60 + 50);
+for (let i = 1; i < amelie022.length; i++) {
+  assert.ok(
+    (amelie022[i]!.timestamp ?? 0) > (amelie022[i - 1]!.timestamp ?? 0),
+    `Amelie Lens Radio Show 022 clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_OLIVER_HELDENS_DAYBREAK_SESSION_TOMORROWLAND_WE1_2024);
+assert.equal(TL_OLIVER_HELDENS_DAYBREAK_SESSION_TOMORROWLAND_WE1_2024.length, 95);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-wuMQeEJ3YnQ"],
+  TL_OLIVER_HELDENS_DAYBREAK_SESSION_TOMORROWLAND_WE1_2024,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-oliverheldens-oliver-heldens-daybreak-session-tomorrowland-weekend-1-2024"
+  ],
+  TL_OLIVER_HELDENS_DAYBREAK_SESSION_TOMORROWLAND_WE1_2024,
+);
+const heldensDaybreak = tracklist1001RowsToPlays(
+  TL_OLIVER_HELDENS_DAYBREAK_SESSION_TOMORROWLAND_WE1_2024,
+);
+assert.equal(heldensDaybreak.length, 95);
+assert.equal(heldensDaybreak[0]?.provenance, "1001tl");
+assert.equal(heldensDaybreak[0]?.timestamp, 12);
+assert.equal(
+  heldensDaybreak[0]?.trackTitle,
+  "You & Me (Flume Remix / Westend & Local Singles Edit)",
+);
+assert.equal(
+  heldensDaybreak[94]?.trackTitle,
+  "Everybody Loves The Sunshine",
+);
+assert.equal(heldensDaybreak[94]?.timestamp, 2 * 3600 + 25 * 60 + 8);
+for (let i = 1; i < heldensDaybreak.length; i++) {
+  assert.ok(
+    (heldensDaybreak[i]!.timestamp ?? 0) >
+      (heldensDaybreak[i - 1]!.timestamp ?? 0),
+    `Oliver Heldens Daybreak clocks must increase at index ${i}`,
   );
 }
 

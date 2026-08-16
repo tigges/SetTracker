@@ -232,6 +232,17 @@ assert.equal(
 assert.equal(
   skipCaptureNeed(
     row({
+      slug: "yt-SeKRNa26kug",
+      title: "Vintage Culture b2b Arodes at Burning Man 2024, Black Rock City",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
       slug: "yt-soEFl73peVA",
       title: "Joel Corry Epic Rooftop Set From Edge NYC",
     }),
@@ -327,6 +338,189 @@ assert.equal(
       slug: "yt-phWKhIwgiTo",
       title: "Group Therapy 690 with Above & Beyond and Estiva",
       type: "radio",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "yt-k4Drn6AwAdk",
+      title: "Max Styler @ Opulent Temple, Burning Man 2024",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "sc-maxstyler-max-styler-live-opulent-temple-burning-man-2024",
+      title: "Max Styler Live @ Opulent Temple Burning Man 2024",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "yt-arowbYnNFGY",
+      title: "Hannah Laing @ Zenless Zone Zero, Creamfields North 2024",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "sc-hannahlaingdj-hannah-laing-creamfields-2024-audio",
+      title: "Hannah Laing Creamfields 2024 Audio",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "yt-8aDoUu4GDrc",
+      title: "Nora En Pure - Purified Radio 520",
+      type: "radio",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "sc-noraenpure-purified-520",
+      title: "Purified Radio 520",
+      type: "radio",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "yt-5JxfEjVdQFk",
+      title: "Korolova - Captive Soul 098",
+      type: "radio",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "sc-korolovadj-korolova-captive-soul-98",
+      title: "Korolova Captive Soul 98",
+      type: "radio",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "yt-rLTCLSsqrXY",
+      title: "James Hype SYNC London (Full Set)",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "sc-jameshypethedj-sync-london-full-set",
+      title: "James Hype SYNC London Full Set",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "yt-JLIYTueL4TI",
+      title: "Eric Prydz presents EPIC Radio 036",
+      type: "radio",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "sc-eric-prydz-eric-prydz-presents-463760700",
+      title: "Eric Prydz presents EPIC Radio 036",
+      type: "radio",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "sc-bradeazy-bradeazy-live-lollapalooza",
+      title: "bradeazy Live @ Lollapalooza Chicago 2026",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "sc-amelielens-amelie-lens-radio-show-022",
+      title: "Amelie Lens - Radio Show 022 2026-06-05",
+      type: "radio",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "yt-wuMQeEJ3YnQ",
+      title: "Oliver Heldens - Daybreak Session @ Tomorrowland Weekend 1 2024",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "sc-oliverheldens-oliver-heldens-daybreak-session-tomorrowland-weekend-1-2024",
+      title: "Oliver Heldens - Daybreak Session @ Tomorrowland Weekend 1 2024",
     }),
     mapped,
     now,

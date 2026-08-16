@@ -27,6 +27,10 @@ import {
   sleep,
   type ScTrack,
 } from "./client";
+import {
+  fingerprintRowsToPlays,
+  mergeFingerprintPlays,
+} from "../fingerprint/seeds";
 import { playsFromDescription1001Links } from "../tracklists1001/client";
 import {
   applyTracklist1001Seed,
@@ -340,12 +344,18 @@ async function trackSeedToRawSet(
     }
   }
 
-  const plays = await enrichScPlaysWith1001(
+  let plays = await enrichScPlaysWith1001(
     track.description,
     sourceSlug,
     mergeTracklistSignals(fromDescription, fromComments),
     durationSec,
   );
+  if (seed.fingerprintPlays?.length) {
+    plays = mergeFingerprintPlays(
+      plays,
+      fingerprintRowsToPlays(seed.fingerprintPlays),
+    );
+  }
   const artistImage = scImageUrl(track.user?.avatar_url);
   const setImage = scImageUrl(track.artwork_url) || artistImage;
   const preferredPrimary = {

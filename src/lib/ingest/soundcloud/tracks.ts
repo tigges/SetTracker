@@ -5,6 +5,10 @@
  * on radio/label accounts. Parallel to youtube/videos.ts curated seeds.
  */
 
+import {
+  FP_KEINEMUSIK_RADIO_FIFI_20260807,
+  type FingerprintSeedRow,
+} from "../fingerprint/seeds";
 import type { RawArtist } from "../types";
 import { slugify } from "../types";
 
@@ -17,6 +21,11 @@ export type SoundCloudTrackSeed = {
   type?: "radio" | "festival" | "soundcloud" | "mix";
   /** Skip if shorter (default 15 minutes) */
   minDurationSec?: number;
+  /**
+   * Manual / ACRCloud Identify rows (provenance "fingerprint").
+   * Gap-fills only; never overwrites source/1001tl cues.
+   */
+  fingerprintPlays?: FingerprintSeedRow[];
 };
 
 function dj(name: string, extra: Partial<RawArtist> = {}): RawArtist {
@@ -179,5 +188,130 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     genre: "House",
     type: "festival",
     minDurationSec: 30 * 60,
+  },
+  {
+    // Official Max Styler upload; 1001TL wired via
+    // sc-maxstyler-max-styler-live-opulent-temple-burning-man-2024
+    // (same list as yt-k4Drn6AwAdk).
+    url: "https://soundcloud.com/maxstyler/max-styler-live-opulent-temple-burning-man-2024",
+    primaryArtist: dj("Max Styler", {
+      accent: "#ff9f1c",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    minDurationSec: 30 * 60,
+  },
+  {
+    // Official Hannah Laing upload; 1001TL wired via
+    // sc-hannahlaingdj-hannah-laing-creamfields-2024-audio
+    // (same list as yt-arowbYnNFGY).
+    url: "https://soundcloud.com/hannahlaingdj/hannah-laing-creamfields-2024-audio",
+    primaryArtist: dj("Hannah Laing", {
+      accent: "#ff006e",
+    }),
+    genre: "Techno",
+    type: "festival",
+    minDurationSec: 30 * 60,
+  },
+  {
+    // Official Nora En Pure upload; 1001TL wired via
+    // sc-noraenpure-purified-520 (same list as yt-8aDoUu4GDrc).
+    url: "https://soundcloud.com/noraenpure/purified-520",
+    primaryArtist: dj("Nora En Pure", { accent: "#48cae4" }),
+    genre: "Deep House",
+    seriesName: "Purified Radio",
+    type: "radio",
+    minDurationSec: 30 * 60,
+  },
+  {
+    // Official Korolova upload; 1001TL wired via
+    // sc-korolovadj-korolova-captive-soul-98 (same list as yt-5JxfEjVdQFk).
+    url: "https://soundcloud.com/korolovadj/korolova-captive-soul-98",
+    primaryArtist: dj("Korolova", {
+      accent: "#f72585",
+      homeCity: "Ukraine",
+    }),
+    genre: "Melodic Techno",
+    seriesName: "Captive Soul",
+    type: "radio",
+    minDurationSec: 30 * 60,
+  },
+  {
+    // Official James Hype upload; 1001TL wired via
+    // sc-jameshypethedj-sync-london-full-set (same list as yt-rLTCLSsqrXY).
+    url: "https://soundcloud.com/jameshypethedj/sync-london-full-set",
+    primaryArtist: dj("James Hype", {
+      accent: "#ff3d6e",
+      homeCity: "Liverpool, UK",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    minDurationSec: 30 * 60,
+  },
+  {
+    // Official Eric Prydz upload; 1001TL wired via
+    // sc-eric-prydz-eric-prydz-presents-463760700
+    // (same list as yt-JLIYTueL4TI). Mixcloud is a mirror only.
+    url: "https://soundcloud.com/eric-prydz/eric-prydz-presents-463760700",
+    primaryArtist: dj("Eric Prydz", {
+      accent: "#7209b7",
+      homeCity: "Sweden",
+    }),
+    genre: "Progressive House",
+    seriesName: "Epic Radio",
+    type: "radio",
+    minDurationSec: 30 * 60,
+  },
+  {
+    // Official bradeazy upload; 1001TL wired via
+    // sc-bradeazy-bradeazy-live-lollapalooza (never sc-https://…).
+    url: "https://soundcloud.com/bradeazy/bradeazy-live-lollapalooza",
+    primaryArtist: dj("bradeazy", {
+      accent: "#3aa0e0",
+      homeCity: "Miami, US",
+    }),
+    genre: "Bass House",
+    type: "festival",
+    minDurationSec: 15 * 60,
+  },
+  {
+    // Official Amelie Lens upload; 1001TL wired via
+    // sc-amelielens-amelie-lens-radio-show-022 (never sc-https://…).
+    url: "https://soundcloud.com/amelielens/amelie-lens-radio-show-022",
+    primaryArtist: dj("Amelie Lens", {
+      accent: "#d00000",
+      homeCity: "Belgium",
+    }),
+    genre: "Techno",
+    seriesName: "Amelie Lens Radio Show",
+    type: "radio",
+    minDurationSec: 30 * 60,
+  },
+  {
+    // Official Keinemusik upload; guest FIFI. ACR Identify rows in
+    // fingerprintPlays (never invent 1001 cues). Slug:
+    // sc-keinemusik-keinemusik-radio-show-by-fifi-07082026
+    url: "https://soundcloud.com/keinemusik/keinemusik-radio-show-by-fifi-07082026",
+    primaryArtist: dj("FIFI", {
+      accent: "#e8c547",
+    }),
+    genre: "Afro House",
+    seriesName: "Keinemusik Radio",
+    type: "radio",
+    minDurationSec: 30 * 60,
+    fingerprintPlays: FP_KEINEMUSIK_RADIO_FIFI_20260807,
+  },
+  {
+    // Official Oliver Heldens upload; 1001TL wired via
+    // sc-oliverheldens-oliver-heldens-daybreak-session-tomorrowland-weekend-1-2024
+    // (same list as yt-wuMQeEJ3YnQ). Never wire sc-https://….
+    url: "https://soundcloud.com/oliverheldens/oliver-heldens-daybreak-session-tomorrowland-weekend-1-2024",
+    primaryArtist: dj("Oliver Heldens", {
+      accent: "#7c5cff",
+      homeCity: "Netherlands",
+    }),
+    genre: "Future House",
+    type: "festival",
+    minDurationSec: 60 * 60,
   },
 ];

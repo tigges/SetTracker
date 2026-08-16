@@ -342,8 +342,11 @@ export const TL_JAMIE_JONES_HOT_ROBOT_RADIO_239: FingerprintSeedRow[] = [
  * Vintage Culture & Arodes @ Playground, Burning Man, United States 2024-08-31
  * https://www.1001tracklists.com/tracklist/20s910xk/vintage-culture-arodes-playground-burning-man-united-states-2024-08-31.html
  * Official SC: https://soundcloud.com/vintageculturemusic/vintage-culture-b2b-arodes-at-burning-man-2024
+ * Official YT: https://youtu.be/SeKRNa26kug
  * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["sc-vintageculturemusic-vintage-culture-b2b-arodes-at-burning-man-2024"]
+ *       TRACKLIST_1001_BY_SOURCE_SLUG["yt-SeKRNa26kug"]
  * Captured 2026-08-16 — provenance 1001tl. Official script: 22 tracks.
+ * Capture overlay used an invalid identifier (hyphens/spaces); constant renamed.
  */
 export const TL_VINTAGE_CULTURE_ARODES_BURNING_MAN_2024: FingerprintSeedRow[] = [
   { at: "0:00", artist: "Monblaire", title: "The Church" },
@@ -611,4 +614,403 @@ export const TL_ABOVE_AND_BEYOND_ESTIVA_GROUP_THERAPY_RADIO_690_2026: Fingerprin
   { at: "1:47:18", artist: "Estiva", title: "Palma" },
   { at: "1:51:45", artist: "Estiva", title: "Chemicals" },
   { at: "1:54:40", artist: "Estiva", title: "The Wave" },
+];
+
+/**
+ * Max Styler @ Opulent Temple, Burning Man, United States 2024-08-30
+ * https://www.1001tracklists.com/tracklist/2tx1742t/max-styler-opulent-temple-burning-man-united-states-2024-08-30.html
+ * Official YT: https://youtu.be/k4Drn6AwAdk
+ * Official SC: https://soundcloud.com/maxstyler/max-styler-live-opulent-temple-burning-man-2024
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-k4Drn6AwAdk"]
+ *       TRACKLIST_1001_BY_SOURCE_SLUG["sc-maxstyler-max-styler-live-opulent-temple-burning-man-2024"]
+ * Captured 2026-08-16 — provenance 1001tl. Official script: 28 tracks.
+ * Capture overlay used an invalid identifier (hyphens); constant renamed.
+ */
+export const TL_MAX_STYLER_OPULENT_TEMPLE_BURNING_MAN_2024: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "Max Styler & Vintage Culture & Ali Love", title: "Freaky 1" },
+  { at: "3:30", artist: "Max Styler & Clüb De Combat", title: "On Repeat" },
+  { at: "7:45", artist: "Technicism & Chinosynth", title: "Discodelia" },
+  { at: "10:00", artist: "Deomid", title: "You Gonna Do" },
+  { at: "12:30", artist: "Habitatt", title: "Fire" },
+  { at: "16:25", artist: "Mita Gami & OMRI.", title: "Madness" },
+  { at: "18:50", artist: "Sapian", title: "What Da Hell" },
+  { at: "22:00", artist: "dub.format", title: "Feelings" },
+  { at: "24:50", artist: "Max Styler & GENESI", title: "See You Sweat" },
+  { at: "29:20", artist: "David Lindmer", title: "Acid Response" },
+  { at: "32:30", artist: "Dubfire & Oliver Huntemann & Joseph Capriati vs. Fred again.. & Baby Keem", title: "Terra vs. leavemealone" },
+  { at: "34:45", artist: "Gespona & Abuk", title: "Komenko" },
+  { at: "39:20", artist: "AIKON", title: "Big" },
+  { at: "41:30", artist: "Max Styler", title: "Let Em' Know" },
+  { at: "44:20", artist: "Max Styler", title: "Kiki" },
+  { at: "47:30", artist: "Max Styler vs. Tiga & Audion", title: "Hypnotic vs. Let's Go Dancing (Max Styler Edit)" },
+  { at: "48:32", artist: "Tiga vs. Audion", title: "Let's Go Dancing (Acappella)" },
+  { at: "49:34", artist: "Max Styler", title: "Hypnotic" },
+  { at: "50:35", artist: "Max Styler & Oscar L", title: "Yapper" },
+  { at: "53:55", artist: "Max Styler & Oscar L", title: "Addiction" },
+  { at: "58:20", artist: "Carl Bee", title: "Mangatune" },
+  { at: "1:02:25", artist: "Pleasurekraft", title: "Tarantula (Max Styler Remix)" },
+  { at: "1:06:25", artist: "Theus Mago", title: "Holocene" },
+  { at: "1:09:25", artist: "John Summit ft. Paige Cavell", title: "Tears (Max Styler Remix)" },
+  { at: "1:13:45", artist: "Azzecca", title: "Dance Of The Desert" },
+  { at: "1:17:35", artist: "Max Styler", title: "Follow Me" },
+  { at: "1:21:45", artist: "Max Styler & Gorgon City", title: "Touch" },
+  { at: "1:25:00", artist: "Max Styler", title: "Lights Out" },
+];
+
+/**
+ * Hannah Laing @ Zenless Zone Zero, Creamfields North, United Kingdom 2024-08-25
+ * https://www.1001tracklists.com/tracklist/18k472y9/hannah-laing-zenless-zone-zero-creamfields-north-united-kingdom-2024-08-25.html
+ * Official YT: https://youtu.be/arowbYnNFGY
+ * Official SC: https://soundcloud.com/hannahlaingdj/hannah-laing-creamfields-2024-audio
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-arowbYnNFGY"]
+ *       TRACKLIST_1001_BY_SOURCE_SLUG["sc-hannahlaingdj-hannah-laing-creamfields-2024-audio"]
+ * Captured 2026-08-16 — provenance 1001tl. Official script: 24 tracks.
+ * Capture overlay used an invalid identifier (hyphens); constant renamed.
+ */
+export const TL_HANNAH_LAING_ZENLESS_ZONE_ZERO_CREAMFIELDS_2024: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "Hannah Laing ft. Muki", title: "Ibizacore" },
+  { at: "5:02", artist: "Odymel", title: "Gucci" },
+  { at: "8:53", artist: "Hannah Laing ft. Jem Cooke", title: "Stay" },
+  { at: "11:45", artist: "Hannah Laing", title: "I Need It More" },
+  { at: "15:04", artist: "Rudosa", title: "Dreams" },
+  { at: "17:30", artist: "Liam Wilson", title: "Hesitate" },
+  { at: "20:48", artist: "Ludacris ft. Shawnna", title: "What's Your Fantasy (Shemm Rave Remix)" },
+  { at: "25:39", artist: "Adam Port & Stryv ft. Malachiii", title: "Move (Jezza & Jod Edit)" },
+  { at: "29:08", artist: "ZAPRAVKA", title: "ACID" },
+  { at: "31:13", artist: "Hannah Laing", title: "FWTDJ (All Night Long)" },
+  { at: "35:40", artist: "Matty Ralph", title: "Te Adoro" },
+  { at: "40:05", artist: "Stuarty Baillie", title: "I'm Your DJ" },
+  { at: "46:28", artist: "ZAPRAVKA ft. CERES", title: "I Feel" },
+  { at: "49:14", artist: "Derb", title: "Derb (Derbus)" },
+  { at: "52:27", artist: "Warp Brothers & Drakk", title: "Phatt Bass" },
+  { at: "54:45", artist: "Hannah Laing", title: "Poppin'" },
+  { at: "57:12", artist: "Matty Ralph", title: "Rock This Party" },
+  { at: "1:01:35", artist: "Hannah Laing & Fairground", title: "Tell Me" },
+  { at: "1:04:39", artist: "Storm", title: "Time To Burn (DBF Remix)" },
+  { at: "1:07:24", artist: "Fenrick", title: "2 Sexy" },
+  { at: "1:11:12", artist: "Arma & TRYM", title: "In My Mind" },
+  { at: "1:14:45", artist: "t e s t p r e s s", title: "Rock Me Baby" },
+  { at: "1:18:08", artist: "Hannah Laing & Peaches", title: "Fuck The Pain Away" },
+  { at: "1:21:44", artist: "Hannah Laing ft. RoRo", title: "Good Love (Reinier Zonneveld Remix)" },
+];
+
+/**
+ * Nora En Pure - Purified Radio 520 2026-08-10
+ * https://www.1001tracklists.com/tracklist/q195rv1/nora-en-pure-purified-radio-520-2026-08-10.html
+ * Official YT: https://youtu.be/8aDoUu4GDrc
+ * Official SC: https://soundcloud.com/noraenpure/purified-520
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-8aDoUu4GDrc"]
+ *       TRACKLIST_1001_BY_SOURCE_SLUG["sc-noraenpure-purified-520"]
+ * Captured 2026-08-16 — provenance 1001tl. Official script: 13 tracks.
+ * Capture overlay used an invalid identifier (hyphens); constant renamed.
+ */
+export const TL_NORA_EN_PURE_PURIFIED_RADIO_520_2026: FingerprintSeedRow[] = [
+  { at: "1:29", artist: "Dan Sushi", title: "Shadows" },
+  { at: "5:37", artist: "Boxer", title: "Verde (Jerome Isma-Ae Remix)" },
+  { at: "9:45", artist: "Corren Cavini & EAST-97", title: "Darkness Into Day" },
+  { at: "14:23", artist: "Matt Fax", title: "Tomorrow" },
+  { at: "18:32", artist: "LE YORA & SOMMA & JEWELS & YUMA & Magnus", title: "More Than I Should Know" },
+  { at: "25:29", artist: "Heikoon", title: "Let Go" },
+  { at: "30:30", artist: "Alfa Romero", title: "Breathe In The Echo" },
+  { at: "34:54", artist: "Con's Universe", title: "Evenfall" },
+  { at: "38:15", artist: "Eli & Fur", title: "Ceremony" },
+  { at: "42:56", artist: "Sam WOLFE & JD Farrell", title: "Reservoir" },
+  { at: "48:52", artist: "NTO & Mont Rouge ft. Noah Kulaga", title: "I Cared For You (Tim Engelhardt Remix)" },
+  { at: "52:30", artist: "Einmusik ft. Shayan (UK)", title: "Do You Think Of Me (Joachim Pastor Remix)" },
+  { at: "57:54", artist: "DJ Paulus", title: "Mirage" },
+];
+
+/**
+ * Korolova - Captive Soul 098 2026-08-07
+ * https://www.1001tracklists.com/tracklist/1cgr4nqk/korolova-captive-soul-098-2026-08-07.html
+ * Official YT: https://www.youtube.com/watch?v=5JxfEjVdQFk
+ * Official SC: https://soundcloud.com/korolovadj/korolova-captive-soul-98
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-5JxfEjVdQFk"]
+ *       TRACKLIST_1001_BY_SOURCE_SLUG["sc-korolovadj-korolova-captive-soul-98"]
+ * Captured 2026-08-16 — provenance 1001tl. Official script: 15 tracks.
+ * Capture overlay used an invalid identifier (hyphens); constant renamed.
+ */
+export const TL_KOROLOVA_CAPTIVE_SOUL_098_2026: FingerprintSeedRow[] = [
+  { at: "1:43", artist: "Cherry", title: "Buka" },
+  { at: "6:00", artist: "Corren Cavini & EAST-97", title: "Darkness Into Day" },
+  { at: "10:12", artist: "Timeless", title: "Free Your Mind" },
+  { at: "14:20", artist: "Anyma & Volkoder", title: "Other Dimension" },
+  { at: "18:42", artist: "Rafael Cerato", title: "Cash" },
+  { at: "22:40", artist: "Silver Panda", title: "Get Closer" },
+  { at: "25:40", artist: "Wailey", title: "To The Underground" },
+  { at: "28:33", artist: "Massano", title: "Beyond Today" },
+  { at: "33:12", artist: "Avrix & Fialkovska", title: "Acid Drop" },
+  { at: "37:12", artist: "Belladonna", title: "About That" },
+  { at: "40:42", artist: "Linska & Duss", title: "Criminal" },
+  { at: "44:53", artist: "KAF3R", title: "Lights" },
+  { at: "48:27", artist: "MEDUZA & Kevin de Vries", title: "7 Days" },
+  { at: "52:16", artist: "FEZZO", title: "Where You Go" },
+  { at: "55:58", artist: "JOA & James Carter", title: "Don't Wake Us Up" },
+];
+
+/**
+ * James Hype @ SYNC, Magazine London, United Kingdom 2025-11-29
+ * https://www.1001tracklists.com/tracklist/n48bp01/james-hype-sync-magazine-london-united-kingdom-2025-11-29.html
+ * Official YT: https://youtu.be/rLTCLSsqrXY
+ * Official SC: https://soundcloud.com/jameshypethedj/sync-london-full-set
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-rLTCLSsqrXY"]
+ *       TRACKLIST_1001_BY_SOURCE_SLUG["sc-jameshypethedj-sync-london-full-set"]
+ * Captured 2026-08-16 — provenance 1001tl. Official script: 66 tracks.
+ * Capture overlay used an invalid identifier (hyphens); constant renamed.
+ */
+export const TL_JAMES_HYPE_SYNC_MAGAZINE_LONDON_2025: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "James Hype & Miggy Dela Rosa", title: "Ferrari" },
+  { at: "2:39", artist: "Bessey", title: "Controller" },
+  { at: "3:08", artist: "Warp Brothers vs. Aquagen", title: "Phatt Bass" },
+  { at: "3:37", artist: "The Prodigy", title: "Breathe (James Hype Edit)" },
+  { at: "4:48", artist: "James Hype ft. Kim Petras", title: "Drums" },
+  { at: "5:53", artist: "Pizzaman & Lexa Hill", title: "Sex On The Streets (Fatboy Slim Edit)" },
+  { at: "6:57", artist: "HAVEN. ft. Kaitlin Aragon", title: "I Run (James Hype Remix)" },
+  { at: "8:44", artist: "Jack Back", title: "(It Happens) Sometimes (James Hype SYNC Intro Edit)" },
+  { at: "11:22", artist: "Obskür", title: "Bayside (James Hype Remix)" },
+  { at: "14:14", artist: "James Hype", title: "Dominator" },
+  { at: "15:20", artist: "Kanye West", title: "Can't Tell Me Nothing (Acappella)" },
+  { at: "16:25", artist: "James Hype", title: "Give Me Fire" },
+  { at: "18:50", artist: "Odd Mob & OMNOM pres. HYPERBEAM", title: "Coming Up (It's Dare)" },
+  { at: "20:45", artist: "James Hype ft. Kelli-Leigh", title: "Hold Me" },
+  { at: "23:36", artist: "James Hype & Tita Lau", title: "Disconnected (James Hype SYNC Edit)" },
+  { at: "26:14", artist: "Vintage Culture & James Hype", title: "You Give Me A Feeling" },
+  { at: "27:37", artist: "Mila Journée & Olivier Giacomotto", title: "Spaceship" },
+  { at: "29:00", artist: "James Hype", title: "909" },
+  { at: "31:27", artist: "GHSTGHSTGHST", title: "JCKJCKJCK" },
+  { at: "33:51", artist: "James Hype", title: "Wild (DnB Edit)" },
+  { at: "35:32", artist: "James Hype", title: "Wild" },
+  { at: "37:13", artist: "Equinøx & Sonora & OFFMODE", title: "Taki Taki" },
+  { at: "38:29", artist: "Daft Punk", title: "Harder, Better, Faster, Stronger (Acappella)" },
+  { at: "39:44", artist: "Turbo Dubz", title: "Loozing Control" },
+  { at: "41:49", artist: "James Hype ft. Sam Harper & Bobby Harvey", title: "Waterfalls (VIP Mix)" },
+  { at: "44:35", artist: "Da Klubb Kings", title: "Don't Stop (Speed Garage Mix)" },
+  { at: "46:11", artist: "Martin Ikin", title: "In The Streets (James Hype Edit)" },
+  { at: "47:27", artist: "Martin Ikin", title: "In The Streets" },
+  { at: "48:43", artist: "James Hype", title: "Generator" },
+  { at: "51:34", artist: "Charlie Sloth & Mazza L20 & Giggs", title: "Sleep (James Hype Remix)" },
+  { at: "53:01", artist: "Lowdown", title: "Deeper" },
+  { at: "53:58", artist: "Central Cee ft. Lil Baby", title: "BAND4BAND" },
+  { at: "54:55", artist: "James Hype", title: "Hit That Switch" },
+  { at: "55:52", artist: "The Porn Kings", title: "Up To No Good" },
+  { at: "56:48", artist: "James Hype & Tita Lau", title: "More Of The Same" },
+  { at: "1:00:07", artist: "Camisra & James Hype", title: "Let Me Show You" },
+  { at: "1:01:18", artist: "Armin van Buuren & Reinier Zonneveld & Roland Clark", title: "We Can Dance Again" },
+  { at: "1:02:29", artist: "James Hype", title: "Godzilla" },
+  { at: "1:04:58", artist: "The Chemical Brothers", title: "Galvanize (Acappella)" },
+  { at: "1:07:27", artist: "James Hype", title: "Be Mine" },
+  { at: "1:09:47", artist: "Masters At Work", title: "Work (Acappella)" },
+  { at: "1:10:52", artist: "Major Lazer & James Hype", title: "Number 1" },
+  { at: "1:11:56", artist: "Tita Lau", title: "Sweat Couture" },
+  { at: "1:13:58", artist: "Duke Dumont ft. Shaun Ross", title: "Red Light, Green Light (James Hype Edit)" },
+  { at: "1:17:33", artist: "James Hype", title: "Don't Wake Me Up" },
+  { at: "1:19:03", artist: "James Hype", title: "Don't Wake Me Up (VIP Mix)" },
+  { at: "1:20:32", artist: "James Hype", title: "Rock Right Now" },
+  { at: "1:22:39", artist: "James Hype & Tita Lau", title: "Sound Technician" },
+  { at: "1:25:44", artist: "Tensnake", title: "Coma Cat (James Hype Edit)" },
+  { at: "1:28:13", artist: "Justice vs. Simian", title: "We Are Your Friends (James Hype Edit)" },
+  { at: "1:30:07", artist: "James Hype ft. A.D.O.R.", title: "Behaviour" },
+  { at: "1:32:47", artist: "Matt Guy & Tigerblind", title: "Smoke This One" },
+  { at: "1:35:37", artist: "Drake & Central Cee", title: "Which One (James Hype Remix)" },
+  { at: "1:38:24", artist: "Julio Bashmore", title: "Battle For Middle You" },
+  { at: "1:39:48", artist: "ATB", title: "9PM (Till I Come) (James Hype Edit)" },
+  { at: "1:41:13", artist: "James Hype", title: "Lose Control (2025 Edit)" },
+  { at: "1:42:37", artist: "Who Da Funk ft. Jessica Eve", title: "Shiny Disco Balls (Acappella)" },
+  { at: "1:44:03", artist: "Mylo", title: "Drop The Pressure (James Hype Edit)" },
+  { at: "1:45:29", artist: "Frankie Knuckles pres. Marshall Jefferson", title: "Move Your Body (Acappella)" },
+  { at: "1:46:55", artist: "The Weeknd & Playboi Carti", title: "Timeless" },
+  { at: "1:47:59", artist: "Faithless", title: "Insomnia (James Hype Remix)" },
+  { at: "1:49:03", artist: "James Hype", title: "East 2 West" },
+  { at: "1:50:58", artist: "AJ Tracey", title: "Ladbroke Grove" },
+  { at: "1:53:02", artist: "James Hype & Miggy Dela Rosa", title: "Ferrari" },
+  { at: "1:55:06", artist: "Mr Jay", title: "Cafe Del Mar 2024" },
+  { at: "1:55:07", artist: "James Hype ft. Kelli-Leigh", title: "More Than Friends" },
+];
+
+/**
+ * Eric Prydz - Epic Radio 036 2026-08-06
+ * https://www.1001tracklists.com/tracklist/9xurh1t/eric-prydz-epic-radio-036-2026-08-06.html
+ * Official YT: https://youtu.be/JLIYTueL4TI
+ * Official SC: https://soundcloud.com/eric-prydz/eric-prydz-presents-463760700
+ * Mixcloud mirror: https://www.mixcloud.com/ericprydz-epicradio/epic-radio-036/
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-JLIYTueL4TI"]
+ *       TRACKLIST_1001_BY_SOURCE_SLUG["sc-eric-prydz-eric-prydz-presents-463760700"]
+ * Captured 2026-08-16 — provenance 1001tl. Official script: 13 tracks.
+ * Capture overlay used an invalid identifier (hyphens); constant renamed.
+ */
+export const TL_ERIC_PRYDZ_EPIC_RADIO_036_2026: FingerprintSeedRow[] = [
+  { at: "0:30", artist: "Cirez D", title: "Tha Bass Line" },
+  { at: "5:20", artist: "Cirez D", title: "The Trip" },
+  { at: "10:21", artist: "Cirez D", title: "Frequency 2024 ID 02 (Working Title)" },
+  { at: "14:03", artist: "Cirez D", title: "Twitter 2022 ID (Working Title)" },
+  { at: "19:51", artist: "Cirez D", title: "Sunrise Festival 2022 ID 02 (Working Title)" },
+  { at: "23:47", artist: "Cirez D", title: "Evacuate" },
+  { at: "29:56", artist: "Cirez D", title: "Ramafixation" },
+  { at: "35:43", artist: "Cirez D", title: "Amnesia Ibiza 2026 ID (Working Title)" },
+  { at: "40:24", artist: "Pryda", title: "Loveland 2022 ID 02 (Working Title)" },
+  { at: "44:49", artist: "Cirez D", title: "Womb Tokyo 2023 ID 01 (Working Title)" },
+  { at: "50:44", artist: "Cirez D", title: "Hi Ibiza Theater ID (Working Title)" },
+  { at: "53:41", artist: "Pryda", title: "The Return" },
+  { at: "59:10", artist: "Cirez D", title: "Control Freak" },
+];
+
+/**
+ * bradeazy @ Perry's Stage, Lollapalooza United States Chicago 2026-07-31
+ * https://www.1001tracklists.com/tracklist/2knllttt/bradeazy-perrys-stage-lollapalooza-united-states-chicago-2026-07-31.html
+ * Official SC: https://soundcloud.com/bradeazy/bradeazy-live-lollapalooza
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["sc-bradeazy-bradeazy-live-lollapalooza"]
+ * Never wire sc-https://… slugs.
+ * Captured 2026-08-16 — provenance 1001tl. Official script: 12 tracks.
+ * Capture overlay used an invalid identifier (hyphens); constant renamed.
+ */
+export const TL_BRADEAZY_LIVE_LOLLAPALOOZA_CHICAGO_2026: FingerprintSeedRow[] = [
+  { at: "0:20", artist: "Skuro & Braynod", title: "System Failed" },
+  { at: "5:16", artist: "Skuro & Enzo Gauthier", title: "Keep It Moving" },
+  { at: "10:12", artist: "Mia Mendi & Skuro (IT)", title: "Angel Wings" },
+  { at: "15:08", artist: "bradeazy & Nico Falla", title: "Accelerate" },
+  { at: "20:04", artist: "Adam Ten & Asulin", title: "Warawara (Calussa Edit)" },
+  { at: "25:00", artist: "Eli Brown", title: "It's Like That" },
+  { at: "29:56", artist: "bradeazy & HUMAN404 ft. Lovlee", title: "The Baddest" },
+  { at: "34:52", artist: "bradeazy & Öwnboss", title: "Louboutin" },
+  { at: "39:48", artist: "bradeazy & TyriqueOrDie", title: "Make It Work" },
+  { at: "44:44", artist: "bradeazy ft. TyriqueOrDie", title: "Up Down" },
+  { at: "49:40", artist: "Anyma & LISA", title: "Bad Angel (bradeazy Remix)" },
+  { at: "54:36", artist: "bradeazy & Crazy Town", title: "Butterfly 2026" },
+];
+
+/**
+ * Amelie Lens - Radio Show 022 2026-06-05
+ * https://www.1001tracklists.com/tracklist/1z06sxht/amelie-lens-radio-show-022-2026-06-05.html
+ * Official SC: https://soundcloud.com/amelielens/amelie-lens-radio-show-022
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["sc-amelielens-amelie-lens-radio-show-022"]
+ * Never wire sc-https://… slugs.
+ * Captured 2026-08-16 — provenance 1001tl. Official script: 16 tracks.
+ * Capture overlay used an invalid identifier (hyphens); constant renamed.
+ */
+export const TL_AMELIE_LENS_RADIO_SHOW_022_2026: FingerprintSeedRow[] = [
+  { at: "0:20", artist: "Rove", title: "Zen Meteor" },
+  { at: "4:02", artist: "Nuntius Noctis", title: "Night City (2077) (Plural Remix)" },
+  { at: "7:44", artist: "Alex Farell", title: "Double Droppin'" },
+  { at: "11:26", artist: "Amelie Lens", title: "Whatever You Do" },
+  { at: "15:08", artist: "Swart", title: "Extazy" },
+  { at: "18:50", artist: "Amelie Lens", title: "our frequency" },
+  { at: "22:32", artist: "Matty Ralph", title: "For The Love Of Acid" },
+  { at: "26:14", artist: "Shadym", title: "Society" },
+  { at: "29:56", artist: "Rhygar & Stëh", title: "Psycho" },
+  { at: "33:38", artist: "David Strasser", title: "Sintra" },
+  { at: "37:20", artist: "Felicie", title: "The Devil Himself" },
+  { at: "41:02", artist: "Flour", title: "Gravity" },
+  { at: "44:44", artist: "Incident Prism", title: "Bassmurda" },
+  { at: "48:26", artist: "Hardwell & Vini Vici & MR.BLACK ft. Liquid Soul", title: "Crazy People 2026" },
+  { at: "52:08", artist: "Flour", title: "In The End" },
+  { at: "55:50", artist: "Tonni3000", title: "Storkens Vej" },
+];
+
+/**
+ * Oliver Heldens @ Mainstage (Daybreak Session), Tomorrowland Weekend 1, Belgium 2024-07-19
+ * https://www.1001tracklists.com/tracklist/25du2utt/oliver-heldens-mainstage-daybreak-session-tomorrowland-weekend-1-belgium-2024-07-19.html
+ * Official YT: https://youtu.be/wuMQeEJ3YnQ
+ * Official SC: https://soundcloud.com/oliverheldens/oliver-heldens-daybreak-session-tomorrowland-weekend-1-2024
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-wuMQeEJ3YnQ"]
+ *       TRACKLIST_1001_BY_SOURCE_SLUG["sc-oliverheldens-oliver-heldens-daybreak-session-tomorrowland-weekend-1-2024"]
+ * Never wire sc-https://… slugs.
+ * Captured 2026-08-16 — provenance 1001tl. Official script: 95 tracks.
+ * Capture overlay used an invalid identifier (hyphens); constant renamed.
+ */
+export const TL_OLIVER_HELDENS_DAYBREAK_SESSION_TOMORROWLAND_WE1_2024: FingerprintSeedRow[] = [
+  { at: "0:12", artist: "Disclosure ft. Eliza Doolittle", title: "You & Me (Flume Remix / Westend & Local Singles Edit)" },
+  { at: "1:55", artist: "ANOTR & Abel Balder", title: "Relax My Eyes" },
+  { at: "3:38", artist: "Oliver Heldens vs. Florence + The Machine", title: "Aquarius vs. You've Got The Love (Oliver Heldens Mashup)" },
+  { at: "4:43", artist: "Florence + The Machine", title: "You've Got The Love" },
+  { at: "5:48", artist: "Oliver Heldens", title: "Aquarius" },
+  { at: "6:53", artist: "Octave One ft. Ann Saunderson", title: "Black Water (Full Strings Vocal Mix)" },
+  { at: "9:34", artist: "Ultra Naté", title: "Free (Mood II Swing Extended Vocal Mix)" },
+  { at: "11:27", artist: "Rampa ft. Chuala", title: "Les Gout" },
+  { at: "14:50", artist: "RÜFÜS DU SOL", title: "On My Knees (Cassian Remix)" },
+  { at: "17:58", artist: "BLOND:ISH & Eran Hersh & Darmon ft. Madonna", title: "Sorry (Layton Giordani Edit)" },
+  { at: "20:15", artist: "Eelke Kleijn & Armin van Buuren vs. Lana Del Rey", title: "Transmission vs. Summertime Sadness (Oliver Heldens Mashup)" },
+  { at: "21:19", artist: "Lana Del Rey", title: "Summertime Sadness (Acappella)" },
+  { at: "22:23", artist: "Eelke Kleijn", title: "Transmission (Armin van Buuren Remix)" },
+  { at: "23:27", artist: "Oliver Heldens & DJs From Mars ft. JD Davis", title: "Blue Monday" },
+  { at: "26:33", artist: "Oliver Heldens & Kryder & The Young Punx", title: "AEIOU" },
+  { at: "31:10", artist: "Oliver Heldens & Becky Hill", title: "Gecko (Overdrive)" },
+  { at: "35:00", artist: "Dr. Kucho! & Gregor Salto & Oliver Heldens vs. Mau P vs. Tyla vs. Macklemore & Ryan Lewis & Ray Dalton vs. Cirez D", title: "Can't Stop Playing vs. BEATS FOR THE UNDERGROUND vs. Water vs. Can't Hold Us vs. On Off (Oliver Heldens Mashup)" },
+  { at: "35:34", artist: "Cirez D", title: "On Off" },
+  { at: "36:08", artist: "Macklemore & Ryan Lewis ft. Ray Dalton", title: "Can't Hold Us" },
+  { at: "36:42", artist: "Dr. Kucho! & Gregor Salto", title: "Can't Stop Playing (Oliver Heldens & Gregor Salto Remix)" },
+  { at: "37:16", artist: "Tyla", title: "Water" },
+  { at: "37:51", artist: "Mau P", title: "BEATS FOR THE UNDERGROUND" },
+  { at: "38:25", artist: "FISHER & Aatig vs. Oliver Heldens & Nile Rodgers & House Gospel Choir", title: "Take It Off vs. I Was Made For Lovin' You (Oliver Heldens Mashup)" },
+  { at: "39:33", artist: "Oliver Heldens ft. Nile Rodgers & House Gospel Choir", title: "I Was Made For Lovin' You" },
+  { at: "40:41", artist: "FISHER & Aatig", title: "Take It Off" },
+  { at: "41:49", artist: "Tobiahs", title: "Lifetime (Oliver Heldens Edit)" },
+  { at: "44:22", artist: "Calvin Harris & Dua Lipa", title: "One Kiss (Oliver Heldens Remix)" },
+  { at: "47:14", artist: "Zonderling", title: "Variant (HI-LO Variant)" },
+  { at: "48:24", artist: "John Summit ft. HAYLA", title: "Where You Are (Acappella)" },
+  { at: "49:33", artist: "HI-LO", title: "MESMERIZE" },
+  { at: "51:27", artist: "Delerium ft. Sarah McLachlan", title: "Silence (Acappella)" },
+  { at: "53:20", artist: "Eli Brown vs. HI-LO & Danny Avila", title: "Be The One vs. Paradise (Oliver Heldens Mashup)" },
+  { at: "54:28", artist: "Eli Brown", title: "Be The One" },
+  { at: "55:36", artist: "HI-LO & Danny Avila", title: "PARADISE" },
+  { at: "56:43", artist: "Armin van Buuren & Oliver Heldens ft. Sam Harper", title: "Freedom" },
+  { at: "1:00:08", artist: "Roger Sanchez & Oliver Heldens & Toto vs. The Neighbourhood", title: "Another Chance vs. Sweater Weather (Oliver Heldens Mashup)" },
+  { at: "1:01:23", artist: "The Neighbourhood", title: "Sweater Weather" },
+  { at: "1:02:39", artist: "Roger Sanchez & Oliver Heldens ft. Toto", title: "Another Chance" },
+  { at: "1:03:54", artist: "The Temper Trap", title: "Sweet Disposition (Axwell & Dirty South Remix)" },
+  { at: "1:04:11", artist: "Avicii vs. Journey", title: "Levels vs. Don't Stop Believin' (David Guetta Mashup)" },
+  { at: "1:05:36", artist: "Avicii", title: "Levels" },
+  { at: "1:07:01", artist: "Journey", title: "Don't Stop Believin'" },
+  { at: "1:08:25", artist: "Oliver Heldens & David Guetta & FAST BOY", title: "Chills (Feel My Love)" },
+  { at: "1:11:59", artist: "Mason & Princess Superstar & Oliver Heldens vs. Destiny's Child", title: "Perfect (Exceeder) vs. Say My Name (Oliver Heldens Mashup)" },
+  { at: "1:13:00", artist: "Destiny's Child", title: "Say My Name (Acappella)" },
+  { at: "1:14:01", artist: "Mason vs. Princess Superstar", title: "Perfect (Exceeder) (Oliver Heldens Remix)" },
+  { at: "1:15:01", artist: "HI-LO & Temper vs. Timbaland & Nelly Furtado & Justin Timberlake", title: "Work That Body vs. Give It To Me (Oliver Heldens Mashup)" },
+  { at: "1:15:49", artist: "Timbaland ft. Nelly Furtado & Justin Timberlake", title: "Give It To Me" },
+  { at: "1:16:37", artist: "HI-LO & Temper", title: "Work That Body" },
+  { at: "1:17:25", artist: "Cassö & RAYE & D-Block Europe", title: "Prada (Oliver Heldens Remix)" },
+  { at: "1:20:26", artist: "HI-LO & LUSU vs. Barbatuques", title: "Dizzy vs. Baianá (HI-LO Mashup)" },
+  { at: "1:21:45", artist: "Barbatuques", title: "Baianá" },
+  { at: "1:23:05", artist: "HI-LO & LUSU", title: "Dizzy" },
+  { at: "1:24:24", artist: "HI-LO & Green Velvet & Dajae", title: "LIFT ME UP" },
+  { at: "1:28:17", artist: "Skrillex & Boys Noize ft. Opus III", title: "Fine Day Anthem" },
+  { at: "1:30:51", artist: "Oliver Heldens & RoRo", title: "SHINE" },
+  { at: "1:33:37", artist: "Swedish House Mafia vs. Benny Benassi & Gary Go", title: "Ray Of Solar vs. Cinema (Oliver Heldens Mashup)" },
+  { at: "1:34:49", artist: "Benny Benassi ft. Gary Go", title: "Cinema (Acappella)" },
+  { at: "1:36:01", artist: "Swedish House Mafia", title: "Ray Of Solar" },
+  { at: "1:37:12", artist: "Oliver Heldens", title: "PHYSICAL" },
+  { at: "1:40:52", artist: "HI-LO vs. Sebastian Ingrosso & Tommy Trash & John Martin", title: "BONZAI vs. Reload (Oliver Heldens Mashup)" },
+  { at: "1:41:34", artist: "Sebastian Ingrosso & Tommy Trash ft. John Martin", title: "Reload (Acappella)" },
+  { at: "1:42:16", artist: "HI-LO", title: "BONZAI" },
+  { at: "1:42:57", artist: "Creeds vs. Peggy Gou vs. HI-LO & Space 92", title: "Push Up vs. (It Goes Like) Nanana vs. Mercury (Oliver Heldens Mashup)" },
+  { at: "1:43:47", artist: "HI-LO & Space 92", title: "Mercury" },
+  { at: "1:44:37", artist: "Creeds", title: "Push Up" },
+  { at: "1:45:28", artist: "Peggy Gou", title: "(It Goes Like) Nanana" },
+  { at: "1:46:18", artist: "HI-LO & Maddix", title: "My Fantasy" },
+  { at: "1:47:54", artist: "Tommy Richman", title: "MILLION DOLLAR BABY" },
+  { at: "1:49:30", artist: "Oliver Heldens vs. Swedish House Mafia & John Martin", title: "Let You Go vs. Save The World (Oliver Heldens Mashup)" },
+  { at: "1:50:37", artist: "Swedish House Mafia ft. John Martin", title: "Save The World (Acappella)" },
+  { at: "1:51:45", artist: "Oliver Heldens", title: "Let You Go" },
+  { at: "1:52:52", artist: "Gala", title: "Freed From Desire (Oliver Heldens EuroRave Remix)" },
+  { at: "1:56:18", artist: "Kate Ryan", title: "Désenchantée (Oliver Heldens EuroRave Remix)" },
+  { at: "1:58:25", artist: "Oliver Heldens & DIØN & Funk Tribu", title: "I WANT YOUR LOVE" },
+  { at: "2:00:30", artist: "Marlon Hoffstadt aka DJ Daddy Trance vs. Dimitri Vegas & Like Mike & Vini Vici & MATTN", title: "It's That Time vs. Cafe Del Mar (Oliver Heldens Mashup)" },
+  { at: "2:01:32", artist: "Dimitri Vegas & Like Mike vs. Vini Vici & MATTN", title: "Cafe Del Mar" },
+  { at: "2:02:35", artist: "Marlon Hoffstadt aka DJ Daddy Trance", title: "It's That Time" },
+  { at: "2:03:37", artist: "Bassjackers & Oliver Heldens", title: "MASK OFF" },
+  { at: "2:06:10", artist: "Oliver Heldens & Charles B & Dana Vicci", title: "Mozart's Final Rave (Lacrimosa)" },
+  { at: "2:08:30", artist: "Arma & TRYM", title: "In My Mind" },
+  { at: "2:11:00", artist: "BYØRN", title: "Adagio For Strings (HI-LO Edit)" },
+  { at: "2:13:33", artist: "MK & Dom Dolla & Dimension vs. Oliver Heldens & Becky Hill & Matrix & Futurebound vs. The Qemists & Spor", title: "Rhyme Dust vs. Gecko (Overdrive) vs. Stompbox (Oliver Heldens Mashup)" },
+  { at: "2:14:23", artist: "The Qemists", title: "Stompbox (Spor Remix)" },
+  { at: "2:15:13", artist: "Oliver Heldens & Becky Hill", title: "Gecko (Overdrive) (Matrix & Futurebound Remix)" },
+  { at: "2:16:04", artist: "MK & Dom Dolla", title: "Rhyme Dust (Dimension Remix)" },
+  { at: "2:16:54", artist: "Öwnboss & Sevek", title: "Move Your Body (Hedex Remix)" },
+  { at: "2:18:46", artist: "Fred again.. & Baby Keem vs. Lorde & Flume", title: "leavemealone vs. Tennis Court (Fredrick Flip)" },
+  { at: "2:19:20", artist: "LORDE", title: "Tennis Court (Flume Remix)" },
+  { at: "2:19:54", artist: "Fred again.. & Baby Keem", title: "leavemealone" },
+  { at: "2:20:27", artist: "Koven", title: "Chase The Sun" },
+  { at: "2:22:28", artist: "Bicep & Kanine vs. Rihanna", title: "Glue vs. Don't Stop The Music (Oliver Heldens Mashup)" },
+  { at: "2:23:21", artist: "Rihanna", title: "Don't Stop The Music" },
+  { at: "2:24:15", artist: "Bicep", title: "Glue (Kanine Bootleg)" },
+  { at: "2:25:08", artist: "Netsky ft. Daddy Waku & Chantal Kashala", title: "Everybody Loves The Sunshine" },
 ];

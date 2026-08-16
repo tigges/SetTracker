@@ -31,6 +31,16 @@ const NICKY_TML_ARTIST = YOUTUBE_SETS.find((s) =>
   s.video.includes("B05MAbsCOLA"),
 );
 const ABGT_690 = YOUTUBE_SETS.find((s) => s.video.includes("phWKhIwgiTo"));
+const VC_ARODES_YT = YOUTUBE_SETS.find((s) => s.video.includes("SeKRNa26kug"));
+const MAX_STYLER_OT = YOUTUBE_SETS.find((s) => s.video.includes("k4Drn6AwAdk"));
+const HANNAH_CF = YOUTUBE_SETS.find((s) => s.video.includes("arowbYnNFGY"));
+const PURIFIED_520 = YOUTUBE_SETS.find((s) => s.video.includes("8aDoUu4GDrc"));
+const CAPTIVE_098 = YOUTUBE_SETS.find((s) => s.video.includes("5JxfEjVdQFk"));
+const HYPE_SYNC = YOUTUBE_SETS.find((s) => s.video.includes("rLTCLSsqrXY"));
+const EPIC_036 = YOUTUBE_SETS.find((s) => s.video.includes("JLIYTueL4TI"));
+const HELDENS_DAYBREAK = YOUTUBE_SETS.find((s) =>
+  s.video.includes("wuMQeEJ3YnQ"),
+);
 
 describe("watchMetaFromCuratedSeed", () => {
   it("builds ASOT 1290 meta from the curated 1001 capture", () => {
@@ -239,6 +249,83 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=phWKhIwgiTo");
     // Last cue 1:54:40 + 180s pad.
     assert.equal(meta.durationSec, 1 * 3600 + 54 * 60 + 40 + 180);
+  });
+
+  it("builds Vintage Culture Arodes Burning Man YT meta from the curated 1001 capture", () => {
+    assert.ok(VC_ARODES_YT);
+    const meta = watchMetaFromCuratedSeed(VC_ARODES_YT);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "SeKRNa26kug");
+    assert.match(meta.title, /Burning Man 2024/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=SeKRNa26kug");
+    // Last cue 1:46:10 + 180s pad.
+    assert.equal(meta.durationSec, 1 * 3600 + 46 * 60 + 10 + 180);
+  });
+
+  it("builds Max Styler Opulent Temple meta from the curated 1001 capture", () => {
+    assert.ok(MAX_STYLER_OT);
+    const meta = watchMetaFromCuratedSeed(MAX_STYLER_OT);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "k4Drn6AwAdk");
+    assert.match(meta.title, /Opulent Temple/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=k4Drn6AwAdk");
+    // Last cue 1:25:00 + 180s pad.
+    assert.equal(meta.durationSec, 1 * 3600 + 25 * 60 + 180);
+  });
+
+  it("builds Hannah Laing Creamfields North meta from the curated 1001 capture", () => {
+    assert.ok(HANNAH_CF);
+    const meta = watchMetaFromCuratedSeed(HANNAH_CF);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "arowbYnNFGY");
+    assert.match(meta.title, /Creamfields/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=arowbYnNFGY");
+    // Last cue 1:21:44 + 180s pad.
+    assert.equal(meta.durationSec, 1 * 3600 + 21 * 60 + 44 + 180);
+  });
+
+  it("builds Purified Radio 520 meta from the curated 1001 capture", () => {
+    assert.ok(PURIFIED_520);
+    const meta = watchMetaFromCuratedSeed(PURIFIED_520);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "8aDoUu4GDrc");
+    assert.match(meta.title, /Purified Radio 520/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=8aDoUu4GDrc");
+    // Last cue 57:54 + 180s pad.
+    assert.equal(meta.durationSec, 57 * 60 + 54 + 180);
+  });
+
+  it("builds Captive Soul 098 meta from the curated 1001 capture", () => {
+    assert.ok(CAPTIVE_098);
+    const meta = watchMetaFromCuratedSeed(CAPTIVE_098);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "5JxfEjVdQFk");
+    assert.match(meta.title, /Captive Soul 098/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=5JxfEjVdQFk");
+    // Last cue 55:58 + 180s pad.
+    assert.equal(meta.durationSec, 55 * 60 + 58 + 180);
+  });
+
+  it("builds James Hype SYNC London meta from the curated 1001 capture", () => {
+    assert.ok(HYPE_SYNC);
+    const meta = watchMetaFromCuratedSeed(HYPE_SYNC);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "rLTCLSsqrXY");
+    assert.match(meta.title, /SYNC London/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=rLTCLSsqrXY");
+    // Last cue 1:55:07 + 180s pad.
+    assert.equal(meta.durationSec, 1 * 3600 + 55 * 60 + 7 + 180);
+  });
+
+  it("builds Epic Radio 036 meta from the curated 1001 capture", () => {
+    assert.ok(EPIC_036);
+    const meta = watchMetaFromCuratedSeed(EPIC_036);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "JLIYTueL4TI");
+    assert.match(meta.title, /EPIC Radio 036/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=JLIYTueL4TI");
+    // Last cue 59:10 + 180s pad.
+    assert.equal(meta.durationSec, 59 * 60 + 10 + 180);
   });
 
   it("returns null without a title or video id", () => {
@@ -564,5 +651,120 @@ describe("curated YouTube 429 fallback", () => {
     assert.equal(sets[0]?.primaryArtist?.slug, "above-beyond");
     assert.equal(sets[0]?.seriesName, "Group Therapy");
     assert.ok(sets[0]?.collaborators?.some((c) => c.slug === "estiva"));
+  });
+
+  it("lands Vintage Culture Arodes Burning Man YT from the 1001 seed when watch is 429", async () => {
+    assert.ok(VC_ARODES_YT);
+    const adapter = createYoutubeAdapter([VC_ARODES_YT], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-SeKRNa26kug");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 22);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 1 * 3600 + 46 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "vintage-culture");
+    assert.match(String(sets[0]?.eventName ?? ""), /Burning Man/i);
+  });
+
+  it("lands Max Styler Opulent Temple from the 1001 seed when watch is 429", async () => {
+    assert.ok(MAX_STYLER_OT);
+    const adapter = createYoutubeAdapter([MAX_STYLER_OT], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-k4Drn6AwAdk");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 28);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 1 * 3600 + 25 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "max-styler");
+    assert.match(String(sets[0]?.title ?? ""), /Opulent Temple/i);
+    assert.match(String(sets[0]?.eventName ?? ""), /Burning Man/i);
+  });
+
+  it("lands Hannah Laing Creamfields North from the 1001 seed when watch is 429", async () => {
+    assert.ok(HANNAH_CF);
+    const adapter = createYoutubeAdapter([HANNAH_CF], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-arowbYnNFGY");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 24);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 1 * 3600 + 21 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "hannah-laing");
+    assert.match(String(sets[0]?.title ?? ""), /Creamfields/i);
+    assert.match(String(sets[0]?.eventName ?? ""), /Creamfields/i);
+  });
+
+  it("lands Purified Radio 520 from the 1001 seed when watch is 429", async () => {
+    assert.ok(PURIFIED_520);
+    const adapter = createYoutubeAdapter([PURIFIED_520], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-8aDoUu4GDrc");
+    assert.equal(sets[0]!.type, "radio");
+    assert.ok(sets[0]!.plays.length >= 13);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 57 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "nora-en-pure");
+    assert.equal(sets[0]?.seriesName, "Purified Radio");
+  });
+
+  it("lands Captive Soul 098 from the 1001 seed when watch is 429", async () => {
+    assert.ok(CAPTIVE_098);
+    const adapter = createYoutubeAdapter([CAPTIVE_098], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-5JxfEjVdQFk");
+    assert.equal(sets[0]!.type, "radio");
+    assert.ok(sets[0]!.plays.length >= 15);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 55 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "korolova");
+    assert.equal(sets[0]?.seriesName, "Captive Soul");
+  });
+
+  it("lands James Hype SYNC London from the 1001 seed when watch is 429", async () => {
+    assert.ok(HYPE_SYNC);
+    const adapter = createYoutubeAdapter([HYPE_SYNC], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-rLTCLSsqrXY");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 66);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 1 * 3600 + 55 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "james-hype");
+    assert.match(String(sets[0]?.title ?? ""), /SYNC/i);
+  });
+
+  it("lands Epic Radio 036 from the 1001 seed when watch is 429", async () => {
+    assert.ok(EPIC_036);
+    const adapter = createYoutubeAdapter([EPIC_036], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-JLIYTueL4TI");
+    assert.equal(sets[0]!.type, "radio");
+    assert.ok(sets[0]!.plays.length >= 13);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 59 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "eric-prydz");
+    assert.equal(sets[0]?.seriesName, "Epic Radio");
+  });
+
+  it("lands Oliver Heldens Daybreak TML WE1 from the 1001 seed when watch is 429", async () => {
+    assert.ok(HELDENS_DAYBREAK);
+    const adapter = createYoutubeAdapter([HELDENS_DAYBREAK], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-wuMQeEJ3YnQ");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 95);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 2 * 3600 + 25 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "oliver-heldens");
+    assert.match(String(sets[0]?.title ?? ""), /Daybreak/i);
+    assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
   });
 });

@@ -3,6 +3,7 @@ import {
   fingerprintRowsToPlays,
   FP_JAMES_HYPE_GET_CLOSER_LONDON,
   FP_JAMES_HYPE_GET_CLOSER_LONDON_2,
+  FP_KEINEMUSIK_RADIO_FIFI_20260807,
   mergeFingerprintPlays,
   parseClockToSec,
 } from "./seeds";
@@ -28,6 +29,20 @@ assert.ok(plays2.some((p) => /Drums/i.test(p.trackTitle || "")));
 assert.ok(plays2.some((p) => p.trackTitle === "Wild"));
 assert.ok(!plays2.some((p) => /getting rich/i.test(p.trackTitle || "")));
 assert.ok(!plays2.some((p) => /Jatt Tera/i.test(p.trackTitle || "")));
+
+const fifi = fingerprintRowsToPlays(FP_KEINEMUSIK_RADIO_FIFI_20260807);
+assert.equal(fifi.length, 11);
+assert.equal(fifi[0]!.provenance, "fingerprint");
+assert.equal(fifi[0]!.timestamp, 30);
+assert.equal(fifi[0]!.trackTitle, "Someone Gotta Found Love (feat. Kim Mazelle) (Alone Mix)");
+assert.equal(fifi[10]!.trackTitle, "Se Eu Cantar");
+assert.equal(fifi[10]!.timestamp, 56 * 60);
+for (let i = 1; i < fifi.length; i++) {
+  assert.ok(
+    (fifi[i]!.timestamp ?? 0) > (fifi[i - 1]!.timestamp ?? 0),
+    `FIFI ACR clocks must increase at index ${i}`,
+  );
+}
 
 // consecutive dup drop
 const deduped = fingerprintRowsToPlays([

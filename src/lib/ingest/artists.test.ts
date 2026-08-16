@@ -163,6 +163,16 @@ assert.equal(
   guestFromSeriesByTitle("Keinemusik Radio Show by Lazarusman 03.07.2026"),
   "Lazarusman",
 );
+assert.equal(
+  guestFromSeriesByTitle("Keinemusik Radio Show by FIFI 07.08.2026"),
+  "FIFI",
+);
+const kmFifi = artistsForSet(
+  "Keinemusik Radio Show by FIFI 07.08.2026",
+  { name: "Keinemusik", slug: "keinemusik", accent: "#e8c547" },
+);
+assert.equal(kmFifi.primary.slug, "fifi");
+assert.equal(kmFifi.primary.name, "FIFI");
 const kmRadio = artistsForSet(
   "Keinemusik Radio Show by Lara Bee 17.07.2026",
   { name: "Keinemusik", slug: "keinemusik", accent: "#e8c547" },

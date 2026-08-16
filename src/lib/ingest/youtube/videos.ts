@@ -28,6 +28,7 @@ import {
   TL_HOLY_PRIEST_EDC_LV_2026,
   TL_MATTY_RALPH_EDC_LV_2026,
   TL_ENRICO_SANGIULIANO_TML_WE2_2026,
+  TL_ERIC_PRYDZ_EPIC_RADIO_036_2026,
   TL_ERIC_PRYDZ_ULTRA_MIAMI_2026,
   TL_FISHER_TML_WE1_2026,
   TL_FISHER_TML_WE2_2026,
@@ -47,6 +48,7 @@ import {
   TL_ZAMNA_STREET_PARADE_2025,
   TL_PUSH_TML_WE2_2026,
   TL_JAMES_HYPE_MELKWEG_ADE_2025,
+  TL_JAMES_HYPE_SYNC_MAGAZINE_LONDON_2025,
   TL_JAMES_HYPE_TML_WE2_2026,
   TL_JOHN_SUMMIT_TML_WE2_2026,
   TL_KOLSCH_TML_WE2_2026,
@@ -69,8 +71,14 @@ import {
   TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026,
   TL_MISS_MONIQUE_IBIZA_SUNSET_YACHT_2026,
   TL_NICKY_ROMERO_PROTOCOL_RADIO_731,
+  TL_KOROLOVA_CAPTIVE_SOUL_098_2026,
+  TL_NORA_EN_PURE_PURIFIED_RADIO_520_2026,
+  TL_OLIVER_HELDENS_DAYBREAK_SESSION_TOMORROWLAND_WE1_2024,
   TL_TIESTO_PRISMATIC_032_2026,
   TL_REINIER_ZONNEVELD_AWAKENINGS_2025,
+  TL_HANNAH_LAING_ZENLESS_ZONE_ZERO_CREAMFIELDS_2024,
+  TL_MAX_STYLER_OPULENT_TEMPLE_BURNING_MAN_2024,
+  TL_VINTAGE_CULTURE_ARODES_BURNING_MAN_2024,
   TL_VINTAGE_CULTURE_EDC_LV_NEON_2025,
   TL_VINTAGE_CULTURE_NYC_YACHT_2023,
   TL_VINTAGE_CULTURE_PACHA_IBIZA_2026,
@@ -229,6 +237,9 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     title: "James Hype SYNC London (Full Set)",
     seriesName: "SYNC",
     eventName: "SYNC London",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/n48bp01/james-hype-sync-magazine-london-united-kingdom-2025-11-29.html",
+    tracklist1001: TL_JAMES_HYPE_SYNC_MAGAZINE_LONDON_2025,
   },
   {
     video: "https://www.youtube.com/watch?v=oVOuXYtqi6I",
@@ -905,6 +916,49 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_NICKY_ROMERO_PROTOCOL_RADIO_731,
   },
   {
+    // Official Purified Radio 520; timed 1001 capture (same list as SC).
+    video: "https://www.youtube.com/watch?v=8aDoUu4GDrc",
+    primaryArtist: dj("Nora En Pure", { accent: "#48cae4" }),
+    genre: "Deep House",
+    type: "radio",
+    title: "Nora En Pure - Purified Radio 520",
+    seriesName: "Purified Radio",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/q195rv1/nora-en-pure-purified-radio-520-2026-08-10.html",
+    tracklist1001: TL_NORA_EN_PURE_PURIFIED_RADIO_520_2026,
+  },
+  {
+    // Official Captive Soul 098 (show channel / same 1001 as SC).
+    video: "https://www.youtube.com/watch?v=5JxfEjVdQFk",
+    primaryArtist: dj("Korolova", {
+      accent: "#f72585",
+      homeCity: "Ukraine",
+    }),
+    genre: "Melodic Techno",
+    type: "radio",
+    title: "Korolova - Captive Soul 098",
+    seriesName: "Captive Soul",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1cgr4nqk/korolova-captive-soul-098-2026-08-07.html",
+    tracklist1001: TL_KOROLOVA_CAPTIVE_SOUL_098_2026,
+  },
+  {
+    // Official Epic Radio 036; timed 1001 capture (same list as SC).
+    // Mixcloud is a mirror only — do not wire mixcloud slugs.
+    video: "https://www.youtube.com/watch?v=JLIYTueL4TI",
+    primaryArtist: dj("Eric Prydz", {
+      accent: "#7209b7",
+      homeCity: "Sweden",
+    }),
+    genre: "Progressive House",
+    type: "radio",
+    title: "Eric Prydz presents EPIC Radio 036",
+    seriesName: "Epic Radio",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/9xurh1t/eric-prydz-epic-radio-036-2026-08-06.html",
+    tracklist1001: TL_ERIC_PRYDZ_EPIC_RADIO_036_2026,
+  },
+  {
     // Official Miss Monique upload; timed 1001 capture.
     video: "https://www.youtube.com/watch?v=0-s_qZRWElA",
     primaryArtist: dj("Miss Monique", {
@@ -1333,6 +1387,65 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     title: "Vintage Culture @ Pacha New York City, Affairs (2026)",
     seriesName: "Affairs",
     eventName: "Pacha New York",
+  },
+  {
+    // Artist-channel Relive of the Burning Man Playground set (same 1001 as SC).
+    video: "https://www.youtube.com/watch?v=SeKRNa26kug",
+    primaryArtist: dj("Vintage Culture", {
+      accent: "#e85d04",
+      homeCity: "Brazil",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    title: "Vintage Culture b2b Arodes at Burning Man 2024, Black Rock City",
+    eventName: "Burning Man Playground",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/20s910xk/vintage-culture-arodes-playground-burning-man-united-states-2024-08-31.html",
+    tracklist1001: TL_VINTAGE_CULTURE_ARODES_BURNING_MAN_2024,
+  },
+  {
+    // Artist-channel Relive of the Opulent Temple set (same 1001 as SC).
+    video: "https://www.youtube.com/watch?v=k4Drn6AwAdk",
+    primaryArtist: dj("Max Styler", {
+      accent: "#ff9f1c",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    title: "Max Styler @ Opulent Temple, Burning Man 2024",
+    eventName: "Opulent Temple, Burning Man",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2tx1742t/max-styler-opulent-temple-burning-man-united-states-2024-08-30.html",
+    tracklist1001: TL_MAX_STYLER_OPULENT_TEMPLE_BURNING_MAN_2024,
+  },
+  {
+    // Artist-channel Relive of the Creamfields North set (same 1001 as SC).
+    video: "https://www.youtube.com/watch?v=arowbYnNFGY",
+    primaryArtist: dj("Hannah Laing", {
+      accent: "#ff006e",
+    }),
+    genre: "Techno",
+    type: "festival",
+    title: "Hannah Laing @ Zenless Zone Zero, Creamfields North 2024",
+    eventName: "Creamfields North",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/18k472y9/hannah-laing-zenless-zone-zero-creamfields-north-united-kingdom-2024-08-25.html",
+    tracklist1001: TL_HANNAH_LAING_ZENLESS_ZONE_ZERO_CREAMFIELDS_2024,
+  },
+  {
+    // Artist-channel Relive of the Tomorrowland WE1 Daybreak Session (same 1001 as SC).
+    video: "https://www.youtube.com/watch?v=wuMQeEJ3YnQ",
+    primaryArtist: dj("Oliver Heldens", {
+      accent: "#7c5cff",
+      homeCity: "Netherlands",
+    }),
+    genre: "Future House",
+    type: "festival",
+    title:
+      "Oliver Heldens - Daybreak Session @ Tomorrowland Weekend 1 2024",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/25du2utt/oliver-heldens-mainstage-daybreak-session-tomorrowland-weekend-1-belgium-2024-07-19.html",
+    tracklist1001: TL_OLIVER_HELDENS_DAYBREAK_SESSION_TOMORROWLAND_WE1_2024,
   },
   {
     video: "https://www.youtube.com/watch?v=OVex0rm7ZR4",
