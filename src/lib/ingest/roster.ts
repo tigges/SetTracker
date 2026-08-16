@@ -2086,6 +2086,7 @@ export const ARTIST_ROSTER_CURATED: ArtistRosterEntry[] = [
       "https://www.instagram.com/negitiv/",
       "https://linktr.ee/negitiv",
       "https://www.bcbfamily.com/artists/negitiv",
+      "https://www.tiktok.com/@negitivv",
     ],
     priority: "normal",
   },
