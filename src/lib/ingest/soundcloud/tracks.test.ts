@@ -198,4 +198,16 @@ assert.equal(
   "sc-korolovadj-korolova-captive-soul-98",
 );
 
+const hypeSyncSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url === "https://soundcloud.com/jameshypethedj/sync-london-full-set",
+);
+assert.ok(hypeSyncSc);
+assert.equal(hypeSyncSc.primaryArtist.name, "James Hype");
+assert.equal(hypeSyncSc.type, "festival");
+assert.equal(
+  `sc-jameshypethedj-${slugify("sync-london-full-set")}`,
+  "sc-jameshypethedj-sync-london-full-set",
+);
+
 console.log("soundcloud/tracks.test.ts ok");

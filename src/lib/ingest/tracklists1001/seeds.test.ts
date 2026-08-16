@@ -97,6 +97,7 @@ import {
   TL_JAMIE_JONES_HOT_ROBOT_RADIO_225,
   TL_JAMIE_JONES_HOT_ROBOT_RADIO_239,
   TL_JOEL_CORRY_EDGE_NYC_2026,
+  TL_JAMES_HYPE_SYNC_MAGAZINE_LONDON_2025,
   TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026,
   TL_KOROLOVA_CAPTIVE_SOUL_098_2026,
   TL_MAX_STYLER_OPULENT_TEMPLE_BURNING_MAN_2024,
@@ -1632,6 +1633,11 @@ assert.equal(
   isWiredTracklistSlug("sc-korolovadj-korolova-captive-soul-98"),
   true,
 );
+assert.equal(isWiredTracklistSlug("yt-rLTCLSsqrXY"), true);
+assert.equal(
+  isWiredTracklistSlug("sc-jameshypethedj-sync-london-full-set"),
+  true,
+);
 assert.equal(
   isWiredTracklistSlug(
     "sc-https://soundcloud.com/sashaofficial/sasha-eclipse-mix-12-8-26",
@@ -1991,6 +1997,30 @@ for (let i = 1; i < captive098.length; i++) {
   assert.ok(
     (captive098[i]!.timestamp ?? 0) > (captive098[i - 1]!.timestamp ?? 0),
     `Captive Soul 098 clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_JAMES_HYPE_SYNC_MAGAZINE_LONDON_2025);
+assert.equal(TL_JAMES_HYPE_SYNC_MAGAZINE_LONDON_2025.length, 66);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-rLTCLSsqrXY"],
+  TL_JAMES_HYPE_SYNC_MAGAZINE_LONDON_2025,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-jameshypethedj-sync-london-full-set"],
+  TL_JAMES_HYPE_SYNC_MAGAZINE_LONDON_2025,
+);
+const hypeSync = tracklist1001RowsToPlays(TL_JAMES_HYPE_SYNC_MAGAZINE_LONDON_2025);
+assert.equal(hypeSync.length, 66);
+assert.equal(hypeSync[0]?.provenance, "1001tl");
+assert.equal(hypeSync[0]?.timestamp, 0);
+assert.equal(hypeSync[0]?.trackTitle, "Ferrari");
+assert.equal(hypeSync[65]?.trackTitle, "More Than Friends");
+assert.equal(hypeSync[65]?.timestamp, 1 * 3600 + 55 * 60 + 7);
+for (let i = 1; i < hypeSync.length; i++) {
+  assert.ok(
+    (hypeSync[i]!.timestamp ?? 0) > (hypeSync[i - 1]!.timestamp ?? 0),
+    `James Hype SYNC London clocks must increase at index ${i}`,
   );
 }
 

@@ -47,6 +47,7 @@ import {
   TL_ZAMNA_STREET_PARADE_2025,
   TL_PUSH_TML_WE2_2026,
   TL_JAMES_HYPE_MELKWEG_ADE_2025,
+  TL_JAMES_HYPE_SYNC_MAGAZINE_LONDON_2025,
   TL_JAMES_HYPE_TML_WE2_2026,
   TL_JOHN_SUMMIT_TML_WE2_2026,
   TL_KOLSCH_TML_WE2_2026,
@@ -234,6 +235,9 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     title: "James Hype SYNC London (Full Set)",
     seriesName: "SYNC",
     eventName: "SYNC London",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/n48bp01/james-hype-sync-magazine-london-united-kingdom-2025-11-29.html",
+    tracklist1001: TL_JAMES_HYPE_SYNC_MAGAZINE_LONDON_2025,
   },
   {
     video: "https://www.youtube.com/watch?v=oVOuXYtqi6I",

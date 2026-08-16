@@ -436,5 +436,27 @@ assert.equal(
   ),
   "mapped",
 );
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "yt-rLTCLSsqrXY",
+      title: "James Hype SYNC London (Full Set)",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "sc-jameshypethedj-sync-london-full-set",
+      title: "James Hype SYNC London Full Set",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
 
 console.log("nextCaptures.queue.test.ts ok");

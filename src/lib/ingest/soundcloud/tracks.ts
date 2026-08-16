@@ -227,4 +227,16 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     type: "radio",
     minDurationSec: 30 * 60,
   },
+  {
+    // Official James Hype upload; 1001TL wired via
+    // sc-jameshypethedj-sync-london-full-set (same list as yt-rLTCLSsqrXY).
+    url: "https://soundcloud.com/jameshypethedj/sync-london-full-set",
+    primaryArtist: dj("James Hype", {
+      accent: "#ff3d6e",
+      homeCity: "Liverpool, UK",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    minDurationSec: 30 * 60,
+  },
 ];

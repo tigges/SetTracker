@@ -36,6 +36,7 @@ const MAX_STYLER_OT = YOUTUBE_SETS.find((s) => s.video.includes("k4Drn6AwAdk"));
 const HANNAH_CF = YOUTUBE_SETS.find((s) => s.video.includes("arowbYnNFGY"));
 const PURIFIED_520 = YOUTUBE_SETS.find((s) => s.video.includes("8aDoUu4GDrc"));
 const CAPTIVE_098 = YOUTUBE_SETS.find((s) => s.video.includes("5JxfEjVdQFk"));
+const HYPE_SYNC = YOUTUBE_SETS.find((s) => s.video.includes("rLTCLSsqrXY"));
 
 describe("watchMetaFromCuratedSeed", () => {
   it("builds ASOT 1290 meta from the curated 1001 capture", () => {
@@ -299,6 +300,17 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=5JxfEjVdQFk");
     // Last cue 55:58 + 180s pad.
     assert.equal(meta.durationSec, 55 * 60 + 58 + 180);
+  });
+
+  it("builds James Hype SYNC London meta from the curated 1001 capture", () => {
+    assert.ok(HYPE_SYNC);
+    const meta = watchMetaFromCuratedSeed(HYPE_SYNC);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "rLTCLSsqrXY");
+    assert.match(meta.title, /SYNC London/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=rLTCLSsqrXY");
+    // Last cue 1:55:07 + 180s pad.
+    assert.equal(meta.durationSec, 1 * 3600 + 55 * 60 + 7 + 180);
   });
 
   it("returns null without a title or video id", () => {
@@ -696,5 +708,19 @@ describe("curated YouTube 429 fallback", () => {
     assert.ok(sets[0]!.durationSec >= 55 * 60);
     assert.equal(sets[0]?.primaryArtist?.slug, "korolova");
     assert.equal(sets[0]?.seriesName, "Captive Soul");
+  });
+
+  it("lands James Hype SYNC London from the 1001 seed when watch is 429", async () => {
+    assert.ok(HYPE_SYNC);
+    const adapter = createYoutubeAdapter([HYPE_SYNC], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-rLTCLSsqrXY");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 66);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 1 * 3600 + 55 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "james-hype");
+    assert.match(String(sets[0]?.title ?? ""), /SYNC/i);
   });
 });
