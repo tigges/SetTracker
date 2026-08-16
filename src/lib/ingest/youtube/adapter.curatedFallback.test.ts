@@ -25,6 +25,7 @@ const RZ_AWAKE = YOUTUBE_SETS.find((s) => s.video.includes("i-mFuxbGHzg"));
 const JOEL_EDGE = YOUTUBE_SETS.find((s) => s.video.includes("soEFl73peVA"));
 const PRR_731 = YOUTUBE_SETS.find((s) => s.video.includes("Rgx-wT9FDaE"));
 const MM_YACHT = YOUTUBE_SETS.find((s) => s.video.includes("0-s_qZRWElA"));
+const PRISMATIC_032 = YOUTUBE_SETS.find((s) => s.video.includes("blP5J6BUG0M"));
 
 describe("watchMetaFromCuratedSeed", () => {
   it("builds ASOT 1290 meta from the curated 1001 capture", () => {
@@ -189,6 +190,17 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=0-s_qZRWElA");
     // Last cue 55:49 + 180s pad.
     assert.equal(meta.durationSec, 55 * 60 + 49 + 180);
+  });
+
+  it("builds Tiësto Prismatic 032 meta from the curated 1001 capture", () => {
+    assert.ok(PRISMATIC_032);
+    const meta = watchMetaFromCuratedSeed(PRISMATIC_032);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "blP5J6BUG0M");
+    assert.match(meta.title, /PRISMATIC/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=blP5J6BUG0M");
+    // Last cue 57:52 + 180s pad.
+    assert.equal(meta.durationSec, 57 * 60 + 52 + 180);
   });
 
   it("returns null without a title or video id", () => {
@@ -457,5 +469,19 @@ describe("curated YouTube 429 fallback", () => {
     assert.ok(sets[0]!.durationSec >= 55 * 60);
     assert.equal(sets[0]?.primaryArtist?.slug, "miss-monique");
     assert.match(String(sets[0]?.eventName ?? ""), /Ibiza Sunset Yacht/i);
+  });
+
+  it("lands Tiësto Prismatic 032 from the 1001 seed when watch is 429", async () => {
+    assert.ok(PRISMATIC_032);
+    const adapter = createYoutubeAdapter([PRISMATIC_032], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-blP5J6BUG0M");
+    assert.equal(sets[0]!.type, "radio");
+    assert.ok(sets[0]!.plays.length >= 20);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 57 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "tiesto");
+    assert.equal(sets[0]?.seriesName, "Prismatic");
   });
 });

@@ -99,6 +99,7 @@ import {
   TL_NICKY_ROMERO_PROTOCOL_RADIO_731,
   TL_REINIER_ZONNEVELD_AWAKENINGS_2025,
   TL_SASHA_ECLIPSE_MIX_2026,
+  TL_TIESTO_PRISMATIC_032_2026,
   TL_VINTAGE_CULTURE_ARODES_BURNING_MAN_2024,
   TL_VINTAGE_CULTURE_EDC_LV_NEON_2025,
   TL_VINTAGE_CULTURE_NYC_YACHT_2023,
@@ -1592,6 +1593,7 @@ assert.equal(
 assert.equal(isWiredTracklistSlug("yt-soEFl73peVA"), true);
 assert.equal(isWiredTracklistSlug("yt-Rgx-wT9FDaE"), true);
 assert.equal(isWiredTracklistSlug("yt-0-s_qZRWElA"), true);
+assert.equal(isWiredTracklistSlug("yt-blP5J6BUG0M"), true);
 assert.equal(
   isWiredTracklistSlug("sc-sashaofficial-sasha-eclipse-mix-12-8-26"),
   true,
@@ -1750,6 +1752,26 @@ for (let i = 1; i < mmYacht.length; i++) {
   assert.ok(
     (mmYacht[i]!.timestamp ?? 0) > (mmYacht[i - 1]!.timestamp ?? 0),
     `Miss Monique Ibiza Yacht clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_TIESTO_PRISMATIC_032_2026);
+assert.equal(TL_TIESTO_PRISMATIC_032_2026.length, 20);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-blP5J6BUG0M"],
+  TL_TIESTO_PRISMATIC_032_2026,
+);
+const prismatic032 = tracklist1001RowsToPlays(TL_TIESTO_PRISMATIC_032_2026);
+assert.equal(prismatic032.length, 20);
+assert.equal(prismatic032[0]?.provenance, "1001tl");
+assert.equal(prismatic032[0]?.timestamp, 32);
+assert.equal(prismatic032[0]?.trackTitle, "TILL SUNRISE");
+assert.equal(prismatic032[19]?.trackTitle, "High On The Beat");
+assert.equal(prismatic032[19]?.timestamp, 57 * 60 + 52);
+for (let i = 1; i < prismatic032.length; i++) {
+  assert.ok(
+    (prismatic032[i]!.timestamp ?? 0) > (prismatic032[i - 1]!.timestamp ?? 0),
+    `Tiësto Prismatic 032 clocks must increase at index ${i}`,
   );
 }
 

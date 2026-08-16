@@ -67,6 +67,7 @@ import {
   TL_JOEL_CORRY_EDGE_NYC_2026,
   TL_MISS_MONIQUE_IBIZA_SUNSET_YACHT_2026,
   TL_NICKY_ROMERO_PROTOCOL_RADIO_731,
+  TL_TIESTO_PRISMATIC_032_2026,
   TL_REINIER_ZONNEVELD_AWAKENINGS_2025,
   TL_VINTAGE_CULTURE_EDC_LV_NEON_2025,
   TL_VINTAGE_CULTURE_NYC_YACHT_2023,
@@ -899,6 +900,21 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/2ng22gq9/miss-monique-ibiza-sunset-yacht-mix-2026-08-13.html",
     tracklist1001: TL_MISS_MONIQUE_IBIZA_SUNSET_YACHT_2026,
+  },
+  {
+    // Official Prismatic 032; timed 1001 capture.
+    video: "https://www.youtube.com/watch?v=blP5J6BUG0M",
+    primaryArtist: dj("Tiësto", {
+      accent: "#00bbf9",
+      homeCity: "Netherlands",
+    }),
+    genre: "Big Room",
+    type: "radio",
+    title: "PRISMATIC by Tiësto 032",
+    seriesName: "Prismatic",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/m7vw17k/tiesto-prismatic-032-2026-08-08.html",
+    tracklist1001: TL_TIESTO_PRISMATIC_032_2026,
   },
   {
     // Tomorrowland official Relive — Mainstage WE2.

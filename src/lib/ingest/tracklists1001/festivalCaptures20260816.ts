@@ -516,3 +516,34 @@ export const TL_MISS_MONIQUE_IBIZA_SUNSET_YACHT_2026: FingerprintSeedRow[] = [
   { at: "52:18", artist: "CamelPhat & Josh Gigante ft. Kuuda", title: "So Good (SLVR Remix)" },
   { at: "55:49", artist: "Layton Giordani ft. AR/CO", title: "She's A Devil" },
 ];
+
+/**
+ * Tiësto - Prismatic 032 2026-08-08
+ * https://www.1001tracklists.com/tracklist/m7vw17k/tiesto-prismatic-032-2026-08-08.html
+ * Official YT: https://youtu.be/blP5J6BUG0M
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-blP5J6BUG0M"]
+ * Captured 2026-08-16 — provenance 1001tl. Official script: 20 tracks.
+ * Capture overlay used an invalid identifier (ë); constant renamed.
+ */
+export const TL_TIESTO_PRISMATIC_032_2026: FingerprintSeedRow[] = [
+  { at: "0:32", artist: "JOR", title: "TILL SUNRISE" },
+  { at: "4:10", artist: "KUKO", title: "Voicemail (Tiësto Remix)" },
+  { at: "7:43", artist: "Alan Fitzpatrick", title: "We Do What We Want (Karish Edit)" },
+  { at: "10:16", artist: "Yomanda", title: "Synth & Strings (LAWTON Lick)" },
+  { at: "13:15", artist: "Duke Dumont ft. Jay Norton", title: "Ocean Drive (CIElll & Mack Edit)" },
+  { at: "17:25", artist: "Ultra Naté", title: "Free (Don Remix)" },
+  { at: "21:13", artist: "Nedea & Bryan Kearney", title: "Back Once Again" },
+  { at: "23:28", artist: "TWOFACED & Nikita Warren", title: "I Need You" },
+  { at: "25:44", artist: "Headhigh", title: "We Belong Together" },
+  { at: "28:14", artist: "BLR & Amber Revival", title: "Autumn Leaves" },
+  { at: "32:06", artist: "David Guetta & MARTEN HØRGER pres. Men Machine & Snap!", title: "PWR" },
+  { at: "33:50", artist: "Kölsch", title: "Picasso" },
+  { at: "35:46", artist: "HUGEL & Imael Angel & Ultra Naté", title: "Movin' To The Sun (Blake Light & ALAC Remix)" },
+  { at: "39:26", artist: "Swedish House Mafia & Lykke Li", title: "Happiness Is So Sad" },
+  { at: "42:03", artist: "Talla 2XLC & York", title: "Ghosts" },
+  { at: "47:14", artist: "Jordan Tilstone", title: "Kilnside Euphoria" },
+  { at: "50:12", artist: "Mekka", title: "Diamondback (Paul Denton Remix)" },
+  { at: "53:53", artist: "Everything But The Girl", title: "Missing (Will Atkinson Bootleg)" },
+  { at: "56:32", artist: "The Rocketman & TMPL", title: "Round & Round" },
+  { at: "57:52", artist: "Nifra & KEVU & Caroline Roxy", title: "High On The Beat" },
+];

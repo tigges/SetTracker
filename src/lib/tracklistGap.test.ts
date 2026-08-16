@@ -108,6 +108,20 @@ describe("tracklistGap", () => {
     assert.equal(
       isActionableTracklistGap(
         {
+          title: "PRISMATIC by Tiësto 032",
+          type: "radio",
+          playCount: 20,
+          durationSec: 60 * 60,
+          publishedAt: "2026-08-08T00:00:00.000Z",
+          top100Rank: 5,
+        },
+        now,
+      ),
+      false,
+    );
+    assert.equal(
+      isActionableTracklistGap(
+        {
           title: "Smash The House Radio ep. 689",
           type: "festival",
           eventKind: "festival",

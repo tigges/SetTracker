@@ -274,5 +274,17 @@ assert.equal(
   ),
   "mapped",
 );
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "yt-blP5J6BUG0M",
+      title: "PRISMATIC by Tiësto 032",
+      type: "radio",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
 
 console.log("nextCaptures.queue.test.ts ok");
