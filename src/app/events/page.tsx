@@ -144,9 +144,9 @@ export default async function EventsPage() {
           />
           <VisualTeaser
             href="/events/calendar"
-            eyebrow="Festival editions"
+            eyebrow="Festival editions & club nights"
             title="This season’s calendar"
-            blurb="Curated weekends — Relives land after the close."
+            blurb="Curated weekends plus official club calendars."
             cta="Calendar →"
             variant="calendar"
             faces={calFaces.map((f) => ({

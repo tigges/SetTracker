@@ -1,0 +1,1717 @@
+{
+  "venueSlug": "amnesia-ibiza",
+  "venueName": "Amnesia Ibiza",
+  "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+  "fetchedAt": "2026-08-16T14:46:38.140Z",
+  "nights": [
+    {
+      "title": "Pyramid",
+      "startsAt": "2026-08-16",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "ticketsUrl": "https://sales.ticketing.cm.com/Pyramid-Amnesia-16thAugust2026",
+      "rooms": [
+        {
+          "name": "Terraza",
+          "artists": [
+            "RICARDO VILLALOBOS",
+            "CHRIS STUSSY",
+            "RARESH",
+            "SIDNEY CHARLES",
+            "MAR-T",
+            "CAAL",
+            "ÁLVARO MEDINA&nbsp;"
+          ]
+        },
+        {
+          "name": "Main Room",
+          "artists": [
+            "DEBORAH DE LUCA",
+            "ANDRÉS CAMPO",
+            "FUMI",
+            "ALAN FITZPATRICK",
+            "ESTELLA BOERSMA"
+          ]
+        }
+      ],
+      "artists": [
+        "RICARDO VILLALOBOS",
+        "CHRIS STUSSY",
+        "RARESH",
+        "SIDNEY CHARLES",
+        "MAR-T",
+        "CAAL",
+        "ÁLVARO MEDINA&nbsp;",
+        "DEBORAH DE LUCA",
+        "ANDRÉS CAMPO",
+        "FUMI",
+        "ALAN FITZPATRICK",
+        "ESTELLA BOERSMA"
+      ]
+    },
+    {
+      "title": "NRG",
+      "startsAt": "2026-08-17",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "ticketsUrl": "https://sales.ticketing.cm.com/NRG-Amnesia-17thAugust2026",
+      "rooms": [
+        {
+          "name": "Main Room",
+          "artists": [
+            "Ben Hemsley",
+            "blk.",
+            "Dart",
+            "Kyle Starkey",
+            "Dominique",
+            "Morgan Seatree",
+            "Winson"
+          ]
+        }
+      ],
+      "artists": [
+        "Ben Hemsley",
+        "blk.",
+        "Dart",
+        "Kyle Starkey",
+        "Dominique",
+        "Morgan Seatree",
+        "Winson"
+      ]
+    },
+    {
+      "title": "Metamorfosi",
+      "startsAt": "2026-08-18",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "ticketsUrl": "https://sales.ticketing.cm.com/Metamorfosi-Amnesia-18thAugust2026",
+      "rooms": [
+        {
+          "name": "Terraza",
+          "artists": [
+            "Joseph Capriati",
+            "Cloonee",
+            "Traumer",
+            "Amedeo Picone"
+          ]
+        },
+        {
+          "name": "Club Room",
+          "artists": [
+            "Ben Klock",
+            "Alarico",
+            "SERAFINA",
+            "Antonio Pepe"
+          ]
+        }
+      ],
+      "artists": [
+        "Joseph Capriati",
+        "Cloonee",
+        "Traumer",
+        "Amedeo Picone",
+        "Ben Klock",
+        "Alarico",
+        "SERAFINA",
+        "Antonio Pepe"
+      ]
+    },
+    {
+      "title": "Resistance Ibiza",
+      "startsAt": "2026-08-19",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "ticketsUrl": "https://sales.ticketing.cm.com/Resistance-Amnesia-19thAugust2026",
+      "rooms": [
+        {
+          "name": "Terraza",
+          "artists": [
+            "ARTBAT",
+            "Adam Beyer",
+            "CamelPhat",
+            "Out of Mind&nbsp;&nbsp;"
+          ]
+        }
+      ],
+      "artists": [
+        "ARTBAT",
+        "Adam Beyer",
+        "CamelPhat",
+        "Out of Mind&nbsp;&nbsp;"
+      ]
+    },
+    {
+      "title": "You&Me",
+      "startsAt": "2026-08-20",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "ticketsUrl": "https://sales.ticketing.cm.com/YouandMe-Amnesia-20thAugust2026",
+      "rooms": [
+        {
+          "name": "Terraza",
+          "artists": [
+            "JOSH BAKER",
+            "KETTAMA",
+            "SILVA BUMPA",
+            "REESHY&nbsp;",
+            "PHILL DE JANEIRO",
+            "& BENJI KING"
+          ]
+        }
+      ],
+      "artists": [
+        "JOSH BAKER",
+        "KETTAMA",
+        "SILVA BUMPA",
+        "REESHY&nbsp;",
+        "PHILL DE JANEIRO",
+        "& BENJI KING"
+      ]
+    },
+    {
+      "title": "Rememberland",
+      "startsAt": "2026-08-21",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "ticketsUrl": "https://sales.ticketing.cm.com/Rememberland-Amnesia-21stAugust2026",
+      "rooms": [
+        {
+          "name": "Terraza",
+          "artists": [
+            "DREAMTEAM",
+            "LA MOVIDA",
+            "DAVID KEIPER",
+            "EUPHORIA DANCERS",
+            "LUGOTTI",
+            "MARTIN VIANA",
+            "PERFORMANCE LAB"
+          ]
+        }
+      ],
+      "artists": [
+        "DREAMTEAM",
+        "LA MOVIDA",
+        "DAVID KEIPER",
+        "EUPHORIA DANCERS",
+        "LUGOTTI",
+        "MARTIN VIANA",
+        "PERFORMANCE LAB"
+      ]
+    },
+    {
+      "title": "Glitterbox",
+      "startsAt": "2026-08-21",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "ticketsUrl": "https://sales.ticketing.cm.com/Glitterbox-Amnesia-21stAugust2026",
+      "rooms": [
+        {
+          "name": "Terraza",
+          "artists": [
+            "Catz n Dogz",
+            "Groove Armada",
+            "Minna",
+            "Mousse T",
+            "Salomé Le Chat"
+          ]
+        },
+        {
+          "name": "Main Room",
+          "artists": [
+            "Busy P",
+            "Cassius",
+            "Todd Terry"
+          ]
+        }
+      ],
+      "artists": [
+        "Catz n Dogz",
+        "Groove Armada",
+        "Minna",
+        "Mousse T",
+        "Salomé Le Chat",
+        "Busy P",
+        "Cassius",
+        "Todd Terry"
+      ]
+    },
+    {
+      "title": "Bresh",
+      "startsAt": "2026-08-22",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "ticketsUrl": "https://sales.ticketing.cm.com/Bresh-Amnesia-22ndAugust2026",
+      "rooms": [
+        {
+          "name": "Terraza",
+          "artists": [
+            "SPECIAL GUEST TBA"
+          ]
+        }
+      ],
+      "artists": [
+        "SPECIAL GUEST TBA"
+      ]
+    },
+    {
+      "title": "Pyramid",
+      "startsAt": "2026-08-23",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "ticketsUrl": "https://sales.ticketing.cm.com/Pyramid-Amnesia-23rdAugust2026",
+      "rooms": [
+        {
+          "name": "Terraza",
+          "artists": [
+            "RICARDO VILLALOBOS",
+            "FUMIYA TANAKA&nbsp;",
+            "LAIDLAW",
+            "KEPLER",
+            "GERMANO VENTURA"
+          ]
+        },
+        {
+          "name": "Main Room",
+          "artists": [
+            "SARA LANDRY",
+            "CLARA CUVÉ",
+            "AIDA ARKO",
+            "JULIET FOX"
+          ]
+        }
+      ],
+      "artists": [
+        "RICARDO VILLALOBOS",
+        "FUMIYA TANAKA&nbsp;",
+        "LAIDLAW",
+        "KEPLER",
+        "GERMANO VENTURA",
+        "SARA LANDRY",
+        "CLARA CUVÉ",
+        "AIDA ARKO",
+        "JULIET FOX"
+      ]
+    },
+    {
+      "title": "NRG",
+      "startsAt": "2026-08-24",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "ticketsUrl": "https://sales.ticketing.cm.com/NRG-Amnesia-24thAugust2026",
+      "artists": [
+        "Ben Hemsley",
+        "Black Traffic",
+        "Diffrent",
+        "Jezza & Jod",
+        "Viki Dos Santos"
+      ]
+    },
+    {
+      "title": "Metamorfosi",
+      "startsAt": "2026-08-25",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "ticketsUrl": "https://sales.ticketing.cm.com/Metamorfosi-Amnesia-25thAugust2026",
+      "rooms": [
+        {
+          "name": "Terraza",
+          "artists": [
+            "Joseph Capriati",
+            "Enzo Siragusa",
+            "Archie Hamilton",
+            "Fleur Shore",
+            "Marco Tropeano"
+          ]
+        },
+        {
+          "name": "Club Room",
+          "artists": [
+            "Freddy K",
+            "ALARICO",
+            "ANNĒ",
+            "Antonio Pepe"
+          ]
+        }
+      ],
+      "artists": [
+        "Joseph Capriati",
+        "Enzo Siragusa",
+        "Archie Hamilton",
+        "Fleur Shore",
+        "Marco Tropeano",
+        "Freddy K",
+        "ALARICO",
+        "ANNĒ",
+        "Antonio Pepe"
+      ]
+    },
+    {
+      "title": "Resistance Ibiza",
+      "startsAt": "2026-08-26",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "ticketsUrl": "https://sales.ticketing.cm.com/Resistance-Amnesia-26thAugust20206",
+      "rooms": [
+        {
+          "name": "Terraza",
+          "artists": [
+            "Boris Brejcha",
+            "Adam Beyer",
+            "Chris Avantgarde",
+            "Henri Bergmann&nbsp;&nbsp;",
+            "Melóne Morez"
+          ]
+        }
+      ],
+      "artists": [
+        "Boris Brejcha",
+        "Adam Beyer",
+        "Chris Avantgarde",
+        "Henri Bergmann&nbsp;&nbsp;",
+        "Melóne Morez"
+      ]
+    },
+    {
+      "title": "You&Me",
+      "startsAt": "2026-08-27",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "ticketsUrl": "https://sales.ticketing.cm.com/YouandMe-Amnesia-27thAugust2026",
+      "rooms": [
+        {
+          "name": "Terraza",
+          "artists": [
+            "JOSH BAKER",
+            "LUUK VAN DIJK&nbsp;",
+            "ELIZA ROSE",
+            "OLIVE F&nbsp;",
+            "JENTZEN&nbsp;"
+          ]
+        }
+      ],
+      "artists": [
+        "JOSH BAKER",
+        "LUUK VAN DIJK&nbsp;",
+        "ELIZA ROSE",
+        "OLIVE F&nbsp;",
+        "JENTZEN&nbsp;"
+      ]
+    },
+    {
+      "title": "Rememberland",
+      "startsAt": "2026-08-28",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "ticketsUrl": "https://sales.ticketing.cm.com/Rememberland-Amnesia-28thAugust2026",
+      "rooms": [
+        {
+          "name": "Terraza",
+          "artists": [
+            "DREAMTEAM",
+            "LA MOVIDA",
+            "David Keiper",
+            "Euphoria Dancers",
+            "Lugotti",
+            "Martin Viana",
+            "Performance Lab"
+          ]
+        }
+      ],
+      "artists": [
+        "DREAMTEAM",
+        "LA MOVIDA",
+        "David Keiper",
+        "Euphoria Dancers",
+        "Lugotti",
+        "Martin Viana",
+        "Performance Lab"
+      ]
+    },
+    {
+      "title": "Glitterbox",
+      "startsAt": "2026-08-28",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "ticketsUrl": "https://sales.ticketing.cm.com/Glitterbox-Amnesia-28thAugust2026",
+      "rooms": [
+        {
+          "name": "Terraza",
+          "artists": [
+            "DJ Jazzy Jeff",
+            "Fat Tony",
+            "Groove Armada",
+            "Melvo Baptiste"
+          ]
+        },
+        {
+          "name": "Main Room",
+          "artists": [
+            "Dam Swindle",
+            "Horse Meat Disco",
+            "Shaun Ross"
+          ]
+        }
+      ],
+      "artists": [
+        "DJ Jazzy Jeff",
+        "Fat Tony",
+        "Groove Armada",
+        "Melvo Baptiste",
+        "Dam Swindle",
+        "Horse Meat Disco",
+        "Shaun Ross"
+      ]
+    },
+    {
+      "title": "Bresh",
+      "startsAt": "2026-08-29",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "ticketsUrl": "https://sales.ticketing.cm.com/Bresh-Amnesia-29thAugust2026",
+      "rooms": [
+        {
+          "name": "Terraza",
+          "artists": [
+            "SPECIAL GUEST TBA"
+          ]
+        }
+      ],
+      "artists": [
+        "SPECIAL GUEST TBA"
+      ]
+    },
+    {
+      "title": "Pyramid",
+      "startsAt": "2026-08-30",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "ticketsUrl": "https://sales.ticketing.cm.com/Pyramid-Amnesia-30thAugust2026",
+      "rooms": [
+        {
+          "name": "Terraza",
+          "artists": [
+            "Ben Sterling",
+            "Gaskin",
+            "Saraga",
+            "KIM APRIL"
+          ]
+        },
+        {
+          "name": "Main Room",
+          "artists": [
+            "NINA KRAVIZ",
+            "YANAMASTE",
+            "KATNADA"
+          ]
+        }
+      ],
+      "artists": [
+        "Ben Sterling",
+        "Gaskin",
+        "Saraga",
+        "KIM APRIL",
+        "NINA KRAVIZ",
+        "YANAMASTE",
+        "KATNADA"
+      ]
+    },
+    {
+      "title": "NRG",
+      "startsAt": "2026-08-31",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "ticketsUrl": "https://sales.ticketing.cm.com/NRG-Amnesia-31stAugust2026",
+      "artists": [
+        "Ben Hemsley",
+        "Benwal",
+        "Dart",
+        "Kyle Starkey",
+        "Denis Sulta",
+        "Robbie Doherty",
+        "Leena Punks"
+      ]
+    },
+    {
+      "title": "Metamorfosi",
+      "startsAt": "2026-09-01",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "ticketsUrl": "https://sales.ticketing.cm.com/Metamorfosi-Amnesia-1stSeptember2026",
+      "rooms": [
+        {
+          "name": "Terraza",
+          "artists": [
+            "Joseph Capriati",
+            "Josh Baker",
+            "Gennaro",
+            "Pheelo",
+            "Alexander M"
+          ]
+        },
+        {
+          "name": "Club Room",
+          "artists": [
+            "Ben Klock",
+            "Anfisa Letyago",
+            "Héctor Oaks",
+            "Horo",
+            "MØSENGGE"
+          ]
+        }
+      ],
+      "artists": [
+        "Joseph Capriati",
+        "Josh Baker",
+        "Gennaro",
+        "Pheelo",
+        "Alexander M",
+        "Ben Klock",
+        "Anfisa Letyago",
+        "Héctor Oaks",
+        "Horo",
+        "MØSENGGE"
+      ]
+    },
+    {
+      "title": "Resistance Ibiza",
+      "startsAt": "2026-09-02",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "ticketsUrl": "https://sales.ticketing.cm.com/Resistance-Amnesia-2ndSeptember2026",
+      "rooms": [
+        {
+          "name": "Terraza",
+          "artists": [
+            "Adam Beyer",
+            "Eric Prydz",
+            "Innellea",
+            "Dreya V&nbsp;&nbsp;"
+          ]
+        }
+      ],
+      "artists": [
+        "Adam Beyer",
+        "Eric Prydz",
+        "Innellea",
+        "Dreya V&nbsp;&nbsp;"
+      ]
+    },
+    {
+      "title": "You&Me",
+      "startsAt": "2026-09-03",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "ticketsUrl": "https://sales.ticketing.cm.com/YouandMe-Amnesia-3rdSeptember2026",
+      "rooms": [
+        {
+          "name": "Terraza",
+          "artists": [
+            "JOSH BAKER",
+            "ENZO SIRAGUSA",
+            "CHRISTIAN AB&nbsp;",
+            "LAIDLAW&nbsp;",
+            "ALEXANDRIA"
+          ]
+        }
+      ],
+      "artists": [
+        "JOSH BAKER",
+        "ENZO SIRAGUSA",
+        "CHRISTIAN AB&nbsp;",
+        "LAIDLAW&nbsp;",
+        "ALEXANDRIA"
+      ]
+    },
+    {
+      "title": "Rememberland",
+      "startsAt": "2026-09-04",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "ticketsUrl": "https://sales.ticketing.cm.com/Rememberland-Amnesia-4thSept2026",
+      "rooms": [
+        {
+          "name": "Terraza",
+          "artists": [
+            "DREAMTEAM",
+            "LA MOVIDA",
+            "+ TBA"
+          ]
+        }
+      ],
+      "artists": [
+        "DREAMTEAM",
+        "LA MOVIDA",
+        "+ TBA"
+      ]
+    },
+    {
+      "title": "Glitterbox",
+      "startsAt": "2026-09-04",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "ticketsUrl": "https://sales.ticketing.cm.com/Glitterbox-Amnesia-4thSeptember2026",
+      "rooms": [
+        {
+          "name": "Terraza",
+          "artists": [
+            "DAVID MORALES",
+            "JAYDA G",
+            "MELVO BAPTISTE",
+            "AROOP ROY",
+            "SEAMUS HAJI"
+          ]
+        },
+        {
+          "name": "Main Room",
+          "artists": [
+            "ALINE ROCHA",
+            "FAT TONY",
+            "HORSE MEAT DISCO"
+          ]
+        }
+      ],
+      "artists": [
+        "DAVID MORALES",
+        "JAYDA G",
+        "MELVO BAPTISTE",
+        "AROOP ROY",
+        "SEAMUS HAJI",
+        "ALINE ROCHA",
+        "FAT TONY",
+        "HORSE MEAT DISCO"
+      ]
+    },
+    {
+      "title": "Bresh Closing Party",
+      "startsAt": "2026-09-05",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "ticketsUrl": "https://sales.ticketing.cm.com/Bresh-Amnesia-5thSeptember2026",
+      "rooms": [
+        {
+          "name": "Terraza",
+          "artists": [
+            "SPECIAL GUEST TBA"
+          ]
+        }
+      ],
+      "artists": [
+        "SPECIAL GUEST TBA"
+      ]
+    },
+    {
+      "title": "Pyramid",
+      "startsAt": "2026-09-06",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "ticketsUrl": "https://sales.ticketing.cm.com/Pyramid-Amnesia-6thSeptember2026",
+      "rooms": [
+        {
+          "name": "Terraza",
+          "artists": [
+            "JOSEPH CAPRIATI",
+            "MARCO FARAONE&nbsp;",
+            "SIDNEY CHARLES&nbsp;",
+            "MAR-T"
+          ]
+        },
+        {
+          "name": "Main Room",
+          "artists": [
+            "YANAMASTE",
+            "CHLÄR",
+            "ALARICO",
+            "LUCA DONZELLI"
+          ]
+        }
+      ],
+      "artists": [
+        "JOSEPH CAPRIATI",
+        "MARCO FARAONE&nbsp;",
+        "SIDNEY CHARLES&nbsp;",
+        "MAR-T",
+        "YANAMASTE",
+        "CHLÄR",
+        "ALARICO",
+        "LUCA DONZELLI"
+      ]
+    },
+    {
+      "title": "NRG",
+      "startsAt": "2026-09-07",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "ticketsUrl": "https://sales.ticketing.cm.com/NRG-Amnesia-7thSeptember2026",
+      "artists": [
+        "Ben Hemsley",
+        "Alan Fitzpatrick",
+        "Black Traffic",
+        "Jezza & Jod",
+        "blk.",
+        "Paige Tomlinson",
+        "Strictly Different"
+      ]
+    },
+    {
+      "title": "Metamorfosi",
+      "startsAt": "2026-09-08",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "ticketsUrl": "https://sales.ticketing.cm.com/Metamorfosi-Amnesia-8thSeptember2026",
+      "rooms": [
+        {
+          "name": "Terraza",
+          "artists": [
+            "Joseph Capriati",
+            "Seth Troxler",
+            "Maceo Plex",
+            "Karretero",
+            "Skizzo"
+          ]
+        },
+        {
+          "name": "Club Room",
+          "artists": [
+            "Joseph Capriati",
+            "Ryan Elliott",
+            "Dubfire&nbsp;",
+            "Sasha Carassi&nbsp;",
+            "Janina"
+          ]
+        }
+      ],
+      "artists": [
+        "Joseph Capriati",
+        "Seth Troxler",
+        "Maceo Plex",
+        "Karretero",
+        "Skizzo",
+        "Ryan Elliott",
+        "Dubfire&nbsp;",
+        "Sasha Carassi&nbsp;",
+        "Janina"
+      ]
+    },
+    {
+      "title": "Resistance Ibiza",
+      "startsAt": "2026-09-09",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "ticketsUrl": "https://sales.ticketing.cm.com/Resistance-Amnesia-9thSeptember2026",
+      "rooms": [
+        {
+          "name": "Terraza",
+          "artists": [
+            "ARTBAT",
+            "Adam Beyer",
+            "Massano",
+            "Stephan Bodzin",
+            "Olympe&nbsp;&nbsp;"
+          ]
+        }
+      ],
+      "artists": [
+        "ARTBAT",
+        "Adam Beyer",
+        "Massano",
+        "Stephan Bodzin",
+        "Olympe&nbsp;&nbsp;"
+      ]
+    },
+    {
+      "title": "You&Me",
+      "startsAt": "2026-09-10",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "ticketsUrl": "https://sales.ticketing.cm.com/YouandMe-Amnesia-10thSeptember2026",
+      "rooms": [
+        {
+          "name": "Terraza",
+          "artists": [
+            "JOSH BAKER",
+            "SHANTI CELESTE",
+            "PEACH&nbsp;",
+            "KEPLER",
+            "JOB DE JONG&nbsp;",
+            "JAMIE FIELDING&nbsp;"
+          ]
+        }
+      ],
+      "artists": [
+        "JOSH BAKER",
+        "SHANTI CELESTE",
+        "PEACH&nbsp;",
+        "KEPLER",
+        "JOB DE JONG&nbsp;",
+        "JAMIE FIELDING&nbsp;"
+      ]
+    },
+    {
+      "title": "Rememberland",
+      "startsAt": "2026-09-11",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "ticketsUrl": "https://sales.ticketing.cm.com/Rememberland-Amnesia-11thSept2026",
+      "rooms": [
+        {
+          "name": "Terraza",
+          "artists": [
+            "DREAMTEAM",
+            "LA MOVIDA",
+            "+ TBA"
+          ]
+        }
+      ],
+      "artists": [
+        "DREAMTEAM",
+        "LA MOVIDA",
+        "+ TBA"
+      ]
+    },
+    {
+      "title": "Glitterbox",
+      "startsAt": "2026-09-11",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "ticketsUrl": "https://sales.ticketing.cm.com/Glitterbox-Amnesia-11thSeptember2026",
+      "rooms": [
+        {
+          "name": "Terraza",
+          "artists": [
+            "BARBARA TUCKER",
+            "BREAKBOT & IRFANE",
+            "EATS EVERYTHING",
+            "JAMIE LOVE",
+            "KRYSTAL KLEAR",
+            "THE BROTHERS MACKLOVITCH"
+          ]
+        },
+        {
+          "name": "Main Room",
+          "artists": [
+            "DIMITRI FROM PARIS",
+            "LEV",
+            "SAM KARLSON"
+          ]
+        }
+      ],
+      "artists": [
+        "BARBARA TUCKER",
+        "BREAKBOT & IRFANE",
+        "EATS EVERYTHING",
+        "JAMIE LOVE",
+        "KRYSTAL KLEAR",
+        "THE BROTHERS MACKLOVITCH",
+        "DIMITRI FROM PARIS",
+        "LEV",
+        "SAM KARLSON"
+      ]
+    },
+    {
+      "title": "Bar Sessions",
+      "startsAt": "2026-09-12",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "artists": []
+    },
+    {
+      "title": "Pyramid",
+      "startsAt": "2026-09-13",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "ticketsUrl": "https://sales.ticketing.cm.com/Pyramid-Amnesia-13thSeptember2026",
+      "rooms": [
+        {
+          "name": "Terraza UNUM",
+          "artists": [
+            "RICARDO VILLALOBOS",
+            "LUCIANO",
+            "FRANCESCO DEL GARDA",
+            "SAOIRSE&nbsp;",
+            "ANITË"
+          ]
+        },
+        {
+          "name": "Main Room",
+          "artists": [
+            "MARCO FARAONE",
+            "NINA KRAVIZ",
+            "ANNĒ",
+            "IGNEZ"
+          ]
+        }
+      ],
+      "artists": [
+        "RICARDO VILLALOBOS",
+        "LUCIANO",
+        "FRANCESCO DEL GARDA",
+        "SAOIRSE&nbsp;",
+        "ANITË",
+        "MARCO FARAONE",
+        "NINA KRAVIZ",
+        "ANNĒ",
+        "IGNEZ"
+      ]
+    },
+    {
+      "title": "NRG",
+      "startsAt": "2026-09-14",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "ticketsUrl": "https://sales.ticketing.cm.com/NRG-Amnesia-14thSeptember2026",
+      "artists": [
+        "Ben Hemsley",
+        "Dart",
+        "Kyle Starkey",
+        "Datsko",
+        "Prada2000",
+        "Hannah Laing",
+        "HYKKEN&nbsp;"
+      ]
+    },
+    {
+      "title": "Metamorfosi",
+      "startsAt": "2026-09-15",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "ticketsUrl": "https://sales.ticketing.cm.com/Metamorfosi-Amnesia-15thSept2026",
+      "rooms": [
+        {
+          "name": "Terraza",
+          "artists": [
+            "Joseph Capriati",
+            "Richie Hawtin",
+            "Toman",
+            "PARAMIDA",
+            "Vanee"
+          ]
+        },
+        {
+          "name": "Club Room",
+          "artists": [
+            "Adiel",
+            "Alarico",
+            "Yanamaste",
+            "Nuke"
+          ]
+        }
+      ],
+      "artists": [
+        "Joseph Capriati",
+        "Richie Hawtin",
+        "Toman",
+        "PARAMIDA",
+        "Vanee",
+        "Adiel",
+        "Alarico",
+        "Yanamaste",
+        "Nuke"
+      ]
+    },
+    {
+      "title": "Resistance Ibiza Closing Party",
+      "startsAt": "2026-09-16",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "ticketsUrl": "https://sales.ticketing.cm.com/Resistance-Amnesia-16thSeptember2026",
+      "rooms": [
+        {
+          "name": "Terraza",
+          "artists": [
+            "Adam Beyer",
+            "Eric Prydz",
+            "Mind Against",
+            "Brina Knauss"
+          ]
+        },
+        {
+          "name": "Main Room",
+          "artists": [
+            "I HATE MODELS",
+            "Nicole Moudaber",
+            "Estella Boersma",
+            "Juliet Fox",
+            "Stëh",
+            "NO_IP"
+          ]
+        }
+      ],
+      "artists": [
+        "Adam Beyer",
+        "Eric Prydz",
+        "Mind Against",
+        "Brina Knauss",
+        "I HATE MODELS",
+        "Nicole Moudaber",
+        "Estella Boersma",
+        "Juliet Fox",
+        "Stëh",
+        "NO_IP"
+      ]
+    },
+    {
+      "title": "You&Me",
+      "startsAt": "2026-09-17",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "ticketsUrl": "https://sales.ticketing.cm.com/YouandMe-Amnesia-17thSeptember2026",
+      "rooms": [
+        {
+          "name": "Terraza",
+          "artists": [
+            "JOSH BAKER",
+            "INTERPLANETARY CRIMINAL",
+            "SOSA",
+            "L.P RHYTHM",
+            "LILI"
+          ]
+        }
+      ],
+      "artists": [
+        "JOSH BAKER",
+        "INTERPLANETARY CRIMINAL",
+        "SOSA",
+        "L.P RHYTHM",
+        "LILI"
+      ]
+    },
+    {
+      "title": "Rememberland",
+      "startsAt": "2026-09-18",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "ticketsUrl": "https://sales.ticketing.cm.com/Rememberland-Amnesia-18thSept2026",
+      "rooms": [
+        {
+          "name": "Terraza",
+          "artists": [
+            "DREAMTEAM",
+            "LA MOVIDA",
+            "+ TBA"
+          ]
+        }
+      ],
+      "artists": [
+        "DREAMTEAM",
+        "LA MOVIDA",
+        "+ TBA"
+      ]
+    },
+    {
+      "title": "Glitterbox",
+      "startsAt": "2026-09-18",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "ticketsUrl": "https://sales.ticketing.cm.com/Glitterbox-Amnesia-18thSeptember2026",
+      "rooms": [
+        {
+          "name": "Terraza",
+          "artists": [
+            "ARMAND VAN HELDEN",
+            "FLOORPLAN",
+            "MOUSSE T.",
+            "RAVEN MANDELLA",
+            "SPILLER"
+          ]
+        },
+        {
+          "name": "Main Room",
+          "artists": [
+            "DAN SHAKE",
+            "NATASHA DIGGS",
+            "MELVO baptiste",
+            "RIVA STARR"
+          ]
+        }
+      ],
+      "artists": [
+        "ARMAND VAN HELDEN",
+        "FLOORPLAN",
+        "MOUSSE T.",
+        "RAVEN MANDELLA",
+        "SPILLER",
+        "DAN SHAKE",
+        "NATASHA DIGGS",
+        "MELVO baptiste",
+        "RIVA STARR"
+      ]
+    },
+    {
+      "title": "FAÇ51 - The Haçienda",
+      "startsAt": "2026-09-19",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "ticketsUrl": "https://sales.ticketing.cm.com/hacienda-amnesia-19thseptember2026",
+      "artists": [
+        "Haçienda Classical Orchestra",
+        "David Morales",
+        "Inner City",
+        "Todd Terry",
+        "Graeme Park",
+        "Mike Pickering",
+        "DJ Paulette",
+        "Special Guest: Alison Limerick"
+      ]
+    },
+    {
+      "title": "Pyramid",
+      "startsAt": "2026-09-20",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "ticketsUrl": "https://sales.ticketing.cm.com/Pyramid-Amnesia-20thSeptember2026",
+      "rooms": [
+        {
+          "name": "Terraza",
+          "artists": [
+            "MARSOLO",
+            "MARCO FARAONE",
+            "FLEUR SHORE",
+            "DEMI RIQUISIMO",
+            "BAGGI"
+          ]
+        },
+        {
+          "name": "Main Room",
+          "artists": [
+            "CHARLIE SPARKS",
+            "DEBORAH DE LUCA",
+            "ANDRÉS CAMPO",
+            "LUCA DONZELLI"
+          ]
+        }
+      ],
+      "artists": [
+        "MARSOLO",
+        "MARCO FARAONE",
+        "FLEUR SHORE",
+        "DEMI RIQUISIMO",
+        "BAGGI",
+        "CHARLIE SPARKS",
+        "DEBORAH DE LUCA",
+        "ANDRÉS CAMPO",
+        "LUCA DONZELLI"
+      ]
+    },
+    {
+      "title": "NRG",
+      "startsAt": "2026-09-21",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "ticketsUrl": "https://sales.ticketing.cm.com/NRG-Amnesia-21stSeptember2026",
+      "artists": [
+        "Ben Hemsley",
+        "Camrin Watsin",
+        "Denis Sulta",
+        "Dart",
+        "Faster Horses",
+        "Kyle Starkey",
+        "Emma B&nbsp;"
+      ]
+    },
+    {
+      "title": "Metamorfosi",
+      "startsAt": "2026-09-22",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "ticketsUrl": "https://sales.ticketing.cm.com/Metamorfosi-Amnesia-22ndSept2026",
+      "rooms": [
+        {
+          "name": "Terraza",
+          "artists": [
+            "Joseph Capriati",
+            "Traumer",
+            "Alisha",
+            "Obskür",
+            "Joe Vanditti"
+          ]
+        },
+        {
+          "name": "Club Room",
+          "artists": [
+            "Ben Klock",
+            "Phillippa Pacho",
+            "Alarico",
+            "Markantonio",
+            "Roberto Capuano"
+          ]
+        }
+      ],
+      "artists": [
+        "Joseph Capriati",
+        "Traumer",
+        "Alisha",
+        "Obskür",
+        "Joe Vanditti",
+        "Ben Klock",
+        "Phillippa Pacho",
+        "Alarico",
+        "Markantonio",
+        "Roberto Capuano"
+      ]
+    },
+    {
+      "title": "Kevin and Perry Amnesia Experience",
+      "startsAt": "2026-09-23",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "ticketsUrl": "https://sales.ticketing.cm.com/KevinPerry-Amnesia-23rdSeptember2026",
+      "rooms": [
+        {
+          "name": "Terraza",
+          "artists": [
+            "Billy Gillies",
+            "Ian Van Dahl",
+            "N-Trance",
+            "Rob Tissera",
+            "Dale Castell",
+            "Ultrabeat"
+          ]
+        },
+        {
+          "name": "Discotheque",
+          "artists": [
+            "Dave Pearce",
+            "Lange",
+            "Seb Fontaine",
+            "Signum",
+            "Vicky Devine",
+            "+ ITE DJ's"
+          ]
+        }
+      ],
+      "artists": [
+        "Billy Gillies",
+        "Ian Van Dahl",
+        "N-Trance",
+        "Rob Tissera",
+        "Dale Castell",
+        "Ultrabeat",
+        "Dave Pearce",
+        "Lange",
+        "Seb Fontaine",
+        "Signum",
+        "Vicky Devine",
+        "+ ITE DJ's"
+      ]
+    },
+    {
+      "title": "You&Me",
+      "startsAt": "2026-09-24",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "ticketsUrl": "https://sales.ticketing.cm.com/YouandMe-Amnesia-24thSeptember2026",
+      "rooms": [
+        {
+          "name": "Terraza",
+          "artists": [
+            "JOSH BAKER&nbsp;",
+            "LUKE DEAN&nbsp;",
+            "JULIAN FIJMA",
+            "ELVI&nbsp;"
+          ]
+        }
+      ],
+      "artists": [
+        "JOSH BAKER&nbsp;",
+        "LUKE DEAN&nbsp;",
+        "JULIAN FIJMA",
+        "ELVI&nbsp;"
+      ]
+    },
+    {
+      "title": "Rememberland",
+      "startsAt": "2026-09-25",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "ticketsUrl": "https://sales.ticketing.cm.com/Rememberland-Amnesia-25thSept2026",
+      "rooms": [
+        {
+          "name": "Terraza",
+          "artists": [
+            "DREAMTEAM",
+            "LA MOVIDA",
+            "+ TBA"
+          ]
+        }
+      ],
+      "artists": [
+        "DREAMTEAM",
+        "LA MOVIDA",
+        "+ TBA"
+      ]
+    },
+    {
+      "title": "Glitterbox",
+      "startsAt": "2026-09-25",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "ticketsUrl": "https://sales.ticketing.cm.com/Glitterbox-Amnesia-25thSeptember2026",
+      "rooms": [
+        {
+          "name": "Terraza",
+          "artists": [
+            "BASEMENT JAXX",
+            "DAN SHAKE",
+            "L3NI",
+            "MELVO BAPTISTE",
+            "MINNA"
+          ]
+        },
+        {
+          "name": "Main Room",
+          "artists": [
+            "BRIDGE",
+            "LUKE SOLOMON",
+            "MAKÈZ"
+          ]
+        }
+      ],
+      "artists": [
+        "BASEMENT JAXX",
+        "DAN SHAKE",
+        "L3NI",
+        "MELVO BAPTISTE",
+        "MINNA",
+        "BRIDGE",
+        "LUKE SOLOMON",
+        "MAKÈZ"
+      ]
+    },
+    {
+      "title": "Godskitchen",
+      "startsAt": "2026-09-26",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "ticketsUrl": "https://sales.ticketing.cm.com/godskitchen-amnesia-26thsept2026/",
+      "rooms": [
+        {
+          "name": "Terrace",
+          "artists": [
+            "Fergie (5h Vinyl Set)",
+            "Jordan Nocturne"
+          ]
+        },
+        {
+          "name": "Discotheque",
+          "artists": [
+            "Ferry Corsten&nbsp;",
+            "John O’Callaghan&nbsp;",
+            "Lisa Lashes&nbsp;",
+            "Paul Thomas",
+            "Paul van Dyk",
+            "Tall Paul",
+            "+ AJ Gibson&nbsp;"
+          ]
+        }
+      ],
+      "artists": [
+        "Fergie (5h Vinyl Set)",
+        "Jordan Nocturne",
+        "Ferry Corsten&nbsp;",
+        "John O’Callaghan&nbsp;",
+        "Lisa Lashes&nbsp;",
+        "Paul Thomas",
+        "Paul van Dyk",
+        "Tall Paul",
+        "+ AJ Gibson&nbsp;"
+      ]
+    },
+    {
+      "title": "Pyramid",
+      "startsAt": "2026-09-27",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "ticketsUrl": "https://sales.ticketing.cm.com/Pyramid-Amnesia-27thSeptember2026",
+      "rooms": [
+        {
+          "name": "Terraza",
+          "artists": [
+            "OBSKUR",
+            "OMAR+",
+            "SOSA&nbsp;",
+            "KEPLER",
+            "BURNSKI",
+            "CAAL",
+            "DE LA SWING"
+          ]
+        },
+        {
+          "name": "Main Room",
+          "artists": [
+            "JEFF MILLS",
+            "Nørbak",
+            "DJ PETE"
+          ]
+        }
+      ],
+      "artists": [
+        "OBSKUR",
+        "OMAR+",
+        "SOSA&nbsp;",
+        "KEPLER",
+        "BURNSKI",
+        "CAAL",
+        "DE LA SWING",
+        "JEFF MILLS",
+        "Nørbak",
+        "DJ PETE"
+      ]
+    },
+    {
+      "title": "NRG CLOSING PARTY",
+      "startsAt": "2026-09-28",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "ticketsUrl": "https://sales.ticketing.cm.com/NRG-Amnesia-28thSeptember2026",
+      "artists": [
+        "Ben Hemsley",
+        "Dart",
+        "Kyle Starkey",
+        "Paige Tomlinson",
+        "Somewhen&nbsp;&nbsp;",
+        "special guests"
+      ]
+    },
+    {
+      "title": "Metamorfosi Closing Party",
+      "startsAt": "2026-09-29",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "ticketsUrl": "https://sales.ticketing.cm.com/Metamorfosi-Amnesia-29thSept2026",
+      "rooms": [
+        {
+          "name": "Terraza",
+          "artists": [
+            "Joseph Capriati",
+            "Jamie Jones",
+            "Chris Stussy",
+            "Marco Faraone",
+            "Marco Tropeano",
+            "Francesco Squillante"
+          ]
+        },
+        {
+          "name": "Club Room",
+          "artists": [
+            "Yanamaste",
+            "Freddy K",
+            "Elisa Bee",
+            "Skizzo"
+          ]
+        }
+      ],
+      "artists": [
+        "Joseph Capriati",
+        "Jamie Jones",
+        "Chris Stussy",
+        "Marco Faraone",
+        "Marco Tropeano",
+        "Francesco Squillante",
+        "Yanamaste",
+        "Freddy K",
+        "Elisa Bee",
+        "Skizzo"
+      ]
+    },
+    {
+      "title": "Bar Sessions",
+      "startsAt": "2026-09-30",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "artists": []
+    },
+    {
+      "title": "You&Me Closing Party",
+      "startsAt": "2026-10-01",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "ticketsUrl": "https://sales.ticketing.cm.com/YouandMe-Amnesia-1stOctober2026",
+      "rooms": [
+        {
+          "name": "Terraza",
+          "artists": [
+            "Josh Baker",
+            "+ Special Guests"
+          ]
+        }
+      ],
+      "artists": [
+        "Josh Baker",
+        "+ Special Guests"
+      ]
+    },
+    {
+      "title": "Rememberland",
+      "startsAt": "2026-10-02",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "ticketsUrl": "https://sales.ticketing.cm.com/Rememberland-Amnesia-2ndOctober2026",
+      "rooms": [
+        {
+          "name": "Terraza",
+          "artists": [
+            "DREAMTEAM",
+            "LA MOVIDA",
+            "+ TBA"
+          ]
+        }
+      ],
+      "artists": [
+        "DREAMTEAM",
+        "LA MOVIDA",
+        "+ TBA"
+      ]
+    },
+    {
+      "title": "Glitterbox",
+      "startsAt": "2026-10-02",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "ticketsUrl": "https://sales.ticketing.cm.com/Glitterbox-Amnesia-2ndOctober2026",
+      "rooms": [
+        {
+          "name": "Terraza",
+          "artists": [
+            "DANNY TENAGLIA",
+            "DAVE LEE",
+            "DENIS SULTA (disco set)",
+            "EATS EVERYTHING",
+            "JAMIE LOVE"
+          ]
+        },
+        {
+          "name": "Main Room",
+          "artists": [
+            "Coco & Breezy",
+            "The Shapeshifters",
+            "Todd Terry"
+          ]
+        }
+      ],
+      "artists": [
+        "DANNY TENAGLIA",
+        "DAVE LEE",
+        "DENIS SULTA (disco set)",
+        "EATS EVERYTHING",
+        "JAMIE LOVE",
+        "Coco & Breezy",
+        "The Shapeshifters",
+        "Todd Terry"
+      ]
+    },
+    {
+      "title": "Bar Sessions",
+      "startsAt": "2026-10-03",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "artists": []
+    },
+    {
+      "title": "Pyramid Closing Party",
+      "startsAt": "2026-10-04",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "ticketsUrl": "https://sales.ticketing.cm.com/Pyramid-Amnesia-4thOctober2026",
+      "rooms": [
+        {
+          "name": "Terraza",
+          "artists": [
+            "RICARDO VILLALOBOS b3b RARESH b3b FRANCO CINELLI",
+            "SETH TROXLER&nbsp;",
+            "SHANTI CELESTE",
+            "MAR-T"
+          ]
+        },
+        {
+          "name": "Main Room",
+          "artists": [
+            "Adrián Mills",
+            "Nina Kraviz (extended set)",
+            "Cerrot",
+            "Luca Donzelli"
+          ]
+        }
+      ],
+      "artists": [
+        "RICARDO VILLALOBOS b3b RARESH b3b FRANCO CINELLI",
+        "SETH TROXLER&nbsp;",
+        "SHANTI CELESTE",
+        "MAR-T",
+        "Adrián Mills",
+        "Nina Kraviz (extended set)",
+        "Cerrot",
+        "Luca Donzelli"
+      ]
+    },
+    {
+      "title": "NEXUP",
+      "startsAt": "2026-10-05",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "ticketsUrl": "https://sales.ticketing.cm.com/Nexup-Amnesia-5thOctober2026",
+      "artists": [
+        "Max Dean&nbsp;",
+        "+&nbsp; MORE TBA&nbsp;"
+      ]
+    },
+    {
+      "title": "Bar Sessions",
+      "startsAt": "2026-10-06",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "artists": []
+    },
+    {
+      "title": "Bar Sessions",
+      "startsAt": "2026-10-07",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "artists": []
+    },
+    {
+      "title": "Teletech",
+      "startsAt": "2026-10-08",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "ticketsUrl": "https://sales.ticketing.cm.com/Teletech-Amnesia-8thOctober2026",
+      "rooms": [
+        {
+          "name": "Terraza",
+          "artists": [
+            "Bella Claxton",
+            "Benwal",
+            "Kyle Starkey",
+            "Paige Tomlinson",
+            "Morgan Seatree",
+            "Salute",
+            "Faster Horses",
+            "Sim0ne",
+            "b2b SPFDJ"
+          ]
+        },
+        {
+          "name": "Main Room",
+          "artists": [
+            "BLK.",
+            "Winson",
+            "Clara Cuvé",
+            "Emilija",
+            "Onlynumbers",
+            "Vieze Asbak"
+          ]
+        }
+      ],
+      "artists": [
+        "Bella Claxton",
+        "Benwal",
+        "Kyle Starkey",
+        "Paige Tomlinson",
+        "Morgan Seatree",
+        "Salute",
+        "Faster Horses",
+        "Sim0ne",
+        "b2b SPFDJ",
+        "BLK.",
+        "Winson",
+        "Clara Cuvé",
+        "Emilija",
+        "Onlynumbers",
+        "Vieze Asbak"
+      ]
+    },
+    {
+      "title": "Rememberland Closing Party",
+      "startsAt": "2026-10-09",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "ticketsUrl": "https://sales.ticketing.cm.com/Rememberland-Amnesia-9thOctober2026",
+      "rooms": [
+        {
+          "name": "Terraza",
+          "artists": [
+            "DREAMTEAM",
+            "LA MOVIDA",
+            "+ TBA"
+          ]
+        }
+      ],
+      "artists": [
+        "DREAMTEAM",
+        "LA MOVIDA",
+        "+ TBA"
+      ]
+    },
+    {
+      "title": "Glitterbox Closing Party",
+      "startsAt": "2026-10-09",
+      "sourceUrl": "https://www.amnesia.es/en/calendar/ibiza/2026/all",
+      "ticketsUrl": "https://sales.ticketing.cm.com/Glitterbox-Amnesia-9thOctober2026",
+      "rooms": [
+        {
+          "name": "Terraza",
+          "artists": [
+            "HONEYLUV (DISCO SET)",
+            "JORJA SMITH (LIVE PA)",
+            "MASTERS AT WORK",
+            "MELVO BAPTISTE"
+          ]
+        },
+        {
+          "name": "Main Room",
+          "artists": [
+            "DIMITRI FROM PARIS",
+            "NATASHA DIGGS",
+            "+TBA"
+          ]
+        }
+      ],
+      "artists": [
+        "HONEYLUV (DISCO SET)",
+        "JORJA SMITH (LIVE PA)",
+        "MASTERS AT WORK",
+        "MELVO BAPTISTE",
+        "DIMITRI FROM PARIS",
+        "NATASHA DIGGS",
+        "+TBA"
+      ]
+    }
+  ]
+}

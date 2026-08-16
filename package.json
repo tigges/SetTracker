@@ -43,7 +43,8 @@
     "preview:acr-queue": "tsx scripts/preview-acr-queue.ts",
     "backfill:set-events": "tsx scripts/backfill-set-events.ts",
     "report:roster-graduates": "tsx scripts/report-roster-graduates.ts",
-    "export:1001": "tsx scripts/export-1001-seed.ts"
+    "export:1001": "tsx scripts/export-1001-seed.ts",
+    "calendars:venues": "tsx scripts/refresh-venue-calendars.ts"
   },
   "dependencies": {
     "@prisma/client": "^6.19.3",

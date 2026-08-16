@@ -10,6 +10,7 @@ import {
 } from "@/lib/calendarGrid";
 import { editionLabel } from "@/lib/ingest/festivalDrops";
 import type { EditionCalendarRow } from "@/lib/ingest/festivalDrops";
+import type { VenueNightCalendarRow } from "@/lib/ingest/discovery/venueCalendars/board";
 
 const BUCKET_COPY: Record<string, string> = {
   current: "On now",
@@ -23,27 +24,91 @@ const BUCKET_TONE: Record<string, string> = {
   recent: "bg-teal/15 text-teal",
 };
 
+const CLUB_TONE: Record<string, string> = {
+  current: "bg-teal/20 text-teal",
+  upcoming: "bg-teal/15 text-teal",
+  recent: "bg-panel2 text-muted",
+};
+
 export type CalendarEdition = EditionCalendarRow & {
   name: string;
   imageUrl: string | null;
 };
 
-function shortName(e: CalendarEdition): string {
+export type CalendarNight = VenueNightCalendarRow & {
+  name: string;
+  imageUrl: string | null;
+};
+
+type CalendarItem = {
+  slug: string;
+  eventSlug: string;
+  name: string;
+  imageUrl: string | null;
+  year: number;
+  label?: string;
+  startsAt: string;
+  endsAt: string;
+  bucket: string;
+  kind: "festival" | "club";
+  nightTitle?: string;
+};
+
+function shortName(e: CalendarItem): string {
+  if (e.kind === "club") {
+    return e.name.replace(/\s+(ibiza|phuket|london)$/i, "");
+  }
   return e.name.replace(/\s+(music festival|festival|weekend)$/i, "");
+}
+
+function toItems(
+  editions: CalendarEdition[],
+  nights: CalendarNight[],
+): CalendarItem[] {
+  return [
+    ...editions.map((e) => ({
+      slug: e.slug,
+      eventSlug: e.eventSlug,
+      name: e.name,
+      imageUrl: e.imageUrl,
+      year: e.year,
+      label: e.label,
+      startsAt: e.startsAt,
+      endsAt: e.endsAt,
+      bucket: e.bucket,
+      kind: "festival" as const,
+    })),
+    ...nights.map((n) => ({
+      slug: n.slug,
+      eventSlug: n.eventSlug,
+      name: n.name,
+      imageUrl: n.imageUrl,
+      year: Number(n.startsAt.slice(0, 4)),
+      label: n.title,
+      startsAt: n.startsAt,
+      endsAt: n.endsAt,
+      bucket: n.bucket,
+      kind: "club" as const,
+      nightTitle: n.title,
+    })),
+  ];
 }
 
 export function FestivalCalendar({
   editions,
+  nights = [],
   nowMs,
 }: {
   editions: CalendarEdition[];
+  nights?: CalendarNight[];
   nowMs: number;
 }) {
-  const months = monthsForEditions(editions, nowMs);
-  if (editions.length === 0) {
+  const items = toItems(editions, nights);
+  const months = monthsForEditions(items, nowMs);
+  if (items.length === 0) {
     return (
       <p className="py-12 text-center text-[14px] text-muted2">
-        No curated festival weekends in this window.
+        No festival weekends or club nights in this window.
       </p>
     );
   }
@@ -52,7 +117,7 @@ export function FestivalCalendar({
     <div className="space-y-10">
       {months.map(({ year, month }) => {
         const cells = monthGrid(year, month, nowMs);
-        const monthEds = editionsInMonth(editions, year, month);
+        const monthEds = editionsInMonth(items, year, month);
         return (
           <section key={`${year}-${month}`}>
             <div className="mb-3 flex items-baseline justify-between gap-3">
@@ -104,11 +169,19 @@ export function FestivalCalendar({
                             <Link
                               href={`/events/${e.eventSlug}`}
                               className={`block truncate rounded px-1 py-0.5 text-[10px] font-medium leading-tight ${
-                                BUCKET_TONE[e.bucket] ?? "bg-panel2 text-muted"
+                                e.kind === "club"
+                                  ? (CLUB_TONE[e.bucket] ?? "bg-teal/15 text-teal")
+                                  : (BUCKET_TONE[e.bucket] ?? "bg-panel2 text-muted")
                               }`}
-                              title={editionLabel(e)}
+                              title={
+                                e.kind === "club"
+                                  ? `${e.name} · ${e.nightTitle}`
+                                  : editionLabel(e)
+                              }
                             >
-                              {shortName(e)}
+                              {e.kind === "club"
+                                ? `${shortName(e)}${e.nightTitle ? ` · ${e.nightTitle}` : ""}`
+                                : shortName(e)}
                             </Link>
                           </li>
                         ))}
@@ -137,22 +210,25 @@ export function FestivalCalendar({
                       <EntityThumb
                         src={e.imageUrl}
                         label={e.name}
-                        accent="var(--amber)"
+                        accent={e.kind === "club" ? "var(--teal)" : "var(--amber)"}
                         size={44}
                         radius={10}
                         monogram={e.name.slice(0, 2).toUpperCase()}
                       />
                       <span className="min-w-0 flex-1">
                         <span className="block truncate text-[14px] font-semibold text-ink">
-                          {e.name}
+                          {e.kind === "club" && e.nightTitle
+                            ? e.nightTitle
+                            : e.name}
                           <span className="font-normal text-muted">
-                            {" "}
-                            · {e.year}
-                            {e.label ? ` ${e.label}` : ""}
+                            {e.kind === "club"
+                              ? ` · ${e.name}`
+                              : ` · ${e.year}${e.label ? ` ${e.label}` : ""}`}
                           </span>
                         </span>
                         <span className="mono text-[12px] text-muted2">
-                          {e.startsAt} – {e.endsAt}
+                          {e.startsAt}
+                          {e.endsAt !== e.startsAt ? ` – ${e.endsAt}` : ""}
                           {" · "}
                           {BUCKET_COPY[e.bucket] ?? e.bucket}
                         </span>

@@ -59,6 +59,7 @@ async function main() {
   await prisma.idTrack.deleteMany();
   await prisma.track.deleteMany();
   await prisma.series.deleteMany();
+  await prisma.venueNight.deleteMany();
   await prisma.event.deleteMany();
   await prisma.dj.deleteMany();
   await prisma.label.deleteMany();

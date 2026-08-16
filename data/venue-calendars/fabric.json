@@ -1,0 +1,428 @@
+{
+  "venueSlug": "fabric",
+  "venueName": "fabric",
+  "sourceUrl": "https://fabriclondon.com/whats-on",
+  "fetchedAt": "2026-08-16T14:46:38.174Z",
+  "nights": [
+    {
+      "title": "CAYA by fabric: Step Inside - Wax Material, Jordan Masters, Jelsen, simmo, MUNNI",
+      "startsAt": "2026-08-16",
+      "sourceUrl": "https://fabriclondon.com/event/caya-by-fabric-step-inside---wax-material-jordan-masters-jelsen-simmo-munni",
+      "ticketsUrl": "https://ra.co/events/2497514",
+      "artists": [
+        "Wax Material",
+        "Jordan Masters",
+        "Jelsen",
+        "simmo",
+        "MUNNI"
+      ]
+    },
+    {
+      "title": "fabric: Sven Väth, Ms Mada, Ben Sterling, Dale Mussington, Delasflores, Regan Funk & Oma",
+      "startsAt": "2026-08-21",
+      "sourceUrl": "https://fabriclondon.com/event/fabric-sven-vath-ms-mada-ben-sterling-dale-mussington-delaflores-regan-funk-oma",
+      "ticketsUrl": "https://ra.co/events/2486360",
+      "artists": [
+        "Sven Väth",
+        "Ms Mada",
+        "Ben Sterling",
+        "Dale Mussington",
+        "Delasflores",
+        "Regan Funk",
+        "Oma"
+      ]
+    },
+    {
+      "title": "Broadwick Live presents: Flight Facilities, Kirollus, Jennifer Loveless, Fort Romeau + more",
+      "startsAt": "2026-08-22",
+      "sourceUrl": "https://fabriclondon.com/event/broadwick-live-presents-flight-facilities-kirollus-jennifer-loveless-fort-romeau-more",
+      "ticketsUrl": "https://ra.co/events/2454567",
+      "artists": [
+        "Flight Facilities",
+        "Jennifer Loveless",
+        "Fort Romeau",
+        "Ella Knight",
+        "Kirollus",
+        "Aroop Roy",
+        "A Hard Day's Dance",
+        "Donis",
+        "Millie",
+        "Pheebs"
+      ]
+    },
+    {
+      "title": "CAYA by fabric: Inermu - James Dexter (All Night Long)",
+      "startsAt": "2026-08-23",
+      "sourceUrl": "https://fabriclondon.com/event/caya-by-fabric-inermu---james-dexter-all-night-long",
+      "ticketsUrl": "https://ra.co/events/2497524",
+      "artists": [
+        "James Dexter (All Night Long)",
+        "Inermu - James Dexter (All Night Long)"
+      ]
+    },
+    {
+      "title": "FABRICLIVE: Piano People Afterparty - TXC, ZEE NXUMALO, MöRDA, DEB FA, JADA JADE",
+      "startsAt": "2026-08-28",
+      "sourceUrl": "https://fabriclondon.com/event/fabriclive-piano-people-afterparty",
+      "ticketsUrl": "https://ra.co/events/2454574",
+      "artists": []
+    },
+    {
+      "title": "Appetite Afterparty (Saturday) - Skream, Special Guests, Jaden Thompson, Kellie Allen, Lewis Carroll + more",
+      "startsAt": "2026-08-29",
+      "sourceUrl": "https://fabriclondon.com/event/appetite-afterparty-saturday",
+      "ticketsUrl": "https://ra.co/events/2454581",
+      "artists": [
+        "Skream - Special Guest - Lewis Carroll - James Lavelle"
+      ]
+    },
+    {
+      "title": "Appetite Afterparty (Sunday) - Locky B2B Elliot Schooling & Liam Palmer, Captain Wallop, Laura De Greef + more",
+      "startsAt": "2026-08-30",
+      "sourceUrl": "https://fabriclondon.com/event/appetite-afterparty-sunday",
+      "ticketsUrl": "https://ra.co/events/2454809",
+      "artists": [
+        "Locky",
+        "Liam Palmer - Captain Wallop",
+        "Appetite Afterparty (Sunday) - Locky"
+      ]
+    },
+    {
+      "title": "FABRICLIVE x UKF: Koven, Taiki Nulight, Zero, Arcando, BCee, Brookes Brothers + more",
+      "startsAt": "2026-09-04",
+      "sourceUrl": "https://fabriclondon.com/event/fabriclive-x-ukf-koven-taiki-nulight-zero-arcando-bcee-brookes-brothers-more",
+      "ticketsUrl": "https://ra.co/events/2467159",
+      "artists": [
+        "Koven",
+        "Arcando",
+        "Brookes Brothers",
+        "Georgie Riot",
+        "SAVANNAH",
+        "Yaano",
+        "Taiki Nulight",
+        "Anaïs",
+        "Jakes",
+        "Jojo Deevoy",
+        "Zero",
+        "BCee",
+        "Bluck",
+        "Ruthless"
+      ]
+    },
+    {
+      "title": "fabric: Danilo Plessow (MCDE), Kenny Larkin, Seb Odyssey",
+      "startsAt": "2026-09-05",
+      "sourceUrl": "https://fabriclondon.com/event/fabric-danilo-plessow-mcde-kenny-larkin-seb-odyssey",
+      "ticketsUrl": "https://ra.co/events/2471487",
+      "artists": [
+        "Danilo Plessow (MCDE)",
+        "Kenny Larkin",
+        "Seb Odyssey",
+        "Danilo Plessow (MCDE), Kenny Larkin, Seb Odyssey"
+      ]
+    },
+    {
+      "title": "CAYA by fabric: Rarebit x CUE - Lucas Alexander + more tba",
+      "startsAt": "2026-09-06",
+      "sourceUrl": "https://fabriclondon.com/event/caya-by-fabric-rarebit-x-cue---lucas-alexander-more-tba",
+      "ticketsUrl": "https://ra.co/events/2507073",
+      "artists": [
+        "Lucas Alexander",
+        "more TBA",
+        "Rarebit x CUE - Lucas Alexander + more tba"
+      ]
+    },
+    {
+      "title": "Heavy House Society: Sidney Charles + more TBA",
+      "startsAt": "2026-09-11",
+      "sourceUrl": "https://fabriclondon.com/event/heavy-house-society-sidney-charles-more-tba",
+      "ticketsUrl": "https://ra.co/events/2504065",
+      "artists": [
+        "Sidney Charles",
+        "more TBA",
+        "Sidney Charles + more TBA"
+      ]
+    },
+    {
+      "title": "fabric presents Mount Kimbie mix launch: Yu Su, Tijana T, Leo Gosh, DJ Python, Galcher Lustwerk, Mor Elian",
+      "startsAt": "2026-09-12",
+      "sourceUrl": "https://fabriclondon.com/event/fabric-presents-mount-kimbie-mix-launch-yu-su-tijana-t-leo-gosh-dj-python-galcher-lustwerk-mor-elian",
+      "ticketsUrl": "https://ra.co/events/2471520",
+      "artists": [
+        "Mount Kimbie",
+        "Yu Su‍",
+        "Tijana T‍",
+        "Leo Gosh",
+        "Galcher Lustwerk‍",
+        "DJ Python‍",
+        "Mor Elian"
+      ]
+    },
+    {
+      "title": "CAYA by fabric: bloop london Radio - 11 Year Anniversary",
+      "startsAt": "2026-09-13",
+      "sourceUrl": "https://fabriclondon.com/event/caya-by-fabric-bloop-london-radio---11-year-anniversary",
+      "ticketsUrl": "https://ra.co/events/2506305",
+      "artists": [
+        "Lake Turner",
+        "Hunter. S",
+        "I Like Wires",
+        "Alfie",
+        "Joey",
+        "OBS"
+      ]
+    },
+    {
+      "title": "fabric: Sam Paganini, Simone Zino, Marco Faraone, FIFI FORTE, Ryan Resso",
+      "startsAt": "2026-09-19",
+      "sourceUrl": "https://fabriclondon.com/event/fabric-sam-paganini-simone-zino-marco-faraone-fifi-forte-ryan-resso",
+      "ticketsUrl": "https://ra.co/events/2471532",
+      "artists": [
+        "Sam Paganini",
+        "Simone Zino",
+        "Marco Faraone",
+        "FIFI FORTE",
+        "Ryan Resso"
+      ]
+    },
+    {
+      "title": "fabric: Kölsch, Ankhoï, Laolu, Sef Kombo, Mayssa, Leeda, Teaser, Jimono B2B The Almanac",
+      "startsAt": "2026-09-25",
+      "sourceUrl": "https://fabriclondon.com/event/fabric-kolsch-ankhoi-laolu-sef-kombo-mayssa-leeda-teaser-jimono-b2b-the-almanac",
+      "ticketsUrl": "https://ra.co/events/2471513",
+      "artists": []
+    },
+    {
+      "title": "fabric: Crosstown Rebels - Damian Lazarus, Mano Le Tough, Jonathan Kaspar, OMRI + more",
+      "startsAt": "2026-09-26",
+      "sourceUrl": "https://fabriclondon.com/event/fabric-crosstown-rebels---damian-lazarus-mano-le-tough-jonathan-kaspar-omri-more",
+      "ticketsUrl": "https://ra.co/events/2471476",
+      "artists": [
+        "Damian Lazarus",
+        "Mano Le Tough",
+        "Jonathan Kaspar",
+        "OMRI",
+        "Meera",
+        "Culoe De Song"
+      ]
+    },
+    {
+      "title": "FABRICLIVE: Yung Singh, O'Flynn, KOLLIN + more tba",
+      "startsAt": "2026-10-02",
+      "sourceUrl": "https://fabriclondon.com/event/fabriclive-yung-singh-oflynn-kollin-more-tba",
+      "ticketsUrl": "https://ra.co/events/2476950",
+      "artists": [
+        "Yung Singh‍",
+        "KOLLIN‍",
+        "O'Flynn",
+        "more tba",
+        "Yung Singh, O'Flynn, KOLLIN + more tba"
+      ]
+    },
+    {
+      "title": "fabric: Max Cooper (All Night Long), DVS1, Dasha Rush, Jasmín, Pattn, Redfreya, Moritz",
+      "startsAt": "2026-10-03",
+      "sourceUrl": "https://fabriclondon.com/event/fabric-max-cooper-all-night-long-dvs1-dasha-rush-jasmin-pattn-redfreya-moritz",
+      "ticketsUrl": "https://ra.co/events/2476951",
+      "artists": [
+        "Max Cooper (All Night Long)",
+        "DVS1",
+        "Dasha Rush",
+        "Jasmín",
+        "Pattn",
+        "Redfreya",
+        "Moritz"
+      ]
+    },
+    {
+      "title": "fabric: Locklead, bullet tooth, A For Alpha, Papa Nugs, Burnski, Busted + more",
+      "startsAt": "2026-10-09",
+      "sourceUrl": "https://fabriclondon.com/event/fabric-locklead-bullet-tooth-a-for-alpha-papa-nugs-burnski-more-tba",
+      "ticketsUrl": "https://ra.co/events/2476955",
+      "artists": [
+        "Locklead",
+        "bullet tooth",
+        "A For Alpha",
+        "Papa Nugs",
+        "Burnski",
+        "Jude Lenihan",
+        "J:me",
+        "Mya",
+        "Finley Lenihan",
+        "Harvey Austin",
+        "Liam Hibbert"
+      ]
+    },
+    {
+      "title": "fabric: The Martinez Brothers (6 hour set), Sarahrey",
+      "startsAt": "2026-10-11",
+      "sourceUrl": "https://fabriclondon.com/event/fabric-t",
+      "ticketsUrl": "https://ra.co/events/2506210",
+      "artists": [
+        "The Martinez Brothers (6 Hour Set)",
+        "Sarahrey",
+        "The Martinez Brothers (6 hour set), Sarahrey"
+      ]
+    },
+    {
+      "title": "FABRICLIVE 27th BIRTHDAY",
+      "startsAt": "2026-10-16",
+      "sourceUrl": "https://fabriclondon.com/event/fabriclive-27th-birthday",
+      "ticketsUrl": "https://ra.co/events/2476956",
+      "artists": [
+        "FABRICLIVE 27th BIRTHDAY"
+      ]
+    },
+    {
+      "title": "fabric 27th Birthday",
+      "startsAt": "2026-10-17",
+      "sourceUrl": "https://fabriclondon.com/event/fabric-27th-birthday",
+      "ticketsUrl": "https://ra.co/events/2476959",
+      "artists": [
+        "more",
+        "fabric 27th Birthday"
+      ]
+    },
+    {
+      "title": "FABRICLIVE X Critical Sound",
+      "startsAt": "2026-10-23",
+      "sourceUrl": "https://fabriclondon.com/event/fabriclive-x-critical-sound",
+      "ticketsUrl": "https://ra.co/events/2476961",
+      "artists": [
+        "SIMULA - SKANTIA",
+        "FABRICLIVE X Critical Sound"
+      ]
+    },
+    {
+      "title": "Fool's Paradise: Mark Knight, Mousse T., Michael Gray, Junior Jack, David Penn, Groove P + more",
+      "startsAt": "2026-10-24",
+      "sourceUrl": "https://fabriclondon.com/event/fools-paradise-mark-knight-mousse-t-michael-gray-junior-jack-david-penn-groove-p-more",
+      "ticketsUrl": "https://ra.co/events/2469357",
+      "artists": []
+    },
+    {
+      "title": "FABRICLIVE: Special Guest, Chloé Robinson, JAEL, LAMSI, Priya, Shadobeni, State OFFF, TOCCORORO",
+      "startsAt": "2026-10-30",
+      "sourceUrl": "https://fabriclondon.com/event/fabriclive-special-guest-chloe-robinson-jael-lamsi-priya-shadobeni-state-offf-toccororo",
+      "ticketsUrl": "https://ra.co/events/2476964",
+      "artists": [
+        "Special Guest TBA‍",
+        "Chloé Robinson‍",
+        "JAEL‍",
+        "LAMSI‍",
+        "Priya‍",
+        "Shadobeni‍",
+        "State OFFF‍",
+        "TOCCORORO"
+      ]
+    },
+    {
+      "title": "FABRICLIVE: Arthi, Chloé Robinson, JAEL, LAMSI, DJ Priya, State OFFF, TOCCORORO",
+      "startsAt": "2026-10-30",
+      "sourceUrl": "https://fabriclondon.com/event/fabriclive-arthi-chloe-robinson-jael-lamsi-dj-priya-state-offf-toccororo",
+      "ticketsUrl": "https://ra.co/events/2476964",
+      "artists": [
+        "ìyáàlù"
+      ]
+    },
+    {
+      "title": "fabric: Rødhåd, Demi Riquisimo, DESIREE, Kamma & Masalo + more tba",
+      "startsAt": "2026-10-31",
+      "sourceUrl": "https://fabriclondon.com/event/fabric-rodhad-demi-riquisimo-desiree-kamma-masalo-more-tba",
+      "ticketsUrl": "https://ra.co/events/2476967",
+      "artists": [
+        "Rødhåd‍",
+        "Demi Riquisimo‍",
+        "DESIREE‍",
+        "Kamma",
+        "Masalo",
+        "more tba",
+        "Rødhåd, Demi Riquisimo, DESIREE, Kamma & Masalo + more tba"
+      ]
+    },
+    {
+      "title": "Loukeman",
+      "startsAt": "2026-11-05",
+      "sourceUrl": "https://fabriclondon.com/event/loukeman",
+      "ticketsUrl": "https://ra.co/events/2476969",
+      "artists": [
+        "Ellen Allien",
+        "Shonky",
+        "Marie Montexier",
+        "Josh Keit",
+        "Nate Oldfield",
+        "more Marcel Dettmann",
+        "Serenne",
+        "Loukeman"
+      ]
+    },
+    {
+      "title": "FABRICLIVE: Special Guest, Ghoulish, ESC + more tba",
+      "startsAt": "2026-11-13",
+      "sourceUrl": "https://fabriclondon.com/event/fabriclive-special-guest-ghoulish-esc-more-tba",
+      "ticketsUrl": "https://ra.co/events/2476972",
+      "artists": [
+        "Special Guest TBA",
+        "Ghoulish",
+        "ESC",
+        "Special Guest, Ghoulish, ESC + more tba"
+      ]
+    },
+    {
+      "title": "fabric: Special Guest, Ogazón, Mathew Jonson + more tba",
+      "startsAt": "2026-11-28",
+      "sourceUrl": "https://fabriclondon.com/event/fabric-special-guest-ogazon-mathew-jonson-more-tba",
+      "ticketsUrl": "https://ra.co/events/2476977",
+      "artists": [
+        "Special Guest TBA‍",
+        "Ogazón‍",
+        "Mathew Jonson",
+        "more tba",
+        "Special Guest, Ogazón, Mathew Jonson + more tba"
+      ]
+    },
+    {
+      "title": "fabric: Ben Klock, Ryan Elliott, Cassy + more tba",
+      "startsAt": "2026-12-05",
+      "sourceUrl": "https://fabriclondon.com/event/fabric-ben-klock-ryan-elliott-cassy-more-tba",
+      "ticketsUrl": "https://ra.co/events/2476980",
+      "artists": [
+        "Ben Klock‍",
+        "Ryan Elliott‍",
+        "Cassy",
+        "more tba",
+        "Ben Klock, Ryan Elliott, Cassy + more tba"
+      ]
+    },
+    {
+      "title": "Continuum: RPR Soundsystem + more tba (24+ Hours of uninterrupted music)",
+      "startsAt": "2026-12-12",
+      "sourceUrl": "https://fabriclondon.com/event/continuum-rpr-soundsystem-more-tba-24-hours-of-uninterrupted-music",
+      "ticketsUrl": "https://ra.co/events/2476985",
+      "artists": [
+        "RPR Soundsystem",
+        "more tba"
+      ]
+    },
+    {
+      "title": "FABRICLIVE x Hospital Records: Hospital30",
+      "startsAt": "2026-12-12",
+      "sourceUrl": "https://fabriclondon.com/event/fabriclive-x-hospital-records-hospital30",
+      "ticketsUrl": "https://ra.co/events/2506860",
+      "artists": [
+        "Hospital30"
+      ]
+    },
+    {
+      "title": "fabric: Joseph Capriati + more tba",
+      "startsAt": "2026-12-28",
+      "sourceUrl": "https://fabriclondon.com/event/fabric-joseph-capriati-more-tba",
+      "ticketsUrl": "https://ra.co/events/2476990",
+      "artists": [
+        "Joseph Capriati",
+        "more tba",
+        "Joseph Capriati + more tba"
+      ]
+    }
+  ]
+}

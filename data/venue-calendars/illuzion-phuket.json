@@ -1,0 +1,40 @@
+{
+  "venueSlug": "illuzion-phuket",
+  "venueName": "Illuzion Phuket",
+  "sourceUrl": "https://www.illuzionphuket.com/events/",
+  "fetchedAt": "2026-08-16T14:46:38.176Z",
+  "nights": [
+    {
+      "title": "AFTER PARTY",
+      "startsAt": "2026-08-15",
+      "endsAt": "2026-08-16",
+      "sourceUrl": "https://www.illuzionphuket.com/event/after-party/",
+      "ticketsUrl": "https://www.illuzionphuket.com/event/after-party/",
+      "artists": []
+    },
+    {
+      "title": "SAM COLLINS",
+      "startsAt": "2026-08-22",
+      "endsAt": "2026-08-23",
+      "sourceUrl": "https://www.illuzionphuket.com/event/sam-collins-22-aug-2026-shelter/",
+      "ticketsUrl": "https://www.illuzionphuket.com/event/sam-collins-22-aug-2026-shelter/",
+      "rooms": [
+        {
+          "name": "Illuzion",
+          "artists": [
+            "SAM COLLINS"
+          ]
+        },
+        {
+          "name": "Shelter",
+          "artists": [
+            "SAM COLLINS"
+          ]
+        }
+      ],
+      "artists": [
+        "SAM COLLINS"
+      ]
+    }
+  ]
+}

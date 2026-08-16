@@ -93,10 +93,10 @@ export async function getSearchIndex(): Promise<SearchIndexItem[]> {
     },
     {
       kind: "venue",
-      title: "Festival calendar",
-      subtitle: "Curated edition weekends",
+      title: "Calendar",
+      subtitle: "Festival weekends and official club nights",
       href: "/events/calendar",
-      keywords: "calendar festival editions weekends upcoming",
+      keywords: "calendar festival editions club nights weekends upcoming unvrs hi amnesia",
     },
     ...atlasSearchItems(),
   ];

@@ -1,0 +1,49 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Illuzion Phuket - ECPv6.17.0//NONSGML v1.0//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Illuzion Phuket
+X-ORIGINAL-URL:https://www.illuzionphuket.com
+X-WR-CALDESC:Events for Illuzion Phuket
+REFRESH-INTERVAL;VALUE=DURATION:PT1H
+X-Robots-Tag:noindex
+X-PUBLISHED-TTL:PT1H
+BEGIN:VTIMEZONE
+TZID:Asia/Bangkok
+BEGIN:STANDARD
+TZOFFSETFROM:+0700
+TZOFFSETTO:+0700
+TZNAME:+07
+DTSTART:20250101T000000
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+DTSTART;TZID=Asia/Bangkok:20260822T210000
+DTEND;TZID=Asia/Bangkok:20260823T040000
+DTSTAMP:20260803T023519Z
+CREATED:20260803T023345Z
+LAST-MODIFIED:20260803T023519Z
+UID:10000487-1787432400-1787457600@www.illuzionphuket.com
+SUMMARY:SAM COLLINS
+DESCRIPTION:SAT 22 AUG | @samcollinsmusic \nWith releases on Experts Only\, Confession and\nArmada\, plus support from Solomun\, John Summit\,\nMau P\, Gordo and The Martinez Brothers\, Sam Collins\nhas built a name far beyond Amsterdam. \nFrom clubs across Europe to festival stages worldwide\,\nhis tech house productions continue to find their way\ninto the sets of the scene’s biggest names. \nInfo & VIP: +66 (0) 64 454 4985 | info@illuzionphuket.com
+URL:https://www.illuzionphuket.com/event/sam-collins-22-august-2026/
+LOCATION:Illuzion\, Illuzion Phuket\, Patong\, Phuket\, 83150\, Thailand
+ATTACH;FMTTYPE=image/jpeg:https://www.illuzionphuket.com/wp-content/uploads/ninja-forms/6/2026_08_22_SAM_COLLINS_IG_FEED.jpg
+ORGANIZER;CN="Illuzion Phuket":MAILTO:info@illuzionphuket.com
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Asia/Bangkok:20260822T233000
+DTEND;TZID=Asia/Bangkok:20260823T040000
+DTSTAMP:20260805T020019Z
+CREATED:20260805T015946Z
+LAST-MODIFIED:20260805T020019Z
+UID:10000488-1787441400-1787457600@www.illuzionphuket.com
+SUMMARY:SAM COLLINS
+DESCRIPTION:SAT 22 AUG | @samcollinsmusic behind the decks \nAn international producer with releases on Experts Only\, Confession and Armada\, Sam Collins has built a global following through clubs and festivals worldwide. \nPlug into the underground. \nInfo & VIP: +66 (0) 64 454 4985 | info@illuzionphuket.com
+URL:https://www.illuzionphuket.com/event/sam-collins-22-aug-2026-shelter/
+LOCATION:Shelter\, Bangla Road\, Patong\, Phuket\, 83150\, Thailand
+ATTACH;FMTTYPE=image/jpeg:https://www.illuzionphuket.com/wp-content/uploads/ninja-forms/6/2026_08_22_SAM_COLLINS_IG_FEED-1.jpg
+ORGANIZER;CN="Illuzion Phuket":MAILTO:info@illuzionphuket.com
+END:VEVENT
+END:VCALENDAR

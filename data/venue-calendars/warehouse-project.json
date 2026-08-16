@@ -1,0 +1,382 @@
+{
+  "venueSlug": "warehouse-project",
+  "venueName": "The Warehouse Project",
+  "sourceUrl": "https://thewarehouseproject.com/calendar/",
+  "fetchedAt": "2026-08-16T14:46:38.152Z",
+  "nights": [
+    {
+      "title": "KI/KI",
+      "startsAt": "2026-09-18",
+      "sourceUrl": "https://thewarehouseproject.com/events/ki-ki/",
+      "ticketsUrl": "https://www.ticketmaster.co.uk/kiki-manchester-manchester-18-09-2026/event/35006494E6FC49D2",
+      "rooms": [
+        {
+          "name": "Depot Mayfield",
+          "artists": [
+            "KI/KI"
+          ]
+        }
+      ],
+      "artists": [
+        "KI/KI"
+      ]
+    },
+    {
+      "title": "RAMPA + &ME",
+      "startsAt": "2026-09-19",
+      "sourceUrl": "https://thewarehouseproject.com/events/rampa-me-keinemusik/",
+      "ticketsUrl": "https://www.ticketmaster.co.uk/event/350064DA49D97546",
+      "rooms": [
+        {
+          "name": "Depot Mayfield",
+          "artists": [
+            "RAMPA + &ME",
+            "RAMPA",
+            "&ME"
+          ]
+        }
+      ],
+      "artists": [
+        "RAMPA + &ME",
+        "RAMPA",
+        "&ME"
+      ]
+    },
+    {
+      "title": "SOLOMUN",
+      "startsAt": "2026-09-25",
+      "sourceUrl": "https://thewarehouseproject.com/events/solomun/",
+      "ticketsUrl": "https://www.ticketmaster.co.uk/event/350064B5B3A55827",
+      "rooms": [
+        {
+          "name": "Depot Mayfield",
+          "artists": [
+            "SOLOMUN"
+          ]
+        }
+      ],
+      "artists": [
+        "SOLOMUN"
+      ]
+    },
+    {
+      "title": "HOMOBLOC A QUEER PARTY FOR ALL.",
+      "startsAt": "2026-09-26",
+      "sourceUrl": "https://thewarehouseproject.com/events/homobloc/",
+      "ticketsUrl": "https://www.ticketmaster.co.uk/event/350064C193744D98",
+      "rooms": [
+        {
+          "name": "Depot Mayfield",
+          "artists": [
+            "HOMOBLOC A QUEER PARTY FOR ALL."
+          ]
+        }
+      ],
+      "artists": [
+        "HOMOBLOC A QUEER PARTY FOR ALL."
+      ]
+    },
+    {
+      "title": "YOU&ME – FRIDAY",
+      "startsAt": "2026-10-02",
+      "sourceUrl": "https://thewarehouseproject.com/events/youme-joshbaker-friday/",
+      "rooms": [
+        {
+          "name": "Depot Mayfield",
+          "artists": [
+            "YOU&ME",
+            "YOU&ME – FRIDAY"
+          ]
+        }
+      ],
+      "artists": [
+        "YOU&ME",
+        "YOU&ME – FRIDAY"
+      ]
+    },
+    {
+      "title": "YOU&ME – SATURDAY",
+      "startsAt": "2026-10-03",
+      "sourceUrl": "https://thewarehouseproject.com/events/you-and-me/",
+      "rooms": [
+        {
+          "name": "Depot Mayfield",
+          "artists": [
+            "YOU&ME",
+            "YOU&ME – SATURDAY"
+          ]
+        }
+      ],
+      "artists": [
+        "YOU&ME",
+        "YOU&ME – SATURDAY"
+      ]
+    },
+    {
+      "title": "WORRIED ABOUT HENRY",
+      "startsAt": "2026-10-09",
+      "sourceUrl": "https://thewarehouseproject.com/events/worriedabouthenry/",
+      "ticketsUrl": "https://www.ticketmaster.co.uk/event/350064DDD33F0B9D",
+      "rooms": [
+        {
+          "name": "Depot Mayfield",
+          "artists": [
+            "WORRIED ABOUT HENRY"
+          ]
+        }
+      ],
+      "artists": [
+        "WORRIED ABOUT HENRY"
+      ]
+    },
+    {
+      "title": "INTERPLANETARY CRIMINAL PRESENTS",
+      "startsAt": "2026-10-10",
+      "sourceUrl": "https://thewarehouseproject.com/events/interplanetary-criminal-presents/",
+      "rooms": [
+        {
+          "name": "Depot Mayfield",
+          "artists": [
+            "INTERPLANETARY CRIMINAL"
+          ]
+        }
+      ],
+      "artists": [
+        "INTERPLANETARY CRIMINAL"
+      ]
+    },
+    {
+      "title": "WHP + TELETECH PRESENT doof – HANNAH LAING",
+      "startsAt": "2026-10-16",
+      "sourceUrl": "https://thewarehouseproject.com/events/whp-teletech-presents-doof-hannah-laing/",
+      "ticketsUrl": "https://www.ticketmaster.co.uk/event/35006477CCBE81B1",
+      "rooms": [
+        {
+          "name": "Depot Mayfield",
+          "artists": [
+            "WHP + TELETECH PRESENT doof – HANNAH LAING",
+            "WHP",
+            "TELETECH PRESENT doof – HANNAH LAING"
+          ]
+        }
+      ],
+      "artists": [
+        "WHP + TELETECH PRESENT doof – HANNAH LAING",
+        "WHP",
+        "TELETECH PRESENT doof – HANNAH LAING"
+      ]
+    },
+    {
+      "title": "ERIC PRYDZ – CONCOURSE ONLY",
+      "startsAt": "2026-10-17",
+      "sourceUrl": "https://thewarehouseproject.com/events/eric-prydz/",
+      "ticketsUrl": "https://www.ticketmaster.co.uk/event/3500650303726DC1",
+      "rooms": [
+        {
+          "name": "Depot Mayfield",
+          "artists": [
+            "ERIC PRYDZ",
+            "ERIC PRYDZ – CONCOURSE ONLY"
+          ]
+        }
+      ],
+      "artists": [
+        "ERIC PRYDZ",
+        "ERIC PRYDZ – CONCOURSE ONLY"
+      ]
+    },
+    {
+      "title": "ALISHA – CONCOURSE ONLY",
+      "startsAt": "2026-10-23",
+      "sourceUrl": "https://thewarehouseproject.com/events/alisha-concourse-only/",
+      "ticketsUrl": "https://www.ticketmaster.co.uk/event/350064EACF98D046",
+      "rooms": [
+        {
+          "name": "Depot Mayfield",
+          "artists": [
+            "ALISHA",
+            "ALISHA – CONCOURSE ONLY"
+          ]
+        }
+      ],
+      "artists": [
+        "ALISHA",
+        "ALISHA – CONCOURSE ONLY"
+      ]
+    },
+    {
+      "title": "DUKE DUMONT",
+      "startsAt": "2026-10-24",
+      "sourceUrl": "https://thewarehouseproject.com/events/duke-dumont/",
+      "rooms": [
+        {
+          "name": "Depot Mayfield",
+          "artists": [
+            "DUKE DUMONT"
+          ]
+        }
+      ],
+      "artists": [
+        "DUKE DUMONT"
+      ]
+    },
+    {
+      "title": "OVERMONO",
+      "startsAt": "2026-10-30",
+      "sourceUrl": "https://thewarehouseproject.com/events/overmono/",
+      "ticketsUrl": "https://www.ticketmaster.co.uk/event/350064AC95E71EB9",
+      "rooms": [
+        {
+          "name": "Depot Mayfield",
+          "artists": [
+            "OVERMONO"
+          ]
+        }
+      ],
+      "artists": [
+        "OVERMONO"
+      ]
+    },
+    {
+      "title": "NEXUP MANCHESTER",
+      "startsAt": "2026-10-31",
+      "sourceUrl": "https://thewarehouseproject.com/events/nexup/",
+      "rooms": [
+        {
+          "name": "Depot Mayfield",
+          "artists": [
+            "NEXUP MANCHESTER"
+          ]
+        }
+      ],
+      "artists": [
+        "NEXUP MANCHESTER"
+      ]
+    },
+    {
+      "title": "THE STREETS – A GRAND DON'T COME FOR FREE",
+      "startsAt": "2026-11-05",
+      "sourceUrl": "https://thewarehouseproject.com/events/the-streets-26/",
+      "ticketsUrl": "https://www.ticketmaster.co.uk/event/350064BCF26DA6B9",
+      "rooms": [
+        {
+          "name": "Depot Mayfield",
+          "artists": [
+            "THE STREETS – A GRAND DON'T COME FOR FREE"
+          ]
+        }
+      ],
+      "artists": [
+        "THE STREETS – A GRAND DON'T COME FOR FREE"
+      ]
+    },
+    {
+      "title": "KETTAMA PRESENTS STEEL CITY DANCE DISCS",
+      "startsAt": "2026-11-06",
+      "sourceUrl": "https://thewarehouseproject.com/events/kettama-scdd/",
+      "rooms": [
+        {
+          "name": "Depot Mayfield",
+          "artists": []
+        }
+      ],
+      "artists": []
+    },
+    {
+      "title": "LA DISCOTHÈQUE",
+      "startsAt": "2026-11-07",
+      "sourceUrl": "https://thewarehouseproject.com/events/la-discotheque/",
+      "ticketsUrl": "https://www.ticketmaster.co.uk/event/350064F5E3BC79E6",
+      "rooms": [
+        {
+          "name": "Depot Mayfield",
+          "artists": [
+            "LA DISCOTHÈQUE"
+          ]
+        }
+      ],
+      "artists": [
+        "LA DISCOTHÈQUE"
+      ]
+    },
+    {
+      "title": "KLANGKUENSTLER",
+      "startsAt": "2026-11-14",
+      "sourceUrl": "https://thewarehouseproject.com/events/klangkuenstler/",
+      "ticketsUrl": "https://www.ticketmaster.co.uk/event/350064B5DA077EA2",
+      "rooms": [
+        {
+          "name": "Depot Mayfield",
+          "artists": [
+            "KLANGKUENSTLER"
+          ]
+        }
+      ],
+      "artists": [
+        "KLANGKUENSTLER"
+      ]
+    },
+    {
+      "title": "EASTENDERZ MANCHESTER",
+      "startsAt": "2026-11-20",
+      "sourceUrl": "https://thewarehouseproject.com/events/eastenderz/",
+      "ticketsUrl": "https://www.ticketmaster.co.uk/event/350064F6A7984FF2",
+      "rooms": [
+        {
+          "name": "Depot Mayfield",
+          "artists": [
+            "EASTENDERZ MANCHESTER"
+          ]
+        }
+      ],
+      "artists": [
+        "EASTENDERZ MANCHESTER"
+      ]
+    },
+    {
+      "title": "FAC51 THE HAÇIENDA",
+      "startsAt": "2026-12-05",
+      "sourceUrl": "https://thewarehouseproject.com/events/hacienda/",
+      "rooms": [
+        {
+          "name": "Depot Mayfield",
+          "artists": [
+            "FAC51 THE HAÇIENDA"
+          ]
+        }
+      ],
+      "artists": [
+        "FAC51 THE HAÇIENDA"
+      ]
+    },
+    {
+      "title": "TIËSTO",
+      "startsAt": "2026-12-11",
+      "sourceUrl": "https://thewarehouseproject.com/events/tiesto/",
+      "rooms": [
+        {
+          "name": "Depot Mayfield",
+          "artists": [
+            "TIËSTO"
+          ]
+        }
+      ],
+      "artists": [
+        "TIËSTO"
+      ]
+    },
+    {
+      "title": "NEW YEAR'S EVE AT THE WAREHOUSE PROJECT",
+      "startsAt": "2026-12-31",
+      "sourceUrl": "https://thewarehouseproject.com/events/nye/",
+      "ticketsUrl": "https://www.ticketmaster.co.uk/event/350064EEEAB1ECCE",
+      "rooms": [
+        {
+          "name": "Depot Mayfield",
+          "artists": []
+        }
+      ],
+      "artists": []
+    }
+  ]
+}

@@ -15,6 +15,11 @@ import { hintForName } from "./knownHandles";
 import { scanFestivalLineups } from "./lineup";
 import { scanPressSeeds } from "./press";
 import {
+  artistHitsFromCalendars,
+  persistVenueCalendarNights,
+  scanVenueCalendars,
+} from "./venueCalendars";
+import {
   linkCohort,
   linkVenueArtists,
   loadRelations,
@@ -230,6 +235,53 @@ export async function runDiscovery(
     } catch (err) {
       console.warn(
         "[discovery] lineup scan failed:",
+        err instanceof Error ? err.message : err,
+      );
+    }
+
+    try {
+      const calendars = await scanVenueCalendars();
+      const persisted = await persistVenueCalendarNights(prisma, calendars);
+      venuesEnsured += persisted.venues;
+      const calHits = artistHitsFromCalendars(calendars);
+      lineupHits += calHits.length;
+      const byClub = new Map<string, string[]>();
+      for (const hit of calHits) {
+        const ok = queueMention(
+          file,
+          beforeSlugs,
+          new Set(),
+          hit.name,
+          [
+            {
+              kind: "venue_calendar",
+              detail: hit.detail,
+              sourceSlug: hit.eventSlug,
+              weight: hit.weight,
+            },
+          ],
+          hit.weight,
+        );
+        if (ok) newlyQueued += 1;
+        const cleanName = sanitizeArtistName(hit.name);
+        if (!cleanName) continue;
+        const list = byClub.get(hit.eventSlug) ?? [];
+        list.push(cleanName);
+        byClub.set(hit.eventSlug, list);
+      }
+      for (const [venue, names] of byClub) {
+        linkVenueArtists(relations, venue, names);
+        linkCohort(
+          relations,
+          names.slice(0, 40),
+          `${venue} calendar`,
+          18,
+          venue,
+        );
+      }
+    } catch (err) {
+      console.warn(
+        "[discovery] venue calendars failed:",
         err instanceof Error ? err.message : err,
       );
     }

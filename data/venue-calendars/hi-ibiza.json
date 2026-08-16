@@ -1,0 +1,776 @@
+{
+  "venueSlug": "hi-ibiza",
+  "venueName": "Hï Ibiza",
+  "sourceUrl": "https://www.hiibiza.com/events-calendar",
+  "fetchedAt": "2026-08-16T14:46:38.123Z",
+  "nights": [
+    {
+      "title": "CamelPhat Present Summer of Love",
+      "startsAt": "2026-08-16",
+      "sourceUrl": "https://www.hiibiza.com/events/2026/camelphat/2026-08-16",
+      "ticketsUrl": "https://www.hiibiza.com/events/2026/camelphat/2026-08-16",
+      "artists": [
+        "CamelPhat",
+        "Maceo Plex",
+        "Julya Karma",
+        "Charlie Sparks",
+        "Indira Paganotto",
+        "Sam Paganini",
+        "R.Korner",
+        "Fiona Kraft",
+        "Camila Isasi",
+        "CamelPhat Present Summer of Love"
+      ]
+    },
+    {
+      "title": "Francis Mercier Presents Solèy",
+      "startsAt": "2026-08-17",
+      "sourceUrl": "https://www.hiibiza.com/events/2026/francis-mercier/2026-08-17",
+      "ticketsUrl": "https://www.hiibiza.com/events/2026/francis-mercier/2026-08-17",
+      "artists": [
+        "Francis Mercier",
+        "Lee Burridge",
+        "Adassiya",
+        "Non Grata",
+        "Nazir",
+        "Andrea Oliva",
+        "Shimza",
+        "Tripolism",
+        "Meera",
+        "Jaquet"
+      ]
+    },
+    {
+      "title": "East End Dubs presents Eastenderz",
+      "startsAt": "2026-08-18",
+      "sourceUrl": "https://www.hiibiza.com/events/2026/eastenderz/2026-08-18",
+      "ticketsUrl": "https://www.hiibiza.com/events/2026/eastenderz/2026-08-18",
+      "artists": [
+        "East End Dubs",
+        "SOSA",
+        "Silvie Loto",
+        "Janeret",
+        "Paco Osuna",
+        "Nicole Moudaber",
+        "Iglesias"
+      ]
+    },
+    {
+      "title": "MEDUZA & James Hype present Our House",
+      "startsAt": "2026-08-19",
+      "sourceUrl": "https://www.hiibiza.com/events/2026/our-house/2026-08-19",
+      "ticketsUrl": "https://www.hiibiza.com/events/2026/our-house/2026-08-19",
+      "artists": [
+        "MEDUZA³",
+        "James Hype",
+        "Maya Janes Coles",
+        "Anna Tur",
+        "Jonas Blue",
+        "Sasson",
+        "Sam Blacky",
+        "MEDUZA & James Hype present Our House"
+      ]
+    },
+    {
+      "title": "HUGEL Presents Make The Girls Dance",
+      "startsAt": "2026-08-20",
+      "sourceUrl": "https://www.hiibiza.com/events/2026/hugel/2026-08-20",
+      "ticketsUrl": "https://www.hiibiza.com/events/2026/hugel/2026-08-20",
+      "artists": [
+        "HUGEL",
+        "Diplo",
+        "Crusy",
+        "Manu BS",
+        "Miss Monique",
+        "GENESI",
+        "Carl Bee"
+      ]
+    },
+    {
+      "title": "Dom Dolla",
+      "startsAt": "2026-08-21",
+      "sourceUrl": "https://www.hiibiza.com/events/2026/dom-dolla/2026-08-21",
+      "ticketsUrl": "https://www.hiibiza.com/events/2026/dom-dolla/2026-08-21",
+      "artists": [
+        "Dom Dolla",
+        "Tiga",
+        "Heidi",
+        "Ewan McVicar",
+        "LAMMER",
+        "Cinthie"
+      ]
+    },
+    {
+      "title": "Black Coffee",
+      "startsAt": "2026-08-22",
+      "sourceUrl": "https://www.hiibiza.com/events/2026/black-coffee/2026-08-22",
+      "ticketsUrl": "https://www.hiibiza.com/events/2026/black-coffee/2026-08-22",
+      "artists": [
+        "Black Coffee",
+        "Kerri Chandler",
+        "Joeski",
+        "Skepta",
+        "Marsolo",
+        "Locky",
+        "Djammin"
+      ]
+    },
+    {
+      "title": "CamelPhat Present Summer of Love",
+      "startsAt": "2026-08-23",
+      "sourceUrl": "https://www.hiibiza.com/events/2026/camelphat/2026-08-23",
+      "ticketsUrl": "https://www.hiibiza.com/events/2026/camelphat/2026-08-23",
+      "artists": [
+        "CamelPhat",
+        "Maz",
+        "Scenarios",
+        "Indira Paganotto",
+        "Kobosil",
+        "Hyperloop",
+        "AD7USTMENT",
+        "Riva Starr",
+        "Nice7",
+        "Miki J",
+        "Knowhat",
+        "CamelPhat Present Summer of Love"
+      ]
+    },
+    {
+      "title": "Francis Mercier Presents Solèy",
+      "startsAt": "2026-08-24",
+      "sourceUrl": "https://www.hiibiza.com/events/2026/francis-mercier/2026-08-24",
+      "ticketsUrl": "https://www.hiibiza.com/events/2026/francis-mercier/2026-08-24",
+      "artists": [
+        "Francis Mercier",
+        "Alex Wann",
+        "Faul & Wad",
+        "Maesic",
+        "Divolly & Markward",
+        "Andrea Oliva",
+        "Marten Lou",
+        "Peace Control"
+      ]
+    },
+    {
+      "title": "East End Dubs presents Eastenderz",
+      "startsAt": "2026-08-25",
+      "sourceUrl": "https://www.hiibiza.com/events/2026/eastenderz/2026-08-25",
+      "ticketsUrl": "https://www.hiibiza.com/events/2026/eastenderz/2026-08-25",
+      "artists": [
+        "East End Dubs",
+        "Ilario Alicante",
+        "Mason Collective",
+        "Evie",
+        "Paco Osuna",
+        "RSquared",
+        "David Lowe"
+      ]
+    },
+    {
+      "title": "MEDUZA & James Hype present Our House",
+      "startsAt": "2026-08-26",
+      "sourceUrl": "https://www.hiibiza.com/events/2026/our-house/2026-08-26",
+      "ticketsUrl": "https://www.hiibiza.com/events/2026/our-house/2026-08-26",
+      "artists": [
+        "James Hype",
+        "MEDUZA³",
+        "Tini Gessler",
+        "8Kays",
+        "Jonas Blue",
+        "Prunk",
+        "Storm Mollison",
+        "MEDUZA & James Hype present Our House"
+      ]
+    },
+    {
+      "title": "HUGEL Presents Make The Girls Dance",
+      "startsAt": "2026-08-27",
+      "sourceUrl": "https://www.hiibiza.com/events/2026/hugel/2026-08-27",
+      "ticketsUrl": "https://www.hiibiza.com/events/2026/hugel/2026-08-27",
+      "artists": [
+        "HUGEL",
+        "Oscar G",
+        "Arkadyan",
+        "Provi",
+        "Gatano",
+        "Miss Monique",
+        "Kevin de Vries",
+        "TH;EN",
+        "JAST"
+      ]
+    },
+    {
+      "title": "Dom Dolla — Closing Party",
+      "startsAt": "2026-08-28",
+      "sourceUrl": "https://www.hiibiza.com/events/2026/dom-dolla/2026-08-28",
+      "ticketsUrl": "https://www.hiibiza.com/events/2026/dom-dolla/2026-08-28",
+      "artists": [
+        "Dom Dolla",
+        "Dj Hearstring",
+        "Luke Alessi",
+        "Sophie Mcalister",
+        "Tyson O'brien",
+        "Ewan McVicar",
+        "Sasha",
+        "Spray",
+        "Dom Dolla — Closing Party"
+      ]
+    },
+    {
+      "title": "Black Coffee",
+      "startsAt": "2026-08-29",
+      "sourceUrl": "https://www.hiibiza.com/events/2026/black-coffee/2026-08-29",
+      "ticketsUrl": "https://www.hiibiza.com/events/2026/black-coffee/2026-08-29",
+      "artists": [
+        "Black Coffee",
+        "DJ Tennis",
+        "Angelos",
+        "Vanco",
+        "Hank",
+        "The Menendez Brothers"
+      ]
+    },
+    {
+      "title": "CamelPhat Present Summer of Love",
+      "startsAt": "2026-08-30",
+      "sourceUrl": "https://www.hiibiza.com/events/2026/camelphat/2026-08-30",
+      "ticketsUrl": "https://www.hiibiza.com/events/2026/camelphat/2026-08-30",
+      "artists": [
+        "CamelPhat",
+        "Adam Ten",
+        "Nick Curly",
+        "Indira Paganotto",
+        "Elli Acula",
+        "KiNK (Live Set)",
+        "Marhu",
+        "Lauren Mia",
+        "Victoria Why Not",
+        "Summer Ghemati",
+        "CamelPhat Present Summer of Love"
+      ]
+    },
+    {
+      "title": "Francis Mercier Presents Solèy",
+      "startsAt": "2026-08-31",
+      "sourceUrl": "https://www.hiibiza.com/events/2026/francis-mercier/2026-08-31",
+      "ticketsUrl": "https://www.hiibiza.com/events/2026/francis-mercier/2026-08-31",
+      "artists": [
+        "Francis Mercier",
+        "THEMBA",
+        "&friends",
+        "Sistek",
+        "Raul Vidal",
+        "Andrea Oliva",
+        "Maxi Meraki",
+        "AWEN"
+      ]
+    },
+    {
+      "title": "East End Dubs presents Eastenderz",
+      "startsAt": "2026-09-01",
+      "sourceUrl": "https://www.hiibiza.com/events/2026/eastenderz/2026-09-01",
+      "ticketsUrl": "https://www.hiibiza.com/events/2026/eastenderz/2026-09-01",
+      "artists": [
+        "East End Dubs",
+        "Miguelle & Tons",
+        "Job De Jong",
+        "Delilah",
+        "Paco Osuna",
+        "Joëlla Jackson",
+        "Easttown"
+      ]
+    },
+    {
+      "title": "MEDUZA & James Hype present Our House",
+      "startsAt": "2026-09-02",
+      "sourceUrl": "https://www.hiibiza.com/events/2026/our-house/2026-09-02",
+      "ticketsUrl": "https://www.hiibiza.com/events/2026/our-house/2026-09-02",
+      "artists": [
+        "James Hype",
+        "MEDUZA³",
+        "Sam Blacky",
+        "Jonas Blue",
+        "Sem Jacobs",
+        "Paisley Jensen",
+        "MEDUZA & James Hype present Our House"
+      ]
+    },
+    {
+      "title": "HUGEL Presents Make The Girls Dance",
+      "startsAt": "2026-09-03",
+      "sourceUrl": "https://www.hiibiza.com/events/2026/hugel/2026-09-03",
+      "ticketsUrl": "https://www.hiibiza.com/events/2026/hugel/2026-09-03",
+      "artists": [
+        "HUGEL",
+        "Chus",
+        "Deron",
+        "KILL THEM",
+        "Miss Monique"
+      ]
+    },
+    {
+      "title": "CamelPhat Present Summer of Love",
+      "startsAt": "2026-09-04",
+      "sourceUrl": "https://www.hiibiza.com/events/2026/camelphat/2026-09-04",
+      "ticketsUrl": "https://www.hiibiza.com/events/2026/camelphat/2026-09-04",
+      "artists": [
+        "CamelPhat",
+        "Âme DJ",
+        "Trikk",
+        "Meera",
+        "Ewan McVicar",
+        "Young Marco",
+        "Ella Knight",
+        "CamelPhat Present Summer of Love"
+      ]
+    },
+    {
+      "title": "Black Coffee",
+      "startsAt": "2026-09-05",
+      "sourceUrl": "https://www.hiibiza.com/events/2026/black-coffee/2026-09-05",
+      "ticketsUrl": "https://www.hiibiza.com/events/2026/black-coffee/2026-09-05",
+      "artists": [
+        "Black Coffee",
+        "Maz",
+        "DJ Kent",
+        "Skepta",
+        "Cameron Jack",
+        "Maximum",
+        "Continental GT"
+      ]
+    },
+    {
+      "title": "Francis Mercier Presents Solèy",
+      "startsAt": "2026-09-07",
+      "sourceUrl": "https://www.hiibiza.com/events/2026/francis-mercier/2026-09-07",
+      "ticketsUrl": "https://www.hiibiza.com/events/2026/francis-mercier/2026-09-07",
+      "artists": [
+        "Francis Mercier",
+        "Fideles",
+        "Honeyluv",
+        "Nico De Andrea",
+        "Alex Twin",
+        "Mednas",
+        "Andrea Oliva",
+        "Bensy",
+        "Read The News"
+      ]
+    },
+    {
+      "title": "East End Dubs presents Eastenderz",
+      "startsAt": "2026-09-08",
+      "sourceUrl": "https://www.hiibiza.com/events/2026/eastenderz/2026-09-08",
+      "ticketsUrl": "https://www.hiibiza.com/events/2026/eastenderz/2026-09-08",
+      "artists": [
+        "East End Dubs",
+        "Luuk Van Dijk",
+        "Toman",
+        "Jazzy",
+        "Ryan Nicholls",
+        "Paco Osuna",
+        "Melanie Ribbe",
+        "Merissa Mahilaa"
+      ]
+    },
+    {
+      "title": "MEDUZA & James Hype present Our House",
+      "startsAt": "2026-09-09",
+      "sourceUrl": "https://www.hiibiza.com/events/2026/our-house/2026-09-09",
+      "ticketsUrl": "https://www.hiibiza.com/events/2026/our-house/2026-09-09",
+      "artists": [
+        "MEDUZA³",
+        "James Hype",
+        "Magdalena",
+        "Kasia",
+        "Jonas Blue",
+        "Marten Lou",
+        "Mark Di Meo",
+        "MEDUZA & James Hype present Our House"
+      ]
+    },
+    {
+      "title": "HUGEL Presents Make The Girls Dance",
+      "startsAt": "2026-09-10",
+      "sourceUrl": "https://www.hiibiza.com/events/2026/hugel/2026-09-10",
+      "ticketsUrl": "https://www.hiibiza.com/events/2026/hugel/2026-09-10",
+      "artists": [
+        "HUGEL",
+        "Rivo",
+        "HVMZA",
+        "Sama",
+        "Miss Monique",
+        "Fred Lenix",
+        "HI-LO"
+      ]
+    },
+    {
+      "title": "CamelPhat Present Summer of Love",
+      "startsAt": "2026-09-11",
+      "sourceUrl": "https://www.hiibiza.com/events/2026/camelphat/2026-09-11",
+      "ticketsUrl": "https://www.hiibiza.com/events/2026/camelphat/2026-09-11",
+      "artists": [
+        "CamelPhat",
+        "Butch",
+        "Volkoder",
+        "Ewan McVicar",
+        "Roman Flügel",
+        "Maslow Unkown",
+        "CamelPhat Present Summer of Love"
+      ]
+    },
+    {
+      "title": "Black Coffee",
+      "startsAt": "2026-09-12",
+      "sourceUrl": "https://www.hiibiza.com/events/2026/black-coffee/2026-09-12",
+      "ticketsUrl": "https://www.hiibiza.com/events/2026/black-coffee/2026-09-12",
+      "artists": [
+        "Black Coffee",
+        "Mahmut Orhan",
+        "Kasango",
+        "Skepta",
+        "SG Lewis",
+        "Arielle Free",
+        "Meeshy"
+      ]
+    },
+    {
+      "title": "Francis Mercier Presents Solèy",
+      "startsAt": "2026-09-14",
+      "sourceUrl": "https://www.hiibiza.com/events/2026/francis-mercier/2026-09-14",
+      "ticketsUrl": "https://www.hiibiza.com/events/2026/francis-mercier/2026-09-14",
+      "artists": [
+        "Francis Mercier",
+        "Kölsch",
+        "Patrick Mason",
+        "Kilimanjaro",
+        "Bantu",
+        "Dr. Chaii",
+        "Andrea Oliva",
+        "Honeyluv",
+        "Cincity",
+        "Daughter In Law"
+      ]
+    },
+    {
+      "title": "East End Dubs presents Eastenderz",
+      "startsAt": "2026-09-15",
+      "sourceUrl": "https://www.hiibiza.com/events/2026/eastenderz/2026-09-15",
+      "ticketsUrl": "https://www.hiibiza.com/events/2026/eastenderz/2026-09-15",
+      "artists": [
+        "East End Dubs",
+        "Marco Carola",
+        "Gaskin",
+        "Lola Palmer",
+        "Paco Osuna",
+        "Luuk Van Dijk",
+        "Chinonegro"
+      ]
+    },
+    {
+      "title": "MEDUZA & James Hype present Our House",
+      "startsAt": "2026-09-16",
+      "sourceUrl": "https://www.hiibiza.com/events/2026/our-house/2026-09-16",
+      "ticketsUrl": "https://www.hiibiza.com/events/2026/our-house/2026-09-16",
+      "artists": [
+        "MEDUZA³",
+        "James Hype",
+        "Dreya V",
+        "Tita Lau",
+        "Jonas Blue",
+        "Butch",
+        "Ruze",
+        "MEDUZA & James Hype present Our House"
+      ]
+    },
+    {
+      "title": "HUGEL Presents Make The Girls Dance",
+      "startsAt": "2026-09-17",
+      "sourceUrl": "https://www.hiibiza.com/events/2026/hugel/2026-09-17",
+      "ticketsUrl": "https://www.hiibiza.com/events/2026/hugel/2026-09-17",
+      "artists": [
+        "HUGEL",
+        "AMÉMÉ",
+        "David Tort",
+        "Nautik",
+        "Miss Monique",
+        "Benny Benassi",
+        "Volkoder"
+      ]
+    },
+    {
+      "title": "CamelPhat Present Summer of Love",
+      "startsAt": "2026-09-18",
+      "sourceUrl": "https://www.hiibiza.com/events/2026/camelphat/2026-09-18",
+      "ticketsUrl": "https://www.hiibiza.com/events/2026/camelphat/2026-09-18",
+      "artists": [
+        "CamelPhat",
+        "Jimi Jules",
+        "Samm",
+        "Ajna",
+        "Ewan McVicar",
+        "Skream",
+        "MPH",
+        "CamelPhat Present Summer of Love"
+      ]
+    },
+    {
+      "title": "Black Coffee",
+      "startsAt": "2026-09-19",
+      "sourceUrl": "https://www.hiibiza.com/events/2026/black-coffee/2026-09-19",
+      "ticketsUrl": "https://www.hiibiza.com/events/2026/black-coffee/2026-09-19",
+      "artists": [
+        "Black Coffee",
+        "Anotr",
+        "Laolu",
+        "East End Dubs",
+        "Locklead",
+        "Delilah",
+        "Djammin",
+        "Ossie"
+      ]
+    },
+    {
+      "title": "Francis Mercier Presents Solèy",
+      "startsAt": "2026-09-21",
+      "sourceUrl": "https://www.hiibiza.com/events/2026/francis-mercier/2026-09-21",
+      "ticketsUrl": "https://www.hiibiza.com/events/2026/francis-mercier/2026-09-21",
+      "artists": [
+        "Francis Mercier",
+        "Nitefreak",
+        "Novak",
+        "Skyla Tylaa",
+        "Nick Castle",
+        "Manu",
+        "Andrea Oliva",
+        "Michael Mayer",
+        "Raxon",
+        "Cameron Jack"
+      ]
+    },
+    {
+      "title": "East End Dubs presents Eastenderz",
+      "startsAt": "2026-09-22",
+      "sourceUrl": "https://www.hiibiza.com/events/2026/eastenderz/2026-09-22",
+      "ticketsUrl": "https://www.hiibiza.com/events/2026/eastenderz/2026-09-22",
+      "artists": [
+        "East End Dubs",
+        "Luciano",
+        "Laidlaw",
+        "Bullet Tooth",
+        "Reeshy",
+        "Paco Osuna",
+        "Iglesias",
+        "Fer BR"
+      ]
+    },
+    {
+      "title": "MEDUZA & James Hype present Our House",
+      "startsAt": "2026-09-23",
+      "sourceUrl": "https://www.hiibiza.com/events/2026/our-house/2026-09-23",
+      "ticketsUrl": "https://www.hiibiza.com/events/2026/our-house/2026-09-23",
+      "artists": [
+        "MEDUZA³",
+        "James Hype",
+        "The Blessed Madonna",
+        "Jonas Blue",
+        "Kid Bamboo",
+        "Gudfella",
+        "MEDUZA & James Hype present Our House"
+      ]
+    },
+    {
+      "title": "HUGEL Presents Make The Girls Dance — Closing Party",
+      "startsAt": "2026-09-24",
+      "sourceUrl": "https://www.hiibiza.com/events/2026/hugel/2026-09-24",
+      "ticketsUrl": "https://www.hiibiza.com/events/2026/hugel/2026-09-24",
+      "artists": [
+        "HUGEL",
+        "Moojo",
+        "Juany Bravo",
+        "Grossomoddo",
+        "Miss Monique",
+        "Adam Beyer",
+        "Son Of Son"
+      ]
+    },
+    {
+      "title": "CamelPhat Present Summer of Love",
+      "startsAt": "2026-09-25",
+      "sourceUrl": "https://www.hiibiza.com/events/2026/camelphat/2026-09-25",
+      "ticketsUrl": "https://www.hiibiza.com/events/2026/camelphat/2026-09-25",
+      "artists": [
+        "CamelPhat",
+        "Guy Gerber",
+        "Lilya Mandre",
+        "Ewan McVicar",
+        "Erol Akan",
+        "Giulia Tess",
+        "CamelPhat Present Summer of Love"
+      ]
+    },
+    {
+      "title": "Black Coffee",
+      "startsAt": "2026-09-26",
+      "sourceUrl": "https://www.hiibiza.com/events/2026/black-coffee/2026-09-26",
+      "ticketsUrl": "https://www.hiibiza.com/events/2026/black-coffee/2026-09-26",
+      "artists": [
+        "Black Coffee",
+        "Marco Carola",
+        "AMÉMÉ",
+        "DJ EZ (House & Garage Set)",
+        "Circle feat Supa D",
+        "Kismet",
+        "Feva & Tippa",
+        "Olive F",
+        "Ossie"
+      ]
+    },
+    {
+      "title": "Francis Mercier Presents Solèy",
+      "startsAt": "2026-09-28",
+      "sourceUrl": "https://www.hiibiza.com/events/2026/francis-mercier/2026-09-28",
+      "ticketsUrl": "https://www.hiibiza.com/events/2026/francis-mercier/2026-09-28",
+      "artists": [
+        "Francis Mercier",
+        "Mahmut Orhan",
+        "Ashibah",
+        "ThatGirl SherryK",
+        "Jade",
+        "Rolbac",
+        "Andrea Oliva",
+        "Major League Djz",
+        "Bontan",
+        "Stofella"
+      ]
+    },
+    {
+      "title": "East End Dubs presents Eastenderz",
+      "startsAt": "2026-09-29",
+      "sourceUrl": "https://www.hiibiza.com/events/2026/eastenderz/2026-09-29",
+      "ticketsUrl": "https://www.hiibiza.com/events/2026/eastenderz/2026-09-29",
+      "artists": [
+        "East End Dubs",
+        "Hot Since 82",
+        "Oden & Fatzo",
+        "Gallya",
+        "Paco Osuna",
+        "Nick Curly",
+        "Ariel Rodz"
+      ]
+    },
+    {
+      "title": "MEDUZA & James Hype present Our House",
+      "startsAt": "2026-09-30",
+      "sourceUrl": "https://www.hiibiza.com/events/2026/our-house/2026-09-30",
+      "ticketsUrl": "https://www.hiibiza.com/events/2026/our-house/2026-09-30",
+      "artists": [
+        "James Hype",
+        "MEDUZA³",
+        "Korolova",
+        "Brina Knauss",
+        "Jonas Blue",
+        "Malive",
+        "Calussa",
+        "MEDUZA & James Hype present Our House"
+      ]
+    },
+    {
+      "title": "CamelPhat Present Summer of Love — Closing Party",
+      "startsAt": "2026-10-02",
+      "sourceUrl": "https://www.hiibiza.com/events/2026/camelphat/2026-10-02",
+      "ticketsUrl": "https://www.hiibiza.com/events/2026/camelphat/2026-10-02",
+      "artists": [
+        "CamelPhat",
+        "Âme",
+        "Trikk",
+        "Josh Gigante",
+        "Ewan McVicar",
+        "Jayda G",
+        "Edd",
+        "CamelPhat Present Summer of Love — Closing Party"
+      ]
+    },
+    {
+      "title": "Black Coffee — Closing Party",
+      "startsAt": "2026-10-03",
+      "sourceUrl": "https://www.hiibiza.com/events/2026/black-coffee/2026-10-03",
+      "ticketsUrl": "https://www.hiibiza.com/events/2026/black-coffee/2026-10-03",
+      "artists": [
+        "Black Coffee",
+        "Dorian Craft",
+        "Djeff",
+        "Skepta",
+        "Djammin",
+        "Ossie",
+        "Meeshy",
+        "Maximum",
+        "The Menendez Brothers",
+        "Shae Reid",
+        "Black Coffee — Closing Party"
+      ]
+    },
+    {
+      "title": "Francis Mercier Presents Solèy — Closing Party",
+      "startsAt": "2026-10-05",
+      "sourceUrl": "https://www.hiibiza.com/events/2026/francis-mercier/2026-10-05",
+      "ticketsUrl": "https://www.hiibiza.com/events/2026/francis-mercier/2026-10-05",
+      "artists": [
+        "Francis Mercier",
+        "Shimza",
+        "Satori",
+        "Apache",
+        "Vanjee",
+        "Gudfella",
+        "Andrea Oliva",
+        "Bensy",
+        "Serve Cold"
+      ]
+    },
+    {
+      "title": "East End Dubs presents Eastenderz — Closing Party",
+      "startsAt": "2026-10-06",
+      "sourceUrl": "https://www.hiibiza.com/events/2026/eastenderz/2026-10-06",
+      "ticketsUrl": "https://www.hiibiza.com/events/2026/eastenderz/2026-10-06",
+      "artists": [
+        "East End Dubs",
+        "Ewan McVicar",
+        "Traumer",
+        "Priku",
+        "Tee Dee",
+        "A For Alpha",
+        "Paco Osuna",
+        "Andre Butano"
+      ]
+    },
+    {
+      "title": "Closing Party 2026",
+      "startsAt": "2026-10-09",
+      "sourceUrl": "https://www.hiibiza.com/events/2026/hi-ibiza-closing-party/2026-10-09",
+      "ticketsUrl": "https://www.hiibiza.com/events/2026/hi-ibiza-closing-party/2026-10-09",
+      "artists": [
+        "Adam Ten",
+        "Mita Gami",
+        "Black Coffee",
+        "Delilah",
+        "Maz",
+        "Antdot",
+        "Paco Osuna",
+        "The Martinez Brothers",
+        "Skepta",
+        "Gaskin",
+        "Laidlaw",
+        "Djammin",
+        "Ossie",
+        "Meeshy",
+        "The Menendez Brothers",
+        "LF System",
+        "Melon Bomb",
+        "Edd",
+        "Candidate",
+        "Minna",
+        "Saigon",
+        "Closing Party 2026"
+      ]
+    }
+  ]
+}

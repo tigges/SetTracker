@@ -1,0 +1,220 @@
+{
+  "venueSlug": "bootshaus",
+  "venueName": "Bootshaus",
+  "sourceUrl": "https://bootshaus.tv/events",
+  "fetchedAt": "2026-08-16T14:46:38.178Z",
+  "nights": [
+    {
+      "title": "122 pres. KAZ JAMES @ Palma de Mallorca (ES)",
+      "startsAt": "2026-08-17",
+      "sourceUrl": "https://bootshaus.tv/events/122-pres-kaz-james-at-palma-de-mallorca-es",
+      "artists": [
+        "KAZ JAMES"
+      ]
+    },
+    {
+      "title": "LOONYLAND pres. LUCA DANTE SPADAFORA & 2 ENGEL & CHARLIE",
+      "startsAt": "2026-08-21",
+      "sourceUrl": "https://bootshaus.tv/events/loonyland-pres-luca-dante-spadafora-2-engel-charlie",
+      "artists": [
+        "LUCA DANTE SPADAFORA & 2 ENGEL & CHARLIE"
+      ]
+    },
+    {
+      "title": "SA * 22.08.2026 | KitKatClub",
+      "startsAt": "2026-08-22",
+      "sourceUrl": "https://bootshaus.tv/events/sa-22-08-2026-kitkatclub",
+      "artists": [
+        "SA * 22.08.2026 | KitKatClub",
+        "KITKATCLUB"
+      ]
+    },
+    {
+      "title": "122 pres. NOTRE DAME @ Palma de Mallorca (ES)",
+      "startsAt": "2026-08-24",
+      "sourceUrl": "https://bootshaus.tv/events/24-8-26-122-pres-notre-dame-at-palma-de-mallorca-es",
+      "artists": [
+        "NOTRE DAME"
+      ]
+    },
+    {
+      "title": "Nibirii Festival 2026",
+      "startsAt": "2026-08-28",
+      "sourceUrl": "https://bootshaus.tv/events/nibirii-festival-2026",
+      "artists": []
+    },
+    {
+      "title": "122 pres. TRIPOLISM @ Palma de Mallorca (ES)",
+      "startsAt": "2026-08-31",
+      "sourceUrl": "https://bootshaus.tv/events/31-8-26-122-pres-tripolism-at-palma-de-mallorca-es",
+      "artists": [
+        "TRIPOLISM"
+      ]
+    },
+    {
+      "title": "R3HAB pres. by BOOTSHAUS",
+      "startsAt": "2026-09-04",
+      "sourceUrl": "https://bootshaus.tv/events/r3hab-pres-by-bootshaus",
+      "artists": [
+        "R3HAB"
+      ]
+    },
+    {
+      "title": "Bootshaus Sommerfest auf 4 Floors!",
+      "startsAt": "2026-09-05",
+      "sourceUrl": "https://bootshaus.tv/events/5-9-26-bootshaus-sommerfest-auf-4-floors",
+      "artists": [
+        "Bootshaus Sommerfest auf 4 Floors!"
+      ]
+    },
+    {
+      "title": "122 pres. MARTEN LOU @ Palma de Mallorca (ES)",
+      "startsAt": "2026-09-07",
+      "sourceUrl": "https://bootshaus.tv/events/122-pres-marten-lou-at-palma-de-mallorca-es",
+      "artists": [
+        "MARTEN LOU"
+      ]
+    },
+    {
+      "title": "Blacklist & Inurfase pres. ZAAGSTEP by Dr Donk",
+      "startsAt": "2026-09-11",
+      "sourceUrl": "https://bootshaus.tv/events/blacklist-inurfase-pres-zaagstep-by-dr-donk",
+      "artists": [
+        "ZAAGSTEP by Dr Donk",
+        "INURFASE"
+      ]
+    },
+    {
+      "title": "Bootshaus on a Ship Vol. IV",
+      "startsAt": "2026-09-13",
+      "sourceUrl": "https://bootshaus.tv/events/bootshaus-on-a-ship-vol-iv",
+      "artists": [
+        "Bootshaus on a Ship Vol. IV"
+      ]
+    },
+    {
+      "title": "Polyamor Bootshaus w/ DAVYBOI, PRADA2000, MIKA HEGGEMANN & many more",
+      "startsAt": "2026-09-18",
+      "sourceUrl": "https://bootshaus.tv/events/polyamor-bootshaus-w-davyboi-prada2000-mika-heggemann-many-more",
+      "artists": []
+    },
+    {
+      "title": "BC173 Airport Session pres. by Bootshaus",
+      "startsAt": "2026-09-19",
+      "sourceUrl": "https://bootshaus.tv/events/19-9-26-bc173-airport-session-pres-by-bootshaus",
+      "artists": []
+    },
+    {
+      "title": "Bootshaus Sommerfest Closing",
+      "startsAt": "2026-09-19",
+      "sourceUrl": "https://bootshaus.tv/events/bootshaus-sommerfest-closing-26",
+      "artists": [
+        "Bootshaus Sommerfest Closing"
+      ]
+    },
+    {
+      "title": "VERTILE pres. EVERYTHING CHANGES -LIVE- @ BOOTSHAUS!",
+      "startsAt": "2026-09-20",
+      "sourceUrl": "https://bootshaus.tv/events/vertile-pres-everything-changes-live-at-bootshaus",
+      "artists": [
+        "EVERYTHING CHANGES -LIVE-"
+      ]
+    },
+    {
+      "title": "Unreal Weekender Night I - September 2026",
+      "startsAt": "2026-09-25",
+      "sourceUrl": "https://bootshaus.tv/events/unreal-weekender-night-i-september-2026",
+      "artists": [
+        "Unreal Weekender Night I - September 2026"
+      ]
+    },
+    {
+      "title": "Unreal Weekender Night II - September 2026",
+      "startsAt": "2026-09-26",
+      "sourceUrl": "https://bootshaus.tv/events/unreal-weekender-night-ii-september-2026",
+      "artists": [
+        "Unreal Weekender Night II - September 2026"
+      ]
+    },
+    {
+      "title": "NIBIRII pres. ELY OAKS!",
+      "startsAt": "2026-10-02",
+      "sourceUrl": "https://bootshaus.tv/events/nibirii-pres-ely-oaks",
+      "artists": [
+        "ELY OAKS!"
+      ]
+    },
+    {
+      "title": "Blacklist Festival 2026",
+      "startsAt": "2026-10-09",
+      "sourceUrl": "https://bootshaus.tv/events/10-2026-blacklist-festival-2026",
+      "artists": []
+    },
+    {
+      "title": "CHROME COLOGNE",
+      "startsAt": "2026-10-09",
+      "sourceUrl": "https://bootshaus.tv/events/9-10-26-chrome-cologne",
+      "artists": [
+        "CHROME COLOGNE"
+      ]
+    },
+    {
+      "title": "CHRIS STUSSY pres. by BOOTSHAUS",
+      "startsAt": "2026-10-16",
+      "sourceUrl": "https://bootshaus.tv/events/16-10-26-chris-stussy-pres-by-bootshaus",
+      "artists": [
+        "CHRIS STUSSY"
+      ]
+    },
+    {
+      "title": "AFFENKÄFIG RULES // BOOTSHAUS KÖLN",
+      "startsAt": "2026-10-23",
+      "sourceUrl": "https://bootshaus.tv/events/affenkaefig-rules-bootshaus-koeln",
+      "artists": [
+        "AFFENKÄFIG"
+      ]
+    },
+    {
+      "title": "SA * 24.10.2026 | KitKatClub",
+      "startsAt": "2026-10-24",
+      "sourceUrl": "https://bootshaus.tv/events/sa-24-10-2026-kitkatclub",
+      "artists": [
+        "SA * 24.10.2026 | KitKatClub",
+        "KITKATCLUB"
+      ]
+    },
+    {
+      "title": "Bootshaus & Loonyland pres. Halloween 2026",
+      "startsAt": "2026-10-31",
+      "sourceUrl": "https://bootshaus.tv/events/bootshaus-loonyland-pres-halloween-2026",
+      "artists": [
+        "Halloween 2026"
+      ]
+    },
+    {
+      "title": "UNREAL x KUKO All Night Long World Tour (Cologne)",
+      "startsAt": "2026-12-19",
+      "sourceUrl": "https://bootshaus.tv/events/19-12-26unreal-x-kuko-all-night-long-world-tour-cologne",
+      "artists": [
+        "UNREAL x KUKO All Night Long World Tour (Cologne)"
+      ]
+    },
+    {
+      "title": "MI * 30.12.2026 | KitKatClub",
+      "startsAt": "2026-12-30",
+      "sourceUrl": "https://bootshaus.tv/events/mi-30-12-2026-kitkatclub",
+      "artists": [
+        "MI * 30.12.2026 | KitKatClub",
+        "KITKATCLUB"
+      ]
+    },
+    {
+      "title": "Bootshaus & Loonyland pres. NYE 2026",
+      "startsAt": "2026-12-31",
+      "sourceUrl": "https://bootshaus.tv/events/bootshaus-loonyland-pres-nye-2026",
+      "artists": [
+        "NYE 2026"
+      ]
+    }
+  ]
+}
