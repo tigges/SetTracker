@@ -17,7 +17,7 @@ export default async function Home() {
       <div className="mb-6">
         <h1 className="text-3xl font-extrabold tracking-tight">DJ Sets</h1>
         <p className="mt-2 max-w-2xl text-[14px] text-muted">
-          Festival Relives, radio shows, and mixes — a set is a set.
+          Best Sets from recent festival and club performances
         </p>
       </div>
 
