@@ -1,5 +1,6 @@
 import type { PrismaClient } from "@prisma/client";
 import { sanitizeArtistName } from "../artistName";
+import { isNonCatalogSet } from "../setBrowse";
 import {
   isBrandHostArtist,
   isBrandHostSlug,
@@ -28,6 +29,7 @@ import { slugify, type RawArtist, type RawPlay, type RawSet, type SourceAdapter 
 import { canonicalDjSlug } from "./djSlugAliases";
 import { curatedEventSocialPatch } from "./eventSocials";
 import { eventSocialPayload, KNOWN_EVENTS, resolveEvent } from "./events";
+import { classifyJunkDj, inferJunkHostEvent } from "./junkDj";
 import { previousSlugsFor } from "./sourceRemaps";
 import {
   festivalDropBoostActive,
@@ -692,6 +694,15 @@ export async function runIngest(
         }
         return null;
       })());
+    if (isNonCatalogSet({ title: raw.title, durationSec: raw.durationSec })) {
+      if (existing) {
+        await prisma.played.deleteMany({ where: { setId: existing.id } });
+        await prisma.setArtist.deleteMany({ where: { setId: existing.id } });
+        await prisma.set.delete({ where: { id: existing.id } });
+      }
+      stats.skippedSets += 1;
+      return;
+    }
 
     const playSignal = raw.plays.filter(
       (p) => p.idStatus === "identified" || p.idStatus === "community_resolved",
@@ -712,17 +723,38 @@ export async function runIngest(
       if (id) collaboratorIds.push(id);
     }
 
-    const eventId = await upsertEvent(
+    let eventId = await upsertEvent(
       raw.eventName,
       raw.eventKind,
       raw.eventLocation,
     );
+    if (!eventId && raw.primaryArtist) {
+      const hostKind = classifyJunkDj(
+        raw.primaryArtist.name,
+        raw.primaryArtist.slug ?? "",
+      );
+      if (hostKind === "radio" || hostKind === "stage") {
+        const inferred = inferJunkHostEvent(raw.primaryArtist.name, [
+          raw.title,
+          raw.eventName ?? "",
+        ]);
+        if (inferred) {
+          eventId = await upsertEvent(
+            inferred.name,
+            inferred.kind,
+            inferred.location,
+          );
+        }
+      }
+    }
     const eventSlug = raw.eventName
       ? resolveEvent(raw.eventName, {
           kind: raw.eventKind,
           location: raw.eventLocation,
         }).slug
-      : null;
+      : eventId && raw.primaryArtist
+        ? inferJunkHostEvent(raw.primaryArtist.name, [raw.title])?.slug ?? null
+        : null;
     const { editionId, performedAt } = await upsertEditionForSet(
       eventId,
       eventSlug,

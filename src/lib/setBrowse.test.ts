@@ -1,6 +1,11 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { isBrowseReadySet, isEmptyOrPreviewSet, setDisplayThumb } from "./setBrowse";
+import {
+  isBrowseReadySet,
+  isEmptyOrPreviewSet,
+  isNonCatalogSet,
+  setDisplayThumb,
+} from "./setBrowse";
 
 describe("setBrowse", () => {
   it("prefers set cover over DJ portrait", () => {
@@ -72,6 +77,20 @@ describe("setBrowse", () => {
         title: "ASOT Mix 2 [Preview]",
         trackCount: 0,
       }),
+      false,
+    );
+  });
+
+  it("rejects Shorts and produce-a-track tutorials", () => {
+    assert.equal(isNonCatalogSet({ title: "One World Radio Shorts" }), true);
+    assert.equal(
+      isNonCatalogSet({
+        title: "Pegassi Makes A Trance Track From Scratch",
+      }),
+      true,
+    );
+    assert.equal(
+      isNonCatalogSet({ title: "Dom Dolla | Creamfields 2025" }),
       false,
     );
   });

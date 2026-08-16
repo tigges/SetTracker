@@ -75,6 +75,9 @@ export default function RootLayout({
               <Link href="/atlas" className="underline decoration-dotted underline-offset-2 hover:text-ink">
                 Atlas
               </Link>
+              <Link href="/events/calendar" className="underline decoration-dotted underline-offset-2 hover:text-ink">
+                Calendar
+              </Link>
               <Link href="/stats" className="underline decoration-dotted underline-offset-2 hover:text-ink">
                 Stats
               </Link>

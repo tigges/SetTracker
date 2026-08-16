@@ -227,7 +227,7 @@ export default async function DjPage({
           </Panel>
         </div>
 
-        {/* right column: series, source health, collaborators */}
+        {/* right column: series, collaborators */}
         <div className="space-y-5">
           {dj.series.length > 0 && (
             <Panel title="Series" meta={`${dj.series.length}`}>

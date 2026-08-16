@@ -91,6 +91,13 @@ export async function getSearchIndex(): Promise<SearchIndexItem[]> {
       href: "/atlas",
       keywords: "map dj mag top 100 clubs festivals djs atlas",
     },
+    {
+      kind: "venue",
+      title: "Festival calendar",
+      subtitle: "Curated edition weekends",
+      href: "/events/calendar",
+      keywords: "calendar festival editions weekends upcoming",
+    },
     ...atlasSearchItems(),
   ];
 
