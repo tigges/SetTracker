@@ -4700,6 +4700,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "sc-jamie-jones-hot-robot-radio-239": TL_JAMIE_JONES_HOT_ROBOT_RADIO_239,
   "sc-vintageculturemusic-vintage-culture-b2b-arodes-at-burning-man-2024":
     TL_VINTAGE_CULTURE_ARODES_BURNING_MAN_2024,
+  "yt-SeKRNa26kug": TL_VINTAGE_CULTURE_ARODES_BURNING_MAN_2024,
   "yt-soEFl73peVA": TL_JOEL_CORRY_EDGE_NYC_2026,
   "sc-joelcorry-edgenyc": TL_JOEL_CORRY_EDGE_NYC_2026,
   "yt-Rgx-wT9FDaE": TL_NICKY_ROMERO_PROTOCOL_RADIO_731,

@@ -1595,6 +1595,7 @@ assert.equal(
   ),
   true,
 );
+assert.equal(isWiredTracklistSlug("yt-SeKRNa26kug"), true);
 assert.equal(isWiredTracklistSlug("yt-soEFl73peVA"), true);
 assert.equal(isWiredTracklistSlug("sc-joelcorry-edgenyc"), true);
 assert.equal(isWiredTracklistSlug("yt-Rgx-wT9FDaE"), true);
@@ -1661,6 +1662,10 @@ assert.equal(
   TRACKLIST_1001_BY_SOURCE_SLUG[
     "sc-vintageculturemusic-vintage-culture-b2b-arodes-at-burning-man-2024"
   ],
+  TL_VINTAGE_CULTURE_ARODES_BURNING_MAN_2024,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-SeKRNa26kug"],
   TL_VINTAGE_CULTURE_ARODES_BURNING_MAN_2024,
 );
 const vcArodes = tracklist1001RowsToPlays(

@@ -232,6 +232,17 @@ assert.equal(
 assert.equal(
   skipCaptureNeed(
     row({
+      slug: "yt-SeKRNa26kug",
+      title: "Vintage Culture b2b Arodes at Burning Man 2024, Black Rock City",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
       slug: "yt-soEFl73peVA",
       title: "Joel Corry Epic Rooftop Set From Edge NYC",
     }),

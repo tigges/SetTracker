@@ -31,6 +31,7 @@ const NICKY_TML_ARTIST = YOUTUBE_SETS.find((s) =>
   s.video.includes("B05MAbsCOLA"),
 );
 const ABGT_690 = YOUTUBE_SETS.find((s) => s.video.includes("phWKhIwgiTo"));
+const VC_ARODES_YT = YOUTUBE_SETS.find((s) => s.video.includes("SeKRNa26kug"));
 
 describe("watchMetaFromCuratedSeed", () => {
   it("builds ASOT 1290 meta from the curated 1001 capture", () => {
@@ -239,6 +240,17 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=phWKhIwgiTo");
     // Last cue 1:54:40 + 180s pad.
     assert.equal(meta.durationSec, 1 * 3600 + 54 * 60 + 40 + 180);
+  });
+
+  it("builds Vintage Culture Arodes Burning Man YT meta from the curated 1001 capture", () => {
+    assert.ok(VC_ARODES_YT);
+    const meta = watchMetaFromCuratedSeed(VC_ARODES_YT);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "SeKRNa26kug");
+    assert.match(meta.title, /Burning Man 2024/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=SeKRNa26kug");
+    // Last cue 1:46:10 + 180s pad.
+    assert.equal(meta.durationSec, 1 * 3600 + 46 * 60 + 10 + 180);
   });
 
   it("returns null without a title or video id", () => {
@@ -564,5 +576,19 @@ describe("curated YouTube 429 fallback", () => {
     assert.equal(sets[0]?.primaryArtist?.slug, "above-beyond");
     assert.equal(sets[0]?.seriesName, "Group Therapy");
     assert.ok(sets[0]?.collaborators?.some((c) => c.slug === "estiva"));
+  });
+
+  it("lands Vintage Culture Arodes Burning Man YT from the 1001 seed when watch is 429", async () => {
+    assert.ok(VC_ARODES_YT);
+    const adapter = createYoutubeAdapter([VC_ARODES_YT], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-SeKRNa26kug");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 22);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 1 * 3600 + 46 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "vintage-culture");
+    assert.match(String(sets[0]?.eventName ?? ""), /Burning Man/i);
   });
 });

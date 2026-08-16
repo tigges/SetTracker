@@ -71,6 +71,7 @@ import {
   TL_NICKY_ROMERO_PROTOCOL_RADIO_731,
   TL_TIESTO_PRISMATIC_032_2026,
   TL_REINIER_ZONNEVELD_AWAKENINGS_2025,
+  TL_VINTAGE_CULTURE_ARODES_BURNING_MAN_2024,
   TL_VINTAGE_CULTURE_EDC_LV_NEON_2025,
   TL_VINTAGE_CULTURE_NYC_YACHT_2023,
   TL_VINTAGE_CULTURE_PACHA_IBIZA_2026,
@@ -1333,6 +1334,21 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     title: "Vintage Culture @ Pacha New York City, Affairs (2026)",
     seriesName: "Affairs",
     eventName: "Pacha New York",
+  },
+  {
+    // Artist-channel Relive of the Burning Man Playground set (same 1001 as SC).
+    video: "https://www.youtube.com/watch?v=SeKRNa26kug",
+    primaryArtist: dj("Vintage Culture", {
+      accent: "#e85d04",
+      homeCity: "Brazil",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    title: "Vintage Culture b2b Arodes at Burning Man 2024, Black Rock City",
+    eventName: "Burning Man Playground",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/20s910xk/vintage-culture-arodes-playground-burning-man-united-states-2024-08-31.html",
+    tracklist1001: TL_VINTAGE_CULTURE_ARODES_BURNING_MAN_2024,
   },
   {
     video: "https://www.youtube.com/watch?v=OVex0rm7ZR4",

@@ -342,8 +342,11 @@ export const TL_JAMIE_JONES_HOT_ROBOT_RADIO_239: FingerprintSeedRow[] = [
  * Vintage Culture & Arodes @ Playground, Burning Man, United States 2024-08-31
  * https://www.1001tracklists.com/tracklist/20s910xk/vintage-culture-arodes-playground-burning-man-united-states-2024-08-31.html
  * Official SC: https://soundcloud.com/vintageculturemusic/vintage-culture-b2b-arodes-at-burning-man-2024
+ * Official YT: https://youtu.be/SeKRNa26kug
  * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["sc-vintageculturemusic-vintage-culture-b2b-arodes-at-burning-man-2024"]
+ *       TRACKLIST_1001_BY_SOURCE_SLUG["yt-SeKRNa26kug"]
  * Captured 2026-08-16 — provenance 1001tl. Official script: 22 tracks.
+ * Capture overlay used an invalid identifier (hyphens/spaces); constant renamed.
  */
 export const TL_VINTAGE_CULTURE_ARODES_BURNING_MAN_2024: FingerprintSeedRow[] = [
   { at: "0:00", artist: "Monblaire", title: "The Church" },
