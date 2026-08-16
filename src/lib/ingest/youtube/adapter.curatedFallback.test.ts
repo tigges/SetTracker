@@ -16,6 +16,8 @@ const MARLON_COACHELLA = YOUTUBE_SETS.find((s) =>
 );
 const GDJB = YOUTUBE_SETS.find((s) => s.video.includes("WWnLYZrh6kw"));
 const ALOK_TML = YOUTUBE_SETS.find((s) => s.video.includes("zHAUZ02aCwo"));
+const VC_NEON = YOUTUBE_SETS.find((s) => s.video.includes("knJyJPP45dg"));
+const VC_BOA = YOUTUBE_SETS.find((s) => s.video.includes("kmMYCg-igjc"));
 
 describe("watchMetaFromCuratedSeed", () => {
   it("builds ASOT 1290 meta from the curated 1001 capture", () => {
@@ -81,6 +83,28 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=zHAUZ02aCwo");
     // Last cue 59:30 + 180s pad.
     assert.equal(meta.durationSec, 59 * 60 + 30 + 180);
+  });
+
+  it("builds Vintage Culture Neon Garden meta from the curated 1001 capture", () => {
+    assert.ok(VC_NEON);
+    const meta = watchMetaFromCuratedSeed(VC_NEON);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "knJyJPP45dg");
+    assert.match(meta.title, /Neon Garden/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=knJyJPP45dg");
+    // Last cue 1:08:35 + 180s pad.
+    assert.equal(meta.durationSec, 1 * 3600 + 8 * 60 + 35 + 180);
+  });
+
+  it("builds Vintage Culture Só Track Boa meta from the curated 1001 capture", () => {
+    assert.ok(VC_BOA);
+    const meta = watchMetaFromCuratedSeed(VC_BOA);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "kmMYCg-igjc");
+    assert.match(meta.title, /S[oó] Track Boa/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=kmMYCg-igjc");
+    // Last cue 1:17:44 + 180s pad.
+    assert.equal(meta.durationSec, 1 * 3600 + 17 * 60 + 44 + 180);
   });
 
   it("returns null without a title or video id", () => {
@@ -223,5 +247,33 @@ describe("curated YouTube 429 fallback", () => {
     assert.ok(sets[0]!.durationSec >= 59 * 60);
     assert.equal(sets[0]?.primaryArtist?.slug, "alok");
     assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
+  });
+
+  it("lands Vintage Culture Neon Garden from the 1001 seed when watch is 429", async () => {
+    assert.ok(VC_NEON);
+    const adapter = createYoutubeAdapter([VC_NEON], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-knJyJPP45dg");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 16);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 1 * 3600 + 8 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "vintage-culture");
+    assert.match(String(sets[0]?.eventName ?? ""), /EDC Las Vegas/i);
+  });
+
+  it("lands Vintage Culture Só Track Boa from the 1001 seed when watch is 429", async () => {
+    assert.ok(VC_BOA);
+    const adapter = createYoutubeAdapter([VC_BOA], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-kmMYCg-igjc");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 14);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 1 * 3600 + 17 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "vintage-culture");
+    assert.match(String(sets[0]?.eventName ?? ""), /S[oó] Track Boa/i);
   });
 });

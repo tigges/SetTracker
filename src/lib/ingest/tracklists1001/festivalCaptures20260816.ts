@@ -58,3 +58,54 @@ export const TL_ALOK_TML_WE2_2026: FingerprintSeedRow[] = [
   { at: "59:08", artist: "Vini Vici & HI-LO", title: "Pump It Up" },
   { at: "59:30", artist: "ALOK", title: "Around" },
 ];
+
+/**
+ * Vintage Culture @ neonGARDEN, EDC Las Vegas, United States 2025-05-17
+ * https://www.1001tracklists.com/tracklist/295sbvjt/vintage-culture-neongarden-edc-las-vegas-united-states-2025-05-17.html
+ * Official YT: https://youtu.be/knJyJPP45dg
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-knJyJPP45dg"]
+ * Captured 2026-08-16 — provenance 1001tl. 16/17 IDed; bare ID at 44:30 skipped.
+ */
+export const TL_VINTAGE_CULTURE_EDC_LV_NEON_2025: FingerprintSeedRow[] = [
+  { at: "0:14", artist: "Armand van Helden", title: "The Funk Phenomena (Viot Remix)" },
+  { at: "4:23", artist: "Kimonos & Gozlan", title: "Fuego" },
+  { at: "8:23", artist: "JOSHWA", title: "Freaks" },
+  { at: "14:08", artist: "Pavesi", title: "House Christmas" },
+  { at: "19:08", artist: "Cellow (BR)", title: "Dontel" },
+  { at: "23:05", artist: "ANNA & Vintage Culture", title: "Feel The Rhythm" },
+  { at: "26:21", artist: "ATFC ft. Lisa Millett", title: "Bad Habit (Club De Combat Remix)" },
+  { at: "32:00", artist: "The Prodigy", title: "Smack My Bitch Up (Club De Combat Remix)" },
+  { at: "35:50", artist: "Matt Guy & Tigerblind", title: "Smoke This One" },
+  { at: "40:10", artist: "Ugo Banchi", title: "Legacy" },
+  { at: "47:50", artist: "GENESI", title: "Hyper" },
+  { at: "51:14", artist: "DJ Spektur", title: "This Sound" },
+  { at: "56:40", artist: "Shermanology", title: "Beat Of The Drum" },
+  { at: "1:00:03", artist: "Kelis ft. Too $hort", title: "Bossy (Vintage Culture & Beltran Bootleg)" },
+  { at: "1:03:12", artist: "Nympho", title: "DJ Assault (ID Remix)" },
+  { at: "1:08:35", artist: "Gabss & Vintage Culture", title: "Lost" },
+];
+
+/**
+ * Vintage Culture @ NSD Mainstage, Só Track Boa Festival, Brazil 2026-06-06
+ * https://www.1001tracklists.com/tracklist/1j3fbbr9/vintage-culture-nsd-mainstage-so-track-boa-festival-brazil-2026-06-06.html
+ * Official YT: https://youtu.be/kmMYCg-igjc
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-kmMYCg-igjc"]
+ * Captured 2026-08-16 — provenance 1001tl. 13/20 IDed; bare IDs skipped.
+ * Opening cue untimed on 1001 → 0:00. w/ acappella kept +1s after 1:17:43.
+ */
+export const TL_VINTAGE_CULTURE_SO_TRACK_BOA_2026: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "Vintage Culture & DJ Glen ft. Ali Love", title: "Off My Head" },
+  { at: "9:57", artist: "Vintage Culture", title: "Do You" },
+  { at: "17:45", artist: "Oliver Huntemann & Stephan Bodzin", title: "Rubin (Victor Ruiz Remix)" },
+  { at: "22:40", artist: "Vintage Culture & Volkoder", title: "Hands Up" },
+  { at: "30:52", artist: "Mombaak", title: "Alive" },
+  { at: "34:43", artist: "The Killers", title: "Mr. Brightside (ID Remix)" },
+  { at: "51:24", artist: "Torna", title: "Rhythm Haters" },
+  { at: "56:42", artist: "Max Styler & Vintage Culture & Ali Love", title: "Freaky 1" },
+  { at: "1:00:59", artist: "Vintage Culture & Volkoder", title: "Best Move" },
+  { at: "1:03:18", artist: "MGMT", title: "Time To Pretend (ANNA Edit)" },
+  { at: "1:07:58", artist: "Vintage Culture & MAGNUS", title: "Nothing Ever Changes (Agents Of Time Remix)" },
+  { at: "1:11:55", artist: "Gabss & Vintage Culture", title: "Lost" },
+  { at: "1:17:43", artist: "Vintage Culture & Fancy Inc", title: "In The Dark (Fancy Inc 2026 VIP Mix)" },
+  { at: "1:17:44", artist: "ARTBAT & Vintage Culture", title: "She The Last One (Acappella)" },
+];

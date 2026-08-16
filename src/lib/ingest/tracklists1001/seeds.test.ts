@@ -91,6 +91,8 @@ import {
   TL_MARKUS_SCHULZ_AND_JEROME_ISMA_AE_GDJB_2026,
   TL_STEVE_AOKI_TML_FRIENDSHIP_MIX_2026,
   TL_ALOK_TML_WE2_2026,
+  TL_VINTAGE_CULTURE_EDC_LV_NEON_2025,
+  TL_VINTAGE_CULTURE_SO_TRACK_BOA_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   tracklist1001RowsToPlays,
 } from "./seeds";
@@ -1453,6 +1455,46 @@ for (let i = 1; i < alokTml.length; i++) {
   assert.ok(
     (alokTml[i]!.timestamp ?? 0) > (alokTml[i - 1]!.timestamp ?? 0),
     `Alok TML clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_VINTAGE_CULTURE_EDC_LV_NEON_2025);
+assert.equal(TL_VINTAGE_CULTURE_EDC_LV_NEON_2025.length, 16);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-knJyJPP45dg"],
+  TL_VINTAGE_CULTURE_EDC_LV_NEON_2025,
+);
+const vcNeon = tracklist1001RowsToPlays(TL_VINTAGE_CULTURE_EDC_LV_NEON_2025);
+assert.equal(vcNeon.length, 16);
+assert.equal(vcNeon[0]?.provenance, "1001tl");
+assert.equal(vcNeon[0]?.timestamp, 14);
+assert.equal(vcNeon[0]?.trackTitle, "The Funk Phenomena (Viot Remix)");
+assert.equal(vcNeon[15]?.trackTitle, "Lost");
+assert.equal(vcNeon[15]?.timestamp, 1 * 3600 + 8 * 60 + 35);
+for (let i = 1; i < vcNeon.length; i++) {
+  assert.ok(
+    (vcNeon[i]!.timestamp ?? 0) > (vcNeon[i - 1]!.timestamp ?? 0),
+    `Vintage Culture Neon clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_VINTAGE_CULTURE_SO_TRACK_BOA_2026);
+assert.equal(TL_VINTAGE_CULTURE_SO_TRACK_BOA_2026.length, 14);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-kmMYCg-igjc"],
+  TL_VINTAGE_CULTURE_SO_TRACK_BOA_2026,
+);
+const vcBoa = tracklist1001RowsToPlays(TL_VINTAGE_CULTURE_SO_TRACK_BOA_2026);
+assert.equal(vcBoa.length, 14);
+assert.equal(vcBoa[0]?.provenance, "1001tl");
+assert.equal(vcBoa[0]?.timestamp, 0);
+assert.equal(vcBoa[0]?.trackTitle, "Off My Head");
+assert.equal(vcBoa[13]?.trackTitle, "She The Last One (Acappella)");
+assert.equal(vcBoa[13]?.timestamp, 1 * 3600 + 17 * 60 + 44);
+for (let i = 1; i < vcBoa.length; i++) {
+  assert.ok(
+    (vcBoa[i]!.timestamp ?? 0) > (vcBoa[i - 1]!.timestamp ?? 0),
+    `Vintage Culture Só Track Boa clocks must increase at index ${i}`,
   );
 }
 
