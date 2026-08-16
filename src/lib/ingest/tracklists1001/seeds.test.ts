@@ -125,6 +125,7 @@ import {
   TL_DUBVISION_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
   TL_W_AND_W_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
   TL_MANDY_MANDY_MONDAYS_028_2026,
+  TL_MANDY_AND_NEGATIV_ATMOSPHERE_STAGE_TOMORROWLAND_WE1_BELGIUM_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   tracklist1001RowsToPlays,
@@ -2396,7 +2397,10 @@ assert.equal(
   TRACKLIST_1001_BY_SOURCE_SLUG["sc-tomorrowland-mandy-mondays-august-2026"],
   TL_MANDY_MANDY_MONDAYS_028_2026,
 );
-assert.equal(TRACKLIST_1001_BY_SOURCE_SLUG["yt-J7b0G4XX8pg"], undefined);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-J7b0G4XX8pg"],
+  TL_MANDY_MANDY_MONDAYS_028_2026,
+);
 const mandyMondays = tracklist1001RowsToPlays(TL_MANDY_MANDY_MONDAYS_028_2026);
 assert.equal(mandyMondays.length, 47);
 assert.equal(mandyMondays[0]?.provenance, "1001tl");
@@ -2411,6 +2415,31 @@ for (let i = 1; i < mandyMondays.length; i++) {
   assert.ok(
     (mandyMondays[i]!.timestamp ?? 0) > (mandyMondays[i - 1]!.timestamp ?? 0),
     `MANDY Mondays 028 clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_MANDY_AND_NEGATIV_ATMOSPHERE_STAGE_TOMORROWLAND_WE1_BELGIUM_2026);
+assert.equal(
+  TL_MANDY_AND_NEGATIV_ATMOSPHERE_STAGE_TOMORROWLAND_WE1_BELGIUM_2026.length,
+  55,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-J7b0G4XX8pg"],
+  TL_MANDY_AND_NEGATIV_ATMOSPHERE_STAGE_TOMORROWLAND_WE1_BELGIUM_2026,
+);
+const mandyNegativ = tracklist1001RowsToPlays(
+  TL_MANDY_AND_NEGATIV_ATMOSPHERE_STAGE_TOMORROWLAND_WE1_BELGIUM_2026,
+);
+assert.equal(mandyNegativ.length, 55);
+assert.equal(mandyNegativ[0]?.provenance, "1001tl");
+assert.equal(mandyNegativ[0]?.timestamp, 20);
+assert.equal(mandyNegativ[0]?.trackTitle, "Miami 2 Ibiza (MANDY Edit)");
+assert.equal(mandyNegativ[54]?.trackTitle, "Trepidation");
+assert.equal(mandyNegativ[54]?.timestamp, 57 * 60 + 56);
+for (let i = 1; i < mandyNegativ.length; i++) {
+  assert.ok(
+    (mandyNegativ[i]!.timestamp ?? 0) > (mandyNegativ[i - 1]!.timestamp ?? 0),
+    `MANDY B2B Negativ TML WE1 clocks must increase at index ${i}`,
   );
 }
 

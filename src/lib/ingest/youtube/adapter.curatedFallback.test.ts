@@ -63,6 +63,9 @@ const DV_PAROOKAVILLE = YOUTUBE_SETS.find((s) =>
 const WW_PAROOKAVILLE = YOUTUBE_SETS.find((s) =>
   s.video.includes("or_SDolEBfw"),
 );
+const MANDY_NEGATIV_TML = YOUTUBE_SETS.find((s) =>
+  s.video.includes("J7b0G4XX8pg"),
+);
 
 describe("watchMetaFromCuratedSeed", () => {
   it("builds ASOT 1290 meta from the curated 1001 capture", () => {
@@ -249,6 +252,17 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=or_SDolEBfw");
     // Last cue 1:11:25 + 180s pad.
     assert.equal(meta.durationSec, 1 * 3600 + 11 * 60 + 25 + 180);
+  });
+
+  it("builds MANDY B2B Negativ Atmosphere TML WE1 meta from the curated 1001 capture", () => {
+    assert.ok(MANDY_NEGATIV_TML);
+    const meta = watchMetaFromCuratedSeed(MANDY_NEGATIV_TML);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "J7b0G4XX8pg");
+    assert.match(meta.title, /Atmosphere|Tomorrowland/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=J7b0G4XX8pg");
+    // Last cue 57:56 + 180s pad.
+    assert.equal(meta.durationSec, 57 * 60 + 56 + 180);
   });
 
   it("builds Vintage Culture NYC Yacht meta from the curated 1001 capture", () => {
@@ -992,5 +1006,20 @@ describe("curated YouTube 429 fallback", () => {
     assert.ok(sets[0]!.durationSec >= 1 * 3600 + 11 * 60);
     assert.equal(sets[0]?.primaryArtist?.slug, "w-w");
     assert.match(String(sets[0]?.eventName ?? ""), /Parookaville/i);
+  });
+
+  it("lands MANDY B2B Negativ Atmosphere TML WE1 from the 1001 seed when watch is 429", async () => {
+    assert.ok(MANDY_NEGATIV_TML);
+    const adapter = createYoutubeAdapter([MANDY_NEGATIV_TML], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-J7b0G4XX8pg");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 55);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 57 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "mandy");
+    assert.ok(sets[0]?.collaborators?.some((c) => c.slug === "negativ"));
+    assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
   });
 });

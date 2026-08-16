@@ -90,6 +90,7 @@ import {
   TL_HARDWELL_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
   TL_DUBVISION_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
   TL_W_AND_W_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
+  TL_MANDY_AND_NEGATIV_ATMOSPHERE_STAGE_TOMORROWLAND_WE1_BELGIUM_2026,
   TL_MISS_MONIQUE_TML_WE2_2026,
   TL_NICKY_ROMERO_TML_WE2_2026,
   TL_ODD_MOB_TML_WE2_2026,
@@ -1573,6 +1574,23 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/1j3n03kk/wandw-mainstage-parookaville-germany-2026-07-18.html",
     tracklist1001: TL_W_AND_W_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
+  },
+  {
+    // Tomorrowland official — Atmosphere WE1 B2B; title drives collaborator parse.
+    video: "https://www.youtube.com/watch?v=J7b0G4XX8pg",
+    primaryArtist: dj("MANDY", {
+      accent: "#ff006e",
+      homeCity: "Belgium",
+    }),
+    genre: "Hard Dance",
+    type: "festival",
+    title: "MANDY B2B Negativ | Atmosphere Stage, Tomorrowland Weekend 1 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/23phk9t9/mandy-negativ-atmosphere-stage-tomorrowland-weekend-1-belgium-2026-07-17.html",
+    tracklist1001:
+      TL_MANDY_AND_NEGATIV_ATMOSPHERE_STAGE_TOMORROWLAND_WE1_BELGIUM_2026,
   },
   {
     video: "https://www.youtube.com/watch?v=6bJZPDKlq7o",
