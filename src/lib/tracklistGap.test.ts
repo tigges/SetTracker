@@ -122,6 +122,20 @@ describe("tracklistGap", () => {
     assert.equal(
       isActionableTracklistGap(
         {
+          title: "Spectrum Radio 485 Joris Voorn | Brno,Czech Republic",
+          type: "radio",
+          playCount: 15,
+          durationSec: 60 * 60,
+          publishedAt: "2026-08-12T00:00:00.000Z",
+          top100Rank: 5,
+        },
+        now,
+      ),
+      false,
+    );
+    assert.equal(
+      isActionableTracklistGap(
+        {
           title: "Smash The House Radio ep. 689",
           type: "festival",
           eventKind: "festival",

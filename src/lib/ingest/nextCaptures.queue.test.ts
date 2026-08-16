@@ -286,5 +286,17 @@ assert.equal(
   ),
   "mapped",
 );
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "yt-yTRvLrtsM9I",
+      title: "Spectrum Radio 485 Joris Voorn | Brno,Czech Republic",
+      type: "radio",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
 
 console.log("nextCaptures.queue.test.ts ok");

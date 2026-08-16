@@ -65,6 +65,7 @@ import {
   TL_ALOK_TML_WE2_2026,
   TL_HARDWELL_HOA_527_YEARMIX_2025,
   TL_JOEL_CORRY_EDGE_NYC_2026,
+  TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026,
   TL_MISS_MONIQUE_IBIZA_SUNSET_YACHT_2026,
   TL_NICKY_ROMERO_PROTOCOL_RADIO_731,
   TL_TIESTO_PRISMATIC_032_2026,
@@ -915,6 +916,22 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/m7vw17k/tiesto-prismatic-032-2026-08-08.html",
     tracklist1001: TL_TIESTO_PRISMATIC_032_2026,
+  },
+  {
+    // Official Spectrum Radio 485; timed 1001 capture.
+    video: "https://www.youtube.com/watch?v=yTRvLrtsM9I",
+    primaryArtist: dj("Joris Voorn", {
+      accent: "#2ec4b6",
+      homeCity: "Rotterdam, NL",
+    }),
+    genre: "Tech House",
+    type: "radio",
+    title: "Spectrum Radio 485 Joris Voorn | Brno,Czech Republic",
+    seriesName: "Spectrum Radio",
+    eventName: "Exit, Veveří Castle Brno",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2vwh8lq1/joris-voorn-spectrum-radio-485-exit-veveri-castle-brno-czech-republic-2026-08-12.html",
+    tracklist1001: TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026,
   },
   {
     // Tomorrowland official Relive — Mainstage WE2.

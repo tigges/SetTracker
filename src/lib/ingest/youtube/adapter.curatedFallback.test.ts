@@ -26,6 +26,7 @@ const JOEL_EDGE = YOUTUBE_SETS.find((s) => s.video.includes("soEFl73peVA"));
 const PRR_731 = YOUTUBE_SETS.find((s) => s.video.includes("Rgx-wT9FDaE"));
 const MM_YACHT = YOUTUBE_SETS.find((s) => s.video.includes("0-s_qZRWElA"));
 const PRISMATIC_032 = YOUTUBE_SETS.find((s) => s.video.includes("blP5J6BUG0M"));
+const SPECTRUM_485 = YOUTUBE_SETS.find((s) => s.video.includes("yTRvLrtsM9I"));
 
 describe("watchMetaFromCuratedSeed", () => {
   it("builds ASOT 1290 meta from the curated 1001 capture", () => {
@@ -201,6 +202,17 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=blP5J6BUG0M");
     // Last cue 57:52 + 180s pad.
     assert.equal(meta.durationSec, 57 * 60 + 52 + 180);
+  });
+
+  it("builds Joris Voorn Spectrum Radio 485 meta from the curated 1001 capture", () => {
+    assert.ok(SPECTRUM_485);
+    const meta = watchMetaFromCuratedSeed(SPECTRUM_485);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "yTRvLrtsM9I");
+    assert.match(meta.title, /Spectrum Radio 485/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=yTRvLrtsM9I");
+    // Last cue 59:10 + 180s pad.
+    assert.equal(meta.durationSec, 59 * 60 + 10 + 180);
   });
 
   it("returns null without a title or video id", () => {
@@ -483,5 +495,19 @@ describe("curated YouTube 429 fallback", () => {
     assert.ok(sets[0]!.durationSec >= 57 * 60);
     assert.equal(sets[0]?.primaryArtist?.slug, "tiesto");
     assert.equal(sets[0]?.seriesName, "Prismatic");
+  });
+
+  it("lands Joris Voorn Spectrum Radio 485 from the 1001 seed when watch is 429", async () => {
+    assert.ok(SPECTRUM_485);
+    const adapter = createYoutubeAdapter([SPECTRUM_485], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-yTRvLrtsM9I");
+    assert.equal(sets[0]!.type, "radio");
+    assert.ok(sets[0]!.plays.length >= 15);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 59 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "joris-voorn");
+    assert.equal(sets[0]?.seriesName, "Spectrum Radio");
   });
 });

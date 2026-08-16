@@ -95,6 +95,7 @@ import {
   TL_JAMIE_JONES_HOT_ROBOT_RADIO_225,
   TL_JAMIE_JONES_HOT_ROBOT_RADIO_239,
   TL_JOEL_CORRY_EDGE_NYC_2026,
+  TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026,
   TL_MISS_MONIQUE_IBIZA_SUNSET_YACHT_2026,
   TL_NICKY_ROMERO_PROTOCOL_RADIO_731,
   TL_REINIER_ZONNEVELD_AWAKENINGS_2025,
@@ -1594,6 +1595,7 @@ assert.equal(isWiredTracklistSlug("yt-soEFl73peVA"), true);
 assert.equal(isWiredTracklistSlug("yt-Rgx-wT9FDaE"), true);
 assert.equal(isWiredTracklistSlug("yt-0-s_qZRWElA"), true);
 assert.equal(isWiredTracklistSlug("yt-blP5J6BUG0M"), true);
+assert.equal(isWiredTracklistSlug("yt-yTRvLrtsM9I"), true);
 assert.equal(
   isWiredTracklistSlug("sc-sashaofficial-sasha-eclipse-mix-12-8-26"),
   true,
@@ -1772,6 +1774,28 @@ for (let i = 1; i < prismatic032.length; i++) {
   assert.ok(
     (prismatic032[i]!.timestamp ?? 0) > (prismatic032[i - 1]!.timestamp ?? 0),
     `Tiësto Prismatic 032 clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026);
+assert.equal(TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026.length, 15);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-yTRvLrtsM9I"],
+  TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026,
+);
+const spectrum485 = tracklist1001RowsToPlays(
+  TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026,
+);
+assert.equal(spectrum485.length, 15);
+assert.equal(spectrum485[0]?.provenance, "1001tl");
+assert.equal(spectrum485[0]?.timestamp, 30);
+assert.equal(spectrum485[0]?.trackTitle, "Horizon (Eelke Kleijn Remix)");
+assert.equal(spectrum485[14]?.trackTitle, "Darkness (Joris Voorn Remix)");
+assert.equal(spectrum485[14]?.timestamp, 59 * 60 + 10);
+for (let i = 1; i < spectrum485.length; i++) {
+  assert.ok(
+    (spectrum485[i]!.timestamp ?? 0) > (spectrum485[i - 1]!.timestamp ?? 0),
+    `Joris Voorn Spectrum Radio 485 clocks must increase at index ${i}`,
   );
 }
 

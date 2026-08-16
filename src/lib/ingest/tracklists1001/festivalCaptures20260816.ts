@@ -547,3 +547,29 @@ export const TL_TIESTO_PRISMATIC_032_2026: FingerprintSeedRow[] = [
   { at: "56:32", artist: "The Rocketman & TMPL", title: "Round & Round" },
   { at: "57:52", artist: "Nifra & KEVU & Caroline Roxy", title: "High On The Beat" },
 ];
+
+/**
+ * Joris Voorn @ Spectrum Radio 485 (Exit, Veveří Castle Brno, Czech Republic) 2026-08-12
+ * https://www.1001tracklists.com/tracklist/2vwh8lq1/joris-voorn-spectrum-radio-485-exit-veveri-castle-brno-czech-republic-2026-08-12.html
+ * Official YT: https://youtu.be/yTRvLrtsM9I
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-yTRvLrtsM9I"]
+ * Captured 2026-08-16 — provenance 1001tl. Official script: 15 tracks.
+ * Capture overlay used an invalid identifier (hyphens); constant renamed.
+ */
+export const TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026: FingerprintSeedRow[] = [
+  { at: "0:30", artist: "Joris Voorn", title: "Horizon (Eelke Kleijn Remix)" },
+  { at: "2:00", artist: "Betical", title: "Track Of Time" },
+  { at: "5:30", artist: "Galexis", title: "Silence" },
+  { at: "8:30", artist: "Joris Voorn", title: "Tomorrow (Sultan + Shepard Remix)" },
+  { at: "12:20", artist: "deadmau5 ft. Stevie Appleton", title: "Science" },
+  { at: "17:00", artist: "Roland Clark", title: "Speak To Me (Accapella)" },
+  { at: "21:40", artist: "Eelke Kleijn", title: "Transmission (Joris Voorn Remix)" },
+  { at: "25:00", artist: "Joris Voorn & Roddy Lima & Taylr Renee", title: "Machine" },
+  { at: "31:00", artist: "Matt Fax", title: "Blow" },
+  { at: "34:40", artist: "Joris Voorn", title: "Ringo (Joris Voorn Edit)" },
+  { at: "37:40", artist: "Joris Voorn & Xavier Rudd", title: "Spirit Bird" },
+  { at: "45:50", artist: "Nick Matthew & Kyparis", title: "UNVRS" },
+  { at: "48:15", artist: "Green Velvet vs. MEDUZA & GENESI & ESSENTIA", title: "La La Land" },
+  { at: "54:52", artist: "Joris Voorn", title: "Quicksand" },
+  { at: "59:10", artist: "METODI & Mari Ferrari", title: "Darkness (Joris Voorn Remix)" },
+];
