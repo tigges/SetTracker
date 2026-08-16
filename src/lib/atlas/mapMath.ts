@@ -38,12 +38,32 @@ export type AtlasPin = {
 
 export type AtlasTypeFilter = "all" | "festival" | "club" | "dj";
 
+export const ATLAS_KINDS: AtlasKind[] = ["festival", "club", "dj"];
+
 export type AtlasFilter = {
-  type: AtlasTypeFilter;
+  /** Exclusive radio — kept so older callers still compile. Prefer `kinds`. */
+  type?: AtlasTypeFilter;
+  /** Multi-select layers. Empty = show nothing. */
+  kinds?: AtlasKind[];
   q: string;
   country: string;
   city: string;
 };
+
+export function atlasKindsFromFilter(f: AtlasFilter): AtlasKind[] | null {
+  if (f.kinds) return f.kinds;
+  if (!f.type || f.type === "all") return null;
+  return [f.type];
+}
+
+export function toggleAtlasKind(
+  kinds: AtlasKind[],
+  kind: AtlasKind,
+): AtlasKind[] {
+  return kinds.includes(kind)
+    ? kinds.filter((k) => k !== kind)
+    : [...kinds, kind];
+}
 
 /** Default world frame (SVG units). Must stay near the 0..1000 land path. */
 export const ATLAS_INITIAL_VIEW = { cx: 500, cy: 430, span: 900 };
@@ -88,7 +108,8 @@ export function filterAtlasPins(
 ): AtlasPin[] {
   const q = f.q.trim().toLowerCase();
   return pins.filter((p) => {
-    if (f.type !== "all" && p.kind !== f.type) return false;
+    const kinds = atlasKindsFromFilter(f);
+    if (kinds && !kinds.includes(p.kind)) return false;
     if (f.country && p.country !== f.country) return false;
     if (f.city && p.city !== f.city) return false;
     if (!q) return true;
@@ -184,4 +205,29 @@ export function atlasTapMoved(
   const dx = to.x - from.x;
   const dy = to.y - from.y;
   return dx * dx + dy * dy > thresholdPx * thresholdPx;
+}
+
+/** Hit radius in SVG units — grows with zoom-out so stacked pins share a tap. */
+export function atlasClusterRadius(span: number): number {
+  return Math.max(6, Math.min(28, span * 0.016));
+}
+
+export function atlasPinsNear<
+  T extends { id: string; x: number; y: number; nomap?: boolean },
+>(
+  pins: T[],
+  origin: { x: number; y: number },
+  radius: number,
+): T[] {
+  return pins
+    .filter(
+      (p) =>
+        !p.nomap &&
+        Math.hypot(p.x - origin.x, p.y - origin.y) <= radius,
+    )
+    .sort(
+      (a, b) =>
+        Math.hypot(a.x - origin.x, a.y - origin.y) -
+        Math.hypot(b.x - origin.x, b.y - origin.y),
+    );
 }
