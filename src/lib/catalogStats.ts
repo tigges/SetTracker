@@ -11,6 +11,7 @@ import {
   DENSITY_MIN_DURATION_SEC,
   type DensitySeverity,
 } from "@/lib/setDensity";
+import { compareNeedsIds, identifiedRatio } from "@/lib/feedQuality";
 import {
   PROVENANCE_META,
   STATUS_META,
@@ -77,6 +78,19 @@ export type StatsSparseSet = {
   playbackHost: string | null;
 };
 
+export type StatsNeedsIdSet = {
+  id: string;
+  slug: string;
+  title: string;
+  sourceName: string | null;
+  durationSec: number;
+  playCount: number;
+  identifiedCount: number;
+  unresolvedCount: number;
+  identifiedRatio: number;
+  primaryDj: string | null;
+};
+
 export type CatalogStats = {
   totals: {
     sets: number;
@@ -91,6 +105,10 @@ export type CatalogStats = {
     empty: number;
     withImage: number;
     withPlayback: number;
+    /** Empty + thin + severe density. */
+    incomplete: number;
+    /** Sets with at least one unresolved ID cue. */
+    needsIds: number;
     byType: NamedCount[];
     bySource: NamedCount[];
   };
@@ -171,6 +189,8 @@ export type CatalogStats = {
   topUnresolvedIds: StatsUnresolvedId[];
   /** Pink IDs on recent festival sets / Top 20 DJs — fingerprint priority. */
   priorityUnresolvedIds: StatsUnresolvedId[];
+  /** Sets with unresolved cues, lowest identified ratio first. */
+  needsIdsSets: StatsNeedsIdSet[];
 };
 
 function toStatsRow(d: DjListItem): StatsDjRow {
@@ -218,7 +238,7 @@ function playbackHost(url: string | null | undefined): string | null {
   }
 }
 
-/** Build-time catalog health snapshot for the public /stats page. */
+/** Build-time catalog health snapshot for the operator /stats page. */
 export async function getCatalogStats(): Promise<CatalogStats> {
   const [
     djs,
@@ -244,6 +264,7 @@ export async function getCatalogStats(): Promise<CatalogStats> {
     fingerprintIdentifiedPlays,
     sparseSetRows,
     unresolvedIdRows,
+    unresolvedSetGroups,
   ] = await Promise.all([
     getDjList(),
     prisma.set.count(),
@@ -382,6 +403,11 @@ export async function getCatalogStats(): Promise<CatalogStats> {
         _count: { select: { plays: true } },
       },
       take: 400,
+    }),
+    prisma.played.groupBy({
+      by: ["setId"],
+      where: { idStatus: "unresolved_id" },
+      _count: { _all: true },
     }),
   ]);
 
@@ -606,6 +632,76 @@ export async function getCatalogStats(): Promise<CatalogStats> {
     };
   })();
 
+  const needsIdsCount = unresolvedSetGroups.length;
+  const topNeedIds = unresolvedSetGroups
+    .slice()
+    .sort((a, b) => b._count._all - a._count._all)
+    .slice(0, 80)
+    .map((g) => g.setId);
+
+  const [needSetRows, needStatusGroups] = topNeedIds.length
+    ? await Promise.all([
+        prisma.set.findMany({
+          where: { id: { in: topNeedIds } },
+          select: {
+            id: true,
+            slug: true,
+            title: true,
+            sourceName: true,
+            durationSec: true,
+            publishedAt: true,
+            artists: {
+              where: { isPrimary: true },
+              take: 1,
+              select: { dj: { select: { name: true } } },
+            },
+          },
+        }),
+        prisma.played.groupBy({
+          by: ["setId", "idStatus"],
+          where: { setId: { in: topNeedIds } },
+          _count: { _all: true },
+        }),
+      ])
+    : [[], []];
+
+  const needCounts = new Map<string, Partial<Record<IdStatus, number>>>();
+  for (const g of needStatusGroups) {
+    let row = needCounts.get(g.setId);
+    if (!row) {
+      row = {};
+      needCounts.set(g.setId, row);
+    }
+    row[g.idStatus as IdStatus] = g._count._all;
+  }
+
+  const needsIdsSets: StatsNeedsIdSet[] = needSetRows
+    .map((s) => {
+      const counts = needCounts.get(s.id) ?? {};
+      const playCount = Object.values(counts).reduce(
+        (n, v) => n + (v ?? 0),
+        0,
+      );
+      return {
+        id: s.id,
+        slug: s.slug,
+        title: s.title,
+        sourceName: s.sourceName,
+        durationSec: s.durationSec,
+        playCount,
+        identifiedCount:
+          (counts.identified ?? 0) + (counts.community_resolved ?? 0),
+        unresolvedCount: counts.unresolved_id ?? 0,
+        identifiedRatio: identifiedRatio(counts),
+        primaryDj: s.artists[0]?.dj.name ?? null,
+        publishedAt: s.publishedAt,
+        statusCounts: counts,
+      };
+    })
+    .sort(compareNeedsIds)
+    .slice(0, 60)
+    .map(({ publishedAt: _publishedAt, statusCounts: _statusCounts, ...row }) => row);
+
   return {
     totals: {
       sets: setCount,
@@ -620,6 +716,8 @@ export async function getCatalogStats(): Promise<CatalogStats> {
       empty: setCount - setsWithPlays,
       withImage: setsWithImage,
       withPlayback: setsWithPlayback,
+      incomplete: density.thin + density.severe,
+      needsIds: needsIdsCount,
       byType: namedFromGroup(
         setTypeGroups.map((g) => ({ key: g.type, count: g._count._all })),
         (k) => k,
@@ -680,5 +778,6 @@ export async function getCatalogStats(): Promise<CatalogStats> {
     sparseSets,
     topUnresolvedIds,
     priorityUnresolvedIds,
+    needsIdsSets,
   };
 }

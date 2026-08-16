@@ -3,20 +3,13 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getDjBySlug, getAllDjSlugs } from "@/lib/queries";
 import { EntityThumb } from "@/components/EntityThumb";
-import { StatusBar, StatusLegend } from "@/components/StatusBits";
+import { StatusBar } from "@/components/StatusBits";
 import { SocialLinks } from "@/components/SocialLinks";
 import { ATLAS_DJ_YEAR, lookupAtlasDj } from "@/lib/atlas/seed";
 import { chartKicker } from "@/lib/atlas/mapMath";
 import { displayCity } from "@/lib/displayCity";
 import { pageMeta } from "@/lib/site";
-import {
-  PROVENANCE_META,
-  SET_TYPE_META,
-  fmtDate,
-  fmtDuration,
-  fmtRelative,
-  type Provenance,
-} from "@/lib/status";
+import { SET_TYPE_META, fmtDate, fmtDuration, fmtRelative } from "@/lib/status";
 
 export async function generateStaticParams() {
   const slugs = await getAllDjSlugs();
@@ -77,8 +70,6 @@ export default async function DjPage({
   const accent = dj.accent;
   const city = displayCity(dj.homeCity);
   const chart = lookupAtlasDj(dj.slug);
-  const provTotal =
-    Object.values(dj.provenance).reduce((a, b) => a + b, 0) || 1;
   const maxPlays = dj.mostPlayed[0]?.count ?? 1;
 
   return (
@@ -254,34 +245,6 @@ export default async function DjPage({
               </div>
             </Panel>
           )}
-
-          <Panel title="Source health">
-            <StatusBar counts={dj.health} height={10} />
-            <div className="mt-3">
-              <StatusLegend counts={dj.health} />
-            </div>
-            <div className="mt-5 space-y-2.5">
-              <p className="eyebrow">Provenance</p>
-              {Object.entries(dj.provenance)
-                .sort((a, b) => b[1] - a[1])
-                .map(([p, count]) => (
-                  <div key={p} className="flex items-center gap-3">
-                    <span className="w-24 flex-none text-[12px] text-muted">
-                      {PROVENANCE_META[p as Provenance]?.short ?? p}
-                    </span>
-                    <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-linesoft">
-                      <div
-                        className="h-full rounded-full bg-muted"
-                        style={{ width: `${(count / provTotal) * 100}%` }}
-                      />
-                    </div>
-                    <span className="mono w-6 flex-none text-right text-[12px] text-muted2">
-                      {count}
-                    </span>
-                  </div>
-                ))}
-            </div>
-          </Panel>
 
           <Panel title="Collaborators" meta={`${dj.collaborators.length}`}>
             {dj.collaborators.length === 0 ? (

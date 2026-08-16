@@ -13,11 +13,6 @@ import {
   fmtRelative,
 } from "@/lib/status";
 import { FEED_SPOTLIGHT_META } from "@/lib/feedPriority";
-import {
-  identifiedRatio,
-  PROVENANCE_HINT_LABEL,
-  tracklistProvenanceHint,
-} from "@/lib/feedQuality";
 import { setDisplayThumb } from "@/lib/setBrowse";
 import type { FeedItem } from "@/lib/queries";
 
@@ -44,8 +39,8 @@ export function SetCard({ set }: { set: FeedItem }) {
   const community = set.statusCounts.community_resolved ?? 0;
   const statusHint = [
     identified ? `${identified} ID` : null,
-    unresolved ? `${unresolved} ?` : null,
-    community ? `${community} ✓` : null,
+    unresolved ? `${unresolved} unresolved` : null,
+    community ? `${community} resolved` : null,
   ]
     .filter(Boolean)
     .join(" · ");
@@ -95,34 +90,16 @@ export function SetCard({ set }: { set: FeedItem }) {
           {set.title !== headline ? (
             <p className="mt-0.5 truncate text-[12px] text-muted2">{set.title}</p>
           ) : null}
-          <p className="mt-1 flex flex-wrap gap-1">
-            {set.spotlight ? (
+          {set.spotlight ? (
+            <p className="mt-1 flex flex-wrap gap-1">
               <span
                 className="inline-block rounded-full border border-line px-2 py-0.5 text-[10px] font-medium uppercase tracking-[0.08em] text-muted"
                 title={FEED_SPOTLIGHT_META[set.spotlight].title}
               >
                 {FEED_SPOTLIGHT_META[set.spotlight].short}
               </span>
-            ) : null}
-            <span
-              className="inline-block rounded-full border border-line px-2 py-0.5 text-[10px] uppercase tracking-[0.08em] text-muted2"
-              title="Tracklist provenance"
-            >
-              {PROVENANCE_HINT_LABEL[
-                tracklistProvenanceHint(
-                  set.sourceName,
-                  set.slug,
-                  set.dominantProvenance,
-                )
-              ]}
-            </span>
-            <span
-              className="inline-block rounded-full border border-line px-2 py-0.5 text-[10px] uppercase tracking-[0.08em] text-muted2"
-              title="Identified + community-resolved share"
-            >
-              {Math.round(identifiedRatio(set.statusCounts) * 100)}% ID
-            </span>
-          </p>
+            </p>
+          ) : null}
         </div>
       </Link>
 
@@ -132,7 +109,6 @@ export function SetCard({ set }: { set: FeedItem }) {
         <div className="flex items-center justify-between gap-2 text-[12px] text-muted2">
           <span className="mono" title={statusHint || undefined}>
             {set.trackCount} tracks
-            {unresolved ? ` · ${unresolved}?` : ""}
           </span>
           <span className="mono">{fmtDuration(set.durationSec)}</span>
           {target ? (

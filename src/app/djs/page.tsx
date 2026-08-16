@@ -27,7 +27,7 @@ export default async function DjsPage() {
         </p>
       </div>
 
-      <DjList djs={djs} />
+      <DjList djs={djs.filter((d) => d.isBrowseReady)} />
     </div>
   );
 }

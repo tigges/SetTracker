@@ -1,5 +1,6 @@
 /**
- * Homepage feed quality — twins, type chips, week buckets, provenance hints.
+ * Homepage feed quality — twins, week buckets, provenance hints.
+ * Type matching is for ingest/stats, not consumer chips.
  * Client-safe (no Prisma / Node fs).
  */
 

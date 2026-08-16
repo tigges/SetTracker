@@ -142,7 +142,6 @@ export default async function EventsPage() {
             </div>
             <ul className="divide-y divide-line border-y border-line">
               {board.calendar.map((e) => {
-                const gap = board.gaps.find((g) => g.edition.slug === e.slug);
                 const name = board.names.get(e.eventSlug);
                 return (
                   <li
@@ -169,17 +168,6 @@ export default async function EventsPage() {
                     </span>
                     <span className="mono text-[12px] text-muted2">
                       {e.startsAt} – {e.endsAt}
-                      {gap ? (
-                        <>
-                          {" · "}
-                          <Link
-                            href={`/capture-1001?q=${encodeURIComponent(name ?? editionLabel(e))}`}
-                            className="text-brand hover:underline"
-                          >
-                            capture gap
-                          </Link>
-                        </>
-                      ) : null}
                     </span>
                   </li>
                 );

@@ -5,7 +5,6 @@ import "./globals.css";
 import { BrandMark } from "@/components/BrandMark";
 import { GlobalSearch } from "@/components/GlobalSearch";
 import { SiteNav } from "@/components/SiteNav";
-import { StatusLegend } from "@/components/StatusBits";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_TAGLINE, SITE_URL } from "@/lib/site";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
@@ -55,9 +54,6 @@ export default function RootLayout({
             <SiteNav />
             <div className="ml-auto flex flex-none items-center gap-2 sm:gap-3">
               <GlobalSearch />
-              <div className="hidden xl:block">
-                <StatusLegend />
-              </div>
             </div>
           </div>
         </header>
