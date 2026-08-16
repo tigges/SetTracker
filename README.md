@@ -49,8 +49,8 @@ Provenance per row: `1001TL parse`, `SoundCloud parse`, `fingerprint`, `communit
    Ranking uses performance year (`performedAt` / edition / source
    `publishedAt`), never site ingest time — this year beats last year's
    chart festivals. Incomplete / needs-IDs queues live on Stats.
-2. **Set detail** (`/sets/[slug]`) — status timeline, export, related sets
-   (same event / series / DJ).
+2. **Set detail** (`/sets/[slug]`) — set strip, status legend, export menu,
+   tracklist, related sets (same event / series / DJ).
 3. **DJ profile** (`/djs/[slug]`) — series chips open Search, recent sets,
    most-played tracks, collaborators.
 4. **Events** (`/events`, `/events/[slug]`) — festivals, clubs, livestreams.

@@ -1,7 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
+import {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  useSyncExternalStore,
+  type ReactNode,
+} from "react";
 import { EntityThumb } from "@/components/EntityThumb";
 import { SuggestIdButton } from "@/components/SuggestId";
 import {
@@ -49,6 +56,7 @@ export function SetTimeline({
   setSlug,
   setGenre,
   setSourceUrl,
+  children,
 }: {
   plays: PlayRow[];
   durationSec: number;
@@ -58,6 +66,8 @@ export function SetTimeline({
   setGenre?: string | null;
   /** Real upload URL — used for SC listen pill instead of search guesses. */
   setSourceUrl?: string | null;
+  /** Rendered between the set strip and the tracklist (legend, export). */
+  children?: ReactNode;
 }) {
   const seek = useSetSeek();
   const [activeId, setActiveId] = useState<string | null>(plays[0]?.id ?? null);
@@ -100,7 +110,7 @@ export function SetTimeline({
   const caption = plays.find((p) => p.id === (hoverId ?? activeId));
 
   return (
-    <div className="space-y-6">
+    <div className="mt-6 space-y-6">
       {/* ------------------------------- SET STRIP ------------------------------- */}
       <div className="card p-4">
         <div className="mb-3 flex items-center justify-between">
@@ -176,6 +186,8 @@ export function SetTimeline({
           )}
         </div>
       </div>
+
+      {children}
 
       {/* ------------------------------- TRACKLIST ------------------------------- */}
       <div className="card overflow-hidden">
