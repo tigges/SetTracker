@@ -615,3 +615,44 @@ export const TL_ABOVE_AND_BEYOND_ESTIVA_GROUP_THERAPY_RADIO_690_2026: Fingerprin
   { at: "1:51:45", artist: "Estiva", title: "Chemicals" },
   { at: "1:54:40", artist: "Estiva", title: "The Wave" },
 ];
+
+/**
+ * Max Styler @ Opulent Temple, Burning Man, United States 2024-08-30
+ * https://www.1001tracklists.com/tracklist/2tx1742t/max-styler-opulent-temple-burning-man-united-states-2024-08-30.html
+ * Official YT: https://youtu.be/k4Drn6AwAdk
+ * Official SC: https://soundcloud.com/maxstyler/max-styler-live-opulent-temple-burning-man-2024
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-k4Drn6AwAdk"]
+ *       TRACKLIST_1001_BY_SOURCE_SLUG["sc-maxstyler-max-styler-live-opulent-temple-burning-man-2024"]
+ * Captured 2026-08-16 — provenance 1001tl. Official script: 28 tracks.
+ * Capture overlay used an invalid identifier (hyphens); constant renamed.
+ */
+export const TL_MAX_STYLER_OPULENT_TEMPLE_BURNING_MAN_2024: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "Max Styler & Vintage Culture & Ali Love", title: "Freaky 1" },
+  { at: "3:30", artist: "Max Styler & Clüb De Combat", title: "On Repeat" },
+  { at: "7:45", artist: "Technicism & Chinosynth", title: "Discodelia" },
+  { at: "10:00", artist: "Deomid", title: "You Gonna Do" },
+  { at: "12:30", artist: "Habitatt", title: "Fire" },
+  { at: "16:25", artist: "Mita Gami & OMRI.", title: "Madness" },
+  { at: "18:50", artist: "Sapian", title: "What Da Hell" },
+  { at: "22:00", artist: "dub.format", title: "Feelings" },
+  { at: "24:50", artist: "Max Styler & GENESI", title: "See You Sweat" },
+  { at: "29:20", artist: "David Lindmer", title: "Acid Response" },
+  { at: "32:30", artist: "Dubfire & Oliver Huntemann & Joseph Capriati vs. Fred again.. & Baby Keem", title: "Terra vs. leavemealone" },
+  { at: "34:45", artist: "Gespona & Abuk", title: "Komenko" },
+  { at: "39:20", artist: "AIKON", title: "Big" },
+  { at: "41:30", artist: "Max Styler", title: "Let Em' Know" },
+  { at: "44:20", artist: "Max Styler", title: "Kiki" },
+  { at: "47:30", artist: "Max Styler vs. Tiga & Audion", title: "Hypnotic vs. Let's Go Dancing (Max Styler Edit)" },
+  { at: "48:32", artist: "Tiga vs. Audion", title: "Let's Go Dancing (Acappella)" },
+  { at: "49:34", artist: "Max Styler", title: "Hypnotic" },
+  { at: "50:35", artist: "Max Styler & Oscar L", title: "Yapper" },
+  { at: "53:55", artist: "Max Styler & Oscar L", title: "Addiction" },
+  { at: "58:20", artist: "Carl Bee", title: "Mangatune" },
+  { at: "1:02:25", artist: "Pleasurekraft", title: "Tarantula (Max Styler Remix)" },
+  { at: "1:06:25", artist: "Theus Mago", title: "Holocene" },
+  { at: "1:09:25", artist: "John Summit ft. Paige Cavell", title: "Tears (Max Styler Remix)" },
+  { at: "1:13:45", artist: "Azzecca", title: "Dance Of The Desert" },
+  { at: "1:17:35", artist: "Max Styler", title: "Follow Me" },
+  { at: "1:21:45", artist: "Max Styler & Gorgon City", title: "Touch" },
+  { at: "1:25:00", artist: "Max Styler", title: "Lights Out" },
+];

@@ -180,4 +180,16 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     type: "festival",
     minDurationSec: 30 * 60,
   },
+  {
+    // Official Max Styler upload; 1001TL wired via
+    // sc-maxstyler-max-styler-live-opulent-temple-burning-man-2024
+    // (same list as yt-k4Drn6AwAdk).
+    url: "https://soundcloud.com/maxstyler/max-styler-live-opulent-temple-burning-man-2024",
+    primaryArtist: dj("Max Styler", {
+      accent: "#ff9f1c",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    minDurationSec: 30 * 60,
+  },
 ];

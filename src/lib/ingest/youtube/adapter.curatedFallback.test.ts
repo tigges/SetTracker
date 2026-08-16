@@ -32,6 +32,7 @@ const NICKY_TML_ARTIST = YOUTUBE_SETS.find((s) =>
 );
 const ABGT_690 = YOUTUBE_SETS.find((s) => s.video.includes("phWKhIwgiTo"));
 const VC_ARODES_YT = YOUTUBE_SETS.find((s) => s.video.includes("SeKRNa26kug"));
+const MAX_STYLER_OT = YOUTUBE_SETS.find((s) => s.video.includes("k4Drn6AwAdk"));
 
 describe("watchMetaFromCuratedSeed", () => {
   it("builds ASOT 1290 meta from the curated 1001 capture", () => {
@@ -251,6 +252,17 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=SeKRNa26kug");
     // Last cue 1:46:10 + 180s pad.
     assert.equal(meta.durationSec, 1 * 3600 + 46 * 60 + 10 + 180);
+  });
+
+  it("builds Max Styler Opulent Temple meta from the curated 1001 capture", () => {
+    assert.ok(MAX_STYLER_OT);
+    const meta = watchMetaFromCuratedSeed(MAX_STYLER_OT);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "k4Drn6AwAdk");
+    assert.match(meta.title, /Opulent Temple/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=k4Drn6AwAdk");
+    // Last cue 1:25:00 + 180s pad.
+    assert.equal(meta.durationSec, 1 * 3600 + 25 * 60 + 180);
   });
 
   it("returns null without a title or video id", () => {
@@ -590,5 +602,19 @@ describe("curated YouTube 429 fallback", () => {
     assert.ok(sets[0]!.durationSec >= 1 * 3600 + 46 * 60);
     assert.equal(sets[0]?.primaryArtist?.slug, "vintage-culture");
     assert.match(String(sets[0]?.eventName ?? ""), /Burning Man/i);
+  });
+
+  it("lands Max Styler Opulent Temple from the 1001 seed when watch is 429", async () => {
+    assert.ok(MAX_STYLER_OT);
+    const adapter = createYoutubeAdapter([MAX_STYLER_OT], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-k4Drn6AwAdk");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 28);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 1 * 3600 + 25 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "max-styler");
+    assert.match(String(sets[0]?.eventName ?? ""), /Opulent Temple/i);
   });
 });

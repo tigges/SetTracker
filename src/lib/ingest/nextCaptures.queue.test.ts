@@ -344,5 +344,27 @@ assert.equal(
   ),
   "mapped",
 );
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "yt-k4Drn6AwAdk",
+      title: "Max Styler @ Opulent Temple, Burning Man 2024",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "sc-maxstyler-max-styler-live-opulent-temple-burning-man-2024",
+      title: "Max Styler Live @ Opulent Temple Burning Man 2024",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
 
 console.log("nextCaptures.queue.test.ts ok");

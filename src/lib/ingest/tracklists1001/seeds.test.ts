@@ -97,6 +97,7 @@ import {
   TL_JAMIE_JONES_HOT_ROBOT_RADIO_239,
   TL_JOEL_CORRY_EDGE_NYC_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026,
+  TL_MAX_STYLER_OPULENT_TEMPLE_BURNING_MAN_2024,
   TL_MISS_MONIQUE_IBIZA_SUNSET_YACHT_2026,
   TL_NICKY_ROMERO_PROTOCOL_RADIO_731,
   TL_REINIER_ZONNEVELD_AWAKENINGS_2025,
@@ -1609,6 +1610,13 @@ assert.equal(
   isWiredTracklistSlug("sc-sashaofficial-sasha-eclipse-mix-12-8-26"),
   true,
 );
+assert.equal(isWiredTracklistSlug("yt-k4Drn6AwAdk"), true);
+assert.equal(
+  isWiredTracklistSlug(
+    "sc-maxstyler-max-styler-live-opulent-temple-burning-man-2024",
+  ),
+  true,
+);
 assert.equal(
   isWiredTracklistSlug(
     "sc-https://soundcloud.com/sashaofficial/sasha-eclipse-mix-12-8-26",
@@ -1862,6 +1870,34 @@ for (let i = 1; i < hoa527.length; i++) {
   assert.ok(
     (hoa527[i]!.timestamp ?? 0) > (hoa527[i - 1]!.timestamp ?? 0),
     `Hardwell HOA 527 clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_MAX_STYLER_OPULENT_TEMPLE_BURNING_MAN_2024);
+assert.equal(TL_MAX_STYLER_OPULENT_TEMPLE_BURNING_MAN_2024.length, 28);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-k4Drn6AwAdk"],
+  TL_MAX_STYLER_OPULENT_TEMPLE_BURNING_MAN_2024,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-maxstyler-max-styler-live-opulent-temple-burning-man-2024"
+  ],
+  TL_MAX_STYLER_OPULENT_TEMPLE_BURNING_MAN_2024,
+);
+const maxStylerOt = tracklist1001RowsToPlays(
+  TL_MAX_STYLER_OPULENT_TEMPLE_BURNING_MAN_2024,
+);
+assert.equal(maxStylerOt.length, 28);
+assert.equal(maxStylerOt[0]?.provenance, "1001tl");
+assert.equal(maxStylerOt[0]?.timestamp, 0);
+assert.equal(maxStylerOt[0]?.trackTitle, "Freaky 1");
+assert.equal(maxStylerOt[27]?.trackTitle, "Lights Out");
+assert.equal(maxStylerOt[27]?.timestamp, 1 * 3600 + 25 * 60);
+for (let i = 1; i < maxStylerOt.length; i++) {
+  assert.ok(
+    (maxStylerOt[i]!.timestamp ?? 0) > (maxStylerOt[i - 1]!.timestamp ?? 0),
+    `Max Styler Opulent Temple clocks must increase at index ${i}`,
   );
 }
 

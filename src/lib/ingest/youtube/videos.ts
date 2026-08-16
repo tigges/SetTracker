@@ -71,6 +71,7 @@ import {
   TL_NICKY_ROMERO_PROTOCOL_RADIO_731,
   TL_TIESTO_PRISMATIC_032_2026,
   TL_REINIER_ZONNEVELD_AWAKENINGS_2025,
+  TL_MAX_STYLER_OPULENT_TEMPLE_BURNING_MAN_2024,
   TL_VINTAGE_CULTURE_ARODES_BURNING_MAN_2024,
   TL_VINTAGE_CULTURE_EDC_LV_NEON_2025,
   TL_VINTAGE_CULTURE_NYC_YACHT_2023,
@@ -1349,6 +1350,20 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/20s910xk/vintage-culture-arodes-playground-burning-man-united-states-2024-08-31.html",
     tracklist1001: TL_VINTAGE_CULTURE_ARODES_BURNING_MAN_2024,
+  },
+  {
+    // Artist-channel Relive of the Opulent Temple set (same 1001 as SC).
+    video: "https://www.youtube.com/watch?v=k4Drn6AwAdk",
+    primaryArtist: dj("Max Styler", {
+      accent: "#ff9f1c",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    title: "Max Styler @ Opulent Temple, Burning Man 2024",
+    eventName: "Opulent Temple, Burning Man",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2tx1742t/max-styler-opulent-temple-burning-man-united-states-2024-08-30.html",
+    tracklist1001: TL_MAX_STYLER_OPULENT_TEMPLE_BURNING_MAN_2024,
   },
   {
     video: "https://www.youtube.com/watch?v=OVex0rm7ZR4",

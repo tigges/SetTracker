@@ -147,4 +147,17 @@ assert.equal(
   "sc-joelcorry-edgenyc",
 );
 
+const maxStylerOtSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url ===
+    "https://soundcloud.com/maxstyler/max-styler-live-opulent-temple-burning-man-2024",
+);
+assert.ok(maxStylerOtSc);
+assert.equal(maxStylerOtSc.primaryArtist.name, "Max Styler");
+assert.equal(maxStylerOtSc.type, "festival");
+assert.equal(
+  `sc-maxstyler-${slugify("max-styler-live-opulent-temple-burning-man-2024")}`,
+  "sc-maxstyler-max-styler-live-opulent-temple-burning-man-2024",
+);
+
 console.log("soundcloud/tracks.test.ts ok");
