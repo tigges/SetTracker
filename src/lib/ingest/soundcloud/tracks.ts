@@ -169,4 +169,15 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     type: "mix",
     minDurationSec: 30 * 60,
   },
+  {
+    // Official Joel Corry upload; 1001TL wired via sc-joelcorry-edgenyc
+    // (same list as yt-soEFl73peVA).
+    url: "https://soundcloud.com/joelcorry/edgenyc",
+    primaryArtist: dj("Joel Corry", {
+      accent: "#4cc9f0",
+    }),
+    genre: "House",
+    type: "festival",
+    minDurationSec: 30 * 60,
+  },
 ];

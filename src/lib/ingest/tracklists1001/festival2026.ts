@@ -4701,6 +4701,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "sc-vintageculturemusic-vintage-culture-b2b-arodes-at-burning-man-2024":
     TL_VINTAGE_CULTURE_ARODES_BURNING_MAN_2024,
   "yt-soEFl73peVA": TL_JOEL_CORRY_EDGE_NYC_2026,
+  "sc-joelcorry-edgenyc": TL_JOEL_CORRY_EDGE_NYC_2026,
   "yt-Rgx-wT9FDaE": TL_NICKY_ROMERO_PROTOCOL_RADIO_731,
   "sc-sashaofficial-sasha-eclipse-mix-12-8-26": TL_SASHA_ECLIPSE_MIX_2026,
   "yt-0-s_qZRWElA": TL_MISS_MONIQUE_IBIZA_SUNSET_YACHT_2026,

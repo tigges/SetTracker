@@ -1596,6 +1596,7 @@ assert.equal(
   true,
 );
 assert.equal(isWiredTracklistSlug("yt-soEFl73peVA"), true);
+assert.equal(isWiredTracklistSlug("sc-joelcorry-edgenyc"), true);
 assert.equal(isWiredTracklistSlug("yt-Rgx-wT9FDaE"), true);
 assert.equal(isWiredTracklistSlug("yt-0-s_qZRWElA"), true);
 assert.equal(isWiredTracklistSlug("yt-blP5J6BUG0M"), true);
@@ -1682,6 +1683,10 @@ assertSeedClocks(TL_JOEL_CORRY_EDGE_NYC_2026);
 assert.equal(TL_JOEL_CORRY_EDGE_NYC_2026.length, 55);
 assert.equal(
   TRACKLIST_1001_BY_SOURCE_SLUG["yt-soEFl73peVA"],
+  TL_JOEL_CORRY_EDGE_NYC_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-joelcorry-edgenyc"],
   TL_JOEL_CORRY_EDGE_NYC_2026,
 );
 const joelEdge = tracklist1001RowsToPlays(TL_JOEL_CORRY_EDGE_NYC_2026);

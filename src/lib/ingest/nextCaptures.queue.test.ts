@@ -243,6 +243,17 @@ assert.equal(
 assert.equal(
   skipCaptureNeed(
     row({
+      slug: "sc-joelcorry-edgenyc",
+      title: "Joel Corry Live @ Edge NYC",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
       slug: "yt-Rgx-wT9FDaE",
       title: "Protocol Radio 731 by Nicky Romero (PRR731)",
       type: "radio",
