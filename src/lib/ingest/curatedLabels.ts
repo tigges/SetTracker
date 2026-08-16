@@ -72,6 +72,9 @@ export const CURATED_LABELS: CuratedLabel[] = withColors([
   { name: "Anjunadeep", slug: "anjunadeep", color: "#3d7eff" },
   { name: "Anjunabeats", slug: "anjunabeats", color: "#1a4bff" },
   { name: "Diynamic", slug: "diynamic", color: "#e8ff00" },
+  // Berlin imprint (Beatport 12792, keinemusik.bandcamp.com, KM071 Say What).
+  // Collective is also DJ Mag #20 — radio guests are not this label.
+  { name: "Keinemusik", slug: "keinemusik", color: "#e8c547" },
   { name: "Innervisions", slug: "innervisions", color: "#111111" },
   { name: "Spinnin' Records", slug: "spinnin-records", color: "#ff6a00" },
   { name: "Musical Freedom", slug: "musical-freedom", color: "#00c2ff" },

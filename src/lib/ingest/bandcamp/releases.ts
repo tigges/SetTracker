@@ -20,6 +20,8 @@ function dj(name: string, extra: Partial<RawArtist> = {}): RawArtist {
 }
 
 export const BANDCAMP_RELEASES: BandcampReleaseSource[] = [
+  // Do not add Keinemusik catalog singles (Crazy For It, KM071 Say What) —
+  // those are label releases, not DJ sets.
   {
     url: "https://aizoclutch.bandcamp.com/track/ezel-ft-mike-city-already-knew-aizo-clutch-rebass-2",
     primaryArtist: dj("Aizo Clutch", {

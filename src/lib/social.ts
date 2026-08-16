@@ -271,6 +271,13 @@ export const KNOWN_LABEL_SOCIALS: Record<
     soundcloud: "https://soundcloud.com/defectedrecords",
     instagram: "https://www.instagram.com/defectedrecords/",
   },
+  // Berlin imprint (Beatport label/12792, Bandcamp shop). Catalog KM071
+  // "Say What" / "Crazy For It" are releases, not DJ sets.
+  keinemusik: {
+    website: "https://keinemusik.com/",
+    soundcloud: "https://soundcloud.com/keinemusik",
+    instagram: "https://instagram.com/keinemusikcrue",
+  },
   toolroom: {
     website: "https://www.toolroomrecords.com/",
     soundcloud: "https://soundcloud.com/toolroom",

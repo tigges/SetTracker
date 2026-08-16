@@ -1,5 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
+import { labelSocials } from "../social";
+import { guestFromSeriesByTitle } from "./artists";
 import {
   CURATED_LABELS,
   CURATED_LABEL_SLUGS,
@@ -27,6 +29,17 @@ describe("curatedLabels", () => {
     assert.ok(CURATED_LABEL_SLUGS.has("soulfuric-trax"));
     assert.ok(CURATED_LABEL_SLUGS.has("you-me-records"));
     assert.ok(CURATED_LABEL_SLUGS.has("dim-mak"));
+    assert.ok(CURATED_LABEL_SLUGS.has("keinemusik"));
+    assert.equal(labelSocials("Keinemusik").website, "https://keinemusik.com/");
+    assert.equal(
+      labelSocials("Keinemusik").soundcloud,
+      "https://soundcloud.com/keinemusik",
+    );
+    assert.equal(
+      guestFromSeriesByTitle("Crazy For It"),
+      null,
+      "catalog singles are not radio-guest titles",
+    );
     assert.equal(slugify("You&Me Records"), "you-me-records");
     assert.equal(slugify("Dim Mak"), "dim-mak");
   });

@@ -109,9 +109,22 @@ function artistFromBySuffix(text: string): string | null {
   const bit = m[1]
     .replace(/\s*[\[(#].*$/, "")
     .replace(/\s*[–—|-].*$/, "")
+    .replace(/\s+\d{1,2}[.\/-]\d{1,2}[.\/-]\d{2,4}\s*$/, "")
     .trim();
   if (!bit || looksLikeEventOrSeriesCredit(bit)) return null;
   return tidyPerformingCredit(bit);
+}
+
+/**
+ * Label / series radio: "Keinemusik Radio Show by Lara Bee 17.07.2026"
+ * → the guest, not the imprint.
+ */
+export function guestFromSeriesByTitle(title: string): string | null {
+  const series = title.replace(/\bby\s+.+$/i, "").trim();
+  if (!looksLikeEventOrSeriesCredit(series)) return null;
+  const guest = artistFromBySuffix(title);
+  if (!guest) return null;
+  return sanitizeArtistName(guest);
 }
 
 /**
@@ -304,6 +317,12 @@ export function artistsForSet(
   const split = splitArtistCredit(credit, extras);
 
   if (!preferredPrimary) return split;
+
+  // Label radio / series host is not the performing DJ.
+  const seriesGuest = guestFromSeriesByTitle(title);
+  if (seriesGuest && slugify(seriesGuest) !== slugify(preferredPrimary.name)) {
+    return splitArtistCredit(seriesGuest, extras);
+  }
 
   // Festival brand accounts must not stick as the performing DJ.
   const prefSlug = preferredPrimary.slug || slugify(preferredPrimary.name);
