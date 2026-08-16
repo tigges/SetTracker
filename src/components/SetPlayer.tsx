@@ -2,7 +2,12 @@
 
 import { useState } from "react";
 import { useSetListen } from "@/components/SetListen";
-import { resolvePlaybackTarget } from "@/lib/playback";
+import {
+  hearthisPublicUrl,
+  hearthisSeekUrl,
+  resolvePlaybackTarget,
+} from "@/lib/playback";
+import { fmtTimestamp } from "@/lib/status";
 
 /**
  * Collapsed-by-default on-site player (SoundCloud / YouTube / Mixcloud).
@@ -28,7 +33,32 @@ export function SetPlayer({
   const [dismissedNonce, setDismissedNonce] = useState(0);
   const open = userOpen || (seeking && seekNonce !== dismissedNonce);
 
-  if (!target) return null;
+  if (!target) {
+    const publicUrl = hearthisPublicUrl(playbackUrl, sourceUrl);
+    if (!publicUrl) return null;
+    const openUrl = hearthisSeekUrl(publicUrl, startSec);
+    const cued = startSec != null && startSec > 0;
+    return (
+      <div className="mt-5 overflow-hidden rounded-xl border border-line bg-panel">
+        <div className="flex flex-wrap items-center gap-2 px-3 py-2.5">
+          <a
+            href={openUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 rounded-full border border-line px-3 py-1 text-[12px] font-medium text-ink transition-colors hover:border-[color:var(--muted2)]"
+          >
+            <span aria-hidden>↗</span>
+            {cued
+              ? `Open hearthis.at at ${fmtTimestamp(startSec ?? 0)}`
+              : "Open on hearthis.at"}
+          </a>
+          <span className="text-[12px] text-muted2">
+            Cue clicks set a timestamp — hearthis is not embedded.
+          </span>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="mt-5 overflow-hidden rounded-xl border border-line bg-panel">

@@ -278,12 +278,16 @@ describe("DJ Mag 2025 atlas DJs", () => {
     assert.equal(g?.href, "/djs/david-guetta");
     assert.equal(g?.setCount, 4);
     assert.equal(g?.year, 2025);
+    assert.equal(g?.nomap, false);
     assert.equal(g?.instagram, "https://www.instagram.com/davidguetta/");
     assert.equal(g?.soundcloud, "https://soundcloud.com/davidguetta");
     assert.equal(g?.youtube, "https://www.youtube.com/@davidguetta");
     const missing = pins.find((p) => p.slug === "claptone");
     assert.equal(missing?.href, null);
     assert.equal(missing?.nomap, true);
+    const noRelive = pins.find((p) => p.slug === "martin-garrix");
+    assert.equal(noRelive?.setCount, 0);
+    assert.equal(noRelive?.nomap, true);
   });
 
   it("spirals stacked country pins and skips nomap on the combined map", () => {
@@ -304,6 +308,11 @@ describe("DJ Mag 2025 atlas DJs", () => {
     );
     assert.equal(pins.length, 300);
     assert.equal(pins.filter((p) => p.kind === "dj").length, 100);
+    assert.equal(
+      pins.filter((p) => p.kind === "dj" && !p.nomap).length,
+      0,
+      "empty catalog → DJ pins stay list-only",
+    );
     const nl = pins.filter(
       (p) => p.kind === "dj" && p.country === "Netherlands" && !p.nomap,
     );

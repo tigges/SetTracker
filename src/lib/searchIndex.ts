@@ -2,6 +2,7 @@ import { prisma } from "@/lib/db";
 import { atlasSearchItems } from "@/lib/atlas/searchItems";
 import { atlasVenueBySlug } from "@/lib/atlas/seed";
 import { normalizeGenre } from "@/lib/genre";
+import { isSearchableDj } from "@/lib/djBrowse";
 import { getDjList } from "@/lib/queries";
 import { nearDuplicateKey } from "@/lib/feedPriority";
 import { isBrowseReadySet } from "@/lib/setBrowse";
@@ -9,7 +10,7 @@ import { displayCity } from "@/lib/displayCity";
 import { ensureTrackSlugs } from "@/lib/tracks/ensureSlugs";
 
 export type SearchIndexItem = {
-  kind: "set" | "dj" | "venue" | "label" | "track" | "atlas";
+  kind: "set" | "dj" | "venue" | "label" | "track" | "atlas" | "series";
   title: string;
   subtitle?: string | null;
   href: string;
@@ -20,7 +21,7 @@ export type SearchIndexItem = {
 export async function getSearchIndex(): Promise<SearchIndexItem[]> {
   await ensureTrackSlugs(prisma);
 
-  const [sets, djs, venues, labels, trackPlays] = await Promise.all([
+  const [sets, djs, venues, labels, trackPlays, series] = await Promise.all([
     prisma.set.findMany({
       select: {
         slug: true,
@@ -66,6 +67,15 @@ export async function getSearchIndex(): Promise<SearchIndexItem[]> {
       _count: { trackId: true },
       orderBy: { _count: { trackId: "desc" } },
       take: 400,
+    }),
+    prisma.series.findMany({
+      select: {
+        slug: true,
+        name: true,
+        dj: { select: { name: true } },
+        _count: { select: { sets: true } },
+      },
+      orderBy: { name: "asc" },
     }),
   ]);
 
@@ -135,14 +145,25 @@ export async function getSearchIndex(): Promise<SearchIndexItem[]> {
   }
 
   for (const d of djs) {
-    // Match DJs directory Browse: store thin rows, don't surface in search.
-    if (!d.isBrowseReady) continue;
+    // Directory stays browse-ready; search includes handle- or set-backed DJs.
+    if (!isSearchableDj(d)) continue;
     items.push({
       kind: "dj",
       title: d.name,
       subtitle: [displayCity(d.homeCity), `${d.setCount} sets`].filter(Boolean).join(" · "),
       href: `/djs/${d.slug}`,
       keywords: d.website ?? undefined,
+    });
+  }
+
+  for (const s of series) {
+    if (s._count.sets < 1) continue;
+    items.push({
+      kind: "series",
+      title: s.name,
+      subtitle: [s.dj?.name, `${s._count.sets} sets`].filter(Boolean).join(" · "),
+      href: `/series/${s.slug}`,
+      keywords: s.dj?.name ?? undefined,
     });
   }
 

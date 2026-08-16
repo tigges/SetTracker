@@ -143,6 +143,7 @@ export function resolvePlaybackTarget(
   }
 
   // hearthis.at: discovery / cues only. Never iframe app.hearthis.at.
+  // Cue clicks use hearthisPublicUrl + hearthisSeekUrl instead.
   if (host === "hearthis") return null;
 
   if (host === "youtube") {
@@ -196,6 +197,40 @@ export function playablePlaybackUrl(
   if (isPlayablePlaybackUrl(playbackUrl)) return playbackUrl!.trim();
   if (isPlayablePlaybackUrl(sourceUrl)) return sourceUrl!.trim();
   return null;
+}
+
+/** Public hearthis.at page (never the app embed). */
+export function hearthisPublicUrl(
+  playbackUrl?: string | null,
+  sourceUrl?: string | null,
+): string | null {
+  for (const raw of [sourceUrl, playbackUrl]) {
+    if (!raw?.trim()) continue;
+    if (detectPlaybackHost(raw) !== "hearthis") continue;
+    try {
+      const u = new URL(raw.trim());
+      const host = u.hostname.replace(/^www\./, "").toLowerCase();
+      if (host === "app.hearthis.at") continue;
+      u.hash = "";
+      u.search = "";
+      let href = u.toString();
+      if (!href.endsWith("/")) href += "/";
+      return href;
+    } catch {
+      continue;
+    }
+  }
+  return null;
+}
+
+/** hearthis public page with an optional `#t=` cue (seconds). */
+export function hearthisSeekUrl(
+  publicUrl: string,
+  startSec?: number | null,
+): string {
+  const base = publicUrl.replace(/#.*$/, "");
+  if (startSec == null || startSec <= 0) return base;
+  return `${base}#t=${Math.floor(startSec)}`;
 }
 
 /**

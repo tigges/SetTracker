@@ -2,6 +2,8 @@ import assert from "node:assert/strict";
 import {
   detectPlaybackHost,
   hearthisEmbedUrl,
+  hearthisPublicUrl,
+  hearthisSeekUrl,
   isPlayablePlaybackUrl,
   playablePlaybackUrl,
   playbackUrlFromSource,
@@ -93,5 +95,26 @@ assert.equal(
   playbackUrlFromSource("hearthis.at", "https://hearthis.at/a/b/"),
   null,
 );
+
+assert.equal(
+  hearthisPublicUrl(
+    "https://app.hearthis.at/embed/11283178/transparent_black/",
+    "https://hearthis.at/shaun-mbetse/busted-deep-birthday-mix-2024/",
+  ),
+  "https://hearthis.at/shaun-mbetse/busted-deep-birthday-mix-2024/",
+);
+assert.equal(
+  hearthisPublicUrl("https://hearthis.at/shaun-mbetse/mix"),
+  "https://hearthis.at/shaun-mbetse/mix/",
+);
+assert.equal(
+  hearthisPublicUrl("https://app.hearthis.at/embed/1/transparent_black/"),
+  null,
+);
+assert.equal(
+  hearthisSeekUrl("https://hearthis.at/a/b/", 125),
+  "https://hearthis.at/a/b/#t=125",
+);
+assert.equal(hearthisSeekUrl("https://hearthis.at/a/b/", 0), "https://hearthis.at/a/b/");
 
 console.log("playback.test.ts ok");

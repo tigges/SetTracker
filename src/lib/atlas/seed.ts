@@ -172,7 +172,7 @@ export function atlasPinsFromDjs(
       src: d.src || null,
       note: d.note,
       prec: d.prec,
-      nomap: d.nomap,
+      nomap: d.nomap || (ev?.setCount ?? 0) === 0,
       x,
       y,
       setCount: ev?.setCount ?? 0,

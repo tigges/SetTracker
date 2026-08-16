@@ -422,7 +422,7 @@ export function SetTimeline({
                     ))}
 
                   <span
-                    className="hidden flex-none rounded-md border border-line px-2 py-0.5 text-[11px] text-muted2 sm:inline"
+                    className="flex-none rounded-md border border-line px-1.5 py-0.5 text-[10px] text-muted2 sm:px-2 sm:text-[11px]"
                     title={`Provenance: ${prov?.label ?? p.provenance}`}
                   >
                     {prov?.short ?? p.provenance}

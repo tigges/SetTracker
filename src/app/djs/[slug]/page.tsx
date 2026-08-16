@@ -122,6 +122,11 @@ export default async function DjPage({
               <span className="mono">{dj.totals.sets}</span> sets ·{" "}
               <span className="mono">{dj.totals.tracks}</span> tracks logged
             </p>
+            {dj.genre ? (
+              <span className="mt-2 inline-block rounded-full border border-line px-2 py-0.5 text-[11px] text-muted">
+                {dj.genre}
+              </span>
+            ) : null}
           </div>
         </div>
         {dj.bio && <p className="mt-4 max-w-2xl text-[14px] text-muted">{dj.bio}</p>}
@@ -229,13 +234,41 @@ export default async function DjPage({
 
         {/* right column: series, collaborators */}
         <div className="space-y-5">
+          {dj.upcomingNights.length > 0 && (
+            <Panel title="On the bill" meta={`${dj.upcomingNights.length}`}>
+              <ul className="space-y-2.5">
+                {dj.upcomingNights.map((n) => (
+                  <li key={n.slug}>
+                    <Link
+                      href={`/events/${n.eventSlug}`}
+                      className="block text-[13px] text-ink transition-colors hover:text-brand"
+                    >
+                      {n.eventName}
+                    </Link>
+                    <p className="mono text-[12px] text-muted2">
+                      {n.title} · {n.startsAt}
+                    </p>
+                    <a
+                      href={n.ticketsUrl || n.sourceUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="mono text-[11px] text-brand hover:text-brandstrong"
+                    >
+                      Official →
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </Panel>
+          )}
+
           {dj.series.length > 0 && (
             <Panel title="Series" meta={`${dj.series.length}`}>
               <div className="flex flex-wrap gap-2">
                 {dj.series.map((s) => (
                   <Link
                     key={s.slug}
-                    href={`/search?q=${encodeURIComponent(s.name)}`}
+                    href={`/series/${s.slug}`}
                     className="rounded-full border border-line bg-panel px-3 py-1 text-[12px] transition-colors hover:border-[color:var(--muted2)] hover:text-ink"
                   >
                     {s.name}

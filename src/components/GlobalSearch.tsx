@@ -14,6 +14,7 @@ const KIND_LABEL: Record<SearchIndexItem["kind"], string> = {
   label: "Label",
   track: "Track",
   atlas: "Atlas",
+  series: "Series",
 };
 
 const HEADER_KIND_FILTERS: Array<"all" | SearchIndexItem["kind"]> = [
@@ -22,6 +23,8 @@ const HEADER_KIND_FILTERS: Array<"all" | SearchIndexItem["kind"]> = [
   "dj",
   "venue",
   "atlas",
+  "label",
+  "track",
 ];
 
 const PAGE_KIND_FILTERS: Array<"all" | SearchIndexItem["kind"]> = [
@@ -32,6 +35,7 @@ const PAGE_KIND_FILTERS: Array<"all" | SearchIndexItem["kind"]> = [
   "atlas",
   "label",
   "track",
+  "series",
 ];
 
 function score(item: SearchIndexItem, q: string): number {
@@ -177,7 +181,7 @@ export function GlobalSearch({
               router.push(results[active].href);
               setOpen(false);
               if (!embedded) setQ("");
-            } else if (q.trim().length >= 2 && !embedded && !onAtlas) {
+            } else if (q.trim().length >= 2 && !embedded) {
               router.push(`/search?q=${encodeURIComponent(q.trim())}`);
               setOpen(false);
             }
