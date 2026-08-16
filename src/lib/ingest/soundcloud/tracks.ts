@@ -253,4 +253,16 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     type: "radio",
     minDurationSec: 30 * 60,
   },
+  {
+    // Official bradeazy upload; 1001TL wired via
+    // sc-bradeazy-bradeazy-live-lollapalooza (never sc-https://…).
+    url: "https://soundcloud.com/bradeazy/bradeazy-live-lollapalooza",
+    primaryArtist: dj("bradeazy", {
+      accent: "#3aa0e0",
+      homeCity: "Miami, US",
+    }),
+    genre: "Bass House",
+    type: "festival",
+    minDurationSec: 15 * 60,
+  },
 ];

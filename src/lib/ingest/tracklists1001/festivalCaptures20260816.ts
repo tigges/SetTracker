@@ -853,3 +853,27 @@ export const TL_ERIC_PRYDZ_EPIC_RADIO_036_2026: FingerprintSeedRow[] = [
   { at: "53:41", artist: "Pryda", title: "The Return" },
   { at: "59:10", artist: "Cirez D", title: "Control Freak" },
 ];
+
+/**
+ * bradeazy @ Perry's Stage, Lollapalooza United States Chicago 2026-07-31
+ * https://www.1001tracklists.com/tracklist/2knllttt/bradeazy-perrys-stage-lollapalooza-united-states-chicago-2026-07-31.html
+ * Official SC: https://soundcloud.com/bradeazy/bradeazy-live-lollapalooza
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["sc-bradeazy-bradeazy-live-lollapalooza"]
+ * Never wire sc-https://… slugs.
+ * Captured 2026-08-16 — provenance 1001tl. Official script: 12 tracks.
+ * Capture overlay used an invalid identifier (hyphens); constant renamed.
+ */
+export const TL_BRADEAZY_LIVE_LOLLAPALOOZA_CHICAGO_2026: FingerprintSeedRow[] = [
+  { at: "0:20", artist: "Skuro & Braynod", title: "System Failed" },
+  { at: "5:16", artist: "Skuro & Enzo Gauthier", title: "Keep It Moving" },
+  { at: "10:12", artist: "Mia Mendi & Skuro (IT)", title: "Angel Wings" },
+  { at: "15:08", artist: "bradeazy & Nico Falla", title: "Accelerate" },
+  { at: "20:04", artist: "Adam Ten & Asulin", title: "Warawara (Calussa Edit)" },
+  { at: "25:00", artist: "Eli Brown", title: "It's Like That" },
+  { at: "29:56", artist: "bradeazy & HUMAN404 ft. Lovlee", title: "The Baddest" },
+  { at: "34:52", artist: "bradeazy & Öwnboss", title: "Louboutin" },
+  { at: "39:48", artist: "bradeazy & TyriqueOrDie", title: "Make It Work" },
+  { at: "44:44", artist: "bradeazy ft. TyriqueOrDie", title: "Up Down" },
+  { at: "49:40", artist: "Anyma & LISA", title: "Bad Angel (bradeazy Remix)" },
+  { at: "54:36", artist: "bradeazy & Crazy Town", title: "Butterfly 2026" },
+];

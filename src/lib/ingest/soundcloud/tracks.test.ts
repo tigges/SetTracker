@@ -224,4 +224,16 @@ assert.equal(
   "sc-eric-prydz-eric-prydz-presents-463760700",
 );
 
+const bradeazyLollaSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url === "https://soundcloud.com/bradeazy/bradeazy-live-lollapalooza",
+);
+assert.ok(bradeazyLollaSc);
+assert.equal(bradeazyLollaSc.primaryArtist.name, "bradeazy");
+assert.equal(bradeazyLollaSc.type, "festival");
+assert.equal(
+  `sc-bradeazy-${slugify("bradeazy-live-lollapalooza")}`,
+  "sc-bradeazy-bradeazy-live-lollapalooza",
+);
+
 console.log("soundcloud/tracks.test.ts ok");

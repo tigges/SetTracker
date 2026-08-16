@@ -482,5 +482,16 @@ assert.equal(
   ),
   "mapped",
 );
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "sc-bradeazy-bradeazy-live-lollapalooza",
+      title: "bradeazy Live @ Lollapalooza Chicago 2026",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
 
 console.log("nextCaptures.queue.test.ts ok");

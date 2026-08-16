@@ -92,6 +92,7 @@ import {
   TL_STEVE_AOKI_TML_FRIENDSHIP_MIX_2026,
   TL_ABOVE_AND_BEYOND_ESTIVA_GROUP_THERAPY_RADIO_690_2026,
   TL_ALOK_TML_WE2_2026,
+  TL_BRADEAZY_LIVE_LOLLAPALOOZA_CHICAGO_2026,
   TL_ERIC_PRYDZ_EPIC_RADIO_036_2026,
   TL_HANNAH_LAING_ZENLESS_ZONE_ZERO_CREAMFIELDS_2024,
   TL_HARDWELL_HOA_527_YEARMIX_2025,
@@ -1645,6 +1646,16 @@ assert.equal(
   true,
 );
 assert.equal(
+  isWiredTracklistSlug("sc-bradeazy-bradeazy-live-lollapalooza"),
+  true,
+);
+assert.equal(
+  isWiredTracklistSlug(
+    "sc-https://soundcloud.com/bradeazy/bradeazy-live-lollapalooza",
+  ),
+  false,
+);
+assert.equal(
   isWiredTracklistSlug(
     "mc-ericprydz-epicradio-epic-radio-036",
   ),
@@ -2057,6 +2068,28 @@ for (let i = 1; i < epic036.length; i++) {
   assert.ok(
     (epic036[i]!.timestamp ?? 0) > (epic036[i - 1]!.timestamp ?? 0),
     `Epic Radio 036 clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_BRADEAZY_LIVE_LOLLAPALOOZA_CHICAGO_2026);
+assert.equal(TL_BRADEAZY_LIVE_LOLLAPALOOZA_CHICAGO_2026.length, 12);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-bradeazy-bradeazy-live-lollapalooza"],
+  TL_BRADEAZY_LIVE_LOLLAPALOOZA_CHICAGO_2026,
+);
+const bradeazyLolla = tracklist1001RowsToPlays(
+  TL_BRADEAZY_LIVE_LOLLAPALOOZA_CHICAGO_2026,
+);
+assert.equal(bradeazyLolla.length, 12);
+assert.equal(bradeazyLolla[0]?.provenance, "1001tl");
+assert.equal(bradeazyLolla[0]?.timestamp, 20);
+assert.equal(bradeazyLolla[0]?.trackTitle, "System Failed");
+assert.equal(bradeazyLolla[11]?.trackTitle, "Butterfly 2026");
+assert.equal(bradeazyLolla[11]?.timestamp, 54 * 60 + 36);
+for (let i = 1; i < bradeazyLolla.length; i++) {
+  assert.ok(
+    (bradeazyLolla[i]!.timestamp ?? 0) > (bradeazyLolla[i - 1]!.timestamp ?? 0),
+    `bradeazy Lollapalooza clocks must increase at index ${i}`,
   );
 }
 
