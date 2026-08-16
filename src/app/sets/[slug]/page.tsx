@@ -103,7 +103,7 @@ export default async function SetPage({
             )}
             {set.series && (
               <Link
-                href={`/search?q=${encodeURIComponent(set.series.name)}`}
+                href={`/series/${set.series.slug}`}
                 className="eyebrow transition-colors hover:text-ink"
               >
                 {set.series.name}

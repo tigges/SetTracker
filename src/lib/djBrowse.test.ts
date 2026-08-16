@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { isBrowseReadyDj } from "./djBrowse";
+import { isBrowseReadyDj, isSearchableDj } from "./djBrowse";
 
 const base = {
   isJunk: false,
@@ -30,6 +30,40 @@ assert.equal(
   isBrowseReadyDj({
     ...base,
     imageUrl: "  ",
+  }),
+  false,
+);
+
+assert.equal(isSearchableDj(base), true);
+assert.equal(isSearchableDj({ ...base, isJunk: true }), false);
+assert.equal(isSearchableDj({ ...base, isLowSignal: true }), false);
+assert.equal(
+  isSearchableDj({
+    ...base,
+    hasHandle: true,
+    setCount: 0,
+    playCount: 0,
+    imageUrl: null,
+  }),
+  true,
+);
+assert.equal(
+  isSearchableDj({
+    ...base,
+    hasHandle: false,
+    setCount: 1,
+    playCount: 0,
+    imageUrl: null,
+  }),
+  true,
+);
+assert.equal(
+  isSearchableDj({
+    ...base,
+    hasHandle: false,
+    setCount: 0,
+    playCount: 0,
+    imageUrl: null,
   }),
   false,
 );

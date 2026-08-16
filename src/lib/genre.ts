@@ -468,7 +468,7 @@ type GenreRowClient = {
   };
 };
 
-function modeGenre(values: Array<string | null | undefined>): CanonicalGenre | null {
+export function modeGenre(values: Array<string | null | undefined>): CanonicalGenre | null {
   const counts = new Map<CanonicalGenre, number>();
   for (const v of values) {
     const n = normalizeGenre(v);

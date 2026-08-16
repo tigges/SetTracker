@@ -91,9 +91,21 @@ export default async function EventPage({
 
       {event.nights.length > 0 && (
         <section className="mb-8">
-          <h2 className="mb-3 text-[13px] font-semibold uppercase tracking-[0.14em] text-muted">
-            Upcoming nights
-          </h2>
+          <div className="mb-3 flex flex-wrap items-baseline justify-between gap-2">
+            <h2 className="text-[13px] font-semibold uppercase tracking-[0.14em] text-muted">
+              Upcoming nights
+            </h2>
+            {event.socials.website ? (
+              <a
+                href={event.socials.website}
+                target="_blank"
+                rel="noreferrer"
+                className="mono text-[12px] text-brand hover:text-brandstrong"
+              >
+                Official site →
+              </a>
+            ) : null}
+          </div>
           <ul className="space-y-2">
             {event.nights.slice(0, 12).map((n) => (
               <li
@@ -106,11 +118,24 @@ export default async function EventPage({
                   </span>
                   <span className="mono text-[12px] text-muted2">
                     {n.startsAt}
-                    {n.artists.length
-                      ? ` · ${n.artists.slice(0, 4).join(", ")}${
-                          n.artists.length > 4 ? "…" : ""
-                        }`
-                      : ""}
+                    {n.artists.length ? " · " : ""}
+                    {n.artists.slice(0, 6).map((a, i) => (
+                      <span key={`${a.name}-${i}`}>
+                        {i > 0 ? ", " : ""}
+                        {a.slug ? (
+                          <Link
+                            href={`/djs/${a.slug}`}
+                            className="text-ink transition-colors hover:text-brand"
+                            title="In catalog"
+                          >
+                            {a.name}
+                          </Link>
+                        ) : (
+                          <span title="On the bill">{a.name}</span>
+                        )}
+                      </span>
+                    ))}
+                    {n.artists.length > 6 ? "…" : ""}
                   </span>
                 </span>
                 <a
@@ -124,6 +149,11 @@ export default async function EventPage({
               </li>
             ))}
           </ul>
+          {event.nights.some((n) => n.artists.some((a) => a.slug)) ? (
+            <p className="mt-2 text-[11px] text-muted2">
+              Linked names are in the catalog; others are on the bill only.
+            </p>
+          ) : null}
         </section>
       )}
 
@@ -151,7 +181,9 @@ export default async function EventPage({
 
       {event.sets.length === 0 ? (
         <p className="text-[14px] text-muted">
-          No sets linked yet — check back after the next deep catalog refresh.
+          {event.nights.length > 0
+            ? "No Relives linked yet — nights above are from the official calendar."
+            : "No sets linked yet — check back after the next deep catalog refresh."}
         </p>
       ) : (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">

@@ -6,9 +6,15 @@ import { isBrowseReadyDj } from "@/lib/djBrowse";
 import { prisma } from "@/lib/db";
 import {
   expandGenres,
+  modeGenre,
   normalizeGenre,
   normalizeGenreList,
 } from "@/lib/genre";
+import {
+  catalogArtistIndex,
+  matchLineupName,
+  nightMentionsDj,
+} from "@/lib/lineupMatch";
 import { CURATED_LABEL_SLUGS } from "@/lib/ingest/curatedLabels";
 import { relatedSlugsFor } from "@/lib/ingest/discovery/relations";
 import { aliasSlugsFor, resolveSetSlug } from "@/lib/ingest/sourceRemaps";
@@ -794,6 +800,11 @@ export async function getDjBySlug(slug: string) {
       name: s.name,
       setCount: s._count.sets,
     })),
+    genre: modeGenre(sets.map((s) => s.genre)),
+    upcomingNights: await upcomingNightsForDj({
+      slug: dj.slug,
+      name: dj.name,
+    }),
     totals: {
       sets: sets.length,
       tracks: trackTotal,
@@ -808,6 +819,43 @@ export async function getDjBySlug(slug: string) {
 }
 
 export type DjProfile = NonNullable<Awaited<ReturnType<typeof getDjBySlug>>>;
+
+async function upcomingNightsForDj(
+  dj: { slug: string; name: string },
+  limit = 3,
+) {
+  const nightRows = await prisma.venueNight.findMany({
+    include: { event: { select: { slug: true, name: true } } },
+    orderBy: { startsAt: "asc" },
+  });
+  const out: Array<{
+    slug: string;
+    title: string;
+    startsAt: string;
+    eventSlug: string;
+    eventName: string;
+    sourceUrl: string;
+    ticketsUrl: string | null;
+  }> = [];
+  const nowMs = Date.now();
+  for (const row of nightRows) {
+    const startsAt = isoUTC(row.startsAt);
+    const endsAt = row.endsAt ? isoUTC(row.endsAt) : startsAt;
+    if (bucketVenueNight(startsAt, endsAt, nowMs) === "past") continue;
+    if (!nightMentionsDj(parseJsonStringList(row.artistsJson), dj)) continue;
+    out.push({
+      slug: row.slug,
+      title: row.title,
+      startsAt,
+      eventSlug: row.event.slug,
+      eventName: row.event.name,
+      sourceUrl: row.sourceUrl,
+      ticketsUrl: row.ticketsUrl,
+    });
+    if (out.length >= limit) break;
+  }
+  return out;
+}
 
 // ---------------------------------------------------------------------------
 // misc
@@ -1226,6 +1274,64 @@ export async function getAllVenueSlugs() {
   return rows.map((r) => r.slug);
 }
 
+export async function getAllSeriesSlugs() {
+  const rows = await prisma.series.findMany({
+    where: { sets: { some: {} } },
+    select: { slug: true },
+  });
+  return rows.map((r) => r.slug);
+}
+
+export async function getSeriesBySlug(slug: string) {
+  const series = await prisma.series.findUnique({
+    where: { slug },
+    include: {
+      dj: {
+        select: { slug: true, name: true, accent: true, imageUrl: true },
+      },
+      sets: {
+        orderBy: { publishedAt: "desc" },
+        include: {
+          artists: { include: { dj: true }, orderBy: { isPrimary: "desc" } },
+          event: true,
+        },
+      },
+    },
+  });
+  if (!series) return null;
+
+  const tallies = await statusCountsBySetIds(series.sets.map((s) => s.id));
+  return {
+    slug: series.slug,
+    name: series.name,
+    host: series.dj
+      ? {
+          slug: series.dj.slug,
+          name: series.dj.name,
+          accent: series.dj.accent,
+          imageUrl: series.dj.imageUrl,
+        }
+      : null,
+    sets: series.sets.map((s) => {
+      const primary = s.artists.find((a) => a.isPrimary) ?? s.artists[0];
+      const tally = tallies.get(s.id);
+      return {
+        slug: s.slug,
+        title: s.title,
+        type: s.type,
+        publishedAt: s.publishedAt,
+        durationSec: s.durationSec,
+        imageUrl: s.imageUrl ?? primary?.dj.imageUrl ?? null,
+        eventName: s.event?.name ?? null,
+        trackCount: tally?.trackCount ?? 0,
+        statusCounts: tally?.counts ?? emptyCounts(),
+      };
+    }),
+  };
+}
+
+export type SeriesProfile = NonNullable<Awaited<ReturnType<typeof getSeriesBySlug>>>;
+
 export async function getVenueBySlug(slug: string) {
   const event = await prisma.event.findUnique({
     where: { slug },
@@ -1287,6 +1393,33 @@ export async function getVenueBySlug(slug: string) {
         a.name.localeCompare(b.name),
     )
     .map(({ top100Rank: _rank, ...rest }) => rest);
+
+  const [nightRows, catalogRows] = await Promise.all([
+    prisma.venueNight.findMany({
+      where: { eventId: event.id },
+      orderBy: { startsAt: "asc" },
+    }),
+    prisma.dj.findMany({ select: { slug: true, name: true } }),
+  ]);
+  const catalog = catalogArtistIndex(catalogRows);
+  const nights = nightRows
+    .map((row) => {
+      const startsAt = isoUTC(row.startsAt);
+      const endsAt = row.endsAt ? isoUTC(row.endsAt) : startsAt;
+      return {
+        slug: row.slug,
+        title: row.title,
+        startsAt,
+        endsAt,
+        bucket: bucketVenueNight(startsAt, endsAt, Date.now()),
+        sourceUrl: row.sourceUrl,
+        ticketsUrl: row.ticketsUrl,
+        artists: parseJsonStringList(row.artistsJson).map((name) =>
+          matchLineupName(name, catalog),
+        ),
+      };
+    })
+    .filter((n) => n.bucket !== "past");
 
   const sets = event.sets
     .map((s) => {
@@ -1364,27 +1497,7 @@ export async function getVenueBySlug(slug: string) {
     lineupArtists,
     setCount: event.sets.length,
     sets,
-    nights: (
-      await prisma.venueNight.findMany({
-        where: { eventId: event.id },
-        orderBy: { startsAt: "asc" },
-      })
-    )
-      .map((row) => {
-        const startsAt = isoUTC(row.startsAt);
-        const endsAt = row.endsAt ? isoUTC(row.endsAt) : startsAt;
-        return {
-          slug: row.slug,
-          title: row.title,
-          startsAt,
-          endsAt,
-          bucket: bucketVenueNight(startsAt, endsAt, Date.now()),
-          sourceUrl: row.sourceUrl,
-          ticketsUrl: row.ticketsUrl,
-          artists: parseJsonStringList(row.artistsJson),
-        };
-      })
-      .filter((n) => n.bucket !== "past"),
+    nights,
   };
 }
 

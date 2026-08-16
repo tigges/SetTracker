@@ -29,3 +29,15 @@ export function isBrowseReadyDj(d: DjBrowseSignals): boolean {
   if (!d.imageUrl?.trim()) return false;
   return true;
 }
+
+/**
+ * Search can surface a DJ that is not directory-ready: a pin/handle or at
+ * least one set. Junk and hearthis-hobbyist rows stay hidden.
+ */
+export function isSearchableDj(
+  d: DjBrowseSignals & { isLowSignal?: boolean },
+): boolean {
+  if (d.isJunk) return false;
+  if (d.isLowSignal) return false;
+  return d.hasHandle || d.setCount >= 1;
+}

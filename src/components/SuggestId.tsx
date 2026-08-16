@@ -149,14 +149,14 @@ export function SuggestIdButton({
               target="_blank"
               rel="noreferrer"
               aria-disabled={!ready}
-              className={`text-center text-[10px] ${
-                ready ? "text-muted2 hover:text-ink" : "pointer-events-none text-muted2"
+              className={`rounded-md border border-line px-2 py-1 text-center text-[11px] ${
+                ready ? "text-ink hover:border-brand" : "pointer-events-none text-muted2"
               }`}
               onClick={(e) => {
                 if (!ready) e.preventDefault();
               }}
             >
-              Or open a GitHub issue
+              Open GitHub issue
             </a>
             <button
               type="button"

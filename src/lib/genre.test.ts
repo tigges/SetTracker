@@ -6,6 +6,7 @@ import {
   ensureGenre,
   expandGenres,
   isGenreTagName,
+  modeGenre,
   normalizeGenre,
   normalizeGenreList,
 } from "./genre";
@@ -121,5 +122,12 @@ describe("normalizeGenreList", () => {
         "UK Garage",
       ],
     );
+  });
+});
+
+describe("modeGenre", () => {
+  it("returns the most common canonical genre", () => {
+    assert.equal(modeGenre(["tech house", "Techno", "Tech House", null]), "Tech House");
+    assert.equal(modeGenre([null, "", "guestmix"]), null);
   });
 });

@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import {
   getAllDjSlugs,
   getAllLabelSlugs,
+  getAllSeriesSlugs,
   getAllSetSlugs,
   getAllTrackSlugs,
   getAllVenueSlugs,
@@ -16,12 +17,13 @@ function loc(path: string): string {
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [sets, djs, events, labels, tracks] = await Promise.all([
+  const [sets, djs, events, labels, tracks, series] = await Promise.all([
     getAllSetSlugs(),
     getAllDjSlugs(),
     getAllVenueSlugs(),
     getAllLabelSlugs(),
     getAllTrackSlugs(),
+    getAllSeriesSlugs(),
   ]);
 
   const staticPages: MetadataRoute.Sitemap = [
@@ -73,6 +75,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         url: loc(`/tracks/${slug}`),
         changeFrequency: "monthly" as const,
         priority: 0.3,
+      })),
+    ...series
+      .filter((s) => s !== "_placeholder")
+      .map((slug) => ({
+        url: loc(`/series/${slug}`),
+        changeFrequency: "weekly" as const,
+        priority: 0.4,
       })),
   ];
 }
