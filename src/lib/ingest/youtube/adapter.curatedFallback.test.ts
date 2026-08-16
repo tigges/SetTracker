@@ -41,6 +41,38 @@ const EPIC_036 = YOUTUBE_SETS.find((s) => s.video.includes("JLIYTueL4TI"));
 const HELDENS_DAYBREAK = YOUTUBE_SETS.find((s) =>
   s.video.includes("wuMQeEJ3YnQ"),
 );
+const CH_DANCE_VALLEY = YOUTUBE_SETS.find((s) =>
+  s.video.includes("pnzSuCiAGdk"),
+);
+const BASSJACKERS_TML = YOUTUBE_SETS.find((s) =>
+  s.video.includes("BG3Lr9EdWVY"),
+);
+const TUJAMO_PAROOKAVILLE = YOUTUBE_SETS.find((s) =>
+  s.video.includes("JhpL-KKGoO8"),
+);
+const DF_MH_PAROOKAVILLE = YOUTUBE_SETS.find((s) =>
+  s.video.includes("IwNPc_4ux84"),
+);
+const MW_TIME_LAB = YOUTUBE_SETS.find((s) => s.video.includes("XisbmW1Smgc"));
+const HW_PAROOKAVILLE = YOUTUBE_SETS.find((s) =>
+  s.video.includes("eBeeWwsCVls"),
+);
+const DV_PAROOKAVILLE = YOUTUBE_SETS.find((s) =>
+  s.video.includes("UETk8HSB0Yw"),
+);
+const WW_PAROOKAVILLE = YOUTUBE_SETS.find((s) =>
+  s.video.includes("or_SDolEBfw"),
+);
+const MANDY_NEGATIV_TML = YOUTUBE_SETS.find((s) =>
+  s.video.includes("J7b0G4XX8pg"),
+);
+const DLDK_ZIGGO = YOUTUBE_SETS.find((s) => s.video.includes("B1EaMgsf84Q"));
+const AFROJACK_R3HAB_TML = YOUTUBE_SETS.find((s) =>
+  s.video.includes("lEIGnx7qLl0"),
+);
+const INDIRA_TML_2023 = YOUTUBE_SETS.find((s) =>
+  s.video.includes("yPCOu0-JKJo"),
+);
 
 describe("watchMetaFromCuratedSeed", () => {
   it("builds ASOT 1290 meta from the curated 1001 capture", () => {
@@ -139,6 +171,138 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=OVex0rm7ZR4");
     // Last cue 1:07:05 + 180s pad.
     assert.equal(meta.durationSec, 1 * 3600 + 7 * 60 + 5 + 180);
+  });
+
+  it("builds Calvin Harris Dance Valley meta from the curated 1001 capture", () => {
+    assert.ok(CH_DANCE_VALLEY);
+    const meta = watchMetaFromCuratedSeed(CH_DANCE_VALLEY);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "pnzSuCiAGdk");
+    assert.match(meta.title, /Dance Valley/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=pnzSuCiAGdk");
+    // Last cue 1:12:29 + 180s pad.
+    assert.equal(meta.durationSec, 1 * 3600 + 12 * 60 + 29 + 180);
+  });
+
+  it("builds Bassjackers Great Library TML WE2 meta from the curated 1001 capture", () => {
+    assert.ok(BASSJACKERS_TML);
+    const meta = watchMetaFromCuratedSeed(BASSJACKERS_TML);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "BG3Lr9EdWVY");
+    assert.match(meta.title, /Great Library|Tomorrowland/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=BG3Lr9EdWVY");
+    // Last cue 59:30 + 180s pad.
+    assert.equal(meta.durationSec, 59 * 60 + 30 + 180);
+  });
+
+  it("builds TUJAMO Parookaville meta from the curated 1001 capture", () => {
+    assert.ok(TUJAMO_PAROOKAVILLE);
+    const meta = watchMetaFromCuratedSeed(TUJAMO_PAROOKAVILLE);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "JhpL-KKGoO8");
+    assert.match(meta.title, /Parookaville/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=JhpL-KKGoO8");
+    // Last cue 1:11:41 + 180s pad.
+    assert.equal(meta.durationSec, 1 * 3600 + 11 * 60 + 41 + 180);
+  });
+
+  it("builds Dillon Francis B2B Marten Horger Parookaville 2025 meta", () => {
+    assert.ok(DF_MH_PAROOKAVILLE);
+    const meta = watchMetaFromCuratedSeed(DF_MH_PAROOKAVILLE);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "IwNPc_4ux84");
+    assert.match(meta.title, /Parookaville 2025/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=IwNPc_4ux84");
+    // Last cue 59:30 + 180s pad.
+    assert.equal(meta.durationSec, 59 * 60 + 30 + 180);
+  });
+
+  it("builds Mike Williams Time Lab Parookaville meta from the curated 1001 capture", () => {
+    assert.ok(MW_TIME_LAB);
+    const meta = watchMetaFromCuratedSeed(MW_TIME_LAB);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "XisbmW1Smgc");
+    assert.match(meta.title, /Time Lab|Parookaville/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=XisbmW1Smgc");
+    // Last cue 56:09 + 180s pad.
+    assert.equal(meta.durationSec, 56 * 60 + 9 + 180);
+  });
+
+  it("builds Hardwell Parookaville meta from the curated 1001 capture", () => {
+    assert.ok(HW_PAROOKAVILLE);
+    const meta = watchMetaFromCuratedSeed(HW_PAROOKAVILLE);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "eBeeWwsCVls");
+    assert.match(meta.title, /Parookaville/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=eBeeWwsCVls");
+    // Last cue 1:19:07 + 180s pad.
+    assert.equal(meta.durationSec, 1 * 3600 + 19 * 60 + 7 + 180);
+  });
+
+  it("builds DubVision Parookaville meta from the curated 1001 capture", () => {
+    assert.ok(DV_PAROOKAVILLE);
+    const meta = watchMetaFromCuratedSeed(DV_PAROOKAVILLE);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "UETk8HSB0Yw");
+    assert.match(meta.title, /Parookaville/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=UETk8HSB0Yw");
+    // Last cue 56:13 + 180s pad.
+    assert.equal(meta.durationSec, 56 * 60 + 13 + 180);
+  });
+
+  it("builds W&W Parookaville meta from the curated 1001 capture", () => {
+    assert.ok(WW_PAROOKAVILLE);
+    const meta = watchMetaFromCuratedSeed(WW_PAROOKAVILLE);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "or_SDolEBfw");
+    assert.match(meta.title, /Parookaville/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=or_SDolEBfw");
+    // Last cue 1:11:25 + 180s pad.
+    assert.equal(meta.durationSec, 1 * 3600 + 11 * 60 + 25 + 180);
+  });
+
+  it("builds MANDY B2B Negativ Atmosphere TML WE1 meta from the curated 1001 capture", () => {
+    assert.ok(MANDY_NEGATIV_TML);
+    const meta = watchMetaFromCuratedSeed(MANDY_NEGATIV_TML);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "J7b0G4XX8pg");
+    assert.match(meta.title, /Atmosphere|Tomorrowland/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=J7b0G4XX8pg");
+    // Last cue 57:56 + 180s pad.
+    assert.equal(meta.durationSec, 57 * 60 + 56 + 180);
+  });
+
+  it("builds Indira Paganotto Atmosphere TML WE1 2023 meta from the curated 1001 capture", () => {
+    assert.ok(INDIRA_TML_2023);
+    const meta = watchMetaFromCuratedSeed(INDIRA_TML_2023);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "yPCOu0-JKJo");
+    assert.match(meta.title, /Atmosphere|Tomorrowland/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=yPCOu0-JKJo");
+    // Last cue 1:55:24 + 180s pad.
+    assert.equal(meta.durationSec, 1 * 3600 + 55 * 60 + 24 + 180);
+  });
+
+  it("builds AFROJACK B2B R3HAB TML WE2 meta from the curated 1001 capture", () => {
+    assert.ok(AFROJACK_R3HAB_TML);
+    const meta = watchMetaFromCuratedSeed(AFROJACK_R3HAB_TML);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "lEIGnx7qLl0");
+    assert.match(meta.title, /Tomorrowland/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=lEIGnx7qLl0");
+    // Last cue 59:30 + 180s pad.
+    assert.equal(meta.durationSec, 59 * 60 + 30 + 180);
+  });
+
+  it("builds Lucas & Steve B2B Mike Williams DLDK Ziggo meta from the curated 1001 capture", () => {
+    assert.ok(DLDK_ZIGGO);
+    const meta = watchMetaFromCuratedSeed(DLDK_ZIGGO);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "B1EaMgsf84Q");
+    assert.match(meta.title, /Don't Let Daddy Know|Ziggo/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=B1EaMgsf84Q");
+    // Last cue 59:30 + 180s pad.
+    assert.equal(meta.durationSec, 59 * 60 + 30 + 180);
   });
 
   it("builds Vintage Culture NYC Yacht meta from the curated 1001 capture", () => {
@@ -766,5 +930,184 @@ describe("curated YouTube 429 fallback", () => {
     assert.equal(sets[0]?.primaryArtist?.slug, "oliver-heldens");
     assert.match(String(sets[0]?.title ?? ""), /Daybreak/i);
     assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
+  });
+
+  it("lands Calvin Harris Dance Valley from the 1001 seed when watch is 429", async () => {
+    assert.ok(CH_DANCE_VALLEY);
+    const adapter = createYoutubeAdapter([CH_DANCE_VALLEY], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-pnzSuCiAGdk");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 35);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 1 * 3600 + 12 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "calvin-harris");
+    assert.match(String(sets[0]?.eventName ?? ""), /Dance Valley/i);
+  });
+
+  it("lands Bassjackers Great Library TML WE2 from the 1001 seed when watch is 429", async () => {
+    assert.ok(BASSJACKERS_TML);
+    const adapter = createYoutubeAdapter([BASSJACKERS_TML], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-BG3Lr9EdWVY");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 36);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 59 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "bassjackers");
+    assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
+  });
+
+  it("lands TUJAMO Parookaville from the 1001 seed when watch is 429", async () => {
+    assert.ok(TUJAMO_PAROOKAVILLE);
+    const adapter = createYoutubeAdapter([TUJAMO_PAROOKAVILLE], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-JhpL-KKGoO8");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 74);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 1 * 3600 + 11 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "tujamo");
+    assert.match(String(sets[0]?.eventName ?? ""), /Parookaville/i);
+  });
+
+  it("lands Dillon Francis B2B Marten Horger Parookaville 2025 when watch is 429", async () => {
+    assert.ok(DF_MH_PAROOKAVILLE);
+    const adapter = createYoutubeAdapter([DF_MH_PAROOKAVILLE], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-IwNPc_4ux84");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 32);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 59 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "dillon-francis");
+    assert.ok(
+      sets[0]?.collaborators?.some((c) => c.slug === "marten-horger"),
+    );
+    assert.match(String(sets[0]?.eventName ?? ""), /Parookaville/i);
+  });
+
+  it("lands Mike Williams Time Lab Parookaville from the 1001 seed when watch is 429", async () => {
+    assert.ok(MW_TIME_LAB);
+    const adapter = createYoutubeAdapter([MW_TIME_LAB], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-XisbmW1Smgc");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 50);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 56 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "mike-williams");
+    assert.match(String(sets[0]?.eventName ?? ""), /Parookaville/i);
+    assert.match(String(sets[0]?.title ?? ""), /Time Lab/i);
+  });
+
+  it("lands Hardwell Parookaville from the 1001 seed when watch is 429", async () => {
+    assert.ok(HW_PAROOKAVILLE);
+    const adapter = createYoutubeAdapter([HW_PAROOKAVILLE], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-eBeeWwsCVls");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 63);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 1 * 3600 + 19 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "hardwell");
+    assert.match(String(sets[0]?.eventName ?? ""), /Parookaville/i);
+  });
+
+  it("lands DubVision Parookaville from the 1001 seed when watch is 429", async () => {
+    assert.ok(DV_PAROOKAVILLE);
+    const adapter = createYoutubeAdapter([DV_PAROOKAVILLE], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-UETk8HSB0Yw");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 62);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 56 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "dubvision");
+    assert.match(String(sets[0]?.eventName ?? ""), /Parookaville/i);
+  });
+
+  it("lands W&W Parookaville from the 1001 seed when watch is 429", async () => {
+    assert.ok(WW_PAROOKAVILLE);
+    const adapter = createYoutubeAdapter([WW_PAROOKAVILLE], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-or_SDolEBfw");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 58);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 1 * 3600 + 11 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "w-w");
+    assert.match(String(sets[0]?.eventName ?? ""), /Parookaville/i);
+  });
+
+  it("lands MANDY B2B Negativ Atmosphere TML WE1 from the 1001 seed when watch is 429", async () => {
+    assert.ok(MANDY_NEGATIV_TML);
+    const adapter = createYoutubeAdapter([MANDY_NEGATIV_TML], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-J7b0G4XX8pg");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 55);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 57 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "mandy");
+    assert.ok(sets[0]?.collaborators?.some((c) => c.slug === "negitiv"));
+    assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
+  });
+
+  it("lands Indira Paganotto Atmosphere TML WE1 2023 from the 1001 seed when watch is 429", async () => {
+    assert.ok(INDIRA_TML_2023);
+    const adapter = createYoutubeAdapter([INDIRA_TML_2023], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-yPCOu0-JKJo");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 29);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 1 * 3600 + 55 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "indira-paganotto");
+    assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
+  });
+
+  it("lands AFROJACK B2B R3HAB TML WE2 from the 1001 seed when watch is 429", async () => {
+    assert.ok(AFROJACK_R3HAB_TML);
+    const adapter = createYoutubeAdapter([AFROJACK_R3HAB_TML], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-lEIGnx7qLl0");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 54);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 59 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "afrojack");
+    assert.ok(sets[0]?.collaborators?.some((c) => c.slug === "r3hab"));
+    assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
+  });
+
+  it("lands Lucas & Steve B2B Mike Williams DLDK Ziggo from the 1001 seed when watch is 429", async () => {
+    assert.ok(DLDK_ZIGGO);
+    const adapter = createYoutubeAdapter([DLDK_ZIGGO], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-B1EaMgsf84Q");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 51);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 59 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "lucas-steve");
+    assert.ok(sets[0]?.collaborators?.some((c) => c.slug === "mike-williams"));
+    assert.equal(
+      sets[0]?.collaborators?.some((c) => c.slug === "steve"),
+      false,
+    );
+    assert.match(String(sets[0]?.eventName ?? ""), /Don't Let Daddy Know/i);
   });
 });

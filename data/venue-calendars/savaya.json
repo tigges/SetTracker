@@ -1,0 +1,910 @@
+{
+  "venueSlug": "savaya",
+  "venueName": "Savaya",
+  "sourceUrl": "https://www.savaya.com/event-calendar",
+  "fetchedAt": "2026-08-16T14:46:38.148Z",
+  "nights": [
+    {
+      "title": "SNAKEHIPS",
+      "startsAt": "2026-08-16",
+      "sourceUrl": "http://www.savaya.com/event-calendar/august-16-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/august-16-2026",
+      "artists": [
+        "SNAKEHIPS"
+      ]
+    },
+    {
+      "title": "LAST LIGHT",
+      "startsAt": "2026-08-16",
+      "sourceUrl": "http://www.savaya.com/event-calendar/august-16-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/august-16-2026",
+      "artists": [
+        "LAST LIGHT"
+      ]
+    },
+    {
+      "title": "SAVAYA TUESDAY",
+      "startsAt": "2026-08-17",
+      "sourceUrl": "http://www.savaya.com/event-calendar/august-17-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/august-17-2026",
+      "artists": [
+        "SAVAYA TUESDAY"
+      ]
+    },
+    {
+      "title": "SAVAYA WEDNESDAY",
+      "startsAt": "2026-08-18",
+      "sourceUrl": "http://www.savaya.com/event-calendar/august-18-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/august-18-2026",
+      "artists": [
+        "SAVAYA WEDNESDAY"
+      ]
+    },
+    {
+      "title": "SAVAYA THURSDAY",
+      "startsAt": "2026-08-19",
+      "sourceUrl": "http://www.savaya.com/event-calendar/august-19-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/august-19-2026",
+      "artists": [
+        "SAVAYA THURSDAY"
+      ]
+    },
+    {
+      "title": "DEFECTED",
+      "startsAt": "2026-08-20",
+      "sourceUrl": "http://www.savaya.com/event-calendar/august-20-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/august-20-2026",
+      "artists": [
+        "DEFECTED"
+      ]
+    },
+    {
+      "title": "CRISTOPH",
+      "startsAt": "2026-08-21",
+      "sourceUrl": "http://www.savaya.com/event-calendar/august-21-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/august-21-2026",
+      "artists": [
+        "CRISTOPH"
+      ]
+    },
+    {
+      "title": "AWEN",
+      "startsAt": "2026-08-22",
+      "sourceUrl": "http://www.savaya.com/event-calendar/august-22-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/august-22-2026",
+      "artists": [
+        "AWEN"
+      ]
+    },
+    {
+      "title": "LAST LIGHT",
+      "startsAt": "2026-08-23",
+      "sourceUrl": "http://www.savaya.com/event-calendar/august-23-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/august-23-2026",
+      "artists": [
+        "LAST LIGHT"
+      ]
+    },
+    {
+      "title": "SAVAYA TUESDAY",
+      "startsAt": "2026-08-24",
+      "sourceUrl": "http://www.savaya.com/event-calendar/august-24-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/august-24-2026",
+      "artists": [
+        "SAVAYA TUESDAY"
+      ]
+    },
+    {
+      "title": "SAVAYA WEDNESDAY",
+      "startsAt": "2026-08-25",
+      "sourceUrl": "http://www.savaya.com/event-calendar/august-25-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/august-25-2026",
+      "artists": [
+        "SAVAYA WEDNESDAY"
+      ]
+    },
+    {
+      "title": "SAVAYA THURSDAY",
+      "startsAt": "2026-08-26",
+      "sourceUrl": "http://www.savaya.com/event-calendar/august-26-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/august-26-2026",
+      "artists": [
+        "SAVAYA THURSDAY"
+      ]
+    },
+    {
+      "title": "SAM FELDT",
+      "startsAt": "2026-08-27",
+      "sourceUrl": "http://www.savaya.com/event-calendar/august-27-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/august-27-2026",
+      "artists": [
+        "SAM FELDT"
+      ]
+    },
+    {
+      "title": "GENESI",
+      "startsAt": "2026-08-28",
+      "sourceUrl": "http://www.savaya.com/event-calendar/august-28-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/august-28-2026",
+      "artists": [
+        "GENESI"
+      ]
+    },
+    {
+      "title": "AARON SEVILLA",
+      "startsAt": "2026-08-29",
+      "sourceUrl": "http://www.savaya.com/event-calendar/august-29-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/august-29-2026",
+      "artists": [
+        "AARON SEVILLA"
+      ]
+    },
+    {
+      "title": "LAST LIGHT",
+      "startsAt": "2026-08-30",
+      "sourceUrl": "http://www.savaya.com/event-calendar/august-30-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/august-30-2026",
+      "artists": [
+        "LAST LIGHT"
+      ]
+    },
+    {
+      "title": "SAVAYA TUESDAY",
+      "startsAt": "2026-08-31",
+      "sourceUrl": "http://www.savaya.com/event-calendar/august-31-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/august-31-2026",
+      "artists": [
+        "SAVAYA TUESDAY"
+      ]
+    },
+    {
+      "title": "SAVAYA WEDNESDAY",
+      "startsAt": "2026-09-01",
+      "sourceUrl": "http://www.savaya.com/event-calendar/september-1-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/september-1-2026",
+      "artists": [
+        "SAVAYA WEDNESDAY"
+      ]
+    },
+    {
+      "title": "SAVAYA THURSDAY",
+      "startsAt": "2026-09-02",
+      "sourceUrl": "http://www.savaya.com/event-calendar/september-2-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/september-2-2026",
+      "artists": [
+        "SAVAYA THURSDAY"
+      ]
+    },
+    {
+      "title": "SOUTHERN TRIBE",
+      "startsAt": "2026-09-03",
+      "sourceUrl": "http://www.savaya.com/event-calendar/september-3-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/september-3-2026",
+      "artists": [
+        "SOUTHERN TRIBE"
+      ]
+    },
+    {
+      "title": "LAOLU",
+      "startsAt": "2026-09-04",
+      "sourceUrl": "http://www.savaya.com/event-calendar/september-4-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/september-4-2026",
+      "artists": [
+        "LAOLU"
+      ]
+    },
+    {
+      "title": "MAESIC",
+      "startsAt": "2026-09-05",
+      "sourceUrl": "http://www.savaya.com/event-calendar/september-5-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/september-5-2026",
+      "artists": [
+        "MAESIC"
+      ]
+    },
+    {
+      "title": "LAST LIGHT",
+      "startsAt": "2026-09-06",
+      "sourceUrl": "http://www.savaya.com/event-calendar/september-6-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/september-6-2026",
+      "artists": [
+        "LAST LIGHT"
+      ]
+    },
+    {
+      "title": "SAVAYA TUESDAY",
+      "startsAt": "2026-09-07",
+      "sourceUrl": "http://www.savaya.com/event-calendar/september-7-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/september-7-2026",
+      "artists": [
+        "SAVAYA TUESDAY"
+      ]
+    },
+    {
+      "title": "SAVAYA WEDNESDAY",
+      "startsAt": "2026-09-08",
+      "sourceUrl": "http://www.savaya.com/event-calendar/september-8-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/september-8-2026",
+      "artists": [
+        "SAVAYA WEDNESDAY"
+      ]
+    },
+    {
+      "title": "SAVAYA THURSDAY",
+      "startsAt": "2026-09-09",
+      "sourceUrl": "http://www.savaya.com/event-calendar/september-9-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/september-9-2026",
+      "artists": [
+        "SAVAYA THURSDAY"
+      ]
+    },
+    {
+      "title": "SAVAYA FRIDAY",
+      "startsAt": "2026-09-10",
+      "sourceUrl": "http://www.savaya.com/event-calendar/september-10-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/september-10-2026",
+      "artists": [
+        "SAVAYA FRIDAY"
+      ]
+    },
+    {
+      "title": "MARTEN LOU",
+      "startsAt": "2026-09-11",
+      "sourceUrl": "http://www.savaya.com/event-calendar/september-11-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/september-11-2026",
+      "artists": [
+        "MARTEN LOU"
+      ]
+    },
+    {
+      "title": "TOPIC",
+      "startsAt": "2026-09-12",
+      "sourceUrl": "http://www.savaya.com/event-calendar/september-12-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/september-12-2026",
+      "artists": [
+        "TOPIC"
+      ]
+    },
+    {
+      "title": "LAST LIGHT",
+      "startsAt": "2026-09-13",
+      "sourceUrl": "http://www.savaya.com/event-calendar/september-13-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/september-13-2026",
+      "artists": [
+        "LAST LIGHT"
+      ]
+    },
+    {
+      "title": "SAVAYA TUESDAY",
+      "startsAt": "2026-09-14",
+      "sourceUrl": "http://www.savaya.com/event-calendar/september-14-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/september-14-2026",
+      "artists": [
+        "SAVAYA TUESDAY"
+      ]
+    },
+    {
+      "title": "SAVAYA WEDNESDAY",
+      "startsAt": "2026-09-15",
+      "sourceUrl": "http://www.savaya.com/event-calendar/september-15-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/september-15-2026",
+      "artists": [
+        "SAVAYA WEDNESDAY"
+      ]
+    },
+    {
+      "title": "SAVAYA THURSDAY",
+      "startsAt": "2026-09-16",
+      "sourceUrl": "http://www.savaya.com/event-calendar/september-16-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/september-16-2026",
+      "artists": [
+        "SAVAYA THURSDAY"
+      ]
+    },
+    {
+      "title": "SAVAYA FRIDAY",
+      "startsAt": "2026-09-17",
+      "sourceUrl": "http://www.savaya.com/event-calendar/september-17-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/september-17-2026",
+      "artists": [
+        "SAVAYA FRIDAY"
+      ]
+    },
+    {
+      "title": "TECHNO AND CHILL",
+      "startsAt": "2026-09-18",
+      "sourceUrl": "http://www.savaya.com/event-calendar/september-18-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/september-18-2026",
+      "artists": []
+    },
+    {
+      "title": "TECHNO AND CHILL",
+      "startsAt": "2026-09-19",
+      "sourceUrl": "http://www.savaya.com/event-calendar/september-19-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/september-19-2026",
+      "artists": []
+    },
+    {
+      "title": "LAST LIGHT",
+      "startsAt": "2026-09-20",
+      "sourceUrl": "http://www.savaya.com/event-calendar/september-20-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/september-20-2026",
+      "artists": [
+        "LAST LIGHT"
+      ]
+    },
+    {
+      "title": "SAVAYA TUESDAY",
+      "startsAt": "2026-09-21",
+      "sourceUrl": "http://www.savaya.com/event-calendar/september-21-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/september-21-2026",
+      "artists": [
+        "SAVAYA TUESDAY"
+      ]
+    },
+    {
+      "title": "SAVAYA WEDNESDAY",
+      "startsAt": "2026-09-22",
+      "sourceUrl": "http://www.savaya.com/event-calendar/september-22-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/september-22-2026",
+      "artists": [
+        "SAVAYA WEDNESDAY"
+      ]
+    },
+    {
+      "title": "SAVAYA THURSDAY",
+      "startsAt": "2026-09-23",
+      "sourceUrl": "http://www.savaya.com/event-calendar/september-23-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/september-23-2026",
+      "artists": [
+        "SAVAYA THURSDAY"
+      ]
+    },
+    {
+      "title": "FULL MOON",
+      "startsAt": "2026-09-24",
+      "sourceUrl": "http://www.savaya.com/event-calendar/september-24-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/september-24-2026",
+      "artists": [
+        "FULL MOON"
+      ]
+    },
+    {
+      "title": "STEPHAN BODZIN",
+      "startsAt": "2026-09-25",
+      "sourceUrl": "http://www.savaya.com/event-calendar/september-25-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/september-25-2026",
+      "artists": [
+        "STEPHAN BODZIN"
+      ]
+    },
+    {
+      "title": "THE MARTINEZ BROTHERS",
+      "startsAt": "2026-09-26",
+      "sourceUrl": "http://www.savaya.com/event-calendar/september-26-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/september-26-2026",
+      "artists": [
+        "THE MARTINEZ BROTHERS"
+      ]
+    },
+    {
+      "title": "LAST LIGHT",
+      "startsAt": "2026-09-27",
+      "sourceUrl": "http://www.savaya.com/event-calendar/september-27-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/september-27-2026",
+      "artists": [
+        "LAST LIGHT"
+      ]
+    },
+    {
+      "title": "SAVAYA TUESDAY",
+      "startsAt": "2026-09-28",
+      "sourceUrl": "http://www.savaya.com/event-calendar/september-28-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/september-28-2026",
+      "artists": [
+        "SAVAYA TUESDAY"
+      ]
+    },
+    {
+      "title": "SAVAYA WEDNESDAY",
+      "startsAt": "2026-09-29",
+      "sourceUrl": "http://www.savaya.com/event-calendar/september-29-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/september-29-2026",
+      "artists": [
+        "SAVAYA WEDNESDAY"
+      ]
+    },
+    {
+      "title": "SAVAYA THURSDAY",
+      "startsAt": "2026-09-30",
+      "sourceUrl": "http://www.savaya.com/event-calendar/september-30-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/september-30-2026",
+      "artists": [
+        "SAVAYA THURSDAY"
+      ]
+    },
+    {
+      "title": "SAVAYA FRIDAY",
+      "startsAt": "2026-10-01",
+      "sourceUrl": "http://www.savaya.com/event-calendar/october-1-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/october-1-2026",
+      "artists": [
+        "SAVAYA FRIDAY"
+      ]
+    },
+    {
+      "title": "STEPHAN JOLK",
+      "startsAt": "2026-10-02",
+      "sourceUrl": "http://www.savaya.com/event-calendar/october-2-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/october-2-2026",
+      "artists": [
+        "STEPHAN JOLK"
+      ]
+    },
+    {
+      "title": "ALEX WANN",
+      "startsAt": "2026-10-03",
+      "sourceUrl": "http://www.savaya.com/event-calendar/october-3-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/october-3-2026",
+      "artists": [
+        "ALEX WANN"
+      ]
+    },
+    {
+      "title": "LAST LIGHT",
+      "startsAt": "2026-10-04",
+      "sourceUrl": "http://www.savaya.com/event-calendar/october-4-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/october-4-2026",
+      "artists": [
+        "LAST LIGHT"
+      ]
+    },
+    {
+      "title": "SAVAYA TUESDAY",
+      "startsAt": "2026-10-05",
+      "sourceUrl": "http://www.savaya.com/event-calendar/october-5-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/october-5-2026",
+      "artists": [
+        "SAVAYA TUESDAY"
+      ]
+    },
+    {
+      "title": "SAVAYA WEDNESDAY",
+      "startsAt": "2026-10-06",
+      "sourceUrl": "http://www.savaya.com/event-calendar/october-6-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/october-6-2026",
+      "artists": [
+        "SAVAYA WEDNESDAY"
+      ]
+    },
+    {
+      "title": "DIPLO",
+      "startsAt": "2026-10-07",
+      "sourceUrl": "http://www.savaya.com/event-calendar/october-7-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/october-7-2026",
+      "artists": [
+        "DIPLO"
+      ]
+    },
+    {
+      "title": "SAVAYA FRIDAY",
+      "startsAt": "2026-10-08",
+      "sourceUrl": "http://www.savaya.com/event-calendar/october-8-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/october-8-2026",
+      "artists": [
+        "SAVAYA FRIDAY"
+      ]
+    },
+    {
+      "title": "RIVO",
+      "startsAt": "2026-10-09",
+      "sourceUrl": "http://www.savaya.com/event-calendar/october-9-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/october-9-2026",
+      "artists": [
+        "RIVO"
+      ]
+    },
+    {
+      "title": "COLYN",
+      "startsAt": "2026-10-10",
+      "sourceUrl": "http://www.savaya.com/event-calendar/october-10-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/october-10-2026",
+      "artists": [
+        "COLYN"
+      ]
+    },
+    {
+      "title": "LAST LIGHT",
+      "startsAt": "2026-10-11",
+      "sourceUrl": "http://www.savaya.com/event-calendar/october-11-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/october-11-2026",
+      "artists": [
+        "LAST LIGHT"
+      ]
+    },
+    {
+      "title": "SAVAYA TUESDAY",
+      "startsAt": "2026-10-12",
+      "sourceUrl": "http://www.savaya.com/event-calendar/october-12-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/october-12-2026",
+      "artists": [
+        "SAVAYA TUESDAY"
+      ]
+    },
+    {
+      "title": "SAVAYA WEDNESDAY",
+      "startsAt": "2026-10-13",
+      "sourceUrl": "http://www.savaya.com/event-calendar/october-13-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/october-13-2026",
+      "artists": [
+        "SAVAYA WEDNESDAY"
+      ]
+    },
+    {
+      "title": "SAVAYA THURSDAY",
+      "startsAt": "2026-10-14",
+      "sourceUrl": "http://www.savaya.com/event-calendar/october-14-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/october-14-2026",
+      "artists": [
+        "SAVAYA THURSDAY"
+      ]
+    },
+    {
+      "title": "SOUTHERN TRIBE",
+      "startsAt": "2026-10-15",
+      "sourceUrl": "http://www.savaya.com/event-calendar/october-15-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/october-15-2026",
+      "artists": [
+        "SOUTHERN TRIBE"
+      ]
+    },
+    {
+      "title": "ZAMNA",
+      "startsAt": "2026-10-16",
+      "sourceUrl": "http://www.savaya.com/event-calendar/october-16-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/october-16-2026",
+      "artists": [
+        "ZAMNA"
+      ]
+    },
+    {
+      "title": "ZAMNA",
+      "startsAt": "2026-10-17",
+      "sourceUrl": "http://www.savaya.com/event-calendar/october-17-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/october-17-2026",
+      "artists": [
+        "ZAMNA"
+      ]
+    },
+    {
+      "title": "LAST LIGHT",
+      "startsAt": "2026-10-18",
+      "sourceUrl": "http://www.savaya.com/event-calendar/october-18-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/october-18-2026",
+      "artists": [
+        "LAST LIGHT"
+      ]
+    },
+    {
+      "title": "SAVAYA TUESDAY",
+      "startsAt": "2026-10-19",
+      "sourceUrl": "http://www.savaya.com/event-calendar/october-19-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/october-19-2026",
+      "artists": [
+        "SAVAYA TUESDAY"
+      ]
+    },
+    {
+      "title": "SAVAYA WEDNESDAY",
+      "startsAt": "2026-10-20",
+      "sourceUrl": "http://www.savaya.com/event-calendar/october-20-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/october-20-2026",
+      "artists": [
+        "SAVAYA WEDNESDAY"
+      ]
+    },
+    {
+      "title": "SAVAYA THURSDAY",
+      "startsAt": "2026-10-21",
+      "sourceUrl": "http://www.savaya.com/event-calendar/october-21-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/october-21-2026",
+      "artists": [
+        "SAVAYA THURSDAY"
+      ]
+    },
+    {
+      "title": "FULL MOON",
+      "startsAt": "2026-10-22",
+      "sourceUrl": "http://www.savaya.com/event-calendar/october-22-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/october-22-2026",
+      "artists": [
+        "FULL MOON"
+      ]
+    },
+    {
+      "title": "FRANKY WAH",
+      "startsAt": "2026-10-23",
+      "sourceUrl": "http://www.savaya.com/event-calendar/october-23-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/october-23-2026",
+      "artists": [
+        "FRANKY WAH"
+      ]
+    },
+    {
+      "title": "SPECIAL GUEST",
+      "startsAt": "2026-10-24",
+      "sourceUrl": "http://www.savaya.com/event-calendar/october-24-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/october-24-2026",
+      "artists": [
+        "SPECIAL GUEST"
+      ]
+    },
+    {
+      "title": "LAST LIGHT",
+      "startsAt": "2026-10-25",
+      "sourceUrl": "http://www.savaya.com/event-calendar/october-25-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/october-25-2026",
+      "artists": [
+        "LAST LIGHT"
+      ]
+    },
+    {
+      "title": "SAVAYA TUESDAY",
+      "startsAt": "2026-10-26",
+      "sourceUrl": "http://www.savaya.com/event-calendar/october-26-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/october-26-2026",
+      "artists": [
+        "SAVAYA TUESDAY"
+      ]
+    },
+    {
+      "title": "SAVAYA WEDNESDAY",
+      "startsAt": "2026-10-27",
+      "sourceUrl": "http://www.savaya.com/event-calendar/october-27-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/october-27-2026",
+      "artists": [
+        "SAVAYA WEDNESDAY"
+      ]
+    },
+    {
+      "title": "SAVAYA THURSDAY",
+      "startsAt": "2026-10-28",
+      "sourceUrl": "http://www.savaya.com/event-calendar/october-28-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/october-28-2026",
+      "artists": [
+        "SAVAYA THURSDAY"
+      ]
+    },
+    {
+      "title": "JONAS BLUE",
+      "startsAt": "2026-10-29",
+      "sourceUrl": "http://www.savaya.com/event-calendar/october-29-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/october-29-2026",
+      "artists": [
+        "JONAS BLUE",
+        "HALLOWEEN WEEKEND"
+      ]
+    },
+    {
+      "title": "HAYDEN JAMES",
+      "startsAt": "2026-10-30",
+      "sourceUrl": "http://www.savaya.com/event-calendar/october-30-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/october-30-2026",
+      "artists": [
+        "HAYDEN JAMES",
+        "HALLOWEEN WEEKEND"
+      ]
+    },
+    {
+      "title": "SPECIAL GUEST",
+      "startsAt": "2026-10-31",
+      "sourceUrl": "http://www.savaya.com/event-calendar/october-31-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/october-31-2026",
+      "artists": [
+        "SPECIAL GUEST",
+        "HALLOWEEN WEEKEND"
+      ]
+    },
+    {
+      "title": "LAST LIGHT",
+      "startsAt": "2026-11-01",
+      "sourceUrl": "http://www.savaya.com/event-calendar/november-1-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/november-1-2026",
+      "artists": [
+        "LAST LIGHT",
+        "HALLOWEEN WEEKEND"
+      ]
+    },
+    {
+      "title": "SAVAYA TUESDAY",
+      "startsAt": "2026-11-02",
+      "sourceUrl": "http://www.savaya.com/event-calendar/november-2-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/november-2-2026",
+      "artists": [
+        "SAVAYA TUESDAY"
+      ]
+    },
+    {
+      "title": "SAVAYA WEDNESDAY",
+      "startsAt": "2026-11-03",
+      "sourceUrl": "http://www.savaya.com/event-calendar/november-3-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/november-3-2026",
+      "artists": [
+        "SAVAYA WEDNESDAY"
+      ]
+    },
+    {
+      "title": "SAVAYA THURSDAY",
+      "startsAt": "2026-11-04",
+      "sourceUrl": "http://www.savaya.com/event-calendar/november-4-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/november-4-2026",
+      "artists": [
+        "SAVAYA THURSDAY"
+      ]
+    },
+    {
+      "title": "YOUSUKE YUKIMATSU",
+      "startsAt": "2026-11-05",
+      "sourceUrl": "http://www.savaya.com/event-calendar/november-5-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/november-5-2026",
+      "artists": [
+        "YOUSUKE YUKIMATSU"
+      ]
+    },
+    {
+      "title": "SPECIAL GUEST",
+      "startsAt": "2026-11-06",
+      "sourceUrl": "http://www.savaya.com/event-calendar/november-6-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/november-6-2026",
+      "artists": [
+        "SPECIAL GUEST"
+      ]
+    },
+    {
+      "title": "ELVIS GUETTA",
+      "startsAt": "2026-11-07",
+      "sourceUrl": "http://www.savaya.com/event-calendar/november-7-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/november-7-2026",
+      "artists": [
+        "ELVIS GUETTA",
+        "PEOPLE OF SUN"
+      ]
+    },
+    {
+      "title": "LAST LIGHT",
+      "startsAt": "2026-11-08",
+      "sourceUrl": "http://www.savaya.com/event-calendar/november-8-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/november-8-2026",
+      "artists": [
+        "LAST LIGHT",
+        "PEOPLE OF SUN"
+      ]
+    },
+    {
+      "title": "SAVAYA TUESDAY",
+      "startsAt": "2026-11-09",
+      "sourceUrl": "http://www.savaya.com/event-calendar/november-9-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/november-9-2026",
+      "artists": [
+        "SAVAYA TUESDAY"
+      ]
+    },
+    {
+      "title": "SAVAYA WEDNESDAY",
+      "startsAt": "2026-11-10",
+      "sourceUrl": "http://www.savaya.com/event-calendar/november-10-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/november-10-2026",
+      "artists": [
+        "SAVAYA WEDNESDAY"
+      ]
+    },
+    {
+      "title": "SAVAYA THURSDAY",
+      "startsAt": "2026-11-11",
+      "sourceUrl": "http://www.savaya.com/event-calendar/november-11-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/november-11-2026",
+      "artists": [
+        "SAVAYA THURSDAY"
+      ]
+    },
+    {
+      "title": "SOUTHERN TRIBE",
+      "startsAt": "2026-11-12",
+      "sourceUrl": "http://www.savaya.com/event-calendar/november-12-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/november-12-2026",
+      "artists": [
+        "SOUTHERN TRIBE"
+      ]
+    },
+    {
+      "title": "MK",
+      "startsAt": "2026-11-13",
+      "sourceUrl": "http://www.savaya.com/event-calendar/november-13-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/november-13-2026",
+      "artists": [
+        "MK"
+      ]
+    },
+    {
+      "title": "LEE BURRIDGE",
+      "startsAt": "2026-11-14",
+      "sourceUrl": "http://www.savaya.com/event-calendar/november-14-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/november-14-2026",
+      "artists": [
+        "LEE BURRIDGE"
+      ]
+    },
+    {
+      "title": "LAST LIGHT",
+      "startsAt": "2026-11-15",
+      "sourceUrl": "http://www.savaya.com/event-calendar/november-15-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/november-15-2026",
+      "artists": [
+        "LAST LIGHT"
+      ]
+    },
+    {
+      "title": "SAVAYA TUESDAY",
+      "startsAt": "2026-11-16",
+      "sourceUrl": "http://www.savaya.com/event-calendar/november-16-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/november-16-2026",
+      "artists": [
+        "SAVAYA TUESDAY"
+      ]
+    },
+    {
+      "title": "SAVAYA WEDNESDAY",
+      "startsAt": "2026-11-17",
+      "sourceUrl": "http://www.savaya.com/event-calendar/november-17-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/november-17-2026",
+      "artists": [
+        "SAVAYA WEDNESDAY"
+      ]
+    },
+    {
+      "title": "SAVAYA THURSDAY",
+      "startsAt": "2026-11-18",
+      "sourceUrl": "http://www.savaya.com/event-calendar/november-18-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/november-18-2026",
+      "artists": [
+        "SAVAYA THURSDAY"
+      ]
+    },
+    {
+      "title": "SAVAYA FRIDAY",
+      "startsAt": "2026-11-19",
+      "sourceUrl": "http://www.savaya.com/event-calendar/november-19-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/november-19-2026",
+      "artists": [
+        "SAVAYA FRIDAY"
+      ]
+    },
+    {
+      "title": "DAMIAN LAZARUS",
+      "startsAt": "2026-11-20",
+      "sourceUrl": "http://www.savaya.com/event-calendar/november-20-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/november-20-2026",
+      "artists": [
+        "DAMIAN LAZARUS"
+      ]
+    },
+    {
+      "title": "GIOLÌ & ASSIA",
+      "startsAt": "2026-11-21",
+      "sourceUrl": "http://www.savaya.com/event-calendar/november-21-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/november-21-2026",
+      "artists": [
+        "GIOLÌ & ASSIA"
+      ]
+    },
+    {
+      "title": "LAST LIGHT",
+      "startsAt": "2026-11-22",
+      "sourceUrl": "http://www.savaya.com/event-calendar/november-22-2026",
+      "ticketsUrl": "http://www.savaya.com/event-calendar/november-22-2026",
+      "artists": [
+        "LAST LIGHT"
+      ]
+    }
+  ]
+}

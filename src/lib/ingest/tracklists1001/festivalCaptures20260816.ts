@@ -1014,3 +1014,747 @@ export const TL_OLIVER_HELDENS_DAYBREAK_SESSION_TOMORROWLAND_WE1_2024: Fingerpri
   { at: "2:24:15", artist: "Bicep", title: "Glue (Kanine Bootleg)" },
   { at: "2:25:08", artist: "Netsky ft. Daddy Waku & Chantal Kashala", title: "Everybody Loves The Sunshine" },
 ];
+
+/**
+ * Robin Schulz @ Pacha Ibiza, Spain 2026-06-06
+ * https://www.1001tracklists.com/tracklist/1y2t00n9/robin-schulz-pacha-ibiza-spain-2026-06-06.html
+ * Hearthis: https://hearthis.at/toccoscuro/1live-dj-session-mit-robin-schulz-live-aus-dem-pacha-ibiza-vom-0/
+ * Capture overlay used TL_Robin-Schulz_Pacha_Ibiza_2026 (hyphens illegal);
+ * constant is TL_ROBIN_SCHULZ_PACHA_IBIZA_2026.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["ht-toccoscuro-1live-dj-session-mit-robin-schulz-live-aus-dem-pacha-ibiza-vom-0"]
+ * (not ht-https://…).
+ * Captured 2026-08-16 - provenance 1001tl.
+ */
+export const TL_ROBIN_SCHULZ_PACHA_IBIZA_2026: FingerprintSeedRow[] = [
+  { at: "0:20", artist: "Green Velvet vs. MEDUZA & GENESI & ESSENTIA", title: "La La Land" },
+  { at: "2:11", artist: "Robin Schulz ft. James Blunt", title: "OK" },
+  { at: "4:02", artist: "Dom Dolla & Tiga", title: "Don't Worry Baby" },
+  { at: "5:53", artist: "Volkoder", title: "All Night Long" },
+  { at: "7:44", artist: "YOOKiE", title: "COME AS YOU ARE" },
+  { at: "9:35", artist: "OutKast", title: "Ms. Jackson (N2N & Avilo Edit)" },
+  { at: "11:26", artist: "Robin Schulz & Dennis Lloyd", title: "Young Right Now" },
+  { at: "13:17", artist: "Odd Mob & OMNOM pres. HYPERBEAM", title: "Coming Up (It's Dare)" },
+  { at: "15:08", artist: "Dimitri Vegas & Like Mike & Marlon Hoffstadt & DJ Konik", title: "Makina Time (Joel Corry Remix)" },
+  { at: "16:59", artist: "ANOTR ft. 54 Ultra", title: "Talk To You (Dave Summer Edit)" },
+  { at: "18:50", artist: "Robin Schulz & MARTEN HØRGER", title: "Arizona" },
+  { at: "20:41", artist: "Matroda", title: "Winning Prize" },
+  { at: "22:32", artist: "Robin Schulz ft. Jasmine Thompson", title: "Sun Goes Down" },
+  { at: "24:23", artist: "Alesso & Sacha", title: "Destiny (HILLS Remix)" },
+  { at: "26:14", artist: "Robin Schulz & Imanbek", title: "Push It" },
+  { at: "28:05", artist: "Robin Schulz ft. Ilsey Juber", title: "Headlights" },
+  { at: "29:56", artist: "John Summit ft. CLOVES", title: "Focus (ALOK Remix)" },
+  { at: "31:47", artist: "Laherte", title: "Sing It Back" },
+  { at: "33:38", artist: "Swedish House Mafia ft. Pharrell Williams", title: "One (Your Name) (Darren After Edit)" },
+  { at: "35:29", artist: "Vinter", title: "This Is Not The James Brown" },
+  { at: "37:20", artist: "NEXBOY & Cha$e 13", title: "Calabria" },
+  { at: "39:11", artist: "Robin Schulz ft. Kiddo", title: "All We Got" },
+  { at: "41:02", artist: "Justė & Jaxstyle & Jon", title: "Turn The Lights Off (HILLS & Dansyn Remix)" },
+  { at: "42:53", artist: "Lady GaGa ft. Colby O'Donis", title: "Just Dance (ACRAZE Remix)" },
+  { at: "44:44", artist: "Chris Lorenzo & aMo", title: "HOTS 4 U" },
+  { at: "46:35", artist: "JOSHWA", title: "Out Of My Mind" },
+  { at: "48:26", artist: "Max Styler ft. Ad-Apt", title: "One More (Solomun Remix)" },
+  { at: "50:17", artist: "Robin Schulz & Fil Bo Riva", title: "Killer Queen" },
+  { at: "52:08", artist: "Alexander Delanois", title: "Deep Down" },
+  { at: "53:59", artist: "will.i.am & Britney Spears", title: "Scream & Shout (Gaddi Edit)" },
+  { at: "55:50", artist: "Dean Turnley", title: "Actin' Tough (Dave Summer Edit)" },
+  { at: "57:41", artist: "Volkoder", title: "Everybody" },
+];
+
+/**
+ * Calvin Harris @ Mainstage, Dance Valley, Netherlands 2026-08-08
+ * https://www.1001tracklists.com/tracklist/2pcuzd49/calvin-harris-mainstage-dance-valley-netherlands-2026-08-08.html
+ * Official YT: https://youtu.be/pnzSuCiAGdk
+ * Capture overlay used TL_Calvin-Harris_Mainstage_Dance-Valley_Netherlands_2026
+ * (hyphens illegal); constant is TL_CALVIN_HARRIS_MAINSTAGE_DANCE_VALLEY_NETHERLANDS_2026.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-pnzSuCiAGdk"]
+ * Captured 2026-08-16 - provenance 1001tl.
+ */
+export const TL_CALVIN_HARRIS_MAINSTAGE_DANCE_VALLEY_NETHERLANDS_2026: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "Calvin Harris ft. Florence Welch", title: "Sweet Nothing (Calvin Harris 2025 Remix)" },
+  { at: "4:41", artist: "Eric Prydz", title: "Pjanoo (Calvin Harris Remix)" },
+  { at: "6:25", artist: "Calvin Harris ft. HAIM", title: "Pray To God (Acappella)" },
+  { at: "8:08", artist: "Calvin Harris ft. Ellie Goulding", title: "Outside (Calvin Harris 2025 Remix)" },
+  { at: "9:46", artist: "L.P. Rhythm", title: "Versatile" },
+  { at: "11:25", artist: "Fred again.. & Skepta & PlaqueBoyMax", title: "Victory Lap" },
+  { at: "13:03", artist: "Calvin Harris & Rag'n'Bone Man", title: "Giant (Calvin Harris Remix)" },
+  { at: "15:05", artist: "Cassian & YOTTO & Da Hool", title: "Love Parade" },
+  { at: "17:07", artist: "Calvin Harris & Dua Lipa", title: "One Kiss" },
+  { at: "18:50", artist: "Calvin Harris & Dua Lipa", title: "One Kiss (Calvin Harris 2026 Remix)" },
+  { at: "20:34", artist: "Dean Turnley", title: "Actin' Tough" },
+  { at: "22:17", artist: "Calvin Harris ft. Rihanna", title: "This Is What You Came For (VIP Mix)" },
+  { at: "25:14", artist: "Calvin Harris & Kasabian", title: "Release The Pressure (VIP Mix)" },
+  { at: "28:54", artist: "Calvin Harris ft. Ellie Goulding", title: "I Need Your Love (Calvin Harris Remix)" },
+  { at: "32:37", artist: "Calvin Harris ft. John Newman", title: "Blame" },
+  { at: "34:58", artist: "Calvin Harris ft. John Newman", title: "Blame (Calvin Harris 2026 Remix)" },
+  { at: "37:18", artist: "Calvin Harris", title: "Feel So Close" },
+  { at: "40:02", artist: "The Chemical Brothers", title: "Hey Boy, Hey Girl (Acappella)" },
+  { at: "42:46", artist: "Hans Zimmer", title: "Time (Inception OST)" },
+  { at: "43:45", artist: "Calvin Harris & Disciples ft. Ina Wroldsen", title: "How Deep Is Your Love" },
+  { at: "44:45", artist: "Calvin Harris & Disciples ft. Ina Wroldsen", title: "How Deep Is Your Love (Calvin Harris 2026 VIP Edit)" },
+  { at: "45:44", artist: "Calvin Harris ft. Clementine Douglas", title: "Blessings (Cassian Remix)" },
+  { at: "48:34", artist: "Calvin Harris ft. Clementine Douglas", title: "Blessings" },
+  { at: "51:23", artist: "Rihanna", title: "Where Have You Been (Calvin Harris 2026 Remix)" },
+  { at: "54:54", artist: "Adriano Pagani", title: "Vibe (Calvin Harris Remix)" },
+  { at: "56:52", artist: "Florence + The Machine", title: "Spectrum (Say My Name) (Calvin Harris 2025 Remix)" },
+  { at: "1:00:33", artist: "Calvin Harris", title: "Summer (Calvin Harris 2024 Remix)" },
+  { at: "1:02:46", artist: "UMEK", title: "Collision Wall" },
+  { at: "1:04:58", artist: "Calvin Harris ft. Kelis", title: "Bounce (Calvin Harris Remix)" },
+  { at: "1:07:03", artist: "Zombie Nation", title: "Kernkraft 400" },
+  { at: "1:09:07", artist: "PPK", title: "ResuRection (Calvin Harris Remix)" },
+  { at: "1:10:47", artist: "Calvin Harris & Ellie Goulding", title: "Miracle (Acappella)" },
+  { at: "1:12:27", artist: "Calvin Harris & Alesso & Hurts vs. Robert Miles", title: "Under Control vs. Children (Alesso Mashup)" },
+  { at: "1:12:28", artist: "Robert Miles", title: "Children" },
+  { at: "1:12:29", artist: "Calvin Harris & Alesso ft. Hurts", title: "Under Control" },
+];
+
+/**
+ * TUJAMO @ Mainstage, Parookaville, Germany 2026-07-19
+ * https://www.1001tracklists.com/tracklist/2r7bnnpk/tujamo-mainstage-parookaville-germany-2026-07-19.html
+ * Official YT: https://youtu.be/JhpL-KKGoO8
+ * Capture overlay used TL_TUJAMO_Mainstage_Parookaville_Germany_2026
+ * (mixed-case overlay id); constant is TL_TUJAMO_MAINSTAGE_PAROOKAVILLE_GERMANY_2026.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-JhpL-KKGoO8"]
+ * Captured 2026-08-16 - provenance 1001tl.
+ */
+export const TL_TUJAMO_MAINSTAGE_PAROOKAVILLE_GERMANY_2026: FingerprintSeedRow[] = [
+  { at: "0:11", artist: "Plastik Funk & TUJAMO", title: "WHO (BRANDON Remix)" },
+  { at: "1:08", artist: "Fedde Le Grand", title: "Put Your Hands Up For Detroit (Acappella)" },
+  { at: "2:05", artist: "Fred again.. & Swedish House Mafia ft. Future", title: "Turn On The Lights Again.." },
+  { at: "3:03", artist: "Justice vs. Simian", title: "We Are Your Friends (Acappella)" },
+  { at: "4:00", artist: "Daft Punk ft. Pharrell Williams & Nile Rodgers", title: "Get Lucky (FÄT TONY Remix)" },
+  { at: "4:54", artist: "Don Diablo", title: "Lose Control" },
+  { at: "5:48", artist: "TUJAMO & Lotten", title: "One Million (TUJAMO 2026 Edit)" },
+  { at: "7:53", artist: "Bad Bunny & Los Pleneros de la Cresta", title: "CAFé CON RON" },
+  { at: "10:30", artist: "Swedish House Mafia ft. Tinie Tempah", title: "Miami 2 Ibiza (Paradise Again Edit)" },
+  { at: "11:58", artist: "Rello", title: "MUV" },
+  { at: "13:25", artist: "Eurythmics", title: "Sweet Dreams (Are Made of This)" },
+  { at: "14:00", artist: "Missy Elliott ft. Ciara & Fatman Scoop", title: "Lose Control (Acappella)" },
+  { at: "14:35", artist: "James Hype", title: "Dancing" },
+  { at: "16:40", artist: "Danzel vs. MEDUZA & GENESI", title: "Pump It Up Everything You Have Done (DJs From Mars Mashup)" },
+  { at: "17:12", artist: "Danzel", title: "Pump It Up" },
+  { at: "17:44", artist: "GENESI", title: "Everything You Have Done (MEDUZA Edit)" },
+  { at: "18:15", artist: "John Summit & Sub Focus ft. Julia Church", title: "Go Back (Kyle Watson Remix)" },
+  { at: "18:53", artist: "TUJAMO & Dizzee Rascal", title: "Fader" },
+  { at: "19:31", artist: "Jack Ü ft. Bunji Garlin & MX Prime", title: "Jungle Bae (Acappella)" },
+  { at: "20:08", artist: "StadiumX vs. Post Malone & 21 Savage", title: "Legend vs. Rockstar (Kryder Mashup)" },
+  { at: "20:41", artist: "Post Malone ft. 21 Savage", title: "Rockstar (Acappella)" },
+  { at: "21:15", artist: "Stadiumx", title: "Legend" },
+  { at: "21:48", artist: "Axwell Λ Ingrosso ft. Kristoffer Fogelmark", title: "More Than You Know" },
+  { at: "22:48", artist: "Armin van Buuren & Skytech", title: "She A Freak" },
+  { at: "23:47", artist: "Good Times Ahead", title: "Rhythm Of The Night" },
+  { at: "24:20", artist: "Matt Faulk", title: "Like This" },
+  { at: "25:20", artist: "Alesso", title: "The Rhythm Of The Night" },
+  { at: "26:19", artist: "Bad Bunny vs. Faithless vs. Öwnboss & DJs From Mars & Henry Himself", title: "Nuevayol vs. We Come One vs. I Have No Memories About Last Night (DJs From Mars Bootleg)" },
+  { at: "27:08", artist: "La Fuente", title: "I Want You (KOFM Festival Edit)" },
+  { at: "28:21", artist: "Justice vs. Simian", title: "We Are Your Friends (Acappella)" },
+  { at: "29:33", artist: "TUJAMO", title: "Drop That Low (When I Dip)" },
+  { at: "30:42", artist: "TUJAMO", title: "Drop That Low (When I Dip) (TUJAMO Secret Weapon 2022)" },
+  { at: "31:51", artist: "Avicii ft. RAS", title: "The Nights (Acappella)" },
+  { at: "33:01", artist: "TUJAMO & Adnan Veron & Erga & Liquid Silva", title: "Lowkey" },
+  { at: "34:10", artist: "David Guetta ft. Kid Cudi", title: "Memories" },
+  { at: "34:54", artist: "Lil Jon", title: "Get Loose (Acappella)" },
+  { at: "35:38", artist: "Nari & Milani", title: "Atom" },
+  { at: "36:22", artist: "MORTEN & David Guetta", title: "Lucky" },
+  { at: "37:05", artist: "Steff Da Campo & David Puentez", title: "Everybody" },
+  { at: "38:17", artist: "TUJAMO & Jay Hardway ft. BayC", title: "Energy" },
+  { at: "39:29", artist: "Tom Odell", title: "Another Love" },
+  { at: "40:40", artist: "Calvin Harris", title: "Feel So Close" },
+  { at: "41:25", artist: "Alle Farben & TUJAMO", title: "Know My Name" },
+  { at: "42:10", artist: "Cirez D", title: "On Off" },
+  { at: "43:15", artist: "Missy Elliott ft. Ciara & Fatman Scoop", title: "Lose Control (Acappella)" },
+  { at: "44:21", artist: "David Guetta ft. Chris Willis", title: "Love Is Gone (Fred Rister & Joachim Garraud Remix)" },
+  { at: "45:26", artist: "Bob Sinclar ft. Steve Edwards", title: "World, Hold On (Children Of The Sky)" },
+  { at: "47:44", artist: "Steve Aoki & Chris Lake & Tujamo vs. Yeah Yeah Yeahs", title: "Boneless vs. Heads Will Roll (Julian Jordan Mashup)" },
+  { at: "48:28", artist: "Yeah Yeah Yeahs", title: "Heads Will Roll (A-Trak Remix)" },
+  { at: "49:11", artist: "Steve Aoki & Chris Lake & TUJAMO", title: "Boneless" },
+  { at: "49:55", artist: "AFROJACK & Lucas & Steve", title: "Control" },
+  { at: "50:38", artist: "Calvin Harris X FISHER", title: "Sweet Favour (Mo27Da Edit)" },
+  { at: "52:22", artist: "TUJAMO X VIZE ft. Majan", title: "Lonely" },
+  { at: "53:09", artist: "Green Velvet", title: "Flash (Nicky Romero Remix)" },
+  { at: "53:55", artist: "Arodes & REDD", title: "Use Somebody" },
+  { at: "55:03", artist: "Gabry Ponte & DJs From Mars & Sidekick", title: "Deep Fear" },
+  { at: "56:10", artist: "LEBLAENG", title: "Higher Frequency (Love Parade Festival Bounce)" },
+  { at: "57:30", artist: "Rihanna", title: "Where Have You Been" },
+  { at: "58:39", artist: "Calvin Harris ft. Clementine Douglas", title: "Blessings (Cassian Remix)" },
+  { at: "59:48", artist: "Gala", title: "Freed From Desire" },
+  { at: "1:01:30", artist: "Tim Berg ft. Amanda Wilson", title: "Seek Bromance (Avicii Vocal Remix)" },
+  { at: "1:03:40", artist: "Tiësto", title: "Lay Low (Tiësto VIP Mix)" },
+  { at: "1:05:50", artist: "TUJAMO", title: "All This Time" },
+  { at: "1:06:38", artist: "Avicii ft. Aloe Blacc", title: "SOS" },
+  { at: "1:07:26", artist: "Lana Del Rey", title: "Summertime Sadness (Cedric Gervais Remix)" },
+  { at: "1:09:08", artist: "2WEI", title: "Survivor" },
+  { at: "1:10:22", artist: "TUJAMO", title: "Booty Bounce" },
+  { at: "1:11:35", artist: "Sebastian Ingrosso & Tommy Trash vs. John Summit & Hayla vs. Hans Zimmer", title: "Reload vs. Where You Are vs. Interstellar (MashBit Mashup)" },
+  { at: "1:11:36", artist: "Sebastian Ingrosso & Tommy Trash ft. John Martin", title: "Reload" },
+  { at: "1:11:37", artist: "Hans Zimmer", title: "Interstellar" },
+  { at: "1:11:38", artist: "John Summit ft. HAYLA", title: "Where You Are (Acappella)" },
+  { at: "1:11:39", artist: "Bassjackers", title: "Cornfield Chase" },
+  { at: "1:11:40", artist: "David Guetta & MORTEN ft. Lanie Gardner", title: "Dreams" },
+  { at: "1:11:41", artist: "Justice vs. Simian", title: "We Are Your Friends (Acappella)" },
+];
+
+/**
+ * Dillon Francis & MARTEN HØRGER @ Mainstage, Parookaville, Germany 2025-07-20
+ * https://www.1001tracklists.com/tracklist/2gsy0kp1/dillon-francis-marten-horger-mainstage-parookaville-germany-2025-07-20.html
+ * Official YT: https://youtu.be/IwNPc_4ux84
+ * Capture overlay used TL_Dillon-Francis_and_MARTEN-HØRGER_Mainstage_Parookaville_Germany_2025
+ * (hyphens + Ø illegal); constant is
+ * TL_DILLON_FRANCIS_AND_MARTEN_HORGER_MAINSTAGE_PAROOKAVILLE_GERMANY_2025.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-IwNPc_4ux84"]
+ * Captured 2026-08-16 - provenance 1001tl.
+ */
+export const TL_DILLON_FRANCIS_AND_MARTEN_HORGER_MAINSTAGE_PAROOKAVILLE_GERMANY_2025: FingerprintSeedRow[] = [
+  { at: "0:15", artist: "Dillon Francis & MARTEN HØRGER", title: "On A Trip" },
+  { at: "2:10", artist: "MARTEN HØRGER", title: "Ill Behavior" },
+  { at: "6:10", artist: "Pharoahe Monch", title: "Simon Says (Bassjackers Bootleg)" },
+  { at: "7:42", artist: "Zombie Nation", title: "Kernkraft 400 (Thomas Anthony & Control Room Remix)" },
+  { at: "10:08", artist: "Diplo & HUGEL ft. Julia Church", title: "Stay High" },
+  { at: "11:37", artist: "Skrillex & Dillon Francis", title: "Bun Up The Dance (Seth Hills Remix)" },
+  { at: "12:49", artist: "Dillon Francis & Martin Garrix", title: "Set Me Free (Dillon Francis VIP)" },
+  { at: "15:07", artist: "Ship Wrek", title: "Shake That" },
+  { at: "21:20", artist: "Da Hool", title: "Meet Her At The Love Parade (MARTEN HØRGER x Empra Edit)" },
+  { at: "23:00", artist: "Dillon Francis", title: "Goodies (Knock2 Remix)" },
+  { at: "25:10", artist: "Missy Elliott ft. Ciara & Fatman Scoop", title: "Lose Control" },
+  { at: "26:00", artist: "Dillon Francis", title: "DFR" },
+  { at: "26:35", artist: "Major Lazer ft. Busy Signal & The Flexican & FS Green", title: "Watch Out For This (Bumaye)" },
+  { at: "27:35", artist: "Eurythmics", title: "Sweet Dreams (Are Made of This) (MARTEN HØRGER Remix)" },
+  { at: "30:43", artist: "Axwell & Sebastian Ingrosso & Steve Angello & Laidback Luke ft. Deborah Cox", title: "Leave The World Behind (Mark Pride Miami Remix)" },
+  { at: "32:10", artist: "MARTEN HØRGER & CRÜPO & Swen Weber ft. Stush", title: "Get Low" },
+  { at: "35:07", artist: "Dillon Francis & MARTEN HØRGER", title: "B2U" },
+  { at: "38:15", artist: "Valentino Khan & Dillon Francis vs. Reel 2 Real & The Mad Stuntman", title: "Move It (KidCutUp Throwback Intro)" },
+  { at: "38:40", artist: "Reel 2 Real ft. The Mad Stuntman", title: "I Like To Move It (Acappella)" },
+  { at: "39:05", artist: "Valentino Khan & Dillon Francis", title: "Move It" },
+  { at: "39:29", artist: "Valentino Khan & Dillon Francis", title: "Move It (ONI Remix)" },
+  { at: "40:35", artist: "Dr. Fresch & MARTEN HØRGER", title: "Take A Step Back" },
+  { at: "41:40", artist: "Dillon Francis & MARTEN HØRGER", title: "Cut The Midrange" },
+  { at: "43:50", artist: "Dillon Francis & Good Times Ahead", title: "LA On Acid-er" },
+  { at: "45:50", artist: "The Prodigy", title: "Breathe (HUMAN404 Remix)" },
+  { at: "47:06", artist: "David Guetta & MARTEN HØRGER pres. Men Machine", title: "The Past, The Present, The Future" },
+  { at: "50:30", artist: "MARTEN HØRGER", title: "Rave (PAROOKAVILLE Anthem 2026)" },
+  { at: "53:50", artist: "Dillon Francis & DJ Snake", title: "Get Low (Armin van Buuren Remix)" },
+  { at: "56:00", artist: "Alice Deejay", title: "Better Off Alone (Pickle Remix)" },
+  { at: "57:17", artist: "Dillon Francis & longstoryshort", title: "Take Me Away" },
+  { at: "58:33", artist: "Oasis", title: "Wonderwall" },
+  { at: "59:30", artist: "Freaks & Geeks", title: "Rave Is Life" },
+];
+
+/**
+ * Mike Williams @ Time Lab, Parookaville, Germany 2026-07-19
+ * https://www.1001tracklists.com/tracklist/1muxp6s1/mike-williams-time-lab-parookaville-germany-2026-07-19.html
+ * Official YT: https://youtu.be/XisbmW1Smgc
+ * Capture overlay used TL_Mike-Williams_Time-Lab_Parookaville_Germany_2026
+ * (hyphens illegal); constant is TL_MIKE_WILLIAMS_TIME_LAB_PAROOKAVILLE_GERMANY_2026.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-XisbmW1Smgc"]
+ * Captured 2026-08-16 - provenance 1001tl.
+ */
+export const TL_MIKE_WILLIAMS_TIME_LAB_PAROOKAVILLE_GERMANY_2026: FingerprintSeedRow[] = [
+  { at: "0:10", artist: "Mike Williams & Brooks", title: "Drop The Pressure" },
+  { at: "2:10", artist: "Spice Girls", title: "Wannabe" },
+  { at: "3:01", artist: "Mike Williams ft. DTale", title: "Living On Video (VIP Mix)" },
+  { at: "3:45", artist: "Lucas & Steve", title: "Renegade Master" },
+  { at: "4:29", artist: "Mike Williams & Philip Strand", title: "All My Life (In My Heart)" },
+  { at: "5:28", artist: "Avicii", title: "Levels (Acappella)" },
+  { at: "6:27", artist: "Lady GaGa ft. Colby O'Donis", title: "Just Dance (ACRAZE Remix)" },
+  { at: "8:01", artist: "Nari & Milani", title: "Atom (SQU4RE 2024 Edit)" },
+  { at: "8:41", artist: "Mightyfools", title: "Footrocker (Get Your, Get Your Hands Up Acappella)" },
+  { at: "9:20", artist: "Mike Williams & Brooks & WHAT EVA", title: "Illusion" },
+  { at: "10:20", artist: "DJ KUBA & NEITAN x Bounce Inc.", title: "Blade" },
+  { at: "11:31", artist: "Axwell & Sebastian Ingrosso & Steve Angello & Laidback Luke ft. Deborah Cox", title: "Leave The World Behind" },
+  { at: "13:40", artist: "Mike Williams & Mesto & Sasha Rangas vs. Zombie Nation", title: "Wait Another Day vs. Kernkraft 400 (Mike Williams Mashup)" },
+  { at: "15:26", artist: "Zombie Nation", title: "Kernkraft 400 (W&W Remix)" },
+  { at: "17:12", artist: "Mike Williams & Mesto ft. Sasha Rangas", title: "Wait Another Day" },
+  { at: "18:58", artist: "Mike Williams", title: "The Beat (Mike Williams Techno Edit)" },
+  { at: "19:58", artist: "Tiësto & Mike Williams", title: "I Want You" },
+  { at: "20:58", artist: "Madonna", title: "Music (Acappella)" },
+  { at: "21:58", artist: "Swedish House Mafia & Knife Party ft. ADL", title: "Antidote (Duer Remix)" },
+  { at: "22:55", artist: "Mike Williams & Bruno Martini & Stephen Puth", title: "Multiply" },
+  { at: "24:57", artist: "Swedish House Mafia ft. John Martin", title: "Save The World (Acappella)" },
+  { at: "26:58", artist: "Mike Williams & NOME.", title: "Back To Life" },
+  { at: "27:54", artist: "Mightyfools", title: "Footrocker (Get Your, Get Your Hands Up Acappella)" },
+  { at: "28:50", artist: "R3HAB & Mike Williams ft. Mary Jane Smith", title: "Lullaby" },
+  { at: "29:46", artist: "Steve Angello & Laidback Luke ft. Rowetta", title: "Be" },
+  { at: "30:47", artist: "Florence + The Machine", title: "You've Got The Love (Acappella)" },
+  { at: "31:48", artist: "Mightyfools", title: "Footrocker (Get Your, Get Your Hands Up Acappella)" },
+  { at: "32:49", artist: "Fatima Yamaha", title: "What's A Girl To Do" },
+  { at: "34:28", artist: "Faithless", title: "Insomnia" },
+  { at: "36:07", artist: "Cloonee & Prospa", title: "Free Your Mind (Mike Williams Remix)" },
+  { at: "37:45", artist: "Calvin Harris vs. Mike Williams", title: "Feel So Close vs. Rocket (Mike Williams Mashup)" },
+  { at: "38:10", artist: "Calvin Harris", title: "Feel So Close (Acappella)" },
+  { at: "38:36", artist: "Mike Williams", title: "Rocket" },
+  { at: "39:01", artist: "Quintino & Mike Williams", title: "Let Me Be Your Fantasy" },
+  { at: "39:42", artist: "Tove Lo", title: "Habits (Stay High) (Acappella)" },
+  { at: "40:23", artist: "Wildchild", title: "Renegade Master (Acappella)" },
+  { at: "41:03", artist: "Mike Williams", title: "The System" },
+  { at: "42:08", artist: "Sebastien Benett", title: "Let Me See Those Hands (Acappella)" },
+  { at: "43:13", artist: "Tom Odell", title: "Another Love" },
+  { at: "44:22", artist: "Corey James & IMAN", title: "Paranoia" },
+  { at: "45:32", artist: "Florence + The Machine", title: "Spectrum (Say My Name) (Acappella)" },
+  { at: "46:41", artist: "Porter Robinson ft. Bright Lights", title: "Language" },
+  { at: "47:47", artist: "Mike Williams ft. Moa Lisa", title: "Make You Mine" },
+  { at: "48:52", artist: "Martin Garrix & Third ≡ Party ft. Oaks & Declan J Donovan", title: "Carry You" },
+  { at: "49:58", artist: "Mike Williams ft. Benjamin Ingrosso & Jaimes", title: "Best Part Missing" },
+  { at: "51:03", artist: "ANOTR ft. 54 Ultra", title: "Talk To You (Hardwell Bootleg)" },
+  { at: "52:52", artist: "Kate Ryan", title: "Désenchantée (Mike Williams Remix)" },
+  { at: "54:03", artist: "AFROJACK & Mike Williams", title: "Alone" },
+  { at: "55:06", artist: "Axwell Λ Ingrosso", title: "More Than You Know (Acappella)" },
+  { at: "56:09", artist: "Mike Williams & Oaks", title: "I'll Do It" },
+];
+
+/**
+ * Hardwell @ Mainstage, Parookaville, Germany 2026-07-19
+ * https://www.1001tracklists.com/tracklist/kd4zp61/hardwell-mainstage-parookaville-germany-2026-07-19.html
+ * Official YT: https://youtu.be/eBeeWwsCVls
+ * Capture overlay used TL_Hardwell_Mainstage_Parookaville_Germany_2026
+ * (mixed-case overlay id); constant is TL_HARDWELL_MAINSTAGE_PAROOKAVILLE_GERMANY_2026.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-eBeeWwsCVls"]
+ * Captured 2026-08-16 - provenance 1001tl.
+ */
+export const TL_HARDWELL_MAINSTAGE_PAROOKAVILLE_GERMANY_2026: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "Hardwell & braev", title: "Believe" },
+  { at: "5:37", artist: "Hardwell & W&W vs. HAVEN. & Kaitlin Aragon", title: "Bangkok vs. I Run (Hardwell Mashup)" },
+  { at: "6:18", artist: "Danzel", title: "Put Your Hands Up In The Air (Acappella)" },
+  { at: "7:00", artist: "Zedd & Lucky Date ft. Ellie Goulding", title: "Fall Into The Sky (Everybody Fuckin Jump Acappella)" },
+  { at: "7:41", artist: "HAVEN. ft. Kaitlin Aragon", title: "I Run" },
+  { at: "8:23", artist: "Hardwell & W&W", title: "Bangkok" },
+  { at: "9:04", artist: "Dyro", title: "Go Down (Acappella)" },
+  { at: "9:41", artist: "Benny Benassi ft. Gary Go", title: "Cinema (Acappella)" },
+  { at: "11:30", artist: "Hardwell & Olly James vs. Hardwell vs. Avicii & Ras", title: "Flatline vs. Spaceman vs. The Nights (Hardwell Mashup)" },
+  { at: "12:06", artist: "Hardwell", title: "Spaceman" },
+  { at: "12:42", artist: "Hardwell & W&W", title: "Jumper (Acappella)" },
+  { at: "13:17", artist: "Hardwell & Olly James", title: "Flatline" },
+  { at: "13:53", artist: "Avicii ft. RAS", title: "The Nights (Acappella)" },
+  { at: "14:28", artist: "TUJAMO & TV Noise", title: "Ravers" },
+  { at: "15:23", artist: "Daft Punk", title: "Harder, Better, Faster, Stronger (Acappella)" },
+  { at: "17:30", artist: "Hardwell & MAKJ vs. KROMI vs. Amba Shepherd & Maddix", title: "Countdown 2026 vs. Simulation vs. Apollo (Hardwell Mashup)" },
+  { at: "18:50", artist: "KROMI vs. Hardwell & Amba Shepherd & Maddix", title: "Simulation vs. Apollo (Hardwell Mashup)" },
+  { at: "20:10", artist: "Hardwell & MAKJ", title: "Countdown 2026" },
+  { at: "21:30", artist: "Delerium ft. Sarah McLachlan", title: "Silence (W&W Rework)" },
+  { at: "24:09", artist: "Martin Garrix", title: "Animals" },
+  { at: "26:00", artist: "Hardwell & Showtek", title: "How We Do (Acappella)" },
+  { at: "27:08", artist: "Calvin Harris & Disciples ft. Ina Wroldsen", title: "How Deep Is Your Love (Acappella)" },
+  { at: "29:02", artist: "Hardwell & W&W ft. Fatman Scoop", title: "Don't Stop The Madness (Hardwell Rework)" },
+  { at: "31:11", artist: "Armin van Buuren & Hardwell vs. Blasterjaxx", title: "Follow The Beat Of The Drum (Hardwell Mashup)" },
+  { at: "32:00", artist: "Chuck Nash", title: "Are You Ready (Make Some Noise) (Acappella)" },
+  { at: "32:49", artist: "Armin van Buuren & Hardwell", title: "Follow The Light" },
+  { at: "33:39", artist: "Hardwell & Blasterjaxx", title: "Beat Of The Drum" },
+  { at: "34:28", artist: "Kill The Buzz & Dirty Signal", title: "Ignite" },
+  { at: "35:23", artist: "Ivan Gough & Feenixpawl ft. Georgi Kay", title: "In My Mind (Acappella)" },
+  { at: "37:13", artist: "MatricK & Domeno ft. MERYLL", title: "Like That" },
+  { at: "37:45", artist: "Tiësto", title: "Maximal Crazy (Acappella)" },
+  { at: "38:42", artist: "Hardwell & Dyro ft. Bright Lights", title: "Never Say Goodbye (Acappella)" },
+  { at: "41:16", artist: "Hardwell & W&W vs. Icona Pop & Charli xcx", title: "Turn Up The Bass vs. I Love It (Hardwell Mashup)" },
+  { at: "42:20", artist: "Icona Pop ft. Charli xcx", title: "I Love It (Acappella)" },
+  { at: "43:24", artist: "Hardwell & W&W", title: "Turn Up The Bass" },
+  { at: "44:28", artist: "AVAO & 2ACES vs. Green Velvet vs. Alex Gaudino & Crystal Waters", title: "Green vs. Flash vs. Destination Calabria (Hardwell Mashup)" },
+  { at: "45:08", artist: "Alex Gaudino ft. Crystal Waters", title: "Destination Calabria" },
+  { at: "45:48", artist: "Green Velvet", title: "Flash (Acappella)" },
+  { at: "46:28", artist: "AVAO & 2ACES", title: "Green" },
+  { at: "47:07", artist: "MatricK vs. The Killers vs. HIFEER", title: "Can't Stop Us Now vs. Mr. Brightside vs. Lucid Desire (Hardwell Mashup)" },
+  { at: "47:49", artist: "The Killers", title: "Mr. Brightside (Acappella)" },
+  { at: "48:31", artist: "Deorro", title: "Dechorro (One Two Three Woow Acappella)" },
+  { at: "49:13", artist: "HIFEER", title: "Lucid Desire" },
+  { at: "49:55", artist: "MatricK", title: "Can't Stop Us Now" },
+  { at: "50:36", artist: "Hardwell & Vini Vici & MR.BLACK & Liquid Soul vs. David Guetta & Benny Benassi & Maddix", title: "Crazy People 2026 vs. Satisfaction (Hardwell Mashup)" },
+  { at: "51:33", artist: "David Guetta vs. Benny Benassi", title: "Satisfaction (Hardwell & Maddix Remix)" },
+  { at: "52:31", artist: "Hardwell & Vini Vici & MR.BLACK ft. Liquid Soul", title: "Crazy People 2026" },
+  { at: "53:28", artist: "David Guetta & GLOWINTHEDARK ft. Harrison", title: "Ain't A Party (Acappella)" },
+  { at: "54:40", artist: "Tim Berg ft. Amanda Wilson", title: "Seek Bromance (Acappella)" },
+  { at: "56:43", artist: "Matt Dybal & Agus Zack", title: "Like I Do" },
+  { at: "57:25", artist: "Hardwell ft. Chris Jones", title: "Young Again (Acappella)" },
+  { at: "59:12", artist: "Sebastian Ingrosso & Alesso ft. Ryan Tedder", title: "Calling (Lose My Mind) (Hardwell & W&W Bootleg)" },
+  { at: "1:02:18", artist: "David Guetta & OneRepublic", title: "I Don't Wanna Wait (Hardwell & Olly James Remix)" },
+  { at: "1:05:11", artist: "Hardwell & Azteck & Dr Phunk", title: "LOW" },
+  { at: "1:07:44", artist: "Hardwell", title: "Spaceman (Sub Zero Project Edit)" },
+  { at: "1:07:57", artist: "Hardwell ft. Mitch Crown", title: "Call Me A Spaceman (Acappella)" },
+  { at: "1:08:55", artist: "Zedd & Lucky Date ft. Ellie Goulding", title: "Fall Into The Sky (Everybody Fuckin Jump Acappella)" },
+  { at: "1:09:33", artist: "4444 OF A KIND & Hardwell", title: "RE4SON" },
+  { at: "1:13:06", artist: "Milleniumkid & JBS", title: "Vielleicht Vielleicht (W&W Remix)" },
+  { at: "1:15:39", artist: "Hardwell & Sub Zero Project & Lil Jon vs. Gotye & Kimbra", title: "Brace For Impact vs. Somebody That I Used To Know (Hardwell Mashup)" },
+  { at: "1:16:48", artist: "Gotye ft. Kimbra", title: "Somebody That I Used To Know (Acappella)" },
+  { at: "1:17:58", artist: "Hardwell & Sub Zero Project ft. Lil Jon", title: "Brace For Impact" },
+  { at: "1:19:07", artist: "Hardwell & Sound Rush", title: "IRIS" },
+];
+
+/**
+ * DubVision @ Mainstage, Parookaville, Germany 2026-07-19
+ * https://www.1001tracklists.com/tracklist/uq5pqjt/dubvision-mainstage-parookaville-germany-2026-07-19.html
+ * Official YT: https://youtu.be/UETk8HSB0Yw
+ * Capture overlay used TL_DubVision_Mainstage_Parookaville_Germany_2026
+ * (mixed-case overlay id); constant is TL_DUBVISION_MAINSTAGE_PAROOKAVILLE_GERMANY_2026.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-UETk8HSB0Yw"]
+ * Captured 2026-08-16 - provenance 1001tl.
+ */
+export const TL_DUBVISION_MAINSTAGE_PAROOKAVILLE_GERMANY_2026: FingerprintSeedRow[] = [
+  { at: "0:11", artist: "DubVision vs. Martin Garrix & Bebe Rexha", title: "Rise Again vs. In The Name Of Love (DubVision Mashup)" },
+  { at: "1:31", artist: "Martin Garrix & Bebe Rexha", title: "In The Name Of Love (Acappella)" },
+  { at: "2:52", artist: "DubVision", title: "Rise Again" },
+  { at: "4:12", artist: "Armin van Buuren & JOA", title: "Heavy" },
+  { at: "5:28", artist: "Martin Garrix & Third ≡ Party & Max McElligott", title: "Keep On Loving You vs. Lions In The Wild (Third ≡ Party Mashup)" },
+  { at: "6:27", artist: "Martin Garrix & Third ≡ Party ft. Max McElligott", title: "Lions In The Wild (Acappella)" },
+  { at: "7:25", artist: "Third ≡ Party", title: "Keep On Loving You" },
+  { at: "8:24", artist: "John Summit ft. HAYLA", title: "Where You Are (Acappella)" },
+  { at: "9:22", artist: "DubVision", title: "Run" },
+  { at: "9:55", artist: "Fred again.. & Skrillex & Four Tet ft. Lil Baby", title: "Baby Again.." },
+  { at: "10:28", artist: "D-Jastic", title: "Up To No Good" },
+  { at: "11:02", artist: "Jamie Lewis ft. Michael Watford", title: "For You (Put Your Hands Up In The Air Acappella)" },
+  { at: "11:35", artist: "Roger Sanchez", title: "Another Chance (DubVision Remix)" },
+  { at: "14:11", artist: "John Newman", title: "Love Me Again (Again) (Third ≡ Party & DubVision Remix)" },
+  { at: "17:37", artist: "DubVision vs. David Guetta & Kid Cudi", title: "Like This vs. Memories (DubVision Mashup)" },
+  { at: "18:21", artist: "David Guetta ft. Kid Cudi", title: "Memories" },
+  { at: "19:05", artist: "DubVision", title: "Like This" },
+  { at: "19:48", artist: "DubVision & KDH & I-RIE ft. WHAT EVA", title: "Right Here (WDJF 2025 Anthem)" },
+  { at: "20:44", artist: "John Summit & Sub Focus ft. Julia Church", title: "Go Back (Acappella)" },
+  { at: "21:40", artist: "Lost Frequencies & Pickle", title: "Kick The Nation" },
+  { at: "23:22", artist: "Martin Garrix & DubVision ft. Shaun Farrugia", title: "Wherever You Are" },
+  { at: "25:32", artist: "Martin Garrix & Third ≡ Party ft. Oaks & Declan J Donovan", title: "Carry You" },
+  { at: "28:15", artist: "DubVision vs. Corona", title: "P.R.O.G.2 vs. The Rhythm Of The Night (DubVision Mashup)" },
+  { at: "28:45", artist: "Corona", title: "The Rhythm Of The Night (Acappella)" },
+  { at: "29:15", artist: "DubVision", title: "P.R.O.G.2" },
+  { at: "29:45", artist: "Mark Roma", title: "Demon" },
+  { at: "30:09", artist: "Technotronic", title: "Pump Up The Jam (Acappella)" },
+  { at: "30:34", artist: "Third ≡ Party & Pete K & Cory Lasser", title: "Like This" },
+  { at: "30:58", artist: "DubVision & SICK INDIVIDUALS", title: "Endless Dreamers" },
+  { at: "33:13", artist: "Matisse & Sadko", title: "Higher" },
+  { at: "33:42", artist: "Matt Caseli & Danny Freakazoid", title: "Raise Your Hands (Acappella)" },
+  { at: "34:10", artist: "Tiësto vs. Da Hool", title: "Meet Her" },
+  { at: "35:57", artist: "Coldplay", title: "A Sky Full Of Stars (Acappella)" },
+  { at: "37:43", artist: "DubVision vs. Tove Lo", title: "I'll Be There vs. Habits (DubVision Mashup)" },
+  { at: "38:26", artist: "Tove Lo", title: "Habits (Stay High) (Acappella)" },
+  { at: "39:10", artist: "DubVision", title: "I'll Be There" },
+  { at: "39:53", artist: "Sentinel", title: "Like Fire" },
+  { at: "41:07", artist: "Martin Garrix & DubVision vs. Avicii", title: "Empty vs. Levels (DubVision Mashup)" },
+  { at: "42:03", artist: "Avicii", title: "Levels (Acappella)" },
+  { at: "42:59", artist: "Martin Garrix & DubVision ft. Jaimes", title: "Empty" },
+  { at: "43:55", artist: "Martin Garrix & Dua Lipa", title: "Scared To Be Lonely (Acappella)" },
+  { at: "44:50", artist: "Sebastian Ingrosso & Alesso & Ryan Tedder vs. Martin Garrix & Dua Lipa", title: "Calling vs. Scared To Be Lonely (Martin Garrix Mashup)" },
+  { at: "45:17", artist: "Sebastian Ingrosso & Alesso ft. Ryan Tedder", title: "Calling (Lose My Mind)" },
+  { at: "45:45", artist: "Martin Garrix & Dua Lipa", title: "Scared To Be Lonely (Acappella)" },
+  { at: "46:12", artist: "R3HAB & Vion Konger & Skytech", title: "Ultimate" },
+  { at: "47:06", artist: "Alex Gaudino ft. Crystal Waters", title: "Destination Calabria" },
+  { at: "48:00", artist: "DubVision & Nicky Romero & Oaks vs. Robert Miles vs. Calvin Harris & Disciples", title: "Live My Life vs. Children vs. How Deep Is Your Love (Fuerte & Josué Rodriguez Mashup)" },
+  { at: "48:29", artist: "Robert Miles", title: "Children" },
+  { at: "48:58", artist: "Calvin Harris & Disciples ft. Ina Wroldsen", title: "How Deep Is Your Love" },
+  { at: "49:27", artist: "DubVision & Nicky Romero & Oaks", title: "Live My Life" },
+  { at: "49:55", artist: "Lucas & Steve & DubVision & Joe Taylor vs. Avicii & Sandro Cavazza", title: "Feel My Love vs. Without You (DubVision Mashup)" },
+  { at: "50:30", artist: "Avicii ft. Sandro Cavazza", title: "Without You (Acappella)" },
+  { at: "51:05", artist: "Lucas & Steve & DubVision ft. Joe Taylor", title: "Feel My Love (Festival Mix)" },
+  { at: "51:40", artist: "Supermode & MEDUZA vs. DubVision vs. Third ≡ Party & Max McElligott", title: "Tell Me Why vs. Turn It Around vs. Come With Me (Third ≡ Party Mashup)" },
+  { at: "51:59", artist: "DubVision", title: "Turn It Around" },
+  { at: "52:18", artist: "Third ≡ Party ft. Max McElligott", title: "Come With Me" },
+  { at: "52:36", artist: "Supermode", title: "Tell Me Why (MEDUZA Remix)" },
+  { at: "52:55", artist: "Shouse", title: "Love Tonight" },
+  { at: "53:13", artist: "Daft Punk", title: "One More Time" },
+  { at: "54:13", artist: "The Temper Trap", title: "Sweet Disposition (Acappella)" },
+  { at: "55:13", artist: "DubVision & AFROJACK ft. Fais", title: "New Memories" },
+  { at: "56:13", artist: "Martin Garrix & DubVision ft. Shaun Farrugia", title: "Starlight (Keep Me Afloat)" },
+];
+
+/**
+ * W&W @ Mainstage, Parookaville, Germany 2026-07-18
+ * https://www.1001tracklists.com/tracklist/1j3n03kk/wandw-mainstage-parookaville-germany-2026-07-18.html
+ * Official YT: https://youtu.be/or_SDolEBfw
+ * Capture overlay used TL_W&W_Mainstage_Parookaville_Germany_2026
+ * (`&` illegal in an identifier); constant is
+ * TL_W_AND_W_MAINSTAGE_PAROOKAVILLE_GERMANY_2026.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-or_SDolEBfw"]
+ * Captured 2026-08-16 - provenance 1001tl.
+ */
+export const TL_W_AND_W_MAINSTAGE_PAROOKAVILLE_GERMANY_2026: FingerprintSeedRow[] = [
+  { at: "0:10", artist: "Hardwell & W&W", title: "Bangkok" },
+  { at: "1:35", artist: "Zedd & Lucky Date ft. Ellie Goulding", title: "Fall Into The Sky (Everybody Fuckin Jump Acappella)" },
+  { at: "3:00", artist: "HUGEL & SOLTO", title: "Jamaican (Bam Bam)" },
+  { at: "3:57", artist: "Teriyaki Boyz", title: "Tokyo Drift (The Fast And The Furious: Tokyo Drift OST) (W&W Festival Mix)" },
+  { at: "4:54", artist: "Carly Rae Jepsen", title: "Call Me Maybe (Acappella)" },
+  { at: "5:51", artist: "Hardwell & W&W", title: "Jumper (Acappella)" },
+  { at: "6:48", artist: "Rihanna", title: "Where Have You Been (W&W Festival Mix)" },
+  { at: "9:23", artist: "W&W & AXMO", title: "Ritmo De La Noche (Vamos A La Playa)" },
+  { at: "10:35", artist: "ATB", title: "9PM (Till I Come)" },
+  { at: "11:55", artist: "Queen", title: "We Will Rock You" },
+  { at: "13:16", artist: "sombr", title: "back to friends" },
+  { at: "14:36", artist: "Panjabi MC", title: "Mundian To Bach Ke" },
+  { at: "16:00", artist: "Jordan & Baker", title: "Explode" },
+  { at: "16:24", artist: "Captain Hollywood Project", title: "Flying High" },
+  { at: "16:48", artist: "Mightyfools", title: "Footrocker (Get Your, Get Your Hands Up Acappella)" },
+  { at: "17:12", artist: "Mr. Polska & Ski Aggu & Natte Visstick", title: "Spring" },
+  { at: "17:37", artist: "Endymion", title: "Pussy Motherfuckerz" },
+  { at: "18:01", artist: "LMFAO ft. Lauren Bennett & Goonrock", title: "Party Rock Anthem (Hardwell & W&W Bootleg)" },
+  { at: "19:16", artist: "Hardwell & W&W", title: "Turn Up The Bass" },
+  { at: "20:54", artist: "Katy Perry", title: "Firework (Acappella)" },
+  { at: "22:31", artist: "Veracocha", title: "Carte Blanche (W&W Bootleg)" },
+  { at: "24:26", artist: "Ian Van Dahl ft. Marsha", title: "Castles In The Sky" },
+  { at: "26:20", artist: "W&W & Scooter", title: "Rave From Outer Space" },
+  { at: "28:30", artist: "W&W & Scooter", title: "Rave From Outer Space" },
+  { at: "28:47", artist: "Avicii", title: "Levels (W&W 2026 Bootleg)" },
+  { at: "29:51", artist: "Bruno Mars", title: "Locked Out Of Heaven (Acappella)" },
+  { at: "30:55", artist: "Brennan Heart", title: "Van Halen Is A Rockstar" },
+  { at: "33:07", artist: "Scarf!", title: "Odysee (AXMO Bootleg)" },
+  { at: "33:49", artist: "Chicago", title: "Street Player (W&W Bootleg)" },
+  { at: "34:28", artist: "Mr. Polska & Natte Visstick & Vieze Asbak", title: "POLSKA JUMPSTYLE" },
+  { at: "35:07", artist: "O-Zone", title: "Mai Ai Hee (Dragostea Din Tei) (W&W Remix)" },
+  { at: "36:08", artist: "ItaloBrothers", title: "My Life Is A Party" },
+  { at: "37:08", artist: "Dimitri Vegas & Like Mike vs. W&W", title: "Crowd Control" },
+  { at: "37:50", artist: "Snollebollekes", title: "Links Rechts" },
+  { at: "38:32", artist: "Speedy J", title: "Pullover" },
+  { at: "39:13", artist: "Jan Wayne", title: "Because The Night (W&W Bootleg)" },
+  { at: "40:54", artist: "Belinda Carlisle", title: "Heaven Is A Place On Earth (W&W 2026 Bootleg)" },
+  { at: "43:14", artist: "Sebastian Ingrosso & Alesso ft. Ryan Tedder", title: "Calling (Lose My Mind) (Hardwell & W&W Bootleg)" },
+  { at: "46:26", artist: "Bastille", title: "Pompeii (W&W Festival Mix)" },
+  { at: "48:31", artist: "Gigi D'Agostino", title: "The Riddle (W&W Bootleg)" },
+  { at: "50:23", artist: "Dimitri Vegas & Like Mike & Tiësto & W&W ft. Dido", title: "Thank You (Not So Bad)" },
+  { at: "51:34", artist: "The White Stripes", title: "Seven Nation Army" },
+  { at: "52:45", artist: "Dimitri Vegas & Like Mike & Tiësto & W&W ft. Dido", title: "Thank You (Not So Bad) (Da Tweekaz Edit)" },
+  { at: "53:56", artist: "Snap!", title: "Rhythm Is A Dancer (AXMO Bootleg)" },
+  { at: "54:46", artist: "Bloodhound Gang", title: "The Bad Touch (Acappella)" },
+  { at: "55:35", artist: "W&W", title: "OIIA OIIA (Spinning Cat)" },
+  { at: "56:48", artist: "W&W", title: "OIIA OIIA (Spinning Cat)" },
+  { at: "58:00", artist: "Robbie Williams", title: "Angels (AXMO Remix)" },
+  { at: "1:00:04", artist: "Part Time Killer", title: "Hard Bounce Beat (TNT Edit)" },
+  { at: "1:00:41", artist: "Icona Pop ft. Charli xcx", title: "I Love It (Acappella)" },
+  { at: "1:01:18", artist: "Milleniumkid & JBS", title: "Vielleicht Vielleicht (W&W Remix)" },
+  { at: "1:03:50", artist: "BEAUZ", title: "Bel Mercy" },
+  { at: "1:06:10", artist: "Sub Zero Project & Dual Damage vs. Swedish House Mafia & John Martin", title: "It Will Be OK vs. Don't You Worry Child (Hardwell Mashup)" },
+  { at: "1:06:45", artist: "Swedish House Mafia ft. John Martin", title: "Don't You Worry Child (Acappella)" },
+  { at: "1:07:19", artist: "Dimitri Vegas & Like Mike & Martin Garrix", title: "Tremor (Sensation 2014 Anthem) (3, 2, 1 Go Acappella)" },
+  { at: "1:07:54", artist: "Sub Zero Project & Dual Damage", title: "It Will Be OK" },
+  { at: "1:08:28", artist: "W&W & The Saints", title: "Stereo Love" },
+  { at: "1:11:25", artist: "W&W & Groove Coverage", title: "Moonlight Shadow" },
+];
+
+/**
+ * MANDY - MANDY Mondays 028 2026-08-03
+ * https://www.1001tracklists.com/tracklist/1qnblmtt/mandy-mandy-mondays-028-2026-08-03.html
+ * Official SC: https://soundcloud.com/tomorrowland/mandy-mondays-august-2026
+ * Capture overlay used TL_MANDY_MANDY-Mondays_028_2026
+ * (hyphen illegal); constant is TL_MANDY_MANDY_MONDAYS_028_2026.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["sc-tomorrowland-mandy-mondays-august-2026"]
+ * Distinct from yt-J7b0G4XX8pg (MANDY B2B NEGITIV Atmosphere TML WE1).
+ * Captured 2026-08-16 - provenance 1001tl.
+ */
+export const TL_MANDY_MANDY_MONDAYS_028_2026: FingerprintSeedRow[] = [
+  { at: "0:20", artist: "Swedish House Mafia ft. Tinie Tempah", title: "Miami 2 Ibiza (MANDY Edit)" },
+  { at: "1:35", artist: "Adam Port & Stryv ft. Malachiii", title: "Move" },
+  { at: "2:50", artist: "MANDY", title: "Street Knowledge" },
+  { at: "4:05", artist: "DJ G2G", title: "paleta x faint" },
+  { at: "5:20", artist: "KX CHR ft. MANDY vs. BLACKPINK", title: "Everybody Dance Now vs. Jump (MANDY Mashup)" },
+  { at: "6:35", artist: "Will Atkinson", title: "Not Your Friend" },
+  { at: "7:50", artist: "Low-E", title: "Masters At Work" },
+  { at: "9:05", artist: "Cherry Moon Trax", title: "The House Of House" },
+  { at: "10:20", artist: "Creeds vs. Derb", title: "Push Up The Derb (MANDY Edit)" },
+  { at: "11:35", artist: "Travis Scott ft. Kendrick Lamar", title: "Goosebumps (Acappella)" },
+  { at: "12:50", artist: "Cloonee & Prospa", title: "Free Your Mind (MANDY Edit)" },
+  { at: "14:05", artist: "will.i.am & Britney Spears", title: "Scream & Shout" },
+  { at: "15:20", artist: "Fin Carroll", title: "Adrenaline Junkie" },
+  { at: "16:35", artist: "BADGRUB X POLICE IN PARIS", title: "Katyusha" },
+  { at: "17:50", artist: "GORDO & Reinier Zonneveld", title: "Loco Loco (Coone & Maddix Mashup)" },
+  { at: "19:05", artist: "Junkie Kid & Lister", title: "90s Baby" },
+  { at: "20:20", artist: "SMR", title: "Attention" },
+  { at: "21:35", artist: "MANDY", title: "Wanna Feel It" },
+  { at: "22:50", artist: "Negativ", title: "Sprite" },
+  { at: "24:05", artist: "KRANK", title: "Diet Coke" },
+  { at: "25:20", artist: "Lowriders", title: "Don't Get Back (MANDY Remix)" },
+  { at: "26:35", artist: "Black Eyed Peas", title: "Pump It (GWELD Schranz Remix)" },
+  { at: "27:50", artist: "HELLBOUND!", title: "Baile93" },
+  { at: "29:05", artist: "Onlynumbers ft. Lucie Hart", title: "Euphoric Night" },
+  { at: "30:20", artist: "MANDY", title: "Dark Bounce" },
+  { at: "31:35", artist: "DJSM & Flawx & Samuel Moriero", title: "Shiva" },
+  { at: "32:50", artist: "JSTJR & TELETECH", title: "Sound of the Underground" },
+  { at: "34:05", artist: "BYØRN", title: "Darkness I'm Feeling" },
+  { at: "35:20", artist: "Will Atkinson", title: "Marching Powder" },
+  { at: "36:35", artist: "Crazy Frog", title: "Axel F" },
+  { at: "37:50", artist: "BYØRN & Pawlowski ft. Vikina", title: "LA TEMPERATURA" },
+  { at: "39:05", artist: "Ray Volpe", title: "SONG REQUEST (Creeds Remix)" },
+  { at: "40:20", artist: "Funk Tribu", title: "Azul (MANDY Edit)" },
+  { at: "41:35", artist: "Ivan Gough & Feenixpawl ft. Georgi Kay", title: "In My Mind (Acappella)" },
+  { at: "42:50", artist: "Dimitri Vegas & Like Mike & Marlon Hoffstadt & DJ Konik", title: "Makina Time" },
+  { at: "44:05", artist: "Push", title: "Universal Nation" },
+  { at: "45:20", artist: "KIRK", title: "Go Funk Yourself" },
+  { at: "46:35", artist: "Dutch Disorder", title: "Heroine (Samuel Moriero Remix)" },
+  { at: "47:50", artist: "Lowriderz", title: "Papacito" },
+  { at: "49:05", artist: "KIRK", title: "Dream Man" },
+  { at: "50:20", artist: "Bad Bunny", title: "Nuevayol" },
+  { at: "51:35", artist: "HARDSOK vs. Florence + The Machine", title: "Forever vs. Spectrum (Say My Name) (Restricted Edit)" },
+  { at: "52:50", artist: "Sister Nancy", title: "Bam Bam (MANDY Bootleg)" },
+  { at: "54:05", artist: "Bad Gyal", title: "Fuma (Noro$t Remix)" },
+  { at: "55:20", artist: "LEVOS", title: "Brazilian Boing" },
+  { at: "56:35", artist: "D-Block & S-te-Fan & DJ Isaac", title: "Berlin" },
+  { at: "57:50", artist: "Eurythmics vs. Stan Christ", title: "Sweet Dreams x Trepidation (Code Black DJ Tool)" },
+];
+
+/**
+ * MANDY & Negativ @ Atmosphere Stage, Tomorrowland Weekend 1, Belgium 2026-07-17
+ * https://www.1001tracklists.com/tracklist/23phk9t9/mandy-negativ-atmosphere-stage-tomorrowland-weekend-1-belgium-2026-07-17.html
+ * Official YT: https://youtu.be/J7b0G4XX8pg
+ * Capture overlay used TL_MANDY&Negativ_Atmosphere-Stage_Tomorrowland_WE1_Belgium_2026
+ * (`&` / hyphens illegal); constant is
+ * TL_MANDY_AND_NEGATIV_ATMOSPHERE_STAGE_TOMORROWLAND_WE1_BELGIUM_2026.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-J7b0G4XX8pg"]
+ * Distinct from sc-tomorrowland-mandy-mondays-august-2026 (Mondays 028).
+ * Captured 2026-08-16 - provenance 1001tl.
+ */
+export const TL_MANDY_AND_NEGATIV_ATMOSPHERE_STAGE_TOMORROWLAND_WE1_BELGIUM_2026: FingerprintSeedRow[] = [
+  { at: "0:20", artist: "Swedish House Mafia ft. Tinie Tempah", title: "Miami 2 Ibiza (MANDY Edit)" },
+  { at: "1:24", artist: "Adam Port & Stryv ft. Malachiii", title: "Move" },
+  { at: "2:28", artist: "MANDY", title: "Street Knowledge" },
+  { at: "3:32", artist: "DJ G2G", title: "paleta x faint" },
+  { at: "4:36", artist: "Linkin Park", title: "Faint" },
+  { at: "5:40", artist: "Kamixlo", title: "Paleta" },
+  { at: "6:44", artist: "KX CHR ft. MANDY vs. BLACKPINK", title: "Everybody Dance Now vs. Jump (MANDY Mashup)" },
+  { at: "7:48", artist: "Will Atkinson", title: "Not Your Friend" },
+  { at: "8:52", artist: "Low-E", title: "Masters At Work" },
+  { at: "9:56", artist: "Cherry Moon Trax", title: "The House Of House" },
+  { at: "11:00", artist: "Creeds vs. Derb", title: "Push Up The Derb (MANDY Edit)" },
+  { at: "12:04", artist: "Derb", title: "Derb (Derbus)" },
+  { at: "13:08", artist: "Creeds", title: "Push Up" },
+  { at: "14:12", artist: "Travis Scott ft. Kendrick Lamar", title: "Goosebumps (Acappella)" },
+  { at: "15:16", artist: "Cloonee & Prospa", title: "Free Your Mind (MANDY Edit)" },
+  { at: "16:20", artist: "will.i.am & Britney Spears", title: "Scream & Shout" },
+  { at: "17:24", artist: "Fin Carroll", title: "Adrenaline Junkie" },
+  { at: "18:28", artist: "BADGRUB X POLICE IN PARIS", title: "Katyusha" },
+  { at: "19:32", artist: "GORDO & Reinier Zonneveld", title: "Loco Loco (Coone & Maddix Mashup)" },
+  { at: "20:36", artist: "Junkie Kid & Lister", title: "90s Baby" },
+  { at: "21:40", artist: "SMR", title: "Attention" },
+  { at: "22:44", artist: "MANDY", title: "Wanna Feel It" },
+  { at: "23:48", artist: "Negativ", title: "Sprite" },
+  { at: "24:52", artist: "KRANK", title: "Diet Coke" },
+  { at: "25:56", artist: "Lowriders", title: "Don't Get Back (MANDY Remix)" },
+  { at: "27:00", artist: "Black Eyed Peas", title: "Pump It (GWELD Schranz Remix)" },
+  { at: "28:04", artist: "HELLBOUND!", title: "Baile93" },
+  { at: "29:08", artist: "Onlynumbers ft. Lucie Hart", title: "Euphoric Night" },
+  { at: "30:12", artist: "MANDY", title: "Dark Bounce" },
+  { at: "31:16", artist: "DJSM & Flawx & Samuel Moriero", title: "Shiva" },
+  { at: "32:20", artist: "JSTJR & TELETECH", title: "Sound of the Underground" },
+  { at: "33:24", artist: "BYØRN", title: "Darkness I'm Feeling" },
+  { at: "34:28", artist: "Will Atkinson", title: "Marching Powder" },
+  { at: "35:32", artist: "Crazy Frog", title: "Axel F" },
+  { at: "36:36", artist: "BYØRN & Pawlowski ft. Vikina", title: "LA TEMPERATURA" },
+  { at: "37:40", artist: "Ray Volpe", title: "SONG REQUEST (Creeds Remix)" },
+  { at: "38:44", artist: "Funk Tribu", title: "Azul (MANDY Edit)" },
+  { at: "39:48", artist: "Ivan Gough & Feenixpawl ft. Georgi Kay", title: "In My Mind (Acappella)" },
+  { at: "40:52", artist: "Dimitri Vegas & Like Mike & Marlon Hoffstadt & DJ Konik", title: "Makina Time" },
+  { at: "41:56", artist: "Push", title: "Universal Nation" },
+  { at: "43:00", artist: "KIRK", title: "Go Funk Yourself" },
+  { at: "44:04", artist: "Dutch Disorder", title: "Heroine (Samuel Moriero Remix)" },
+  { at: "45:08", artist: "Lowriderz", title: "Papacito" },
+  { at: "46:12", artist: "KIRK", title: "Dream Man" },
+  { at: "47:16", artist: "Bad Bunny", title: "Nuevayol" },
+  { at: "48:20", artist: "HARDSOK vs. Florence + The Machine", title: "Forever vs. Spectrum (Say My Name) (Restricted Edit)" },
+  { at: "49:24", artist: "Florence + The Machine", title: "Spectrum (Say My Name) (Acappella)" },
+  { at: "50:28", artist: "HARDSOK", title: "Forever" },
+  { at: "51:32", artist: "Sister Nancy", title: "Bam Bam (MANDY Bootleg)" },
+  { at: "52:36", artist: "Bad Gyal", title: "Fuma (Noro$t Remix)" },
+  { at: "53:40", artist: "LEVOS", title: "Brazilian Boing" },
+  { at: "54:44", artist: "D-Block & S-te-Fan & DJ Isaac", title: "Berlin" },
+  { at: "55:48", artist: "Eurythmics vs. Stan Christ", title: "Sweet Dreams x Trepidation (Code Black DJ Tool)" },
+  { at: "56:52", artist: "Eurythmics", title: "Sweet Dreams (Are Made of This)" },
+  { at: "57:56", artist: "Stan Christ", title: "Trepidation" },
+];
+
+/**
+ * Lucas & Steve & Mike Williams @ Don't Let Daddy Know, Ziggo Dome Amsterdam, Netherlands 2026-03-07
+ * https://www.1001tracklists.com/tracklist/trluwg9/lucas-steve-mike-williams-dont-let-daddy-know-ziggo-dome-amsterdam-netherlands-2026-03-07.html
+ * Official YT: https://youtu.be/B1EaMgsf84Q
+ * Capture overlay used
+ * TL_Lucas&Steve_and_Mike-Williams_Don't-Let-Daddy-Know_Ziggo-Dome-Amsterdam_2026
+ * (`&` / hyphens / apostrophe illegal); constant is
+ * TL_LUCAS_AND_STEVE_AND_MIKE_WILLIAMS_DONT_LET_DADDY_KNOW_ZIGGO_DOME_AMSTERDAM_2026.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-B1EaMgsf84Q"]
+ * Captured 2026-08-16 - provenance 1001tl.
+ */
+export const TL_LUCAS_AND_STEVE_AND_MIKE_WILLIAMS_DONT_LET_DADDY_KNOW_ZIGGO_DOME_AMSTERDAM_2026: FingerprintSeedRow[] = [
+  { at: "0:21", artist: "Lucas & Steve x Mike Williams x Curbi", title: "Let's Go" },
+  { at: "1:09", artist: "Lucas & Steve", title: "What About Now" },
+  { at: "1:57", artist: "AFROJACK & Lucas & Steve", title: "Control" },
+  { at: "2:45", artist: "Mike Williams & Mesto ft. Sasha Rangas", title: "Wait Another Day" },
+  { at: "3:33", artist: "Mike Williams & Three Drives & ANTICALM", title: "Greece 2000" },
+  { at: "4:44", artist: "Sam Feldt X Lucas & Steve ft. Wulf", title: "Summer On You" },
+  { at: "5:55", artist: "AFROJACK & Lucas & Steve", title: "Control" },
+  { at: "8:43", artist: "Vluarr", title: "Steppin'" },
+  { at: "10:14", artist: "Disco Lines & Tinashe", title: "No Broke Boys" },
+  { at: "11:44", artist: "BrEaCh", title: "Jack (Acappella)" },
+  { at: "13:15", artist: "J Balvin & Willy William", title: "Mi Gente" },
+  { at: "14:45", artist: "Mike Williams", title: "The System" },
+  { at: "15:27", artist: "Mike Williams & Brooks", title: "Drop The Pressure" },
+  { at: "18:24", artist: "Lucas & Steve", title: "Emergency" },
+  { at: "19:34", artist: "Zerb ft. Sofiya Nzau", title: "Mwaki" },
+  { at: "20:45", artist: "RÜFÜS DU SOL", title: "Innerbloom" },
+  { at: "21:55", artist: "Lucas & Steve & Steve Aoki vs. Empire Of The Sun", title: "Weirder Things vs. Walking On A Dream (Lucas & Steve Mashup)" },
+  { at: "22:48", artist: "Empire Of The Sun", title: "Walking On A Dream (Acappella)" },
+  { at: "23:41", artist: "Steve Aoki", title: "Weirder Things (Steve Aoki & Lucas & Steve Remix)" },
+  { at: "24:34", artist: "Mike Williams", title: "The Beat (Mike Williams Techno Edit)" },
+  { at: "25:31", artist: "Madonna", title: "Music (Acappella)" },
+  { at: "26:28", artist: "Mightyfools", title: "Footrocker (Get Your, Get Your Hands Up Acappella)" },
+  { at: "27:24", artist: "Mike Williams & NOME.", title: "Back To Life" },
+  { at: "28:41", artist: "R3HAB & Mike Williams ft. Mary Jane Smith", title: "Lullaby" },
+  { at: "29:58", artist: "Mike Williams ft. DTale", title: "Living On Video (VIP Mix)" },
+  { at: "30:34", artist: "Lucas & Steve", title: "Renegade Master" },
+  { at: "31:10", artist: "Adam Port & Stryv ft. Malachiii", title: "Move" },
+  { at: "31:47", artist: "Alice Deejay", title: "Better Off Alone" },
+  { at: "32:23", artist: "Lucas & Steve vs. Ivan Gough & Feenixpawl & Georgi Kay", title: "Wasting Time vs. In My Mind (Lucas & Steve Mashup)" },
+  { at: "32:48", artist: "Ivan Gough & Feenixpawl ft. Georgi Kay", title: "In My Mind (Acappella)" },
+  { at: "33:13", artist: "Lucas & Steve", title: "Wasting Time" },
+  { at: "33:37", artist: "Sebastian Ingrosso & Tommy Trash ft. John Martin", title: "Reload (Lucas & Steve Remix)" },
+  { at: "35:45", artist: "Firebeatz", title: "In Space" },
+  { at: "36:52", artist: "Jack Ü ft. Bunji Garlin & MX Prime", title: "Jungle Bae" },
+  { at: "37:58", artist: "AFROJACK & Mike Williams", title: "Alone" },
+  { at: "39:50", artist: "Martin Garrix", title: "Animals (Lucas & Steve Flip)" },
+  { at: "40:27", artist: "Tiësto & Lucas & Steve", title: "Free Your Mind" },
+  { at: "41:04", artist: "Nari & Milani", title: "Atom (SQU4RE 2024 Edit)" },
+  { at: "44:18", artist: "Darude & Lucas & Steve vs. Gala", title: "Sandstorm vs. Freed From Desire (Lucas & Steve Mashup)" },
+  { at: "44:19", artist: "Gala", title: "Freed From Desire" },
+  { at: "44:20", artist: "Darude", title: "Sandstorm (Lucas & Steve 2025 Flip)" },
+  { at: "44:21", artist: "Lucas & Steve", title: "Up Till Dawn (On The Move) (Lucas & Steve 2024 Edit)" },
+  { at: "45:03", artist: "Mike Williams & Justin Mylo ft. Sara Sangfelt", title: "Face Up To The Sun" },
+  { at: "45:48", artist: "AFROJACK & Lucas & Steve & DubVision ft. Taranteeno", title: "Anywhere With You (Festival Mix)" },
+  { at: "48:59", artist: "Mike Williams & Bruno Martini & Stephen Puth", title: "Multiply" },
+  { at: "50:48", artist: "Lucas & Steve x Oaks x Jaimes", title: "Love On Hold (Club Mix)" },
+  { at: "52:45", artist: "Mike Williams & Philip Strand", title: "All My Life (In My Heart)" },
+  { at: "53:58", artist: "Avicii", title: "Levels (Acappella)" },
+  { at: "55:12", artist: "Timbaland ft. OneRepublic", title: "Apologize (Acappella)" },
+  { at: "56:25", artist: "Lucas & Steve ft. Jordan Shaw", title: "Heart First (Club Mix)" },
+  { at: "59:30", artist: "Swedish House Mafia ft. John Martin", title: "Save The World (Acappella)" },
+];
+
+/**
+ * Indira Paganotto @ Atmosphere Stage, Tomorrowland Weekend 1, Belgium 2023-07-22
+ * https://www.1001tracklists.com/tracklist/1gzmsd19/indira-paganotto-atmosphere-stage-tomorrowland-weekend-1-belgium-2023-07-22.html
+ * Official YT: https://youtu.be/yPCOu0-JKJo
+ * Capture overlay used TL_Indira-Paganotto_Atmosphere-Stage_Tomorrowland_WE1_Belgium_2023
+ * (hyphens illegal); constant is
+ * TL_INDIRA_PAGANOTTO_ATMOSPHERE_STAGE_TOMORROWLAND_WE1_BELGIUM_2023.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-yPCOu0-JKJo"]
+ * Distinct from yt-xUdcEDryN8o (Awakenings Festival 2025).
+ * Captured 2026-08-16 - provenance 1001tl.
+ */
+export const TL_INDIRA_PAGANOTTO_ATMOSPHERE_STAGE_TOMORROWLAND_WE1_BELGIUM_2023: FingerprintSeedRow[] = [
+  { at: "0:29", artist: "Indialucia ft. Jorge Pardo & Blas Cordoba", title: "Acatao" },
+  { at: "2:00", artist: "Indira Paganotto", title: "Requiem" },
+  { at: "4:56", artist: "Indira Paganotto", title: "Diabla" },
+  { at: "8:49", artist: "La Kajofol", title: "Virgin Poison" },
+  { at: "11:43", artist: "Interactive Noise ft. Lil Jorck", title: "The Punisher" },
+  { at: "15:40", artist: "Blazy ft. Aura Vortex", title: "Interlude" },
+  { at: "20:00", artist: "Zyce & Flegma", title: "Animal" },
+  { at: "24:10", artist: "Dennis Bauer & Nimatekk", title: "Beat Boy" },
+  { at: "27:39", artist: "Mötley Crüe", title: "Kickstart My Heart (AlexUnder Edit)" },
+  { at: "30:17", artist: "Indecorum", title: "Babushka" },
+  { at: "33:11", artist: "Gabriel Padrevita & AnGy KoRe", title: "Bomberos" },
+  { at: "36:26", artist: "Luca Agnelli & Rian Wood", title: "Kiss Like This" },
+  { at: "39:50", artist: "Tao Andra", title: "Gracias A La Vida" },
+  { at: "44:10", artist: "CHRS", title: "In The Darkness" },
+  { at: "48:31", artist: "Lorenzo", title: "Gute Nacht" },
+  { at: "51:53", artist: "Rooler & Kronos", title: "FCK DAT!" },
+  { at: "54:50", artist: "Ansbro", title: "Into The Flood" },
+  { at: "1:00:43", artist: "Pash", title: "She Is A Fucking Techno Girl" },
+  { at: "1:03:06", artist: "Blastoyz", title: "High On Acid" },
+  { at: "1:06:13", artist: "The Prodigy", title: "Voodoo People (Blastoyz Remix)" },
+  { at: "1:11:18", artist: "Mind Void", title: "New World Synthphony" },
+  { at: "1:16:10", artist: "southstar", title: "Miss You (AIROD Rave Remix)" },
+  { at: "1:20:10", artist: "GUERRILLA RADIO & Ansbro", title: "Patakha Guddi" },
+  { at: "1:24:43", artist: "Mainline Magic Orchestra", title: "Tranchera" },
+  { at: "1:28:29", artist: "Justin Tinderdate & Robin Tasi", title: "BR451L" },
+  { at: "1:31:47", artist: "Blastoyz", title: "Mandala" },
+  { at: "1:37:51", artist: "Anatomic", title: "The Illusion (PerfecTone Remix)" },
+  { at: "1:51:31", artist: "Freedom Fighters & Ivort", title: "Creature From The Lost World (Silent Sphere Remix)" },
+  { at: "1:55:24", artist: "YAIBA & Yasuharu Takanashi", title: "Courtesy" },
+];
+
+

@@ -1,0 +1,722 @@
+{
+  "venueSlug": "pacha-ibiza",
+  "venueName": "Pacha Ibiza",
+  "sourceUrl": "https://pacha.com/events",
+  "fetchedAt": "2026-08-16T14:46:38.167Z",
+  "nights": [
+    {
+      "title": "SOLOMUN+1",
+      "startsAt": "2026-08-16",
+      "sourceUrl": "https://pacha.com/events/solomun1-16-08-2026",
+      "ticketsUrl": "https://fourvenues.com/iframe/pacha/HN2D",
+      "artists": [
+        "Solomun",
+        "DJ Gigola",
+        "SOLOMUN+1"
+      ]
+    },
+    {
+      "title": "SONNY FODERA",
+      "startsAt": "2026-08-17",
+      "sourceUrl": "https://pacha.com/events/sonny-fodera-17-08-20263",
+      "ticketsUrl": "https://fourvenues.com/iframe/pacha/TXIU",
+      "artists": [
+        "Sonny Fodera",
+        "Danny Howard",
+        "Arielle Free"
+      ]
+    },
+    {
+      "title": "FRANKY RIZARDO PRESENTS FLOW - CLOSING PARTY",
+      "startsAt": "2026-08-18",
+      "sourceUrl": "https://pacha.com/events/franky-rizardo-presents-flow---closing-party-18-08-2026",
+      "ticketsUrl": "https://fourvenues.com/iframe/pacha/QV6L",
+      "artists": [
+        "Franky Rizardo",
+        "BLOND:ISH",
+        "Ale De Tuglie"
+      ]
+    },
+    {
+      "title": "MAU P | BADDEST BEHAVIOUR",
+      "startsAt": "2026-08-19",
+      "sourceUrl": "https://pacha.com/events/mau-p--baddest-behaviour-19-08-2026",
+      "ticketsUrl": "https://fourvenues.com/iframe/pacha/Q462",
+      "artists": [
+        "Mau P",
+        "Joseph Capriati",
+        "Sven Väth",
+        "Karretero",
+        "MAU P | BADDEST BEHAVIOUR"
+      ]
+    },
+    {
+      "title": "PURPLE DISCO MACHINE | PURE PACHA",
+      "startsAt": "2026-08-20",
+      "sourceUrl": "https://pacha.com/events/purple-disco-machine--pure-pacha-20-08-2026",
+      "ticketsUrl": "https://fourvenues.com/iframe/pacha/260I",
+      "artists": [
+        "Purple Disco Machine",
+        "Boys Noize",
+        "Flight Facilities",
+        "David Bay",
+        "PURPLE DISCO MACHINE | PURE PACHA"
+      ]
+    },
+    {
+      "title": "MARCO CAROLA PRESENTS MUSIC ON",
+      "startsAt": "2026-08-21",
+      "sourceUrl": "https://pacha.com/events/marco-carola-presents-music-on-21-08-2026",
+      "ticketsUrl": "https://fourvenues.com/iframe/pacha/VRZZ",
+      "artists": [
+        "Marco Carola",
+        "Rampa",
+        "MĪMĪ x FY",
+        "Frank Storm"
+      ]
+    },
+    {
+      "title": "ROGER SANCHEZ | FLOWER POWER",
+      "startsAt": "2026-08-22",
+      "sourceUrl": "https://pacha.com/events/roger-sanchez--flower-power-22-08-2026",
+      "ticketsUrl": "https://fourvenues.com/iframe/pacha/798S",
+      "artists": [
+        "Roger Sanchez",
+        "Disco Dom",
+        "The Shapeshifters",
+        "Sam Oui",
+        "ROGER SANCHEZ | FLOWER POWER"
+      ]
+    },
+    {
+      "title": "SOLOMUN+1",
+      "startsAt": "2026-08-23",
+      "sourceUrl": "https://pacha.com/events/solomun1-23-08-2026",
+      "ticketsUrl": "https://fourvenues.com/iframe/pacha/DCTG",
+      "artists": [
+        "Solomun",
+        "Max Styler",
+        "SOLOMUN+1"
+      ]
+    },
+    {
+      "title": "SONNY FODERA",
+      "startsAt": "2026-08-24",
+      "sourceUrl": "https://pacha.com/events/sonny-fodera-24-08-20261",
+      "ticketsUrl": "https://fourvenues.com/iframe/pacha/ODRL",
+      "artists": [
+        "Sonny Fodera",
+        "Eats Everything",
+        "Danny Howard",
+        "LAEET"
+      ]
+    },
+    {
+      "title": "GORDO | TARAKA",
+      "startsAt": "2026-08-25",
+      "sourceUrl": "https://pacha.com/events/gordo--taraka-25-08-2026",
+      "ticketsUrl": "https://fourvenues.com/iframe/pacha/Y520",
+      "artists": [
+        "GORDO",
+        "Vanjee",
+        "Wade",
+        "Gustavo Domínguez",
+        "Gala",
+        "GORDO | TARAKA"
+      ]
+    },
+    {
+      "title": "MAU P | BADDEST BEHAVIOUR",
+      "startsAt": "2026-08-26",
+      "sourceUrl": "https://pacha.com/events/mau-p--baddest-behaviour-26-08-2026",
+      "ticketsUrl": "https://fourvenues.com/iframe/pacha/WEDY",
+      "artists": [
+        "Mau P",
+        "Dennis Cruz",
+        "Miguelle & Tons",
+        "Franc Fala",
+        "MAU P | BADDEST BEHAVIOUR"
+      ]
+    },
+    {
+      "title": "PURPLE DISCO MACHINE | PURE PACHA",
+      "startsAt": "2026-08-27",
+      "sourceUrl": "https://pacha.com/events/purple-disco-machine--pure-pacha-27-08-2026",
+      "ticketsUrl": "https://fourvenues.com/iframe/pacha/C5JY",
+      "artists": [
+        "Purple Disco Machine",
+        "Kungs",
+        "DiOSA",
+        "David Bay",
+        "PURPLE DISCO MACHINE | PURE PACHA"
+      ]
+    },
+    {
+      "title": "MARCO CAROLA PRESENTS MUSIC ON",
+      "startsAt": "2026-08-28",
+      "sourceUrl": "https://pacha.com/events/marco-carola-presents-music-on-28-08-2026",
+      "ticketsUrl": "https://fourvenues.com/iframe/pacha/220J",
+      "artists": [
+        "Marco Carola",
+        "Luciano",
+        "Rossi.",
+        "SOSA",
+        "Obskür",
+        "Fletch"
+      ]
+    },
+    {
+      "title": "ROGER SANCHEZ | FLOWER POWER - CLOSING PARTY",
+      "startsAt": "2026-08-29",
+      "sourceUrl": "https://pacha.com/events/roger-sanchez--flower-power---closing-party-29-08-2026",
+      "ticketsUrl": "https://fourvenues.com/iframe/pacha/CIV4",
+      "artists": [
+        "Roger Sanchez",
+        "Melanie C",
+        "Karen Harding",
+        "Sam Oui",
+        "ROGER SANCHEZ | FLOWER POWER - CLOSING PARTY"
+      ]
+    },
+    {
+      "title": "SOLOMUN+1",
+      "startsAt": "2026-08-30",
+      "sourceUrl": "https://pacha.com/events/solomun1-30-08-2026",
+      "ticketsUrl": "https://fourvenues.com/iframe/pacha/3DH4",
+      "artists": [
+        "Solomun",
+        "Barry Can´t Swim",
+        "SOLOMUN+1"
+      ]
+    },
+    {
+      "title": "SONNY FODERA",
+      "startsAt": "2026-08-31",
+      "sourceUrl": "https://pacha.com/events/sonny-fodera-31-08-20261",
+      "ticketsUrl": "https://fourvenues.com/iframe/pacha/PDBE",
+      "artists": [
+        "Sonny Fodera",
+        "Flight Facilities",
+        "Danny Howard",
+        "LAEET"
+      ]
+    },
+    {
+      "title": "GORDO | TARAKA",
+      "startsAt": "2026-09-01",
+      "sourceUrl": "https://pacha.com/events/gordo--taraka-01-09-2026",
+      "ticketsUrl": "https://fourvenues.com/iframe/pacha/O5G4",
+      "artists": [
+        "GORDO",
+        "Nicole Moudaber",
+        "Sacchi",
+        "Harvy Valencia",
+        "Tony Guerra",
+        "GORDO | TARAKA"
+      ]
+    },
+    {
+      "title": "MAU P | BADDEST BEHAVIOUR",
+      "startsAt": "2026-09-02",
+      "sourceUrl": "https://pacha.com/events/mau-p--baddest-behaviour-02-09-2026",
+      "ticketsUrl": "https://fourvenues.com/iframe/pacha/HEO5",
+      "artists": [
+        "Mau P",
+        "Loco Dice",
+        "Toman",
+        "Discip",
+        "MAU P | BADDEST BEHAVIOUR"
+      ]
+    },
+    {
+      "title": "PURPLE DISCO MACHINE | PURE PACHA",
+      "startsAt": "2026-09-03",
+      "sourceUrl": "https://pacha.com/events/purple-disco-machine--pure-pacha-03-09-2026",
+      "ticketsUrl": "https://fourvenues.com/iframe/pacha/KGAR",
+      "artists": [
+        "Purple Disco Machine",
+        "2ManyDjs",
+        "Brothers Macklovitch",
+        "David Bay",
+        "PURPLE DISCO MACHINE | PURE PACHA"
+      ]
+    },
+    {
+      "title": "MARCO CAROLA PRESENTS MUSIC ON",
+      "startsAt": "2026-09-04",
+      "sourceUrl": "https://pacha.com/events/marco-carola-presents-music-on-04-09-2026",
+      "ticketsUrl": "https://fourvenues.com/iframe/pacha/6JVJ",
+      "artists": [
+        "Marco Carola",
+        "Damian Lazarus",
+        "Dennis Ferrer",
+        "Ale De Tuglie",
+        "Jazzy"
+      ]
+    },
+    {
+      "title": "ROBIN SCHULZ",
+      "startsAt": "2026-09-05",
+      "sourceUrl": "https://pacha.com/events/robin-schulz-05-09-2026",
+      "ticketsUrl": "https://fourvenues.com/iframe/pacha/TASZ",
+      "artists": [
+        "Robin Schulz",
+        "Sunnery James & Ryan Marciano",
+        "Mark Knight",
+        "Marten Horger"
+      ]
+    },
+    {
+      "title": "SOLOMUN+1",
+      "startsAt": "2026-09-06",
+      "sourceUrl": "https://pacha.com/events/solomun1-06-09-2026",
+      "ticketsUrl": "https://fourvenues.com/iframe/pacha/EIPW",
+      "artists": [
+        "Solomun",
+        "SOLOMUN+1"
+      ]
+    },
+    {
+      "title": "SONNY FODERA",
+      "startsAt": "2026-09-07",
+      "sourceUrl": "https://pacha.com/events/sonny-fodera-07-09-20261",
+      "ticketsUrl": "https://fourvenues.com/iframe/pacha/O44P",
+      "artists": [
+        "Sonny Fodera",
+        "TSHA",
+        "Danny Howard",
+        "LAEET"
+      ]
+    },
+    {
+      "title": "GORDO | TARAKA",
+      "startsAt": "2026-09-08",
+      "sourceUrl": "https://pacha.com/events/gordo--taraka-08-09-2026",
+      "ticketsUrl": "https://fourvenues.com/iframe/pacha/9GRP",
+      "artists": [
+        "GORDO",
+        "Shimza",
+        "Alex Wann",
+        "ARODES",
+        "Manda Moor",
+        "Gala",
+        "GORDO | TARAKA"
+      ]
+    },
+    {
+      "title": "MAU P | BADDEST BEHAVIOUR",
+      "startsAt": "2026-09-09",
+      "sourceUrl": "https://pacha.com/events/mau-p--baddest-behaviour-09-09-2026",
+      "ticketsUrl": "https://fourvenues.com/iframe/pacha/FMWI",
+      "artists": [
+        "Mau P",
+        "Nic Fanciulli",
+        "DJ Tennis",
+        "Mita Gami",
+        "Brunello",
+        "MAU P | BADDEST BEHAVIOUR"
+      ]
+    },
+    {
+      "title": "PURPLE DISCO MACHINE | PURE PACHA",
+      "startsAt": "2026-09-10",
+      "sourceUrl": "https://pacha.com/events/purple-disco-machine--pure-pacha-10-09-2026",
+      "ticketsUrl": "https://fourvenues.com/iframe/pacha/T9P9",
+      "artists": [
+        "Purple Disco Machine",
+        "Armand Van Helden",
+        "DiOSA",
+        "Yuksek",
+        "PURPLE DISCO MACHINE | PURE PACHA"
+      ]
+    },
+    {
+      "title": "MARCO CAROLA PRESENTS MUSIC ON",
+      "startsAt": "2026-09-11",
+      "sourceUrl": "https://pacha.com/events/marco-carola-presents-music-on-11-09-2026",
+      "ticketsUrl": "https://fourvenues.com/iframe/pacha/JM4C",
+      "artists": [
+        "Marco Carola",
+        "Chris Stussy",
+        "Arapu",
+        "Priku",
+        "Traumer",
+        "Mahony",
+        "Danyelino"
+      ]
+    },
+    {
+      "title": "ROBIN SCHULZ",
+      "startsAt": "2026-09-12",
+      "sourceUrl": "https://pacha.com/events/robin-schulz-12-09-2026",
+      "ticketsUrl": "https://fourvenues.com/iframe/pacha/XUMK",
+      "artists": [
+        "Robin Schulz",
+        "Nervo",
+        "Jodie Harsh",
+        "The Menendez Brothers"
+      ]
+    },
+    {
+      "title": "SOLOMUN+1",
+      "startsAt": "2026-09-13",
+      "sourceUrl": "https://pacha.com/events/solomun1-13-09-2026",
+      "ticketsUrl": "https://fourvenues.com/iframe/pacha/6A5A",
+      "artists": [
+        "Solomun",
+        "DESIREE",
+        "SOLOMUN+1"
+      ]
+    },
+    {
+      "title": "SONNY FODERA",
+      "startsAt": "2026-09-14",
+      "sourceUrl": "https://pacha.com/events/sonny-fodera-14-09-20261",
+      "ticketsUrl": "https://fourvenues.com/iframe/pacha/5AE6",
+      "artists": [
+        "Sonny Fodera",
+        "Lost Frequencies",
+        "Danny Howard",
+        "LAEET"
+      ]
+    },
+    {
+      "title": "GORDO | TARAKA",
+      "startsAt": "2026-09-15",
+      "sourceUrl": "https://pacha.com/events/gordo--taraka-15-09-2026",
+      "ticketsUrl": "https://fourvenues.com/iframe/pacha/L4VI",
+      "artists": [
+        "GORDO",
+        "Vintage Culture",
+        "Patrick Topping",
+        "Sacchi",
+        "JØRD",
+        "GORDO | TARAKA"
+      ]
+    },
+    {
+      "title": "MAU P | BADDEST BEHAVIOUR",
+      "startsAt": "2026-09-16",
+      "sourceUrl": "https://pacha.com/events/mau-p--baddest-behaviour-16-09-2026",
+      "ticketsUrl": "https://fourvenues.com/iframe/pacha/MR26",
+      "artists": [
+        "Mau P",
+        "Carlita",
+        "Adam Ten",
+        "OMRI",
+        "MAU P | BADDEST BEHAVIOUR"
+      ]
+    },
+    {
+      "title": "PURPLE DISCO MACHINE | PURE PACHA",
+      "startsAt": "2026-09-17",
+      "sourceUrl": "https://pacha.com/events/purple-disco-machine--pure-pacha-17-09-2026",
+      "ticketsUrl": "https://fourvenues.com/iframe/pacha/MDSM",
+      "artists": [
+        "Purple Disco Machine",
+        "Cerrone",
+        "Kenny Dope",
+        "DiOSA",
+        "David Bay",
+        "PURPLE DISCO MACHINE | PURE PACHA"
+      ]
+    },
+    {
+      "title": "MARCO CAROLA PRESENTS MUSIC ON",
+      "startsAt": "2026-09-18",
+      "sourceUrl": "https://pacha.com/events/marco-carola-presents-music-on-18-09-2026",
+      "ticketsUrl": "https://fourvenues.com/iframe/pacha/WRPF",
+      "artists": [
+        "Marco Carola",
+        "Jamie Jones",
+        "Mason Collective",
+        "Calvin Clarke",
+        "AJ Christou",
+        "MEDNAS"
+      ]
+    },
+    {
+      "title": "ROBIN SCHULZ",
+      "startsAt": "2026-09-19",
+      "sourceUrl": "https://pacha.com/events/robin-schulz-19-09-2026",
+      "ticketsUrl": "https://fourvenues.com/iframe/pacha/3S9U",
+      "artists": [
+        "Robin Schulz",
+        "Jax Jones",
+        "Mistajam",
+        "Jaden Bojsen"
+      ]
+    },
+    {
+      "title": "SOLOMUN+1",
+      "startsAt": "2026-09-20",
+      "sourceUrl": "https://pacha.com/events/solomun1-20-09-2026",
+      "ticketsUrl": "https://fourvenues.com/iframe/pacha/UJIW",
+      "artists": [
+        "Solomun",
+        "KETTAMA",
+        "SOLOMUN+1"
+      ]
+    },
+    {
+      "title": "SONNY FODERA",
+      "startsAt": "2026-09-21",
+      "sourceUrl": "https://pacha.com/events/sonny-fodera-21-09-20261",
+      "ticketsUrl": "https://fourvenues.com/iframe/pacha/57IL",
+      "artists": [
+        "Sonny Fodera",
+        "Roger Sanchez",
+        "Danny Howard",
+        "LAEET"
+      ]
+    },
+    {
+      "title": "GORDO | TARAKA",
+      "startsAt": "2026-09-22",
+      "sourceUrl": "https://pacha.com/events/gordo--taraka-22-09-2026",
+      "ticketsUrl": "https://fourvenues.com/iframe/pacha/ITU5",
+      "artists": [
+        "GORDO",
+        "HoneyLuv",
+        "Vanjee",
+        "Gala",
+        "GORDO | TARAKA"
+      ]
+    },
+    {
+      "title": "MAU P | BADDEST BEHAVIOUR",
+      "startsAt": "2026-09-23",
+      "sourceUrl": "https://pacha.com/events/mau-p--baddest-behaviour-23-09-2026",
+      "ticketsUrl": "https://fourvenues.com/iframe/pacha/5ROL",
+      "artists": [
+        "Mau P",
+        "WhoMadeWho (Hybrid DJ Set)",
+        "Ale De Tuglie",
+        "Frank Storm",
+        "Anna Tur",
+        "MAU P | BADDEST BEHAVIOUR"
+      ]
+    },
+    {
+      "title": "PURPLE DISCO MACHINE | PURE PACHA",
+      "startsAt": "2026-09-24",
+      "sourceUrl": "https://pacha.com/events/purple-disco-machine--pure-pacha-24-09-2026",
+      "ticketsUrl": "https://fourvenues.com/iframe/pacha/D28W",
+      "artists": [
+        "Purple Disco Machine",
+        "Todd Terje",
+        "Deer Jade",
+        "David Bay",
+        "PURPLE DISCO MACHINE | PURE PACHA"
+      ]
+    },
+    {
+      "title": "MARCO CAROLA PRESENTS MUSIC ON",
+      "startsAt": "2026-09-25",
+      "sourceUrl": "https://pacha.com/events/marco-carola-presents-music-on-25-09-2026",
+      "ticketsUrl": "https://fourvenues.com/iframe/pacha/KO5W",
+      "artists": [
+        "Marco Carola",
+        "Seth Troxler",
+        "Ilario Alicante",
+        "Chelina Manuhutu",
+        "Neverdogs",
+        "Leon"
+      ]
+    },
+    {
+      "title": "ROBIN SCHULZ",
+      "startsAt": "2026-09-26",
+      "sourceUrl": "https://pacha.com/events/robin-schulz-26-09-2026",
+      "ticketsUrl": "https://fourvenues.com/iframe/pacha/XYN2",
+      "artists": [
+        "Robin Schulz",
+        "Tita Lau",
+        "Noel Holler",
+        "Wave Wave"
+      ]
+    },
+    {
+      "title": "SOLOMUN+1",
+      "startsAt": "2026-09-27",
+      "sourceUrl": "https://pacha.com/events/solomun1-27-09-2026",
+      "ticketsUrl": "https://fourvenues.com/iframe/pacha/ORO7",
+      "artists": [
+        "Solomun",
+        "Amê",
+        "SOLOMUN+1"
+      ]
+    },
+    {
+      "title": "SONNY FODERA",
+      "startsAt": "2026-09-28",
+      "sourceUrl": "https://pacha.com/events/sonny-fodera-28-09-20261",
+      "ticketsUrl": "https://fourvenues.com/iframe/pacha/KIGI",
+      "artists": [
+        "Sonny Fodera",
+        "Jazzy",
+        "Marten Lou"
+      ]
+    },
+    {
+      "title": "GORDO | TARAKA - CLOSING PARTY",
+      "startsAt": "2026-09-29",
+      "sourceUrl": "https://pacha.com/events/gordo--taraka-29-09-2026",
+      "ticketsUrl": "https://fourvenues.com/iframe/pacha/NLML",
+      "artists": [
+        "GORDO",
+        "Roger Sanchez",
+        "Gala",
+        "Abril Love",
+        "GORDO | TARAKA - CLOSING PARTY"
+      ]
+    },
+    {
+      "title": "MAU P | BADDEST BEHAVIOUR",
+      "startsAt": "2026-09-30",
+      "sourceUrl": "https://pacha.com/events/mau-p--baddest-behaviour-30-09-2026",
+      "ticketsUrl": "https://fourvenues.com/iframe/pacha/QZ6K",
+      "artists": [
+        "Mau P",
+        "Jimi Jules",
+        "HAAi",
+        "Sally C",
+        "Baggi",
+        "MAU P | BADDEST BEHAVIOUR"
+      ]
+    },
+    {
+      "title": "PURPLE DISCO MACHINE | PURE PACHA - CLOSING PARTY",
+      "startsAt": "2026-10-01",
+      "sourceUrl": "https://pacha.com/events/purple-disco-machine--pure-pacha---closing-party-01-10-2026",
+      "ticketsUrl": "https://fourvenues.com/iframe/pacha/6WO5",
+      "artists": [
+        "Purple Disco Machine",
+        "Gerd Janson",
+        "Busy P",
+        "Breakbot",
+        "David Bay",
+        "PURPLE DISCO MACHINE | PURE PACHA - CLOSING PARTY"
+      ]
+    },
+    {
+      "title": "MARCO CAROLA PRESENTS MUSIC ON",
+      "startsAt": "2026-10-02",
+      "sourceUrl": "https://pacha.com/events/marco-carola-presents-music-on-02-10-2026",
+      "ticketsUrl": "https://fourvenues.com/iframe/pacha/LRJF",
+      "artists": [
+        "Marco Carola",
+        "Adriatique",
+        "Mita Gami",
+        "II Faces"
+      ]
+    },
+    {
+      "title": "ROBIN SCHULZ - CLOSING PARTY",
+      "startsAt": "2026-10-03",
+      "sourceUrl": "https://pacha.com/events/robin-schulz---closing-party-03-10-2026",
+      "ticketsUrl": "https://fourvenues.com/iframe/pacha/FOTV",
+      "artists": [
+        "Robin Schulz",
+        "Oliver Heldens",
+        "LOVRA",
+        "Alle Farben",
+        "ROBIN SCHULZ - CLOSING PARTY"
+      ]
+    },
+    {
+      "title": "SOLOMUN+1 - CLOSING PARTY",
+      "startsAt": "2026-10-04",
+      "sourceUrl": "https://pacha.com/events/solomun1---closing-party-04-10-2026",
+      "ticketsUrl": "https://fourvenues.com/iframe/pacha/999J",
+      "artists": [
+        "Solomun",
+        "SOLOMUN+1 - CLOSING PARTY"
+      ]
+    },
+    {
+      "title": "SONNY FODERA - CLOSING PARTY",
+      "startsAt": "2026-10-05",
+      "sourceUrl": "https://pacha.com/events/sonny-fodera-05-10-20261",
+      "ticketsUrl": "https://fourvenues.com/iframe/pacha/W5W7",
+      "artists": [
+        "Sonny Fodera",
+        "Fatboy Slim",
+        "Danny Howard",
+        "Saffron Stone",
+        "SONNY FODERA - CLOSING PARTY"
+      ]
+    },
+    {
+      "title": "RAMPA PRESENTS ANARCHY",
+      "startsAt": "2026-10-06",
+      "sourceUrl": "https://pacha.com/events/rampa-presents-anarchy-06-10-2026",
+      "ticketsUrl": "https://fourvenues.com/iframe/pacha/HHJE",
+      "artists": [
+        "Rampa",
+        "Sven Väth",
+        "JAMIIE"
+      ]
+    },
+    {
+      "title": "MAU P | BADDEST BEHAVIOUR - CLOSING PARTY",
+      "startsAt": "2026-10-07",
+      "sourceUrl": "https://pacha.com/events/mau-p--baddest-behaviour---closing-party-07-10-2026",
+      "ticketsUrl": "https://fourvenues.com/iframe/pacha/HD66",
+      "artists": [
+        "Mau P",
+        "MAU P | BADDEST BEHAVIOUR - CLOSING PARTY"
+      ]
+    },
+    {
+      "title": "MARCO CAROLA PRESENTS MUSIC ON - CLOSING PARTY (PART 1)",
+      "startsAt": "2026-10-08",
+      "sourceUrl": "https://pacha.com/events/marco-carola-presents-music-on---closing-party-part-1-08-10-2026",
+      "ticketsUrl": "https://fourvenues.com/iframe/pacha/1PA4",
+      "artists": [
+        "Marco Carola",
+        "Michael Bibi",
+        "Cloonee",
+        "Mason Collective",
+        "Frank Storm"
+      ]
+    },
+    {
+      "title": "MARCO CAROLA PRESENTS MUSIC ON - CLOSING PARTY (PART 2)",
+      "startsAt": "2026-10-09",
+      "sourceUrl": "https://pacha.com/events/marco-carola-presents-music-on---closing-party-part-2-09-10-2026",
+      "ticketsUrl": "https://fourvenues.com/iframe/pacha/ZR5I",
+      "artists": [
+        "Marco Carola",
+        "Franky Rizardo",
+        "East End Dubs",
+        "Ilario Alicante",
+        "Ale De Tuglie",
+        "Grace Arribas"
+      ]
+    },
+    {
+      "title": "GRAND CLOSING WEEKEND – PART 1 | FLOWER POWER",
+      "startsAt": "2026-10-10",
+      "sourceUrl": "https://pacha.com/events/grand-closing-weekend--part-1--flower-power-10-10-20261",
+      "ticketsUrl": "https://fourvenues.com/iframe/pacha/7N6L",
+      "artists": [
+        "Roger Sanchez",
+        "MK",
+        "LAEET",
+        "GRAND CLOSING WEEKEND – PART 1 | FLOWER POWER"
+      ]
+    },
+    {
+      "title": "GRAND CLOSING WEEKEND - PART 2 | PAWSA, MIGUELLE & TONS",
+      "startsAt": "2026-10-11",
+      "sourceUrl": "https://pacha.com/events/grand-closing--pawsa-miguelle--tons-11-10-2026",
+      "ticketsUrl": "https://fourvenues.com/iframe/pacha/O1V8",
+      "artists": [
+        "PAWSA",
+        "Miguelle & Tons",
+        "GRAND CLOSING WEEKEND - PART 2 | PAWSA, MIGUELLE & TONS"
+      ]
+    }
+  ]
+}

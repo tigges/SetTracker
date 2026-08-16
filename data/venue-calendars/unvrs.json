@@ -1,0 +1,758 @@
+{
+  "venueSlug": "unvrs",
+  "venueName": "UNVRS",
+  "sourceUrl": "https://www.unvrs.com/events-calendar",
+  "fetchedAt": "2026-08-16T14:46:38.107Z",
+  "nights": [
+    {
+      "title": "Carl Cox",
+      "startsAt": "2026-08-16",
+      "sourceUrl": "https://www.unvrs.com/events/2026/carl-cox/16-08-2026",
+      "ticketsUrl": "https://www.unvrs.com/events/2026/carl-cox/16-08-2026",
+      "artists": [
+        "CARL COX",
+        "VINTAGE CULTURE",
+        "MISS MONIQUE",
+        "Clüb de combat",
+        "melon bomb"
+      ]
+    },
+    {
+      "title": "Tiësto",
+      "startsAt": "2026-08-17",
+      "sourceUrl": "https://www.unvrs.com/events/2026/tiesto/17-08-2026",
+      "ticketsUrl": "https://www.unvrs.com/events/2026/tiesto/17-08-2026",
+      "artists": [
+        "Tiësto",
+        "HANNAH LAING",
+        "S3PPA"
+      ]
+    },
+    {
+      "title": "ANYMA",
+      "startsAt": "2026-08-18",
+      "sourceUrl": "https://www.unvrs.com/events/2026/anyma/18-08-2026",
+      "ticketsUrl": "https://www.unvrs.com/events/2026/anyma/18-08-2026",
+      "artists": [
+        "ANYMA",
+        "SOLOMUN",
+        "SON OF SON",
+        "Henri Bergmann",
+        "OMNYA",
+        "Sapian",
+        "YET MORE",
+        "1LINE"
+      ]
+    },
+    {
+      "title": "Jamie Jones Presents Paradise",
+      "startsAt": "2026-08-19",
+      "sourceUrl": "https://www.unvrs.com/events/2026/jamie-jones-paradise/19-08-2026",
+      "ticketsUrl": "https://www.unvrs.com/events/2026/jamie-jones-paradise/19-08-2026",
+      "artists": [
+        "JAMIE JONES",
+        "GREEN VELVET",
+        "PATRICK TOPPING",
+        "ALISHA",
+        "AJ CHRISTOU",
+        "GIDEÖN",
+        "ROBBIE DOHERTY",
+        "RIORDAN",
+        "STEF DAVIDSE",
+        "OLLIE BC",
+        "TOM NOLAN",
+        "LUCA 606",
+        "DAVID BERRIE",
+        "BECKIE ADAMS"
+      ]
+    },
+    {
+      "title": "FISHER",
+      "startsAt": "2026-08-20",
+      "sourceUrl": "https://www.unvrs.com/events/2026/fisher/20-08-2026",
+      "ticketsUrl": "https://www.unvrs.com/events/2026/fisher/20-08-2026",
+      "artists": [
+        "FISHER",
+        "LUCIANO",
+        "ENZO IS BURNING",
+        "JASON BYE",
+        "RICHY PENNY"
+      ]
+    },
+    {
+      "title": "David Guetta Presents Galactic Circus",
+      "startsAt": "2026-08-21",
+      "sourceUrl": "https://www.unvrs.com/events/2026/david-guetta-galactic-circus/21-08-2026",
+      "ticketsUrl": "https://www.unvrs.com/events/2026/david-guetta-galactic-circus/21-08-2026",
+      "artists": [
+        "DAVID GUETTA",
+        "MEDUZA",
+        "LOOFY",
+        "discoliscious",
+        "paul reynolds"
+      ]
+    },
+    {
+      "title": "elrow Ibiza",
+      "startsAt": "2026-08-22",
+      "sourceUrl": "https://www.unvrs.com/events/2026/elrow-ibiza/22-08-2026",
+      "ticketsUrl": "https://www.unvrs.com/events/2026/elrow-ibiza/22-08-2026",
+      "artists": [
+        "DE LA SWING",
+        "FATBOY SLIM",
+        "Oden & Fatzo",
+        "Us Two",
+        "elrow Ibiza"
+      ]
+    },
+    {
+      "title": "Carl Cox",
+      "startsAt": "2026-08-23",
+      "sourceUrl": "https://www.unvrs.com/events/2026/carl-cox/23-08-2026",
+      "ticketsUrl": "https://www.unvrs.com/events/2026/carl-cox/23-08-2026",
+      "artists": [
+        "CARL COX",
+        "THE MARTINEZ BROTHERS",
+        "PAUZA"
+      ]
+    },
+    {
+      "title": "Tiësto",
+      "startsAt": "2026-08-24",
+      "sourceUrl": "https://www.unvrs.com/events/2026/tiesto/24-08-2026",
+      "ticketsUrl": "https://www.unvrs.com/events/2026/tiesto/24-08-2026",
+      "artists": [
+        "Tiësto",
+        "KI/KI",
+        "PAIGE TOMLINSON"
+      ]
+    },
+    {
+      "title": "ANYMA",
+      "startsAt": "2026-08-25",
+      "sourceUrl": "https://www.unvrs.com/events/2026/anyma/25-08-2026",
+      "ticketsUrl": "https://www.unvrs.com/events/2026/anyma/25-08-2026",
+      "artists": [
+        "ANYMA",
+        "Camelphat",
+        "MASSANO",
+        "RECONDITE",
+        "HUNTER/GAME",
+        "ANII",
+        "MARINO CANAL",
+        "CHERRY"
+      ]
+    },
+    {
+      "title": "Jamie Jones Presents Paradise",
+      "startsAt": "2026-08-26",
+      "sourceUrl": "https://www.unvrs.com/events/2026/jamie-jones-paradise/26-08-2026",
+      "ticketsUrl": "https://www.unvrs.com/events/2026/jamie-jones-paradise/26-08-2026",
+      "artists": [
+        "JAMIE JONES",
+        "MAX DEAN",
+        "LUKE DEAN",
+        "BONTAN",
+        "SIDNEY CHARLES",
+        "DELILAH",
+        "RICHY AHMED",
+        "LEON",
+        "joey daniel",
+        "BAGLIONE",
+        "JOSS DEAN",
+        "TOMMY PHILLIPS",
+        "PAISLEY JENSEN"
+      ]
+    },
+    {
+      "title": "FISHER",
+      "startsAt": "2026-08-27",
+      "sourceUrl": "https://www.unvrs.com/events/2026/fisher/27-08-2026",
+      "ticketsUrl": "https://www.unvrs.com/events/2026/fisher/27-08-2026",
+      "artists": [
+        "FISHER",
+        "MACEO PLEX",
+        "MARCO LYS",
+        "JASON BYE",
+        "RICHY PENNY"
+      ]
+    },
+    {
+      "title": "David Guetta Presents Galactic Circus",
+      "startsAt": "2026-08-28",
+      "sourceUrl": "https://www.unvrs.com/events/2026/david-guetta-galactic-circus/28-08-2026",
+      "ticketsUrl": "https://www.unvrs.com/events/2026/david-guetta-galactic-circus/28-08-2026",
+      "artists": [
+        "DAVID GUETTA",
+        "MISS MONIQUE",
+        "GOODBOYS",
+        "discoliscious",
+        "paul reynolds"
+      ]
+    },
+    {
+      "title": "elrow Ibiza",
+      "startsAt": "2026-08-29",
+      "sourceUrl": "https://www.unvrs.com/events/2026/elrow-ibiza/29-08-2026",
+      "ticketsUrl": "https://www.unvrs.com/events/2026/elrow-ibiza/29-08-2026",
+      "artists": [
+        "ANDRES CAMPO",
+        "Bora Uzer",
+        "Sante Sansone",
+        "elrow Ibiza"
+      ]
+    },
+    {
+      "title": "Carl Cox",
+      "startsAt": "2026-08-30",
+      "sourceUrl": "https://www.unvrs.com/events/2026/carl-cox/30-08-2026",
+      "ticketsUrl": "https://www.unvrs.com/events/2026/carl-cox/30-08-2026",
+      "artists": [
+        "CARL COX",
+        "JOSEPH CAPRIATI",
+        "HONEY DIJON",
+        "BRINA KNAUSS",
+        "melon bomb"
+      ]
+    },
+    {
+      "title": "Tiësto — Closing Party",
+      "startsAt": "2026-08-31",
+      "sourceUrl": "https://www.unvrs.com/events/2026/tiesto/31-08-2026",
+      "ticketsUrl": "https://www.unvrs.com/events/2026/tiesto/31-08-2026",
+      "artists": [
+        "Tiësto",
+        "MASSANO",
+        "dj try",
+        "Tiësto — Closing Party"
+      ]
+    },
+    {
+      "title": "ANYMA",
+      "startsAt": "2026-09-01",
+      "sourceUrl": "https://www.unvrs.com/events/2026/anyma/01-09-2026",
+      "ticketsUrl": "https://www.unvrs.com/events/2026/anyma/01-09-2026",
+      "artists": [
+        "ANYMA",
+        "ARTBAT",
+        "REBŪKE",
+        "baset",
+        "ZSS",
+        "pacs",
+        "DORIANN",
+        "RODDY LIMA"
+      ]
+    },
+    {
+      "title": "Jamie Jones Presents Paradise",
+      "startsAt": "2026-09-02",
+      "sourceUrl": "https://www.unvrs.com/events/2026/jamie-jones-paradise/02-09-2026",
+      "ticketsUrl": "https://www.unvrs.com/events/2026/jamie-jones-paradise/02-09-2026",
+      "artists": [
+        "JAMIE JONES",
+        "HOT SINCE 82",
+        "TRAUMER",
+        "lp. rhythm",
+        "FIFI FORTE",
+        "ELLIOT SCHOOLING",
+        "LIAM PALMER",
+        "LOCKY",
+        "mad again",
+        "ENZO IS BURNING",
+        "VIBE KILLERS",
+        "JAVI BORA",
+        "SHO",
+        "KREED",
+        "MOLLY"
+      ]
+    },
+    {
+      "title": "FISHER",
+      "startsAt": "2026-09-03",
+      "sourceUrl": "https://www.unvrs.com/events/2026/fisher/03-09-2026",
+      "ticketsUrl": "https://www.unvrs.com/events/2026/fisher/03-09-2026",
+      "artists": [
+        "FISHER",
+        "GORGON CITY",
+        "HILLS",
+        "JACKIE HOLLANDER",
+        "JASON BYE",
+        "RICHY PENNY"
+      ]
+    },
+    {
+      "title": "David Guetta Presents Galactic Circus",
+      "startsAt": "2026-09-04",
+      "sourceUrl": "https://www.unvrs.com/events/2026/david-guetta-galactic-circus/04-09-2026",
+      "ticketsUrl": "https://www.unvrs.com/events/2026/david-guetta-galactic-circus/04-09-2026",
+      "artists": [
+        "DAVID GUETTA",
+        "MORTEN",
+        "MATT SASSARI",
+        "discoliscious",
+        "paul reynolds"
+      ]
+    },
+    {
+      "title": "elrow Ibiza",
+      "startsAt": "2026-09-05",
+      "sourceUrl": "https://www.unvrs.com/events/2026/elrow-ibiza/05-09-2026",
+      "ticketsUrl": "https://www.unvrs.com/events/2026/elrow-ibiza/05-09-2026",
+      "artists": [
+        "BASTIAN BUX",
+        "menesix",
+        "OLIVE F",
+        "PATRICK TOPPING",
+        "Us Two",
+        "elrow Ibiza"
+      ]
+    },
+    {
+      "title": "Carl Cox",
+      "startsAt": "2026-09-06",
+      "sourceUrl": "https://www.unvrs.com/events/2026/carl-cox/06-09-2026",
+      "ticketsUrl": "https://www.unvrs.com/events/2026/carl-cox/06-09-2026",
+      "artists": [
+        "CARL COX",
+        "SASHA & JOHN DIGWEED",
+        "Mariano Mellino",
+        "melon bomb"
+      ]
+    },
+    {
+      "title": "Armin Van Buuren presents A State Of Trance — Opening Party",
+      "startsAt": "2026-09-07",
+      "sourceUrl": "https://www.unvrs.com/events/2026/armin-van-buuren-asot/07-09-2026",
+      "ticketsUrl": "https://www.unvrs.com/events/2026/armin-van-buuren-asot/07-09-2026",
+      "artists": [
+        "Armin van Buuren",
+        "HANNAH LAING"
+      ]
+    },
+    {
+      "title": "ANYMA",
+      "startsAt": "2026-09-08",
+      "sourceUrl": "https://www.unvrs.com/events/2026/anyma/08-09-2026",
+      "ticketsUrl": "https://www.unvrs.com/events/2026/anyma/08-09-2026",
+      "artists": [
+        "ANYMA",
+        "AMELIE LENS",
+        "Kas:st",
+        "Konstantin Sibold",
+        "pacs",
+        "SIDERAL",
+        "MARK REEVE",
+        "VALENTINA GALANTUCCI"
+      ]
+    },
+    {
+      "title": "Jamie Jones Presents Paradise",
+      "startsAt": "2026-09-09",
+      "sourceUrl": "https://www.unvrs.com/events/2026/jamie-jones-paradise/09-09-2026",
+      "ticketsUrl": "https://www.unvrs.com/events/2026/jamie-jones-paradise/09-09-2026",
+      "artists": [
+        "JAMIE JONES",
+        "ROSSI.",
+        "NICOLE MOUDABER",
+        "WAFF",
+        "OBSKÜR",
+        "FLORENTIA",
+        "MURPHY'S LAW",
+        "RICH NXT",
+        "JORDAN PEAK",
+        "LIGHTLEAK",
+        "HORO",
+        "VITO",
+        "PITCH JAMES",
+        "FIRZA"
+      ]
+    },
+    {
+      "title": "FISHER — Closing Party",
+      "startsAt": "2026-09-10",
+      "sourceUrl": "https://www.unvrs.com/events/2026/fisher/10-09-2026",
+      "ticketsUrl": "https://www.unvrs.com/events/2026/fisher/10-09-2026",
+      "artists": [
+        "FISHER",
+        "ATRIP",
+        "RICHY PENNY",
+        "FISHER — Closing Party"
+      ]
+    },
+    {
+      "title": "David Guetta Presents Galactic Circus",
+      "startsAt": "2026-09-11",
+      "sourceUrl": "https://www.unvrs.com/events/2026/david-guetta-galactic-circus/11-09-2026",
+      "ticketsUrl": "https://www.unvrs.com/events/2026/david-guetta-galactic-circus/11-09-2026",
+      "artists": [
+        "DAVID GUETTA",
+        "MARLON HOFFSTADT",
+        "discoliscious",
+        "paul reynolds"
+      ]
+    },
+    {
+      "title": "elrow Ibiza",
+      "startsAt": "2026-09-12",
+      "sourceUrl": "https://www.unvrs.com/events/2026/elrow-ibiza/12-09-2026",
+      "ticketsUrl": "https://www.unvrs.com/events/2026/elrow-ibiza/12-09-2026",
+      "artists": [
+        "aat",
+        "ILARIO ALICANTE",
+        "JORIS VOORN",
+        "TONI VARGA",
+        "elrow Ibiza"
+      ]
+    },
+    {
+      "title": "Carl Cox",
+      "startsAt": "2026-09-13",
+      "sourceUrl": "https://www.unvrs.com/events/2026/carl-cox/13-09-2026",
+      "ticketsUrl": "https://www.unvrs.com/events/2026/carl-cox/13-09-2026",
+      "artists": [
+        "CARL COX",
+        "louie vega",
+        "dimitri from paris",
+        "souldynamic",
+        "melon bomb"
+      ]
+    },
+    {
+      "title": "Armin Van Buuren presents A State Of Trance",
+      "startsAt": "2026-09-14",
+      "sourceUrl": "https://www.unvrs.com/events/2026/armin-van-buuren-asot/14-09-2026",
+      "ticketsUrl": "https://www.unvrs.com/events/2026/armin-van-buuren-asot/14-09-2026",
+      "artists": [
+        "Armin van Buuren",
+        "Eli Brown"
+      ]
+    },
+    {
+      "title": "ANYMA — Closing Party",
+      "startsAt": "2026-09-15",
+      "sourceUrl": "https://www.unvrs.com/events/2026/anyma/15-09-2026",
+      "ticketsUrl": "https://www.unvrs.com/events/2026/anyma/15-09-2026",
+      "artists": [
+        "ANYMA",
+        "CASSIAN",
+        "KEVIN DE VRIES",
+        "COLYN",
+        "INNELLEA",
+        "AGENTS OF TIME",
+        "Adam Sellouk",
+        "ENAI",
+        "pacs",
+        "ANYMA — Closing Party"
+      ]
+    },
+    {
+      "title": "Jamie Jones Presents Paradise",
+      "startsAt": "2026-09-16",
+      "sourceUrl": "https://www.unvrs.com/events/2026/jamie-jones-paradise/16-09-2026",
+      "ticketsUrl": "https://www.unvrs.com/events/2026/jamie-jones-paradise/16-09-2026",
+      "artists": [
+        "JAMIE JONES",
+        "PROSPA",
+        "ARCHIE HAMILTON",
+        "SIDNEY CHARLES",
+        "LUKE DEAN",
+        "LOCKY",
+        "OLIVE F",
+        "RAFAEL",
+        "BONTAN",
+        "LUCA SAPORITO",
+        "MINDLESS",
+        "ADRI",
+        "DAVID BERRIE",
+        "HARTY",
+        "ACA"
+      ]
+    },
+    {
+      "title": "Adriatique Presents X",
+      "startsAt": "2026-09-17",
+      "sourceUrl": "https://www.unvrs.com/events/2026/adriatique-presents-x/17-09-2026",
+      "ticketsUrl": "https://www.unvrs.com/events/2026/adriatique-presents-x/17-09-2026",
+      "artists": []
+    },
+    {
+      "title": "David Guetta Presents Galactic Circus",
+      "startsAt": "2026-09-18",
+      "sourceUrl": "https://www.unvrs.com/events/2026/david-guetta-galactic-circus/18-09-2026",
+      "ticketsUrl": "https://www.unvrs.com/events/2026/david-guetta-galactic-circus/18-09-2026",
+      "artists": [
+        "DAVID GUETTA",
+        "RIVO",
+        "discoliscious",
+        "paul reynolds"
+      ]
+    },
+    {
+      "title": "elrow Ibiza",
+      "startsAt": "2026-09-19",
+      "sourceUrl": "https://www.unvrs.com/events/2026/elrow-ibiza/19-09-2026",
+      "ticketsUrl": "https://www.unvrs.com/events/2026/elrow-ibiza/19-09-2026",
+      "artists": [
+        "Bora Uzer",
+        "DE LA SWING",
+        "JOËLLA JACKSON",
+        "RENDHER",
+        "WADE",
+        "elrow Ibiza"
+      ]
+    },
+    {
+      "title": "Carl Cox",
+      "startsAt": "2026-09-20",
+      "sourceUrl": "https://www.unvrs.com/events/2026/carl-cox/20-09-2026",
+      "ticketsUrl": "https://www.unvrs.com/events/2026/carl-cox/20-09-2026",
+      "artists": [
+        "CARL COX",
+        "DENNIS CRUZ",
+        "LOCO DICE",
+        "MITA GAMI",
+        "Karretero",
+        "PAUZA",
+        "melon bomb"
+      ]
+    },
+    {
+      "title": "Armin Van Buuren presents A State Of Trance",
+      "startsAt": "2026-09-21",
+      "sourceUrl": "https://www.unvrs.com/events/2026/armin-van-buuren-asot/21-09-2026",
+      "ticketsUrl": "https://www.unvrs.com/events/2026/armin-van-buuren-asot/21-09-2026",
+      "artists": [
+        "Armin van Buuren",
+        "ARGY"
+      ]
+    },
+    {
+      "title": "Black Coffee",
+      "startsAt": "2026-09-22",
+      "sourceUrl": "https://www.unvrs.com/events/2026/black-coffee/22-09-2026",
+      "ticketsUrl": "https://www.unvrs.com/events/2026/black-coffee/22-09-2026",
+      "artists": [
+        "Black Coffee"
+      ]
+    },
+    {
+      "title": "Jamie Jones Presents Paradise",
+      "startsAt": "2026-09-23",
+      "sourceUrl": "https://www.unvrs.com/events/2026/jamie-jones-paradise/23-09-2026",
+      "ticketsUrl": "https://www.unvrs.com/events/2026/jamie-jones-paradise/23-09-2026",
+      "artists": [
+        "JAMIE JONES",
+        "MAX DEAN",
+        "FRANKY RIZARDO",
+        "GASKIN",
+        "FIFI FORTE",
+        "OZZIE GUVEN",
+        "DXNBY",
+        "WHEATS",
+        "NATALIA ROTH",
+        "CAM STOCKMAN",
+        "ELLIA JAY",
+        "PIRATE COPY",
+        "OMARI"
+      ]
+    },
+    {
+      "title": "Adriatique Presents X",
+      "startsAt": "2026-09-24",
+      "sourceUrl": "https://www.unvrs.com/events/2026/adriatique-presents-x/24-09-2026",
+      "ticketsUrl": "https://www.unvrs.com/events/2026/adriatique-presents-x/24-09-2026",
+      "artists": []
+    },
+    {
+      "title": "David Guetta Presents Galactic Circus",
+      "startsAt": "2026-09-25",
+      "sourceUrl": "https://www.unvrs.com/events/2026/david-guetta-galactic-circus/25-09-2026",
+      "ticketsUrl": "https://www.unvrs.com/events/2026/david-guetta-galactic-circus/25-09-2026",
+      "artists": [
+        "DAVID GUETTA",
+        "MISS MONIQUE",
+        "ZSS",
+        "discoliscious",
+        "paul reynolds"
+      ]
+    },
+    {
+      "title": "elrow Ibiza",
+      "startsAt": "2026-09-26",
+      "sourceUrl": "https://www.unvrs.com/events/2026/elrow-ibiza/26-09-2026",
+      "ticketsUrl": "https://www.unvrs.com/events/2026/elrow-ibiza/26-09-2026",
+      "artists": [
+        "KÖLSCH",
+        "JORIS VOORN",
+        "RENDHER",
+        "TINI GESSLER",
+        "elrow Ibiza"
+      ]
+    },
+    {
+      "title": "Carl Cox",
+      "startsAt": "2026-09-27",
+      "sourceUrl": "https://www.unvrs.com/events/2026/carl-cox/27-09-2026",
+      "ticketsUrl": "https://www.unvrs.com/events/2026/carl-cox/27-09-2026",
+      "artists": [
+        "CARL COX",
+        "NICOLE MOUDABER",
+        "ALAN FITZPATRICK",
+        "PAUZA",
+        "melon bomb"
+      ]
+    },
+    {
+      "title": "Armin Van Buuren presents A State Of Trance",
+      "startsAt": "2026-09-28",
+      "sourceUrl": "https://www.unvrs.com/events/2026/armin-van-buuren-asot/28-09-2026",
+      "ticketsUrl": "https://www.unvrs.com/events/2026/armin-van-buuren-asot/28-09-2026",
+      "artists": [
+        "Armin van Buuren",
+        "Funk Tribu"
+      ]
+    },
+    {
+      "title": "No Art",
+      "startsAt": "2026-09-29",
+      "sourceUrl": "https://www.unvrs.com/events/2026/no-art-ibiza/29-09-2026",
+      "ticketsUrl": "https://www.unvrs.com/events/2026/no-art-ibiza/29-09-2026",
+      "artists": [
+        "ANOTR",
+        "PROSPA",
+        "TOMAN",
+        "MILUHSKA",
+        "No Art"
+      ]
+    },
+    {
+      "title": "Jamie Jones Presents Paradise",
+      "startsAt": "2026-09-30",
+      "sourceUrl": "https://www.unvrs.com/events/2026/jamie-jones-paradise/30-09-2026",
+      "ticketsUrl": "https://www.unvrs.com/events/2026/jamie-jones-paradise/30-09-2026",
+      "artists": [
+        "JAMIE JONES",
+        "LOCO DICE",
+        "DAMIAN LAZARUS",
+        "CALVIN CLARKE",
+        "jaden thompson",
+        "SYREETA",
+        "JOSS DEAN",
+        "CICLO",
+        "MIKE MORRISEY",
+        "PAUL C",
+        "PAOLO MARTINI",
+        "DAN COSTELLO"
+      ]
+    },
+    {
+      "title": "Black Coffee",
+      "startsAt": "2026-10-01",
+      "sourceUrl": "https://www.unvrs.com/events/2026/black-coffee/01-10-2026",
+      "ticketsUrl": "https://www.unvrs.com/events/2026/black-coffee/01-10-2026",
+      "artists": [
+        "Black Coffee"
+      ]
+    },
+    {
+      "title": "David Guetta Presents Galactic Circus — Closing Party",
+      "startsAt": "2026-10-02",
+      "sourceUrl": "https://www.unvrs.com/events/2026/david-guetta-galactic-circus/02-10-2026",
+      "ticketsUrl": "https://www.unvrs.com/events/2026/david-guetta-galactic-circus/02-10-2026",
+      "artists": [
+        "DAVID GUETTA",
+        "JAMES HYPE",
+        "LIVA K",
+        "discoliscious",
+        "paul reynolds"
+      ]
+    },
+    {
+      "title": "elrow Ibiza — Closing Party",
+      "startsAt": "2026-10-03",
+      "sourceUrl": "https://www.unvrs.com/events/2026/elrow-ibiza/03-10-2026",
+      "ticketsUrl": "https://www.unvrs.com/events/2026/elrow-ibiza/03-10-2026",
+      "artists": [
+        "aat",
+        "CHELINA MANUHUTU",
+        "TINI GESSLER",
+        "ILARIO ALICANTE",
+        "PACO OSUNA",
+        "elrow Ibiza — Closing Party"
+      ]
+    },
+    {
+      "title": "Carl Cox — Closing Party",
+      "startsAt": "2026-10-04",
+      "sourceUrl": "https://www.unvrs.com/events/2026/carl-cox/04-10-2026",
+      "ticketsUrl": "https://www.unvrs.com/events/2026/carl-cox/04-10-2026",
+      "artists": [
+        "CARL COX",
+        "melon bomb",
+        "Carl Cox — Closing Party"
+      ]
+    },
+    {
+      "title": "Armin Van Buuren presents A State Of Trance — Closing Party",
+      "startsAt": "2026-10-05",
+      "sourceUrl": "https://www.unvrs.com/events/2026/armin-van-buuren-asot/05-10-2026",
+      "ticketsUrl": "https://www.unvrs.com/events/2026/armin-van-buuren-asot/05-10-2026",
+      "artists": [
+        "Armin van Buuren"
+      ]
+    },
+    {
+      "title": "Jamie Jones Presents Paradise — Closing Party",
+      "startsAt": "2026-10-07",
+      "sourceUrl": "https://www.unvrs.com/events/2026/jamie-jones-paradise/07-10-2026",
+      "ticketsUrl": "https://www.unvrs.com/events/2026/jamie-jones-paradise/07-10-2026",
+      "artists": [
+        "JAMIE JONES",
+        "MANDA MOOR",
+        "MASON MAYNARD",
+        "sośa",
+        "AMÉMÉ",
+        "lp. rhythm",
+        "GRACE ARRIBAS",
+        "LUCA 606"
+      ]
+    },
+    {
+      "title": "Indira Paganotto Presents Artcore",
+      "startsAt": "2026-10-08",
+      "sourceUrl": "https://www.unvrs.com/events/2026/artcore/08-10-2026",
+      "ticketsUrl": "https://www.unvrs.com/events/2026/artcore/08-10-2026",
+      "artists": [
+        "AZYR",
+        "ANNA UNUSYAN",
+        "I HATE MODELS",
+        "INDIRA PAGANOTTO",
+        "KOBOSIL"
+      ]
+    },
+    {
+      "title": "[UNVRS] Closing 2026",
+      "startsAt": "2026-10-10",
+      "sourceUrl": "https://www.unvrs.com/events/2026/unvrs-closing/10-10-2026",
+      "ticketsUrl": "https://www.unvrs.com/events/2026/unvrs-closing/10-10-2026",
+      "artists": [
+        "Adriatique",
+        "DENNIS CRUZ",
+        "East End Dubs",
+        "mochakk",
+        "RAFAEL",
+        "THE MARTINEZ BROTHERS",
+        "whomadewho (Hybrid DJ set)",
+        "+ SPECIAL GUEST",
+        "BENDER",
+        "DENNIS QUIN",
+        "kamma",
+        "Mr Belt & Wizol",
+        "mella dee",
+        "discoliscious",
+        "melon bomb",
+        "[UNVRS] Closing 2026"
+      ]
+    }
+  ]
+}

@@ -89,5 +89,22 @@ assert.equal(
   "nature-one",
 );
 assert.equal(resolveEvent("Nature One").slug, "nature-one");
+assert.equal(
+  inferFestivalEvent(
+    "Calvin Harris @ Mainstage, Dance Valley, Netherlands 2026-08-08",
+  )?.slug,
+  "dance-valley",
+);
+assert.equal(resolveEvent("Dance Valley").slug, "dance-valley");
+assert.equal(resolveEvent("dancevalley").slug, "dance-valley");
+assert.equal(resolveEvent("Dance Valley").kind, "festival");
+assert.equal(
+  resolveEvent("Dance Valley").website,
+  "https://www.dancevalley.com/",
+);
+assert.equal(
+  resolveEvent("Dance Valley").instagram,
+  "https://www.instagram.com/dancevalley/",
+);
 
 console.log("events.test.ts ok");

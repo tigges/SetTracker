@@ -83,6 +83,16 @@ import {
   TL_VINTAGE_CULTURE_NYC_YACHT_2023,
   TL_VINTAGE_CULTURE_PACHA_IBIZA_2026,
   TL_VINTAGE_CULTURE_SO_TRACK_BOA_2026,
+  TL_CALVIN_HARRIS_MAINSTAGE_DANCE_VALLEY_NETHERLANDS_2026,
+  TL_TUJAMO_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
+  TL_DILLON_FRANCIS_AND_MARTEN_HORGER_MAINSTAGE_PAROOKAVILLE_GERMANY_2025,
+  TL_MIKE_WILLIAMS_TIME_LAB_PAROOKAVILLE_GERMANY_2026,
+  TL_HARDWELL_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
+  TL_DUBVISION_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
+  TL_W_AND_W_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
+  TL_MANDY_AND_NEGATIV_ATMOSPHERE_STAGE_TOMORROWLAND_WE1_BELGIUM_2026,
+  TL_LUCAS_AND_STEVE_AND_MIKE_WILLIAMS_DONT_LET_DADDY_KNOW_ZIGGO_DOME_AMSTERDAM_2026,
+  TL_INDIRA_PAGANOTTO_ATMOSPHERE_STAGE_TOMORROWLAND_WE1_BELGIUM_2023,
   TL_MISS_MONIQUE_TML_WE2_2026,
   TL_NICKY_ROMERO_TML_WE2_2026,
   TL_ODD_MOB_TML_WE2_2026,
@@ -1078,7 +1088,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_KOROLOVA_TML_WE2_2026,
   },
   {
-    // Tomorrowland official — Mainstage WE2; 25/54 timed (rest lerped in capture).
+    // Tomorrowland official — Mainstage WE2; 1001 recapture 2026-08-16.
     video: "https://www.youtube.com/watch?v=LE-byccuovI",
     primaryArtist: dj("Lucas & Steve", {
       accent: "#ffb703",
@@ -1110,7 +1120,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_SARA_LANDRY_TML_WE2_2026,
   },
   {
-    // Tomorrowland official — Mainstage WE2 B2B; 21/54 timed (rest lerped).
+    // Tomorrowland official — Mainstage WE2 B2B; title drives collaborator parse.
     video: "https://www.youtube.com/watch?v=AjQeohYmg3A",
     primaryArtist: dj("Afrojack", {
       accent: "#ff9f1c",
@@ -1118,7 +1128,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     }),
     genre: "Big Room",
     type: "festival",
-    title: "Afrojack b2b R3hab WE2 | Tomorrowland 2026",
+    title: "AFROJACK B2B R3HAB | Mainstage, Tomorrowland Weekend 2 2026",
     seriesName: "Tomorrowland",
     eventName: "Tomorrowland Belgium",
     tracklist1001Url:
@@ -1126,7 +1136,9 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_AFROJACK_R3HAB_TML_WE2_2026,
   },
   {
-    // Same TML WE2 B2B, alternate official upload; same 1001 list.
+    // R3HAB official upload of the same TML WE2 B2B; same 1001 list.
+    // oEmbed is "Tomorrowland Weekend 2 | Afrojack b2b R3HAB" — keep artist first
+    // so Tomorrowland is not parsed as the performing credit.
     video: "https://www.youtube.com/watch?v=lEIGnx7qLl0",
     primaryArtist: dj("Afrojack", {
       accent: "#ff9f1c",
@@ -1134,7 +1146,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     }),
     genre: "Big Room",
     type: "festival",
-    title: "Afrojack b2b R3hab WE2 | Tomorrowland 2026",
+    title: "AFROJACK B2B R3HAB | Mainstage, Tomorrowland Weekend 2 2026",
     seriesName: "Tomorrowland",
     eventName: "Tomorrowland Belgium",
     tracklist1001Url:
@@ -1255,7 +1267,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_PUSH_TML_WE2_2026,
   },
   {
-    // Tomorrowland official — Great Library WE2; 26/36 timed (rest lerped).
+    // Tomorrowland official — Great Library WE2.
     video: "https://www.youtube.com/watch?v=BG3Lr9EdWVY",
     primaryArtist: dj("Bassjackers", {
       accent: "#e63946",
@@ -1263,7 +1275,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     }),
     genre: "Big Room",
     type: "festival",
-    title: "Bassjackers WE2 | Tomorrowland 2026",
+    title: "Bassjackers @ The Great Library Stage, Tomorrowland WE2 2026",
     seriesName: "Tomorrowland",
     eventName: "Tomorrowland Belgium",
     tracklist1001Url:
@@ -1461,6 +1473,163 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/2vw827m1/vintage-culture-affairs-pacha-ibiza-spain-2026-06-23.html",
     tracklist1001: TL_VINTAGE_CULTURE_PACHA_IBIZA_2026,
+  },
+  {
+    video: "https://www.youtube.com/watch?v=pnzSuCiAGdk",
+    primaryArtist: dj("Calvin Harris", {
+      accent: "#ff9f1c",
+      homeCity: "Scotland, UK",
+    }),
+    genre: "House",
+    type: "festival",
+    title: "Calvin Harris @ Mainstage, Dance Valley 2026",
+    eventName: "Dance Valley",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2pcuzd49/calvin-harris-mainstage-dance-valley-netherlands-2026-08-08.html",
+    tracklist1001: TL_CALVIN_HARRIS_MAINSTAGE_DANCE_VALLEY_NETHERLANDS_2026,
+  },
+  {
+    // Official Parookaville channel — 1001TL timed list (2026-08-16 capture).
+    video: "https://www.youtube.com/watch?v=JhpL-KKGoO8",
+    primaryArtist: dj("TUJAMO", {
+      accent: "#f4a261",
+      homeCity: "Germany",
+    }),
+    genre: "Big Room",
+    type: "festival",
+    title: "TUJAMO @ Mainstage, Parookaville 2026",
+    seriesName: "Parookaville",
+    eventName: "Parookaville",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2r7bnnpk/tujamo-mainstage-parookaville-germany-2026-07-19.html",
+    tracklist1001: TL_TUJAMO_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
+  },
+  {
+    // Official Parookaville channel — B2B; title drives collaborator parse.
+    video: "https://www.youtube.com/watch?v=IwNPc_4ux84",
+    primaryArtist: dj("Dillon Francis", {
+      accent: "#ff4d6d",
+      homeCity: "Los Angeles, CA",
+    }),
+    genre: "Bass House",
+    type: "festival",
+    title: "Dillon Francis B2B Marten Horger | Parookaville 2025 Mainstage",
+    seriesName: "Parookaville",
+    eventName: "Parookaville",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2gsy0kp1/dillon-francis-marten-horger-mainstage-parookaville-germany-2025-07-20.html",
+    tracklist1001:
+      TL_DILLON_FRANCIS_AND_MARTEN_HORGER_MAINSTAGE_PAROOKAVILLE_GERMANY_2025,
+  },
+  {
+    // Official Parookaville channel — Time Lab 2026-07-19.
+    video: "https://www.youtube.com/watch?v=XisbmW1Smgc",
+    primaryArtist: dj("Mike Williams", { accent: "#e9c46a" }),
+    genre: "Future House",
+    type: "festival",
+    title: "Mike Williams | Time Lab, Parookaville 2026",
+    seriesName: "Parookaville",
+    eventName: "Parookaville",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1muxp6s1/mike-williams-time-lab-parookaville-germany-2026-07-19.html",
+    tracklist1001: TL_MIKE_WILLIAMS_TIME_LAB_PAROOKAVILLE_GERMANY_2026,
+  },
+  {
+    // Hardwell official — Parookaville Mainstage 2026-07-19.
+    video: "https://www.youtube.com/watch?v=eBeeWwsCVls",
+    primaryArtist: dj("Hardwell", {
+      accent: "#023e8a",
+      homeCity: "Breda, NL",
+    }),
+    genre: "Big Room",
+    type: "festival",
+    title: "Hardwell | Mainstage, Parookaville 2026",
+    seriesName: "Parookaville",
+    eventName: "Parookaville",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/kd4zp61/hardwell-mainstage-parookaville-germany-2026-07-19.html",
+    tracklist1001: TL_HARDWELL_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
+  },
+  {
+    // Official Parookaville channel — Mainstage 2026-07-19.
+    video: "https://www.youtube.com/watch?v=UETk8HSB0Yw",
+    primaryArtist: dj("DubVision", { accent: "#4361ee" }),
+    genre: "Progressive House",
+    type: "festival",
+    title: "DubVision | Mainstage, Parookaville 2026",
+    seriesName: "Parookaville",
+    eventName: "Parookaville",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/uq5pqjt/dubvision-mainstage-parookaville-germany-2026-07-19.html",
+    tracklist1001: TL_DUBVISION_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
+  },
+  {
+    // W&W official — Parookaville Mainstage 2026-07-18.
+    video: "https://www.youtube.com/watch?v=or_SDolEBfw",
+    primaryArtist: dj("W&W", {
+      accent: "#00b4d8",
+      homeCity: "Netherlands",
+    }),
+    genre: "Big Room",
+    type: "festival",
+    title: "W&W | Mainstage, Parookaville 2026",
+    seriesName: "Parookaville",
+    eventName: "Parookaville",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1j3n03kk/wandw-mainstage-parookaville-germany-2026-07-18.html",
+    tracklist1001: TL_W_AND_W_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
+  },
+  {
+    // Tomorrowland official — Atmosphere WE1 B2B; title drives collaborator parse.
+    video: "https://www.youtube.com/watch?v=J7b0G4XX8pg",
+    primaryArtist: dj("MANDY", {
+      accent: "#ff006e",
+      homeCity: "Belgium",
+    }),
+    genre: "Hard Dance",
+    type: "festival",
+    title: "MANDY B2B NEGITIV | Atmosphere Stage, Tomorrowland Weekend 1 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/23phk9t9/mandy-negativ-atmosphere-stage-tomorrowland-weekend-1-belgium-2026-07-17.html",
+    tracklist1001:
+      TL_MANDY_AND_NEGATIV_ATMOSPHERE_STAGE_TOMORROWLAND_WE1_BELGIUM_2026,
+  },
+  {
+    // Official Mike Williams upload — B2B; title drives collaborator parse.
+    video: "https://www.youtube.com/watch?v=B1EaMgsf84Q",
+    primaryArtist: dj("Lucas & Steve", {
+      accent: "#ffb703",
+      homeCity: "Maastricht, NL",
+    }),
+    genre: "Future House",
+    type: "festival",
+    title:
+      "Lucas & Steve B2B Mike Williams | Don't Let Daddy Know, Ziggo Dome 2026",
+    seriesName: "Don't Let Daddy Know",
+    eventName: "Don't Let Daddy Know",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/trluwg9/lucas-steve-mike-williams-dont-let-daddy-know-ziggo-dome-amsterdam-netherlands-2026-03-07.html",
+    tracklist1001:
+      TL_LUCAS_AND_STEVE_AND_MIKE_WILLIAMS_DONT_LET_DADDY_KNOW_ZIGGO_DOME_AMSTERDAM_2026,
+  },
+  {
+    // Tomorrowland official — Atmosphere WE1 2023. Distinct from
+    // yt-xUdcEDryN8o (Awakenings Festival 2025).
+    video: "https://www.youtube.com/watch?v=yPCOu0-JKJo",
+    primaryArtist: dj("Indira Paganotto", {
+      accent: "#ff006e",
+    }),
+    genre: "Hard Techno",
+    type: "festival",
+    title: "Indira Paganotto | Atmosphere Stage, Tomorrowland Weekend 1 2023",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1gzmsd19/indira-paganotto-atmosphere-stage-tomorrowland-weekend-1-belgium-2023-07-22.html",
+    tracklist1001:
+      TL_INDIRA_PAGANOTTO_ATMOSPHERE_STAGE_TOMORROWLAND_WE1_BELGIUM_2023,
   },
   {
     video: "https://www.youtube.com/watch?v=6bJZPDKlq7o",

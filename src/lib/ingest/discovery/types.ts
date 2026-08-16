@@ -13,6 +13,7 @@ export type CandidateEvidence = {
     | "tracklist_channel"
     | "manual"
     | "lineup"
+    | "venue_calendar"
     | "press"
     | "youtube_similar"
     | "youtube_spotlight";

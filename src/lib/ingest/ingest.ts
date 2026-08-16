@@ -41,6 +41,7 @@ import {
   backfillSetEditions,
   ensureFestivalEditions,
 } from "./setEditions";
+import { ensureVenueCalendarNights } from "./discovery/venueCalendars";
 import { scanEntityUrls } from "./scanEntityUrls";
 import { verifyStoredSocialUrls } from "./verifyUrls";
 
@@ -683,6 +684,11 @@ export async function runIngest(
 
   async function ingestSet(raw: RawSet): Promise<void> {
     stats.scannedSets += 1;
+    const seeded = applyTracklist1001Seed(raw.sourceSlug, raw.plays);
+    if (seeded !== raw.plays) {
+      raw.plays = seeded;
+      raw.sourceHash = hashRawSetContent(raw);
+    }
     let sourceHash = raw.sourceHash ?? hashRawSetContent(raw);
     const existing =
       (await prisma.set.findUnique({
@@ -955,6 +961,12 @@ export async function runIngest(
     const editions = await ensureFestivalEditions(prisma);
     if (editions) {
       console.log(`[ingest] festival editions seeded: ${editions}`);
+    }
+    const nights = await ensureVenueCalendarNights(prisma);
+    if (nights.nights) {
+      console.log(
+        `[ingest] venue calendar nights: ${nights.nights} (created=${nights.created} updated=${nights.updated})`,
+      );
     }
     const dropEds = recentlyEndedEditions(21);
     if (festivalDropBoostActive() && dropEds.length) {

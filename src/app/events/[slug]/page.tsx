@@ -89,6 +89,44 @@ export default async function EventPage({
         </div>
       </div>
 
+      {event.nights.length > 0 && (
+        <section className="mb-8">
+          <h2 className="mb-3 text-[13px] font-semibold uppercase tracking-[0.14em] text-muted">
+            Upcoming nights
+          </h2>
+          <ul className="space-y-2">
+            {event.nights.slice(0, 12).map((n) => (
+              <li
+                key={n.slug}
+                className="card flex flex-wrap items-baseline justify-between gap-2 p-3"
+              >
+                <span className="min-w-0">
+                  <span className="block text-[14px] font-semibold text-ink">
+                    {n.title}
+                  </span>
+                  <span className="mono text-[12px] text-muted2">
+                    {n.startsAt}
+                    {n.artists.length
+                      ? ` · ${n.artists.slice(0, 4).join(", ")}${
+                          n.artists.length > 4 ? "…" : ""
+                        }`
+                      : ""}
+                  </span>
+                </span>
+                <a
+                  href={n.ticketsUrl || n.sourceUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mono text-[12px] text-brand hover:text-brandstrong"
+                >
+                  Official →
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
       {event.lineupArtists.length > 0 && (
         <section className="mb-8">
           <h2 className="mb-3 text-[13px] font-semibold uppercase tracking-[0.14em] text-muted">

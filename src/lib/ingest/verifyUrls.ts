@@ -32,6 +32,7 @@ import { fillDjHandlesFromKnown, fillDjWebsitesFromWikidata } from "./discovery/
 import { discoverCuratedReliveRemaps } from "./reliveWatch";
 import { applySetSourceRemaps } from "./sourceRemaps";
 import { ensureCuratedLabels } from "./curatedLabels";
+import { ensureVenueCalendarNights } from "./discovery/venueCalendars";
 
 export type VerifyStats = {
   checked: number;
@@ -331,6 +332,8 @@ export async function applyKnownUrlFixes(prisma: PrismaClient): Promise<number> 
   n += topDjs.created + topDjs.updated;
   const lists = await ensureClubListVenues(prisma);
   n += lists.created + lists.updated;
+  const nights = await ensureVenueCalendarNights(prisma);
+  n += nights.created + nights.updated;
 
   // Re-home sets whose titles clearly say EDC onto the curated venue
   // (covers Insomniac-channel crawls that previously used event=Insomniac).

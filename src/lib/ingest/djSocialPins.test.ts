@@ -228,6 +228,37 @@ assert.match(bySlug["michael-bibi"]!.website, /michaelbibi\.com/);
 assert.match(bySlug["boris-brejcha"]!.website, /borisbrejcha\.de/);
 assert.equal(bySlug["steve-aoki"]!.instagram, null);
 
+assert.ok(bySlug.negitiv);
+assert.equal(bySlug.negitiv!.name, "NEGITIV");
+assert.match(bySlug.negitiv!.soundcloud!, /negitivofficial/);
+assert.match(bySlug.negitiv!.youtube!, /@negitivofficial/);
+assert.match(bySlug.negitiv!.instagram!, /instagram\.com\/negitiv/);
+assert.match(bySlug.negitiv!.website, /negitiv\.com/);
+assert.equal(hintForName("NEGITIV")?.youtubeHandle, "@negitivofficial");
+assert.equal(hintForName("Negativ")?.soundcloudPermalink, "negitivofficial");
+
+assert.ok(bySlug.mandy);
+assert.equal(bySlug.mandy!.name, "MANDY");
+assert.equal(bySlug.mandy!.soundcloud, null);
+assert.match(bySlug.mandy!.youtube!, /@mandyofficialbe/);
+assert.match(bySlug.mandy!.instagram!, /instagram\.com\/mandyofficial_be/);
+assert.match(bySlug.mandy!.twitter!, /(?:twitter|x)\.com\/djmandyofficial/);
+assert.match(bySlug.mandy!.website, /youtube\.com\/@mandyofficialbe/);
+assert.equal(slugify("MANDY"), "mandy");
+assert.equal(hintForName("MANDY")?.youtubeHandle, "@mandyofficialbe");
+assert.equal(hintForName("MANDY")?.soundcloudPermalink, undefined);
+
+assert.ok(bySlug["steve-angello"]);
+assert.equal(bySlug["steve-angello"]!.name, "Steve Angello");
+assert.match(bySlug["steve-angello"]!.soundcloud!, /soundcloud\.com\/steveangello/);
+assert.match(bySlug["steve-angello"]!.youtube!, /youtube\.com\/steveangello/);
+assert.match(bySlug["steve-angello"]!.instagram!, /instagram\.com\/steveangello/);
+assert.match(bySlug["steve-angello"]!.twitter!, /(?:twitter|x)\.com\/SteveAngello/);
+assert.match(bySlug["steve-angello"]!.website, /steveangello\.com/);
+assert.equal(slugify("Steve Angello"), "steve-angello");
+assert.equal(hintForName("Steve Angello")?.youtubeHandle, "@steveangello");
+assert.equal(hintForName("Steve Angello")?.soundcloudPermalink, "steveangello");
+
 assert.ok(bySlug["1788-l"], "missing pin 1788-l");
 assert.equal(bySlug["1788-l"]!.name, "1788-L");
 assert.equal(bySlug["1788-l"]!.soundcloud, null);

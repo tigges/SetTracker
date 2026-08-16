@@ -39,6 +39,15 @@ describe("festivalDrops", () => {
     assert.equal(seed?.slug, "parookaville-2026");
   });
 
+  it("matches Parookaville 2025 from a 2025 title", () => {
+    const seed = matchEditionSeed(
+      "parookaville",
+      "Dillon Francis B2B Marten Horger | Parookaville 2025 Mainstage",
+      new Date("2025-07-21"),
+    );
+    assert.equal(seed?.slug, "parookaville-2025");
+  });
+
   it("flags recently ended editions for season rail", () => {
     const now = Date.parse("2026-07-30T12:00:00Z");
     const recent = recentlyEndedEditions(21, now);

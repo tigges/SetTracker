@@ -56,6 +56,18 @@ import {
   TL_VINTAGE_CULTURE_NYC_YACHT_2023,
   TL_VINTAGE_CULTURE_PACHA_IBIZA_2026,
   TL_VINTAGE_CULTURE_SO_TRACK_BOA_2026,
+  TL_ROBIN_SCHULZ_PACHA_IBIZA_2026,
+  TL_CALVIN_HARRIS_MAINSTAGE_DANCE_VALLEY_NETHERLANDS_2026,
+  TL_TUJAMO_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
+  TL_DILLON_FRANCIS_AND_MARTEN_HORGER_MAINSTAGE_PAROOKAVILLE_GERMANY_2025,
+  TL_MIKE_WILLIAMS_TIME_LAB_PAROOKAVILLE_GERMANY_2026,
+  TL_HARDWELL_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
+  TL_DUBVISION_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
+  TL_W_AND_W_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
+  TL_MANDY_MANDY_MONDAYS_028_2026,
+  TL_MANDY_AND_NEGATIV_ATMOSPHERE_STAGE_TOMORROWLAND_WE1_BELGIUM_2026,
+  TL_LUCAS_AND_STEVE_AND_MIKE_WILLIAMS_DONT_LET_DADDY_KNOW_ZIGGO_DOME_AMSTERDAM_2026,
+  TL_INDIRA_PAGANOTTO_ATMOSPHERE_STAGE_TOMORROWLAND_WE1_BELGIUM_2023,
 } from "./festivalCaptures20260816";
 
 export {
@@ -104,6 +116,18 @@ export {
   TL_VINTAGE_CULTURE_NYC_YACHT_2023,
   TL_VINTAGE_CULTURE_PACHA_IBIZA_2026,
   TL_VINTAGE_CULTURE_SO_TRACK_BOA_2026,
+  TL_ROBIN_SCHULZ_PACHA_IBIZA_2026,
+  TL_CALVIN_HARRIS_MAINSTAGE_DANCE_VALLEY_NETHERLANDS_2026,
+  TL_TUJAMO_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
+  TL_DILLON_FRANCIS_AND_MARTEN_HORGER_MAINSTAGE_PAROOKAVILLE_GERMANY_2025,
+  TL_MIKE_WILLIAMS_TIME_LAB_PAROOKAVILLE_GERMANY_2026,
+  TL_HARDWELL_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
+  TL_DUBVISION_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
+  TL_W_AND_W_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
+  TL_MANDY_MANDY_MONDAYS_028_2026,
+  TL_MANDY_AND_NEGATIV_ATMOSPHERE_STAGE_TOMORROWLAND_WE1_BELGIUM_2026,
+  TL_LUCAS_AND_STEVE_AND_MIKE_WILLIAMS_DONT_LET_DADDY_KNOW_ZIGGO_DOME_AMSTERDAM_2026,
+  TL_INDIRA_PAGANOTTO_ATMOSPHERE_STAGE_TOMORROWLAND_WE1_BELGIUM_2023,
 };
 
 function formatClock(sec: number): string {
@@ -2474,165 +2498,68 @@ export const TL_KOROLOVA_TML_WE2_2026: FingerprintSeedRow[] = [
 
 /**
  * Lucas & Steve @ Mainstage, Tomorrowland Weekend 2, Belgium 2026-07-26
- * Official YT: https://www.youtube.com/watch?v=LE-byccuovI
- * 1001TL: https://1001.tl/qz05s21 — operator console capture 2026-08-01
- * (25/54 timed cues; missing clocks already lerped in capture).
+ * https://www.1001tracklists.com/tracklist/qz05s21/lucas-steve-mainstage-tomorrowland-weekend-2-belgium-2026-07-26.html
+ * Official YT: https://youtu.be/LE-byccuovI
+ * Capture overlay used TL_Lucas&Steve_Mainstage_Tomorrowland_WE2_Belgium_2026
+ * (`&` illegal); constant stays TL_LUCAS_STEVE_TML_WE2_2026.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-LE-byccuovI"]
+ * Recapture 2026-08-16 — same 54 cues as 2026-08-01; Be Like Bob joiner is `&`.
  */
 export const TL_LUCAS_STEVE_TML_WE2_2026: FingerprintSeedRow[] = [
   { at: "0:12", artist: "Tiësto & Lucas & Steve", title: "Free Your Mind" },
   { at: "2:56", artist: "Tove Lo", title: "Habits (Stay High) (Acappella)" },
-  {
-    at: "5:40",
-    artist: "Tiësto & Lucas & Steve & Silent Child & Sān-Z",
-    title: "ZENLESS",
-  },
-  {
-    at: "6:38",
-    artist: "Axwell Λ Ingrosso",
-    title: "More Than You Know (Acappella)",
-  },
+  { at: "5:40", artist: "Tiësto & Lucas & Steve & Silent Child & Sān-Z", title: "ZENLESS" },
+  { at: "6:38", artist: "Axwell Λ Ingrosso", title: "More Than You Know (Acappella)" },
   { at: "7:36", artist: "Sentinel", title: "Bring The House Down" },
-  {
-    at: "10:47",
-    artist: "Steve Aoki & JJ Lin",
-    title: "The Show (Steve Aoki & Lucas & Steve Remix)",
-  },
+  { at: "10:47", artist: "Steve Aoki & JJ Lin", title: "The Show (Steve Aoki & Lucas & Steve Remix)" },
   { at: "11:31", artist: "HUGEL & SOLTO", title: "Jamaican (Bam Bam)" },
-  { at: "12:15", artist: "Lucas & Steve x Mike Bond", title: "Be Like Bob" },
+  { at: "12:15", artist: "Lucas & Steve & Mike Bond", title: "Be Like Bob" },
   { at: "14:13", artist: "Zombie Nation", title: "Kernkraft 400" },
   { at: "14:59", artist: "Lucas & Steve", title: "Renegade Master" },
-  {
-    at: "15:46",
-    artist: "The Chemical Brothers",
-    title: "Galvanize (Lucas & Steve Bootleg)",
-  },
-  {
-    at: "16:32",
-    artist: "Swedish House Mafia & Knife Party ft. ADL",
-    title: "Antidote (Belgium Edit)",
-  },
-  {
-    at: "18:14",
-    artist: "Michael Calfan",
-    title: "Resurrection (Axwell Re-Cut Club Version)",
-  },
-  {
-    at: "18:59",
-    artist: "Lucas & Steve X Tungevaag ft. Philip Strand",
-    title: "Paper Planes",
-  },
+  { at: "15:46", artist: "The Chemical Brothers", title: "Galvanize (Lucas & Steve Bootleg)" },
+  { at: "16:32", artist: "Swedish House Mafia & Knife Party ft. ADL", title: "Antidote (Belgium Edit)" },
+  { at: "18:14", artist: "Michael Calfan", title: "Resurrection (Axwell Re-Cut Club Version)" },
+  { at: "18:59", artist: "Lucas & Steve X Tungevaag ft. Philip Strand", title: "Paper Planes" },
   { at: "19:43", artist: "Lucas & Steve", title: "This Ain't Just Music" },
   { at: "22:11", artist: "Lucas & Steve", title: "Emergency" },
   { at: "23:20", artist: "Mike Posner", title: "Cooler Than Me" },
   { at: "24:29", artist: "RÜFÜS DU SOL", title: "Innerbloom" },
-  {
-    at: "25:38",
-    artist: "Lucas & Steve vs. Ivan Gough & Feenixpawl & Georgi Kay",
-    title: "Wasting Time vs. In My Mind (Lucas & Steve Mashup)",
-  },
-  {
-    at: "26:32",
-    artist: "Ivan Gough & Feenixpawl ft. Georgi Kay",
-    title: "In My Mind (Acappella)",
-  },
+  { at: "25:38", artist: "Lucas & Steve vs. Ivan Gough & Feenixpawl & Georgi Kay", title: "Wasting Time vs. In My Mind (Lucas & Steve Mashup)" },
+  { at: "26:32", artist: "Ivan Gough & Feenixpawl ft. Georgi Kay", title: "In My Mind (Acappella)" },
   { at: "27:26", artist: "Lucas & Steve", title: "Wasting Time" },
-  {
-    at: "28:21",
-    artist: "Avicii ft. Sandro Cavazza",
-    title: "Without You (Acappella)",
-  },
-  {
-    at: "29:15",
-    artist: "ALOK & Firebeatz",
-    title: "Higher State Of Consciousness",
-  },
-  {
-    at: "30:01",
-    artist: "Mightyfools",
-    title: "Footrocker (Get Your, Get Your Hands Up Acappella)",
-  },
-  {
-    at: "30:46",
-    artist: "Mau P vs. Tiësto",
-    title: "Like I Like It (Kastra RVN (Raven) Edit)",
-  },
+  { at: "28:21", artist: "Avicii ft. Sandro Cavazza", title: "Without You (Acappella)" },
+  { at: "29:15", artist: "ALOK & Firebeatz", title: "Higher State Of Consciousness" },
+  { at: "30:01", artist: "Mightyfools", title: "Footrocker (Get Your, Get Your Hands Up Acappella)" },
+  { at: "30:46", artist: "Mau P vs. Tiësto", title: "Like I Like It (Kastra RVN (Raven) Edit)" },
   { at: "31:10", artist: "Mau P", title: "Like I Like It" },
   { at: "31:35", artist: "Tiësto", title: "RVN (Raven)" },
   { at: "31:59", artist: "Lucas & Steve", title: "LFG" },
   { at: "32:24", artist: "Gwen Stefani", title: "Hollaback Girl (Acappella)" },
   { at: "32:49", artist: "Da Hool", title: "Meet Her At The Love Parade" },
-  {
-    at: "33:15",
-    artist: "Steve Angello",
-    title: "Knas (Lucas & Steve Bootleg)",
-  },
-  {
-    at: "33:40",
-    artist: "Lucas & Steve vs. Avicii & RAS",
-    title: "Source vs. The Nights (Lucas & Steve Mashup)",
-  },
+  { at: "33:15", artist: "Steve Angello", title: "Knas (Lucas & Steve Bootleg)" },
+  { at: "33:40", artist: "Lucas & Steve vs. Avicii & RAS", title: "Source vs. The Nights (Lucas & Steve Mashup)" },
   { at: "34:24", artist: "Lucas & Steve", title: "Source" },
   { at: "35:08", artist: "Avicii ft. RAS", title: "The Nights (Acappella)" },
-  {
-    at: "35:51",
-    artist: "Darude & Lucas & Steve vs. Gala",
-    title: "Sandstorm vs. Freed From Desire (Lucas & Steve Mashup)",
-  },
+  { at: "35:51", artist: "Darude & Lucas & Steve vs. Gala", title: "Sandstorm vs. Freed From Desire (Lucas & Steve Mashup)" },
   { at: "36:33", artist: "Gala", title: "Freed From Desire" },
-  {
-    at: "37:16",
-    artist: "Darude",
-    title: "Sandstorm (Lucas & Steve 2025 Flip)",
-  },
+  { at: "37:16", artist: "Darude", title: "Sandstorm (Lucas & Steve 2025 Flip)" },
   { at: "37:58", artist: "AFROJACK & Lucas & Steve", title: "Control" },
-  {
-    at: "39:14",
-    artist: "Yeah Yeah Yeahs",
-    title: "Heads Will Roll (A-Trak Remix)",
-  },
+  { at: "39:14", artist: "Yeah Yeah Yeahs", title: "Heads Will Roll (A-Trak Remix)" },
   { at: "40:30", artist: "AFROJACK & Lucas & Steve", title: "Control (VIP)" },
   { at: "41:21", artist: "Technotronic", title: "Pump Up The Jam" },
-  {
-    at: "42:12",
-    artist: "AFROJACK & Lucas & Steve & DubVision ft. Taranteeno",
-    title: "Anywhere With You (Festival Mix)",
-  },
-  {
-    at: "45:38",
-    artist: "Lucas & Steve & Maynamic & Edd Blaze",
-    title: "Lift Me Up",
-  },
+  { at: "42:12", artist: "AFROJACK & Lucas & Steve & DubVision ft. Taranteeno", title: "Anywhere With You (Festival Mix)" },
+  { at: "45:38", artist: "Lucas & Steve & Maynamic & Edd Blaze", title: "Lift Me Up" },
   { at: "46:26", artist: "Lucas & Steve", title: "Good Times" },
   { at: "47:14", artist: "Lucas & Steve", title: "All I Know" },
-  {
-    at: "50:12",
-    artist: "Nari & Milani",
-    title: "Atom (SQU4RE 2024 Edit)",
-  },
+  { at: "50:12", artist: "Nari & Milani", title: "Atom (SQU4RE 2024 Edit)" },
   { at: "51:04", artist: "Coldplay", title: "Clocks" },
   { at: "51:56", artist: "Nico & Vinz", title: "Am I Wrong (Acappella)" },
   { at: "52:47", artist: "Alice Deejay", title: "Better Off Alone" },
   { at: "53:34", artist: "Lucas & Steve", title: "What About Now" },
-  {
-    at: "54:20",
-    artist: "Lucas & Steve x Oaks x Jaimes",
-    title: "Love On Hold (Club Mix)",
-  },
-  {
-    at: "55:10",
-    artist: "Corona",
-    title: "The Rhythm Of The Night (Acappella)",
-  },
-  {
-    at: "55:59",
-    artist: "Lucas & Steve ft. Jordan Shaw",
-    title: "Heart First (Club Mix)",
-  },
-  {
-    at: "59:30",
-    artist: "Swedish House Mafia ft. John Martin",
-    title: "Save The World (Acappella)",
-  },
+  { at: "54:20", artist: "Lucas & Steve x Oaks x Jaimes", title: "Love On Hold (Club Mix)" },
+  { at: "55:10", artist: "Corona", title: "The Rhythm Of The Night (Acappella)" },
+  { at: "55:59", artist: "Lucas & Steve ft. Jordan Shaw", title: "Heart First (Club Mix)" },
+  { at: "59:30", artist: "Swedish House Mafia ft. John Martin", title: "Save The World (Acappella)" },
 ];
 
 /**
@@ -2687,10 +2614,14 @@ export const TL_SARA_LANDRY_TML_WE2_2026: FingerprintSeedRow[] = [
 
 /**
  * AFROJACK & R3HAB @ Mainstage, Tomorrowland Weekend 2, Belgium 2026-07-26
- * Official YT: https://www.youtube.com/watch?v=AjQeohYmg3A
- * Also: https://youtu.be/lEIGnx7qLl0 (same 1001 list, 2026-08-15 recapture)
- * 1001TL: https://1001.tl/2s55dyj1 — operator console capture 2026-08-01 / 2026-08-15
- * (54 timed cues).
+ * https://www.1001tracklists.com/tracklist/2s55dyj1/afrojack-r3hab-mainstage-tomorrowland-weekend-2-belgium-2026-07-26.html
+ * Official YT: https://youtu.be/lEIGnx7qLl0 (R3HAB) and
+ * https://www.youtube.com/watch?v=AjQeohYmg3A (Tomorrowland).
+ * Capture overlay used TL_AFROJACK&R3HAB_Mainstage_Tomorrowland_WE2_Belgium_2026
+ * (`&` illegal); constant is TL_AFROJACK_R3HAB_TML_WE2_2026.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-lEIGnx7qLl0"]
+ *       TRACKLIST_1001_BY_SOURCE_SLUG["yt-AjQeohYmg3A"]
+ * Captured 2026-08-16 - provenance 1001tl.
  */
 export const TL_AFROJACK_R3HAB_TML_WE2_2026: FingerprintSeedRow[] = [
   { at: "0:12", artist: "R3HAB & Vion Konger & Skytech", title: "Ultimate" },
@@ -2698,26 +2629,14 @@ export const TL_AFROJACK_R3HAB_TML_WE2_2026: FingerprintSeedRow[] = [
   { at: "3:31", artist: "Zombie Nation", title: "Kernkraft 400" },
   { at: "3:46", artist: "Alesso", title: "Raise Your Head (Acappella)" },
   { at: "4:01", artist: "AFROJACK & R3HAB", title: "Shockwave" },
-  {
-    at: "4:16",
-    artist: "David Guetta & GLOWINTHEDARK ft. Harrison",
-    title: "Ain't A Party (Let Me See Your Fuckin Hands Acappella)",
-  },
+  { at: "4:16", artist: "David Guetta & GLOWINTHEDARK ft. Harrison", title: "Ain't A Party (Let Me See Your Fuckin Hands Acappella)" },
   { at: "4:30", artist: "Vion Konger", title: "Funky Shit" },
   { at: "5:10", artist: "Icona Pop ft. Charli xcx", title: "I Love It (Acappella)" },
-  {
-    at: "5:50",
-    artist: "Martin Garrix & R3HAB & Skytech vs. Empire Of The Sun",
-    title: "Voodoo vs. Walking On A Dream (Martin Garrix Mashup)",
-  },
+  { at: "5:50", artist: "Martin Garrix & R3HAB & Skytech vs. Empire Of The Sun", title: "Voodoo vs. Walking On A Dream (Martin Garrix Mashup)" },
   { at: "6:47", artist: "Empire Of The Sun", title: "Walking On A Dream (Acappella)" },
   { at: "7:44", artist: "Martin Garrix & R3HAB & Skytech", title: "Voodoo" },
   { at: "8:40", artist: "R3HAB & Deorro", title: "Flashlight" },
-  {
-    at: "9:03",
-    artist: "Mightyfools",
-    title: "Footrocker (Get Your, Get Your Hands Up Acappella)",
-  },
+  { at: "9:03", artist: "Mightyfools", title: "Footrocker (Get Your, Get Your Hands Up Acappella)" },
   { at: "9:26", artist: "R3HAB & KSHMR", title: "Karate" },
   { at: "10:11", artist: "Corona", title: "The Rhythm Of The Night (Acappella)" },
   { at: "10:55", artist: "AFROJACK & Bart B More", title: "Nothing But This" },
@@ -2726,84 +2645,36 @@ export const TL_AFROJACK_R3HAB_TML_WE2_2026: FingerprintSeedRow[] = [
   { at: "16:18", artist: "Korolova & R3HAB", title: "Hi Hello" },
   { at: "19:07", artist: "ARTBAT & R3HAB", title: "The Sound" },
   { at: "22:48", artist: "HUGEL & SOLTO", title: "Jamaican (Bam Bam) (Vion Konger Remix)" },
-  {
-    at: "24:03",
-    artist: "Sebastian Ingrosso & Tommy Trash ft. John Martin",
-    title: "Reload (Afrojack Edit)",
-  },
-  {
-    at: "25:18",
-    artist: "Swedish House Mafia ft. John Martin",
-    title: "Don't You Worry Child (Acappella)",
-  },
+  { at: "24:03", artist: "Sebastian Ingrosso & Tommy Trash ft. John Martin", title: "Reload (Afrojack Edit)" },
+  { at: "25:18", artist: "Swedish House Mafia ft. John Martin", title: "Don't You Worry Child (Acappella)" },
   { at: "26:33", artist: "NLW & R3HAB ft. MC Ambush", title: "Let Me See Those Hands" },
   { at: "27:48", artist: "Afrojack ft. Wrabel", title: "Ten Feet Tall" },
   { at: "31:22", artist: "ANOTR ft. 54 Ultra", title: "Talk To You (AFROJACK Remix)" },
-  {
-    at: "33:13",
-    artist: "Mightyfools",
-    title: "Footrocker (Get Your, Get Your Hands Up Acappella)",
-  },
-  {
-    at: "35:04",
-    artist: "Pitbull ft. Ne-Yo & Afrojack & Nayer",
-    title: "Give Me Everything (Acappella)",
-  },
+  { at: "33:13", artist: "Mightyfools", title: "Footrocker (Get Your, Get Your Hands Up Acappella)" },
+  { at: "35:04", artist: "Pitbull ft. Ne-Yo & Afrojack & Nayer", title: "Give Me Everything (Acappella)" },
   { at: "36:55", artist: "AFROJACK & Arti Prjct & SOFI TUKKER", title: "Adrenaline" },
   { at: "39:50", artist: "David Guetta ft. Sia", title: "Titanium" },
   { at: "40:29", artist: "Lazy Rich & Hot Mouth", title: "Flash" },
-  {
-    at: "41:08",
-    artist: "UMEK & Popof & Space 92 vs. Hardwell & Afrojack",
-    title: "Control vs. Hands Up (Hardwell Mashup)",
-  },
+  { at: "41:08", artist: "UMEK & Popof & Space 92 vs. Hardwell & Afrojack", title: "Control vs. Hands Up (Hardwell Mashup)" },
   { at: "41:47", artist: "Hardwell & AFROJACK ft. MC Ambush", title: "Hands Up" },
   { at: "42:27", artist: "UMEK & POPOF & Space 92", title: "Control" },
   { at: "43:06", artist: "AFROJACK & Gil Glaze", title: "Allein" },
   { at: "46:39", artist: "ARTBAT & R3HAB & Stylo & Eli & Dani ft. NAIIM", title: "Fight Machine" },
-  {
-    at: "47:20",
-    artist: "Pitbull ft. Lil Jon & will.i.am & Jermaine Dupri",
-    title: "Put Ya Fuckin Hands Up (Acappella)",
-  },
+  { at: "47:20", artist: "Pitbull ft. Lil Jon & will.i.am & Jermaine Dupri", title: "Put Ya Fuckin Hands Up (Acappella)" },
   { at: "48:01", artist: "MAKJ & Lil Jon", title: "Let's Get F*cked Up (Acappella)" },
-  {
-    at: "48:43",
-    artist: "The Bloody Beetroots ft. Steve Aoki",
-    title: "Warp 1.9 (One, Two, Woop, Woop Acappella)",
-  },
-  {
-    at: "49:24",
-    artist: "AFROJACK & Martin Garrix",
-    title: "Turn Up The Speakers (AFROJACK Edit)",
-  },
+  { at: "48:43", artist: "The Bloody Beetroots ft. Steve Aoki", title: "Warp 1.9 (One, Two, Woop, Woop Acappella)" },
+  { at: "49:24", artist: "AFROJACK & Martin Garrix", title: "Turn Up The Speakers (AFROJACK Edit)" },
   { at: "50:20", artist: "Avicii ft. Simon Aldred", title: "Waiting For Love (Acappella)" },
   { at: "51:16", artist: "AFROJACK & Martin Garrix", title: "Turn Up The Speakers" },
-  {
-    at: "52:12",
-    artist: "R3HAB & Skytech & Pupa Nas T & Kevin McKay ft. Denise Belfon & Fideles",
-    title: "Work",
-  },
-  {
-    at: "53:08",
-    artist: "AFROJACK & Martin Garrix",
-    title: "Turn Up The Speakers (Julian Jordan Remix)",
-  },
-  { at: "54:03", artist: "Jack \u00dc ft. Bunji Garlin & MX Prime", title: "Jungle Bae" },
+  { at: "52:12", artist: "R3HAB & Skytech & Pupa Nas T & Kevin McKay ft. Denise Belfon & Fideles", title: "Work" },
+  { at: "53:08", artist: "AFROJACK & Martin Garrix", title: "Turn Up The Speakers (Julian Jordan Remix)" },
+  { at: "54:03", artist: "Jack Ü ft. Bunji Garlin & MX Prime", title: "Jungle Bae" },
   { at: "54:29", artist: "R3HAB & VINAI", title: "How We Party" },
   { at: "54:55", artist: "Major Lazer ft. Vybz Kartel", title: "Pon De Floor (Acappella)" },
-  {
-    at: "55:21",
-    artist: "Dimitri Vegas & Like Mike & W&W vs. The White Stripes",
-    title: "Arcade vs. Seven Nation Army (W&W Edit)",
-  },
+  { at: "55:21", artist: "Dimitri Vegas & Like Mike & W&W vs. The White Stripes", title: "Arcade vs. Seven Nation Army (W&W Edit)" },
   { at: "55:50", artist: "The White Stripes", title: "Seven Nation Army" },
   { at: "56:19", artist: "Dimitri Vegas & Like Mike vs. W&W", title: "Arcade" },
-  {
-    at: "56:48",
-    artist: "Dimitri Vegas & Like Mike & Martin Garrix",
-    title: "Tremor (Sensation 2014 Anthem) (3, 2, 1 Go Acappella)",
-  },
+  { at: "56:48", artist: "Dimitri Vegas & Like Mike & Martin Garrix", title: "Tremor (Sensation 2014 Anthem) (3, 2, 1 Go Acappella)" },
   { at: "57:17", artist: "AFROJACK ft. Eva Simons", title: "Take Over Control" },
   { at: "58:24", artist: "Avicii", title: "Levels" },
   { at: "59:30", artist: "Afrojack", title: "Bangduck" },
@@ -2928,9 +2799,12 @@ export const TL_PUSH_TML_WE2_2026: FingerprintSeedRow[] = [
 
 /**
  * Bassjackers @ The Great Library Stage, Tomorrowland Weekend 2, Belgium 2026-07-26
- * Official YT: https://www.youtube.com/watch?v=BG3Lr9EdWVY
- * 1001TL: https://1001.tl/1muwkg71 — operator console capture 2026-08-01
- * (26/36 timed cues; missing clocks already lerped in capture).
+ * Official YT: https://youtu.be/BG3Lr9EdWVY
+ * 1001TL: https://www.1001tracklists.com/tracklist/1muwkg71/bassjackers-the-great-library-stage-tomorrowland-weekend-2-belgium-2026-07-26.html
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-BG3Lr9EdWVY"] = TL_BASSJACKERS_TML_WE2_2026
+ * Capture overlay used TL_Bassjackers_Great-Library-Stage_Tomorrowland_WE2_Belgium_2026
+ * (hyphens illegal). 2026-08-16 official recapture matches the 36 cues already
+ * wired (2026-08-01 console capture; 26/36 timed, rest lerped — clocks agree).
  */
 export const TL_BASSJACKERS_TML_WE2_2026: FingerprintSeedRow[] = [
   { at: "0:11", artist: "Bassjackers & WUKONG & Evil Twiin", title: "Rave Baby" },
@@ -4750,6 +4624,23 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-wuMQeEJ3YnQ": TL_OLIVER_HELDENS_DAYBREAK_SESSION_TOMORROWLAND_WE1_2024,
   "sc-oliverheldens-oliver-heldens-daybreak-session-tomorrowland-weekend-1-2024":
     TL_OLIVER_HELDENS_DAYBREAK_SESSION_TOMORROWLAND_WE1_2024,
+  "ht-toccoscuro-1live-dj-session-mit-robin-schulz-live-aus-dem-pacha-ibiza-vom-0":
+    TL_ROBIN_SCHULZ_PACHA_IBIZA_2026,
+  "yt-pnzSuCiAGdk": TL_CALVIN_HARRIS_MAINSTAGE_DANCE_VALLEY_NETHERLANDS_2026,
+  "yt-JhpL-KKGoO8": TL_TUJAMO_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
+  "yt-IwNPc_4ux84":
+    TL_DILLON_FRANCIS_AND_MARTEN_HORGER_MAINSTAGE_PAROOKAVILLE_GERMANY_2025,
+  "yt-XisbmW1Smgc": TL_MIKE_WILLIAMS_TIME_LAB_PAROOKAVILLE_GERMANY_2026,
+  "yt-eBeeWwsCVls": TL_HARDWELL_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
+  "yt-UETk8HSB0Yw": TL_DUBVISION_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
+  "yt-or_SDolEBfw": TL_W_AND_W_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
+  "sc-tomorrowland-mandy-mondays-august-2026": TL_MANDY_MANDY_MONDAYS_028_2026,
+  "yt-J7b0G4XX8pg":
+    TL_MANDY_AND_NEGATIV_ATMOSPHERE_STAGE_TOMORROWLAND_WE1_BELGIUM_2026,
+  "yt-B1EaMgsf84Q":
+    TL_LUCAS_AND_STEVE_AND_MIKE_WILLIAMS_DONT_LET_DADDY_KNOW_ZIGGO_DOME_AMSTERDAM_2026,
+  "yt-yPCOu0-JKJo":
+    TL_INDIRA_PAGANOTTO_ATMOSPHERE_STAGE_TOMORROWLAND_WE1_BELGIUM_2023,
 };
 
 /** Sanity: every seeded clock must parse. */

@@ -107,7 +107,7 @@ function withOptionalSynthetic(base: SourceAdapter[]): SourceAdapter[] {
  * - Insomniac Night Owl Radio + /music/mixes (SC/YT audio + Insomniac tracklists)
  * - Boiler Room sessions (boilerroom.tv provenance + SC/YT playback)
  * - Bandcamp curated tracks/albums
- * - hearthis.at curated artist accounts only (no house-category browse)
+ * - hearthis.at curated artist accounts + single-track seeds (no house-category browse)
  *
  * Filter with INGEST_ADAPTERS=youtube,soundcloud (comma list of adapter ids)
  * for light deploy hooks (e.g. curated YouTube only).

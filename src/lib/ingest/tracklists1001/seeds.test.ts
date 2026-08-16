@@ -116,6 +116,18 @@ import {
   TL_VINTAGE_CULTURE_NYC_YACHT_2023,
   TL_VINTAGE_CULTURE_PACHA_IBIZA_2026,
   TL_VINTAGE_CULTURE_SO_TRACK_BOA_2026,
+  TL_ROBIN_SCHULZ_PACHA_IBIZA_2026,
+  TL_CALVIN_HARRIS_MAINSTAGE_DANCE_VALLEY_NETHERLANDS_2026,
+  TL_TUJAMO_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
+  TL_DILLON_FRANCIS_AND_MARTEN_HORGER_MAINSTAGE_PAROOKAVILLE_GERMANY_2025,
+  TL_MIKE_WILLIAMS_TIME_LAB_PAROOKAVILLE_GERMANY_2026,
+  TL_HARDWELL_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
+  TL_DUBVISION_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
+  TL_W_AND_W_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
+  TL_MANDY_MANDY_MONDAYS_028_2026,
+  TL_MANDY_AND_NEGATIV_ATMOSPHERE_STAGE_TOMORROWLAND_WE1_BELGIUM_2026,
+  TL_LUCAS_AND_STEVE_AND_MIKE_WILLIAMS_DONT_LET_DADDY_KNOW_ZIGGO_DOME_AMSTERDAM_2026,
+  TL_INDIRA_PAGANOTTO_ATMOSPHERE_STAGE_TOMORROWLAND_WE1_BELGIUM_2023,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   tracklist1001RowsToPlays,
@@ -916,6 +928,8 @@ assertSeedClocks(TL_LUCAS_STEVE_TML_WE2_2026);
 const lucasSteve = tracklist1001RowsToPlays(TL_LUCAS_STEVE_TML_WE2_2026);
 assert.equal(lucasSteve.length, 54);
 assert.equal(lucasSteve[0]!.trackTitle, "Free Your Mind");
+assert.equal(TL_LUCAS_STEVE_TML_WE2_2026[7]?.artist, "Lucas & Steve & Mike Bond");
+assert.equal(TL_LUCAS_STEVE_TML_WE2_2026[7]?.title, "Be Like Bob");
 assert.match(lucasSteve[lucasSteve.length - 1]!.trackTitle!, /Save The World/);
 assert.equal(lucasSteve[lucasSteve.length - 1]!.timestamp, 59 * 60 + 30);
 let lsPrev = -1;
@@ -947,18 +961,21 @@ assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-aDAWctObTvI"]!.length >= 17);
 assertSeedClocks(TL_AFROJACK_R3HAB_TML_WE2_2026);
 const afroR3 = tracklist1001RowsToPlays(TL_AFROJACK_R3HAB_TML_WE2_2026);
 assert.equal(afroR3.length, 54);
+assert.equal(afroR3[0]!.provenance, "1001tl");
+assert.equal(afroR3[0]!.timestamp, 12);
 assert.equal(afroR3[0]!.trackTitle, "Ultimate");
 assert.equal(afroR3[afroR3.length - 1]!.trackTitle, "Bangduck");
 assert.equal(afroR3[afroR3.length - 1]!.timestamp, 59 * 60 + 30);
-let arPrev = -1;
-for (const p of afroR3) {
+for (let i = 1; i < afroR3.length; i++) {
   assert.ok(
-    p.timestamp >= arPrev,
-    `AFROJACK R3HAB TML clocks must not go back @ ${p.timestamp}`,
+    (afroR3[i]!.timestamp ?? 0) >= (afroR3[i - 1]!.timestamp ?? 0),
+    `AFROJACK R3HAB TML clocks must not go back at index ${i}`,
   );
-  arPrev = p.timestamp;
 }
-assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-AjQeohYmg3A"]!.length >= 54);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-AjQeohYmg3A"],
+  TL_AFROJACK_R3HAB_TML_WE2_2026,
+);
 assert.equal(
   TRACKLIST_1001_BY_SOURCE_SLUG["yt-lEIGnx7qLl0"],
   TL_AFROJACK_R3HAB_TML_WE2_2026,
@@ -1013,9 +1030,16 @@ for (const p of pushTml) {
 assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-KVZlecHlVkg"]!.length >= 16);
 
 assertSeedClocks(TL_BASSJACKERS_TML_WE2_2026);
+assert.equal(TL_BASSJACKERS_TML_WE2_2026.length, 36);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-BG3Lr9EdWVY"],
+  TL_BASSJACKERS_TML_WE2_2026,
+);
 const bassjackers = tracklist1001RowsToPlays(TL_BASSJACKERS_TML_WE2_2026);
 assert.equal(bassjackers.length, 36);
+assert.equal(bassjackers[0]!.provenance, "1001tl");
 assert.equal(bassjackers[0]!.trackTitle, "Rave Baby");
+assert.equal(bassjackers[0]!.timestamp, 11);
 assert.equal(bassjackers[bassjackers.length - 1]!.trackTitle, "Forever");
 assert.equal(bassjackers[bassjackers.length - 1]!.timestamp, 59 * 60 + 30);
 let bjPrev = -1;
@@ -1026,7 +1050,6 @@ for (const p of bassjackers) {
   );
   bjPrev = p.timestamp;
 }
-assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-BG3Lr9EdWVY"]!.length >= 36);
 
 assertSeedClocks(TL_BHASKAR_TML_WE2_2026);
 const bhaskar = tracklist1001RowsToPlays(TL_BHASKAR_TML_WE2_2026);
@@ -2170,6 +2193,314 @@ for (let i = 1; i < heldensDaybreak.length; i++) {
     (heldensDaybreak[i]!.timestamp ?? 0) >
       (heldensDaybreak[i - 1]!.timestamp ?? 0),
     `Oliver Heldens Daybreak clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_ROBIN_SCHULZ_PACHA_IBIZA_2026);
+assert.equal(TL_ROBIN_SCHULZ_PACHA_IBIZA_2026.length, 32);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "ht-toccoscuro-1live-dj-session-mit-robin-schulz-live-aus-dem-pacha-ibiza-vom-0"
+  ],
+  TL_ROBIN_SCHULZ_PACHA_IBIZA_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "ht-https://hearthis.at/toccoscuro/1live-dj-session-mit-robin-schulz-live-aus-dem-pacha-ibiza-vom-0/"
+  ],
+  undefined,
+);
+const schulzPacha = tracklist1001RowsToPlays(TL_ROBIN_SCHULZ_PACHA_IBIZA_2026);
+assert.equal(schulzPacha.length, 32);
+assert.equal(schulzPacha[0]?.provenance, "1001tl");
+assert.equal(schulzPacha[0]?.timestamp, 20);
+assert.equal(schulzPacha[0]?.trackTitle, "La La Land");
+assert.equal(schulzPacha[31]?.trackTitle, "Everybody");
+assert.equal(schulzPacha[31]?.timestamp, 57 * 60 + 41);
+for (let i = 1; i < schulzPacha.length; i++) {
+  assert.ok(
+    (schulzPacha[i]!.timestamp ?? 0) > (schulzPacha[i - 1]!.timestamp ?? 0),
+    `Robin Schulz Pacha clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_CALVIN_HARRIS_MAINSTAGE_DANCE_VALLEY_NETHERLANDS_2026);
+assert.equal(TL_CALVIN_HARRIS_MAINSTAGE_DANCE_VALLEY_NETHERLANDS_2026.length, 35);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-pnzSuCiAGdk"],
+  TL_CALVIN_HARRIS_MAINSTAGE_DANCE_VALLEY_NETHERLANDS_2026,
+);
+const chDanceValley = tracklist1001RowsToPlays(
+  TL_CALVIN_HARRIS_MAINSTAGE_DANCE_VALLEY_NETHERLANDS_2026,
+);
+assert.equal(chDanceValley.length, 35);
+assert.equal(chDanceValley[0]?.provenance, "1001tl");
+assert.equal(chDanceValley[0]?.timestamp, 0);
+assert.equal(
+  chDanceValley[0]?.trackTitle,
+  "Sweet Nothing (Calvin Harris 2025 Remix)",
+);
+assert.equal(chDanceValley[34]?.trackTitle, "Under Control");
+assert.equal(chDanceValley[34]?.timestamp, 1 * 3600 + 12 * 60 + 29);
+for (let i = 1; i < chDanceValley.length; i++) {
+  assert.ok(
+    (chDanceValley[i]!.timestamp ?? 0) >
+      (chDanceValley[i - 1]!.timestamp ?? 0),
+    `Calvin Harris Dance Valley clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_TUJAMO_MAINSTAGE_PAROOKAVILLE_GERMANY_2026);
+assert.equal(TL_TUJAMO_MAINSTAGE_PAROOKAVILLE_GERMANY_2026.length, 74);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-JhpL-KKGoO8"],
+  TL_TUJAMO_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
+);
+const tujamoParookaville = tracklist1001RowsToPlays(
+  TL_TUJAMO_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
+);
+assert.equal(tujamoParookaville.length, 74);
+assert.equal(tujamoParookaville[0]?.provenance, "1001tl");
+assert.equal(tujamoParookaville[0]?.timestamp, 11);
+assert.equal(tujamoParookaville[0]?.trackTitle, "WHO (BRANDON Remix)");
+assert.equal(
+  tujamoParookaville[73]?.trackTitle,
+  "We Are Your Friends (Acappella)",
+);
+assert.equal(tujamoParookaville[73]?.timestamp, 1 * 3600 + 11 * 60 + 41);
+for (let i = 1; i < tujamoParookaville.length; i++) {
+  assert.ok(
+    (tujamoParookaville[i]!.timestamp ?? 0) >
+      (tujamoParookaville[i - 1]!.timestamp ?? 0),
+    `TUJAMO Parookaville clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(
+  TL_DILLON_FRANCIS_AND_MARTEN_HORGER_MAINSTAGE_PAROOKAVILLE_GERMANY_2025,
+);
+assert.equal(
+  TL_DILLON_FRANCIS_AND_MARTEN_HORGER_MAINSTAGE_PAROOKAVILLE_GERMANY_2025.length,
+  32,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-IwNPc_4ux84"],
+  TL_DILLON_FRANCIS_AND_MARTEN_HORGER_MAINSTAGE_PAROOKAVILLE_GERMANY_2025,
+);
+const dfMhParookaville = tracklist1001RowsToPlays(
+  TL_DILLON_FRANCIS_AND_MARTEN_HORGER_MAINSTAGE_PAROOKAVILLE_GERMANY_2025,
+);
+assert.equal(dfMhParookaville.length, 32);
+assert.equal(dfMhParookaville[0]?.provenance, "1001tl");
+assert.equal(dfMhParookaville[0]?.timestamp, 15);
+assert.equal(dfMhParookaville[0]?.trackTitle, "On A Trip");
+assert.equal(dfMhParookaville[31]?.trackTitle, "Rave Is Life");
+assert.equal(dfMhParookaville[31]?.timestamp, 59 * 60 + 30);
+for (let i = 1; i < dfMhParookaville.length; i++) {
+  assert.ok(
+    (dfMhParookaville[i]!.timestamp ?? 0) >
+      (dfMhParookaville[i - 1]!.timestamp ?? 0),
+    `Dillon Francis / Marten Horger Parookaville clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_MIKE_WILLIAMS_TIME_LAB_PAROOKAVILLE_GERMANY_2026);
+assert.equal(TL_MIKE_WILLIAMS_TIME_LAB_PAROOKAVILLE_GERMANY_2026.length, 50);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-XisbmW1Smgc"],
+  TL_MIKE_WILLIAMS_TIME_LAB_PAROOKAVILLE_GERMANY_2026,
+);
+const mwTimeLab = tracklist1001RowsToPlays(
+  TL_MIKE_WILLIAMS_TIME_LAB_PAROOKAVILLE_GERMANY_2026,
+);
+assert.equal(mwTimeLab.length, 50);
+assert.equal(mwTimeLab[0]?.provenance, "1001tl");
+assert.equal(mwTimeLab[0]?.timestamp, 10);
+assert.equal(mwTimeLab[0]?.trackTitle, "Drop The Pressure");
+assert.equal(mwTimeLab[49]?.trackTitle, "I'll Do It");
+assert.equal(mwTimeLab[49]?.timestamp, 56 * 60 + 9);
+for (let i = 1; i < mwTimeLab.length; i++) {
+  assert.ok(
+    (mwTimeLab[i]!.timestamp ?? 0) > (mwTimeLab[i - 1]!.timestamp ?? 0),
+    `Mike Williams Time Lab clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_HARDWELL_MAINSTAGE_PAROOKAVILLE_GERMANY_2026);
+assert.equal(TL_HARDWELL_MAINSTAGE_PAROOKAVILLE_GERMANY_2026.length, 63);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-eBeeWwsCVls"],
+  TL_HARDWELL_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
+);
+const hwParookaville = tracklist1001RowsToPlays(
+  TL_HARDWELL_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
+);
+assert.equal(hwParookaville.length, 63);
+assert.equal(hwParookaville[0]?.provenance, "1001tl");
+assert.equal(hwParookaville[0]?.timestamp, 0);
+assert.equal(hwParookaville[0]?.trackTitle, "Believe");
+assert.equal(hwParookaville[62]?.trackTitle, "IRIS");
+assert.equal(hwParookaville[62]?.timestamp, 1 * 3600 + 19 * 60 + 7);
+for (let i = 1; i < hwParookaville.length; i++) {
+  assert.ok(
+    (hwParookaville[i]!.timestamp ?? 0) >
+      (hwParookaville[i - 1]!.timestamp ?? 0),
+    `Hardwell Parookaville clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_DUBVISION_MAINSTAGE_PAROOKAVILLE_GERMANY_2026);
+assert.equal(TL_DUBVISION_MAINSTAGE_PAROOKAVILLE_GERMANY_2026.length, 62);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-UETk8HSB0Yw"],
+  TL_DUBVISION_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
+);
+const dvParookaville = tracklist1001RowsToPlays(
+  TL_DUBVISION_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
+);
+assert.equal(dvParookaville.length, 62);
+assert.equal(dvParookaville[0]?.provenance, "1001tl");
+assert.equal(dvParookaville[0]?.timestamp, 11);
+assert.equal(
+  dvParookaville[0]?.trackTitle,
+  "Rise Again vs. In The Name Of Love (DubVision Mashup)",
+);
+assert.equal(dvParookaville[61]?.trackTitle, "Starlight (Keep Me Afloat)");
+assert.equal(dvParookaville[61]?.timestamp, 56 * 60 + 13);
+for (let i = 1; i < dvParookaville.length; i++) {
+  assert.ok(
+    (dvParookaville[i]!.timestamp ?? 0) >
+      (dvParookaville[i - 1]!.timestamp ?? 0),
+    `DubVision Parookaville clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_W_AND_W_MAINSTAGE_PAROOKAVILLE_GERMANY_2026);
+assert.equal(TL_W_AND_W_MAINSTAGE_PAROOKAVILLE_GERMANY_2026.length, 58);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-or_SDolEBfw"],
+  TL_W_AND_W_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
+);
+const wwParookaville = tracklist1001RowsToPlays(
+  TL_W_AND_W_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
+);
+assert.equal(wwParookaville.length, 58);
+assert.equal(wwParookaville[0]?.provenance, "1001tl");
+assert.equal(wwParookaville[0]?.timestamp, 10);
+assert.equal(wwParookaville[0]?.trackTitle, "Bangkok");
+assert.equal(wwParookaville[57]?.trackTitle, "Moonlight Shadow");
+assert.equal(wwParookaville[57]?.timestamp, 1 * 3600 + 11 * 60 + 25);
+for (let i = 1; i < wwParookaville.length; i++) {
+  assert.ok(
+    (wwParookaville[i]!.timestamp ?? 0) >
+      (wwParookaville[i - 1]!.timestamp ?? 0),
+    `W&W Parookaville clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_MANDY_MANDY_MONDAYS_028_2026);
+assert.equal(TL_MANDY_MANDY_MONDAYS_028_2026.length, 47);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-tomorrowland-mandy-mondays-august-2026"],
+  TL_MANDY_MANDY_MONDAYS_028_2026,
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-J7b0G4XX8pg"],
+  TL_MANDY_MANDY_MONDAYS_028_2026,
+);
+const mandyMondays = tracklist1001RowsToPlays(TL_MANDY_MANDY_MONDAYS_028_2026);
+assert.equal(mandyMondays.length, 47);
+assert.equal(mandyMondays[0]?.provenance, "1001tl");
+assert.equal(mandyMondays[0]?.timestamp, 20);
+assert.equal(mandyMondays[0]?.trackTitle, "Miami 2 Ibiza (MANDY Edit)");
+assert.equal(
+  mandyMondays[46]?.trackTitle,
+  "Sweet Dreams x Trepidation (Code Black DJ Tool)",
+);
+assert.equal(mandyMondays[46]?.timestamp, 57 * 60 + 50);
+for (let i = 1; i < mandyMondays.length; i++) {
+  assert.ok(
+    (mandyMondays[i]!.timestamp ?? 0) > (mandyMondays[i - 1]!.timestamp ?? 0),
+    `MANDY Mondays 028 clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_MANDY_AND_NEGATIV_ATMOSPHERE_STAGE_TOMORROWLAND_WE1_BELGIUM_2026);
+assert.equal(
+  TL_MANDY_AND_NEGATIV_ATMOSPHERE_STAGE_TOMORROWLAND_WE1_BELGIUM_2026.length,
+  55,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-J7b0G4XX8pg"],
+  TL_MANDY_AND_NEGATIV_ATMOSPHERE_STAGE_TOMORROWLAND_WE1_BELGIUM_2026,
+);
+const mandyNegativ = tracklist1001RowsToPlays(
+  TL_MANDY_AND_NEGATIV_ATMOSPHERE_STAGE_TOMORROWLAND_WE1_BELGIUM_2026,
+);
+assert.equal(mandyNegativ.length, 55);
+assert.equal(mandyNegativ[0]?.provenance, "1001tl");
+assert.equal(mandyNegativ[0]?.timestamp, 20);
+assert.equal(mandyNegativ[0]?.trackTitle, "Miami 2 Ibiza (MANDY Edit)");
+assert.equal(mandyNegativ[54]?.trackTitle, "Trepidation");
+assert.equal(mandyNegativ[54]?.timestamp, 57 * 60 + 56);
+for (let i = 1; i < mandyNegativ.length; i++) {
+  assert.ok(
+    (mandyNegativ[i]!.timestamp ?? 0) > (mandyNegativ[i - 1]!.timestamp ?? 0),
+    `MANDY B2B Negativ TML WE1 clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(
+  TL_LUCAS_AND_STEVE_AND_MIKE_WILLIAMS_DONT_LET_DADDY_KNOW_ZIGGO_DOME_AMSTERDAM_2026,
+);
+assert.equal(
+  TL_LUCAS_AND_STEVE_AND_MIKE_WILLIAMS_DONT_LET_DADDY_KNOW_ZIGGO_DOME_AMSTERDAM_2026.length,
+  51,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-B1EaMgsf84Q"],
+  TL_LUCAS_AND_STEVE_AND_MIKE_WILLIAMS_DONT_LET_DADDY_KNOW_ZIGGO_DOME_AMSTERDAM_2026,
+);
+const dldkZiggo = tracklist1001RowsToPlays(
+  TL_LUCAS_AND_STEVE_AND_MIKE_WILLIAMS_DONT_LET_DADDY_KNOW_ZIGGO_DOME_AMSTERDAM_2026,
+);
+assert.equal(dldkZiggo.length, 51);
+assert.equal(dldkZiggo[0]?.provenance, "1001tl");
+assert.equal(dldkZiggo[0]?.timestamp, 21);
+assert.equal(dldkZiggo[0]?.trackTitle, "Let's Go");
+assert.equal(dldkZiggo[50]?.trackTitle, "Save The World (Acappella)");
+assert.equal(dldkZiggo[50]?.timestamp, 59 * 60 + 30);
+for (let i = 1; i < dldkZiggo.length; i++) {
+  assert.ok(
+    (dldkZiggo[i]!.timestamp ?? 0) > (dldkZiggo[i - 1]!.timestamp ?? 0),
+    `DLDK Ziggo clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(
+  TL_INDIRA_PAGANOTTO_ATMOSPHERE_STAGE_TOMORROWLAND_WE1_BELGIUM_2023,
+);
+assert.equal(
+  TL_INDIRA_PAGANOTTO_ATMOSPHERE_STAGE_TOMORROWLAND_WE1_BELGIUM_2023.length,
+  29,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-yPCOu0-JKJo"],
+  TL_INDIRA_PAGANOTTO_ATMOSPHERE_STAGE_TOMORROWLAND_WE1_BELGIUM_2023,
+);
+const indiraTml = tracklist1001RowsToPlays(
+  TL_INDIRA_PAGANOTTO_ATMOSPHERE_STAGE_TOMORROWLAND_WE1_BELGIUM_2023,
+);
+assert.equal(indiraTml.length, 29);
+assert.equal(indiraTml[0]?.provenance, "1001tl");
+assert.equal(indiraTml[0]?.timestamp, 29);
+assert.equal(indiraTml[0]?.trackTitle, "Acatao");
+assert.equal(indiraTml[28]?.trackTitle, "Courtesy");
+assert.equal(indiraTml[28]?.timestamp, 1 * 3600 + 55 * 60 + 24);
+for (let i = 1; i < indiraTml.length; i++) {
+  assert.ok(
+    (indiraTml[i]!.timestamp ?? 0) > (indiraTml[i - 1]!.timestamp ?? 0),
+    `Indira Paganotto TML WE1 2023 clocks must increase at index ${i}`,
   );
 }
 

@@ -1,0 +1,590 @@
+{
+  "venueSlug": "berghain",
+  "venueName": "Berghain",
+  "sourceUrl": "https://berghain.berlin/en/program/",
+  "fetchedAt": "2026-08-16T14:46:38.183Z",
+  "nights": [
+    {
+      "title": "SÄULE",
+      "startsAt": "2026-08-20",
+      "sourceUrl": "https://berghain.berlin/en/event/80840/",
+      "rooms": [
+        {
+          "name": "Säule",
+          "artists": [
+            "Wave Arising",
+            "Ebony Willis",
+            "Marylou"
+          ]
+        }
+      ],
+      "artists": [
+        "Wave Arising",
+        "Ebony Willis",
+        "Marylou"
+      ]
+    },
+    {
+      "title": "REEF",
+      "startsAt": "2026-08-21",
+      "sourceUrl": "https://berghain.berlin/en/event/80789/",
+      "rooms": [
+        {
+          "name": "Berghain",
+          "artists": [
+            "Alix Perez",
+            "Esposito",
+            "Headhunter"
+          ]
+        },
+        {
+          "name": "Panorama Bar",
+          "artists": [
+            "Arthur",
+            "Jan Loup",
+            "Le Motel & Magugu"
+          ]
+        }
+      ],
+      "artists": [
+        "Alix Perez",
+        "Esposito",
+        "Headhunter",
+        "Arthur",
+        "Jan Loup",
+        "Le Motel & Magugu"
+      ]
+    },
+    {
+      "title": "Klubnacht",
+      "startsAt": "2026-08-22",
+      "sourceUrl": "https://berghain.berlin/en/event/80739/",
+      "rooms": [
+        {
+          "name": "Berghain",
+          "artists": [
+            "Amanda Mussi",
+            "Andy Martin",
+            "Banu",
+            "DJ Maria.",
+            "Kaiser",
+            "Kwartz",
+            "Norman Nodge"
+          ]
+        },
+        {
+          "name": "Panorama Bar",
+          "artists": [
+            "André Galluzzi",
+            "Deepa",
+            "Franziska Berns",
+            "HUNEE",
+            "Maruwa",
+            "Mattias El Mansouri",
+            "Nicola Cruz",
+            "Zombies In Miami"
+          ]
+        }
+      ],
+      "artists": [
+        "Amanda Mussi",
+        "Andy Martin",
+        "Banu",
+        "DJ Maria.",
+        "Kaiser",
+        "Kwartz",
+        "Norman Nodge",
+        "André Galluzzi",
+        "Deepa",
+        "Franziska Berns",
+        "HUNEE",
+        "Maruwa",
+        "Mattias El Mansouri",
+        "Nicola Cruz",
+        "Zombies In Miami"
+      ]
+    },
+    {
+      "title": "KEYI Magazine",
+      "startsAt": "2026-08-27",
+      "sourceUrl": "https://berghain.berlin/en/event/80841/",
+      "rooms": [
+        {
+          "name": "Säule",
+          "artists": [
+            "L.F.T.",
+            "Oppenheimer MKII",
+            "Bézier",
+            "Samantha Togni"
+          ]
+        }
+      ],
+      "artists": [
+        "L.F.T.",
+        "Oppenheimer MKII",
+        "Bézier",
+        "Samantha Togni"
+      ]
+    },
+    {
+      "title": "Love On The Rocks",
+      "startsAt": "2026-08-28",
+      "sourceUrl": "https://berghain.berlin/en/event/80790/",
+      "rooms": [
+        {
+          "name": "Panorama Bar",
+          "artists": [
+            "BOBBY.",
+            "Fais Le Beau",
+            "Giammarco Orsini",
+            "Marie Montexier",
+            "PARAMIDA",
+            "QUEST"
+          ]
+        }
+      ],
+      "artists": [
+        "BOBBY.",
+        "Fais Le Beau",
+        "Giammarco Orsini",
+        "Marie Montexier",
+        "PARAMIDA",
+        "QUEST"
+      ]
+    },
+    {
+      "title": "Klubnacht",
+      "startsAt": "2026-08-29",
+      "sourceUrl": "https://berghain.berlin/en/event/80740/",
+      "rooms": [
+        {
+          "name": "Berghain",
+          "artists": [
+            "Answer Code Request",
+            "Paul Claude",
+            "Amotik",
+            "Chami",
+            "Clarisa Kimskii",
+            "Newa",
+            "Shinedoe",
+            "Stefan Goldmann",
+            "Tauceti"
+          ]
+        },
+        {
+          "name": "Panorama Bar",
+          "artists": [
+            "Âme DJ",
+            "Bella Boo",
+            "Loren",
+            "Niebla",
+            "Oracy",
+            "Tijana T",
+            "Yamour"
+          ]
+        }
+      ],
+      "artists": [
+        "Answer Code Request",
+        "Paul Claude",
+        "Amotik",
+        "Chami",
+        "Clarisa Kimskii",
+        "Newa",
+        "Shinedoe",
+        "Stefan Goldmann",
+        "Tauceti",
+        "Âme DJ",
+        "Bella Boo",
+        "Loren",
+        "Niebla",
+        "Oracy",
+        "Tijana T",
+        "Yamour"
+      ]
+    },
+    {
+      "title": "Omen Wapta",
+      "startsAt": "2026-09-03",
+      "sourceUrl": "https://berghain.berlin/en/event/80842/",
+      "rooms": [
+        {
+          "name": "Säule",
+          "artists": [
+            "Laima Adelaide",
+            "Blume",
+            "Floid",
+            "Marco Maldarella",
+            "Woody92"
+          ]
+        }
+      ],
+      "artists": [
+        "Laima Adelaide",
+        "Blume",
+        "Floid",
+        "Marco Maldarella",
+        "Woody92"
+      ]
+    },
+    {
+      "title": "Desert Ghosts",
+      "startsAt": "2026-09-04",
+      "sourceUrl": "https://berghain.berlin/en/event/80791/",
+      "rooms": [
+        {
+          "name": "Panorama Bar",
+          "artists": [
+            "Lawrence",
+            "Thomas Melchior",
+            "Edward",
+            "Konduku",
+            "Sibel",
+            "Tau Car"
+          ]
+        }
+      ],
+      "artists": [
+        "Lawrence",
+        "Thomas Melchior",
+        "Edward",
+        "Konduku",
+        "Sibel",
+        "Tau Car"
+      ]
+    },
+    {
+      "title": "Klubnacht",
+      "startsAt": "2026-09-05",
+      "sourceUrl": "https://berghain.berlin/en/event/80741/",
+      "rooms": [
+        {
+          "name": "Berghain",
+          "artists": [
+            "Hurdslenk",
+            "Deetron",
+            "Josh Caffé",
+            "Mareena",
+            "Reka Zalan",
+            "Sanna Mun",
+            "Steffi",
+            "Stojche",
+            "VIL",
+            "Zenker Brothers"
+          ]
+        },
+        {
+          "name": "Panorama Bar",
+          "artists": [
+            "DJ Miss Parker",
+            "Gabrielle Kwarteng",
+            "Gwenan",
+            "Majdolen",
+            "Massimiliano Pagliara",
+            "Moopie",
+            "Sedef Adasï"
+          ]
+        }
+      ],
+      "artists": [
+        "Hurdslenk",
+        "Deetron",
+        "Josh Caffé",
+        "Mareena",
+        "Reka Zalan",
+        "Sanna Mun",
+        "Steffi",
+        "Stojche",
+        "VIL",
+        "Zenker Brothers",
+        "DJ Miss Parker",
+        "Gabrielle Kwarteng",
+        "Gwenan",
+        "Majdolen",
+        "Massimiliano Pagliara",
+        "Moopie",
+        "Sedef Adasï"
+      ]
+    },
+    {
+      "title": "Laundrette",
+      "startsAt": "2026-09-11",
+      "sourceUrl": "https://berghain.berlin/en/event/80792/",
+      "rooms": [
+        {
+          "name": "Panorama Bar",
+          "artists": [
+            "CC:DISCO!",
+            "David Elimelech",
+            "Partok",
+            "Paul Wolsch",
+            "Roi Perez",
+            "Sally C",
+            "Samira"
+          ]
+        }
+      ],
+      "artists": [
+        "CC:DISCO!",
+        "David Elimelech",
+        "Partok",
+        "Paul Wolsch",
+        "Roi Perez",
+        "Sally C",
+        "Samira"
+      ]
+    },
+    {
+      "title": "Klubnacht",
+      "startsAt": "2026-09-12",
+      "sourceUrl": "https://berghain.berlin/en/event/80742/",
+      "rooms": [
+        {
+          "name": "Berghain",
+          "artists": [
+            "Drumcell",
+            "Kangding Ray",
+            "Lolsnake",
+            "Mari Sakurai",
+            "Perfo",
+            "Virginia",
+            "Wata Igarashi"
+          ]
+        },
+        {
+          "name": "Panorama Bar",
+          "artists": [
+            "Erik Luebs",
+            "Gio Thello",
+            "Jennifer Loveless",
+            "Jump Source",
+            "Kikelomo",
+            "Subb-an",
+            "Tama Sumo"
+          ]
+        }
+      ],
+      "artists": [
+        "Drumcell",
+        "Kangding Ray",
+        "Lolsnake",
+        "Mari Sakurai",
+        "Perfo",
+        "Virginia",
+        "Wata Igarashi",
+        "Erik Luebs",
+        "Gio Thello",
+        "Jennifer Loveless",
+        "Jump Source",
+        "Kikelomo",
+        "Subb-an",
+        "Tama Sumo"
+      ]
+    },
+    {
+      "title": "Mäzen",
+      "startsAt": "2026-09-17",
+      "sourceUrl": "https://berghain.berlin/en/event/80844/",
+      "rooms": [
+        {
+          "name": "Säule",
+          "artists": [
+            "Nadia Struiwigh",
+            "Pre Silent",
+            "Acronym",
+            "Thirteen Doze"
+          ]
+        }
+      ],
+      "artists": [
+        "Nadia Struiwigh",
+        "Pre Silent",
+        "Acronym",
+        "Thirteen Doze"
+      ]
+    },
+    {
+      "title": "Italorama Bar",
+      "startsAt": "2026-09-18",
+      "sourceUrl": "https://berghain.berlin/en/event/80793/",
+      "rooms": [
+        {
+          "name": "Panorama Bar",
+          "artists": [
+            "N.O.I.A.",
+            "Curses",
+            "Dash",
+            "Franz Scala",
+            "Giulia Gutterer",
+            "Intergalactic Gary",
+            "Lennart"
+          ]
+        }
+      ],
+      "artists": [
+        "N.O.I.A.",
+        "Curses",
+        "Dash",
+        "Franz Scala",
+        "Giulia Gutterer",
+        "Intergalactic Gary",
+        "Lennart"
+      ]
+    },
+    {
+      "title": "Klubnacht",
+      "startsAt": "2026-09-19",
+      "sourceUrl": "https://berghain.berlin/en/event/80743/",
+      "rooms": [
+        {
+          "name": "Berghain",
+          "artists": [
+            "Ben Klock",
+            "DHÆÜR",
+            "Fadi Mohem",
+            "JakoJako",
+            "Marie Montexier",
+            "Mary Yuzovskaya",
+            "OPH"
+          ]
+        },
+        {
+          "name": "Panorama Bar",
+          "artists": [
+            "Alinka",
+            "Budino",
+            "Cinthie",
+            "Francesco del Garda",
+            "Mike Starr",
+            "Prom Night",
+            "Tal Fussman"
+          ]
+        },
+        {
+          "name": "Säule",
+          "artists": [
+            "Rex The Dog"
+          ]
+        }
+      ],
+      "artists": [
+        "Ben Klock",
+        "DHÆÜR",
+        "Fadi Mohem",
+        "JakoJako",
+        "Marie Montexier",
+        "Mary Yuzovskaya",
+        "OPH",
+        "Alinka",
+        "Budino",
+        "Cinthie",
+        "Francesco del Garda",
+        "Mike Starr",
+        "Prom Night",
+        "Tal Fussman",
+        "Rex The Dog"
+      ]
+    },
+    {
+      "title": "Terenor",
+      "startsAt": "2026-09-24",
+      "sourceUrl": "https://berghain.berlin/en/event/80845/",
+      "rooms": [
+        {
+          "name": "Säule",
+          "artists": [
+            "KĀ",
+            "Ninon",
+            "Agata",
+            "Cunt Remember",
+            "Egregore",
+            "Jolly"
+          ]
+        }
+      ],
+      "artists": [
+        "KĀ",
+        "Ninon",
+        "Agata",
+        "Cunt Remember",
+        "Egregore",
+        "Jolly"
+      ]
+    },
+    {
+      "title": "WSNWG LIVE",
+      "startsAt": "2026-09-25",
+      "sourceUrl": "https://berghain.berlin/en/event/80794/",
+      "rooms": [
+        {
+          "name": "Berghain",
+          "artists": [
+            "Dasha Rush",
+            "Megan Leber",
+            "Rødhåd",
+            "Speedy J",
+            "UFO95"
+          ]
+        }
+      ],
+      "artists": [
+        "Dasha Rush",
+        "Megan Leber",
+        "Rødhåd",
+        "Speedy J",
+        "UFO95"
+      ]
+    },
+    {
+      "title": "Klubnacht",
+      "startsAt": "2026-09-26",
+      "sourceUrl": "https://berghain.berlin/en/event/80744/",
+      "rooms": [
+        {
+          "name": "Berghain",
+          "artists": [
+            "Colin Benders",
+            "Auspex",
+            "Beste Hira",
+            "Joline Scheffler",
+            "Marcel Dettmann",
+            "Tasha",
+            "UVB"
+          ]
+        },
+        {
+          "name": "Panorama Bar",
+          "artists": [
+            "Pulsinger & Irl",
+            "Bradley Zero",
+            "Fabio Monesi",
+            "Jana Falcon",
+            "Jorkes",
+            "Make A Dance",
+            "MATISA",
+            "nd_baumecker",
+            "Tripmastaz"
+          ]
+        }
+      ],
+      "artists": [
+        "Colin Benders",
+        "Auspex",
+        "Beste Hira",
+        "Joline Scheffler",
+        "Marcel Dettmann",
+        "Tasha",
+        "UVB",
+        "Pulsinger & Irl",
+        "Bradley Zero",
+        "Fabio Monesi",
+        "Jana Falcon",
+        "Jorkes",
+        "Make A Dance",
+        "MATISA",
+        "nd_baumecker",
+        "Tripmastaz"
+      ]
+    }
+  ]
+}

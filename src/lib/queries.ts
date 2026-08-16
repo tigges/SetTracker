@@ -23,7 +23,12 @@ import {
   loadAtlasDjs,
   loadAtlasVenues,
 } from "@/lib/atlas/seed";
-import { daysCoveredByEditions } from "@/lib/calendarGrid";
+import { daysCoveredByEditions, isoUTC } from "@/lib/calendarGrid";
+import {
+  bucketVenueNight,
+  parseJsonStringList,
+  type VenueNightCalendarRow,
+} from "@/lib/ingest/discovery/venueCalendars/board";
 import {
   editionBrandLabel,
   editionCalendar,
@@ -450,7 +455,35 @@ export async function getFestivalEditionBoard(nowMs = Date.now()) {
     })),
     nowMs,
   );
-  return { calendar, gaps, names, images, nowMs };
+
+  const nightRows = await prisma.venueNight.findMany({
+    include: { event: { select: { slug: true, name: true, imageUrl: true } } },
+    orderBy: { startsAt: "asc" },
+  });
+  const nights: VenueNightCalendarRow[] = [];
+  for (const row of nightRows) {
+    const startsAt = isoUTC(row.startsAt);
+    const endsAt = row.endsAt ? isoUTC(row.endsAt) : startsAt;
+    const bucket = bucketVenueNight(startsAt, endsAt, nowMs);
+    if (bucket === "past") continue;
+    names.set(row.event.slug, row.event.name);
+    if (row.event.imageUrl && !images.has(row.event.slug)) {
+      images.set(row.event.slug, row.event.imageUrl);
+    }
+    nights.push({
+      slug: row.slug,
+      eventSlug: row.event.slug,
+      title: row.title,
+      startsAt,
+      endsAt,
+      bucket,
+      sourceUrl: row.sourceUrl,
+      ticketsUrl: row.ticketsUrl,
+      artists: parseJsonStringList(row.artistsJson),
+    });
+  }
+
+  return { calendar, nights, gaps, names, images, nowMs };
 }
 
 export type TeaserFaceRow = {
@@ -533,7 +566,10 @@ export function calendarTeaserFaces(
 export function calendarMarkedDays(
   board: Awaited<ReturnType<typeof getFestivalEditionBoard>>,
 ): Set<string> {
-  return daysCoveredByEditions(board.calendar);
+  return daysCoveredByEditions([
+    ...board.calendar,
+    ...board.nights.map((n) => ({ startsAt: n.startsAt, endsAt: n.endsAt })),
+  ]);
 }
 
 // ---------------------------------------------------------------------------
@@ -1328,6 +1364,27 @@ export async function getVenueBySlug(slug: string) {
     lineupArtists,
     setCount: event.sets.length,
     sets,
+    nights: (
+      await prisma.venueNight.findMany({
+        where: { eventId: event.id },
+        orderBy: { startsAt: "asc" },
+      })
+    )
+      .map((row) => {
+        const startsAt = isoUTC(row.startsAt);
+        const endsAt = row.endsAt ? isoUTC(row.endsAt) : startsAt;
+        return {
+          slug: row.slug,
+          title: row.title,
+          startsAt,
+          endsAt,
+          bucket: bucketVenueNight(startsAt, endsAt, Date.now()),
+          sourceUrl: row.sourceUrl,
+          ticketsUrl: row.ticketsUrl,
+          artists: parseJsonStringList(row.artistsJson),
+        };
+      })
+      .filter((n) => n.bucket !== "past"),
   };
 }
 

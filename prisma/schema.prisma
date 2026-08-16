@@ -79,6 +79,7 @@ model Event {
   imageUrl   String?
   sets       Set[]
   editions   EventEdition[]
+  nights     VenueNight[]
 }
 
 // A dated edition of a festival brand (Tomorrowland Belgium 2026, EDC LV 2025).
@@ -95,6 +96,27 @@ model EventEdition {
 
   @@index([eventId, year])
   @@index([endsAt])
+}
+
+// A dated club night scraped from an official venue calendar (never invented).
+model VenueNight {
+  id          String    @id @default(cuid())
+  slug        String    @unique
+  eventId     String
+  event       Event     @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  title       String
+  startsAt    DateTime
+  endsAt      DateTime?
+  sourceUrl   String
+  ticketsUrl  String?
+  roomsJson   String? // JSON [{ name, artists[] }]
+  artistsJson String? // JSON string[]
+  sourceHash  String?
+  fetchedAt   DateTime  @default(now())
+
+  @@unique([eventId, startsAt, title])
+  @@index([startsAt])
+  @@index([eventId])
 }
 
 // A released, identified track (the playable unit in a set — not the release).
