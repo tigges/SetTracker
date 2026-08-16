@@ -127,5 +127,16 @@ assert.equal(
   ),
   "mapped",
 );
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "yt-kmMYCg-igjc",
+      title: "Vintage Culture live @ Só Track Boa Festival, Brasil 2026",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
 
 console.log("nextCaptures.queue.test.ts ok");

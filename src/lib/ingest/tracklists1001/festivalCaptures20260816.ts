@@ -84,3 +84,28 @@ export const TL_VINTAGE_CULTURE_EDC_LV_NEON_2025: FingerprintSeedRow[] = [
   { at: "1:03:12", artist: "Nympho", title: "DJ Assault (ID Remix)" },
   { at: "1:08:35", artist: "Gabss & Vintage Culture", title: "Lost" },
 ];
+
+/**
+ * Vintage Culture @ NSD Mainstage, Só Track Boa Festival, Brazil 2026-06-06
+ * https://www.1001tracklists.com/tracklist/1j3fbbr9/vintage-culture-nsd-mainstage-so-track-boa-festival-brazil-2026-06-06.html
+ * Official YT: https://youtu.be/kmMYCg-igjc
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-kmMYCg-igjc"]
+ * Captured 2026-08-16 — provenance 1001tl. 13/20 IDed; bare IDs skipped.
+ * Opening cue untimed on 1001 → 0:00. w/ acappella kept +1s after 1:17:43.
+ */
+export const TL_VINTAGE_CULTURE_SO_TRACK_BOA_2026: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "Vintage Culture & DJ Glen ft. Ali Love", title: "Off My Head" },
+  { at: "9:57", artist: "Vintage Culture", title: "Do You" },
+  { at: "17:45", artist: "Oliver Huntemann & Stephan Bodzin", title: "Rubin (Victor Ruiz Remix)" },
+  { at: "22:40", artist: "Vintage Culture & Volkoder", title: "Hands Up" },
+  { at: "30:52", artist: "Mombaak", title: "Alive" },
+  { at: "34:43", artist: "The Killers", title: "Mr. Brightside (ID Remix)" },
+  { at: "51:24", artist: "Torna", title: "Rhythm Haters" },
+  { at: "56:42", artist: "Max Styler & Vintage Culture & Ali Love", title: "Freaky 1" },
+  { at: "1:00:59", artist: "Vintage Culture & Volkoder", title: "Best Move" },
+  { at: "1:03:18", artist: "MGMT", title: "Time To Pretend (ANNA Edit)" },
+  { at: "1:07:58", artist: "Vintage Culture & MAGNUS", title: "Nothing Ever Changes (Agents Of Time Remix)" },
+  { at: "1:11:55", artist: "Gabss & Vintage Culture", title: "Lost" },
+  { at: "1:17:43", artist: "Vintage Culture & Fancy Inc", title: "In The Dark (Fancy Inc 2026 VIP Mix)" },
+  { at: "1:17:44", artist: "ARTBAT & Vintage Culture", title: "She The Last One (Acappella)" },
+];

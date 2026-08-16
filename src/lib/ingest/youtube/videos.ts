@@ -64,6 +64,7 @@ import {
   TL_MARKUS_SCHULZ_AND_JEROME_ISMA_AE_GDJB_2026,
   TL_ALOK_TML_WE2_2026,
   TL_VINTAGE_CULTURE_EDC_LV_NEON_2025,
+  TL_VINTAGE_CULTURE_SO_TRACK_BOA_2026,
   TL_MISS_MONIQUE_TML_WE2_2026,
   TL_NICKY_ROMERO_TML_WE2_2026,
   TL_ODD_MOB_TML_WE2_2026,
@@ -1268,6 +1269,9 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     type: "festival",
     title: "Vintage Culture live @ Só Track Boa Festival, Brasil 2026",
     eventName: "Só Track Boa",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1j3fbbr9/vintage-culture-nsd-mainstage-so-track-boa-festival-brazil-2026-06-06.html",
+    tracklist1001: TL_VINTAGE_CULTURE_SO_TRACK_BOA_2026,
   },
   {
     video: "https://www.youtube.com/watch?v=jnSFLztjm80",
