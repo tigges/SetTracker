@@ -27,4 +27,9 @@ describe("djSlugAliases", () => {
     assert.equal(canonicalDjSlug("david-guetta-we-2"), "david-guetta");
     assert.equal(canonicalDjSlug("armin-van-buuren"), "armin-van-buuren");
   });
+
+  it("folds Artist SELECTS show slugs onto the artist", () => {
+    assert.equal(canonicalDjSlug("laidback-luke-selects"), "laidback-luke");
+    assert.equal(canonicalDjSlug("laidback-luke"), "laidback-luke");
+  });
 });

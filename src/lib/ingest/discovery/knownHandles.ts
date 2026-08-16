@@ -199,6 +199,11 @@ export const KNOWN_HANDLES: Record<string, HandleHint> = {
     genre: "Bass House",
     accent: "#f77f00",
   },
+  "laidback luke": {
+    soundcloudPermalink: "laidbackluke",
+    genre: "House",
+    accent: "#f4c542",
+  },
   keinemusik: {
     youtubeHandle: "@keinemusik",
     soundcloudPermalink: "keinemusik",

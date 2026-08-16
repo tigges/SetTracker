@@ -61,6 +61,7 @@ export function tidyPerformingCredit(name: string): string {
     .replace(/\s+(main\s*stage|mainstage)\s*$/i, "")
     // "Guetta & Horger pres. Men Machine" → presenters (project is preferred primary)
     .replace(/\s+pres(?:ents?|\.)\s+.+$/i, "")
+    .replace(/\s+selects\s*$/i, "")
     .replace(/\s*[|–—:-]+\s*$/g, "")
     .trim();
 }

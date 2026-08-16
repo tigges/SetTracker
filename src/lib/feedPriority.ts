@@ -4,13 +4,16 @@
  * Rank *resolution* (chart JSON) lives in `feedPriorityResolve.ts` so
  * SetCard / SetFeed never pull seed data or Node builtins into the browser.
  *
- * Within This week / Earlier we sort:
+ * Spotlight rails (`compareFeedPriority`) sort:
  *   1) Tracklist completeness (ok → thin → severe; empty last)
  *   2) Performance year (performedAt / edition year / publishedAt — never ingest)
  *   3) DJ Mag Top 100 DJs (lower chart rank first)
  *   4) DJ Mag Top 100 Festivals (linked event; lower rank first)
  *   5) Venue class: festival → club → livestream → radio → other
  *   6) Performance date
+ *
+ * Deep catalog leftovers (`compareDeepCatalog`) sort date first, then density,
+ * then chart — so Guetta Ultra 2024 does not sit on page 1 ahead of 2026 sets.
  *
  * Event/festival profile grids use `compareEventSetPriority` — same stack,
  * plus ID quality so all-pink (unresolved) tracklists rank below identified.
@@ -152,6 +155,41 @@ export function compareFeedPriority(
   if (va !== vb) return va - vb;
 
   return setPerformanceTime(b) - setPerformanceTime(a);
+}
+
+/** Leftover Deep catalog: newest performance first, then density, then chart. */
+export function compareDeepCatalog(
+  a: FeedPriorityFields,
+  b: FeedPriorityFields,
+): number {
+  const ta = setPerformanceTime(a);
+  const tb = setPerformanceTime(b);
+  if (ta !== tb) return tb - ta;
+
+  const da = DENSITY_RANK[a.densitySeverity ?? "ok"];
+  const db = DENSITY_RANK[b.densitySeverity ?? "ok"];
+  if (da !== db) return da - db;
+
+  const ra = a.top100Rank ?? 999;
+  const rb = b.top100Rank ?? 999;
+  if (ra !== rb) return ra - rb;
+
+  const fa = a.festivalRank ?? 999;
+  const fb = b.festivalRank ?? 999;
+  if (fa !== fb) return fa - fb;
+
+  const ca = a.clubRank ?? 999;
+  const cb = b.clubRank ?? 999;
+  if (ca !== cb) return ca - cb;
+
+  return 0;
+}
+
+export function isThisPerformanceYear(
+  s: FeedPriorityFields,
+  nowMs = Date.now(),
+): boolean {
+  return setPerformanceYear(s, nowMs) >= new Date(nowMs).getUTCFullYear();
 }
 
 export type StatusCountFields = Partial<Record<IdStatus, number>> | null | undefined;

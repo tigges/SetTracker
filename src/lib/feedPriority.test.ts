@@ -3,8 +3,10 @@ import { describe, it } from "node:test";
 import { loadDjMagFestivalRankBySlug } from "./djmagFestivalRanks";
 import { loadDjMagTop100RankBySlug } from "./djmagTop100";
 import {
+  compareDeepCatalog,
   compareEventSetPriority,
   compareFeedPriority,
+  isThisPerformanceYear,
   dedupeNearDuplicates,
   diversifyByArtist,
   diversifyBySeries,
@@ -165,6 +167,52 @@ describe("feedPriority complete → Top 100 → festivals", () => {
     ].sort(compareFeedPriority);
     assert.equal(sorted[0]?.venueTier, "radio");
     assert.equal(sorted[1]?.festivalRank, 1);
+  });
+
+  it("Deep catalog sorts by performance date, then density, then chart", () => {
+    const now = Date.parse("2026-08-16T12:00:00.000Z");
+    const sorted = [
+      {
+        id: "guetta-2024",
+        densitySeverity: "ok" as const,
+        top100Rank: 1,
+        festivalRank: 4,
+        publishedAt: "2024-05-01T00:00:00.000Z",
+      },
+      {
+        id: "alok-winter",
+        densitySeverity: "ok" as const,
+        top100Rank: 20,
+        festivalRank: 1,
+        publishedAt: "2026-03-15T00:00:00.000Z",
+      },
+      {
+        id: "lost-freq",
+        densitySeverity: "ok" as const,
+        top100Rank: 15,
+        festivalRank: 1,
+        publishedAt: "2026-07-20T00:00:00.000Z",
+      },
+      {
+        id: "thin-july",
+        densitySeverity: "thin" as const,
+        top100Rank: 2,
+        festivalRank: 1,
+        publishedAt: "2026-07-20T00:00:00.000Z",
+      },
+    ].sort(compareDeepCatalog);
+    assert.deepEqual(
+      sorted.map((s) => s.id),
+      ["lost-freq", "thin-july", "alok-winter", "guetta-2024"],
+    );
+    assert.equal(
+      isThisPerformanceYear({ publishedAt: "2026-03-15T00:00:00.000Z" }, now),
+      true,
+    );
+    assert.equal(
+      isThisPerformanceYear({ publishedAt: "2024-05-01T00:00:00.000Z" }, now),
+      false,
+    );
   });
 
   it("uses performedAt year, not a later upload publishedAt", () => {

@@ -269,7 +269,7 @@ export const SOUNDCLOUD_SHOWS: SoundCloudShow[] = [
     eventSlug: "tomorrowland",
     minDurationSec: 45 * 60,
     titleMatch:
-      /\b(friendship|academy|euphoria|mix|live|set|tomorrowland|one\s*world)\b/i,
+      /\b(friendship|academy|euphoria|mix|live|set|selects|tomorrowland|one\s*world)\b/i,
     // Base poll; festivalDrops phase-boosts after Belgium weekend.
     limit: Number(process.env.TOMORROWLAND_SC_LIMIT || 40),
   },

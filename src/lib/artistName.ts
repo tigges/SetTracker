@@ -146,6 +146,7 @@ export function isJunkArtistName(name: string): boolean {
   if (/\btv\s*$/i.test(n)) return true;
   if (/\bepisode\b/i.test(n) || /\bmixtape\b/i.test(n)) return true;
   if (/\bpresents\b/i.test(n) || /\bpresents?\s*$/i.test(n)) return true;
+  if (/\bselects\s*$/i.test(n)) return true;
   if (/\)+$/.test(n) && !n.includes("(")) return true;
   if (/\bfrom scratch\b/i.test(n)) return true;
   if (/\bmakes a\b/i.test(n) && /\btrack\b/i.test(n)) return true;
@@ -227,6 +228,8 @@ export function sanitizeArtistName(raw: string): string | null {
   n = stripFestivalEditionSuffix(n);
   // "Goodboys Present" → "Goodboys"
   n = n.replace(/\s+presents?\s*$/i, "").trim();
+  // "Laidback Luke SELECTS" → "Laidback Luke" (show brand, not a second DJ)
+  n = n.replace(/\s+selects\s*$/i, "").trim();
   // Scrape leftover: "Ginger)"
   if (/\)+$/.test(n) && !n.includes("(")) n = n.replace(/\)+$/g, "").trim();
   if (/^\(+/.test(n) && !n.includes(")")) n = n.replace(/^\(+/g, "").trim();

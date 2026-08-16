@@ -24,6 +24,7 @@ export const DJ_SLUG_ALIASES: Record<string, string> = {
   "sara-landry-live": "sara-landry",
   "defected-virtual-festival-4-0": "dom-dolla",
   "the-sydney-social-podcast-3": "dom-dolla",
+  "laidback-luke-selects": "laidback-luke",
 };
 
 /** "armin-van-buuren-we1" / "odd-mob-we-2" → real artist slug. */
@@ -31,7 +32,12 @@ export function foldWeekendEditionSlug(slug: string): string {
   return slug.replace(/-we-?[12]$/i, "").replace(/-weekend-?[12]$/i, "");
 }
 
+/** "laidback-luke-selects" → laidback-luke (show brand, not a second DJ). */
+export function foldSelectsSlug(slug: string): string {
+  return slug.replace(/-selects$/i, "");
+}
+
 export function canonicalDjSlug(slug: string): string {
-  const folded = foldWeekendEditionSlug(slug);
+  const folded = foldSelectsSlug(foldWeekendEditionSlug(slug));
   return DJ_SLUG_ALIASES[slug] ?? DJ_SLUG_ALIASES[folded] ?? folded;
 }

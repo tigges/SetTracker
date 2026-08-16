@@ -128,6 +128,9 @@ assert.equal(
   "Above & Beyond",
 );
 assert.equal(sanitizeArtistName("Goodboys Present"), "Goodboys");
+assert.equal(isJunkArtistName("Laidback Luke SELECTS"), true);
+assert.equal(isJunkArtistName("Laidback Luke"), false);
+assert.equal(sanitizeArtistName("Laidback Luke SELECTS"), "Laidback Luke");
 assert.equal(sanitizeArtistName("Ginger)"), "Ginger");
 assert.equal(sanitizeArtistName("Gaydio Mixes"), null);
 assert.equal(sanitizeArtistName("Gqom"), null);
