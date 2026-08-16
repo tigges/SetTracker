@@ -1,4 +1,5 @@
 import { isJunkArtistName } from "@/lib/artistName";
+import { playablePlaybackUrl } from "@/lib/playback";
 import { isBrandHostSlug } from "@/lib/brandHosts";
 import { isBrowseReadyDj } from "@/lib/djBrowse";
 import { prisma } from "@/lib/db";
@@ -144,7 +145,7 @@ export async function getFeed() {
         durationSec: s.durationSec,
         sourceName: s.sourceName,
         sourceUrl: s.sourceUrl,
-        playbackUrl: s.playbackUrl ?? s.sourceUrl,
+        playbackUrl: playablePlaybackUrl(s.playbackUrl, s.sourceUrl),
         cover: s.cover,
         imageUrl: s.imageUrl,
         eventName: s.event?.name ?? null,
@@ -239,7 +240,7 @@ export async function getSetBySlug(slug: string) {
     durationSec: set.durationSec,
     sourceName: set.sourceName,
     sourceUrl: set.sourceUrl,
-    playbackUrl: set.playbackUrl ?? set.sourceUrl,
+    playbackUrl: playablePlaybackUrl(set.playbackUrl, set.sourceUrl),
     cover: set.cover,
     imageUrl:
       set.imageUrl ??
@@ -1222,7 +1223,7 @@ export async function getVenueBySlug(slug: string) {
         statusCounts: tally?.counts ?? emptyCounts(),
         sourceName: s.sourceName,
         sourceUrl: s.sourceUrl,
-        playbackUrl: s.playbackUrl ?? s.sourceUrl,
+        playbackUrl: playablePlaybackUrl(s.playbackUrl, s.sourceUrl),
         cover: s.cover,
         eventName: event.name,
         eventSlug: event.slug,

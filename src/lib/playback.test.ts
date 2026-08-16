@@ -2,6 +2,8 @@ import assert from "node:assert/strict";
 import {
   detectPlaybackHost,
   hearthisEmbedUrl,
+  isPlayablePlaybackUrl,
+  playablePlaybackUrl,
   playbackUrlFromSource,
   resolvePlaybackTarget,
 } from "./playback";
@@ -28,20 +30,34 @@ assert.ok(sc);
 assert.equal(sc!.host, "soundcloud");
 assert.ok(sc!.embedSrc.includes("w.soundcloud.com/player"));
 
-const ht = resolvePlaybackTarget(
-  "https://app.hearthis.at/embed/11283178/transparent_black/",
-  { sourceUrl: "https://hearthis.at/shaun-mbetse/busted-deep-birthday-mix-2024/" },
-);
-assert.ok(ht);
-assert.equal(ht!.host, "hearthis");
 assert.equal(
-  ht!.openUrl,
-  "https://hearthis.at/shaun-mbetse/busted-deep-birthday-mix-2024/",
+  resolvePlaybackTarget(
+    "https://app.hearthis.at/embed/11283178/transparent_black/",
+    { sourceUrl: "https://hearthis.at/shaun-mbetse/busted-deep-birthday-mix-2024/" },
+  ),
+  null,
 );
-
 assert.equal(
   resolvePlaybackTarget("https://hearthis.at/shaun-mbetse/mix/"),
   null,
+);
+assert.equal(
+  isPlayablePlaybackUrl("https://app.hearthis.at/embed/11283178/transparent_black/"),
+  false,
+);
+assert.equal(
+  playablePlaybackUrl(
+    "https://app.hearthis.at/embed/1/transparent_black/",
+    "https://hearthis.at/a/b/",
+  ),
+  null,
+);
+assert.equal(
+  playablePlaybackUrl(
+    "https://app.hearthis.at/embed/1/transparent_black/",
+    "https://soundcloud.com/a/b",
+  ),
+  "https://soundcloud.com/a/b",
 );
 
 const yt = resolvePlaybackTarget("https://youtu.be/dQw4w9WgXcQ");

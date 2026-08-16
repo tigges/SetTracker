@@ -12,7 +12,6 @@ import {
 } from "../src/lib/ingest/hearthis/client";
 import { parseDescriptionTracklist } from "../src/lib/ingest/soundcloud/parseTracklist";
 import { slugify, type RawSet, type SourceAdapter } from "../src/lib/ingest/types";
-import { hearthisEmbedUrl } from "../src/lib/playback";
 import {
   preferredExternalPlaybackFromText,
   resolveSoundCloudTrackUrl,
@@ -38,17 +37,15 @@ async function buildRaw(user: string, track: string): Promise<RawSet> {
   const sourceSlug = `ht-${user}-${slugify(track)}`.slice(0, 120);
   const sourceUrl =
     detail.permalink_url || `https://hearthis.at/${user}/${track}/`;
-  const htPlay =
-    detail.id != null ? hearthisEmbedUrl(detail.id) : undefined;
   const external = preferredExternalPlaybackFromText(
     detail.description,
     detail.buy_link,
   );
-  let playbackUrl = htPlay;
+  let playbackUrl: string | undefined;
   let type: RawSet["type"] = "mix";
   if (external?.host === "soundcloud") {
     playbackUrl =
-      (await resolveSoundCloudTrackUrl(external.playbackUrl)) ?? htPlay;
+      (await resolveSoundCloudTrackUrl(external.playbackUrl)) ?? undefined;
     if (playbackUrl && /soundcloud\.com\//i.test(playbackUrl)) {
       type = "soundcloud";
     }
