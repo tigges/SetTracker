@@ -107,6 +107,16 @@ describe("resolveCanonicalFromSetTitleDj", () => {
     );
   });
 
+  it("folds Laidback Luke SELECTS onto Laidback Luke", () => {
+    assert.deepEqual(
+      resolveCanonicalFromSetTitleDj(
+        "Laidback Luke SELECTS",
+        "laidback-luke-selects",
+      ),
+      { slug: "laidback-luke", name: "Laidback Luke" },
+    );
+  });
+
   it("reads the guest off a label radio title", () => {
     assert.equal(
       guestFromSeriesByTitle("Keinemusik Radio Show by Lara Bee 17.07.2026"),

@@ -12,6 +12,7 @@ import {
 import { CURATED_LABEL_SLUGS } from "@/lib/ingest/curatedLabels";
 import { relatedSlugsFor } from "@/lib/ingest/discovery/relations";
 import { aliasSlugsFor, resolveSetSlug } from "@/lib/ingest/sourceRemaps";
+import { canonicalDjSlug, DJ_SLUG_ALIASES } from "@/lib/ingest/djSlugAliases";
 import {
   compareEventSetPriority,
   nearDuplicateKey,
@@ -539,8 +540,9 @@ export function calendarMarkedDays(
 // DJ profile hub
 // ---------------------------------------------------------------------------
 export async function getDjBySlug(slug: string) {
+  const mapped = canonicalDjSlug(slug);
   const dj = await prisma.dj.findUnique({
-    where: { slug },
+    where: { slug: mapped },
     include: { series: { include: { _count: { select: { sets: true } } } } },
   });
   if (!dj) return null;
@@ -1113,7 +1115,7 @@ export async function getAllDjSlugs() {
     },
     select: { slug: true, name: true },
   });
-  return rows
+  const slugs = rows
     .filter(
       (r) =>
         !isBrandHostSlug(r.slug) &&
@@ -1122,6 +1124,11 @@ export async function getAllDjSlugs() {
             !/^view-artist-details-for-/.test(r.slug))),
     )
     .map((r) => r.slug);
+  const have = new Set(slugs);
+  const aliases = Object.entries(DJ_SLUG_ALIASES)
+    .filter(([, canon]) => have.has(canon))
+    .map(([alias]) => alias);
+  return [...slugs, ...aliases.filter((a) => !have.has(a))];
 }
 
 // ---------------------------------------------------------------------------

@@ -65,6 +65,7 @@ const EXPLICIT_ALIAS: Record<string, string> = {
   "mochakk-at-plaza-de-espana-in-sevilla-spain-for-cercle": "mochakk",
   "folamour-at-cathedrale-saint-pierre-in-geneva-switzerland-for-cercle":
     "folamour",
+  "laidback-luke-selects": "laidback-luke",
 };
 
 const MEGA_MIX =
@@ -202,6 +203,7 @@ function stripDecor(name: string): string {
 function displayNameForSlug(slug: string, fallbackName: string): string {
   const known: Record<string, string> = {
     "dom-dolla": "Dom Dolla",
+    "laidback-luke": "Laidback Luke",
     "odd-mob": "Odd Mob",
     "james-hype": "James Hype",
     "sara-landry": "Sara Landry",

@@ -150,6 +150,10 @@ assert.equal(
   "Japhet Be",
 );
 assert.equal(
+  performingCreditFromTitle("Laidback Luke SELECTS - August, 2026"),
+  "Laidback Luke",
+);
+assert.equal(
   performingCreditFromTitle(
     "Keinemusik Radio Show by Lara Bee 17.07.2026",
   ),
