@@ -233,19 +233,28 @@ function isGenreTagKey(key: string): boolean {
   return lookupKey(key) != null;
 }
 
+/** "House, Tech & Minimal: 12.03.22" — date crumb after a genre list. */
+const GENRE_DATE_CRUMB =
+  /(?:[:\-–—|]\s*)?(?:\d{1,2}[.\/-]\d{1,2}[.\/-]\d{2,4}|\d{4}[.\/-]\d{1,2}[.\/-]\d{1,2})\s*$/;
+
+function stripGenreDateCrumb(name: string): string {
+  return name.replace(GENRE_DATE_CRUMB, "").replace(/[:\-–—|]\s*$/, "").trim();
+}
+
 /**
  * True when the whole string is only genre tokens — one chip ("Afro House")
- * or a list ("House, Tech" → House + Tech House). Leftover person words
+ * or a list ("House, Tech" → House + Tech House). Trailing dates are ignored
+ * ("House, Tech & Minimal: 12.03.22"). Leftover person words
  * ("House of Yes", "Fisher House") stay false.
  */
 export function isGenreTagName(name: string | null | undefined): boolean {
   if (name == null) return false;
-  const trimmed = String(name).replace(/\s+/g, " ").trim();
+  const trimmed = stripGenreDateCrumb(String(name).replace(/\s+/g, " ").trim());
   if (!trimmed) return false;
   // Punctuation collapses ("House, Tech" → "house tech" → Tech House).
   if (isGenreTagKey(genreKey(trimmed))) return true;
   const parts = trimmed
-    .split(/\s*(?:[/|,;]+|\band\b|&)\s*/i)
+    .split(/\s*(?:[/|,;:]+|\band\b|&)\s*/i)
     .map((p) => p.trim())
     .filter(Boolean);
   if (parts.length < 2) return false;

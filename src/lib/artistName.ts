@@ -184,7 +184,7 @@ export function isJunkArtistName(name: string): boolean {
     return true;
   }
   // Tiny event / publisher accounts mistaken for DJs (not a catalog Event).
-  if (/^soweto\s*punk$/i.test(n)) return true;
+  if (/soweto\s*punk/i.test(n)) return true;
   // Festival stages mistaken for artists ("Freedom Stage", "Mainstage")
   if (/\bstages?\s*$/i.test(n) || /^main\s*stage$/i.test(n)) return true;
   // Set-title crumbs: "OMNOM EDC Las Vegas 2024", "Artist Tomorrowland 2026"
