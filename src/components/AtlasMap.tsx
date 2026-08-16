@@ -25,6 +25,7 @@ import {
   chartKicker,
   filterAtlasPins,
   ATLAS_INITIAL_VIEW,
+  atlasFitView,
   atlasViewBox,
   flyToSpan,
   toggleAtlasKind,
@@ -335,27 +336,12 @@ export function AtlasMap({
   }, []);
 
   function fitHits() {
-    if (!mappedHits.length) return;
     const svg = svgRef.current;
     if (!svg) return;
-    const xs = mappedHits.map((d) => d.x);
-    const ys = mappedHits.map((d) => d.y);
-    const minX = Math.min(...xs);
-    const maxX = Math.max(...xs);
-    const minY = Math.min(...ys);
-    const maxY = Math.max(...ys);
     const r = svg.getBoundingClientRect();
-    const w = r.width || 1;
-    const h = r.height || 1;
-    const span = Math.max(
-      (maxX - minX) * 1.45,
-      (maxY - minY) * 1.45 * (w / h),
-      6,
-    );
-    const view = viewRef.current;
-    view.cx = (minX + maxX) / 2;
-    view.cy = (minY + maxY) / 2;
-    view.span = span;
+    const next = atlasFitView(mappedHits, (r.width || 1) / (r.height || 1));
+    if (!next) return;
+    Object.assign(viewRef.current, next);
     (svg as SvgWithView).__applyView?.();
   }
 

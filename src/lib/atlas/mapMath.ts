@@ -68,6 +68,32 @@ export function toggleAtlasKind(
 /** Default world frame (SVG units). Must stay near the 0..1000 land path. */
 export const ATLAS_INITIAL_VIEW = { cx: 500, cy: 430, span: 900 };
 
+/** Floor for auto-fit — country/city frames must not blow pins up. */
+export const ATLAS_FIT_MIN_SPAN = 80;
+
+export function atlasFitView(
+  points: { x: number; y: number }[],
+  aspectWoverH: number,
+  minSpan = ATLAS_FIT_MIN_SPAN,
+): { cx: number; cy: number; span: number } | null {
+  if (!points.length) return null;
+  const xs = points.map((p) => p.x);
+  const ys = points.map((p) => p.y);
+  const minX = Math.min(...xs);
+  const maxX = Math.max(...xs);
+  const minY = Math.min(...ys);
+  const maxY = Math.max(...ys);
+  return {
+    cx: (minX + maxX) / 2,
+    cy: (minY + maxY) / 2,
+    span: Math.max(
+      (maxX - minX) * 1.45,
+      (maxY - minY) * 1.45 * aspectWoverH,
+      minSpan,
+    ),
+  };
+}
+
 /** ViewBox `[x, y, w, h]` for a pane size. Span is width; height follows aspect. */
 export function atlasViewBox(
   view: { cx: number; cy: number; span: number },

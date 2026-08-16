@@ -6,6 +6,8 @@ import {
   atlasCities,
   atlasCountries,
   atlasClusterRadius,
+  atlasFitView,
+  ATLAS_FIT_MIN_SPAN,
   atlasPinClass,
   atlasPinIdFromTarget,
   atlasPinsNear,
@@ -234,6 +236,15 @@ describe("DJ Mag 2026 atlas seed", () => {
     );
     assert.deepEqual(cluster.map((p) => p.id), ["a", "b"]);
     assert.ok(atlasClusterRadius(900) >= 6);
+    const tight = atlasFitView(
+      [
+        { x: 10, y: 10 },
+        { x: 12, y: 11 },
+      ],
+      1,
+    );
+    assert.equal(tight?.span, ATLAS_FIT_MIN_SPAN);
+    assert.ok((atlasFitView([{ x: 0, y: 0 }, { x: 200, y: 0 }], 1)?.span ?? 0) > ATLAS_FIT_MIN_SPAN);
   });
 });
 
