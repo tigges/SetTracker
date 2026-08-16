@@ -166,3 +166,22 @@ export function flyToSpan(p: Pick<AtlasPin, "kind" | "prec" | "nomap">): number 
   if (p.kind === "dj" && p.prec === "country") return 240;
   return 80;
 }
+
+/** Pin id from a map pointer target (`[data-atlas-pin]` on the hit circle / group). */
+export function atlasPinIdFromTarget(target: EventTarget | null): string | null {
+  if (!target || typeof (target as Element).closest !== "function") return null;
+  const el = (target as Element).closest("[data-atlas-pin]");
+  const id = el?.getAttribute("data-atlas-pin")?.trim();
+  return id || null;
+}
+
+/** True when a pointer left the tap slop — treat as a pan, not a pin select. */
+export function atlasTapMoved(
+  from: { x: number; y: number },
+  to: { x: number; y: number },
+  thresholdPx = 8,
+): boolean {
+  const dx = to.x - from.x;
+  const dy = to.y - from.y;
+  return dx * dx + dy * dy > thresholdPx * thresholdPx;
+}

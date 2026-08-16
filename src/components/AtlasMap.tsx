@@ -17,6 +17,8 @@ import {
   atlasCities,
   atlasCountries,
   atlasPinClass,
+  atlasPinIdFromTarget,
+  atlasTapMoved,
   chartKicker,
   filterAtlasPins,
   ATLAS_INITIAL_VIEW,
@@ -125,6 +127,7 @@ export function AtlasMap({
   });
   const [clickedId, setClickedId] = useState<string | null>(null);
   const [listOpen, setListOpen] = useState(false);
+  const selectByIdRef = useRef<(id: string) => void>(() => {});
 
   const activeFilter = {
     ...filter,
@@ -163,6 +166,8 @@ export function AtlasMap({
       y: number;
       cx: number;
       cy: number;
+      pinId: string | null;
+      moved: boolean;
     } | null = null;
 
     function size() {
@@ -179,8 +184,12 @@ export function AtlasMap({
         svg!.setAttribute("viewBox", vb.map((n) => n.toFixed(2)).join(" "));
       }
       const r = Math.max(0.9, view.span * 0.0052);
+      const hit = Math.max(r * 2.8, view.span * 0.012);
       svg!.querySelectorAll<SVGCircleElement>(".atlas-pin").forEach((c) => {
         c.setAttribute("r", r.toFixed(2));
+      });
+      svg!.querySelectorAll<SVGCircleElement>(".atlas-hit").forEach((c) => {
+        c.setAttribute("r", hit.toFixed(2));
       });
       const halo = svg!.querySelector(".atlas-halo");
       if (halo) halo.setAttribute("r", (r * 2.6).toFixed(2));
@@ -200,12 +209,28 @@ export function AtlasMap({
     if (svg.parentElement) ro.observe(svg.parentElement);
 
     function onDown(e: PointerEvent) {
-      drag = { x: e.clientX, y: e.clientY, cx: view.cx, cy: view.cy };
+      if (e.button !== 0) return;
+      drag = {
+        x: e.clientX,
+        y: e.clientY,
+        cx: view.cx,
+        cy: view.cy,
+        pinId: atlasPinIdFromTarget(e.target),
+        moved: false,
+      };
       svg!.setPointerCapture(e.pointerId);
-      svg!.classList.add("cursor-grabbing");
+      if (!drag.pinId) svg!.classList.add("cursor-grabbing");
     }
     function onMove(e: PointerEvent) {
       if (!drag) return;
+      if (
+        !drag.moved &&
+        atlasTapMoved({ x: drag.x, y: drag.y }, { x: e.clientX, y: e.clientY })
+      ) {
+        drag.moved = true;
+        svg!.classList.add("cursor-grabbing");
+      }
+      if (drag.pinId && !drag.moved) return;
       const { w } = size();
       const k = view.span / w;
       view.cx = drag.cx - (e.clientX - drag.x) * k;
@@ -213,6 +238,9 @@ export function AtlasMap({
       scheduleView();
     }
     function onUp() {
+      if (drag?.pinId && !drag.moved) {
+        selectByIdRef.current(drag.pinId);
+      }
       drag = null;
       svg!.classList.remove("cursor-grabbing");
     }
@@ -281,6 +309,14 @@ export function AtlasMap({
     }
   }, [hash, pins]);
 
+  useEffect(() => {
+    if (!selectedId) return;
+    const row = document.querySelector(
+      `[data-atlas-row="${CSS.escape(selectedId)}"]`,
+    );
+    row?.scrollIntoView({ block: "nearest" });
+  }, [selectedId, listOpen]);
+
   function fitHits() {
     if (!mappedHits.length) return;
     const svg = svgRef.current;
@@ -326,7 +362,9 @@ export function AtlasMap({
   function selectPin(p: AtlasPin) {
     setClickedId(p.id);
     if (typeof window !== "undefined") {
-      history.replaceState(null, "", `#${p.slug}`);
+      const next = `${window.location.pathname}${window.location.search}#${p.slug}`;
+      history.replaceState(null, "", next);
+      window.dispatchEvent(new HashChangeEvent("hashchange"));
     }
     if (!p.nomap) {
       flyToPin(
@@ -337,6 +375,11 @@ export function AtlasMap({
       );
     }
   }
+
+  selectByIdRef.current = (id: string) => {
+    const p = pins.find((row) => row.id === id);
+    if (p) selectPin(p);
+  };
 
   function setType(type: AtlasTypeFilter) {
     setFilter((f) => ({ ...f, type }));
@@ -384,13 +427,16 @@ export function AtlasMap({
           <h1 className="pointer-events-none absolute top-3 left-1/2 z-10 -translate-x-1/2 text-[13px] font-semibold text-ink/90 lg:hidden">
             Top 100 Atlas
           </h1>
-          <button
-            type="button"
-            className="absolute top-3 left-3 z-10 rounded-md border border-line bg-panel/90 px-2 py-1 text-[12px] text-muted lg:hidden"
-            onClick={() => setListOpen((v) => !v)}
-          >
-            {listOpen ? "Hide list" : "Show list"}
-          </button>
+          <div className="absolute top-3 left-3 z-10 flex max-w-[min(100%-5.5rem,22rem)] flex-col gap-2">
+            <button
+              type="button"
+              className="w-fit rounded-md border border-line bg-panel/90 px-2 py-1 text-[12px] text-muted lg:hidden"
+              onClick={() => setListOpen((v) => !v)}
+            >
+              {listOpen ? "Hide ranks" : "Show ranks"}
+            </button>
+            <TypeBar type={filter.type} onType={setType} />
+          </div>
           <div className="absolute top-3 right-3 z-10 grid gap-1.5">
             <button
               type="button"
@@ -420,18 +466,22 @@ export function AtlasMap({
             <rect width="1000" height="1000" x="-200" y="-200" fill="#07090d" />
             <path d={WORLD_LAND_PATH} className="atlas-land" />
             {mappedHits.map((p) => (
-              <circle
-                key={p.id}
-                className={`atlas-pin ${atlasPinClass(p.kind)}`}
-                cx={p.x}
-                cy={p.y}
-                r={4}
-                data-on={selectedId === p.id ? "true" : undefined}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  selectPin(p);
-                }}
-              />
+              <g key={p.id} data-atlas-pin={p.id}>
+                <circle
+                  className="atlas-hit"
+                  data-atlas-pin={p.id}
+                  cx={p.x}
+                  cy={p.y}
+                  r={10}
+                />
+                <circle
+                  className={`atlas-pin ${atlasPinClass(p.kind)}`}
+                  cx={p.x}
+                  cy={p.y}
+                  r={4}
+                  data-on={selectedId === p.id ? "true" : undefined}
+                />
+              </g>
             ))}
             {selected && mappedHits.some((h) => h.id === selected.id) ? (
               <circle
@@ -537,30 +587,6 @@ export function AtlasMap({
           }`}
         >
           <div className="grid gap-3 border-b border-line p-3">
-            <div className="flex overflow-hidden rounded-lg border border-line">
-              {(
-                [
-                  ["all", "All"],
-                  ["festival", "Fests"],
-                  ["club", "Clubs"],
-                  ["dj", "DJs"],
-                ] as const
-              ).map(([value, label]) => (
-                <button
-                  key={value}
-                  type="button"
-                  aria-pressed={filter.type === value}
-                  onClick={() => setType(value)}
-                  className={`flex-1 px-1 py-1.5 text-[11px] font-medium ${
-                    filter.type === value
-                      ? "bg-panel2 text-ink"
-                      : "text-muted hover:text-ink"
-                  }`}
-                >
-                  {label}
-                </button>
-              ))}
-            </div>
             <div className="grid grid-cols-2 gap-2">
               <label className="grid gap-1">
                 <span className="eyebrow">Country</span>
@@ -635,6 +661,7 @@ export function AtlasMap({
                 <button
                   key={p.id}
                   type="button"
+                  data-atlas-row={p.id}
                   data-on={selectedId === p.id ? "true" : undefined}
                   onClick={() => selectPin(p)}
                   className={`grid w-full grid-cols-[36px_1fr] items-center gap-2 border-l-2 px-3 py-2 text-left ${
@@ -677,6 +704,46 @@ export function AtlasMap({
           </div>
         </aside>
       </div>
+    </div>
+  );
+}
+
+function TypeBar({
+  type,
+  onType,
+}: {
+  type: AtlasTypeFilter;
+  onType: (type: AtlasTypeFilter) => void;
+}) {
+  return (
+    <div
+      className="flex overflow-hidden rounded-lg border border-line bg-panel/90 shadow-sm shadow-black/30"
+      role="group"
+      aria-label="Map layers"
+    >
+      {(
+        [
+          ["all", "All", null],
+          ["festival", "Fests", "bg-amber"],
+          ["club", "Clubs", "bg-teal"],
+          ["dj", "DJs", "bg-violet"],
+        ] as const
+      ).map(([value, label, swatch]) => (
+        <button
+          key={value}
+          type="button"
+          aria-pressed={type === value}
+          onClick={() => onType(value)}
+          className={`flex flex-1 items-center justify-center gap-1 px-1.5 py-1.5 text-[11px] font-medium ${
+            type === value ? "bg-panel2 text-ink" : "text-muted hover:text-ink"
+          }`}
+        >
+          {swatch ? (
+            <i className={`inline-block h-2 w-2 rounded-full ${swatch}`} />
+          ) : null}
+          {label}
+        </button>
+      ))}
     </div>
   );
 }

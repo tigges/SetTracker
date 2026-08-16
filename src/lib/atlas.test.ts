@@ -6,6 +6,8 @@ import {
   atlasCities,
   atlasCountries,
   atlasPinClass,
+  atlasPinIdFromTarget,
+  atlasTapMoved,
   atlasViewBox,
   chartKicker,
   filterAtlasPins,
@@ -194,6 +196,9 @@ describe("DJ Mag 2026 atlas seed", () => {
     assert.equal(chartKicker("dj", 1, 2025), "DJ · No. 1 · 2025");
     assert.equal(atlasAccent("dj"), "var(--violet)");
     assert.equal(atlasPinClass("dj"), "atlas-pin-dj");
+    assert.equal(atlasTapMoved({ x: 0, y: 0 }, { x: 3, y: 3 }), false);
+    assert.equal(atlasTapMoved({ x: 0, y: 0 }, { x: 10, y: 0 }), true);
+    assert.equal(atlasPinIdFromTarget(null), null);
   });
 });
 
