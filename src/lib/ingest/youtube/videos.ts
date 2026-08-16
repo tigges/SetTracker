@@ -86,6 +86,7 @@ import {
   TL_CALVIN_HARRIS_MAINSTAGE_DANCE_VALLEY_NETHERLANDS_2026,
   TL_TUJAMO_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
   TL_DILLON_FRANCIS_AND_MARTEN_HORGER_MAINSTAGE_PAROOKAVILLE_GERMANY_2025,
+  TL_MIKE_WILLIAMS_TIME_LAB_PAROOKAVILLE_GERMANY_2026,
   TL_MISS_MONIQUE_TML_WE2_2026,
   TL_NICKY_ROMERO_TML_WE2_2026,
   TL_ODD_MOB_TML_WE2_2026,
@@ -1511,6 +1512,19 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
       "https://www.1001tracklists.com/tracklist/2gsy0kp1/dillon-francis-marten-horger-mainstage-parookaville-germany-2025-07-20.html",
     tracklist1001:
       TL_DILLON_FRANCIS_AND_MARTEN_HORGER_MAINSTAGE_PAROOKAVILLE_GERMANY_2025,
+  },
+  {
+    // Official Parookaville channel — Time Lab 2026-07-19.
+    video: "https://www.youtube.com/watch?v=XisbmW1Smgc",
+    primaryArtist: dj("Mike Williams", { accent: "#e9c46a" }),
+    genre: "Future House",
+    type: "festival",
+    title: "Mike Williams | Time Lab, Parookaville 2026",
+    seriesName: "Parookaville",
+    eventName: "Parookaville",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1muxp6s1/mike-williams-time-lab-parookaville-germany-2026-07-19.html",
+    tracklist1001: TL_MIKE_WILLIAMS_TIME_LAB_PAROOKAVILLE_GERMANY_2026,
   },
   {
     video: "https://www.youtube.com/watch?v=6bJZPDKlq7o",

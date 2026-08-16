@@ -53,6 +53,7 @@ const TUJAMO_PAROOKAVILLE = YOUTUBE_SETS.find((s) =>
 const DF_MH_PAROOKAVILLE = YOUTUBE_SETS.find((s) =>
   s.video.includes("IwNPc_4ux84"),
 );
+const MW_TIME_LAB = YOUTUBE_SETS.find((s) => s.video.includes("XisbmW1Smgc"));
 
 describe("watchMetaFromCuratedSeed", () => {
   it("builds ASOT 1290 meta from the curated 1001 capture", () => {
@@ -195,6 +196,17 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=IwNPc_4ux84");
     // Last cue 59:30 + 180s pad.
     assert.equal(meta.durationSec, 59 * 60 + 30 + 180);
+  });
+
+  it("builds Mike Williams Time Lab Parookaville meta from the curated 1001 capture", () => {
+    assert.ok(MW_TIME_LAB);
+    const meta = watchMetaFromCuratedSeed(MW_TIME_LAB);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "XisbmW1Smgc");
+    assert.match(meta.title, /Time Lab|Parookaville/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=XisbmW1Smgc");
+    // Last cue 56:09 + 180s pad.
+    assert.equal(meta.durationSec, 56 * 60 + 9 + 180);
   });
 
   it("builds Vintage Culture NYC Yacht meta from the curated 1001 capture", () => {
@@ -881,5 +893,20 @@ describe("curated YouTube 429 fallback", () => {
       sets[0]?.collaborators?.some((c) => c.slug === "marten-horger"),
     );
     assert.match(String(sets[0]?.eventName ?? ""), /Parookaville/i);
+  });
+
+  it("lands Mike Williams Time Lab Parookaville from the 1001 seed when watch is 429", async () => {
+    assert.ok(MW_TIME_LAB);
+    const adapter = createYoutubeAdapter([MW_TIME_LAB], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-XisbmW1Smgc");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 50);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 56 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "mike-williams");
+    assert.match(String(sets[0]?.eventName ?? ""), /Parookaville/i);
+    assert.match(String(sets[0]?.title ?? ""), /Time Lab/i);
   });
 });

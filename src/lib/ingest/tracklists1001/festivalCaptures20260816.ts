@@ -1238,4 +1238,66 @@ export const TL_DILLON_FRANCIS_AND_MARTEN_HORGER_MAINSTAGE_PAROOKAVILLE_GERMANY_
   { at: "59:30", artist: "Freaks & Geeks", title: "Rave Is Life" },
 ];
 
+/**
+ * Mike Williams @ Time Lab, Parookaville, Germany 2026-07-19
+ * https://www.1001tracklists.com/tracklist/1muxp6s1/mike-williams-time-lab-parookaville-germany-2026-07-19.html
+ * Official YT: https://youtu.be/XisbmW1Smgc
+ * Capture overlay used TL_Mike-Williams_Time-Lab_Parookaville_Germany_2026
+ * (hyphens illegal); constant is TL_MIKE_WILLIAMS_TIME_LAB_PAROOKAVILLE_GERMANY_2026.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-XisbmW1Smgc"]
+ * Captured 2026-08-16 - provenance 1001tl.
+ */
+export const TL_MIKE_WILLIAMS_TIME_LAB_PAROOKAVILLE_GERMANY_2026: FingerprintSeedRow[] = [
+  { at: "0:10", artist: "Mike Williams & Brooks", title: "Drop The Pressure" },
+  { at: "2:10", artist: "Spice Girls", title: "Wannabe" },
+  { at: "3:01", artist: "Mike Williams ft. DTale", title: "Living On Video (VIP Mix)" },
+  { at: "3:45", artist: "Lucas & Steve", title: "Renegade Master" },
+  { at: "4:29", artist: "Mike Williams & Philip Strand", title: "All My Life (In My Heart)" },
+  { at: "5:28", artist: "Avicii", title: "Levels (Acappella)" },
+  { at: "6:27", artist: "Lady GaGa ft. Colby O'Donis", title: "Just Dance (ACRAZE Remix)" },
+  { at: "8:01", artist: "Nari & Milani", title: "Atom (SQU4RE 2024 Edit)" },
+  { at: "8:41", artist: "Mightyfools", title: "Footrocker (Get Your, Get Your Hands Up Acappella)" },
+  { at: "9:20", artist: "Mike Williams & Brooks & WHAT EVA", title: "Illusion" },
+  { at: "10:20", artist: "DJ KUBA & NEITAN x Bounce Inc.", title: "Blade" },
+  { at: "11:31", artist: "Axwell & Sebastian Ingrosso & Steve Angello & Laidback Luke ft. Deborah Cox", title: "Leave The World Behind" },
+  { at: "13:40", artist: "Mike Williams & Mesto & Sasha Rangas vs. Zombie Nation", title: "Wait Another Day vs. Kernkraft 400 (Mike Williams Mashup)" },
+  { at: "15:26", artist: "Zombie Nation", title: "Kernkraft 400 (W&W Remix)" },
+  { at: "17:12", artist: "Mike Williams & Mesto ft. Sasha Rangas", title: "Wait Another Day" },
+  { at: "18:58", artist: "Mike Williams", title: "The Beat (Mike Williams Techno Edit)" },
+  { at: "19:58", artist: "Tiësto & Mike Williams", title: "I Want You" },
+  { at: "20:58", artist: "Madonna", title: "Music (Acappella)" },
+  { at: "21:58", artist: "Swedish House Mafia & Knife Party ft. ADL", title: "Antidote (Duer Remix)" },
+  { at: "22:55", artist: "Mike Williams & Bruno Martini & Stephen Puth", title: "Multiply" },
+  { at: "24:57", artist: "Swedish House Mafia ft. John Martin", title: "Save The World (Acappella)" },
+  { at: "26:58", artist: "Mike Williams & NOME.", title: "Back To Life" },
+  { at: "27:54", artist: "Mightyfools", title: "Footrocker (Get Your, Get Your Hands Up Acappella)" },
+  { at: "28:50", artist: "R3HAB & Mike Williams ft. Mary Jane Smith", title: "Lullaby" },
+  { at: "29:46", artist: "Steve Angello & Laidback Luke ft. Rowetta", title: "Be" },
+  { at: "30:47", artist: "Florence + The Machine", title: "You've Got The Love (Acappella)" },
+  { at: "31:48", artist: "Mightyfools", title: "Footrocker (Get Your, Get Your Hands Up Acappella)" },
+  { at: "32:49", artist: "Fatima Yamaha", title: "What's A Girl To Do" },
+  { at: "34:28", artist: "Faithless", title: "Insomnia" },
+  { at: "36:07", artist: "Cloonee & Prospa", title: "Free Your Mind (Mike Williams Remix)" },
+  { at: "37:45", artist: "Calvin Harris vs. Mike Williams", title: "Feel So Close vs. Rocket (Mike Williams Mashup)" },
+  { at: "38:10", artist: "Calvin Harris", title: "Feel So Close (Acappella)" },
+  { at: "38:36", artist: "Mike Williams", title: "Rocket" },
+  { at: "39:01", artist: "Quintino & Mike Williams", title: "Let Me Be Your Fantasy" },
+  { at: "39:42", artist: "Tove Lo", title: "Habits (Stay High) (Acappella)" },
+  { at: "40:23", artist: "Wildchild", title: "Renegade Master (Acappella)" },
+  { at: "41:03", artist: "Mike Williams", title: "The System" },
+  { at: "42:08", artist: "Sebastien Benett", title: "Let Me See Those Hands (Acappella)" },
+  { at: "43:13", artist: "Tom Odell", title: "Another Love" },
+  { at: "44:22", artist: "Corey James & IMAN", title: "Paranoia" },
+  { at: "45:32", artist: "Florence + The Machine", title: "Spectrum (Say My Name) (Acappella)" },
+  { at: "46:41", artist: "Porter Robinson ft. Bright Lights", title: "Language" },
+  { at: "47:47", artist: "Mike Williams ft. Moa Lisa", title: "Make You Mine" },
+  { at: "48:52", artist: "Martin Garrix & Third ≡ Party ft. Oaks & Declan J Donovan", title: "Carry You" },
+  { at: "49:58", artist: "Mike Williams ft. Benjamin Ingrosso & Jaimes", title: "Best Part Missing" },
+  { at: "51:03", artist: "ANOTR ft. 54 Ultra", title: "Talk To You (Hardwell Bootleg)" },
+  { at: "52:52", artist: "Kate Ryan", title: "Désenchantée (Mike Williams Remix)" },
+  { at: "54:03", artist: "AFROJACK & Mike Williams", title: "Alone" },
+  { at: "55:06", artist: "Axwell Λ Ingrosso", title: "More Than You Know (Acappella)" },
+  { at: "56:09", artist: "Mike Williams & Oaks", title: "I'll Do It" },
+];
+
 
