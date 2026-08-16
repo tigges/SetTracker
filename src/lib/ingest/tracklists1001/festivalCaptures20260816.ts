@@ -1375,4 +1375,78 @@ export const TL_HARDWELL_MAINSTAGE_PAROOKAVILLE_GERMANY_2026: FingerprintSeedRow
   { at: "1:19:07", artist: "Hardwell & Sound Rush", title: "IRIS" },
 ];
 
+/**
+ * DubVision @ Mainstage, Parookaville, Germany 2026-07-19
+ * https://www.1001tracklists.com/tracklist/uq5pqjt/dubvision-mainstage-parookaville-germany-2026-07-19.html
+ * Official YT: https://youtu.be/UETk8HSB0Yw
+ * Capture overlay used TL_DubVision_Mainstage_Parookaville_Germany_2026
+ * (mixed-case overlay id); constant is TL_DUBVISION_MAINSTAGE_PAROOKAVILLE_GERMANY_2026.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-UETk8HSB0Yw"]
+ * Captured 2026-08-16 - provenance 1001tl.
+ */
+export const TL_DUBVISION_MAINSTAGE_PAROOKAVILLE_GERMANY_2026: FingerprintSeedRow[] = [
+  { at: "0:11", artist: "DubVision vs. Martin Garrix & Bebe Rexha", title: "Rise Again vs. In The Name Of Love (DubVision Mashup)" },
+  { at: "1:31", artist: "Martin Garrix & Bebe Rexha", title: "In The Name Of Love (Acappella)" },
+  { at: "2:52", artist: "DubVision", title: "Rise Again" },
+  { at: "4:12", artist: "Armin van Buuren & JOA", title: "Heavy" },
+  { at: "5:28", artist: "Martin Garrix & Third ≡ Party & Max McElligott", title: "Keep On Loving You vs. Lions In The Wild (Third ≡ Party Mashup)" },
+  { at: "6:27", artist: "Martin Garrix & Third ≡ Party ft. Max McElligott", title: "Lions In The Wild (Acappella)" },
+  { at: "7:25", artist: "Third ≡ Party", title: "Keep On Loving You" },
+  { at: "8:24", artist: "John Summit ft. HAYLA", title: "Where You Are (Acappella)" },
+  { at: "9:22", artist: "DubVision", title: "Run" },
+  { at: "9:55", artist: "Fred again.. & Skrillex & Four Tet ft. Lil Baby", title: "Baby Again.." },
+  { at: "10:28", artist: "D-Jastic", title: "Up To No Good" },
+  { at: "11:02", artist: "Jamie Lewis ft. Michael Watford", title: "For You (Put Your Hands Up In The Air Acappella)" },
+  { at: "11:35", artist: "Roger Sanchez", title: "Another Chance (DubVision Remix)" },
+  { at: "14:11", artist: "John Newman", title: "Love Me Again (Again) (Third ≡ Party & DubVision Remix)" },
+  { at: "17:37", artist: "DubVision vs. David Guetta & Kid Cudi", title: "Like This vs. Memories (DubVision Mashup)" },
+  { at: "18:21", artist: "David Guetta ft. Kid Cudi", title: "Memories" },
+  { at: "19:05", artist: "DubVision", title: "Like This" },
+  { at: "19:48", artist: "DubVision & KDH & I-RIE ft. WHAT EVA", title: "Right Here (WDJF 2025 Anthem)" },
+  { at: "20:44", artist: "John Summit & Sub Focus ft. Julia Church", title: "Go Back (Acappella)" },
+  { at: "21:40", artist: "Lost Frequencies & Pickle", title: "Kick The Nation" },
+  { at: "23:22", artist: "Martin Garrix & DubVision ft. Shaun Farrugia", title: "Wherever You Are" },
+  { at: "25:32", artist: "Martin Garrix & Third ≡ Party ft. Oaks & Declan J Donovan", title: "Carry You" },
+  { at: "28:15", artist: "DubVision vs. Corona", title: "P.R.O.G.2 vs. The Rhythm Of The Night (DubVision Mashup)" },
+  { at: "28:45", artist: "Corona", title: "The Rhythm Of The Night (Acappella)" },
+  { at: "29:15", artist: "DubVision", title: "P.R.O.G.2" },
+  { at: "29:45", artist: "Mark Roma", title: "Demon" },
+  { at: "30:09", artist: "Technotronic", title: "Pump Up The Jam (Acappella)" },
+  { at: "30:34", artist: "Third ≡ Party & Pete K & Cory Lasser", title: "Like This" },
+  { at: "30:58", artist: "DubVision & SICK INDIVIDUALS", title: "Endless Dreamers" },
+  { at: "33:13", artist: "Matisse & Sadko", title: "Higher" },
+  { at: "33:42", artist: "Matt Caseli & Danny Freakazoid", title: "Raise Your Hands (Acappella)" },
+  { at: "34:10", artist: "Tiësto vs. Da Hool", title: "Meet Her" },
+  { at: "35:57", artist: "Coldplay", title: "A Sky Full Of Stars (Acappella)" },
+  { at: "37:43", artist: "DubVision vs. Tove Lo", title: "I'll Be There vs. Habits (DubVision Mashup)" },
+  { at: "38:26", artist: "Tove Lo", title: "Habits (Stay High) (Acappella)" },
+  { at: "39:10", artist: "DubVision", title: "I'll Be There" },
+  { at: "39:53", artist: "Sentinel", title: "Like Fire" },
+  { at: "41:07", artist: "Martin Garrix & DubVision vs. Avicii", title: "Empty vs. Levels (DubVision Mashup)" },
+  { at: "42:03", artist: "Avicii", title: "Levels (Acappella)" },
+  { at: "42:59", artist: "Martin Garrix & DubVision ft. Jaimes", title: "Empty" },
+  { at: "43:55", artist: "Martin Garrix & Dua Lipa", title: "Scared To Be Lonely (Acappella)" },
+  { at: "44:50", artist: "Sebastian Ingrosso & Alesso & Ryan Tedder vs. Martin Garrix & Dua Lipa", title: "Calling vs. Scared To Be Lonely (Martin Garrix Mashup)" },
+  { at: "45:17", artist: "Sebastian Ingrosso & Alesso ft. Ryan Tedder", title: "Calling (Lose My Mind)" },
+  { at: "45:45", artist: "Martin Garrix & Dua Lipa", title: "Scared To Be Lonely (Acappella)" },
+  { at: "46:12", artist: "R3HAB & Vion Konger & Skytech", title: "Ultimate" },
+  { at: "47:06", artist: "Alex Gaudino ft. Crystal Waters", title: "Destination Calabria" },
+  { at: "48:00", artist: "DubVision & Nicky Romero & Oaks vs. Robert Miles vs. Calvin Harris & Disciples", title: "Live My Life vs. Children vs. How Deep Is Your Love (Fuerte & Josué Rodriguez Mashup)" },
+  { at: "48:29", artist: "Robert Miles", title: "Children" },
+  { at: "48:58", artist: "Calvin Harris & Disciples ft. Ina Wroldsen", title: "How Deep Is Your Love" },
+  { at: "49:27", artist: "DubVision & Nicky Romero & Oaks", title: "Live My Life" },
+  { at: "49:55", artist: "Lucas & Steve & DubVision & Joe Taylor vs. Avicii & Sandro Cavazza", title: "Feel My Love vs. Without You (DubVision Mashup)" },
+  { at: "50:30", artist: "Avicii ft. Sandro Cavazza", title: "Without You (Acappella)" },
+  { at: "51:05", artist: "Lucas & Steve & DubVision ft. Joe Taylor", title: "Feel My Love (Festival Mix)" },
+  { at: "51:40", artist: "Supermode & MEDUZA vs. DubVision vs. Third ≡ Party & Max McElligott", title: "Tell Me Why vs. Turn It Around vs. Come With Me (Third ≡ Party Mashup)" },
+  { at: "51:59", artist: "DubVision", title: "Turn It Around" },
+  { at: "52:18", artist: "Third ≡ Party ft. Max McElligott", title: "Come With Me" },
+  { at: "52:36", artist: "Supermode", title: "Tell Me Why (MEDUZA Remix)" },
+  { at: "52:55", artist: "Shouse", title: "Love Tonight" },
+  { at: "53:13", artist: "Daft Punk", title: "One More Time" },
+  { at: "54:13", artist: "The Temper Trap", title: "Sweet Disposition (Acappella)" },
+  { at: "55:13", artist: "DubVision & AFROJACK ft. Fais", title: "New Memories" },
+  { at: "56:13", artist: "Martin Garrix & DubVision ft. Shaun Farrugia", title: "Starlight (Keep Me Afloat)" },
+];
+
 

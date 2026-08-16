@@ -122,6 +122,7 @@ import {
   TL_DILLON_FRANCIS_AND_MARTEN_HORGER_MAINSTAGE_PAROOKAVILLE_GERMANY_2025,
   TL_MIKE_WILLIAMS_TIME_LAB_PAROOKAVILLE_GERMANY_2026,
   TL_HARDWELL_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
+  TL_DUBVISION_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   tracklist1001RowsToPlays,
@@ -2335,6 +2336,32 @@ for (let i = 1; i < hwParookaville.length; i++) {
     (hwParookaville[i]!.timestamp ?? 0) >
       (hwParookaville[i - 1]!.timestamp ?? 0),
     `Hardwell Parookaville clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_DUBVISION_MAINSTAGE_PAROOKAVILLE_GERMANY_2026);
+assert.equal(TL_DUBVISION_MAINSTAGE_PAROOKAVILLE_GERMANY_2026.length, 62);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-UETk8HSB0Yw"],
+  TL_DUBVISION_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
+);
+const dvParookaville = tracklist1001RowsToPlays(
+  TL_DUBVISION_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
+);
+assert.equal(dvParookaville.length, 62);
+assert.equal(dvParookaville[0]?.provenance, "1001tl");
+assert.equal(dvParookaville[0]?.timestamp, 11);
+assert.equal(
+  dvParookaville[0]?.trackTitle,
+  "Rise Again vs. In The Name Of Love (DubVision Mashup)",
+);
+assert.equal(dvParookaville[61]?.trackTitle, "Starlight (Keep Me Afloat)");
+assert.equal(dvParookaville[61]?.timestamp, 56 * 60 + 13);
+for (let i = 1; i < dvParookaville.length; i++) {
+  assert.ok(
+    (dvParookaville[i]!.timestamp ?? 0) >
+      (dvParookaville[i - 1]!.timestamp ?? 0),
+    `DubVision Parookaville clocks must increase at index ${i}`,
   );
 }
 

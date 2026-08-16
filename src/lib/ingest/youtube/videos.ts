@@ -88,6 +88,7 @@ import {
   TL_DILLON_FRANCIS_AND_MARTEN_HORGER_MAINSTAGE_PAROOKAVILLE_GERMANY_2025,
   TL_MIKE_WILLIAMS_TIME_LAB_PAROOKAVILLE_GERMANY_2026,
   TL_HARDWELL_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
+  TL_DUBVISION_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
   TL_MISS_MONIQUE_TML_WE2_2026,
   TL_NICKY_ROMERO_TML_WE2_2026,
   TL_ODD_MOB_TML_WE2_2026,
@@ -1542,6 +1543,19 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/kd4zp61/hardwell-mainstage-parookaville-germany-2026-07-19.html",
     tracklist1001: TL_HARDWELL_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
+  },
+  {
+    // Official Parookaville channel — Mainstage 2026-07-19.
+    video: "https://www.youtube.com/watch?v=UETk8HSB0Yw",
+    primaryArtist: dj("DubVision", { accent: "#4361ee" }),
+    genre: "Progressive House",
+    type: "festival",
+    title: "DubVision | Mainstage, Parookaville 2026",
+    seriesName: "Parookaville",
+    eventName: "Parookaville",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/uq5pqjt/dubvision-mainstage-parookaville-germany-2026-07-19.html",
+    tracklist1001: TL_DUBVISION_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
   },
   {
     video: "https://www.youtube.com/watch?v=6bJZPDKlq7o",
