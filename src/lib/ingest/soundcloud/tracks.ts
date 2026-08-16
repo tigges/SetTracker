@@ -265,4 +265,17 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     type: "festival",
     minDurationSec: 15 * 60,
   },
+  {
+    // Official Amelie Lens upload; 1001TL wired via
+    // sc-amelielens-amelie-lens-radio-show-022 (never sc-https://…).
+    url: "https://soundcloud.com/amelielens/amelie-lens-radio-show-022",
+    primaryArtist: dj("Amelie Lens", {
+      accent: "#d00000",
+      homeCity: "Belgium",
+    }),
+    genre: "Techno",
+    seriesName: "Amelie Lens Radio Show",
+    type: "radio",
+    minDurationSec: 30 * 60,
+  },
 ];

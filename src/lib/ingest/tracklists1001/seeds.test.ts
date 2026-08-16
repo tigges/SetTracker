@@ -92,6 +92,7 @@ import {
   TL_STEVE_AOKI_TML_FRIENDSHIP_MIX_2026,
   TL_ABOVE_AND_BEYOND_ESTIVA_GROUP_THERAPY_RADIO_690_2026,
   TL_ALOK_TML_WE2_2026,
+  TL_AMELIE_LENS_RADIO_SHOW_022_2026,
   TL_BRADEAZY_LIVE_LOLLAPALOOZA_CHICAGO_2026,
   TL_ERIC_PRYDZ_EPIC_RADIO_036_2026,
   TL_HANNAH_LAING_ZENLESS_ZONE_ZERO_CREAMFIELDS_2024,
@@ -1650,8 +1651,18 @@ assert.equal(
   true,
 );
 assert.equal(
+  isWiredTracklistSlug("sc-amelielens-amelie-lens-radio-show-022"),
+  true,
+);
+assert.equal(
   isWiredTracklistSlug(
     "sc-https://soundcloud.com/bradeazy/bradeazy-live-lollapalooza",
+  ),
+  false,
+);
+assert.equal(
+  isWiredTracklistSlug(
+    "sc-https://soundcloud.com/amelielens/amelie-lens-radio-show-022",
   ),
   false,
 );
@@ -2090,6 +2101,26 @@ for (let i = 1; i < bradeazyLolla.length; i++) {
   assert.ok(
     (bradeazyLolla[i]!.timestamp ?? 0) > (bradeazyLolla[i - 1]!.timestamp ?? 0),
     `bradeazy Lollapalooza clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_AMELIE_LENS_RADIO_SHOW_022_2026);
+assert.equal(TL_AMELIE_LENS_RADIO_SHOW_022_2026.length, 16);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-amelielens-amelie-lens-radio-show-022"],
+  TL_AMELIE_LENS_RADIO_SHOW_022_2026,
+);
+const amelie022 = tracklist1001RowsToPlays(TL_AMELIE_LENS_RADIO_SHOW_022_2026);
+assert.equal(amelie022.length, 16);
+assert.equal(amelie022[0]?.provenance, "1001tl");
+assert.equal(amelie022[0]?.timestamp, 20);
+assert.equal(amelie022[0]?.trackTitle, "Zen Meteor");
+assert.equal(amelie022[15]?.trackTitle, "Storkens Vej");
+assert.equal(amelie022[15]?.timestamp, 55 * 60 + 50);
+for (let i = 1; i < amelie022.length; i++) {
+  assert.ok(
+    (amelie022[i]!.timestamp ?? 0) > (amelie022[i - 1]!.timestamp ?? 0),
+    `Amelie Lens Radio Show 022 clocks must increase at index ${i}`,
   );
 }
 

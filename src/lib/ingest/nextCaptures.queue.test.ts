@@ -493,5 +493,17 @@ assert.equal(
   ),
   "mapped",
 );
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "sc-amelielens-amelie-lens-radio-show-022",
+      title: "Amelie Lens - Radio Show 022 2026-06-05",
+      type: "radio",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
 
 console.log("nextCaptures.queue.test.ts ok");

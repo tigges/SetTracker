@@ -877,3 +877,31 @@ export const TL_BRADEAZY_LIVE_LOLLAPALOOZA_CHICAGO_2026: FingerprintSeedRow[] = 
   { at: "49:40", artist: "Anyma & LISA", title: "Bad Angel (bradeazy Remix)" },
   { at: "54:36", artist: "bradeazy & Crazy Town", title: "Butterfly 2026" },
 ];
+
+/**
+ * Amelie Lens - Radio Show 022 2026-06-05
+ * https://www.1001tracklists.com/tracklist/1z06sxht/amelie-lens-radio-show-022-2026-06-05.html
+ * Official SC: https://soundcloud.com/amelielens/amelie-lens-radio-show-022
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["sc-amelielens-amelie-lens-radio-show-022"]
+ * Never wire sc-https://… slugs.
+ * Captured 2026-08-16 — provenance 1001tl. Official script: 16 tracks.
+ * Capture overlay used an invalid identifier (hyphens); constant renamed.
+ */
+export const TL_AMELIE_LENS_RADIO_SHOW_022_2026: FingerprintSeedRow[] = [
+  { at: "0:20", artist: "Rove", title: "Zen Meteor" },
+  { at: "4:02", artist: "Nuntius Noctis", title: "Night City (2077) (Plural Remix)" },
+  { at: "7:44", artist: "Alex Farell", title: "Double Droppin'" },
+  { at: "11:26", artist: "Amelie Lens", title: "Whatever You Do" },
+  { at: "15:08", artist: "Swart", title: "Extazy" },
+  { at: "18:50", artist: "Amelie Lens", title: "our frequency" },
+  { at: "22:32", artist: "Matty Ralph", title: "For The Love Of Acid" },
+  { at: "26:14", artist: "Shadym", title: "Society" },
+  { at: "29:56", artist: "Rhygar & Stëh", title: "Psycho" },
+  { at: "33:38", artist: "David Strasser", title: "Sintra" },
+  { at: "37:20", artist: "Felicie", title: "The Devil Himself" },
+  { at: "41:02", artist: "Flour", title: "Gravity" },
+  { at: "44:44", artist: "Incident Prism", title: "Bassmurda" },
+  { at: "48:26", artist: "Hardwell & Vini Vici & MR.BLACK ft. Liquid Soul", title: "Crazy People 2026" },
+  { at: "52:08", artist: "Flour", title: "In The End" },
+  { at: "55:50", artist: "Tonni3000", title: "Storkens Vej" },
+];

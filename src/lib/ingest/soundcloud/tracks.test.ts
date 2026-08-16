@@ -236,4 +236,18 @@ assert.equal(
   "sc-bradeazy-bradeazy-live-lollapalooza",
 );
 
+const amelie022Sc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url ===
+    "https://soundcloud.com/amelielens/amelie-lens-radio-show-022",
+);
+assert.ok(amelie022Sc);
+assert.equal(amelie022Sc.primaryArtist.name, "Amelie Lens");
+assert.equal(amelie022Sc.type, "radio");
+assert.equal(amelie022Sc.seriesName, "Amelie Lens Radio Show");
+assert.equal(
+  `sc-amelielens-${slugify("amelie-lens-radio-show-022")}`,
+  "sc-amelielens-amelie-lens-radio-show-022",
+);
+
 console.log("soundcloud/tracks.test.ts ok");
