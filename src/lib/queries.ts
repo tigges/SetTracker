@@ -17,6 +17,12 @@ import {
 } from "@/lib/feedPriority";
 import { resolveFeedRanks } from "@/lib/feedPriorityResolve";
 import {
+  loadAtlasDjs,
+  loadAtlasVenues,
+} from "@/lib/atlas/seed";
+import { daysCoveredByEditions } from "@/lib/calendarGrid";
+import {
+  editionBrandLabel,
   editionCalendar,
   editionGapReport,
 } from "@/lib/ingest/festivalDrops";
@@ -416,7 +422,7 @@ export async function getFestivalEditionBoard(nowMs = Date.now()) {
     ? await Promise.all([
         prisma.event.findMany({
           where: { slug: { in: slugs } },
-          select: { slug: true, name: true },
+          select: { slug: true, name: true, imageUrl: true },
         }),
         prisma.set.findMany({
           where: { event: { slug: { in: slugs } } },
@@ -430,6 +436,7 @@ export async function getFestivalEditionBoard(nowMs = Date.now()) {
       ])
     : [[], []];
   const names = new Map(events.map((e) => [e.slug, e.name]));
+  const images = new Map(events.map((e) => [e.slug, e.imageUrl]));
   const gaps = editionGapReport(
     sets.map((s) => ({
       eventSlug: s.event?.slug,
@@ -439,7 +446,90 @@ export async function getFestivalEditionBoard(nowMs = Date.now()) {
     })),
     nowMs,
   );
-  return { calendar, gaps, names };
+  return { calendar, gaps, names, images, nowMs };
+}
+
+export type TeaserFaceRow = {
+  slug: string;
+  name: string;
+  imageUrl: string | null;
+  accent: string;
+};
+
+/** Rank-1 festival, club, and DJ faces for the Atlas teaser. */
+export async function getAtlasTeaserFaces(): Promise<TeaserFaceRow[]> {
+  const fest = loadAtlasVenues().find((v) => v.kind === "festival" && v.rank === 1);
+  const club = loadAtlasVenues().find((v) => v.kind === "club" && v.rank === 1);
+  const dj = loadAtlasDjs().find((d) => d.rank === 1);
+  const eventSlugs = [fest?.slug, club?.slug].filter((s): s is string => Boolean(s));
+  const [eventRows, djRow] = await Promise.all([
+    eventSlugs.length
+      ? prisma.event.findMany({
+          where: { slug: { in: eventSlugs } },
+          select: { slug: true, name: true, imageUrl: true },
+        })
+      : Promise.resolve([]),
+    dj
+      ? prisma.dj.findUnique({
+          where: { slug: dj.slug },
+          select: { slug: true, name: true, imageUrl: true, accent: true },
+        })
+      : Promise.resolve(null),
+  ]);
+  const bySlug = new Map(eventRows.map((e) => [e.slug, e]));
+  const faces: TeaserFaceRow[] = [];
+  if (fest) {
+    const row = bySlug.get(fest.slug);
+    faces.push({
+      slug: fest.slug,
+      name: row?.name ?? fest.name,
+      imageUrl: row?.imageUrl ?? null,
+      accent: "var(--amber)",
+    });
+  }
+  if (club) {
+    const row = bySlug.get(club.slug);
+    faces.push({
+      slug: club.slug,
+      name: row?.name ?? club.name,
+      imageUrl: row?.imageUrl ?? null,
+      accent: "var(--teal)",
+    });
+  }
+  if (dj) {
+    faces.push({
+      slug: dj.slug,
+      name: djRow?.name ?? dj.name,
+      imageUrl: djRow?.imageUrl ?? null,
+      accent: djRow?.accent ?? "var(--violet)",
+    });
+  }
+  return faces;
+}
+
+export function calendarTeaserFaces(
+  board: Awaited<ReturnType<typeof getFestivalEditionBoard>>,
+): TeaserFaceRow[] {
+  const seen = new Set<string>();
+  const faces: TeaserFaceRow[] = [];
+  for (const e of board.calendar) {
+    if (seen.has(e.eventSlug)) continue;
+    seen.add(e.eventSlug);
+    faces.push({
+      slug: e.eventSlug,
+      name: board.names.get(e.eventSlug) ?? editionBrandLabel(e.eventSlug),
+      imageUrl: board.images.get(e.eventSlug) ?? null,
+      accent: "var(--amber)",
+    });
+    if (faces.length >= 3) break;
+  }
+  return faces;
+}
+
+export function calendarMarkedDays(
+  board: Awaited<ReturnType<typeof getFestivalEditionBoard>>,
+): Set<string> {
+  return daysCoveredByEditions(board.calendar);
 }
 
 // ---------------------------------------------------------------------------
