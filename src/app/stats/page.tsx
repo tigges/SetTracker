@@ -337,7 +337,7 @@ export default async function StatsPage() {
       <QueueFold
         title="Tracklist capture"
         count={s.tracklistGaps.length}
-        hint={`${s.sets.incomplete.toLocaleString()} thin/severe stored — only this-year chart or festival Relives are a capture job. Find a 1001 page already on the source (do not invent URLs). Weekly radio stubs are not this queue. Empty shells have no set page.`}
+        hint={`${s.sets.incomplete.toLocaleString()} thin/severe stored — only this-year chart or festival Relives are a capture job. Find a 1001 page already on the source (do not invent URLs). Wired 1001 seeds and weekly radio episodes are not this queue. Empty shells have no set page.`}
         open
       >
         <GapQueue

@@ -20,6 +20,7 @@ import {
   tracklistGapReason,
   type TracklistGapFields,
 } from "@/lib/tracklistGap";
+import { isWiredTracklistSlug } from "@/lib/ingest/tracklists1001/seeds";
 import {
   PROVENANCE_META,
   STATUS_META,
@@ -739,6 +740,7 @@ export async function getCatalogStats(): Promise<CatalogStats> {
     playCount: number,
   ) => {
     if (gapSeen.has(s.id)) return;
+    if (isWiredTracklistSlug(s.slug)) return;
     const fields = toTracklistGapFields(s, playCount);
     if (!isActionableTracklistGap(fields, nowMs)) return;
     gapSeen.add(s.id);

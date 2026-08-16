@@ -38,6 +38,62 @@ describe("tracklistGap", () => {
     assert.equal(
       isActionableTracklistGap(
         {
+          title: "Hot Robot Radio 235",
+          type: "radio",
+          playCount: 6,
+          durationSec: 57 * 60,
+          publishedAt: "2026-04-08T00:00:00.000Z",
+          top100Rank: 40,
+        },
+        now,
+      ),
+      false,
+    );
+    assert.equal(
+      isActionableTracklistGap(
+        {
+          title: "Korolova - Captive Soul 90",
+          type: "radio",
+          playCount: 4,
+          durationSec: 3600,
+          publishedAt: "2026-07-01T00:00:00.000Z",
+          top100Rank: 80,
+        },
+        now,
+      ),
+      false,
+    );
+    assert.equal(
+      isActionableTracklistGap(
+        {
+          title: "Eric Prydz presents EPIC Radio 036",
+          type: "radio",
+          playCount: 6,
+          durationSec: 63 * 60,
+          publishedAt: "2026-07-01T00:00:00.000Z",
+          top100Rank: 20,
+        },
+        now,
+      ),
+      false,
+    );
+    assert.equal(
+      isActionableTracklistGap(
+        {
+          title: "Hardwell On Air 527 YEARMIX 2025",
+          type: "radio",
+          playCount: 6,
+          durationSec: 3600,
+          publishedAt: "2026-01-02T00:00:00.000Z",
+          top100Rank: 12,
+        },
+        now,
+      ),
+      true,
+    );
+    assert.equal(
+      isActionableTracklistGap(
+        {
           title: "Smash The House Radio ep. 689",
           type: "festival",
           eventKind: "festival",

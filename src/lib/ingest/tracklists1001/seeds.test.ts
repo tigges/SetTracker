@@ -92,11 +92,13 @@ import {
   TL_STEVE_AOKI_TML_FRIENDSHIP_MIX_2026,
   TL_ALOK_TML_WE2_2026,
   TL_HARDWELL_HOA_527_YEARMIX_2025,
+  TL_REINIER_ZONNEVELD_AWAKENINGS_2025,
   TL_VINTAGE_CULTURE_EDC_LV_NEON_2025,
   TL_VINTAGE_CULTURE_NYC_YACHT_2023,
   TL_VINTAGE_CULTURE_PACHA_IBIZA_2026,
   TL_VINTAGE_CULTURE_SO_TRACK_BOA_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
+  isWiredTracklistSlug,
   tracklist1001RowsToPlays,
 } from "./seeds";
 import { assertSeedClocks } from "./festival2026";
@@ -1563,6 +1565,35 @@ assert.equal(hoa527[0]?.provenance, "1001tl");
 assert.equal(hoa527[0]?.timestamp, 58);
 assert.equal(hoa527[0]?.trackTitle, "Sanctuary");
 assert.equal(hoa527[82]?.trackTitle, "Brace For Impact");
+assert.equal(isWiredTracklistSlug("yt-zHAUZ02aCwo"), true);
+assert.equal(isWiredTracklistSlug("yt-knJyJPP45dg"), true);
+assert.equal(isWiredTracklistSlug("yt-kmMYCg-igjc"), true);
+assert.equal(isWiredTracklistSlug("yt-OVex0rm7ZR4"), true);
+assert.equal(isWiredTracklistSlug("yt-6bJZPDKlq7o"), true);
+assert.equal(isWiredTracklistSlug("yt-OXwK0CSmXzY"), true);
+assert.equal(isWiredTracklistSlug("sc-hardwell-hardwell-on-air-527-yearmix"), true);
+assert.equal(isWiredTracklistSlug("yt-not-a-real-seed"), false);
+assert.equal(isWiredTracklistSlug("yt-i-mFuxbGHzg"), true);
+
+assertSeedClocks(TL_REINIER_ZONNEVELD_AWAKENINGS_2025);
+assert.equal(TL_REINIER_ZONNEVELD_AWAKENINGS_2025.length, 20);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-i-mFuxbGHzg"],
+  TL_REINIER_ZONNEVELD_AWAKENINGS_2025,
+);
+const rzAwake = tracklist1001RowsToPlays(TL_REINIER_ZONNEVELD_AWAKENINGS_2025);
+assert.equal(rzAwake.length, 20);
+assert.equal(rzAwake[0]?.provenance, "1001tl");
+assert.equal(rzAwake[0]?.timestamp, 0);
+assert.equal(rzAwake[0]?.trackTitle, "Move Your Body To The Beat");
+assert.equal(rzAwake[19]?.trackTitle, "Kernkraft 400");
+assert.equal(rzAwake[19]?.timestamp, 1 * 3600 + 28 * 60 + 45);
+for (let i = 1; i < rzAwake.length; i++) {
+  assert.ok(
+    (rzAwake[i]!.timestamp ?? 0) > (rzAwake[i - 1]!.timestamp ?? 0),
+    `Reinier Awakenings clocks must increase at index ${i}`,
+  );
+}
 assert.equal(hoa527[82]?.timestamp, 56 * 60 + 47);
 for (let i = 1; i < hoa527.length; i++) {
   assert.ok(

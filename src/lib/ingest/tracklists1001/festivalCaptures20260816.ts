@@ -268,3 +268,34 @@ export const TL_HARDWELL_HOA_527_YEARMIX_2025: FingerprintSeedRow[] = [
   { at: "54:20", artist: "Hardwell & Atmozfears ft. JAiMES", title: "Hideaway" },
   { at: "56:47", artist: "Hardwell & Sub Zero Project ft. Lil Jon", title: "Brace For Impact" },
 ];
+
+/**
+ * Reinier Zonneveld @ Area V, Awakenings Festival, Netherlands 2025-07-11
+ * https://www.1001tracklists.com/tracklist/hgdfs3t/reinier-zonneveld-area-v-awakenings-festival-netherlands-2025-07-11.html
+ * Official YT: https://youtu.be/i-mFuxbGHzg
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-i-mFuxbGHzg"]
+ * Captured 2026-08-16 — provenance 1001tl. Official script: 20 tracks, 19 cues.
+ * Opening cue untimed on 1001 → 0:00.
+ */
+export const TL_REINIER_ZONNEVELD_AWAKENINGS_2025: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "Reinier Zonneveld", title: "Move Your Body To The Beat" },
+  { at: "2:00", artist: "Maddix & Reinier Zonneveld & Sarah de Warren", title: "Girls Go Freak" },
+  { at: "6:00", artist: "Reinier Zonneveld", title: "CSE" },
+  { at: "9:00", artist: "Benny Benassi pres. The Biz", title: "Satisfaction (Reinier Zonneveld Remix)" },
+  { at: "12:00", artist: "D-Devils & Reinier Zonneveld", title: "Dance With The Devil (The 6th Gate) (Reinier Zonneveld Remix)" },
+  { at: "16:00", artist: "Reinier Zonneveld & Fēlēs", title: "Acid" },
+  { at: "20:00", artist: "Reinier Zonneveld & Tinlicker & Kiki Solvej", title: "Heute Tanzen (Tinlicker Version)" },
+  { at: "25:00", artist: "Will Atkinson", title: "Marching Powder" },
+  { at: "29:00", artist: "Reinier Zonneveld & The Subs", title: "Someone To Hold" },
+  { at: "37:00", artist: "JG & Reinier Zonneveld", title: "Music Is The Answer" },
+  { at: "43:00", artist: "Angerfist & Gaston Zani", title: "The Dark of The Night" },
+  { at: "48:00", artist: "Tiësto", title: "Adagio For Strings (Reinier Zonneveld Remix)" },
+  { at: "51:00", artist: "Reinier Zonneveld & Angerfist", title: "World On Fire" },
+  { at: "54:00", artist: "Bodyrox ft. Luciana", title: "Yeah Yeah (Reinier Zonneveld Edit)" },
+  { at: "56:00", artist: "Angerfist & CARV", title: "Shot To The Brain" },
+  { at: "1:10:00", artist: "Showtek", title: "FTS (Fuck The System) (Reinier Zonneveld Tech Mix)" },
+  { at: "1:18:00", artist: "Forze DJ Team", title: "'98 To Piano (The Viper & Neophyte Rfx)" },
+  { at: "1:22:00", artist: "Neophyte & DJ Panic", title: "Music For The 90's" },
+  { at: "1:26:00", artist: "Nena", title: "99 Luftballons (Reinier Zonneveld Remix)" },
+  { at: "1:28:45", artist: "Zombie Nation", title: "Kernkraft 400" },
+];

@@ -21,6 +21,7 @@ const VC_BOA = YOUTUBE_SETS.find((s) => s.video.includes("kmMYCg-igjc"));
 const VC_PACHA = YOUTUBE_SETS.find((s) => s.video.includes("OVex0rm7ZR4"));
 const VC_YACHT = YOUTUBE_SETS.find((s) => s.video.includes("6bJZPDKlq7o"));
 const HOA_527 = YOUTUBE_SETS.find((s) => s.video.includes("OXwK0CSmXzY"));
+const RZ_AWAKE = YOUTUBE_SETS.find((s) => s.video.includes("i-mFuxbGHzg"));
 
 describe("watchMetaFromCuratedSeed", () => {
   it("builds ASOT 1290 meta from the curated 1001 capture", () => {
@@ -141,6 +142,17 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=OXwK0CSmXzY");
     // Last cue 56:47 + 180s pad.
     assert.equal(meta.durationSec, 56 * 60 + 47 + 180);
+  });
+
+  it("builds Reinier Zonneveld Awakenings meta from the curated 1001 capture", () => {
+    assert.ok(RZ_AWAKE);
+    const meta = watchMetaFromCuratedSeed(RZ_AWAKE);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "i-mFuxbGHzg");
+    assert.match(meta.title, /Awakenings Festival 2025/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=i-mFuxbGHzg");
+    // Last cue 1:28:45 + 180s pad.
+    assert.equal(meta.durationSec, 1 * 3600 + 28 * 60 + 45 + 180);
   });
 
   it("returns null without a title or video id", () => {
@@ -353,5 +365,19 @@ describe("curated YouTube 429 fallback", () => {
     assert.ok(sets[0]!.durationSec >= 56 * 60);
     assert.equal(sets[0]?.primaryArtist?.slug, "hardwell");
     assert.equal(sets[0]?.seriesName, "Hardwell On Air");
+  });
+
+  it("lands Reinier Zonneveld Awakenings from the 1001 seed when watch is 429", async () => {
+    assert.ok(RZ_AWAKE);
+    const adapter = createYoutubeAdapter([RZ_AWAKE], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-i-mFuxbGHzg");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 20);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 1 * 3600 + 28 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "reinier-zonneveld");
+    assert.match(String(sets[0]?.eventName ?? ""), /Awakenings/i);
   });
 });

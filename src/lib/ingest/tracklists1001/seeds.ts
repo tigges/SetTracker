@@ -107,6 +107,7 @@ export {
   TL_STEVE_AOKI_TML_FRIENDSHIP_MIX_2026,
   TL_ALOK_TML_WE2_2026,
   TL_HARDWELL_HOA_527_YEARMIX_2025,
+  TL_REINIER_ZONNEVELD_AWAKENINGS_2025,
   TL_VINTAGE_CULTURE_EDC_LV_NEON_2025,
   TL_VINTAGE_CULTURE_NYC_YACHT_2023,
   TL_VINTAGE_CULTURE_PACHA_IBIZA_2026,
@@ -146,6 +147,11 @@ export function applyTracklist1001Seed(
   const seed = TRACKLIST_1001_BY_SOURCE_SLUG[sourceSlug];
   if (!seed?.length) return base;
   return merge1001Plays(base, tracklist1001RowsToPlays(seed));
+}
+
+/** Already-captured 1001 seed — Stats / capture queue should not list these. */
+export function isWiredTracklistSlug(slug: string): boolean {
+  return (TRACKLIST_1001_BY_SOURCE_SLUG[slug]?.length ?? 0) >= 12;
 }
 
 /**

@@ -52,9 +52,11 @@ export function isSourceCompleteRadioStub(s: {
   festivalRank?: number | null;
 }): boolean {
   if (s.festivalRank != null) return false;
-  if (s.playCount > 3) return false;
+  if (/\byearmix\b/i.test(s.title)) return false;
   // Title wins over a mis-typed "festival" Smash The House episode.
+  // Weekly series stay out of Tracklist capture even with 4–7 description cues.
   if (WEEKLY_RADIO.test(s.title)) return true;
+  if (s.playCount > 3) return false;
   if (s.eventKind === "festival" || s.eventKind === "club") return false;
   return s.type === "radio";
 }

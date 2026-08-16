@@ -183,5 +183,16 @@ assert.equal(
   ),
   "mapped",
 );
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "yt-i-mFuxbGHzg",
+      title: "Reinier Zonneveld | Awakenings Festival 2025",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
 
 console.log("nextCaptures.queue.test.ts ok");

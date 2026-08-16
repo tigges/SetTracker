@@ -64,6 +64,7 @@ import {
   TL_MARKUS_SCHULZ_AND_JEROME_ISMA_AE_GDJB_2026,
   TL_ALOK_TML_WE2_2026,
   TL_HARDWELL_HOA_527_YEARMIX_2025,
+  TL_REINIER_ZONNEVELD_AWAKENINGS_2025,
   TL_VINTAGE_CULTURE_EDC_LV_NEON_2025,
   TL_VINTAGE_CULTURE_NYC_YACHT_2023,
   TL_VINTAGE_CULTURE_PACHA_IBIZA_2026,
@@ -1513,6 +1514,9 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     title: "Reinier Zonneveld | Awakenings Festival 2025",
     seriesName: "Awakenings",
     eventName: "Awakenings Festival",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/hgdfs3t/reinier-zonneveld-area-v-awakenings-festival-netherlands-2025-07-11.html",
+    tracklist1001: TL_REINIER_ZONNEVELD_AWAKENINGS_2025,
   },
   {
     video: "https://www.youtube.com/watch?v=b-2YA4yC3UA",
