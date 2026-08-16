@@ -281,6 +281,14 @@ export const KNOWN_EVENTS: Record<string, CanonicalEvent> = {
     location: "Germany",
     website: "https://www.nature-one.de/",
   },
+  "dance-valley": {
+    slug: "dance-valley",
+    name: "Dance Valley",
+    kind: "festival",
+    location: "Netherlands",
+    website: "https://www.dancevalley.com/",
+    instagram: "https://www.instagram.com/dancevalley/",
+  },
   "one-world-radio": {
     slug: "one-world-radio",
     name: "One World Radio",
@@ -363,6 +371,8 @@ const ALIAS_TO_SLUG: Record<string, string> = {
   "zurcher-street-parade": "street-parade",
   "nature-one": "nature-one",
   natureone: "nature-one",
+  "dance-valley": "dance-valley",
+  dancevalley: "dance-valley",
   "one-world-radio": "one-world-radio",
   oneworldradio: "one-world-radio",
   "tomorrowland-one-world-radio": "one-world-radio",
@@ -473,6 +483,7 @@ export function inferFestivalEvent(title: string): CanonicalEvent | null {
   if (/\bawakenings\b/i.test(t)) return KNOWN_EVENTS.awakenings;
   if (/\bstreet\s*parade\b/i.test(t)) return KNOWN_EVENTS["street-parade"];
   if (/\bnature\s*one\b/i.test(t)) return KNOWN_EVENTS["nature-one"];
+  if (/\bdance\s*valley\b/i.test(t)) return KNOWN_EVENTS["dance-valley"];
   // DJ Mag Top 100 Festivals / Clubs / other club listicles (not Mixmag.net).
   return (
     inferDjMagFestivalEvent(t) ??

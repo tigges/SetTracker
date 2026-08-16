@@ -41,6 +41,9 @@ const EPIC_036 = YOUTUBE_SETS.find((s) => s.video.includes("JLIYTueL4TI"));
 const HELDENS_DAYBREAK = YOUTUBE_SETS.find((s) =>
   s.video.includes("wuMQeEJ3YnQ"),
 );
+const CH_DANCE_VALLEY = YOUTUBE_SETS.find((s) =>
+  s.video.includes("pnzSuCiAGdk"),
+);
 
 describe("watchMetaFromCuratedSeed", () => {
   it("builds ASOT 1290 meta from the curated 1001 capture", () => {
@@ -139,6 +142,17 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=OVex0rm7ZR4");
     // Last cue 1:07:05 + 180s pad.
     assert.equal(meta.durationSec, 1 * 3600 + 7 * 60 + 5 + 180);
+  });
+
+  it("builds Calvin Harris Dance Valley meta from the curated 1001 capture", () => {
+    assert.ok(CH_DANCE_VALLEY);
+    const meta = watchMetaFromCuratedSeed(CH_DANCE_VALLEY);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "pnzSuCiAGdk");
+    assert.match(meta.title, /Dance Valley/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=pnzSuCiAGdk");
+    // Last cue 1:12:29 + 180s pad.
+    assert.equal(meta.durationSec, 1 * 3600 + 12 * 60 + 29 + 180);
   });
 
   it("builds Vintage Culture NYC Yacht meta from the curated 1001 capture", () => {
@@ -766,5 +780,19 @@ describe("curated YouTube 429 fallback", () => {
     assert.equal(sets[0]?.primaryArtist?.slug, "oliver-heldens");
     assert.match(String(sets[0]?.title ?? ""), /Daybreak/i);
     assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
+  });
+
+  it("lands Calvin Harris Dance Valley from the 1001 seed when watch is 429", async () => {
+    assert.ok(CH_DANCE_VALLEY);
+    const adapter = createYoutubeAdapter([CH_DANCE_VALLEY], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-pnzSuCiAGdk");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 35);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 1 * 3600 + 12 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "calvin-harris");
+    assert.match(String(sets[0]?.eventName ?? ""), /Dance Valley/i);
   });
 });

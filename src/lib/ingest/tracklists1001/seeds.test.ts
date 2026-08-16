@@ -117,6 +117,7 @@ import {
   TL_VINTAGE_CULTURE_PACHA_IBIZA_2026,
   TL_VINTAGE_CULTURE_SO_TRACK_BOA_2026,
   TL_ROBIN_SCHULZ_PACHA_IBIZA_2026,
+  TL_CALVIN_HARRIS_MAINSTAGE_DANCE_VALLEY_NETHERLANDS_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   tracklist1001RowsToPlays,
@@ -2199,6 +2200,32 @@ for (let i = 1; i < schulzPacha.length; i++) {
   assert.ok(
     (schulzPacha[i]!.timestamp ?? 0) > (schulzPacha[i - 1]!.timestamp ?? 0),
     `Robin Schulz Pacha clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_CALVIN_HARRIS_MAINSTAGE_DANCE_VALLEY_NETHERLANDS_2026);
+assert.equal(TL_CALVIN_HARRIS_MAINSTAGE_DANCE_VALLEY_NETHERLANDS_2026.length, 35);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-pnzSuCiAGdk"],
+  TL_CALVIN_HARRIS_MAINSTAGE_DANCE_VALLEY_NETHERLANDS_2026,
+);
+const chDanceValley = tracklist1001RowsToPlays(
+  TL_CALVIN_HARRIS_MAINSTAGE_DANCE_VALLEY_NETHERLANDS_2026,
+);
+assert.equal(chDanceValley.length, 35);
+assert.equal(chDanceValley[0]?.provenance, "1001tl");
+assert.equal(chDanceValley[0]?.timestamp, 0);
+assert.equal(
+  chDanceValley[0]?.trackTitle,
+  "Sweet Nothing (Calvin Harris 2025 Remix)",
+);
+assert.equal(chDanceValley[34]?.trackTitle, "Under Control");
+assert.equal(chDanceValley[34]?.timestamp, 1 * 3600 + 12 * 60 + 29);
+for (let i = 1; i < chDanceValley.length; i++) {
+  assert.ok(
+    (chDanceValley[i]!.timestamp ?? 0) >
+      (chDanceValley[i - 1]!.timestamp ?? 0),
+    `Calvin Harris Dance Valley clocks must increase at index ${i}`,
   );
 }
 

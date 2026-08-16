@@ -83,6 +83,7 @@ import {
   TL_VINTAGE_CULTURE_NYC_YACHT_2023,
   TL_VINTAGE_CULTURE_PACHA_IBIZA_2026,
   TL_VINTAGE_CULTURE_SO_TRACK_BOA_2026,
+  TL_CALVIN_HARRIS_MAINSTAGE_DANCE_VALLEY_NETHERLANDS_2026,
   TL_MISS_MONIQUE_TML_WE2_2026,
   TL_NICKY_ROMERO_TML_WE2_2026,
   TL_ODD_MOB_TML_WE2_2026,
@@ -1461,6 +1462,20 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/2vw827m1/vintage-culture-affairs-pacha-ibiza-spain-2026-06-23.html",
     tracklist1001: TL_VINTAGE_CULTURE_PACHA_IBIZA_2026,
+  },
+  {
+    video: "https://www.youtube.com/watch?v=pnzSuCiAGdk",
+    primaryArtist: dj("Calvin Harris", {
+      accent: "#ff9f1c",
+      homeCity: "Scotland, UK",
+    }),
+    genre: "House",
+    type: "festival",
+    title: "Calvin Harris @ Mainstage, Dance Valley 2026",
+    eventName: "Dance Valley",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2pcuzd49/calvin-harris-mainstage-dance-valley-netherlands-2026-08-08.html",
+    tracklist1001: TL_CALVIN_HARRIS_MAINSTAGE_DANCE_VALLEY_NETHERLANDS_2026,
   },
   {
     video: "https://www.youtube.com/watch?v=6bJZPDKlq7o",

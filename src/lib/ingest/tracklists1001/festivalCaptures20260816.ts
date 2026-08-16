@@ -1060,3 +1060,51 @@ export const TL_ROBIN_SCHULZ_PACHA_IBIZA_2026: FingerprintSeedRow[] = [
   { at: "57:41", artist: "Volkoder", title: "Everybody" },
 ];
 
+/**
+ * Calvin Harris @ Mainstage, Dance Valley, Netherlands 2026-08-08
+ * https://www.1001tracklists.com/tracklist/2pcuzd49/calvin-harris-mainstage-dance-valley-netherlands-2026-08-08.html
+ * Official YT: https://youtu.be/pnzSuCiAGdk
+ * Capture overlay used TL_Calvin-Harris_Mainstage_Dance-Valley_Netherlands_2026
+ * (hyphens illegal); constant is TL_CALVIN_HARRIS_MAINSTAGE_DANCE_VALLEY_NETHERLANDS_2026.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-pnzSuCiAGdk"]
+ * Captured 2026-08-16 - provenance 1001tl.
+ */
+export const TL_CALVIN_HARRIS_MAINSTAGE_DANCE_VALLEY_NETHERLANDS_2026: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "Calvin Harris ft. Florence Welch", title: "Sweet Nothing (Calvin Harris 2025 Remix)" },
+  { at: "4:41", artist: "Eric Prydz", title: "Pjanoo (Calvin Harris Remix)" },
+  { at: "6:25", artist: "Calvin Harris ft. HAIM", title: "Pray To God (Acappella)" },
+  { at: "8:08", artist: "Calvin Harris ft. Ellie Goulding", title: "Outside (Calvin Harris 2025 Remix)" },
+  { at: "9:46", artist: "L.P. Rhythm", title: "Versatile" },
+  { at: "11:25", artist: "Fred again.. & Skepta & PlaqueBoyMax", title: "Victory Lap" },
+  { at: "13:03", artist: "Calvin Harris & Rag'n'Bone Man", title: "Giant (Calvin Harris Remix)" },
+  { at: "15:05", artist: "Cassian & YOTTO & Da Hool", title: "Love Parade" },
+  { at: "17:07", artist: "Calvin Harris & Dua Lipa", title: "One Kiss" },
+  { at: "18:50", artist: "Calvin Harris & Dua Lipa", title: "One Kiss (Calvin Harris 2026 Remix)" },
+  { at: "20:34", artist: "Dean Turnley", title: "Actin' Tough" },
+  { at: "22:17", artist: "Calvin Harris ft. Rihanna", title: "This Is What You Came For (VIP Mix)" },
+  { at: "25:14", artist: "Calvin Harris & Kasabian", title: "Release The Pressure (VIP Mix)" },
+  { at: "28:54", artist: "Calvin Harris ft. Ellie Goulding", title: "I Need Your Love (Calvin Harris Remix)" },
+  { at: "32:37", artist: "Calvin Harris ft. John Newman", title: "Blame" },
+  { at: "34:58", artist: "Calvin Harris ft. John Newman", title: "Blame (Calvin Harris 2026 Remix)" },
+  { at: "37:18", artist: "Calvin Harris", title: "Feel So Close" },
+  { at: "40:02", artist: "The Chemical Brothers", title: "Hey Boy, Hey Girl (Acappella)" },
+  { at: "42:46", artist: "Hans Zimmer", title: "Time (Inception OST)" },
+  { at: "43:45", artist: "Calvin Harris & Disciples ft. Ina Wroldsen", title: "How Deep Is Your Love" },
+  { at: "44:45", artist: "Calvin Harris & Disciples ft. Ina Wroldsen", title: "How Deep Is Your Love (Calvin Harris 2026 VIP Edit)" },
+  { at: "45:44", artist: "Calvin Harris ft. Clementine Douglas", title: "Blessings (Cassian Remix)" },
+  { at: "48:34", artist: "Calvin Harris ft. Clementine Douglas", title: "Blessings" },
+  { at: "51:23", artist: "Rihanna", title: "Where Have You Been (Calvin Harris 2026 Remix)" },
+  { at: "54:54", artist: "Adriano Pagani", title: "Vibe (Calvin Harris Remix)" },
+  { at: "56:52", artist: "Florence + The Machine", title: "Spectrum (Say My Name) (Calvin Harris 2025 Remix)" },
+  { at: "1:00:33", artist: "Calvin Harris", title: "Summer (Calvin Harris 2024 Remix)" },
+  { at: "1:02:46", artist: "UMEK", title: "Collision Wall" },
+  { at: "1:04:58", artist: "Calvin Harris ft. Kelis", title: "Bounce (Calvin Harris Remix)" },
+  { at: "1:07:03", artist: "Zombie Nation", title: "Kernkraft 400" },
+  { at: "1:09:07", artist: "PPK", title: "ResuRection (Calvin Harris Remix)" },
+  { at: "1:10:47", artist: "Calvin Harris & Ellie Goulding", title: "Miracle (Acappella)" },
+  { at: "1:12:27", artist: "Calvin Harris & Alesso & Hurts vs. Robert Miles", title: "Under Control vs. Children (Alesso Mashup)" },
+  { at: "1:12:28", artist: "Robert Miles", title: "Children" },
+  { at: "1:12:29", artist: "Calvin Harris & Alesso ft. Hurts", title: "Under Control" },
+];
+
+
