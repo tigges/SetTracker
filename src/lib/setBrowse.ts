@@ -36,6 +36,29 @@ export function isEmptyOrPreviewSet(s: {
   if (/\[preview\]|\(preview\)/i.test(title)) return true;
   const dur = s.durationSec ?? 0;
   if (/\bpreview\b/i.test(title) && dur > 0 && dur <= 12 * 60) return true;
+  if (isNonCatalogSet({ title, durationSec: s.durationSec })) return true;
+  return false;
+}
+
+/** YouTube Shorts, produce-a-track tutorials — never a catalog set. */
+export function isNonCatalogSet(s: {
+  title?: string | null;
+  durationSec?: number | null;
+}): boolean {
+  const title = (s.title ?? "").replace(/\s+/g, " ").trim();
+  if (!title) return false;
+  if (/\b(radio\s*)?shorts?\b/i.test(title)) return true;
+  if (/\bfrom scratch\b/i.test(title)) return true;
+  if (/\bmakes a\b/i.test(title) && /\btrack\b/i.test(title)) return true;
+  if (
+    /\b(tutorial|how\s+to\s+(make|produce|build)|training\s+session)\b/i.test(
+      title,
+    )
+  ) {
+    return true;
+  }
+  const dur = s.durationSec ?? 0;
+  if (dur > 0 && dur <= 90 && /\bshort\b/i.test(title)) return true;
   return false;
 }
 

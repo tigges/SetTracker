@@ -155,6 +155,11 @@ export function isJunkArtistName(name: string): boolean {
   if (/\bpresents\b/i.test(n) || /\bpresents?\s*$/i.test(n)) return true;
   if (/\)+$/.test(n) && !n.includes("(")) return true;
   if (/\bfrom scratch\b/i.test(n)) return true;
+  if (/\bmakes a\b/i.test(n) && /\btrack\b/i.test(n)) return true;
+  if (/\b(tutorial|how\s+to\s+(make|produce|build)|training\s+session)\b/i.test(n)) {
+    return true;
+  }
+  if (/\bchannel\s+by\b/i.test(n)) return true;
   // "Artist at Venue / Festival …" should never be a Dj.name
   if (/\s+at\s+.+/i.test(n) && n.length > 24) return true;
   // Series chrome ("Dom Dolla // Dancefloor Currency", decorative bullets)
@@ -246,4 +251,39 @@ export function sanitizeArtistName(raw: string): string | null {
   if (/https?:|www\.|@|^\d+$/.test(n)) return null;
   if (isJunkArtistName(n)) return null;
   return n;
+}
+
+/** Festival stage mistaken for a person ("Freedom Stage", "Mainstage"). */
+export function isStageArtistName(name: string): boolean {
+  const n = name.replace(/\s+/g, " ").trim();
+  if (!n) return false;
+  if (/\b(radio\s*)?shorts?\s*$/i.test(n)) return false;
+  return /\bstages?\s*$/i.test(n) || /^main\s*stage$/i.test(n);
+}
+
+/** Radio / session / TV host mistaken for a person. */
+export function isRadioArtistName(name: string): boolean {
+  const n = name.replace(/\s+/g, " ").trim();
+  if (!n) return false;
+  if (/\b(radio\s*)?shorts?\s*$/i.test(n)) return false;
+  if (isStageArtistName(n)) return false;
+  return (
+    /\bradio\b/i.test(n) ||
+    /\bsessions?\b/i.test(n) ||
+    /\btv\s*$/i.test(n) ||
+    /\bchannel\s+by\b/i.test(n)
+  );
+}
+
+/** Tutorial / Shorts / "makes a track" — not a DJ set and not an artist. */
+export function isNonSetCredit(name: string): boolean {
+  const n = name.replace(/\s+/g, " ").trim();
+  if (!n) return false;
+  if (/\b(radio\s*)?shorts?\s*$/i.test(n)) return true;
+  if (/\bfrom scratch\b/i.test(n)) return true;
+  if (/\bmakes a\b/i.test(n) && /\btrack\b/i.test(n)) return true;
+  if (/\b(tutorial|how\s+to\s+(make|produce|build)|training\s+session)\b/i.test(n)) {
+    return true;
+  }
+  return false;
 }

@@ -281,6 +281,12 @@ export const KNOWN_EVENTS: Record<string, CanonicalEvent> = {
     location: "Germany",
     website: "https://www.nature-one.de/",
   },
+  "one-world-radio": {
+    slug: "one-world-radio",
+    name: "One World Radio",
+    kind: "radio",
+    location: "Tomorrowland",
+  },
 };
 
 /** Alternate name/slug keys → canonical slug. */
@@ -357,6 +363,9 @@ const ALIAS_TO_SLUG: Record<string, string> = {
   "zurcher-street-parade": "street-parade",
   "nature-one": "nature-one",
   natureone: "nature-one",
+  "one-world-radio": "one-world-radio",
+  oneworldradio: "one-world-radio",
+  "tomorrowland-one-world-radio": "one-world-radio",
 };
 
 function keyOf(name: string): string {
@@ -423,7 +432,16 @@ export function inferFestivalEvent(title: string): CanonicalEvent | null {
   if (/\bhard\s*(summer|fest|day of the dead|miami|nyc|sf)\b|\bholy\s*ship\b/i.test(t)) {
     return KNOWN_EVENTS["hard-summer"];
   }
+  if (/\bone\s*world\s*radio\b/i.test(t)) {
+    return KNOWN_EVENTS["one-world-radio"];
+  }
   if (/\btomorrowland\b/i.test(t)) return KNOWN_EVENTS.tomorrowland;
+  if (
+    /\b(freedom\s*stage|main\s*stage|mainstage)\b/i.test(t) &&
+    /\b(belgium|weekend|we\s*[12]|boom)\b/i.test(t)
+  ) {
+    return KNOWN_EVENTS.tomorrowland;
+  }
   if (/\bparookaville\b/i.test(t)) return KNOWN_EVENTS.parookaville;
   if (/\bburning\s*man\b/i.test(t)) return KNOWN_EVENTS["burning-man"];
   if (/\bcoachella\b/i.test(t)) return KNOWN_EVENTS.coachella;

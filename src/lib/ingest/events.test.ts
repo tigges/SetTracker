@@ -36,6 +36,13 @@ assert.equal(
 assert.equal(resolveEvent("Dreamstate SoCal").slug, "dreamstate");
 assert.equal(inferFestivalEvent("Random Club Night"), null);
 assert.equal(resolveEvent("Djoon").kind, "club");
+assert.equal(inferFestivalEvent("One World Radio Guest Mix")?.slug, "one-world-radio");
+assert.equal(resolveEvent("One World Radio").slug, "one-world-radio");
+assert.equal(resolveEvent("One World Radio").kind, "radio");
+assert.equal(
+  inferFestivalEvent("Artist | Freedom Stage Weekend 2 Belgium")?.slug,
+  "tomorrowland",
+);
 assert.equal(resolveEvent("Tomorrowland Belgium").slug, "tomorrowland");
 assert.equal(resolveEvent("Tomorrowland Belgium").kind, "festival");
 assert.equal(
