@@ -1086,7 +1086,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_KOROLOVA_TML_WE2_2026,
   },
   {
-    // Tomorrowland official — Mainstage WE2; 25/54 timed (rest lerped in capture).
+    // Tomorrowland official — Mainstage WE2; 1001 recapture 2026-08-16.
     video: "https://www.youtube.com/watch?v=LE-byccuovI",
     primaryArtist: dj("Lucas & Steve", {
       accent: "#ffb703",

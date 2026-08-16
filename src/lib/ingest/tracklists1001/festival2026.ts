@@ -2494,165 +2494,68 @@ export const TL_KOROLOVA_TML_WE2_2026: FingerprintSeedRow[] = [
 
 /**
  * Lucas & Steve @ Mainstage, Tomorrowland Weekend 2, Belgium 2026-07-26
- * Official YT: https://www.youtube.com/watch?v=LE-byccuovI
- * 1001TL: https://1001.tl/qz05s21 — operator console capture 2026-08-01
- * (25/54 timed cues; missing clocks already lerped in capture).
+ * https://www.1001tracklists.com/tracklist/qz05s21/lucas-steve-mainstage-tomorrowland-weekend-2-belgium-2026-07-26.html
+ * Official YT: https://youtu.be/LE-byccuovI
+ * Capture overlay used TL_Lucas&Steve_Mainstage_Tomorrowland_WE2_Belgium_2026
+ * (`&` illegal); constant stays TL_LUCAS_STEVE_TML_WE2_2026.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-LE-byccuovI"]
+ * Recapture 2026-08-16 — same 54 cues as 2026-08-01; Be Like Bob joiner is `&`.
  */
 export const TL_LUCAS_STEVE_TML_WE2_2026: FingerprintSeedRow[] = [
   { at: "0:12", artist: "Tiësto & Lucas & Steve", title: "Free Your Mind" },
   { at: "2:56", artist: "Tove Lo", title: "Habits (Stay High) (Acappella)" },
-  {
-    at: "5:40",
-    artist: "Tiësto & Lucas & Steve & Silent Child & Sān-Z",
-    title: "ZENLESS",
-  },
-  {
-    at: "6:38",
-    artist: "Axwell Λ Ingrosso",
-    title: "More Than You Know (Acappella)",
-  },
+  { at: "5:40", artist: "Tiësto & Lucas & Steve & Silent Child & Sān-Z", title: "ZENLESS" },
+  { at: "6:38", artist: "Axwell Λ Ingrosso", title: "More Than You Know (Acappella)" },
   { at: "7:36", artist: "Sentinel", title: "Bring The House Down" },
-  {
-    at: "10:47",
-    artist: "Steve Aoki & JJ Lin",
-    title: "The Show (Steve Aoki & Lucas & Steve Remix)",
-  },
+  { at: "10:47", artist: "Steve Aoki & JJ Lin", title: "The Show (Steve Aoki & Lucas & Steve Remix)" },
   { at: "11:31", artist: "HUGEL & SOLTO", title: "Jamaican (Bam Bam)" },
-  { at: "12:15", artist: "Lucas & Steve x Mike Bond", title: "Be Like Bob" },
+  { at: "12:15", artist: "Lucas & Steve & Mike Bond", title: "Be Like Bob" },
   { at: "14:13", artist: "Zombie Nation", title: "Kernkraft 400" },
   { at: "14:59", artist: "Lucas & Steve", title: "Renegade Master" },
-  {
-    at: "15:46",
-    artist: "The Chemical Brothers",
-    title: "Galvanize (Lucas & Steve Bootleg)",
-  },
-  {
-    at: "16:32",
-    artist: "Swedish House Mafia & Knife Party ft. ADL",
-    title: "Antidote (Belgium Edit)",
-  },
-  {
-    at: "18:14",
-    artist: "Michael Calfan",
-    title: "Resurrection (Axwell Re-Cut Club Version)",
-  },
-  {
-    at: "18:59",
-    artist: "Lucas & Steve X Tungevaag ft. Philip Strand",
-    title: "Paper Planes",
-  },
+  { at: "15:46", artist: "The Chemical Brothers", title: "Galvanize (Lucas & Steve Bootleg)" },
+  { at: "16:32", artist: "Swedish House Mafia & Knife Party ft. ADL", title: "Antidote (Belgium Edit)" },
+  { at: "18:14", artist: "Michael Calfan", title: "Resurrection (Axwell Re-Cut Club Version)" },
+  { at: "18:59", artist: "Lucas & Steve X Tungevaag ft. Philip Strand", title: "Paper Planes" },
   { at: "19:43", artist: "Lucas & Steve", title: "This Ain't Just Music" },
   { at: "22:11", artist: "Lucas & Steve", title: "Emergency" },
   { at: "23:20", artist: "Mike Posner", title: "Cooler Than Me" },
   { at: "24:29", artist: "RÜFÜS DU SOL", title: "Innerbloom" },
-  {
-    at: "25:38",
-    artist: "Lucas & Steve vs. Ivan Gough & Feenixpawl & Georgi Kay",
-    title: "Wasting Time vs. In My Mind (Lucas & Steve Mashup)",
-  },
-  {
-    at: "26:32",
-    artist: "Ivan Gough & Feenixpawl ft. Georgi Kay",
-    title: "In My Mind (Acappella)",
-  },
+  { at: "25:38", artist: "Lucas & Steve vs. Ivan Gough & Feenixpawl & Georgi Kay", title: "Wasting Time vs. In My Mind (Lucas & Steve Mashup)" },
+  { at: "26:32", artist: "Ivan Gough & Feenixpawl ft. Georgi Kay", title: "In My Mind (Acappella)" },
   { at: "27:26", artist: "Lucas & Steve", title: "Wasting Time" },
-  {
-    at: "28:21",
-    artist: "Avicii ft. Sandro Cavazza",
-    title: "Without You (Acappella)",
-  },
-  {
-    at: "29:15",
-    artist: "ALOK & Firebeatz",
-    title: "Higher State Of Consciousness",
-  },
-  {
-    at: "30:01",
-    artist: "Mightyfools",
-    title: "Footrocker (Get Your, Get Your Hands Up Acappella)",
-  },
-  {
-    at: "30:46",
-    artist: "Mau P vs. Tiësto",
-    title: "Like I Like It (Kastra RVN (Raven) Edit)",
-  },
+  { at: "28:21", artist: "Avicii ft. Sandro Cavazza", title: "Without You (Acappella)" },
+  { at: "29:15", artist: "ALOK & Firebeatz", title: "Higher State Of Consciousness" },
+  { at: "30:01", artist: "Mightyfools", title: "Footrocker (Get Your, Get Your Hands Up Acappella)" },
+  { at: "30:46", artist: "Mau P vs. Tiësto", title: "Like I Like It (Kastra RVN (Raven) Edit)" },
   { at: "31:10", artist: "Mau P", title: "Like I Like It" },
   { at: "31:35", artist: "Tiësto", title: "RVN (Raven)" },
   { at: "31:59", artist: "Lucas & Steve", title: "LFG" },
   { at: "32:24", artist: "Gwen Stefani", title: "Hollaback Girl (Acappella)" },
   { at: "32:49", artist: "Da Hool", title: "Meet Her At The Love Parade" },
-  {
-    at: "33:15",
-    artist: "Steve Angello",
-    title: "Knas (Lucas & Steve Bootleg)",
-  },
-  {
-    at: "33:40",
-    artist: "Lucas & Steve vs. Avicii & RAS",
-    title: "Source vs. The Nights (Lucas & Steve Mashup)",
-  },
+  { at: "33:15", artist: "Steve Angello", title: "Knas (Lucas & Steve Bootleg)" },
+  { at: "33:40", artist: "Lucas & Steve vs. Avicii & RAS", title: "Source vs. The Nights (Lucas & Steve Mashup)" },
   { at: "34:24", artist: "Lucas & Steve", title: "Source" },
   { at: "35:08", artist: "Avicii ft. RAS", title: "The Nights (Acappella)" },
-  {
-    at: "35:51",
-    artist: "Darude & Lucas & Steve vs. Gala",
-    title: "Sandstorm vs. Freed From Desire (Lucas & Steve Mashup)",
-  },
+  { at: "35:51", artist: "Darude & Lucas & Steve vs. Gala", title: "Sandstorm vs. Freed From Desire (Lucas & Steve Mashup)" },
   { at: "36:33", artist: "Gala", title: "Freed From Desire" },
-  {
-    at: "37:16",
-    artist: "Darude",
-    title: "Sandstorm (Lucas & Steve 2025 Flip)",
-  },
+  { at: "37:16", artist: "Darude", title: "Sandstorm (Lucas & Steve 2025 Flip)" },
   { at: "37:58", artist: "AFROJACK & Lucas & Steve", title: "Control" },
-  {
-    at: "39:14",
-    artist: "Yeah Yeah Yeahs",
-    title: "Heads Will Roll (A-Trak Remix)",
-  },
+  { at: "39:14", artist: "Yeah Yeah Yeahs", title: "Heads Will Roll (A-Trak Remix)" },
   { at: "40:30", artist: "AFROJACK & Lucas & Steve", title: "Control (VIP)" },
   { at: "41:21", artist: "Technotronic", title: "Pump Up The Jam" },
-  {
-    at: "42:12",
-    artist: "AFROJACK & Lucas & Steve & DubVision ft. Taranteeno",
-    title: "Anywhere With You (Festival Mix)",
-  },
-  {
-    at: "45:38",
-    artist: "Lucas & Steve & Maynamic & Edd Blaze",
-    title: "Lift Me Up",
-  },
+  { at: "42:12", artist: "AFROJACK & Lucas & Steve & DubVision ft. Taranteeno", title: "Anywhere With You (Festival Mix)" },
+  { at: "45:38", artist: "Lucas & Steve & Maynamic & Edd Blaze", title: "Lift Me Up" },
   { at: "46:26", artist: "Lucas & Steve", title: "Good Times" },
   { at: "47:14", artist: "Lucas & Steve", title: "All I Know" },
-  {
-    at: "50:12",
-    artist: "Nari & Milani",
-    title: "Atom (SQU4RE 2024 Edit)",
-  },
+  { at: "50:12", artist: "Nari & Milani", title: "Atom (SQU4RE 2024 Edit)" },
   { at: "51:04", artist: "Coldplay", title: "Clocks" },
   { at: "51:56", artist: "Nico & Vinz", title: "Am I Wrong (Acappella)" },
   { at: "52:47", artist: "Alice Deejay", title: "Better Off Alone" },
   { at: "53:34", artist: "Lucas & Steve", title: "What About Now" },
-  {
-    at: "54:20",
-    artist: "Lucas & Steve x Oaks x Jaimes",
-    title: "Love On Hold (Club Mix)",
-  },
-  {
-    at: "55:10",
-    artist: "Corona",
-    title: "The Rhythm Of The Night (Acappella)",
-  },
-  {
-    at: "55:59",
-    artist: "Lucas & Steve ft. Jordan Shaw",
-    title: "Heart First (Club Mix)",
-  },
-  {
-    at: "59:30",
-    artist: "Swedish House Mafia ft. John Martin",
-    title: "Save The World (Acappella)",
-  },
+  { at: "54:20", artist: "Lucas & Steve x Oaks x Jaimes", title: "Love On Hold (Club Mix)" },
+  { at: "55:10", artist: "Corona", title: "The Rhythm Of The Night (Acappella)" },
+  { at: "55:59", artist: "Lucas & Steve ft. Jordan Shaw", title: "Heart First (Club Mix)" },
+  { at: "59:30", artist: "Swedish House Mafia ft. John Martin", title: "Save The World (Acappella)" },
 ];
 
 /**

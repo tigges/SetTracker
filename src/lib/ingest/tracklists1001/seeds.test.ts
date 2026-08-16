@@ -926,6 +926,8 @@ assertSeedClocks(TL_LUCAS_STEVE_TML_WE2_2026);
 const lucasSteve = tracklist1001RowsToPlays(TL_LUCAS_STEVE_TML_WE2_2026);
 assert.equal(lucasSteve.length, 54);
 assert.equal(lucasSteve[0]!.trackTitle, "Free Your Mind");
+assert.equal(TL_LUCAS_STEVE_TML_WE2_2026[7]?.artist, "Lucas & Steve & Mike Bond");
+assert.equal(TL_LUCAS_STEVE_TML_WE2_2026[7]?.title, "Be Like Bob");
 assert.match(lucasSteve[lucasSteve.length - 1]!.trackTitle!, /Save The World/);
 assert.equal(lucasSteve[lucasSteve.length - 1]!.timestamp, 59 * 60 + 30);
 let lsPrev = -1;
