@@ -47,6 +47,9 @@ const CH_DANCE_VALLEY = YOUTUBE_SETS.find((s) =>
 const BASSJACKERS_TML = YOUTUBE_SETS.find((s) =>
   s.video.includes("BG3Lr9EdWVY"),
 );
+const TUJAMO_PAROOKAVILLE = YOUTUBE_SETS.find((s) =>
+  s.video.includes("JhpL-KKGoO8"),
+);
 
 describe("watchMetaFromCuratedSeed", () => {
   it("builds ASOT 1290 meta from the curated 1001 capture", () => {
@@ -167,6 +170,17 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=BG3Lr9EdWVY");
     // Last cue 59:30 + 180s pad.
     assert.equal(meta.durationSec, 59 * 60 + 30 + 180);
+  });
+
+  it("builds TUJAMO Parookaville meta from the curated 1001 capture", () => {
+    assert.ok(TUJAMO_PAROOKAVILLE);
+    const meta = watchMetaFromCuratedSeed(TUJAMO_PAROOKAVILLE);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "JhpL-KKGoO8");
+    assert.match(meta.title, /Parookaville/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=JhpL-KKGoO8");
+    // Last cue 1:11:41 + 180s pad.
+    assert.equal(meta.durationSec, 1 * 3600 + 11 * 60 + 41 + 180);
   });
 
   it("builds Vintage Culture NYC Yacht meta from the curated 1001 capture", () => {
@@ -822,5 +836,19 @@ describe("curated YouTube 429 fallback", () => {
     assert.ok(sets[0]!.durationSec >= 59 * 60);
     assert.equal(sets[0]?.primaryArtist?.slug, "bassjackers");
     assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
+  });
+
+  it("lands TUJAMO Parookaville from the 1001 seed when watch is 429", async () => {
+    assert.ok(TUJAMO_PAROOKAVILLE);
+    const adapter = createYoutubeAdapter([TUJAMO_PAROOKAVILLE], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-JhpL-KKGoO8");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 74);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 1 * 3600 + 11 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "tujamo");
+    assert.match(String(sets[0]?.eventName ?? ""), /Parookaville/i);
   });
 });

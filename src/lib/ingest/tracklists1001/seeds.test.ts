@@ -118,6 +118,7 @@ import {
   TL_VINTAGE_CULTURE_SO_TRACK_BOA_2026,
   TL_ROBIN_SCHULZ_PACHA_IBIZA_2026,
   TL_CALVIN_HARRIS_MAINSTAGE_DANCE_VALLEY_NETHERLANDS_2026,
+  TL_TUJAMO_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   tracklist1001RowsToPlays,
@@ -2232,6 +2233,32 @@ for (let i = 1; i < chDanceValley.length; i++) {
     (chDanceValley[i]!.timestamp ?? 0) >
       (chDanceValley[i - 1]!.timestamp ?? 0),
     `Calvin Harris Dance Valley clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_TUJAMO_MAINSTAGE_PAROOKAVILLE_GERMANY_2026);
+assert.equal(TL_TUJAMO_MAINSTAGE_PAROOKAVILLE_GERMANY_2026.length, 74);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-JhpL-KKGoO8"],
+  TL_TUJAMO_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
+);
+const tujamoParookaville = tracklist1001RowsToPlays(
+  TL_TUJAMO_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
+);
+assert.equal(tujamoParookaville.length, 74);
+assert.equal(tujamoParookaville[0]?.provenance, "1001tl");
+assert.equal(tujamoParookaville[0]?.timestamp, 11);
+assert.equal(tujamoParookaville[0]?.trackTitle, "WHO (BRANDON Remix)");
+assert.equal(
+  tujamoParookaville[73]?.trackTitle,
+  "We Are Your Friends (Acappella)",
+);
+assert.equal(tujamoParookaville[73]?.timestamp, 1 * 3600 + 11 * 60 + 41);
+for (let i = 1; i < tujamoParookaville.length; i++) {
+  assert.ok(
+    (tujamoParookaville[i]!.timestamp ?? 0) >
+      (tujamoParookaville[i - 1]!.timestamp ?? 0),
+    `TUJAMO Parookaville clocks must increase at index ${i}`,
   );
 }
 

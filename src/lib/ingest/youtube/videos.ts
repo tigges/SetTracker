@@ -84,6 +84,7 @@ import {
   TL_VINTAGE_CULTURE_PACHA_IBIZA_2026,
   TL_VINTAGE_CULTURE_SO_TRACK_BOA_2026,
   TL_CALVIN_HARRIS_MAINSTAGE_DANCE_VALLEY_NETHERLANDS_2026,
+  TL_TUJAMO_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
   TL_MISS_MONIQUE_TML_WE2_2026,
   TL_NICKY_ROMERO_TML_WE2_2026,
   TL_ODD_MOB_TML_WE2_2026,
@@ -1476,6 +1477,22 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/2pcuzd49/calvin-harris-mainstage-dance-valley-netherlands-2026-08-08.html",
     tracklist1001: TL_CALVIN_HARRIS_MAINSTAGE_DANCE_VALLEY_NETHERLANDS_2026,
+  },
+  {
+    // Official Parookaville channel — 1001TL timed list (2026-08-16 capture).
+    video: "https://www.youtube.com/watch?v=JhpL-KKGoO8",
+    primaryArtist: dj("TUJAMO", {
+      accent: "#f4a261",
+      homeCity: "Germany",
+    }),
+    genre: "Big Room",
+    type: "festival",
+    title: "TUJAMO @ Mainstage, Parookaville 2026",
+    seriesName: "Parookaville",
+    eventName: "Parookaville",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2r7bnnpk/tujamo-mainstage-parookaville-germany-2026-07-19.html",
+    tracklist1001: TL_TUJAMO_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
   },
   {
     video: "https://www.youtube.com/watch?v=6bJZPDKlq7o",
