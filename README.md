@@ -50,8 +50,9 @@ Provenance per row: `1001TL parse`, `SoundCloud parse`, `fingerprint`, `communit
    (same event / series / DJ).
 3. **DJ profile** (`/djs/[slug]`) — series chips open Search, recent sets,
    most-played tracks, collaborators, source health.
-4. **Events** (`/events`, `/events/[slug]`) — festivals, clubs, livestreams,
-   plus a curated festival-edition calendar with capture-gap links.
+4. **Events** (`/events`, `/events/[slug]`) — festivals, clubs, livestreams.
+   Visual teasers open Atlas and the festival **calendar**
+   (`/events/calendar`) — a month grid of curated edition weekends.
 5. **Atlas** (`/atlas`) — DJ Mag Top 100 clubs, festivals, and DJs. Layer
    chips are multi-select; pin tap selects (nearby stack listed); Hide ranks
    keeps the legend. Header search; empty pins link to `/capture-1001?q=…`.
