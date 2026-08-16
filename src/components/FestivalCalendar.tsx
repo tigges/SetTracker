@@ -26,7 +26,6 @@ const BUCKET_TONE: Record<string, string> = {
 export type CalendarEdition = EditionCalendarRow & {
   name: string;
   imageUrl: string | null;
-  gap: boolean;
 };
 
 function shortName(e: CalendarEdition): string {
@@ -159,14 +158,6 @@ export function FestivalCalendar({
                         </span>
                       </span>
                     </Link>
-                    {e.gap ? (
-                      <Link
-                        href={`/capture-1001?q=${encodeURIComponent(e.name)}`}
-                        className="flex-none text-[12px] text-brand hover:underline"
-                      >
-                        Capture
-                      </Link>
-                    ) : null}
                   </li>
                 ))}
               </ul>

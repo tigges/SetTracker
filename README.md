@@ -43,21 +43,23 @@ Provenance per row: `1001TL parse`, `SoundCloud parse`, `fingerprint`, `communit
 ## Pages
 
 1. **Sets feed** (`/`) — New this week, Festival season, Popular, Radar picks,
-   then Deep catalog grouped by week. **Complete only** defaults on (saved in
-   the browser). Festival / Radio / Mix chips, Needs IDs sort, YT+SC twins
-   collapse, and cards show provenance + identified %.
+   then Deep catalog grouped by week. Genre is the only consumer filter.
+   Spotlight rails still prefer complete tracklists; YT+SC twins collapse.
+   Incomplete / needs-IDs queues live on Stats, not as homepage chips.
 2. **Set detail** (`/sets/[slug]`) — status timeline, export, related sets
    (same event / series / DJ).
 3. **DJ profile** (`/djs/[slug]`) — series chips open Search, recent sets,
-   most-played tracks, collaborators, source health.
+   most-played tracks, collaborators.
 4. **Events** (`/events`, `/events/[slug]`) — festivals, clubs, livestreams.
    Visual teasers open Atlas and the festival **calendar**
    (`/events/calendar`) — a month grid of curated edition weekends.
 5. **Atlas** (`/atlas`) — DJ Mag Top 100 clubs, festivals, and DJs. Layer
    chips are multi-select; pin tap selects (nearby stack listed); Hide ranks
    keeps the legend. Header search; empty pins link to `/capture-1001?q=…`.
-6. **Search / Stats / About** — catalog search, coverage, product notes.
-7. **Tracks / Labels** — still in the catalog and sitemap; not in the main nav.
+6. **Stats** (`/stats`) — operator catalog health (incomplete sets, needs IDs,
+   DJ gaps, festival capture gaps). Footer link only; not in the main nav.
+7. **Search / About** — catalog search and product notes.
+8. **Tracks / Labels** — still in the catalog and sitemap; not in the main nav.
 
 ## Getting started
 

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { getFeed, getGenres } from "@/lib/queries";
 import { SetFeed } from "@/components/SetFeed";
-import { StatusLegend } from "@/components/StatusBits";
 import { pageMeta, SITE_DESCRIPTION } from "@/lib/site";
 
 export const metadata: Metadata = pageMeta({
@@ -18,11 +17,8 @@ export default async function Home() {
       <div className="mb-6">
         <h1 className="text-3xl font-extrabold tracking-tight">DJ Sets</h1>
         <p className="mt-2 max-w-2xl text-[14px] text-muted">
-          Festival, radio, and mix tracklists with ID status and provenance.
+          Festival Relives, radio shows, and mixes — a set is a set.
         </p>
-        <div className="mt-3 lg:hidden">
-          <StatusLegend />
-        </div>
       </div>
 
       <SetFeed feed={feed} genres={genres} />

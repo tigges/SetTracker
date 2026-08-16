@@ -18,7 +18,6 @@ export default async function FestivalCalendarPage() {
     ...e,
     name: board.names.get(e.eventSlug) ?? editionBrandLabel(e.eventSlug),
     imageUrl: board.images.get(e.eventSlug) ?? null,
-    gap: board.gaps.some((g) => g.edition.slug === e.slug),
   }));
 
   return (

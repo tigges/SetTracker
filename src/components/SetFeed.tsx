@@ -13,11 +13,8 @@ import {
 } from "@/lib/feedPriority";
 import {
   collapseHostTwins,
-  compareNeedsIds,
   groupByDeepWeek,
   identifiedRatio,
-  setMatchesTypeFilter,
-  type FeedTypeFilter,
 } from "@/lib/feedQuality";
 import { setMatchesGenreFilter } from "@/lib/genreFamilies";
 import {
@@ -38,20 +35,12 @@ const PAGE_SIZE = 18;
 
 const PREFS_KEY = "setradar.feedPrefs";
 
-type FeedSort = "default" | "needs-ids";
-
 type FeedPrefs = {
-  completeOnly: boolean;
-  type: FeedTypeFilter;
   genre: string;
-  sort: FeedSort;
 };
 
 const DEFAULT_PREFS: FeedPrefs = {
-  completeOnly: true,
-  type: "all",
   genre: "all",
-  sort: "default",
 };
 
 const prefsListeners = new Set<() => void>();
@@ -76,13 +65,7 @@ function parsePrefs(raw: string): FeedPrefs {
   try {
     const parsed = JSON.parse(raw) as Partial<FeedPrefs>;
     return {
-      completeOnly: parsed.completeOnly ?? true,
-      type:
-        parsed.type === "festival" || parsed.type === "radio" || parsed.type === "mix"
-          ? parsed.type
-          : "all",
       genre: typeof parsed.genre === "string" ? parsed.genre : "all",
-      sort: parsed.sort === "needs-ids" ? "needs-ids" : "default",
     };
   } catch {
     return DEFAULT_PREFS;
@@ -111,8 +94,9 @@ function isRadarCandidate(s: FeedItem): boolean {
 
 /**
  * Homepage feed:
- * New this week → Popular sets → In-demand DJs (Top 100) / Top events →
+ * New this week → Festival season → Popular sets → In-demand DJs / Top events →
  * Radar picks → Deep catalog.
+ * Quality queues live on /stats, not as consumer filters.
  */
 export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }) {
   const prefsRaw = useSyncExternalStore(
@@ -133,12 +117,10 @@ export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }
       dedupeNearDuplicates(
         feed
           .filter((s) => setMatchesGenreFilter(s, prefs.genre))
-          .filter((s) => setMatchesTypeFilter(s, prefs.type))
-          .filter((s) => !prefs.completeOnly || isCompleteTracklist(s))
           .map((s) => ({ ...s, primaryDjSlug: s.primaryDj?.slug ?? null })),
       ),
     );
-  }, [feed, prefs.genre, prefs.type, prefs.completeOnly]);
+  }, [feed, prefs.genre]);
 
   const {
     newWeek,
@@ -185,9 +167,7 @@ export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }
 
     const deepSorted = filtered
       .filter((s) => !used.has(s.id))
-      .sort(
-        prefs.sort === "needs-ids" ? compareNeedsIds : compareFeedPriority,
-      );
+      .sort(compareFeedPriority);
     const deepAll = diversifyBySeries(diversifyByArtist(deepSorted, 1), 1);
     const deepShown = deepAll.slice(0, visible);
     return {
@@ -200,7 +180,7 @@ export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }
       deepShown,
       deepRemaining: deepAll.length - deepShown.length,
     };
-  }, [filtered, visible, prefs.sort]);
+  }, [filtered, visible]);
 
   const deepGroups = useMemo(() => groupByDeepWeek(deepShown), [deepShown]);
 
@@ -210,50 +190,16 @@ export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }
         <span className="mono text-[12px] text-muted2">
           {filtered.length} sets
         </span>
-        <div className="flex flex-wrap items-center gap-2">
-          <TypeChips
-            value={prefs.type}
-            onChange={(type) => patchPrefs({ type })}
-          />
-          <button
-            type="button"
-            aria-pressed={prefs.completeOnly}
-            onClick={() => patchPrefs({ completeOnly: !prefs.completeOnly })}
-            className={`rounded-full border px-3 py-1 text-[12px] ${
-              prefs.completeOnly
-                ? "border-brand text-brand"
-                : "border-line text-muted hover:border-[color:var(--muted2)]"
-            }`}
-          >
-            Complete only
-          </button>
-          <button
-            type="button"
-            aria-pressed={prefs.sort === "needs-ids"}
-            onClick={() =>
-              patchPrefs({
-                sort: prefs.sort === "needs-ids" ? "default" : "needs-ids",
-              })
-            }
-            className={`rounded-full border px-3 py-1 text-[12px] ${
-              prefs.sort === "needs-ids"
-                ? "border-brand text-brand"
-                : "border-line text-muted hover:border-[color:var(--muted2)]"
-            }`}
-          >
-            Needs IDs
-          </button>
-          <GenreFilter
-            genres={genres}
-            value={prefs.genre}
-            onChange={(genre) => patchPrefs({ genre })}
-          />
-        </div>
+        <GenreFilter
+          genres={genres}
+          value={prefs.genre}
+          onChange={(genre) => patchPrefs({ genre })}
+        />
       </div>
 
       {filtered.length === 0 ? (
         <p className="py-16 text-center text-[14px] text-muted2">
-          No sets match this filter.
+          No sets match this genre.
         </p>
       ) : (
         <>
@@ -300,43 +246,6 @@ export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }
           )}
         </>
       )}
-    </div>
-  );
-}
-
-function TypeChips({
-  value,
-  onChange,
-}: {
-  value: FeedTypeFilter;
-  onChange: (type: FeedTypeFilter) => void;
-}) {
-  return (
-    <div
-      className="flex overflow-hidden rounded-full border border-line"
-      role="group"
-      aria-label="Set type"
-    >
-      {(
-        [
-          ["all", "All"],
-          ["festival", "Festival"],
-          ["radio", "Radio"],
-          ["mix", "Mix"],
-        ] as const
-      ).map(([id, label]) => (
-        <button
-          key={id}
-          type="button"
-          aria-pressed={value === id}
-          onClick={() => onChange(id)}
-          className={`px-2.5 py-1 text-[12px] ${
-            value === id ? "bg-panel2 text-ink" : "text-muted hover:text-ink"
-          }`}
-        >
-          {label}
-        </button>
-      ))}
     </div>
   );
 }

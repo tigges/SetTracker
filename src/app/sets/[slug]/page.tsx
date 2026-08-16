@@ -10,7 +10,6 @@ import { SetTimeline } from "@/components/SetTimeline";
 import { StatusLegend } from "@/components/StatusBits";
 import { setHostHeadline } from "@/lib/brandHosts";
 import { detectPlaybackHost } from "@/lib/playback";
-import { assessSetDensity } from "@/lib/setDensity";
 import { pageMeta } from "@/lib/site";
 import { SET_TYPE_META, fmtDate, fmtDuration } from "@/lib/status";
 
@@ -61,11 +60,6 @@ export default async function SetPage({
     seriesName: set.series?.name,
     eventName: set.event?.name,
   });
-  const density = assessSetDensity({
-    durationSec: set.durationSec,
-    playCount: set.plays.length,
-  });
-
   return (
     <SetListen>
     <div>
@@ -153,21 +147,6 @@ export default async function SetPage({
             <span className="mono">{fmtDate(set.publishedAt)}</span>
             <span className="mono">{fmtDuration(set.durationSec)}</span>
             <span className="mono">{set.plays.length} tracks</span>
-            {density.severity !== "ok" && (
-              <span
-                className="mono"
-                style={{
-                  color:
-                    density.severity === "severe"
-                      ? "var(--magenta)"
-                      : "var(--amber)",
-                }}
-                title={density.reason ?? undefined}
-              >
-                {density.severity} tracklist · ~{density.tracksPerHour.toFixed(1)}
-                /h (expect ~{density.expectedPlays})
-              </span>
-            )}
             {set.sourceName && (
               <span>
                 Source:{" "}

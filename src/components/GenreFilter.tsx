@@ -7,6 +7,9 @@ import {
   familyFilterValue,
   genreFilterLabel,
 } from "@/lib/genreFamilies";
+import { placeRightAlignedPopover } from "@/lib/popoverPlace";
+
+const MENU_WIDTH = 256;
 
 function rowClass(active: boolean): string {
   return `flex w-full items-center justify-between rounded-md px-2.5 py-1.5 text-left text-[13px] transition-colors ${
@@ -26,8 +29,50 @@ export function GenreFilter({
   onChange: (next: string) => void;
 }) {
   const [open, setOpen] = useState(false);
+  const [pos, setPos] = useState<{
+    top: number;
+    left: number;
+    width: number;
+    maxHeight: number;
+  } | null>(null);
   const root = useRef<HTMLDivElement>(null);
   const families = useMemo(() => familiesPresentInCatalog(genres), [genres]);
+
+  function placeMenu() {
+    const el = root.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    setPos(
+      placeRightAlignedPopover({
+        trigger: { bottom: rect.bottom, right: rect.right },
+        menuWidth: MENU_WIDTH,
+        viewportWidth: window.innerWidth,
+        viewportHeight: window.innerHeight,
+      }),
+    );
+  }
+
+  function toggle() {
+    if (open) {
+      setOpen(false);
+      return;
+    }
+    placeMenu();
+    setOpen(true);
+  }
+
+  useEffect(() => {
+    if (!open) return;
+    function onMove() {
+      placeMenu();
+    }
+    window.addEventListener("resize", onMove);
+    window.addEventListener("scroll", onMove, true);
+    return () => {
+      window.removeEventListener("resize", onMove);
+      window.removeEventListener("scroll", onMove, true);
+    };
+  }, [open]);
 
   useEffect(() => {
     function onDoc(e: MouseEvent) {
@@ -58,7 +103,7 @@ export function GenreFilter({
         aria-haspopup="listbox"
         aria-expanded={open}
         aria-label={`Genre filter, ${genreFilterLabel(value)}`}
-        onClick={() => setOpen((v) => !v)}
+        onClick={toggle}
         className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-[12px] transition-colors ${
           value === "all"
             ? "border-line text-muted hover:border-muted2 hover:text-ink"
@@ -74,10 +119,16 @@ export function GenreFilter({
         </span>
       </button>
 
-      {open && (
+      {open && pos ? (
         <div
           role="listbox"
-          className="absolute right-0 z-20 mt-2 w-64 rounded-xl border border-line bg-panel p-1.5 shadow-lg shadow-black/40"
+          style={{
+            top: pos.top,
+            left: pos.left,
+            width: pos.width,
+            maxHeight: pos.maxHeight,
+          }}
+          className="fixed z-30 overflow-y-auto rounded-xl border border-line bg-panel p-1.5 shadow-lg shadow-black/40 scroll-thin"
         >
           <button
             type="button"
@@ -127,7 +178,7 @@ export function GenreFilter({
             );
           })}
         </div>
-      )}
+      ) : null}
     </div>
   );
 }

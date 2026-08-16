@@ -20,7 +20,7 @@ describe("feedQuality", () => {
     assert.equal(tracklistProvenanceHint(null, "yt-x", "fingerprint"), "fingerprint");
   });
 
-  it("matches festival / radio / mix type chips", () => {
+  it("matches festival / radio / mix types for ingest and stats", () => {
     assert.equal(setMatchesTypeFilter({ type: "festival" }, "festival"), true);
     assert.equal(
       setMatchesTypeFilter({ type: "mix", venueTier: "festival" }, "festival"),

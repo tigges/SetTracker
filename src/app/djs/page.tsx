@@ -42,7 +42,7 @@ export default async function DjsPage() {
         </div>
       </div>
 
-      <DjList djs={djs} />
+      <DjList djs={djs.filter((d) => d.isBrowseReady)} />
     </div>
   );
 }
