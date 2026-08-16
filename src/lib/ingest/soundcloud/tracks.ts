@@ -108,4 +108,17 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     type: "radio",
     minDurationSec: 30 * 60,
   },
+  {
+    // Official Hardwell On Air 527 Yearmix; 1001TL wired via
+    // sc-hardwell-hardwell-on-air-527-yearmix (same list as yt-OXwK0CSmXzY).
+    url: "https://soundcloud.com/hardwell/hardwell-on-air-527-yearmix",
+    primaryArtist: dj("Hardwell", {
+      accent: "#023e8a",
+      homeCity: "Breda, NL",
+    }),
+    genre: "Big Room",
+    seriesName: "Hardwell On Air",
+    type: "radio",
+    minDurationSec: 30 * 60,
+  },
 ];

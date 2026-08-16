@@ -91,7 +91,10 @@ import {
   TL_MARKUS_SCHULZ_AND_JEROME_ISMA_AE_GDJB_2026,
   TL_STEVE_AOKI_TML_FRIENDSHIP_MIX_2026,
   TL_ALOK_TML_WE2_2026,
+  TL_HARDWELL_HOA_527_YEARMIX_2025,
   TL_VINTAGE_CULTURE_EDC_LV_NEON_2025,
+  TL_VINTAGE_CULTURE_NYC_YACHT_2023,
+  TL_VINTAGE_CULTURE_PACHA_IBIZA_2026,
   TL_VINTAGE_CULTURE_SO_TRACK_BOA_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   tracklist1001RowsToPlays,
@@ -1495,6 +1498,76 @@ for (let i = 1; i < vcBoa.length; i++) {
   assert.ok(
     (vcBoa[i]!.timestamp ?? 0) > (vcBoa[i - 1]!.timestamp ?? 0),
     `Vintage Culture Só Track Boa clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_VINTAGE_CULTURE_PACHA_IBIZA_2026);
+assert.equal(TL_VINTAGE_CULTURE_PACHA_IBIZA_2026.length, 14);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-OVex0rm7ZR4"],
+  TL_VINTAGE_CULTURE_PACHA_IBIZA_2026,
+);
+const vcPacha = tracklist1001RowsToPlays(TL_VINTAGE_CULTURE_PACHA_IBIZA_2026);
+assert.equal(vcPacha.length, 14);
+assert.equal(vcPacha[0]?.provenance, "1001tl");
+assert.equal(vcPacha[0]?.timestamp, 0);
+assert.equal(vcPacha[0]?.trackTitle, "I Need It");
+assert.equal(vcPacha[13]?.trackTitle, "It Is Simple But It Works Like Fcuk");
+assert.equal(vcPacha[13]?.timestamp, 1 * 3600 + 7 * 60 + 5);
+for (let i = 1; i < vcPacha.length; i++) {
+  assert.ok(
+    (vcPacha[i]!.timestamp ?? 0) > (vcPacha[i - 1]!.timestamp ?? 0),
+    `Vintage Culture Pacha Ibiza clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_VINTAGE_CULTURE_NYC_YACHT_2023);
+assert.equal(TL_VINTAGE_CULTURE_NYC_YACHT_2023.length, 27);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-6bJZPDKlq7o"],
+  TL_VINTAGE_CULTURE_NYC_YACHT_2023,
+);
+const vcYacht = tracklist1001RowsToPlays(TL_VINTAGE_CULTURE_NYC_YACHT_2023);
+assert.equal(vcYacht.length, 27);
+assert.equal(vcYacht[0]?.provenance, "1001tl");
+assert.equal(vcYacht[0]?.timestamp, 0);
+assert.equal(vcYacht[0]?.trackTitle, "Fallen Leaf");
+assert.equal(vcYacht[26]?.trackTitle, "Spring Girl");
+assert.equal(vcYacht[26]?.timestamp, 2 * 3600 + 4 * 60);
+for (let i = 1; i < vcYacht.length; i++) {
+  assert.ok(
+    (vcYacht[i]!.timestamp ?? 0) > (vcYacht[i - 1]!.timestamp ?? 0),
+    `Vintage Culture NYC Yacht clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_HARDWELL_HOA_527_YEARMIX_2025);
+assert.equal(TL_HARDWELL_HOA_527_YEARMIX_2025.length, 83);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-OXwK0CSmXzY"],
+  TL_HARDWELL_HOA_527_YEARMIX_2025,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-hardwell-hardwell-on-air-527-yearmix"],
+  TL_HARDWELL_HOA_527_YEARMIX_2025,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "https://soundcloud.com/hardwell/hardwell-on-air-527-yearmix"
+  ],
+  undefined,
+);
+const hoa527 = tracklist1001RowsToPlays(TL_HARDWELL_HOA_527_YEARMIX_2025);
+assert.equal(hoa527.length, 83);
+assert.equal(hoa527[0]?.provenance, "1001tl");
+assert.equal(hoa527[0]?.timestamp, 58);
+assert.equal(hoa527[0]?.trackTitle, "Sanctuary");
+assert.equal(hoa527[82]?.trackTitle, "Brace For Impact");
+assert.equal(hoa527[82]?.timestamp, 56 * 60 + 47);
+for (let i = 1; i < hoa527.length; i++) {
+  assert.ok(
+    (hoa527[i]!.timestamp ?? 0) > (hoa527[i - 1]!.timestamp ?? 0),
+    `Hardwell HOA 527 clocks must increase at index ${i}`,
   );
 }
 

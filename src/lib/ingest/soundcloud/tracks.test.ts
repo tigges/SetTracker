@@ -74,4 +74,17 @@ assert.equal(
   "sc-markusschulz-gdjb-aug132026",
 );
 
+const hoa527Sc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url === "https://soundcloud.com/hardwell/hardwell-on-air-527-yearmix",
+);
+assert.ok(hoa527Sc);
+assert.equal(hoa527Sc.primaryArtist.name, "Hardwell");
+assert.equal(hoa527Sc.type, "radio");
+assert.equal(hoa527Sc.seriesName, "Hardwell On Air");
+assert.equal(
+  `sc-hardwell-${slugify("hardwell-on-air-527-yearmix")}`,
+  "sc-hardwell-hardwell-on-air-527-yearmix",
+);
+
 console.log("soundcloud/tracks.test.ts ok");

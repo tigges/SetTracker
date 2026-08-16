@@ -18,6 +18,9 @@ const GDJB = YOUTUBE_SETS.find((s) => s.video.includes("WWnLYZrh6kw"));
 const ALOK_TML = YOUTUBE_SETS.find((s) => s.video.includes("zHAUZ02aCwo"));
 const VC_NEON = YOUTUBE_SETS.find((s) => s.video.includes("knJyJPP45dg"));
 const VC_BOA = YOUTUBE_SETS.find((s) => s.video.includes("kmMYCg-igjc"));
+const VC_PACHA = YOUTUBE_SETS.find((s) => s.video.includes("OVex0rm7ZR4"));
+const VC_YACHT = YOUTUBE_SETS.find((s) => s.video.includes("6bJZPDKlq7o"));
+const HOA_527 = YOUTUBE_SETS.find((s) => s.video.includes("OXwK0CSmXzY"));
 
 describe("watchMetaFromCuratedSeed", () => {
   it("builds ASOT 1290 meta from the curated 1001 capture", () => {
@@ -105,6 +108,39 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=kmMYCg-igjc");
     // Last cue 1:17:44 + 180s pad.
     assert.equal(meta.durationSec, 1 * 3600 + 17 * 60 + 44 + 180);
+  });
+
+  it("builds Vintage Culture Pacha Ibiza meta from the curated 1001 capture", () => {
+    assert.ok(VC_PACHA);
+    const meta = watchMetaFromCuratedSeed(VC_PACHA);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "OVex0rm7ZR4");
+    assert.match(meta.title, /Pacha Ibiza/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=OVex0rm7ZR4");
+    // Last cue 1:07:05 + 180s pad.
+    assert.equal(meta.durationSec, 1 * 3600 + 7 * 60 + 5 + 180);
+  });
+
+  it("builds Vintage Culture NYC Yacht meta from the curated 1001 capture", () => {
+    assert.ok(VC_YACHT);
+    const meta = watchMetaFromCuratedSeed(VC_YACHT);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "6bJZPDKlq7o");
+    assert.match(meta.title, /Sunset Yacht Party/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=6bJZPDKlq7o");
+    // Last cue 2:04:00 + 180s pad.
+    assert.equal(meta.durationSec, 2 * 3600 + 4 * 60 + 180);
+  });
+
+  it("builds Hardwell On Air 527 Yearmix meta from the curated 1001 capture", () => {
+    assert.ok(HOA_527);
+    const meta = watchMetaFromCuratedSeed(HOA_527);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "OXwK0CSmXzY");
+    assert.match(meta.title, /Hardwell On Air 527/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=OXwK0CSmXzY");
+    // Last cue 56:47 + 180s pad.
+    assert.equal(meta.durationSec, 56 * 60 + 47 + 180);
   });
 
   it("returns null without a title or video id", () => {
@@ -275,5 +311,47 @@ describe("curated YouTube 429 fallback", () => {
     assert.ok(sets[0]!.durationSec >= 1 * 3600 + 17 * 60);
     assert.equal(sets[0]?.primaryArtist?.slug, "vintage-culture");
     assert.match(String(sets[0]?.eventName ?? ""), /S[oó] Track Boa/i);
+  });
+
+  it("lands Vintage Culture Pacha Ibiza from the 1001 seed when watch is 429", async () => {
+    assert.ok(VC_PACHA);
+    const adapter = createYoutubeAdapter([VC_PACHA], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-OVex0rm7ZR4");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 14);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 1 * 3600 + 7 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "vintage-culture");
+    assert.match(String(sets[0]?.eventName ?? ""), /Pacha Ibiza/i);
+  });
+
+  it("lands Vintage Culture NYC Yacht from the 1001 seed when watch is 429", async () => {
+    assert.ok(VC_YACHT);
+    const adapter = createYoutubeAdapter([VC_YACHT], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-6bJZPDKlq7o");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 27);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 2 * 3600 + 4 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "vintage-culture");
+    assert.match(String(sets[0]?.eventName ?? ""), /Sunset Yacht Party/i);
+  });
+
+  it("lands Hardwell On Air 527 Yearmix from the 1001 seed when watch is 429", async () => {
+    assert.ok(HOA_527);
+    const adapter = createYoutubeAdapter([HOA_527], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-OXwK0CSmXzY");
+    assert.equal(sets[0]!.type, "radio");
+    assert.ok(sets[0]!.plays.length >= 83);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 56 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "hardwell");
+    assert.equal(sets[0]?.seriesName, "Hardwell On Air");
   });
 });
