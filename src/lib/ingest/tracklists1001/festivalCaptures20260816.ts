@@ -491,3 +491,28 @@ export const TL_SASHA_ECLIPSE_MIX_2026: FingerprintSeedRow[] = [
   { at: "1:43:25", artist: "The KLF & The Justified Ancients of Mu Mu", title: "Atlanta to Mobile" },
   { at: "1:50:46", artist: "The Future Sound Of London", title: "Papua New Guinea" },
 ];
+
+/**
+ * Miss Monique @ Ibiza Sunset Yacht Mix 2026-08-13
+ * https://www.1001tracklists.com/tracklist/2ng22gq9/miss-monique-ibiza-sunset-yacht-mix-2026-08-13.html
+ * Official YT: https://youtu.be/0-s_qZRWElA
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-0-s_qZRWElA"]
+ * Captured 2026-08-16 — provenance 1001tl. Official script: 14 tracks.
+ * Capture overlay used an invalid identifier (hyphens); constant renamed.
+ */
+export const TL_MISS_MONIQUE_IBIZA_SUNSET_YACHT_2026: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "HotLap", title: "I See U" },
+  { at: "4:28", artist: "Arodes & Analog Sol", title: "Trinidad Dreams" },
+  { at: "10:00", artist: "Bermani", title: "Momento" },
+  { at: "15:00", artist: "NTO & Mont Rouge ft. Noah Kulaga", title: "I Cared For You (Ugo Banchi Remix)" },
+  { at: "19:55", artist: "Matara", title: "Indie Fever" },
+  { at: "23:20", artist: "Jast", title: "Looking For You" },
+  { at: "28:38", artist: "Yanick", title: "La Bomba" },
+  { at: "32:26", artist: "Sonickraft", title: "Vice" },
+  { at: "36:51", artist: "GOODBOYS", title: "Arrive" },
+  { at: "40:27", artist: "Adapter", title: "Nakupenda" },
+  { at: "44:06", artist: "CultureKind", title: "Come Closer" },
+  { at: "47:52", artist: "Pablo Say", title: "Consistently" },
+  { at: "52:18", artist: "CamelPhat & Josh Gigante ft. Kuuda", title: "So Good (SLVR Remix)" },
+  { at: "55:49", artist: "Layton Giordani ft. AR/CO", title: "She's A Devil" },
+];

@@ -263,5 +263,16 @@ assert.equal(
   ),
   "mapped",
 );
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "yt-0-s_qZRWElA",
+      title: "Miss Monique @ Ibiza Yacht Sunset '26",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
 
 console.log("nextCaptures.queue.test.ts ok");

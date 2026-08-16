@@ -95,6 +95,7 @@ import {
   TL_JAMIE_JONES_HOT_ROBOT_RADIO_225,
   TL_JAMIE_JONES_HOT_ROBOT_RADIO_239,
   TL_JOEL_CORRY_EDGE_NYC_2026,
+  TL_MISS_MONIQUE_IBIZA_SUNSET_YACHT_2026,
   TL_NICKY_ROMERO_PROTOCOL_RADIO_731,
   TL_REINIER_ZONNEVELD_AWAKENINGS_2025,
   TL_SASHA_ECLIPSE_MIX_2026,
@@ -1590,6 +1591,7 @@ assert.equal(
 );
 assert.equal(isWiredTracklistSlug("yt-soEFl73peVA"), true);
 assert.equal(isWiredTracklistSlug("yt-Rgx-wT9FDaE"), true);
+assert.equal(isWiredTracklistSlug("yt-0-s_qZRWElA"), true);
 assert.equal(
   isWiredTracklistSlug("sc-sashaofficial-sasha-eclipse-mix-12-8-26"),
   true,
@@ -1728,6 +1730,26 @@ for (let i = 1; i < sashaEclipse.length; i++) {
   assert.ok(
     (sashaEclipse[i]!.timestamp ?? 0) > (sashaEclipse[i - 1]!.timestamp ?? 0),
     `Sasha Eclipse Mix clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_MISS_MONIQUE_IBIZA_SUNSET_YACHT_2026);
+assert.equal(TL_MISS_MONIQUE_IBIZA_SUNSET_YACHT_2026.length, 14);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-0-s_qZRWElA"],
+  TL_MISS_MONIQUE_IBIZA_SUNSET_YACHT_2026,
+);
+const mmYacht = tracklist1001RowsToPlays(TL_MISS_MONIQUE_IBIZA_SUNSET_YACHT_2026);
+assert.equal(mmYacht.length, 14);
+assert.equal(mmYacht[0]?.provenance, "1001tl");
+assert.equal(mmYacht[0]?.timestamp, 0);
+assert.equal(mmYacht[0]?.trackTitle, "I See U");
+assert.equal(mmYacht[13]?.trackTitle, "She's A Devil");
+assert.equal(mmYacht[13]?.timestamp, 55 * 60 + 49);
+for (let i = 1; i < mmYacht.length; i++) {
+  assert.ok(
+    (mmYacht[i]!.timestamp ?? 0) > (mmYacht[i - 1]!.timestamp ?? 0),
+    `Miss Monique Ibiza Yacht clocks must increase at index ${i}`,
   );
 }
 

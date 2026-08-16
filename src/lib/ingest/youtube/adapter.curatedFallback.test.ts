@@ -24,6 +24,7 @@ const HOA_527 = YOUTUBE_SETS.find((s) => s.video.includes("OXwK0CSmXzY"));
 const RZ_AWAKE = YOUTUBE_SETS.find((s) => s.video.includes("i-mFuxbGHzg"));
 const JOEL_EDGE = YOUTUBE_SETS.find((s) => s.video.includes("soEFl73peVA"));
 const PRR_731 = YOUTUBE_SETS.find((s) => s.video.includes("Rgx-wT9FDaE"));
+const MM_YACHT = YOUTUBE_SETS.find((s) => s.video.includes("0-s_qZRWElA"));
 
 describe("watchMetaFromCuratedSeed", () => {
   it("builds ASOT 1290 meta from the curated 1001 capture", () => {
@@ -177,6 +178,17 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=Rgx-wT9FDaE");
     // Last cue 53:53 + 180s pad.
     assert.equal(meta.durationSec, 53 * 60 + 53 + 180);
+  });
+
+  it("builds Miss Monique Ibiza Yacht meta from the curated 1001 capture", () => {
+    assert.ok(MM_YACHT);
+    const meta = watchMetaFromCuratedSeed(MM_YACHT);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "0-s_qZRWElA");
+    assert.match(meta.title, /Ibiza Yacht Sunset/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=0-s_qZRWElA");
+    // Last cue 55:49 + 180s pad.
+    assert.equal(meta.durationSec, 55 * 60 + 49 + 180);
   });
 
   it("returns null without a title or video id", () => {
@@ -431,5 +443,19 @@ describe("curated YouTube 429 fallback", () => {
     assert.ok(sets[0]!.durationSec >= 53 * 60);
     assert.equal(sets[0]?.primaryArtist?.slug, "nicky-romero");
     assert.equal(sets[0]?.seriesName, "Protocol Radio");
+  });
+
+  it("lands Miss Monique Ibiza Yacht from the 1001 seed when watch is 429", async () => {
+    assert.ok(MM_YACHT);
+    const adapter = createYoutubeAdapter([MM_YACHT], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-0-s_qZRWElA");
+    assert.equal(sets[0]!.type, "mix");
+    assert.ok(sets[0]!.plays.length >= 14);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 55 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "miss-monique");
+    assert.match(String(sets[0]?.eventName ?? ""), /Ibiza Sunset Yacht/i);
   });
 });

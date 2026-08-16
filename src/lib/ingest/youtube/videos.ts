@@ -65,6 +65,7 @@ import {
   TL_ALOK_TML_WE2_2026,
   TL_HARDWELL_HOA_527_YEARMIX_2025,
   TL_JOEL_CORRY_EDGE_NYC_2026,
+  TL_MISS_MONIQUE_IBIZA_SUNSET_YACHT_2026,
   TL_NICKY_ROMERO_PROTOCOL_RADIO_731,
   TL_REINIER_ZONNEVELD_AWAKENINGS_2025,
   TL_VINTAGE_CULTURE_EDC_LV_NEON_2025,
@@ -883,6 +884,21 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/zcblxf9/nicky-romero-protocol-radio-731-2026-08-13.html",
     tracklist1001: TL_NICKY_ROMERO_PROTOCOL_RADIO_731,
+  },
+  {
+    // Official Miss Monique upload; timed 1001 capture.
+    video: "https://www.youtube.com/watch?v=0-s_qZRWElA",
+    primaryArtist: dj("Miss Monique", {
+      accent: "#9b5de5",
+      homeCity: "Kyiv, UA",
+    }),
+    genre: "Melodic Techno",
+    type: "mix",
+    title: "Miss Monique @ Ibiza Yacht Sunset '26",
+    eventName: "Ibiza Sunset Yacht",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2ng22gq9/miss-monique-ibiza-sunset-yacht-mix-2026-08-13.html",
+    tracklist1001: TL_MISS_MONIQUE_IBIZA_SUNSET_YACHT_2026,
   },
   {
     // Tomorrowland official Relive — Mainstage WE2.
