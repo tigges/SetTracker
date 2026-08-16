@@ -171,7 +171,9 @@ async function enrichWith1001Tracklist(
     TRACKLIST_1001_BY_SOURCE_SLUG[`yt-${meta.videoId}`.slice(0, 120)];
   const effectiveSeed =
     seed?.length ? seed : slugSeed?.length ? slugSeed : undefined;
-  if (from1001.length < 5 && effectiveSeed?.length) {
+  if (effectiveSeed && effectiveSeed.length >= 12) {
+    from1001 = tracklist1001RowsToPlays(effectiveSeed);
+  } else if (from1001.length < 5 && effectiveSeed?.length) {
     from1001 = tracklist1001RowsToPlays(effectiveSeed);
   }
   return merge1001Plays(base, from1001);

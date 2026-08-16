@@ -138,5 +138,177 @@ assert.equal(
   ),
   "mapped",
 );
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "yt-OVex0rm7ZR4",
+      title: "Vintage Culture @ Pacha Ibiza, Affairs (2026)",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "yt-6bJZPDKlq7o",
+      title: "Vintage Culture @ Sunset Yacht Party - New York City 2023",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "yt-OXwK0CSmXzY",
+      title: "Hardwell On Air 527 YEARMIX 2025",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "sc-hardwell-hardwell-on-air-527-yearmix",
+      title: "Hardwell On Air 527 YEARMIX 2025",
+      type: "radio",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "yt-i-mFuxbGHzg",
+      title: "Reinier Zonneveld | Awakenings Festival 2025",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "sc-jamie-jones-hot-robot-radio-225",
+      title: "Hot Robot Radio 225",
+      type: "radio",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "sc-jamie-jones-hot-robot-radio-239",
+      title: "Hot Robot Radio 239",
+      type: "radio",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "sc-vintageculturemusic-vintage-culture-b2b-arodes-at-burning-man-2024",
+      title: "Vintage Culture b2b Arodes at Burning Man 2024",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "yt-soEFl73peVA",
+      title: "Joel Corry Epic Rooftop Set From Edge NYC",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "yt-Rgx-wT9FDaE",
+      title: "Protocol Radio 731 by Nicky Romero (PRR731)",
+      type: "radio",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "sc-sashaofficial-sasha-eclipse-mix-12-8-26",
+      title: "Sasha Eclipse Mix 12/8/26",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "yt-0-s_qZRWElA",
+      title: "Miss Monique @ Ibiza Yacht Sunset '26",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "yt-blP5J6BUG0M",
+      title: "PRISMATIC by Tiësto 032",
+      type: "radio",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "yt-yTRvLrtsM9I",
+      title: "Spectrum Radio 485 Joris Voorn | Brno,Czech Republic",
+      type: "radio",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "yt-B05MAbsCOLA",
+      title: "Nicky Romero LIVE at Tomorrowland 2026 - Mainstage",
+      type: "festival",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
 
 console.log("nextCaptures.queue.test.ts ok");

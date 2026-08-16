@@ -108,4 +108,65 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     type: "radio",
     minDurationSec: 30 * 60,
   },
+  {
+    // Official Hardwell On Air 527 Yearmix; 1001TL wired via
+    // sc-hardwell-hardwell-on-air-527-yearmix (same list as yt-OXwK0CSmXzY).
+    url: "https://soundcloud.com/hardwell/hardwell-on-air-527-yearmix",
+    primaryArtist: dj("Hardwell", {
+      accent: "#023e8a",
+      homeCity: "Breda, NL",
+    }),
+    genre: "Big Room",
+    seriesName: "Hardwell On Air",
+    type: "radio",
+    minDurationSec: 30 * 60,
+  },
+  {
+    // Official Jamie Jones upload; Mixcloud mirror also exists.
+    // 1001TL wired via sc-jamie-jones-hot-robot-radio-225.
+    url: "https://soundcloud.com/jamie-jones/hot-robot-radio-225",
+    primaryArtist: dj("Jamie Jones", {
+      accent: "#f72585",
+    }),
+    genre: "Tech House",
+    seriesName: "Hot Robot Radio",
+    type: "radio",
+    minDurationSec: 30 * 60,
+  },
+  {
+    // Official Jamie Jones upload; Mixcloud mirror also exists.
+    // 1001TL wired via sc-jamie-jones-hot-robot-radio-239.
+    url: "https://soundcloud.com/jamie-jones/hot-robot-radio-239",
+    primaryArtist: dj("Jamie Jones", {
+      accent: "#f72585",
+    }),
+    genre: "Tech House",
+    seriesName: "Hot Robot Radio",
+    type: "radio",
+    minDurationSec: 30 * 60,
+  },
+  {
+    // Official Vintage Culture upload; 1001TL wired via
+    // sc-vintageculturemusic-vintage-culture-b2b-arodes-at-burning-man-2024.
+    url: "https://soundcloud.com/vintageculturemusic/vintage-culture-b2b-arodes-at-burning-man-2024",
+    primaryArtist: dj("Vintage Culture", {
+      accent: "#e85d04",
+      homeCity: "Brazil",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    minDurationSec: 30 * 60,
+  },
+  {
+    // Official Sasha upload; 1001TL wired via
+    // sc-sashaofficial-sasha-eclipse-mix-12-8-26.
+    url: "https://soundcloud.com/sashaofficial/sasha-eclipse-mix-12-8-26",
+    primaryArtist: dj("Sasha", {
+      accent: "#4361ee",
+    }),
+    genre: "Progressive House",
+    seriesName: "Eclipse Mix",
+    type: "mix",
+    minDurationSec: 30 * 60,
+  },
 ];

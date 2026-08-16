@@ -15,6 +15,7 @@ import { runCatalogYtSocials } from "./discovery/catalogYtSocials";
 import { runCrosslinkDiscovery, type HandleReport } from "./discovery/crosslink";
 import { runDiscovery, type DiscoveryStats } from "./discovery/run";
 import { hashRawSetContent } from "./hash";
+import { applyTracklist1001Seed } from "./tracklists1001/seeds";
 import { fetchTrackDetail, sleep as htSleep } from "./hearthis/client";
 import {
   preferPlaybackUrl,
@@ -682,7 +683,7 @@ export async function runIngest(
 
   async function ingestSet(raw: RawSet): Promise<void> {
     stats.scannedSets += 1;
-    const sourceHash = raw.sourceHash ?? hashRawSetContent(raw);
+    let sourceHash = raw.sourceHash ?? hashRawSetContent(raw);
     const existing =
       (await prisma.set.findUnique({
         where: { slug: raw.sourceSlug },
@@ -778,6 +779,20 @@ export async function runIngest(
     );
 
     if (existing) {
+      if (existing.sourceHash && existing.sourceHash === sourceHash) {
+        const seeded = applyTracklist1001Seed(raw.sourceSlug, raw.plays);
+        const seed1001 = seeded.filter((p) => p.provenance === "1001tl").length;
+        if (seed1001 >= 5) {
+          const stored1001 = await prisma.played.count({
+            where: { setId: existing.id, provenance: "1001tl" },
+          });
+          if (stored1001 < seed1001) {
+            raw.plays = seeded;
+            raw.sourceHash = hashRawSetContent(raw);
+            sourceHash = raw.sourceHash;
+          }
+        }
+      }
       if (existing.sourceHash && existing.sourceHash === sourceHash) {
         // Still refresh artist linkage (b2b backfill) even when tracklist is unchanged.
         await syncSetArtists(existing.id, primaryDjId, collaboratorIds);

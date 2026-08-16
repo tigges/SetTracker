@@ -91,9 +91,23 @@ import {
   TL_MARKUS_SCHULZ_AND_JEROME_ISMA_AE_GDJB_2026,
   TL_STEVE_AOKI_TML_FRIENDSHIP_MIX_2026,
   TL_ALOK_TML_WE2_2026,
+  TL_HARDWELL_HOA_527_YEARMIX_2025,
+  TL_JAMIE_JONES_HOT_ROBOT_RADIO_225,
+  TL_JAMIE_JONES_HOT_ROBOT_RADIO_239,
+  TL_JOEL_CORRY_EDGE_NYC_2026,
+  TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026,
+  TL_MISS_MONIQUE_IBIZA_SUNSET_YACHT_2026,
+  TL_NICKY_ROMERO_PROTOCOL_RADIO_731,
+  TL_REINIER_ZONNEVELD_AWAKENINGS_2025,
+  TL_SASHA_ECLIPSE_MIX_2026,
+  TL_TIESTO_PRISMATIC_032_2026,
+  TL_VINTAGE_CULTURE_ARODES_BURNING_MAN_2024,
   TL_VINTAGE_CULTURE_EDC_LV_NEON_2025,
+  TL_VINTAGE_CULTURE_NYC_YACHT_2023,
+  TL_VINTAGE_CULTURE_PACHA_IBIZA_2026,
   TL_VINTAGE_CULTURE_SO_TRACK_BOA_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
+  isWiredTracklistSlug,
   tracklist1001RowsToPlays,
 } from "./seeds";
 import { assertSeedClocks } from "./festival2026";
@@ -1469,6 +1483,9 @@ assert.equal(vcNeon.length, 16);
 assert.equal(vcNeon[0]?.provenance, "1001tl");
 assert.equal(vcNeon[0]?.timestamp, 14);
 assert.equal(vcNeon[0]?.trackTitle, "The Funk Phenomena (Viot Remix)");
+assert.equal(vcNeon[6]?.trackTitle, "Bad Habit (Clüb De Combat Remix)");
+assert.equal(vcNeon[7]?.trackTitle, "Smack My Bitch Up (Clüb De Combat Remix)");
+assert.equal(vcNeon[14]?.trackTitle, "DJ Assault");
 assert.equal(vcNeon[15]?.trackTitle, "Lost");
 assert.equal(vcNeon[15]?.timestamp, 1 * 3600 + 8 * 60 + 35);
 for (let i = 1; i < vcNeon.length; i++) {
@@ -1495,6 +1512,322 @@ for (let i = 1; i < vcBoa.length; i++) {
   assert.ok(
     (vcBoa[i]!.timestamp ?? 0) > (vcBoa[i - 1]!.timestamp ?? 0),
     `Vintage Culture Só Track Boa clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_VINTAGE_CULTURE_PACHA_IBIZA_2026);
+assert.equal(TL_VINTAGE_CULTURE_PACHA_IBIZA_2026.length, 14);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-OVex0rm7ZR4"],
+  TL_VINTAGE_CULTURE_PACHA_IBIZA_2026,
+);
+const vcPacha = tracklist1001RowsToPlays(TL_VINTAGE_CULTURE_PACHA_IBIZA_2026);
+assert.equal(vcPacha.length, 14);
+assert.equal(vcPacha[0]?.provenance, "1001tl");
+assert.equal(vcPacha[0]?.timestamp, 0);
+assert.equal(vcPacha[0]?.trackTitle, "I Need It");
+assert.equal(vcPacha[13]?.trackTitle, "It Is Simple But It Works Like Fcuk");
+assert.equal(vcPacha[13]?.timestamp, 1 * 3600 + 7 * 60 + 5);
+for (let i = 1; i < vcPacha.length; i++) {
+  assert.ok(
+    (vcPacha[i]!.timestamp ?? 0) > (vcPacha[i - 1]!.timestamp ?? 0),
+    `Vintage Culture Pacha Ibiza clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_VINTAGE_CULTURE_NYC_YACHT_2023);
+assert.equal(TL_VINTAGE_CULTURE_NYC_YACHT_2023.length, 27);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-6bJZPDKlq7o"],
+  TL_VINTAGE_CULTURE_NYC_YACHT_2023,
+);
+const vcYacht = tracklist1001RowsToPlays(TL_VINTAGE_CULTURE_NYC_YACHT_2023);
+assert.equal(vcYacht.length, 27);
+assert.equal(vcYacht[0]?.provenance, "1001tl");
+assert.equal(vcYacht[0]?.timestamp, 0);
+assert.equal(vcYacht[0]?.trackTitle, "Fallen Leaf");
+assert.equal(vcYacht[26]?.trackTitle, "Spring Girl");
+assert.equal(vcYacht[26]?.timestamp, 2 * 3600 + 4 * 60);
+for (let i = 1; i < vcYacht.length; i++) {
+  assert.ok(
+    (vcYacht[i]!.timestamp ?? 0) > (vcYacht[i - 1]!.timestamp ?? 0),
+    `Vintage Culture NYC Yacht clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_HARDWELL_HOA_527_YEARMIX_2025);
+assert.equal(TL_HARDWELL_HOA_527_YEARMIX_2025.length, 83);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-OXwK0CSmXzY"],
+  TL_HARDWELL_HOA_527_YEARMIX_2025,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-hardwell-hardwell-on-air-527-yearmix"],
+  TL_HARDWELL_HOA_527_YEARMIX_2025,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "https://soundcloud.com/hardwell/hardwell-on-air-527-yearmix"
+  ],
+  undefined,
+);
+const hoa527 = tracklist1001RowsToPlays(TL_HARDWELL_HOA_527_YEARMIX_2025);
+assert.equal(hoa527.length, 83);
+assert.equal(hoa527[0]?.provenance, "1001tl");
+assert.equal(hoa527[0]?.timestamp, 58);
+assert.equal(hoa527[0]?.trackTitle, "Sanctuary");
+assert.equal(hoa527[82]?.trackTitle, "Brace For Impact");
+assert.equal(isWiredTracklistSlug("yt-zHAUZ02aCwo"), true);
+assert.equal(isWiredTracklistSlug("yt-knJyJPP45dg"), true);
+assert.equal(isWiredTracklistSlug("yt-kmMYCg-igjc"), true);
+assert.equal(isWiredTracklistSlug("yt-OVex0rm7ZR4"), true);
+assert.equal(isWiredTracklistSlug("yt-6bJZPDKlq7o"), true);
+assert.equal(isWiredTracklistSlug("yt-OXwK0CSmXzY"), true);
+assert.equal(isWiredTracklistSlug("sc-hardwell-hardwell-on-air-527-yearmix"), true);
+assert.equal(isWiredTracklistSlug("yt-not-a-real-seed"), false);
+assert.equal(isWiredTracklistSlug("yt-i-mFuxbGHzg"), true);
+assert.equal(isWiredTracklistSlug("sc-jamie-jones-hot-robot-radio-225"), true);
+assert.equal(isWiredTracklistSlug("sc-jamie-jones-hot-robot-radio-239"), true);
+assert.equal(
+  isWiredTracklistSlug(
+    "sc-vintageculturemusic-vintage-culture-b2b-arodes-at-burning-man-2024",
+  ),
+  true,
+);
+assert.equal(isWiredTracklistSlug("yt-soEFl73peVA"), true);
+assert.equal(isWiredTracklistSlug("yt-Rgx-wT9FDaE"), true);
+assert.equal(isWiredTracklistSlug("yt-0-s_qZRWElA"), true);
+assert.equal(isWiredTracklistSlug("yt-blP5J6BUG0M"), true);
+assert.equal(isWiredTracklistSlug("yt-yTRvLrtsM9I"), true);
+assert.equal(isWiredTracklistSlug("yt-TsyGMhx8izw"), true);
+assert.equal(isWiredTracklistSlug("yt-B05MAbsCOLA"), true);
+assert.equal(
+  isWiredTracklistSlug("sc-sashaofficial-sasha-eclipse-mix-12-8-26"),
+  true,
+);
+assert.equal(
+  isWiredTracklistSlug(
+    "sc-https://soundcloud.com/sashaofficial/sasha-eclipse-mix-12-8-26",
+  ),
+  false,
+);
+
+assertSeedClocks(TL_JAMIE_JONES_HOT_ROBOT_RADIO_225);
+assert.equal(TL_JAMIE_JONES_HOT_ROBOT_RADIO_225.length, 7);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-jamie-jones-hot-robot-radio-225"],
+  TL_JAMIE_JONES_HOT_ROBOT_RADIO_225,
+);
+const hrr225 = tracklist1001RowsToPlays(TL_JAMIE_JONES_HOT_ROBOT_RADIO_225);
+assert.equal(hrr225.length, 7);
+assert.equal(hrr225[0]?.provenance, "1001tl");
+assert.equal(hrr225[0]?.timestamp, 47);
+assert.equal(hrr225[0]?.trackTitle, "Bassline Soldiers");
+assert.equal(hrr225[6]?.trackTitle, "Clurb");
+assert.equal(hrr225[6]?.timestamp, 50 * 60 + 10);
+for (let i = 1; i < hrr225.length; i++) {
+  assert.ok(
+    (hrr225[i]!.timestamp ?? 0) > (hrr225[i - 1]!.timestamp ?? 0),
+    `HRR 225 clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_JAMIE_JONES_HOT_ROBOT_RADIO_239);
+assert.equal(TL_JAMIE_JONES_HOT_ROBOT_RADIO_239.length, 7);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-jamie-jones-hot-robot-radio-239"],
+  TL_JAMIE_JONES_HOT_ROBOT_RADIO_239,
+);
+const hrr239 = tracklist1001RowsToPlays(TL_JAMIE_JONES_HOT_ROBOT_RADIO_239);
+assert.equal(hrr239.length, 7);
+assert.equal(hrr239[0]?.provenance, "1001tl");
+assert.equal(hrr239[0]?.timestamp, 20);
+assert.equal(hrr239[0]?.trackTitle, "Booty Perculator");
+assert.equal(hrr239[6]?.trackTitle, "Feels So Good");
+assert.equal(hrr239[6]?.timestamp, 51 * 60 + 2);
+for (let i = 1; i < hrr239.length; i++) {
+  assert.ok(
+    (hrr239[i]!.timestamp ?? 0) > (hrr239[i - 1]!.timestamp ?? 0),
+    `HRR 239 clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_VINTAGE_CULTURE_ARODES_BURNING_MAN_2024);
+assert.equal(TL_VINTAGE_CULTURE_ARODES_BURNING_MAN_2024.length, 22);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-vintageculturemusic-vintage-culture-b2b-arodes-at-burning-man-2024"
+  ],
+  TL_VINTAGE_CULTURE_ARODES_BURNING_MAN_2024,
+);
+const vcArodes = tracklist1001RowsToPlays(
+  TL_VINTAGE_CULTURE_ARODES_BURNING_MAN_2024,
+);
+assert.equal(vcArodes.length, 22);
+assert.equal(vcArodes[0]?.provenance, "1001tl");
+assert.equal(vcArodes[0]?.timestamp, 0);
+assert.equal(vcArodes[0]?.trackTitle, "The Church");
+assert.equal(vcArodes[21]?.trackTitle, "Bad Habit (Alex Metric Remix)");
+assert.equal(vcArodes[21]?.timestamp, 1 * 3600 + 46 * 60 + 10);
+for (let i = 1; i < vcArodes.length; i++) {
+  assert.ok(
+    (vcArodes[i]!.timestamp ?? 0) > (vcArodes[i - 1]!.timestamp ?? 0),
+    `Vintage Culture Arodes clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_JOEL_CORRY_EDGE_NYC_2026);
+assert.equal(TL_JOEL_CORRY_EDGE_NYC_2026.length, 55);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-soEFl73peVA"],
+  TL_JOEL_CORRY_EDGE_NYC_2026,
+);
+const joelEdge = tracklist1001RowsToPlays(TL_JOEL_CORRY_EDGE_NYC_2026);
+assert.equal(joelEdge.length, 55);
+assert.equal(joelEdge[0]?.provenance, "1001tl");
+assert.equal(joelEdge[0]?.timestamp, 60);
+assert.equal(joelEdge[0]?.trackTitle, "Devotion (Sweetest Emotion)");
+assert.equal(joelEdge[54]?.trackTitle, "Head & Heart");
+assert.equal(joelEdge[54]?.timestamp, 2 * 3600 + 28 * 60 + 40);
+for (let i = 1; i < joelEdge.length; i++) {
+  assert.ok(
+    (joelEdge[i]!.timestamp ?? 0) > (joelEdge[i - 1]!.timestamp ?? 0),
+    `Joel Corry Edge NYC clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_NICKY_ROMERO_PROTOCOL_RADIO_731);
+assert.equal(TL_NICKY_ROMERO_PROTOCOL_RADIO_731.length, 16);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-Rgx-wT9FDaE"],
+  TL_NICKY_ROMERO_PROTOCOL_RADIO_731,
+);
+const prr731 = tracklist1001RowsToPlays(TL_NICKY_ROMERO_PROTOCOL_RADIO_731);
+assert.equal(prr731.length, 16);
+assert.equal(prr731[0]?.provenance, "1001tl");
+assert.equal(prr731[0]?.timestamp, 53);
+assert.equal(prr731[0]?.trackTitle, "Play Me");
+assert.equal(prr731[15]?.trackTitle, "What Are We Gonna Do");
+assert.equal(prr731[15]?.timestamp, 53 * 60 + 53);
+for (let i = 1; i < prr731.length; i++) {
+  assert.ok(
+    (prr731[i]!.timestamp ?? 0) > (prr731[i - 1]!.timestamp ?? 0),
+    `Protocol Radio 731 clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_SASHA_ECLIPSE_MIX_2026);
+assert.equal(TL_SASHA_ECLIPSE_MIX_2026.length, 22);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-sashaofficial-sasha-eclipse-mix-12-8-26"],
+  TL_SASHA_ECLIPSE_MIX_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-https://soundcloud.com/sashaofficial/sasha-eclipse-mix-12-8-26"
+  ],
+  undefined,
+);
+const sashaEclipse = tracklist1001RowsToPlays(TL_SASHA_ECLIPSE_MIX_2026);
+assert.equal(sashaEclipse.length, 22);
+assert.equal(sashaEclipse[0]?.provenance, "1001tl");
+assert.equal(sashaEclipse[0]?.timestamp, 0);
+assert.equal(sashaEclipse[0]?.trackTitle, "Together We Will Live Forever");
+assert.equal(sashaEclipse[21]?.trackTitle, "Papua New Guinea");
+assert.equal(sashaEclipse[21]?.timestamp, 1 * 3600 + 50 * 60 + 46);
+for (let i = 1; i < sashaEclipse.length; i++) {
+  assert.ok(
+    (sashaEclipse[i]!.timestamp ?? 0) > (sashaEclipse[i - 1]!.timestamp ?? 0),
+    `Sasha Eclipse Mix clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_MISS_MONIQUE_IBIZA_SUNSET_YACHT_2026);
+assert.equal(TL_MISS_MONIQUE_IBIZA_SUNSET_YACHT_2026.length, 14);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-0-s_qZRWElA"],
+  TL_MISS_MONIQUE_IBIZA_SUNSET_YACHT_2026,
+);
+const mmYacht = tracklist1001RowsToPlays(TL_MISS_MONIQUE_IBIZA_SUNSET_YACHT_2026);
+assert.equal(mmYacht.length, 14);
+assert.equal(mmYacht[0]?.provenance, "1001tl");
+assert.equal(mmYacht[0]?.timestamp, 0);
+assert.equal(mmYacht[0]?.trackTitle, "I See U");
+assert.equal(mmYacht[13]?.trackTitle, "She's A Devil");
+assert.equal(mmYacht[13]?.timestamp, 55 * 60 + 49);
+for (let i = 1; i < mmYacht.length; i++) {
+  assert.ok(
+    (mmYacht[i]!.timestamp ?? 0) > (mmYacht[i - 1]!.timestamp ?? 0),
+    `Miss Monique Ibiza Yacht clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_TIESTO_PRISMATIC_032_2026);
+assert.equal(TL_TIESTO_PRISMATIC_032_2026.length, 20);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-blP5J6BUG0M"],
+  TL_TIESTO_PRISMATIC_032_2026,
+);
+const prismatic032 = tracklist1001RowsToPlays(TL_TIESTO_PRISMATIC_032_2026);
+assert.equal(prismatic032.length, 20);
+assert.equal(prismatic032[0]?.provenance, "1001tl");
+assert.equal(prismatic032[0]?.timestamp, 32);
+assert.equal(prismatic032[0]?.trackTitle, "TILL SUNRISE");
+assert.equal(prismatic032[19]?.trackTitle, "High On The Beat");
+assert.equal(prismatic032[19]?.timestamp, 57 * 60 + 52);
+for (let i = 1; i < prismatic032.length; i++) {
+  assert.ok(
+    (prismatic032[i]!.timestamp ?? 0) > (prismatic032[i - 1]!.timestamp ?? 0),
+    `Tiësto Prismatic 032 clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026);
+assert.equal(TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026.length, 15);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-yTRvLrtsM9I"],
+  TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026,
+);
+const spectrum485 = tracklist1001RowsToPlays(
+  TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026,
+);
+assert.equal(spectrum485.length, 15);
+assert.equal(spectrum485[0]?.provenance, "1001tl");
+assert.equal(spectrum485[0]?.timestamp, 30);
+assert.equal(spectrum485[0]?.trackTitle, "Horizon (Eelke Kleijn Remix)");
+assert.equal(spectrum485[14]?.trackTitle, "Darkness (Joris Voorn Remix)");
+assert.equal(spectrum485[14]?.timestamp, 59 * 60 + 10);
+for (let i = 1; i < spectrum485.length; i++) {
+  assert.ok(
+    (spectrum485[i]!.timestamp ?? 0) > (spectrum485[i - 1]!.timestamp ?? 0),
+    `Joris Voorn Spectrum Radio 485 clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_REINIER_ZONNEVELD_AWAKENINGS_2025);
+assert.equal(TL_REINIER_ZONNEVELD_AWAKENINGS_2025.length, 20);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-i-mFuxbGHzg"],
+  TL_REINIER_ZONNEVELD_AWAKENINGS_2025,
+);
+const rzAwake = tracklist1001RowsToPlays(TL_REINIER_ZONNEVELD_AWAKENINGS_2025);
+assert.equal(rzAwake.length, 20);
+assert.equal(rzAwake[0]?.provenance, "1001tl");
+assert.equal(rzAwake[0]?.timestamp, 0);
+assert.equal(rzAwake[0]?.trackTitle, "Move Your Body To The Beat");
+assert.equal(rzAwake[19]?.trackTitle, "Kernkraft 400");
+assert.equal(rzAwake[19]?.timestamp, 1 * 3600 + 28 * 60 + 45);
+for (let i = 1; i < rzAwake.length; i++) {
+  assert.ok(
+    (rzAwake[i]!.timestamp ?? 0) > (rzAwake[i - 1]!.timestamp ?? 0),
+    `Reinier Awakenings clocks must increase at index ${i}`,
+  );
+}
+assert.equal(hoa527[82]?.timestamp, 56 * 60 + 47);
+for (let i = 1; i < hoa527.length; i++) {
+  assert.ok(
+    (hoa527[i]!.timestamp ?? 0) > (hoa527[i - 1]!.timestamp ?? 0),
+    `Hardwell HOA 527 clocks must increase at index ${i}`,
   );
 }
 

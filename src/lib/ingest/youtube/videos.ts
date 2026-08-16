@@ -63,7 +63,16 @@ import {
   TL_MARLON_HOFFSTADT_COACHELLA_WE2_2026,
   TL_MARKUS_SCHULZ_AND_JEROME_ISMA_AE_GDJB_2026,
   TL_ALOK_TML_WE2_2026,
+  TL_HARDWELL_HOA_527_YEARMIX_2025,
+  TL_JOEL_CORRY_EDGE_NYC_2026,
+  TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026,
+  TL_MISS_MONIQUE_IBIZA_SUNSET_YACHT_2026,
+  TL_NICKY_ROMERO_PROTOCOL_RADIO_731,
+  TL_TIESTO_PRISMATIC_032_2026,
+  TL_REINIER_ZONNEVELD_AWAKENINGS_2025,
   TL_VINTAGE_CULTURE_EDC_LV_NEON_2025,
+  TL_VINTAGE_CULTURE_NYC_YACHT_2023,
+  TL_VINTAGE_CULTURE_PACHA_IBIZA_2026,
   TL_VINTAGE_CULTURE_SO_TRACK_BOA_2026,
   TL_MISS_MONIQUE_TML_WE2_2026,
   TL_NICKY_ROMERO_TML_WE2_2026,
@@ -594,6 +603,22 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_NICKY_ROMERO_TML_WE2_2026,
   },
   {
+    // Artist-channel Relive of the same Mainstage WE2 set (1001.tl/wkty6z9).
+    video: "https://www.youtube.com/watch?v=B05MAbsCOLA",
+    primaryArtist: dj("Nicky Romero", {
+      accent: "#00bbf9",
+      homeCity: "Amerongen, NL",
+    }),
+    genre: "Progressive House",
+    type: "festival",
+    title: "Nicky Romero LIVE at Tomorrowland 2026 - Mainstage",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/wkty6z9/nicky-romero-mainstage-tomorrowland-weekend-2-belgium-2026-07-24.html",
+    tracklist1001: TL_NICKY_ROMERO_TML_WE2_2026,
+  },
+  {
     // Tomorrowland official — Freedom Stage WE2; 21/35 timed cues from 1001.
     video: "https://www.youtube.com/watch?v=dmhUJYEdkKo",
     primaryArtist: dj("James Hype", {
@@ -847,6 +872,82 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/2llgr4u1/markus-schulz-jerome-isma-ae-global-dj-broadcast-2026-08-13.html", // pragma: allowlist secret
     tracklist1001: TL_MARKUS_SCHULZ_AND_JEROME_ISMA_AE_GDJB_2026,
+  },
+  {
+    // Official Hardwell On Air 527 Yearmix; timed 1001 capture. SC twin:
+    // sc-hardwell-hardwell-on-air-527-yearmix.
+    video: "https://www.youtube.com/watch?v=OXwK0CSmXzY",
+    primaryArtist: dj("Hardwell", {
+      accent: "#023e8a",
+      homeCity: "Breda, NL",
+    }),
+    genre: "Big Room",
+    type: "radio",
+    title: "Hardwell On Air 527 YEARMIX 2025",
+    seriesName: "Hardwell On Air",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1w5whv39/hardwell-hardwell-on-air-527-yearmix-2025-2026-01-02.html",
+    tracklist1001: TL_HARDWELL_HOA_527_YEARMIX_2025,
+  },
+  {
+    // Official Protocol Radio 731; timed 1001 capture.
+    video: "https://www.youtube.com/watch?v=Rgx-wT9FDaE",
+    primaryArtist: dj("Nicky Romero", {
+      accent: "#ffbe0b",
+    }),
+    genre: "Progressive House",
+    type: "radio",
+    title: "Protocol Radio 731 by Nicky Romero (PRR731)",
+    seriesName: "Protocol Radio",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/zcblxf9/nicky-romero-protocol-radio-731-2026-08-13.html",
+    tracklist1001: TL_NICKY_ROMERO_PROTOCOL_RADIO_731,
+  },
+  {
+    // Official Miss Monique upload; timed 1001 capture.
+    video: "https://www.youtube.com/watch?v=0-s_qZRWElA",
+    primaryArtist: dj("Miss Monique", {
+      accent: "#9b5de5",
+      homeCity: "Kyiv, UA",
+    }),
+    genre: "Melodic Techno",
+    type: "mix",
+    title: "Miss Monique @ Ibiza Yacht Sunset '26",
+    eventName: "Ibiza Sunset Yacht",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2ng22gq9/miss-monique-ibiza-sunset-yacht-mix-2026-08-13.html",
+    tracklist1001: TL_MISS_MONIQUE_IBIZA_SUNSET_YACHT_2026,
+  },
+  {
+    // Official Prismatic 032; timed 1001 capture.
+    video: "https://www.youtube.com/watch?v=blP5J6BUG0M",
+    primaryArtist: dj("Tiësto", {
+      accent: "#00bbf9",
+      homeCity: "Netherlands",
+    }),
+    genre: "Big Room",
+    type: "radio",
+    title: "PRISMATIC by Tiësto 032",
+    seriesName: "Prismatic",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/m7vw17k/tiesto-prismatic-032-2026-08-08.html",
+    tracklist1001: TL_TIESTO_PRISMATIC_032_2026,
+  },
+  {
+    // Official Spectrum Radio 485; timed 1001 capture.
+    video: "https://www.youtube.com/watch?v=yTRvLrtsM9I",
+    primaryArtist: dj("Joris Voorn", {
+      accent: "#2ec4b6",
+      homeCity: "Rotterdam, NL",
+    }),
+    genre: "Tech House",
+    type: "radio",
+    title: "Spectrum Radio 485 Joris Voorn | Brno,Czech Republic",
+    seriesName: "Spectrum Radio",
+    eventName: "Exit, Veveří Castle Brno",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2vwh8lq1/joris-voorn-spectrum-radio-485-exit-veveri-castle-brno-czech-republic-2026-08-12.html",
+    tracklist1001: TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026,
   },
   {
     // Tomorrowland official Relive — Mainstage WE2.
@@ -1231,6 +1332,23 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     title: "Vintage Culture @ Pacha Ibiza, Affairs (2026)",
     seriesName: "Affairs",
     eventName: "Pacha Ibiza",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2vw827m1/vintage-culture-affairs-pacha-ibiza-spain-2026-06-23.html",
+    tracklist1001: TL_VINTAGE_CULTURE_PACHA_IBIZA_2026,
+  },
+  {
+    video: "https://www.youtube.com/watch?v=6bJZPDKlq7o",
+    primaryArtist: dj("Vintage Culture", {
+      accent: "#e85d04",
+      homeCity: "Brazil",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    title: "Vintage Culture @ Sunset Yacht Party - New York City 2023",
+    eventName: "Sunset Yacht Party",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1d6g4y99/vintage-culture-sunset-yacht-party-new-york-city-united-states-2023-08-12.html",
+    tracklist1001: TL_VINTAGE_CULTURE_NYC_YACHT_2023,
   },
   {
     video: "https://www.youtube.com/watch?v=xXRjglkAmq8",
@@ -1477,6 +1595,23 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     title: "Reinier Zonneveld | Awakenings Festival 2025",
     seriesName: "Awakenings",
     eventName: "Awakenings Festival",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/hgdfs3t/reinier-zonneveld-area-v-awakenings-festival-netherlands-2025-07-11.html",
+    tracklist1001: TL_REINIER_ZONNEVELD_AWAKENINGS_2025,
+  },
+  {
+    // Official DJ Mag Relive; 1001 captured 2026-08-16.
+    video: "https://www.youtube.com/watch?v=soEFl73peVA",
+    primaryArtist: dj("Joel Corry", {
+      accent: "#4cc9f0",
+    }),
+    genre: "House",
+    type: "festival",
+    title: "Joel Corry Epic Rooftop Set From Edge NYC",
+    eventName: "Edge New York City",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1nsmcmx9/joel-corry-edge-new-york-city-united-states-2026-05-30.html",
+    tracklist1001: TL_JOEL_CORRY_EDGE_NYC_2026,
   },
   {
     video: "https://www.youtube.com/watch?v=b-2YA4yC3UA",
