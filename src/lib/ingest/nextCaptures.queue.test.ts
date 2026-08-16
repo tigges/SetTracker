@@ -252,5 +252,16 @@ assert.equal(
   ),
   "mapped",
 );
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "sc-sashaofficial-sasha-eclipse-mix-12-8-26",
+      title: "Sasha Eclipse Mix 12/8/26",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
 
 console.log("nextCaptures.queue.test.ts ok");

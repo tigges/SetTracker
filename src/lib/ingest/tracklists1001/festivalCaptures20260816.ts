@@ -459,3 +459,35 @@ export const TL_NICKY_ROMERO_PROTOCOL_RADIO_731: FingerprintSeedRow[] = [
   { at: "51:00", artist: "Marten Hørger & James Carter", title: "Paradise" },
   { at: "53:53", artist: "Jaxstyle & Jon", title: "What Are We Gonna Do" },
 ];
+
+/**
+ * Sasha - Eclipse Mix 2026-08-12
+ * https://www.1001tracklists.com/tracklist/rwx0639/sasha-eclipse-mix-2026-08-12.html
+ * Official SC: https://soundcloud.com/sashaofficial/sasha-eclipse-mix-12-8-26
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["sc-sashaofficial-sasha-eclipse-mix-12-8-26"]
+ * Captured 2026-08-16 — provenance 1001tl. Official script: 22 tracks.
+ */
+export const TL_SASHA_ECLIPSE_MIX_2026: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "Clint Mansell", title: "Together We Will Live Forever" },
+  { at: "4:41", artist: "Max Richter", title: "Dream 3 (In The Midst Of My Life)" },
+  { at: "13:44", artist: "Jon Hopkins", title: "Abandon Window" },
+  { at: "17:58", artist: "Nils Frahm", title: "Some" },
+  { at: "21:59", artist: "Max Richter", title: "On The Nature Of Daylight" },
+  { at: "28:08", artist: "Jóhann Jóhannsson", title: "Flight from the City" },
+  { at: "34:15", artist: "Global Communication", title: "14:31" },
+  { at: "48:17", artist: "Vangelis", title: "Blade Runner Blues (Blade Runner OST)" },
+  { at: "55:01", artist: "Aphex Twin", title: "#3" },
+  { at: "1:01:33", artist: "Brian Eno", title: "An Ending (Ascent)" },
+  { at: "1:05:17", artist: "Boards Of Canada", title: "Olson" },
+  { at: "1:06:23", artist: "Jóhann Jóhannsson", title: "A Song For Europa" },
+  { at: "1:08:30", artist: "Nils Frahm", title: "Says" },
+  { at: "1:15:58", artist: "Hans Zimmer", title: "Cornfield Chase (Interstellar OST)" },
+  { at: "1:17:21", artist: "Jon Hopkins", title: "Light Through The Veins" },
+  { at: "1:26:01", artist: "The Orb", title: "A Huge Ever Growing Pulsating Brain That Rules From The Centre Of The Ultraworld (Orbital Mix)" },
+  { at: "1:32:15", artist: "Richard Strauss", title: "Also Sprach Zarathustra (2001: A Space Odyssey OST)" },
+  { at: "1:34:42", artist: "M83", title: "Outro" },
+  { at: "1:37:16", artist: "Vangelis", title: "Rachel's Song (Blade Runner OST)" },
+  { at: "1:41:09", artist: "The KLF", title: "3AM Somewhere Out of Beaumont" },
+  { at: "1:43:25", artist: "The KLF & The Justified Ancients of Mu Mu", title: "Atlanta to Mobile" },
+  { at: "1:50:46", artist: "The Future Sound Of London", title: "Papua New Guinea" },
+];

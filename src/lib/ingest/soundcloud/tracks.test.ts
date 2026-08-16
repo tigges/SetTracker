@@ -123,4 +123,17 @@ assert.equal(
   "sc-vintageculturemusic-vintage-culture-b2b-arodes-at-burning-man-2024",
 );
 
+const sashaEclipseSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url === "https://soundcloud.com/sashaofficial/sasha-eclipse-mix-12-8-26",
+);
+assert.ok(sashaEclipseSc);
+assert.equal(sashaEclipseSc.primaryArtist.name, "Sasha");
+assert.equal(sashaEclipseSc.type, "mix");
+assert.equal(sashaEclipseSc.seriesName, "Eclipse Mix");
+assert.equal(
+  `sc-sashaofficial-${slugify("sasha-eclipse-mix-12-8-26")}`,
+  "sc-sashaofficial-sasha-eclipse-mix-12-8-26",
+);
+
 console.log("soundcloud/tracks.test.ts ok");

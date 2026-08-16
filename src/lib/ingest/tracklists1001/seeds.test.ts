@@ -97,6 +97,7 @@ import {
   TL_JOEL_CORRY_EDGE_NYC_2026,
   TL_NICKY_ROMERO_PROTOCOL_RADIO_731,
   TL_REINIER_ZONNEVELD_AWAKENINGS_2025,
+  TL_SASHA_ECLIPSE_MIX_2026,
   TL_VINTAGE_CULTURE_ARODES_BURNING_MAN_2024,
   TL_VINTAGE_CULTURE_EDC_LV_NEON_2025,
   TL_VINTAGE_CULTURE_NYC_YACHT_2023,
@@ -1589,6 +1590,16 @@ assert.equal(
 );
 assert.equal(isWiredTracklistSlug("yt-soEFl73peVA"), true);
 assert.equal(isWiredTracklistSlug("yt-Rgx-wT9FDaE"), true);
+assert.equal(
+  isWiredTracklistSlug("sc-sashaofficial-sasha-eclipse-mix-12-8-26"),
+  true,
+);
+assert.equal(
+  isWiredTracklistSlug(
+    "sc-https://soundcloud.com/sashaofficial/sasha-eclipse-mix-12-8-26",
+  ),
+  false,
+);
 
 assertSeedClocks(TL_JAMIE_JONES_HOT_ROBOT_RADIO_225);
 assert.equal(TL_JAMIE_JONES_HOT_ROBOT_RADIO_225.length, 7);
@@ -1691,6 +1702,32 @@ for (let i = 1; i < prr731.length; i++) {
   assert.ok(
     (prr731[i]!.timestamp ?? 0) > (prr731[i - 1]!.timestamp ?? 0),
     `Protocol Radio 731 clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_SASHA_ECLIPSE_MIX_2026);
+assert.equal(TL_SASHA_ECLIPSE_MIX_2026.length, 22);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-sashaofficial-sasha-eclipse-mix-12-8-26"],
+  TL_SASHA_ECLIPSE_MIX_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-https://soundcloud.com/sashaofficial/sasha-eclipse-mix-12-8-26"
+  ],
+  undefined,
+);
+const sashaEclipse = tracklist1001RowsToPlays(TL_SASHA_ECLIPSE_MIX_2026);
+assert.equal(sashaEclipse.length, 22);
+assert.equal(sashaEclipse[0]?.provenance, "1001tl");
+assert.equal(sashaEclipse[0]?.timestamp, 0);
+assert.equal(sashaEclipse[0]?.trackTitle, "Together We Will Live Forever");
+assert.equal(sashaEclipse[21]?.trackTitle, "Papua New Guinea");
+assert.equal(sashaEclipse[21]?.timestamp, 1 * 3600 + 50 * 60 + 46);
+for (let i = 1; i < sashaEclipse.length; i++) {
+  assert.ok(
+    (sashaEclipse[i]!.timestamp ?? 0) > (sashaEclipse[i - 1]!.timestamp ?? 0),
+    `Sasha Eclipse Mix clocks must increase at index ${i}`,
   );
 }
 

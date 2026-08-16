@@ -157,4 +157,16 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     type: "festival",
     minDurationSec: 30 * 60,
   },
+  {
+    // Official Sasha upload; 1001TL wired via
+    // sc-sashaofficial-sasha-eclipse-mix-12-8-26.
+    url: "https://soundcloud.com/sashaofficial/sasha-eclipse-mix-12-8-26",
+    primaryArtist: dj("Sasha", {
+      accent: "#4361ee",
+    }),
+    genre: "Progressive House",
+    seriesName: "Eclipse Mix",
+    type: "mix",
+    minDurationSec: 30 * 60,
+  },
 ];
