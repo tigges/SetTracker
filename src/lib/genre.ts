@@ -233,32 +233,39 @@ function isGenreTagKey(key: string): boolean {
   return lookupKey(key) != null;
 }
 
-/** "House, Tech & Minimal: 12.03.22" — date crumb after a genre list. */
+/** "House, Tech & Minimal: 12.03.22" / slug "…-12-03-22". */
 const GENRE_DATE_CRUMB =
   /(?:[:\-–—|]\s*)?(?:\d{1,2}[.\/-]\d{1,2}[.\/-]\d{2,4}|\d{4}[.\/-]\d{1,2}[.\/-]\d{1,2})\s*$/;
+const GENRE_SPACED_DATE_CRUMB = /\s+\d{1,2}\s+\d{1,2}\s+\d{2,4}\s*$/;
 
 function stripGenreDateCrumb(name: string): string {
-  return name.replace(GENRE_DATE_CRUMB, "").replace(/[:\-–—|]\s*$/, "").trim();
+  return name
+    .replace(GENRE_DATE_CRUMB, "")
+    .replace(GENRE_SPACED_DATE_CRUMB, "")
+    .replace(/[:\-–—|]\s*$/, "")
+    .trim();
 }
 
 /**
- * True when the whole string is only genre tokens — one chip ("Afro House")
- * or a list ("House, Tech" → House + Tech House). Trailing dates are ignored
- * ("House, Tech & Minimal: 12.03.22"). Leftover person words
- * ("House of Yes", "Fisher House") stay false.
+ * True when the whole string is only genre tokens — one chip ("Afro House"),
+ * a list ("House, Tech"), or space-separated tags ("House Tech Minimal").
+ * Trailing dates are ignored ("House, Tech & Minimal: 12.03.22").
+ * Leftover person words ("House of Yes", "Fisher House") stay false.
  */
 export function isGenreTagName(name: string | null | undefined): boolean {
   if (name == null) return false;
   const trimmed = stripGenreDateCrumb(String(name).replace(/\s+/g, " ").trim());
   if (!trimmed) return false;
-  // Punctuation collapses ("House, Tech" → "house tech" → Tech House).
   if (isGenreTagKey(genreKey(trimmed))) return true;
   const parts = trimmed
     .split(/\s*(?:[/|,;:]+|\band\b|&)\s*/i)
     .map((p) => p.trim())
     .filter(Boolean);
-  if (parts.length < 2) return false;
-  return parts.every((p) => isGenreTagKey(genreKey(p)));
+  if (parts.length >= 2 && parts.every((p) => isGenreTagKey(genreKey(p)))) {
+    return true;
+  }
+  const words = genreKey(trimmed).split(" ").filter(Boolean);
+  return words.length > 0 && words.every((w) => isGenreTagKey(w));
 }
 
 function lookupKey(key: string): CanonicalGenre | null {

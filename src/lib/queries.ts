@@ -547,6 +547,7 @@ export async function getDjBySlug(slug: string) {
   if (
     isBrandHostSlug(dj.slug) ||
     isJunkArtistName(dj.name) ||
+    isJunkArtistName(dj.slug.replace(/-/g, " ")) ||
     /^view-artist-details-for-/.test(dj.slug)
   ) {
     return null;
@@ -841,6 +842,7 @@ export async function getDjList(): Promise<DjListItem[]> {
     const isJunk =
       isBrandHostSlug(d.slug) ||
       isJunkArtistName(d.name) ||
+      isJunkArtistName(d.slug.replace(/-/g, " ")) ||
       /^view-artist-details-for-/.test(d.slug);
     const plays = playAgg.get(d.id) ?? {
       playCount: 0,

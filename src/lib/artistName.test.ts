@@ -52,6 +52,8 @@ assert.equal(isJunkArtistName("House, Tech"), true);
 assert.equal(isJunkArtistName("House / Tech"), true);
 assert.equal(isJunkArtistName("House, Tech & Minimal"), true);
 assert.equal(isJunkArtistName("House, Tech & Minimal: 12.03.22"), true);
+assert.equal(isJunkArtistName("house tech minimal 12 03 22"), true);
+assert.equal(isJunkArtistName("House Tech Minimal"), true);
 assert.equal(isJunkArtistName("Minimal"), true);
 assert.equal(isJunkArtistName("Minimal Techno"), true);
 assert.equal(sanitizeArtistName("House, Tech"), null);

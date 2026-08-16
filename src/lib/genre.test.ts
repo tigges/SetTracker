@@ -86,6 +86,8 @@ describe("isGenreTagName", () => {
     assert.equal(isGenreTagName("House / Tech"), true);
     assert.equal(isGenreTagName("House, Tech & Minimal"), true);
     assert.equal(isGenreTagName("House, Tech & Minimal: 12.03.22"), true);
+    assert.equal(isGenreTagName("house tech minimal 12 03 22"), true);
+    assert.equal(isGenreTagName("House Tech Minimal"), true);
     assert.equal(isGenreTagName("Melodic House & Techno"), true);
     assert.equal(isGenreTagName("Minimal"), true);
     assert.equal(isGenreTagName("Minimal: 12.03.22"), true);
