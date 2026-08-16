@@ -67,6 +67,9 @@ const MANDY_NEGATIV_TML = YOUTUBE_SETS.find((s) =>
   s.video.includes("J7b0G4XX8pg"),
 );
 const DLDK_ZIGGO = YOUTUBE_SETS.find((s) => s.video.includes("B1EaMgsf84Q"));
+const AFROJACK_R3HAB_TML = YOUTUBE_SETS.find((s) =>
+  s.video.includes("lEIGnx7qLl0"),
+);
 
 describe("watchMetaFromCuratedSeed", () => {
   it("builds ASOT 1290 meta from the curated 1001 capture", () => {
@@ -264,6 +267,17 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=J7b0G4XX8pg");
     // Last cue 57:56 + 180s pad.
     assert.equal(meta.durationSec, 57 * 60 + 56 + 180);
+  });
+
+  it("builds AFROJACK B2B R3HAB TML WE2 meta from the curated 1001 capture", () => {
+    assert.ok(AFROJACK_R3HAB_TML);
+    const meta = watchMetaFromCuratedSeed(AFROJACK_R3HAB_TML);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "lEIGnx7qLl0");
+    assert.match(meta.title, /Tomorrowland/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=lEIGnx7qLl0");
+    // Last cue 59:30 + 180s pad.
+    assert.equal(meta.durationSec, 59 * 60 + 30 + 180);
   });
 
   it("builds Lucas & Steve B2B Mike Williams DLDK Ziggo meta from the curated 1001 capture", () => {
@@ -1032,6 +1046,21 @@ describe("curated YouTube 429 fallback", () => {
     assert.ok(sets[0]!.durationSec >= 57 * 60);
     assert.equal(sets[0]?.primaryArtist?.slug, "mandy");
     assert.ok(sets[0]?.collaborators?.some((c) => c.slug === "negitiv"));
+    assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
+  });
+
+  it("lands AFROJACK B2B R3HAB TML WE2 from the 1001 seed when watch is 429", async () => {
+    assert.ok(AFROJACK_R3HAB_TML);
+    const adapter = createYoutubeAdapter([AFROJACK_R3HAB_TML], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-lEIGnx7qLl0");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 54);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 59 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "afrojack");
+    assert.ok(sets[0]?.collaborators?.some((c) => c.slug === "r3hab"));
     assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
   });
 

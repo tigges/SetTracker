@@ -960,18 +960,21 @@ assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-aDAWctObTvI"]!.length >= 17);
 assertSeedClocks(TL_AFROJACK_R3HAB_TML_WE2_2026);
 const afroR3 = tracklist1001RowsToPlays(TL_AFROJACK_R3HAB_TML_WE2_2026);
 assert.equal(afroR3.length, 54);
+assert.equal(afroR3[0]!.provenance, "1001tl");
+assert.equal(afroR3[0]!.timestamp, 12);
 assert.equal(afroR3[0]!.trackTitle, "Ultimate");
 assert.equal(afroR3[afroR3.length - 1]!.trackTitle, "Bangduck");
 assert.equal(afroR3[afroR3.length - 1]!.timestamp, 59 * 60 + 30);
-let arPrev = -1;
-for (const p of afroR3) {
+for (let i = 1; i < afroR3.length; i++) {
   assert.ok(
-    p.timestamp >= arPrev,
-    `AFROJACK R3HAB TML clocks must not go back @ ${p.timestamp}`,
+    (afroR3[i]!.timestamp ?? 0) >= (afroR3[i - 1]!.timestamp ?? 0),
+    `AFROJACK R3HAB TML clocks must not go back at index ${i}`,
   );
-  arPrev = p.timestamp;
 }
-assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-AjQeohYmg3A"]!.length >= 54);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-AjQeohYmg3A"],
+  TL_AFROJACK_R3HAB_TML_WE2_2026,
+);
 assert.equal(
   TRACKLIST_1001_BY_SOURCE_SLUG["yt-lEIGnx7qLl0"],
   TL_AFROJACK_R3HAB_TML_WE2_2026,

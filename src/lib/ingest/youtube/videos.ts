@@ -1119,7 +1119,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_SARA_LANDRY_TML_WE2_2026,
   },
   {
-    // Tomorrowland official — Mainstage WE2 B2B; 21/54 timed (rest lerped).
+    // Tomorrowland official — Mainstage WE2 B2B; title drives collaborator parse.
     video: "https://www.youtube.com/watch?v=AjQeohYmg3A",
     primaryArtist: dj("Afrojack", {
       accent: "#ff9f1c",
@@ -1127,7 +1127,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     }),
     genre: "Big Room",
     type: "festival",
-    title: "Afrojack b2b R3hab WE2 | Tomorrowland 2026",
+    title: "AFROJACK B2B R3HAB | Mainstage, Tomorrowland Weekend 2 2026",
     seriesName: "Tomorrowland",
     eventName: "Tomorrowland Belgium",
     tracklist1001Url:
@@ -1135,7 +1135,9 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_AFROJACK_R3HAB_TML_WE2_2026,
   },
   {
-    // Same TML WE2 B2B, alternate official upload; same 1001 list.
+    // R3HAB official upload of the same TML WE2 B2B; same 1001 list.
+    // oEmbed is "Tomorrowland Weekend 2 | Afrojack b2b R3HAB" — keep artist first
+    // so Tomorrowland is not parsed as the performing credit.
     video: "https://www.youtube.com/watch?v=lEIGnx7qLl0",
     primaryArtist: dj("Afrojack", {
       accent: "#ff9f1c",
@@ -1143,7 +1145,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     }),
     genre: "Big Room",
     type: "festival",
-    title: "Afrojack b2b R3hab WE2 | Tomorrowland 2026",
+    title: "AFROJACK B2B R3HAB | Mainstage, Tomorrowland Weekend 2 2026",
     seriesName: "Tomorrowland",
     eventName: "Tomorrowland Belgium",
     tracklist1001Url:
