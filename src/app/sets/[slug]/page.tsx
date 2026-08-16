@@ -207,31 +207,6 @@ export default async function SetPage({
         </div>
       </div>
 
-      <div className="my-6">
-        <StatusLegend counts={set.statusCounts} />
-      </div>
-
-      <div className="mb-6">
-        <SetExport
-          meta={{
-            title: set.title,
-            slug: set.slug,
-            artistLine: set.artists.map((a) => a.name).join(" b2b "),
-          }}
-          plays={set.plays.map((p) => ({
-            position: p.position,
-            timestamp: p.timestamp,
-            title: p.title,
-            artistName: p.artistName,
-            bpm: p.bpm,
-            musicalKey: p.musicalKey,
-            trackDurationSec: p.trackDurationSec,
-            beatportUrl: p.beatportUrl,
-            idStatus: p.idStatus,
-          }))}
-        />
-      </div>
-
       <SetTimeline
         plays={set.plays}
         durationSec={set.durationSec}
@@ -239,7 +214,29 @@ export default async function SetPage({
         setSlug={set.slug}
         setGenre={set.genre}
         setSourceUrl={set.sourceUrl}
-      />
+      >
+        <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
+          <StatusLegend counts={set.statusCounts} />
+          <SetExport
+            meta={{
+              title: set.title,
+              slug: set.slug,
+              artistLine: set.artists.map((a) => a.name).join(" b2b "),
+            }}
+            plays={set.plays.map((p) => ({
+              position: p.position,
+              timestamp: p.timestamp,
+              title: p.title,
+              artistName: p.artistName,
+              bpm: p.bpm,
+              musicalKey: p.musicalKey,
+              trackDurationSec: p.trackDurationSec,
+              beatportUrl: p.beatportUrl,
+              idStatus: p.idStatus,
+            }))}
+          />
+        </div>
+      </SetTimeline>
 
       {related.length > 0 ? (
         <section className="mt-10">
