@@ -64,6 +64,7 @@ import {
   TL_MARKUS_SCHULZ_AND_JEROME_ISMA_AE_GDJB_2026,
   TL_ALOK_TML_WE2_2026,
   TL_HARDWELL_HOA_527_YEARMIX_2025,
+  TL_JOEL_CORRY_EDGE_NYC_2026,
   TL_REINIER_ZONNEVELD_AWAKENINGS_2025,
   TL_VINTAGE_CULTURE_EDC_LV_NEON_2025,
   TL_VINTAGE_CULTURE_NYC_YACHT_2023,
@@ -1517,6 +1518,20 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/hgdfs3t/reinier-zonneveld-area-v-awakenings-festival-netherlands-2025-07-11.html",
     tracklist1001: TL_REINIER_ZONNEVELD_AWAKENINGS_2025,
+  },
+  {
+    // Official DJ Mag Relive; 1001 captured 2026-08-16.
+    video: "https://www.youtube.com/watch?v=soEFl73peVA",
+    primaryArtist: dj("Joel Corry", {
+      accent: "#4cc9f0",
+    }),
+    genre: "House",
+    type: "festival",
+    title: "Joel Corry Epic Rooftop Set From Edge NYC",
+    eventName: "Edge New York City",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1nsmcmx9/joel-corry-edge-new-york-city-united-states-2026-05-30.html",
+    tracklist1001: TL_JOEL_CORRY_EDGE_NYC_2026,
   },
   {
     video: "https://www.youtube.com/watch?v=b-2YA4yC3UA",

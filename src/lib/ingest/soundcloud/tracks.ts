@@ -121,4 +121,40 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     type: "radio",
     minDurationSec: 30 * 60,
   },
+  {
+    // Official Jamie Jones upload; Mixcloud mirror also exists.
+    // 1001TL wired via sc-jamie-jones-hot-robot-radio-225.
+    url: "https://soundcloud.com/jamie-jones/hot-robot-radio-225",
+    primaryArtist: dj("Jamie Jones", {
+      accent: "#f72585",
+    }),
+    genre: "Tech House",
+    seriesName: "Hot Robot Radio",
+    type: "radio",
+    minDurationSec: 30 * 60,
+  },
+  {
+    // Official Jamie Jones upload; Mixcloud mirror also exists.
+    // 1001TL wired via sc-jamie-jones-hot-robot-radio-239.
+    url: "https://soundcloud.com/jamie-jones/hot-robot-radio-239",
+    primaryArtist: dj("Jamie Jones", {
+      accent: "#f72585",
+    }),
+    genre: "Tech House",
+    seriesName: "Hot Robot Radio",
+    type: "radio",
+    minDurationSec: 30 * 60,
+  },
+  {
+    // Official Vintage Culture upload; 1001TL wired via
+    // sc-vintageculturemusic-vintage-culture-b2b-arodes-at-burning-man-2024.
+    url: "https://soundcloud.com/vintageculturemusic/vintage-culture-b2b-arodes-at-burning-man-2024",
+    primaryArtist: dj("Vintage Culture", {
+      accent: "#e85d04",
+      homeCity: "Brazil",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    minDurationSec: 30 * 60,
+  },
 ];

@@ -87,4 +87,40 @@ assert.equal(
   "sc-hardwell-hardwell-on-air-527-yearmix",
 );
 
+const hrr225Sc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) => s.url === "https://soundcloud.com/jamie-jones/hot-robot-radio-225",
+);
+assert.ok(hrr225Sc);
+assert.equal(hrr225Sc.primaryArtist.name, "Jamie Jones");
+assert.equal(hrr225Sc.type, "radio");
+assert.equal(hrr225Sc.seriesName, "Hot Robot Radio");
+assert.equal(
+  `sc-jamie-jones-${slugify("hot-robot-radio-225")}`,
+  "sc-jamie-jones-hot-robot-radio-225",
+);
+
+const hrr239Sc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) => s.url === "https://soundcloud.com/jamie-jones/hot-robot-radio-239",
+);
+assert.ok(hrr239Sc);
+assert.equal(hrr239Sc.primaryArtist.name, "Jamie Jones");
+assert.equal(hrr239Sc.type, "radio");
+assert.equal(
+  `sc-jamie-jones-${slugify("hot-robot-radio-239")}`,
+  "sc-jamie-jones-hot-robot-radio-239",
+);
+
+const arodesSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url ===
+    "https://soundcloud.com/vintageculturemusic/vintage-culture-b2b-arodes-at-burning-man-2024",
+);
+assert.ok(arodesSc);
+assert.equal(arodesSc.primaryArtist.name, "Vintage Culture");
+assert.equal(arodesSc.type, "festival");
+assert.equal(
+  `sc-vintageculturemusic-${slugify("vintage-culture-b2b-arodes-at-burning-man-2024")}`,
+  "sc-vintageculturemusic-vintage-culture-b2b-arodes-at-burning-man-2024",
+);
+
 console.log("soundcloud/tracks.test.ts ok");

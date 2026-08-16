@@ -299,3 +299,137 @@ export const TL_REINIER_ZONNEVELD_AWAKENINGS_2025: FingerprintSeedRow[] = [
   { at: "1:26:00", artist: "Nena", title: "99 Luftballons (Reinier Zonneveld Remix)" },
   { at: "1:28:45", artist: "Zombie Nation", title: "Kernkraft 400" },
 ];
+
+/**
+ * Jamie Jones @ Hot Robot Radio 225 (Be Beach Dubai) 2026-01-28
+ * https://www.1001tracklists.com/tracklist/1g700mm9/jamie-jones-hot-robot-radio-225-be-beach-dubai-united-arab-emirates-2025-11-28-2026-01-28.html
+ * Official SC: https://soundcloud.com/jamie-jones/hot-robot-radio-225
+ * Mixcloud mirror: https://www.mixcloud.com/JamieJones/hot-robot-radio-225/
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["sc-jamie-jones-hot-robot-radio-225"]
+ * Captured 2026-08-16 — provenance 1001tl. Official script: 7 tracks, 7 cues.
+ */
+export const TL_JAMIE_JONES_HOT_ROBOT_RADIO_225: FingerprintSeedRow[] = [
+  { at: "0:47", artist: "NiCe7", title: "Bassline Soldiers" },
+  { at: "6:50", artist: "Adne", title: "GDM" },
+  { at: "18:02", artist: "Nettis", title: "That Is" },
+  { at: "27:49", artist: "Ferra Black", title: "Flamengo" },
+  { at: "32:14", artist: "Nautica", title: "Sway" },
+  { at: "43:17", artist: "Matteo Gatti", title: "Psycho For Drum Machine (Neverdogs Remix)" },
+  { at: "50:10", artist: "Joey London Style", title: "Clurb" },
+];
+
+/**
+ * Jamie Jones @ Hot Robot Radio 239 (Cruise Like This, Glass Island Sydney) 2026-05-06
+ * https://www.1001tracklists.com/tracklist/glb2nwk/jamie-jones-hot-robot-radio-239-cruise-like-this-glass-island-sydney-australia-2026-01-02-2026-05-06.html
+ * Official SC: https://soundcloud.com/jamie-jones/hot-robot-radio-239
+ * Mixcloud mirror: https://www.mixcloud.com/JamieJones/hot-robot-radio-239/
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["sc-jamie-jones-hot-robot-radio-239"]
+ * Captured 2026-08-16 — provenance 1001tl. Official script: 7 named tracks
+ * (5 bare IDs skipped). 1001 had no timed cues → script spaced clocks.
+ */
+export const TL_JAMIE_JONES_HOT_ROBOT_RADIO_239: FingerprintSeedRow[] = [
+  { at: "0:20", artist: "Davence", title: "Booty Perculator" },
+  { at: "8:47", artist: "Hawker", title: "I Know You Want" },
+  { at: "17:14", artist: "Jamback", title: "Freaky Freqz" },
+  { at: "25:41", artist: "JOSHWA", title: "Out Of My Mind" },
+  { at: "34:08", artist: "Max Dean & Luke Dean", title: "Gets Like That (Jamie Jones Remix)" },
+  { at: "42:35", artist: "Tom & Collins & OMRI.", title: "Dancing Shoes" },
+  { at: "51:02", artist: "Deyart", title: "Feels So Good" },
+];
+
+/**
+ * Vintage Culture & Arodes @ Playground, Burning Man, United States 2024-08-31
+ * https://www.1001tracklists.com/tracklist/20s910xk/vintage-culture-arodes-playground-burning-man-united-states-2024-08-31.html
+ * Official SC: https://soundcloud.com/vintageculturemusic/vintage-culture-b2b-arodes-at-burning-man-2024
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["sc-vintageculturemusic-vintage-culture-b2b-arodes-at-burning-man-2024"]
+ * Captured 2026-08-16 — provenance 1001tl. Official script: 22 tracks.
+ */
+export const TL_VINTAGE_CULTURE_ARODES_BURNING_MAN_2024: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "Monblaire", title: "The Church" },
+  { at: "7:30", artist: "Carl Bee", title: "Mangatune" },
+  { at: "12:00", artist: "Âme", title: "Asa" },
+  { at: "16:15", artist: "Max Styler & Oscar L", title: "Addiction" },
+  { at: "21:40", artist: "2030 & Takiru & Dor Reuveni & Mosko", title: "Bubblegum" },
+  { at: "24:30", artist: "CamelPhat & Elderbrook", title: "Cola (Made By Pete Remix)" },
+  { at: "34:10", artist: "Vintage Culture & braev", title: "Time (Olivier Giacomotto Remix)" },
+  { at: "39:00", artist: "Frankey & Sandrino", title: "The Moment" },
+  { at: "42:30", artist: "Vintage Culture", title: "Strange Feelings (Solomun Remix)" },
+  { at: "47:50", artist: "Arodes", title: "Kidz" },
+  { at: "53:00", artist: "Cassian X ICEHOUSE", title: "Great Southern Land" },
+  { at: "59:00", artist: "Sade", title: "Never Thought I'd See The Day (Kotiēr Remix)" },
+  { at: "1:03:00", artist: "Ugo Banchi", title: "Walk In Amsterdam" },
+  { at: "1:08:00", artist: "Emanuel Satie & Maga & Sean Doron & Tim Engelhardt", title: "Mind Over Matter" },
+  { at: "1:12:10", artist: "RÜFÜS DU SOL", title: "Lately (Vintage Culture Remix)" },
+  { at: "1:16:30", artist: "Kimonos & Ugo Banchi", title: "Discoteka" },
+  { at: "1:21:00", artist: "Sono", title: "Keep Control" },
+  { at: "1:26:40", artist: "Solique", title: "Ordinary Things" },
+  { at: "1:30:40", artist: "Marasi", title: "Opera" },
+  { at: "1:37:50", artist: "Radio Slave ft. Nez", title: "Wait A Minute" },
+  { at: "1:42:30", artist: "KUČKA", title: "No Good For Me (Odd Mob Remix)" },
+  { at: "1:46:10", artist: "Foals", title: "Bad Habit (Alex Metric Remix)" },
+];
+
+/**
+ * Joel Corry @ Edge New York City, United States 2026-05-30
+ * https://www.1001tracklists.com/tracklist/1nsmcmx9/joel-corry-edge-new-york-city-united-states-2026-05-30.html
+ * Official YT: https://youtu.be/soEFl73peVA
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-soEFl73peVA"]
+ * Captured 2026-08-16 — provenance 1001tl. Official script: 55 tracks.
+ */
+export const TL_JOEL_CORRY_EDGE_NYC_2026: FingerprintSeedRow[] = [
+  { at: "1:00", artist: "Joel Corry ft. RAHH", title: "Devotion (Sweetest Emotion)" },
+  { at: "1:50", artist: "Joel Corry ft. RAHH", title: "Devotion (Sweetest Emotion) (VIP Mix)" },
+  { at: "3:30", artist: "HAVEN. ft. Kaitlin Aragon", title: "I Run (HILLS Remix)" },
+  { at: "5:40", artist: "NIIKO X SWAE", title: "Ayer" },
+  { at: "8:10", artist: "CID", title: "Party Jumpin'" },
+  { at: "10:50", artist: "Jennifer Lopez & Joel Corry", title: "Get Right (Joel Corry VIP Mix)" },
+  { at: "13:40", artist: "SIDEPIECE", title: "Lick" },
+  { at: "15:00", artist: "Joel Corry & Jax Jones ft. Charli xcx & Saweetie", title: "Out Out (Joel Corry VIP Mix)" },
+  { at: "18:10", artist: "Joel Corry", title: "Lonely" },
+  { at: "20:20", artist: "Joel Corry", title: "Lonely (VIP Mix)" },
+  { at: "21:20", artist: "Sonny Fodera & Jazzy & D.O.D", title: "Somedays (MARTEN HØRGER Remix)" },
+  { at: "23:20", artist: "Joel Corry & Icona Pop & Rain Radio", title: "Desire" },
+  { at: "25:50", artist: "Joel Corry ft. Becky Hill", title: "History (Lekota Remix)" },
+  { at: "28:00", artist: "Cloonee & Prospa", title: "Free Your Mind" },
+  { at: "31:40", artist: "Chris Lorenzo & aMo", title: "HOTS 4 U" },
+  { at: "35:00", artist: "JOSHWA", title: "Out Of My Mind (Rello Remix)" },
+  { at: "38:30", artist: "Mau P", title: "Like I Like It" },
+  { at: "42:20", artist: "Joel Corry", title: "Liquor Store" },
+  { at: "44:20", artist: "Joel Corry ft. Mabel", title: "I Wish (VIP Mix)" },
+  { at: "46:40", artist: "Joel Corry X MNEK", title: "Head & Heart" },
+  { at: "49:00", artist: "Alice Deejay", title: "Better Off Alone (Pickle Remix)" },
+  { at: "50:20", artist: "Tchami & Malaa & MAKJ", title: "N9" },
+  { at: "53:10", artist: "Fred again.. & Skepta & PlaqueBoyMax", title: "Victory Lap (HILLS Remix)" },
+  { at: "56:00", artist: "Joel Corry & Taylr Renee", title: "IDGAF" },
+  { at: "59:00", artist: "ESSE", title: "Make My Day" },
+  { at: "1:00:30", artist: "GREG 99", title: "Pump It Up" },
+  { at: "1:04:00", artist: "Wildchild", title: "Renegade Master" },
+  { at: "1:06:20", artist: "JOSHWA", title: "Work Your Body" },
+  { at: "1:09:50", artist: "ESSE", title: "Music Is The Answer" },
+  { at: "1:13:00", artist: "Joel Corry & Volkoder", title: "Shine" },
+  { at: "1:16:30", artist: "San Pacho & Noah Scannell", title: "Stereo Love" },
+  { at: "1:19:10", artist: "ANOTR ft. 54 Ultra", title: "Talk To You" },
+  { at: "1:22:40", artist: "Joel Corry", title: "Whisper" },
+  { at: "1:26:00", artist: "Joel Corry", title: "Sorry" },
+  { at: "1:28:40", artist: "Joel Corry & RAYE & David Guetta", title: "BED" },
+  { at: "1:31:20", artist: "David Guetta vs. Benny Benassi", title: "Satisfaction" },
+  { at: "1:34:00", artist: "Daft Punk", title: "One More Time (Pickle Club Edit)" },
+  { at: "1:35:50", artist: "Alaia & Gallo", title: "Lipstick" },
+  { at: "1:38:10", artist: "Max Styler & Greggio", title: "Oldskool Flavor" },
+  { at: "1:42:00", artist: "Vintage Culture & Volkoder", title: "Hands Up" },
+  { at: "1:45:00", artist: "Rafael Cerato & Equinøx", title: "Let It Bang" },
+  { at: "1:48:30", artist: "Dean Turnley", title: "Actin' Tough (Cassian Remix)" },
+  { at: "1:51:50", artist: "Prospa", title: "Don't Stop" },
+  { at: "1:55:00", artist: "Daft Punk", title: "Around The World (Westend Edit)" },
+  { at: "1:58:00", artist: "Tiga", title: "Mind Dimension (Adam Sellouk Remix)" },
+  { at: "2:02:00", artist: "Chris Lorenzo", title: "Appetite" },
+  { at: "2:05:00", artist: "Cassian & YOTTO & Da Hool", title: "Love Parade" },
+  { at: "2:08:00", artist: "KAAZE", title: "Destination Calabria" },
+  { at: "2:09:50", artist: "Empire Of The Sun", title: "Alive (ALOK Remix)" },
+  { at: "2:13:00", artist: "Axwell & Sebastian Ingrosso & Steve Angello & Laidback Luke ft. Deborah Cox", title: "Leave The World Behind (Henry Himself Remix)" },
+  { at: "2:16:30", artist: "Eric Prydz", title: "Pjanoo (Henry Himself Remix)" },
+  { at: "2:19:50", artist: "Calvin Harris & D.O.D", title: "Sweet Nothing (2025 Edit)" },
+  { at: "2:23:10", artist: "Joel Corry", title: "Hey DJ" },
+  { at: "2:25:50", artist: "Nathan Dawe & Joel Corry & Ella Henderson", title: "0800 HEAVEN" },
+  { at: "2:28:40", artist: "Joel Corry X MNEK", title: "Head & Heart" },
+];

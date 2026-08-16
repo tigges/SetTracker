@@ -22,6 +22,7 @@ const VC_PACHA = YOUTUBE_SETS.find((s) => s.video.includes("OVex0rm7ZR4"));
 const VC_YACHT = YOUTUBE_SETS.find((s) => s.video.includes("6bJZPDKlq7o"));
 const HOA_527 = YOUTUBE_SETS.find((s) => s.video.includes("OXwK0CSmXzY"));
 const RZ_AWAKE = YOUTUBE_SETS.find((s) => s.video.includes("i-mFuxbGHzg"));
+const JOEL_EDGE = YOUTUBE_SETS.find((s) => s.video.includes("soEFl73peVA"));
 
 describe("watchMetaFromCuratedSeed", () => {
   it("builds ASOT 1290 meta from the curated 1001 capture", () => {
@@ -153,6 +154,17 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=i-mFuxbGHzg");
     // Last cue 1:28:45 + 180s pad.
     assert.equal(meta.durationSec, 1 * 3600 + 28 * 60 + 45 + 180);
+  });
+
+  it("builds Joel Corry Edge NYC meta from the curated 1001 capture", () => {
+    assert.ok(JOEL_EDGE);
+    const meta = watchMetaFromCuratedSeed(JOEL_EDGE);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "soEFl73peVA");
+    assert.match(meta.title, /Edge NYC/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=soEFl73peVA");
+    // Last cue 2:28:40 + 180s pad.
+    assert.equal(meta.durationSec, 2 * 3600 + 28 * 60 + 40 + 180);
   });
 
   it("returns null without a title or video id", () => {
@@ -379,5 +391,19 @@ describe("curated YouTube 429 fallback", () => {
     assert.ok(sets[0]!.durationSec >= 1 * 3600 + 28 * 60);
     assert.equal(sets[0]?.primaryArtist?.slug, "reinier-zonneveld");
     assert.match(String(sets[0]?.eventName ?? ""), /Awakenings/i);
+  });
+
+  it("lands Joel Corry Edge NYC from the 1001 seed when watch is 429", async () => {
+    assert.ok(JOEL_EDGE);
+    const adapter = createYoutubeAdapter([JOEL_EDGE], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-soEFl73peVA");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 55);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 2 * 3600 + 28 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "joel-corry");
+    assert.match(String(sets[0]?.eventName ?? ""), /Edge/i);
   });
 });

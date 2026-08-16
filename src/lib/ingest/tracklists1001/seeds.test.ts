@@ -92,7 +92,11 @@ import {
   TL_STEVE_AOKI_TML_FRIENDSHIP_MIX_2026,
   TL_ALOK_TML_WE2_2026,
   TL_HARDWELL_HOA_527_YEARMIX_2025,
+  TL_JAMIE_JONES_HOT_ROBOT_RADIO_225,
+  TL_JAMIE_JONES_HOT_ROBOT_RADIO_239,
+  TL_JOEL_CORRY_EDGE_NYC_2026,
   TL_REINIER_ZONNEVELD_AWAKENINGS_2025,
+  TL_VINTAGE_CULTURE_ARODES_BURNING_MAN_2024,
   TL_VINTAGE_CULTURE_EDC_LV_NEON_2025,
   TL_VINTAGE_CULTURE_NYC_YACHT_2023,
   TL_VINTAGE_CULTURE_PACHA_IBIZA_2026,
@@ -1574,6 +1578,99 @@ assert.equal(isWiredTracklistSlug("yt-OXwK0CSmXzY"), true);
 assert.equal(isWiredTracklistSlug("sc-hardwell-hardwell-on-air-527-yearmix"), true);
 assert.equal(isWiredTracklistSlug("yt-not-a-real-seed"), false);
 assert.equal(isWiredTracklistSlug("yt-i-mFuxbGHzg"), true);
+assert.equal(isWiredTracklistSlug("sc-jamie-jones-hot-robot-radio-225"), true);
+assert.equal(isWiredTracklistSlug("sc-jamie-jones-hot-robot-radio-239"), true);
+assert.equal(
+  isWiredTracklistSlug(
+    "sc-vintageculturemusic-vintage-culture-b2b-arodes-at-burning-man-2024",
+  ),
+  true,
+);
+assert.equal(isWiredTracklistSlug("yt-soEFl73peVA"), true);
+
+assertSeedClocks(TL_JAMIE_JONES_HOT_ROBOT_RADIO_225);
+assert.equal(TL_JAMIE_JONES_HOT_ROBOT_RADIO_225.length, 7);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-jamie-jones-hot-robot-radio-225"],
+  TL_JAMIE_JONES_HOT_ROBOT_RADIO_225,
+);
+const hrr225 = tracklist1001RowsToPlays(TL_JAMIE_JONES_HOT_ROBOT_RADIO_225);
+assert.equal(hrr225.length, 7);
+assert.equal(hrr225[0]?.provenance, "1001tl");
+assert.equal(hrr225[0]?.timestamp, 47);
+assert.equal(hrr225[0]?.trackTitle, "Bassline Soldiers");
+assert.equal(hrr225[6]?.trackTitle, "Clurb");
+assert.equal(hrr225[6]?.timestamp, 50 * 60 + 10);
+for (let i = 1; i < hrr225.length; i++) {
+  assert.ok(
+    (hrr225[i]!.timestamp ?? 0) > (hrr225[i - 1]!.timestamp ?? 0),
+    `HRR 225 clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_JAMIE_JONES_HOT_ROBOT_RADIO_239);
+assert.equal(TL_JAMIE_JONES_HOT_ROBOT_RADIO_239.length, 7);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-jamie-jones-hot-robot-radio-239"],
+  TL_JAMIE_JONES_HOT_ROBOT_RADIO_239,
+);
+const hrr239 = tracklist1001RowsToPlays(TL_JAMIE_JONES_HOT_ROBOT_RADIO_239);
+assert.equal(hrr239.length, 7);
+assert.equal(hrr239[0]?.provenance, "1001tl");
+assert.equal(hrr239[0]?.timestamp, 20);
+assert.equal(hrr239[0]?.trackTitle, "Booty Perculator");
+assert.equal(hrr239[6]?.trackTitle, "Feels So Good");
+assert.equal(hrr239[6]?.timestamp, 51 * 60 + 2);
+for (let i = 1; i < hrr239.length; i++) {
+  assert.ok(
+    (hrr239[i]!.timestamp ?? 0) > (hrr239[i - 1]!.timestamp ?? 0),
+    `HRR 239 clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_VINTAGE_CULTURE_ARODES_BURNING_MAN_2024);
+assert.equal(TL_VINTAGE_CULTURE_ARODES_BURNING_MAN_2024.length, 22);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-vintageculturemusic-vintage-culture-b2b-arodes-at-burning-man-2024"
+  ],
+  TL_VINTAGE_CULTURE_ARODES_BURNING_MAN_2024,
+);
+const vcArodes = tracklist1001RowsToPlays(
+  TL_VINTAGE_CULTURE_ARODES_BURNING_MAN_2024,
+);
+assert.equal(vcArodes.length, 22);
+assert.equal(vcArodes[0]?.provenance, "1001tl");
+assert.equal(vcArodes[0]?.timestamp, 0);
+assert.equal(vcArodes[0]?.trackTitle, "The Church");
+assert.equal(vcArodes[21]?.trackTitle, "Bad Habit (Alex Metric Remix)");
+assert.equal(vcArodes[21]?.timestamp, 1 * 3600 + 46 * 60 + 10);
+for (let i = 1; i < vcArodes.length; i++) {
+  assert.ok(
+    (vcArodes[i]!.timestamp ?? 0) > (vcArodes[i - 1]!.timestamp ?? 0),
+    `Vintage Culture Arodes clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_JOEL_CORRY_EDGE_NYC_2026);
+assert.equal(TL_JOEL_CORRY_EDGE_NYC_2026.length, 55);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-soEFl73peVA"],
+  TL_JOEL_CORRY_EDGE_NYC_2026,
+);
+const joelEdge = tracklist1001RowsToPlays(TL_JOEL_CORRY_EDGE_NYC_2026);
+assert.equal(joelEdge.length, 55);
+assert.equal(joelEdge[0]?.provenance, "1001tl");
+assert.equal(joelEdge[0]?.timestamp, 60);
+assert.equal(joelEdge[0]?.trackTitle, "Devotion (Sweetest Emotion)");
+assert.equal(joelEdge[54]?.trackTitle, "Head & Heart");
+assert.equal(joelEdge[54]?.timestamp, 2 * 3600 + 28 * 60 + 40);
+for (let i = 1; i < joelEdge.length; i++) {
+  assert.ok(
+    (joelEdge[i]!.timestamp ?? 0) > (joelEdge[i - 1]!.timestamp ?? 0),
+    `Joel Corry Edge NYC clocks must increase at index ${i}`,
+  );
+}
 
 assertSeedClocks(TL_REINIER_ZONNEVELD_AWAKENINGS_2025);
 assert.equal(TL_REINIER_ZONNEVELD_AWAKENINGS_2025.length, 20);

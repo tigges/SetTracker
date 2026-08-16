@@ -782,11 +782,11 @@ export async function runIngest(
       if (existing.sourceHash && existing.sourceHash === sourceHash) {
         const seeded = applyTracklist1001Seed(raw.sourceSlug, raw.plays);
         const seed1001 = seeded.filter((p) => p.provenance === "1001tl").length;
-        if (seed1001 >= 12) {
+        if (seed1001 >= 5) {
           const stored1001 = await prisma.played.count({
             where: { setId: existing.id, provenance: "1001tl" },
           });
-          if (stored1001 < 12) {
+          if (stored1001 < seed1001) {
             raw.plays = seeded;
             raw.sourceHash = hashRawSetContent(raw);
             sourceHash = raw.sourceHash;

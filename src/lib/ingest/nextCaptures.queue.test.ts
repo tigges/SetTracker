@@ -194,5 +194,51 @@ assert.equal(
   ),
   "mapped",
 );
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "sc-jamie-jones-hot-robot-radio-225",
+      title: "Hot Robot Radio 225",
+      type: "radio",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "sc-jamie-jones-hot-robot-radio-239",
+      title: "Hot Robot Radio 239",
+      type: "radio",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "sc-vintageculturemusic-vintage-culture-b2b-arodes-at-burning-man-2024",
+      title: "Vintage Culture b2b Arodes at Burning Man 2024",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "yt-soEFl73peVA",
+      title: "Joel Corry Epic Rooftop Set From Edge NYC",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
 
 console.log("nextCaptures.queue.test.ts ok");
