@@ -1504,7 +1504,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     }),
     genre: "Bass House",
     type: "festival",
-    title: "Dillon Francis B2B Marten Horger - Parookaville 2025 Mainstage",
+    title: "Dillon Francis B2B Marten Horger | Parookaville 2025 Mainstage",
     seriesName: "Parookaville",
     eventName: "Parookaville",
     tracklist1001Url:

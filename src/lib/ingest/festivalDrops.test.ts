@@ -42,7 +42,7 @@ describe("festivalDrops", () => {
   it("matches Parookaville 2025 from a 2025 title", () => {
     const seed = matchEditionSeed(
       "parookaville",
-      "Dillon Francis B2B Marten Horger - Parookaville 2025 Mainstage",
+      "Dillon Francis B2B Marten Horger | Parookaville 2025 Mainstage",
       new Date("2025-07-21"),
     );
     assert.equal(seed?.slug, "parookaville-2025");
