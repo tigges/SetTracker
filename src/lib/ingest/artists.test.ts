@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import {
   artistsForSet,
+  guestFromSeriesByTitle,
   performingCreditFromTitle,
   splitArtistCredit,
   splitArtistsFromSetTitle,
@@ -148,6 +149,22 @@ assert.equal(
   performingCreditFromTitle("Sunk Afinity Sessions by Japhet Be"),
   "Japhet Be",
 );
+assert.equal(
+  performingCreditFromTitle(
+    "Keinemusik Radio Show by Lara Bee 17.07.2026",
+  ),
+  "Lara Bee",
+);
+assert.equal(
+  guestFromSeriesByTitle("Keinemusik Radio Show by Lazarusman 03.07.2026"),
+  "Lazarusman",
+);
+const kmRadio = artistsForSet(
+  "Keinemusik Radio Show by Lara Bee 17.07.2026",
+  { name: "Keinemusik", slug: "keinemusik", accent: "#e8c547" },
+);
+assert.equal(kmRadio.primary.slug, "lara-bee");
+assert.equal(kmRadio.primary.name, "Lara Bee");
 
 assert.equal(
   performingCreditFromTitle("Armin van Buuren WE2 | Tomorrowland 2026"),

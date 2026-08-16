@@ -26,6 +26,7 @@ import {
   isBrandHostSlug,
 } from "../brandHosts";
 import {
+  guestFromSeriesByTitle,
   looksLikeEventOrSeriesCredit,
   performingCreditFromTitle,
   tidyPerformingCredit,
@@ -252,6 +253,49 @@ async function stripBrandHostPrimaries(
   return stripped;
 }
 
+/**
+ * "Keinemusik Radio Show by Lara Bee" — primary is the guest, not the imprint.
+ * Keinemusik stays a Label + DJ Mag collective; it is not the performing DJ.
+ */
+async function relinkSeriesByGuests(
+  prisma: PrismaClient,
+): Promise<{ relinked: number; ensured: number }> {
+  const sets = await prisma.set.findMany({
+    where: { title: { contains: "Radio Show" } },
+    select: {
+      id: true,
+      title: true,
+      artists: {
+        where: { isPrimary: true },
+        take: 1,
+        select: { djId: true, dj: { select: { slug: true } } },
+      },
+    },
+  });
+  let relinked = 0;
+  let ensured = 0;
+  for (const set of sets) {
+    const guest = guestFromSeriesByTitle(set.title);
+    if (!guest) continue;
+    const guestSlug = canonicalDjSlug(slugify(guest));
+    if (!guestSlug || isBrandHostSlug(guestSlug)) continue;
+    const current = set.artists[0];
+    if (current?.dj.slug === guestSlug) continue;
+    const { id: guestId, created } = await ensureDj(prisma, guestSlug, guest);
+    if (created) ensured += 1;
+    const junkId = current?.djId;
+    if (junkId && junkId !== guestId) {
+      await relinkSetPrimary(prisma, set.id, guestId, junkId);
+    } else if (!junkId) {
+      await prisma.setArtist.create({
+        data: { setId: set.id, djId: guestId, isPrimary: true },
+      });
+    }
+    relinked += 1;
+  }
+  return { relinked, ensured };
+}
+
 async function ensureDj(
   prisma: PrismaClient,
   slug: string,
@@ -343,6 +387,9 @@ export async function mergeSetTitleDjs(
   let ensured = 0;
 
   const brandHostsStripped = await stripBrandHostPrimaries(prisma);
+  const seriesGuests = await relinkSeriesByGuests(prisma);
+  setsRelinked += seriesGuests.relinked;
+  ensured += seriesGuests.ensured;
 
   const candidates = await prisma.dj.findMany({
     select: {

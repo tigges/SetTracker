@@ -31,6 +31,7 @@ import { backfillSetEditions } from "./setEditions";
 import { fillDjHandlesFromKnown, fillDjWebsitesFromWikidata } from "./discovery/fillDjHandles";
 import { discoverCuratedReliveRemaps } from "./reliveWatch";
 import { applySetSourceRemaps } from "./sourceRemaps";
+import { ensureCuratedLabels } from "./curatedLabels";
 
 export type VerifyStats = {
   checked: number;
@@ -116,6 +117,26 @@ async function scrubField(
 /** Apply curated corrections that name-guessing gets wrong. */
 export async function applyKnownUrlFixes(prisma: PrismaClient): Promise<number> {
   let n = 0;
+  const labels = await ensureCuratedLabels(prisma);
+  n += labels.created + labels.updated;
+
+  const keinemusik = await prisma.label.findUnique({
+    where: { slug: "keinemusik" },
+  });
+  if (keinemusik) {
+    await prisma.label.update({
+      where: { id: keinemusik.id },
+      data: {
+        website: keinemusik.website || "https://keinemusik.com/",
+        soundcloud:
+          keinemusik.soundcloud || "https://soundcloud.com/keinemusik",
+        instagram:
+          keinemusik.instagram || "https://instagram.com/keinemusikcrue",
+      },
+    });
+    n += 1;
+  }
+
   // Divided Souls label — never dividedsouls.com (SSL broken)
   const divided = await prisma.label.findUnique({ where: { slug: "divided" } });
   if (divided) {

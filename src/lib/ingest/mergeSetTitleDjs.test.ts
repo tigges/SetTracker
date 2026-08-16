@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { resolveCanonicalFromSetTitleDj } from "./mergeSetTitleDjs";
+import { guestFromSeriesByTitle } from "./artists";
 
 describe("resolveCanonicalFromSetTitleDj", () => {
   it("folds Dom Dolla set-title accidents onto dom-dolla", () => {
@@ -103,6 +104,13 @@ describe("resolveCanonicalFromSetTitleDj", () => {
         ["Goodboys Present — Club Mix"],
       ),
       { slug: "goodboys", name: "Goodboys" },
+    );
+  });
+
+  it("reads the guest off a label radio title", () => {
+    assert.equal(
+      guestFromSeriesByTitle("Keinemusik Radio Show by Lara Bee 17.07.2026"),
+      "Lara Bee",
     );
   });
 });

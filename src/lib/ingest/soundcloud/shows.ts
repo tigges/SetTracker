@@ -138,6 +138,7 @@ export const SOUNDCLOUD_SHOWS: SoundCloudShow[] = [
     permalink: "keinemusik",
     userId: 42109,
     label: "Keinemusik",
+    // Label / series host — "Radio Show by X" credits the guest.
     primaryArtist: dj("Keinemusik", {
       accent: "#e8c547",
       homeCity: "Berlin, DE",
