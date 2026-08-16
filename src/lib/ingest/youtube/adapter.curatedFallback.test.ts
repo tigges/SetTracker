@@ -615,6 +615,7 @@ describe("curated YouTube 429 fallback", () => {
     assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
     assert.ok(sets[0]!.durationSec >= 1 * 3600 + 25 * 60);
     assert.equal(sets[0]?.primaryArtist?.slug, "max-styler");
-    assert.match(String(sets[0]?.eventName ?? ""), /Opulent Temple/i);
+    assert.match(String(sets[0]?.title ?? ""), /Opulent Temple/i);
+    assert.match(String(sets[0]?.eventName ?? ""), /Burning Man/i);
   });
 });
