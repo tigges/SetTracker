@@ -121,6 +121,7 @@ import {
   TL_TUJAMO_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
   TL_DILLON_FRANCIS_AND_MARTEN_HORGER_MAINSTAGE_PAROOKAVILLE_GERMANY_2025,
   TL_MIKE_WILLIAMS_TIME_LAB_PAROOKAVILLE_GERMANY_2026,
+  TL_HARDWELL_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   tracklist1001RowsToPlays,
@@ -2311,6 +2312,29 @@ for (let i = 1; i < mwTimeLab.length; i++) {
   assert.ok(
     (mwTimeLab[i]!.timestamp ?? 0) > (mwTimeLab[i - 1]!.timestamp ?? 0),
     `Mike Williams Time Lab clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_HARDWELL_MAINSTAGE_PAROOKAVILLE_GERMANY_2026);
+assert.equal(TL_HARDWELL_MAINSTAGE_PAROOKAVILLE_GERMANY_2026.length, 63);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-eBeeWwsCVls"],
+  TL_HARDWELL_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
+);
+const hwParookaville = tracklist1001RowsToPlays(
+  TL_HARDWELL_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
+);
+assert.equal(hwParookaville.length, 63);
+assert.equal(hwParookaville[0]?.provenance, "1001tl");
+assert.equal(hwParookaville[0]?.timestamp, 0);
+assert.equal(hwParookaville[0]?.trackTitle, "Believe");
+assert.equal(hwParookaville[62]?.trackTitle, "IRIS");
+assert.equal(hwParookaville[62]?.timestamp, 1 * 3600 + 19 * 60 + 7);
+for (let i = 1; i < hwParookaville.length; i++) {
+  assert.ok(
+    (hwParookaville[i]!.timestamp ?? 0) >
+      (hwParookaville[i - 1]!.timestamp ?? 0),
+    `Hardwell Parookaville clocks must increase at index ${i}`,
   );
 }
 

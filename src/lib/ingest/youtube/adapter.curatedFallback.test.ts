@@ -54,6 +54,9 @@ const DF_MH_PAROOKAVILLE = YOUTUBE_SETS.find((s) =>
   s.video.includes("IwNPc_4ux84"),
 );
 const MW_TIME_LAB = YOUTUBE_SETS.find((s) => s.video.includes("XisbmW1Smgc"));
+const HW_PAROOKAVILLE = YOUTUBE_SETS.find((s) =>
+  s.video.includes("eBeeWwsCVls"),
+);
 
 describe("watchMetaFromCuratedSeed", () => {
   it("builds ASOT 1290 meta from the curated 1001 capture", () => {
@@ -207,6 +210,17 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=XisbmW1Smgc");
     // Last cue 56:09 + 180s pad.
     assert.equal(meta.durationSec, 56 * 60 + 9 + 180);
+  });
+
+  it("builds Hardwell Parookaville meta from the curated 1001 capture", () => {
+    assert.ok(HW_PAROOKAVILLE);
+    const meta = watchMetaFromCuratedSeed(HW_PAROOKAVILLE);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "eBeeWwsCVls");
+    assert.match(meta.title, /Parookaville/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=eBeeWwsCVls");
+    // Last cue 1:19:07 + 180s pad.
+    assert.equal(meta.durationSec, 1 * 3600 + 19 * 60 + 7 + 180);
   });
 
   it("builds Vintage Culture NYC Yacht meta from the curated 1001 capture", () => {
@@ -908,5 +922,19 @@ describe("curated YouTube 429 fallback", () => {
     assert.equal(sets[0]?.primaryArtist?.slug, "mike-williams");
     assert.match(String(sets[0]?.eventName ?? ""), /Parookaville/i);
     assert.match(String(sets[0]?.title ?? ""), /Time Lab/i);
+  });
+
+  it("lands Hardwell Parookaville from the 1001 seed when watch is 429", async () => {
+    assert.ok(HW_PAROOKAVILLE);
+    const adapter = createYoutubeAdapter([HW_PAROOKAVILLE], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-eBeeWwsCVls");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 63);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 1 * 3600 + 19 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "hardwell");
+    assert.match(String(sets[0]?.eventName ?? ""), /Parookaville/i);
   });
 });

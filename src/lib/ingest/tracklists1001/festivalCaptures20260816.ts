@@ -1300,4 +1300,79 @@ export const TL_MIKE_WILLIAMS_TIME_LAB_PAROOKAVILLE_GERMANY_2026: FingerprintSee
   { at: "56:09", artist: "Mike Williams & Oaks", title: "I'll Do It" },
 ];
 
+/**
+ * Hardwell @ Mainstage, Parookaville, Germany 2026-07-19
+ * https://www.1001tracklists.com/tracklist/kd4zp61/hardwell-mainstage-parookaville-germany-2026-07-19.html
+ * Official YT: https://youtu.be/eBeeWwsCVls
+ * Capture overlay used TL_Hardwell_Mainstage_Parookaville_Germany_2026
+ * (mixed-case overlay id); constant is TL_HARDWELL_MAINSTAGE_PAROOKAVILLE_GERMANY_2026.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-eBeeWwsCVls"]
+ * Captured 2026-08-16 - provenance 1001tl.
+ */
+export const TL_HARDWELL_MAINSTAGE_PAROOKAVILLE_GERMANY_2026: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "Hardwell & braev", title: "Believe" },
+  { at: "5:37", artist: "Hardwell & W&W vs. HAVEN. & Kaitlin Aragon", title: "Bangkok vs. I Run (Hardwell Mashup)" },
+  { at: "6:18", artist: "Danzel", title: "Put Your Hands Up In The Air (Acappella)" },
+  { at: "7:00", artist: "Zedd & Lucky Date ft. Ellie Goulding", title: "Fall Into The Sky (Everybody Fuckin Jump Acappella)" },
+  { at: "7:41", artist: "HAVEN. ft. Kaitlin Aragon", title: "I Run" },
+  { at: "8:23", artist: "Hardwell & W&W", title: "Bangkok" },
+  { at: "9:04", artist: "Dyro", title: "Go Down (Acappella)" },
+  { at: "9:41", artist: "Benny Benassi ft. Gary Go", title: "Cinema (Acappella)" },
+  { at: "11:30", artist: "Hardwell & Olly James vs. Hardwell vs. Avicii & Ras", title: "Flatline vs. Spaceman vs. The Nights (Hardwell Mashup)" },
+  { at: "12:06", artist: "Hardwell", title: "Spaceman" },
+  { at: "12:42", artist: "Hardwell & W&W", title: "Jumper (Acappella)" },
+  { at: "13:17", artist: "Hardwell & Olly James", title: "Flatline" },
+  { at: "13:53", artist: "Avicii ft. RAS", title: "The Nights (Acappella)" },
+  { at: "14:28", artist: "TUJAMO & TV Noise", title: "Ravers" },
+  { at: "15:23", artist: "Daft Punk", title: "Harder, Better, Faster, Stronger (Acappella)" },
+  { at: "17:30", artist: "Hardwell & MAKJ vs. KROMI vs. Amba Shepherd & Maddix", title: "Countdown 2026 vs. Simulation vs. Apollo (Hardwell Mashup)" },
+  { at: "18:50", artist: "KROMI vs. Hardwell & Amba Shepherd & Maddix", title: "Simulation vs. Apollo (Hardwell Mashup)" },
+  { at: "20:10", artist: "Hardwell & MAKJ", title: "Countdown 2026" },
+  { at: "21:30", artist: "Delerium ft. Sarah McLachlan", title: "Silence (W&W Rework)" },
+  { at: "24:09", artist: "Martin Garrix", title: "Animals" },
+  { at: "26:00", artist: "Hardwell & Showtek", title: "How We Do (Acappella)" },
+  { at: "27:08", artist: "Calvin Harris & Disciples ft. Ina Wroldsen", title: "How Deep Is Your Love (Acappella)" },
+  { at: "29:02", artist: "Hardwell & W&W ft. Fatman Scoop", title: "Don't Stop The Madness (Hardwell Rework)" },
+  { at: "31:11", artist: "Armin van Buuren & Hardwell vs. Blasterjaxx", title: "Follow The Beat Of The Drum (Hardwell Mashup)" },
+  { at: "32:00", artist: "Chuck Nash", title: "Are You Ready (Make Some Noise) (Acappella)" },
+  { at: "32:49", artist: "Armin van Buuren & Hardwell", title: "Follow The Light" },
+  { at: "33:39", artist: "Hardwell & Blasterjaxx", title: "Beat Of The Drum" },
+  { at: "34:28", artist: "Kill The Buzz & Dirty Signal", title: "Ignite" },
+  { at: "35:23", artist: "Ivan Gough & Feenixpawl ft. Georgi Kay", title: "In My Mind (Acappella)" },
+  { at: "37:13", artist: "MatricK & Domeno ft. MERYLL", title: "Like That" },
+  { at: "37:45", artist: "Tiësto", title: "Maximal Crazy (Acappella)" },
+  { at: "38:42", artist: "Hardwell & Dyro ft. Bright Lights", title: "Never Say Goodbye (Acappella)" },
+  { at: "41:16", artist: "Hardwell & W&W vs. Icona Pop & Charli xcx", title: "Turn Up The Bass vs. I Love It (Hardwell Mashup)" },
+  { at: "42:20", artist: "Icona Pop ft. Charli xcx", title: "I Love It (Acappella)" },
+  { at: "43:24", artist: "Hardwell & W&W", title: "Turn Up The Bass" },
+  { at: "44:28", artist: "AVAO & 2ACES vs. Green Velvet vs. Alex Gaudino & Crystal Waters", title: "Green vs. Flash vs. Destination Calabria (Hardwell Mashup)" },
+  { at: "45:08", artist: "Alex Gaudino ft. Crystal Waters", title: "Destination Calabria" },
+  { at: "45:48", artist: "Green Velvet", title: "Flash (Acappella)" },
+  { at: "46:28", artist: "AVAO & 2ACES", title: "Green" },
+  { at: "47:07", artist: "MatricK vs. The Killers vs. HIFEER", title: "Can't Stop Us Now vs. Mr. Brightside vs. Lucid Desire (Hardwell Mashup)" },
+  { at: "47:49", artist: "The Killers", title: "Mr. Brightside (Acappella)" },
+  { at: "48:31", artist: "Deorro", title: "Dechorro (One Two Three Woow Acappella)" },
+  { at: "49:13", artist: "HIFEER", title: "Lucid Desire" },
+  { at: "49:55", artist: "MatricK", title: "Can't Stop Us Now" },
+  { at: "50:36", artist: "Hardwell & Vini Vici & MR.BLACK & Liquid Soul vs. David Guetta & Benny Benassi & Maddix", title: "Crazy People 2026 vs. Satisfaction (Hardwell Mashup)" },
+  { at: "51:33", artist: "David Guetta vs. Benny Benassi", title: "Satisfaction (Hardwell & Maddix Remix)" },
+  { at: "52:31", artist: "Hardwell & Vini Vici & MR.BLACK ft. Liquid Soul", title: "Crazy People 2026" },
+  { at: "53:28", artist: "David Guetta & GLOWINTHEDARK ft. Harrison", title: "Ain't A Party (Acappella)" },
+  { at: "54:40", artist: "Tim Berg ft. Amanda Wilson", title: "Seek Bromance (Acappella)" },
+  { at: "56:43", artist: "Matt Dybal & Agus Zack", title: "Like I Do" },
+  { at: "57:25", artist: "Hardwell ft. Chris Jones", title: "Young Again (Acappella)" },
+  { at: "59:12", artist: "Sebastian Ingrosso & Alesso ft. Ryan Tedder", title: "Calling (Lose My Mind) (Hardwell & W&W Bootleg)" },
+  { at: "1:02:18", artist: "David Guetta & OneRepublic", title: "I Don't Wanna Wait (Hardwell & Olly James Remix)" },
+  { at: "1:05:11", artist: "Hardwell & Azteck & Dr Phunk", title: "LOW" },
+  { at: "1:07:44", artist: "Hardwell", title: "Spaceman (Sub Zero Project Edit)" },
+  { at: "1:07:57", artist: "Hardwell ft. Mitch Crown", title: "Call Me A Spaceman (Acappella)" },
+  { at: "1:08:55", artist: "Zedd & Lucky Date ft. Ellie Goulding", title: "Fall Into The Sky (Everybody Fuckin Jump Acappella)" },
+  { at: "1:09:33", artist: "4444 OF A KIND & Hardwell", title: "RE4SON" },
+  { at: "1:13:06", artist: "Milleniumkid & JBS", title: "Vielleicht Vielleicht (W&W Remix)" },
+  { at: "1:15:39", artist: "Hardwell & Sub Zero Project & Lil Jon vs. Gotye & Kimbra", title: "Brace For Impact vs. Somebody That I Used To Know (Hardwell Mashup)" },
+  { at: "1:16:48", artist: "Gotye ft. Kimbra", title: "Somebody That I Used To Know (Acappella)" },
+  { at: "1:17:58", artist: "Hardwell & Sub Zero Project ft. Lil Jon", title: "Brace For Impact" },
+  { at: "1:19:07", artist: "Hardwell & Sound Rush", title: "IRIS" },
+];
+
 

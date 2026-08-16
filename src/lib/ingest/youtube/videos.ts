@@ -87,6 +87,7 @@ import {
   TL_TUJAMO_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
   TL_DILLON_FRANCIS_AND_MARTEN_HORGER_MAINSTAGE_PAROOKAVILLE_GERMANY_2025,
   TL_MIKE_WILLIAMS_TIME_LAB_PAROOKAVILLE_GERMANY_2026,
+  TL_HARDWELL_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
   TL_MISS_MONIQUE_TML_WE2_2026,
   TL_NICKY_ROMERO_TML_WE2_2026,
   TL_ODD_MOB_TML_WE2_2026,
@@ -1525,6 +1526,22 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/1muxp6s1/mike-williams-time-lab-parookaville-germany-2026-07-19.html",
     tracklist1001: TL_MIKE_WILLIAMS_TIME_LAB_PAROOKAVILLE_GERMANY_2026,
+  },
+  {
+    // Hardwell official — Parookaville Mainstage 2026-07-19.
+    video: "https://www.youtube.com/watch?v=eBeeWwsCVls",
+    primaryArtist: dj("Hardwell", {
+      accent: "#023e8a",
+      homeCity: "Breda, NL",
+    }),
+    genre: "Big Room",
+    type: "festival",
+    title: "Hardwell | Mainstage, Parookaville 2026",
+    seriesName: "Parookaville",
+    eventName: "Parookaville",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/kd4zp61/hardwell-mainstage-parookaville-germany-2026-07-19.html",
+    tracklist1001: TL_HARDWELL_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
   },
   {
     video: "https://www.youtube.com/watch?v=6bJZPDKlq7o",
