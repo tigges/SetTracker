@@ -174,6 +174,18 @@ export async function applyKnownUrlFixes(prisma: PrismaClient): Promise<number> 
     );
   }
 
+  // hearthis.at is tracklist provenance — never leave its app embed as audio.
+  const htPlayback = await prisma.set.updateMany({
+    where: { playbackUrl: { contains: "hearthis.at" } },
+    data: { playbackUrl: null },
+  });
+  n += htPlayback.count;
+  if (htPlayback.count) {
+    console.log(
+      `[verify-urls] cleared hearthis playbackUrl rows=${htPlayback.count}`,
+    );
+  }
+
   // Insomniac mixes: replace chrome YouTube trailers with Mixcloud/SC; fix crawl dates.
   const mixRepair = await repairInsomniacMixPlayback(prisma);
   n += mixRepair.playbackFixed + mixRepair.dateFixed;

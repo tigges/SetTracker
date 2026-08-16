@@ -4,14 +4,7 @@
  */
 
 import { shieldAtomicActs } from "./ingest/atomicActs";
-import { expandGenres, genreKey } from "./genre";
-
-/** True when the whole string is exactly one canonical genre (e.g. "Afro House"). */
-function isGenreOnlyName(name: string): boolean {
-  const genres = expandGenres(name);
-  if (genres.length !== 1) return false;
-  return genreKey(genres[0]!) === genreKey(name);
-}
+import { isGenreTagName } from "./genre";
 
 const A11Y_PREFIXES = [
   /^view artist details for\s+/i,
@@ -190,6 +183,8 @@ export function isJunkArtistName(name: string): boolean {
   if (/^dj[øöo]{1,2}n$/i.test(n.normalize("NFKD").replace(/[\u0300-\u036f]/g, ""))) {
     return true;
   }
+  // Tiny event / publisher accounts mistaken for DJs (not a catalog Event).
+  if (/^soweto\s*punk$/i.test(n)) return true;
   // Festival stages mistaken for artists ("Freedom Stage", "Mainstage")
   if (/\bstages?\s*$/i.test(n) || /^main\s*stage$/i.test(n)) return true;
   // Set-title crumbs: "OMNOM EDC Las Vegas 2024", "Artist Tomorrowland 2026"
@@ -204,8 +199,8 @@ export function isJunkArtistName(name: string): boolean {
   if (/\bedc\s+(las\s*vegas|mexico|orlando|china|korea)\b/i.test(n)) {
     return true;
   }
-  // Genre tags are not people ("Afro House", "Tech House")
-  if (isGenreOnlyName(n)) return true;
+  // Genre tags are not people ("Afro House", "House, Tech", "Minimal")
+  if (isGenreTagName(n)) return true;
   return false;
 }
 

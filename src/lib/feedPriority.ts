@@ -6,10 +6,11 @@
  *
  * Within This week / Earlier we sort:
  *   1) Tracklist completeness (ok → thin → severe; empty last)
- *   2) DJ Mag Top 100 DJs (lower chart rank first)
- *   3) DJ Mag Top 100 Festivals (linked event; lower rank first)
- *   4) Venue class: festival → club → livestream → radio → other
- *   5) Recency
+ *   2) Performance year (performedAt / edition year / publishedAt — never ingest)
+ *   3) DJ Mag Top 100 DJs (lower chart rank first)
+ *   4) DJ Mag Top 100 Festivals (linked event; lower rank first)
+ *   5) Venue class: festival → club → livestream → radio → other
+ *   6) Performance date
  *
  * Event/festival profile grids use `compareEventSetPriority` — same stack,
  * plus ID quality so all-pink (unresolved) tracklists rank below identified.
@@ -84,9 +85,44 @@ export type FeedPriorityFields = {
   clubRank?: number | null;
   venueTier?: VenueTier | null;
   publishedAt: Date | string;
+  /** Festival weekend / edition date when known — not site ingest time. */
+  performedAt?: Date | string | null;
+  editionYear?: number | null;
 };
 
-/** Within an age section — complete → Top 100 DJ → top festival → venue → date. */
+/**
+ * When the set was played (or first published by the source).
+ * Never uses Prisma createdAt / site ingest time.
+ */
+export function setPerformanceTime(s: {
+  publishedAt: Date | string;
+  performedAt?: Date | string | null;
+  editionYear?: number | null;
+}): number {
+  if (s.performedAt) {
+    const t = new Date(s.performedAt).getTime();
+    if (Number.isFinite(t)) return t;
+  }
+  if (s.editionYear && s.editionYear > 1990 && s.editionYear < 2100) {
+    return Date.UTC(s.editionYear, 6, 1);
+  }
+  const t = new Date(s.publishedAt).getTime();
+  return Number.isFinite(t) ? t : 0;
+}
+
+export function setPerformanceYear(
+  s: {
+    publishedAt: Date | string;
+    performedAt?: Date | string | null;
+    editionYear?: number | null;
+  },
+  nowMs = Date.now(),
+): number {
+  const y = new Date(setPerformanceTime(s)).getUTCFullYear();
+  return Number.isFinite(y) ? y : new Date(nowMs).getUTCFullYear();
+}
+
+/** Within an age section — complete → year → Top 100 DJ → top festival → venue → date. */
 export function compareFeedPriority(
   a: FeedPriorityFields,
   b: FeedPriorityFields,
@@ -94,6 +130,10 @@ export function compareFeedPriority(
   const da = DENSITY_RANK[a.densitySeverity ?? "ok"];
   const db = DENSITY_RANK[b.densitySeverity ?? "ok"];
   if (da !== db) return da - db;
+
+  const ya = setPerformanceYear(a);
+  const yb = setPerformanceYear(b);
+  if (ya !== yb) return yb - ya;
 
   const ta = a.top100Rank ?? 999;
   const tb = b.top100Rank ?? 999;
@@ -111,7 +151,7 @@ export function compareFeedPriority(
   const vb = VENUE_RANK[b.venueTier ?? "other"];
   if (va !== vb) return va - vb;
 
-  return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime();
+  return setPerformanceTime(b) - setPerformanceTime(a);
 }
 
 export type StatusCountFields = Partial<Record<IdStatus, number>> | null | undefined;
@@ -143,7 +183,7 @@ export type EventSetPriorityFields = FeedPriorityFields & {
 };
 
 /**
- * Event profile grids: completeness → ID quality → Top 100 → festival → date.
+ * Event profile grids: completeness → ID quality → year → Top 100 → date.
  * Deprioritizes all-pink unresolved tracklists below sets with real IDs.
  */
 export function compareEventSetPriority(
@@ -165,6 +205,10 @@ export function compareEventSetPriority(
     if (ia !== ib) return ib - ia;
   }
 
+  const ya = setPerformanceYear(a);
+  const yb = setPerformanceYear(b);
+  if (ya !== yb) return yb - ya;
+
   const ta = a.top100Rank ?? 999;
   const tb = b.top100Rank ?? 999;
   if (ta !== tb) return ta - tb;
@@ -177,7 +221,7 @@ export function compareEventSetPriority(
   const cb = b.clubRank ?? 999;
   if (ca !== cb) return ca - cb;
 
-  return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime();
+  return setPerformanceTime(b) - setPerformanceTime(a);
 }
 
 const DAY_MS = 24 * 60 * 60 * 1000;
@@ -192,8 +236,8 @@ export type RadarPickFields = FeedPriorityFields & {
 
 /**
  * Score for the Radar picks cluster (higher = better).
- * Mixes completeness, Top 100 / festival chart, venue class, and recency —
- * so decade-old #1 Ultra archives don't crowd out recent festival / club sets.
+ * Mixes completeness, performance year, Top 100 / festival chart, and recency —
+ * so last year's #1 Ultra does not crowd out this year's sets.
  */
 export function radarPickScore(s: RadarPickFields, nowMs = Date.now()): number {
   let score = 0;
@@ -202,8 +246,14 @@ export function radarPickScore(s: RadarPickFields, nowMs = Date.now()): number {
   else if (s.densitySeverity === "thin") score += 16;
   else score -= 8;
 
+  const nowYear = new Date(nowMs).getUTCFullYear();
+  const ageYears = nowYear - setPerformanceYear(s, nowMs);
+  if (ageYears <= 0) score += 52;
+  else if (ageYears === 1) score += 10;
+  else score -= Math.min(40, ageYears * 14);
+
   if (s.top100Rank != null) {
-    // #1 ≈ +28, #50 ≈ +18, #100 ≈ +8 — chart helps, doesn't dominate.
+    // #1 ≈ +28, #50 ≈ +18, #100 ≈ +8 — chart helps, doesn't dominate year.
     score += Math.max(0, 28 - (s.top100Rank - 1) * 0.2);
   }
   if (s.festivalRank != null) {
@@ -218,13 +268,12 @@ export function radarPickScore(s: RadarPickFields, nowMs = Date.now()): number {
   else if (s.venueTier === "livestream") score += 4;
   else if (s.venueTier === "radio") score += 2;
 
-  const ageDays =
-    (nowMs - new Date(s.publishedAt).getTime()) / DAY_MS;
+  const ageDays = (nowMs - setPerformanceTime(s)) / DAY_MS;
   if (ageDays <= 90) score += 38;
   else if (ageDays <= 365) score += 26;
   else if (ageDays <= 730) score += 12;
   else if (ageDays <= 365 * 4) score += 2;
-  else score -= 22; // deep archive — only fill if nothing else qualifies
+  else score -= 22;
 
   if (s.identifiedRatio != null) {
     score += s.identifiedRatio * 14;
@@ -245,6 +294,8 @@ export function pickRadarPicks<T extends RadarPickFields>(
   if (limit <= 0 || candidates.length === 0) return [];
 
   const ranked = [...candidates].sort((a, b) => {
+    const y = setPerformanceYear(b, nowMs) - setPerformanceYear(a, nowMs);
+    if (y !== 0) return y;
     const ds = radarPickScore(b, nowMs) - radarPickScore(a, nowMs);
     if (ds !== 0) return ds;
     return compareFeedPriority(a, b);

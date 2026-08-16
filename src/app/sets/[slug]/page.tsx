@@ -167,11 +167,12 @@ export default async function SetPage({
             {(() => {
               const host = detectPlaybackHost(set.playbackUrl);
               if (!host) return null;
+              if (host === "hearthis") return null;
               const label =
                 host === "soundcloud"
                   ? "SoundCloud"
-                  : host === "hearthis"
-                    ? "hearthis.at"
+                  : host === "mixcloud"
+                    ? "Mixcloud"
                     : "YouTube";
               // Only show when playback host differs from discovery source label.
               if (
