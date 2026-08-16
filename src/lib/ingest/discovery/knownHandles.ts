@@ -527,6 +527,12 @@ export const KNOWN_HANDLES: Record<string, HandleHint> = {
     genre: "Hard Dance",
     accent: "#ff006e",
   },
+  "steve angello": {
+    youtubeHandle: "@steveangello",
+    soundcloudPermalink: "steveangello",
+    genre: "Progressive House",
+    accent: "#e63946",
+  },
 };
 
 export function hintForName(name: string): HandleHint | undefined {

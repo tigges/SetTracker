@@ -1217,4 +1217,15 @@ export const DJ_SOCIAL_PINS: DjSocialPin[] = [
     website: "https://www.youtube.com/@mandyofficialbe",
     bio: "Hard Dance / Hardstyle. Belgium. Official YT @mandyofficialbe — IG @mandyofficial_be, X @djmandyofficial. No official SoundCloud. Facebook on roster.",
   },
+  {
+    slug: "steve-angello",
+    name: "Steve Angello",
+    accent: "#e63946",
+    soundcloud: "https://soundcloud.com/steveangello",
+    youtube: "https://www.youtube.com/steveangello",
+    instagram: "https://www.instagram.com/steveangello/",
+    twitter: "https://x.com/SteveAngello",
+    website: "https://www.steveangello.com/",
+    bio: "Progressive House. Stockholm. Official steveangello.com — SC steveangello, YT /steveangello, IG @steveangello, X @SteveAngello. Facebook / TikTok / Spotify on roster.",
+  },
 ];

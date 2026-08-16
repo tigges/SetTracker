@@ -2105,6 +2105,25 @@ export const ARTIST_ROSTER_CURATED: ArtistRosterEntry[] = [
     ],
     priority: "normal",
   },
+  {
+    name: "Steve Angello",
+    genre: "Progressive House",
+    accent: "#e63946",
+    homeCity: "Stockholm, SE",
+    youtube: { handle: "@steveangello", status: "ok" },
+    soundcloud: { permalink: "steveangello", status: "ok" },
+    website: "https://www.steveangello.com/",
+    socials: [
+      "https://www.youtube.com/steveangello",
+      "https://soundcloud.com/steveangello",
+      "https://www.instagram.com/steveangello/",
+      "https://x.com/SteveAngello",
+      "https://www.facebook.com/steveangello",
+      "https://www.tiktok.com/@steveangello",
+      "https://open.spotify.com/artist/4FqPRilb0Ja0TKG3RS3y4s",
+    ],
+    priority: "high",
+  },
 ];
 
 /**
