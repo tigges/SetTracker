@@ -5,6 +5,10 @@
  * on radio/label accounts. Parallel to youtube/videos.ts curated seeds.
  */
 
+import {
+  FP_KEINEMUSIK_RADIO_FIFI_20260807,
+  type FingerprintSeedRow,
+} from "../fingerprint/seeds";
 import type { RawArtist } from "../types";
 import { slugify } from "../types";
 
@@ -17,6 +21,11 @@ export type SoundCloudTrackSeed = {
   type?: "radio" | "festival" | "soundcloud" | "mix";
   /** Skip if shorter (default 15 minutes) */
   minDurationSec?: number;
+  /**
+   * Manual / ACRCloud Identify rows (provenance "fingerprint").
+   * Gap-fills only; never overwrites source/1001tl cues.
+   */
+  fingerprintPlays?: FingerprintSeedRow[];
 };
 
 function dj(name: string, extra: Partial<RawArtist> = {}): RawArtist {
@@ -277,6 +286,20 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     seriesName: "Amelie Lens Radio Show",
     type: "radio",
     minDurationSec: 30 * 60,
+  },
+  {
+    // Official Keinemusik upload; guest FIFI. ACR Identify rows in
+    // fingerprintPlays (never invent 1001 cues). Slug:
+    // sc-keinemusik-keinemusik-radio-show-by-fifi-07082026
+    url: "https://soundcloud.com/keinemusik/keinemusik-radio-show-by-fifi-07082026",
+    primaryArtist: dj("FIFI", {
+      accent: "#e8c547",
+    }),
+    genre: "Afro House",
+    seriesName: "Keinemusik Radio",
+    type: "radio",
+    minDurationSec: 30 * 60,
+    fingerprintPlays: FP_KEINEMUSIK_RADIO_FIFI_20260807,
   },
   {
     // Official Oliver Heldens upload; 1001TL wired via

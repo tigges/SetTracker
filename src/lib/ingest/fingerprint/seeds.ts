@@ -237,3 +237,40 @@ export const FP_JAMES_HYPE_GET_CLOSER_LONDON_2: FingerprintSeedRow[] = [
   },
   { at: "29:30", artist: "The Electroclassic", title: "Daft Sounds" },
 ];
+
+/**
+ * Keinemusik Radio Show by FIFI 07.08.2026
+ * https://soundcloud.com/keinemusik/keinemusik-radio-show-by-fifi-07082026
+ * ACRCloud Identify 2026-08-16 (min score 55, 12s clips / 90s step).
+ * Consecutive same-track hits collapsed to first clock. Weak misses
+ * (score below 55) not seeded.
+ */
+export const FP_KEINEMUSIK_RADIO_FIFI_20260807: FingerprintSeedRow[] = [
+  {
+    at: "0:30",
+    artist: "Don Carlos, Kim Mazelle",
+    title: "Someone Gotta Found Love (feat. Kim Mazelle) (Alone Mix)",
+  },
+  { at: "8:00", artist: "Reboot", title: "Danz Danz (Original Mix)" },
+  {
+    at: "15:30",
+    artist: "Ollie BC, Mason Collective, Dany Gomez, EMBI",
+    title: "Mi Combi (Original Mix)",
+  },
+  {
+    at: "20:00",
+    artist: "Fish Go Deep",
+    title: "The Cure & The Cause (feat. Tracey K)",
+  },
+  { at: "27:30", artist: "M-High", title: "Craving What Ain't Mine" },
+  { at: "36:30", artist: "Classmatic, Mc Th", title: "Catuca" },
+  { at: "41:00", artist: "Sucker DJs", title: "Lotta Lovin'" },
+  {
+    at: "45:30",
+    artist: "Armand Van Helden, Duck Sauce, A-Trak",
+    title: "Mesmerize",
+  },
+  { at: "48:30", artist: "Afriqua", title: "Da Whip" },
+  { at: "51:30", artist: "Kitty Hall", title: "Puff Puff Pass" },
+  { at: "56:00", artist: "Dj Danifox", title: "Se Eu Cantar" },
+];

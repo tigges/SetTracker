@@ -250,6 +250,23 @@ assert.equal(
   "sc-amelielens-amelie-lens-radio-show-022",
 );
 
+const fifiKmSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url ===
+    "https://soundcloud.com/keinemusik/keinemusik-radio-show-by-fifi-07082026",
+);
+assert.ok(fifiKmSc);
+assert.equal(fifiKmSc.primaryArtist.name, "FIFI");
+assert.equal(fifiKmSc.type, "radio");
+assert.equal(fifiKmSc.seriesName, "Keinemusik Radio");
+assert.equal(fifiKmSc.fingerprintPlays?.length, 11);
+assert.equal(fifiKmSc.fingerprintPlays?.[0]?.artist, "Don Carlos, Kim Mazelle");
+assert.equal(fifiKmSc.fingerprintPlays?.at(-1)?.title, "Se Eu Cantar");
+assert.equal(
+  `sc-keinemusik-${slugify("keinemusik-radio-show-by-fifi-07082026")}`,
+  "sc-keinemusik-keinemusik-radio-show-by-fifi-07082026",
+);
+
 const heldensDaybreakSc = SOUNDCLOUD_TRACK_SEEDS.find(
   (s) =>
     s.url ===
