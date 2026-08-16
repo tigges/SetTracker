@@ -283,7 +283,27 @@ export function radarPickScore(s: RadarPickFields, nowMs = Date.now()): number {
 }
 
 /**
- * Greedy Radar cluster: highest score, at most one set per DJ and per event.
+ * Radar pool: this performance year, dense tracklist, some real IDs,
+ * and a Top 100 DJ or top festival/club. Archives and all-pink parses stay
+ * in Deep catalog.
+ */
+export function isRadarCandidate(
+  s: FeedPriorityFields & {
+    statusCounts?: StatusCountFields;
+    trackCount?: number | null;
+  },
+  nowMs = Date.now(),
+): boolean {
+  if ((s.densitySeverity ?? "ok") !== "ok") return false;
+  if (setPerformanceYear(s, nowMs) < new Date(nowMs).getUTCFullYear()) {
+    return false;
+  }
+  if (idQualityTier(s.statusCounts, s.trackCount ?? 0) !== 0) return false;
+  return s.top100Rank != null || s.festivalRank != null || s.clubRank != null;
+}
+
+/**
+ * Greedy Radar cluster: this-year candidates, at most one set per DJ and per event.
  * Prevents "David Guetta Ultra × 9 years" style repetition.
  */
 export function pickRadarPicks<T extends RadarPickFields>(
@@ -293,7 +313,14 @@ export function pickRadarPicks<T extends RadarPickFields>(
 ): T[] {
   if (limit <= 0 || candidates.length === 0) return [];
 
-  const ranked = [...candidates].sort((a, b) => {
+  const yearNow = new Date(nowMs).getUTCFullYear();
+  const currentYear = candidates.filter(
+    (s) => setPerformanceYear(s, nowMs) >= yearNow,
+  );
+  const pool = currentYear.length > 0 ? currentYear : [];
+  if (pool.length === 0) return [];
+
+  const ranked = [...pool].sort((a, b) => {
     const y = setPerformanceYear(b, nowMs) - setPerformanceYear(a, nowMs);
     if (y !== 0) return y;
     const ds = radarPickScore(b, nowMs) - radarPickScore(a, nowMs);

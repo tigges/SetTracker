@@ -10,6 +10,7 @@ import {
   diversifyBySeries,
   idQualityTier,
   nearDuplicateKey,
+  isRadarCandidate,
   pickRadarPicks,
   radarPickScore,
   resolveVenueTier,
@@ -291,6 +292,16 @@ describe("feedPriority complete → Top 100 → festivals", () => {
           eventSlug: "ultra-miami",
         },
         {
+          id: "g26",
+          densitySeverity: "ok" as const,
+          top100Rank: 1,
+          festivalRank: 4,
+          venueTier: "festival" as const,
+          publishedAt: "2026-03-22T00:00:00.000Z",
+          primaryDjSlug: "david-guetta",
+          eventSlug: "ultra-miami",
+        },
+        {
           id: "dd",
           densitySeverity: "ok" as const,
           top100Rank: 13,
@@ -320,8 +331,60 @@ describe("feedPriority complete → Top 100 → festivals", () => {
     assert.ok(djs.includes("david-guetta"));
     assert.equal(
       picks.find((p) => p.primaryDjSlug === "david-guetta")?.id,
-      "g24",
-      "keeps the more recent Guetta Ultra, not 2015",
+      "g26",
+      "keeps this year's Guetta Ultra, not 2015/2024",
+    );
+  });
+
+  it("Radar candidates are this-year complete chart sets, not archives", () => {
+    const now = Date.parse("2026-08-16T12:00:00.000Z");
+    assert.equal(
+      isRadarCandidate(
+        {
+          densitySeverity: "ok",
+          top100Rank: 12,
+          festivalRank: 8,
+          venueTier: "festival",
+          publishedAt: "2022-08-01T00:00:00.000Z",
+          statusCounts: { identified: 11 },
+          trackCount: 11,
+        },
+        now,
+      ),
+      false,
+      "ATB Untold 2022",
+    );
+    assert.equal(
+      isRadarCandidate(
+        {
+          densitySeverity: "ok",
+          top100Rank: 40,
+          festivalRank: 20,
+          venueTier: "festival",
+          publishedAt: "2025-08-01T00:00:00.000Z",
+          statusCounts: { unresolved_id: 9 },
+          trackCount: 9,
+        },
+        now,
+      ),
+      false,
+      "Miss Monique all-pink 2025",
+    );
+    assert.equal(
+      isRadarCandidate(
+        {
+          densitySeverity: "ok",
+          top100Rank: 8,
+          festivalRank: 2,
+          venueTier: "festival",
+          publishedAt: "2026-05-16T00:00:00.000Z",
+          statusCounts: { identified: 90, unresolved_id: 4 },
+          trackCount: 94,
+        },
+        now,
+      ),
+      true,
+      "Tiësto EDC 2026",
     );
   });
 
