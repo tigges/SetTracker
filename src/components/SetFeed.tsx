@@ -5,18 +5,16 @@ import { GenreFilter } from "@/components/GenreFilter";
 import { PopularRails } from "@/components/PopularRails";
 import { SetCard } from "@/components/SetCard";
 import {
+  compareDeepCatalog,
   compareFeedPriority,
   dedupeNearDuplicates,
   diversifyByArtist,
   diversifyBySeries,
   isRadarCandidate,
+  isThisPerformanceYear,
   pickRadarPicks,
 } from "@/lib/feedPriority";
-import {
-  collapseHostTwins,
-  groupByDeepWeek,
-  identifiedRatio,
-} from "@/lib/feedQuality";
+import { collapseHostTwins, identifiedRatio } from "@/lib/feedQuality";
 import { setMatchesGenreFilter } from "@/lib/genreFamilies";
 import {
   festivalSeasonSets,
@@ -84,7 +82,7 @@ function writePrefs(next: FeedPrefs) {
 /**
  * Homepage feed:
  * New this week → Festival season → Popular sets → In-demand DJs / Top events →
- * Radar picks → Deep catalog.
+ * Radar picks → Deep catalog (this year first; Show earlier years for archives).
  * Quality queues live on /stats, not as consumer filters.
  */
 export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }) {
@@ -95,10 +93,12 @@ export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }
   );
   const prefs = useMemo(() => parsePrefs(prefsRaw), [prefsRaw]);
   const [visible, setVisible] = useState(PAGE_SIZE);
+  const [showEarlier, setShowEarlier] = useState(false);
 
   function patchPrefs(next: Partial<FeedPrefs>) {
     writePrefs({ ...prefs, ...next });
     setVisible(PAGE_SIZE);
+    setShowEarlier(false);
   }
 
   const filtered = useMemo(() => {
@@ -120,6 +120,8 @@ export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }
     radarPicks,
     deepShown,
     deepRemaining,
+    thisYearDeepCount,
+    earlierDeepCount,
   } = useMemo(() => {
     const weekAll = diversifyByArtist(
       newThisWeekSets(filtered, CLUSTER).sort(compareFeedPriority),
@@ -154,9 +156,12 @@ export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }
 
     const deepSorted = filtered
       .filter((s) => !used.has(s.id))
-      .sort(compareFeedPriority);
-    const deepAll = diversifyBySeries(diversifyByArtist(deepSorted, 1), 1);
-    const deepShown = deepAll.slice(0, visible);
+      .sort(compareDeepCatalog);
+    const deepRanked = diversifyBySeries(diversifyByArtist(deepSorted, 1), 1);
+    const thisYearDeep = deepRanked.filter((s) => isThisPerformanceYear(s));
+    const earlierDeep = deepRanked.filter((s) => !isThisPerformanceYear(s));
+    const deepPool = showEarlier ? [...thisYearDeep, ...earlierDeep] : thisYearDeep;
+    const deepShown = deepPool.slice(0, visible);
     return {
       newWeek,
       festivalSeason,
@@ -165,11 +170,11 @@ export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }
       popularVenues,
       radarPicks,
       deepShown,
-      deepRemaining: deepAll.length - deepShown.length,
+      deepRemaining: deepPool.length - deepShown.length,
+      thisYearDeepCount: thisYearDeep.length,
+      earlierDeepCount: earlierDeep.length,
     };
-  }, [filtered, visible]);
-
-  const deepGroups = useMemo(() => groupByDeepWeek(deepShown), [deepShown]);
+  }, [filtered, visible, showEarlier]);
 
   return (
     <div>
@@ -208,28 +213,53 @@ export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }
           {radarPicks.length > 0 && (
             <Section title="Radar picks" sets={radarPicks} />
           )}
-          {deepGroups.map((group) => (
-            <Section
-              key={group.label}
-              title={
-                deepGroups.length === 1
-                  ? "Deep catalog"
-                  : `Deep catalog · ${group.label}`
-              }
-              sets={group.items}
-            />
-          ))}
-          {deepRemaining > 0 && (
-            <div className="flex justify-center pb-4">
-              <button
-                type="button"
-                onClick={() => setVisible((n) => n + PAGE_SIZE)}
-                className="rounded-full border border-line px-5 py-2 text-[13px] text-muted transition-colors hover:border-brand hover:text-brand"
-              >
-                Load more · {Math.min(PAGE_SIZE, deepRemaining)} of{" "}
-                {deepRemaining} left
-              </button>
-            </div>
+          {(deepShown.length > 0 || earlierDeepCount > 0) && (
+            <>
+              {deepShown.length > 0 ? (
+                <Section title="Deep catalog" sets={deepShown} />
+              ) : (
+                <section className="mb-10">
+                  <div className="mb-4 flex items-baseline gap-3">
+                    <h2 className="text-[13px] font-semibold uppercase tracking-[0.14em] text-muted">
+                      Deep catalog
+                    </h2>
+                    <div className="h-px flex-1 bg-line" />
+                  </div>
+                </section>
+              )}
+              {deepRemaining > 0 && (
+                <div className="flex justify-center pb-4">
+                  <button
+                    type="button"
+                    onClick={() => setVisible((n) => n + PAGE_SIZE)}
+                    className="rounded-full border border-line px-5 py-2 text-[13px] text-muted transition-colors hover:border-brand hover:text-brand"
+                  >
+                    Load more · {Math.min(PAGE_SIZE, deepRemaining)} of{" "}
+                    {deepRemaining} left
+                  </button>
+                </div>
+              )}
+              {!showEarlier && earlierDeepCount > 0 && (
+                <div className="flex justify-center pb-8">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setShowEarlier(true);
+                      setVisible((n) =>
+                        Math.max(
+                          n,
+                          thisYearDeepCount +
+                            Math.min(PAGE_SIZE, earlierDeepCount),
+                        ),
+                      );
+                    }}
+                    className="text-[13px] text-muted underline-offset-4 transition-colors hover:text-brand hover:underline"
+                  >
+                    Show earlier years
+                  </button>
+                </div>
+              )}
+            </>
           )}
         </>
       )}

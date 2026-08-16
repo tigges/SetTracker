@@ -43,7 +43,8 @@ Provenance per row: `1001TL parse`, `SoundCloud parse`, `fingerprint`, `communit
 ## Pages
 
 1. **Sets feed** (`/`) — New this week, Festival season, Popular, Radar picks,
-   then Deep catalog grouped by week. Genre is the only consumer filter.
+   then Deep catalog (this year first; Show earlier years for archives).
+   Genre is the only consumer filter.
    Spotlight rails still prefer complete tracklists; YT+SC twins collapse.
    Ranking uses performance year (`performedAt` / edition / source
    `publishedAt`), never site ingest time — this year beats last year's
