@@ -58,3 +58,29 @@ export const TL_ALOK_TML_WE2_2026: FingerprintSeedRow[] = [
   { at: "59:08", artist: "Vini Vici & HI-LO", title: "Pump It Up" },
   { at: "59:30", artist: "ALOK", title: "Around" },
 ];
+
+/**
+ * Vintage Culture @ neonGARDEN, EDC Las Vegas, United States 2025-05-17
+ * https://www.1001tracklists.com/tracklist/295sbvjt/vintage-culture-neongarden-edc-las-vegas-united-states-2025-05-17.html
+ * Official YT: https://youtu.be/knJyJPP45dg
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-knJyJPP45dg"]
+ * Captured 2026-08-16 — provenance 1001tl. 16/17 IDed; bare ID at 44:30 skipped.
+ */
+export const TL_VINTAGE_CULTURE_EDC_LV_NEON_2025: FingerprintSeedRow[] = [
+  { at: "0:14", artist: "Armand van Helden", title: "The Funk Phenomena (Viot Remix)" },
+  { at: "4:23", artist: "Kimonos & Gozlan", title: "Fuego" },
+  { at: "8:23", artist: "JOSHWA", title: "Freaks" },
+  { at: "14:08", artist: "Pavesi", title: "House Christmas" },
+  { at: "19:08", artist: "Cellow (BR)", title: "Dontel" },
+  { at: "23:05", artist: "ANNA & Vintage Culture", title: "Feel The Rhythm" },
+  { at: "26:21", artist: "ATFC ft. Lisa Millett", title: "Bad Habit (Club De Combat Remix)" },
+  { at: "32:00", artist: "The Prodigy", title: "Smack My Bitch Up (Club De Combat Remix)" },
+  { at: "35:50", artist: "Matt Guy & Tigerblind", title: "Smoke This One" },
+  { at: "40:10", artist: "Ugo Banchi", title: "Legacy" },
+  { at: "47:50", artist: "GENESI", title: "Hyper" },
+  { at: "51:14", artist: "DJ Spektur", title: "This Sound" },
+  { at: "56:40", artist: "Shermanology", title: "Beat Of The Drum" },
+  { at: "1:00:03", artist: "Kelis ft. Too $hort", title: "Bossy (Vintage Culture & Beltran Bootleg)" },
+  { at: "1:03:12", artist: "Nympho", title: "DJ Assault (ID Remix)" },
+  { at: "1:08:35", artist: "Gabss & Vintage Culture", title: "Lost" },
+];

@@ -63,6 +63,7 @@ import {
   TL_MARLON_HOFFSTADT_COACHELLA_WE2_2026,
   TL_MARKUS_SCHULZ_AND_JEROME_ISMA_AE_GDJB_2026,
   TL_ALOK_TML_WE2_2026,
+  TL_VINTAGE_CULTURE_EDC_LV_NEON_2025,
   TL_MISS_MONIQUE_TML_WE2_2026,
   TL_NICKY_ROMERO_TML_WE2_2026,
   TL_ODD_MOB_TML_WE2_2026,
@@ -1253,6 +1254,9 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     type: "festival",
     title: "Vintage Culture Live at EDC Las Vegas, Neon Garden (Club Space)",
     eventName: "EDC Las Vegas",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/295sbvjt/vintage-culture-neongarden-edc-las-vegas-united-states-2025-05-17.html",
+    tracklist1001: TL_VINTAGE_CULTURE_EDC_LV_NEON_2025,
   },
   {
     video: "https://www.youtube.com/watch?v=kmMYCg-igjc",

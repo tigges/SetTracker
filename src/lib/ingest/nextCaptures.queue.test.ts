@@ -116,5 +116,16 @@ assert.equal(
   ),
   "mapped",
 );
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "yt-knJyJPP45dg",
+      title: "Vintage Culture Live at EDC Las Vegas, Neon Garden (Club Space)",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
 
 console.log("nextCaptures.queue.test.ts ok");
