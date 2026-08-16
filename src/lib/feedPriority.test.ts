@@ -380,11 +380,29 @@ describe("feedPriority complete → Top 100 → festivals", () => {
           publishedAt: "2026-05-16T00:00:00.000Z",
           statusCounts: { identified: 90, unresolved_id: 4 },
           trackCount: 94,
+          durationSec: 89 * 60,
         },
         now,
       ),
       true,
       "Tiësto EDC 2026",
+    );
+    assert.equal(
+      isRadarCandidate(
+        {
+          densitySeverity: "ok",
+          top100Rank: 4,
+          festivalRank: 2,
+          venueTier: "festival",
+          publishedAt: "2026-07-25T00:00:00.000Z",
+          statusCounts: { identified: 7 },
+          trackCount: 7,
+          durationSec: 14 * 60,
+        },
+        now,
+      ),
+      false,
+      "Armin YouTube House 14m clip",
     );
   });
 

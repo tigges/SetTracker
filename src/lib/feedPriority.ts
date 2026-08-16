@@ -16,7 +16,7 @@
  * plus ID quality so all-pink (unresolved) tracklists rank below identified.
  */
 
-import type { DensitySeverity } from "./setDensity";
+import { DENSITY_MIN_DURATION_SEC, type DensitySeverity } from "./setDensity";
 import type { IdStatus } from "./status";
 
 export type VenueTier =
@@ -291,10 +291,16 @@ export function isRadarCandidate(
   s: FeedPriorityFields & {
     statusCounts?: StatusCountFields;
     trackCount?: number | null;
+    durationSec?: number | null;
   },
   nowMs = Date.now(),
 ): boolean {
   if ((s.densitySeverity ?? "ok") !== "ok") return false;
+  // Short uploads are density-ok by design; Radar still wants a real set.
+  const durationSec = s.durationSec ?? 0;
+  if (durationSec > 0 && durationSec < DENSITY_MIN_DURATION_SEC) {
+    return false;
+  }
   if (setPerformanceYear(s, nowMs) < new Date(nowMs).getUTCFullYear()) {
     return false;
   }
