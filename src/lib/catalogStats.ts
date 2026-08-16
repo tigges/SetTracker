@@ -700,7 +700,18 @@ export async function getCatalogStats(): Promise<CatalogStats> {
     })
     .sort(compareNeedsIds)
     .slice(0, 60)
-    .map(({ publishedAt: _publishedAt, statusCounts: _statusCounts, ...row }) => row);
+    .map((row) => ({
+      id: row.id,
+      slug: row.slug,
+      title: row.title,
+      sourceName: row.sourceName,
+      durationSec: row.durationSec,
+      playCount: row.playCount,
+      identifiedCount: row.identifiedCount,
+      unresolvedCount: row.unresolvedCount,
+      identifiedRatio: row.identifiedRatio,
+      primaryDj: row.primaryDj,
+    }));
 
   return {
     totals: {
