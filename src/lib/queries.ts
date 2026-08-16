@@ -47,26 +47,52 @@ function tallyStatuses(plays: { idStatus: string }[]): StatusCounts {
 /** Aggregate play status counts per set via SQL groupBy (no play-row payload). */
 async function statusCountsBySetIds(
   setIds: string[],
-): Promise<Map<string, { counts: StatusCounts; trackCount: number }>> {
-  const out = new Map<string, { counts: StatusCounts; trackCount: number }>();
+): Promise<
+  Map<string, { counts: StatusCounts; trackCount: number; provenance: string | null }>
+> {
+  const out = new Map<
+    string,
+    { counts: StatusCounts; trackCount: number; provenance: string | null }
+  >();
   if (setIds.length === 0) return out;
 
-  const groups = await prisma.played.groupBy({
-    by: ["setId", "idStatus"],
-    where: { setId: { in: setIds } },
-    _count: { _all: true },
-  });
+  const [groups, provGroups] = await Promise.all([
+    prisma.played.groupBy({
+      by: ["setId", "idStatus"],
+      where: { setId: { in: setIds } },
+      _count: { _all: true },
+    }),
+    prisma.played.groupBy({
+      by: ["setId", "provenance"],
+      where: { setId: { in: setIds } },
+      _count: { _all: true },
+    }),
+  ]);
 
   for (const g of groups) {
     let entry = out.get(g.setId);
     if (!entry) {
-      entry = { counts: emptyCounts(), trackCount: 0 };
+      entry = { counts: emptyCounts(), trackCount: 0, provenance: null };
       out.set(g.setId, entry);
     }
     entry.trackCount += g._count._all;
     if (g.idStatus in entry.counts) {
       entry.counts[g.idStatus as IdStatus] += g._count._all;
     }
+  }
+  const provBest = new Map<string, { provenance: string; n: number }>();
+  for (const g of provGroups) {
+    const prev = provBest.get(g.setId);
+    if (g.provenance === "1001tl") {
+      provBest.set(g.setId, { provenance: "1001tl", n: g._count._all + 10_000 });
+      continue;
+    }
+    if (!prev || g._count._all > prev.n) {
+      provBest.set(g.setId, { provenance: g.provenance, n: g._count._all });
+    }
+  }
+  for (const [id, row] of out) {
+    row.provenance = provBest.get(id)?.provenance ?? null;
   }
   return out;
 }
@@ -143,6 +169,7 @@ export async function getFeed() {
         clubRank: ranks.clubRank,
         venueTier: ranks.venueTier,
         densitySeverity: ranks.densitySeverity,
+        dominantProvenance: tally?.provenance ?? null,
       };
     })
     .filter((s) =>
@@ -1115,6 +1142,7 @@ export async function getVenueBySlug(slug: string) {
         editionEndsAt: null,
         seriesName: null,
         spotlight: ranks.spotlight,
+        dominantProvenance: tally?.provenance ?? null,
         top100Rank: ranks.top100Rank,
         festivalRank: ranks.festivalRank,
         clubRank: ranks.clubRank,

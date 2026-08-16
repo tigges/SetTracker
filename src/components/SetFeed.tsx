@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useSyncExternalStore } from "react";
 import { GenreFilter } from "@/components/GenreFilter";
 import { PopularRails } from "@/components/PopularRails";
 import { SetCard } from "@/components/SetCard";
@@ -11,12 +11,20 @@ import {
   diversifyBySeries,
   pickRadarPicks,
 } from "@/lib/feedPriority";
+import {
+  collapseHostTwins,
+  compareNeedsIds,
+  groupByDeepWeek,
+  identifiedRatio,
+  setMatchesTypeFilter,
+  type FeedTypeFilter,
+} from "@/lib/feedQuality";
 import { setMatchesGenreFilter } from "@/lib/genreFamilies";
 import {
   festivalSeasonSets,
   isCompleteTracklist,
-  isFestivalStorySet,
   MIN_RAIL_SHOW,
+  newThisWeekSets,
   popularDjsThisWeek,
   popularSetsThisWeek,
   popularVenuesThisWeek,
@@ -28,8 +36,66 @@ const CLUSTER = 9;
 /** Deep-catalog page size after the spotlight clusters. */
 const PAGE_SIZE = 18;
 
-function within7Days(d: Date | string): boolean {
-  return Date.now() - new Date(d).getTime() < 7 * 24 * 60 * 60 * 1000;
+const PREFS_KEY = "setradar.feedPrefs";
+
+type FeedSort = "default" | "needs-ids";
+
+type FeedPrefs = {
+  completeOnly: boolean;
+  type: FeedTypeFilter;
+  genre: string;
+  sort: FeedSort;
+};
+
+const DEFAULT_PREFS: FeedPrefs = {
+  completeOnly: true,
+  type: "all",
+  genre: "all",
+  sort: "default",
+};
+
+const prefsListeners = new Set<() => void>();
+
+function subscribePrefs(onChange: () => void) {
+  prefsListeners.add(onChange);
+  return () => {
+    prefsListeners.delete(onChange);
+  };
+}
+
+function getPrefsRaw(): string {
+  try {
+    return localStorage.getItem(PREFS_KEY) ?? "";
+  } catch {
+    return "";
+  }
+}
+
+function parsePrefs(raw: string): FeedPrefs {
+  if (!raw) return DEFAULT_PREFS;
+  try {
+    const parsed = JSON.parse(raw) as Partial<FeedPrefs>;
+    return {
+      completeOnly: parsed.completeOnly ?? true,
+      type:
+        parsed.type === "festival" || parsed.type === "radio" || parsed.type === "mix"
+          ? parsed.type
+          : "all",
+      genre: typeof parsed.genre === "string" ? parsed.genre : "all",
+      sort: parsed.sort === "needs-ids" ? "needs-ids" : "default",
+    };
+  } catch {
+    return DEFAULT_PREFS;
+  }
+}
+
+function writePrefs(next: FeedPrefs) {
+  try {
+    localStorage.setItem(PREFS_KEY, JSON.stringify(next));
+  } catch {
+    /* private mode */
+  }
+  prefsListeners.forEach((l) => l());
 }
 
 /** Chart / complete / festival-linked sets for the Radar pool. */
@@ -43,40 +109,36 @@ function isRadarCandidate(s: FeedItem): boolean {
   );
 }
 
-function identifiedRatio(s: FeedItem): number {
-  const c = s.statusCounts;
-  const total =
-    (c.identified ?? 0) +
-    (c.unresolved_id ?? 0) +
-    (c.community_resolved ?? 0) +
-    (c.unparsed ?? 0);
-  if (total === 0) return 0;
-  return (c.identified ?? 0) / total;
-}
-
 /**
  * Homepage feed:
  * New this week → Popular sets → In-demand DJs (Top 100) / Top events →
  * Radar picks → Deep catalog.
  */
 export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }) {
-  const [genre, setGenre] = useState("all");
-  const [completeOnly, setCompleteOnly] = useState(false);
+  const prefsRaw = useSyncExternalStore(
+    subscribePrefs,
+    getPrefsRaw,
+    () => "",
+  );
+  const prefs = useMemo(() => parsePrefs(prefsRaw), [prefsRaw]);
   const [visible, setVisible] = useState(PAGE_SIZE);
 
-  function selectGenre(next: string) {
-    setGenre(next);
+  function patchPrefs(next: Partial<FeedPrefs>) {
+    writePrefs({ ...prefs, ...next });
     setVisible(PAGE_SIZE);
   }
 
   const filtered = useMemo(() => {
-    return dedupeNearDuplicates(
-      feed
-        .filter((s) => setMatchesGenreFilter(s, genre))
-        .filter((s) => !completeOnly || isCompleteTracklist(s))
-        .map((s) => ({ ...s, primaryDjSlug: s.primaryDj?.slug ?? null })),
+    return collapseHostTwins(
+      dedupeNearDuplicates(
+        feed
+          .filter((s) => setMatchesGenreFilter(s, prefs.genre))
+          .filter((s) => setMatchesTypeFilter(s, prefs.type))
+          .filter((s) => !prefs.completeOnly || isCompleteTracklist(s))
+          .map((s) => ({ ...s, primaryDjSlug: s.primaryDj?.slug ?? null })),
+      ),
     );
-  }, [feed, genre, completeOnly]);
+  }, [feed, prefs.genre, prefs.type, prefs.completeOnly]);
 
   const {
     newWeek,
@@ -89,14 +151,7 @@ export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }
     deepRemaining,
   } = useMemo(() => {
     const weekAll = diversifyByArtist(
-      filtered
-        .filter(
-          (s) =>
-            isCompleteTracklist(s) &&
-            within7Days(s.publishedAt) &&
-            !isFestivalStorySet(s),
-        )
-        .sort(compareFeedPriority),
+      newThisWeekSets(filtered, CLUSTER).sort(compareFeedPriority),
       2,
     );
     const newWeek = weekAll.slice(0, CLUSTER);
@@ -123,18 +178,17 @@ export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }
     const pool = [...preferred, ...filler].map((s) => ({
       ...s,
       primaryDjSlug: s.primaryDj?.slug ?? null,
-      identifiedRatio: identifiedRatio(s),
+      identifiedRatio: identifiedRatio(s.statusCounts),
     }));
     const radarPicks = pickRadarPicks(pool, CLUSTER);
     for (const s of radarPicks) used.add(s.id);
 
-    const deepAll = diversifyBySeries(
-      diversifyByArtist(
-        filtered.filter((s) => !used.has(s.id)).sort(compareFeedPriority),
-        1,
-      ),
-      1,
-    );
+    const deepSorted = filtered
+      .filter((s) => !used.has(s.id))
+      .sort(
+        prefs.sort === "needs-ids" ? compareNeedsIds : compareFeedPriority,
+      );
+    const deepAll = diversifyBySeries(diversifyByArtist(deepSorted, 1), 1);
     const deepShown = deepAll.slice(0, visible);
     return {
       newWeek,
@@ -146,7 +200,9 @@ export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }
       deepShown,
       deepRemaining: deepAll.length - deepShown.length,
     };
-  }, [filtered, visible]);
+  }, [filtered, visible, prefs.sort]);
+
+  const deepGroups = useMemo(() => groupByDeepWeek(deepShown), [deepShown]);
 
   return (
     <div>
@@ -155,22 +211,43 @@ export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }
           {filtered.length} sets
         </span>
         <div className="flex flex-wrap items-center gap-2">
+          <TypeChips
+            value={prefs.type}
+            onChange={(type) => patchPrefs({ type })}
+          />
           <button
             type="button"
-            aria-pressed={completeOnly}
-            onClick={() => {
-              setCompleteOnly((v) => !v);
-              setVisible(PAGE_SIZE);
-            }}
+            aria-pressed={prefs.completeOnly}
+            onClick={() => patchPrefs({ completeOnly: !prefs.completeOnly })}
             className={`rounded-full border px-3 py-1 text-[12px] ${
-              completeOnly
+              prefs.completeOnly
                 ? "border-brand text-brand"
                 : "border-line text-muted hover:border-[color:var(--muted2)]"
             }`}
           >
             Complete only
           </button>
-          <GenreFilter genres={genres} value={genre} onChange={selectGenre} />
+          <button
+            type="button"
+            aria-pressed={prefs.sort === "needs-ids"}
+            onClick={() =>
+              patchPrefs({
+                sort: prefs.sort === "needs-ids" ? "default" : "needs-ids",
+              })
+            }
+            className={`rounded-full border px-3 py-1 text-[12px] ${
+              prefs.sort === "needs-ids"
+                ? "border-brand text-brand"
+                : "border-line text-muted hover:border-[color:var(--muted2)]"
+            }`}
+          >
+            Needs IDs
+          </button>
+          <GenreFilter
+            genres={genres}
+            value={prefs.genre}
+            onChange={(genre) => patchPrefs({ genre })}
+          />
         </div>
       </div>
 
@@ -198,9 +275,17 @@ export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }
           {radarPicks.length > 0 && (
             <Section title="Radar picks" sets={radarPicks} />
           )}
-          {deepShown.length > 0 && (
-            <Section title="Deep catalog" sets={deepShown} />
-          )}
+          {deepGroups.map((group) => (
+            <Section
+              key={group.label}
+              title={
+                deepGroups.length === 1
+                  ? "Deep catalog"
+                  : `Deep catalog · ${group.label}`
+              }
+              sets={group.items}
+            />
+          ))}
           {deepRemaining > 0 && (
             <div className="flex justify-center pb-4">
               <button
@@ -215,6 +300,43 @@ export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }
           )}
         </>
       )}
+    </div>
+  );
+}
+
+function TypeChips({
+  value,
+  onChange,
+}: {
+  value: FeedTypeFilter;
+  onChange: (type: FeedTypeFilter) => void;
+}) {
+  return (
+    <div
+      className="flex overflow-hidden rounded-full border border-line"
+      role="group"
+      aria-label="Set type"
+    >
+      {(
+        [
+          ["all", "All"],
+          ["festival", "Festival"],
+          ["radio", "Radio"],
+          ["mix", "Mix"],
+        ] as const
+      ).map(([id, label]) => (
+        <button
+          key={id}
+          type="button"
+          aria-pressed={value === id}
+          onClick={() => onChange(id)}
+          className={`px-2.5 py-1 text-[12px] ${
+            value === id ? "bg-panel2 text-ink" : "text-muted hover:text-ink"
+          }`}
+        >
+          {label}
+        </button>
+      ))}
     </div>
   );
 }
