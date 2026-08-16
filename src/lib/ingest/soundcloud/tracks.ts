@@ -192,4 +192,16 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     type: "festival",
     minDurationSec: 30 * 60,
   },
+  {
+    // Official Hannah Laing upload; 1001TL wired via
+    // sc-hannahlaingdj-hannah-laing-creamfields-2024-audio
+    // (same list as yt-arowbYnNFGY).
+    url: "https://soundcloud.com/hannahlaingdj/hannah-laing-creamfields-2024-audio",
+    primaryArtist: dj("Hannah Laing", {
+      accent: "#ff006e",
+    }),
+    genre: "Techno",
+    type: "festival",
+    minDurationSec: 30 * 60,
+  },
 ];

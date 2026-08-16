@@ -160,4 +160,17 @@ assert.equal(
   "sc-maxstyler-max-styler-live-opulent-temple-burning-man-2024",
 );
 
+const hannahCfSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url ===
+    "https://soundcloud.com/hannahlaingdj/hannah-laing-creamfields-2024-audio",
+);
+assert.ok(hannahCfSc);
+assert.equal(hannahCfSc.primaryArtist.name, "Hannah Laing");
+assert.equal(hannahCfSc.type, "festival");
+assert.equal(
+  `sc-hannahlaingdj-${slugify("hannah-laing-creamfields-2024-audio")}`,
+  "sc-hannahlaingdj-hannah-laing-creamfields-2024-audio",
+);
+
 console.log("soundcloud/tracks.test.ts ok");

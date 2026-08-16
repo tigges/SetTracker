@@ -71,6 +71,7 @@ import {
   TL_NICKY_ROMERO_PROTOCOL_RADIO_731,
   TL_TIESTO_PRISMATIC_032_2026,
   TL_REINIER_ZONNEVELD_AWAKENINGS_2025,
+  TL_HANNAH_LAING_ZENLESS_ZONE_ZERO_CREAMFIELDS_2024,
   TL_MAX_STYLER_OPULENT_TEMPLE_BURNING_MAN_2024,
   TL_VINTAGE_CULTURE_ARODES_BURNING_MAN_2024,
   TL_VINTAGE_CULTURE_EDC_LV_NEON_2025,
@@ -1364,6 +1365,20 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/2tx1742t/max-styler-opulent-temple-burning-man-united-states-2024-08-30.html",
     tracklist1001: TL_MAX_STYLER_OPULENT_TEMPLE_BURNING_MAN_2024,
+  },
+  {
+    // Artist-channel Relive of the Creamfields North set (same 1001 as SC).
+    video: "https://www.youtube.com/watch?v=arowbYnNFGY",
+    primaryArtist: dj("Hannah Laing", {
+      accent: "#ff006e",
+    }),
+    genre: "Techno",
+    type: "festival",
+    title: "Hannah Laing @ Zenless Zone Zero, Creamfields North 2024",
+    eventName: "Creamfields North",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/18k472y9/hannah-laing-zenless-zone-zero-creamfields-north-united-kingdom-2024-08-25.html",
+    tracklist1001: TL_HANNAH_LAING_ZENLESS_ZONE_ZERO_CREAMFIELDS_2024,
   },
   {
     video: "https://www.youtube.com/watch?v=OVex0rm7ZR4",

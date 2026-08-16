@@ -92,6 +92,7 @@ import {
   TL_STEVE_AOKI_TML_FRIENDSHIP_MIX_2026,
   TL_ABOVE_AND_BEYOND_ESTIVA_GROUP_THERAPY_RADIO_690_2026,
   TL_ALOK_TML_WE2_2026,
+  TL_HANNAH_LAING_ZENLESS_ZONE_ZERO_CREAMFIELDS_2024,
   TL_HARDWELL_HOA_527_YEARMIX_2025,
   TL_JAMIE_JONES_HOT_ROBOT_RADIO_225,
   TL_JAMIE_JONES_HOT_ROBOT_RADIO_239,
@@ -1617,6 +1618,11 @@ assert.equal(
   ),
   true,
 );
+assert.equal(isWiredTracklistSlug("yt-arowbYnNFGY"), true);
+assert.equal(
+  isWiredTracklistSlug("sc-hannahlaingdj-hannah-laing-creamfields-2024-audio"),
+  true,
+);
 assert.equal(
   isWiredTracklistSlug(
     "sc-https://soundcloud.com/sashaofficial/sasha-eclipse-mix-12-8-26",
@@ -1898,6 +1904,34 @@ for (let i = 1; i < maxStylerOt.length; i++) {
   assert.ok(
     (maxStylerOt[i]!.timestamp ?? 0) > (maxStylerOt[i - 1]!.timestamp ?? 0),
     `Max Styler Opulent Temple clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_HANNAH_LAING_ZENLESS_ZONE_ZERO_CREAMFIELDS_2024);
+assert.equal(TL_HANNAH_LAING_ZENLESS_ZONE_ZERO_CREAMFIELDS_2024.length, 24);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-arowbYnNFGY"],
+  TL_HANNAH_LAING_ZENLESS_ZONE_ZERO_CREAMFIELDS_2024,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-hannahlaingdj-hannah-laing-creamfields-2024-audio"
+  ],
+  TL_HANNAH_LAING_ZENLESS_ZONE_ZERO_CREAMFIELDS_2024,
+);
+const hannahCf = tracklist1001RowsToPlays(
+  TL_HANNAH_LAING_ZENLESS_ZONE_ZERO_CREAMFIELDS_2024,
+);
+assert.equal(hannahCf.length, 24);
+assert.equal(hannahCf[0]?.provenance, "1001tl");
+assert.equal(hannahCf[0]?.timestamp, 0);
+assert.equal(hannahCf[0]?.trackTitle, "Ibizacore");
+assert.equal(hannahCf[23]?.trackTitle, "Good Love (Reinier Zonneveld Remix)");
+assert.equal(hannahCf[23]?.timestamp, 1 * 3600 + 21 * 60 + 44);
+for (let i = 1; i < hannahCf.length; i++) {
+  assert.ok(
+    (hannahCf[i]!.timestamp ?? 0) > (hannahCf[i - 1]!.timestamp ?? 0),
+    `Hannah Laing Creamfields clocks must increase at index ${i}`,
   );
 }
 

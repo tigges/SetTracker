@@ -366,5 +366,27 @@ assert.equal(
   ),
   "mapped",
 );
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "yt-arowbYnNFGY",
+      title: "Hannah Laing @ Zenless Zone Zero, Creamfields North 2024",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "sc-hannahlaingdj-hannah-laing-creamfields-2024-audio",
+      title: "Hannah Laing Creamfields 2024 Audio",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
 
 console.log("nextCaptures.queue.test.ts ok");

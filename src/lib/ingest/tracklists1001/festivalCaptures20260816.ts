@@ -656,3 +656,40 @@ export const TL_MAX_STYLER_OPULENT_TEMPLE_BURNING_MAN_2024: FingerprintSeedRow[]
   { at: "1:21:45", artist: "Max Styler & Gorgon City", title: "Touch" },
   { at: "1:25:00", artist: "Max Styler", title: "Lights Out" },
 ];
+
+/**
+ * Hannah Laing @ Zenless Zone Zero, Creamfields North, United Kingdom 2024-08-25
+ * https://www.1001tracklists.com/tracklist/18k472y9/hannah-laing-zenless-zone-zero-creamfields-north-united-kingdom-2024-08-25.html
+ * Official YT: https://youtu.be/arowbYnNFGY
+ * Official SC: https://soundcloud.com/hannahlaingdj/hannah-laing-creamfields-2024-audio
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-arowbYnNFGY"]
+ *       TRACKLIST_1001_BY_SOURCE_SLUG["sc-hannahlaingdj-hannah-laing-creamfields-2024-audio"]
+ * Captured 2026-08-16 — provenance 1001tl. Official script: 24 tracks.
+ * Capture overlay used an invalid identifier (hyphens); constant renamed.
+ */
+export const TL_HANNAH_LAING_ZENLESS_ZONE_ZERO_CREAMFIELDS_2024: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "Hannah Laing ft. Muki", title: "Ibizacore" },
+  { at: "5:02", artist: "Odymel", title: "Gucci" },
+  { at: "8:53", artist: "Hannah Laing ft. Jem Cooke", title: "Stay" },
+  { at: "11:45", artist: "Hannah Laing", title: "I Need It More" },
+  { at: "15:04", artist: "Rudosa", title: "Dreams" },
+  { at: "17:30", artist: "Liam Wilson", title: "Hesitate" },
+  { at: "20:48", artist: "Ludacris ft. Shawnna", title: "What's Your Fantasy (Shemm Rave Remix)" },
+  { at: "25:39", artist: "Adam Port & Stryv ft. Malachiii", title: "Move (Jezza & Jod Edit)" },
+  { at: "29:08", artist: "ZAPRAVKA", title: "ACID" },
+  { at: "31:13", artist: "Hannah Laing", title: "FWTDJ (All Night Long)" },
+  { at: "35:40", artist: "Matty Ralph", title: "Te Adoro" },
+  { at: "40:05", artist: "Stuarty Baillie", title: "I'm Your DJ" },
+  { at: "46:28", artist: "ZAPRAVKA ft. CERES", title: "I Feel" },
+  { at: "49:14", artist: "Derb", title: "Derb (Derbus)" },
+  { at: "52:27", artist: "Warp Brothers & Drakk", title: "Phatt Bass" },
+  { at: "54:45", artist: "Hannah Laing", title: "Poppin'" },
+  { at: "57:12", artist: "Matty Ralph", title: "Rock This Party" },
+  { at: "1:01:35", artist: "Hannah Laing & Fairground", title: "Tell Me" },
+  { at: "1:04:39", artist: "Storm", title: "Time To Burn (DBF Remix)" },
+  { at: "1:07:24", artist: "Fenrick", title: "2 Sexy" },
+  { at: "1:11:12", artist: "Arma & TRYM", title: "In My Mind" },
+  { at: "1:14:45", artist: "t e s t p r e s s", title: "Rock Me Baby" },
+  { at: "1:18:08", artist: "Hannah Laing & Peaches", title: "Fuck The Pain Away" },
+  { at: "1:21:44", artist: "Hannah Laing ft. RoRo", title: "Good Love (Reinier Zonneveld Remix)" },
+];
