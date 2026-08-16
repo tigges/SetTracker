@@ -15,6 +15,7 @@ const MARLON_COACHELLA = YOUTUBE_SETS.find((s) =>
   s.video.includes("vpf4LLy42Zc"),
 );
 const GDJB = YOUTUBE_SETS.find((s) => s.video.includes("WWnLYZrh6kw"));
+const ALOK_TML = YOUTUBE_SETS.find((s) => s.video.includes("zHAUZ02aCwo"));
 
 describe("watchMetaFromCuratedSeed", () => {
   it("builds ASOT 1290 meta from the curated 1001 capture", () => {
@@ -69,6 +70,17 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=WWnLYZrh6kw");
     // Last cue 1:56:31 + 180s pad.
     assert.equal(meta.durationSec, 1 * 3600 + 56 * 60 + 31 + 180);
+  });
+
+  it("builds Alok TML WE2 meta from the curated 1001 capture", () => {
+    assert.ok(ALOK_TML);
+    const meta = watchMetaFromCuratedSeed(ALOK_TML);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "zHAUZ02aCwo");
+    assert.match(meta.title, /Alok WE2/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=zHAUZ02aCwo");
+    // Last cue 59:30 + 180s pad.
+    assert.equal(meta.durationSec, 59 * 60 + 30 + 180);
   });
 
   it("returns null without a title or video id", () => {
@@ -197,5 +209,19 @@ describe("curated YouTube 429 fallback", () => {
     assert.ok(
       sets[0]?.collaborators?.some((c) => c.slug === "jerome-isma-ae"),
     );
+  });
+
+  it("lands Alok TML WE2 from the 1001 seed when watch is 429", async () => {
+    assert.ok(ALOK_TML);
+    const adapter = createYoutubeAdapter([ALOK_TML], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-zHAUZ02aCwo");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 44);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 59 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "alok");
+    assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
   });
 });

@@ -62,6 +62,7 @@ import {
   TL_DOM_DOLLA_CREAMFIELDS_STEEL_YARD_2025,
   TL_MARLON_HOFFSTADT_COACHELLA_WE2_2026,
   TL_MARKUS_SCHULZ_AND_JEROME_ISMA_AE_GDJB_2026,
+  TL_ALOK_TML_WE2_2026,
   TL_MISS_MONIQUE_TML_WE2_2026,
   TL_NICKY_ROMERO_TML_WE2_2026,
   TL_ODD_MOB_TML_WE2_2026,
@@ -795,6 +796,22 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/vmz5x4t/armin-van-buuren-freedom-stage-tomorrowland-weekend-1-belgium-2026-07-18.html",
     tracklist1001: TL_ARMIN_VAN_BUUREN_TML_WE1_FREEDOM_2026,
+  },
+  {
+    // Tomorrowland official Relive — Mainstage WE2.
+    video: "https://www.youtube.com/watch?v=zHAUZ02aCwo",
+    primaryArtist: dj("Alok", {
+      accent: "#ff6b35",
+      homeCity: "Brazil",
+    }),
+    genre: "House",
+    type: "festival",
+    title: "Alok WE2 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/fnz6fv9/alok-mainstage-tomorrowland-weekend-2-belgium-2026-07-24.html",
+    tracklist1001: TL_ALOK_TML_WE2_2026,
   },
   {
     // ASOT 1290 radio episode; timed 1001 capture.
