@@ -3,9 +3,9 @@ name: Deploy to GitHub Pages
 # Single deployer: the ONLY workflow that builds + publishes Pages.
 # Producers (catalog-deep, catalog-enrich) save the DB cache then dispatch this
 # workflow — they no longer build/deploy themselves.
-# Push = restore cached catalog → apply pins → static export. Never
-# re-polls YouTube/SoundCloud on push (catalog-deep does). ingest=force
-# is the only Pages crawl. Dispatch from deep/enrich never re-polls.
+# Push = restore cached catalog → light curated ingest only if YT/SC/1001
+# sources changed → apply pins → static export (always includes /stats).
+# Dispatch from deep/enrich never re-polls. ingest=force is the manual crawl.
 # Deep catalog refresh lives in catalog-deep.yml (separate concurrency group).
 on:
   push:
@@ -111,7 +111,8 @@ jobs:
 
       # Curated ingest is the expensive "detection" (YT/SC watch + thumbs).
       # 1001 live HTML is never fetched here (Cloudflare). Seeds only.
-      # Push / dispatch never ingest. Only ingest=force re-polls.
+      # Push ingests only when catalog sources changed. Dispatch never
+      # re-polls. ingest=force is the manual re-poll.
       - name: Decide curated ingest
         id: need_ingest
         env:
@@ -194,8 +195,8 @@ jobs:
         run: echo "version=$(node -p "require('./package.json').version")" >> "$GITHUB_OUTPUT"
 
       # GitHub Pages is a full snapshot. Next `output: "export"` has no ISR,
-      # so every ship still regenerates set/dj/track HTML (~8 min). Compile
-      # cache above only speeds bundling; it cannot skip unchanged routes.
+      # so every ship regenerates /, /stats, set/dj/track HTML from the current
+      # catalog DB (~8 min). Compile cache only speeds bundling.
       - name: Build static export
         env:
           GITHUB_PAGES: "true"
@@ -224,11 +225,14 @@ jobs:
           test -d out/djs
           test -d out/events
           test -d out/venues
+          test -f out/stats/index.html
+          grep -qi "catalog health" out/stats/index.html
+          grep -qi "tracklist capture" out/stats/index.html
           SET_PAGES=$(find out/sets -mindepth 1 -maxdepth 1 -type d ! -name '_placeholder' | wc -l)
           DJ_PAGES=$(find out/djs -mindepth 1 -maxdepth 1 -type d ! -name '_placeholder' | wc -l)
           TRACK_PAGES=$(find out/tracks -mindepth 1 -maxdepth 1 -type d ! -name '_placeholder' 2>/dev/null | wc -l)
           echo "Exported set pages: $SET_PAGES dj=$DJ_PAGES track=$TRACK_PAGES"
-          du -sh out out/sets out/djs out/tracks out/events out/venues out/_next 2>/dev/null || true
+          du -sh out out/sets out/djs out/tracks out/events out/venues out/stats out/_next 2>/dev/null || true
           if [ "$SET_PAGES" -lt 50 ]; then
             echo "::error::Export only has $SET_PAGES set pages — refusing to deploy a wiped catalog."
             exit 1

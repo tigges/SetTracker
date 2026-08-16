@@ -30,7 +30,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: loc("/events"), changeFrequency: "weekly", priority: 0.8 },
     { url: loc("/events/calendar"), changeFrequency: "weekly", priority: 0.6 },
     { url: loc("/atlas"), changeFrequency: "monthly", priority: 0.7 },
-    { url: loc("/stats"), changeFrequency: "weekly", priority: 0.4 },
+    { url: loc("/stats"), changeFrequency: "daily", priority: 0.4 },
     { url: loc("/about"), changeFrequency: "monthly", priority: 0.5 },
     { url: loc("/search"), changeFrequency: "weekly", priority: 0.4 },
     { url: loc("/labels"), changeFrequency: "monthly", priority: 0.3 },

@@ -1,7 +1,8 @@
 /**
- * Pages ship never polls. Catalog-deep crawls; enrich fingerprints.
- * `ingest=force` is the only Pages re-poll. Path helpers stay so
- * operators can see which files *would* have tripped the old auto path.
+ * Pages push is restore + export. Light curated YT/SC ingest runs only
+ * when catalog sources changed (new seeds). Catalog-deep crawls; enrich
+ * fingerprints. Dispatch from those producers never re-polls.
+ * `ingest=force` is the manual Pages re-poll.
  */
 
 export type CuratedIngestMode = "auto" | "skip" | "force";
@@ -50,15 +51,11 @@ export function decideCuratedIngest(opts: {
     return { run: false, reason: "ingest=skip" };
   }
 
-  // Ship is restore + export. Catalog-deep polls; enrich fingerprints.
-  // `ingest=force` is the only way a Pages job re-crawls.
-  if (opts.eventName === "workflow_dispatch" || opts.eventName === "push") {
+  // Deep/enrich dispatch must not re-poll — they already wrote the DB cache.
+  if (opts.eventName === "workflow_dispatch") {
     return {
       run: false,
-      reason:
-        opts.eventName === "push"
-          ? "push ships cached catalog (catalog-deep polls)"
-          : "workflow_dispatch uses cached catalog (no curated re-poll)",
+      reason: "workflow_dispatch uses cached catalog (no curated re-poll)",
     };
   }
 

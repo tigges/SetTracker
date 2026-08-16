@@ -260,6 +260,15 @@ export default async function StatsPage() {
         <h1 className="mt-1 text-2xl font-extrabold tracking-tight">
           Catalog health
         </h1>
+        <p className="mono mt-1 text-[11px] text-muted2">
+          This export
+          {process.env.NEXT_PUBLIC_APP_VERSION
+            ? ` · v${process.env.NEXT_PUBLIC_APP_VERSION}`
+            : ""}
+          {process.env.NEXT_PUBLIC_GIT_SHA
+            ? ` · ${process.env.NEXT_PUBLIC_GIT_SHA.slice(0, 7)}`
+            : ""}
+        </p>
       </div>
 
       <section className="mb-5">

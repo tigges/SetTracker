@@ -11,10 +11,10 @@ so you can see what's identified and what's still an ID.
 > briefly serves this README as the site — that is the blank “Stack / Data model”
 > page, not the product.
 >
-> **Deploy speed:** pushes to `main` rebuild the site **without crawling**
-> (cached catalog DB, ~2 min). New 1001 seeds on `main` still need
-> **Actions → Deploy to GitHub Pages → `ingest: force`** to land in the live
-> HTML. Full crawls run on the overnight `catalog-deep` chain, not on push.
+> **Deploy speed:** pushes to `main` restore the cached catalog and export
+> every page including `/stats`. Light curated YT/SC ingest runs only when
+> catalog sources changed (new seeds). Full crawls run on the overnight
+> `catalog-deep` chain, not on push.
 
 ## Stack
 
@@ -62,6 +62,7 @@ Provenance per row: `1001TL parse`, `SoundCloud parse`, `fingerprint`, `communit
    keeps the legend. Header search; empty pins link to `/capture-1001?q=…`.
 6. **Stats** (`/stats`) — operator catalog health (incomplete sets, needs IDs,
    DJ gaps, festival capture gaps). Queues show 10 rows, then **N more**.
+   Every Pages export rebuilds this page from the current catalog DB.
    Footer link only; not in the main nav.
 7. **Search / About** — catalog search and product notes.
 8. **Tracks / Labels** — still in the catalog and sitemap; not in the main nav.
@@ -136,7 +137,7 @@ The app publishes as a fully static site. **`deploy-pages.yml` is the single
 deployer** — the only workflow that builds + publishes Pages. Producers save the
 catalog DB cache and dispatch it:
 
-- **push to `main`** — fast path: restore cached catalog DB → apply pins → export → deploy. **Never ingests** unless `ingest=force`. New 1001 / YT / SC seeds on the same push do **not** appear live until that force ingest. Request-file bumps (`data/deep-request`, …) do not start a Pages build. Do not bump `data/deep-request` for seed-only work.
+- **push to `main`** — restore cached catalog DB → light curated ingest only if YT/SC/1001/roster sources changed → apply pins → export (including `/stats`) → deploy. Request-file bumps (`data/deep-request`, …) do not start a Pages build. Do not bump `data/deep-request` for seed-only work.
 - **6h cron / manual `deep`** (`catalog-deep.yml`) — crawl → save DB cache → dispatch **enrich `full`** (not Pages; avoids a DB-cache race)
 - **`catalog-enrich.yml`** — thumbs/MB + ACRCloud + File Scanning → save DB cache → dispatch deploy
 
