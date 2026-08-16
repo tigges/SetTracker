@@ -136,6 +136,20 @@ describe("tracklistGap", () => {
     assert.equal(
       isActionableTracklistGap(
         {
+          title: "Group Therapy 690 with Above & Beyond and Estiva",
+          type: "radio",
+          playCount: 27,
+          durationSec: 2 * 3600,
+          publishedAt: "2026-08-14T00:00:00.000Z",
+          top100Rank: 61,
+        },
+        now,
+      ),
+      false,
+    );
+    assert.equal(
+      isActionableTracklistGap(
+        {
           title: "Smash The House Radio ep. 689",
           type: "festival",
           eventKind: "festival",

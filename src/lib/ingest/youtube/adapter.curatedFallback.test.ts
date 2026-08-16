@@ -30,6 +30,7 @@ const SPECTRUM_485 = YOUTUBE_SETS.find((s) => s.video.includes("yTRvLrtsM9I"));
 const NICKY_TML_ARTIST = YOUTUBE_SETS.find((s) =>
   s.video.includes("B05MAbsCOLA"),
 );
+const ABGT_690 = YOUTUBE_SETS.find((s) => s.video.includes("phWKhIwgiTo"));
 
 describe("watchMetaFromCuratedSeed", () => {
   it("builds ASOT 1290 meta from the curated 1001 capture", () => {
@@ -227,6 +228,17 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=B05MAbsCOLA");
     // Last cue 59:30 + 180s pad.
     assert.equal(meta.durationSec, 59 * 60 + 30 + 180);
+  });
+
+  it("builds Group Therapy 690 meta from the curated 1001 capture", () => {
+    assert.ok(ABGT_690);
+    const meta = watchMetaFromCuratedSeed(ABGT_690);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "phWKhIwgiTo");
+    assert.match(meta.title, /Group Therapy 690/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=phWKhIwgiTo");
+    // Last cue 1:54:40 + 180s pad.
+    assert.equal(meta.durationSec, 1 * 3600 + 54 * 60 + 40 + 180);
   });
 
   it("returns null without a title or video id", () => {
@@ -537,5 +549,20 @@ describe("curated YouTube 429 fallback", () => {
     assert.ok(sets[0]!.durationSec >= 59 * 60);
     assert.equal(sets[0]?.primaryArtist?.slug, "nicky-romero");
     assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
+  });
+
+  it("lands Group Therapy 690 from the 1001 seed when watch is 429", async () => {
+    assert.ok(ABGT_690);
+    const adapter = createYoutubeAdapter([ABGT_690], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-phWKhIwgiTo");
+    assert.equal(sets[0]!.type, "radio");
+    assert.ok(sets[0]!.plays.length >= 27);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 1 * 3600 + 54 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "above-beyond");
+    assert.equal(sets[0]?.seriesName, "Group Therapy");
+    assert.ok(sets[0]?.collaborators?.some((c) => c.slug === "estiva"));
   });
 });

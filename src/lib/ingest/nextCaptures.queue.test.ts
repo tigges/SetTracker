@@ -310,5 +310,17 @@ assert.equal(
   ),
   "mapped",
 );
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "yt-phWKhIwgiTo",
+      title: "Group Therapy 690 with Above & Beyond and Estiva",
+      type: "radio",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
 
 console.log("nextCaptures.queue.test.ts ok");
