@@ -136,4 +136,15 @@ assert.equal(
   "sc-sashaofficial-sasha-eclipse-mix-12-8-26",
 );
 
+const joelEdgeSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) => s.url === "https://soundcloud.com/joelcorry/edgenyc",
+);
+assert.ok(joelEdgeSc);
+assert.equal(joelEdgeSc.primaryArtist.name, "Joel Corry");
+assert.equal(joelEdgeSc.type, "festival");
+assert.equal(
+  `sc-joelcorry-${slugify("edgenyc")}`,
+  "sc-joelcorry-edgenyc",
+);
+
 console.log("soundcloud/tracks.test.ts ok");

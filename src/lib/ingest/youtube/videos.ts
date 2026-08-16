@@ -62,6 +62,7 @@ import {
   TL_DOM_DOLLA_CREAMFIELDS_STEEL_YARD_2025,
   TL_MARLON_HOFFSTADT_COACHELLA_WE2_2026,
   TL_MARKUS_SCHULZ_AND_JEROME_ISMA_AE_GDJB_2026,
+  TL_ABOVE_AND_BEYOND_ESTIVA_GROUP_THERAPY_RADIO_690_2026,
   TL_ALOK_TML_WE2_2026,
   TL_HARDWELL_HOA_527_YEARMIX_2025,
   TL_JOEL_CORRY_EDGE_NYC_2026,
@@ -948,6 +949,18 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/2vwh8lq1/joris-voorn-spectrum-radio-485-exit-veveri-castle-brno-czech-republic-2026-08-12.html",
     tracklist1001: TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026,
+  },
+  {
+    // Official Group Therapy 690; timed 1001 capture.
+    video: "https://www.youtube.com/watch?v=phWKhIwgiTo",
+    primaryArtist: dj("Above & Beyond", { accent: "#7209b7" }),
+    genre: "Trance",
+    type: "radio",
+    title: "Group Therapy 690 with Above & Beyond and Estiva",
+    seriesName: "Group Therapy",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/19m58br9/above-beyond-estiva-group-therapy-radio-690-2026-08-14.html",
+    tracklist1001: TL_ABOVE_AND_BEYOND_ESTIVA_GROUP_THERAPY_RADIO_690_2026,
   },
   {
     // Tomorrowland official Relive — Mainstage WE2.

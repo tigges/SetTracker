@@ -574,3 +574,41 @@ export const TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026: FingerprintSeedRow[] 
   { at: "54:52", artist: "Joris Voorn", title: "Quicksand" },
   { at: "59:10", artist: "METODI & Mari Ferrari", title: "Darkness (Joris Voorn Remix)" },
 ];
+
+/**
+ * Above & Beyond & Estiva - Group Therapy Radio 690 2026-08-14
+ * https://www.1001tracklists.com/tracklist/19m58br9/above-beyond-estiva-group-therapy-radio-690-2026-08-14.html
+ * Official YT: https://youtu.be/phWKhIwgiTo
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-phWKhIwgiTo"]
+ * Captured 2026-08-16 — provenance 1001tl. Official script: 27 tracks.
+ * Capture overlay used an invalid identifier (hyphens); constant renamed.
+ */
+export const TL_ABOVE_AND_BEYOND_ESTIVA_GROUP_THERAPY_RADIO_690_2026: FingerprintSeedRow[] = [
+  { at: "0:31", artist: "AVNT", title: "Echo" },
+  { at: "5:57", artist: "Marsh", title: "Too High" },
+  { at: "10:30", artist: "Michael Cassette", title: "United" },
+  { at: "15:09", artist: "Smith & Pledger", title: "Northern Lights (Oliver Smith Update)" },
+  { at: "20:33", artist: "Jaytech", title: "La Presencia" },
+  { at: "24:47", artist: "Soundprank", title: "Chaser" },
+  { at: "29:07", artist: "Alexey Sonar & Ramon Daler", title: "Sometimes (RIKO & GUGGA Remix)" },
+  { at: "34:21", artist: "Darren Tate", title: "Return Of The Vries" },
+  { at: "38:54", artist: "Grum & Big Gal", title: "Mega Bertha" },
+  { at: "43:46", artist: "Tholin", title: "Come With Me" },
+  { at: "47:52", artist: "Because Of Art", title: "Hold On" },
+  { at: "51:46", artist: "CultureKind & Frynn", title: "Water Into Waves" },
+  { at: "55:58", artist: "M.O.S.", title: "Skywalkers (Paul Thomas Remix)" },
+  { at: "1:00:15", artist: "Above & Beyond ft. Victoria Horn", title: "When You Believe (Above & Beyond Club Mix)" },
+  { at: "1:06:08", artist: "Simon Gregory", title: "Waiting For You" },
+  { at: "1:10:09", artist: "Trilucid", title: "One Day At A Time (Tim Green Remix)" },
+  { at: "1:13:59", artist: "Spencer Brown", title: "Stormchasing" },
+  { at: "1:17:15", artist: "Lipless & Blue Noir", title: "Cimmerian (OCULA Remix)" },
+  { at: "1:20:35", artist: "Kyau & Albert with Hello Machines", title: "One Last Time" },
+  { at: "1:24:45", artist: "William Orbit", title: "Barber's Adagio For Strings (Ferry Corsten Remix)" },
+  { at: "1:29:39", artist: "Estiva", title: "Désir (Estiva Club Mix)" },
+  { at: "1:32:34", artist: "Estiva", title: "Mistika" },
+  { at: "1:39:41", artist: "Estiva", title: "TCL" },
+  { at: "1:43:29", artist: "Estiva", title: "Noo Tacchi" },
+  { at: "1:47:18", artist: "Estiva", title: "Palma" },
+  { at: "1:51:45", artist: "Estiva", title: "Chemicals" },
+  { at: "1:54:40", artist: "Estiva", title: "The Wave" },
+];

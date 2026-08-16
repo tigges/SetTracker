@@ -90,6 +90,7 @@ import {
   TL_MARLON_HOFFSTADT_COACHELLA_WE2_2026,
   TL_MARKUS_SCHULZ_AND_JEROME_ISMA_AE_GDJB_2026,
   TL_STEVE_AOKI_TML_FRIENDSHIP_MIX_2026,
+  TL_ABOVE_AND_BEYOND_ESTIVA_GROUP_THERAPY_RADIO_690_2026,
   TL_ALOK_TML_WE2_2026,
   TL_HARDWELL_HOA_527_YEARMIX_2025,
   TL_JAMIE_JONES_HOT_ROBOT_RADIO_225,
@@ -1595,10 +1596,12 @@ assert.equal(
   true,
 );
 assert.equal(isWiredTracklistSlug("yt-soEFl73peVA"), true);
+assert.equal(isWiredTracklistSlug("sc-joelcorry-edgenyc"), true);
 assert.equal(isWiredTracklistSlug("yt-Rgx-wT9FDaE"), true);
 assert.equal(isWiredTracklistSlug("yt-0-s_qZRWElA"), true);
 assert.equal(isWiredTracklistSlug("yt-blP5J6BUG0M"), true);
 assert.equal(isWiredTracklistSlug("yt-yTRvLrtsM9I"), true);
+assert.equal(isWiredTracklistSlug("yt-phWKhIwgiTo"), true);
 assert.equal(isWiredTracklistSlug("yt-TsyGMhx8izw"), true);
 assert.equal(isWiredTracklistSlug("yt-B05MAbsCOLA"), true);
 assert.equal(
@@ -1680,6 +1683,10 @@ assertSeedClocks(TL_JOEL_CORRY_EDGE_NYC_2026);
 assert.equal(TL_JOEL_CORRY_EDGE_NYC_2026.length, 55);
 assert.equal(
   TRACKLIST_1001_BY_SOURCE_SLUG["yt-soEFl73peVA"],
+  TL_JOEL_CORRY_EDGE_NYC_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-joelcorry-edgenyc"],
   TL_JOEL_CORRY_EDGE_NYC_2026,
 );
 const joelEdge = tracklist1001RowsToPlays(TL_JOEL_CORRY_EDGE_NYC_2026);
@@ -1801,6 +1808,28 @@ for (let i = 1; i < spectrum485.length; i++) {
   assert.ok(
     (spectrum485[i]!.timestamp ?? 0) > (spectrum485[i - 1]!.timestamp ?? 0),
     `Joris Voorn Spectrum Radio 485 clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_ABOVE_AND_BEYOND_ESTIVA_GROUP_THERAPY_RADIO_690_2026);
+assert.equal(TL_ABOVE_AND_BEYOND_ESTIVA_GROUP_THERAPY_RADIO_690_2026.length, 27);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-phWKhIwgiTo"],
+  TL_ABOVE_AND_BEYOND_ESTIVA_GROUP_THERAPY_RADIO_690_2026,
+);
+const abgt690 = tracklist1001RowsToPlays(
+  TL_ABOVE_AND_BEYOND_ESTIVA_GROUP_THERAPY_RADIO_690_2026,
+);
+assert.equal(abgt690.length, 27);
+assert.equal(abgt690[0]?.provenance, "1001tl");
+assert.equal(abgt690[0]?.timestamp, 31);
+assert.equal(abgt690[0]?.trackTitle, "Echo");
+assert.equal(abgt690[26]?.trackTitle, "The Wave");
+assert.equal(abgt690[26]?.timestamp, 1 * 3600 + 54 * 60 + 40);
+for (let i = 1; i < abgt690.length; i++) {
+  assert.ok(
+    (abgt690[i]!.timestamp ?? 0) > (abgt690[i - 1]!.timestamp ?? 0),
+    `Group Therapy 690 clocks must increase at index ${i}`,
   );
 }
 

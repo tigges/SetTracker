@@ -243,6 +243,17 @@ assert.equal(
 assert.equal(
   skipCaptureNeed(
     row({
+      slug: "sc-joelcorry-edgenyc",
+      title: "Joel Corry Live @ Edge NYC",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
       slug: "yt-Rgx-wT9FDaE",
       title: "Protocol Radio 731 by Nicky Romero (PRR731)",
       type: "radio",
@@ -304,6 +315,18 @@ assert.equal(
       slug: "yt-B05MAbsCOLA",
       title: "Nicky Romero LIVE at Tomorrowland 2026 - Mainstage",
       type: "festival",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "yt-phWKhIwgiTo",
+      title: "Group Therapy 690 with Above & Beyond and Estiva",
+      type: "radio",
     }),
     mapped,
     now,
