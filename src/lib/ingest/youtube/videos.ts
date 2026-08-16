@@ -89,6 +89,7 @@ import {
   TL_MIKE_WILLIAMS_TIME_LAB_PAROOKAVILLE_GERMANY_2026,
   TL_HARDWELL_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
   TL_DUBVISION_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
+  TL_W_AND_W_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
   TL_MISS_MONIQUE_TML_WE2_2026,
   TL_NICKY_ROMERO_TML_WE2_2026,
   TL_ODD_MOB_TML_WE2_2026,
@@ -1556,6 +1557,22 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/uq5pqjt/dubvision-mainstage-parookaville-germany-2026-07-19.html",
     tracklist1001: TL_DUBVISION_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
+  },
+  {
+    // W&W official — Parookaville Mainstage 2026-07-18.
+    video: "https://www.youtube.com/watch?v=or_SDolEBfw",
+    primaryArtist: dj("W&W", {
+      accent: "#00b4d8",
+      homeCity: "Netherlands",
+    }),
+    genre: "Big Room",
+    type: "festival",
+    title: "W&W | Mainstage, Parookaville 2026",
+    seriesName: "Parookaville",
+    eventName: "Parookaville",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1j3n03kk/wandw-mainstage-parookaville-germany-2026-07-18.html",
+    tracklist1001: TL_W_AND_W_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
   },
   {
     video: "https://www.youtube.com/watch?v=6bJZPDKlq7o",

@@ -1449,4 +1449,75 @@ export const TL_DUBVISION_MAINSTAGE_PAROOKAVILLE_GERMANY_2026: FingerprintSeedRo
   { at: "56:13", artist: "Martin Garrix & DubVision ft. Shaun Farrugia", title: "Starlight (Keep Me Afloat)" },
 ];
 
+/**
+ * W&W @ Mainstage, Parookaville, Germany 2026-07-18
+ * https://www.1001tracklists.com/tracklist/1j3n03kk/wandw-mainstage-parookaville-germany-2026-07-18.html
+ * Official YT: https://youtu.be/or_SDolEBfw
+ * Capture overlay used TL_W&W_Mainstage_Parookaville_Germany_2026
+ * (`&` illegal in an identifier); constant is
+ * TL_W_AND_W_MAINSTAGE_PAROOKAVILLE_GERMANY_2026.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-or_SDolEBfw"]
+ * Captured 2026-08-16 - provenance 1001tl.
+ */
+export const TL_W_AND_W_MAINSTAGE_PAROOKAVILLE_GERMANY_2026: FingerprintSeedRow[] = [
+  { at: "0:10", artist: "Hardwell & W&W", title: "Bangkok" },
+  { at: "1:35", artist: "Zedd & Lucky Date ft. Ellie Goulding", title: "Fall Into The Sky (Everybody Fuckin Jump Acappella)" },
+  { at: "3:00", artist: "HUGEL & SOLTO", title: "Jamaican (Bam Bam)" },
+  { at: "3:57", artist: "Teriyaki Boyz", title: "Tokyo Drift (The Fast And The Furious: Tokyo Drift OST) (W&W Festival Mix)" },
+  { at: "4:54", artist: "Carly Rae Jepsen", title: "Call Me Maybe (Acappella)" },
+  { at: "5:51", artist: "Hardwell & W&W", title: "Jumper (Acappella)" },
+  { at: "6:48", artist: "Rihanna", title: "Where Have You Been (W&W Festival Mix)" },
+  { at: "9:23", artist: "W&W & AXMO", title: "Ritmo De La Noche (Vamos A La Playa)" },
+  { at: "10:35", artist: "ATB", title: "9PM (Till I Come)" },
+  { at: "11:55", artist: "Queen", title: "We Will Rock You" },
+  { at: "13:16", artist: "sombr", title: "back to friends" },
+  { at: "14:36", artist: "Panjabi MC", title: "Mundian To Bach Ke" },
+  { at: "16:00", artist: "Jordan & Baker", title: "Explode" },
+  { at: "16:24", artist: "Captain Hollywood Project", title: "Flying High" },
+  { at: "16:48", artist: "Mightyfools", title: "Footrocker (Get Your, Get Your Hands Up Acappella)" },
+  { at: "17:12", artist: "Mr. Polska & Ski Aggu & Natte Visstick", title: "Spring" },
+  { at: "17:37", artist: "Endymion", title: "Pussy Motherfuckerz" },
+  { at: "18:01", artist: "LMFAO ft. Lauren Bennett & Goonrock", title: "Party Rock Anthem (Hardwell & W&W Bootleg)" },
+  { at: "19:16", artist: "Hardwell & W&W", title: "Turn Up The Bass" },
+  { at: "20:54", artist: "Katy Perry", title: "Firework (Acappella)" },
+  { at: "22:31", artist: "Veracocha", title: "Carte Blanche (W&W Bootleg)" },
+  { at: "24:26", artist: "Ian Van Dahl ft. Marsha", title: "Castles In The Sky" },
+  { at: "26:20", artist: "W&W & Scooter", title: "Rave From Outer Space" },
+  { at: "28:30", artist: "W&W & Scooter", title: "Rave From Outer Space" },
+  { at: "28:47", artist: "Avicii", title: "Levels (W&W 2026 Bootleg)" },
+  { at: "29:51", artist: "Bruno Mars", title: "Locked Out Of Heaven (Acappella)" },
+  { at: "30:55", artist: "Brennan Heart", title: "Van Halen Is A Rockstar" },
+  { at: "33:07", artist: "Scarf!", title: "Odysee (AXMO Bootleg)" },
+  { at: "33:49", artist: "Chicago", title: "Street Player (W&W Bootleg)" },
+  { at: "34:28", artist: "Mr. Polska & Natte Visstick & Vieze Asbak", title: "POLSKA JUMPSTYLE" },
+  { at: "35:07", artist: "O-Zone", title: "Mai Ai Hee (Dragostea Din Tei) (W&W Remix)" },
+  { at: "36:08", artist: "ItaloBrothers", title: "My Life Is A Party" },
+  { at: "37:08", artist: "Dimitri Vegas & Like Mike vs. W&W", title: "Crowd Control" },
+  { at: "37:50", artist: "Snollebollekes", title: "Links Rechts" },
+  { at: "38:32", artist: "Speedy J", title: "Pullover" },
+  { at: "39:13", artist: "Jan Wayne", title: "Because The Night (W&W Bootleg)" },
+  { at: "40:54", artist: "Belinda Carlisle", title: "Heaven Is A Place On Earth (W&W 2026 Bootleg)" },
+  { at: "43:14", artist: "Sebastian Ingrosso & Alesso ft. Ryan Tedder", title: "Calling (Lose My Mind) (Hardwell & W&W Bootleg)" },
+  { at: "46:26", artist: "Bastille", title: "Pompeii (W&W Festival Mix)" },
+  { at: "48:31", artist: "Gigi D'Agostino", title: "The Riddle (W&W Bootleg)" },
+  { at: "50:23", artist: "Dimitri Vegas & Like Mike & Tiësto & W&W ft. Dido", title: "Thank You (Not So Bad)" },
+  { at: "51:34", artist: "The White Stripes", title: "Seven Nation Army" },
+  { at: "52:45", artist: "Dimitri Vegas & Like Mike & Tiësto & W&W ft. Dido", title: "Thank You (Not So Bad) (Da Tweekaz Edit)" },
+  { at: "53:56", artist: "Snap!", title: "Rhythm Is A Dancer (AXMO Bootleg)" },
+  { at: "54:46", artist: "Bloodhound Gang", title: "The Bad Touch (Acappella)" },
+  { at: "55:35", artist: "W&W", title: "OIIA OIIA (Spinning Cat)" },
+  { at: "56:48", artist: "W&W", title: "OIIA OIIA (Spinning Cat)" },
+  { at: "58:00", artist: "Robbie Williams", title: "Angels (AXMO Remix)" },
+  { at: "1:00:04", artist: "Part Time Killer", title: "Hard Bounce Beat (TNT Edit)" },
+  { at: "1:00:41", artist: "Icona Pop ft. Charli xcx", title: "I Love It (Acappella)" },
+  { at: "1:01:18", artist: "Milleniumkid & JBS", title: "Vielleicht Vielleicht (W&W Remix)" },
+  { at: "1:03:50", artist: "BEAUZ", title: "Bel Mercy" },
+  { at: "1:06:10", artist: "Sub Zero Project & Dual Damage vs. Swedish House Mafia & John Martin", title: "It Will Be OK vs. Don't You Worry Child (Hardwell Mashup)" },
+  { at: "1:06:45", artist: "Swedish House Mafia ft. John Martin", title: "Don't You Worry Child (Acappella)" },
+  { at: "1:07:19", artist: "Dimitri Vegas & Like Mike & Martin Garrix", title: "Tremor (Sensation 2014 Anthem) (3, 2, 1 Go Acappella)" },
+  { at: "1:07:54", artist: "Sub Zero Project & Dual Damage", title: "It Will Be OK" },
+  { at: "1:08:28", artist: "W&W & The Saints", title: "Stereo Love" },
+  { at: "1:11:25", artist: "W&W & Groove Coverage", title: "Moonlight Shadow" },
+];
+
 

@@ -60,6 +60,9 @@ const HW_PAROOKAVILLE = YOUTUBE_SETS.find((s) =>
 const DV_PAROOKAVILLE = YOUTUBE_SETS.find((s) =>
   s.video.includes("UETk8HSB0Yw"),
 );
+const WW_PAROOKAVILLE = YOUTUBE_SETS.find((s) =>
+  s.video.includes("or_SDolEBfw"),
+);
 
 describe("watchMetaFromCuratedSeed", () => {
   it("builds ASOT 1290 meta from the curated 1001 capture", () => {
@@ -235,6 +238,17 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=UETk8HSB0Yw");
     // Last cue 56:13 + 180s pad.
     assert.equal(meta.durationSec, 56 * 60 + 13 + 180);
+  });
+
+  it("builds W&W Parookaville meta from the curated 1001 capture", () => {
+    assert.ok(WW_PAROOKAVILLE);
+    const meta = watchMetaFromCuratedSeed(WW_PAROOKAVILLE);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "or_SDolEBfw");
+    assert.match(meta.title, /Parookaville/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=or_SDolEBfw");
+    // Last cue 1:11:25 + 180s pad.
+    assert.equal(meta.durationSec, 1 * 3600 + 11 * 60 + 25 + 180);
   });
 
   it("builds Vintage Culture NYC Yacht meta from the curated 1001 capture", () => {
@@ -963,6 +977,20 @@ describe("curated YouTube 429 fallback", () => {
     assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
     assert.ok(sets[0]!.durationSec >= 56 * 60);
     assert.equal(sets[0]?.primaryArtist?.slug, "dubvision");
+    assert.match(String(sets[0]?.eventName ?? ""), /Parookaville/i);
+  });
+
+  it("lands W&W Parookaville from the 1001 seed when watch is 429", async () => {
+    assert.ok(WW_PAROOKAVILLE);
+    const adapter = createYoutubeAdapter([WW_PAROOKAVILLE], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-or_SDolEBfw");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 58);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 1 * 3600 + 11 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "w-w");
     assert.match(String(sets[0]?.eventName ?? ""), /Parookaville/i);
   });
 });

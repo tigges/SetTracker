@@ -123,6 +123,7 @@ import {
   TL_MIKE_WILLIAMS_TIME_LAB_PAROOKAVILLE_GERMANY_2026,
   TL_HARDWELL_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
   TL_DUBVISION_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
+  TL_W_AND_W_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   tracklist1001RowsToPlays,
@@ -2362,6 +2363,29 @@ for (let i = 1; i < dvParookaville.length; i++) {
     (dvParookaville[i]!.timestamp ?? 0) >
       (dvParookaville[i - 1]!.timestamp ?? 0),
     `DubVision Parookaville clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_W_AND_W_MAINSTAGE_PAROOKAVILLE_GERMANY_2026);
+assert.equal(TL_W_AND_W_MAINSTAGE_PAROOKAVILLE_GERMANY_2026.length, 58);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-or_SDolEBfw"],
+  TL_W_AND_W_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
+);
+const wwParookaville = tracklist1001RowsToPlays(
+  TL_W_AND_W_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
+);
+assert.equal(wwParookaville.length, 58);
+assert.equal(wwParookaville[0]?.provenance, "1001tl");
+assert.equal(wwParookaville[0]?.timestamp, 10);
+assert.equal(wwParookaville[0]?.trackTitle, "Bangkok");
+assert.equal(wwParookaville[57]?.trackTitle, "Moonlight Shadow");
+assert.equal(wwParookaville[57]?.timestamp, 1 * 3600 + 11 * 60 + 25);
+for (let i = 1; i < wwParookaville.length; i++) {
+  assert.ok(
+    (wwParookaville[i]!.timestamp ?? 0) >
+      (wwParookaville[i - 1]!.timestamp ?? 0),
+    `W&W Parookaville clocks must increase at index ${i}`,
   );
 }
 
