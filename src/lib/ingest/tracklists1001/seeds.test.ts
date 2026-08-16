@@ -124,6 +124,7 @@ import {
   TL_HARDWELL_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
   TL_DUBVISION_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
   TL_W_AND_W_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
+  TL_MANDY_MANDY_MONDAYS_028_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   tracklist1001RowsToPlays,
@@ -2386,6 +2387,30 @@ for (let i = 1; i < wwParookaville.length; i++) {
     (wwParookaville[i]!.timestamp ?? 0) >
       (wwParookaville[i - 1]!.timestamp ?? 0),
     `W&W Parookaville clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_MANDY_MANDY_MONDAYS_028_2026);
+assert.equal(TL_MANDY_MANDY_MONDAYS_028_2026.length, 47);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-tomorrowland-mandy-mondays-august-2026"],
+  TL_MANDY_MANDY_MONDAYS_028_2026,
+);
+assert.equal(TRACKLIST_1001_BY_SOURCE_SLUG["yt-J7b0G4XX8pg"], undefined);
+const mandyMondays = tracklist1001RowsToPlays(TL_MANDY_MANDY_MONDAYS_028_2026);
+assert.equal(mandyMondays.length, 47);
+assert.equal(mandyMondays[0]?.provenance, "1001tl");
+assert.equal(mandyMondays[0]?.timestamp, 20);
+assert.equal(mandyMondays[0]?.trackTitle, "Miami 2 Ibiza (MANDY Edit)");
+assert.equal(
+  mandyMondays[46]?.trackTitle,
+  "Sweet Dreams x Trepidation (Code Black DJ Tool)",
+);
+assert.equal(mandyMondays[46]?.timestamp, 57 * 60 + 50);
+for (let i = 1; i < mandyMondays.length; i++) {
+  assert.ok(
+    (mandyMondays[i]!.timestamp ?? 0) > (mandyMondays[i - 1]!.timestamp ?? 0),
+    `MANDY Mondays 028 clocks must increase at index ${i}`,
   );
 }
 

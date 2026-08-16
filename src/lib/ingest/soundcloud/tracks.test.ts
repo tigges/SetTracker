@@ -280,4 +280,18 @@ assert.equal(
   "sc-oliverheldens-oliver-heldens-daybreak-session-tomorrowland-weekend-1-2024",
 );
 
+const mandyMondaysSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url ===
+    "https://soundcloud.com/tomorrowland/mandy-mondays-august-2026",
+);
+assert.ok(mandyMondaysSc);
+assert.equal(mandyMondaysSc.primaryArtist.name, "MANDY");
+assert.equal(mandyMondaysSc.type, "radio");
+assert.equal(mandyMondaysSc.seriesName, "MANDY Mondays");
+assert.equal(
+  `sc-tomorrowland-${slugify("mandy-mondays-august-2026")}`,
+  "sc-tomorrowland-mandy-mondays-august-2026",
+);
+
 console.log("soundcloud/tracks.test.ts ok");

@@ -314,4 +314,19 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     type: "festival",
     minDurationSec: 60 * 60,
   },
+  {
+    // Official Tomorrowland One World Radio upload; 1001TL wired via
+    // sc-tomorrowland-mandy-mondays-august-2026. Tomorrowland poll
+    // titleMatch does not include "mondays", so this seed is required.
+    // Never wire sc-https://… or yt-J7b0G4XX8pg (TML B2B Relive).
+    url: "https://soundcloud.com/tomorrowland/mandy-mondays-august-2026",
+    primaryArtist: dj("MANDY", {
+      accent: "#ff006e",
+      homeCity: "Belgium",
+    }),
+    genre: "Hard Dance",
+    seriesName: "MANDY Mondays",
+    type: "radio",
+    minDurationSec: 30 * 60,
+  },
 ];

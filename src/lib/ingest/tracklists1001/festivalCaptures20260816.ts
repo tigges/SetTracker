@@ -1520,4 +1520,65 @@ export const TL_W_AND_W_MAINSTAGE_PAROOKAVILLE_GERMANY_2026: FingerprintSeedRow[
   { at: "1:11:25", artist: "W&W & Groove Coverage", title: "Moonlight Shadow" },
 ];
 
+/**
+ * MANDY - MANDY Mondays 028 2026-08-03
+ * https://www.1001tracklists.com/tracklist/1qnblmtt/mandy-mandy-mondays-028-2026-08-03.html
+ * Official SC: https://soundcloud.com/tomorrowland/mandy-mondays-august-2026
+ * Capture overlay used TL_MANDY_MANDY-Mondays_028_2026
+ * (hyphen illegal); constant is TL_MANDY_MANDY_MONDAYS_028_2026.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["sc-tomorrowland-mandy-mondays-august-2026"]
+ * Not wired: yt-J7b0G4XX8pg — oEmbed is "MANDY b2b Negitiv WE1 | Tomorrowland 2026"
+ * (festival Relive, different set).
+ * Captured 2026-08-16 - provenance 1001tl.
+ */
+export const TL_MANDY_MANDY_MONDAYS_028_2026: FingerprintSeedRow[] = [
+  { at: "0:20", artist: "Swedish House Mafia ft. Tinie Tempah", title: "Miami 2 Ibiza (MANDY Edit)" },
+  { at: "1:35", artist: "Adam Port & Stryv ft. Malachiii", title: "Move" },
+  { at: "2:50", artist: "MANDY", title: "Street Knowledge" },
+  { at: "4:05", artist: "DJ G2G", title: "paleta x faint" },
+  { at: "5:20", artist: "KX CHR ft. MANDY vs. BLACKPINK", title: "Everybody Dance Now vs. Jump (MANDY Mashup)" },
+  { at: "6:35", artist: "Will Atkinson", title: "Not Your Friend" },
+  { at: "7:50", artist: "Low-E", title: "Masters At Work" },
+  { at: "9:05", artist: "Cherry Moon Trax", title: "The House Of House" },
+  { at: "10:20", artist: "Creeds vs. Derb", title: "Push Up The Derb (MANDY Edit)" },
+  { at: "11:35", artist: "Travis Scott ft. Kendrick Lamar", title: "Goosebumps (Acappella)" },
+  { at: "12:50", artist: "Cloonee & Prospa", title: "Free Your Mind (MANDY Edit)" },
+  { at: "14:05", artist: "will.i.am & Britney Spears", title: "Scream & Shout" },
+  { at: "15:20", artist: "Fin Carroll", title: "Adrenaline Junkie" },
+  { at: "16:35", artist: "BADGRUB X POLICE IN PARIS", title: "Katyusha" },
+  { at: "17:50", artist: "GORDO & Reinier Zonneveld", title: "Loco Loco (Coone & Maddix Mashup)" },
+  { at: "19:05", artist: "Junkie Kid & Lister", title: "90s Baby" },
+  { at: "20:20", artist: "SMR", title: "Attention" },
+  { at: "21:35", artist: "MANDY", title: "Wanna Feel It" },
+  { at: "22:50", artist: "Negativ", title: "Sprite" },
+  { at: "24:05", artist: "KRANK", title: "Diet Coke" },
+  { at: "25:20", artist: "Lowriders", title: "Don't Get Back (MANDY Remix)" },
+  { at: "26:35", artist: "Black Eyed Peas", title: "Pump It (GWELD Schranz Remix)" },
+  { at: "27:50", artist: "HELLBOUND!", title: "Baile93" },
+  { at: "29:05", artist: "Onlynumbers ft. Lucie Hart", title: "Euphoric Night" },
+  { at: "30:20", artist: "MANDY", title: "Dark Bounce" },
+  { at: "31:35", artist: "DJSM & Flawx & Samuel Moriero", title: "Shiva" },
+  { at: "32:50", artist: "JSTJR & TELETECH", title: "Sound of the Underground" },
+  { at: "34:05", artist: "BYØRN", title: "Darkness I'm Feeling" },
+  { at: "35:20", artist: "Will Atkinson", title: "Marching Powder" },
+  { at: "36:35", artist: "Crazy Frog", title: "Axel F" },
+  { at: "37:50", artist: "BYØRN & Pawlowski ft. Vikina", title: "LA TEMPERATURA" },
+  { at: "39:05", artist: "Ray Volpe", title: "SONG REQUEST (Creeds Remix)" },
+  { at: "40:20", artist: "Funk Tribu", title: "Azul (MANDY Edit)" },
+  { at: "41:35", artist: "Ivan Gough & Feenixpawl ft. Georgi Kay", title: "In My Mind (Acappella)" },
+  { at: "42:50", artist: "Dimitri Vegas & Like Mike & Marlon Hoffstadt & DJ Konik", title: "Makina Time" },
+  { at: "44:05", artist: "Push", title: "Universal Nation" },
+  { at: "45:20", artist: "KIRK", title: "Go Funk Yourself" },
+  { at: "46:35", artist: "Dutch Disorder", title: "Heroine (Samuel Moriero Remix)" },
+  { at: "47:50", artist: "Lowriderz", title: "Papacito" },
+  { at: "49:05", artist: "KIRK", title: "Dream Man" },
+  { at: "50:20", artist: "Bad Bunny", title: "Nuevayol" },
+  { at: "51:35", artist: "HARDSOK vs. Florence + The Machine", title: "Forever vs. Spectrum (Say My Name) (Restricted Edit)" },
+  { at: "52:50", artist: "Sister Nancy", title: "Bam Bam (MANDY Bootleg)" },
+  { at: "54:05", artist: "Bad Gyal", title: "Fuma (Noro$t Remix)" },
+  { at: "55:20", artist: "LEVOS", title: "Brazilian Boing" },
+  { at: "56:35", artist: "D-Block & S-te-Fan & DJ Isaac", title: "Berlin" },
+  { at: "57:50", artist: "Eurythmics vs. Stan Christ", title: "Sweet Dreams x Trepidation (Code Black DJ Tool)" },
+];
+
 
