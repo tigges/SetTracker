@@ -29,6 +29,7 @@ import {
   TL_MEN_MACHINE_1001_EXCLUSIVE_2026,
   TL_STEVE_AOKI_TML_FRIENDSHIP_MIX_2026,
 } from "./festivalCaptures20260815";
+import { TL_ALOK_TML_WE2_2026 } from "./festivalCaptures20260816";
 
 export {
   TL_ALESSO_TML_WE2_2026,
@@ -50,6 +51,7 @@ export {
   TL_MARLON_HOFFSTADT_COACHELLA_WE2_2026,
   TL_MARKUS_SCHULZ_AND_JEROME_ISMA_AE_GDJB_2026,
   TL_STEVE_AOKI_TML_FRIENDSHIP_MIX_2026,
+  TL_ALOK_TML_WE2_2026,
 };
 
 function formatClock(sec: number): string {
@@ -4652,6 +4654,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-WWnLYZrh6kw": TL_MARKUS_SCHULZ_AND_JEROME_ISMA_AE_GDJB_2026,
   "sc-markusschulz-gdjb-aug132026":
     TL_MARKUS_SCHULZ_AND_JEROME_ISMA_AE_GDJB_2026,
+  "yt-zHAUZ02aCwo": TL_ALOK_TML_WE2_2026,
 };
 
 /** Sanity: every seeded clock must parse. */

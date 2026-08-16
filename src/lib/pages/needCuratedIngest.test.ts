@@ -66,8 +66,8 @@ const seedPush = decideCuratedIngest({
     "src/lib/ingest/tracklists1001/festival2026.ts",
   ],
 });
-assert.equal(seedPush.run, false);
-assert.match(seedPush.reason, /cached catalog/);
+assert.equal(seedPush.run, true);
+assert.match(seedPush.reason, /catalog sources changed/);
 
 assert.equal(
   decideCuratedIngest({

@@ -10,6 +10,7 @@ import {
   dedupeNearDuplicates,
   diversifyByArtist,
   diversifyBySeries,
+  idCoverageTier,
   idQualityTier,
   nearDuplicateKey,
   isRadarCandidate,
@@ -148,6 +149,41 @@ describe("feedPriority complete → Top 100 → festivals", () => {
     assert.equal(sorted[2]?.densitySeverity, "severe");
   });
 
+  it("homepage prefers mostly identified tracklists over sparse IDs", () => {
+    assert.equal(
+      idCoverageTier({ identified: 30, unresolved_id: 2, unparsed: 1 }, 33),
+      0,
+    );
+    assert.equal(
+      idCoverageTier({ identified: 6, unresolved_id: 1, unparsed: 12 }, 19),
+      2,
+    );
+    const sorted = [
+      {
+        id: "vintage-sparse",
+        densitySeverity: "ok" as const,
+        top100Rank: 1,
+        festivalRank: 1,
+        venueTier: "festival" as const,
+        publishedAt: "2026-08-01T00:00:00.000Z",
+        trackCount: 18,
+        statusCounts: { identified: 6, unresolved_id: 1, unparsed: 11 },
+      },
+      {
+        id: "hype-full",
+        densitySeverity: "ok" as const,
+        top100Rank: 40,
+        festivalRank: null,
+        venueTier: "club" as const,
+        publishedAt: "2026-07-20T00:00:00.000Z",
+        trackCount: 34,
+        statusCounts: { identified: 34, unresolved_id: 0, unparsed: 0 },
+      },
+    ].sort(compareFeedPriority);
+    assert.equal(sorted[0]?.id, "hype-full");
+    assert.equal(sorted[1]?.id, "vintage-sparse");
+  });
+
   it("current year beats last year's Top 100 festival", () => {
     const sorted = [
       {
@@ -212,6 +248,29 @@ describe("feedPriority complete → Top 100 → festivals", () => {
     assert.equal(
       isThisPerformanceYear({ publishedAt: "2024-05-01T00:00:00.000Z" }, now),
       false,
+    );
+  });
+
+  it("Deep catalog prefers mostly identified sets on the same date", () => {
+    const sorted = [
+      {
+        id: "sparse",
+        densitySeverity: "ok" as const,
+        top100Rank: 1,
+        publishedAt: "2026-07-20T00:00:00.000Z",
+        statusCounts: { identified: 4, unparsed: 14 },
+      },
+      {
+        id: "full",
+        densitySeverity: "ok" as const,
+        top100Rank: 80,
+        publishedAt: "2026-07-20T00:00:00.000Z",
+        statusCounts: { identified: 18, unparsed: 0 },
+      },
+    ].sort(compareDeepCatalog);
+    assert.deepEqual(
+      sorted.map((s) => s.id),
+      ["full", "sparse"],
     );
   });
 
@@ -451,6 +510,40 @@ describe("feedPriority complete → Top 100 → festivals", () => {
       ),
       false,
       "Armin YouTube House 14m clip",
+    );
+    assert.equal(
+      isRadarCandidate(
+        {
+          densitySeverity: "ok",
+          top100Rank: 12,
+          festivalRank: 8,
+          venueTier: "festival",
+          publishedAt: "2026-08-01T00:00:00.000Z",
+          statusCounts: { identified: 6, unresolved_id: 1, unparsed: 11 },
+          trackCount: 18,
+          durationSec: 2 * 3600 + 21 * 60,
+        },
+        now,
+      ),
+      false,
+      "Vintage Culture-style: only a few IDs, rest unparsed",
+    );
+    assert.equal(
+      isRadarCandidate(
+        {
+          densitySeverity: "ok",
+          top100Rank: 40,
+          festivalRank: null,
+          venueTier: "club",
+          publishedAt: "2026-07-20T00:00:00.000Z",
+          statusCounts: { identified: 34 },
+          trackCount: 34,
+          durationSec: 46 * 60,
+        },
+        now,
+      ),
+      true,
+      "mostly identified Cafe Mambo-style set",
     );
   });
 

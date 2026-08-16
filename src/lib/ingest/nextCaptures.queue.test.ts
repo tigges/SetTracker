@@ -108,5 +108,13 @@ assert.equal(
   ),
   "mapped",
 );
+assert.equal(
+  skipCaptureNeed(
+    row({ slug: "yt-zHAUZ02aCwo", title: "Alok WE2 | Tomorrowland 2026" }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
 
 console.log("nextCaptures.queue.test.ts ok");

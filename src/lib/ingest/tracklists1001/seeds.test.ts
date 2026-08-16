@@ -90,6 +90,7 @@ import {
   TL_MARLON_HOFFSTADT_COACHELLA_WE2_2026,
   TL_MARKUS_SCHULZ_AND_JEROME_ISMA_AE_GDJB_2026,
   TL_STEVE_AOKI_TML_FRIENDSHIP_MIX_2026,
+  TL_ALOK_TML_WE2_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   tracklist1001RowsToPlays,
 } from "./seeds";
@@ -1432,6 +1433,26 @@ for (let i = 1; i < gdjb.length; i++) {
   assert.ok(
     (gdjb[i]!.timestamp ?? 0) > (gdjb[i - 1]!.timestamp ?? 0),
     `clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_ALOK_TML_WE2_2026);
+assert.equal(TL_ALOK_TML_WE2_2026.length, 45);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-zHAUZ02aCwo"],
+  TL_ALOK_TML_WE2_2026,
+);
+const alokTml = tracklist1001RowsToPlays(TL_ALOK_TML_WE2_2026);
+assert.equal(alokTml.length, 44);
+assert.equal(alokTml[0]?.provenance, "1001tl");
+assert.equal(alokTml[0]?.timestamp, 12);
+assert.equal(alokTml[0]?.trackTitle, "Around");
+assert.equal(alokTml[43]?.trackTitle, "Around");
+assert.equal(alokTml[43]?.timestamp, 59 * 60 + 30);
+for (let i = 1; i < alokTml.length; i++) {
+  assert.ok(
+    (alokTml[i]!.timestamp ?? 0) > (alokTml[i - 1]!.timestamp ?? 0),
+    `Alok TML clocks must increase at index ${i}`,
   );
 }
 

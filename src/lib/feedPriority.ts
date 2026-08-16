@@ -6,14 +6,16 @@
  *
  * Spotlight rails (`compareFeedPriority`) sort:
  *   1) Tracklist completeness (ok → thin → severe; empty last)
- *   2) Performance year (performedAt / edition year / publishedAt — never ingest)
- *   3) DJ Mag Top 100 DJs (lower chart rank first)
- *   4) DJ Mag Top 100 Festivals (linked event; lower rank first)
- *   5) Venue class: festival → club → livestream → radio → other
- *   6) Performance date
+ *   2) ID coverage (mostly identified → partial → sparse)
+ *   3) Performance year (performedAt / edition year / publishedAt — never ingest)
+ *   4) DJ Mag Top 100 DJs (lower chart rank first)
+ *   5) DJ Mag Top 100 Festivals (linked event; lower rank first)
+ *   6) Venue class: festival → club → livestream → radio → other
+ *   7) Performance date
  *
- * Deep catalog leftovers (`compareDeepCatalog`) sort date first, then density,
- * then chart — so Guetta Ultra 2024 does not sit on page 1 ahead of 2026 sets.
+ * Deep catalog leftovers (`compareDeepCatalog`) sort date first, then ID
+ * coverage, then density, then chart — so Guetta Ultra 2024 does not sit on
+ * page 1 ahead of 2026 sets, but a mostly-orange bar beats a mostly-grey one.
  *
  * Event/festival profile grids use `compareEventSetPriority` — same stack,
  * plus ID quality so all-pink (unresolved) tracklists rank below identified.
@@ -91,6 +93,8 @@ export type FeedPriorityFields = {
   /** Festival weekend / edition date when known — not site ingest time. */
   performedAt?: Date | string | null;
   editionYear?: number | null;
+  statusCounts?: StatusCountFields;
+  trackCount?: number | null;
 };
 
 /**
@@ -125,7 +129,7 @@ export function setPerformanceYear(
   return Number.isFinite(y) ? y : new Date(nowMs).getUTCFullYear();
 }
 
-/** Within an age section — complete → year → Top 100 DJ → top festival → venue → date. */
+/** Within an age section — complete → IDs → year → Top 100 DJ → top festival → venue → date. */
 export function compareFeedPriority(
   a: FeedPriorityFields,
   b: FeedPriorityFields,
@@ -133,6 +137,10 @@ export function compareFeedPriority(
   const da = DENSITY_RANK[a.densitySeverity ?? "ok"];
   const db = DENSITY_RANK[b.densitySeverity ?? "ok"];
   if (da !== db) return da - db;
+
+  const ia = idCoverageTier(a.statusCounts, a.trackCount ?? 0);
+  const ib = idCoverageTier(b.statusCounts, b.trackCount ?? 0);
+  if (ia !== ib) return ia - ib;
 
   const ya = setPerformanceYear(a);
   const yb = setPerformanceYear(b);
@@ -157,7 +165,7 @@ export function compareFeedPriority(
   return setPerformanceTime(b) - setPerformanceTime(a);
 }
 
-/** Leftover Deep catalog: newest performance first, then density, then chart. */
+/** Leftover Deep catalog: newest performance first, then IDs, then density, then chart. */
 export function compareDeepCatalog(
   a: FeedPriorityFields,
   b: FeedPriorityFields,
@@ -165,6 +173,10 @@ export function compareDeepCatalog(
   const ta = setPerformanceTime(a);
   const tb = setPerformanceTime(b);
   if (ta !== tb) return tb - ta;
+
+  const ia = idCoverageTier(a.statusCounts, a.trackCount ?? 0);
+  const ib = idCoverageTier(b.statusCounts, b.trackCount ?? 0);
+  if (ia !== ib) return ia - ib;
 
   const da = DENSITY_RANK[a.densitySeverity ?? "ok"];
   const db = DENSITY_RANK[b.densitySeverity ?? "ok"];
@@ -198,6 +210,38 @@ export type StatusCountFields = Partial<Record<IdStatus, number>> | null | undef
 export function resolvedIdCount(counts: StatusCountFields): number {
   if (!counts) return 0;
   return (counts.identified ?? 0) + (counts.community_resolved ?? 0);
+}
+
+/** Identified + community-resolved share of logged plays (0–1). */
+export function resolvedIdRatio(
+  counts: StatusCountFields,
+  trackCount = 0,
+): number {
+  if (!counts) return 0;
+  const total =
+    (counts.identified ?? 0) +
+    (counts.unresolved_id ?? 0) +
+    (counts.community_resolved ?? 0) +
+    (counts.unparsed ?? 0);
+  const n = total > 0 ? total : trackCount;
+  if (n <= 0) return 0;
+  return resolvedIdCount(counts) / n;
+}
+
+/**
+ * Homepage ID fill:
+ *   0 = mostly tracked (≥70% identified / community-resolved)
+ *   1 = half-plus (≥50%)
+ *   2 = sparse / few IDs
+ */
+export function idCoverageTier(
+  counts: StatusCountFields,
+  trackCount = 0,
+): 0 | 1 | 2 {
+  const ratio = resolvedIdRatio(counts, trackCount);
+  if (ratio >= 0.7) return 0;
+  if (ratio >= 0.5) return 1;
+  return 2;
 }
 
 /**
@@ -313,17 +357,18 @@ export function radarPickScore(s: RadarPickFields, nowMs = Date.now()): number {
   else if (ageDays <= 365 * 4) score += 2;
   else score -= 22;
 
-  if (s.identifiedRatio != null) {
-    score += s.identifiedRatio * 14;
-  }
+  const idRatio =
+    s.identifiedRatio ?? resolvedIdRatio(s.statusCounts, s.trackCount ?? 0);
+  // Mostly-orange bars beat chart fame when the strip is mostly grey/pink.
+  score += idRatio * 40;
+  score -= idCoverageTier(s.statusCounts, s.trackCount ?? 0) * 18;
 
   return score;
 }
 
 /**
- * Radar pool: this performance year, dense tracklist, some real IDs,
- * and a Top 100 DJ or top festival/club. Archives and all-pink parses stay
- * in Deep catalog.
+ * Radar pool: this performance year, dense tracklist, at least half identified,
+ * and a Top 100 DJ or top festival/club. Sparse / all-pink parses stay in Deep.
  */
 export function isRadarCandidate(
   s: FeedPriorityFields & {
@@ -342,7 +387,7 @@ export function isRadarCandidate(
   if (setPerformanceYear(s, nowMs) < new Date(nowMs).getUTCFullYear()) {
     return false;
   }
-  if (idQualityTier(s.statusCounts, s.trackCount ?? 0) !== 0) return false;
+  if (idCoverageTier(s.statusCounts, s.trackCount ?? 0) > 1) return false;
   return s.top100Rank != null || s.festivalRank != null || s.clubRank != null;
 }
 
@@ -367,6 +412,9 @@ export function pickRadarPicks<T extends RadarPickFields>(
   const ranked = [...pool].sort((a, b) => {
     const y = setPerformanceYear(b, nowMs) - setPerformanceYear(a, nowMs);
     if (y !== 0) return y;
+    const ca = idCoverageTier(a.statusCounts, a.trackCount ?? 0);
+    const cb = idCoverageTier(b.statusCounts, b.trackCount ?? 0);
+    if (ca !== cb) return ca - cb;
     const ds = radarPickScore(b, nowMs) - radarPickScore(a, nowMs);
     if (ds !== 0) return ds;
     return compareFeedPriority(a, b);
