@@ -214,4 +214,17 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     type: "radio",
     minDurationSec: 30 * 60,
   },
+  {
+    // Official Korolova upload; 1001TL wired via
+    // sc-korolovadj-korolova-captive-soul-98 (same list as yt-5JxfEjVdQFk).
+    url: "https://soundcloud.com/korolovadj/korolova-captive-soul-98",
+    primaryArtist: dj("Korolova", {
+      accent: "#f72585",
+      homeCity: "Ukraine",
+    }),
+    genre: "Melodic Techno",
+    seriesName: "Captive Soul",
+    type: "radio",
+    minDurationSec: 30 * 60,
+  },
 ];

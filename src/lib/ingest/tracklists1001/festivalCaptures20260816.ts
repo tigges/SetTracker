@@ -719,3 +719,31 @@ export const TL_NORA_EN_PURE_PURIFIED_RADIO_520_2026: FingerprintSeedRow[] = [
   { at: "52:30", artist: "Einmusik ft. Shayan (UK)", title: "Do You Think Of Me (Joachim Pastor Remix)" },
   { at: "57:54", artist: "DJ Paulus", title: "Mirage" },
 ];
+
+/**
+ * Korolova - Captive Soul 098 2026-08-07
+ * https://www.1001tracklists.com/tracklist/1cgr4nqk/korolova-captive-soul-098-2026-08-07.html
+ * Official YT: https://www.youtube.com/watch?v=5JxfEjVdQFk
+ * Official SC: https://soundcloud.com/korolovadj/korolova-captive-soul-98
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-5JxfEjVdQFk"]
+ *       TRACKLIST_1001_BY_SOURCE_SLUG["sc-korolovadj-korolova-captive-soul-98"]
+ * Captured 2026-08-16 — provenance 1001tl. Official script: 15 tracks.
+ * Capture overlay used an invalid identifier (hyphens); constant renamed.
+ */
+export const TL_KOROLOVA_CAPTIVE_SOUL_098_2026: FingerprintSeedRow[] = [
+  { at: "1:43", artist: "Cherry", title: "Buka" },
+  { at: "6:00", artist: "Corren Cavini & EAST-97", title: "Darkness Into Day" },
+  { at: "10:12", artist: "Timeless", title: "Free Your Mind" },
+  { at: "14:20", artist: "Anyma & Volkoder", title: "Other Dimension" },
+  { at: "18:42", artist: "Rafael Cerato", title: "Cash" },
+  { at: "22:40", artist: "Silver Panda", title: "Get Closer" },
+  { at: "25:40", artist: "Wailey", title: "To The Underground" },
+  { at: "28:33", artist: "Massano", title: "Beyond Today" },
+  { at: "33:12", artist: "Avrix & Fialkovska", title: "Acid Drop" },
+  { at: "37:12", artist: "Belladonna", title: "About That" },
+  { at: "40:42", artist: "Linska & Duss", title: "Criminal" },
+  { at: "44:53", artist: "KAF3R", title: "Lights" },
+  { at: "48:27", artist: "MEDUZA & Kevin de Vries", title: "7 Days" },
+  { at: "52:16", artist: "FEZZO", title: "Where You Go" },
+  { at: "55:58", artist: "JOA & James Carter", title: "Don't Wake Us Up" },
+];

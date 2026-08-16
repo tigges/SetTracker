@@ -185,4 +185,17 @@ assert.equal(
   "sc-noraenpure-purified-520",
 );
 
+const captive098Sc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url === "https://soundcloud.com/korolovadj/korolova-captive-soul-98",
+);
+assert.ok(captive098Sc);
+assert.equal(captive098Sc.primaryArtist.name, "Korolova");
+assert.equal(captive098Sc.type, "radio");
+assert.equal(captive098Sc.seriesName, "Captive Soul");
+assert.equal(
+  `sc-korolovadj-${slugify("korolova-captive-soul-98")}`,
+  "sc-korolovadj-korolova-captive-soul-98",
+);
+
 console.log("soundcloud/tracks.test.ts ok");

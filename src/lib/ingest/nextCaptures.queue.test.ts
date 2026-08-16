@@ -412,5 +412,29 @@ assert.equal(
   ),
   "mapped",
 );
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "yt-5JxfEjVdQFk",
+      title: "Korolova - Captive Soul 098",
+      type: "radio",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "sc-korolovadj-korolova-captive-soul-98",
+      title: "Korolova Captive Soul 98",
+      type: "radio",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
 
 console.log("nextCaptures.queue.test.ts ok");

@@ -98,6 +98,7 @@ import {
   TL_JAMIE_JONES_HOT_ROBOT_RADIO_239,
   TL_JOEL_CORRY_EDGE_NYC_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026,
+  TL_KOROLOVA_CAPTIVE_SOUL_098_2026,
   TL_MAX_STYLER_OPULENT_TEMPLE_BURNING_MAN_2024,
   TL_MISS_MONIQUE_IBIZA_SUNSET_YACHT_2026,
   TL_NICKY_ROMERO_PROTOCOL_RADIO_731,
@@ -1626,6 +1627,11 @@ assert.equal(
 );
 assert.equal(isWiredTracklistSlug("yt-8aDoUu4GDrc"), true);
 assert.equal(isWiredTracklistSlug("sc-noraenpure-purified-520"), true);
+assert.equal(isWiredTracklistSlug("yt-5JxfEjVdQFk"), true);
+assert.equal(
+  isWiredTracklistSlug("sc-korolovadj-korolova-captive-soul-98"),
+  true,
+);
 assert.equal(
   isWiredTracklistSlug(
     "sc-https://soundcloud.com/sashaofficial/sasha-eclipse-mix-12-8-26",
@@ -1961,6 +1967,30 @@ for (let i = 1; i < purified520.length; i++) {
   assert.ok(
     (purified520[i]!.timestamp ?? 0) > (purified520[i - 1]!.timestamp ?? 0),
     `Purified Radio 520 clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_KOROLOVA_CAPTIVE_SOUL_098_2026);
+assert.equal(TL_KOROLOVA_CAPTIVE_SOUL_098_2026.length, 15);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-5JxfEjVdQFk"],
+  TL_KOROLOVA_CAPTIVE_SOUL_098_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-korolovadj-korolova-captive-soul-98"],
+  TL_KOROLOVA_CAPTIVE_SOUL_098_2026,
+);
+const captive098 = tracklist1001RowsToPlays(TL_KOROLOVA_CAPTIVE_SOUL_098_2026);
+assert.equal(captive098.length, 15);
+assert.equal(captive098[0]?.provenance, "1001tl");
+assert.equal(captive098[0]?.timestamp, 103);
+assert.equal(captive098[0]?.trackTitle, "Buka");
+assert.equal(captive098[14]?.trackTitle, "Don't Wake Us Up");
+assert.equal(captive098[14]?.timestamp, 55 * 60 + 58);
+for (let i = 1; i < captive098.length; i++) {
+  assert.ok(
+    (captive098[i]!.timestamp ?? 0) > (captive098[i - 1]!.timestamp ?? 0),
+    `Captive Soul 098 clocks must increase at index ${i}`,
   );
 }
 

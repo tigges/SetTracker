@@ -69,6 +69,7 @@ import {
   TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026,
   TL_MISS_MONIQUE_IBIZA_SUNSET_YACHT_2026,
   TL_NICKY_ROMERO_PROTOCOL_RADIO_731,
+  TL_KOROLOVA_CAPTIVE_SOUL_098_2026,
   TL_NORA_EN_PURE_PURIFIED_RADIO_520_2026,
   TL_TIESTO_PRISMATIC_032_2026,
   TL_REINIER_ZONNEVELD_AWAKENINGS_2025,
@@ -919,6 +920,21 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/q195rv1/nora-en-pure-purified-radio-520-2026-08-10.html",
     tracklist1001: TL_NORA_EN_PURE_PURIFIED_RADIO_520_2026,
+  },
+  {
+    // Official Captive Soul 098 (show channel / same 1001 as SC).
+    video: "https://www.youtube.com/watch?v=5JxfEjVdQFk",
+    primaryArtist: dj("Korolova", {
+      accent: "#f72585",
+      homeCity: "Ukraine",
+    }),
+    genre: "Melodic Techno",
+    type: "radio",
+    title: "Korolova - Captive Soul 098",
+    seriesName: "Captive Soul",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1cgr4nqk/korolova-captive-soul-098-2026-08-07.html",
+    tracklist1001: TL_KOROLOVA_CAPTIVE_SOUL_098_2026,
   },
   {
     // Official Miss Monique upload; timed 1001 capture.
