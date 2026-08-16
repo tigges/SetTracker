@@ -1,25 +1,20 @@
 import Link from "next/link";
 
 /**
- * Site lockup — setradar.ai wordmark (no tile mark; saves header space).
+ * Compact SR.ai mark — short lockup so nav + search fit on a phone.
  */
-export function BrandMark({
-  compact = false,
-}: {
-  /** Slightly tighter lockup for constrained headers. */
-  compact?: boolean;
-}) {
-  const word = compact ? "text-[16px]" : "text-[18px]";
-
+export function BrandMark() {
   return (
     <Link
       href="/"
       className="group flex flex-none items-center"
       aria-label="setradar.ai home"
     >
-      <span className={`${word} font-extrabold tracking-tight`}>
-        SET<span className="text-brand">RADAR</span>
-        <span className="text-muted2">.ai</span>
+      <span className="text-[17px] font-extrabold tracking-tight sm:text-[18px]">
+        S<span className="text-brand">R</span>
+        <span className="text-[13px] font-semibold text-muted2 sm:text-[14px]">
+          .ai
+        </span>
       </span>
     </Link>
   );
