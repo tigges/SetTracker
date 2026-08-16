@@ -1,0 +1,41 @@
+import assert from "node:assert/strict";
+import { describe, it } from "node:test";
+import { classifyJunkDj, inferJunkHostEvent } from "./junkDj";
+
+describe("junkDj", () => {
+  it("classifies stages, radios, shorts, and tutorials", () => {
+    assert.equal(classifyJunkDj("Freedom Stage"), "stage");
+    assert.equal(classifyJunkDj("Mainstage"), "stage");
+    assert.equal(classifyJunkDj("One World Radio"), "radio");
+    assert.equal(classifyJunkDj("Afro Inspirations Radio"), "radio");
+    assert.equal(classifyJunkDj("DETUNED SESSIONS"), "radio");
+    assert.equal(classifyJunkDj("Daybreak Sessions channel by One"), "radio");
+    assert.equal(classifyJunkDj("One World Radio Shorts"), "nonset");
+    assert.equal(classifyJunkDj("Mainstage Shorts"), "nonset");
+    assert.equal(
+      classifyJunkDj("Pegassi Makes A Trance Track From Scratch"),
+      "nonset",
+    );
+    assert.equal(classifyJunkDj("Dom Dolla"), null);
+  });
+
+  it("maps Freedom Stage and TML mainstage titles onto Tomorrowland", () => {
+    assert.equal(inferJunkHostEvent("Freedom Stage")?.slug, "tomorrowland");
+    assert.equal(
+      inferJunkHostEvent("Mainstage", [
+        "Artist | Mainstage Tomorrowland Weekend 2 Belgium",
+      ])?.slug,
+      "tomorrowland",
+    );
+    assert.equal(inferJunkHostEvent("Mainstage", ["Mainstage"])?.slug, undefined);
+  });
+
+  it("maps radio hosts onto a radio / livestream event", () => {
+    assert.equal(inferJunkHostEvent("One World Radio")?.slug, "one-world-radio");
+    assert.equal(inferJunkHostEvent("One World Radio")?.kind, "radio");
+    assert.equal(
+      inferJunkHostEvent("Afro Inspirations Radio")?.kind,
+      "radio",
+    );
+  });
+});

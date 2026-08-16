@@ -205,9 +205,14 @@ Our submit forces `engine=1` (audio fingerprint; override `ACRCLOUD_FS_ENGINE`).
 | `ANTHROPIC_API_KEY` | optional alias for the same Claude key |
 | `GEMINI_API_KEY` | Gemini **API** key from [AI Studio](https://aistudio.google.com/apikey) (preferred — Search grounding). Aliases: `GEMINI_AGENT_API`, `GEMINI`, `GOOGLE_API_KEY` |
 
+**Catalog junk** (verify-urls / Pages): festival stages (`Freedom Stage`,
+`Mainstage`) fold onto the parent festival; radio/session hosts become
+`Event` rows (`radio` / livestream); YouTube Shorts and “makes a track”
+tutorials are dropped. They are never created as DJs on the next ingest.
+
 **LLM handle research** (`npm run research:handles`): Claude and/or Gemini
 propose official SC/YT/IG/X/websites for DJs that already have sets but no
-handle. Proposals are **never written raw** — the URL must be a profile, the
+handle. Junk names are skipped. Proposals are **never written raw** — the URL must be a profile, the
 handle must overlap the DJ name, it must be live, and it must not belong to
 another catalog DJ. Missing keys → safe no-op. Runs on catalog-deep and
 weekly enrich `full`. Reports: `data/crosscheck/llm-handle-research.json`.

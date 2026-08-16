@@ -63,6 +63,11 @@ assert.equal(isJunkArtistName("Dom Dolla"), false);
 assert.equal(isJunkArtistName("Defected Virtual Festival 4.0"), true);
 assert.equal(isJunkArtistName("Mainstage Shorts"), true);
 assert.equal(isJunkArtistName("One World Radio"), true);
+assert.equal(
+  isJunkArtistName("Pegassi Makes A Trance Track From Scratch"),
+  true,
+);
+assert.equal(isJunkArtistName("Daybreak Sessions channel by One"), true);
 assert.equal(isJunkArtistName("Defected TV"), true);
 assert.equal(sanitizeArtistName("Defected Virtual Festival 4.0"), null);
 
