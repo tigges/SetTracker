@@ -1483,6 +1483,9 @@ assert.equal(vcNeon.length, 16);
 assert.equal(vcNeon[0]?.provenance, "1001tl");
 assert.equal(vcNeon[0]?.timestamp, 14);
 assert.equal(vcNeon[0]?.trackTitle, "The Funk Phenomena (Viot Remix)");
+assert.equal(vcNeon[6]?.trackTitle, "Bad Habit (Clüb De Combat Remix)");
+assert.equal(vcNeon[7]?.trackTitle, "Smack My Bitch Up (Clüb De Combat Remix)");
+assert.equal(vcNeon[14]?.trackTitle, "DJ Assault");
 assert.equal(vcNeon[15]?.trackTitle, "Lost");
 assert.equal(vcNeon[15]?.timestamp, 1 * 3600 + 8 * 60 + 35);
 for (let i = 1; i < vcNeon.length; i++) {
