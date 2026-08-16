@@ -2090,6 +2090,21 @@ export const ARTIST_ROSTER_CURATED: ArtistRosterEntry[] = [
     ],
     priority: "normal",
   },
+  {
+    name: "MANDY",
+    genre: "Hard Dance",
+    accent: "#ff006e",
+    homeCity: "Belgium",
+    youtube: { handle: "@mandyofficialbe", status: "ok" },
+    website: "https://www.youtube.com/@mandyofficialbe",
+    socials: [
+      "https://www.youtube.com/@mandyofficialbe",
+      "https://www.instagram.com/mandyofficial_be/",
+      "https://x.com/djmandyofficial",
+      "https://www.facebook.com/MANDYofficial",
+    ],
+    priority: "normal",
+  },
 ];
 
 /**

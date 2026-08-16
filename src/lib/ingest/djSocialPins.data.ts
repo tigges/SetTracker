@@ -1206,4 +1206,15 @@ export const DJ_SOCIAL_PINS: DjSocialPin[] = [
     website: "https://negitiv.com",
     bio: "Hard Techno. Cologne. Official negitiv.com — SC negitivofficial, YT @negitivofficial, IG @negitiv, booking BCB Family. 1001 sometimes credits Negativ.",
   },
+  {
+    slug: "mandy",
+    name: "MANDY",
+    accent: "#ff006e",
+    soundcloud: null,
+    youtube: "https://www.youtube.com/@mandyofficialbe",
+    instagram: "https://www.instagram.com/mandyofficial_be/",
+    twitter: "https://x.com/djmandyofficial",
+    website: "https://www.youtube.com/@mandyofficialbe",
+    bio: "Hard Dance / Hardstyle. Belgium. Official YT @mandyofficialbe — IG @mandyofficial_be, X @djmandyofficial. No official SoundCloud. Facebook on roster.",
+  },
 ];

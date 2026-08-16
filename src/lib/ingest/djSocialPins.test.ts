@@ -237,6 +237,17 @@ assert.match(bySlug.negitiv!.website, /negitiv\.com/);
 assert.equal(hintForName("NEGITIV")?.youtubeHandle, "@negitivofficial");
 assert.equal(hintForName("Negativ")?.soundcloudPermalink, "negitivofficial");
 
+assert.ok(bySlug.mandy);
+assert.equal(bySlug.mandy!.name, "MANDY");
+assert.equal(bySlug.mandy!.soundcloud, null);
+assert.match(bySlug.mandy!.youtube!, /@mandyofficialbe/);
+assert.match(bySlug.mandy!.instagram!, /instagram\.com\/mandyofficial_be/);
+assert.match(bySlug.mandy!.twitter!, /(?:twitter|x)\.com\/djmandyofficial/);
+assert.match(bySlug.mandy!.website, /youtube\.com\/@mandyofficialbe/);
+assert.equal(slugify("MANDY"), "mandy");
+assert.equal(hintForName("MANDY")?.youtubeHandle, "@mandyofficialbe");
+assert.equal(hintForName("MANDY")?.soundcloudPermalink, undefined);
+
 assert.ok(bySlug["1788-l"], "missing pin 1788-l");
 assert.equal(bySlug["1788-l"]!.name, "1788-L");
 assert.equal(bySlug["1788-l"]!.soundcloud, null);
