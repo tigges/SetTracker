@@ -45,7 +45,9 @@ Provenance per row: `1001TL parse`, `SoundCloud parse`, `fingerprint`, `communit
 1. **Sets feed** (`/`) — New this week, Festival season, Popular, Radar picks,
    then Deep catalog grouped by week. Genre is the only consumer filter.
    Spotlight rails still prefer complete tracklists; YT+SC twins collapse.
-   Incomplete / needs-IDs queues live on Stats, not as homepage chips.
+   Ranking uses performance year (`performedAt` / edition / source
+   `publishedAt`), never site ingest time — this year beats last year's
+   chart festivals. Incomplete / needs-IDs queues live on Stats.
 2. **Set detail** (`/sets/[slug]`) — status timeline, export, related sets
    (same event / series / DJ).
 3. **DJ profile** (`/djs/[slug]`) — series chips open Search, recent sets,

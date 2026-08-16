@@ -50,7 +50,7 @@ describe("feedPriority complete → Top 100 → festivals", () => {
     assert.equal(ranks.spotlight, "top100");
   });
 
-  it("orders complete → Top 100 → festival chart → venue → date", () => {
+  it("orders complete → year → Top 100 → festival chart → venue → date", () => {
     const items = [
       {
         // empty Top 100 festival — last among these
@@ -145,6 +145,48 @@ describe("feedPriority complete → Top 100 → festivals", () => {
     assert.equal(sorted[2]?.densitySeverity, "severe");
   });
 
+  it("current year beats last year's Top 100 festival", () => {
+    const sorted = [
+      {
+        densitySeverity: "ok" as const,
+        top100Rank: 1,
+        festivalRank: 1,
+        venueTier: "festival" as const,
+        publishedAt: "2025-07-20T00:00:00.000Z",
+      },
+      {
+        densitySeverity: "ok" as const,
+        top100Rank: null,
+        festivalRank: null,
+        venueTier: "radio" as const,
+        publishedAt: "2026-08-01T00:00:00.000Z",
+      },
+    ].sort(compareFeedPriority);
+    assert.equal(sorted[0]?.venueTier, "radio");
+    assert.equal(sorted[1]?.festivalRank, 1);
+  });
+
+  it("uses performedAt year, not a later upload publishedAt", () => {
+    const sorted = [
+      {
+        densitySeverity: "ok" as const,
+        top100Rank: 1,
+        festivalRank: 1,
+        venueTier: "festival" as const,
+        publishedAt: "2026-08-10T00:00:00.000Z",
+        performedAt: "2024-07-28T00:00:00.000Z",
+      },
+      {
+        densitySeverity: "ok" as const,
+        top100Rank: null,
+        festivalRank: null,
+        venueTier: "radio" as const,
+        publishedAt: "2026-08-01T00:00:00.000Z",
+      },
+    ].sort(compareFeedPriority);
+    assert.equal(sorted[0]?.venueTier, "radio");
+  });
+
   it("among equal Top 100, better festival rank and festival>club", () => {
     const sorted = [
       {
@@ -164,6 +206,35 @@ describe("feedPriority complete → Top 100 → festivals", () => {
     ].sort(compareFeedPriority);
     assert.equal(sorted[0]?.festivalRank, 5);
     assert.equal(sorted[1]?.venueTier, "club");
+  });
+
+  it("radar score prefers this year over last year's #1 festival", () => {
+    const now = Date.parse("2026-08-16T12:00:00.000Z");
+    const thisYear = radarPickScore(
+      {
+        id: "radio",
+        densitySeverity: "ok",
+        top100Rank: null,
+        festivalRank: null,
+        venueTier: "radio",
+        publishedAt: "2026-08-01T00:00:00.000Z",
+        primaryDjSlug: "local",
+      },
+      now,
+    );
+    const lastYearChart = radarPickScore(
+      {
+        id: "tml",
+        densitySeverity: "ok",
+        top100Rank: 1,
+        festivalRank: 1,
+        venueTier: "festival",
+        publishedAt: "2025-07-20T00:00:00.000Z",
+        primaryDjSlug: "david-guetta",
+      },
+      now,
+    );
+    assert.ok(thisYear > lastYearChart);
   });
 
   it("radar score prefers recent complete sets over decade archives", () => {

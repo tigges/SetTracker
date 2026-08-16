@@ -4,7 +4,7 @@
  * Client-safe (no Prisma / Node fs).
  */
 
-import { nearDuplicateKey } from "./feedPriority";
+import { nearDuplicateKey, setPerformanceTime } from "./feedPriority";
 import type { DensitySeverity } from "./setDensity";
 import type { IdStatus } from "./status";
 
@@ -193,8 +193,18 @@ export function groupByDeepWeek<T extends { publishedAt: Date | string }>(
 }
 
 export function compareNeedsIds(
-  a: { statusCounts?: Partial<Record<IdStatus, number>> | null; publishedAt: Date | string },
-  b: { statusCounts?: Partial<Record<IdStatus, number>> | null; publishedAt: Date | string },
+  a: {
+    statusCounts?: Partial<Record<IdStatus, number>> | null;
+    publishedAt: Date | string;
+    performedAt?: Date | string | null;
+    editionYear?: number | null;
+  },
+  b: {
+    statusCounts?: Partial<Record<IdStatus, number>> | null;
+    publishedAt: Date | string;
+    performedAt?: Date | string | null;
+    editionYear?: number | null;
+  },
 ): number {
   const ra = identifiedRatio(a.statusCounts);
   const rb = identifiedRatio(b.statusCounts);
@@ -202,5 +212,8 @@ export function compareNeedsIds(
   const ua = a.statusCounts?.unresolved_id ?? 0;
   const ub = b.statusCounts?.unresolved_id ?? 0;
   if (ua !== ub) return ub - ua;
-  return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime();
+  const ya = new Date(setPerformanceTime(a)).getUTCFullYear();
+  const yb = new Date(setPerformanceTime(b)).getUTCFullYear();
+  if (ya !== yb) return yb - ya;
+  return setPerformanceTime(b) - setPerformanceTime(a);
 }

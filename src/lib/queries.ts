@@ -140,6 +140,7 @@ export async function getFeed() {
         genre: normalizeGenre(s.genre),
         genres: expandGenres(s.genre),
         publishedAt: s.publishedAt,
+        performedAt: s.performedAt,
         durationSec: s.durationSec,
         sourceName: s.sourceName,
         sourceUrl: s.sourceUrl,
@@ -1203,6 +1204,7 @@ export async function getVenueBySlug(slug: string) {
         genre: normalizeGenre(s.genre),
         genres: expandGenres(s.genre),
         publishedAt: s.publishedAt,
+        performedAt: s.performedAt,
         durationSec: s.durationSec,
         imageUrl: s.imageUrl ?? prim?.dj.imageUrl ?? null,
         primaryDj: prim

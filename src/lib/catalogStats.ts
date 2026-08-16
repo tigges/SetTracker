@@ -650,6 +650,7 @@ export async function getCatalogStats(): Promise<CatalogStats> {
             sourceName: true,
             durationSec: true,
             publishedAt: true,
+            performedAt: true,
             artists: {
               where: { isPrimary: true },
               take: 1,
@@ -695,6 +696,7 @@ export async function getCatalogStats(): Promise<CatalogStats> {
         identifiedRatio: identifiedRatio(counts),
         primaryDj: s.artists[0]?.dj.name ?? null,
         publishedAt: s.publishedAt,
+        performedAt: s.performedAt,
         statusCounts: counts,
       };
     })
