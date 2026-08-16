@@ -16,6 +16,7 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import type { PrismaClient } from "@prisma/client";
 import { isJunkArtistName } from "../../artistName";
+import { isCatalogWorkDj, isTop100DjSlug } from "../../djCatalog";
 import { isBrandHostSlug } from "../../brandHosts";
 import { youtubeChannelUrl } from "../../social";
 import { normalizeOfficialWebsite } from "./wikidataOfficial";
@@ -359,8 +360,18 @@ export async function runLlmHandleResearch(
         slug: true,
         name: true,
         sets: {
-          take: 3,
-          select: { set: { select: { title: true } } },
+          take: 20,
+          select: {
+            set: {
+              select: {
+                title: true,
+                sourceName: true,
+                sourceUrl: true,
+                type: true,
+                event: { select: { kind: true } },
+              },
+            },
+          },
           orderBy: { isPrimary: "desc" },
         },
       },
@@ -368,7 +379,21 @@ export async function runLlmHandleResearch(
       orderBy: { name: "asc" },
     })
   )
-    .filter((d) => !isJunkArtistName(d.name) && !isBrandHostSlug(d.slug))
+    .filter(
+      (d) =>
+        !isJunkArtistName(d.name) &&
+        !isBrandHostSlug(d.slug) &&
+        isCatalogWorkDj({
+          slug: d.slug,
+          isTop100: isTop100DjSlug(d.slug),
+          sets: d.sets.map((s) => ({
+            sourceName: s.set.sourceName,
+            sourceUrl: s.set.sourceUrl,
+            type: s.set.type,
+            eventKind: s.set.event?.kind ?? null,
+          })),
+        }),
+    )
     .slice(0, limit);
 
   const rows: ResearchRow[] = [];
@@ -481,12 +506,43 @@ export async function runLlmQualityCheck(
         website: null,
         sets: { some: {} },
       },
-      select: { slug: true, name: true, _count: { select: { sets: true } } },
+      select: {
+        slug: true,
+        name: true,
+        _count: { select: { sets: true } },
+        sets: {
+          take: 20,
+          select: {
+            set: {
+              select: {
+                sourceName: true,
+                sourceUrl: true,
+                type: true,
+                event: { select: { kind: true } },
+              },
+            },
+          },
+        },
+      },
       take: 80,
       orderBy: { name: "asc" },
     })
   )
-    .filter((d) => !isJunkArtistName(d.name) && !isBrandHostSlug(d.slug))
+    .filter(
+      (d) =>
+        !isJunkArtistName(d.name) &&
+        !isBrandHostSlug(d.slug) &&
+        isCatalogWorkDj({
+          slug: d.slug,
+          isTop100: isTop100DjSlug(d.slug),
+          sets: d.sets.map((s) => ({
+            sourceName: s.set.sourceName,
+            sourceUrl: s.set.sourceUrl,
+            type: s.set.type,
+            eventKind: s.set.event?.kind ?? null,
+          })),
+        }),
+    )
     .slice(0, 25);
   for (const d of handleless) {
     notes.push({

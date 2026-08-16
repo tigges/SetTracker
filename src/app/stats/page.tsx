@@ -377,7 +377,7 @@ export default async function StatsPage() {
       <QueueFold
         title="DJ queues"
         count={djQueueCount}
-        hint="Handle, artwork, empty profiles, junk."
+        hint="Catalog DJs only — hearthis hobbyist leaks are dropped."
       >
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div>

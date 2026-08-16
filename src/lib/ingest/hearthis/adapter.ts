@@ -32,7 +32,6 @@ import {
 import type { RawArtist } from "../types";
 import {
   asInt,
-  fetchCategoryTracks,
   fetchTrackComments,
   fetchTrackDetail,
   fetchTrackPlaylist,
@@ -276,7 +275,7 @@ type Candidate = {
 };
 
 export function createHearthisAdapter(
-  categories: HearthisCategory[] = HEARTHIS_HOUSE_CATEGORIES,
+  _categories: HearthisCategory[] = HEARTHIS_HOUSE_CATEGORIES,
   artists: HearthisArtistSource[] = HEARTHIS_ARTISTS,
 ): SourceAdapter {
   return {
@@ -284,42 +283,6 @@ export function createHearthisAdapter(
     label: "hearthis.at",
     async fetchRecent(): Promise<RawSet[]> {
       const byId = new Map<string, Candidate>();
-
-      for (const category of categories) {
-        try {
-          console.log(`[hearthis] poll category=${category.id}`);
-          const tracks = await fetchCategoryTracks(category.id, 1, 25);
-          await sleep(120);
-          for (const track of tracks) {
-            const id = String(track.id);
-            if (byId.has(id)) continue;
-            const dur = durationSecOf(track);
-            if (dur < HEARTHIS_MIN_DURATION_SEC) continue;
-            const desc = track.description || "";
-            const tl = hasTracklistSignal(desc) ? 1000 : 0;
-            const featured = track.is_featured === true || track.is_featured === 1 || track.is_featured === "1"
-              ? 400
-              : 0;
-            const plays = asInt(track.playback_count);
-            const favs = asInt(track.favoritings_count);
-            byId.set(id, {
-              track,
-              category,
-              score:
-                tl +
-                featured +
-                Math.min(plays, 500) +
-                Math.min(favs, 200) +
-                Math.min(dur / 60, 120),
-            });
-          }
-        } catch (err) {
-          console.error(
-            `[hearthis] category ${category.id} failed:`,
-            err instanceof Error ? err.message : err,
-          );
-        }
-      }
 
       // Curated brand / artist accounts (e.g. Gentlemen's Groove mixes).
       for (const artist of artists) {

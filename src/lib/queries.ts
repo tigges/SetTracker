@@ -1,6 +1,7 @@
 import { isJunkArtistName } from "@/lib/artistName";
 import { playablePlaybackUrl } from "@/lib/playback";
 import { isBrandHostSlug } from "@/lib/brandHosts";
+import { isCatalogWorkDj, isTop100DjSlug } from "@/lib/djCatalog";
 import { isBrowseReadyDj } from "@/lib/djBrowse";
 import { prisma } from "@/lib/db";
 import {
@@ -569,6 +570,20 @@ export async function getDjBySlug(slug: string) {
   const sets = setArtists
     .map((sa) => sa.set)
     .sort((a, b) => b.publishedAt.getTime() - a.publishedAt.getTime());
+  if (
+    !isCatalogWorkDj({
+      slug: dj.slug,
+      isTop100: isTop100DjSlug(dj.slug),
+      sets: sets.map((s) => ({
+        sourceName: s.sourceName,
+        sourceUrl: s.sourceUrl,
+        type: s.type,
+        eventKind: s.event?.kind ?? null,
+      })),
+    })
+  ) {
+    return null;
+  }
   const setIds = sets.map((s) => s.id);
   const recent = sets.slice(0, 8);
 
@@ -776,6 +791,8 @@ export type DjListItem = {
   identifiedPlayCount: number;
   hasHandle: boolean;
   isJunk: boolean;
+  /** Hearthis-crawl hobbyist — not operator work, not a public profile. */
+  isLowSignal: boolean;
   /** Default directory visibility (store everything; hide thin profiles). */
   isBrowseReady: boolean;
 };
@@ -814,7 +831,7 @@ async function djPlayAggregates(): Promise<
 }
 
 export async function getDjList(): Promise<DjListItem[]> {
-  const [rows, playAgg] = await Promise.all([
+  const [rows, playAgg, setLinks] = await Promise.all([
     prisma.dj.findMany({
       orderBy: { name: "asc" },
       select: {
@@ -833,7 +850,40 @@ export async function getDjList(): Promise<DjListItem[]> {
       },
     }),
     djPlayAggregates(),
+    prisma.setArtist.findMany({
+      select: {
+        djId: true,
+        set: {
+          select: {
+            sourceName: true,
+            sourceUrl: true,
+            type: true,
+            event: { select: { kind: true } },
+          },
+        },
+      },
+    }),
   ]);
+
+  const setsByDj = new Map<
+    string,
+    Array<{
+      sourceName: string | null;
+      sourceUrl: string | null;
+      type: string;
+      eventKind: string | null;
+    }>
+  >();
+  for (const row of setLinks) {
+    const list = setsByDj.get(row.djId) ?? [];
+    list.push({
+      sourceName: row.set.sourceName,
+      sourceUrl: row.set.sourceUrl,
+      type: row.set.type,
+      eventKind: row.set.event?.kind ?? null,
+    });
+    setsByDj.set(row.djId, list);
+  }
 
   return rows.map((d) => {
     const hasHandle = Boolean(
@@ -848,6 +898,14 @@ export async function getDjList(): Promise<DjListItem[]> {
       playCount: 0,
       identifiedPlayCount: 0,
     };
+    const sets = setsByDj.get(d.id) ?? [];
+    const isLowSignal =
+      !isJunk &&
+      !isCatalogWorkDj({
+        slug: d.slug,
+        isTop100: isTop100DjSlug(d.slug),
+        sets,
+      });
     const item = {
       id: d.id,
       slug: d.slug,
@@ -865,9 +923,10 @@ export async function getDjList(): Promise<DjListItem[]> {
       identifiedPlayCount: plays.identifiedPlayCount,
       hasHandle,
       isJunk,
+      isLowSignal,
       isBrowseReady: false,
     };
-    item.isBrowseReady = isBrowseReadyDj(item);
+    item.isBrowseReady = isBrowseReadyDj(item) && !isLowSignal;
     return item;
   });
 }
