@@ -45,7 +45,8 @@ Provenance per row: `1001TL parse`, `SoundCloud parse`, `fingerprint`, `communit
 1. **Sets feed** (`/`) — New this week, Festival season, Popular, Radar picks,
    then Deep catalog (this year first; Show earlier years for archives).
    Genre is the only consumer filter.
-   Spotlight rails still prefer complete tracklists; YT+SC twins collapse.
+   Spotlight rails still prefer complete, mostly identified tracklists;
+   YT+SC twins collapse. Sparse-ID strips stay in Deep catalog.
    Ranking uses performance year (`performedAt` / edition / source
    `publishedAt`), never site ingest time — this year beats last year's
    chart festivals. Incomplete / needs-IDs queues live on Stats.

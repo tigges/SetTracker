@@ -7,7 +7,7 @@ import {
   radarPickScore,
   type RadarPickFields,
 } from "@/lib/feedPriority";
-import { diversifyByEvent } from "@/lib/feedQuality";
+import { diversifyByEvent, identifiedRatio } from "@/lib/feedQuality";
 import { isBrandHostSlug } from "@/lib/brandHosts";
 import { isFestivalSeasonSet } from "@/lib/ingest/festivalDrops";
 import type { FeedItem } from "@/lib/queries";
@@ -30,15 +30,8 @@ export function withinDays(
   return nowMs - new Date(d).getTime() < days * DAY_MS;
 }
 
-function identifiedRatio(s: FeedItem): number {
-  const c = s.statusCounts;
-  const total =
-    (c.identified ?? 0) +
-    (c.unresolved_id ?? 0) +
-    (c.community_resolved ?? 0) +
-    (c.unparsed ?? 0);
-  if (total === 0) return 0;
-  return (c.identified ?? 0) / total;
+function setIdentifiedRatio(s: FeedItem): number {
+  return identifiedRatio(s.statusCounts);
 }
 
 /** Spotlight rails hide incomplete parses; Deep catalog still lists them. */
@@ -70,7 +63,7 @@ function toRadarFields(s: FeedItem): FeedItem & RadarPickFields {
   return {
     ...s,
     primaryDjSlug: s.primaryDj?.slug ?? null,
-    identifiedRatio: identifiedRatio(s),
+    identifiedRatio: setIdentifiedRatio(s),
   };
 }
 
