@@ -5,6 +5,7 @@ import {
   DEFAULT_GENRE,
   ensureGenre,
   expandGenres,
+  isGenreTagName,
   normalizeGenre,
   normalizeGenreList,
 } from "./genre";
@@ -13,6 +14,7 @@ describe("normalizeGenre", () => {
   it("canonicalizes synonyms and case", () => {
     assert.equal(normalizeGenre("techhouse"), "Tech House");
     assert.equal(normalizeGenre("TECH HOUSE"), "Tech House");
+    assert.equal(normalizeGenre("tech"), "Tech House");
     assert.equal(normalizeGenre("bass"), "Bass House");
     assert.equal(normalizeGenre("uk bass"), "Bass House");
     assert.equal(normalizeGenre("ukg"), "UK Garage");
@@ -73,6 +75,21 @@ describe("expandGenres", () => {
   it("returns empty for guestmix / live set", () => {
     assert.deepEqual(expandGenres("GUESTMIX"), []);
     assert.deepEqual(expandGenres("Live Set"), []);
+  });
+});
+
+describe("isGenreTagName", () => {
+  it("flags single genres and comma lists, not people", () => {
+    assert.equal(isGenreTagName("House"), true);
+    assert.equal(isGenreTagName("Afro House"), true);
+    assert.equal(isGenreTagName("House, Tech"), true);
+    assert.equal(isGenreTagName("House / Tech"), true);
+    assert.equal(isGenreTagName("Melodic House & Techno"), true);
+    assert.equal(isGenreTagName("Minimal"), true);
+    assert.equal(isGenreTagName("House of Yes"), false);
+    assert.equal(isGenreTagName("Fisher House"), false);
+    assert.equal(isGenreTagName("Kaskade"), false);
+    assert.equal(isGenreTagName("Soweto Punk"), false);
   });
 });
 
