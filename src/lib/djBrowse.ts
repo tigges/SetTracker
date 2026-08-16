@@ -1,7 +1,7 @@
 /**
  * Display policy for the DJs directory.
- * Ingest still stores every discovered artist; browse hides thin / dupe /
- * unresolvable profiles until we have enough signal to show them.
+ * Hearthis-category hobbyists are not stored as catalog work (see djCatalog).
+ * Browse also hides thin / dupe / unresolvable profiles.
  */
 
 export type DjBrowseSignals = {

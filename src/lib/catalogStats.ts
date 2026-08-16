@@ -411,7 +411,7 @@ export async function getCatalogStats(): Promise<CatalogStats> {
     }),
   ]);
 
-  const nonJunk = djs.filter((d) => !d.isJunk);
+  const nonJunk = djs.filter((d) => !d.isJunk && !d.isLowSignal);
   const missingHandleWithSets = nonJunk
     .filter((d) => !d.hasHandle && d.setCount > 0)
     .map(toStatsRow)

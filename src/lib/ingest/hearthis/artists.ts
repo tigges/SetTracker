@@ -1,6 +1,6 @@
 /**
  * Curated hearthis.at artist / brand accounts to deep-poll for long mixes.
- * Complements category browse (house / tech house / …).
+ * Category house-browse is off — it leaked hobbyist radio DJs.
  */
 
 import type { RawArtist } from "../types";
