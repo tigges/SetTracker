@@ -15,6 +15,8 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import type { PrismaClient } from "@prisma/client";
+import { isJunkArtistName } from "../../artistName";
+import { isBrandHostSlug } from "../../brandHosts";
 import { youtubeChannelUrl } from "../../social";
 import { normalizeOfficialWebsite } from "./wikidataOfficial";
 import {
@@ -342,28 +344,32 @@ export async function runLlmHandleResearch(
   const apply = process.env.LLM_RESEARCH_APPLY !== "0";
   const artistKeys = await loadArtistSocialKeys(prisma);
 
-  const djs = await prisma.dj.findMany({
-    where: {
-      soundcloud: null,
-      youtube: null,
-      instagram: null,
-      twitter: null,
-      website: null,
-      sets: { some: {} },
-    },
-    select: {
-      id: true,
-      slug: true,
-      name: true,
-      sets: {
-        take: 3,
-        select: { set: { select: { title: true } } },
-        orderBy: { isPrimary: "desc" },
+  const djs = (
+    await prisma.dj.findMany({
+      where: {
+        soundcloud: null,
+        youtube: null,
+        instagram: null,
+        twitter: null,
+        website: null,
+        sets: { some: {} },
       },
-    },
-    take: limit,
-    orderBy: { name: "asc" },
-  });
+      select: {
+        id: true,
+        slug: true,
+        name: true,
+        sets: {
+          take: 3,
+          select: { set: { select: { title: true } } },
+          orderBy: { isPrimary: "desc" },
+        },
+      },
+      take: limit * 4,
+      orderBy: { name: "asc" },
+    })
+  )
+    .filter((d) => !isJunkArtistName(d.name) && !isBrandHostSlug(d.slug))
+    .slice(0, limit);
 
   const rows: ResearchRow[] = [];
   for (const d of djs) {
@@ -465,19 +471,23 @@ export async function runLlmQualityCheck(
     });
   }
 
-  const handleless = await prisma.dj.findMany({
-    where: {
-      soundcloud: null,
-      youtube: null,
-      instagram: null,
-      twitter: null,
-      website: null,
-      sets: { some: {} },
-    },
-    select: { slug: true, name: true, _count: { select: { sets: true } } },
-    take: 25,
-    orderBy: { name: "asc" },
-  });
+  const handleless = (
+    await prisma.dj.findMany({
+      where: {
+        soundcloud: null,
+        youtube: null,
+        instagram: null,
+        twitter: null,
+        website: null,
+        sets: { some: {} },
+      },
+      select: { slug: true, name: true, _count: { select: { sets: true } } },
+      take: 80,
+      orderBy: { name: "asc" },
+    })
+  )
+    .filter((d) => !isJunkArtistName(d.name) && !isBrandHostSlug(d.slug))
+    .slice(0, 25);
   for (const d of handleless) {
     notes.push({
       kind: "dj",
