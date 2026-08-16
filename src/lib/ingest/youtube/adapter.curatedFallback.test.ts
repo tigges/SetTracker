@@ -34,6 +34,7 @@ const ABGT_690 = YOUTUBE_SETS.find((s) => s.video.includes("phWKhIwgiTo"));
 const VC_ARODES_YT = YOUTUBE_SETS.find((s) => s.video.includes("SeKRNa26kug"));
 const MAX_STYLER_OT = YOUTUBE_SETS.find((s) => s.video.includes("k4Drn6AwAdk"));
 const HANNAH_CF = YOUTUBE_SETS.find((s) => s.video.includes("arowbYnNFGY"));
+const PURIFIED_520 = YOUTUBE_SETS.find((s) => s.video.includes("8aDoUu4GDrc"));
 
 describe("watchMetaFromCuratedSeed", () => {
   it("builds ASOT 1290 meta from the curated 1001 capture", () => {
@@ -275,6 +276,17 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=arowbYnNFGY");
     // Last cue 1:21:44 + 180s pad.
     assert.equal(meta.durationSec, 1 * 3600 + 21 * 60 + 44 + 180);
+  });
+
+  it("builds Purified Radio 520 meta from the curated 1001 capture", () => {
+    assert.ok(PURIFIED_520);
+    const meta = watchMetaFromCuratedSeed(PURIFIED_520);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "8aDoUu4GDrc");
+    assert.match(meta.title, /Purified Radio 520/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=8aDoUu4GDrc");
+    // Last cue 57:54 + 180s pad.
+    assert.equal(meta.durationSec, 57 * 60 + 54 + 180);
   });
 
   it("returns null without a title or video id", () => {
@@ -644,5 +656,19 @@ describe("curated YouTube 429 fallback", () => {
     assert.equal(sets[0]?.primaryArtist?.slug, "hannah-laing");
     assert.match(String(sets[0]?.title ?? ""), /Creamfields/i);
     assert.match(String(sets[0]?.eventName ?? ""), /Creamfields/i);
+  });
+
+  it("lands Purified Radio 520 from the 1001 seed when watch is 429", async () => {
+    assert.ok(PURIFIED_520);
+    const adapter = createYoutubeAdapter([PURIFIED_520], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-8aDoUu4GDrc");
+    assert.equal(sets[0]!.type, "radio");
+    assert.ok(sets[0]!.plays.length >= 13);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 57 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "nora-en-pure");
+    assert.equal(sets[0]?.seriesName, "Purified Radio");
   });
 });

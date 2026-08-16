@@ -173,4 +173,16 @@ assert.equal(
   "sc-hannahlaingdj-hannah-laing-creamfields-2024-audio",
 );
 
+const purified520Sc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) => s.url === "https://soundcloud.com/noraenpure/purified-520",
+);
+assert.ok(purified520Sc);
+assert.equal(purified520Sc.primaryArtist.name, "Nora En Pure");
+assert.equal(purified520Sc.type, "radio");
+assert.equal(purified520Sc.seriesName, "Purified Radio");
+assert.equal(
+  `sc-noraenpure-${slugify("purified-520")}`,
+  "sc-noraenpure-purified-520",
+);
+
 console.log("soundcloud/tracks.test.ts ok");

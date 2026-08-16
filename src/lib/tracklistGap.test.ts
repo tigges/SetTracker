@@ -150,6 +150,34 @@ describe("tracklistGap", () => {
     assert.equal(
       isActionableTracklistGap(
         {
+          title: "Nora En Pure - Purified Radio 520",
+          type: "radio",
+          playCount: 13,
+          durationSec: 60 * 60,
+          publishedAt: "2026-08-10T00:00:00.000Z",
+          top100Rank: 80,
+        },
+        now,
+      ),
+      false,
+    );
+    assert.equal(
+      isActionableTracklistGap(
+        {
+          title: "Nora En Pure - Purified Radio 519",
+          type: "radio",
+          playCount: 3,
+          durationSec: 60 * 60,
+          publishedAt: "2026-08-03T00:00:00.000Z",
+          top100Rank: 80,
+        },
+        now,
+      ),
+      false,
+    );
+    assert.equal(
+      isActionableTracklistGap(
+        {
           title: "Smash The House Radio ep. 689",
           type: "festival",
           eventKind: "festival",

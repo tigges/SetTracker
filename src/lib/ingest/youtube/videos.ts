@@ -69,6 +69,7 @@ import {
   TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026,
   TL_MISS_MONIQUE_IBIZA_SUNSET_YACHT_2026,
   TL_NICKY_ROMERO_PROTOCOL_RADIO_731,
+  TL_NORA_EN_PURE_PURIFIED_RADIO_520_2026,
   TL_TIESTO_PRISMATIC_032_2026,
   TL_REINIER_ZONNEVELD_AWAKENINGS_2025,
   TL_HANNAH_LAING_ZENLESS_ZONE_ZERO_CREAMFIELDS_2024,
@@ -906,6 +907,18 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/zcblxf9/nicky-romero-protocol-radio-731-2026-08-13.html",
     tracklist1001: TL_NICKY_ROMERO_PROTOCOL_RADIO_731,
+  },
+  {
+    // Official Purified Radio 520; timed 1001 capture (same list as SC).
+    video: "https://www.youtube.com/watch?v=8aDoUu4GDrc",
+    primaryArtist: dj("Nora En Pure", { accent: "#48cae4" }),
+    genre: "Deep House",
+    type: "radio",
+    title: "Nora En Pure - Purified Radio 520",
+    seriesName: "Purified Radio",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/q195rv1/nora-en-pure-purified-radio-520-2026-08-10.html",
+    tracklist1001: TL_NORA_EN_PURE_PURIFIED_RADIO_520_2026,
   },
   {
     // Official Miss Monique upload; timed 1001 capture.

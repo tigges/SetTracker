@@ -101,6 +101,7 @@ import {
   TL_MAX_STYLER_OPULENT_TEMPLE_BURNING_MAN_2024,
   TL_MISS_MONIQUE_IBIZA_SUNSET_YACHT_2026,
   TL_NICKY_ROMERO_PROTOCOL_RADIO_731,
+  TL_NORA_EN_PURE_PURIFIED_RADIO_520_2026,
   TL_REINIER_ZONNEVELD_AWAKENINGS_2025,
   TL_SASHA_ECLIPSE_MIX_2026,
   TL_TIESTO_PRISMATIC_032_2026,
@@ -1623,6 +1624,8 @@ assert.equal(
   isWiredTracklistSlug("sc-hannahlaingdj-hannah-laing-creamfields-2024-audio"),
   true,
 );
+assert.equal(isWiredTracklistSlug("yt-8aDoUu4GDrc"), true);
+assert.equal(isWiredTracklistSlug("sc-noraenpure-purified-520"), true);
 assert.equal(
   isWiredTracklistSlug(
     "sc-https://soundcloud.com/sashaofficial/sasha-eclipse-mix-12-8-26",
@@ -1932,6 +1935,32 @@ for (let i = 1; i < hannahCf.length; i++) {
   assert.ok(
     (hannahCf[i]!.timestamp ?? 0) > (hannahCf[i - 1]!.timestamp ?? 0),
     `Hannah Laing Creamfields clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_NORA_EN_PURE_PURIFIED_RADIO_520_2026);
+assert.equal(TL_NORA_EN_PURE_PURIFIED_RADIO_520_2026.length, 13);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-8aDoUu4GDrc"],
+  TL_NORA_EN_PURE_PURIFIED_RADIO_520_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-noraenpure-purified-520"],
+  TL_NORA_EN_PURE_PURIFIED_RADIO_520_2026,
+);
+const purified520 = tracklist1001RowsToPlays(
+  TL_NORA_EN_PURE_PURIFIED_RADIO_520_2026,
+);
+assert.equal(purified520.length, 13);
+assert.equal(purified520[0]?.provenance, "1001tl");
+assert.equal(purified520[0]?.timestamp, 89);
+assert.equal(purified520[0]?.trackTitle, "Shadows");
+assert.equal(purified520[12]?.trackTitle, "Mirage");
+assert.equal(purified520[12]?.timestamp, 57 * 60 + 54);
+for (let i = 1; i < purified520.length; i++) {
+  assert.ok(
+    (purified520[i]!.timestamp ?? 0) > (purified520[i - 1]!.timestamp ?? 0),
+    `Purified Radio 520 clocks must increase at index ${i}`,
   );
 }
 

@@ -693,3 +693,29 @@ export const TL_HANNAH_LAING_ZENLESS_ZONE_ZERO_CREAMFIELDS_2024: FingerprintSeed
   { at: "1:18:08", artist: "Hannah Laing & Peaches", title: "Fuck The Pain Away" },
   { at: "1:21:44", artist: "Hannah Laing ft. RoRo", title: "Good Love (Reinier Zonneveld Remix)" },
 ];
+
+/**
+ * Nora En Pure - Purified Radio 520 2026-08-10
+ * https://www.1001tracklists.com/tracklist/q195rv1/nora-en-pure-purified-radio-520-2026-08-10.html
+ * Official YT: https://youtu.be/8aDoUu4GDrc
+ * Official SC: https://soundcloud.com/noraenpure/purified-520
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-8aDoUu4GDrc"]
+ *       TRACKLIST_1001_BY_SOURCE_SLUG["sc-noraenpure-purified-520"]
+ * Captured 2026-08-16 — provenance 1001tl. Official script: 13 tracks.
+ * Capture overlay used an invalid identifier (hyphens); constant renamed.
+ */
+export const TL_NORA_EN_PURE_PURIFIED_RADIO_520_2026: FingerprintSeedRow[] = [
+  { at: "1:29", artist: "Dan Sushi", title: "Shadows" },
+  { at: "5:37", artist: "Boxer", title: "Verde (Jerome Isma-Ae Remix)" },
+  { at: "9:45", artist: "Corren Cavini & EAST-97", title: "Darkness Into Day" },
+  { at: "14:23", artist: "Matt Fax", title: "Tomorrow" },
+  { at: "18:32", artist: "LE YORA & SOMMA & JEWELS & YUMA & Magnus", title: "More Than I Should Know" },
+  { at: "25:29", artist: "Heikoon", title: "Let Go" },
+  { at: "30:30", artist: "Alfa Romero", title: "Breathe In The Echo" },
+  { at: "34:54", artist: "Con's Universe", title: "Evenfall" },
+  { at: "38:15", artist: "Eli & Fur", title: "Ceremony" },
+  { at: "42:56", artist: "Sam WOLFE & JD Farrell", title: "Reservoir" },
+  { at: "48:52", artist: "NTO & Mont Rouge ft. Noah Kulaga", title: "I Cared For You (Tim Engelhardt Remix)" },
+  { at: "52:30", artist: "Einmusik ft. Shayan (UK)", title: "Do You Think Of Me (Joachim Pastor Remix)" },
+  { at: "57:54", artist: "DJ Paulus", title: "Mirage" },
+];

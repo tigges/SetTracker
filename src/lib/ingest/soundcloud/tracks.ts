@@ -204,4 +204,14 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     type: "festival",
     minDurationSec: 30 * 60,
   },
+  {
+    // Official Nora En Pure upload; 1001TL wired via
+    // sc-noraenpure-purified-520 (same list as yt-8aDoUu4GDrc).
+    url: "https://soundcloud.com/noraenpure/purified-520",
+    primaryArtist: dj("Nora En Pure", { accent: "#48cae4" }),
+    genre: "Deep House",
+    seriesName: "Purified Radio",
+    type: "radio",
+    minDurationSec: 30 * 60,
+  },
 ];
