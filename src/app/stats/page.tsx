@@ -14,6 +14,8 @@ export const metadata: Metadata = pageMeta({
   path: "/stats",
 });
 
+const PREVIEW = 8;
+
 function pct(part: number, whole: number): string {
   if (whole <= 0) return "—";
   return `${Math.round((part / whole) * 100)}%`;
@@ -29,102 +31,102 @@ function Stat({
   hint?: string;
 }) {
   return (
-    <div className="border-b border-line py-3 pr-4">
-      <div className="mono text-[11px] uppercase tracking-[0.12em] text-muted2">
+    <div className="border-b border-line py-2 pr-3">
+      <div className="mono text-[10px] uppercase tracking-[0.12em] text-muted2">
         {label}
       </div>
-      <div className="mt-1 text-2xl font-extrabold tracking-tight tabular-nums">
+      <div className="mt-0.5 text-xl font-extrabold tracking-tight tabular-nums">
         {typeof value === "number" ? value.toLocaleString() : value}
       </div>
       {hint ? (
-        <div className="mt-0.5 mono text-[11px] text-muted2">{hint}</div>
+        <div className="mono text-[10px] text-muted2">{hint}</div>
       ) : null}
     </div>
   );
 }
 
-function BarRow({
-  label,
-  count,
-  total,
-  color,
-}: {
-  label: string;
-  count: number;
-  total: number;
-  color?: string;
-}) {
-  const width = total > 0 ? Math.max(2, Math.round((count / total) * 100)) : 0;
-  return (
-    <div className="py-1.5">
-      <div className="flex items-center justify-between gap-2 text-[13px]">
-        <span className="truncate text-ink">{label}</span>
-        <span className="mono shrink-0 text-[12px] text-muted2">
-          {count.toLocaleString()} · {pct(count, total)}
-        </span>
-      </div>
-      <div className="mt-1 h-1 overflow-hidden rounded-sm bg-line">
-        <div
-          className="h-full rounded-sm"
-          style={{
-            width: `${width}%`,
-            background: color ?? "var(--brand)",
-          }}
-        />
-      </div>
-    </div>
-  );
-}
-
-function QueueSection({
+function QueueFold({
   title,
-  hint,
   count,
+  hint,
+  open = false,
   children,
 }: {
   title: string;
-  hint: string;
   count: number;
+  hint: string;
+  open?: boolean;
   children: ReactNode;
 }) {
   return (
-    <section className="mb-10">
-      <h2 className="mb-1 text-lg font-bold tracking-tight">{title}</h2>
-      <p className="mb-3 text-[13px] text-muted2">
-        {hint}
-        <span className="mono ml-2">{count.toLocaleString()}</span>
-      </p>
-      {children}
-    </section>
+    <details
+      open={open}
+      className="mb-3 rounded-lg border border-line bg-panel px-3 py-2"
+    >
+      <summary className="cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+        <div className="flex items-baseline justify-between gap-3">
+          <h2 className="text-[15px] font-bold tracking-tight">{title}</h2>
+          <span className="mono text-[12px] text-muted2">
+            {count.toLocaleString()}
+          </span>
+        </div>
+        <p className="mt-0.5 text-[12px] text-muted2">{hint}</p>
+      </summary>
+      <div className="mt-3">{children}</div>
+    </details>
   );
 }
 
 function SetQueue({
   rows,
 }: {
-  rows: Array<{
-    slug: string;
-    title: string;
-    meta: string;
-  }>;
+  rows: Array<{ slug: string; title: string; meta: string }>;
 }) {
   if (rows.length === 0) {
     return <p className="text-[13px] text-muted2">None in this queue.</p>;
   }
+  const head = rows.slice(0, PREVIEW);
+  const rest = rows.slice(PREVIEW);
   return (
-    <ul className="divide-y divide-line border-y border-line">
-      {rows.map((row) => (
-        <li key={row.slug} className="py-2.5">
-          <Link
-            href={`/sets/${row.slug}`}
-            className="font-semibold text-ink hover:underline"
-          >
-            {row.title}
-          </Link>
-          <div className="mono mt-0.5 text-[12px] text-muted2">{row.meta}</div>
-        </li>
-      ))}
-    </ul>
+    <>
+      <ul className="divide-y divide-line border-y border-line">
+        {head.map((row) => (
+          <li key={row.slug} className="py-1.5">
+            <Link
+              href={`/sets/${row.slug}`}
+              className="text-[13px] font-semibold text-ink hover:underline"
+            >
+              {row.title}
+            </Link>
+            <div className="mono truncate text-[11px] text-muted2">
+              {row.meta}
+            </div>
+          </li>
+        ))}
+      </ul>
+      {rest.length > 0 ? (
+        <details className="mt-2">
+          <summary className="cursor-pointer text-[12px] text-muted hover:text-ink">
+            {rest.length} more
+          </summary>
+          <ul className="mt-1 divide-y divide-line border-y border-line">
+            {rest.map((row) => (
+              <li key={row.slug} className="py-1.5">
+                <Link
+                  href={`/sets/${row.slug}`}
+                  className="text-[13px] font-semibold text-ink hover:underline"
+                >
+                  {row.title}
+                </Link>
+                <div className="mono truncate text-[11px] text-muted2">
+                  {row.meta}
+                </div>
+              </li>
+            ))}
+          </ul>
+        </details>
+      ) : null}
+    </>
   );
 }
 
@@ -139,27 +141,56 @@ function DjQueue({
   }>;
 }) {
   if (rows.length === 0) {
-    return <p className="text-[13px] text-muted2">None in this queue.</p>;
+    return <p className="text-[13px] text-muted2">None.</p>;
   }
+  const head = rows.slice(0, PREVIEW);
+  const rest = rows.slice(PREVIEW, 40);
   return (
-    <ul className="divide-y divide-line border-y border-line">
-      {rows.slice(0, 40).map((d) => (
-        <li
-          key={d.slug}
-          className="flex items-baseline justify-between gap-3 py-2"
-        >
-          <Link
-            href={`/djs/${d.slug}`}
-            className="truncate font-semibold text-ink hover:underline"
+    <>
+      <ul className="divide-y divide-line border-y border-line">
+        {head.map((d) => (
+          <li
+            key={d.slug}
+            className="flex items-baseline justify-between gap-2 py-1"
           >
-            {d.name}
-          </Link>
-          <span className="mono shrink-0 text-[12px] text-muted2">
-            {d.setCount} sets · {d.playCount} plays
-          </span>
-        </li>
-      ))}
-    </ul>
+            <Link
+              href={`/djs/${d.slug}`}
+              className="truncate text-[13px] font-semibold text-ink hover:underline"
+            >
+              {d.name}
+            </Link>
+            <span className="mono shrink-0 text-[11px] text-muted2">
+              {d.setCount}s · {d.playCount}p
+            </span>
+          </li>
+        ))}
+      </ul>
+      {rest.length > 0 ? (
+        <details className="mt-1">
+          <summary className="cursor-pointer text-[12px] text-muted hover:text-ink">
+            {rest.length} more
+          </summary>
+          <ul className="mt-1 divide-y divide-line border-y border-line">
+            {rest.map((d) => (
+              <li
+                key={d.slug}
+                className="flex items-baseline justify-between gap-2 py-1"
+              >
+                <Link
+                  href={`/djs/${d.slug}`}
+                  className="truncate text-[13px] font-semibold text-ink hover:underline"
+                >
+                  {d.name}
+                </Link>
+                <span className="mono shrink-0 text-[11px] text-muted2">
+                  {d.setCount}s · {d.playCount}p
+                </span>
+              </li>
+            ))}
+          </ul>
+        </details>
+      ) : null}
+    </>
   );
 }
 
@@ -171,47 +202,33 @@ export default async function StatsPage() {
   const playTotal = s.totals.plays;
   const identified =
     s.plays.byStatus.find((row) => row.key === "identified")?.count ?? 0;
+  const djQueueCount =
+    s.djs.missingHandleWithSets.length +
+    s.djs.junkNames.length +
+    s.djs.emptySetProfiles.length +
+    s.djs.noThumbWithSets.length;
 
   return (
     <div>
-      <div className="mb-8">
+      <div className="mb-5">
         <p className="eyebrow">Operator</p>
-        <h1 className="mt-1 text-3xl font-extrabold tracking-tight">
+        <h1 className="mt-1 text-2xl font-extrabold tracking-tight">
           Catalog health
         </h1>
-        <p className="mt-2 max-w-2xl text-[14px] text-muted">
-          Incomplete tracklists, missing IDs, and DJ gaps. Browse stays on Sets
-          and DJs — this page is the QA queue.
-        </p>
       </div>
 
-      <section className="mb-10">
-        <h2 className="mb-3 text-lg font-bold tracking-tight">Totals</h2>
-        <div className="grid grid-cols-2 gap-x-6 sm:grid-cols-3 lg:grid-cols-5">
+      <section className="mb-5">
+        <div className="grid grid-cols-2 gap-x-4 sm:grid-cols-4 lg:grid-cols-8">
           <Stat label="Sets" value={s.totals.sets} />
           <Stat
             label="DJs"
             value={s.djs.browseReady}
             hint={`${s.totals.djs.toLocaleString()} stored`}
           />
-          <Stat label="Tracks" value={s.totals.tracks} />
-          <Stat label="Plays" value={s.totals.plays} />
-          <Stat label="Events" value={s.totals.venues} />
-        </div>
-      </section>
-
-      <section className="mb-10">
-        <h2 className="mb-3 text-lg font-bold tracking-tight">Coverage</h2>
-        <div className="grid grid-cols-2 gap-x-6 sm:grid-cols-3 lg:grid-cols-6">
           <Stat
-            label="Identified plays"
+            label="Identified"
             value={pct(identified, playTotal)}
-            hint={`${identified.toLocaleString()} of ${playTotal.toLocaleString()}`}
-          />
-          <Stat
-            label="Sets with plays"
-            value={s.sets.withPlays}
-            hint={`${s.sets.empty} empty`}
+            hint={`${identified.toLocaleString()} plays`}
           />
           <Stat
             label="Incomplete"
@@ -221,7 +238,7 @@ export default async function StatsPage() {
           <Stat
             label="Needs IDs"
             value={s.sets.needsIds}
-            hint="sets with unresolved cues"
+            hint={`${s.sets.empty} empty`}
           />
           <Stat
             label="Playback"
@@ -229,42 +246,49 @@ export default async function StatsPage() {
             hint={pct(s.sets.withPlayback, s.totals.sets)}
           />
           <Stat
-            label="Fingerprint IDs"
+            label="Fingerprint"
             value={s.fingerprint.identified}
             hint={`${s.fingerprint.uniqueTracks} tracks`}
           />
+          <Stat label="Events" value={s.totals.venues} />
         </div>
       </section>
 
-      <section className="mb-10">
-        <h2 className="mb-1 text-lg font-bold tracking-tight">Play status</h2>
-        <p className="mb-3 text-[13px] text-muted2">
-          Identification health across all timeline rows.
-        </p>
-        <div className="mb-4">
+      <section className="mb-5">
+        <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
+          <h2 className="text-[13px] font-semibold uppercase tracking-[0.14em] text-muted">
+            Play status
+          </h2>
           <StatusLegend />
         </div>
-        <div className="max-w-xl">
-          {s.plays.byStatus.map((row) => (
-            <BarRow
-              key={row.key}
-              label={row.label}
-              count={row.count}
-              total={playTotal}
-              color={STATUS_META[row.key as IdStatus]?.color}
-            />
-          ))}
+        <div className="flex h-2 overflow-hidden rounded-full bg-line">
+          {s.plays.byStatus.map((row) => {
+            const width =
+              playTotal > 0 ? Math.round((row.count / playTotal) * 100) : 0;
+            if (!width) return null;
+            return (
+              <div
+                key={row.key}
+                title={`${row.label}: ${row.count.toLocaleString()}`}
+                style={{
+                  width: `${width}%`,
+                  background: STATUS_META[row.key as IdStatus]?.color,
+                }}
+              />
+            );
+          })}
         </div>
       </section>
 
-      <QueueSection
+      <QueueFold
         title="Incomplete tracklists"
-        hint="Empty shells and thin/severe density — capture or re-parse."
         count={s.sets.empty + s.sets.incomplete}
+        hint="Empty shells and thin/severe density — capture or re-parse."
+        open
       >
         {s.emptySets.length > 0 ? (
-          <div className="mb-6">
-            <h3 className="mb-2 text-[13px] font-semibold uppercase tracking-[0.14em] text-muted">
+          <div className="mb-4">
+            <h3 className="mb-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">
               Empty
             </h3>
             <SetQueue
@@ -276,7 +300,7 @@ export default async function StatsPage() {
             />
           </div>
         ) : null}
-        <h3 className="mb-2 text-[13px] font-semibold uppercase tracking-[0.14em] text-muted">
+        <h3 className="mb-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">
           Thin / severe
         </h3>
         <SetQueue
@@ -288,18 +312,18 @@ export default async function StatsPage() {
               row.severity,
               `${row.playCount} plays`,
               fmtDuration(row.durationSec),
-              row.reason,
             ]
               .filter(Boolean)
               .join(" · "),
           }))}
         />
-      </QueueSection>
+      </QueueFold>
 
-      <QueueSection
+      <QueueFold
         title="Needs IDs"
-        hint="Sets with unresolved cues, lowest identified share first."
         count={s.sets.needsIds}
+        hint="Lowest identified share first. Performance year, not ingest date."
+        open
       >
         <SetQueue
           rows={s.needsIdsSets.map((row) => ({
@@ -310,38 +334,37 @@ export default async function StatsPage() {
               `${Math.round(row.identifiedRatio * 100)}% ID`,
               `${row.unresolvedCount} unresolved`,
               `${row.playCount} plays`,
-              fmtDuration(row.durationSec),
             ]
               .filter(Boolean)
               .join(" · "),
           }))}
         />
         {s.topUnresolvedIds.length > 0 ? (
-          <div className="mt-6">
-            <h3 className="mb-2 text-[13px] font-semibold uppercase tracking-[0.14em] text-muted">
+          <div className="mt-4">
+            <h3 className="mb-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">
               Hottest unresolved labels
             </h3>
             <ul className="divide-y divide-line border-y border-line">
-              {s.topUnresolvedIds.map((row) => (
+              {s.topUnresolvedIds.slice(0, PREVIEW).map((row) => (
                 <li
                   key={row.id}
-                  className="flex items-baseline justify-between gap-3 py-2"
+                  className="flex items-baseline justify-between gap-3 py-1"
                 >
-                  <span className="min-w-0">
-                    <span className="text-ink">{row.label}</span>
+                  <span className="min-w-0 truncate text-[13px] text-ink">
+                    {row.label}
                     {row.setSlug ? (
                       <>
                         {" "}
                         <Link
                           href={`/sets/${row.setSlug}`}
-                          className="text-[13px] text-muted hover:underline"
+                          className="text-muted hover:underline"
                         >
                           {row.setTitle}
                         </Link>
                       </>
                     ) : null}
                   </span>
-                  <span className="mono shrink-0 text-[12px] text-muted2">
+                  <span className="mono shrink-0 text-[11px] text-muted2">
                     {row.playCount}×
                   </span>
                 </li>
@@ -349,51 +372,46 @@ export default async function StatsPage() {
             </ul>
           </div>
         ) : null}
-      </QueueSection>
+      </QueueFold>
 
-      <QueueSection
+      <QueueFold
         title="DJ queues"
-        hint="Handle, artwork, and junk rows that used to live on the DJs page."
-        count={
-          s.djs.missingHandleWithSets.length +
-          s.djs.junkNames.length +
-          s.djs.emptySetProfiles.length +
-          s.djs.noThumbWithSets.length
-        }
+        count={djQueueCount}
+        hint="Handle, artwork, empty profiles, junk."
       >
-        <div className="space-y-6">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div>
-            <h3 className="mb-2 text-[13px] font-semibold uppercase tracking-[0.14em] text-muted">
+            <h3 className="mb-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">
               No handle · has sets
             </h3>
             <DjQueue rows={s.djs.missingHandleWithSets} />
           </div>
           <div>
-            <h3 className="mb-2 text-[13px] font-semibold uppercase tracking-[0.14em] text-muted">
+            <h3 className="mb-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">
               Empty set profiles
             </h3>
             <DjQueue rows={s.djs.emptySetProfiles} />
           </div>
           <div>
-            <h3 className="mb-2 text-[13px] font-semibold uppercase tracking-[0.14em] text-muted">
+            <h3 className="mb-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">
               No artwork
             </h3>
             <DjQueue rows={s.djs.noThumbWithSets} />
           </div>
           <div>
-            <h3 className="mb-2 text-[13px] font-semibold uppercase tracking-[0.14em] text-muted">
+            <h3 className="mb-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">
               Junk names
             </h3>
             <DjQueue rows={s.djs.junkNames} />
           </div>
         </div>
-      </QueueSection>
+      </QueueFold>
 
       {board.gaps.length > 0 ? (
-        <QueueSection
+        <QueueFold
           title="Festival capture gaps"
-          hint="Curated editions still missing a dense Relive."
           count={board.gaps.length}
+          hint="Curated editions still missing a dense Relive."
         >
           <ul className="divide-y divide-line border-y border-line">
             {board.gaps.map((g) => {
@@ -404,25 +422,25 @@ export default async function StatsPage() {
               return (
                 <li
                   key={g.edition.slug}
-                  className="flex flex-col gap-1 py-2.5 sm:flex-row sm:items-baseline sm:justify-between"
+                  className="flex items-baseline justify-between gap-3 py-1.5"
                 >
                   <Link
                     href={`/events/${g.edition.eventSlug}`}
-                    className="font-semibold text-ink hover:underline"
+                    className="truncate text-[13px] font-semibold text-ink hover:underline"
                   >
                     {label}
                   </Link>
                   <Link
                     href={`/capture-1001?q=${encodeURIComponent(name ?? editionLabel(g.edition))}`}
-                    className="mono text-[12px] text-brand hover:underline"
+                    className="mono shrink-0 text-[11px] text-brand hover:underline"
                   >
-                    capture 1001
+                    capture
                   </Link>
                 </li>
               );
             })}
           </ul>
-        </QueueSection>
+        </QueueFold>
       ) : null}
     </div>
   );
