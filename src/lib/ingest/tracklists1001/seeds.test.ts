@@ -1596,6 +1596,8 @@ assert.equal(isWiredTracklistSlug("yt-Rgx-wT9FDaE"), true);
 assert.equal(isWiredTracklistSlug("yt-0-s_qZRWElA"), true);
 assert.equal(isWiredTracklistSlug("yt-blP5J6BUG0M"), true);
 assert.equal(isWiredTracklistSlug("yt-yTRvLrtsM9I"), true);
+assert.equal(isWiredTracklistSlug("yt-TsyGMhx8izw"), true);
+assert.equal(isWiredTracklistSlug("yt-B05MAbsCOLA"), true);
 assert.equal(
   isWiredTracklistSlug("sc-sashaofficial-sasha-eclipse-mix-12-8-26"),
   true,

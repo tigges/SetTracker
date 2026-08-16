@@ -603,6 +603,22 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_NICKY_ROMERO_TML_WE2_2026,
   },
   {
+    // Artist-channel Relive of the same Mainstage WE2 set (1001.tl/wkty6z9).
+    video: "https://www.youtube.com/watch?v=B05MAbsCOLA",
+    primaryArtist: dj("Nicky Romero", {
+      accent: "#00bbf9",
+      homeCity: "Amerongen, NL",
+    }),
+    genre: "Progressive House",
+    type: "festival",
+    title: "Nicky Romero LIVE at Tomorrowland 2026 - Mainstage",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/wkty6z9/nicky-romero-mainstage-tomorrowland-weekend-2-belgium-2026-07-24.html",
+    tracklist1001: TL_NICKY_ROMERO_TML_WE2_2026,
+  },
+  {
     // Tomorrowland official — Freedom Stage WE2; 21/35 timed cues from 1001.
     video: "https://www.youtube.com/watch?v=dmhUJYEdkKo",
     primaryArtist: dj("James Hype", {

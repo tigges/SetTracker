@@ -27,6 +27,9 @@ const PRR_731 = YOUTUBE_SETS.find((s) => s.video.includes("Rgx-wT9FDaE"));
 const MM_YACHT = YOUTUBE_SETS.find((s) => s.video.includes("0-s_qZRWElA"));
 const PRISMATIC_032 = YOUTUBE_SETS.find((s) => s.video.includes("blP5J6BUG0M"));
 const SPECTRUM_485 = YOUTUBE_SETS.find((s) => s.video.includes("yTRvLrtsM9I"));
+const NICKY_TML_ARTIST = YOUTUBE_SETS.find((s) =>
+  s.video.includes("B05MAbsCOLA"),
+);
 
 describe("watchMetaFromCuratedSeed", () => {
   it("builds ASOT 1290 meta from the curated 1001 capture", () => {
@@ -213,6 +216,17 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=yTRvLrtsM9I");
     // Last cue 59:10 + 180s pad.
     assert.equal(meta.durationSec, 59 * 60 + 10 + 180);
+  });
+
+  it("builds Nicky Romero TML artist Relive meta from the curated 1001 capture", () => {
+    assert.ok(NICKY_TML_ARTIST);
+    const meta = watchMetaFromCuratedSeed(NICKY_TML_ARTIST);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "B05MAbsCOLA");
+    assert.match(meta.title, /LIVE at Tomorrowland 2026/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=B05MAbsCOLA");
+    // Last cue 59:30 + 180s pad.
+    assert.equal(meta.durationSec, 59 * 60 + 30 + 180);
   });
 
   it("returns null without a title or video id", () => {
@@ -509,5 +523,19 @@ describe("curated YouTube 429 fallback", () => {
     assert.ok(sets[0]!.durationSec >= 59 * 60);
     assert.equal(sets[0]?.primaryArtist?.slug, "joris-voorn");
     assert.equal(sets[0]?.seriesName, "Spectrum Radio");
+  });
+
+  it("lands Nicky Romero TML artist Relive from the 1001 seed when watch is 429", async () => {
+    assert.ok(NICKY_TML_ARTIST);
+    const adapter = createYoutubeAdapter([NICKY_TML_ARTIST], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-B05MAbsCOLA");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 76);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 59 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "nicky-romero");
+    assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
   });
 });

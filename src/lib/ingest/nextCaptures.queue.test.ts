@@ -298,5 +298,17 @@ assert.equal(
   ),
   "mapped",
 );
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "yt-B05MAbsCOLA",
+      title: "Nicky Romero LIVE at Tomorrowland 2026 - Mainstage",
+      type: "festival",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
 
 console.log("nextCaptures.queue.test.ts ok");
