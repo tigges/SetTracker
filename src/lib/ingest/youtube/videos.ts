@@ -65,6 +65,7 @@ import {
   TL_ALOK_TML_WE2_2026,
   TL_HARDWELL_HOA_527_YEARMIX_2025,
   TL_JOEL_CORRY_EDGE_NYC_2026,
+  TL_NICKY_ROMERO_PROTOCOL_RADIO_731,
   TL_REINIER_ZONNEVELD_AWAKENINGS_2025,
   TL_VINTAGE_CULTURE_EDC_LV_NEON_2025,
   TL_VINTAGE_CULTURE_NYC_YACHT_2023,
@@ -868,6 +869,20 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/1w5whv39/hardwell-hardwell-on-air-527-yearmix-2025-2026-01-02.html",
     tracklist1001: TL_HARDWELL_HOA_527_YEARMIX_2025,
+  },
+  {
+    // Official Protocol Radio 731; timed 1001 capture.
+    video: "https://www.youtube.com/watch?v=Rgx-wT9FDaE",
+    primaryArtist: dj("Nicky Romero", {
+      accent: "#ffbe0b",
+    }),
+    genre: "Progressive House",
+    type: "radio",
+    title: "Protocol Radio 731 by Nicky Romero (PRR731)",
+    seriesName: "Protocol Radio",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/zcblxf9/nicky-romero-protocol-radio-731-2026-08-13.html",
+    tracklist1001: TL_NICKY_ROMERO_PROTOCOL_RADIO_731,
   },
   {
     // Tomorrowland official Relive — Mainstage WE2.

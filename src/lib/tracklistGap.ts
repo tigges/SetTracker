@@ -37,7 +37,7 @@ export type TracklistGapFields = {
 };
 
 const WEEKLY_RADIO =
-  /\b(radio\s*(show|ep\.?|#)?|on air|captive soul|selects|clapcast|desire radio|resonation|dharma|spannung|group therapy|a state of trance|\basot\b|gdwb|gdjb|hot robot|steve radio|smash the house radio|night owl radio|core radio|night service)\b/i;
+  /\b(radio\s*(show|ep\.?|#)?|on air|captive soul|selects|clapcast|desire radio|resonation|dharma|spannung|group therapy|a state of trance|\basot\b|gdwb|gdjb|hot robot|steve radio|smash the house radio|night owl radio|core radio|night service|protocol radio)\b/i;
 
 const LIVESTREAM_HUB =
   /\b(livestream|live\s*stream|one world radio)\b/i;

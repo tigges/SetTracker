@@ -433,3 +433,29 @@ export const TL_JOEL_CORRY_EDGE_NYC_2026: FingerprintSeedRow[] = [
   { at: "2:25:50", artist: "Nathan Dawe & Joel Corry & Ella Henderson", title: "0800 HEAVEN" },
   { at: "2:28:40", artist: "Joel Corry X MNEK", title: "Head & Heart" },
 ];
+
+/**
+ * Nicky Romero - Protocol Radio 731 2026-08-13
+ * https://www.1001tracklists.com/tracklist/zcblxf9/nicky-romero-protocol-radio-731-2026-08-13.html
+ * Official YT: https://www.youtube.com/watch?v=Rgx-wT9FDaE
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-Rgx-wT9FDaE"]
+ * Captured 2026-08-16 — provenance 1001tl. Official script: 16 tracks, 16 cues.
+ */
+export const TL_NICKY_ROMERO_PROTOCOL_RADIO_731: FingerprintSeedRow[] = [
+  { at: "0:53", artist: "Albert Harvey pres. SETO", title: "Play Me" },
+  { at: "3:30", artist: "FEZZO & Kosmo Kint", title: "Follow The Road" },
+  { at: "7:10", artist: "Robin Schulz & Watermät", title: "Take It Slow (Bullit)" },
+  { at: "10:50", artist: "Henri Bergmann & Y do I & Wennink", title: "Dark Darker" },
+  { at: "14:00", artist: "Nicky Romero ft. FORS", title: "Follow You" },
+  { at: "18:15", artist: "Rafael Cerato", title: "Cash" },
+  { at: "22:15", artist: "Swedish House Mafia & Lykke Li", title: "Happiness Is So Sad" },
+  { at: "26:25", artist: "Alesso", title: "Get Your Groove On" },
+  { at: "29:40", artist: "Justus", title: "My League" },
+  { at: "33:00", artist: "Noizu & Amira Eldine", title: "Feeling It Too" },
+  { at: "36:00", artist: "MEDUZA & Kevin de Vries", title: "7 Days" },
+  { at: "40:30", artist: "AFROJACK", title: "Monopoly Man" },
+  { at: "44:37", artist: "Hardwell & Dyro ft. Bright Lights", title: "Never Say Goodbye" },
+  { at: "48:02", artist: "GROUPLOVE & Snakehips", title: "Tongue Tied 2026" },
+  { at: "51:00", artist: "Marten Hørger & James Carter", title: "Paradise" },
+  { at: "53:53", artist: "Jaxstyle & Jon", title: "What Are We Gonna Do" },
+];

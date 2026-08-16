@@ -95,6 +95,7 @@ import {
   TL_JAMIE_JONES_HOT_ROBOT_RADIO_225,
   TL_JAMIE_JONES_HOT_ROBOT_RADIO_239,
   TL_JOEL_CORRY_EDGE_NYC_2026,
+  TL_NICKY_ROMERO_PROTOCOL_RADIO_731,
   TL_REINIER_ZONNEVELD_AWAKENINGS_2025,
   TL_VINTAGE_CULTURE_ARODES_BURNING_MAN_2024,
   TL_VINTAGE_CULTURE_EDC_LV_NEON_2025,
@@ -1587,6 +1588,7 @@ assert.equal(
   true,
 );
 assert.equal(isWiredTracklistSlug("yt-soEFl73peVA"), true);
+assert.equal(isWiredTracklistSlug("yt-Rgx-wT9FDaE"), true);
 
 assertSeedClocks(TL_JAMIE_JONES_HOT_ROBOT_RADIO_225);
 assert.equal(TL_JAMIE_JONES_HOT_ROBOT_RADIO_225.length, 7);
@@ -1669,6 +1671,26 @@ for (let i = 1; i < joelEdge.length; i++) {
   assert.ok(
     (joelEdge[i]!.timestamp ?? 0) > (joelEdge[i - 1]!.timestamp ?? 0),
     `Joel Corry Edge NYC clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_NICKY_ROMERO_PROTOCOL_RADIO_731);
+assert.equal(TL_NICKY_ROMERO_PROTOCOL_RADIO_731.length, 16);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-Rgx-wT9FDaE"],
+  TL_NICKY_ROMERO_PROTOCOL_RADIO_731,
+);
+const prr731 = tracklist1001RowsToPlays(TL_NICKY_ROMERO_PROTOCOL_RADIO_731);
+assert.equal(prr731.length, 16);
+assert.equal(prr731[0]?.provenance, "1001tl");
+assert.equal(prr731[0]?.timestamp, 53);
+assert.equal(prr731[0]?.trackTitle, "Play Me");
+assert.equal(prr731[15]?.trackTitle, "What Are We Gonna Do");
+assert.equal(prr731[15]?.timestamp, 53 * 60 + 53);
+for (let i = 1; i < prr731.length; i++) {
+  assert.ok(
+    (prr731[i]!.timestamp ?? 0) > (prr731[i - 1]!.timestamp ?? 0),
+    `Protocol Radio 731 clocks must increase at index ${i}`,
   );
 }
 
