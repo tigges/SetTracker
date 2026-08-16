@@ -1015,9 +1015,16 @@ for (const p of pushTml) {
 assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-KVZlecHlVkg"]!.length >= 16);
 
 assertSeedClocks(TL_BASSJACKERS_TML_WE2_2026);
+assert.equal(TL_BASSJACKERS_TML_WE2_2026.length, 36);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-BG3Lr9EdWVY"],
+  TL_BASSJACKERS_TML_WE2_2026,
+);
 const bassjackers = tracklist1001RowsToPlays(TL_BASSJACKERS_TML_WE2_2026);
 assert.equal(bassjackers.length, 36);
+assert.equal(bassjackers[0]!.provenance, "1001tl");
 assert.equal(bassjackers[0]!.trackTitle, "Rave Baby");
+assert.equal(bassjackers[0]!.timestamp, 11);
 assert.equal(bassjackers[bassjackers.length - 1]!.trackTitle, "Forever");
 assert.equal(bassjackers[bassjackers.length - 1]!.timestamp, 59 * 60 + 30);
 let bjPrev = -1;
@@ -1028,7 +1035,6 @@ for (const p of bassjackers) {
   );
   bjPrev = p.timestamp;
 }
-assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-BG3Lr9EdWVY"]!.length >= 36);
 
 assertSeedClocks(TL_BHASKAR_TML_WE2_2026);
 const bhaskar = tracklist1001RowsToPlays(TL_BHASKAR_TML_WE2_2026);

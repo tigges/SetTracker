@@ -1256,7 +1256,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_PUSH_TML_WE2_2026,
   },
   {
-    // Tomorrowland official — Great Library WE2; 26/36 timed (rest lerped).
+    // Tomorrowland official — Great Library WE2.
     video: "https://www.youtube.com/watch?v=BG3Lr9EdWVY",
     primaryArtist: dj("Bassjackers", {
       accent: "#e63946",
@@ -1264,7 +1264,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     }),
     genre: "Big Room",
     type: "festival",
-    title: "Bassjackers WE2 | Tomorrowland 2026",
+    title: "Bassjackers @ The Great Library Stage, Tomorrowland WE2 2026",
     seriesName: "Tomorrowland",
     eventName: "Tomorrowland Belgium",
     tracklist1001Url:

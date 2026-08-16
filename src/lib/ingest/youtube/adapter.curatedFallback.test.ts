@@ -44,6 +44,9 @@ const HELDENS_DAYBREAK = YOUTUBE_SETS.find((s) =>
 const CH_DANCE_VALLEY = YOUTUBE_SETS.find((s) =>
   s.video.includes("pnzSuCiAGdk"),
 );
+const BASSJACKERS_TML = YOUTUBE_SETS.find((s) =>
+  s.video.includes("BG3Lr9EdWVY"),
+);
 
 describe("watchMetaFromCuratedSeed", () => {
   it("builds ASOT 1290 meta from the curated 1001 capture", () => {
@@ -153,6 +156,17 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=pnzSuCiAGdk");
     // Last cue 1:12:29 + 180s pad.
     assert.equal(meta.durationSec, 1 * 3600 + 12 * 60 + 29 + 180);
+  });
+
+  it("builds Bassjackers Great Library TML WE2 meta from the curated 1001 capture", () => {
+    assert.ok(BASSJACKERS_TML);
+    const meta = watchMetaFromCuratedSeed(BASSJACKERS_TML);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "BG3Lr9EdWVY");
+    assert.match(meta.title, /Great Library|Tomorrowland/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=BG3Lr9EdWVY");
+    // Last cue 59:30 + 180s pad.
+    assert.equal(meta.durationSec, 59 * 60 + 30 + 180);
   });
 
   it("builds Vintage Culture NYC Yacht meta from the curated 1001 capture", () => {
@@ -794,5 +808,19 @@ describe("curated YouTube 429 fallback", () => {
     assert.ok(sets[0]!.durationSec >= 1 * 3600 + 12 * 60);
     assert.equal(sets[0]?.primaryArtist?.slug, "calvin-harris");
     assert.match(String(sets[0]?.eventName ?? ""), /Dance Valley/i);
+  });
+
+  it("lands Bassjackers Great Library TML WE2 from the 1001 seed when watch is 429", async () => {
+    assert.ok(BASSJACKERS_TML);
+    const adapter = createYoutubeAdapter([BASSJACKERS_TML], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-BG3Lr9EdWVY");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 36);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 59 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "bassjackers");
+    assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
   });
 });

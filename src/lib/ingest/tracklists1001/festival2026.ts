@@ -2932,9 +2932,12 @@ export const TL_PUSH_TML_WE2_2026: FingerprintSeedRow[] = [
 
 /**
  * Bassjackers @ The Great Library Stage, Tomorrowland Weekend 2, Belgium 2026-07-26
- * Official YT: https://www.youtube.com/watch?v=BG3Lr9EdWVY
- * 1001TL: https://1001.tl/1muwkg71 — operator console capture 2026-08-01
- * (26/36 timed cues; missing clocks already lerped in capture).
+ * Official YT: https://youtu.be/BG3Lr9EdWVY
+ * 1001TL: https://www.1001tracklists.com/tracklist/1muwkg71/bassjackers-the-great-library-stage-tomorrowland-weekend-2-belgium-2026-07-26.html
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-BG3Lr9EdWVY"] = TL_BASSJACKERS_TML_WE2_2026
+ * Capture overlay used TL_Bassjackers_Great-Library-Stage_Tomorrowland_WE2_Belgium_2026
+ * (hyphens illegal). 2026-08-16 official recapture matches the 36 cues already
+ * wired (2026-08-01 console capture; 26/36 timed, rest lerped — clocks agree).
  */
 export const TL_BASSJACKERS_TML_WE2_2026: FingerprintSeedRow[] = [
   { at: "0:11", artist: "Bassjackers & WUKONG & Evil Twiin", title: "Rave Baby" },
