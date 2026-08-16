@@ -17,6 +17,7 @@ import { applyCuratedDjImages } from "../thumbs/djImages";
 import { applyCuratedEventImages } from "../thumbs/eventImages";
 import { mergeSplitAtomicActs } from "./mergeAtomicActs";
 import { resolveJunkDjs } from "./junkDj";
+import { resolveLowSignalDjs } from "./lowSignalDj";
 import { mergeSetTitleDjs } from "./mergeSetTitleDjs";
 import { repairInsomniacMixPlayback } from "./insomniac/repairMixPlayback";
 import { applyDjSocialPins } from "./djSocialPins";
@@ -171,6 +172,14 @@ export async function applyKnownUrlFixes(prisma: PrismaClient): Promise<number> 
   if (junk.scanned) {
     console.log(
       `[verify-urls] junk DJs scanned=${junk.scanned} deletedSets=${junk.setsDeleted} moved=${junk.setsMoved} removed=${junk.djsRemoved} events=${junk.eventsEnsured}`,
+    );
+  }
+
+  const low = await resolveLowSignalDjs(prisma);
+  n += low.setsDeleted + low.djsRemoved;
+  if (low.scanned) {
+    console.log(
+      `[verify-urls] low-signal DJs scanned=${low.scanned} deletedSets=${low.setsDeleted} removed=${low.djsRemoved}`,
     );
   }
 

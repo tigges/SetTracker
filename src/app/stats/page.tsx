@@ -10,7 +10,7 @@ import { StatusLegend } from "@/components/StatusBits";
 
 export const metadata: Metadata = pageMeta({
   title: "Stats",
-  description: "Catalog health queues — incomplete sets, missing IDs, DJ gaps.",
+  description: "Catalog health queues — capture gaps, missing IDs, DJ gaps.",
   path: "/stats",
 });
 
@@ -74,6 +74,64 @@ function QueueFold({
       </summary>
       <div className="mt-3">{children}</div>
     </details>
+  );
+}
+
+function GapQueue({
+  rows,
+}: {
+  rows: Array<{
+    slug: string;
+    title: string;
+    meta: string;
+    hasSetPage: boolean;
+    captureQuery: string;
+    sourceUrl: string | null;
+  }>;
+}) {
+  if (rows.length === 0) {
+    return <p className="text-[13px] text-muted2">None in this queue.</p>;
+  }
+  return (
+    <ul className="divide-y divide-line border-y border-line">
+      {rows.map((row) => (
+        <li key={row.slug} className="py-1.5">
+          {row.hasSetPage ? (
+            <Link
+              href={`/sets/${row.slug}`}
+              className="text-[13px] font-semibold text-ink hover:underline"
+            >
+              {row.title}
+            </Link>
+          ) : (
+            <span className="text-[13px] font-semibold text-ink">
+              {row.title}
+            </span>
+          )}
+          <div className="mono truncate text-[11px] text-muted2">{row.meta}</div>
+          <div className="mt-0.5 flex flex-wrap gap-x-3 text-[11px]">
+            <Link
+              href={`/capture-1001?q=${encodeURIComponent(row.captureQuery)}`}
+              className="text-brand hover:underline"
+            >
+              capture 1001
+            </Link>
+            {row.sourceUrl ? (
+              <a
+                href={row.sourceUrl}
+                className="text-muted hover:underline"
+                rel="noreferrer"
+              >
+                source
+              </a>
+            ) : null}
+            {row.hasSetPage ? null : (
+              <span className="text-muted2">no set page (empty timeline)</span>
+            )}
+          </div>
+        </li>
+      ))}
+    </ul>
   );
 }
 
@@ -281,40 +339,21 @@ export default async function StatsPage() {
       </section>
 
       <QueueFold
-        title="Incomplete tracklists"
-        count={s.sets.empty + s.sets.incomplete}
-        hint="Empty shells and thin/severe density — capture or re-parse."
+        title="Tracklist capture"
+        count={s.tracklistGaps.length}
+        hint={`${s.sets.incomplete.toLocaleString()} thin/severe stored — only this-year chart or festival Relives are a capture job. Find a 1001 page already on the source (do not invent URLs). Weekly radio stubs are not this queue. Empty shells have no set page.`}
         open
       >
-        {s.emptySets.length > 0 ? (
-          <div className="mb-4">
-            <h3 className="mb-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">
-              Empty
-            </h3>
-            <SetQueue
-              rows={s.emptySets.map((row) => ({
-                slug: row.slug,
-                title: row.title,
-                meta: [row.sourceName, row.type].filter(Boolean).join(" · "),
-              }))}
-            />
-          </div>
-        ) : null}
-        <h3 className="mb-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">
-          Thin / severe
-        </h3>
-        <SetQueue
-          rows={s.density.worst.map((row) => ({
+        <GapQueue
+          rows={s.tracklistGaps.map((row) => ({
             slug: row.slug,
             title: row.title,
-            meta: [
-              row.primaryDj,
-              row.severity,
-              `${row.playCount} plays`,
-              fmtDuration(row.durationSec),
-            ]
+            meta: [row.primaryDj, row.reason, fmtDuration(row.durationSec)]
               .filter(Boolean)
               .join(" · "),
+            hasSetPage: row.hasSetPage,
+            captureQuery: row.captureQuery,
+            sourceUrl: row.sourceUrl,
           }))}
         />
       </QueueFold>
@@ -377,7 +416,7 @@ export default async function StatsPage() {
       <QueueFold
         title="DJ queues"
         count={djQueueCount}
-        hint="Handle, artwork, empty profiles, junk."
+        hint="Catalog DJs only — hearthis hobbyist leaks are dropped."
       >
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div>

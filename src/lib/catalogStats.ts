@@ -12,6 +12,14 @@ import {
   type DensitySeverity,
 } from "@/lib/setDensity";
 import { compareNeedsIds, identifiedRatio } from "@/lib/feedQuality";
+import { resolveFeedRanks } from "@/lib/feedPriorityResolve";
+import {
+  compareTracklistGaps,
+  isActionableTracklistGap,
+  setPageIsPublished,
+  tracklistGapReason,
+  type TracklistGapFields,
+} from "@/lib/tracklistGap";
 import {
   PROVENANCE_META,
   STATUS_META,
@@ -76,6 +84,19 @@ export type StatsSparseSet = {
   durationSec: number;
   playCount: number;
   playbackHost: string | null;
+};
+
+export type StatsTracklistGap = {
+  id: string;
+  slug: string;
+  title: string;
+  primaryDj: string | null;
+  playCount: number;
+  durationSec: number;
+  reason: string;
+  sourceUrl: string | null;
+  hasSetPage: boolean;
+  captureQuery: string;
 };
 
 export type StatsNeedsIdSet = {
@@ -163,6 +184,11 @@ export type CatalogStats = {
     sourceName: string | null;
     type: string;
   }>;
+  /**
+   * Operator capture queue — this-year chart/festival Relives with a
+   * duration-vs-cues gap. Not every thin radio stub.
+   */
+  tracklistGaps: StatsTracklistGap[];
   /** Duration vs play-count gaps (incomplete tracklists). */
   density: {
     scanned: number;
@@ -223,6 +249,50 @@ function namedFromGroup(
       count: r.count,
     }))
     .sort((a, b) => b.count - a.count || a.label.localeCompare(b.label));
+}
+
+function toTracklistGapFields(
+  s: {
+    title: string;
+    type: string;
+    durationSec: number;
+    publishedAt: Date;
+    performedAt: Date | null;
+    sourceName: string | null;
+    sourceUrl: string | null;
+    event: { slug: string; kind: string | null } | null;
+    edition: { year: number; endsAt: Date | null } | null;
+    artists: Array<{ dj: { name: string; slug: string } }>;
+  },
+  playCount: number,
+): TracklistGapFields {
+  const primary = s.artists[0]?.dj;
+  const ranks = resolveFeedRanks({
+    primaryDjSlug: primary?.slug,
+    eventSlug: s.event?.slug,
+    eventKind: s.event?.kind,
+    setType: s.type,
+    durationSec: s.durationSec,
+    trackCount: playCount,
+  });
+  return {
+    title: s.title,
+    playCount,
+    durationSec: s.durationSec,
+    type: s.type,
+    eventKind: s.event?.kind,
+    eventSlug: s.event?.slug,
+    sourceName: s.sourceName,
+    sourceUrl: s.sourceUrl,
+    primaryDjSlug: primary?.slug,
+    top100Rank: ranks.top100Rank,
+    festivalRank: ranks.festivalRank,
+    clubRank: ranks.clubRank,
+    publishedAt: s.publishedAt,
+    performedAt: s.performedAt,
+    editionYear: s.edition?.year,
+    editionEndsAt: s.edition?.endsAt,
+  };
 }
 
 function playbackHost(url: string | null | undefined): string | null {
@@ -297,13 +367,24 @@ export async function getCatalogStats(): Promise<CatalogStats> {
     prisma.set.findMany({
       where: { plays: { none: {} } },
       orderBy: { publishedAt: "desc" },
-      take: 60,
+      take: 80,
       select: {
         id: true,
         slug: true,
         title: true,
         sourceName: true,
+        sourceUrl: true,
         type: true,
+        durationSec: true,
+        publishedAt: true,
+        performedAt: true,
+        event: { select: { slug: true, kind: true } },
+        edition: { select: { year: true, endsAt: true } },
+        artists: {
+          where: { isPrimary: true },
+          take: 1,
+          select: { dj: { select: { name: true, slug: true } } },
+        },
       },
     }),
     prisma.set.findMany({
@@ -313,12 +394,18 @@ export async function getCatalogStats(): Promise<CatalogStats> {
         slug: true,
         title: true,
         sourceName: true,
+        sourceUrl: true,
+        type: true,
         durationSec: true,
+        publishedAt: true,
+        performedAt: true,
         _count: { select: { plays: true } },
+        event: { select: { slug: true, kind: true } },
+        edition: { select: { year: true, endsAt: true } },
         artists: {
           where: { isPrimary: true },
           take: 1,
-          select: { dj: { select: { name: true } } },
+          select: { dj: { select: { name: true, slug: true } } },
         },
       },
     }),
@@ -411,7 +498,7 @@ export async function getCatalogStats(): Promise<CatalogStats> {
     }),
   ]);
 
-  const nonJunk = djs.filter((d) => !d.isJunk);
+  const nonJunk = djs.filter((d) => !d.isJunk && !d.isLowSignal);
   const missingHandleWithSets = nonJunk
     .filter((d) => !d.hasHandle && d.setCount > 0)
     .map(toStatsRow)
@@ -632,6 +719,60 @@ export async function getCatalogStats(): Promise<CatalogStats> {
     };
   })();
 
+  const gapSeen = new Set<string>();
+  const gapCandidates: Array<{
+    id: string;
+    slug: string;
+    title: string;
+    primaryDj: string | null;
+    sourceUrl: string | null;
+    fields: TracklistGapFields;
+  }> = [];
+  const pushGap = (
+    s: {
+      id: string;
+      slug: string;
+      title: string;
+      sourceUrl: string | null;
+      artists: Array<{ dj: { name: string; slug: string } }>;
+    } & Parameters<typeof toTracklistGapFields>[0],
+    playCount: number,
+  ) => {
+    if (gapSeen.has(s.id)) return;
+    const fields = toTracklistGapFields(s, playCount);
+    if (!isActionableTracklistGap(fields, nowMs)) return;
+    gapSeen.add(s.id);
+    gapCandidates.push({
+      id: s.id,
+      slug: s.slug,
+      title: s.title,
+      primaryDj: s.artists[0]?.dj.name ?? null,
+      sourceUrl: s.sourceUrl,
+      fields,
+    });
+  };
+  for (const s of emptySetRows) pushGap(s, 0);
+  for (const s of densitySetRows) pushGap(s, s._count.plays);
+
+  const tracklistGaps: StatsTracklistGap[] = gapCandidates
+    .sort((a, b) => compareTracklistGaps(a.fields, b.fields, nowMs))
+    .slice(0, 24)
+    .map((row) => ({
+      id: row.id,
+      slug: row.slug,
+      title: row.title,
+      primaryDj: row.primaryDj,
+      playCount: row.fields.playCount,
+      durationSec: row.fields.durationSec,
+      reason: tracklistGapReason(row.fields),
+      sourceUrl: row.sourceUrl,
+      hasSetPage: setPageIsPublished(row.fields),
+      captureQuery: [row.primaryDj, row.title]
+        .filter(Boolean)
+        .join(" ")
+        .slice(0, 80),
+    }));
+
   const needsIdsCount = unresolvedSetGroups.length;
   const topNeedIds = unresolvedSetGroups
     .slice()
@@ -786,7 +927,14 @@ export async function getCatalogStats(): Promise<CatalogStats> {
       noThumbWithSets,
       junkNames,
     },
-    emptySets: emptySetRows,
+    emptySets: emptySetRows.map((s) => ({
+      id: s.id,
+      slug: s.slug,
+      title: s.title,
+      sourceName: s.sourceName,
+      type: s.type,
+    })),
+    tracklistGaps,
     density,
     sparseSets,
     topUnresolvedIds,
