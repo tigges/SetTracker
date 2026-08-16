@@ -85,6 +85,7 @@ import {
   TL_VINTAGE_CULTURE_SO_TRACK_BOA_2026,
   TL_CALVIN_HARRIS_MAINSTAGE_DANCE_VALLEY_NETHERLANDS_2026,
   TL_TUJAMO_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
+  TL_DILLON_FRANCIS_AND_MARTEN_HORGER_MAINSTAGE_PAROOKAVILLE_GERMANY_2025,
   TL_MISS_MONIQUE_TML_WE2_2026,
   TL_NICKY_ROMERO_TML_WE2_2026,
   TL_ODD_MOB_TML_WE2_2026,
@@ -1493,6 +1494,23 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/2r7bnnpk/tujamo-mainstage-parookaville-germany-2026-07-19.html",
     tracklist1001: TL_TUJAMO_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
+  },
+  {
+    // Official Parookaville channel — B2B; title drives collaborator parse.
+    video: "https://www.youtube.com/watch?v=IwNPc_4ux84",
+    primaryArtist: dj("Dillon Francis", {
+      accent: "#ff4d6d",
+      homeCity: "Los Angeles, CA",
+    }),
+    genre: "Bass House",
+    type: "festival",
+    title: "Dillon Francis B2B Marten Horger - Parookaville 2025 Mainstage",
+    seriesName: "Parookaville",
+    eventName: "Parookaville",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2gsy0kp1/dillon-francis-marten-horger-mainstage-parookaville-germany-2025-07-20.html",
+    tracklist1001:
+      TL_DILLON_FRANCIS_AND_MARTEN_HORGER_MAINSTAGE_PAROOKAVILLE_GERMANY_2025,
   },
   {
     video: "https://www.youtube.com/watch?v=6bJZPDKlq7o",

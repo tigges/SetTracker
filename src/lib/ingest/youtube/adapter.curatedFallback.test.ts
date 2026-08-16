@@ -50,6 +50,9 @@ const BASSJACKERS_TML = YOUTUBE_SETS.find((s) =>
 const TUJAMO_PAROOKAVILLE = YOUTUBE_SETS.find((s) =>
   s.video.includes("JhpL-KKGoO8"),
 );
+const DF_MH_PAROOKAVILLE = YOUTUBE_SETS.find((s) =>
+  s.video.includes("IwNPc_4ux84"),
+);
 
 describe("watchMetaFromCuratedSeed", () => {
   it("builds ASOT 1290 meta from the curated 1001 capture", () => {
@@ -181,6 +184,17 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=JhpL-KKGoO8");
     // Last cue 1:11:41 + 180s pad.
     assert.equal(meta.durationSec, 1 * 3600 + 11 * 60 + 41 + 180);
+  });
+
+  it("builds Dillon Francis B2B Marten Horger Parookaville 2025 meta", () => {
+    assert.ok(DF_MH_PAROOKAVILLE);
+    const meta = watchMetaFromCuratedSeed(DF_MH_PAROOKAVILLE);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "IwNPc_4ux84");
+    assert.match(meta.title, /Parookaville 2025/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=IwNPc_4ux84");
+    // Last cue 59:30 + 180s pad.
+    assert.equal(meta.durationSec, 59 * 60 + 30 + 180);
   });
 
   it("builds Vintage Culture NYC Yacht meta from the curated 1001 capture", () => {
@@ -849,6 +863,23 @@ describe("curated YouTube 429 fallback", () => {
     assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
     assert.ok(sets[0]!.durationSec >= 1 * 3600 + 11 * 60);
     assert.equal(sets[0]?.primaryArtist?.slug, "tujamo");
+    assert.match(String(sets[0]?.eventName ?? ""), /Parookaville/i);
+  });
+
+  it("lands Dillon Francis B2B Marten Horger Parookaville 2025 when watch is 429", async () => {
+    assert.ok(DF_MH_PAROOKAVILLE);
+    const adapter = createYoutubeAdapter([DF_MH_PAROOKAVILLE], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-IwNPc_4ux84");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 32);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 59 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "dillon-francis");
+    assert.ok(
+      sets[0]?.collaborators?.some((c) => c.slug === "marten-horger"),
+    );
     assert.match(String(sets[0]?.eventName ?? ""), /Parookaville/i);
   });
 });

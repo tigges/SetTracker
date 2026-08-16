@@ -1193,4 +1193,49 @@ export const TL_TUJAMO_MAINSTAGE_PAROOKAVILLE_GERMANY_2026: FingerprintSeedRow[]
   { at: "1:11:41", artist: "Justice vs. Simian", title: "We Are Your Friends (Acappella)" },
 ];
 
+/**
+ * Dillon Francis & MARTEN HØRGER @ Mainstage, Parookaville, Germany 2025-07-20
+ * https://www.1001tracklists.com/tracklist/2gsy0kp1/dillon-francis-marten-horger-mainstage-parookaville-germany-2025-07-20.html
+ * Official YT: https://youtu.be/IwNPc_4ux84
+ * Capture overlay used TL_Dillon-Francis_and_MARTEN-HØRGER_Mainstage_Parookaville_Germany_2025
+ * (hyphens + Ø illegal); constant is
+ * TL_DILLON_FRANCIS_AND_MARTEN_HORGER_MAINSTAGE_PAROOKAVILLE_GERMANY_2025.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-IwNPc_4ux84"]
+ * Captured 2026-08-16 - provenance 1001tl.
+ */
+export const TL_DILLON_FRANCIS_AND_MARTEN_HORGER_MAINSTAGE_PAROOKAVILLE_GERMANY_2025: FingerprintSeedRow[] = [
+  { at: "0:15", artist: "Dillon Francis & MARTEN HØRGER", title: "On A Trip" },
+  { at: "2:10", artist: "MARTEN HØRGER", title: "Ill Behavior" },
+  { at: "6:10", artist: "Pharoahe Monch", title: "Simon Says (Bassjackers Bootleg)" },
+  { at: "7:42", artist: "Zombie Nation", title: "Kernkraft 400 (Thomas Anthony & Control Room Remix)" },
+  { at: "10:08", artist: "Diplo & HUGEL ft. Julia Church", title: "Stay High" },
+  { at: "11:37", artist: "Skrillex & Dillon Francis", title: "Bun Up The Dance (Seth Hills Remix)" },
+  { at: "12:49", artist: "Dillon Francis & Martin Garrix", title: "Set Me Free (Dillon Francis VIP)" },
+  { at: "15:07", artist: "Ship Wrek", title: "Shake That" },
+  { at: "21:20", artist: "Da Hool", title: "Meet Her At The Love Parade (MARTEN HØRGER x Empra Edit)" },
+  { at: "23:00", artist: "Dillon Francis", title: "Goodies (Knock2 Remix)" },
+  { at: "25:10", artist: "Missy Elliott ft. Ciara & Fatman Scoop", title: "Lose Control" },
+  { at: "26:00", artist: "Dillon Francis", title: "DFR" },
+  { at: "26:35", artist: "Major Lazer ft. Busy Signal & The Flexican & FS Green", title: "Watch Out For This (Bumaye)" },
+  { at: "27:35", artist: "Eurythmics", title: "Sweet Dreams (Are Made of This) (MARTEN HØRGER Remix)" },
+  { at: "30:43", artist: "Axwell & Sebastian Ingrosso & Steve Angello & Laidback Luke ft. Deborah Cox", title: "Leave The World Behind (Mark Pride Miami Remix)" },
+  { at: "32:10", artist: "MARTEN HØRGER & CRÜPO & Swen Weber ft. Stush", title: "Get Low" },
+  { at: "35:07", artist: "Dillon Francis & MARTEN HØRGER", title: "B2U" },
+  { at: "38:15", artist: "Valentino Khan & Dillon Francis vs. Reel 2 Real & The Mad Stuntman", title: "Move It (KidCutUp Throwback Intro)" },
+  { at: "38:40", artist: "Reel 2 Real ft. The Mad Stuntman", title: "I Like To Move It (Acappella)" },
+  { at: "39:05", artist: "Valentino Khan & Dillon Francis", title: "Move It" },
+  { at: "39:29", artist: "Valentino Khan & Dillon Francis", title: "Move It (ONI Remix)" },
+  { at: "40:35", artist: "Dr. Fresch & MARTEN HØRGER", title: "Take A Step Back" },
+  { at: "41:40", artist: "Dillon Francis & MARTEN HØRGER", title: "Cut The Midrange" },
+  { at: "43:50", artist: "Dillon Francis & Good Times Ahead", title: "LA On Acid-er" },
+  { at: "45:50", artist: "The Prodigy", title: "Breathe (HUMAN404 Remix)" },
+  { at: "47:06", artist: "David Guetta & MARTEN HØRGER pres. Men Machine", title: "The Past, The Present, The Future" },
+  { at: "50:30", artist: "MARTEN HØRGER", title: "Rave (PAROOKAVILLE Anthem 2026)" },
+  { at: "53:50", artist: "Dillon Francis & DJ Snake", title: "Get Low (Armin van Buuren Remix)" },
+  { at: "56:00", artist: "Alice Deejay", title: "Better Off Alone (Pickle Remix)" },
+  { at: "57:17", artist: "Dillon Francis & longstoryshort", title: "Take Me Away" },
+  { at: "58:33", artist: "Oasis", title: "Wonderwall" },
+  { at: "59:30", artist: "Freaks & Geeks", title: "Rave Is Life" },
+];
+
 

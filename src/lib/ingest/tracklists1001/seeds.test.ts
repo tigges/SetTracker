@@ -119,6 +119,7 @@ import {
   TL_ROBIN_SCHULZ_PACHA_IBIZA_2026,
   TL_CALVIN_HARRIS_MAINSTAGE_DANCE_VALLEY_NETHERLANDS_2026,
   TL_TUJAMO_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
+  TL_DILLON_FRANCIS_AND_MARTEN_HORGER_MAINSTAGE_PAROOKAVILLE_GERMANY_2025,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   tracklist1001RowsToPlays,
@@ -2259,6 +2260,34 @@ for (let i = 1; i < tujamoParookaville.length; i++) {
     (tujamoParookaville[i]!.timestamp ?? 0) >
       (tujamoParookaville[i - 1]!.timestamp ?? 0),
     `TUJAMO Parookaville clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(
+  TL_DILLON_FRANCIS_AND_MARTEN_HORGER_MAINSTAGE_PAROOKAVILLE_GERMANY_2025,
+);
+assert.equal(
+  TL_DILLON_FRANCIS_AND_MARTEN_HORGER_MAINSTAGE_PAROOKAVILLE_GERMANY_2025.length,
+  32,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-IwNPc_4ux84"],
+  TL_DILLON_FRANCIS_AND_MARTEN_HORGER_MAINSTAGE_PAROOKAVILLE_GERMANY_2025,
+);
+const dfMhParookaville = tracklist1001RowsToPlays(
+  TL_DILLON_FRANCIS_AND_MARTEN_HORGER_MAINSTAGE_PAROOKAVILLE_GERMANY_2025,
+);
+assert.equal(dfMhParookaville.length, 32);
+assert.equal(dfMhParookaville[0]?.provenance, "1001tl");
+assert.equal(dfMhParookaville[0]?.timestamp, 15);
+assert.equal(dfMhParookaville[0]?.trackTitle, "On A Trip");
+assert.equal(dfMhParookaville[31]?.trackTitle, "Rave Is Life");
+assert.equal(dfMhParookaville[31]?.timestamp, 59 * 60 + 30);
+for (let i = 1; i < dfMhParookaville.length; i++) {
+  assert.ok(
+    (dfMhParookaville[i]!.timestamp ?? 0) >
+      (dfMhParookaville[i - 1]!.timestamp ?? 0),
+    `Dillon Francis / Marten Horger Parookaville clocks must increase at index ${i}`,
   );
 }
 
