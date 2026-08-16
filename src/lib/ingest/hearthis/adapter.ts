@@ -23,6 +23,7 @@ import {
   HEARTHIS_ARTISTS,
   type HearthisArtistSource,
 } from "./artists";
+import { HEARTHIS_TRACKS, type HearthisTrackSource } from "./tracks";
 import {
   HEARTHIS_HOUSE_CATEGORIES,
   HEARTHIS_MAX_SETS,
@@ -36,6 +37,7 @@ import {
   fetchTrackDetail,
   fetchTrackPlaylist,
   fetchUserTracks,
+  parseHearthisUrl,
   pickHearthisImage,
   sleep,
   type HtTrack,
@@ -202,7 +204,7 @@ export async function trackToRawSet(
     track.user?.username?.trim() ||
     userPermalink;
   const artistSlug = slugify(artistName);
-  const sourceSlug = `ht-${userPermalink}-${slugify(trackPermalink)}`.slice(0, 120);
+  const sourceSlug = hearthisSourceSlug(userPermalink, trackPermalink);
   const sourceUrl =
     detail.permalink_url ||
     track.permalink_url ||
@@ -274,15 +276,74 @@ type Candidate = {
   minDurationSec?: number;
 };
 
+export function hearthisSourceSlug(
+  userPermalink: string,
+  trackPermalink: string,
+): string {
+  return `ht-${userPermalink}-${slugify(trackPermalink)}`.slice(0, 120);
+}
+
+function applyTrackSeedMeta(
+  raw: RawSet,
+  seed: HearthisTrackSource,
+): RawSet {
+  if (seed.eventName) raw.eventName = seed.eventName;
+  if (seed.eventKind) raw.eventKind = seed.eventKind;
+  if (seed.eventLocation) raw.eventLocation = seed.eventLocation;
+  if (seed.seriesName) raw.seriesName = seed.seriesName;
+  if (seed.type) raw.type = seed.type;
+  if (seed.performedOn) {
+    const d = new Date(`${seed.performedOn}T00:00:00.000Z`);
+    if (!Number.isNaN(d.getTime())) raw.publishedAt = d;
+  }
+  raw.sourceHash = hashRawSetContent(raw);
+  return raw;
+}
+
 export function createHearthisAdapter(
   _categories: HearthisCategory[] = HEARTHIS_HOUSE_CATEGORIES,
   artists: HearthisArtistSource[] = HEARTHIS_ARTISTS,
+  tracks: HearthisTrackSource[] = HEARTHIS_TRACKS,
 ): SourceAdapter {
   return {
     id: "hearthis",
     label: "hearthis.at",
     async fetchRecent(): Promise<RawSet[]> {
       const byId = new Map<string, Candidate>();
+      const curated: RawSet[] = [];
+
+      // Curated single-track seeds (always ingest — not subject to poll cap).
+      for (const seed of tracks) {
+        const parsed = parseHearthisUrl(seed.url);
+        if (!parsed?.user || !parsed.track) {
+          console.warn(`[hearthis] bad curated url ${seed.url}`);
+          continue;
+        }
+        try {
+          console.log(
+            `[hearthis] curated track=${parsed.user}/${parsed.track}`,
+          );
+          const detail = await fetchTrackDetail(parsed.user, parsed.track);
+          await sleep(100);
+          const cat: HearthisCategory = {
+            id: `track:${parsed.user}/${parsed.track}`,
+            genre: seed.genre,
+          };
+          const raw = await trackToRawSet(
+            detail,
+            cat,
+            seed.primaryArtist,
+            seed.seriesName,
+            seed.minDurationSec ?? HEARTHIS_MIN_DURATION_SEC,
+          );
+          if (raw) curated.push(applyTrackSeedMeta(raw, seed));
+        } catch (err) {
+          console.error(
+            `[hearthis] curated ${parsed.user}/${parsed.track} failed:`,
+            err instanceof Error ? err.message : err,
+          );
+        }
+      }
 
       // Curated brand / artist accounts (e.g. Gentlemen's Groove mixes).
       for (const artist of artists) {
@@ -347,8 +408,8 @@ export function createHearthisAdapter(
       );
       const selected = [...withTl, ...curatedNoTl].slice(0, HEARTHIS_MAX_SETS);
 
-      const out: RawSet[] = [];
-      const seen = new Set<string>();
+      const out: RawSet[] = [...curated];
+      const seen = new Set<string>(curated.map((r) => r.sourceSlug));
       for (const c of selected) {
         try {
           const raw = await trackToRawSet(

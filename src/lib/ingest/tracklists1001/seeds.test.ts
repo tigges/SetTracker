@@ -116,6 +116,7 @@ import {
   TL_VINTAGE_CULTURE_NYC_YACHT_2023,
   TL_VINTAGE_CULTURE_PACHA_IBIZA_2026,
   TL_VINTAGE_CULTURE_SO_TRACK_BOA_2026,
+  TL_ROBIN_SCHULZ_PACHA_IBIZA_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   tracklist1001RowsToPlays,
@@ -2170,6 +2171,34 @@ for (let i = 1; i < heldensDaybreak.length; i++) {
     (heldensDaybreak[i]!.timestamp ?? 0) >
       (heldensDaybreak[i - 1]!.timestamp ?? 0),
     `Oliver Heldens Daybreak clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_ROBIN_SCHULZ_PACHA_IBIZA_2026);
+assert.equal(TL_ROBIN_SCHULZ_PACHA_IBIZA_2026.length, 32);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "ht-toccoscuro-1live-dj-session-mit-robin-schulz-live-aus-dem-pacha-ibiza-vom-0"
+  ],
+  TL_ROBIN_SCHULZ_PACHA_IBIZA_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "ht-https://hearthis.at/toccoscuro/1live-dj-session-mit-robin-schulz-live-aus-dem-pacha-ibiza-vom-0/"
+  ],
+  undefined,
+);
+const schulzPacha = tracklist1001RowsToPlays(TL_ROBIN_SCHULZ_PACHA_IBIZA_2026);
+assert.equal(schulzPacha.length, 32);
+assert.equal(schulzPacha[0]?.provenance, "1001tl");
+assert.equal(schulzPacha[0]?.timestamp, 20);
+assert.equal(schulzPacha[0]?.trackTitle, "La La Land");
+assert.equal(schulzPacha[31]?.trackTitle, "Everybody");
+assert.equal(schulzPacha[31]?.timestamp, 57 * 60 + 41);
+for (let i = 1; i < schulzPacha.length; i++) {
+  assert.ok(
+    (schulzPacha[i]!.timestamp ?? 0) > (schulzPacha[i - 1]!.timestamp ?? 0),
+    `Robin Schulz Pacha clocks must increase at index ${i}`,
   );
 }
 

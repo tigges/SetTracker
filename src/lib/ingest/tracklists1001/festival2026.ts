@@ -56,6 +56,7 @@ import {
   TL_VINTAGE_CULTURE_NYC_YACHT_2023,
   TL_VINTAGE_CULTURE_PACHA_IBIZA_2026,
   TL_VINTAGE_CULTURE_SO_TRACK_BOA_2026,
+  TL_ROBIN_SCHULZ_PACHA_IBIZA_2026,
 } from "./festivalCaptures20260816";
 
 export {
@@ -104,6 +105,7 @@ export {
   TL_VINTAGE_CULTURE_NYC_YACHT_2023,
   TL_VINTAGE_CULTURE_PACHA_IBIZA_2026,
   TL_VINTAGE_CULTURE_SO_TRACK_BOA_2026,
+  TL_ROBIN_SCHULZ_PACHA_IBIZA_2026,
 };
 
 function formatClock(sec: number): string {
@@ -4750,6 +4752,8 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-wuMQeEJ3YnQ": TL_OLIVER_HELDENS_DAYBREAK_SESSION_TOMORROWLAND_WE1_2024,
   "sc-oliverheldens-oliver-heldens-daybreak-session-tomorrowland-weekend-1-2024":
     TL_OLIVER_HELDENS_DAYBREAK_SESSION_TOMORROWLAND_WE1_2024,
+  "ht-toccoscuro-1live-dj-session-mit-robin-schulz-live-aus-dem-pacha-ibiza-vom-0":
+    TL_ROBIN_SCHULZ_PACHA_IBIZA_2026,
 };
 
 /** Sanity: every seeded clock must parse. */

@@ -1014,3 +1014,49 @@ export const TL_OLIVER_HELDENS_DAYBREAK_SESSION_TOMORROWLAND_WE1_2024: Fingerpri
   { at: "2:24:15", artist: "Bicep", title: "Glue (Kanine Bootleg)" },
   { at: "2:25:08", artist: "Netsky ft. Daddy Waku & Chantal Kashala", title: "Everybody Loves The Sunshine" },
 ];
+
+/**
+ * Robin Schulz @ Pacha Ibiza, Spain 2026-06-06
+ * https://www.1001tracklists.com/tracklist/1y2t00n9/robin-schulz-pacha-ibiza-spain-2026-06-06.html
+ * Hearthis: https://hearthis.at/toccoscuro/1live-dj-session-mit-robin-schulz-live-aus-dem-pacha-ibiza-vom-0/
+ * Capture overlay used TL_Robin-Schulz_Pacha_Ibiza_2026 (hyphens illegal);
+ * constant is TL_ROBIN_SCHULZ_PACHA_IBIZA_2026.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["ht-toccoscuro-1live-dj-session-mit-robin-schulz-live-aus-dem-pacha-ibiza-vom-0"]
+ * (not ht-https://…).
+ * Captured 2026-08-16 - provenance 1001tl.
+ */
+export const TL_ROBIN_SCHULZ_PACHA_IBIZA_2026: FingerprintSeedRow[] = [
+  { at: "0:20", artist: "Green Velvet vs. MEDUZA & GENESI & ESSENTIA", title: "La La Land" },
+  { at: "2:11", artist: "Robin Schulz ft. James Blunt", title: "OK" },
+  { at: "4:02", artist: "Dom Dolla & Tiga", title: "Don't Worry Baby" },
+  { at: "5:53", artist: "Volkoder", title: "All Night Long" },
+  { at: "7:44", artist: "YOOKiE", title: "COME AS YOU ARE" },
+  { at: "9:35", artist: "OutKast", title: "Ms. Jackson (N2N & Avilo Edit)" },
+  { at: "11:26", artist: "Robin Schulz & Dennis Lloyd", title: "Young Right Now" },
+  { at: "13:17", artist: "Odd Mob & OMNOM pres. HYPERBEAM", title: "Coming Up (It's Dare)" },
+  { at: "15:08", artist: "Dimitri Vegas & Like Mike & Marlon Hoffstadt & DJ Konik", title: "Makina Time (Joel Corry Remix)" },
+  { at: "16:59", artist: "ANOTR ft. 54 Ultra", title: "Talk To You (Dave Summer Edit)" },
+  { at: "18:50", artist: "Robin Schulz & MARTEN HØRGER", title: "Arizona" },
+  { at: "20:41", artist: "Matroda", title: "Winning Prize" },
+  { at: "22:32", artist: "Robin Schulz ft. Jasmine Thompson", title: "Sun Goes Down" },
+  { at: "24:23", artist: "Alesso & Sacha", title: "Destiny (HILLS Remix)" },
+  { at: "26:14", artist: "Robin Schulz & Imanbek", title: "Push It" },
+  { at: "28:05", artist: "Robin Schulz ft. Ilsey Juber", title: "Headlights" },
+  { at: "29:56", artist: "John Summit ft. CLOVES", title: "Focus (ALOK Remix)" },
+  { at: "31:47", artist: "Laherte", title: "Sing It Back" },
+  { at: "33:38", artist: "Swedish House Mafia ft. Pharrell Williams", title: "One (Your Name) (Darren After Edit)" },
+  { at: "35:29", artist: "Vinter", title: "This Is Not The James Brown" },
+  { at: "37:20", artist: "NEXBOY & Cha$e 13", title: "Calabria" },
+  { at: "39:11", artist: "Robin Schulz ft. Kiddo", title: "All We Got" },
+  { at: "41:02", artist: "Justė & Jaxstyle & Jon", title: "Turn The Lights Off (HILLS & Dansyn Remix)" },
+  { at: "42:53", artist: "Lady GaGa ft. Colby O'Donis", title: "Just Dance (ACRAZE Remix)" },
+  { at: "44:44", artist: "Chris Lorenzo & aMo", title: "HOTS 4 U" },
+  { at: "46:35", artist: "JOSHWA", title: "Out Of My Mind" },
+  { at: "48:26", artist: "Max Styler ft. Ad-Apt", title: "One More (Solomun Remix)" },
+  { at: "50:17", artist: "Robin Schulz & Fil Bo Riva", title: "Killer Queen" },
+  { at: "52:08", artist: "Alexander Delanois", title: "Deep Down" },
+  { at: "53:59", artist: "will.i.am & Britney Spears", title: "Scream & Shout (Gaddi Edit)" },
+  { at: "55:50", artist: "Dean Turnley", title: "Actin' Tough (Dave Summer Edit)" },
+  { at: "57:41", artist: "Volkoder", title: "Everybody" },
+];
+
