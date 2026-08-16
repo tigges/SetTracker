@@ -278,4 +278,17 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     type: "radio",
     minDurationSec: 30 * 60,
   },
+  {
+    // Official Oliver Heldens upload; 1001TL wired via
+    // sc-oliverheldens-oliver-heldens-daybreak-session-tomorrowland-weekend-1-2024
+    // (same list as yt-wuMQeEJ3YnQ). Never wire sc-https://….
+    url: "https://soundcloud.com/oliverheldens/oliver-heldens-daybreak-session-tomorrowland-weekend-1-2024",
+    primaryArtist: dj("Oliver Heldens", {
+      accent: "#7c5cff",
+      homeCity: "Netherlands",
+    }),
+    genre: "Future House",
+    type: "festival",
+    minDurationSec: 60 * 60,
+  },
 ];

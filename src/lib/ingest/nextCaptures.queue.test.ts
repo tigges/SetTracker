@@ -505,5 +505,27 @@ assert.equal(
   ),
   "mapped",
 );
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "yt-wuMQeEJ3YnQ",
+      title: "Oliver Heldens - Daybreak Session @ Tomorrowland Weekend 1 2024",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "sc-oliverheldens-oliver-heldens-daybreak-session-tomorrowland-weekend-1-2024",
+      title: "Oliver Heldens - Daybreak Session @ Tomorrowland Weekend 1 2024",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
 
 console.log("nextCaptures.queue.test.ts ok");

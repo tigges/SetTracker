@@ -73,6 +73,7 @@ import {
   TL_NICKY_ROMERO_PROTOCOL_RADIO_731,
   TL_KOROLOVA_CAPTIVE_SOUL_098_2026,
   TL_NORA_EN_PURE_PURIFIED_RADIO_520_2026,
+  TL_OLIVER_HELDENS_DAYBREAK_SESSION_TOMORROWLAND_WE1_2024,
   TL_TIESTO_PRISMATIC_032_2026,
   TL_REINIER_ZONNEVELD_AWAKENINGS_2025,
   TL_HANNAH_LAING_ZENLESS_ZONE_ZERO_CREAMFIELDS_2024,
@@ -1429,6 +1430,22 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/18k472y9/hannah-laing-zenless-zone-zero-creamfields-north-united-kingdom-2024-08-25.html",
     tracklist1001: TL_HANNAH_LAING_ZENLESS_ZONE_ZERO_CREAMFIELDS_2024,
+  },
+  {
+    // Artist-channel Relive of the Tomorrowland WE1 Daybreak Session (same 1001 as SC).
+    video: "https://www.youtube.com/watch?v=wuMQeEJ3YnQ",
+    primaryArtist: dj("Oliver Heldens", {
+      accent: "#7c5cff",
+      homeCity: "Netherlands",
+    }),
+    genre: "Future House",
+    type: "festival",
+    title:
+      "Oliver Heldens - Daybreak Session @ Tomorrowland Weekend 1 2024",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/25du2utt/oliver-heldens-mainstage-daybreak-session-tomorrowland-weekend-1-belgium-2024-07-19.html",
+    tracklist1001: TL_OLIVER_HELDENS_DAYBREAK_SESSION_TOMORROWLAND_WE1_2024,
   },
   {
     video: "https://www.youtube.com/watch?v=OVex0rm7ZR4",

@@ -94,6 +94,7 @@ import {
   TL_ALOK_TML_WE2_2026,
   TL_AMELIE_LENS_RADIO_SHOW_022_2026,
   TL_BRADEAZY_LIVE_LOLLAPALOOZA_CHICAGO_2026,
+  TL_OLIVER_HELDENS_DAYBREAK_SESSION_TOMORROWLAND_WE1_2024,
   TL_ERIC_PRYDZ_EPIC_RADIO_036_2026,
   TL_HANNAH_LAING_ZENLESS_ZONE_ZERO_CREAMFIELDS_2024,
   TL_HARDWELL_HOA_527_YEARMIX_2025,
@@ -1654,6 +1655,13 @@ assert.equal(
   isWiredTracklistSlug("sc-amelielens-amelie-lens-radio-show-022"),
   true,
 );
+assert.equal(isWiredTracklistSlug("yt-wuMQeEJ3YnQ"), true);
+assert.equal(
+  isWiredTracklistSlug(
+    "sc-oliverheldens-oliver-heldens-daybreak-session-tomorrowland-weekend-1-2024",
+  ),
+  true,
+);
 assert.equal(
   isWiredTracklistSlug(
     "sc-https://soundcloud.com/bradeazy/bradeazy-live-lollapalooza",
@@ -1663,6 +1671,12 @@ assert.equal(
 assert.equal(
   isWiredTracklistSlug(
     "sc-https://soundcloud.com/amelielens/amelie-lens-radio-show-022",
+  ),
+  false,
+);
+assert.equal(
+  isWiredTracklistSlug(
+    "sc-https://soundcloud.com/oliverheldens/oliver-heldens-daybreak-session-tomorrowland-weekend-1-2024",
   ),
   false,
 );
@@ -2121,6 +2135,41 @@ for (let i = 1; i < amelie022.length; i++) {
   assert.ok(
     (amelie022[i]!.timestamp ?? 0) > (amelie022[i - 1]!.timestamp ?? 0),
     `Amelie Lens Radio Show 022 clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_OLIVER_HELDENS_DAYBREAK_SESSION_TOMORROWLAND_WE1_2024);
+assert.equal(TL_OLIVER_HELDENS_DAYBREAK_SESSION_TOMORROWLAND_WE1_2024.length, 95);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-wuMQeEJ3YnQ"],
+  TL_OLIVER_HELDENS_DAYBREAK_SESSION_TOMORROWLAND_WE1_2024,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-oliverheldens-oliver-heldens-daybreak-session-tomorrowland-weekend-1-2024"
+  ],
+  TL_OLIVER_HELDENS_DAYBREAK_SESSION_TOMORROWLAND_WE1_2024,
+);
+const heldensDaybreak = tracklist1001RowsToPlays(
+  TL_OLIVER_HELDENS_DAYBREAK_SESSION_TOMORROWLAND_WE1_2024,
+);
+assert.equal(heldensDaybreak.length, 95);
+assert.equal(heldensDaybreak[0]?.provenance, "1001tl");
+assert.equal(heldensDaybreak[0]?.timestamp, 12);
+assert.equal(
+  heldensDaybreak[0]?.trackTitle,
+  "You & Me (Flume Remix / Westend & Local Singles Edit)",
+);
+assert.equal(
+  heldensDaybreak[94]?.trackTitle,
+  "Everybody Loves The Sunshine",
+);
+assert.equal(heldensDaybreak[94]?.timestamp, 2 * 3600 + 25 * 60 + 8);
+for (let i = 1; i < heldensDaybreak.length; i++) {
+  assert.ok(
+    (heldensDaybreak[i]!.timestamp ?? 0) >
+      (heldensDaybreak[i - 1]!.timestamp ?? 0),
+    `Oliver Heldens Daybreak clocks must increase at index ${i}`,
   );
 }
 

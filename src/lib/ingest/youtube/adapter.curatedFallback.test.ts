@@ -38,6 +38,9 @@ const PURIFIED_520 = YOUTUBE_SETS.find((s) => s.video.includes("8aDoUu4GDrc"));
 const CAPTIVE_098 = YOUTUBE_SETS.find((s) => s.video.includes("5JxfEjVdQFk"));
 const HYPE_SYNC = YOUTUBE_SETS.find((s) => s.video.includes("rLTCLSsqrXY"));
 const EPIC_036 = YOUTUBE_SETS.find((s) => s.video.includes("JLIYTueL4TI"));
+const HELDENS_DAYBREAK = YOUTUBE_SETS.find((s) =>
+  s.video.includes("wuMQeEJ3YnQ"),
+);
 
 describe("watchMetaFromCuratedSeed", () => {
   it("builds ASOT 1290 meta from the curated 1001 capture", () => {
@@ -748,5 +751,20 @@ describe("curated YouTube 429 fallback", () => {
     assert.ok(sets[0]!.durationSec >= 59 * 60);
     assert.equal(sets[0]?.primaryArtist?.slug, "eric-prydz");
     assert.equal(sets[0]?.seriesName, "Epic Radio");
+  });
+
+  it("lands Oliver Heldens Daybreak TML WE1 from the 1001 seed when watch is 429", async () => {
+    assert.ok(HELDENS_DAYBREAK);
+    const adapter = createYoutubeAdapter([HELDENS_DAYBREAK], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-wuMQeEJ3YnQ");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 95);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 2 * 3600 + 25 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "oliver-heldens");
+    assert.match(String(sets[0]?.title ?? ""), /Daybreak/i);
+    assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
   });
 });

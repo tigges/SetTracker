@@ -250,4 +250,17 @@ assert.equal(
   "sc-amelielens-amelie-lens-radio-show-022",
 );
 
+const heldensDaybreakSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url ===
+    "https://soundcloud.com/oliverheldens/oliver-heldens-daybreak-session-tomorrowland-weekend-1-2024",
+);
+assert.ok(heldensDaybreakSc);
+assert.equal(heldensDaybreakSc.primaryArtist.name, "Oliver Heldens");
+assert.equal(heldensDaybreakSc.type, "festival");
+assert.equal(
+  `sc-oliverheldens-${slugify("oliver-heldens-daybreak-session-tomorrowland-weekend-1-2024")}`,
+  "sc-oliverheldens-oliver-heldens-daybreak-session-tomorrowland-weekend-1-2024",
+);
+
 console.log("soundcloud/tracks.test.ts ok");
