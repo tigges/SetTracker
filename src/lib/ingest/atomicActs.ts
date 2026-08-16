@@ -40,6 +40,12 @@ export const ATOMIC_ACTS: AtomicAct[] = [
     slug: "dimitri-vegas-like-mike",
     junkSlugs: ["dimitri-vegas", "like-mike"],
   },
+  {
+    name: "Lucas & Steve",
+    slug: "lucas-steve",
+    // Do not junk "steve" — Steve Aoki / Steve Angello are unrelated.
+    junkSlugs: [],
+  },
 ];
 
 /** Match "Walker & Royce" / "Walker and Royce" (flexible whitespace). */

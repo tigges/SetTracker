@@ -66,6 +66,7 @@ const WW_PAROOKAVILLE = YOUTUBE_SETS.find((s) =>
 const MANDY_NEGATIV_TML = YOUTUBE_SETS.find((s) =>
   s.video.includes("J7b0G4XX8pg"),
 );
+const DLDK_ZIGGO = YOUTUBE_SETS.find((s) => s.video.includes("B1EaMgsf84Q"));
 
 describe("watchMetaFromCuratedSeed", () => {
   it("builds ASOT 1290 meta from the curated 1001 capture", () => {
@@ -263,6 +264,17 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=J7b0G4XX8pg");
     // Last cue 57:56 + 180s pad.
     assert.equal(meta.durationSec, 57 * 60 + 56 + 180);
+  });
+
+  it("builds Lucas & Steve B2B Mike Williams DLDK Ziggo meta from the curated 1001 capture", () => {
+    assert.ok(DLDK_ZIGGO);
+    const meta = watchMetaFromCuratedSeed(DLDK_ZIGGO);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "B1EaMgsf84Q");
+    assert.match(meta.title, /Don't Let Daddy Know|Ziggo/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=B1EaMgsf84Q");
+    // Last cue 59:30 + 180s pad.
+    assert.equal(meta.durationSec, 59 * 60 + 30 + 180);
   });
 
   it("builds Vintage Culture NYC Yacht meta from the curated 1001 capture", () => {
@@ -1021,5 +1033,24 @@ describe("curated YouTube 429 fallback", () => {
     assert.equal(sets[0]?.primaryArtist?.slug, "mandy");
     assert.ok(sets[0]?.collaborators?.some((c) => c.slug === "negativ"));
     assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
+  });
+
+  it("lands Lucas & Steve B2B Mike Williams DLDK Ziggo from the 1001 seed when watch is 429", async () => {
+    assert.ok(DLDK_ZIGGO);
+    const adapter = createYoutubeAdapter([DLDK_ZIGGO], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-B1EaMgsf84Q");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 51);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 59 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "lucas-steve");
+    assert.ok(sets[0]?.collaborators?.some((c) => c.slug === "mike-williams"));
+    assert.equal(
+      sets[0]?.collaborators?.some((c) => c.slug === "steve"),
+      false,
+    );
+    assert.match(String(sets[0]?.eventName ?? ""), /Don't Let Daddy Know/i);
   });
 });

@@ -108,6 +108,25 @@ const chapter = splitArtistCredit("Chapter & Verse");
 assert.equal(chapter.primary.slug, "chapter-verse");
 assert.equal(chapter.collaborators.length, 0);
 
+const lucasSteve = splitArtistsFromSetTitle(
+  "Lucas & Steve B2B Mike Williams | Don't Let Daddy Know, Ziggo Dome 2026",
+);
+assert.equal(lucasSteve.primary.name, "Lucas & Steve");
+assert.equal(lucasSteve.primary.slug, "lucas-steve");
+assert.equal(lucasSteve.collaborators.length, 1);
+assert.equal(lucasSteve.collaborators[0]?.name, "Mike Williams");
+assert.equal(lucasSteve.collaborators[0]?.slug, "mike-williams");
+
+const lucasStevePreferred = artistsForSet(
+  "Lucas & Steve B2B Mike Williams | Don't Let Daddy Know, Ziggo Dome 2026",
+  { name: "Lucas & Steve", slug: "lucas-steve", accent: "#ffb703" },
+);
+assert.equal(lucasStevePreferred.primary.slug, "lucas-steve");
+assert.deepEqual(
+  lucasStevePreferred.collaborators.map((c) => c.slug),
+  ["mike-williams"],
+);
+
 // Set-title accidents must resolve to the artist, not the venue/series.
 assert.equal(
   performingCreditFromTitle(

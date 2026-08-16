@@ -126,6 +126,7 @@ import {
   TL_W_AND_W_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
   TL_MANDY_MANDY_MONDAYS_028_2026,
   TL_MANDY_AND_NEGATIV_ATMOSPHERE_STAGE_TOMORROWLAND_WE1_BELGIUM_2026,
+  TL_LUCAS_AND_STEVE_AND_MIKE_WILLIAMS_DONT_LET_DADDY_KNOW_ZIGGO_DOME_AMSTERDAM_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   tracklist1001RowsToPlays,
@@ -2442,6 +2443,33 @@ for (let i = 1; i < mandyNegativ.length; i++) {
   assert.ok(
     (mandyNegativ[i]!.timestamp ?? 0) > (mandyNegativ[i - 1]!.timestamp ?? 0),
     `MANDY B2B Negativ TML WE1 clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(
+  TL_LUCAS_AND_STEVE_AND_MIKE_WILLIAMS_DONT_LET_DADDY_KNOW_ZIGGO_DOME_AMSTERDAM_2026,
+);
+assert.equal(
+  TL_LUCAS_AND_STEVE_AND_MIKE_WILLIAMS_DONT_LET_DADDY_KNOW_ZIGGO_DOME_AMSTERDAM_2026.length,
+  51,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-B1EaMgsf84Q"],
+  TL_LUCAS_AND_STEVE_AND_MIKE_WILLIAMS_DONT_LET_DADDY_KNOW_ZIGGO_DOME_AMSTERDAM_2026,
+);
+const dldkZiggo = tracklist1001RowsToPlays(
+  TL_LUCAS_AND_STEVE_AND_MIKE_WILLIAMS_DONT_LET_DADDY_KNOW_ZIGGO_DOME_AMSTERDAM_2026,
+);
+assert.equal(dldkZiggo.length, 51);
+assert.equal(dldkZiggo[0]?.provenance, "1001tl");
+assert.equal(dldkZiggo[0]?.timestamp, 21);
+assert.equal(dldkZiggo[0]?.trackTitle, "Let's Go");
+assert.equal(dldkZiggo[50]?.trackTitle, "Save The World (Acappella)");
+assert.equal(dldkZiggo[50]?.timestamp, 59 * 60 + 30);
+for (let i = 1; i < dldkZiggo.length; i++) {
+  assert.ok(
+    (dldkZiggo[i]!.timestamp ?? 0) > (dldkZiggo[i - 1]!.timestamp ?? 0),
+    `DLDK Ziggo clocks must increase at index ${i}`,
   );
 }
 

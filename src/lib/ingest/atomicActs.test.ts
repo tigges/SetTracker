@@ -20,4 +20,13 @@ assert.equal(
   "Walker & Royce b2b VNSSA b2b Chapter & Verse",
 );
 
+const ls = shieldAtomicActs(
+  "Lucas & Steve B2B Mike Williams | Don't Let Daddy Know",
+);
+assert.ok(!/Lucas\s*&\s*Steve/.test(ls.text));
+assert.equal(
+  ls.restore(ls.text),
+  "Lucas & Steve B2B Mike Williams | Don't Let Daddy Know",
+);
+
 console.log("atomicActs.test.ts ok");

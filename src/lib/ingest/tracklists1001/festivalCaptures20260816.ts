@@ -1649,4 +1649,69 @@ export const TL_MANDY_AND_NEGATIV_ATMOSPHERE_STAGE_TOMORROWLAND_WE1_BELGIUM_2026
   { at: "57:56", artist: "Stan Christ", title: "Trepidation" },
 ];
 
+/**
+ * Lucas & Steve & Mike Williams @ Don't Let Daddy Know, Ziggo Dome Amsterdam, Netherlands 2026-03-07
+ * https://www.1001tracklists.com/tracklist/trluwg9/lucas-steve-mike-williams-dont-let-daddy-know-ziggo-dome-amsterdam-netherlands-2026-03-07.html
+ * Official YT: https://youtu.be/B1EaMgsf84Q
+ * Capture overlay used
+ * TL_Lucas&Steve_and_Mike-Williams_Don't-Let-Daddy-Know_Ziggo-Dome-Amsterdam_2026
+ * (`&` / hyphens / apostrophe illegal); constant is
+ * TL_LUCAS_AND_STEVE_AND_MIKE_WILLIAMS_DONT_LET_DADDY_KNOW_ZIGGO_DOME_AMSTERDAM_2026.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-B1EaMgsf84Q"]
+ * Captured 2026-08-16 - provenance 1001tl.
+ */
+export const TL_LUCAS_AND_STEVE_AND_MIKE_WILLIAMS_DONT_LET_DADDY_KNOW_ZIGGO_DOME_AMSTERDAM_2026: FingerprintSeedRow[] = [
+  { at: "0:21", artist: "Lucas & Steve x Mike Williams x Curbi", title: "Let's Go" },
+  { at: "1:09", artist: "Lucas & Steve", title: "What About Now" },
+  { at: "1:57", artist: "AFROJACK & Lucas & Steve", title: "Control" },
+  { at: "2:45", artist: "Mike Williams & Mesto ft. Sasha Rangas", title: "Wait Another Day" },
+  { at: "3:33", artist: "Mike Williams & Three Drives & ANTICALM", title: "Greece 2000" },
+  { at: "4:44", artist: "Sam Feldt X Lucas & Steve ft. Wulf", title: "Summer On You" },
+  { at: "5:55", artist: "AFROJACK & Lucas & Steve", title: "Control" },
+  { at: "8:43", artist: "Vluarr", title: "Steppin'" },
+  { at: "10:14", artist: "Disco Lines & Tinashe", title: "No Broke Boys" },
+  { at: "11:44", artist: "BrEaCh", title: "Jack (Acappella)" },
+  { at: "13:15", artist: "J Balvin & Willy William", title: "Mi Gente" },
+  { at: "14:45", artist: "Mike Williams", title: "The System" },
+  { at: "15:27", artist: "Mike Williams & Brooks", title: "Drop The Pressure" },
+  { at: "18:24", artist: "Lucas & Steve", title: "Emergency" },
+  { at: "19:34", artist: "Zerb ft. Sofiya Nzau", title: "Mwaki" },
+  { at: "20:45", artist: "RÜFÜS DU SOL", title: "Innerbloom" },
+  { at: "21:55", artist: "Lucas & Steve & Steve Aoki vs. Empire Of The Sun", title: "Weirder Things vs. Walking On A Dream (Lucas & Steve Mashup)" },
+  { at: "22:48", artist: "Empire Of The Sun", title: "Walking On A Dream (Acappella)" },
+  { at: "23:41", artist: "Steve Aoki", title: "Weirder Things (Steve Aoki & Lucas & Steve Remix)" },
+  { at: "24:34", artist: "Mike Williams", title: "The Beat (Mike Williams Techno Edit)" },
+  { at: "25:31", artist: "Madonna", title: "Music (Acappella)" },
+  { at: "26:28", artist: "Mightyfools", title: "Footrocker (Get Your, Get Your Hands Up Acappella)" },
+  { at: "27:24", artist: "Mike Williams & NOME.", title: "Back To Life" },
+  { at: "28:41", artist: "R3HAB & Mike Williams ft. Mary Jane Smith", title: "Lullaby" },
+  { at: "29:58", artist: "Mike Williams ft. DTale", title: "Living On Video (VIP Mix)" },
+  { at: "30:34", artist: "Lucas & Steve", title: "Renegade Master" },
+  { at: "31:10", artist: "Adam Port & Stryv ft. Malachiii", title: "Move" },
+  { at: "31:47", artist: "Alice Deejay", title: "Better Off Alone" },
+  { at: "32:23", artist: "Lucas & Steve vs. Ivan Gough & Feenixpawl & Georgi Kay", title: "Wasting Time vs. In My Mind (Lucas & Steve Mashup)" },
+  { at: "32:48", artist: "Ivan Gough & Feenixpawl ft. Georgi Kay", title: "In My Mind (Acappella)" },
+  { at: "33:13", artist: "Lucas & Steve", title: "Wasting Time" },
+  { at: "33:37", artist: "Sebastian Ingrosso & Tommy Trash ft. John Martin", title: "Reload (Lucas & Steve Remix)" },
+  { at: "35:45", artist: "Firebeatz", title: "In Space" },
+  { at: "36:52", artist: "Jack Ü ft. Bunji Garlin & MX Prime", title: "Jungle Bae" },
+  { at: "37:58", artist: "AFROJACK & Mike Williams", title: "Alone" },
+  { at: "39:50", artist: "Martin Garrix", title: "Animals (Lucas & Steve Flip)" },
+  { at: "40:27", artist: "Tiësto & Lucas & Steve", title: "Free Your Mind" },
+  { at: "41:04", artist: "Nari & Milani", title: "Atom (SQU4RE 2024 Edit)" },
+  { at: "44:18", artist: "Darude & Lucas & Steve vs. Gala", title: "Sandstorm vs. Freed From Desire (Lucas & Steve Mashup)" },
+  { at: "44:19", artist: "Gala", title: "Freed From Desire" },
+  { at: "44:20", artist: "Darude", title: "Sandstorm (Lucas & Steve 2025 Flip)" },
+  { at: "44:21", artist: "Lucas & Steve", title: "Up Till Dawn (On The Move) (Lucas & Steve 2024 Edit)" },
+  { at: "45:03", artist: "Mike Williams & Justin Mylo ft. Sara Sangfelt", title: "Face Up To The Sun" },
+  { at: "45:48", artist: "AFROJACK & Lucas & Steve & DubVision ft. Taranteeno", title: "Anywhere With You (Festival Mix)" },
+  { at: "48:59", artist: "Mike Williams & Bruno Martini & Stephen Puth", title: "Multiply" },
+  { at: "50:48", artist: "Lucas & Steve x Oaks x Jaimes", title: "Love On Hold (Club Mix)" },
+  { at: "52:45", artist: "Mike Williams & Philip Strand", title: "All My Life (In My Heart)" },
+  { at: "53:58", artist: "Avicii", title: "Levels (Acappella)" },
+  { at: "55:12", artist: "Timbaland ft. OneRepublic", title: "Apologize (Acappella)" },
+  { at: "56:25", artist: "Lucas & Steve ft. Jordan Shaw", title: "Heart First (Club Mix)" },
+  { at: "59:30", artist: "Swedish House Mafia ft. John Martin", title: "Save The World (Acappella)" },
+];
+
 

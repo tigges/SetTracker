@@ -91,6 +91,7 @@ import {
   TL_DUBVISION_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
   TL_W_AND_W_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
   TL_MANDY_AND_NEGATIV_ATMOSPHERE_STAGE_TOMORROWLAND_WE1_BELGIUM_2026,
+  TL_LUCAS_AND_STEVE_AND_MIKE_WILLIAMS_DONT_LET_DADDY_KNOW_ZIGGO_DOME_AMSTERDAM_2026,
   TL_MISS_MONIQUE_TML_WE2_2026,
   TL_NICKY_ROMERO_TML_WE2_2026,
   TL_ODD_MOB_TML_WE2_2026,
@@ -1591,6 +1592,24 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
       "https://www.1001tracklists.com/tracklist/23phk9t9/mandy-negativ-atmosphere-stage-tomorrowland-weekend-1-belgium-2026-07-17.html",
     tracklist1001:
       TL_MANDY_AND_NEGATIV_ATMOSPHERE_STAGE_TOMORROWLAND_WE1_BELGIUM_2026,
+  },
+  {
+    // Official Mike Williams upload — B2B; title drives collaborator parse.
+    video: "https://www.youtube.com/watch?v=B1EaMgsf84Q",
+    primaryArtist: dj("Lucas & Steve", {
+      accent: "#ffb703",
+      homeCity: "Maastricht, NL",
+    }),
+    genre: "Future House",
+    type: "festival",
+    title:
+      "Lucas & Steve B2B Mike Williams | Don't Let Daddy Know, Ziggo Dome 2026",
+    seriesName: "Don't Let Daddy Know",
+    eventName: "Don't Let Daddy Know",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/trluwg9/lucas-steve-mike-williams-dont-let-daddy-know-ziggo-dome-amsterdam-netherlands-2026-03-07.html",
+    tracklist1001:
+      TL_LUCAS_AND_STEVE_AND_MIKE_WILLIAMS_DONT_LET_DADDY_KNOW_ZIGGO_DOME_AMSTERDAM_2026,
   },
   {
     video: "https://www.youtube.com/watch?v=6bJZPDKlq7o",
