@@ -1714,4 +1714,47 @@ export const TL_LUCAS_AND_STEVE_AND_MIKE_WILLIAMS_DONT_LET_DADDY_KNOW_ZIGGO_DOME
   { at: "59:30", artist: "Swedish House Mafia ft. John Martin", title: "Save The World (Acappella)" },
 ];
 
+/**
+ * Indira Paganotto @ Atmosphere Stage, Tomorrowland Weekend 1, Belgium 2023-07-22
+ * https://www.1001tracklists.com/tracklist/1gzmsd19/indira-paganotto-atmosphere-stage-tomorrowland-weekend-1-belgium-2023-07-22.html
+ * Official YT: https://youtu.be/yPCOu0-JKJo
+ * Capture overlay used TL_Indira-Paganotto_Atmosphere-Stage_Tomorrowland_WE1_Belgium_2023
+ * (hyphens illegal); constant is
+ * TL_INDIRA_PAGANOTTO_ATMOSPHERE_STAGE_TOMORROWLAND_WE1_BELGIUM_2023.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-yPCOu0-JKJo"]
+ * Distinct from yt-xUdcEDryN8o (Awakenings Festival 2025).
+ * Captured 2026-08-16 - provenance 1001tl.
+ */
+export const TL_INDIRA_PAGANOTTO_ATMOSPHERE_STAGE_TOMORROWLAND_WE1_BELGIUM_2023: FingerprintSeedRow[] = [
+  { at: "0:29", artist: "Indialucia ft. Jorge Pardo & Blas Cordoba", title: "Acatao" },
+  { at: "2:00", artist: "Indira Paganotto", title: "Requiem" },
+  { at: "4:56", artist: "Indira Paganotto", title: "Diabla" },
+  { at: "8:49", artist: "La Kajofol", title: "Virgin Poison" },
+  { at: "11:43", artist: "Interactive Noise ft. Lil Jorck", title: "The Punisher" },
+  { at: "15:40", artist: "Blazy ft. Aura Vortex", title: "Interlude" },
+  { at: "20:00", artist: "Zyce & Flegma", title: "Animal" },
+  { at: "24:10", artist: "Dennis Bauer & Nimatekk", title: "Beat Boy" },
+  { at: "27:39", artist: "Mötley Crüe", title: "Kickstart My Heart (AlexUnder Edit)" },
+  { at: "30:17", artist: "Indecorum", title: "Babushka" },
+  { at: "33:11", artist: "Gabriel Padrevita & AnGy KoRe", title: "Bomberos" },
+  { at: "36:26", artist: "Luca Agnelli & Rian Wood", title: "Kiss Like This" },
+  { at: "39:50", artist: "Tao Andra", title: "Gracias A La Vida" },
+  { at: "44:10", artist: "CHRS", title: "In The Darkness" },
+  { at: "48:31", artist: "Lorenzo", title: "Gute Nacht" },
+  { at: "51:53", artist: "Rooler & Kronos", title: "FCK DAT!" },
+  { at: "54:50", artist: "Ansbro", title: "Into The Flood" },
+  { at: "1:00:43", artist: "Pash", title: "She Is A Fucking Techno Girl" },
+  { at: "1:03:06", artist: "Blastoyz", title: "High On Acid" },
+  { at: "1:06:13", artist: "The Prodigy", title: "Voodoo People (Blastoyz Remix)" },
+  { at: "1:11:18", artist: "Mind Void", title: "New World Synthphony" },
+  { at: "1:16:10", artist: "southstar", title: "Miss You (AIROD Rave Remix)" },
+  { at: "1:20:10", artist: "GUERRILLA RADIO & Ansbro", title: "Patakha Guddi" },
+  { at: "1:24:43", artist: "Mainline Magic Orchestra", title: "Tranchera" },
+  { at: "1:28:29", artist: "Justin Tinderdate & Robin Tasi", title: "BR451L" },
+  { at: "1:31:47", artist: "Blastoyz", title: "Mandala" },
+  { at: "1:37:51", artist: "Anatomic", title: "The Illusion (PerfecTone Remix)" },
+  { at: "1:51:31", artist: "Freedom Fighters & Ivort", title: "Creature From The Lost World (Silent Sphere Remix)" },
+  { at: "1:55:24", artist: "YAIBA & Yasuharu Takanashi", title: "Courtesy" },
+];
+
 

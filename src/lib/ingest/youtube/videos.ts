@@ -92,6 +92,7 @@ import {
   TL_W_AND_W_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
   TL_MANDY_AND_NEGATIV_ATMOSPHERE_STAGE_TOMORROWLAND_WE1_BELGIUM_2026,
   TL_LUCAS_AND_STEVE_AND_MIKE_WILLIAMS_DONT_LET_DADDY_KNOW_ZIGGO_DOME_AMSTERDAM_2026,
+  TL_INDIRA_PAGANOTTO_ATMOSPHERE_STAGE_TOMORROWLAND_WE1_BELGIUM_2023,
   TL_MISS_MONIQUE_TML_WE2_2026,
   TL_NICKY_ROMERO_TML_WE2_2026,
   TL_ODD_MOB_TML_WE2_2026,
@@ -1612,6 +1613,23 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
       "https://www.1001tracklists.com/tracklist/trluwg9/lucas-steve-mike-williams-dont-let-daddy-know-ziggo-dome-amsterdam-netherlands-2026-03-07.html",
     tracklist1001:
       TL_LUCAS_AND_STEVE_AND_MIKE_WILLIAMS_DONT_LET_DADDY_KNOW_ZIGGO_DOME_AMSTERDAM_2026,
+  },
+  {
+    // Tomorrowland official — Atmosphere WE1 2023. Distinct from
+    // yt-xUdcEDryN8o (Awakenings Festival 2025).
+    video: "https://www.youtube.com/watch?v=yPCOu0-JKJo",
+    primaryArtist: dj("Indira Paganotto", {
+      accent: "#ff006e",
+    }),
+    genre: "Hard Techno",
+    type: "festival",
+    title: "Indira Paganotto | Atmosphere Stage, Tomorrowland Weekend 1 2023",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1gzmsd19/indira-paganotto-atmosphere-stage-tomorrowland-weekend-1-belgium-2023-07-22.html",
+    tracklist1001:
+      TL_INDIRA_PAGANOTTO_ATMOSPHERE_STAGE_TOMORROWLAND_WE1_BELGIUM_2023,
   },
   {
     video: "https://www.youtube.com/watch?v=6bJZPDKlq7o",

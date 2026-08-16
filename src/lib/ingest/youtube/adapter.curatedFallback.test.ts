@@ -70,6 +70,9 @@ const DLDK_ZIGGO = YOUTUBE_SETS.find((s) => s.video.includes("B1EaMgsf84Q"));
 const AFROJACK_R3HAB_TML = YOUTUBE_SETS.find((s) =>
   s.video.includes("lEIGnx7qLl0"),
 );
+const INDIRA_TML_2023 = YOUTUBE_SETS.find((s) =>
+  s.video.includes("yPCOu0-JKJo"),
+);
 
 describe("watchMetaFromCuratedSeed", () => {
   it("builds ASOT 1290 meta from the curated 1001 capture", () => {
@@ -267,6 +270,17 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=J7b0G4XX8pg");
     // Last cue 57:56 + 180s pad.
     assert.equal(meta.durationSec, 57 * 60 + 56 + 180);
+  });
+
+  it("builds Indira Paganotto Atmosphere TML WE1 2023 meta from the curated 1001 capture", () => {
+    assert.ok(INDIRA_TML_2023);
+    const meta = watchMetaFromCuratedSeed(INDIRA_TML_2023);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "yPCOu0-JKJo");
+    assert.match(meta.title, /Atmosphere|Tomorrowland/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=yPCOu0-JKJo");
+    // Last cue 1:55:24 + 180s pad.
+    assert.equal(meta.durationSec, 1 * 3600 + 55 * 60 + 24 + 180);
   });
 
   it("builds AFROJACK B2B R3HAB TML WE2 meta from the curated 1001 capture", () => {
@@ -1046,6 +1060,20 @@ describe("curated YouTube 429 fallback", () => {
     assert.ok(sets[0]!.durationSec >= 57 * 60);
     assert.equal(sets[0]?.primaryArtist?.slug, "mandy");
     assert.ok(sets[0]?.collaborators?.some((c) => c.slug === "negitiv"));
+    assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
+  });
+
+  it("lands Indira Paganotto Atmosphere TML WE1 2023 from the 1001 seed when watch is 429", async () => {
+    assert.ok(INDIRA_TML_2023);
+    const adapter = createYoutubeAdapter([INDIRA_TML_2023], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-yPCOu0-JKJo");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 29);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 1 * 3600 + 55 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "indira-paganotto");
     assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
   });
 

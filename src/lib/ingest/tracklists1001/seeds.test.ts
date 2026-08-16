@@ -127,6 +127,7 @@ import {
   TL_MANDY_MANDY_MONDAYS_028_2026,
   TL_MANDY_AND_NEGATIV_ATMOSPHERE_STAGE_TOMORROWLAND_WE1_BELGIUM_2026,
   TL_LUCAS_AND_STEVE_AND_MIKE_WILLIAMS_DONT_LET_DADDY_KNOW_ZIGGO_DOME_AMSTERDAM_2026,
+  TL_INDIRA_PAGANOTTO_ATMOSPHERE_STAGE_TOMORROWLAND_WE1_BELGIUM_2023,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   tracklist1001RowsToPlays,
@@ -2473,6 +2474,33 @@ for (let i = 1; i < dldkZiggo.length; i++) {
   assert.ok(
     (dldkZiggo[i]!.timestamp ?? 0) > (dldkZiggo[i - 1]!.timestamp ?? 0),
     `DLDK Ziggo clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(
+  TL_INDIRA_PAGANOTTO_ATMOSPHERE_STAGE_TOMORROWLAND_WE1_BELGIUM_2023,
+);
+assert.equal(
+  TL_INDIRA_PAGANOTTO_ATMOSPHERE_STAGE_TOMORROWLAND_WE1_BELGIUM_2023.length,
+  29,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-yPCOu0-JKJo"],
+  TL_INDIRA_PAGANOTTO_ATMOSPHERE_STAGE_TOMORROWLAND_WE1_BELGIUM_2023,
+);
+const indiraTml = tracklist1001RowsToPlays(
+  TL_INDIRA_PAGANOTTO_ATMOSPHERE_STAGE_TOMORROWLAND_WE1_BELGIUM_2023,
+);
+assert.equal(indiraTml.length, 29);
+assert.equal(indiraTml[0]?.provenance, "1001tl");
+assert.equal(indiraTml[0]?.timestamp, 29);
+assert.equal(indiraTml[0]?.trackTitle, "Acatao");
+assert.equal(indiraTml[28]?.trackTitle, "Courtesy");
+assert.equal(indiraTml[28]?.timestamp, 1 * 3600 + 55 * 60 + 24);
+for (let i = 1; i < indiraTml.length; i++) {
+  assert.ok(
+    (indiraTml[i]!.timestamp ?? 0) > (indiraTml[i - 1]!.timestamp ?? 0),
+    `Indira Paganotto TML WE1 2023 clocks must increase at index ${i}`,
   );
 }
 
