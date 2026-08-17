@@ -1,7 +1,14 @@
 {
   "note": "Operator-collected 1001Tracklists URLs. All listed urls[] rows are now seeded. Prefer new operator pastes over this archive. stillMissing1001 is video-in / no 1001 page — do not invent URLs. heldPendingRelive is 1001-in / no official YT/SC Relive — seed held, do not invent or wire fan playback.",
-  "updatedAt": "2026-08-17T10:40:00.000Z",
+  "updatedAt": "2026-08-17T14:20:00.000Z",
   "urls": [
+    {
+      "label": "John Summit · Burning Man Playa Package Mix 2025",
+      "slug": "yt-PkWNuf7rtms",
+      "name": "TL_JOHN_SUMMIT_BURNING_MAN_PLAYA_PACKAGE_MIX_2025",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/btv3mn9/john-summit-burning-man-playa-package-mix-2025-10-09.html",
+      "youtubeUrl": "https://youtu.be/PkWNuf7rtms"
+    },
     {
       "label": "PAN-POT · Street Parade",
       "slug": "yt-LpFxQmtEeAA",

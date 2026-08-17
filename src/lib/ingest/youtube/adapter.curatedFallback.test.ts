@@ -100,6 +100,9 @@ const GORDO_TML_WE2_2023 = YOUTUBE_SETS.find((s) =>
 const LUCAS_STEVE_TML_WE2_2024 = YOUTUBE_SETS.find((s) =>
   s.video.includes("GbG_OFmdPKk"),
 );
+const JOHN_SUMMIT_PLAYA = YOUTUBE_SETS.find((s) =>
+  s.video.includes("PkWNuf7rtms"),
+);
 
 describe("watchMetaFromCuratedSeed", () => {
   it("builds ASOT 1290 meta from the curated 1001 capture", () => {
@@ -245,6 +248,17 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=E1WH0nvaxAw");
     // Last cue 59:30 + 180s pad.
     assert.equal(meta.durationSec, 59 * 60 + 30 + 180);
+  });
+
+  it("builds John Summit Playa Package Mix meta from the curated 1001 capture", () => {
+    assert.ok(JOHN_SUMMIT_PLAYA);
+    const meta = watchMetaFromCuratedSeed(JOHN_SUMMIT_PLAYA);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "PkWNuf7rtms");
+    assert.match(meta.title, /Playa Package Mix/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=PkWNuf7rtms");
+    // Last cue 21:50 + 180s pad.
+    assert.equal(meta.durationSec, 21 * 60 + 50 + 180);
   });
 
   it("builds Alesso TML WE1 Mainstage meta from the curated 1001 capture", () => {
@@ -1354,6 +1368,22 @@ describe("curated YouTube 429 fallback", () => {
     assert.equal(sets[0]?.primaryArtist?.slug, "gordo");
     assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
     assert.match(String(sets[0]?.title ?? ""), /2023/);
+  });
+
+  it("lands John Summit Playa Package Mix from the 1001 seed when watch is 429", async () => {
+    assert.ok(JOHN_SUMMIT_PLAYA);
+    const adapter = createYoutubeAdapter([JOHN_SUMMIT_PLAYA], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-PkWNuf7rtms");
+    assert.equal(sets[0]!.type, "mix");
+    assert.ok(sets[0]!.plays.length >= 6);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 21 * 60 + 50);
+    assert.equal(sets[0]?.primaryArtist?.slug, "john-summit");
+    assert.equal(sets[0]?.seriesName, "Experts Only");
+    assert.match(String(sets[0]?.eventName ?? ""), /Burning Man/i);
+    assert.match(String(sets[0]?.title ?? ""), /Playa Package/i);
   });
 
   it("lands Lucas & Steve TML WE2 2024 from the 1001 seed when watch is 429", async () => {

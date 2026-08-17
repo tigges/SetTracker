@@ -117,6 +117,7 @@ import {
   TL_HONEYLUV_ANTS_USHUAIA_2026,
   TL_HONEYLUV_STREET_PARADE_2025,
   TL_JOHN_SUMMIT_LOLLAPALOOZA,
+  TL_JOHN_SUMMIT_BURNING_MAN_PLAYA_PACKAGE_MIX_2025,
   TL_MARTIN_GARRIX_TML_WE2_2026,
   TL_PAN_POT_STREET_PARADE_2025,
   TL_PEGGY_GOU_CERCLE_LILLE,
@@ -2623,6 +2624,23 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     type: "festival",
     title: "Cuebrick – Live from Sacré Paris | Mainstage Techno | Club Set",
     eventName: "Sacré Paris",
+  },
+  {
+    // Official John Summit upload — Experts Only remix album mix.
+    // Distinct from TML WE2 (yt-PlArfyuzuqo) and Lollapalooza (yt-9TKqqBCmDHA).
+    video: "https://www.youtube.com/watch?v=PkWNuf7rtms",
+    primaryArtist: dj("John Summit", {
+      accent: "#4cc9f0",
+      homeCity: "Chicago, US",
+    }),
+    genre: "Tech House",
+    type: "mix",
+    title: "John Summit - Burning Man Playa Package Mix 2025",
+    seriesName: "Experts Only",
+    eventName: "Burning Man",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/btv3mn9/john-summit-burning-man-playa-package-mix-2025-10-09.html",
+    tracklist1001: TL_JOHN_SUMMIT_BURNING_MAN_PLAYA_PACKAGE_MIX_2025,
   },
 ];
 

@@ -686,3 +686,24 @@ export const TL_COLE_TERRAZAS_HARD_SUMMER_2026: FingerprintSeedRow[] = [
   { at: "34:14", artist: "Mathew Jonson", title: "Automaton" },
   { at: "56:08", artist: "Oshana", title: "Girls In The Front" },
 ];
+
+/**
+ * John Summit - Burning Man Playa Package Mix 2025-10-09
+ * https://www.1001tracklists.com/tracklist/btv3mn9/john-summit-burning-man-playa-package-mix-2025-10-09.html
+ * Official YT: https://youtu.be/PkWNuf7rtms (@JohnSummit — Experts Only remix album)
+ * Capture overlay used TL_John-Summit_Burning-Man_Playa-Package-Mix_2025
+ * (hyphens illegal); constant is TL_JOHN_SUMMIT_BURNING_MAN_PLAYA_PACKAGE_MIX_2025.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-PkWNuf7rtms"]
+ * 6 timed cues — gap-fill, not dense-replace.
+ * Distinct from TL_JOHN_SUMMIT_TML_WE2_2026 / TL_JOHN_SUMMIT_LOLLAPALOOZA.
+ * Captured 2026-08-17 - provenance 1001tl.
+ */
+export const TL_JOHN_SUMMIT_BURNING_MAN_PLAYA_PACKAGE_MIX_2025: FingerprintSeedRow[] =
+  [
+    { at: "0:00", artist: "John Summit ft. Inéz", title: "crystallized (Playa Dub Remix)" },
+    { at: "4:15", artist: "John Summit & GUZ ft. Stevie Appleton", title: "What A Life (OMRI. Remix)" },
+    { at: "9:30", artist: "John Summit & HAYLA", title: "Shiver (N.O.Y & Guy Katch Remix)" },
+    { at: "13:00", artist: "John Summit & Of The Trees", title: "Stay With Me (Mishell Remix)" },
+    { at: "17:35", artist: "John Summit ft. HAYLA", title: "Where You Are (Millero Remix)" },
+    { at: "21:50", artist: "John Summit ft. CLOVES", title: "Focus (EdiP Remix)" },
+  ];

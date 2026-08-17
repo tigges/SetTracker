@@ -76,6 +76,7 @@ import {
   TL_HONEYLUV_ANTS_USHUAIA_2026,
   TL_HONEYLUV_STREET_PARADE_2025,
   TL_JOHN_SUMMIT_LOLLAPALOOZA,
+  TL_JOHN_SUMMIT_BURNING_MAN_PLAYA_PACKAGE_MIX_2025,
   TL_MARTIN_GARRIX_TML_WE2_2026,
   TL_PAN_POT_STREET_PARADE_2025,
   TL_PEGGY_GOU_CERCLE_LILLE,
@@ -2819,5 +2820,38 @@ for (let i = 1; i < coleHard.length; i++) {
 // Liu TML artist Relive — no 1001 URL found; do not invent a wire.
 assert.equal(isWiredTracklistSlug("yt-DWPSLZLKslg"), false);
 assert.equal(TRACKLIST_1001_BY_SOURCE_SLUG["yt-DWPSLZLKslg"], undefined);
+
+assertSeedClocks(TL_JOHN_SUMMIT_BURNING_MAN_PLAYA_PACKAGE_MIX_2025);
+assert.equal(TL_JOHN_SUMMIT_BURNING_MAN_PLAYA_PACKAGE_MIX_2025.length, 6);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-PkWNuf7rtms"],
+  TL_JOHN_SUMMIT_BURNING_MAN_PLAYA_PACKAGE_MIX_2025,
+);
+assert.equal(isWiredTracklistSlug("yt-PkWNuf7rtms"), true);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-PkWNuf7rtms"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-PlArfyuzuqo"],
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-PkWNuf7rtms"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-9TKqqBCmDHA"],
+);
+const playaPackage = tracklist1001RowsToPlays(
+  TL_JOHN_SUMMIT_BURNING_MAN_PLAYA_PACKAGE_MIX_2025,
+);
+assert.equal(playaPackage.length, 6);
+assert.equal(playaPackage[0]?.provenance, "1001tl");
+assert.equal(playaPackage[0]?.timestamp, 0);
+assert.equal(playaPackage[0]?.artistName, "John Summit ft. Inéz");
+assert.equal(playaPackage[0]?.trackTitle, "crystallized (Playa Dub Remix)");
+assert.equal(playaPackage[5]?.artistName, "John Summit ft. CLOVES");
+assert.equal(playaPackage[5]?.trackTitle, "Focus (EdiP Remix)");
+assert.equal(playaPackage[5]?.timestamp, 21 * 60 + 50);
+for (let i = 1; i < playaPackage.length; i++) {
+  assert.ok(
+    (playaPackage[i]!.timestamp ?? 0) > (playaPackage[i - 1]!.timestamp ?? 0),
+    `John Summit Playa Package Mix 2025 clocks must increase at index ${i}`,
+  );
+}
 
 console.log("tracklists1001/seeds.test.ts ok");
