@@ -1,0 +1,2203 @@
+{
+  "generatedAt": "2026-08-17T06:53:45.463Z",
+  "provider": "gemini",
+  "apply": true,
+  "stats": {
+    "provider": "gemini",
+    "scanned": 60,
+    "proposed": 60,
+    "applied": 44,
+    "rejected": 13,
+    "skippedNoKey": false
+  },
+  "rows": [
+    {
+      "slug": "tomorrowland",
+      "name": "Tomorrowland",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/tomorrowland",
+        "youtube": "https://www.youtube.com/@tomorrowland",
+        "instagram": "https://www.instagram.com/tomorrowland",
+        "twitter": "https://twitter.com/tomorrowland",
+        "website": "https://www.tomorrowland.com",
+        "confidence": 1,
+        "notes": null
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/tomorrowland",
+          "reason": "name-matched"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@tomorrowland",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/tomorrowland",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/tomorrowland",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.tomorrowland.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "ultra-miami",
+      "name": "Ultra Music Festival",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": "https://www.youtube.com/umftv",
+        "instagram": "https://www.instagram.com/ultra",
+        "twitter": "https://twitter.com/ultra",
+        "website": "https://ultramusicfestival.com",
+        "confidence": 0.95,
+        "notes": "YouTube sessions and festival video content are hosted on the official UMFTV channel. There is no official dedicated SoundCloud profile for the festival distinct from Ultra Records."
+      },
+      "accepted": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/umftv",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/ultra",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/ultra",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://ultramusicfestival.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "edc-lv",
+      "name": "EDC Las Vegas",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": null,
+        "instagram": "https://www.instagram.com/edc_lasvegas",
+        "twitter": "https://twitter.com/edc_lasvegas",
+        "website": "https://lasvegas.electricdaisycarnival.com",
+        "confidence": 0.95,
+        "notes": "EDC Las Vegas operates dedicated Instagram and X/Twitter accounts along with its official website. Official festival recordings, livestreams, and music sets are distributed through parent organizer Insomniac's channels."
+      },
+      "accepted": [
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/edc_lasvegas",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/edc_lasvegas",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://lasvegas.electricdaisycarnival.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "beyond-wonderland",
+      "name": "Beyond Wonderland",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": null,
+        "instagram": "https://www.instagram.com/beyondwland",
+        "twitter": "https://twitter.com/beyondwland",
+        "website": "https://socal.beyondwonderland.com",
+        "confidence": 0.95,
+        "notes": "Beyond Wonderland is produced by Insomniac Events. While dedicated Instagram and Twitter handles exist for the festival, video and audio content are hosted on Insomniac's central channels."
+      },
+      "accepted": [
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/beyondwland",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/beyondwland",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://socal.beyondwonderland.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "escape-halloween",
+      "name": "Escape Halloween",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": null,
+        "instagram": "https://www.instagram.com/escapehalloween",
+        "twitter": "https://twitter.com/escapehalloween",
+        "website": "https://escapehalloween.com",
+        "confidence": 0.95,
+        "notes": "Escape Halloween is produced by Insomniac Events. It maintains dedicated website, Instagram, and Twitter profiles; audio and video content is primarily distributed through Insomniac's central channels."
+      },
+      "accepted": [
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/escapehalloween",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/escapehalloween",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://escapehalloween.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "nocturnal-wonderland",
+      "name": "Nocturnal Wonderland",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": null,
+        "instagram": "https://www.instagram.com/nocturnalwland",
+        "twitter": "https://twitter.com/nocturnalwland",
+        "website": "https://www.nocturnalwonderland.com",
+        "confidence": 0.95,
+        "notes": "Nocturnal Wonderland is produced by Insomniac Events; it maintains dedicated Instagram and X (Twitter) accounts and website, while YouTube and SoundCloud content is hosted under the parent Insomniac channels."
+      },
+      "accepted": [
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/nocturnalwland",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/nocturnalwland",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.nocturnalwonderland.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "awakenings-festival",
+      "name": "Awakenings Festival",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/awakenings",
+        "youtube": "https://www.youtube.com/@awakeningsevent",
+        "instagram": "https://www.instagram.com/awakenings",
+        "twitter": "https://twitter.com/awakenings",
+        "website": "https://www.awakenings.com",
+        "confidence": 1,
+        "notes": null
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/awakenings",
+          "reason": "name-matched"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@awakeningsevent",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/awakenings",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/awakenings",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.awakenings.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "dekmantel-festival",
+      "name": "Dekmantel Festival",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/dkmntl",
+        "youtube": "https://www.youtube.com/@dkmntl",
+        "instagram": "https://www.instagram.com/dkmntl",
+        "twitter": "https://twitter.com/dkmntl",
+        "website": "https://dekmantelfestival.com",
+        "confidence": 0.95,
+        "notes": "Dekmantel Festival is an electronic music festival held annually in Amsterdam, Netherlands, primarily at the Amsterdamse Bos."
+      },
+      "accepted": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@dkmntl",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://dekmantelfestival.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/dkmntl",
+          "reason": "handle is an artist profile or does not match event"
+        },
+        {
+          "field": "instagram",
+          "url": "https://www.instagram.com/dkmntl",
+          "reason": "handle is an artist profile or does not match event"
+        },
+        {
+          "field": "twitter",
+          "url": "https://twitter.com/dkmntl",
+          "reason": "handle is an artist profile or does not match event"
+        }
+      ]
+    },
+    {
+      "slug": "lollapalooza",
+      "name": "Lollapalooza",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": "https://www.youtube.com/@lollapalooza",
+        "instagram": "https://www.instagram.com/lollapalooza",
+        "twitter": "https://twitter.com/lollapalooza",
+        "website": "https://www.lollapalooza.com",
+        "confidence": 1,
+        "notes": null
+      },
+      "accepted": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@lollapalooza",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/lollapalooza",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/lollapalooza",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.lollapalooza.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "burning-man",
+      "name": "Burning Man",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/burningman",
+        "youtube": "https://www.youtube.com/@burningman",
+        "instagram": "https://www.instagram.com/burningman",
+        "twitter": "https://twitter.com/burningman",
+        "website": "https://burningman.org",
+        "confidence": 1,
+        "notes": null
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/burningman",
+          "reason": "name-matched"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@burningman",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/burningman",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/burningman",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://burningman.org/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "coachella",
+      "name": "Coachella",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": "https://www.youtube.com/coachella",
+        "instagram": "https://www.instagram.com/coachella",
+        "twitter": "https://twitter.com/coachella",
+        "website": "https://www.coachella.com",
+        "confidence": 1,
+        "notes": null
+      },
+      "accepted": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/coachella",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/coachella",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/coachella",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.coachella.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "countdown-nye",
+      "name": "Countdown NYE",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": null,
+        "instagram": "https://www.instagram.com/countdownnye",
+        "twitter": "https://twitter.com/countdown_nye",
+        "website": "https://countdownnye.com",
+        "confidence": 0.95,
+        "notes": "Countdown NYE is an annual electronic dance music festival organized by Insomniac Events. Video content and mixes are published under Insomniac Events' main YouTube and SoundCloud channels rather than separate dedicated festival accounts."
+      },
+      "accepted": [
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/countdownnye",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/countdown_nye",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://countdownnye.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "dreamstate",
+      "name": "Dreamstate",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": null,
+        "instagram": "https://www.instagram.com/dreamstateusa",
+        "twitter": "https://twitter.com/DreamstateUSA",
+        "website": "https://www.dreamstateusa.com",
+        "confidence": 0.95,
+        "notes": "Dreamstate is Insomniac's dedicated trance music brand and festival. Official video and audio content is primarily hosted via Insomniac Events' central YouTube and SoundCloud channels."
+      },
+      "accepted": [
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/dreamstateusa",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/DreamstateUSA",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.dreamstateusa.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "edc-orlando",
+      "name": "EDC Orlando",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": null,
+        "instagram": "https://www.instagram.com/edc_orlando",
+        "twitter": "https://twitter.com/EDC_Orlando",
+        "website": "https://orlando.electricdaisycarnival.com",
+        "confidence": 0.95,
+        "notes": "Official festival video and audio content are hosted under parent organizer Insomniac's central channels."
+      },
+      "accepted": [
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/edc_orlando",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/EDC_Orlando",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://orlando.electricdaisycarnival.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "elrow",
+      "name": "elrow",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/elrowmusic",
+        "youtube": "https://www.youtube.com/@elrowofficial",
+        "instagram": "https://www.instagram.com/elrowofficial",
+        "twitter": "https://twitter.com/elrow_",
+        "website": "https://www.elrow.com",
+        "confidence": 1,
+        "notes": "Verified official website and social media profiles for global electronic music brand and party/club concept elrow."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/elrowmusic",
+          "reason": "name-matched"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@elrowofficial",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/elrowofficial",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/elrow_",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.elrow.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "nature-one",
+      "name": "Nature One",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/official-nature-one",
+        "youtube": "https://www.youtube.com/@NATUREONE",
+        "instagram": "https://www.instagram.com/natureonefestival",
+        "twitter": "https://twitter.com/natureone",
+        "website": "https://www.nature-one.de",
+        "confidence": 0.95,
+        "notes": "Nature One is a major electronic music festival held annually at the former Raketenbasis Pydna near Kastellaun, Germany."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/official-nature-one",
+          "reason": "name-matched"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@NATUREONE",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/natureonefestival",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/natureone",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.nature-one.de/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "parookaville",
+      "name": "Parookaville",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": "https://www.youtube.com/@parookavilleTV",
+        "instagram": "https://www.instagram.com/parookaville",
+        "twitter": "https://twitter.com/PAROOKAVILLE",
+        "website": "https://www.parookaville.com",
+        "confidence": 1,
+        "notes": "Parookaville is a major electronic dance music festival held annually at Airport Weeze in Germany. No official SoundCloud profile was verified."
+      },
+      "accepted": [
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/parookaville",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.parookaville.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@parookavilleTV",
+          "reason": "URL is dead"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/PAROOKAVILLE",
+          "reason": "URL is dead"
+        }
+      ]
+    },
+    {
+      "slug": "siam-songkran-music-festival",
+      "name": "Siam Songkran Music Festival",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": "https://www.youtube.com/@siamsongkranmusicfestival",
+        "instagram": "https://www.instagram.com/siamsongkran",
+        "twitter": null,
+        "website": "https://siamsongkran.info",
+        "confidence": 0.9,
+        "notes": "Siam Songkran Music Festival is an annual electronic dance music festival held in Bangkok, Thailand during Songkran, organized by One Asia Ventures. No official SoundCloud or Twitter/X profiles were verified."
+      },
+      "accepted": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@siamsongkranmusicfestival",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/siamsongkran",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://siamsongkran.info/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "untold-festival",
+      "name": "Untold Festival",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": "https://www.youtube.com/@untoldfestival",
+        "instagram": "https://www.instagram.com/untoldfestival",
+        "twitter": "https://twitter.com/untoldfestival",
+        "website": "https://untold.com",
+        "confidence": 0.95,
+        "notes": "Untold Festival is a prominent electronic music festival held annually in Cluj-Napoca, Romania (with editions in Dubai)."
+      },
+      "accepted": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@untoldfestival",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/untoldfestival",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/untoldfestival",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://untold.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "veld-music-festival",
+      "name": "Veld Music Festival",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": "https://www.youtube.com/@VeldMusicFestival",
+        "instagram": "https://www.instagram.com/veldmusicfestival",
+        "twitter": "https://twitter.com/VELDFest",
+        "website": "https://veldmusicfestival.com",
+        "confidence": 0.95,
+        "notes": "Veld Music Festival is an annual electronic dance music festival held at Downsview Park in Toronto, Canada. No official SoundCloud account was identified."
+      },
+      "accepted": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@VeldMusicFestival",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/veldmusicfestival",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/VELDFest",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://veldmusicfestival.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "verknipt-festival",
+      "name": "Verknipt Festival",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/verknipt-events",
+        "youtube": "https://www.youtube.com/@verkniptevents",
+        "instagram": "https://www.instagram.com/verkniptevents",
+        "twitter": null,
+        "website": "https://www.verknipt.org",
+        "confidence": 0.95,
+        "notes": "Verknipt Festival is an annual electronic and hard techno festival hosted by Dutch event organization Verknipt at Strijkviertel in Utrecht, Netherlands. Official profiles are shared across the Verknipt organization brand."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/verknipt-events",
+          "reason": "name-matched"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@verkniptevents",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/verkniptevents",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.verknipt.org/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "state-of-trance-festival",
+      "name": "A State Of Trance Festival",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/astateoftrance",
+        "youtube": "https://www.youtube.com/@astateoftrance",
+        "instagram": "https://www.instagram.com/asotlive",
+        "twitter": "https://twitter.com/asot",
+        "website": "https://festival.astateoftrance.com",
+        "confidence": 0.95,
+        "notes": "A State Of Trance (ASOT) operates festival events worldwide with a dedicated festival portal at festival.astateoftrance.com and main brand portal at astateoftrance.com."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/astateoftrance",
+          "reason": "name-matched"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@astateoftrance",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://festival.astateoftrance.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "instagram",
+          "url": "https://www.instagram.com/asotlive",
+          "reason": "handle is an artist profile or does not match event"
+        },
+        {
+          "field": "twitter",
+          "url": "https://twitter.com/asot",
+          "reason": "handle is an artist profile or does not match event"
+        }
+      ]
+    },
+    {
+      "slug": "airbeat-one",
+      "name": "Airbeat One",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": "https://www.youtube.com/@airbeat1festival",
+        "instagram": "https://www.instagram.com/airbeatone",
+        "twitter": "https://twitter.com/airbeatone",
+        "website": "https://airbeat-one.de",
+        "confidence": 0.95,
+        "notes": "Airbeat One is an annual electronic dance music festival held at Flugplatz Neustadt-Glewe in Germany."
+      },
+      "accepted": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@airbeat1festival",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/airbeatone",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/airbeatone",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://airbeat-one.de/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "amf",
+      "name": "AMF",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": "https://www.youtube.com/@Amsterdammusicfestival",
+        "instagram": "https://www.instagram.com/amffestival",
+        "twitter": "https://twitter.com/_AMFofficial",
+        "website": "https://amf-festival.com",
+        "confidence": 0.95,
+        "notes": "AMF (Amsterdam Music Festival) is a major annual electronic dance music festival held at Johan Cruijff ArenA in Amsterdam during ADE."
+      },
+      "accepted": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@Amsterdammusicfestival",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/amffestival",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/_AMFofficial",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://amf-festival.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "arc-music-festival",
+      "name": "Arc Music Festival",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": "https://www.youtube.com/@arcmusicfestival",
+        "instagram": "https://www.instagram.com/arcmusicfestival",
+        "twitter": "https://twitter.com/arcmusicfest",
+        "website": "https://arcmusicfestival.com",
+        "confidence": 0.95,
+        "notes": "ARC Music Festival is an annual electronic and house/techno music festival organized by Auris Presents in Union Park, Chicago."
+      },
+      "accepted": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@arcmusicfestival",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/arcmusicfestival",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/arcmusicfest",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://arcmusicfestival.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "baum-festival",
+      "name": "Baum Festival",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": null,
+        "instagram": "https://www.instagram.com/baumfestival",
+        "twitter": "https://twitter.com/BaumFestival_",
+        "website": "https://www.baumfestival.com",
+        "confidence": 0.95,
+        "notes": "Baum Festival is a major electronic music and techno festival held annually at Corferias in Bogot\u00e1, Colombia."
+      },
+      "accepted": [
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/baumfestival",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/BaumFestival_",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.baumfestival.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "beyond-valley",
+      "name": "Beyond The Valley",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": "https://www.youtube.com/@beyondthevalley9633",
+        "instagram": "https://www.instagram.com/beyondthevalleyfest",
+        "twitter": null,
+        "website": "https://www.beyondthevalley.com.au",
+        "confidence": 0.95,
+        "notes": "Beyond The Valley is an annual music festival held over New Year's Eve in Victoria, Australia, organized by Untitled Group."
+      },
+      "accepted": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@beyondthevalley9633",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/beyondthevalleyfest",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.beyondthevalley.com.au/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "beyond-wonderland-southern-california",
+      "name": "Beyond Wonderland Southern California",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": null,
+        "instagram": "https://www.instagram.com/beyondwland",
+        "twitter": "https://twitter.com/beyondwland",
+        "website": "https://socal.beyondwonderland.com",
+        "confidence": 0.95,
+        "notes": "Beyond Wonderland is produced by Insomniac Events. Dedicated festival social accounts exist for Instagram and Twitter/X (@beyondwland), while official audio and video content is hosted via parent Insomniac channels."
+      },
+      "accepted": [
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/beyondwland",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/beyondwland",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://socal.beyondwonderland.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "bonnaroo-music-arts-festival",
+      "name": "Bonnaroo Music & Arts Festival",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": "https://www.youtube.com/@Bonnaroo",
+        "instagram": "https://www.instagram.com/bonnaroo",
+        "twitter": "https://twitter.com/Bonnaroo",
+        "website": "https://www.bonnaroo.com",
+        "confidence": 0.95,
+        "notes": "Official website and social media profiles for Bonnaroo Music & Arts Festival in Manchester, Tennessee."
+      },
+      "accepted": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@Bonnaroo",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/bonnaroo",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/Bonnaroo",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.bonnaroo.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "boomtown",
+      "name": "Boomtown",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": "https://www.youtube.com/@BoomtownFairOfficial",
+        "instagram": "https://www.instagram.com/boomtownfairofficial",
+        "twitter": "https://twitter.com/boomtownfair",
+        "website": "https://www.boomtownfair.co.uk",
+        "confidence": 0.95,
+        "notes": "Boomtown (also known as Boomtown Fair) is an independent immersive music festival held near Winchester, Hampshire, UK."
+      },
+      "accepted": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@BoomtownFairOfficial",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/boomtownfairofficial",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/boomtownfair",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.boomtownfair.co.uk/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "cova-santa",
+      "name": "Cova Santa",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": "https://www.youtube.com/@covasanta_ibiza",
+        "instagram": "https://www.instagram.com/covasantaibiza",
+        "twitter": null,
+        "website": "https://www.covasanta.com",
+        "confidence": 0.9,
+        "notes": "Cova Santa is an open-air club, restaurant, and event venue located in Sant Josep de sa Talaia, Ibiza, Spain."
+      },
+      "accepted": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@covasanta_ibiza",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/covasantaibiza",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.covasanta.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "crssd-festival",
+      "name": "CRSSD Festival",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/fngrscrssd",
+        "youtube": "https://www.youtube.com/@crssd_fest",
+        "instagram": "https://www.instagram.com/crssdfest",
+        "twitter": "https://twitter.com/crssdfest",
+        "website": "https://www.crssdfest.com",
+        "confidence": 0.95,
+        "notes": "CRSSD Festival is a biannual electronic music festival produced by FNGRS CRSSD and held at Waterfront Park in San Diego, California."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/fngrscrssd",
+          "reason": "name-matched"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@crssd_fest",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/crssdfest",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/crssdfest",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.crssdfest.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "defected-croatia",
+      "name": "Defected Croatia",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/defectedrecords",
+        "youtube": "https://www.youtube.com/@DefectedRecords",
+        "instagram": "https://www.instagram.com/defectedrecords",
+        "twitter": "https://twitter.com/defectedrecords",
+        "website": "https://croatia.defected.com",
+        "confidence": 0.95,
+        "notes": "Defected Croatia is produced directly by Defected Records and shares the label's primary social channels alongside a dedicated festival subdomain."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/defectedrecords",
+          "reason": "name-matched"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@DefectedRecords",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/defectedrecords",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/defectedrecords",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://croatia.defected.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "defected-malta",
+      "name": "Defected Malta",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": null,
+        "instagram": null,
+        "twitter": null,
+        "website": "https://malta.defected.com/",
+        "confidence": 0.95,
+        "notes": "Defected Malta is an annual festival organized by Defected Records in Malta. It operates via its dedicated festival subsite (malta.defected.com), while its promotional content, social media updates, and audio/video streams are hosted on the main Defected Records channels."
+      },
+      "accepted": [
+        {
+          "field": "website",
+          "url": "https://malta.defected.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "defqon1",
+      "name": "Defqon.1",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": null,
+        "instagram": "https://www.instagram.com/defqon1/",
+        "twitter": null,
+        "website": "https://defqon1.com/",
+        "confidence": 0.95,
+        "notes": "Defqon.1 is organized by Q-dance. While Defqon.1 maintains its own dedicated website and Instagram profile, full video sessions and music streaming are distributed through Q-dance's central channels."
+      },
+      "accepted": [
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/defqon1",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://defqon1.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "dgtl",
+      "name": "DGTL",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/dgtl-festival",
+        "youtube": "https://www.youtube.com/@DGTLfestival",
+        "instagram": "https://www.instagram.com/dgtlfestival",
+        "twitter": "https://twitter.com/dgtlfestival",
+        "website": "https://dgtl.nl",
+        "confidence": 0.95,
+        "notes": "DGTL is a global electronic music and arts festival originating in Amsterdam, Netherlands, with international editions held across Europe, South America, and Asia."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/dgtl-festival",
+          "reason": "name-matched"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@DGTLfestival",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/dgtlfestival",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/dgtlfestival",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://dgtl.nl/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "dimensions-festival",
+      "name": "Dimensions Festival",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/dimensionsfestival",
+        "youtube": "https://www.youtube.com/@DimensionsFestival",
+        "instagram": "https://www.instagram.com/dimensionsfestival",
+        "twitter": "https://twitter.com/dimensions_fest",
+        "website": "https://www.dimensionsfestival.com",
+        "confidence": 0.95,
+        "notes": "Dimensions Festival is an electronic music festival held at The Garden Resort in Tisno, Croatia (previously held at Fort Punta Christo in Pula, Croatia)."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/dimensionsfestival",
+          "reason": "name-matched"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@DimensionsFestival",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/dimensionsfestival",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/dimensions_fest",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.dimensionsfestival.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "djakarta-warehouse-project",
+      "name": "Djakarta Warehouse Project",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": "https://www.youtube.com/@ISMAYATV",
+        "instagram": "https://www.instagram.com/djakartawarehouseproject",
+        "twitter": "https://twitter.com/DWPfest",
+        "website": "https://www.dwpfest.com",
+        "confidence": 0.95,
+        "notes": "Djakarta Warehouse Project (DWP) is organized by Ismaya Live, which hosts all official DWP aftermovies, trailers, and announcement videos via their official YouTube channel @ISMAYATV."
+      },
+      "accepted": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@ISMAYATV",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/djakartawarehouseproject",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "twitter",
+          "url": "https://twitter.com/DWPfest",
+          "reason": "handle is an artist profile or does not match event"
+        },
+        {
+          "field": "website",
+          "url": "https://www.dwpfest.com",
+          "reason": "website host does not match event name"
+        }
+      ]
+    },
+    {
+      "slug": "djoon",
+      "name": "Djoon",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/djoon",
+        "youtube": "https://www.youtube.com/@djoonclub",
+        "instagram": "https://www.instagram.com/djoonclub",
+        "twitter": "https://twitter.com/djoonclub",
+        "website": "https://www.djoon.com",
+        "confidence": 0.95,
+        "notes": null
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/djoon",
+          "reason": "name-matched"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@djoonclub",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/djoonclub",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/djoonclub",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.djoon.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "edc-mexico",
+      "name": "EDC Mexico",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": null,
+        "instagram": "https://www.instagram.com/edc_mexico",
+        "twitter": "https://twitter.com/edc_mexico",
+        "website": "https://mexico.electricdaisycarnival.com",
+        "confidence": 0.95,
+        "notes": "EDC Mexico does not have dedicated standalone YouTube or SoundCloud channels; audio-visual content is released via the parent promoter (Insomniac Events)."
+      },
+      "accepted": [
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/edc_mexico",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/edc_mexico",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://mexico.electricdaisycarnival.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "edc-thailand",
+      "name": "EDC Thailand",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": null,
+        "instagram": "https://www.instagram.com/edc_thailand",
+        "twitter": "https://x.com/edc_thailand",
+        "website": "https://thailand.electricdaisycarnival.com",
+        "confidence": 0.95,
+        "notes": "Official regional edition of Electric Daisy Carnival (EDC) in Thailand organized by Insomniac Events. YouTube and SoundCloud do not have dedicated festival accounts and are handled under the main Insomniac umbrella."
+      },
+      "accepted": [
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/edc_thailand",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/edc_thailand",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://thailand.electricdaisycarnival.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "electric-love",
+      "name": "Electric Love",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": "https://www.youtube.com/@electriclovetv",
+        "instagram": "https://www.instagram.com/electricloveaut",
+        "twitter": "https://twitter.com/electricloveaut",
+        "website": "https://www.electriclove.at",
+        "confidence": 0.95,
+        "notes": "Electric Love Festival is an annual electronic dance music festival held at the Salzburgring in Plainfeld, Austria."
+      },
+      "accepted": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@electriclovetv",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/electricloveaut",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/electricloveaut",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.electriclove.at/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "es-paradis",
+      "name": "Es Paradis",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": "https://www.youtube.com/@esparadisofficial",
+        "instagram": "https://www.instagram.com/esparadisofficial",
+        "twitter": "https://twitter.com/esparadisibz",
+        "website": "https://www.esparadis.com",
+        "confidence": 0.9,
+        "notes": "Es Paradis is a historic nightclub located in Sant Antoni de Portmany, Ibiza, Spain, known for its pyramid roof and signature water parties."
+      },
+      "accepted": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@esparadisofficial",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/esparadisofficial",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/esparadisibz",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.esparadis.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "glastonbury-festival",
+      "name": "Glastonbury Festival",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": "https://www.youtube.com/@GlastonburyOfficial",
+        "instagram": "https://www.instagram.com/glastofest",
+        "twitter": "https://twitter.com/glastonbury",
+        "website": "https://www.glastonburyfestivals.co.uk/",
+        "confidence": 1,
+        "notes": "Official accounts for Glastonbury Festival (Pilton, Somerset, UK). No verified primary SoundCloud profile found for the festival itself."
+      },
+      "accepted": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@GlastonburyOfficial",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/glastonbury",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.glastonburyfestivals.co.uk/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "instagram",
+          "url": "https://www.instagram.com/glastofest",
+          "reason": "handle is an artist profile or does not match event"
+        }
+      ]
+    },
+    {
+      "slug": "groove-cruise",
+      "name": "Groove Cruise",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/groovecruise",
+        "youtube": "https://www.youtube.com/@TheGrooveCruise",
+        "instagram": "https://www.instagram.com/groovecruise",
+        "twitter": "https://twitter.com/GrooveCruise",
+        "website": "https://www.groovecruise.com",
+        "confidence": 0.95,
+        "notes": null
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/groovecruise",
+          "reason": "name-matched"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@TheGrooveCruise",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/groovecruise",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/GrooveCruise",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.groovecruise.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "hard-rock-hotel-ibiza",
+      "name": "Hard Rock Hotel Ibiza",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": null,
+        "instagram": "https://www.instagram.com/hrhibiza",
+        "twitter": "https://twitter.com/hrhibiza",
+        "website": "https://hotel.hardrock.com/ibiza/",
+        "confidence": 0.95,
+        "notes": "Hard Rock Hotel Ibiza is an open-air venue, beach club, and music-themed resort in Playa d'en Bossa, Ibiza, Spain."
+      },
+      "accepted": [
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/hrhibiza",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/hrhibiza",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://hotel.hardrock.com/ibiza/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "hideout-festival",
+      "name": "Hideout Festival",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/hideoutfestival",
+        "youtube": "https://www.youtube.com/@hideoutfestival",
+        "instagram": "https://www.instagram.com/hideoutfestival",
+        "twitter": "https://twitter.com/hideoutfestival",
+        "website": "https://hideoutfestival.com",
+        "confidence": 0.95,
+        "notes": "Hideout Festival is an electronic music festival held annually at Zr\u0107e Beach on the island of Pag, Croatia."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/hideoutfestival",
+          "reason": "name-matched"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@hideoutfestival",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/hideoutfestival",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://hideoutfestival.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "twitter",
+          "url": "https://x.com/hideoutfestival",
+          "reason": "URL is dead"
+        }
+      ]
+    },
+    {
+      "slug": "houghton-festival",
+      "name": "Houghton Festival",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/houghton-festival",
+        "youtube": null,
+        "instagram": "https://www.instagram.com/houghtonfestival",
+        "twitter": null,
+        "website": "https://www.houghtonfestival.co.uk",
+        "confidence": 0.9,
+        "notes": "Houghton Festival is an electronic music and arts festival founded and curated by Craig Richards, held at Houghton Hall in Norfolk, UK."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/houghton-festival",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/houghtonfestival",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.houghtonfestival.co.uk/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "kappa-futurfestival",
+      "name": "Kappa Futurfestival",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": "https://www.youtube.com/@futur_festival",
+        "instagram": "https://www.instagram.com/futur_festival",
+        "twitter": "https://x.com/FuturFestival",
+        "website": "https://www.kappafuturfestival.it",
+        "confidence": 0.95,
+        "notes": "Verified official website, YouTube, Instagram, and X/Twitter channels for Kappa FuturFestival held in Turin, Italy. No dedicated official SoundCloud profile found."
+      },
+      "accepted": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@futur_festival",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/futur_festival",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/FuturFestival",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.kappafuturfestival.it/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "lio-ibiza",
+      "name": "L\u00edo Ibiza",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": "https://www.youtube.com/@lioofficial_",
+        "instagram": "https://www.instagram.com/lioibizaofficial",
+        "twitter": "https://twitter.com/lioibiza",
+        "website": "https://lioibiza.com",
+        "confidence": 0.95,
+        "notes": "L\u00edo Ibiza is an upscale cabaret, restaurant, and nightclub venue in Ibiza (part of L\u00edo Group)."
+      },
+      "accepted": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@lioofficial_",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/lioibizaofficial",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://lioibiza.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "twitter",
+          "url": "https://x.com/lioibiza",
+          "reason": "URL is dead"
+        }
+      ]
+    },
+    {
+      "slug": "lost-lands-festival",
+      "name": "Lost Lands Festival",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": "https://www.youtube.com/@LostLandsMusicFestival",
+        "instagram": "https://www.instagram.com/lostlandsfestival",
+        "twitter": "https://twitter.com/lost_lands",
+        "website": "https://www.lostlandsfestival.com",
+        "confidence": 0.95,
+        "notes": "Verified official website, YouTube, Instagram, and Twitter accounts. No standalone official SoundCloud profile was identified."
+      },
+      "accepted": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@LostLandsMusicFestival",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/lostlandsfestival",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/lost_lands",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.lostlandsfestival.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "lost-village",
+      "name": "Lost Village",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/lost-village-festival",
+        "youtube": "https://www.youtube.com/@LostVillage",
+        "instagram": "https://www.instagram.com/lostvillagefestival",
+        "twitter": "https://twitter.com/lostvillagefest",
+        "website": "https://lostvillagefestival.com",
+        "confidence": 0.95,
+        "notes": "Lost Village is an electronic music and arts boutique festival held annually in Lincolnshire, UK."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/lost-village-festival",
+          "reason": "name-matched"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@LostVillage",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/lostvillagefestival",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/lostvillagefest",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://lostvillagefestival.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "lovefest",
+      "name": "Lovefest",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": "https://www.youtube.com/c/LovefestSerbia",
+        "instagram": "https://www.instagram.com/lovefest.rs",
+        "twitter": "https://twitter.com/lovefestrs",
+        "website": "https://lovefest.rs",
+        "confidence": 0.95,
+        "notes": "Lovefest (also known as Tuborg Lovefest) is an electronic music festival held annually in Vrnja\u010dka Banja, Serbia. No official SoundCloud profile was found."
+      },
+      "accepted": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/c/LovefestSerbia",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/lovefest.rs",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/lovefestrs",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://lovefest.rs/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "loveland",
+      "name": "Loveland",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/loveland-legacy",
+        "youtube": "https://www.youtube.com/@LovelandEvents",
+        "instagram": "https://www.instagram.com/lovelandnl",
+        "twitter": null,
+        "website": "https://loveland.nl/festival",
+        "confidence": 0.95,
+        "notes": "Loveland is an electronic music festival in Amsterdam, Netherlands, organized by Loveland Events."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/loveland-legacy",
+          "reason": "name-matched"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@LovelandEvents",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/lovelandnl",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://loveland.nl/festival/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "monegros-desert-festival",
+      "name": "Monegros Desert Festival",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": "https://www.youtube.com/@MonegrosOfficial",
+        "instagram": "https://www.instagram.com/monegrosfestival",
+        "twitter": "https://twitter.com/monegrosfes",
+        "website": "https://monegrosfestival.com",
+        "confidence": 0.9,
+        "notes": "Monegros Desert Festival is an electronic music festival held in the Monegros Desert near Fraga, Huesca, Spain."
+      },
+      "accepted": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@MonegrosOfficial",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/monegrosfestival",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://monegrosfestival.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "twitter",
+          "url": "https://x.com/monegrosfes",
+          "reason": "URL is dead"
+        }
+      ]
+    },
+    {
+      "slug": "movement-music-festival",
+      "name": "Movement Music Festival",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": "https://www.youtube.com/@movementdetroit",
+        "instagram": "https://www.instagram.com/movementdetroit",
+        "twitter": "https://twitter.com/movementdetroit",
+        "website": "https://movementfestival.com",
+        "confidence": 0.95,
+        "notes": "Movement Music Festival is an electronic music festival held annually in Detroit, Michigan at Hart Plaza. The festival is produced by Paxahau."
+      },
+      "accepted": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@movementdetroit",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/movementdetroit",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/movementdetroit",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://movementfestival.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "mysteryland",
+      "name": "Mysteryland",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/mysterylandmusic",
+        "youtube": "https://www.youtube.com/@mysteryland",
+        "instagram": "https://www.instagram.com/mysteryland_official",
+        "twitter": "https://twitter.com/mysteryland",
+        "website": "https://www.mysteryland.com",
+        "confidence": 1,
+        "notes": "Mysteryland is a leading electronic music festival held annually in Haarlemmermeer, Netherlands."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/mysterylandmusic",
+          "reason": "name-matched"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@mysteryland",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/mysteryland_official",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/mysteryland",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.mysteryland.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "neopop-festival",
+      "name": "Neopop Festival",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": "https://www.youtube.com/@neopopfestival",
+        "instagram": "https://www.instagram.com/neopopfestival",
+        "twitter": null,
+        "website": "https://neopopfestival.com",
+        "confidence": 0.9,
+        "notes": "Neopop Festival is an electronic and techno music festival held in Viana do Castelo, Portugal. Official Instagram, YouTube, and website accounts verified."
+      },
+      "accepted": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@neopopfestival",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/neopopfestival",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://neopopfestival.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "neversea-kapital",
+      "name": "Neversea Kapital",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": "https://www.youtube.com/@KapitalFestival",
+        "instagram": "https://www.instagram.com/kapitalfestival",
+        "twitter": null,
+        "website": "https://kapitalfestival.com",
+        "confidence": 0.9,
+        "notes": "Neversea Kapital (branded as Kapital Festival) is an electronic music festival held at Arena Na\u021bional\u0103 in Bucharest, Romania, organized by Untold Universe / Neversea Production."
+      },
+      "accepted": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@KapitalFestival",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/kapitalfestival",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://kapitalfestival.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "nibirii-festival",
+      "name": "Nibirii Festival",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": "https://www.youtube.com/@nibirii",
+        "instagram": "https://www.instagram.com/nibirii",
+        "twitter": null,
+        "website": "https://nibirii.com",
+        "confidence": 0.95,
+        "notes": "Nibirii Festival is an electronic music festival held at D\u00fcrener Badesee near Cologne, Germany. Official website, Instagram, and YouTube channels verified; no active official SoundCloud profile found."
+      },
+      "accepted": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@nibirii",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/nibirii",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://nibirii.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    }
+  ]
+}
