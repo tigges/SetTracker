@@ -121,15 +121,14 @@ export function resolvePlaybackTarget(
 
   if (host === "soundcloud") {
     // Widget accepts the public track/set permalink.
+    // Do not put `#t=` on the widget `url=` — SoundCloud ignores a hash
+    // inside that query param. Cue jumps use the Widget API (`seekTo`).
     const page =
       url.includes("w.soundcloud.com") && opts.sourceUrl
         ? opts.sourceUrl
         : url;
-    const start = opts.startSec != null && opts.startSec > 0
-      ? `#t=${Math.floor(opts.startSec)}`
-      : "";
     const embedSrc =
-      `https://w.soundcloud.com/player/?url=${encodeURIComponent(page + start)}` +
+      `https://w.soundcloud.com/player/?url=${encodeURIComponent(page)}` +
       `&color=%2300ff9c&auto_play=${opts.autoplay ? "true" : "false"}` +
       `&hide_related=true&show_comments=false` +
       `&show_user=true&show_reposts=false&show_teaser=false&visual=false`;
@@ -137,7 +136,7 @@ export function resolvePlaybackTarget(
       host,
       label: HOST_LABEL[host],
       embedSrc,
-      openUrl: page,
+      openUrl: soundcloudSeekUrl(page, opts.startSec),
       embedHeight: 166,
     };
   }
@@ -154,11 +153,13 @@ export function resolvePlaybackTarget(
         ? `&start=${Math.floor(opts.startSec)}`
         : "";
     const autoplay = opts.autoplay ? "&autoplay=1" : "";
+    const watch =
+      opts.sourceUrl || `https://www.youtube.com/watch?v=${id}`;
     return {
       host,
       label: HOST_LABEL[host],
       embedSrc: `https://www.youtube.com/embed/${id}?rel=0${start}${autoplay}`,
-      openUrl: opts.sourceUrl || `https://www.youtube.com/watch?v=${id}`,
+      openUrl: youtubeSeekUrl(watch, opts.startSec),
       embedHeight: 360,
     };
   }
@@ -231,6 +232,34 @@ export function hearthisSeekUrl(
   const base = publicUrl.replace(/#.*$/, "");
   if (startSec == null || startSec <= 0) return base;
   return `${base}#t=${Math.floor(startSec)}`;
+}
+
+/** SoundCloud permalink with an optional `#t=` cue (seconds). */
+export function soundcloudSeekUrl(
+  page: string,
+  startSec?: number | null,
+): string {
+  const base = page.replace(/#.*$/, "");
+  if (startSec == null || startSec <= 0) return base;
+  return `${base}#t=${Math.floor(startSec)}`;
+}
+
+/** YouTube watch URL with an optional `t=` cue. */
+export function youtubeSeekUrl(
+  watchUrl: string,
+  startSec?: number | null,
+): string {
+  try {
+    const u = new URL(watchUrl);
+    if (startSec != null && startSec > 0) {
+      u.searchParams.set("t", `${Math.floor(startSec)}s`);
+    } else {
+      u.searchParams.delete("t");
+    }
+    return u.toString();
+  } catch {
+    return watchUrl;
+  }
 }
 
 /**
