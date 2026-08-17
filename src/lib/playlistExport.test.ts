@@ -20,6 +20,8 @@ const plays = [
     musicalKey: "A min",
     trackDurationSec: 360,
     beatportUrl: "https://www.beatport.com/track/pressure/1",
+    isrc: "GBXXXX0000001",
+    mixName: "Extended Mix",
     idStatus: "identified",
   },
   {
@@ -31,6 +33,8 @@ const plays = [
     musicalKey: null,
     trackDurationSec: null,
     beatportUrl: null,
+    isrc: null,
+    mixName: null,
     idStatus: "unresolved_id",
   },
   {
@@ -41,7 +45,9 @@ const plays = [
     bpm: null,
     musicalKey: null,
     trackDurationSec: null,
-    beatportUrl: null,
+    beatportUrl: "https://www.beatport.com/search/tracks?q=Rave",
+    isrc: null,
+    mixName: null,
     idStatus: "community_resolved",
   },
 ];
@@ -59,7 +65,10 @@ const csv = buildTracklistCsv(plays, { title: "Test Set", slug: "test-set" });
 assert.ok(csv.startsWith("position,cue,artist,title"));
 assert.ok(csv.includes("AC Slater"));
 assert.ok(csv.includes("00:00"));
+assert.ok(csv.includes("GBXXXX0000001"));
+assert.ok(csv.includes("Extended Mix"));
 assert.ok(csv.includes(spotifySearchUrl("Pressure", "AC Slater")));
+assert.ok(!csv.includes("beatport.com/search"));
 
 const m3u = buildTracklistM3u(plays, {
   title: "Test Set",
@@ -69,10 +78,12 @@ const m3u = buildTracklistM3u(plays, {
 assert.ok(m3u.includes("#EXTM3U"));
 assert.ok(m3u.includes("#EXTINF:360,AC Slater - Pressure"));
 assert.ok(m3u.includes("# setradar-cue:00:00"));
+assert.ok(m3u.includes("# isrc:GBXXXX0000001"));
+assert.ok(m3u.includes("# mix:Extended Mix"));
 
 const bp = buildBeatportUrlList(plays);
 assert.ok(bp.includes("https://www.beatport.com/track/pressure/1"));
-assert.ok(bp.includes("beatport.com/search/tracks?q="));
+assert.ok(!bp.includes("beatport.com/search"));
 
 assert.ok(
   spotifySearchUrl("Pressure", "AC Slater").startsWith(

@@ -46,6 +46,13 @@ function cleanCredit(s: string): string {
   return s.replace(/\s+/g, " ").trim();
 }
 
+/** 12-char ISRC, uppercase, no dashes. */
+export function normalizeIsrc(raw?: string | null): string | null {
+  if (!raw) return null;
+  const compact = raw.replace(/[\s-]+/g, "").toUpperCase();
+  return /^[A-Z]{2}[A-Z0-9]{3}[0-9]{7}$/.test(compact) ? compact : null;
+}
+
 /** Beatport /track/{slug}/{id} only — never a search or artist/label page. */
 export function canonicalBeatportUrl(url?: string | null): string | null {
   if (!url) return null;
@@ -90,7 +97,70 @@ export function resolveBeatportUrl(
   );
 }
 
-/** Stable key for copying Beatport URLs across identical catalog tracks. */
+/** Mashups / bootlegs / acapellas are usually not a single store SKU. */
+export function isLikelyUnbuyable(
+  title: string,
+  artistName?: string | null,
+): boolean {
+  const blob = `${artistName ?? ""} ${title}`;
+  return /\b(mash[\s-]?up|bootleg|acappella|acapella)\b/i.test(blob);
+}
+
+export type BeatportBuyability = "buy" | "search" | "unavailable";
+
+export function beatportBuyability(opts: {
+  idStatus: string;
+  title: string;
+  artistName?: string | null;
+  beatportUrl?: string | null;
+}): BeatportBuyability {
+  if (canonicalBeatportUrl(opts.beatportUrl)) return "buy";
+  if (
+    opts.idStatus === "unresolved_id" ||
+    opts.idStatus === "unparsed" ||
+    isLikelyUnbuyable(opts.title, opts.artistName)
+  ) {
+    return "unavailable";
+  }
+  if (
+    opts.idStatus === "identified" ||
+    opts.idStatus === "community_resolved"
+  ) {
+    return "search";
+  }
+  return "unavailable";
+}
+
+export type BeatportCoverage = {
+  identified: number;
+  buyable: number;
+};
+
+/** Identified rows that have a real Beatport /track page. */
+export function beatportCoverage(
+  plays: {
+    idStatus: string;
+    title: string;
+    artistName?: string | null;
+    beatportUrl?: string | null;
+  }[],
+): BeatportCoverage {
+  let identified = 0;
+  let buyable = 0;
+  for (const p of plays) {
+    if (
+      p.idStatus !== "identified" &&
+      p.idStatus !== "community_resolved"
+    ) {
+      continue;
+    }
+    identified += 1;
+    if (beatportBuyability(p) === "buy") buyable += 1;
+  }
+  return { identified, buyable };
+}
+
+/** Stable key for copying store IDs across identical catalog tracks. */
 export function trackIdentityKey(
   title: string,
   artistName?: string | null,

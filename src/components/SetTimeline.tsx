@@ -20,6 +20,7 @@ import {
   type IdStatus,
 } from "@/lib/status";
 import type { PlayRow } from "@/lib/queries";
+import { beatportBuyability } from "@/lib/trackMeta";
 import { useSetSeek } from "@/components/SetListen";
 
 const DENSITY_KEY = "setradar.tracklistDensity";
@@ -333,6 +334,12 @@ export function SetTimeline({
                         beatportUrl: p.beatportUrl,
                         setSourceUrl,
                       });
+                      const buyability = beatportBuyability({
+                        idStatus: p.idStatus,
+                        title: p.title,
+                        artistName: p.artistName,
+                        beatportUrl: p.beatportUrl,
+                      });
                       const pill =
                         "grid h-6 place-items-center rounded-md border border-line px-1.5 text-[10px] text-muted2 transition-colors hover:border-brand hover:text-brand";
                       return (
@@ -359,19 +366,21 @@ export function SetTimeline({
                           >
                             SP
                           </a>
-                          <a
-                            href={links.beatport}
-                            target="_blank"
-                            rel="noreferrer"
-                            title={
-                              links.beatportIsCanonical
-                                ? "Open on Beatport"
-                                : "Search on Beatport"
-                            }
-                            className={`${pill} hidden sm:grid`}
-                          >
-                            BP
-                          </a>
+                          {buyability !== "unavailable" && (
+                            <a
+                              href={links.beatport}
+                              target="_blank"
+                              rel="noreferrer"
+                              title={
+                                buyability === "buy"
+                                  ? "Buy on Beatport"
+                                  : "Search on Beatport"
+                              }
+                              className={`${pill} hidden sm:grid`}
+                            >
+                              BP
+                            </a>
+                          )}
                           {links.soundcloud && (
                             <a
                               href={links.soundcloud}

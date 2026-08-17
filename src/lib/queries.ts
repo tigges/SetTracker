@@ -350,6 +350,7 @@ export async function getSetBySlug(slug: string) {
           genre: normalizeGenre(track?.genre ?? null),
           trackDurationSec: track?.durationSec ?? null,
           beatportUrl: track?.beatportUrl ?? null,
+          isrc: track?.isrc ?? null,
           idNote: p.idTrack?.note ?? null,
           resolvedTitle: resolved
             ? `${resolved.artistName} – ${resolved.title}`
@@ -1690,6 +1691,7 @@ export async function getTrackBySlug(slug: string) {
     releaseDate: track.releaseDate,
     imageUrl: track.imageUrl,
     beatportUrl,
+    isrc: track.isrc,
     label: track.label
       ? {
           name: track.label.name,

@@ -61,6 +61,7 @@ import {
 } from "../../setDensity";
 import { fmtTimestamp } from "../../status";
 import { allocateTrackSlug, trackSlugBase } from "../../tracks/slug";
+import { normalizeIsrc } from "../../trackMeta";
 import {
   fetchTrackDetail,
   parseHearthisUrl,
@@ -1042,11 +1043,17 @@ export async function upsertFingerprintTrack(
 ): Promise<string> {
   const artistName = hit.artist;
   const title = hit.title;
-  const existing = await prisma.track.findFirst({
-    where: { title, artistName },
-  });
+  const isrc = normalizeIsrc(hit.isrc);
+  const existing =
+    (isrc
+      ? await prisma.track.findFirst({ where: { isrc } })
+      : null) ??
+    (await prisma.track.findFirst({
+      where: { title, artistName },
+    }));
   if (existing) {
     const data: Record<string, unknown> = {};
+    if (isrc && !existing.isrc) data.isrc = isrc;
     if (hit.label && !existing.labelId) {
       const slug = hit.label
         .toLowerCase()
@@ -1104,6 +1111,7 @@ export async function upsertFingerprintTrack(
       artistName,
       labelId,
       genre: setGenre ?? null,
+      isrc,
     },
   });
   return created.id;

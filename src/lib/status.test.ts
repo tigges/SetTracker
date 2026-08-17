@@ -36,6 +36,14 @@ describe("listenLinks", () => {
     assert.match(links.youtube, /youtube\.com\/results/);
   });
 
+  it("strips query params from stored Beatport /track URLs", () => {
+    const links = listenLinks("Pressure", "AC Slater", {
+      beatportUrl: "https://www.beatport.com/track/pressure/1?foo=1",
+    });
+    assert.equal(links.beatport, "https://www.beatport.com/track/pressure/1");
+    assert.equal(links.beatportIsCanonical, true);
+  });
+
   it("falls back to Beatport track search, not a 1001 link", () => {
     const links = listenLinks("Pressure", "AC Slater", {
       beatportUrl: "https://www.beatport.com/search?q=Pressure",
