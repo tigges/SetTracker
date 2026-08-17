@@ -105,6 +105,7 @@ import {
   TL_WESTEND_EDC_LV_2026,
   TL_ALESSO_TML_WE1_2026,
   TL_ALESSO_TML_WE2_2026,
+  TL_ILLENIUM_TML_WE1_2026,
   TL_ARMIN_VAN_BUUREN_TML_WE2_2026,
   TL_HONEYLUV_ANTS_USHUAIA_2026,
   TL_HONEYLUV_STREET_PARADE_2025,
@@ -1071,6 +1072,22 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/dr4mczt/alesso-mainstage-tomorrowland-weekend-1-belgium-2026-07-19.html",
     tracklist1001: TL_ALESSO_TML_WE1_2026,
+  },
+  {
+    // Tomorrowland official Relive — Great Library WE1.
+    video: "https://www.youtube.com/watch?v=E1WH0nvaxAw",
+    primaryArtist: dj("Illenium", {
+      accent: "#7b2cbf",
+      homeCity: "Denver, US",
+    }),
+    genre: "Melodic Bass",
+    type: "festival",
+    title: "ILLENIUM WE1 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1kz7zvr9/illenium-the-great-library-stage-tomorrowland-weekend-1-belgium-2026-07-18.html",
+    tracklist1001: TL_ILLENIUM_TML_WE1_2026,
   },
   {
     // Tomorrowland official Relive — Freedom Stage WE2.

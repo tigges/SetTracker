@@ -76,6 +76,9 @@ const INDIRA_TML_2023 = YOUTUBE_SETS.find((s) =>
 const ALESSO_TML_WE1 = YOUTUBE_SETS.find((s) =>
   s.video.includes("TidwOi0NMI0"),
 );
+const ILLENIUM_TML_WE1 = YOUTUBE_SETS.find((s) =>
+  s.video.includes("E1WH0nvaxAw"),
+);
 
 describe("watchMetaFromCuratedSeed", () => {
   it("builds ASOT 1290 meta from the curated 1001 capture", () => {
@@ -130,6 +133,17 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=WWnLYZrh6kw");
     // Last cue 1:56:31 + 180s pad.
     assert.equal(meta.durationSec, 1 * 3600 + 56 * 60 + 31 + 180);
+  });
+
+  it("builds ILLENIUM TML WE1 Great Library meta from the curated 1001 capture", () => {
+    assert.ok(ILLENIUM_TML_WE1);
+    const meta = watchMetaFromCuratedSeed(ILLENIUM_TML_WE1);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "E1WH0nvaxAw");
+    assert.match(meta.title, /ILLENIUM WE1/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=E1WH0nvaxAw");
+    // Last cue 59:30 + 180s pad.
+    assert.equal(meta.durationSec, 59 * 60 + 30 + 180);
   });
 
   it("builds Alesso TML WE1 Mainstage meta from the curated 1001 capture", () => {
@@ -1136,6 +1150,20 @@ describe("curated YouTube 429 fallback", () => {
     assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
     assert.ok(sets[0]!.durationSec >= 59 * 60);
     assert.equal(sets[0]?.primaryArtist?.slug, "alesso");
+    assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
+  });
+
+  it("lands ILLENIUM TML WE1 Great Library from the 1001 seed when watch is 429", async () => {
+    assert.ok(ILLENIUM_TML_WE1);
+    const adapter = createYoutubeAdapter([ILLENIUM_TML_WE1], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-E1WH0nvaxAw");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 97);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 59 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "illenium");
     assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
   });
 });
