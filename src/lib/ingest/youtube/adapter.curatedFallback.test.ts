@@ -73,6 +73,9 @@ const AFROJACK_R3HAB_TML = YOUTUBE_SETS.find((s) =>
 const INDIRA_TML_2023 = YOUTUBE_SETS.find((s) =>
   s.video.includes("yPCOu0-JKJo"),
 );
+const ALESSO_TML_WE1 = YOUTUBE_SETS.find((s) =>
+  s.video.includes("TidwOi0NMI0"),
+);
 
 describe("watchMetaFromCuratedSeed", () => {
   it("builds ASOT 1290 meta from the curated 1001 capture", () => {
@@ -127,6 +130,17 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=WWnLYZrh6kw");
     // Last cue 1:56:31 + 180s pad.
     assert.equal(meta.durationSec, 1 * 3600 + 56 * 60 + 31 + 180);
+  });
+
+  it("builds Alesso TML WE1 Mainstage meta from the curated 1001 capture", () => {
+    assert.ok(ALESSO_TML_WE1);
+    const meta = watchMetaFromCuratedSeed(ALESSO_TML_WE1);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "TidwOi0NMI0");
+    assert.match(meta.title, /Alesso WE1/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=TidwOi0NMI0");
+    // Last cue 59:30 + 180s pad.
+    assert.equal(meta.durationSec, 59 * 60 + 30 + 180);
   });
 
   it("builds Alok TML WE2 meta from the curated 1001 capture", () => {
@@ -1109,5 +1123,19 @@ describe("curated YouTube 429 fallback", () => {
       false,
     );
     assert.match(String(sets[0]?.eventName ?? ""), /Don't Let Daddy Know/i);
+  });
+
+  it("lands Alesso TML WE1 Mainstage from the 1001 seed when watch is 429", async () => {
+    assert.ok(ALESSO_TML_WE1);
+    const adapter = createYoutubeAdapter([ALESSO_TML_WE1], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-TidwOi0NMI0");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 42);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 59 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "alesso");
+    assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
   });
 });
