@@ -1,0 +1,33 @@
+{
+  "generatedAt": "2026-08-17T06:30:00.000Z",
+  "rounds": [
+    {
+      "file": "llm-handle-research-gemini-round1.json",
+      "provider": "gemini",
+      "scanned": 40,
+      "applied": 111,
+      "rejected": 33
+    },
+    {
+      "file": "llm-handle-research-gemini.json",
+      "provider": "gemini",
+      "scanned": 80,
+      "applied": 218,
+      "rejected": 46
+    },
+    {
+      "file": "llm-handle-research-claude.json",
+      "provider": "claude",
+      "scanned": 80,
+      "applied": 156,
+      "rejected": 106
+    }
+  ],
+  "totals": {
+    "scanned": 200,
+    "djsWithAccepted": 164,
+    "fieldsApplied": 485,
+    "knownHandlesAdded": 133
+  },
+  "note": "Models propose; we write only live name-matched profiles not owned by another DJ. No invented @slug guesses."
+}

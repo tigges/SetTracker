@@ -1,0 +1,1429 @@
+{
+  "generatedAt": "2026-08-17T06:04:18.772Z",
+  "provider": "gemini",
+  "apply": true,
+  "stats": {
+    "provider": "gemini",
+    "scanned": 40,
+    "proposed": 40,
+    "applied": 111,
+    "rejected": 33,
+    "skippedNoKey": false
+  },
+  "rows": [
+    {
+      "slug": "mapanta",
+      "name": "Mapanta",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": null,
+        "instagram": null,
+        "twitter": null,
+        "website": null,
+        "confidence": 0,
+        "notes": "Mapanta is a high-BPM electronic music genre and DIY sound system culture originating from Ga-Sekhukhune, Limpopo, South Africa (featured in Boiler Room's Limpopo sessions with artists like Serokolo 7) rather than an individual DJ."
+      },
+      "accepted": [],
+      "rejected": []
+    },
+    {
+      "slug": "rossi",
+      "name": "Rossi.",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/ross-mccormack-1-2",
+        "youtube": null,
+        "instagram": "https://www.instagram.com/rossi.dj_",
+        "twitter": "https://twitter.com/_rossidj",
+        "website": null,
+        "confidence": 0.95,
+        "notes": "Rossi. (Ross McCormack) is a London-based minimal/tech house DJ and producer who also runs the HOMEGROWN. label. No standalone official artist website or personal YouTube channel was verified."
+      },
+      "accepted": [
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/rossi.dj_",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/_rossidj",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/ross-mccormack-1-2",
+          "reason": "handle does not match DJ name"
+        }
+      ]
+    },
+    {
+      "slug": "erick-morillo",
+      "name": "Erick Morillo",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/erickmorillo",
+        "youtube": "https://www.youtube.com/@erickmorillovideo",
+        "instagram": "https://www.instagram.com/erickmorillo",
+        "twitter": "https://twitter.com/ErickMorillo",
+        "website": "https://erickmorillo.com",
+        "confidence": 0.95,
+        "notes": "Erick Morillo passed away in September 2020; links point to his official artist social profiles and former official domain."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/erickmorillo",
+          "reason": "name-matched"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@erickmorillovideo",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/erickmorillo",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/ErickMorillo",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://erickmorillo.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "funk-tribu",
+      "name": "Funk Tribu",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/funktribumusic",
+        "youtube": "https://www.youtube.com/@funktribumusic",
+        "instagram": "https://www.instagram.com/funktribu",
+        "twitter": null,
+        "website": "https://funktribu.komi.io",
+        "confidence": "high",
+        "notes": "Official SoundCloud, YouTube channel (@funktribumusic), and Instagram profile verified. The artist uses Komi as his official links and website hub. No verified active Twitter/X profile found."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/funktribumusic",
+          "reason": "name-matched"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@funktribumusic",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/funktribu",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://funktribu.komi.io/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "hi-lo",
+      "name": "HI-LO",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/official-hilo",
+        "youtube": "https://www.youtube.com/@HILOofficial",
+        "instagram": "https://www.instagram.com/officialhilo",
+        "twitter": "https://twitter.com/official_hilo",
+        "website": null,
+        "confidence": 0.95,
+        "notes": "HI-LO is the techno alias of Dutch DJ/producer Oliver Heldens and the founder of the HILOMATIK record label."
+      },
+      "accepted": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@HILOofficial",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/official-hilo",
+          "reason": "handle does not match DJ name"
+        },
+        {
+          "field": "instagram",
+          "url": "https://www.instagram.com/officialhilo",
+          "reason": "handle does not match DJ name"
+        },
+        {
+          "field": "twitter",
+          "url": "https://twitter.com/official_hilo",
+          "reason": "handle does not match DJ name"
+        }
+      ]
+    },
+    {
+      "slug": "joris-voorn",
+      "name": "Joris Voorn",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/joris-voorn",
+        "youtube": "https://www.youtube.com/@jorisvoorndj",
+        "instagram": "https://www.instagram.com/jorisvoorn",
+        "twitter": "https://twitter.com/jorisvoorn",
+        "website": "https://jorisvoorn.com",
+        "confidence": 1,
+        "notes": "Verified official social media profiles and website for Dutch DJ/producer Joris Voorn."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/joris-voorn",
+          "reason": "name-matched"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@jorisvoorndj",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/jorisvoorn",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://jorisvoorn.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "instagram",
+          "url": "https://www.instagram.com/jorisvoorn",
+          "reason": "URL already owned by another DJ"
+        }
+      ]
+    },
+    {
+      "slug": "ray-volpe",
+      "name": "RAY VOLPE",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/rayvolpemusic",
+        "youtube": "https://www.youtube.com/rayvolpe",
+        "instagram": "https://www.instagram.com/rayvolpe",
+        "twitter": "https://twitter.com/rayvolpe",
+        "website": "https://rayvolpe.com",
+        "confidence": 1,
+        "notes": "Verified official social media channels, SoundCloud profile, YouTube channel, and official website for Ray Volpe."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/rayvolpemusic",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/rayvolpe",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/rayvolpe",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://rayvolpe.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/rayvolpe",
+          "reason": "not a youtube profile"
+        }
+      ]
+    },
+    {
+      "slug": "sullivan-king",
+      "name": "SULLIVAN KING",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/sullivankingmusic",
+        "youtube": "https://www.youtube.com/@SullivanKing",
+        "instagram": "https://www.instagram.com/sullivanking",
+        "twitter": "https://twitter.com/sullivanking",
+        "website": "https://www.sullivankingmusic.com",
+        "confidence": 1,
+        "notes": "Official accounts verified via official video descriptions, website links, and platform verifications."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/sullivankingmusic",
+          "reason": "name-matched"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@SullivanKing",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/sullivanking",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/sullivanking",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.sullivankingmusic.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "third-party",
+      "name": "Third Party",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/thirdpartymusic",
+        "youtube": "https://www.youtube.com/thirdpartychannel",
+        "instagram": "https://www.instagram.com/thirdpartylive",
+        "twitter": "https://twitter.com/thirdpartylive",
+        "website": "https://www.thirdpartylive.com",
+        "confidence": 0.95,
+        "notes": "Verified official social media profiles, YouTube channel (@thirdpartychannel), SoundCloud account, and website for the UK progressive house duo Third Party (Jonnie Macaire and Harry Bass)."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/thirdpartymusic",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/thirdpartylive",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/thirdpartylive",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.thirdpartylive.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/thirdpartychannel",
+          "reason": "not a youtube profile"
+        }
+      ]
+    },
+    {
+      "slug": "monrhea",
+      "name": "[MONRHEA]",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/monrheacarter",
+        "youtube": "https://www.youtube.com/channel/UCJuKwVMwpeLqSU27OQOrx_Q",
+        "instagram": "https://www.instagram.com/monrhea_/",
+        "twitter": null,
+        "website": "https://monrhea.bandcamp.com",
+        "confidence": 0.85,
+        "notes": "MONRHEA (Wanjiru Maureen, also known as Monrhea Carter / Rheina) is an experimental techno DJ, producer, and creative technologist based in Nairobi, Kenya."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/monrheacarter",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/monrhea_",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/channel/UCJuKwVMwpeLqSU27OQOrx_Q",
+          "reason": "not a youtube profile"
+        },
+        {
+          "field": "website",
+          "url": "https://monrhea.bandcamp.com",
+          "reason": "not an official website"
+        }
+      ]
+    },
+    {
+      "slug": "archie",
+      "name": "Archie",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/archiedennis",
+        "youtube": null,
+        "instagram": "https://www.instagram.com/mr_mdrfkr",
+        "twitter": null,
+        "website": null,
+        "confidence": 0.85,
+        "notes": "Archie (full name Archie Dennis) is an Indonesian DJ and selector based between Jakarta and Bali, affiliated with SCRUBS!, Tantra Bali, Fraktal, and Klymax Discotheque."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/archiedennis",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "instagram",
+          "url": "https://www.instagram.com/mr_mdrfkr",
+          "reason": "handle does not match DJ name"
+        }
+      ]
+    },
+    {
+      "slug": "axwell",
+      "name": "Axwell",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/axwell",
+        "youtube": "https://www.youtube.com/@axwell",
+        "instagram": "https://www.instagram.com/axwell",
+        "twitter": "https://twitter.com/axwell",
+        "website": "https://axwell.komi.io",
+        "confidence": 0.98,
+        "notes": "Swedish DJ, producer, member of Swedish House Mafia and Axwell \u039b Ingrosso, and founder of Axtone Records."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/axwell",
+          "reason": "name-matched"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@axwell",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/axwell",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/axwell",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://axwell.komi.io/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "bdk",
+      "name": "BDK",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": null,
+        "instagram": null,
+        "twitter": null,
+        "website": null,
+        "confidence": 0.2,
+        "notes": "DJ BDK (also known as VJ BDK) is a prominent Ivorian DJ and video jockey based in Abidjan, C\u00f4te d'Ivoire, known for his sets with TRACE Africa and his performance at Boiler Room Abidjan: Biama. Direct official URLs for SoundCloud, YouTube, Instagram, Twitter, and website could not be conclusively verified."
+      },
+      "accepted": [],
+      "rejected": []
+    },
+    {
+      "slug": "behind-cercle-odyssey-i-chapter-four",
+      "name": "Behind Cercle Odyssey I Chapter Four",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": null,
+        "instagram": null,
+        "twitter": null,
+        "website": null,
+        "confidence": 0,
+        "notes": "Behind Cercle Odyssey I Chapter Four (Curtain Up) is a behind-the-scenes documentary video episode by media/event production platform Cercle, not an electronic music DJ or musical artist."
+      },
+      "accepted": [],
+      "rejected": []
+    },
+    {
+      "slug": "biblemami",
+      "name": "biblemami",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": "https://www.youtube.com/@biblemami",
+        "instagram": "https://www.instagram.com/biblemami",
+        "twitter": null,
+        "website": null,
+        "confidence": 0.85,
+        "notes": "biblemami is an Australian hyperpop/electronic music artist, producer, and DJ (Maeve Noonan) who performed at Boiler Room London alongside Tiffany Day."
+      },
+      "accepted": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@biblemami",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/biblemami",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "bonobo",
+      "name": "Bonobo",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/bonobo",
+        "youtube": "https://www.youtube.com/@bonobo",
+        "instagram": "https://www.instagram.com/si_bonobo",
+        "twitter": "https://twitter.com/si_bonobo",
+        "website": "https://bonobomusic.com",
+        "confidence": 1,
+        "notes": "Official profiles for British electronic music artist and DJ Simon Green, performing as Bonobo."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/bonobo",
+          "reason": "name-matched"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@bonobo",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://bonobomusic.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "instagram",
+          "url": "https://www.instagram.com/si_bonobo",
+          "reason": "handle does not match DJ name"
+        },
+        {
+          "field": "twitter",
+          "url": "https://twitter.com/si_bonobo",
+          "reason": "handle does not match DJ name"
+        }
+      ]
+    },
+    {
+      "slug": "bonobo-solo",
+      "name": "Bonobo Solo",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/bonobo",
+        "youtube": "https://www.youtube.com/@bonobo",
+        "instagram": "https://www.instagram.com/si_bonobo",
+        "twitter": "https://twitter.com/si_bonobo",
+        "website": "https://bonobomusic.com",
+        "confidence": 0.95,
+        "notes": "Bonobo Solo refers to British producer and DJ Simon Green (Bonobo) performing in a solo / DJ set format. Official profiles for Bonobo have been provided."
+      },
+      "accepted": [],
+      "rejected": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/bonobo",
+          "reason": "URL already owned by another DJ"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@bonobo",
+          "reason": "URL already owned by another DJ"
+        },
+        {
+          "field": "instagram",
+          "url": "https://www.instagram.com/si_bonobo",
+          "reason": "handle does not match DJ name"
+        },
+        {
+          "field": "twitter",
+          "url": "https://twitter.com/si_bonobo",
+          "reason": "handle does not match DJ name"
+        },
+        {
+          "field": "website",
+          "url": "https://bonobomusic.com",
+          "reason": "website host does not match DJ name"
+        }
+      ]
+    },
+    {
+      "slug": "boutross",
+      "name": "Boutross",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": "https://www.youtube.com/@boutrossmunene",
+        "instagram": "https://www.instagram.com/boutross_munene",
+        "twitter": "https://twitter.com/Boutross_Munene",
+        "website": null,
+        "confidence": 0.85,
+        "notes": "Boutross (Boutross Mwebia Munene) is a Kenyan rapper, singer, and producer associated with the AD Family / ADF Music collective and the Shrap movement. Official YouTube, Instagram, and Twitter accounts are verified via official releases; no dedicated personal SoundCloud or official standalone website was identified."
+      },
+      "accepted": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@boutrossmunene",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/boutross_munene",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/Boutross_Munene",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "boy-pillow",
+      "name": "Boy Pillow",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": null,
+        "instagram": "https://www.instagram.com/boy___pillow",
+        "twitter": null,
+        "website": null,
+        "confidence": 0.8,
+        "notes": "Boy Pillow is a London-based DJ and visual artist (real name Ralf Hersborg) associated with collectives/events like MAXXING and MINDTHEGAP, and performed on Boiler Room alongside Tiffany Day. His official Instagram handle is @boy___pillow. Other dedicated solo social/streaming profiles could not be confirmed."
+      },
+      "accepted": [
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/boy___pillow",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "brandy-maina",
+      "name": "Brandy Maina",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": "https://www.youtube.com/@brandymaina9393",
+        "instagram": "https://www.instagram.com/brandy_maina",
+        "twitter": "https://twitter.com/Brandy_Maina",
+        "website": null,
+        "confidence": 0.9,
+        "notes": "Brandy Maina is a Kenyan singer, songwriter, and live performer who performed at the Boiler Room x Ballantine's True Music Studios: Nairobi event. Her official YouTube channel, Instagram, and Twitter accounts are verified via official song descriptions and music releases."
+      },
+      "accepted": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@brandymaina9393",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/brandy_maina",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "twitter",
+          "url": "https://x.com/Brandy_Maina",
+          "reason": "URL is dead"
+        }
+      ]
+    },
+    {
+      "slug": "budalagi",
+      "name": "Budalagi",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": null,
+        "instagram": null,
+        "twitter": null,
+        "website": "https://budalagi.bandcamp.com",
+        "confidence": 0.7,
+        "notes": "Budalagi is the moniker of Nairobi-based electronic music DJ and producer Felix Mwita. While his Bandcamp profile is confirmed, his official individual accounts on SoundCloud, YouTube, Instagram, and Twitter could not be verified with complete certainty and have been set to null to avoid guessing."
+      },
+      "accepted": [],
+      "rejected": [
+        {
+          "field": "website",
+          "url": "https://budalagi.bandcamp.com",
+          "reason": "not an official website"
+        }
+      ]
+    },
+    {
+      "slug": "camelphat",
+      "name": "CAMELPHAT",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/camelphat",
+        "youtube": "https://www.youtube.com/@camelphat_music",
+        "instagram": "https://www.instagram.com/camelphatmusic",
+        "twitter": "https://twitter.com/CamelPhat",
+        "website": "https://camelphatmusic.com",
+        "confidence": 1,
+        "notes": "Official social and web links for British electronic music duo CamelPhat (Dave Whelan and Mike Di Scala)."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/camelphat",
+          "reason": "name-matched"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@camelphat_music",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/camelphatmusic",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/CamelPhat",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://camelphatmusic.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "camila-jun",
+      "name": "Camila Jun",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/camilajun",
+        "youtube": "https://www.youtube.com/@camilajft",
+        "instagram": "https://www.instagram.com/camilajun",
+        "twitter": null,
+        "website": "https://www.camilajun.com",
+        "confidence": 0.95,
+        "notes": "Camila Jun is a Brazilian House music DJ, producer, and founder of T\u00f4nica based in Bras\u00edlia."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/camilajun",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/camilajun",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.camilajun.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@camilajft",
+          "reason": "handle does not match DJ name"
+        }
+      ]
+    },
+    {
+      "slug": "cassius",
+      "name": "Cassius",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/cassiusofficial",
+        "youtube": "https://www.youtube.com/@cassius1999",
+        "instagram": "https://www.instagram.com/cassius",
+        "twitter": "https://twitter.com/cassiusofficial",
+        "website": "https://cassius.paris",
+        "confidence": 0.95,
+        "notes": "Cassius is the legendary French touch duo formed by Philippe Zdar (Cerboneschi, deceased 2019) and Hubert Blanc-Francard (BoomBass), who continues the project and brand."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/cassiusofficial",
+          "reason": "name-matched"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@cassius1999",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/cassius",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/cassiusofficial",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://cassius.paris/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "chris-lake-full",
+      "name": "Chris Lake Full",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/chrislake",
+        "youtube": "https://www.youtube.com/@chrislake",
+        "instagram": "https://www.instagram.com/chrislake",
+        "twitter": "https://twitter.com/chrislake",
+        "website": "https://chris-lake.com",
+        "confidence": 0.95,
+        "notes": "Identified artist as Chris Lake from the provided set title context."
+      },
+      "accepted": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@chrislake",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://chris-lake.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/chrislake",
+          "reason": "URL already owned by another DJ"
+        },
+        {
+          "field": "instagram",
+          "url": "https://www.instagram.com/chrislake",
+          "reason": "URL already owned by another DJ"
+        },
+        {
+          "field": "twitter",
+          "url": "https://twitter.com/chrislake",
+          "reason": "URL already owned by another DJ"
+        }
+      ]
+    },
+    {
+      "slug": "claude-vonstroke",
+      "name": "Claude VonStroke",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/claudevonstroke",
+        "youtube": "https://www.youtube.com/@claudevonstroke",
+        "instagram": "https://www.instagram.com/claudevonstroke",
+        "twitter": "https://twitter.com/vonstroke",
+        "website": "https://claudevonstroke.com",
+        "confidence": 0.95,
+        "notes": "Claude VonStroke is the house music alias of Barclay Crenshaw. Official handles historically also used @vonstroke on several platforms."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/claudevonstroke",
+          "reason": "name-matched"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@claudevonstroke",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/claudevonstroke",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://claudevonstroke.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "twitter",
+          "url": "https://twitter.com/vonstroke",
+          "reason": "handle does not match DJ name"
+        }
+      ]
+    },
+    {
+      "slug": "coco-em",
+      "name": "Coco Em",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/coco_em",
+        "youtube": null,
+        "instagram": "https://www.instagram.com/cocoem__/",
+        "twitter": "https://twitter.com/coco_em",
+        "website": null,
+        "confidence": 0.9,
+        "notes": "Coco Em (Emma Nzioka) is a Kenyan DJ and producer based in Nairobi. Her verified official handles are soundcloud.com/coco_em, instagram.com/cocoem__, and twitter.com/coco_em. No dedicated personal website or official personal YouTube creator channel was identified (music is primarily hosted via label/topic channels)."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/coco_em",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/cocoem__",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/coco_em",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "coco-maria",
+      "name": "Coco Mar\u00eda",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/cocomariamusic",
+        "youtube": null,
+        "instagram": "https://www.instagram.com/cocomaria___",
+        "twitter": null,
+        "website": "https://cocomaria.net",
+        "confidence": 0.95,
+        "notes": "Verified official website, SoundCloud, and Instagram profiles. No dedicated official artist YouTube channel or Twitter profile found."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/cocomariamusic",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/cocomaria___",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "website",
+          "url": "https://cocomaria.net",
+          "reason": "website host does not match DJ name"
+        }
+      ]
+    },
+    {
+      "slug": "codes",
+      "name": "Codes",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/codeshouse",
+        "youtube": "https://www.youtube.com/@CODESHOUSE",
+        "instagram": "https://www.instagram.com/codeshouse",
+        "twitter": "https://twitter.com/codeshouse",
+        "website": "https://welcometocodeshouse.com",
+        "confidence": "high",
+        "notes": "Official links for NY house DJ and producer Codes, founder of Holy Mol\u00e9 Music and featured on Metronome #158."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/codeshouse",
+          "reason": "name-matched"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@CODESHOUSE",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/codeshouse",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/codeshouse",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://welcometocodeshouse.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "colyn",
+      "name": "COLYN",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/colynmusic",
+        "youtube": "https://www.youtube.com/@Colyn_music",
+        "instagram": "https://www.instagram.com/colyn_music",
+        "twitter": null,
+        "website": null,
+        "confidence": 0.95,
+        "notes": "Colyn (Ewout Colijn) is a Dutch melodic house/techno DJ and music producer known for his releases on Afterlife and Rose Avenue Records."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/colynmusic",
+          "reason": "name-matched"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@Colyn_music",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "instagram",
+          "url": "https://www.instagram.com/colyn_music",
+          "reason": "URL already owned by another DJ"
+        }
+      ]
+    },
+    {
+      "slug": "darude",
+      "name": "Darude",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/darude",
+        "youtube": "https://www.youtube.com/darude",
+        "instagram": "https://www.instagram.com/darude",
+        "twitter": "https://twitter.com/darudevil",
+        "website": "https://www.darude.com",
+        "confidence": 1,
+        "notes": "All profiles verified as official accounts for Finnish DJ/producer Darude (Ville Virtanen)."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/darude",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/darude",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/darudevil",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.darude.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/darude",
+          "reason": "not a youtube profile"
+        }
+      ]
+    },
+    {
+      "slug": "das-kapital",
+      "name": "Das Kapital",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/daskapital",
+        "youtube": "https://www.youtube.com/c/daskapital",
+        "instagram": "https://www.instagram.com/iamdaskapital",
+        "twitter": "https://twitter.com/iamdaskapital",
+        "website": null,
+        "confidence": 0.95,
+        "notes": "Das Kapital (Kyle Brinkmann) is a South African electronic music DJ, producer, and radio host (In Das We Trust) featured on Metronome #162."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/daskapital",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/c/daskapital",
+          "reason": "not a youtube profile"
+        },
+        {
+          "field": "instagram",
+          "url": "https://www.instagram.com/iamdaskapital",
+          "reason": "handle does not match DJ name"
+        },
+        {
+          "field": "twitter",
+          "url": "https://twitter.com/iamdaskapital",
+          "reason": "handle does not match DJ name"
+        }
+      ]
+    },
+    {
+      "slug": "dc-breaks",
+      "name": "DC Breaks",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/dc-breaks-uk",
+        "youtube": null,
+        "instagram": "https://www.instagram.com/dcbreaks",
+        "twitter": "https://twitter.com/DCBreaks",
+        "website": "https://www.dcbreaks.com",
+        "confidence": 0.95,
+        "notes": "DC Breaks is a British drum & bass duo consisting of Dan Havers and Chris Page. All verified social profiles and official website confirmed via their label releases on RAM Records and UKF."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/dc-breaks-uk",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/dcbreaks",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/DCBreaks",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.dcbreaks.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "dcr180",
+      "name": "DCR180",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": null,
+        "instagram": null,
+        "twitter": null,
+        "website": null,
+        "confidence": 0,
+        "notes": "DCR180 is not a DJ or artist; it is an episode identifier for Drumcode Radio Live (Episode 180, featuring Adam Beyer B2B Alan Fitzpatrick)."
+      },
+      "accepted": [],
+      "rejected": []
+    },
+    {
+      "slug": "demi-riquisimo",
+      "name": "Demi Riqu\u00edsimo",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/demiriquisimo",
+        "youtube": null,
+        "instagram": "https://www.instagram.com/demi_riquisimo_",
+        "twitter": "https://twitter.com/demiriquisimo",
+        "website": null,
+        "confidence": 0.95,
+        "notes": "Verified official SoundCloud, Instagram, and X/Twitter accounts. Demi Riqu\u00edsimo does not have a dedicated official YouTube channel or personal website (runs the label Semi Delicious)."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/demiriquisimo",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/demi_riquisimo_",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/demiriquisimo",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "deorro",
+      "name": "Deorro",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/deorro",
+        "youtube": "https://www.youtube.com/@deorroTV",
+        "instagram": "https://www.instagram.com/deorro",
+        "twitter": "https://twitter.com/deorro",
+        "website": "https://www.deorro.com",
+        "confidence": 1,
+        "notes": null
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/deorro",
+          "reason": "name-matched"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@deorroTV",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/deorro",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/deorro",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.deorro.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "dillon-francis",
+      "name": "Dillon Francis",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/dillonfrancis",
+        "youtube": "https://www.youtube.com/@DillonFrancis",
+        "instagram": "https://www.instagram.com/dillonfrancis",
+        "twitter": "https://twitter.com/DillonFrancis",
+        "website": "https://dillonfrancis.com",
+        "confidence": 1,
+        "notes": null
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/dillonfrancis",
+          "reason": "name-matched"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@DillonFrancis",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/dillonfrancis",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/DillonFrancis",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://dillonfrancis.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "dimitri-vegas",
+      "name": "Dimitri Vegas",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/dimitrivegas",
+        "youtube": "https://www.youtube.com/@dimitrivegasandlikemike",
+        "instagram": "https://www.instagram.com/dimitrivegas",
+        "twitter": "https://twitter.com/dimitrivegas",
+        "website": "https://www.dimitrivegasandlikemike.com",
+        "confidence": 0.95,
+        "notes": "Dimitri Vegas maintains individual Instagram, X/Twitter, and SoundCloud profiles, while primary YouTube and website destinations are shared with his duo project Dimitri Vegas & Like Mike."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/dimitrivegas",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/dimitrivegas",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.dimitrivegasandlikemike.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@dimitrivegasandlikemike",
+          "reason": "URL already owned by another DJ"
+        },
+        {
+          "field": "twitter",
+          "url": "https://twitter.com/dimitrivegas",
+          "reason": "URL already owned by another DJ"
+        }
+      ]
+    },
+    {
+      "slug": "disclosure",
+      "name": "Disclosure",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/disclosuremusic",
+        "youtube": "https://www.youtube.com/@disclosure",
+        "instagram": "https://www.instagram.com/disclosure",
+        "twitter": "https://x.com/disclosure",
+        "website": "https://www.disclosureofficial.com",
+        "confidence": 1,
+        "notes": null
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/disclosuremusic",
+          "reason": "name-matched"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@disclosure",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/disclosure",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/disclosure",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.disclosureofficial.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "dixon",
+      "name": "Dixon",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/dixon",
+        "youtube": null,
+        "instagram": "https://www.instagram.com/dixon_",
+        "twitter": null,
+        "website": "https://togetherwedancealone.com",
+        "confidence": 0.95,
+        "notes": "Dixon (Steffen Berkhahn) uses the Instagram handle @dixon_ and SoundCloud @dixon. He co-runs the label Innervisions and the fashion/creative label 'Together We Dance Alone' (togetherwedancealone.com). He does not maintain a verified personal YouTube channel or personal Twitter/X account, with music and videos primarily distributed through Innervisions channels."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/dixon",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/dixon_",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "website",
+          "url": "https://togetherwedancealone.com",
+          "reason": "website host does not match DJ name"
+        }
+      ]
+    }
+  ]
+}
