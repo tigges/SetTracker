@@ -30,6 +30,14 @@ assert.equal(resolveEvent("Burning Man").slug, "burning-man");
 assert.equal(resolveEvent("Burning Man").kind, "festival");
 assert.equal(resolveEvent("Burning Man").website, "https://burningman.org/");
 assert.equal(
+  resolveEvent("Tomorrowland").instagram,
+  "https://instagram.com/tomorrowland",
+);
+assert.equal(
+  resolveEvent("The Brooklyn Mirage").instagram,
+  "https://instagram.com/thebrooklynmirage",
+);
+assert.equal(
   resolveEvent("Dreamstate").website,
   "https://socal.dreamstateusa.com/",
 );
