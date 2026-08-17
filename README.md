@@ -212,6 +212,7 @@ Our submit forces `engine=1` (audio fingerprint; override `ACRCLOUD_FS_ENGINE`).
 | `CLAUDE_AGENT_API` | Claude API key for DJ handle research |
 | `ANTHROPIC_API_KEY` | optional alias for the same Claude key |
 | `GEMINI_API_KEY` | Gemini **API** key from [AI Studio](https://aistudio.google.com/apikey) (preferred — Search grounding). Aliases: `GEMINI_AGENT_API`, `GEMINI`, `GOOGLE_API_KEY` |
+| `TRACKRADAR_API_KEY` | TrackRadar MCP bearer (`tr_live_…`) for `search_track` / mix analyze |
 
 **Catalog junk** (verify-urls / Pages): festival stages (`Freedom Stage`,
 `Mainstage`) fold onto the parent festival; radio/session hosts become
@@ -227,10 +228,11 @@ weekly enrich `full`. Reports: `data/crosscheck/llm-handle-research.json`.
 
 **Track IDs from held 1001 seeds** (`npm run research:track-ids`): named cues
 go to Deezer (ISRC) and optional MusicBrainz (`TRACK_ID_MB=1` → MBID /
-Beatport). Fill-null `Track.isrc` / `beatportUrl` only with
-`TRACK_ID_APPLY=1`. Bare ID cues stay as Identify offsets on
-fingerprint-only fan clips (never Relive / FileScan). LLM job `tracks`
-confirms model ISRCs against the same live lookup. Report:
+Beatport). [TrackRadar](https://trackradar.ai) (`TRACKRADAR=1` +
+`TRACKRADAR_API_KEY`) adds Spotify / Bandcamp / Apple / Discogs via MCP
+`search_track` (name-matched). `TRACKRADAR_ANALYZE=1` runs
+`analyze_social_post` on fingerprint-only fan clips (quota; never Relive).
+Fill-null `Track.isrc` / `beatportUrl` only with `TRACK_ID_APPLY=1`. Report:
 `data/crosscheck/track-id-research.json`.
 
 `https://gemini.google.com/app` is the consumer chat UI — Actions cannot

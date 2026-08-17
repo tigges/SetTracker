@@ -1,8 +1,9 @@
 /**
  * Resolve catalog track IDs from held / captured 1001 rows.
  *
- * Propose-then-verify: Deezer (ISRC) and optional MusicBrainz (MBID / Beatport).
- * Never invents ISRCs, never wires fan Relives, never overwrites sourceUrl.
+ * Propose-then-verify: Deezer (ISRC), optional MusicBrainz, optional
+ * TrackRadar (https://trackradar.ai) platform IDs. Never invents ISRCs,
+ * never wires fan Relives, never overwrites sourceUrl.
  */
 
 import type { PrismaClient } from "@prisma/client";
@@ -21,6 +22,13 @@ import {
   normalizeIsrc,
 } from "../../trackMeta";
 import { fingerprintIdProbes } from "./fingerprintWatch";
+import {
+  analyzeFingerprintOnlyWatches,
+  searchTrackRadar,
+  trackradarApiKey,
+  type TrackRadarAnalyzeResult,
+  type TrackRadarPlatforms,
+} from "./trackradar";
 
 export type TrackIdHit = {
   artist: string;
@@ -30,7 +38,8 @@ export type TrackIdHit = {
   mbid?: string;
   beatportUrl?: string;
   deezerTitle?: string;
-  source: "deezer" | "musicbrainz" | "both";
+  platforms?: TrackRadarPlatforms;
+  source: "deezer" | "musicbrainz" | "both" | "trackradar";
 };
 
 export type TrackIdMiss = {
@@ -47,6 +56,7 @@ export type TrackIdReport = {
   hits: TrackIdHit[];
   misses: TrackIdMiss[];
   idGaps: ReturnType<typeof fingerprintIdProbes>;
+  trackradarAnalyzes: TrackRadarAnalyzeResult[];
   applied: number;
 };
 
@@ -94,14 +104,14 @@ export function heldIdentifyJobs(): {
 
 export async function identifySeedRow(
   row: FingerprintSeedRow,
-  opts: { musicbrainz?: boolean } = {},
+  opts: { musicbrainz?: boolean; trackradar?: boolean } = {},
 ): Promise<TrackIdHit | TrackIdMiss> {
   if (isBareIdRow(row.artist, row.title)) {
     return { artist: row.artist, title: row.title, at: row.at, reason: "bare id" };
   }
 
   const deezer = await resolveTrackImage(row.title, row.artist);
-  const isrc = normalizeIsrc(deezer?.isrc);
+  let isrc = normalizeIsrc(deezer?.isrc);
   let mbid: string | undefined;
   let beatportUrl: string | undefined;
 
@@ -111,21 +121,21 @@ export async function identifySeedRow(
     beatportUrl = canonicalBeatportUrl(mb?.beatportUrl) || undefined;
     if (!isrc && mb?.isrc) {
       const ev = evaluateIsrc(mb.isrc);
-      if (ev.ok) {
-        return {
-          artist: row.artist,
-          title: row.title,
-          at: row.at,
-          isrc: ev.isrc,
-          mbid,
-          beatportUrl,
-          source: "musicbrainz",
-        };
-      }
+      if (ev.ok) isrc = ev.isrc ?? null;
     }
   }
 
-  if (!isrc && !mbid && !beatportUrl) {
+  let platforms: TrackRadarPlatforms | undefined;
+  if (opts.trackradar) {
+    const tr = await searchTrackRadar(row.artist, row.title);
+    if (tr) {
+      platforms = tr.platforms;
+      if (!isrc && tr.isrc) isrc = tr.isrc;
+      if (!beatportUrl && tr.beatportUrl) beatportUrl = tr.beatportUrl;
+    }
+  }
+
+  if (!isrc && !mbid && !beatportUrl && !platforms) {
     return {
       artist: row.artist,
       title: row.title,
@@ -133,6 +143,15 @@ export async function identifySeedRow(
       reason: "no verified id",
     };
   }
+
+  const source: TrackIdHit["source"] =
+    !isrc && !mbid && !beatportUrl && platforms
+      ? "trackradar"
+      : mbid || (beatportUrl && !platforms)
+        ? isrc
+          ? "both"
+          : "musicbrainz"
+        : "deezer";
 
   return {
     artist: row.artist,
@@ -142,19 +161,24 @@ export async function identifySeedRow(
     mbid,
     beatportUrl,
     deezerTitle: deezer?.matchedTitle || undefined,
-    source: mbid || beatportUrl ? (isrc ? "both" : "musicbrainz") : "deezer",
+    platforms,
+    source,
   };
 }
 
 export async function identifyHeldSeeds(opts: {
   limit?: number;
   musicbrainz?: boolean;
+  trackradar?: boolean;
   apply?: boolean;
   prisma?: PrismaClient;
 } = {}): Promise<TrackIdReport> {
   const limit = opts.limit ?? Number(process.env.TRACK_ID_LIMIT || 20);
   const musicbrainz =
     opts.musicbrainz ?? process.env.TRACK_ID_MB === "1";
+  const trackradar =
+    opts.trackradar ??
+    (process.env.TRACKRADAR === "1" || Boolean(trackradarApiKey()));
   const rows = heldIdentifyJobs().flatMap((j) =>
     uniqueIdentifyRows(j.rows).map((r) => ({ ...r, seed: j.seed })),
   );
@@ -163,10 +187,12 @@ export async function identifyHeldSeeds(opts: {
   const misses: TrackIdMiss[] = [];
 
   for (const row of slice) {
-    const result = await identifySeedRow(row, { musicbrainz });
+    const result = await identifySeedRow(row, { musicbrainz, trackradar });
     if ("reason" in result) misses.push(result);
     else hits.push(result);
   }
+
+  const trackradarAnalyzes = await analyzeFingerprintOnlyWatches();
 
   let applied = 0;
   if (opts.apply && opts.prisma) {
@@ -175,11 +201,12 @@ export async function identifyHeldSeeds(opts: {
 
   const report: TrackIdReport = {
     generatedAt: new Date().toISOString(),
-    note: "Verified Deezer/MusicBrainz IDs from held 1001 seeds. Fan Relives stay unwired.",
+    note: "Verified Deezer / MusicBrainz / TrackRadar IDs from held 1001 seeds. Fan Relives stay unwired.",
     scanned: slice.length,
     hits,
     misses,
     idGaps: fingerprintIdProbes(),
+    trackradarAnalyzes,
     applied,
   };
   writeReport("track-id-research.json", report);
