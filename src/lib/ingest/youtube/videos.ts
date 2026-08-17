@@ -103,6 +103,7 @@ import {
   TL_SOLOMUN_ALLY_PALLY_2026,
   TL_SOLOMUN_EDC_LV_2026,
   TL_WESTEND_EDC_LV_2026,
+  TL_ALAN_WALKER_TML_WE1_2018,
   TL_ALESSO_TML_WE1_2026,
   TL_ALESSO_TML_WE2_2026,
   TL_CHASE_STATUS_TML_WE2_2026,
@@ -2071,6 +2072,9 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     title: "Alan Walker | Tomorrowland Belgium 2018",
     seriesName: "Tomorrowland",
     eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1uurlz51/alan-walker-main-stage-tomorrowland-weekend-1-belgium-2018-07-20.html",
+    tracklist1001: TL_ALAN_WALKER_TML_WE1_2018,
   },
   {
     video: "https://www.youtube.com/watch?v=U2ZjW_8K3h4",

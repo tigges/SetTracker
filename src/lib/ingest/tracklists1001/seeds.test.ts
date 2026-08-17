@@ -135,6 +135,7 @@ import {
   TL_I_HATE_MODELS_TML_WE1_2026,
   TL_NETSKY_TML_WE1_2026,
   TL_OLIVER_HELDENS_TML_WE1_2026,
+  TL_ALAN_WALKER_TML_WE1_2018,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   tracklist1001RowsToPlays,
@@ -2679,6 +2680,28 @@ for (let i = 1; i < heldensWe1.length; i++) {
   assert.ok(
     (heldensWe1[i]!.timestamp ?? 0) > (heldensWe1[i - 1]!.timestamp ?? 0),
     `Oliver Heldens TML WE1 2026 clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_ALAN_WALKER_TML_WE1_2018);
+assert.equal(TL_ALAN_WALKER_TML_WE1_2018.length, 48);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-xVWs0ti0J90"],
+  TL_ALAN_WALKER_TML_WE1_2018,
+);
+assert.equal(isWiredTracklistSlug("yt-xVWs0ti0J90"), true);
+const walkerWe1 = tracklist1001RowsToPlays(TL_ALAN_WALKER_TML_WE1_2018);
+assert.equal(walkerWe1.length, 48);
+assert.equal(walkerWe1[0]?.provenance, "1001tl");
+assert.equal(walkerWe1[0]?.timestamp, 4);
+assert.equal(walkerWe1[0]?.artistName, "Alan Walker ft. Jesper Borgen");
+assert.equal(walkerWe1[0]?.trackTitle, "The Spectre");
+assert.equal(walkerWe1[47]?.trackTitle, "Faded (Tiësto Northern Lights Remix)");
+assert.equal(walkerWe1[47]?.timestamp, 55 * 60 + 30);
+for (let i = 1; i < walkerWe1.length; i++) {
+  assert.ok(
+    (walkerWe1[i]!.timestamp ?? 0) > (walkerWe1[i - 1]!.timestamp ?? 0),
+    `Alan Walker TML WE1 2018 clocks must increase at index ${i}`,
   );
 }
 

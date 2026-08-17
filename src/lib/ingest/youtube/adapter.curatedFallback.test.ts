@@ -91,6 +91,9 @@ const NETSKY_TML_WE1 = YOUTUBE_SETS.find((s) =>
 const OLIVER_HELDENS_TML_WE1 = YOUTUBE_SETS.find((s) =>
   s.video.includes("2i3XOxbp54U"),
 );
+const ALAN_WALKER_TML_WE1_2018 = YOUTUBE_SETS.find((s) =>
+  s.video.includes("xVWs0ti0J90"),
+);
 
 describe("watchMetaFromCuratedSeed", () => {
   it("builds ASOT 1290 meta from the curated 1001 capture", () => {
@@ -189,6 +192,18 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=2i3XOxbp54U");
     // Last cue 1:01:48 + 180s pad.
     assert.equal(meta.durationSec, 1 * 3600 + 1 * 60 + 48 + 180);
+  });
+
+  it("builds Alan Walker TML WE1 2018 meta from the curated 1001 capture", () => {
+    assert.ok(ALAN_WALKER_TML_WE1_2018);
+    const meta = watchMetaFromCuratedSeed(ALAN_WALKER_TML_WE1_2018);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "xVWs0ti0J90");
+    assert.match(meta.title, /Alan Walker/i);
+    assert.match(meta.title, /2018/);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=xVWs0ti0J90");
+    // Last cue 55:30 + 180s pad.
+    assert.equal(meta.durationSec, 55 * 60 + 30 + 180);
   });
 
   it("builds ILLENIUM TML WE1 Great Library meta from the curated 1001 capture", () => {
@@ -1279,5 +1294,20 @@ describe("curated YouTube 429 fallback", () => {
     assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
     assert.match(String(sets[0]?.title ?? ""), /2026/);
     assert.doesNotMatch(String(sets[0]?.title ?? ""), /Daybreak/i);
+  });
+
+  it("lands Alan Walker TML WE1 2018 from the 1001 seed when watch is 429", async () => {
+    assert.ok(ALAN_WALKER_TML_WE1_2018);
+    const adapter = createYoutubeAdapter([ALAN_WALKER_TML_WE1_2018], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-xVWs0ti0J90");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 48);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 55 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "alan-walker");
+    assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
+    assert.match(String(sets[0]?.title ?? ""), /2018/);
   });
 });

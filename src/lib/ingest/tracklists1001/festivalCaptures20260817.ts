@@ -417,3 +417,64 @@ export const TL_OLIVER_HELDENS_TML_WE1_2026: FingerprintSeedRow[] = [
   { at: "1:01:48", artist: "MilleniumKid x JBS x Dimitri Vegas & Like Mike x Marlon Hoffstadt x DJ Konik", title: "Vielleicht Vielleicht x Makina Time (Rudeejay & Da Brozz Mashup)" },
 ];
 
+/**
+ * Alan Walker @ Main Stage, Tomorrowland Weekend 1, Belgium 2018-07-20
+ * https://www.1001tracklists.com/tracklist/1uurlz51/alan-walker-main-stage-tomorrowland-weekend-1-belgium-2018-07-20.html
+ * Official YT: https://youtu.be/xVWs0ti0J90
+ * Capture overlay used TL_Alan-Walker_Main-Stage_Tomorrowland_WE1_Belgium_2018
+ * (hyphens illegal); constant is TL_ALAN_WALKER_TML_WE1_2018.
+ * Archive-titled Relive — stays off /capture-1001 extras via isArchiveTitledSet.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-xVWs0ti0J90"]
+ * Captured 2026-08-17 - provenance 1001tl.
+ */
+export const TL_ALAN_WALKER_TML_WE1_2018: FingerprintSeedRow[] = [
+  { at: "0:04", artist: "Alan Walker ft. Jesper Borgen", title: "The Spectre" },
+  { at: "4:22", artist: "Sia", title: "Move Your Body (Alan Walker Remix)" },
+  { at: "6:02", artist: "Alan Walker ft. Iselin Solheim", title: "Sing Me To Sleep" },
+  { at: "7:23", artist: "Alan Walker ft. Iselin Solheim", title: "Sing Me To Sleep (Marshmello Remix)" },
+  { at: "9:16", artist: "Coldplay ft. Beyoncé", title: "Hymn For The Weekend (Alan Walker Remix)" },
+  { at: "11:51", artist: "NIVIRO", title: "Flares" },
+  { at: "13:18", artist: "Clarx & Uplink", title: "Titans" },
+  { at: "15:19", artist: "Hellberg ft. Cozi Zuehlsdorff", title: "The Girl (Different Heaven Remix)" },
+  { at: "16:10", artist: "DJ KUBA & NEITAN ft. Nicci vs. TJR & VINAI", title: "Drop The Beat vs. Bounce Generation (Alan Walker Mashup)" },
+  { at: "16:44", artist: "TJR & VINAI", title: "Bounce Generation" },
+  { at: "17:19", artist: "DJ KUBA & NEITAN ft. Nicci", title: "Drop The Beat" },
+  { at: "17:53", artist: "Benny Benassi pres. The Biz & Ca$htag vs. Nicky Romero & Teamworx", title: "Satisfaction vs. Champion Sound (Alan Walker Mashup)" },
+  { at: "18:47", artist: "Benny Benassi pres. The Biz", title: "Satisfaction (Ca$htag Remix)" },
+  { at: "19:41", artist: "Bassjackers & Bali Bandits", title: "Are You Randy?" },
+  { at: "20:35", artist: "Nicky Romero & Teamworx", title: "Champion Sound" },
+  { at: "21:29", artist: "Ill Phil & Mesto vs. Herobust", title: "Seven Nation Army vs. Move Mint (VIP) (Alan Walker Mashup)" },
+  { at: "21:56", artist: "Ill Phil", title: "We're Guna Fight Em Off (Seven Nation Army Re-fix) (Mesto Remix)" },
+  { at: "22:23", artist: "Herobust", title: "Move Mint (VIP)" },
+  { at: "22:49", artist: "Sikdope vs. DVBBS & BORGEOUS", title: "Old School vs. Tsunami (DJ KUBA & NEITAN VIP Edit)" },
+  { at: "23:09", artist: "DVBBS & BORGEOUS", title: "Tsunami" },
+  { at: "23:29", artist: "Sikdope", title: "Old School" },
+  { at: "23:48", artist: "Bon Jovi", title: "Livin' On A Prayer (Maydro Remix)" },
+  { at: "25:17", artist: "Galantis & Dillon Francis vs. Curbi", title: "No Money vs. Triple Six (TJR Mashup)" },
+  { at: "25:33", artist: "Galantis", title: "No Money (Dillon Francis Remix)" },
+  { at: "25:49", artist: "Curbi", title: "Triple Six" },
+  { at: "26:04", artist: "WATEVA", title: "Ber Zer Ker" },
+  { at: "27:35", artist: "Deorro", title: "Offspring" },
+  { at: "28:15", artist: "Alan Walker vs. MARNIK & Blazars vs. Queen", title: "Fade vs. King In The North vs. We Will Rock You (Alan Walker Mashup)" },
+  { at: "28:59", artist: "Queen", title: "We Will Rock You" },
+  { at: "29:43", artist: "MARNIK & Blazars", title: "King In The North" },
+  { at: "30:28", artist: "Alan Walker", title: "Fade" },
+  { at: "31:12", artist: "Tiësto & John Christian ft. Marshall Masters & The Ultimate MC", title: "I Like It Loud" },
+  { at: "33:54", artist: "Alan Walker & Alex Skrindo", title: "Sky (VIP)" },
+  { at: "36:13", artist: "K-391 ft. Alan Walker & Julie Bergan & Seungri", title: "Ignite" },
+  { at: "38:32", artist: "Alan Walker ft. Noah Cyrus & Digital Farm Animals & Juliander", title: "All Falls Down" },
+  { at: "40:49", artist: "Alan Walker ft. Noah Cyrus & Digital Farm Animals", title: "All Falls Down (Mark Villa Remix)" },
+  { at: "41:36", artist: "Kygo vs. Bassjackers & D'Angello & Francis & Dimitri Vegas & Like Mike vs. NIVIRO", title: "Stargazing vs. All Aboard vs. The Apocalypse (Alan Walker Mashup)" },
+  { at: "42:02", artist: "Bassjackers vs. D'Angello & Francis", title: "All Aboard (Dimitri Vegas & Like Mike Edit)" },
+  { at: "42:28", artist: "NIVIRO", title: "The Apocalypse" },
+  { at: "42:54", artist: "Kygo ft. Justin Jesso", title: "Stargazing" },
+  { at: "43:20", artist: "TJR & Reece Low ft. Fatman Scoop", title: "Check This" },
+  { at: "45:35", artist: "TWIIG", title: "Tarantella" },
+  { at: "46:15", artist: "Marnik & Danko", title: "Hymn (Till My Kingdom Comes)" },
+  { at: "49:05", artist: "Alan Walker vs. RetroVision", title: "Alone vs. Get Down (Alan Walker Mashup)" },
+  { at: "50:10", artist: "Alan Walker", title: "Alone" },
+  { at: "51:15", artist: "RetroVision", title: "Get Down" },
+  { at: "52:20", artist: "Alan Walker ft. Iselin Solheim", title: "Faded" },
+  { at: "55:30", artist: "Alan Walker ft. Iselin Solheim", title: "Faded (Tiësto Northern Lights Remix)" },
+];
+
