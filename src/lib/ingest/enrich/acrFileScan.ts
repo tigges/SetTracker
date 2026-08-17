@@ -30,6 +30,7 @@
 import type { PrismaClient } from "@prisma/client";
 import { detectPlaybackHost } from "../../playback";
 import { HELD_RELIVE_WATCH } from "../nextCaptures";
+import { isFingerprintOnlyVideoId, isFingerprintOnlyWatchUrl } from "../identify/fingerprintWatch";
 import {
   mapAcrMusicHit,
   nextPlayPosition,
@@ -471,6 +472,17 @@ export function isHeldFileScanTarget(opts: {
   return HELD_RELIVE_WATCH.some((h) => h.match.test(hay));
 }
 
+/** Fan Identify-only clips must never enter the File Scanning Relive queue. */
+export function isFingerprintOnlyFileScanTarget(opts: {
+  slug?: string | null;
+  playbackUrl?: string | null;
+}): boolean {
+  const slug = opts.slug ?? "";
+  const fromSlug = slug.startsWith("yt-") ? slug.slice(3) : "";
+  if (fromSlug && isFingerprintOnlyVideoId(fromSlug)) return true;
+  return opts.playbackUrl ? isFingerprintOnlyWatchUrl(opts.playbackUrl) : false;
+}
+
 /**
  * File Scanning queue: YouTube only, held Relives out, then slice.
  * Identify keeps SoundCloud-first ranking; this path must not share it.
@@ -483,6 +495,7 @@ export function youtubeFileScanQueue(
   return candidates
     .filter((c) => c.host === "youtube")
     .filter((c) => !isHeldFileScanTarget(c))
+    .filter((c) => !isFingerprintOnlyFileScanTarget(c))
     .slice(0, limit);
 }
 

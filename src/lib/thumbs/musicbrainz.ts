@@ -14,6 +14,8 @@ export type MusicBrainzTrackMeta = {
   releaseDate?: string | null; // ISO date yyyy-mm-dd
   labelName?: string | null;
   beatportUrl?: string | null;
+  mbid?: string | null;
+  isrc?: string | null;
 };
 
 type MbUrlRel = {
@@ -25,6 +27,7 @@ type MbRecording = {
   id?: string;
   title?: string;
   length?: number; // ms
+  isrcs?: string[];
   releases?: {
     date?: string;
     title?: string;
@@ -110,8 +113,18 @@ export async function resolveTrackMetaMusicBrainz(
         beatportUrl = await lookupRecordingBeatportUrl(row.id);
       }
 
-      if (!durationSec && !releaseDate && !labelName && !beatportUrl) continue;
-      return { durationSec, releaseDate, labelName, beatportUrl };
+      const isrc = row.isrcs?.find((x) => /^[A-Z]{2}[A-Z0-9]{3}[0-9]{7}$/i.test(x));
+      if (!durationSec && !releaseDate && !labelName && !beatportUrl && !row.id && !isrc) {
+        continue;
+      }
+      return {
+        durationSec,
+        releaseDate,
+        labelName,
+        beatportUrl,
+        mbid: row.id ?? null,
+        isrc: isrc ? isrc.toUpperCase() : null,
+      };
     }
   } catch {
     /* ignore */

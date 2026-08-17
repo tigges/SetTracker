@@ -225,6 +225,14 @@ handle must overlap the DJ name, it must be live, and it must not belong to
 another catalog DJ. Missing keys → safe no-op. Runs on catalog-deep and
 weekly enrich `full`. Reports: `data/crosscheck/llm-handle-research.json`.
 
+**Track IDs from held 1001 seeds** (`npm run research:track-ids`): named cues
+go to Deezer (ISRC) and optional MusicBrainz (`TRACK_ID_MB=1` → MBID /
+Beatport). Fill-null `Track.isrc` / `beatportUrl` only with
+`TRACK_ID_APPLY=1`. Bare ID cues stay as Identify offsets on
+fingerprint-only fan clips (never Relive / FileScan). LLM job `tracks`
+confirms model ISRCs against the same live lookup. Report:
+`data/crosscheck/track-id-research.json`.
+
 `https://gemini.google.com/app` is the consumer chat UI — Actions cannot
 call it. Gemini in CI needs a key from
 [Google AI Studio](https://aistudio.google.com/apikey) stored as

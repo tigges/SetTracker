@@ -94,6 +94,63 @@ assert.equal(dyzen!.videoId, undefined);
 const sonny = held.find((h) => /sonny/i.test(h.name));
 assert.equal(sonny!.status, "waiting");
 
+const knockWaiting = held.find((h) => /knock2/i.test(h.name));
+assert.ok(knockWaiting);
+assert.equal(knockWaiting!.status, "waiting");
+assert.match(knockWaiting!.note, /DerekD2/);
+
+const coleWaiting = held.find((h) => /cole/i.test(h.name));
+assert.ok(coleWaiting);
+assert.equal(coleWaiting!.status, "waiting");
+assert.match(coleWaiting!.note, /HARD\/Insomniac/i);
+
+const knockEntries = [
+  {
+    videoId: "KNOCKHARD01",
+    title: "Knock2 B2B Zedd | HARD Summer 2026",
+    channel: "HARD",
+  },
+  {
+    videoId: "KNOCKSOLO01",
+    title: "Knock2 | HARD Summer 2026",
+    channel: "HARD",
+  },
+  {
+    videoId: "KNOCKTMLFAKE",
+    title: "Knock2 B2B Zedd WE2 | Tomorrowland 2026",
+    channel: "Tomorrowland",
+  },
+];
+const knockHeld = matchHeldRelives(knockEntries, HELD_RELIVE_WATCH);
+const knockHit = knockHeld.find((h) => /knock2/i.test(h.name));
+assert.equal(knockHit!.status, "candidate");
+assert.equal(knockHit!.videoId, "KNOCKHARD01");
+assert.equal(
+  knockHeld.find((h) => /calvin/i.test(h.name))!.status,
+  "waiting",
+);
+
+const coleEntries = [
+  {
+    videoId: "COLEHARD001",
+    title: "Cole Terrazas | HARD Summer 2026 Pink Stage",
+    channel: "HARD",
+  },
+  {
+    videoId: "COLETMLFAKE",
+    title: "Cole Terrazas WE2 | Tomorrowland 2026",
+    channel: "Tomorrowland",
+  },
+];
+const coleHeld = matchHeldRelives(coleEntries, HELD_RELIVE_WATCH);
+const coleHit = coleHeld.find((h) => /cole/i.test(h.name));
+assert.equal(coleHit!.status, "candidate");
+assert.equal(coleHit!.videoId, "COLEHARD001");
+assert.equal(
+  coleHeld.find((h) => /calvin/i.test(h.name))!.status,
+  "waiting",
+);
+
 const unwired = matchUnwiredOfficialRelives(entries, {
   curatedVideoIds: new Set(["DuXXMZLfAkQ"]),
   mappedSlugs: new Set(),

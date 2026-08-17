@@ -1,0 +1,238 @@
+{
+  "generatedAt": "2026-08-17T10:37:12.105Z",
+  "note": "Verified Deezer/MusicBrainz IDs from held 1001 seeds. Fan Relives stay unwired.",
+  "scanned": 30,
+  "hits": [
+    {
+      "artist": "Zedd ft. Bea Miller",
+      "title": "Out Of Time",
+      "at": "3:03",
+      "isrc": "USUM72406304",
+      "deezerTitle": "Out of Time",
+      "source": "deezer"
+    },
+    {
+      "artist": "Knock2",
+      "title": "feel U luv Me",
+      "at": "4:04",
+      "isrc": "QMBZ92447777",
+      "deezerTitle": "feel U luv Me",
+      "source": "deezer"
+    },
+    {
+      "artist": "Zedd ft. Jon Bellion",
+      "title": "Beautiful Now",
+      "at": "5:04",
+      "isrc": "USUM71505090",
+      "deezerTitle": "Beautiful Now",
+      "source": "deezer"
+    },
+    {
+      "artist": "Knock2 & NGHTMRE ft. Marlhy",
+      "title": "One Chance",
+      "at": "8:37",
+      "isrc": "US39N2204824",
+      "deezerTitle": "One Chance (feat. Marlhy)",
+      "source": "deezer"
+    },
+    {
+      "artist": "Martin Garrix & Zedd ft. Emily Warren",
+      "title": "Follow",
+      "at": "9:55",
+      "isrc": "NLM5S2201640",
+      "deezerTitle": "Follow",
+      "source": "deezer"
+    },
+    {
+      "artist": "Zedd",
+      "title": "Shave It Up",
+      "at": "11:13",
+      "isrc": "USQY51155889",
+      "deezerTitle": "Shave It Up",
+      "source": "deezer"
+    },
+    {
+      "artist": "Zedd ft. Matthew Koma",
+      "title": "Spectrum",
+      "at": "15:06",
+      "isrc": "USUM71205604",
+      "deezerTitle": "Spectrum",
+      "source": "deezer"
+    },
+    {
+      "artist": "Zedd & Botnek",
+      "title": "Bumble Bee",
+      "at": "19:13",
+      "isrc": "USUM71505096",
+      "deezerTitle": "Bumble Bee",
+      "source": "deezer"
+    },
+    {
+      "artist": "ISOKNOCK ft. Cade Clair",
+      "title": "4EVR",
+      "at": "19:40",
+      "isrc": "QM6P42472446",
+      "deezerTitle": "4EVR",
+      "source": "deezer"
+    },
+    {
+      "artist": "Knock2 ft. Rhea Raj",
+      "title": "fw me (dirty)",
+      "at": "20:07",
+      "isrc": "QMFME2478573",
+      "deezerTitle": "fw me (dirty)",
+      "source": "deezer"
+    },
+    {
+      "artist": "Zedd",
+      "title": "Shotgun",
+      "at": "20:34",
+      "isrc": "USQY51260132",
+      "deezerTitle": "Shotgun",
+      "source": "deezer"
+    },
+    {
+      "artist": "Knock2 & Naliya",
+      "title": "shake!the!city!",
+      "at": "21:01",
+      "isrc": "QMFME2478555",
+      "deezerTitle": "shake!the!city!",
+      "source": "deezer"
+    },
+    {
+      "artist": "Zedd ft. Hayley Williams",
+      "title": "Stay The Night",
+      "at": "22:15",
+      "isrc": "USUM71311478",
+      "deezerTitle": "Stay The Night (Featuring Hayley Williams Of Paramore)",
+      "source": "deezer"
+    },
+    {
+      "artist": "Knock2",
+      "title": "crank the bass, play the muzik",
+      "at": "24:53",
+      "isrc": "QMFME2478524",
+      "deezerTitle": "crank the bass, play the muzik",
+      "source": "deezer"
+    },
+    {
+      "artist": "Zedd & Alessia Cara",
+      "title": "Stay",
+      "at": "28:00",
+      "isrc": "USUM71700736",
+      "deezerTitle": "Stay",
+      "source": "deezer"
+    },
+    {
+      "artist": "Knock2",
+      "title": "gettin' hott",
+      "at": "31:36",
+      "isrc": "CA5KR2231603",
+      "deezerTitle": "gettin' hott",
+      "source": "deezer"
+    }
+  ],
+  "misses": [
+    {
+      "artist": "Zedd & Knock2",
+      "title": "Niteharts 2025 Intro",
+      "at": "0:00",
+      "reason": "no verified id"
+    },
+    {
+      "artist": "Zedd ft. Jon Bellion",
+      "title": "Beautiful Now (Acappella)",
+      "at": "1:01",
+      "reason": "no verified id"
+    },
+    {
+      "artist": "Knock2",
+      "title": "ROOM202 Intro",
+      "at": "2:02",
+      "reason": "no verified id"
+    },
+    {
+      "artist": "Zedd ft. Jon Bellion",
+      "title": "Beautiful Now (Knock2 Remix)",
+      "at": "6:51",
+      "reason": "no verified id"
+    },
+    {
+      "artist": "Martin Garrix & Zedd & Emily Warren vs. Knock2 & NGHTMRE & Marlhy",
+      "title": "Follow vs. One Chance (Zedd & Knock2 Edit)",
+      "at": "9:16",
+      "reason": "no verified id"
+    },
+    {
+      "artist": "Knock2 & Vedo",
+      "title": "fast n slow (VIP)",
+      "at": "13:00",
+      "reason": "no verified id"
+    },
+    {
+      "artist": "Zedd ft. Matthew Koma",
+      "title": "Spectrum (Tristan Garner & Gregori Klosman Knight Remix)",
+      "at": "16:56",
+      "reason": "no verified id"
+    },
+    {
+      "artist": "Zedd & Botnek vs. ISOKNOCK & Cade Clair",
+      "title": "Bumble Bee vs. 4EVR (Zedd & Knock2 Edit)",
+      "at": "18:46",
+      "reason": "no verified id"
+    },
+    {
+      "artist": "Black Eyed Peas",
+      "title": "Rock That Body (Acappella)",
+      "at": "21:38",
+      "reason": "no verified id"
+    },
+    {
+      "artist": "Zedd ft. Hayley Williams",
+      "title": "Stay The Night (Schoolboy Remix)",
+      "at": "23:34",
+      "reason": "no verified id"
+    },
+    {
+      "artist": "Chase & Status & Bou ft. Trigga & IRAH & Flowdan & Takura",
+      "title": "Baddadan (Knock2 Remix)",
+      "at": "26:12",
+      "reason": "no verified id"
+    },
+    {
+      "artist": "Chase & Status & Bou ft. Trigga & IRAH & Flowdan & Takura",
+      "title": "Baddadan (Knock2 VIP)",
+      "at": "27:06",
+      "reason": "no verified id"
+    },
+    {
+      "artist": "Lil Uzi Vert",
+      "title": "Money Longer (Knock2 Remix)",
+      "at": "29:48",
+      "reason": "no verified id"
+    },
+    {
+      "artist": "Habstrakt & Nitepunk vs. Knock2 vs. Justin Bieber & Nicki Minaj",
+      "title": "Point vs. gettin' hott vs. Beauty And A Beat (Knock2 Edit)",
+      "at": "33:06",
+      "reason": "no verified id"
+    }
+  ],
+  "idGaps": [
+    {
+      "seed": "TL_KNOCK2_ZEDD_HARD_SUMMER_2026",
+      "youtubeUrl": "https://www.youtube.com/watch?v=6DC3xoQF4Zs",
+      "videoId": "6DC3xoQF4Zs",
+      "offsetSec": 1035,
+      "note": "Fan 4K on 1001. Identify probe only — never Relive wire or FileScan as official."
+    },
+    {
+      "seed": "TL_KNOCK2_ZEDD_HARD_SUMMER_2026",
+      "youtubeUrl": "https://www.youtube.com/watch?v=6DC3xoQF4Zs",
+      "videoId": "6DC3xoQF4Zs",
+      "offsetSec": 4288,
+      "note": "Fan 4K on 1001. Identify probe only — never Relive wire or FileScan as official."
+    }
+  ],
+  "applied": 0
+}
