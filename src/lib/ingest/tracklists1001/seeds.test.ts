@@ -136,6 +136,7 @@ import {
   TL_NETSKY_TML_WE1_2026,
   TL_OLIVER_HELDENS_TML_WE1_2026,
   TL_ALAN_WALKER_TML_WE1_2018,
+  TL_GORDO_TML_WE2_2023,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   tracklist1001RowsToPlays,
@@ -2704,5 +2705,32 @@ for (let i = 1; i < walkerWe1.length; i++) {
     `Alan Walker TML WE1 2018 clocks must increase at index ${i}`,
   );
 }
+
+assertSeedClocks(TL_GORDO_TML_WE2_2023);
+assert.equal(TL_GORDO_TML_WE2_2023.length, 29);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-lopIWBJ0T5I"],
+  TL_GORDO_TML_WE2_2023,
+);
+assert.equal(isWiredTracklistSlug("yt-lopIWBJ0T5I"), true);
+assert.equal(TRACKLIST_1001_BY_SOURCE_SLUG["yt-lopIWBJ0T5I?si=_3aa1f1yf9YPzV9g"], undefined);
+const gordoWe2 = tracklist1001RowsToPlays(TL_GORDO_TML_WE2_2023);
+assert.equal(gordoWe2.length, 29);
+assert.equal(gordoWe2[0]?.provenance, "1001tl");
+assert.equal(gordoWe2[0]?.timestamp, 2 * 60 + 20);
+assert.equal(gordoWe2[0]?.artistName, "Anyma & Chris Avantgarde");
+assert.equal(gordoWe2[0]?.trackTitle, "Consciousness");
+assert.equal(gordoWe2[28]?.trackTitle, "Satisfaction (Justus Remix)");
+assert.equal(gordoWe2[28]?.timestamp, 58 * 60 + 38);
+for (let i = 1; i < gordoWe2.length; i++) {
+  assert.ok(
+    (gordoWe2[i]!.timestamp ?? 0) > (gordoWe2[i - 1]!.timestamp ?? 0),
+    `GORDO TML WE2 2023 clocks must increase at index ${i}`,
+  );
+}
+
+// Liu TML artist Relive — no 1001 URL found; do not invent a wire.
+assert.equal(isWiredTracklistSlug("yt-DWPSLZLKslg"), false);
+assert.equal(TRACKLIST_1001_BY_SOURCE_SLUG["yt-DWPSLZLKslg"], undefined);
 
 console.log("tracklists1001/seeds.test.ts ok");

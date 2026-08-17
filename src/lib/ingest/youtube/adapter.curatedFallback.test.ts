@@ -94,6 +94,9 @@ const OLIVER_HELDENS_TML_WE1 = YOUTUBE_SETS.find((s) =>
 const ALAN_WALKER_TML_WE1_2018 = YOUTUBE_SETS.find((s) =>
   s.video.includes("xVWs0ti0J90"),
 );
+const GORDO_TML_WE2_2023 = YOUTUBE_SETS.find((s) =>
+  s.video.includes("lopIWBJ0T5I"),
+);
 
 describe("watchMetaFromCuratedSeed", () => {
   it("builds ASOT 1290 meta from the curated 1001 capture", () => {
@@ -204,6 +207,18 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=xVWs0ti0J90");
     // Last cue 55:30 + 180s pad.
     assert.equal(meta.durationSec, 55 * 60 + 30 + 180);
+  });
+
+  it("builds GORDO TML WE2 2023 meta from the curated 1001 capture", () => {
+    assert.ok(GORDO_TML_WE2_2023);
+    const meta = watchMetaFromCuratedSeed(GORDO_TML_WE2_2023);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "lopIWBJ0T5I");
+    assert.match(meta.title, /GORDO/i);
+    assert.match(meta.title, /2023/);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=lopIWBJ0T5I");
+    // Last cue 58:38 + 180s pad.
+    assert.equal(meta.durationSec, 58 * 60 + 38 + 180);
   });
 
   it("builds ILLENIUM TML WE1 Great Library meta from the curated 1001 capture", () => {
@@ -1309,5 +1324,20 @@ describe("curated YouTube 429 fallback", () => {
     assert.equal(sets[0]?.primaryArtist?.slug, "alan-walker");
     assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
     assert.match(String(sets[0]?.title ?? ""), /2018/);
+  });
+
+  it("lands GORDO TML WE2 2023 from the 1001 seed when watch is 429", async () => {
+    assert.ok(GORDO_TML_WE2_2023);
+    const adapter = createYoutubeAdapter([GORDO_TML_WE2_2023], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-lopIWBJ0T5I");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 29);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 58 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "gordo");
+    assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
+    assert.match(String(sets[0]?.title ?? ""), /2023/);
   });
 });

@@ -104,6 +104,7 @@ import {
   TL_SOLOMUN_EDC_LV_2026,
   TL_WESTEND_EDC_LV_2026,
   TL_ALAN_WALKER_TML_WE1_2018,
+  TL_GORDO_TML_WE2_2023,
   TL_ALESSO_TML_WE1_2026,
   TL_ALESSO_TML_WE2_2026,
   TL_CHASE_STATUS_TML_WE2_2026,
@@ -2305,6 +2306,9 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     title: "GORDO | Tomorrowland 2023",
     seriesName: "Tomorrowland",
     eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1hxfpsk9/gordo-freedom-stage-tomorrowland-weekend-2-belgium-2023-07-30.html",
+    tracklist1001: TL_GORDO_TML_WE2_2023,
   },
   {
     video: "https://www.youtube.com/watch?v=A5ERobJaS_0",

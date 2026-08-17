@@ -478,3 +478,46 @@ export const TL_ALAN_WALKER_TML_WE1_2018: FingerprintSeedRow[] = [
   { at: "55:30", artist: "Alan Walker ft. Iselin Solheim", title: "Faded (Tiësto Northern Lights Remix)" },
 ];
 
+/**
+ * GORDO @ Freedom Stage, Tomorrowland Weekend 2, Belgium 2023-07-30
+ * https://www.1001tracklists.com/tracklist/1hxfpsk9/gordo-freedom-stage-tomorrowland-weekend-2-belgium-2023-07-30.html
+ * Official YT: https://youtu.be/lopIWBJ0T5I
+ * Capture overlay used TL_GORDO_Freedom-Stage_Tomorrowland_WE2_Belgium_2023
+ * (hyphens illegal); constant is TL_GORDO_TML_WE2_2023.
+ * Wire slug is yt-lopIWBJ0T5I (strip ?si= share param).
+ * Archive-titled Relive — stays off /capture-1001 extras via isArchiveTitledSet.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-lopIWBJ0T5I"]
+ * Captured 2026-08-17 - provenance 1001tl.
+ */
+export const TL_GORDO_TML_WE2_2023: FingerprintSeedRow[] = [
+  { at: "2:20", artist: "Anyma & Chris Avantgarde", title: "Consciousness" },
+  { at: "3:40", artist: "Pavel Petrov & Rafael Cerato", title: "Intelligence" },
+  { at: "5:37", artist: "El Alfa x CJ x El Cherry Scom", title: "La Mamá De La Mamá (GORDO x REDTAPE Remix)" },
+  { at: "7:23", artist: "Darude", title: "Sandstorm (Vintage Culture & Zerky VIP)" },
+  { at: "8:20", artist: "Cajmere", title: "Percolator (Sabadini & Rafa Ferreira Rework)" },
+  { at: "10:40", artist: "Young Miko & Jowell & Randy", title: "ID (Marfil & Batvn Edit)" },
+  { at: "12:00", artist: "OGUZ & Nyctonian", title: "Golden Szn" },
+  { at: "15:00", artist: "Astrix & Rising Dust", title: "Universo" },
+  { at: "17:15", artist: "Creeds", title: "Push Up (Maddix Remix)" },
+  { at: "19:32", artist: "Dimitri Vegas & Like Mike & Tiësto & W&W ft. Dido", title: "Thank You (Not So Bad)" },
+  { at: "20:50", artist: "MCR-T & Horsegiirl", title: "My Barn My Rules" },
+  { at: "22:20", artist: "Indira Paganotto", title: "Angels Never Die" },
+  { at: "25:00", artist: "Peggy Gou", title: "(It Goes Like) Nanana (Maddix Remix)" },
+  { at: "27:00", artist: "ALOK & Ava Max", title: "Car Keys (Ayla) (Tiësto Remix)" },
+  { at: "29:40", artist: "Julio Navas & Gustavo Bravetti & David Amo & Tony Romera vs. Karol G", title: "Provenza vs. Raw (Gotch x Ishy Mashup)" },
+  { at: "30:05", artist: "Karol G", title: "Provenza" },
+  { at: "30:30", artist: "Gustavo Bravetti & David Amo & Julio Navas", title: "Raw (Tony Romera Remix)" },
+  { at: "30:55", artist: "Illusionize", title: "Down (Viot Rework)" },
+  { at: "32:40", artist: "Ciara ft. Petey Pablo", title: "Goodies" },
+  { at: "35:10", artist: "Andruss", title: "Frikitona" },
+  { at: "37:10", artist: "Airsand & TuraniQa", title: "Better Off Alone" },
+  { at: "38:30", artist: "GORDO", title: "Taraka" },
+  { at: "39:00", artist: "GORDO & Feid", title: "Hombres Y Mujeres" },
+  { at: "40:10", artist: "Adriatique & GORDO", title: "With You" },
+  { at: "46:00", artist: "Adam Sellouk & Konstantin Sibold", title: "Day 'N' Night" },
+  { at: "52:37", artist: "El Alfa ft. Braulio Fogon", title: "El Tontoron Tonton (MewTunes Remix)" },
+  { at: "54:53", artist: "GORDO & Feid", title: "Hombres Y Mujeres" },
+  { at: "57:15", artist: "Lazza", title: "Cenere (GORDO Remix)" },
+  { at: "58:38", artist: "Benny Benassi pres. The Biz", title: "Satisfaction (Justus Remix)" },
+];
+
