@@ -109,6 +109,7 @@ import {
   TL_I_HATE_MODELS_TML_WE1_2026,
   TL_ILLENIUM_TML_WE1_2026,
   TL_NETSKY_TML_WE1_2026,
+  TL_OLIVER_HELDENS_TML_WE1_2026,
   TL_ARMIN_VAN_BUUREN_TML_WE2_2026,
   TL_HONEYLUV_ANTS_USHUAIA_2026,
   TL_HONEYLUV_STREET_PARADE_2025,
@@ -1133,6 +1134,22 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/rwsgynk/netsky-freedom-stage-tomorrowland-weekend-1-belgium-2026-07-18.html",
     tracklist1001: TL_NETSKY_TML_WE1_2026,
+  },
+  {
+    // Tomorrowland official Relive — Great Library WE1 2026 (not Daybreak 2024).
+    video: "https://www.youtube.com/watch?v=2i3XOxbp54U",
+    primaryArtist: dj("Oliver Heldens", {
+      accent: "#7c5cff",
+      homeCity: "Netherlands",
+    }),
+    genre: "Future House",
+    type: "festival",
+    title: "Oliver Heldens WE1 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1y2pm859/oliver-heldens-the-great-library-stage-tomorrowland-weekend-1-belgium-2026-07-18.html",
+    tracklist1001: TL_OLIVER_HELDENS_TML_WE1_2026,
   },
   {
     // Tomorrowland official Relive — Freedom Stage WE2.

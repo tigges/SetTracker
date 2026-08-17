@@ -88,6 +88,9 @@ const I_HATE_MODELS_TML_WE1 = YOUTUBE_SETS.find((s) =>
 const NETSKY_TML_WE1 = YOUTUBE_SETS.find((s) =>
   s.video.includes("_e1H9pkcjsQ"),
 );
+const OLIVER_HELDENS_TML_WE1 = YOUTUBE_SETS.find((s) =>
+  s.video.includes("2i3XOxbp54U"),
+);
 
 describe("watchMetaFromCuratedSeed", () => {
   it("builds ASOT 1290 meta from the curated 1001 capture", () => {
@@ -175,6 +178,17 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=_e1H9pkcjsQ");
     // Last cue 59:30 + 180s pad.
     assert.equal(meta.durationSec, 59 * 60 + 30 + 180);
+  });
+
+  it("builds Oliver Heldens TML WE1 Great Library meta from the curated 1001 capture", () => {
+    assert.ok(OLIVER_HELDENS_TML_WE1);
+    const meta = watchMetaFromCuratedSeed(OLIVER_HELDENS_TML_WE1);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "2i3XOxbp54U");
+    assert.match(meta.title, /Oliver Heldens WE1/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=2i3XOxbp54U");
+    // Last cue 1:01:48 + 180s pad.
+    assert.equal(meta.durationSec, 1 * 3600 + 1 * 60 + 48 + 180);
   });
 
   it("builds ILLENIUM TML WE1 Great Library meta from the curated 1001 capture", () => {
@@ -1249,5 +1263,21 @@ describe("curated YouTube 429 fallback", () => {
     assert.ok(sets[0]!.durationSec >= 59 * 60);
     assert.equal(sets[0]?.primaryArtist?.slug, "netsky");
     assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
+  });
+
+  it("lands Oliver Heldens TML WE1 Great Library from the 1001 seed when watch is 429", async () => {
+    assert.ok(OLIVER_HELDENS_TML_WE1);
+    const adapter = createYoutubeAdapter([OLIVER_HELDENS_TML_WE1], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-2i3XOxbp54U");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 51);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 61 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "oliver-heldens");
+    assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
+    assert.match(String(sets[0]?.title ?? ""), /2026/);
+    assert.doesNotMatch(String(sets[0]?.title ?? ""), /Daybreak/i);
   });
 });

@@ -353,3 +353,67 @@ export const TL_NETSKY_TML_WE1_2026: FingerprintSeedRow[] = [
   { at: "59:30", artist: "Netsky & Hybrid Minds", title: "Let Me Hold You (Grafix Remix)" },
 ];
 
+/**
+ * Oliver Heldens @ The Great Library Stage, Tomorrowland Weekend 1, Belgium 2026-07-18
+ * https://www.1001tracklists.com/tracklist/1y2pm859/oliver-heldens-the-great-library-stage-tomorrowland-weekend-1-belgium-2026-07-18.html
+ * Official YT: https://youtu.be/2i3XOxbp54U
+ * Capture overlay used TL_Oliver-Heldens_Great-Library-Stage_Tomorrowland_WE1_Belgium_2026
+ * (hyphens illegal); constant is TL_OLIVER_HELDENS_TML_WE1_2026.
+ * Distinct from TL_OLIVER_HELDENS_DAYBREAK_SESSION_TOMORROWLAND_WE1_2024 (yt-wuMQeEJ3YnQ).
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-2i3XOxbp54U"]
+ * Captured 2026-08-17 - provenance 1001tl.
+ */
+export const TL_OLIVER_HELDENS_TML_WE1_2026: FingerprintSeedRow[] = [
+  { at: "0:12", artist: "Empire Of The Sun", title: "We Are The People (ARTBAT Remix)" },
+  { at: "1:53", artist: "Oliver Heldens", title: "Aquarius" },
+  { at: "3:35", artist: "Rihanna", title: "Don't Stop The Music" },
+  { at: "5:16", artist: "Oliver Heldens", title: "Lady (Hear Me Tonight)" },
+  { at: "8:12", artist: "Eric Prydz vs. Riton & Oliver Heldens & Vula", title: "Pjanoo vs. Turn Me On (Oliver Heldens & Da Brozz Mashup)" },
+  { at: "8:42", artist: "Eric Prydz", title: "Pjanoo" },
+  { at: "9:13", artist: "Riton & Oliver Heldens ft. Vula", title: "Turn Me On" },
+  { at: "9:43", artist: "Cloonee & Prospa", title: "Free Your Mind" },
+  { at: "11:10", artist: "Sean Paul & Odd Mob", title: "Get Busy (Odd Mob Club Mix)" },
+  { at: "12:25", artist: "Bountyhunter", title: "Woops (Dimitri Vegas & Junkie Kid Remix / BRANDON Remix)" },
+  { at: "13:41", artist: "Eminem", title: "Without Me (Acappella)" },
+  { at: "14:56", artist: "Teriyaki Boyz vs. Gwen Stefani", title: "Tokio Drift vs. Hollaback Girl (Macon 148 BPM Remix)" },
+  { at: "15:30", artist: "Gwen Stefani", title: "Hollaback Girl" },
+  { at: "16:04", artist: "Teriyaki Boyz", title: "Tokyo Drift (The Fast And The Furious: Tokyo Drift OST)" },
+  { at: "16:37", artist: "Teriyaki Boyz vs. Dom Dolla & Clementine Douglas vs. Gwen Stefani vs. David Guetta & Benny Benassi vs. Hardwell & Maddix", title: "Tokyo Drift vs. Miracle Maker vs. Hollaback Girl vs. Satisfaction (Oliver Heldens Mashup)" },
+  { at: "16:52", artist: "Gwen Stefani", title: "Hollaback Girl" },
+  { at: "17:06", artist: "Gwen Stefani", title: "Hollaback Girl (Acappella)" },
+  { at: "17:21", artist: "Teriyaki Boyz", title: "Tokyo Drift (The Fast And The Furious: Tokyo Drift OST)" },
+  { at: "17:35", artist: "David Guetta vs. Benny Benassi", title: "Satisfaction" },
+  { at: "17:50", artist: "Dom Dolla ft. Clementine Douglas", title: "Miracle Maker (Maddix Edit)" },
+  { at: "18:04", artist: "Gotye ft. Kimbra", title: "Somebody That I Used To Know (SIDEPIECE Treat)" },
+  { at: "19:46", artist: "Oliver Heldens & Kryder & The Young Punx", title: "AEIOU" },
+  { at: "22:41", artist: "HI-LO & Will Clarke", title: "Lost In Music" },
+  { at: "25:34", artist: "Oliver Heldens & Becky Hill", title: "Gecko (Overdrive)" },
+  { at: "28:59", artist: "Dr. Kucho! & Gregor Salto & Oliver Heldens vs. Mau P vs. Tyla vs. Macklemore & Ryan Lewis & Ray Dalton vs. Cirez D", title: "Can't Stop Playing vs. BEATS FOR THE UNDERGROUND vs. Water vs. Can't Hold Us vs. On Off (Oliver Heldens Mashup)" },
+  { at: "29:33", artist: "Cirez D", title: "On Off" },
+  { at: "30:07", artist: "Macklemore & Ryan Lewis ft. Ray Dalton", title: "Can't Hold Us" },
+  { at: "30:41", artist: "Dr. Kucho! & Gregor Salto", title: "Can't Stop Playing (Oliver Heldens & Gregor Salto Remix)" },
+  { at: "31:15", artist: "Tyla", title: "Water" },
+  { at: "31:49", artist: "Mau P", title: "BEATS FOR THE UNDERGROUND" },
+  { at: "32:22", artist: "Bob Sinclar ft. Steve Edwards", title: "World, Hold On (Children Of The Sky) (FISHER 2022 Rework)" },
+  { at: "34:19", artist: "Oliver Heldens vs. Galantis", title: "Melody vs. Runaway (Oliver Heldens Mashup)" },
+  { at: "35:22", artist: "Oliver Heldens", title: "Melody" },
+  { at: "36:25", artist: "Galantis", title: "Runaway (U & I)" },
+  { at: "37:28", artist: "Bag Raiders", title: "Shooting Stars (Moonphazes Remix)" },
+  { at: "40:34", artist: "HI-LO vs. Lykke Li", title: "REESE vs. I Follow Rivers (Oliver Heldens Mashup)" },
+  { at: "41:20", artist: "Lykke Li", title: "I Follow Rivers (Acappella)" },
+  { at: "42:07", artist: "HI-LO", title: "REESE" },
+  { at: "42:53", artist: "HI-LO & Layton Giordani vs. David Guetta & Sia", title: "Rabbit Hole vs. Titanium (Layton Giordani Mashup)" },
+  { at: "43:48", artist: "David Guetta ft. Sia", title: "Titanium (Acappella)" },
+  { at: "44:43", artist: "HI-LO & Layton Giordani", title: "Rabbit Hole" },
+  { at: "45:38", artist: "deadmau5", title: "Strobe (Maddix Remix)" },
+  { at: "47:21", artist: "Benny Benassi ft. Gary Go", title: "Cinema (Acappella)" },
+  { at: "49:03", artist: "BK vs. iiO & Nadia Ali", title: "Revolution Rapture (Olly James Nu-Rave Mix)" },
+  { at: "50:05", artist: "BK", title: "Revolution" },
+  { at: "51:07", artist: "iiO ft. Nadia Ali", title: "Rapture (Acappella)" },
+  { at: "52:08", artist: "Kate Ryan", title: "Désenchantée (Oliver Heldens EuroRave Remix)" },
+  { at: "54:39", artist: "APRD", title: "Crazy Kikker" },
+  { at: "56:14", artist: "Ricchi E Poveri", title: "Sarà Perché Ti Amo" },
+  { at: "57:48", artist: "Bassjackers", title: "KIDS" },
+  { at: "1:01:48", artist: "MilleniumKid x JBS x Dimitri Vegas & Like Mike x Marlon Hoffstadt x DJ Konik", title: "Vielleicht Vielleicht x Makina Time (Rudeejay & Da Brozz Mashup)" },
+];
+

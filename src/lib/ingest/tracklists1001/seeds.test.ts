@@ -134,6 +134,7 @@ import {
   TL_CHASE_STATUS_TML_WE2_2026,
   TL_I_HATE_MODELS_TML_WE1_2026,
   TL_NETSKY_TML_WE1_2026,
+  TL_OLIVER_HELDENS_TML_WE1_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   tracklist1001RowsToPlays,
@@ -2649,6 +2650,35 @@ for (let i = 1; i < netskyWe1.length; i++) {
   assert.ok(
     (netskyWe1[i]!.timestamp ?? 0) > (netskyWe1[i - 1]!.timestamp ?? 0),
     `Netsky TML WE1 2026 clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_OLIVER_HELDENS_TML_WE1_2026);
+assert.equal(TL_OLIVER_HELDENS_TML_WE1_2026.length, 51);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-2i3XOxbp54U"],
+  TL_OLIVER_HELDENS_TML_WE1_2026,
+);
+assert.equal(isWiredTracklistSlug("yt-2i3XOxbp54U"), true);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-2i3XOxbp54U"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-wuMQeEJ3YnQ"],
+);
+const heldensWe1 = tracklist1001RowsToPlays(TL_OLIVER_HELDENS_TML_WE1_2026);
+assert.equal(heldensWe1.length, 51);
+assert.equal(heldensWe1[0]?.provenance, "1001tl");
+assert.equal(heldensWe1[0]?.timestamp, 12);
+assert.equal(heldensWe1[0]?.artistName, "Empire Of The Sun");
+assert.equal(heldensWe1[0]?.trackTitle, "We Are The People (ARTBAT Remix)");
+assert.equal(
+  heldensWe1[50]?.trackTitle,
+  "Vielleicht Vielleicht x Makina Time (Rudeejay & Da Brozz Mashup)",
+);
+assert.equal(heldensWe1[50]?.timestamp, 1 * 3600 + 1 * 60 + 48);
+for (let i = 1; i < heldensWe1.length; i++) {
+  assert.ok(
+    (heldensWe1[i]!.timestamp ?? 0) > (heldensWe1[i - 1]!.timestamp ?? 0),
+    `Oliver Heldens TML WE1 2026 clocks must increase at index ${i}`,
   );
 }
 
