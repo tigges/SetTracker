@@ -7,6 +7,7 @@ export type SoundCloudWidget = {
   bind: (event: string, listener: () => void) => void;
   seekTo: (ms: number) => void;
   play: () => void;
+  getDuration?: (cb: (durationMs: number) => void) => void;
 };
 
 export type SoundCloudWidgetApi = {
@@ -74,6 +75,15 @@ export function cueSoundCloudWidget(
   startSec: number | null,
   play: boolean,
 ): void {
-  widget.seekTo(Math.max(0, Math.floor(startSec ?? 0) * 1000));
-  if (play) widget.play();
+  const requested = Math.max(0, Math.floor(startSec ?? 0) * 1000);
+  const apply = (durationMs?: number) => {
+    const ms =
+      typeof durationMs === "number" && durationMs > 0
+        ? Math.min(requested, Math.max(0, durationMs - 250))
+        : requested;
+    if (play) widget.play();
+    widget.seekTo(ms);
+  };
+  apply();
+  widget.getDuration?.(apply);
 }

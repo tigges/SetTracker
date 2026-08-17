@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { cueSoundCloudWidget, type SoundCloudWidget } from "./soundcloudWidget";
 
-function mockWidget(): SoundCloudWidget & {
+function mockWidget(durationMs?: number): SoundCloudWidget & {
   seeks: number[];
   plays: number;
 } {
@@ -18,6 +18,9 @@ function mockWidget(): SoundCloudWidget & {
     },
     play() {
       plays += 1;
+    },
+    getDuration(cb) {
+      if (durationMs != null) cb(durationMs);
     },
   };
 }
@@ -36,5 +39,10 @@ const noPlay = mockWidget();
 cueSoundCloudWidget(noPlay, 12.9, false);
 assert.deepEqual(noPlay.seeks, [12_000]);
 assert.equal(noPlay.plays, 0);
+
+const clamped = mockWidget(266_000);
+cueSoundCloudWidget(clamped, 588, true);
+assert.equal(clamped.seeks.at(-1), 265_750);
+assert.equal(clamped.plays, 2);
 
 console.log("soundcloudWidget.test.ts ok");

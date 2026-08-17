@@ -70,6 +70,12 @@ export function SetPlayer({
           if (cue.seeking) cueSoundCloudWidget(widget, cue.startSec, true);
         };
         widget.bind(api.Widget.Events.READY, apply);
+        // seekTo before PLAY is often ignored; seek again once audio starts.
+        widget.bind(api.Widget.Events.PLAY, () => {
+          const cue = cueRef.current;
+          if (!cue.seeking) return;
+          widget.seekTo(Math.max(0, Math.floor(cue.startSec ?? 0) * 1000));
+        });
         apply();
       })
       .catch(() => {
@@ -160,7 +166,7 @@ export function SetPlayer({
             src={target.embedSrc}
             width="100%"
             height={target.embedHeight}
-            loading="lazy"
+            loading="eager"
             allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
             allowFullScreen
             className="w-full rounded-lg border-0"
