@@ -1,0 +1,1628 @@
+{
+  "generatedAt": "2026-08-17T06:44:19.265Z",
+  "provider": "gemini",
+  "apply": true,
+  "stats": {
+    "provider": "gemini",
+    "scanned": 42,
+    "proposed": 42,
+    "applied": 132,
+    "rejected": 44,
+    "skippedNoKey": false
+  },
+  "rows": [
+    {
+      "slug": "layton-giordani-space-miami-1-10-25",
+      "name": "Layton Giordani Space Miami 1-10-25",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/laytongiordani",
+        "youtube": "https://www.youtube.com/@layton-giordani",
+        "instagram": "https://www.instagram.com/laytongiordani",
+        "twitter": "https://twitter.com/laytongiordani",
+        "website": "https://laytongiordani.com",
+        "confidence": 1,
+        "notes": "Official profiles for American techno DJ/producer Layton Giordani."
+      },
+      "accepted": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@layton-giordani",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/laytongiordani",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/laytongiordani",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/laytongiordani",
+          "reason": "URL already owned by another DJ"
+        },
+        {
+          "field": "website",
+          "url": "https://laytongiordani.com/",
+          "reason": "URL is dead"
+        }
+      ]
+    },
+    {
+      "slug": "leftwing-kody",
+      "name": "Leftwing : Kody",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/leftwingaudio",
+        "youtube": null,
+        "instagram": "https://www.instagram.com/leftwingkody",
+        "twitter": "https://twitter.com/leftwingkody",
+        "website": null,
+        "confidence": 0.9,
+        "notes": "Leftwing : Kody (Jon Kong & Chris Adie) consistently use the handle @leftwingaudio on SoundCloud and @leftwingkody across Instagram and Twitter. No standalone official YouTube channel or personal website was verified."
+      },
+      "accepted": [
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/leftwingkody",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/leftwingkody",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/leftwingaudio",
+          "reason": "handle does not match DJ name"
+        }
+      ]
+    },
+    {
+      "slug": "loofy",
+      "name": "Loofy",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/loofy-644934783",
+        "youtube": "https://www.youtube.com/@luvloofy",
+        "instagram": "https://www.instagram.com/luvloofy",
+        "twitter": null,
+        "website": null,
+        "confidence": 0.9,
+        "notes": "Loofy (producer of the hit house track 'Last Night' released on Nervous Records) uses the handle @luvloofy across his main social media and runs the label imprint Luv & Lust."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/loofy-644934783",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@luvloofy",
+          "reason": "handle does not match DJ name"
+        },
+        {
+          "field": "instagram",
+          "url": "https://www.instagram.com/luvloofy",
+          "reason": "handle does not match DJ name"
+        }
+      ]
+    },
+    {
+      "slug": "luuk-van-dijk",
+      "name": "Luuk van Dijk",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/luukvandijkdj",
+        "youtube": "https://www.youtube.com/@luukvandijkdj",
+        "instagram": "https://www.instagram.com/luukvandijkdj",
+        "twitter": "https://twitter.com/luukvandijkdj",
+        "website": "https://luukvandijkdj.nl",
+        "confidence": 0.95,
+        "notes": "Official profiles for Amsterdam-based house DJ/producer and Dark Side of the Sun label founder Luuk van Dijk."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/luukvandijkdj",
+          "reason": "name-matched"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@luukvandijkdj",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/luukvandijkdj",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/luukvandijkdj",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://luukvandijkdj.nl/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "melanie-ribbe",
+      "name": "Melanie Ribbe",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/themelanieribbe",
+        "youtube": "https://www.youtube.com/@melanieribbeofc",
+        "instagram": "https://www.instagram.com/melanieribbe",
+        "twitter": "https://twitter.com/melanieribbe",
+        "website": "https://www.melanieribbe.com",
+        "confidence": 0.95,
+        "notes": "Official links verified across artist listings and official channels for German DJ/producer Melanie Ribbe."
+      },
+      "accepted": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@melanieribbeofc",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/melanieribbe",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/melanieribbe",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.melanieribbe.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/themelanieribbe",
+          "reason": "handle does not match DJ name"
+        }
+      ]
+    },
+    {
+      "slug": "miguel-bastida",
+      "name": "Miguel Bastida",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/miguel_bastida",
+        "youtube": "https://www.youtube.com/@MiguelBastida",
+        "instagram": "https://www.instagram.com/miguel_bastida",
+        "twitter": "https://twitter.com/Miguel_Bastida",
+        "website": "https://www.miguelbastida.com",
+        "confidence": 1,
+        "notes": "Spanish tech house DJ and producer, founder of Be One Records."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/miguel_bastida",
+          "reason": "name-matched"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@MiguelBastida",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/miguel_bastida",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/Miguel_Bastida",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.miguelbastida.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "mila-alias",
+      "name": "Mila Alias",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": "https://www.youtube.com/@MILAALIASDJ",
+        "instagram": "https://www.instagram.com/djmilaalias/",
+        "twitter": null,
+        "website": null,
+        "confidence": 0.85,
+        "notes": "Mila Alias is a Ukrainian melodic techno/house DJ and regular collaborator with Korolova on the Captive Soul label/events. Her verified Instagram handle is @djmilaalias and her official YouTube channel is @MILAALIASDJ."
+      },
+      "accepted": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@MILAALIASDJ",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "instagram",
+          "url": "https://www.instagram.com/djmilaalias/",
+          "reason": "handle does not match DJ name"
+        }
+      ]
+    },
+    {
+      "slug": "miss-dre",
+      "name": "MISS DRE",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/miss_dre",
+        "youtube": "https://www.youtube.com/@missdremusic",
+        "instagram": "https://www.instagram.com/missdremusic",
+        "twitter": null,
+        "website": "https://www.missdremusic.com",
+        "confidence": 0.95,
+        "notes": "MISS DRE is the artist moniker of California-based house/techno DJ, producer, and vocalist Drea Kaplan (who later also performs/releases as DREYA V)."
+      },
+      "accepted": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@missdremusic",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/missdremusic",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/miss_dre",
+          "reason": "URL is dead"
+        },
+        {
+          "field": "website",
+          "url": "https://www.missdremusic.com/",
+          "reason": "URL is dead"
+        }
+      ]
+    },
+    {
+      "slug": "mitis",
+      "name": "MitiS",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/mitis",
+        "youtube": "https://www.youtube.com/@MitisMusic",
+        "instagram": "https://www.instagram.com/mitis",
+        "twitter": "https://twitter.com/MitisOfficial",
+        "website": "https://www.mitisofficial.com",
+        "confidence": 1,
+        "notes": null
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/mitis",
+          "reason": "name-matched"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@MitisMusic",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/mitis",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/MitisOfficial",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.mitisofficial.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "moon-boots",
+      "name": "Moon Boots",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/moonbootsmusic",
+        "youtube": "https://www.youtube.com/@MoonBootsMusic",
+        "instagram": "https://www.instagram.com/moonbootsmusic",
+        "twitter": "https://twitter.com/moonbootsmusic",
+        "website": "https://www.moonbootsmusic.com",
+        "confidence": 1,
+        "notes": "Official links for American DJ/producer Moon Boots (Pete Dougherty)."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/moonbootsmusic",
+          "reason": "name-matched"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@MoonBootsMusic",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/moonbootsmusic",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/moonbootsmusic",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.moonbootsmusic.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "mph",
+      "name": "MPH",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/mph-uk",
+        "youtube": null,
+        "instagram": "https://www.instagram.com/mph_uk",
+        "twitter": "https://twitter.com/mph_uk",
+        "website": "https://www.mphuk.com",
+        "confidence": 0.9,
+        "notes": "MPH (Myles Fairbairn) is a UK garage and bass DJ/producer."
+      },
+      "accepted": [],
+      "rejected": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/mph-uk",
+          "reason": "handle does not match DJ name"
+        },
+        {
+          "field": "instagram",
+          "url": "https://www.instagram.com/mph_uk",
+          "reason": "handle does not match DJ name"
+        },
+        {
+          "field": "twitter",
+          "url": "https://twitter.com/mph_uk",
+          "reason": "handle does not match DJ name"
+        },
+        {
+          "field": "website",
+          "url": "https://www.mphuk.com/",
+          "reason": "URL is dead"
+        }
+      ]
+    },
+    {
+      "slug": "myles-o-neal",
+      "name": "Myles O'Neal",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/mylesboneal",
+        "youtube": "https://www.youtube.com/@MylesONeal_",
+        "instagram": "https://www.instagram.com/mylesoneal",
+        "twitter": "https://x.com/mylesboneal",
+        "website": "https://mylesoneal.com",
+        "confidence": "high",
+        "notes": null
+      },
+      "accepted": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@MylesONeal_",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/mylesoneal",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://mylesoneal.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/mylesboneal",
+          "reason": "handle does not match DJ name"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/mylesboneal",
+          "reason": "handle does not match DJ name"
+        }
+      ]
+    },
+    {
+      "slug": "mythm",
+      "name": "MYTHM",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/mythmofficial",
+        "youtube": "https://www.youtube.com/@mythmofficial",
+        "instagram": "https://www.instagram.com/mythmofficial",
+        "twitter": "https://twitter.com/mythmofficial",
+        "website": null,
+        "confidence": 0.95,
+        "notes": "MYTHM (Mikey Miele) is a Vancouver-based dubstep/bass music producer and DJ. Primary central hub used is linktr.ee/mythmofficial."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/mythmofficial",
+          "reason": "name-matched"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@mythmofficial",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/mythmofficial",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/mythmofficial",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "neon-deluz",
+      "name": "Neon Deluz",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/neondeluzmusic",
+        "youtube": "https://www.youtube.com/@neondeluzmusic",
+        "instagram": "https://www.instagram.com/neondeluzmusic",
+        "twitter": null,
+        "website": null,
+        "confidence": 0.9,
+        "notes": "Neon Deluz is a melodic techno/progressive house duo consisting of brothers Erick and Favio Esquivel Escalante."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/neondeluzmusic",
+          "reason": "name-matched"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@neondeluzmusic",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/neondeluzmusic",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "new-school",
+      "name": "New School",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": null,
+        "instagram": null,
+        "twitter": null,
+        "website": null,
+        "confidence": 0,
+        "notes": "\"New School\" is not an individual DJ. In the provided context, \"Old School X New School\" is the title/theme of a headlining tour and live performance set by the electronic music artist Tape B (recorded live at the Ogden Theatre in Denver)."
+      },
+      "accepted": [],
+      "rejected": []
+    },
+    {
+      "slug": "noizu",
+      "name": "Noizu",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/noizusound",
+        "youtube": "https://www.youtube.com/@NoizuSound",
+        "instagram": "https://www.instagram.com/noizusound",
+        "twitter": "https://twitter.com/noizu",
+        "website": "https://noizusound.com",
+        "confidence": 0.95,
+        "notes": "Official links verified via artist's official YouTube channel descriptions and Linktree profile."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/noizusound",
+          "reason": "name-matched"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@NoizuSound",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/noizusound",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/noizu",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://noizusound.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "nterplanetary-criminal",
+      "name": "NTERPLANETARY CRIMINAL",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/interplanetary-criminal",
+        "youtube": null,
+        "instagram": "https://www.instagram.com/interplanetary_criminal93",
+        "twitter": "https://twitter.com/intergalacticz",
+        "website": "https://interplanetarycriminal.com",
+        "confidence": 0.95,
+        "notes": "Name corrected from typographical prompt error 'NTERPLANETARY CRIMINAL' to UK Garage DJ/producer Interplanetary Criminal (Zach Bruce). Official profiles verified across Resident Advisor, festival announcements, and official artist links."
+      },
+      "accepted": [
+        {
+          "field": "website",
+          "url": "https://interplanetarycriminal.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/interplanetary-criminal",
+          "reason": "handle does not match DJ name"
+        },
+        {
+          "field": "instagram",
+          "url": "https://www.instagram.com/interplanetary_criminal93",
+          "reason": "handle does not match DJ name"
+        },
+        {
+          "field": "twitter",
+          "url": "https://twitter.com/intergalacticz",
+          "reason": "handle does not match DJ name"
+        }
+      ]
+    },
+    {
+      "slug": "omnom",
+      "name": "OMNOM",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/omnom",
+        "youtube": "https://www.youtube.com/@imomnom",
+        "instagram": "https://www.instagram.com/imomnom",
+        "twitter": "https://twitter.com/imOMNOM",
+        "website": "https://www.imomnom.com",
+        "confidence": 1,
+        "notes": null
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/omnom",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.imomnom.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@imomnom",
+          "reason": "handle does not match DJ name"
+        },
+        {
+          "field": "instagram",
+          "url": "https://www.instagram.com/imomnom",
+          "reason": "handle does not match DJ name"
+        },
+        {
+          "field": "twitter",
+          "url": "https://twitter.com/imOMNOM",
+          "reason": "handle does not match DJ name"
+        }
+      ]
+    },
+    {
+      "slug": "paco-osuna",
+      "name": "Paco Osuna",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/paco-osuna",
+        "youtube": null,
+        "instagram": "https://www.instagram.com/pacoosuna",
+        "twitter": "https://twitter.com/paco_osuna",
+        "website": "https://www.pacoosuna.com",
+        "confidence": 0.95,
+        "notes": "Official SoundCloud, Instagram, Twitter/X, and website verified. Paco Osuna does not maintain a dedicated personal official YouTube channel (his sets and music are typically published via his label Mindshake Records, event channels, or auto-generated YouTube Music topic channels)."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/paco-osuna",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/pacoosuna",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/paco_osuna",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "website",
+          "url": "https://www.pacoosuna.com/",
+          "reason": "URL is dead"
+        }
+      ]
+    },
+    {
+      "slug": "pls-ty",
+      "name": "PLS&TY",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/pls-ty",
+        "youtube": "https://www.youtube.com/@plsandtybased",
+        "instagram": "https://www.instagram.com/plsandty",
+        "twitter": "https://twitter.com/plsandtybased",
+        "website": "https://plsandty.com",
+        "confidence": 1,
+        "notes": "Verified official profiles for electronic music producer and DJ PLS&TY (Tommy Leas)."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/pls-ty",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@plsandtybased",
+          "reason": "handle does not match DJ name"
+        },
+        {
+          "field": "instagram",
+          "url": "https://www.instagram.com/plsandty",
+          "reason": "handle does not match DJ name"
+        },
+        {
+          "field": "twitter",
+          "url": "https://twitter.com/plsandtybased",
+          "reason": "handle does not match DJ name"
+        },
+        {
+          "field": "website",
+          "url": "https://plsandty.com",
+          "reason": "website host does not match DJ name"
+        }
+      ]
+    },
+    {
+      "slug": "porter-robinson",
+      "name": "Porter Robinson",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/porter-robinson",
+        "youtube": "https://www.youtube.com/@porterrobinson",
+        "instagram": "https://www.instagram.com/porterrobinson",
+        "twitter": "https://twitter.com/porterrobinson",
+        "website": "https://porterrobinson.com",
+        "confidence": 1,
+        "notes": "Official verified profiles and website for American DJ and music producer Porter Robinson."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/porter-robinson",
+          "reason": "name-matched"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@porterrobinson",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/porterrobinson",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/porterrobinson",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://porterrobinson.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "quackson",
+      "name": "Quackson",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/quacksonmusic",
+        "youtube": "https://www.youtube.com/@quacksonmusic",
+        "instagram": "https://www.instagram.com/quacksonmusic",
+        "twitter": "https://twitter.com/quacksonmusic",
+        "website": "https://quacksonmusic.com",
+        "confidence": 0.95,
+        "notes": "Jackson Wells (Quackson) is a Seattle/Los Angeles-based bass and mid-tempo EDM DJ/producer; uses @quacksonmusic across all major platforms."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/quacksonmusic",
+          "reason": "name-matched"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@quacksonmusic",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/quacksonmusic",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/quacksonmusic",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "website",
+          "url": "https://quacksonmusic.com/",
+          "reason": "URL is dead"
+        }
+      ]
+    },
+    {
+      "slug": "riordan",
+      "name": "Riordan",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/riordanuk",
+        "youtube": "https://www.youtube.com/@riordanuk",
+        "instagram": "https://www.instagram.com/riordan.uk",
+        "twitter": "https://twitter.com/riordan_uk",
+        "website": "https://www.riordanmusic.co.uk",
+        "confidence": 0.95,
+        "notes": "UK house and tech house DJ/producer (Riordan Kelly), known for tracks like 'Needle On The Record', 'While The Record Spins', and 'TWOSTEP'."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/riordanuk",
+          "reason": "name-matched"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@riordanuk",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/riordan.uk",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/riordan_uk",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.riordanmusic.co.uk/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "rohaan",
+      "name": "Rohaan",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/rohaanofficial",
+        "youtube": "https://www.youtube.com/@Rohaan",
+        "instagram": "https://www.instagram.com/rohaanmusic",
+        "twitter": "https://twitter.com/Rohaanofficial",
+        "website": null,
+        "confidence": 0.95,
+        "notes": "Rohaan is a UK bass and drum & bass producer and DJ featured on labels like VISION, Shogun Audio, and Deadbeats."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/rohaanofficial",
+          "reason": "name-matched"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@Rohaan",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/rohaanmusic",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/Rohaanofficial",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "rommii",
+      "name": "rommii",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/heyrommii",
+        "youtube": "https://www.youtube.com/@heyrommii",
+        "instagram": "https://www.instagram.com/heyrommii",
+        "twitter": "https://twitter.com/heyrommii",
+        "website": "https://www.heyrommii.com",
+        "confidence": 0.95,
+        "notes": "Rommii is a San Diego-based DJ and producer known for his dance and house tracks (e.g., 'What We Had Was Real', 'Baile Bounce') and appearances on Insomniac's Night Owl Radio."
+      },
+      "accepted": [],
+      "rejected": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/heyrommii",
+          "reason": "handle does not match DJ name"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@heyrommii",
+          "reason": "handle does not match DJ name"
+        },
+        {
+          "field": "instagram",
+          "url": "https://www.instagram.com/heyrommii",
+          "reason": "handle does not match DJ name"
+        },
+        {
+          "field": "twitter",
+          "url": "https://twitter.com/heyrommii",
+          "reason": "handle does not match DJ name"
+        },
+        {
+          "field": "website",
+          "url": "https://www.heyrommii.com/",
+          "reason": "URL is dead"
+        }
+      ]
+    },
+    {
+      "slug": "ry-x",
+      "name": "RY X",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/ry-x",
+        "youtube": "https://www.youtube.com/@RYX",
+        "instagram": "https://www.instagram.com/ryx",
+        "twitter": "https://twitter.com/ryx",
+        "website": "https://www.ry-x.com",
+        "confidence": 0.95,
+        "notes": "Official profiles for Australian singer, producer, and electronic artist RY X (Ry Cuming)."
+      },
+      "accepted": [
+        {
+          "field": "website",
+          "url": "https://www.ry-x.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/ry-x",
+          "reason": "handle does not match DJ name"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@RYX",
+          "reason": "handle does not match DJ name"
+        },
+        {
+          "field": "instagram",
+          "url": "https://www.instagram.com/ryx",
+          "reason": "handle does not match DJ name"
+        },
+        {
+          "field": "twitter",
+          "url": "https://twitter.com/ryx",
+          "reason": "handle does not match DJ name"
+        }
+      ]
+    },
+    {
+      "slug": "skepsis",
+      "name": "Skepsis",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/skepsisproducer",
+        "youtube": null,
+        "instagram": "https://www.instagram.com/skepsismusicuk",
+        "twitter": "https://twitter.com/skepsismusic_uk",
+        "website": null,
+        "confidence": 0.95,
+        "notes": "Skepsis (Scott Jenkins) is a UK bassline and drum & bass DJ/producer. Official profiles confirmed across multiple label releases and event listings."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/skepsisproducer",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/skepsismusicuk",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/skepsismusic_uk",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "space-92",
+      "name": "Space 92",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/space92",
+        "youtube": "https://www.youtube.com/@space92music",
+        "instagram": "https://www.instagram.com/space92__official/",
+        "twitter": null,
+        "website": null,
+        "confidence": 0.95,
+        "notes": "Official SoundCloud, YouTube channel, and Instagram verified across official music releases and festival line-ups. Space 92 primarily uses Linktree (https://linktr.ee/space92) rather than a standalone dedicated website."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/space92",
+          "reason": "name-matched"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@space92music",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/space92__official",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "spartaque",
+      "name": "Spartaque",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/spartaque",
+        "youtube": "https://www.youtube.com/@djspartaque",
+        "instagram": "https://www.instagram.com/spartaquelive",
+        "twitter": "https://twitter.com/spartaque",
+        "website": "https://www.spartaque.com",
+        "confidence": 1,
+        "notes": "Spartaque (Vitalii Babii) is a Ukrainian techno DJ and producer based in Barcelona, Spain, founder of IAMT Music Group and Codex Recordings, and host of Supreme podcast."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/spartaque",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/spartaquelive",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/spartaque",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.spartaque.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@djspartaque",
+          "reason": "handle does not match DJ name"
+        }
+      ]
+    },
+    {
+      "slug": "steller",
+      "name": "Steller",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/stellersounds",
+        "youtube": "https://www.youtube.com/@stellersounds",
+        "instagram": "https://www.instagram.com/stellersounds",
+        "twitter": "https://twitter.com/StellerSounds",
+        "website": "https://stellersounds.com",
+        "confidence": 1,
+        "notes": "Steller (Angelica Bafitis) is a US-based electronic/bass music DJ and producer featured on Night Owl Radio 456."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/stellersounds",
+          "reason": "name-matched"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@stellersounds",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/stellersounds",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/StellerSounds",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://stellersounds.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "sub-focus",
+      "name": "Sub Focus",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/subfocus",
+        "youtube": "https://www.youtube.com/@SubFocus",
+        "instagram": "https://www.instagram.com/subfocus",
+        "twitter": "https://twitter.com/subfocus",
+        "website": "https://www.subfocus.com",
+        "confidence": 1,
+        "notes": null
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/subfocus",
+          "reason": "name-matched"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@SubFocus",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/subfocus",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/subfocus",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.subfocus.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "sultan-shepard",
+      "name": "Sultan + Shepard",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/sultanshepard",
+        "youtube": "https://www.youtube.com/@sultanshepard",
+        "instagram": "https://www.instagram.com/sultanshepard",
+        "twitter": "https://twitter.com/sultanshepard",
+        "website": "https://sultanshepard.com",
+        "confidence": 1,
+        "notes": "Verified official website and primary social/streaming accounts for electronic music duo Sultan + Shepard."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/sultanshepard",
+          "reason": "name-matched"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@sultanshepard",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/sultanshepard",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/sultanshepard",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://sultanshepard.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "the-prototypes",
+      "name": "The Prototypes",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/theprototypes",
+        "youtube": "https://www.youtube.com/theprototypesuk",
+        "instagram": "https://www.instagram.com/theprototypes",
+        "twitter": "https://twitter.com/PrototypesDNB",
+        "website": "https://www.theprototypes.co.uk",
+        "confidence": "high",
+        "notes": "Originally a UK drum and bass duo consisting of Chris Garvey and Nick White (since 2023, operated solely by Nick White). Previously also used the handle @ThePrototypesUK on Twitter."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/theprototypes",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/theprototypes",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.theprototypes.co.uk/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/theprototypesuk",
+          "reason": "not a youtube profile"
+        },
+        {
+          "field": "twitter",
+          "url": "https://twitter.com/PrototypesDNB",
+          "reason": "handle does not match DJ name"
+        }
+      ]
+    },
+    {
+      "slug": "tini-gessler",
+      "name": "Tini Gessler",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/tini-gessler",
+        "youtube": null,
+        "instagram": "https://www.instagram.com/tinigessler",
+        "twitter": "https://twitter.com/tinigessler",
+        "website": null,
+        "confidence": 0.95,
+        "notes": "Tini Gessler (German-born, Spain-based DJ/producer and elrow resident) has verified presence across SoundCloud, Instagram, and Twitter. No dedicated personal website or official standalone YouTube channel was identified."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/tini-gessler",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/tinigessler",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/tinigessler",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "tobehonest",
+      "name": "TOBEHONEST",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/tobehonestmusic",
+        "youtube": "https://www.youtube.com/@tobehonestmusic",
+        "instagram": "https://www.instagram.com/tobehonest",
+        "twitter": "https://twitter.com/tbhtunez",
+        "website": null,
+        "confidence": 0.95,
+        "notes": "US-based tech house DJ and producer TOBEHONEST (Luke Jacobsen). Official Linktree is available at https://linktr.ee/ToBeHonestMusic, but no standalone domain website was identified."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/tobehonestmusic",
+          "reason": "name-matched"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@tobehonestmusic",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/tobehonest",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "twitter",
+          "url": "https://twitter.com/tbhtunez",
+          "reason": "handle does not match DJ name"
+        }
+      ]
+    },
+    {
+      "slug": "torren-foot",
+      "name": "Torren Foot",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/torrenfoot",
+        "youtube": "https://www.youtube.com/@torrenfoote",
+        "instagram": "https://www.instagram.com/torrenfoot",
+        "twitter": "https://twitter.com/torrenfoot",
+        "website": "https://www.torrenfoot.com.au",
+        "confidence": 0.95,
+        "notes": "Official channels and website for Melbourne-based house DJ and producer Torren Foot."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/torrenfoot",
+          "reason": "name-matched"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@torrenfoote",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/torrenfoot",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/torrenfoot",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.torrenfoot.com.au/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "toyzz",
+      "name": "TOYZZ",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/toyzzx",
+        "youtube": null,
+        "instagram": "https://www.instagram.com/toyzzx",
+        "twitter": "https://twitter.com/toyzzmusic",
+        "website": null,
+        "confidence": 0.9,
+        "notes": "TOYZZ is a Spanish tech/bass house DJ and producer (Diego Diaz) based in Alicante, Spain."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/toyzzx",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/toyzzx",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "twitter",
+          "url": "https://x.com/toyzzmusic",
+          "reason": "URL is dead"
+        }
+      ]
+    },
+    {
+      "slug": "vltra",
+      "name": "VLTRA",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/vltramusic1719",
+        "youtube": "https://www.youtube.com/@vltramusic",
+        "instagram": "https://www.instagram.com/vltramusic",
+        "twitter": "https://twitter.com/ItVltra",
+        "website": "https://vltramusic.com",
+        "confidence": 0.95,
+        "notes": "VLTRA (IT) is an Italian tech house duo consisting of Riccardo Anzalone and Samuele A. Giambona."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/vltramusic1719",
+          "reason": "name-matched"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@vltramusic",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/vltramusic",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://vltramusic.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "twitter",
+          "url": "https://twitter.com/ItVltra",
+          "reason": "handle does not match DJ name"
+        }
+      ]
+    },
+    {
+      "slug": "wakyin",
+      "name": "Wakyin",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/wakyin",
+        "youtube": "https://www.youtube.com/@wakyin",
+        "instagram": "https://www.instagram.com/wakyin",
+        "twitter": "https://twitter.com/wakyin",
+        "website": null,
+        "confidence": 0.95,
+        "notes": "Wakyin (Christian Rivera-Joaquin) is a Dominican-Puerto Rican American house/Afro-house DJ and producer. He primarily uses Linktree in lieu of a standalone personal website."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/wakyin",
+          "reason": "name-matched"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@wakyin",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/wakyin",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/wakyin",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "wavhart",
+      "name": "WAVHART",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/wavhart",
+        "youtube": "https://www.youtube.com/channel/UCD-NPf1PM0Ikp7WCfGfYDRQ",
+        "instagram": "https://www.instagram.com/wavhart",
+        "twitter": "https://twitter.com/wavhart",
+        "website": null,
+        "confidence": 0.85,
+        "notes": "Los Angeles-based drum and bass/bass music producer and DJ featured on Night Owl Radio, Play Me Records, and Insomniac Radio."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/wavhart",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/wavhart",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/wavhart",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/channel/UCD-NPf1PM0Ikp7WCfGfYDRQ",
+          "reason": "not a youtube profile"
+        }
+      ]
+    },
+    {
+      "slug": "wes-pierce",
+      "name": "wes pierce",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/wespiercemusic",
+        "youtube": null,
+        "instagram": "https://www.instagram.com/wespierce",
+        "twitter": null,
+        "website": null,
+        "confidence": 0.85,
+        "notes": "Wes Pierce is a Los Angeles-based UK Garage and bass music DJ/producer featured on Insomniac's Night Owl Radio 442. Official SoundCloud and Instagram profiles are verified, but no dedicated personal YouTube channel, Twitter profile, or standalone website was identified."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/wespiercemusic",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/wespierce",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "zuezeu",
+      "name": "ZUEZEU",
+      "provider": "gemini",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/zuezeu",
+        "youtube": "https://www.youtube.com/@zuezeu",
+        "instagram": "https://www.instagram.com/zuezeu",
+        "twitter": "https://twitter.com/zuezeumusic",
+        "website": "https://zuezeu.com",
+        "confidence": 1,
+        "notes": "Verified official website and profiles for DJ/producer ZUEZEU across YouTube, SoundCloud, Instagram, and Twitter/X."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/zuezeu",
+          "reason": "name-matched"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@zuezeu",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/zuezeu",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://zuezeu.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "twitter",
+          "url": "https://x.com/zuezeumusic",
+          "reason": "URL is dead"
+        }
+      ]
+    }
+  ]
+}

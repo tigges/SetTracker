@@ -7,6 +7,9 @@ export type HandleHint = {
   youtubeHandle?: string;
   soundcloudPermalink?: string;
   bandcampUrl?: string;
+  instagram?: string;
+  twitter?: string;
+  website?: string;
   genre?: string;
   accent?: string;
 };
@@ -539,6 +542,720 @@ export const KNOWN_HANDLES: Record<string, HandleHint> = {
     genre: "Bass House",
     accent: "#2a9d8f",
   },
+
+  // ---- LLM handle research 2026-08-17 (Gemini + Claude, verify-then-write) ----
+  "erick morillo": {
+    youtubeHandle: "@erickmorillovideo",
+    soundcloudPermalink: "erickmorillo",
+  },
+  "funk tribu": {
+    youtubeHandle: "@funktribumusic",
+    soundcloudPermalink: "funktribumusic",
+  },
+  "hi-lo": {
+    youtubeHandle: "@HILOofficial",
+  },
+  "joris voorn": {
+    youtubeHandle: "@jorisvoorndj",
+    soundcloudPermalink: "joris-voorn",
+  },
+  "ray volpe": {
+    soundcloudPermalink: "rayvolpemusic",
+  },
+  "sullivan king": {
+    youtubeHandle: "@SullivanKing",
+    soundcloudPermalink: "sullivankingmusic",
+  },
+  "third party": {
+    soundcloudPermalink: "thirdpartymusic",
+  },
+  "[monrhea]": {
+    soundcloudPermalink: "monrheacarter",
+  },
+  archie: {
+    soundcloudPermalink: "archiedennis",
+  },
+  axwell: {
+    youtubeHandle: "@axwell",
+    soundcloudPermalink: "axwell",
+  },
+  biblemami: {
+    youtubeHandle: "@biblemami",
+  },
+  bonobo: {
+    youtubeHandle: "@bonobo",
+    soundcloudPermalink: "bonobo",
+  },
+  boutross: {
+    youtubeHandle: "@boutrossmunene",
+  },
+  "brandy maina": {
+    youtubeHandle: "@brandymaina9393",
+  },
+  camelphat: {
+    youtubeHandle: "@camelphat_music",
+    soundcloudPermalink: "camelphat",
+  },
+  "camila jun": {
+    soundcloudPermalink: "camilajun",
+  },
+  cassius: {
+    youtubeHandle: "@cassius1999",
+    soundcloudPermalink: "cassiusofficial",
+  },
+  "claude vonstroke": {
+    youtubeHandle: "@claudevonstroke",
+    soundcloudPermalink: "claudevonstroke",
+  },
+  "coco em": {
+    soundcloudPermalink: "coco_em",
+  },
+  "coco mar\u00eda": {
+    soundcloudPermalink: "cocomariamusic",
+  },
+  codes: {
+    youtubeHandle: "@CODESHOUSE",
+    soundcloudPermalink: "codeshouse",
+  },
+  colyn: {
+    youtubeHandle: "@Colyn_music",
+    soundcloudPermalink: "colynmusic",
+  },
+  darude: {
+    soundcloudPermalink: "darude",
+  },
+  "das kapital": {
+    soundcloudPermalink: "daskapital",
+  },
+  "dc breaks": {
+    soundcloudPermalink: "dc-breaks-uk",
+  },
+  "demi riqu\u00edsimo": {
+    soundcloudPermalink: "demiriquisimo",
+  },
+  deorro: {
+    youtubeHandle: "@deorroTV",
+    soundcloudPermalink: "deorro",
+  },
+  "dillon francis": {
+    youtubeHandle: "@DillonFrancis",
+    soundcloudPermalink: "dillonfrancis",
+  },
+  "dimitri vegas": {
+    soundcloudPermalink: "dimitrivegas",
+  },
+  disclosure: {
+    youtubeHandle: "@disclosure",
+    soundcloudPermalink: "disclosuremusic",
+  },
+  dixon: {
+    soundcloudPermalink: "dixon",
+  },
+  "dj l.a.j": {
+    youtubeHandle: "@DJ_LAJ",
+  },
+  "dj lesoul": {
+    youtubeHandle: "@djlesoul7811",
+  },
+  djknator: {
+    youtubeHandle: "@DJKNATOR",
+  },
+  dustycloud: {
+    soundcloudPermalink: "dustycloudmusic",
+  },
+  "empire of the sun": {
+    youtubeHandle: "@empireofthesun",
+    soundcloudPermalink: "empireofthesunsound",
+  },
+  ephwurd: {
+    youtubeHandle: "@Ephwurd",
+    soundcloudPermalink: "ephwurd",
+  },
+  eskuche: {
+    youtubeHandle: "@Eskuchemusic",
+    soundcloudPermalink: "eskuchemusic",
+  },
+  "eyes everywhere": {
+    soundcloudPermalink: "eyeseverywhere",
+  },
+  "faster horses": {
+    soundcloudPermalink: "faster_horses",
+  },
+  fish56octagon: {
+    youtubeHandle: "@fish56octagon",
+  },
+  "flava d": {
+    youtubeHandle: "@flavadmusic",
+    soundcloudPermalink: "flava_d",
+  },
+  folamour: {
+    youtubeHandle: "@Folamour",
+    soundcloudPermalink: "folamour",
+  },
+  fonzo: {
+    soundcloudPermalink: "fonzox",
+  },
+  "franky rizardo": {
+    youtubeHandle: "@FrankyRizardoOfficial",
+    soundcloudPermalink: "frankyrizardo",
+  },
+  gallya: {
+    youtubeHandle: "@Gallya",
+    soundcloudPermalink: "gallya",
+  },
+  "general c'mamane": {
+    youtubeHandle: "@general_cmamane",
+  },
+  goldmax: {
+    youtubeHandle: "@goldmaxdb",
+  },
+  "grabba ranks": {
+    youtubeHandle: "@GRABBARANKS",
+    soundcloudPermalink: "grabbaranks",
+  },
+  "green velvet": {
+    soundcloudPermalink: "green-velvet-1",
+  },
+  "guido penno": {
+    soundcloudPermalink: "guidopenno",
+  },
+  "hania rani": {
+    youtubeHandle: "@haniaranimusic",
+    soundcloudPermalink: "haniarani",
+  },
+  imanu: {
+    youtubeHandle: "@IMANU",
+    soundcloudPermalink: "imanumusic",
+  },
+  "internet girl": {
+    soundcloudPermalink: "internetgirlmusic",
+  },
+  jazzy: {
+    youtubeHandle: "@JazzyOfficial",
+    soundcloudPermalink: "jazzydublin",
+  },
+  "jessica audiffred": {
+    soundcloudPermalink: "jessicaaudiffred",
+  },
+  "joseph capriati": {
+    soundcloudPermalink: "joseph-capriati",
+  },
+  joshwa: {
+    soundcloudPermalink: "joshwauk",
+  },
+  judeline: {
+    youtubeHandle: "@judeline__",
+  },
+  "julian fijma": {
+    soundcloudPermalink: "julianfijma",
+  },
+  "just bee": {
+    youtubeHandle: "@justbeehk",
+    soundcloudPermalink: "justbeehk",
+  },
+  "justin jay": {
+    youtubeHandle: "@justinjaymusic",
+    soundcloudPermalink: "justin-jay",
+  },
+  "k dot": {
+    youtubeHandle: "@kdot0114",
+    soundcloudPermalink: "kdotscumfam",
+  },
+  "kamo mphela": {
+    youtubeHandle: "@KamoMphelaxx",
+  },
+  kaskade: {
+    youtubeHandle: "@Kaskade",
+    soundcloudPermalink: "kaskade",
+  },
+  kayzo: {
+    youtubeHandle: "@Kayzomusic",
+    soundcloudPermalink: "kayzo-music",
+  },
+  kiasmos: {
+    youtubeHandle: "@Kiasmos",
+    soundcloudPermalink: "kiasmos",
+  },
+  "kilopatrah jones": {
+    soundcloudPermalink: "kilopatrah-jones",
+  },
+  "kyle starkey": {
+    soundcloudPermalink: "kyle_starkey43",
+  },
+  "len faki": {
+    youtubeHandle: "@lenfakiofficial",
+    soundcloudPermalink: "lenfaki",
+  },
+  "liquid stranger": {
+    soundcloudPermalink: "liquidstranger",
+  },
+  locklead: {
+    soundcloudPermalink: "locklead",
+  },
+  lucas: {
+    youtubeHandle: "@lucasandsteve",
+  },
+  "mason collective": {
+    youtubeHandle: "@masoncollective5299",
+    soundcloudPermalink: "masoncollective",
+  },
+  matisse: {
+    youtubeHandle: "@MatisseSadkoOfficial",
+    soundcloudPermalink: "matissesadko",
+  },
+  "matty ralph": {
+    soundcloudPermalink: "matty-ralphmusic",
+  },
+  "max mylo": {
+    soundcloudPermalink: "maxmylomusic",
+  },
+  "max richter": {
+    youtubeHandle: "@maxrichtermusic",
+    soundcloudPermalink: "max-richter",
+  },
+  menesix: {
+    youtubeHandle: "@menesixmusic",
+    soundcloudPermalink: "menesix",
+  },
+  mengzy: {
+    soundcloudPermalink: "mengzy",
+  },
+  miguelle: {
+    youtubeHandle: "@miguelleandtons",
+    soundcloudPermalink: "miguelletons",
+  },
+  "mihalis safras": {
+    youtubeHandle: "@MihalisSafras",
+    soundcloudPermalink: "mihalissafras",
+  },
+  "milena adamis": {
+    soundcloudPermalink: "milena-adamis",
+  },
+  monolink: {
+    youtubeHandle: "@Monolink",
+    soundcloudPermalink: "monolink",
+  },
+  "morena leraba": {
+    youtubeHandle: "@MorenaLeraba",
+    soundcloudPermalink: "morenaleraba",
+  },
+  "nitti gritti": {
+    soundcloudPermalink: "nittigritti",
+  },
+  njelic: {
+    youtubeHandle: "@NjelicOfficial",
+  },
+  notion: {
+    youtubeHandle: "@NOTIONDJ",
+    soundcloudPermalink: "notiondj",
+  },
+  "\u00f3lafur arnalds": {
+    youtubeHandle: "@olafurarnalds",
+    soundcloudPermalink: "olafur-arnalds",
+  },
+  pegassi: {
+    soundcloudPermalink: "pegassimusic",
+  },
+  "phlegmatic dogs": {
+    soundcloudPermalink: "phlegmaticdogs",
+  },
+  "pigeon hole": {
+    soundcloudPermalink: "pigeon_hole",
+  },
+  pnny: {
+    soundcloudPermalink: "pnnycollective",
+  },
+  "raw district": {
+    soundcloudPermalink: "rawdistrict",
+  },
+  rawayana: {
+    youtubeHandle: "@RawayanaOfficial",
+  },
+  rinzen: {
+    soundcloudPermalink: "rinzen",
+  },
+  "saint ludo": {
+    soundcloudPermalink: "saintludo",
+  },
+  "san holo": {
+    soundcloudPermalink: "sanholo",
+  },
+  "sarah de warren": {
+    youtubeHandle: "@sarahdewarren",
+    soundcloudPermalink: "sarahdewarren",
+  },
+  "shanti celeste": {
+    soundcloudPermalink: "shanticeleste",
+  },
+  spfdj: {
+    soundcloudPermalink: "spfdj",
+  },
+  subez: {
+    soundcloudPermalink: "subez",
+  },
+  "tame impala": {
+    soundcloudPermalink: "tameimpala",
+  },
+  "the blaze": {
+    youtubeHandle: "@TheBlazeOfficial",
+  },
+  tons: {
+    soundcloudPermalink: "tonsandtons",
+  },
+  trevormusiq: {
+    soundcloudPermalink: "trevormusiq",
+  },
+  "tuta m": {
+    soundcloudPermalink: "tuta-m",
+  },
+  vnssa: {
+    soundcloudPermalink: "vnssa",
+  },
+  whomadewho: {
+    soundcloudPermalink: "whomadewho",
+  },
+  zomboy: {
+    soundcloudPermalink: "zomboy",
+  },
+  "mal\u00f3ne": {
+    soundcloudPermalink: "malone-music",
+  },
+  "\u00e6on:mode": {
+    soundcloudPermalink: "aeonmode",
+  },
+  borgore: {
+    soundcloudPermalink: "borgore",
+  },
+  "born dirty": {
+    soundcloudPermalink: "borndirty",
+  },
+  castion: {
+    youtubeHandle: "@castionmusic",
+    soundcloudPermalink: "castionmusic",
+  },
+  chaney: {
+    youtubeHandle: "@chaneymusic",
+    soundcloudPermalink: "chaneymusic",
+  },
+  cloudnone: {
+    soundcloudPermalink: "cloudnone",
+  },
+  cristoph: {
+    soundcloudPermalink: "cristophmusic",
+  },
+  "danny avila": {
+    soundcloudPermalink: "dannyavila",
+  },
+  dimension: {
+    soundcloudPermalink: "dimensionuk",
+  },
+  diplo: {
+    youtubeHandle: "@diplo",
+    soundcloudPermalink: "diplo",
+  },
+  dombresky: {
+    soundcloudPermalink: "dombresky",
+  },
+  dusky: {
+    youtubeHandle: "@DuskyMusic",
+    soundcloudPermalink: "duskymusic",
+  },
+  "enrico sangiuliano": {
+    soundcloudPermalink: "enricosangiuliano",
+  },
+  funtcase: {
+    soundcloudPermalink: "funtcase",
+  },
+  giant: {
+    youtubeHandle: "@GIANTmusicofficial",
+  },
+  "hayden james": {
+    soundcloudPermalink: "hayden-james",
+  },
+  hyperbeam: {
+    youtubeHandle: "@hyperbeammusic",
+    soundcloudPermalink: "hyperbeammusic",
+  },
+  jaded: {
+    youtubeHandle: "@jadedlondon",
+    soundcloudPermalink: "jadedlondon",
+  },
+  "jeremy olander": {
+    soundcloudPermalink: "jeremyolander",
+  },
+  kendoll: {
+    soundcloudPermalink: "kendollmusic",
+  },
+  khomha: {
+    soundcloudPermalink: "khomha",
+  },
+  "kyle watson": {
+    soundcloudPermalink: "kylewatson",
+  },
+  // ---- LLM handle research 2026-08-17 round 3 ----
+  loofy: {
+    soundcloudPermalink: "loofy-644934783",
+  },
+  "luuk van dijk": {
+    youtubeHandle: "@luukvandijkdj",
+    soundcloudPermalink: "luukvandijkdj",
+  },
+  "melanie ribbe": {
+    youtubeHandle: "@melanieribbeofc",
+  },
+  "miguel bastida": {
+    youtubeHandle: "@MiguelBastida",
+    soundcloudPermalink: "miguel_bastida",
+  },
+  "mila alias": {
+    youtubeHandle: "@MILAALIASDJ",
+  },
+  "miss dre": {
+    youtubeHandle: "@missdremusic",
+  },
+  mitis: {
+    youtubeHandle: "@MitisMusic",
+    soundcloudPermalink: "mitis",
+  },
+  "moon boots": {
+    youtubeHandle: "@MoonBootsMusic",
+    soundcloudPermalink: "moonbootsmusic",
+  },
+  "myles o'neal": {
+    youtubeHandle: "@MylesONeal_",
+  },
+  mythm: {
+    youtubeHandle: "@mythmofficial",
+    soundcloudPermalink: "mythmofficial",
+  },
+  "neon deluz": {
+    youtubeHandle: "@neondeluzmusic",
+    soundcloudPermalink: "neondeluzmusic",
+  },
+  noizu: {
+    youtubeHandle: "@NoizuSound",
+    soundcloudPermalink: "noizusound",
+  },
+  omnom: {
+    soundcloudPermalink: "omnom",
+  },
+  "paco osuna": {
+    soundcloudPermalink: "paco-osuna",
+  },
+  "pls&ty": {
+    soundcloudPermalink: "pls-ty",
+  },
+  "porter robinson": {
+    youtubeHandle: "@porterrobinson",
+    soundcloudPermalink: "porter-robinson",
+  },
+  quackson: {
+    youtubeHandle: "@quacksonmusic",
+    soundcloudPermalink: "quacksonmusic",
+  },
+  riordan: {
+    youtubeHandle: "@riordanuk",
+    soundcloudPermalink: "riordanuk",
+  },
+  rohaan: {
+    youtubeHandle: "@Rohaan",
+    soundcloudPermalink: "rohaanofficial",
+  },
+  skepsis: {
+    soundcloudPermalink: "skepsisproducer",
+  },
+  "space 92": {
+    youtubeHandle: "@space92music",
+    soundcloudPermalink: "space92",
+  },
+  spartaque: {
+    soundcloudPermalink: "spartaque",
+  },
+  steller: {
+    youtubeHandle: "@stellersounds",
+    soundcloudPermalink: "stellersounds",
+  },
+  "sub focus": {
+    youtubeHandle: "@SubFocus",
+    soundcloudPermalink: "subfocus",
+  },
+  "sultan + shepard": {
+    youtubeHandle: "@sultanshepard",
+    soundcloudPermalink: "sultanshepard",
+  },
+  "the prototypes": {
+    soundcloudPermalink: "theprototypes",
+  },
+  "tini gessler": {
+    soundcloudPermalink: "tini-gessler",
+  },
+  tobehonest: {
+    youtubeHandle: "@tobehonestmusic",
+    soundcloudPermalink: "tobehonestmusic",
+  },
+  "torren foot": {
+    youtubeHandle: "@torrenfoote",
+    soundcloudPermalink: "torrenfoot",
+  },
+  toyzz: {
+    soundcloudPermalink: "toyzzx",
+  },
+  vltra: {
+    youtubeHandle: "@vltramusic",
+    soundcloudPermalink: "vltramusic1719",
+  },
+  wakyin: {
+    youtubeHandle: "@wakyin",
+    soundcloudPermalink: "wakyin",
+  },
+  wavhart: {
+    soundcloudPermalink: "wavhart",
+  },
+  "wes pierce": {
+    soundcloudPermalink: "wespiercemusic",
+  },
+  zuezeu: {
+    youtubeHandle: "@zuezeu",
+    soundcloudPermalink: "zuezeu",
+  },
+
+  // ---- first-party scrape 2026-08-17 (YT About / SC bio / official site) ----
+  "wax motif": {
+    youtubeHandle: "@WaxMotif",
+    soundcloudPermalink: "waxmotif",
+  },
+  bijou: {
+    youtubeHandle: "@BIJOU",
+    soundcloudPermalink: "bijou",
+  },
+  cloonee: {
+    youtubeHandle: "@cloonee",
+    soundcloudPermalink: "cloonee",
+  },
+  meduza: {
+    youtubeHandle: "@meduzamusic",
+    soundcloudPermalink: "meduzamusic",
+    instagram: "https://www.instagram.com/meduzamusic",
+  },
+  avello: {
+    youtubeHandle: "@avello_music",
+    soundcloudPermalink: "avello",
+    instagram: "https://instagram.com/avello_music",
+  },
+  beltran: {
+    soundcloudPermalink: "beltranmusic",
+    instagram: "https://instagram.com/beltranmusic",
+  },
+  "eli brown": {
+    youtubeHandle: "@elibrownbeats",
+    soundcloudPermalink: "elibrownbeats",
+    instagram: "https://instagram.com/elibrownbeats",
+  },
+  innellea: {
+    youtubeHandle: "@Innellea",
+  },
+  "layton giordani": {
+    youtubeHandle: "@LaytonGiordani",
+    soundcloudPermalink: "laytongiordani",
+  },
+  massano: {
+    youtubeHandle: "@massanomusic",
+    soundcloudPermalink: "massanomusic",
+    instagram: "https://instagram.com/massanomusic",
+  },
+  "agents of time": {
+    youtubeHandle: "@AgentsOfTime",
+    soundcloudPermalink: "agents-of-time",
+    instagram: "https://instagram.com/agentsoftime",
+  },
+  "ben sterling": {
+    youtubeHandle: "@bensterlinguk",
+    soundcloudPermalink: "bensterling",
+    instagram: "https://instagram.com/bensterlingmusic",
+  },
+  "ayra starr": {
+    youtubeHandle: "@ayrastarrofficial",
+    instagram: "https://instagram.com/ayrastarr",
+  },
+  audiomarc: {
+    youtubeHandle: "@audiomarcdj",
+    instagram: "https://instagram.com/audiomarcdj",
+  },
+  "aizo clutch": {
+    youtubeHandle: "@AizoClutch",
+    instagram: "https://instagram.com/aizoclutch",
+  },
+  "ann clue": {
+    youtubeHandle: "@AnnClue",
+    soundcloudPermalink: "ann-clue",
+    instagram: "https://instagram.com/annclue",
+  },
+  avision: {
+    youtubeHandle: "@avisionnyc",
+    instagram: "https://instagram.com/avision_nyc",
+  },
+  "bianca oblivion": {
+    youtubeHandle: "@BiancaOblivion",
+    soundcloudPermalink: "biancaoblivion",
+    instagram: "https://instagram.com/bianca_oblivion",
+  },
+  blanke: {
+    youtubeHandle: "@Blankemusic",
+    soundcloudPermalink: "blankemusicau",
+    instagram: "https://instagram.com/blankemusic",
+  },
+  curbi: {
+    youtubeHandle: "@Curbi",
+    soundcloudPermalink: "curbiofficial",
+    instagram: "https://instagram.com/curbimusic",
+  },
+  bexxie: {
+    youtubeHandle: "@bexxiemusic",
+    instagram: "https://instagram.com/bexxiemusic",
+  },
+  "black carl!": {
+    youtubeHandle: "@BlackCarl",
+    soundcloudPermalink: "black_carl",
+    instagram: "https://instagram.com/black_carl",
+  },
+  illenium: {
+    youtubeHandle: "@illenium",
+    soundcloudPermalink: "illeniumofficial",
+    instagram: "https://instagram.com/illenium",
+  },
+  "loud luxury": {
+    youtubeHandle: "@LoudLuxury",
+    instagram: "https://instagram.com/loudluxury",
+  },
+  sidequest: {
+    youtubeHandle: "@SIDEQUESTMUSIC",
+    instagram: "https://instagram.com/sidequestdj",
+  },
+  crankdat: {
+    youtubeHandle: "@Crankdat",
+    soundcloudPermalink: "crankdatmusic",
+    instagram: "https://instagram.com/crankdat",
+  },
+  "bart skils": {
+    youtubeHandle: "@bartskils",
+    soundcloudPermalink: "bart-skils",
+    instagram: "https://instagram.com/bart_skils",
+  },
+  goodboys: {
+    youtubeHandle: "@GoodboysOff",
+    soundcloudPermalink: "goodboysoff",
+    instagram: "https://instagram.com/goodboysoff",
+  },
+  azzecca: {
+    youtubeHandle: "@azzeccamusic",
+    soundcloudPermalink: "azzecca",
+    instagram: "https://instagram.com/azzecca",
+  },
+  "ben rau": {
+    soundcloudPermalink: "ben-rau",
+    instagram: "https://instagram.com/ben_rau",
+  },
+
 };
 
 export function hintForName(name: string): HandleHint | undefined {

@@ -268,6 +268,12 @@ assert.match(bySlug.liu!.instagram!, /instagram\.com\/liulive/);
 assert.match(bySlug.liu!.twitter!, /(?:twitter|x)\.com\/liulive/);
 assert.equal(hintForName("Liu")?.youtubeHandle, "@Liumusic");
 assert.equal(hintForName("Liu")?.soundcloudPermalink, "liulive");
+assert.equal(hintForName("Axwell")?.youtubeHandle, "@axwell");
+assert.equal(hintForName("Axwell")?.soundcloudPermalink, "axwell");
+assert.equal(hintForName("Kaskade")?.youtubeHandle, "@Kaskade");
+assert.equal(hintForName("Kaskade")?.soundcloudPermalink, "kaskade");
+assert.equal(hintForName("Porter Robinson")?.youtubeHandle, "@porterrobinson");
+assert.equal(hintForName("Sub Focus")?.soundcloudPermalink, "subfocus");
 
 assert.ok(bySlug["1788-l"], "missing pin 1788-l");
 assert.equal(bySlug["1788-l"]!.name, "1788-L");
@@ -279,5 +285,9 @@ assert.match(bySlug["1788-l"]!.website, /1788-l\.com/);
 assert.equal(slugify("1788-L"), "1788-l");
 assert.equal(hintForName("1788-L")?.youtubeHandle, "@1788L");
 assert.equal(hintForName("1788-l")?.youtubeHandle, "@1788L");
+assert.equal(hintForName("ILLENIUM")?.youtubeHandle, "@illenium");
+assert.equal(hintForName("MEDUZA")?.soundcloudPermalink, "meduzamusic");
+assert.equal(hintForName("INNELLEA")?.youtubeHandle, "@Innellea");
+assert.equal(hintForName("INNELLEA")?.instagram, undefined);
 
 console.log("djSocialPins.test.ts ok");

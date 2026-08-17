@@ -12,7 +12,7 @@
  * gemini.google.com/app is the consumer chat UI and cannot be called from CI.
  */
 
-import { mkdirSync, writeFileSync } from "node:fs";
+import { mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import type { PrismaClient } from "@prisma/client";
 import { isJunkArtistName } from "../../artistName";
@@ -22,6 +22,8 @@ import { youtubeChannelUrl } from "../../social";
 import { normalizeOfficialWebsite } from "./wikidataOfficial";
 import {
   djMayClaimSocialUrl,
+  eventMayClaimSocialUrl,
+  handleMatchesEvent,
   loadArtistSocialKeys,
   normalizeSocialUrl,
   socialFieldFromUrl,
@@ -67,11 +69,14 @@ export type ResearchStats = {
 
 const TIMEOUT_MS = 45_000;
 
-/** Repo secret is `CLAUDE_AGENT_API`; `ANTHROPIC_API_KEY` is an alias. */
+/** Repo secret is `CLAUDE_AGENT_API`; `ANTHROPIC_API_KEY` / `CLAUDE_API_KEY` are aliases. */
 export function claudeApiKey(
   env: Record<string, string | undefined> = process.env,
 ): string | null {
-  const key = env.CLAUDE_AGENT_API?.trim() || env.ANTHROPIC_API_KEY?.trim();
+  const key =
+    env.CLAUDE_AGENT_API?.trim() ||
+    env.ANTHROPIC_API_KEY?.trim() ||
+    env.CLAUDE_API_KEY?.trim();
   return key || null;
 }
 
@@ -127,6 +132,20 @@ DJ: ${name}
 Context: ${context || "none"}`;
 }
 
+function eventHandlePrompt(
+  name: string,
+  kind: string,
+  location: string | null,
+): string {
+  return `You research official profiles for electronic-music festivals and clubs.
+Return ONLY JSON with keys: soundcloud, youtube, instagram, twitter, website, confidence, notes.
+Use full https URLs. Null when you are not sure. Do not invent slugified guesses.
+Prefer the venue or festival's own account. Never a lineup artist, resident DJ, promoter person, or fan page.
+Event: ${name}
+Kind: ${kind}
+Location: ${location || "unknown"}`;
+}
+
 async function callClaude(prompt: string): Promise<string> {
   const key = claudeApiKey();
   if (!key) throw new Error("CLAUDE_AGENT_API / ANTHROPIC_API_KEY missing");
@@ -156,7 +175,7 @@ async function callClaude(prompt: string): Promise<string> {
 
 async function callGemini(prompt: string): Promise<string> {
   const key = geminiApiKey() || "";
-  const model = process.env.GEMINI_MODEL || "gemini-2.5-flash";
+  const model = process.env.GEMINI_MODEL || "gemini-3.7-flash";
   const url =
     `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent` +
     `?key=${encodeURIComponent(key)}`;
@@ -182,14 +201,14 @@ async function callGemini(prompt: string): Promise<string> {
   );
 }
 
-async function complete(
+export async function complete(
   provider: LlmProvider,
   prompt: string,
 ): Promise<string> {
   return provider === "claude" ? callClaude(prompt) : callGemini(prompt);
 }
 
-async function probeLive(url: string): Promise<"ok" | "dead" | "soft"> {
+export async function probeLive(url: string): Promise<"ok" | "dead" | "soft"> {
   try {
     const res = await fetch(url, {
       method: "HEAD",
@@ -275,6 +294,47 @@ export function evaluateProposedUrl(
   return { ok: true, url, reason: "name-matched" };
 }
 
+/** Same verify-then-write rules for Event rows. Never claim a DJ profile. */
+export function evaluateProposedEventUrl(
+  eventName: string,
+  field: VerifiedField["field"],
+  raw: string,
+  artistKeys: Set<string>,
+): { ok: boolean; url?: string; reason: string } {
+  let url = raw.trim();
+  if (!url) return { ok: false, reason: "empty" };
+  if (field === "youtube") {
+    const yt = youtubeChannelUrl(url);
+    if (!yt) return { ok: false, reason: "not a YouTube channel" };
+    url = yt;
+  } else if (field === "website") {
+    const web = normalizeOfficialWebsite(url);
+    if (!web) return { ok: false, reason: "not an official website" };
+    url = web;
+    const host = (() => {
+      try {
+        return new URL(url).hostname.replace(/^www\./, "");
+      } catch {
+        return "";
+      }
+    })();
+    const hostHandle = host.replace(/\.(com|net|org|io|tv|co|uk|be|nl|de)$/i, "");
+    if (!handleMatchesEvent(hostHandle, eventName)) {
+      return { ok: false, reason: "website host does not match event name" };
+    }
+  } else {
+    const n = normalizeSocialUrl(url);
+    if (!n) return { ok: false, reason: "unparseable URL" };
+    url = n;
+    const mapped = socialFieldFromUrl(url);
+    if (mapped !== field) return { ok: false, reason: `not a ${field} profile` };
+    if (!eventMayClaimSocialUrl(eventName, url, artistKeys)) {
+      return { ok: false, reason: "handle is an artist profile or does not match event" };
+    }
+  }
+  return { ok: true, url, reason: "name-matched" };
+}
+
 const FIELDS = [
   "soundcloud",
   "youtube",
@@ -282,6 +342,56 @@ const FIELDS = [
   "twitter",
   "website",
 ] as const;
+
+/** Prefer Top 100 + festival acts over alphabetical one-set leftovers. */
+export function researchPriority(d: {
+  slug: string;
+  setCount: number;
+  festivalSets: number;
+}): number {
+  let s = d.setCount;
+  if (isTop100DjSlug(d.slug)) s += 100;
+  if (d.festivalSets > 0) s += 20;
+  return s;
+}
+
+/** Set-title crumbs that slipped past isJunkArtistName. */
+export function isResearchWorthyName(name: string): boolean {
+  const n = name.replace(/\s+/g, " ").trim();
+  if (!n) return false;
+  if (/^behind\b/i.test(n)) return false;
+  if (/\b(full|solo|sunrise|sunset)\s*$/i.test(n)) return false;
+  if (/\bchapter\b/i.test(n)) return false;
+  if (/^dj\s+\w{1,3}$/i.test(n)) return false;
+  return true;
+}
+
+/** Slugs already scanned in data/crosscheck/llm-handle-research*.json */
+export function previouslyResearchedSlugs(cwd = process.cwd()): Set<string> {
+  const dir = join(cwd, "data", "crosscheck");
+  const out = new Set<string>();
+  let files: string[] = [];
+  try {
+    files = readdirSync(dir).filter(
+      (f) => f.startsWith("llm-handle-research") && f.endsWith(".json"),
+    );
+  } catch {
+    return out;
+  }
+  for (const f of files) {
+    try {
+      const raw = JSON.parse(readFileSync(join(dir, f), "utf8")) as {
+        rows?: Array<{ slug?: string }>;
+      };
+      for (const row of raw.rows ?? []) {
+        if (row.slug) out.add(row.slug);
+      }
+    } catch {
+      /* ignore broken report */
+    }
+  }
+  return out;
+}
 
 export async function verifyProposal(
   djName: string,
@@ -308,7 +418,7 @@ export async function verifyProposal(
   return { accepted, rejected };
 }
 
-function writeReport(name: string, payload: unknown): void {
+export function writeReport(name: string, payload: unknown): void {
   const dir = join(process.cwd(), "data", "crosscheck");
   mkdirSync(dir, { recursive: true });
   writeFileSync(join(dir, name), `${JSON.stringify(payload, null, 2)}\n`);
@@ -320,8 +430,9 @@ function writeReport(name: string, payload: unknown): void {
  */
 export async function runLlmHandleResearch(
   prisma: PrismaClient,
+  opts: { provider?: LlmProvider; reportTag?: string } = {},
 ): Promise<ResearchStats> {
-  const provider = detectLlmProvider();
+  const provider = opts.provider ?? detectLlmProvider();
   const stats: ResearchStats = {
     provider,
     scanned: 0,
@@ -344,6 +455,7 @@ export async function runLlmHandleResearch(
   const limit = Math.max(1, Number(process.env.LLM_RESEARCH_LIMIT || 12));
   const apply = process.env.LLM_RESEARCH_APPLY !== "0";
   const artistKeys = await loadArtistSocialKeys(prisma);
+  const already = previouslyResearchedSlugs();
 
   const djs = (
     await prisma.dj.findMany({
@@ -375,13 +487,15 @@ export async function runLlmHandleResearch(
           orderBy: { isPrimary: "desc" },
         },
       },
-      take: limit * 4,
+      take: Math.max(limit * 8, 80),
       orderBy: { name: "asc" },
     })
   )
     .filter(
       (d) =>
+        !already.has(d.slug) &&
         !isJunkArtistName(d.name) &&
+        isResearchWorthyName(d.name) &&
         !isBrandHostSlug(d.slug) &&
         isCatalogWorkDj({
           slug: d.slug,
@@ -394,12 +508,37 @@ export async function runLlmHandleResearch(
           })),
         }),
     )
+    .map((d) => ({
+      ...d,
+      priority: researchPriority({
+        slug: d.slug,
+        setCount: d.sets.length,
+        festivalSets: d.sets.filter(
+          (s) =>
+            s.set.type === "festival" ||
+            s.set.event?.kind === "festival" ||
+            s.set.event?.kind === "club",
+        ).length,
+      }),
+    }))
+    .sort((a, b) => b.priority - a.priority || a.name.localeCompare(b.name))
     .slice(0, limit);
+
+  console.log(
+    `[llm-research] provider=${provider} model=${
+      provider === "gemini"
+        ? process.env.GEMINI_MODEL || "gemini-3.7-flash"
+        : process.env.ANTHROPIC_MODEL || "claude-sonnet-4-5"
+    } queue=${djs.map((d) => d.name).join(", ")}`,
+  );
 
   const rows: ResearchRow[] = [];
   for (const d of djs) {
     stats.scanned += 1;
     const context = d.sets.map((s) => s.set.title).filter(Boolean).join("; ");
+    console.log(
+      `[llm-research] ${stats.scanned}/${djs.length} ${d.name} (${d.slug})`,
+    );
     try {
       const text = await complete(provider, handlePrompt(d.name, context));
       const proposal = parseLlmJson(text);
@@ -453,15 +592,236 @@ export async function runLlmHandleResearch(
     }
   }
 
-  writeReport("llm-handle-research.json", {
+  const payload = {
     generatedAt: new Date().toISOString(),
     provider,
     apply,
     stats,
     rows,
-  });
+  };
+  writeReport("llm-handle-research.json", payload);
+  if (provider) {
+    const tag = opts.reportTag ? `-${opts.reportTag}` : "";
+    writeReport(`llm-handle-research-${provider}${tag}.json`, payload);
+  }
   console.log(
     `[llm-research] provider=${provider} scanned=${stats.scanned}` +
+      ` proposed=${stats.proposed} applied=${stats.applied} rejected=${stats.rejected}`,
+  );
+  return stats;
+}
+
+async function verifyEventProposal(
+  eventName: string,
+  proposal: HandleProposal,
+  artistKeys: Set<string>,
+): Promise<{ accepted: VerifiedField[]; rejected: ResearchRow["rejected"] }> {
+  const accepted: VerifiedField[] = [];
+  const rejected: ResearchRow["rejected"] = [];
+  for (const field of FIELDS) {
+    const raw = proposal[field];
+    if (!raw) continue;
+    const ev = evaluateProposedEventUrl(eventName, field, raw, artistKeys);
+    if (!ev.ok || !ev.url) {
+      rejected.push({ field, url: raw, reason: ev.reason });
+      continue;
+    }
+    const live = await probeLive(ev.url);
+    if (live === "dead") {
+      rejected.push({ field, url: ev.url, reason: "URL is dead" });
+      continue;
+    }
+    accepted.push({ field, url: ev.url, reason: ev.reason });
+  }
+  return { accepted, rejected };
+}
+
+function previouslyResearchedEventSlugs(cwd = process.cwd()): Set<string> {
+  const dir = join(cwd, "data", "crosscheck");
+  const out = new Set<string>();
+  let files: string[] = [];
+  try {
+    files = readdirSync(dir).filter(
+      (f) => f.startsWith("llm-event-handle-research") && f.endsWith(".json"),
+    );
+  } catch {
+    return out;
+  }
+  for (const f of files) {
+    try {
+      const raw = JSON.parse(readFileSync(join(dir, f), "utf8")) as {
+        rows?: Array<{ slug?: string }>;
+      };
+      for (const row of raw.rows ?? []) {
+        if (row.slug) out.add(row.slug);
+      }
+    } catch {
+      /* ignore */
+    }
+  }
+  return out;
+}
+
+/**
+ * Official festival/club socials. Fill-null only. Never copies a DJ profile.
+ */
+export async function runLlmEventHandleResearch(
+  prisma: PrismaClient,
+  opts: { provider?: LlmProvider; reportTag?: string } = {},
+): Promise<ResearchStats> {
+  const provider = opts.provider ?? detectLlmProvider();
+  const stats: ResearchStats = {
+    provider,
+    scanned: 0,
+    proposed: 0,
+    applied: 0,
+    rejected: 0,
+    skippedNoKey: !provider,
+  };
+  if (!provider) return stats;
+  if (process.env.LLM_RESEARCH === "0" || process.env.LLM_RESEARCH_EVENTS === "0") {
+    console.log("[llm-event-research] skipped");
+    return stats;
+  }
+
+  const limit = Math.max(1, Number(process.env.LLM_EVENT_RESEARCH_LIMIT || 60));
+  const apply = process.env.LLM_RESEARCH_APPLY !== "0";
+  const artistKeys = await loadArtistSocialKeys(prisma);
+  const already = previouslyResearchedEventSlugs();
+  const djNames = new Set(
+    (
+      await prisma.dj.findMany({
+        select: { name: true, slug: true },
+      })
+    ).flatMap((d) => [d.name.toLowerCase(), d.slug.toLowerCase()]),
+  );
+
+  const events = (
+    await prisma.event.findMany({
+      where: {
+        kind: { in: ["festival", "club"] },
+        OR: [
+          { instagram: null },
+          { twitter: null },
+          { website: null },
+          { soundcloud: null },
+        ],
+      },
+      select: {
+        id: true,
+        slug: true,
+        name: true,
+        kind: true,
+        location: true,
+        soundcloud: true,
+        instagram: true,
+        twitter: true,
+        website: true,
+        _count: { select: { sets: true } },
+      },
+    })
+  )
+    .filter((e) => {
+      if (already.has(e.slug)) return false;
+      if (djNames.has(e.name.toLowerCase()) || djNames.has(e.slug.toLowerCase())) {
+        return false;
+      }
+      return true;
+    })
+    .sort(
+      (a, b) =>
+        b._count.sets - a._count.sets || a.name.localeCompare(b.name),
+    )
+    .slice(0, limit);
+
+  console.log(
+    `[llm-event-research] provider=${provider} queue=${events.map((e) => e.name).join(", ")}`,
+  );
+
+  const rows: ResearchRow[] = [];
+  for (const e of events) {
+    stats.scanned += 1;
+    console.log(
+      `[llm-event-research] ${stats.scanned}/${events.length} ${e.name} (${e.slug})`,
+    );
+    try {
+      const text = await complete(
+        provider,
+        eventHandlePrompt(e.name, e.kind, e.location),
+      );
+      const proposal = parseLlmJson(text);
+      if (!proposal) {
+        rows.push({
+          slug: e.slug,
+          name: e.name,
+          provider,
+          proposal: null,
+          accepted: [],
+          rejected: [],
+          error: "unparseable model JSON",
+        });
+        continue;
+      }
+      stats.proposed += 1;
+      const { accepted, rejected } = await verifyEventProposal(
+        e.name,
+        proposal,
+        artistKeys,
+      );
+      stats.rejected += rejected.length;
+      if (apply && accepted.length) {
+        const data: Record<string, string> = {};
+        const current: Record<string, string | null> = {
+          soundcloud: e.soundcloud,
+          instagram: e.instagram,
+          twitter: e.twitter,
+          website: e.website,
+        };
+        for (const a of accepted) {
+          if (a.field === "youtube") continue;
+          if (current[a.field]) continue;
+          data[a.field] = a.url;
+        }
+        if (Object.keys(data).length) {
+          await prisma.event.update({ where: { id: e.id }, data });
+          stats.applied += Object.keys(data).length;
+        }
+      }
+      rows.push({
+        slug: e.slug,
+        name: e.name,
+        provider,
+        proposal,
+        accepted,
+        rejected,
+      });
+    } catch (err) {
+      rows.push({
+        slug: e.slug,
+        name: e.name,
+        provider,
+        proposal: null,
+        accepted: [],
+        rejected: [],
+        error: err instanceof Error ? err.message : String(err),
+      });
+    }
+  }
+
+  const payload = {
+    generatedAt: new Date().toISOString(),
+    provider,
+    apply,
+    stats,
+    rows,
+  };
+  writeReport("llm-event-handle-research.json", payload);
+  if (provider) {
+    const tag = opts.reportTag ? `-${opts.reportTag}` : "";
+    writeReport(`llm-event-handle-research-${provider}${tag}.json`, payload);
+  }
+  console.log(
+    `[llm-event-research] provider=${provider} scanned=${stats.scanned}` +
       ` proposed=${stats.proposed} applied=${stats.applied} rejected=${stats.rejected}`,
   );
   return stats;

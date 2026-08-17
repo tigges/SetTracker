@@ -59,6 +59,26 @@ assert.equal(
   djMayClaimSocialUrl("FISHER", "https://soundcloud.com/adambeyer"),
   false,
 );
+assert.equal(
+  djMayClaimSocialUrl("AFRO", "https://soundcloud.com/afrojack"),
+  false,
+);
+assert.equal(
+  djMayClaimSocialUrl("AFRO", "https://instagram.com/afrojack"),
+  false,
+);
+assert.equal(
+  djMayClaimSocialUrl("Afrojack", "https://soundcloud.com/afrojack"),
+  true,
+);
+assert.equal(
+  djMayClaimSocialUrl("ARTBAT", "https://soundcloud.com/artbatmusic"),
+  true,
+);
+assert.equal(
+  djMayClaimSocialUrl("Westend", "https://instagram.com/beatport"),
+  false,
+);
 
 const pins = artistSocialKeysFromPins();
 assert.ok(pins.has("instagram:realadambeyer"));

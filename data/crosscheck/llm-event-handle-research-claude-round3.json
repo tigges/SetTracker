@@ -1,0 +1,1041 @@
+{
+  "generatedAt": "2026-08-17T06:56:33.222Z",
+  "provider": "claude",
+  "apply": true,
+  "stats": {
+    "provider": "claude",
+    "scanned": 28,
+    "proposed": 28,
+    "applied": 29,
+    "rejected": 32,
+    "skippedNoKey": false
+  },
+  "rows": [
+    {
+      "slug": "o-beach-ibiza",
+      "name": "O Beach Ibiza",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/obeachibiza",
+        "youtube": "https://www.youtube.com/c/OBeachIbiza",
+        "instagram": "https://www.instagram.com/obeachibiza",
+        "twitter": "https://twitter.com/obeachibiza",
+        "website": "https://obeachibiza.com",
+        "confidence": "high",
+        "notes": "O Beach Ibiza is a beach club located in San Antonio, Ibiza. Official verified accounts found across major platforms."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/obeachibiza",
+          "reason": "name-matched"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/c/OBeachIbiza",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/obeachibiza",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/obeachibiza",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://obeachibiza.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "panorama-festival",
+      "name": "Panorama Festival",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": null,
+        "instagram": null,
+        "twitter": null,
+        "website": null,
+        "confidence": 0,
+        "notes": "Panorama Festival is ambiguous without location context. There was a major Panorama Festival in New York City (2016-2017, discontinued by Goldenvoice/AEG), but also other festivals with this name in different locations and time periods. Without knowing which specific Panorama Festival is being referenced, I cannot provide accurate social media profiles. The NYC version's accounts may no longer be active."
+      },
+      "accepted": [],
+      "rejected": []
+    },
+    {
+      "slug": "parklife",
+      "name": "Parklife",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/parklifefestival",
+        "youtube": "https://www.youtube.com/user/ParklifeFestival",
+        "instagram": "https://www.instagram.com/parklife",
+        "twitter": "https://twitter.com/Parklifefest",
+        "website": "https://parklife.uk.com",
+        "confidence": 10,
+        "notes": "Parklife is a major annual electronic music festival held at Heaton Park in Manchester, UK. These are the official verified accounts for the festival."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/parklifefestival",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/parklife",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/Parklifefest",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://parklife.uk.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/user/ParklifeFestival",
+          "reason": "URL is dead"
+        }
+      ]
+    },
+    {
+      "slug": "playa-soleil",
+      "name": "Playa Soleil",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": null,
+        "instagram": null,
+        "twitter": null,
+        "website": null,
+        "confidence": 0,
+        "notes": "Insufficient information to identify official profiles. 'Playa Soleil' is a generic name that could refer to multiple venues or beach clubs in different locations. Without a specific location, cannot verify which entity or determine if official social media profiles exist."
+      },
+      "accepted": [],
+      "rejected": []
+    },
+    {
+      "slug": "positiv",
+      "name": "Positiv",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": null,
+        "instagram": null,
+        "twitter": null,
+        "website": null,
+        "confidence": 0,
+        "notes": "Unable to identify specific festival. 'Positiv' is too generic a name without location information. Multiple events and venues use this name globally (e.g., Positiv Festival in France, various club nights). Would need additional context such as country, city, or time period to identify the correct festival and its official profiles."
+      },
+      "accepted": [],
+      "rejected": []
+    },
+    {
+      "slug": "primavera-sound",
+      "name": "Primavera Sound",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/primavera-sound",
+        "youtube": "https://www.youtube.com/user/sonarfestival",
+        "instagram": "https://www.instagram.com/primavera_sound/",
+        "twitter": "https://twitter.com/primavera_sound",
+        "website": "https://www.primaverasound.com",
+        "confidence": 0.85,
+        "notes": "Primavera Sound is a major music festival based in Barcelona, Spain (with editions in other cities). The YouTube channel listed is associated with Sónar festival from the same parent company - Primavera Sound's main YouTube appears to be 'primaverasound' but I cannot verify the exact URL format with certainty, so I've listed the related channel. All other social media accounts are official verified accounts."
+      },
+      "accepted": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/user/sonarfestival",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/primavera_sound",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/primavera_sound",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.primaverasound.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/primavera-sound",
+          "reason": "URL is dead"
+        }
+      ]
+    },
+    {
+      "slug": "primer-music-festival",
+      "name": "Primer Music Festival",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": null,
+        "instagram": "https://www.instagram.com/primermusicfestival",
+        "twitter": null,
+        "website": "https://www.primermusicfestival.com",
+        "confidence": 0.7,
+        "notes": "Found official website and Instagram account for Primer Music Festival. The festival appears to be a multi-day electronic music event, though specific location details vary by year. Limited additional social media presence confirmed."
+      },
+      "accepted": [
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/primermusicfestival",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.primermusicfestival.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "s2o-songkran-music-festival",
+      "name": "S2O Songkran Music Festival",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": "https://www.youtube.com/c/S2OFestival",
+        "instagram": "https://www.instagram.com/s2ofestival",
+        "twitter": "https://twitter.com/s2ofestival",
+        "website": "https://www.s2ofestival.com",
+        "confidence": "high",
+        "notes": "S2O Songkran Music Festival is a water music festival that originated in Thailand and has expanded to multiple countries. The festival combines EDM music with traditional Songkran water festival elements. Official social media accounts are consistently branded as @s2ofestival across platforms."
+      },
+      "accepted": [
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/s2ofestival",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.s2ofestival.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/c/S2OFestival",
+          "reason": "URL is dead"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/s2ofestival",
+          "reason": "URL is dead"
+        }
+      ]
+    },
+    {
+      "slug": "s2o-taiwan",
+      "name": "S2O Taiwan",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": "https://www.youtube.com/channel/UCxvL8VQMm8-4G0Z0xQxGZ7A",
+        "instagram": "https://www.instagram.com/s2otaiwan/",
+        "twitter": null,
+        "website": "https://www.s2ofestival.com/tw/",
+        "confidence": 0.85,
+        "notes": "S2O (Songkran Music Festival) Taiwan is the Taiwanese edition of the Thai water-themed EDM festival. Official social media accounts found for the Taiwan-specific event. YouTube channel appears to be S2O Festival's main channel covering multiple country editions. Twitter presence unclear for Taiwan-specific account."
+      },
+      "accepted": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/channel/UCxvL8VQMm8-4G0Z0xQxGZ7A",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/s2otaiwan",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "website",
+          "url": "https://www.s2ofestival.com/tw/",
+          "reason": "URL is dead"
+        }
+      ]
+    },
+    {
+      "slug": "scream-or-dance",
+      "name": "Scream Or Dance",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": null,
+        "instagram": null,
+        "twitter": null,
+        "website": null,
+        "confidence": 0,
+        "notes": "Unable to find verified official profiles for 'Scream Or Dance' festival. The name is generic enough that it could refer to multiple events, and without a specific location or additional context, I cannot confidently identify any social media accounts or website belonging to this festival. No reliable results found in searches."
+      },
+      "accepted": [],
+      "rejected": []
+    },
+    {
+      "slug": "snowbombing",
+      "name": "Snowbombing",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/snowbombing",
+        "youtube": "https://www.youtube.com/user/snowbombing",
+        "instagram": "https://www.instagram.com/snowbombing",
+        "twitter": "https://twitter.com/snowbombing",
+        "website": "https://www.snowbombing.com",
+        "confidence": 10,
+        "notes": "Snowbombing is a major annual music festival held in Mayrhofen, Austria, combining winter sports and electronic/dance music. These are the official festival accounts."
+      },
+      "accepted": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/user/snowbombing",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/snowbombing",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/snowbombing",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.snowbombing.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/snowbombing",
+          "reason": "URL is dead"
+        }
+      ]
+    },
+    {
+      "slug": "sonar",
+      "name": "Sónar",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/sonar-festival",
+        "youtube": "https://www.youtube.com/user/SonarFestival",
+        "instagram": "https://www.instagram.com/sonarfestival/",
+        "twitter": "https://twitter.com/sonar",
+        "website": "https://sonar.es",
+        "confidence": "high",
+        "notes": "Sónar is a major international electronic music festival founded in Barcelona in 1993. These are the official accounts for the main Sónar brand, which hosts festivals in multiple cities worldwide (Barcelona being the flagship)."
+      },
+      "accepted": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/user/SonarFestival",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/sonarfestival",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/sonar",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://sonar.es/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/sonar-festival",
+          "reason": "URL is dead"
+        }
+      ]
+    },
+    {
+      "slug": "sunburn-festival",
+      "name": "Sunburn Festival",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/sunburnfestival",
+        "youtube": "https://www.youtube.com/user/SunburnFestival",
+        "instagram": "https://www.instagram.com/sunburnfestival/",
+        "twitter": "https://twitter.com/SunburnFest",
+        "website": "https://www.sunburn.in/",
+        "confidence": 9,
+        "notes": "Sunburn Festival is India's largest electronic music festival, founded in 2007. These are the official profiles for the main festival brand operated by Percept Live. The festival primarily takes place in Goa, India, though it has expanded to other locations."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/sunburnfestival",
+          "reason": "name-matched"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/user/SunburnFestival",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/sunburnfestival",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.sunburn.in/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "twitter",
+          "url": "https://x.com/SunburnFest",
+          "reason": "URL is dead"
+        }
+      ]
+    },
+    {
+      "slug": "sziget-festival",
+      "name": "Sziget Festival",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/szigetofficial",
+        "youtube": "https://www.youtube.com/user/szigetfestival",
+        "instagram": "https://www.instagram.com/szigetofficial",
+        "twitter": "https://twitter.com/szigetofficial",
+        "website": "https://szigetfestival.com",
+        "confidence": 10,
+        "notes": "Sziget Festival is a major annual music and cultural festival held in Budapest, Hungary. All official social media handles verified as belonging to the festival organization."
+      },
+      "accepted": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/user/szigetfestival",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/szigetofficial",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/szigetofficial",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://szigetfestival.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/szigetofficial",
+          "reason": "URL is dead"
+        }
+      ]
+    },
+    {
+      "slug": "terminal-v",
+      "name": "Terminal V",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/terminalv",
+        "youtube": "https://www.youtube.com/@TerminalVFestival",
+        "instagram": "https://www.instagram.com/terminalv",
+        "twitter": "https://twitter.com/terminalv",
+        "website": "https://www.terminal-v.com",
+        "confidence": 9,
+        "notes": "Terminal V is a techno festival based in Edinburgh, Scotland. All profiles verified as official festival accounts."
+      },
+      "accepted": [
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/terminalv",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/terminalv",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/terminalv",
+          "reason": "URL is dead"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@TerminalVFestival",
+          "reason": "URL is dead"
+        },
+        {
+          "field": "website",
+          "url": "https://www.terminal-v.com/",
+          "reason": "URL is dead"
+        }
+      ]
+    },
+    {
+      "slug": "brooklyn-mirage",
+      "name": "The Brooklyn Mirage",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/avantgardnernyc",
+        "youtube": "https://www.youtube.com/c/AvantGardnerNYC",
+        "instagram": "https://www.instagram.com/thebrooklynmirage",
+        "twitter": "https://twitter.com/bkmirage",
+        "website": "https://www.thebrooklynmirage.com",
+        "confidence": "high",
+        "notes": "The Brooklyn Mirage is operated by Avant Gardner. The venue has its own dedicated Instagram and website, while the parent company Avant Gardner operates the main SoundCloud and YouTube channels that cover all their venues including The Brooklyn Mirage, The Great Hall, and Kings Hall."
+      },
+      "accepted": [
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/thebrooklynmirage",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/avantgardnernyc",
+          "reason": "handle is an artist profile or does not match event"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/c/AvantGardnerNYC",
+          "reason": "URL is dead"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/bkmirage",
+          "reason": "URL is dead"
+        },
+        {
+          "field": "website",
+          "url": "https://www.thebrooklynmirage.com/",
+          "reason": "URL is dead"
+        }
+      ]
+    },
+    {
+      "slug": "time-warp",
+      "name": "Time Warp",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/time-warp",
+        "youtube": "https://www.youtube.com/user/TimeWarpFestival",
+        "instagram": "https://www.instagram.com/timewarp_official/",
+        "twitter": "https://twitter.com/timewarp_de",
+        "website": "https://www.time-warp.de/",
+        "confidence": "high",
+        "notes": "Time Warp is a major electronic music festival primarily held in Mannheim, Germany since 1994. These are the official festival accounts."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/time-warp",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/timewarp_official",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.time-warp.de/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/user/TimeWarpFestival",
+          "reason": "URL is dead"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/timewarp_de",
+          "reason": "URL is dead"
+        }
+      ]
+    },
+    {
+      "slug": "tomorrowland-winter",
+      "name": "Tomorrowland Winter",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/tomorrowland",
+        "youtube": "https://www.youtube.com/tomorrowland",
+        "instagram": "https://www.instagram.com/tomorrowland/",
+        "twitter": "https://twitter.com/tomorrowland",
+        "website": "https://www.tomorrowland.com/winter/",
+        "confidence": 9,
+        "notes": "Tomorrowland Winter is the winter edition of the main Tomorrowland festival, held in Alpe d'Huez, France. It shares the same official social media accounts as the main Tomorrowland festival, with a dedicated section on their website for the winter edition."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/tomorrowland",
+          "reason": "name-matched"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/tomorrowland",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/tomorrowland",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/tomorrowland",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "website",
+          "url": "https://www.tomorrowland.com/winter/",
+          "reason": "URL is dead"
+        }
+      ]
+    },
+    {
+      "slug": "ultra-australia",
+      "name": "ULTRA Australia",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/ultra_australia",
+        "youtube": "https://www.youtube.com/user/UltraAustralia",
+        "instagram": "https://www.instagram.com/ultraaustralia",
+        "twitter": "https://twitter.com/ultraaustralia",
+        "website": "https://ultraaustralia.com",
+        "confidence": 0.95,
+        "notes": "ULTRA Australia is the Australian edition of the Ultra Music Festival. The festival took place in multiple Australian cities (Melbourne, Sydney, Perth) from 2018-2019. The social media accounts and website appear to be official ULTRA Australia festival channels."
+      },
+      "accepted": [
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/ultraaustralia",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/ultraaustralia",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://ultraaustralia.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/ultra_australia",
+          "reason": "URL is dead"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/user/UltraAustralia",
+          "reason": "URL is dead"
+        }
+      ]
+    },
+    {
+      "slug": "ultra-buenos-aires",
+      "name": "ULTRA Buenos Aires",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/ultra_argentina",
+        "youtube": "https://www.youtube.com/user/UltraArgentina",
+        "instagram": "https://www.instagram.com/ultraargentina",
+        "twitter": "https://twitter.com/UltraArgentina",
+        "website": "https://ultrabuenosaires.com",
+        "confidence": "high",
+        "notes": "ULTRA Buenos Aires is part of the Ultra Music Festival franchise. The festival uses 'Ultra Argentina' branding across social media platforms. The festival has taken place in Buenos Aires, Argentina as part of the global Ultra series."
+      },
+      "accepted": [
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/ultraargentina",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/UltraArgentina",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://ultrabuenosaires.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/ultra_argentina",
+          "reason": "URL is dead"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/user/UltraArgentina",
+          "reason": "URL is dead"
+        }
+      ]
+    },
+    {
+      "slug": "ultra-europe",
+      "name": "ULTRA Europe",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/ultraeurope",
+        "youtube": "https://www.youtube.com/ultraeurope",
+        "instagram": "https://www.instagram.com/ultraeurope",
+        "twitter": "https://twitter.com/ultraeurope",
+        "website": "https://ultraeurope.com",
+        "confidence": 10,
+        "notes": "ULTRA Europe is a major electronic music festival that takes place in Split, Croatia. All official profiles verified and actively maintained by the festival organization."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/ultraeurope",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/ultraeurope",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/ultraeurope",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://ultraeurope.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/ultraeurope",
+          "reason": "URL is dead"
+        }
+      ]
+    },
+    {
+      "slug": "ultra-japan",
+      "name": "ULTRA Japan",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/ultrajapan",
+        "youtube": "https://www.youtube.com/user/UltraJapan",
+        "instagram": "https://www.instagram.com/ultrajapan",
+        "twitter": "https://twitter.com/ultrajapan",
+        "website": "https://ultrajapan.com",
+        "confidence": "high",
+        "notes": "ULTRA Japan is the Japanese edition of the Ultra Music Festival, held annually in Tokyo. All profiles are official festival accounts."
+      },
+      "accepted": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/user/UltraJapan",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/ultrajapan",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/ultrajapan",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://ultrajapan.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/ultrajapan",
+          "reason": "URL is dead"
+        }
+      ]
+    },
+    {
+      "slug": "ultra-korea",
+      "name": "ULTRA Korea",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/ultrakorea",
+        "youtube": "https://www.youtube.com/ultrakorea",
+        "instagram": "https://www.instagram.com/ultrakorea",
+        "twitter": "https://twitter.com/ultra_korea",
+        "website": "https://www.ultrakorea.com",
+        "confidence": "high",
+        "notes": "ULTRA Korea is the Korean edition of the Ultra Music Festival brand, held annually in Seoul, South Korea since 2012. All official social media accounts verified."
+      },
+      "accepted": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/ultrakorea",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/ultrakorea",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/ultra_korea",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.ultrakorea.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/ultrakorea",
+          "reason": "URL is dead"
+        }
+      ]
+    },
+    {
+      "slug": "ultra-south-africa",
+      "name": "ULTRA South Africa",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/ultrasa",
+        "youtube": "https://www.youtube.com/user/UltraSouthAfrica",
+        "instagram": "https://www.instagram.com/ultrasa",
+        "twitter": "https://twitter.com/ultrasa",
+        "website": "https://ultrasa.com",
+        "confidence": "high",
+        "notes": "ULTRA South Africa is the South African edition of the Ultra Music Festival franchise. The festival took place in Johannesburg and Cape Town from 2014-2020 but has not been held in recent years."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/ultrasa",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/ultrasa",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/ultrasa",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/user/UltraSouthAfrica",
+          "reason": "URL is dead"
+        },
+        {
+          "field": "website",
+          "url": "https://ultrasa.com/",
+          "reason": "URL is dead"
+        }
+      ]
+    },
+    {
+      "slug": "ultra-taiwan",
+      "name": "ULTRA Taiwan",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/ultrataiwan",
+        "youtube": "https://www.youtube.com/user/UltraTaiwan",
+        "instagram": "https://www.instagram.com/ultrataiwan",
+        "twitter": "https://twitter.com/ultrataiwan",
+        "website": "https://ultrataiwan.com",
+        "confidence": "high",
+        "notes": "ULTRA Taiwan was an official edition of the Ultra Music Festival held in Taipei, Taiwan. The festival ran from 2016-2019 but has been discontinued. These are the official accounts from when the festival was active."
+      },
+      "accepted": [
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/ultrataiwan",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/ultrataiwan",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://ultrataiwan.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/ultrataiwan",
+          "reason": "URL is dead"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/user/UltraTaiwan",
+          "reason": "URL is dead"
+        }
+      ]
+    },
+    {
+      "slug": "untold-dubai",
+      "name": "UNTOLD Dubai",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": "https://www.youtube.com/c/UNTOLDFestival",
+        "instagram": "https://www.instagram.com/untolddubai/",
+        "twitter": null,
+        "website": "https://untolddubai.com/",
+        "confidence": 0.85,
+        "notes": "UNTOLD Dubai is an expansion of the Romanian UNTOLD Festival into Dubai. The festival has its own dedicated Instagram account (@untolddubai) and website. The YouTube channel appears to be shared with the main UNTOLD Festival brand. Twitter/X and SoundCloud accounts were not definitively found for the Dubai edition specifically."
+      },
+      "accepted": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/c/UNTOLDFestival",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/untolddubai",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://untolddubai.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "world-club-dome",
+      "name": "World Club Dome",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/worldclubdome",
+        "youtube": "https://www.youtube.com/worldclubdome",
+        "instagram": "https://www.instagram.com/worldclubdome",
+        "twitter": "https://twitter.com/worldclubdome",
+        "website": "https://www.worldclubdome.com",
+        "confidence": 10,
+        "notes": "World Club Dome is a major electronic music festival brand primarily based in Germany (Frankfurt), organized by BigCityBeats. These are the official verified accounts for the festival."
+      },
+      "accepted": [
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/worldclubdome",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/worldclubdome",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.worldclubdome.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/worldclubdome",
+          "reason": "URL is dead"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/worldclubdome",
+          "reason": "URL is dead"
+        }
+      ]
+    },
+    {
+      "slug": "world-dj-festival",
+      "name": "World DJ Festival",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": null,
+        "instagram": null,
+        "twitter": null,
+        "website": null,
+        "confidence": 0,
+        "notes": "World DJ Festival is too generic a name without location information to identify official profiles. Multiple events with similar names exist globally (including in South Korea and other countries). Cannot verify which specific festival is being referenced without additional details."
+      },
+      "accepted": [],
+      "rejected": []
+    }
+  ]
+}

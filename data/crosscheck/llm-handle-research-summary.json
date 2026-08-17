@@ -1,0 +1,62 @@
+{
+  "generatedAt": "2026-08-17T07:20:00.000Z",
+  "rounds": [
+    {
+      "file": "llm-handle-research-gemini-round1.json",
+      "provider": "gemini",
+      "target": "dj",
+      "scanned": 40,
+      "applied": 111,
+      "rejected": 33
+    },
+    {
+      "file": "llm-handle-research-gemini.json",
+      "provider": "gemini",
+      "target": "dj",
+      "scanned": 80,
+      "applied": 218,
+      "rejected": 46
+    },
+    {
+      "file": "llm-handle-research-claude.json",
+      "provider": "claude",
+      "target": "dj",
+      "scanned": 80,
+      "applied": 156,
+      "rejected": 106
+    },
+    {
+      "file": "llm-handle-research-gemini-round3.json",
+      "provider": "gemini",
+      "target": "dj",
+      "scanned": 42,
+      "applied": 132,
+      "rejected": 44
+    },
+    {
+      "file": "llm-event-handle-research-gemini-round3.json",
+      "provider": "gemini",
+      "target": "event",
+      "scanned": 60,
+      "applied": 44,
+      "rejected": 13
+    },
+    {
+      "file": "llm-event-handle-research-claude-round3.json",
+      "provider": "claude",
+      "target": "event",
+      "scanned": 28,
+      "applied": 29,
+      "rejected": 32
+    }
+  ],
+  "totals": {
+    "djsScanned": 242,
+    "djFieldsApplied": 617,
+    "eventsScanned": 88,
+    "eventFieldsApplied": 73,
+    "knownHandlesAddedRound3": 35,
+    "knownEventsPatched": 18
+  },
+  "note": "Models propose; we write only live name-matched profiles. Events never receive a lineup-artist profile."
+}

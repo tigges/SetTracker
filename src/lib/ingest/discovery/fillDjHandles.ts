@@ -27,7 +27,7 @@ function hasAnyHandle(d: {
   );
 }
 
-/** Apply roster + KNOWN_HANDLES to DJs that still have no socials. */
+/** Apply roster + KNOWN_HANDLES fill-null per field. */
 export async function fillDjHandlesFromKnown(
   prisma: PrismaClient,
 ): Promise<number> {
@@ -46,29 +46,38 @@ export async function fillDjHandlesFromKnown(
   });
   let n = 0;
   for (const d of djs) {
-    if (hasAnyHandle(d)) continue;
     const roster = ARTIST_ROSTER.find(
       (a) => slugify(a.name) === d.slug || a.name === d.name,
     );
     const hint = hintForName(d.name);
+    const extra = [hint?.instagram, hint?.twitter].filter(
+      (u): u is string => Boolean(u),
+    );
     const socials = djSocialsFromKnown({
       name: d.name,
       soundcloudPermalink:
         roster?.soundcloud?.permalink || hint?.soundcloudPermalink,
       youtubeHandle: roster?.youtube?.handle || hint?.youtubeHandle,
-      socials: roster?.socials,
-      website: roster?.website,
+      socials: [...(roster?.socials ?? []), ...extra],
+      website: roster?.website || hint?.website,
     });
     if (!hasAnyHandle(socials)) continue;
+    const data: {
+      soundcloud?: string;
+      youtube?: string;
+      instagram?: string;
+      twitter?: string;
+      website?: string;
+    } = {};
+    if (!d.soundcloud && socials.soundcloud) data.soundcloud = socials.soundcloud;
+    if (!d.youtube && socials.youtube) data.youtube = socials.youtube;
+    if (!d.instagram && socials.instagram) data.instagram = socials.instagram;
+    if (!d.twitter && socials.twitter) data.twitter = socials.twitter;
+    if (!d.website && socials.website) data.website = socials.website;
+    if (!Object.keys(data).length) continue;
     await prisma.dj.update({
       where: { id: d.id },
-      data: {
-        soundcloud: socials.soundcloud,
-        youtube: socials.youtube,
-        instagram: socials.instagram,
-        twitter: socials.twitter,
-        website: socials.website,
-      },
+      data,
     });
     n += 1;
   }

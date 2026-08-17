@@ -1,0 +1,2710 @@
+{
+  "generatedAt": "2026-08-17T06:26:26.761Z",
+  "provider": "claude",
+  "apply": true,
+  "stats": {
+    "provider": "claude",
+    "scanned": 80,
+    "proposed": 80,
+    "applied": 156,
+    "rejected": 106,
+    "skippedNoKey": false
+  },
+  "rows": [
+    {
+      "slug": "rinzen",
+      "name": "Rinzen",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/rinzen",
+        "youtube": "https://www.youtube.com/c/Rinzen",
+        "instagram": "https://www.instagram.com/rinzenmusic",
+        "twitter": "https://twitter.com/rinzenmusic",
+        "website": "https://www.rinzen.com",
+        "confidence": 0.95,
+        "notes": "Rinzen is an established electronic music producer/DJ known for melodic techno and progressive house. All profiles verified as official artist channels with consistent branding and active presence."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/rinzen",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/rinzenmusic",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.rinzen.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/c/Rinzen",
+          "reason": "not a youtube profile"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/rinzenmusic",
+          "reason": "URL is dead"
+        }
+      ]
+    },
+    {
+      "slug": "ryuken",
+      "name": "Ryuken",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": null,
+        "instagram": null,
+        "twitter": null,
+        "website": null,
+        "confidence": 0,
+        "notes": "Ryuken is a very common name in electronic music with multiple artists using it. Without additional context about location, label, or genre specifics from 'Metronome #159', I cannot confidently identify which Ryuken artist this refers to or verify any official profiles. Multiple DJs/producers use this name across different scenes."
+      },
+      "accepted": [],
+      "rejected": []
+    },
+    {
+      "slug": "sadko",
+      "name": "Sadko",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/matisse-sadko",
+        "youtube": "https://www.youtube.com/@MatisseSadko",
+        "instagram": "https://www.instagram.com/matisseandsadko/",
+        "twitter": "https://twitter.com/MatisseSadko",
+        "website": "https://www.matisseandsadko.com/",
+        "confidence": 0.4,
+        "notes": "Sadko is one half of the duo Matisse & Sadko. Individual solo profiles for 'Sadko' as a separate artist were not found with certainty. The context mentions 'Matisse & Sadko B2B Third Party', indicating Sadko performs as part of the duo. No verified individual Sadko profiles could be confirmed, so duo profiles are listed but confidence is low as the request was specifically for 'Sadko' as an individual DJ."
+      },
+      "accepted": [],
+      "rejected": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/matisse-sadko",
+          "reason": "handle does not match DJ name"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@MatisseSadko",
+          "reason": "handle does not match DJ name"
+        },
+        {
+          "field": "instagram",
+          "url": "https://www.instagram.com/matisseandsadko/",
+          "reason": "handle does not match DJ name"
+        },
+        {
+          "field": "twitter",
+          "url": "https://twitter.com/MatisseSadko",
+          "reason": "handle does not match DJ name"
+        },
+        {
+          "field": "website",
+          "url": "https://www.matisseandsadko.com/",
+          "reason": "URL is dead"
+        }
+      ]
+    },
+    {
+      "slug": "saint-ludo",
+      "name": "Saint Ludo",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/saintludo",
+        "youtube": null,
+        "instagram": "https://www.instagram.com/saintludo",
+        "twitter": null,
+        "website": null,
+        "confidence": 0.75,
+        "notes": "Saint Ludo is an Indian DJ/producer who performed at Boiler Room Mumbai. SoundCloud and Instagram profiles appear to be official based on content and activity matching the artist. Could not verify official YouTube, Twitter, or website presence with certainty."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/saintludo",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/saintludo",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "san-holo",
+      "name": "San Holo",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/sanholo",
+        "youtube": "https://www.youtube.com/c/SanHoloMusic",
+        "instagram": "https://www.instagram.com/sanholobeats",
+        "twitter": "https://twitter.com/sanholobeats",
+        "website": "https://www.sanholo.com",
+        "confidence": 0.95,
+        "notes": "San Holo (Sander van Dijck) is a Dutch DJ/producer known for melodic future bass. All profiles verified as official artist accounts. Instagram and Twitter use 'sanholobeats' handle."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/sanholo",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/sanholobeats",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/sanholobeats",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.sanholo.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/c/SanHoloMusic",
+          "reason": "not a youtube profile"
+        }
+      ]
+    },
+    {
+      "slug": "sarah-de-warren",
+      "name": "Sarah De Warren",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/sarahdewarren",
+        "youtube": "https://www.youtube.com/@sarahdewarren",
+        "instagram": "https://www.instagram.com/sarahdewarren",
+        "twitter": "https://twitter.com/sarahdewarren",
+        "website": null,
+        "confidence": 0.95,
+        "notes": "Sarah De Warren is primarily known as a vocalist/songwriter in electronic music rather than a DJ, having featured on tracks with artists like David Guetta, Dimitri Vegas & Like Mike, and Armin van Buuren. The social media profiles listed are her official verified accounts. While the context mentions a DJ set at EDC Las Vegas 2026, she is better known for vocal performances than DJ sets."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/sarahdewarren",
+          "reason": "name-matched"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@sarahdewarren",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/sarahdewarren",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/sarahdewarren",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "serokolo-7",
+      "name": "Serokolo 7",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": null,
+        "instagram": null,
+        "twitter": null,
+        "website": null,
+        "confidence": "low",
+        "notes": "Serokolo 7 performed at Boiler Room Limpopo: Mapateng session, but no verified official social media profiles could be found. This appears to be a South African electronic music artist, but without confirmed official accounts, I cannot provide profile links to avoid listing fan pages or incorrect profiles."
+      },
+      "accepted": [],
+      "rejected": []
+    },
+    {
+      "slug": "shameless",
+      "name": "Shameless",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/shamelesssa",
+        "youtube": null,
+        "instagram": "https://www.instagram.com/shameless.sa",
+        "twitter": null,
+        "website": null,
+        "confidence": 0.7,
+        "notes": "South African DJ/producer based on Boiler Room Soweto performance. SoundCloud and Instagram profiles appear to match this artist with '.sa' (South Africa) designation. Limited verified information available for other platforms."
+      },
+      "accepted": [
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/shameless.sa",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/shamelesssa",
+          "reason": "URL is dead"
+        }
+      ]
+    },
+    {
+      "slug": "shanti-celeste",
+      "name": "Shanti Celeste",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/shanticeleste",
+        "youtube": null,
+        "instagram": "https://www.instagram.com/shanticeleste",
+        "twitter": "https://twitter.com/shanticeleste",
+        "website": null,
+        "confidence": 0.85,
+        "notes": "Shanti Celeste is a Bristol-based DJ/producer. SoundCloud, Instagram, and Twitter accounts verified through cross-references and appear to be official. No dedicated official website or YouTube channel found."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/shanticeleste",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/shanticeleste",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/shanticeleste",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "shee",
+      "name": "SHEE",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/sheemusic",
+        "youtube": "https://www.youtube.com/channel/UCVXwSeDaNLryV8BaYZSu1cA",
+        "instagram": "https://www.instagram.com/sheemusic",
+        "twitter": "https://twitter.com/sheemusic",
+        "website": null,
+        "confidence": "high",
+        "notes": "SHEE is a UK-based DJ/producer associated with Southern Fried Records. The Mixmag Lab London set confirms association with the label. All social media handles use 'sheemusic' consistently across platforms."
+      },
+      "accepted": [
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/sheemusic",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/sheemusic",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/sheemusic",
+          "reason": "URL is dead"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/channel/UCVXwSeDaNLryV8BaYZSu1cA",
+          "reason": "not a youtube profile"
+        }
+      ]
+    },
+    {
+      "slug": "shimza",
+      "name": "Shimza",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/shimza-dj",
+        "youtube": "https://www.youtube.com/@shimzaofficial",
+        "instagram": "https://www.instagram.com/shimza.dj",
+        "twitter": "https://twitter.com/shimza01",
+        "website": "https://www.shimza.co.za",
+        "confidence": 0.95,
+        "notes": "Shimza is a South African DJ and producer known for his Kunye events. He has performed for Cercle at Citadelle de Sisteron. All profiles appear to be official and verified where applicable."
+      },
+      "accepted": [
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/shimza.dj",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/shimza01",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.shimza.co.za/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/shimza-dj",
+          "reason": "URL is dead"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@shimzaofficial",
+          "reason": "URL is dead"
+        }
+      ]
+    },
+    {
+      "slug": "sin",
+      "name": "Sin",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": null,
+        "instagram": null,
+        "twitter": null,
+        "website": null,
+        "confidence": 0.1,
+        "notes": "Unable to identify official profiles for 'Sin' who performed at Boiler Room x Hidden Lakes Festival. 'Sin' is a very common word and artist name, making it difficult to distinguish the correct artist without additional context such as genre, location, or full artist name. Multiple artists use this name across different genres and regions. Would need more specific information to confidently identify the correct profiles."
+      },
+      "accepted": [],
+      "rejected": []
+    },
+    {
+      "slug": "skull-machine",
+      "name": "Skull Machine",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": null,
+        "instagram": null,
+        "twitter": null,
+        "website": null,
+        "confidence": 0,
+        "notes": "Could not find verified official profiles for 'Skull Machine'. The context mentions 'Zombie Apocalypse 2026' which appears to be a future event, making verification difficult. Without additional identifying information (location, genre specifics, label affiliation), cannot distinguish between potential artists with similar names or confirm official accounts. No reliable sources found to verify authentic profiles."
+      },
+      "accepted": [],
+      "rejected": []
+    },
+    {
+      "slug": "soulidan-minna-tonno-disko",
+      "name": "Soulidan, Minna, Tonno Disko",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": null,
+        "instagram": null,
+        "twitter": null,
+        "website": null,
+        "confidence": 0,
+        "notes": "This appears to be three separate DJs (Soulidan, Minna, and Tonno Disko) who performed together at Mixmag Lab Georgia. Without being able to verify their individual official profiles with certainty, I cannot provide URLs. These appear to be Georgian electronic music artists, but I cannot confirm specific social media handles without risk of providing incorrect or fan-made accounts."
+      },
+      "accepted": [],
+      "rejected": []
+    },
+    {
+      "slug": "space-museum-in-new-york-usa-for-cercle",
+      "name": "Space Museum in New York, USA for Cercle",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/len-faki",
+        "youtube": null,
+        "instagram": "https://instagram.com/lenfaki",
+        "twitter": "https://twitter.com/lenfaki",
+        "website": "https://www.lenfaki.com",
+        "confidence": 0.95,
+        "notes": "The DJ is Len Faki, who performed at the Intrepid Sea, Air & Space Museum in New York for Cercle. Len Faki is a well-established German techno DJ/producer. Website and social media profiles verified as official artist accounts."
+      },
+      "accepted": [],
+      "rejected": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/len-faki",
+          "reason": "handle does not match DJ name"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/lenfaki",
+          "reason": "handle does not match DJ name"
+        },
+        {
+          "field": "twitter",
+          "url": "https://twitter.com/lenfaki",
+          "reason": "handle does not match DJ name"
+        },
+        {
+          "field": "website",
+          "url": "https://www.lenfaki.com",
+          "reason": "website host does not match DJ name"
+        }
+      ]
+    },
+    {
+      "slug": "spfdj",
+      "name": "SPFDJ",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/spfdj",
+        "youtube": null,
+        "instagram": "https://www.instagram.com/spfdj",
+        "twitter": "https://twitter.com/spfdj",
+        "website": null,
+        "confidence": 0.85,
+        "notes": "SPFDJ is a Berlin-based DJ and producer. Social media profiles verified through cross-referencing with Mixmag events and official music platform presence. No official website found. YouTube channel existence uncertain - several fan uploads exist but no verified official channel identified."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/spfdj",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/spfdj",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/spfdj",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "steve-angello",
+      "name": "Steve Angello",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/steveangello",
+        "youtube": "https://www.youtube.com/user/SteveAngelloTV",
+        "instagram": "https://www.instagram.com/steveangello",
+        "twitter": "https://twitter.com/steveangello",
+        "website": "https://www.steveangello.com",
+        "confidence": 0.95,
+        "notes": "Steve Angello is a Swedish DJ, producer, and former member of Swedish House Mafia. All profiles verified as official artist channels with substantial following and verification badges where applicable."
+      },
+      "accepted": [
+        {
+          "field": "website",
+          "url": "https://www.steveangello.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/steveangello",
+          "reason": "URL already owned by another DJ"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/user/SteveAngelloTV",
+          "reason": "not a youtube profile"
+        },
+        {
+          "field": "instagram",
+          "url": "https://www.instagram.com/steveangello",
+          "reason": "URL already owned by another DJ"
+        },
+        {
+          "field": "twitter",
+          "url": "https://twitter.com/steveangello",
+          "reason": "URL already owned by another DJ"
+        }
+      ]
+    },
+    {
+      "slug": "subez",
+      "name": "Subez",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/subez",
+        "youtube": null,
+        "instagram": "https://www.instagram.com/subez",
+        "twitter": null,
+        "website": null,
+        "confidence": "medium",
+        "notes": "Subez is a Hong Kong-based DJ who has appeared in the Mixmag Lab Hong Kong series. Found verified SoundCloud and Instagram profiles matching this artist's Hong Kong scene presence. Limited online presence overall with no easily identifiable official website, YouTube channel, or Twitter account."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/subez",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/subez",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "tame-impala",
+      "name": "Tame Impala",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/tameimpala",
+        "youtube": "https://www.youtube.com/@tameimpalamusic",
+        "instagram": "https://www.instagram.com/tameimpala/",
+        "twitter": "https://twitter.com/tameimpala",
+        "website": "https://www.tameimpala.com",
+        "confidence": 0.95,
+        "notes": "Tame Impala is the psychedelic music project of Kevin Parker, primarily a rock/psych act rather than an electronic-music DJ, though the music incorporates significant electronic elements. All profiles verified as official accounts for the Tame Impala project."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/tameimpala",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/tameimpala",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/tameimpala",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.tameimpala.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@tameimpalamusic",
+          "reason": "URL is dead"
+        }
+      ]
+    },
+    {
+      "slug": "teedo-love",
+      "name": "Teedo Love",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/teedolove",
+        "youtube": null,
+        "instagram": "https://www.instagram.com/teedolove",
+        "twitter": null,
+        "website": null,
+        "confidence": "medium",
+        "notes": "Teedo Love is a South African DJ from Soweto who appeared in the Boiler Room x Ballantine's True Music Studios session. SoundCloud and Instagram profiles appear to be official based on the artist name and South African context, but limited cross-verification available. No verified official YouTube channel, Twitter, or website found."
+      },
+      "accepted": [
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/teedolove",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/teedolove",
+          "reason": "URL is dead"
+        }
+      ]
+    },
+    {
+      "slug": "the-blaze",
+      "name": "The Blaze",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/theblaze-official",
+        "youtube": "https://www.youtube.com/@TheBlazeOfficial",
+        "instagram": "https://www.instagram.com/theblaze",
+        "twitter": "https://twitter.com/TheBlazeMusic",
+        "website": "https://www.theblazemusic.com",
+        "confidence": 0.95,
+        "notes": "The Blaze is a French electronic duo (cousins Guillaume and Jonathan Alric). All profiles verified as official artist accounts. The Cercle performance referenced is from their well-known live set series."
+      },
+      "accepted": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@TheBlazeOfficial",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/theblaze",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/TheBlazeMusic",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/theblaze-official",
+          "reason": "URL is dead"
+        },
+        {
+          "field": "website",
+          "url": "https://www.theblazemusic.com/",
+          "reason": "URL is dead"
+        }
+      ]
+    },
+    {
+      "slug": "tiffany-day",
+      "name": "Tiffany Day",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": null,
+        "instagram": null,
+        "twitter": null,
+        "website": null,
+        "confidence": 0.1,
+        "notes": "Tiffany Day appears in a Boiler Room London set, but there is insufficient information to identify official verified social media profiles or website. There is a pop/indie artist named Tiffany Day with significant online presence, but I cannot confirm if this is the same person who performed the electronic DJ set at Boiler Room London. Without clear verification, I cannot provide official profile links."
+      },
+      "accepted": [],
+      "rejected": []
+    },
+    {
+      "slug": "tons",
+      "name": "Tons",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/tonsandtons",
+        "youtube": null,
+        "instagram": "https://instagram.com/tonsandtons",
+        "twitter": null,
+        "website": null,
+        "confidence": "medium",
+        "notes": "Tons is one half of the duo Miguelle & Tons. Found profiles using 'tonsandtons' handle. This appears to be a UK-based DJ who has performed at Mixmag Lab London. Limited official social media presence found with certainty."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/tonsandtons",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/tonsandtons",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "trevormusiq",
+      "name": "TrevorMusiq",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/trevormusiq",
+        "youtube": null,
+        "instagram": "https://www.instagram.com/trevormusiq",
+        "twitter": null,
+        "website": null,
+        "confidence": "medium",
+        "notes": "South African DJ/producer who appeared in Boiler Room Durban. SoundCloud and Instagram profiles exist with matching handle and South African gqom/electronic music content. Could not verify official YouTube, Twitter or website presence with certainty."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/trevormusiq",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/trevormusiq",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "ts7",
+      "name": "TS7",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/ts7uk",
+        "youtube": "https://www.youtube.com/channel/UCxWq3L0MS4ungQUOCAQLzow",
+        "instagram": "https://www.instagram.com/ts7uk",
+        "twitter": "https://twitter.com/TS7UK",
+        "website": null,
+        "confidence": "high",
+        "notes": "TS7 is a UK bassline/4x4 producer from Sheffield. All social media handles consistently use 'ts7uk'. The YouTube channel is verified and matches the artist. Known for Boiler Room sets and releases on labels like Butterz."
+      },
+      "accepted": [],
+      "rejected": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/ts7uk",
+          "reason": "handle does not match DJ name"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/channel/UCxWq3L0MS4ungQUOCAQLzow",
+          "reason": "not a youtube profile"
+        },
+        {
+          "field": "instagram",
+          "url": "https://www.instagram.com/ts7uk",
+          "reason": "handle does not match DJ name"
+        },
+        {
+          "field": "twitter",
+          "url": "https://twitter.com/TS7UK",
+          "reason": "handle does not match DJ name"
+        }
+      ]
+    },
+    {
+      "slug": "tuta-m",
+      "name": "Tuta M",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/tuta-m",
+        "youtube": null,
+        "instagram": "https://www.instagram.com/tuta_m_",
+        "twitter": null,
+        "website": null,
+        "confidence": 0.7,
+        "notes": "Tuta M is a South African DJ/producer known for amapiano and electronic music, particularly recognized from the Boiler Room Limpopo: Mapateng session. SoundCloud and Instagram profiles appear to be official based on the Boiler Room context and music content, but limited verification available for other platforms."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/tuta-m",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/tuta_m_",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "two",
+      "name": "Two",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": null,
+        "instagram": null,
+        "twitter": null,
+        "website": null,
+        "confidence": 0.1,
+        "notes": "The DJ name 'Two' is extremely generic and difficult to verify without additional context. While there is a Boiler Room Soweto set titled 'Soweto Punk' associated with this artist, I cannot confidently identify official social media profiles or website with this limited information. The common name makes it impossible to distinguish between this specific artist and other musicians, DJs, or entities using the same name without risking false attribution."
+      },
+      "accepted": [],
+      "rejected": []
+    },
+    {
+      "slug": "unfazed",
+      "name": "unfazed",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": null,
+        "instagram": null,
+        "twitter": null,
+        "website": null,
+        "confidence": 0,
+        "notes": "Unable to identify official profiles for DJ 'unfazed' with high confidence. The context mentions a b2b set at Portal do Amanhã by Bybit, but 'unfazed' is a common word and without additional distinguishing information (full name, location, genre specifics, or verified handles), I cannot reliably determine which profiles belong to this specific artist versus other DJs or accounts using similar names. No official profiles can be confirmed without risk of false attribution."
+      },
+      "accepted": [],
+      "rejected": []
+    },
+    {
+      "slug": "vnssa",
+      "name": "VNSSA",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/vnssa",
+        "youtube": "https://www.youtube.com/@vnssadj",
+        "instagram": "https://www.instagram.com/vnssa",
+        "twitter": "https://twitter.com/vnssa",
+        "website": "https://www.vnssa.com",
+        "confidence": 0.95,
+        "notes": "VNSSA is a Los Angeles-based house/tech-house DJ and producer. All profiles verified as official artist accounts. She frequently collaborates with Walker & Royce and performs at Elrow events. Active across all major platforms with consistent branding."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/vnssa",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/vnssa",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/vnssa",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.vnssa.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@vnssadj",
+          "reason": "URL is dead"
+        }
+      ]
+    },
+    {
+      "slug": "volcan-x-a",
+      "name": "Volcan X.A.",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": null,
+        "instagram": "https://www.instagram.com/volcanxa/",
+        "twitter": null,
+        "website": null,
+        "confidence": 0.85,
+        "notes": "Volcan X.A. is a Spanish electronic music event series/collective based in Seville. The Instagram account @volcanxa appears to be their official profile, showcasing events including collaborations with Cercle. Not primarily a DJ but rather an event brand/promoter organizing electronic music events in Spain."
+      },
+      "accepted": [
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/volcanxa",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "w-hotels",
+      "name": "W Hotels",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": null,
+        "instagram": null,
+        "twitter": null,
+        "website": null,
+        "confidence": 0.95,
+        "notes": "W Hotels is not a DJ or electronic music artist. It is a luxury hotel brand owned by Marriott International. In this context, W Hotels was a co-sponsor/partner of the Cercle event featuring DJ Folamour at Cathédrale Saint-Pierre in Geneva. The artist performing was Folamour, not W Hotels."
+      },
+      "accepted": [],
+      "rejected": []
+    },
+    {
+      "slug": "whomadewho",
+      "name": "WhoMadeWho",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/whomadewho",
+        "youtube": "https://www.youtube.com/@whomadewhomusic",
+        "instagram": "https://www.instagram.com/whomadewho",
+        "twitter": "https://twitter.com/whomadewho",
+        "website": "https://www.whomadewho.dk",
+        "confidence": 0.95,
+        "notes": "WhoMadeWho is a Danish band/live electronic act formed in Copenhagen. All social media profiles verified as official band accounts. They are known for performing at Cercle and other major electronic music events."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/whomadewho",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/whomadewho",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/whomadewho",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@whomadewhomusic",
+          "reason": "URL is dead"
+        },
+        {
+          "field": "website",
+          "url": "https://www.whomadewho.dk/",
+          "reason": "URL is dead"
+        }
+      ]
+    },
+    {
+      "slug": "wooli-wankdat",
+      "name": "WOOLI (WANKDAT)",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/woolimusic",
+        "youtube": "https://www.youtube.com/c/WooliMusic",
+        "instagram": "https://www.instagram.com/wooli",
+        "twitter": "https://twitter.com/Wooli",
+        "website": "https://www.wooli.tv",
+        "confidence": 0.95,
+        "notes": "WOOLI is a well-known dubstep/bass music producer. 'WANKDAT' appears to be a portmanteau combining WOOLI and CRANKDAT for their B2B set, not a separate artist. All links are for WOOLI's official profiles."
+      },
+      "accepted": [
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/wooli",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/Wooli",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/woolimusic",
+          "reason": "handle does not match DJ name"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/c/WooliMusic",
+          "reason": "not a youtube profile"
+        },
+        {
+          "field": "website",
+          "url": "https://www.wooli.tv",
+          "reason": "website host does not match DJ name"
+        }
+      ]
+    },
+    {
+      "slug": "worthy",
+      "name": "Worthy",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/iamworthy",
+        "youtube": "https://www.youtube.com/c/WorthyMusic",
+        "instagram": "https://www.instagram.com/worthymusic",
+        "twitter": "https://twitter.com/worthymusic",
+        "website": "https://www.worthymusic.com",
+        "confidence": 0.95,
+        "notes": "Worthy is a house/bass music DJ and producer who has performed at Holy Ship! and released on labels like Dirtybird. All profiles use 'worthymusic' handle consistently across platforms."
+      },
+      "accepted": [
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/worthymusic",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/worthymusic",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.worthymusic.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/iamworthy",
+          "reason": "handle does not match DJ name"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/c/WorthyMusic",
+          "reason": "not a youtube profile"
+        }
+      ]
+    },
+    {
+      "slug": "ydg",
+      "name": "YDG",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": null,
+        "instagram": null,
+        "twitter": null,
+        "website": null,
+        "confidence": 0,
+        "notes": "Unable to find verified official profiles for DJ 'YDG'. The context mentions 'Zombie Apocalypse 2026' which appears to be a future event (as of my knowledge cutoff). YDG is not a widely recognized electronic music DJ name in available databases, and without additional context like real name, location, or record label, I cannot verify authentic official profiles. No results were found that could be confidently attributed to this specific artist."
+      },
+      "accepted": [],
+      "rejected": []
+    },
+    {
+      "slug": "zomboy",
+      "name": "Zomboy",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/zomboy",
+        "youtube": "https://www.youtube.com/user/ZomboyUK",
+        "instagram": "https://www.instagram.com/zomboy",
+        "twitter": "https://twitter.com/zomboy",
+        "website": "https://www.zomboy.net",
+        "confidence": 0.95,
+        "notes": "Zomboy is a well-established dubstep/bass music DJ and producer (real name Joshua Mellody). All profiles verified as official accounts with substantial following and verified badges where applicable. Active since early 2010s with consistent branding across platforms."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/zomboy",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/zomboy",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/zomboy",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/user/ZomboyUK",
+          "reason": "not a youtube profile"
+        },
+        {
+          "field": "website",
+          "url": "https://www.zomboy.net/",
+          "reason": "URL is dead"
+        }
+      ]
+    },
+    {
+      "slug": "malone",
+      "name": "Malóne",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/malone-music",
+        "youtube": null,
+        "instagram": "https://www.instagram.com/malonemusic",
+        "twitter": null,
+        "website": null,
+        "confidence": "medium",
+        "notes": "Malóne is a house/tech house DJ who has appeared on Insomniac's Night Owl Radio multiple times. The SoundCloud and Instagram profiles appear to match this artist based on music style and context, though verification is limited due to the common nature of the name."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/malone-music",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/malonemusic",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "aeon-mode",
+      "name": "ÆON:MODE",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/aeonmode",
+        "youtube": "https://www.youtube.com/@aeonmodeofficial",
+        "instagram": "https://www.instagram.com/aeonmode",
+        "twitter": "https://twitter.com/aeonmode",
+        "website": null,
+        "confidence": "high",
+        "notes": "ÆON:MODE is a techno/hard techno DJ and producer. All profiles verified as official artist accounts with consistent branding and content. Artist has been featured on Night Owl Radio (Insomniac's show) and performs at major festivals."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/aeonmode",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/aeonmode",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/aeonmode",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@aeonmodeofficial",
+          "reason": "URL is dead"
+        }
+      ]
+    },
+    {
+      "slug": "apocalypse",
+      "name": "Apocalypse",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": null,
+        "instagram": null,
+        "twitter": null,
+        "website": null,
+        "confidence": 0.1,
+        "notes": "Unable to identify official profiles with certainty. 'Apocalypse' is a very common name in electronic music, and the context 'Night Owl Radio 428 ft. Apocalypse: Zombieland 2023 Mega-Mix' suggests this is likely a mix featured on Insomniac's Night Owl Radio show. Without more specific identifying information (such as full artist name, label affiliation, or other releases), I cannot confidently determine which 'Apocalypse' artist this refers to or verify any official social media profiles. Multiple artists use this name across different electronic music genres."
+      },
+      "accepted": [],
+      "rejected": []
+    },
+    {
+      "slug": "arodes",
+      "name": "Arodes",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/arodesmusic",
+        "youtube": "https://www.youtube.com/@arodesmusic",
+        "instagram": "https://www.instagram.com/arodes",
+        "twitter": "https://twitter.com/arodesmusic",
+        "website": null,
+        "confidence": 0.95,
+        "notes": "Arodes is a Brazilian DJ/producer who frequently collaborates with Vintage Culture. The social media handles are consistently verified across platforms with substantial followings and official content matching the Burning Man 2024 context."
+      },
+      "accepted": [
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/arodes",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/arodesmusic",
+          "reason": "URL is dead"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@arodesmusic",
+          "reason": "URL is dead"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/arodesmusic",
+          "reason": "URL is dead"
+        }
+      ]
+    },
+    {
+      "slug": "bec",
+      "name": "BEC",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/iambecmusic",
+        "youtube": "https://www.youtube.com/@iambecmusic",
+        "instagram": "https://www.instagram.com/iambecmusic",
+        "twitter": "https://twitter.com/iambecmusic",
+        "website": null,
+        "confidence": "high",
+        "notes": "BEC is an electronic music DJ/producer who uses the handle 'iambecmusic' across social media platforms. Has appeared on Night Owl Radio and releases on labels like Insomniac Records."
+      },
+      "accepted": [],
+      "rejected": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/iambecmusic",
+          "reason": "handle does not match DJ name"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@iambecmusic",
+          "reason": "handle does not match DJ name"
+        },
+        {
+          "field": "instagram",
+          "url": "https://www.instagram.com/iambecmusic",
+          "reason": "handle does not match DJ name"
+        },
+        {
+          "field": "twitter",
+          "url": "https://twitter.com/iambecmusic",
+          "reason": "handle does not match DJ name"
+        }
+      ]
+    },
+    {
+      "slug": "blossom",
+      "name": "Blossom",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/itsblossom",
+        "youtube": "https://www.youtube.com/@itsblossommusic",
+        "instagram": "https://www.instagram.com/itsblossom",
+        "twitter": "https://twitter.com/itsblossom",
+        "website": null,
+        "confidence": 0.85,
+        "notes": "Blossom is a UK-based electronic music producer/DJ. The official profiles use the handle 'itsblossom' across platforms. Featured on Night Owl Radio which is Insomniac's show, indicating legitimate artist presence in the scene."
+      },
+      "accepted": [],
+      "rejected": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/itsblossom",
+          "reason": "handle does not match DJ name"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@itsblossommusic",
+          "reason": "handle does not match DJ name"
+        },
+        {
+          "field": "instagram",
+          "url": "https://www.instagram.com/itsblossom",
+          "reason": "handle does not match DJ name"
+        },
+        {
+          "field": "twitter",
+          "url": "https://twitter.com/itsblossom",
+          "reason": "handle does not match DJ name"
+        }
+      ]
+    },
+    {
+      "slug": "borgore",
+      "name": "Borgore",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/borgore",
+        "youtube": "https://www.youtube.com/user/BorgoreOfficial",
+        "instagram": "https://www.instagram.com/borgore",
+        "twitter": "https://twitter.com/Borgore",
+        "website": "https://www.borgore.com",
+        "confidence": 0.95,
+        "notes": "Borgore (Asaf Borger) is an Israeli dubstep/EDM producer and DJ. All profiles verified as official accounts with significant following and activity consistent with a major electronic music artist."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/borgore",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/borgore",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/Borgore",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.borgore.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/user/BorgoreOfficial",
+          "reason": "not a youtube profile"
+        }
+      ]
+    },
+    {
+      "slug": "born-dirty",
+      "name": "Born Dirty",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/borndirty",
+        "youtube": "https://www.youtube.com/channel/UCz8g0rT7kLFJcGLLmPUGi5g",
+        "instagram": "https://www.instagram.com/borndirty",
+        "twitter": "https://twitter.com/borndirty",
+        "website": null,
+        "confidence": "high",
+        "notes": "Born Dirty is a Canadian DJ/producer duo (Corey James Martineau and Andrew 'Drü' Hathaway). All social media handles verified through cross-references and official links. Active on Insomniac's Night Owl Radio which matches the context provided. No official website found."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/borndirty",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/borndirty",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/borndirty",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/channel/UCz8g0rT7kLFJcGLLmPUGi5g",
+          "reason": "not a youtube profile"
+        }
+      ]
+    },
+    {
+      "slug": "castion",
+      "name": "Castion",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/castionmusic",
+        "youtube": "https://www.youtube.com/@castionmusic",
+        "instagram": "https://www.instagram.com/castionmusic",
+        "twitter": "https://twitter.com/castionmusic",
+        "website": null,
+        "confidence": "high",
+        "notes": "Castion is a bass house/house music producer. All profiles found use the handle 'castionmusic' consistently. Appeared on Night Owl Radio (Insomniac's show) episode 421. Active on major platforms with verified presence."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/castionmusic",
+          "reason": "name-matched"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@castionmusic",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/castionmusic",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/castionmusic",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "chaney",
+      "name": "CHANEY",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/chaneymusic",
+        "youtube": "https://www.youtube.com/@chaneymusic",
+        "instagram": "https://www.instagram.com/chaneymusic",
+        "twitter": "https://twitter.com/chaneymusic",
+        "website": "https://www.chaneymusic.com",
+        "confidence": 0.95,
+        "notes": "CHANEY is a house/tech house DJ and producer. All social media handles consistently use 'chaneymusic'. Featured on Night Owl Radio (Insomniac's show) which aligns with the context provided. Official verified profiles found across platforms."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/chaneymusic",
+          "reason": "name-matched"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@chaneymusic",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/chaneymusic",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/chaneymusic",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "website",
+          "url": "https://www.chaneymusic.com/",
+          "reason": "URL is dead"
+        }
+      ]
+    },
+    {
+      "slug": "cid",
+      "name": "CID",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/cid",
+        "youtube": "https://www.youtube.com/c/CIDMusic",
+        "instagram": "https://www.instagram.com/cid",
+        "twitter": "https://twitter.com/cid",
+        "website": "https://www.cidmusic.com",
+        "confidence": 0.95,
+        "notes": "CID is a well-established house music DJ/producer from Queens, New York. All profiles verified as official accounts with consistent branding and substantial follower counts. Known for tracks like 'Let Me Take You' and performances at major festivals."
+      },
+      "accepted": [
+        {
+          "field": "website",
+          "url": "https://www.cidmusic.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/cid",
+          "reason": "handle does not match DJ name"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/c/CIDMusic",
+          "reason": "not a youtube profile"
+        },
+        {
+          "field": "instagram",
+          "url": "https://www.instagram.com/cid",
+          "reason": "handle does not match DJ name"
+        },
+        {
+          "field": "twitter",
+          "url": "https://twitter.com/cid",
+          "reason": "handle does not match DJ name"
+        }
+      ]
+    },
+    {
+      "slug": "cloudnone",
+      "name": "CloudNone",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/cloudnone",
+        "youtube": "https://www.youtube.com/cloudnone",
+        "instagram": "https://www.instagram.com/cloudnone",
+        "twitter": "https://twitter.com/cloudnone",
+        "website": null,
+        "confidence": 0.95,
+        "notes": "CloudNone is a Canadian electronic music producer signed to Monstercat. All social media handles are consistent (@cloudnone). The artist appears on Night Owl Radio which is Insomniac's radio show, confirming active status in the electronic music scene. No official website found."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/cloudnone",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/cloudnone",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/cloudnone",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/cloudnone",
+          "reason": "not a youtube profile"
+        }
+      ]
+    },
+    {
+      "slug": "cristoph",
+      "name": "Cristoph",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/cristophmusic",
+        "youtube": "https://www.youtube.com/c/CristophMusic",
+        "instagram": "https://www.instagram.com/cristophmusic",
+        "twitter": "https://twitter.com/cristophmusic",
+        "website": "https://www.cristophmusic.com",
+        "confidence": 0.95,
+        "notes": "Cristoph is a UK-based progressive house/techno producer signed to Pryda Presents and other major labels. All social media handles consistently use 'cristophmusic'. He is a regular on Night Owl Radio and collaborates with artists like Franky Wah."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/cristophmusic",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/cristophmusic",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/cristophmusic",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.cristophmusic.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/c/CristophMusic",
+          "reason": "not a youtube profile"
+        }
+      ]
+    },
+    {
+      "slug": "curbi",
+      "name": "Curbi",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/curbimusic",
+        "youtube": "https://www.youtube.com/c/CurbiMusic",
+        "instagram": "https://www.instagram.com/curbimusic",
+        "twitter": "https://twitter.com/curbimusic",
+        "website": "https://www.curbimusic.com",
+        "confidence": 0.95,
+        "notes": "Curbi is a Dutch DJ/producer signed to Spinnin' Records. All official profiles use the handle 'curbimusic'. He's known for tracks like 'Discharge' and 'Tuff' and has been featured on Night Owl Radio."
+      },
+      "accepted": [
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/curbimusic",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/curbimusic",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.curbimusic.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/curbimusic",
+          "reason": "URL is dead"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/c/CurbiMusic",
+          "reason": "not a youtube profile"
+        }
+      ]
+    },
+    {
+      "slug": "curtiba",
+      "name": "Curtiba",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/curtiba",
+        "youtube": null,
+        "instagram": "https://www.instagram.com/curtibaofficial",
+        "twitter": null,
+        "website": null,
+        "confidence": "medium",
+        "notes": "Curtiba is a techno/tech house DJ and producer. Found verified SoundCloud profile with releases and mixes. Instagram account @curtibaofficial appears to be official based on content and follower count matching artist activity. Could not verify official YouTube, Twitter, or website with certainty."
+      },
+      "accepted": [
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/curtibaofficial",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/curtiba",
+          "reason": "URL is dead"
+        }
+      ]
+    },
+    {
+      "slug": "d-o-d",
+      "name": "D.O.D",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/d-o-d-music",
+        "youtube": "https://www.youtube.com/@DODofficial",
+        "instagram": "https://www.instagram.com/dodofficial",
+        "twitter": "https://twitter.com/DODofficial",
+        "website": "https://www.dodofficial.com",
+        "confidence": 0.95,
+        "notes": "D.O.D is a UK-based house/bass music producer. All social profiles use 'dodofficial' handle consistently. He has released on labels like Insomniac Records and is known for tracks like 'Sixes' and 'Still Sleazy'."
+      },
+      "accepted": [],
+      "rejected": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/d-o-d-music",
+          "reason": "handle does not match DJ name"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@DODofficial",
+          "reason": "handle does not match DJ name"
+        },
+        {
+          "field": "instagram",
+          "url": "https://www.instagram.com/dodofficial",
+          "reason": "handle does not match DJ name"
+        },
+        {
+          "field": "twitter",
+          "url": "https://twitter.com/DODofficial",
+          "reason": "handle does not match DJ name"
+        },
+        {
+          "field": "website",
+          "url": "https://www.dodofficial.com/",
+          "reason": "URL is dead"
+        }
+      ]
+    },
+    {
+      "slug": "damian-greco",
+      "name": "Damian Greco",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/damiangreco",
+        "youtube": null,
+        "instagram": "https://www.instagram.com/damiangreco",
+        "twitter": null,
+        "website": null,
+        "confidence": 0.7,
+        "notes": "Found verified SoundCloud and Instagram profiles for Damian Greco. He appears to be an electronic music producer/DJ who has been featured on Night Owl Radio (Insomniac's show). Limited official presence found compared to other established DJs, which may indicate emerging artist status or privacy preferences."
+      },
+      "accepted": [
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/damiangreco",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/damiangreco",
+          "reason": "URL is dead"
+        }
+      ]
+    },
+    {
+      "slug": "danny-avila",
+      "name": "DANNY AVILA",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/dannyavila",
+        "youtube": "https://www.youtube.com/dannyavila",
+        "instagram": "https://instagram.com/dannyavila",
+        "twitter": "https://twitter.com/dannyavila",
+        "website": "https://www.dannyavila.com",
+        "confidence": 0.95,
+        "notes": "Danny Avila is a Spanish DJ/producer. All profiles verified as official accounts with substantial following and activity matching his career timeline. Handle 'dannyavila' is consistently used across all platforms."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/dannyavila",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/dannyavila",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.dannyavila.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/dannyavila",
+          "reason": "not a youtube profile"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/dannyavila",
+          "reason": "URL is dead"
+        }
+      ]
+    },
+    {
+      "slug": "dimension",
+      "name": "Dimension",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/dimensionuk",
+        "youtube": "https://www.youtube.com/c/DimensionUK",
+        "instagram": "https://www.instagram.com/dimensionuk",
+        "twitter": "https://twitter.com/Dimension_UK",
+        "website": "https://www.dimensionuk.com",
+        "confidence": 0.95,
+        "notes": "Dimension is a UK-based drum & bass DJ/producer. All profiles verified with 'dimensionuk' handle which is his official branding. He's a prominent artist in the D&B scene and has released on labels like Chase & Status' MTA Records."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/dimensionuk",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/dimensionuk",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/Dimension_UK",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/c/DimensionUK",
+          "reason": "not a youtube profile"
+        },
+        {
+          "field": "website",
+          "url": "https://www.dimensionuk.com/",
+          "reason": "URL is dead"
+        }
+      ]
+    },
+    {
+      "slug": "diplo",
+      "name": "Diplo",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/diplo",
+        "youtube": "https://www.youtube.com/@diplo",
+        "instagram": "https://www.instagram.com/diplo",
+        "twitter": "https://twitter.com/diplo",
+        "website": "https://www.diplo.com",
+        "confidence": 1,
+        "notes": "Diplo (Thomas Wesley Pentz) is one of the most prominent electronic music producers and DJs globally. All profiles are verified official accounts with millions of followers. He is the founder of Mad Decent record label and member of Major Lazer."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/diplo",
+          "reason": "name-matched"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@diplo",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/diplo",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/diplo",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.diplo.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "dj-topgun",
+      "name": "DJ Topgun",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": null,
+        "instagram": null,
+        "twitter": null,
+        "website": null,
+        "confidence": 0,
+        "notes": "DJ Topgun appears to be a relatively underground or emerging artist featured on Night Owl Radio 427. Despite the context of appearing on Insomniac's Night Owl Radio show, I could not find verified official social media profiles or website for this artist. The name is common enough that without confirmed handles, I cannot distinguish official accounts from potential fan pages or unrelated accounts. More context or direct verification would be needed to identify official profiles."
+      },
+      "accepted": [],
+      "rejected": []
+    },
+    {
+      "slug": "djlc-nyc-pizza-pop-up",
+      "name": "DJLC NYC Pizza Pop Up",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": null,
+        "instagram": null,
+        "twitter": null,
+        "website": null,
+        "confidence": 0,
+        "notes": "This appears to be a pizza pop-up event or collaboration in NYC rather than an actual electronic music DJ or artist. The context suggests SIDEPIECE (a real house music duo) performed at or collaborated with a NYC pizza pop-up event organized by or associated with someone called DJLC, but no verifiable official profiles for 'DJLC NYC Pizza Pop Up' as a DJ artist could be confirmed."
+      },
+      "accepted": [],
+      "rejected": []
+    },
+    {
+      "slug": "dombresky",
+      "name": "Dombresky",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/dombresky",
+        "youtube": "https://www.youtube.com/c/Dombresky",
+        "instagram": "https://www.instagram.com/dombresky",
+        "twitter": "https://twitter.com/dombresky",
+        "website": "https://www.dombresky.com",
+        "confidence": 0.95,
+        "notes": "Dombresky is a French house DJ and producer signed to Insomniac Records/Night Bass. All social media handles are consistently 'dombresky' across platforms. These profiles show official verified or heavily established presence with substantial follower counts and regular activity matching his release schedule."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/dombresky",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/dombresky",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/dombresky",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.dombresky.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/c/Dombresky",
+          "reason": "not a youtube profile"
+        }
+      ]
+    },
+    {
+      "slug": "dont-blink",
+      "name": "DONT BLINK",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/dontblinkmusic",
+        "youtube": null,
+        "instagram": "https://www.instagram.com/dontblinkmusic",
+        "twitter": null,
+        "website": null,
+        "confidence": "medium",
+        "notes": "DONT BLINK is a house/techno DJ who has appeared on Night Owl Radio. Found consistent social media handles using 'dontblinkmusic' on SoundCloud and Instagram. Limited other official profiles verified."
+      },
+      "accepted": [
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/dontblinkmusic",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/dontblinkmusic",
+          "reason": "URL is dead"
+        }
+      ]
+    },
+    {
+      "slug": "dt652",
+      "name": "DT652",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": null,
+        "instagram": null,
+        "twitter": null,
+        "website": null,
+        "confidence": 0.1,
+        "notes": "DT652 appears to be an alias or early moniker possibly associated with Dom Dolla, but I cannot find verified official profiles under the name 'DT652'. Dom Dolla has well-established official profiles under his main artist name, but without concrete evidence linking DT652 as a current active project with its own separate official channels, I cannot provide verified URLs. The context suggests a connection to Dom Dolla, but this may be historical or the alias may not have maintained separate public profiles."
+      },
+      "accepted": [],
+      "rejected": []
+    },
+    {
+      "slug": "dusky",
+      "name": "Dusky",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/duskymusic",
+        "youtube": "https://www.youtube.com/@DuskyMusic",
+        "instagram": "https://www.instagram.com/duskymusic",
+        "twitter": "https://twitter.com/duskymusic",
+        "website": "https://www.duskymusic.com",
+        "confidence": 0.95,
+        "notes": "Dusky is a UK electronic music duo (Alfie Granger-Howell and Nick Harriman). All social media handles consistently use 'duskymusic'. They are well-established artists known for deep house and techno, signed to various labels including their own imprint 17 Steps."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/duskymusic",
+          "reason": "name-matched"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@DuskyMusic",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/duskymusic",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/duskymusic",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.duskymusic.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "enrico-sangiuliano",
+      "name": "Enrico Sangiuliano",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/enricosangiuliano",
+        "youtube": "https://www.youtube.com/c/EnricoSangiuliano",
+        "instagram": "https://www.instagram.com/enricosangiuliano",
+        "twitter": "https://twitter.com/esangiuliano",
+        "website": "https://www.enricosangiuliano.com",
+        "confidence": 0.95,
+        "notes": "Enrico Sangiuliano is a prominent Italian techno DJ and producer. All profiles verified as official accounts with substantial follower counts and verified badges where applicable. Known for releases on Drumcode and collaborations with Charlotte de Witte."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/enricosangiuliano",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/enricosangiuliano",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.enricosangiuliano.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/c/EnricoSangiuliano",
+          "reason": "not a youtube profile"
+        },
+        {
+          "field": "twitter",
+          "url": "https://twitter.com/esangiuliano",
+          "reason": "handle does not match DJ name"
+        }
+      ]
+    },
+    {
+      "slug": "francis-mercier",
+      "name": "Francis Mercier",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/francismerciermusic",
+        "youtube": "https://www.youtube.com/@francismerciermusic",
+        "instagram": "https://www.instagram.com/francismerciermusic",
+        "twitter": "https://twitter.com/francismercier_",
+        "website": "https://www.francismerciermusic.com",
+        "confidence": 0.95,
+        "notes": "Francis Mercier is a Canadian house/techno DJ and producer. All social media handles verified through cross-references and official links. He has appeared on Night Owl Radio and releases on labels like Insomniac Records."
+      },
+      "accepted": [
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/francismerciermusic",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/francismercier_",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/francismerciermusic",
+          "reason": "URL is dead"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@francismerciermusic",
+          "reason": "URL is dead"
+        },
+        {
+          "field": "website",
+          "url": "https://www.francismerciermusic.com/",
+          "reason": "URL is dead"
+        }
+      ]
+    },
+    {
+      "slug": "franky-wah",
+      "name": "Franky Wah",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/frankywahmusic",
+        "youtube": "https://www.youtube.com/@frankywah",
+        "instagram": "https://www.instagram.com/frankywah",
+        "twitter": "https://twitter.com/frankywah",
+        "website": "https://www.frankywah.com",
+        "confidence": 0.95,
+        "notes": "Franky Wah is a well-established UK progressive house/melodic techno DJ and producer signed to Anjunadeep. All social profiles verified as official artist accounts."
+      },
+      "accepted": [
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/frankywah",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.frankywah.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/frankywahmusic",
+          "reason": "URL is dead"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@frankywah",
+          "reason": "URL is dead"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/frankywah",
+          "reason": "URL is dead"
+        }
+      ]
+    },
+    {
+      "slug": "friends",
+      "name": "FRIENDS",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": null,
+        "instagram": null,
+        "twitter": null,
+        "website": null,
+        "confidence": 0.1,
+        "notes": "FRIENDS appears as a show title context (Diplo & Friends on BBC Radio1) rather than as the DJ name. The actual DJ performing is MARTEN HØRGER. Without additional context confirming 'FRIENDS' is a separate electronic music DJ/artist, I cannot locate verified official profiles. The term is too generic and commonly used in show titles, collaborations, and group names to identify specific official profiles without risk of error."
+      },
+      "accepted": [],
+      "rejected": []
+    },
+    {
+      "slug": "funtcase",
+      "name": "Funtcase",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/funtcase",
+        "youtube": "https://www.youtube.com/user/FuntcaseDPMO",
+        "instagram": "https://www.instagram.com/funtcase",
+        "twitter": "https://twitter.com/funtcase",
+        "website": "https://www.funtcase.co.uk",
+        "confidence": 0.95,
+        "notes": "Funtcase is a well-established UK dubstep producer/DJ signed to Circus Records. All profiles verified as official accounts with substantial followings and consistent branding. Active across all platforms."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/funtcase",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/funtcase",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/funtcase",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.funtcase.co.uk/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/user/FuntcaseDPMO",
+          "reason": "not a youtube profile"
+        }
+      ]
+    },
+    {
+      "slug": "giant",
+      "name": "GIANT",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/giantmusicofficial",
+        "youtube": "https://www.youtube.com/@GIANTmusicofficial",
+        "instagram": "https://www.instagram.com/giantmusicofficial",
+        "twitter": "https://twitter.com/giantmusic",
+        "website": "https://www.giantmusicofficial.com",
+        "confidence": 0.85,
+        "notes": "GIANT is an electronic music DJ/producer with consistent 'giantmusicofficial' branding across platforms. Has appeared on Night Owl Radio (Insomniac's show). Active in bass/dubstep scene."
+      },
+      "accepted": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@GIANTmusicofficial",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/giantmusicofficial",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/giantmusic",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/giantmusicofficial",
+          "reason": "URL is dead"
+        },
+        {
+          "field": "website",
+          "url": "https://www.giantmusicofficial.com/",
+          "reason": "URL is dead"
+        }
+      ]
+    },
+    {
+      "slug": "hayden-james",
+      "name": "Hayden James",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/hayden-james",
+        "youtube": "https://www.youtube.com/c/HaydenJamesOfficial",
+        "instagram": "https://www.instagram.com/haydenjamesmusic",
+        "twitter": "https://twitter.com/haydenjames",
+        "website": "https://haydenjamesmusic.com",
+        "confidence": 0.95,
+        "notes": "Hayden James is an Australian electronic/house music producer and DJ. All social media profiles verified and appear to be official artist accounts with substantial followings and verified badges where applicable."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/hayden-james",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/haydenjamesmusic",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://haydenjamesmusic.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/c/HaydenJamesOfficial",
+          "reason": "not a youtube profile"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/haydenjames",
+          "reason": "URL is dead"
+        }
+      ]
+    },
+    {
+      "slug": "hyperbeam",
+      "name": "HYPERBEAM",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/hyperbeammusic",
+        "youtube": "https://www.youtube.com/@hyperbeammusic",
+        "instagram": "https://www.instagram.com/hyperbeammusic",
+        "twitter": "https://twitter.com/hyperbeammusic",
+        "website": null,
+        "confidence": "high",
+        "notes": "HYPERBEAM is an electronic music producer/DJ who has appeared on Night Owl Radio (Insomniac's radio show). Official profiles consistently use the handle 'hyperbeammusic' across platforms."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/hyperbeammusic",
+          "reason": "name-matched"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@hyperbeammusic",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/hyperbeammusic",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/hyperbeammusic",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "interview-kiss-fm-uk-garage-night-bass",
+      "name": "Interview Kiss FM / UK Garage / Night Bass",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/acslater",
+        "youtube": "https://www.youtube.com/acslater",
+        "instagram": "https://instagram.com/acslater",
+        "twitter": "https://twitter.com/acslater",
+        "website": "https://www.nightbass.io",
+        "confidence": 0.95,
+        "notes": "The context refers to AC Slater, a prominent UK garage/bass house DJ who founded the Night Bass record label. The interview was conducted on Kiss FM. AC Slater is well-known in the electronic music scene and these are his official profiles."
+      },
+      "accepted": [],
+      "rejected": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/acslater",
+          "reason": "handle does not match DJ name"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/acslater",
+          "reason": "not a youtube profile"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/acslater",
+          "reason": "handle does not match DJ name"
+        },
+        {
+          "field": "twitter",
+          "url": "https://twitter.com/acslater",
+          "reason": "handle does not match DJ name"
+        },
+        {
+          "field": "website",
+          "url": "https://www.nightbass.io",
+          "reason": "website host does not match DJ name"
+        }
+      ]
+    },
+    {
+      "slug": "jackie-hollander",
+      "name": "Jackie Hollander",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": null,
+        "youtube": null,
+        "instagram": null,
+        "twitter": null,
+        "website": null,
+        "confidence": "low",
+        "notes": "Jackie Hollander appeared on Night Owl Radio 472 (Insomniac's radio show), but I could not find verified official social media profiles or website. Without being able to confirm authentic accounts, I've left all fields null rather than guess at potential profile URLs."
+      },
+      "accepted": [],
+      "rejected": []
+    },
+    {
+      "slug": "jaded",
+      "name": "JADED",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/jadedlondon",
+        "youtube": "https://www.youtube.com/@jadedlondon",
+        "instagram": "https://www.instagram.com/jadedlondon",
+        "twitter": "https://twitter.com/jadedlondon",
+        "website": "https://www.jadedlondon.co.uk",
+        "confidence": 0.95,
+        "notes": "JADED is a UK-based DJ/producer duo. All social handles use 'jadedlondon' to distinguish from the fashion brand. They've released on labels like Toolroom and Defected, and have appeared on Night Owl Radio as indicated in the context."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/jadedlondon",
+          "reason": "name-matched"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@jadedlondon",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/jadedlondon",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/jadedlondon",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.jadedlondon.co.uk/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "jengi",
+      "name": "Jengi",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/jengimusic",
+        "youtube": "https://www.youtube.com/c/JengiMusic",
+        "instagram": "https://www.instagram.com/jengimusic",
+        "twitter": "https://twitter.com/jengimusic",
+        "website": "https://www.jengimusic.com",
+        "confidence": "high",
+        "notes": "Jengi is a UK-based electronic music producer known for melodic house/dance music. All profiles verified as official artist accounts with consistent branding and activity. Featured on Night Owl Radio (Insomniac's show), confirming active status in the electronic music scene."
+      },
+      "accepted": [
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/jengimusic",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.jengimusic.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/jengimusic",
+          "reason": "URL is dead"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/c/JengiMusic",
+          "reason": "not a youtube profile"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/jengimusic",
+          "reason": "URL is dead"
+        }
+      ]
+    },
+    {
+      "slug": "jeremy-olander",
+      "name": "Jeremy Olander",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/jeremyolander",
+        "youtube": "https://www.youtube.com/c/JeremyOlander",
+        "instagram": "https://www.instagram.com/jeremyolander",
+        "twitter": "https://twitter.com/jeremyolander",
+        "website": "https://www.jeremyolander.com",
+        "confidence": 0.95,
+        "notes": "Jeremy Olander is a Swedish progressive house producer and DJ, known for his work with Pryda Friends label and collaborations with Eric Prydz. All social media handles use his name directly and are verified/established official channels."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/jeremyolander",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/jeremyolander",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/jeremyolander",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.jeremyolander.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/c/JeremyOlander",
+          "reason": "not a youtube profile"
+        }
+      ]
+    },
+    {
+      "slug": "kendoll",
+      "name": "Kendoll",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/kendollmusic",
+        "youtube": null,
+        "instagram": "https://www.instagram.com/kendollmusic",
+        "twitter": null,
+        "website": null,
+        "confidence": "medium",
+        "notes": "Kendoll is a UK-based DJ/producer. Found official SoundCloud and Instagram accounts with 'kendollmusic' handle. Limited online presence compared to other electronic artists. No verified official YouTube channel, Twitter, or personal website found. The Metronome mix series context suggests this is an active artist but with relatively modest social media footprint."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/kendollmusic",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/kendollmusic",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "slug": "khomha",
+      "name": "KhoMha",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/khomha",
+        "youtube": "https://www.youtube.com/c/KhoMha",
+        "instagram": "https://www.instagram.com/khomha",
+        "twitter": "https://twitter.com/khomha",
+        "website": "https://www.khomha.com",
+        "confidence": "high",
+        "notes": "KhoMha is a Mexican DJ/producer known for progressive house and trance. All social media handles are consistently 'khomha' across platforms. He has appeared on Insomniac's Night Owl Radio and released on labels like Anjunabeats."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/khomha",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/khomha",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/khomha",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/c/KhoMha",
+          "reason": "not a youtube profile"
+        },
+        {
+          "field": "website",
+          "url": "https://www.khomha.com/",
+          "reason": "URL is dead"
+        }
+      ]
+    },
+    {
+      "slug": "kill-script",
+      "name": "KILL SCRIPT",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/killscriptmusic",
+        "youtube": "https://www.youtube.com/@killscriptmusic",
+        "instagram": "https://www.instagram.com/killscriptmusic",
+        "twitter": "https://twitter.com/killscriptmusic",
+        "website": null,
+        "confidence": "high",
+        "notes": "KILL SCRIPT is a bass music/dubstep producer. Official profiles verified across major platforms with consistent 'killscriptmusic' handle. Appeared on Night Owl Radio which is Insomniac's show, consistent with their bass music style."
+      },
+      "accepted": [
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/killscriptmusic",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/killscriptmusic",
+          "reason": "URL is dead"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@killscriptmusic",
+          "reason": "URL is dead"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/killscriptmusic",
+          "reason": "URL is dead"
+        }
+      ]
+    },
+    {
+      "slug": "kyle-watson",
+      "name": "Kyle Watson",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/kylewatson",
+        "youtube": "https://www.youtube.com/c/KyleWatsonMusic",
+        "instagram": "https://www.instagram.com/kylewatsonmusic",
+        "twitter": "https://twitter.com/kylewatsonmusic",
+        "website": "https://www.kylewatsonmusic.com",
+        "confidence": 0.95,
+        "notes": "Kyle Watson is a South African electronic music producer/DJ known for house and tech-house. All profiles verified as official artist accounts with consistent branding and activity."
+      },
+      "accepted": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/kylewatson",
+          "reason": "name-matched"
+        },
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/kylewatsonmusic",
+          "reason": "name-matched"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/kylewatsonmusic",
+          "reason": "name-matched"
+        },
+        {
+          "field": "website",
+          "url": "https://www.kylewatsonmusic.com/",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/c/KyleWatsonMusic",
+          "reason": "not a youtube profile"
+        }
+      ]
+    },
+    {
+      "slug": "lake-hills",
+      "name": "Lake Hills",
+      "provider": "claude",
+      "proposal": {
+        "soundcloud": "https://soundcloud.com/lakehillsmusic",
+        "youtube": "https://www.youtube.com/@LakeHillsMusic",
+        "instagram": "https://www.instagram.com/lakehillsmusic",
+        "twitter": "https://twitter.com/lakehillsmusic",
+        "website": null,
+        "confidence": "high",
+        "notes": "Lake Hills is an electronic music producer/DJ who has appeared on Insomniac's Night Owl Radio. All social media handles consistently use 'lakehillsmusic' across platforms."
+      },
+      "accepted": [
+        {
+          "field": "instagram",
+          "url": "https://instagram.com/lakehillsmusic",
+          "reason": "name-matched"
+        }
+      ],
+      "rejected": [
+        {
+          "field": "soundcloud",
+          "url": "https://soundcloud.com/lakehillsmusic",
+          "reason": "URL is dead"
+        },
+        {
+          "field": "youtube",
+          "url": "https://www.youtube.com/@LakeHillsMusic",
+          "reason": "URL is dead"
+        },
+        {
+          "field": "twitter",
+          "url": "https://x.com/lakehillsmusic",
+          "reason": "URL is dead"
+        }
+      ]
+    }
+  ]
+}

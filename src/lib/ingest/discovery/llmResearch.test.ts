@@ -2,9 +2,12 @@ import assert from "node:assert/strict";
 import {
   claudeApiKey,
   detectLlmProvider,
+  evaluateProposedEventUrl,
   evaluateProposedUrl,
   geminiApiKey,
+  isResearchWorthyName,
   parseLlmJson,
+  researchPriority,
 } from "./llmResearch";
 
 assert.equal(parseLlmJson("not json"), null);
@@ -18,6 +21,7 @@ assert.equal(parsed?.confidence, "high");
 assert.equal(claudeApiKey({}), null);
 assert.equal(claudeApiKey({ CLAUDE_AGENT_API: "sk-ant-repo" }), "sk-ant-repo");
 assert.equal(claudeApiKey({ ANTHROPIC_API_KEY: "sk-ant-alias" }), "sk-ant-alias");
+assert.equal(claudeApiKey({ CLAUDE_API_KEY: "sk-ant-env" }), "sk-ant-env");
 assert.equal(detectLlmProvider({}), null);
 assert.equal(
   detectLlmProvider({ ANTHROPIC_API_KEY: "sk-ant-x" }),
@@ -36,6 +40,7 @@ assert.equal(
   "gemini",
 );
 assert.equal(detectLlmProvider({ GEMINI: "g-short" }), "gemini");
+assert.equal(detectLlmProvider({ CLAUDE_API_KEY: "sk-ant-env" }), "claude");
 assert.equal(
   detectLlmProvider({
     ANTHROPIC_API_KEY: "c",
@@ -108,6 +113,45 @@ assert.equal(
     keys,
   ).ok,
   false,
+);
+
+assert.ok(
+  researchPriority({ slug: "david-guetta", setCount: 1, festivalSets: 1 }) >
+    researchPriority({ slug: "aizo-clutch", setCount: 1, festivalSets: 0 }),
+  "Top 100 + festival outranks a one-set leftover",
+);
+assert.equal(isResearchWorthyName("Axwell"), true);
+assert.equal(isResearchWorthyName("Behind Cercle Odyssey I Chapter Four"), false);
+assert.equal(isResearchWorthyName("Bonobo Solo"), false);
+assert.equal(isResearchWorthyName("MAU P SUNRISE"), false);
+
+const eventKeys = new Set(["instagram:alesso"]);
+assert.equal(
+  evaluateProposedEventUrl(
+    "Tomorrowland",
+    "instagram",
+    "https://www.instagram.com/tomorrowland/",
+    eventKeys,
+  ).ok,
+  true,
+);
+assert.equal(
+  evaluateProposedEventUrl(
+    "Tomorrowland",
+    "instagram",
+    "https://www.instagram.com/alesso/",
+    eventKeys,
+  ).ok,
+  false,
+);
+assert.equal(
+  evaluateProposedEventUrl(
+    "Tomorrowland",
+    "website",
+    "https://www.tomorrowland.com/",
+    eventKeys,
+  ).ok,
+  true,
 );
 
 console.log("llmResearch.test.ts ok");

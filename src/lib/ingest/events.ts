@@ -63,6 +63,8 @@ export const KNOWN_EVENTS: Record<string, CanonicalEvent> = {
     kind: "festival",
     location: "Empire Polo Club, Indio",
     website: "https://www.coachella.com/",
+    instagram: "https://instagram.com/coachella",
+    twitter: "https://x.com/coachella",
   },
   lollapalooza: {
     slug: "lollapalooza",
@@ -70,6 +72,8 @@ export const KNOWN_EVENTS: Record<string, CanonicalEvent> = {
     kind: "festival",
     location: "Grant Park, Chicago",
     website: "https://www.lollapalooza.com/",
+    instagram: "https://instagram.com/lollapalooza",
+    twitter: "https://x.com/lollapalooza",
   },
   "brooklyn-mirage": {
     slug: "brooklyn-mirage",
@@ -77,6 +81,7 @@ export const KNOWN_EVENTS: Record<string, CanonicalEvent> = {
     kind: "club",
     location: "Brooklyn, New York",
     website: "https://www.avantgardner.com/",
+    instagram: "https://instagram.com/thebrooklynmirage",
   },
   tomorrowland: {
     slug: "tomorrowland",
@@ -87,6 +92,8 @@ export const KNOWN_EVENTS: Record<string, CanonicalEvent> = {
     soundcloud: "https://soundcloud.com/tomorrowland",
     // Lineup page scanned every deep ingest (CDN + HTML + seed fallback).
     // See discovery/lineupSources.ts — Relive YT playlist + SC in festivalDrops.
+    instagram: "https://instagram.com/tomorrowland",
+    twitter: "https://x.com/tomorrowland",
   },
   parookaville: {
     slug: "parookaville",
@@ -94,6 +101,7 @@ export const KNOWN_EVENTS: Record<string, CanonicalEvent> = {
     kind: "festival",
     location: "Weeze, Germany",
     website: "https://parookaville.com/",
+    instagram: "https://instagram.com/parookaville",
   },
   "burning-man": {
     slug: "burning-man",
@@ -101,6 +109,9 @@ export const KNOWN_EVENTS: Record<string, CanonicalEvent> = {
     kind: "festival",
     location: "Black Rock City, Nevada",
     website: "https://burningman.org/",
+    soundcloud: "https://soundcloud.com/burningman",
+    instagram: "https://instagram.com/burningman",
+    twitter: "https://x.com/burningman",
   },
   "boiler-room": {
     slug: "boiler-room",
@@ -141,6 +152,8 @@ export const KNOWN_EVENTS: Record<string, CanonicalEvent> = {
     kind: "festival",
     location: "San Bernardino, CA",
     website: "https://nocturnalwonderland.com/",
+    instagram: "https://instagram.com/nocturnalwland",
+    twitter: "https://x.com/nocturnalwland",
   },
   "beyond-wonderland": {
     slug: "beyond-wonderland",
@@ -148,6 +161,8 @@ export const KNOWN_EVENTS: Record<string, CanonicalEvent> = {
     kind: "festival",
     location: "San Bernardino, CA",
     website: "https://beyondwonderland.com/",
+    instagram: "https://instagram.com/beyondwland",
+    twitter: "https://x.com/beyondwland",
   },
   "escape-halloween": {
     slug: "escape-halloween",
@@ -155,6 +170,8 @@ export const KNOWN_EVENTS: Record<string, CanonicalEvent> = {
     kind: "festival",
     location: "San Bernardino, CA",
     website: "https://escapepsychocircus.com/",
+    instagram: "https://instagram.com/escapehalloween",
+    twitter: "https://x.com/escapehalloween",
   },
   dreamstate: {
     slug: "dreamstate",
@@ -164,6 +181,8 @@ export const KNOWN_EVENTS: Record<string, CanonicalEvent> = {
     // Insomniac SoCal brand site (not dreamstate.eu).
     // Hub: https://www.insomniac.com/events/our-world/dreamstate/
     website: "https://socal.dreamstateusa.com/",
+    instagram: "https://instagram.com/dreamstateusa",
+    twitter: "https://x.com/DreamstateUSA",
   },
   "countdown-nye": {
     slug: "countdown-nye",
@@ -171,6 +190,8 @@ export const KNOWN_EVENTS: Record<string, CanonicalEvent> = {
     kind: "festival",
     location: "San Bernardino, CA",
     website: "https://countdownnye.com/",
+    instagram: "https://instagram.com/countdownnye",
+    twitter: "https://x.com/countdown_nye",
   },
   djoon: {
     slug: "djoon",
@@ -179,6 +200,8 @@ export const KNOWN_EVENTS: Record<string, CanonicalEvent> = {
     location: "Paris, France",
     website: "https://shotgun.live/venues/djoonclub",
     instagram: "https://www.instagram.com/djoonclub/",
+    soundcloud: "https://soundcloud.com/djoon",
+    twitter: "https://x.com/djoonclub",
   },
   defected: {
     slug: "defected",
@@ -228,6 +251,7 @@ export const KNOWN_EVENTS: Record<string, CanonicalEvent> = {
     kind: "festival",
     location: "Biddinghuizen, Netherlands",
     website: "https://www.defqon1.nl/",
+    instagram: "https://instagram.com/defqon1",
   },
   "electric-love": {
     slug: "electric-love",
@@ -235,6 +259,8 @@ export const KNOWN_EVENTS: Record<string, CanonicalEvent> = {
     kind: "festival",
     location: "Salzburg, Austria",
     website: "https://www.electriclove.at/",
+    instagram: "https://instagram.com/electricloveaut",
+    twitter: "https://x.com/electricloveaut",
   },
   parklife: {
     slug: "parklife",
@@ -242,6 +268,9 @@ export const KNOWN_EVENTS: Record<string, CanonicalEvent> = {
     kind: "festival",
     location: "Heaton Park, Manchester",
     website: "https://www.parklife.uk.com/",
+    soundcloud: "https://soundcloud.com/parklifefestival",
+    instagram: "https://instagram.com/parklife",
+    twitter: "https://x.com/Parklifefest",
   },
   "time-warp": {
     slug: "time-warp",
@@ -249,6 +278,8 @@ export const KNOWN_EVENTS: Record<string, CanonicalEvent> = {
     kind: "festival",
     location: "Mannheim, Germany",
     website: "https://www.time-warp.de/",
+    soundcloud: "https://soundcloud.com/time-warp",
+    instagram: "https://instagram.com/timewarp_official",
   },
   mysteryland: {
     slug: "mysteryland",
@@ -256,6 +287,9 @@ export const KNOWN_EVENTS: Record<string, CanonicalEvent> = {
     kind: "festival",
     location: "Haarlemmermeer, Netherlands",
     website: "https://mysteryland.id-t.com/",
+    soundcloud: "https://soundcloud.com/mysterylandmusic",
+    instagram: "https://instagram.com/mysteryland_official",
+    twitter: "https://x.com/mysteryland",
   },
   awakenings: {
     slug: "awakenings",
@@ -280,6 +314,9 @@ export const KNOWN_EVENTS: Record<string, CanonicalEvent> = {
     kind: "festival",
     location: "Germany",
     website: "https://www.nature-one.de/",
+    soundcloud: "https://soundcloud.com/official-nature-one",
+    instagram: "https://instagram.com/natureonefestival",
+    twitter: "https://x.com/natureone",
   },
   "dance-valley": {
     slug: "dance-valley",
@@ -369,6 +406,8 @@ const ALIAS_TO_SLUG: Record<string, string> = {
   "zurich-street-parade": "street-parade",
   "zuerich-street-parade": "street-parade",
   "zurcher-street-parade": "street-parade",
+  "brooklyn-mirage": "brooklyn-mirage",
+  "the-brooklyn-mirage": "brooklyn-mirage",
   "nature-one": "nature-one",
   natureone: "nature-one",
   "dance-valley": "dance-valley",
