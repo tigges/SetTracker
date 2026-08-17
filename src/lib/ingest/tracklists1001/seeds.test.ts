@@ -128,6 +128,7 @@ import {
   TL_MANDY_AND_NEGATIV_ATMOSPHERE_STAGE_TOMORROWLAND_WE1_BELGIUM_2026,
   TL_LUCAS_AND_STEVE_AND_MIKE_WILLIAMS_DONT_LET_DADDY_KNOW_ZIGGO_DOME_AMSTERDAM_2026,
   TL_INDIRA_PAGANOTTO_ATMOSPHERE_STAGE_TOMORROWLAND_WE1_BELGIUM_2023,
+  TL_DJS_FROM_MARS_MASH_UP_UNIVERSE_056_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   tracklist1001RowsToPlays,
@@ -2501,6 +2502,38 @@ for (let i = 1; i < indiraTml.length; i++) {
   assert.ok(
     (indiraTml[i]!.timestamp ?? 0) > (indiraTml[i - 1]!.timestamp ?? 0),
     `Indira Paganotto TML WE1 2023 clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_DJS_FROM_MARS_MASH_UP_UNIVERSE_056_2026);
+assert.equal(TL_DJS_FROM_MARS_MASH_UP_UNIVERSE_056_2026.length, 30);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-tomorrowland-mash-up-universe-djs-from-mars-august-2026"
+  ],
+  TL_DJS_FROM_MARS_MASH_UP_UNIVERSE_056_2026,
+);
+assert.equal(
+  isWiredTracklistSlug(
+    "sc-tomorrowland-mash-up-universe-djs-from-mars-august-2026",
+  ),
+  true,
+);
+const dfm056 = tracklist1001RowsToPlays(
+  TL_DJS_FROM_MARS_MASH_UP_UNIVERSE_056_2026,
+);
+assert.equal(dfm056.length, 30);
+assert.equal(dfm056[0]?.provenance, "1001tl");
+assert.equal(dfm056[0]?.timestamp, 20);
+assert.equal(dfm056[0]?.artistName, "deadmau5");
+assert.equal(dfm056[0]?.trackTitle, "Not Exactly (Rinzen Remix)");
+assert.equal(dfm056[29]?.artistName, "Skrillex & Damian Marley");
+assert.equal(dfm056[29]?.trackTitle, "Make It Bun Dem (HayaT & Vandija Remix)");
+assert.equal(dfm056[29]?.timestamp, 58 * 60 + 20);
+for (let i = 1; i < dfm056.length; i++) {
+  assert.ok(
+    (dfm056[i]!.timestamp ?? 0) > (dfm056[i - 1]!.timestamp ?? 0),
+    `DJs From Mars Mash-Up Universe 056 clocks must increase at index ${i}`,
   );
 }
 

@@ -294,4 +294,18 @@ assert.equal(
   "sc-tomorrowland-mandy-mondays-august-2026",
 );
 
+const dfmMashupSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url ===
+    "https://soundcloud.com/tomorrowland/mash-up-universe-djs-from-mars-august-2026",
+);
+assert.ok(dfmMashupSc);
+assert.equal(dfmMashupSc.primaryArtist.name, "DJs From Mars");
+assert.equal(dfmMashupSc.type, "radio");
+assert.equal(dfmMashupSc.seriesName, "Mash-Up Universe");
+assert.equal(
+  `sc-tomorrowland-${slugify("mash-up-universe-djs-from-mars-august-2026")}`,
+  "sc-tomorrowland-mash-up-universe-djs-from-mars-august-2026",
+);
+
 console.log("soundcloud/tracks.test.ts ok");
