@@ -308,4 +308,79 @@ assert.equal(
   "sc-tomorrowland-mash-up-universe-djs-from-mars-august-2026",
 );
 
+const tapeBCt5Sc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url === "https://soundcloud.com/tape-b-official/tape-b-cartunes-vol-5",
+);
+assert.ok(tapeBCt5Sc);
+assert.equal(tapeBCt5Sc.primaryArtist.name, "Tape B");
+assert.equal(tapeBCt5Sc.type, "mix");
+assert.equal(tapeBCt5Sc.seriesName, "CarTunes");
+assert.equal(
+  `sc-tape-b-official-${slugify("tape-b-cartunes-vol-5")}`,
+  "sc-tape-b-official-tape-b-cartunes-vol-5",
+);
+
+const mauPXxxSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) => s.url === "https://soundcloud.com/realmaup/xxx-radio-201",
+);
+assert.ok(mauPXxxSc);
+assert.equal(mauPXxxSc.primaryArtist.name, "Mau P");
+assert.equal(mauPXxxSc.type, "radio");
+assert.equal(mauPXxxSc.seriesName, "XXX Radio");
+assert.equal(
+  `sc-realmaup-${slugify("xxx-radio-201")}`,
+  "sc-realmaup-xxx-radio-201",
+);
+assert.equal(
+  SOUNDCLOUD_TRACK_SEEDS.some((s) => s.url.startsWith("sc-https://")),
+  false,
+);
+
+const vcRobotSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url ===
+    "https://soundcloud.com/vintageculturemusic/vintage-culture-robot-heart-residency-2024-california",
+);
+assert.ok(vcRobotSc);
+assert.equal(vcRobotSc.primaryArtist.name, "Vintage Culture");
+assert.equal(vcRobotSc.type, "festival");
+assert.equal(vcRobotSc.seriesName, "Robot Heart");
+assert.equal(
+  `sc-vintageculturemusic-${slugify("vintage-culture-robot-heart-residency-2024-california")}`,
+  "sc-vintageculturemusic-vintage-culture-robot-heart-residency-2024-california",
+);
+
+const clapcast576Sc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) => s.url === "https://soundcloud.com/claptone/clapcast-576",
+);
+assert.ok(clapcast576Sc);
+assert.equal(clapcast576Sc.primaryArtist.name, "Claptone");
+assert.equal(clapcast576Sc.type, "radio");
+assert.equal(clapcast576Sc.seriesName, "Clapcast");
+assert.equal(
+  `sc-claptone-${slugify("clapcast-576")}`,
+  "sc-claptone-clapcast-576",
+);
+
+const brandonPvSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url ===
+    "https://soundcloud.com/brandonsounds/brandon-live-at-parookaville-2024-desert-valley",
+);
+assert.ok(brandonPvSc);
+assert.equal(brandonPvSc.primaryArtist.name, "BRANDON");
+assert.equal(brandonPvSc.type, "festival");
+assert.equal(brandonPvSc.seriesName, "Parookaville");
+assert.equal(
+  `sc-brandonsounds-${slugify("brandon-live-at-parookaville-2024-desert-valley")}`,
+  "sc-brandonsounds-brandon-live-at-parookaville-2024-desert-valley",
+);
+assert.equal(
+  SOUNDCLOUD_TRACK_SEEDS.some((s) =>
+    s.url.startsWith("sc-https://"),
+  ),
+  false,
+);
+
 console.log("soundcloud/tracks.test.ts ok");

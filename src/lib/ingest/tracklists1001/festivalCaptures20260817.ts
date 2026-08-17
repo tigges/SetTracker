@@ -686,3 +686,198 @@ export const TL_COLE_TERRAZAS_HARD_SUMMER_2026: FingerprintSeedRow[] = [
   { at: "34:14", artist: "Mathew Jonson", title: "Automaton" },
   { at: "56:08", artist: "Oshana", title: "Girls In The Front" },
 ];
+
+/**
+ * Tape B - CarTunes Vol. 5 2026-08-10
+ * https://www.1001tracklists.com/tracklist/1g84vp31/tape-b-cartunes-vol.-5-2026-08-10.html
+ * Official YT: https://youtu.be/7_O8N_EJg_c
+ * Official SC: https://soundcloud.com/tape-b-official/tape-b-cartunes-vol-5
+ * Capture overlay used TL_Tape-B_CarTunes_Vol5_2026 (hyphen illegal);
+ * constant is TL_TAPE_B_CARTUNES_VOL5_2026.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-7_O8N_EJg_c"]
+ *   and ["sc-tape-b-official-tape-b-cartunes-vol-5"]
+ * Captured 2026-08-17 - provenance 1001tl.
+ */
+export const TL_TAPE_B_CARTUNES_VOL5_2026: FingerprintSeedRow[] = [
+  { at: "0:20", artist: "Dubba Jonny", title: "A Brief Introduction On Dubstep Production (Tape B Edit)" },
+  { at: "2:01", artist: "Of The Trees & Tape B", title: "Brackish (Tape B CT5 Flip)" },
+  { at: "3:42", artist: "Flatbush Zombies", title: "Palm Trees (Tape B CT5 Flip)" },
+  { at: "5:23", artist: "Chief Keef & Gucci Mane", title: "Semi On Em" },
+  { at: "7:04", artist: "Ganja White Night & Tape B", title: "Ganja Tape (Tape B VIP)" },
+  { at: "8:45", artist: "Fred again.. & Skepta & PlaqueBoyMax", title: "Victory Lap (Artifakts Remix)" },
+  { at: "10:26", artist: "Waka Flocka Flame ft. Diddy & Rick Ross & Gucci Mane", title: "O Let's Do It (Remix) (Know Good & Tape B Flip)" },
+  { at: "12:07", artist: "Shawty Lo", title: "They Know (Dey Know) (Artifuckt Remix)" },
+  { at: "13:48", artist: "Tape B & Zaytoven", title: "Signature Sound" },
+  { at: "15:29", artist: "Zeds Dead & Subtronics & Tape B", title: "Word Scramble" },
+  { at: "17:10", artist: "Zeds Dead & Subtronics & Tape B", title: "Word Scramble (HEYZ Flip)" },
+  { at: "18:51", artist: "AJ Tracey & Jorja Smith", title: "Crush (Tape B Flip)" },
+  { at: "20:32", artist: "Santigold", title: "Disparate Youth (Tape B Flip)" },
+  { at: "22:13", artist: "Chief Keef ft. 50 Cent & Wiz Khalifa", title: "Hate Bein' Sober (STVSH Flip)" },
+  { at: "23:54", artist: "DJ ESCO & Future", title: "Psychedelik Smoke (Tape B Flip)" },
+  { at: "25:35", artist: "Kendrick Lamar", title: "Backseat Freestyle (Know Good & Tape B Flip)" },
+  { at: "27:16", artist: "Speaker Knockerz", title: "Lonely (Tape B & Cozy Kev Flip)" },
+  { at: "28:57", artist: "Isaiah Rashad", title: "SAME SH!T (Tape B Flip)" },
+  { at: "30:38", artist: "Future", title: "I Serve The Base (Tape B Flip)" },
+  { at: "32:19", artist: "Mac Miller", title: "Perfect Circle (Tape B & Jkyl & Hyde Flip)" },
+  { at: "34:00", artist: "Juicy J", title: "Wax (Tape B Flip)" },
+  { at: "35:41", artist: "Ty Dolla $ign ft. Shoreline Mafia & Quavo & Juicy J", title: "Don't Kill The Party (Artifakts Remix)" },
+  { at: "37:22", artist: "Tape B & Casey Club", title: "Vicious" },
+  { at: "39:03", artist: "Lil Baby", title: "Freestyle" },
+  { at: "40:44", artist: "Schoolboy Q", title: "Yay Yay (Know Good & Tape B Flip)" },
+  { at: "42:25", artist: "yojas.", title: "rated R." },
+  { at: "44:06", artist: "A$AP Rocky", title: "Long Live A$AP (Cozy Kev Flip)" },
+  { at: "45:47", artist: "Wiley", title: "FIRETECH" },
+  { at: "47:28", artist: "Baby Bash ft. Akon", title: "Baby, I'm Back (Seth David Flip)" },
+  { at: "49:09", artist: "Plan B", title: "The Recluse (Nero Remix)" },
+  { at: "50:50", artist: "Effin & Tape B", title: "Ups and Downs" },
+  { at: "52:31", artist: "Effin & Tape B", title: "I'll Never Know" },
+  { at: "54:12", artist: "Lil Uzi Vert", title: "You Was Right (Tape B Flip)" },
+  { at: "55:53", artist: "Tape B ft. Dani King", title: "Underneath Your Skin" },
+  { at: "57:34", artist: "Lana Del Rey", title: "Young & Beautiful (Zeds Dead & Subtronics & Tape B Flip / Tape B CT5 Version)" },
+];
+
+/**
+ * Mau P - XXX Radio 201 2026-08-14
+ * https://www.1001tracklists.com/tracklist/9xw8jdk/mau-p-xxx-radio-201-2026-08-14.html
+ * Official SC: https://soundcloud.com/realmaup/xxx-radio-201
+ * Capture overlay used TL_Mau-P_XXX-Radio-201_2026 (hyphens illegal);
+ * constant is TL_MAU_P_XXX_RADIO_201_2026.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["sc-realmaup-xxx-radio-201"]
+ * Never wire sc-https://….
+ * Captured 2026-08-17 - provenance 1001tl.
+ */
+export const TL_MAU_P_XXX_RADIO_201_2026: FingerprintSeedRow[] = [
+  { at: "0:20", artist: "Chris Brooks & Resco (US)", title: "Dat Funk" },
+  { at: "6:35", artist: "Simes", title: "Whippin' Up" },
+  { at: "10:50", artist: "BizZa & Sera De Villalta", title: "Sueño Compartido" },
+  { at: "15:20", artist: "Crusy", title: "Rising" },
+  { at: "26:35", artist: "Piem", title: "Take Me Up" },
+  { at: "31:30", artist: "Rooléh", title: "Want To Know" },
+  { at: "44:45", artist: "Route 94", title: "4Get The Girl (Mellizos Remix)" },
+  { at: "48:50", artist: "Bagheera (FR)", title: "7 Heures Du Matin" },
+];
+
+/**
+ * Vintage Culture @ Robot Heart Residency, United States 2024-05-16
+ * https://www.1001tracklists.com/tracklist/12xtt1u1/vintage-culture-robot-heart-residency-united-states-2024-05-16.html
+ * Official YT: https://youtu.be/KbGNocaJDjw
+ * Official SC: https://soundcloud.com/vintageculturemusic/vintage-culture-robot-heart-residency-2024-california
+ * Capture overlay used TL_Vintage-Culture_Robot-Heart-Residency_United-States_2024
+ * (hyphens illegal); constant is TL_VINTAGE_CULTURE_ROBOT_HEART_RESIDENCY_UNITED_STATES_2024.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-KbGNocaJDjw"]
+ *   and ["sc-vintageculturemusic-vintage-culture-robot-heart-residency-2024-california"]
+ * Captured 2026-08-17 - provenance 1001tl.
+ */
+export const TL_VINTAGE_CULTURE_ROBOT_HEART_RESIDENCY_UNITED_STATES_2024: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "Bedouin", title: "Tijuana (Vintage Culture Remix)" },
+  { at: "5:21", artist: "Hardt Antoine", title: "I Need Someone" },
+  { at: "10:42", artist: "Matador", title: "Sol" },
+  { at: "16:02", artist: "Bambook", title: "Give It Up (Audiofly Remix)" },
+  { at: "21:23", artist: "CIOZ & Ryan Murgatroyd", title: "Wachaka" },
+  { at: "26:43", artist: "Enamour", title: "Red Room" },
+  { at: "32:04", artist: "Solee", title: "Our Lives" },
+  { at: "37:24", artist: "Incláme", title: "Cipher" },
+  { at: "42:45", artist: "Radio Slave ft. NEZ", title: "Wait A Minute (Dixon Extension)" },
+  { at: "48:05", artist: "Run With Me (Extended)", title: "Made By Pete" },
+  { at: "51:40", artist: "the real unknown", title: "Heart Shaped Box" },
+  { at: "57:25", artist: "Solee", title: "Tanz Der Planeten" },
+  { at: "1:03:10", artist: "Toto Chiavetta & Trenton", title: "My Eyes Are Failing" },
+  { at: "1:09:47", artist: "Karmon", title: "Acido" },
+  { at: "1:15:12", artist: "Beanfield ft. Bajka", title: "Tides (Carl Craig C's Movement Number 1)" },
+  { at: "1:20:37", artist: "Daniel Rateuke", title: "Oudara" },
+  { at: "1:26:02", artist: "Oliver Koletzki & andhim", title: "Branka" },
+  { at: "1:31:27", artist: "AFFKT", title: "Tarambana (NEIR Tunnel Vision Mix)" },
+  { at: "1:36:52", artist: "Mumbai Science", title: "Iris" },
+  { at: "1:42:17", artist: "Guy J", title: "Beast Of Sea" },
+  { at: "1:47:42", artist: "Vintage Culture & braev", title: "Time" },
+  { at: "1:53:07", artist: "Olivier Giacomotto", title: "Lui" },
+  { at: "1:58:32", artist: "Dennis Cruz & Ian Ludvig", title: "Pain Away" },
+  { at: "2:03:56", artist: "Dino Lenny", title: "Did This" },
+  { at: "2:09:21", artist: "Yousef ft. Afronaut Zu", title: "Learn To Fly (Private Version)" },
+  { at: "2:14:45", artist: "Vintage Culture ft. Noah Kulaga", title: "Upon Your Skin" },
+];
+
+/**
+ * John Summit - Burning Man Playa Package Mix 2025-10-09
+ * https://www.1001tracklists.com/tracklist/btv3mn9/john-summit-burning-man-playa-package-mix-2025-10-09.html
+ * Official YT: https://youtu.be/PkWNuf7rtms (@JohnSummit — Experts Only remix album)
+ * Capture overlay used TL_John-Summit_Burning-Man_Playa-Package-Mix_2025
+ * (hyphens illegal); constant is TL_JOHN_SUMMIT_BURNING_MAN_PLAYA_PACKAGE_MIX_2025.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-PkWNuf7rtms"]
+ * 6 timed cues — gap-fill, not dense-replace.
+ * Distinct from TL_JOHN_SUMMIT_TML_WE2_2026 / TL_JOHN_SUMMIT_LOLLAPALOOZA.
+ * Captured 2026-08-17 - provenance 1001tl.
+ */
+export const TL_JOHN_SUMMIT_BURNING_MAN_PLAYA_PACKAGE_MIX_2025: FingerprintSeedRow[] =
+  [
+    { at: "0:00", artist: "John Summit ft. Inéz", title: "crystallized (Playa Dub Remix)" },
+    { at: "4:15", artist: "John Summit & GUZ ft. Stevie Appleton", title: "What A Life (OMRI. Remix)" },
+    { at: "9:30", artist: "John Summit & HAYLA", title: "Shiver (N.O.Y & Guy Katch Remix)" },
+    { at: "13:00", artist: "John Summit & Of The Trees", title: "Stay With Me (Mishell Remix)" },
+    { at: "17:35", artist: "John Summit ft. HAYLA", title: "Where You Are (Millero Remix)" },
+    { at: "21:50", artist: "John Summit ft. CLOVES", title: "Focus (EdiP Remix)" },
+  ];
+
+/**
+ * Claptone - Clapcast 576 2026-07-31
+ * https://www.1001tracklists.com/tracklist/uq8g1pk/claptone-clapcast-576-2026-07-31.html
+ * Official SC Relive: https://soundcloud.com/claptone/clapcast-576
+ * (sc-claptone-clapcast-576). Mixcloud is a mirror only.
+ * Operator sent the 1001 URL without cue rows — do not scrape 1001 or
+ * invent TL_CLAPTONE_CLAPCAST_576_2026. Official SC description has 14
+ * untimed tracks (source provenance). Paste timed 1001 cues to wire
+ * TRACKLIST_1001_BY_SOURCE_SLUG["sc-claptone-clapcast-576"].
+ */
+
+/**
+ * BRANDON @ Desert Valley, Parookaville, Germany 2024-07-28
+ * https://www.1001tracklists.com/tracklist/1w51jd7t/brandon-desert-valley-parookaville-germany-2024-07-28.html
+ * Official YT: https://youtu.be/AQ6wWT2HaSQ (@BRANDONSOUNDS)
+ * Official SC: https://soundcloud.com/brandonsounds/brandon-live-at-parookaville-2024-desert-valley
+ * Capture overlay used TL_BRANDON_Desert-Valley_Parookaville_Germany_2024
+ * (hyphens illegal); constant is TL_BRANDON_DESERT_VALLEY_PAROOKAVILLE_GERMANY_2024.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-AQ6wWT2HaSQ"]
+ *   and ["sc-brandonsounds-brandon-live-at-parookaville-2024-desert-valley"]
+ * Never wire sc-https://….
+ * Captured 2026-08-17 - provenance 1001tl.
+ */
+export const TL_BRANDON_DESERT_VALLEY_PAROOKAVILLE_GERMANY_2024: FingerprintSeedRow[] =
+  [
+    { at: "0:01", artist: "Victor Lou & Visage Music", title: "Pleya" },
+    { at: "0:46", artist: "BRANDON ft. KXNE", title: "Shades On" },
+    { at: "1:06", artist: "Yellow Claw pres. €URO TRA$H & Breaking Beattz ft. Almondmilkhunni", title: "Six Figures" },
+    { at: "2:45", artist: "BRANDON & KXNE", title: "Gucci Slides" },
+    { at: "4:41", artist: "Breaking Beattz", title: "Flex" },
+    { at: "5:06", artist: "Matroda & Dances", title: "Britney" },
+    { at: "6:40", artist: "BRANDON & MYLØ", title: "Floor Addiction" },
+    { at: "8:11", artist: "Corrupt (UK) ft. Raas", title: "Strange Things" },
+    { at: "8:55", artist: "BRANDON", title: "Dance In Chicago" },
+    { at: "9:51", artist: "DLMT & No Thanks & Halogen", title: "On Brand" },
+    { at: "11:12", artist: "Kanye West", title: "Can't Tell Me Nothing (Cave Studio Edit)" },
+    { at: "12:36", artist: "Illusionize & Victor Lou", title: "Fucking Party" },
+    { at: "14:05", artist: "BRANDON & PVC", title: "Watch Me Move" },
+    { at: "14:38", artist: "Chris Lorenzo ft. MC Buzzz", title: "Bota Bota" },
+    { at: "16:01", artist: "Kendrick Lamar", title: "Swimming Pools (Drank) (BRANDON Bootleg)" },
+    { at: "18:45", artist: "Central Cee ft. Lil Baby", title: "BAND4BAND" },
+    { at: "20:21", artist: "Corrupt (UK)", title: "Shook (VIP)" },
+    { at: "22:05", artist: "Lil' Bow Wow & Snoop Dogg", title: "Bow Wow (That's My Name) (BRANDON Bootleg)" },
+    { at: "24:26", artist: "BRANDON ft. KXNE", title: "Shades On" },
+    { at: "28:07", artist: "Dominica", title: "I Gotta Let U Go (BRANDON Remix)" },
+    { at: "29:08", artist: "No Thanks & Legacy", title: "Click Click" },
+    { at: "31:08", artist: "BRANDON", title: "Clock Ticker (Adam Miller Remix)" },
+    { at: "32:49", artist: "BRANDON & Lackmus", title: "Ravers Bounce" },
+    { at: "34:30", artist: "Dr. Dre ft. Snoop Dogg", title: "Still D.R.E. (BRANDON Bootleg)" },
+    { at: "35:01", artist: "BRANDON & Kyogre", title: "Night Heater" },
+    { at: "36:51", artist: "DJ Snake & Peso Pluma", title: "TEKA (Matroda Remix)" },
+    { at: "39:28", artist: "Gigi D'Agostino", title: "Bla Bla Bla (BigGrand TechHouse Edit)" },
+    { at: "41:08", artist: "Illusionize ft. Y&M", title: "My Body" },
+    { at: "43:09", artist: "BRANDON & No/Me", title: "Lost & Found London" },
+    { at: "45:16", artist: "BRANDON", title: "Garados" },
+    { at: "46:46", artist: "J-Kwon", title: "Tipsy (BRANDON Bootleg)" },
+    { at: "48:49", artist: "BIJOU & BRANDON", title: "Swagger Feet" },
+    { at: "50:43", artist: "Rihanna", title: "Disturbia (BRANDON Bootleg)" },
+    { at: "53:21", artist: "Hamdi ft. Princess Superstar", title: "Counting (Taiki Nulight Remix)" },
+    { at: "54:41", artist: "Borne & Alexis B", title: "Hush" },
+    { at: "55:11", artist: "ero808 & BRANDON", title: "Serotonin" },
+    { at: "57:41", artist: "Andrewboy ft. Moby", title: "Porcelain" },
+  ];

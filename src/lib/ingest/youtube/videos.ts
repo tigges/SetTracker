@@ -122,6 +122,10 @@ import {
   TL_PEGGY_GOU_CERCLE_LILLE,
   TL_PEGGY_GOU_EDC_LV_2026,
   TL_THE_CHAINSMOKERS_TML_WE1_2026,
+  TL_TAPE_B_CARTUNES_VOL5_2026,
+  TL_VINTAGE_CULTURE_ROBOT_HEART_RESIDENCY_UNITED_STATES_2024,
+  TL_JOHN_SUMMIT_BURNING_MAN_PLAYA_PACKAGE_MIX_2025,
+  TL_BRANDON_DESERT_VALLEY_PAROOKAVILLE_GERMANY_2024,
 } from "../tracklists1001/seeds";
 import type { RawArtist } from "../types";
 import { slugify } from "../types";
@@ -2623,6 +2627,70 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     type: "festival",
     title: "Cuebrick – Live from Sacré Paris | Mainstage Techno | Club Set",
     eventName: "Sacré Paris",
+  },
+  {
+    // Official Tape B upload; 1001TL wired via yt-7_O8N_EJg_c
+    // (same list as sc-tape-b-official-tape-b-cartunes-vol-5).
+    video: "https://www.youtube.com/watch?v=7_O8N_EJg_c",
+    primaryArtist: dj("Tape B", { accent: "#ffbe0b" }),
+    genre: "Bass House",
+    type: "mix",
+    title: "Tape B - CarTunes Vol. 5",
+    seriesName: "CarTunes",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1g84vp31/tape-b-cartunes-vol.-5-2026-08-10.html",
+    tracklist1001: TL_TAPE_B_CARTUNES_VOL5_2026,
+  },
+  {
+    // Official Vintage Culture upload; 1001TL wired via yt-KbGNocaJDjw
+    // (same list as sc-vintageculturemusic-vintage-culture-robot-heart-residency-2024-california).
+    video: "https://www.youtube.com/watch?v=KbGNocaJDjw",
+    primaryArtist: dj("Vintage Culture", {
+      accent: "#e85d04",
+      homeCity: "Brazil",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    title: "Vintage Culture @ Robot Heart Residency, California 2024",
+    seriesName: "Robot Heart",
+    eventName: "Robot Heart Residency",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/12xtt1u1/vintage-culture-robot-heart-residency-united-states-2024-05-16.html",
+    tracklist1001: TL_VINTAGE_CULTURE_ROBOT_HEART_RESIDENCY_UNITED_STATES_2024,
+  },
+  {
+    // Official John Summit upload — Experts Only remix album mix.
+    // Distinct from TML WE2 (yt-PlArfyuzuqo) and Lollapalooza (yt-9TKqqBCmDHA).
+    video: "https://www.youtube.com/watch?v=PkWNuf7rtms",
+    primaryArtist: dj("John Summit", {
+      accent: "#4cc9f0",
+      homeCity: "Chicago, US",
+    }),
+    genre: "Tech House",
+    type: "mix",
+    title: "John Summit - Burning Man Playa Package Mix 2025",
+    seriesName: "Experts Only",
+    eventName: "Burning Man",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/btv3mn9/john-summit-burning-man-playa-package-mix-2025-10-09.html",
+    tracklist1001: TL_JOHN_SUMMIT_BURNING_MAN_PLAYA_PACKAGE_MIX_2025,
+  },
+  {
+    // Official @BRANDONSOUNDS upload; 1001TL wired via yt-AQ6wWT2HaSQ
+    // (same list as sc-brandonsounds-brandon-live-at-parookaville-2024-desert-valley).
+    video: "https://www.youtube.com/watch?v=AQ6wWT2HaSQ",
+    primaryArtist: dj("BRANDON", {
+      accent: "#ff5e5e",
+      homeCity: "Germany",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    title: "BRANDON @ Desert Valley, Parookaville 2024",
+    seriesName: "Parookaville",
+    eventName: "Parookaville",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1w51jd7t/brandon-desert-valley-parookaville-germany-2024-07-28.html",
+    tracklist1001: TL_BRANDON_DESERT_VALLEY_PAROOKAVILLE_GERMANY_2024,
   },
 ];
 

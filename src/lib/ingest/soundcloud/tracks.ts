@@ -344,4 +344,67 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     type: "radio",
     minDurationSec: 30 * 60,
   },
+  {
+    // Official Tape B upload; 1001TL wired via
+    // sc-tape-b-official-tape-b-cartunes-vol-5 (same list as yt-7_O8N_EJg_c).
+    url: "https://soundcloud.com/tape-b-official/tape-b-cartunes-vol-5",
+    primaryArtist: dj("Tape B", { accent: "#ffbe0b" }),
+    genre: "Bass House",
+    seriesName: "CarTunes",
+    type: "mix",
+    minDurationSec: 45 * 60,
+  },
+  {
+    // Official Mau P upload; 1001TL wired via sc-realmaup-xxx-radio-201.
+    // Never wire sc-https://….
+    url: "https://soundcloud.com/realmaup/xxx-radio-201",
+    primaryArtist: dj("Mau P", { accent: "#118ab2" }),
+    genre: "Tech House",
+    seriesName: "XXX Radio",
+    type: "radio",
+    minDurationSec: 45 * 60,
+  },
+  {
+    // Official Vintage Culture upload; 1001TL wired via
+    // sc-vintageculturemusic-vintage-culture-robot-heart-residency-2024-california
+    // (same list as yt-KbGNocaJDjw). Never wire sc-https://….
+    url: "https://soundcloud.com/vintageculturemusic/vintage-culture-robot-heart-residency-2024-california",
+    primaryArtist: dj("Vintage Culture", {
+      accent: "#e85d04",
+      homeCity: "Brazil",
+    }),
+    genre: "Tech House",
+    seriesName: "Robot Heart",
+    type: "festival",
+    minDurationSec: 90 * 60,
+  },
+  {
+    // Official Claptone upload (CLAPCAST #576). Operator 1001 URL
+    // uq8g1pk recorded in known-1001-urls pendingCuePaste — do not
+    // scrape or invent 1001tl rows. Description has 14 untimed tracks.
+    // Slug: sc-claptone-clapcast-576 (never sc-https://…).
+    // Mixcloud https://www.mixcloud.com/Claptone/clapcast-576/ is a mirror.
+    url: "https://soundcloud.com/claptone/clapcast-576",
+    primaryArtist: dj("Claptone", {
+      accent: "#ffd60a",
+    }),
+    genre: "Deep House",
+    seriesName: "Clapcast",
+    type: "radio",
+    minDurationSec: 30 * 60,
+  },
+  {
+    // Official brandonsounds upload; 1001TL wired via
+    // sc-brandonsounds-brandon-live-at-parookaville-2024-desert-valley
+    // (same list as yt-AQ6wWT2HaSQ). Never wire sc-https://….
+    url: "https://soundcloud.com/brandonsounds/brandon-live-at-parookaville-2024-desert-valley",
+    primaryArtist: dj("BRANDON", {
+      accent: "#ff5e5e",
+      homeCity: "Germany",
+    }),
+    genre: "Tech House",
+    seriesName: "Parookaville",
+    type: "festival",
+    minDurationSec: 50 * 60,
+  },
 ];

@@ -13,6 +13,7 @@ import {
 import {
   catalogArtistIndex,
   matchLineupName,
+  nightHeadliner,
   nightMentionsDj,
 } from "@/lib/lineupMatch";
 import { CURATED_LABEL_SLUGS } from "@/lib/ingest/curatedLabels";
@@ -510,10 +511,16 @@ export async function getFestivalEditionBoard(nowMs = Date.now()) {
     nowMs,
   );
 
-  const nightRows = await prisma.venueNight.findMany({
-    include: { event: { select: { slug: true, name: true, imageUrl: true } } },
-    orderBy: { startsAt: "asc" },
-  });
+  const [nightRows, catalogRows] = await Promise.all([
+    prisma.venueNight.findMany({
+      include: { event: { select: { slug: true, name: true, imageUrl: true } } },
+      orderBy: { startsAt: "asc" },
+    }),
+    prisma.dj.findMany({
+      select: { slug: true, name: true, imageUrl: true, accent: true },
+    }),
+  ]);
+  const catalog = catalogArtistIndex(catalogRows);
   const nights: VenueNightCalendarRow[] = [];
   for (const row of nightRows) {
     const startsAt = isoUTC(row.startsAt);
@@ -524,6 +531,8 @@ export async function getFestivalEditionBoard(nowMs = Date.now()) {
     if (row.event.imageUrl && !images.has(row.event.slug)) {
       images.set(row.event.slug, row.event.imageUrl);
     }
+    const billed = parseJsonStringList(row.artistsJson);
+    const lineup = billed.map((name) => matchLineupName(name, catalog));
     nights.push({
       slug: row.slug,
       eventSlug: row.event.slug,
@@ -533,7 +542,9 @@ export async function getFestivalEditionBoard(nowMs = Date.now()) {
       bucket,
       sourceUrl: row.sourceUrl,
       ticketsUrl: row.ticketsUrl,
-      artists: parseJsonStringList(row.artistsJson),
+      artists: billed,
+      lineup,
+      headliner: nightHeadliner(row.title, lineup, catalog),
     });
   }
 
@@ -890,7 +901,9 @@ async function upcomingNightsForDj(
     const startsAt = isoUTC(row.startsAt);
     const endsAt = row.endsAt ? isoUTC(row.endsAt) : startsAt;
     if (bucketVenueNight(startsAt, endsAt, nowMs) === "past") continue;
-    if (!nightMentionsDj(parseJsonStringList(row.artistsJson), dj)) continue;
+    if (!nightMentionsDj(parseJsonStringList(row.artistsJson), dj, row.title)) {
+      continue;
+    }
     out.push({
       slug: row.slug,
       title: row.title,
@@ -1447,13 +1460,18 @@ export async function getVenueBySlug(slug: string) {
       where: { eventId: event.id },
       orderBy: { startsAt: "asc" },
     }),
-    prisma.dj.findMany({ select: { slug: true, name: true } }),
+    prisma.dj.findMany({
+      select: { slug: true, name: true, imageUrl: true, accent: true },
+    }),
   ]);
   const catalog = catalogArtistIndex(catalogRows);
   const nights = nightRows
     .map((row) => {
       const startsAt = isoUTC(row.startsAt);
       const endsAt = row.endsAt ? isoUTC(row.endsAt) : startsAt;
+      const artists = parseJsonStringList(row.artistsJson).map((name) =>
+        matchLineupName(name, catalog),
+      );
       return {
         slug: row.slug,
         title: row.title,
@@ -1462,9 +1480,8 @@ export async function getVenueBySlug(slug: string) {
         bucket: bucketVenueNight(startsAt, endsAt, Date.now()),
         sourceUrl: row.sourceUrl,
         ticketsUrl: row.ticketsUrl,
-        artists: parseJsonStringList(row.artistsJson).map((name) =>
-          matchLineupName(name, catalog),
-        ),
+        artists,
+        headliner: nightHeadliner(row.title, artists, catalog),
       };
     })
     .filter((n) => n.bucket !== "past");

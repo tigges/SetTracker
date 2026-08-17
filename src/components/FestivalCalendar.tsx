@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { EntityThumb } from "@/components/EntityThumb";
+import { LineupArtistChips } from "@/components/LineupArtistChips";
 import {
   CALENDAR_WEEKDAYS,
   editionCoversDay,
@@ -25,8 +26,8 @@ const BUCKET_TONE: Record<string, string> = {
 };
 
 const CLUB_TONE: Record<string, string> = {
-  current: "bg-teal/20 text-teal",
-  upcoming: "bg-teal/15 text-teal",
+  current: "bg-brand/20 text-brand",
+  upcoming: "bg-brand/15 text-brand",
   recent: "bg-panel2 text-muted",
 };
 
@@ -52,6 +53,8 @@ type CalendarItem = {
   bucket: string;
   kind: "festival" | "club";
   nightTitle?: string;
+  lineup?: CalendarNight["lineup"];
+  headliner?: CalendarNight["headliner"];
 };
 
 function shortName(e: CalendarItem): string {
@@ -90,6 +93,8 @@ function toItems(
       bucket: n.bucket,
       kind: "club" as const,
       nightTitle: n.title,
+      lineup: n.lineup,
+      headliner: n.headliner,
     })),
   ];
 }
@@ -170,7 +175,7 @@ export function FestivalCalendar({
                               href={`/events/${e.eventSlug}`}
                               className={`block truncate rounded px-1 py-0.5 text-[10px] font-medium leading-tight ${
                                 e.kind === "club"
-                                  ? (CLUB_TONE[e.bucket] ?? "bg-teal/15 text-teal")
+                                  ? (CLUB_TONE[e.bucket] ?? "bg-brand/15 text-brand")
                                   : (BUCKET_TONE[e.bucket] ?? "bg-panel2 text-muted")
                               }`}
                               title={
@@ -197,45 +202,87 @@ export function FestivalCalendar({
               </div>
             </div>
             {monthEds.length > 0 ? (
-              <ul className="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-2">
-                {monthEds.map((e) => (
-                  <li
-                    key={e.slug}
-                    className="card flex items-center gap-3 p-3"
-                  >
-                    <Link
-                      href={`/events/${e.eventSlug}`}
-                      className="flex min-w-0 flex-1 items-center gap-3"
+              <ul className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
+                {monthEds.map((e) => {
+                  const club = e.kind === "club";
+                  const head = e.headliner;
+                  const title = club && e.nightTitle ? e.nightTitle : e.name;
+                  const thumbHref =
+                    club && head?.slug ? `/djs/${head.slug}` : `/events/${e.eventSlug}`;
+                  return (
+                    <li
+                      key={e.slug}
+                      className="card flex flex-col gap-3 p-4 transition-colors hover:border-[color:var(--muted2)]"
                     >
-                      <EntityThumb
-                        src={e.imageUrl}
-                        label={e.name}
-                        accent={e.kind === "club" ? "var(--teal)" : "var(--amber)"}
-                        size={44}
-                        radius={10}
-                        monogram={e.name.slice(0, 2).toUpperCase()}
-                      />
-                      <span className="min-w-0 flex-1">
-                        <span className="block truncate text-[14px] font-semibold text-ink">
-                          {e.kind === "club" && e.nightTitle
-                            ? e.nightTitle
-                            : e.name}
-                          <span className="font-normal text-muted">
-                            {e.kind === "club"
-                              ? ` · ${e.name}`
-                              : ` · ${e.year}${e.label ? ` ${e.label}` : ""}`}
+                      <div className="flex items-start gap-3">
+                        <Link href={thumbHref} className="flex-none">
+                          <EntityThumb
+                            src={club ? (head?.imageUrl ?? e.imageUrl) : e.imageUrl}
+                            label={title}
+                            accent={
+                              club
+                                ? head?.accent || "var(--brand)"
+                                : "var(--amber)"
+                            }
+                            size={44}
+                            radius={12}
+                            monogram={title.slice(0, 2).toUpperCase()}
+                          />
+                        </Link>
+                        <span className="min-w-0 flex-1">
+                          <span className="block truncate text-[15px] font-semibold text-ink">
+                            {club && head?.slug ? (
+                              <Link
+                                href={`/djs/${head.slug}`}
+                                className="transition-colors hover:text-brand"
+                                title="In catalog"
+                              >
+                                {title}
+                              </Link>
+                            ) : (
+                              <Link
+                                href={`/events/${e.eventSlug}`}
+                                className="transition-colors hover:text-brand"
+                              >
+                                {title}
+                              </Link>
+                            )}
+                            <span className="font-normal text-muted">
+                              {club ? (
+                                <>
+                                  {" · "}
+                                  <Link
+                                    href={`/events/${e.eventSlug}`}
+                                    className="transition-colors hover:text-ink"
+                                  >
+                                    {e.name}
+                                  </Link>
+                                </>
+                              ) : (
+                                ` · ${e.year}${e.label ? ` ${e.label}` : ""}`
+                              )}
+                            </span>
                           </span>
+                          <span className="mono text-[12px] text-muted2">
+                            {e.startsAt}
+                            {e.endsAt !== e.startsAt ? ` – ${e.endsAt}` : ""}
+                            {" · "}
+                            {BUCKET_COPY[e.bucket] ?? e.bucket}
+                          </span>
+                          {club && e.lineup?.length ? (
+                            <div className="mt-2">
+                              <LineupArtistChips
+                                artists={e.lineup}
+                                previewCount={4}
+                                compact
+                              />
+                            </div>
+                          ) : null}
                         </span>
-                        <span className="mono text-[12px] text-muted2">
-                          {e.startsAt}
-                          {e.endsAt !== e.startsAt ? ` – ${e.endsAt}` : ""}
-                          {" · "}
-                          {BUCKET_COPY[e.bucket] ?? e.bucket}
-                        </span>
-                      </span>
-                    </Link>
-                  </li>
-                ))}
+                      </div>
+                    </li>
+                  );
+                })}
               </ul>
             ) : null}
           </section>

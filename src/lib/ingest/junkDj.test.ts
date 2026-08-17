@@ -17,6 +17,8 @@ describe("junkDj", () => {
       "nonset",
     );
     assert.equal(classifyJunkDj("Dom Dolla"), null);
+    assert.equal(classifyJunkDj("Tape B"), null);
+    assert.equal(classifyJunkDj("Tape B", "tape-b"), null);
     assert.equal(classifyJunkDj("House, Tech"), "other");
     assert.equal(classifyJunkDj("House, Tech & Minimal: 12.03.22"), "other");
     assert.equal(

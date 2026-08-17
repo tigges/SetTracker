@@ -140,6 +140,11 @@ import {
   TL_LUCAS_STEVE_TML_WE2_2024,
   TL_KNOCK2_ZEDD_HARD_SUMMER_2026,
   TL_COLE_TERRAZAS_HARD_SUMMER_2026,
+  TL_TAPE_B_CARTUNES_VOL5_2026,
+  TL_MAU_P_XXX_RADIO_201_2026,
+  TL_VINTAGE_CULTURE_ROBOT_HEART_RESIDENCY_UNITED_STATES_2024,
+  TL_JOHN_SUMMIT_BURNING_MAN_PLAYA_PACKAGE_MIX_2025,
+  TL_BRANDON_DESERT_VALLEY_PAROOKAVILLE_GERMANY_2024,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   tracklist1001RowsToPlays,
@@ -2819,5 +2824,168 @@ for (let i = 1; i < coleHard.length; i++) {
 // Liu TML artist Relive — no 1001 URL found; do not invent a wire.
 assert.equal(isWiredTracklistSlug("yt-DWPSLZLKslg"), false);
 assert.equal(TRACKLIST_1001_BY_SOURCE_SLUG["yt-DWPSLZLKslg"], undefined);
+
+assertSeedClocks(TL_TAPE_B_CARTUNES_VOL5_2026);
+assert.equal(TL_TAPE_B_CARTUNES_VOL5_2026.length, 35);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-7_O8N_EJg_c"],
+  TL_TAPE_B_CARTUNES_VOL5_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-tape-b-official-tape-b-cartunes-vol-5"],
+  TL_TAPE_B_CARTUNES_VOL5_2026,
+);
+assert.equal(isWiredTracklistSlug("yt-7_O8N_EJg_c"), true);
+assert.equal(
+  isWiredTracklistSlug("sc-tape-b-official-tape-b-cartunes-vol-5"),
+  true,
+);
+const tapeBCt5 = tracklist1001RowsToPlays(TL_TAPE_B_CARTUNES_VOL5_2026);
+assert.equal(tapeBCt5.length, 35);
+assert.equal(tapeBCt5[0]?.provenance, "1001tl");
+assert.equal(tapeBCt5[0]?.artistName, "Dubba Jonny");
+assert.equal(
+  tapeBCt5[0]?.trackTitle,
+  "A Brief Introduction On Dubstep Production (Tape B Edit)",
+);
+assert.equal(tapeBCt5[0]?.timestamp, 20);
+assert.equal(tapeBCt5[34]?.artistName, "Lana Del Rey");
+assert.match(String(tapeBCt5[34]?.trackTitle), /Young & Beautiful/);
+assert.equal(tapeBCt5[34]?.timestamp, 57 * 60 + 34);
+for (let i = 1; i < tapeBCt5.length; i++) {
+  assert.ok(
+    (tapeBCt5[i]!.timestamp ?? 0) > (tapeBCt5[i - 1]!.timestamp ?? 0),
+    `Tape B CarTunes Vol. 5 clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_MAU_P_XXX_RADIO_201_2026);
+assert.equal(TL_MAU_P_XXX_RADIO_201_2026.length, 8);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-realmaup-xxx-radio-201"],
+  TL_MAU_P_XXX_RADIO_201_2026,
+);
+assert.equal(isWiredTracklistSlug("sc-realmaup-xxx-radio-201"), true);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-https://soundcloud.com/realmaup/xxx-radio-201"
+  ],
+  undefined,
+);
+const mauPXxx = tracklist1001RowsToPlays(TL_MAU_P_XXX_RADIO_201_2026);
+assert.equal(mauPXxx.length, 8);
+assert.equal(mauPXxx[0]?.provenance, "1001tl");
+assert.equal(mauPXxx[0]?.artistName, "Chris Brooks & Resco (US)");
+assert.equal(mauPXxx[0]?.trackTitle, "Dat Funk");
+assert.equal(mauPXxx[0]?.timestamp, 20);
+assert.equal(mauPXxx[7]?.artistName, "Bagheera (FR)");
+assert.equal(mauPXxx[7]?.trackTitle, "7 Heures Du Matin");
+assert.equal(mauPXxx[7]?.timestamp, 48 * 60 + 50);
+for (let i = 1; i < mauPXxx.length; i++) {
+  assert.ok(
+    (mauPXxx[i]!.timestamp ?? 0) > (mauPXxx[i - 1]!.timestamp ?? 0),
+    `Mau P XXX Radio 201 clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_VINTAGE_CULTURE_ROBOT_HEART_RESIDENCY_UNITED_STATES_2024);
+assert.equal(TL_VINTAGE_CULTURE_ROBOT_HEART_RESIDENCY_UNITED_STATES_2024.length, 26);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-KbGNocaJDjw"],
+  TL_VINTAGE_CULTURE_ROBOT_HEART_RESIDENCY_UNITED_STATES_2024,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-vintageculturemusic-vintage-culture-robot-heart-residency-2024-california"
+  ],
+  TL_VINTAGE_CULTURE_ROBOT_HEART_RESIDENCY_UNITED_STATES_2024,
+);
+assert.equal(isWiredTracklistSlug("yt-KbGNocaJDjw"), true);
+const vcRobot = tracklist1001RowsToPlays(
+  TL_VINTAGE_CULTURE_ROBOT_HEART_RESIDENCY_UNITED_STATES_2024,
+);
+assert.equal(vcRobot.length, 26);
+assert.equal(vcRobot[0]?.provenance, "1001tl");
+assert.equal(vcRobot[0]?.artistName, "Bedouin");
+assert.equal(vcRobot[0]?.trackTitle, "Tijuana (Vintage Culture Remix)");
+assert.equal(vcRobot[25]?.artistName, "Vintage Culture ft. Noah Kulaga");
+assert.equal(vcRobot[25]?.trackTitle, "Upon Your Skin");
+assert.equal(vcRobot[25]?.timestamp, 2 * 3600 + 14 * 60 + 45);
+
+assertSeedClocks(TL_JOHN_SUMMIT_BURNING_MAN_PLAYA_PACKAGE_MIX_2025);
+assert.equal(TL_JOHN_SUMMIT_BURNING_MAN_PLAYA_PACKAGE_MIX_2025.length, 6);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-PkWNuf7rtms"],
+  TL_JOHN_SUMMIT_BURNING_MAN_PLAYA_PACKAGE_MIX_2025,
+);
+assert.equal(isWiredTracklistSlug("yt-PkWNuf7rtms"), true);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-PkWNuf7rtms"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-PlArfyuzuqo"],
+);
+const playaPackage = tracklist1001RowsToPlays(
+  TL_JOHN_SUMMIT_BURNING_MAN_PLAYA_PACKAGE_MIX_2025,
+);
+assert.equal(playaPackage.length, 6);
+assert.equal(playaPackage[0]?.provenance, "1001tl");
+assert.equal(playaPackage[0]?.artistName, "John Summit ft. Inéz");
+assert.equal(playaPackage[0]?.trackTitle, "crystallized (Playa Dub Remix)");
+assert.equal(playaPackage[5]?.artistName, "John Summit ft. CLOVES");
+assert.equal(playaPackage[5]?.trackTitle, "Focus (EdiP Remix)");
+assert.equal(playaPackage[5]?.timestamp, 21 * 60 + 50);
+
+assertSeedClocks(TL_BRANDON_DESERT_VALLEY_PAROOKAVILLE_GERMANY_2024);
+assert.equal(TL_BRANDON_DESERT_VALLEY_PAROOKAVILLE_GERMANY_2024.length, 37);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-AQ6wWT2HaSQ"],
+  TL_BRANDON_DESERT_VALLEY_PAROOKAVILLE_GERMANY_2024,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-brandonsounds-brandon-live-at-parookaville-2024-desert-valley"
+  ],
+  TL_BRANDON_DESERT_VALLEY_PAROOKAVILLE_GERMANY_2024,
+);
+assert.equal(isWiredTracklistSlug("yt-AQ6wWT2HaSQ"), true);
+assert.equal(
+  isWiredTracklistSlug(
+    "sc-brandonsounds-brandon-live-at-parookaville-2024-desert-valley",
+  ),
+  true,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-https://soundcloud.com/brandonsounds/brandon-live-at-parookaville-2024-desert-valley"
+  ],
+  undefined,
+);
+const brandonPv = tracklist1001RowsToPlays(
+  TL_BRANDON_DESERT_VALLEY_PAROOKAVILLE_GERMANY_2024,
+);
+assert.equal(brandonPv.length, 37);
+assert.equal(brandonPv[0]?.provenance, "1001tl");
+assert.equal(brandonPv[0]?.artistName, "Victor Lou & Visage Music");
+assert.equal(brandonPv[0]?.trackTitle, "Pleya");
+assert.equal(brandonPv[0]?.timestamp, 1);
+assert.equal(brandonPv[36]?.artistName, "Andrewboy ft. Moby");
+assert.equal(brandonPv[36]?.trackTitle, "Porcelain");
+assert.equal(brandonPv[36]?.timestamp, 57 * 60 + 41);
+for (let i = 1; i < brandonPv.length; i++) {
+  assert.ok(
+    (brandonPv[i]!.timestamp ?? 0) > (brandonPv[i - 1]!.timestamp ?? 0),
+    `BRANDON Parookaville 2024 clocks must increase at index ${i}`,
+  );
+}
+
+// Claptone Clapcast 576 — official SC Relive in, 1001 URL recorded,
+// no cue paste. Do not invent 1001tl rows or sc-https://… slugs.
+assert.equal(isWiredTracklistSlug("sc-claptone-clapcast-576"), false);
+assert.equal(TRACKLIST_1001_BY_SOURCE_SLUG["sc-claptone-clapcast-576"], undefined);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-https://soundcloud.com/claptone/clapcast-576"
+  ],
+  undefined,
+);
 
 console.log("tracklists1001/seeds.test.ts ok");

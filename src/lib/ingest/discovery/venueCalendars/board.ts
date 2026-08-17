@@ -1,3 +1,4 @@
+import type { LineupName } from "@/lib/lineupMatch";
 import type { EditionCalendarBucket } from "../../festivalDrops";
 
 const DAY_MS = 24 * 60 * 60 * 1000;
@@ -12,6 +13,8 @@ export type VenueNightCalendarRow = {
   sourceUrl: string;
   ticketsUrl: string | null;
   artists: string[];
+  lineup?: LineupName[];
+  headliner?: LineupName | null;
 };
 
 export function bucketVenueNight(
