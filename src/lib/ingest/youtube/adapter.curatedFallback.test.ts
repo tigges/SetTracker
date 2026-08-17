@@ -97,6 +97,9 @@ const ALAN_WALKER_TML_WE1_2018 = YOUTUBE_SETS.find((s) =>
 const GORDO_TML_WE2_2023 = YOUTUBE_SETS.find((s) =>
   s.video.includes("lopIWBJ0T5I"),
 );
+const LUCAS_STEVE_TML_WE2_2024 = YOUTUBE_SETS.find((s) =>
+  s.video.includes("GbG_OFmdPKk"),
+);
 
 describe("watchMetaFromCuratedSeed", () => {
   it("builds ASOT 1290 meta from the curated 1001 capture", () => {
@@ -219,6 +222,18 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=lopIWBJ0T5I");
     // Last cue 58:38 + 180s pad.
     assert.equal(meta.durationSec, 58 * 60 + 38 + 180);
+  });
+
+  it("builds Lucas & Steve TML WE2 2024 meta from the curated 1001 capture", () => {
+    assert.ok(LUCAS_STEVE_TML_WE2_2024);
+    const meta = watchMetaFromCuratedSeed(LUCAS_STEVE_TML_WE2_2024);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "GbG_OFmdPKk");
+    assert.match(meta.title, /Lucas & Steve/i);
+    assert.match(meta.title, /2024/);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=GbG_OFmdPKk");
+    // Last cue 1:01:56 + 180s pad.
+    assert.equal(meta.durationSec, 1 * 3600 + 1 * 60 + 56 + 180);
   });
 
   it("builds ILLENIUM TML WE1 Great Library meta from the curated 1001 capture", () => {
@@ -1339,5 +1354,20 @@ describe("curated YouTube 429 fallback", () => {
     assert.equal(sets[0]?.primaryArtist?.slug, "gordo");
     assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
     assert.match(String(sets[0]?.title ?? ""), /2023/);
+  });
+
+  it("lands Lucas & Steve TML WE2 2024 from the 1001 seed when watch is 429", async () => {
+    assert.ok(LUCAS_STEVE_TML_WE2_2024);
+    const adapter = createYoutubeAdapter([LUCAS_STEVE_TML_WE2_2024], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-GbG_OFmdPKk");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 61);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 61 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "lucas-steve");
+    assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
+    assert.match(String(sets[0]?.title ?? ""), /2024/);
   });
 });

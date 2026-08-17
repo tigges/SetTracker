@@ -521,3 +521,78 @@ export const TL_GORDO_TML_WE2_2023: FingerprintSeedRow[] = [
   { at: "58:38", artist: "Benny Benassi pres. The Biz", title: "Satisfaction (Justus Remix)" },
 ];
 
+/**
+ * Lucas & Steve @ The Library Stage, Tomorrowland Weekend 2, Belgium 2024-07-26
+ * https://www.1001tracklists.com/tracklist/1t9g49st/lucas-steve-the-library-stage-tomorrowland-weekend-2-belgium-2024-07-26.html
+ * Official YT: https://youtu.be/GbG_OFmdPKk
+ * Capture overlay used TL_Lucas&Steve_Library-Stage_Tomorrowland_WE2_Belgium_2024
+ * (`&` / hyphens illegal); constant is TL_LUCAS_STEVE_TML_WE2_2024.
+ * Distinct from TL_LUCAS_STEVE_TML_WE2_2026 (yt-LE-byccuovI).
+ * Archive-titled Relive — stays off /capture-1001 extras via isArchiveTitledSet.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-GbG_OFmdPKk"]
+ * Captured 2026-08-17 - provenance 1001tl.
+ */
+export const TL_LUCAS_STEVE_TML_WE2_2024: FingerprintSeedRow[] = [
+  { at: "0:12", artist: "AFROJACK & Lucas & Steve & DubVision ft. Taranteeno", title: "Anywhere With You" },
+  { at: "1:27", artist: "Tiësto & Lucas & Steve & Silent Child & Sān-Z", title: "ZENLESS" },
+  { at: "2:43", artist: "Axwell Λ Ingrosso", title: "More Than You Know (Acappella)" },
+  { at: "3:58", artist: "Steve Aoki & JJ Lin", title: "The Show (Steve Aoki & Lucas & Steve Remix)" },
+  { at: "4:51", artist: "Tiësto & Dzeko ft. Preme & Post Malone", title: "Jackie Chan" },
+  { at: "6:06", artist: "Martin Garrix", title: "Animals (Lucas & Steve Flip)" },
+  { at: "6:25", artist: "Mightyfools", title: "Footrocker (Get Your, Get Your Hands Up Acappella)" },
+  { at: "7:05", artist: "Yeah Yeah Yeahs", title: "Heads Will Roll (DiscoTech Remix)" },
+  { at: "8:15", artist: "AFROJACK & Lucas & Steve", title: "Control" },
+  { at: "8:57", artist: "Steve Aoki & Lucas & Steve", title: "Loco" },
+  { at: "10:11", artist: "Alesso", title: "Hypnotize" },
+  { at: "12:25", artist: "Lucas & Steve X Tungevaag ft. Philip Strand", title: "Paper Planes" },
+  { at: "15:04", artist: "Lucas & Steve", title: "Anywhere" },
+  { at: "15:48", artist: "Lucas & Steve", title: "Legacy" },
+  { at: "17:17", artist: "Sam Feldt X Lucas & Steve ft. Wulf", title: "Summer On You" },
+  { at: "19:00", artist: "Lucas & Steve vs. Sean Paul", title: "Emergency vs. Get Busy (Lucas & Steve Mashup)" },
+  { at: "19:53", artist: "Lucas & Steve", title: "Emergency" },
+  { at: "20:46", artist: "Sean Paul", title: "Get Busy (Acappella)" },
+  { at: "21:39", artist: "Lucas & Steve", title: "Renegade Master" },
+  { at: "24:21", artist: "Lucas & Steve vs. David Guetta & Chris Willis", title: "SICK vs. Love Don't Let Me Go (Armin van Buuren Mashup)" },
+  { at: "24:41", artist: "David Guetta ft. Chris Willis", title: "Love Don't Let Me Go (Acappella)" },
+  { at: "25:02", artist: "Lucas & Steve", title: "SICK" },
+  { at: "25:22", artist: "Zombie Nation", title: "Kernkraft 400" },
+  { at: "25:44", artist: "Mightyfools", title: "Footrocker (Get Your, Get Your Hands Up Acappella)" },
+  { at: "26:05", artist: "Showtek ft. We Are Loud & Sonny Wilson", title: "Booyah (Lucas & Steve Remix)" },
+  { at: "28:32", artist: "Lucas & Steve ft. Laura White", title: "Are You Ready" },
+  { at: "28:35", artist: "Shakedown", title: "At Night (Acappella)" },
+  { at: "30:48", artist: "Lucas & Steve vs. Avicii & RAS", title: "Source vs. The Nights (Lucas & Steve Mashup)" },
+  { at: "31:29", artist: "Lucas & Steve", title: "Source" },
+  { at: "32:11", artist: "Avicii ft. RAS", title: "The Nights (Acappella)" },
+  { at: "32:52", artist: "Post Malone ft. Morgan Wallen", title: "I Had Some Help" },
+  { at: "32:54", artist: "Otto Knows", title: "Million Voices" },
+  { at: "33:53", artist: "DubVision vs. Corona", title: "P.R.O.G.2 vs. The Rhythm Of The Night (DubVision Mashup)" },
+  { at: "34:38", artist: "Corona", title: "The Rhythm Of The Night (Acappella)" },
+  { at: "35:23", artist: "DubVision", title: "P.R.O.G.2" },
+  { at: "36:08", artist: "Alesso & Sentinel vs. Avicii", title: "Only You vs. Without You (JAYBEE Mashup)" },
+  { at: "36:44", artist: "Avicii ft. Sandro Cavazza", title: "Without You (Acappella)" },
+  { at: "37:20", artist: "Alesso & Sentinel", title: "Only You" },
+  { at: "37:55", artist: "Martin Garrix & Third ≡ Party & Oaks vs. The Temper Trap", title: "Carry You vs. Sweet Disposition (Martin Garrix Mashup)" },
+  { at: "38:36", artist: "The Temper Trap", title: "Sweet Disposition (Acappella)" },
+  { at: "39:17", artist: "Martin Garrix & Third ≡ Party ft. Oaks & Declan J Donovan", title: "Carry You" },
+  { at: "39:57", artist: "Lucas & Steve", title: "Feel So Good" },
+  { at: "40:19", artist: "Cassius ft. Steve Edwards", title: "The Sound Of Violence (Acappella)" },
+  { at: "42:33", artist: "Steve Angello & Laidback Luke vs. Benny Benassi", title: "Be Satisfied (Swedish House Mafia Bootleg)" },
+  { at: "42:46", artist: "Steve Angello & Laidback Luke ft. Rowetta", title: "Be" },
+  { at: "42:59", artist: "Benny Benassi pres. The Biz", title: "Satisfaction" },
+  { at: "43:12", artist: "David Guetta vs. Benny Benassi", title: "Satisfaction" },
+  { at: "44:08", artist: "David Guetta ft. Akon", title: "Sexy Bitch (Lucas & Steve Flip)" },
+  { at: "48:06", artist: "Knock2", title: "dashstar* (VIP)" },
+  { at: "48:07", artist: "Daft Punk", title: "Technologic (Acappella)" },
+  { at: "48:56", artist: "Madison Mars & Lucas & Steve vs. OneRepublic", title: "Lunar vs. If I Lose Myself (Lucas & Steve Mashup)" },
+  { at: "49:23", artist: "Alesso & OneRepublic", title: "If I Lose Myself" },
+  { at: "49:50", artist: "Alesso & OneRepublic", title: "If I Lose Myself (Acappella)" },
+  { at: "50:17", artist: "Madison Mars X Lucas & Steve", title: "Lunar" },
+  { at: "50:43", artist: "Sebastian Ingrosso & Tommy Trash ft. John Martin", title: "Reload (Lucas & Steve Remix)" },
+  { at: "52:54", artist: "AFROJACK & Martin Garrix", title: "Turn Up The Speakers (Hardwell Rework)" },
+  { at: "53:46", artist: "Fais ft. Afrojack", title: "Hey (Acappella)" },
+  { at: "54:37", artist: "Lucas & Steve", title: "Up Till Dawn (On The Move) (Lucas & Steve 2024 Edit)" },
+  { at: "56:21", artist: "Artemas", title: "i like the way you kiss me" },
+  { at: "57:52", artist: "AFROJACK & Lucas & Steve & DubVision ft. Taranteeno", title: "Anywhere With You (Festival Mix)" },
+  { at: "1:01:56", artist: "LUM!X & Lucas & Steve", title: "Can't Forget You (Club Mix)" },
+];
+

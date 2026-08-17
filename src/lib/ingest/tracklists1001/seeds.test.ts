@@ -137,6 +137,7 @@ import {
   TL_OLIVER_HELDENS_TML_WE1_2026,
   TL_ALAN_WALKER_TML_WE1_2018,
   TL_GORDO_TML_WE2_2023,
+  TL_LUCAS_STEVE_TML_WE2_2024,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   tracklist1001RowsToPlays,
@@ -2726,6 +2727,36 @@ for (let i = 1; i < gordoWe2.length; i++) {
   assert.ok(
     (gordoWe2[i]!.timestamp ?? 0) > (gordoWe2[i - 1]!.timestamp ?? 0),
     `GORDO TML WE2 2023 clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_LUCAS_STEVE_TML_WE2_2024);
+assert.equal(TL_LUCAS_STEVE_TML_WE2_2024.length, 61);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-GbG_OFmdPKk"],
+  TL_LUCAS_STEVE_TML_WE2_2024,
+);
+assert.equal(isWiredTracklistSlug("yt-GbG_OFmdPKk"), true);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-GbG_OFmdPKk"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-LE-byccuovI"],
+);
+const lucasSteveWe2_2024 = tracklist1001RowsToPlays(TL_LUCAS_STEVE_TML_WE2_2024);
+assert.equal(lucasSteveWe2_2024.length, 61);
+assert.equal(lucasSteveWe2_2024[0]?.provenance, "1001tl");
+assert.equal(lucasSteveWe2_2024[0]?.timestamp, 12);
+assert.equal(
+  lucasSteveWe2_2024[0]?.artistName,
+  "AFROJACK & Lucas & Steve & DubVision ft. Taranteeno",
+);
+assert.equal(lucasSteveWe2_2024[0]?.trackTitle, "Anywhere With You");
+assert.equal(lucasSteveWe2_2024[60]?.trackTitle, "Can't Forget You (Club Mix)");
+assert.equal(lucasSteveWe2_2024[60]?.timestamp, 1 * 3600 + 1 * 60 + 56);
+for (let i = 1; i < lucasSteveWe2_2024.length; i++) {
+  assert.ok(
+    (lucasSteveWe2_2024[i]!.timestamp ?? 0) >
+      (lucasSteveWe2_2024[i - 1]!.timestamp ?? 0),
+    `Lucas & Steve TML WE2 2024 clocks must increase at index ${i}`,
   );
 }
 

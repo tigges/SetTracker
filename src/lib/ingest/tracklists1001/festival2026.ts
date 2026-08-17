@@ -77,6 +77,7 @@ import {
   TL_GORDO_TML_WE2_2023,
   TL_I_HATE_MODELS_TML_WE1_2026,
   TL_ILLENIUM_TML_WE1_2026,
+  TL_LUCAS_STEVE_TML_WE2_2024,
   TL_NETSKY_TML_WE1_2026,
   TL_OLIVER_HELDENS_TML_WE1_2026,
 } from "./festivalCaptures20260817";
@@ -148,6 +149,7 @@ export {
   TL_OLIVER_HELDENS_TML_WE1_2026,
   TL_ALAN_WALKER_TML_WE1_2018,
   TL_GORDO_TML_WE2_2023,
+  TL_LUCAS_STEVE_TML_WE2_2024,
 };
 
 function formatClock(sec: number): string {
@@ -4671,6 +4673,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-2i3XOxbp54U": TL_OLIVER_HELDENS_TML_WE1_2026,
   "yt-xVWs0ti0J90": TL_ALAN_WALKER_TML_WE1_2018,
   "yt-lopIWBJ0T5I": TL_GORDO_TML_WE2_2023,
+  "yt-GbG_OFmdPKk": TL_LUCAS_STEVE_TML_WE2_2024,
 };
 
 /** Sanity: every seeded clock must parse. */

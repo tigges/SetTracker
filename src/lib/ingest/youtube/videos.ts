@@ -105,6 +105,7 @@ import {
   TL_WESTEND_EDC_LV_2026,
   TL_ALAN_WALKER_TML_WE1_2018,
   TL_GORDO_TML_WE2_2023,
+  TL_LUCAS_STEVE_TML_WE2_2024,
   TL_ALESSO_TML_WE1_2026,
   TL_ALESSO_TML_WE2_2026,
   TL_CHASE_STATUS_TML_WE2_2026,
@@ -2297,6 +2298,9 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     title: "Lucas & Steve WE2 | Tomorrowland 2024",
     seriesName: "Tomorrowland",
     eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1t9g49st/lucas-steve-the-library-stage-tomorrowland-weekend-2-belgium-2024-07-26.html",
+    tracklist1001: TL_LUCAS_STEVE_TML_WE2_2024,
   },
   {
     video: "https://www.youtube.com/watch?v=lopIWBJ0T5I",
