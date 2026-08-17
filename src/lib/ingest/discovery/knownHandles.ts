@@ -533,6 +533,12 @@ export const KNOWN_HANDLES: Record<string, HandleHint> = {
     genre: "Progressive House",
     accent: "#e63946",
   },
+  liu: {
+    youtubeHandle: "@Liumusic",
+    soundcloudPermalink: "liulive",
+    genre: "Bass House",
+    accent: "#2a9d8f",
+  },
 };
 
 export function hintForName(name: string): HandleHint | undefined {

@@ -2315,8 +2315,10 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     eventName: "Ultra Melbourne",
   },
   {
+    // Artist-channel Relive (@Liumusic). No 1001Tracklists URL in the
+    // description — do not invent one. Capture if a 1001 page appears.
     video: "https://www.youtube.com/watch?v=DWPSLZLKslg",
-    primaryArtist: dj("Liu", { accent: "#2a9d8f" }),
+    primaryArtist: dj("Liu", { accent: "#2a9d8f", homeCity: "Brazil" }),
     genre: "Brazilian Bass",
     type: "festival",
     title: "Liu @ Tomorrowland Belgium",
