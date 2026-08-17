@@ -150,6 +150,8 @@ async function fillSocial(
   if (field === "website" && current.website) return;
   // Labels / events have no youtube column — only fill on Dj.
   if (field === "youtube" && target.kind !== "dj") return;
+  // Label has no twitter column.
+  if (field === "twitter" && target.kind === "label") return;
   if (
     target.kind === "event" &&
     (field === "soundcloud" || field === "instagram" || field === "twitter") &&
