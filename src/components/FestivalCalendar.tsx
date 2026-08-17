@@ -162,7 +162,7 @@ export function FestivalCalendar({
                             ? "font-semibold text-brand"
                             : c.inMonth
                               ? "text-muted"
-                              : "text-muted2/50"
+                              : "text-muted2"
                         }`}
                       >
                         {c.day}
