@@ -129,6 +129,7 @@ import {
   TL_LUCAS_AND_STEVE_AND_MIKE_WILLIAMS_DONT_LET_DADDY_KNOW_ZIGGO_DOME_AMSTERDAM_2026,
   TL_INDIRA_PAGANOTTO_ATMOSPHERE_STAGE_TOMORROWLAND_WE1_BELGIUM_2023,
   TL_DJS_FROM_MARS_MASH_UP_UNIVERSE_056_2026,
+  TL_ALESSO_TML_WE1_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   tracklist1001RowsToPlays,
@@ -2534,6 +2535,28 @@ for (let i = 1; i < dfm056.length; i++) {
   assert.ok(
     (dfm056[i]!.timestamp ?? 0) > (dfm056[i - 1]!.timestamp ?? 0),
     `DJs From Mars Mash-Up Universe 056 clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_ALESSO_TML_WE1_2026);
+assert.equal(TL_ALESSO_TML_WE1_2026.length, 42);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-TidwOi0NMI0"],
+  TL_ALESSO_TML_WE1_2026,
+);
+assert.equal(isWiredTracklistSlug("yt-TidwOi0NMI0"), true);
+const alessoWe1 = tracklist1001RowsToPlays(TL_ALESSO_TML_WE1_2026);
+assert.equal(alessoWe1.length, 42);
+assert.equal(alessoWe1[0]?.provenance, "1001tl");
+assert.equal(alessoWe1[0]?.timestamp, 12);
+assert.equal(alessoWe1[0]?.artistName, "Alesso");
+assert.equal(alessoWe1[0]?.trackTitle, "Get Your Groove On");
+assert.equal(alessoWe1[41]?.trackTitle, "Never Going Home Tonight");
+assert.equal(alessoWe1[41]?.timestamp, 59 * 60 + 30);
+for (let i = 1; i < alessoWe1.length; i++) {
+  assert.ok(
+    (alessoWe1[i]!.timestamp ?? 0) > (alessoWe1[i - 1]!.timestamp ?? 0),
+    `Alesso TML WE1 2026 clocks must increase at index ${i}`,
   );
 }
 

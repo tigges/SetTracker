@@ -52,3 +52,57 @@ export const TL_DJS_FROM_MARS_MASH_UP_UNIVERSE_056_2026: FingerprintSeedRow[] =
     3656,
   );
 
+/**
+ * Alesso @ Mainstage, Tomorrowland Weekend 1, Belgium 2026-07-19
+ * https://www.1001tracklists.com/tracklist/dr4mczt/alesso-mainstage-tomorrowland-weekend-1-belgium-2026-07-19.html
+ * Official YT: https://youtu.be/TidwOi0NMI0
+ * Capture overlay used TL_Alesso_Mainstage_Tomorrowland_WE1_2026;
+ * constant is TL_ALESSO_TML_WE1_2026 (matches TL_ALESSO_TML_WE2_2026).
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-TidwOi0NMI0"]
+ * Captured 2026-08-17 - provenance 1001tl.
+ */
+export const TL_ALESSO_TML_WE1_2026: FingerprintSeedRow[] = [
+  { at: "0:12", artist: "Alesso", title: "Get Your Groove On" },
+  { at: "1:28", artist: "Calvin Harris & Alesso ft. Hurts", title: "Under Control" },
+  { at: "2:57", artist: "Calvin Harris & Alesso & Hurts vs. Sentinel & SICK INDIVIDUALS", title: "Under Control vs. Upside Down (Alesso Mashup)" },
+  { at: "3:58", artist: "Calvin Harris & Alesso ft. Hurts", title: "Under Control (Acappella)" },
+  { at: "5:00", artist: "Alesso & Sentinel & SICK INDIVIDUALS", title: "Upside Down" },
+  { at: "6:01", artist: "Alesso vs. Hailee Steinfeld & Florida Georgia Line & Watt", title: "Stupidisco vs. Let Me Go (Alesso Mashup)" },
+  { at: "6:49", artist: "Alesso & Hailee Steinfeld ft. Florida Georgia Line & Watt", title: "Let Me Go" },
+  { at: "7:37", artist: "Alesso", title: "Stupidisco" },
+  { at: "8:24", artist: "Alesso", title: "Get Your Groove On" },
+  { at: "11:39", artist: "Alesso ft. Nate Smith", title: "I Like It (Alesso & Sentinel VIP)" },
+  { at: "11:40", artist: "Alesso & Zara Larsson", title: "Words" },
+  { at: "14:00", artist: "Alesso & JOA & Tyree Cooper vs. Dimitri Vegas & Like Mike & Martin Garrix", title: "Turn Up The Bass vs. Tremor (Alesso Mashup)" },
+  { at: "14:53", artist: "Dimitri Vegas & Like Mike & Martin Garrix", title: "Tremor (Sensation 2014 Anthem)" },
+  { at: "15:47", artist: "Alesso & JOA ft. Tyree Cooper", title: "Turn Up The Bass" },
+  { at: "16:40", artist: "Alesso ft. Nico & Vinz", title: "I Wanna Know (Acappella)" },
+  { at: "19:27", artist: "DubVision vs. Alesso & Matthew Koma", title: "Rise Again vs. Years (Alesso Mashup)" },
+  { at: "20:01", artist: "Alesso ft. Matthew Koma", title: "Years (Acappella)" },
+  { at: "20:35", artist: "DubVision", title: "Rise Again" },
+  { at: "21:09", artist: "Alesso & Sacha", title: "Destiny" },
+  { at: "24:15", artist: "Alesso", title: "Smoke Machine" },
+  { at: "26:54", artist: "Sentinel & Alesso vs. Katy Perry", title: "Freedom vs. When I'm Gone (Alesso Mashup)" },
+  { at: "28:03", artist: "Alesso & Katy Perry", title: "When I'm Gone" },
+  { at: "29:12", artist: "Sentinel & Alesso", title: "Freedom" },
+  { at: "30:20", artist: "Sebastian Ingrosso & Alesso & Ryan Tedder vs. Martin Garrix & Dua Lipa", title: "Calling vs. Scared To Be Lonely (Martin Garrix Mashup)" },
+  { at: "31:39", artist: "Sebastian Ingrosso & Alesso ft. Ryan Tedder", title: "Calling (Lose My Mind)" },
+  { at: "32:58", artist: "Martin Garrix & Dua Lipa", title: "Scared To Be Lonely (Acappella)" },
+  { at: "34:17", artist: "Alesso & Pendulum vs. Edward Maya & Vika Jigulina", title: "FADE vs. Stereo Love (Alesso Mashup)" },
+  { at: "35:29", artist: "Alesso & Pendulum", title: "FADE" },
+  { at: "36:41", artist: "Edward Maya & Vika Jigulina", title: "Stereo Love (Alesso Edit)" },
+  { at: "37:52", artist: "Alesso & Sentinel vs. Avicii", title: "Only You vs. Without You (JAYBEE Mashup)" },
+  { at: "38:36", artist: "Avicii ft. Sandro Cavazza", title: "Without You (Acappella)" },
+  { at: "39:21", artist: "Alesso & Sentinel", title: "Only You" },
+  { at: "40:05", artist: "Nadia Ali & Starkillers & Alex Kenji", title: "Pressure (Alesso Remix)" },
+  { at: "41:41", artist: "Dirty South & Alesso ft. Ruben Haze", title: "City Of Dreams (Alesso Rework)" },
+  { at: "46:04", artist: "Alesso & OneRepublic vs. Eric Prydz & Andreas Postl", title: "If I Lose Myself vs. Mighty Love (Alesso Mashup)" },
+  { at: "47:35", artist: "Eric Prydz & Andreas Postl", title: "Mighty Love" },
+  { at: "49:07", artist: "Alesso & OneRepublic", title: "If I Lose Myself" },
+  { at: "50:38", artist: "Daft Punk", title: "One More Time (HILLS Remix)" },
+  { at: "53:28", artist: "Alesso & OneRepublic", title: "In Your Eyes" },
+  { at: "57:36", artist: "David Guetta & Alesso & Madison Love vs. Tove Lo", title: "Never Going Home Tonight vs. Heroes (We Could Be) (Alesso Mashup)" },
+  { at: "58:33", artist: "Alesso ft. Tove Lo", title: "Heroes (We Could Be)" },
+  { at: "59:30", artist: "David Guetta & Alesso ft. Madison Love", title: "Never Going Home Tonight" },
+];
+

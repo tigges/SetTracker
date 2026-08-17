@@ -103,6 +103,7 @@ import {
   TL_SOLOMUN_ALLY_PALLY_2026,
   TL_SOLOMUN_EDC_LV_2026,
   TL_WESTEND_EDC_LV_2026,
+  TL_ALESSO_TML_WE1_2026,
   TL_ALESSO_TML_WE2_2026,
   TL_ARMIN_VAN_BUUREN_TML_WE2_2026,
   TL_HONEYLUV_ANTS_USHUAIA_2026,
@@ -1054,6 +1055,22 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/1ucg9n01/the-chainsmokers-mainstage-tomorrowland-weekend-1-belgium-2026-07-17.html",
     tracklist1001: TL_THE_CHAINSMOKERS_TML_WE1_2026,
+  },
+  {
+    // Tomorrowland official Relive — Mainstage WE1.
+    video: "https://www.youtube.com/watch?v=TidwOi0NMI0",
+    primaryArtist: dj("Alesso", {
+      accent: "#4895ef",
+      homeCity: "Stockholm, SE",
+    }),
+    genre: "Progressive House",
+    type: "festival",
+    title: "Alesso WE1 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/dr4mczt/alesso-mainstage-tomorrowland-weekend-1-belgium-2026-07-19.html",
+    tracklist1001: TL_ALESSO_TML_WE1_2026,
   },
   {
     // Tomorrowland official Relive — Freedom Stage WE2.
