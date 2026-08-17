@@ -756,3 +756,75 @@ export const TL_MAU_P_XXX_RADIO_201_2026: FingerprintSeedRow[] = [
   { at: "44:45", artist: "Route 94", title: "4Get The Girl (Mellizos Remix)" },
   { at: "48:50", artist: "Bagheera (FR)", title: "7 Heures Du Matin" },
 ];
+
+/**
+ * Vintage Culture @ Robot Heart Residency, United States 2024-05-16
+ * https://www.1001tracklists.com/tracklist/12xtt1u1/vintage-culture-robot-heart-residency-united-states-2024-05-16.html
+ * Official YT: https://youtu.be/KbGNocaJDjw
+ * Official SC: https://soundcloud.com/vintageculturemusic/vintage-culture-robot-heart-residency-2024-california
+ * Capture overlay used TL_Vintage-Culture_Robot-Heart-Residency_United-States_2024
+ * (hyphens illegal); constant is TL_VINTAGE_CULTURE_ROBOT_HEART_RESIDENCY_UNITED_STATES_2024.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-KbGNocaJDjw"]
+ *   and ["sc-vintageculturemusic-vintage-culture-robot-heart-residency-2024-california"]
+ * Captured 2026-08-17 - provenance 1001tl.
+ */
+export const TL_VINTAGE_CULTURE_ROBOT_HEART_RESIDENCY_UNITED_STATES_2024: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "Bedouin", title: "Tijuana (Vintage Culture Remix)" },
+  { at: "5:21", artist: "Hardt Antoine", title: "I Need Someone" },
+  { at: "10:42", artist: "Matador", title: "Sol" },
+  { at: "16:02", artist: "Bambook", title: "Give It Up (Audiofly Remix)" },
+  { at: "21:23", artist: "CIOZ & Ryan Murgatroyd", title: "Wachaka" },
+  { at: "26:43", artist: "Enamour", title: "Red Room" },
+  { at: "32:04", artist: "Solee", title: "Our Lives" },
+  { at: "37:24", artist: "Incláme", title: "Cipher" },
+  { at: "42:45", artist: "Radio Slave ft. NEZ", title: "Wait A Minute (Dixon Extension)" },
+  { at: "48:05", artist: "Run With Me (Extended)", title: "Made By Pete" },
+  { at: "51:40", artist: "the real unknown", title: "Heart Shaped Box" },
+  { at: "57:25", artist: "Solee", title: "Tanz Der Planeten" },
+  { at: "1:03:10", artist: "Toto Chiavetta & Trenton", title: "My Eyes Are Failing" },
+  { at: "1:09:47", artist: "Karmon", title: "Acido" },
+  { at: "1:15:12", artist: "Beanfield ft. Bajka", title: "Tides (Carl Craig C's Movement Number 1)" },
+  { at: "1:20:37", artist: "Daniel Rateuke", title: "Oudara" },
+  { at: "1:26:02", artist: "Oliver Koletzki & andhim", title: "Branka" },
+  { at: "1:31:27", artist: "AFFKT", title: "Tarambana (NEIR Tunnel Vision Mix)" },
+  { at: "1:36:52", artist: "Mumbai Science", title: "Iris" },
+  { at: "1:42:17", artist: "Guy J", title: "Beast Of Sea" },
+  { at: "1:47:42", artist: "Vintage Culture & braev", title: "Time" },
+  { at: "1:53:07", artist: "Olivier Giacomotto", title: "Lui" },
+  { at: "1:58:32", artist: "Dennis Cruz & Ian Ludvig", title: "Pain Away" },
+  { at: "2:03:56", artist: "Dino Lenny", title: "Did This" },
+  { at: "2:09:21", artist: "Yousef ft. Afronaut Zu", title: "Learn To Fly (Private Version)" },
+  { at: "2:14:45", artist: "Vintage Culture ft. Noah Kulaga", title: "Upon Your Skin" },
+];
+
+/**
+ * John Summit - Burning Man Playa Package Mix 2025-10-09
+ * https://www.1001tracklists.com/tracklist/btv3mn9/john-summit-burning-man-playa-package-mix-2025-10-09.html
+ * Official YT: https://youtu.be/PkWNuf7rtms (@JohnSummit — Experts Only remix album)
+ * Capture overlay used TL_John-Summit_Burning-Man_Playa-Package-Mix_2025
+ * (hyphens illegal); constant is TL_JOHN_SUMMIT_BURNING_MAN_PLAYA_PACKAGE_MIX_2025.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-PkWNuf7rtms"]
+ * 6 timed cues — gap-fill, not dense-replace.
+ * Distinct from TL_JOHN_SUMMIT_TML_WE2_2026 / TL_JOHN_SUMMIT_LOLLAPALOOZA.
+ * Captured 2026-08-17 - provenance 1001tl.
+ */
+export const TL_JOHN_SUMMIT_BURNING_MAN_PLAYA_PACKAGE_MIX_2025: FingerprintSeedRow[] =
+  [
+    { at: "0:00", artist: "John Summit ft. Inéz", title: "crystallized (Playa Dub Remix)" },
+    { at: "4:15", artist: "John Summit & GUZ ft. Stevie Appleton", title: "What A Life (OMRI. Remix)" },
+    { at: "9:30", artist: "John Summit & HAYLA", title: "Shiver (N.O.Y & Guy Katch Remix)" },
+    { at: "13:00", artist: "John Summit & Of The Trees", title: "Stay With Me (Mishell Remix)" },
+    { at: "17:35", artist: "John Summit ft. HAYLA", title: "Where You Are (Millero Remix)" },
+    { at: "21:50", artist: "John Summit ft. CLOVES", title: "Focus (EdiP Remix)" },
+  ];
+
+/**
+ * Claptone - Clapcast 576 2026-07-31
+ * https://www.1001tracklists.com/tracklist/uq8g1pk/claptone-clapcast-576-2026-07-31.html
+ * Official SC Relive: https://soundcloud.com/claptone/clapcast-576
+ * (sc-claptone-clapcast-576). Mixcloud is a mirror only.
+ * Operator sent the 1001 URL without cue rows — do not scrape 1001 or
+ * invent TL_CLAPTONE_CLAPCAST_576_2026. Official SC description has 14
+ * untimed tracks (source provenance). Paste timed 1001 cues to wire
+ * TRACKLIST_1001_BY_SOURCE_SLUG["sc-claptone-clapcast-576"].
+ */

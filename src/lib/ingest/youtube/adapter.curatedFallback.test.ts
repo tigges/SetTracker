@@ -101,6 +101,10 @@ const LUCAS_STEVE_TML_WE2_2024 = YOUTUBE_SETS.find((s) =>
   s.video.includes("GbG_OFmdPKk"),
 );
 const TAPE_B_CT5 = YOUTUBE_SETS.find((s) => s.video.includes("7_O8N_EJg_c"));
+const VC_ROBOT_HEART = YOUTUBE_SETS.find((s) => s.video.includes("KbGNocaJDjw"));
+const JOHN_SUMMIT_PLAYA = YOUTUBE_SETS.find((s) =>
+  s.video.includes("PkWNuf7rtms"),
+);
 
 describe("watchMetaFromCuratedSeed", () => {
   it("builds ASOT 1290 meta from the curated 1001 capture", () => {
@@ -246,6 +250,28 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=7_O8N_EJg_c");
     // Last cue 57:34 + 180s pad.
     assert.equal(meta.durationSec, 57 * 60 + 34 + 180);
+  });
+
+  it("builds Vintage Culture Robot Heart 2024 meta from the curated 1001 capture", () => {
+    assert.ok(VC_ROBOT_HEART);
+    const meta = watchMetaFromCuratedSeed(VC_ROBOT_HEART);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "KbGNocaJDjw");
+    assert.match(meta.title, /Robot Heart/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=KbGNocaJDjw");
+    // Last cue 2:14:45 + 180s pad.
+    assert.equal(meta.durationSec, 2 * 3600 + 14 * 60 + 45 + 180);
+  });
+
+  it("builds John Summit Playa Package Mix meta from the curated 1001 capture", () => {
+    assert.ok(JOHN_SUMMIT_PLAYA);
+    const meta = watchMetaFromCuratedSeed(JOHN_SUMMIT_PLAYA);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "PkWNuf7rtms");
+    assert.match(meta.title, /Playa Package Mix/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=PkWNuf7rtms");
+    // Last cue 21:50 + 180s pad.
+    assert.equal(meta.durationSec, 21 * 60 + 50 + 180);
   });
 
   it("builds ILLENIUM TML WE1 Great Library meta from the curated 1001 capture", () => {
@@ -1395,5 +1421,34 @@ describe("curated YouTube 429 fallback", () => {
     assert.ok(sets[0]!.durationSec >= 57 * 60);
     assert.equal(sets[0]?.primaryArtist?.slug, "tape-b");
     assert.match(String(sets[0]?.title ?? ""), /CarTunes/i);
+  });
+
+  it("lands Vintage Culture Robot Heart 2024 from the 1001 seed when watch is 429", async () => {
+    assert.ok(VC_ROBOT_HEART);
+    const adapter = createYoutubeAdapter([VC_ROBOT_HEART], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-KbGNocaJDjw");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 26);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 2 * 3600 + 14 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "vintage-culture");
+    assert.match(String(sets[0]?.eventName ?? ""), /Robot Heart/i);
+  });
+
+  it("lands John Summit Playa Package Mix from the 1001 seed when watch is 429", async () => {
+    assert.ok(JOHN_SUMMIT_PLAYA);
+    const adapter = createYoutubeAdapter([JOHN_SUMMIT_PLAYA], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-PkWNuf7rtms");
+    assert.equal(sets[0]!.type, "mix");
+    assert.ok(sets[0]!.plays.length >= 6);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 21 * 60 + 50);
+    assert.equal(sets[0]?.primaryArtist?.slug, "john-summit");
+    assert.equal(sets[0]?.seriesName, "Experts Only");
+    assert.match(String(sets[0]?.eventName ?? ""), /Burning Man/i);
   });
 });

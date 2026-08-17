@@ -337,4 +337,30 @@ assert.equal(
   false,
 );
 
+const vcRobotSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url ===
+    "https://soundcloud.com/vintageculturemusic/vintage-culture-robot-heart-residency-2024-california",
+);
+assert.ok(vcRobotSc);
+assert.equal(vcRobotSc.primaryArtist.name, "Vintage Culture");
+assert.equal(vcRobotSc.type, "festival");
+assert.equal(vcRobotSc.seriesName, "Robot Heart");
+assert.equal(
+  `sc-vintageculturemusic-${slugify("vintage-culture-robot-heart-residency-2024-california")}`,
+  "sc-vintageculturemusic-vintage-culture-robot-heart-residency-2024-california",
+);
+
+const clapcast576Sc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) => s.url === "https://soundcloud.com/claptone/clapcast-576",
+);
+assert.ok(clapcast576Sc);
+assert.equal(clapcast576Sc.primaryArtist.name, "Claptone");
+assert.equal(clapcast576Sc.type, "radio");
+assert.equal(clapcast576Sc.seriesName, "Clapcast");
+assert.equal(
+  `sc-claptone-${slugify("clapcast-576")}`,
+  "sc-claptone-clapcast-576",
+);
+
 console.log("soundcloud/tracks.test.ts ok");

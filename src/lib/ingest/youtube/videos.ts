@@ -123,6 +123,8 @@ import {
   TL_PEGGY_GOU_EDC_LV_2026,
   TL_THE_CHAINSMOKERS_TML_WE1_2026,
   TL_TAPE_B_CARTUNES_VOL5_2026,
+  TL_VINTAGE_CULTURE_ROBOT_HEART_RESIDENCY_UNITED_STATES_2024,
+  TL_JOHN_SUMMIT_BURNING_MAN_PLAYA_PACKAGE_MIX_2025,
 } from "../tracklists1001/seeds";
 import type { RawArtist } from "../types";
 import { slugify } from "../types";
@@ -2637,6 +2639,40 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/1g84vp31/tape-b-cartunes-vol.-5-2026-08-10.html",
     tracklist1001: TL_TAPE_B_CARTUNES_VOL5_2026,
+  },
+  {
+    // Official Vintage Culture upload; 1001TL wired via yt-KbGNocaJDjw
+    // (same list as sc-vintageculturemusic-vintage-culture-robot-heart-residency-2024-california).
+    video: "https://www.youtube.com/watch?v=KbGNocaJDjw",
+    primaryArtist: dj("Vintage Culture", {
+      accent: "#e85d04",
+      homeCity: "Brazil",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    title: "Vintage Culture @ Robot Heart Residency, California 2024",
+    seriesName: "Robot Heart",
+    eventName: "Robot Heart Residency",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/12xtt1u1/vintage-culture-robot-heart-residency-united-states-2024-05-16.html",
+    tracklist1001: TL_VINTAGE_CULTURE_ROBOT_HEART_RESIDENCY_UNITED_STATES_2024,
+  },
+  {
+    // Official John Summit upload — Experts Only remix album mix.
+    // Distinct from TML WE2 (yt-PlArfyuzuqo) and Lollapalooza (yt-9TKqqBCmDHA).
+    video: "https://www.youtube.com/watch?v=PkWNuf7rtms",
+    primaryArtist: dj("John Summit", {
+      accent: "#4cc9f0",
+      homeCity: "Chicago, US",
+    }),
+    genre: "Tech House",
+    type: "mix",
+    title: "John Summit - Burning Man Playa Package Mix 2025",
+    seriesName: "Experts Only",
+    eventName: "Burning Man",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/btv3mn9/john-summit-burning-man-playa-package-mix-2025-10-09.html",
+    tracklist1001: TL_JOHN_SUMMIT_BURNING_MAN_PLAYA_PACKAGE_MIX_2025,
   },
 ];
 

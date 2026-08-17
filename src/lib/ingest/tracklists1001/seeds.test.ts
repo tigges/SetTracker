@@ -142,6 +142,8 @@ import {
   TL_COLE_TERRAZAS_HARD_SUMMER_2026,
   TL_TAPE_B_CARTUNES_VOL5_2026,
   TL_MAU_P_XXX_RADIO_201_2026,
+  TL_VINTAGE_CULTURE_ROBOT_HEART_RESIDENCY_UNITED_STATES_2024,
+  TL_JOHN_SUMMIT_BURNING_MAN_PLAYA_PACKAGE_MIX_2025,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   tracklist1001RowsToPlays,
@@ -2884,5 +2886,62 @@ for (let i = 1; i < mauPXxx.length; i++) {
     `Mau P XXX Radio 201 clocks must increase at index ${i}`,
   );
 }
+
+assertSeedClocks(TL_VINTAGE_CULTURE_ROBOT_HEART_RESIDENCY_UNITED_STATES_2024);
+assert.equal(TL_VINTAGE_CULTURE_ROBOT_HEART_RESIDENCY_UNITED_STATES_2024.length, 26);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-KbGNocaJDjw"],
+  TL_VINTAGE_CULTURE_ROBOT_HEART_RESIDENCY_UNITED_STATES_2024,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-vintageculturemusic-vintage-culture-robot-heart-residency-2024-california"
+  ],
+  TL_VINTAGE_CULTURE_ROBOT_HEART_RESIDENCY_UNITED_STATES_2024,
+);
+assert.equal(isWiredTracklistSlug("yt-KbGNocaJDjw"), true);
+const vcRobot = tracklist1001RowsToPlays(
+  TL_VINTAGE_CULTURE_ROBOT_HEART_RESIDENCY_UNITED_STATES_2024,
+);
+assert.equal(vcRobot.length, 26);
+assert.equal(vcRobot[0]?.provenance, "1001tl");
+assert.equal(vcRobot[0]?.artistName, "Bedouin");
+assert.equal(vcRobot[0]?.trackTitle, "Tijuana (Vintage Culture Remix)");
+assert.equal(vcRobot[25]?.artistName, "Vintage Culture ft. Noah Kulaga");
+assert.equal(vcRobot[25]?.trackTitle, "Upon Your Skin");
+assert.equal(vcRobot[25]?.timestamp, 2 * 3600 + 14 * 60 + 45);
+
+assertSeedClocks(TL_JOHN_SUMMIT_BURNING_MAN_PLAYA_PACKAGE_MIX_2025);
+assert.equal(TL_JOHN_SUMMIT_BURNING_MAN_PLAYA_PACKAGE_MIX_2025.length, 6);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-PkWNuf7rtms"],
+  TL_JOHN_SUMMIT_BURNING_MAN_PLAYA_PACKAGE_MIX_2025,
+);
+assert.equal(isWiredTracklistSlug("yt-PkWNuf7rtms"), true);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-PkWNuf7rtms"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-PlArfyuzuqo"],
+);
+const playaPackage = tracklist1001RowsToPlays(
+  TL_JOHN_SUMMIT_BURNING_MAN_PLAYA_PACKAGE_MIX_2025,
+);
+assert.equal(playaPackage.length, 6);
+assert.equal(playaPackage[0]?.provenance, "1001tl");
+assert.equal(playaPackage[0]?.artistName, "John Summit ft. Inéz");
+assert.equal(playaPackage[0]?.trackTitle, "crystallized (Playa Dub Remix)");
+assert.equal(playaPackage[5]?.artistName, "John Summit ft. CLOVES");
+assert.equal(playaPackage[5]?.trackTitle, "Focus (EdiP Remix)");
+assert.equal(playaPackage[5]?.timestamp, 21 * 60 + 50);
+
+// Claptone Clapcast 576 — official SC Relive in, 1001 URL recorded,
+// no cue paste. Do not invent 1001tl rows or sc-https://… slugs.
+assert.equal(isWiredTracklistSlug("sc-claptone-clapcast-576"), false);
+assert.equal(TRACKLIST_1001_BY_SOURCE_SLUG["sc-claptone-clapcast-576"], undefined);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-https://soundcloud.com/claptone/clapcast-576"
+  ],
+  undefined,
+);
 
 console.log("tracklists1001/seeds.test.ts ok");

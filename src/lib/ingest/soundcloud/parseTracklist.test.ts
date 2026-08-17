@@ -180,4 +180,33 @@ assert.equal(peggyCercle[0]!.timestamp, 0);
 assert.equal(peggyCercle[1]!.idStatus, "unresolved_id");
 assert.equal(peggyCercle[2]!.artistName, "Commix");
 
+const clapcast576 = parseDescriptionTracklist(
+  `www.claptone.com
+
+01. A-Trak, SHEE - Dancefloor (Extended Mix) [A-Trak & Friends]
+02. Dario D’Attis - Solera (Original Mix) [Poker Flat Recordings]
+03. Groove Armada - Love’s Theme (Myd Extended Remix) [Glitterbox Recordings]
+04. J. Worra - Adored (Extended) [Milk & Honey]
+05. Daniel Steinberg - No Good (Original Mix) [Arms & Legs]
+06. Adam Ten & Darco - Limousine (Original Mix) [ID]
+07. Amedeo Picone - Hot Shot (Extended Mix) [Snatch! Records]
+08. Booka Shade, Eddie Bizzarre - Count On You (Extended Mix) [Blaufield Music]
+09. Alexander Som - Out Of My Head (Extended Mix) [Wh0 Plays]
+10. Dompe - Firestarter (Extended Mix) [Jackfruit Music]
+11. Michael Gray - Universe (Extended Mix) [Toolroom]
+12. AYYBO, Ragie Ban - I Don’t Want To (Extended) [Disorder]
+13. Reboot - Silk (Mike The Connector & Daaeeru Extended Remix) [Snatch! RAW]
+14. CamelPhat, Josh Gigante feat. Kuuda - So Good (Extended Mix) [When Stars Align]
+`,
+  3602,
+);
+assert.equal(clapcast576.length, 14);
+assert.equal(clapcast576[0]!.artistName, "A-Trak, SHEE");
+assert.equal(clapcast576[0]!.trackTitle, "Dancefloor (Extended Mix) [A-Trak & Friends]");
+assert.equal(clapcast576[13]!.artistName, "CamelPhat, Josh Gigante feat. Kuuda");
+assert.equal(
+  clapcast576[13]!.trackTitle,
+  "So Good (Extended Mix) [When Stars Align]",
+);
+
 console.log("parseTracklist.test.ts ok");

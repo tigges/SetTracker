@@ -1,7 +1,22 @@
 {
-  "note": "Operator-collected 1001Tracklists URLs. All listed urls[] rows are now seeded. Prefer new operator pastes over this archive. stillMissing1001 is video-in / no 1001 page — do not invent URLs. heldPendingRelive is 1001-in / no official YT/SC Relive — seed held, do not invent or wire fan playback.",
-  "updatedAt": "2026-08-17T14:40:00.000Z",
+  "note": "Operator-collected 1001Tracklists URLs. All listed urls[] rows are now seeded. Prefer new operator pastes over this archive. stillMissing1001 is video-in / no 1001 page — do not invent URLs. heldPendingRelive is 1001-in / no official YT/SC Relive — seed held, do not invent or wire fan playback. pendingCuePaste is official Relive + operator 1001 URL without cue rows — do not scrape 1001 or invent 1001tl seeds.",
+  "updatedAt": "2026-08-17T14:45:00.000Z",
   "urls": [
+    {
+      "label": "John Summit · Burning Man Playa Package Mix 2025",
+      "slug": "yt-PkWNuf7rtms",
+      "name": "TL_JOHN_SUMMIT_BURNING_MAN_PLAYA_PACKAGE_MIX_2025",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/btv3mn9/john-summit-burning-man-playa-package-mix-2025-10-09.html",
+      "youtubeUrl": "https://youtu.be/PkWNuf7rtms"
+    },
+    {
+      "label": "Vintage Culture · Robot Heart Residency 2024-05-16",
+      "slug": "yt-KbGNocaJDjw",
+      "name": "TL_VINTAGE_CULTURE_ROBOT_HEART_RESIDENCY_UNITED_STATES_2024",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/12xtt1u1/vintage-culture-robot-heart-residency-united-states-2024-05-16.html",
+      "youtubeUrl": "https://youtu.be/KbGNocaJDjw",
+      "soundcloudUrl": "https://soundcloud.com/vintageculturemusic/vintage-culture-robot-heart-residency-2024-california"
+    },
     {
       "label": "Tape B · CarTunes Vol. 5 2026-08-10",
       "slug": "yt-7_O8N_EJg_c",
@@ -128,6 +143,15 @@
       "tracklistUrl": "https://www.1001tracklists.com/tracklist/2vwfrkc9/cole-terrazas-pink-stage-hard-summer-festival-united-states-2026-08-02.html",
       "eventUrl": "https://www.hardsummer.com/",
       "note": "Operator paste. 1001 has no media links. Seed held until official HARD/Insomniac Relive."
+    }
+  ],
+  "pendingCuePaste": [
+    {
+      "label": "Claptone · Clapcast 576 2026-07-31",
+      "slug": "sc-claptone-clapcast-576",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/uq8g1pk/claptone-clapcast-576-2026-07-31.html",
+      "soundcloudUrl": "https://soundcloud.com/claptone/clapcast-576",
+      "note": "Official SC Relive wired. Operator 1001 URL recorded — do not scrape. Paste timed cues to seed TL_CLAPTONE_CLAPCAST_576_2026."
     }
   ]
 }
