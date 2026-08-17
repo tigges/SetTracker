@@ -2164,7 +2164,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     eventName: "Tomorrowland Belgium",
   },
   {
-    // Official Relive — Mainstage WE1; 1001 URL known, seed pending capture.
+    // Official Relive — Mainstage WE1; timed 1001 capture.
     video: "https://www.youtube.com/watch?v=NpL_bT5vgmU",
     primaryArtist: dj("Boris Brejcha", { accent: "#ff006e" }),
     genre: "Techno",
@@ -2177,7 +2177,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_BORIS_BREJCHA_TML_WE1_2026,
   },
   {
-    // Official Relive — Freedom WE2; 1001 URL known, seed pending capture.
+    // Official Relive — Freedom WE2; timed 1001 capture.
     video: "https://www.youtube.com/watch?v=g4vR2VlhNtk",
     primaryArtist: dj("Sebastian Ingrosso", { accent: "#4361ee" }),
     genre: "Progressive House",
@@ -2190,7 +2190,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_SEBASTIAN_INGROSSO_TML_WE2_2026,
   },
   {
-    // BIORHYTHM @ Freedom Stage TML WE1; 1001 URL known, seed pending.
+    // BIORHYTHM @ Freedom Stage TML WE1; timed 1001 capture.
     // Distinct from Miss Monique Mainstage WE2 (yt + TL_MISS_MONIQUE_TML_WE2_2026).
     video: "https://www.youtube.com/watch?v=1LpQZ5GTRDg",
     primaryArtist: dj("Miss Monique", { accent: "#9b5de5" }),

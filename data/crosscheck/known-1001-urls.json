@@ -1,6 +1,6 @@
 {
-  "note": "Operator-collected 1001Tracklists URLs. Prefer capturing recent sets (2025–2026) before archive Cercle 2018. Seeds pending desktop console capture.",
-  "updatedAt": "2026-08-12T05:18:00.000Z",
+  "note": "Operator-collected 1001Tracklists URLs. All listed urls[] rows are now seeded. Prefer new operator pastes over this archive. stillMissing1001 is video-in / no 1001 page — do not invent URLs.",
+  "updatedAt": "2026-08-17T05:00:00.000Z",
   "urls": [
     {
       "label": "PAN-POT · Street Parade",
@@ -90,5 +90,12 @@
       "note": "Archive official Cercle — capture after EDC 2026"
     }
   ],
-  "stillMissing1001": []
+  "stillMissing1001": [
+    {
+      "label": "Liu · Tomorrowland Belgium",
+      "slug": "yt-DWPSLZLKslg",
+      "youtubeUrl": "https://www.youtube.com/watch?v=DWPSLZLKslg",
+      "note": "Artist-channel Relive (@Liumusic). No 1001 page in the description — capture if one appears."
+    }
+  ]
 }
