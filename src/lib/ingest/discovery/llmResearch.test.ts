@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import {
   claudeApiKey,
   detectLlmProvider,
+  evaluateProposedEventUrl,
   evaluateProposedUrl,
   geminiApiKey,
   isResearchWorthyName,
@@ -123,5 +124,34 @@ assert.equal(isResearchWorthyName("Axwell"), true);
 assert.equal(isResearchWorthyName("Behind Cercle Odyssey I Chapter Four"), false);
 assert.equal(isResearchWorthyName("Bonobo Solo"), false);
 assert.equal(isResearchWorthyName("MAU P SUNRISE"), false);
+
+const eventKeys = new Set(["instagram:alesso"]);
+assert.equal(
+  evaluateProposedEventUrl(
+    "Tomorrowland",
+    "instagram",
+    "https://www.instagram.com/tomorrowland/",
+    eventKeys,
+  ).ok,
+  true,
+);
+assert.equal(
+  evaluateProposedEventUrl(
+    "Tomorrowland",
+    "instagram",
+    "https://www.instagram.com/alesso/",
+    eventKeys,
+  ).ok,
+  false,
+);
+assert.equal(
+  evaluateProposedEventUrl(
+    "Tomorrowland",
+    "website",
+    "https://www.tomorrowland.com/",
+    eventKeys,
+  ).ok,
+  true,
+);
 
 console.log("llmResearch.test.ts ok");

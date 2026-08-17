@@ -15,6 +15,7 @@ import {
   claudeApiKey,
   detectLlmProvider,
   geminiApiKey,
+  runLlmEventHandleResearch,
   runLlmHandleResearch,
   runLlmQualityCheck,
   type LlmProvider,
@@ -44,12 +45,30 @@ async function main() {
       "[llm-research] skipped (set GEMINI_API_KEY and/or CLAUDE_API_KEY / CLAUDE_AGENT_API / ANTHROPIC_API_KEY)",
     );
   }
+  const tag = process.env.LLM_RESEARCH_TAG || undefined;
   const rounds = [];
   for (const provider of providers) {
-    const research = await runLlmHandleResearch(prisma, { provider });
+    const research = await runLlmHandleResearch(prisma, {
+      provider,
+      reportTag: tag,
+    });
     rounds.push({ provider, research });
   }
-  console.log("Done:", { quality: quality.notes.length, rounds });
+  const eventRounds = [];
+  if (process.env.LLM_RESEARCH_EVENTS !== "0") {
+    for (const provider of providers) {
+      const research = await runLlmEventHandleResearch(prisma, {
+        provider,
+        reportTag: tag,
+      });
+      eventRounds.push({ provider, research });
+    }
+  }
+  console.log("Done:", {
+    quality: quality.notes.length,
+    rounds,
+    eventRounds,
+  });
   await prisma.$disconnect();
 }
 

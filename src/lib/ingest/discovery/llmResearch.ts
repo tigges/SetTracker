@@ -22,6 +22,8 @@ import { youtubeChannelUrl } from "../../social";
 import { normalizeOfficialWebsite } from "./wikidataOfficial";
 import {
   djMayClaimSocialUrl,
+  eventMayClaimSocialUrl,
+  handleMatchesEvent,
   loadArtistSocialKeys,
   normalizeSocialUrl,
   socialFieldFromUrl,
@@ -128,6 +130,20 @@ Use full https URLs. Null when you are not sure. Do not invent slugified guesses
 Prefer the artist's own channel/profile, never a festival, label, or fan page.
 DJ: ${name}
 Context: ${context || "none"}`;
+}
+
+function eventHandlePrompt(
+  name: string,
+  kind: string,
+  location: string | null,
+): string {
+  return `You research official profiles for electronic-music festivals and clubs.
+Return ONLY JSON with keys: soundcloud, youtube, instagram, twitter, website, confidence, notes.
+Use full https URLs. Null when you are not sure. Do not invent slugified guesses.
+Prefer the venue or festival's own account. Never a lineup artist, resident DJ, promoter person, or fan page.
+Event: ${name}
+Kind: ${kind}
+Location: ${location || "unknown"}`;
 }
 
 async function callClaude(prompt: string): Promise<string> {
@@ -278,6 +294,47 @@ export function evaluateProposedUrl(
   return { ok: true, url, reason: "name-matched" };
 }
 
+/** Same verify-then-write rules for Event rows. Never claim a DJ profile. */
+export function evaluateProposedEventUrl(
+  eventName: string,
+  field: VerifiedField["field"],
+  raw: string,
+  artistKeys: Set<string>,
+): { ok: boolean; url?: string; reason: string } {
+  let url = raw.trim();
+  if (!url) return { ok: false, reason: "empty" };
+  if (field === "youtube") {
+    const yt = youtubeChannelUrl(url);
+    if (!yt) return { ok: false, reason: "not a YouTube channel" };
+    url = yt;
+  } else if (field === "website") {
+    const web = normalizeOfficialWebsite(url);
+    if (!web) return { ok: false, reason: "not an official website" };
+    url = web;
+    const host = (() => {
+      try {
+        return new URL(url).hostname.replace(/^www\./, "");
+      } catch {
+        return "";
+      }
+    })();
+    const hostHandle = host.replace(/\.(com|net|org|io|tv|co|uk|be|nl|de)$/i, "");
+    if (!handleMatchesEvent(hostHandle, eventName)) {
+      return { ok: false, reason: "website host does not match event name" };
+    }
+  } else {
+    const n = normalizeSocialUrl(url);
+    if (!n) return { ok: false, reason: "unparseable URL" };
+    url = n;
+    const mapped = socialFieldFromUrl(url);
+    if (mapped !== field) return { ok: false, reason: `not a ${field} profile` };
+    if (!eventMayClaimSocialUrl(eventName, url, artistKeys)) {
+      return { ok: false, reason: "handle is an artist profile or does not match event" };
+    }
+  }
+  return { ok: true, url, reason: "name-matched" };
+}
+
 const FIELDS = [
   "soundcloud",
   "youtube",
@@ -373,7 +430,7 @@ function writeReport(name: string, payload: unknown): void {
  */
 export async function runLlmHandleResearch(
   prisma: PrismaClient,
-  opts: { provider?: LlmProvider } = {},
+  opts: { provider?: LlmProvider; reportTag?: string } = {},
 ): Promise<ResearchStats> {
   const provider = opts.provider ?? detectLlmProvider();
   const stats: ResearchStats = {
@@ -543,9 +600,228 @@ export async function runLlmHandleResearch(
     rows,
   };
   writeReport("llm-handle-research.json", payload);
-  if (provider) writeReport(`llm-handle-research-${provider}.json`, payload);
+  if (provider) {
+    const tag = opts.reportTag ? `-${opts.reportTag}` : "";
+    writeReport(`llm-handle-research-${provider}${tag}.json`, payload);
+  }
   console.log(
     `[llm-research] provider=${provider} scanned=${stats.scanned}` +
+      ` proposed=${stats.proposed} applied=${stats.applied} rejected=${stats.rejected}`,
+  );
+  return stats;
+}
+
+async function verifyEventProposal(
+  eventName: string,
+  proposal: HandleProposal,
+  artistKeys: Set<string>,
+): Promise<{ accepted: VerifiedField[]; rejected: ResearchRow["rejected"] }> {
+  const accepted: VerifiedField[] = [];
+  const rejected: ResearchRow["rejected"] = [];
+  for (const field of FIELDS) {
+    const raw = proposal[field];
+    if (!raw) continue;
+    const ev = evaluateProposedEventUrl(eventName, field, raw, artistKeys);
+    if (!ev.ok || !ev.url) {
+      rejected.push({ field, url: raw, reason: ev.reason });
+      continue;
+    }
+    const live = await probeLive(ev.url);
+    if (live === "dead") {
+      rejected.push({ field, url: ev.url, reason: "URL is dead" });
+      continue;
+    }
+    accepted.push({ field, url: ev.url, reason: ev.reason });
+  }
+  return { accepted, rejected };
+}
+
+function previouslyResearchedEventSlugs(cwd = process.cwd()): Set<string> {
+  const dir = join(cwd, "data", "crosscheck");
+  const out = new Set<string>();
+  let files: string[] = [];
+  try {
+    files = readdirSync(dir).filter(
+      (f) => f.startsWith("llm-event-handle-research") && f.endsWith(".json"),
+    );
+  } catch {
+    return out;
+  }
+  for (const f of files) {
+    try {
+      const raw = JSON.parse(readFileSync(join(dir, f), "utf8")) as {
+        rows?: Array<{ slug?: string }>;
+      };
+      for (const row of raw.rows ?? []) {
+        if (row.slug) out.add(row.slug);
+      }
+    } catch {
+      /* ignore */
+    }
+  }
+  return out;
+}
+
+/**
+ * Official festival/club socials. Fill-null only. Never copies a DJ profile.
+ */
+export async function runLlmEventHandleResearch(
+  prisma: PrismaClient,
+  opts: { provider?: LlmProvider; reportTag?: string } = {},
+): Promise<ResearchStats> {
+  const provider = opts.provider ?? detectLlmProvider();
+  const stats: ResearchStats = {
+    provider,
+    scanned: 0,
+    proposed: 0,
+    applied: 0,
+    rejected: 0,
+    skippedNoKey: !provider,
+  };
+  if (!provider) return stats;
+  if (process.env.LLM_RESEARCH === "0" || process.env.LLM_RESEARCH_EVENTS === "0") {
+    console.log("[llm-event-research] skipped");
+    return stats;
+  }
+
+  const limit = Math.max(1, Number(process.env.LLM_EVENT_RESEARCH_LIMIT || 60));
+  const apply = process.env.LLM_RESEARCH_APPLY !== "0";
+  const artistKeys = await loadArtistSocialKeys(prisma);
+  const already = previouslyResearchedEventSlugs();
+  const djNames = new Set(
+    (
+      await prisma.dj.findMany({
+        select: { name: true, slug: true },
+      })
+    ).flatMap((d) => [d.name.toLowerCase(), d.slug.toLowerCase()]),
+  );
+
+  const events = (
+    await prisma.event.findMany({
+      where: {
+        kind: { in: ["festival", "club"] },
+        OR: [
+          { instagram: null },
+          { twitter: null },
+          { website: null },
+          { soundcloud: null },
+        ],
+      },
+      select: {
+        id: true,
+        slug: true,
+        name: true,
+        kind: true,
+        location: true,
+        soundcloud: true,
+        instagram: true,
+        twitter: true,
+        website: true,
+        _count: { select: { sets: true } },
+      },
+    })
+  )
+    .filter((e) => {
+      if (already.has(e.slug)) return false;
+      if (djNames.has(e.name.toLowerCase()) || djNames.has(e.slug.toLowerCase())) {
+        return false;
+      }
+      return true;
+    })
+    .sort(
+      (a, b) =>
+        b._count.sets - a._count.sets || a.name.localeCompare(b.name),
+    )
+    .slice(0, limit);
+
+  console.log(
+    `[llm-event-research] provider=${provider} queue=${events.map((e) => e.name).join(", ")}`,
+  );
+
+  const rows: ResearchRow[] = [];
+  for (const e of events) {
+    stats.scanned += 1;
+    console.log(
+      `[llm-event-research] ${stats.scanned}/${events.length} ${e.name} (${e.slug})`,
+    );
+    try {
+      const text = await complete(
+        provider,
+        eventHandlePrompt(e.name, e.kind, e.location),
+      );
+      const proposal = parseLlmJson(text);
+      if (!proposal) {
+        rows.push({
+          slug: e.slug,
+          name: e.name,
+          provider,
+          proposal: null,
+          accepted: [],
+          rejected: [],
+          error: "unparseable model JSON",
+        });
+        continue;
+      }
+      stats.proposed += 1;
+      const { accepted, rejected } = await verifyEventProposal(
+        e.name,
+        proposal,
+        artistKeys,
+      );
+      stats.rejected += rejected.length;
+      if (apply && accepted.length) {
+        const data: Record<string, string> = {};
+        const current: Record<string, string | null> = {
+          soundcloud: e.soundcloud,
+          instagram: e.instagram,
+          twitter: e.twitter,
+          website: e.website,
+        };
+        for (const a of accepted) {
+          if (a.field === "youtube") continue;
+          if (current[a.field]) continue;
+          data[a.field] = a.url;
+        }
+        if (Object.keys(data).length) {
+          await prisma.event.update({ where: { id: e.id }, data });
+          stats.applied += Object.keys(data).length;
+        }
+      }
+      rows.push({
+        slug: e.slug,
+        name: e.name,
+        provider,
+        proposal,
+        accepted,
+        rejected,
+      });
+    } catch (err) {
+      rows.push({
+        slug: e.slug,
+        name: e.name,
+        provider,
+        proposal: null,
+        accepted: [],
+        rejected: [],
+        error: err instanceof Error ? err.message : String(err),
+      });
+    }
+  }
+
+  const payload = {
+    generatedAt: new Date().toISOString(),
+    provider,
+    apply,
+    stats,
+    rows,
+  };
+  writeReport("llm-event-handle-research.json", payload);
+  if (provider) {
+    const tag = opts.reportTag ? `-${opts.reportTag}` : "";
+    writeReport(`llm-event-handle-research-${provider}${tag}.json`, payload);
+  }
+  console.log(
+    `[llm-event-research] provider=${provider} scanned=${stats.scanned}` +
       ` proposed=${stats.proposed} applied=${stats.applied} rejected=${stats.rejected}`,
   );
   return stats;
