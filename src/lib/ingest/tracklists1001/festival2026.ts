@@ -72,6 +72,7 @@ import {
 import {
   TL_ALESSO_TML_WE1_2026,
   TL_DJS_FROM_MARS_MASH_UP_UNIVERSE_056_2026,
+  TL_ILLENIUM_TML_WE1_2026,
 } from "./festivalCaptures20260817";
 
 export {
@@ -134,6 +135,7 @@ export {
   TL_INDIRA_PAGANOTTO_ATMOSPHERE_STAGE_TOMORROWLAND_WE1_BELGIUM_2023,
   TL_DJS_FROM_MARS_MASH_UP_UNIVERSE_056_2026,
   TL_ALESSO_TML_WE1_2026,
+  TL_ILLENIUM_TML_WE1_2026,
 };
 
 function formatClock(sec: number): string {
@@ -4650,6 +4652,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "sc-tomorrowland-mash-up-universe-djs-from-mars-august-2026":
     TL_DJS_FROM_MARS_MASH_UP_UNIVERSE_056_2026,
   "yt-TidwOi0NMI0": TL_ALESSO_TML_WE1_2026,
+  "yt-E1WH0nvaxAw": TL_ILLENIUM_TML_WE1_2026,
 };
 
 /** Sanity: every seeded clock must parse. */

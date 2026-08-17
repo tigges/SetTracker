@@ -130,6 +130,7 @@ import {
   TL_INDIRA_PAGANOTTO_ATMOSPHERE_STAGE_TOMORROWLAND_WE1_BELGIUM_2023,
   TL_DJS_FROM_MARS_MASH_UP_UNIVERSE_056_2026,
   TL_ALESSO_TML_WE1_2026,
+  TL_ILLENIUM_TML_WE1_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   tracklist1001RowsToPlays,
@@ -2557,6 +2558,28 @@ for (let i = 1; i < alessoWe1.length; i++) {
   assert.ok(
     (alessoWe1[i]!.timestamp ?? 0) > (alessoWe1[i - 1]!.timestamp ?? 0),
     `Alesso TML WE1 2026 clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_ILLENIUM_TML_WE1_2026);
+assert.equal(TL_ILLENIUM_TML_WE1_2026.length, 97);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-E1WH0nvaxAw"],
+  TL_ILLENIUM_TML_WE1_2026,
+);
+assert.equal(isWiredTracklistSlug("yt-E1WH0nvaxAw"), true);
+const illeniumWe1 = tracklist1001RowsToPlays(TL_ILLENIUM_TML_WE1_2026);
+assert.equal(illeniumWe1.length, 97);
+assert.equal(illeniumWe1[0]?.provenance, "1001tl");
+assert.equal(illeniumWe1[0]?.timestamp, 12);
+assert.equal(illeniumWe1[0]?.artistName, "ILLENIUM");
+assert.equal(illeniumWe1[0]?.trackTitle, "ODYSSEY Live Intro Edit");
+assert.equal(illeniumWe1[96]?.trackTitle, "Good Things Fall Apart");
+assert.equal(illeniumWe1[96]?.timestamp, 59 * 60 + 30);
+for (let i = 1; i < illeniumWe1.length; i++) {
+  assert.ok(
+    (illeniumWe1[i]!.timestamp ?? 0) > (illeniumWe1[i - 1]!.timestamp ?? 0),
+    `ILLENIUM TML WE1 2026 clocks must increase at index ${i}`,
   );
 }
 
