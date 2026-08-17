@@ -2820,4 +2820,15 @@ for (let i = 1; i < coleHard.length; i++) {
 assert.equal(isWiredTracklistSlug("yt-DWPSLZLKslg"), false);
 assert.equal(TRACKLIST_1001_BY_SOURCE_SLUG["yt-DWPSLZLKslg"], undefined);
 
+// Claptone Clapcast 576 — official SC Relive in, 1001 URL recorded,
+// no cue paste. Do not invent 1001tl rows or sc-https://… slugs.
+assert.equal(isWiredTracklistSlug("sc-claptone-clapcast-576"), false);
+assert.equal(TRACKLIST_1001_BY_SOURCE_SLUG["sc-claptone-clapcast-576"], undefined);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-https://soundcloud.com/claptone/clapcast-576"
+  ],
+  undefined,
+);
+
 console.log("tracklists1001/seeds.test.ts ok");

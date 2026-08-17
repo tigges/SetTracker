@@ -308,4 +308,22 @@ assert.equal(
   "sc-tomorrowland-mash-up-universe-djs-from-mars-august-2026",
 );
 
+const clapcast576Sc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) => s.url === "https://soundcloud.com/claptone/clapcast-576",
+);
+assert.ok(clapcast576Sc);
+assert.equal(clapcast576Sc.primaryArtist.name, "Claptone");
+assert.equal(clapcast576Sc.type, "radio");
+assert.equal(clapcast576Sc.seriesName, "Clapcast");
+assert.equal(
+  `sc-claptone-${slugify("clapcast-576")}`,
+  "sc-claptone-clapcast-576",
+);
+assert.equal(
+  SOUNDCLOUD_TRACK_SEEDS.some(
+    (s) => s.url === "https://soundcloud.com/claptone/claptone-clapcast-576",
+  ),
+  false,
+);
+
 console.log("soundcloud/tracks.test.ts ok");

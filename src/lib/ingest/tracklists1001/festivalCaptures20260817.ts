@@ -686,3 +686,14 @@ export const TL_COLE_TERRAZAS_HARD_SUMMER_2026: FingerprintSeedRow[] = [
   { at: "34:14", artist: "Mathew Jonson", title: "Automaton" },
   { at: "56:08", artist: "Oshana", title: "Girls In The Front" },
 ];
+
+/**
+ * Claptone - Clapcast 576 2026-07-31
+ * https://www.1001tracklists.com/tracklist/uq8g1pk/claptone-clapcast-576-2026-07-31.html
+ * Official SC Relive: https://soundcloud.com/claptone/clapcast-576
+ * (sc-claptone-clapcast-576). Mixcloud is a mirror only.
+ * Operator sent the 1001 URL without cue rows — do not scrape 1001 or
+ * invent TL_CLAPTONE_CLAPCAST_576_2026. Official SC description has 14
+ * untimed tracks (source provenance). Paste timed 1001 cues to wire
+ * TRACKLIST_1001_BY_SOURCE_SLUG["sc-claptone-clapcast-576"].
+ */

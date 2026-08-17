@@ -344,4 +344,19 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     type: "radio",
     minDurationSec: 30 * 60,
   },
+  {
+    // Official Claptone upload (CLAPCAST #576). Operator 1001 URL
+    // uq8g1pk recorded in known-1001-urls pendingCuePaste — do not
+    // scrape or invent 1001tl rows. Description has 14 untimed tracks.
+    // Slug: sc-claptone-clapcast-576 (never sc-https://…).
+    // Mixcloud https://www.mixcloud.com/Claptone/clapcast-576/ is a mirror.
+    url: "https://soundcloud.com/claptone/clapcast-576",
+    primaryArtist: dj("Claptone", {
+      accent: "#ffd60a",
+    }),
+    genre: "Deep House",
+    seriesName: "Clapcast",
+    type: "radio",
+    minDurationSec: 30 * 60,
+  },
 ];
