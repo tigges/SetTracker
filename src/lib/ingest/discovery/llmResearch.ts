@@ -19,7 +19,11 @@ import { isJunkArtistName } from "../../artistName";
 import { isCatalogWorkDj, isTop100DjSlug } from "../../djCatalog";
 import { isBrandHostSlug } from "../../brandHosts";
 import { youtubeChannelUrl } from "../../social";
-import { normalizeOfficialWebsite } from "./wikidataOfficial";
+import {
+  normalizeOfficialWebsite,
+  websiteHost,
+  websiteHostMatchesDj,
+} from "./wikidataOfficial";
 import {
   djMayClaimSocialUrl,
   eventMayClaimSocialUrl,
@@ -273,23 +277,8 @@ export function evaluateProposedUrl(
     if (key && artistKeys.has(key)) {
       return { ok: false, reason: "URL already owned by another DJ" };
     }
-  } else {
-    const host = (() => {
-      try {
-        return new URL(url).hostname.replace(/^www\./, "");
-      } catch {
-        return "";
-      }
-    })();
-    const compact = djName.toLowerCase().replace(/[^a-z0-9]+/g, "");
-    const hostCompact = host.replace(/[^a-z0-9]+/g, "");
-    if (
-      compact.length >= 4 &&
-      !hostCompact.includes(compact) &&
-      !compact.includes(hostCompact.replace(/com$|net$|org$/, ""))
-    ) {
-      return { ok: false, reason: "website host does not match DJ name" };
-    }
+  } else if (!websiteHostMatchesDj(djName, websiteHost(url) || url)) {
+    return { ok: false, reason: "website host does not match DJ name" };
   }
   return { ok: true, url, reason: "name-matched" };
 }

@@ -33,6 +33,49 @@ async function wikiJson(url: string): Promise<unknown | null> {
   }
 }
 
+/** Hosts that look name-adjacent but are not a catalog artist homepage. */
+const REJECTED_WEBSITE_HOSTS = new Set([
+  // Casino / click-through, not the Ivorian Boiler Room BDK.
+  "therealdjbdk.com",
+]);
+
+export function websiteHost(raw: string): string {
+  try {
+    return new URL(raw).hostname.replace(/^www\./i, "").toLowerCase();
+  } catch {
+    return "";
+  }
+}
+
+export function isRejectedWebsiteHost(hostOrUrl: string): boolean {
+  const host = hostOrUrl.includes("://")
+    ? websiteHost(hostOrUrl)
+    : hostOrUrl.replace(/^www\./i, "").toLowerCase();
+  return Boolean(host) && REJECTED_WEBSITE_HOSTS.has(host);
+}
+
+/**
+ * True when a homepage host is a plausible official site for this DJ.
+ * Short names (BDK) must match the registrable label, not a substring of
+ * a longer brand (therealdjbdk.com).
+ */
+export function websiteHostMatchesDj(djName: string, hostOrUrl: string): boolean {
+  const host = hostOrUrl.includes("://")
+    ? websiteHost(hostOrUrl)
+    : hostOrUrl.replace(/^www\./i, "").toLowerCase();
+  if (!host || isRejectedWebsiteHost(host)) return false;
+  const compact = djName.toLowerCase().replace(/[^a-z0-9]+/g, "");
+  const hostCompact = host.replace(/[^a-z0-9]+/g, "");
+  const label = host.split(".")[0] ?? "";
+  if (!compact || !hostCompact) return false;
+  if (compact.length < 4) {
+    return label === compact || label === `dj${compact}` || label === `${compact}dj`;
+  }
+  if (hostCompact.includes(compact)) return true;
+  const hostCore = hostCompact.replace(/(com|net|org|io|tv|co)$/i, "");
+  return Boolean(hostCore) && compact.includes(hostCore);
+}
+
 export function normalizeOfficialWebsite(raw: string): string | null {
   let s = raw.trim();
   if (!s) return null;
@@ -49,6 +92,7 @@ export function normalizeOfficialWebsite(raw: string): string | null {
     ) {
       return null;
     }
+    if (isRejectedWebsiteHost(u.hostname)) return null;
     u.hash = "";
     if (u.protocol === "http:") u.protocol = "https:";
     let path = u.pathname.replace(/\/+$/, "");
