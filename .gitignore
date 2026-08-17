@@ -47,6 +47,8 @@ yarn-error.log*
 # generated ingest scan output
 /data/url-scan-candidates.json
 /data/venue-candidates.json
+# local / CI density audit (artifact only; committed snapshot is set-density-live.json)
+/data/crosscheck/set-density.json
 
 # vercel
 .vercel
