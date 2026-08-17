@@ -5,6 +5,7 @@
  */
 
 import { canonicalBeatportUrl } from "../trackMeta";
+import { namesClose, primaryArtist, titleRank } from "../ingest/identify/names";
 
 const UA =
   "SetRadar/0.2.7 (https://setradar.ai; track metadata; contact via github.com/tigges/SetTracker)";
@@ -37,6 +38,31 @@ type MbRecording = {
   relations?: MbUrlRel[];
 };
 
+/** Prefer exact studio titles over remix/bootleg recordings. */
+export function pickBestRecording(
+  title: string,
+  artistName: string,
+  recordings: MbRecording[],
+): MbRecording | null {
+  const primary = primaryArtist(artistName);
+  const ranked = recordings
+    .map((row) => {
+      const credit =
+        row["artist-credit"]?.[0]?.name ??
+        row["artist-credit"]?.[0]?.artist?.name ??
+        "";
+      const artistOk =
+        !credit ||
+        namesClose(credit, primary) ||
+        namesClose(credit, artistName);
+      const rank = row.title && artistOk ? titleRank(title, row.title) : 0;
+      return { row, rank };
+    })
+    .filter((x) => x.rank > 0)
+    .sort((a, b) => b.rank - a.rank);
+  return ranked[0]?.row ?? null;
+}
+
 /** Pull the first canonical Beatport track URL from MusicBrainz url-rels. */
 export function beatportUrlFromMbRelations(
   relations: MbUrlRel[] | null | undefined,
@@ -48,31 +74,15 @@ export function beatportUrlFromMbRelations(
   return null;
 }
 
-function norm(s: string): string {
-  return s
-    .toLowerCase()
-    .normalize("NFKD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/[^a-z0-9]+/g, " ")
-    .trim();
-}
-
-function nameClose(a: string, b: string): boolean {
-  const na = norm(a);
-  const nb = norm(b);
-  return na === nb || na.includes(nb) || nb.includes(na);
-}
-
 export async function resolveTrackMetaMusicBrainz(
   title: string,
   artistName: string,
 ): Promise<MusicBrainzTrackMeta | null> {
-  const primary =
-    artistName.split(/[,&]| b2b | x /i)[0]?.trim() || artistName;
+  const primary = primaryArtist(artistName);
   const q = encodeURIComponent(
     `recording:"${title.replace(/"/g, "")}" AND artist:"${primary.replace(/"/g, "")}"`,
   );
-  const url = `https://musicbrainz.org/ws/2/recording/?query=${q}&fmt=json&limit=5`;
+  const url = `https://musicbrainz.org/ws/2/recording/?query=${q}&fmt=json&limit=8`;
 
   try {
     const res = await fetch(url, {
@@ -81,70 +91,70 @@ export async function resolveTrackMetaMusicBrainz(
     });
     if (!res.ok) return null;
     const json = (await res.json()) as { recordings?: MbRecording[] };
-    const rows = json.recordings ?? [];
-    for (const row of rows) {
-      if (!row.title || !nameClose(row.title, title)) continue;
-      const credit =
-        row["artist-credit"]?.[0]?.name ??
-        row["artist-credit"]?.[0]?.artist?.name ??
-        "";
-      if (credit && !nameClose(credit, primary) && !nameClose(credit, artistName)) {
-        continue;
-      }
+    const row = pickBestRecording(title, artistName, json.recordings ?? []);
+    if (!row?.id) return null;
 
-      const release = row.releases?.[0];
-      const labelName =
-        release?.["label-info"]?.find((li) => li.label?.name)?.label?.name ??
-        null;
-      const durationSec =
-        typeof row.length === "number" && row.length > 0
-          ? Math.round(row.length / 1000)
-          : null;
-      const releaseDate = release?.date && /^\d{4}/.test(release.date)
-        ? release.date.length === 4
-          ? `${release.date}-01-01`
-          : release.date.length === 7
-            ? `${release.date}-01`
-            : release.date
+    const release = row.releases?.[0];
+    const labelName =
+      release?.["label-info"]?.find((li) => li.label?.name)?.label?.name ??
+      null;
+    const durationSec =
+      typeof row.length === "number" && row.length > 0
+        ? Math.round(row.length / 1000)
         : null;
+    const releaseDate = release?.date && /^\d{4}/.test(release.date)
+      ? release.date.length === 4
+        ? `${release.date}-01-01`
+        : release.date.length === 7
+          ? `${release.date}-01`
+          : release.date
+      : null;
 
-      let beatportUrl: string | null = beatportUrlFromMbRelations(row.relations);
-      if (!beatportUrl && row.id) {
-        beatportUrl = await lookupRecordingBeatportUrl(row.id);
-      }
+    const extra = await lookupRecordingIds(row.id);
+    const beatportUrl =
+      beatportUrlFromMbRelations(row.relations) || extra.beatportUrl;
+    const isrc =
+      row.isrcs?.find((x) => /^[A-Z]{2}[A-Z0-9]{3}[0-9]{7}$/i.test(x)) ||
+      extra.isrc;
 
-      const isrc = row.isrcs?.find((x) => /^[A-Z]{2}[A-Z0-9]{3}[0-9]{7}$/i.test(x));
-      if (!durationSec && !releaseDate && !labelName && !beatportUrl && !row.id && !isrc) {
-        continue;
-      }
-      return {
-        durationSec,
-        releaseDate,
-        labelName,
-        beatportUrl,
-        mbid: row.id ?? null,
-        isrc: isrc ? isrc.toUpperCase() : null,
-      };
-    }
+    return {
+      durationSec,
+      releaseDate,
+      labelName,
+      beatportUrl,
+      mbid: row.id,
+      isrc: isrc ? isrc.toUpperCase() : null,
+    };
   } catch {
     /* ignore */
   }
   return null;
 }
 
-async function lookupRecordingBeatportUrl(mbid: string): Promise<string | null> {
-  const url = `https://musicbrainz.org/ws/2/recording/${encodeURIComponent(mbid)}?inc=url-rels&fmt=json`;
+async function lookupRecordingIds(mbid: string): Promise<{
+  beatportUrl: string | null;
+  isrc: string | null;
+}> {
+  const url = `https://musicbrainz.org/ws/2/recording/${encodeURIComponent(mbid)}?inc=url-rels+isrcs&fmt=json`;
   try {
-    // Search + lookup = 2 requests; stay under MB's ~1 req/sec.
     await new Promise((r) => setTimeout(r, 1100));
     const res = await fetch(url, {
       headers: { "User-Agent": UA, Accept: "application/json" },
       signal: AbortSignal.timeout(15_000),
     });
-    if (!res.ok) return null;
-    const json = (await res.json()) as { relations?: MbUrlRel[] };
-    return beatportUrlFromMbRelations(json.relations);
+    if (!res.ok) return { beatportUrl: null, isrc: null };
+    const json = (await res.json()) as {
+      relations?: MbUrlRel[];
+      isrcs?: string[];
+    };
+    const isrc = json.isrcs?.find((x) =>
+      /^[A-Z]{2}[A-Z0-9]{3}[0-9]{7}$/i.test(x),
+    );
+    return {
+      beatportUrl: beatportUrlFromMbRelations(json.relations),
+      isrc: isrc ? isrc.toUpperCase() : null,
+    };
   } catch {
-    return null;
+    return { beatportUrl: null, isrc: null };
   }
 }

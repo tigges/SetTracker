@@ -4,6 +4,8 @@ import {
   heldIdentifyJobs,
   uniqueIdentifyRows,
 } from "./trackIds";
+import { isPasteOnlyIdentifyUrl } from "./pasteOnly";
+import { acceptBeatportTrackUrl } from "./beatport";
 import {
   TL_COLE_TERRAZAS_HARD_SUMMER_2026,
   TL_KNOCK2_ZEDD_HARD_SUMMER_2026,
@@ -29,5 +31,10 @@ assert.ok(jobs.some((j) => j.seed === "TL_KNOCK2_ZEDD_HARD_SUMMER_2026"));
 assert.ok(jobs.some((j) => j.seed === "TL_COLE_TERRAZAS_HARD_SUMMER_2026"));
 assert.equal(uniqueIdentifyRows(TL_COLE_TERRAZAS_HARD_SUMMER_2026).length, 6);
 assert.equal(isWiredTracklistSlug("yt-6DC3xoQF4Zs"), false);
+assert.equal(isPasteOnlyIdentifyUrl("https://audioscout.io/x"), true);
+assert.equal(
+  acceptBeatportTrackUrl("https://www.beatport.com/search?q=clarity"),
+  undefined,
+);
 
 console.log("identify/trackIds.test.ts ok");

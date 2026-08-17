@@ -2,7 +2,7 @@
  * Manual fingerprint tracklists for curated sets.
  *
  * Source: direct ACRCloud / AudD (or equivalent) analysis results pasted by
- * operators — never scrape AudioScout / TrackId / MusicMate.
+ * operators — never scrape AudioScout / TrackId / MusicMate / Set79 HTML.
  * aha-music.com URL analysis is acceptable when the human pastes the IDs here.
  * 1001TL follow-links / curated captures live in `tracklists1001/` (provenance
  * "1001tl"), not here.
