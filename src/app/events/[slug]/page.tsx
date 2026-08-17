@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { ExpandableChipRow } from "@/components/ExpandableChipRow";
 import { SetCard } from "@/components/SetCard";
 import { SocialLinks } from "@/components/SocialLinks";
+import { VenueNightCard } from "@/components/VenueNightCard";
 import { ATLAS_YEAR, lookupAtlasVenue } from "@/lib/atlas/seed";
 import { chartKicker } from "@/lib/atlas/mapMath";
 import { getAllVenueSlugs, getVenueBySlug } from "@/lib/queries";
@@ -106,52 +107,17 @@ export default async function EventPage({
               </a>
             ) : null}
           </div>
-          <ul className="space-y-2">
+          <ul className="space-y-3">
             {event.nights.slice(0, 12).map((n) => (
-              <li
-                key={n.slug}
-                className="card flex flex-wrap items-baseline justify-between gap-2 p-3"
-              >
-                <span className="min-w-0">
-                  <span className="block text-[14px] font-semibold text-ink">
-                    {n.title}
-                  </span>
-                  <span className="mono text-[12px] text-muted2">
-                    {n.startsAt}
-                    {n.artists.length ? " · " : ""}
-                    {n.artists.slice(0, 6).map((a, i) => (
-                      <span key={`${a.name}-${i}`}>
-                        {i > 0 ? ", " : ""}
-                        {a.slug ? (
-                          <Link
-                            href={`/djs/${a.slug}`}
-                            className="text-ink transition-colors hover:text-brand"
-                            title="In catalog"
-                          >
-                            {a.name}
-                          </Link>
-                        ) : (
-                          <span title="On the bill">{a.name}</span>
-                        )}
-                      </span>
-                    ))}
-                    {n.artists.length > 6 ? "…" : ""}
-                  </span>
-                </span>
-                <a
-                  href={n.ticketsUrl || n.sourceUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="mono text-[12px] text-brand hover:text-brandstrong"
-                >
-                  Official →
-                </a>
-              </li>
+              <VenueNightCard key={n.slug} night={n} />
             ))}
           </ul>
-          {event.nights.some((n) => n.artists.some((a) => a.slug)) ? (
-            <p className="mt-2 text-[11px] text-muted2">
-              Linked names are in the catalog; others are on the bill only.
+          {event.nights.some(
+            (n) => n.headliner?.slug || n.artists.some((a) => a.slug),
+          ) ? (
+            <p className="mt-3 text-[11px] text-muted2">
+              Accent chips and titles link to catalog DJs; muted chips are on
+              the bill only.
             </p>
           ) : null}
         </section>

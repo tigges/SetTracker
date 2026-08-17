@@ -236,23 +236,27 @@ export default async function DjPage({
         <div className="space-y-5">
           {dj.upcomingNights.length > 0 && (
             <Panel title="On the bill" meta={`${dj.upcomingNights.length}`}>
-              <ul className="space-y-2.5">
+              <ul className="space-y-3">
                 {dj.upcomingNights.map((n) => (
-                  <li key={n.slug}>
+                  <li
+                    key={n.slug}
+                    className="rounded-xl border border-line bg-panel2 p-3"
+                  >
                     <Link
                       href={`/events/${n.eventSlug}`}
-                      className="block text-[13px] text-ink transition-colors hover:text-brand"
+                      className="block text-[14px] font-semibold text-ink transition-colors hover:text-brand"
                     >
                       {n.eventName}
                     </Link>
-                    <p className="mono text-[12px] text-muted2">
-                      {n.title} · {n.startsAt}
+                    <p className="mt-0.5 text-[13px] text-muted">{n.title}</p>
+                    <p className="mono mt-1 text-[12px] text-muted2">
+                      {n.startsAt}
                     </p>
                     <a
                       href={n.ticketsUrl || n.sourceUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="mono text-[11px] text-brand hover:text-brandstrong"
+                      className="mono mt-2 inline-block text-[11px] text-brand hover:text-brandstrong"
                     >
                       Official →
                     </a>
