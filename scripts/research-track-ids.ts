@@ -31,6 +31,7 @@ async function main() {
         misses: report.misses.length,
         applied: report.applied,
         isrcs: report.hits.filter((h) => h.isrc).length,
+        trackradarMode: report.trackradarMode,
         trackradar: report.hits.filter((h) => h.platforms).length,
         trackradarAnalyzes: report.trackradarAnalyzes.map((a) => ({
           sourceUrl: a.sourceUrl,

@@ -101,8 +101,9 @@ empty `PAGES_BASE_PATH`). The github.io `/SetTracker` path is a redirect.
   Reports in `data/crosscheck/llm-handle-research.json`.
   **Track IDs:** `npm run research:track-ids` resolves ISRCs from held 1001
   names via Deezer (optional MusicBrainz with `TRACK_ID_MB=1`). TrackRadar
-  (`TRACKRADAR=1` + `TRACKRADAR_API_KEY`) looks up platform IDs via MCP
-  `search_track`; `TRACKRADAR_ANALYZE=1` analyzes fingerprint-only fan
+  name-matches the public archive (no key). MCP `search_track`
+  needs `TRACKRADAR_API_KEY`. `TRACKRADAR=0` skips it.
+  `TRACKRADAR_ANALYZE=1` analyzes fingerprint-only fan
   YouTube (quota, never Relive). Fan Relives in `FINGERPRINT_ONLY_WATCH`
   are Identify-offset probes only — never `sourceUrl` / FileScan. LLM job
   `tracks` writes fill-null IDs only when Deezer/MB confirms the proposal.

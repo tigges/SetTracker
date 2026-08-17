@@ -228,10 +228,11 @@ weekly enrich `full`. Reports: `data/crosscheck/llm-handle-research.json`.
 
 **Track IDs from held 1001 seeds** (`npm run research:track-ids`): named cues
 go to Deezer (ISRC) and optional MusicBrainz (`TRACK_ID_MB=1` → MBID /
-Beatport). [TrackRadar](https://trackradar.ai) (`TRACKRADAR=1` +
-`TRACKRADAR_API_KEY`) adds Spotify / Bandcamp / Apple / Discogs via MCP
-`search_track` (name-matched). `TRACKRADAR_ANALYZE=1` runs
-`analyze_social_post` on fingerprint-only fan clips (quota; never Relive).
+Beatport). [TrackRadar](https://trackradar.ai) name-matches the public
+`/api/tracklists` archive (no key). With `TRACKRADAR_API_KEY`, MCP
+`search_track` is preferred. `TRACKRADAR=0` skips TrackRadar.
+`TRACKRADAR_ANALYZE=1` analyzes fingerprint-only fan clips (quota; never
+Relive) and still needs a key for a reliable run.
 Fill-null `Track.isrc` / `beatportUrl` only with `TRACK_ID_APPLY=1`. Report:
 `data/crosscheck/track-id-research.json`.
 

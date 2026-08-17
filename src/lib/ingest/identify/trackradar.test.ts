@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import {
   evaluateTrackRadarHit,
+  matchPublishedTrack,
   parseTrackRadarTrack,
   platformsFromUnknown,
   namesClose,
@@ -60,6 +61,26 @@ assert.equal(parseTrackRadarTrack({ title: "Only Title" }), null);
 assert.equal(
   isFingerprintOnlyWatchUrl("https://www.youtube.com/watch?v=6DC3xoQF4Zs"),
   true,
+);
+
+const archiveHit = matchPublishedTrack("Zedd ft. Jon Bellion", "Beautiful Now", [
+  {
+    artist: "Zedd",
+    title: "Beautiful Now",
+    platforms: { spotify: "https://open.spotify.com/track/abc" },
+  },
+  {
+    artist: "Knock2",
+    title: "dashstar*",
+    platforms: { spotify: "https://open.spotify.com/track/zzz" },
+  },
+]);
+assert.equal(archiveHit?.platforms.spotify, "https://open.spotify.com/track/abc");
+assert.equal(
+  matchPublishedTrack("Zedd", "Clarity", [
+    { artist: "Zedd", title: "Beautiful Now", platforms: {} },
+  ]),
+  null,
 );
 
 console.log("identify/trackradar.test.ts ok");

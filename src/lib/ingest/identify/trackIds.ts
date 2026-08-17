@@ -25,7 +25,7 @@ import { fingerprintIdProbes } from "./fingerprintWatch";
 import {
   analyzeFingerprintOnlyWatches,
   searchTrackRadar,
-  trackradarApiKey,
+  trackradarMode,
   type TrackRadarAnalyzeResult,
   type TrackRadarPlatforms,
 } from "./trackradar";
@@ -56,6 +56,7 @@ export type TrackIdReport = {
   hits: TrackIdHit[];
   misses: TrackIdMiss[];
   idGaps: ReturnType<typeof fingerprintIdProbes>;
+  trackradarMode: ReturnType<typeof trackradarMode>;
   trackradarAnalyzes: TrackRadarAnalyzeResult[];
   applied: number;
 };
@@ -177,8 +178,7 @@ export async function identifyHeldSeeds(opts: {
   const musicbrainz =
     opts.musicbrainz ?? process.env.TRACK_ID_MB === "1";
   const trackradar =
-    opts.trackradar ??
-    (process.env.TRACKRADAR === "1" || Boolean(trackradarApiKey()));
+    opts.trackradar ?? process.env.TRACKRADAR !== "0";
   const rows = heldIdentifyJobs().flatMap((j) =>
     uniqueIdentifyRows(j.rows).map((r) => ({ ...r, seed: j.seed })),
   );
@@ -201,11 +201,12 @@ export async function identifyHeldSeeds(opts: {
 
   const report: TrackIdReport = {
     generatedAt: new Date().toISOString(),
-    note: "Verified Deezer / MusicBrainz / TrackRadar IDs from held 1001 seeds. Fan Relives stay unwired.",
+    note: "Verified Deezer / MusicBrainz / TrackRadar IDs from held 1001 seeds. Fan Relives stay unwired. TrackRadar MCP is skipped without TRACKRADAR_API_KEY; public archive is used instead.",
     scanned: slice.length,
     hits,
     misses,
     idGaps: fingerprintIdProbes(),
+    trackradarMode: trackradarMode(),
     trackradarAnalyzes,
     applied,
   };
