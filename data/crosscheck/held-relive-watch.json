@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-13T15:08:03.334Z",
+  "generatedAt": "2026-08-17T02:16:25.988Z",
   "playlists": [
     {
       "id": "PLeeZgE3_zp1w",
@@ -53,13 +53,6 @@
   ],
   "unwiredOfficial": [
     {
-      "label": "Armin van Buuren WE1 | Tomorrowland 2026",
-      "slug": "yt-pwXGm4HEQdo",
-      "name": "TL_ARMIN_VAN_BUUREN_TML_WE1",
-      "searchUrl": "https://www.google.com/search?q=Armin%20van%20Buuren%20tomorrowland%202026%20site%3A1001tracklists.com",
-      "reason": "relive:official-unwired"
-    },
-    {
       "label": "Alesso | Tomorrowland 2026 (Mainstage Weekend 1) [Full DJ Live Set]",
       "slug": "yt-TidwOi0NMI0",
       "name": "TL_ALESSO_TML_WE1",
@@ -78,13 +71,6 @@
       "slug": "yt-jSJEkiV3cCs",
       "name": "TL_CHASE_STATUS_TML_WE2",
       "searchUrl": "https://www.google.com/search?q=Chase%20%26%20Status%20tomorrowland%202026%20site%3A1001tracklists.com",
-      "reason": "relive:official-unwired"
-    },
-    {
-      "label": "Oliver Heldens WE1 | Tomorrowland 2026",
-      "slug": "yt-2i3XOxbp54U",
-      "name": "TL_OLIVER_HELDENS_TML_WE1",
-      "searchUrl": "https://www.google.com/search?q=Oliver%20Heldens%20tomorrowland%202026%20site%3A1001tracklists.com",
       "reason": "relive:official-unwired"
     },
     {

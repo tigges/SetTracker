@@ -6,6 +6,7 @@ import {
   compareDeepCatalog,
   compareEventSetPriority,
   compareFeedPriority,
+  isArchiveTitledSet,
   isThisPerformanceYear,
   dedupeNearDuplicates,
   diversifyByArtist,
@@ -17,8 +18,56 @@ import {
   pickRadarPicks,
   radarPickScore,
   resolveVenueTier,
+  setPerformanceYear,
+  yearFromSetTitle,
 } from "./feedPriority";
 import { resolveFeedRanks } from "./feedPriorityResolve";
+
+describe("title year vs upload date", () => {
+  const now = Date.parse("2026-08-16T12:00:00.000Z");
+
+  it("reads the last 20xx in the set title", () => {
+    assert.equal(
+      yearFromSetTitle("Alan Walker | Tomorrowland Belgium 2018", now),
+      2018,
+    );
+    assert.equal(
+      yearFromSetTitle("Hardwell On Air 527 YEARMIX 2025", now),
+      2025,
+    );
+    assert.equal(yearFromSetTitle("Joel Corry Live @ Edge NYC", now), null);
+  });
+
+  it("treats pre-last-year title years as archive Relives", () => {
+    assert.equal(
+      isArchiveTitledSet("Alan Walker | Tomorrowland Belgium 2018", now),
+      true,
+    );
+    assert.equal(isArchiveTitledSet("FISHER — EDC Orlando 2024", now), true);
+    assert.equal(
+      isArchiveTitledSet("Hardwell On Air 527 YEARMIX 2025", now),
+      false,
+    );
+    assert.equal(
+      isArchiveTitledSet("Alok | Tomorrowland Winter 2026", now),
+      false,
+    );
+  });
+
+  it("prefers title year over a remapped 2026 edition", () => {
+    assert.equal(
+      setPerformanceYear(
+        {
+          title: "Alan Walker | Tomorrowland Belgium 2018",
+          publishedAt: "2026-08-01T00:00:00.000Z",
+          editionYear: 2026,
+        },
+        now,
+      ),
+      2018,
+    );
+  });
+});
 
 describe("feedPriority complete → Top 100 → festivals", () => {
   it("loads DJ and festival chart ranks (with event aliases)", () => {

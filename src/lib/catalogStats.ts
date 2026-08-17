@@ -141,6 +141,7 @@ export type CatalogStats = {
   tracks: {
     withImage: number;
     withBeatport: number;
+    withIsrc: number;
     withBpm: number;
   };
   /** ACRCloud enrich (`provenance: "fingerprint"`). */
@@ -323,6 +324,7 @@ export async function getCatalogStats(): Promise<CatalogStats> {
     setsWithPlayback,
     tracksWithImage,
     tracksWithBeatport,
+    tracksWithIsrc,
     tracksWithBpm,
     setTypeGroups,
     setSourceGroups,
@@ -348,6 +350,7 @@ export async function getCatalogStats(): Promise<CatalogStats> {
     prisma.set.count({ where: { playbackUrl: { not: null } } }),
     prisma.track.count({ where: { imageUrl: { not: null } } }),
     prisma.track.count({ where: { beatportUrl: { not: null } } }),
+    prisma.track.count({ where: { isrc: { not: null } } }),
     prisma.track.count({ where: { bpm: { not: null } } }),
     prisma.set.groupBy({
       by: ["type"],
@@ -899,6 +902,7 @@ export async function getCatalogStats(): Promise<CatalogStats> {
     tracks: {
       withImage: tracksWithImage,
       withBeatport: tracksWithBeatport,
+      withIsrc: tracksWithIsrc,
       withBpm: tracksWithBpm,
     },
     fingerprint: {

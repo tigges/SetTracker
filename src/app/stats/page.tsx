@@ -272,7 +272,7 @@ export default async function StatsPage() {
       </div>
 
       <section className="mb-5">
-        <div className="grid grid-cols-2 gap-x-4 sm:grid-cols-4 lg:grid-cols-8">
+        <div className="grid grid-cols-2 gap-x-4 sm:grid-cols-3 lg:grid-cols-9">
           <Stat label="Sets" value={s.totals.sets} />
           <Stat
             label="DJs"
@@ -303,6 +303,11 @@ export default async function StatsPage() {
             label="Fingerprint"
             value={s.fingerprint.identified}
             hint={`${s.fingerprint.uniqueTracks} tracks`}
+          />
+          <Stat
+            label="Beatport"
+            value={s.tracks.withBeatport}
+            hint={`${s.tracks.withIsrc.toLocaleString()} ISRC`}
           />
           <Stat label="Events" value={s.totals.venues} />
         </div>
@@ -337,7 +342,7 @@ export default async function StatsPage() {
       <QueueFold
         title="Tracklist capture"
         count={s.tracklistGaps.length}
-        hint={`${s.sets.incomplete.toLocaleString()} thin/severe stored — only this-year chart or festival Relives are a capture job. Find a 1001 page already on the source (do not invent URLs). Wired 1001 seeds and weekly radio episodes are not this queue. Empty shells have no set page.`}
+        hint={`${s.sets.incomplete.toLocaleString()} thin/severe stored — only this-year or last-year chart/festival Relives are a capture job (title year, not YouTube reupload date). Find a 1001 page already on the source (do not invent URLs). Wired 1001 seeds and weekly radio episodes are not this queue. Empty shells have no set page.`}
         open
       >
         <GapQueue
