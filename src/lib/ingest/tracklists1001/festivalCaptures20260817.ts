@@ -215,3 +215,41 @@ export const TL_ILLENIUM_TML_WE1_2026: FingerprintSeedRow[] = [
   { at: "59:30", artist: "ILLENIUM ft. Jon Bellion", title: "Good Things Fall Apart" },
 ];
 
+/**
+ * Chase & Status @ Mainstage, Tomorrowland Weekend 2, Belgium 2026-07-26
+ * https://www.1001tracklists.com/tracklist/p3duwuk/chase-status-mainstage-tomorrowland-weekend-2-belgium-2026-07-26.html
+ * Official YT: https://youtu.be/jSJEkiV3cCs
+ * Capture overlay used TL_Chase&Statu_Mainstage_Tomorrowland_WE2_Belgium_2026
+ * (`&` illegal); constant is TL_CHASE_STATUS_TML_WE2_2026.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-jSJEkiV3cCs"]
+ * Captured 2026-08-17 - provenance 1001tl.
+ */
+export const TL_CHASE_STATUS_TML_WE2_2026: FingerprintSeedRow[] = [
+  { at: "0:27", artist: "Chase & Status ft. Pozer", title: "Through The Pain" },
+  { at: "2:19", artist: "Landau & Eemoz", title: "Get'Da" },
+  { at: "4:10", artist: "Chase & Status & Hedex ft. ArrDee", title: "Liquor & Cigarettes (VIP)" },
+  { at: "6:58", artist: "Chase & Status & Hedex ft. Arrdee", title: "Liquor & Cigarettes" },
+  { at: "9:45", artist: "Chase & Status", title: "Badman" },
+  { at: "10:35", artist: "Subsonic", title: "Genesis" },
+  { at: "11:50", artist: "BrEaCh", title: "Jack (Hoax Rework)" },
+  { at: "13:35", artist: "Becky Hill & Chase & Status", title: "Disconnect" },
+  { at: "16:15", artist: "Chase & Status & Mozey ft. Sav'O & Horrid1", title: "On The Block" },
+  { at: "18:10", artist: "Chase & Status", title: "Run Da" },
+  { at: "20:00", artist: "Chase & Status & Bou ft. Trigga & IRAH & Flowdan & Takura", title: "Baddadan (VIP)" },
+  { at: "23:15", artist: "Travis Scott", title: "HYAENA" },
+  { at: "24:20", artist: "Chase & Status ft. J Hus & IRAH", title: "Disgruntled" },
+  { at: "28:35", artist: "Fred again.. & Skepta & PlaqueBoyMax & Denzel Curry & Hanumankind & That Mexican OT & D Double E & LYNY", title: "Victory Lap Five" },
+  { at: "32:50", artist: "Sammy Virji & Flowdan", title: "Shella Verse" },
+  { at: "34:20", artist: "Chase & Status", title: "Saxon" },
+  { at: "35:10", artist: "Chase & Status", title: "Eastern Jam (Chase & Status & Sammy Virji Remix)" },
+  { at: "37:05", artist: "Etta James", title: "At Last (Amplify & Nick The Lot Bootleg)" },
+  { at: "38:20", artist: "Chase & Status ft. Stefflon Don", title: "Selecta" },
+  { at: "41:25", artist: "Chase & Status & Stormzy", title: "BACKBONE" },
+  { at: "44:25", artist: "Chase & Status ft. Takura", title: "No Problem (4x4 Refix)" },
+  { at: "45:30", artist: "Rusko & Mozey", title: "Hands In The Air (VIP)" },
+  { at: "47:25", artist: "Basstripper", title: "Ready For It" },
+  { at: "49:55", artist: "Chase & Status ft. IRAH", title: "Program (VIP)" },
+  { at: "53:35", artist: "Upgrade", title: "Knock" },
+  { at: "56:40", artist: "Chase & Status", title: "Carnage" },
+];
+

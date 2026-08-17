@@ -131,6 +131,7 @@ import {
   TL_DJS_FROM_MARS_MASH_UP_UNIVERSE_056_2026,
   TL_ALESSO_TML_WE1_2026,
   TL_ILLENIUM_TML_WE1_2026,
+  TL_CHASE_STATUS_TML_WE2_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   tracklist1001RowsToPlays,
@@ -2580,6 +2581,28 @@ for (let i = 1; i < illeniumWe1.length; i++) {
   assert.ok(
     (illeniumWe1[i]!.timestamp ?? 0) > (illeniumWe1[i - 1]!.timestamp ?? 0),
     `ILLENIUM TML WE1 2026 clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_CHASE_STATUS_TML_WE2_2026);
+assert.equal(TL_CHASE_STATUS_TML_WE2_2026.length, 26);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-jSJEkiV3cCs"],
+  TL_CHASE_STATUS_TML_WE2_2026,
+);
+assert.equal(isWiredTracklistSlug("yt-jSJEkiV3cCs"), true);
+const chaseWe2 = tracklist1001RowsToPlays(TL_CHASE_STATUS_TML_WE2_2026);
+assert.equal(chaseWe2.length, 26);
+assert.equal(chaseWe2[0]?.provenance, "1001tl");
+assert.equal(chaseWe2[0]?.timestamp, 27);
+assert.equal(chaseWe2[0]?.artistName, "Chase & Status ft. Pozer");
+assert.equal(chaseWe2[0]?.trackTitle, "Through The Pain");
+assert.equal(chaseWe2[25]?.trackTitle, "Carnage");
+assert.equal(chaseWe2[25]?.timestamp, 56 * 60 + 40);
+for (let i = 1; i < chaseWe2.length; i++) {
+  assert.ok(
+    (chaseWe2[i]!.timestamp ?? 0) > (chaseWe2[i - 1]!.timestamp ?? 0),
+    `Chase & Status TML WE2 2026 clocks must increase at index ${i}`,
   );
 }
 

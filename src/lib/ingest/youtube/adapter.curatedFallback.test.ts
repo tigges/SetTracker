@@ -79,6 +79,9 @@ const ALESSO_TML_WE1 = YOUTUBE_SETS.find((s) =>
 const ILLENIUM_TML_WE1 = YOUTUBE_SETS.find((s) =>
   s.video.includes("E1WH0nvaxAw"),
 );
+const CHASE_STATUS_TML_WE2 = YOUTUBE_SETS.find((s) =>
+  s.video.includes("jSJEkiV3cCs"),
+);
 
 describe("watchMetaFromCuratedSeed", () => {
   it("builds ASOT 1290 meta from the curated 1001 capture", () => {
@@ -133,6 +136,17 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=WWnLYZrh6kw");
     // Last cue 1:56:31 + 180s pad.
     assert.equal(meta.durationSec, 1 * 3600 + 56 * 60 + 31 + 180);
+  });
+
+  it("builds Chase & Status TML WE2 Mainstage meta from the curated 1001 capture", () => {
+    assert.ok(CHASE_STATUS_TML_WE2);
+    const meta = watchMetaFromCuratedSeed(CHASE_STATUS_TML_WE2);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "jSJEkiV3cCs");
+    assert.match(meta.title, /Chase & Status/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=jSJEkiV3cCs");
+    // Last cue 56:40 + 180s pad.
+    assert.equal(meta.durationSec, 56 * 60 + 40 + 180);
   });
 
   it("builds ILLENIUM TML WE1 Great Library meta from the curated 1001 capture", () => {
@@ -1164,6 +1178,20 @@ describe("curated YouTube 429 fallback", () => {
     assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
     assert.ok(sets[0]!.durationSec >= 59 * 60);
     assert.equal(sets[0]?.primaryArtist?.slug, "illenium");
+    assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
+  });
+
+  it("lands Chase & Status TML WE2 Mainstage from the 1001 seed when watch is 429", async () => {
+    assert.ok(CHASE_STATUS_TML_WE2);
+    const adapter = createYoutubeAdapter([CHASE_STATUS_TML_WE2], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-jSJEkiV3cCs");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 26);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 56 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "chase-status");
     assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
   });
 });
