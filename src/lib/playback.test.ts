@@ -8,6 +8,8 @@ import {
   playablePlaybackUrl,
   playbackUrlFromSource,
   resolvePlaybackTarget,
+  soundcloudSeekUrl,
+  youtubeSeekUrl,
 } from "./playback";
 
 assert.equal(detectPlaybackHost("https://soundcloud.com/a/b"), "soundcloud");
@@ -71,13 +73,26 @@ const ytSeek = resolvePlaybackTarget("https://youtu.be/dQw4w9WgXcQ", {
 });
 assert.ok(ytSeek!.embedSrc.includes("start=93"));
 assert.ok(ytSeek!.embedSrc.includes("autoplay=1"));
+assert.ok(ytSeek!.openUrl.includes("t=93s"));
 
 const scSeek = resolvePlaybackTarget("https://soundcloud.com/cloonee/edc-orlando", {
   startSec: 40,
   autoplay: true,
 });
 assert.ok(scSeek!.embedSrc.includes("auto_play=true"));
-assert.ok(decodeURIComponent(scSeek!.embedSrc).includes("#t=40"));
+assert.ok(!decodeURIComponent(scSeek!.embedSrc).includes("#t=40"));
+assert.equal(
+  scSeek!.openUrl,
+  "https://soundcloud.com/cloonee/edc-orlando#t=40",
+);
+assert.equal(
+  soundcloudSeekUrl("https://soundcloud.com/cloonee/edc-orlando", 588),
+  "https://soundcloud.com/cloonee/edc-orlando#t=588",
+);
+assert.equal(
+  youtubeSeekUrl("https://www.youtube.com/watch?v=dQw4w9WgXcQ", 93),
+  "https://www.youtube.com/watch?v=dQw4w9WgXcQ&t=93s",
+);
 
 const mc = resolvePlaybackTarget(
   "https://www.mixcloud.com/insomniacevents/don-diablo-edc-orlando-2018-mix/",

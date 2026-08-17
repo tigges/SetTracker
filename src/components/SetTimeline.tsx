@@ -112,8 +112,13 @@ export function SetTimeline({
     <div className="mt-6 space-y-6">
       {/* ------------------------------- SET STRIP ------------------------------- */}
       <div className="card p-4">
-        <div className="mb-3 flex items-center justify-between">
-          <span className="eyebrow">Set strip</span>
+        <div className="mb-3 flex items-center justify-between gap-3">
+          <div className="min-w-0">
+            <span className="eyebrow">Set strip</span>
+            <p className="mt-1 text-[11px] text-muted2">
+              Click a segment or tracklist row to play from that cue
+            </p>
+          </div>
           <div className="flex items-center gap-3 text-[12px] text-muted2">
             <span className="mono">00:00</span>
             <span className="text-muted2/60">→</span>
@@ -132,7 +137,8 @@ export function SetTimeline({
                 onClick={() => focusRow(p.id)}
                 onMouseEnter={() => setHoverId(p.id)}
                 onMouseLeave={() => setHoverId(null)}
-                aria-label={`${p.title} at ${fmtTimestamp(p.timestamp)}`}
+                aria-label={`Play ${p.title} from ${fmtTimestamp(p.timestamp)}`}
+                title={`Play from ${fmtTimestamp(p.timestamp)}`}
                 className="group relative h-full cursor-pointer rounded-[3px] transition-all duration-150"
                 style={{
                   flexGrow: spans[i],
@@ -221,6 +227,7 @@ export function SetTimeline({
                     rowRefs.current[p.id] = el;
                   }}
                   onClick={() => focusRow(p.id)}
+                  title={`Play from ${fmtTimestamp(p.timestamp)}`}
                   className={`flex cursor-pointer items-center gap-3 border-b border-linesoft px-4 transition-colors last:border-b-0 ${
                     compact ? "py-1.5" : "py-3"
                   } ${flashId === p.id ? "row-flash" : ""}`}
