@@ -89,7 +89,7 @@ export function isLikelyUnbuyable(
   artistName?: string | null,
 ): boolean {
   const blob = `${artistName ?? ""} ${title}`;
-  return /\b(mashup|bootleg|acappella|acapella)\b/i.test(blob);
+  return /\b(mash[\s-]?up|bootleg|acappella|acapella)\b/i.test(blob);
 }
 
 export type BeatportBuyability = "buy" | "search" | "unavailable";

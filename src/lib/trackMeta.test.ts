@@ -29,8 +29,8 @@ const bp = beatportSearchUrl("Pressure", "AC Slater");
 assert.ok(bp.includes("beatport.com/search/tracks"));
 assert.ok(bp.includes("AC"));
 
-assert.equal(normalizeIsrc("gb-xxx-x00-00001"), "GBXXXX0000001");
-assert.equal(normalizeIsrc("GBXXXX0000001"), "GBXXXX0000001");
+assert.equal(normalizeIsrc("gb-xxx-00-00001"), "GBXXX0000001");
+assert.equal(normalizeIsrc("GBXXX0000001"), "GBXXX0000001");
 assert.equal(normalizeIsrc("not-an-isrc"), null);
 assert.equal(normalizeIsrc(""), null);
 
