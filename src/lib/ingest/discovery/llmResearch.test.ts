@@ -114,6 +114,19 @@ assert.equal(
   ).ok,
   false,
 );
+assert.equal(
+  evaluateProposedUrl(
+    "BDK",
+    "website",
+    "https://www.therealdjbdk.com/",
+    keys,
+  ).ok,
+  false,
+);
+assert.equal(
+  evaluateProposedUrl("BDK", "website", "https://bdk.com/", keys).ok,
+  true,
+);
 
 assert.ok(
   researchPriority({ slug: "david-guetta", setCount: 1, festivalSets: 1 }) >
