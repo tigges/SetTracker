@@ -72,7 +72,7 @@ assert.ok(m3u.includes("# setradar-cue:00:00"));
 
 const bp = buildBeatportUrlList(plays);
 assert.ok(bp.includes("https://www.beatport.com/track/pressure/1"));
-assert.ok(bp.includes("beatport.com/search?q="));
+assert.ok(bp.includes("beatport.com/search/tracks?q="));
 
 assert.ok(
   spotifySearchUrl("Pressure", "AC Slater").startsWith(

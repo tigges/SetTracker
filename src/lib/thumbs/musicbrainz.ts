@@ -1,7 +1,10 @@
 /**
- * MusicBrainz recording lookup — fills sparse label / releaseDate / duration.
+ * MusicBrainz recording lookup — fills sparse label / releaseDate / duration
+ * and canonical Beatport /track URLs from url-rels.
  * Respects MB rate limits via caller sleep; requires a descriptive User-Agent.
  */
+
+import { canonicalBeatportUrl } from "../trackMeta";
 
 const UA =
   "SetRadar/0.2.7 (https://setradar.ai; track metadata; contact via github.com/tigges/SetTracker)";
@@ -10,9 +13,16 @@ export type MusicBrainzTrackMeta = {
   durationSec?: number | null;
   releaseDate?: string | null; // ISO date yyyy-mm-dd
   labelName?: string | null;
+  beatportUrl?: string | null;
+};
+
+type MbUrlRel = {
+  type?: string;
+  url?: { resource?: string };
 };
 
 type MbRecording = {
+  id?: string;
   title?: string;
   length?: number; // ms
   releases?: {
@@ -21,7 +31,19 @@ type MbRecording = {
     "label-info"?: { label?: { name?: string } }[];
   }[];
   "artist-credit"?: { name?: string; artist?: { name?: string } }[];
+  relations?: MbUrlRel[];
 };
+
+/** Pull the first canonical Beatport track URL from MusicBrainz url-rels. */
+export function beatportUrlFromMbRelations(
+  relations: MbUrlRel[] | null | undefined,
+): string | null {
+  for (const rel of relations ?? []) {
+    const url = canonicalBeatportUrl(rel.url?.resource);
+    if (url) return url;
+  }
+  return null;
+}
 
 function norm(s: string): string {
   return s
@@ -83,11 +105,33 @@ export async function resolveTrackMetaMusicBrainz(
             : release.date
         : null;
 
-      if (!durationSec && !releaseDate && !labelName) continue;
-      return { durationSec, releaseDate, labelName };
+      let beatportUrl: string | null = beatportUrlFromMbRelations(row.relations);
+      if (!beatportUrl && row.id) {
+        beatportUrl = await lookupRecordingBeatportUrl(row.id);
+      }
+
+      if (!durationSec && !releaseDate && !labelName && !beatportUrl) continue;
+      return { durationSec, releaseDate, labelName, beatportUrl };
     }
   } catch {
     /* ignore */
   }
   return null;
+}
+
+async function lookupRecordingBeatportUrl(mbid: string): Promise<string | null> {
+  const url = `https://musicbrainz.org/ws/2/recording/${encodeURIComponent(mbid)}?inc=url-rels&fmt=json`;
+  try {
+    // Search + lookup = 2 requests; stay under MB's ~1 req/sec.
+    await new Promise((r) => setTimeout(r, 1100));
+    const res = await fetch(url, {
+      headers: { "User-Agent": UA, Accept: "application/json" },
+      signal: AbortSignal.timeout(15_000),
+    });
+    if (!res.ok) return null;
+    const json = (await res.json()) as { relations?: MbUrlRel[] };
+    return beatportUrlFromMbRelations(json.relations);
+  } catch {
+    return null;
+  }
 }

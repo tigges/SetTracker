@@ -16,7 +16,11 @@
  * Usage: npm run thumbs
  */
 import { PrismaClient } from "@prisma/client";
-import { parseTrackTitle } from "../src/lib/trackMeta";
+import {
+  canonicalBeatportUrl,
+  parseTrackTitle,
+  trackIdentityKey,
+} from "../src/lib/trackMeta";
 import { fillMissingGenres, rewriteStoredGenres } from "../src/lib/genre";
 import { ensureTrackSlugs } from "../src/lib/tracks/ensureSlugs";
 import { slugify } from "../src/lib/ingest/types";
@@ -82,6 +86,7 @@ type Stats = {
     upgraded: number;
     meta: number;
     musicbrainz: number;
+    beatport: number;
   };
   sets: { scanned: number; filled: number; missed: number; updated: number };
   slugs: number;
@@ -108,6 +113,7 @@ async function main() {
       upgraded: 0,
       meta: 0,
       musicbrainz: 0,
+      beatport: 0,
     },
     sets: { scanned: 0, filled: 0, missed: 0, updated: 0 },
     slugs: 0,
@@ -274,11 +280,44 @@ async function main() {
     }
   }
 
+  async function copySiblingBeatportUrls(): Promise<number> {
+    const withBp = await prisma.track.findMany({
+      where: { beatportUrl: { not: null } },
+      select: { title: true, artistName: true, beatportUrl: true },
+    });
+    const byKey = new Map<string, string>();
+    for (const t of withBp) {
+      const url = canonicalBeatportUrl(t.beatportUrl);
+      if (!url) continue;
+      const key = trackIdentityKey(t.title, t.artistName);
+      if (!byKey.has(key)) byKey.set(key, url);
+    }
+    if (byKey.size === 0) return 0;
+
+    const missing = await prisma.track.findMany({
+      where: { beatportUrl: null },
+      select: { id: true, title: true, artistName: true },
+    });
+    let copied = 0;
+    for (const t of missing) {
+      const url = byKey.get(trackIdentityKey(t.title, t.artistName));
+      if (!url) continue;
+      await prisma.track.update({
+        where: { id: t.id },
+        data: { beatportUrl: url },
+      });
+      copied += 1;
+    }
+    return copied;
+  }
+
   console.log(
     NULL_ONLY
       ? "[thumbs] resolving track artwork (null only, capped)…"
       : "[thumbs] resolving track artwork + light meta…",
   );
+  stats.tracks.beatport += await copySiblingBeatportUrls();
+
   const tracks = await prisma.track.findMany({
     where: NULL_ONLY ? { imageUrl: null } : undefined,
     select: {
@@ -291,6 +330,7 @@ async function main() {
       remixerName: true,
       labelId: true,
       releaseDate: true,
+      beatportUrl: true,
     },
     orderBy: { title: "asc" },
     ...(TRACK_LIMIT > 0 || NULL_ONLY
@@ -303,7 +343,8 @@ async function main() {
       !t.imageUrl ||
       (!NULL_ONLY && isArtistArtUrl(t.imageUrl)) ||
       (!NULL_ONLY && t.durationSec == null) ||
-      (!NULL_ONLY && t.mixName == null),
+      (!NULL_ONLY && t.mixName == null) ||
+      (!NULL_ONLY && !canonicalBeatportUrl(t.beatportUrl)),
   );
   let mbCalls = 0;
 
@@ -329,7 +370,10 @@ async function main() {
     const needsMb =
       MB_LIMIT > 0 &&
       mbCalls < MB_LIMIT &&
-      (t.labelId == null || t.releaseDate == null || needsDuration);
+      (t.labelId == null ||
+        t.releaseDate == null ||
+        needsDuration ||
+        !canonicalBeatportUrl(t.beatportUrl));
     // Skip network when only mix is sparse and the title already encodes it.
     const canLocalMix =
       !t.mixName &&
@@ -345,6 +389,7 @@ async function main() {
       remixerName?: string;
       labelId?: string;
       releaseDate?: Date;
+      beatportUrl?: string;
     } = {};
 
     let result: Awaited<ReturnType<typeof resolveTrackImage>> = null;
@@ -393,7 +438,16 @@ async function main() {
             const labelId = await upsertLabelByName(mb.labelName);
             if (labelId) data.labelId = labelId;
           }
-          if (mb.durationSec != null || mb.releaseDate || mb.labelName) {
+          if (!canonicalBeatportUrl(t.beatportUrl) && mb.beatportUrl) {
+            data.beatportUrl = mb.beatportUrl;
+            stats.tracks.beatport += 1;
+          }
+          if (
+            mb.durationSec != null ||
+            mb.releaseDate ||
+            mb.labelName ||
+            mb.beatportUrl
+          ) {
             stats.tracks.musicbrainz += 1;
           }
         }
@@ -407,7 +461,8 @@ async function main() {
         data.remixerName ||
         data.durationSec != null ||
         data.labelId ||
-        data.releaseDate
+        data.releaseDate ||
+        data.beatportUrl
       ) {
         stats.tracks.meta += 1;
       }
@@ -424,7 +479,7 @@ async function main() {
     if (stats.tracks.scanned % 25 === 0) {
       console.log(
         `  … tracks ${stats.tracks.scanned}/${trackQueue.length}` +
-          ` (covers ${stats.tracks.covers}, artist-fallback ${stats.tracks.artistFallback}, upgraded ${stats.tracks.upgraded}, meta ${stats.tracks.meta}, mb ${stats.tracks.musicbrainz})`,
+          ` (covers ${stats.tracks.covers}, artist-fallback ${stats.tracks.artistFallback}, upgraded ${stats.tracks.upgraded}, meta ${stats.tracks.meta}, mb ${stats.tracks.musicbrainz}, bp ${stats.tracks.beatport})`,
       );
     }
   }

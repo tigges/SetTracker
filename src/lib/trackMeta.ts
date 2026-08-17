@@ -46,10 +46,63 @@ function cleanCredit(s: string): string {
   return s.replace(/\s+/g, " ").trim();
 }
 
-/** Beatport search URL (not canonical). Prefer Track.beatportUrl when set. */
+/** Beatport /track/{slug}/{id} only — never a search or artist/label page. */
+export function canonicalBeatportUrl(url?: string | null): string | null {
+  if (!url) return null;
+  try {
+    const parsed = new URL(url);
+    const host = parsed.hostname.replace(/^www\./, "");
+    if (host !== "beatport.com") return null;
+    const m = parsed.pathname.match(/^\/track\/([^/]+)\/(\d+)\/?$/);
+    if (!m) return null;
+    return `https://www.beatport.com/track/${m[1]}/${m[2]}`;
+  } catch {
+    return null;
+  }
+}
+
+/** Beatport track-tab search (not canonical). Prefer Track.beatportUrl when set. */
 export function beatportSearchUrl(title: string, artistName?: string | null): string {
   const q = encodeURIComponent([artistName, title].filter(Boolean).join(" ").trim());
-  return `https://www.beatport.com/search?q=${q}`;
+  return `https://www.beatport.com/search/tracks?q=${q}`;
+}
+
+/** Canonical /track URL when stored; otherwise the track-tab search. */
+export function beatportTrackHref(
+  title: string,
+  artistName?: string | null,
+  storedUrl?: string | null,
+): string {
+  return canonicalBeatportUrl(storedUrl) ?? beatportSearchUrl(title, artistName);
+}
+
+/** Apply a stored URL, else a same-title+artist catalog hit. */
+export function resolveBeatportUrl(
+  stored: string | null | undefined,
+  title: string,
+  artistName: string | null | undefined,
+  catalog: Map<string, string>,
+): string | null {
+  return (
+    canonicalBeatportUrl(stored) ??
+    catalog.get(trackIdentityKey(title, artistName)) ??
+    null
+  );
+}
+
+/** Stable key for copying Beatport URLs across identical catalog tracks. */
+export function trackIdentityKey(
+  title: string,
+  artistName?: string | null,
+): string {
+  const norm = (s: string) =>
+    s
+      .toLowerCase()
+      .normalize("NFKD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-z0-9]+/g, " ")
+      .trim();
+  return `${norm(title)}::${norm(artistName ?? "")}`;
 }
 
 /** Spotify search URL (not a track URI). Prefer a stored Spotify ID when we have one. */
