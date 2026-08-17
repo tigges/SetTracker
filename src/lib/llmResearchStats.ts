@@ -87,6 +87,14 @@ function targetFromFile(file: string): LlmResearchTarget | null {
   return null;
 }
 
+/** Latest-write copies duplicate a tagged round — count the tagged file only. */
+function isLatestWriteCopy(file: string): boolean {
+  return (
+    file === "llm-handle-research.json" ||
+    file === "llm-event-handle-research.json"
+  );
+}
+
 export function summarizeHandleReport(
   file: string,
   raw: unknown,
@@ -187,6 +195,7 @@ export function loadLlmResearchStats(
   for (const file of files) {
     const raw = readJson(join(dir, file));
     if (!raw || typeof raw !== "object") continue;
+    if (isLatestWriteCopy(file)) continue;
     if (file.startsWith("llm-identity-research")) {
       identity.push(...summarizeIdentityReport(raw));
       const at = (raw as { generatedAt?: string }).generatedAt;

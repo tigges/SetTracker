@@ -56,7 +56,10 @@ assert.equal(id.length, 2);
 const live = loadLlmResearchStats();
 assert.ok(live.totals.djsScanned >= 200, "expected committed DJ research rounds");
 assert.ok(live.totals.djFieldsApplied >= 500);
-assert.ok(live.fills.some((f) => f.slug === "meduza" || f.kind === "dj"));
+assert.equal(live.totals.eventsScanned, 88);
+assert.equal(live.totals.eventFieldsApplied, 73);
+assert.ok(!live.rounds.some((r) => r.file === "llm-event-handle-research.json"));
+assert.ok(live.fills.some((f) => f.kind === "dj"));
 assert.ok(live.identity.some((r) => r.cls === "junk"));
 assert.doesNotMatch(JSON.stringify(live.fills), /1001tracklists\.com/);
 
