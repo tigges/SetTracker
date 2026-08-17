@@ -140,6 +140,7 @@ import {
   TL_LUCAS_STEVE_TML_WE2_2024,
   TL_KNOCK2_ZEDD_HARD_SUMMER_2026,
   TL_COLE_TERRAZAS_HARD_SUMMER_2026,
+  TL_VINTAGE_CULTURE_ROBOT_HEART_RESIDENCY_UNITED_STATES_2024,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   tracklist1001RowsToPlays,
@@ -2819,5 +2820,42 @@ for (let i = 1; i < coleHard.length; i++) {
 // Liu TML artist Relive — no 1001 URL found; do not invent a wire.
 assert.equal(isWiredTracklistSlug("yt-DWPSLZLKslg"), false);
 assert.equal(TRACKLIST_1001_BY_SOURCE_SLUG["yt-DWPSLZLKslg"], undefined);
+
+assertSeedClocks(TL_VINTAGE_CULTURE_ROBOT_HEART_RESIDENCY_UNITED_STATES_2024);
+assert.equal(TL_VINTAGE_CULTURE_ROBOT_HEART_RESIDENCY_UNITED_STATES_2024.length, 26);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-KbGNocaJDjw"],
+  TL_VINTAGE_CULTURE_ROBOT_HEART_RESIDENCY_UNITED_STATES_2024,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-vintageculturemusic-vintage-culture-robot-heart-residency-2024-california"
+  ],
+  TL_VINTAGE_CULTURE_ROBOT_HEART_RESIDENCY_UNITED_STATES_2024,
+);
+assert.equal(isWiredTracklistSlug("yt-KbGNocaJDjw"), true);
+assert.equal(
+  isWiredTracklistSlug(
+    "sc-vintageculturemusic-vintage-culture-robot-heart-residency-2024-california",
+  ),
+  true,
+);
+const vcRobot = tracklist1001RowsToPlays(
+  TL_VINTAGE_CULTURE_ROBOT_HEART_RESIDENCY_UNITED_STATES_2024,
+);
+assert.equal(vcRobot.length, 26);
+assert.equal(vcRobot[0]?.provenance, "1001tl");
+assert.equal(vcRobot[0]?.artistName, "Bedouin");
+assert.equal(vcRobot[0]?.trackTitle, "Tijuana (Vintage Culture Remix)");
+assert.equal(vcRobot[0]?.timestamp, 0);
+assert.equal(vcRobot[25]?.artistName, "Vintage Culture ft. Noah Kulaga");
+assert.equal(vcRobot[25]?.trackTitle, "Upon Your Skin");
+assert.equal(vcRobot[25]?.timestamp, 2 * 3600 + 14 * 60 + 45);
+for (let i = 1; i < vcRobot.length; i++) {
+  assert.ok(
+    (vcRobot[i]!.timestamp ?? 0) > (vcRobot[i - 1]!.timestamp ?? 0),
+    `Vintage Culture Robot Heart 2024 clocks must increase at index ${i}`,
+  );
+}
 
 console.log("tracklists1001/seeds.test.ts ok");

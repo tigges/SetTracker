@@ -122,6 +122,7 @@ import {
   TL_PEGGY_GOU_CERCLE_LILLE,
   TL_PEGGY_GOU_EDC_LV_2026,
   TL_THE_CHAINSMOKERS_TML_WE1_2026,
+  TL_VINTAGE_CULTURE_ROBOT_HEART_RESIDENCY_UNITED_STATES_2024,
 } from "../tracklists1001/seeds";
 import type { RawArtist } from "../types";
 import { slugify } from "../types";
@@ -2623,6 +2624,23 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     type: "festival",
     title: "Cuebrick – Live from Sacré Paris | Mainstage Techno | Club Set",
     eventName: "Sacré Paris",
+  },
+  {
+    // Official Vintage Culture upload; 1001TL wired via yt-KbGNocaJDjw
+    // (same list as sc-vintageculturemusic-vintage-culture-robot-heart-residency-2024-california).
+    video: "https://www.youtube.com/watch?v=KbGNocaJDjw",
+    primaryArtist: dj("Vintage Culture", {
+      accent: "#e85d04",
+      homeCity: "Brazil",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    title: "Vintage Culture @ Robot Heart Residency, California 2024",
+    seriesName: "Robot Heart",
+    eventName: "Robot Heart Residency",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/12xtt1u1/vintage-culture-robot-heart-residency-united-states-2024-05-16.html",
+    tracklist1001: TL_VINTAGE_CULTURE_ROBOT_HEART_RESIDENCY_UNITED_STATES_2024,
   },
 ];
 

@@ -308,4 +308,18 @@ assert.equal(
   "sc-tomorrowland-mash-up-universe-djs-from-mars-august-2026",
 );
 
+const vcRobotSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url ===
+    "https://soundcloud.com/vintageculturemusic/vintage-culture-robot-heart-residency-2024-california",
+);
+assert.ok(vcRobotSc);
+assert.equal(vcRobotSc.primaryArtist.name, "Vintage Culture");
+assert.equal(vcRobotSc.type, "festival");
+assert.equal(vcRobotSc.seriesName, "Robot Heart");
+assert.equal(
+  `sc-vintageculturemusic-${slugify("vintage-culture-robot-heart-residency-2024-california")}`,
+  "sc-vintageculturemusic-vintage-culture-robot-heart-residency-2024-california",
+);
+
 console.log("soundcloud/tracks.test.ts ok");

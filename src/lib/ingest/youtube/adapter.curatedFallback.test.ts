@@ -100,6 +100,7 @@ const GORDO_TML_WE2_2023 = YOUTUBE_SETS.find((s) =>
 const LUCAS_STEVE_TML_WE2_2024 = YOUTUBE_SETS.find((s) =>
   s.video.includes("GbG_OFmdPKk"),
 );
+const VC_ROBOT_HEART = YOUTUBE_SETS.find((s) => s.video.includes("KbGNocaJDjw"));
 
 describe("watchMetaFromCuratedSeed", () => {
   it("builds ASOT 1290 meta from the curated 1001 capture", () => {
@@ -234,6 +235,17 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=GbG_OFmdPKk");
     // Last cue 1:01:56 + 180s pad.
     assert.equal(meta.durationSec, 1 * 3600 + 1 * 60 + 56 + 180);
+  });
+
+  it("builds Vintage Culture Robot Heart 2024 meta from the curated 1001 capture", () => {
+    assert.ok(VC_ROBOT_HEART);
+    const meta = watchMetaFromCuratedSeed(VC_ROBOT_HEART);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "KbGNocaJDjw");
+    assert.match(meta.title, /Robot Heart/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=KbGNocaJDjw");
+    // Last cue 2:14:45 + 180s pad.
+    assert.equal(meta.durationSec, 2 * 3600 + 14 * 60 + 45 + 180);
   });
 
   it("builds ILLENIUM TML WE1 Great Library meta from the curated 1001 capture", () => {
@@ -1369,5 +1381,19 @@ describe("curated YouTube 429 fallback", () => {
     assert.equal(sets[0]?.primaryArtist?.slug, "lucas-steve");
     assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
     assert.match(String(sets[0]?.title ?? ""), /2024/);
+  });
+
+  it("lands Vintage Culture Robot Heart 2024 from the 1001 seed when watch is 429", async () => {
+    assert.ok(VC_ROBOT_HEART);
+    const adapter = createYoutubeAdapter([VC_ROBOT_HEART], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-KbGNocaJDjw");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 26);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 2 * 3600 + 14 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "vintage-culture");
+    assert.match(String(sets[0]?.eventName ?? ""), /Robot Heart/i);
   });
 });

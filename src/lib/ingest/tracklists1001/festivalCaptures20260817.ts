@@ -686,3 +686,43 @@ export const TL_COLE_TERRAZAS_HARD_SUMMER_2026: FingerprintSeedRow[] = [
   { at: "34:14", artist: "Mathew Jonson", title: "Automaton" },
   { at: "56:08", artist: "Oshana", title: "Girls In The Front" },
 ];
+
+/**
+ * Vintage Culture @ Robot Heart Residency, United States 2024-05-16
+ * https://www.1001tracklists.com/tracklist/12xtt1u1/vintage-culture-robot-heart-residency-united-states-2024-05-16.html
+ * Official YT: https://youtu.be/KbGNocaJDjw
+ * Official SC: https://soundcloud.com/vintageculturemusic/vintage-culture-robot-heart-residency-2024-california
+ * Capture overlay used TL_Vintage-Culture_Robot-Heart-Residency_United-States_2024
+ * (hyphens illegal); constant is TL_VINTAGE_CULTURE_ROBOT_HEART_RESIDENCY_UNITED_STATES_2024.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-KbGNocaJDjw"]
+ *   and ["sc-vintageculturemusic-vintage-culture-robot-heart-residency-2024-california"]
+ * Captured 2026-08-17 - provenance 1001tl.
+ */
+export const TL_VINTAGE_CULTURE_ROBOT_HEART_RESIDENCY_UNITED_STATES_2024: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "Bedouin", title: "Tijuana (Vintage Culture Remix)" },
+  { at: "5:21", artist: "Hardt Antoine", title: "I Need Someone" },
+  { at: "10:42", artist: "Matador", title: "Sol" },
+  { at: "16:02", artist: "Bambook", title: "Give It Up (Audiofly Remix)" },
+  { at: "21:23", artist: "CIOZ & Ryan Murgatroyd", title: "Wachaka" },
+  { at: "26:43", artist: "Enamour", title: "Red Room" },
+  { at: "32:04", artist: "Solee", title: "Our Lives" },
+  { at: "37:24", artist: "Incláme", title: "Cipher" },
+  { at: "42:45", artist: "Radio Slave ft. NEZ", title: "Wait A Minute (Dixon Extension)" },
+  { at: "48:05", artist: "Run With Me (Extended)", title: "Made By Pete" },
+  { at: "51:40", artist: "the real unknown", title: "Heart Shaped Box" },
+  { at: "57:25", artist: "Solee", title: "Tanz Der Planeten" },
+  { at: "1:03:10", artist: "Toto Chiavetta & Trenton", title: "My Eyes Are Failing" },
+  { at: "1:09:47", artist: "Karmon", title: "Acido" },
+  { at: "1:15:12", artist: "Beanfield ft. Bajka", title: "Tides (Carl Craig C's Movement Number 1)" },
+  { at: "1:20:37", artist: "Daniel Rateuke", title: "Oudara" },
+  { at: "1:26:02", artist: "Oliver Koletzki & andhim", title: "Branka" },
+  { at: "1:31:27", artist: "AFFKT", title: "Tarambana (NEIR Tunnel Vision Mix)" },
+  { at: "1:36:52", artist: "Mumbai Science", title: "Iris" },
+  { at: "1:42:17", artist: "Guy J", title: "Beast Of Sea" },
+  { at: "1:47:42", artist: "Vintage Culture & braev", title: "Time" },
+  { at: "1:53:07", artist: "Olivier Giacomotto", title: "Lui" },
+  { at: "1:58:32", artist: "Dennis Cruz & Ian Ludvig", title: "Pain Away" },
+  { at: "2:03:56", artist: "Dino Lenny", title: "Did This" },
+  { at: "2:09:21", artist: "Yousef ft. Afronaut Zu", title: "Learn To Fly (Private Version)" },
+  { at: "2:14:45", artist: "Vintage Culture ft. Noah Kulaga", title: "Upon Your Skin" },
+];

@@ -344,4 +344,18 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     type: "radio",
     minDurationSec: 30 * 60,
   },
+  {
+    // Official Vintage Culture upload; 1001TL wired via
+    // sc-vintageculturemusic-vintage-culture-robot-heart-residency-2024-california
+    // (same list as yt-KbGNocaJDjw). Never wire sc-https://….
+    url: "https://soundcloud.com/vintageculturemusic/vintage-culture-robot-heart-residency-2024-california",
+    primaryArtist: dj("Vintage Culture", {
+      accent: "#e85d04",
+      homeCity: "Brazil",
+    }),
+    genre: "Tech House",
+    seriesName: "Robot Heart",
+    type: "festival",
+    minDurationSec: 90 * 60,
+  },
 ];
