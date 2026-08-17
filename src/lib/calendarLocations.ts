@@ -215,3 +215,17 @@ export function occurrencesOnDay(
 ): CalendarOccurrence[] {
   return items.filter((e) => editionCoversDay(e, iso));
 }
+
+/** Soonest current/upcoming night; otherwise the earliest night in the month. */
+export function nextClubNight<N extends { startsAt: string; bucket: string }>(
+  nights: N[],
+): N | null {
+  if (nights.length === 0) return null;
+  const live = nights.filter(
+    (n) => n.bucket === "current" || n.bucket === "upcoming",
+  );
+  const pool = live.length > 0 ? live : nights;
+  return (
+    [...pool].sort((a, b) => a.startsAt.localeCompare(b.startsAt))[0] ?? null
+  );
+}

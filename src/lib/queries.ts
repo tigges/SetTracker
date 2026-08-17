@@ -548,7 +548,27 @@ export async function getFestivalEditionBoard(nowMs = Date.now()) {
     });
   }
 
-  return { calendar, nights, gaps, names, images, nowMs };
+  const countSlugs = [
+    ...new Set([
+      ...calendar.map((e) => e.eventSlug),
+      ...nights.map((n) => n.eventSlug),
+    ]),
+  ];
+  const extraSlugs = countSlugs.filter((s) => !slugs.includes(s));
+  const extraSets = extraSlugs.length
+    ? await prisma.set.findMany({
+        where: { event: { slug: { in: extraSlugs } } },
+        select: { event: { select: { slug: true } } },
+      })
+    : [];
+  const setCounts: Record<string, number> = {};
+  for (const s of [...sets, ...extraSets]) {
+    const slug = s.event?.slug;
+    if (!slug) continue;
+    setCounts[slug] = (setCounts[slug] ?? 0) + 1;
+  }
+
+  return { calendar, nights, gaps, names, images, setCounts, nowMs };
 }
 
 export type TeaserFaceRow = {
@@ -1545,7 +1565,7 @@ export async function getVenueBySlug(slug: string) {
         densitySeverity: ranks.densitySeverity,
       } satisfies FeedItem;
     })
-    // Completeness → identified IDs → Top 100 → festival → recency.
+    // This year first, then complete / identified, then date.
     .sort(compareEventSetPriority);
 
   return {

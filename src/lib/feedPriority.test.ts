@@ -198,6 +198,48 @@ describe("feedPriority complete → Top 100 → festivals", () => {
     assert.equal(sorted[2]?.densitySeverity, "severe");
   });
 
+  it("event grids keep this year ahead of a denser last-year Relive", () => {
+    const sorted = [
+      {
+        id: "garrix-2025",
+        densitySeverity: "ok" as const,
+        publishedAt: "2025-07-26T00:00:00.000Z",
+        trackCount: 40,
+        statusCounts: { identified: 40 },
+      },
+      {
+        id: "thin-2026",
+        densitySeverity: "thin" as const,
+        publishedAt: "2026-07-20T00:00:00.000Z",
+        trackCount: 8,
+        statusCounts: { identified: 4, unresolved_id: 4 },
+      },
+    ].sort(compareEventSetPriority);
+    assert.equal(sorted[0]?.id, "thin-2026");
+    assert.equal(sorted[1]?.id, "garrix-2025");
+  });
+
+  it("event grids keep empty this-year shells after playable this-year sets", () => {
+    const sorted = [
+      {
+        id: "empty-2026",
+        densitySeverity: "severe" as const,
+        publishedAt: "2026-07-29T00:00:00.000Z",
+        trackCount: 0,
+        statusCounts: {},
+      },
+      {
+        id: "playable-2026",
+        densitySeverity: "ok" as const,
+        publishedAt: "2026-07-18T00:00:00.000Z",
+        trackCount: 18,
+        statusCounts: { identified: 15 },
+      },
+    ].sort(compareEventSetPriority);
+    assert.equal(sorted[0]?.id, "playable-2026");
+    assert.equal(sorted[1]?.id, "empty-2026");
+  });
+
   it("homepage prefers mostly identified tracklists over sparse IDs", () => {
     assert.equal(
       idCoverageTier({ identified: 30, unresolved_id: 2, unparsed: 1 }, 33),

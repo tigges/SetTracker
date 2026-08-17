@@ -14,6 +14,7 @@ import {
   groupMonthLocations,
   mergeLocationBucket,
   occurrencesOnDay,
+  nextClubNight,
   toCalendarOccurrences,
   venueShortName,
 } from "./calendarLocations";
@@ -180,5 +181,19 @@ describe("calendarLocations", () => {
     const club = pills.find((p) => p.groupKey === "club:unvrs");
     assert.equal(club?.name, "UNVRS");
     assert.equal(club?.tooltip, "Tiësto; FISHER");
+  });
+
+  it("picks the soonest current or upcoming night", () => {
+    const next = nextClubNight([
+      { startsAt: "2026-08-07", bucket: "recent" },
+      { startsAt: "2026-08-20", bucket: "upcoming" },
+      { startsAt: "2026-08-16", bucket: "current" },
+    ]);
+    assert.equal(next?.startsAt, "2026-08-16");
+    const fallback = nextClubNight([
+      { startsAt: "2026-08-14", bucket: "recent" },
+      { startsAt: "2026-08-07", bucket: "recent" },
+    ]);
+    assert.equal(fallback?.startsAt, "2026-08-07");
   });
 });
