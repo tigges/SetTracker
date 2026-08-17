@@ -20,6 +20,14 @@ export function primaryArtist(artist: string): string {
   return artist.split(/[,&]| b2b | x | ft\.? | feat\.?/i)[0]!.trim();
 }
 
+/** Drop acappella/intro wrappers so catalogs can match the studio title. */
+export function catalogQueryTitle(title: string): string {
+  const stripped = title
+    .replace(/\s*\((?:acappella|a\s*cappella|accapella|intro|outro)\)\s*$/i, "")
+    .trim();
+  return stripped || title;
+}
+
 /** Prefer exact studio titles over remix/bootleg hits. */
 export function titleRank(want: string, got: string): number {
   const a = normName(want);

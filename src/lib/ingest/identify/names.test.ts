@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { namesClose, primaryArtist, titleRank } from "./names";
+import { catalogQueryTitle, namesClose, primaryArtist, titleRank } from "./names";
 
 assert.equal(namesClose("Beautiful Now", "Beautiful Now"), true);
 assert.equal(namesClose("feel U luv Me", "feel u luv me"), true);
@@ -16,5 +16,9 @@ assert.equal(
 );
 assert.equal(titleRank("Clarity", "Clarity (Remix)"), 0);
 assert.equal(titleRank("Clarity", "Spectrum"), 0);
+
+assert.equal(catalogQueryTitle("Beautiful Now (Acappella)"), "Beautiful Now");
+assert.equal(catalogQueryTitle("Beautiful Now (Knock2 Remix)"), "Beautiful Now (Knock2 Remix)");
+assert.equal(catalogQueryTitle("ROOM202 Intro"), "ROOM202 Intro");
 
 console.log("identify/names.test.ts ok");

@@ -1,0 +1,68 @@
+{
+  "generatedAt": "2026-08-17T12:29:19.504Z",
+  "hits": [
+    {
+      "artist": "Zedd ft. Bea Miller",
+      "title": "Out Of Time",
+      "at": "3:03",
+      "isrc": "USUM72406304",
+      "mbid": "424eda5b-c95c-4fac-ac62-98f36761199d",
+      "deezerTitle": "Out of Time",
+      "platforms": {
+        "youtube": "https://www.youtube.com/watch?v=ujBqCgClEFo"
+      },
+      "source": "both"
+    },
+    {
+      "artist": "Zedd ft. Jon Bellion",
+      "title": "Beautiful Now",
+      "at": "5:04",
+      "isrc": "USUM71505090",
+      "mbid": "8139f7ee-6b2c-4889-baec-9528dd12e0d2",
+      "deezerTitle": "Beautiful Now",
+      "platforms": {
+        "youtube": "https://www.youtube.com/watch?v=n1a7o44WxNo",
+        "spotify": "https://open.spotify.com/track/2ISSQPb9LHHiV6ng2NXosL"
+      },
+      "source": "both"
+    },
+    {
+      "artist": "Zedd ft. Foxes",
+      "title": "Clarity",
+      "at": "1:09:02",
+      "isrc": "USUM71210662",
+      "mbid": "b871d3e9-c6e6-4a69-b6c0-9277a64ce1d3",
+      "deezerTitle": "Clarity",
+      "platforms": {
+        "youtube": "https://www.youtube.com/watch?v=IxxstCcJlsc",
+        "spotify": "https://open.spotify.com/track/60wwxj6Dd9NJlirf84wr2c"
+      },
+      "source": "both"
+    },
+    {
+      "artist": "Zedd ft. Jon Bellion",
+      "title": "Beautiful Now (Acappella)",
+      "at": "1:01",
+      "isrc": "USUM71505090",
+      "mbid": "8139f7ee-6b2c-4889-baec-9528dd12e0d2",
+      "deezerTitle": "Beautiful Now",
+      "platforms": {
+        "youtube": "https://www.youtube.com/watch?v=n1a7o44WxNo",
+        "spotify": "https://open.spotify.com/track/2ISSQPb9LHHiV6ng2NXosL"
+      },
+      "source": "both"
+    }
+  ],
+  "set79": [
+    {
+      "seed": "TL_KNOCK2_ZEDD_HARD_SUMMER_2026",
+      "urls": [],
+      "note": "Published sitemap only — not Relive. Login-walled HTML and the paid SoundCloud analyzer are never fetched."
+    },
+    {
+      "seed": "TL_COLE_TERRAZAS_HARD_SUMMER_2026",
+      "urls": [],
+      "note": "Published sitemap only — not Relive. Login-walled HTML and the paid SoundCloud analyzer are never fetched."
+    }
+  ]
+}

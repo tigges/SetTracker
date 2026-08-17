@@ -25,6 +25,7 @@ import { normalizeIsrc } from "../../trackMeta";
 import { searchAuddLyrics } from "./audd";
 import { acceptBeatportTrackUrl } from "./beatport";
 import { fingerprintIdProbes } from "./fingerprintWatch";
+import { catalogQueryTitle } from "./names";
 import { dropPasteOnlyUrls } from "./pasteOnly";
 import { findHeldSet79Hints, type Set79Hint } from "./set79";
 import {
@@ -157,14 +158,15 @@ export async function identifySeedRow(
     return { artist: row.artist, title: row.title, at: row.at, reason: "bare id" };
   }
 
-  const deezer = await resolveTrackImage(row.title, row.artist);
+  const queryTitle = catalogQueryTitle(row.title);
+  const deezer = await resolveTrackImage(queryTitle, row.artist);
   let isrc = normalizeIsrc(deezer?.isrc);
   let mbid: string | undefined;
   let beatportUrl: string | undefined;
   let usedMb = false;
 
   if (opts.musicbrainz) {
-    const mb = await resolveTrackMetaMusicBrainz(row.title, row.artist);
+    const mb = await resolveTrackMetaMusicBrainz(queryTitle, row.artist);
     if (mb?.mbid) {
       usedMb = true;
       mbid = mb.mbid;
@@ -179,7 +181,7 @@ export async function identifySeedRow(
   let platforms: TrackRadarPlatforms | undefined;
   let usedTr = false;
   if (opts.trackradar) {
-    const tr = await searchTrackRadar(row.artist, row.title);
+    const tr = await searchTrackRadar(row.artist, queryTitle);
     if (tr) {
       usedTr = true;
       platforms = tr.platforms;
@@ -192,7 +194,7 @@ export async function identifySeedRow(
 
   let usedAudd = false;
   if (opts.audd) {
-    const audd = await searchAuddLyrics(row.artist, row.title);
+    const audd = await searchAuddLyrics(row.artist, queryTitle);
     if (audd) {
       usedAudd = true;
       platforms = mergePlatforms(platforms, audd.platforms);

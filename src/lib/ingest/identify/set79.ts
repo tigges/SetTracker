@@ -52,7 +52,7 @@ export async function findPublishedSet79(tokens: string[]): Promise<string[]> {
 /** Held-set sitemap tokens — require venue so Niteharts ≠ HARD Summer. */
 export const SET79_HINT_TOKENS: Record<string, string[]> = {
   TL_KNOCK2_ZEDD_HARD_SUMMER_2026: ["knock2", "zedd", "hard"],
-  TL_COLE_TERRAZAS_HARD_SUMMER_2026: ["cole", "terrazas"],
+  TL_COLE_TERRAZAS_HARD_SUMMER_2026: ["cole", "terrazas", "hard"],
 };
 
 export type Set79Hint = {

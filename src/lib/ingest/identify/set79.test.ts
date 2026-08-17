@@ -29,6 +29,15 @@ const cole = matchSet79Urls(
 assert.deepEqual(cole, [
   "https://set79.com/tracklists/cole-terrazas-hard-summer-pink",
 ]);
+assert.deepEqual(
+  matchSet79Urls(
+    [
+      "https://set79.com/tracklist/soundcloud.com/coleterrazas/ccb57f81-a6ef-4a4d-b187-8d7b1bd1302f",
+    ],
+    SET79_HINT_TOKENS.TL_COLE_TERRAZAS_HARD_SUMMER_2026!,
+  ),
+  [],
+);
 
 assert.deepEqual(matchSet79Urls(locs, ["knock2", "zedd"]), [
   "https://set79.com/tracklists/knock2-b2b-zedd-niteharts-san",
