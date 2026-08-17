@@ -94,6 +94,32 @@ assert.equal(dyzen!.videoId, undefined);
 const sonny = held.find((h) => /sonny/i.test(h.name));
 assert.equal(sonny!.status, "waiting");
 
+const coleWaiting = held.find((h) => /cole/i.test(h.name));
+assert.ok(coleWaiting);
+assert.equal(coleWaiting!.status, "waiting");
+assert.match(coleWaiting!.note, /HARD\/Insomniac/i);
+
+const coleEntries = [
+  {
+    videoId: "COLEHARD001",
+    title: "Cole Terrazas | HARD Summer 2026 Pink Stage",
+    channel: "HARD",
+  },
+  {
+    videoId: "COLETMLFAKE",
+    title: "Cole Terrazas WE2 | Tomorrowland 2026",
+    channel: "Tomorrowland",
+  },
+];
+const coleHeld = matchHeldRelives(coleEntries, HELD_RELIVE_WATCH);
+const coleHit = coleHeld.find((h) => /cole/i.test(h.name));
+assert.equal(coleHit!.status, "candidate");
+assert.equal(coleHit!.videoId, "COLEHARD001");
+assert.equal(
+  coleHeld.find((h) => /calvin/i.test(h.name))!.status,
+  "waiting",
+);
+
 const unwired = matchUnwiredOfficialRelives(entries, {
   curatedVideoIds: new Set(["DuXXMZLfAkQ"]),
   mappedSlugs: new Set(),

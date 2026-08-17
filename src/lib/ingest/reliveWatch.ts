@@ -182,9 +182,13 @@ export function matchHeldRelives(
 ): HeldReliveHit[] {
   return watches.map((h) => {
     const wantWe = weekendFromHeldName(h.name);
+    const venue = h.venue ?? /tomorrowland/i;
+    const waitNote =
+      h.waitNote ??
+      "Do not wire fan clips — wait for official Tomorrowland/artist Relive.";
     const hits = entries.filter((e) => {
       if (!h.match.test(e.title)) return false;
-      if (!/tomorrowland/i.test(e.title)) return false;
+      if (!venue.test(e.title)) return false;
       if (wantWe) {
         const got = reliveEditionToken(e.title);
         if (got && got !== `tml-we${wantWe}`) return false;
@@ -198,7 +202,7 @@ export function matchHeldRelives(
         seed: h.seed,
         searchUrl: search1001(...h.search, "relive", "youtube"),
         status: "waiting" as const,
-        note: "Do not wire fan clips — wait for official Tomorrowland/artist Relive.",
+        note: waitNote,
       };
     }
     return {

@@ -80,6 +80,7 @@ import {
   TL_LUCAS_STEVE_TML_WE2_2024,
   TL_NETSKY_TML_WE1_2026,
   TL_OLIVER_HELDENS_TML_WE1_2026,
+  TL_COLE_TERRAZAS_HARD_SUMMER_2026,
 } from "./festivalCaptures20260817";
 
 export {
@@ -150,6 +151,7 @@ export {
   TL_ALAN_WALKER_TML_WE1_2018,
   TL_GORDO_TML_WE2_2023,
   TL_LUCAS_STEVE_TML_WE2_2024,
+  TL_COLE_TERRAZAS_HARD_SUMMER_2026,
 };
 
 function formatClock(sec: number): string {

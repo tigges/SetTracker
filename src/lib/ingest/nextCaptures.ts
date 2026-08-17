@@ -40,6 +40,9 @@ export const HELD_RELIVE_WATCH: {
   seed: string;
   match: RegExp;
   search: string[];
+  /** Official Relive title must also match (default: Tomorrowland). */
+  venue?: RegExp;
+  waitNote?: string;
 }[] = [
   {
     name: "Calvin Harris · TML WE2",
@@ -76,6 +79,15 @@ export const HELD_RELIVE_WATCH: {
     seed: "TL_HOLY_PRIEST_TML_WE1_2026",
     match: /holy\s*priest/i,
     search: ["holy priest", "tomorrowland", "weekend 1", "2026"],
+  },
+  {
+    name: "Cole Terrazas · HARD Summer",
+    seed: "TL_COLE_TERRAZAS_HARD_SUMMER_2026",
+    match: /cole\s*terrazas/i,
+    search: ["cole terrazas", "hard summer", "pink stage", "2026"],
+    venue: /hard\s*summer|hardfest|\binsomniac\b/i,
+    waitNote:
+      "Do not wire fan clips — wait for official HARD/Insomniac Relive.",
   },
 ];
 
@@ -403,7 +415,9 @@ export function buildHeldReliveWatch(): HeldReliveReport {
       seed: h.seed,
       searchUrl: search1001(...h.search, "relive", "youtube"),
       status: "waiting" as const,
-      note: "Do not wire fan clips — wait for official Tomorrowland/artist Relive.",
+      note:
+        h.waitNote ??
+        "Do not wire fan clips — wait for official Tomorrowland/artist Relive.",
     })),
   };
 }
