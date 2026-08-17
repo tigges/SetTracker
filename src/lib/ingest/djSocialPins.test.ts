@@ -268,6 +268,10 @@ assert.match(bySlug.liu!.instagram!, /instagram\.com\/liulive/);
 assert.match(bySlug.liu!.twitter!, /(?:twitter|x)\.com\/liulive/);
 assert.equal(hintForName("Liu")?.youtubeHandle, "@Liumusic");
 assert.equal(hintForName("Liu")?.soundcloudPermalink, "liulive");
+assert.equal(hintForName("Axwell")?.youtubeHandle, "@axwell");
+assert.equal(hintForName("Axwell")?.soundcloudPermalink, "axwell");
+assert.equal(hintForName("Kaskade")?.youtubeHandle, "@Kaskade");
+assert.equal(hintForName("Kaskade")?.soundcloudPermalink, "kaskade");
 
 assert.ok(bySlug["1788-l"], "missing pin 1788-l");
 assert.equal(bySlug["1788-l"]!.name, "1788-L");
