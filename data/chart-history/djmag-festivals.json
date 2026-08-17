@@ -1,0 +1,1431 @@
+{
+  "source": "https://djmag.com/top100festivals/{year}",
+  "kind": "festival",
+  "note": "DJ Mag Top 100 Festivals. Structured year pages start at 2026; 2025 ranks are inferred from 2026 YoY movement.",
+  "years": [
+    2025,
+    2026
+  ],
+  "entries": [
+    {
+      "year": 2026,
+      "rank": 1,
+      "slug": "tomorrowland",
+      "name": "Tomorrowland",
+      "change": "Non-mover"
+    },
+    {
+      "year": 2026,
+      "rank": 2,
+      "slug": "edc-las-vegas",
+      "name": "EDC Las Vegas",
+      "change": "Up 2"
+    },
+    {
+      "year": 2026,
+      "rank": 3,
+      "slug": "untold-festival",
+      "name": "Untold Festival",
+      "change": "Non-mover"
+    },
+    {
+      "year": 2026,
+      "rank": 4,
+      "slug": "ultra-music-festival",
+      "name": "Ultra Music Festival",
+      "change": null
+    },
+    {
+      "year": 2026,
+      "rank": 5,
+      "slug": "defqon1",
+      "name": "Defqon.1",
+      "change": "Up 5"
+    },
+    {
+      "year": 2026,
+      "rank": 6,
+      "slug": "sunburn-festival",
+      "name": "Sunburn Festival",
+      "change": "Up 2"
+    },
+    {
+      "year": 2026,
+      "rank": 7,
+      "slug": "creamfields",
+      "name": "Creamfields",
+      "change": "Up 2"
+    },
+    {
+      "year": 2026,
+      "rank": 8,
+      "slug": "kappa-futurfestival",
+      "name": "Kappa Futurfestival",
+      "change": null
+    },
+    {
+      "year": 2026,
+      "rank": 9,
+      "slug": "glastonbury-festival",
+      "name": "Glastonbury Festival",
+      "change": null
+    },
+    {
+      "year": 2026,
+      "rank": 10,
+      "slug": "parookaville",
+      "name": "Parookaville",
+      "change": "Up 8"
+    },
+    {
+      "year": 2026,
+      "rank": 11,
+      "slug": "electric-love",
+      "name": "Electric Love",
+      "change": "Up 12"
+    },
+    {
+      "year": 2026,
+      "rank": 12,
+      "slug": "coachella-valley-music-and-arts-festival",
+      "name": "Coachella Valley Music And Arts Festival",
+      "change": null
+    },
+    {
+      "year": 2026,
+      "rank": 13,
+      "slug": "parklife",
+      "name": "Parklife",
+      "change": null
+    },
+    {
+      "year": 2026,
+      "rank": 14,
+      "slug": "time-warp",
+      "name": "Time Warp",
+      "change": "Non-mover"
+    },
+    {
+      "year": 2026,
+      "rank": 15,
+      "slug": "mysteryland",
+      "name": "Mysteryland",
+      "change": "Up 18"
+    },
+    {
+      "year": 2026,
+      "rank": 16,
+      "slug": "edc-orlando",
+      "name": "EDC Orlando",
+      "change": "Up 6"
+    },
+    {
+      "year": 2026,
+      "rank": 17,
+      "slug": "dekmantel-festival",
+      "name": "Dekmantel Festival",
+      "change": "Non-mover"
+    },
+    {
+      "year": 2026,
+      "rank": 18,
+      "slug": "sziget-festival",
+      "name": "Sziget Festival",
+      "change": null
+    },
+    {
+      "year": 2026,
+      "rank": 19,
+      "slug": "primer-music-festival",
+      "name": "Primer Music Festival",
+      "change": "Up 23"
+    },
+    {
+      "year": 2026,
+      "rank": 20,
+      "slug": "boomtown",
+      "name": "Boomtown",
+      "change": null
+    },
+    {
+      "year": 2026,
+      "rank": 21,
+      "slug": "amf",
+      "name": "AMF",
+      "change": null
+    },
+    {
+      "year": 2026,
+      "rank": 22,
+      "slug": "terminal-v",
+      "name": "Terminal V",
+      "change": "Up 12"
+    },
+    {
+      "year": 2026,
+      "rank": 23,
+      "slug": "world-club-dome",
+      "name": "World Club Dome",
+      "change": null
+    },
+    {
+      "year": 2026,
+      "rank": 24,
+      "slug": "exit-festival",
+      "name": "Exit Festival",
+      "change": "Up 4"
+    },
+    {
+      "year": 2026,
+      "rank": 25,
+      "slug": "world-dj-festival",
+      "name": "World DJ Festival",
+      "change": "Up 7"
+    },
+    {
+      "year": 2026,
+      "rank": 26,
+      "slug": "monegros-desert-festival",
+      "name": "Monegros Desert Festival",
+      "change": null
+    },
+    {
+      "year": 2026,
+      "rank": 27,
+      "slug": "808-festival",
+      "name": "808 Festival",
+      "change": "Up 2"
+    },
+    {
+      "year": 2026,
+      "rank": 28,
+      "slug": "neopop-festival",
+      "name": "Neopop Festival",
+      "change": "Up 2"
+    },
+    {
+      "year": 2026,
+      "rank": 29,
+      "slug": "siam-songkran-music-festival",
+      "name": "Siam Songkran Music Festival",
+      "change": "Up 42"
+    },
+    {
+      "year": 2026,
+      "rank": 30,
+      "slug": "primavera-sound",
+      "name": "Primavera Sound",
+      "change": null
+    },
+    {
+      "year": 2026,
+      "rank": 31,
+      "slug": "burning-man",
+      "name": "Burning Man",
+      "change": null
+    },
+    {
+      "year": 2026,
+      "rank": 32,
+      "slug": "s2o-songkran-music-festival",
+      "name": "S2O Songkran Music Festival",
+      "change": "Up 3"
+    },
+    {
+      "year": 2026,
+      "rank": 33,
+      "slug": "neversea-kapital",
+      "name": "Neversea Kapital",
+      "change": "New entry"
+    },
+    {
+      "year": 2026,
+      "rank": 34,
+      "slug": "awakenings-festival",
+      "name": "Awakenings Festival",
+      "change": null
+    },
+    {
+      "year": 2026,
+      "rank": 35,
+      "slug": "movement-music-festival",
+      "name": "Movement Music Festival",
+      "change": null
+    },
+    {
+      "year": 2026,
+      "rank": 36,
+      "slug": "panorama-festival",
+      "name": "Panorama Festival",
+      "change": "Up 7"
+    },
+    {
+      "year": 2026,
+      "rank": 37,
+      "slug": "dgtl",
+      "name": "DGTL",
+      "change": "Up 1"
+    },
+    {
+      "year": 2026,
+      "rank": 38,
+      "slug": "sonar",
+      "name": "Sónar",
+      "change": null
+    },
+    {
+      "year": 2026,
+      "rank": 39,
+      "slug": "nibirii-festival",
+      "name": "Nibirii Festival",
+      "change": "Up 13"
+    },
+    {
+      "year": 2026,
+      "rank": 40,
+      "slug": "veld-music-festival",
+      "name": "Veld Music Festival",
+      "change": "Up 4"
+    },
+    {
+      "year": 2026,
+      "rank": 41,
+      "slug": "arc-music-festival",
+      "name": "Arc Music Festival",
+      "change": null
+    },
+    {
+      "year": 2026,
+      "rank": 42,
+      "slug": "tomorrowland-winter",
+      "name": "Tomorrowland Winter",
+      "change": "Up 20"
+    },
+    {
+      "year": 2026,
+      "rank": 43,
+      "slug": "houghton-festival",
+      "name": "Houghton Festival",
+      "change": "Up 43"
+    },
+    {
+      "year": 2026,
+      "rank": 44,
+      "slug": "positiv",
+      "name": "Positiv",
+      "change": "Up 21"
+    },
+    {
+      "year": 2026,
+      "rank": 45,
+      "slug": "edc-mexico",
+      "name": "EDC Mexico",
+      "change": "Up 5"
+    },
+    {
+      "year": 2026,
+      "rank": 46,
+      "slug": "airbeat-one",
+      "name": "Airbeat One",
+      "change": "Up 14"
+    },
+    {
+      "year": 2026,
+      "rank": 47,
+      "slug": "ultra-europe",
+      "name": "ULTRA Europe",
+      "change": null
+    },
+    {
+      "year": 2026,
+      "rank": 48,
+      "slug": "loveland",
+      "name": "Loveland",
+      "change": "Non-mover"
+    },
+    {
+      "year": 2026,
+      "rank": 49,
+      "slug": "dimensions-festival",
+      "name": "Dimensions Festival",
+      "change": null
+    },
+    {
+      "year": 2026,
+      "rank": 50,
+      "slug": "s2o-taiwan",
+      "name": "S2O Taiwan",
+      "change": "Up 5"
+    },
+    {
+      "year": 2026,
+      "rank": 51,
+      "slug": "bonnaroo-music-arts-festival",
+      "name": "Bonnaroo Music & Arts Festival",
+      "change": null
+    },
+    {
+      "year": 2026,
+      "rank": 52,
+      "slug": "crssd-festival",
+      "name": "CRSSD Festival",
+      "change": null
+    },
+    {
+      "year": 2026,
+      "rank": 53,
+      "slug": "state-of-trance-festival",
+      "name": "A State Of Trance Festival",
+      "change": "Up 4"
+    },
+    {
+      "year": 2026,
+      "rank": 54,
+      "slug": "together-festival",
+      "name": "Together Festival",
+      "change": "Up 13"
+    },
+    {
+      "year": 2026,
+      "rank": 55,
+      "slug": "lovefest",
+      "name": "Lovefest",
+      "change": null
+    },
+    {
+      "year": 2026,
+      "rank": 56,
+      "slug": "hard-summer",
+      "name": "HARD Summer",
+      "change": "Up 3"
+    },
+    {
+      "year": 2026,
+      "rank": 57,
+      "slug": "snowbombing",
+      "name": "Snowbombing",
+      "change": null
+    },
+    {
+      "year": 2026,
+      "rank": 58,
+      "slug": "ava-festival",
+      "name": "AVA Festival",
+      "change": null
+    },
+    {
+      "year": 2026,
+      "rank": 59,
+      "slug": "ultra-japan",
+      "name": "ULTRA Japan",
+      "change": "Up 17"
+    },
+    {
+      "year": 2026,
+      "rank": 60,
+      "slug": "les-plages-electroniques",
+      "name": "Les Plages Electroniques",
+      "change": null
+    },
+    {
+      "year": 2026,
+      "rank": 61,
+      "slug": "lollapalooza",
+      "name": "Lollapalooza",
+      "change": null
+    },
+    {
+      "year": 2026,
+      "rank": 62,
+      "slug": "vision-colour-music-festival",
+      "name": "Vision & Colour Music Festival",
+      "change": "Up 32"
+    },
+    {
+      "year": 2026,
+      "rank": 63,
+      "slug": "hideout-festival",
+      "name": "Hideout Festival",
+      "change": null
+    },
+    {
+      "year": 2026,
+      "rank": 64,
+      "slug": "djakarta-warehouse-project",
+      "name": "Djakarta Warehouse Project",
+      "change": "Up 9"
+    },
+    {
+      "year": 2026,
+      "rank": 65,
+      "slug": "beonix-festival",
+      "name": "Beonix Festival",
+      "change": "Up 4"
+    },
+    {
+      "year": 2026,
+      "rank": 66,
+      "slug": "lost-village",
+      "name": "Lost Village",
+      "change": "Up 2"
+    },
+    {
+      "year": 2026,
+      "rank": 67,
+      "slug": "beyond-valley",
+      "name": "Beyond The Valley",
+      "change": "Up 15"
+    },
+    {
+      "year": 2026,
+      "rank": 68,
+      "slug": "untold-dubai",
+      "name": "UNTOLD Dubai",
+      "change": null
+    },
+    {
+      "year": 2026,
+      "rank": 69,
+      "slug": "groove-cruise",
+      "name": "Groove Cruise",
+      "change": "Up 12"
+    },
+    {
+      "year": 2026,
+      "rank": 70,
+      "slug": "ultra-korea",
+      "name": "ULTRA Korea",
+      "change": "Up 2"
+    },
+    {
+      "year": 2026,
+      "rank": 71,
+      "slug": "scream-or-dance",
+      "name": "Scream Or Dance",
+      "change": "New entry"
+    },
+    {
+      "year": 2026,
+      "rank": 72,
+      "slug": "creamfields-chile",
+      "name": "Creamfields Chile",
+      "change": null
+    },
+    {
+      "year": 2026,
+      "rank": 73,
+      "slug": "white-party-bangkok",
+      "name": "White Party Bangkok",
+      "change": "New entry"
+    },
+    {
+      "year": 2026,
+      "rank": 74,
+      "slug": "ultra-taiwan",
+      "name": "ULTRA Taiwan",
+      "change": null
+    },
+    {
+      "year": 2026,
+      "rank": 75,
+      "slug": "blacklist-festival",
+      "name": "Blacklist Festival",
+      "change": null
+    },
+    {
+      "year": 2026,
+      "rank": 76,
+      "slug": "love-international-festival",
+      "name": "Love International Festival",
+      "change": "Up 11"
+    },
+    {
+      "year": 2026,
+      "rank": 77,
+      "slug": "defected-croatia",
+      "name": "Defected Croatia",
+      "change": null
+    },
+    {
+      "year": 2026,
+      "rank": 78,
+      "slug": "neon-countdown",
+      "name": "Neon Countdown",
+      "change": null
+    },
+    {
+      "year": 2026,
+      "rank": 79,
+      "slug": "sonus",
+      "name": "Sonus",
+      "change": null
+    },
+    {
+      "year": 2026,
+      "rank": 80,
+      "slug": "nameless-festival",
+      "name": "Nameless Festival",
+      "change": null
+    },
+    {
+      "year": 2026,
+      "rank": 81,
+      "slug": "edc-thailand",
+      "name": "EDC Thailand",
+      "change": "Up 9"
+    },
+    {
+      "year": 2026,
+      "rank": 82,
+      "slug": "ultra-buenos-aires",
+      "name": "ULTRA Buenos Aires",
+      "change": "New entry"
+    },
+    {
+      "year": 2026,
+      "rank": 83,
+      "slug": "fly-open-air-festival",
+      "name": "Fly Open Air Festival",
+      "change": "Up 6"
+    },
+    {
+      "year": 2026,
+      "rank": 84,
+      "slug": "pitch-music-arts",
+      "name": "Pitch Music & Arts",
+      "change": "Up 12"
+    },
+    {
+      "year": 2026,
+      "rank": 85,
+      "slug": "beyond-wonderland-southern-california",
+      "name": "Beyond Wonderland Southern California",
+      "change": null
+    },
+    {
+      "year": 2026,
+      "rank": 86,
+      "slug": "ultra-australia",
+      "name": "ULTRA Australia",
+      "change": "Up 2"
+    },
+    {
+      "year": 2026,
+      "rank": 87,
+      "slug": "glitch-festival",
+      "name": "Glitch Festival",
+      "change": null
+    },
+    {
+      "year": 2026,
+      "rank": 88,
+      "slug": "medusa-festival",
+      "name": "Medusa Festival",
+      "change": "Up 9"
+    },
+    {
+      "year": 2026,
+      "rank": 89,
+      "slug": "sunset-neon",
+      "name": "Sunset By Neon",
+      "change": null
+    },
+    {
+      "year": 2026,
+      "rank": 90,
+      "slug": "gmo-sonic",
+      "name": "GMO Sonic",
+      "change": "New entry"
+    },
+    {
+      "year": 2026,
+      "rank": 91,
+      "slug": "soundstorm",
+      "name": "Soundstorm",
+      "change": null
+    },
+    {
+      "year": 2026,
+      "rank": 92,
+      "slug": "beats-love",
+      "name": "Beats For Love",
+      "change": "Up 7"
+    },
+    {
+      "year": 2026,
+      "rank": 93,
+      "slug": "magic-of-tomorrowland",
+      "name": "The Magic Of Tomorrowland",
+      "change": "New entry"
+    },
+    {
+      "year": 2026,
+      "rank": 94,
+      "slug": "nature-one",
+      "name": "Nature One",
+      "change": "New entry"
+    },
+    {
+      "year": 2026,
+      "rank": 95,
+      "slug": "ultra-south-africa",
+      "name": "ULTRA South Africa",
+      "change": "Non-mover"
+    },
+    {
+      "year": 2026,
+      "rank": 96,
+      "slug": "lost-lands-festival",
+      "name": "Lost Lands Festival",
+      "change": "Up 2"
+    },
+    {
+      "year": 2026,
+      "rank": 97,
+      "slug": "defected-malta",
+      "name": "Defected Malta",
+      "change": null
+    },
+    {
+      "year": 2026,
+      "rank": 98,
+      "slug": "verknipt-festival",
+      "name": "Verknipt Festival",
+      "change": "New entry"
+    },
+    {
+      "year": 2026,
+      "rank": 99,
+      "slug": "iii-points",
+      "name": "III Points",
+      "change": "New entry"
+    },
+    {
+      "year": 2026,
+      "rank": 100,
+      "slug": "baum-festival",
+      "name": "Baum Festival",
+      "change": null
+    },
+    {
+      "year": 2025,
+      "rank": 1,
+      "slug": "tomorrowland",
+      "name": "Tomorrowland",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 3,
+      "slug": "untold-festival",
+      "name": "Untold Festival",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 4,
+      "slug": "edc-las-vegas",
+      "name": "EDC Las Vegas",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 8,
+      "slug": "sunburn-festival",
+      "name": "Sunburn Festival",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 9,
+      "slug": "creamfields",
+      "name": "Creamfields",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 10,
+      "slug": "defqon1",
+      "name": "Defqon.1",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 14,
+      "slug": "time-warp",
+      "name": "Time Warp",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 17,
+      "slug": "dekmantel-festival",
+      "name": "Dekmantel Festival",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 18,
+      "slug": "parookaville",
+      "name": "Parookaville",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 22,
+      "slug": "edc-orlando",
+      "name": "EDC Orlando",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 23,
+      "slug": "electric-love",
+      "name": "Electric Love",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 28,
+      "slug": "exit-festival",
+      "name": "Exit Festival",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 29,
+      "slug": "808-festival",
+      "name": "808 Festival",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 30,
+      "slug": "neopop-festival",
+      "name": "Neopop Festival",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 32,
+      "slug": "world-dj-festival",
+      "name": "World DJ Festival",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 33,
+      "slug": "mysteryland",
+      "name": "Mysteryland",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 34,
+      "slug": "terminal-v",
+      "name": "Terminal V",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 35,
+      "slug": "s2o-songkran-music-festival",
+      "name": "S2O Songkran Music Festival",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 38,
+      "slug": "dgtl",
+      "name": "DGTL",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 42,
+      "slug": "primer-music-festival",
+      "name": "Primer Music Festival",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 43,
+      "slug": "panorama-festival",
+      "name": "Panorama Festival",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 44,
+      "slug": "veld-music-festival",
+      "name": "Veld Music Festival",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 48,
+      "slug": "loveland",
+      "name": "Loveland",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 50,
+      "slug": "edc-mexico",
+      "name": "EDC Mexico",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 52,
+      "slug": "nibirii-festival",
+      "name": "Nibirii Festival",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 55,
+      "slug": "s2o-taiwan",
+      "name": "S2O Taiwan",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 57,
+      "slug": "state-of-trance-festival",
+      "name": "A State Of Trance Festival",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 59,
+      "slug": "hard-summer",
+      "name": "HARD Summer",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 60,
+      "slug": "airbeat-one",
+      "name": "Airbeat One",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 62,
+      "slug": "tomorrowland-winter",
+      "name": "Tomorrowland Winter",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 65,
+      "slug": "positiv",
+      "name": "Positiv",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 67,
+      "slug": "together-festival",
+      "name": "Together Festival",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 68,
+      "slug": "lost-village",
+      "name": "Lost Village",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 69,
+      "slug": "beonix-festival",
+      "name": "Beonix Festival",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 71,
+      "slug": "siam-songkran-music-festival",
+      "name": "Siam Songkran Music Festival",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 72,
+      "slug": "ultra-korea",
+      "name": "ULTRA Korea",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 73,
+      "slug": "djakarta-warehouse-project",
+      "name": "Djakarta Warehouse Project",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 76,
+      "slug": "ultra-japan",
+      "name": "ULTRA Japan",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 81,
+      "slug": "groove-cruise",
+      "name": "Groove Cruise",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 82,
+      "slug": "beyond-valley",
+      "name": "Beyond The Valley",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 86,
+      "slug": "houghton-festival",
+      "name": "Houghton Festival",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 87,
+      "slug": "love-international-festival",
+      "name": "Love International Festival",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 88,
+      "slug": "ultra-australia",
+      "name": "ULTRA Australia",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 89,
+      "slug": "fly-open-air-festival",
+      "name": "Fly Open Air Festival",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 90,
+      "slug": "edc-thailand",
+      "name": "EDC Thailand",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 94,
+      "slug": "vision-colour-music-festival",
+      "name": "Vision & Colour Music Festival",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 95,
+      "slug": "ultra-south-africa",
+      "name": "ULTRA South Africa",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 96,
+      "slug": "pitch-music-arts",
+      "name": "Pitch Music & Arts",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 97,
+      "slug": "medusa-festival",
+      "name": "Medusa Festival",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 98,
+      "slug": "lost-lands-festival",
+      "name": "Lost Lands Festival",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 99,
+      "slug": "beats-love",
+      "name": "Beats For Love",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 2,
+      "slug": "ultra-music-festival",
+      "name": "Ultra Music Festival",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 6,
+      "slug": "kappa-futurfestival",
+      "name": "Kappa FuturFestival",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 5,
+      "slug": "glastonbury-festival",
+      "name": "Glastonbury Festival",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 7,
+      "slug": "coachella-valley-music-and-arts-festival",
+      "name": "Coachella Valley Music And Arts Festival",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 12,
+      "slug": "parklife",
+      "name": "Parklife",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 13,
+      "slug": "sziget-festival",
+      "name": "Sziget Festival",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 15,
+      "slug": "boomtown",
+      "name": "Boomtown",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 16,
+      "slug": "amf",
+      "name": "AMF",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 11,
+      "slug": "world-club-dome",
+      "name": "World Club Dome",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 19,
+      "slug": "monegros-desert-festival",
+      "name": "Monegros Desert Festival",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 25,
+      "slug": "primavera-sound",
+      "name": "Primavera Sound",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 24,
+      "slug": "burning-man",
+      "name": "Burning Man",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 20,
+      "slug": "awakenings-festival",
+      "name": "Awakenings Festival",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 27,
+      "slug": "movement-music-festival",
+      "name": "Movement Music Festival",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 26,
+      "slug": "sonar",
+      "name": "Sónar",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 36,
+      "slug": "arc-music-festival",
+      "name": "ARC Music Festival",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 31,
+      "slug": "ultra-europe",
+      "name": "Ultra Europe",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 45,
+      "slug": "dimensions-festival",
+      "name": "Dimensions Festival",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 46,
+      "slug": "bonnaroo-music-arts-festival",
+      "name": "Bonnaroo Music & Arts Festival",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 41,
+      "slug": "crssd-festival",
+      "name": "CRSSD Festival",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 49,
+      "slug": "lovefest",
+      "name": "Lovefest",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 56,
+      "slug": "snowbombing",
+      "name": "Snowbombing",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 54,
+      "slug": "ava-festival",
+      "name": "AVA Festival",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 58,
+      "slug": "les-plages-electroniques",
+      "name": "Les Plages Electroniques",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 39,
+      "slug": "lollapalooza",
+      "name": "Lollapalooza",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 47,
+      "slug": "hideout-festival",
+      "name": "Hideout Festival",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 40,
+      "slug": "untold-dubai",
+      "name": "UNTOLD Dubai",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 70,
+      "slug": "creamfields-chile",
+      "name": "Creamfields Chile",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 66,
+      "slug": "ultra-taiwan",
+      "name": "ULTRA Taiwan",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 61,
+      "slug": "blacklist-festival",
+      "name": "Blacklist Festival",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 74,
+      "slug": "defected-croatia",
+      "name": "Defected Croatia",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 53,
+      "slug": "neon-countdown",
+      "name": "Neon Countdown",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 37,
+      "slug": "sonus",
+      "name": "Sonus",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 51,
+      "slug": "nameless-festival",
+      "name": "Nameless Festival",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 83,
+      "slug": "glitch-festival",
+      "name": "Glitch Festival",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 85,
+      "slug": "sunset-neon",
+      "name": "Sunset By Neon",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 77,
+      "slug": "soundstorm",
+      "name": "Soundstorm",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 92,
+      "slug": "defected-malta",
+      "name": "Defected Malta",
+      "change": null,
+      "inferred": true
+    },
+    {
+      "year": 2025,
+      "rank": 84,
+      "slug": "baum-festival",
+      "name": "Baum Festival",
+      "change": null,
+      "inferred": true
+    }
+  ]
+}
