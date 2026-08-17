@@ -363,4 +363,24 @@ assert.equal(
   "sc-claptone-clapcast-576",
 );
 
+const brandonPvSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url ===
+    "https://soundcloud.com/brandonsounds/brandon-live-at-parookaville-2024-desert-valley",
+);
+assert.ok(brandonPvSc);
+assert.equal(brandonPvSc.primaryArtist.name, "BRANDON");
+assert.equal(brandonPvSc.type, "festival");
+assert.equal(brandonPvSc.seriesName, "Parookaville");
+assert.equal(
+  `sc-brandonsounds-${slugify("brandon-live-at-parookaville-2024-desert-valley")}`,
+  "sc-brandonsounds-brandon-live-at-parookaville-2024-desert-valley",
+);
+assert.equal(
+  SOUNDCLOUD_TRACK_SEEDS.some((s) =>
+    s.url.startsWith("sc-https://"),
+  ),
+  false,
+);
+
 console.log("soundcloud/tracks.test.ts ok");

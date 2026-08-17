@@ -125,6 +125,7 @@ import {
   TL_TAPE_B_CARTUNES_VOL5_2026,
   TL_VINTAGE_CULTURE_ROBOT_HEART_RESIDENCY_UNITED_STATES_2024,
   TL_JOHN_SUMMIT_BURNING_MAN_PLAYA_PACKAGE_MIX_2025,
+  TL_BRANDON_DESERT_VALLEY_PAROOKAVILLE_GERMANY_2024,
 } from "../tracklists1001/seeds";
 import type { RawArtist } from "../types";
 import { slugify } from "../types";
@@ -2673,6 +2674,23 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/btv3mn9/john-summit-burning-man-playa-package-mix-2025-10-09.html",
     tracklist1001: TL_JOHN_SUMMIT_BURNING_MAN_PLAYA_PACKAGE_MIX_2025,
+  },
+  {
+    // Official @BRANDONSOUNDS upload; 1001TL wired via yt-AQ6wWT2HaSQ
+    // (same list as sc-brandonsounds-brandon-live-at-parookaville-2024-desert-valley).
+    video: "https://www.youtube.com/watch?v=AQ6wWT2HaSQ",
+    primaryArtist: dj("BRANDON", {
+      accent: "#ff5e5e",
+      homeCity: "Germany",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    title: "BRANDON @ Desert Valley, Parookaville 2024",
+    seriesName: "Parookaville",
+    eventName: "Parookaville",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1w51jd7t/brandon-desert-valley-parookaville-germany-2024-07-28.html",
+    tracklist1001: TL_BRANDON_DESERT_VALLEY_PAROOKAVILLE_GERMANY_2024,
   },
 ];
 

@@ -393,4 +393,18 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     type: "radio",
     minDurationSec: 30 * 60,
   },
+  {
+    // Official brandonsounds upload; 1001TL wired via
+    // sc-brandonsounds-brandon-live-at-parookaville-2024-desert-valley
+    // (same list as yt-AQ6wWT2HaSQ). Never wire sc-https://….
+    url: "https://soundcloud.com/brandonsounds/brandon-live-at-parookaville-2024-desert-valley",
+    primaryArtist: dj("BRANDON", {
+      accent: "#ff5e5e",
+      homeCity: "Germany",
+    }),
+    genre: "Tech House",
+    seriesName: "Parookaville",
+    type: "festival",
+    minDurationSec: 50 * 60,
+  },
 ];

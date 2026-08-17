@@ -39,6 +39,15 @@ describe("festivalDrops", () => {
     assert.equal(seed?.slug, "parookaville-2026");
   });
 
+  it("matches Parookaville 2024 from a 2024 title", () => {
+    const seed = matchEditionSeed(
+      "parookaville",
+      "BRANDON @ Desert Valley, Parookaville 2024",
+      new Date("2024-07-28"),
+    );
+    assert.equal(seed?.slug, "parookaville-2024");
+  });
+
   it("matches Parookaville 2025 from a 2025 title", () => {
     const seed = matchEditionSeed(
       "parookaville",

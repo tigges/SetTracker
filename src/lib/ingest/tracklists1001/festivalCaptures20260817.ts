@@ -828,3 +828,56 @@ export const TL_JOHN_SUMMIT_BURNING_MAN_PLAYA_PACKAGE_MIX_2025: FingerprintSeedR
  * untimed tracks (source provenance). Paste timed 1001 cues to wire
  * TRACKLIST_1001_BY_SOURCE_SLUG["sc-claptone-clapcast-576"].
  */
+
+/**
+ * BRANDON @ Desert Valley, Parookaville, Germany 2024-07-28
+ * https://www.1001tracklists.com/tracklist/1w51jd7t/brandon-desert-valley-parookaville-germany-2024-07-28.html
+ * Official YT: https://youtu.be/AQ6wWT2HaSQ (@BRANDONSOUNDS)
+ * Official SC: https://soundcloud.com/brandonsounds/brandon-live-at-parookaville-2024-desert-valley
+ * Capture overlay used TL_BRANDON_Desert-Valley_Parookaville_Germany_2024
+ * (hyphens illegal); constant is TL_BRANDON_DESERT_VALLEY_PAROOKAVILLE_GERMANY_2024.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-AQ6wWT2HaSQ"]
+ *   and ["sc-brandonsounds-brandon-live-at-parookaville-2024-desert-valley"]
+ * Never wire sc-https://….
+ * Captured 2026-08-17 - provenance 1001tl.
+ */
+export const TL_BRANDON_DESERT_VALLEY_PAROOKAVILLE_GERMANY_2024: FingerprintSeedRow[] =
+  [
+    { at: "0:01", artist: "Victor Lou & Visage Music", title: "Pleya" },
+    { at: "0:46", artist: "BRANDON ft. KXNE", title: "Shades On" },
+    { at: "1:06", artist: "Yellow Claw pres. €URO TRA$H & Breaking Beattz ft. Almondmilkhunni", title: "Six Figures" },
+    { at: "2:45", artist: "BRANDON & KXNE", title: "Gucci Slides" },
+    { at: "4:41", artist: "Breaking Beattz", title: "Flex" },
+    { at: "5:06", artist: "Matroda & Dances", title: "Britney" },
+    { at: "6:40", artist: "BRANDON & MYLØ", title: "Floor Addiction" },
+    { at: "8:11", artist: "Corrupt (UK) ft. Raas", title: "Strange Things" },
+    { at: "8:55", artist: "BRANDON", title: "Dance In Chicago" },
+    { at: "9:51", artist: "DLMT & No Thanks & Halogen", title: "On Brand" },
+    { at: "11:12", artist: "Kanye West", title: "Can't Tell Me Nothing (Cave Studio Edit)" },
+    { at: "12:36", artist: "Illusionize & Victor Lou", title: "Fucking Party" },
+    { at: "14:05", artist: "BRANDON & PVC", title: "Watch Me Move" },
+    { at: "14:38", artist: "Chris Lorenzo ft. MC Buzzz", title: "Bota Bota" },
+    { at: "16:01", artist: "Kendrick Lamar", title: "Swimming Pools (Drank) (BRANDON Bootleg)" },
+    { at: "18:45", artist: "Central Cee ft. Lil Baby", title: "BAND4BAND" },
+    { at: "20:21", artist: "Corrupt (UK)", title: "Shook (VIP)" },
+    { at: "22:05", artist: "Lil' Bow Wow & Snoop Dogg", title: "Bow Wow (That's My Name) (BRANDON Bootleg)" },
+    { at: "24:26", artist: "BRANDON ft. KXNE", title: "Shades On" },
+    { at: "28:07", artist: "Dominica", title: "I Gotta Let U Go (BRANDON Remix)" },
+    { at: "29:08", artist: "No Thanks & Legacy", title: "Click Click" },
+    { at: "31:08", artist: "BRANDON", title: "Clock Ticker (Adam Miller Remix)" },
+    { at: "32:49", artist: "BRANDON & Lackmus", title: "Ravers Bounce" },
+    { at: "34:30", artist: "Dr. Dre ft. Snoop Dogg", title: "Still D.R.E. (BRANDON Bootleg)" },
+    { at: "35:01", artist: "BRANDON & Kyogre", title: "Night Heater" },
+    { at: "36:51", artist: "DJ Snake & Peso Pluma", title: "TEKA (Matroda Remix)" },
+    { at: "39:28", artist: "Gigi D'Agostino", title: "Bla Bla Bla (BigGrand TechHouse Edit)" },
+    { at: "41:08", artist: "Illusionize ft. Y&M", title: "My Body" },
+    { at: "43:09", artist: "BRANDON & No/Me", title: "Lost & Found London" },
+    { at: "45:16", artist: "BRANDON", title: "Garados" },
+    { at: "46:46", artist: "J-Kwon", title: "Tipsy (BRANDON Bootleg)" },
+    { at: "48:49", artist: "BIJOU & BRANDON", title: "Swagger Feet" },
+    { at: "50:43", artist: "Rihanna", title: "Disturbia (BRANDON Bootleg)" },
+    { at: "53:21", artist: "Hamdi ft. Princess Superstar", title: "Counting (Taiki Nulight Remix)" },
+    { at: "54:41", artist: "Borne & Alexis B", title: "Hush" },
+    { at: "55:11", artist: "ero808 & BRANDON", title: "Serotonin" },
+    { at: "57:41", artist: "Andrewboy ft. Moby", title: "Porcelain" },
+  ];

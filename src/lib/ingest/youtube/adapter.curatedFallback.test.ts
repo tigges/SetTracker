@@ -105,6 +105,9 @@ const VC_ROBOT_HEART = YOUTUBE_SETS.find((s) => s.video.includes("KbGNocaJDjw"))
 const JOHN_SUMMIT_PLAYA = YOUTUBE_SETS.find((s) =>
   s.video.includes("PkWNuf7rtms"),
 );
+const BRANDON_PAROOKAVILLE = YOUTUBE_SETS.find((s) =>
+  s.video.includes("AQ6wWT2HaSQ"),
+);
 
 describe("watchMetaFromCuratedSeed", () => {
   it("builds ASOT 1290 meta from the curated 1001 capture", () => {
@@ -272,6 +275,17 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=PkWNuf7rtms");
     // Last cue 21:50 + 180s pad.
     assert.equal(meta.durationSec, 21 * 60 + 50 + 180);
+  });
+
+  it("builds BRANDON Parookaville Desert Valley meta from the curated 1001 capture", () => {
+    assert.ok(BRANDON_PAROOKAVILLE);
+    const meta = watchMetaFromCuratedSeed(BRANDON_PAROOKAVILLE);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "AQ6wWT2HaSQ");
+    assert.match(meta.title, /Parookaville/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=AQ6wWT2HaSQ");
+    // Last cue 57:41 + 180s pad.
+    assert.equal(meta.durationSec, 57 * 60 + 41 + 180);
   });
 
   it("builds ILLENIUM TML WE1 Great Library meta from the curated 1001 capture", () => {
@@ -1450,5 +1464,20 @@ describe("curated YouTube 429 fallback", () => {
     assert.equal(sets[0]?.primaryArtist?.slug, "john-summit");
     assert.equal(sets[0]?.seriesName, "Experts Only");
     assert.match(String(sets[0]?.eventName ?? ""), /Burning Man/i);
+  });
+
+  it("lands BRANDON Parookaville Desert Valley from the 1001 seed when watch is 429", async () => {
+    assert.ok(BRANDON_PAROOKAVILLE);
+    const adapter = createYoutubeAdapter([BRANDON_PAROOKAVILLE], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-AQ6wWT2HaSQ");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 37);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 57 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "brandon");
+    assert.match(String(sets[0]?.eventName ?? ""), /Parookaville/i);
+    assert.match(String(sets[0]?.title ?? ""), /2024/);
   });
 });

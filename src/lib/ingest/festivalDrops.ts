@@ -76,6 +76,15 @@ export const FESTIVAL_EDITION_SEEDS: FestivalEditionSeed[] = [
     startsAt: "2025-05-16",
     endsAt: "2025-05-18",
   },
+  // Parookaville 2024 — official weekend 19–21 Jul.
+  {
+    eventSlug: "parookaville",
+    slug: "parookaville-2024",
+    year: 2024,
+    label: "Germany",
+    startsAt: "2024-07-19",
+    endsAt: "2024-07-21",
+  },
   // Parookaville 2025 — official weekend 18–20 Jul (set 2025-07-20).
   {
     eventSlug: "parookaville",

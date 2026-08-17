@@ -1,7 +1,15 @@
 {
   "note": "Operator-collected 1001Tracklists URLs. All listed urls[] rows are now seeded. Prefer new operator pastes over this archive. stillMissing1001 is video-in / no 1001 page — do not invent URLs. heldPendingRelive is 1001-in / no official YT/SC Relive — seed held, do not invent or wire fan playback. pendingCuePaste is official Relive + operator 1001 URL without cue rows — do not scrape 1001 or invent 1001tl seeds.",
-  "updatedAt": "2026-08-17T14:45:00.000Z",
+  "updatedAt": "2026-08-17T16:40:00.000Z",
   "urls": [
+    {
+      "label": "BRANDON · Desert Valley, Parookaville 2024-07-28",
+      "slug": "yt-AQ6wWT2HaSQ",
+      "name": "TL_BRANDON_DESERT_VALLEY_PAROOKAVILLE_GERMANY_2024",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/1w51jd7t/brandon-desert-valley-parookaville-germany-2024-07-28.html",
+      "youtubeUrl": "https://youtu.be/AQ6wWT2HaSQ",
+      "soundcloudUrl": "https://soundcloud.com/brandonsounds/brandon-live-at-parookaville-2024-desert-valley"
+    },
     {
       "label": "John Summit · Burning Man Playa Package Mix 2025",
       "slug": "yt-PkWNuf7rtms",

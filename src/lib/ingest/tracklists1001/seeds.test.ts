@@ -144,6 +144,7 @@ import {
   TL_MAU_P_XXX_RADIO_201_2026,
   TL_VINTAGE_CULTURE_ROBOT_HEART_RESIDENCY_UNITED_STATES_2024,
   TL_JOHN_SUMMIT_BURNING_MAN_PLAYA_PACKAGE_MIX_2025,
+  TL_BRANDON_DESERT_VALLEY_PAROOKAVILLE_GERMANY_2024,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   tracklist1001RowsToPlays,
@@ -2932,6 +2933,49 @@ assert.equal(playaPackage[0]?.trackTitle, "crystallized (Playa Dub Remix)");
 assert.equal(playaPackage[5]?.artistName, "John Summit ft. CLOVES");
 assert.equal(playaPackage[5]?.trackTitle, "Focus (EdiP Remix)");
 assert.equal(playaPackage[5]?.timestamp, 21 * 60 + 50);
+
+assertSeedClocks(TL_BRANDON_DESERT_VALLEY_PAROOKAVILLE_GERMANY_2024);
+assert.equal(TL_BRANDON_DESERT_VALLEY_PAROOKAVILLE_GERMANY_2024.length, 37);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-AQ6wWT2HaSQ"],
+  TL_BRANDON_DESERT_VALLEY_PAROOKAVILLE_GERMANY_2024,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-brandonsounds-brandon-live-at-parookaville-2024-desert-valley"
+  ],
+  TL_BRANDON_DESERT_VALLEY_PAROOKAVILLE_GERMANY_2024,
+);
+assert.equal(isWiredTracklistSlug("yt-AQ6wWT2HaSQ"), true);
+assert.equal(
+  isWiredTracklistSlug(
+    "sc-brandonsounds-brandon-live-at-parookaville-2024-desert-valley",
+  ),
+  true,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-https://soundcloud.com/brandonsounds/brandon-live-at-parookaville-2024-desert-valley"
+  ],
+  undefined,
+);
+const brandonPv = tracklist1001RowsToPlays(
+  TL_BRANDON_DESERT_VALLEY_PAROOKAVILLE_GERMANY_2024,
+);
+assert.equal(brandonPv.length, 37);
+assert.equal(brandonPv[0]?.provenance, "1001tl");
+assert.equal(brandonPv[0]?.artistName, "Victor Lou & Visage Music");
+assert.equal(brandonPv[0]?.trackTitle, "Pleya");
+assert.equal(brandonPv[0]?.timestamp, 1);
+assert.equal(brandonPv[36]?.artistName, "Andrewboy ft. Moby");
+assert.equal(brandonPv[36]?.trackTitle, "Porcelain");
+assert.equal(brandonPv[36]?.timestamp, 57 * 60 + 41);
+for (let i = 1; i < brandonPv.length; i++) {
+  assert.ok(
+    (brandonPv[i]!.timestamp ?? 0) > (brandonPv[i - 1]!.timestamp ?? 0),
+    `BRANDON Parookaville 2024 clocks must increase at index ${i}`,
+  );
+}
 
 // Claptone Clapcast 576 — official SC Relive in, 1001 URL recorded,
 // no cue paste. Do not invent 1001tl rows or sc-https://… slugs.
