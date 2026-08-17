@@ -253,3 +253,62 @@ export const TL_CHASE_STATUS_TML_WE2_2026: FingerprintSeedRow[] = [
   { at: "56:40", artist: "Chase & Status", title: "Carnage" },
 ];
 
+/**
+ * I Hate Models @ Freedom Stage, Tomorrowland Weekend 1, Belgium 2026-07-19
+ * https://www.1001tracklists.com/tracklist/ctbyvpk/i-hate-models-freedom-stage-tomorrowland-weekend-1-belgium-2026-07-19.html
+ * Official YT: https://youtu.be/zMW5SQPS1cY
+ * Capture overlay used TL_I-Hate-Models_Freedom-Stage_Tomorrowland_WE1_Belgium_2026
+ * (hyphens illegal); constant is TL_I_HATE_MODELS_TML_WE1_2026.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-zMW5SQPS1cY"]
+ * Captured 2026-08-17 - provenance 1001tl.
+ */
+export const TL_I_HATE_MODELS_TML_WE1_2026: FingerprintSeedRow[] = [
+  { at: "0:20", artist: "H! Dude & Angel Cannon", title: "Who Let The Dogs Out" },
+  { at: "1:35", artist: "V-TEC", title: "My Fucking Show" },
+  { at: "2:50", artist: "JAAX", title: "FAKE" },
+  { at: "4:05", artist: "DJ Snake & Crankdat", title: "Big Bang" },
+  { at: "5:20", artist: "T A N E", title: "Slave To The Rave" },
+  { at: "6:35", artist: "ZEP & Ravn", title: "R4VESTARS" },
+  { at: "7:50", artist: "Teriyaki Boyz vs. Gwen Stefani", title: "Tokio Drift vs. Hollaback Girl (Macon 148 BPM Remix)" },
+  { at: "9:05", artist: "Gwen Stefani", title: "Hollaback Girl" },
+  { at: "10:20", artist: "Teriyaki Boyz", title: "Tokyo Drift (The Fast And The Furious: Tokyo Drift OST)" },
+  { at: "11:35", artist: "Benny Benassi pres. The Biz", title: "Satisfaction (BEAUZ Hard Techno Remix)" },
+  { at: "12:50", artist: "Anderex", title: "Sweet Disposition" },
+  { at: "14:05", artist: "Slipknot", title: "Duality (Ephesis Remix)" },
+  { at: "15:20", artist: "Dimitri Vangelis & Wyman X Steve Angello", title: "Payback" },
+  { at: "16:35", artist: "The Chemical Brothers", title: "Hey Boy, Hey Girl" },
+  { at: "17:50", artist: "Daft Punk vs. Justice & Simian", title: "Aerodynamic Friends (N4C x Gianni Di Bernardo Hard Remix)" },
+  { at: "19:05", artist: "Daft Punk", title: "Aerodynamic" },
+  { at: "20:20", artist: "Justice vs. Simian", title: "We Are Your Friends" },
+  { at: "21:35", artist: "Luke Noize", title: "Pump It (Pulp Fiction)" },
+  { at: "22:50", artist: "Carl Orff", title: "Carmina Burana (O Fortuna) (Digital Mindz Bootleg)" },
+  { at: "24:05", artist: "Edyom & Fidelys", title: "From Fire" },
+  { at: "25:20", artist: "Daft Punk", title: "Technologic" },
+  { at: "26:35", artist: "Oliver Tree & Robin Schulz", title: "Miss You (Exproz Bootleg)" },
+  { at: "27:50", artist: "Ray Volpe", title: "Laserbeam (TiDo Edit)" },
+  { at: "29:05", artist: "ILLENIUM & Bring Me The Horizon", title: "Slave To The Rithm (I Hate Models Never Alone Remix)" },
+  { at: "30:20", artist: "AKSYS & Aresklas", title: "IMPACT" },
+  { at: "31:35", artist: "PRMIDV", title: "Get Up!" },
+  { at: "32:50", artist: "Coone", title: "4 BY 4 BEATS (I Don't Care)" },
+  { at: "34:05", artist: "Thick As Thieves", title: "Hyperspeed" },
+  { at: "35:20", artist: "ISOxo", title: "FUCK THE SPEAKERZ UP (Tylow Remix)" },
+  { at: "36:35", artist: "Rage Against The Machine", title: "Killing In The Name Of" },
+  { at: "37:50", artist: "The Bloody Beetroots ft. Steve Aoki", title: "Warp 1.9 (Don Dirty Remix)" },
+  { at: "39:05", artist: "Justin Timberlake ft. Timbaland", title: "SexyBack (TBR Edit)" },
+  { at: "40:20", artist: "Bountyhunter", title: "Woops (Dimitri Vegas & Junkie Kid Remix / BRANDON Remix)" },
+  { at: "41:35", artist: "Timmy Trumpet & Restricted", title: "Perfect (Exceeder)" },
+  { at: "42:50", artist: "Age Of Love", title: "The Age Of Love (Lethyx Nekuia Remix)" },
+  { at: "44:05", artist: "Space Laces", title: "Dominate (VIP)" },
+  { at: "45:20", artist: "Usher ft. Ludacris & Lil Jon", title: "Yeah!" },
+  { at: "46:35", artist: "Tazlow", title: "Rise Of The Machines" },
+  { at: "47:50", artist: "Da Hool", title: "Meet Her At The Love Parade" },
+  { at: "49:05", artist: "Zatox", title: "Let Me See Ya" },
+  { at: "50:20", artist: "Ely 023", title: "Regulation" },
+  { at: "51:35", artist: "Rihanna", title: "Where Have You Been (CIRCO Edit)" },
+  { at: "52:50", artist: "The Guard", title: "Beads" },
+  { at: "54:05", artist: "REDROOM & Reno Zdevay & LEVRE", title: "Feel It" },
+  { at: "55:20", artist: "Hilight Tribe", title: "Free Tibet (Flawx Remix)" },
+  { at: "56:35", artist: "I Hate Models", title: "Forever Melancholia" },
+  { at: "57:50", artist: "David Guetta ft. Chris Willis", title: "Love Is Gone" },
+];
+

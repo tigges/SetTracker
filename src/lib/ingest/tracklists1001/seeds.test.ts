@@ -132,6 +132,7 @@ import {
   TL_ALESSO_TML_WE1_2026,
   TL_ILLENIUM_TML_WE1_2026,
   TL_CHASE_STATUS_TML_WE2_2026,
+  TL_I_HATE_MODELS_TML_WE1_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   tracklist1001RowsToPlays,
@@ -2603,6 +2604,28 @@ for (let i = 1; i < chaseWe2.length; i++) {
   assert.ok(
     (chaseWe2[i]!.timestamp ?? 0) > (chaseWe2[i - 1]!.timestamp ?? 0),
     `Chase & Status TML WE2 2026 clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_I_HATE_MODELS_TML_WE1_2026);
+assert.equal(TL_I_HATE_MODELS_TML_WE1_2026.length, 47);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-zMW5SQPS1cY"],
+  TL_I_HATE_MODELS_TML_WE1_2026,
+);
+assert.equal(isWiredTracklistSlug("yt-zMW5SQPS1cY"), true);
+const ihmWe1 = tracklist1001RowsToPlays(TL_I_HATE_MODELS_TML_WE1_2026);
+assert.equal(ihmWe1.length, 47);
+assert.equal(ihmWe1[0]?.provenance, "1001tl");
+assert.equal(ihmWe1[0]?.timestamp, 20);
+assert.equal(ihmWe1[0]?.artistName, "H! Dude & Angel Cannon");
+assert.equal(ihmWe1[0]?.trackTitle, "Who Let The Dogs Out");
+assert.equal(ihmWe1[46]?.trackTitle, "Love Is Gone");
+assert.equal(ihmWe1[46]?.timestamp, 57 * 60 + 50);
+for (let i = 1; i < ihmWe1.length; i++) {
+  assert.ok(
+    (ihmWe1[i]!.timestamp ?? 0) > (ihmWe1[i - 1]!.timestamp ?? 0),
+    `I Hate Models TML WE1 2026 clocks must increase at index ${i}`,
   );
 }
 

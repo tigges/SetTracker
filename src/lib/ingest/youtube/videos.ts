@@ -106,6 +106,7 @@ import {
   TL_ALESSO_TML_WE1_2026,
   TL_ALESSO_TML_WE2_2026,
   TL_CHASE_STATUS_TML_WE2_2026,
+  TL_I_HATE_MODELS_TML_WE1_2026,
   TL_ILLENIUM_TML_WE1_2026,
   TL_ARMIN_VAN_BUUREN_TML_WE2_2026,
   TL_HONEYLUV_ANTS_USHUAIA_2026,
@@ -1105,6 +1106,19 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/p3duwuk/chase-status-mainstage-tomorrowland-weekend-2-belgium-2026-07-26.html",
     tracklist1001: TL_CHASE_STATUS_TML_WE2_2026,
+  },
+  {
+    // Tomorrowland official Relive — Freedom Stage WE1.
+    video: "https://www.youtube.com/watch?v=zMW5SQPS1cY",
+    primaryArtist: dj("I Hate Models", { accent: "#212529" }),
+    genre: "Techno",
+    type: "festival",
+    title: "I Hate Models WE1 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/ctbyvpk/i-hate-models-freedom-stage-tomorrowland-weekend-1-belgium-2026-07-19.html",
+    tracklist1001: TL_I_HATE_MODELS_TML_WE1_2026,
   },
   {
     // Tomorrowland official Relive — Freedom Stage WE2.

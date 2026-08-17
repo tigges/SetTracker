@@ -73,6 +73,7 @@ import {
   TL_ALESSO_TML_WE1_2026,
   TL_CHASE_STATUS_TML_WE2_2026,
   TL_DJS_FROM_MARS_MASH_UP_UNIVERSE_056_2026,
+  TL_I_HATE_MODELS_TML_WE1_2026,
   TL_ILLENIUM_TML_WE1_2026,
 } from "./festivalCaptures20260817";
 
@@ -138,6 +139,7 @@ export {
   TL_ALESSO_TML_WE1_2026,
   TL_ILLENIUM_TML_WE1_2026,
   TL_CHASE_STATUS_TML_WE2_2026,
+  TL_I_HATE_MODELS_TML_WE1_2026,
 };
 
 function formatClock(sec: number): string {
@@ -4656,6 +4658,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-TidwOi0NMI0": TL_ALESSO_TML_WE1_2026,
   "yt-E1WH0nvaxAw": TL_ILLENIUM_TML_WE1_2026,
   "yt-jSJEkiV3cCs": TL_CHASE_STATUS_TML_WE2_2026,
+  "yt-zMW5SQPS1cY": TL_I_HATE_MODELS_TML_WE1_2026,
 };
 
 /** Sanity: every seeded clock must parse. */

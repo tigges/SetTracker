@@ -82,6 +82,9 @@ const ILLENIUM_TML_WE1 = YOUTUBE_SETS.find((s) =>
 const CHASE_STATUS_TML_WE2 = YOUTUBE_SETS.find((s) =>
   s.video.includes("jSJEkiV3cCs"),
 );
+const I_HATE_MODELS_TML_WE1 = YOUTUBE_SETS.find((s) =>
+  s.video.includes("zMW5SQPS1cY"),
+);
 
 describe("watchMetaFromCuratedSeed", () => {
   it("builds ASOT 1290 meta from the curated 1001 capture", () => {
@@ -147,6 +150,17 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=jSJEkiV3cCs");
     // Last cue 56:40 + 180s pad.
     assert.equal(meta.durationSec, 56 * 60 + 40 + 180);
+  });
+
+  it("builds I Hate Models TML WE1 Freedom Stage meta from the curated 1001 capture", () => {
+    assert.ok(I_HATE_MODELS_TML_WE1);
+    const meta = watchMetaFromCuratedSeed(I_HATE_MODELS_TML_WE1);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "zMW5SQPS1cY");
+    assert.match(meta.title, /I Hate Models/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=zMW5SQPS1cY");
+    // Last cue 57:50 + 180s pad.
+    assert.equal(meta.durationSec, 57 * 60 + 50 + 180);
   });
 
   it("builds ILLENIUM TML WE1 Great Library meta from the curated 1001 capture", () => {
@@ -1192,6 +1206,20 @@ describe("curated YouTube 429 fallback", () => {
     assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
     assert.ok(sets[0]!.durationSec >= 56 * 60);
     assert.equal(sets[0]?.primaryArtist?.slug, "chase-status");
+    assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
+  });
+
+  it("lands I Hate Models TML WE1 Freedom Stage from the 1001 seed when watch is 429", async () => {
+    assert.ok(I_HATE_MODELS_TML_WE1);
+    const adapter = createYoutubeAdapter([I_HATE_MODELS_TML_WE1], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-zMW5SQPS1cY");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 47);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 57 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "i-hate-models");
     assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
   });
 });
