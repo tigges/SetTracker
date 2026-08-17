@@ -129,6 +129,15 @@ import {
   TL_LUCAS_AND_STEVE_AND_MIKE_WILLIAMS_DONT_LET_DADDY_KNOW_ZIGGO_DOME_AMSTERDAM_2026,
   TL_INDIRA_PAGANOTTO_ATMOSPHERE_STAGE_TOMORROWLAND_WE1_BELGIUM_2023,
   TL_DJS_FROM_MARS_MASH_UP_UNIVERSE_056_2026,
+  TL_ALESSO_TML_WE1_2026,
+  TL_ILLENIUM_TML_WE1_2026,
+  TL_CHASE_STATUS_TML_WE2_2026,
+  TL_I_HATE_MODELS_TML_WE1_2026,
+  TL_NETSKY_TML_WE1_2026,
+  TL_OLIVER_HELDENS_TML_WE1_2026,
+  TL_ALAN_WALKER_TML_WE1_2018,
+  TL_GORDO_TML_WE2_2023,
+  TL_LUCAS_STEVE_TML_WE2_2024,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   tracklist1001RowsToPlays,
@@ -2536,5 +2545,223 @@ for (let i = 1; i < dfm056.length; i++) {
     `DJs From Mars Mash-Up Universe 056 clocks must increase at index ${i}`,
   );
 }
+
+assertSeedClocks(TL_ALESSO_TML_WE1_2026);
+assert.equal(TL_ALESSO_TML_WE1_2026.length, 42);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-TidwOi0NMI0"],
+  TL_ALESSO_TML_WE1_2026,
+);
+assert.equal(isWiredTracklistSlug("yt-TidwOi0NMI0"), true);
+const alessoWe1 = tracklist1001RowsToPlays(TL_ALESSO_TML_WE1_2026);
+assert.equal(alessoWe1.length, 42);
+assert.equal(alessoWe1[0]?.provenance, "1001tl");
+assert.equal(alessoWe1[0]?.timestamp, 12);
+assert.equal(alessoWe1[0]?.artistName, "Alesso");
+assert.equal(alessoWe1[0]?.trackTitle, "Get Your Groove On");
+assert.equal(alessoWe1[41]?.trackTitle, "Never Going Home Tonight");
+assert.equal(alessoWe1[41]?.timestamp, 59 * 60 + 30);
+for (let i = 1; i < alessoWe1.length; i++) {
+  assert.ok(
+    (alessoWe1[i]!.timestamp ?? 0) > (alessoWe1[i - 1]!.timestamp ?? 0),
+    `Alesso TML WE1 2026 clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_ILLENIUM_TML_WE1_2026);
+assert.equal(TL_ILLENIUM_TML_WE1_2026.length, 97);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-E1WH0nvaxAw"],
+  TL_ILLENIUM_TML_WE1_2026,
+);
+assert.equal(isWiredTracklistSlug("yt-E1WH0nvaxAw"), true);
+const illeniumWe1 = tracklist1001RowsToPlays(TL_ILLENIUM_TML_WE1_2026);
+assert.equal(illeniumWe1.length, 97);
+assert.equal(illeniumWe1[0]?.provenance, "1001tl");
+assert.equal(illeniumWe1[0]?.timestamp, 12);
+assert.equal(illeniumWe1[0]?.artistName, "ILLENIUM");
+assert.equal(illeniumWe1[0]?.trackTitle, "ODYSSEY Live Intro Edit");
+assert.equal(illeniumWe1[96]?.trackTitle, "Good Things Fall Apart");
+assert.equal(illeniumWe1[96]?.timestamp, 59 * 60 + 30);
+for (let i = 1; i < illeniumWe1.length; i++) {
+  assert.ok(
+    (illeniumWe1[i]!.timestamp ?? 0) > (illeniumWe1[i - 1]!.timestamp ?? 0),
+    `ILLENIUM TML WE1 2026 clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_CHASE_STATUS_TML_WE2_2026);
+assert.equal(TL_CHASE_STATUS_TML_WE2_2026.length, 26);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-jSJEkiV3cCs"],
+  TL_CHASE_STATUS_TML_WE2_2026,
+);
+assert.equal(isWiredTracklistSlug("yt-jSJEkiV3cCs"), true);
+const chaseWe2 = tracklist1001RowsToPlays(TL_CHASE_STATUS_TML_WE2_2026);
+assert.equal(chaseWe2.length, 26);
+assert.equal(chaseWe2[0]?.provenance, "1001tl");
+assert.equal(chaseWe2[0]?.timestamp, 27);
+assert.equal(chaseWe2[0]?.artistName, "Chase & Status ft. Pozer");
+assert.equal(chaseWe2[0]?.trackTitle, "Through The Pain");
+assert.equal(chaseWe2[25]?.trackTitle, "Carnage");
+assert.equal(chaseWe2[25]?.timestamp, 56 * 60 + 40);
+for (let i = 1; i < chaseWe2.length; i++) {
+  assert.ok(
+    (chaseWe2[i]!.timestamp ?? 0) > (chaseWe2[i - 1]!.timestamp ?? 0),
+    `Chase & Status TML WE2 2026 clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_I_HATE_MODELS_TML_WE1_2026);
+assert.equal(TL_I_HATE_MODELS_TML_WE1_2026.length, 47);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-zMW5SQPS1cY"],
+  TL_I_HATE_MODELS_TML_WE1_2026,
+);
+assert.equal(isWiredTracklistSlug("yt-zMW5SQPS1cY"), true);
+const ihmWe1 = tracklist1001RowsToPlays(TL_I_HATE_MODELS_TML_WE1_2026);
+assert.equal(ihmWe1.length, 47);
+assert.equal(ihmWe1[0]?.provenance, "1001tl");
+assert.equal(ihmWe1[0]?.timestamp, 20);
+assert.equal(ihmWe1[0]?.artistName, "H! Dude & Angel Cannon");
+assert.equal(ihmWe1[0]?.trackTitle, "Who Let The Dogs Out");
+assert.equal(ihmWe1[46]?.trackTitle, "Love Is Gone");
+assert.equal(ihmWe1[46]?.timestamp, 57 * 60 + 50);
+for (let i = 1; i < ihmWe1.length; i++) {
+  assert.ok(
+    (ihmWe1[i]!.timestamp ?? 0) > (ihmWe1[i - 1]!.timestamp ?? 0),
+    `I Hate Models TML WE1 2026 clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_NETSKY_TML_WE1_2026);
+assert.equal(TL_NETSKY_TML_WE1_2026.length, 29);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-_e1H9pkcjsQ"],
+  TL_NETSKY_TML_WE1_2026,
+);
+assert.equal(isWiredTracklistSlug("yt-_e1H9pkcjsQ"), true);
+const netskyWe1 = tracklist1001RowsToPlays(TL_NETSKY_TML_WE1_2026);
+assert.equal(netskyWe1.length, 29);
+assert.equal(netskyWe1[0]?.provenance, "1001tl");
+assert.equal(netskyWe1[0]?.timestamp, 3 * 60 + 33);
+assert.equal(netskyWe1[0]?.artistName, "Netsky & Andromedik");
+assert.equal(netskyWe1[0]?.trackTitle, "Out Of Body");
+assert.equal(netskyWe1[28]?.trackTitle, "Let Me Hold You (Grafix Remix)");
+assert.equal(netskyWe1[28]?.timestamp, 59 * 60 + 30);
+for (let i = 1; i < netskyWe1.length; i++) {
+  assert.ok(
+    (netskyWe1[i]!.timestamp ?? 0) > (netskyWe1[i - 1]!.timestamp ?? 0),
+    `Netsky TML WE1 2026 clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_OLIVER_HELDENS_TML_WE1_2026);
+assert.equal(TL_OLIVER_HELDENS_TML_WE1_2026.length, 51);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-2i3XOxbp54U"],
+  TL_OLIVER_HELDENS_TML_WE1_2026,
+);
+assert.equal(isWiredTracklistSlug("yt-2i3XOxbp54U"), true);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-2i3XOxbp54U"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-wuMQeEJ3YnQ"],
+);
+const heldensWe1 = tracklist1001RowsToPlays(TL_OLIVER_HELDENS_TML_WE1_2026);
+assert.equal(heldensWe1.length, 51);
+assert.equal(heldensWe1[0]?.provenance, "1001tl");
+assert.equal(heldensWe1[0]?.timestamp, 12);
+assert.equal(heldensWe1[0]?.artistName, "Empire Of The Sun");
+assert.equal(heldensWe1[0]?.trackTitle, "We Are The People (ARTBAT Remix)");
+assert.equal(
+  heldensWe1[50]?.trackTitle,
+  "Vielleicht Vielleicht x Makina Time (Rudeejay & Da Brozz Mashup)",
+);
+assert.equal(heldensWe1[50]?.timestamp, 1 * 3600 + 1 * 60 + 48);
+for (let i = 1; i < heldensWe1.length; i++) {
+  assert.ok(
+    (heldensWe1[i]!.timestamp ?? 0) > (heldensWe1[i - 1]!.timestamp ?? 0),
+    `Oliver Heldens TML WE1 2026 clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_ALAN_WALKER_TML_WE1_2018);
+assert.equal(TL_ALAN_WALKER_TML_WE1_2018.length, 48);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-xVWs0ti0J90"],
+  TL_ALAN_WALKER_TML_WE1_2018,
+);
+assert.equal(isWiredTracklistSlug("yt-xVWs0ti0J90"), true);
+const walkerWe1 = tracklist1001RowsToPlays(TL_ALAN_WALKER_TML_WE1_2018);
+assert.equal(walkerWe1.length, 48);
+assert.equal(walkerWe1[0]?.provenance, "1001tl");
+assert.equal(walkerWe1[0]?.timestamp, 4);
+assert.equal(walkerWe1[0]?.artistName, "Alan Walker ft. Jesper Borgen");
+assert.equal(walkerWe1[0]?.trackTitle, "The Spectre");
+assert.equal(walkerWe1[47]?.trackTitle, "Faded (Tiësto Northern Lights Remix)");
+assert.equal(walkerWe1[47]?.timestamp, 55 * 60 + 30);
+for (let i = 1; i < walkerWe1.length; i++) {
+  assert.ok(
+    (walkerWe1[i]!.timestamp ?? 0) > (walkerWe1[i - 1]!.timestamp ?? 0),
+    `Alan Walker TML WE1 2018 clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_GORDO_TML_WE2_2023);
+assert.equal(TL_GORDO_TML_WE2_2023.length, 29);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-lopIWBJ0T5I"],
+  TL_GORDO_TML_WE2_2023,
+);
+assert.equal(isWiredTracklistSlug("yt-lopIWBJ0T5I"), true);
+assert.equal(TRACKLIST_1001_BY_SOURCE_SLUG["yt-lopIWBJ0T5I?si=_3aa1f1yf9YPzV9g"], undefined);
+const gordoWe2 = tracklist1001RowsToPlays(TL_GORDO_TML_WE2_2023);
+assert.equal(gordoWe2.length, 29);
+assert.equal(gordoWe2[0]?.provenance, "1001tl");
+assert.equal(gordoWe2[0]?.timestamp, 2 * 60 + 20);
+assert.equal(gordoWe2[0]?.artistName, "Anyma & Chris Avantgarde");
+assert.equal(gordoWe2[0]?.trackTitle, "Consciousness");
+assert.equal(gordoWe2[28]?.trackTitle, "Satisfaction (Justus Remix)");
+assert.equal(gordoWe2[28]?.timestamp, 58 * 60 + 38);
+for (let i = 1; i < gordoWe2.length; i++) {
+  assert.ok(
+    (gordoWe2[i]!.timestamp ?? 0) > (gordoWe2[i - 1]!.timestamp ?? 0),
+    `GORDO TML WE2 2023 clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_LUCAS_STEVE_TML_WE2_2024);
+assert.equal(TL_LUCAS_STEVE_TML_WE2_2024.length, 61);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-GbG_OFmdPKk"],
+  TL_LUCAS_STEVE_TML_WE2_2024,
+);
+assert.equal(isWiredTracklistSlug("yt-GbG_OFmdPKk"), true);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-GbG_OFmdPKk"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-LE-byccuovI"],
+);
+const lucasSteveWe2_2024 = tracklist1001RowsToPlays(TL_LUCAS_STEVE_TML_WE2_2024);
+assert.equal(lucasSteveWe2_2024.length, 61);
+assert.equal(lucasSteveWe2_2024[0]?.provenance, "1001tl");
+assert.equal(lucasSteveWe2_2024[0]?.timestamp, 12);
+assert.equal(
+  lucasSteveWe2_2024[0]?.artistName,
+  "AFROJACK & Lucas & Steve & DubVision ft. Taranteeno",
+);
+assert.equal(lucasSteveWe2_2024[0]?.trackTitle, "Anywhere With You");
+assert.equal(lucasSteveWe2_2024[60]?.trackTitle, "Can't Forget You (Club Mix)");
+assert.equal(lucasSteveWe2_2024[60]?.timestamp, 1 * 3600 + 1 * 60 + 56);
+for (let i = 1; i < lucasSteveWe2_2024.length; i++) {
+  assert.ok(
+    (lucasSteveWe2_2024[i]!.timestamp ?? 0) >
+      (lucasSteveWe2_2024[i - 1]!.timestamp ?? 0),
+    `Lucas & Steve TML WE2 2024 clocks must increase at index ${i}`,
+  );
+}
+
+// Liu TML artist Relive — no 1001 URL found; do not invent a wire.
+assert.equal(isWiredTracklistSlug("yt-DWPSLZLKslg"), false);
+assert.equal(TRACKLIST_1001_BY_SOURCE_SLUG["yt-DWPSLZLKslg"], undefined);
 
 console.log("tracklists1001/seeds.test.ts ok");

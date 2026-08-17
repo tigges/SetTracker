@@ -51,41 +51,5 @@
       "note": "Do not wire fan clips — wait for official Tomorrowland/artist Relive."
     }
   ],
-  "unwiredOfficial": [
-    {
-      "label": "Alesso | Tomorrowland 2026 (Mainstage Weekend 1) [Full DJ Live Set]",
-      "slug": "yt-TidwOi0NMI0",
-      "name": "TL_ALESSO_TML_WE1",
-      "searchUrl": "https://www.google.com/search?q=Alesso%20tomorrowland%202026%20site%3A1001tracklists.com",
-      "reason": "relive:official-unwired"
-    },
-    {
-      "label": "ILLENIUM WE1 | Tomorrowland 2026",
-      "slug": "yt-E1WH0nvaxAw",
-      "name": "TL_ILLENIUM_TML_WE1",
-      "searchUrl": "https://www.google.com/search?q=Illenium%20tomorrowland%202026%20site%3A1001tracklists.com",
-      "reason": "relive:official-unwired"
-    },
-    {
-      "label": "Chase & Status (DJ set) WE2 | Tomorrowland 2026",
-      "slug": "yt-jSJEkiV3cCs",
-      "name": "TL_CHASE_STATUS_TML_WE2",
-      "searchUrl": "https://www.google.com/search?q=Chase%20%26%20Status%20tomorrowland%202026%20site%3A1001tracklists.com",
-      "reason": "relive:official-unwired"
-    },
-    {
-      "label": "Netsky WE1 | Tomorrowland 2026",
-      "slug": "yt-_e1H9pkcjsQ",
-      "name": "TL_NETSKY_TML_WE1",
-      "searchUrl": "https://www.google.com/search?q=Netsky%20tomorrowland%202026%20site%3A1001tracklists.com",
-      "reason": "relive:official-unwired"
-    },
-    {
-      "label": "I Hate Models WE1 | Tomorrowland 2026",
-      "slug": "yt-zMW5SQPS1cY",
-      "name": "TL_I_HATE_MODELS_TML_WE1",
-      "searchUrl": "https://www.google.com/search?q=I%20Hate%20Models%20tomorrowland%202026%20site%3A1001tracklists.com",
-      "reason": "relive:official-unwired"
-    }
-  ]
+  "unwiredOfficial": []
 }

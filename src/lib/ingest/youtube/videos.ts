@@ -103,7 +103,16 @@ import {
   TL_SOLOMUN_ALLY_PALLY_2026,
   TL_SOLOMUN_EDC_LV_2026,
   TL_WESTEND_EDC_LV_2026,
+  TL_ALAN_WALKER_TML_WE1_2018,
+  TL_GORDO_TML_WE2_2023,
+  TL_LUCAS_STEVE_TML_WE2_2024,
+  TL_ALESSO_TML_WE1_2026,
   TL_ALESSO_TML_WE2_2026,
+  TL_CHASE_STATUS_TML_WE2_2026,
+  TL_I_HATE_MODELS_TML_WE1_2026,
+  TL_ILLENIUM_TML_WE1_2026,
+  TL_NETSKY_TML_WE1_2026,
+  TL_OLIVER_HELDENS_TML_WE1_2026,
   TL_ARMIN_VAN_BUUREN_TML_WE2_2026,
   TL_HONEYLUV_ANTS_USHUAIA_2026,
   TL_HONEYLUV_STREET_PARADE_2025,
@@ -1056,6 +1065,96 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_THE_CHAINSMOKERS_TML_WE1_2026,
   },
   {
+    // Tomorrowland official Relive — Mainstage WE1.
+    video: "https://www.youtube.com/watch?v=TidwOi0NMI0",
+    primaryArtist: dj("Alesso", {
+      accent: "#4895ef",
+      homeCity: "Stockholm, SE",
+    }),
+    genre: "Progressive House",
+    type: "festival",
+    title: "Alesso WE1 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/dr4mczt/alesso-mainstage-tomorrowland-weekend-1-belgium-2026-07-19.html",
+    tracklist1001: TL_ALESSO_TML_WE1_2026,
+  },
+  {
+    // Tomorrowland official Relive — Great Library WE1.
+    video: "https://www.youtube.com/watch?v=E1WH0nvaxAw",
+    primaryArtist: dj("Illenium", {
+      accent: "#7b2cbf",
+      homeCity: "Denver, US",
+    }),
+    genre: "Melodic Bass",
+    type: "festival",
+    title: "ILLENIUM WE1 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1kz7zvr9/illenium-the-great-library-stage-tomorrowland-weekend-1-belgium-2026-07-18.html",
+    tracklist1001: TL_ILLENIUM_TML_WE1_2026,
+  },
+  {
+    // Tomorrowland official Relive — Mainstage WE2.
+    video: "https://www.youtube.com/watch?v=jSJEkiV3cCs",
+    primaryArtist: dj("Chase & Status", {
+      accent: "#f77f00",
+      homeCity: "London, UK",
+    }),
+    genre: "Drum & Bass",
+    type: "festival",
+    title: "Chase & Status (DJ set) WE2 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/p3duwuk/chase-status-mainstage-tomorrowland-weekend-2-belgium-2026-07-26.html",
+    tracklist1001: TL_CHASE_STATUS_TML_WE2_2026,
+  },
+  {
+    // Tomorrowland official Relive — Freedom Stage WE1.
+    video: "https://www.youtube.com/watch?v=zMW5SQPS1cY",
+    primaryArtist: dj("I Hate Models", { accent: "#212529" }),
+    genre: "Techno",
+    type: "festival",
+    title: "I Hate Models WE1 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/ctbyvpk/i-hate-models-freedom-stage-tomorrowland-weekend-1-belgium-2026-07-19.html",
+    tracklist1001: TL_I_HATE_MODELS_TML_WE1_2026,
+  },
+  {
+    // Tomorrowland official Relive — Freedom Stage WE1.
+    video: "https://www.youtube.com/watch?v=_e1H9pkcjsQ",
+    primaryArtist: dj("Netsky", { accent: "#c8e600" }),
+    genre: "Drum & Bass",
+    type: "festival",
+    title: "Netsky WE1 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/rwsgynk/netsky-freedom-stage-tomorrowland-weekend-1-belgium-2026-07-18.html",
+    tracklist1001: TL_NETSKY_TML_WE1_2026,
+  },
+  {
+    // Tomorrowland official Relive — Great Library WE1 2026 (not Daybreak 2024).
+    video: "https://www.youtube.com/watch?v=2i3XOxbp54U",
+    primaryArtist: dj("Oliver Heldens", {
+      accent: "#7c5cff",
+      homeCity: "Netherlands",
+    }),
+    genre: "Future House",
+    type: "festival",
+    title: "Oliver Heldens WE1 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1y2pm859/oliver-heldens-the-great-library-stage-tomorrowland-weekend-1-belgium-2026-07-18.html",
+    tracklist1001: TL_OLIVER_HELDENS_TML_WE1_2026,
+  },
+  {
     // Tomorrowland official Relive — Freedom Stage WE2.
     video: "https://www.youtube.com/watch?v=fhiZ1Rj9o-A",
     primaryArtist: dj("Alesso", {
@@ -1975,6 +2074,9 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     title: "Alan Walker | Tomorrowland Belgium 2018",
     seriesName: "Tomorrowland",
     eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1uurlz51/alan-walker-main-stage-tomorrowland-weekend-1-belgium-2018-07-20.html",
+    tracklist1001: TL_ALAN_WALKER_TML_WE1_2018,
   },
   {
     video: "https://www.youtube.com/watch?v=U2ZjW_8K3h4",
@@ -2196,6 +2298,9 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     title: "Lucas & Steve WE2 | Tomorrowland 2024",
     seriesName: "Tomorrowland",
     eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1t9g49st/lucas-steve-the-library-stage-tomorrowland-weekend-2-belgium-2024-07-26.html",
+    tracklist1001: TL_LUCAS_STEVE_TML_WE2_2024,
   },
   {
     video: "https://www.youtube.com/watch?v=lopIWBJ0T5I",
@@ -2205,6 +2310,9 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     title: "GORDO | Tomorrowland 2023",
     seriesName: "Tomorrowland",
     eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1hxfpsk9/gordo-freedom-stage-tomorrowland-weekend-2-belgium-2023-07-30.html",
+    tracklist1001: TL_GORDO_TML_WE2_2023,
   },
   {
     video: "https://www.youtube.com/watch?v=A5ERobJaS_0",
@@ -2215,8 +2323,10 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     eventName: "Ultra Melbourne",
   },
   {
+    // Artist-channel Relive (@Liumusic). No 1001Tracklists URL in the
+    // description — do not invent one. Capture if a 1001 page appears.
     video: "https://www.youtube.com/watch?v=DWPSLZLKslg",
-    primaryArtist: dj("Liu", { accent: "#2a9d8f" }),
+    primaryArtist: dj("Liu", { accent: "#2a9d8f", homeCity: "Brazil" }),
     genre: "Brazilian Bass",
     type: "festival",
     title: "Liu @ Tomorrowland Belgium",

@@ -73,6 +73,33 @@ const AFROJACK_R3HAB_TML = YOUTUBE_SETS.find((s) =>
 const INDIRA_TML_2023 = YOUTUBE_SETS.find((s) =>
   s.video.includes("yPCOu0-JKJo"),
 );
+const ALESSO_TML_WE1 = YOUTUBE_SETS.find((s) =>
+  s.video.includes("TidwOi0NMI0"),
+);
+const ILLENIUM_TML_WE1 = YOUTUBE_SETS.find((s) =>
+  s.video.includes("E1WH0nvaxAw"),
+);
+const CHASE_STATUS_TML_WE2 = YOUTUBE_SETS.find((s) =>
+  s.video.includes("jSJEkiV3cCs"),
+);
+const I_HATE_MODELS_TML_WE1 = YOUTUBE_SETS.find((s) =>
+  s.video.includes("zMW5SQPS1cY"),
+);
+const NETSKY_TML_WE1 = YOUTUBE_SETS.find((s) =>
+  s.video.includes("_e1H9pkcjsQ"),
+);
+const OLIVER_HELDENS_TML_WE1 = YOUTUBE_SETS.find((s) =>
+  s.video.includes("2i3XOxbp54U"),
+);
+const ALAN_WALKER_TML_WE1_2018 = YOUTUBE_SETS.find((s) =>
+  s.video.includes("xVWs0ti0J90"),
+);
+const GORDO_TML_WE2_2023 = YOUTUBE_SETS.find((s) =>
+  s.video.includes("lopIWBJ0T5I"),
+);
+const LUCAS_STEVE_TML_WE2_2024 = YOUTUBE_SETS.find((s) =>
+  s.video.includes("GbG_OFmdPKk"),
+);
 
 describe("watchMetaFromCuratedSeed", () => {
   it("builds ASOT 1290 meta from the curated 1001 capture", () => {
@@ -127,6 +154,108 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=WWnLYZrh6kw");
     // Last cue 1:56:31 + 180s pad.
     assert.equal(meta.durationSec, 1 * 3600 + 56 * 60 + 31 + 180);
+  });
+
+  it("builds Chase & Status TML WE2 Mainstage meta from the curated 1001 capture", () => {
+    assert.ok(CHASE_STATUS_TML_WE2);
+    const meta = watchMetaFromCuratedSeed(CHASE_STATUS_TML_WE2);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "jSJEkiV3cCs");
+    assert.match(meta.title, /Chase & Status/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=jSJEkiV3cCs");
+    // Last cue 56:40 + 180s pad.
+    assert.equal(meta.durationSec, 56 * 60 + 40 + 180);
+  });
+
+  it("builds I Hate Models TML WE1 Freedom Stage meta from the curated 1001 capture", () => {
+    assert.ok(I_HATE_MODELS_TML_WE1);
+    const meta = watchMetaFromCuratedSeed(I_HATE_MODELS_TML_WE1);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "zMW5SQPS1cY");
+    assert.match(meta.title, /I Hate Models/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=zMW5SQPS1cY");
+    // Last cue 57:50 + 180s pad.
+    assert.equal(meta.durationSec, 57 * 60 + 50 + 180);
+  });
+
+  it("builds Netsky TML WE1 Freedom Stage meta from the curated 1001 capture", () => {
+    assert.ok(NETSKY_TML_WE1);
+    const meta = watchMetaFromCuratedSeed(NETSKY_TML_WE1);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "_e1H9pkcjsQ");
+    assert.match(meta.title, /Netsky/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=_e1H9pkcjsQ");
+    // Last cue 59:30 + 180s pad.
+    assert.equal(meta.durationSec, 59 * 60 + 30 + 180);
+  });
+
+  it("builds Oliver Heldens TML WE1 Great Library meta from the curated 1001 capture", () => {
+    assert.ok(OLIVER_HELDENS_TML_WE1);
+    const meta = watchMetaFromCuratedSeed(OLIVER_HELDENS_TML_WE1);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "2i3XOxbp54U");
+    assert.match(meta.title, /Oliver Heldens WE1/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=2i3XOxbp54U");
+    // Last cue 1:01:48 + 180s pad.
+    assert.equal(meta.durationSec, 1 * 3600 + 1 * 60 + 48 + 180);
+  });
+
+  it("builds Alan Walker TML WE1 2018 meta from the curated 1001 capture", () => {
+    assert.ok(ALAN_WALKER_TML_WE1_2018);
+    const meta = watchMetaFromCuratedSeed(ALAN_WALKER_TML_WE1_2018);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "xVWs0ti0J90");
+    assert.match(meta.title, /Alan Walker/i);
+    assert.match(meta.title, /2018/);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=xVWs0ti0J90");
+    // Last cue 55:30 + 180s pad.
+    assert.equal(meta.durationSec, 55 * 60 + 30 + 180);
+  });
+
+  it("builds GORDO TML WE2 2023 meta from the curated 1001 capture", () => {
+    assert.ok(GORDO_TML_WE2_2023);
+    const meta = watchMetaFromCuratedSeed(GORDO_TML_WE2_2023);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "lopIWBJ0T5I");
+    assert.match(meta.title, /GORDO/i);
+    assert.match(meta.title, /2023/);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=lopIWBJ0T5I");
+    // Last cue 58:38 + 180s pad.
+    assert.equal(meta.durationSec, 58 * 60 + 38 + 180);
+  });
+
+  it("builds Lucas & Steve TML WE2 2024 meta from the curated 1001 capture", () => {
+    assert.ok(LUCAS_STEVE_TML_WE2_2024);
+    const meta = watchMetaFromCuratedSeed(LUCAS_STEVE_TML_WE2_2024);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "GbG_OFmdPKk");
+    assert.match(meta.title, /Lucas & Steve/i);
+    assert.match(meta.title, /2024/);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=GbG_OFmdPKk");
+    // Last cue 1:01:56 + 180s pad.
+    assert.equal(meta.durationSec, 1 * 3600 + 1 * 60 + 56 + 180);
+  });
+
+  it("builds ILLENIUM TML WE1 Great Library meta from the curated 1001 capture", () => {
+    assert.ok(ILLENIUM_TML_WE1);
+    const meta = watchMetaFromCuratedSeed(ILLENIUM_TML_WE1);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "E1WH0nvaxAw");
+    assert.match(meta.title, /ILLENIUM WE1/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=E1WH0nvaxAw");
+    // Last cue 59:30 + 180s pad.
+    assert.equal(meta.durationSec, 59 * 60 + 30 + 180);
+  });
+
+  it("builds Alesso TML WE1 Mainstage meta from the curated 1001 capture", () => {
+    assert.ok(ALESSO_TML_WE1);
+    const meta = watchMetaFromCuratedSeed(ALESSO_TML_WE1);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "TidwOi0NMI0");
+    assert.match(meta.title, /Alesso WE1/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=TidwOi0NMI0");
+    // Last cue 59:30 + 180s pad.
+    assert.equal(meta.durationSec, 59 * 60 + 30 + 180);
   });
 
   it("builds Alok TML WE2 meta from the curated 1001 capture", () => {
@@ -1109,5 +1238,136 @@ describe("curated YouTube 429 fallback", () => {
       false,
     );
     assert.match(String(sets[0]?.eventName ?? ""), /Don't Let Daddy Know/i);
+  });
+
+  it("lands Alesso TML WE1 Mainstage from the 1001 seed when watch is 429", async () => {
+    assert.ok(ALESSO_TML_WE1);
+    const adapter = createYoutubeAdapter([ALESSO_TML_WE1], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-TidwOi0NMI0");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 42);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 59 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "alesso");
+    assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
+  });
+
+  it("lands ILLENIUM TML WE1 Great Library from the 1001 seed when watch is 429", async () => {
+    assert.ok(ILLENIUM_TML_WE1);
+    const adapter = createYoutubeAdapter([ILLENIUM_TML_WE1], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-E1WH0nvaxAw");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 97);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 59 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "illenium");
+    assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
+  });
+
+  it("lands Chase & Status TML WE2 Mainstage from the 1001 seed when watch is 429", async () => {
+    assert.ok(CHASE_STATUS_TML_WE2);
+    const adapter = createYoutubeAdapter([CHASE_STATUS_TML_WE2], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-jSJEkiV3cCs");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 26);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 56 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "chase-status");
+    assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
+  });
+
+  it("lands I Hate Models TML WE1 Freedom Stage from the 1001 seed when watch is 429", async () => {
+    assert.ok(I_HATE_MODELS_TML_WE1);
+    const adapter = createYoutubeAdapter([I_HATE_MODELS_TML_WE1], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-zMW5SQPS1cY");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 47);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 57 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "i-hate-models");
+    assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
+  });
+
+  it("lands Netsky TML WE1 Freedom Stage from the 1001 seed when watch is 429", async () => {
+    assert.ok(NETSKY_TML_WE1);
+    const adapter = createYoutubeAdapter([NETSKY_TML_WE1], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-_e1H9pkcjsQ");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 29);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 59 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "netsky");
+    assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
+  });
+
+  it("lands Oliver Heldens TML WE1 Great Library from the 1001 seed when watch is 429", async () => {
+    assert.ok(OLIVER_HELDENS_TML_WE1);
+    const adapter = createYoutubeAdapter([OLIVER_HELDENS_TML_WE1], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-2i3XOxbp54U");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 51);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 61 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "oliver-heldens");
+    assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
+    assert.match(String(sets[0]?.title ?? ""), /2026/);
+    assert.doesNotMatch(String(sets[0]?.title ?? ""), /Daybreak/i);
+  });
+
+  it("lands Alan Walker TML WE1 2018 from the 1001 seed when watch is 429", async () => {
+    assert.ok(ALAN_WALKER_TML_WE1_2018);
+    const adapter = createYoutubeAdapter([ALAN_WALKER_TML_WE1_2018], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-xVWs0ti0J90");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 48);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 55 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "alan-walker");
+    assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
+    assert.match(String(sets[0]?.title ?? ""), /2018/);
+  });
+
+  it("lands GORDO TML WE2 2023 from the 1001 seed when watch is 429", async () => {
+    assert.ok(GORDO_TML_WE2_2023);
+    const adapter = createYoutubeAdapter([GORDO_TML_WE2_2023], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-lopIWBJ0T5I");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 29);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 58 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "gordo");
+    assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
+    assert.match(String(sets[0]?.title ?? ""), /2023/);
+  });
+
+  it("lands Lucas & Steve TML WE2 2024 from the 1001 seed when watch is 429", async () => {
+    assert.ok(LUCAS_STEVE_TML_WE2_2024);
+    const adapter = createYoutubeAdapter([LUCAS_STEVE_TML_WE2_2024], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-GbG_OFmdPKk");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 61);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 61 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "lucas-steve");
+    assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
+    assert.match(String(sets[0]?.title ?? ""), /2024/);
   });
 });

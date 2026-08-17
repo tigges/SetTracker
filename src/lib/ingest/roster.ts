@@ -1781,8 +1781,16 @@ export const ARTIST_ROSTER_CURATED: ArtistRosterEntry[] = [
     name: "Liu",
     genre: "Bass House",
     accent: "#2a9d8f",
-    youtube: { handle: "@liulive", status: "ok" },
+    homeCity: "Brazil",
+    // Official channel is @Liumusic (UCQlaArsZfebRbb70iXm6usg).
+    // @liulive / @LiuLive is a different account (Людмила Колесникова).
+    youtube: { handle: "@Liumusic", status: "ok" },
     soundcloud: { permalink: "liulive", status: "ok" },
+    socials: [
+      "https://instagram.com/liulive",
+      "https://twitter.com/liulive",
+      "https://facebook.com/liulive",
+    ],
     priority: "high",
   },
   {
