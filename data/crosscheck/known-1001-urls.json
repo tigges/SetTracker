@@ -1,6 +1,6 @@
 {
-  "note": "Operator-collected 1001Tracklists URLs. All listed urls[] rows are now seeded. Prefer new operator pastes over this archive. stillMissing1001 is video-in / no 1001 page — do not invent URLs.",
-  "updatedAt": "2026-08-17T05:00:00.000Z",
+  "note": "Operator-collected 1001Tracklists URLs. All listed urls[] rows are now seeded. Prefer new operator pastes over this archive. stillMissing1001 is video-in / no 1001 page — do not invent URLs. heldPendingRelive is 1001-in / no official YT/SC Relive — seed held, do not invent or wire fan playback.",
+  "updatedAt": "2026-08-17T10:25:00.000Z",
   "urls": [
     {
       "label": "PAN-POT · Street Parade",
@@ -96,6 +96,16 @@
       "slug": "yt-DWPSLZLKslg",
       "youtubeUrl": "https://www.youtube.com/watch?v=DWPSLZLKslg",
       "note": "Artist-channel Relive (@Liumusic). No 1001 page in the description — capture if one appears."
+    }
+  ],
+  "heldPendingRelive": [
+    {
+      "label": "Knock2 B2B Zedd · HARD Summer HARD Stage 2026-08-02",
+      "name": "TL_KNOCK2_ZEDD_HARD_SUMMER_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/lb17sb1/knock2-zedd-hard-stage-hard-summer-festival-united-states-2026-08-02.html",
+      "rejectedYoutubeUrl": "https://youtu.be/6DC3xoQF4Zs",
+      "rejectedChannel": "DerekD2",
+      "note": "Operator paste. 1001 embeds DerekD2 fan 4K — do not wire. Seed held until official HARD/Insomniac Relive."
     }
   ]
 }

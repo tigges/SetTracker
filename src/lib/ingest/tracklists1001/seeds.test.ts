@@ -138,6 +138,7 @@ import {
   TL_ALAN_WALKER_TML_WE1_2018,
   TL_GORDO_TML_WE2_2023,
   TL_LUCAS_STEVE_TML_WE2_2024,
+  TL_KNOCK2_ZEDD_HARD_SUMMER_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   tracklist1001RowsToPlays,
@@ -2759,6 +2760,36 @@ for (let i = 1; i < lucasSteveWe2_2024.length; i++) {
     `Lucas & Steve TML WE2 2024 clocks must increase at index ${i}`,
   );
 }
+
+assertSeedClocks(TL_KNOCK2_ZEDD_HARD_SUMMER_2026);
+assert.equal(TL_KNOCK2_ZEDD_HARD_SUMMER_2026.length, 65);
+assert.equal(
+  Object.values(TRACKLIST_1001_BY_SOURCE_SLUG).includes(
+    TL_KNOCK2_ZEDD_HARD_SUMMER_2026,
+  ),
+  false,
+);
+const knock2Zedd = tracklist1001RowsToPlays(TL_KNOCK2_ZEDD_HARD_SUMMER_2026);
+assert.equal(knock2Zedd.length, 65);
+assert.equal(knock2Zedd[0]?.provenance, "1001tl");
+assert.equal(knock2Zedd[0]?.artistName, "Zedd & Knock2");
+assert.equal(knock2Zedd[0]?.trackTitle, "Niteharts 2025 Intro");
+assert.equal(knock2Zedd[0]?.timestamp, 0);
+assert.equal(
+  knock2Zedd[64]?.artistName,
+  "Zedd ft. Matthew Koma & Miriam Bryant",
+);
+assert.equal(knock2Zedd[64]?.trackTitle, "Find You (Acappella)");
+assert.equal(knock2Zedd[64]?.timestamp, 1 * 3600 + 15 * 60 + 37);
+for (let i = 1; i < knock2Zedd.length; i++) {
+  assert.ok(
+    (knock2Zedd[i]!.timestamp ?? 0) > (knock2Zedd[i - 1]!.timestamp ?? 0),
+    `Knock2 B2B Zedd HARD Summer 2026 clocks must increase at index ${i}`,
+  );
+}
+// DerekD2 fan clip — do not wire.
+assert.equal(isWiredTracklistSlug("yt-6DC3xoQF4Zs"), false);
+assert.equal(TRACKLIST_1001_BY_SOURCE_SLUG["yt-6DC3xoQF4Zs"], undefined);
 
 // Liu TML artist Relive — no 1001 URL found; do not invent a wire.
 assert.equal(isWiredTracklistSlug("yt-DWPSLZLKslg"), false);

@@ -94,6 +94,37 @@ assert.equal(dyzen!.videoId, undefined);
 const sonny = held.find((h) => /sonny/i.test(h.name));
 assert.equal(sonny!.status, "waiting");
 
+const knockWaiting = held.find((h) => /knock2/i.test(h.name));
+assert.ok(knockWaiting);
+assert.equal(knockWaiting!.status, "waiting");
+assert.match(knockWaiting!.note, /DerekD2/);
+
+const knockEntries = [
+  {
+    videoId: "KNOCKHARD01",
+    title: "Knock2 B2B Zedd | HARD Summer 2026",
+    channel: "HARD",
+  },
+  {
+    videoId: "KNOCKSOLO01",
+    title: "Knock2 | HARD Summer 2026",
+    channel: "HARD",
+  },
+  {
+    videoId: "KNOCKTMLFAKE",
+    title: "Knock2 B2B Zedd WE2 | Tomorrowland 2026",
+    channel: "Tomorrowland",
+  },
+];
+const knockHeld = matchHeldRelives(knockEntries, HELD_RELIVE_WATCH);
+const knockHit = knockHeld.find((h) => /knock2/i.test(h.name));
+assert.equal(knockHit!.status, "candidate");
+assert.equal(knockHit!.videoId, "KNOCKHARD01");
+assert.equal(
+  knockHeld.find((h) => /calvin/i.test(h.name))!.status,
+  "waiting",
+);
+
 const unwired = matchUnwiredOfficialRelives(entries, {
   curatedVideoIds: new Set(["DuXXMZLfAkQ"]),
   mappedSlugs: new Set(),
