@@ -12,7 +12,7 @@
  * gemini.google.com/app is the consumer chat UI and cannot be called from CI.
  */
 
-import { mkdirSync, writeFileSync } from "node:fs";
+import { mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import type { PrismaClient } from "@prisma/client";
 import { isJunkArtistName } from "../../artistName";
@@ -67,11 +67,14 @@ export type ResearchStats = {
 
 const TIMEOUT_MS = 45_000;
 
-/** Repo secret is `CLAUDE_AGENT_API`; `ANTHROPIC_API_KEY` is an alias. */
+/** Repo secret is `CLAUDE_AGENT_API`; `ANTHROPIC_API_KEY` / `CLAUDE_API_KEY` are aliases. */
 export function claudeApiKey(
   env: Record<string, string | undefined> = process.env,
 ): string | null {
-  const key = env.CLAUDE_AGENT_API?.trim() || env.ANTHROPIC_API_KEY?.trim();
+  const key =
+    env.CLAUDE_AGENT_API?.trim() ||
+    env.ANTHROPIC_API_KEY?.trim() ||
+    env.CLAUDE_API_KEY?.trim();
   return key || null;
 }
 
@@ -156,7 +159,7 @@ async function callClaude(prompt: string): Promise<string> {
 
 async function callGemini(prompt: string): Promise<string> {
   const key = geminiApiKey() || "";
-  const model = process.env.GEMINI_MODEL || "gemini-2.5-flash";
+  const model = process.env.GEMINI_MODEL || "gemini-3.7-flash";
   const url =
     `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent` +
     `?key=${encodeURIComponent(key)}`;
@@ -283,6 +286,56 @@ const FIELDS = [
   "website",
 ] as const;
 
+/** Prefer Top 100 + festival acts over alphabetical one-set leftovers. */
+export function researchPriority(d: {
+  slug: string;
+  setCount: number;
+  festivalSets: number;
+}): number {
+  let s = d.setCount;
+  if (isTop100DjSlug(d.slug)) s += 100;
+  if (d.festivalSets > 0) s += 20;
+  return s;
+}
+
+/** Set-title crumbs that slipped past isJunkArtistName. */
+export function isResearchWorthyName(name: string): boolean {
+  const n = name.replace(/\s+/g, " ").trim();
+  if (!n) return false;
+  if (/^behind\b/i.test(n)) return false;
+  if (/\b(full|solo|sunrise|sunset)\s*$/i.test(n)) return false;
+  if (/\bchapter\b/i.test(n)) return false;
+  if (/^dj\s+\w{1,3}$/i.test(n)) return false;
+  return true;
+}
+
+/** Slugs already scanned in data/crosscheck/llm-handle-research*.json */
+export function previouslyResearchedSlugs(cwd = process.cwd()): Set<string> {
+  const dir = join(cwd, "data", "crosscheck");
+  const out = new Set<string>();
+  let files: string[] = [];
+  try {
+    files = readdirSync(dir).filter(
+      (f) => f.startsWith("llm-handle-research") && f.endsWith(".json"),
+    );
+  } catch {
+    return out;
+  }
+  for (const f of files) {
+    try {
+      const raw = JSON.parse(readFileSync(join(dir, f), "utf8")) as {
+        rows?: Array<{ slug?: string }>;
+      };
+      for (const row of raw.rows ?? []) {
+        if (row.slug) out.add(row.slug);
+      }
+    } catch {
+      /* ignore broken report */
+    }
+  }
+  return out;
+}
+
 export async function verifyProposal(
   djName: string,
   proposal: HandleProposal,
@@ -320,8 +373,9 @@ function writeReport(name: string, payload: unknown): void {
  */
 export async function runLlmHandleResearch(
   prisma: PrismaClient,
+  opts: { provider?: LlmProvider } = {},
 ): Promise<ResearchStats> {
-  const provider = detectLlmProvider();
+  const provider = opts.provider ?? detectLlmProvider();
   const stats: ResearchStats = {
     provider,
     scanned: 0,
@@ -344,6 +398,7 @@ export async function runLlmHandleResearch(
   const limit = Math.max(1, Number(process.env.LLM_RESEARCH_LIMIT || 12));
   const apply = process.env.LLM_RESEARCH_APPLY !== "0";
   const artistKeys = await loadArtistSocialKeys(prisma);
+  const already = previouslyResearchedSlugs();
 
   const djs = (
     await prisma.dj.findMany({
@@ -375,13 +430,15 @@ export async function runLlmHandleResearch(
           orderBy: { isPrimary: "desc" },
         },
       },
-      take: limit * 4,
+      take: Math.max(limit * 8, 80),
       orderBy: { name: "asc" },
     })
   )
     .filter(
       (d) =>
+        !already.has(d.slug) &&
         !isJunkArtistName(d.name) &&
+        isResearchWorthyName(d.name) &&
         !isBrandHostSlug(d.slug) &&
         isCatalogWorkDj({
           slug: d.slug,
@@ -394,12 +451,37 @@ export async function runLlmHandleResearch(
           })),
         }),
     )
+    .map((d) => ({
+      ...d,
+      priority: researchPriority({
+        slug: d.slug,
+        setCount: d.sets.length,
+        festivalSets: d.sets.filter(
+          (s) =>
+            s.set.type === "festival" ||
+            s.set.event?.kind === "festival" ||
+            s.set.event?.kind === "club",
+        ).length,
+      }),
+    }))
+    .sort((a, b) => b.priority - a.priority || a.name.localeCompare(b.name))
     .slice(0, limit);
+
+  console.log(
+    `[llm-research] provider=${provider} model=${
+      provider === "gemini"
+        ? process.env.GEMINI_MODEL || "gemini-3.7-flash"
+        : process.env.ANTHROPIC_MODEL || "claude-sonnet-4-5"
+    } queue=${djs.map((d) => d.name).join(", ")}`,
+  );
 
   const rows: ResearchRow[] = [];
   for (const d of djs) {
     stats.scanned += 1;
     const context = d.sets.map((s) => s.set.title).filter(Boolean).join("; ");
+    console.log(
+      `[llm-research] ${stats.scanned}/${djs.length} ${d.name} (${d.slug})`,
+    );
     try {
       const text = await complete(provider, handlePrompt(d.name, context));
       const proposal = parseLlmJson(text);
@@ -453,13 +535,15 @@ export async function runLlmHandleResearch(
     }
   }
 
-  writeReport("llm-handle-research.json", {
+  const payload = {
     generatedAt: new Date().toISOString(),
     provider,
     apply,
     stats,
     rows,
-  });
+  };
+  writeReport("llm-handle-research.json", payload);
+  if (provider) writeReport(`llm-handle-research-${provider}.json`, payload);
   console.log(
     `[llm-research] provider=${provider} scanned=${stats.scanned}` +
       ` proposed=${stats.proposed} applied=${stats.applied} rejected=${stats.rejected}`,
