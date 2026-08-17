@@ -1,0 +1,40 @@
+{
+  "generatedAt": "2026-08-17T07:40:40.451Z",
+  "provider": "gemini",
+  "write": false,
+  "note": "Report only. Identity class never writes socials or 1001 URLs.",
+  "rows": [
+    {
+      "slug": "a-deeper",
+      "name": "A DEEPER",
+      "sets": 1,
+      "cls": "junk",
+      "reason": "classified",
+      "notes": "Truncated phrase or set title fragment rather than an artist name."
+    },
+    {
+      "slug": "another-life-music",
+      "name": "Another Life Music",
+      "sets": 1,
+      "cls": "venue_host",
+      "reason": "classified",
+      "notes": "Swiss progressive house record label and music brand founded in 2019 by Bynomic."
+    },
+    {
+      "slug": "apocalypse",
+      "name": "Apocalypse",
+      "sets": 1,
+      "cls": "venue_host",
+      "reason": "classified",
+      "notes": "Bass music festival brand organized by Bassrush/Insomniac (Apocalypse: Zombieland)."
+    },
+    {
+      "slug": "bdk",
+      "name": "BDK",
+      "sets": 1,
+      "cls": "touring_dj",
+      "reason": "classified",
+      "notes": "House and electronic music DJ and producer."
+    }
+  ]
+}

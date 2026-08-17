@@ -201,14 +201,14 @@ async function callGemini(prompt: string): Promise<string> {
   );
 }
 
-async function complete(
+export async function complete(
   provider: LlmProvider,
   prompt: string,
 ): Promise<string> {
   return provider === "claude" ? callClaude(prompt) : callGemini(prompt);
 }
 
-async function probeLive(url: string): Promise<"ok" | "dead" | "soft"> {
+export async function probeLive(url: string): Promise<"ok" | "dead" | "soft"> {
   try {
     const res = await fetch(url, {
       method: "HEAD",
@@ -418,7 +418,7 @@ export async function verifyProposal(
   return { accepted, rejected };
 }
 
-function writeReport(name: string, payload: unknown): void {
+export function writeReport(name: string, payload: unknown): void {
   const dir = join(process.cwd(), "data", "crosscheck");
   mkdirSync(dir, { recursive: true });
   writeFileSync(join(dir, name), `${JSON.stringify(payload, null, 2)}\n`);
