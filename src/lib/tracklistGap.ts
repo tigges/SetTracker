@@ -12,7 +12,7 @@ import {
   isFestivalOrClubSet,
   isHearthisSource,
 } from "./djCatalog";
-import { setPerformanceYear } from "./feedPriority";
+import { isArchiveTitledSet, setPerformanceYear } from "./feedPriority";
 import { isFestivalSeasonSet } from "./ingest/festivalDrops";
 import { isEmptyOrPreviewSet, isNonCatalogSet } from "./setBrowse";
 import { assessSetDensity, DENSITY_MIN_DURATION_SEC } from "./setDensity";
@@ -118,6 +118,7 @@ export function isActionableTracklistGap(
     return false;
   }
   if (isSourceCompleteRadioStub(s)) return false;
+  if (isArchiveTitledSet(s.title, nowMs)) return false;
 
   const hearthisLeak =
     isHearthisSource(s) &&

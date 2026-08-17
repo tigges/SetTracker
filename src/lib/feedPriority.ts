@@ -97,19 +97,51 @@ export type FeedPriorityFields = {
   trackCount?: number | null;
 };
 
+/** Event year printed in the set title (`TML 2018`, `Ultra Miami 2023`). */
+export function yearFromSetTitle(
+  title: string | null | undefined,
+  nowMs = Date.now(),
+): number | null {
+  if (!title) return null;
+  const max = new Date(nowMs).getUTCFullYear() + 1;
+  const years = [...title.matchAll(/\b(20\d{2})\b/g)]
+    .map((m) => Number(m[1]))
+    .filter((n) => n >= 2005 && n <= max);
+  if (!years.length) return null;
+  return years[years.length - 1]!;
+}
+
+/**
+ * Title names an older festival year and none of the printed years are
+ * current/last-year — archive Relive, even if YouTube reuploaded it this week.
+ */
+export function isArchiveTitledSet(
+  title: string | null | undefined,
+  nowMs = Date.now(),
+): boolean {
+  const year = yearFromSetTitle(title, nowMs);
+  if (year == null) return false;
+  return year < new Date(nowMs).getUTCFullYear() - 1;
+}
+
 /**
  * When the set was played (or first published by the source).
  * Never uses Prisma createdAt / site ingest time.
+ * Title year beats edition/upload so a 2018 Relive remapped onto a 2026
+ * edition does not rank as this-year.
  */
 export function setPerformanceTime(s: {
   publishedAt: Date | string;
   performedAt?: Date | string | null;
   editionYear?: number | null;
+  title?: string | null;
 }): number {
   if (s.performedAt) {
     const t = new Date(s.performedAt).getTime();
     if (Number.isFinite(t)) return t;
   }
+  const titleYear = yearFromSetTitle(s.title);
+  if (titleYear != null) return Date.UTC(titleYear, 6, 1);
   if (s.editionYear && s.editionYear > 1990 && s.editionYear < 2100) {
     return Date.UTC(s.editionYear, 6, 1);
   }
@@ -122,6 +154,7 @@ export function setPerformanceYear(
     publishedAt: Date | string;
     performedAt?: Date | string | null;
     editionYear?: number | null;
+    title?: string | null;
   },
   nowMs = Date.now(),
 ): number {

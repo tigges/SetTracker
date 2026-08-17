@@ -55,7 +55,23 @@ assert.equal(
     mapped,
     now,
   ),
-  "stale",
+  "archive-title",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "yt-tml-2018-reupload",
+      title: "Alan Walker | Tomorrowland Belgium 2018",
+      eventSlug: "tomorrowland",
+      festivalSeason: true,
+      publishedAt: "2026-08-01T00:00:00Z",
+      playCount: 0,
+      density: "severe",
+    }),
+    mapped,
+    now,
+  ),
+  "archive-title",
 );
 
 const recentEmpty = row({

@@ -211,6 +211,57 @@ describe("tracklistGap", () => {
     );
   });
 
+  it("drops archive Relives whose title year is older than last year", () => {
+    assert.equal(
+      isActionableTracklistGap(
+        {
+          title: "Alan Walker | Tomorrowland Belgium 2018",
+          type: "festival",
+          eventKind: "festival",
+          eventSlug: "tomorrowland",
+          playCount: 0,
+          durationSec: 3600,
+          publishedAt: "2026-08-01T00:00:00.000Z",
+          editionYear: 2026,
+          top100Rank: 40,
+        },
+        now,
+      ),
+      false,
+    );
+    assert.equal(
+      isActionableTracklistGap(
+        {
+          title: "Timmy Trumpet LIVE @ Ultra Music Festival Miami 2023",
+          type: "festival",
+          eventKind: "festival",
+          eventSlug: "ultra-miami",
+          playCount: 0,
+          durationSec: 3600,
+          publishedAt: "2026-07-20T00:00:00.000Z",
+          top100Rank: 30,
+        },
+        now,
+      ),
+      false,
+    );
+    assert.equal(
+      isActionableTracklistGap(
+        {
+          title: "FISHER — EDC Orlando 2024",
+          type: "festival",
+          eventKind: "festival",
+          playCount: 0,
+          durationSec: 3600,
+          publishedAt: "2026-08-10T00:00:00.000Z",
+          top100Rank: 8,
+        },
+        now,
+      ),
+      false,
+    );
+  });
+
   it("queues this-year chart Relives with a duration gap", () => {
     assert.equal(
       isActionableTracklistGap(

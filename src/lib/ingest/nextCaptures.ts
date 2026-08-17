@@ -8,6 +8,7 @@
 
 import { readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
+import { isArchiveTitledSet } from "../feedPriority";
 import type { DensitySeverity } from "../setDensity";
 import { TRACKLIST_1001_BY_SOURCE_SLUG } from "./tracklists1001/festival2026";
 
@@ -216,6 +217,7 @@ export function skipCaptureNeed(
   if (!captureHost(row.slug)) return "host";
   if (row.durationSec < 20 * 60) return "short";
   if (/\bshorts?\b/i.test(row.title)) return "shorts";
+  if (isArchiveTitledSet(row.title, nowMs)) return "archive-title";
   if (row.plays1001 >= 12) return "has-1001";
   const ageDays =
     (nowMs - new Date(row.publishedAt).getTime()) / DAY_MS;
