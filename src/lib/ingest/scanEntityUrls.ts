@@ -131,7 +131,7 @@ function classify(url: string): {
 }
 
 type FillTarget =
-  | { kind: "dj"; id: string }
+  | { kind: "dj"; id: string; name: string }
   | { kind: "event"; id: string; name: string }
   | { kind: "label"; id: string };
 
@@ -152,6 +152,16 @@ async function fillSocial(
   if (field === "youtube" && target.kind !== "dj") return;
   // Label has no twitter column.
   if (field === "twitter" && target.kind === "label") return;
+  if (
+    target.kind === "dj" &&
+    (field === "soundcloud" ||
+      field === "instagram" ||
+      field === "twitter" ||
+      field === "youtube") &&
+    !djMayClaimSocialUrl(target.name, url)
+  ) {
+    return;
+  }
   if (
     target.kind === "event" &&
     (field === "soundcloud" || field === "instagram" || field === "twitter") &&
@@ -379,6 +389,7 @@ export async function scanEntityUrls(prisma: PrismaClient): Promise<ScanStats> {
     select: {
       id: true,
       slug: true,
+      name: true,
       website: true,
       soundcloud: true,
       youtube: true,
@@ -403,7 +414,7 @@ export async function scanEntityUrls(prisma: PrismaClient): Promise<ScanStats> {
     };
     await scanPage(
       prisma,
-      { kind: "dj", id: d.id },
+      { kind: "dj", id: d.id, name: d.name },
       d.website,
       current,
       stats,
@@ -470,7 +481,14 @@ export async function scanEntityUrls(prisma: PrismaClient): Promise<ScanStats> {
     stats.artistsMentioned += 1;
   }
 
-  await applyBeatportHints(prisma, [...beatport], stats);
+  try {
+    await applyBeatportHints(prisma, [...beatport], stats);
+  } catch (err) {
+    console.warn(
+      "[scan-urls] beatport hints skipped:",
+      err instanceof Error ? err.message : err,
+    );
+  }
 
   stats.setCandidates = setCandidates.size;
   try {

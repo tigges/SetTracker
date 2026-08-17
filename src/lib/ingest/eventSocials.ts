@@ -184,12 +184,22 @@ export function isArtistOwnedSocial(
  * Rejects known DJ profiles and handles that do not overlap the event name
  * (lineup pages list artist accounts first).
  */
+const HANDLE_SUFFIX =
+  /(?:official|music|dj|djs|live|hq|uk|ofc|thedj)$/i;
+
 /** Compact handle vs artist name (adambeyer ↔ Adam Beyer). Never guesses IG/X. */
 export function handleMatchesArtist(handle: string, artistName: string): boolean {
   const h = handle.toLowerCase().replace(/^@/, "").replace(/[_-]/g, "");
   const compact = socialHandle(artistName);
   if (!h || !compact || compact.length < 4) return false;
-  return h === compact || h.startsWith(compact) || compact.startsWith(h);
+  if (h === compact) return true;
+  // Short names ("AFRO") must not claim longer brands ("afrojack").
+  if (h.startsWith(compact)) {
+    if (compact.length >= 6) return true;
+    const rest = h.slice(compact.length);
+    return HANDLE_SUFFIX.test(rest);
+  }
+  return compact.startsWith(h) && h.length >= 4;
 }
 
 export function socialFieldFromUrl(

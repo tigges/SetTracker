@@ -1,0 +1,488 @@
+{
+  "generatedAt": "2026-08-17T07:35:59.098Z",
+  "djs": 1023,
+  "anySocial": 395,
+  "djsIg": 327,
+  "djsSc": 323,
+  "djsYt": 284,
+  "djsWeb": 236,
+  "noSocialWithSets": 120,
+  "ytNoIg": 47,
+  "scNoIg": 56,
+  "webNoIg": 24,
+  "ytNoSc": 43,
+  "events": 280,
+  "eventsIg": 240,
+  "eventsMissingIg": 40,
+  "nameMismatchesUnpinned": 81,
+  "persistableNameMatched": 40,
+  "note": "First-party scrape (YT About, SC bios, official sites, Wikidata). Models not used. Official-site fills now require a name-matched handle (AFRO cannot claim Afrojack). 31 catalog acts persisted to knownHandles. Pins overwrite collisions. Remaining IG fills live in the local DB until the next catalog-deep scan-urls.",
+  "sampleMismatches": [
+    {
+      "slug": "cid",
+      "name": "CID",
+      "field": "instagram",
+      "url": "http://instagram.com/cidmusic"
+    },
+    {
+      "slug": "cid",
+      "name": "CID",
+      "field": "soundcloud",
+      "url": "http://soundcloud.com/cidmusic"
+    },
+    {
+      "slug": "cid",
+      "name": "CID",
+      "field": "youtube",
+      "url": "https://www.youtube.com/@CIDmusic"
+    },
+    {
+      "slug": "cid",
+      "name": "CID",
+      "field": "twitter",
+      "url": "https://x.com/CIDmusic"
+    },
+    {
+      "slug": "oliver-heldens",
+      "name": "Oliver Heldens",
+      "field": "instagram",
+      "url": "http://instagram.com/heldeeprecords/"
+    },
+    {
+      "slug": "sidepiece",
+      "name": "SIDEPIECE",
+      "field": "youtube",
+      "url": "https://www.youtube.com/@youasidepiece"
+    },
+    {
+      "slug": "sidepiece",
+      "name": "SIDEPIECE",
+      "field": "twitter",
+      "url": "https://twitter.com/youasidepiece"
+    },
+    {
+      "slug": "mau-p",
+      "name": "Mau P",
+      "field": "soundcloud",
+      "url": "https://soundcloud.com/realmaup"
+    },
+    {
+      "slug": "mau-p",
+      "name": "Mau P",
+      "field": "twitter",
+      "url": "https://twitter.com/realmaup"
+    },
+    {
+      "slug": "men-machine",
+      "name": "Men Machine",
+      "field": "soundcloud",
+      "url": "https://soundcloud.com/davidguetta"
+    },
+    {
+      "slug": "men-machine",
+      "name": "Men Machine",
+      "field": "youtube",
+      "url": "https://www.youtube.com/@davidguetta"
+    },
+    {
+      "slug": "ahee",
+      "name": "AHEE",
+      "field": "instagram",
+      "url": "https://www.instagram.com/iamahee"
+    },
+    {
+      "slug": "ahee",
+      "name": "AHEE",
+      "field": "youtube",
+      "url": "https://www.youtube.com/channel/UCNNFPGqrCztLAlfTKIJ1uKQ"
+    },
+    {
+      "slug": "ahee",
+      "name": "AHEE",
+      "field": "twitter",
+      "url": "https://twitter.com/OfficialAhee"
+    },
+    {
+      "slug": "luke-alessi",
+      "name": "Luke Alessi",
+      "field": "youtube",
+      "url": "https://www.youtube.com/@luke.alessi"
+    },
+    {
+      "slug": "noizu",
+      "name": "Noizu",
+      "field": "instagram",
+      "url": "https://instagram.com/noizusound"
+    },
+    {
+      "slug": "noizu",
+      "name": "Noizu",
+      "field": "soundcloud",
+      "url": "https://soundcloud.com/noizusound"
+    },
+    {
+      "slug": "noizu",
+      "name": "Noizu",
+      "field": "youtube",
+      "url": "https://www.youtube.com/@NoizuSound"
+    },
+    {
+      "slug": "omnom",
+      "name": "OMNOM",
+      "field": "instagram",
+      "url": "https://www.instagram.com/imomnom"
+    },
+    {
+      "slug": "omnom",
+      "name": "OMNOM",
+      "field": "twitter",
+      "url": "https://twitter.com/imOMNOM"
+    },
+    {
+      "slug": "restricted",
+      "name": "Restricted",
+      "field": "instagram",
+      "url": "https://www.instagram.com/itsrestricted_"
+    },
+    {
+      "slug": "restricted",
+      "name": "Restricted",
+      "field": "youtube",
+      "url": "https://www.youtube.com/@itsrestricted"
+    },
+    {
+      "slug": "san-holo",
+      "name": "San Holo",
+      "field": "youtube",
+      "url": "https://www.youtube.com/channel/UCIwv90GceyJdsl9-9YYYaLQ"
+    },
+    {
+      "slug": "dimitri-vegas",
+      "name": "Dimitri Vegas",
+      "field": "youtube",
+      "url": "https://www.youtube.com/user/dimitrivegasonline"
+    },
+    {
+      "slug": "judeline",
+      "name": "Judeline",
+      "field": "instagram",
+      "url": "https://www.instagram.com/judeli.ne"
+    },
+    {
+      "slug": "imanu",
+      "name": "IMANU",
+      "field": "instagram",
+      "url": "https://instagram.com/imanunami"
+    },
+    {
+      "slug": "pnny",
+      "name": "PNNY",
+      "field": "soundcloud",
+      "url": "https://soundcloud.com/pnnycollective"
+    },
+    {
+      "slug": "fonzo",
+      "name": "Fonzo",
+      "field": "soundcloud",
+      "url": "https://soundcloud.com/fonzox"
+    },
+    {
+      "slug": "jazzy",
+      "name": "Jazzy",
+      "field": "soundcloud",
+      "url": "https://soundcloud.com/jazzydublin"
+    },
+    {
+      "slug": "camila-jun",
+      "name": "Camila Jun",
+      "field": "youtube",
+      "url": "https://www.youtube.com/channel/UCfzs4l2_6PG3ZkgqPtJnCQg?view_as=subscriber"
+    },
+    {
+      "slug": "claude-vonstroke",
+      "name": "Claude VonStroke",
+      "field": "twitter",
+      "url": "https://x.com/VonStroke"
+    },
+    {
+      "slug": "tons",
+      "name": "Tons",
+      "field": "instagram",
+      "url": "https://instagram.com/tonsandtons"
+    },
+    {
+      "slug": "tons",
+      "name": "Tons",
+      "field": "soundcloud",
+      "url": "https://soundcloud.com/tonsandtons"
+    },
+    {
+      "slug": "k-dot",
+      "name": "K Dot",
+      "field": "instagram",
+      "url": "https://instagram.com/kdot0114"
+    },
+    {
+      "slug": "k-dot",
+      "name": "K Dot",
+      "field": "soundcloud",
+      "url": "https://soundcloud.com/kdotscumfam"
+    },
+    {
+      "slug": "k-dot",
+      "name": "K Dot",
+      "field": "youtube",
+      "url": "https://www.youtube.com/@kdot0114"
+    },
+    {
+      "slug": "akiid",
+      "name": "Akiid",
+      "field": "youtube",
+      "url": "https://www.youtube.com/@Akiidmusiq"
+    },
+    {
+      "slug": "femi-koleoso-of-ezra-collective",
+      "name": "Femi Koleoso of Ezra Collective",
+      "field": "instagram",
+      "url": "https://www.instagram.com/ezracollective"
+    },
+    {
+      "slug": "femi-koleoso-of-ezra-collective",
+      "name": "Femi Koleoso of Ezra Collective",
+      "field": "youtube",
+      "url": "https://www.youtube.com/channel/UCDjQX5MfQrWowYF9ucLpdOQ"
+    },
+    {
+      "slug": "femi-koleoso-of-ezra-collective",
+      "name": "Femi Koleoso of Ezra Collective",
+      "field": "twitter",
+      "url": "https://twitter.com/ezracollective?lang=en"
+    }
+  ],
+  "samplePersistable": [
+    {
+      "slug": "ahee",
+      "name": "AHEE",
+      "instagram": "https://www.instagram.com/iamahee",
+      "soundcloud": "https://soundcloud.com/ahee",
+      "youtube": "https://www.youtube.com/channel/UCNNFPGqrCztLAlfTKIJ1uKQ",
+      "website": "https://aheebass.com/"
+    },
+    {
+      "slug": "argy",
+      "name": "Argy",
+      "instagram": "https://instagram.com/argy",
+      "soundcloud": "https://soundcloud.com/argyofficial",
+      "youtube": "https://www.youtube.com/@ArgyMusic",
+      "website": "https://ffm.to/like-a-child"
+    },
+    {
+      "slug": "johannes-schuster",
+      "name": "Johannes Schuster",
+      "soundcloud": "https://soundcloud.com/johannes-schuster"
+    },
+    {
+      "slug": "max-dean",
+      "name": "Max Dean",
+      "soundcloud": "https://soundcloud.com/max-dean-music"
+    },
+    {
+      "slug": "volcan-x-a",
+      "name": "Volcan X.A.",
+      "instagram": "https://instagram.com/volcanxa"
+    },
+    {
+      "slug": "bonobo-solo",
+      "name": "Bonobo Solo",
+      "youtube": "https://www.youtube.com/@bonobo"
+    },
+    {
+      "slug": "harpriya",
+      "name": "harpriya",
+      "instagram": "https://instagram.com/harpriyaa"
+    },
+    {
+      "slug": "shee",
+      "name": "SHEE",
+      "instagram": "https://instagram.com/sheemusic"
+    },
+    {
+      "slug": "jackson",
+      "name": "Jackson",
+      "instagram": "https://instagram.com/jackson_____jackson"
+    },
+    {
+      "slug": "azyr",
+      "name": "AZYR",
+      "instagram": "https://instagram.com/azyr_music",
+      "soundcloud": "https://soundcloud.com/azy_r",
+      "youtube": "https://www.youtube.com/@AzyrMusic"
+    },
+    {
+      "slug": "boy-pillow",
+      "name": "Boy Pillow",
+      "instagram": "https://instagram.com/boy___pillow"
+    },
+    {
+      "slug": "rossi",
+      "name": "Rossi.",
+      "instagram": "https://instagram.com/rossi.dj_"
+    },
+    {
+      "slug": "imaniii",
+      "name": "Imaniii",
+      "instagram": "https://instagram.com/imaniii.riddim"
+    },
+    {
+      "slug": "drybabe",
+      "name": "Drybabe",
+      "instagram": "https://instagram.com/drybabe"
+    },
+    {
+      "slug": "shameless",
+      "name": "Shameless",
+      "instagram": "https://instagram.com/shameless.sa"
+    },
+    {
+      "slug": "francis-mercier",
+      "name": "Francis Mercier",
+      "instagram": "https://instagram.com/francismerciermusic"
+    },
+    {
+      "slug": "dont-blink",
+      "name": "DONT BLINK",
+      "instagram": "https://instagram.com/dontblinkmusic"
+    },
+    {
+      "slug": "teedo-love",
+      "name": "Teedo Love",
+      "instagram": "https://instagram.com/teedolove"
+    },
+    {
+      "slug": "hu-dat",
+      "name": "Hu Dat",
+      "instagram": "https://instagram.com/hu_dat_"
+    },
+    {
+      "slug": "monateng-music",
+      "name": "Monateng Music",
+      "instagram": "https://instagram.com/monatengmusic"
+    },
+    {
+      "slug": "martin-ikin",
+      "name": "Martin Ikin",
+      "instagram": "https://www.instagram.com/martin_ikin",
+      "website": "https://lnk.to/JH-HELI"
+    },
+    {
+      "slug": "layton-giordani-space-miami-1-10-25",
+      "name": "Layton Giordani Space Miami 1-10-25",
+      "instagram": "https://instagram.com/laytongiordani",
+      "youtube": "https://www.youtube.com/@layton-giordani"
+    },
+    {
+      "slug": "blond-ish",
+      "name": "Blond:Ish",
+      "soundcloud": "https://soundcloud.com/blondish"
+    },
+    {
+      "slug": "lake-hills",
+      "name": "Lake Hills",
+      "instagram": "https://instagram.com/lakehillsmusic"
+    },
+    {
+      "slug": "jengi",
+      "name": "Jengi",
+      "instagram": "https://instagram.com/jengimusic",
+      "soundcloud": "https://on.soundcloud.com/9VFvUJfyYej2BP2S7",
+      "youtube": "https://youtube.com/channel/UCW3nxCSyZeqaB5hCSZHQXJA?si=ULm2qLU-gw3Zppu9",
+      "website": "https://www.jengimusic.com/"
+    },
+    {
+      "slug": "ferreck-dawn",
+      "name": "Ferreck Dawn",
+      "instagram": "https://www.instagram.com/ferreckdawn",
+      "website": "https://lnk.to/JH-HELI"
+    },
+    {
+      "slug": "worship",
+      "name": "WORSHIP",
+      "instagram": "http://instagram.com/worship_",
+      "soundcloud": "https://soundcloud.com/worshipartists",
+      "youtube": "https://www.youtube.com/@WORSHIP_artists"
+    },
+    {
+      "slug": "wooli-wankdat",
+      "name": "WOOLI (WANKDAT)",
+      "instagram": "https://instagram.com/wooli"
+    },
+    {
+      "slug": "sonny-fodera",
+      "name": "Sonny Fodera",
+      "soundcloud": "https://soundcloud.com/sonnyfodera?utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing"
+    },
+    {
+      "slug": "chris-lake-full",
+      "name": "Chris Lake Full",
+      "instagram": "https://instagram.com/chrislake",
+      "soundcloud": "https://soundcloud.com/chrislake",
+      "youtube": "https://www.youtube.com/@chrislake",
+      "website": "https://chris-lake.com/"
+    },
+    {
+      "slug": "franky-wah",
+      "name": "Franky Wah",
+      "instagram": "https://instagram.com/frankywah",
+      "website": "https://www.frankywah.com/"
+    },
+    {
+      "slug": "damian-greco",
+      "name": "Damian Greco",
+      "instagram": "https://instagram.com/damiangreco"
+    },
+    {
+      "slug": "curtiba",
+      "name": "Curtiba",
+      "instagram": "https://instagram.com/curtibaofficial"
+    },
+    {
+      "slug": "leftwing-kody",
+      "name": "Leftwing : Kody",
+      "instagram": "https://instagram.com/leftwingkody"
+    },
+    {
+      "slug": "kill-script",
+      "name": "KILL SCRIPT",
+      "instagram": "https://instagram.com/killscriptmusic"
+    },
+    {
+      "slug": "worthy",
+      "name": "Worthy",
+      "instagram": "https://instagram.com/worthymusic",
+      "youtube": "https://www.youtube.com/@BahtRivkaWhitten",
+      "website": "https://www.worthymusic.com/"
+    },
+    {
+      "slug": "shimza",
+      "name": "Shimza",
+      "instagram": "https://instagram.com/shimza.dj",
+      "website": "https://www.shimza.co.za/"
+    },
+    {
+      "slug": "jocelyn-brown",
+      "name": "Jocelyn Brown",
+      "youtube": "https://www.youtube.com/@jocelynbrownmusic"
+    },
+    {
+      "slug": "gentlemen-s-groove",
+      "name": "Gentlemen's Groove",
+      "soundcloud": "https://soundcloud.com/gentlemens-groove-records",
+      "website": "https://www.facebook.com/Gentlemensgroove"
+    },
+    {
+      "slug": "arodes",
+      "name": "Arodes",
+      "instagram": "https://instagram.com/arodes"
+    }
+  ]
+}

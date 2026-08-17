@@ -7,6 +7,9 @@ export type HandleHint = {
   youtubeHandle?: string;
   soundcloudPermalink?: string;
   bandcampUrl?: string;
+  instagram?: string;
+  twitter?: string;
+  website?: string;
   genre?: string;
   accent?: string;
 };
@@ -1114,6 +1117,143 @@ export const KNOWN_HANDLES: Record<string, HandleHint> = {
   zuezeu: {
     youtubeHandle: "@zuezeu",
     soundcloudPermalink: "zuezeu",
+  },
+
+  // ---- first-party scrape 2026-08-17 (YT About / SC bio / official site) ----
+  "wax motif": {
+    youtubeHandle: "@WaxMotif",
+    soundcloudPermalink: "waxmotif",
+  },
+  bijou: {
+    youtubeHandle: "@BIJOU",
+    soundcloudPermalink: "bijou",
+  },
+  cloonee: {
+    youtubeHandle: "@cloonee",
+    soundcloudPermalink: "cloonee",
+  },
+  meduza: {
+    youtubeHandle: "@meduzamusic",
+    soundcloudPermalink: "meduzamusic",
+    instagram: "https://www.instagram.com/meduzamusic",
+  },
+  avello: {
+    youtubeHandle: "@avello_music",
+    soundcloudPermalink: "avello",
+    instagram: "https://instagram.com/avello_music",
+  },
+  beltran: {
+    soundcloudPermalink: "beltranmusic",
+    instagram: "https://instagram.com/beltranmusic",
+  },
+  "eli brown": {
+    youtubeHandle: "@elibrownbeats",
+    soundcloudPermalink: "elibrownbeats",
+    instagram: "https://instagram.com/elibrownbeats",
+  },
+  innellea: {
+    youtubeHandle: "@Innellea",
+  },
+  "layton giordani": {
+    youtubeHandle: "@LaytonGiordani",
+    soundcloudPermalink: "laytongiordani",
+  },
+  massano: {
+    youtubeHandle: "@massanomusic",
+    soundcloudPermalink: "massanomusic",
+    instagram: "https://instagram.com/massanomusic",
+  },
+  "agents of time": {
+    youtubeHandle: "@AgentsOfTime",
+    soundcloudPermalink: "agents-of-time",
+    instagram: "https://instagram.com/agentsoftime",
+  },
+  "ben sterling": {
+    youtubeHandle: "@bensterlinguk",
+    soundcloudPermalink: "bensterling",
+    instagram: "https://instagram.com/bensterlingmusic",
+  },
+  "ayra starr": {
+    youtubeHandle: "@ayrastarrofficial",
+    instagram: "https://instagram.com/ayrastarr",
+  },
+  audiomarc: {
+    youtubeHandle: "@audiomarcdj",
+    instagram: "https://instagram.com/audiomarcdj",
+  },
+  "aizo clutch": {
+    youtubeHandle: "@AizoClutch",
+    instagram: "https://instagram.com/aizoclutch",
+  },
+  "ann clue": {
+    youtubeHandle: "@AnnClue",
+    soundcloudPermalink: "ann-clue",
+    instagram: "https://instagram.com/annclue",
+  },
+  avision: {
+    youtubeHandle: "@avisionnyc",
+    instagram: "https://instagram.com/avision_nyc",
+  },
+  "bianca oblivion": {
+    youtubeHandle: "@BiancaOblivion",
+    soundcloudPermalink: "biancaoblivion",
+    instagram: "https://instagram.com/bianca_oblivion",
+  },
+  blanke: {
+    youtubeHandle: "@Blankemusic",
+    soundcloudPermalink: "blankemusicau",
+    instagram: "https://instagram.com/blankemusic",
+  },
+  curbi: {
+    youtubeHandle: "@Curbi",
+    soundcloudPermalink: "curbiofficial",
+    instagram: "https://instagram.com/curbimusic",
+  },
+  bexxie: {
+    youtubeHandle: "@bexxiemusic",
+    instagram: "https://instagram.com/bexxiemusic",
+  },
+  "black carl!": {
+    youtubeHandle: "@BlackCarl",
+    soundcloudPermalink: "black_carl",
+    instagram: "https://instagram.com/black_carl",
+  },
+  illenium: {
+    youtubeHandle: "@illenium",
+    soundcloudPermalink: "illeniumofficial",
+    instagram: "https://instagram.com/illenium",
+  },
+  "loud luxury": {
+    youtubeHandle: "@LoudLuxury",
+    instagram: "https://instagram.com/loudluxury",
+  },
+  sidequest: {
+    youtubeHandle: "@SIDEQUESTMUSIC",
+    instagram: "https://instagram.com/sidequestdj",
+  },
+  crankdat: {
+    youtubeHandle: "@Crankdat",
+    soundcloudPermalink: "crankdatmusic",
+    instagram: "https://instagram.com/crankdat",
+  },
+  "bart skils": {
+    youtubeHandle: "@bartskils",
+    soundcloudPermalink: "bart-skils",
+    instagram: "https://instagram.com/bart_skils",
+  },
+  goodboys: {
+    youtubeHandle: "@GoodboysOff",
+    soundcloudPermalink: "goodboysoff",
+    instagram: "https://instagram.com/goodboysoff",
+  },
+  azzecca: {
+    youtubeHandle: "@azzeccamusic",
+    soundcloudPermalink: "azzecca",
+    instagram: "https://instagram.com/azzecca",
+  },
+  "ben rau": {
+    soundcloudPermalink: "ben-rau",
+    instagram: "https://instagram.com/ben_rau",
   },
 
 };
