@@ -33,7 +33,7 @@ const itemClass =
   "flex w-full items-center rounded-md px-2.5 py-1.5 text-left text-[13px] text-muted transition-colors hover:bg-panel2 hover:text-ink disabled:cursor-not-allowed disabled:opacity-40";
 
 /**
- * Set-level export / open actions (CSV, M3U, text, Beatport & Spotify URL lists).
+ * Set-level export / open actions (CSV, M3U, text, Beatport buy list, Spotify searches).
  * Single button + menu. Uses identified plays when available; no OAuth.
  */
 export function SetExport({
@@ -53,8 +53,10 @@ export function SetExport({
   } | null>(null);
   const root = useRef<HTMLDivElement>(null);
   const rows = useMemo(() => exportablePlays(plays), [plays]);
+  const beatportBuyList = useMemo(() => buildBeatportUrlList(plays), [plays]);
   const base = slugifyFilename(meta.title || meta.slug);
   const disabled = rows.length === 0;
+  const beatportDisabled = beatportBuyList.length === 0;
 
   function placeMenu() {
     const el = root.current;
@@ -236,18 +238,23 @@ export function SetExport({
             type="button"
             role="menuitem"
             className={itemClass}
-            title="Beatport deep links when known, otherwise search URLs"
+            disabled={beatportDisabled}
+            title={
+              beatportDisabled
+                ? "No canonical Beatport /track pages on this set"
+                : "Canonical Beatport /track URLs only — buy list for Rekordbox"
+            }
             onClick={() =>
               run(() =>
                 downloadText(
-                  `${base}-beatport-urls.txt`,
-                  buildBeatportUrlList(plays),
+                  `${base}-beatport-buy.txt`,
+                  beatportBuyList,
                   "text/plain;charset=utf-8",
                 ),
               )
             }
           >
-            Beatport URLs
+            Beatport buy list
           </button>
         </div>
       ) : null}

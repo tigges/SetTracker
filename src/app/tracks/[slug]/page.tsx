@@ -4,7 +4,11 @@ import { notFound } from "next/navigation";
 import { EntityThumb } from "@/components/EntityThumb";
 import { getAllTrackSlugs, getTrackBySlug } from "@/lib/queries";
 import { pageMeta } from "@/lib/site";
-import { beatportSearchUrl, spotifySearchUrl } from "@/lib/trackMeta";
+import {
+  beatportTrackHref,
+  canonicalBeatportUrl,
+  spotifySearchUrl,
+} from "@/lib/trackMeta";
 import {
   SET_TYPE_META,
   fmtDate,
@@ -67,7 +71,12 @@ export default async function TrackPage({
   if (!track) notFound();
 
   const accent = track.label?.color ?? "var(--brand)";
-  const bpHref = track.beatportUrl ?? beatportSearchUrl(track.title, track.artistName);
+  const bpCanonical = canonicalBeatportUrl(track.beatportUrl);
+  const bpHref = beatportTrackHref(
+    track.title,
+    track.artistName,
+    track.beatportUrl,
+  );
   const spHref = spotifySearchUrl(track.title, track.artistName);
 
   return (
@@ -111,6 +120,7 @@ export default async function TrackPage({
                 <span> · {fmtTimestamp(track.durationSec)}</span>
               ) : null}
               {track.genre ? <span> · {track.genre}</span> : null}
+              {track.isrc ? <span> · ISRC {track.isrc}</span> : null}
             </p>
             <div className="mt-3 flex flex-wrap items-center gap-2">
               {track.label && (
@@ -143,7 +153,7 @@ export default async function TrackPage({
                 rel="noreferrer"
                 className="rounded-md border border-line px-2.5 py-1 text-[12px] text-muted2 transition-colors hover:border-brand hover:text-brand"
               >
-                {track.beatportUrl ? "Beatport" : "Search Beatport"}
+                {bpCanonical ? "Buy on Beatport" : "Search Beatport"}
               </a>
             </div>
           </div>

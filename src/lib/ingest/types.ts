@@ -39,6 +39,8 @@ export type RawPlay = {
   remixerName?: string;
   /** Canonical Beatport URL only — never a search page. */
   beatportUrl?: string;
+  /** ISRC when the source already has one (ACR, etc.). */
+  isrc?: string;
   // unresolved id:
   idLabel?: string; // e.g. "AC Slater - ID"
   suspectedArtist?: string;

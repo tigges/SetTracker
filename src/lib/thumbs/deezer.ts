@@ -158,6 +158,8 @@ export type TrackImageResult = {
   durationSec?: number | null;
   /** Matched provider title (useful for mix/remix parsing). */
   matchedTitle?: string | null;
+  /** ISRC when the provider returned one. */
+  isrc?: string | null;
 };
 
 function trackRowMatches(
@@ -202,6 +204,7 @@ export async function resolveTrackImage(
       DeezerList<{
         title: string;
         duration?: number;
+        isrc?: string;
         artist?: { name?: string };
         album?: { cover_medium?: string };
       }>
@@ -219,10 +222,15 @@ export async function resolveTrackImage(
           kind: "cover",
           durationSec,
           matchedTitle: row.title,
+          isrc: row.isrc ?? null,
         };
       }
-      if (!metaOnly && (durationSec || row.title)) {
-        metaOnly = { durationSec, matchedTitle: row.title };
+      if (!metaOnly && (durationSec || row.title || row.isrc)) {
+        metaOnly = {
+          durationSec,
+          matchedTitle: row.title,
+          isrc: row.isrc ?? null,
+        };
       }
     }
   }
@@ -234,6 +242,7 @@ export async function resolveTrackImage(
       ...itunes,
       durationSec: itunes.durationSec ?? metaOnly?.durationSec ?? null,
       matchedTitle: itunes.matchedTitle ?? metaOnly?.matchedTitle ?? null,
+      isrc: itunes.isrc ?? metaOnly?.isrc ?? null,
     };
   }
 
@@ -245,6 +254,7 @@ export async function resolveTrackImage(
       kind: "artist",
       durationSec: metaOnly?.durationSec ?? null,
       matchedTitle: metaOnly?.matchedTitle ?? null,
+      isrc: metaOnly?.isrc ?? null,
     };
   }
 

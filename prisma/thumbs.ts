@@ -16,7 +16,12 @@
  * Usage: npm run thumbs
  */
 import { PrismaClient } from "@prisma/client";
-import { parseTrackTitle } from "../src/lib/trackMeta";
+import {
+  canonicalBeatportUrl,
+  normalizeIsrc,
+  parseTrackTitle,
+  trackIdentityKey,
+} from "../src/lib/trackMeta";
 import { fillMissingGenres, rewriteStoredGenres } from "../src/lib/genre";
 import { ensureTrackSlugs } from "../src/lib/tracks/ensureSlugs";
 import { slugify } from "../src/lib/ingest/types";
@@ -82,6 +87,8 @@ type Stats = {
     upgraded: number;
     meta: number;
     musicbrainz: number;
+    beatport: number;
+    isrc: number;
   };
   sets: { scanned: number; filled: number; missed: number; updated: number };
   slugs: number;
@@ -108,6 +115,8 @@ async function main() {
       upgraded: 0,
       meta: 0,
       musicbrainz: 0,
+      beatport: 0,
+      isrc: 0,
     },
     sets: { scanned: 0, filled: 0, missed: 0, updated: 0 },
     slugs: 0,
@@ -274,11 +283,58 @@ async function main() {
     }
   }
 
+  async function copySiblingStoreIds(): Promise<{ beatport: number; isrc: number }> {
+    const withStore = await prisma.track.findMany({
+      where: { OR: [{ beatportUrl: { not: null } }, { isrc: { not: null } }] },
+      select: { title: true, artistName: true, beatportUrl: true, isrc: true },
+    });
+    const bpByKey = new Map<string, string>();
+    const isrcByKey = new Map<string, string>();
+    for (const t of withStore) {
+      const key = trackIdentityKey(t.title, t.artistName);
+      const bp = canonicalBeatportUrl(t.beatportUrl);
+      const isrc = normalizeIsrc(t.isrc);
+      if (bp && !bpByKey.has(key)) bpByKey.set(key, bp);
+      if (isrc && !isrcByKey.has(key)) isrcByKey.set(key, isrc);
+    }
+    if (bpByKey.size === 0 && isrcByKey.size === 0) {
+      return { beatport: 0, isrc: 0 };
+    }
+
+    const missing = await prisma.track.findMany({
+      where: { OR: [{ beatportUrl: null }, { isrc: null }] },
+      select: { id: true, title: true, artistName: true, beatportUrl: true, isrc: true },
+    });
+    let beatport = 0;
+    let isrc = 0;
+    for (const t of missing) {
+      const key = trackIdentityKey(t.title, t.artistName);
+      const data: { beatportUrl?: string; isrc?: string } = {};
+      if (!canonicalBeatportUrl(t.beatportUrl)) {
+        const url = bpByKey.get(key);
+        if (url) data.beatportUrl = url;
+      }
+      if (!normalizeIsrc(t.isrc)) {
+        const code = isrcByKey.get(key);
+        if (code) data.isrc = code;
+      }
+      if (Object.keys(data).length === 0) continue;
+      await prisma.track.update({ where: { id: t.id }, data });
+      if (data.beatportUrl) beatport += 1;
+      if (data.isrc) isrc += 1;
+    }
+    return { beatport, isrc };
+  }
+
   console.log(
     NULL_ONLY
       ? "[thumbs] resolving track artwork (null only, capped)…"
       : "[thumbs] resolving track artwork + light meta…",
   );
+  const copied = await copySiblingStoreIds();
+  stats.tracks.beatport += copied.beatport;
+  stats.tracks.isrc += copied.isrc;
+
   const tracks = await prisma.track.findMany({
     where: NULL_ONLY ? { imageUrl: null } : undefined,
     select: {
@@ -291,6 +347,8 @@ async function main() {
       remixerName: true,
       labelId: true,
       releaseDate: true,
+      beatportUrl: true,
+      isrc: true,
     },
     orderBy: { title: "asc" },
     ...(TRACK_LIMIT > 0 || NULL_ONLY
@@ -303,7 +361,9 @@ async function main() {
       !t.imageUrl ||
       (!NULL_ONLY && isArtistArtUrl(t.imageUrl)) ||
       (!NULL_ONLY && t.durationSec == null) ||
-      (!NULL_ONLY && t.mixName == null),
+      (!NULL_ONLY && t.mixName == null) ||
+      (!NULL_ONLY && !canonicalBeatportUrl(t.beatportUrl)) ||
+      (!NULL_ONLY && !normalizeIsrc(t.isrc)),
   );
   let mbCalls = 0;
 
@@ -329,14 +389,18 @@ async function main() {
     const needsMb =
       MB_LIMIT > 0 &&
       mbCalls < MB_LIMIT &&
-      (t.labelId == null || t.releaseDate == null || needsDuration);
+      (t.labelId == null ||
+        t.releaseDate == null ||
+        needsDuration ||
+        !canonicalBeatportUrl(t.beatportUrl));
     // Skip network when only mix is sparse and the title already encodes it.
     const canLocalMix =
       !t.mixName &&
       !!fromTitle.mixName &&
       !needsArt &&
       !needsDuration &&
-      !needsMb;
+      !needsMb &&
+      !!normalizeIsrc(t.isrc);
 
     const data: {
       imageUrl?: string;
@@ -345,6 +409,8 @@ async function main() {
       remixerName?: string;
       labelId?: string;
       releaseDate?: Date;
+      beatportUrl?: string;
+      isrc?: string;
     } = {};
 
     let result: Awaited<ReturnType<typeof resolveTrackImage>> = null;
@@ -354,7 +420,7 @@ async function main() {
         data.remixerName = fromTitle.remixerName;
       }
     } else {
-      if (needsArt || needsDuration || !t.mixName) {
+      if (needsArt || needsDuration || !t.mixName || !normalizeIsrc(t.isrc)) {
         result = await resolveTrackImage(t.title, t.artistName);
         await sleep(DELAY_MS);
 
@@ -373,6 +439,11 @@ async function main() {
         if (remixerName && !t.remixerName) data.remixerName = remixerName;
         if (needsDuration && result?.durationSec != null) {
           data.durationSec = result.durationSec;
+        }
+        const isrc = normalizeIsrc(result?.isrc);
+        if (isrc && !normalizeIsrc(t.isrc)) {
+          data.isrc = isrc;
+          stats.tracks.isrc += 1;
         }
       }
 
@@ -393,7 +464,16 @@ async function main() {
             const labelId = await upsertLabelByName(mb.labelName);
             if (labelId) data.labelId = labelId;
           }
-          if (mb.durationSec != null || mb.releaseDate || mb.labelName) {
+          if (!canonicalBeatportUrl(t.beatportUrl) && mb.beatportUrl) {
+            data.beatportUrl = mb.beatportUrl;
+            stats.tracks.beatport += 1;
+          }
+          if (
+            mb.durationSec != null ||
+            mb.releaseDate ||
+            mb.labelName ||
+            mb.beatportUrl
+          ) {
             stats.tracks.musicbrainz += 1;
           }
         }
@@ -407,7 +487,9 @@ async function main() {
         data.remixerName ||
         data.durationSec != null ||
         data.labelId ||
-        data.releaseDate
+        data.releaseDate ||
+        data.beatportUrl ||
+        data.isrc
       ) {
         stats.tracks.meta += 1;
       }
@@ -424,7 +506,7 @@ async function main() {
     if (stats.tracks.scanned % 25 === 0) {
       console.log(
         `  … tracks ${stats.tracks.scanned}/${trackQueue.length}` +
-          ` (covers ${stats.tracks.covers}, artist-fallback ${stats.tracks.artistFallback}, upgraded ${stats.tracks.upgraded}, meta ${stats.tracks.meta}, mb ${stats.tracks.musicbrainz})`,
+          ` (covers ${stats.tracks.covers}, artist-fallback ${stats.tracks.artistFallback}, upgraded ${stats.tracks.upgraded}, meta ${stats.tracks.meta}, mb ${stats.tracks.musicbrainz}, bp ${stats.tracks.beatport}, isrc ${stats.tracks.isrc})`,
       );
     }
   }

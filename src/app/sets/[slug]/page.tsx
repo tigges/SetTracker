@@ -12,6 +12,7 @@ import { setHostHeadline } from "@/lib/brandHosts";
 import { detectPlaybackHost } from "@/lib/playback";
 import { pageMeta } from "@/lib/site";
 import { SET_TYPE_META, fmtDate, fmtDuration } from "@/lib/status";
+import { beatportCoverage } from "@/lib/trackMeta";
 
 export async function generateStaticParams() {
   const slugs = await getAllSetSlugs();
@@ -60,6 +61,7 @@ export default async function SetPage({
     seriesName: set.series?.name,
     eventName: set.event?.name,
   });
+  const coverage = beatportCoverage(set.plays);
   return (
     <SetListen>
     <div>
@@ -216,7 +218,15 @@ export default async function SetPage({
         setSourceUrl={set.sourceUrl}
       >
         <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
-          <StatusLegend counts={set.statusCounts} />
+          <div className="min-w-0 space-y-1">
+            <StatusLegend counts={set.statusCounts} />
+            {coverage.identified > 0 ? (
+              <p className="text-[12px] text-muted2">
+                {coverage.buyable} of {coverage.identified} identified tracks
+                have a Beatport page
+              </p>
+            ) : null}
+          </div>
           <SetExport
             meta={{
               title: set.title,
@@ -232,6 +242,8 @@ export default async function SetPage({
               musicalKey: p.musicalKey,
               trackDurationSec: p.trackDurationSec,
               beatportUrl: p.beatportUrl,
+              isrc: p.isrc,
+              mixName: p.mixName,
               idStatus: p.idStatus,
             }))}
           />
