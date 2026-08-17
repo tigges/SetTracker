@@ -121,7 +121,7 @@ export function SetTimeline({
           </div>
           <div className="flex items-center gap-3 text-[12px] text-muted2">
             <span className="mono">00:00</span>
-            <span className="text-muted2/60">→</span>
+            <span className="text-muted2">→</span>
             <span className="mono">{fmtTimestamp(durationSec)}</span>
           </div>
         </div>

@@ -19,9 +19,10 @@
   --panel-2: #181c23;
   --line: #262b34;
   --line-soft: #1c2029;
-  --ink: #f1f3f6;
-  --muted: #99a0ac;
-  --muted-2: #616873;
+  --ink: #f7f8fa;
+  /* Secondary + hint text stay below ink but pass WCAG AA on --bg (4.5:1+). */
+  --muted: #d8dce4;
+  --muted-2: #c5cad3;
 
   /* Brand mint — sits with amber/teal/magenta status chrome (less neon) */
   --brand: #3dcea0;
@@ -33,7 +34,7 @@
   --magenta: #ff4d8d;
   --teal: #29c7dd;
   --violet: #c08bff;
-  --grey: #6b7280;
+  --grey: #b4bac4;
 
   --accent: var(--brand);
 }
