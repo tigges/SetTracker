@@ -1,0 +1,6318 @@
+{
+  "source": "https://djmag.com/top100clubs/{year}",
+  "kind": "club",
+  "note": "DJ Mag Top 100 Clubs year archives. Latest poll is also at /top100clubs.",
+  "years": [
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+  ],
+  "entries": [
+    {
+      "year": 2018,
+      "rank": 1,
+      "slug": "green-valley",
+      "name": "GREENVALLEY",
+      "change": "Up 2"
+    },
+    {
+      "year": 2018,
+      "rank": 2,
+      "slug": "ushuaia-ibiza",
+      "name": "Ushuaïa Ibiza",
+      "change": "Up 2"
+    },
+    {
+      "year": 2018,
+      "rank": 3,
+      "slug": "zouk-singapore",
+      "name": "Zouk Singapore",
+      "change": "Up 1"
+    },
+    {
+      "year": 2018,
+      "rank": 4,
+      "slug": "echostage",
+      "name": "Echostage",
+      "change": "Up 4"
+    },
+    {
+      "year": 2018,
+      "rank": 5,
+      "slug": "hi-ibiza",
+      "name": "Hï Ibiza",
+      "change": "New entry"
+    },
+    {
+      "year": 2018,
+      "rank": 6,
+      "slug": "papaya",
+      "name": "Papaya Club",
+      "change": "Up 3"
+    },
+    {
+      "year": 2018,
+      "rank": 7,
+      "slug": "octagon",
+      "name": "Octagon",
+      "change": "Down 2"
+    },
+    {
+      "year": 2018,
+      "rank": 8,
+      "slug": "pacha-ibiza",
+      "name": "PACHA IBIZA",
+      "change": "Down 1"
+    },
+    {
+      "year": 2018,
+      "rank": 9,
+      "slug": "fabric",
+      "name": "fabric",
+      "change": "Down 7"
+    },
+    {
+      "year": 2018,
+      "rank": 10,
+      "slug": "berghain",
+      "name": "Berghain",
+      "change": "Up 2"
+    },
+    {
+      "year": 2018,
+      "rank": 11,
+      "slug": "bootshaus",
+      "name": "Bootshaus",
+      "change": "Up 4"
+    },
+    {
+      "year": 2018,
+      "rank": 12,
+      "slug": "amnesia",
+      "name": "Amnesia",
+      "change": "Down 1"
+    },
+    {
+      "year": 2018,
+      "rank": 13,
+      "slug": "noa-beach-club",
+      "name": "Noa Beach Club",
+      "change": "Up 1"
+    },
+    {
+      "year": 2018,
+      "rank": 14,
+      "slug": "printworks-london",
+      "name": "Printworks London",
+      "change": "New entry"
+    },
+    {
+      "year": 2018,
+      "rank": 15,
+      "slug": "dc-10",
+      "name": "DC-10",
+      "change": "Down 2"
+    },
+    {
+      "year": 2018,
+      "rank": 16,
+      "slug": "motion",
+      "name": "Motion",
+      "change": "Up 4"
+    },
+    {
+      "year": 2018,
+      "rank": 17,
+      "slug": "guaba-beach-bar",
+      "name": "Guaba Beach Bar",
+      "change": "Up 2"
+    },
+    {
+      "year": 2018,
+      "rank": 18,
+      "slug": "warung-beach-club",
+      "name": "Warung Beach Club",
+      "change": "Up 7"
+    },
+    {
+      "year": 2018,
+      "rank": 19,
+      "slug": "zouk-kl",
+      "name": "Zouk Kl",
+      "change": "Up 2"
+    },
+    {
+      "year": 2018,
+      "rank": 20,
+      "slug": "white-dubai",
+      "name": "WHITE Dubai",
+      "change": "Up 7"
+    },
+    {
+      "year": 2018,
+      "rank": 21,
+      "slug": "elrow-row-14",
+      "name": "Elrow (Row 14)",
+      "change": "Down 3"
+    },
+    {
+      "year": 2018,
+      "rank": 22,
+      "slug": "exchange-la",
+      "name": "Exchange LA",
+      "change": "Up 5"
+    },
+    {
+      "year": 2018,
+      "rank": 23,
+      "slug": "omnia",
+      "name": "OMNIA",
+      "change": "Down 1"
+    },
+    {
+      "year": 2018,
+      "rank": 24,
+      "slug": "ministry-of-sound",
+      "name": "Ministry Of Sound",
+      "change": "Up 5"
+    },
+    {
+      "year": 2018,
+      "rank": 25,
+      "slug": "aquarius",
+      "name": "Aquarius",
+      "change": "Down 1"
+    },
+    {
+      "year": 2018,
+      "rank": 26,
+      "slug": "el-fortin",
+      "name": "El Fortin",
+      "change": "Up 2"
+    },
+    {
+      "year": 2018,
+      "rank": 27,
+      "slug": "warehouse-project",
+      "name": "The Warehouse Project",
+      "change": "Down 10"
+    },
+    {
+      "year": 2018,
+      "rank": 28,
+      "slug": "output",
+      "name": "Output",
+      "change": "Up 7"
+    },
+    {
+      "year": 2018,
+      "rank": 29,
+      "slug": "laroc-club",
+      "name": "Laroc Club",
+      "change": "Up 16"
+    },
+    {
+      "year": 2018,
+      "rank": 30,
+      "slug": "hakkasan",
+      "name": "Hakkasan",
+      "change": "Down 14"
+    },
+    {
+      "year": 2018,
+      "rank": 31,
+      "slug": "avalon-hollywood",
+      "name": "AVALON Hollywood",
+      "change": "Up 2"
+    },
+    {
+      "year": 2018,
+      "rank": 32,
+      "slug": "barbarellas-discotheque",
+      "name": "Barbarella's Discotheque",
+      "change": "Up 2"
+    },
+    {
+      "year": 2018,
+      "rank": 33,
+      "slug": "kalypso",
+      "name": "Kalypso",
+      "change": "Up 6"
+    },
+    {
+      "year": 2018,
+      "rank": 34,
+      "slug": "egg-ldn",
+      "name": "EGG LDN",
+      "change": "Up 2"
+    },
+    {
+      "year": 2018,
+      "rank": 35,
+      "slug": "marquee-nightclub-dayclub",
+      "name": "Marquee Nightclub & Dayclub",
+      "change": "Down 5"
+    },
+    {
+      "year": 2018,
+      "rank": 36,
+      "slug": "tobacco-dock",
+      "name": "Tobacco Dock",
+      "change": "Up 4"
+    },
+    {
+      "year": 2018,
+      "rank": 37,
+      "slug": "fabrik",
+      "name": "FABRIK",
+      "change": "Up 6"
+    },
+    {
+      "year": 2018,
+      "rank": 38,
+      "slug": "cavo-paradiso",
+      "name": "Cavo Paradiso",
+      "change": "Down 1"
+    },
+    {
+      "year": 2018,
+      "rank": 39,
+      "slug": "baum-club",
+      "name": "BAUM Club",
+      "change": "Down 16"
+    },
+    {
+      "year": 2018,
+      "rank": 40,
+      "slug": "culture-club-revelin",
+      "name": "Culture Club Revelin",
+      "change": "Up 9"
+    },
+    {
+      "year": 2018,
+      "rank": 41,
+      "slug": "myst",
+      "name": "Myst",
+      "change": "Up 3"
+    },
+    {
+      "year": 2018,
+      "rank": 42,
+      "slug": "privilege",
+      "name": "Privilege",
+      "change": "Down 4"
+    },
+    {
+      "year": 2018,
+      "rank": 43,
+      "slug": "beachclub",
+      "name": "Beachclub",
+      "change": "Up 11"
+    },
+    {
+      "year": 2018,
+      "rank": 44,
+      "slug": "lost-beach-club",
+      "name": "Lost Beach Club",
+      "change": "Up 8"
+    },
+    {
+      "year": 2018,
+      "rank": 45,
+      "slug": "digital-newcastle",
+      "name": "Digital Newcastle",
+      "change": "Down 4"
+    },
+    {
+      "year": 2018,
+      "rank": 46,
+      "slug": "elements",
+      "name": "Elements",
+      "change": "Up 10"
+    },
+    {
+      "year": 2018,
+      "rank": 47,
+      "slug": "watergate",
+      "name": "Watergate",
+      "change": "Up 15"
+    },
+    {
+      "year": 2018,
+      "rank": 48,
+      "slug": "illuzion",
+      "name": "Illuzion Phuket",
+      "change": "Up 33"
+    },
+    {
+      "year": 2018,
+      "rank": 49,
+      "slug": "versuz",
+      "name": "Versuz",
+      "change": "Up 11"
+    },
+    {
+      "year": 2018,
+      "rank": 50,
+      "slug": "rex-club",
+      "name": "Rex Club",
+      "change": "Up 22"
+    },
+    {
+      "year": 2018,
+      "rank": 51,
+      "slug": "schimanski",
+      "name": "Schimanski",
+      "change": "New entry"
+    },
+    {
+      "year": 2018,
+      "rank": 52,
+      "slug": "concrete",
+      "name": "Concrete",
+      "change": "Up 11"
+    },
+    {
+      "year": 2018,
+      "rank": 53,
+      "slug": "razzmatazz",
+      "name": "Razzmatazz",
+      "change": "Up 22"
+    },
+    {
+      "year": 2018,
+      "rank": 54,
+      "slug": "matahari",
+      "name": "Matahari",
+      "change": "Up 15"
+    },
+    {
+      "year": 2018,
+      "rank": 55,
+      "slug": "duelbeat",
+      "name": "DUEL:BEAT",
+      "change": null
+    },
+    {
+      "year": 2018,
+      "rank": 56,
+      "slug": "womb",
+      "name": "WOMB",
+      "change": "Up 38"
+    },
+    {
+      "year": 2018,
+      "rank": 57,
+      "slug": "tresor",
+      "name": "Tresor",
+      "change": "Up 13"
+    },
+    {
+      "year": 2018,
+      "rank": 58,
+      "slug": "xoyo",
+      "name": "XOYO",
+      "change": "Up 6"
+    },
+    {
+      "year": 2018,
+      "rank": 59,
+      "slug": "tenax-club",
+      "name": "Tenax Club",
+      "change": null
+    },
+    {
+      "year": 2018,
+      "rank": 60,
+      "slug": "velvet",
+      "name": "Velvet",
+      "change": "Down 5"
+    },
+    {
+      "year": 2018,
+      "rank": 61,
+      "slug": "foundation-club",
+      "name": "Foundation Club",
+      "change": "Up 10"
+    },
+    {
+      "year": 2018,
+      "rank": 62,
+      "slug": "yalta-club",
+      "name": "Yalta Club",
+      "change": "Up 20"
+    },
+    {
+      "year": 2018,
+      "rank": 63,
+      "slug": "panama",
+      "name": "Panama",
+      "change": "Up 15"
+    },
+    {
+      "year": 2018,
+      "rank": 64,
+      "slug": "robert-johnson",
+      "name": "Robert Johnson",
+      "change": null
+    },
+    {
+      "year": 2018,
+      "rank": 65,
+      "slug": "space-plus",
+      "name": "Space Plus",
+      "change": "New entry"
+    },
+    {
+      "year": 2018,
+      "rank": 66,
+      "slug": "phonox",
+      "name": "Phonox",
+      "change": "Down 34"
+    },
+    {
+      "year": 2018,
+      "rank": 67,
+      "slug": "ce-la-vi",
+      "name": "Cé La Vi",
+      "change": "Up 13"
+    },
+    {
+      "year": 2018,
+      "rank": 68,
+      "slug": "guendalina",
+      "name": "Guendalina",
+      "change": "Down 9"
+    },
+    {
+      "year": 2018,
+      "rank": 69,
+      "slug": "sankeys-ibiza",
+      "name": "Sankeys Ibiza",
+      "change": "Up 9"
+    },
+    {
+      "year": 2018,
+      "rank": 70,
+      "slug": "sky-garden",
+      "name": "Sky Garden",
+      "change": "Up 18"
+    },
+    {
+      "year": 2018,
+      "rank": 71,
+      "slug": "mad-club",
+      "name": "MAD Club",
+      "change": "Up 12"
+    },
+    {
+      "year": 2018,
+      "rank": 72,
+      "slug": "palace",
+      "name": "The Palace",
+      "change": "Down 19"
+    },
+    {
+      "year": 2018,
+      "rank": 73,
+      "slug": "space-one",
+      "name": "Space One",
+      "change": "Up 18"
+    },
+    {
+      "year": 2018,
+      "rank": 74,
+      "slug": "eden",
+      "name": "Eden",
+      "change": null
+    },
+    {
+      "year": 2018,
+      "rank": 75,
+      "slug": "oqtagon",
+      "name": "Oqtagon",
+      "change": "New entry"
+    },
+    {
+      "year": 2018,
+      "rank": 76,
+      "slug": "de-school",
+      "name": "De School",
+      "change": "New entry"
+    },
+    {
+      "year": 2018,
+      "rank": 77,
+      "slug": "onyx",
+      "name": "Onyx",
+      "change": "Up 15"
+    },
+    {
+      "year": 2018,
+      "rank": 78,
+      "slug": "sos-club",
+      "name": "SOS Club",
+      "change": "Up 19"
+    },
+    {
+      "year": 2018,
+      "rank": 79,
+      "slug": "arma-17",
+      "name": "ARMA 17",
+      "change": "Up 8"
+    },
+    {
+      "year": 2018,
+      "rank": 80,
+      "slug": "heart-nightclub",
+      "name": "Heart Nightclub",
+      "change": "New entry"
+    },
+    {
+      "year": 2018,
+      "rank": 81,
+      "slug": "d-edge",
+      "name": "D-Edge",
+      "change": "Down 31"
+    },
+    {
+      "year": 2018,
+      "rank": 82,
+      "slug": "chinese-laundry",
+      "name": "Chinese Laundry",
+      "change": "Up 18"
+    },
+    {
+      "year": 2018,
+      "rank": 83,
+      "slug": "lux-fragil",
+      "name": "Lux Fragil",
+      "change": "Down 22"
+    },
+    {
+      "year": 2018,
+      "rank": 84,
+      "slug": "propaganda",
+      "name": "Propaganda",
+      "change": null
+    },
+    {
+      "year": 2018,
+      "rank": 85,
+      "slug": "jewel-nightclub",
+      "name": "Jewel Nightclub",
+      "change": "New entry"
+    },
+    {
+      "year": 2018,
+      "rank": 86,
+      "slug": "goa-club",
+      "name": "Goa Club",
+      "change": null
+    },
+    {
+      "year": 2018,
+      "rank": 87,
+      "slug": "halcyon",
+      "name": "Halcyon",
+      "change": "New entry"
+    },
+    {
+      "year": 2018,
+      "rank": 88,
+      "slug": "catwalk-disco-club",
+      "name": "Catwalk Disco & Club",
+      "change": "New entry"
+    },
+    {
+      "year": 2018,
+      "rank": 89,
+      "slug": "studio-338",
+      "name": "Studio 338",
+      "change": "Down 41"
+    },
+    {
+      "year": 2018,
+      "rank": 90,
+      "slug": "zig-zag",
+      "name": "Zig Zag",
+      "change": "Down 1"
+    },
+    {
+      "year": 2018,
+      "rank": 91,
+      "slug": "club-galame",
+      "name": "Club Galame",
+      "change": "New entry"
+    },
+    {
+      "year": 2018,
+      "rank": 92,
+      "slug": "colosseum-club",
+      "name": "Colosseum Club",
+      "change": "Down 34"
+    },
+    {
+      "year": 2018,
+      "rank": 93,
+      "slug": "e11even",
+      "name": "E11even",
+      "change": "Down 42"
+    },
+    {
+      "year": 2018,
+      "rank": 94,
+      "slug": "home-sydney",
+      "name": "Home Sydney",
+      "change": null
+    },
+    {
+      "year": 2018,
+      "rank": 95,
+      "slug": "club-space",
+      "name": "Club Space",
+      "change": "Down 48"
+    },
+    {
+      "year": 2018,
+      "rank": 96,
+      "slug": "ageha",
+      "name": "Ageha",
+      "change": "Down 17"
+    },
+    {
+      "year": 2018,
+      "rank": 97,
+      "slug": "house-of-yes",
+      "name": "House of Yes",
+      "change": "New entry"
+    },
+    {
+      "year": 2018,
+      "rank": 98,
+      "slug": "sub-club",
+      "name": "Sub Club",
+      "change": "Down 52"
+    },
+    {
+      "year": 2018,
+      "rank": 99,
+      "slug": "club-piccadilly",
+      "name": "Club Piccadilly",
+      "change": "New entry"
+    },
+    {
+      "year": 2018,
+      "rank": 100,
+      "slug": "coda",
+      "name": "Coda",
+      "change": "Down 5"
+    },
+    {
+      "year": 2019,
+      "rank": 1,
+      "slug": "green-valley",
+      "name": "GREENVALLEY",
+      "change": "Non-mover"
+    },
+    {
+      "year": 2019,
+      "rank": 2,
+      "slug": "echostage",
+      "name": "Echostage",
+      "change": "Up 2"
+    },
+    {
+      "year": 2019,
+      "rank": 3,
+      "slug": "ushuaia-ibiza",
+      "name": "Ushuaïa Ibiza",
+      "change": "Down 1"
+    },
+    {
+      "year": 2019,
+      "rank": 4,
+      "slug": "hi-ibiza",
+      "name": "Hï Ibiza",
+      "change": "Up 1"
+    },
+    {
+      "year": 2019,
+      "rank": 5,
+      "slug": "zouk-singapore",
+      "name": "Zouk Singapore",
+      "change": "Down 2"
+    },
+    {
+      "year": 2019,
+      "rank": 6,
+      "slug": "papaya",
+      "name": "Papaya Club",
+      "change": "Non-mover"
+    },
+    {
+      "year": 2019,
+      "rank": 7,
+      "slug": "octagon",
+      "name": "Octagon",
+      "change": "Non-mover"
+    },
+    {
+      "year": 2019,
+      "rank": 8,
+      "slug": "bootshaus",
+      "name": "Bootshaus",
+      "change": "Up 3"
+    },
+    {
+      "year": 2019,
+      "rank": 9,
+      "slug": "printworks-london",
+      "name": "Printworks London",
+      "change": "Up 5"
+    },
+    {
+      "year": 2019,
+      "rank": 10,
+      "slug": "berghain",
+      "name": "Berghain",
+      "change": "Non-mover"
+    },
+    {
+      "year": 2019,
+      "rank": 11,
+      "slug": "motion",
+      "name": "Motion",
+      "change": "Up 5"
+    },
+    {
+      "year": 2019,
+      "rank": 12,
+      "slug": "pacha-ibiza",
+      "name": "PACHA IBIZA",
+      "change": "Down 4"
+    },
+    {
+      "year": 2019,
+      "rank": 13,
+      "slug": "zouk-kl",
+      "name": "Zouk Kl",
+      "change": "Up 6"
+    },
+    {
+      "year": 2019,
+      "rank": 14,
+      "slug": "amnesia",
+      "name": "Amnesia",
+      "change": "Down 2"
+    },
+    {
+      "year": 2019,
+      "rank": 15,
+      "slug": "fabric",
+      "name": "fabric",
+      "change": "Down 6"
+    },
+    {
+      "year": 2019,
+      "rank": 16,
+      "slug": "white-dubai",
+      "name": "WHITE Dubai",
+      "change": "Up 4"
+    },
+    {
+      "year": 2019,
+      "rank": 17,
+      "slug": "exchange-la",
+      "name": "Exchange LA",
+      "change": "Up 5"
+    },
+    {
+      "year": 2019,
+      "rank": 18,
+      "slug": "guaba-beach-bar",
+      "name": "Guaba Beach Bar",
+      "change": "Down 1"
+    },
+    {
+      "year": 2019,
+      "rank": 19,
+      "slug": "aquarius",
+      "name": "Aquarius",
+      "change": "Up 6"
+    },
+    {
+      "year": 2019,
+      "rank": 20,
+      "slug": "elrow-row-14",
+      "name": "Elrow (Row 14)",
+      "change": "Up 1"
+    },
+    {
+      "year": 2019,
+      "rank": 21,
+      "slug": "dc-10",
+      "name": "DC-10",
+      "change": "Down 6"
+    },
+    {
+      "year": 2019,
+      "rank": 22,
+      "slug": "noa-beach-club",
+      "name": "Noa Beach Club",
+      "change": "Down 9"
+    },
+    {
+      "year": 2019,
+      "rank": 23,
+      "slug": "el-fortin",
+      "name": "El Fortin",
+      "change": "Up 3"
+    },
+    {
+      "year": 2019,
+      "rank": 24,
+      "slug": "output",
+      "name": "Output",
+      "change": "Up 4"
+    },
+    {
+      "year": 2019,
+      "rank": 25,
+      "slug": "laroc-club",
+      "name": "Laroc Club",
+      "change": "Up 4"
+    },
+    {
+      "year": 2019,
+      "rank": 26,
+      "slug": "warehouse-project",
+      "name": "The Warehouse Project",
+      "change": "Up 1"
+    },
+    {
+      "year": 2019,
+      "rank": 27,
+      "slug": "ministry-of-sound",
+      "name": "Ministry Of Sound",
+      "change": "Down 3"
+    },
+    {
+      "year": 2019,
+      "rank": 28,
+      "slug": "warung-beach-club",
+      "name": "Warung Beach Club",
+      "change": "Down 10"
+    },
+    {
+      "year": 2019,
+      "rank": 29,
+      "slug": "barbarellas-discotheque",
+      "name": "Barbarella's Discotheque",
+      "change": "Up 3"
+    },
+    {
+      "year": 2019,
+      "rank": 30,
+      "slug": "avalon-hollywood",
+      "name": "AVALON Hollywood",
+      "change": "Up 1"
+    },
+    {
+      "year": 2019,
+      "rank": 31,
+      "slug": "tobacco-dock",
+      "name": "Tobacco Dock",
+      "change": "Up 5"
+    },
+    {
+      "year": 2019,
+      "rank": 32,
+      "slug": "culture-club-revelin",
+      "name": "Culture Club Revelin",
+      "change": "Up 8"
+    },
+    {
+      "year": 2019,
+      "rank": 33,
+      "slug": "illuzion",
+      "name": "Illuzion Phuket",
+      "change": "Up 15"
+    },
+    {
+      "year": 2019,
+      "rank": 34,
+      "slug": "fabrik",
+      "name": "FABRIK",
+      "change": "Up 3"
+    },
+    {
+      "year": 2019,
+      "rank": 35,
+      "slug": "lost-beach-club",
+      "name": "Lost Beach Club",
+      "change": "Up 9"
+    },
+    {
+      "year": 2019,
+      "rank": 36,
+      "slug": "privilege",
+      "name": "Privilege",
+      "change": "Up 6"
+    },
+    {
+      "year": 2019,
+      "rank": 37,
+      "slug": "omnia",
+      "name": "OMNIA",
+      "change": "Down 14"
+    },
+    {
+      "year": 2019,
+      "rank": 38,
+      "slug": "beachclub",
+      "name": "Beachclub",
+      "change": "Up 5"
+    },
+    {
+      "year": 2019,
+      "rank": 39,
+      "slug": "hakkasan",
+      "name": "Hakkasan",
+      "change": "Down 9"
+    },
+    {
+      "year": 2019,
+      "rank": 40,
+      "slug": "versuz",
+      "name": "Versuz",
+      "change": "Up 9"
+    },
+    {
+      "year": 2019,
+      "rank": 41,
+      "slug": "rex-club",
+      "name": "Rex Club",
+      "change": "Up 9"
+    },
+    {
+      "year": 2019,
+      "rank": 42,
+      "slug": "watergate",
+      "name": "Watergate",
+      "change": "Up 5"
+    },
+    {
+      "year": 2019,
+      "rank": 43,
+      "slug": "concrete",
+      "name": "Concrete",
+      "change": "Up 9"
+    },
+    {
+      "year": 2019,
+      "rank": 44,
+      "slug": "cavo-paradiso",
+      "name": "Cavo Paradiso",
+      "change": "Down 6"
+    },
+    {
+      "year": 2019,
+      "rank": 45,
+      "slug": "duel-club",
+      "name": "Duel Club",
+      "change": "Up 10"
+    },
+    {
+      "year": 2019,
+      "rank": 46,
+      "slug": "marquee-nightclub-dayclub",
+      "name": "Marquee Nightclub & Dayclub",
+      "change": "Down 11"
+    },
+    {
+      "year": 2019,
+      "rank": 47,
+      "slug": "womb",
+      "name": "WOMB",
+      "change": "Up 9"
+    },
+    {
+      "year": 2019,
+      "rank": 48,
+      "slug": "yalta-club",
+      "name": "Yalta Club",
+      "change": "Up 14"
+    },
+    {
+      "year": 2019,
+      "rank": 49,
+      "slug": "xoyo",
+      "name": "XOYO",
+      "change": "Up 9"
+    },
+    {
+      "year": 2019,
+      "rank": 50,
+      "slug": "razzmatazz",
+      "name": "Razzmatazz",
+      "change": "Up 3"
+    },
+    {
+      "year": 2019,
+      "rank": 51,
+      "slug": "baum-club",
+      "name": "BAUM Club",
+      "change": "Down 12"
+    },
+    {
+      "year": 2019,
+      "rank": 52,
+      "slug": "academy-la",
+      "name": "Academy LA",
+      "change": "New entry"
+    },
+    {
+      "year": 2019,
+      "rank": 53,
+      "slug": "space-plus",
+      "name": "Space Plus",
+      "change": "Up 12"
+    },
+    {
+      "year": 2019,
+      "rank": 54,
+      "slug": "egg-ldn",
+      "name": "EGG LDN",
+      "change": "Down 20"
+    },
+    {
+      "year": 2019,
+      "rank": 55,
+      "slug": "panama",
+      "name": "Panama",
+      "change": "Up 8"
+    },
+    {
+      "year": 2019,
+      "rank": 56,
+      "slug": "kalypso",
+      "name": "Kalypso",
+      "change": "Down 23"
+    },
+    {
+      "year": 2019,
+      "rank": 57,
+      "slug": "de-school",
+      "name": "De School",
+      "change": "Up 19"
+    },
+    {
+      "year": 2019,
+      "rank": 58,
+      "slug": "cove-manila",
+      "name": "Cove Manila",
+      "change": "New entry"
+    },
+    {
+      "year": 2019,
+      "rank": 59,
+      "slug": "sky-garden",
+      "name": "Sky Garden",
+      "change": "Up 11"
+    },
+    {
+      "year": 2019,
+      "rank": 60,
+      "slug": "13-one-third",
+      "name": "1/3 One Third",
+      "change": "New entry"
+    },
+    {
+      "year": 2019,
+      "rank": 61,
+      "slug": "tresor",
+      "name": "Tresor",
+      "change": "Down 4"
+    },
+    {
+      "year": 2019,
+      "rank": 62,
+      "slug": "oqtagon",
+      "name": "Oqtagon",
+      "change": "Up 13"
+    },
+    {
+      "year": 2019,
+      "rank": 63,
+      "slug": "crobar",
+      "name": "Crobar",
+      "change": "New entry"
+    },
+    {
+      "year": 2019,
+      "rank": 64,
+      "slug": "eden",
+      "name": "Eden",
+      "change": "Up 10"
+    },
+    {
+      "year": 2019,
+      "rank": 65,
+      "slug": "sos-club",
+      "name": "SOS Club",
+      "change": "Up 13"
+    },
+    {
+      "year": 2019,
+      "rank": 66,
+      "slug": "digital-newcastle",
+      "name": "Digital Newcastle",
+      "change": "Down 21"
+    },
+    {
+      "year": 2019,
+      "rank": 67,
+      "slug": "d-edge",
+      "name": "D-Edge",
+      "change": "Up 14"
+    },
+    {
+      "year": 2019,
+      "rank": 68,
+      "slug": "1900-le-theatre",
+      "name": "1900 LE THÉÂTRE",
+      "change": "New entry"
+    },
+    {
+      "year": 2019,
+      "rank": 69,
+      "slug": "mad-club",
+      "name": "MAD Club",
+      "change": "Up 2"
+    },
+    {
+      "year": 2019,
+      "rank": 70,
+      "slug": "guendalina",
+      "name": "Guendalina",
+      "change": "Down 2"
+    },
+    {
+      "year": 2019,
+      "rank": 71,
+      "slug": "onyx",
+      "name": "Onyx",
+      "change": "Up 6"
+    },
+    {
+      "year": 2019,
+      "rank": 72,
+      "slug": "myst",
+      "name": "Myst",
+      "change": "Down 31"
+    },
+    {
+      "year": 2019,
+      "rank": 73,
+      "slug": "chroma",
+      "name": "Chroma",
+      "change": "New entry"
+    },
+    {
+      "year": 2019,
+      "rank": 74,
+      "slug": "encore-beach-club",
+      "name": "Encore Beach Club",
+      "change": "New entry"
+    },
+    {
+      "year": 2019,
+      "rank": 75,
+      "slug": "club-galame",
+      "name": "Club Galame",
+      "change": "Up 16"
+    },
+    {
+      "year": 2019,
+      "rank": 76,
+      "slug": "halcyon",
+      "name": "Halcyon",
+      "change": "Up 11"
+    },
+    {
+      "year": 2019,
+      "rank": 77,
+      "slug": "catwalk-disco-club",
+      "name": "Catwalk Disco & Club",
+      "change": "Up 11"
+    },
+    {
+      "year": 2019,
+      "rank": 78,
+      "slug": "chinese-laundry",
+      "name": "Chinese Laundry",
+      "change": "Up 4"
+    },
+    {
+      "year": 2019,
+      "rank": 79,
+      "slug": "elsewhere",
+      "name": "Elsewhere",
+      "change": "New entry"
+    },
+    {
+      "year": 2019,
+      "rank": 80,
+      "slug": "envy",
+      "name": "Envy",
+      "change": "New entry"
+    },
+    {
+      "year": 2019,
+      "rank": 81,
+      "slug": "coda",
+      "name": "Coda",
+      "change": "Up 19"
+    },
+    {
+      "year": 2019,
+      "rank": 82,
+      "slug": "lux-fragil",
+      "name": "Lux Fragil",
+      "change": "Up 1"
+    },
+    {
+      "year": 2019,
+      "rank": 83,
+      "slug": "propaganda",
+      "name": "Propaganda",
+      "change": "Up 1"
+    },
+    {
+      "year": 2019,
+      "rank": 84,
+      "slug": "elements",
+      "name": "Elements",
+      "change": "Down 38"
+    },
+    {
+      "year": 2019,
+      "rank": 85,
+      "slug": "studio-338",
+      "name": "Studio 338",
+      "change": "Up 4"
+    },
+    {
+      "year": 2019,
+      "rank": 86,
+      "slug": "goa-club",
+      "name": "Goa Club",
+      "change": "New entry"
+    },
+    {
+      "year": 2019,
+      "rank": 87,
+      "slug": "club-space",
+      "name": "Club Space",
+      "change": "Up 8"
+    },
+    {
+      "year": 2019,
+      "rank": 88,
+      "slug": "ce-la-vi",
+      "name": "Cé La Vi",
+      "change": "Down 21"
+    },
+    {
+      "year": 2019,
+      "rank": 89,
+      "slug": "la-feria",
+      "name": "La Feria",
+      "change": "New entry"
+    },
+    {
+      "year": 2019,
+      "rank": 90,
+      "slug": "phonox",
+      "name": "Phonox",
+      "change": "Down 24"
+    },
+    {
+      "year": 2019,
+      "rank": 91,
+      "slug": "house-of-yes",
+      "name": "House of Yes",
+      "change": "Up 6"
+    },
+    {
+      "year": 2019,
+      "rank": 92,
+      "slug": "stereo",
+      "name": "Stereo",
+      "change": "New entry"
+    },
+    {
+      "year": 2019,
+      "rank": 93,
+      "slug": "district-8",
+      "name": "District 8",
+      "change": "New entry"
+    },
+    {
+      "year": 2019,
+      "rank": 94,
+      "slug": "salon-zur-wilden-renate",
+      "name": "Salon - Zur Wilden Renate",
+      "change": "New entry"
+    },
+    {
+      "year": 2019,
+      "rank": 95,
+      "slug": "ageha",
+      "name": "Ageha",
+      "change": "Up 1"
+    },
+    {
+      "year": 2019,
+      "rank": 96,
+      "slug": "octava",
+      "name": "Octava",
+      "change": "New entry"
+    },
+    {
+      "year": 2019,
+      "rank": 97,
+      "slug": "colosseum-club",
+      "name": "Colosseum Club",
+      "change": "Down 5"
+    },
+    {
+      "year": 2019,
+      "rank": 98,
+      "slug": "home-sydney",
+      "name": "Home Sydney",
+      "change": "Down 4"
+    },
+    {
+      "year": 2019,
+      "rank": 99,
+      "slug": "grand-factory",
+      "name": "The Grand Factory",
+      "change": "New entry"
+    },
+    {
+      "year": 2019,
+      "rank": 100,
+      "slug": "sub-club",
+      "name": "Sub Club",
+      "change": "Down 2"
+    },
+    {
+      "year": 2020,
+      "rank": 1,
+      "slug": "green-valley",
+      "name": "GREENVALLEY",
+      "change": "Non-mover"
+    },
+    {
+      "year": 2020,
+      "rank": 2,
+      "slug": "hi-ibiza",
+      "name": "Hï Ibiza",
+      "change": "Up 2"
+    },
+    {
+      "year": 2020,
+      "rank": 3,
+      "slug": "echostage",
+      "name": "Echostage",
+      "change": "Down 1"
+    },
+    {
+      "year": 2020,
+      "rank": 4,
+      "slug": "ushuaia-ibiza",
+      "name": "Ushuaïa Ibiza",
+      "change": "Down 1"
+    },
+    {
+      "year": 2020,
+      "rank": 5,
+      "slug": "printworks-london",
+      "name": "Printworks London",
+      "change": "Up 4"
+    },
+    {
+      "year": 2020,
+      "rank": 6,
+      "slug": "bootshaus",
+      "name": "Bootshaus",
+      "change": "Up 2"
+    },
+    {
+      "year": 2020,
+      "rank": 7,
+      "slug": "papaya",
+      "name": "Papaya Club",
+      "change": "Down 1"
+    },
+    {
+      "year": 2020,
+      "rank": 8,
+      "slug": "berghain",
+      "name": "Berghain",
+      "change": "Up 2"
+    },
+    {
+      "year": 2020,
+      "rank": 9,
+      "slug": "zouk-singapore",
+      "name": "Zouk Singapore",
+      "change": "Down 4"
+    },
+    {
+      "year": 2020,
+      "rank": 10,
+      "slug": "octagon",
+      "name": "Octagon",
+      "change": "Down 3"
+    },
+    {
+      "year": 2020,
+      "rank": 11,
+      "slug": "warehouse-project",
+      "name": "The Warehouse Project",
+      "change": "Up 15"
+    },
+    {
+      "year": 2020,
+      "rank": 12,
+      "slug": "amnesia",
+      "name": "Amnesia",
+      "change": "Up 2"
+    },
+    {
+      "year": 2020,
+      "rank": 13,
+      "slug": "exchange-la",
+      "name": "Exchange LA",
+      "change": "Up 4"
+    },
+    {
+      "year": 2020,
+      "rank": 14,
+      "slug": "motion",
+      "name": "Motion",
+      "change": "Down 3"
+    },
+    {
+      "year": 2020,
+      "rank": 15,
+      "slug": "white-dubai",
+      "name": "WHITE Dubai",
+      "change": "Up 1"
+    },
+    {
+      "year": 2020,
+      "rank": 16,
+      "slug": "pacha-ibiza",
+      "name": "PACHA IBIZA",
+      "change": "Down 4"
+    },
+    {
+      "year": 2020,
+      "rank": 17,
+      "slug": "aquarius",
+      "name": "Aquarius",
+      "change": "Up 2"
+    },
+    {
+      "year": 2020,
+      "rank": 18,
+      "slug": "laroc-club",
+      "name": "Laroc Club",
+      "change": "Up 7"
+    },
+    {
+      "year": 2020,
+      "rank": 19,
+      "slug": "dc-10",
+      "name": "DC-10",
+      "change": "Up 2"
+    },
+    {
+      "year": 2020,
+      "rank": 20,
+      "slug": "warung-beach-club",
+      "name": "Warung Beach Club",
+      "change": "Up 8"
+    },
+    {
+      "year": 2020,
+      "rank": 21,
+      "slug": "illuzion",
+      "name": "Illuzion Phuket",
+      "change": "Up 12"
+    },
+    {
+      "year": 2020,
+      "rank": 22,
+      "slug": "guaba-beach-bar",
+      "name": "Guaba Beach Bar",
+      "change": "Down 4"
+    },
+    {
+      "year": 2020,
+      "rank": 23,
+      "slug": "elrow-row-14",
+      "name": "Elrow (Row 14)",
+      "change": "Down 3"
+    },
+    {
+      "year": 2020,
+      "rank": 24,
+      "slug": "fabric",
+      "name": "fabric",
+      "change": "Down 9"
+    },
+    {
+      "year": 2020,
+      "rank": 25,
+      "slug": "culture-club-revelin",
+      "name": "Culture Club Revelin",
+      "change": "Up 7"
+    },
+    {
+      "year": 2020,
+      "rank": 26,
+      "slug": "ministry-of-sound",
+      "name": "Ministry Of Sound",
+      "change": "Up 1"
+    },
+    {
+      "year": 2020,
+      "rank": 27,
+      "slug": "zouk-kl",
+      "name": "Zouk Kl",
+      "change": "Down 14"
+    },
+    {
+      "year": 2020,
+      "rank": 28,
+      "slug": "barbarellas-discotheque",
+      "name": "Barbarella's Discotheque",
+      "change": "Up 1"
+    },
+    {
+      "year": 2020,
+      "rank": 29,
+      "slug": "beachclub",
+      "name": "Beachclub",
+      "change": "Up 9"
+    },
+    {
+      "year": 2020,
+      "rank": 30,
+      "slug": "omnia",
+      "name": "OMNIA",
+      "change": "Up 7"
+    },
+    {
+      "year": 2020,
+      "rank": 31,
+      "slug": "lost-beach-club",
+      "name": "Lost Beach Club",
+      "change": "Up 4"
+    },
+    {
+      "year": 2020,
+      "rank": 32,
+      "slug": "el-fortin",
+      "name": "El Fortin",
+      "change": "Down 9"
+    },
+    {
+      "year": 2020,
+      "rank": 33,
+      "slug": "fabrik",
+      "name": "FABRIK",
+      "change": "Up 1"
+    },
+    {
+      "year": 2020,
+      "rank": 34,
+      "slug": "versuz",
+      "name": "Versuz",
+      "change": "Up 6"
+    },
+    {
+      "year": 2020,
+      "rank": 35,
+      "slug": "avant-gardner-brooklyn-mirage",
+      "name": "Avant Gardner & The Brooklyn Mirage",
+      "change": "New entry"
+    },
+    {
+      "year": 2020,
+      "rank": 36,
+      "slug": "privilege",
+      "name": "Privilege",
+      "change": "Non-mover"
+    },
+    {
+      "year": 2020,
+      "rank": 37,
+      "slug": "space-plus-shanghai",
+      "name": "Space Plus Shanghai",
+      "change": "New entry"
+    },
+    {
+      "year": 2020,
+      "rank": 38,
+      "slug": "tobacco-dock",
+      "name": "Tobacco Dock",
+      "change": "Down 7"
+    },
+    {
+      "year": 2020,
+      "rank": 39,
+      "slug": "de-school",
+      "name": "De School",
+      "change": "Up 18"
+    },
+    {
+      "year": 2020,
+      "rank": 40,
+      "slug": "rex-club",
+      "name": "Rex Club",
+      "change": "Up 1"
+    },
+    {
+      "year": 2020,
+      "rank": 41,
+      "slug": "noa-beach-club",
+      "name": "Noa Beach Club",
+      "change": "Down 19"
+    },
+    {
+      "year": 2020,
+      "rank": 42,
+      "slug": "yalta-club",
+      "name": "Yalta Club",
+      "change": "Up 6"
+    },
+    {
+      "year": 2020,
+      "rank": 43,
+      "slug": "hakkasan",
+      "name": "Hakkasan",
+      "change": "Down 4"
+    },
+    {
+      "year": 2020,
+      "rank": 44,
+      "slug": "academy-la",
+      "name": "Academy LA",
+      "change": "Up 8"
+    },
+    {
+      "year": 2020,
+      "rank": 45,
+      "slug": "marquee-nightclub-dayclub",
+      "name": "Marquee Nightclub & Dayclub",
+      "change": "Up 1"
+    },
+    {
+      "year": 2020,
+      "rank": 46,
+      "slug": "watergate",
+      "name": "Watergate",
+      "change": "Down 4"
+    },
+    {
+      "year": 2020,
+      "rank": 47,
+      "slug": "oqtagon",
+      "name": "Oqtagon",
+      "change": "Up 15"
+    },
+    {
+      "year": 2020,
+      "rank": 48,
+      "slug": "avalon-hollywood",
+      "name": "AVALON Hollywood",
+      "change": "Down 18"
+    },
+    {
+      "year": 2020,
+      "rank": 49,
+      "slug": "playhouse",
+      "name": "Playhouse",
+      "change": "New entry"
+    },
+    {
+      "year": 2020,
+      "rank": 50,
+      "slug": "razzmatazz",
+      "name": "Razzmatazz",
+      "change": "Non-mover"
+    },
+    {
+      "year": 2020,
+      "rank": 51,
+      "slug": "crobar",
+      "name": "Crobar",
+      "change": "Up 12"
+    },
+    {
+      "year": 2020,
+      "rank": 52,
+      "slug": "e1",
+      "name": "E1",
+      "change": "New entry"
+    },
+    {
+      "year": 2020,
+      "rank": 53,
+      "slug": "tresor",
+      "name": "Tresor",
+      "change": "Up 8"
+    },
+    {
+      "year": 2020,
+      "rank": 54,
+      "slug": "cavo-paradiso",
+      "name": "Cavo Paradiso",
+      "change": "Down 10"
+    },
+    {
+      "year": 2020,
+      "rank": 55,
+      "slug": "superface",
+      "name": "Superface",
+      "change": "New entry"
+    },
+    {
+      "year": 2020,
+      "rank": 56,
+      "slug": "eden",
+      "name": "Eden",
+      "change": "Up 8"
+    },
+    {
+      "year": 2020,
+      "rank": 57,
+      "slug": "ai-nightclub",
+      "name": "Ai-X",
+      "change": "New entry"
+    },
+    {
+      "year": 2020,
+      "rank": 58,
+      "slug": "womb",
+      "name": "WOMB",
+      "change": "Down 11"
+    },
+    {
+      "year": 2020,
+      "rank": 59,
+      "slug": "chroma",
+      "name": "Chroma",
+      "change": "Up 14"
+    },
+    {
+      "year": 2020,
+      "rank": 60,
+      "slug": "kalypso",
+      "name": "Kalypso",
+      "change": "Down 4"
+    },
+    {
+      "year": 2020,
+      "rank": 61,
+      "slug": "mad-club",
+      "name": "MAD Club",
+      "change": "Up 8"
+    },
+    {
+      "year": 2020,
+      "rank": 62,
+      "slug": "warp-shinjuku",
+      "name": "WARP Shinjuku",
+      "change": "New entry"
+    },
+    {
+      "year": 2020,
+      "rank": 63,
+      "slug": "13-one-third",
+      "name": "1/3 One Third",
+      "change": "Down 3"
+    },
+    {
+      "year": 2020,
+      "rank": 64,
+      "slug": "onyx",
+      "name": "Onyx",
+      "change": "Up 7"
+    },
+    {
+      "year": 2020,
+      "rank": 65,
+      "slug": "d-edge",
+      "name": "D-Edge",
+      "change": "Up 2"
+    },
+    {
+      "year": 2020,
+      "rank": 66,
+      "slug": "digital-newcastle",
+      "name": "Digital Newcastle",
+      "change": "Non-mover"
+    },
+    {
+      "year": 2020,
+      "rank": 67,
+      "slug": "xoyo",
+      "name": "XOYO",
+      "change": "Down 18"
+    },
+    {
+      "year": 2020,
+      "rank": 68,
+      "slug": "halcyon",
+      "name": "Halcyon",
+      "change": "Up 8"
+    },
+    {
+      "year": 2020,
+      "rank": 69,
+      "slug": "club-illusion",
+      "name": "Club Illusion",
+      "change": "New entry"
+    },
+    {
+      "year": 2020,
+      "rank": 70,
+      "slug": "insanity",
+      "name": "Insanity",
+      "change": "New entry"
+    },
+    {
+      "year": 2020,
+      "rank": 71,
+      "slug": "stellar-night-club",
+      "name": "Stellar Night Club",
+      "change": "New entry"
+    },
+    {
+      "year": 2020,
+      "rank": 72,
+      "slug": "envy",
+      "name": "Envy",
+      "change": "Up 8"
+    },
+    {
+      "year": 2020,
+      "rank": 73,
+      "slug": "sos-club",
+      "name": "SOS Club",
+      "change": "Down 8"
+    },
+    {
+      "year": 2020,
+      "rank": 74,
+      "slug": "coda",
+      "name": "Coda",
+      "change": "Up 7"
+    },
+    {
+      "year": 2020,
+      "rank": 75,
+      "slug": "studio-338",
+      "name": "Studio 338",
+      "change": "Up 10"
+    },
+    {
+      "year": 2020,
+      "rank": 76,
+      "slug": "encore-beach-club",
+      "name": "Encore Beach Club",
+      "change": "Down 2"
+    },
+    {
+      "year": 2020,
+      "rank": 77,
+      "slug": "guendalina",
+      "name": "Guendalina",
+      "change": "Down 7"
+    },
+    {
+      "year": 2020,
+      "rank": 78,
+      "slug": "lux-fragil",
+      "name": "Lux Fragil",
+      "change": "Up 4"
+    },
+    {
+      "year": 2020,
+      "rank": 79,
+      "slug": "ce-la-vi",
+      "name": "Cé La Vi",
+      "change": "Up 9"
+    },
+    {
+      "year": 2020,
+      "rank": 80,
+      "slug": "first",
+      "name": "First",
+      "change": "New entry"
+    },
+    {
+      "year": 2020,
+      "rank": 81,
+      "slug": "club-space",
+      "name": "Club Space",
+      "change": "Up 6"
+    },
+    {
+      "year": 2020,
+      "rank": 82,
+      "slug": "panama",
+      "name": "Panama",
+      "change": "Down 27"
+    },
+    {
+      "year": 2020,
+      "rank": 83,
+      "slug": "goa-club",
+      "name": "Goa Club",
+      "change": "Up 3"
+    },
+    {
+      "year": 2020,
+      "rank": 84,
+      "slug": "elsewhere",
+      "name": "Elsewhere",
+      "change": "Down 5"
+    },
+    {
+      "year": 2020,
+      "rank": 85,
+      "slug": "la-feria",
+      "name": "La Feria",
+      "change": "Up 4"
+    },
+    {
+      "year": 2020,
+      "rank": 86,
+      "slug": "grand-factory",
+      "name": "The Grand Factory",
+      "change": "Up 13"
+    },
+    {
+      "year": 2020,
+      "rank": 87,
+      "slug": "egg-ldn",
+      "name": "EGG LDN",
+      "change": "Down 33"
+    },
+    {
+      "year": 2020,
+      "rank": 88,
+      "slug": "catwalk-disco-club",
+      "name": "Catwalk Disco & Club",
+      "change": "Down 11"
+    },
+    {
+      "year": 2020,
+      "rank": 89,
+      "slug": "duel-club",
+      "name": "Duel Club",
+      "change": "Down 44"
+    },
+    {
+      "year": 2020,
+      "rank": 90,
+      "slug": "lxxy",
+      "name": "LXXY",
+      "change": "New entry"
+    },
+    {
+      "year": 2020,
+      "rank": 91,
+      "slug": "garten",
+      "name": "The Gärten",
+      "change": "New entry"
+    },
+    {
+      "year": 2020,
+      "rank": 92,
+      "slug": "space-plus-nanjing",
+      "name": "Space Plus Nanjing",
+      "change": "New entry"
+    },
+    {
+      "year": 2020,
+      "rank": 93,
+      "slug": "club-galame",
+      "name": "Club Galame",
+      "change": "Down 18"
+    },
+    {
+      "year": 2020,
+      "rank": 94,
+      "slug": "nitsa",
+      "name": "Nitsa",
+      "change": null
+    },
+    {
+      "year": 2020,
+      "rank": 95,
+      "slug": "dehors-brut",
+      "name": "Dehors Brut",
+      "change": "New entry"
+    },
+    {
+      "year": 2020,
+      "rank": 96,
+      "slug": "warehouse",
+      "name": "Warehouse",
+      "change": "New entry"
+    },
+    {
+      "year": 2020,
+      "rank": 97,
+      "slug": "district-8",
+      "name": "District 8",
+      "change": "Down 4"
+    },
+    {
+      "year": 2020,
+      "rank": 98,
+      "slug": "sub-club",
+      "name": "Sub Club",
+      "change": "Up 2"
+    },
+    {
+      "year": 2020,
+      "rank": 99,
+      "slug": "octava",
+      "name": "Octava",
+      "change": "Down 3"
+    },
+    {
+      "year": 2020,
+      "rank": 100,
+      "slug": "grand",
+      "name": "The Grand",
+      "change": "New entry"
+    },
+    {
+      "year": 2021,
+      "rank": 1,
+      "slug": "echostage",
+      "name": "Echostage",
+      "change": "Up 2"
+    },
+    {
+      "year": 2021,
+      "rank": 2,
+      "slug": "green-valley",
+      "name": "GREENVALLEY",
+      "change": "Down 1"
+    },
+    {
+      "year": 2021,
+      "rank": 3,
+      "slug": "hi-ibiza",
+      "name": "Hï Ibiza",
+      "change": "Down 1"
+    },
+    {
+      "year": 2021,
+      "rank": 4,
+      "slug": "ushuaia-ibiza",
+      "name": "Ushuaïa Ibiza",
+      "change": "Non-mover"
+    },
+    {
+      "year": 2021,
+      "rank": 5,
+      "slug": "bootshaus",
+      "name": "Bootshaus",
+      "change": "Up 1"
+    },
+    {
+      "year": 2021,
+      "rank": 6,
+      "slug": "berghain",
+      "name": "Berghain",
+      "change": "Up 2"
+    },
+    {
+      "year": 2021,
+      "rank": 7,
+      "slug": "printworks-london",
+      "name": "Printworks London",
+      "change": "Down 2"
+    },
+    {
+      "year": 2021,
+      "rank": 8,
+      "slug": "papaya",
+      "name": "Papaya Club",
+      "change": "Down 1"
+    },
+    {
+      "year": 2021,
+      "rank": 9,
+      "slug": "warehouse-project",
+      "name": "The Warehouse Project",
+      "change": "Up 2"
+    },
+    {
+      "year": 2021,
+      "rank": 10,
+      "slug": "exchange-la",
+      "name": "Exchange LA",
+      "change": "Up 3"
+    },
+    {
+      "year": 2021,
+      "rank": 11,
+      "slug": "zouk-singapore",
+      "name": "Zouk Singapore",
+      "change": "Down 2"
+    },
+    {
+      "year": 2021,
+      "rank": 12,
+      "slug": "laroc-club",
+      "name": "Laroc Club",
+      "change": "Up 6"
+    },
+    {
+      "year": 2021,
+      "rank": 13,
+      "slug": "fabric",
+      "name": "fabric",
+      "change": "Up 11"
+    },
+    {
+      "year": 2021,
+      "rank": 14,
+      "slug": "motion",
+      "name": "Motion",
+      "change": "Non-mover"
+    },
+    {
+      "year": 2021,
+      "rank": 15,
+      "slug": "amnesia",
+      "name": "Amnesia",
+      "change": "Down 3"
+    },
+    {
+      "year": 2021,
+      "rank": 16,
+      "slug": "illuzion",
+      "name": "Illuzion Phuket",
+      "change": "Up 5"
+    },
+    {
+      "year": 2021,
+      "rank": 17,
+      "slug": "aquarius",
+      "name": "Aquarius",
+      "change": "Non-mover"
+    },
+    {
+      "year": 2021,
+      "rank": 18,
+      "slug": "pacha-ibiza",
+      "name": "PACHA IBIZA",
+      "change": "Down 2"
+    },
+    {
+      "year": 2021,
+      "rank": 19,
+      "slug": "warung-beach-club",
+      "name": "Warung Beach Club",
+      "change": "Up 1"
+    },
+    {
+      "year": 2021,
+      "rank": 20,
+      "slug": "white-dubai",
+      "name": "WHITE Dubai",
+      "change": "Down 5"
+    },
+    {
+      "year": 2021,
+      "rank": 21,
+      "slug": "omnia",
+      "name": "OMNIA",
+      "change": "Up 9"
+    },
+    {
+      "year": 2021,
+      "rank": 22,
+      "slug": "space-plus",
+      "name": "Space Plus",
+      "change": "New entry"
+    },
+    {
+      "year": 2021,
+      "rank": 23,
+      "slug": "dc-10",
+      "name": "DC-10",
+      "change": "Down 4"
+    },
+    {
+      "year": 2021,
+      "rank": 24,
+      "slug": "13-one-third",
+      "name": "1/3 One Third",
+      "change": "Up 39"
+    },
+    {
+      "year": 2021,
+      "rank": 25,
+      "slug": "lost-beach-club",
+      "name": "Lost Beach Club",
+      "change": "Up 6"
+    },
+    {
+      "year": 2021,
+      "rank": 26,
+      "slug": "culture-club-revelin",
+      "name": "Culture Club Revelin",
+      "change": "Down 1"
+    },
+    {
+      "year": 2021,
+      "rank": 27,
+      "slug": "rex-club",
+      "name": "Rex Club",
+      "change": "Up 13"
+    },
+    {
+      "year": 2021,
+      "rank": 28,
+      "slug": "yalta-club",
+      "name": "Yalta Club",
+      "change": "Up 14"
+    },
+    {
+      "year": 2021,
+      "rank": 29,
+      "slug": "tobacco-dock",
+      "name": "Tobacco Dock",
+      "change": "Up 9"
+    },
+    {
+      "year": 2021,
+      "rank": 30,
+      "slug": "play-house",
+      "name": "PLAY HOUSE",
+      "change": "Up 19"
+    },
+    {
+      "year": 2021,
+      "rank": 31,
+      "slug": "elrow-row-14",
+      "name": "Elrow (Row 14)",
+      "change": "Down 8"
+    },
+    {
+      "year": 2021,
+      "rank": 32,
+      "slug": "avant-gardner-brooklyn-mirage",
+      "name": "Avant Gardner & The Brooklyn Mirage",
+      "change": "Up 3"
+    },
+    {
+      "year": 2021,
+      "rank": 33,
+      "slug": "zouk-kl",
+      "name": "Zouk Kl",
+      "change": "Down 6"
+    },
+    {
+      "year": 2021,
+      "rank": 34,
+      "slug": "guaba-beach-bar",
+      "name": "Guaba Beach Bar",
+      "change": "Down 12"
+    },
+    {
+      "year": 2021,
+      "rank": 35,
+      "slug": "ministry-of-sound",
+      "name": "Ministry Of Sound",
+      "change": "Down 9"
+    },
+    {
+      "year": 2021,
+      "rank": 36,
+      "slug": "watergate",
+      "name": "Watergate",
+      "change": "Up 10"
+    },
+    {
+      "year": 2021,
+      "rank": 37,
+      "slug": "barbarellas-discotheque",
+      "name": "Barbarella's Discotheque",
+      "change": "Down 9"
+    },
+    {
+      "year": 2021,
+      "rank": 38,
+      "slug": "fabrik",
+      "name": "FABRIK",
+      "change": "Down 5"
+    },
+    {
+      "year": 2021,
+      "rank": 39,
+      "slug": "hakkasan",
+      "name": "Hakkasan",
+      "change": "Up 4"
+    },
+    {
+      "year": 2021,
+      "rank": 40,
+      "slug": "marquee-nightclub-dayclub",
+      "name": "Marquee Nightclub & Dayclub",
+      "change": "Up 5"
+    },
+    {
+      "year": 2021,
+      "rank": 41,
+      "slug": "academy-la",
+      "name": "Academy LA",
+      "change": "Up 3"
+    },
+    {
+      "year": 2021,
+      "rank": 42,
+      "slug": "versuz",
+      "name": "Versuz",
+      "change": "Down 8"
+    },
+    {
+      "year": 2021,
+      "rank": 43,
+      "slug": "privilege",
+      "name": "Privilege",
+      "change": "Down 7"
+    },
+    {
+      "year": 2021,
+      "rank": 44,
+      "slug": "noa-beach-club",
+      "name": "Noa Beach Club",
+      "change": "Down 3"
+    },
+    {
+      "year": 2021,
+      "rank": 45,
+      "slug": "wave-club",
+      "name": "WAVE Club",
+      "change": "New entry"
+    },
+    {
+      "year": 2021,
+      "rank": 46,
+      "slug": "razzmatazz",
+      "name": "Razzmatazz",
+      "change": "Up 4"
+    },
+    {
+      "year": 2021,
+      "rank": 47,
+      "slug": "beachclub",
+      "name": "Beachclub",
+      "change": "Down 18"
+    },
+    {
+      "year": 2021,
+      "rank": 48,
+      "slug": "ai-nightclub",
+      "name": "Ai-X",
+      "change": "Up 9"
+    },
+    {
+      "year": 2021,
+      "rank": 49,
+      "slug": "el-fortin",
+      "name": "El Fortin",
+      "change": "Down 17"
+    },
+    {
+      "year": 2021,
+      "rank": 50,
+      "slug": "club-space",
+      "name": "Club Space",
+      "change": "Up 31"
+    },
+    {
+      "year": 2021,
+      "rank": 51,
+      "slug": "club-galame",
+      "name": "Club Galame",
+      "change": "Up 42"
+    },
+    {
+      "year": 2021,
+      "rank": 52,
+      "slug": "1900-le-theatre",
+      "name": "1900 LE THÉÂTRE",
+      "change": null
+    },
+    {
+      "year": 2021,
+      "rank": 53,
+      "slug": "warp-shinjuku",
+      "name": "WARP Shinjuku",
+      "change": "Up 9"
+    },
+    {
+      "year": 2021,
+      "rank": 54,
+      "slug": "mad-club",
+      "name": "MAD Club",
+      "change": "Up 7"
+    },
+    {
+      "year": 2021,
+      "rank": 55,
+      "slug": "eden",
+      "name": "Eden",
+      "change": "Up 1"
+    },
+    {
+      "year": 2021,
+      "rank": 56,
+      "slug": "crobar",
+      "name": "Crobar",
+      "change": "Down 5"
+    },
+    {
+      "year": 2021,
+      "rank": 57,
+      "slug": "avalon-hollywood",
+      "name": "AVALON Hollywood",
+      "change": "Down 9"
+    },
+    {
+      "year": 2021,
+      "rank": 58,
+      "slug": "studio-338",
+      "name": "Studio 338",
+      "change": "Up 17"
+    },
+    {
+      "year": 2021,
+      "rank": 59,
+      "slug": "first",
+      "name": "First",
+      "change": "Up 21"
+    },
+    {
+      "year": 2021,
+      "rank": 60,
+      "slug": "tresor",
+      "name": "Tresor",
+      "change": "Down 7"
+    },
+    {
+      "year": 2021,
+      "rank": 61,
+      "slug": "e1",
+      "name": "E1",
+      "change": "Down 9"
+    },
+    {
+      "year": 2021,
+      "rank": 62,
+      "slug": "catwalk-disco-club",
+      "name": "Catwalk Disco & Club",
+      "change": "Up 26"
+    },
+    {
+      "year": 2021,
+      "rank": 63,
+      "slug": "openpie-party-space",
+      "name": "Openpie Party Space",
+      "change": "New entry"
+    },
+    {
+      "year": 2021,
+      "rank": 64,
+      "slug": "insanity",
+      "name": "Insanity",
+      "change": "Up 6"
+    },
+    {
+      "year": 2021,
+      "rank": 65,
+      "slug": "stellar-night-club",
+      "name": "Stellar Night Club",
+      "change": "Up 6"
+    },
+    {
+      "year": 2021,
+      "rank": 66,
+      "slug": "kalypso",
+      "name": "Kalypso",
+      "change": "Down 6"
+    },
+    {
+      "year": 2021,
+      "rank": 67,
+      "slug": "womb",
+      "name": "WOMB",
+      "change": "Down 9"
+    },
+    {
+      "year": 2021,
+      "rank": 68,
+      "slug": "cavo-paradiso",
+      "name": "Cavo Paradiso",
+      "change": "Down 14"
+    },
+    {
+      "year": 2021,
+      "rank": 69,
+      "slug": "guendalina",
+      "name": "Guendalina",
+      "change": "Up 8"
+    },
+    {
+      "year": 2021,
+      "rank": 70,
+      "slug": "goa-club",
+      "name": "Goa Club",
+      "change": "Up 13"
+    },
+    {
+      "year": 2021,
+      "rank": 71,
+      "slug": "otkun",
+      "name": "OTkun",
+      "change": "New entry"
+    },
+    {
+      "year": 2021,
+      "rank": 72,
+      "slug": "elsewhere",
+      "name": "Elsewhere",
+      "change": "Up 12"
+    },
+    {
+      "year": 2021,
+      "rank": 73,
+      "slug": "octan",
+      "name": "Octan",
+      "change": "New entry"
+    },
+    {
+      "year": 2021,
+      "rank": 74,
+      "slug": "onyx",
+      "name": "Onyx",
+      "change": "Down 10"
+    },
+    {
+      "year": 2021,
+      "rank": 75,
+      "slug": "club-illusion",
+      "name": "Club Illusion",
+      "change": "Down 6"
+    },
+    {
+      "year": 2021,
+      "rank": 76,
+      "slug": "d-edge",
+      "name": "D-Edge",
+      "change": "Down 11"
+    },
+    {
+      "year": 2021,
+      "rank": 77,
+      "slug": "coda",
+      "name": "Coda",
+      "change": "Down 3"
+    },
+    {
+      "year": 2021,
+      "rank": 78,
+      "slug": "halcyon",
+      "name": "Halcyon",
+      "change": "Down 10"
+    },
+    {
+      "year": 2021,
+      "rank": 79,
+      "slug": "digital-newcastle",
+      "name": "Digital Newcastle",
+      "change": "Down 13"
+    },
+    {
+      "year": 2021,
+      "rank": 80,
+      "slug": "la-feria",
+      "name": "La Feria",
+      "change": "Up 5"
+    },
+    {
+      "year": 2021,
+      "rank": 81,
+      "slug": "xoyo",
+      "name": "XOYO",
+      "change": "Down 14"
+    },
+    {
+      "year": 2021,
+      "rank": 82,
+      "slug": "lxxy",
+      "name": "LXXY",
+      "change": "Up 8"
+    },
+    {
+      "year": 2021,
+      "rank": 83,
+      "slug": "grand-factory",
+      "name": "The Grand Factory",
+      "change": "Up 3"
+    },
+    {
+      "year": 2021,
+      "rank": 84,
+      "slug": "panama",
+      "name": "Panama",
+      "change": "Down 2"
+    },
+    {
+      "year": 2021,
+      "rank": 85,
+      "slug": "lux-fragil",
+      "name": "Lux Fragil",
+      "change": "Down 7"
+    },
+    {
+      "year": 2021,
+      "rank": 86,
+      "slug": "warehouse",
+      "name": "Warehouse",
+      "change": "Up 10"
+    },
+    {
+      "year": 2021,
+      "rank": 87,
+      "slug": "grand",
+      "name": "The Grand",
+      "change": "Up 13"
+    },
+    {
+      "year": 2021,
+      "rank": 88,
+      "slug": "13-one-third-hangzhou",
+      "name": "1/3 One Third Hangzhou",
+      "change": "New entry"
+    },
+    {
+      "year": 2021,
+      "rank": 89,
+      "slug": "knockdown-center",
+      "name": "Knockdown Center",
+      "change": "New entry"
+    },
+    {
+      "year": 2021,
+      "rank": 90,
+      "slug": "district-8",
+      "name": "District 8",
+      "change": "Up 7"
+    },
+    {
+      "year": 2021,
+      "rank": 91,
+      "slug": "duel-club",
+      "name": "Duel Club",
+      "change": "Down 2"
+    },
+    {
+      "year": 2021,
+      "rank": 92,
+      "slug": "muze",
+      "name": "MUZE",
+      "change": "New entry"
+    },
+    {
+      "year": 2021,
+      "rank": 93,
+      "slug": "exit",
+      "name": "Exit",
+      "change": "New entry"
+    },
+    {
+      "year": 2021,
+      "rank": 94,
+      "slug": "egg-ldn",
+      "name": "EGG LDN",
+      "change": "Down 7"
+    },
+    {
+      "year": 2021,
+      "rank": 95,
+      "slug": "hope-works",
+      "name": "Hope Works",
+      "change": "New entry"
+    },
+    {
+      "year": 2021,
+      "rank": 96,
+      "slug": "sub-club",
+      "name": "Sub Club",
+      "change": "Up 2"
+    },
+    {
+      "year": 2021,
+      "rank": 97,
+      "slug": "octava",
+      "name": "Octava",
+      "change": "Up 2"
+    },
+    {
+      "year": 2021,
+      "rank": 98,
+      "slug": "boomerang",
+      "name": "Boomerang",
+      "change": "New entry"
+    },
+    {
+      "year": 2021,
+      "rank": 99,
+      "slug": "sneaky-petes",
+      "name": "Sneaky Pete's",
+      "change": "New entry"
+    },
+    {
+      "year": 2021,
+      "rank": 100,
+      "slug": "nitsa",
+      "name": "Nitsa",
+      "change": "Down 6"
+    },
+    {
+      "year": 2022,
+      "rank": 1,
+      "slug": "hi-ibiza",
+      "name": "Hï Ibiza",
+      "change": "Up 3"
+    },
+    {
+      "year": 2022,
+      "rank": 2,
+      "slug": "echostage",
+      "name": "Echostage",
+      "change": "Down 1"
+    },
+    {
+      "year": 2022,
+      "rank": 3,
+      "slug": "green-valley",
+      "name": "GREENVALLEY",
+      "change": "Down 1"
+    },
+    {
+      "year": 2022,
+      "rank": 4,
+      "slug": "printworks-london",
+      "name": "Printworks London",
+      "change": "Up 3"
+    },
+    {
+      "year": 2022,
+      "rank": 5,
+      "slug": "bootshaus",
+      "name": "Bootshaus",
+      "change": "Non-mover"
+    },
+    {
+      "year": 2022,
+      "rank": 6,
+      "slug": "ushuaia-ibiza",
+      "name": "Ushuaïa Ibiza",
+      "change": "Down 2"
+    },
+    {
+      "year": 2022,
+      "rank": 7,
+      "slug": "amnesia",
+      "name": "Amnesia",
+      "change": "Up 8"
+    },
+    {
+      "year": 2022,
+      "rank": 8,
+      "slug": "warehouse-project-depot-mayfield",
+      "name": "The Warehouse Project at Depot Mayfield",
+      "change": "Up 1"
+    },
+    {
+      "year": 2022,
+      "rank": 9,
+      "slug": "laroc-club",
+      "name": "Laroc Club",
+      "change": "Up 3"
+    },
+    {
+      "year": 2022,
+      "rank": 10,
+      "slug": "papaya",
+      "name": "Papaya Club",
+      "change": "Down 2"
+    },
+    {
+      "year": 2022,
+      "rank": 11,
+      "slug": "exchange-la",
+      "name": "Exchange LA",
+      "change": "Down 1"
+    },
+    {
+      "year": 2022,
+      "rank": 12,
+      "slug": "berghain",
+      "name": "Berghain",
+      "change": "Down 6"
+    },
+    {
+      "year": 2022,
+      "rank": 13,
+      "slug": "fabric",
+      "name": "fabric",
+      "change": "Non-mover"
+    },
+    {
+      "year": 2022,
+      "rank": 14,
+      "slug": "zouk-singapore",
+      "name": "Zouk Singapore",
+      "change": "Down 3"
+    },
+    {
+      "year": 2022,
+      "rank": 15,
+      "slug": "illuzion",
+      "name": "Illuzion Phuket",
+      "change": "Up 1"
+    },
+    {
+      "year": 2022,
+      "rank": 16,
+      "slug": "avant-gardner-brooklyn-mirage",
+      "name": "Avant Gardner & The Brooklyn Mirage",
+      "change": "Up 16"
+    },
+    {
+      "year": 2022,
+      "rank": 17,
+      "slug": "13-one-third",
+      "name": "1/3 One Third",
+      "change": "Up 7"
+    },
+    {
+      "year": 2022,
+      "rank": 18,
+      "slug": "pacha",
+      "name": "Pacha",
+      "change": "Non-mover"
+    },
+    {
+      "year": 2022,
+      "rank": 19,
+      "slug": "play-house",
+      "name": "PLAY HOUSE",
+      "change": "Up 11"
+    },
+    {
+      "year": 2022,
+      "rank": 20,
+      "slug": "motion",
+      "name": "Motion",
+      "change": "Down 6"
+    },
+    {
+      "year": 2022,
+      "rank": 21,
+      "slug": "warung-beach-club",
+      "name": "Warung Beach Club",
+      "change": "Down 2"
+    },
+    {
+      "year": 2022,
+      "rank": 22,
+      "slug": "culture-club-revelin",
+      "name": "Culture Club Revelin",
+      "change": "Up 4"
+    },
+    {
+      "year": 2022,
+      "rank": 23,
+      "slug": "dc-10",
+      "name": "DC-10",
+      "change": "Non-mover"
+    },
+    {
+      "year": 2022,
+      "rank": 24,
+      "slug": "aquarius",
+      "name": "Aquarius",
+      "change": "Down 7"
+    },
+    {
+      "year": 2022,
+      "rank": 25,
+      "slug": "yalta-club",
+      "name": "Yalta Club",
+      "change": "Up 3"
+    },
+    {
+      "year": 2022,
+      "rank": 26,
+      "slug": "studio-338",
+      "name": "Studio 338",
+      "change": "Up 32"
+    },
+    {
+      "year": 2022,
+      "rank": 27,
+      "slug": "lost-beach-club",
+      "name": "Lost Beach Club",
+      "change": "Down 2"
+    },
+    {
+      "year": 2022,
+      "rank": 28,
+      "slug": "omnia",
+      "name": "OMNIA",
+      "change": "Down 7"
+    },
+    {
+      "year": 2022,
+      "rank": 29,
+      "slug": "cavo-paradiso",
+      "name": "Cavo Paradiso",
+      "change": "Up 39"
+    },
+    {
+      "year": 2022,
+      "rank": 30,
+      "slug": "noa-beach-club",
+      "name": "Noa Beach Club",
+      "change": "Up 14"
+    },
+    {
+      "year": 2022,
+      "rank": 31,
+      "slug": "fabrik",
+      "name": "FABRIK",
+      "change": "Up 7"
+    },
+    {
+      "year": 2022,
+      "rank": 32,
+      "slug": "ministry-of-sound",
+      "name": "Ministry Of Sound",
+      "change": "Up 3"
+    },
+    {
+      "year": 2022,
+      "rank": 33,
+      "slug": "elrow-row-14",
+      "name": "Elrow (Row 14)",
+      "change": "Down 2"
+    },
+    {
+      "year": 2022,
+      "rank": 34,
+      "slug": "club-space",
+      "name": "Club Space",
+      "change": "Up 16"
+    },
+    {
+      "year": 2022,
+      "rank": 35,
+      "slug": "watergate",
+      "name": "Watergate",
+      "change": "Up 1"
+    },
+    {
+      "year": 2022,
+      "rank": 36,
+      "slug": "academy-la",
+      "name": "Academy LA",
+      "change": "Up 5"
+    },
+    {
+      "year": 2022,
+      "rank": 37,
+      "slug": "hakkasan",
+      "name": "Hakkasan",
+      "change": "Up 2"
+    },
+    {
+      "year": 2022,
+      "rank": 38,
+      "slug": "warp-shinjuku",
+      "name": "WARP Shinjuku",
+      "change": "Up 15"
+    },
+    {
+      "year": 2022,
+      "rank": 39,
+      "slug": "crobar",
+      "name": "Crobar",
+      "change": "Up 17"
+    },
+    {
+      "year": 2022,
+      "rank": 40,
+      "slug": "wave-club",
+      "name": "WAVE Club",
+      "change": "Up 5"
+    },
+    {
+      "year": 2022,
+      "rank": 41,
+      "slug": "rex-club",
+      "name": "Rex Club",
+      "change": "Down 14"
+    },
+    {
+      "year": 2022,
+      "rank": 42,
+      "slug": "zouk-las-vegas",
+      "name": "Zouk Las Vegas",
+      "change": "New entry"
+    },
+    {
+      "year": 2022,
+      "rank": 43,
+      "slug": "guaba-beach-bar",
+      "name": "Guaba Beach Bar",
+      "change": "Down 9"
+    },
+    {
+      "year": 2022,
+      "rank": 44,
+      "slug": "barbarellas-discoteque",
+      "name": "Barbarellas Discoteque",
+      "change": "Down 7"
+    },
+    {
+      "year": 2022,
+      "rank": 45,
+      "slug": "e1",
+      "name": "E1",
+      "change": "Up 16"
+    },
+    {
+      "year": 2022,
+      "rank": 46,
+      "slug": "1900-le-theatre",
+      "name": "1900 LE THÉÂTRE",
+      "change": "Up 6"
+    },
+    {
+      "year": 2022,
+      "rank": 47,
+      "slug": "club-galame",
+      "name": "Club Galame",
+      "change": "Up 4"
+    },
+    {
+      "year": 2022,
+      "rank": 48,
+      "slug": "razzmatazz",
+      "name": "Razzmatazz",
+      "change": "Down 2"
+    },
+    {
+      "year": 2022,
+      "rank": 49,
+      "slug": "avalon-hollywood",
+      "name": "AVALON Hollywood",
+      "change": "Up 8"
+    },
+    {
+      "year": 2022,
+      "rank": 50,
+      "slug": "tresor",
+      "name": "Tresor",
+      "change": "Up 10"
+    },
+    {
+      "year": 2022,
+      "rank": 51,
+      "slug": "mad-club",
+      "name": "MAD Club",
+      "change": "Up 3"
+    },
+    {
+      "year": 2022,
+      "rank": 52,
+      "slug": "lod",
+      "name": "LOD",
+      "change": "New entry"
+    },
+    {
+      "year": 2022,
+      "rank": 53,
+      "slug": "digital-newcastle",
+      "name": "Digital Newcastle",
+      "change": "Up 26"
+    },
+    {
+      "year": 2022,
+      "rank": 54,
+      "slug": "marquee-nightclub-dayclub",
+      "name": "Marquee Nightclub & Dayclub",
+      "change": "Down 14"
+    },
+    {
+      "year": 2022,
+      "rank": 55,
+      "slug": "versuz",
+      "name": "Versuz",
+      "change": "Down 13"
+    },
+    {
+      "year": 2022,
+      "rank": 56,
+      "slug": "beachclub",
+      "name": "Beachclub",
+      "change": "Down 9"
+    },
+    {
+      "year": 2022,
+      "rank": 57,
+      "slug": "club-illusion",
+      "name": "Club Illusion",
+      "change": "Up 18"
+    },
+    {
+      "year": 2022,
+      "rank": 58,
+      "slug": "grand",
+      "name": "The Grand",
+      "change": "Up 29"
+    },
+    {
+      "year": 2022,
+      "rank": 59,
+      "slug": "stellar-night-club",
+      "name": "Stellar Night Club",
+      "change": "Up 6"
+    },
+    {
+      "year": 2022,
+      "rank": 60,
+      "slug": "exe-club",
+      "name": "EXE CLUB",
+      "change": "New entry"
+    },
+    {
+      "year": 2022,
+      "rank": 61,
+      "slug": "eden",
+      "name": "Eden",
+      "change": "Down 6"
+    },
+    {
+      "year": 2022,
+      "rank": 62,
+      "slug": "duplex",
+      "name": "DupleX",
+      "change": "New entry"
+    },
+    {
+      "year": 2022,
+      "rank": 63,
+      "slug": "el-fortin",
+      "name": "El Fortin",
+      "change": "Down 14"
+    },
+    {
+      "year": 2022,
+      "rank": 64,
+      "slug": "ai-nightclub",
+      "name": "Ai-X",
+      "change": "Down 16"
+    },
+    {
+      "year": 2022,
+      "rank": 65,
+      "slug": "guendalina",
+      "name": "Guendalina",
+      "change": "Up 4"
+    },
+    {
+      "year": 2022,
+      "rank": 66,
+      "slug": "elsewhere",
+      "name": "Elsewhere",
+      "change": "Up 6"
+    },
+    {
+      "year": 2022,
+      "rank": 67,
+      "slug": "farout-beach-club",
+      "name": "Farout Beach Club",
+      "change": "New entry"
+    },
+    {
+      "year": 2022,
+      "rank": 68,
+      "slug": "white-dubai",
+      "name": "WHITE Dubai",
+      "change": "Down 48"
+    },
+    {
+      "year": 2022,
+      "rank": 69,
+      "slug": "zouk-kuala-lumpur",
+      "name": "Zouk Kuala Lumpur",
+      "change": "Down 36"
+    },
+    {
+      "year": 2022,
+      "rank": 70,
+      "slug": "d-edge",
+      "name": "D-Edge",
+      "change": "Up 6"
+    },
+    {
+      "year": 2022,
+      "rank": 71,
+      "slug": "cromie-disco",
+      "name": "Cromie Disco",
+      "change": "New entry"
+    },
+    {
+      "year": 2022,
+      "rank": 72,
+      "slug": "boomerang",
+      "name": "Boomerang",
+      "change": "Up 26"
+    },
+    {
+      "year": 2022,
+      "rank": 73,
+      "slug": "warehouse",
+      "name": "Warehouse",
+      "change": "Up 13"
+    },
+    {
+      "year": 2022,
+      "rank": 74,
+      "slug": "goa-club",
+      "name": "Goa Club",
+      "change": "Down 4"
+    },
+    {
+      "year": 2022,
+      "rank": 75,
+      "slug": "duel-club",
+      "name": "Duel Club",
+      "change": "Up 16"
+    },
+    {
+      "year": 2022,
+      "rank": 76,
+      "slug": "grand-factory",
+      "name": "The Grand Factory",
+      "change": "Up 7"
+    },
+    {
+      "year": 2022,
+      "rank": 77,
+      "slug": "lux-fragil",
+      "name": "Lux Fragil",
+      "change": "Up 8"
+    },
+    {
+      "year": 2022,
+      "rank": 78,
+      "slug": "womb",
+      "name": "WOMB",
+      "change": "Down 11"
+    },
+    {
+      "year": 2022,
+      "rank": 79,
+      "slug": "surreal-park",
+      "name": "Surreal Park",
+      "change": "New entry"
+    },
+    {
+      "year": 2022,
+      "rank": 80,
+      "slug": "nitsa",
+      "name": "Nitsa",
+      "change": "Up 20"
+    },
+    {
+      "year": 2022,
+      "rank": 81,
+      "slug": "shelter-amsterdam",
+      "name": "Shelter Amsterdam",
+      "change": "New entry"
+    },
+    {
+      "year": 2022,
+      "rank": 82,
+      "slug": "tobacco-dock",
+      "name": "Tobacco Dock",
+      "change": "Down 53"
+    },
+    {
+      "year": 2022,
+      "rank": 83,
+      "slug": "coda",
+      "name": "Coda",
+      "change": "Down 6"
+    },
+    {
+      "year": 2022,
+      "rank": 84,
+      "slug": "knockdown-center",
+      "name": "Knockdown Center",
+      "change": "Up 5"
+    },
+    {
+      "year": 2022,
+      "rank": 85,
+      "slug": "catwalk-disco-club",
+      "name": "Catwalk Disco & Club",
+      "change": "Down 23"
+    },
+    {
+      "year": 2022,
+      "rank": 86,
+      "slug": "kalypso",
+      "name": "Kalypso",
+      "change": "Down 20"
+    },
+    {
+      "year": 2022,
+      "rank": 87,
+      "slug": "la-feria",
+      "name": "La Feria",
+      "change": "Down 7"
+    },
+    {
+      "year": 2022,
+      "rank": 88,
+      "slug": "chinese-laundry",
+      "name": "Chinese Laundry",
+      "change": null
+    },
+    {
+      "year": 2022,
+      "rank": 89,
+      "slug": "time",
+      "name": "Time",
+      "change": "New entry"
+    },
+    {
+      "year": 2022,
+      "rank": 90,
+      "slug": "hope-works",
+      "name": "Hope Works",
+      "change": "Up 5"
+    },
+    {
+      "year": 2022,
+      "rank": 91,
+      "slug": "octava",
+      "name": "Octava",
+      "change": "Up 6"
+    },
+    {
+      "year": 2022,
+      "rank": 92,
+      "slug": "openpie-party-space",
+      "name": "Openpie Party Space",
+      "change": "Down 29"
+    },
+    {
+      "year": 2022,
+      "rank": 93,
+      "slug": "lxxy",
+      "name": "LXXY",
+      "change": "Down 11"
+    },
+    {
+      "year": 2022,
+      "rank": 94,
+      "slug": "muze",
+      "name": "MUZE",
+      "change": "Down 2"
+    },
+    {
+      "year": 2022,
+      "rank": 95,
+      "slug": "stereo",
+      "name": "Stereo",
+      "change": null
+    },
+    {
+      "year": 2022,
+      "rank": 96,
+      "slug": "sub-club",
+      "name": "Sub Club",
+      "change": "Non-mover"
+    },
+    {
+      "year": 2022,
+      "rank": 97,
+      "slug": "big-night-live",
+      "name": "Big Night Live",
+      "change": "New entry"
+    },
+    {
+      "year": 2022,
+      "rank": 98,
+      "slug": "corsica-studios",
+      "name": "Corsica Studios",
+      "change": null
+    },
+    {
+      "year": 2022,
+      "rank": 99,
+      "slug": "sound-la",
+      "name": "Sound LA",
+      "change": "New entry"
+    },
+    {
+      "year": 2022,
+      "rank": 100,
+      "slug": "world-headquarters",
+      "name": "World Headquarters",
+      "change": "New entry"
+    },
+    {
+      "year": 2023,
+      "rank": 1,
+      "slug": "hi-ibiza",
+      "name": "Hï Ibiza",
+      "change": "Non-mover"
+    },
+    {
+      "year": 2023,
+      "rank": 2,
+      "slug": "printworks-london",
+      "name": "Printworks London",
+      "change": "Up 2"
+    },
+    {
+      "year": 2023,
+      "rank": 3,
+      "slug": "green-valley",
+      "name": "GREENVALLEY",
+      "change": "Non-mover"
+    },
+    {
+      "year": 2023,
+      "rank": 4,
+      "slug": "echostage",
+      "name": "Echostage",
+      "change": "Down 2"
+    },
+    {
+      "year": 2023,
+      "rank": 5,
+      "slug": "ushuaia-ibiza",
+      "name": "Ushuaïa Ibiza",
+      "change": "Up 1"
+    },
+    {
+      "year": 2023,
+      "rank": 6,
+      "slug": "bootshaus",
+      "name": "Bootshaus",
+      "change": "Down 1"
+    },
+    {
+      "year": 2023,
+      "rank": 7,
+      "slug": "amnesia",
+      "name": "Amnesia",
+      "change": "Non-mover"
+    },
+    {
+      "year": 2023,
+      "rank": 8,
+      "slug": "avant-gardner-brooklyn-mirage",
+      "name": "Avant Gardner & The Brooklyn Mirage",
+      "change": "Up 8"
+    },
+    {
+      "year": 2023,
+      "rank": 9,
+      "slug": "warehouse-project-depot-mayfield",
+      "name": "The Warehouse Project at Depot Mayfield",
+      "change": "Down 1"
+    },
+    {
+      "year": 2023,
+      "rank": 10,
+      "slug": "zouk-singapore",
+      "name": "Zouk Singapore",
+      "change": "Up 4"
+    },
+    {
+      "year": 2023,
+      "rank": 11,
+      "slug": "papaya",
+      "name": "Papaya Club",
+      "change": "Down 1"
+    },
+    {
+      "year": 2023,
+      "rank": 12,
+      "slug": "laroc",
+      "name": "Laroc",
+      "change": "Down 3"
+    },
+    {
+      "year": 2023,
+      "rank": 13,
+      "slug": "illuzion",
+      "name": "Illuzion Phuket",
+      "change": "Up 2"
+    },
+    {
+      "year": 2023,
+      "rank": 14,
+      "slug": "exchange-la",
+      "name": "Exchange LA",
+      "change": "Down 3"
+    },
+    {
+      "year": 2023,
+      "rank": 15,
+      "slug": "one-third",
+      "name": "One Third",
+      "change": "Up 2"
+    },
+    {
+      "year": 2023,
+      "rank": 16,
+      "slug": "berghain",
+      "name": "Berghain",
+      "change": "Down 4"
+    },
+    {
+      "year": 2023,
+      "rank": 17,
+      "slug": "fabric",
+      "name": "fabric",
+      "change": "Down 4"
+    },
+    {
+      "year": 2023,
+      "rank": 18,
+      "slug": "play-house",
+      "name": "PLAY HOUSE",
+      "change": "Up 1"
+    },
+    {
+      "year": 2023,
+      "rank": 19,
+      "slug": "motion",
+      "name": "Motion",
+      "change": "Up 1"
+    },
+    {
+      "year": 2023,
+      "rank": 20,
+      "slug": "culture-club-revelin",
+      "name": "Culture Club Revelin",
+      "change": "Up 2"
+    },
+    {
+      "year": 2023,
+      "rank": 21,
+      "slug": "studio-338",
+      "name": "Studio 338",
+      "change": "Up 5"
+    },
+    {
+      "year": 2023,
+      "rank": 22,
+      "slug": "fabrik",
+      "name": "FABRIK",
+      "change": "Up 9"
+    },
+    {
+      "year": 2023,
+      "rank": 23,
+      "slug": "pacha",
+      "name": "Pacha",
+      "change": "Down 5"
+    },
+    {
+      "year": 2023,
+      "rank": 24,
+      "slug": "cavo-paradiso",
+      "name": "Cavo Paradiso",
+      "change": "Up 5"
+    },
+    {
+      "year": 2023,
+      "rank": 25,
+      "slug": "lost-beach-club",
+      "name": "Lost Beach Club",
+      "change": "Up 2"
+    },
+    {
+      "year": 2023,
+      "rank": 26,
+      "slug": "aquarius",
+      "name": "Aquarius",
+      "change": "Down 2"
+    },
+    {
+      "year": 2023,
+      "rank": 27,
+      "slug": "dc-10",
+      "name": "DC-10",
+      "change": "Down 4"
+    },
+    {
+      "year": 2023,
+      "rank": 28,
+      "slug": "noa-beach-club",
+      "name": "Noa Beach Club",
+      "change": "Up 2"
+    },
+    {
+      "year": 2023,
+      "rank": 29,
+      "slug": "warung-beach-club",
+      "name": "Warung Beach Club",
+      "change": "Down 8"
+    },
+    {
+      "year": 2023,
+      "rank": 30,
+      "slug": "ministry-of-sound",
+      "name": "Ministry Of Sound",
+      "change": "Up 2"
+    },
+    {
+      "year": 2023,
+      "rank": 31,
+      "slug": "academy-la",
+      "name": "Academy LA",
+      "change": "Up 5"
+    },
+    {
+      "year": 2023,
+      "rank": 32,
+      "slug": "zouk-las-vegas",
+      "name": "Zouk Las Vegas",
+      "change": "Up 10"
+    },
+    {
+      "year": 2023,
+      "rank": 33,
+      "slug": "warp-shinjuku",
+      "name": "WARP Shinjuku",
+      "change": "Up 5"
+    },
+    {
+      "year": 2023,
+      "rank": 34,
+      "slug": "wave-club",
+      "name": "WAVE Club",
+      "change": "Up 6"
+    },
+    {
+      "year": 2023,
+      "rank": 35,
+      "slug": "hakkasan",
+      "name": "Hakkasan",
+      "change": "Up 2"
+    },
+    {
+      "year": 2023,
+      "rank": 36,
+      "slug": "club-space",
+      "name": "Club Space",
+      "change": "Down 2"
+    },
+    {
+      "year": 2023,
+      "rank": 37,
+      "slug": "crobar",
+      "name": "Crobar",
+      "change": "Up 2"
+    },
+    {
+      "year": 2023,
+      "rank": 38,
+      "slug": "watergate",
+      "name": "Watergate",
+      "change": "Down 3"
+    },
+    {
+      "year": 2023,
+      "rank": 39,
+      "slug": "concourse-project",
+      "name": "The Concourse Project",
+      "change": "New entry"
+    },
+    {
+      "year": 2023,
+      "rank": 40,
+      "slug": "1900-le-theatre",
+      "name": "1900 LE THÉÂTRE",
+      "change": "Up 6"
+    },
+    {
+      "year": 2023,
+      "rank": 41,
+      "slug": "omnia",
+      "name": "OMNIA",
+      "change": "Down 13"
+    },
+    {
+      "year": 2023,
+      "rank": 42,
+      "slug": "penthouse",
+      "name": "The Penthouse",
+      "change": "New entry"
+    },
+    {
+      "year": 2023,
+      "rank": 43,
+      "slug": "club-galame",
+      "name": "Club Galame",
+      "change": "Up 4"
+    },
+    {
+      "year": 2023,
+      "rank": 44,
+      "slug": "rex-club",
+      "name": "Rex Club",
+      "change": "Down 3"
+    },
+    {
+      "year": 2023,
+      "rank": 45,
+      "slug": "grand",
+      "name": "The Grand",
+      "change": "Up 13"
+    },
+    {
+      "year": 2023,
+      "rank": 46,
+      "slug": "ai-nightclub",
+      "name": "Ai-X",
+      "change": "Up 18"
+    },
+    {
+      "year": 2023,
+      "rank": 47,
+      "slug": "shishi-bali",
+      "name": "ShiShi Bali",
+      "change": "New entry"
+    },
+    {
+      "year": 2023,
+      "rank": 48,
+      "slug": "e1",
+      "name": "E1",
+      "change": "Down 3"
+    },
+    {
+      "year": 2023,
+      "rank": 49,
+      "slug": "lod",
+      "name": "LOD",
+      "change": "Up 3"
+    },
+    {
+      "year": 2023,
+      "rank": 50,
+      "slug": "beachclub",
+      "name": "Beachclub",
+      "change": "Up 6"
+    },
+    {
+      "year": 2023,
+      "rank": 51,
+      "slug": "avalon-hollywood",
+      "name": "AVALON Hollywood",
+      "change": "Down 2"
+    },
+    {
+      "year": 2023,
+      "rank": 52,
+      "slug": "boomerang",
+      "name": "Boomerang",
+      "change": "Up 20"
+    },
+    {
+      "year": 2023,
+      "rank": 53,
+      "slug": "duplex",
+      "name": "DupleX",
+      "change": "Up 9"
+    },
+    {
+      "year": 2023,
+      "rank": 54,
+      "slug": "farout-beach-club",
+      "name": "Farout Beach Club",
+      "change": "Up 13"
+    },
+    {
+      "year": 2023,
+      "rank": 55,
+      "slug": "club-illusion",
+      "name": "Club Illusion",
+      "change": "Up 2"
+    },
+    {
+      "year": 2023,
+      "rank": 56,
+      "slug": "white-dubai",
+      "name": "WHITE Dubai",
+      "change": "Up 12"
+    },
+    {
+      "year": 2023,
+      "rank": 57,
+      "slug": "yalta-club",
+      "name": "Yalta Club",
+      "change": "Down 32"
+    },
+    {
+      "year": 2023,
+      "rank": 58,
+      "slug": "versuz",
+      "name": "Versuz",
+      "change": "Down 3"
+    },
+    {
+      "year": 2023,
+      "rank": 59,
+      "slug": "mad-club",
+      "name": "MAD Club",
+      "change": "Down 8"
+    },
+    {
+      "year": 2023,
+      "rank": 60,
+      "slug": "digital-newcastle",
+      "name": "Digital Newcastle",
+      "change": "Down 7"
+    },
+    {
+      "year": 2023,
+      "rank": 61,
+      "slug": "marquee-nightclub-dayclub",
+      "name": "Marquee Nightclub & Dayclub",
+      "change": "Down 7"
+    },
+    {
+      "year": 2023,
+      "rank": 62,
+      "slug": "razzmatazz",
+      "name": "Razzmatazz",
+      "change": "Down 14"
+    },
+    {
+      "year": 2023,
+      "rank": 63,
+      "slug": "guendalina",
+      "name": "Guendalina",
+      "change": "Up 2"
+    },
+    {
+      "year": 2023,
+      "rank": 64,
+      "slug": "soundcheck",
+      "name": "Soundcheck",
+      "change": "New entry"
+    },
+    {
+      "year": 2023,
+      "rank": 65,
+      "slug": "eden",
+      "name": "Eden",
+      "change": "Down 4"
+    },
+    {
+      "year": 2023,
+      "rank": 66,
+      "slug": "space-plus-bangkok",
+      "name": "Space Plus Bangkok",
+      "change": "New entry"
+    },
+    {
+      "year": 2023,
+      "rank": 67,
+      "slug": "elsewhere",
+      "name": "Elsewhere",
+      "change": "Down 1"
+    },
+    {
+      "year": 2023,
+      "rank": 68,
+      "slug": "sel-octagon",
+      "name": "Sel Octagon",
+      "change": "New entry"
+    },
+    {
+      "year": 2023,
+      "rank": 69,
+      "slug": "warehouse",
+      "name": "Warehouse",
+      "change": "Up 4"
+    },
+    {
+      "year": 2023,
+      "rank": 70,
+      "slug": "grand-factory",
+      "name": "The Grand Factory",
+      "change": "Up 6"
+    },
+    {
+      "year": 2023,
+      "rank": 71,
+      "slug": "surreal-park",
+      "name": "Surreal Park",
+      "change": "Up 8"
+    },
+    {
+      "year": 2023,
+      "rank": 72,
+      "slug": "tresor",
+      "name": "Tresor",
+      "change": "Down 22"
+    },
+    {
+      "year": 2023,
+      "rank": 73,
+      "slug": "el-fortin",
+      "name": "El Fortin",
+      "change": "Down 10"
+    },
+    {
+      "year": 2023,
+      "rank": 74,
+      "slug": "guaba-beach-bar",
+      "name": "Guaba Beach Bar",
+      "change": "Down 31"
+    },
+    {
+      "year": 2023,
+      "rank": 75,
+      "slug": "d-edge",
+      "name": "D-Edge",
+      "change": "Down 5"
+    },
+    {
+      "year": 2023,
+      "rank": 76,
+      "slug": "womb",
+      "name": "WOMB",
+      "change": "Up 2"
+    },
+    {
+      "year": 2023,
+      "rank": 77,
+      "slug": "nitsa",
+      "name": "Nitsa",
+      "change": "Up 3"
+    },
+    {
+      "year": 2023,
+      "rank": 78,
+      "slug": "time",
+      "name": "Time",
+      "change": "Up 11"
+    },
+    {
+      "year": 2023,
+      "rank": 79,
+      "slug": "home-sydney",
+      "name": "Home Sydney",
+      "change": null
+    },
+    {
+      "year": 2023,
+      "rank": 80,
+      "slug": "duel-club",
+      "name": "Duel Club",
+      "change": "Down 5"
+    },
+    {
+      "year": 2023,
+      "rank": 81,
+      "slug": "big-night-live",
+      "name": "Big Night Live",
+      "change": "Up 16"
+    },
+    {
+      "year": 2023,
+      "rank": 82,
+      "slug": "muze",
+      "name": "MUZE",
+      "change": "Up 12"
+    },
+    {
+      "year": 2023,
+      "rank": 83,
+      "slug": "after-caposile",
+      "name": "After Caposile",
+      "change": "New entry"
+    },
+    {
+      "year": 2023,
+      "rank": 84,
+      "slug": "de-school",
+      "name": "De School",
+      "change": null
+    },
+    {
+      "year": 2023,
+      "rank": 85,
+      "slug": "barbarellas-discoteque",
+      "name": "Barbarellas Discoteque",
+      "change": "Down 41"
+    },
+    {
+      "year": 2023,
+      "rank": 86,
+      "slug": "zebbies-garden",
+      "name": "Zebbie's Garden",
+      "change": "New entry"
+    },
+    {
+      "year": 2023,
+      "rank": 87,
+      "slug": "exe-club",
+      "name": "EXE Club",
+      "change": "Down 27"
+    },
+    {
+      "year": 2023,
+      "rank": 88,
+      "slug": "bengkel-space",
+      "name": "Bengkel Space",
+      "change": "New entry"
+    },
+    {
+      "year": 2023,
+      "rank": 89,
+      "slug": "cromie-disco",
+      "name": "Cromie Disco",
+      "change": "Down 18"
+    },
+    {
+      "year": 2023,
+      "rank": 90,
+      "slug": "la-feria",
+      "name": "La Feria",
+      "change": "Down 3"
+    },
+    {
+      "year": 2023,
+      "rank": 91,
+      "slug": "kalypso",
+      "name": "Kalypso",
+      "change": "Down 5"
+    },
+    {
+      "year": 2023,
+      "rank": 92,
+      "slug": "nova-sd",
+      "name": "NOVA SD",
+      "change": "New entry"
+    },
+    {
+      "year": 2023,
+      "rank": 93,
+      "slug": "shelter-amsterdam",
+      "name": "Shelter Amsterdam",
+      "change": "Down 12"
+    },
+    {
+      "year": 2023,
+      "rank": 94,
+      "slug": "coda",
+      "name": "Coda",
+      "change": "Down 11"
+    },
+    {
+      "year": 2023,
+      "rank": 95,
+      "slug": "new-city-gas",
+      "name": "New City Gas",
+      "change": null
+    },
+    {
+      "year": 2023,
+      "rank": 96,
+      "slug": "and-club",
+      "name": "And Club",
+      "change": "New entry"
+    },
+    {
+      "year": 2023,
+      "rank": 97,
+      "slug": "knockdown-center",
+      "name": "Knockdown Center",
+      "change": "Down 13"
+    },
+    {
+      "year": 2023,
+      "rank": 98,
+      "slug": "octava",
+      "name": "Octava",
+      "change": "Down 7"
+    },
+    {
+      "year": 2023,
+      "rank": 99,
+      "slug": "beams",
+      "name": "Beams",
+      "change": "New entry"
+    },
+    {
+      "year": 2023,
+      "rank": 100,
+      "slug": "hardpop",
+      "name": "Hardpop",
+      "change": null
+    },
+    {
+      "year": 2024,
+      "rank": 1,
+      "slug": "hi-ibiza",
+      "name": "Hï Ibiza",
+      "change": "Non-mover"
+    },
+    {
+      "year": 2024,
+      "rank": 2,
+      "slug": "greenvalley",
+      "name": "GREENVALLEY",
+      "change": "Up 1"
+    },
+    {
+      "year": 2024,
+      "rank": 3,
+      "slug": "echostage",
+      "name": "Echostage",
+      "change": "Up 1"
+    },
+    {
+      "year": 2024,
+      "rank": 4,
+      "slug": "ushuaia-ibiza",
+      "name": "Ushuaïa Ibiza",
+      "change": "Up 1"
+    },
+    {
+      "year": 2024,
+      "rank": 5,
+      "slug": "bootshaus",
+      "name": "Bootshaus",
+      "change": "Up 1"
+    },
+    {
+      "year": 2024,
+      "rank": 6,
+      "slug": "warehouse-project-depot-mayfield",
+      "name": "The Warehouse Project at Depot Mayfield",
+      "change": "Up 3"
+    },
+    {
+      "year": 2024,
+      "rank": 7,
+      "slug": "fabric",
+      "name": "fabric",
+      "change": "Up 10"
+    },
+    {
+      "year": 2024,
+      "rank": 8,
+      "slug": "amnesia",
+      "name": "Amnesia",
+      "change": "Down 1"
+    },
+    {
+      "year": 2024,
+      "rank": 9,
+      "slug": "savaya",
+      "name": "Savaya",
+      "change": "New entry"
+    },
+    {
+      "year": 2024,
+      "rank": 10,
+      "slug": "laroc-club",
+      "name": "Laroc Club",
+      "change": "Up 2"
+    },
+    {
+      "year": 2024,
+      "rank": 11,
+      "slug": "illuzion-phuket",
+      "name": "Illuzion Phuket",
+      "change": "Up 2"
+    },
+    {
+      "year": 2024,
+      "rank": 12,
+      "slug": "noa-beach-club",
+      "name": "Noa Beach Club",
+      "change": "Up 16"
+    },
+    {
+      "year": 2024,
+      "rank": 13,
+      "slug": "berghain",
+      "name": "Berghain",
+      "change": "Up 3"
+    },
+    {
+      "year": 2024,
+      "rank": 14,
+      "slug": "zouk-singapore",
+      "name": "Zouk Singapore",
+      "change": "Down 4"
+    },
+    {
+      "year": 2024,
+      "rank": 15,
+      "slug": "papaya-club",
+      "name": "Papaya Club",
+      "change": "Down 4"
+    },
+    {
+      "year": 2024,
+      "rank": 16,
+      "slug": "play-house",
+      "name": "PLAY HOUSE",
+      "change": "Up 2"
+    },
+    {
+      "year": 2024,
+      "rank": 17,
+      "slug": "fabrik",
+      "name": "FABRIK",
+      "change": "Up 5"
+    },
+    {
+      "year": 2024,
+      "rank": 18,
+      "slug": "ministry-of-sound",
+      "name": "Ministry Of Sound",
+      "change": "Up 12"
+    },
+    {
+      "year": 2024,
+      "rank": 19,
+      "slug": "studio-338",
+      "name": "Studio 338",
+      "change": "Up 2"
+    },
+    {
+      "year": 2024,
+      "rank": 20,
+      "slug": "pacha-ibiza",
+      "name": "PACHA IBIZA",
+      "change": "Up 3"
+    },
+    {
+      "year": 2024,
+      "rank": 21,
+      "slug": "cavo-paradiso",
+      "name": "Cavo Paradiso",
+      "change": "Up 3"
+    },
+    {
+      "year": 2024,
+      "rank": 22,
+      "slug": "avant-gardner-brooklyn-mirage",
+      "name": "Avant Gardner & The Brooklyn Mirage",
+      "change": "Down 14"
+    },
+    {
+      "year": 2024,
+      "rank": 23,
+      "slug": "surreal-park",
+      "name": "Surreal Park",
+      "change": "Up 48"
+    },
+    {
+      "year": 2024,
+      "rank": 24,
+      "slug": "academy-la",
+      "name": "Academy LA",
+      "change": "Up 7"
+    },
+    {
+      "year": 2024,
+      "rank": 25,
+      "slug": "culture-club-revelin",
+      "name": "Culture Club Revelin",
+      "change": "Down 5"
+    },
+    {
+      "year": 2024,
+      "rank": 26,
+      "slug": "dc-10",
+      "name": "DC-10",
+      "change": "Up 1"
+    },
+    {
+      "year": 2024,
+      "rank": 27,
+      "slug": "exchange-la",
+      "name": "Exchange LA",
+      "change": "Down 13"
+    },
+    {
+      "year": 2024,
+      "rank": 28,
+      "slug": "concourse-project",
+      "name": "The Concourse Project",
+      "change": "Up 11"
+    },
+    {
+      "year": 2024,
+      "rank": 29,
+      "slug": "shishi-bali",
+      "name": "ShiShi Bali",
+      "change": "Up 18"
+    },
+    {
+      "year": 2024,
+      "rank": 30,
+      "slug": "club-space",
+      "name": "Club Space",
+      "change": "Up 6"
+    },
+    {
+      "year": 2024,
+      "rank": 31,
+      "slug": "lost-beach-club",
+      "name": "Lost Beach Club",
+      "change": "Down 6"
+    },
+    {
+      "year": 2024,
+      "rank": 32,
+      "slug": "wave-club",
+      "name": "WAVE Club",
+      "change": "Up 2"
+    },
+    {
+      "year": 2024,
+      "rank": 33,
+      "slug": "motion",
+      "name": "Motion",
+      "change": "Down 14"
+    },
+    {
+      "year": 2024,
+      "rank": 34,
+      "slug": "watergate",
+      "name": "Watergate",
+      "change": "Up 4"
+    },
+    {
+      "year": 2024,
+      "rank": 35,
+      "slug": "warung-beach-club",
+      "name": "Warung Beach Club",
+      "change": "Down 6"
+    },
+    {
+      "year": 2024,
+      "rank": 36,
+      "slug": "penthouse",
+      "name": "The Penthouse",
+      "change": "Up 6"
+    },
+    {
+      "year": 2024,
+      "rank": 37,
+      "slug": "warp-shinjuku",
+      "name": "WARP Shinjuku",
+      "change": "Down 4"
+    },
+    {
+      "year": 2024,
+      "rank": 38,
+      "slug": "omnia",
+      "name": "OMNIA",
+      "change": "Up 3"
+    },
+    {
+      "year": 2024,
+      "rank": 39,
+      "slug": "duplex",
+      "name": "DupleX",
+      "change": "Up 14"
+    },
+    {
+      "year": 2024,
+      "rank": 40,
+      "slug": "sel-octagon",
+      "name": "Sel Octagon",
+      "change": "Up 28"
+    },
+    {
+      "year": 2024,
+      "rank": 41,
+      "slug": "avalon-hollywood",
+      "name": "AVALON Hollywood",
+      "change": "Up 10"
+    },
+    {
+      "year": 2024,
+      "rank": 42,
+      "slug": "ai-x",
+      "name": "Ai-X",
+      "change": "Up 4"
+    },
+    {
+      "year": 2024,
+      "rank": 43,
+      "slug": "boomerang",
+      "name": "Boomerang",
+      "change": "Up 9"
+    },
+    {
+      "year": 2024,
+      "rank": 44,
+      "slug": "1900-le-theatre",
+      "name": "1900 LE THÉÂTRE",
+      "change": "Down 4"
+    },
+    {
+      "year": 2024,
+      "rank": 45,
+      "slug": "crobar",
+      "name": "Crobar",
+      "change": "Down 8"
+    },
+    {
+      "year": 2024,
+      "rank": 46,
+      "slug": "zouk-las-vegas",
+      "name": "Zouk Las Vegas",
+      "change": "Down 14"
+    },
+    {
+      "year": 2024,
+      "rank": 47,
+      "slug": "space-plus",
+      "name": "Space Plus",
+      "change": "Up 19"
+    },
+    {
+      "year": 2024,
+      "rank": 48,
+      "slug": "aquarius",
+      "name": "Aquarius",
+      "change": "Down 22"
+    },
+    {
+      "year": 2024,
+      "rank": 49,
+      "slug": "marquee-nightclub-dayclub",
+      "name": "Marquee Nightclub & Dayclub",
+      "change": "Up 12"
+    },
+    {
+      "year": 2024,
+      "rank": 50,
+      "slug": "lod",
+      "name": "LOD",
+      "change": "Down 1"
+    },
+    {
+      "year": 2024,
+      "rank": 51,
+      "slug": "d-edge",
+      "name": "D-Edge",
+      "change": "Up 24"
+    },
+    {
+      "year": 2024,
+      "rank": 52,
+      "slug": "mad-club",
+      "name": "MAD Club",
+      "change": "Up 7"
+    },
+    {
+      "year": 2024,
+      "rank": 53,
+      "slug": "soudcheck",
+      "name": "Soudcheck",
+      "change": "Up 11"
+    },
+    {
+      "year": 2024,
+      "rank": 54,
+      "slug": "opium-barcelona",
+      "name": "Opium Barcelona",
+      "change": "New entry"
+    },
+    {
+      "year": 2024,
+      "rank": 55,
+      "slug": "amnesia-cap-dagde",
+      "name": "Amnesia Cap d’Agde",
+      "change": "New entry"
+    },
+    {
+      "year": 2024,
+      "rank": 56,
+      "slug": "hakkasan",
+      "name": "Hakkasan",
+      "change": "Down 21"
+    },
+    {
+      "year": 2024,
+      "rank": 57,
+      "slug": "grand-factory",
+      "name": "The Grand Factory",
+      "change": "Up 13"
+    },
+    {
+      "year": 2024,
+      "rank": 58,
+      "slug": "nitsa",
+      "name": "Nitsa",
+      "change": "Up 19"
+    },
+    {
+      "year": 2024,
+      "rank": 59,
+      "slug": "ministry-of-fun",
+      "name": "Ministry Of Fun",
+      "change": "New entry"
+    },
+    {
+      "year": 2024,
+      "rank": 60,
+      "slug": "farout-beach-club",
+      "name": "Farout Beach Club",
+      "change": "Down 6"
+    },
+    {
+      "year": 2024,
+      "rank": 61,
+      "slug": "phi-beach",
+      "name": "Phi Beach",
+      "change": "New entry"
+    },
+    {
+      "year": 2024,
+      "rank": 62,
+      "slug": "warehouse",
+      "name": "Warehouse",
+      "change": "Up 7"
+    },
+    {
+      "year": 2024,
+      "rank": 63,
+      "slug": "zerotokyo",
+      "name": "ZEROTOKYO",
+      "change": "New entry"
+    },
+    {
+      "year": 2024,
+      "rank": 64,
+      "slug": "club-galame",
+      "name": "Club Galame",
+      "change": "Down 21"
+    },
+    {
+      "year": 2024,
+      "rank": 65,
+      "slug": "grand",
+      "name": "The Grand",
+      "change": "Down 20"
+    },
+    {
+      "year": 2024,
+      "rank": 66,
+      "slug": "pitt-club",
+      "name": "Pitt Club",
+      "change": "New entry"
+    },
+    {
+      "year": 2024,
+      "rank": 67,
+      "slug": "drumsheds",
+      "name": "Drumsheds",
+      "change": "New entry"
+    },
+    {
+      "year": 2024,
+      "rank": 68,
+      "slug": "rex-club",
+      "name": "Rex Club",
+      "change": "Down 24"
+    },
+    {
+      "year": 2024,
+      "rank": 69,
+      "slug": "eden",
+      "name": "Eden",
+      "change": "Down 4"
+    },
+    {
+      "year": 2024,
+      "rank": 70,
+      "slug": "cafe-del-mar",
+      "name": "Cafe Del Mar",
+      "change": "New entry"
+    },
+    {
+      "year": 2024,
+      "rank": 71,
+      "slug": "time",
+      "name": "Time",
+      "change": "Up 7"
+    },
+    {
+      "year": 2024,
+      "rank": 72,
+      "slug": "womb",
+      "name": "WOMB",
+      "change": "Up 4"
+    },
+    {
+      "year": 2024,
+      "rank": 73,
+      "slug": "marquee",
+      "name": "Marquee",
+      "change": "New entry"
+    },
+    {
+      "year": 2024,
+      "rank": 74,
+      "slug": "razzmatazz",
+      "name": "Razzmatazz",
+      "change": "Down 12"
+    },
+    {
+      "year": 2024,
+      "rank": 75,
+      "slug": "fomo",
+      "name": "FOMO",
+      "change": "New entry"
+    },
+    {
+      "year": 2024,
+      "rank": 76,
+      "slug": "elsewhere",
+      "name": "Elsewhere",
+      "change": "Down 9"
+    },
+    {
+      "year": 2024,
+      "rank": 77,
+      "slug": "tresor",
+      "name": "Tresor",
+      "change": "Down 5"
+    },
+    {
+      "year": 2024,
+      "rank": 78,
+      "slug": "home",
+      "name": "Home",
+      "change": "Up 1"
+    },
+    {
+      "year": 2024,
+      "rank": 79,
+      "slug": "beachclub",
+      "name": "Beachclub",
+      "change": "Down 29"
+    },
+    {
+      "year": 2024,
+      "rank": 80,
+      "slug": "sound",
+      "name": "Sound",
+      "change": null
+    },
+    {
+      "year": 2024,
+      "rank": 81,
+      "slug": "pocpoc-garden",
+      "name": "POCPOC Garden",
+      "change": "New entry"
+    },
+    {
+      "year": 2024,
+      "rank": 82,
+      "slug": "after-caposile",
+      "name": "After Caposile",
+      "change": "Up 1"
+    },
+    {
+      "year": 2024,
+      "rank": 83,
+      "slug": "muze",
+      "name": "MUZE",
+      "change": "Down 1"
+    },
+    {
+      "year": 2024,
+      "rank": 84,
+      "slug": "versuz",
+      "name": "Versuz",
+      "change": "Down 6"
+    },
+    {
+      "year": 2024,
+      "rank": 85,
+      "slug": "de-school",
+      "name": "De School",
+      "change": "Down 1"
+    },
+    {
+      "year": 2024,
+      "rank": 86,
+      "slug": "nova",
+      "name": "Nova",
+      "change": "Up 6"
+    },
+    {
+      "year": 2024,
+      "rank": 87,
+      "slug": "koko",
+      "name": "Koko",
+      "change": null
+    },
+    {
+      "year": 2024,
+      "rank": 88,
+      "slug": "barbarellas-discotheque",
+      "name": "Barbarella's Discotheque",
+      "change": "Down 3"
+    },
+    {
+      "year": 2024,
+      "rank": 89,
+      "slug": "exe-club",
+      "name": "EXE Club",
+      "change": "Down 2"
+    },
+    {
+      "year": 2024,
+      "rank": 90,
+      "slug": "index",
+      "name": "Index",
+      "change": "New entry"
+    },
+    {
+      "year": 2024,
+      "rank": 91,
+      "slug": "noxx",
+      "name": "Noxx",
+      "change": "New entry"
+    },
+    {
+      "year": 2024,
+      "rank": 92,
+      "slug": "cromie-disco",
+      "name": "Cromie Disco",
+      "change": "Down 3"
+    },
+    {
+      "year": 2024,
+      "rank": 93,
+      "slug": "rebel",
+      "name": "Rebel",
+      "change": "New entry"
+    },
+    {
+      "year": 2024,
+      "rank": 94,
+      "slug": "hardpop",
+      "name": "Hardpop",
+      "change": "Up 6"
+    },
+    {
+      "year": 2024,
+      "rank": 95,
+      "slug": "shelter",
+      "name": "Shelter",
+      "change": "Down 2"
+    },
+    {
+      "year": 2024,
+      "rank": 96,
+      "slug": "new-city-gas",
+      "name": "New City Gas",
+      "change": "Down 1"
+    },
+    {
+      "year": 2024,
+      "rank": 97,
+      "slug": "spazio-900",
+      "name": "Spazio 900",
+      "change": "New entry"
+    },
+    {
+      "year": 2024,
+      "rank": 98,
+      "slug": "and-club",
+      "name": "And Club",
+      "change": "Down 2"
+    },
+    {
+      "year": 2024,
+      "rank": 99,
+      "slug": "octava",
+      "name": "Octava",
+      "change": "Down 1"
+    },
+    {
+      "year": 2024,
+      "rank": 100,
+      "slug": "la-feria",
+      "name": "La Feria",
+      "change": "Down 10"
+    },
+    {
+      "year": 2025,
+      "rank": 1,
+      "slug": "hi-ibiza",
+      "name": "Hï Ibiza",
+      "change": "Non-mover"
+    },
+    {
+      "year": 2025,
+      "rank": 2,
+      "slug": "greenvalley",
+      "name": "GREENVALLEY",
+      "change": "Non-mover"
+    },
+    {
+      "year": 2025,
+      "rank": 3,
+      "slug": "ushuaia-ibiza",
+      "name": "Ushuaïa Ibiza",
+      "change": "Up 1"
+    },
+    {
+      "year": 2025,
+      "rank": 4,
+      "slug": "warehouse-project-depot-mayfield",
+      "name": "The Warehouse Project at Depot Mayfield",
+      "change": "Up 2"
+    },
+    {
+      "year": 2025,
+      "rank": 5,
+      "slug": "echostage",
+      "name": "Echostage",
+      "change": "Down 2"
+    },
+    {
+      "year": 2025,
+      "rank": 6,
+      "slug": "savaya",
+      "name": "Savaya",
+      "change": "Up 3"
+    },
+    {
+      "year": 2025,
+      "rank": 7,
+      "slug": "bootshaus",
+      "name": "Bootshaus",
+      "change": "Down 2"
+    },
+    {
+      "year": 2025,
+      "rank": 8,
+      "slug": "laroc-club",
+      "name": "Laroc Club",
+      "change": "Up 2"
+    },
+    {
+      "year": 2025,
+      "rank": 9,
+      "slug": "illuzion-phuket",
+      "name": "Illuzion Phuket",
+      "change": "Up 2"
+    },
+    {
+      "year": 2025,
+      "rank": 10,
+      "slug": "noa-beach-club",
+      "name": "Noa Beach Club",
+      "change": "Up 2"
+    },
+    {
+      "year": 2025,
+      "rank": 11,
+      "slug": "amnesia",
+      "name": "Amnesia",
+      "change": "Down 3"
+    },
+    {
+      "year": 2025,
+      "rank": 12,
+      "slug": "fabric",
+      "name": "fabric",
+      "change": "Down 5"
+    },
+    {
+      "year": 2025,
+      "rank": 13,
+      "slug": "pacha",
+      "name": "Pacha",
+      "change": "Up 7"
+    },
+    {
+      "year": 2025,
+      "rank": 14,
+      "slug": "fabrik",
+      "name": "FABRIK",
+      "change": "Up 3"
+    },
+    {
+      "year": 2025,
+      "rank": 15,
+      "slug": "dc-10",
+      "name": "DC-10",
+      "change": "Up 11"
+    },
+    {
+      "year": 2025,
+      "rank": 16,
+      "slug": "berghain",
+      "name": "Berghain",
+      "change": "Down 3"
+    },
+    {
+      "year": 2025,
+      "rank": 17,
+      "slug": "avant-gardner-brooklyn-mirage",
+      "name": "Avant Gardner & The Brooklyn Mirage",
+      "change": "Up 5"
+    },
+    {
+      "year": 2025,
+      "rank": 18,
+      "slug": "studio-338",
+      "name": "Studio 338",
+      "change": "Up 1"
+    },
+    {
+      "year": 2025,
+      "rank": 19,
+      "slug": "play-house",
+      "name": "PLAY HOUSE",
+      "change": "Down 3"
+    },
+    {
+      "year": 2025,
+      "rank": 20,
+      "slug": "cavo-paradiso",
+      "name": "Cavo Paradiso",
+      "change": "Up 1"
+    },
+    {
+      "year": 2025,
+      "rank": 21,
+      "slug": "papaya-club",
+      "name": "Papaya Club",
+      "change": "Down 6"
+    },
+    {
+      "year": 2025,
+      "rank": 22,
+      "slug": "ministry-of-sound",
+      "name": "Ministry Of Sound",
+      "change": "Down 4"
+    },
+    {
+      "year": 2025,
+      "rank": 23,
+      "slug": "culture-club-revelin",
+      "name": "Culture Club Revelin",
+      "change": "Up 2"
+    },
+    {
+      "year": 2025,
+      "rank": 24,
+      "slug": "club-space",
+      "name": "Club Space",
+      "change": "Up 6"
+    },
+    {
+      "year": 2025,
+      "rank": 25,
+      "slug": "shishi-bali",
+      "name": "ShiShi Bali",
+      "change": "Up 4"
+    },
+    {
+      "year": 2025,
+      "rank": 26,
+      "slug": "surreal-park",
+      "name": "Surreal Park",
+      "change": "Down 3"
+    },
+    {
+      "year": 2025,
+      "rank": 27,
+      "slug": "concourse-project",
+      "name": "The Concourse Project",
+      "change": "Up 1"
+    },
+    {
+      "year": 2025,
+      "rank": 28,
+      "slug": "wave-club",
+      "name": "WAVE Club",
+      "change": "Up 4"
+    },
+    {
+      "year": 2025,
+      "rank": 29,
+      "slug": "academy-la",
+      "name": "Academy LA",
+      "change": "Down 5"
+    },
+    {
+      "year": 2025,
+      "rank": 30,
+      "slug": "zouk-singapore",
+      "name": "Zouk Singapore",
+      "change": "Down 16"
+    },
+    {
+      "year": 2025,
+      "rank": 31,
+      "slug": "warp-shinjuku",
+      "name": "WARP Shinjuku",
+      "change": "Up 6"
+    },
+    {
+      "year": 2025,
+      "rank": 32,
+      "slug": "lost-beach-club",
+      "name": "Lost Beach Club",
+      "change": "Down 1"
+    },
+    {
+      "year": 2025,
+      "rank": 33,
+      "slug": "warung-beach-club",
+      "name": "Warung Beach Club",
+      "change": "Up 2"
+    },
+    {
+      "year": 2025,
+      "rank": 34,
+      "slug": "penthouse",
+      "name": "The Penthouse",
+      "change": "Up 2"
+    },
+    {
+      "year": 2025,
+      "rank": 35,
+      "slug": "space-riccione",
+      "name": "Space Riccione",
+      "change": "New entry"
+    },
+    {
+      "year": 2025,
+      "rank": 36,
+      "slug": "exchange-la",
+      "name": "Exchange LA",
+      "change": "Down 9"
+    },
+    {
+      "year": 2025,
+      "rank": 37,
+      "slug": "phi-beach",
+      "name": "Phi Beach",
+      "change": "Up 24"
+    },
+    {
+      "year": 2025,
+      "rank": 38,
+      "slug": "amnesia-cap-dagde",
+      "name": "Amnesia Cap d’Agde",
+      "change": "Up 17"
+    },
+    {
+      "year": 2025,
+      "rank": 39,
+      "slug": "marquee-singapore",
+      "name": "Marquee Singapore",
+      "change": "Up 34"
+    },
+    {
+      "year": 2025,
+      "rank": 40,
+      "slug": "boomerang",
+      "name": "Boomerang",
+      "change": "Up 3"
+    },
+    {
+      "year": 2025,
+      "rank": 41,
+      "slug": "duplex",
+      "name": "DupleX",
+      "change": "Down 2"
+    },
+    {
+      "year": 2025,
+      "rank": 42,
+      "slug": "motion",
+      "name": "Motion",
+      "change": "Down 9"
+    },
+    {
+      "year": 2025,
+      "rank": 43,
+      "slug": "space-plus-bangkok",
+      "name": "Space Plus Bangkok",
+      "change": "Up 4"
+    },
+    {
+      "year": 2025,
+      "rank": 44,
+      "slug": "lod",
+      "name": "LOD",
+      "change": "Up 6"
+    },
+    {
+      "year": 2025,
+      "rank": 45,
+      "slug": "cafe-del-mar-phuket",
+      "name": "Café Del Mar Phuket",
+      "change": "Up 25"
+    },
+    {
+      "year": 2025,
+      "rank": 46,
+      "slug": "avalon-hollywood",
+      "name": "AVALON Hollywood",
+      "change": "Down 5"
+    },
+    {
+      "year": 2025,
+      "rank": 47,
+      "slug": "mad-club",
+      "name": "MAD Club",
+      "change": "Up 4"
+    },
+    {
+      "year": 2025,
+      "rank": 48,
+      "slug": "omnia",
+      "name": "OMNIA",
+      "change": "Down 10"
+    },
+    {
+      "year": 2025,
+      "rank": 49,
+      "slug": "crobar",
+      "name": "Crobar",
+      "change": "Down 4"
+    },
+    {
+      "year": 2025,
+      "rank": 50,
+      "slug": "sel-octagon",
+      "name": "Sel Octagon",
+      "change": "Down 10"
+    },
+    {
+      "year": 2025,
+      "rank": 51,
+      "slug": "nitsa",
+      "name": "Nitsa",
+      "change": "Down 7"
+    },
+    {
+      "year": 2025,
+      "rank": 52,
+      "slug": "silo-dallas",
+      "name": "SILO Dallas",
+      "change": "New entry"
+    },
+    {
+      "year": 2025,
+      "rank": 53,
+      "slug": "d-edge",
+      "name": "D-Edge",
+      "change": "Down 2"
+    },
+    {
+      "year": 2025,
+      "rank": 54,
+      "slug": "marquee-nightclub-dayclub",
+      "name": "Marquee Nightclub & Dayclub",
+      "change": "Down 5"
+    },
+    {
+      "year": 2025,
+      "rank": 55,
+      "slug": "warehouse",
+      "name": "Warehouse",
+      "change": "Up 7"
+    },
+    {
+      "year": 2025,
+      "rank": 56,
+      "slug": "quake-arena",
+      "name": "Quake Arena",
+      "change": "New entry"
+    },
+    {
+      "year": 2025,
+      "rank": 57,
+      "slug": "soundcheck",
+      "name": "Soundcheck",
+      "change": "Down 4"
+    },
+    {
+      "year": 2025,
+      "rank": 58,
+      "slug": "hakkasan",
+      "name": "Hakkasan",
+      "change": "Down 2"
+    },
+    {
+      "year": 2025,
+      "rank": 59,
+      "slug": "zouk-las-vegas",
+      "name": "Zouk Las Vegas",
+      "change": "Down 13"
+    },
+    {
+      "year": 2025,
+      "rank": 60,
+      "slug": "world-house",
+      "name": "WORLD HOUSE",
+      "change": "New entry"
+    },
+    {
+      "year": 2025,
+      "rank": 61,
+      "slug": "pitt-club",
+      "name": "Pitt Club",
+      "change": "Up 5"
+    },
+    {
+      "year": 2025,
+      "rank": 62,
+      "slug": "grand-factory",
+      "name": "The Grand Factory",
+      "change": "Down 5"
+    },
+    {
+      "year": 2025,
+      "rank": 63,
+      "slug": "farout-beach-club",
+      "name": "Farout Beach Club",
+      "change": "Down 3"
+    },
+    {
+      "year": 2025,
+      "rank": 64,
+      "slug": "room26",
+      "name": "Room26",
+      "change": "New entry"
+    },
+    {
+      "year": 2025,
+      "rank": 65,
+      "slug": "fomo",
+      "name": "FOMO",
+      "change": "Up 10"
+    },
+    {
+      "year": 2025,
+      "rank": 66,
+      "slug": "ai-x",
+      "name": "Ai-X",
+      "change": "Down 22"
+    },
+    {
+      "year": 2025,
+      "rank": 67,
+      "slug": "plus-hanoi",
+      "name": "APLUS HANOI",
+      "change": "New entry"
+    },
+    {
+      "year": 2025,
+      "rank": 68,
+      "slug": "koko",
+      "name": "Koko",
+      "change": "Up 19"
+    },
+    {
+      "year": 2025,
+      "rank": 69,
+      "slug": "drumsheds",
+      "name": "Drumsheds",
+      "change": "Down 2"
+    },
+    {
+      "year": 2025,
+      "rank": 70,
+      "slug": "aquarius",
+      "name": "Aquarius",
+      "change": "Down 22"
+    },
+    {
+      "year": 2025,
+      "rank": 71,
+      "slug": "opium-barcelona",
+      "name": "Opium Barcelona",
+      "change": "Down 17"
+    },
+    {
+      "year": 2025,
+      "rank": 72,
+      "slug": "time",
+      "name": "Time",
+      "change": "Down 1"
+    },
+    {
+      "year": 2025,
+      "rank": 73,
+      "slug": "pocpoc-garden",
+      "name": "POCPOC Garden",
+      "change": "Up 8"
+    },
+    {
+      "year": 2025,
+      "rank": 74,
+      "slug": "bonbonniere-tulum",
+      "name": "Bonbonniere Tulum",
+      "change": "New entry"
+    },
+    {
+      "year": 2025,
+      "rank": 75,
+      "slug": "liv-nightclub",
+      "name": "Liv Nightclub",
+      "change": null
+    },
+    {
+      "year": 2025,
+      "rank": 76,
+      "slug": "club-khaosan",
+      "name": "The Club Khaosan",
+      "change": "New entry"
+    },
+    {
+      "year": 2025,
+      "rank": 77,
+      "slug": "sound",
+      "name": "Sound",
+      "change": "Up 3"
+    },
+    {
+      "year": 2025,
+      "rank": 78,
+      "slug": "womb",
+      "name": "WOMB",
+      "change": "Down 6"
+    },
+    {
+      "year": 2025,
+      "rank": 79,
+      "slug": "after-caposile",
+      "name": "After Caposile",
+      "change": "Up 3"
+    },
+    {
+      "year": 2025,
+      "rank": 80,
+      "slug": "radi",
+      "name": "RADi",
+      "change": "New entry"
+    },
+    {
+      "year": 2025,
+      "rank": 81,
+      "slug": "beachclub",
+      "name": "Beachclub",
+      "change": "Down 2"
+    },
+    {
+      "year": 2025,
+      "rank": 82,
+      "slug": "radius",
+      "name": "Radius",
+      "change": "New entry"
+    },
+    {
+      "year": 2025,
+      "rank": 83,
+      "slug": "chinois",
+      "name": "Chinois",
+      "change": "New entry"
+    },
+    {
+      "year": 2025,
+      "rank": 84,
+      "slug": "midnight-club",
+      "name": "Midnight Club",
+      "change": "New entry"
+    },
+    {
+      "year": 2025,
+      "rank": 85,
+      "slug": "noxx",
+      "name": "Noxx",
+      "change": "Up 6"
+    },
+    {
+      "year": 2025,
+      "rank": 86,
+      "slug": "soho-garden",
+      "name": "Soho Garden",
+      "change": "New entry"
+    },
+    {
+      "year": 2025,
+      "rank": 87,
+      "slug": "zerotokyo",
+      "name": "ZEROTOKYO",
+      "change": "Down 24"
+    },
+    {
+      "year": 2025,
+      "rank": 88,
+      "slug": "eden",
+      "name": "Eden",
+      "change": "Down 19"
+    },
+    {
+      "year": 2025,
+      "rank": 89,
+      "slug": "rex-club",
+      "name": "Rex Club",
+      "change": "Down 21"
+    },
+    {
+      "year": 2025,
+      "rank": 90,
+      "slug": "republic-club-pattaya",
+      "name": "Republic Club",
+      "change": "New entry"
+    },
+    {
+      "year": 2025,
+      "rank": 91,
+      "slug": "la-feria",
+      "name": "La Feria",
+      "change": "Up 9"
+    },
+    {
+      "year": 2025,
+      "rank": 92,
+      "slug": "space-club",
+      "name": "Space Club",
+      "change": "New entry"
+    },
+    {
+      "year": 2025,
+      "rank": 93,
+      "slug": "nova-sd",
+      "name": "NOVA SD",
+      "change": "Down 7"
+    },
+    {
+      "year": 2025,
+      "rank": 94,
+      "slug": "chinese-laundry",
+      "name": "Chinese Laundry",
+      "change": null
+    },
+    {
+      "year": 2025,
+      "rank": 95,
+      "slug": "vega-discoteque",
+      "name": "VEGA Discoteque",
+      "change": "New entry"
+    },
+    {
+      "year": 2025,
+      "rank": 96,
+      "slug": "tipsy-unicorn",
+      "name": "Tipsy Unicorn",
+      "change": "New entry"
+    },
+    {
+      "year": 2025,
+      "rank": 97,
+      "slug": "tenax",
+      "name": "Tenax",
+      "change": null
+    },
+    {
+      "year": 2025,
+      "rank": 98,
+      "slug": "index",
+      "name": "Index",
+      "change": "Down 8"
+    },
+    {
+      "year": 2025,
+      "rank": 99,
+      "slug": "muze",
+      "name": "MUZE",
+      "change": "Down 16"
+    },
+    {
+      "year": 2025,
+      "rank": 100,
+      "slug": "ilmuretto",
+      "name": "ilMuretto",
+      "change": null
+    },
+    {
+      "year": 2026,
+      "rank": 1,
+      "slug": "unvrs",
+      "name": "[UNVRS]",
+      "change": "New entry"
+    },
+    {
+      "year": 2026,
+      "rank": 2,
+      "slug": "greenvalley",
+      "name": "GREENVALLEY",
+      "change": "Non-mover"
+    },
+    {
+      "year": 2026,
+      "rank": 3,
+      "slug": "ushuaia-ibiza",
+      "name": "Ushuaïa Ibiza",
+      "change": "Non-mover"
+    },
+    {
+      "year": 2026,
+      "rank": 4,
+      "slug": "hi-ibiza",
+      "name": "Hï Ibiza",
+      "change": "Down 3"
+    },
+    {
+      "year": 2026,
+      "rank": 5,
+      "slug": "savaya",
+      "name": "Savaya",
+      "change": "Up 1"
+    },
+    {
+      "year": 2026,
+      "rank": 6,
+      "slug": "echostage",
+      "name": "Echostage",
+      "change": "Down 1"
+    },
+    {
+      "year": 2026,
+      "rank": 7,
+      "slug": "laroc-club",
+      "name": "Laroc Club",
+      "change": "Up 1"
+    },
+    {
+      "year": 2026,
+      "rank": 8,
+      "slug": "fabrik",
+      "name": "FABRIK",
+      "change": "Up 6"
+    },
+    {
+      "year": 2026,
+      "rank": 9,
+      "slug": "illuzion-phuket",
+      "name": "Illuzion Phuket",
+      "change": "Non-mover"
+    },
+    {
+      "year": 2026,
+      "rank": 10,
+      "slug": "surreal-park",
+      "name": "Surreal Park",
+      "change": "Up 16"
+    },
+    {
+      "year": 2026,
+      "rank": 11,
+      "slug": "bootshaus",
+      "name": "Bootshaus",
+      "change": "Down 4"
+    },
+    {
+      "year": 2026,
+      "rank": 12,
+      "slug": "ins-land",
+      "name": "INS LAND",
+      "change": "New entry"
+    },
+    {
+      "year": 2026,
+      "rank": 13,
+      "slug": "fabric",
+      "name": "fabric",
+      "change": "Down 1"
+    },
+    {
+      "year": 2026,
+      "rank": 14,
+      "slug": "club-space",
+      "name": "Club Space",
+      "change": "Up 10"
+    },
+    {
+      "year": 2026,
+      "rank": 15,
+      "slug": "warehouse-project",
+      "name": "The Warehouse Project",
+      "change": "Down 11"
+    },
+    {
+      "year": 2026,
+      "rank": 16,
+      "slug": "amnesia-ibiza",
+      "name": "Amnesia Ibiza",
+      "change": "Down 5"
+    },
+    {
+      "year": 2026,
+      "rank": 17,
+      "slug": "zouk-singapore",
+      "name": "Zouk Singapore",
+      "change": "Up 13"
+    },
+    {
+      "year": 2026,
+      "rank": 18,
+      "slug": "pacha-ibiza",
+      "name": "PACHA IBIZA",
+      "change": "Down 5"
+    },
+    {
+      "year": 2026,
+      "rank": 19,
+      "slug": "dc-10",
+      "name": "DC-10",
+      "change": "Down 4"
+    },
+    {
+      "year": 2026,
+      "rank": 20,
+      "slug": "studio-338",
+      "name": "Studio 338",
+      "change": "Down 2"
+    },
+    {
+      "year": 2026,
+      "rank": 21,
+      "slug": "berghain",
+      "name": "Berghain",
+      "change": "Down 5"
+    },
+    {
+      "year": 2026,
+      "rank": 22,
+      "slug": "cavo-paradiso",
+      "name": "Cavo Paradiso",
+      "change": "Down 2"
+    },
+    {
+      "year": 2026,
+      "rank": 23,
+      "slug": "wave-club",
+      "name": "WAVE Club",
+      "change": "Up 5"
+    },
+    {
+      "year": 2026,
+      "rank": 24,
+      "slug": "ministry-of-sound",
+      "name": "Ministry Of Sound",
+      "change": "Down 2"
+    },
+    {
+      "year": 2026,
+      "rank": 25,
+      "slug": "culture-club-revelin",
+      "name": "Culture Club Revelin",
+      "change": "Down 2"
+    },
+    {
+      "year": 2026,
+      "rank": 26,
+      "slug": "space-riccione",
+      "name": "Space Riccione",
+      "change": "Up 9"
+    },
+    {
+      "year": 2026,
+      "rank": 27,
+      "slug": "play-x",
+      "name": "Play X",
+      "change": "New entry"
+    },
+    {
+      "year": 2026,
+      "rank": 28,
+      "slug": "lost-beach-club",
+      "name": "Lost Beach Club",
+      "change": "Up 4"
+    },
+    {
+      "year": 2026,
+      "rank": 29,
+      "slug": "papaya-club",
+      "name": "Papaya Club",
+      "change": "Down 8"
+    },
+    {
+      "year": 2026,
+      "rank": 30,
+      "slug": "quake-arena",
+      "name": "Quake Arena",
+      "change": "Up 26"
+    },
+    {
+      "year": 2026,
+      "rank": 31,
+      "slug": "concourse-project",
+      "name": "The Concourse Project",
+      "change": "Down 4"
+    },
+    {
+      "year": 2026,
+      "rank": 32,
+      "slug": "boomerang",
+      "name": "Boomerang",
+      "change": "Up 8"
+    },
+    {
+      "year": 2026,
+      "rank": 33,
+      "slug": "amnesia-cap-dagde",
+      "name": "Amnesia Cap d’Agde",
+      "change": "Up 5"
+    },
+    {
+      "year": 2026,
+      "rank": 34,
+      "slug": "marquee-singapore",
+      "name": "Marquee Singapore",
+      "change": "Up 5"
+    },
+    {
+      "year": 2026,
+      "rank": 35,
+      "slug": "d-edge",
+      "name": "D-Edge",
+      "change": "Up 18"
+    },
+    {
+      "year": 2026,
+      "rank": 36,
+      "slug": "penthouse",
+      "name": "The Penthouse",
+      "change": "Down 2"
+    },
+    {
+      "year": 2026,
+      "rank": 37,
+      "slug": "cafe-del-mar-phuket",
+      "name": "Café Del Mar Phuket",
+      "change": "Up 8"
+    },
+    {
+      "year": 2026,
+      "rank": 38,
+      "slug": "duplex",
+      "name": "DupleX",
+      "change": "Up 3"
+    },
+    {
+      "year": 2026,
+      "rank": 39,
+      "slug": "silo-dallas",
+      "name": "SILO Dallas",
+      "change": "Up 13"
+    },
+    {
+      "year": 2026,
+      "rank": 40,
+      "slug": "lod",
+      "name": "LOD",
+      "change": "Up 4"
+    },
+    {
+      "year": 2026,
+      "rank": 41,
+      "slug": "crobar",
+      "name": "Crobar",
+      "change": "Up 8"
+    },
+    {
+      "year": 2026,
+      "rank": 42,
+      "slug": "atlas-superclub-bali",
+      "name": "Atlas Superclub Bali",
+      "change": "New entry"
+    },
+    {
+      "year": 2026,
+      "rank": 43,
+      "slug": "aplus-hanoi",
+      "name": "APLUS HANOI",
+      "change": "Up 24"
+    },
+    {
+      "year": 2026,
+      "rank": 44,
+      "slug": "academy-la",
+      "name": "Academy LA",
+      "change": "Down 15"
+    },
+    {
+      "year": 2026,
+      "rank": 45,
+      "slug": "drumsheds",
+      "name": "Drumsheds",
+      "change": "Up 24"
+    },
+    {
+      "year": 2026,
+      "rank": 46,
+      "slug": "warung-beach-club",
+      "name": "Warung Beach Club",
+      "change": "Down 13"
+    },
+    {
+      "year": 2026,
+      "rank": 47,
+      "slug": "shishi-bali",
+      "name": "ShiShi Bali",
+      "change": "Down 22"
+    },
+    {
+      "year": 2026,
+      "rank": 48,
+      "slug": "exchange-la",
+      "name": "Exchange LA",
+      "change": "Down 12"
+    },
+    {
+      "year": 2026,
+      "rank": 49,
+      "slug": "fomo",
+      "name": "FOMO",
+      "change": "Up 16"
+    },
+    {
+      "year": 2026,
+      "rank": 50,
+      "slug": "atlas-superclub-bangkok",
+      "name": "Atlas Superclub Bangkok",
+      "change": "New entry"
+    },
+    {
+      "year": 2026,
+      "rank": 51,
+      "slug": "zouk-tokyo",
+      "name": "Zouk Tokyo",
+      "change": "New entry"
+    },
+    {
+      "year": 2026,
+      "rank": 52,
+      "slug": "club-seen-koh-samui",
+      "name": "CLUB SEEN Koh Samui",
+      "change": "New entry"
+    },
+    {
+      "year": 2026,
+      "rank": 53,
+      "slug": "warehouse",
+      "name": "Warehouse",
+      "change": "Up 1"
+    },
+    {
+      "year": 2026,
+      "rank": 54,
+      "slug": "phi-beach",
+      "name": "Phi Beach",
+      "change": "Down 17"
+    },
+    {
+      "year": 2026,
+      "rank": 55,
+      "slug": "h-club-jakarta",
+      "name": "The H Club Jakarta",
+      "change": "New entry"
+    },
+    {
+      "year": 2026,
+      "rank": 56,
+      "slug": "nitsa",
+      "name": "Nitsa",
+      "change": "Down 5"
+    },
+    {
+      "year": 2026,
+      "rank": 57,
+      "slug": "lion-seoul",
+      "name": "Lion Seoul",
+      "change": "New entry"
+    },
+    {
+      "year": 2026,
+      "rank": 58,
+      "slug": "world-house",
+      "name": "WORLD HOUSE",
+      "change": "Up 2"
+    },
+    {
+      "year": 2026,
+      "rank": 59,
+      "slug": "aplus-saigon",
+      "name": "APLUS SAIGON",
+      "change": "New entry"
+    },
+    {
+      "year": 2026,
+      "rank": 60,
+      "slug": "mad-club",
+      "name": "MAD Club",
+      "change": "Down 13"
+    },
+    {
+      "year": 2026,
+      "rank": 61,
+      "slug": "big-bull",
+      "name": "Big Bull",
+      "change": "New entry"
+    },
+    {
+      "year": 2026,
+      "rank": 62,
+      "slug": "room26",
+      "name": "Room26",
+      "change": "Up 2"
+    },
+    {
+      "year": 2026,
+      "rank": 63,
+      "slug": "farout-beach-club",
+      "name": "Farout Beach Club",
+      "change": "Non-mover"
+    },
+    {
+      "year": 2026,
+      "rank": 64,
+      "slug": "avalon-hollywood",
+      "name": "AVALON Hollywood",
+      "change": "Down 18"
+    },
+    {
+      "year": 2026,
+      "rank": 65,
+      "slug": "hakkasan",
+      "name": "Hakkasan",
+      "change": "Down 7"
+    },
+    {
+      "year": 2026,
+      "rank": 66,
+      "slug": "koko",
+      "name": "Koko",
+      "change": "Up 2"
+    },
+    {
+      "year": 2026,
+      "rank": 67,
+      "slug": "void",
+      "name": "VOID",
+      "change": "New entry"
+    },
+    {
+      "year": 2026,
+      "rank": 68,
+      "slug": "cine-saigon",
+      "name": "CINÉ Saigon",
+      "change": "New entry"
+    },
+    {
+      "year": 2026,
+      "rank": 69,
+      "slug": "space-club",
+      "name": "Space Club",
+      "change": "Up 23"
+    },
+    {
+      "year": 2026,
+      "rank": 70,
+      "slug": "omnia",
+      "name": "OMNIA",
+      "change": "Down 22"
+    },
+    {
+      "year": 2026,
+      "rank": 71,
+      "slug": "club-khaosan",
+      "name": "The Club Khaosan",
+      "change": "Up 5"
+    },
+    {
+      "year": 2026,
+      "rank": 72,
+      "slug": "liv-nightclub",
+      "name": "Liv Nightclub",
+      "change": "Up 3"
+    },
+    {
+      "year": 2026,
+      "rank": 73,
+      "slug": "warp-shinjuku",
+      "name": "WARP Shinjuku",
+      "change": "Down 42"
+    },
+    {
+      "year": 2026,
+      "rank": 74,
+      "slug": "chinois",
+      "name": "Chinois",
+      "change": "Up 9"
+    },
+    {
+      "year": 2026,
+      "rank": 75,
+      "slug": "mute",
+      "name": "MUTE",
+      "change": "New entry"
+    },
+    {
+      "year": 2026,
+      "rank": 76,
+      "slug": "papagayo-tenerife",
+      "name": "Papagayo Tenerife",
+      "change": "New entry"
+    },
+    {
+      "year": 2026,
+      "rank": 77,
+      "slug": "midnight-club",
+      "name": "Midnight Club",
+      "change": "Up 7"
+    },
+    {
+      "year": 2026,
+      "rank": 78,
+      "slug": "after-caposile",
+      "name": "After Caposile",
+      "change": "Up 1"
+    },
+    {
+      "year": 2026,
+      "rank": 79,
+      "slug": "radius",
+      "name": "Radius",
+      "change": "Up 3"
+    },
+    {
+      "year": 2026,
+      "rank": 80,
+      "slug": "index",
+      "name": "Index",
+      "change": "Up 18"
+    },
+    {
+      "year": 2026,
+      "rank": 81,
+      "slug": "pelicano",
+      "name": "Pelícano",
+      "change": "New entry"
+    },
+    {
+      "year": 2026,
+      "rank": 82,
+      "slug": "republic-club",
+      "name": "Republic Club",
+      "change": "Up 8"
+    },
+    {
+      "year": 2026,
+      "rank": 83,
+      "slug": "zouk",
+      "name": "Zouk",
+      "change": "Down 24"
+    },
+    {
+      "year": 2026,
+      "rank": 84,
+      "slug": "marquee-nightclub-dayclub",
+      "name": "Marquee Nightclub & Dayclub",
+      "change": "Down 30"
+    },
+    {
+      "year": 2026,
+      "rank": 85,
+      "slug": "ai-x",
+      "name": "Ai-X",
+      "change": "Down 19"
+    },
+    {
+      "year": 2026,
+      "rank": 86,
+      "slug": "sound",
+      "name": "Sound",
+      "change": "Down 9"
+    },
+    {
+      "year": 2026,
+      "rank": 87,
+      "slug": "aquarius",
+      "name": "Aquarius",
+      "change": "Down 17"
+    },
+    {
+      "year": 2026,
+      "rank": 88,
+      "slug": "womb",
+      "name": "WOMB",
+      "change": "Down 10"
+    },
+    {
+      "year": 2026,
+      "rank": 89,
+      "slug": "tenax-club",
+      "name": "Tenax Club",
+      "change": "Up 8"
+    },
+    {
+      "year": 2026,
+      "rank": 90,
+      "slug": "shelter-amsterdam",
+      "name": "Shelter Amsterdam",
+      "change": null
+    },
+    {
+      "year": 2026,
+      "rank": 91,
+      "slug": "beachclub",
+      "name": "Beachclub",
+      "change": "Down 10"
+    },
+    {
+      "year": 2026,
+      "rank": 92,
+      "slug": "ivy-sydney",
+      "name": "ivy Sydney",
+      "change": "New entry"
+    },
+    {
+      "year": 2026,
+      "rank": 93,
+      "slug": "soho-garden",
+      "name": "Soho Garden",
+      "change": "Down 7"
+    },
+    {
+      "year": 2026,
+      "rank": 94,
+      "slug": "amnesia-milano",
+      "name": "Amnesia Milano",
+      "change": "New entry"
+    },
+    {
+      "year": 2026,
+      "rank": 95,
+      "slug": "time",
+      "name": "Time",
+      "change": "Down 23"
+    },
+    {
+      "year": 2026,
+      "rank": 96,
+      "slug": "ilmuretto",
+      "name": "ilMuretto",
+      "change": "Up 4"
+    },
+    {
+      "year": 2026,
+      "rank": 97,
+      "slug": "chinese-laundry",
+      "name": "Chinese Laundry",
+      "change": "Down 3"
+    },
+    {
+      "year": 2026,
+      "rank": 98,
+      "slug": "muze",
+      "name": "MUZE",
+      "change": "Up 1"
+    },
+    {
+      "year": 2026,
+      "rank": 99,
+      "slug": "eden",
+      "name": "Eden",
+      "change": "Down 11"
+    },
+    {
+      "year": 2026,
+      "rank": 100,
+      "slug": "open-ground",
+      "name": "Open Ground",
+      "change": "New entry"
+    }
+  ]
+}
