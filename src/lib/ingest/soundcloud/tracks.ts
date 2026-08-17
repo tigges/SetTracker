@@ -344,4 +344,14 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     type: "radio",
     minDurationSec: 30 * 60,
   },
+  {
+    // Official Tape B upload; 1001TL wired via
+    // sc-tape-b-official-tape-b-cartunes-vol-5 (same list as yt-7_O8N_EJg_c).
+    url: "https://soundcloud.com/tape-b-official/tape-b-cartunes-vol-5",
+    primaryArtist: dj("Tape B", { accent: "#ffbe0b" }),
+    genre: "Bass House",
+    seriesName: "CarTunes",
+    type: "mix",
+    minDurationSec: 45 * 60,
+  },
 ];

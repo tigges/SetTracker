@@ -686,3 +686,52 @@ export const TL_COLE_TERRAZAS_HARD_SUMMER_2026: FingerprintSeedRow[] = [
   { at: "34:14", artist: "Mathew Jonson", title: "Automaton" },
   { at: "56:08", artist: "Oshana", title: "Girls In The Front" },
 ];
+
+/**
+ * Tape B - CarTunes Vol. 5 2026-08-10
+ * https://www.1001tracklists.com/tracklist/1g84vp31/tape-b-cartunes-vol.-5-2026-08-10.html
+ * Official YT: https://youtu.be/7_O8N_EJg_c
+ * Official SC: https://soundcloud.com/tape-b-official/tape-b-cartunes-vol-5
+ * Capture overlay used TL_Tape-B_CarTunes_Vol5_2026 (hyphen illegal);
+ * constant is TL_TAPE_B_CARTUNES_VOL5_2026.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-7_O8N_EJg_c"]
+ *   and ["sc-tape-b-official-tape-b-cartunes-vol-5"]
+ * Captured 2026-08-17 - provenance 1001tl.
+ */
+export const TL_TAPE_B_CARTUNES_VOL5_2026: FingerprintSeedRow[] = [
+  { at: "0:20", artist: "Dubba Jonny", title: "A Brief Introduction On Dubstep Production (Tape B Edit)" },
+  { at: "2:01", artist: "Of The Trees & Tape B", title: "Brackish (Tape B CT5 Flip)" },
+  { at: "3:42", artist: "Flatbush Zombies", title: "Palm Trees (Tape B CT5 Flip)" },
+  { at: "5:23", artist: "Chief Keef & Gucci Mane", title: "Semi On Em" },
+  { at: "7:04", artist: "Ganja White Night & Tape B", title: "Ganja Tape (Tape B VIP)" },
+  { at: "8:45", artist: "Fred again.. & Skepta & PlaqueBoyMax", title: "Victory Lap (Artifakts Remix)" },
+  { at: "10:26", artist: "Waka Flocka Flame ft. Diddy & Rick Ross & Gucci Mane", title: "O Let's Do It (Remix) (Know Good & Tape B Flip)" },
+  { at: "12:07", artist: "Shawty Lo", title: "They Know (Dey Know) (Artifuckt Remix)" },
+  { at: "13:48", artist: "Tape B & Zaytoven", title: "Signature Sound" },
+  { at: "15:29", artist: "Zeds Dead & Subtronics & Tape B", title: "Word Scramble" },
+  { at: "17:10", artist: "Zeds Dead & Subtronics & Tape B", title: "Word Scramble (HEYZ Flip)" },
+  { at: "18:51", artist: "AJ Tracey & Jorja Smith", title: "Crush (Tape B Flip)" },
+  { at: "20:32", artist: "Santigold", title: "Disparate Youth (Tape B Flip)" },
+  { at: "22:13", artist: "Chief Keef ft. 50 Cent & Wiz Khalifa", title: "Hate Bein' Sober (STVSH Flip)" },
+  { at: "23:54", artist: "DJ ESCO & Future", title: "Psychedelik Smoke (Tape B Flip)" },
+  { at: "25:35", artist: "Kendrick Lamar", title: "Backseat Freestyle (Know Good & Tape B Flip)" },
+  { at: "27:16", artist: "Speaker Knockerz", title: "Lonely (Tape B & Cozy Kev Flip)" },
+  { at: "28:57", artist: "Isaiah Rashad", title: "SAME SH!T (Tape B Flip)" },
+  { at: "30:38", artist: "Future", title: "I Serve The Base (Tape B Flip)" },
+  { at: "32:19", artist: "Mac Miller", title: "Perfect Circle (Tape B & Jkyl & Hyde Flip)" },
+  { at: "34:00", artist: "Juicy J", title: "Wax (Tape B Flip)" },
+  { at: "35:41", artist: "Ty Dolla $ign ft. Shoreline Mafia & Quavo & Juicy J", title: "Don't Kill The Party (Artifakts Remix)" },
+  { at: "37:22", artist: "Tape B & Casey Club", title: "Vicious" },
+  { at: "39:03", artist: "Lil Baby", title: "Freestyle" },
+  { at: "40:44", artist: "Schoolboy Q", title: "Yay Yay (Know Good & Tape B Flip)" },
+  { at: "42:25", artist: "yojas.", title: "rated R." },
+  { at: "44:06", artist: "A$AP Rocky", title: "Long Live A$AP (Cozy Kev Flip)" },
+  { at: "45:47", artist: "Wiley", title: "FIRETECH" },
+  { at: "47:28", artist: "Baby Bash ft. Akon", title: "Baby, I'm Back (Seth David Flip)" },
+  { at: "49:09", artist: "Plan B", title: "The Recluse (Nero Remix)" },
+  { at: "50:50", artist: "Effin & Tape B", title: "Ups and Downs" },
+  { at: "52:31", artist: "Effin & Tape B", title: "I'll Never Know" },
+  { at: "54:12", artist: "Lil Uzi Vert", title: "You Was Right (Tape B Flip)" },
+  { at: "55:53", artist: "Tape B ft. Dani King", title: "Underneath Your Skin" },
+  { at: "57:34", artist: "Lana Del Rey", title: "Young & Beautiful (Zeds Dead & Subtronics & Tape B Flip / Tape B CT5 Version)" },
+];

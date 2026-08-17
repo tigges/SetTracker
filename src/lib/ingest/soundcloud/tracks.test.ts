@@ -308,4 +308,17 @@ assert.equal(
   "sc-tomorrowland-mash-up-universe-djs-from-mars-august-2026",
 );
 
+const tapeBCt5Sc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url === "https://soundcloud.com/tape-b-official/tape-b-cartunes-vol-5",
+);
+assert.ok(tapeBCt5Sc);
+assert.equal(tapeBCt5Sc.primaryArtist.name, "Tape B");
+assert.equal(tapeBCt5Sc.type, "mix");
+assert.equal(tapeBCt5Sc.seriesName, "CarTunes");
+assert.equal(
+  `sc-tape-b-official-${slugify("tape-b-cartunes-vol-5")}`,
+  "sc-tape-b-official-tape-b-cartunes-vol-5",
+);
+
 console.log("soundcloud/tracks.test.ts ok");

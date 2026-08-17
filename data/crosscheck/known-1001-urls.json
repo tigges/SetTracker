@@ -1,7 +1,15 @@
 {
   "note": "Operator-collected 1001Tracklists URLs. All listed urls[] rows are now seeded. Prefer new operator pastes over this archive. stillMissing1001 is video-in / no 1001 page — do not invent URLs. heldPendingRelive is 1001-in / no official YT/SC Relive — seed held, do not invent or wire fan playback.",
-  "updatedAt": "2026-08-17T10:40:00.000Z",
+  "updatedAt": "2026-08-17T14:10:00.000Z",
   "urls": [
+    {
+      "label": "Tape B · CarTunes Vol. 5 2026-08-10",
+      "slug": "yt-7_O8N_EJg_c",
+      "name": "TL_TAPE_B_CARTUNES_VOL5_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/1g84vp31/tape-b-cartunes-vol.-5-2026-08-10.html",
+      "youtubeUrl": "https://youtu.be/7_O8N_EJg_c",
+      "soundcloudUrl": "https://soundcloud.com/tape-b-official/tape-b-cartunes-vol-5"
+    },
     {
       "label": "PAN-POT · Street Parade",
       "slug": "yt-LpFxQmtEeAA",

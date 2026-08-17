@@ -100,6 +100,7 @@ const GORDO_TML_WE2_2023 = YOUTUBE_SETS.find((s) =>
 const LUCAS_STEVE_TML_WE2_2024 = YOUTUBE_SETS.find((s) =>
   s.video.includes("GbG_OFmdPKk"),
 );
+const TAPE_B_CT5 = YOUTUBE_SETS.find((s) => s.video.includes("7_O8N_EJg_c"));
 
 describe("watchMetaFromCuratedSeed", () => {
   it("builds ASOT 1290 meta from the curated 1001 capture", () => {
@@ -234,6 +235,17 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=GbG_OFmdPKk");
     // Last cue 1:01:56 + 180s pad.
     assert.equal(meta.durationSec, 1 * 3600 + 1 * 60 + 56 + 180);
+  });
+
+  it("builds Tape B CarTunes Vol. 5 meta from the curated 1001 capture", () => {
+    assert.ok(TAPE_B_CT5);
+    const meta = watchMetaFromCuratedSeed(TAPE_B_CT5);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "7_O8N_EJg_c");
+    assert.match(meta.title, /CarTunes/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=7_O8N_EJg_c");
+    // Last cue 57:34 + 180s pad.
+    assert.equal(meta.durationSec, 57 * 60 + 34 + 180);
   });
 
   it("builds ILLENIUM TML WE1 Great Library meta from the curated 1001 capture", () => {
@@ -1369,5 +1381,19 @@ describe("curated YouTube 429 fallback", () => {
     assert.equal(sets[0]?.primaryArtist?.slug, "lucas-steve");
     assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
     assert.match(String(sets[0]?.title ?? ""), /2024/);
+  });
+
+  it("lands Tape B CarTunes Vol. 5 from the 1001 seed when watch is 429", async () => {
+    assert.ok(TAPE_B_CT5);
+    const adapter = createYoutubeAdapter([TAPE_B_CT5], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-7_O8N_EJg_c");
+    assert.equal(sets[0]!.type, "mix");
+    assert.ok(sets[0]!.plays.length >= 35);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 57 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "tape-b");
+    assert.match(String(sets[0]?.title ?? ""), /CarTunes/i);
   });
 });

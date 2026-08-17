@@ -140,6 +140,7 @@ import {
   TL_LUCAS_STEVE_TML_WE2_2024,
   TL_KNOCK2_ZEDD_HARD_SUMMER_2026,
   TL_COLE_TERRAZAS_HARD_SUMMER_2026,
+  TL_TAPE_B_CARTUNES_VOL5_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   tracklist1001RowsToPlays,
@@ -2819,5 +2820,39 @@ for (let i = 1; i < coleHard.length; i++) {
 // Liu TML artist Relive — no 1001 URL found; do not invent a wire.
 assert.equal(isWiredTracklistSlug("yt-DWPSLZLKslg"), false);
 assert.equal(TRACKLIST_1001_BY_SOURCE_SLUG["yt-DWPSLZLKslg"], undefined);
+
+assertSeedClocks(TL_TAPE_B_CARTUNES_VOL5_2026);
+assert.equal(TL_TAPE_B_CARTUNES_VOL5_2026.length, 35);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-7_O8N_EJg_c"],
+  TL_TAPE_B_CARTUNES_VOL5_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-tape-b-official-tape-b-cartunes-vol-5"],
+  TL_TAPE_B_CARTUNES_VOL5_2026,
+);
+assert.equal(isWiredTracklistSlug("yt-7_O8N_EJg_c"), true);
+assert.equal(
+  isWiredTracklistSlug("sc-tape-b-official-tape-b-cartunes-vol-5"),
+  true,
+);
+const tapeBCt5 = tracklist1001RowsToPlays(TL_TAPE_B_CARTUNES_VOL5_2026);
+assert.equal(tapeBCt5.length, 35);
+assert.equal(tapeBCt5[0]?.provenance, "1001tl");
+assert.equal(tapeBCt5[0]?.artistName, "Dubba Jonny");
+assert.equal(
+  tapeBCt5[0]?.trackTitle,
+  "A Brief Introduction On Dubstep Production (Tape B Edit)",
+);
+assert.equal(tapeBCt5[0]?.timestamp, 20);
+assert.equal(tapeBCt5[34]?.artistName, "Lana Del Rey");
+assert.match(String(tapeBCt5[34]?.trackTitle), /Young & Beautiful/);
+assert.equal(tapeBCt5[34]?.timestamp, 57 * 60 + 34);
+for (let i = 1; i < tapeBCt5.length; i++) {
+  assert.ok(
+    (tapeBCt5[i]!.timestamp ?? 0) > (tapeBCt5[i - 1]!.timestamp ?? 0),
+    `Tape B CarTunes Vol. 5 clocks must increase at index ${i}`,
+  );
+}
 
 console.log("tracklists1001/seeds.test.ts ok");

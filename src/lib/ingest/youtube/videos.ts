@@ -122,6 +122,7 @@ import {
   TL_PEGGY_GOU_CERCLE_LILLE,
   TL_PEGGY_GOU_EDC_LV_2026,
   TL_THE_CHAINSMOKERS_TML_WE1_2026,
+  TL_TAPE_B_CARTUNES_VOL5_2026,
 } from "../tracklists1001/seeds";
 import type { RawArtist } from "../types";
 import { slugify } from "../types";
@@ -2623,6 +2624,19 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     type: "festival",
     title: "Cuebrick – Live from Sacré Paris | Mainstage Techno | Club Set",
     eventName: "Sacré Paris",
+  },
+  {
+    // Official Tape B upload; 1001TL wired via yt-7_O8N_EJg_c
+    // (same list as sc-tape-b-official-tape-b-cartunes-vol-5).
+    video: "https://www.youtube.com/watch?v=7_O8N_EJg_c",
+    primaryArtist: dj("Tape B", { accent: "#ffbe0b" }),
+    genre: "Bass House",
+    type: "mix",
+    title: "Tape B - CarTunes Vol. 5",
+    seriesName: "CarTunes",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1g84vp31/tape-b-cartunes-vol.-5-2026-08-10.html",
+    tracklist1001: TL_TAPE_B_CARTUNES_VOL5_2026,
   },
 ];
 
