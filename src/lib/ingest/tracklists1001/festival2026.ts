@@ -82,6 +82,7 @@ import {
   TL_OLIVER_HELDENS_TML_WE1_2026,
   TL_KNOCK2_ZEDD_HARD_SUMMER_2026,
   TL_COLE_TERRAZAS_HARD_SUMMER_2026,
+  TL_MAU_P_XXX_RADIO_201_2026,
 } from "./festivalCaptures20260817";
 
 export {
@@ -154,6 +155,7 @@ export {
   TL_LUCAS_STEVE_TML_WE2_2024,
   TL_KNOCK2_ZEDD_HARD_SUMMER_2026,
   TL_COLE_TERRAZAS_HARD_SUMMER_2026,
+  TL_MAU_P_XXX_RADIO_201_2026,
 };
 
 function formatClock(sec: number): string {
@@ -4678,6 +4680,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-xVWs0ti0J90": TL_ALAN_WALKER_TML_WE1_2018,
   "yt-lopIWBJ0T5I": TL_GORDO_TML_WE2_2023,
   "yt-GbG_OFmdPKk": TL_LUCAS_STEVE_TML_WE2_2024,
+  "sc-realmaup-xxx-radio-201": TL_MAU_P_XXX_RADIO_201_2026,
 };
 
 /** Sanity: every seeded clock must parse. */

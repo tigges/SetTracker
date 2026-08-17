@@ -1,7 +1,14 @@
 {
   "note": "Operator-collected 1001Tracklists URLs. All listed urls[] rows are now seeded. Prefer new operator pastes over this archive. stillMissing1001 is video-in / no 1001 page — do not invent URLs. heldPendingRelive is 1001-in / no official YT/SC Relive — seed held, do not invent or wire fan playback.",
-  "updatedAt": "2026-08-17T10:40:00.000Z",
+  "updatedAt": "2026-08-17T14:15:00.000Z",
   "urls": [
+    {
+      "label": "Mau P · XXX Radio 201 2026-08-14",
+      "slug": "sc-realmaup-xxx-radio-201",
+      "name": "TL_MAU_P_XXX_RADIO_201_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/9xw8jdk/mau-p-xxx-radio-201-2026-08-14.html",
+      "soundcloudUrl": "https://soundcloud.com/realmaup/xxx-radio-201"
+    },
     {
       "label": "PAN-POT · Street Parade",
       "slug": "yt-LpFxQmtEeAA",

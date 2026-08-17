@@ -686,3 +686,24 @@ export const TL_COLE_TERRAZAS_HARD_SUMMER_2026: FingerprintSeedRow[] = [
   { at: "34:14", artist: "Mathew Jonson", title: "Automaton" },
   { at: "56:08", artist: "Oshana", title: "Girls In The Front" },
 ];
+
+/**
+ * Mau P - XXX Radio 201 2026-08-14
+ * https://www.1001tracklists.com/tracklist/9xw8jdk/mau-p-xxx-radio-201-2026-08-14.html
+ * Official SC: https://soundcloud.com/realmaup/xxx-radio-201
+ * Capture overlay used TL_Mau-P_XXX-Radio-201_2026 (hyphens illegal);
+ * constant is TL_MAU_P_XXX_RADIO_201_2026.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["sc-realmaup-xxx-radio-201"]
+ * Never wire sc-https://….
+ * Captured 2026-08-17 - provenance 1001tl.
+ */
+export const TL_MAU_P_XXX_RADIO_201_2026: FingerprintSeedRow[] = [
+  { at: "0:20", artist: "Chris Brooks & Resco (US)", title: "Dat Funk" },
+  { at: "6:35", artist: "Simes", title: "Whippin' Up" },
+  { at: "10:50", artist: "BizZa & Sera De Villalta", title: "Sueño Compartido" },
+  { at: "15:20", artist: "Crusy", title: "Rising" },
+  { at: "26:35", artist: "Piem", title: "Take Me Up" },
+  { at: "31:30", artist: "Rooléh", title: "Want To Know" },
+  { at: "44:45", artist: "Route 94", title: "4Get The Girl (Mellizos Remix)" },
+  { at: "48:50", artist: "Bagheera (FR)", title: "7 Heures Du Matin" },
+];
