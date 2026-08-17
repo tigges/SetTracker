@@ -92,6 +92,15 @@ export const HELD_RELIVE_WATCH: {
     waitNote:
       "Do not wire fan clips (DerekD2 yt-6DC3xoQF4Zs) — wait for official HARD/Insomniac Relive.",
   },
+  {
+    name: "Cole Terrazas · HARD Summer",
+    seed: "TL_COLE_TERRAZAS_HARD_SUMMER_2026",
+    match: /cole\s*terrazas/i,
+    search: ["cole terrazas", "hard summer", "pink stage", "2026"],
+    venue: /hard\s*summer|hardfest|\binsomniac\b/i,
+    waitNote:
+      "Do not wire fan clips — wait for official HARD/Insomniac Relive.",
+  },
 ];
 
 type DensityRow = {

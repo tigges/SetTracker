@@ -139,6 +139,7 @@ import {
   TL_GORDO_TML_WE2_2023,
   TL_LUCAS_STEVE_TML_WE2_2024,
   TL_KNOCK2_ZEDD_HARD_SUMMER_2026,
+  TL_COLE_TERRAZAS_HARD_SUMMER_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   tracklist1001RowsToPlays,
@@ -2790,6 +2791,30 @@ for (let i = 1; i < knock2Zedd.length; i++) {
 // DerekD2 fan clip — do not wire.
 assert.equal(isWiredTracklistSlug("yt-6DC3xoQF4Zs"), false);
 assert.equal(TRACKLIST_1001_BY_SOURCE_SLUG["yt-6DC3xoQF4Zs"], undefined);
+
+assertSeedClocks(TL_COLE_TERRAZAS_HARD_SUMMER_2026);
+assert.equal(TL_COLE_TERRAZAS_HARD_SUMMER_2026.length, 6);
+assert.equal(
+  Object.values(TRACKLIST_1001_BY_SOURCE_SLUG).includes(
+    TL_COLE_TERRAZAS_HARD_SUMMER_2026,
+  ),
+  false,
+);
+const coleHard = tracklist1001RowsToPlays(TL_COLE_TERRAZAS_HARD_SUMMER_2026);
+assert.equal(coleHard.length, 6);
+assert.equal(coleHard[0]?.provenance, "1001tl");
+assert.equal(coleHard[0]?.artistName, "Led Zeppelin");
+assert.equal(coleHard[0]?.trackTitle, "No Quarter");
+assert.equal(coleHard[0]?.timestamp, 1);
+assert.equal(coleHard[5]?.artistName, "Oshana");
+assert.equal(coleHard[5]?.trackTitle, "Girls In The Front");
+assert.equal(coleHard[5]?.timestamp, 56 * 60 + 8);
+for (let i = 1; i < coleHard.length; i++) {
+  assert.ok(
+    (coleHard[i]!.timestamp ?? 0) > (coleHard[i - 1]!.timestamp ?? 0),
+    `Cole Terrazas HARD Summer 2026 clocks must increase at index ${i}`,
+  );
+}
 
 // Liu TML artist Relive — no 1001 URL found; do not invent a wire.
 assert.equal(isWiredTracklistSlug("yt-DWPSLZLKslg"), false);

@@ -670,3 +670,19 @@ export const TL_KNOCK2_ZEDD_HARD_SUMMER_2026: FingerprintSeedRow[] = [
   { at: "1:12:20", artist: "Knock2 ft. Sophia Gripari", title: "hold my hand" },
   { at: "1:15:37", artist: "Zedd ft. Matthew Koma & Miriam Bryant", title: "Find You (Acappella)" },
 ];
+
+/**
+ * Cole Terrazas @ Pink Stage, HARD Summer Festival, United States 2026-08-02
+ * https://www.1001tracklists.com/tracklist/2vwfrkc9/cole-terrazas-pink-stage-hard-summer-festival-united-states-2026-08-02.html
+ * Operator paste 2026-08-17. 1001 has no media links (HARD site only).
+ * 11 rows / 6 IDed — bare ID–ID dropped. Cues kept. Do not wire until an
+ * official HARD / Insomniac Relive exists.
+ */
+export const TL_COLE_TERRAZAS_HARD_SUMMER_2026: FingerprintSeedRow[] = [
+  { at: "0:01", artist: "Led Zeppelin", title: "No Quarter" },
+  { at: "14:00", artist: "Hanfry Martinez & Terence :Terry:", title: "Evocation" },
+  { at: "19:52", artist: "Till Von Sein", title: "Sundowna (Dyed Soundorom & Shonky Remix)" },
+  { at: "29:39", artist: "Menta Sauce", title: "Inside" },
+  { at: "34:14", artist: "Mathew Jonson", title: "Automaton" },
+  { at: "56:08", artist: "Oshana", title: "Girls In The Front" },
+];

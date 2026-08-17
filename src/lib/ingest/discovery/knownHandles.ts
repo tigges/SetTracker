@@ -1255,6 +1255,11 @@ export const KNOWN_HANDLES: Record<string, HandleHint> = {
     soundcloudPermalink: "ben-rau",
     instagram: "https://instagram.com/ben_rau",
   },
+  "cole terrazas": {
+    soundcloudPermalink: "coleterrazas",
+    genre: "Tech House",
+    accent: "#ff3d6e",
+  },
 
 };
 

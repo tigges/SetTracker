@@ -4,7 +4,10 @@ import {
   heldIdentifyJobs,
   uniqueIdentifyRows,
 } from "./trackIds";
-import { TL_KNOCK2_ZEDD_HARD_SUMMER_2026 } from "../tracklists1001/seeds";
+import {
+  TL_COLE_TERRAZAS_HARD_SUMMER_2026,
+  TL_KNOCK2_ZEDD_HARD_SUMMER_2026,
+} from "../tracklists1001/seeds";
 import { isWiredTracklistSlug } from "../tracklists1001/seeds";
 
 assert.equal(evaluateIsrc("USUM71502634").ok, true);
@@ -23,6 +26,8 @@ assert.equal(
 
 const jobs = heldIdentifyJobs();
 assert.ok(jobs.some((j) => j.seed === "TL_KNOCK2_ZEDD_HARD_SUMMER_2026"));
+assert.ok(jobs.some((j) => j.seed === "TL_COLE_TERRAZAS_HARD_SUMMER_2026"));
+assert.equal(uniqueIdentifyRows(TL_COLE_TERRAZAS_HARD_SUMMER_2026).length, 6);
 assert.equal(isWiredTracklistSlug("yt-6DC3xoQF4Zs"), false);
 
 console.log("identify/trackIds.test.ts ok");

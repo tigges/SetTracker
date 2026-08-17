@@ -10,7 +10,10 @@ import { writeReport } from "../discovery/llmResearch";
 import { isBareIdRow } from "../tracklists1001/toSeed";
 import type { FingerprintSeedRow } from "../fingerprint/seeds";
 import { HELD_RELIVE_WATCH } from "../nextCaptures";
-import { TL_KNOCK2_ZEDD_HARD_SUMMER_2026 } from "../tracklists1001/seeds";
+import {
+  TL_COLE_TERRAZAS_HARD_SUMMER_2026,
+  TL_KNOCK2_ZEDD_HARD_SUMMER_2026,
+} from "../tracklists1001/seeds";
 import { resolveTrackImage } from "../../thumbs/deezer";
 import { resolveTrackMetaMusicBrainz } from "../../thumbs/musicbrainz";
 import {
@@ -49,6 +52,7 @@ export type TrackIdReport = {
 
 const HELD_SEED_ROWS: Record<string, FingerprintSeedRow[]> = {
   TL_KNOCK2_ZEDD_HARD_SUMMER_2026,
+  TL_COLE_TERRAZAS_HARD_SUMMER_2026,
 };
 
 export function evaluateIsrc(raw: string | null | undefined): {

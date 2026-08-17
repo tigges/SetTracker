@@ -99,6 +99,11 @@ assert.ok(knockWaiting);
 assert.equal(knockWaiting!.status, "waiting");
 assert.match(knockWaiting!.note, /DerekD2/);
 
+const coleWaiting = held.find((h) => /cole/i.test(h.name));
+assert.ok(coleWaiting);
+assert.equal(coleWaiting!.status, "waiting");
+assert.match(coleWaiting!.note, /HARD\/Insomniac/i);
+
 const knockEntries = [
   {
     videoId: "KNOCKHARD01",
@@ -122,6 +127,27 @@ assert.equal(knockHit!.status, "candidate");
 assert.equal(knockHit!.videoId, "KNOCKHARD01");
 assert.equal(
   knockHeld.find((h) => /calvin/i.test(h.name))!.status,
+  "waiting",
+);
+
+const coleEntries = [
+  {
+    videoId: "COLEHARD001",
+    title: "Cole Terrazas | HARD Summer 2026 Pink Stage",
+    channel: "HARD",
+  },
+  {
+    videoId: "COLETMLFAKE",
+    title: "Cole Terrazas WE2 | Tomorrowland 2026",
+    channel: "Tomorrowland",
+  },
+];
+const coleHeld = matchHeldRelives(coleEntries, HELD_RELIVE_WATCH);
+const coleHit = coleHeld.find((h) => /cole/i.test(h.name));
+assert.equal(coleHit!.status, "candidate");
+assert.equal(coleHit!.videoId, "COLEHARD001");
+assert.equal(
+  coleHeld.find((h) => /calvin/i.test(h.name))!.status,
   "waiting",
 );
 
