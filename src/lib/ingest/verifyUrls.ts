@@ -29,6 +29,7 @@ import {
 import { KNOWN_EVENTS } from "./events";
 import { backfillSetEditions } from "./setEditions";
 import { fillDjHandlesFromKnown, fillDjWebsitesFromWikidata } from "./discovery/fillDjHandles";
+import { isRejectedWebsiteHost } from "./discovery/wikidataOfficial";
 import { discoverCuratedReliveRemaps } from "./reliveWatch";
 import { applySetSourceRemaps } from "./sourceRemaps";
 import { ensureCuratedLabels } from "./curatedLabels";
@@ -154,6 +155,21 @@ export async function applyKnownUrlFixes(prisma: PrismaClient): Promise<number> 
 
   // Brand DJ social pins (BISCITS, Guetta, FISHER, ARTBAT, …).
   n += await applyDjSocialPins(prisma);
+
+  // Operator: therealdjbdk.com is a casino / click-through, not BDK.
+  const rejectedSites = await prisma.dj.findMany({
+    where: { website: { not: null } },
+    select: { id: true, website: true },
+  });
+  for (const row of rejectedSites) {
+    if (!row.website || !isRejectedWebsiteHost(row.website)) continue;
+    await prisma.dj.update({
+      where: { id: row.id },
+      data: { website: null },
+    });
+    n += 1;
+    console.log(`[verify-urls] cleared rejected website ${row.website}`);
+  }
 
   // Retired YouTube Relives (private Fisher WE2 → public re-upload).
   const discovered = await discoverCuratedReliveRemaps(prisma);
