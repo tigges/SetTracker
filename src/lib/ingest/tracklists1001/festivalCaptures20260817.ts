@@ -312,3 +312,44 @@ export const TL_I_HATE_MODELS_TML_WE1_2026: FingerprintSeedRow[] = [
   { at: "57:50", artist: "David Guetta ft. Chris Willis", title: "Love Is Gone" },
 ];
 
+/**
+ * Netsky @ Freedom Stage, Tomorrowland Weekend 1, Belgium 2026-07-18
+ * https://www.1001tracklists.com/tracklist/rwsgynk/netsky-freedom-stage-tomorrowland-weekend-1-belgium-2026-07-18.html
+ * Official YT: https://youtu.be/_e1H9pkcjsQ
+ * Capture overlay used TL_Netsky_Freedom-Stage_Tomorrowland_WE1_Belgium_2026
+ * (hyphens illegal); constant is TL_NETSKY_TML_WE1_2026.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-_e1H9pkcjsQ"]
+ * Captured 2026-08-17 - provenance 1001tl.
+ */
+export const TL_NETSKY_TML_WE1_2026: FingerprintSeedRow[] = [
+  { at: "3:33", artist: "Netsky & Andromedik", title: "Out Of Body" },
+  { at: "5:38", artist: "Tantrum Desire", title: "Step" },
+  { at: "7:30", artist: "Subsonic", title: "Frequency" },
+  { at: "10:15", artist: "Netsky & Montell2099", title: "Mixed Emotions" },
+  { at: "14:38", artist: "Rusko", title: "Everyday (Netsky Remix)" },
+  { at: "17:18", artist: "Netsky ft. Scarlett Quinn", title: "Come Alive (Grafix Remix)" },
+  { at: "18:45", artist: "Delerium ft. Sarah McLachlan", title: "Silence (John Summit Remix / Dimension Remix)" },
+  { at: "21:27", artist: "Netsky & Darren Styles", title: "Look At Me Go" },
+  { at: "23:15", artist: "SLESS & Loboski", title: "I Like It" },
+  { at: "24:24", artist: "Dimension", title: "DJ Turn It Up (JPKy Flip)" },
+  { at: "25:44", artist: "Bugwell", title: "Everything In Its Right Place" },
+  { at: "26:36", artist: "Zerb ft. Sofiya Nzau", title: "Mwaki (Netsky Bootleg)" },
+  { at: "28:15", artist: "Netsky ft. Emeli Sandé", title: "Thunder" },
+  { at: "30:02", artist: "Metrik ft. Reija Lee", title: "Cadence (VIP)" },
+  { at: "31:35", artist: "Yetti", title: "Lose Control" },
+  { at: "35:33", artist: "Skrillex ft. Sirah", title: "Kyoto (Netsky DnB Edit)" },
+  { at: "36:26", artist: "Dimitri Vegas & Like Mike & Martin Garrix", title: "Tremor (Sensation 2014 Anthem) (Arcando Remix)" },
+  { at: "37:38", artist: "Netsky & Sub Focus ft. Jozzy", title: "Destiny" },
+  { at: "40:39", artist: "Netsky & Urbandawn", title: "Power" },
+  { at: "41:19", artist: "Kanye West", title: "Power (Acappella)" },
+  { at: "42:00", artist: "Keys N Krates", title: "Double Dutch" },
+  { at: "42:40", artist: "EUROCLUB", title: "Pump The Stereo" },
+  { at: "43:45", artist: "SØNATA", title: "u and i" },
+  { at: "45:15", artist: "Benny Benassi pres. The Biz", title: "Satisfaction (Netsky Remix)" },
+  { at: "47:00", artist: "streetflicker & riddo.", title: "ALALA" },
+  { at: "47:35", artist: "BrEaCh", title: "Jack (Hoax Rework)" },
+  { at: "48:50", artist: "Soldat", title: "Rave City" },
+  { at: "54:39", artist: "Netsky & Hybrid Minds", title: "Let Me Hold You" },
+  { at: "59:30", artist: "Netsky & Hybrid Minds", title: "Let Me Hold You (Grafix Remix)" },
+];
+

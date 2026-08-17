@@ -85,6 +85,9 @@ const CHASE_STATUS_TML_WE2 = YOUTUBE_SETS.find((s) =>
 const I_HATE_MODELS_TML_WE1 = YOUTUBE_SETS.find((s) =>
   s.video.includes("zMW5SQPS1cY"),
 );
+const NETSKY_TML_WE1 = YOUTUBE_SETS.find((s) =>
+  s.video.includes("_e1H9pkcjsQ"),
+);
 
 describe("watchMetaFromCuratedSeed", () => {
   it("builds ASOT 1290 meta from the curated 1001 capture", () => {
@@ -161,6 +164,17 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=zMW5SQPS1cY");
     // Last cue 57:50 + 180s pad.
     assert.equal(meta.durationSec, 57 * 60 + 50 + 180);
+  });
+
+  it("builds Netsky TML WE1 Freedom Stage meta from the curated 1001 capture", () => {
+    assert.ok(NETSKY_TML_WE1);
+    const meta = watchMetaFromCuratedSeed(NETSKY_TML_WE1);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "_e1H9pkcjsQ");
+    assert.match(meta.title, /Netsky/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=_e1H9pkcjsQ");
+    // Last cue 59:30 + 180s pad.
+    assert.equal(meta.durationSec, 59 * 60 + 30 + 180);
   });
 
   it("builds ILLENIUM TML WE1 Great Library meta from the curated 1001 capture", () => {
@@ -1220,6 +1234,20 @@ describe("curated YouTube 429 fallback", () => {
     assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
     assert.ok(sets[0]!.durationSec >= 57 * 60);
     assert.equal(sets[0]?.primaryArtist?.slug, "i-hate-models");
+    assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
+  });
+
+  it("lands Netsky TML WE1 Freedom Stage from the 1001 seed when watch is 429", async () => {
+    assert.ok(NETSKY_TML_WE1);
+    const adapter = createYoutubeAdapter([NETSKY_TML_WE1], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-_e1H9pkcjsQ");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 29);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 59 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "netsky");
     assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
   });
 });

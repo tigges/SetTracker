@@ -133,6 +133,7 @@ import {
   TL_ILLENIUM_TML_WE1_2026,
   TL_CHASE_STATUS_TML_WE2_2026,
   TL_I_HATE_MODELS_TML_WE1_2026,
+  TL_NETSKY_TML_WE1_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   tracklist1001RowsToPlays,
@@ -2626,6 +2627,28 @@ for (let i = 1; i < ihmWe1.length; i++) {
   assert.ok(
     (ihmWe1[i]!.timestamp ?? 0) > (ihmWe1[i - 1]!.timestamp ?? 0),
     `I Hate Models TML WE1 2026 clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_NETSKY_TML_WE1_2026);
+assert.equal(TL_NETSKY_TML_WE1_2026.length, 29);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-_e1H9pkcjsQ"],
+  TL_NETSKY_TML_WE1_2026,
+);
+assert.equal(isWiredTracklistSlug("yt-_e1H9pkcjsQ"), true);
+const netskyWe1 = tracklist1001RowsToPlays(TL_NETSKY_TML_WE1_2026);
+assert.equal(netskyWe1.length, 29);
+assert.equal(netskyWe1[0]?.provenance, "1001tl");
+assert.equal(netskyWe1[0]?.timestamp, 3 * 60 + 33);
+assert.equal(netskyWe1[0]?.artistName, "Netsky & Andromedik");
+assert.equal(netskyWe1[0]?.trackTitle, "Out Of Body");
+assert.equal(netskyWe1[28]?.trackTitle, "Let Me Hold You (Grafix Remix)");
+assert.equal(netskyWe1[28]?.timestamp, 59 * 60 + 30);
+for (let i = 1; i < netskyWe1.length; i++) {
+  assert.ok(
+    (netskyWe1[i]!.timestamp ?? 0) > (netskyWe1[i - 1]!.timestamp ?? 0),
+    `Netsky TML WE1 2026 clocks must increase at index ${i}`,
   );
 }
 
