@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import { getCatalogStats } from "@/lib/catalogStats";
 import { editionLabel } from "@/lib/ingest/festivalDrops";
+import { loadLlmResearchStats } from "@/lib/llmResearchStats";
 import { getFestivalEditionBoard } from "@/lib/queries";
 import { pageMeta } from "@/lib/site";
 import { STATUS_META, fmtDuration, type IdStatus } from "@/lib/status";
@@ -239,10 +240,27 @@ function DjQueue({
   );
 }
 
+function fieldShort(field: string): string {
+  if (field === "instagram") return "IG";
+  if (field === "soundcloud") return "SC";
+  if (field === "youtube") return "YT";
+  if (field === "twitter") return "X";
+  if (field === "website") return "WWW";
+  return field;
+}
+
+function identityLabel(cls: string): string {
+  if (cls === "touring_dj") return "touring DJ";
+  if (cls === "track_credit") return "track credit";
+  if (cls === "venue_host") return "venue / label";
+  return cls.replace(/_/g, " ");
+}
+
 export default async function StatsPage() {
-  const [s, board] = await Promise.all([
+  const [s, board, llm] = await Promise.all([
     getCatalogStats(),
     getFestivalEditionBoard(),
+    Promise.resolve(loadLlmResearchStats()),
   ]);
   const playTotal = s.totals.plays;
   const identified =
@@ -310,6 +328,11 @@ export default async function StatsPage() {
             hint={`${s.tracks.withIsrc.toLocaleString()} ISRC`}
           />
           <Stat label="Events" value={s.totals.venues} />
+          <Stat
+            label="LLM fills"
+            value={llm.totals.djFieldsApplied + llm.totals.eventFieldsApplied}
+            hint={`${llm.totals.djsScanned} DJs · ${llm.totals.eventsScanned} events`}
+          />
         </div>
       </section>
 
@@ -338,6 +361,144 @@ export default async function StatsPage() {
           })}
         </div>
       </section>
+
+      <QueueFold
+        title="LLM research"
+        count={llm.totals.djFieldsApplied + llm.totals.eventFieldsApplied}
+        hint={`${llm.note}${llm.generatedAt ? ` Latest report ${llm.generatedAt.slice(0, 10)}.` : ""}`}
+      >
+        <div className="mb-3 grid grid-cols-2 gap-x-4 sm:grid-cols-4">
+          <Stat
+            label="DJ fields"
+            value={llm.totals.djFieldsApplied}
+            hint={`${llm.totals.djsScanned} scanned`}
+          />
+          <Stat
+            label="Event fields"
+            value={llm.totals.eventFieldsApplied}
+            hint={`${llm.totals.eventsScanned} scanned`}
+          />
+          <Stat
+            label="Identity"
+            value={llm.totals.identityClassified}
+            hint={`${llm.totals.touringDj} touring · ${llm.totals.junkOrHost} junk/host`}
+          />
+          <Stat
+            label="First-party IG"
+            value={llm.firstParty?.djsIg ?? "—"}
+            hint={
+              llm.firstParty
+                ? `${llm.firstParty.noSocialWithSets} sets, no social`
+                : "no scrape report"
+            }
+          />
+        </div>
+        {llm.rounds.length > 0 ? (
+          <div className="mb-3 overflow-x-auto">
+            <table className="w-full text-left text-[12px]">
+              <thead className="mono text-[10px] uppercase tracking-[0.12em] text-muted2">
+                <tr>
+                  <th className="py-1 pr-3 font-normal">Round</th>
+                  <th className="py-1 pr-3 font-normal">Target</th>
+                  <th className="py-1 pr-3 font-normal">Scanned</th>
+                  <th className="py-1 pr-3 font-normal">Applied</th>
+                  <th className="py-1 font-normal">Rejected</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-line">
+                {llm.rounds.map((r) => (
+                  <tr key={r.file}>
+                    <td className="py-1 pr-3">{r.provider}</td>
+                    <td className="py-1 pr-3">{r.target}</td>
+                    <td className="mono py-1 pr-3">{r.scanned}</td>
+                    <td className="mono py-1 pr-3">{r.applied}</td>
+                    <td className="mono py-1">{r.rejected}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        ) : null}
+        <h3 className="mb-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">
+          Verified fills
+        </h3>
+        {llm.fills.length === 0 ? (
+          <p className="text-[13px] text-muted2">No committed fills yet.</p>
+        ) : (
+          (() => {
+            const head = llm.fills.slice(0, PREVIEW);
+            const rest = llm.fills.slice(PREVIEW);
+            const list = (items: typeof llm.fills) => (
+              <ul className="divide-y divide-line border-y border-line">
+                {items.map((row) => (
+                  <li
+                    key={`${row.kind}:${row.slug}`}
+                    className="flex items-baseline justify-between gap-2 py-1"
+                  >
+                    <Link
+                      href={
+                        row.kind === "event"
+                          ? `/events/${row.slug}`
+                          : `/djs/${row.slug}`
+                      }
+                      className="truncate text-[13px] font-semibold text-ink hover:underline"
+                    >
+                      {row.name}
+                    </Link>
+                    <span className="mono shrink-0 text-[11px] text-muted2">
+                      {row.fields.map(fieldShort).join(" · ")}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            );
+            return (
+              <>
+                {list(head)}
+                <MoreFold restCount={rest.length}>{list(rest)}</MoreFold>
+              </>
+            );
+          })()
+        )}
+        {llm.identity.length > 0 ? (
+          <div className="mt-3">
+            <h3 className="mb-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">
+              Identity QA
+            </h3>
+            {(() => {
+              const head = llm.identity.slice(0, PREVIEW);
+              const rest = llm.identity.slice(PREVIEW);
+              const list = (items: typeof llm.identity) => (
+                <ul className="divide-y divide-line border-y border-line">
+                  {items.map((row) => (
+                    <li
+                      key={row.slug}
+                      className="flex items-baseline justify-between gap-2 py-1"
+                    >
+                      <Link
+                        href={`/djs/${row.slug}`}
+                        className="truncate text-[13px] font-semibold text-ink hover:underline"
+                      >
+                        {row.name}
+                      </Link>
+                      <span className="mono shrink-0 text-[11px] text-muted2">
+                        {identityLabel(row.cls)}
+                        {row.sets ? ` · ${row.sets}s` : ""}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              );
+              return (
+                <>
+                  {list(head)}
+                  <MoreFold restCount={rest.length}>{list(rest)}</MoreFold>
+                </>
+              );
+            })()}
+          </div>
+        ) : null}
+      </QueueFold>
 
       <QueueFold
         title="Tracklist capture"
