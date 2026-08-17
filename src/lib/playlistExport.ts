@@ -3,7 +3,7 @@
  * Static-site friendly: downloads only — no Spotify/Beatport OAuth.
  */
 
-import { spotifySearchUrl } from "@/lib/trackMeta";
+import { beatportTrackHref, spotifySearchUrl } from "@/lib/trackMeta";
 
 export { spotifySearchUrl };
 
@@ -150,14 +150,7 @@ export function buildBeatportUrlList(plays: ExportPlay[]): string {
   return (
     exportablePlays(plays)
       .map((p) => {
-        if (
-          p.beatportUrl &&
-          p.beatportUrl.startsWith("https://www.beatport.com/")
-        ) {
-          return p.beatportUrl;
-        }
-        const q = encodeURIComponent(trackDisplayLine(p));
-        return `https://www.beatport.com/search?q=${q}`;
+        return beatportTrackHref(p.title, p.artistName, p.beatportUrl);
       })
       .join("\n") + "\n"
   );

@@ -12,14 +12,12 @@ import {
 import { EntityThumb } from "@/components/EntityThumb";
 import { SuggestIdButton } from "@/components/SuggestId";
 import {
-  PROVENANCE_META,
   STATUS_META,
   fmtTimestamp,
   listenLinks,
   statusColor,
   statusLabel,
   type IdStatus,
-  type Provenance,
 } from "@/lib/status";
 import type { PlayRow } from "@/lib/queries";
 import { useSetSeek } from "@/components/SetListen";
@@ -215,7 +213,6 @@ export function SetTimeline({
           {plays.map((p) => {
             const isActive = p.id === activeId;
             const meta = STATUS_META[p.idStatus as IdStatus];
-            const prov = PROVENANCE_META[p.provenance as Provenance];
             return (
               <li key={p.id}>
                 <div
@@ -367,7 +364,7 @@ export function SetTimeline({
                             target="_blank"
                             rel="noreferrer"
                             title={
-                              p.beatportUrl
+                              links.beatportIsCanonical
                                 ? "Open on Beatport"
                                 : "Search on Beatport"
                             }
@@ -420,13 +417,6 @@ export function SetTimeline({
                         {p.labelName}
                       </span>
                     ))}
-
-                  <span
-                    className="flex-none rounded-md border border-line px-1.5 py-0.5 text-[10px] text-muted2 sm:px-2 sm:text-[11px]"
-                    title={`Provenance: ${prov?.label ?? p.provenance}`}
-                  >
-                    {prov?.short ?? p.provenance}
-                  </span>
                 </div>
               </li>
             );
