@@ -321,4 +321,20 @@ assert.equal(
   "sc-tape-b-official-tape-b-cartunes-vol-5",
 );
 
+const mauPXxxSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) => s.url === "https://soundcloud.com/realmaup/xxx-radio-201",
+);
+assert.ok(mauPXxxSc);
+assert.equal(mauPXxxSc.primaryArtist.name, "Mau P");
+assert.equal(mauPXxxSc.type, "radio");
+assert.equal(mauPXxxSc.seriesName, "XXX Radio");
+assert.equal(
+  `sc-realmaup-${slugify("xxx-radio-201")}`,
+  "sc-realmaup-xxx-radio-201",
+);
+assert.equal(
+  SOUNDCLOUD_TRACK_SEEDS.some((s) => s.url.startsWith("sc-https://")),
+  false,
+);
+
 console.log("soundcloud/tracks.test.ts ok");

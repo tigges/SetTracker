@@ -141,6 +141,7 @@ import {
   TL_KNOCK2_ZEDD_HARD_SUMMER_2026,
   TL_COLE_TERRAZAS_HARD_SUMMER_2026,
   TL_TAPE_B_CARTUNES_VOL5_2026,
+  TL_MAU_P_XXX_RADIO_201_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   tracklist1001RowsToPlays,
@@ -2852,6 +2853,35 @@ for (let i = 1; i < tapeBCt5.length; i++) {
   assert.ok(
     (tapeBCt5[i]!.timestamp ?? 0) > (tapeBCt5[i - 1]!.timestamp ?? 0),
     `Tape B CarTunes Vol. 5 clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_MAU_P_XXX_RADIO_201_2026);
+assert.equal(TL_MAU_P_XXX_RADIO_201_2026.length, 8);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-realmaup-xxx-radio-201"],
+  TL_MAU_P_XXX_RADIO_201_2026,
+);
+assert.equal(isWiredTracklistSlug("sc-realmaup-xxx-radio-201"), true);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-https://soundcloud.com/realmaup/xxx-radio-201"
+  ],
+  undefined,
+);
+const mauPXxx = tracklist1001RowsToPlays(TL_MAU_P_XXX_RADIO_201_2026);
+assert.equal(mauPXxx.length, 8);
+assert.equal(mauPXxx[0]?.provenance, "1001tl");
+assert.equal(mauPXxx[0]?.artistName, "Chris Brooks & Resco (US)");
+assert.equal(mauPXxx[0]?.trackTitle, "Dat Funk");
+assert.equal(mauPXxx[0]?.timestamp, 20);
+assert.equal(mauPXxx[7]?.artistName, "Bagheera (FR)");
+assert.equal(mauPXxx[7]?.trackTitle, "7 Heures Du Matin");
+assert.equal(mauPXxx[7]?.timestamp, 48 * 60 + 50);
+for (let i = 1; i < mauPXxx.length; i++) {
+  assert.ok(
+    (mauPXxx[i]!.timestamp ?? 0) > (mauPXxx[i - 1]!.timestamp ?? 0),
+    `Mau P XXX Radio 201 clocks must increase at index ${i}`,
   );
 }
 

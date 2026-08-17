@@ -354,4 +354,14 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     type: "mix",
     minDurationSec: 45 * 60,
   },
+  {
+    // Official Mau P upload; 1001TL wired via sc-realmaup-xxx-radio-201.
+    // Never wire sc-https://….
+    url: "https://soundcloud.com/realmaup/xxx-radio-201",
+    primaryArtist: dj("Mau P", { accent: "#118ab2" }),
+    genre: "Tech House",
+    seriesName: "XXX Radio",
+    type: "radio",
+    minDurationSec: 45 * 60,
+  },
 ];
