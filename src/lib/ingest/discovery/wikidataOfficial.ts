@@ -35,7 +35,8 @@ async function wikiJson(url: string): Promise<unknown | null> {
 
 /** Hosts that look name-adjacent but are not a catalog artist homepage. */
 const REJECTED_WEBSITE_HOSTS = new Set([
-  // Casino / click-through, not the Ivorian Boiler Room BDK.
+  // Operator screenshot 2026-08-17: Dragon Casino / 尊龙凯时 / Z6.COM
+  // (Chinese gambling portal). Not the Ivorian Boiler Room BDK.
   "therealdjbdk.com",
 ]);
 
