@@ -9,7 +9,7 @@ import {
 import { playbackUrlFromSource } from "../playback";
 import { djSocialsFromKnown, labelSocials } from "../social";
 import { ARTIST_ROSTER } from "./roster";
-import { parseTrackTitle } from "../trackMeta";
+import { normalizeIsrc, parseTrackTitle } from "../trackMeta";
 import { runCatalogScSocials } from "./discovery/catalogScSocials";
 import { runCatalogYtSocials } from "./discovery/catalogYtSocials";
 import { runCrosslinkDiscovery, type HandleReport } from "./discovery/crosslink";
@@ -270,8 +270,10 @@ export async function runIngest(
     mixName?: string;
     remixerName?: string;
     beatportUrl?: string;
+    isrc?: string;
   }): Promise<string> {
     const artistName = normalizeArtistName(play.artistName);
+    const isrc = normalizeIsrc(play.isrc);
     const parsed = parseTrackTitle(play.title);
     const mixName = play.mixName ?? parsed.mixName;
     const remixerName = play.remixerName
@@ -297,6 +299,7 @@ export async function runIngest(
         data.durationSec = play.durationSec;
       }
       if (play.beatportUrl && !existing.beatportUrl) data.beatportUrl = play.beatportUrl;
+      if (isrc && !existing.isrc) data.isrc = isrc;
       if (play.label && !existing.labelId) {
         const labelId = await upsertLabel(play.label);
         if (labelId) data.labelId = labelId;
@@ -345,6 +348,7 @@ export async function runIngest(
         genre: ensureGenre(play.genre),
         durationSec: play.durationSec ?? null,
         beatportUrl: play.beatportUrl ?? null,
+        isrc,
       },
     });
     stats.newTracks += 1;
@@ -515,6 +519,7 @@ export async function runIngest(
           mixName: p.mixName,
           remixerName: p.remixerName,
           beatportUrl: p.beatportUrl,
+          isrc: p.isrc,
         });
         await prisma.played.create({ data: { ...base, trackId } });
       } else if (
@@ -533,6 +538,7 @@ export async function runIngest(
           mixName: p.mixName,
           remixerName: p.remixerName,
           beatportUrl: p.beatportUrl,
+          isrc: p.isrc,
         });
         const idLabel = sanitizeDbText(p.idLabel, "ID - ID");
         const idTrack = await prisma.idTrack.create({

@@ -3,7 +3,10 @@
  * Static-site friendly: downloads only — no Spotify/Beatport OAuth.
  */
 
-import { spotifySearchUrl } from "@/lib/trackMeta";
+import {
+  canonicalBeatportUrl,
+  spotifySearchUrl,
+} from "@/lib/trackMeta";
 
 export { spotifySearchUrl };
 
@@ -16,6 +19,8 @@ export type ExportPlay = {
   musicalKey: string | null;
   trackDurationSec: number | null;
   beatportUrl: string | null;
+  isrc: string | null;
+  mixName: string | null;
   idStatus: string;
 };
 
@@ -72,9 +77,11 @@ export function buildTracklistCsv(
     "cue",
     "artist",
     "title",
+    "mix",
     "bpm",
     "key",
     "duration_sec",
+    "isrc",
     "beatport_url",
     "spotify_search_url",
     "id_status",
@@ -88,10 +95,12 @@ export function buildTracklistCsv(
       exportTimestamp(p.timestamp),
       csvEscape(p.artistName ?? ""),
       csvEscape(p.title),
+      csvEscape(p.mixName ?? ""),
       p.bpm != null ? String(p.bpm) : "",
       csvEscape(p.musicalKey ?? ""),
       p.trackDurationSec != null ? String(p.trackDurationSec) : "",
-      csvEscape(p.beatportUrl ?? ""),
+      csvEscape(p.isrc ?? ""),
+      csvEscape(canonicalBeatportUrl(p.beatportUrl) ?? ""),
       csvEscape(spotifySearchUrl(p.title, p.artistName)),
       csvEscape(p.idStatus),
       csvEscape(meta.slug),
@@ -129,7 +138,10 @@ export function buildTracklistM3u(
     const artist = (p.artistName ?? "").trim() || "Unknown";
     lines.push(`#EXTINF:${dur},${artist} - ${p.title.trim()}`);
     lines.push(`# setradar-cue:${exportTimestamp(p.timestamp)}`);
-    if (p.beatportUrl) lines.push(`# beatport:${p.beatportUrl}`);
+    if (p.mixName) lines.push(`# mix:${p.mixName}`);
+    if (p.isrc) lines.push(`# isrc:${p.isrc}`);
+    const bp = canonicalBeatportUrl(p.beatportUrl);
+    if (bp) lines.push(`# beatport:${bp}`);
     lines.push(display);
   }
 
@@ -145,22 +157,12 @@ export function buildTracklistPlain(plays: ExportPlay[]): string {
   );
 }
 
-/** One Beatport deep link or search URL per exportable play. */
+/** Canonical Beatport /track URLs only — the Rekordbox buy list. */
 export function buildBeatportUrlList(plays: ExportPlay[]): string {
-  return (
-    exportablePlays(plays)
-      .map((p) => {
-        if (
-          p.beatportUrl &&
-          p.beatportUrl.startsWith("https://www.beatport.com/")
-        ) {
-          return p.beatportUrl;
-        }
-        const q = encodeURIComponent(trackDisplayLine(p));
-        return `https://www.beatport.com/search?q=${q}`;
-      })
-      .join("\n") + "\n"
-  );
+  const urls = exportablePlays(plays)
+    .map((p) => canonicalBeatportUrl(p.beatportUrl))
+    .filter((url): url is string => !!url);
+  return urls.length ? urls.join("\n") + "\n" : "";
 }
 
 /** One Spotify search URL per exportable play. */

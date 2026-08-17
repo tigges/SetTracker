@@ -329,4 +329,19 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     type: "radio",
     minDurationSec: 30 * 60,
   },
+  {
+    // Official Tomorrowland One World Radio upload; 1001TL wired via
+    // sc-tomorrowland-mash-up-universe-djs-from-mars-august-2026.
+    // Tomorrowland poll titleMatch does not include "mash-up" / "universe",
+    // so this seed is required. Never wire sc-https://….
+    url: "https://soundcloud.com/tomorrowland/mash-up-universe-djs-from-mars-august-2026",
+    primaryArtist: dj("DJs From Mars", {
+      accent: "#ff5a1f",
+      homeCity: "Italy",
+    }),
+    genre: "Electro House",
+    seriesName: "Mash-Up Universe",
+    type: "radio",
+    minDurationSec: 30 * 60,
+  },
 ];

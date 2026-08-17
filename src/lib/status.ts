@@ -1,5 +1,7 @@
 // Status color semantics + provenance labels, used everywhere in the UI.
 
+import { beatportSearchUrl, canonicalBeatportUrl } from "./trackMeta";
+
 export type IdStatus =
   | "identified"
   | "unresolved_id"
@@ -106,12 +108,11 @@ export function listenLinks(
   const q = encodeURIComponent([artist, title].filter(Boolean).join(" ").trim());
   const src = opts?.setSourceUrl ?? "";
   const scFromSet = /soundcloud\.com\//i.test(src) ? src : null;
+  const beatportCanonical = canonicalBeatportUrl(opts?.beatportUrl);
   return {
     youtube: `https://www.youtube.com/results?search_query=${q}`,
-    beatport:
-      opts?.beatportUrl && opts.beatportUrl.startsWith("https://www.beatport.com/")
-        ? opts.beatportUrl
-        : `https://www.beatport.com/search?q=${q}`,
+    beatport: beatportCanonical ?? beatportSearchUrl(title, artist),
+    beatportIsCanonical: !!beatportCanonical,
     spotify: `https://open.spotify.com/search/${q}`,
     // Only link SC when we have the set's real upload URL — never a name search.
     soundcloud: scFromSet,

@@ -16,6 +16,11 @@ import {
   nightMentionsDj,
 } from "@/lib/lineupMatch";
 import { CURATED_LABEL_SLUGS } from "@/lib/ingest/curatedLabels";
+import {
+  canonicalBeatportUrl,
+  resolveBeatportUrl,
+  trackIdentityKey,
+} from "@/lib/trackMeta";
 import { relatedSlugsFor } from "@/lib/ingest/discovery/relations";
 import { aliasSlugsFor, resolveSetSlug } from "@/lib/ingest/sourceRemaps";
 import { canonicalDjSlug, DJ_SLUG_ALIASES } from "@/lib/ingest/djSlugAliases";
@@ -62,6 +67,29 @@ function tallyStatuses(plays: { idStatus: string }[]): StatusCounts {
     if (p.idStatus in c) c[p.idStatus as IdStatus] += 1;
   }
   return c;
+}
+
+/** Canonical Beatport /track URLs already stored on a same-title+artist row. */
+async function siblingBeatportMap(
+  rows: { title: string; artistName: string | null }[],
+): Promise<Map<string, string>> {
+  const uniqueTitles = [
+    ...new Set(rows.filter((r) => r.artistName).map((r) => r.title)),
+  ];
+  if (uniqueTitles.length === 0) return new Map();
+
+  const found = await prisma.track.findMany({
+    where: { beatportUrl: { not: null }, title: { in: uniqueTitles } },
+    select: { title: true, artistName: true, beatportUrl: true },
+  });
+  const map = new Map<string, string>();
+  for (const t of found) {
+    const url = canonicalBeatportUrl(t.beatportUrl);
+    if (!url) continue;
+    const key = trackIdentityKey(t.title, t.artistName);
+    if (!map.has(key)) map.set(key, url);
+  }
+  return map;
 }
 
 /** Aggregate play status counts per set via SQL groupBy (no play-row payload). */
@@ -284,47 +312,67 @@ export async function getSetBySlug(slug: string) {
         isPrimary: a.isPrimary,
       })),
     statusCounts: tallyStatuses(set.plays),
-    plays: set.plays.map((p) => {
-      const resolved = p.idTrack?.resolvedTrack ?? null;
-      const title =
-        p.track?.title ??
-        resolved?.title ??
-        p.idTrack?.label ??
-        p.rawText ??
-        "Unknown";
-      const artistName =
-        p.track?.artistName ??
-        resolved?.artistName ??
-        p.idTrack?.suspectedArtist ??
-        null;
-      const label = p.track?.label ?? resolved?.label ?? null;
-      const track = p.track ?? resolved;
-      return {
-        id: p.id,
-        position: p.position,
-        timestamp: p.timestamp,
-        idStatus: p.idStatus,
-        provenance: p.provenance,
-        rawText: p.rawText,
-        title,
-        artistName,
-        imageUrl: track?.imageUrl ?? null,
-        labelName: label?.name ?? null,
-        labelSlug: label?.slug ?? null,
-        labelColor: label?.color ?? null,
-        labelImageUrl: label?.imageUrl ?? null,
-        trackSlug: track?.slug ?? null,
-        bpm: track?.bpm ?? null,
-        musicalKey: track?.musicalKey ?? null,
-        mixName: track?.mixName ?? null,
-        remixerName: track?.remixerName ?? null,
-        genre: normalizeGenre(track?.genre ?? null),
-        trackDurationSec: track?.durationSec ?? null,
-        beatportUrl: track?.beatportUrl ?? null,
-        idNote: p.idTrack?.note ?? null,
-        resolvedTitle: resolved ? `${resolved.artistName} – ${resolved.title}` : null,
-      };
-    }),
+    plays: await (async () => {
+      const plays = set.plays.map((p) => {
+        const resolved = p.idTrack?.resolvedTrack ?? null;
+        const title =
+          p.track?.title ??
+          resolved?.title ??
+          p.idTrack?.label ??
+          p.rawText ??
+          "Unknown";
+        const artistName =
+          p.track?.artistName ??
+          resolved?.artistName ??
+          p.idTrack?.suspectedArtist ??
+          null;
+        const label = p.track?.label ?? resolved?.label ?? null;
+        const track = p.track ?? resolved;
+        return {
+          id: p.id,
+          position: p.position,
+          timestamp: p.timestamp,
+          idStatus: p.idStatus,
+          provenance: p.provenance,
+          rawText: p.rawText,
+          title,
+          artistName,
+          imageUrl: track?.imageUrl ?? null,
+          labelName: label?.name ?? null,
+          labelSlug: label?.slug ?? null,
+          labelColor: label?.color ?? null,
+          labelImageUrl: label?.imageUrl ?? null,
+          trackSlug: track?.slug ?? null,
+          bpm: track?.bpm ?? null,
+          musicalKey: track?.musicalKey ?? null,
+          mixName: track?.mixName ?? null,
+          remixerName: track?.remixerName ?? null,
+          genre: normalizeGenre(track?.genre ?? null),
+          trackDurationSec: track?.durationSec ?? null,
+          beatportUrl: track?.beatportUrl ?? null,
+          isrc: track?.isrc ?? null,
+          idNote: p.idTrack?.note ?? null,
+          resolvedTitle: resolved
+            ? `${resolved.artistName} – ${resolved.title}`
+            : null,
+        };
+      });
+      const missing = plays.filter(
+        (p) => !canonicalBeatportUrl(p.beatportUrl) && p.artistName,
+      );
+      if (missing.length === 0) return plays;
+      const catalog = await siblingBeatportMap(missing);
+      if (catalog.size === 0) return plays;
+      return plays.map((p) => ({
+        ...p,
+        beatportUrl: resolveBeatportUrl(
+          p.beatportUrl,
+          p.title,
+          p.artistName,
+          catalog,
+        ),
+      }));
+    })(),
   };
 }
 
@@ -1618,6 +1666,18 @@ export async function getTrackBySlug(slug: string) {
       });
   }
 
+  const beatportCatalog = canonicalBeatportUrl(track.beatportUrl)
+    ? new Map<string, string>()
+    : await siblingBeatportMap([
+        { title: track.title, artistName: track.artistName },
+      ]);
+  const beatportUrl = resolveBeatportUrl(
+    track.beatportUrl,
+    track.title,
+    track.artistName,
+    beatportCatalog,
+  );
+
   return {
     slug: track.slug,
     title: track.title,
@@ -1630,7 +1690,8 @@ export async function getTrackBySlug(slug: string) {
     durationSec: track.durationSec,
     releaseDate: track.releaseDate,
     imageUrl: track.imageUrl,
-    beatportUrl: track.beatportUrl,
+    beatportUrl,
+    isrc: track.isrc,
     label: track.label
       ? {
           name: track.label.name,

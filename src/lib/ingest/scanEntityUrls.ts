@@ -20,6 +20,7 @@ import {
 } from "./eventSocials";
 import { KNOWN_EVENTS } from "./events";
 import { slugify } from "./types";
+import { canonicalBeatportUrl } from "../trackMeta";
 
 export type ScanStats = {
   pages: number;
@@ -269,9 +270,12 @@ async function applyBeatportHints(
 ): Promise<void> {
   for (const url of urls.slice(0, 40)) {
     // https://www.beatport.com/track/title/12345678
-    const m = url.match(/beatport\.com\/track\/([^/]+)\/(\d+)/i);
-    if (!m) continue;
-    const slugTitle = m[1].replace(/-/g, " ");
+    const canonical = canonicalBeatportUrl(url);
+    if (!canonical) continue;
+    const slugTitle = new URL(canonical).pathname
+      .split("/")[2]
+      ?.replace(/-/g, " ");
+    if (!slugTitle) continue;
     const tracks = await prisma.track.findMany({
       where: {
         beatportUrl: null,
@@ -282,10 +286,10 @@ async function applyBeatportHints(
     for (const t of tracks) {
       // Loose match — only fill when artist token also appears in slug path.
       const artTok = t.artistName.toLowerCase().split(/\s+/)[0] ?? "";
-      if (artTok.length >= 3 && !url.toLowerCase().includes(artTok)) continue;
+      if (artTok.length >= 3 && !canonical.toLowerCase().includes(artTok)) continue;
       await prisma.track.update({
         where: { id: t.id },
-        data: { beatportUrl: url.split("?")[0] },
+        data: { beatportUrl: canonical },
       });
       stats.beatportHits += 1;
     }
