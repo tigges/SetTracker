@@ -1,0 +1,63 @@
+/**
+ * Fan / unofficial watch URLs that may be sampled for Identify only.
+ * Never become sourceUrl, playbackUrl, or TRACKLIST_1001_BY_SOURCE_SLUG keys.
+ */
+
+export type FingerprintOnlyWatch = {
+  seed: string;
+  youtubeUrl: string;
+  videoId: string;
+  channel: string;
+  official: false;
+  /** Cue offsets (sec) that 1001 left as bare ID. */
+  idOffsetsSec: number[];
+  note: string;
+};
+
+export const FINGERPRINT_ONLY_WATCH: FingerprintOnlyWatch[] = [
+  {
+    seed: "TL_KNOCK2_ZEDD_HARD_SUMMER_2026",
+    youtubeUrl: "https://www.youtube.com/watch?v=6DC3xoQF4Zs",
+    videoId: "6DC3xoQF4Zs",
+    channel: "DerekD2",
+    official: false,
+    idOffsetsSec: [17 * 60 + 15, 1 * 3600 + 11 * 60 + 28],
+    note: "Fan 4K on 1001. Identify probe only — never Relive wire or FileScan as official.",
+  },
+];
+
+export function isFingerprintOnlyVideoId(id: string): boolean {
+  return FINGERPRINT_ONLY_WATCH.some((w) => w.videoId === id);
+}
+
+export function isFingerprintOnlyWatchUrl(url: string): boolean {
+  const m = url.match(/(?:youtu\.be\/|v=)([\w-]{11})/);
+  return m ? isFingerprintOnlyVideoId(m[1]!) : false;
+}
+
+export type FingerprintIdProbe = {
+  seed: string;
+  youtubeUrl: string;
+  videoId: string;
+  offsetSec: number;
+  note: string;
+};
+
+/** ACR Identify offsets for held ID rows — does not create a catalog set. */
+export function fingerprintIdProbes(
+  watches = FINGERPRINT_ONLY_WATCH,
+): FingerprintIdProbe[] {
+  const out: FingerprintIdProbe[] = [];
+  for (const w of watches) {
+    for (const offsetSec of w.idOffsetsSec) {
+      out.push({
+        seed: w.seed,
+        youtubeUrl: w.youtubeUrl,
+        videoId: w.videoId,
+        offsetSec,
+        note: w.note,
+      });
+    }
+  }
+  return out;
+}

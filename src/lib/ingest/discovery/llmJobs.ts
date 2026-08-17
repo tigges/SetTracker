@@ -25,6 +25,9 @@ import {
   type ResearchStats,
 } from "./llmResearch";
 import { loadArtistSocialKeys } from "../eventSocials";
+import { evaluateIsrc, identifySeedRow } from "../identify/trackIds";
+import { isFingerprintOnlyWatchUrl } from "../identify/fingerprintWatch";
+import { canonicalBeatportUrl } from "../../trackMeta";
 
 export const RESEARCH_JOBS = [
   "handles",
@@ -32,6 +35,7 @@ export const RESEARCH_JOBS = [
   "identity",
   "homecity",
   "videos",
+  "tracks",
   "quality",
 ] as const;
 
@@ -52,6 +56,7 @@ export const LLM_WRITE_JOBS = new Set<ResearchJobId>([
   "handles",
   "events",
   "homecity",
+  "tracks",
 ]);
 
 export function parseResearchJobs(
@@ -110,6 +115,28 @@ export function evaluateHomeCity(
   return { ok: true, value, reason: "city-shaped" };
 }
 
+/** Model ISRC/Beatport is accepted only when a live catalog lookup confirms it. */
+export function evaluateConfirmedTrackIds(
+  proposal: { isrc?: string | null; beatportUrl?: string | null } | null,
+  confirmed: { isrc?: string; beatportUrl?: string } | null,
+): { ok: boolean; isrc?: string; beatportUrl?: string; reason: string } {
+  if (!proposal || !confirmed) return { ok: false, reason: "no confirm" };
+  const want = evaluateIsrc(proposal.isrc);
+  const beatport = canonicalBeatportUrl(proposal.beatportUrl || undefined);
+  if (want.ok && confirmed.isrc && want.isrc === confirmed.isrc) {
+    return {
+      ok: true,
+      isrc: want.isrc,
+      beatportUrl: beatport || confirmed.beatportUrl,
+      reason: "isrc confirmed",
+    };
+  }
+  if (beatport && confirmed.beatportUrl && beatport === confirmed.beatportUrl) {
+    return { ok: true, beatportUrl: beatport, reason: "beatport confirmed" };
+  }
+  return { ok: false, reason: "proposal did not match live lookup" };
+}
+
 export function evaluateOfficialWatchUrl(
   raw: string | null | undefined,
 ): { ok: boolean; url?: string; reason: string } {
@@ -128,12 +155,20 @@ export function evaluateOfficialWatchUrl(
   if (host === "youtu.be") {
     const id = parsed.pathname.replace(/^\//, "").split("/")[0];
     if (!id || id.length < 8) return { ok: false, reason: "not a watch URL" };
-    return { ok: true, url: `https://www.youtube.com/watch?v=${id}`, reason: "watch url" };
+    const watch = `https://www.youtube.com/watch?v=${id}`;
+    if (isFingerprintOnlyWatchUrl(watch)) {
+      return { ok: false, reason: "fingerprint-only fan clip — not an official Relive" };
+    }
+    return { ok: true, url: watch, reason: "watch url" };
   }
   if (host === "youtube.com" || host === "m.youtube.com") {
     if (/^\/(watch)$/i.test(parsed.pathname) && parsed.searchParams.get("v")) {
       const id = parsed.searchParams.get("v")!;
-      return { ok: true, url: `https://www.youtube.com/watch?v=${id}`, reason: "watch url" };
+      const watch = `https://www.youtube.com/watch?v=${id}`;
+      if (isFingerprintOnlyWatchUrl(watch)) {
+        return { ok: false, reason: "fingerprint-only fan clip — not an official Relive" };
+      }
+      return { ok: true, url: watch, reason: "watch url" };
     }
     return { ok: false, reason: "not a watch URL" };
   }
@@ -413,6 +448,16 @@ Search hints: ${held.search.join(" ")}`,
       );
       const proposal = parseLlmJson(text) as { watchUrl?: string | null } | null;
       const ev = evaluateOfficialWatchUrl(proposal?.watchUrl);
+      if (ev.ok && ev.url && isFingerprintOnlyWatchUrl(ev.url)) {
+        stats.rejected += 1;
+        rows.push({
+          name: held.name,
+          seed: held.seed,
+          accepted: null,
+          reason: "fingerprint-only fan clip — not an official Relive",
+        });
+        continue;
+      }
       if (!ev.ok || !ev.url) {
         stats.rejected += 1;
         rows.push({
@@ -479,6 +524,105 @@ Search hints: ${held.search.join(" ")}`,
   });
   console.log(
     `[llm-videos] provider=${provider} scanned=${stats.scanned} rejected=${stats.rejected}`,
+  );
+  return stats;
+}
+
+export async function runLlmTrackIdResearch(
+  prisma: PrismaClient,
+  opts: { provider?: LlmProvider; limit?: number; reportTag?: string } = {},
+): Promise<ResearchStats> {
+  const provider = opts.provider ?? detectLlmProvider();
+  const stats = emptyStats(provider);
+  if (!provider) return stats;
+  const apply = process.env.LLM_RESEARCH_APPLY !== "0";
+  const limit = Math.max(
+    1,
+    opts.limit ?? Number(process.env.LLM_TRACK_ID_LIMIT || 12),
+  );
+  const tracks = await prisma.track.findMany({
+    where: { isrc: null },
+    select: { id: true, title: true, artistName: true, isrc: true, beatportUrl: true },
+    take: limit,
+    orderBy: { createdAt: "desc" },
+  });
+
+  const rows = [];
+  for (const t of tracks) {
+    stats.scanned += 1;
+    try {
+      const text = await complete(
+        provider,
+        `Find the ISRC and canonical Beatport track URL for this recording.
+Return ONLY JSON: {"isrc":"CCXXX0000000 or null","beatportUrl":"https://www.beatport.com/track/.../123 or null","confidence":"high|medium|low"}
+Never invent an ISRC. Null when unsure. No 1001tracklists URLs.
+Artist: ${t.artistName}
+Title: ${t.title}`,
+      );
+      const proposal = parseLlmJson(text) as {
+        isrc?: string | null;
+        beatportUrl?: string | null;
+      } | null;
+      stats.proposed += 1;
+      const live = await identifySeedRow({
+        at: "0:00",
+        artist: t.artistName,
+        title: t.title,
+      });
+      const confirmed =
+        "reason" in live
+          ? null
+          : { isrc: live.isrc, beatportUrl: live.beatportUrl };
+      const ev = evaluateConfirmedTrackIds(proposal, confirmed);
+      if (!ev.ok) {
+        stats.rejected += 1;
+        rows.push({
+          id: t.id,
+          artist: t.artistName,
+          title: t.title,
+          accepted: null,
+          reason: ev.reason,
+        });
+        continue;
+      }
+      if (apply) {
+        const data: { isrc?: string; beatportUrl?: string } = {};
+        if (ev.isrc && !t.isrc) data.isrc = ev.isrc;
+        if (ev.beatportUrl && !t.beatportUrl) data.beatportUrl = ev.beatportUrl;
+        if (Object.keys(data).length) {
+          await prisma.track.update({ where: { id: t.id }, data });
+          stats.applied += 1;
+        }
+      }
+      rows.push({
+        id: t.id,
+        artist: t.artistName,
+        title: t.title,
+        accepted: { isrc: ev.isrc, beatportUrl: ev.beatportUrl },
+        reason: ev.reason,
+      });
+    } catch (err) {
+      stats.rejected += 1;
+      rows.push({
+        id: t.id,
+        artist: t.artistName,
+        title: t.title,
+        accepted: null,
+        reason: err instanceof Error ? err.message : String(err),
+      });
+    }
+  }
+
+  const tag = opts.reportTag ? `-${opts.reportTag}` : "";
+  writeReport(`llm-track-id-research${tag}.json`, {
+    generatedAt: new Date().toISOString(),
+    provider,
+    write: apply,
+    note: "Fill-null Track.isrc / beatportUrl only when Deezer/MB confirms the proposal.",
+    rows,
+  });
+  console.log(
+    `[llm-tracks] provider=${provider} scanned=${stats.scanned} applied=${stats.applied}`,
   );
   return stats;
 }

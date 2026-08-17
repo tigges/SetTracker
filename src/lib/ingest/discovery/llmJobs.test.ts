@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import {
   evaluateHomeCity,
   evaluateIdentityClass,
+  evaluateConfirmedTrackIds,
   evaluateOfficialWatchUrl,
   parseResearchJobs,
   RESEARCH_JOBS,
@@ -13,10 +14,11 @@ assert.deepEqual(parseResearchJobs(undefined), [
   "quality",
 ]);
 assert.deepEqual(parseResearchJobs("all"), [...RESEARCH_JOBS]);
-assert.deepEqual(parseResearchJobs("identity,homecity,videos"), [
+assert.deepEqual(parseResearchJobs("identity,homecity,videos,tracks"), [
   "identity",
   "homecity",
   "videos",
+  "tracks",
 ]);
 assert.deepEqual(parseResearchJobs("handles,nope,events"), [
   "handles",
@@ -56,6 +58,34 @@ assert.equal(
 assert.match(
   evaluateOfficialWatchUrl("https://1001.tl/abc").reason,
   /1001/,
+);
+assert.equal(
+  evaluateOfficialWatchUrl("https://youtu.be/6DC3xoQF4Zs").ok,
+  false,
+);
+assert.match(
+  evaluateOfficialWatchUrl("https://www.youtube.com/watch?v=6DC3xoQF4Zs")
+    .reason,
+  /fingerprint-only/,
+);
+
+assert.equal(
+  evaluateConfirmedTrackIds(
+    { isrc: "USUM71502634" },
+    { isrc: "USUM71502634" },
+  ).ok,
+  true,
+);
+assert.equal(
+  evaluateConfirmedTrackIds(
+    { isrc: "USUM71502634" },
+    { isrc: "GBAAA0000000" },
+  ).ok,
+  false,
+);
+assert.equal(
+  evaluateConfirmedTrackIds({ isrc: "USUM71502634" }, null).ok,
+  false,
 );
 
 console.log("llmJobs.test.ts ok");

@@ -3,6 +3,7 @@ import {
   fileScanActionForVideo,
   fileScanConfig,
   isHeldFileScanTarget,
+  isFingerprintOnlyFileScanTarget,
   parseScanHits,
   youtubeFileScanQueue,
   youtubeVideoIdFromFsUri,
@@ -213,6 +214,20 @@ assert.equal(
   isHeldFileScanTarget({ title: "Alesso | Tomorrowland Relive" }),
   false,
 );
+assert.equal(
+  isFingerprintOnlyFileScanTarget({ slug: "yt-6DC3xoQF4Zs" }),
+  true,
+);
+assert.equal(
+  isFingerprintOnlyFileScanTarget({
+    playbackUrl: "https://youtu.be/6DC3xoQF4Zs",
+  }),
+  true,
+);
+assert.equal(
+  isFingerprintOnlyFileScanTarget({ slug: "yt-BUsCIK_kh_A" }),
+  false,
+);
 
 // Identify ranking puts SC first; a mixed slice would drop YT. File Scanning
 // must filter YouTube before slicing so Relives still enter the queue.
@@ -231,6 +246,12 @@ const mixedCrowd = [
     slug: "yt-heldfanclip1",
     primaryDjSlug: "calvin-harris",
     title: "Calvin Harris Tomorrowland WE2",
+  }),
+  fsCand({
+    id: "yt-6DC3xoQF4Zs",
+    slug: "yt-6DC3xoQF4Zs",
+    playbackUrl: "https://www.youtube.com/watch?v=6DC3xoQF4Zs",
+    title: "Knock2 & Zedd HARD Stage fan 4K",
   }),
   fsCand({ id: "yt-fhiZ1Rj9o-A", slug: "yt-fhiZ1Rj9o-A" }),
 ];

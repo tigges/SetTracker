@@ -1,5 +1,5 @@
 /**
- * Claude / Gemini research jobs (handles, events, identity, home city, videos).
+ * Claude / Gemini research jobs (handles, events, identity, home city, videos, tracks).
  * No-op without a Claude or Gemini key.
  *
  *   npm run research:handles
@@ -18,6 +18,7 @@ import {
   runLlmHomeCityResearch,
   runLlmIdentityResearch,
   runLlmOfficialVideoResearch,
+  runLlmTrackIdResearch,
 } from "../src/lib/ingest/discovery/llmJobs";
 import {
   claudeApiKey,
@@ -102,6 +103,16 @@ async function main() {
       });
     }
     done.homecity = homecity;
+  }
+  if (jobs.includes("tracks")) {
+    const tracks = [];
+    for (const provider of providers) {
+      tracks.push({
+        provider,
+        research: await runLlmTrackIdResearch(prisma, { provider, reportTag: tag }),
+      });
+    }
+    done.tracks = tracks;
   }
   if (jobs.includes("videos")) {
     const videos = [];
