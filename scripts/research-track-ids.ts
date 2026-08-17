@@ -5,6 +5,8 @@
  *   TRACK_ID_LIMIT=20 npm run research:track-ids
  *   TRACK_ID_MB=1 npm run research:track-ids
  *   TRACK_ID_APPLY=1 npm run research:track-ids   # fill-null Track.isrc / beatportUrl
+ *   TRACKRADAR=1 npm run research:track-ids       # MCP search_track (needs TRACKRADAR_API_KEY)
+ *   TRACKRADAR_ANALYZE=1 npm run research:track-ids  # analyze fan YT (quota; never Relive)
  *
  * Fan Relives in FINGERPRINT_ONLY_WATCH stay Identify-only.
  */
@@ -29,6 +31,12 @@ async function main() {
         misses: report.misses.length,
         applied: report.applied,
         isrcs: report.hits.filter((h) => h.isrc).length,
+        trackradar: report.hits.filter((h) => h.platforms).length,
+        trackradarAnalyzes: report.trackradarAnalyzes.map((a) => ({
+          sourceUrl: a.sourceUrl,
+          tracks: a.tracks.length,
+          via: a.via,
+        })),
         idProbes: probes.map((p) => ({
           seed: p.seed,
           videoId: p.videoId,

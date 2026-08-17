@@ -100,10 +100,12 @@ empty `PAGES_BASE_PATH`). The github.io `/SetTracker` path is a redirect.
   both keys are missing. Trigger on main by bumping `data/llm-request`.
   Reports in `data/crosscheck/llm-handle-research.json`.
   **Track IDs:** `npm run research:track-ids` resolves ISRCs from held 1001
-  names via Deezer (optional MusicBrainz with `TRACK_ID_MB=1`). Fan Relives
-  in `FINGERPRINT_ONLY_WATCH` are Identify-offset probes only — never
-  `sourceUrl` / FileScan. LLM job `tracks` writes fill-null IDs only when
-  Deezer/MB confirms the proposal.
+  names via Deezer (optional MusicBrainz with `TRACK_ID_MB=1`). TrackRadar
+  (`TRACKRADAR=1` + `TRACKRADAR_API_KEY`) looks up platform IDs via MCP
+  `search_track`; `TRACKRADAR_ANALYZE=1` analyzes fingerprint-only fan
+  YouTube (quota, never Relive). Fan Relives in `FINGERPRINT_ONLY_WATCH`
+  are Identify-offset probes only — never `sourceUrl` / FileScan. LLM job
+  `tracks` writes fill-null IDs only when Deezer/MB confirms the proposal.
 - **Artwork thumbnails:** `npm run thumbs` fills null `imageUrl` on Dj / Label /
  Track / Set via the Deezer Search API (no key). Idempotent; skips rows that
  already have art. Sets fall back to the primary DJ image. The Pages workflow
