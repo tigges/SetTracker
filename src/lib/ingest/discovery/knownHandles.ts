@@ -989,6 +989,133 @@ export const KNOWN_HANDLES: Record<string, HandleHint> = {
   "kyle watson": {
     soundcloudPermalink: "kylewatson",
   },
+  // ---- LLM handle research 2026-08-17 round 3 ----
+  loofy: {
+    soundcloudPermalink: "loofy-644934783",
+  },
+  "luuk van dijk": {
+    youtubeHandle: "@luukvandijkdj",
+    soundcloudPermalink: "luukvandijkdj",
+  },
+  "melanie ribbe": {
+    youtubeHandle: "@melanieribbeofc",
+  },
+  "miguel bastida": {
+    youtubeHandle: "@MiguelBastida",
+    soundcloudPermalink: "miguel_bastida",
+  },
+  "mila alias": {
+    youtubeHandle: "@MILAALIASDJ",
+  },
+  "miss dre": {
+    youtubeHandle: "@missdremusic",
+  },
+  mitis: {
+    youtubeHandle: "@MitisMusic",
+    soundcloudPermalink: "mitis",
+  },
+  "moon boots": {
+    youtubeHandle: "@MoonBootsMusic",
+    soundcloudPermalink: "moonbootsmusic",
+  },
+  "myles o'neal": {
+    youtubeHandle: "@MylesONeal_",
+  },
+  mythm: {
+    youtubeHandle: "@mythmofficial",
+    soundcloudPermalink: "mythmofficial",
+  },
+  "neon deluz": {
+    youtubeHandle: "@neondeluzmusic",
+    soundcloudPermalink: "neondeluzmusic",
+  },
+  noizu: {
+    youtubeHandle: "@NoizuSound",
+    soundcloudPermalink: "noizusound",
+  },
+  omnom: {
+    soundcloudPermalink: "omnom",
+  },
+  "paco osuna": {
+    soundcloudPermalink: "paco-osuna",
+  },
+  "pls&ty": {
+    soundcloudPermalink: "pls-ty",
+  },
+  "porter robinson": {
+    youtubeHandle: "@porterrobinson",
+    soundcloudPermalink: "porter-robinson",
+  },
+  quackson: {
+    youtubeHandle: "@quacksonmusic",
+    soundcloudPermalink: "quacksonmusic",
+  },
+  riordan: {
+    youtubeHandle: "@riordanuk",
+    soundcloudPermalink: "riordanuk",
+  },
+  rohaan: {
+    youtubeHandle: "@Rohaan",
+    soundcloudPermalink: "rohaanofficial",
+  },
+  skepsis: {
+    soundcloudPermalink: "skepsisproducer",
+  },
+  "space 92": {
+    youtubeHandle: "@space92music",
+    soundcloudPermalink: "space92",
+  },
+  spartaque: {
+    soundcloudPermalink: "spartaque",
+  },
+  steller: {
+    youtubeHandle: "@stellersounds",
+    soundcloudPermalink: "stellersounds",
+  },
+  "sub focus": {
+    youtubeHandle: "@SubFocus",
+    soundcloudPermalink: "subfocus",
+  },
+  "sultan + shepard": {
+    youtubeHandle: "@sultanshepard",
+    soundcloudPermalink: "sultanshepard",
+  },
+  "the prototypes": {
+    soundcloudPermalink: "theprototypes",
+  },
+  "tini gessler": {
+    soundcloudPermalink: "tini-gessler",
+  },
+  tobehonest: {
+    youtubeHandle: "@tobehonestmusic",
+    soundcloudPermalink: "tobehonestmusic",
+  },
+  "torren foot": {
+    youtubeHandle: "@torrenfoote",
+    soundcloudPermalink: "torrenfoot",
+  },
+  toyzz: {
+    soundcloudPermalink: "toyzzx",
+  },
+  vltra: {
+    youtubeHandle: "@vltramusic",
+    soundcloudPermalink: "vltramusic1719",
+  },
+  wakyin: {
+    youtubeHandle: "@wakyin",
+    soundcloudPermalink: "wakyin",
+  },
+  wavhart: {
+    soundcloudPermalink: "wavhart",
+  },
+  "wes pierce": {
+    soundcloudPermalink: "wespiercemusic",
+  },
+  zuezeu: {
+    youtubeHandle: "@zuezeu",
+    soundcloudPermalink: "zuezeu",
+  },
+
 };
 
 export function hintForName(name: string): HandleHint | undefined {

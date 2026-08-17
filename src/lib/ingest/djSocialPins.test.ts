@@ -272,6 +272,8 @@ assert.equal(hintForName("Axwell")?.youtubeHandle, "@axwell");
 assert.equal(hintForName("Axwell")?.soundcloudPermalink, "axwell");
 assert.equal(hintForName("Kaskade")?.youtubeHandle, "@Kaskade");
 assert.equal(hintForName("Kaskade")?.soundcloudPermalink, "kaskade");
+assert.equal(hintForName("Porter Robinson")?.youtubeHandle, "@porterrobinson");
+assert.equal(hintForName("Sub Focus")?.soundcloudPermalink, "subfocus");
 
 assert.ok(bySlug["1788-l"], "missing pin 1788-l");
 assert.equal(bySlug["1788-l"]!.name, "1788-L");
