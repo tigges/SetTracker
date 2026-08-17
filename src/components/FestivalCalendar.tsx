@@ -1,15 +1,20 @@
 import Link from "next/link";
 import { EntityThumb } from "@/components/EntityThumb";
+import { ExpandableList } from "@/components/ExpandableChipRow";
 import { LineupArtistChips } from "@/components/LineupArtistChips";
 import {
   CALENDAR_WEEKDAYS,
-  editionCoversDay,
   editionsInMonth,
   monthGrid,
   monthTitle,
   monthsForEditions,
 } from "@/lib/calendarGrid";
-import { editionLabel } from "@/lib/ingest/festivalDrops";
+import {
+  dedupeDayPills,
+  groupMonthLocations,
+  occurrencesOnDay,
+  toCalendarOccurrences,
+} from "@/lib/calendarLocations";
 import type { EditionCalendarRow } from "@/lib/ingest/festivalDrops";
 import type { VenueNightCalendarRow } from "@/lib/ingest/discovery/venueCalendars/board";
 
@@ -31,6 +36,8 @@ const CLUB_TONE: Record<string, string> = {
   recent: "bg-panel2 text-muted",
 };
 
+const NIGHT_PREVIEW = 5;
+
 export type CalendarEdition = EditionCalendarRow & {
   name: string;
   imageUrl: string | null;
@@ -41,62 +48,49 @@ export type CalendarNight = VenueNightCalendarRow & {
   imageUrl: string | null;
 };
 
-type CalendarItem = {
-  slug: string;
-  eventSlug: string;
-  name: string;
-  imageUrl: string | null;
-  year: number;
-  label?: string;
-  startsAt: string;
-  endsAt: string;
-  bucket: string;
-  kind: "festival" | "club";
-  nightTitle?: string;
-  lineup?: CalendarNight["lineup"];
-  headliner?: CalendarNight["headliner"];
-};
-
-function shortName(e: CalendarItem): string {
-  if (e.kind === "club") {
-    return e.name.replace(/\s+(ibiza|phuket|london)$/i, "");
-  }
-  return e.name.replace(/\s+(music festival|festival|weekend)$/i, "");
-}
-
-function toItems(
-  editions: CalendarEdition[],
-  nights: CalendarNight[],
-): CalendarItem[] {
-  return [
-    ...editions.map((e) => ({
-      slug: e.slug,
-      eventSlug: e.eventSlug,
-      name: e.name,
-      imageUrl: e.imageUrl,
-      year: e.year,
-      label: e.label,
-      startsAt: e.startsAt,
-      endsAt: e.endsAt,
-      bucket: e.bucket,
-      kind: "festival" as const,
-    })),
-    ...nights.map((n) => ({
-      slug: n.slug,
-      eventSlug: n.eventSlug,
-      name: n.name,
-      imageUrl: n.imageUrl,
-      year: Number(n.startsAt.slice(0, 4)),
-      label: n.title,
-      startsAt: n.startsAt,
-      endsAt: n.endsAt,
-      bucket: n.bucket,
-      kind: "club" as const,
-      nightTitle: n.title,
-      lineup: n.lineup,
-      headliner: n.headliner,
-    })),
-  ];
+function ClubNightRow({ night }: { night: CalendarNight }) {
+  const head = night.headliner;
+  const official = night.ticketsUrl || night.sourceUrl;
+  return (
+    <li className="py-2 first:pt-3">
+      <div className="flex items-start justify-between gap-3">
+        <div className="min-w-0">
+          <p className="truncate text-[13px] text-ink">
+            <span className="mono text-[12px] text-muted2">{night.startsAt}</span>
+            {" · "}
+            {head?.slug ? (
+              <Link
+                href={`/djs/${head.slug}`}
+                className="font-medium transition-colors hover:text-brand"
+                title="In catalog"
+              >
+                {night.title}
+              </Link>
+            ) : (
+              <span className="font-medium">{night.title}</span>
+            )}
+          </p>
+          {night.lineup?.length ? (
+            <div className="mt-1.5">
+              <LineupArtistChips
+                artists={night.lineup}
+                previewCount={4}
+                compact
+              />
+            </div>
+          ) : null}
+        </div>
+        <a
+          href={official}
+          target="_blank"
+          rel="noreferrer"
+          className="mono shrink-0 text-[12px] text-brand hover:text-brandstrong"
+        >
+          Official →
+        </a>
+      </div>
+    </li>
+  );
 }
 
 export function FestivalCalendar({
@@ -108,9 +102,11 @@ export function FestivalCalendar({
   nights?: CalendarNight[];
   nowMs: number;
 }) {
-  const items = toItems(editions, nights);
-  const months = monthsForEditions(items, nowMs);
-  if (items.length === 0) {
+  const dated = [...editions, ...nights];
+  const months = monthsForEditions(dated, nowMs);
+  const occurrences = toCalendarOccurrences(editions, nights);
+
+  if (dated.length === 0) {
     return (
       <p className="py-12 text-center text-[14px] text-muted2">
         No festival weekends or club nights in this window.
@@ -122,7 +118,10 @@ export function FestivalCalendar({
     <div className="space-y-10">
       {months.map(({ year, month }) => {
         const cells = monthGrid(year, month, nowMs);
-        const monthEds = editionsInMonth(items, year, month);
+        const monthEds = editionsInMonth(editions, year, month);
+        const monthNights = editionsInMonth(nights, year, month);
+        const locations = groupMonthLocations(monthEds, monthNights);
+        const monthOcc = editionsInMonth(occurrences, year, month);
         return (
           <section key={`${year}-${month}`}>
             <div className="mb-3 flex items-baseline justify-between gap-3">
@@ -130,7 +129,7 @@ export function FestivalCalendar({
                 {monthTitle(year, month)}
               </h2>
               <span className="mono text-[12px] text-muted2">
-                {monthEds.length}
+                {locations.length}
               </span>
             </div>
             <div className="overflow-x-auto">
@@ -148,7 +147,7 @@ export function FestivalCalendar({
                   </div>
                 ))}
                 {cells.map((c) => {
-                  const hits = monthEds.filter((e) => editionCoversDay(e, c.iso));
+                  const hits = dedupeDayPills(occurrencesOnDay(monthOcc, c.iso));
                   return (
                     <div
                       key={c.iso}
@@ -170,23 +169,17 @@ export function FestivalCalendar({
                       </span>
                       <ul className="mt-1 space-y-0.5">
                         {hits.slice(0, 2).map((e) => (
-                          <li key={e.slug}>
+                          <li key={e.groupKey}>
                             <Link
-                              href={`/events/${e.eventSlug}`}
+                              href={e.href}
                               className={`block truncate rounded px-1 py-0.5 text-[10px] font-medium leading-tight ${
-                                e.kind === "club"
+                                e.accent === "brand"
                                   ? (CLUB_TONE[e.bucket] ?? "bg-brand/15 text-brand")
                                   : (BUCKET_TONE[e.bucket] ?? "bg-panel2 text-muted")
                               }`}
-                              title={
-                                e.kind === "club"
-                                  ? `${e.name} · ${e.nightTitle}`
-                                  : editionLabel(e)
-                              }
+                              title={e.tooltip}
                             >
-                              {e.kind === "club"
-                                ? `${shortName(e)}${e.nightTitle ? ` · ${e.nightTitle}` : ""}`
-                                : shortName(e)}
+                              {e.name}
                             </Link>
                           </li>
                         ))}
@@ -201,85 +194,102 @@ export function FestivalCalendar({
                 })}
               </div>
             </div>
-            {monthEds.length > 0 ? (
+            {locations.length > 0 ? (
               <ul className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
-                {monthEds.map((e) => {
-                  const club = e.kind === "club";
-                  const head = e.headliner;
-                  const title = club && e.nightTitle ? e.nightTitle : e.name;
-                  const thumbHref =
-                    club && head?.slug ? `/djs/${head.slug}` : `/events/${e.eventSlug}`;
-                  return (
-                    <li
-                      key={e.slug}
-                      className="card flex flex-col gap-3 p-4 transition-colors hover:border-[color:var(--muted2)]"
-                    >
-                      <div className="flex items-start gap-3">
-                        <Link href={thumbHref} className="flex-none">
-                          <EntityThumb
-                            src={club ? (head?.imageUrl ?? e.imageUrl) : e.imageUrl}
-                            label={title}
-                            accent={
-                              club
-                                ? head?.accent || "var(--brand)"
-                                : "var(--amber)"
-                            }
-                            size={44}
-                            radius={12}
-                            monogram={title.slice(0, 2).toUpperCase()}
-                          />
-                        </Link>
-                        <span className="min-w-0 flex-1">
-                          <span className="block truncate text-[15px] font-semibold text-ink">
-                            {club && head?.slug ? (
-                              <Link
-                                href={`/djs/${head.slug}`}
-                                className="transition-colors hover:text-brand"
-                                title="In catalog"
-                              >
-                                {title}
-                              </Link>
-                            ) : (
+                {locations.map((loc) => {
+                  if (loc.kind === "festival") {
+                    const e = loc.edition;
+                    return (
+                      <li
+                        key={loc.key}
+                        className="card flex flex-col gap-3 p-4 transition-colors hover:border-[color:var(--muted2)]"
+                      >
+                        <div className="flex items-start gap-3">
+                          <Link
+                            href={`/events/${e.eventSlug}`}
+                            className="flex-none"
+                          >
+                            <EntityThumb
+                              src={e.imageUrl}
+                              label={e.name}
+                              accent="var(--amber)"
+                              size={44}
+                              radius={12}
+                              monogram={e.name.slice(0, 2).toUpperCase()}
+                            />
+                          </Link>
+                          <span className="min-w-0 flex-1">
+                            <span className="block truncate text-[15px] font-semibold text-ink">
                               <Link
                                 href={`/events/${e.eventSlug}`}
                                 className="transition-colors hover:text-brand"
                               >
-                                {title}
+                                {e.name}
                               </Link>
-                            )}
-                            <span className="font-normal text-muted">
-                              {club ? (
-                                <>
-                                  {" · "}
-                                  <Link
-                                    href={`/events/${e.eventSlug}`}
-                                    className="transition-colors hover:text-ink"
-                                  >
-                                    {e.name}
-                                  </Link>
-                                </>
-                              ) : (
-                                ` · ${e.year}${e.label ? ` ${e.label}` : ""}`
-                              )}
+                              <span className="font-normal text-muted">
+                                {` · ${e.year}${e.label ? ` ${e.label}` : ""}`}
+                              </span>
+                            </span>
+                            <span className="mono text-[12px] text-muted2">
+                              {e.startsAt}
+                              {e.endsAt !== e.startsAt ? ` – ${e.endsAt}` : ""}
+                              {" · "}
+                              {BUCKET_COPY[e.bucket] ?? e.bucket}
                             </span>
                           </span>
-                          <span className="mono text-[12px] text-muted2">
-                            {e.startsAt}
-                            {e.endsAt !== e.startsAt ? ` – ${e.endsAt}` : ""}
-                            {" · "}
-                            {BUCKET_COPY[e.bucket] ?? e.bucket}
+                        </div>
+                      </li>
+                    );
+                  }
+
+                  return (
+                    <li
+                      key={loc.key}
+                      className="card flex flex-col gap-1 p-4 transition-colors hover:border-[color:var(--muted2)]"
+                    >
+                      <div className="flex items-start gap-3">
+                        <Link
+                          href={`/events/${loc.eventSlug}`}
+                          className="flex-none"
+                        >
+                          <EntityThumb
+                            src={loc.imageUrl}
+                            label={loc.name}
+                            accent="var(--brand)"
+                            size={44}
+                            radius={12}
+                            monogram={loc.name.slice(0, 2).toUpperCase()}
+                          />
+                        </Link>
+                        <span className="min-w-0 flex-1">
+                          <span className="block truncate text-[15px] font-semibold text-ink">
+                            <Link
+                              href={`/events/${loc.eventSlug}`}
+                              className="transition-colors hover:text-brand"
+                            >
+                              {loc.name}
+                            </Link>
                           </span>
-                          {club && e.lineup?.length ? (
-                            <div className="mt-2">
-                              <LineupArtistChips
-                                artists={e.lineup}
-                                previewCount={4}
-                                compact
-                              />
-                            </div>
-                          ) : null}
+                          <span className="mono text-[12px] text-muted2">
+                            {loc.startsAt}
+                            {loc.endsAt !== loc.startsAt
+                              ? ` – ${loc.endsAt}`
+                              : ""}
+                            {" · "}
+                            {BUCKET_COPY[loc.bucket] ?? loc.bucket}
+                            {" · "}
+                            {loc.nights.length}{" "}
+                            {loc.nights.length === 1 ? "night" : "nights"}
+                          </span>
                         </span>
                       </div>
+                      <ExpandableList
+                        items={loc.nights.map((n) => (
+                          <ClubNightRow key={n.slug} night={n} />
+                        ))}
+                        previewCount={NIGHT_PREVIEW}
+                        moreLabel="nights"
+                      />
                     </li>
                   );
                 })}
