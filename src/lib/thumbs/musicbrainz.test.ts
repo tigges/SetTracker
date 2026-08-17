@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { beatportUrlFromMbRelations } from "./musicbrainz";
+import { beatportUrlFromMbRelations, pickBestRecording } from "./musicbrainz";
 
 assert.equal(
   beatportUrlFromMbRelations([
@@ -21,5 +21,35 @@ assert.equal(
 
 assert.equal(beatportUrlFromMbRelations([]), null);
 assert.equal(beatportUrlFromMbRelations(undefined), null);
+
+const best = pickBestRecording("Beautiful Now", "Zedd ft. Jon Bellion", [
+  {
+    id: "bootleg",
+    title: "Beautiful Now [Twysted & Jellix bootleg]",
+    "artist-credit": [{ name: "Zedd" }],
+  },
+  {
+    id: "studio",
+    title: "Beautiful Now",
+    "artist-credit": [{ name: "Zedd" }],
+  },
+  {
+    id: "other",
+    title: "Clarity",
+    "artist-credit": [{ name: "Zedd" }],
+  },
+]);
+assert.equal(best?.id, "studio");
+
+assert.equal(
+  pickBestRecording("Beautiful Now", "Zedd", [
+    {
+      id: "wrong-artist",
+      title: "Beautiful Now",
+      "artist-credit": [{ name: "Coldplay" }],
+    },
+  ]),
+  null,
+);
 
 console.log("musicbrainz.test.ts ok");

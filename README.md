@@ -213,6 +213,7 @@ Our submit forces `engine=1` (audio fingerprint; override `ACRCLOUD_FS_ENGINE`).
 | `ANTHROPIC_API_KEY` | optional alias for the same Claude key |
 | `GEMINI_API_KEY` | Gemini **API** key from [AI Studio](https://aistudio.google.com/apikey) (preferred — Search grounding). Aliases: `GEMINI_AGENT_API`, `GEMINI`, `GOOGLE_API_KEY` |
 | `TRACKRADAR_API_KEY` | TrackRadar MCP bearer (`tr_live_…`) for `search_track` / mix analyze |
+| `AUDD_API_TOKEN` | optional AudD recognize (`AUDD_ANALYZE=1`); `findLyrics` needs no key |
 
 **Catalog junk** (verify-urls / Pages): festival stages (`Freedom Stage`,
 `Mainstage`) fold onto the parent festival; radio/session hosts become
@@ -227,11 +228,21 @@ another catalog DJ. Missing keys → safe no-op. Runs on catalog-deep and
 weekly enrich `full`. Reports: `data/crosscheck/llm-handle-research.json`.
 
 **Track IDs from held 1001 seeds** (`npm run research:track-ids`): named cues
-go to Deezer (ISRC) and optional MusicBrainz (`TRACK_ID_MB=1` → MBID /
-Beatport). [TrackRadar](https://trackradar.ai) (`TRACKRADAR=1` +
-`TRACKRADAR_API_KEY`) adds Spotify / Bandcamp / Apple / Discogs via MCP
-`search_track` (name-matched). `TRACKRADAR_ANALYZE=1` runs
-`analyze_social_post` on fingerprint-only fan clips (quota; never Relive).
+go to Deezer (ISRC), [MusicBrainz](https://musicbrainz.org/) (on unless
+`TRACK_ID_MB=0` → MBID / ISRC / Beatport url-rels),
+[TrackRadar](https://trackradar.ai) (public `/api/tracklists` archive; MCP
+`search_track` when `TRACKRADAR_API_KEY` is set), and
+[AudD](https://www.audd.io/) `findLyrics` (no token; Spotify / YouTube /
+Apple after name match). `AUDD=0` / `TRACKRADAR=0` skip those sources.
+[Beatport](https://www.beatport.com/) is Cloudflare-walled — we never scrape
+HTML or `api.beatport.com`. Canonical `/track/{slug}/{id}` comes from
+MusicBrainz url-rels or TrackRadar. [Set79](https://set79.com/) is
+**sitemap-only** (published set URLs as hints; `SET79=0` skips). Login-walled
+tracklist HTML and their paid SoundCloud analyzer are never fetched.
+[AudioScout](https://audioscout.io/) / [MusicMate](https://www.getmusicmate.com/)
+/ TrackId stay operator-paste in `src/lib/ingest/fingerprint/seeds.ts`.
+`TRACKRADAR_ANALYZE=1` / `AUDD_ANALYZE=1` (needs `AUDD_API_TOKEN`) analyze
+fingerprint-only fan clips (quota; never Relive).
 Fill-null `Track.isrc` / `beatportUrl` only with `TRACK_ID_APPLY=1`. Report:
 `data/crosscheck/track-id-research.json`.
 

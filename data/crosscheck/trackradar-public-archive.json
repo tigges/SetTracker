@@ -1,0 +1,19 @@
+{
+  "generatedAt": "2026-08-17T12:20:00.000Z",
+  "note": "No TRACKRADAR_API_KEY. Public GET /api/tracklists only. DerekD2 yt-6DC3xoQF4Zs is not in the archive. MCP search/analyze stay skipped.",
+  "indexedTracks": 6796,
+  "derekD2Archive": null,
+  "matched": [
+    {
+      "artist": "Zedd",
+      "title": "Clarity",
+      "at": "1:09:02",
+      "seed": "TL_KNOCK2_ZEDD_HARD_SUMMER_2026",
+      "platforms": {
+        "spotify": "https://open.spotify.com/track/0jE6fcDK21Bq4BjGHlMCGt",
+        "appleMusic": "https://music.apple.com/us/album/clarity-feat-foxes/1440861402?i=1440861976",
+        "discogs": "https://www.discogs.com/release/5437286-Zedd-Featuring-Foxes-Clarity-Remixes"
+      }
+    }
+  ]
+}

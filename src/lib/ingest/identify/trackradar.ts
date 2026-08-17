@@ -179,24 +179,65 @@ async function mcpCall(
   }
 }
 
-/** Free MCP lookup — no-op without TRACKRADAR_API_KEY. */
+export function matchPublishedTrack(
+  artist: string,
+  title: string,
+  tracks: TrackRadarTrack[],
+): TrackRadarTrack | null {
+  for (const t of tracks) {
+    if (evaluateTrackRadarHit(artist, title, t).ok) return t;
+  }
+  return null;
+}
+
+let publishedIndex: TrackRadarTrack[] | null = null;
+
+/** Public archive tracks (no key). Cached per process. */
+export async function loadPublishedTrackIndex(): Promise<TrackRadarTrack[]> {
+  if (publishedIndex) return publishedIndex;
+  const lists = await listPublishedTracklists();
+  const cap = Number(process.env.TRACKRADAR_ARCHIVE_LIMIT || lists.length);
+  const slice = lists.slice(0, Math.max(0, cap));
+  const tracks: TrackRadarTrack[] = [];
+  const concurrency = 8;
+  for (let i = 0; i < slice.length; i += concurrency) {
+    const batch = await Promise.all(
+      slice.slice(i, i + concurrency).map((s) => getPublishedTracklist(s.slug)),
+    );
+    for (const d of batch) {
+      if (d) tracks.push(...d.tracks);
+    }
+  }
+  publishedIndex = tracks;
+  return tracks;
+}
+
+export function trackradarMode(): "mcp" | "public-archive" | "off" {
+  if (process.env.TRACKRADAR === "0") return "off";
+  if (trackradarApiKey()) return "mcp";
+  return "public-archive";
+}
+
+/** MCP search_track when keyed; otherwise name-match the public archive. */
 export async function searchTrackRadar(
   artist: string,
   title: string,
 ): Promise<TrackRadarTrack | null> {
   const raw = await mcpCall("search_track", { artist, title });
-  if (!raw) return null;
-  const row = Array.isArray(raw)
-    ? raw[0]
-    : raw && typeof raw === "object" && "tracks" in raw
-      ? (raw as { tracks?: unknown[] }).tracks?.[0]
-      : raw && typeof raw === "object" && "track" in raw
-        ? (raw as { track?: unknown }).track
-        : raw;
-  const parsed = parseTrackRadarTrack(row);
-  if (!parsed) return null;
-  const ev = evaluateTrackRadarHit(artist, title, parsed);
-  return ev.ok ? parsed : null;
+  if (raw) {
+    const row = Array.isArray(raw)
+      ? raw[0]
+      : raw && typeof raw === "object" && "tracks" in raw
+        ? (raw as { tracks?: unknown[] }).tracks?.[0]
+        : raw && typeof raw === "object" && "track" in raw
+          ? (raw as { track?: unknown }).track
+          : raw;
+    const parsed = parseTrackRadarTrack(row);
+    if (parsed && evaluateTrackRadarHit(artist, title, parsed).ok) return parsed;
+  }
+  if (process.env.TRACKRADAR === "0") return null;
+  const index = await loadPublishedTrackIndex();
+  return matchPublishedTrack(artist, title, index);
 }
 
 export async function listPublishedTracklists(): Promise<TrackRadarPublishedSet[]> {
