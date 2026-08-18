@@ -234,16 +234,16 @@ export function HomeLanding({
 
   return (
     <div className="space-y-12">
-      <section className="relative min-h-[22rem] overflow-hidden rounded-2xl border border-line bg-panel sm:min-h-[28rem]">
+      <section className="relative min-h-[22rem] overflow-hidden rounded-2xl border border-line bg-bg sm:min-h-[28rem]">
         <FaceCollage faces={collage} />
-        <div className="absolute inset-0 bg-gradient-to-r from-bg via-bg/80 to-bg/25" />
+        <div className="hero-scrim absolute inset-0" aria-hidden />
         <div className="relative z-10 flex min-h-[22rem] flex-col justify-end gap-5 p-6 sm:min-h-[28rem] sm:p-10">
           <div className="max-w-xl">
-            <p className="eyebrow">setradar.ai</p>
-            <h1 className="mt-2 text-4xl font-extrabold tracking-tight sm:text-5xl">
+            <p className="eyebrow hero-title">setradar.ai</p>
+            <h1 className="hero-title mt-2 text-4xl font-extrabold tracking-tight text-ink sm:text-5xl">
               The night, as a graph.
             </h1>
-            <p className="mt-3 max-w-md text-[15px] leading-relaxed text-muted">
+            <p className="hero-title mt-3 max-w-md text-[15px] leading-relaxed text-muted">
               Timed tracklists from festivals, clubs, and radio.
             </p>
           </div>

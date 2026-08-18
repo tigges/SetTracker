@@ -78,6 +78,31 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Homepage hero — crush bright collage highlights under the title */
+.hero-scrim {
+  background:
+    linear-gradient(
+      90deg,
+      var(--bg) 0%,
+      color-mix(in srgb, var(--bg) 94%, transparent) 38%,
+      color-mix(in srgb, var(--bg) 58%, transparent) 64%,
+      color-mix(in srgb, var(--bg) 22%, transparent) 100%
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--bg) 40%, transparent) 0%,
+      color-mix(in srgb, var(--bg) 18%, transparent) 36%,
+      color-mix(in srgb, var(--bg) 82%, transparent) 100%
+    );
+}
+
+.hero-title {
+  text-shadow:
+    0 1px 0 color-mix(in srgb, var(--bg) 80%, transparent),
+    0 2px 20px var(--bg),
+    0 0 48px var(--bg);
+}
+
 /* eyebrow / section label */
 .eyebrow {
   font-family: var(--font-mono), ui-monospace, monospace;

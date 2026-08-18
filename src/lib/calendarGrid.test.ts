@@ -10,6 +10,7 @@ import {
   monthsForEditions,
 } from "./calendarGrid";
 import {
+  calendarPillClass,
   dedupeDayPills,
   groupMonthLocations,
   mergeLocationBucket,
@@ -174,6 +175,8 @@ describe("calendarLocations", () => {
         },
       ],
     );
+    assert.equal(occ.find((o) => o.groupKey === "fest:hard-summer-2026")?.accent, "festival");
+    assert.equal(occ.find((o) => o.groupKey === "club:unvrs")?.accent, "club");
     assert.equal(occ.find((o) => o.groupKey === "club:unvrs")?.name, "UNVRS");
     assert.ok(!occ.some((o) => o.name.includes("Tiësto")));
     const pills = dedupeDayPills(occurrencesOnDay(occ, "2026-08-01"));
@@ -195,5 +198,14 @@ describe("calendarLocations", () => {
       { startsAt: "2026-08-07", bucket: "recent" },
     ]);
     assert.equal(fallback?.startsAt, "2026-08-07");
+  });
+
+  it("paints pills by place; time is ring or fade", () => {
+    assert.match(calendarPillClass("festival", "upcoming"), /bg-amber/);
+    assert.match(calendarPillClass("club", "upcoming"), /bg-teal/);
+    assert.match(calendarPillClass("club", "current"), /ring-brand/);
+    assert.doesNotMatch(calendarPillClass("festival", "current"), /bg-brand\/35/);
+    assert.match(calendarPillClass("festival", "recent"), /opacity-55/);
+    assert.match(calendarPillClass("club", "past"), /opacity-55/);
   });
 });
