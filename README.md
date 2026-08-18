@@ -227,6 +227,13 @@ handle must overlap the DJ name, it must be live, and it must not belong to
 another catalog DJ. Missing keys → safe no-op. Runs on catalog-deep and
 weekly enrich `full`. Reports: `data/crosscheck/llm-handle-research.json`.
 
+**Export tracks for Claude ID** (`npm run export:tracks`): CSV + JSONL of
+catalog songs (need-ISRC first) in `data/track-id-export/`. The Pages build
+publishes `/exports/tracks-need-id.csv`, `/exports/tracks-need-id.jsonl`,
+and `/exports/claude-track-id-prompt.md`. `/stats` links **Export for Claude ID**.
+Propose ISRC / canonical Beatport `/track/{slug}/{id}` only — never invent;
+Deezer/MusicBrainz confirm before `Track.isrc` is written.
+
 **Track IDs from held 1001 seeds** (`npm run research:track-ids`): named cues
 go to Deezer (ISRC), [MusicBrainz](https://musicbrainz.org/) (on unless
 `TRACK_ID_MB=0` → MBID / ISRC / Beatport url-rels),

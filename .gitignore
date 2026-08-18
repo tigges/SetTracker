@@ -17,6 +17,8 @@
 /.next/
 /out/
 /public/search-index.json
+/public/exports/
+/data/track-id-export/
 
 # production
 /build

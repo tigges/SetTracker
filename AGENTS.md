@@ -99,9 +99,9 @@ The producer will say if this bundling rule is abolished.
   filescan + LLM). Enrich then dispatches Pages. Do not run deep and
   enrich in parallel — both write `prisma/dev.db` cache. Bump
   `data/deep-request` to start the chain; `data/enrich-full-request` starts
-  full enrich alone;   `data/enrich-request` is the fast `acr` pass. To ship, the producer
-  merges from GitHub. To fix the build, edit one workflow. Agents keep
-  small updates on one PR so that publish is one export.
+  full enrich alone; `data/enrich-request` is the fast `acr` pass. To ship,
+  the producer merges from GitHub. To fix the build, edit one workflow.
+  Agents keep small updates on one PR so that publish is one export.
 - **LLM handle research:** `npm run research:handles` (catalog-deep + enrich
   `full`, or dedicated `catalog-llm-research.yml`). Claude (`CLAUDE_AGENT_API`
   or `ANTHROPIC_API_KEY`) and/or Gemini (`GEMINI_API_KEY` from
@@ -113,6 +113,11 @@ The producer will say if this bundling rule is abolished.
   guesses. No-op without keys on deep/enrich; dedicated workflow fails if
   both keys are missing. Trigger on main by bumping `data/llm-request`.
   Reports in `data/crosscheck/llm-handle-research.json`.
+  **Track export:** `npm run export:tracks` dumps catalog tracks (CSV +
+  Claude JSONL) to `data/track-id-export/`. Pages `prebuild` also writes
+  `/exports/tracks-need-id.csv` and `.jsonl` (no-ISRC, most-played first).
+  Claude may propose ISRC / Beatport `/track/{slug}/{id}` only — never
+  invent; Deezer/MB must confirm before write. Download from `/stats`.
   **Track IDs:** `npm run research:track-ids` resolves ISRCs from held 1001
   names via Deezer, MusicBrainz (on unless `TRACK_ID_MB=0` — MBID / ISRC /
   Beatport url-rels), TrackRadar public archive (no key; MCP needs

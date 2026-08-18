@@ -117,7 +117,7 @@ function placeGaps(places: PlaceHealthInput[]) {
 
 export async function getStatsHealth(): Promise<StatsHealth> {
   const top100 = loadDjMagTop100RankBySlug();
-  const [djs, events, sets, playStatus, trackTotal, tracksWithBeatport, tracksNoArt] =
+  const [djs, events, sets, playStatus, trackTotal, tracksWithBeatport, tracksWithIsrc, tracksNoArt] =
     await Promise.all([
       getDjList(),
       prisma.event.findMany({
@@ -149,6 +149,7 @@ export async function getStatsHealth(): Promise<StatsHealth> {
       }),
       prisma.track.count(),
       prisma.track.count({ where: { beatportUrl: { not: null } } }),
+      prisma.track.count({ where: { isrc: { not: null } } }),
       prisma.track.count({ where: { imageUrl: null } }),
     ]);
 
@@ -295,6 +296,11 @@ export async function getStatsHealth(): Promise<StatsHealth> {
           href: "#tracks",
           label: "Beatport / ISRC enrich",
           count: Math.max(0, trackTotal - tracksWithBeatport),
+        },
+        {
+          href: "/exports/tracks-need-id.csv",
+          label: "Export for Claude ID",
+          count: Math.max(0, trackTotal - tracksWithIsrc),
         },
       ].filter((a) => a.count > 0),
     },
