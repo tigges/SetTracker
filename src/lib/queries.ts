@@ -26,7 +26,7 @@ import { relatedSlugsFor } from "@/lib/ingest/discovery/relations";
 import { aliasSlugsFor, resolveSetSlug } from "@/lib/ingest/sourceRemaps";
 import { canonicalDjSlug, DJ_SLUG_ALIASES } from "@/lib/ingest/djSlugAliases";
 import {
-  compareEventSetPriority,
+  compareEventSetPriorityAt,
   nearDuplicateKey,
   resolvedIdCount,
 } from "@/lib/feedPriority";
@@ -36,6 +36,7 @@ import {
   loadAtlasVenues,
 } from "@/lib/atlas/seed";
 import { daysCoveredByEditions, isoUTC } from "@/lib/calendarGrid";
+import { sortPlaceNights } from "@/lib/placeTimeline";
 import {
   bucketVenueNight,
   parseJsonStringList,
@@ -907,20 +908,22 @@ async function upcomingNightsForDj(
     include: { event: { select: { slug: true, name: true } } },
     orderBy: { startsAt: "asc" },
   });
+  const nowMs = Date.now();
   const out: Array<{
     slug: string;
     title: string;
     startsAt: string;
+    bucket: string;
     eventSlug: string;
     eventName: string;
     sourceUrl: string;
     ticketsUrl: string | null;
   }> = [];
-  const nowMs = Date.now();
   for (const row of nightRows) {
     const startsAt = isoUTC(row.startsAt);
     const endsAt = row.endsAt ? isoUTC(row.endsAt) : startsAt;
-    if (bucketVenueNight(startsAt, endsAt, nowMs) === "past") continue;
+    const bucket = bucketVenueNight(startsAt, endsAt, nowMs);
+    if (bucket === "past") continue;
     if (!nightMentionsDj(parseJsonStringList(row.artistsJson), dj, row.title)) {
       continue;
     }
@@ -928,14 +931,16 @@ async function upcomingNightsForDj(
       slug: row.slug,
       title: row.title,
       startsAt,
+      bucket,
       eventSlug: row.event.slug,
       eventName: row.event.name,
       sourceUrl: row.sourceUrl,
       ticketsUrl: row.ticketsUrl,
     });
-    if (out.length >= limit) break;
   }
-  return out;
+  return sortPlaceNights(out)
+    .slice(0, limit)
+    .map(({ bucket: _bucket, ...rest }) => rest);
 }
 
 // ---------------------------------------------------------------------------
@@ -1413,7 +1418,7 @@ export async function getSeriesBySlug(slug: string) {
 
 export type SeriesProfile = NonNullable<Awaited<ReturnType<typeof getSeriesBySlug>>>;
 
-export async function getVenueBySlug(slug: string) {
+export async function getVenueBySlug(slug: string, nowMs = Date.now()) {
   const event = await prisma.event.findUnique({
     where: { slug },
     include: {
@@ -1485,7 +1490,7 @@ export async function getVenueBySlug(slug: string) {
     }),
   ]);
   const catalog = catalogArtistIndex(catalogRows);
-  const nights = nightRows
+  const unsortedNights = nightRows
     .map((row) => {
       const startsAt = isoUTC(row.startsAt);
       const endsAt = row.endsAt ? isoUTC(row.endsAt) : startsAt;
@@ -1497,7 +1502,7 @@ export async function getVenueBySlug(slug: string) {
         title: row.title,
         startsAt,
         endsAt,
-        bucket: bucketVenueNight(startsAt, endsAt, Date.now()),
+        bucket: bucketVenueNight(startsAt, endsAt, nowMs),
         sourceUrl: row.sourceUrl,
         ticketsUrl: row.ticketsUrl,
         artists,
@@ -1505,6 +1510,7 @@ export async function getVenueBySlug(slug: string) {
       };
     })
     .filter((n) => n.bucket !== "past");
+  const nights = sortPlaceNights(unsortedNights);
 
   const sets = event.sets
     .map((s) => {
@@ -1565,8 +1571,8 @@ export async function getVenueBySlug(slug: string) {
         densitySeverity: ranks.densitySeverity,
       } satisfies FeedItem;
     })
-    // This year first, then complete / identified, then date.
-    .sort(compareEventSetPriority);
+    // Today → upcoming ↑ → past ↓; completeness is same-day only.
+    .sort(compareEventSetPriorityAt(nowMs));
 
   return {
     slug: event.slug,
