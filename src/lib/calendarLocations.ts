@@ -129,6 +129,9 @@ export function groupMonthLocations<
   );
 }
 
+/** Atlas place hue — festival amber, club teal. Time is ring / fade, not a third paint. */
+export type CalendarPlaceAccent = "festival" | "club";
+
 export type CalendarOccurrence = {
   id: string;
   groupKey: string;
@@ -137,9 +140,20 @@ export type CalendarOccurrence = {
   href: string;
   startsAt: string;
   endsAt: string;
-  accent: "amber" | "brand";
+  accent: CalendarPlaceAccent;
   bucket: string;
 };
+
+export function calendarPillClass(
+  accent: CalendarPlaceAccent,
+  bucket: string,
+): string {
+  const place =
+    accent === "club" ? "bg-teal/35 text-ink" : "bg-amber/35 text-ink";
+  if (bucket === "current") return `${place} ring-1 ring-inset ring-brand/70`;
+  if (bucket === "recent" || bucket === "past") return `${place} opacity-55`;
+  return place;
+}
 
 export function toCalendarOccurrences(
   editions: Array<{
@@ -171,7 +185,7 @@ export function toCalendarOccurrences(
       href: `/events/${e.eventSlug}`,
       startsAt: e.startsAt,
       endsAt: e.endsAt,
-      accent: "amber" as const,
+      accent: "festival" as const,
       bucket: e.bucket,
     })),
     ...nights.map((n) => ({
@@ -182,7 +196,7 @@ export function toCalendarOccurrences(
       href: `/events/${n.eventSlug}`,
       startsAt: n.startsAt,
       endsAt: n.endsAt,
-      accent: "brand" as const,
+      accent: "club" as const,
       bucket: n.bucket,
     })),
   ];

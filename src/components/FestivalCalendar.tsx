@@ -8,6 +8,7 @@ import {
   monthsForEditions,
 } from "@/lib/calendarGrid";
 import {
+  calendarPillClass,
   dedupeDayPills,
   groupMonthLocations,
   nextClubNight,
@@ -21,13 +22,6 @@ const BUCKET_COPY: Record<string, string> = {
   current: "On now",
   upcoming: "Upcoming",
   recent: "Just ended",
-};
-
-/** Ink on tinted chips — brand/amber text on 15% fills was too faint. */
-const PILL_TONE: Record<string, string> = {
-  current: "bg-brand/35 text-ink",
-  upcoming: "bg-amber/35 text-ink",
-  recent: "bg-teal/30 text-ink",
 };
 
 export type CalendarEdition = EditionCalendarRow & {
@@ -129,6 +123,20 @@ export function FestivalCalendar({
 
   return (
     <div className="space-y-10">
+      <p className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[10px] uppercase tracking-[0.12em] text-muted2">
+        <span className="inline-flex items-center gap-1.5">
+          <i className="inline-block h-2 w-2 rounded-full bg-amber" />
+          Fests
+        </span>
+        <span className="inline-flex items-center gap-1.5">
+          <i className="inline-block h-2 w-2 rounded-full bg-teal" />
+          Clubs
+        </span>
+        <span className="inline-flex items-center gap-1.5">
+          <i className="inline-block h-2 w-2 rounded-full ring-1 ring-inset ring-brand" />
+          On now
+        </span>
+      </p>
       {months.map(({ year, month }) => {
         const cells = monthGrid(year, month, nowMs);
         const monthEds = editionsInMonth(editions, year, month);
@@ -185,10 +193,8 @@ export function FestivalCalendar({
                           <li key={e.groupKey}>
                             <Link
                               href={e.href}
-                              className={`block truncate rounded px-1 py-0.5 text-[10px] font-medium leading-tight ${
-                                PILL_TONE[e.bucket] ?? "bg-panel2 text-ink"
-                              }`}
-                              title={e.tooltip}
+                              className={`block truncate rounded px-1 py-0.5 text-[10px] font-medium leading-tight ${calendarPillClass(e.accent, e.bucket)}`}
+                              title={`${e.tooltip}${BUCKET_COPY[e.bucket] ? ` · ${BUCKET_COPY[e.bucket]}` : ""}`}
                             >
                               {e.name}
                             </Link>
@@ -240,7 +246,7 @@ export function FestivalCalendar({
                       href={`/events/${loc.eventSlug}`}
                       name={loc.name}
                       imageUrl={loc.imageUrl}
-                      accent="var(--brand)"
+                        accent="var(--teal)"
                       meta={bits.join(" · ")}
                       relives={setCounts[loc.eventSlug] ?? 0}
                       next={
