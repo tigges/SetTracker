@@ -145,6 +145,8 @@ import {
   TL_VINTAGE_CULTURE_ROBOT_HEART_RESIDENCY_UNITED_STATES_2024,
   TL_JOHN_SUMMIT_BURNING_MAN_PLAYA_PACKAGE_MIX_2025,
   TL_BRANDON_DESERT_VALLEY_PAROOKAVILLE_GERMANY_2024,
+  TL_DVLM_SMASH_THE_HOUSE_RADIO_687_2026,
+  TL_NOTION_PERRYS_LOLLAPALOOZA_CHICAGO_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   tracklist1001RowsToPlays,
@@ -1824,6 +1826,80 @@ for (let i = 1; i < joelEdge.length; i++) {
     `Joel Corry Edge NYC clocks must increase at index ${i}`,
   );
 }
+
+assertSeedClocks(TL_DVLM_SMASH_THE_HOUSE_RADIO_687_2026);
+assert.equal(TL_DVLM_SMASH_THE_HOUSE_RADIO_687_2026.length, 22);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-eVjC42MNgkI"],
+  TL_DVLM_SMASH_THE_HOUSE_RADIO_687_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-dimitrivegasandlikemike-smash-the-house-radio-ep-687"
+  ],
+  TL_DVLM_SMASH_THE_HOUSE_RADIO_687_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "https://soundcloud.com/dimitrivegasandlikemike/smash-the-house-radio-ep-687"
+  ],
+  undefined,
+);
+const sth687 = tracklist1001RowsToPlays(TL_DVLM_SMASH_THE_HOUSE_RADIO_687_2026);
+assert.equal(sth687.length, 22);
+assert.equal(sth687[0]?.provenance, "1001tl");
+assert.equal(sth687[0]?.timestamp, 60);
+assert.equal(sth687[0]?.trackTitle, "Makina Time");
+assert.equal(sth687[21]?.trackTitle, "Join The Club");
+assert.equal(sth687[21]?.timestamp, 57 * 60 + 17);
+for (let i = 1; i < sth687.length; i++) {
+  assert.ok(
+    (sth687[i]!.timestamp ?? 0) > (sth687[i - 1]!.timestamp ?? 0),
+    `Smash The House Radio 687 clocks must increase at index ${i}`,
+  );
+}
+assert.equal(isWiredTracklistSlug("yt-eVjC42MNgkI"), true);
+assert.equal(
+  isWiredTracklistSlug("sc-dimitrivegasandlikemike-smash-the-house-radio-ep-687"),
+  true,
+);
+
+assertSeedClocks(TL_NOTION_PERRYS_LOLLAPALOOZA_CHICAGO_2026);
+assert.equal(TL_NOTION_PERRYS_LOLLAPALOOZA_CHICAGO_2026.length, 28);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-9vgSTomhCp8"],
+  TL_NOTION_PERRYS_LOLLAPALOOZA_CHICAGO_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-notiondj-notion-live-at-lollapalooza"],
+  TL_NOTION_PERRYS_LOLLAPALOOZA_CHICAGO_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "https://soundcloud.com/notiondj/notion-live-at-lollapalooza"
+  ],
+  undefined,
+);
+const notionPerry = tracklist1001RowsToPlays(
+  TL_NOTION_PERRYS_LOLLAPALOOZA_CHICAGO_2026,
+);
+assert.equal(notionPerry.length, 28);
+assert.equal(notionPerry[0]?.provenance, "1001tl");
+assert.equal(notionPerry[0]?.timestamp, 5 * 60 + 40);
+assert.equal(notionPerry[0]?.trackTitle, "Damager");
+assert.equal(notionPerry[27]?.trackTitle, "DARWIN");
+assert.equal(notionPerry[27]?.timestamp, 59 * 60 + 30);
+for (let i = 1; i < notionPerry.length; i++) {
+  assert.ok(
+    (notionPerry[i]!.timestamp ?? 0) > (notionPerry[i - 1]!.timestamp ?? 0),
+    `NOTION Perry's Lollapalooza clocks must increase at index ${i}`,
+  );
+}
+assert.equal(isWiredTracklistSlug("yt-9vgSTomhCp8"), true);
+assert.equal(
+  isWiredTracklistSlug("sc-notiondj-notion-live-at-lollapalooza"),
+  true,
+);
 
 assertSeedClocks(TL_NICKY_ROMERO_PROTOCOL_RADIO_731);
 assert.equal(TL_NICKY_ROMERO_PROTOCOL_RADIO_731.length, 16);

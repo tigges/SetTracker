@@ -24,6 +24,18 @@ assert.equal(
   "sc-sidepiece-sidepiece-lollapalooza-perry",
 );
 
+const notionPerrySc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url === "https://soundcloud.com/notiondj/notion-live-at-lollapalooza",
+);
+assert.ok(notionPerrySc);
+assert.equal(notionPerrySc.primaryArtist.name, "NOTION");
+assert.equal(notionPerrySc.type, "festival");
+assert.equal(
+  `sc-notiondj-${slugify("notion-live-at-lollapalooza")}`,
+  "sc-notiondj-notion-live-at-lollapalooza",
+);
+
 const horgerTml = SOUNDCLOUD_TRACK_SEEDS.find(
   (s) =>
     s.url === "https://soundcloud.com/marten-horger/tomorrowland-mainstage-2023",
@@ -85,6 +97,20 @@ assert.equal(hoa527Sc.seriesName, "Hardwell On Air");
 assert.equal(
   `sc-hardwell-${slugify("hardwell-on-air-527-yearmix")}`,
   "sc-hardwell-hardwell-on-air-527-yearmix",
+);
+
+const sth687Sc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url ===
+    "https://soundcloud.com/dimitrivegasandlikemike/smash-the-house-radio-ep-687",
+);
+assert.ok(sth687Sc);
+assert.equal(sth687Sc.primaryArtist.name, "Dimitri Vegas & Like Mike");
+assert.equal(sth687Sc.type, "radio");
+assert.equal(sth687Sc.seriesName, "Smash The House Radio");
+assert.equal(
+  `sc-dimitrivegasandlikemike-${slugify("smash-the-house-radio-ep-687")}`,
+  "sc-dimitrivegasandlikemike-smash-the-house-radio-ep-687",
 );
 
 const hrr225Sc = SOUNDCLOUD_TRACK_SEEDS.find(

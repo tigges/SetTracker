@@ -15,6 +15,9 @@ empty `PAGES_BASE_PATH`). The github.io `/SetTracker` path is a redirect.
 
 Do not run manual UI testing, screen recordings, or walkthrough artifacts.
 Ship to main when asked to go live. The producer tests on https://setradar.ai/.
+Small catalog and UI updates (1001 captures, stats copy, pins) belong in one
+PR so GitHub Pages builds once. `deploy-pages.yml` cancels in-progress
+exports on every main push — drip-merging leaves live on an old version.
 
 - **Run the app:** `npm run dev` (Turbopack, http://localhost:3000). Dev output
   goes to `.next/dev` in Next 16.
@@ -92,7 +95,8 @@ Ship to main when asked to go live. The producer tests on https://setradar.ai/.
   enrich in parallel — both write `prisma/dev.db` cache. Bump
   `data/deep-request` to start the chain; `data/enrich-full-request` starts
   full enrich alone; `data/enrich-request` is the fast `acr` pass. To ship,
-  producers hand off; to fix the build, edit one workflow.
+  producers hand off; to fix the build, edit one workflow. Bundle small
+  updates into one main push so Pages exports once.
 - **LLM handle research:** `npm run research:handles` (catalog-deep + enrich
   `full`, or dedicated `catalog-llm-research.yml`). Claude (`CLAUDE_AGENT_API`
   or `ANTHROPIC_API_KEY`) and/or Gemini (`GEMINI_API_KEY` from

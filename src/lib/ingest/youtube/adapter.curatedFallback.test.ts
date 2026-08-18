@@ -24,6 +24,8 @@ const HOA_527 = YOUTUBE_SETS.find((s) => s.video.includes("OXwK0CSmXzY"));
 const RZ_AWAKE = YOUTUBE_SETS.find((s) => s.video.includes("i-mFuxbGHzg"));
 const JOEL_EDGE = YOUTUBE_SETS.find((s) => s.video.includes("soEFl73peVA"));
 const PRR_731 = YOUTUBE_SETS.find((s) => s.video.includes("Rgx-wT9FDaE"));
+const STH_687 = YOUTUBE_SETS.find((s) => s.video.includes("eVjC42MNgkI"));
+const NOTION_PERRY = YOUTUBE_SETS.find((s) => s.video.includes("9vgSTomhCp8"));
 const MM_YACHT = YOUTUBE_SETS.find((s) => s.video.includes("0-s_qZRWElA"));
 const PRISMATIC_032 = YOUTUBE_SETS.find((s) => s.video.includes("blP5J6BUG0M"));
 const SPECTRUM_485 = YOUTUBE_SETS.find((s) => s.video.includes("yTRvLrtsM9I"));
@@ -553,6 +555,29 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.durationSec, 53 * 60 + 53 + 180);
   });
 
+  it("builds Smash The House Radio 687 meta from the curated 1001 capture", () => {
+    assert.ok(STH_687);
+    const meta = watchMetaFromCuratedSeed(STH_687);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "eVjC42MNgkI");
+    assert.match(meta.title, /Smash The House Radio 687/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=eVjC42MNgkI");
+    // Last cue 57:17 + 180s pad.
+    assert.equal(meta.durationSec, 57 * 60 + 17 + 180);
+  });
+
+  it("builds NOTION Perry's Lollapalooza meta from the curated 1001 capture", () => {
+    assert.ok(NOTION_PERRY);
+    const meta = watchMetaFromCuratedSeed(NOTION_PERRY);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "9vgSTomhCp8");
+    assert.match(meta.title, /NOTION/i);
+    assert.match(meta.title, /Lollapalooza/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=9vgSTomhCp8");
+    // Last cue 59:30 + 180s pad.
+    assert.equal(meta.durationSec, 59 * 60 + 30 + 180);
+  });
+
   it("builds Miss Monique Ibiza Yacht meta from the curated 1001 capture", () => {
     assert.ok(MM_YACHT);
     const meta = watchMetaFromCuratedSeed(MM_YACHT);
@@ -937,6 +962,34 @@ describe("curated YouTube 429 fallback", () => {
     assert.ok(sets[0]!.durationSec >= 53 * 60);
     assert.equal(sets[0]?.primaryArtist?.slug, "nicky-romero");
     assert.equal(sets[0]?.seriesName, "Protocol Radio");
+  });
+
+  it("lands Smash The House Radio 687 from the 1001 seed when watch is 429", async () => {
+    assert.ok(STH_687);
+    const adapter = createYoutubeAdapter([STH_687], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-eVjC42MNgkI");
+    assert.equal(sets[0]!.type, "radio");
+    assert.ok(sets[0]!.plays.length >= 22);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 57 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "dimitri-vegas-like-mike");
+    assert.equal(sets[0]?.seriesName, "Smash The House Radio");
+  });
+
+  it("lands NOTION Perry's Lollapalooza from the 1001 seed when watch is 429", async () => {
+    assert.ok(NOTION_PERRY);
+    const adapter = createYoutubeAdapter([NOTION_PERRY], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-9vgSTomhCp8");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 28);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 59 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "notion");
+    assert.match(String(sets[0]?.eventName ?? ""), /Lollapalooza/i);
   });
 
   it("lands Miss Monique Ibiza Yacht from the 1001 seed when watch is 429", async () => {

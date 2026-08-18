@@ -68,6 +68,18 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     minDurationSec: 15 * 60,
   },
   {
+    // Official NOTION Perry's Lollapalooza; 1001TL wired via
+    // sc-notiondj-notion-live-at-lollapalooza (same list as yt-9vgSTomhCp8).
+    url: "https://soundcloud.com/notiondj/notion-live-at-lollapalooza",
+    primaryArtist: dj("NOTION", {
+      accent: "#ff006e",
+      homeCity: "London, UK",
+    }),
+    genre: "UK Garage",
+    type: "festival",
+    minDurationSec: 15 * 60,
+  },
+  {
     // Official Horger upload; 1001TL wired via
     // sc-marten-horger-tomorrowland-mainstage-2023.
     url: "https://soundcloud.com/marten-horger/tomorrowland-mainstage-2023",
@@ -127,6 +139,21 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     }),
     genre: "Big Room",
     seriesName: "Hardwell On Air",
+    type: "radio",
+    minDurationSec: 30 * 60,
+  },
+  {
+    // Official Smash The House Radio 687; 1001TL wired via
+    // sc-dimitrivegasandlikemike-smash-the-house-radio-ep-687
+    // (same list as yt-eVjC42MNgkI). Mixcloud is a mirror only:
+    // https://www.mixcloud.com/DimitriVegasAndLikeMike/smash-the-house-radio-ep-687/
+    url: "https://soundcloud.com/dimitrivegasandlikemike/smash-the-house-radio-ep-687",
+    primaryArtist: dj("Dimitri Vegas & Like Mike", {
+      accent: "#f7b801",
+      homeCity: "Belgium",
+    }),
+    genre: "Big Room",
+    seriesName: "Smash The House Radio",
     type: "radio",
     minDurationSec: 30 * 60,
   },

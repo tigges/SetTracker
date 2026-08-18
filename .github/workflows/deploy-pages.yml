@@ -227,7 +227,8 @@ jobs:
           test -d out/venues
           test -f out/stats/index.html
           grep -qi "catalog health" out/stats/index.html
-          grep -qi "tracklist capture" out/stats/index.html
+          grep -qi "fill thin lists" out/stats/index.html
+          grep -qi "pin handles" out/stats/index.html
           SET_PAGES=$(find out/sets -mindepth 1 -maxdepth 1 -type d ! -name '_placeholder' | wc -l)
           DJ_PAGES=$(find out/djs -mindepth 1 -maxdepth 1 -type d ! -name '_placeholder' | wc -l)
           TRACK_PAGES=$(find out/tracks -mindepth 1 -maxdepth 1 -type d ! -name '_placeholder' 2>/dev/null | wc -l)
