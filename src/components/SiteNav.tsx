@@ -2,30 +2,16 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { isPrimaryNavActive } from "@/lib/siteNav";
 
 const LINKS = [
-  { href: "/", label: "Sets" },
+  { href: "/sets", label: "Sets" },
   { href: "/djs", label: "DJs" },
   { href: "/events", label: "Events" },
   { href: "/atlas", label: "Atlas" },
   { href: "/tracks", label: "Tracks" },
   { href: "/labels", label: "Labels" },
 ] as const;
-
-function isActive(pathname: string, href: string): boolean {
-  if (href === "/") {
-    return pathname === "/" || pathname.startsWith("/sets");
-  }
-  if (href === "/events") {
-    return (
-      pathname === "/events" ||
-      pathname.startsWith("/events/") ||
-      pathname === "/venues" ||
-      pathname.startsWith("/venues/")
-    );
-  }
-  return pathname === href || pathname.startsWith(`${href}/`);
-}
 
 export function SiteNav() {
   const pathname = usePathname() || "/";
@@ -36,7 +22,7 @@ export function SiteNav() {
       className="flex min-w-0 flex-1 items-center gap-0.5 overflow-x-auto scroll-thin text-[13px] sm:gap-1"
     >
       {LINKS.map((link) => {
-        const active = isActive(pathname, link.href);
+        const active = isPrimaryNavActive(pathname, link.href);
         return (
           <Link
             key={link.href}

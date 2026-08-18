@@ -66,7 +66,7 @@ export default async function SetPage({
     <SetListen>
     <div>
       <Link
-        href="/"
+        href="/sets"
         className="mono text-[12px] text-muted2 transition-colors hover:text-ink"
       >
         ← Sets
