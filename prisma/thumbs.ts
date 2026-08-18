@@ -78,6 +78,7 @@ type Stats = {
     missed: number;
     curated: number;
     og: number;
+    wiki: number;
     fromSet: number;
   };
   tracks: {
@@ -106,6 +107,7 @@ async function main() {
       missed: 0,
       curated: 0,
       og: 0,
+      wiki: 0,
       fromSet: 0,
     },
     tracks: {

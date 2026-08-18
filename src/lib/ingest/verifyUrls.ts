@@ -14,7 +14,7 @@ import { ensureDjMagTopDjs } from "./discovery/djmagDjs";
 import { ensureDjMagFestivals } from "./discovery/djmagFestivals";
 import { ensureDiscoveredDjs } from "./discovery/ensureDjs";
 import { applyCuratedDjImages } from "../thumbs/djImages";
-import { applyCuratedEventImages } from "../thumbs/eventImages";
+import { applyCuratedEventImages, fillEventImages } from "../thumbs/eventImages";
 import { applyCuratedSetImages } from "../thumbs/setImages";
 import { mergeSplitAtomicActs } from "./mergeAtomicActs";
 import { resolveJunkDjs } from "./junkDj";
@@ -289,6 +289,25 @@ export async function applyKnownUrlFixes(prisma: PrismaClient): Promise<number> 
 
   // Curated venue / festival share images (Ultra, EDC, Tomorrowland, …).
   n += await applyCuratedEventImages(prisma);
+
+  // Habit: every Pages / verify pass fills remaining club & festival thumbs
+  // from official OG, then Wikipedia, then latest set art. Null-only.
+  try {
+    const eventThumbs = await fillEventImages(prisma, {
+      delayMs: Number(process.env.EVENT_THUMBS_DELAY_MS ?? 60),
+    });
+    n += eventThumbs.filled;
+    if (eventThumbs.filled || eventThumbs.missed) {
+      console.log(
+        `[verify-urls] event thumbs filled=${eventThumbs.filled} og=${eventThumbs.og} wiki=${eventThumbs.wiki} missed=${eventThumbs.missed}`,
+      );
+    }
+  } catch (err) {
+    console.warn(
+      "[verify-urls] event thumbs:",
+      err instanceof Error ? err.message : err,
+    );
+  }
 
   // Meantime set covers when the official YouTube still is gone.
   n += await applyCuratedSetImages(prisma);

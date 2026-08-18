@@ -245,6 +245,11 @@ Wikipedia pages are not official websites. Confirmed rows pin fill-null via
 `data/entity-complete-pins.json` (`npx tsx scripts/confirm-entity-complete-audit.ts`).
 Venue YouTube is dropped (Event has no youtube column).
 
+**Club / festival thumbs:** every `verify-urls` / Pages pass fills null venue
+art from curated pins, official-site Open Graph, Wikipedia (name-matched),
+then latest set art. Deezer is never used for venues. `/stats` **Fill artwork**
+on the Clubs card downloads the leftover Claude queue.
+
 **Track IDs from held 1001 seeds** (`npm run research:track-ids`): named cues
 go to Deezer (ISRC), [MusicBrainz](https://musicbrainz.org/) (on unless
 `TRACK_ID_MB=0` → MBID / ISRC / Beatport url-rels),
