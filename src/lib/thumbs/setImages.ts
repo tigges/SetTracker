@@ -10,8 +10,7 @@ import type { PrismaClient } from "@prisma/client";
 /** Hand-picked meantime covers keyed by Set.slug (YT ids are case-sensitive). */
 export const KNOWN_SET_IMAGES: Record<string, string> = {
   // Official Crystal Garden WE2 watch (PlArfyuzuqo) is private; iytimg 404s.
-  // Tomorrowland Belgium 2026 still from the official lineup article until
-  // the full-set upload is public again.
+  // Official TML 2026 CONSCIENCIA key visual until the full-set upload returns.
   "yt-PlArfyuzuqo": "/sets/john-summit-tml-we2-2026.jpg",
 };
 
