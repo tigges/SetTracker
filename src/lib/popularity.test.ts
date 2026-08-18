@@ -302,12 +302,23 @@ describe("popularity rails", () => {
       eventSlug: null,
       editionEndsAt: null,
       venueTier: "radio",
+      top100Rank: null,
+    });
+    const club = item({
+      id: "club",
+      slug: "club",
+      type: "mix",
+      eventSlug: "ushuaia",
+      editionEndsAt: null,
+      venueTier: "club",
+      publishedAt: new Date("2026-07-28"),
     });
     assert.equal(isFestivalStorySet(fest, now), true);
     assert.equal(isFestivalStorySet(radio, now), false);
     assert.equal(MIN_RAIL_SHOW, 3);
-    const week = newThisWeekSets([fest, radio], 9, now);
-    assert.ok(week.some((s) => s.id === "radio"));
+    const week = newThisWeekSets([fest, radio, club], 9, now);
+    assert.ok(week.some((s) => s.id === "club"));
+    assert.ok(!week.some((s) => s.id === "radio"), "uncharted radio is filler");
     assert.ok(!week.some((s) => s.id === "tl"));
   });
 
@@ -317,8 +328,9 @@ describe("popularity rails", () => {
       item({
         id: "d10",
         slug: "d10",
-        type: "radio",
-        eventSlug: null,
+        type: "mix",
+        venueTier: "club",
+        eventSlug: "ushuaia",
         publishedAt: new Date("2026-08-06T00:00:00Z"),
       }),
     ];
