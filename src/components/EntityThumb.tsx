@@ -13,6 +13,7 @@ export function EntityThumb({
   accent = "var(--brand)",
   size = 48,
   radius = 12,
+  fill = false,
   monogram,
   className = "",
   onImageError,
@@ -23,6 +24,8 @@ export function EntityThumb({
   accent?: string;
   size?: number;
   radius?: number;
+  /** Stretch to the parent box (poster / mosaic cells). */
+  fill?: boolean;
   /** Fallback initials / letter. Defaults to first char of label. */
   monogram?: string;
   className?: string;
@@ -34,11 +37,9 @@ export function EntityThumb({
     (monogram != null
       ? monogram.trim().slice(0, 2)
       : label.trim().slice(0, 1)) || "?";
-  const style = {
-    width: size,
-    height: size,
-    borderRadius: radius,
-  } as const;
+  const style = fill
+    ? { width: "100%", height: "100%", borderRadius: radius }
+    : { width: size, height: size, borderRadius: radius };
   const resolved = broken ? undefined : mediaUrl(src);
 
   if (resolved) {
@@ -47,11 +48,11 @@ export function EntityThumb({
       <img
         src={resolved}
         alt={label}
-        width={size}
-        height={size}
+        width={fill ? undefined : size}
+        height={fill ? undefined : size}
         loading="lazy"
         decoding="async"
-        className={`flex-none object-cover ${className}`}
+        className={`${fill ? "absolute inset-0" : "flex-none"} object-cover ${className}`}
         style={{
           ...style,
           border: "1px solid var(--line)",
@@ -67,13 +68,13 @@ export function EntityThumb({
 
   return (
     <span
-      className={`grid flex-none place-items-center font-black ${className}`}
+      className={`grid ${fill ? "absolute inset-0" : "flex-none"} place-items-center font-black ${className}`}
       style={{
         ...style,
         background: `${accent}22`,
         color: accent,
         border: `1px solid ${accent}44`,
-        fontSize: Math.max(12, Math.round(size * 0.38)),
+        fontSize: Math.max(12, Math.round((fill ? 48 : size) * 0.38)),
       }}
       aria-hidden
     >

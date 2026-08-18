@@ -61,7 +61,7 @@ export default function AboutPage() {
       </p>
 
       <p className="mt-10 text-[14px] text-muted">
-        <Link href="/" className="text-brand hover:text-brandstrong">
+        <Link href="/sets" className="text-brand hover:text-brandstrong">
           Browse sets →
         </Link>
       </p>

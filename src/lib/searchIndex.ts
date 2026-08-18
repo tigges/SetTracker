@@ -95,6 +95,13 @@ export async function getSearchIndex(): Promise<SearchIndexItem[]> {
 
   const items: SearchIndexItem[] = [
     {
+      kind: "set",
+      title: "Sets",
+      subtitle: "Festival and club tracklists",
+      href: "/sets",
+      keywords: "browse sets feed catalog tracklists",
+    },
+    {
       kind: "atlas",
       title: "Top 100 Atlas",
       subtitle: "DJ Mag clubs & festivals 2026, DJs 2025",

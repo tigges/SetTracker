@@ -80,7 +80,7 @@ function writePrefs(next: FeedPrefs) {
 }
 
 /**
- * Homepage feed:
+ * Sets catalog feed (`/sets`):
  * New this week → Festival season → Popular sets → In-demand DJs / Top events →
  * Radar picks → Deep catalog (this year first; Show earlier years for archives).
  * Quality queues live on /stats, not as consumer filters.

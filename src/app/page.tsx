@@ -1,27 +1,50 @@
 import type { Metadata } from "next";
-import { getFeed, getGenres } from "@/lib/queries";
-import { SetFeed } from "@/components/SetFeed";
-import { pageMeta, SITE_DESCRIPTION } from "@/lib/site";
+import { HomeLanding } from "@/components/HomeLanding";
+import {
+  calendarMarkedDays,
+  calendarTeaserFaces,
+  getAtlasTeaserFaces,
+  getDjList,
+  getFeed,
+  getFestivalEditionBoard,
+  getVenues,
+} from "@/lib/queries";
+import { pageMeta } from "@/lib/site";
 
 export const metadata: Metadata = pageMeta({
-  title: "Sets",
-  description: SITE_DESCRIPTION,
+  title: "The night, as a graph",
+  description: "Timed tracklists from festivals, clubs, and radio.",
   path: "/",
 });
 
 export default async function Home() {
-  const [feed, genres] = await Promise.all([getFeed(), getGenres()]);
+  const [feed, djs, venues, board, atlasFaces] = await Promise.all([
+    getFeed(),
+    getDjList(),
+    getVenues(),
+    getFestivalEditionBoard(),
+    getAtlasTeaserFaces(),
+  ]);
+  const calFaces = calendarTeaserFaces(board);
+  const marked = calendarMarkedDays(board);
 
   return (
-    <div>
-      <div className="mb-6">
-        <h1 className="text-3xl font-extrabold tracking-tight">DJ Sets</h1>
-        <p className="mt-2 max-w-2xl text-[14px] text-muted">
-          Best Sets from recent festival and club performances
-        </p>
-      </div>
-
-      <SetFeed feed={feed} genres={genres} />
-    </div>
+    <HomeLanding
+      feed={feed}
+      djs={djs}
+      venues={venues}
+      atlasFaces={atlasFaces.map((f) => ({
+        src: f.imageUrl,
+        label: f.name,
+        accent: f.accent,
+      }))}
+      calendarFaces={calFaces.map((f) => ({
+        src: f.imageUrl,
+        label: f.name,
+        accent: f.accent,
+      }))}
+      markedDays={marked}
+      nowMs={board.nowMs}
+    />
   );
 }
