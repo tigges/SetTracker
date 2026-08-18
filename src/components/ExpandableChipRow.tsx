@@ -59,15 +59,17 @@ export function ExpandableChipRow({
   );
 }
 
-/** Stacked list with the same “Show N more” pattern (club nights under a venue). */
+/** Stacked list with the same “Show N more” pattern. */
 export function ExpandableList({
   items,
   previewCount = 5,
   moreLabel = "nights",
+  listClassName = "divide-y divide-line",
 }: {
   items: ReactNode[];
   previewCount?: number;
   moreLabel?: string;
+  listClassName?: string;
 }) {
   const [expanded, setExpanded] = useState(false);
   const hidden = Math.max(0, items.length - previewCount);
@@ -76,7 +78,7 @@ export function ExpandableList({
 
   return (
     <div>
-      <ul className="divide-y divide-line">{visible}</ul>
+      <ul className={listClassName}>{visible}</ul>
       <ExpandToggle
         expanded={expanded}
         hidden={hidden}

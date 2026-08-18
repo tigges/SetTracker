@@ -17,8 +17,9 @@
  * coverage, then density, then chart — so Guetta Ultra 2024 does not sit on
  * page 1 ahead of 2026 sets, but a mostly-orange bar beats a mostly-grey one.
  *
- * Event/festival profile grids use `compareEventSetPriority` — same stack,
- * plus ID quality so all-pink (unresolved) tracklists rank below identified.
+ * Event/festival profile grids use `compareEventSetPriority` — this year
+ * first, then completeness / ID quality, so a dense 2025 Relive does not
+ * bury a thin 2026 dump. Empty this-year shells stay in the year block.
  */
 
 import { DENSITY_MIN_DURATION_SEC, type DensitySeverity } from "./setDensity";
@@ -298,13 +299,17 @@ export type EventSetPriorityFields = FeedPriorityFields & {
 };
 
 /**
- * Event profile grids: completeness → ID quality → year → Top 100 → date.
- * Deprioritizes all-pink unresolved tracklists below sets with real IDs.
+ * Place-page Relive grid: year → completeness → ID quality → date.
+ * Nights stay a separate date-ordered bill (not this comparator).
  */
 export function compareEventSetPriority(
   a: EventSetPriorityFields,
   b: EventSetPriorityFields,
 ): number {
+  const ya = setPerformanceYear(a);
+  const yb = setPerformanceYear(b);
+  if (ya !== yb) return yb - ya;
+
   const da = DENSITY_RANK[a.densitySeverity ?? "ok"];
   const db = DENSITY_RANK[b.densitySeverity ?? "ok"];
   if (da !== db) return da - db;
@@ -313,28 +318,11 @@ export function compareEventSetPriority(
   const qb = idQualityTier(b.statusCounts, b.trackCount ?? 0);
   if (qa !== qb) return qa - qb;
 
-  // Among identified sets, more resolved IDs first.
   if (qa === 0) {
     const ia = resolvedIdCount(a.statusCounts);
     const ib = resolvedIdCount(b.statusCounts);
     if (ia !== ib) return ib - ia;
   }
-
-  const ya = setPerformanceYear(a);
-  const yb = setPerformanceYear(b);
-  if (ya !== yb) return yb - ya;
-
-  const ta = a.top100Rank ?? 999;
-  const tb = b.top100Rank ?? 999;
-  if (ta !== tb) return ta - tb;
-
-  const fa = a.festivalRank ?? 999;
-  const fb = b.festivalRank ?? 999;
-  if (fa !== fb) return fa - fb;
-
-  const ca = a.clubRank ?? 999;
-  const cb = b.clubRank ?? 999;
-  if (ca !== cb) return ca - cb;
 
   return setPerformanceTime(b) - setPerformanceTime(a);
 }

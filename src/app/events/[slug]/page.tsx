@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ExpandableChipRow } from "@/components/ExpandableChipRow";
+import {
+  ExpandableChipRow,
+  ExpandableList,
+} from "@/components/ExpandableChipRow";
 import { SetCard } from "@/components/SetCard";
 import { SocialLinks } from "@/components/SocialLinks";
 import { VenueNightCard } from "@/components/VenueNightCard";
@@ -82,6 +85,9 @@ export default async function EventPage({
         ) : null}
         <p className="mt-2 text-[14px] text-muted">
           <span className="mono">{event.setCount}</span> sets
+          {event.nights.length > 0
+            ? ` · ${event.nights.length} ${event.nights.length === 1 ? "night" : "nights"}`
+            : ""}
           {place ? ` · ${place}` : ""}
           {event.kind ? ` · ${event.kind}` : ""}
         </p>
@@ -94,24 +100,34 @@ export default async function EventPage({
         <section className="mb-8">
           <div className="mb-3 flex flex-wrap items-baseline justify-between gap-2">
             <h2 className="text-[13px] font-semibold uppercase tracking-[0.14em] text-muted">
-              Upcoming nights
+              {event.nights.some((n) => n.bucket === "current")
+                ? "On now"
+                : "Upcoming nights"}
             </h2>
-            {event.socials.website ? (
-              <a
-                href={event.socials.website}
-                target="_blank"
-                rel="noreferrer"
-                className="mono text-[12px] text-brand hover:text-brandstrong"
-              >
-                Official site →
-              </a>
-            ) : null}
+            <span className="flex items-center gap-3">
+              <span className="mono text-[12px] text-muted2">
+                {event.nights.length}
+              </span>
+              {event.socials.website ? (
+                <a
+                  href={event.socials.website}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mono text-[12px] text-brand hover:text-brandstrong"
+                >
+                  Official calendar →
+                </a>
+              ) : null}
+            </span>
           </div>
-          <ul className="space-y-3">
-            {event.nights.slice(0, 12).map((n) => (
+          <ExpandableList
+            items={event.nights.map((n) => (
               <VenueNightCard key={n.slug} night={n} />
             ))}
-          </ul>
+            previewCount={5}
+            moreLabel="nights"
+            listClassName="space-y-3"
+          />
           {event.nights.some(
             (n) => n.headliner?.slug || n.artists.some((a) => a.slug),
           ) ? (
@@ -152,11 +168,21 @@ export default async function EventPage({
             : "No sets linked yet — check back after the next deep catalog refresh."}
         </p>
       ) : (
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {event.sets.map((s) => (
-            <SetCard key={s.id} set={s} />
-          ))}
-        </div>
+        <section>
+          <div className="mb-3 flex items-baseline justify-between gap-3">
+            <h2 className="text-[13px] font-semibold uppercase tracking-[0.14em] text-muted">
+              Sets
+            </h2>
+            <span className="mono text-[12px] text-muted2">
+              {event.sets.length}
+            </span>
+          </div>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {event.sets.map((s) => (
+              <SetCard key={s.id} set={s} />
+            ))}
+          </div>
+        </section>
       )}
     </div>
   );

@@ -43,6 +43,7 @@ export default async function FestivalCalendarPage() {
       <FestivalCalendar
         editions={editions}
         nights={nights}
+        setCounts={board.setCounts}
         nowMs={board.nowMs}
       />
     </div>
