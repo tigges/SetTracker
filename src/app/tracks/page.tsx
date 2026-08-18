@@ -6,7 +6,8 @@ import { pageMeta } from "@/lib/site";
 
 export const metadata: Metadata = pageMeta({
   title: "Tracks",
-  description: "Most-played identified tracks across the setradar catalog.",
+  description:
+    "Identified tracks mixed by more than one DJ in the setradar catalog.",
   path: "/tracks",
 });
 
@@ -16,11 +17,11 @@ export default async function TracksPage() {
   return (
     <div>
       <div className="mb-8">
-        <p className="eyebrow">Identified plays</p>
+        <p className="eyebrow">Crossing DJs</p>
         <h1 className="mt-1 text-3xl font-extrabold tracking-tight">Tracks</h1>
         <p className="mt-2 max-w-2xl text-[14px] text-muted">
-          Most-played identified tracks across the catalog — open a track for
-          every set that spun it.
+          Tracks mixed by more than one DJ, ranked by DJ spread — not how many
+          episodes we ingested. Open a track for every set that spun it.
         </p>
       </div>
 
@@ -57,8 +58,11 @@ export default async function TracksPage() {
                   {t.bpm != null ? ` · ${t.bpm} BPM` : ""}
                 </div>
               </div>
-              <span className="mono flex-none text-[12px] text-muted2">
-                {t.playCount}×
+              <span className="mono flex-none text-right text-[12px] text-muted2">
+                {t.djCount} {t.djCount === 1 ? "DJ" : "DJs"}
+                <span className="block text-[11px] text-muted2">
+                  {t.setCount} {t.setCount === 1 ? "set" : "sets"}
+                </span>
               </span>
             </Link>
           </li>
@@ -67,7 +71,8 @@ export default async function TracksPage() {
 
       {tracks.length === 0 && (
         <p className="py-16 text-center text-[14px] text-muted2">
-          No identified tracks yet — they appear after ingest parses tracklists.
+          No crossing tracks yet — they appear when two DJs have identified
+          plays of the same song.
         </p>
       )}
     </div>

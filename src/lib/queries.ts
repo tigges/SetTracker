@@ -37,6 +37,7 @@ import {
 } from "@/lib/atlas/seed";
 import { daysCoveredByEditions, isoUTC } from "@/lib/calendarGrid";
 import { sortPlaceNights } from "@/lib/placeTimeline";
+import { rankTrackChart, type TrackChartAgg } from "@/lib/trackChart";
 import {
   bucketVenueNight,
   parseJsonStringList,
@@ -1597,15 +1598,41 @@ export type VenueProfile = NonNullable<Awaited<ReturnType<typeof getVenueBySlug>
 // ---------------------------------------------------------------------------
 // Tracks
 // ---------------------------------------------------------------------------
+type TrackChartSqlRow = {
+  trackId: string;
+  playCount: number | bigint;
+  setCount: number | bigint;
+  djCount: number | bigint;
+  eventCount: number | bigint;
+};
+
 export async function getTracks(limit = 120) {
-  const grouped = await prisma.played.groupBy({
-    by: ["trackId"],
-    where: { trackId: { not: null } },
-    _count: { trackId: true },
-    orderBy: { _count: { trackId: "desc" } },
-    take: limit,
-  });
-  const ids = grouped.map((g) => g.trackId!).filter(Boolean);
+  const grouped = await prisma.$queryRaw<TrackChartSqlRow[]>`
+    SELECT
+      p.trackId AS trackId,
+      COUNT(p.id) AS playCount,
+      COUNT(DISTINCT p.setId) AS setCount,
+      COUNT(DISTINCT sa.djId) AS djCount,
+      COUNT(DISTINCT s.eventId) AS eventCount
+    FROM Played p
+    INNER JOIN "Set" s ON s.id = p.setId
+    INNER JOIN SetArtist sa ON sa.setId = p.setId AND sa.isPrimary = 1
+    WHERE p.trackId IS NOT NULL
+    GROUP BY p.trackId
+  `;
+  const ranked = rankTrackChart(
+    grouped.map(
+      (g): TrackChartAgg => ({
+        trackId: g.trackId,
+        playCount: Number(g.playCount ?? 0),
+        setCount: Number(g.setCount ?? 0),
+        djCount: Number(g.djCount ?? 0),
+        eventCount: Number(g.eventCount ?? 0),
+      }),
+    ),
+    limit,
+  );
+  const ids = ranked.map((g) => g.trackId);
   if (ids.length === 0) return [];
   const rows = await prisma.track.findMany({
     where: { id: { in: ids } },
@@ -1622,11 +1649,12 @@ export async function getTracks(limit = 120) {
     },
   });
   const byId = new Map(rows.map((t) => [t.id, t]));
-  const countBy = new Map(grouped.map((g) => [g.trackId!, g._count.trackId]));
+  const statsBy = new Map(ranked.map((g) => [g.trackId, g]));
   return ids
     .map((id) => {
       const t = byId.get(id);
-      if (!t) return null;
+      const stats = statsBy.get(id);
+      if (!t || !stats) return null;
       return {
         slug: t.slug,
         title: t.title,
@@ -1638,7 +1666,9 @@ export async function getTracks(limit = 120) {
         labelName: t.label?.name ?? null,
         labelSlug: t.label?.slug ?? null,
         labelColor: t.label?.color ?? null,
-        playCount: countBy.get(id) ?? 0,
+        playCount: stats.playCount,
+        setCount: stats.setCount,
+        djCount: stats.djCount,
       };
     })
     .filter((x): x is NonNullable<typeof x> => !!x);
