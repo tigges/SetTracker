@@ -14,10 +14,15 @@ empty `PAGES_BASE_PATH`). The github.io `/SetTracker` path is a redirect.
 ## Testing
 
 Do not run manual UI testing, screen recordings, or walkthrough artifacts.
-Ship to main when asked to go live. The producer tests on https://setradar.ai/.
-Small catalog and UI updates (1001 captures, stats copy, pins) belong in one
-PR so GitHub Pages builds once. `deploy-pages.yml` cancels in-progress
-exports on every main push — drip-merging leaves live on an old version.
+The producer tests on https://setradar.ai/ and publishes to live from GitHub
+(merge the PR / push `main`). Agents do not merge to `main` or start a Pages
+deploy unless the producer explicitly says otherwise.
+
+Bundle multiple prompts into one PR so one publish is one Pages build.
+`deploy-pages.yml` cancels in-progress exports on every main push —
+drip-merging leaves live on an old version. Keep stacking 1001 captures,
+stats copy, and pins on the same branch until the producer publishes.
+The producer will say if this bundling rule is abolished.
 
 - **Run the app:** `npm run dev` (Turbopack, http://localhost:3000). Dev output
   goes to `.next/dev` in Next 16.
@@ -95,8 +100,8 @@ exports on every main push — drip-merging leaves live on an old version.
   enrich in parallel — both write `prisma/dev.db` cache. Bump
   `data/deep-request` to start the chain; `data/enrich-full-request` starts
   full enrich alone; `data/enrich-request` is the fast `acr` pass. To ship,
-  producers hand off; to fix the build, edit one workflow. Bundle small
-  updates into one main push so Pages exports once.
+  the producer merges from GitHub. To fix the build, edit one workflow.
+  Agents keep small updates on one PR so that publish is one export.
 - **LLM handle research:** `npm run research:handles` (catalog-deep + enrich
   `full`, or dedicated `catalog-llm-research.yml`). Claude (`CLAUDE_AGENT_API`
   or `ANTHROPIC_API_KEY`) and/or Gemini (`GEMINI_API_KEY` from
@@ -108,6 +113,11 @@ exports on every main push — drip-merging leaves live on an old version.
   guesses. No-op without keys on deep/enrich; dedicated workflow fails if
   both keys are missing. Trigger on main by bumping `data/llm-request`.
   Reports in `data/crosscheck/llm-handle-research.json`.
+  **Track export:** `npm run export:tracks` dumps catalog tracks (CSV +
+  Claude JSONL) to `data/track-id-export/`. Pages `prebuild` also writes
+  `/exports/tracks-need-id.csv` and `.jsonl` (no-ISRC, most-played first).
+  Claude may propose ISRC / Beatport `/track/{slug}/{id}` only — never
+  invent; Deezer/MB must confirm before write. Download from `/stats`.
   **Track IDs:** `npm run research:track-ids` resolves ISRCs from held 1001
   names via Deezer, MusicBrainz (on unless `TRACK_ID_MB=0` — MBID / ISRC /
   Beatport url-rels), TrackRadar public archive (no key; MCP needs
