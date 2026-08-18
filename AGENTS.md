@@ -11,6 +11,11 @@ Turbopack) backed by Prisma 6 on SQLite. There is only one service to run.
 GitHub Pages deploys the static export at https://setradar.ai/ (custom domain,
 empty `PAGES_BASE_PATH`). The github.io `/SetTracker` path is a redirect.
 
+## Testing
+
+Do not run manual UI testing, screen recordings, or walkthrough artifacts.
+Ship to main when asked to go live. The producer tests on https://setradar.ai/.
+
 - **Run the app:** `npm run dev` (Turbopack, http://localhost:3000). Dev output
   goes to `.next/dev` in Next 16.
 - **Database:** SQLite at `prisma/dev.db` (git-ignored), `DATABASE_URL` is in the
