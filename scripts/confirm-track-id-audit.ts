@@ -7,7 +7,11 @@
 import { readFile } from "node:fs/promises";
 import { writeFile } from "node:fs/promises";
 import { join } from "node:path";
-import { evaluateTrackIdPin, type TrackIdPin } from "../src/lib/ingest/identify/trackIdPins";
+import {
+  evaluateTrackIdPin,
+  loadTrackIdPins,
+  type TrackIdPin,
+} from "../src/lib/ingest/identify/trackIdPins";
 import { canonicalBeatportUrl, normalizeIsrc } from "../src/lib/trackMeta";
 
 const UA = "SetRadar/0.2.190 (+https://setradar.ai; track-id confirm)";
@@ -157,7 +161,7 @@ async function mapPool<T, R>(
 async function main() {
   const csvPath =
     process.argv[2] ||
-    "/home/ubuntu/.cursor/projects/workspace/uploads/track-id-results-audit_b136.csv";
+    join(process.cwd(), "data/crosscheck/track-id-results-audit.csv");
   const rows = await readAudit(csvPath);
   const withBp = rows.filter((r) => canonicalBeatportUrl(r.beatportUrl));
   const withIsrc = rows.filter((r) => normalizeIsrc(r.isrc));
@@ -196,9 +200,41 @@ async function main() {
     }
   }
 
-  pins.sort((a, b) => a.slug.localeCompare(b.slug));
+  const existing = loadTrackIdPins();
+  const bySlug = new Map(existing.map((p) => [p.slug, { ...p }]));
+  for (const pin of pins) {
+    const prev = bySlug.get(pin.slug);
+    bySlug.set(pin.slug, {
+      slug: pin.slug,
+      ...(pin.isrc || prev?.isrc ? { isrc: pin.isrc || prev?.isrc } : {}),
+      ...(pin.beatportUrl || prev?.beatportUrl
+        ? { beatportUrl: pin.beatportUrl || prev?.beatportUrl }
+        : {}),
+    });
+  }
+
+  const merged = [...bySlug.values()].sort((a, b) => a.slug.localeCompare(b.slug));
+  const pinUrls = [
+    ...new Set(
+      merged.map((p) => p.beatportUrl).filter((u): u is string => Boolean(u)),
+    ),
+  ];
+  const liveHeads = await mapPool(pinUrls, 4, async (url) => {
+    const hit = await probeBeatport(url);
+    return { url, status: hit.status };
+  });
+  const dead = new Set(
+    liveHeads.filter((h) => h.status === 404).map((h) => h.url),
+  );
+  const kept: TrackIdPin[] = merged.map((p) => {
+    if (p.beatportUrl && dead.has(p.beatportUrl)) {
+      return { slug: p.slug, ...(p.isrc ? { isrc: p.isrc } : {}) };
+    }
+    return p;
+  });
+
   const outPath = join(process.cwd(), "data/track-id-pins.json");
-  await writeFile(outPath, `${JSON.stringify(pins, null, 2)}\n`);
+  await writeFile(outPath, `${JSON.stringify(kept, null, 2)}\n`);
 
   const report = {
     generatedAt: new Date().toISOString(),
@@ -208,11 +244,14 @@ async function main() {
     withIsrc: withIsrc.length,
     beatportProbes: probes,
     deezerConfirmed: confirmed,
-    pins: pins.length,
-    pinsWithBeatport: pins.filter((p) => p.beatportUrl).length,
-    pinsWithIsrc: pins.filter((p) => p.isrc).length,
+    newPins: pins.length,
+    keptExisting: existing.length,
+    pins: kept.length,
+    pinsWithBeatport: kept.filter((p) => p.beatportUrl).length,
+    pinsWithIsrc: kept.filter((p) => p.isrc).length,
+    beatport404dropped: [...dead],
     rejected,
-    note: "Beatport HTML is never scraped. Pins require a Deezer ISRC hit plus a canonical /track URL whose slug matches the title.",
+    note: "Beatport HTML is never scraped. Pins require a Deezer ISRC hit plus a canonical /track URL whose slug matches the title. Merge with existing pins; drop HEAD 404 Beatport URLs (keep ISRC).",
   };
   await writeFile(
     join(process.cwd(), "data/crosscheck/track-id-audit-confirm.json"),

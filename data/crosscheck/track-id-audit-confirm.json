@@ -1,41 +1,65 @@
 {
-  "generatedAt": "2026-08-18T08:56:37.546Z",
-  "csv": "data/crosscheck/track-id-results-audit.csv",
-  "rows": 1200,
-  "withBeatport": 887,
-  "withIsrc": 897,
+  "generatedAt": "2026-08-18T15:49:52.538Z",
+  "csv": "track-id-results-audit_1_OUT_5e35.csv (8787-row producer dump; not committed)",
+  "rows": 8787,
+  "withBeatport": 6020,
+  "withIsrc": 6058,
   "beatportProbes": [
     {
       "url": "https://www.beatport.com/track/connect/17595139",
-      "status": 200
+      "status": 200,
+      "finalUrl": "https://www.beatport.com/track/connect/17595139"
     },
     {
       "url": "https://www.beatport.com/track/footrocker/4437156",
-      "status": 200
+      "status": 200,
+      "finalUrl": "https://www.beatport.com/track/footrocker/4437156"
     },
     {
       "url": "https://www.beatport.com/track/weirder-things/26745003",
-      "status": 200
+      "status": 200,
+      "finalUrl": "https://www.beatport.com/track/weirder-things/26745003"
     },
     {
       "url": "https://www.beatport.com/track/helicopter/17286765",
-      "status": 200
+      "status": 200,
+      "finalUrl": "https://www.beatport.com/track/helicopter/17286765"
+    },
+    {
+      "url": "https://www.beatport.com/track/where-you-are/24364611",
+      "status": 200,
+      "finalUrl": "https://www.beatport.com/track/where-you-are/24364611"
+    },
+    {
+      "url": "https://www.beatport.com/track/pursuit-of-happiness/12110556",
+      "status": 200,
+      "finalUrl": "https://www.beatport.com/track/pursuit-of-happiness/12110556"
+    },
+    {
+      "url": "https://www.beatport.com/track/scared-to-be-lonely/9092135",
+      "status": 200,
+      "finalUrl": "https://www.beatport.com/track/scared-to-be-lonely/9092135"
+    },
+    {
+      "url": "https://www.beatport.com/track/without-you/24344586",
+      "status": 200,
+      "finalUrl": "https://www.beatport.com/track/without-you/24344586"
     }
   ],
-  "deezerConfirmed": 285,
-  "pins": 285,
-  "pinsWithBeatport": 272,
-  "pinsWithIsrc": 285,
-  "liveBeatportHead": {
-    "probed": 265,
-    "ok200": 264,
-    "notFound404": [
-      "https://www.beatport.com/track/bayside/24369290"
-    ]
-  },
+  "deezerConfirmed": 1840,
+  "newPins": 1840,
+  "keptExisting": 285,
+  "pins": 1882,
+  "pinsWithBeatport": 1837,
+  "pinsWithIsrc": 1882,
+  "beatport404dropped": [
+    "https://www.beatport.com/track/superman/24370858",
+    "https://www.beatport.com/track/bayside/24369290"
+  ],
   "rejected": {
-    "not confirmed": 604,
-    "beatport slug mismatch": 8
+    "not confirmed": 4122,
+    "junk row": 5,
+    "beatport slug mismatch": 91
   },
-  "note": "Beatport HTML is never scraped. Pins require a Deezer ISRC hit plus a canonical /track URL whose slug matches the title. Dropped the one 404 Beatport URL; ISRC kept when Deezer confirmed it."
+  "note": "Beatport HTML is never scraped. Pins require a Deezer ISRC hit plus a canonical /track URL whose slug matches the title. Merge with existing pins; drop HEAD 404 Beatport URLs (keep ISRC). Raw producer dump is not in git (title-string secret-scan hits); apply source is data/track-id-pins.json."
 }
