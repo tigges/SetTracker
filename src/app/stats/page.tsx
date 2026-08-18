@@ -286,6 +286,10 @@ export default async function StatsPage() {
           {process.env.NEXT_PUBLIC_GIT_SHA
             ? ` · ${process.env.NEXT_PUBLIC_GIT_SHA.slice(0, 7)}`
             : ""}
+          {" · "}
+          <Link href="/stats/v2" className="text-brand hover:underline">
+            dashboard v2 →
+          </Link>
         </p>
       </div>
 
