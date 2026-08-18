@@ -94,7 +94,7 @@ exports on every main push — drip-merging leaves live on an old version.
   filescan + LLM). Enrich then dispatches Pages. Do not run deep and
   enrich in parallel — both write `prisma/dev.db` cache. Bump
   `data/deep-request` to start the chain; `data/enrich-full-request` starts
-  full enrich alone; `data/enrich-request` is the fast `acr` pass.   To ship,
+  full enrich alone; `data/enrich-request` is the fast `acr` pass. To ship,
   producers hand off; to fix the build, edit one workflow. Bundle small
   updates into one main push so Pages exports once.
 - **LLM handle research:** `npm run research:handles` (catalog-deep + enrich
