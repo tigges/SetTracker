@@ -87,6 +87,20 @@ assert.equal(
   "sc-hardwell-hardwell-on-air-527-yearmix",
 );
 
+const sth687Sc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url ===
+    "https://soundcloud.com/dimitrivegasandlikemike/smash-the-house-radio-ep-687",
+);
+assert.ok(sth687Sc);
+assert.equal(sth687Sc.primaryArtist.name, "Dimitri Vegas & Like Mike");
+assert.equal(sth687Sc.type, "radio");
+assert.equal(sth687Sc.seriesName, "Smash The House Radio");
+assert.equal(
+  `sc-dimitrivegasandlikemike-${slugify("smash-the-house-radio-ep-687")}`,
+  "sc-dimitrivegasandlikemike-smash-the-house-radio-ep-687",
+);
+
 const hrr225Sc = SOUNDCLOUD_TRACK_SEEDS.find(
   (s) => s.url === "https://soundcloud.com/jamie-jones/hot-robot-radio-225",
 );

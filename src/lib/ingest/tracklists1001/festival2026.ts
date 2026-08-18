@@ -88,6 +88,7 @@ import {
   TL_JOHN_SUMMIT_BURNING_MAN_PLAYA_PACKAGE_MIX_2025,
   TL_BRANDON_DESERT_VALLEY_PAROOKAVILLE_GERMANY_2024,
 } from "./festivalCaptures20260817";
+import { TL_DVLM_SMASH_THE_HOUSE_RADIO_687_2026 } from "./festivalCaptures20260818";
 
 export {
   TL_ALESSO_TML_WE2_2026,
@@ -164,6 +165,7 @@ export {
   TL_VINTAGE_CULTURE_ROBOT_HEART_RESIDENCY_UNITED_STATES_2024,
   TL_JOHN_SUMMIT_BURNING_MAN_PLAYA_PACKAGE_MIX_2025,
   TL_BRANDON_DESERT_VALLEY_PAROOKAVILLE_GERMANY_2024,
+  TL_DVLM_SMASH_THE_HOUSE_RADIO_687_2026,
 };
 
 function formatClock(sec: number): string {
@@ -4698,6 +4700,9 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-AQ6wWT2HaSQ": TL_BRANDON_DESERT_VALLEY_PAROOKAVILLE_GERMANY_2024,
   "sc-brandonsounds-brandon-live-at-parookaville-2024-desert-valley":
     TL_BRANDON_DESERT_VALLEY_PAROOKAVILLE_GERMANY_2024,
+  "yt-eVjC42MNgkI": TL_DVLM_SMASH_THE_HOUSE_RADIO_687_2026,
+  "sc-dimitrivegasandlikemike-smash-the-house-radio-ep-687":
+    TL_DVLM_SMASH_THE_HOUSE_RADIO_687_2026,
 };
 
 /** Sanity: every seeded clock must parse. */

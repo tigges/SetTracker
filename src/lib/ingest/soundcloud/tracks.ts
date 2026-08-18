@@ -131,6 +131,21 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     minDurationSec: 30 * 60,
   },
   {
+    // Official Smash The House Radio 687; 1001TL wired via
+    // sc-dimitrivegasandlikemike-smash-the-house-radio-ep-687
+    // (same list as yt-eVjC42MNgkI). Mixcloud is a mirror only:
+    // https://www.mixcloud.com/DimitriVegasAndLikeMike/smash-the-house-radio-ep-687/
+    url: "https://soundcloud.com/dimitrivegasandlikemike/smash-the-house-radio-ep-687",
+    primaryArtist: dj("Dimitri Vegas & Like Mike", {
+      accent: "#f7b801",
+      homeCity: "Belgium",
+    }),
+    genre: "Big Room",
+    seriesName: "Smash The House Radio",
+    type: "radio",
+    minDurationSec: 30 * 60,
+  },
+  {
     // Official Jamie Jones upload; Mixcloud mirror also exists.
     // 1001TL wired via sc-jamie-jones-hot-robot-radio-225.
     url: "https://soundcloud.com/jamie-jones/hot-robot-radio-225",
