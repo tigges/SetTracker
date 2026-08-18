@@ -24,6 +24,7 @@ import { applyProducerDjReview } from "./producerDjReview";
 import { mergeSetTitleDjs } from "./mergeSetTitleDjs";
 import { repairInsomniacMixPlayback } from "./insomniac/repairMixPlayback";
 import { applyDjSocialPins } from "./djSocialPins";
+import { applyTrackIdPins } from "./identify/trackIdPins";
 import {
   curatedEventSocialPatch,
   eventSocialCleanupPatch,
@@ -158,6 +159,14 @@ export async function applyKnownUrlFixes(prisma: PrismaClient): Promise<number> 
 
   // Brand DJ social pins (BISCITS, Guetta, FISHER, ARTBAT, …).
   n += await applyDjSocialPins(prisma);
+
+  const trackIds = await applyTrackIdPins(prisma);
+  n += trackIds.beatport + trackIds.isrc;
+  if (trackIds.beatport || trackIds.isrc) {
+    console.log(
+      `[verify-urls] track id pins matched=${trackIds.matched} beatport=${trackIds.beatport} isrc=${trackIds.isrc}`,
+    );
+  }
 
   // Operator: therealdjbdk.com is a casino / click-through, not BDK.
   const rejectedSites = await prisma.dj.findMany({

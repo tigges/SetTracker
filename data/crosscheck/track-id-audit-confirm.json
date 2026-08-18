@@ -1,0 +1,41 @@
+{
+  "generatedAt": "2026-08-18T08:56:37.546Z",
+  "csv": "data/crosscheck/track-id-results-audit.csv",
+  "rows": 1200,
+  "withBeatport": 887,
+  "withIsrc": 897,
+  "beatportProbes": [
+    {
+      "url": "https://www.beatport.com/track/connect/17595139",
+      "status": 200
+    },
+    {
+      "url": "https://www.beatport.com/track/footrocker/4437156",
+      "status": 200
+    },
+    {
+      "url": "https://www.beatport.com/track/weirder-things/26745003",
+      "status": 200
+    },
+    {
+      "url": "https://www.beatport.com/track/helicopter/17286765",
+      "status": 200
+    }
+  ],
+  "deezerConfirmed": 285,
+  "pins": 285,
+  "pinsWithBeatport": 272,
+  "pinsWithIsrc": 285,
+  "liveBeatportHead": {
+    "probed": 265,
+    "ok200": 264,
+    "notFound404": [
+      "https://www.beatport.com/track/bayside/24369290"
+    ]
+  },
+  "rejected": {
+    "not confirmed": 604,
+    "beatport slug mismatch": 8
+  },
+  "note": "Beatport HTML is never scraped. Pins require a Deezer ISRC hit plus a canonical /track URL whose slug matches the title. Dropped the one 404 Beatport URL; ISRC kept when Deezer confirmed it."
+}
