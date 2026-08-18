@@ -5,6 +5,7 @@ import { loadDjMagTop100RankBySlug } from "./djmagTop100";
 import {
   compareDeepCatalog,
   compareEventSetPriorityAt,
+  groupEventSetsByYear,
   compareFeedPriority,
   isArchiveTitledSet,
   isThisPerformanceYear,
@@ -233,6 +234,40 @@ describe("feedPriority complete → Top 100 → festivals", () => {
     ].sort(cmp);
     assert.equal(sorted[0]?.id, "playable-2026");
     assert.equal(sorted[1]?.id, "empty-2026");
+  });
+
+  it("place year bands keep a remapped 2018 title out of this year", () => {
+    const now = Date.parse("2026-08-18T12:00:00Z");
+    const bands = groupEventSetsByYear(
+      [
+        {
+          id: "walker-2018",
+          title: "Alan Walker | Tomorrowland Belgium 2018",
+          publishedAt: "2026-08-18T00:00:00.000Z",
+          performedAt: "2026-07-18T00:00:00.000Z",
+          editionYear: 2026,
+          densitySeverity: "ok" as const,
+          trackCount: 30,
+          statusCounts: { identified: 30 },
+        },
+        {
+          id: "thin-2026",
+          title: "Main Stage 2026",
+          publishedAt: "2026-07-20T00:00:00.000Z",
+          densitySeverity: "thin" as const,
+          trackCount: 8,
+          statusCounts: { identified: 4, unresolved_id: 4 },
+        },
+      ],
+      now,
+    );
+    assert.deepEqual(
+      bands.map((b) => ({ year: b.year, ids: b.sets.map((s) => s.id) })),
+      [
+        { year: 2026, ids: ["thin-2026"] },
+        { year: 2018, ids: ["walker-2018"] },
+      ],
+    );
   });
 
   it("event grids put a newer empty shell ahead of an older playable Relive", () => {

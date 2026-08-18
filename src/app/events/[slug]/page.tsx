@@ -160,10 +160,10 @@ export default async function EventPage({
         </section>
       )}
 
-      {event.sets.length === 0 ? (
+      {event.setBands.length === 0 ? (
         <p className="text-[14px] text-muted">
           {event.nights.length > 0
-            ? "No Relives linked yet — nights above are from the official calendar."
+            ? "No sets linked yet — nights above are from the official calendar."
             : "No sets linked yet — check back after the next deep catalog refresh."}
         </p>
       ) : (
@@ -173,12 +173,31 @@ export default async function EventPage({
               Sets
             </h2>
             <span className="mono text-[12px] text-muted2">
-              {event.sets.length}
+              {event.setCount}
             </span>
           </div>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {event.sets.map((s) => (
-              <SetCard key={s.id} set={s} />
+          <div className="space-y-10">
+            {event.setBands.map((band) => (
+              <section key={band.year}>
+                <div className="mb-3 flex items-baseline justify-between gap-3">
+                  <div>
+                    <h3 className="text-lg font-bold tracking-tight">
+                      {band.year}
+                    </h3>
+                    {band.current ? (
+                      <p className="mt-0.5 text-[13px] text-muted2">This year</p>
+                    ) : null}
+                  </div>
+                  <span className="mono text-[12px] text-muted2">
+                    {band.sets.length}
+                  </span>
+                </div>
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                  {band.sets.map((s) => (
+                    <SetCard key={s.id} set={s} />
+                  ))}
+                </div>
+              </section>
             ))}
           </div>
         </section>

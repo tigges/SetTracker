@@ -17,14 +17,20 @@
  * coverage, then density, then chart — so Guetta Ultra 2024 does not sit on
  * page 1 ahead of 2026 sets, but a mostly-orange bar beats a mostly-grey one.
  *
- * Event/festival profile grids use `compareEventSetPriority` — today, then
- * upcoming soonest-first, then past latest-first. Completeness is a same-day
- * tie-break only.
+ * Event/festival profile grids use year bands (`groupEventSetsByYear`).
+ * This year: today, then upcoming soonest-first, then past latest-first.
+ * Older years: date descending. Completeness is a same-day tie-break only.
  */
 
 import { DENSITY_MIN_DURATION_SEC, type DensitySeverity } from "./setDensity";
-import { comparePlaceSetTimes } from "./placeTimeline";
+import {
+  comparePlaceSetTimes,
+  groupPlaceSetsByYear,
+  yearFromSetTitle,
+} from "./placeTimeline";
 import type { IdStatus } from "./status";
+
+export { yearFromSetTitle };
 
 export type VenueTier =
   | "festival"
@@ -98,20 +104,6 @@ export type FeedPriorityFields = {
   statusCounts?: StatusCountFields;
   trackCount?: number | null;
 };
-
-/** Event year printed in the set title (`TML 2018`, `Ultra Miami 2023`). */
-export function yearFromSetTitle(
-  title: string | null | undefined,
-  nowMs = Date.now(),
-): number | null {
-  if (!title) return null;
-  const max = new Date(nowMs).getUTCFullYear() + 1;
-  const years = [...title.matchAll(/\b(20\d{2})\b/g)]
-    .map((m) => Number(m[1]))
-    .filter((n) => n >= 2005 && n <= max);
-  if (!years.length) return null;
-  return years[years.length - 1]!;
-}
 
 /**
  * Title names an older festival year and none of the printed years are
@@ -297,6 +289,7 @@ export function idQualityTier(
 export type EventSetPriorityFields = FeedPriorityFields & {
   statusCounts?: StatusCountFields;
   trackCount?: number | null;
+  title?: string | null;
 };
 
 function placeSetQuality(s: EventSetPriorityFields): number {
@@ -324,6 +317,14 @@ export function compareEventSetPriority(
   b: EventSetPriorityFields,
 ): number {
   return compareEventSetPriorityAt(Date.now())(a, b);
+}
+
+/** Place-page set grid: year bands, newest first. Never remapped edition year. */
+export function groupEventSetsByYear<T extends EventSetPriorityFields>(
+  sets: T[],
+  nowMs: number,
+) {
+  return groupPlaceSetsByYear(sets, nowMs, placeSetQuality);
 }
 
 const DAY_MS = 24 * 60 * 60 * 1000;
