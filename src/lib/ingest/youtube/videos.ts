@@ -797,7 +797,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
   },
   {
     // Tomorrowland official — Crystal Garden WE2; 34/38 timed cues from 1001.
-    // Watch is private (iytimg 404). Meantime cover: KNOWN_SET_IMAGES.
+    // Watch is private (iytimg 404). Meantime cover: TML 2026 CONSCIENCIA key visual.
     video: "https://www.youtube.com/watch?v=PlArfyuzuqo",
     primaryArtist: dj("John Summit", {
       accent: "#4cc9f0",
