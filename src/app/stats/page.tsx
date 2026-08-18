@@ -1,17 +1,20 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import Link from "next/link";
+import { StatsHealthCard, StatsMeter } from "@/components/StatsHealthCard";
 import { getCatalogStats } from "@/lib/catalogStats";
 import { editionLabel } from "@/lib/ingest/festivalDrops";
+import { loadDjMagTop100RankBySlug } from "@/lib/djmagTop100";
 import { loadLlmResearchStats } from "@/lib/llmResearchStats";
 import { getFestivalEditionBoard } from "@/lib/queries";
 import { pageMeta } from "@/lib/site";
-import { STATUS_META, fmtDuration, type IdStatus } from "@/lib/status";
-import { StatusLegend } from "@/components/StatusBits";
+import { getStatsHealth } from "@/lib/statsHealthData";
+import { fmtDuration } from "@/lib/status";
 
 export const metadata: Metadata = pageMeta({
   title: "Stats",
-  description: "Catalog health queues — capture gaps, missing IDs, DJ gaps.",
+  description:
+    "Catalog health — sets, DJs, clubs, festivals, and the work left.",
   path: "/stats",
 });
 
@@ -33,11 +36,6 @@ function MoreFold({
       <div className="mt-1">{children}</div>
     </details>
   );
-}
-
-function pct(part: number, whole: number): string {
-  if (whole <= 0) return "—";
-  return `${Math.round((part / whole) * 100)}%`;
 }
 
 function Stat({
@@ -240,6 +238,48 @@ function DjQueue({
   );
 }
 
+function PlaceGapQueue({
+  rows,
+}: {
+  rows: Array<{ slug: string; name: string; onChart: boolean }>;
+}) {
+  if (rows.length === 0) {
+    return <p className="text-[13px] text-muted2">None in this queue.</p>;
+  }
+  const head = rows.slice(0, PREVIEW);
+  const rest = rows.slice(PREVIEW);
+  const list = (items: typeof rows) => (
+    <ul className="divide-y divide-line border-y border-line">
+      {items.map((row) => (
+        <li
+          key={row.slug}
+          className="flex items-baseline justify-between gap-2 py-1.5"
+        >
+          <Link
+            href={`/events/${row.slug}`}
+            className="truncate text-[13px] font-semibold text-ink hover:underline"
+          >
+            {row.onChart ? "★ " : ""}
+            {row.name}
+          </Link>
+          <Link
+            href={`/capture-1001?q=${encodeURIComponent(row.name)}`}
+            className="mono shrink-0 text-[11px] text-brand hover:underline"
+          >
+            capture
+          </Link>
+        </li>
+      ))}
+    </ul>
+  );
+  return (
+    <>
+      {list(head)}
+      <MoreFold restCount={rest.length}>{list(rest)}</MoreFold>
+    </>
+  );
+}
+
 function fieldShort(field: string): string {
   if (field === "instagram") return "IG";
   if (field === "soundcloud") return "SC";
@@ -257,27 +297,26 @@ function identityLabel(cls: string): string {
 }
 
 export default async function StatsPage() {
-  const [s, board, llm] = await Promise.all([
+  const [s, board, llm, health] = await Promise.all([
     getCatalogStats(),
     getFestivalEditionBoard(),
     Promise.resolve(loadLlmResearchStats()),
+    getStatsHealth(),
   ]);
-  const playTotal = s.totals.plays;
-  const identified =
-    s.plays.byStatus.find((row) => row.key === "identified")?.count ?? 0;
-  const djQueueCount =
-    s.djs.missingHandleWithSets.length +
-    s.djs.junkNames.length +
-    s.djs.emptySetProfiles.length +
-    s.djs.noThumbWithSets.length;
+  const top100 = loadDjMagTop100RankBySlug();
+  const starFirst = (slug: string) => (top100.has(slug) ? 0 : 1);
+  const cueTotal = health.sets.identified.reduce((n, row) => n + row.count, 0);
+  const playbackTotal = health.sets.playback.reduce((n, row) => n + row.count, 0);
+  const noPlayback = health.sets.playback.find((row) => row.key === "no_playback");
 
   return (
     <div>
-      <div className="mb-5">
+      <div className="mb-6">
         <p className="eyebrow">Operator</p>
         <h1 className="mt-1 text-2xl font-extrabold tracking-tight">
           Catalog health
         </h1>
+        <p className="mono mt-1 text-[12px] text-amber">{health.chartNote}</p>
         <p className="mono mt-1 text-[11px] text-muted2">
           This export
           {process.env.NEXT_PUBLIC_APP_VERSION
@@ -289,78 +328,78 @@ export default async function StatsPage() {
         </p>
       </div>
 
-      <section className="mb-5">
-        <div className="grid grid-cols-2 gap-x-4 sm:grid-cols-3 lg:grid-cols-9">
-          <Stat label="Sets" value={s.totals.sets} />
-          <Stat
-            label="DJs"
-            value={s.djs.browseReady}
-            hint={`${s.totals.djs.toLocaleString()} stored`}
-          />
-          <Stat
-            label="Identified"
-            value={pct(identified, playTotal)}
-            hint={`${identified.toLocaleString()} plays`}
-          />
-          <Stat
-            label="Incomplete"
-            value={s.sets.incomplete}
-            hint={`${s.density.thin} thin · ${s.density.severe} severe`}
-          />
-          <Stat
-            label="Needs IDs"
-            value={s.sets.needsIds}
-            hint={`${s.sets.empty} empty`}
-          />
-          <Stat
-            label="Playback"
-            value={s.sets.withPlayback}
-            hint={pct(s.sets.withPlayback, s.totals.sets)}
-          />
-          <Stat
-            label="Fingerprint"
-            value={s.fingerprint.identified}
-            hint={`${s.fingerprint.uniqueTracks} tracks`}
-          />
-          <Stat
-            label="Beatport"
-            value={s.tracks.withBeatport}
-            hint={`${s.tracks.withIsrc.toLocaleString()} ISRC`}
-          />
-          <Stat label="Events" value={s.totals.venues} />
-          <Stat
-            label="LLM fills"
-            value={llm.totals.djFieldsApplied + llm.totals.eventFieldsApplied}
-            hint={`${llm.totals.djsScanned} DJs · ${llm.totals.eventsScanned} events`}
-          />
-        </div>
-      </section>
+      <StatsHealthCard
+        id="djs"
+        noun="DJs"
+        total={health.djs.total}
+        hint={`${health.djs.stored.toLocaleString()} stored · junk hidden · with a set`}
+        slices={health.djs.slices}
+        onChart={health.djs.onChart}
+        actions={health.djs.actions}
+      />
+      <StatsHealthCard
+        id="festivals-card"
+        noun="Festivals"
+        total={health.festivals.total}
+        hint="Catalog + current Top 100 list"
+        slices={health.festivals.slices}
+        onChart={health.festivals.onChart}
+        actions={health.festivals.actions}
+      />
+      <StatsHealthCard
+        id="clubs-card"
+        noun="Clubs"
+        total={health.clubs.total}
+        hint="Catalog + current Top 100 list"
+        slices={health.clubs.slices}
+        onChart={health.clubs.onChart}
+        actions={health.clubs.actions}
+      />
+      <StatsHealthCard
+        id="sets"
+        noun="Sets"
+        total={health.sets.total}
+        hint="A set is the list of tracks · playback is the official recording"
+        slices={health.sets.slices}
+        onChart={health.sets.onChart}
+        actions={health.sets.actions}
+      >
+        <StatsMeter
+          label="Identified"
+          slices={health.sets.identified}
+          total={cueTotal}
+          starNote={
+            health.sets.identifiedStarGap > 0
+              ? `★ ${health.sets.identifiedStarGap.toLocaleString()} of the gap sit on chart sets`
+              : undefined
+          }
+        />
+        <StatsMeter
+          label="Playback"
+          slices={health.sets.playback}
+          total={playbackTotal}
+          starNote={
+            noPlayback && noPlayback.star > 0
+              ? `★ ${noPlayback.star.toLocaleString()} of no-playback are chart sets`
+              : undefined
+          }
+        />
+        <p className="mt-3 text-[12px] text-muted2">
+          No playback has no button — wait for an official full-set upload.
+        </p>
+      </StatsHealthCard>
+      <StatsHealthCard
+        id="tracks"
+        noun="Tracks"
+        total={health.tracks.total}
+        hint="Songs, not sets"
+        slices={health.tracks.slices}
+        actions={health.tracks.actions}
+      />
 
-      <section className="mb-5">
-        <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
-          <h2 className="text-[13px] font-semibold uppercase tracking-[0.14em] text-muted">
-            Play status
-          </h2>
-          <StatusLegend />
-        </div>
-        <div className="flex h-2 overflow-hidden rounded-full bg-line">
-          {s.plays.byStatus.map((row) => {
-            const width =
-              playTotal > 0 ? Math.round((row.count / playTotal) * 100) : 0;
-            if (!width) return null;
-            return (
-              <div
-                key={row.key}
-                title={`${row.label}: ${row.count.toLocaleString()}`}
-                style={{
-                  width: `${width}%`,
-                  background: STATUS_META[row.key as IdStatus]?.color,
-                }}
-              />
-            );
-          })}
-        </div>
-      </section>
+      <p className="mb-4 mt-8 text-[13px] font-semibold uppercase tracking-[0.14em] text-muted">
+        Queues
+      </p>
 
       <QueueFold
         title="LLM research"
@@ -500,10 +539,11 @@ export default async function StatsPage() {
         ) : null}
       </QueueFold>
 
+      <div id="lists">
       <QueueFold
-        title="Tracklist capture"
+        title="Fill thin lists"
         count={s.tracklistGaps.length}
-        hint={`${s.sets.incomplete.toLocaleString()} thin/severe stored — only this-year or last-year chart/festival Relives are a capture job (title year, not YouTube reupload date). Find a 1001 page already on the source (do not invent URLs). Wired 1001 seeds and weekly radio episodes are not this queue. Empty shells have no set page.`}
+        hint={`${s.sets.incomplete.toLocaleString()} thin/severe stored — only this-year or last-year chart/festival sets are a capture job (title year, not YouTube reupload date). Find a 1001 page already on the source (do not invent URLs). Wired 1001 seeds and weekly radio episodes are not this queue. Empty shells have no set page.`}
         open
       >
         <GapQueue
@@ -519,9 +559,11 @@ export default async function StatsPage() {
           }))}
         />
       </QueueFold>
+      </div>
 
+      <div id="cues">
       <QueueFold
-        title="Needs IDs"
+        title="ID cues"
         count={s.sets.needsIds}
         hint="Lowest identified share first. Performance year, not ingest date."
         open
@@ -540,91 +582,107 @@ export default async function StatsPage() {
               .join(" · "),
           }))}
         />
-        {s.topUnresolvedIds.length > 0 ? (
-          <div className="mt-4">
-            <h3 className="mb-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">
-              Hottest unresolved labels
-            </h3>
-            {(() => {
-              const head = s.topUnresolvedIds.slice(0, PREVIEW);
-              const rest = s.topUnresolvedIds.slice(PREVIEW);
-              const list = (items: typeof s.topUnresolvedIds) => (
-                <ul className="divide-y divide-line border-y border-line">
-                  {items.map((row) => (
-                    <li
-                      key={row.id}
-                      className="flex items-baseline justify-between gap-3 py-1"
-                    >
-                      <span className="min-w-0 truncate text-[13px] text-ink">
-                        {row.label}
-                        {row.setSlug ? (
-                          <>
-                            {" "}
-                            <Link
-                              href={`/sets/${row.setSlug}`}
-                              className="text-muted hover:underline"
-                            >
-                              {row.setTitle}
-                            </Link>
-                          </>
-                        ) : null}
-                      </span>
-                      <span className="mono shrink-0 text-[11px] text-muted2">
-                        {row.playCount}×
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              );
-              return (
-                <>
-                  {list(head)}
-                  <MoreFold restCount={rest.length}>{list(rest)}</MoreFold>
-                </>
-              );
-            })()}
-          </div>
-        ) : null}
       </QueueFold>
+      </div>
 
-      <QueueFold
-        title="DJ queues"
-        count={djQueueCount}
-        hint="Catalog DJs only — hearthis hobbyist leaks are dropped."
-      >
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          <div>
-            <h3 className="mb-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">
-              No handle · has sets
-            </h3>
-            <DjQueue rows={s.djs.missingHandleWithSets} />
-          </div>
-          <div>
-            <h3 className="mb-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">
-              Empty set profiles
-            </h3>
-            <DjQueue rows={s.djs.emptySetProfiles} />
-          </div>
-          <div>
-            <h3 className="mb-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">
-              No artwork
-            </h3>
-            <DjQueue rows={s.djs.noThumbWithSets} />
-          </div>
-          <div>
-            <h3 className="mb-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">
-              Junk names
-            </h3>
-            <DjQueue rows={s.djs.junkNames} />
-          </div>
-        </div>
-      </QueueFold>
+      {s.topUnresolvedIds.length > 0 ? (
+        <QueueFold
+          title="Hottest unresolved labels"
+          count={s.topUnresolvedIds.length}
+          hint="Same ID work — labels that show up most often."
+        >
+          {(() => {
+            const head = s.topUnresolvedIds.slice(0, PREVIEW);
+            const rest = s.topUnresolvedIds.slice(PREVIEW);
+            const list = (items: typeof s.topUnresolvedIds) => (
+              <ul className="divide-y divide-line border-y border-line">
+                {items.map((row) => (
+                  <li
+                    key={row.id}
+                    className="flex items-baseline justify-between gap-3 py-1"
+                  >
+                    <span className="min-w-0 truncate text-[13px] text-ink">
+                      {row.label}
+                      {row.setSlug ? (
+                        <>
+                          {" "}
+                          <Link
+                            href={`/sets/${row.setSlug}`}
+                            className="text-muted hover:underline"
+                          >
+                            {row.setTitle}
+                          </Link>
+                        </>
+                      ) : null}
+                    </span>
+                    <span className="mono shrink-0 text-[11px] text-muted2">
+                      {row.playCount}×
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            );
+            return (
+              <>
+                {list(head)}
+                <MoreFold restCount={rest.length}>{list(rest)}</MoreFold>
+              </>
+            );
+          })()}
+        </QueueFold>
+      ) : null}
+
+      <div id="dj-handles">
+        <QueueFold
+          title="Pin handles"
+          count={s.djs.missingHandleWithSets.length}
+          hint="DJs with a set and no social/web handle. ★ current Top 100 first. Junk omitted."
+        >
+          <DjQueue
+            rows={[...s.djs.missingHandleWithSets].sort(
+              (a, b) => starFirst(a.slug) - starFirst(b.slug),
+            )}
+          />
+        </QueueFold>
+      </div>
+      <div id="dj-art">
+        <QueueFold
+          title="Fill artwork"
+          count={s.djs.noThumbWithSets.length}
+          hint="DJs with a set and no image. ★ current Top 100 first."
+        >
+          <DjQueue
+            rows={[...s.djs.noThumbWithSets].sort(
+              (a, b) => starFirst(a.slug) - starFirst(b.slug),
+            )}
+          />
+        </QueueFold>
+      </div>
+
+      <div id="festivals">
+        <QueueFold
+          title="Festivals without a set"
+          count={health.festivals.gaps.length}
+          hint="Link an official set. ★ current Top 100 first."
+        >
+          <PlaceGapQueue rows={health.festivals.gaps} />
+        </QueueFold>
+      </div>
+      <div id="clubs">
+        <QueueFold
+          title="Clubs without a set"
+          count={health.clubs.gaps.length}
+          hint="Link an official set. ★ current Top 100 first."
+        >
+          <PlaceGapQueue rows={health.clubs.gaps} />
+        </QueueFold>
+      </div>
 
       {board.gaps.length > 0 ? (
         <QueueFold
-          title="Festival capture gaps"
+          title="Festival edition gaps"
           count={board.gaps.length}
-          hint="Curated editions still missing a dense Relive."
+          hint="Curated editions still missing a dense set."
         >
           {(() => {
             const head = board.gaps.slice(0, PREVIEW);
