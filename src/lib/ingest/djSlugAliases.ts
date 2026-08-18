@@ -1,3 +1,5 @@
+import { PRODUCER_DJ_ALIASES } from "./producerDjReview.data";
+
 /**
  * Map accidental slugify variants onto curated Dj.slug values.
  * Example: slugify("Gentlemen's Groove") → gentlemen-s-groove, but hearthis
@@ -28,6 +30,7 @@ export const DJ_SLUG_ALIASES: Record<string, string> = {
   // Hot Since 82 destination films mistaken for a DJ
   "recovery-hot-air-balloon": "hot-since-82",
   "recovery-hot-air-balloon-set": "hot-since-82",
+  ...PRODUCER_DJ_ALIASES,
 };
 
 /** "armin-van-buuren-we1" / "odd-mob-we-2" → real artist slug. */

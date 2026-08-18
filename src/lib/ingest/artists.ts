@@ -76,6 +76,12 @@ export function looksLikeEventOrSeriesCredit(name: string): boolean {
   if (!n) return true;
   if (isDestinationFilmHostName(n)) return true;
   return (
+    /\bcercle\b/i.test(n) ||
+    /\bmixmag\b/i.test(n) ||
+    /\bkiss\s*fm\b/i.test(n) ||
+    /\bmash-?up\s+universe\b/i.test(n) ||
+    /\binfinite\s+experience\b/i.test(n) ||
+    /\b\d{1,2}-\d{1,2}-\d{2,4}\s*$/.test(n) ||
     /\bfestival\b/i.test(n) ||
     /\blineup\b/i.test(n) ||
     /\bstages?\b/i.test(n) ||

@@ -1,6 +1,7 @@
 import { isJunkArtistName } from "@/lib/artistName";
 import { playablePlaybackUrl } from "@/lib/playback";
 import { isBrandHostSlug } from "@/lib/brandHosts";
+import { isProducerHiddenSlug } from "@/lib/ingest/producerDjReview.data";
 import { isCatalogWorkDj, isTop100DjSlug } from "@/lib/djCatalog";
 import { isBrowseReadyDj } from "@/lib/djBrowse";
 import { prisma } from "@/lib/db";
@@ -672,6 +673,7 @@ export async function getDjBySlug(slug: string) {
   // Festival / stage / radio-series / brand hosts must not render as DJ profiles.
   if (
     isBrandHostSlug(dj.slug) ||
+    isProducerHiddenSlug(dj.slug) ||
     isJunkArtistName(dj.name) ||
     isJunkArtistName(dj.slug.replace(/-/g, " ")) ||
     /^view-artist-details-for-/.test(dj.slug)
@@ -1064,6 +1066,7 @@ export async function getDjList(): Promise<DjListItem[]> {
     );
     const isJunk =
       isBrandHostSlug(d.slug) ||
+      isProducerHiddenSlug(d.slug) ||
       isJunkArtistName(d.name) ||
       isJunkArtistName(d.slug.replace(/-/g, " ")) ||
       /^view-artist-details-for-/.test(d.slug);
@@ -1290,6 +1293,7 @@ export async function getAllDjSlugs() {
     .filter(
       (r) =>
         !isBrandHostSlug(r.slug) &&
+        !isProducerHiddenSlug(r.slug) &&
         (pinned.has(r.slug) ||
           (!isJunkArtistName(r.name) &&
             !/^view-artist-details-for-/.test(r.slug))),
@@ -1454,6 +1458,7 @@ export async function getVenueBySlug(slug: string, nowMs = Date.now()) {
       const dj = a.dj;
       if (lineupBySlug.has(dj.slug)) continue;
       if (isJunkArtistName(dj.name)) continue;
+      if (isProducerHiddenSlug(dj.slug)) continue;
       if (/^view-artist-details-for-/.test(dj.slug)) continue;
       if (isBrandHostSlug(dj.slug)) continue;
       const ranks = resolveFeedRanks({
