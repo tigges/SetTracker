@@ -2,10 +2,16 @@ import { ATLAS_DJ_YEAR, ATLAS_YEAR, loadAtlasVenues } from "@/lib/atlas/seed";
 import { getDjList } from "@/lib/queries";
 import { prisma } from "@/lib/db";
 import { loadDjMagTop100RankBySlug } from "@/lib/djmagTop100";
+import {
+  needsEntityComplete,
+  rowFromDj,
+  rowFromEvent,
+} from "@/lib/exportEntities";
 import { resolveFeedRanks } from "@/lib/feedPriorityResolve";
 import { STATUS_META, STATUS_ORDER, type IdStatus } from "@/lib/status";
 import { isVenueListed } from "@/lib/venueBrowse";
 import {
+  isDjOnHealthBar,
   summarizeDjHealth,
   summarizePlaceHealth,
   summarizeSetHealth,
@@ -125,7 +131,12 @@ export async function getStatsHealth(): Promise<StatsHealth> {
           slug: true,
           name: true,
           kind: true,
+          location: true,
           website: true,
+          instagram: true,
+          soundcloud: true,
+          twitter: true,
+          imageUrl: true,
           _count: { select: { sets: true } },
         },
       }),
@@ -160,6 +171,33 @@ export async function getStatsHealth(): Promise<StatsHealth> {
     website: e.website,
     setCount: e._count.sets,
   }));
+
+  const djNeedComplete = djs.filter(
+    (d) => isDjOnHealthBar(d) && needsEntityComplete(rowFromDj(d)),
+  ).length;
+  const placeNeedComplete = {
+    festival: 0,
+    club: 0,
+  };
+  for (const e of events) {
+    const row = rowFromEvent({
+      slug: e.slug,
+      name: e.name,
+      kind: e.kind,
+      location: e.location,
+      setCount: e._count.sets,
+      imageUrl: e.imageUrl,
+      website: e.website,
+      instagram: e.instagram,
+      soundcloud: e.soundcloud,
+      twitter: e.twitter,
+    });
+    if (!row) continue;
+    if (!isVenueListed({ setCount: row.setCount, website: row.website })) continue;
+    if (needsEntityComplete(row) && row.kind !== "dj") {
+      placeNeedComplete[row.kind] += 1;
+    }
+  }
 
   const djBar = summarizeDjHealth(djs, (slug) => top100.has(slug));
   const noHandle = djBar.slices.find((s) => s.key === "no_handle")?.count ?? 0;
@@ -232,7 +270,12 @@ export async function getStatsHealth(): Promise<StatsHealth> {
       actions: [
         { href: "#dj-handles", label: "Pin handles", count: noHandle },
         { href: "#dj-art", label: "Fill artwork", count: noArt },
-      ].filter((a) => a.count > 0),
+        {
+          href: "/exports/djs-need-complete.csv",
+          label: "Export for Claude complete",
+          count: djNeedComplete,
+        },
+      ].filter((a) => a.count > 0 || a.href.startsWith("/exports/")),
     },
     festivals: {
       total: festivals.total,
@@ -244,7 +287,12 @@ export async function getStatsHealth(): Promise<StatsHealth> {
           label: "Link / capture a set",
           count: festivals.slices.find((s) => s.key === "no_set")?.count ?? 0,
         },
-      ].filter((a) => a.count > 0),
+        {
+          href: "/exports/festivals-need-complete.csv",
+          label: "Export for Claude complete",
+          count: placeNeedComplete.festival,
+        },
+      ].filter((a) => a.count > 0 || a.href.startsWith("/exports/")),
       gaps: placeGaps(festivalRows),
     },
     clubs: {
@@ -257,7 +305,12 @@ export async function getStatsHealth(): Promise<StatsHealth> {
           label: "Link / capture a set",
           count: clubs.slices.find((s) => s.key === "no_set")?.count ?? 0,
         },
-      ].filter((a) => a.count > 0),
+        {
+          href: "/exports/clubs-need-complete.csv",
+          label: "Export for Claude complete",
+          count: placeNeedComplete.club,
+        },
+      ].filter((a) => a.count > 0 || a.href.startsWith("/exports/")),
       gaps: placeGaps(clubRows),
     },
     sets: {

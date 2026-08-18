@@ -1,6 +1,6 @@
 {
   "name": "setradar",
-  "version": "0.2.192",
+  "version": "0.2.193",
   "private": true,
   "prisma": {
     "seed": "tsx prisma/seed.ts"
@@ -9,7 +9,7 @@
     "dev": "next dev",
     "predev": "tsx scripts/write-search-index.ts",
     "build": "next build",
-    "prebuild": "tsx scripts/write-search-index.ts && tsx scripts/export-tracks.ts --public",
+    "prebuild": "tsx scripts/write-search-index.ts && tsx --env-file=.env scripts/export-tracks.ts --public && tsx --env-file=.env scripts/export-entities.ts --public",
     "start": "next start",
     "lint": "eslint",
     "db:migrate": "prisma migrate dev",
@@ -47,7 +47,8 @@
     "backfill:set-events": "tsx scripts/backfill-set-events.ts",
     "report:roster-graduates": "tsx scripts/report-roster-graduates.ts",
     "export:1001": "tsx scripts/export-1001-seed.ts",
-    "export:tracks": "tsx scripts/export-tracks.ts",
+    "export:tracks": "tsx --env-file=.env scripts/export-tracks.ts",
+    "export:entities": "tsx --env-file=.env scripts/export-entities.ts",
     "calendars:venues": "tsx scripts/refresh-venue-calendars.ts"
   },
   "dependencies": {

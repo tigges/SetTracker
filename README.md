@@ -234,6 +234,15 @@ and `/exports/claude-track-id-prompt.md`. `/stats` links **Export for Claude ID*
 Propose ISRC / canonical Beatport `/track/{slug}/{id}` only — never invent;
 Deezer/MusicBrainz confirm before `Track.isrc` is written.
 
+**Export entities for Claude complete** (`npm run export:entities`): DJs,
+festivals, and clubs missing a thumbnail, official website, or first-party
+social. Writes `data/entity-complete-export/` and, on Pages `prebuild`,
+`/exports/djs-need-complete.csv`, `festivals-need-complete.csv`,
+`clubs-need-complete.csv`, plus combined `entities-need-complete.csv` /
+`.jsonl` and `claude-entity-complete-prompt.md`. `/stats` links
+**Export for Claude complete**. Never invent `@slug` handles; DJ Mag / 6am /
+Wikipedia pages are not official websites.
+
 **Track IDs from held 1001 seeds** (`npm run research:track-ids`): named cues
 go to Deezer (ISRC), [MusicBrainz](https://musicbrainz.org/) (on unless
 `TRACK_ID_MB=0` → MBID / ISRC / Beatport url-rels),

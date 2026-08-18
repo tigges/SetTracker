@@ -118,6 +118,13 @@ The producer will say if this bundling rule is abolished.
   `/exports/tracks-need-id.csv` and `.jsonl` (no-ISRC, most-played first).
   Claude may propose ISRC / Beatport `/track/{slug}/{id}` only — never
   invent; Deezer/MB must confirm before write. Download from `/stats`.
+  **Entity export:** `npm run export:entities` dumps DJs / festivals / clubs
+  missing a thumb, official website, or first-party social
+  (`data/entity-complete-export/`). Pages writes `/exports/djs-need-complete.csv`,
+  `festivals-need-complete.csv`, `clubs-need-complete.csv`, plus combined
+  `entities-need-complete.csv` / `.jsonl` and `claude-entity-complete-prompt.md`.
+  `/stats` links **Export for Claude complete**. Never invent `@slug` handles;
+  DJ Mag / 6am / Wikipedia are not official websites. Verify-then-pin.
   **Track IDs:** `npm run research:track-ids` resolves ISRCs from held 1001
   names via Deezer, MusicBrainz (on unless `TRACK_ID_MB=0` — MBID / ISRC /
   Beatport url-rels), TrackRadar public archive (no key; MCP needs
