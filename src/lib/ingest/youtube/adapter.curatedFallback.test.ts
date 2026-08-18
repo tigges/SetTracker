@@ -105,6 +105,9 @@ const VC_ROBOT_HEART = YOUTUBE_SETS.find((s) => s.video.includes("KbGNocaJDjw"))
 const JOHN_SUMMIT_PLAYA = YOUTUBE_SETS.find((s) =>
   s.video.includes("PkWNuf7rtms"),
 );
+const JOHN_SUMMIT_TML_WE2 = YOUTUBE_SETS.find((s) =>
+  s.video.includes("PlArfyuzuqo"),
+);
 const BRANDON_PAROOKAVILLE = YOUTUBE_SETS.find((s) =>
   s.video.includes("AQ6wWT2HaSQ"),
 );
@@ -275,6 +278,15 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=PkWNuf7rtms");
     // Last cue 21:50 + 180s pad.
     assert.equal(meta.durationSec, 21 * 60 + 50 + 180);
+  });
+
+  it("pins a Meantime TML 2026 cover on John Summit WE2 while the watch is private", () => {
+    assert.ok(JOHN_SUMMIT_TML_WE2);
+    const meta = watchMetaFromCuratedSeed(JOHN_SUMMIT_TML_WE2);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "PlArfyuzuqo");
+    assert.match(meta.title, /WE2/i);
+    assert.equal(meta.imageUrl, "/sets/john-summit-tml-we2-2026.jpg");
   });
 
   it("builds BRANDON Parookaville Desert Valley meta from the curated 1001 capture", () => {
