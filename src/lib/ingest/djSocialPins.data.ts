@@ -90,9 +90,11 @@ export const DJ_SOCIAL_PINS: DjSocialPin[] = [
     name: "AC Slater",
     accent: "#f2b33d",
     soundcloud: "https://soundcloud.com/acslater",
+    youtube: "https://www.youtube.com/@djacslater",
     instagram: "https://www.instagram.com/djacslater/",
+    twitter: "https://x.com/djacslater",
     website: "https://www.djacslater.com/",
-    bio: "Bass House. Official djacslater.com — YT @djacslater / user/djacslater, IG @djacslater, SC acslater, Beatport artist/ac-slater/52351.",
+    bio: "Bass House. Official djacslater.com — YT @djacslater / user/djacslater, IG @djacslater, X @djacslater, SC acslater, Beatport artist/ac-slater/52351.",
   },
   {
     slug: "solomun",

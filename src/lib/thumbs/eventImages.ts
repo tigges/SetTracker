@@ -8,6 +8,7 @@
  */
 
 import type { PrismaClient } from "@prisma/client";
+import { isWeakOfficialUrl } from "../officialUrls";
 import { resolveOgImage } from "./ogImage";
 
 /** Hand-picked official share images for flagship venues/festivals. */
@@ -86,6 +87,7 @@ export const EVENT_OFFICIAL_SITES: Record<string, string> = {
   defected: "https://defected.com/",
   "ministry-of-sound": "https://www.ministryofsound.com/",
   "amnesia-ibiza": "https://www.amnesia.es/en/",
+  elrow: "https://elrow.com/",
   "pacha-ibiza": "https://www.pacha.com/",
   "cavo-paradiso": "https://www.cavoparadiso.gr/",
   "warehouse-project": "https://warehouseproject.com/",
@@ -110,13 +112,6 @@ export const EVENT_OFFICIAL_SITES: Record<string, string> = {
   cercle: "https://www.cercle.io/",
   mixmag: "https://mixmag.net/",
 };
-
-function isWeakVenueWebsite(url: string): boolean {
-  // DJ Mag Top 100 profile pages (both URL shapes) are not club OG sources.
-  return /6amgroup\.com|clubtickets\.com\/blog|djmag\.com\/top-?100-?clubs/i.test(
-    url,
-  );
-}
 
 export type EventImageStats = {
   scanned: number;
@@ -159,7 +154,7 @@ export async function fillEventImages(
     if (!url) {
       const candidates = [
         EVENT_OFFICIAL_SITES[ev.slug],
-        ev.website && !isWeakVenueWebsite(ev.website) ? ev.website : null,
+        ev.website && !isWeakOfficialUrl(ev.website) ? ev.website : null,
       ].filter((u): u is string => !!u);
       for (const page of [...new Set(candidates)]) {
         url = await resolveOgImage(page);

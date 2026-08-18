@@ -19,6 +19,7 @@
 /public/search-index.json
 /public/exports/
 /data/track-id-export/
+/data/entity-complete-export/
 
 # production
 /build

@@ -83,6 +83,15 @@ export const KNOWN_EVENTS: Record<string, CanonicalEvent> = {
     website: "https://www.avantgardner.com/",
     instagram: "https://instagram.com/thebrooklynmirage",
   },
+  elrow: {
+    slug: "elrow",
+    name: "elrow",
+    kind: "club",
+    location: "various",
+    website: "https://elrow.com/",
+    instagram: "https://www.instagram.com/elrowofficial/",
+    twitter: "https://x.com/elrow_",
+  },
   tomorrowland: {
     slug: "tomorrowland",
     name: "Tomorrowland",
@@ -378,6 +387,8 @@ const ALIAS_TO_SLUG: Record<string, string> = {
   djoon: "djoon",
   djøøn: "djoon",
   "djoon-club": "djoon",
+  elrow: "elrow",
+  "el-row": "elrow",
   "burning-man": "burning-man",
   burningman: "burning-man",
   "burning-man-festival": "burning-man",
@@ -523,6 +534,7 @@ export function inferFestivalEvent(title: string): CanonicalEvent | null {
   if (/\bstreet\s*parade\b/i.test(t)) return KNOWN_EVENTS["street-parade"];
   if (/\bnature\s*one\b/i.test(t)) return KNOWN_EVENTS["nature-one"];
   if (/\bdance\s*valley\b/i.test(t)) return KNOWN_EVENTS["dance-valley"];
+  if (/\belrow\b/i.test(t)) return KNOWN_EVENTS.elrow;
   // DJ Mag Top 100 Festivals / Clubs / other club listicles (not Mixmag.net).
   return (
     inferDjMagFestivalEvent(t) ??
