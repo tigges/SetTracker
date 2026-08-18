@@ -107,6 +107,24 @@ describe("resolveCanonicalFromSetTitleDj", () => {
     );
   });
 
+  it("folds Recovery balloon / Pirate Ship film hosts onto Hot Since 82", () => {
+    assert.deepEqual(
+      resolveCanonicalFromSetTitleDj(
+        "Recovery (Hot Air Balloon)",
+        "recovery-hot-air-balloon",
+      ),
+      { slug: "hot-since-82", name: "Hot Since 82" },
+    );
+    assert.deepEqual(
+      resolveCanonicalFromSetTitleDj(
+        "Recovery (Hot Air Balloon)",
+        "recovery-hot-air-balloon",
+        ["Hot Since 82 - Live From A Pirate Ship in Ibiza 2025"],
+      ),
+      { slug: "hot-since-82", name: "Hot Since 82" },
+    );
+  });
+
   it("folds Laidback Luke SELECTS onto Laidback Luke", () => {
     assert.deepEqual(
       resolveCanonicalFromSetTitleDj(

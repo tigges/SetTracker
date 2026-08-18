@@ -19,6 +19,7 @@ import { applyCuratedSetImages } from "../thumbs/setImages";
 import { mergeSplitAtomicActs } from "./mergeAtomicActs";
 import { resolveJunkDjs } from "./junkDj";
 import { resolveLowSignalDjs } from "./lowSignalDj";
+import { attachInferredFilmSeries } from "./filmSeries";
 import { mergeSetTitleDjs } from "./mergeSetTitleDjs";
 import { repairInsomniacMixPlayback } from "./insomniac/repairMixPlayback";
 import { applyDjSocialPins } from "./djSocialPins";
@@ -204,6 +205,12 @@ export async function applyKnownUrlFixes(prisma: PrismaClient): Promise<number> 
     console.log(
       `[verify-urls] set-title DJs scanned=${setTitle.scanned} relinked=${setTitle.setsRelinked} removed=${setTitle.junkRemoved} ensured=${setTitle.ensured} brandHosts=${setTitle.brandHostsStripped}`,
     );
+  }
+
+  const films = await attachInferredFilmSeries(prisma);
+  n += films;
+  if (films) {
+    console.log(`[verify-urls] film series attached=${films}`);
   }
 
   const junk = await resolveJunkDjs(prisma);

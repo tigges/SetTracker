@@ -28,6 +28,18 @@ describe("djSlugAliases", () => {
     assert.equal(canonicalDjSlug("armin-van-buuren"), "armin-van-buuren");
   });
 
+  it("folds Recovery balloon film slugs onto Hot Since 82", () => {
+    assert.equal(
+      canonicalDjSlug("recovery-hot-air-balloon"),
+      "hot-since-82",
+    );
+    assert.equal(
+      canonicalDjSlug("recovery-hot-air-balloon-set"),
+      "hot-since-82",
+    );
+    assert.equal(canonicalDjSlug("hot-since-82"), "hot-since-82");
+  });
+
   it("folds Artist SELECTS show slugs onto the artist", () => {
     assert.equal(canonicalDjSlug("laidback-luke-selects"), "laidback-luke");
     assert.equal(canonicalDjSlug("laidback-luke"), "laidback-luke");

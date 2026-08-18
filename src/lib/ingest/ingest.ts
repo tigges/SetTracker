@@ -30,6 +30,7 @@ import { slugify, type RawArtist, type RawPlay, type RawSet, type SourceAdapter 
 import { canonicalDjSlug } from "./djSlugAliases";
 import { curatedEventSocialPatch } from "./eventSocials";
 import { eventSocialPayload, KNOWN_EVENTS, resolveEvent } from "./events";
+import { inferFilmSeriesName } from "./filmSeries";
 import { classifyJunkDj, inferJunkHostEvent } from "./junkDj";
 import { previousSlugsFor } from "./sourceRemaps";
 import {
@@ -774,7 +775,10 @@ export async function runIngest(
       raw.title,
       raw.publishedAt,
     );
-    const seriesId = await upsertSeries(raw.seriesName, primaryDjId);
+    const seriesId = await upsertSeries(
+      raw.seriesName ?? inferFilmSeriesName(raw.title),
+      primaryDjId,
+    );
 
     // Need a performing DJ, series, or event — otherwise nothing to attribute.
     if (!primaryDjId && !seriesId && !eventId) {
