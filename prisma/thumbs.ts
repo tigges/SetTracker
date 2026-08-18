@@ -11,7 +11,8 @@
  * - Tracks: fill nulls, and re-resolve rows that only have an artist portrait so
  *   we can upgrade to release cover art when available; also fill durationSec /
  *   mixName / remixerName from matched provider titles when sparse
- * - Sets: fill nulls; refresh when primary DJ image changed; YT thumb from watch URL
+ * - Sets: fill nulls; refresh when primary DJ image changed; YT thumb from watch URL;
+ *   curated KNOWN_SET_IMAGES win last (dead / private official YouTube stills)
  *
  * Usage: npm run thumbs
  */
@@ -41,6 +42,7 @@ import {
   applyCuratedEventImages,
   fillEventImages,
 } from "../src/lib/thumbs/eventImages";
+import { applyCuratedSetImages } from "../src/lib/thumbs/setImages";
 import {
   resolveHearthisTrackImage,
   resolveHearthisUserImage,
@@ -596,6 +598,10 @@ async function main() {
   console.log(
     `  curated dj pins=${curatedDjs.djs} set pins=${curatedDjs.sets} merged=${curatedDjs.merged}`,
   );
+
+  console.log("[thumbs] applying curated set images…");
+  const curatedSets = await applyCuratedSetImages(prisma);
+  console.log(`  curated set pins=${curatedSets}`);
 
   console.log("[thumbs] applying curated venue images…");
   const curatedEvents = await applyCuratedEventImages(prisma);

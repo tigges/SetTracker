@@ -28,6 +28,7 @@ import {
 } from "../fingerprint/seeds";
 import { hashRawSetContent } from "../hash";
 import { parseDescriptionTracklist } from "../soundcloud/parseTracklist";
+import { curatedSetImage } from "../../thumbs/setImages";
 import { pickYoutubeThumbnail } from "../../thumbs/youtubeThumb";
 import {
   playsFrom1001Urls,
@@ -252,7 +253,8 @@ export function watchMetaFromCuratedSeed(
     musicCredits: [],
     relatedVideos: [],
     watchUrl: `https://www.youtube.com/watch?v=${videoId}`,
-    imageUrl: pickYoutubeThumbnail(videoId, []),
+    imageUrl:
+      curatedSetImage(`yt-${videoId}`) ?? pickYoutubeThumbnail(videoId, []),
   };
 }
 
@@ -323,7 +325,7 @@ async function curatedToHit(src: YoutubeSetSource): Promise<YtHit | null> {
     sourceUrl: meta.watchUrl,
     playbackUrl: meta.watchUrl,
     cover: primary.accent ?? "#ff7a45",
-    imageUrl: meta.imageUrl,
+    imageUrl: curatedSetImage(sourceSlug) ?? meta.imageUrl,
     plays,
   };
   raw.sourceHash = hashRawSetContent(raw);

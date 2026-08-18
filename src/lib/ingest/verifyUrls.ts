@@ -15,6 +15,7 @@ import { ensureDjMagFestivals } from "./discovery/djmagFestivals";
 import { ensureDiscoveredDjs } from "./discovery/ensureDjs";
 import { applyCuratedDjImages } from "../thumbs/djImages";
 import { applyCuratedEventImages } from "../thumbs/eventImages";
+import { applyCuratedSetImages } from "../thumbs/setImages";
 import { mergeSplitAtomicActs } from "./mergeAtomicActs";
 import { resolveJunkDjs } from "./junkDj";
 import { resolveLowSignalDjs } from "./lowSignalDj";
@@ -262,6 +263,9 @@ export async function applyKnownUrlFixes(prisma: PrismaClient): Promise<number> 
 
   // Curated venue / festival share images (Ultra, EDC, Tomorrowland, …).
   n += await applyCuratedEventImages(prisma);
+
+  // Meantime set covers when the official YouTube still is gone.
+  n += await applyCuratedSetImages(prisma);
 
   // Curated venue / festival websites (EDC Las Vegas etc.)
   for (const ev of Object.values(KNOWN_EVENTS)) {
