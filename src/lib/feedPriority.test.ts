@@ -7,6 +7,8 @@ import {
   compareEventSetPriorityAt,
   groupEventSetsByYear,
   compareFeedPriority,
+  displayLane,
+  isRadioFiller,
   isArchiveTitledSet,
   isThisPerformanceYear,
   dedupeNearDuplicates,
@@ -463,11 +465,11 @@ describe("feedPriority complete → Top 100 → festivals", () => {
     const now = Date.parse("2026-08-16T12:00:00.000Z");
     const thisYear = radarPickScore(
       {
-        id: "radio",
+        id: "club",
         densitySeverity: "ok",
-        top100Rank: null,
+        top100Rank: 40,
         festivalRank: null,
-        venueTier: "radio",
+        venueTier: "club",
         publishedAt: "2026-08-01T00:00:00.000Z",
         primaryDjSlug: "local",
       },
@@ -688,6 +690,73 @@ describe("feedPriority complete → Top 100 → festivals", () => {
       true,
       "mostly identified Cafe Mambo-style set",
     );
+    assert.equal(
+      isRadarCandidate(
+        {
+          densitySeverity: "ok",
+          top100Rank: 11,
+          festivalRank: null,
+          venueTier: "radio",
+          publishedAt: "2026-08-01T00:00:00.000Z",
+          statusCounts: { identified: 20 },
+          trackCount: 20,
+          durationSec: 3600,
+        },
+        now,
+      ),
+      false,
+      "Top 100 radio stays off Radar",
+    );
+  });
+
+  it("treats uncharted radio as a Deep filler, behind live rooms", () => {
+    assert.equal(isRadioFiller({ venueTier: "radio", top100Rank: null }), true);
+    assert.equal(isRadioFiller({ venueTier: "radio", top100Rank: 11 }), false);
+    assert.equal(isRadioFiller({ venueTier: "festival", top100Rank: null }), false);
+    assert.equal(displayLane({ venueTier: "festival" }), 0);
+    assert.equal(displayLane({ venueTier: "radio", top100Rank: 4 }), 2);
+    assert.equal(displayLane({ venueTier: "radio" }), 3);
+
+    const spotlight = [
+      {
+        id: "radio-star",
+        densitySeverity: "ok" as const,
+        top100Rank: 4,
+        venueTier: "radio" as const,
+        publishedAt: "2026-08-10T00:00:00.000Z",
+      },
+      {
+        id: "club-unknown",
+        densitySeverity: "ok" as const,
+        top100Rank: null,
+        venueTier: "club" as const,
+        publishedAt: "2026-08-01T00:00:00.000Z",
+      },
+    ].sort(compareFeedPriority);
+    assert.equal(spotlight[0]?.id, "club-unknown");
+
+    const deep = [
+      {
+        id: "radio-new",
+        densitySeverity: "ok" as const,
+        top100Rank: null,
+        venueTier: "radio" as const,
+        publishedAt: "2026-08-16T00:00:00.000Z",
+        statusCounts: { identified: 18 },
+        trackCount: 18,
+      },
+      {
+        id: "fest-older",
+        densitySeverity: "ok" as const,
+        top100Rank: 80,
+        venueTier: "festival" as const,
+        publishedAt: "2026-07-20T00:00:00.000Z",
+        statusCounts: { identified: 18 },
+        trackCount: 18,
+      },
+    ].sort(compareDeepCatalog);
+    assert.equal(deep[0]?.id, "fest-older");
+    assert.equal(deep[1]?.id, "radio-new");
   });
 
   it("dedupes near-duplicate titles from the same DJ", () => {

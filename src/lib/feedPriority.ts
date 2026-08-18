@@ -8,14 +8,16 @@
  *   1) Tracklist completeness (ok → thin → severe; empty last)
  *   2) ID coverage (mostly identified → partial → sparse)
  *   3) Performance year (performedAt / edition year / publishedAt — never ingest)
- *   4) DJ Mag Top 100 DJs (lower chart rank first)
- *   5) DJ Mag Top 100 Festivals (linked event; lower rank first)
- *   6) Venue class: festival → club → livestream → radio → other
- *   7) Performance date
+ *   4) Live room (festival / club) ahead of radio; uncharted radio last
+ *   5) DJ Mag Top 100 DJs (lower chart rank first)
+ *   6) DJ Mag Top 100 Festivals (linked event; lower rank first)
+ *   7) Venue class: festival → club → livestream → radio → other
+ *   8) Performance date
  *
- * Deep catalog leftovers (`compareDeepCatalog`) sort date first, then ID
- * coverage, then density, then chart — so Guetta Ultra 2024 does not sit on
- * page 1 ahead of 2026 sets, but a mostly-orange bar beats a mostly-grey one.
+ * Deep catalog leftovers (`compareDeepCatalog`) put physical live ahead of
+ * radio fillers, then date, IDs, density, chart. Uncharted radio with a
+ * reasonable ID fill is leftover fodder — not a spotlight card.
+ * Radar rejects radio. New this week drops uncharted radio.
  *
  * Event/festival profile grids (`sortEventSets`) list this year first
  * (today → upcoming → latest finished), then older title-years descending.
@@ -76,6 +78,39 @@ const VENUE_RANK: Record<VenueTier, number> = {
   radio: 3,
   other: 4,
 };
+
+/** Festival or club — a physical room, not a studio show. */
+export function isPhysicalLive(s: {
+  venueTier?: VenueTier | null;
+}): boolean {
+  return s.venueTier === "festival" || s.venueTier === "club";
+}
+
+/**
+ * Weekly radio from a DJ who is not on the current Top 100.
+ * Identified episodes fill Deep catalog after live sets.
+ */
+export function isRadioFiller(s: {
+  venueTier?: VenueTier | null;
+  top100Rank?: number | null;
+}): boolean {
+  return s.venueTier === "radio" && s.top100Rank == null;
+}
+
+/**
+ * Homepage prominence. Lower = more visible.
+ * 0 live room · 1 livestream · 2 chart radio / mix · 3 uncharted radio filler
+ */
+export function displayLane(s: {
+  venueTier?: VenueTier | null;
+  top100Rank?: number | null;
+}): number {
+  if (isPhysicalLive(s)) return 0;
+  if (s.venueTier === "livestream") return 1;
+  if (s.venueTier === "radio" && s.top100Rank != null) return 2;
+  if (s.venueTier === "radio") return 3;
+  return 2;
+}
 
 /** Map Event.kind (preferred) or Set.type fallback → venue tier. */
 export function resolveVenueTier(
@@ -157,7 +192,7 @@ export function setPerformanceYear(
   return Number.isFinite(y) ? y : new Date(nowMs).getUTCFullYear();
 }
 
-/** Within an age section — complete → IDs → year → Top 100 DJ → top festival → venue → date. */
+/** Within an age section — complete → IDs → year → live room → chart → date. */
 export function compareFeedPriority(
   a: FeedPriorityFields,
   b: FeedPriorityFields,
@@ -173,6 +208,10 @@ export function compareFeedPriority(
   const ya = setPerformanceYear(a);
   const yb = setPerformanceYear(b);
   if (ya !== yb) return yb - ya;
+
+  const la = displayLane(a);
+  const lb = displayLane(b);
+  if (la !== lb) return la - lb;
 
   const ta = a.top100Rank ?? 999;
   const tb = b.top100Rank ?? 999;
@@ -193,11 +232,15 @@ export function compareFeedPriority(
   return setPerformanceTime(b) - setPerformanceTime(a);
 }
 
-/** Leftover Deep catalog: newest performance first, then IDs, then density, then chart. */
+/** Leftover Deep catalog: live rooms first, then date, IDs, density, chart. */
 export function compareDeepCatalog(
   a: FeedPriorityFields,
   b: FeedPriorityFields,
 ): number {
+  const la = displayLane(a);
+  const lb = displayLane(b);
+  if (la !== lb) return la - lb;
+
   const ta = setPerformanceTime(a);
   const tb = setPerformanceTime(b);
   if (ta !== tb) return tb - ta;
@@ -377,7 +420,7 @@ export function radarPickScore(s: RadarPickFields, nowMs = Date.now()): number {
   if (s.venueTier === "festival") score += 12;
   else if (s.venueTier === "club") score += 8;
   else if (s.venueTier === "livestream") score += 4;
-  else if (s.venueTier === "radio") score += 2;
+  else if (s.venueTier === "radio") score += s.top100Rank != null ? 2 : -8;
 
   const ageDays = (nowMs - setPerformanceTime(s)) / DAY_MS;
   if (ageDays <= 90) score += 38;
@@ -417,6 +460,7 @@ export function isRadarCandidate(
     return false;
   }
   if (idCoverageTier(s.statusCounts, s.trackCount ?? 0) > 1) return false;
+  if (s.venueTier === "radio") return false;
   return s.top100Rank != null || s.festivalRank != null || s.clubRank != null;
 }
 
