@@ -20,6 +20,7 @@ import { mergeSplitAtomicActs } from "./mergeAtomicActs";
 import { resolveJunkDjs } from "./junkDj";
 import { resolveLowSignalDjs } from "./lowSignalDj";
 import { attachInferredFilmSeries } from "./filmSeries";
+import { applyProducerDjReview } from "./producerDjReview";
 import { mergeSetTitleDjs } from "./mergeSetTitleDjs";
 import { repairInsomniacMixPlayback } from "./insomniac/repairMixPlayback";
 import { applyDjSocialPins } from "./djSocialPins";
@@ -204,6 +205,14 @@ export async function applyKnownUrlFixes(prisma: PrismaClient): Promise<number> 
   ) {
     console.log(
       `[verify-urls] set-title DJs scanned=${setTitle.scanned} relinked=${setTitle.setsRelinked} removed=${setTitle.junkRemoved} ensured=${setTitle.ensured} brandHosts=${setTitle.brandHostsStripped}`,
+    );
+  }
+
+  const review = await applyProducerDjReview(prisma);
+  n += review.rematched + review.dropped + review.pinned;
+  if (review.rematched || review.dropped || review.pinned) {
+    console.log(
+      `[verify-urls] producer review rematched=${review.rematched} dropped=${review.dropped} pinned=${review.pinned}`,
     );
   }
 

@@ -28,6 +28,15 @@ describe("djSlugAliases", () => {
     assert.equal(canonicalDjSlug("armin-van-buuren"), "armin-van-buuren");
   });
 
+  it("folds producer-reviewed set-title slugs onto the artist", () => {
+    assert.equal(canonicalDjSlug("mau-p-sunrise"), "mau-p");
+    assert.equal(
+      canonicalDjSlug("layton-giordani-space-miami-1-10-25"),
+      "layton-giordani",
+    );
+    assert.equal(canonicalDjSlug("mandy-mondays"), "mandy");
+  });
+
   it("folds Recovery balloon film slugs onto Hot Since 82", () => {
     assert.equal(
       canonicalDjSlug("recovery-hot-air-balloon"),

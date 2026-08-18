@@ -18,6 +18,7 @@ import type { PrismaClient } from "@prisma/client";
 import { isJunkArtistName } from "../../artistName";
 import { isCatalogWorkDj, isTop100DjSlug } from "../../djCatalog";
 import { isBrandHostSlug } from "../../brandHosts";
+import { isProducerHiddenSlug } from "../producerDjReview.data";
 import { youtubeChannelUrl } from "../../social";
 import {
   normalizeOfficialWebsite,
@@ -486,6 +487,7 @@ export async function runLlmHandleResearch(
         !isJunkArtistName(d.name) &&
         isResearchWorthyName(d.name) &&
         !isBrandHostSlug(d.slug) &&
+        !isProducerHiddenSlug(d.slug) &&
         isCatalogWorkDj({
           slug: d.slug,
           isTop100: isTop100DjSlug(d.slug),

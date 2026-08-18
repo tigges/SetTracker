@@ -11,6 +11,7 @@ import {
   isStageArtistName,
 } from "../artistName";
 import { isBrandHostSlug } from "../brandHosts";
+import { isProducerHiddenSlug } from "./producerDjReview.data";
 import { isNonCatalogSet } from "../setBrowse";
 import { curatedEventSocialPatch } from "./eventSocials";
 import {
@@ -33,6 +34,7 @@ export type ResolveJunkDjStats = {
 
 export function classifyJunkDj(name: string, slug = ""): JunkDjKind | null {
   const n = name.replace(/\s+/g, " ").trim();
+  if (isProducerHiddenSlug(slug)) return "other";
   if (isNonSetCredit(n) || isNonSetCredit(slug.replace(/-/g, " "))) {
     return "nonset";
   }

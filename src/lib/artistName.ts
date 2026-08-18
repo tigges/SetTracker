@@ -5,6 +5,7 @@
 
 import { shieldAtomicActs } from "./ingest/atomicActs";
 import { isGenreTagName } from "./genre";
+import { isProducerDiscardName } from "./ingest/producerDjReview.data";
 
 const A11Y_PREFIXES = [
   /^view artist details for\s+/i,
@@ -144,6 +145,7 @@ export function isDestinationFilmHostName(name: string): boolean {
 export function isJunkArtistName(name: string): boolean {
   const n = name.replace(/\s+/g, " ").trim();
   if (!n) return true;
+  if (isProducerDiscardName(n)) return true;
   if (isDestinationFilmHostName(n)) return true;
   if (isMonthYearArtistName(n)) return true;
   if (hasUnshieldedCollab(n)) return true;

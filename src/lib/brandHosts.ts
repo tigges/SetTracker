@@ -9,6 +9,7 @@ export const BRAND_HOST_SLUGS = new Set([
   "defected",
   "boiler-room",
   "mixmag",
+  "mixmag-nl",
   "dj-mag",
   "djmag",
 ]);
@@ -31,6 +32,7 @@ const BRAND_HOST_NAMES = new Set([
   "defected",
   "boiler room",
   "mixmag",
+  "mixmag nl",
   "dj mag",
   "djmag",
 ]);

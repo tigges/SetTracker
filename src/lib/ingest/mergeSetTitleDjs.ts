@@ -32,6 +32,7 @@ import {
   tidyPerformingCredit,
 } from "./artists";
 import { canonicalDjSlug } from "./djSlugAliases";
+import { PRODUCER_DJ_ALIASES } from "./producerDjReview.data";
 import { slugify } from "./types";
 
 export type MergeSetTitleStats = {
@@ -68,6 +69,7 @@ const EXPLICIT_ALIAS: Record<string, string> = {
   "laidback-luke-selects": "laidback-luke",
   "recovery-hot-air-balloon": "hot-since-82",
   "recovery-hot-air-balloon-set": "hot-since-82",
+  ...PRODUCER_DJ_ALIASES,
 };
 
 const MEGA_MIX =
@@ -217,6 +219,13 @@ function displayNameForSlug(slug: string, fallbackName: string): string {
     mochakk: "Mochakk",
     folamour: "Folamour",
     "hot-since-82": "Hot Since 82",
+    "layton-giordani": "Layton Giordani",
+    "mau-p": "Mau P",
+    mandy: "MANDY",
+    alok: "Alok",
+    wooli: "WOOLI",
+    "maceo-plex": "Maceo Plex",
+    soulidan: "Soulidan",
   };
   return known[slug] ?? fallbackName;
 }
