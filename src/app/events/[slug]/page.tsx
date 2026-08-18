@@ -11,6 +11,7 @@ import { VenueNightCard } from "@/components/VenueNightCard";
 import { ATLAS_YEAR, lookupAtlasVenue } from "@/lib/atlas/seed";
 import { chartKicker } from "@/lib/atlas/mapMath";
 import { getAllVenueSlugs, getVenueBySlug } from "@/lib/queries";
+import { placeNightsHeading } from "@/lib/placeTimeline";
 import { pageMeta } from "@/lib/site";
 
 /** Keep the first viewport light — expand for the rest. */
@@ -100,9 +101,7 @@ export default async function EventPage({
         <section className="mb-8">
           <div className="mb-3 flex flex-wrap items-baseline justify-between gap-2">
             <h2 className="text-[13px] font-semibold uppercase tracking-[0.14em] text-muted">
-              {event.nights.some((n) => n.bucket === "current")
-                ? "On now"
-                : "Upcoming nights"}
+              {placeNightsHeading(event.nights)}
             </h2>
             <span className="flex items-center gap-3">
               <span className="mono text-[12px] text-muted2">

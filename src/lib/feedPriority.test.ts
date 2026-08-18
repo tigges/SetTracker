@@ -4,7 +4,7 @@ import { loadDjMagFestivalRankBySlug } from "./djmagFestivalRanks";
 import { loadDjMagTop100RankBySlug } from "./djmagTop100";
 import {
   compareDeepCatalog,
-  compareEventSetPriority,
+  compareEventSetPriorityAt,
   compareFeedPriority,
   isArchiveTitledSet,
   isThisPerformanceYear,
@@ -155,7 +155,7 @@ describe("feedPriority complete → Top 100 → festivals", () => {
     assert.equal(sorted[4]?.densitySeverity, "severe");
   });
 
-  it("event grids prefer identified IDs over all-pink unresolved", () => {
+  it("event grids prefer identified IDs over all-pink unresolved on the same day", () => {
     assert.equal(
       idQualityTier({ identified: 10, unresolved_id: 2 }, 12),
       0,
@@ -163,42 +163,36 @@ describe("feedPriority complete → Top 100 → festivals", () => {
     assert.equal(idQualityTier({ unresolved_id: 20 }, 20), 1);
     assert.equal(idQualityTier({}, 0), 2);
 
+    const day = "2026-07-20T00:00:00.000Z";
+    const cmp = compareEventSetPriorityAt(Date.parse("2026-08-18T12:00:00Z"));
     const sorted = [
       {
-        // Dom Dolla-style: tracks but all unresolved
         densitySeverity: "ok" as const,
-        top100Rank: 5,
-        festivalRank: 2,
-        publishedAt: "2026-07-28T00:00:00.000Z",
+        publishedAt: day,
         trackCount: 20,
         statusCounts: { unresolved_id: 20 },
       },
       {
-        // empty shell
         densitySeverity: "severe" as const,
-        top100Rank: 1,
-        festivalRank: 2,
-        publishedAt: "2026-07-29T00:00:00.000Z",
+        publishedAt: day,
         trackCount: 0,
         statusCounts: {},
       },
       {
-        // Charlotte-style: mostly identified
         densitySeverity: "ok" as const,
-        top100Rank: 9,
-        festivalRank: 2,
-        publishedAt: "2026-07-20T00:00:00.000Z",
+        publishedAt: day,
         trackCount: 18,
         statusCounts: { identified: 15, unresolved_id: 3 },
       },
-    ].sort(compareEventSetPriority);
+    ].sort(cmp);
 
-    assert.equal(sorted[0]?.top100Rank, 9);
-    assert.equal(sorted[1]?.top100Rank, 5);
+    assert.equal(sorted[0]?.statusCounts?.identified, 15);
+    assert.equal(sorted[1]?.statusCounts?.unresolved_id, 20);
     assert.equal(sorted[2]?.densitySeverity, "severe");
   });
 
-  it("event grids keep this year ahead of a denser last-year Relive", () => {
+  it("event grids keep a newer Relive ahead of a denser older one", () => {
+    const cmp = compareEventSetPriorityAt(Date.parse("2026-08-18T12:00:00Z"));
     const sorted = [
       {
         id: "garrix-2025",
@@ -214,30 +208,53 @@ describe("feedPriority complete → Top 100 → festivals", () => {
         trackCount: 8,
         statusCounts: { identified: 4, unresolved_id: 4 },
       },
-    ].sort(compareEventSetPriority);
+    ].sort(cmp);
     assert.equal(sorted[0]?.id, "thin-2026");
     assert.equal(sorted[1]?.id, "garrix-2025");
   });
 
-  it("event grids keep empty this-year shells after playable this-year sets", () => {
+  it("event grids keep empty shells after playable Relives on the same day", () => {
+    const cmp = compareEventSetPriorityAt(Date.parse("2026-08-18T12:00:00Z"));
     const sorted = [
       {
         id: "empty-2026",
         densitySeverity: "severe" as const,
-        publishedAt: "2026-07-29T00:00:00.000Z",
+        publishedAt: "2026-07-20T00:00:00.000Z",
         trackCount: 0,
         statusCounts: {},
       },
       {
         id: "playable-2026",
         densitySeverity: "ok" as const,
-        publishedAt: "2026-07-18T00:00:00.000Z",
+        publishedAt: "2026-07-20T00:00:00.000Z",
         trackCount: 18,
         statusCounts: { identified: 15 },
       },
-    ].sort(compareEventSetPriority);
+    ].sort(cmp);
     assert.equal(sorted[0]?.id, "playable-2026");
     assert.equal(sorted[1]?.id, "empty-2026");
+  });
+
+  it("event grids put a newer empty shell ahead of an older playable Relive", () => {
+    const cmp = compareEventSetPriorityAt(Date.parse("2026-08-18T12:00:00Z"));
+    const sorted = [
+      {
+        id: "empty-newer",
+        densitySeverity: "severe" as const,
+        publishedAt: "2026-08-11T00:00:00.000Z",
+        trackCount: 0,
+        statusCounts: {},
+      },
+      {
+        id: "playable-older",
+        densitySeverity: "ok" as const,
+        publishedAt: "2026-07-20T00:00:00.000Z",
+        trackCount: 18,
+        statusCounts: { identified: 15 },
+      },
+    ].sort(cmp);
+    assert.equal(sorted[0]?.id, "empty-newer");
+    assert.equal(sorted[1]?.id, "playable-older");
   });
 
   it("homepage prefers mostly identified tracklists over sparse IDs", () => {
