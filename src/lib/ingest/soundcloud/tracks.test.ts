@@ -24,6 +24,18 @@ assert.equal(
   "sc-sidepiece-sidepiece-lollapalooza-perry",
 );
 
+const notionPerrySc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url === "https://soundcloud.com/notiondj/notion-live-at-lollapalooza",
+);
+assert.ok(notionPerrySc);
+assert.equal(notionPerrySc.primaryArtist.name, "NOTION");
+assert.equal(notionPerrySc.type, "festival");
+assert.equal(
+  `sc-notiondj-${slugify("notion-live-at-lollapalooza")}`,
+  "sc-notiondj-notion-live-at-lollapalooza",
+);
+
 const horgerTml = SOUNDCLOUD_TRACK_SEEDS.find(
   (s) =>
     s.url === "https://soundcloud.com/marten-horger/tomorrowland-mainstage-2023",

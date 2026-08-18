@@ -127,6 +127,7 @@ import {
   TL_JOHN_SUMMIT_BURNING_MAN_PLAYA_PACKAGE_MIX_2025,
   TL_BRANDON_DESERT_VALLEY_PAROOKAVILLE_GERMANY_2024,
   TL_DVLM_SMASH_THE_HOUSE_RADIO_687_2026,
+  TL_NOTION_PERRYS_LOLLAPALOOZA_CHICAGO_2026,
 } from "../tracklists1001/seeds";
 import type { RawArtist } from "../types";
 import { slugify } from "../types";
@@ -2238,6 +2239,22 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/dr6kbf9/john-summit-bud-light-stage-lollapalooza-united-states-chicago-2026-07-30.html",
     tracklist1001: TL_JOHN_SUMMIT_LOLLAPALOOZA,
+  },
+  {
+    // Official NOTION Perry's Lollapalooza; timed 1001 capture. SC twin:
+    // sc-notiondj-notion-live-at-lollapalooza.
+    video: "https://www.youtube.com/watch?v=9vgSTomhCp8",
+    primaryArtist: dj("NOTION", {
+      accent: "#ff006e",
+      homeCity: "London, UK",
+    }),
+    genre: "UK Garage",
+    type: "festival",
+    title: "NOTION @ Perry's, Lollapalooza Chicago 2026",
+    eventName: "Lollapalooza",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/27dsqm49/notion-perrys-lollapalooza-united-states-chicago-2026-07-31.html",
+    tracklist1001: TL_NOTION_PERRYS_LOLLAPALOOZA_CHICAGO_2026,
   },
   {
     video: "https://www.youtube.com/watch?v=NqX1Fn6MBf0",

@@ -146,6 +146,7 @@ import {
   TL_JOHN_SUMMIT_BURNING_MAN_PLAYA_PACKAGE_MIX_2025,
   TL_BRANDON_DESERT_VALLEY_PAROOKAVILLE_GERMANY_2024,
   TL_DVLM_SMASH_THE_HOUSE_RADIO_687_2026,
+  TL_NOTION_PERRYS_LOLLAPALOOZA_CHICAGO_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   tracklist1001RowsToPlays,
@@ -1860,6 +1861,43 @@ for (let i = 1; i < sth687.length; i++) {
 assert.equal(isWiredTracklistSlug("yt-eVjC42MNgkI"), true);
 assert.equal(
   isWiredTracklistSlug("sc-dimitrivegasandlikemike-smash-the-house-radio-ep-687"),
+  true,
+);
+
+assertSeedClocks(TL_NOTION_PERRYS_LOLLAPALOOZA_CHICAGO_2026);
+assert.equal(TL_NOTION_PERRYS_LOLLAPALOOZA_CHICAGO_2026.length, 28);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-9vgSTomhCp8"],
+  TL_NOTION_PERRYS_LOLLAPALOOZA_CHICAGO_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-notiondj-notion-live-at-lollapalooza"],
+  TL_NOTION_PERRYS_LOLLAPALOOZA_CHICAGO_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "https://soundcloud.com/notiondj/notion-live-at-lollapalooza"
+  ],
+  undefined,
+);
+const notionPerry = tracklist1001RowsToPlays(
+  TL_NOTION_PERRYS_LOLLAPALOOZA_CHICAGO_2026,
+);
+assert.equal(notionPerry.length, 28);
+assert.equal(notionPerry[0]?.provenance, "1001tl");
+assert.equal(notionPerry[0]?.timestamp, 5 * 60 + 40);
+assert.equal(notionPerry[0]?.trackTitle, "Damager");
+assert.equal(notionPerry[27]?.trackTitle, "DARWIN");
+assert.equal(notionPerry[27]?.timestamp, 59 * 60 + 30);
+for (let i = 1; i < notionPerry.length; i++) {
+  assert.ok(
+    (notionPerry[i]!.timestamp ?? 0) > (notionPerry[i - 1]!.timestamp ?? 0),
+    `NOTION Perry's Lollapalooza clocks must increase at index ${i}`,
+  );
+}
+assert.equal(isWiredTracklistSlug("yt-9vgSTomhCp8"), true);
+assert.equal(
+  isWiredTracklistSlug("sc-notiondj-notion-live-at-lollapalooza"),
   true,
 );
 

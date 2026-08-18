@@ -88,7 +88,10 @@ import {
   TL_JOHN_SUMMIT_BURNING_MAN_PLAYA_PACKAGE_MIX_2025,
   TL_BRANDON_DESERT_VALLEY_PAROOKAVILLE_GERMANY_2024,
 } from "./festivalCaptures20260817";
-import { TL_DVLM_SMASH_THE_HOUSE_RADIO_687_2026 } from "./festivalCaptures20260818";
+import {
+  TL_DVLM_SMASH_THE_HOUSE_RADIO_687_2026,
+  TL_NOTION_PERRYS_LOLLAPALOOZA_CHICAGO_2026,
+} from "./festivalCaptures20260818";
 
 export {
   TL_ALESSO_TML_WE2_2026,
@@ -166,6 +169,7 @@ export {
   TL_JOHN_SUMMIT_BURNING_MAN_PLAYA_PACKAGE_MIX_2025,
   TL_BRANDON_DESERT_VALLEY_PAROOKAVILLE_GERMANY_2024,
   TL_DVLM_SMASH_THE_HOUSE_RADIO_687_2026,
+  TL_NOTION_PERRYS_LOLLAPALOOZA_CHICAGO_2026,
 };
 
 function formatClock(sec: number): string {
@@ -4703,6 +4707,9 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-eVjC42MNgkI": TL_DVLM_SMASH_THE_HOUSE_RADIO_687_2026,
   "sc-dimitrivegasandlikemike-smash-the-house-radio-ep-687":
     TL_DVLM_SMASH_THE_HOUSE_RADIO_687_2026,
+  "yt-9vgSTomhCp8": TL_NOTION_PERRYS_LOLLAPALOOZA_CHICAGO_2026,
+  "sc-notiondj-notion-live-at-lollapalooza":
+    TL_NOTION_PERRYS_LOLLAPALOOZA_CHICAGO_2026,
 };
 
 /** Sanity: every seeded clock must parse. */

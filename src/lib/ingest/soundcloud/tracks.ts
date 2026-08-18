@@ -68,6 +68,18 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     minDurationSec: 15 * 60,
   },
   {
+    // Official NOTION Perry's Lollapalooza; 1001TL wired via
+    // sc-notiondj-notion-live-at-lollapalooza (same list as yt-9vgSTomhCp8).
+    url: "https://soundcloud.com/notiondj/notion-live-at-lollapalooza",
+    primaryArtist: dj("NOTION", {
+      accent: "#ff006e",
+      homeCity: "London, UK",
+    }),
+    genre: "UK Garage",
+    type: "festival",
+    minDurationSec: 15 * 60,
+  },
+  {
     // Official Horger upload; 1001TL wired via
     // sc-marten-horger-tomorrowland-mainstage-2023.
     url: "https://soundcloud.com/marten-horger/tomorrowland-mainstage-2023",
