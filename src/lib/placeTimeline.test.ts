@@ -3,8 +3,11 @@ import { describe, it } from "node:test";
 import {
   comparePlaceNights,
   comparePlaceSetTimes,
+  groupPlaceSetsByYear,
   placeNightsHeading,
+  setBandYear,
   sortPlaceNights,
+  sortPlaceSets,
 } from "./placeTimeline";
 
 const NOW = Date.parse("2026-08-18T12:00:00Z");
@@ -57,6 +60,116 @@ describe("placeTimeline", () => {
     assert.deepEqual(
       sorted.map((s) => s.id),
       ["today", "future", "3d", "2025", "2023"],
+    );
+  });
+
+  it("bands a remapped 2018 title onto 2018, not the 2026 edition", () => {
+    assert.equal(
+      setBandYear(
+        {
+          title: "Alan Walker | Tomorrowland Belgium 2018",
+          publishedAt: "2026-08-01T00:00:00.000Z",
+          performedAt: "2026-07-18T00:00:00.000Z",
+        },
+        NOW,
+      ),
+      2018,
+    );
+    assert.equal(
+      setBandYear(
+        {
+          title: "Lost Frequencies | Tomorrowland 2024",
+          publishedAt: "2026-08-18T00:00:00.000Z",
+        },
+        NOW,
+      ),
+      2024,
+    );
+    assert.equal(
+      setBandYear(
+        { title: "Main Stage — Weekend 1", publishedAt: "2026-07-20T00:00:00.000Z" },
+        NOW,
+      ),
+      2026,
+    );
+  });
+
+  it("groups place sets into year bands and keeps 2018 out of 2026", () => {
+    const bands = groupPlaceSetsByYear(
+      [
+        {
+          id: "walker-2018",
+          title: "Alan Walker | Tomorrowland Belgium 2018",
+          publishedAt: "2026-08-01T00:00:00.000Z",
+          performedAt: "2026-07-18T00:00:00.000Z",
+        },
+        {
+          id: "today",
+          title: "Alok | Tomorrowland 2026",
+          publishedAt: "2026-08-18T00:00:00.000Z",
+        },
+        {
+          id: "future",
+          title: "Amelie Lens | Tomorrowland 2026",
+          publishedAt: "2026-08-20T00:00:00.000Z",
+        },
+        {
+          id: "done",
+          title: "Charlotte de Witte | Tomorrowland 2026",
+          publishedAt: "2026-08-15T00:00:00.000Z",
+        },
+        {
+          id: "garrix-2025",
+          title: "Martin Garrix | Tomorrowland 2025",
+          publishedAt: "2025-07-26T00:00:00.000Z",
+        },
+        {
+          id: "older-2025",
+          title: "FISHER | Tomorrowland 2025",
+          publishedAt: "2025-07-18T00:00:00.000Z",
+        },
+      ],
+      NOW,
+    );
+    assert.deepEqual(
+      bands.map((b) => ({ year: b.year, current: b.current, ids: b.sets.map((s) => s.id) })),
+      [
+        { year: 2026, current: true, ids: ["today", "future", "done"] },
+        { year: 2025, current: false, ids: ["garrix-2025", "older-2025"] },
+        { year: 2018, current: false, ids: ["walker-2018"] },
+      ],
+    );
+    assert.deepEqual(
+      sortPlaceSets(bands.flatMap((b) => b.sets), NOW).map((s) => s.id),
+      ["today", "future", "done", "garrix-2025", "older-2025", "walker-2018"],
+    );
+  });
+
+  it("uses completeness only as a same-day tie-break inside a band", () => {
+    const bands = groupPlaceSetsByYear(
+      [
+        {
+          id: "thin",
+          title: "Thin | Tomorrowland 2025",
+          publishedAt: "2025-07-26T00:00:00.000Z",
+        },
+        {
+          id: "full",
+          title: "Full | Tomorrowland 2025",
+          publishedAt: "2025-07-26T00:00:00.000Z",
+        },
+        {
+          id: "newer-empty",
+          title: "Empty | Tomorrowland 2025",
+          publishedAt: "2025-07-27T00:00:00.000Z",
+        },
+      ],
+      NOW,
+      (s) => (s.id === "full" ? 0 : 1),
+    );
+    assert.deepEqual(
+      bands[0]?.sets.map((s) => s.id),
+      ["newer-empty", "full", "thin"],
     );
   });
 });

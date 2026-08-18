@@ -3,6 +3,7 @@
  */
 
 import {
+  isRadioFiller,
   pickRadarPicks,
   radarPickScore,
   type RadarPickFields,
@@ -78,6 +79,7 @@ function pickRecentSets(
     .filter(
       (s) =>
         isCompleteTracklist(s) &&
+        !isRadioFiller(s) &&
         withinDays(s.publishedAt, lookbackDays, nowMs) &&
         !excludeIds?.has(s.id),
     )
@@ -340,6 +342,7 @@ export function newThisWeekSets(
     feed.filter(
       (s) =>
         isCompleteTracklist(s) &&
+        !isRadioFiller(s) &&
         withinDays(s.publishedAt, days, nowMs) &&
         !isFestivalStorySet(s, nowMs) &&
         !exclude.has(s.id),

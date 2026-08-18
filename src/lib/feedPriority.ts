@@ -8,23 +8,32 @@
  *   1) Tracklist completeness (ok → thin → severe; empty last)
  *   2) ID coverage (mostly identified → partial → sparse)
  *   3) Performance year (performedAt / edition year / publishedAt — never ingest)
- *   4) DJ Mag Top 100 DJs (lower chart rank first)
- *   5) DJ Mag Top 100 Festivals (linked event; lower rank first)
- *   6) Venue class: festival → club → livestream → radio → other
- *   7) Performance date
+ *   4) Live room (festival / club) ahead of radio; uncharted radio last
+ *   5) DJ Mag Top 100 DJs (lower chart rank first)
+ *   6) DJ Mag Top 100 Festivals (linked event; lower rank first)
+ *   7) Venue class: festival → club → livestream → radio → other
+ *   8) Performance date
  *
- * Deep catalog leftovers (`compareDeepCatalog`) sort date first, then ID
- * coverage, then density, then chart — so Guetta Ultra 2024 does not sit on
- * page 1 ahead of 2026 sets, but a mostly-orange bar beats a mostly-grey one.
+ * Deep catalog leftovers (`compareDeepCatalog`) put physical live ahead of
+ * radio fillers, then date, IDs, density, chart. Uncharted radio with a
+ * reasonable ID fill is leftover fodder — not a spotlight card.
+ * Radar rejects radio. New this week drops uncharted radio.
  *
- * Event/festival profile grids use `compareEventSetPriority` — today, then
- * upcoming soonest-first, then past latest-first. Completeness is a same-day
- * tie-break only.
+ * Event/festival profile grids (`sortEventSets`) list this year first
+ * (today → upcoming → latest finished), then older title-years descending.
+ * Completeness is a same-day tie-break only. No year headings.
  */
 
 import { DENSITY_MIN_DURATION_SEC, type DensitySeverity } from "./setDensity";
-import { comparePlaceSetTimes } from "./placeTimeline";
+import {
+  comparePlaceSetTimes,
+  groupPlaceSetsByYear,
+  sortPlaceSets,
+  yearFromSetTitle,
+} from "./placeTimeline";
 import type { IdStatus } from "./status";
+
+export { yearFromSetTitle };
 
 export type VenueTier =
   | "festival"
@@ -70,6 +79,39 @@ const VENUE_RANK: Record<VenueTier, number> = {
   other: 4,
 };
 
+/** Festival or club — a physical room, not a studio show. */
+export function isPhysicalLive(s: {
+  venueTier?: VenueTier | null;
+}): boolean {
+  return s.venueTier === "festival" || s.venueTier === "club";
+}
+
+/**
+ * Weekly radio from a DJ who is not on the current Top 100.
+ * Identified episodes fill Deep catalog after live sets.
+ */
+export function isRadioFiller(s: {
+  venueTier?: VenueTier | null;
+  top100Rank?: number | null;
+}): boolean {
+  return s.venueTier === "radio" && s.top100Rank == null;
+}
+
+/**
+ * Homepage prominence. Lower = more visible.
+ * 0 live room · 1 livestream · 2 chart radio / mix · 3 uncharted radio filler
+ */
+export function displayLane(s: {
+  venueTier?: VenueTier | null;
+  top100Rank?: number | null;
+}): number {
+  if (isPhysicalLive(s)) return 0;
+  if (s.venueTier === "livestream") return 1;
+  if (s.venueTier === "radio" && s.top100Rank != null) return 2;
+  if (s.venueTier === "radio") return 3;
+  return 2;
+}
+
 /** Map Event.kind (preferred) or Set.type fallback → venue tier. */
 export function resolveVenueTier(
   eventKind?: string | null,
@@ -98,20 +140,6 @@ export type FeedPriorityFields = {
   statusCounts?: StatusCountFields;
   trackCount?: number | null;
 };
-
-/** Event year printed in the set title (`TML 2018`, `Ultra Miami 2023`). */
-export function yearFromSetTitle(
-  title: string | null | undefined,
-  nowMs = Date.now(),
-): number | null {
-  if (!title) return null;
-  const max = new Date(nowMs).getUTCFullYear() + 1;
-  const years = [...title.matchAll(/\b(20\d{2})\b/g)]
-    .map((m) => Number(m[1]))
-    .filter((n) => n >= 2005 && n <= max);
-  if (!years.length) return null;
-  return years[years.length - 1]!;
-}
 
 /**
  * Title names an older festival year and none of the printed years are
@@ -164,7 +192,7 @@ export function setPerformanceYear(
   return Number.isFinite(y) ? y : new Date(nowMs).getUTCFullYear();
 }
 
-/** Within an age section — complete → IDs → year → Top 100 DJ → top festival → venue → date. */
+/** Within an age section — complete → IDs → year → live room → chart → date. */
 export function compareFeedPriority(
   a: FeedPriorityFields,
   b: FeedPriorityFields,
@@ -180,6 +208,10 @@ export function compareFeedPriority(
   const ya = setPerformanceYear(a);
   const yb = setPerformanceYear(b);
   if (ya !== yb) return yb - ya;
+
+  const la = displayLane(a);
+  const lb = displayLane(b);
+  if (la !== lb) return la - lb;
 
   const ta = a.top100Rank ?? 999;
   const tb = b.top100Rank ?? 999;
@@ -200,11 +232,15 @@ export function compareFeedPriority(
   return setPerformanceTime(b) - setPerformanceTime(a);
 }
 
-/** Leftover Deep catalog: newest performance first, then IDs, then density, then chart. */
+/** Leftover Deep catalog: live rooms first, then date, IDs, density, chart. */
 export function compareDeepCatalog(
   a: FeedPriorityFields,
   b: FeedPriorityFields,
 ): number {
+  const la = displayLane(a);
+  const lb = displayLane(b);
+  if (la !== lb) return la - lb;
+
   const ta = setPerformanceTime(a);
   const tb = setPerformanceTime(b);
   if (ta !== tb) return tb - ta;
@@ -297,6 +333,7 @@ export function idQualityTier(
 export type EventSetPriorityFields = FeedPriorityFields & {
   statusCounts?: StatusCountFields;
   trackCount?: number | null;
+  title?: string | null;
 };
 
 function placeSetQuality(s: EventSetPriorityFields): number {
@@ -324,6 +361,21 @@ export function compareEventSetPriority(
   b: EventSetPriorityFields,
 ): number {
   return compareEventSetPriorityAt(Date.now())(a, b);
+}
+
+/** Place-page set grid: title-year order, newest first. Never remapped edition year. */
+export function groupEventSetsByYear<T extends EventSetPriorityFields>(
+  sets: T[],
+  nowMs: number,
+) {
+  return groupPlaceSetsByYear(sets, nowMs, placeSetQuality);
+}
+
+export function sortEventSets<T extends EventSetPriorityFields>(
+  sets: T[],
+  nowMs: number,
+) {
+  return sortPlaceSets(sets, nowMs, placeSetQuality);
 }
 
 const DAY_MS = 24 * 60 * 60 * 1000;
@@ -368,7 +420,7 @@ export function radarPickScore(s: RadarPickFields, nowMs = Date.now()): number {
   if (s.venueTier === "festival") score += 12;
   else if (s.venueTier === "club") score += 8;
   else if (s.venueTier === "livestream") score += 4;
-  else if (s.venueTier === "radio") score += 2;
+  else if (s.venueTier === "radio") score += s.top100Rank != null ? 2 : -8;
 
   const ageDays = (nowMs - setPerformanceTime(s)) / DAY_MS;
   if (ageDays <= 90) score += 38;
@@ -408,6 +460,7 @@ export function isRadarCandidate(
     return false;
   }
   if (idCoverageTier(s.statusCounts, s.trackCount ?? 0) > 1) return false;
+  if (s.venueTier === "radio") return false;
   return s.top100Rank != null || s.festivalRank != null || s.clubRank != null;
 }
 
