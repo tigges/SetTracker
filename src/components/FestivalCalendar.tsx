@@ -244,7 +244,8 @@ export function FestivalCalendar({
                       meta={bits.join(" · ")}
                       relives={setCounts[loc.eventSlug] ?? 0}
                       next={
-                        next
+                        next &&
+                        (next.bucket === "current" || next.bucket === "upcoming")
                           ? { startsAt: next.startsAt, title: next.title }
                           : null
                       }
