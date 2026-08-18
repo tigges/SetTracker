@@ -179,6 +179,12 @@ export async function getStatsHealth(): Promise<StatsHealth> {
     festival: 0,
     club: 0,
   };
+  const clubsNoArt = events.filter(
+    (e) =>
+      e.kind === "club" &&
+      isVenueListed({ setCount: e._count.sets, website: e.website }) &&
+      !e.imageUrl?.trim(),
+  ).length;
   for (const e of events) {
     const row = rowFromEvent({
       slug: e.slug,
@@ -304,6 +310,11 @@ export async function getStatsHealth(): Promise<StatsHealth> {
           href: "#clubs",
           label: "Link / capture a set",
           count: clubs.slices.find((s) => s.key === "no_set")?.count ?? 0,
+        },
+        {
+          href: "/exports/clubs-need-complete.csv",
+          label: "Fill artwork",
+          count: clubsNoArt,
         },
         {
           href: "/exports/clubs-need-complete.csv",

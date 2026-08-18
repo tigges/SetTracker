@@ -16,4 +16,12 @@ const rel = extractOgImage(
 );
 assert.equal(rel, "https://www.berghain.berlin/static/berghain/og-image.jpg");
 
+assert.equal(
+  extractOgImage(
+    `<meta property="og:image" content="url" />`,
+    "https://www.amnesia.es/en/",
+  ),
+  null,
+);
+
 console.log("ogImage.test.ts ok");

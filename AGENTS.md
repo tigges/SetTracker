@@ -144,6 +144,12 @@ The producer will say if this bundling rule is abolished.
  already have art. Sets fall back to the primary DJ image. The Pages workflow
  runs this only after a curated ingest on that deploy. UI uses `EntityThumb`
  with monogram fallback.
+  **Venue / club thumbs (habit):** every `verify-urls` / Pages pass fills
+  null `Event.imageUrl` — curated `KNOWN_EVENT_IMAGES`, then official-site
+  Open Graph (`EVENT_OFFICIAL_SITES` + calendars + `KNOWN_EVENTS.website`),
+  then Wikipedia summary art (name must match), then latest set art.
+  Deezer is never used for venues. Leftovers stay on
+  `/exports/clubs-need-complete.csv` for Claude. Do not use DJ Mag photos.
 - **Fingerprint enrich:** `npm run enrich:fingerprint` via `catalog-enrich.yml`
   in **modes** (workflow_dispatch `mode`, or `data/enrich-request` bump = `acr`):
   `full` (weekly cron — thumbs + MusicBrainz + deep ACR 40×20),

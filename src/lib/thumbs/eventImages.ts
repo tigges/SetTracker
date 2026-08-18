@@ -8,8 +8,11 @@
  */
 
 import type { PrismaClient } from "@prisma/client";
+import { KNOWN_EVENTS } from "../ingest/events";
+import { VENUE_CALENDAR_SOURCES } from "../ingest/discovery/venueCalendars/sources";
 import { isWeakOfficialUrl } from "../officialUrls";
 import { resolveOgImage } from "./ogImage";
+import { resolveWikipediaImage } from "./wikipediaImage";
 
 /** Hand-picked official share images for flagship venues/festivals. */
 export const KNOWN_EVENT_IMAGES: Record<string, string> = {
@@ -65,6 +68,19 @@ export const KNOWN_EVENT_IMAGES: Record<string, string> = {
     "https://ministryofsound.com/wp-content/uploads/2025/12/home-page-banner-1-1024x582.png",
   dreamstate:
     "https://d3vhc53cl8e8km.cloudfront.net/hello-staging/wp-content/uploads/2025/11/26203958/dssc1.jpg",
+  "warehouse-project":
+    "https://thewarehouseproject.com/wp-content/uploads/2026/05/WHP-2026-ograph-image.jpg",
+  "amnesia-ibiza":
+    "https://upload.wikimedia.org/wikipedia/commons/9/99/Amnesia_ibiza.jpeg",
+  "pacha-ibiza":
+    "https://upload.wikimedia.org/wikipedia/en/f/f1/Pacha_Logo_New.png",
+  "silo-dallas": "https://silodallas.com/og-image.png",
+  "concourse-project":
+    "https://concourseproject.com/wp-content/uploads/2026/02/13_1920x900-Crop-1.webp",
+  "the-concourse-project":
+    "https://concourseproject.com/wp-content/uploads/2026/02/13_1920x900-Crop-1.webp",
+  "avalon-hollywood":
+    "https://avalonhollywood.com/wp-content/uploads/2024/06/041224_Excision_Avalon_TroyAcevedo_photos-57.jpg",
 };
 
 /**
@@ -90,8 +106,15 @@ export const EVENT_OFFICIAL_SITES: Record<string, string> = {
   elrow: "https://elrow.com/",
   "pacha-ibiza": "https://www.pacha.com/",
   "cavo-paradiso": "https://www.cavoparadiso.gr/",
-  "warehouse-project": "https://warehouseproject.com/",
+  "warehouse-project": "https://thewarehouseproject.com/",
   drumsheds: "https://drumsheds.com/",
+  "dc-10": "https://www.dc10ibiza.com/",
+  "academy-la": "https://www.academyla.com/",
+  "exchange-la": "https://exchangela.com/",
+  "silo-dallas": "https://www.silodallas.com/",
+  "concourse-project": "https://www.concourseproject.com/",
+  "the-concourse-project": "https://www.concourseproject.com/",
+  "avalon-hollywood": "https://www.avalonhollywood.com/",
   "rex-club": "https://www.rexclub.com/",
   "sub-club": "https://www.subclub.co.uk/",
   "ultra-miami": "https://ultramusicfestival.com/",
@@ -119,17 +142,45 @@ export type EventImageStats = {
   missed: number;
   curated: number;
   og: number;
+  wiki: number;
   fromSet: number;
 };
 
+const CALENDAR_SITES: Record<string, string> = Object.fromEntries(
+  VENUE_CALENDAR_SOURCES.map((s) => [s.venueSlug, s.website]),
+);
+
+/** Official pages to scrape for OG — curated maps, calendars, then Event.website. */
+export function officialEventPages(
+  slug: string,
+  website?: string | null,
+): string[] {
+  const pages = [
+    EVENT_OFFICIAL_SITES[slug],
+    CALENDAR_SITES[slug],
+    KNOWN_EVENTS[slug]?.website,
+    website && !isWeakOfficialUrl(website) ? website : null,
+  ];
+  return [...new Set(pages.filter((u): u is string => Boolean(u)))];
+}
+
 export async function fillEventImages(
   prisma: PrismaClient,
-  opts?: { delayMs?: number; sleep?: (ms: number) => Promise<void> },
+  opts?: {
+    delayMs?: number;
+    sleep?: (ms: number) => Promise<void>;
+    resolveOg?: typeof resolveOgImage;
+    resolveWiki?: typeof resolveWikipediaImage;
+    wikiLimit?: number;
+  },
 ): Promise<EventImageStats> {
   const delay = opts?.delayMs ?? 80;
   const sleep =
     opts?.sleep ??
     ((ms: number) => new Promise((r) => setTimeout(r, ms)));
+  const resolveOg = opts?.resolveOg ?? resolveOgImage;
+  const resolveWiki = opts?.resolveWiki ?? resolveWikipediaImage;
+  const wikiLimit = opts?.wikiLimit ?? Number(process.env.EVENT_WIKI_LIMIT ?? 40);
 
   const stats: EventImageStats = {
     scanned: 0,
@@ -137,33 +188,38 @@ export async function fillEventImages(
     missed: 0,
     curated: 0,
     og: 0,
+    wiki: 0,
     fromSet: 0,
   };
 
   const events = await prisma.event.findMany({
     where: { OR: [{ imageUrl: null }, { imageUrl: "" }] },
-    select: { id: true, slug: true, name: true, website: true },
+    select: { id: true, slug: true, name: true, kind: true, website: true },
     orderBy: { name: "asc" },
   });
 
+  let wikiLeft = wikiLimit;
   for (const ev of events) {
     stats.scanned += 1;
     let url: string | null = KNOWN_EVENT_IMAGES[ev.slug] ?? null;
-    let source: "curated" | "og" | "set" | null = url ? "curated" : null;
+    let source: "curated" | "og" | "wiki" | "set" | null = url ? "curated" : null;
 
     if (!url) {
-      const candidates = [
-        EVENT_OFFICIAL_SITES[ev.slug],
-        ev.website && !isWeakOfficialUrl(ev.website) ? ev.website : null,
-      ].filter((u): u is string => !!u);
-      for (const page of [...new Set(candidates)]) {
-        url = await resolveOgImage(page);
+      for (const page of officialEventPages(ev.slug, ev.website)) {
+        url = await resolveOg(page);
         await sleep(delay);
         if (url) {
           source = "og";
           break;
         }
       }
+    }
+
+    if (!url && wikiLeft > 0 && (ev.kind === "club" || ev.kind === "festival")) {
+      wikiLeft -= 1;
+      url = await resolveWiki(ev.name, ev.kind);
+      await sleep(delay);
+      if (url) source = "wiki";
     }
 
     if (!url) {
@@ -189,6 +245,7 @@ export async function fillEventImages(
       stats.filled += 1;
       if (source === "curated") stats.curated += 1;
       else if (source === "og") stats.og += 1;
+      else if (source === "wiki") stats.wiki += 1;
       else if (source === "set") stats.fromSet += 1;
       console.log(`  ✓ event ${ev.slug} (${source})`);
     } else {

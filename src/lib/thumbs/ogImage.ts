@@ -31,9 +31,21 @@ export function extractOgImage(html: string, pageUrl: string): string | null {
     const hit = m?.[1];
     if (!hit) continue;
     const abs = absUrl(pageUrl, hit);
-    if (abs) return abs;
+    if (abs && isUsableOgImage(abs)) return abs;
   }
   return null;
+}
+
+/** Drop placeholder og:image values like content="url". */
+export function isUsableOgImage(url: string): boolean {
+  try {
+    const u = new URL(url);
+    const path = u.pathname.replace(/\/+$/, "");
+    if (!path || path === "/url" || /\/url$/i.test(path)) return false;
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 export async function resolveOgImage(
