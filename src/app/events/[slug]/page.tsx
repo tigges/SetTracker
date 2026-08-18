@@ -163,7 +163,7 @@ export default async function EventPage({
       {event.sets.length === 0 ? (
         <p className="text-[14px] text-muted">
           {event.nights.length > 0
-            ? "No Relives linked yet — nights above are from the official calendar."
+            ? "No sets linked yet — nights above are from the official calendar."
             : "No sets linked yet — check back after the next deep catalog refresh."}
         </p>
       ) : (
@@ -173,7 +173,7 @@ export default async function EventPage({
               Sets
             </h2>
             <span className="mono text-[12px] text-muted2">
-              {event.sets.length}
+              {event.setCount}
             </span>
           </div>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">

@@ -44,7 +44,46 @@ export function sortPlaceNights<T extends { startsAt: string; bucket: string }>(
 export type PlaceSetTimeFields = {
   publishedAt: Date | string;
   performedAt?: Date | string | null;
+  title?: string | null;
 };
+
+export type PlaceSetYearBand<T> = {
+  year: number;
+  current: boolean;
+  sets: T[];
+};
+
+/** Event year printed in the set title (`TML 2018`, `Ultra Miami 2023`). */
+export function yearFromSetTitle(
+  title: string | null | undefined,
+  nowMs = Date.now(),
+): number | null {
+  if (!title) return null;
+  const max = new Date(nowMs).getUTCFullYear() + 1;
+  const years = [...title.matchAll(/\b(20\d{2})\b/g)]
+    .map((m) => Number(m[1]))
+    .filter((n) => n >= 2005 && n <= max);
+  if (!years.length) return null;
+  return years[years.length - 1]!;
+}
+
+/**
+ * Place-page year band. Last 20xx in the title, else performedAt year,
+ * else upload year. Never a remapped edition year.
+ */
+export function setBandYear(
+  s: PlaceSetTimeFields,
+  nowMs = Date.now(),
+): number {
+  const titled = yearFromSetTitle(s.title, nowMs);
+  if (titled != null) return titled;
+  if (s.performedAt) {
+    const y = new Date(s.performedAt).getUTCFullYear();
+    if (Number.isFinite(y)) return y;
+  }
+  const y = new Date(s.publishedAt).getUTCFullYear();
+  return Number.isFinite(y) ? y : new Date(nowMs).getUTCFullYear();
+}
 
 function setTimeMs(s: PlaceSetTimeFields): number {
   if (s.performedAt) {
@@ -75,4 +114,65 @@ export function comparePlaceSetTimes(
   if (la === 1 && aDay !== bDay) return aDay - bDay;
   if (la === 2 && aDay !== bDay) return bDay - aDay;
   return quality;
+}
+
+/**
+ * This year: from-today clock. Older bands: date descending.
+ * `quality` is only a same-day tie-break (lower wins).
+ */
+export function comparePlaceSetInBand(
+  a: PlaceSetTimeFields,
+  b: PlaceSetTimeFields,
+  nowMs: number,
+  currentYear: boolean,
+  quality = 0,
+): number {
+  if (currentYear) return comparePlaceSetTimes(a, b, nowMs, quality);
+  const aDay = utcDayMs(setTimeMs(a));
+  const bDay = utcDayMs(setTimeMs(b));
+  if (aDay !== bDay) return bDay - aDay;
+  return quality;
+}
+
+/** Newest year first. Used to order the seamless grid — not as UI headings. */
+export function groupPlaceSetsByYear<T extends PlaceSetTimeFields>(
+  sets: T[],
+  nowMs: number,
+  qualityOf: (s: T) => number = () => 0,
+): PlaceSetYearBand<T>[] {
+  const currentYear = new Date(nowMs).getUTCFullYear();
+  const buckets = new Map<number, T[]>();
+  for (const s of sets) {
+    const year = setBandYear(s, nowMs);
+    const list = buckets.get(year);
+    if (list) list.push(s);
+    else buckets.set(year, [s]);
+  }
+  return [...buckets.entries()]
+    .sort(([a], [b]) => b - a)
+    .map(([year, items]) => {
+      const current = year === currentYear;
+      return {
+        year,
+        current,
+        sets: [...items].sort((a, b) =>
+          comparePlaceSetInBand(
+            a,
+            b,
+            nowMs,
+            current,
+            qualityOf(a) - qualityOf(b),
+          ),
+        ),
+      };
+    });
+}
+
+/** This year (from-today clock), then older years date-descending. */
+export function sortPlaceSets<T extends PlaceSetTimeFields>(
+  sets: T[],
+  nowMs: number,
+  qualityOf: (s: T) => number = () => 0,
+): T[] {
+  return groupPlaceSetsByYear(sets, nowMs, qualityOf).flatMap((b) => b.sets);
 }

@@ -26,7 +26,7 @@ import { relatedSlugsFor } from "@/lib/ingest/discovery/relations";
 import { aliasSlugsFor, resolveSetSlug } from "@/lib/ingest/sourceRemaps";
 import { canonicalDjSlug, DJ_SLUG_ALIASES } from "@/lib/ingest/djSlugAliases";
 import {
-  compareEventSetPriorityAt,
+  sortEventSets,
   nearDuplicateKey,
   resolvedIdCount,
 } from "@/lib/feedPriority";
@@ -1571,9 +1571,7 @@ export async function getVenueBySlug(slug: string, nowMs = Date.now()) {
         venueTier: ranks.venueTier,
         densitySeverity: ranks.densitySeverity,
       } satisfies FeedItem;
-    })
-    // Today → upcoming ↑ → past ↓; completeness is same-day only.
-    .sort(compareEventSetPriorityAt(nowMs));
+    });
 
   return {
     slug: event.slug,
@@ -1588,7 +1586,7 @@ export async function getVenueBySlug(slug: string, nowMs = Date.now()) {
     },
     lineupArtists,
     setCount: event.sets.length,
-    sets,
+    sets: sortEventSets(sets, nowMs),
     nights,
   };
 }
