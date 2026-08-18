@@ -87,6 +87,7 @@ export const EVENT_OFFICIAL_SITES: Record<string, string> = {
   defected: "https://defected.com/",
   "ministry-of-sound": "https://www.ministryofsound.com/",
   "amnesia-ibiza": "https://www.amnesia.es/en/",
+  elrow: "https://elrow.com/",
   "pacha-ibiza": "https://www.pacha.com/",
   "cavo-paradiso": "https://www.cavoparadiso.gr/",
   "warehouse-project": "https://warehouseproject.com/",

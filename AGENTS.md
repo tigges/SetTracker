@@ -124,7 +124,9 @@ The producer will say if this bundling rule is abolished.
   `festivals-need-complete.csv`, `clubs-need-complete.csv`, plus combined
   `entities-need-complete.csv` / `.jsonl` and `claude-entity-complete-prompt.md`.
   `/stats` links **Export for Claude complete**. Never invent `@slug` handles;
-  DJ Mag / 6am / Wikipedia are not official websites. Verify-then-pin.
+  DJ Mag / 6am / Wikipedia are not official websites. Verify-then-pin
+  (`data/entity-complete-pins.json`, fill-null on verify-urls). Event has no
+  `youtube` column — drop venue YouTube rows. Empty / “cannot confirm” rows stay out.
   **Track IDs:** `npm run research:track-ids` resolves ISRCs from held 1001
   names via Deezer, MusicBrainz (on unless `TRACK_ID_MB=0` — MBID / ISRC /
   Beatport url-rels), TrackRadar public archive (no key; MCP needs

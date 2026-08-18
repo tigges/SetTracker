@@ -25,6 +25,7 @@ import { mergeSetTitleDjs } from "./mergeSetTitleDjs";
 import { repairInsomniacMixPlayback } from "./insomniac/repairMixPlayback";
 import { applyDjSocialPins } from "./djSocialPins";
 import { applyTrackIdPins } from "./identify/trackIdPins";
+import { applyEntityCompletePins } from "./entityCompletePins";
 import {
   curatedEventSocialPatch,
   eventSocialCleanupPatch,
@@ -339,6 +340,14 @@ export async function applyKnownUrlFixes(prisma: PrismaClient): Promise<number> 
     if (Object.keys(patch).length === 0) continue;
     await prisma.event.update({ where: { id: e.id }, data: patch });
     n += 1;
+  }
+
+  const entities = await applyEntityCompletePins(prisma);
+  n += entities.filled;
+  if (entities.filled) {
+    console.log(
+      `[verify-urls] entity complete pins matched=${entities.matched} filled=${entities.filled}`,
+    );
   }
 
   // Merge accidental edc-las-vegas fork into canonical edc-lv.

@@ -46,8 +46,12 @@ Rules:
 - Use null when unsure. confidence is high | medium | low.
 - Do not invent 1001Tracklists URLs, ISRCs, or set cues.
 
-Output JSONL only:
+Output JSONL:
 {"kind":"dj","slug":"…","imageUrl":null,"website":null,"instagram":null,"youtube":null,"soundcloud":null,"twitter":null,"confidence":"low"}
+
+Or CSV (one row per field):
+kind,slug,name,field,value,evidence
+Leave value empty when you cannot confirm. Do not invent a row to look complete.
 `;
 
 export function hasImage(row: Pick<ExportEntityRow, "imageUrl">): boolean {
