@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { BrandLogo } from "@/components/BrandMark";
 import { EntityThumb } from "@/components/EntityThumb";
 import { VisualTeaser, type TeaserFace } from "@/components/VisualTeaser";
 import { setHostHeadline } from "@/lib/brandHosts";
@@ -239,8 +240,8 @@ export function HomeLanding({
         <div className="hero-scrim absolute inset-0" aria-hidden />
         <div className="relative z-10 flex min-h-[22rem] flex-col justify-end gap-5 p-6 sm:min-h-[28rem] sm:p-10">
           <div className="max-w-xl">
-            <p className="eyebrow hero-title">setradar.ai</p>
-            <h1 className="hero-title mt-2 text-4xl font-extrabold tracking-tight text-ink sm:text-5xl">
+            <BrandLogo className="h-12 w-[8.25rem] sm:h-14 sm:w-[9.6rem]" />
+            <h1 className="hero-title mt-3 text-4xl font-extrabold tracking-tight text-ink sm:text-5xl">
               The night, as a graph.
             </h1>
             <p className="hero-title mt-3 max-w-md text-[15px] leading-relaxed text-muted">
