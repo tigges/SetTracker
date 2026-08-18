@@ -26,7 +26,7 @@ import { relatedSlugsFor } from "@/lib/ingest/discovery/relations";
 import { aliasSlugsFor, resolveSetSlug } from "@/lib/ingest/sourceRemaps";
 import { canonicalDjSlug, DJ_SLUG_ALIASES } from "@/lib/ingest/djSlugAliases";
 import {
-  groupEventSetsByYear,
+  sortEventSets,
   nearDuplicateKey,
   resolvedIdCount,
 } from "@/lib/feedPriority";
@@ -1572,8 +1572,6 @@ export async function getVenueBySlug(slug: string, nowMs = Date.now()) {
       } satisfies FeedItem;
     });
 
-  const setBands = groupEventSetsByYear(sets, nowMs);
-
   return {
     slug: event.slug,
     name: event.name,
@@ -1587,8 +1585,7 @@ export async function getVenueBySlug(slug: string, nowMs = Date.now()) {
     },
     lineupArtists,
     setCount: event.sets.length,
-    sets: setBands.flatMap((band) => band.sets),
-    setBands,
+    sets: sortEventSets(sets, nowMs),
     nights,
   };
 }

@@ -134,7 +134,7 @@ export function comparePlaceSetInBand(
   return quality;
 }
 
-/** Newest year first. Does not mix nights into the set grid. */
+/** Newest year first. Used to order the seamless grid — not as UI headings. */
 export function groupPlaceSetsByYear<T extends PlaceSetTimeFields>(
   sets: T[],
   nowMs: number,
@@ -166,4 +166,13 @@ export function groupPlaceSetsByYear<T extends PlaceSetTimeFields>(
         ),
       };
     });
+}
+
+/** This year (from-today clock), then older years date-descending. */
+export function sortPlaceSets<T extends PlaceSetTimeFields>(
+  sets: T[],
+  nowMs: number,
+  qualityOf: (s: T) => number = () => 0,
+): T[] {
+  return groupPlaceSetsByYear(sets, nowMs, qualityOf).flatMap((b) => b.sets);
 }

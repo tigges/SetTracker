@@ -17,15 +17,16 @@
  * coverage, then density, then chart — so Guetta Ultra 2024 does not sit on
  * page 1 ahead of 2026 sets, but a mostly-orange bar beats a mostly-grey one.
  *
- * Event/festival profile grids use year bands (`groupEventSetsByYear`).
- * This year: today, then upcoming soonest-first, then past latest-first.
- * Older years: date descending. Completeness is a same-day tie-break only.
+ * Event/festival profile grids (`sortEventSets`) list this year first
+ * (today → upcoming → latest finished), then older title-years descending.
+ * Completeness is a same-day tie-break only. No year headings.
  */
 
 import { DENSITY_MIN_DURATION_SEC, type DensitySeverity } from "./setDensity";
 import {
   comparePlaceSetTimes,
   groupPlaceSetsByYear,
+  sortPlaceSets,
   yearFromSetTitle,
 } from "./placeTimeline";
 import type { IdStatus } from "./status";
@@ -319,12 +320,19 @@ export function compareEventSetPriority(
   return compareEventSetPriorityAt(Date.now())(a, b);
 }
 
-/** Place-page set grid: year bands, newest first. Never remapped edition year. */
+/** Place-page set grid: title-year order, newest first. Never remapped edition year. */
 export function groupEventSetsByYear<T extends EventSetPriorityFields>(
   sets: T[],
   nowMs: number,
 ) {
   return groupPlaceSetsByYear(sets, nowMs, placeSetQuality);
+}
+
+export function sortEventSets<T extends EventSetPriorityFields>(
+  sets: T[],
+  nowMs: number,
+) {
+  return sortPlaceSets(sets, nowMs, placeSetQuality);
 }
 
 const DAY_MS = 24 * 60 * 60 * 1000;

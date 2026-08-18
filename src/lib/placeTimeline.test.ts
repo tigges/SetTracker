@@ -7,6 +7,7 @@ import {
   placeNightsHeading,
   setBandYear,
   sortPlaceNights,
+  sortPlaceSets,
 } from "./placeTimeline";
 
 const NOW = Date.parse("2026-08-18T12:00:00Z");
@@ -137,6 +138,10 @@ describe("placeTimeline", () => {
         { year: 2025, current: false, ids: ["garrix-2025", "older-2025"] },
         { year: 2018, current: false, ids: ["walker-2018"] },
       ],
+    );
+    assert.deepEqual(
+      sortPlaceSets(bands.flatMap((b) => b.sets), NOW).map((s) => s.id),
+      ["today", "future", "done", "garrix-2025", "older-2025", "walker-2018"],
     );
   });
 
