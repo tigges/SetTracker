@@ -160,6 +160,27 @@ assert.equal(
 );
 assert.equal(
   performingCreditFromTitle(
+    "Hot Since 82 - Live From A Pirate Ship in Ibiza 2025",
+  ),
+  "Hot Since 82",
+);
+assert.equal(
+  performingCreditFromTitle("Recovery (Hot Air Balloon Set)"),
+  "Hot Since 82",
+);
+assert.equal(
+  performingCreditFromTitle("Hot Since 82 - Recovery (Hot Air Balloon Set)"),
+  "Hot Since 82",
+);
+
+const balloonPreferred = artistsForSet(
+  "Hot Since 82 - Live From A Pirate Ship in Ibiza 2025",
+  { name: "Recovery (Hot Air Balloon)", slug: "recovery-hot-air-balloon" },
+);
+assert.equal(balloonPreferred.primary.slug, "hot-since-82");
+assert.equal(balloonPreferred.primary.name, "Hot Since 82");
+assert.equal(
+  performingCreditFromTitle(
     "Defected TV - MIAMI WMC 2010 presented by Erick Morillo",
   ),
   "Erick Morillo",

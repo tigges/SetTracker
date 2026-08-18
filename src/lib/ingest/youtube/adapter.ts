@@ -10,6 +10,7 @@
  */
 
 import { artistsForSet } from "../artists";
+import { inferFilmSeriesName } from "../filmSeries";
 import {
   promotedYoutubeChannels,
   queueYoutubeSimilarChannels,
@@ -75,6 +76,11 @@ const RELATED_PER_VIDEO = Number(process.env.YOUTUBE_RELATED_PER_VIDEO || 4);
 const RELATED_GLOBAL_CAP = Number(process.env.YOUTUBE_RELATED_GLOBAL_CAP || 48);
 const SHELF_VIDEO_CAP = Number(process.env.YOUTUBE_SHELF_VIDEO_CAP || 12);
 const SIMILAR_CHANNEL_CAP = Number(process.env.YOUTUBE_SIMILAR_CHANNEL_CAP || 24);
+
+function inferYoutubeSeriesName(title: string): string | undefined {
+  if (/\bheldeep\b/i.test(title)) return "Heldeep Radio";
+  return inferFilmSeriesName(title);
+}
 
 type YtHit = {
   raw: RawSet;
@@ -315,7 +321,7 @@ async function curatedToHit(src: YoutubeSetSource): Promise<YtHit | null> {
     genre: src.genre,
     primaryArtist: withDescriptionSocials(primary, meta.description),
     collaborators,
-    seriesName: src.seriesName,
+    seriesName: src.seriesName ?? inferYoutubeSeriesName(title),
     eventName: festival?.name ?? src.eventName,
     eventKind: festival?.kind,
     eventLocation: festival?.location,
@@ -431,7 +437,7 @@ async function artistChannelVideoToHit(
     genre: ch.genre,
     primaryArtist: withDescriptionSocials(primary, meta.description),
     collaborators,
-    seriesName: /\bheldeep\b/i.test(meta.title) ? "Heldeep Radio" : undefined,
+    seriesName: inferYoutubeSeriesName(meta.title),
     publishedAt: meta.publishedAt ?? new Date(),
     durationSec: meta.durationSec,
     sourceName: "YouTube",
@@ -491,6 +497,7 @@ async function relatedVideoToHit(
     genre: seed.genre,
     primaryArtist: withDescriptionSocials(primary, meta.description),
     collaborators,
+    seriesName: inferYoutubeSeriesName(meta.title),
     eventName: festival?.name,
     eventKind: festival?.kind,
     eventLocation: festival?.location,

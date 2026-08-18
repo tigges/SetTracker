@@ -66,6 +66,8 @@ const EXPLICIT_ALIAS: Record<string, string> = {
   "folamour-at-cathedrale-saint-pierre-in-geneva-switzerland-for-cercle":
     "folamour",
   "laidback-luke-selects": "laidback-luke",
+  "recovery-hot-air-balloon": "hot-since-82",
+  "recovery-hot-air-balloon-set": "hot-since-82",
 };
 
 const MEGA_MIX =
@@ -214,6 +216,7 @@ function displayNameForSlug(slug: string, fallbackName: string): string {
     "indira-paganotto": "Indira Paganotto",
     mochakk: "Mochakk",
     folamour: "Folamour",
+    "hot-since-82": "Hot Since 82",
   };
   return known[slug] ?? fallbackName;
 }
@@ -407,7 +410,9 @@ export async function mergeSetTitleDjs(
     if (!looksLikeSetTitleDj(dj.name, dj.slug)) continue;
     // Never merge away a curated/pinned short slug that is already canonical.
     if (
-      ["dom-dolla", "odd-mob", "james-hype", "sara-landry"].includes(dj.slug)
+      ["dom-dolla", "odd-mob", "james-hype", "sara-landry", "hot-since-82"].includes(
+        dj.slug,
+      )
     ) {
       continue;
     }

@@ -6,6 +6,7 @@
  */
 
 import {
+  isDestinationFilmHostName,
   isMonthYearArtistName,
   looksLikeShowSeriesPrefix,
   sanitizeArtistName,
@@ -73,6 +74,7 @@ export function tidyPerformingCredit(name: string): string {
 export function looksLikeEventOrSeriesCredit(name: string): boolean {
   const n = name.replace(/\s+/g, " ").trim();
   if (!n) return true;
+  if (isDestinationFilmHostName(n)) return true;
   return (
     /\bfestival\b/i.test(n) ||
     /\blineup\b/i.test(n) ||
@@ -136,6 +138,9 @@ export function performingCreditFromTitle(title: string): string {
     .replace(/[⠶✦★☆●◆]/g, " ")
     .replace(/\s+/g, " ")
     .trim();
+  // "Recovery (Hot Air Balloon Set)" / "Live From A Pirate Ship…" — film
+  // host, not a person. These are Hot Since 82 destination films.
+  if (isDestinationFilmHostName(cleaned)) return "Hot Since 82";
   // "Full Moon with Timmy Trumpet" / "Group Therapy 674 with Above & Beyond…"
   // Also covers Tomorrowland Friendship Mix with Sara Landry - July, 2026
   let m = cleaned.match(

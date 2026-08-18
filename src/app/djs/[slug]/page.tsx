@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { getDjBySlug, getAllDjSlugs } from "@/lib/queries";
 import { EntityThumb } from "@/components/EntityThumb";
 import { StatusBar } from "@/components/StatusBits";
@@ -66,6 +66,7 @@ export default async function DjPage({
   const { slug } = await params;
   const dj = await getDjBySlug(slug);
   if (!dj) notFound();
+  if (slug !== dj.slug) redirect(`/djs/${dj.slug}`);
 
   const accent = dj.accent;
   const city = displayCity(dj.homeCity);

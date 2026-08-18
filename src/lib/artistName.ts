@@ -118,10 +118,33 @@ function hasUnshieldedCollab(name: string): boolean {
   return SHOW_WITH_RE.test(text) || UNSHIELDED_COLLAB_SPLIT.test(text);
 }
 
+/**
+ * Destination-film leftovers mistaken for a person.
+ * Hot Since 82's Pirate Ship / Recovery balloon films are Sets (and
+ * sometimes a Series cluster) — never a Dj row.
+ */
+export function isDestinationFilmHostName(name: string): boolean {
+  const n = name.replace(/\s+/g, " ").trim();
+  if (!n) return false;
+  if (/\bhot\s*air\s*balloon\b/i.test(n)) return true;
+  if (/\brecovery\s*\(\s*hot\s*air/i.test(n)) return true;
+  if (
+    /^\s*recovery(\s+[-(].+)?\s*$/i.test(n) &&
+    /\b(set|balloon|live)\b/i.test(n)
+  ) {
+    return true;
+  }
+  if (/\bpirate\s*ship\b/i.test(n) && !/\bhot\s*since\s*82\b/i.test(n)) {
+    return true;
+  }
+  return false;
+}
+
 /** True when the string is UI chrome / form copy, not an artist. */
 export function isJunkArtistName(name: string): boolean {
   const n = name.replace(/\s+/g, " ").trim();
   if (!n) return true;
+  if (isDestinationFilmHostName(n)) return true;
   if (isMonthYearArtistName(n)) return true;
   if (hasUnshieldedCollab(n)) return true;
   if (WEEKEND_EDITION_RE.test(n) || WEEKEND_WORD_RE.test(n)) return true;
