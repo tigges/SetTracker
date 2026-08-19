@@ -4,7 +4,7 @@
  * Never invents ISRCs. Beatport only when the URL is canonical /track/{slug}/{id}.
  */
 
-import { readFileSync } from "node:fs";
+import { readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import type { PrismaClient } from "@prisma/client";
 import {
@@ -43,6 +43,43 @@ export function loadTrackIdPins(): TrackIdPin[] {
   } catch {
     return [];
   }
+}
+
+export function mergeTrackIdPins(
+  existing: TrackIdPin[],
+  incoming: TrackIdPin[],
+): TrackIdPin[] {
+  const bySlug = new Map<string, TrackIdPin>();
+  for (const pin of [...existing, ...incoming]) {
+    const slug = pin.slug.trim();
+    if (!slug) continue;
+    const prev = bySlug.get(slug);
+    const isrc = normalizeIsrc(prev?.isrc) || normalizeIsrc(pin.isrc);
+    const beatport =
+      canonicalBeatportUrl(prev?.beatportUrl) ||
+      canonicalBeatportUrl(pin.beatportUrl);
+    bySlug.set(slug, {
+      slug,
+      ...(isrc ? { isrc } : {}),
+      ...(beatport ? { beatportUrl: beatport } : {}),
+    });
+  }
+  return [...bySlug.values()].sort((a, b) => a.slug.localeCompare(b.slug));
+}
+
+export function saveTrackIdPins(pins: TrackIdPin[], path = PINS_PATH): void {
+  writeFileSync(path, `${JSON.stringify(pins, null, 2)}\n`);
+}
+
+/** True when the pin already supplies every field this catalog row still needs. */
+export function pinCoversNeed(
+  pin: TrackIdPin | undefined,
+  need: { wantIsrc?: boolean; wantBeatport?: boolean },
+): boolean {
+  if (!pin) return false;
+  if (need.wantIsrc && !normalizeIsrc(pin.isrc)) return false;
+  if (need.wantBeatport && !canonicalBeatportUrl(pin.beatportUrl)) return false;
+  return true;
 }
 
 const JUNK_SLUG = /^(youtube-|explore-countdown|in-laidback-luke|dj-electro-pop|djdefjam)/i;

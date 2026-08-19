@@ -4,10 +4,10 @@
  * Propose-then-verify:
  *   Deezer (ISRC) → MusicBrainz (MBID / ISRC / Beatport url-rels) →
  *   TrackRadar platforms → AudD findLyrics (public, no token).
- * Set79: published sitemap URLs only (set-level hints, never Relive).
+ * Set79: published sitemap URLs only (set-level hints, never official playback).
  * Beatport: canonical /track/{slug}/{id} from MB / TrackRadar — never scrape.
  * AudioScout / MusicMate / TrackId: paste-only, never fetched.
- * Never invents ISRCs, never wires fan Relives, never overwrites sourceUrl.
+ * Never invents ISRCs, never wires fan playbacks, never overwrites sourceUrl.
  */
 
 import type { PrismaClient } from "@prisma/client";
@@ -19,14 +19,27 @@ import {
   TL_COLE_TERRAZAS_HARD_SUMMER_2026,
   TL_KNOCK2_ZEDD_HARD_SUMMER_2026,
 } from "../tracklists1001/seeds";
-import { resolveTrackImage } from "../../thumbs/deezer";
+import { resolveTrackImage, sleep } from "../../thumbs/deezer";
 import { resolveTrackMetaMusicBrainz } from "../../thumbs/musicbrainz";
 import { normalizeIsrc } from "../../trackMeta";
+import {
+  parseTracksCsv,
+  tracksNeedEnrich,
+  type ExportTrackRow,
+} from "../../exportTracks";
 import { searchAuddLyrics } from "./audd";
 import { acceptBeatportTrackUrl } from "./beatport";
 import { fingerprintIdProbes } from "./fingerprintWatch";
 import { catalogQueryTitle } from "./names";
 import { dropPasteOnlyUrls } from "./pasteOnly";
+import {
+  evaluateTrackIdPin,
+  isJunkTrackPin,
+  loadTrackIdPins,
+  mergeTrackIdPins,
+  pinCoversNeed,
+  saveTrackIdPins,
+} from "./trackIdPins";
 import { findHeldSet79Hints, type Set79Hint } from "./set79";
 import {
   analyzeFingerprintOnlyWatches,
@@ -36,10 +49,13 @@ import {
   type TrackRadarPlatforms,
 } from "./trackradar";
 
+export type IdentifyQueueRow = FingerprintSeedRow & { slug?: string };
+
 export type TrackIdHit = {
   artist: string;
   title: string;
   at?: string;
+  slug?: string;
   isrc?: string;
   mbid?: string;
   beatportUrl?: string;
@@ -66,6 +82,7 @@ export type TrackIdReport = {
   trackradarAnalyzes: TrackRadarAnalyzeResult[];
   set79Hints: Set79Hint[];
   applied: number;
+  pinned: number;
 };
 
 const HELD_SEED_ROWS: Record<string, FingerprintSeedRow[]> = {
@@ -83,11 +100,11 @@ export function evaluateIsrc(raw: string | null | undefined): {
   return { ok: true, isrc, reason: "isrc" };
 }
 
-export function uniqueIdentifyRows(
-  rows: FingerprintSeedRow[],
-): FingerprintSeedRow[] {
+export function uniqueIdentifyRows<T extends FingerprintSeedRow>(
+  rows: T[],
+): T[] {
   const seen = new Set<string>();
-  const out: FingerprintSeedRow[] = [];
+  const out: T[] = [];
   for (const r of rows) {
     if (isBareIdRow(r.artist, r.title)) continue;
     const key = `${r.artist.trim().toLowerCase()}::${r.title.trim().toLowerCase()}`;
@@ -119,10 +136,10 @@ function rowKey(row: Pick<FingerprintSeedRow, "artist" | "title">): string {
  * Default held cap leaves room in TRACK_ID_LIMIT for catalog research.
  */
 export function mergeIdentifyQueue(
-  held: FingerprintSeedRow[],
-  catalog: FingerprintSeedRow[],
+  held: IdentifyQueueRow[],
+  catalog: IdentifyQueueRow[],
   opts: { limit: number; heldCap?: number },
-): FingerprintSeedRow[] {
+): IdentifyQueueRow[] {
   const heldCap = opts.heldCap ?? Number(process.env.TRACK_ID_HELD_LIMIT || 8);
   const heldSlice = uniqueIdentifyRows(held).slice(0, Math.max(0, heldCap));
   const seen = new Set(heldSlice.map(rowKey));
@@ -135,28 +152,97 @@ export function mergeIdentifyQueue(
   return [...heldSlice, ...catalogSlice].slice(0, Math.max(0, opts.limit));
 }
 
+/** High-play catalog tracks missing ISRC and/or a canonical Beatport URL. */
 export async function catalogNeedIdRows(
   prisma: PrismaClient,
   limit: number,
-): Promise<FingerprintSeedRow[]> {
+): Promise<IdentifyQueueRow[]> {
   if (limit <= 0) return [];
+  const pins = loadTrackIdPins();
+  const pinBySlug = new Map(pins.map((p) => [p.slug, p]));
   const tracks = await prisma.track.findMany({
     where: {
-      isrc: null,
-      artistName: { not: "" },
-      title: { not: "" },
+      AND: [
+        { artistName: { not: "" } },
+        { title: { not: "" } },
+        { OR: [{ isrc: null }, { beatportUrl: null }] },
+      ],
     },
     orderBy: { plays: { _count: "desc" } },
-    take: Math.max(limit * 2, limit),
-    select: { artistName: true, title: true },
+    take: Math.max(limit * 8, limit),
+    select: { slug: true, artistName: true, title: true, isrc: true, beatportUrl: true },
   });
   return uniqueIdentifyRows(
-    tracks.map((t) => ({
-      at: "0:00",
-      artist: t.artistName,
-      title: t.title,
-    })),
+    tracks
+      .filter((t) => {
+        if (isJunkTrackPin({ slug: t.slug, artist: t.artistName, title: t.title })) {
+          return false;
+        }
+        return !pinCoversNeed(pinBySlug.get(t.slug), {
+          wantIsrc: !normalizeIsrc(t.isrc),
+          wantBeatport: !t.beatportUrl,
+        });
+      })
+      .map((t) => ({
+        at: "0:00",
+        artist: t.artistName,
+        title: t.title,
+        slug: t.slug,
+      })),
   ).slice(0, limit);
+}
+
+const LIVE_TRACKS_CSV = "https://www.setradar.ai/exports/tracks.csv";
+
+export function exportRowsToIdentifyQueue(
+  rows: ExportTrackRow[],
+  limit: number,
+): IdentifyQueueRow[] {
+  const pins = loadTrackIdPins();
+  const pinBySlug = new Map(pins.map((p) => [p.slug, p]));
+  return uniqueIdentifyRows(
+    tracksNeedEnrich(rows)
+      .filter((r) => {
+        if (isJunkTrackPin({ slug: r.slug, artist: r.artist, title: r.title })) {
+          return false;
+        }
+        return !pinCoversNeed(pinBySlug.get(r.slug), {
+          wantIsrc: !r.isrc?.trim(),
+          wantBeatport: !r.beatportUrl?.trim(),
+        });
+      })
+      .map((r) => ({
+        at: "0:00",
+        artist: r.artist,
+        title: r.title,
+        slug: r.slug,
+      })),
+  ).slice(0, Math.max(0, limit));
+}
+
+export async function loadNeedEnrichExportRows(
+  limit: number,
+): Promise<IdentifyQueueRow[]> {
+  if (limit <= 0) return [];
+  const fromEnv = process.env.TRACK_ID_EXPORT_PATH?.trim();
+  const localPath = fromEnv || "data/track-id-export/tracks.csv";
+  let text = "";
+  try {
+    const { readFileSync } = await import("node:fs");
+    text = readFileSync(localPath, "utf8");
+  } catch {
+    try {
+      const res = await fetch(LIVE_TRACKS_CSV, {
+        headers: { Accept: "text/csv", "User-Agent": "SetRadar/0.2.212 (+https://setradar.ai; track-id enrich)" },
+        signal: AbortSignal.timeout(60_000),
+      });
+      if (res.ok) text = await res.text();
+    } catch {
+      text = "";
+    }
+  }
+  if (!text) return [];
+  return exportRowsToIdentifyQueue(parseTracksCsv(text), limit);
 }
 
 function mergePlatforms(
@@ -196,7 +282,7 @@ function pickSource(flags: {
 }
 
 export async function identifySeedRow(
-  row: FingerprintSeedRow,
+  row: IdentifyQueueRow,
   opts: {
     musicbrainz?: boolean;
     trackradar?: boolean;
@@ -269,6 +355,7 @@ export async function identifySeedRow(
     artist: row.artist,
     title: row.title,
     at: row.at,
+    slug: row.slug,
     isrc: isrc || undefined,
     mbid,
     beatportUrl,
@@ -302,17 +389,27 @@ export async function identifyHeldSeeds(opts: {
   const useCatalog =
     Boolean(opts.prisma) && process.env.TRACK_ID_CATALOG !== "0";
   const held = heldIdentifyJobs().flatMap((j) => j.rows);
-  const catalog = useCatalog
-    ? await catalogNeedIdRows(opts.prisma!, Math.max(0, limit))
-    : [];
+  let catalog: IdentifyQueueRow[] = [];
+  if (useCatalog) {
+    try {
+      catalog = await catalogNeedIdRows(opts.prisma!, Math.max(0, limit));
+    } catch {
+      catalog = [];
+    }
+  }
+  if (catalog.length === 0 && process.env.TRACK_ID_EXPORT !== "0") {
+    catalog = await loadNeedEnrichExportRows(Math.max(0, limit));
+  }
   const slice = mergeIdentifyQueue(held, catalog, { limit });
   const hits: TrackIdHit[] = [];
   const misses: TrackIdMiss[] = [];
+  const delayMs = Number(process.env.TRACK_ID_DELAY_MS || 250);
 
   for (const row of slice) {
     const result = await identifySeedRow(row, { musicbrainz, trackradar, audd });
     if ("reason" in result) misses.push(result);
-    else hits.push(result);
+    else hits.push({ ...result, slug: result.slug ?? row.slug });
+    if (delayMs > 0) await sleep(delayMs);
   }
 
   const trackradarAnalyzes = await analyzeFingerprintOnlyWatches();
@@ -324,10 +421,11 @@ export async function identifyHeldSeeds(opts: {
   if (opts.apply && opts.prisma) {
     applied = await applyTrackIdHits(opts.prisma, hits);
   }
+  const pinned = upsertPinsFromHits(hits);
 
   const report: TrackIdReport = {
     generatedAt: new Date().toISOString(),
-    note: "Verified Deezer / MusicBrainz / TrackRadar / AudD IDs from held 1001 seeds, then high-play catalog tracks missing ISRC. Beatport only via MB url-rels or TrackRadar canonical /track URLs (never scrape). Set79 is sitemap-only. AudioScout / MusicMate / TrackId stay paste-only. Fan Relives stay unwired.",
+    note: "Verified Deezer / MusicBrainz / TrackRadar / AudD IDs from held 1001 seeds, then high-play catalog tracks missing ISRC or Beatport. Beatport only via MB url-rels or TrackRadar canonical /track URLs (never scrape). Set79 is sitemap-only. AudioScout / MusicMate / TrackId stay paste-only. Fan playbacks stay unwired.",
     scanned: slice.length,
     hits,
     misses,
@@ -336,9 +434,37 @@ export async function identifyHeldSeeds(opts: {
     trackradarAnalyzes,
     set79Hints,
     applied,
+    pinned,
   };
   writeReport("track-id-research.json", report);
   return report;
+}
+
+export function upsertPinsFromHits(hits: TrackIdHit[]): number {
+  const incoming = [];
+  for (const hit of hits) {
+    if (!hit.slug || (!hit.isrc && !hit.beatportUrl)) continue;
+    const ev = evaluateTrackIdPin(
+      {
+        slug: hit.slug,
+        artist: hit.artist,
+        title: hit.title,
+        isrc: hit.isrc,
+        beatportUrl: hit.beatportUrl,
+        source: hit.source,
+      },
+      {
+        artist: hit.artist,
+        title: hit.title,
+        isrc: hit.isrc ?? null,
+      },
+    );
+    if (ev.ok && ev.pin) incoming.push(ev.pin);
+  }
+  if (!incoming.length) return 0;
+  const merged = mergeTrackIdPins(loadTrackIdPins(), incoming);
+  saveTrackIdPins(merged);
+  return incoming.length;
 }
 
 export async function applyTrackIdHits(

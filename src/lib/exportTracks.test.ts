@@ -2,9 +2,12 @@ import assert from "node:assert/strict";
 import {
   CLAUDE_TRACK_ID_PROMPT,
   csvEscape,
+  needsBeatportOrIsrc,
   needsTrackId,
+  parseTracksCsv,
   trackToClaudeJsonl,
   trackToCsvRow,
+  tracksNeedEnrich,
   tracksNeedId,
   tracksToClaudeJsonl,
   tracksToCsv,
@@ -42,6 +45,18 @@ const held: ExportTrackRow = {
 
 assert.equal(needsTrackId(identified), false);
 assert.equal(needsTrackId(held), true);
+assert.equal(needsBeatportOrIsrc(identified), false);
+assert.equal(needsBeatportOrIsrc({ ...identified, beatportUrl: null }), true);
+assert.deepEqual(
+  tracksNeedEnrich([
+    identified,
+    { ...identified, slug: "has-isrc", beatportUrl: null, plays: 4 },
+    held,
+  ]).map((r) => r.slug),
+  ["held-id", "has-isrc"],
+);
+assert.equal(parseTracksCsv(tracksToCsv([identified, held])).length, 2);
+assert.equal(parseTracksCsv(tracksToCsv([identified, held]))[1]!.slug, "held-id");
 assert.deepEqual(tracksNeedId([identified, held]).map((r) => r.slug), [
   "held-id",
 ]);

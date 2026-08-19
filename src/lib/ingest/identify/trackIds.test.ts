@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import {
   evaluateIsrc,
+  exportRowsToIdentifyQueue,
   heldIdentifyJobs,
   mergeIdentifyQueue,
   uniqueIdentifyRows,
@@ -55,6 +56,57 @@ assert.equal(queued[2]?.title, "Hot");
 assert.equal(
   acceptBeatportTrackUrl("https://www.beatport.com/search?q=clarity"),
   undefined,
+);
+
+const fromExport = exportRowsToIdentifyQueue(
+  [
+    {
+      slug: "zz-test-enrich-queue-hot",
+      artist: "Catalog",
+      title: "Hot Track",
+      mix: null,
+      remixer: null,
+      genre: "House",
+      plays: 12,
+      isrc: "USUM70000000",
+      beatportUrl: null,
+    },
+    {
+      slug: "convex-id",
+      artist: "Convex",
+      title: "ID",
+      mix: null,
+      remixer: null,
+      genre: "House",
+      plays: 99,
+      isrc: null,
+      beatportUrl: null,
+    },
+    {
+      slug: "zz-test-enrich-queue-done",
+      artist: "Done",
+      title: "Already",
+      mix: null,
+      remixer: null,
+      genre: "House",
+      plays: 20,
+      isrc: "USUM70000001",
+      beatportUrl: "https://www.beatport.com/track/already/1",
+    },
+  ],
+  10,
+);
+assert.equal(
+  fromExport.some((r) => r.slug === "zz-test-enrich-queue-hot"),
+  true,
+);
+assert.equal(
+  fromExport.some((r) => r.slug === "convex-id" || r.title === "ID"),
+  false,
+);
+assert.equal(
+  fromExport.some((r) => r.slug === "zz-test-enrich-queue-done"),
+  false,
 );
 
 console.log("identify/trackIds.test.ts ok");
