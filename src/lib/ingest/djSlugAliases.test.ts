@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { canonicalDjSlug, DJ_SLUG_ALIASES } from "./djSlugAliases";
+import { slugify } from "./types";
 
 describe("djSlugAliases", () => {
   it("folds Gentlemen's Groove slugify variant", () => {
@@ -52,5 +53,12 @@ describe("djSlugAliases", () => {
   it("folds Artist SELECTS show slugs onto the artist", () => {
     assert.equal(canonicalDjSlug("laidback-luke-selects"), "laidback-luke");
     assert.equal(canonicalDjSlug("laidback-luke"), "laidback-luke");
+  });
+
+  it("folds HALŌ onto DubVision", () => {
+    assert.equal(slugify("HALŌ"), "halo");
+    assert.equal(canonicalDjSlug("halo"), "dubvision");
+    assert.equal(canonicalDjSlug(slugify("HALŌ")), "dubvision");
+    assert.equal(canonicalDjSlug("dubvision"), "dubvision");
   });
 });

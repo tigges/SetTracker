@@ -230,6 +230,12 @@ const igHarvest = [
   ["fantasm", /instagram\.com\/fantasm_techno/],
   ["faustix", /instagram\.com\/faustix/],
   ["honey-dijon", /instagram\.com\/honeydijon/],
+  ["quintino", /instagram\.com\/quintino/],
+  ["nervo", /instagram\.com\/nervomusic/],
+  ["sub-zero-project", /instagram\.com\/subzeroproject/],
+  ["dubvision", /instagram\.com\/dubvisionmusic/],
+  ["mariana-bo", /instagram\.com\/djmarianabo/],
+  ["vinai", /instagram\.com\/vinaiofficial/],
   ["topic", /instagram\.com\/topic/],
   ["marlon-hoffstadt", /instagram\.com\/marlonhoffstadt/],
 ] as const;
@@ -314,5 +320,51 @@ assert.equal(hintForName("Mila Alias")?.soundcloudPermalink, "djmilaalias");
 assert.match(bySlug["korolova"]!.website, /solo\.to\/korolova\.dj/);
 assert.match(bySlug["korolova"]!.beatport!, /beatport\.com\/artist\/korolova\/956858/);
 assert.equal(hintForName("Korolova")?.website, "https://solo.to/korolova.dj");
+
+// DJ Mag rank pages replaced with verified official sites / link hubs.
+const djmagHubPins: Array<[string, RegExp, string]> = [
+  ["skrillex", /skrillex\.com/, "https://skrillex.com/"],
+  ["above-beyond", /aboveandbeyond\.nu/, "https://www.aboveandbeyond.nu/"],
+  ["chris-stussy", /chrisstussy\.com/, "https://www.chrisstussy.com/"],
+  ["mike-williams", /mikewilliams\.nl/, "https://www.mikewilliams.nl/"],
+  ["plastik-funk", /plastik-funk\.de/, "https://plastik-funk.de/"],
+  ["reinier-zonneveld", /linktr\.ee\/reinierzonneveld/, "https://linktr.ee/reinierzonneveld"],
+  ["quintino", /linktr\.ee\/quintino/, "https://linktr.ee/quintino"],
+  ["nervo", /linktr\.ee\/nervomusic/, "https://linktr.ee/nervomusic"],
+  ["sub-zero-project", /subzeroproject\.com/, "https://www.subzeroproject.com/"],
+  ["liu", /linktr\.ee\/liulive/, "https://linktr.ee/liulive"],
+  ["le-twins", /linktr\.ee\/officialletwins/, "https://linktr.ee/officialletwins"],
+  ["wukong", /linktr\.ee\/wukongmusic/, "https://linktr.ee/wukongmusic"],
+  ["dubvision", /linktr\.ee\/dubvision/, "https://linktr.ee/dubvision"],
+  ["mariana-bo", /linktr\.ee\/djmarianabo/, "https://linktr.ee/djmarianabo"],
+  ["vinai", /linktr\.ee\/vinaiofficial/, "https://linktr.ee/vinaiofficial"],
+  ["honey-dijon", /linktr\.ee\/honeydijon/, "https://linktr.ee/honeydijon"],
+  ["nils-van-zandt", /linktr\.ee\/nilsvanzandt/, "https://linktr.ee/nilsvanzandt"],
+];
+for (const [slug, site, hint] of djmagHubPins) {
+  assert.ok(bySlug[slug], `missing pin ${slug}`);
+  assert.match(bySlug[slug]!.website, site);
+  assert.doesNotMatch(bySlug[slug]!.website, /djmag\.com/);
+  assert.equal(hintForName(bySlug[slug]!.name)?.website, hint);
+}
+assert.equal(hintForName("Liu")?.website, "https://linktr.ee/liulive");
+assert.equal(hintForName("Above & Beyond")?.website, "https://www.aboveandbeyond.nu/");
+assert.match(bySlug.quintino!.twitter!, /(?:twitter|x)\.com\/quintinoo/);
+assert.match(bySlug.nervo!.twitter!, /(?:twitter|x)\.com\/nervomusic/);
+assert.match(bySlug["sub-zero-project"]!.twitter!, /(?:twitter|x)\.com\/sub_zeroproject/);
+assert.match(bySlug.dubvision!.twitter!, /(?:twitter|x)\.com\/dubvisionmusic/);
+assert.match(bySlug.dubvision!.bio, /HALŌ/);
+assert.match(bySlug.dubvision!.bio, /halo__ofc/);
+assert.equal(hintForName("HALŌ")?.youtubeHandle, "@DubVision");
+assert.equal(hintForName("Halo")?.instagram, "https://www.instagram.com/halo__ofc/");
+assert.equal(hintForName("Halo")?.twitter, "https://x.com/Halo__ofc");
+assert.equal(hintForName("HALŌ")?.website, "https://haloofc.com/");
+assert.match(bySlug.dubvision!.bio, /haloofc\.com/);
+assert.match(bySlug.dubvision!.youtube!, /@DubVision/);
+assert.match(bySlug.quintino!.youtube!, /@Quintino/);
+assert.match(bySlug.quintino!.instagram!, /instagram\.com\/quintino/);
+assert.doesNotMatch(bySlug.quintino!.website, /ra\.co/);
+assert.match(bySlug["mariana-bo"]!.twitter!, /(?:twitter|x)\.com\/djmarianabo/);
+assert.equal(bySlug.vinai!.twitter, undefined);
 
 console.log("djSocialPins.test.ts ok");

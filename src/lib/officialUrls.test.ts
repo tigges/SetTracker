@@ -35,6 +35,11 @@ describe("isWeakOfficialUrl", () => {
     assert.equal(isWeakOfficialUrl("https://www.carlcox.com/"), false);
     assert.equal(isWeakOfficialUrl("https://djoon.com/"), false);
     assert.equal(isWeakOfficialUrl("https://solo.to/korolova.dj"), false);
+    assert.equal(isWeakOfficialUrl("https://linktr.ee/honeydijon"), false);
+    assert.equal(isWeakOfficialUrl("https://skrillex.com/"), false);
+    assert.equal(isWeakOfficialUrl("https://plastik-funk.de/"), false);
+    assert.equal(isWeakOfficialUrl("https://www.aboveandbeyond.nu/"), false);
+    assert.equal(isWeakOfficialUrl("https://haloofc.com/"), false);
     assert.equal(isWeakOfficialUrl(null), false);
     assert.equal(isWeakOfficialUrl(""), false);
   });

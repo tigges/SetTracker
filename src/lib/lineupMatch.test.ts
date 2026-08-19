@@ -22,6 +22,7 @@ describe("lineupMatch", () => {
     { slug: "anyma", name: "Anyma" },
     { slug: "tiesto", name: "Tiësto" },
     { slug: "odd-mob", name: "Odd Mob" },
+    { slug: "dubvision", name: "DubVision", accent: "#4361ee" },
   ]);
 
   it("links bill names that slug-match a catalog DJ", () => {
@@ -64,6 +65,12 @@ describe("lineupMatch", () => {
   it("folds diacritics and @-venue titles", () => {
     assert.equal(matchLineupName("Tiësto", catalog).slug, "tiesto");
     assert.equal(matchLineupName("ANYMA @ UNVRS", catalog).slug, "anyma");
+  });
+
+  it("folds HALŌ bills onto DubVision", () => {
+    assert.equal(matchLineupName("HALŌ", catalog).slug, "dubvision");
+    assert.equal(matchLineupName("Halo", catalog).slug, "dubvision");
+    assert.equal(matchLineupName("HALŌ @ Tomorrowland", catalog).slug, "dubvision");
   });
 
   it("picks the night title as headliner when it matches", () => {

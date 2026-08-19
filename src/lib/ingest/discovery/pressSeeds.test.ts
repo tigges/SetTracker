@@ -23,4 +23,11 @@ assert.ok(korolova);
 assert.match(korolova!.url, /ra\.co\/dj\/korolova/);
 assert.equal(korolova!.skipFetch, true);
 
+const quintino = PRESS_SEEDS.find((s) =>
+  s.artists.some((a) => /quintino/i.test(a)),
+);
+assert.ok(quintino);
+assert.match(quintino!.url, /ra\.co\/dj\/quintino/);
+assert.equal(quintino!.skipFetch, true);
+
 console.log("pressSeeds.test.ts ok");
