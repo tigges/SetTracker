@@ -141,6 +141,9 @@ const JAMIE_LOST_HORIZON = YOUTUBE_SETS.find((s) =>
 const SKRILLEX_LOLLA_CHILE = YOUTUBE_SETS.find((s) =>
   s.video.includes("loD-whuR5zc"),
 );
+const STUSSY_BOILER_EDINBURGH = YOUTUBE_SETS.find((s) =>
+  s.video.includes("42XFNGZrpaQ"),
+);
 
 describe("watchMetaFromCuratedSeed", () => {
   it("builds ASOT 1290 meta from the curated 1001 capture", () => {
@@ -868,6 +871,17 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=loD-whuR5zc");
     // Last cue 1:25:21 + 180s pad.
     assert.equal(meta.durationSec, 1 * 3600 + 25 * 60 + 21 + 180);
+  });
+
+  it("builds Chris Stussy Boiler Room Edinburgh meta from the curated 1001 capture", () => {
+    assert.ok(STUSSY_BOILER_EDINBURGH);
+    const meta = watchMetaFromCuratedSeed(STUSSY_BOILER_EDINBURGH);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "42XFNGZrpaQ");
+    assert.match(meta.title, /Boiler Room: Edinburgh/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=42XFNGZrpaQ");
+    // Last cue 1:11:49 + 180s pad.
+    assert.equal(meta.durationSec, 1 * 3600 + 11 * 60 + 49 + 180);
   });
 
   it("returns null without a title or video id", () => {
@@ -1905,5 +1919,29 @@ describe("curated YouTube 429 fallback", () => {
       false,
     );
     assert.match(String(sets[0]?.title ?? ""), /Banco de Chile/i);
+  });
+
+  it("lands Chris Stussy Boiler Room Edinburgh from the 1001 seed when watch is 429", async () => {
+    assert.ok(STUSSY_BOILER_EDINBURGH);
+    const adapter = createYoutubeAdapter([STUSSY_BOILER_EDINBURGH], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-42XFNGZrpaQ");
+    assert.equal(sets[0]!.type, "festival");
+    assert.equal(sets[0]!.genre, "Tech House");
+    assert.ok(sets[0]!.plays.length >= 10);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.equal(sets[0]?.primaryArtist?.slug, "chris-stussy");
+    assert.equal(sets[0]?.seriesName, "Boiler Room");
+    assert.match(String(sets[0]?.eventName ?? ""), /Boiler Room/i);
+    assert.equal(
+      (sets[0]?.collaborators ?? []).some((c) => c.slug === "chris-stassy"),
+      false,
+    );
+    assert.equal(
+      (sets[0]?.collaborators ?? []).some((c) => c.slug === "edinburgh"),
+      false,
+    );
+    assert.match(String(sets[0]?.title ?? ""), /Chris Stussy/i);
   });
 });
