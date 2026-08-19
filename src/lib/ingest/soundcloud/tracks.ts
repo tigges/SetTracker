@@ -511,4 +511,14 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     type: "festival",
     minDurationSec: 90 * 60,
   },
+  {
+    // Official Cuebrick Conference 297; 1001TL wired via
+    // sc-cuebrick-cuebricks-conference-297. Never wire sc-https://….
+    url: "https://soundcloud.com/cuebrick/cuebricks-conference-297",
+    primaryArtist: dj("Cuebrick", { accent: "#8338ec" }),
+    genre: "Big Room",
+    seriesName: "Conference",
+    type: "radio",
+    minDurationSec: 50 * 60,
+  },
 ];

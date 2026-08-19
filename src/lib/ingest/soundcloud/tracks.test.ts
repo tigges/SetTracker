@@ -491,4 +491,17 @@ assert.equal(
   false,
 );
 
+const cuebrick297Sc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url === "https://soundcloud.com/cuebrick/cuebricks-conference-297",
+);
+assert.ok(cuebrick297Sc);
+assert.equal(cuebrick297Sc.primaryArtist.name, "Cuebrick");
+assert.equal(cuebrick297Sc.seriesName, "Conference");
+assert.equal(cuebrick297Sc.type, "radio");
+assert.equal(
+  `sc-cuebrick-${slugify("cuebricks-conference-297")}`,
+  "sc-cuebrick-cuebricks-conference-297",
+);
+
 console.log("soundcloud/tracks.test.ts ok");

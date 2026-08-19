@@ -409,3 +409,30 @@ export const TL_GIUSEPPE_OTTAVIANI_DIGITAL_SOCIETY_LEEDS_WAREHOUSE_2026: Fingerp
     { at: "2:51:49", artist: "Hardwell ft. Jonathan Mendelsohn", title: "Echo (Giuseppe Ottaviani Remix)" },
     { at: "2:57:04", artist: "Brennan Heart & HI-LO & Project Zeitgeist", title: "Adagio For Strings" },
   ];
+
+/**
+ * Cuebrick — Conference 297 2026-07-12
+ * Official SoundCloud: https://soundcloud.com/cuebrick/cuebricks-conference-297
+ * https://www.1001tracklists.com/tracklist/2hsx15xk/cuebrick-conference-297-2026-07-12.html
+ * Overlay name TL_Cuebrick_Conference_297_2026 is not a valid identifier.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["sc-cuebrick-cuebricks-conference-297"]
+ * Never wire sc-https://….
+ * Captured 2026-08-19 — provenance 1001tl.
+ */
+export const TL_CUEBRICK_CONFERENCE_297_2026: FingerprintSeedRow[] = [
+  { at: "0:20", artist: "Alexander Komarov", title: "My Soul" },
+  { at: "4:17", artist: "Ruslan Radriges & Nat Dankir", title: "Ghost" },
+  { at: "8:14", artist: "David Guetta & Third ≡ Party ft. John Martin", title: "Human" },
+  { at: "12:11", artist: "NTO & Mont Rouge ft. Noah Kulaga", title: "I Cared For You" },
+  { at: "16:08", artist: "Martin Trevy", title: "La Sinfonia" },
+  { at: "20:05", artist: "BlackCode & KDH & David Allen", title: "Together As We Are" },
+  { at: "24:02", artist: "Adriatique ft. Rhys From The Sticks", title: "Coming Home" },
+  { at: "27:59", artist: "NOME.", title: "Calling" },
+  { at: "31:56", artist: "VIVID", title: "Gas" },
+  { at: "35:53", artist: "Nedea & Bryan Kearney", title: "Back Once Again" },
+  { at: "39:50", artist: "Jeffersn Sky", title: "Wait For Me" },
+  { at: "43:47", artist: "Emilio", title: "Into The Groove" },
+  { at: "47:44", artist: "Seth Hills", title: "Secretos" },
+  { at: "51:41", artist: "Modeā", title: "Part Of Me" },
+  { at: "55:38", artist: "Cuebrick & Diego Miranda & BIGMOO & TOPGREAT", title: "Ordinary" },
+];

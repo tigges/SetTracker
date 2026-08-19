@@ -157,6 +157,7 @@ import {
   TL_NATTE_VISSTICK_TELETECH_FYM_AFAS_LIVE_AMSTERDAM_2025,
   TL_DEBORAH_DE_LUCA_PYRAMID_AMNESIA_IBIZA_2025,
   TL_GIUSEPPE_OTTAVIANI_DIGITAL_SOCIETY_LEEDS_WAREHOUSE_2026,
+  TL_CUEBRICK_CONFERENCE_297_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   tracklist1001RowsToPlays,
@@ -2324,6 +2325,49 @@ for (let i = 1; i < goDigital.length; i++) {
 assert.equal(
   isWiredTracklistSlug("sc-giuseppeottaviani-giuseppe-ottaviani-digitalsociety"),
   true,
+);
+
+assertSeedClocks(TL_CUEBRICK_CONFERENCE_297_2026);
+assert.equal(TL_CUEBRICK_CONFERENCE_297_2026.length, 15);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-cuebrick-cuebricks-conference-297"],
+  TL_CUEBRICK_CONFERENCE_297_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-https://soundcloud.com/cuebrick/cuebricks-conference-297"
+  ],
+  undefined,
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-cuebrick-cuebricks-conference-297"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-LLJn_gDMG_M"],
+);
+const cuebrick297 = tracklist1001RowsToPlays(TL_CUEBRICK_CONFERENCE_297_2026);
+assert.equal(cuebrick297.length, 15);
+assert.equal(cuebrick297[0]?.provenance, "1001tl");
+assert.equal(cuebrick297[0]?.timestamp, 20);
+assert.equal(cuebrick297[0]?.artistName, "Alexander Komarov");
+assert.equal(cuebrick297[0]?.trackTitle, "My Soul");
+assert.equal(cuebrick297[6]?.trackTitle, "Coming Home");
+assert.equal(cuebrick297[6]?.timestamp, 24 * 60 + 2);
+assert.equal(cuebrick297[14]?.trackTitle, "Ordinary");
+assert.equal(cuebrick297[14]?.timestamp, 55 * 60 + 38);
+for (let i = 1; i < cuebrick297.length; i++) {
+  assert.ok(
+    (cuebrick297[i]!.timestamp ?? 0) > (cuebrick297[i - 1]!.timestamp ?? 0),
+    `Cuebrick Conference 297 clocks must increase at index ${i}`,
+  );
+}
+assert.equal(
+  isWiredTracklistSlug("sc-cuebrick-cuebricks-conference-297"),
+  true,
+);
+assert.equal(
+  isWiredTracklistSlug(
+    "sc-https://soundcloud.com/cuebrick/cuebricks-conference-297",
+  ),
+  false,
 );
 assert.equal(
   isWiredTracklistSlug(
