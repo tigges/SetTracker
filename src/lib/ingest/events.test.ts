@@ -120,5 +120,37 @@ assert.equal(
   resolveEvent("Dance Valley").instagram,
   "https://www.instagram.com/dancevalley/",
 );
+assert.equal(resolveEvent("808 Festival").website, "https://808festival.net/");
+assert.equal(
+  resolveEvent("Together Festival").website,
+  "https://togetherfestival.net/",
+);
+assert.equal(
+  resolveEvent("White Party Bangkok").instagram,
+  "https://www.instagram.com/whitepartybkk/",
+);
+assert.equal(resolveEvent("Sunset By Neon").website, "https://sunsetbyneon.asia/");
+assert.equal(
+  resolveEvent("Pitch Music & Arts").soundcloud,
+  "https://soundcloud.com/pitchfestival",
+);
+assert.equal(resolveEvent("GMO Sonic").kind, "festival");
+assert.equal(resolveEvent("GMO Sonic").website, "https://sonic.gmo/en/");
+assert.equal(
+  inferFestivalEvent("The Magic of Tomorrowland Shanghai")?.slug,
+  "magic-of-tomorrowland",
+);
+assert.equal(
+  inferFestivalEvent("Martin Garrix | Tomorrowland 2026")?.slug,
+  "tomorrowland",
+);
+assert.equal(
+  resolveEvent("VAC Festival").slug,
+  "vision-colour-music-festival",
+);
+assert.equal(
+  resolveEvent("Vision & Colour Music Festival").instagram,
+  "https://www.instagram.com/vacfestival/",
+);
 
 console.log("events.test.ts ok");

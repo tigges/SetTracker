@@ -87,7 +87,7 @@ export function normalizeOfficialWebsite(raw: string): string | null {
     if (!/^https?:$/i.test(u.protocol)) return null;
     // Skip socials / stores — want the brand homepage.
     if (
-      /(?:^|\.)(facebook|instagram|twitter|x|tiktok|youtube|youtu\.be|soundcloud|spotify|bandcamp|linktr\.ee|djmag)\./i.test(
+      /(?:^|\.)(facebook|instagram|twitter|x|tiktok|youtube|youtu\.be|soundcloud|spotify|bandcamp|linktr\.ee|djmag|jambase|eventpop)\./i.test(
         u.hostname,
       )
     ) {

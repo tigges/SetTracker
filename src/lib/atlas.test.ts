@@ -101,6 +101,16 @@ describe("DJ Mag 2026 atlas seed", () => {
     assert.equal(ushuaia?.rank, 3);
     assert.equal(ushuaia?.kind, "club");
 
+    assert.equal(
+      lookupAtlasVenue("808-festival")?.website,
+      "https://808festival.net/",
+    );
+    assert.equal(lookupAtlasVenue("gmo-sonic")?.website, "https://sonic.gmo/en/");
+    assert.equal(
+      lookupAtlasVenue("magic-of-tomorrowland")?.website,
+      "https://magicoftomorrowland.com/",
+    );
+
     const approx = venues.filter((v) => v.approx);
     assert.ok(approx.length >= 20, "city-level pins stay flagged");
     assert.ok(

@@ -405,6 +405,69 @@ export const KNOWN_EVENTS: Record<string, CanonicalEvent> = {
     kind: "radio",
     location: "Tomorrowland",
   },
+  "808-festival": {
+    slug: "808-festival",
+    name: "808 Festival",
+    kind: "festival",
+    location: "Bangkok, Thailand",
+    website: "https://808festival.net/",
+  },
+  "together-festival": {
+    slug: "together-festival",
+    name: "Together Festival",
+    kind: "festival",
+    location: "Bangkok, Thailand",
+    website: "https://togetherfestival.net/",
+  },
+  "white-party-bangkok": {
+    slug: "white-party-bangkok",
+    name: "White Party Bangkok",
+    kind: "festival",
+    location: "Bangkok, Thailand",
+    website: "https://whitepartybangkok.com/",
+    instagram: "https://www.instagram.com/whitepartybkk/",
+  },
+  "sunset-neon": {
+    slug: "sunset-neon",
+    name: "Sunset By Neon",
+    kind: "festival",
+    location: "Kuala Lumpur, Malaysia",
+    website: "https://sunsetbyneon.asia/",
+    instagram: "https://www.instagram.com/sunsetbyneon/",
+  },
+  "pitch-music-arts": {
+    slug: "pitch-music-arts",
+    name: "Pitch Music & Arts",
+    kind: "festival",
+    location: "Mafeking, Grampians, Victoria, Australia",
+    website: "https://www.pitchfestival.com.au/",
+    soundcloud: "https://soundcloud.com/pitchfestival",
+  },
+  "gmo-sonic": {
+    slug: "gmo-sonic",
+    name: "GMO Sonic",
+    kind: "festival",
+    // Indoor festival brand. 2026 Makuhari Messe; 2027 GMO Arena Saitama.
+    location: "Makuhari Messe, Chiba, Japan",
+    website: "https://sonic.gmo/en/",
+    instagram: "https://www.instagram.com/gmosonic/",
+    twitter: "https://x.com/gmosonic",
+  },
+  "magic-of-tomorrowland": {
+    slug: "magic-of-tomorrowland",
+    name: "The Magic Of Tomorrowland",
+    kind: "festival",
+    location: "Shanghai (touring), China",
+    website: "https://magicoftomorrowland.com/",
+  },
+  "vision-colour-music-festival": {
+    slug: "vision-colour-music-festival",
+    name: "Vision & Colour Music Festival",
+    kind: "festival",
+    location: "Hengqin (touring), China",
+    // VAC has no first-party www — IG is the official channel.
+    instagram: "https://www.instagram.com/vacfestival/",
+  },
 };
 
 /** Alternate name/slug keys → canonical slug. */
@@ -506,6 +569,18 @@ const ALIAS_TO_SLUG: Record<string, string> = {
   "one-world-radio": "one-world-radio",
   oneworldradio: "one-world-radio",
   "tomorrowland-one-world-radio": "one-world-radio",
+  "808-festival": "808-festival",
+  "together-festival": "together-festival",
+  "white-party-bangkok": "white-party-bangkok",
+  "sunset-neon": "sunset-neon",
+  "sunset-by-neon": "sunset-neon",
+  "pitch-music-arts": "pitch-music-arts",
+  "pitch-festival": "pitch-music-arts",
+  "gmo-sonic": "gmo-sonic",
+  "magic-of-tomorrowland": "magic-of-tomorrowland",
+  "the-magic-of-tomorrowland": "magic-of-tomorrowland",
+  "vision-colour-music-festival": "vision-colour-music-festival",
+  "vac-festival": "vision-colour-music-festival",
 };
 
 function keyOf(name: string): string {
@@ -574,6 +649,9 @@ export function inferFestivalEvent(title: string): CanonicalEvent | null {
   }
   if (/\bone\s*world\s*radio\b/i.test(t)) {
     return KNOWN_EVENTS["one-world-radio"];
+  }
+  if (/\bmagic\s+of\s+tomorrowland\b/i.test(t)) {
+    return KNOWN_EVENTS["magic-of-tomorrowland"];
   }
   if (/\btomorrowland\b/i.test(t)) return KNOWN_EVENTS.tomorrowland;
   if (

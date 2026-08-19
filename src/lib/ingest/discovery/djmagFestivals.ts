@@ -66,6 +66,14 @@ const ALIAS_TO_KNOWN: Record<string, string> = {
   "awakenings-festival": "awakenings",
   awakenings: "awakenings",
   parookaville: "parookaville",
+  "808-festival": "808-festival",
+  "together-festival": "together-festival",
+  "white-party-bangkok": "white-party-bangkok",
+  "sunset-neon": "sunset-neon",
+  "pitch-music-arts": "pitch-music-arts",
+  "gmo-sonic": "gmo-sonic",
+  "magic-of-tomorrowland": "magic-of-tomorrowland",
+  "vision-colour-music-festival": "vision-colour-music-festival",
 };
 
 const SKIP_TITLE_MATCH = new Set(["amf", "exit"]);
@@ -84,6 +92,13 @@ const EXTRA_OFFICIAL: Record<string, string> = {
   "scream-or-dance": "https://www.screamordance.com/",
   "untold-dubai": "https://untold.ae/",
   positiv: "https://positivfestival.fr/",
+  "808-festival": "https://808festival.net/",
+  "together-festival": "https://togetherfestival.net/",
+  "white-party-bangkok": "https://whitepartybangkok.com/",
+  "sunset-neon": "https://sunsetbyneon.asia/",
+  "pitch-music-arts": "https://www.pitchfestival.com.au/",
+  "gmo-sonic": "https://sonic.gmo/en/",
+  "magic-of-tomorrowland": "https://magicoftomorrowland.com/",
 };
 
 let cached: DjMagFestival[] | null = null;

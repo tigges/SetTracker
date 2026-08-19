@@ -15,6 +15,16 @@ describe("isWeakOfficialUrl", () => {
     assert.equal(isWeakOfficialUrl("https://www.residentadvisor.net/club.aspx?id=1"), true);
     assert.equal(isWeakOfficialUrl("https://dice.fm/venue/fabric-london"), true);
     assert.equal(isWeakOfficialUrl("https://shotgun.live/venues/fabric"), true);
+    assert.equal(
+      isWeakOfficialUrl(
+        "https://www.jambase.com/festival/vision-colour-music-festival-2025-2",
+      ),
+      true,
+    );
+    assert.equal(
+      isWeakOfficialUrl("https://www.eventpop.me/e/159292/wpbkk2027amaxon"),
+      true,
+    );
   });
 
   it("keeps first-party club and DJ sites", () => {
