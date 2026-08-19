@@ -36,6 +36,22 @@ describe("statsPlaybook", () => {
     );
     assert.equal(
       leftoverHostOnQueue({
+        name: "8-track (Continuous Mix)",
+        hasHandle: false,
+        setCount: 1,
+      }),
+      true,
+    );
+    assert.equal(
+      leftoverHostOnQueue({
+        name: "Knee Deep In Ibiza Mixed",
+        hasHandle: false,
+        setCount: 2,
+      }),
+      true,
+    );
+    assert.equal(
+      leftoverHostOnQueue({
         name: "Charlotte de Witte",
         hasHandle: false,
         setCount: 4,

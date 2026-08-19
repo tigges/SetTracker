@@ -288,6 +288,10 @@ export function isLeftoverHostName(name: string): boolean {
   if (/^behind\b/i.test(n)) return true;
   if (/^live\s+in\b/i.test(n)) return true;
   if (/^rave\s+ukraine\b/i.test(n)) return true;
+  if (/\bcontinuous\s+mix\b/i.test(n)) return true;
+  if (/knee\s+deep\s+in\s+ibiza/i.test(n)) return true;
+  if (/\bof\s+ezra\s+collective\b/i.test(n)) return true;
+  if (/^le\s+grand\s+brand$/i.test(n)) return true;
   return false;
 }
 

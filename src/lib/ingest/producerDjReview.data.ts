@@ -67,6 +67,10 @@ export const PRODUCER_DISCARD_NAMES = [
   "alok's infinite experience",
   "tape b / mutiny shareholders meeting",
   "wooli (wankdat)",
+  "8-track (continuous mix)",
+  "femi koleoso of ezra collective",
+  "knee deep in ibiza mixed",
+  "le grand brand",
 ] as const;
 
 export const PRODUCER_DISCARD_SLUGS = new Set<string>([
@@ -96,6 +100,10 @@ export const PRODUCER_DISCARD_SLUGS = new Set<string>([
   "w-hotels",
   "wooli-wankdat",
   "alok-s-infinite-experience",
+  "8-track-continuous-mix",
+  "femi-koleoso-of-ezra-collective",
+  "knee-deep-in-ibiza-mixed",
+  "le-grand-brand",
 ]);
 
 /** Wrong channel / not a catalog DJ. Never drop a pin or roster slug. */
@@ -271,6 +279,14 @@ export const PRODUCER_KEEP: ProducerKeep[] = [
       instagram: "https://www.instagram.com/shimza.dj/",
       twitter: "https://x.com/Shimza01",
       youtube: "https://www.youtube.com/@ShimzaSA",
+    },
+  },
+  {
+    slug: "mila-alias",
+    name: "Mila Alias",
+    socials: {
+      instagram: "https://www.instagram.com/djmilaalias/",
+      youtube: "https://www.youtube.com/@MILAALIASDJ",
     },
   },
   {

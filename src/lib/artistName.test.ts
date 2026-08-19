@@ -165,7 +165,13 @@ assert.equal(
 assert.equal(isLeftoverHostName("Live in Buenos Aires"), true);
 assert.equal(isLeftoverHostName("Rave Ukraine: DJ Sets"), true);
 assert.equal(isLeftoverHostName("Rave UKraine"), true);
+assert.equal(isLeftoverHostName("8-track (Continuous Mix)"), true);
+assert.equal(isLeftoverHostName("Femi Koleoso of Ezra Collective"), true);
+assert.equal(isLeftoverHostName("Knee Deep In Ibiza Mixed"), true);
+assert.equal(isLeftoverHostName("Le Grand Brand"), true);
 assert.equal(isLeftoverHostName("Charlotte de Witte"), false);
+assert.equal(isLeftoverHostName("Maceo Plex"), false);
+assert.equal(isLeftoverHostName("Monateng Music"), false);
 assert.equal(isJunkArtistName("Behind Cercle Odyssey I Chapter Four"), true);
 assert.equal(
   isJunkArtistName("Behind Cercle Odyssey I Chapter Four: Curtain"),

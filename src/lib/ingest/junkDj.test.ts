@@ -22,6 +22,13 @@ describe("junkDj", () => {
     );
     assert.equal(classifyJunkDj("Live in Buenos Aires"), "other");
     assert.equal(classifyJunkDj("Rave UKraine"), "other");
+    assert.equal(classifyJunkDj("8-track (Continuous Mix)"), "other");
+    assert.equal(
+      classifyJunkDj("Femi Koleoso of Ezra Collective"),
+      "other",
+    );
+    assert.equal(classifyJunkDj("Knee Deep In Ibiza Mixed"), "other");
+    assert.equal(classifyJunkDj("Le Grand Brand"), "other");
     assert.equal(classifyJunkDj("Dom Dolla"), null);
     assert.equal(classifyJunkDj("Tape B"), null);
     assert.equal(classifyJunkDj("Tape B", "tape-b"), null);
