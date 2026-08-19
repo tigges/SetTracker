@@ -340,6 +340,7 @@ const djmagHubPins: Array<[string, RegExp, string]> = [
   ["vinai", /linktr\.ee\/vinaiofficial/, "https://linktr.ee/vinaiofficial"],
   ["honey-dijon", /linktr\.ee\/honeydijon/, "https://linktr.ee/honeydijon"],
   ["nils-van-zandt", /linktr\.ee\/nilsvanzandt/, "https://linktr.ee/nilsvanzandt"],
+  ["cuebrick", /facebook\.com\/cuebrick/, "https://www.facebook.com/cuebrick"],
 ];
 for (const [slug, site, hint] of djmagHubPins) {
   assert.ok(bySlug[slug], `missing pin ${slug}`);
@@ -366,5 +367,10 @@ assert.match(bySlug.quintino!.instagram!, /instagram\.com\/quintino/);
 assert.doesNotMatch(bySlug.quintino!.website, /ra\.co/);
 assert.match(bySlug["mariana-bo"]!.twitter!, /(?:twitter|x)\.com\/djmarianabo/);
 assert.equal(bySlug.vinai!.twitter, undefined);
+assert.match(bySlug.cuebrick!.beatport!, /beatport\.com\/artist\/cuebrick\/243731/);
+assert.match(bySlug.cuebrick!.twitter!, /(?:twitter|x)\.com\/cuebrick_dj/);
+assert.match(bySlug.cuebrick!.youtube!, /@cuebrick/i);
+assert.equal(hintForName("Cuebrick")?.soundcloudPermalink, "cuebrick");
+assert.equal(hintForName("Cuebrick")?.youtubeHandle, "@Cuebrick");
 
 console.log("djSocialPins.test.ts ok");

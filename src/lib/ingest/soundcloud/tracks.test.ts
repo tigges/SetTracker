@@ -443,9 +443,94 @@ assert.equal(
   `sc-korolovadj-${slugify("korolova-live-snowattack")}`,
   "sc-korolovadj-korolova-live-snowattack",
 );
+
+const korolovaTulumSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url ===
+    "https://soundcloud.com/korolovadj/korolova-tulum-mexico-melodic",
+);
+assert.ok(korolovaTulumSc);
+assert.equal(korolovaTulumSc.primaryArtist.name, "Korolova");
+assert.equal(korolovaTulumSc.type, "mix");
+assert.equal(
+  `sc-korolovadj-${slugify("korolova-tulum-mexico-melodic")}`,
+  "sc-korolovadj-korolova-tulum-mexico-melodic",
+);
+
+const marnikUnlegendSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url ===
+    "https://soundcloud.com/marnikofficial/marnik-presents-unlegend-show",
+);
+assert.ok(marnikUnlegendSc);
+assert.equal(marnikUnlegendSc.primaryArtist.name, "MARNIK");
+assert.equal(marnikUnlegendSc.seriesName, "UNLEGEND");
+assert.equal(marnikUnlegendSc.eventName, "Nameless Festival");
+assert.equal(marnikUnlegendSc.type, "festival");
+assert.equal(
+  `sc-marnikofficial-${slugify("marnik-presents-unlegend-show")}`,
+  "sc-marnikofficial-marnik-presents-unlegend-show",
+);
+
+const goDigitalSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url ===
+    "https://soundcloud.com/giuseppeottaviani/giuseppe-ottaviani-digitalsociety",
+);
+assert.ok(goDigitalSc);
+assert.equal(goDigitalSc.primaryArtist.name, "Giuseppe Ottaviani");
+assert.equal(goDigitalSc.seriesName, "Digital Society");
+assert.equal(
+  `sc-giuseppeottaviani-${slugify("giuseppe-ottaviani-digitalsociety")}`,
+  "sc-giuseppeottaviani-giuseppe-ottaviani-digitalsociety",
+);
 assert.equal(
   SOUNDCLOUD_TRACK_SEEDS.some((s) =>
     s.url.startsWith("sc-https://"),
+  ),
+  false,
+);
+
+const cuebrick297Sc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url === "https://soundcloud.com/cuebrick/cuebricks-conference-297",
+);
+assert.ok(cuebrick297Sc);
+assert.equal(cuebrick297Sc.primaryArtist.name, "Cuebrick");
+assert.equal(cuebrick297Sc.seriesName, "Conference");
+assert.equal(cuebrick297Sc.type, "radio");
+assert.equal(
+  `sc-cuebrick-${slugify("cuebricks-conference-297")}`,
+  "sc-cuebrick-cuebricks-conference-297",
+);
+
+const meduzaStereoSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) => s.url === "https://soundcloud.com/meduzamusic/meduza_dj_set",
+);
+assert.ok(meduzaStereoSc);
+assert.equal(meduzaStereoSc.primaryArtist.name, "MEDUZA");
+assert.equal(meduzaStereoSc.eventName, "Stereo Montréal");
+assert.equal(meduzaStereoSc.type, "mix");
+assert.equal(
+  `sc-meduzamusic-${slugify("meduza_dj_set")}`,
+  "sc-meduzamusic-meduza-dj-set",
+);
+
+const meduzaSpaceSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url === "https://soundcloud.com/meduzamusic/meduza-space-miami-march-13",
+);
+assert.ok(meduzaSpaceSc);
+assert.equal(meduzaSpaceSc.primaryArtist.name, "MEDUZA");
+assert.equal(meduzaSpaceSc.eventName, "Club Space Miami");
+assert.equal(meduzaSpaceSc.type, "mix");
+assert.equal(
+  `sc-meduzamusic-${slugify("meduza-space-miami-march-13")}`,
+  "sc-meduzamusic-meduza-space-miami-march-13",
+);
+assert.equal(
+  SOUNDCLOUD_TRACK_SEEDS.some((s) =>
+    /meduzamusic\/meduza-club-space$/.test(s.url),
   ),
   false,
 );

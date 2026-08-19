@@ -3,6 +3,71 @@
   "updatedAt": "2026-08-19T00:00:00.000Z",
   "urls": [
     {
+      "label": "Austin Kramer · UNreleased 139 2026-05-19",
+      "slug": "yt-QLpmLx5JUsg",
+      "name": "TL_AUSTIN_KRAMER_UNRELEASED_139_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/17r26gu1/austin-kramer-unreleased-with-austin-kramer-139-2026-05-19.html",
+      "youtubeUrl": "https://youtu.be/QLpmLx5JUsg",
+      "note": "Operator paste 2026-08-19. 19 timed cues on official YT. Overlay TL_Austin-Kramer_UNreleased-With-Austin-Kramer_139_2026-05-19 is not a valid identifier. No SC in the paste — do not invent an SC slug. unreleased is a show leftover, not a DJ."
+    },
+    {
+      "label": "MEDUZA · Club Space Miami, United States 2026-03-13",
+      "slug": "sc-meduzamusic-meduza-space-miami-march-13",
+      "name": "TL_MEDUZA_CLUB_SPACE_MIAMI_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/2mhf717k/meduza-club-space-miami-united-states-2026-03-13.html",
+      "soundcloudUrl": "https://soundcloud.com/meduzamusic/meduza-space-miami-march-13",
+      "note": "Operator paste 2026-08-19. 62 timed cues on official meduzamusic SC. Never sc-https://… or sc-meduzamusic-meduza-club-space (different Space upload). Overlay TL_MEDUZA_Club-Space_Miami_United-States_2026-03-13 is not a valid identifier. Distinct from Stereo Montréal sc-meduzamusic-meduza-dj-set."
+    },
+    {
+      "label": "MEDUZA · Stereo Montréal, Canada 2026-05-16",
+      "slug": "sc-meduzamusic-meduza-dj-set",
+      "name": "TL_MEDUZA_STEREO_MONTREAL_CANADA_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/26gkj70t/meduza-stereo-montreal-canada-2026-05-16.html",
+      "soundcloudUrl": "https://soundcloud.com/meduzamusic/meduza_dj_set",
+      "note": "Operator paste 2026-08-19. 91 timed cues on official meduzamusic SC. Never sc-https://…. Overlay TL_MEDUZA_Stereo_Montréal_Canada_2026-05-16 is not a valid identifier. Distinct from Aeterna Radio on the same account. No official Stereo site in the paste."
+    },
+    {
+      "label": "Cuebrick · Conference 297 2026-07-12",
+      "slug": "sc-cuebrick-cuebricks-conference-297",
+      "name": "TL_CUEBRICK_CONFERENCE_297_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/2hsx15xk/cuebrick-conference-297-2026-07-12.html",
+      "soundcloudUrl": "https://soundcloud.com/cuebrick/cuebricks-conference-297",
+      "note": "Operator paste 2026-08-19. 15 timed cues on official cuebrick SC. Never sc-https://…. Overlay TL_Cuebrick_Conference_297_2026 is not a valid identifier. Distinct from Sacré Paris yt-LLJn_gDMG_M (no 1001)."
+    },
+    {
+      "label": "Giuseppe Ottaviani · Digital Society, Leeds Warehouse 2026-07-24",
+      "slug": "sc-giuseppeottaviani-giuseppe-ottaviani-digitalsociety",
+      "name": "TL_GIUSEPPE_OTTAVIANI_DIGITAL_SOCIETY_LEEDS_WAREHOUSE_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/24mbg639/giuseppe-ottaviani-digital-society-leeds-warehouse-united-kingdom-2026-07-24.html",
+      "soundcloudUrl": "https://soundcloud.com/giuseppeottaviani/giuseppe-ottaviani-digitalsociety",
+      "note": "Operator paste 2026-08-19. 51 timed cues on official SC. Never sc-https://…. Overlay TL_Giuseppe-Ottaviani_Digital-Society_Leeds-Warehouse__2026 is not a valid identifier."
+    },
+    {
+      "label": "Deborah De Luca · Pyramid, Amnesia Ibiza 2025-09-21",
+      "slug": "yt-IfFnvi7O2Po",
+      "name": "TL_DEBORAH_DE_LUCA_PYRAMID_AMNESIA_IBIZA_2025",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/crntdz1/deborah-de-luca-pyramid-amnesia-ibiza-spain-2025-09-21.html",
+      "youtubeUrl": "https://youtu.be/IfFnvi7O2Po",
+      "note": "Operator paste 2026-08-19. 13 timed cues on official YT. Distinct from Street Parade Opera yt-7cK7rhYXbh8. No SC in the paste — do not invent an SC slug. Overlay TL_Deborah-De-Luca_Pyramid,_Amnesia_Ibiza_Spain_2025 is not a valid identifier."
+    },
+    {
+      "label": "Natte Visstick · Teletech x FYM, AFAS Live Amsterdam 2025-12-31",
+      "slug": "yt-Nrl9yBX6Kpw",
+      "name": "TL_NATTE_VISSTICK_TELETECH_FYM_AFAS_LIVE_AMSTERDAM_2025",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/25jl14z9/natte-visstick-teletech-x-fym-afas-live-amsterdam-netherlands-2025-12-31.html",
+      "youtubeUrl": "https://youtu.be/Nrl9yBX6Kpw",
+      "note": "Operator paste 2026-08-19. 35 timed cues on official YT. No SC in the paste — do not invent an SC slug. Overlay TL_Natte-Visstick_Teletech_FYM_AFAS-Live_Amsterdam_Netherlands_2025 is not a valid identifier."
+    },
+    {
+      "label": "Korolova · Tulum, Mexico 2026-02-27",
+      "slug": "yt-HvkAfj1QnK8",
+      "name": "TL_KOROLOVA_TULUM_MEXICO_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/20v73731/korolova-tulum-mexico-2026-02-27.html",
+      "youtubeUrl": "https://youtu.be/HvkAfj1QnK8",
+      "soundcloudUrl": "https://soundcloud.com/korolovadj/korolova-tulum-mexico-melodic",
+      "note": "Operator paste 2026-08-19. 12 timed cues on official YT + korolovadj SC playbacks. Distinct from Snowattack, Captive Soul 098, and TML WE2."
+    },
+    {
       "label": "Korolova · Snowattack Festival, Les Deux Alpes 2026-01-21",
       "slug": "yt-7UcyaKbvy2o",
       "name": "TL_KOROLOVA_SNOWATTACK_FESTIVAL_2026",
@@ -195,6 +260,12 @@
     }
   ],
   "heldPendingRelive": [
+    {
+      "label": "MARNIK · Nameless Festival 2016-06-04",
+      "name": "TL_MARNIK_NAMELESS_FESTIVAL_2016",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/lr8pswt/marnik-nameless-festival-italy-2016-06-04.html",
+      "note": "Operator 1001 URL 2026-08-19. No official YT/SC playback and no cue paste — do not scrape 1001 or invent cues/playback. Distinct from UNLEGEND 2026 SC."
+    },
     {
       "label": "Knock2 B2B Zedd · HARD Summer HARD Stage 2026-08-02",
       "name": "TL_KNOCK2_ZEDD_HARD_SUMMER_2026",

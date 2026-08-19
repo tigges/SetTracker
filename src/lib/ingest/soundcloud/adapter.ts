@@ -363,7 +363,9 @@ async function trackSeedToRawSet(
     imageUrl: seed.primaryArtist.imageUrl || artistImage,
   };
   const { primary, collaborators } = artistsForSet(title, preferredPrimary);
-  const festival = inferFestivalEvent(title);
+  const festival =
+    inferFestivalEvent(title) ||
+    (seed.eventName ? inferFestivalEvent(seed.eventName) : null);
   const raw: RawSet = {
     sourceSlug,
     title,
@@ -372,7 +374,7 @@ async function trackSeedToRawSet(
     primaryArtist: withDescriptionSocials(primary, track.description),
     collaborators,
     seriesName: seed.seriesName,
-    eventName: festival?.name,
+    eventName: festival?.name ?? seed.eventName,
     eventKind: festival?.kind,
     eventLocation: festival?.location,
     publishedAt: publishedAtOf(track),

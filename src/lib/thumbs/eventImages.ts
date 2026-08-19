@@ -134,6 +134,7 @@ export const EVENT_OFFICIAL_SITES: Record<string, string> = {
   stereohype: "https://www.stereohype.com/",
   cercle: "https://www.cercle.io/",
   mixmag: "https://mixmag.net/",
+  "nameless-festival": "https://www.namelessfestival.it/en/",
 };
 
 export type EventImageStats = {

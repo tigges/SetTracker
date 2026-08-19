@@ -18,6 +18,8 @@ export type SoundCloudTrackSeed = {
   primaryArtist: RawArtist;
   genre: string;
   seriesName?: string;
+  /** Curated venue/festival name when the SC title omits it. */
+  eventName?: string;
   type?: "radio" | "festival" | "soundcloud" | "mix";
   /** Skip if shorter (default 15 minutes) */
   minDurationSec?: number;
@@ -473,5 +475,78 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     seriesName: "Snowattack",
     type: "festival",
     minDurationSec: 45 * 60,
+  },
+  {
+    // Official Korolova playback; 1001TL wired via
+    // sc-korolovadj-korolova-tulum-mexico-melodic
+    // (same list as yt-HvkAfj1QnK8). Never wire sc-https://….
+    url: "https://soundcloud.com/korolovadj/korolova-tulum-mexico-melodic",
+    primaryArtist: dj("Korolova", {
+      accent: "#f72585",
+      homeCity: "Ukraine",
+    }),
+    genre: "Melodic Techno",
+    type: "mix",
+    minDurationSec: 45 * 60,
+  },
+  {
+    // Official MARNIK UNLEGEND playback @ Nameless Festival 2026-02-14.
+    // No 1001 cue paste — do not invent 1001tl rows. Never wire sc-https://….
+    url: "https://soundcloud.com/marnikofficial/marnik-presents-unlegend-show",
+    primaryArtist: dj("MARNIK", { accent: "#ff006e" }),
+    genre: "Big Room",
+    seriesName: "UNLEGEND",
+    eventName: "Nameless Festival",
+    type: "festival",
+    minDurationSec: 30 * 60,
+  },
+  {
+    // Official Giuseppe Ottaviani playback; 1001TL wired via
+    // sc-giuseppeottaviani-giuseppe-ottaviani-digitalsociety
+    // Never wire sc-https://….
+    url: "https://soundcloud.com/giuseppeottaviani/giuseppe-ottaviani-digitalsociety",
+    primaryArtist: dj("Giuseppe Ottaviani", { accent: "#7b2cbf" }),
+    genre: "Trance",
+    seriesName: "Digital Society",
+    type: "festival",
+    minDurationSec: 90 * 60,
+  },
+  {
+    // Official Cuebrick Conference 297; 1001TL wired via
+    // sc-cuebrick-cuebricks-conference-297. Never wire sc-https://….
+    url: "https://soundcloud.com/cuebrick/cuebricks-conference-297",
+    primaryArtist: dj("Cuebrick", { accent: "#8338ec" }),
+    genre: "Big Room",
+    seriesName: "Conference",
+    type: "radio",
+    minDurationSec: 50 * 60,
+  },
+  {
+    // Official MEDUZA Stereo Montréal 2026-05-16; 1001TL wired via
+    // sc-meduzamusic-meduza-dj-set. Never wire sc-https://….
+    // Distinct from Aeterna Radio seeds on the same account.
+    url: "https://soundcloud.com/meduzamusic/meduza_dj_set",
+    primaryArtist: dj("MEDUZA", {
+      accent: "#5cc7e8",
+      homeCity: "Italy",
+    }),
+    genre: "House",
+    eventName: "Stereo Montréal",
+    type: "mix",
+    minDurationSec: 90 * 60,
+  },
+  {
+    // Official MEDUZA Club Space Miami 2026-03-13; 1001TL wired via
+    // sc-meduzamusic-meduza-space-miami-march-13. Never wire sc-https://…
+    // or the other Space upload sc-meduzamusic-meduza-club-space.
+    url: "https://soundcloud.com/meduzamusic/meduza-space-miami-march-13",
+    primaryArtist: dj("MEDUZA", {
+      accent: "#5cc7e8",
+      homeCity: "Italy",
+    }),
+    genre: "House",
+    eventName: "Club Space Miami",
+    type: "mix",
+    minDurationSec: 90 * 60,
   },
 ];

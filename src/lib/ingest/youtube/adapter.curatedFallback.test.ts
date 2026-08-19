@@ -35,6 +35,13 @@ const INDIRA_AWAKENINGS = YOUTUBE_SETS.find((s) =>
 const KOROLOVA_SNOWATTACK = YOUTUBE_SETS.find((s) =>
   s.video.includes("7UcyaKbvy2o"),
 );
+const KOROLOVA_TULUM = YOUTUBE_SETS.find((s) =>
+  s.video.includes("HvkAfj1QnK8"),
+);
+const NATTE_AFAS = YOUTUBE_SETS.find((s) => s.video.includes("Nrl9yBX6Kpw"));
+const DEBORAH_AMNESIA = YOUTUBE_SETS.find((s) =>
+  s.video.includes("IfFnvi7O2Po"),
+);
 const MM_YACHT = YOUTUBE_SETS.find((s) => s.video.includes("0-s_qZRWElA"));
 const PRISMATIC_032 = YOUTUBE_SETS.find((s) => s.video.includes("blP5J6BUG0M"));
 const SPECTRUM_485 = YOUTUBE_SETS.find((s) => s.video.includes("yTRvLrtsM9I"));
@@ -121,6 +128,12 @@ const JOHN_SUMMIT_TML_WE2 = YOUTUBE_SETS.find((s) =>
 );
 const BRANDON_PAROOKAVILLE = YOUTUBE_SETS.find((s) =>
   s.video.includes("AQ6wWT2HaSQ"),
+);
+const CUEBRICK_SACRE = YOUTUBE_SETS.find((s) =>
+  s.video.includes("LLJn_gDMG_M"),
+);
+const AUSTIN_UNRELEASED_139 = YOUTUBE_SETS.find((s) =>
+  s.video.includes("QLpmLx5JUsg"),
 );
 
 describe("watchMetaFromCuratedSeed", () => {
@@ -642,6 +655,39 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.durationSec, 52 * 60 + 3 + 180);
   });
 
+  it("builds Korolova Tulum Mexico 2026 meta from the curated 1001 capture", () => {
+    assert.ok(KOROLOVA_TULUM);
+    const meta = watchMetaFromCuratedSeed(KOROLOVA_TULUM);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "HvkAfj1QnK8");
+    assert.match(meta.title, /Tulum, Mexico 2026/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=HvkAfj1QnK8");
+    // Last cue 53:08 + 180s pad.
+    assert.equal(meta.durationSec, 53 * 60 + 8 + 180);
+  });
+
+  it("builds Natte Visstick Teletech x FYM AFAS Live 2025 meta from the curated 1001 capture", () => {
+    assert.ok(NATTE_AFAS);
+    const meta = watchMetaFromCuratedSeed(NATTE_AFAS);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "Nrl9yBX6Kpw");
+    assert.match(meta.title, /Teletech x FYM, AFAS Live 2025/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=Nrl9yBX6Kpw");
+    // Last cue 56:03 + 180s pad.
+    assert.equal(meta.durationSec, 56 * 60 + 3 + 180);
+  });
+
+  it("builds Deborah De Luca Pyramid Amnesia Ibiza 2025 meta from the curated 1001 capture", () => {
+    assert.ok(DEBORAH_AMNESIA);
+    const meta = watchMetaFromCuratedSeed(DEBORAH_AMNESIA);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "IfFnvi7O2Po");
+    assert.match(meta.title, /Pyramid, Amnesia Ibiza 2025/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=IfFnvi7O2Po");
+    // Last cue 54:56 + 180s pad.
+    assert.equal(meta.durationSec, 54 * 60 + 56 + 180);
+  });
+
   it("builds Miss Monique Ibiza Yacht meta from the curated 1001 capture", () => {
     assert.ok(MM_YACHT);
     const meta = watchMetaFromCuratedSeed(MM_YACHT);
@@ -772,6 +818,28 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=JLIYTueL4TI");
     // Last cue 59:10 + 180s pad.
     assert.equal(meta.durationSec, 59 * 60 + 10 + 180);
+  });
+
+  it("builds Cuebrick Sacré Paris meta from the official @Cuebrick seed", () => {
+    assert.ok(CUEBRICK_SACRE);
+    const meta = watchMetaFromCuratedSeed(CUEBRICK_SACRE);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "LLJn_gDMG_M");
+    assert.match(meta.title, /Sacré Paris/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=LLJn_gDMG_M");
+    // No 1001 cues in the operator paste — default hour pad.
+    assert.equal(meta.durationSec, 60 * 60);
+  });
+
+  it("builds Austin Kramer UNreleased 139 meta from the curated 1001 capture", () => {
+    assert.ok(AUSTIN_UNRELEASED_139);
+    const meta = watchMetaFromCuratedSeed(AUSTIN_UNRELEASED_139);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "QLpmLx5JUsg");
+    assert.match(meta.title, /UNreleased/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=QLpmLx5JUsg");
+    // Last cue 57:15 + 180s pad.
+    assert.equal(meta.durationSec, 57 * 60 + 15 + 180);
   });
 
   it("returns null without a title or video id", () => {
@@ -1128,6 +1196,52 @@ describe("curated YouTube 429 fallback", () => {
     assert.match(String(sets[0]?.eventName ?? ""), /Snowattack/i);
     assert.notEqual(sets[0]!.sourceSlug, "yt-5JxfEjVdQFk");
     assert.notEqual(sets[0]!.sourceSlug, "yt-RLOghpXjuJI");
+  });
+
+  it("lands Korolova Tulum Mexico 2026 from the 1001 seed when watch is 429", async () => {
+    assert.ok(KOROLOVA_TULUM);
+    const adapter = createYoutubeAdapter([KOROLOVA_TULUM], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-HvkAfj1QnK8");
+    assert.equal(sets[0]!.type, "mix");
+    assert.ok(sets[0]!.plays.length >= 12);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 53 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "korolova");
+    assert.match(String(sets[0]?.eventName ?? ""), /Tulum/i);
+    assert.notEqual(sets[0]!.sourceSlug, "yt-7UcyaKbvy2o");
+    assert.notEqual(sets[0]!.sourceSlug, "yt-5JxfEjVdQFk");
+    assert.notEqual(sets[0]!.sourceSlug, "yt-RLOghpXjuJI");
+  });
+
+  it("lands Natte Visstick Teletech x FYM AFAS Live 2025 from the 1001 seed when watch is 429", async () => {
+    assert.ok(NATTE_AFAS);
+    const adapter = createYoutubeAdapter([NATTE_AFAS], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-Nrl9yBX6Kpw");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 35);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 56 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "natte-visstick");
+    assert.match(String(sets[0]?.eventName ?? ""), /Teletech x FYM/i);
+  });
+
+  it("lands Deborah De Luca Pyramid Amnesia Ibiza 2025 from the 1001 seed when watch is 429", async () => {
+    assert.ok(DEBORAH_AMNESIA);
+    const adapter = createYoutubeAdapter([DEBORAH_AMNESIA], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-IfFnvi7O2Po");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 13);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 54 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "deborah-de-luca");
+    assert.match(String(sets[0]?.eventName ?? ""), /Amnesia Ibiza/i);
+    assert.notEqual(sets[0]!.sourceSlug, "yt-7cK7rhYXbh8");
   });
 
   it("lands Miss Monique Ibiza Yacht from the 1001 seed when watch is 429", async () => {
@@ -1682,5 +1796,38 @@ describe("curated YouTube 429 fallback", () => {
     assert.equal(sets[0]?.primaryArtist?.slug, "brandon");
     assert.match(String(sets[0]?.eventName ?? ""), /Parookaville/i);
     assert.match(String(sets[0]?.title ?? ""), /2024/);
+  });
+
+  it("lands Cuebrick Sacré Paris from the official seed when watch is 429", async () => {
+    assert.ok(CUEBRICK_SACRE);
+    const adapter = createYoutubeAdapter([CUEBRICK_SACRE], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-LLJn_gDMG_M");
+    assert.equal(sets[0]!.type, "mix");
+    assert.equal(sets[0]!.genre, "Techno");
+    assert.equal(sets[0]!.plays.length, 0);
+    assert.equal(sets[0]?.primaryArtist?.slug, "cuebrick");
+    assert.match(String(sets[0]?.eventName ?? ""), /Sacr[eé] Paris/i);
+    assert.match(String(sets[0]?.title ?? ""), /Mainstage Techno/i);
+  });
+
+  it("lands Austin Kramer UNreleased 139 from the 1001 seed when watch is 429", async () => {
+    assert.ok(AUSTIN_UNRELEASED_139);
+    const adapter = createYoutubeAdapter([AUSTIN_UNRELEASED_139], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-QLpmLx5JUsg");
+    assert.equal(sets[0]!.type, "radio");
+    assert.equal(sets[0]!.genre, "House");
+    assert.ok(sets[0]!.plays.length >= 19);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.equal(sets[0]?.primaryArtist?.slug, "austin-kramer");
+    assert.equal(sets[0]?.seriesName, "UNreleased");
+    assert.equal(
+      (sets[0]?.collaborators ?? []).some((c) => c.slug === "unreleased"),
+      false,
+    );
+    assert.match(String(sets[0]?.title ?? ""), /UNreleased/i);
   });
 });

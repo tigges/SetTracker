@@ -153,5 +153,39 @@ assert.equal(
   resolveEvent("Vision & Colour Music Festival").instagram,
   "https://www.instagram.com/vacfestival/",
 );
+assert.equal(
+  inferFestivalEvent("MARNIK presents UNLEGEND @ NAMELESS Festival")?.slug,
+  "nameless-festival",
+);
+assert.equal(
+  inferFestivalEvent("Nameless Festival")?.website,
+  "https://www.namelessfestival.it/en/",
+);
+assert.equal(
+  inferFestivalEvent("MEDUZA @ Stereo Montréal, Canada 2026-05-16")?.slug,
+  "stereo-montreal",
+);
+assert.equal(inferFestivalEvent("Stereo Montréal")?.kind, "club");
+assert.equal(inferFestivalEvent("Stereo"), null);
+assert.equal(inferFestivalEvent("stereoBLOOM"), null);
+assert.equal(
+  inferFestivalEvent("R3WIRE - House & Tech Live on STEREOHYPE")?.slug,
+  "stereohype",
+);
+assert.equal(
+  inferFestivalEvent("MEDUZA @ Club Space Miami, United States 2026-03-13")
+    ?.slug,
+  "club-space",
+);
+assert.equal(
+  inferFestivalEvent("MEDUZA Space Miami March 13")?.website,
+  "https://www.clubspace.com/",
+);
+assert.equal(
+  inferFestivalEvent(
+    "Vintage Culture Live at EDC Las Vegas, Neon Garden (Club Space)",
+  )?.slug,
+  "edc-lv",
+);
 
 console.log("events.test.ts ok");

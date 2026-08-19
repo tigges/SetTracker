@@ -2013,10 +2013,17 @@ export const ARTIST_ROSTER_CURATED: ArtistRosterEntry[] = [
   },
   {
     name: "Cuebrick",
-    genre: "Big Room",
+    genre: "Techno",
     accent: "#8338ec",
     youtube: { handle: "@cuebrick", status: "ok" },
     soundcloud: { permalink: "cuebrick", status: "ok" },
+    website: "https://www.facebook.com/cuebrick",
+    socials: [
+      "https://www.facebook.com/cuebrick",
+      "https://www.instagram.com/cuebrick_dj/",
+      "https://x.com/cuebrick_dj",
+      "https://www.beatport.com/artist/cuebrick/243731",
+    ],
     priority: "high",
   },
   {

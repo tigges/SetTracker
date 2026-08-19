@@ -133,6 +133,10 @@ import {
   TL_CLAPTONE_MASQUERADE_BUENOS_AIRES_2022,
   TL_INDIRA_PAGANOTTO_AREA_V_AWAKENINGS_2025,
   TL_KOROLOVA_SNOWATTACK_FESTIVAL_2026,
+  TL_KOROLOVA_TULUM_MEXICO_2026,
+  TL_NATTE_VISSTICK_TELETECH_FYM_AFAS_LIVE_AMSTERDAM_2025,
+  TL_DEBORAH_DE_LUCA_PYRAMID_AMNESIA_IBIZA_2025,
+  TL_AUSTIN_KRAMER_UNRELEASED_139_2026,
 } from "../tracklists1001/seeds";
 import type { RawArtist } from "../types";
 import { slugify } from "../types";
@@ -1007,6 +1011,52 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/kcl35g1/korolova-snowattack-festival-les-deux-alpes-france-2026-01-21.html",
     tracklist1001: TL_KOROLOVA_SNOWATTACK_FESTIVAL_2026,
+  },
+  {
+    // Official Korolova playback — Tulum, Mexico 2026-02-27.
+    // Distinct from Snowattack, Captive Soul 098, and TML WE2.
+    video: "https://www.youtube.com/watch?v=HvkAfj1QnK8",
+    primaryArtist: dj("Korolova", {
+      accent: "#f72585",
+      homeCity: "Ukraine",
+    }),
+    genre: "Melodic Techno",
+    type: "mix",
+    title: "Korolova | Tulum, Mexico 2026",
+    eventName: "Tulum",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/20v73731/korolova-tulum-mexico-2026-02-27.html",
+    tracklist1001: TL_KOROLOVA_TULUM_MEXICO_2026,
+  },
+  {
+    // Official playback — Teletech x FYM, AFAS Live Amsterdam 2025-12-31.
+    // No SoundCloud in the operator paste — do not invent an SC slug.
+    video: "https://www.youtube.com/watch?v=Nrl9yBX6Kpw",
+    primaryArtist: dj("Natte Visstick", {
+      accent: "#ff4d00",
+    }),
+    genre: "Hard Dance",
+    type: "festival",
+    title: "Natte Visstick | Teletech x FYM, AFAS Live 2025",
+    eventName: "Teletech x FYM",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/25jl14z9/natte-visstick-teletech-x-fym-afas-live-amsterdam-netherlands-2025-12-31.html",
+    tracklist1001: TL_NATTE_VISSTICK_TELETECH_FYM_AFAS_LIVE_AMSTERDAM_2025,
+  },
+  {
+    // Official playback — Pyramid, Amnesia Ibiza 2025-09-21.
+    // Distinct from Street Parade Opera (yt-7cK7rhYXbh8).
+    // No SoundCloud in the operator paste — do not invent an SC slug.
+    video: "https://www.youtube.com/watch?v=IfFnvi7O2Po",
+    primaryArtist: dj("Deborah De Luca", { accent: "#c9184a" }),
+    genre: "Techno",
+    type: "festival",
+    title: "Deborah De Luca | Pyramid, Amnesia Ibiza 2025",
+    seriesName: "Pyramid",
+    eventName: "Amnesia Ibiza",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/crntdz1/deborah-de-luca-pyramid-amnesia-ibiza-spain-2025-09-21.html",
+    tracklist1001: TL_DEBORAH_DE_LUCA_PYRAMID_AMNESIA_IBIZA_2025,
   },
   {
     // Official Epic Radio 036; timed 1001 capture (same list as SC).
@@ -2709,12 +2759,27 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     eventName: "Tomorrowland Belgium",
   },
   {
+    // Official @Cuebrick club set. No 1001 URL in the operator paste —
+    // do not invent Sacré cues.
     video: "https://www.youtube.com/watch?v=LLJn_gDMG_M",
     primaryArtist: dj("Cuebrick", { accent: "#8338ec" }),
-    genre: "Big Room",
-    type: "festival",
+    genre: "Techno",
+    type: "mix",
     title: "Cuebrick – Live from Sacré Paris | Mainstage Techno | Club Set",
     eventName: "Sacré Paris",
+  },
+  {
+    // Official Austin Kramer UNreleased 139. No SoundCloud in the paste —
+    // do not invent an SC slug. "unreleased" is a show leftover, not a DJ.
+    video: "https://youtu.be/QLpmLx5JUsg",
+    primaryArtist: dj("Austin Kramer", { accent: "#ff9f1c" }),
+    genre: "House",
+    type: "radio",
+    title: "Austin Kramer - UNreleased With Austin Kramer 139",
+    seriesName: "UNreleased",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/17r26gu1/austin-kramer-unreleased-with-austin-kramer-139-2026-05-19.html",
+    tracklist1001: TL_AUSTIN_KRAMER_UNRELEASED_139_2026,
   },
   {
     // Official Tape B upload; 1001TL wired via yt-7_O8N_EJg_c

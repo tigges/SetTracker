@@ -923,8 +923,9 @@ export const DJ_SOCIAL_PINS: DjSocialPin[] = [
     youtube: "https://www.youtube.com/@cuebrick",
     instagram: "https://www.instagram.com/cuebrick_dj/",
     twitter: "https://x.com/cuebrick_dj",
-    website: "https://djmag.com/top100djs/2025/90/cuebrick",
-    bio: "Big Room. SC cuebrick (~20k), YT @cuebrick, IG @cuebrick_dj.",
+    website: "https://www.facebook.com/cuebrick",
+    beatport: "https://www.beatport.com/artist/cuebrick/243731",
+    bio: "Techno / Big Room. Official About: SC cuebrick, YT @Cuebrick, IG @cuebrick_dj, X @Cuebrick_DJ, FB /cuebrick, Beatport /artist/cuebrick/243731. DJ Mag Top 100 is not a homepage.",
   },
   {
     slug: "mariana-bo",

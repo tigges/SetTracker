@@ -74,6 +74,7 @@ const ALIAS_TO_KNOWN: Record<string, string> = {
   "gmo-sonic": "gmo-sonic",
   "magic-of-tomorrowland": "magic-of-tomorrowland",
   "vision-colour-music-festival": "vision-colour-music-festival",
+  "nameless-festival": "nameless-festival",
 };
 
 const SKIP_TITLE_MATCH = new Set(["amf", "exit"]);
@@ -99,6 +100,7 @@ const EXTRA_OFFICIAL: Record<string, string> = {
   "pitch-music-arts": "https://www.pitchfestival.com.au/",
   "gmo-sonic": "https://sonic.gmo/en/",
   "magic-of-tomorrowland": "https://magicoftomorrowland.com/",
+  "nameless-festival": "https://www.namelessfestival.it/en/",
 };
 
 let cached: DjMagFestival[] | null = null;

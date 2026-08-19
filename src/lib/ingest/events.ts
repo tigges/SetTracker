@@ -371,6 +371,27 @@ export const KNOWN_EVENTS: Record<string, CanonicalEvent> = {
     location: "Amsterdam, Netherlands",
     website: "https://www.awakenings.nl/",
   },
+  "nameless-festival": {
+    slug: "nameless-festival",
+    name: "Nameless Festival",
+    kind: "festival",
+    location: "Lecco, Lake Como, Italy",
+    website: "https://www.namelessfestival.it/en/",
+  },
+  "stereo-montreal": {
+    slug: "stereo-montreal",
+    name: "Stereo Montréal",
+    kind: "club",
+    location: "Montréal, Canada",
+    // No official site in the operator paste — do not invent a host.
+  },
+  "club-space": {
+    slug: "club-space",
+    name: "Club Space",
+    kind: "club",
+    location: "Miami, United States",
+    website: "https://www.clubspace.com/",
+  },
   "street-parade": {
     slug: "street-parade",
     name: "Street Parade",
@@ -522,6 +543,9 @@ const ALIAS_TO_SLUG: Record<string, string> = {
   "amnesia-ibiza": "amnesia-ibiza",
   "warehouse-project": "warehouse-project",
   "the-warehouse-project": "warehouse-project",
+  "club-space": "club-space",
+  "club-space-miami": "club-space",
+  "space-miami": "club-space",
   "concourse-project": "concourse-project",
   "the-concourse-project": "concourse-project",
   "avalon-hollywood": "avalon-hollywood",
@@ -693,6 +717,16 @@ export function inferFestivalEvent(title: string): CanonicalEvent | null {
   if (/\bnature\s*one\b/i.test(t)) return KNOWN_EVENTS["nature-one"];
   if (/\bdance\s*valley\b/i.test(t)) return KNOWN_EVENTS["dance-valley"];
   if (/\belrow\b/i.test(t)) return KNOWN_EVENTS.elrow;
+  if (/\bnameless\s+festival\b/i.test(t)) {
+    return KNOWN_EVENTS["nameless-festival"];
+  }
+  // Require Montréal — bare "stereo" is STEREOHYPE / Stereo Love / stereoBLOOM.
+  if (/\bstereo\s+montr[eé]al\b/i.test(t)) {
+    return KNOWN_EVENTS["stereo-montreal"];
+  }
+  if (/\bclub\s+space\b|\bspace\s+miami\b/i.test(t)) {
+    return KNOWN_EVENTS["club-space"];
+  }
   // DJ Mag Top 100 Festivals / Clubs / other club listicles (not Mixmag.net).
   return (
     inferDjMagFestivalEvent(t) ??

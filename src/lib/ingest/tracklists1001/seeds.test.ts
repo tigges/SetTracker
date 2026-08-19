@@ -153,6 +153,14 @@ import {
   TL_CLAPTONE_MASQUERADE_BUENOS_AIRES_2022,
   TL_INDIRA_PAGANOTTO_AREA_V_AWAKENINGS_2025,
   TL_KOROLOVA_SNOWATTACK_FESTIVAL_2026,
+  TL_KOROLOVA_TULUM_MEXICO_2026,
+  TL_NATTE_VISSTICK_TELETECH_FYM_AFAS_LIVE_AMSTERDAM_2025,
+  TL_DEBORAH_DE_LUCA_PYRAMID_AMNESIA_IBIZA_2025,
+  TL_GIUSEPPE_OTTAVIANI_DIGITAL_SOCIETY_LEEDS_WAREHOUSE_2026,
+  TL_CUEBRICK_CONFERENCE_297_2026,
+  TL_MEDUZA_STEREO_MONTREAL_CANADA_2026,
+  TL_MEDUZA_CLUB_SPACE_MIAMI_2026,
+  TL_AUSTIN_KRAMER_UNRELEASED_139_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   tracklist1001RowsToPlays,
@@ -2168,6 +2176,326 @@ assert.equal(
   isWiredTracklistSlug("sc-korolovadj-korolova-live-snowattack"),
   true,
 );
+
+assertSeedClocks(TL_KOROLOVA_TULUM_MEXICO_2026);
+assert.equal(TL_KOROLOVA_TULUM_MEXICO_2026.length, 12);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-HvkAfj1QnK8"],
+  TL_KOROLOVA_TULUM_MEXICO_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-korolovadj-korolova-tulum-mexico-melodic"
+  ],
+  TL_KOROLOVA_TULUM_MEXICO_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-https://soundcloud.com/korolovadj/korolova-tulum-mexico-melodic"
+  ],
+  undefined,
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-HvkAfj1QnK8"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-7UcyaKbvy2o"],
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-HvkAfj1QnK8"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-5JxfEjVdQFk"],
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-HvkAfj1QnK8"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-RLOghpXjuJI"],
+);
+const korolovaTulum = tracklist1001RowsToPlays(
+  TL_KOROLOVA_TULUM_MEXICO_2026,
+);
+assert.equal(korolovaTulum.length, 12);
+assert.equal(korolovaTulum[0]?.provenance, "1001tl");
+assert.equal(korolovaTulum[0]?.timestamp, 0);
+assert.equal(korolovaTulum[0]?.artistName, "Omnya & Eli Huli");
+assert.equal(korolovaTulum[0]?.trackTitle, "Lost In The Sound");
+assert.equal(korolovaTulum[8]?.trackTitle, "Empty Skies");
+assert.equal(korolovaTulum[8]?.timestamp, 33 * 60 + 58);
+assert.equal(korolovaTulum[11]?.trackTitle, "Sunset In Colombo");
+assert.equal(korolovaTulum[11]?.timestamp, 53 * 60 + 8);
+for (let i = 1; i < korolovaTulum.length; i++) {
+  assert.ok(
+    (korolovaTulum[i]!.timestamp ?? 0) > (korolovaTulum[i - 1]!.timestamp ?? 0),
+    `Korolova Tulum clocks must increase at index ${i}`,
+  );
+}
+assert.equal(isWiredTracklistSlug("yt-HvkAfj1QnK8"), true);
+assert.equal(
+  isWiredTracklistSlug("sc-korolovadj-korolova-tulum-mexico-melodic"),
+  true,
+);
+
+assertSeedClocks(TL_NATTE_VISSTICK_TELETECH_FYM_AFAS_LIVE_AMSTERDAM_2025);
+assert.equal(TL_NATTE_VISSTICK_TELETECH_FYM_AFAS_LIVE_AMSTERDAM_2025.length, 35);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-Nrl9yBX6Kpw"],
+  TL_NATTE_VISSTICK_TELETECH_FYM_AFAS_LIVE_AMSTERDAM_2025,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-https://youtu.be/Nrl9yBX6Kpw"],
+  undefined,
+);
+const natteAfas = tracklist1001RowsToPlays(
+  TL_NATTE_VISSTICK_TELETECH_FYM_AFAS_LIVE_AMSTERDAM_2025,
+);
+assert.equal(natteAfas.length, 35);
+assert.equal(natteAfas[0]?.provenance, "1001tl");
+assert.equal(natteAfas[0]?.timestamp, 1);
+assert.equal(natteAfas[0]?.artistName, "Natte Visstick");
+assert.equal(natteAfas[0]?.trackTitle, "Show Intro");
+assert.equal(natteAfas[4]?.trackTitle, "Deutsche Techno Bunker X Insomnia (Natte Visstick Mashup)");
+assert.equal(natteAfas[4]?.timestamp, 7 * 60 + 35);
+assert.equal(natteAfas[34]?.trackTitle, "Blood, Sweat And Hardcore (Natte Visstick Live Remix)");
+assert.equal(natteAfas[34]?.timestamp, 56 * 60 + 3);
+for (let i = 1; i < natteAfas.length; i++) {
+  assert.ok(
+    (natteAfas[i]!.timestamp ?? 0) > (natteAfas[i - 1]!.timestamp ?? 0),
+    `Natte Visstick AFAS Live clocks must increase at index ${i}`,
+  );
+}
+assert.equal(isWiredTracklistSlug("yt-Nrl9yBX6Kpw"), true);
+
+assertSeedClocks(TL_DEBORAH_DE_LUCA_PYRAMID_AMNESIA_IBIZA_2025);
+assert.equal(TL_DEBORAH_DE_LUCA_PYRAMID_AMNESIA_IBIZA_2025.length, 13);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-IfFnvi7O2Po"],
+  TL_DEBORAH_DE_LUCA_PYRAMID_AMNESIA_IBIZA_2025,
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-IfFnvi7O2Po"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-7cK7rhYXbh8"],
+);
+const deborahAmnesia = tracklist1001RowsToPlays(
+  TL_DEBORAH_DE_LUCA_PYRAMID_AMNESIA_IBIZA_2025,
+);
+assert.equal(deborahAmnesia.length, 13);
+assert.equal(deborahAmnesia[0]?.provenance, "1001tl");
+assert.equal(deborahAmnesia[0]?.timestamp, 20);
+assert.equal(deborahAmnesia[0]?.artistName, "Maddix & Gabry Ponte");
+assert.equal(deborahAmnesia[0]?.trackTitle, "Hellfire");
+assert.equal(deborahAmnesia[5]?.trackTitle, "Baila Fuego");
+assert.equal(deborahAmnesia[5]?.timestamp, 23 * 60 + 5);
+assert.equal(deborahAmnesia[12]?.trackTitle, "DOMINATE");
+assert.equal(deborahAmnesia[12]?.timestamp, 54 * 60 + 56);
+for (let i = 1; i < deborahAmnesia.length; i++) {
+  assert.ok(
+    (deborahAmnesia[i]!.timestamp ?? 0) >
+      (deborahAmnesia[i - 1]!.timestamp ?? 0),
+    `Deborah De Luca Pyramid Amnesia clocks must increase at index ${i}`,
+  );
+}
+assert.equal(isWiredTracklistSlug("yt-IfFnvi7O2Po"), true);
+
+assertSeedClocks(TL_GIUSEPPE_OTTAVIANI_DIGITAL_SOCIETY_LEEDS_WAREHOUSE_2026);
+assert.equal(
+  TL_GIUSEPPE_OTTAVIANI_DIGITAL_SOCIETY_LEEDS_WAREHOUSE_2026.length,
+  51,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-giuseppeottaviani-giuseppe-ottaviani-digitalsociety"
+  ],
+  TL_GIUSEPPE_OTTAVIANI_DIGITAL_SOCIETY_LEEDS_WAREHOUSE_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-https://soundcloud.com/giuseppeottaviani/giuseppe-ottaviani-digitalsociety"
+  ],
+  undefined,
+);
+const goDigital = tracklist1001RowsToPlays(
+  TL_GIUSEPPE_OTTAVIANI_DIGITAL_SOCIETY_LEEDS_WAREHOUSE_2026,
+);
+assert.equal(goDigital.length, 51);
+assert.equal(goDigital[0]?.provenance, "1001tl");
+assert.equal(goDigital[0]?.timestamp, 1);
+assert.equal(goDigital[0]?.trackTitle, "Break The Loop");
+assert.equal(goDigital[7]?.trackTitle, "What Is On Your Mind vs. Greece 2000 (Giuseppe Ottaviani Mashup)");
+assert.equal(goDigital[50]?.trackTitle, "Adagio For Strings");
+assert.equal(goDigital[50]?.timestamp, 2 * 3600 + 57 * 60 + 4);
+for (let i = 1; i < goDigital.length; i++) {
+  assert.ok(
+    (goDigital[i]!.timestamp ?? 0) > (goDigital[i - 1]!.timestamp ?? 0),
+    `Giuseppe Ottaviani Digital Society clocks must increase at index ${i}`,
+  );
+}
+assert.equal(
+  isWiredTracklistSlug("sc-giuseppeottaviani-giuseppe-ottaviani-digitalsociety"),
+  true,
+);
+
+assertSeedClocks(TL_CUEBRICK_CONFERENCE_297_2026);
+assert.equal(TL_CUEBRICK_CONFERENCE_297_2026.length, 15);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-cuebrick-cuebricks-conference-297"],
+  TL_CUEBRICK_CONFERENCE_297_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-https://soundcloud.com/cuebrick/cuebricks-conference-297"
+  ],
+  undefined,
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-cuebrick-cuebricks-conference-297"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-LLJn_gDMG_M"],
+);
+const cuebrick297 = tracklist1001RowsToPlays(TL_CUEBRICK_CONFERENCE_297_2026);
+assert.equal(cuebrick297.length, 15);
+assert.equal(cuebrick297[0]?.provenance, "1001tl");
+assert.equal(cuebrick297[0]?.timestamp, 20);
+assert.equal(cuebrick297[0]?.artistName, "Alexander Komarov");
+assert.equal(cuebrick297[0]?.trackTitle, "My Soul");
+assert.equal(cuebrick297[6]?.trackTitle, "Coming Home");
+assert.equal(cuebrick297[6]?.timestamp, 24 * 60 + 2);
+assert.equal(cuebrick297[14]?.trackTitle, "Ordinary");
+assert.equal(cuebrick297[14]?.timestamp, 55 * 60 + 38);
+for (let i = 1; i < cuebrick297.length; i++) {
+  assert.ok(
+    (cuebrick297[i]!.timestamp ?? 0) > (cuebrick297[i - 1]!.timestamp ?? 0),
+    `Cuebrick Conference 297 clocks must increase at index ${i}`,
+  );
+}
+assert.equal(
+  isWiredTracklistSlug("sc-cuebrick-cuebricks-conference-297"),
+  true,
+);
+assert.equal(
+  isWiredTracklistSlug(
+    "sc-https://soundcloud.com/cuebrick/cuebricks-conference-297",
+  ),
+  false,
+);
+
+assertSeedClocks(TL_MEDUZA_STEREO_MONTREAL_CANADA_2026);
+assert.equal(TL_MEDUZA_STEREO_MONTREAL_CANADA_2026.length, 91);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-meduzamusic-meduza-dj-set"],
+  TL_MEDUZA_STEREO_MONTREAL_CANADA_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-https://soundcloud.com/meduzamusic/meduza_dj_set"
+  ],
+  undefined,
+);
+const meduzaStereo = tracklist1001RowsToPlays(
+  TL_MEDUZA_STEREO_MONTREAL_CANADA_2026,
+);
+assert.equal(meduzaStereo.length, 91);
+assert.equal(meduzaStereo[0]?.provenance, "1001tl");
+assert.equal(meduzaStereo[0]?.timestamp, 0);
+assert.equal(meduzaStereo[0]?.artistName, "The Organism");
+assert.equal(meduzaStereo[0]?.trackTitle, "Gypsy");
+assert.equal(meduzaStereo[8]?.trackTitle, "Tides");
+assert.equal(meduzaStereo[8]?.timestamp, 50 * 60 + 57);
+assert.equal(meduzaStereo[14]?.trackTitle, "Rave Love");
+assert.equal(meduzaStereo[14]?.timestamp, 1 * 3600 + 41 * 60 + 53);
+assert.equal(meduzaStereo[15]?.trackTitle, "A Gira (Emanuel Satie & Maga & Sean Doron & Tim Engelhardt pres. Scenarios Remix)");
+assert.equal(meduzaStereo[15]?.timestamp, 1 * 3600 + 41 * 60 + 54);
+assert.equal(meduzaStereo[90]?.trackTitle, "Black Water (Full Strings Vocal Mix)");
+assert.equal(meduzaStereo[90]?.timestamp, 8 * 3600 + 53 * 60 + 10);
+for (let i = 1; i < meduzaStereo.length; i++) {
+  assert.ok(
+    (meduzaStereo[i]!.timestamp ?? 0) > (meduzaStereo[i - 1]!.timestamp ?? 0),
+    `MEDUZA Stereo Montréal clocks must increase at index ${i}`,
+  );
+}
+assert.equal(isWiredTracklistSlug("sc-meduzamusic-meduza-dj-set"), true);
+assert.equal(
+  isWiredTracklistSlug(
+    "sc-https://soundcloud.com/meduzamusic/meduza_dj_set",
+  ),
+  false,
+);
+
+assertSeedClocks(TL_MEDUZA_CLUB_SPACE_MIAMI_2026);
+assert.equal(TL_MEDUZA_CLUB_SPACE_MIAMI_2026.length, 62);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-meduzamusic-meduza-space-miami-march-13"],
+  TL_MEDUZA_CLUB_SPACE_MIAMI_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-https://soundcloud.com/meduzamusic/meduza-space-miami-march-13"
+  ],
+  undefined,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-meduzamusic-meduza-club-space"],
+  undefined,
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-meduzamusic-meduza-space-miami-march-13"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-meduzamusic-meduza-dj-set"],
+);
+const meduzaSpace = tracklist1001RowsToPlays(TL_MEDUZA_CLUB_SPACE_MIAMI_2026);
+assert.equal(meduzaSpace.length, 62);
+assert.equal(meduzaSpace[0]?.provenance, "1001tl");
+assert.equal(meduzaSpace[0]?.timestamp, 0);
+assert.equal(meduzaSpace[0]?.artistName, "MEDUZA & Kevin de Vries");
+assert.equal(meduzaSpace[0]?.trackTitle, "7 Days");
+assert.equal(meduzaSpace[10]?.trackTitle, "Lose Control");
+assert.equal(meduzaSpace[10]?.timestamp, 50 * 60 + 4);
+assert.equal(meduzaSpace[61]?.trackTitle, "Careless Whisper");
+assert.equal(meduzaSpace[61]?.timestamp, 4 * 3600 + 52 * 60 + 15);
+for (let i = 1; i < meduzaSpace.length; i++) {
+  assert.ok(
+    (meduzaSpace[i]!.timestamp ?? 0) > (meduzaSpace[i - 1]!.timestamp ?? 0),
+    `MEDUZA Club Space Miami clocks must increase at index ${i}`,
+  );
+}
+assert.equal(
+  isWiredTracklistSlug("sc-meduzamusic-meduza-space-miami-march-13"),
+  true,
+);
+assert.equal(
+  isWiredTracklistSlug(
+    "sc-https://soundcloud.com/meduzamusic/meduza-space-miami-march-13",
+  ),
+  false,
+);
+assert.equal(isWiredTracklistSlug("sc-meduzamusic-meduza-club-space"), false);
+assert.equal(
+  isWiredTracklistSlug(
+    "sc-https://soundcloud.com/giuseppeottaviani/giuseppe-ottaviani-digitalsociety",
+  ),
+  false,
+);
+
+assertSeedClocks(TL_AUSTIN_KRAMER_UNRELEASED_139_2026);
+assert.equal(TL_AUSTIN_KRAMER_UNRELEASED_139_2026.length, 19);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-QLpmLx5JUsg"],
+  TL_AUSTIN_KRAMER_UNRELEASED_139_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-https://youtu.be/QLpmLx5JUsg"],
+  undefined,
+);
+const austin139 = tracklist1001RowsToPlays(TL_AUSTIN_KRAMER_UNRELEASED_139_2026);
+assert.equal(austin139.length, 19);
+assert.equal(austin139[0]?.provenance, "1001tl");
+assert.equal(austin139[0]?.timestamp, 0);
+assert.equal(austin139[0]?.artistName, "B JONES & MIDI Kittyy");
+assert.equal(austin139[0]?.trackTitle, "Universe");
+assert.equal(austin139[5]?.trackTitle, "You Keep It Simple");
+assert.equal(austin139[5]?.timestamp, 14 * 60 + 50);
+assert.equal(austin139[18]?.trackTitle, "Begin Again");
+assert.equal(austin139[18]?.timestamp, 57 * 60 + 15);
+for (let i = 1; i < austin139.length; i++) {
+  assert.ok(
+    (austin139[i]!.timestamp ?? 0) > (austin139[i - 1]!.timestamp ?? 0),
+    `Austin Kramer UNreleased 139 clocks must increase at index ${i}`,
+  );
+}
+assert.equal(isWiredTracklistSlug("yt-QLpmLx5JUsg"), true);
 
 assertSeedClocks(TL_NICKY_ROMERO_PROTOCOL_RADIO_731);
 assert.equal(TL_NICKY_ROMERO_PROTOCOL_RADIO_731.length, 16);
