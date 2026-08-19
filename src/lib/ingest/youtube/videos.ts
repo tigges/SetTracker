@@ -137,6 +137,9 @@ import {
   TL_NATTE_VISSTICK_TELETECH_FYM_AFAS_LIVE_AMSTERDAM_2025,
   TL_DEBORAH_DE_LUCA_PYRAMID_AMNESIA_IBIZA_2025,
   TL_AUSTIN_KRAMER_UNRELEASED_139_2026,
+  TL_JAMIE_JONES_GAS_TOWER_LOST_HORIZON_FESTIVAL_2020,
+  TL_SKRILLEX_BANCO_DE_CHILE_STAGE_LOLLAPALOOZA_CHILE_2026,
+  TL_CHRIS_STUSSY_BOILER_ROOM_EDINBURGH_2024,
 } from "../tracklists1001/seeds";
 import type { RawArtist } from "../types";
 import { slugify } from "../types";
@@ -2214,6 +2217,12 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     title: "Jamie Jones DJ set - Lost Horizon Festival | Beatport Live",
     seriesName: "Beatport Live",
     eventName: "Lost Horizon Festival",
+    // Official Beatport Live upload already curated. Operator 1001 paste
+    // 2026-08-19. No SoundCloud in the paste — do not invent an SC slug.
+    // Distinct from Hot Robot Radio 225 / 239.
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/29ty8h89/jamie-jones-gas-tower-lost-horizon-festival-beatport-live-2020-07-04.html",
+    tracklist1001: TL_JAMIE_JONES_GAS_TOWER_LOST_HORIZON_FESTIVAL_2020,
   },
   {
     video: "https://www.youtube.com/watch?v=y3I-vaIIo9Y",
@@ -2235,6 +2244,21 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     type: "festival",
     title: "SKRILLEX LIVE @ LOLLAPALOOZA CHILE 2026 (Full Set HD)",
     eventName: "Lollapalooza Chile",
+    // Different upload from the operator 1001 paste (yt-loD-whuR5zc).
+    // Do not attach that list or merge sourceSlugs.
+  },
+  {
+    // Official operator paste 2026-08-19. No SoundCloud in the paste —
+    // do not invent an SC slug. Never yt-oGS0A_R9tag (different Chile upload).
+    video: "https://youtu.be/loD-whuR5zc",
+    primaryArtist: dj("Skrillex", { accent: "#80ffdb" }),
+    genre: "Dubstep",
+    type: "festival",
+    title: "Skrillex @ Banco de Chile Stage, Lollapalooza Chile 2026-03-15",
+    eventName: "Lollapalooza Chile",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1sh3nkvk/skrillex-banco-de-chile-stage-lollapalooza-chile-2026-03-15.html",
+    tracklist1001: TL_SKRILLEX_BANCO_DE_CHILE_STAGE_LOLLAPALOOZA_CHILE_2026,
   },
   // Top 100 gap fills — oEmbed + YouTube Data API duration-validated (≥~30m).
   // Prefer official Tomorrowland / artist / Boiler Room / Cercle / ASOT uploads.
@@ -2536,6 +2560,12 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     title: "Chris Stussy | Boiler Room: Edinburgh",
     seriesName: "Boiler Room",
     eventName: "Boiler Room Edinburgh",
+    // Official Boiler Room upload already curated. Operator 1001 paste
+    // 2026-08-19. 1001 title spells Stassy; catalog DJ is Chris Stussy.
+    // No SoundCloud in the paste — do not invent an SC slug.
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2787514k/chris-stassy-boiler-room-edinburgh-united-kingdom-2024-05-19.html",
+    tracklist1001: TL_CHRIS_STUSSY_BOILER_ROOM_EDINBURGH_2024,
   },
   {
     video: "https://www.youtube.com/watch?v=5LqJCIi6p7Y",

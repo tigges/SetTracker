@@ -3,6 +3,30 @@
   "updatedAt": "2026-08-19T00:00:00.000Z",
   "urls": [
     {
+      "label": "Chris Stussy · Boiler Room Edinburgh, United Kingdom 2024-05-19",
+      "slug": "yt-42XFNGZrpaQ",
+      "name": "TL_CHRIS_STUSSY_BOILER_ROOM_EDINBURGH_2024",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/2787514k/chris-stassy-boiler-room-edinburgh-united-kingdom-2024-05-19.html",
+      "youtubeUrl": "https://youtu.be/42XFNGZrpaQ",
+      "note": "Operator paste 2026-08-19. 10 timed cues on official Boiler Room YT already curated. Overlay TL_Chris-Stassy_Boiler-Room_Edinburgh_2024-05-19 is not a valid identifier. 1001 title spells Stassy; catalog / official YT seed is Chris Stussy. No SC in the paste — do not invent an SC slug."
+    },
+    {
+      "label": "Skrillex · Banco de Chile Stage, Lollapalooza Chile 2026-03-15",
+      "slug": "yt-loD-whuR5zc",
+      "name": "TL_SKRILLEX_BANCO_DE_CHILE_STAGE_LOLLAPALOOZA_CHILE_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/1sh3nkvk/skrillex-banco-de-chile-stage-lollapalooza-chile-2026-03-15.html",
+      "youtubeUrl": "https://youtu.be/loD-whuR5zc",
+      "note": "Operator paste 2026-08-19. 73 timed cues on official YT. Overlay TL_Skrillex_Banco-de-Chile-Stage_Lollapalooza_Chile_2026-03-15 is not a valid identifier. No SC in the paste — do not invent an SC slug. Never yt-oGS0A_R9tag (different Chile upload). Banco de Chile Stage is a stage, not a separate event. Last two clocks 1:25:20 / 1:25:21 kept as pasted."
+    },
+    {
+      "label": "Jamie Jones · Gas Tower, Lost Horizon Festival (Beatport Live) 2020-07-04",
+      "slug": "yt-U2ZjW_8K3h4",
+      "name": "TL_JAMIE_JONES_GAS_TOWER_LOST_HORIZON_FESTIVAL_2020",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/29ty8h89/jamie-jones-gas-tower-lost-horizon-festival-beatport-live-2020-07-04.html",
+      "youtubeUrl": "https://youtu.be/U2ZjW_8K3h4",
+      "note": "Operator paste 2026-08-19. 16 timed cues on official Beatport Live YT already curated. Overlay TL_Jamie-Jones_Gas-Tower_Lost-Horizon-Festival_Beatport-Live_2020-07-04 is not a valid identifier. No SC in the paste — do not invent an SC slug. Distinct from Hot Robot Radio 225 / 239. Gas Tower is a stage, not a separate event."
+    },
+    {
       "label": "Austin Kramer · UNreleased 139 2026-05-19",
       "slug": "yt-QLpmLx5JUsg",
       "name": "TL_AUSTIN_KRAMER_UNRELEASED_139_2026",

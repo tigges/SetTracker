@@ -161,6 +161,9 @@ import {
   TL_MEDUZA_STEREO_MONTREAL_CANADA_2026,
   TL_MEDUZA_CLUB_SPACE_MIAMI_2026,
   TL_AUSTIN_KRAMER_UNRELEASED_139_2026,
+  TL_JAMIE_JONES_GAS_TOWER_LOST_HORIZON_FESTIVAL_2020,
+  TL_SKRILLEX_BANCO_DE_CHILE_STAGE_LOLLAPALOOZA_CHILE_2026,
+  TL_CHRIS_STUSSY_BOILER_ROOM_EDINBURGH_2024,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   tracklist1001RowsToPlays,
@@ -2496,6 +2499,114 @@ for (let i = 1; i < austin139.length; i++) {
   );
 }
 assert.equal(isWiredTracklistSlug("yt-QLpmLx5JUsg"), true);
+
+assertSeedClocks(TL_JAMIE_JONES_GAS_TOWER_LOST_HORIZON_FESTIVAL_2020);
+assert.equal(TL_JAMIE_JONES_GAS_TOWER_LOST_HORIZON_FESTIVAL_2020.length, 16);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-U2ZjW_8K3h4"],
+  TL_JAMIE_JONES_GAS_TOWER_LOST_HORIZON_FESTIVAL_2020,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-https://youtu.be/U2ZjW_8K3h4"],
+  undefined,
+);
+const jamieLostHorizon = tracklist1001RowsToPlays(
+  TL_JAMIE_JONES_GAS_TOWER_LOST_HORIZON_FESTIVAL_2020,
+);
+assert.equal(jamieLostHorizon.length, 16);
+assert.equal(jamieLostHorizon[0]?.provenance, "1001tl");
+assert.equal(jamieLostHorizon[0]?.timestamp, 0);
+assert.equal(jamieLostHorizon[0]?.artistName, "DJ Slugo");
+assert.equal(jamieLostHorizon[0]?.trackTitle, "Cardboard Booty");
+assert.equal(jamieLostHorizon[7]?.trackTitle, "Gotta Have It (Underground Mix)");
+assert.equal(jamieLostHorizon[7]?.timestamp, 22 * 60 + 30);
+assert.equal(jamieLostHorizon[15]?.trackTitle, "Halcyon On & On");
+assert.equal(jamieLostHorizon[15]?.timestamp, 54 * 60 + 58);
+for (let i = 1; i < jamieLostHorizon.length; i++) {
+  assert.ok(
+    (jamieLostHorizon[i]!.timestamp ?? 0) >
+      (jamieLostHorizon[i - 1]!.timestamp ?? 0),
+    `Jamie Jones Lost Horizon clocks must increase at index ${i}`,
+  );
+}
+assert.equal(isWiredTracklistSlug("yt-U2ZjW_8K3h4"), true);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-U2ZjW_8K3h4"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-jamie-jones-hot-robot-radio-225"],
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-U2ZjW_8K3h4"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-jamie-jones-hot-robot-radio-239"],
+);
+
+assertSeedClocks(TL_SKRILLEX_BANCO_DE_CHILE_STAGE_LOLLAPALOOZA_CHILE_2026);
+assert.equal(TL_SKRILLEX_BANCO_DE_CHILE_STAGE_LOLLAPALOOZA_CHILE_2026.length, 73);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-loD-whuR5zc"],
+  TL_SKRILLEX_BANCO_DE_CHILE_STAGE_LOLLAPALOOZA_CHILE_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-oGS0A_R9tag"],
+  undefined,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-https://youtu.be/loD-whuR5zc"],
+  undefined,
+);
+const skrillexChile = tracklist1001RowsToPlays(
+  TL_SKRILLEX_BANCO_DE_CHILE_STAGE_LOLLAPALOOZA_CHILE_2026,
+);
+assert.equal(skrillexChile.length, 73);
+assert.equal(skrillexChile[0]?.provenance, "1001tl");
+assert.equal(skrillexChile[0]?.timestamp, 0);
+assert.equal(skrillexChile[0]?.artistName, "Skrillex & Nitepunk");
+assert.equal(skrillexChile[0]?.trackTitle, "Soma");
+assert.equal(skrillexChile[24]?.trackTitle, "Listen Music Culture");
+assert.equal(skrillexChile[24]?.timestamp, 36 * 60 + 30);
+assert.equal(skrillexChile[71]?.trackTitle, "Kyoto (Skrillex & Virtual Riot VIP)");
+assert.equal(skrillexChile[71]?.timestamp, 1 * 3600 + 25 * 60 + 20);
+assert.equal(skrillexChile[72]?.trackTitle, "SAN DIEGO (VIP)");
+assert.equal(skrillexChile[72]?.timestamp, 1 * 3600 + 25 * 60 + 21);
+for (let i = 1; i < skrillexChile.length; i++) {
+  assert.ok(
+    (skrillexChile[i]!.timestamp ?? 0) > (skrillexChile[i - 1]!.timestamp ?? 0),
+    `Skrillex Lollapalooza Chile clocks must increase at index ${i}`,
+  );
+}
+assert.equal(isWiredTracklistSlug("yt-loD-whuR5zc"), true);
+assert.equal(isWiredTracklistSlug("yt-oGS0A_R9tag"), false);
+
+assertSeedClocks(TL_CHRIS_STUSSY_BOILER_ROOM_EDINBURGH_2024);
+assert.equal(TL_CHRIS_STUSSY_BOILER_ROOM_EDINBURGH_2024.length, 10);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-42XFNGZrpaQ"],
+  TL_CHRIS_STUSSY_BOILER_ROOM_EDINBURGH_2024,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-https://youtu.be/42XFNGZrpaQ"],
+  undefined,
+);
+const stussyEdinburgh = tracklist1001RowsToPlays(
+  TL_CHRIS_STUSSY_BOILER_ROOM_EDINBURGH_2024,
+);
+assert.equal(stussyEdinburgh.length, 10);
+assert.equal(stussyEdinburgh[0]?.provenance, "1001tl");
+assert.equal(stussyEdinburgh[0]?.timestamp, 17);
+assert.equal(stussyEdinburgh[0]?.artistName, "Moby");
+assert.equal(stussyEdinburgh[0]?.trackTitle, "Go (Chris Stussy Edit)");
+assert.equal(stussyEdinburgh[8]?.artistName, "Chris Stussy");
+assert.equal(stussyEdinburgh[8]?.trackTitle, "Bounce To The Beat");
+assert.equal(stussyEdinburgh[8]?.timestamp, 59 * 60 + 30);
+assert.equal(stussyEdinburgh[9]?.trackTitle, "Something Going On (Acappella)");
+assert.equal(stussyEdinburgh[9]?.timestamp, 1 * 3600 + 11 * 60 + 49);
+for (let i = 1; i < stussyEdinburgh.length; i++) {
+  assert.ok(
+    (stussyEdinburgh[i]!.timestamp ?? 0) >
+      (stussyEdinburgh[i - 1]!.timestamp ?? 0),
+    `Chris Stussy Boiler Room Edinburgh clocks must increase at index ${i}`,
+  );
+}
+assert.equal(isWiredTracklistSlug("yt-42XFNGZrpaQ"), true);
 
 assertSeedClocks(TL_NICKY_ROMERO_PROTOCOL_RADIO_731);
 assert.equal(TL_NICKY_ROMERO_PROTOCOL_RADIO_731.length, 16);

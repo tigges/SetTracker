@@ -646,3 +646,144 @@ export const TL_AUSTIN_KRAMER_UNRELEASED_139_2026: FingerprintSeedRow[] = [
   { at: "53:25", artist: "VNDL", title: "You Were Always There" },
   { at: "57:15", artist: "Dokkodo Sounds", title: "Begin Again" },
 ];
+
+/**
+ * Jamie Jones @ Gas Tower, Lost Horizon Festival (Beatport Live) 2020-07-04
+ * Official YouTube: https://youtu.be/U2ZjW_8K3h4
+ * https://www.1001tracklists.com/tracklist/29ty8h89/jamie-jones-gas-tower-lost-horizon-festival-beatport-live-2020-07-04.html
+ * Overlay name TL_Jamie-Jones_Gas-Tower_Lost-Horizon-Festival_Beatport-Live_2020-07-04 is not a valid identifier.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-U2ZjW_8K3h4"]
+ * No SoundCloud in the operator paste — do not invent an SC slug.
+ * Distinct from Hot Robot Radio 225 / 239.
+ * Captured 2026-08-19 — provenance 1001tl.
+ */
+export const TL_JAMIE_JONES_GAS_TOWER_LOST_HORIZON_FESTIVAL_2020: FingerprintSeedRow[] =
+  [
+    { at: "0:00", artist: "DJ Slugo", title: "Cardboard Booty" },
+    { at: "5:10", artist: "Giano", title: "The Underground" },
+    { at: "7:30", artist: "Oneiro Say", title: "Shhh! (Slide On The Wild Side)" },
+    { at: "9:20", artist: "Hanfry Martinez & Cuartero", title: "Volver" },
+    { at: "12:35", artist: "Fabe", title: "Chocolate Cake" },
+    { at: "16:00", artist: "Andy Jay & S-Tee ft. Rubi Dan", title: "Funky Dip (Dumplin Deep Remix)" },
+    { at: "18:40", artist: "Basement Jaxx ft. Kele Le Roc", title: "Romeo (Harry Romero Remix)" },
+    { at: "22:30", artist: "Up 4 It", title: "Gotta Have It (Underground Mix)" },
+    { at: "29:00", artist: "Nyra", title: "Sounds Of The Spectrum" },
+    { at: "31:50", artist: "Mark Broom", title: "Hear Me" },
+    { at: "35:10", artist: "KMA Productions", title: "Cape Fear" },
+    { at: "37:20", artist: "undertone", title: "What" },
+    { at: "43:00", artist: "Todd Terry", title: "I Feel It" },
+    { at: "45:00", artist: "Andy Rojas", title: "Touching Me" },
+    { at: "50:00", artist: "Bodega Queen", title: "Bodega Queen" },
+    { at: "54:58", artist: "Orbital", title: "Halcyon On & On" },
+  ];
+
+/**
+ * Skrillex @ Banco de Chile Stage, Lollapalooza Chile 2026-03-15
+ * Official YouTube: https://youtu.be/loD-whuR5zc
+ * https://www.1001tracklists.com/tracklist/1sh3nkvk/skrillex-banco-de-chile-stage-lollapalooza-chile-2026-03-15.html
+ * Overlay name TL_Skrillex_Banco-de-Chile-Stage_Lollapalooza_Chile_2026-03-15 is not a valid identifier.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-loD-whuR5zc"]
+ * Never attach this list to yt-oGS0A_R9tag (different Chile upload already curated).
+ * No SoundCloud in the operator paste — do not invent an SC slug.
+ * Captured 2026-08-19 — provenance 1001tl.
+ */
+export const TL_SKRILLEX_BANCO_DE_CHILE_STAGE_LOLLAPALOOZA_CHILE_2026: FingerprintSeedRow[] =
+  [
+    { at: "0:00", artist: "Skrillex & Nitepunk", title: "Soma" },
+    { at: "4:50", artist: "Skrillex & Hamdi & Taichu & OFFAIAH", title: "Push" },
+    { at: "6:10", artist: "Skrillex & Hamdi & Taichu & OFFAIAH", title: "Push (Lizdek Remix)" },
+    { at: "7:30", artist: "Chris Lake & Skrillex ft. ANITA B QUEEN", title: "LA NOCHE (if found Remix)" },
+    { at: "9:50", artist: "Chris Lake & Skrillex ft. ANITA B QUEEN", title: "LA NOCHE" },
+    { at: "12:10", artist: "Jack Ü & Justin Bieber vs. Skrillex", title: "Where Are Ü Now vs. Voltage (Skrillex Edit)" },
+    { at: "12:33", artist: "Skrillex", title: "VOLTAGE" },
+    { at: "12:57", artist: "Jack Ü ft. Justin Bieber", title: "Where Are Ü Now (Acappella)" },
+    { at: "13:20", artist: "Skrillex & swedm® & Habstrakt & Bladee", title: "Far From Home" },
+    { at: "15:57", artist: "Skrillex & swedm® & Habstrakt & Bladee", title: "Far From Home (KARAN! Flip)" },
+    { at: "16:30", artist: "Skrillex & Kito ft. Aluna", title: "Inhale Exhale" },
+    { at: "17:35", artist: "Skrillex & Sleepnet & Joker", title: "Tears (KARAN! UMF Flip)" },
+    { at: "18:02", artist: "Skrillex & Yung Lean & Bladee", title: "Ceremony" },
+    { at: "18:29", artist: "J Balvin & Skrillex", title: "In Da Getto" },
+    { at: "18:56", artist: "Skrillex & Sleepnet & Joker", title: "Tears (Neillusion Cumbia Tribal Remix)" },
+    { at: "19:23", artist: "Skrillex & Sleepnet & Joker", title: "Tears" },
+    { at: "19:50", artist: "Avicii", title: "Levels (Skrillex Tribute 2025 Edit)" },
+    { at: "21:15", artist: "Avicii", title: "Levels (Skrillex Remix / ISOxo Edit)" },
+    { at: "22:40", artist: "Skrillex ft. Nai Barghouti", title: "XENA" },
+    { at: "24:08", artist: "Skrillex ft. Nai Barghouti", title: "XENA (KARAN! Flip)" },
+    { at: "25:35", artist: "Skrillex & Ellie Goulding vs. Porter Robinson", title: "Summit vs. Flicker (Skrillex Edit)" },
+    { at: "28:13", artist: "Skrillex ft. Ellie Goulding", title: "Summit" },
+    { at: "30:52", artist: "Porter Robinson", title: "Flicker" },
+    { at: "33:30", artist: "Skrillex & Boys Noize ft. Opus III", title: "Fine Day Anthem" },
+    { at: "36:30", artist: "JOYRYDE & Skrillex & Flowdan", title: "Listen Music Culture" },
+    { at: "37:30", artist: "Headie One", title: "Both" },
+    { at: "38:30", artist: "Megan Thee Stallion", title: "Body" },
+    { at: "39:30", artist: "Central Cee ft. Lil Baby", title: "BAND4BAND (Skrillex Remix)" },
+    { at: "40:07", artist: "Bizarrap & Villano Antillano", title: "BZRP Music Sessions #51" },
+    { at: "40:44", artist: "Skrillex ft. Alvin Risk", title: "Try It Out (Try Harder Mix)" },
+    { at: "41:20", artist: "Skrillex & Starrah & Four Tet", title: "Butterflies" },
+    { at: "44:05", artist: "Skrillex & Porter Robinson & Bibi Bourelly", title: "Still Here (With The Ones That I Came With)" },
+    { at: "45:23", artist: "Skrillex ft. Bobby Raps", title: "Leave Me Like This" },
+    { at: "46:40", artist: "Skrillex & ISOxo ft. Cristale & TeeZandos", title: "Smoke" },
+    { at: "47:45", artist: "Jack Ü ft. Bunji Garlin & MX Prime", title: "Jungle Bae (Acappella)" },
+    { at: "48:50", artist: "Whitney Houston vs. Jack Ü & Justin Bieber", title: "I Wanna Dance with Somebody (Who Loves Me) vs. Where Are Ü Now (Skrillex Edit)" },
+    { at: "49:27", artist: "Whitney Houston", title: "I Wanna Dance with Somebody (Who Loves Me) (Acappella)" },
+    { at: "50:04", artist: "Jack Ü ft. Justin Bieber", title: "Where Are Ü Now" },
+    { at: "50:40", artist: "Damian Marley", title: "Welcome To Jamrock" },
+    { at: "51:20", artist: "Skrillex & Damian Marley", title: "Make It Bun Dem" },
+    { at: "52:00", artist: "Skrillex & Damian Marley", title: "Make It Bun Dem (MONXX Remix)" },
+    { at: "52:40", artist: "Skrillex & ISOxo", title: "fuze" },
+    { at: "53:55", artist: "Skrillex & ISOxo", title: "fuze (TRVCY Remix)" },
+    { at: "55:10", artist: "Skrillex ft. Beam", title: "Mumbai Power" },
+    { at: "56:18", artist: "Benny Benassi ft. Gary Go", title: "Cinema (Skrillex Remix)" },
+    { at: "57:25", artist: "Skrillex & Fred again.. & Flowdan", title: "Rumble (Chase & Status Remix)" },
+    { at: "57:56", artist: "Skrillex & Fred again.. & Flowdan", title: "Rumble" },
+    { at: "58:27", artist: "Skrillex & Fred again.. & Flowdan", title: "Rumble (Wesflex Continuous Mix)" },
+    { at: "58:59", artist: "Skrillex & Fred again.. & Flowdan", title: "Rumble (ALRT Remix)" },
+    { at: "59:30", artist: "Skrillex & Team EZY", title: "ANIMALS BEAT" },
+    { at: "1:00:17", artist: "Skrillex ft. Sirah", title: "Bangarang" },
+    { at: "1:01:04", artist: "Skrillex ft. Sirah", title: "Bangarang (VIP)" },
+    { at: "1:01:50", artist: "Skrillex & Mr. Oizo ft. Missy Elliott", title: "RATATA" },
+    { at: "1:04:00", artist: "Skrillex", title: "Kill Everybody" },
+    { at: "1:04:55", artist: "ISOxo ft. fussy", title: "STARsound" },
+    { at: "1:05:50", artist: "Daft Punk", title: "Robot Rock (Santo Future Baile Edit)" },
+    { at: "1:07:05", artist: "Skrillex & Habstrakt", title: "Chicken Soup (KARAN! Flip)" },
+    { at: "1:08:20", artist: "ISOxo vs. Jack Ü & Justin Bieber vs. Skrillex & Porter Robinson & Bibi Bourelly", title: "how2fly vs. Where Are Ü Now vs. Still Here (With The Ones That I Came With) (Skrillex & ISOxo Edit)" },
+    { at: "1:09:10", artist: "Jack Ü ft. Justin Bieber", title: "Where Are Ü Now (Acappella)" },
+    { at: "1:10:00", artist: "Skrillex & Porter Robinson & Bibi Bourelly", title: "Still Here (With The Ones That I Came With)" },
+    { at: "1:10:50", artist: "ISOxo", title: "how2fly" },
+    { at: "1:11:40", artist: "Skrillex & Dylan Brady & Caroline Polachek", title: "hit me where it hurts x" },
+    { at: "1:15:15", artist: "Skrillex", title: "Scary Monsters And Nice Sprites" },
+    { at: "1:15:58", artist: "Skrillex", title: "Scary Monsters And Nice Sprites (YOOKiE 'This Kills It Live' VIP / Acraze Jersey Flip)" },
+    { at: "1:16:40", artist: "Naisha & Skrillex & BEAM", title: "Diwali" },
+    { at: "1:17:45", artist: "Skrillex", title: "REDLINE DASH (Nitepunk Edit)" },
+    { at: "1:18:50", artist: "Skrillex & ISOxo", title: "Anybody" },
+    { at: "1:20:45", artist: "Skrillex & Young Miko", title: "Duro" },
+    { at: "1:23:30", artist: "Porter Robinson ft. Bright Lights", title: "Language" },
+    { at: "1:24:08", artist: "Benny Benassi ft. Gary Go", title: "Cinema (Skrillex Remix)" },
+    { at: "1:24:45", artist: "Avicii", title: "Levels (Skrillex Remix)" },
+    { at: "1:25:20", artist: "Skrillex ft. Sirah", title: "Kyoto (Skrillex & Virtual Riot VIP)" },
+    { at: "1:25:21", artist: "Skrillex", title: "SAN DIEGO (VIP)" },
+  ];
+
+/**
+ * Chris Stussy @ Boiler Room Edinburgh, United Kingdom 2024-05-19
+ * Official YouTube: https://youtu.be/42XFNGZrpaQ
+ * https://www.1001tracklists.com/tracklist/2787514k/chris-stassy-boiler-room-edinburgh-united-kingdom-2024-05-19.html
+ * Overlay name TL_Chris-Stassy_Boiler-Room_Edinburgh_2024-05-19 is not a valid identifier.
+ * 1001 title spells Stassy; catalog / official YT seed is Chris Stussy.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-42XFNGZrpaQ"]
+ * No SoundCloud in the operator paste — do not invent an SC slug.
+ * Captured 2026-08-19 — provenance 1001tl.
+ */
+export const TL_CHRIS_STUSSY_BOILER_ROOM_EDINBURGH_2024: FingerprintSeedRow[] =
+  [
+    { at: "0:17", artist: "Moby", title: "Go (Chris Stussy Edit)" },
+    { at: "10:40", artist: "Aaron-Carl", title: "Drive (Downriver Dub)" },
+    { at: "15:10", artist: "Pink Floyd", title: "Another Brick In The Wall (Chris Stussy Edit)" },
+    { at: "39:30", artist: "Across Boundaries", title: "T.M.P." },
+    { at: "44:20", artist: "ID", title: "Be Good To Me" },
+    { at: "48:30", artist: "Across Boundaries", title: "Pumpin'" },
+    { at: "53:20", artist: "Obskür", title: "I've Arrived" },
+    { at: "57:00", artist: "Kosh", title: "Come On" },
+    { at: "59:30", artist: "Chris Stussy", title: "Bounce To The Beat" },
+    { at: "1:11:49", artist: "Todd Terry ft. Martha Wash & Jocelyn Brown", title: "Something Going On (Acappella)" },
+  ];
