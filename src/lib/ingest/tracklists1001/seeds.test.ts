@@ -3760,6 +3760,26 @@ for (let i = 1; i < brandonPv.length; i++) {
   );
 }
 
+// Tini Gessler ANTS Ushuaïa — official SC playback in, 1001 URL recorded,
+// screenshots had no clocks. Do not invent 1001tl rows or sc-https://… slugs.
+assert.equal(
+  isWiredTracklistSlug("sc-tini-gessler-tini-gessler-ants-x-ushuaia"),
+  false,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-tini-gessler-tini-gessler-ants-x-ushuaia"
+  ],
+  undefined,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-https://soundcloud.com/tini-gessler/tini-gessler-ants-x-ushuaia"
+  ],
+  undefined,
+);
+assert.equal(isWiredTracklistSlug("yt-sLtNC21myWM"), true);
+
 // Claptone Clapcast 576 — official SC playback in, 1001 URL recorded,
 // no cue paste. Do not invent 1001tl rows or sc-https://… slugs.
 assert.equal(isWiredTracklistSlug("sc-claptone-clapcast-576"), false);

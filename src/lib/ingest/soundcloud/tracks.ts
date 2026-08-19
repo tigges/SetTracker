@@ -549,4 +549,17 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     type: "mix",
     minDurationSec: 90 * 60,
   },
+  {
+    // Official Tini Gessler ANTS x Ushuaïa playback. Operator 1001 URL
+    // 108xuk31 recorded in known-1001-urls pendingCuePaste — screenshots
+    // had track names without clocks. Do not scrape or invent 1001tl rows.
+    // Never wire sc-https://…. Distinct from HoneyLuv ANTS yt-sLtNC21myWM.
+    url: "https://soundcloud.com/tini-gessler/tini-gessler-ants-x-ushuaia",
+    primaryArtist: dj("Tini Gessler", { accent: "#ff4d6d" }),
+    genre: "Tech House",
+    seriesName: "ANTS",
+    eventName: "Ushuaïa Ibiza",
+    type: "mix",
+    minDurationSec: 45 * 60,
+  },
 ];
