@@ -21,6 +21,7 @@ import {
 } from "@/lib/statsHealth";
 import {
   buildPlaybookItems,
+  isWeakOrEmptyWebsite,
   leftoverHostInCatalog,
   leftoverHostOnQueue,
   weakChartWebsite,
@@ -293,37 +294,41 @@ export async function getStatsHealth(): Promise<StatsHealth> {
     .sort((a, b) => b.setCount - a.setCount || a.name.localeCompare(b.name));
 
   const calendarSlugs = new Set(VENUE_CALENDAR_SOURCES.map((s) => s.venueSlug));
-  const weakSites: PlaybookPlace[] = events
-    .map((e) => {
-      if (e.kind !== "festival" && e.kind !== "club") return null;
-      const onChart = atlasSlugs.includes(e.slug);
-      if (
-        !weakChartWebsite({
-          onChart,
-          website: e.website,
-        })
-      ) {
-        return null;
-      }
-      return {
-        slug: e.slug,
-        name: e.name,
-        kind: e.kind,
-        website: e.website,
-        onChart,
-      };
-    })
-    .filter((row): row is PlaybookPlace => row != null)
-    .sort(
-      (a, b) =>
-        Number(b.onChart) - Number(a.onChart) || a.name.localeCompare(b.name),
-    );
+  const eventBySlug = new Map(events.map((e) => [e.slug, e]));
+  const weakBySlug = new Map<string, PlaybookPlace>();
+  for (const e of events) {
+    if (e.kind !== "festival" && e.kind !== "club") continue;
+    const onChart = atlasSlugs.includes(e.slug);
+    if (!weakChartWebsite({ onChart, website: e.website })) continue;
+    weakBySlug.set(e.slug, {
+      slug: e.slug,
+      name: e.name,
+      kind: e.kind,
+      website: e.website,
+      onChart,
+    });
+  }
+  for (const v of loadAtlasVenues()) {
+    if (v.kind !== "festival" && v.kind !== "club") continue;
+    if (weakBySlug.has(v.slug)) continue;
+    const catalog = eventBySlug.get(v.slug);
+    const website = catalog?.website ?? v.website ?? null;
+    if (!isWeakOrEmptyWebsite(website)) continue;
+    weakBySlug.set(v.slug, {
+      slug: v.slug,
+      name: v.name,
+      kind: v.kind,
+      website,
+      onChart: true,
+    });
+  }
+  const weakSites = [...weakBySlug.values()].sort(
+    (a, b) =>
+      Number(b.onChart) - Number(a.onChart) || a.name.localeCompare(b.name),
+  );
 
-  const chartClubsNoCalendar = events.filter(
-    (e) =>
-      e.kind === "club" &&
-      atlasSlugs.includes(e.slug) &&
-      !calendarSlugs.has(e.slug),
+  const chartClubsNoCalendar = loadAtlasVenues().filter(
+    (v) => v.kind === "club" && !calendarSlugs.has(v.slug),
   ).length;
 
   const handlesAfterHosts = djs.filter(
