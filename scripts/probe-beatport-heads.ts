@@ -17,7 +17,7 @@ import {
 } from "../src/lib/ingest/identify/trackIdPins";
 import { canonicalBeatportUrl } from "../src/lib/trackMeta";
 
-const UA = "SetRadar/0.2.202 (+https://setradar.ai; beatport-head)";
+const UA = "SetRadar/0.2.203 (+https://setradar.ai; beatport-head)";
 const TIMEOUT_MS = 8_000;
 const CONCURRENCY = 2;
 const PACE_MS = 200;
