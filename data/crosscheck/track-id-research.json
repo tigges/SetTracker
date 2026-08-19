@@ -1,135 +1,2031 @@
 {
-  "generatedAt": "2026-08-17T10:37:12.105Z",
-  "note": "Verified Deezer/MusicBrainz IDs from held 1001 seeds. Fan Relives stay unwired.",
-  "scanned": 30,
+  "generatedAt": "2026-08-19T11:51:06.493Z",
+  "note": "Verified Deezer / MusicBrainz / TrackRadar / AudD IDs from held 1001 seeds, then high-play catalog tracks missing ISRC or Beatport. Beatport only via MB url-rels or TrackRadar canonical /track URLs (never scrape). Set79 is sitemap-only. AudioScout / MusicMate / TrackId stay paste-only. Fan playbacks stay unwired.",
+  "scanned": 200,
   "hits": [
+    {
+      "artist": "Zedd ft. Jon Bellion",
+      "title": "Beautiful Now (Acappella)",
+      "at": "1:01",
+      "isrc": "USUM71505090",
+      "mbid": "8139f7ee-6b2c-4889-baec-9528dd12e0d2",
+      "deezerTitle": "Beautiful Now",
+      "platforms": {
+        "youtube": "https://www.youtube.com/watch?v=n1a7o44WxNo",
+        "spotify": "https://open.spotify.com/track/2ISSQPb9LHHiV6ng2NXosL"
+      },
+      "source": "both"
+    },
     {
       "artist": "Zedd ft. Bea Miller",
       "title": "Out Of Time",
       "at": "3:03",
       "isrc": "USUM72406304",
+      "mbid": "f94401cb-1ed6-456e-9b7d-199a1c6e5d2c",
       "deezerTitle": "Out of Time",
-      "source": "deezer"
+      "platforms": {
+        "youtube": "https://www.youtube.com/watch?v=ujBqCgClEFo"
+      },
+      "source": "both"
     },
     {
       "artist": "Knock2",
       "title": "feel U luv Me",
       "at": "4:04",
       "isrc": "QMBZ92447777",
+      "mbid": "4f6884ca-06fa-43a0-9bae-12d4a30619dc",
       "deezerTitle": "feel U luv Me",
-      "source": "deezer"
+      "platforms": {
+        "youtube": "https://www.youtube.com/watch?v=Cb-SEmhiYjA"
+      },
+      "source": "both"
     },
     {
       "artist": "Zedd ft. Jon Bellion",
       "title": "Beautiful Now",
       "at": "5:04",
       "isrc": "USUM71505090",
+      "mbid": "8139f7ee-6b2c-4889-baec-9528dd12e0d2",
       "deezerTitle": "Beautiful Now",
-      "source": "deezer"
+      "platforms": {
+        "youtube": "https://www.youtube.com/watch?v=n1a7o44WxNo",
+        "spotify": "https://open.spotify.com/track/2ISSQPb9LHHiV6ng2NXosL"
+      },
+      "source": "both"
     },
     {
       "artist": "Knock2 & NGHTMRE ft. Marlhy",
       "title": "One Chance",
       "at": "8:37",
       "isrc": "US39N2204824",
+      "mbid": "6492c01d-3759-4890-857d-f8e81f5cbba7",
       "deezerTitle": "One Chance (feat. Marlhy)",
+      "platforms": {
+        "youtube": "https://www.youtube.com/watch?v=SpwppDwCyjM"
+      },
+      "source": "both"
+    },
+    {
+      "artist": "Lucas & Steve",
+      "title": "What About Now",
+      "at": "0:00",
+      "slug": "lucas-steve-what-about-now",
+      "isrc": "NLZ542600064",
+      "mbid": "9d8839e8-b4ce-4d22-906c-be6326f795ba",
+      "deezerTitle": "What About Now",
+      "platforms": {
+        "youtube": "https://www.youtube.com/watch?v=iMPoDEZyWhs"
+      },
+      "source": "both"
+    },
+    {
+      "artist": "Afrojack, Lucas & Steve",
+      "title": "Control",
+      "at": "0:00",
+      "slug": "afrojack-lucas-steve-control",
+      "isrc": "NLC281010987",
+      "mbid": "7a0721f6-9ac0-450d-8069-25ab563fdf44",
+      "deezerTitle": "Take Over Control (feat. Eva Simons) (Radio Edit)",
+      "source": "both"
+    },
+    {
+      "artist": "KSHMR, Jason Ross, Brieanna Grace",
+      "title": "Ultra Love",
+      "at": "0:00",
+      "slug": "kshmr-jason-ross-brieanna-grace-ultra-love",
+      "isrc": "NLZ542600077",
+      "deezerTitle": "Ultra Love",
       "source": "deezer"
     },
     {
-      "artist": "Martin Garrix & Zedd ft. Emily Warren",
-      "title": "Follow",
-      "at": "9:55",
-      "isrc": "NLM5S2201640",
-      "deezerTitle": "Follow",
+      "artist": "Armin van Buuren, Maddix, Caroline Roxy",
+      "title": "Mouth Go LaLa",
+      "at": "0:00",
+      "slug": "armin-van-buuren-maddix-caroline-roxy-mouth-go-lala",
+      "isrc": "NLF712600570",
+      "mbid": "4b1be813-0a7e-433d-88cf-c2eb44882010",
+      "deezerTitle": "Mouth Go LaLa",
+      "source": "both"
+    },
+    {
+      "artist": "Fedde Le Grand",
+      "title": "This Is A Groove",
+      "at": "0:00",
+      "slug": "fedde-le-grand-this-is-a-groove",
+      "isrc": "USNRS2644596",
+      "deezerTitle": "This Is A Groove",
       "source": "deezer"
     },
     {
-      "artist": "Zedd",
-      "title": "Shave It Up",
-      "at": "11:13",
-      "isrc": "USQY51155889",
-      "deezerTitle": "Shave It Up",
+      "artist": "Carl Bee",
+      "title": "Mangatune",
+      "at": "0:00",
+      "slug": "carl-bee-mangatune",
+      "isrc": "DEDH72300289",
+      "deezerTitle": "Mangatune",
+      "platforms": {
+        "spotify": "https://open.spotify.com/track/1RS1pjAkthdk8qZIDuyiQh",
+        "appleMusic": "https://music.apple.com/us/album/mangatune/1759404239?i=1759404381",
+        "discogs": "https://www.discogs.com/search/?q=Carl+Bee+Mangatune&type=release&format=Vinyl"
+      },
+      "source": "both"
+    },
+    {
+      "artist": "Dom Dolla",
+      "title": "San Frandisco",
+      "at": "0:00",
+      "slug": "dom-dolla-san-frandisco",
+      "isrc": "AUDCB1701462",
+      "deezerTitle": "San Frandisco",
       "source": "deezer"
     },
     {
-      "artist": "Zedd ft. Matthew Koma",
-      "title": "Spectrum",
-      "at": "15:06",
-      "isrc": "USUM71205604",
-      "deezerTitle": "Spectrum",
+      "artist": "Lucas & Steve",
+      "title": "Believe It (Club Mix)",
+      "at": "0:00",
+      "slug": "lucas-steve-believe-it-club-mix",
+      "isrc": "NLZ542600009",
+      "deezerTitle": "Believe It (Club Mix)",
       "source": "deezer"
     },
     {
-      "artist": "Zedd & Botnek",
-      "title": "Bumble Bee",
-      "at": "19:13",
-      "isrc": "USUM71505096",
-      "deezerTitle": "Bumble Bee",
+      "artist": "Max Styler, Vintage Culture, Ali Love",
+      "title": "Freaky 1",
+      "at": "0:00",
+      "slug": "max-styler-vintage-culture-ali-love-freaky-1-2",
+      "isrc": "BXLKS2600019",
+      "mbid": "8e480495-4590-4738-bd15-d01edb1782bc",
+      "deezerTitle": "Freaky 1",
+      "platforms": {
+        "spotify": "https://open.spotify.com/track/5cefCIhgIJgsG3r3LcRmwB",
+        "appleMusic": "https://music.apple.com/us/album/freaky-1/1887636545?i=1887636546",
+        "discogs": "https://www.discogs.com/search/?q=Max+Styler%2C+Vintage+Culture+%26+Ali+Love+Freaky+1&type=release&format=Vinyl"
+      },
+      "source": "both"
+    },
+    {
+      "artist": "Prospa/Cloonee",
+      "title": "Free Your Mind",
+      "at": "0:00",
+      "slug": "prospa-cloonee-free-your-mind-3",
+      "isrc": "QM6MZ2647619",
+      "deezerTitle": "Free Your Mind",
+      "platforms": {
+        "spotify": "https://open.spotify.com/track/0eaO2gaO8hVph2GIO7TEa6",
+        "appleMusic": "https://music.apple.com/us/album/free-your-mind/1884097801?i=1884097804",
+        "bandcamp": "https://prospamusic.bandcamp.com/track/free-your-mind",
+        "discogs": "https://www.discogs.com/search/?q=Prospa+%26+Cloonee+Free+Your+Mind&type=release&format=Vinyl"
+      },
+      "source": "both"
+    },
+    {
+      "artist": "Maddix",
+      "title": "Favela",
+      "at": "0:00",
+      "slug": "maddix-favela",
+      "isrc": "NL8RL2629903",
+      "deezerTitle": "Favela",
       "source": "deezer"
     },
     {
-      "artist": "ISOKNOCK ft. Cade Clair",
-      "title": "4EVR",
-      "at": "19:40",
-      "isrc": "QM6P42472446",
-      "deezerTitle": "4EVR",
+      "artist": "Maddix/The Rocketman/2 Brothers On The 4th Floor",
+      "title": "Never Alone",
+      "at": "0:00",
+      "slug": "maddix-the-rocketman-2-brothers-on-the-4th-floor-never-alone",
+      "isrc": "NLQ8D2500272",
+      "deezerTitle": "Never Alone",
       "source": "deezer"
     },
     {
-      "artist": "Knock2 ft. Rhea Raj",
-      "title": "fw me (dirty)",
-      "at": "20:07",
-      "isrc": "QMFME2478573",
-      "deezerTitle": "fw me (dirty)",
+      "artist": "Alok",
+      "title": "Around",
+      "at": "0:00",
+      "slug": "alok-around",
+      "isrc": "BCCNG2600061",
+      "mbid": "d98d0a94-8fe7-4f2e-95d1-0cd1538e765c",
+      "deezerTitle": "Around",
+      "source": "both"
+    },
+    {
+      "artist": "Lilly Palmer",
+      "title": "Bigger Than Techno",
+      "at": "0:00",
+      "slug": "lilly-palmer-bigger-than-techno",
+      "isrc": "NLF712506967",
+      "mbid": "3cf477bb-2ada-4368-95e7-f2fa94486a5c",
+      "deezerTitle": "Bigger Than Techno",
+      "source": "both"
+    },
+    {
+      "artist": "Max Styler & Vintage Culture & Ali Love",
+      "title": "Freaky 1",
+      "at": "0:00",
+      "slug": "max-styler-vintage-culture-ali-love-freaky-1",
+      "isrc": "BXLKS2600019",
+      "mbid": "8e480495-4590-4738-bd15-d01edb1782bc",
+      "deezerTitle": "Freaky 1",
+      "platforms": {
+        "spotify": "https://open.spotify.com/track/5cefCIhgIJgsG3r3LcRmwB",
+        "appleMusic": "https://music.apple.com/us/album/freaky-1/1887636545?i=1887636546",
+        "discogs": "https://www.discogs.com/search/?q=Max+Styler%2C+Vintage+Culture+%26+Ali+Love+Freaky+1&type=release&format=Vinyl"
+      },
+      "source": "both"
+    },
+    {
+      "artist": "Tiga",
+      "title": "Mind Dimension (Adam Sellouk Remix)",
+      "at": "0:00",
+      "slug": "tiga-mind-dimension-adam-sellouk-remix",
+      "isrc": "NL8FJ2600003",
+      "deezerTitle": "Mind Dimension (Adam Sellouk Remix)",
       "source": "deezer"
     },
     {
-      "artist": "Zedd",
-      "title": "Shotgun",
-      "at": "20:34",
-      "isrc": "USQY51260132",
-      "deezerTitle": "Shotgun",
+      "artist": "Avicii",
+      "title": "Levels",
+      "at": "0:00",
+      "slug": "avicii-levels",
+      "isrc": "SEUM71100962",
+      "mbid": "a819cff9-a241-456b-8813-48415f2abdd7",
+      "deezerTitle": "Levels (Radio Edit)",
+      "platforms": {
+        "spotify": "https://open.spotify.com/track/1nk8X436Xd1Pe4fjIkOW4d",
+        "appleMusic": "https://music.apple.com/us/album/levels/1440787344?i=1440787349",
+        "discogs": "https://www.discogs.com/release/5096266-Avicii-Levels"
+      },
+      "source": "both"
+    },
+    {
+      "artist": "DJ Isaac",
+      "title": "Let Yourself Go",
+      "at": "0:00",
+      "slug": "dj-isaac-let-yourself-go",
+      "isrc": "NLS762600087",
+      "mbid": "738b9f52-4ae6-4d1a-a078-a9e9922fb70c",
+      "deezerTitle": "Let Yourself Go",
+      "source": "both"
+    },
+    {
+      "artist": "ESSE",
+      "title": "Make My Day",
+      "at": "0:00",
+      "slug": "esse-make-my-day",
+      "isrc": "QZZ7T2575451",
+      "mbid": "1456d5a9-e623-4229-973d-9cc0584bbd42",
+      "deezerTitle": "Make my day (Live)",
+      "source": "both"
+    },
+    {
+      "artist": "Lowriderz",
+      "title": "Papacito",
+      "at": "0:00",
+      "slug": "lowriderz-papacito",
+      "isrc": "BEB682600244",
+      "deezerTitle": "Papacito",
       "source": "deezer"
     },
     {
-      "artist": "Knock2 & Naliya",
-      "title": "shake!the!city!",
-      "at": "21:01",
-      "isrc": "QMFME2478555",
-      "deezerTitle": "shake!the!city!",
+      "artist": "Martin Garrix & Third ≡ Party ft. Oaks & Declan J Donovan",
+      "title": "Carry You",
+      "at": "0:00",
+      "slug": "martin-garrix-third-party-ft-oaks-declan-j-donovan-carry-you",
+      "isrc": "NLM5S2402145",
+      "mbid": "269d5524-61f5-4002-8cd5-03c1c9409edd",
+      "deezerTitle": "Carry You",
+      "source": "both"
+    },
+    {
+      "artist": "Masters At Work",
+      "title": "Work (Acappella)",
+      "at": "0:00",
+      "slug": "masters-at-work-work-acappella",
+      "isrc": "GBCPZ1408130",
+      "mbid": "dced1b13-d564-498a-b278-d07f132d7cf2",
+      "deezerTitle": "Work (MAW Mix)",
+      "source": "both"
+    },
+    {
+      "artist": "Solardo & Joshwa",
+      "title": "VIP Business",
+      "at": "0:00",
+      "slug": "solardo-joshwa-vip-business",
+      "isrc": "NLRD52319357",
+      "mbid": "f0a16323-e32f-4297-8615-bb22694f78bf",
+      "deezerTitle": "VIP Business",
+      "source": "both"
+    },
+    {
+      "artist": "Timmy Trumpet, Oaks",
+      "title": "Not A Place (feat. Oaks)",
+      "at": "0:00",
+      "slug": "timmy-trumpet-oaks-not-a-place-feat-oaks",
+      "isrc": "NLZ542600134",
+      "deezerTitle": "Not A Place (feat. Oaks)",
       "source": "deezer"
     },
     {
-      "artist": "Zedd ft. Hayley Williams",
-      "title": "Stay The Night",
-      "at": "22:15",
-      "isrc": "USUM71311478",
-      "deezerTitle": "Stay The Night (Featuring Hayley Williams Of Paramore)",
+      "artist": "Amelie Lens",
+      "title": "Feel It",
+      "at": "0:00",
+      "slug": "amelie-lens-feel-it",
+      "isrc": "BEN582300365",
+      "deezerTitle": "Feel It",
+      "platforms": {
+        "spotify": "https://open.spotify.com/track/6iKLdREEci9SyzXl9JNUVk",
+        "appleMusic": "https://music.apple.com/us/album/feel-it/1833479157?i=1833479161",
+        "bandcamp": "https://amelielens.bandcamp.com/track/feel-it",
+        "discogs": "https://www.discogs.com/release/29023498-Amelie-Lens-You-And-Me"
+      },
+      "source": "both"
+    },
+    {
+      "artist": "Amelie Lens",
+      "title": "Breathe",
+      "at": "0:00",
+      "slug": "amelie-lens-breathe",
+      "isrc": "BEN582400187",
+      "mbid": "25723894-3b8a-46f0-94c6-77c4f092d6a5",
+      "deezerTitle": "Breathe",
+      "source": "both"
+    },
+    {
+      "artist": "ARTBAT",
+      "title": "Dance",
+      "at": "0:00",
+      "slug": "artbat-dance",
+      "isrc": "US39N2538157",
+      "mbid": "7d025a43-3e6d-47ed-97cf-44867dc34ebd",
+      "deezerTitle": "Dance",
+      "source": "both"
+    },
+    {
+      "artist": "Cloonee & Prospa",
+      "title": "Free Your Mind",
+      "at": "0:00",
+      "slug": "cloonee-prospa-free-your-mind",
+      "isrc": "QM6MZ2647619",
+      "mbid": "6411620e-0728-4f81-ac59-3e7c3adb1928",
+      "deezerTitle": "Free Your Mind",
+      "platforms": {
+        "spotify": "https://open.spotify.com/track/0eaO2gaO8hVph2GIO7TEa6",
+        "appleMusic": "https://music.apple.com/us/album/free-your-mind/1884097801?i=1884097804",
+        "bandcamp": "https://prospamusic.bandcamp.com/track/free-your-mind",
+        "discogs": "https://www.discogs.com/search/?q=Prospa+%26+Cloonee+Free+Your+Mind&type=release&format=Vinyl"
+      },
+      "source": "both"
+    },
+    {
+      "artist": "Da Africa Deep, NuroGroove",
+      "title": "No End",
+      "at": "0:00",
+      "slug": "da-africa-deep-nurogroove-no-end",
+      "isrc": "TCAJX2518968",
+      "deezerTitle": "No End",
       "source": "deezer"
     },
     {
-      "artist": "Knock2",
-      "title": "crank the bass, play the muzik",
-      "at": "24:53",
-      "isrc": "QMFME2478524",
-      "deezerTitle": "crank the bass, play the muzik",
+      "artist": "Da Hool",
+      "title": "Meet Her At the Loveparade",
+      "at": "0:00",
+      "slug": "da-hool-meet-her-at-the-loveparade",
+      "isrc": "DEC719700559",
+      "mbid": "8fbfbb40-e701-4b03-bf19-53ea5f516df9",
+      "deezerTitle": "Meet Her at the Loveparade (Radio Edit)",
+      "platforms": {
+        "spotify": "https://open.spotify.com/track/4QU0qOEiMKwAFD4OhFiM8J",
+        "appleMusic": "https://music.apple.com/us/album/meet-her-at-the-loveparade-original-mix-mixed/1680768679?i=1680768690",
+        "discogs": "https://www.discogs.com/release/572436-Da-Hool-Meet-Her-At-The-Loveparade"
+      },
+      "source": "both"
+    },
+    {
+      "artist": "David Guetta vs. Benny Benassi",
+      "title": "Satisfaction",
+      "at": "0:00",
+      "slug": "david-guetta-vs-benny-benassi-satisfaction",
+      "isrc": "UKWLG2200138",
+      "mbid": "050e5679-e09f-4d46-bd79-4ce884af31d2",
+      "deezerTitle": "Satisfaction (Hardwell & Maddix Remix)",
+      "platforms": {
+        "spotify": "https://open.spotify.com/track/6k5DKQMC96daK6fSvAxdQv",
+        "appleMusic": "https://music.apple.com/us/album/satisfaction/1638388861?i=1638388862",
+        "discogs": "https://www.discogs.com/search/?q=David+Guetta+Satisfaction&type=release&format=Vinyl"
+      },
+      "source": "both"
+    },
+    {
+      "artist": "Dean Turnley",
+      "title": "Actin' Tough",
+      "at": "0:00",
+      "slug": "dean-turnley-actin-tough",
+      "isrc": "GBUM72601069",
+      "mbid": "87911937-8f82-4d10-9bf0-9d3115c4d4e0",
+      "deezerTitle": "Actin' Tough",
+      "platforms": {
+        "spotify": "https://open.spotify.com/track/507j66jaEEUU11uFSTOHFM",
+        "appleMusic": "https://music.apple.com/us/album/actin-tough/1881996384?i=1881996627",
+        "discogs": "https://www.discogs.com/search/?q=Dean+Turnley+Actin%27+Tough&type=release&format=Vinyl"
+      },
+      "source": "both"
+    },
+    {
+      "artist": "Fedde Le Grand ft. Mr V",
+      "title": "Back & Forth (Tony Romera 2025 Rework)",
+      "at": "0:00",
+      "slug": "fedde-le-grand-ft-mr-v-back-forth-tony-romera-2025-rework",
+      "isrc": "NLML62500214",
+      "deezerTitle": "Back & Forth (Tony Romera 2025 Rework)",
       "source": "deezer"
     },
     {
-      "artist": "Zedd & Alessia Cara",
-      "title": "Stay",
-      "at": "28:00",
-      "isrc": "USUM71700736",
-      "deezerTitle": "Stay",
+      "artist": "FISHER & Aatig",
+      "title": "Take It Off",
+      "at": "0:00",
+      "slug": "fisher-aatig-take-it-off",
+      "isrc": "USAT22306807",
+      "mbid": "897e7cad-d6df-43e3-8838-463e2720f29b",
+      "deezerTitle": "TAKE IT OFF",
+      "source": "both"
+    },
+    {
+      "artist": "Franky Rizardo",
+      "title": "Shinjuku",
+      "at": "0:00",
+      "slug": "franky-rizardo-shinjuku",
+      "isrc": "NLML62600055",
+      "mbid": "60489765-e3e2-4176-9985-c7b651230784",
+      "deezerTitle": "Shinjuku",
+      "source": "both"
+    },
+    {
+      "artist": "Joel Corry",
+      "title": "Stuck In A Loop",
+      "at": "0:00",
+      "slug": "joel-corry-stuck-in-a-loop",
+      "isrc": "AUDCB2500321",
+      "deezerTitle": "Stuck In A Loop",
       "source": "deezer"
     },
     {
-      "artist": "Knock2",
-      "title": "gettin' hott",
-      "at": "31:36",
-      "isrc": "CA5KR2231603",
-      "deezerTitle": "gettin' hott",
+      "artist": "John Summit",
+      "title": "light years feat. Inéz",
+      "at": "0:00",
+      "slug": "john-summit-light-years-feat-inez",
+      "isrc": "USUG12404422",
+      "deezerTitle": "light years",
       "source": "deezer"
+    },
+    {
+      "artist": "John Summit, Sub Focus, Julia Church",
+      "title": "Go Back",
+      "at": "0:00",
+      "slug": "john-summit-sub-focus-julia-church-go-back",
+      "isrc": "USUG12402628",
+      "mbid": "5970d126-c5e1-4656-a059-af5a575b81b3",
+      "deezerTitle": "Go Back",
+      "source": "both"
+    },
+    {
+      "artist": "KREAM & Korolova",
+      "title": "Annihilation",
+      "at": "0:00",
+      "slug": "kream-korolova-annihilation",
+      "isrc": "NLZ542600221",
+      "mbid": "406bbf6c-6049-4be4-84a7-debf7cfb70e8",
+      "deezerTitle": "Annihilation",
+      "platforms": {
+        "spotify": "https://open.spotify.com/track/42qH7RSRQBvrMiKfKNkUto",
+        "discogs": "https://www.discogs.com/search/?q=KREAM+Annihilation+%28Extended+Mix%29&type=release&format=Vinyl"
+      },
+      "source": "both"
+    },
+    {
+      "artist": "KREAM, Korolova",
+      "title": "Annihilation (Extended Mix)",
+      "at": "0:00",
+      "slug": "kream-korolova-annihilation-extended-mix",
+      "platforms": {
+        "spotify": "https://open.spotify.com/track/42qH7RSRQBvrMiKfKNkUto",
+        "discogs": "https://www.discogs.com/search/?q=KREAM+Annihilation+%28Extended+Mix%29&type=release&format=Vinyl"
+      },
+      "source": "trackradar"
+    },
+    {
+      "artist": "Kryder",
+      "title": "Eivissa",
+      "at": "0:00",
+      "slug": "kryder-eivissa",
+      "isrc": "USA2P2634707",
+      "deezerTitle": "Eivissa",
+      "source": "deezer"
+    },
+    {
+      "artist": "Lilly Palmer",
+      "title": "All Eyes On Me",
+      "at": "0:00",
+      "slug": "lilly-palmer-all-eyes-on-me",
+      "isrc": "NLF712506976",
+      "mbid": "a8a6b668-7d70-4d80-bdd8-7e2834cffd16",
+      "deezerTitle": "All Eyes On Me",
+      "source": "both"
+    },
+    {
+      "artist": "Lilly Palmer",
+      "title": "Living Fast",
+      "at": "0:00",
+      "slug": "lilly-palmer-living-fast",
+      "isrc": "DE1QW2638598",
+      "mbid": "76392f26-5ff5-43ed-b039-9b69de5ee02c",
+      "deezerTitle": "Living Fast",
+      "source": "both"
+    },
+    {
+      "artist": "LNY TNZ/MANDY",
+      "title": "KICKS",
+      "at": "0:00",
+      "slug": "lny-tnz-mandy-kicks",
+      "isrc": "NLH8M2500021",
+      "deezerTitle": "KICKS",
+      "source": "deezer"
+    },
+    {
+      "artist": "Maddix",
+      "title": "Acid For Breakfast",
+      "at": "0:00",
+      "slug": "maddix-acid-for-breakfast",
+      "isrc": "NL8RL2653163",
+      "deezerTitle": "Acid For Breakfast",
+      "source": "deezer"
+    },
+    {
+      "artist": "MK & Dom Dolla",
+      "title": "Rhyme Dust",
+      "at": "0:00",
+      "slug": "mk-dom-dolla-rhyme-dust",
+      "isrc": "GBARL2300220",
+      "mbid": "0daa56d6-a2ba-4cb0-be2e-d6e353923748",
+      "deezerTitle": "Rhyme Dust",
+      "platforms": {
+        "spotify": "https://open.spotify.com/track/5mKiwDDrwG22qKKVL6JZqF",
+        "appleMusic": "https://music.apple.com/us/album/rhyme-dust/1671893660?i=1671893661",
+        "discogs": "https://www.discogs.com/search/?q=MK+%26+Dom+Dolla+Rhyme+Dust&type=release&format=Vinyl"
+      },
+      "source": "both"
+    },
+    {
+      "artist": "Mochakk",
+      "title": "Jealous",
+      "at": "0:00",
+      "slug": "mochakk-jealous",
+      "isrc": "QMDA62304401",
+      "deezerTitle": "Jealous",
+      "platforms": {
+        "spotify": "https://open.spotify.com/track/5Ir9mqfAUnXkSkXHF1yvM0",
+        "appleMusic": "https://music.apple.com/us/album/jealous/1700873825?i=1700873980",
+        "discogs": "https://www.discogs.com/search/?q=Mochakk+Jealous&type=release&format=Vinyl"
+      },
+      "source": "both"
+    },
+    {
+      "artist": "Prospa, Cloonee",
+      "title": "Free Your Mind",
+      "at": "0:00",
+      "slug": "prospa-cloonee-free-your-mind",
+      "isrc": "QM6MZ2647619",
+      "mbid": "6411620e-0728-4f81-ac59-3e7c3adb1928",
+      "deezerTitle": "Free Your Mind",
+      "platforms": {
+        "spotify": "https://open.spotify.com/track/0eaO2gaO8hVph2GIO7TEa6",
+        "appleMusic": "https://music.apple.com/us/album/free-your-mind/1884097801?i=1884097804",
+        "bandcamp": "https://prospamusic.bandcamp.com/track/free-your-mind",
+        "discogs": "https://www.discogs.com/search/?q=Prospa+%26+Cloonee+Free+Your+Mind&type=release&format=Vinyl"
+      },
+      "source": "both"
+    },
+    {
+      "artist": "Swedish House Mafia",
+      "title": "One",
+      "at": "0:00",
+      "slug": "swedish-house-mafia-one",
+      "isrc": "GBAAA1000165",
+      "mbid": "74964403-f8b1-4a39-a091-3c5551628c8b",
+      "deezerTitle": "One (Your Name) (Radio Edit)",
+      "source": "both"
+    },
+    {
+      "artist": "The Temper Trap",
+      "title": "Sweet Disposition (ARTBAT Remix)",
+      "at": "0:00",
+      "slug": "the-temper-trap-sweet-disposition-artbat-remix",
+      "isrc": "US38Y2529365",
+      "mbid": "9437b674-6eb2-466c-95d7-81047c53983c",
+      "deezerTitle": "Sweet Disposition (ARTBAT Remix)",
+      "source": "both"
+    },
+    {
+      "artist": "Volkoder",
+      "title": "All Night Long",
+      "at": "0:00",
+      "slug": "volkoder-all-night-long",
+      "isrc": "DEDH72300571",
+      "mbid": "b7097a55-f214-4440-a8d8-40b0206ae868",
+      "deezerTitle": "All Night Long",
+      "platforms": {
+        "spotify": "https://open.spotify.com/track/7nboixHsDQbJkHHjz72pIY",
+        "appleMusic": "https://music.apple.com/us/album/all-night-long/1866953596?i=1866953615",
+        "discogs": "https://www.discogs.com/search/?q=Volkoder+All+Night+Long&type=release&format=Vinyl"
+      },
+      "source": "both"
+    },
+    {
+      "artist": "Westend & Max Styler",
+      "title": "Rhythm Machine",
+      "at": "0:00",
+      "slug": "westend-max-styler-rhythm-machine",
+      "isrc": "NL8RL2336010",
+      "mbid": "2dd899ec-3c95-4bd9-9bec-041d671aa087",
+      "deezerTitle": "Rhythm Machine",
+      "platforms": {
+        "spotify": "https://open.spotify.com/track/7qhYyXBbL12mPyj93PyUBb",
+        "appleMusic": "https://music.apple.com/us/album/rhythm-machine/1719018353?i=1719018354",
+        "discogs": "https://www.discogs.com/search/?q=Westend%2C+Max+Styler+Rhythm+Machine&type=release&format=Vinyl"
+      },
+      "source": "both"
+    },
+    {
+      "artist": "Adam Ten, Asulin",
+      "title": "Warawara",
+      "at": "0:00",
+      "slug": "adam-ten-asulin-warawara",
+      "isrc": "GBK6Y2627601",
+      "deezerTitle": "Warawara",
+      "source": "deezer"
+    },
+    {
+      "artist": "AFROJACK & Lucas & Steve",
+      "title": "Control",
+      "at": "0:00",
+      "slug": "afrojack-lucas-steve-control-2",
+      "isrc": "NLC281010987",
+      "mbid": "16e77bc6-42c0-4188-8a26-f9f13bd769a4",
+      "deezerTitle": "Take Over Control (feat. Eva Simons) (Radio Edit)",
+      "source": "both"
+    },
+    {
+      "artist": "ANOTR ft. 54 Ultra",
+      "title": "Talk To You",
+      "at": "0:00",
+      "slug": "anotr-ft-54-ultra-talk-to-you",
+      "isrc": "CBEFB2600137",
+      "mbid": "52242fe3-d882-475a-bf72-370b170d4825",
+      "deezerTitle": "Talk To You (ft. 54 Ultra)",
+      "platforms": {
+        "youtube": "https://www.youtube.com/watch?v=ajUMhpotf8k"
+      },
+      "source": "both"
+    },
+    {
+      "artist": "Armin van Buuren & Hardwell",
+      "title": "Follow The Light",
+      "at": "0:00",
+      "slug": "armin-van-buuren-hardwell-follow-the-light-2",
+      "isrc": "NLF712605258",
+      "mbid": "d2ddb2e6-47cc-49de-bcdf-7acc93cdb166",
+      "deezerTitle": "Follow The Light (ASOT 1290)",
+      "platforms": {
+        "youtube": "https://www.youtube.com/watch?v=oMq7E3iPzbc"
+      },
+      "source": "both"
+    },
+    {
+      "artist": "Armin van Buuren, Hannah Laing, Wippenberg",
+      "title": "U Got 2 Know",
+      "at": "0:00",
+      "slug": "armin-van-buuren-hannah-laing-wippenberg-u-got-2-know",
+      "isrc": "NLF712605271",
+      "mbid": "d8f278a2-8527-40e6-90d3-4d3433825619",
+      "deezerTitle": "U Got 2 Know (ASOT 1290)",
+      "source": "both"
+    },
+    {
+      "artist": "ARTBAT, Giuseppe Ottaviani, Conor Ross",
+      "title": "Break The Loop",
+      "at": "0:00",
+      "slug": "artbat-giuseppe-ottaviani-conor-ross-break-the-loop",
+      "isrc": "US39N2638239",
+      "deezerTitle": "Break The Loop",
+      "platforms": {
+        "youtube": "https://www.youtube.com/watch?v=ahW0Sd2GOyc"
+      },
+      "source": "both"
+    },
+    {
+      "artist": "ARTBAT, R3HAB, Stylo, Eli & Dani, NAIIM",
+      "title": "Fight Machine (feat. NAIIM)",
+      "at": "0:00",
+      "slug": "artbat-r3hab-stylo-eli-dani-naiim-fight-machine-feat-naiim",
+      "isrc": "US39N2579955",
+      "deezerTitle": "Fight Machine (feat. NAIIM)",
+      "source": "deezer"
+    },
+    {
+      "artist": "BLACK SCIENCE ORCHESTRA",
+      "title": "Sunshine",
+      "at": "0:00",
+      "slug": "black-science-orchestra-sunshine",
+      "isrc": "GBHRP0200014",
+      "mbid": "de35c747-764c-40bc-bb85-42864ccbb4a2",
+      "deezerTitle": "Sunshine (Radio Sunshine)",
+      "source": "both"
+    },
+    {
+      "artist": "Cassian & YOTTO & Da Hool",
+      "title": "Love Parade",
+      "at": "0:00",
+      "slug": "cassian-yotto-da-hool-love-parade-2",
+      "isrc": "USA2P2546024",
+      "mbid": "f39e3ff7-46bd-46be-aa3b-7ac4d7faff16",
+      "deezerTitle": "Love Parade",
+      "source": "both"
+    },
+    {
+      "artist": "Charlotte de Witte",
+      "title": "Satori",
+      "at": "0:00",
+      "slug": "charlotte-de-witte-satori",
+      "isrc": "BE4JP2200009",
+      "mbid": "70c0d148-a475-4eb2-8faf-1849ef55f144",
+      "deezerTitle": "Satori",
+      "source": "both"
+    },
+    {
+      "artist": "Cirez D",
+      "title": "On Off",
+      "at": "0:00",
+      "slug": "cirez-d-on-off",
+      "isrc": "GB6CP0900022",
+      "mbid": "26d411c2-5ac5-4602-9f60-cd55825c4e90",
+      "deezerTitle": "On Off",
+      "source": "both"
+    },
+    {
+      "artist": "Corona",
+      "title": "The Rhythm Of The Night (Acappella)",
+      "at": "0:00",
+      "slug": "corona-the-rhythm-of-the-night-acappella",
+      "isrc": "ITA199800041",
+      "mbid": "0d47d44f-c0fb-4989-b9e9-6166123d6c33",
+      "deezerTitle": "The Rhythm Of The Night",
+      "source": "both"
+    },
+    {
+      "artist": "Da Africa Deep",
+      "title": "Children of Tomorrow",
+      "at": "0:00",
+      "slug": "da-africa-deep-children-of-tomorrow",
+      "isrc": "UKWRY2600007",
+      "deezerTitle": "Children of Tomorrow",
+      "source": "deezer"
+    },
+    {
+      "artist": "Da Hool",
+      "title": "Meet Her At The Love Parade",
+      "at": "0:00",
+      "slug": "da-hool-meet-her-at-the-love-parade",
+      "mbid": "d5eb2940-b73f-4e01-b64d-5d2d180f8174",
+      "deezerTitle": "Meet Her At The Love Parade (feat. Kiki Solvej)",
+      "source": "both"
+    },
+    {
+      "artist": "Daft Punk",
+      "title": "Around The World (Westend Edit)",
+      "at": "0:00",
+      "slug": "daft-punk-around-the-world-westend-edit-2",
+      "mbid": "ffe401c2-1bd7-4e8f-b6ff-485e6c5c5529",
+      "deezerTitle": "Around the World (Westend Edit) [Mixed]",
+      "platforms": {
+        "spotify": "https://open.spotify.com/track/1pKYYY0dkg23sQQXi0Q5zN",
+        "appleMusic": "https://music.apple.com/us/album/around-the-world/1609438391?i=1609438415",
+        "discogs": "https://www.discogs.com/search/?q=Daft+Punk+Around+the+World&type=release&format=Vinyl"
+      },
+      "source": "both"
+    },
+    {
+      "artist": "Dimitri Vegas & Like Mike & Marlon Hoffstadt & DJ Konik",
+      "title": "Makina Time",
+      "at": "0:00",
+      "slug": "dimitri-vegas-like-mike-marlon-hoffstadt-dj-konik-makina-time",
+      "isrc": "BEIW12500926",
+      "mbid": "e25a3f14-591c-4266-8b48-a8ffe32c134c",
+      "deezerTitle": "Makina Time",
+      "source": "both"
+    },
+    {
+      "artist": "Dom Dolla",
+      "title": "Take It",
+      "at": "0:00",
+      "slug": "dom-dolla-take-it",
+      "isrc": "AUDCB1701202",
+      "mbid": "d22cb802-0cc1-4a92-a163-0edf16f8e1fc",
+      "deezerTitle": "Take It",
+      "platforms": {
+        "spotify": "https://open.spotify.com/track/3S4baKuEAz2bM8J3M8DdoZ",
+        "appleMusic": "https://music.apple.com/us/album/take-it/1454818192?i=1454818194",
+        "bandcamp": "https://domdolla.bandcamp.com/track/take-it",
+        "discogs": "https://www.discogs.com/release/13279870-Dom-Dolla-Take-It"
+      },
+      "source": "both"
+    },
+    {
+      "artist": "Dom Dolla & Nelly Furtado",
+      "title": "Eat Your Man",
+      "at": "0:00",
+      "slug": "dom-dolla-nelly-furtado-eat-your-man",
+      "isrc": "USQX92303053",
+      "mbid": "820a6d34-fd11-4441-9cca-d37b2d3917e4",
+      "deezerTitle": "Eat Your Man (with Nelly Furtado)",
+      "platforms": {
+        "spotify": "https://open.spotify.com/track/6Ea2oEzysv4UECGNxL1IEW",
+        "appleMusic": "https://music.apple.com/us/album/eat-your-man/1688054470?i=1688054943",
+        "discogs": "https://www.discogs.com/search/?q=Dom+Dolla+%26+Nelly+Furtado+Eat+Your+Man&type=release&format=Vinyl"
+      },
+      "source": "both"
+    },
+    {
+      "artist": "Eachother",
+      "title": "Moving Along",
+      "at": "0:00",
+      "slug": "eachother-moving-along",
+      "isrc": "NLG3N2600008",
+      "deezerTitle": "Moving Along",
+      "source": "deezer"
+    },
+    {
+      "artist": "Eric Prydz",
+      "title": "Pjanoo",
+      "at": "0:00",
+      "slug": "eric-prydz-pjanoo",
+      "isrc": "GBCEN0800951",
+      "mbid": "f1119405-6970-43b6-a70b-8aae13688fd9",
+      "deezerTitle": "Pjanoo (Radio Edit)",
+      "source": "both"
+    },
+    {
+      "artist": "Faithless",
+      "title": "Insomnia",
+      "at": "0:00",
+      "slug": "faithless-insomnia",
+      "isrc": "GBBXH9820027",
+      "mbid": "920a25bc-34e8-499a-9ce4-74b53523dba7",
+      "deezerTitle": "Insomnia (Monster Mix) (Radio Edit)",
+      "platforms": {
+        "spotify": "https://open.spotify.com/track/01lOQwKZWtfTrYKSlgw30q",
+        "appleMusic": "https://music.apple.com/us/album/insomnia-monster-mix/207180221?i=207180296",
+        "bandcamp": "https://demaxx.bandcamp.com/track/insomnia-monster-mix",
+        "discogs": "https://www.discogs.com/release/705705-Faithless-Insomnia"
+      },
+      "source": "both"
+    },
+    {
+      "artist": "Fallon",
+      "title": "Diet Coke",
+      "at": "0:00",
+      "slug": "fallon-diet-coke",
+      "isrc": "USA2P2552984",
+      "mbid": "bcdfbd89-c139-45bb-a85d-bf442133d774",
+      "deezerTitle": "Diet Coke",
+      "source": "both"
+    },
+    {
+      "artist": "Fedde Le Grand",
+      "title": "Monster",
+      "at": "0:00",
+      "slug": "fedde-le-grand-monster",
+      "isrc": "NLG3N2600012",
+      "deezerTitle": "Monster",
+      "source": "deezer"
+    },
+    {
+      "artist": "Green Velvet",
+      "title": "Lazer Beams",
+      "at": "0:00",
+      "slug": "green-velvet-lazer-beams",
+      "isrc": "GBUR62001283",
+      "mbid": "e0b3b162-04be-47a4-a179-8b31e952722a",
+      "deezerTitle": "Lazer Beams",
+      "source": "both"
+    },
+    {
+      "artist": "Hardwell/Azteck/Dr Phunk",
+      "title": "LOW",
+      "at": "0:00",
+      "slug": "hardwell-azteck-dr-phunk-low-2",
+      "isrc": "NL8RL2632424",
+      "deezerTitle": "LOW",
+      "source": "deezer"
+    },
+    {
+      "artist": "Hardwell/braev",
+      "title": "Believe",
+      "at": "0:00",
+      "slug": "hardwell-braev-believe-2",
+      "isrc": "NL8RL2627720",
+      "deezerTitle": "Believe",
+      "source": "deezer"
+    },
+    {
+      "artist": "Hardwell/Maddix",
+      "title": "Rave Till My Grave feat. Villain",
+      "at": "0:00",
+      "slug": "hardwell-maddix-rave-till-my-grave-feat-villain",
+      "isrc": "NL8RL2534850",
+      "deezerTitle": "Rave Till My Grave",
+      "source": "deezer"
+    },
+    {
+      "artist": "James Hype & Miggy Dela Rosa",
+      "title": "Ferrari",
+      "at": "0:00",
+      "slug": "james-hype-miggy-dela-rosa-ferrari",
+      "isrc": "GB3CE2200004",
+      "mbid": "ef0567e0-aa99-45ae-bcbc-8c5942f998ad",
+      "deezerTitle": "Ferrari",
+      "platforms": {
+        "spotify": "https://open.spotify.com/track/4zN21mbAuaD0WqtmaTZZeP",
+        "appleMusic": "https://music.apple.com/us/album/ferrari/1617280385?i=1617280597",
+        "discogs": "https://www.discogs.com/search/?q=James+Hype+%26+Miggy+Dela+Rosa+Ferrari&type=release&format=Vinyl"
+      },
+      "source": "both"
+    },
+    {
+      "artist": "JOA & James Carter",
+      "title": "Don't Wake Us Up",
+      "at": "0:00",
+      "slug": "joa-james-carter-don-t-wake-us-up",
+      "isrc": "GXGUF2600339",
+      "deezerTitle": "Don't Wake Us Up",
+      "source": "deezer"
+    },
+    {
+      "artist": "Joel Corry",
+      "title": "Whisper",
+      "at": "0:00",
+      "slug": "joel-corry-whisper",
+      "isrc": "NLZ542600320",
+      "mbid": "cbde8563-84a9-4185-bc3e-4ed5c31d61d5",
+      "deezerTitle": "Whisper",
+      "source": "both"
+    },
+    {
+      "artist": "John Summit, Hayla",
+      "title": "Shiver",
+      "at": "0:00",
+      "slug": "john-summit-hayla-shiver-4",
+      "isrc": "USUG12401003",
+      "mbid": "ff3b8ccb-6223-4ecd-9884-ee469243950b",
+      "deezerTitle": "Shiver",
+      "platforms": {
+        "spotify": "https://open.spotify.com/track/32VIrOsJmwvqRm4rWFBCsi",
+        "appleMusic": "https://music.apple.com/us/album/shiver/1748171781?i=1748171788",
+        "discogs": "https://www.discogs.com/search/?q=John+Summit+%26+HAYLA+Shiver&type=release&format=Vinyl"
+      },
+      "source": "both"
+    },
+    {
+      "artist": "Korolova/JOA",
+      "title": "My Mind",
+      "at": "0:00",
+      "slug": "korolova-joa-my-mind-3",
+      "isrc": "USA2P2552012",
+      "deezerTitle": "My Mind",
+      "source": "deezer"
+    },
+    {
+      "artist": "Lilly Palmer",
+      "title": "Stiller Traum",
+      "at": "0:00",
+      "slug": "lilly-palmer-stiller-traum",
+      "isrc": "DE1QW2628199",
+      "mbid": "c01fdecd-88a2-47bd-b3e1-5e73730dfba3",
+      "deezerTitle": "Stiller Traum",
+      "source": "both"
+    },
+    {
+      "artist": "Lilly Palmer",
+      "title": "You're The One",
+      "at": "0:00",
+      "slug": "lilly-palmer-you-re-the-one",
+      "isrc": "DE1QW2638597",
+      "mbid": "ca50fc57-7e64-45bd-9395-1d90cf5a045d",
+      "deezerTitle": "You're the One",
+      "source": "both"
+    },
+    {
+      "artist": "Marie Vaunt",
+      "title": "That Acid",
+      "at": "0:00",
+      "slug": "marie-vaunt-that-acid",
+      "isrc": "NL8RL2527997",
+      "mbid": "7e68b044-6a8a-4e40-8d48-1fe3ed4379d0",
+      "deezerTitle": "That Acid",
+      "source": "both"
+    },
+    {
+      "artist": "Mau P",
+      "title": "Like I Like It",
+      "at": "0:00",
+      "slug": "mau-p-like-i-like-it",
+      "isrc": "DEDH72300418",
+      "mbid": "3b69abff-5465-40da-89bf-4628e4e87be4",
+      "deezerTitle": "Like I Like It",
+      "platforms": {
+        "spotify": "https://open.spotify.com/track/6vLKVWEuOCQAWEaHv2yknm",
+        "appleMusic": "https://music.apple.com/us/album/like-i-like-it/1810702926?i=1810702937",
+        "bandcamp": "https://pablomdj.bandcamp.com/track/mau-p-like-i-like-it-pablo-m-groove-mix",
+        "discogs": "https://www.discogs.com/search/?q=Mau+P+Like+I+Like+It&type=release&format=Vinyl"
+      },
+      "source": "both"
+    },
+    {
+      "artist": "Max Styler",
+      "title": "Lights Out",
+      "at": "0:00",
+      "slug": "max-styler-lights-out",
+      "isrc": "GBCPZ2423164",
+      "mbid": "9da71ad1-5c18-465b-acfd-dd1943e26926",
+      "deezerTitle": "Lights Out",
+      "source": "both"
+    },
+    {
+      "artist": "Max Styler",
+      "title": "Hypnotic",
+      "at": "0:00",
+      "slug": "max-styler-hypnotic",
+      "isrc": "US38Y2308530",
+      "mbid": "86b61d36-4245-46ec-b23d-800ebeba303a",
+      "deezerTitle": "Hypnotic",
+      "source": "both"
+    },
+    {
+      "artist": "Mesto",
+      "title": "Caramelle",
+      "at": "0:00",
+      "slug": "mesto-caramelle",
+      "isrc": "NLM5S2502707",
+      "mbid": "1a4fc6fe-5f0e-4b6a-928a-d9d3f5d74165",
+      "deezerTitle": "Caramelle",
+      "platforms": {
+        "spotify": "https://open.spotify.com/track/1RzVjndxj5X53kYjJW2nuq",
+        "appleMusic": "https://music.apple.com/us/album/caramelle-extended-mix/1850001801?i=1850001802",
+        "discogs": "https://www.discogs.com/search/?q=Mesto+Caramelle+%28Extended+Mix%29&type=release&format=Vinyl"
+      },
+      "source": "both"
+    },
+    {
+      "artist": "Mosmoz",
+      "title": "Put It In Reverse",
+      "at": "0:00",
+      "slug": "mosmoz-put-it-in-reverse",
+      "isrc": "FR10S2617858",
+      "deezerTitle": "Put It In Reverse",
+      "source": "deezer"
+    },
+    {
+      "artist": "Noizu & Martin Ikin",
+      "title": "Burnin’",
+      "at": "0:00",
+      "slug": "noizu-martin-ikin-burnin",
+      "isrc": "NLRD52319418",
+      "mbid": "3b7ef96d-ec43-4dd5-a00e-8c810d6ad550",
+      "deezerTitle": "Burnin'",
+      "source": "both"
+    },
+    {
+      "artist": "Pleasurekraft",
+      "title": "Tarantula (Max Styler Remix)",
+      "at": "0:00",
+      "slug": "pleasurekraft-tarantula-max-styler-remix",
+      "isrc": "US7NS2400006",
+      "mbid": "f57695d6-8b1b-496c-b72b-cdd74f95787b",
+      "deezerTitle": "Tarantula (Max Styler Remix)",
+      "source": "both"
+    },
+    {
+      "artist": "Prospa & Murda Beatz",
+      "title": "Baby",
+      "at": "0:00",
+      "slug": "prospa-murda-beatz-baby",
+      "isrc": "QM6MZ2647626",
+      "deezerTitle": "Baby",
+      "source": "deezer"
+    },
+    {
+      "artist": "SIDEPIECE & Westend",
+      "title": "Take Your Places",
+      "at": "0:00",
+      "slug": "sidepiece-westend-take-your-places",
+      "isrc": "NL8RL2561841",
+      "mbid": "a4aa1f85-b6be-41f1-baac-dc9b66d29ffe",
+      "deezerTitle": "Take Your Places",
+      "platforms": {
+        "spotify": "https://open.spotify.com/track/2adebVLvCyhgIM4eGNfS6n",
+        "appleMusic": "https://music.apple.com/us/album/take-your-places/1843869979?i=1843869980",
+        "discogs": "https://www.discogs.com/search/?q=SIDEPIECE+%26+Westend+Take+Your+Places&type=release&format=Vinyl"
+      },
+      "source": "both"
+    },
+    {
+      "artist": "The Temper Trap",
+      "title": "Sweet Disposition (John Summit & Silver Panda Remix)",
+      "at": "0:00",
+      "slug": "the-temper-trap-sweet-disposition-john-summit-silver-panda-remix",
+      "isrc": "GBCPZ2422741",
+      "mbid": "cfee0ea9-2477-464d-868f-34fb28766c8a",
+      "deezerTitle": "Sweet Disposition (John Summit & Silver Panda Remix)",
+      "platforms": {
+        "spotify": "https://open.spotify.com/track/1jUkHIMc7UaJQuzWe5Iop2",
+        "appleMusic": "https://music.apple.com/us/album/sweet-disposition-john-summit-silver-panda-remix/1782597727?i=1782597728",
+        "discogs": "https://www.discogs.com/search/?q=The+Temper+Trap+Sweet+Disposition+%28John+Summit+%26+Silver+Panda+Remix%29&type=release&format=Vinyl"
+      },
+      "source": "both"
+    },
+    {
+      "artist": "TNT/Darren Styles/Technoboy",
+      "title": "Hard Beat",
+      "at": "0:00",
+      "slug": "tnt-darren-styles-technoboy-hard-beat",
+      "isrc": "ITC942407062",
+      "deezerTitle": "Hard Beat",
+      "source": "deezer"
+    },
+    {
+      "artist": "Westend",
+      "title": "Feels Better",
+      "at": "0:00",
+      "slug": "westend-feels-better",
+      "isrc": "CA5KR2659819",
+      "deezerTitle": "Feels Better",
+      "source": "deezer"
+    },
+    {
+      "artist": "Adam Beyer & Bart Skils",
+      "title": "Your Mind (HNTR Remix)",
+      "at": "0:00",
+      "slug": "adam-beyer-bart-skils-your-mind-hntr-remix",
+      "isrc": "GBUR62001187",
+      "mbid": "6a89d207-81cc-434a-bb56-912508781f73",
+      "deezerTitle": "Your Mind (HNTR Remix)",
+      "platforms": {
+        "spotify": "https://open.spotify.com/track/5NZdurYcFYOg3s2YyzeVgE",
+        "appleMusic": "https://music.apple.com/us/album/your-mind/1700668064?i=1700668296",
+        "bandcamp": "https://adambeyer.bandcamp.com/track/your-mind-charles-d-epic-mix",
+        "discogs": "https://www.discogs.com/release/29301277-Adam-Beyer-Bart-Skils-Your-Mind"
+      },
+      "source": "both"
+    },
+    {
+      "artist": "Afrojack/Lucas & Steve",
+      "title": "Control",
+      "at": "0:00",
+      "slug": "afrojack-lucas-steve-control-3",
+      "isrc": "GXFCP2600064",
+      "deezerTitle": "Control",
+      "source": "deezer"
+    },
+    {
+      "artist": "AIKON",
+      "title": "To You",
+      "at": "0:00",
+      "slug": "aikon-to-you",
+      "isrc": "DEEC31810677",
+      "mbid": "d98bf368-d0b5-49c7-b8bb-e0215d6f7400",
+      "deezerTitle": "To You",
+      "source": "both"
+    },
+    {
+      "artist": "Alice Deejay",
+      "title": "Better Off Alone",
+      "at": "0:00",
+      "slug": "alice-deejay-better-off-alone",
+      "isrc": "NLC529811129",
+      "mbid": "8e5553bd-71ec-4f04-a8f5-3d7299fb7b96",
+      "deezerTitle": "Better Off Alone",
+      "platforms": {
+        "spotify": "https://open.spotify.com/track/5XVjNRubJUW0iPhhSWpLCj",
+        "appleMusic": "https://music.apple.com/us/album/better-off-alone/1631123344?i=1631123438",
+        "discogs": "https://www.discogs.com/release/454410-Alice-Deejay-Better-Off-Alone"
+      },
+      "source": "both"
+    },
+    {
+      "artist": "Armin van Buuren & Skytech",
+      "title": "She A Freak",
+      "at": "0:00",
+      "slug": "armin-van-buuren-skytech-she-a-freak",
+      "isrc": "NLF712605248",
+      "mbid": "51efd58b-13b7-4e9b-9cc8-acbcecd69ab7",
+      "deezerTitle": "She A Freak (ASOT 1290)",
+      "source": "both"
+    },
+    {
+      "artist": "Attma, Reflect Future",
+      "title": "Iridium",
+      "at": "0:00",
+      "slug": "attma-reflect-future-iridium",
+      "isrc": "US83Z2607953",
+      "deezerTitle": "Iridium",
+      "source": "deezer"
+    },
+    {
+      "artist": "Bart Skils",
+      "title": "For the Music",
+      "at": "0:00",
+      "slug": "bart-skils-for-the-music",
+      "isrc": "GBUR62001267",
+      "mbid": "4e39579c-d961-4904-a7d0-01f7f3a11131",
+      "deezerTitle": "For the Music",
+      "source": "both"
+    },
+    {
+      "artist": "Bleu Clair",
+      "title": "Mistake",
+      "at": "0:00",
+      "slug": "bleu-clair-mistake",
+      "isrc": "CA5KR2215389",
+      "mbid": "0af0c931-ea32-40db-bb3c-d47b151eadc3",
+      "deezerTitle": "Mistake",
+      "source": "both"
+    },
+    {
+      "artist": "Calvin Harris & Alesso ft. Hurts",
+      "title": "Under Control",
+      "at": "0:00",
+      "slug": "calvin-harris-alesso-ft-hurts-under-control",
+      "isrc": "GBARL1301271",
+      "mbid": "8d204235-1f5b-4616-93eb-73d4e12337b2",
+      "deezerTitle": "Under Control (feat. Hurts)",
+      "platforms": {
+        "spotify": "https://open.spotify.com/track/3IRopjEQzdRC8oP98yUikY",
+        "appleMusic": "https://music.apple.com/us/album/under-control-feat-hurts/922876176?i=922876183",
+        "discogs": "https://www.discogs.com/release/6960039-Calvin-Harris-Motion"
+      },
+      "source": "both"
+    },
+    {
+      "artist": "Chris Lorenzo",
+      "title": "Appetite",
+      "at": "0:00",
+      "slug": "chris-lorenzo-appetite",
+      "isrc": "QT47L2500018",
+      "mbid": "cd4c19b4-918c-4080-9d27-bd1a500c3472",
+      "deezerTitle": "Appetite",
+      "source": "both"
+    },
+    {
+      "artist": "Da Lata, Diabel Cissokho",
+      "title": "This Is Not Your Job",
+      "at": "0:00",
+      "slug": "da-lata-diabel-cissokho-this-is-not-your-job",
+      "isrc": "GBFNE0920002",
+      "deezerTitle": "This Is Not Your Job (120BPM)",
+      "source": "deezer"
+    },
+    {
+      "artist": "David Guetta",
+      "title": "Play Hard (feat. Ne-Yo & Akon) [Albert Neve Remix]",
+      "at": "0:00",
+      "slug": "david-guetta-play-hard-feat-ne-yo-akon-albert-neve-remix",
+      "isrc": "GB28K1300004",
+      "deezerTitle": "Play Hard (feat. Ne-Yo & Akon) (Albert Neve Remix)",
+      "source": "deezer"
+    },
+    {
+      "artist": "David Guetta, Marten Horger, Men Machine",
+      "title": "The Past, The Present, The Future",
+      "at": "0:00",
+      "slug": "david-guetta-marten-horger-men-machine-the-past-the-present-the-future-2",
+      "isrc": "UKWLG2600047",
+      "deezerTitle": "The Past, The Present, The Future",
+      "source": "deezer"
+    },
+    {
+      "artist": "Delerium, Sarah McLachlan, John Summit",
+      "title": "Silence (John Summit Remix)",
+      "at": "0:00",
+      "slug": "delerium-sarah-mclachlan-john-summit-silence-john-summit-remix",
+      "isrc": "BE5KW2500717",
+      "mbid": "0996c81e-d9f6-4b83-8394-89e835fad8c4",
+      "deezerTitle": "Silence (John Summit Remix)",
+      "source": "both"
+    },
+    {
+      "artist": "Dimitri Vegas & Like Mike & Martin Garrix",
+      "title": "Tremor (Sensation 2014 Anthem)",
+      "at": "0:00",
+      "slug": "dimitri-vegas-like-mike-martin-garrix-tremor-sensation-2014-anthem",
+      "isrc": "NLZ541400192",
+      "mbid": "109c6da3-5d29-4f13-a021-a905800b00df",
+      "deezerTitle": "Tremor (Sensation 2014 Anthem)",
+      "source": "both"
+    },
+    {
+      "artist": "DJ Fire",
+      "title": "The Closest Thing To Heaven (Trance Mix)",
+      "at": "0:00",
+      "slug": "dj-fire-the-closest-thing-to-heaven-trance-mix",
+      "isrc": "BEY920600639",
+      "mbid": "ba4817d1-f880-4628-aa7f-eced08747308",
+      "deezerTitle": "The Closest Thing To Heaven (Trance Mix)",
+      "source": "both"
+    },
+    {
+      "artist": "Dom Dolla",
+      "title": "Take It (Extended)",
+      "at": "0:00",
+      "slug": "dom-dolla-take-it-extended",
+      "isrc": "AUDCB1701203",
+      "deezerTitle": "Take It (Extended Mix)",
+      "platforms": {
+        "spotify": "https://open.spotify.com/track/3S4baKuEAz2bM8J3M8DdoZ",
+        "appleMusic": "https://music.apple.com/us/album/take-it/1454818192?i=1454818194",
+        "bandcamp": "https://domdolla.bandcamp.com/track/take-it",
+        "discogs": "https://www.discogs.com/release/13279870-Dom-Dolla-Take-It"
+      },
+      "source": "both"
+    },
+    {
+      "artist": "Dom Dolla, Tiga",
+      "title": "Don't Worry Baby (Extended)",
+      "at": "0:00",
+      "slug": "dom-dolla-tiga-don-t-worry-baby-extended",
+      "isrc": "USQX92602535",
+      "mbid": "f46f9780-dc7d-4001-a52d-18dd54a02058",
+      "deezerTitle": "Don't Worry Baby",
+      "source": "both"
+    },
+    {
+      "artist": "Elias Kazais",
+      "title": "More Than",
+      "at": "0:00",
+      "slug": "elias-kazais-more-than",
+      "isrc": "DEY472673335",
+      "deezerTitle": "More Than",
+      "source": "deezer"
+    },
+    {
+      "artist": "Felix da Housecat",
+      "title": "Silver Screen (Shower Scene) (Alexander Delanois Private Mix)",
+      "at": "0:00",
+      "slug": "felix-da-housecat-silver-screen-shower-scene-alexander-delanois-private-mix",
+      "isrc": "QMFME2506905",
+      "mbid": "25cb2406-bc4c-4400-8e83-af3a5ae7d6f8",
+      "deezerTitle": "Silver Screen (Shower Scene) (Alexander Delanois Private Mix)",
+      "source": "both"
+    },
+    {
+      "artist": "Ferry Corsten, Matt Fax",
+      "title": "Blueprint (ASOT 1254) (Matt Fax Reprint)",
+      "at": "0:00",
+      "slug": "ferry-corsten-matt-fax-blueprint-asot-1254-matt-fax-reprint",
+      "isrc": "NLF712508171",
+      "deezerTitle": "Blueprint (ASOT 1254) (Matt Fax Reprint)",
+      "source": "deezer"
+    },
+    {
+      "artist": "FOTN, Samantha Loveridge, Barbie Mak",
+      "title": "No More",
+      "at": "0:00",
+      "slug": "fotn-samantha-loveridge-barbie-mak-no-more",
+      "isrc": "GXCM22600012",
+      "mbid": "10dbaeb4-9ccc-44cd-a53a-39b4f8e2ce16",
+      "deezerTitle": "No More (feat. Barbie Mak)",
+      "source": "both"
+    },
+    {
+      "artist": "Frank Savio",
+      "title": "Central State",
+      "at": "0:00",
+      "slug": "frank-savio-central-state",
+      "mbid": "b2859249-f888-40e7-9f3f-084a6395fd7a",
+      "source": "musicbrainz"
+    },
+    {
+      "artist": "Funkagenda & Punkrok",
+      "title": "Ding Dong",
+      "at": "0:00",
+      "slug": "funkagenda-punkrok-ding-dong",
+      "isrc": "GBJAJ0600229",
+      "deezerTitle": "Ding Dong (Original)",
+      "source": "deezer"
+    },
+    {
+      "artist": "Gala",
+      "title": "Freed From Desire",
+      "at": "0:00",
+      "slug": "gala-freed-from-desire",
+      "isrc": "ITA179700143",
+      "mbid": "6687628e-def3-4cce-be6a-006b486cde96",
+      "deezerTitle": "Freed From Desire",
+      "platforms": {
+        "spotify": "https://open.spotify.com/track/2y8wIiJ4w47qDmnkSEQ6f0",
+        "appleMusic": "https://music.apple.com/us/album/freed-from-desire/287591338?i=287592533",
+        "discogs": "https://www.discogs.com/release/25829203-Gala-Freed-From-Desire",
+        "youtube": "https://www.youtube.com/watch?v=p3l7fgvrEKM"
+      },
+      "source": "both"
+    },
+    {
+      "artist": "Hardwell",
+      "title": "Sanctuary - Extended Mix",
+      "at": "0:00",
+      "slug": "hardwell-sanctuary-extended-mix",
+      "isrc": "NL8RL2509974",
+      "deezerTitle": "Sanctuary (Extended Mix)",
+      "source": "deezer"
+    },
+    {
+      "artist": "James Hype",
+      "title": "Lose Control",
+      "at": "0:00",
+      "slug": "james-hype-lose-control",
+      "isrc": "NLRD52319304",
+      "mbid": "4434baf6-3ae4-499f-bfd4-c1926b2b617d",
+      "deezerTitle": "Lose Control",
+      "platforms": {
+        "spotify": "https://open.spotify.com/track/3DLWVhaowApIGw1JnJj6GS",
+        "appleMusic": "https://music.apple.com/us/album/lose-control/1683013352?i=1683013353",
+        "discogs": "https://www.discogs.com/search/?q=James+Hype+Lose+Control&type=release&format=Vinyl",
+        "youtube": "https://www.youtube.com/watch?v=mmLJ-e6PlIY"
+      },
+      "source": "both"
+    },
+    {
+      "artist": "James Hype",
+      "title": "Wild",
+      "at": "0:00",
+      "slug": "james-hype-wild",
+      "isrc": "US38Y2405797",
+      "deezerTitle": "Wild",
+      "source": "deezer"
+    },
+    {
+      "artist": "James Hype",
+      "title": "Don't Wake Me Up",
+      "at": "0:00",
+      "slug": "james-hype-don-t-wake-me-up",
+      "isrc": "GBUM72500069",
+      "mbid": "771462a2-8149-4667-816c-a6e0aef4d88b",
+      "deezerTitle": "Don't Wake Me Up",
+      "source": "both"
+    },
+    {
+      "artist": "John Summit, Inéz",
+      "title": "crystallized",
+      "at": "0:00",
+      "slug": "john-summit-inez-crystallized",
+      "isrc": "USUG12505276",
+      "deezerTitle": "crystallized",
+      "source": "deezer"
+    },
+    {
+      "artist": "John Summit, venbee",
+      "title": "palm of my hands (Odd Mob Extended Remix)",
+      "at": "0:00",
+      "slug": "john-summit-venbee-palm-of-my-hands-odd-mob-extended-remix",
+      "isrc": "USUG12405789",
+      "mbid": "46097390-6270-4145-a7b6-b382e8a7a2fc",
+      "platforms": {
+        "spotify": "https://open.spotify.com/track/2vxsdAnntt6eGZJJRaLBF6",
+        "appleMusic": "https://music.apple.com/us/album/palm-of-my-hands-odd-mob-remix/1776952087?i=1776952088",
+        "discogs": "https://www.discogs.com/search/?q=John+Summit+palm+of+my+hands+%28Odd+Mob+Extended+Remix%29&type=release&format=Vinyl"
+      },
+      "source": "both"
+    },
+    {
+      "artist": "Jonas Steur",
+      "title": "Second Turn",
+      "at": "0:00",
+      "slug": "jonas-steur-second-turn",
+      "isrc": "NLS241202666",
+      "mbid": "bb1c32bf-871e-4132-9755-256783444656",
+      "deezerTitle": "Second Turn",
+      "source": "both"
+    },
+    {
+      "artist": "JUULS/FISION/NLW",
+      "title": "Cricket",
+      "at": "0:00",
+      "slug": "juuls-fision-nlw-cricket",
+      "isrc": "NL8RL2623154",
+      "deezerTitle": "Cricket",
+      "source": "deezer"
+    },
+    {
+      "artist": "Kako Martinez, Nicole",
+      "title": "Dominicana",
+      "at": "0:00",
+      "slug": "kako-martinez-nicole-dominicana",
+      "isrc": "FR59R2158599",
+      "deezerTitle": "Dominicana (Spanish Mix)",
+      "source": "deezer"
+    },
+    {
+      "artist": "Kalamita (FR)",
+      "title": "Soul Of The Dance",
+      "at": "0:00",
+      "slug": "kalamita-fr-soul-of-the-dance",
+      "isrc": "NLG3N2600004",
+      "deezerTitle": "Soul Of The Dance",
+      "source": "deezer"
+    },
+    {
+      "artist": "Kalamita (FR), Jasmine Knight",
+      "title": "Down & Dirty",
+      "at": "0:00",
+      "slug": "kalamita-fr-jasmine-knight-down-dirty",
+      "isrc": "NLG3N2600010",
+      "deezerTitle": "Down & Dirty",
+      "source": "deezer"
+    },
+    {
+      "artist": "Kaskade, Layton Giordani, Natalie Jane",
+      "title": "Meet Again",
+      "at": "0:00",
+      "slug": "kaskade-layton-giordani-natalie-jane-meet-again",
+      "isrc": "NL8RL2641445",
+      "mbid": "7a5f94a4-f56a-439f-9771-a9f8f3b93a5c",
+      "deezerTitle": "Meet Again",
+      "source": "both"
+    },
+    {
+      "artist": "Khadija",
+      "title": "Good",
+      "at": "0:00",
+      "slug": "khadija-good",
+      "isrc": "GBLTF2600068",
+      "mbid": "3b470aab-eca8-482b-ace6-89ab6f35e4dc",
+      "deezerTitle": "Good",
+      "source": "both"
+    },
+    {
+      "artist": "KSHMR, OTIOT, KEL",
+      "title": "Khoye Yahaan Reimagined",
+      "at": "0:00",
+      "slug": "kshmr-otiot-kel-khoye-yahaan-reimagined",
+      "isrc": "NLZ542600239",
+      "deezerTitle": "Khoye Yahaan Reimagined",
+      "source": "deezer"
+    },
+    {
+      "artist": "Lucas & Steve",
+      "title": "All I Know",
+      "at": "0:00",
+      "slug": "lucas-steve-all-i-know",
+      "isrc": "NLZ542600333",
+      "mbid": "99c0ba3c-4611-4e12-bbb0-d9c0b03fa5a9",
+      "deezerTitle": "All I Know",
+      "source": "both"
+    },
+    {
+      "artist": "Lustral",
+      "title": "So This Is Summer",
+      "at": "0:00",
+      "slug": "lustral-so-this-is-summer",
+      "isrc": "NLF710701173",
+      "mbid": "dd151174-b8da-4265-8cc1-de979963ba72",
+      "deezerTitle": "So This Is Summer",
+      "source": "both"
+    },
+    {
+      "artist": "Matador",
+      "title": "Mince",
+      "at": "0:00",
+      "slug": "matador-mince",
+      "isrc": "FR59R2603070",
+      "deezerTitle": "Mince",
+      "source": "deezer"
+    },
+    {
+      "artist": "Mau P",
+      "title": "Drugs From Amsterdam",
+      "at": "0:00",
+      "slug": "mau-p-drugs-from-amsterdam",
+      "isrc": "GBK6Y2251421",
+      "mbid": "8c058e9b-0f4f-458a-9904-e2006844dcc9",
+      "deezerTitle": "Drugs From Amsterdam",
+      "source": "both"
+    },
+    {
+      "artist": "Max Styler",
+      "title": "Kiki",
+      "at": "0:00",
+      "slug": "max-styler-kiki",
+      "isrc": "NLZ542301461",
+      "mbid": "88e8da16-43b0-4ee8-b068-b29883f7e4c9",
+      "deezerTitle": "Kiki",
+      "source": "both"
+    },
+    {
+      "artist": "Max Styler & GENESI",
+      "title": "See You Sweat",
+      "at": "0:00",
+      "slug": "max-styler-genesi-see-you-sweat",
+      "isrc": "NL8RL2426487",
+      "mbid": "478772dd-1d40-4e1a-9a30-6e04ed74bfb3",
+      "deezerTitle": "See You Sweat",
+      "source": "both"
+    },
+    {
+      "artist": "MEDUZA & Kevin de Vries",
+      "title": "7 Days",
+      "at": "0:00",
+      "slug": "meduza-kevin-de-vries-7-days-2",
+      "isrc": "BE5KW2601265",
+      "mbid": "0877fea8-ad72-4c17-a754-e34be8302354",
+      "deezerTitle": "7 Days",
+      "source": "both"
+    },
+    {
+      "artist": "MEDUZA, RANI",
+      "title": "Silence",
+      "at": "0:00",
+      "slug": "meduza-rani-silence",
+      "isrc": "NL8RL2645416",
+      "mbid": "1fb27707-679c-4969-96f9-d094685b7559",
+      "deezerTitle": "Silence",
+      "source": "both"
+    },
+    {
+      "artist": "Megisto, Laidback Luke",
+      "title": "Don't Look Back",
+      "at": "0:00",
+      "slug": "megisto-laidback-luke-don-t-look-back",
+      "isrc": "NLM5S2602803",
+      "deezerTitle": "Don't Look Back",
+      "source": "deezer"
+    },
+    {
+      "artist": "Mesto",
+      "title": "Listen To Me",
+      "at": "0:00",
+      "slug": "mesto-listen-to-me",
+      "isrc": "NLM5S2602820",
+      "deezerTitle": "Listen To Me",
+      "source": "deezer"
+    },
+    {
+      "artist": "Miss Monique/Glowal",
+      "title": "Lost On A Dancefloor",
+      "at": "0:00",
+      "slug": "miss-monique-glowal-lost-on-a-dancefloor",
+      "isrc": "QMFMF2567318",
+      "deezerTitle": "Lost On A Dancefloor",
+      "source": "deezer"
+    },
+    {
+      "artist": "MORTEN & David Guetta",
+      "title": "La Révolution",
+      "at": "0:00",
+      "slug": "morten-david-guetta-la-revolution",
+      "isrc": "UKWLG2600062",
+      "mbid": "e4ebd162-8d18-44b0-98d5-007eb7bdf653",
+      "deezerTitle": "La Révolution",
+      "source": "both"
+    },
+    {
+      "artist": "nilsix, Orjan Nilsen, Mark Sixma",
+      "title": "Outta My Head",
+      "at": "0:00",
+      "slug": "nilsix-orjan-nilsen-mark-sixma-outta-my-head",
+      "isrc": "NLF712602830",
+      "mbid": "d5a36a6b-561b-4de2-8f70-97a99c4d233b",
+      "deezerTitle": "Outta My Head",
+      "source": "both"
+    },
+    {
+      "artist": "Odd Mob",
+      "title": "Give You",
+      "at": "0:00",
+      "slug": "odd-mob-give-you",
+      "isrc": "AUCN32300230",
+      "mbid": "80e1005a-5e13-4ed5-9fec-ccdcd376a469",
+      "deezerTitle": "Give You",
+      "platforms": {
+        "spotify": "https://open.spotify.com/track/3VrFR7A8qVKHmECL5tNIlf",
+        "appleMusic": "https://music.apple.com/us/album/give-you/1718492804?i=1718492805",
+        "bandcamp": "https://oddmob1.bandcamp.com/track/give-you",
+        "discogs": "https://www.discogs.com/search/?q=Odd+Mob+Give+You&type=release&format=Vinyl"
+      },
+      "source": "both"
+    },
+    {
+      "artist": "Odd Mob & OMNOM",
+      "title": "Losing Control",
+      "at": "0:00",
+      "slug": "odd-mob-omnom-losing-control",
+      "isrc": "GBCPZ2322261",
+      "mbid": "2c94c60f-d32d-4cc8-9da3-74e06ec52dff",
+      "deezerTitle": "Losing Control",
+      "source": "both"
+    },
+    {
+      "artist": "Odd Mob & OMNOM pres. HYPERBEAM",
+      "title": "Coming Up (It's Dare)",
+      "at": "0:00",
+      "slug": "odd-mob-omnom-pres-hyperbeam-coming-up-it-s-dare",
+      "isrc": "USAT22508684",
+      "mbid": "ed521cba-0928-4b64-917a-68c9c6dcc0d9",
+      "deezerTitle": "Coming Up (It’s Dare)",
+      "platforms": {
+        "spotify": "https://open.spotify.com/track/7JHkJ5mDS868b5j5h67cwL",
+        "appleMusic": "https://music.apple.com/us/album/coming-up-its-dare/1851055971?i=1851055972",
+        "discogs": "https://www.discogs.com/search/?q=Odd+Mob+Coming+Up+%28It%E2%80%99s+Dare%29&type=release&format=Vinyl"
+      },
+      "source": "both"
+    },
+    {
+      "artist": "Prospa",
+      "title": "Don't Stop",
+      "at": "0:00",
+      "slug": "prospa-don-t-stop",
+      "isrc": "QM6MZ2575912",
+      "mbid": "3029d071-5501-4ef3-aef1-cfdcac561329",
+      "deezerTitle": "Don't Stop",
+      "source": "both"
+    },
+    {
+      "artist": "Salush",
+      "title": "Honey",
+      "at": "0:00",
+      "slug": "salush-honey",
+      "isrc": "FRR642500667",
+      "deezerTitle": "Honey",
+      "source": "deezer"
+    },
+    {
+      "artist": "Sebastian Ingrosso & Alesso ft. Ryan Tedder",
+      "title": "Calling (Lose My Mind)",
+      "at": "0:00",
+      "slug": "sebastian-ingrosso-alesso-ft-ryan-tedder-calling-lose-my-mind",
+      "isrc": "GBJ4B1200056",
+      "mbid": "ce5a3364-991f-4224-81a2-9c5268eeae35",
+      "deezerTitle": "Calling (Lose My Mind) (Radio Edit)",
+      "source": "both"
+    },
+    {
+      "artist": "Seth Hills",
+      "title": "Secretos",
+      "at": "0:00",
+      "slug": "seth-hills-secretos",
+      "isrc": "NLZ542600317",
+      "deezerTitle": "Secretos",
+      "source": "deezer"
+    },
+    {
+      "artist": "SOSA",
+      "title": "Be Without You",
+      "at": "0:00",
+      "slug": "sosa-be-without-you",
+      "isrc": "NL8RL2562245",
+      "mbid": "45fcd209-7b17-48f5-b24a-2d345f5d4259",
+      "deezerTitle": "Be Without You",
+      "source": "both"
+    },
+    {
+      "artist": "The Chemical Brothers",
+      "title": "Do It Again (Massano Remix)",
+      "at": "0:00",
+      "slug": "the-chemical-brothers-do-it-again-massano-remix",
+      "isrc": "GBUM72503673",
+      "mbid": "e5382cf6-d015-4f0d-b638-2370e50bf0b5",
+      "deezerTitle": "Do It Again (Massano Remix)",
+      "platforms": {
+        "spotify": "https://open.spotify.com/track/6eypw7fGYBtYxD3dCE2pld",
+        "appleMusic": "https://music.apple.com/us/album/do-it-again/1474660272?i=1474660526",
+        "bandcamp": "https://martinjuradodj.bandcamp.com/track/the-chemical-brothers-do-it-again-tinchomix-remix-nu-disco",
+        "discogs": "https://www.discogs.com/release/975926-The-Chemical-Brothers-Do-It-Again"
+      },
+      "source": "both"
+    },
+    {
+      "artist": "Tiësto & Odd Mob & GOODBOYS",
+      "title": "Won't Be Possible",
+      "at": "0:00",
+      "slug": "tiesto-odd-mob-goodboys-won-t-be-possible-2",
+      "isrc": "CYA112500001",
+      "mbid": "be6a5fa4-36be-45a9-a912-1272a0305e9c",
+      "deezerTitle": "Won’t Be Possible",
+      "source": "both"
+    },
+    {
+      "artist": "Tuta M",
+      "title": "Le segile kapela",
+      "at": "0:00",
+      "slug": "tuta-m-le-segile-kapela",
+      "isrc": "GXJ8K2615062",
+      "deezerTitle": "Le segile kapela",
+      "source": "deezer"
+    },
+    {
+      "artist": "TWIIG, ANGELPLAYA, LYNDO",
+      "title": "O PAI TÁ ON",
+      "at": "0:00",
+      "slug": "twiig-angelplaya-lyndo-o-pai-ta-on",
+      "isrc": "NLZ542600151",
+      "deezerTitle": "O PAI TÁ ON",
+      "source": "deezer"
+    },
+    {
+      "artist": "Vintage Culture & Volkoder",
+      "title": "Hands Up",
+      "at": "0:00",
+      "slug": "vintage-culture-volkoder-hands-up-2",
+      "isrc": "BXLKS2600022",
+      "mbid": "cb3106a2-eb19-44bf-a0e4-6355a4bcf52f",
+      "deezerTitle": "Hands Up",
+      "source": "both"
+    },
+    {
+      "artist": "Vinter",
+      "title": "Space Pump (Space Jam)",
+      "at": "0:00",
+      "slug": "vinter-space-pump-space-jam",
+      "isrc": "USNRS2544200",
+      "mbid": "166f244e-afd0-4617-8968-7c2a5d009194",
+      "deezerTitle": "Space Pump (Space Jam) (Extended Mix)",
+      "source": "both"
+    },
+    {
+      "artist": "Vion Konger",
+      "title": "DANCE",
+      "at": "0:00",
+      "slug": "vion-konger-dance",
+      "isrc": "BEIW12600319",
+      "deezerTitle": "DANCE",
+      "source": "deezer"
+    },
+    {
+      "artist": "Walker & Royce, James Patterson",
+      "title": "Might Just",
+      "at": "0:00",
+      "slug": "walker-royce-james-patterson-might-just",
+      "isrc": "USUYG1532400",
+      "mbid": "b6dcd925-9de1-4ef4-afff-d489a76a1db2",
+      "deezerTitle": "Might Just",
+      "source": "both"
+    },
+    {
+      "artist": "Westend & Olivia Sebastianelli",
+      "title": "The Ceiling",
+      "at": "0:00",
+      "slug": "westend-olivia-sebastianelli-the-ceiling",
+      "isrc": "USA2P2630264",
+      "mbid": "9961cd3a-df3e-4c12-af8e-4e8e79cb8afe",
+      "deezerTitle": "The Ceiling",
+      "source": "both"
+    },
+    {
+      "artist": "YOTTO",
+      "title": "Aero",
+      "at": "0:00",
+      "slug": "yotto-aero",
+      "isrc": "NL8RL2571253",
+      "mbid": "ddc59572-c8ee-478f-a0b2-9ca1116108f0",
+      "deezerTitle": "Aero",
+      "source": "both"
+    },
+    {
+      "artist": "22Bullets, Angie Robba",
+      "title": "Calling (Lights)",
+      "at": "0:00",
+      "slug": "22bullets-angie-robba-calling-lights",
+      "isrc": "NLZ542600283",
+      "deezerTitle": "Calling (Lights)",
+      "source": "deezer"
+    },
+    {
+      "artist": "2ACES",
+      "title": "Break My Fall",
+      "at": "0:00",
+      "slug": "2aces-break-my-fall",
+      "isrc": "NL8RL2627741",
+      "deezerTitle": "Break My Fall",
+      "source": "deezer"
+    },
+    {
+      "artist": "Adam Beyer, Mark Reeve",
+      "title": "Love Within",
+      "at": "0:00",
+      "slug": "adam-beyer-mark-reeve-love-within",
+      "isrc": "GBUR62001302",
+      "deezerTitle": "Love Within",
+      "source": "deezer"
+    },
+    {
+      "artist": "Age Of Love",
+      "title": "The Age Of Love (Charlotte de Witte & Enrico Sangiuliano Remix)",
+      "at": "0:00",
+      "slug": "age-of-love-the-age-of-love-charlotte-de-witte-enrico-sangiuliano-remix",
+      "isrc": "BEN582100445",
+      "mbid": "a74cea68-f6c0-4fbc-81e6-c99605f129b3",
+      "deezerTitle": "The Age Of Love (Charlotte de Witte & Enrico Sangiuliano Remix)",
+      "source": "both"
+    },
+    {
+      "artist": "AIROD",
+      "title": "Police Brutality",
+      "at": "0:00",
+      "slug": "airod-police-brutality",
+      "isrc": "FRDX62200120",
+      "mbid": "957729b3-cf3f-42b2-b3f3-4bcee99a9e5b",
+      "deezerTitle": "Police Brutality",
+      "source": "both"
+    },
+    {
+      "artist": "Alesso & OneRepublic",
+      "title": "If I Lose Myself",
+      "at": "0:00",
+      "slug": "alesso-onerepublic-if-i-lose-myself",
+      "isrc": "USUM71303190",
+      "mbid": "75d8416c-b8f7-4e1f-b341-7f6b592cbcb2",
+      "deezerTitle": "If I Lose Myself (Alesso vs OneRepublic)",
+      "source": "both"
+    },
+    {
+      "artist": "Alesso & Sentinel",
+      "title": "Only You",
+      "at": "0:00",
+      "slug": "alesso-sentinel-only-you",
+      "isrc": "USUG12201165",
+      "mbid": "92958bec-6a0e-4939-aab8-ebacc724dbcc",
+      "deezerTitle": "Only You",
+      "source": "both"
+    },
+    {
+      "artist": "Alok",
+      "title": "They Want Your Soul (Extended Mix)",
+      "at": "0:00",
+      "slug": "alok-they-want-your-soul-extended-mix",
+      "mbid": "46bdb120-745b-4d03-abc9-829ffc13477a",
+      "source": "musicbrainz"
+    },
+    {
+      "artist": "Alok, Jennifer Lopez",
+      "title": "Everything's Fine (PM) (Extended Mix)",
+      "at": "0:00",
+      "slug": "alok-jennifer-lopez-everything-s-fine-pm-extended-mix",
+      "isrc": "DEE862600673",
+      "mbid": "c1d569aa-36fd-44ee-9036-b9109695ab93",
+      "source": "musicbrainz"
+    },
+    {
+      "artist": "Amber Broos",
+      "title": "Chicks",
+      "at": "0:00",
+      "slug": "amber-broos-chicks",
+      "isrc": "NL8RL2632401",
+      "deezerTitle": "Chicks",
+      "source": "deezer"
+    },
+    {
+      "artist": "ANOTR, 54 Ultra",
+      "title": "Talk To You",
+      "at": "0:00",
+      "slug": "anotr-54-ultra-talk-to-you",
+      "isrc": "CBEFB2600137",
+      "mbid": "52242fe3-d882-475a-bf72-370b170d4825",
+      "deezerTitle": "Talk To You (ft. 54 Ultra)",
+      "source": "both"
+    },
+    {
+      "artist": "Anyma & Volkoder",
+      "title": "Other Dimension",
+      "at": "0:00",
+      "slug": "anyma-volkoder-other-dimension",
+      "isrc": "USA2P2651416",
+      "mbid": "c5ae0f49-f788-44df-a33d-70ba3bc9afa5",
+      "deezerTitle": "Other Dimension",
+      "source": "both"
+    },
+    {
+      "artist": "Anyma, Baset",
+      "title": "Neverland (From Japan)",
+      "at": "0:00",
+      "slug": "anyma-baset-neverland-from-japan",
+      "isrc": "USUG12500920",
+      "mbid": "0e16183f-26e0-4b34-a3b8-31ae87dc3e3c",
+      "deezerTitle": "Neverland (From Japan)",
+      "source": "both"
+    },
+    {
+      "artist": "Anyma, LISA",
+      "title": "Bad Angel",
+      "at": "0:00",
+      "slug": "anyma-lisa-bad-angel",
+      "isrc": "USUG12601991",
+      "mbid": "6430b2f4-6435-4b68-9ba6-7d6b373afe6c",
+      "deezerTitle": "Bad Angel",
+      "source": "both"
     }
   ],
   "misses": [
@@ -137,12 +2033,6 @@
       "artist": "Zedd & Knock2",
       "title": "Niteharts 2025 Intro",
       "at": "0:00",
-      "reason": "no verified id"
-    },
-    {
-      "artist": "Zedd ft. Jon Bellion",
-      "title": "Beautiful Now (Acappella)",
-      "at": "1:01",
       "reason": "no verified id"
     },
     {
@@ -158,63 +2048,57 @@
       "reason": "no verified id"
     },
     {
-      "artist": "Martin Garrix & Zedd & Emily Warren vs. Knock2 & NGHTMRE & Marlhy",
-      "title": "Follow vs. One Chance (Zedd & Knock2 Edit)",
-      "at": "9:16",
+      "artist": "Dreamstate By Vini Vici",
+      "title": "Your Psy Trance Destination",
+      "at": "0:00",
       "reason": "no verified id"
     },
     {
-      "artist": "Knock2 & Vedo",
-      "title": "fast n slow (VIP)",
-      "at": "13:00",
+      "artist": "Timmy Trumpet, Frank Walker, John Martin",
+      "title": "All My Life (feat. John Martin) [Extended Mix]",
+      "at": "0:00",
       "reason": "no verified id"
     },
     {
-      "artist": "Zedd ft. Matthew Koma",
-      "title": "Spectrum (Tristan Garner & Gregori Klosman Knight Remix)",
-      "at": "16:56",
+      "artist": "Alesso",
+      "title": "Get Your Groove On",
+      "at": "0:00",
       "reason": "no verified id"
     },
     {
-      "artist": "Zedd & Botnek vs. ISOKNOCK & Cade Clair",
-      "title": "Bumble Bee vs. 4EVR (Zedd & Knock2 Edit)",
-      "at": "18:46",
+      "artist": "Congorock ft. Mr. Lexx",
+      "title": "Babylon (David Guetta & MARTEN HØRGER pres. Men Machine & KENZ Rework)",
+      "at": "0:00",
       "reason": "no verified id"
     },
     {
-      "artist": "Black Eyed Peas",
-      "title": "Rock That Body (Acappella)",
-      "at": "21:38",
+      "artist": "EBTG V'S Soul Vision",
+      "title": "Tracey In My Room",
+      "at": "0:00",
       "reason": "no verified id"
     },
     {
-      "artist": "Zedd ft. Hayley Williams",
-      "title": "Stay The Night (Schoolboy Remix)",
-      "at": "23:34",
+      "artist": "Emanuel Satie, Maga, Sean Doron",
+      "title": "Moving On (Original Mix)",
+      "at": "0:00",
       "reason": "no verified id"
     },
     {
-      "artist": "Chase & Status & Bou ft. Trigga & IRAH & Flowdan & Takura",
-      "title": "Baddadan (Knock2 Remix)",
-      "at": "26:12",
+      "artist": "Hector Couto, KiRiK",
+      "title": "Day By Day (Original Mix)",
+      "at": "0:00",
       "reason": "no verified id"
     },
     {
-      "artist": "Chase & Status & Bou ft. Trigga & IRAH & Flowdan & Takura",
-      "title": "Baddadan (Knock2 VIP)",
-      "at": "27:06",
+      "artist": "Sied van Riel",
+      "title": "My Dreams (Miika's Lost Method Mix)",
+      "at": "0:00",
       "reason": "no verified id"
     },
     {
-      "artist": "Lil Uzi Vert",
-      "title": "Money Longer (Knock2 Remix)",
-      "at": "29:48",
-      "reason": "no verified id"
-    },
-    {
-      "artist": "Habstrakt & Nitepunk vs. Knock2 vs. Justin Bieber & Nicki Minaj",
-      "title": "Point vs. gettin' hott vs. Beauty And A Beat (Knock2 Edit)",
-      "at": "33:06",
+      "artist": "Ammo Avenue",
+      "title": "Retro Dance (Extended Mix)",
+      "at": "0:00",
       "reason": "no verified id"
     }
   ],
@@ -224,15 +2108,30 @@
       "youtubeUrl": "https://www.youtube.com/watch?v=6DC3xoQF4Zs",
       "videoId": "6DC3xoQF4Zs",
       "offsetSec": 1035,
-      "note": "Fan 4K on 1001. Identify probe only — never Relive wire or FileScan as official."
+      "note": "Fan 4K on 1001. Identify probe only — never official playback wire or FileScan as official."
     },
     {
       "seed": "TL_KNOCK2_ZEDD_HARD_SUMMER_2026",
       "youtubeUrl": "https://www.youtube.com/watch?v=6DC3xoQF4Zs",
       "videoId": "6DC3xoQF4Zs",
       "offsetSec": 4288,
-      "note": "Fan 4K on 1001. Identify probe only — never Relive wire or FileScan as official."
+      "note": "Fan 4K on 1001. Identify probe only — never official playback wire or FileScan as official."
     }
   ],
-  "applied": 0
+  "trackradarMode": "public-archive",
+  "trackradarAnalyzes": [],
+  "set79Hints": [
+    {
+      "seed": "TL_KNOCK2_ZEDD_HARD_SUMMER_2026",
+      "urls": [],
+      "note": "Published sitemap only — not official playback. Login-walled HTML and the paid SoundCloud analyzer are never fetched."
+    },
+    {
+      "seed": "TL_COLE_TERRAZAS_HARD_SUMMER_2026",
+      "urls": [],
+      "note": "Published sitemap only — not official playback. Login-walled HTML and the paid SoundCloud analyzer are never fetched."
+    }
+  ],
+  "applied": 0,
+  "pinned": 178
 }
