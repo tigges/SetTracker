@@ -138,6 +138,7 @@ import {
   TL_DEBORAH_DE_LUCA_PYRAMID_AMNESIA_IBIZA_2025,
   TL_AUSTIN_KRAMER_UNRELEASED_139_2026,
   TL_JAMIE_JONES_GAS_TOWER_LOST_HORIZON_FESTIVAL_2020,
+  TL_SKRILLEX_BANCO_DE_CHILE_STAGE_LOLLAPALOOZA_CHILE_2026,
 } from "../tracklists1001/seeds";
 import type { RawArtist } from "../types";
 import { slugify } from "../types";
@@ -2242,6 +2243,21 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     type: "festival",
     title: "SKRILLEX LIVE @ LOLLAPALOOZA CHILE 2026 (Full Set HD)",
     eventName: "Lollapalooza Chile",
+    // Different upload from the operator 1001 paste (yt-loD-whuR5zc).
+    // Do not attach that list or merge sourceSlugs.
+  },
+  {
+    // Official operator paste 2026-08-19. No SoundCloud in the paste —
+    // do not invent an SC slug. Never yt-oGS0A_R9tag (different Chile upload).
+    video: "https://youtu.be/loD-whuR5zc",
+    primaryArtist: dj("Skrillex", { accent: "#80ffdb" }),
+    genre: "Dubstep",
+    type: "festival",
+    title: "Skrillex @ Banco de Chile Stage, Lollapalooza Chile 2026-03-15",
+    eventName: "Lollapalooza Chile",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1sh3nkvk/skrillex-banco-de-chile-stage-lollapalooza-chile-2026-03-15.html",
+    tracklist1001: TL_SKRILLEX_BANCO_DE_CHILE_STAGE_LOLLAPALOOZA_CHILE_2026,
   },
   // Top 100 gap fills — oEmbed + YouTube Data API duration-validated (≥~30m).
   // Prefer official Tomorrowland / artist / Boiler Room / Cercle / ASOT uploads.
