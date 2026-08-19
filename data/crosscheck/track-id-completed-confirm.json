@@ -1,0 +1,62 @@
+{
+  "generatedAt": "2026-08-19T05:08:22.095Z",
+  "csv": "/tmp/cursor/tracks-need-id-completed.csv",
+  "rows": 5937,
+  "withBeatport": 3276,
+  "withIsrc": 3213,
+  "beatportProbes": [
+    {
+      "url": "https://www.beatport.com/track/meet-her-at-the-love-parade/18982592",
+      "status": 200,
+      "finalUrl": "https://www.beatport.com/track/meet-her-at-the-love-parade/18982592"
+    },
+    {
+      "url": "https://www.beatport.com/track/around-the-world/5811846",
+      "status": 200,
+      "finalUrl": "https://www.beatport.com/track/around-the-world/5811846"
+    },
+    {
+      "url": "https://www.beatport.com/track/get-your-groove-on/30172322",
+      "status": 200,
+      "finalUrl": "https://www.beatport.com/track/get-your-groove-on/30172322"
+    },
+    {
+      "url": "https://www.beatport.com/track/don-t-worry-baby/28665093",
+      "status": 200,
+      "finalUrl": "https://www.beatport.com/track/don-t-worry-baby/28665093"
+    },
+    {
+      "url": "https://www.beatport.com/track/moving-on/27790487",
+      "status": 200,
+      "finalUrl": "https://www.beatport.com/track/moving-on/27790487"
+    },
+    {
+      "url": "https://www.beatport.com/track/palm-of-my-hands/19711254",
+      "status": 200,
+      "finalUrl": "https://www.beatport.com/track/palm-of-my-hands/19711254"
+    },
+    {
+      "url": "https://www.beatport.com/track/they-want-your-soul/29654081",
+      "status": 200,
+      "finalUrl": "https://www.beatport.com/track/they-want-your-soul/29654081"
+    },
+    {
+      "url": "https://www.beatport.com/track/everything-s-fine-pm/29301079",
+      "status": 200,
+      "finalUrl": "https://www.beatport.com/track/everything-s-fine-pm/29301079"
+    }
+  ],
+  "deezerConfirmed": 314,
+  "newPins": 312,
+  "keptExisting": 3231,
+  "pins": 3543,
+  "pinsWithBeatport": 3473,
+  "pinsWithIsrc": 3543,
+  "beatport404dropped": [],
+  "junkSkipped": 6,
+  "rejected": {
+    "not confirmed": 2785,
+    "beatport slug mismatch": 110
+  },
+  "note": "Producer CSV is not committed (secret-scan title hits). Deezer confirmed 314 of 3,213 ISRCs; 2 cue-sheet slugs dropped as junk. Merged with 3,231 existing pins → 3,543. Beatport HTML is never scraped."
+}
