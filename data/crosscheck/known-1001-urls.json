@@ -3,6 +3,14 @@
   "updatedAt": "2026-08-19T00:00:00.000Z",
   "urls": [
     {
+      "label": "Giuseppe Ottaviani · Digital Society, Leeds Warehouse 2026-07-24",
+      "slug": "sc-giuseppeottaviani-giuseppe-ottaviani-digitalsociety",
+      "name": "TL_GIUSEPPE_OTTAVIANI_DIGITAL_SOCIETY_LEEDS_WAREHOUSE_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/24mbg639/giuseppe-ottaviani-digital-society-leeds-warehouse-united-kingdom-2026-07-24.html",
+      "soundcloudUrl": "https://soundcloud.com/giuseppeottaviani/giuseppe-ottaviani-digitalsociety",
+      "note": "Operator paste 2026-08-19. 51 timed cues on official SC. Never sc-https://…. Overlay TL_Giuseppe-Ottaviani_Digital-Society_Leeds-Warehouse__2026 is not a valid identifier."
+    },
+    {
       "label": "Deborah De Luca · Pyramid, Amnesia Ibiza 2025-09-21",
       "slug": "yt-IfFnvi7O2Po",
       "name": "TL_DEBORAH_DE_LUCA_PYRAMID_AMNESIA_IBIZA_2025",
@@ -220,6 +228,12 @@
     }
   ],
   "heldPendingRelive": [
+    {
+      "label": "MARNIK · Nameless Festival 2016-06-04",
+      "name": "TL_MARNIK_NAMELESS_FESTIVAL_2016",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/lr8pswt/marnik-nameless-festival-italy-2016-06-04.html",
+      "note": "Operator 1001 URL 2026-08-19. No official YT/SC playback and no cue paste — do not scrape 1001 or invent cues/playback. Distinct from UNLEGEND 2026 SC."
+    },
     {
       "label": "Knock2 B2B Zedd · HARD Summer HARD Stage 2026-08-02",
       "name": "TL_KNOCK2_ZEDD_HARD_SUMMER_2026",

@@ -456,6 +456,34 @@ assert.equal(
   `sc-korolovadj-${slugify("korolova-tulum-mexico-melodic")}`,
   "sc-korolovadj-korolova-tulum-mexico-melodic",
 );
+
+const marnikUnlegendSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url ===
+    "https://soundcloud.com/marnikofficial/marnik-presents-unlegend-show",
+);
+assert.ok(marnikUnlegendSc);
+assert.equal(marnikUnlegendSc.primaryArtist.name, "MARNIK");
+assert.equal(marnikUnlegendSc.seriesName, "UNLEGEND");
+assert.equal(marnikUnlegendSc.eventName, "Nameless Festival");
+assert.equal(marnikUnlegendSc.type, "festival");
+assert.equal(
+  `sc-marnikofficial-${slugify("marnik-presents-unlegend-show")}`,
+  "sc-marnikofficial-marnik-presents-unlegend-show",
+);
+
+const goDigitalSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url ===
+    "https://soundcloud.com/giuseppeottaviani/giuseppe-ottaviani-digitalsociety",
+);
+assert.ok(goDigitalSc);
+assert.equal(goDigitalSc.primaryArtist.name, "Giuseppe Ottaviani");
+assert.equal(goDigitalSc.seriesName, "Digital Society");
+assert.equal(
+  `sc-giuseppeottaviani-${slugify("giuseppe-ottaviani-digitalsociety")}`,
+  "sc-giuseppeottaviani-giuseppe-ottaviani-digitalsociety",
+);
 assert.equal(
   SOUNDCLOUD_TRACK_SEEDS.some((s) =>
     s.url.startsWith("sc-https://"),

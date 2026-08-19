@@ -19,6 +19,11 @@ assert.ok(KNOWN_EVENT_IMAGES["warehouse-project"]);
 assert.ok(KNOWN_EVENT_IMAGES["concourse-project"]);
 assert.ok(EVENT_OFFICIAL_SITES["avalon-hollywood"]);
 assert.ok(EVENT_OFFICIAL_SITES["silo-dallas"]);
+assert.ok(
+  officialEventPages("nameless-festival").includes(
+    "https://www.namelessfestival.it/en/",
+  ),
+);
 
 for (const [slug, url] of Object.entries(KNOWN_EVENT_IMAGES)) {
   assert.match(slug, /^[a-z0-9-]+$/);

@@ -371,6 +371,13 @@ export const KNOWN_EVENTS: Record<string, CanonicalEvent> = {
     location: "Amsterdam, Netherlands",
     website: "https://www.awakenings.nl/",
   },
+  "nameless-festival": {
+    slug: "nameless-festival",
+    name: "Nameless Festival",
+    kind: "festival",
+    location: "Lecco, Lake Como, Italy",
+    website: "https://www.namelessfestival.it/en/",
+  },
   "street-parade": {
     slug: "street-parade",
     name: "Street Parade",
@@ -693,6 +700,9 @@ export function inferFestivalEvent(title: string): CanonicalEvent | null {
   if (/\bnature\s*one\b/i.test(t)) return KNOWN_EVENTS["nature-one"];
   if (/\bdance\s*valley\b/i.test(t)) return KNOWN_EVENTS["dance-valley"];
   if (/\belrow\b/i.test(t)) return KNOWN_EVENTS.elrow;
+  if (/\bnameless\s+festival\b/i.test(t)) {
+    return KNOWN_EVENTS["nameless-festival"];
+  }
   // DJ Mag Top 100 Festivals / Clubs / other club listicles (not Mixmag.net).
   return (
     inferDjMagFestivalEvent(t) ??

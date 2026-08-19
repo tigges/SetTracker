@@ -18,6 +18,8 @@ export type SoundCloudTrackSeed = {
   primaryArtist: RawArtist;
   genre: string;
   seriesName?: string;
+  /** Curated venue/festival name when the SC title omits it. */
+  eventName?: string;
   type?: "radio" | "festival" | "soundcloud" | "mix";
   /** Skip if shorter (default 15 minutes) */
   minDurationSec?: number;
@@ -486,5 +488,27 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     genre: "Melodic Techno",
     type: "mix",
     minDurationSec: 45 * 60,
+  },
+  {
+    // Official MARNIK UNLEGEND playback @ Nameless Festival 2026-02-14.
+    // No 1001 cue paste — do not invent 1001tl rows. Never wire sc-https://….
+    url: "https://soundcloud.com/marnikofficial/marnik-presents-unlegend-show",
+    primaryArtist: dj("MARNIK", { accent: "#ff006e" }),
+    genre: "Big Room",
+    seriesName: "UNLEGEND",
+    eventName: "Nameless Festival",
+    type: "festival",
+    minDurationSec: 30 * 60,
+  },
+  {
+    // Official Giuseppe Ottaviani playback; 1001TL wired via
+    // sc-giuseppeottaviani-giuseppe-ottaviani-digitalsociety
+    // Never wire sc-https://….
+    url: "https://soundcloud.com/giuseppeottaviani/giuseppe-ottaviani-digitalsociety",
+    primaryArtist: dj("Giuseppe Ottaviani", { accent: "#7b2cbf" }),
+    genre: "Trance",
+    seriesName: "Digital Society",
+    type: "festival",
+    minDurationSec: 90 * 60,
   },
 ];

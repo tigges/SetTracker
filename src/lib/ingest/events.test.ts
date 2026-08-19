@@ -153,5 +153,13 @@ assert.equal(
   resolveEvent("Vision & Colour Music Festival").instagram,
   "https://www.instagram.com/vacfestival/",
 );
+assert.equal(
+  inferFestivalEvent("MARNIK presents UNLEGEND @ NAMELESS Festival")?.slug,
+  "nameless-festival",
+);
+assert.equal(
+  inferFestivalEvent("Nameless Festival")?.website,
+  "https://www.namelessfestival.it/en/",
+);
 
 console.log("events.test.ts ok");

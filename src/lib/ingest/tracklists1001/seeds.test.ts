@@ -156,6 +156,7 @@ import {
   TL_KOROLOVA_TULUM_MEXICO_2026,
   TL_NATTE_VISSTICK_TELETECH_FYM_AFAS_LIVE_AMSTERDAM_2025,
   TL_DEBORAH_DE_LUCA_PYRAMID_AMNESIA_IBIZA_2025,
+  TL_GIUSEPPE_OTTAVIANI_DIGITAL_SOCIETY_LEEDS_WAREHOUSE_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   tracklist1001RowsToPlays,
@@ -2286,6 +2287,50 @@ for (let i = 1; i < deborahAmnesia.length; i++) {
   );
 }
 assert.equal(isWiredTracklistSlug("yt-IfFnvi7O2Po"), true);
+
+assertSeedClocks(TL_GIUSEPPE_OTTAVIANI_DIGITAL_SOCIETY_LEEDS_WAREHOUSE_2026);
+assert.equal(
+  TL_GIUSEPPE_OTTAVIANI_DIGITAL_SOCIETY_LEEDS_WAREHOUSE_2026.length,
+  51,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-giuseppeottaviani-giuseppe-ottaviani-digitalsociety"
+  ],
+  TL_GIUSEPPE_OTTAVIANI_DIGITAL_SOCIETY_LEEDS_WAREHOUSE_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-https://soundcloud.com/giuseppeottaviani/giuseppe-ottaviani-digitalsociety"
+  ],
+  undefined,
+);
+const goDigital = tracklist1001RowsToPlays(
+  TL_GIUSEPPE_OTTAVIANI_DIGITAL_SOCIETY_LEEDS_WAREHOUSE_2026,
+);
+assert.equal(goDigital.length, 51);
+assert.equal(goDigital[0]?.provenance, "1001tl");
+assert.equal(goDigital[0]?.timestamp, 1);
+assert.equal(goDigital[0]?.trackTitle, "Break The Loop");
+assert.equal(goDigital[7]?.trackTitle, "What Is On Your Mind vs. Greece 2000 (Giuseppe Ottaviani Mashup)");
+assert.equal(goDigital[50]?.trackTitle, "Adagio For Strings");
+assert.equal(goDigital[50]?.timestamp, 2 * 3600 + 57 * 60 + 4);
+for (let i = 1; i < goDigital.length; i++) {
+  assert.ok(
+    (goDigital[i]!.timestamp ?? 0) > (goDigital[i - 1]!.timestamp ?? 0),
+    `Giuseppe Ottaviani Digital Society clocks must increase at index ${i}`,
+  );
+}
+assert.equal(
+  isWiredTracklistSlug("sc-giuseppeottaviani-giuseppe-ottaviani-digitalsociety"),
+  true,
+);
+assert.equal(
+  isWiredTracklistSlug(
+    "sc-https://soundcloud.com/giuseppeottaviani/giuseppe-ottaviani-digitalsociety",
+  ),
+  false,
+);
 
 assertSeedClocks(TL_NICKY_ROMERO_PROTOCOL_RADIO_731);
 assert.equal(TL_NICKY_ROMERO_PROTOCOL_RADIO_731.length, 16);

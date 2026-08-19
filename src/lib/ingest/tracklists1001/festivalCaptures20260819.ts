@@ -345,3 +345,67 @@ export const TL_DEBORAH_DE_LUCA_PYRAMID_AMNESIA_IBIZA_2025: FingerprintSeedRow[]
     { at: "50:23", artist: "Franco Moiraghi ft. Amnesia", title: "Feel My Body" },
     { at: "54:56", artist: "Deborah De Luca", title: "DOMINATE" },
   ];
+
+/**
+ * Giuseppe Ottaviani @ Digital Society, Leeds Warehouse, United Kingdom 2026-07-24
+ * Official SoundCloud: https://soundcloud.com/giuseppeottaviani/giuseppe-ottaviani-digitalsociety
+ * https://www.1001tracklists.com/tracklist/24mbg639/giuseppe-ottaviani-digital-society-leeds-warehouse-united-kingdom-2026-07-24.html
+ * Overlay name TL_Giuseppe-Ottaviani_Digital-Society_Leeds-Warehouse__2026 is not a valid identifier.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["sc-giuseppeottaviani-giuseppe-ottaviani-digitalsociety"]
+ * Never wire sc-https://….
+ * Captured 2026-08-19 — provenance 1001tl.
+ */
+export const TL_GIUSEPPE_OTTAVIANI_DIGITAL_SOCIETY_LEEDS_WAREHOUSE_2026: FingerprintSeedRow[] =
+  [
+    { at: "0:01", artist: "ARTBAT & Giuseppe Ottaviani & Conor Ross", title: "Break The Loop" },
+    { at: "4:23", artist: "Giuseppe Ottaviani ft. Mila Josef", title: "Fade Away" },
+    { at: "7:50", artist: "Orkidea", title: "Forward Forever (OTTAGON Retouch)" },
+    { at: "10:42", artist: "Giuseppe Ottaviani & Hypaton", title: "Soundboy" },
+    { at: "13:29", artist: "Giuseppe Ottaviani ft. Faith", title: "Angel (Club Mix)" },
+    { at: "18:05", artist: "RÜFÜS DU SOL", title: "Innerbloom (Giuseppe Ottaviani Bootleg)" },
+    { at: "23:37", artist: "Anyma & Joji", title: "Beautiful (OTTAGON Remix)" },
+    { at: "27:28", artist: "Mark Roma vs. Three Drives & Max Styler", title: "What Is On Your Mind vs. Greece 2000 (Giuseppe Ottaviani Mashup)" },
+    { at: "28:25", artist: "Mark Roma", title: "What Is On Your Mind" },
+    { at: "29:23", artist: "Max Styler & Three Drives", title: "Greece 2000 (Max Styler Rework)" },
+    { at: "30:20", artist: "Giuseppe Ottaviani & Ferry Corsten", title: "Magenta" },
+    { at: "34:23", artist: "OTTAGON ft. Lake Silver", title: "What The Future Holds" },
+    { at: "38:06", artist: "Armin van Buuren", title: "Fathers and Sons (OTTAGON Remix)" },
+    { at: "42:12", artist: "Rank 1 ft. Aino Laos", title: "Breathing (Airwave) (Giuseppe Ottaviani Remix)" },
+    { at: "46:01", artist: "Eric Prydz", title: "Liberate (Giuseppe Ottaviani Rework)" },
+    { at: "49:53", artist: "Giuseppe Ottaviani & Lasada", title: "Leave You There (Dirkie Coetzee Remix)" },
+    { at: "53:35", artist: "Giuseppe Ottaviani", title: "Jakarta" },
+    { at: "57:07", artist: "Blaze ft. Palmer Brown", title: "My Beat (Giuseppe Ottaviani Rework)" },
+    { at: "1:00:38", artist: "Giuseppe Ottaviani & Andrew Rayel ft. Alessia Labate", title: "How Do We Know" },
+    { at: "1:04:25", artist: "Giuseppe Ottaviani ft. Amba Shepherd", title: "Lost For Words (OnAir Mix)" },
+    { at: "1:07:59", artist: "Ben Hemsley & Giuseppe Ottaviani", title: "Law Of Attraction" },
+    { at: "1:11:45", artist: "Giuseppe Ottaviani", title: "Till The Sunrise" },
+    { at: "1:15:33", artist: "Armin van Buuren ft. Trevor Guthrie", title: "This Is What It Feels Like (Giuseppe Ottaviani Remix)" },
+    { at: "1:19:17", artist: "Giuseppe Ottaviani & Ilan Bluestone", title: "Together Again" },
+    { at: "1:23:10", artist: "Giuseppe Ottaviani & Lucid Blue", title: "Be The Angel" },
+    { at: "1:26:56", artist: "Chicane ft. Bryan Adams", title: "Don't Give Up (Giuseppe Ottaviani Remix)" },
+    { at: "1:30:50", artist: "Mauro Picotto & Giuseppe Ottaviani", title: "Ibiza Dream" },
+    { at: "1:34:18", artist: "Andre Visior & Kay Stone", title: "Something For Your Mind (Giuseppe Ottaviani Remix)" },
+    { at: "1:37:47", artist: "Giuseppe Ottaviani", title: "Keep Your Dreams Alive (Dreamstate Europe Official Anthem)" },
+    { at: "1:41:46", artist: "Giuseppe Ottaviani & Dicosis", title: "Run Away" },
+    { at: "1:45:43", artist: "Giuseppe Ottaviani & Gabry Ponte & Crooked Bangs", title: "Astra" },
+    { at: "1:48:46", artist: "Giuseppe Ottaviani", title: "Colours" },
+    { at: "1:52:44", artist: "Ratty", title: "Sunrise (Giuseppe Ottaviani Retouch)" },
+    { at: "1:55:54", artist: "Ascension", title: "Someone (Giuseppe Ottaviani Remix)" },
+    { at: "1:59:34", artist: "SASH! ft. Tina Cousins", title: "Mysterious Times (Giuseppe Ottaviani Rework)" },
+    { at: "2:01:55", artist: "Giuseppe Ottaviani", title: "Through Your Eyes" },
+    { at: "2:05:40", artist: "Giuseppe Ottaviani ft. Stephen Pickup", title: "No More Alone" },
+    { at: "2:09:44", artist: "Giuseppe Ottaviani & Billy Gillies", title: "Doves" },
+    { at: "2:13:10", artist: "Giuseppe Ottaviani", title: "Panama" },
+    { at: "2:16:11", artist: "Giuseppe Ottaviani", title: "8K" },
+    { at: "2:18:53", artist: "Giuseppe Ottaviani ft. Diana Goldberg", title: "Hold On" },
+    { at: "2:23:27", artist: "Giuseppe Ottaviani", title: "No One Like You" },
+    { at: "2:26:53", artist: "Paul van Dyk ft. Plumb", title: "I Don't Deserve You (Giuseppe Ottaviani Remix)" },
+    { at: "2:30:50", artist: "Giuseppe Ottaviani", title: "Linking People" },
+    { at: "2:34:42", artist: "Nu NRG", title: "Freefall" },
+    { at: "2:38:18", artist: "Topic & Giuseppe Ottaviani ft. Sofiloud", title: "No Promises" },
+    { at: "2:41:37", artist: "Nu NRG", title: "Dreamland" },
+    { at: "2:45:39", artist: "Bart Claessen", title: "Playmo (Sneijder Remix)" },
+    { at: "2:48:42", artist: "Giuseppe Ottaviani & Nifra", title: "Unified" },
+    { at: "2:51:49", artist: "Hardwell ft. Jonathan Mendelsohn", title: "Echo (Giuseppe Ottaviani Remix)" },
+    { at: "2:57:04", artist: "Brennan Heart & HI-LO & Project Zeitgeist", title: "Adagio For Strings" },
+  ];
