@@ -192,17 +192,8 @@ async function probeBeatport(url: string): Promise<{
     });
     return { url, status: res.status, finalUrl: res.url };
   } catch {
-    try {
-      const res = await fetch(url, {
-        method: "GET",
-        redirect: "follow",
-        headers: { "User-Agent": UA, Accept: "text/html" },
-        signal: AbortSignal.timeout(10_000),
-      });
-      return { url, status: res.status, finalUrl: res.url };
-    } catch {
-      return { url, status: null, finalUrl: null };
-    }
+    // HEAD only — a GET would fetch Beatport HTML and trip Cloudflare.
+    return { url, status: null, finalUrl: null };
   }
 }
 

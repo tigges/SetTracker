@@ -136,7 +136,10 @@ producer will say if this bundling rule is abolished.
   Beatport url-rels), TrackRadar public archive (no key; MCP needs
   `TRACKRADAR_API_KEY`), and AudD `findLyrics` (no token; `AUDD=0` skips).
   Beatport is never scraped — only canonical `/track/{slug}/{id}` from MB
-  or TrackRadar. Set79 is sitemap-only (`SET79=0` skips); login HTML and
+  or TrackRadar. HEAD-only liveness (`npm run probe:beatport-heads --
+  --since <ref>`) checks those URLs without fetching HTML; 404 drops the
+  URL and keeps the ISRC, 403/429 is Cloudflare and the URL stays.
+  Set79 is sitemap-only (`SET79=0` skips); login HTML and
   their paid analyzer are never fetched. AudioScout / MusicMate / TrackId
   stay paste-only (`fingerprint/seeds.ts`). `TRACKRADAR_ANALYZE=1` /
   `AUDD_ANALYZE=1` analyze fingerprint-only fan YouTube (quota, never
