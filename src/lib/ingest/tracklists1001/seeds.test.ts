@@ -151,6 +151,7 @@ import {
   TL_LAZARUSMAN_KEINEMUSIK_RADIO_SHOW_2026,
   TL_VINTAGE_CULTURE_PACHA_NYC_2026,
   TL_CLAPTONE_MASQUERADE_BUENOS_AIRES_2022,
+  TL_INDIRA_PAGANOTTO_AREA_V_AWAKENINGS_2025,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   tracklist1001RowsToPlays,
@@ -2057,6 +2058,66 @@ for (let i = 1; i < clapBa.length; i++) {
 }
 assert.equal(isWiredTracklistSlug("yt-fQweMs-Q3rg"), true);
 assert.equal(isWiredTracklistSlug("yt-b-2YA4yC3UA"), true);
+
+assertSeedClocks(TL_INDIRA_PAGANOTTO_AREA_V_AWAKENINGS_2025);
+assert.equal(TL_INDIRA_PAGANOTTO_AREA_V_AWAKENINGS_2025.length, 26);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-xUdcEDryN8o"],
+  TL_INDIRA_PAGANOTTO_AREA_V_AWAKENINGS_2025,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-awakenings-indira-paganotto-awakenings-festival-2025"
+  ],
+  TL_INDIRA_PAGANOTTO_AREA_V_AWAKENINGS_2025,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-https://soundcloud.com/awakenings/indira-paganotto-awakenings-festival-2025"
+  ],
+  undefined,
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-xUdcEDryN8o"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-yPCOu0-JKJo"],
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-xUdcEDryN8o"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-i-mFuxbGHzg"],
+);
+const indiraAwake = tracklist1001RowsToPlays(
+  TL_INDIRA_PAGANOTTO_AREA_V_AWAKENINGS_2025,
+);
+assert.equal(indiraAwake.length, 26);
+assert.equal(indiraAwake[0]?.provenance, "1001tl");
+assert.equal(indiraAwake[0]?.timestamp, 70);
+assert.equal(indiraAwake[0]?.artistName, "Vegas & Vermont");
+assert.equal(indiraAwake[0]?.trackTitle, "Jahbulam");
+assert.equal(indiraAwake[17]?.trackTitle, "Won't Be Possible");
+assert.equal(indiraAwake[17]?.timestamp, 3600 + 60 + 21);
+assert.equal(indiraAwake[24]?.artistName, "ID ft. Bilja Krstic");
+assert.equal(indiraAwake[24]?.trackTitle, "Magla Padnala");
+assert.equal(indiraAwake[24]?.timestamp, 3600 + 22 * 60 + 1);
+assert.equal(indiraAwake[25]?.trackTitle, "Pressure (Indira Paganotto Remix)");
+assert.equal(indiraAwake[25]?.timestamp, 3600 + 26 * 60 + 17);
+assert.equal(
+  indiraAwake.some((p) => /^id$/i.test(p.trackTitle ?? "")),
+  false,
+  "bare ID–ID rows must stay dropped; Magla Padnala is a named title",
+);
+for (let i = 1; i < indiraAwake.length; i++) {
+  assert.ok(
+    (indiraAwake[i]!.timestamp ?? 0) > (indiraAwake[i - 1]!.timestamp ?? 0),
+    `Indira Paganotto Area V Awakenings clocks must increase at index ${i}`,
+  );
+}
+assert.equal(isWiredTracklistSlug("yt-xUdcEDryN8o"), true);
+assert.equal(
+  isWiredTracklistSlug(
+    "sc-awakenings-indira-paganotto-awakenings-festival-2025",
+  ),
+  true,
+);
 
 assertSeedClocks(TL_NICKY_ROMERO_PROTOCOL_RADIO_731);
 assert.equal(TL_NICKY_ROMERO_PROTOCOL_RADIO_731.length, 16);

@@ -416,6 +416,20 @@ assert.equal(
   `sc-brandonsounds-${slugify("brandon-live-at-parookaville-2024-desert-valley")}`,
   "sc-brandonsounds-brandon-live-at-parookaville-2024-desert-valley",
 );
+
+const indiraAwakeSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url ===
+    "https://soundcloud.com/awakenings/indira-paganotto-awakenings-festival-2025",
+);
+assert.ok(indiraAwakeSc);
+assert.equal(indiraAwakeSc.primaryArtist.name, "Indira Paganotto");
+assert.equal(indiraAwakeSc.type, "festival");
+assert.equal(indiraAwakeSc.seriesName, "Awakenings");
+assert.equal(
+  `sc-awakenings-${slugify("indira-paganotto-awakenings-festival-2025")}`,
+  "sc-awakenings-indira-paganotto-awakenings-festival-2025",
+);
 assert.equal(
   SOUNDCLOUD_TRACK_SEEDS.some((s) =>
     s.url.startsWith("sc-https://"),

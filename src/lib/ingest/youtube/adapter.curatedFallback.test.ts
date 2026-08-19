@@ -29,6 +29,9 @@ const NOTION_PERRY = YOUTUBE_SETS.find((s) => s.video.includes("9vgSTomhCp8"));
 const VC_ULTRA = YOUTUBE_SETS.find((s) => s.video.includes("xXRjglkAmq8"));
 const VC_PACHA_NYC = YOUTUBE_SETS.find((s) => s.video.includes("TDuFnUAo4II"));
 const CLAPTONE_BA = YOUTUBE_SETS.find((s) => s.video.includes("fQweMs-Q3rg"));
+const INDIRA_AWAKENINGS = YOUTUBE_SETS.find((s) =>
+  s.video.includes("xUdcEDryN8o"),
+);
 const MM_YACHT = YOUTUBE_SETS.find((s) => s.video.includes("0-s_qZRWElA"));
 const PRISMATIC_032 = YOUTUBE_SETS.find((s) => s.video.includes("blP5J6BUG0M"));
 const SPECTRUM_485 = YOUTUBE_SETS.find((s) => s.video.includes("yTRvLrtsM9I"));
@@ -614,6 +617,17 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.durationSec, 1 * 3600 + 40 * 60 + 32 + 180);
   });
 
+  it("builds Indira Paganotto Area V Awakenings 2025 meta from the curated 1001 capture", () => {
+    assert.ok(INDIRA_AWAKENINGS);
+    const meta = watchMetaFromCuratedSeed(INDIRA_AWAKENINGS);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "xUdcEDryN8o");
+    assert.match(meta.title, /Awakenings Festival 2025/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=xUdcEDryN8o");
+    // Last cue 1:26:17 + 180s pad.
+    assert.equal(meta.durationSec, 1 * 3600 + 26 * 60 + 17 + 180);
+  });
+
   it("builds Miss Monique Ibiza Yacht meta from the curated 1001 capture", () => {
     assert.ok(MM_YACHT);
     const meta = watchMetaFromCuratedSeed(MM_YACHT);
@@ -1068,6 +1082,22 @@ describe("curated YouTube 429 fallback", () => {
     assert.ok(sets[0]!.durationSec >= 1 * 3600 + 40 * 60);
     assert.equal(sets[0]?.primaryArtist?.slug, "claptone");
     assert.match(String(sets[0]?.eventName ?? ""), /Masquerade/i);
+  });
+
+  it("lands Indira Paganotto Area V Awakenings 2025 from the 1001 seed when watch is 429", async () => {
+    assert.ok(INDIRA_AWAKENINGS);
+    const adapter = createYoutubeAdapter([INDIRA_AWAKENINGS], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-xUdcEDryN8o");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 26);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 1 * 3600 + 26 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "indira-paganotto");
+    assert.match(String(sets[0]?.eventName ?? ""), /Awakenings/i);
+    assert.notEqual(sets[0]!.sourceSlug, "yt-yPCOu0-JKJo");
+    assert.notEqual(sets[0]!.sourceSlug, "yt-i-mFuxbGHzg");
   });
 
   it("lands Miss Monique Ibiza Yacht from the 1001 seed when watch is 429", async () => {

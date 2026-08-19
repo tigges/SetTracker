@@ -131,6 +131,7 @@ import {
   TL_VINTAGE_CULTURE_ULTRA_MIAMI_RESISTANCE_2026,
   TL_VINTAGE_CULTURE_PACHA_NYC_2026,
   TL_CLAPTONE_MASQUERADE_BUENOS_AIRES_2022,
+  TL_INDIRA_PAGANOTTO_AREA_V_AWAKENINGS_2025,
 } from "../tracklists1001/seeds";
 import type { RawArtist } from "../types";
 import { slugify } from "../types";
@@ -2080,6 +2081,9 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     eventName: "Transmission Poland",
   },
   {
+    // Official Awakenings Relive — Area V 2025-07-11. Distinct from
+    // yt-yPCOu0-JKJo (Atmosphere TML WE1 2023) and yt-i-mFuxbGHzg
+    // (Reinier Zonneveld, same stage/day).
     video: "https://www.youtube.com/watch?v=xUdcEDryN8o",
     primaryArtist: dj("Indira Paganotto", {
       accent: "#ff006e"
@@ -2089,6 +2093,9 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     title: "Indira Paganotto | Awakenings Festival 2025",
     seriesName: "Awakenings",
     eventName: "Awakenings Festival",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/27bmn1uk/indira-paganotto-area-v-awakenings-festival-netherlands-2025-07-11.html",
+    tracklist1001: TL_INDIRA_PAGANOTTO_AREA_V_AWAKENINGS_2025,
   },
   {
     // Official Tomorrowland upload — oEmbed-validated festival set.

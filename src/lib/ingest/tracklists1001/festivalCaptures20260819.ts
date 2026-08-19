@@ -175,3 +175,45 @@ export const TL_CLAPTONE_MASQUERADE_BUENOS_AIRES_2022: FingerprintSeedRow[] = [
   { at: "1:40:31", artist: "Florence + The Machine", title: "You've Got The Love (Acappella)" },
   { at: "1:40:32", artist: "Claptone ft. Jaw", title: "No Eyes (Acappella)" },
 ];
+
+/**
+ * Indira Paganotto @ Area V, Awakenings Festival, Netherlands 2025-07-11
+ * Official YouTube: https://youtu.be/xUdcEDryN8o
+ * Official SoundCloud (Awakenings): https://soundcloud.com/awakenings/indira-paganotto-awakenings-festival-2025
+ * https://www.1001tracklists.com/tracklist/27bmn1uk/indira-paganotto-area-v-awakenings-festival-netherlands-2025-07-11.html
+ * Overlay name TL_ndira-Paganotto_Area-V_Awakenings-Festival_Netherlands_2025 is not a valid identifier.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-xUdcEDryN8o"] = TL_INDIRA_PAGANOTTO_AREA_V_AWAKENINGS_2025
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["sc-awakenings-indira-paganotto-awakenings-festival-2025"]
+ * Distinct from TL_INDIRA_PAGANOTTO_ATMOSPHERE_STAGE_TOMORROWLAND_WE1_BELGIUM_2023 (yt-yPCOu0-JKJo)
+ * and TL_REINIER_ZONNEVELD_AWAKENINGS_2025 (yt-i-mFuxbGHzg, same stage/day).
+ * Captured 2026-08-19 — provenance 1001tl.
+ * Keep "ID ft. Bilja Krstic — Magla Padnala" (not a bare ID–ID).
+ */
+export const TL_INDIRA_PAGANOTTO_AREA_V_AWAKENINGS_2025: FingerprintSeedRow[] = [
+  { at: "1:10", artist: "Vegas & Vermont", title: "Jahbulam" },
+  { at: "5:03", artist: "Juno Reactor", title: "Pistolero (Astrix Remix)" },
+  { at: "9:34", artist: "Interactive Noise & Marhu", title: "Solid Ninja" },
+  { at: "12:52", artist: "GMS", title: "Beetlejuice (Special M & Marambá Remix)" },
+  { at: "17:24", artist: "Rush", title: "My Palazzo (Masters Of Disaster Remix)" },
+  { at: "23:13", artist: "Blicz", title: "Samba Di Bullerengue" },
+  { at: "26:35", artist: "Jubilado666", title: "Dancing With Murmur (Hard Groove)" },
+  { at: "29:30", artist: "Akoriz", title: "It's Schranz" },
+  { at: "32:15", artist: "PRYDIE", title: "No One Can Stop Us" },
+  { at: "35:28", artist: "V-TEC", title: "Psychosis" },
+  { at: "38:21", artist: "MANDY", title: "The Flow" },
+  { at: "45:01", artist: "Kabay", title: "All In" },
+  { at: "47:12", artist: "Askkin", title: "Urban Land" },
+  { at: "48:44", artist: "Bart Skils", title: "Roll The Dice" },
+  { at: "52:03", artist: "LUSU", title: "RISE" },
+  { at: "55:47", artist: "Lutzenkirchen", title: "All That Jazz (POPOF Remix)" },
+  { at: "59:00", artist: "Lutzenkirchen", title: "Undoomed (SUDO Remix)" },
+  { at: "1:01:21", artist: "Tiësto & Odd Mob & GOODBOYS", title: "Won't Be Possible" },
+  { at: "1:03:41", artist: "Chris Lorenzo", title: "Appetite" },
+  { at: "1:05:25", artist: "Pleasurekraft", title: "Tarantula (Max Styler Remix)" },
+  { at: "1:08:05", artist: "Cloonee & InntRaw & Young M.A", title: "Stephanie (HNTR Remix)" },
+  { at: "1:10:56", artist: "Gaston Fiore", title: "Watch Me" },
+  { at: "1:12:46", artist: "Tataki", title: "You" },
+  { at: "1:14:33", artist: "Spectra Sonics", title: "Southern Cross" },
+  { at: "1:22:01", artist: "ID ft. Bilja Krstic", title: "Magla Padnala" },
+  { at: "1:26:17", artist: "Sara Landry & LEGZDINA", title: "Pressure (Indira Paganotto Remix)" },
+];

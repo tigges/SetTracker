@@ -447,4 +447,17 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     type: "festival",
     minDurationSec: 50 * 60,
   },
+  {
+    // Official Awakenings Relive; 1001TL wired via
+    // sc-awakenings-indira-paganotto-awakenings-festival-2025
+    // (same list as yt-xUdcEDryN8o). Never wire sc-https://….
+    url: "https://soundcloud.com/awakenings/indira-paganotto-awakenings-festival-2025",
+    primaryArtist: dj("Indira Paganotto", {
+      accent: "#ff006e",
+    }),
+    genre: "Hard Techno",
+    seriesName: "Awakenings",
+    type: "festival",
+    minDurationSec: 60 * 60,
+  },
 ];
