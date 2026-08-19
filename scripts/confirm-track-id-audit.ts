@@ -326,9 +326,11 @@ async function main() {
     rejected,
     note: "Beatport HTML is never scraped. Pins require a Deezer ISRC hit plus a canonical /track URL whose slug matches the title. Merge with existing pins; drop HEAD 404 Beatport URLs (keep ISRC).",
   };
-  const reportName = csvPath.endsWith(".jsonl")
-    ? "track-id-jsonl-confirm.json"
-    : "track-id-audit-confirm.json";
+  const reportName = csvPath.includes("jsonl-4")
+    ? "track-id-jsonl-4-confirm.json"
+    : csvPath.endsWith(".jsonl")
+      ? "track-id-jsonl-confirm.json"
+      : "track-id-audit-confirm.json";
   await writeFile(
     join(process.cwd(), "data/crosscheck", reportName),
     `${JSON.stringify(report, null, 2)}\n`,
