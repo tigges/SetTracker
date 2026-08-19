@@ -141,10 +141,10 @@ export function SetTimeline({
       {/* ------------------------------- SET STRIP ------------------------------- */}
       <div className="card min-w-0 overflow-x-clip p-3 sm:p-4">
         <div className="mb-2 flex items-center justify-between gap-3 sm:mb-3">
-          <div className="hidden min-w-0 sm:block">
+          <div className="min-w-0">
             <span className="eyebrow">Set strip</span>
             <p className="mt-1 text-[11px] text-muted2">
-              Click a segment or tracklist row to play from that cue
+              Tap a segment or row to play from that cue
             </p>
           </div>
           <div className="flex items-center gap-3 text-[12px] text-muted2 sm:ml-auto">
@@ -413,7 +413,7 @@ export function SetTimeline({
                                   ? "Buy on Beatport"
                                   : "Search on Beatport"
                               }
-                              className={`${pill} hidden sm:grid`}
+                              className={`${pill} ${buyability === "buy" ? "" : "hidden sm:grid"}`}
                             >
                               BP
                             </a>
@@ -424,7 +424,7 @@ export function SetTimeline({
                               target="_blank"
                               rel="noreferrer"
                               title="Open set on SoundCloud"
-                              className={`${pill} hidden sm:grid`}
+                              className={pill}
                             >
                               SC
                             </a>

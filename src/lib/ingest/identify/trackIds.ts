@@ -110,6 +110,55 @@ export function heldIdentifyJobs(): {
   }));
 }
 
+function rowKey(row: Pick<FingerprintSeedRow, "artist" | "title">): string {
+  return `${row.artist.trim().toLowerCase()}::${row.title.trim().toLowerCase()}`;
+}
+
+/**
+ * Held 1001 rows first (capped), then high-play catalog tracks missing ISRC.
+ * Default held cap leaves room in TRACK_ID_LIMIT for catalog research.
+ */
+export function mergeIdentifyQueue(
+  held: FingerprintSeedRow[],
+  catalog: FingerprintSeedRow[],
+  opts: { limit: number; heldCap?: number },
+): FingerprintSeedRow[] {
+  const heldCap = opts.heldCap ?? Number(process.env.TRACK_ID_HELD_LIMIT || 8);
+  const heldSlice = uniqueIdentifyRows(held).slice(0, Math.max(0, heldCap));
+  const seen = new Set(heldSlice.map(rowKey));
+  const catalogSlice = uniqueIdentifyRows(catalog).filter((r) => {
+    const key = rowKey(r);
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+  return [...heldSlice, ...catalogSlice].slice(0, Math.max(0, opts.limit));
+}
+
+export async function catalogNeedIdRows(
+  prisma: PrismaClient,
+  limit: number,
+): Promise<FingerprintSeedRow[]> {
+  if (limit <= 0) return [];
+  const tracks = await prisma.track.findMany({
+    where: {
+      isrc: null,
+      artistName: { not: "" },
+      title: { not: "" },
+    },
+    orderBy: { plays: { _count: "desc" } },
+    take: Math.max(limit * 2, limit),
+    select: { artistName: true, title: true },
+  });
+  return uniqueIdentifyRows(
+    tracks.map((t) => ({
+      at: "0:00",
+      artist: t.artistName,
+      title: t.title,
+    })),
+  ).slice(0, limit);
+}
+
 function mergePlatforms(
   ...parts: (TrackRadarPlatforms | undefined)[]
 ): TrackRadarPlatforms | undefined {
@@ -250,10 +299,13 @@ export async function identifyHeldSeeds(opts: {
     opts.trackradar ?? process.env.TRACKRADAR !== "0";
   const audd = opts.audd ?? process.env.AUDD !== "0";
   const set79 = opts.set79 ?? process.env.SET79 !== "0";
-  const rows = heldIdentifyJobs().flatMap((j) =>
-    uniqueIdentifyRows(j.rows).map((r) => ({ ...r, seed: j.seed })),
-  );
-  const slice = rows.slice(0, Math.max(0, limit));
+  const useCatalog =
+    Boolean(opts.prisma) && process.env.TRACK_ID_CATALOG !== "0";
+  const held = heldIdentifyJobs().flatMap((j) => j.rows);
+  const catalog = useCatalog
+    ? await catalogNeedIdRows(opts.prisma!, Math.max(0, limit))
+    : [];
+  const slice = mergeIdentifyQueue(held, catalog, { limit });
   const hits: TrackIdHit[] = [];
   const misses: TrackIdMiss[] = [];
 
@@ -275,7 +327,7 @@ export async function identifyHeldSeeds(opts: {
 
   const report: TrackIdReport = {
     generatedAt: new Date().toISOString(),
-    note: "Verified Deezer / MusicBrainz / TrackRadar / AudD IDs from held 1001 seeds. Beatport only via MB url-rels or TrackRadar canonical /track URLs (never scrape). Set79 is sitemap-only. AudioScout / MusicMate / TrackId stay paste-only. Fan Relives stay unwired.",
+    note: "Verified Deezer / MusicBrainz / TrackRadar / AudD IDs from held 1001 seeds, then high-play catalog tracks missing ISRC. Beatport only via MB url-rels or TrackRadar canonical /track URLs (never scrape). Set79 is sitemap-only. AudioScout / MusicMate / TrackId stay paste-only. Fan Relives stay unwired.",
     scanned: slice.length,
     hits,
     misses,

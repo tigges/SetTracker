@@ -132,9 +132,11 @@ producer will say if this bundling rule is abolished.
   (`data/entity-complete-pins.json`, fill-null on verify-urls). Event has no
   `youtube` column — drop venue YouTube rows. Empty / “cannot confirm” rows stay out.
   **Track IDs:** `npm run research:track-ids` resolves ISRCs from held 1001
-  names via Deezer, MusicBrainz (on unless `TRACK_ID_MB=0` — MBID / ISRC /
-  Beatport url-rels), TrackRadar public archive (no key; MCP needs
-  `TRACKRADAR_API_KEY`), and AudD `findLyrics` (no token; `AUDD=0` skips).
+  names, then high-play catalog tracks missing ISRC (`TRACK_ID_HELD_LIMIT`,
+  `TRACK_ID_CATALOG=0` skips catalog). Chain: Deezer, MusicBrainz (on unless
+  `TRACK_ID_MB=0` — MBID / ISRC / Beatport url-rels), TrackRadar public
+  archive (no key; MCP needs `TRACKRADAR_API_KEY`), and AudD `findLyrics`
+  (no token; `AUDD=0` skips).
   Beatport is never scraped — only canonical `/track/{slug}/{id}` from MB
   or TrackRadar. HEAD-only liveness (`npm run probe:beatport-heads --
   --since <ref>`) checks those URLs without fetching HTML; 404 drops the

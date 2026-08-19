@@ -270,7 +270,7 @@ export function GlobalSearch({
   }
 
   return (
-    <div ref={root} className="relative w-[8.75rem] sm:w-[16rem]">
+    <div ref={root} className="relative w-[11.5rem] sm:w-[16rem]">
       {box}
       <span className="pointer-events-none absolute right-2 top-1/2 hidden -translate-y-1/2 mono text-[10px] text-muted2 sm:inline">
         ⌘K

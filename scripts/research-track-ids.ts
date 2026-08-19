@@ -1,8 +1,11 @@
 /**
- * Resolve ISRCs / Beatport IDs from held 1001 seeds.
+ * Resolve ISRCs / Beatport IDs from held 1001 seeds, then high-play
+ * catalog tracks missing ISRC.
  *
  *   npm run research:track-ids
  *   TRACK_ID_LIMIT=20 npm run research:track-ids
+ *   TRACK_ID_HELD_LIMIT=8 npm run research:track-ids   # held rows before catalog
+ *   TRACK_ID_CATALOG=0 npm run research:track-ids      # held seeds only
  *   TRACK_ID_MB=0 npm run research:track-ids      # skip MusicBrainz (on by default)
  *   AUDD=0 npm run research:track-ids             # skip AudD findLyrics
  *   SET79=0 npm run research:track-ids            # skip Set79 sitemap hints
@@ -24,7 +27,7 @@ async function main() {
   const apply = process.env.TRACK_ID_APPLY === "1";
   const report = await identifyHeldSeeds({
     apply,
-    prisma: apply ? prisma : undefined,
+    prisma,
   });
   const probes = fingerprintIdProbes();
   console.log(

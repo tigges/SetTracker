@@ -4,6 +4,8 @@
  */
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from "node:fs";
 import { join } from "node:path";
+import { ARTIST_ROSTER_CURATED } from "../src/lib/ingest/roster";
+import { slugify } from "../src/lib/ingest/types";
 
 type Candidate = {
   name: string;
@@ -33,12 +35,16 @@ function main() {
       })
     : { candidates: [] };
 
+  const curatedSlugs = new Set(
+    ARTIST_ROSTER_CURATED.map((a) => slugify(a.name)),
+  );
   const ready = (candidatesFile.candidates ?? [])
     .filter(
       (c) =>
         c.status === "promoted" &&
         c.score >= minScore &&
-        (c.youtubeHandle || c.soundcloudPermalink),
+        (c.youtubeHandle || c.soundcloudPermalink) &&
+        !curatedSlugs.has(c.slug),
     )
     .sort((a, b) => b.score - a.score)
     .slice(0, 30);
@@ -54,7 +60,7 @@ function main() {
       youtube: c.youtubeHandle ?? null,
       soundcloud: c.soundcloudPermalink ?? null,
     })),
-    note: "Deep workflow runs npm run graduate-roster into Actions cache. Commit data/roster-graduates.json when graduates should land in git roster.",
+    note: "Excludes artists already on ARTIST_ROSTER_CURATED. Deep workflow runs npm run graduate-roster into Actions cache. Commit data/roster-graduates.json when graduates should land in git roster.",
   };
 
   const outDir = join(cwd, "data/crosscheck");
