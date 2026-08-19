@@ -474,4 +474,17 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     type: "festival",
     minDurationSec: 45 * 60,
   },
+  {
+    // Official Korolova playback; 1001TL wired via
+    // sc-korolovadj-korolova-tulum-mexico-melodic
+    // (same list as yt-HvkAfj1QnK8). Never wire sc-https://….
+    url: "https://soundcloud.com/korolovadj/korolova-tulum-mexico-melodic",
+    primaryArtist: dj("Korolova", {
+      accent: "#f72585",
+      homeCity: "Ukraine",
+    }),
+    genre: "Melodic Techno",
+    type: "mix",
+    minDurationSec: 45 * 60,
+  },
 ];

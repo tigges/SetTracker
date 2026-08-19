@@ -133,6 +133,7 @@ import {
   TL_CLAPTONE_MASQUERADE_BUENOS_AIRES_2022,
   TL_INDIRA_PAGANOTTO_AREA_V_AWAKENINGS_2025,
   TL_KOROLOVA_SNOWATTACK_FESTIVAL_2026,
+  TL_KOROLOVA_TULUM_MEXICO_2026,
 } from "../tracklists1001/seeds";
 import type { RawArtist } from "../types";
 import { slugify } from "../types";
@@ -1007,6 +1008,22 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/kcl35g1/korolova-snowattack-festival-les-deux-alpes-france-2026-01-21.html",
     tracklist1001: TL_KOROLOVA_SNOWATTACK_FESTIVAL_2026,
+  },
+  {
+    // Official Korolova playback — Tulum, Mexico 2026-02-27.
+    // Distinct from Snowattack, Captive Soul 098, and TML WE2.
+    video: "https://www.youtube.com/watch?v=HvkAfj1QnK8",
+    primaryArtist: dj("Korolova", {
+      accent: "#f72585",
+      homeCity: "Ukraine",
+    }),
+    genre: "Melodic Techno",
+    type: "mix",
+    title: "Korolova | Tulum, Mexico 2026",
+    eventName: "Tulum",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/20v73731/korolova-tulum-mexico-2026-02-27.html",
+    tracklist1001: TL_KOROLOVA_TULUM_MEXICO_2026,
   },
   {
     // Official Epic Radio 036; timed 1001 capture (same list as SC).

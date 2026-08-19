@@ -443,6 +443,19 @@ assert.equal(
   `sc-korolovadj-${slugify("korolova-live-snowattack")}`,
   "sc-korolovadj-korolova-live-snowattack",
 );
+
+const korolovaTulumSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url ===
+    "https://soundcloud.com/korolovadj/korolova-tulum-mexico-melodic",
+);
+assert.ok(korolovaTulumSc);
+assert.equal(korolovaTulumSc.primaryArtist.name, "Korolova");
+assert.equal(korolovaTulumSc.type, "mix");
+assert.equal(
+  `sc-korolovadj-${slugify("korolova-tulum-mexico-melodic")}`,
+  "sc-korolovadj-korolova-tulum-mexico-melodic",
+);
 assert.equal(
   SOUNDCLOUD_TRACK_SEEDS.some((s) =>
     s.url.startsWith("sc-https://"),

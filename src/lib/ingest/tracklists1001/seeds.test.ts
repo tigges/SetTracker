@@ -153,6 +153,7 @@ import {
   TL_CLAPTONE_MASQUERADE_BUENOS_AIRES_2022,
   TL_INDIRA_PAGANOTTO_AREA_V_AWAKENINGS_2025,
   TL_KOROLOVA_SNOWATTACK_FESTIVAL_2026,
+  TL_KOROLOVA_TULUM_MEXICO_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   tracklist1001RowsToPlays,
@@ -2166,6 +2167,60 @@ for (let i = 1; i < korolovaSnow.length; i++) {
 assert.equal(isWiredTracklistSlug("yt-7UcyaKbvy2o"), true);
 assert.equal(
   isWiredTracklistSlug("sc-korolovadj-korolova-live-snowattack"),
+  true,
+);
+
+assertSeedClocks(TL_KOROLOVA_TULUM_MEXICO_2026);
+assert.equal(TL_KOROLOVA_TULUM_MEXICO_2026.length, 12);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-HvkAfj1QnK8"],
+  TL_KOROLOVA_TULUM_MEXICO_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-korolovadj-korolova-tulum-mexico-melodic"
+  ],
+  TL_KOROLOVA_TULUM_MEXICO_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-https://soundcloud.com/korolovadj/korolova-tulum-mexico-melodic"
+  ],
+  undefined,
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-HvkAfj1QnK8"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-7UcyaKbvy2o"],
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-HvkAfj1QnK8"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-5JxfEjVdQFk"],
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-HvkAfj1QnK8"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-RLOghpXjuJI"],
+);
+const korolovaTulum = tracklist1001RowsToPlays(
+  TL_KOROLOVA_TULUM_MEXICO_2026,
+);
+assert.equal(korolovaTulum.length, 12);
+assert.equal(korolovaTulum[0]?.provenance, "1001tl");
+assert.equal(korolovaTulum[0]?.timestamp, 0);
+assert.equal(korolovaTulum[0]?.artistName, "Omnya & Eli Huli");
+assert.equal(korolovaTulum[0]?.trackTitle, "Lost In The Sound");
+assert.equal(korolovaTulum[8]?.trackTitle, "Empty Skies");
+assert.equal(korolovaTulum[8]?.timestamp, 33 * 60 + 58);
+assert.equal(korolovaTulum[11]?.trackTitle, "Sunset In Colombo");
+assert.equal(korolovaTulum[11]?.timestamp, 53 * 60 + 8);
+for (let i = 1; i < korolovaTulum.length; i++) {
+  assert.ok(
+    (korolovaTulum[i]!.timestamp ?? 0) > (korolovaTulum[i - 1]!.timestamp ?? 0),
+    `Korolova Tulum clocks must increase at index ${i}`,
+  );
+}
+assert.equal(isWiredTracklistSlug("yt-HvkAfj1QnK8"), true);
+assert.equal(
+  isWiredTracklistSlug("sc-korolovadj-korolova-tulum-mexico-melodic"),
   true,
 );
 

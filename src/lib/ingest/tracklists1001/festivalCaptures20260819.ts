@@ -244,3 +244,29 @@ export const TL_KOROLOVA_SNOWATTACK_FESTIVAL_2026: FingerprintSeedRow[] = [
   { at: "47:32", artist: "Alex Wann & Aaron Hibell", title: "set me free (CamelPhat Remix)" },
   { at: "52:03", artist: "Sean Finn & Funkera", title: "The Man With The Red Face" },
 ];
+
+/**
+ * Korolova @ Tulum, Mexico 2026-02-27
+ * Official YouTube: https://youtu.be/HvkAfj1QnK8
+ * Official SoundCloud: https://soundcloud.com/korolovadj/korolova-tulum-mexico-melodic
+ * https://www.1001tracklists.com/tracklist/20v73731/korolova-tulum-mexico-2026-02-27.html
+ * Overlay name TL_Korolova_Tulum_Mexico_2026 is not a valid identifier.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-HvkAfj1QnK8"] = TL_KOROLOVA_TULUM_MEXICO_2026
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["sc-korolovadj-korolova-tulum-mexico-melodic"]
+ * Distinct from TL_KOROLOVA_SNOWATTACK_FESTIVAL_2026, Captive Soul 098, and TML WE2.
+ * Captured 2026-08-19 — provenance 1001tl.
+ */
+export const TL_KOROLOVA_TULUM_MEXICO_2026: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "Omnya & Eli Huli", title: "Lost In The Sound" },
+  { at: "3:17", artist: "Axone & Arodes & ACNØR", title: "Volume Up" },
+  { at: "7:21", artist: "Marten Lou & CamelPhat", title: "Save Me (AJNA (BE) & Samm (BE) Remix)" },
+  { at: "11:40", artist: "Rebel Of Sleep", title: "Silent Memories" },
+  { at: "17:08", artist: "Yulia Niko ft. Novel", title: "Boundless" },
+  { at: "20:41", artist: "Coeus", title: "Exploration" },
+  { at: "25:16", artist: "Rafael Cerato & MORGANJ", title: "Slow Down" },
+  { at: "29:23", artist: "Guy J", title: "Worlds Apart" },
+  { at: "33:58", artist: "Korolova & Switch Disco", title: "Empty Skies" },
+  { at: "38:17", artist: "TH;EN & Glowal", title: "In My Blood" },
+  { at: "42:58", artist: "Jan Blomqvist & Rodriguez Jr.", title: "Destination Lost (Helsloot Remix)" },
+  { at: "53:08", artist: "Sistersweet", title: "Sunset In Colombo" },
+];
