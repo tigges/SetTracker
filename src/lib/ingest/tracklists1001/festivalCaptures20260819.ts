@@ -646,3 +646,33 @@ export const TL_AUSTIN_KRAMER_UNRELEASED_139_2026: FingerprintSeedRow[] = [
   { at: "53:25", artist: "VNDL", title: "You Were Always There" },
   { at: "57:15", artist: "Dokkodo Sounds", title: "Begin Again" },
 ];
+
+/**
+ * Jamie Jones @ Gas Tower, Lost Horizon Festival (Beatport Live) 2020-07-04
+ * Official YouTube: https://youtu.be/U2ZjW_8K3h4
+ * https://www.1001tracklists.com/tracklist/29ty8h89/jamie-jones-gas-tower-lost-horizon-festival-beatport-live-2020-07-04.html
+ * Overlay name TL_Jamie-Jones_Gas-Tower_Lost-Horizon-Festival_Beatport-Live_2020-07-04 is not a valid identifier.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-U2ZjW_8K3h4"]
+ * No SoundCloud in the operator paste — do not invent an SC slug.
+ * Distinct from Hot Robot Radio 225 / 239.
+ * Captured 2026-08-19 — provenance 1001tl.
+ */
+export const TL_JAMIE_JONES_GAS_TOWER_LOST_HORIZON_FESTIVAL_2020: FingerprintSeedRow[] =
+  [
+    { at: "0:00", artist: "DJ Slugo", title: "Cardboard Booty" },
+    { at: "5:10", artist: "Giano", title: "The Underground" },
+    { at: "7:30", artist: "Oneiro Say", title: "Shhh! (Slide On The Wild Side)" },
+    { at: "9:20", artist: "Hanfry Martinez & Cuartero", title: "Volver" },
+    { at: "12:35", artist: "Fabe", title: "Chocolate Cake" },
+    { at: "16:00", artist: "Andy Jay & S-Tee ft. Rubi Dan", title: "Funky Dip (Dumplin Deep Remix)" },
+    { at: "18:40", artist: "Basement Jaxx ft. Kele Le Roc", title: "Romeo (Harry Romero Remix)" },
+    { at: "22:30", artist: "Up 4 It", title: "Gotta Have It (Underground Mix)" },
+    { at: "29:00", artist: "Nyra", title: "Sounds Of The Spectrum" },
+    { at: "31:50", artist: "Mark Broom", title: "Hear Me" },
+    { at: "35:10", artist: "KMA Productions", title: "Cape Fear" },
+    { at: "37:20", artist: "undertone", title: "What" },
+    { at: "43:00", artist: "Todd Terry", title: "I Feel It" },
+    { at: "45:00", artist: "Andy Rojas", title: "Touching Me" },
+    { at: "50:00", artist: "Bodega Queen", title: "Bodega Queen" },
+    { at: "54:58", artist: "Orbital", title: "Halcyon On & On" },
+  ];
