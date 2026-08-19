@@ -1,7 +1,15 @@
 {
   "note": "Operator-collected 1001Tracklists URLs. All listed urls[] rows are now seeded. Prefer new operator pastes over this archive. stillMissing1001 is video-in / no 1001 page — do not invent URLs. heldPendingRelive is 1001-in / no official YT/SC Relive — seed held, do not invent or wire fan playback. pendingCuePaste is official Relive + operator 1001 URL without cue rows — do not scrape 1001 or invent 1001tl seeds.",
-  "updatedAt": "2026-08-17T16:40:00.000Z",
+  "updatedAt": "2026-08-19T00:00:00.000Z",
   "urls": [
+    {
+      "label": "Vintage Culture · Resistance Megastructure, Ultra Miami 2026-03-27",
+      "slug": "yt-xXRjglkAmq8",
+      "name": "TL_VINTAGE_CULTURE_ULTRA_MIAMI_RESISTANCE_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/23nu9rq9/vintage-culture-resistance-megastructure-ultra-music-festival-miami-united-states-2026-03-27.html",
+      "youtubeUrl": "https://youtu.be/xXRjglkAmq8",
+      "note": "Operator mobile screenshots 2026-08-19. Partial (14–16 not captured; ID–ID dropped). Untimed 03–04 and 10–12 interpolated."
+    },
     {
       "label": "BRANDON · Desert Valley, Parookaville 2024-07-28",
       "slug": "yt-AQ6wWT2HaSQ",

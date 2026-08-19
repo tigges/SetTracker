@@ -147,6 +147,7 @@ import {
   TL_BRANDON_DESERT_VALLEY_PAROOKAVILLE_GERMANY_2024,
   TL_DVLM_SMASH_THE_HOUSE_RADIO_687_2026,
   TL_NOTION_PERRYS_LOLLAPALOOZA_CHICAGO_2026,
+  TL_VINTAGE_CULTURE_ULTRA_MIAMI_RESISTANCE_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   tracklist1001RowsToPlays,
@@ -1900,6 +1901,59 @@ assert.equal(
   isWiredTracklistSlug("sc-notiondj-notion-live-at-lollapalooza"),
   true,
 );
+
+assertSeedClocks(TL_VINTAGE_CULTURE_ULTRA_MIAMI_RESISTANCE_2026);
+assert.equal(TL_VINTAGE_CULTURE_ULTRA_MIAMI_RESISTANCE_2026.length, 17);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-xXRjglkAmq8"],
+  TL_VINTAGE_CULTURE_ULTRA_MIAMI_RESISTANCE_2026,
+);
+const vcUltra = tracklist1001RowsToPlays(
+  TL_VINTAGE_CULTURE_ULTRA_MIAMI_RESISTANCE_2026,
+);
+assert.equal(vcUltra.length, 17);
+assert.equal(vcUltra[0]?.provenance, "1001tl");
+assert.equal(vcUltra[0]?.timestamp, 0);
+assert.equal(vcUltra[0]?.artistName, "Vintage Culture & Nariman & rhys from the sticks");
+assert.equal(vcUltra[0]?.trackTitle, "Think Too Much");
+assert.equal(vcUltra[1]?.timestamp, 4 * 60 + 30);
+assert.equal(vcUltra[1]?.trackTitle, "Rubin (Victor Ruiz Remix)");
+assert.equal(vcUltra[2]?.trackTitle, "Hands Up");
+assert.equal(vcUltra[2]?.timestamp, 9 * 60);
+assert.equal(vcUltra[3]?.trackTitle, "Rave");
+assert.equal(vcUltra[3]?.timestamp, 13 * 60 + 30);
+assert.equal(vcUltra[4]?.timestamp, 18 * 60);
+assert.equal(vcUltra[8]?.trackTitle, "You & Me (Vintage Culture Remix)");
+assert.equal(vcUltra[8]?.timestamp, 34 * 60 + 50);
+assert.equal(vcUltra[9]?.trackTitle, "Oldskool Flavor");
+assert.equal(vcUltra[9]?.timestamp, 39 * 60 + 18);
+assert.equal(vcUltra[10]?.trackTitle, "Freaky 1");
+assert.equal(vcUltra[10]?.timestamp, 43 * 60 + 45);
+assert.equal(vcUltra[11]?.trackTitle, "Close Your Eyes");
+assert.equal(vcUltra[11]?.timestamp, 48 * 60 + 13);
+assert.equal(vcUltra[12]?.trackTitle, "Feel The Rhythm");
+assert.equal(vcUltra[12]?.timestamp, 52 * 60 + 40);
+assert.equal(vcUltra[13]?.trackTitle, "Tina (Doriann Remix)");
+assert.equal(vcUltra[13]?.timestamp, 3600 + 11 * 60 + 30);
+assert.equal(vcUltra[16]?.trackTitle, "Time To Pretend (ANNA Edit)");
+assert.equal(vcUltra[16]?.timestamp, 3600 + 25 * 60 + 45);
+assert.equal(
+  vcUltra.some((p) => /^id$/i.test(p.trackTitle ?? "")),
+  false,
+  "bare ID–ID rows must stay dropped",
+);
+assert.equal(
+  vcUltra.some((p) => /malabaris/i.test(p.trackTitle ?? "")),
+  false,
+  "do not invent tracks 14–16 from third-party copies",
+);
+for (let i = 1; i < vcUltra.length; i++) {
+  assert.ok(
+    (vcUltra[i]!.timestamp ?? 0) > (vcUltra[i - 1]!.timestamp ?? 0),
+    `Vintage Culture Ultra Miami clocks must increase at index ${i}`,
+  );
+}
+assert.equal(isWiredTracklistSlug("yt-xXRjglkAmq8"), true);
 
 assertSeedClocks(TL_NICKY_ROMERO_PROTOCOL_RADIO_731);
 assert.equal(TL_NICKY_ROMERO_PROTOCOL_RADIO_731.length, 16);

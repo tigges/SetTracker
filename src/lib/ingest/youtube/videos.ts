@@ -128,6 +128,7 @@ import {
   TL_BRANDON_DESERT_VALLEY_PAROOKAVILLE_GERMANY_2024,
   TL_DVLM_SMASH_THE_HOUSE_RADIO_687_2026,
   TL_NOTION_PERRYS_LOLLAPALOOZA_CHICAGO_2026,
+  TL_VINTAGE_CULTURE_ULTRA_MIAMI_RESISTANCE_2026,
 } from "../tracklists1001/seeds";
 import type { RawArtist } from "../types";
 import { slugify } from "../types";
@@ -1781,6 +1782,9 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
       "Vintage Culture @ Ultra Music Festival Miami 2026 - Resistance Megastructure",
     seriesName: "Ultra Shows",
     eventName: "Ultra Music Festival",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/23nu9rq9/vintage-culture-resistance-megastructure-ultra-music-festival-miami-united-states-2026-03-27.html",
+    tracklist1001: TL_VINTAGE_CULTURE_ULTRA_MIAMI_RESISTANCE_2026,
   },
   {
     video: "https://www.youtube.com/watch?v=knJyJPP45dg",

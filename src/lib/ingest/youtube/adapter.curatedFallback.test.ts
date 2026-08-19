@@ -26,6 +26,7 @@ const JOEL_EDGE = YOUTUBE_SETS.find((s) => s.video.includes("soEFl73peVA"));
 const PRR_731 = YOUTUBE_SETS.find((s) => s.video.includes("Rgx-wT9FDaE"));
 const STH_687 = YOUTUBE_SETS.find((s) => s.video.includes("eVjC42MNgkI"));
 const NOTION_PERRY = YOUTUBE_SETS.find((s) => s.video.includes("9vgSTomhCp8"));
+const VC_ULTRA = YOUTUBE_SETS.find((s) => s.video.includes("xXRjglkAmq8"));
 const MM_YACHT = YOUTUBE_SETS.find((s) => s.video.includes("0-s_qZRWElA"));
 const PRISMATIC_032 = YOUTUBE_SETS.find((s) => s.video.includes("blP5J6BUG0M"));
 const SPECTRUM_485 = YOUTUBE_SETS.find((s) => s.video.includes("yTRvLrtsM9I"));
@@ -578,6 +579,17 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.durationSec, 59 * 60 + 30 + 180);
   });
 
+  it("builds Vintage Culture Ultra Miami Resistance meta from the curated 1001 capture", () => {
+    assert.ok(VC_ULTRA);
+    const meta = watchMetaFromCuratedSeed(VC_ULTRA);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "xXRjglkAmq8");
+    assert.match(meta.title, /Ultra Music Festival Miami 2026/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=xXRjglkAmq8");
+    // Last cue 1:25:45 + 180s pad.
+    assert.equal(meta.durationSec, 1 * 3600 + 25 * 60 + 45 + 180);
+  });
+
   it("builds Miss Monique Ibiza Yacht meta from the curated 1001 capture", () => {
     assert.ok(MM_YACHT);
     const meta = watchMetaFromCuratedSeed(MM_YACHT);
@@ -990,6 +1002,20 @@ describe("curated YouTube 429 fallback", () => {
     assert.ok(sets[0]!.durationSec >= 59 * 60);
     assert.equal(sets[0]?.primaryArtist?.slug, "notion");
     assert.match(String(sets[0]?.eventName ?? ""), /Lollapalooza/i);
+  });
+
+  it("lands Vintage Culture Ultra Miami Resistance from the 1001 seed when watch is 429", async () => {
+    assert.ok(VC_ULTRA);
+    const adapter = createYoutubeAdapter([VC_ULTRA], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-xXRjglkAmq8");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 17);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 1 * 3600 + 25 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "vintage-culture");
+    assert.match(String(sets[0]?.eventName ?? ""), /Ultra Music Festival/i);
   });
 
   it("lands Miss Monique Ibiza Yacht from the 1001 seed when watch is 429", async () => {
