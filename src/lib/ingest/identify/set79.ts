@@ -62,7 +62,7 @@ export type Set79Hint = {
 };
 
 const SET79_NOTE =
-  "Published sitemap only — not Relive. Login-walled HTML and the paid SoundCloud analyzer are never fetched.";
+  "Published sitemap only — not official playback. Login-walled HTML and the paid SoundCloud analyzer are never fetched.";
 
 export async function findHeldSet79Hints(
   seeds: string[] = Object.keys(SET79_HINT_TOKENS),

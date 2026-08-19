@@ -83,7 +83,14 @@ jobs:
           echo "set_limit=$SET_LIMIT" >> "$GITHUB_OUTPUT"
           echo "max_probes=$MAX_PROBES" >> "$GITHUB_OUTPUT"
           echo "do_thumbs=$DO_THUMBS" >> "$GITHUB_OUTPUT"
-          echo "Enrich mode=$MODE (sets=$SET_LIMIT probes=$MAX_PROBES thumbs=$DO_THUMBS)"
+          # Chip the 16k Beatport/ISRC pile on every enrich except smoke.
+          case "$MODE" in
+            full) TRACK_ID_LIMIT=200 ;;
+            acr)  TRACK_ID_LIMIT=40 ;;
+            *)    TRACK_ID_LIMIT=0 ;;
+          esac
+          echo "track_id_limit=$TRACK_ID_LIMIT" >> "$GITHUB_OUTPUT"
+          echo "Enrich mode=$MODE (sets=$SET_LIMIT probes=$MAX_PROBES thumbs=$DO_THUMBS track_ids=$TRACK_ID_LIMIT)"
 
       - name: Restore catalog DB
         id: dbcache
@@ -147,7 +154,7 @@ jobs:
         if: steps.acr.outputs.configured == '1'
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
-          # yt-dlp cuts short YouTube Relive clips for ACR Identify (no full download).
+          # yt-dlp cuts short YouTube playback clips for ACR Identify (no full download).
           python3 -m pip install -q -U yt-dlp
 
       - name: Optional YouTube cookies for yt-dlp
@@ -187,7 +194,7 @@ jobs:
 
       # Server-side YouTube fingerprinting (no yt-dlp / cookies / CI bot walls).
       # YouTube-only sparse queue — does not share Identify's SC-first ranking,
-      # so TML radio/academy mixes cannot crowd Relives out of the slice.
+      # so TML radio/academy mixes cannot crowd festival playbacks out of the slice.
       # No-op unless ACRCLOUD_FS_TOKEN + ACRCLOUD_FS_CONTAINER_ID secrets exist.
       - name: ACRCloud File Scanning (YouTube)
         id: filescan
@@ -198,9 +205,22 @@ jobs:
           ACRCLOUD_FS_REGION: ${{ secrets.ACRCLOUD_FS_REGION }}
           ACRCLOUD_FS_MIN_SCORE: "55"
           ACRCLOUD_FS_SET_LIMIT: ${{ steps.mode.outputs.set_limit }}
-          # Same festival focus as Identify so Relives at those events rank first.
+          # Same festival focus as Identify so playbacks at those events rank first.
           ACRCLOUD_EVENT_SLUGS: "street-parade,tomorrowland,ultra-miami,edc-lv,nature-one"
         run: npm run enrich:filescan
+
+      # Fill-null ISRC / canonical Beatport on high-play catalog tracks.
+      # Deezer + MusicBrainz + TrackRadar + AudD — never scrape Beatport HTML.
+      # Writes the cached DB (TRACK_ID_APPLY) and data/track-id-pins.json.
+      - name: Beatport / ISRC enrich
+        if: steps.mode.outputs.track_id_limit != '0'
+        env:
+          TRACK_ID_APPLY: "1"
+          TRACK_ID_LIMIT: ${{ steps.mode.outputs.track_id_limit }}
+          TRACK_ID_HELD_LIMIT: "8"
+          TRACK_ID_DELAY_MS: "250"
+        run: npm run research:track-ids
+        continue-on-error: true
 
       - name: LLM handle research
         if: steps.mode.outputs.do_thumbs == '1'

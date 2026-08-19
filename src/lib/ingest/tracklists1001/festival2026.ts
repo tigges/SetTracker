@@ -1923,7 +1923,7 @@ export const TL_HARDWELL_TML_WE2_2026: FingerprintSeedRow[] = [
  * Chris Lorenzo @ The Great Library Stage, Tomorrowland Weekend 2, Belgium 2026-07-25
  * 1001TL: https://1001.tl/2llc7mh9 — operator console capture 2026-08-01
  * (0/10 timed cues — evenly spaced across ~60m).
- * No official Tomorrowland/artist full-set Relive yet — seed ready; do not wire clips.
+ * No official Tomorrowland Relive / artist full-set playback yet — seed ready; do not wire clips.
  */
 export const TL_CHRIS_LORENZO_TML_WE2_2026: FingerprintSeedRow[] =
   evenlySpaceRows(
@@ -3540,7 +3540,7 @@ export const TL_PEGASSI_EDC_LV_2026: FingerprintSeedRow[] = evenlySpaceRows(
  * Nico Moreno @ circuitGROUNDS, EDC Las Vegas 2026-05-15
  * Official YT: https://www.youtube.com/watch?v=f_p6nfbrm0E (~61:20)
  * 1001TL: https://1001.tl/2r6ym5qt — operator console capture 2026-08-01
- * (0/40 timed cues — evenly spaced across Relive duration).
+ * (0/40 timed cues — evenly spaced across playback duration).
  */
 export const TL_NICO_MORENO_EDC_LV_2026: FingerprintSeedRow[] = evenlySpaceRows(
   [
@@ -3805,7 +3805,7 @@ export const TL_HOLY_PRIEST_TML_WE1_2026: FingerprintSeedRow[] = evenlySpaceRows
  * Nico Moreno & Holy Priest @ cosmicMEADOW, EDC Las Vegas 2026-05-17
  * 1001TL: https://1001.tl/n56kgj1 — operator console capture 2026-08-01
  * (0/47 timed cues — evenly spaced across ~60m festival slot).
- * No official Insomniac Relive yet — seed ready; do not wire fan uploads.
+ * No official Insomniac playback yet — seed ready; do not wire fan uploads.
  */
 export const TL_NICO_MORENO_HOLY_PRIEST_EDC_LV_2026: FingerprintSeedRow[] =
   evenlySpaceRows(
@@ -3942,7 +3942,7 @@ export const TL_FUNK_TRIBU_EDC_LV_2026: FingerprintSeedRow[] = [
  * Sarah de Warren @ quantumVALLEY, EDC Las Vegas 2026-05-15
  * Official YT: https://www.youtube.com/watch?v=KIb3psOt9hI (~40:43)
  * 1001TL: https://1001.tl/1z031tz1 — operator console capture 2026-08-01
- * (14/15 timed cues). Note: last cues run past the Relive duration.
+ * (14/15 timed cues). Note: last cues run past the playback duration.
  */
 export const TL_SARAH_DE_WARREN_EDC_LV_2026: FingerprintSeedRow[] = [
   {

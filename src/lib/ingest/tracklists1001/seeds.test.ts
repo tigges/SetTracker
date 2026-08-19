@@ -518,7 +518,7 @@ const nicoHp = tracklist1001RowsToPlays(TL_NICO_MORENO_HOLY_PRIEST_EDC_LV_2026);
 assert.equal(nicoHp.length, 47);
 assert.equal(nicoHp[0]!.trackTitle, "Overdose");
 assert.match(nicoHp[nicoHp.length - 1]!.trackTitle!, /Move Ma Body/);
-// B2B Relive not published officially yet — seed held, not slug-mapped.
+// B2B playback not published officially yet — seed held, not slug-mapped.
 assert.equal(
   TRACKLIST_1001_BY_SOURCE_SLUG["yt-nZS9gvjlPIs"],
   undefined,
@@ -793,7 +793,7 @@ const chrisL = tracklist1001RowsToPlays(TL_CHRIS_LORENZO_TML_WE2_2026);
 assert.equal(chrisL.length, 10);
 assert.match(chrisL[0]!.trackTitle!, /Appetite/);
 assert.equal(chrisL[chrisL.length - 1]!.trackTitle, "House Every Weekend");
-// No official Relive yet — seed held, not slug-mapped.
+// No official Tomorrowland Relive yet — seed held, not slug-mapped.
 assert.equal(
   Object.values(TRACKLIST_1001_BY_SOURCE_SLUG).includes(
     TL_CHRIS_LORENZO_TML_WE2_2026,
@@ -897,7 +897,7 @@ const dyzen = tracklist1001RowsToPlays(TL_DYZEN_TML_WE2_2026);
 assert.equal(dyzen.length, 4);
 assert.equal(dyzen[0]!.trackTitle, "Mutant Quasars");
 assert.equal(dyzen[dyzen.length - 1]!.trackTitle, "Try");
-// Thin partial TL + no official Relive — held (not Dyen b2b Maddix).
+// Thin partial TL + no official Tomorrowland Relive — held (not Dyen b2b Maddix).
 assert.equal(TRACKLIST_1001_BY_SOURCE_SLUG["yt-VABm0tIRn2U"], undefined);
 assert.equal(
   Object.values(TRACKLIST_1001_BY_SOURCE_SLUG).includes(TL_DYZEN_TML_WE2_2026),
@@ -3165,7 +3165,7 @@ for (let i = 1; i < coleHard.length; i++) {
   );
 }
 
-// Liu TML artist Relive — no 1001 URL found; do not invent a wire.
+// Liu TML artist playback — no 1001 URL found; do not invent a wire.
 assert.equal(isWiredTracklistSlug("yt-DWPSLZLKslg"), false);
 assert.equal(TRACKLIST_1001_BY_SOURCE_SLUG["yt-DWPSLZLKslg"], undefined);
 
@@ -3321,7 +3321,7 @@ for (let i = 1; i < brandonPv.length; i++) {
   );
 }
 
-// Claptone Clapcast 576 — official SC Relive in, 1001 URL recorded,
+// Claptone Clapcast 576 — official SC playback in, 1001 URL recorded,
 // no cue paste. Do not invent 1001tl rows or sc-https://… slugs.
 assert.equal(isWiredTracklistSlug("sc-claptone-clapcast-576"), false);
 assert.equal(TRACKLIST_1001_BY_SOURCE_SLUG["sc-claptone-clapcast-576"], undefined);

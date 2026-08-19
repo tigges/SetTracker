@@ -1,6 +1,6 @@
 # setradar.ai
 
-A DJ **set database**, branded as **setradar.ai**. Browse festival Relives,
+A DJ **set database**, branded as **setradar.ai**. Browse festival playbacks,
 radio shows, and mixes; every track row carries a **status** and **provenance**
 so you can see what's identified and what's still an ID.
 
@@ -176,7 +176,7 @@ own servers — we POST the YouTube URL, ACR fingerprints the whole video and
 returns every matched track with an offset. `npm run enrich:filescan` (and a
 step in `catalog-enrich.yml`) scans a **YouTube-only** sparse queue this way
 (Identify keeps SoundCloud/hearthis first; File Scanning does not share that
-ranking). Held Relives on the fan-clip watch list are skipped. Already-scanned
+ranking). Held official playbacks on the fan-clip watch list are skipped. Already-scanned
 YouTube files in the ACR container are reused (no re-submit). Identify writes
 grey `acr-miss` rows so the same offset is not probed again. Writes the same
 `provenance: fingerprint` gap-fill rows. No-op unless configured.
@@ -188,7 +188,7 @@ grey `acr-miss` rows so the same offset is not probed again. Writes the same
 | `ACRCLOUD_FS_REGION` | `eu-west-1` (default) / `us-west-2` / `ap-southeast-1` |
 | `ACRCLOUD_FS_MIN_SCORE` | Accept hits ≥ score (default 55) |
 | `ACRCLOUD_FS_SET_LIMIT` | Max YouTube sets per run (default 10) |
-| `ACRCLOUD_EVENT_SLUGS` | Festival focus (same list as Identify; Relives at those events rank first) |
+| `ACRCLOUD_EVENT_SLUGS` | Festival focus (same list as Identify; playbacks at those events rank first) |
 
 **Setup:** in the ACRCloud console create a **File Scanning** project/container
 with the **Music Recognition (Audio Fingerprint)** engine attached to the
@@ -265,7 +265,10 @@ tracklist HTML and their paid SoundCloud analyzer are never fetched.
 [AudioScout](https://audioscout.io/) / [MusicMate](https://www.getmusicmate.com/)
 / TrackId stay operator-paste in `src/lib/ingest/fingerprint/seeds.ts`.
 `TRACKRADAR_ANALYZE=1` / `AUDD_ANALYZE=1` (needs `AUDD_API_TOKEN`) analyze
-fingerprint-only fan clips (quota; never Relive).
+fingerprint-only fan clips (quota; never official playback).
+Catalog enrich `acr` / `full` also run `npm run research:track-ids` against
+high-play tracks missing ISRC or Beatport (fill-null only; never scrape
+Beatport HTML).
 Fill-null `Track.isrc` / `beatportUrl` only with `TRACK_ID_APPLY=1`. Report:
 `data/crosscheck/track-id-research.json`.
 

@@ -192,7 +192,7 @@ describe("tracklistGap", () => {
     );
   });
 
-  it("empty shells have no set page; thin Relives do", () => {
+  it("empty shells have no set page; thin playbacks do", () => {
     assert.equal(
       setPageIsPublished({
         title: "Giuseppe Ottaviani at Luminosity Beach Festival 2026",
@@ -211,7 +211,7 @@ describe("tracklistGap", () => {
     );
   });
 
-  it("drops archive Relives whose title year is older than last year", () => {
+  it("drops archive playbacks whose title year is older than last year", () => {
     assert.equal(
       isActionableTracklistGap(
         {
@@ -262,7 +262,7 @@ describe("tracklistGap", () => {
     );
   });
 
-  it("queues this-year chart Relives with a duration gap", () => {
+  it("queues this-year chart playbacks with a duration gap", () => {
     assert.equal(
       isActionableTracklistGap(
         {

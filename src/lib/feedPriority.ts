@@ -143,7 +143,7 @@ export type FeedPriorityFields = {
 
 /**
  * Title names an older festival year and none of the printed years are
- * current/last-year — archive Relive, even if YouTube reuploaded it this week.
+ * current/last-year — archive playback, even if YouTube reuploaded it this week.
  */
 export function isArchiveTitledSet(
   title: string | null | undefined,
@@ -157,7 +157,7 @@ export function isArchiveTitledSet(
 /**
  * When the set was played (or first published by the source).
  * Never uses Prisma createdAt / site ingest time.
- * Title year beats edition/upload so a 2018 Relive remapped onto a 2026
+ * Title year beats edition/upload so a 2018 playback remapped onto a 2026
  * edition does not rank as this-year.
  */
 export function setPerformanceTime(s: {
@@ -346,7 +346,7 @@ function placeSetQuality(s: EventSetPriorityFields): number {
 }
 
 /**
- * Place-page Relive grid: today → upcoming ↑ → past ↓.
+ * Place-page playback grid: today → upcoming ↑ → past ↓.
  * Completeness / IDs only separate sets on the same UTC day.
  */
 export function compareEventSetPriorityAt(

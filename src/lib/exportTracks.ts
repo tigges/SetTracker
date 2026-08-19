@@ -62,10 +62,96 @@ export function needsTrackId(row: ExportTrackRow): boolean {
   return !row.isrc?.trim();
 }
 
+export function needsBeatportOrIsrc(row: ExportTrackRow): boolean {
+  return !row.isrc?.trim() || !row.beatportUrl?.trim();
+}
+
 export function tracksNeedId(rows: ExportTrackRow[]): ExportTrackRow[] {
   return rows
     .filter(needsTrackId)
     .sort((a, b) => b.plays - a.plays || a.artist.localeCompare(b.artist));
+}
+
+export function tracksNeedEnrich(rows: ExportTrackRow[]): ExportTrackRow[] {
+  return rows
+    .filter(needsBeatportOrIsrc)
+    .sort((a, b) => b.plays - a.plays || a.artist.localeCompare(b.artist));
+}
+
+export function parseTracksCsv(text: string): ExportTrackRow[] {
+  const lines = text.split(/\r?\n/).filter((l) => l.length);
+  if (lines.length < 2) return [];
+  const header = splitCsvLine(lines[0]!);
+  const idx = (name: string) => header.indexOf(name);
+  const slugI = idx("slug");
+  const artistI = idx("artist");
+  const titleI = idx("title");
+  if (slugI < 0 || artistI < 0 || titleI < 0) return [];
+  const mixI = idx("mix");
+  const remixerI = idx("remixer");
+  const genreI = idx("genre");
+  const playsI = idx("plays");
+  const isrcI = idx("isrc");
+  const beatportI = idx("beatportUrl");
+  const rows: ExportTrackRow[] = [];
+  for (const line of lines.slice(1)) {
+    const cells = splitCsvLine(line);
+    const slug = (cells[slugI] ?? "").trim();
+    const artist = (cells[artistI] ?? "").trim();
+    const title = (cells[titleI] ?? "").trim();
+    if (!slug || !artist || !title) continue;
+    rows.push({
+      slug,
+      artist,
+      title,
+      mix: cellOrNull(cells[mixI]),
+      remixer: cellOrNull(cells[remixerI]),
+      genre: cellOrNull(cells[genreI]),
+      plays: Number(cells[playsI] || 0) || 0,
+      isrc: cellOrNull(cells[isrcI]),
+      beatportUrl: cellOrNull(cells[beatportI]),
+    });
+  }
+  return rows;
+}
+
+function cellOrNull(raw: string | undefined): string | null {
+  const s = (raw ?? "").trim();
+  return s.length ? s : null;
+}
+
+function splitCsvLine(line: string): string[] {
+  const cells: string[] = [];
+  let cell = "";
+  let quoted = false;
+  for (let i = 0; i < line.length; i++) {
+    const ch = line[i]!;
+    if (quoted) {
+      if (ch === '"') {
+        if (line[i + 1] === '"') {
+          cell += '"';
+          i += 1;
+        } else {
+          quoted = false;
+        }
+      } else {
+        cell += ch;
+      }
+      continue;
+    }
+    if (ch === '"') {
+      quoted = true;
+      continue;
+    }
+    if (ch === ",") {
+      cells.push(cell);
+      cell = "";
+      continue;
+    }
+    cell += ch;
+  }
+  cells.push(cell);
+  return cells;
 }
 
 export function trackToClaudeJsonl(row: ExportTrackRow): string {

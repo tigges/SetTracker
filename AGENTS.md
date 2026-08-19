@@ -26,7 +26,15 @@ stats, 1001 captures) on that same branch. Do not `checkout -b` a new
 After the producer merges to `main` / publishes Pages, the next cycle
 starts a new branch. `deploy-pages.yml` cancels in-progress exports on
 every main push — drip-merging leaves live on an old version. The
-producer will say if this bundling rule is abolished.
+  producer will say if this bundling rule is abolished.
+
+**Relive is Tomorrowland-only.** Relive is Tomorrowland's product name and
+is confusing used for other festivals. In UI, agent docs, and generic
+comments, say **playback** (or official playback). Keep Relive only for
+the Tomorrowland Relive series (`seriesName: "Tomorrowland Relive"`,
+`officialRelivePlaylists()`, `looksLikeRelive()`, `reliveWatch` files,
+`reason: "relive:official-unwired"`). Do not rename those internals
+unless asked.
 
 - **Run the app:** `npm run dev` (Turbopack, http://localhost:3000). Dev output
   goes to `.next/dev` in Next 16.
@@ -49,7 +57,7 @@ producer will say if this bundling rule is abolished.
 - **Lint / typecheck:** `npm run lint` and `npx tsc --noEmit`. `next lint` was
   removed in Next 16; ESLint runs directly.
 - **Catalog QC:** `npm run qc` (file-side pins / official URLs / leftover
-  hosts, then refresh graduate + Relive reports). `--fix` drops junk track-id
+  hosts, then refresh graduate + playback reports). `--fix` drops junk track-id
   pins. `--full` also runs the QC unit tests. Live DB audits run only when
   the catalog has 200+ sets. Never scrapes Beatport or 1001.
 - **Release version:** bump `package.json` `"version"` on every ship to main.
@@ -135,12 +143,17 @@ producer will say if this bundling rule is abolished.
   DJ Mag / 6am / Wikipedia are not official websites. Verify-then-pin
   (`data/entity-complete-pins.json`, fill-null on verify-urls). Event has no
   `youtube` column — drop venue YouTube rows. Empty / “cannot confirm” rows stay out.
-  **Track IDs:** `npm run research:track-ids` resolves ISRCs from held 1001
-  names, then high-play catalog tracks missing ISRC (`TRACK_ID_HELD_LIMIT`,
-  `TRACK_ID_CATALOG=0` skips catalog). Chain: Deezer, MusicBrainz (on unless
-  `TRACK_ID_MB=0` — MBID / ISRC / Beatport url-rels), TrackRadar public
-  archive (no key; MCP needs `TRACKRADAR_API_KEY`), and AudD `findLyrics`
-  (no token; `AUDD=0` skips).
+  **Track IDs:** `npm run research:track-ids` resolves ISRCs / Beatport URLs
+  from held 1001 names, then high-play catalog tracks missing ISRC **or**
+  Beatport (`TRACK_ID_HELD_LIMIT`, `TRACK_ID_CATALOG=0` skips catalog).
+  Catalog enrich `acr` (40) and `full` (200) run this automatically with
+  `TRACK_ID_APPLY=1` — do not dispatch enrich/Pages to start it while those
+  workflows are already running. No catalog DB → live
+  `/exports/tracks.csv` (`TRACK_ID_EXPORT=0` skips). Confirmed hits also
+  fill-null `data/track-id-pins.json` (verify-urls / Pages). Chain: Deezer,
+  MusicBrainz (on unless `TRACK_ID_MB=0` — MBID / ISRC / Beatport url-rels),
+  TrackRadar public archive (no key; MCP needs `TRACKRADAR_API_KEY`), and
+  AudD `findLyrics` (no token; `AUDD=0` skips).
   Beatport is never scraped — only canonical `/track/{slug}/{id}` from MB
   or TrackRadar. HEAD-only liveness (`npm run probe:beatport-heads --
   --since <ref>`) checks those URLs without fetching HTML; 404 drops the
@@ -149,7 +162,7 @@ producer will say if this bundling rule is abolished.
   their paid analyzer are never fetched. AudioScout / MusicMate / TrackId
   stay paste-only (`fingerprint/seeds.ts`). `TRACKRADAR_ANALYZE=1` /
   `AUDD_ANALYZE=1` analyze fingerprint-only fan YouTube (quota, never
-  Relive). Fan Relives in `FINGERPRINT_ONLY_WATCH` are Identify-offset
+  official playback). Fan clips in `FINGERPRINT_ONLY_WATCH` are Identify-offset
   probes only — never `sourceUrl` / FileScan. LLM job `tracks` writes
   fill-null IDs only when Deezer/MB confirms the proposal.
 - **Artwork thumbnails:** `npm run thumbs` fills null `imageUrl` on Dj / Label /
@@ -171,7 +184,7 @@ producer will say if this bundling rule is abolished.
   concurrency lanes so a quick check never queues behind the weekly `full`.
   Samples SC/hearthis `playbackUrl`
   via ffmpeg → ACRCloud Identify (`ACRCLOUD_*` secrets + `ACRCLOUD_ENABLED=1`).
-  YouTube Relives (Top20 / festival priority by default) use `yt-dlp
+  YouTube festival playbacks (Top20 / festival priority by default) use `yt-dlp
   --download-sections` for short clips, then the same Identify path
   (`ACRCLOUD_ALLOW_YOUTUBE_PRIORITY=1`; full YT with `ACRCLOUD_ALLOW_YOUTUBE=1`).
   **Diagnostic (`npm run` via `catalog-acr-diagnose.yml`):** control track HITs
@@ -184,7 +197,7 @@ producer will say if this bundling rule is abolished.
   Server-side — POST the YouTube URL to an ACRCloud **File Scanning** container;
   ACR downloads + fingerprints the whole video and returns matched tracks with
   offsets, bypassing the CI bot wall. Uses a YouTube-only sparse queue (does
-  not share Identify's SC-first ranking) and skips held Relives. Reuses files
+  not share Identify's SC-first ranking) and skips held official playbacks. Reuses files
   already in the ACR container (no second POST of the same YouTube URL).
   Identify records grey `acr-miss` rows so the same offset is not re-probed.
   Writes the

@@ -11,7 +11,7 @@
  * This complements — does not replace — the Identify path in `acrcloud.ts`
  * (still best for SoundCloud / hearthis streams). File Scanning uses a
  * **YouTube-only** sparse queue so Tomorrowland radio / academy mixes cannot
- * crowd Relives out of the slice. Held Relives (fan-clip watch list) are
+ * crowd festival playbacks out of the slice. Held official playbacks (fan-clip watch list) are
  * skipped. Same write rules: `provenance: "fingerprint"` into timeline gaps
  * only, never overwrites `sourceUrl` / `sourceName`, never deletes stronger
  * source rows.
@@ -458,7 +458,7 @@ function videoIdFromSlug(slug: string): string | null {
 }
 
 /**
- * Skip File Scanning for held Relives (Calvin Harris / Chris Lorenzo / …)
+ * Skip File Scanning for held official playbacks (Calvin Harris / Chris Lorenzo / …)
  * until an official upload is wired. Matches DJ slug or set title.
  */
 export function isHeldFileScanTarget(opts: {
@@ -472,7 +472,7 @@ export function isHeldFileScanTarget(opts: {
   return HELD_RELIVE_WATCH.some((h) => h.match.test(hay));
 }
 
-/** Fan Identify-only clips must never enter the File Scanning Relive queue. */
+/** Fan Identify-only clips must never enter the File Scanning playback queue. */
 export function isFingerprintOnlyFileScanTarget(opts: {
   slug?: string | null;
   playbackUrl?: string | null;
@@ -484,7 +484,7 @@ export function isFingerprintOnlyFileScanTarget(opts: {
 }
 
 /**
- * File Scanning queue: YouTube only, held Relives out, then slice.
+ * File Scanning queue: YouTube only, held official playbacks out, then slice.
  * Identify keeps SoundCloud-first ranking; this path must not share it.
  */
 export function youtubeFileScanQueue(
@@ -543,7 +543,7 @@ export async function enrichYoutubeSetsWithFileScan(
   const pollMs = numEnv("ACRCLOUD_FS_POLL_MS", 20_000);
   const timeoutMs = numEnv("ACRCLOUD_FS_TIMEOUT_MS", 1_500_000); // 25m default
 
-  // YouTube-only pool (over-fetch a little so held Relives can be dropped).
+  // YouTube-only pool (over-fetch a little so held official playbacks can be dropped).
   const pooled = await selectSparseSetsForFingerprint(prisma, {
     setLimit: Math.max(setLimit * 3, setLimit),
     allowYoutube: true,

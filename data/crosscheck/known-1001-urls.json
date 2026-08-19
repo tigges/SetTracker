@@ -1,5 +1,5 @@
 {
-  "note": "Operator-collected 1001Tracklists URLs. All listed urls[] rows are now seeded. Prefer new operator pastes over this archive. stillMissing1001 is video-in / no 1001 page — do not invent URLs. heldPendingRelive is 1001-in / no official YT/SC Relive — seed held, do not invent or wire fan playback. pendingCuePaste is official Relive + operator 1001 URL without cue rows — do not scrape 1001 or invent 1001tl seeds.",
+  "note": "Operator-collected 1001Tracklists URLs. All listed urls[] rows are now seeded. Prefer new operator pastes over this archive. stillMissing1001 is video-in / no 1001 page — do not invent URLs. heldPendingRelive is 1001-in / no official YT/SC playback — seed held, do not invent or wire fan playback. pendingCuePaste is official playback + operator 1001 URL without cue rows — do not scrape 1001 or invent 1001tl seeds.",
   "updatedAt": "2026-08-19T00:00:00.000Z",
   "urls": [
     {
@@ -9,7 +9,7 @@
       "tracklistUrl": "https://www.1001tracklists.com/tracklist/kcl35g1/korolova-snowattack-festival-les-deux-alpes-france-2026-01-21.html",
       "youtubeUrl": "https://youtu.be/7UcyaKbvy2o",
       "soundcloudUrl": "https://soundcloud.com/korolovadj/korolova-live-snowattack",
-      "note": "Operator paste 2026-08-19. 13 timed cues on official YT + korolovadj SC Relives. Distinct from Captive Soul 098 and TML WE2."
+      "note": "Operator paste 2026-08-19. 13 timed cues on official YT + korolovadj SC playbacks. Distinct from Captive Soul 098 and TML WE2."
     },
     {
       "label": "Indira Paganotto · Area V, Awakenings Festival 2025-07-11",
@@ -18,7 +18,7 @@
       "tracklistUrl": "https://www.1001tracklists.com/tracklist/27bmn1uk/indira-paganotto-area-v-awakenings-festival-netherlands-2025-07-11.html",
       "youtubeUrl": "https://youtu.be/xUdcEDryN8o",
       "soundcloudUrl": "https://soundcloud.com/awakenings/indira-paganotto-awakenings-festival-2025",
-      "note": "Operator paste 2026-08-19. 26 timed cues on official YT + Awakenings SC Relives. Distinct from Atmosphere TML WE1 2023 and Reinier Zonneveld Area V same day. Keep ID ft. Bilja Krstic — Magla Padnala."
+      "note": "Operator paste 2026-08-19. 26 timed cues on official YT + Awakenings SC playbacks. Distinct from Atmosphere TML WE1 2023 and Reinier Zonneveld Area V same day. Keep ID ft. Bilja Krstic — Magla Padnala."
     },
     {
       "label": "Claptone · The Masquerade, Buenos Aires 2022-11-05",
@@ -34,7 +34,7 @@
       "name": "TL_VINTAGE_CULTURE_PACHA_NYC_2026",
       "tracklistUrl": "https://www.1001tracklists.com/tracklist/fnw24vt/vintage-culture-pacha-nyc-united-states-2026-07-03.html",
       "youtubeUrl": "https://youtu.be/TDuFnUAo4II",
-      "note": "Operator paste 2026-08-19. 40 timed cues on the official Relive."
+      "note": "Operator paste 2026-08-19. 40 timed cues on the official playback."
     },
     {
       "label": "Lazarusman · Keinemusik Radio Show 2026-07-03",
@@ -191,7 +191,7 @@
       "label": "Liu · Tomorrowland Belgium",
       "slug": "yt-DWPSLZLKslg",
       "youtubeUrl": "https://www.youtube.com/watch?v=DWPSLZLKslg",
-      "note": "Artist-channel Relive (@Liumusic). No 1001 page in the description — capture if one appears."
+      "note": "Artist-channel playback (@Liumusic). No 1001 page in the description — capture if one appears."
     }
   ],
   "heldPendingRelive": [
@@ -201,14 +201,14 @@
       "tracklistUrl": "https://www.1001tracklists.com/tracklist/lb17sb1/knock2-zedd-hard-stage-hard-summer-festival-united-states-2026-08-02.html",
       "rejectedYoutubeUrl": "https://youtu.be/6DC3xoQF4Zs",
       "rejectedChannel": "DerekD2",
-      "note": "Operator paste. 1001 embeds DerekD2 fan 4K — do not wire. Seed held until official HARD/Insomniac Relive."
+      "note": "Operator paste. 1001 embeds DerekD2 fan 4K — do not wire. Seed held until official HARD/Insomniac playback."
     },
     {
       "label": "Cole Terrazas · HARD Summer Pink Stage 2026-08-02",
       "name": "TL_COLE_TERRAZAS_HARD_SUMMER_2026",
       "tracklistUrl": "https://www.1001tracklists.com/tracklist/2vwfrkc9/cole-terrazas-pink-stage-hard-summer-festival-united-states-2026-08-02.html",
       "eventUrl": "https://www.hardsummer.com/",
-      "note": "Operator paste. 1001 has no media links. Seed held until official HARD/Insomniac Relive."
+      "note": "Operator paste. 1001 has no media links. Seed held until official HARD/Insomniac playback."
     }
   ],
   "pendingCuePaste": [
@@ -217,7 +217,7 @@
       "slug": "sc-claptone-clapcast-576",
       "tracklistUrl": "https://www.1001tracklists.com/tracklist/uq8g1pk/claptone-clapcast-576-2026-07-31.html",
       "soundcloudUrl": "https://soundcloud.com/claptone/clapcast-576",
-      "note": "Official SC Relive wired. Operator 1001 URL recorded — do not scrape. Paste timed cues to seed TL_CLAPTONE_CLAPCAST_576_2026."
+      "note": "Official SC playback wired. Operator 1001 URL recorded — do not scrape. Paste timed cues to seed TL_CLAPTONE_CLAPCAST_576_2026."
     }
   ]
 }

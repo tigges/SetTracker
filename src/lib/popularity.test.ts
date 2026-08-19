@@ -285,7 +285,7 @@ describe("popularity rails", () => {
     assert.ok(!season.some((s) => s.id === "thin"));
   });
 
-  it("treats recent festival Relives as festival-story, not new-week", () => {
+  it("treats recent festival playbacks as festival-story, not new-week", () => {
     const now = Date.parse("2026-07-30T12:00:00Z");
     const fest = item({
       id: "tl",

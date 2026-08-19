@@ -133,7 +133,7 @@ export function isPlaylistSetCandidate(
   return isVenueSetCandidate(title, durationSec, playlistAsVenue(pl));
 }
 
-/** Festival Relive playlists (official dumps — not artist-owned mix lists). */
+/** Tomorrowland Relive playlists (official dumps — not artist-owned mix lists). */
 export function officialRelivePlaylists(): YoutubePlaylistSource[] {
   return YOUTUBE_PLAYLISTS.filter((p) => /relive/i.test(p.seriesName));
 }

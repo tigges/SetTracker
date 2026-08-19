@@ -27,7 +27,7 @@ export default async function Capture1001Page() {
       generatedAt = queue.generatedAt;
     }
   } catch {
-    /* no catalog DB — keep Relive extras / committed snapshot */
+    /* no catalog DB — keep playback extras / committed snapshot */
   }
 
   return (

@@ -34,13 +34,13 @@ export function search1001(...parts: string[]): string {
 /** Hand-curated high-value assists (official YT, 1001 TBD). Empty when wired. */
 export const PRIORITY_CAPTURES: CapturePreset[] = [];
 
-/** Held 1001 seeds waiting on official Relive — do not queue fan clips. */
+/** Held 1001 seeds waiting on official playback — do not queue fan clips. */
 export const HELD_RELIVE_WATCH: {
   name: string;
   seed: string;
   match: RegExp;
   search: string[];
-  /** Official Relive title must also match (default: Tomorrowland). */
+  /** Official playback title must also match (default: Tomorrowland Relive). */
   venue?: RegExp;
   waitNote?: string;
   /** Extra title token required (e.g. B2B partner). */
@@ -90,7 +90,7 @@ export const HELD_RELIVE_WATCH: {
     venue: /hard\s*summer|hardfest|\binsomniac\b/i,
     alsoMatch: /zedd/i,
     waitNote:
-      "Do not wire fan clips (DerekD2 yt-6DC3xoQF4Zs) — wait for official HARD/Insomniac Relive.",
+      "Do not wire fan clips (DerekD2 yt-6DC3xoQF4Zs) — wait for official HARD/Insomniac playback.",
   },
   {
     name: "Cole Terrazas · HARD Summer",
@@ -99,7 +99,7 @@ export const HELD_RELIVE_WATCH: {
     search: ["cole terrazas", "hard summer", "pink stage", "2026"],
     venue: /hard\s*summer|hardfest|\binsomniac\b/i,
     waitNote:
-      "Do not wire fan clips — wait for official HARD/Insomniac Relive.",
+      "Do not wire fan clips — wait for official HARD/Insomniac playback.",
   },
 ];
 
@@ -207,7 +207,7 @@ export type CaptureNeedRow = {
   top100Rank: number | null;
   isFestival: boolean;
   festivalSeason: boolean;
-  /** Event brand is in an edition-gap window (few complete Relives). */
+  /** Event brand is in an edition-gap window (few complete playbacks). */
   editionGap?: boolean;
   density: DensitySeverity;
   watchUrl?: string;
@@ -418,7 +418,7 @@ export type HeldReliveReport = {
   }[];
 };
 
-/** Offline held-seed watch report (operator finds Relive, then wires). */
+/** Offline held-seed watch report (operator finds official playback, then wires). */
 export function buildHeldReliveWatch(): HeldReliveReport {
   return {
     generatedAt: new Date().toISOString(),
@@ -429,7 +429,7 @@ export function buildHeldReliveWatch(): HeldReliveReport {
       status: "waiting" as const,
       note:
         h.waitNote ??
-        "Do not wire fan clips — wait for official Tomorrowland/artist Relive.",
+        "Do not wire fan clips — wait for official Tomorrowland Relive / artist playback.",
     })),
   };
 }

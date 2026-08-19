@@ -1,7 +1,7 @@
 /**
  * Official festival drop sources + curated edition windows.
  *
- * Phase 0–1: YT Relive playlists / SC venue accounts / deeper channel polls.
+ * Phase 0–1: YT official playback playlists / SC venue accounts / deeper channel polls.
  * Phase 2: edition calendar (Events page).
  * Phase 3: post-weekend poll + Festival season rail boost.
  * Phase 4: gap reporting → capture-1001 scoring.
@@ -229,7 +229,7 @@ export const FESTIVAL_EDITION_SEEDS: FestivalEditionSeed[] = [
     startsAt: "2025-07-31",
     endsAt: "2025-08-03",
   },
-  // Chart-heavy European / UK festivals — Relive / official dumps.
+  // Chart-heavy European / UK festivals — official playback dumps.
   {
     eventSlug: "untold",
     slug: "untold-2026",
@@ -415,7 +415,7 @@ export const INSOMNIAC_FESTIVAL_EVENT_SLUGS = [
 
 /**
  * Raise poll depth for sources tied to a festival currently in its
- * post-weekend Relive / upload dump window. Base limit otherwise.
+ * post-weekend playback / upload dump window. Base limit otherwise.
  * Pass multiple slugs for brand channels (e.g. Insomniac).
  */
 export function festivalSourcePollLimit(

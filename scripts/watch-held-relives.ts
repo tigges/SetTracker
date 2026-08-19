@@ -1,6 +1,6 @@
 /**
- * Report held 1001 seeds waiting on official Relives, and queue Top 100
- * official Relives that are not yet curated.
+ * Report held 1001 seeds waiting on official playback, and queue Top 100
+ * Tomorrowland Relives that are not yet curated.
  * Usage: npx tsx scripts/watch-held-relives.ts
  */
 import { writeFileSync, mkdirSync } from "node:fs";
@@ -65,7 +65,7 @@ async function main() {
   const waiting = report.held.filter((h) => h.status === "waiting").length;
   const ready = report.held.filter((h) => h.status === "candidate").length;
   console.log(
-    `[held-relive] ${report.held.length} held (${ready} official Relive found, ${waiting} still waiting)`,
+    `[held-relive] ${report.held.length} held (${ready} official playback found, ${waiting} still waiting)`,
   );
   for (const h of report.held) {
     const extra = h.youtubeUrl ? ` → ${h.youtubeUrl}` : "";
@@ -73,7 +73,7 @@ async function main() {
   }
   if (report.unwiredOfficial.length) {
     console.log(
-      `[held-relive] ${report.unwiredOfficial.length} Top 100 official Relives not yet curated`,
+      `[held-relive] ${report.unwiredOfficial.length} Top 100 Tomorrowland Relives not yet curated`,
     );
     for (const p of report.unwiredOfficial) {
       console.log(`  - ${p.slug}  ${p.label}`);

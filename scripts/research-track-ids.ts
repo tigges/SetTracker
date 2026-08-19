@@ -11,10 +11,10 @@
  *   SET79=0 npm run research:track-ids            # skip Set79 sitemap hints
  *   TRACK_ID_APPLY=1 npm run research:track-ids   # fill-null Track.isrc / beatportUrl
  *   TRACKRADAR=0 npm run research:track-ids       # skip TrackRadar
- *   TRACKRADAR_ANALYZE=1 npm run research:track-ids  # analyze fan YT (quota; never Relive)
+ *   TRACKRADAR_ANALYZE=1 npm run research:track-ids  # analyze fan YT (quota; never official playback)
  *   AUDD_ANALYZE=1                                # AudD recognize (needs AUDD_API_TOKEN)
  *
- * Fan Relives in FINGERPRINT_ONLY_WATCH stay Identify-only.
+ * Fan clips in FINGERPRINT_ONLY_WATCH stay Identify-only.
  * AudioScout / MusicMate / TrackId are never fetched.
  */
 import { PrismaClient } from "@prisma/client";
@@ -37,6 +37,7 @@ async function main() {
         hits: report.hits.length,
         misses: report.misses.length,
         applied: report.applied,
+        pinned: report.pinned,
         isrcs: report.hits.filter((h) => h.isrc).length,
         trackradarMode: report.trackradarMode,
         trackradar: report.hits.filter((h) => h.platforms).length,

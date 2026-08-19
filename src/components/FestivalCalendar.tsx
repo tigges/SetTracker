@@ -44,7 +44,7 @@ function PlaceTeaser({
   imageUrl,
   accent,
   meta,
-  relives,
+  playbacks,
   next,
 }: {
   href: string;
@@ -52,7 +52,7 @@ function PlaceTeaser({
   imageUrl: string | null;
   accent: string;
   meta: string;
-  relives: number;
+  playbacks: number;
   next?: { startsAt: string; title: string } | null;
 }) {
   return (
@@ -75,9 +75,9 @@ function PlaceTeaser({
             </Link>
           </span>
           <span className="mono block text-[12px] text-muted2">{meta}</span>
-          {relives > 0 ? (
+          {playbacks > 0 ? (
             <span className="mono block text-[12px] text-muted2">
-              {relives} {relives === 1 ? "Relive" : "Relives"}
+              {playbacks} {playbacks === 1 ? "playback" : "playbacks"}
             </span>
           ) : null}
           {next ? (
@@ -229,7 +229,7 @@ export function FestivalCalendar({
                         imageUrl={e.imageUrl}
                         accent="var(--amber)"
                         meta={bits.join(" · ")}
-                        relives={setCounts[e.eventSlug] ?? 0}
+                        playbacks={setCounts[e.eventSlug] ?? 0}
                       />
                     );
                   }
@@ -248,7 +248,7 @@ export function FestivalCalendar({
                       imageUrl={loc.imageUrl}
                         accent="var(--teal)"
                       meta={bits.join(" · ")}
-                      relives={setCounts[loc.eventSlug] ?? 0}
+                      playbacks={setCounts[loc.eventSlug] ?? 0}
                       next={
                         next &&
                         (next.bucket === "current" || next.bucket === "upcoming")

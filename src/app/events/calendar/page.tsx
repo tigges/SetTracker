@@ -34,7 +34,7 @@ export default async function FestivalCalendarPage() {
         </h1>
         <p className="mt-2 max-w-2xl text-[14px] text-muted">
           Curated festival weekends plus dated nights from official club
-          calendars. Relive dumps land after the close.{" "}
+          calendars. Official playbacks land after the close.{" "}
           <Link href="/events" className="text-brand hover:text-brandstrong">
             All events →
           </Link>

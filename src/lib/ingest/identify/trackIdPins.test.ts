@@ -6,6 +6,8 @@ import {
   evaluateTrackIdPin,
   isJunkTrackPin,
   loadTrackIdPins,
+  mergeTrackIdPins,
+  pinCoversNeed,
   slugMatchesLive,
 } from "./trackIdPins";
 
@@ -157,5 +159,27 @@ for (const pin of pins) {
 }
 assert.equal(
   pins.some((p) => p.beatportUrl === "https://www.beatport.com/track/bayside/24369290"),
+  false,
+);
+
+const merged = mergeTrackIdPins(
+  [{ slug: "artist-song", isrc: "USUM70000000" }],
+  [
+    {
+      slug: "artist-song",
+      beatportUrl: "https://www.beatport.com/track/song/1",
+    },
+    { slug: "artist-song", isrc: "GBAAA0000000" },
+  ],
+);
+assert.equal(merged.length, 1);
+assert.equal(merged[0]!.isrc, "USUM70000000");
+assert.equal(merged[0]!.beatportUrl, "https://www.beatport.com/track/song/1");
+assert.equal(
+  pinCoversNeed(merged[0], { wantIsrc: true, wantBeatport: true }),
+  true,
+);
+assert.equal(
+  pinCoversNeed({ slug: "artist-song", isrc: "USUM70000000" }, { wantBeatport: true }),
   false,
 );

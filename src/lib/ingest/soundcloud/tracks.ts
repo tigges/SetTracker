@@ -448,7 +448,7 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     minDurationSec: 50 * 60,
   },
   {
-    // Official Awakenings Relive; 1001TL wired via
+    // Official Awakenings playback; 1001TL wired via
     // sc-awakenings-indira-paganotto-awakenings-festival-2025
     // (same list as yt-xUdcEDryN8o). Never wire sc-https://….
     url: "https://soundcloud.com/awakenings/indira-paganotto-awakenings-festival-2025",
@@ -461,7 +461,7 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     minDurationSec: 60 * 60,
   },
   {
-    // Official Korolova Relive; 1001TL wired via
+    // Official Korolova playback; 1001TL wired via
     // sc-korolovadj-korolova-live-snowattack
     // (same list as yt-7UcyaKbvy2o). Never wire sc-https://….
     url: "https://soundcloud.com/korolovadj/korolova-live-snowattack",

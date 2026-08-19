@@ -185,7 +185,7 @@ export function matchHeldRelives(
     const venue = h.venue ?? /tomorrowland/i;
     const waitNote =
       h.waitNote ??
-      "Do not wire fan clips — wait for official Tomorrowland/artist Relive.";
+      "Do not wire fan clips — wait for official Tomorrowland Relive / artist playback.";
     const hits = entries.filter((e) => {
       if (!h.match.test(e.title)) return false;
       if (!venue.test(e.title)) return false;
@@ -211,7 +211,7 @@ export function matchHeldRelives(
       seed: h.seed,
       searchUrl: search1001(...h.search, "relive", "youtube"),
       status: "candidate" as const,
-      note: `Official Relive found — wire ${h.seed} to yt-${hit.videoId}.`,
+      note: `Official playback found — wire ${h.seed} to yt-${hit.videoId}.`,
       youtubeUrl: `https://www.youtube.com/watch?v=${hit.videoId}`,
       videoId: hit.videoId,
       title: hit.title,

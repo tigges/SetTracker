@@ -41,7 +41,7 @@ describe("title year vs upload date", () => {
     assert.equal(yearFromSetTitle("Joel Corry Live @ Edge NYC", now), null);
   });
 
-  it("treats pre-last-year title years as archive Relives", () => {
+  it("treats pre-last-year title years as archive playbacks", () => {
     assert.equal(
       isArchiveTitledSet("Alan Walker | Tomorrowland Belgium 2018", now),
       true,
@@ -194,7 +194,7 @@ describe("feedPriority complete → Top 100 → festivals", () => {
     assert.equal(sorted[2]?.densitySeverity, "severe");
   });
 
-  it("event grids keep a newer Relive ahead of a denser older one", () => {
+  it("event grids keep a newer playback ahead of a denser older one", () => {
     const cmp = compareEventSetPriorityAt(Date.parse("2026-08-18T12:00:00Z"));
     const sorted = [
       {
@@ -216,7 +216,7 @@ describe("feedPriority complete → Top 100 → festivals", () => {
     assert.equal(sorted[1]?.id, "garrix-2025");
   });
 
-  it("event grids keep empty shells after playable Relives on the same day", () => {
+  it("event grids keep empty shells after playable playbacks on the same day", () => {
     const cmp = compareEventSetPriorityAt(Date.parse("2026-08-18T12:00:00Z"));
     const sorted = [
       {
@@ -272,7 +272,7 @@ describe("feedPriority complete → Top 100 → festivals", () => {
     );
   });
 
-  it("event grids put a newer empty shell ahead of an older playable Relive", () => {
+  it("event grids put a newer empty shell ahead of an older playable playback", () => {
     const cmp = compareEventSetPriorityAt(Date.parse("2026-08-18T12:00:00Z"));
     const sorted = [
       {

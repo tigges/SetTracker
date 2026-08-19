@@ -167,7 +167,7 @@ jobs:
         run: npm run audit:top100
         continue-on-error: true
 
-      - name: Rebuild next-captures + held Relive watch + ACR preview
+      - name: Rebuild next-captures + held playback watch + ACR preview
         run: |
           npm run build:next-captures
           npm run preview:acr-queue

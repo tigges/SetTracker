@@ -1,7 +1,7 @@
 /**
  * Retired source slugs → current host IDs.
  *
- * YouTube Relives get replaced (private / taken down). Ingest keys sets as
+ * Official YouTube playbacks get replaced (private / taken down). Ingest keys sets as
  * `yt-{videoId}`, so a new upload would otherwise fork a duplicate row and
  * leave the old URL 404 / "Video unavailable".
  */

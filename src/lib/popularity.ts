@@ -43,7 +43,7 @@ export function isCompleteTracklist(s: FeedItem): boolean {
 /** Hide a homepage cluster when it would be a lonely 1–2 cards. */
 export const MIN_RAIL_SHOW = 3;
 
-/** Festival Relives belong on Festival season, not New this week. */
+/** Festival playbacks belong on Festival season, not New this week. */
 export function isFestivalStorySet(
   s: FeedItem,
   nowMs = Date.now(),

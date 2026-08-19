@@ -105,9 +105,9 @@ function placeLine(p: AtlasPin): string {
 function cardMeta(p: AtlasPin): string {
   const rank = chartKicker(p.kind, p.rank, p.year);
   if (p.kind === "dj") {
-    if (p.nomap && !p.setCount) return `${rank} · list only · no Relive yet`;
+    if (p.nomap && !p.setCount) return `${rank} · list only · no playback yet`;
     if (p.nomap) return `${rank} · list only`;
-    const sets = p.setCount ? `${p.setCount} sets` : "no Relive yet";
+    const sets = p.setCount ? `${p.setCount} sets` : "no playback yet";
     return `${rank} · ${sets}`;
   }
   const yoy = p.change ? `${p.change} vs ${p.year - 1}` : null;

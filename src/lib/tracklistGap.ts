@@ -61,7 +61,7 @@ export function isSourceCompleteRadioStub(s: {
   return s.type === "radio";
 }
 
-/** Stage-feed / live hub videos, not a DJ Relive to capture. */
+/** Stage-feed / live hub videos, not a DJ playback to capture. */
 export function isLivestreamHubTitle(title: string): boolean {
   if (/\blive\s+(at|from|@)\b/i.test(title)) return false;
   if (LIVESTREAM_HUB.test(title)) return true;
@@ -93,7 +93,7 @@ export function tracklistGapReason(s: TracklistGapFields): string {
 }
 
 /**
- * Worth a Stats row: this-year (or last-year chart festival) Relive
+ * Worth a Stats row: this-year (or last-year chart festival) playback
  * whose duration does not match the cue count.
  */
 export function isActionableTracklistGap(

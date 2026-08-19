@@ -453,7 +453,7 @@ export async function runIngest(
       const count = row?._count.sets ?? 0;
       if (count < 8) {
         console.warn(
-          `[ingest] festival gap: ${ed.slug} has ${count} sets after ${ed.endsAt} — check Relive playlist / SC / channel poll`,
+          `[ingest] festival gap: ${ed.slug} has ${count} sets after ${ed.endsAt} — check official playback playlist / SC / channel poll`,
         );
       } else {
         console.log(

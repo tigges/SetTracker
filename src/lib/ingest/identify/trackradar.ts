@@ -4,7 +4,7 @@
  * Public archive: GET /api/tracklists (no key).
  * Named lookup: MCP search_track (free, needs TRACKRADAR_API_KEY).
  * Mix analysis: POST /api/v2/analyze/url or MCP analyze_social_post
- *   (quota; long mixes take minutes). Never wires the URL as Relive.
+ *   (quota; long mixes take minutes). Never wires the URL as official playback.
  */
 
 import { canonicalBeatportUrl, normalizeIsrc } from "../../trackMeta";
@@ -315,7 +315,7 @@ export type TrackRadarAnalyzeResult = {
 
 /**
  * Analyze a mix URL (quota). Gated by TRACKRADAR_ANALYZE=1.
- * Fingerprint-only fan clips stay Identify-only — never Relive.
+ * Fingerprint-only fan clips stay Identify-only — never official playback.
  */
 export async function analyzeTrackRadarUrl(
   url: string,
