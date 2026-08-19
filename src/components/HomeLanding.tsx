@@ -1,9 +1,8 @@
 import Link from "next/link";
-import { SetEntryLink } from "@/components/SetEntryLink";
 import { BrandLogo } from "@/components/BrandMark";
 import { EntityThumb } from "@/components/EntityThumb";
+import { LandingSetPoster } from "@/components/LandingSetPoster";
 import { VisualTeaser, type TeaserFace } from "@/components/VisualTeaser";
-import { setHostHeadline } from "@/lib/brandHosts";
 import {
   mergeStatusCounts,
   pickDjFaces,
@@ -14,7 +13,6 @@ import {
   type LandingFace,
 } from "@/lib/homeLanding";
 import type { FeedItem } from "@/lib/queries";
-import { setDisplayThumb } from "@/lib/setBrowse";
 import { STATUS_META, type IdStatus } from "@/lib/status";
 
 const COLLAGE_SLOTS = [
@@ -94,76 +92,6 @@ function FaceCollage({ faces }: { faces: LandingFace[] }) {
         );
       })}
     </div>
-  );
-}
-
-function SetPoster({
-  set,
-  tone = "poster",
-}: {
-  set: FeedItem;
-  tone?: "feature" | "compact" | "poster";
-}) {
-  const accent = set.primaryDj?.accent ?? "var(--brand)";
-  const headline = setHostHeadline({
-    title: set.title,
-    primaryDj: set.primaryDj,
-    collaborators: set.collaborators,
-    seriesName: set.seriesName,
-    eventName: set.eventName,
-  });
-  const place = set.eventName ?? set.seriesName ?? "Set";
-  const thumb = setDisplayThumb({
-    imageUrl: set.imageUrl,
-    primaryDjImageUrl: set.primaryDj?.imageUrl,
-    eventImageUrl: set.eventImageUrl,
-    primaryDjSlug: set.primaryDj?.slug,
-  });
-  const feature = tone === "feature";
-  const compact = tone === "compact";
-  return (
-    <SetEntryLink
-      href={`/sets/${set.slug}`}
-      label="Home"
-      className={`card group relative overflow-hidden ${
-        feature ? "col-span-2 sm:col-span-1" : ""
-      }`}
-    >
-      <div
-        className={`relative bg-panel2 ${
-          feature
-            ? "aspect-[4/3] sm:aspect-[4/5]"
-            : compact
-              ? "aspect-square sm:aspect-[4/5]"
-              : "aspect-[4/5]"
-        }`}
-      >
-        <EntityThumb
-          fill
-          src={thumb}
-          label={headline}
-          accent={accent}
-          radius={0}
-          monogram={initials(headline)}
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-bg via-bg/25 to-transparent" />
-        <div
-          className={`absolute inset-x-0 bottom-0 ${
-            compact ? "space-y-1.5 p-3 sm:space-y-2 sm:p-4" : "space-y-2 p-4"
-          }`}
-        >
-          <p className="eyebrow text-muted2">{place}</p>
-          <h3
-            className={`font-bold leading-tight text-ink ${
-              compact ? "text-[15px] sm:text-[18px]" : "text-[18px]"
-            }`}
-          >
-            {headline}
-          </h3>
-          <SetgraphStrip counts={set.statusCounts} maxTicks={28} height={8} />
-        </div>
-      </div>
-    </SetEntryLink>
   );
 }
 
@@ -344,7 +272,7 @@ export function HomeLanding({
           </div>
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
             {landingSets.map((s, i) => (
-              <SetPoster
+              <LandingSetPoster
                 key={s.id}
                 set={s}
                 tone={i === 0 || landingSets.length < 3 ? "feature" : "compact"}
