@@ -1,10 +1,12 @@
 import assert from "node:assert/strict";
 import {
+  landingPlaybackTier,
   mergeStatusCounts,
   pickHeroCollage,
   pickLandingSets,
   pickVenueMosaic,
   pickVisualFaces,
+  preferLandingPlayback,
   setgraphTicks,
   type LandingSetFields,
 } from "./homeLanding";
@@ -58,6 +60,53 @@ const picked = pickLandingSets([filler, radarB, radarA], 3, now);
 assert.equal(picked[0]?.id, "a");
 assert.equal(picked[1]?.id, "b");
 assert.ok(picked.some((s) => s.id === "c"));
+
+assert.equal(
+  landingPlaybackTier({
+    playbackUrl: "https://www.youtube.com/watch?v=blocked",
+    seriesName: "Tomorrowland Relive",
+    title: "David Guetta WE1 | Tomorrowland 2026",
+  }),
+  1,
+);
+assert.equal(
+  landingPlaybackTier({
+    playbackUrl: "https://soundcloud.com/davidguetta/ultra-2026",
+    title: "David Guetta Ultra 2026",
+  }),
+  3,
+);
+assert.equal(landingPlaybackTier({ title: "No audio" }), 0);
+
+const relive = set({
+  id: "relive",
+  title: "David Guetta WE1 | Tomorrowland 2026",
+  seriesName: "Tomorrowland Relive",
+  playbackUrl: "https://www.youtube.com/watch?v=blocked",
+  top100Rank: 1,
+  festivalRank: 1,
+  primaryDj: { name: "David Guetta", slug: "david-guetta" },
+});
+const playable = set({
+  id: "playable",
+  title: "Charlotte de Witte Hï Ibiza",
+  playbackUrl: "https://soundcloud.com/charlottedewitte/hi-2026",
+  top100Rank: 8,
+  festivalRank: null,
+  venueTier: "club",
+  clubRank: 4,
+  primaryDj: { name: "Charlotte de Witte", slug: "charlotte-de-witte" },
+});
+assert.deepEqual(
+  preferLandingPlayback([relive, playable]).map((s) => s.id),
+  ["playable"],
+);
+const playableFirst = pickLandingSets([relive, playable], 3, now);
+assert.equal(playableFirst[0]?.id, "playable");
+assert.ok(
+  playableFirst.findIndex((s) => s.id === "relive") !== 0,
+  "Relive is not the homepage teaser when a playable set exists",
+);
 
 const onlyFiller = pickLandingSets([filler], 3, now);
 assert.deepEqual(
