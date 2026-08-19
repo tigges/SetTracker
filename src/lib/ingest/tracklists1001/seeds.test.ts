@@ -155,6 +155,7 @@ import {
   TL_KOROLOVA_SNOWATTACK_FESTIVAL_2026,
   TL_KOROLOVA_TULUM_MEXICO_2026,
   TL_NATTE_VISSTICK_TELETECH_FYM_AFAS_LIVE_AMSTERDAM_2025,
+  TL_DEBORAH_DE_LUCA_PYRAMID_AMNESIA_IBIZA_2025,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   tracklist1001RowsToPlays,
@@ -2254,6 +2255,37 @@ for (let i = 1; i < natteAfas.length; i++) {
   );
 }
 assert.equal(isWiredTracklistSlug("yt-Nrl9yBX6Kpw"), true);
+
+assertSeedClocks(TL_DEBORAH_DE_LUCA_PYRAMID_AMNESIA_IBIZA_2025);
+assert.equal(TL_DEBORAH_DE_LUCA_PYRAMID_AMNESIA_IBIZA_2025.length, 13);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-IfFnvi7O2Po"],
+  TL_DEBORAH_DE_LUCA_PYRAMID_AMNESIA_IBIZA_2025,
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-IfFnvi7O2Po"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-7cK7rhYXbh8"],
+);
+const deborahAmnesia = tracklist1001RowsToPlays(
+  TL_DEBORAH_DE_LUCA_PYRAMID_AMNESIA_IBIZA_2025,
+);
+assert.equal(deborahAmnesia.length, 13);
+assert.equal(deborahAmnesia[0]?.provenance, "1001tl");
+assert.equal(deborahAmnesia[0]?.timestamp, 20);
+assert.equal(deborahAmnesia[0]?.artistName, "Maddix & Gabry Ponte");
+assert.equal(deborahAmnesia[0]?.trackTitle, "Hellfire");
+assert.equal(deborahAmnesia[5]?.trackTitle, "Baila Fuego");
+assert.equal(deborahAmnesia[5]?.timestamp, 23 * 60 + 5);
+assert.equal(deborahAmnesia[12]?.trackTitle, "DOMINATE");
+assert.equal(deborahAmnesia[12]?.timestamp, 54 * 60 + 56);
+for (let i = 1; i < deborahAmnesia.length; i++) {
+  assert.ok(
+    (deborahAmnesia[i]!.timestamp ?? 0) >
+      (deborahAmnesia[i - 1]!.timestamp ?? 0),
+    `Deborah De Luca Pyramid Amnesia clocks must increase at index ${i}`,
+  );
+}
+assert.equal(isWiredTracklistSlug("yt-IfFnvi7O2Po"), true);
 
 assertSeedClocks(TL_NICKY_ROMERO_PROTOCOL_RADIO_731);
 assert.equal(TL_NICKY_ROMERO_PROTOCOL_RADIO_731.length, 16);

@@ -39,6 +39,9 @@ const KOROLOVA_TULUM = YOUTUBE_SETS.find((s) =>
   s.video.includes("HvkAfj1QnK8"),
 );
 const NATTE_AFAS = YOUTUBE_SETS.find((s) => s.video.includes("Nrl9yBX6Kpw"));
+const DEBORAH_AMNESIA = YOUTUBE_SETS.find((s) =>
+  s.video.includes("IfFnvi7O2Po"),
+);
 const MM_YACHT = YOUTUBE_SETS.find((s) => s.video.includes("0-s_qZRWElA"));
 const PRISMATIC_032 = YOUTUBE_SETS.find((s) => s.video.includes("blP5J6BUG0M"));
 const SPECTRUM_485 = YOUTUBE_SETS.find((s) => s.video.includes("yTRvLrtsM9I"));
@@ -668,6 +671,17 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.durationSec, 56 * 60 + 3 + 180);
   });
 
+  it("builds Deborah De Luca Pyramid Amnesia Ibiza 2025 meta from the curated 1001 capture", () => {
+    assert.ok(DEBORAH_AMNESIA);
+    const meta = watchMetaFromCuratedSeed(DEBORAH_AMNESIA);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "IfFnvi7O2Po");
+    assert.match(meta.title, /Pyramid, Amnesia Ibiza 2025/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=IfFnvi7O2Po");
+    // Last cue 54:56 + 180s pad.
+    assert.equal(meta.durationSec, 54 * 60 + 56 + 180);
+  });
+
   it("builds Miss Monique Ibiza Yacht meta from the curated 1001 capture", () => {
     assert.ok(MM_YACHT);
     const meta = watchMetaFromCuratedSeed(MM_YACHT);
@@ -1185,6 +1199,21 @@ describe("curated YouTube 429 fallback", () => {
     assert.ok(sets[0]!.durationSec >= 56 * 60);
     assert.equal(sets[0]?.primaryArtist?.slug, "natte-visstick");
     assert.match(String(sets[0]?.eventName ?? ""), /Teletech x FYM/i);
+  });
+
+  it("lands Deborah De Luca Pyramid Amnesia Ibiza 2025 from the 1001 seed when watch is 429", async () => {
+    assert.ok(DEBORAH_AMNESIA);
+    const adapter = createYoutubeAdapter([DEBORAH_AMNESIA], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-IfFnvi7O2Po");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 13);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 54 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "deborah-de-luca");
+    assert.match(String(sets[0]?.eventName ?? ""), /Amnesia Ibiza/i);
+    assert.notEqual(sets[0]!.sourceSlug, "yt-7cK7rhYXbh8");
   });
 
   it("lands Miss Monique Ibiza Yacht from the 1001 seed when watch is 429", async () => {

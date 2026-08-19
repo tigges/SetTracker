@@ -318,3 +318,30 @@ export const TL_NATTE_VISSTICK_TELETECH_FYM_AFAS_LIVE_AMSTERDAM_2025: Fingerprin
     { at: "54:58", artist: "Natte Visstick & Vieze Asbak & Lil Texas", title: "Bassline Slut 2026" },
     { at: "56:03", artist: "Paul Elstak", title: "Blood, Sweat And Hardcore (Natte Visstick Live Remix)" },
   ];
+
+/**
+ * Deborah De Luca @ Pyramid, Amnesia Ibiza, Spain 2025-09-21
+ * Official YouTube: https://youtu.be/IfFnvi7O2Po
+ * https://www.1001tracklists.com/tracklist/crntdz1/deborah-de-luca-pyramid-amnesia-ibiza-spain-2025-09-21.html
+ * Overlay name TL_Deborah-De-Luca_Pyramid,_Amnesia_Ibiza_Spain_2025 is not a valid identifier.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-IfFnvi7O2Po"] = TL_DEBORAH_DE_LUCA_PYRAMID_AMNESIA_IBIZA_2025
+ * Distinct from TL_DEBORAH_STREET_PARADE_2025 (yt-7cK7rhYXbh8).
+ * No official SoundCloud in the operator paste — do not invent an SC slug.
+ * Captured 2026-08-19 — provenance 1001tl.
+ */
+export const TL_DEBORAH_DE_LUCA_PYRAMID_AMNESIA_IBIZA_2025: FingerprintSeedRow[] =
+  [
+    { at: "0:20", artist: "Maddix & Gabry Ponte", title: "Hellfire" },
+    { at: "4:53", artist: "Deborah De Luca", title: "Without Me" },
+    { at: "9:26", artist: "BONKA & KEVU", title: "Acid Disco" },
+    { at: "13:59", artist: "Bountyhunter", title: "Woops (Dimitri Vegas & Junkie Kid Remix)" },
+    { at: "18:32", artist: "Sunbeam", title: "Outside World (Denise Schneider Extended Mix)" },
+    { at: "23:05", artist: "Deborah De Luca", title: "Baila Fuego" },
+    { at: "27:38", artist: "Deborah De Luca", title: "Heroine" },
+    { at: "32:11", artist: "The Rocketman & SHVDZ", title: "All Night" },
+    { at: "36:44", artist: "Lilly Palmer X Mauro Picotto", title: "Komodo" },
+    { at: "41:17", artist: "Murk pres. Funky Green Dogs", title: "Fired Up!" },
+    { at: "45:50", artist: "Deborah De Luca", title: "Ta Ta Ta" },
+    { at: "50:23", artist: "Franco Moiraghi ft. Amnesia", title: "Feel My Body" },
+    { at: "54:56", artist: "Deborah De Luca", title: "DOMINATE" },
+  ];
