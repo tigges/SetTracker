@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import {
   evaluateIsrc,
   heldIdentifyJobs,
+  mergeIdentifyQueue,
   uniqueIdentifyRows,
 } from "./trackIds";
 import { isPasteOnlyIdentifyUrl } from "./pasteOnly";
@@ -32,6 +33,25 @@ assert.ok(jobs.some((j) => j.seed === "TL_COLE_TERRAZAS_HARD_SUMMER_2026"));
 assert.equal(uniqueIdentifyRows(TL_COLE_TERRAZAS_HARD_SUMMER_2026).length, 6);
 assert.equal(isWiredTracklistSlug("yt-6DC3xoQF4Zs"), false);
 assert.equal(isPasteOnlyIdentifyUrl("https://audioscout.io/x"), true);
+
+const queued = mergeIdentifyQueue(
+  [
+    { at: "0:00", artist: "Held", title: "One" },
+    { at: "1:00", artist: "Held", title: "Two" },
+    { at: "2:00", artist: "Held", title: "Three" },
+  ],
+  [
+    { at: "0:00", artist: "Held", title: "One" },
+    { at: "0:00", artist: "Catalog", title: "Hot" },
+    { at: "0:00", artist: "Catalog", title: "Also" },
+  ],
+  { limit: 3, heldCap: 2 },
+);
+assert.equal(queued.length, 3);
+assert.equal(queued[0]?.title, "One");
+assert.equal(queued[1]?.title, "Two");
+assert.equal(queued[2]?.artist, "Catalog");
+assert.equal(queued[2]?.title, "Hot");
 assert.equal(
   acceptBeatportTrackUrl("https://www.beatport.com/search?q=clarity"),
   undefined,
