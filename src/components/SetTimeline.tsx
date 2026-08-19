@@ -7,6 +7,8 @@ import {
   useRef,
   useState,
   useSyncExternalStore,
+  type MouseEvent,
+  type PointerEvent,
   type ReactNode,
 } from "react";
 import { EntityThumb } from "@/components/EntityThumb";
@@ -22,6 +24,7 @@ import {
 import type { PlayRow } from "@/lib/queries";
 import { beatportBuyability } from "@/lib/trackMeta";
 import { useSetSeek } from "@/components/SetListen";
+import { cueIndexAtRatio, playSpans, stripIsDense } from "@/lib/setStrip";
 
 const DENSITY_KEY = "setradar.tracklistDensity";
 const densityListeners = new Set<() => void>();
@@ -81,23 +84,45 @@ export function SetTimeline({
     () => false,
   );
   const rowRefs = useRef<Record<string, HTMLDivElement | null>>({});
+  const stripRef = useRef<HTMLDivElement | null>(null);
 
   function toggleDensity() {
     setDensityCompact(!getDensityCompact());
   }
 
-  const spans = useMemo(() => {
-    return plays.map((p, i) => {
-      const end = i < plays.length - 1 ? plays[i + 1].timestamp : durationSec;
-      return Math.max(end - p.timestamp, 1);
-    });
-  }, [plays, durationSec]);
+  const spans = useMemo(
+    () => playSpans(
+      plays.map((p) => p.timestamp),
+      durationSec,
+    ),
+    [plays, durationSec],
+  );
+  const dense = stripIsDense(plays.length);
 
   useEffect(() => {
     if (!flashId) return;
     const t = setTimeout(() => setFlashId(null), 1400);
     return () => clearTimeout(t);
   }, [flashId]);
+
+  function cueIdAtClientX(clientX: number): string | null {
+    const el = stripRef.current;
+    if (!el || plays.length === 0) return null;
+    const { left, width } = el.getBoundingClientRect();
+    if (width <= 0) return null;
+    const i = cueIndexAtRatio((clientX - left) / width, spans);
+    return plays[i]?.id ?? null;
+  }
+
+  function onStripClick(e: MouseEvent<HTMLDivElement>) {
+    const id = cueIdAtClientX(e.clientX);
+    if (id) focusRow(id);
+  }
+
+  function onStripMove(e: PointerEvent<HTMLDivElement>) {
+    const id = cueIdAtClientX(e.clientX);
+    if (id) setHoverId(id);
+  }
 
   function focusRow(id: string) {
     setActiveId(id);
@@ -114,7 +139,7 @@ export function SetTimeline({
   return (
     <div className="mt-4 space-y-4 sm:mt-6 sm:space-y-6">
       {/* ------------------------------- SET STRIP ------------------------------- */}
-      <div className="card p-3 sm:p-4">
+      <div className="card min-w-0 overflow-x-clip p-3 sm:p-4">
         <div className="mb-2 flex items-center justify-between gap-3 sm:mb-3">
           <div className="hidden min-w-0 sm:block">
             <span className="eyebrow">Set strip</span>
@@ -129,24 +154,26 @@ export function SetTimeline({
           </div>
         </div>
 
-        <div className="flex h-8 w-full gap-[2px] sm:h-14">
+        <div
+          ref={stripRef}
+          role="img"
+          aria-label={`Set timeline, ${plays.length} cues. Click to play from a cue.`}
+          className={`flex h-8 w-full min-w-0 cursor-pointer sm:h-14 ${
+            dense ? "gap-px" : "gap-[2px]"
+          }`}
+          onClick={onStripClick}
+          onPointerMove={onStripMove}
+          onPointerLeave={() => setHoverId(null)}
+        >
           {plays.map((p, i) => {
             const isActive = p.id === activeId;
             const isHover = p.id === hoverId;
             return (
-              <button
+              <div
                 key={p.id}
-                type="button"
-                onClick={() => focusRow(p.id)}
-                onMouseEnter={() => setHoverId(p.id)}
-                onMouseLeave={() => setHoverId(null)}
-                aria-label={`Play ${p.title} from ${fmtTimestamp(p.timestamp)}`}
-                title={`Play from ${fmtTimestamp(p.timestamp)}`}
-                className="group relative h-full cursor-pointer rounded-[3px] transition-all duration-150"
+                className="relative h-full min-w-0 rounded-[3px] transition-all duration-150"
                 style={{
-                  flexGrow: spans[i],
-                  flexBasis: 0,
-                  minWidth: 5,
+                  flex: `${spans[i]} 1 0%`,
                   background: statusColor(p.idStatus),
                   opacity: isActive ? 1 : isHover ? 0.92 : 0.72,
                   transform: isActive ? "scaleY(1.06)" : "scaleY(1)",
@@ -161,7 +188,7 @@ export function SetTimeline({
                     style={{ background: statusColor(p.idStatus) }}
                   />
                 )}
-              </button>
+              </div>
             );
           })}
         </div>
