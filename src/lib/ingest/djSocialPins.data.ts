@@ -825,7 +825,7 @@ export const DJ_SOCIAL_PINS: DjSocialPin[] = [
     instagram: "https://www.instagram.com/dubvisionmusic/",
     twitter: "https://x.com/dubvisionmusic",
     website: "https://linktr.ee/dubvision",
-    bio: "Progressive House. Official linktr.ee/dubvision — SC dubvision, YT @DubVision, IG/X @dubvisionmusic. dubvisionmusic.com does not resolve.",
+    bio: "Progressive House. Official linktr.ee/dubvision — SC dubvision, YT @DubVision, IG/X @dubvisionmusic. Also performs as HALŌ (IG/X @halo__ofc). dubvisionmusic.com does not resolve.",
   },
   {
     slug: "b-jones",

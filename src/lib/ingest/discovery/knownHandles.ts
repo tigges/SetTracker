@@ -626,6 +626,25 @@ export const KNOWN_HANDLES: Record<string, HandleHint> = {
     genre: "Progressive House",
     accent: "#4361ee",
   },
+  // DubVision performing-as project (2026 tour poster).
+  halo: {
+    youtubeHandle: "@DubVision",
+    soundcloudPermalink: "dubvision",
+    instagram: "https://www.instagram.com/halo__ofc/",
+    twitter: "https://x.com/Halo__ofc",
+    website: "https://linktr.ee/dubvision",
+    genre: "Trance",
+    accent: "#4361ee",
+  },
+  "halō": {
+    youtubeHandle: "@DubVision",
+    soundcloudPermalink: "dubvision",
+    instagram: "https://www.instagram.com/halo__ofc/",
+    twitter: "https://x.com/Halo__ofc",
+    website: "https://linktr.ee/dubvision",
+    genre: "Trance",
+    accent: "#4361ee",
+  },
   "sub zero project": {
     youtubeHandle: "@SubZeroProject",
     soundcloudPermalink: "subzeroproject",

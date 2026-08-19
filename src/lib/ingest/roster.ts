@@ -1902,6 +1902,15 @@ export const ARTIST_ROSTER_CURATED: ArtistRosterEntry[] = [
     accent: "#4361ee",
     youtube: { handle: "@DubVision", status: "ok" },
     soundcloud: { permalink: "dubvision", status: "ok" },
+    socials: [
+      "https://www.youtube.com/@DubVision",
+      "https://soundcloud.com/dubvision",
+      "https://www.instagram.com/dubvisionmusic/",
+      "https://x.com/dubvisionmusic",
+      "https://linktr.ee/dubvision",
+      "https://www.instagram.com/halo__ofc/",
+      "https://x.com/Halo__ofc",
+    ],
     priority: "high",
   },
   {

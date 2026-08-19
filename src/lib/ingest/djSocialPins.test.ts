@@ -353,6 +353,11 @@ assert.match(bySlug.quintino!.twitter!, /(?:twitter|x)\.com\/quintinoo/);
 assert.match(bySlug.nervo!.twitter!, /(?:twitter|x)\.com\/nervomusic/);
 assert.match(bySlug["sub-zero-project"]!.twitter!, /(?:twitter|x)\.com\/sub_zeroproject/);
 assert.match(bySlug.dubvision!.twitter!, /(?:twitter|x)\.com\/dubvisionmusic/);
+assert.match(bySlug.dubvision!.bio, /HALŌ/);
+assert.match(bySlug.dubvision!.bio, /halo__ofc/);
+assert.equal(hintForName("HALŌ")?.youtubeHandle, "@DubVision");
+assert.equal(hintForName("Halo")?.instagram, "https://www.instagram.com/halo__ofc/");
+assert.equal(hintForName("Halo")?.twitter, "https://x.com/Halo__ofc");
 assert.match(bySlug["mariana-bo"]!.twitter!, /(?:twitter|x)\.com\/djmarianabo/);
 assert.equal(bySlug.vinai!.twitter, undefined);
 
