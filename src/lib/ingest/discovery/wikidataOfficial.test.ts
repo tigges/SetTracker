@@ -15,6 +15,7 @@ assert.equal(
 );
 assert.equal(normalizeOfficialWebsite("https://instagram.com/foo"), null);
 assert.equal(normalizeOfficialWebsite("https://www.djmag.com/x"), null);
+assert.equal(normalizeOfficialWebsite("https://www.jambase.com/festival/x"), null);
 assert.equal(normalizeOfficialWebsite("https://www.therealdjbdk.com/"), null);
 assert.equal(isRejectedWebsiteHost("https://www.therealdjbdk.com/"), true);
 assert.equal(isRejectedWebsiteHost("therealdjbdk.com"), true);

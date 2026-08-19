@@ -25,7 +25,23 @@ describe("producerDjReview.data", () => {
     assert.equal(isProducerDiscardName("Rave UKraine"), true);
     assert.equal(isProducerDiscardSlug("live-in-buenos-aires"), true);
     assert.equal(isProducerDiscardSlug("rave-ukraine"), true);
+    assert.equal(isProducerDiscardName("8-track (Continuous Mix)"), true);
+    assert.equal(
+      isProducerDiscardName("Femi Koleoso of Ezra Collective"),
+      true,
+    );
+    assert.equal(isProducerDiscardName("Knee Deep In Ibiza Mixed"), true);
+    assert.equal(isProducerDiscardName("Le Grand Brand"), true);
+    assert.equal(isProducerDiscardSlug("8-track-continuous-mix"), true);
+    assert.equal(
+      isProducerDiscardSlug("femi-koleoso-of-ezra-collective"),
+      true,
+    );
+    assert.equal(isProducerDiscardSlug("knee-deep-in-ibiza-mixed"), true);
+    assert.equal(isProducerDiscardSlug("le-grand-brand"), true);
     assert.equal(isProducerDiscardSlug("bart-skils"), false);
+    assert.equal(isProducerDiscardSlug("mila-alias"), false);
+    assert.equal(isProducerDiscardSlug("monateng-music"), false);
   });
 
   it("folds known leftovers onto real DJs", () => {
@@ -51,5 +67,16 @@ describe("producerDjReview.data", () => {
     assert.match(franky!.socials.youtube!, /youtube\.com\/@Frankywahmusic/);
     const tiffany = PRODUCER_KEEP.find((k) => k.slug === "tiffany-day");
     assert.match(tiffany!.socials.website!, /tiffdidwhat\.com/);
+    const mila = PRODUCER_KEEP.find((k) => k.slug === "mila-alias");
+    assert.match(mila!.socials.instagram!, /instagram\.com\/djmilaalias/);
+    assert.match(mila!.socials.youtube!, /youtube\.com\/@MILAALIASDJ/);
+    const sonido = PRODUCER_KEEP.find((k) => k.slug === "sonido-tupinamba");
+    assert.match(sonido!.socials.instagram!, /sonido_tupinamba/);
+    const teedo = PRODUCER_KEEP.find((k) => k.slug === "teedo-love");
+    assert.match(teedo!.socials.youtube!, /youtube\.com\/@djteedolove/);
+    assert.equal(
+      PRODUCER_KEEP.some((k) => k.slug === "monateng-music"),
+      false,
+    );
   });
 });

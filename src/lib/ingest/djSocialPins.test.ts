@@ -107,6 +107,9 @@ assert.equal(
   bySlug["maceo-plex"]!.beatport,
   "https://www.beatport.com/artist/maceo-plex/119538",
 );
+assert.match(bySlug["maceo-plex"]!.instagram!, /instagram\.com\/maceoplex/);
+assert.match(bySlug["maceo-plex"]!.twitter!, /x\.com\/maceoplex/);
+assert.match(bySlug["maceo-plex"]!.youtube!, /youtube\.com\/@maceoplex/);
 assert.match(bySlug.dijon!.website, /dijondijon\.com/);
 assert.equal(bySlug.dijon!.soundcloud, null);
 assert.match(bySlug["dom-dolla"]!.website, /domdolla\.com\.au/);

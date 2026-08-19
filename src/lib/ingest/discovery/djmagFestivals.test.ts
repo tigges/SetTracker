@@ -35,6 +35,29 @@ assert.equal(
   seed.festivals.find((f) => f.slug === "amf")?.website,
   "https://www.amsterdammusicfestival.com/",
 );
+assert.equal(
+  seed.festivals.find((f) => f.slug === "808-festival")?.website,
+  "https://808festival.net/",
+);
+assert.equal(
+  seed.festivals.find((f) => f.slug === "gmo-sonic")?.website,
+  "https://sonic.gmo/en/",
+);
+assert.equal(
+  seed.festivals.find((f) => f.slug === "magic-of-tomorrowland")?.website,
+  "https://magicoftomorrowland.com/",
+);
+assert.equal(
+  djMagFestivalToEvent(
+    seed.festivals.find((f) => f.slug === "vision-colour-music-festival")!,
+  ).instagram,
+  "https://www.instagram.com/vacfestival/",
+);
+assert.equal(
+  djMagFestivalToEvent(seed.festivals.find((f) => f.slug === "gmo-sonic")!)
+    .kind,
+  "festival",
+);
 
 const tl = djMagFestivalToEvent(seed.festivals[0]!);
 assert.equal(tl.slug, "tomorrowland");

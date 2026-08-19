@@ -18,11 +18,15 @@ The producer tests on https://setradar.ai/ and publishes to live from GitHub
 (merge the PR / push `main`). Agents do not merge to `main` or start a Pages
 deploy unless the producer explicitly says otherwise.
 
-Bundle multiple prompts into one PR so one publish is one Pages build.
-`deploy-pages.yml` cancels in-progress exports on every main push —
-drip-merging leaves live on an old version. Keep stacking 1001 captures,
-stats copy, and pins on the same branch until the producer publishes.
-The producer will say if this bundling rule is abolished.
+**One ship = one branch = one draft PR until live.** While a draft PR
+is open against `main`, put every follow-up (pins, leftovers, hero,
+stats, 1001 captures) on that same branch. Do not `checkout -b` a new
+`cursor/…-c78b` branch and do not open a second PR. Bump
+`package.json` `"version"` once for the whole ship, not per prompt.
+After the producer merges to `main` / publishes Pages, the next cycle
+starts a new branch. `deploy-pages.yml` cancels in-progress exports on
+every main push — drip-merging leaves live on an old version. The
+producer will say if this bundling rule is abolished.
 
 - **Run the app:** `npm run dev` (Turbopack, http://localhost:3000). Dev output
   goes to `.next/dev` in Next 16.

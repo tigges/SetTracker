@@ -96,7 +96,7 @@ export function buildPlaybookItems(input: {
       id: "weak-sites",
       step: 3,
       title: "Replace weak chart websites",
-      hint: "Top 100 clubs / fests whose site is DJ Mag, 6am, Wikipedia, RA, DICE, Shotgun, or empty. First-party www only.",
+      hint: "Top 100 clubs / fests whose site is DJ Mag, 6am, Wikipedia, RA, DICE, Shotgun, JamBase, Eventpop, or empty. First-party www only.",
       count: input.weakChartSites,
       href: "#weak-sites",
       kind: "queue",
