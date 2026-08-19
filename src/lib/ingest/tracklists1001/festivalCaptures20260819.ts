@@ -75,3 +75,21 @@ export const TL_VINTAGE_CULTURE_ULTRA_MIAMI_RESISTANCE_2026: FingerprintSeedRow[
     ],
     { evenlySpaceDurationSec: 5340 },
   );
+
+/**
+ * Lazarusman — Keinemusik Radio Show 2026-07-03
+ * Official SoundCloud: https://soundcloud.com/keinemusik/keinemusik-radio-show-by-lazarusman-03072026
+ * https://www.1001tracklists.com/tracklist/fnvhsz9/lazarusman-keinemusik-radio-show-2026-07-03.html
+ * Overlay name TL_Lazarusman_Keinemusik-Radio-Show_2026 is not a valid identifier.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["sc-keinemusik-keinemusik-radio-show-by-lazarusman-03072026"]
+ * Never wire sc-https://….
+ * Operator paste 2026-08-19 — provenance 1001tl.
+ */
+export const TL_LAZARUSMAN_KEINEMUSIK_RADIO_SHOW_2026: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "Stimming & Lazarusman", title: "In You Go" },
+  { at: "17:30", artist: "Paul Harris", title: "Words" },
+  { at: "22:20", artist: "Sascha Cawa & Felix Cage ft. Lazarusman", title: "Mirage" },
+  { at: "30:50", artist: "Lazarusman & Moon's Voyager", title: "Steady" },
+  { at: "48:40", artist: "Langenberg", title: "Times (Manuel Tur Ground Glass Reflex)" },
+  { at: "58:10", artist: "Xinobi & Lazarusman", title: "Breakdown" },
+];

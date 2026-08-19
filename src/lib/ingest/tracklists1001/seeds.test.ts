@@ -148,6 +148,7 @@ import {
   TL_DVLM_SMASH_THE_HOUSE_RADIO_687_2026,
   TL_NOTION_PERRYS_LOLLAPALOOZA_CHICAGO_2026,
   TL_VINTAGE_CULTURE_ULTRA_MIAMI_RESISTANCE_2026,
+  TL_LAZARUSMAN_KEINEMUSIK_RADIO_SHOW_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   tracklist1001RowsToPlays,
@@ -1968,6 +1969,42 @@ for (let i = 1; i < vcUltra.length; i++) {
   );
 }
 assert.equal(isWiredTracklistSlug("yt-xXRjglkAmq8"), true);
+
+assertSeedClocks(TL_LAZARUSMAN_KEINEMUSIK_RADIO_SHOW_2026);
+assert.equal(TL_LAZARUSMAN_KEINEMUSIK_RADIO_SHOW_2026.length, 6);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-keinemusik-keinemusik-radio-show-by-lazarusman-03072026"
+  ],
+  TL_LAZARUSMAN_KEINEMUSIK_RADIO_SHOW_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-https://soundcloud.com/keinemusik/keinemusik-radio-show-by-lazarusman-03072026"
+  ],
+  undefined,
+);
+const kmLazarus = tracklist1001RowsToPlays(
+  TL_LAZARUSMAN_KEINEMUSIK_RADIO_SHOW_2026,
+);
+assert.equal(kmLazarus.length, 6);
+assert.equal(kmLazarus[0]?.provenance, "1001tl");
+assert.equal(kmLazarus[0]?.timestamp, 0);
+assert.equal(kmLazarus[0]?.trackTitle, "In You Go");
+assert.equal(kmLazarus[5]?.trackTitle, "Breakdown");
+assert.equal(kmLazarus[5]?.timestamp, 58 * 60 + 10);
+for (let i = 1; i < kmLazarus.length; i++) {
+  assert.ok(
+    (kmLazarus[i]!.timestamp ?? 0) > (kmLazarus[i - 1]!.timestamp ?? 0),
+    `Lazarusman Keinemusik Radio clocks must increase at index ${i}`,
+  );
+}
+assert.equal(
+  isWiredTracklistSlug(
+    "sc-keinemusik-keinemusik-radio-show-by-lazarusman-03072026",
+  ),
+  true,
+);
 
 assertSeedClocks(TL_NICKY_ROMERO_PROTOCOL_RADIO_731);
 assert.equal(TL_NICKY_ROMERO_PROTOCOL_RADIO_731.length, 16);

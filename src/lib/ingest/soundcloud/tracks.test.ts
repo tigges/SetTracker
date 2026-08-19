@@ -293,6 +293,20 @@ assert.equal(
   "sc-keinemusik-keinemusik-radio-show-by-fifi-07082026",
 );
 
+const lazarusKmSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url ===
+    "https://soundcloud.com/keinemusik/keinemusik-radio-show-by-lazarusman-03072026",
+);
+assert.ok(lazarusKmSc);
+assert.equal(lazarusKmSc.primaryArtist.name, "Lazarusman");
+assert.equal(lazarusKmSc.type, "radio");
+assert.equal(lazarusKmSc.seriesName, "Keinemusik Radio");
+assert.equal(
+  `sc-keinemusik-${slugify("keinemusik-radio-show-by-lazarusman-03072026")}`,
+  "sc-keinemusik-keinemusik-radio-show-by-lazarusman-03072026",
+);
+
 const heldensDaybreakSc = SOUNDCLOUD_TRACK_SEEDS.find(
   (s) =>
     s.url ===
