@@ -129,6 +129,9 @@ const JOHN_SUMMIT_TML_WE2 = YOUTUBE_SETS.find((s) =>
 const BRANDON_PAROOKAVILLE = YOUTUBE_SETS.find((s) =>
   s.video.includes("AQ6wWT2HaSQ"),
 );
+const CUEBRICK_SACRE = YOUTUBE_SETS.find((s) =>
+  s.video.includes("LLJn_gDMG_M"),
+);
 
 describe("watchMetaFromCuratedSeed", () => {
   it("builds ASOT 1290 meta from the curated 1001 capture", () => {
@@ -812,6 +815,17 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=JLIYTueL4TI");
     // Last cue 59:10 + 180s pad.
     assert.equal(meta.durationSec, 59 * 60 + 10 + 180);
+  });
+
+  it("builds Cuebrick Sacré Paris meta from the official @Cuebrick seed", () => {
+    assert.ok(CUEBRICK_SACRE);
+    const meta = watchMetaFromCuratedSeed(CUEBRICK_SACRE);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "LLJn_gDMG_M");
+    assert.match(meta.title, /Sacré Paris/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=LLJn_gDMG_M");
+    // No 1001 cues in the operator paste — default hour pad.
+    assert.equal(meta.durationSec, 60 * 60);
   });
 
   it("returns null without a title or video id", () => {
@@ -1768,5 +1782,19 @@ describe("curated YouTube 429 fallback", () => {
     assert.equal(sets[0]?.primaryArtist?.slug, "brandon");
     assert.match(String(sets[0]?.eventName ?? ""), /Parookaville/i);
     assert.match(String(sets[0]?.title ?? ""), /2024/);
+  });
+
+  it("lands Cuebrick Sacré Paris from the official seed when watch is 429", async () => {
+    assert.ok(CUEBRICK_SACRE);
+    const adapter = createYoutubeAdapter([CUEBRICK_SACRE], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-LLJn_gDMG_M");
+    assert.equal(sets[0]!.type, "mix");
+    assert.equal(sets[0]!.genre, "Techno");
+    assert.equal(sets[0]!.plays.length, 0);
+    assert.equal(sets[0]?.primaryArtist?.slug, "cuebrick");
+    assert.match(String(sets[0]?.eventName ?? ""), /Sacr[eé] Paris/i);
+    assert.match(String(sets[0]?.title ?? ""), /Mainstage Techno/i);
   });
 });

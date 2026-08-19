@@ -2758,10 +2758,12 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     eventName: "Tomorrowland Belgium",
   },
   {
+    // Official @Cuebrick club set. No 1001 URL in the operator paste —
+    // do not invent Sacré cues.
     video: "https://www.youtube.com/watch?v=LLJn_gDMG_M",
     primaryArtist: dj("Cuebrick", { accent: "#8338ec" }),
-    genre: "Big Room",
-    type: "festival",
+    genre: "Techno",
+    type: "mix",
     title: "Cuebrick – Live from Sacré Paris | Mainstage Techno | Club Set",
     eventName: "Sacré Paris",
   },

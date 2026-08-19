@@ -675,6 +675,15 @@ export const KNOWN_HANDLES: Record<string, HandleHint> = {
     genre: "Techno",
     accent: "#ff006e",
   },
+  cuebrick: {
+    youtubeHandle: "@Cuebrick",
+    soundcloudPermalink: "cuebrick",
+    instagram: "https://www.instagram.com/cuebrick_dj/",
+    twitter: "https://x.com/cuebrick_dj",
+    website: "https://www.facebook.com/cuebrick",
+    genre: "Techno",
+    accent: "#8338ec",
+  },
 
   // ---- LLM handle research 2026-08-17 (Gemini + Claude, verify-then-write) ----
   "erick morillo": {
