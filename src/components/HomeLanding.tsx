@@ -36,16 +36,18 @@ function SetgraphStrip({
   counts,
   maxTicks = 40,
   height = 10,
+  className = "",
 }: {
   counts: Partial<Record<IdStatus, number>>;
   maxTicks?: number;
   height?: number;
+  className?: string;
 }) {
   const ticks = setgraphTicks(counts, maxTicks);
   if (ticks.length === 0) return null;
   return (
     <div
-      className="flex w-full overflow-hidden rounded-full bg-linesoft"
+      className={`flex w-full overflow-hidden rounded-full bg-linesoft ${className}`}
       style={{ height }}
       aria-hidden
     >
@@ -266,45 +268,61 @@ export function HomeLanding({
       <section className="relative min-h-[22rem] overflow-hidden rounded-2xl border border-line bg-bg sm:min-h-[28rem]">
         <FaceCollage faces={collage} />
         <div className="hero-scrim absolute inset-0" aria-hidden />
-        <div className="relative z-10 flex min-h-[22rem] flex-col justify-end gap-5 p-6 sm:min-h-[28rem] sm:p-10">
-          <div className="max-w-xl">
-            <BrandLogo className="h-12 w-[8.25rem] sm:h-14 sm:w-[9.6rem]" />
-            <h1 className="hero-title mt-3 text-4xl font-extrabold tracking-tight text-ink sm:text-5xl">
-              The night, as a graph.
-            </h1>
-            <p className="hero-title mt-3 max-w-md text-[15px] leading-relaxed text-muted">
-              Timed tracklists from festivals, clubs, and radio.
-            </p>
-          </div>
-          <div className="flex flex-wrap items-center gap-3">
-            <Link
-              href="/sets"
-              className="inline-flex rounded-full bg-brand px-5 py-2.5 text-[14px] font-semibold text-bg transition-colors hover:bg-brandstrong"
-            >
-              Browse sets
-            </Link>
-            <Link
-              href="/atlas"
-              className="inline-flex rounded-full border border-line px-5 py-2.5 text-[14px] font-semibold text-ink transition-colors hover:border-brand hover:text-brand"
-            >
-              Atlas
-            </Link>
-          </div>
-          {setgraphTicks(graphCounts, 48).length > 0 ? (
-            <div className="max-w-xl space-y-2">
-              <SetgraphStrip counts={graphCounts} maxTicks={48} height={10} />
-              <p className="mono text-[11px] text-muted2">
-                Cue IDs ·{" "}
-                <span className="text-amber">identified</span>
-                {" · "}
-                <span className="text-magenta">unresolved</span>
-                {" · "}
-                <span className="text-teal">community</span>
-                {" · "}
-                <span className="text-grey">unparsed</span>
+        <div className="relative z-10 flex min-h-[22rem] flex-col justify-end p-6 sm:min-h-[28rem] sm:p-10">
+          <div className="hero-copy space-y-5">
+            <div>
+              <BrandLogo className="h-12 w-[8.25rem] sm:h-14 sm:w-[9.6rem]" />
+              <h1 className="hero-title mt-3 text-4xl font-extrabold tracking-tight sm:text-5xl">
+                The night, as a graph.
+              </h1>
+              <p className="hero-lede mt-3 max-w-md text-[15px] leading-relaxed">
+                Timed tracklists from festivals, clubs, and radio.
               </p>
             </div>
-          ) : null}
+            <div className="flex flex-wrap items-center gap-3">
+              <Link
+                href="/sets"
+                className="inline-flex rounded-full bg-brand px-5 py-2.5 text-[14px] font-semibold text-bg transition-colors hover:bg-brandstrong"
+              >
+                Browse sets
+              </Link>
+              <Link
+                href="/atlas"
+                className="inline-flex rounded-full border border-line bg-bg/70 px-5 py-2.5 text-[14px] font-semibold text-ink transition-colors hover:border-brand hover:text-brand"
+              >
+                Atlas
+              </Link>
+            </div>
+            {setgraphTicks(graphCounts, 48).length > 0 ? (
+              <div className="space-y-2.5">
+                <SetgraphStrip
+                  counts={graphCounts}
+                  maxTicks={48}
+                  height={14}
+                  className="hero-setgraph"
+                />
+                <ul className="hero-legend mono">
+                  <li className="hero-legend-chip">Cue IDs</li>
+                  <li className="hero-legend-chip">
+                    <span className="dot bg-amber" />
+                    identified
+                  </li>
+                  <li className="hero-legend-chip">
+                    <span className="dot bg-magenta" />
+                    unresolved
+                  </li>
+                  <li className="hero-legend-chip">
+                    <span className="dot bg-teal" />
+                    community
+                  </li>
+                  <li className="hero-legend-chip">
+                    <span className="dot bg-grey" />
+                    unparsed
+                  </li>
+                </ul>
+              </div>
+            ) : null}
+          </div>
         </div>
       </section>
 
