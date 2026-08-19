@@ -18,6 +18,7 @@ const HUB_HOSTS = new Set([
   "beacons.ai",
   "linkin.bio",
   "carrd.co",
+  "solo.to",
 ]);
 
 const TARGET_HOST_RE =

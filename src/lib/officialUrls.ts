@@ -1,7 +1,8 @@
 /**
  * Official website vs listicle / encyclopedia / ticket pages.
- * DJ Mag is a rank list, never a homepage. RA / DICE / Shotgun / JamBase
- * / Eventpop are discovery or tickets — not the venue or DJ site.
+ * DJ Mag is a rank list, never a homepage. RA (ra.co) is a good discovery
+ * seed (tours / official outbound) but DataDome often 403s — never store
+ * ra.co as website. DICE / Shotgun / JamBase / Eventpop are tickets.
  * Follow a JamBase URL already in hand; do not crawl jambase.com.
  */
 

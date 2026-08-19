@@ -474,6 +474,8 @@ export const KNOWN_HANDLES: Record<string, HandleHint> = {
   korolova: {
     youtubeHandle: "@KOROLOVADJ",
     soundcloudPermalink: "korolovadj",
+    instagram: "https://www.instagram.com/korolova.dj/",
+    website: "https://solo.to/korolova.dj",
     genre: "Melodic Techno",
     accent: "#f72585",
   },

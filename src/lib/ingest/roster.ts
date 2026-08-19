@@ -1322,9 +1322,13 @@ export const ARTIST_ROSTER_CURATED: ArtistRosterEntry[] = [
       userId: 264150016,
       status: "ok",
     },
+    website: "https://solo.to/korolova.dj",
     socials: [
       "https://www.youtube.com/@KOROLOVADJ",
       "https://soundcloud.com/korolovadj",
+      "https://www.instagram.com/korolova.dj/",
+      "https://solo.to/korolova.dj",
+      "https://open.spotify.com/artist/0I6oCyQQ1Q50q97y9B9gAx",
     ],
     priority: "high",
   },

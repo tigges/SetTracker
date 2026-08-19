@@ -58,6 +58,7 @@ const HUB_HOSTS = new Set([
   "beacons.ai",
   "bio.site",
   "carrd.co",
+  "solo.to",
 ]);
 
 /** Platforms already mapped to dedicated columns — never put these in Web. */
