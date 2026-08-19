@@ -86,6 +86,7 @@ async function readCsvAudit(path: string): Promise<AuditRow[]> {
   return table.slice(1).map((cols) => {
     const rec: Record<string, string> = {};
     for (let i = 0; i < header.length; i++) rec[header[i]!] = (cols[i] ?? "").trim();
+    rec.source = (rec.source || rec.idSource || "").trim();
     return rec as unknown as AuditRow;
   });
 }
@@ -191,17 +192,8 @@ async function probeBeatport(url: string): Promise<{
     });
     return { url, status: res.status, finalUrl: res.url };
   } catch {
-    try {
-      const res = await fetch(url, {
-        method: "GET",
-        redirect: "follow",
-        headers: { "User-Agent": UA, Accept: "text/html" },
-        signal: AbortSignal.timeout(10_000),
-      });
-      return { url, status: res.status, finalUrl: res.url };
-    } catch {
-      return { url, status: null, finalUrl: null };
-    }
+    // HEAD only — a GET would fetch Beatport HTML and trip Cloudflare.
+    return { url, status: null, finalUrl: null };
   }
 }
 
@@ -328,9 +320,11 @@ async function main() {
   };
   const reportName = csvPath.includes("jsonl-4")
     ? "track-id-jsonl-4-confirm.json"
-    : csvPath.endsWith(".jsonl")
-      ? "track-id-jsonl-confirm.json"
-      : "track-id-audit-confirm.json";
+    : csvPath.includes("completed")
+      ? "track-id-completed-confirm.json"
+      : csvPath.endsWith(".jsonl")
+        ? "track-id-jsonl-confirm.json"
+        : "track-id-audit-confirm.json";
   await writeFile(
     join(process.cwd(), "data/crosscheck", reportName),
     `${JSON.stringify(report, null, 2)}\n`,

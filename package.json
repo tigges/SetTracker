@@ -1,6 +1,6 @@
 {
   "name": "setradar",
-  "version": "0.2.202",
+  "version": "0.2.203",
   "private": true,
   "prisma": {
     "seed": "tsx prisma/seed.ts"
@@ -41,6 +41,7 @@
     "research": "tsx scripts/research-dj-handles.ts",
     "research:handles": "tsx scripts/research-dj-handles.ts",
     "research:track-ids": "tsx scripts/research-track-ids.ts",
+    "probe:beatport-heads": "tsx scripts/probe-beatport-heads.ts",
     "build:next-captures": "tsx scripts/build-next-captures.ts",
     "watch:held-relives": "tsx scripts/watch-held-relives.ts",
     "preview:acr-queue": "tsx scripts/preview-acr-queue.ts",

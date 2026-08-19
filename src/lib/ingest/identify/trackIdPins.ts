@@ -58,6 +58,9 @@ export function isJunkTrackPin(row: {
   const artist = (row.artist ?? "").trim();
   const title = (row.title ?? "").trim();
   if (!slug || JUNK_SLUG.test(slug)) return true;
+  // Hearthis-style cue sheet dumped as one Track.slug (00-00-05-30-…09-30-…).
+  const cueBlocks = slug.match(/\d{1,2}-\d{2}-\d{1,2}-\d{2}/g) ?? [];
+  if (cueBlocks.length >= 2) return true;
   if (/^youtube$/i.test(artist)) return true;
   if (/^id$/i.test(title)) return true;
   if (JUNK_TITLE.test(`${artist} ${title}`)) return true;

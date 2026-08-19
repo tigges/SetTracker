@@ -1,0 +1,77 @@
+{
+  "generatedAt": "2026-08-19T05:20:45.396Z",
+  "mode": "HEAD-only",
+  "sinceRef": "origin/main",
+  "probed": 216,
+  "skipped": 0,
+  "live": 216,
+  "dead": 0,
+  "soft": 0,
+  "unknown": 0,
+  "wallAbort": false,
+  "dropped": [],
+  "softUrls": [],
+  "sample": [
+    {
+      "url": "https://www.beatport.com/track/forgotten-empress/29377357",
+      "status": 200,
+      "kind": "live"
+    },
+    {
+      "url": "https://www.beatport.com/track/atlas/14459715",
+      "status": 200,
+      "kind": "live"
+    },
+    {
+      "url": "https://www.beatport.com/track/keimara/29508844",
+      "status": 200,
+      "kind": "live"
+    },
+    {
+      "url": "https://www.beatport.com/track/sunshine-i-can-fly/29993083",
+      "status": 200,
+      "kind": "live"
+    },
+    {
+      "url": "https://www.beatport.com/track/raging-bull/5580251",
+      "status": 200,
+      "kind": "live"
+    },
+    {
+      "url": "https://www.beatport.com/track/antonio/10285976",
+      "status": 200,
+      "kind": "live"
+    },
+    {
+      "url": "https://www.beatport.com/track/culture-bandit/18322753",
+      "status": 200,
+      "kind": "live"
+    },
+    {
+      "url": "https://www.beatport.com/track/known-universe/29184161",
+      "status": 200,
+      "kind": "live"
+    },
+    {
+      "url": "https://www.beatport.com/track/flotsam/28719743",
+      "status": 200,
+      "kind": "live"
+    },
+    {
+      "url": "https://www.beatport.com/track/water/18383632",
+      "status": 200,
+      "kind": "live"
+    },
+    {
+      "url": "https://www.beatport.com/track/you-can-t-hide-from-yourself/16027751",
+      "status": 200,
+      "kind": "live"
+    },
+    {
+      "url": "https://www.beatport.com/track/naco/29482810",
+      "status": 200,
+      "kind": "live"
+    }
+  ],
+  "note": "Canonical /track/{slug}/{id} from producer input. HEAD only — Beatport HTML is never fetched. 404 drops the URL (ISRC kept). 403/429 is Cloudflare, not a dead page."
+}
