@@ -969,7 +969,7 @@ export async function fetchChannelVideoIdsDeep(
 }
 
 const SOCIAL_HOST_RE =
-  "soundcloud\\.com|instagram\\.com|x\\.com|twitter\\.com|tiktok\\.com|facebook\\.com|fb\\.com|linktr\\.ee|hoo\\.be|lnk\\.to|fanlink\\.tv|ffm\\.to|open\\.spotify\\.com|music\\.apple\\.com|beatport\\.com|youtube\\.com|youtu\\.be";
+  "soundcloud\\.com|instagram\\.com|x\\.com|twitter\\.com|tiktok\\.com|facebook\\.com|fb\\.com|linktr\\.ee|solo\\.to|hoo\\.be|lnk\\.to|fanlink\\.tv|ffm\\.to|open\\.spotify\\.com|music\\.apple\\.com|beatport\\.com|youtube\\.com|youtu\\.be";
 
 /**
  * Extract social / hub URLs from free text (video description "Connect with…"

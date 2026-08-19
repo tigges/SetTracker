@@ -260,7 +260,7 @@ export default async function StatsPage() {
         <QueueFold
           title="Weak chart websites"
           count={health.playbook.weakSites.length}
-          hint="Official www only. DJ Mag, 6am, Wikipedia, RA, DICE, and Shotgun are not the homepage."
+          hint="Official www only. DJ Mag, 6am, Wikipedia, RA, DICE, and Shotgun are not the homepage. RA is a tour/profile seed — do not pin ra.co."
         >
           <WeakSiteQueue rows={health.playbook.weakSites} />
         </QueueFold>

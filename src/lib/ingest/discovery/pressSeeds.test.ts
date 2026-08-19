@@ -16,4 +16,11 @@ const guetta = PRESS_SEEDS.find((s) =>
 );
 assert.ok(guetta);
 
+const korolova = PRESS_SEEDS.find((s) =>
+  s.artists.some((a) => /korolova/i.test(a)),
+);
+assert.ok(korolova);
+assert.match(korolova!.url, /ra\.co\/dj\/korolova/);
+assert.equal(korolova!.skipFetch, true);
+
 console.log("pressSeeds.test.ts ok");

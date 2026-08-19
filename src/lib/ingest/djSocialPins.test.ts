@@ -311,5 +311,8 @@ assert.equal(hintForName("INNELLEA")?.instagram, undefined);
 assert.equal(hintForName("Cole Terrazas")?.soundcloudPermalink, "coleterrazas");
 assert.equal(hintForName("Mila Alias")?.youtubeHandle, "@Mila_Alias");
 assert.equal(hintForName("Mila Alias")?.soundcloudPermalink, "djmilaalias");
+assert.match(bySlug["korolova"]!.website, /solo\.to\/korolova\.dj/);
+assert.match(bySlug["korolova"]!.beatport!, /beatport\.com\/artist\/korolova\/956858/);
+assert.equal(hintForName("Korolova")?.website, "https://solo.to/korolova.dj");
 
 console.log("djSocialPins.test.ts ok");

@@ -1169,8 +1169,9 @@ export const DJ_SOCIAL_PINS: DjSocialPin[] = [
     soundcloud: "https://soundcloud.com/korolovadj",
     youtube: "https://www.youtube.com/@KOROLOVADJ",
     instagram: "https://www.instagram.com/korolova.dj/",
-    website: "https://djmag.com/top100djs/2025/50/korolova",
-    bio: "Melodic Techno. SC korolovadj, YT @KOROLOVADJ, IG @korolova.dj.",
+    website: "https://solo.to/korolova.dj",
+    beatport: "https://www.beatport.com/artist/korolova/956858",
+    bio: "Melodic Techno. Official solo.to/korolova.dj — SC korolovadj, YT @KOROLOVADJ, IG @korolova.dj. Beatport artist/korolova/956858.",
   },
   {
     slug: "kolsch",

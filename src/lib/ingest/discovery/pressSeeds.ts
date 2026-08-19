@@ -122,4 +122,12 @@ export const PRESS_SEEDS: PressSeed[] = [
     skipFetch: true,
     kind: "tour",
   },
+  {
+    url: "https://ra.co/dj/korolova",
+    title: "Korolova RA profile",
+    artists: ["Korolova"],
+    weight: 32,
+    skipFetch: true,
+    kind: "tour",
+  },
 ];
