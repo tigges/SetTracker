@@ -787,3 +787,14 @@ export const TL_CHRIS_STUSSY_BOILER_ROOM_EDINBURGH_2024: FingerprintSeedRow[] =
     { at: "59:30", artist: "Chris Stussy", title: "Bounce To The Beat" },
     { at: "1:11:49", artist: "Todd Terry ft. Martha Wash & Jocelyn Brown", title: "Something Going On (Acappella)" },
   ];
+
+/**
+ * Tini Gessler @ ANTS, Ushuaïa Ibiza, Spain 2026-07-04
+ * Official SoundCloud: https://soundcloud.com/tini-gessler/tini-gessler-ants-x-ushuaia
+ * https://www.1001tracklists.com/tracklist/108xuk31/tini-gessler-ants-ushuaia-ibiza-spain-2026-07-04.html
+ * Operator sent the 1001 URL + untimed screenshots — do not scrape 1001 or
+ * invent TL_TINI_GESSLER_ANTS_USHUAIA_IBIZA_2026 clocks. Official SC is
+ * sc-tini-gessler-tini-gessler-ants-x-ushuaia (never sc-https://…).
+ * Distinct from HoneyLuv ANTS yt-sLtNC21myWM. Paste timed 1001 cues to wire
+ * TRACKLIST_1001_BY_SOURCE_SLUG["sc-tini-gessler-tini-gessler-ants-x-ushuaia"].
+ */
