@@ -236,6 +236,9 @@ export async function searchTrackRadar(
     if (parsed && evaluateTrackRadarHit(artist, title, parsed).ok) return parsed;
   }
   if (process.env.TRACKRADAR === "0") return null;
+  // Public archive is a full download of published sets — skip on CI enrich
+  // and when we only need a Beatport url-rel (TRACKRADAR_ARCHIVE=0).
+  if (process.env.TRACKRADAR_ARCHIVE === "0") return null;
   const index = await loadPublishedTrackIndex();
   return matchPublishedTrack(artist, title, index);
 }

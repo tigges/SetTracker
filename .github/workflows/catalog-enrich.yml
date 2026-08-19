@@ -219,6 +219,7 @@ jobs:
           TRACK_ID_LIMIT: ${{ steps.mode.outputs.track_id_limit }}
           TRACK_ID_HELD_LIMIT: "8"
           TRACK_ID_DELAY_MS: "0"
+          TRACKRADAR_ARCHIVE: "0"
         run: npm run research:track-ids
         continue-on-error: true
 

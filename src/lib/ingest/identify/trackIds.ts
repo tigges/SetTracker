@@ -362,7 +362,11 @@ export async function identifySeedRow(
 
   const runDeezer = plan.useDeezer;
   const runAudd = Boolean(opts.audd) && plan.useAudd;
-  const runTr = Boolean(opts.trackradar);
+  // Have-ISRC rows only hit TrackRadar when MCP is keyed — the public
+  // archive download does not yield Beatport /track url-rels.
+  const runTr =
+    Boolean(opts.trackradar) &&
+    (plan.needIsrc || Boolean(process.env.TRACKRADAR_API_KEY || process.env.TRACKRADAR_KEY));
 
   const [deezerHit, trHit, auddHit] = await Promise.all([
     runDeezer
