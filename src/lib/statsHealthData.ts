@@ -8,7 +8,6 @@ import {
   rowFromEvent,
 } from "@/lib/exportEntities";
 import { resolveFeedRanks } from "@/lib/feedPriorityResolve";
-import { VENUE_CALENDAR_SOURCES } from "@/lib/ingest/discovery/venueCalendars/sources";
 import { STATUS_META, STATUS_ORDER, type IdStatus } from "@/lib/status";
 import { isVenueListed } from "@/lib/venueBrowse";
 import {
@@ -20,13 +19,10 @@ import {
   type PlaceHealthInput,
 } from "@/lib/statsHealth";
 import {
-  buildPlaybookItems,
   isWeakOrEmptyWebsite,
   leftoverHostInCatalog,
-  leftoverHostOnQueue,
   weakChartWebsite,
   type PlaybookHost,
-  type PlaybookItem,
   type PlaybookPlace,
 } from "@/lib/statsPlaybook";
 
@@ -81,8 +77,6 @@ export type StatsHealth = {
     actions: HealthAction[];
   };
   playbook: {
-    catalogNote: string;
-    items: PlaybookItem[];
     leftoverHosts: PlaybookHost[];
     weakSites: PlaybookPlace[];
   };
@@ -293,7 +287,6 @@ export async function getStatsHealth(): Promise<StatsHealth> {
     }))
     .sort((a, b) => b.setCount - a.setCount || a.name.localeCompare(b.name));
 
-  const calendarSlugs = new Set(VENUE_CALENDAR_SOURCES.map((s) => s.venueSlug));
   const eventBySlug = new Map(events.map((e) => [e.slug, e]));
   const weakBySlug = new Map<string, PlaybookPlace>();
   for (const e of events) {
@@ -327,25 +320,6 @@ export async function getStatsHealth(): Promise<StatsHealth> {
       Number(b.onChart) - Number(a.onChart) || a.name.localeCompare(b.name),
   );
 
-  const chartClubsNoCalendar = loadAtlasVenues().filter(
-    (v) => v.kind === "club" && !calendarSlugs.has(v.slug),
-  ).length;
-
-  const handlesAfterHosts = djs.filter(
-    (d) =>
-      isDjOnHealthBar(d) &&
-      !d.hasHandle &&
-      !leftoverHostOnQueue({
-        name: d.name,
-        hasHandle: d.hasHandle,
-        setCount: d.setCount,
-        isJunk: d.isJunk,
-        isLowSignal: d.isLowSignal,
-      }),
-  ).length;
-
-  const thinStar = setBar.slices.find((s) => s.key === "thin")?.star ?? 0;
-  const starIdGaps = thinStar + identifiedStarGap;
   const tracksNeedIsrc = Math.max(0, trackTotal - tracksWithIsrc);
 
   return {
@@ -451,16 +425,6 @@ export async function getStatsHealth(): Promise<StatsHealth> {
       ].filter((a) => a.count > 0),
     },
     playbook: {
-      catalogNote:
-        "This export is the last Pages ship, not a live crawl. ★ is the current Top 100 rank list — never a homepage.",
-      items: buildPlaybookItems({
-        leftoverHosts: leftoverHosts.length,
-        tracksNeedIsrc,
-        weakChartSites: weakSites.length,
-        chartClubsNoCalendar,
-        starIdGaps,
-        handlesAfterHosts,
-      }),
       leftoverHosts,
       weakSites,
     },

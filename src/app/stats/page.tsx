@@ -4,7 +4,6 @@ import Link from "next/link";
 import { SetEntryLink } from "@/components/SetEntryLink";
 import {
   LeftoverHostQueue,
-  StatsPlaybook,
   WeakSiteQueue,
 } from "@/components/StatsPlaybook";
 import { StatsHealthCard, StatsMeter } from "@/components/StatsHealthCard";
@@ -31,11 +30,11 @@ function MoreFold({
 }) {
   if (restCount <= 0) return null;
   return (
-    <details className="mt-2">
+    <details className="mt-1">
       <summary className="cursor-pointer text-[12px] text-muted hover:text-ink">
         {restCount} more
       </summary>
-      <div className="mt-1">{children}</div>
+      <div className="mt-0.5">{children}</div>
     </details>
   );
 }
@@ -52,17 +51,17 @@ function QueueFold({
   children: ReactNode;
 }) {
   return (
-    <details className="mb-3 rounded-lg border border-line bg-panel px-3 py-2">
+    <details className="mb-2 rounded-lg border border-line bg-panel px-2.5 py-1.5">
       <summary className="cursor-pointer list-none [&::-webkit-details-marker]:hidden">
         <div className="flex items-baseline justify-between gap-3">
-          <h2 className="text-[15px] font-bold tracking-tight">{title}</h2>
-          <span className="mono text-[12px] text-muted2">
+          <h2 className="text-[14px] font-bold tracking-tight">{title}</h2>
+          <span className="mono text-[11px] text-muted2">
             {count.toLocaleString()}
           </span>
         </div>
-        <p className="mt-0.5 text-[12px] text-muted2">{hint}</p>
+        <p className="mt-0.5 text-[11px] text-muted2">{hint}</p>
       </summary>
-      <div className="mt-3">{children}</div>
+      <div className="mt-2">{children}</div>
     </details>
   );
 }
@@ -120,7 +119,7 @@ function PlaceGapQueue({
       {items.map((row) => (
         <li
           key={row.slug}
-          className="flex items-baseline justify-between gap-2 py-1.5"
+          className="flex items-baseline justify-between gap-2 py-1"
         >
           <Link
             href={`/events/${row.slug}`}
@@ -160,13 +159,13 @@ export default async function StatsPage() {
 
   return (
     <div>
-      <div className="mb-6">
+      <div className="mb-3">
         <p className="eyebrow">Operator</p>
-        <h1 className="mt-1 text-2xl font-extrabold tracking-tight">
+        <h1 className="mt-0.5 text-xl font-extrabold tracking-tight">
           Catalog health
         </h1>
-        <p className="mono mt-1 text-[12px] text-amber">{health.chartNote}</p>
-        <p className="mono mt-1 text-[11px] text-muted2">
+        <p className="mono mt-0.5 text-[11px] text-amber">{health.chartNote}</p>
+        <p className="mono text-[11px] text-muted2">
           This export
           {process.env.NEXT_PUBLIC_APP_VERSION
             ? ` · v${process.env.NEXT_PUBLIC_APP_VERSION}`
@@ -174,11 +173,6 @@ export default async function StatsPage() {
           {" · last ship, not a live crawl"}
         </p>
       </div>
-
-      <StatsPlaybook
-        catalogNote={health.playbook.catalogNote}
-        items={health.playbook.items}
-      />
 
       <StatsHealthCard
         id="djs"
@@ -236,7 +230,7 @@ export default async function StatsPage() {
               : undefined
           }
         />
-        <p className="mt-3 text-[12px] text-muted2">
+        <p className="mt-2 text-[11px] text-muted2">
           No playback has no button — wait for an official full-set upload.
         </p>
       </StatsHealthCard>
@@ -249,7 +243,7 @@ export default async function StatsPage() {
         actions={health.tracks.actions}
       />
 
-      <p className="mb-4 mt-8 text-[13px] font-semibold uppercase tracking-[0.14em] text-muted">
+      <p className="mb-2 mt-5 text-[12px] font-semibold uppercase tracking-[0.14em] text-muted">
         Queues
       </p>
 
@@ -323,7 +317,7 @@ export default async function StatsPage() {
         >
           <ul className="divide-y divide-line border-y border-line">
             {s.tracklistGaps.slice(0, PREVIEW).map((row) => (
-              <li key={row.slug} className="py-1.5">
+              <li key={row.slug} className="py-1">
                 {row.hasSetPage ? (
                   <SetEntryLink
                     href={`/sets/${row.slug}`}
@@ -346,7 +340,7 @@ export default async function StatsPage() {
           <MoreFold restCount={Math.max(0, s.tracklistGaps.length - PREVIEW)}>
             <ul className="divide-y divide-line border-y border-line">
               {s.tracklistGaps.slice(PREVIEW).map((row) => (
-                <li key={row.slug} className="py-1.5">
+                <li key={row.slug} className="py-1">
                   <span className="text-[13px] font-semibold text-ink">
                     {row.title}
                   </span>
@@ -364,7 +358,7 @@ export default async function StatsPage() {
         >
           <ul className="divide-y divide-line border-y border-line">
             {s.needsIdsSets.slice(0, PREVIEW).map((row) => (
-              <li key={row.slug} className="py-1.5">
+              <li key={row.slug} className="py-1">
                 <SetEntryLink
                   href={`/sets/${row.slug}`}
                   label="Stats"
