@@ -1,7 +1,6 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import {
-  buildPlaybookItems,
   isWeakOrEmptyWebsite,
   leftoverHostInCatalog,
   leftoverHostOnQueue,
@@ -88,23 +87,5 @@ describe("statsPlaybook", () => {
       weakChartWebsite({ onChart: false, website: null }),
       false,
     );
-  });
-
-  it("orders the seven operator steps", () => {
-    const items = buildPlaybookItems({
-      leftoverHosts: 4,
-      tracksNeedIsrc: 17000,
-      weakChartSites: 78,
-      chartClubsNoCalendar: 88,
-      starIdGaps: 120,
-      handlesAfterHosts: 0,
-    });
-    assert.deepEqual(
-      items.map((i) => i.step),
-      [1, 2, 3, 4, 5, 6, 7],
-    );
-    assert.equal(items[0]?.count, 4);
-    assert.equal(items[5]?.count, 0);
-    assert.equal(items[1]?.href, "/exports/tracks-need-id.csv");
   });
 });

@@ -6,7 +6,7 @@ import type { CueMixRow, HealthAction } from "@/lib/statsHealthData";
 function StackedBar({ slices, total }: { slices: HealthSlice[] | CueMixRow[]; total: number }) {
   const n = total > 0 ? total : slices.reduce((s, x) => s + x.count, 0);
   return (
-    <div className="flex h-5 w-full overflow-hidden rounded-full bg-linesoft">
+    <div className="flex h-3.5 w-full overflow-hidden rounded-full bg-linesoft">
       {slices.map((slice) => {
         if (slice.count <= 0) return null;
         const width = n > 0 ? slicePct(slice.count, n) : 0;
@@ -25,15 +25,15 @@ function StackedBar({ slices, total }: { slices: HealthSlice[] | CueMixRow[]; to
 
 function SliceLegend({ slices }: { slices: HealthSlice[] }) {
   return (
-    <div className="mt-3 flex flex-wrap gap-x-5 gap-y-1.5">
+    <div className="mt-1.5 flex flex-wrap gap-x-3 gap-y-0.5">
       {slices.map((s) => (
-        <div key={s.key} className="flex items-baseline gap-2">
+        <div key={s.key} className="flex items-baseline gap-1.5">
           <span
-            className="mt-[3px] inline-block h-2.5 w-2.5 shrink-0 rounded-sm"
+            className="mt-[3px] inline-block h-2 w-2 shrink-0 rounded-sm"
             style={{ background: s.color }}
           />
-          <span className="text-[13px] text-muted">{s.label}</span>
-          <span className="mono text-[13px] font-semibold tabular-nums text-ink">
+          <span className="text-[12px] text-muted">{s.label}</span>
+          <span className="mono text-[12px] font-semibold tabular-nums text-ink">
             {s.count.toLocaleString()}
           </span>
         </div>
@@ -57,19 +57,19 @@ function StarLine({
   ].filter(Boolean);
   if (bits.length === 0) return null;
   return (
-    <p className="mono mt-3 text-[12px] text-amber">{bits.join("   ·   ")}</p>
+    <p className="mono mt-1.5 text-[11px] text-amber">{bits.join("   ·   ")}</p>
   );
 }
 
 function Actions({ actions }: { actions: HealthAction[] }) {
   if (actions.length === 0) return null;
   return (
-    <div className="mt-4 flex flex-wrap gap-2">
+    <div className="mt-2 flex flex-wrap gap-1.5">
       {actions.map((a) => (
         <Link
           key={a.href + a.label}
           href={a.href}
-          className="rounded-lg border border-brand/40 bg-brand/10 px-3 py-1.5 text-[13px] font-semibold text-brandstrong transition-colors hover:border-brand hover:bg-brand/20"
+          className="rounded-md border border-brand/40 bg-brand/10 px-2 py-1 text-[12px] font-semibold text-brandstrong transition-colors hover:border-brand hover:bg-brand/20"
         >
           {a.label} ({a.count.toLocaleString()})
         </Link>
@@ -98,15 +98,15 @@ export function StatsHealthCard({
   children?: ReactNode;
 }) {
   return (
-    <section id={id} className="card mb-4 scroll-mt-24 p-5">
-      <div className="mb-4 flex items-end justify-between gap-4">
+    <section id={id} className="card mb-2.5 scroll-mt-20 p-3">
+      <div className="mb-2 flex items-end justify-between gap-3">
         <div>
-          <h2 className="text-[15px] font-bold tracking-tight">{noun}</h2>
+          <h2 className="text-[14px] font-bold tracking-tight">{noun}</h2>
           {hint ? (
-            <p className="mt-0.5 text-[12px] text-muted2">{hint}</p>
+            <p className="mt-0.5 text-[11px] text-muted2">{hint}</p>
           ) : null}
         </div>
-        <p className="mono text-3xl font-extrabold tabular-nums leading-none tracking-tight">
+        <p className="mono text-2xl font-extrabold tabular-nums leading-none tracking-tight">
           {total.toLocaleString()}
         </p>
       </div>
@@ -131,8 +131,8 @@ export function StatsMeter({
   starNote?: string;
 }) {
   return (
-    <div className="mt-5">
-      <div className="mb-2 flex items-baseline justify-between gap-3">
+    <div className="mt-3">
+      <div className="mb-1 flex items-baseline justify-between gap-3">
         <h3 className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">
           {label}
         </h3>

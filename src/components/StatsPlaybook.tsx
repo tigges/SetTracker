@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
-import type { PlaybookHost, PlaybookItem, PlaybookPlace } from "@/lib/statsPlaybook";
+import type { PlaybookHost, PlaybookPlace } from "@/lib/statsPlaybook";
 
 const PREVIEW = 8;
 
@@ -13,57 +13,12 @@ function MoreFold({
 }) {
   if (restCount <= 0) return null;
   return (
-    <details className="mt-2">
+    <details className="mt-1">
       <summary className="cursor-pointer text-[12px] text-muted hover:text-ink">
         {restCount} more
       </summary>
-      <div className="mt-1">{children}</div>
+      <div className="mt-0.5">{children}</div>
     </details>
-  );
-}
-
-export function StatsPlaybook({
-  catalogNote,
-  items,
-}: {
-  catalogNote: string;
-  items: PlaybookItem[];
-}) {
-  return (
-    <section id="playbook" className="card mb-6 scroll-mt-24 p-5">
-      <div className="mb-3">
-        <p className="eyebrow">Playbook</p>
-        <h2 className="mt-1 text-[15px] font-bold tracking-tight">
-          Grow IDs and first-party URLs
-        </h2>
-        <p className="mt-1 text-[12px] text-muted2">{catalogNote}</p>
-        <p className="mt-1 text-[12px] text-muted2">
-          Verify-then-write. Machine first, Claude last. Never invent ISRCs or
-          scrape Beatport.
-        </p>
-      </div>
-      <ol className="divide-y divide-line border-y border-line">
-        {items.map((item) => (
-          <li key={item.id} className="flex items-baseline justify-between gap-3 py-2">
-            <div className="min-w-0">
-              <p className="text-[13px] font-semibold text-ink">
-                <span className="mono mr-2 text-[11px] text-muted2">
-                  {item.step}
-                </span>
-                {item.title}
-              </p>
-              <p className="mt-0.5 text-[12px] text-muted2">{item.hint}</p>
-            </div>
-            <Link
-              href={item.href}
-              className="mono shrink-0 text-[12px] font-semibold text-brand hover:underline"
-            >
-              {item.count.toLocaleString()}
-            </Link>
-          </li>
-        ))}
-      </ol>
-    </section>
   );
 }
 
@@ -112,7 +67,7 @@ export function WeakSiteQueue({ rows }: { rows: PlaybookPlace[] }) {
       {items.map((row) => (
         <li
           key={`${row.kind}-${row.slug}`}
-          className="flex items-baseline justify-between gap-2 py-1.5"
+          className="flex items-baseline justify-between gap-2 py-1"
         >
           <Link
             href={`/events/${row.slug}`}
