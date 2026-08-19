@@ -211,6 +211,8 @@ export function isJunkArtistName(name: string): boolean {
   }
   // Tiny event / publisher accounts mistaken for DJs (not a catalog Event).
   if (/soweto\s*punk/i.test(n)) return true;
+  // Set / film leftovers mistaken for DJs ("Behind Cercle…", "Live in …")
+  if (isLeftoverHostName(n)) return true;
   // Festival stages mistaken for artists ("Freedom Stage", "Mainstage")
   if (/\bstages?\s*$/i.test(n) || /^main\s*stage$/i.test(n)) return true;
   // Set-title crumbs: "OMNOM EDC Las Vegas 2024", "Artist Tomorrowland 2026"
@@ -274,6 +276,19 @@ export function sanitizeArtistName(raw: string): string | null {
   if (/https?:|www\.|@|^\d+$/.test(n)) return null;
   if (isJunkArtistName(n)) return null;
   return n;
+}
+
+/**
+ * Set / film / event leftovers still sitting on the DJ handle queue
+ * ("Behind Cercle Odyssey…", "Live in Buenos Aires", "Rave Ukraine").
+ */
+export function isLeftoverHostName(name: string): boolean {
+  const n = name.replace(/\s+/g, " ").trim();
+  if (!n) return false;
+  if (/^behind\b/i.test(n)) return true;
+  if (/^live\s+in\b/i.test(n)) return true;
+  if (/^rave\s+ukraine\b/i.test(n)) return true;
+  return false;
 }
 
 /** Festival stage mistaken for a person ("Freedom Stage", "Mainstage"). */

@@ -8,6 +8,7 @@ import {
   rowFromEvent,
 } from "@/lib/exportEntities";
 import { resolveFeedRanks } from "@/lib/feedPriorityResolve";
+import { VENUE_CALENDAR_SOURCES } from "@/lib/ingest/discovery/venueCalendars/sources";
 import { STATUS_META, STATUS_ORDER, type IdStatus } from "@/lib/status";
 import { isVenueListed } from "@/lib/venueBrowse";
 import {
@@ -18,6 +19,15 @@ import {
   type HealthSlice,
   type PlaceHealthInput,
 } from "@/lib/statsHealth";
+import {
+  buildPlaybookItems,
+  leftoverHostInCatalog,
+  leftoverHostOnQueue,
+  weakChartWebsite,
+  type PlaybookHost,
+  type PlaybookItem,
+  type PlaybookPlace,
+} from "@/lib/statsPlaybook";
 
 export type HealthAction = {
   href: string;
@@ -68,6 +78,12 @@ export type StatsHealth = {
     total: number;
     slices: HealthSlice[];
     actions: HealthAction[];
+  };
+  playbook: {
+    catalogNote: string;
+    items: PlaybookItem[];
+    leftoverHosts: PlaybookHost[];
+    weakSites: PlaybookPlace[];
   };
 };
 
@@ -266,6 +282,67 @@ export async function getStatsHealth(): Promise<StatsHealth> {
   const unresolved =
     (statusMap.get("unresolved_id") ?? 0) + (statusMap.get("unparsed") ?? 0);
 
+  const leftoverHosts: PlaybookHost[] = djs
+    .filter((d) => leftoverHostInCatalog(d))
+    .map((d) => ({
+      slug: d.slug,
+      name: d.name,
+      setCount: d.setCount,
+      playCount: d.playCount,
+    }))
+    .sort((a, b) => b.setCount - a.setCount || a.name.localeCompare(b.name));
+
+  const calendarSlugs = new Set(VENUE_CALENDAR_SOURCES.map((s) => s.venueSlug));
+  const weakSites: PlaybookPlace[] = events
+    .map((e) => {
+      if (e.kind !== "festival" && e.kind !== "club") return null;
+      const onChart = atlasSlugs.includes(e.slug);
+      if (
+        !weakChartWebsite({
+          onChart,
+          website: e.website,
+        })
+      ) {
+        return null;
+      }
+      return {
+        slug: e.slug,
+        name: e.name,
+        kind: e.kind,
+        website: e.website,
+        onChart,
+      };
+    })
+    .filter((row): row is PlaybookPlace => row != null)
+    .sort(
+      (a, b) =>
+        Number(b.onChart) - Number(a.onChart) || a.name.localeCompare(b.name),
+    );
+
+  const chartClubsNoCalendar = events.filter(
+    (e) =>
+      e.kind === "club" &&
+      atlasSlugs.includes(e.slug) &&
+      !calendarSlugs.has(e.slug),
+  ).length;
+
+  const handlesAfterHosts = djs.filter(
+    (d) =>
+      isDjOnHealthBar(d) &&
+      !d.hasHandle &&
+      !leftoverHostOnQueue({
+        name: d.name,
+        hasHandle: d.hasHandle,
+        setCount: d.setCount,
+        isJunk: d.isJunk,
+        isLowSignal: d.isLowSignal,
+      }),
+  ).length;
+
+  const thinStar = setBar.slices.find((s) => s.key === "thin")?.star ?? 0;
+  const starIdGaps = thinStar + identifiedStarGap;
+  const tracksNeedIsrc = Math.max(0, trackTotal - tracksWithIsrc);
+
   return {
     chartNote: `★ current Top 100 · DJs ${ATLAS_DJ_YEAR} · clubs / fests ${ATLAS_YEAR}`,
     djs: {
@@ -364,9 +441,23 @@ export async function getStatsHealth(): Promise<StatsHealth> {
         {
           href: "/exports/tracks-need-id.csv",
           label: "Export for Claude ID",
-          count: Math.max(0, trackTotal - tracksWithIsrc),
+          count: tracksNeedIsrc,
         },
       ].filter((a) => a.count > 0),
+    },
+    playbook: {
+      catalogNote:
+        "This export is the last Pages ship, not a live crawl. ★ is the current Top 100 rank list — never a homepage.",
+      items: buildPlaybookItems({
+        leftoverHosts: leftoverHosts.length,
+        tracksNeedIsrc,
+        weakChartSites: weakSites.length,
+        chartClubsNoCalendar,
+        starIdGaps,
+        handlesAfterHosts,
+      }),
+      leftoverHosts,
+      weakSites,
     },
   };
 }

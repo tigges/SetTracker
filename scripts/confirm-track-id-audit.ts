@@ -9,6 +9,7 @@ import { writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import {
   evaluateTrackIdPin,
+  isJunkTrackPin,
   loadTrackIdPins,
   type TrackIdPin,
 } from "../src/lib/ingest/identify/trackIdPins";
@@ -101,14 +102,18 @@ function namesFromSlug(slug: string): { artist: string; title: string } {
 async function readJsonlAudit(path: string): Promise<AuditRow[]> {
   const text = await readFile(path, "utf8");
   const catalog = new Map<string, AuditRow>();
-  try {
-    for (const row of await readCsvAudit(
-      join(process.cwd(), "data/crosscheck/track-id-results-audit.csv"),
-    )) {
-      catalog.set(row.slug, row);
+  const nameHelpers = [
+    join(process.cwd(), "data/crosscheck/track-id-results-audit.csv"),
+    join(process.cwd(), "data/track-id-export/tracks-need-id.csv"),
+  ];
+  for (const helper of nameHelpers) {
+    try {
+      for (const row of await readCsvAudit(helper)) {
+        if (!catalog.has(row.slug)) catalog.set(row.slug, row);
+      }
+    } catch {
+      /* name help is optional */
     }
-  } catch {
-    /* first-batch CSV is optional name help */
   }
   const rows: AuditRow[] = [];
   for (const line of text.split(/\n/)) {
@@ -229,8 +234,13 @@ async function main() {
   const probeSample = withBp.slice(0, 8).map((r) => r.beatportUrl);
   const probes = await Promise.all(probeSample.map(probeBeatport));
 
-  const needConfirm = rows.filter((r) => normalizeIsrc(r.isrc));
-  const lives = await mapPool(needConfirm, 6, async (row) => {
+  const junkSkipped = rows.filter(
+    (r) => normalizeIsrc(r.isrc) && isJunkTrackPin(r),
+  ).length;
+  const needConfirm = rows.filter(
+    (r) => normalizeIsrc(r.isrc) && !isJunkTrackPin(r),
+  );
+  const lives = await mapPool(needConfirm, 8, async (row) => {
     const isrc = normalizeIsrc(row.isrc)!;
     const live = await lookupDeezerIsrc(isrc);
     return { row, live };
@@ -278,7 +288,7 @@ async function main() {
     ...new Set(
       pins.map((p) => p.beatportUrl).filter((u): u is string => Boolean(u)),
     ),
-  ];
+  ].slice(0, 40);
   const liveHeads = pinUrls.length
     ? await mapPool(pinUrls, 4, async (url) => {
         const hit = await probeBeatport(url);
@@ -312,6 +322,7 @@ async function main() {
     pinsWithBeatport: kept.filter((p) => p.beatportUrl).length,
     pinsWithIsrc: kept.filter((p) => p.isrc).length,
     beatport404dropped: [...dead],
+    junkSkipped,
     rejected,
     note: "Beatport HTML is never scraped. Pins require a Deezer ISRC hit plus a canonical /track URL whose slug matches the title. Merge with existing pins; drop HEAD 404 Beatport URLs (keep ISRC).",
   };
