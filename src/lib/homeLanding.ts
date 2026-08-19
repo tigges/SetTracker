@@ -10,6 +10,7 @@ import {
   pickRadarPicks,
 } from "./feedPriority";
 import { collapseHostTwins, identifiedRatio } from "./feedQuality";
+import { detectPlaybackHost } from "./playback";
 import { setDisplayThumb } from "./setBrowse";
 import { STATUS_ORDER, type IdStatus } from "./status";
 
@@ -40,6 +41,8 @@ export type LandingSetFields = {
   trackCount?: number | null;
   densitySeverity?: "ok" | "thin" | "severe" | null;
   sourceName?: string | null;
+  seriesName?: string | null;
+  playbackUrl?: string | null;
   dominantProvenance?: string | null;
   statusCounts: Partial<Record<IdStatus, number>>;
   venueTier?: "festival" | "club" | "livestream" | "radio" | "other" | null;
@@ -58,6 +61,44 @@ function withLandingKeys<T extends LandingSetFields>(s: T) {
   };
 }
 
+function looksLikeRelive(s: {
+  title?: string | null;
+  sourceName?: string | null;
+  seriesName?: string | null;
+}): boolean {
+  return /\brelive\b/i.test(
+    [s.seriesName, s.sourceName, s.title].filter(Boolean).join(" "),
+  );
+}
+
+/**
+ * Homepage teasers should click through to something that plays.
+ * SoundCloud / Mixcloud first. Official YouTube next. Relives last —
+ * festival Relives often keep a watch URL after UMG blocks the embed.
+ */
+export function landingPlaybackTier(s: {
+  playbackUrl?: string | null;
+  title?: string | null;
+  sourceName?: string | null;
+  seriesName?: string | null;
+}): 0 | 1 | 2 | 3 {
+  const host = detectPlaybackHost(s.playbackUrl);
+  if (host === "soundcloud" || host === "mixcloud") return 3;
+  if (host === "youtube") return looksLikeRelive(s) ? 1 : 2;
+  return 0;
+}
+
+/** Keep the best playback class that still leaves a non-empty pool. */
+export function preferLandingPlayback<T extends LandingSetFields>(
+  pool: T[],
+): T[] {
+  if (pool.length === 0) return pool;
+  const best = Math.max(...pool.map((s) => landingPlaybackTier(s)));
+  if (best <= 0) return pool;
+  const kept = pool.filter((s) => landingPlaybackTier(s) >= best);
+  return kept.length > 0 ? kept : pool;
+}
+
 /** Three proof sets: Radar first, then feed priority so the landing never goes blank. */
 export function pickLandingSets<T extends LandingSetFields>(
   feed: T[],
@@ -69,16 +110,22 @@ export function pickLandingSets<T extends LandingSetFields>(
     dedupeNearDuplicates(feed.map((s) => withLandingKeys(s))),
   );
   const radar = pickRadarPicks(
-    mapped.filter((s) => isRadarCandidate(s, nowMs)),
+    preferLandingPlayback(mapped.filter((s) => isRadarCandidate(s, nowMs))),
     limit,
     nowMs,
   );
   if (radar.length >= limit) return radar;
   const used = new Set(radar.map((s) => s.id));
-  const rest = mapped
-    .filter((s) => !used.has(s.id))
+  const playableRest = preferLandingPlayback(
+    mapped.filter((s) => !used.has(s.id)),
+  ).sort(compareFeedPriority);
+  const out = [...radar, ...playableRest];
+  if (out.length >= limit) return out.slice(0, limit);
+  const usedAll = new Set(out.map((s) => s.id));
+  const filler = mapped
+    .filter((s) => !usedAll.has(s.id))
     .sort(compareFeedPriority);
-  return [...radar, ...rest].slice(0, limit);
+  return [...out, ...filler].slice(0, limit);
 }
 
 /** Unique image faces, first-seen wins. Skips empty / duplicate src. */
