@@ -150,6 +150,7 @@ import {
   TL_VINTAGE_CULTURE_ULTRA_MIAMI_RESISTANCE_2026,
   TL_LAZARUSMAN_KEINEMUSIK_RADIO_SHOW_2026,
   TL_VINTAGE_CULTURE_PACHA_NYC_2026,
+  TL_CLAPTONE_MASQUERADE_BUENOS_AIRES_2022,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   tracklist1001RowsToPlays,
@@ -2028,6 +2029,34 @@ for (let i = 1; i < vcPachaNyc.length; i++) {
   );
 }
 assert.equal(isWiredTracklistSlug("yt-TDuFnUAo4II"), true);
+
+assertSeedClocks(TL_CLAPTONE_MASQUERADE_BUENOS_AIRES_2022);
+assert.equal(TL_CLAPTONE_MASQUERADE_BUENOS_AIRES_2022.length, 58);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-fQweMs-Q3rg"],
+  TL_CLAPTONE_MASQUERADE_BUENOS_AIRES_2022,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-b-2YA4yC3UA"],
+  TL_CLAPTONE_MASQUERADE_BUENOS_AIRES_2022,
+);
+const clapBa = tracklist1001RowsToPlays(TL_CLAPTONE_MASQUERADE_BUENOS_AIRES_2022);
+assert.equal(clapBa.length, 58);
+assert.equal(clapBa[0]?.provenance, "1001tl");
+assert.equal(clapBa[0]?.timestamp, 4 * 60);
+assert.equal(clapBa[0]?.trackTitle, "Groove Cruise");
+assert.equal(clapBa[13]?.timestamp, 42 * 60);
+assert.equal(clapBa[32]?.timestamp, 42 * 60 + 19);
+assert.equal(clapBa[57]?.trackTitle, "No Eyes (Acappella)");
+assert.equal(clapBa[57]?.timestamp, 3600 + 40 * 60 + 32);
+for (let i = 1; i < clapBa.length; i++) {
+  assert.ok(
+    (clapBa[i]!.timestamp ?? 0) > (clapBa[i - 1]!.timestamp ?? 0),
+    `Claptone Masquerade BA clocks must increase at index ${i}`,
+  );
+}
+assert.equal(isWiredTracklistSlug("yt-fQweMs-Q3rg"), true);
+assert.equal(isWiredTracklistSlug("yt-b-2YA4yC3UA"), true);
 
 assertSeedClocks(TL_NICKY_ROMERO_PROTOCOL_RADIO_731);
 assert.equal(TL_NICKY_ROMERO_PROTOCOL_RADIO_731.length, 16);

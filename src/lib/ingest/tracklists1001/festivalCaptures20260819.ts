@@ -103,3 +103,75 @@ export const TL_VINTAGE_CULTURE_PACHA_NYC_2026: FingerprintSeedRow[] = [
   { at: "3:19:09", artist: "Gabss & Vintage Culture", title: "Lost" },
   { at: "3:23:23", artist: "Supermini & Frankie Romano", title: "Celebration (Antdot & Maz Edit)" },
 ];
+
+/**
+ * Claptone @ The Masquerade, Buenos Aires, Argentina 2022-11-05
+ * Official YouTube: https://youtu.be/fQweMs-Q3rg
+ * Also curated: https://youtu.be/b-2YA4yC3UA (same night, Movistar Arena upload)
+ * https://www.1001tracklists.com/tracklist/2cu77g71/claptone-the-masquerade-buenos-aires-argentina-2022-11-05.html
+ * Overlay name TL_Claptone_The Masquerade_Buenos-Aires_Argentina_2022 is not a valid identifier.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-fQweMs-Q3rg"] = TL_CLAPTONE_MASQUERADE_BUENOS_AIRES_2022
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-b-2YA4yC3UA"] = TL_CLAPTONE_MASQUERADE_BUENOS_AIRES_2022
+ * Operator paste 2026-08-19 — provenance 1001tl.
+ * 42:00–42:19 and 1:40:30–1:40:32 are 1001 mashup-component clocks (+1s).
+ */
+export const TL_CLAPTONE_MASQUERADE_BUENOS_AIRES_2022: FingerprintSeedRow[] = [
+  { at: "4:00", artist: "Mihalis Safras", title: "Groove Cruise" },
+  { at: "6:30", artist: "Michael Jackson", title: "Thriller (Acappella)" },
+  { at: "9:00", artist: "Adelphi Music Factory", title: "Rise" },
+  { at: "12:00", artist: "Junior Jack", title: "Thrill Me" },
+  { at: "15:40", artist: "DJ KUBA & NEITAN X Skytech", title: "I Want You (Wh0 Festival Remix)" },
+  { at: "19:00", artist: "San Pacho", title: "Trompeta" },
+  { at: "22:30", artist: "Liu & JØRD", title: "Ai Papi" },
+  { at: "25:00", artist: "ACRAZE", title: "Funky Town" },
+  { at: "29:00", artist: "Mobin Master & Rubber People", title: "Ma Baker" },
+  { at: "31:00", artist: "Tensnake", title: "Coma Cat (Purple Disco Machine Rework)" },
+  { at: "34:00", artist: "Elton John & Dua Lipa", title: "Cold Heart (Claptone Remix)" },
+  { at: "37:00", artist: "Escapade aka Walker & Royce & Ardalan", title: "Ballroom" },
+  { at: "40:00", artist: "Riva Starr & Mark Broom pres. Star B ft. MC GQ", title: "House Massive" },
+  { at: "42:00", artist: "ALOK & Ella Eyre & Kenny Dope ft. Never Dull", title: "Deep Down" },
+  { at: "42:01", artist: "Riva Starr", title: "Maria" },
+  { at: "42:02", artist: "Deepswing", title: "In The Music" },
+  { at: "42:03", artist: "Gregory Porter", title: "Liquid Spirit (Claptone Remix)" },
+  { at: "42:04", artist: "Masters At Work", title: "Work (Acappella)" },
+  { at: "42:05", artist: "Chris Lorenzo ft. Puppah Nas-T & Denise", title: "Work" },
+  { at: "42:06", artist: "J Balvin & Skrillex", title: "In Da Getto (Chris Lorenzo Remix)" },
+  { at: "42:07", artist: "Cloonee", title: "MOFO" },
+  { at: "42:08", artist: "Tiga", title: "Mind Dimension (Kölsch Remix)" },
+  { at: "42:09", artist: "Piero Pirupa", title: "Put Your Hands Up" },
+  { at: "42:10", artist: "Todd Terry ft. The Gypsymen", title: "Babarabatiri (David Penn Remix)" },
+  { at: "42:11", artist: "Corona", title: "The Rhythm Of The Night (Acappella)" },
+  { at: "42:12", artist: "Claptone & Rune", title: "Calabria (Claptone Remix)" },
+  { at: "42:13", artist: "Wade", title: "Pan Jabi" },
+  { at: "42:14", artist: "Alexander Som & Albert Neve ft. Elishama", title: "People Like You" },
+  { at: "42:15", artist: "Matt Caseli", title: "Gonna Get With Ya" },
+  { at: "42:16", artist: "Groove Armada ft. Gramma Funk", title: "I See You Baby (Acappella)" },
+  { at: "42:17", artist: "Sllash & Doppe", title: "Aguella" },
+  { at: "42:18", artist: "George Privatti & Saul Antolin", title: "Oye Bien" },
+  { at: "42:19", artist: "Jamie Jones", title: "My Paradise (Vintage Culture Remix)" },
+  { at: "43:30", artist: "Disclosure ft. Eliza Doolittle", title: "You & Me (Flume Remix / Westend & Local Singles Edit)" },
+  { at: "47:30", artist: "CeCe Rogers", title: "All Join Hands (Stuart Ojelay Bootleg)" },
+  { at: "51:00", artist: "Laurent Garnier & Chambray vs. Claptone & Nathan Nicholson", title: "Feelin' Good vs. Under The Moon (Claptone Edit)" },
+  { at: "52:10", artist: "Claptone ft. Nathan Nicholson", title: "Under The Moon" },
+  { at: "53:20", artist: "Laurent Garnier & Chambray", title: "Feelin' Good" },
+  { at: "54:30", artist: "Dua Lipa", title: "Physical (Claptone Remix)" },
+  { at: "58:00", artist: "Eurythmics", title: "Sweet Dreams (Are Made of This) (Claptone Remix)" },
+  { at: "1:01:30", artist: "Roman Flügel", title: "Geht's Noch?" },
+  { at: "1:04:30", artist: "Riva Starr & Todd Terry", title: "This Is The Sound" },
+  { at: "1:07:00", artist: "Claptone ft. George Kranz", title: "The Drums (Din Daa Daa)" },
+  { at: "1:10:00", artist: "James Hurr", title: "Di Da Di" },
+  { at: "1:13:30", artist: "FETISH", title: "Cum Check This" },
+  { at: "1:16:00", artist: "James Hype", title: "Crank" },
+  { at: "1:19:00", artist: "Andrea Oliva", title: "Dilemma" },
+  { at: "1:22:00", artist: "CID & Westend", title: "Let Me Take You" },
+  { at: "1:25:00", artist: "Claptone & Mylo", title: "Drop The Pressure" },
+  { at: "1:28:00", artist: "MOGUAI", title: "ACIIID (Kryder & Benny Benassi Remix)" },
+  { at: "1:31:00", artist: "James Hurr & Tasty Lopez", title: "Til We Break It Down" },
+  { at: "1:34:30", artist: "CJ Bolland & The Advent", title: "Camargue 2019 (Maceo Plex Remix)" },
+  { at: "1:35:45", artist: "Claptone ft. Nathan Nicholson", title: "Heartbeat" },
+  { at: "1:37:00", artist: "2Jays", title: "Fiji" },
+  { at: "1:38:45", artist: "Faithless", title: "Insomnia (Acappella)" },
+  { at: "1:40:30", artist: "Claptone ft. Seal", title: "Just A Ghost (Vintage Culture Remix)" },
+  { at: "1:40:31", artist: "Florence + The Machine", title: "You've Got The Love (Acappella)" },
+  { at: "1:40:32", artist: "Claptone ft. Jaw", title: "No Eyes (Acappella)" },
+];

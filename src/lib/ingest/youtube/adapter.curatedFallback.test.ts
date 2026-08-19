@@ -28,6 +28,7 @@ const STH_687 = YOUTUBE_SETS.find((s) => s.video.includes("eVjC42MNgkI"));
 const NOTION_PERRY = YOUTUBE_SETS.find((s) => s.video.includes("9vgSTomhCp8"));
 const VC_ULTRA = YOUTUBE_SETS.find((s) => s.video.includes("xXRjglkAmq8"));
 const VC_PACHA_NYC = YOUTUBE_SETS.find((s) => s.video.includes("TDuFnUAo4II"));
+const CLAPTONE_BA = YOUTUBE_SETS.find((s) => s.video.includes("fQweMs-Q3rg"));
 const MM_YACHT = YOUTUBE_SETS.find((s) => s.video.includes("0-s_qZRWElA"));
 const PRISMATIC_032 = YOUTUBE_SETS.find((s) => s.video.includes("blP5J6BUG0M"));
 const SPECTRUM_485 = YOUTUBE_SETS.find((s) => s.video.includes("yTRvLrtsM9I"));
@@ -602,6 +603,17 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.durationSec, 3 * 3600 + 23 * 60 + 23 + 180);
   });
 
+  it("builds Claptone Masquerade Buenos Aires meta from the curated 1001 capture", () => {
+    assert.ok(CLAPTONE_BA);
+    const meta = watchMetaFromCuratedSeed(CLAPTONE_BA);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "fQweMs-Q3rg");
+    assert.match(meta.title, /Masquerade/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=fQweMs-Q3rg");
+    // Last cue 1:40:32 + 180s pad.
+    assert.equal(meta.durationSec, 1 * 3600 + 40 * 60 + 32 + 180);
+  });
+
   it("builds Miss Monique Ibiza Yacht meta from the curated 1001 capture", () => {
     assert.ok(MM_YACHT);
     const meta = watchMetaFromCuratedSeed(MM_YACHT);
@@ -1042,6 +1054,20 @@ describe("curated YouTube 429 fallback", () => {
     assert.ok(sets[0]!.durationSec >= 3 * 3600 + 23 * 60);
     assert.equal(sets[0]?.primaryArtist?.slug, "vintage-culture");
     assert.match(String(sets[0]?.eventName ?? ""), /Pacha New York/i);
+  });
+
+  it("lands Claptone Masquerade Buenos Aires from the 1001 seed when watch is 429", async () => {
+    assert.ok(CLAPTONE_BA);
+    const adapter = createYoutubeAdapter([CLAPTONE_BA], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-fQweMs-Q3rg");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 58);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 1 * 3600 + 40 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "claptone");
+    assert.match(String(sets[0]?.eventName ?? ""), /Masquerade/i);
   });
 
   it("lands Miss Monique Ibiza Yacht from the 1001 seed when watch is 429", async () => {

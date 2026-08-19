@@ -130,6 +130,7 @@ import {
   TL_NOTION_PERRYS_LOLLAPALOOZA_CHICAGO_2026,
   TL_VINTAGE_CULTURE_ULTRA_MIAMI_RESISTANCE_2026,
   TL_VINTAGE_CULTURE_PACHA_NYC_2026,
+  TL_CLAPTONE_MASQUERADE_BUENOS_AIRES_2022,
 } from "../tracklists1001/seeds";
 import type { RawArtist } from "../types";
 import { slugify } from "../types";
@@ -2049,6 +2050,23 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     type: "festival",
     title: "Claptone ‘The Masquerade’ Full Set at Movistar Arena, Buenos Aires",
     eventName: "Movistar Arena Buenos Aires",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2cu77g71/claptone-the-masquerade-buenos-aires-argentina-2022-11-05.html",
+    tracklist1001: TL_CLAPTONE_MASQUERADE_BUENOS_AIRES_2022,
+  },
+  {
+    video: "https://www.youtube.com/watch?v=fQweMs-Q3rg",
+    primaryArtist: dj("Claptone", {
+      accent: "#ffd60a",
+    }),
+    genre: "Deep House",
+    type: "festival",
+    title: "Claptone @ The Masquerade, Buenos Aires 2022",
+    seriesName: "The Masquerade",
+    eventName: "The Masquerade Buenos Aires",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2cu77g71/claptone-the-masquerade-buenos-aires-argentina-2022-11-05.html",
+    tracklist1001: TL_CLAPTONE_MASQUERADE_BUENOS_AIRES_2022,
   },
   {
     video: "https://www.youtube.com/watch?v=OzGpEPZ3BZs",
