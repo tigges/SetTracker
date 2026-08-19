@@ -14,7 +14,10 @@ export type DjSocialPin = {
   /** Null when no verified IG — do not invent handles. */
   instagram: string | null;
   twitter?: string | null;
+  /** Official homepage. Beatport artist hubs go on `beatport`, not here. */
   website: string;
+  /** Canonical https://www.beatport.com/artist/{slug}/{id} only. */
+  beatport?: string | null;
   bio: string;
 };
 

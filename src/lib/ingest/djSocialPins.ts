@@ -2,14 +2,19 @@
  * Hard pins for DJ socials that name-guessing / empty IG slots get wrong.
  * Applied on every verify-urls / fast deploy via applyKnownUrlFixes.
  *
- * Keep Beatport / official site as website when there is no personal homepage.
- * Schema stores SC / YT / IG / X / website — TikTok & Facebook stay on roster.socials.
+ * Official homepage stays on website. Canonical Beatport /artist/{slug}/{id}
+ * goes on `beatport` (never a search page; never scraped).
+ * Schema stores SC / YT / IG / X / website / beatport — TikTok & Facebook stay on roster.socials.
  *
  * Pin rows live in `djSocialPins.data.ts` (no Node fs) so queries can import
  * slugs without pulling the artist roster into the static-export graph.
  */
 
 import type { PrismaClient } from "@prisma/client";
+import {
+  canonicalBeatportArtistUrl,
+  resolveDjBeatport,
+} from "../beatportArtist";
 import { youtubeChannelUrl } from "../social";
 import { slugify } from "./types";
 import { DJ_SOCIAL_PINS, type DjSocialPin } from "./djSocialPins.data";
@@ -22,6 +27,8 @@ export async function applyDjSocialPins(prisma: PrismaClient): Promise<number> {
   let n = 0;
   for (const pin of DJ_SOCIAL_PINS) {
     const existing = await prisma.dj.findUnique({ where: { slug: pin.slug } });
+    const beatport = resolveDjBeatport(pin);
+    const websiteIsBeatport = !!canonicalBeatportArtistUrl(pin.website);
     const data = {
       name: pin.name,
       accent: pin.accent,
@@ -29,7 +36,8 @@ export async function applyDjSocialPins(prisma: PrismaClient): Promise<number> {
       youtube: pin.youtube ?? null,
       instagram: pin.instagram ?? null,
       twitter: pin.twitter ?? null,
-      website: pin.website,
+      website: websiteIsBeatport ? null : pin.website,
+      beatport,
       bio: pin.bio,
     };
     if (existing) {

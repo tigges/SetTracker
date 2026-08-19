@@ -1,0 +1,19 @@
+{
+  "generatedAt": "2026-08-19T00:16:11.994Z",
+  "csv": "data/crosscheck/track-id-results-jsonl-3.jsonl",
+  "rows": 380,
+  "withBeatport": 0,
+  "withIsrc": 278,
+  "beatportProbes": [],
+  "deezerConfirmed": 0,
+  "newPins": 0,
+  "keptExisting": 1882,
+  "pins": 1882,
+  "pinsWithBeatport": 1837,
+  "pinsWithIsrc": 1882,
+  "beatport404dropped": [],
+  "rejected": {
+    "not confirmed": 278
+  },
+  "note": "JSONL paste had Beatport links stripped. Deezer confirmed 0 of 278 ISRCs against catalog slugs. Existing 1,882 pins unchanged. Beatport HTML is never scraped."
+}

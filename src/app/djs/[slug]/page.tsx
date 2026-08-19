@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { SetEntryLink } from "@/components/SetEntryLink";
 import { notFound, redirect } from "next/navigation";
 import { getDjBySlug, getAllDjSlugs } from "@/lib/queries";
 import { EntityThumb } from "@/components/EntityThumb";
 import { StatusBar } from "@/components/StatusBits";
 import { SocialLinks } from "@/components/SocialLinks";
+import { DjBio } from "@/components/DjBio";
+import { displayDjBio } from "@/lib/djBio";
 import { ATLAS_DJ_YEAR, lookupAtlasDj } from "@/lib/atlas/seed";
 import { chartKicker } from "@/lib/atlas/mapMath";
 import { displayCity } from "@/lib/displayCity";
@@ -72,6 +75,7 @@ export default async function DjPage({
   const city = displayCity(dj.homeCity);
   const chart = lookupAtlasDj(dj.slug);
   const maxPlays = dj.mostPlayed[0]?.count ?? 1;
+  const bio = displayDjBio(dj.bio, { genre: dj.genre, homeCity: dj.homeCity });
 
   return (
     <div>
@@ -130,7 +134,7 @@ export default async function DjPage({
             ) : null}
           </div>
         </div>
-        {dj.bio && <p className="mt-4 max-w-2xl text-[14px] text-muted">{dj.bio}</p>}
+        {bio ? <DjBio text={bio} /> : null}
         <div className="mt-4">
           <SocialLinks links={dj.socials} />
         </div>
@@ -145,8 +149,9 @@ export default async function DjPage({
                 const type = SET_TYPE_META[s.type] ?? { label: s.type, glyph: "•" };
                 return (
                   <li key={s.slug}>
-                    <Link
+                    <SetEntryLink
                       href={`/sets/${s.slug}`}
+                      label={dj.name}
                       className="flex items-center gap-3 py-3 transition-colors hover:opacity-90"
                     >
                       <EntityThumb
@@ -179,7 +184,7 @@ export default async function DjPage({
                       <span className="mono flex-none text-[12px] text-muted2">
                         {fmtRelative(s.publishedAt)}
                       </span>
-                    </Link>
+                    </SetEntryLink>
                   </li>
                 );
               })}

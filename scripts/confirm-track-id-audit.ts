@@ -1,8 +1,8 @@
 /**
- * Confirm a producer audit CSV (ISRC + canonical Beatport) via Deezer.
+ * Confirm a producer audit CSV or JSONL (ISRC + canonical Beatport) via Deezer.
  * Never scrapes Beatport HTML. Writes data/track-id-pins.json for fill-null apply.
  *
- *   npx tsx scripts/confirm-track-id-audit.ts [csv-path]
+ *   npx tsx scripts/confirm-track-id-audit.ts [csv-or-jsonl-path]
  */
 import { readFile } from "node:fs/promises";
 import { writeFile } from "node:fs/promises";
@@ -72,7 +72,13 @@ function parseCsv(text: string): string[][] {
   return rows;
 }
 
-async function readAudit(path: string): Promise<AuditRow[]> {
+function cleanBeatport(raw: string | null | undefined): string {
+  const s = (raw ?? "").trim();
+  if (!s || /link removed/i.test(s)) return "";
+  return s;
+}
+
+async function readCsvAudit(path: string): Promise<AuditRow[]> {
   const text = await readFile(path, "utf8");
   const table = parseCsv(text);
   const header = table[0] ?? [];
@@ -81,6 +87,60 @@ async function readAudit(path: string): Promise<AuditRow[]> {
     for (let i = 0; i < header.length; i++) rec[header[i]!] = (cols[i] ?? "").trim();
     return rec as unknown as AuditRow;
   });
+}
+
+function namesFromSlug(slug: string): { artist: string; title: string } {
+  const parts = slug.split("-").filter(Boolean);
+  if (parts.length < 2) return { artist: "", title: slug.replace(/-/g, " ") };
+  return {
+    artist: parts.slice(0, Math.min(2, parts.length - 1)).join(" "),
+    title: parts.slice(Math.min(2, parts.length - 1)).join(" "),
+  };
+}
+
+async function readJsonlAudit(path: string): Promise<AuditRow[]> {
+  const text = await readFile(path, "utf8");
+  const catalog = new Map<string, AuditRow>();
+  try {
+    for (const row of await readCsvAudit(
+      join(process.cwd(), "data/crosscheck/track-id-results-audit.csv"),
+    )) {
+      catalog.set(row.slug, row);
+    }
+  } catch {
+    /* first-batch CSV is optional name help */
+  }
+  const rows: AuditRow[] = [];
+  for (const line of text.split(/\n/)) {
+    const trimmed = line.trim();
+    if (!trimmed) continue;
+    let obj: Record<string, unknown>;
+    try {
+      obj = JSON.parse(trimmed) as Record<string, unknown>;
+    } catch {
+      continue;
+    }
+    const slug = String(obj.slug ?? "").trim();
+    if (!slug) continue;
+    const prev = catalog.get(slug);
+    const guessed = namesFromSlug(slug);
+    rows.push({
+      slug,
+      artist: String(obj.artist ?? prev?.artist ?? guessed.artist),
+      title: String(obj.title ?? prev?.title ?? guessed.title),
+      plays: String(obj.plays ?? prev?.plays ?? ""),
+      isrc: String(obj.isrc ?? ""),
+      beatportUrl: cleanBeatport(String(obj.beatportUrl ?? "")),
+      confidence: String(obj.confidence ?? obj.alignment ?? ""),
+      source: String(obj.source ?? "jsonl"),
+    });
+  }
+  return rows;
+}
+
+async function readAudit(path: string): Promise<AuditRow[]> {
+  if (path.endsWith(".jsonl")) return readJsonlAudit(path);
+  return readCsvAudit(path);
 }
 
 async function lookupDeezerIsrc(
@@ -216,13 +276,15 @@ async function main() {
   const merged = [...bySlug.values()].sort((a, b) => a.slug.localeCompare(b.slug));
   const pinUrls = [
     ...new Set(
-      merged.map((p) => p.beatportUrl).filter((u): u is string => Boolean(u)),
+      pins.map((p) => p.beatportUrl).filter((u): u is string => Boolean(u)),
     ),
   ];
-  const liveHeads = await mapPool(pinUrls, 4, async (url) => {
-    const hit = await probeBeatport(url);
-    return { url, status: hit.status };
-  });
+  const liveHeads = pinUrls.length
+    ? await mapPool(pinUrls, 4, async (url) => {
+        const hit = await probeBeatport(url);
+        return { url, status: hit.status };
+      })
+    : [];
   const dead = new Set(
     liveHeads.filter((h) => h.status === 404).map((h) => h.url),
   );
@@ -253,8 +315,11 @@ async function main() {
     rejected,
     note: "Beatport HTML is never scraped. Pins require a Deezer ISRC hit plus a canonical /track URL whose slug matches the title. Merge with existing pins; drop HEAD 404 Beatport URLs (keep ISRC).",
   };
+  const reportName = csvPath.endsWith(".jsonl")
+    ? "track-id-jsonl-confirm.json"
+    : "track-id-audit-confirm.json";
   await writeFile(
-    join(process.cwd(), "data/crosscheck/track-id-audit-confirm.json"),
+    join(process.cwd(), "data/crosscheck", reportName),
     `${JSON.stringify(report, null, 2)}\n`,
   );
   console.log(JSON.stringify(report, null, 2));

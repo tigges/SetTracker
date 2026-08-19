@@ -27,6 +27,8 @@ model Dj {
   instagram  String?
   twitter    String?
   website    String?
+  // Canonical Beatport /artist/{slug}/{id} only — never a search page.
+  beatport   String?
 
   // resolved artwork URL (Deezer CDN etc.); null → monogram fallback in UI
   imageUrl   String?

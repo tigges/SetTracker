@@ -48,8 +48,9 @@ export default function AboutPage() {
       <p className="mt-3 text-[14px] leading-relaxed text-muted">
         Tracklists come from SoundCloud descriptions and timed comments,
         hearthis.at, YouTube descriptions and song credits, Insomniac Night Owl
-        Radio, and 1001Tracklists seeds already linked from those pages. We do
-        not invent cues. Fingerprint enrich (ACRCloud) only fills timeline gaps.
+        Radio, and 1001Tracklists seeds already linked from those pages — often
+        partial or untimed. We do not invent cues. Fingerprint enrich
+        (ACRCloud) only fills timeline gaps.
       </p>
 
       <h2 className="mt-10 text-lg font-bold tracking-tight">Suggest an ID</h2>

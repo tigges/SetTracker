@@ -98,7 +98,7 @@ export function SetPlayer({
     const openUrl = hearthisSeekUrl(publicUrl, startSec);
     const cued = startSec != null && startSec > 0;
     return (
-      <div className="mt-5 overflow-hidden rounded-xl border border-line bg-panel">
+      <div className="mt-3 overflow-hidden rounded-xl border border-line bg-panel sm:mt-5">
         <div className="flex flex-wrap items-center gap-2 px-3 py-2.5">
           <a
             href={openUrl}
@@ -124,7 +124,7 @@ export function SetPlayer({
     : `${target.embedSrc}-${seekNonce}`;
 
   return (
-    <div className="mt-5 overflow-hidden rounded-xl border border-line bg-panel">
+    <div className="mt-3 overflow-hidden rounded-xl border border-line bg-panel sm:mt-5">
       <div className="flex flex-wrap items-center gap-2 px-3 py-2.5">
         <button
           type="button"

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { SetEntryLink } from "@/components/SetEntryLink";
 import { BrandLogo } from "@/components/BrandMark";
 import { EntityThumb } from "@/components/EntityThumb";
 import { VisualTeaser, type TeaserFace } from "@/components/VisualTeaser";
@@ -111,8 +112,9 @@ function SetPoster({ set }: { set: FeedItem }) {
     primaryDjSlug: set.primaryDj?.slug,
   });
   return (
-    <Link
+    <SetEntryLink
       href={`/sets/${set.slug}`}
+      label="Home"
       className="card group relative overflow-hidden"
     >
       <div className="relative aspect-[4/5] bg-panel2">
@@ -133,7 +135,7 @@ function SetPoster({ set }: { set: FeedItem }) {
           <SetgraphStrip counts={set.statusCounts} maxTicks={28} height={8} />
         </div>
       </div>
-    </Link>
+    </SetEntryLink>
   );
 }
 
