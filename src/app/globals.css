@@ -100,15 +100,15 @@ body {
 
 .hero-copy {
   max-width: 36rem;
-  padding: 1rem 1.15rem 1.15rem;
+  padding: 1.1rem 1.2rem 1.2rem;
   margin-inline: -0.35rem;
   border-radius: 18px;
-  background: color-mix(in srgb, var(--bg) 78%, transparent);
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
   box-shadow:
-    0 0 0 1px color-mix(in srgb, var(--bg) 55%, transparent),
-    0 0 56px 28px color-mix(in srgb, var(--bg) 62%, transparent);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+    0 0 0 1px color-mix(in srgb, var(--line) 70%, transparent),
+    0 0 64px 36px color-mix(in srgb, var(--bg) 78%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
 }
 
 .hero-title {
@@ -142,13 +142,13 @@ body {
 .hero-legend-chip {
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
-  padding: 0.2rem 0.5rem;
+  gap: 0.4rem;
+  padding: 0.28rem 0.58rem;
   border-radius: 999px;
   border: 1px solid var(--line);
-  background: color-mix(in srgb, var(--bg) 88%, var(--panel));
+  background: var(--panel);
   color: var(--ink);
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.2;
 }
 

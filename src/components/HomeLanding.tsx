@@ -298,7 +298,7 @@ export function HomeLanding({
                 <SetgraphStrip
                   counts={graphCounts}
                   maxTicks={48}
-                  height={12}
+                  height={14}
                   className="hero-setgraph"
                 />
                 <ul className="hero-legend mono">
