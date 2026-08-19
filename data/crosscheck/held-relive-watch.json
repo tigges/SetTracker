@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-17T02:16:25.988Z",
+  "generatedAt": "2026-08-19T07:39:18.066Z",
   "playlists": [
     {
       "id": "PLeeZgE3_zp1w",
@@ -49,6 +49,20 @@
       "searchUrl": "https://www.google.com/search?q=holy%20priest%20tomorrowland%20weekend%201%202026%20relive%20youtube%20site%3A1001tracklists.com",
       "status": "waiting",
       "note": "Do not wire fan clips — wait for official Tomorrowland/artist Relive."
+    },
+    {
+      "name": "Knock2 B2B Zedd · HARD Summer",
+      "seed": "TL_KNOCK2_ZEDD_HARD_SUMMER_2026",
+      "searchUrl": "https://www.google.com/search?q=knock2%20zedd%20hard%20summer%202026%20relive%20youtube%20site%3A1001tracklists.com",
+      "status": "waiting",
+      "note": "Do not wire fan clips (DerekD2 yt-6DC3xoQF4Zs) — wait for official HARD/Insomniac Relive."
+    },
+    {
+      "name": "Cole Terrazas · HARD Summer",
+      "seed": "TL_COLE_TERRAZAS_HARD_SUMMER_2026",
+      "searchUrl": "https://www.google.com/search?q=cole%20terrazas%20hard%20summer%20pink%20stage%202026%20relive%20youtube%20site%3A1001tracklists.com",
+      "status": "waiting",
+      "note": "Do not wire fan clips — wait for official HARD/Insomniac Relive."
     }
   ],
   "unwiredOfficial": []
