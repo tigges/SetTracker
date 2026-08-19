@@ -2013,7 +2013,8 @@ export const ARTIST_ROSTER_CURATED: ArtistRosterEntry[] = [
     socials: [
       "https://www.youtube.com/@marianabo",
       "https://soundcloud.com/borrego-s",
-      "https://www.threads.com/@djmarianabo",
+      "https://www.instagram.com/djmarianabo/",
+      "https://x.com/djmarianabo",
     ],
     priority: "high",
   },

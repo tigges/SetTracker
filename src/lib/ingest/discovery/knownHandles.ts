@@ -403,6 +403,8 @@ export const KNOWN_HANDLES: Record<string, HandleHint> = {
   "mariana bo": {
     youtubeHandle: "@marianabo",
     soundcloudPermalink: "borrego-s",
+    instagram: "https://www.instagram.com/djmarianabo/",
+    twitter: "https://x.com/djmarianabo",
     website: "https://linktr.ee/djmarianabo",
     genre: "Hardstyle",
     accent: "#e63946",
@@ -592,6 +594,8 @@ export const KNOWN_HANDLES: Record<string, HandleHint> = {
   nervo: {
     youtubeHandle: "@NERVO",
     soundcloudPermalink: "nervomusic",
+    instagram: "https://www.instagram.com/nervomusic/",
+    twitter: "https://x.com/nervomusic",
     website: "https://linktr.ee/nervomusic",
     genre: "Progressive House",
     accent: "#f72585",
@@ -599,6 +603,8 @@ export const KNOWN_HANDLES: Record<string, HandleHint> = {
   quintino: {
     youtubeHandle: "@Quintino",
     soundcloudPermalink: "quintino",
+    instagram: "https://www.instagram.com/quintino/",
+    twitter: "https://x.com/quintinoo",
     website: "https://linktr.ee/quintino",
     genre: "Big Room",
     accent: "#ff9f1c",
@@ -606,6 +612,7 @@ export const KNOWN_HANDLES: Record<string, HandleHint> = {
   vinai: {
     youtubeHandle: "@vinaiofficial",
     soundcloudPermalink: "wearevinai",
+    instagram: "https://www.instagram.com/vinaiofficial/",
     website: "https://linktr.ee/vinaiofficial",
     genre: "Big Room",
     accent: "#ff006e",
@@ -613,6 +620,8 @@ export const KNOWN_HANDLES: Record<string, HandleHint> = {
   dubvision: {
     youtubeHandle: "@DubVision",
     soundcloudPermalink: "dubvision",
+    instagram: "https://www.instagram.com/dubvisionmusic/",
+    twitter: "https://x.com/dubvisionmusic",
     website: "https://linktr.ee/dubvision",
     genre: "Progressive House",
     accent: "#4361ee",
@@ -620,7 +629,9 @@ export const KNOWN_HANDLES: Record<string, HandleHint> = {
   "sub zero project": {
     youtubeHandle: "@SubZeroProject",
     soundcloudPermalink: "subzeroproject",
-    website: "https://linktr.ee/subzeroproject",
+    instagram: "https://www.instagram.com/subzeroproject/",
+    twitter: "https://x.com/sub_zeroproject",
+    website: "https://www.subzeroproject.com/",
     genre: "Hardstyle",
     accent: "#3a0ca3",
   },

@@ -230,6 +230,12 @@ const igHarvest = [
   ["fantasm", /instagram\.com\/fantasm_techno/],
   ["faustix", /instagram\.com\/faustix/],
   ["honey-dijon", /instagram\.com\/honeydijon/],
+  ["quintino", /instagram\.com\/quintino/],
+  ["nervo", /instagram\.com\/nervomusic/],
+  ["sub-zero-project", /instagram\.com\/subzeroproject/],
+  ["dubvision", /instagram\.com\/dubvisionmusic/],
+  ["mariana-bo", /instagram\.com\/djmarianabo/],
+  ["vinai", /instagram\.com\/vinaiofficial/],
   ["topic", /instagram\.com\/topic/],
   ["marlon-hoffstadt", /instagram\.com\/marlonhoffstadt/],
 ] as const;
@@ -325,7 +331,7 @@ const djmagHubPins: Array<[string, RegExp, string]> = [
   ["reinier-zonneveld", /linktr\.ee\/reinierzonneveld/, "https://linktr.ee/reinierzonneveld"],
   ["quintino", /linktr\.ee\/quintino/, "https://linktr.ee/quintino"],
   ["nervo", /linktr\.ee\/nervomusic/, "https://linktr.ee/nervomusic"],
-  ["sub-zero-project", /linktr\.ee\/subzeroproject/, "https://linktr.ee/subzeroproject"],
+  ["sub-zero-project", /subzeroproject\.com/, "https://www.subzeroproject.com/"],
   ["liu", /linktr\.ee\/liulive/, "https://linktr.ee/liulive"],
   ["le-twins", /linktr\.ee\/officialletwins/, "https://linktr.ee/officialletwins"],
   ["wukong", /linktr\.ee\/wukongmusic/, "https://linktr.ee/wukongmusic"],
@@ -343,5 +349,11 @@ for (const [slug, site, hint] of djmagHubPins) {
 }
 assert.equal(hintForName("Liu")?.website, "https://linktr.ee/liulive");
 assert.equal(hintForName("Above & Beyond")?.website, "https://www.aboveandbeyond.nu/");
+assert.match(bySlug.quintino!.twitter!, /(?:twitter|x)\.com\/quintinoo/);
+assert.match(bySlug.nervo!.twitter!, /(?:twitter|x)\.com\/nervomusic/);
+assert.match(bySlug["sub-zero-project"]!.twitter!, /(?:twitter|x)\.com\/sub_zeroproject/);
+assert.match(bySlug.dubvision!.twitter!, /(?:twitter|x)\.com\/dubvisionmusic/);
+assert.match(bySlug["mariana-bo"]!.twitter!, /(?:twitter|x)\.com\/djmarianabo/);
+assert.equal(bySlug.vinai!.twitter, undefined);
 
 console.log("djSocialPins.test.ts ok");
