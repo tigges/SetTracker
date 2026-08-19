@@ -161,6 +161,7 @@ import {
   TL_MEDUZA_STEREO_MONTREAL_CANADA_2026,
   TL_MEDUZA_CLUB_SPACE_MIAMI_2026,
   TL_AUSTIN_KRAMER_UNRELEASED_139_2026,
+  TL_JAMIE_JONES_GAS_TOWER_LOST_HORIZON_FESTIVAL_2020,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   tracklist1001RowsToPlays,
@@ -2496,6 +2497,45 @@ for (let i = 1; i < austin139.length; i++) {
   );
 }
 assert.equal(isWiredTracklistSlug("yt-QLpmLx5JUsg"), true);
+
+assertSeedClocks(TL_JAMIE_JONES_GAS_TOWER_LOST_HORIZON_FESTIVAL_2020);
+assert.equal(TL_JAMIE_JONES_GAS_TOWER_LOST_HORIZON_FESTIVAL_2020.length, 16);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-U2ZjW_8K3h4"],
+  TL_JAMIE_JONES_GAS_TOWER_LOST_HORIZON_FESTIVAL_2020,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-https://youtu.be/U2ZjW_8K3h4"],
+  undefined,
+);
+const jamieLostHorizon = tracklist1001RowsToPlays(
+  TL_JAMIE_JONES_GAS_TOWER_LOST_HORIZON_FESTIVAL_2020,
+);
+assert.equal(jamieLostHorizon.length, 16);
+assert.equal(jamieLostHorizon[0]?.provenance, "1001tl");
+assert.equal(jamieLostHorizon[0]?.timestamp, 0);
+assert.equal(jamieLostHorizon[0]?.artistName, "DJ Slugo");
+assert.equal(jamieLostHorizon[0]?.trackTitle, "Cardboard Booty");
+assert.equal(jamieLostHorizon[7]?.trackTitle, "Gotta Have It (Underground Mix)");
+assert.equal(jamieLostHorizon[7]?.timestamp, 22 * 60 + 30);
+assert.equal(jamieLostHorizon[15]?.trackTitle, "Halcyon On & On");
+assert.equal(jamieLostHorizon[15]?.timestamp, 54 * 60 + 58);
+for (let i = 1; i < jamieLostHorizon.length; i++) {
+  assert.ok(
+    (jamieLostHorizon[i]!.timestamp ?? 0) >
+      (jamieLostHorizon[i - 1]!.timestamp ?? 0),
+    `Jamie Jones Lost Horizon clocks must increase at index ${i}`,
+  );
+}
+assert.equal(isWiredTracklistSlug("yt-U2ZjW_8K3h4"), true);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-U2ZjW_8K3h4"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-jamie-jones-hot-robot-radio-225"],
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-U2ZjW_8K3h4"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-jamie-jones-hot-robot-radio-239"],
+);
 
 assertSeedClocks(TL_NICKY_ROMERO_PROTOCOL_RADIO_731);
 assert.equal(TL_NICKY_ROMERO_PROTOCOL_RADIO_731.length, 16);

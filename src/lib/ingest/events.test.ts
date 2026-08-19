@@ -187,5 +187,14 @@ assert.equal(
   )?.slug,
   "edc-lv",
 );
+assert.equal(
+  inferFestivalEvent(
+    "Jamie Jones DJ set - Lost Horizon Festival | Beatport Live",
+  )?.slug,
+  "lost-horizon-festival",
+);
+assert.equal(inferFestivalEvent("Lost Horizon Festival")?.kind, "festival");
+assert.equal(inferFestivalEvent("Lost Horizon Festival")?.website, undefined);
+assert.equal(inferFestivalEvent("Lost Horizon"), null);
 
 console.log("events.test.ts ok");

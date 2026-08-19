@@ -385,6 +385,13 @@ export const KNOWN_EVENTS: Record<string, CanonicalEvent> = {
     location: "Montréal, Canada",
     // No official site in the operator paste — do not invent a host.
   },
+  "lost-horizon-festival": {
+    slug: "lost-horizon-festival",
+    name: "Lost Horizon Festival",
+    kind: "festival",
+    // Beatport Live 2020 virtual festival. No official site in the paste —
+    // do not invent a host. Gas Tower is a stage, not a separate event.
+  },
   "club-space": {
     slug: "club-space",
     name: "Club Space",
@@ -719,6 +726,10 @@ export function inferFestivalEvent(title: string): CanonicalEvent | null {
   if (/\belrow\b/i.test(t)) return KNOWN_EVENTS.elrow;
   if (/\bnameless\s+festival\b/i.test(t)) {
     return KNOWN_EVENTS["nameless-festival"];
+  }
+  // Require "festival" — bare Lost Horizon is the novel / film, not this event.
+  if (/\blost\s+horizon\s+festival\b/i.test(t)) {
+    return KNOWN_EVENTS["lost-horizon-festival"];
   }
   // Require Montréal — bare "stereo" is STEREOHYPE / Stereo Love / stereoBLOOM.
   if (/\bstereo\s+montr[eé]al\b/i.test(t)) {

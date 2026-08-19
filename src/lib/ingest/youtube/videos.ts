@@ -137,6 +137,7 @@ import {
   TL_NATTE_VISSTICK_TELETECH_FYM_AFAS_LIVE_AMSTERDAM_2025,
   TL_DEBORAH_DE_LUCA_PYRAMID_AMNESIA_IBIZA_2025,
   TL_AUSTIN_KRAMER_UNRELEASED_139_2026,
+  TL_JAMIE_JONES_GAS_TOWER_LOST_HORIZON_FESTIVAL_2020,
 } from "../tracklists1001/seeds";
 import type { RawArtist } from "../types";
 import { slugify } from "../types";
@@ -2214,6 +2215,12 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     title: "Jamie Jones DJ set - Lost Horizon Festival | Beatport Live",
     seriesName: "Beatport Live",
     eventName: "Lost Horizon Festival",
+    // Official Beatport Live upload already curated. Operator 1001 paste
+    // 2026-08-19. No SoundCloud in the paste — do not invent an SC slug.
+    // Distinct from Hot Robot Radio 225 / 239.
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/29ty8h89/jamie-jones-gas-tower-lost-horizon-festival-beatport-live-2020-07-04.html",
+    tracklist1001: TL_JAMIE_JONES_GAS_TOWER_LOST_HORIZON_FESTIVAL_2020,
   },
   {
     video: "https://www.youtube.com/watch?v=y3I-vaIIo9Y",

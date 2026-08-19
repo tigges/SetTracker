@@ -135,6 +135,9 @@ const CUEBRICK_SACRE = YOUTUBE_SETS.find((s) =>
 const AUSTIN_UNRELEASED_139 = YOUTUBE_SETS.find((s) =>
   s.video.includes("QLpmLx5JUsg"),
 );
+const JAMIE_LOST_HORIZON = YOUTUBE_SETS.find((s) =>
+  s.video.includes("U2ZjW_8K3h4"),
+);
 
 describe("watchMetaFromCuratedSeed", () => {
   it("builds ASOT 1290 meta from the curated 1001 capture", () => {
@@ -840,6 +843,17 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=QLpmLx5JUsg");
     // Last cue 57:15 + 180s pad.
     assert.equal(meta.durationSec, 57 * 60 + 15 + 180);
+  });
+
+  it("builds Jamie Jones Lost Horizon Festival meta from the curated 1001 capture", () => {
+    assert.ok(JAMIE_LOST_HORIZON);
+    const meta = watchMetaFromCuratedSeed(JAMIE_LOST_HORIZON);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "U2ZjW_8K3h4");
+    assert.match(meta.title, /Lost Horizon Festival/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=U2ZjW_8K3h4");
+    // Last cue 54:58 + 180s pad.
+    assert.equal(meta.durationSec, 54 * 60 + 58 + 180);
   });
 
   it("returns null without a title or video id", () => {
@@ -1829,5 +1843,29 @@ describe("curated YouTube 429 fallback", () => {
       false,
     );
     assert.match(String(sets[0]?.title ?? ""), /UNreleased/i);
+  });
+
+  it("lands Jamie Jones Lost Horizon Festival from the 1001 seed when watch is 429", async () => {
+    assert.ok(JAMIE_LOST_HORIZON);
+    const adapter = createYoutubeAdapter([JAMIE_LOST_HORIZON], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-U2ZjW_8K3h4");
+    assert.equal(sets[0]!.type, "festival");
+    assert.equal(sets[0]!.genre, "Tech House");
+    assert.ok(sets[0]!.plays.length >= 16);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.equal(sets[0]?.primaryArtist?.slug, "jamie-jones");
+    assert.equal(sets[0]?.seriesName, "Beatport Live");
+    assert.match(String(sets[0]?.eventName ?? ""), /Lost Horizon Festival/i);
+    assert.equal(
+      (sets[0]?.collaborators ?? []).some((c) => c.slug === "beatport-live"),
+      false,
+    );
+    assert.equal(
+      (sets[0]?.collaborators ?? []).some((c) => c.slug === "gas-tower"),
+      false,
+    );
+    assert.match(String(sets[0]?.title ?? ""), /Lost Horizon Festival/i);
   });
 });
