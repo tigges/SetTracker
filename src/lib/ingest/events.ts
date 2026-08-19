@@ -75,6 +75,14 @@ export const KNOWN_EVENTS: Record<string, CanonicalEvent> = {
     instagram: "https://instagram.com/lollapalooza",
     twitter: "https://x.com/lollapalooza",
   },
+  "lollapalooza-chile": {
+    slug: "lollapalooza-chile",
+    name: "Lollapalooza Chile",
+    kind: "festival",
+    location: "Chile",
+    // No official site in the operator paste — do not invent a host.
+    // Banco de Chile Stage is a stage, not a separate event.
+  },
   "brooklyn-mirage": {
     slug: "brooklyn-mirage",
     name: "The Brooklyn Mirage",
@@ -694,6 +702,10 @@ export function inferFestivalEvent(title: string): CanonicalEvent | null {
   if (/\bparookaville\b/i.test(t)) return KNOWN_EVENTS.parookaville;
   if (/\bburning\s*man\b/i.test(t)) return KNOWN_EVENTS["burning-man"];
   if (/\bcoachella\b/i.test(t)) return KNOWN_EVENTS.coachella;
+  // Chile before generic Lollapalooza — Chicago site must not win this title.
+  if (/\blollapalooza\s+chile\b/i.test(t)) {
+    return KNOWN_EVENTS["lollapalooza-chile"];
+  }
   if (/\blollapalooza\b/i.test(t)) return KNOWN_EVENTS.lollapalooza;
   if (/\bnocturnal\s*wonderland\b/i.test(t)) {
     return KNOWN_EVENTS["nocturnal-wonderland"];

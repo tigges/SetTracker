@@ -162,6 +162,7 @@ import {
   TL_MEDUZA_CLUB_SPACE_MIAMI_2026,
   TL_AUSTIN_KRAMER_UNRELEASED_139_2026,
   TL_JAMIE_JONES_GAS_TOWER_LOST_HORIZON_FESTIVAL_2020,
+  TL_SKRILLEX_BANCO_DE_CHILE_STAGE_LOLLAPALOOZA_CHILE_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   tracklist1001RowsToPlays,
@@ -2536,6 +2537,43 @@ assert.notEqual(
   TRACKLIST_1001_BY_SOURCE_SLUG["yt-U2ZjW_8K3h4"],
   TRACKLIST_1001_BY_SOURCE_SLUG["sc-jamie-jones-hot-robot-radio-239"],
 );
+
+assertSeedClocks(TL_SKRILLEX_BANCO_DE_CHILE_STAGE_LOLLAPALOOZA_CHILE_2026);
+assert.equal(TL_SKRILLEX_BANCO_DE_CHILE_STAGE_LOLLAPALOOZA_CHILE_2026.length, 73);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-loD-whuR5zc"],
+  TL_SKRILLEX_BANCO_DE_CHILE_STAGE_LOLLAPALOOZA_CHILE_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-oGS0A_R9tag"],
+  undefined,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-https://youtu.be/loD-whuR5zc"],
+  undefined,
+);
+const skrillexChile = tracklist1001RowsToPlays(
+  TL_SKRILLEX_BANCO_DE_CHILE_STAGE_LOLLAPALOOZA_CHILE_2026,
+);
+assert.equal(skrillexChile.length, 73);
+assert.equal(skrillexChile[0]?.provenance, "1001tl");
+assert.equal(skrillexChile[0]?.timestamp, 0);
+assert.equal(skrillexChile[0]?.artistName, "Skrillex & Nitepunk");
+assert.equal(skrillexChile[0]?.trackTitle, "Soma");
+assert.equal(skrillexChile[24]?.trackTitle, "Listen Music Culture");
+assert.equal(skrillexChile[24]?.timestamp, 36 * 60 + 30);
+assert.equal(skrillexChile[71]?.trackTitle, "Kyoto (Skrillex & Virtual Riot VIP)");
+assert.equal(skrillexChile[71]?.timestamp, 1 * 3600 + 25 * 60 + 20);
+assert.equal(skrillexChile[72]?.trackTitle, "SAN DIEGO (VIP)");
+assert.equal(skrillexChile[72]?.timestamp, 1 * 3600 + 25 * 60 + 21);
+for (let i = 1; i < skrillexChile.length; i++) {
+  assert.ok(
+    (skrillexChile[i]!.timestamp ?? 0) > (skrillexChile[i - 1]!.timestamp ?? 0),
+    `Skrillex Lollapalooza Chile clocks must increase at index ${i}`,
+  );
+}
+assert.equal(isWiredTracklistSlug("yt-loD-whuR5zc"), true);
+assert.equal(isWiredTracklistSlug("yt-oGS0A_R9tag"), false);
 
 assertSeedClocks(TL_NICKY_ROMERO_PROTOCOL_RADIO_731);
 assert.equal(TL_NICKY_ROMERO_PROTOCOL_RADIO_731.length, 16);

@@ -138,6 +138,9 @@ const AUSTIN_UNRELEASED_139 = YOUTUBE_SETS.find((s) =>
 const JAMIE_LOST_HORIZON = YOUTUBE_SETS.find((s) =>
   s.video.includes("U2ZjW_8K3h4"),
 );
+const SKRILLEX_LOLLA_CHILE = YOUTUBE_SETS.find((s) =>
+  s.video.includes("loD-whuR5zc"),
+);
 
 describe("watchMetaFromCuratedSeed", () => {
   it("builds ASOT 1290 meta from the curated 1001 capture", () => {
@@ -854,6 +857,17 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=U2ZjW_8K3h4");
     // Last cue 54:58 + 180s pad.
     assert.equal(meta.durationSec, 54 * 60 + 58 + 180);
+  });
+
+  it("builds Skrillex Lollapalooza Chile meta from the curated 1001 capture", () => {
+    assert.ok(SKRILLEX_LOLLA_CHILE);
+    const meta = watchMetaFromCuratedSeed(SKRILLEX_LOLLA_CHILE);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "loD-whuR5zc");
+    assert.match(meta.title, /Lollapalooza Chile/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=loD-whuR5zc");
+    // Last cue 1:25:21 + 180s pad.
+    assert.equal(meta.durationSec, 1 * 3600 + 25 * 60 + 21 + 180);
   });
 
   it("returns null without a title or video id", () => {
@@ -1867,5 +1881,29 @@ describe("curated YouTube 429 fallback", () => {
       false,
     );
     assert.match(String(sets[0]?.title ?? ""), /Lost Horizon Festival/i);
+  });
+
+  it("lands Skrillex Lollapalooza Chile from the 1001 seed when watch is 429", async () => {
+    assert.ok(SKRILLEX_LOLLA_CHILE);
+    const adapter = createYoutubeAdapter([SKRILLEX_LOLLA_CHILE], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-loD-whuR5zc");
+    assert.equal(sets[0]!.type, "festival");
+    assert.equal(sets[0]!.genre, "Dubstep");
+    assert.ok(sets[0]!.plays.length >= 73);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.equal(sets[0]?.primaryArtist?.slug, "skrillex");
+    assert.match(String(sets[0]?.eventName ?? ""), /Lollapalooza Chile/i);
+    assert.notEqual(sets[0]?.eventName, "Lollapalooza");
+    assert.equal(
+      (sets[0]?.collaborators ?? []).some((c) => c.slug === "banco-de-chile"),
+      false,
+    );
+    assert.equal(
+      (sets[0]?.collaborators ?? []).some((c) => c.slug === "lollapalooza-chile"),
+      false,
+    );
+    assert.match(String(sets[0]?.title ?? ""), /Banco de Chile/i);
   });
 });

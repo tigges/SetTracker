@@ -196,5 +196,18 @@ assert.equal(
 assert.equal(inferFestivalEvent("Lost Horizon Festival")?.kind, "festival");
 assert.equal(inferFestivalEvent("Lost Horizon Festival")?.website, undefined);
 assert.equal(inferFestivalEvent("Lost Horizon"), null);
+assert.equal(
+  inferFestivalEvent(
+    "Skrillex @ Banco de Chile Stage, Lollapalooza Chile 2026-03-15",
+  )?.slug,
+  "lollapalooza-chile",
+);
+assert.equal(inferFestivalEvent("Lollapalooza Chile")?.kind, "festival");
+assert.equal(inferFestivalEvent("Lollapalooza Chile")?.website, undefined);
+assert.equal(
+  inferFestivalEvent("John Summit Bud Light Stage Lollapalooza Chicago")?.slug,
+  "lollapalooza",
+);
+assert.equal(inferFestivalEvent("Lollapalooza")?.website, "https://www.lollapalooza.com/");
 
 console.log("events.test.ts ok");
