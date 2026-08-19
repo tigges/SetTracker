@@ -52,3 +52,54 @@ export const TL_LAZARUSMAN_KEINEMUSIK_RADIO_SHOW_2026: FingerprintSeedRow[] = [
   { at: "48:40", artist: "Langenberg", title: "Times (Manuel Tur Ground Glass Reflex)" },
   { at: "58:10", artist: "Xinobi & Lazarusman", title: "Breakdown" },
 ];
+
+/**
+ * Vintage Culture @ Pacha NYC, United States 2026-07-03
+ * Official YouTube: https://youtu.be/TDuFnUAo4II
+ * https://www.1001tracklists.com/tracklist/fnw24vt/vintage-culture-pacha-nyc-united-states-2026-07-03.html
+ * Overlay name TL_Vintage-Culture_Pacha_NYC__2026 is not a valid identifier.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-TDuFnUAo4II"] = TL_VINTAGE_CULTURE_PACHA_NYC_2026
+ * Operator paste 2026-08-19 — provenance 1001tl.
+ */
+export const TL_VINTAGE_CULTURE_PACHA_NYC_2026: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "Vintage Culture & Volkoder", title: "Hands Up" },
+  { at: "4:30", artist: "Blank Sense", title: "Hot Beatz" },
+  { at: "7:48", artist: "Viot", title: "Flex" },
+  { at: "17:09", artist: "SCRIPT ft. MAGNUS (UK)", title: "Fever" },
+  { at: "21:47", artist: "Vintage Culture & Volkoder", title: "Best Move" },
+  { at: "26:08", artist: "Talón", title: "Ride On Em" },
+  { at: "29:43", artist: "Max Styler & Vintage Culture & Ali Love", title: "Freaky 1" },
+  { at: "37:48", artist: "Deomid", title: "Put Up Your Hands" },
+  { at: "42:20", artist: "JØRD", title: "Baby Do You Wanna Bump" },
+  { at: "46:50", artist: "Tony Romera", title: "Controller" },
+  { at: "52:08", artist: "Michael Jackson", title: "Billie Jean (Acappella)" },
+  { at: "57:25", artist: "Benito Bazar ft. Tinuade", title: "Back To Life (Vintage Culture & Vinter Remix)" },
+  { at: "1:02:44", artist: "ZARO", title: "Hey" },
+  { at: "1:06:15", artist: "Greggio", title: "Even" },
+  { at: "1:10:48", artist: "Sharam", title: "PATT (Party All The Time) (Freedom Mix)" },
+  { at: "1:15:42", artist: "Kashovski", title: "Wally Bang" },
+  { at: "1:25:37", artist: "Vintage Culture", title: "Do You" },
+  { at: "1:29:48", artist: "Shakedown", title: "At Night (Acappella)" },
+  { at: "1:33:58", artist: "Fancy Inc", title: "Been A Long Time" },
+  { at: "1:38:13", artist: "Talón", title: "The King" },
+  { at: "1:41:38", artist: "Michael Gray", title: "Universe" },
+  { at: "1:44:53", artist: "Greggio", title: "Attack" },
+  { at: "1:57:34", artist: "The Killers", title: "Somebody Told Me (Solomun Remix)" },
+  { at: "2:02:36", artist: "SONNIY", title: "Red Line" },
+  { at: "2:13:05", artist: "DEPARTAMENTO", title: "Overdose" },
+  { at: "2:16:50", artist: "Vintage Culture & Roddy Lima", title: "Analog Ascent" },
+  { at: "2:20:44", artist: "Vintage Culture & Nariman & rhys from the sticks", title: "Think Too Much" },
+  { at: "2:24:32", artist: "Adam Beyer", title: "Close Your Eyes" },
+  { at: "2:29:27", artist: "Contribe", title: "Batucada" },
+  { at: "2:31:45", artist: "Layo & Bushwacka!", title: "Love Story (Vintage Culture & Vinter Remix)" },
+  { at: "2:40:16", artist: "Bronski Beat", title: "Smalltown Boy" },
+  { at: "2:45:01", artist: "Vintage Culture & Volkoder", title: "Rave" },
+  { at: "2:48:04", artist: "Max Styler ft. Benni Ola", title: "Uh Oh!" },
+  { at: "2:51:57", artist: "STFU & Supermax", title: "Love Machine" },
+  { at: "2:55:35", artist: "CamelPhat & Volkoder", title: "Unique Moment" },
+  { at: "3:00:40", artist: "Pablo Say", title: "Recognize" },
+  { at: "3:04:35", artist: "Andrew Meller", title: "Born Slippy (Reincarnation Mix)" },
+  { at: "3:11:52", artist: "Roland Clark", title: "Born To Be A DJ" },
+  { at: "3:19:09", artist: "Gabss & Vintage Culture", title: "Lost" },
+  { at: "3:23:23", artist: "Supermini & Frankie Romano", title: "Celebration (Antdot & Maz Edit)" },
+];

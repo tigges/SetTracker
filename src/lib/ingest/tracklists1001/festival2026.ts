@@ -94,6 +94,7 @@ import {
 } from "./festivalCaptures20260818";
 import {
   TL_LAZARUSMAN_KEINEMUSIK_RADIO_SHOW_2026,
+  TL_VINTAGE_CULTURE_PACHA_NYC_2026,
   TL_VINTAGE_CULTURE_ULTRA_MIAMI_RESISTANCE_2026,
 } from "./festivalCaptures20260819";
 
@@ -176,6 +177,7 @@ export {
   TL_NOTION_PERRYS_LOLLAPALOOZA_CHICAGO_2026,
   TL_VINTAGE_CULTURE_ULTRA_MIAMI_RESISTANCE_2026,
   TL_LAZARUSMAN_KEINEMUSIK_RADIO_SHOW_2026,
+  TL_VINTAGE_CULTURE_PACHA_NYC_2026,
 };
 
 function formatClock(sec: number): string {
@@ -4719,6 +4721,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-xXRjglkAmq8": TL_VINTAGE_CULTURE_ULTRA_MIAMI_RESISTANCE_2026,
   "sc-keinemusik-keinemusik-radio-show-by-lazarusman-03072026":
     TL_LAZARUSMAN_KEINEMUSIK_RADIO_SHOW_2026,
+  "yt-TDuFnUAo4II": TL_VINTAGE_CULTURE_PACHA_NYC_2026,
 };
 
 /** Sanity: every seeded clock must parse. */

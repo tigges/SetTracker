@@ -149,6 +149,7 @@ import {
   TL_NOTION_PERRYS_LOLLAPALOOZA_CHICAGO_2026,
   TL_VINTAGE_CULTURE_ULTRA_MIAMI_RESISTANCE_2026,
   TL_LAZARUSMAN_KEINEMUSIK_RADIO_SHOW_2026,
+  TL_VINTAGE_CULTURE_PACHA_NYC_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   tracklist1001RowsToPlays,
@@ -2005,6 +2006,28 @@ assert.equal(
   ),
   true,
 );
+
+assertSeedClocks(TL_VINTAGE_CULTURE_PACHA_NYC_2026);
+assert.equal(TL_VINTAGE_CULTURE_PACHA_NYC_2026.length, 40);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-TDuFnUAo4II"],
+  TL_VINTAGE_CULTURE_PACHA_NYC_2026,
+);
+const vcPachaNyc = tracklist1001RowsToPlays(TL_VINTAGE_CULTURE_PACHA_NYC_2026);
+assert.equal(vcPachaNyc.length, 40);
+assert.equal(vcPachaNyc[0]?.provenance, "1001tl");
+assert.equal(vcPachaNyc[0]?.timestamp, 0);
+assert.equal(vcPachaNyc[0]?.trackTitle, "Hands Up");
+assert.equal(vcPachaNyc[8]?.artistName, "JØRD");
+assert.equal(vcPachaNyc[39]?.trackTitle, "Celebration (Antdot & Maz Edit)");
+assert.equal(vcPachaNyc[39]?.timestamp, 3 * 3600 + 23 * 60 + 23);
+for (let i = 1; i < vcPachaNyc.length; i++) {
+  assert.ok(
+    (vcPachaNyc[i]!.timestamp ?? 0) > (vcPachaNyc[i - 1]!.timestamp ?? 0),
+    `Vintage Culture Pacha NYC clocks must increase at index ${i}`,
+  );
+}
+assert.equal(isWiredTracklistSlug("yt-TDuFnUAo4II"), true);
 
 assertSeedClocks(TL_NICKY_ROMERO_PROTOCOL_RADIO_731);
 assert.equal(TL_NICKY_ROMERO_PROTOCOL_RADIO_731.length, 16);

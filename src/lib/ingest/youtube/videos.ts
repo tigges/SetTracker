@@ -129,6 +129,7 @@ import {
   TL_DVLM_SMASH_THE_HOUSE_RADIO_687_2026,
   TL_NOTION_PERRYS_LOLLAPALOOZA_CHICAGO_2026,
   TL_VINTAGE_CULTURE_ULTRA_MIAMI_RESISTANCE_2026,
+  TL_VINTAGE_CULTURE_PACHA_NYC_2026,
 } from "../tracklists1001/seeds";
 import type { RawArtist } from "../types";
 import { slugify } from "../types";
@@ -1524,6 +1525,9 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     title: "Vintage Culture @ Pacha New York City, Affairs (2026)",
     seriesName: "Affairs",
     eventName: "Pacha New York",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/fnw24vt/vintage-culture-pacha-nyc-united-states-2026-07-03.html",
+    tracklist1001: TL_VINTAGE_CULTURE_PACHA_NYC_2026,
   },
   {
     // Artist-channel Relive of the Burning Man Playground set (same 1001 as SC).
