@@ -667,7 +667,82 @@ export function calendarMarkedDays(
 // ---------------------------------------------------------------------------
 // DJ profile hub
 // ---------------------------------------------------------------------------
-export async function getDjBySlug(slug: string) {
+export type DjRecentSet = {
+  slug: string;
+  title: string;
+  type: string;
+  publishedAt: Date;
+  durationSec: number;
+  cover: string | null;
+  imageUrl: string | null;
+  eventName: string | null;
+  seriesName: string | null;
+  trackCount: number;
+  statusCounts: StatusCounts;
+  isPrimary: boolean;
+};
+
+export type DjPlayedTrack = {
+  slug: string;
+  title: string;
+  artistName: string;
+  count: number;
+  imageUrl: string | null;
+};
+
+export type DjCollaborator = {
+  name: string;
+  slug: string;
+  accent: string;
+  count: number;
+};
+
+export type DjRelated = {
+  slug: string;
+  name: string;
+  accent: string;
+  reason: string;
+};
+
+export type DjUpcomingNight = {
+  slug: string;
+  title: string;
+  startsAt: string;
+  eventSlug: string;
+  eventName: string;
+  sourceUrl: string;
+  ticketsUrl: string | null;
+};
+
+export type DjProfile = {
+  id: string;
+  slug: string;
+  name: string;
+  homeCity: string | null;
+  bio: string | null;
+  accent: string;
+  imageUrl: string | null;
+  socials: {
+    soundcloud: string | null;
+    youtube: string | null;
+    instagram: string | null;
+    twitter: string | null;
+    website: string | null;
+    beatport: string | null;
+  };
+  series: Array<{ slug: string; name: string; setCount: number }>;
+  genre: string | null;
+  upcomingNights: DjUpcomingNight[];
+  totals: { sets: number; tracks: number };
+  recentSets: DjRecentSet[];
+  mostPlayed: DjPlayedTrack[];
+  collaborators: DjCollaborator[];
+  related: DjRelated[];
+  health: StatusCounts;
+  provenance: Record<string, number>;
+};
+
+export async function getDjBySlug(slug: string): Promise<DjProfile | null> {
   const mapped = canonicalDjSlug(slug);
   const dj = await prisma.dj.findUnique({
     where: { slug: mapped },
@@ -910,8 +985,6 @@ export async function getDjBySlug(slug: string) {
   };
 }
 
-export type DjProfile = NonNullable<Awaited<ReturnType<typeof getDjBySlug>>>;
-
 async function upcomingNightsForDj(
   dj: { slug: string; name: string },
   limit = 3,
@@ -1124,7 +1197,7 @@ export async function getDjList(): Promise<DjListItem[]> {
   });
 }
 
-export async function getAllSetSlugs() {
+export async function getAllSetSlugs(): Promise<string[]> {
   const rows = await prisma.set.findMany({
     select: {
       slug: true,
@@ -1205,7 +1278,7 @@ export async function getLabels() {
     .sort((a, b) => b.setCount - a.setCount || b.trackCount - a.trackCount || a.name.localeCompare(b.name));
 }
 
-export async function getAllLabelSlugs() {
+export async function getAllLabelSlugs(): Promise<string[]> {
   const rows = await prisma.label.findMany({ select: { slug: true } });
   return rows.map((r) => r.slug);
 }
@@ -1292,7 +1365,7 @@ export async function getLabelBySlug(slug: string) {
 
 export type LabelProfile = NonNullable<Awaited<ReturnType<typeof getLabelBySlug>>>;
 
-export async function getAllDjSlugs() {
+export async function getAllDjSlugs(): Promise<string[]> {
   // Pages export size cliff (~1–2GB): skip discovery stub DJs with no sets.
   // Always keep social-pinned artist DJs even before their first set lands.
   // Never export festival / stage / radio-series / brand-host rows as artists.
@@ -1327,8 +1400,38 @@ export async function getAllDjSlugs() {
 // Events directory (Prisma Event — festivals, clubs, livestream channels)
 // Kept separate from DJs / Labels / DJ Series.
 // ---------------------------------------------------------------------------
-export async function getVenues() {
-  const events = await prisma.event.findMany({
+export type VenueListItem = {
+  id: string;
+  slug: string;
+  name: string;
+  kind: string;
+  location: string | null;
+  website: string | null;
+  setCount: number;
+  isBrowseReady: boolean;
+  imageUrl: string | null;
+  accent: string;
+};
+
+type VenueQueryRow = {
+  id: string;
+  slug: string;
+  name: string;
+  kind: string;
+  location: string | null;
+  website: string | null;
+  imageUrl: string | null;
+  _count: { sets: number };
+  sets: Array<{
+    imageUrl: string | null;
+    artists: Array<{
+      dj: { imageUrl: string | null; accent: string | null };
+    }>;
+  }>;
+};
+
+export async function getVenues(): Promise<VenueListItem[]> {
+  const events: VenueQueryRow[] = await prisma.event.findMany({
     orderBy: { name: "asc" },
     include: {
       _count: { select: { sets: true } },
@@ -1372,7 +1475,7 @@ export async function getVenues() {
     .sort((a, b) => b.setCount - a.setCount || a.name.localeCompare(b.name));
 }
 
-export async function getAllVenueSlugs() {
+export async function getAllVenueSlugs(): Promise<string[]> {
   const rows = await prisma.event.findMany({
     where: {
       OR: [{ sets: { some: {} } }, { website: { not: null } }],
@@ -1382,7 +1485,7 @@ export async function getAllVenueSlugs() {
   return rows.map((r) => r.slug);
 }
 
-export async function getAllSeriesSlugs() {
+export async function getAllSeriesSlugs(): Promise<string[]> {
   const rows = await prisma.series.findMany({
     where: { sets: { some: {} } },
     select: { slug: true },
@@ -1699,7 +1802,7 @@ const TRACK_STATIC_EXPORT_CAP = Number(
   process.env.TRACK_STATIC_EXPORT_CAP || 400,
 );
 
-export async function getAllTrackSlugs() {
+export async function getAllTrackSlugs(): Promise<string[]> {
   const { ensureTrackSlugs } = await import("@/lib/tracks/ensureSlugs");
   await ensureTrackSlugs(prisma);
   // Prefer frequently played tracks; Music-credit floods otherwise blow the
