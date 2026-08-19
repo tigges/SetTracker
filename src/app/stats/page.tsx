@@ -2,6 +2,11 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import Link from "next/link";
 import { SetEntryLink } from "@/components/SetEntryLink";
+import {
+  LeftoverHostQueue,
+  StatsPlaybook,
+  WeakSiteQueue,
+} from "@/components/StatsPlaybook";
 import { StatsHealthCard, StatsMeter } from "@/components/StatsHealthCard";
 import { getCatalogStats } from "@/lib/catalogStats";
 import { loadDjMagTop100RankBySlug } from "@/lib/djmagTop100";
@@ -166,8 +171,14 @@ export default async function StatsPage() {
           {process.env.NEXT_PUBLIC_APP_VERSION
             ? ` · v${process.env.NEXT_PUBLIC_APP_VERSION}`
             : ""}
+          {" · last ship, not a live crawl"}
         </p>
       </div>
+
+      <StatsPlaybook
+        catalogNote={health.playbook.catalogNote}
+        items={health.playbook.items}
+      />
 
       <StatsHealthCard
         id="djs"
@@ -242,6 +253,24 @@ export default async function StatsPage() {
         Queues
       </p>
 
+      <div id="leftover-hosts">
+        <QueueFold
+          title="Leftover hosts"
+          count={health.playbook.leftoverHosts.length}
+          hint="Set / film / event titles stored as DJs. Relink the sets, then drop the row. Not LLM handle work."
+        >
+          <LeftoverHostQueue rows={health.playbook.leftoverHosts} />
+        </QueueFold>
+      </div>
+      <div id="weak-sites">
+        <QueueFold
+          title="Weak chart websites"
+          count={health.playbook.weakSites.length}
+          hint="Official www only. DJ Mag, 6am, Wikipedia, RA, DICE, and Shotgun are not the homepage."
+        >
+          <WeakSiteQueue rows={health.playbook.weakSites} />
+        </QueueFold>
+      </div>
       <div id="dj-handles">
         <QueueFold
           title="Pin handles"

@@ -1,0 +1,64 @@
+{
+  "generatedAt": "2026-08-19T02:32:39.363Z",
+  "csv": "/tmp/cursor/track-id-results-jsonl-4.jsonl",
+  "rows": 7287,
+  "withBeatport": 4466,
+  "withIsrc": 4422,
+  "beatportProbes": [
+    {
+      "url": "https://www.beatport.com/track/connect/17595139",
+      "status": 200,
+      "finalUrl": "https://www.beatport.com/track/connect/17595139"
+    },
+    {
+      "url": "https://www.beatport.com/track/footrocker/4437156",
+      "status": 200,
+      "finalUrl": "https://www.beatport.com/track/footrocker/4437156"
+    },
+    {
+      "url": "https://www.beatport.com/track/weirder-things/26745003",
+      "status": 200,
+      "finalUrl": "https://www.beatport.com/track/weirder-things/26745003"
+    },
+    {
+      "url": "https://www.beatport.com/track/pursuit-of-happiness/12110556",
+      "status": 200,
+      "finalUrl": "https://www.beatport.com/track/pursuit-of-happiness/12110556"
+    },
+    {
+      "url": "https://www.beatport.com/track/meet-her-at-the-love-parade/18982592",
+      "status": 200,
+      "finalUrl": "https://www.beatport.com/track/meet-her-at-the-love-parade/18982592"
+    },
+    {
+      "url": "https://www.beatport.com/track/around-the-world/5811846",
+      "status": 200,
+      "finalUrl": "https://www.beatport.com/track/around-the-world/5811846"
+    },
+    {
+      "url": "https://www.beatport.com/track/one-of-a-kind/17974382",
+      "status": 200,
+      "finalUrl": "https://www.beatport.com/track/one-of-a-kind/17974382"
+    },
+    {
+      "url": "https://www.beatport.com/track/get-your-groove-on/30172322",
+      "status": 200,
+      "finalUrl": "https://www.beatport.com/track/get-your-groove-on/30172322"
+    }
+  ],
+  "deezerConfirmed": 1349,
+  "newPins": 1349,
+  "keptExisting": 1882,
+  "pins": 3231,
+  "pinsWithBeatport": 3164,
+  "pinsWithIsrc": 3231,
+  "beatport404dropped": [
+    "https://www.beatport.com/track/living-on-video-feat-dtale-vip-mix/17658162"
+  ],
+  "junkSkipped": 4,
+  "rejected": {
+    "not confirmed": 2970,
+    "beatport slug mismatch": 99
+  },
+  "note": "Producer JSONL is not committed (secret-scan title hits). Deezer confirmed 1,349 of 4,422 ISRCs. Merged with 1,882 existing pins. Beatport HTML is never scraped. One HEAD 404 Beatport URL dropped (ISRC kept)."
+}

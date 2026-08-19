@@ -191,6 +191,7 @@ export const KNOWN_EVENTS: Record<string, CanonicalEvent> = {
     kind: "livestream",
     website: "https://boilerroom.tv/",
   },
+  // Immersive event organiser / agency — never a DJ. Official site cercle.io.
   cercle: {
     slug: "cercle",
     name: "Cercle",

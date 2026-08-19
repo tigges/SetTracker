@@ -17,6 +17,15 @@ describe("producerDjReview.data", () => {
     assert.equal(isProducerDiscardName("Sorry"), true);
     assert.equal(isProducerDiscardName("Two"), true);
     assert.equal(isProducerDiscardName("Hot Since 82"), false);
+    assert.equal(
+      isProducerDiscardName("Behind Cercle Odyssey I Chapter Four: Curtain"),
+      true,
+    );
+    assert.equal(isProducerDiscardName("Live in Buenos Aires"), true);
+    assert.equal(isProducerDiscardName("Rave UKraine"), true);
+    assert.equal(isProducerDiscardSlug("live-in-buenos-aires"), true);
+    assert.equal(isProducerDiscardSlug("rave-ukraine"), true);
+    assert.equal(isProducerDiscardSlug("bart-skils"), false);
   });
 
   it("folds known leftovers onto real DJs", () => {
