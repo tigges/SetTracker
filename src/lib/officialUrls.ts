@@ -6,7 +6,7 @@
  */
 
 const WEAK_OFFICIAL =
-  /6amgroup\.com|clubtickets\.com\/blog|djmag\.com|wikipedia\.org|wikidata\.org|(^|[/.])ra\.co([/?#]|$)|residentadvisor\.net|dice\.fm|shotgun\.live|jambase\.com|eventpop\.me/i;
+  /6amgroup\.com|clubtickets\.com\/blog|djmag\.com\/top[-_]?100|djmag\.com\/?([?#]|$)|wikipedia\.org|wikidata\.org|(^|[/.])ra\.co([/?#]|$)|residentadvisor\.net|dice\.fm|shotgun\.live|jambase\.com|eventpop\.me/i;
 
 export function isWeakOfficialUrl(url: string | null | undefined): boolean {
   if (!url?.trim()) return false;

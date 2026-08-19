@@ -28,6 +28,7 @@ assert.equal(
   "nocturnal-wonderland",
 );
 assert.equal(inferFestivalEvent("Set at Djoon Paris")?.slug, "djoon");
+assert.equal(resolveEvent("Djoon").website, "https://djoon.com/");
 assert.equal(
   inferFestivalEvent("BLACK COFFEE - Mayan Warrior - Burning Man 2025")?.slug,
   "burning-man",
