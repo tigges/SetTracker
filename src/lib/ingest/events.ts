@@ -385,6 +385,13 @@ export const KNOWN_EVENTS: Record<string, CanonicalEvent> = {
     location: "Montréal, Canada",
     // No official site in the operator paste — do not invent a host.
   },
+  "club-space": {
+    slug: "club-space",
+    name: "Club Space",
+    kind: "club",
+    location: "Miami, United States",
+    website: "https://www.clubspace.com/",
+  },
   "street-parade": {
     slug: "street-parade",
     name: "Street Parade",
@@ -536,6 +543,9 @@ const ALIAS_TO_SLUG: Record<string, string> = {
   "amnesia-ibiza": "amnesia-ibiza",
   "warehouse-project": "warehouse-project",
   "the-warehouse-project": "warehouse-project",
+  "club-space": "club-space",
+  "club-space-miami": "club-space",
+  "space-miami": "club-space",
   "concourse-project": "concourse-project",
   "the-concourse-project": "concourse-project",
   "avalon-hollywood": "avalon-hollywood",
@@ -713,6 +723,9 @@ export function inferFestivalEvent(title: string): CanonicalEvent | null {
   // Require Montréal — bare "stereo" is STEREOHYPE / Stereo Love / stereoBLOOM.
   if (/\bstereo\s+montr[eé]al\b/i.test(t)) {
     return KNOWN_EVENTS["stereo-montreal"];
+  }
+  if (/\bclub\s+space\b|\bspace\s+miami\b/i.test(t)) {
+    return KNOWN_EVENTS["club-space"];
   }
   // DJ Mag Top 100 Festivals / Clubs / other club listicles (not Mixmag.net).
   return (

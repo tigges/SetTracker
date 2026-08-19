@@ -535,4 +535,18 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     type: "mix",
     minDurationSec: 90 * 60,
   },
+  {
+    // Official MEDUZA Club Space Miami 2026-03-13; 1001TL wired via
+    // sc-meduzamusic-meduza-space-miami-march-13. Never wire sc-https://…
+    // or the other Space upload sc-meduzamusic-meduza-club-space.
+    url: "https://soundcloud.com/meduzamusic/meduza-space-miami-march-13",
+    primaryArtist: dj("MEDUZA", {
+      accent: "#5cc7e8",
+      homeCity: "Italy",
+    }),
+    genre: "House",
+    eventName: "Club Space Miami",
+    type: "mix",
+    minDurationSec: 90 * 60,
+  },
 ];

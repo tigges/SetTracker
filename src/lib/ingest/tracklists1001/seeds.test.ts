@@ -159,6 +159,7 @@ import {
   TL_GIUSEPPE_OTTAVIANI_DIGITAL_SOCIETY_LEEDS_WAREHOUSE_2026,
   TL_CUEBRICK_CONFERENCE_297_2026,
   TL_MEDUZA_STEREO_MONTREAL_CANADA_2026,
+  TL_MEDUZA_CLUB_SPACE_MIAMI_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   tracklist1001RowsToPlays,
@@ -2412,6 +2413,54 @@ assert.equal(
   ),
   false,
 );
+
+assertSeedClocks(TL_MEDUZA_CLUB_SPACE_MIAMI_2026);
+assert.equal(TL_MEDUZA_CLUB_SPACE_MIAMI_2026.length, 62);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-meduzamusic-meduza-space-miami-march-13"],
+  TL_MEDUZA_CLUB_SPACE_MIAMI_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-https://soundcloud.com/meduzamusic/meduza-space-miami-march-13"
+  ],
+  undefined,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-meduzamusic-meduza-club-space"],
+  undefined,
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-meduzamusic-meduza-space-miami-march-13"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-meduzamusic-meduza-dj-set"],
+);
+const meduzaSpace = tracklist1001RowsToPlays(TL_MEDUZA_CLUB_SPACE_MIAMI_2026);
+assert.equal(meduzaSpace.length, 62);
+assert.equal(meduzaSpace[0]?.provenance, "1001tl");
+assert.equal(meduzaSpace[0]?.timestamp, 0);
+assert.equal(meduzaSpace[0]?.artistName, "MEDUZA & Kevin de Vries");
+assert.equal(meduzaSpace[0]?.trackTitle, "7 Days");
+assert.equal(meduzaSpace[10]?.trackTitle, "Lose Control");
+assert.equal(meduzaSpace[10]?.timestamp, 50 * 60 + 4);
+assert.equal(meduzaSpace[61]?.trackTitle, "Careless Whisper");
+assert.equal(meduzaSpace[61]?.timestamp, 4 * 3600 + 52 * 60 + 15);
+for (let i = 1; i < meduzaSpace.length; i++) {
+  assert.ok(
+    (meduzaSpace[i]!.timestamp ?? 0) > (meduzaSpace[i - 1]!.timestamp ?? 0),
+    `MEDUZA Club Space Miami clocks must increase at index ${i}`,
+  );
+}
+assert.equal(
+  isWiredTracklistSlug("sc-meduzamusic-meduza-space-miami-march-13"),
+  true,
+);
+assert.equal(
+  isWiredTracklistSlug(
+    "sc-https://soundcloud.com/meduzamusic/meduza-space-miami-march-13",
+  ),
+  false,
+);
+assert.equal(isWiredTracklistSlug("sc-meduzamusic-meduza-club-space"), false);
 assert.equal(
   isWiredTracklistSlug(
     "sc-https://soundcloud.com/giuseppeottaviani/giuseppe-ottaviani-digitalsociety",

@@ -172,5 +172,20 @@ assert.equal(
   inferFestivalEvent("R3WIRE - House & Tech Live on STEREOHYPE")?.slug,
   "stereohype",
 );
+assert.equal(
+  inferFestivalEvent("MEDUZA @ Club Space Miami, United States 2026-03-13")
+    ?.slug,
+  "club-space",
+);
+assert.equal(
+  inferFestivalEvent("MEDUZA Space Miami March 13")?.website,
+  "https://www.clubspace.com/",
+);
+assert.equal(
+  inferFestivalEvent(
+    "Vintage Culture Live at EDC Las Vegas, Neon Garden (Club Space)",
+  )?.slug,
+  "edc-lv",
+);
 
 console.log("events.test.ts ok");

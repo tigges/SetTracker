@@ -3,6 +3,14 @@
   "updatedAt": "2026-08-19T00:00:00.000Z",
   "urls": [
     {
+      "label": "MEDUZA · Club Space Miami, United States 2026-03-13",
+      "slug": "sc-meduzamusic-meduza-space-miami-march-13",
+      "name": "TL_MEDUZA_CLUB_SPACE_MIAMI_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/2mhf717k/meduza-club-space-miami-united-states-2026-03-13.html",
+      "soundcloudUrl": "https://soundcloud.com/meduzamusic/meduza-space-miami-march-13",
+      "note": "Operator paste 2026-08-19. 62 timed cues on official meduzamusic SC. Never sc-https://… or sc-meduzamusic-meduza-club-space (different Space upload). Overlay TL_MEDUZA_Club-Space_Miami_United-States_2026-03-13 is not a valid identifier. Distinct from Stereo Montréal sc-meduzamusic-meduza-dj-set."
+    },
+    {
       "label": "MEDUZA · Stereo Montréal, Canada 2026-05-16",
       "slug": "sc-meduzamusic-meduza-dj-set",
       "name": "TL_MEDUZA_STEREO_MONTREAL_CANADA_2026",

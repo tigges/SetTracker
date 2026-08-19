@@ -516,4 +516,23 @@ assert.equal(
   "sc-meduzamusic-meduza-dj-set",
 );
 
+const meduzaSpaceSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url === "https://soundcloud.com/meduzamusic/meduza-space-miami-march-13",
+);
+assert.ok(meduzaSpaceSc);
+assert.equal(meduzaSpaceSc.primaryArtist.name, "MEDUZA");
+assert.equal(meduzaSpaceSc.eventName, "Club Space Miami");
+assert.equal(meduzaSpaceSc.type, "mix");
+assert.equal(
+  `sc-meduzamusic-${slugify("meduza-space-miami-march-13")}`,
+  "sc-meduzamusic-meduza-space-miami-march-13",
+);
+assert.equal(
+  SOUNDCLOUD_TRACK_SEEDS.some((s) =>
+    /meduzamusic\/meduza-club-space$/.test(s.url),
+  ),
+  false,
+);
+
 console.log("soundcloud/tracks.test.ts ok");

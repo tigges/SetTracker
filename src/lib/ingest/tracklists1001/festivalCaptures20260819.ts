@@ -540,3 +540,78 @@ export const TL_MEDUZA_STEREO_MONTREAL_CANADA_2026: FingerprintSeedRow[] = [
   { at: "8:48:55", artist: "Michael Jackson", title: "Billie Jean (St Amour Remix)" },
   { at: "8:53:10", artist: "Octave One ft. Ann Saunderson", title: "Black Water (Full Strings Vocal Mix)" },
 ];
+
+/**
+ * MEDUZA @ Club Space Miami, United States 2026-03-13
+ * Official SoundCloud: https://soundcloud.com/meduzamusic/meduza-space-miami-march-13
+ * https://www.1001tracklists.com/tracklist/2mhf717k/meduza-club-space-miami-united-states-2026-03-13.html
+ * Overlay name TL_MEDUZA_Club-Space_Miami_United-States_2026-03-13 is not a valid identifier.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["sc-meduzamusic-meduza-space-miami-march-13"]
+ * Never wire sc-https://… or the other Space upload sc-meduzamusic-meduza-club-space.
+ * Distinct from Stereo Montréal sc-meduzamusic-meduza-dj-set.
+ * Captured 2026-08-19 — provenance 1001tl.
+ */
+export const TL_MEDUZA_CLUB_SPACE_MIAMI_2026: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "MEDUZA & Kevin de Vries", title: "7 Days" },
+  { at: "9:00", artist: "Adam Ten & Asulin", title: "Warawara" },
+  { at: "13:52", artist: "Ewan McVicar", title: "Share The House" },
+  { at: "19:20", artist: "La Roux", title: "Bulletproof (Collier Remix)" },
+  { at: "27:34", artist: "Buogo", title: "Panic Attack" },
+  { at: "32:10", artist: "Maori", title: "Higher" },
+  { at: "36:22", artist: "Kygo & Gryffin & Khalid", title: "Save My Love (MEDUZA Remix)" },
+  { at: "39:10", artist: "Daft Punk", title: "Technologic" },
+  { at: "43:23", artist: "Kolombo & Pysh", title: "Straight From The Heart (DEFLEE Remix)" },
+  { at: "45:55", artist: "Volkoder", title: "All Night Long" },
+  { at: "50:04", artist: "MEDUZA & Becky Hill & GOODBOYS", title: "Lose Control" },
+  { at: "54:22", artist: "Jamback", title: "Positive" },
+  { at: "58:40", artist: "Deomid", title: "Shift Friction" },
+  { at: "1:03:00", artist: "Linska", title: "Bad Boy (GENESI Remix)" },
+  { at: "1:06:56", artist: "Travis Scott ft. Kendrick Lamar", title: "Goosebumps" },
+  { at: "1:10:51", artist: "DREYA V", title: "Money" },
+  { at: "1:15:04", artist: "BOg", title: "Run It" },
+  { at: "1:18:36", artist: "MEDUZA & Innellea & GENESI ft. Nu-La", title: "Edge Of The World" },
+  { at: "1:20:24", artist: "Tim Grand", title: "Blind" },
+  { at: "1:22:11", artist: "Supernova", title: "The Bloom" },
+  { at: "1:28:35", artist: "Tiga vs. MEDUZA", title: "You Gonna Want Me (I Know)" },
+  { at: "1:36:04", artist: "MEDUZA ft. Dermot Kennedy", title: "Paradise" },
+  { at: "1:40:40", artist: "Collier", title: "Move Right Now" },
+  { at: "1:45:00", artist: "Andrey Exx & TuraniQa", title: "Be Good To Me" },
+  { at: "1:57:30", artist: "Dead Or Alive", title: "You Spin Me Round (Like A Record)" },
+  { at: "2:07:38", artist: "POLOVICH", title: "Sweet Dreams" },
+  { at: "2:10:56", artist: "JATO", title: "Eyes" },
+  { at: "2:15:00", artist: "GENESI", title: "Drillo" },
+  { at: "2:19:40", artist: "JOSHWA", title: "Out Of My Mind" },
+  { at: "2:24:00", artist: "Jayden Dee", title: "Groove Instructor" },
+  { at: "2:28:40", artist: "Roddy Lima & Gabss", title: "Funky Beat" },
+  { at: "2:30:35", artist: "Fallon", title: "Diet Coke" },
+  { at: "2:32:30", artist: "Green Velvet vs. MEDUZA & GENESI & ESSENTIA", title: "La La Land" },
+  { at: "2:37:05", artist: "MEDUZA ft. HAYLA", title: "Another World" },
+  { at: "2:41:25", artist: "Planet Funk", title: "Chase The Sun (Acappella)" },
+  { at: "2:45:45", artist: "GENESI", title: "Push Me" },
+  { at: "2:55:06", artist: "Benny Benassi & Tobias Gerard", title: "DISCOTEKA" },
+  { at: "2:58:50", artist: "POLOVICH", title: "Overdose" },
+  { at: "3:04:00", artist: "MEDUZA & James Carter ft. Elley Duhé & FAST BOY", title: "Bad Memories" },
+  { at: "3:14:30", artist: "MEDUZA x Eli & Fur", title: "Pegasus" },
+  { at: "3:16:47", artist: "Rihanna", title: "Where Have You Been" },
+  { at: "3:19:03", artist: "Daft Punk", title: "Television Rules The Nation (Shilla Remix)" },
+  { at: "3:23:42", artist: "Broken Hill", title: "Shot My Heart" },
+  { at: "3:31:53", artist: "MEDUZA ft. Hozier", title: "Tell It To My Heart" },
+  { at: "3:36:25", artist: "GENESI & MEDUZA ft. Aya Anne", title: "Freak" },
+  { at: "3:40:56", artist: "Dansyn & Tom Westy", title: "Feel Your Soul" },
+  { at: "3:42:58", artist: "Supermode", title: "Tell Me Why (MEDUZA Remix)" },
+  { at: "3:45:00", artist: "David Guetta ft. Chris Willis", title: "Love Is Gone" },
+  { at: "3:56:48", artist: "ANOTR ft. 54 Ultra", title: "Talk To You" },
+  { at: "4:01:58", artist: "Josh Baker", title: "Bass Up To The Top" },
+  { at: "4:06:28", artist: "Reblok", title: "Retro Nights" },
+  { at: "4:12:08", artist: "Lennard Ellis", title: "Colossum" },
+  { at: "4:13:31", artist: "Noir & Haze vs. MEDUZA", title: "Around" },
+  { at: "4:14:54", artist: "MEDUZA ft. Henry Camamile", title: "Don't Wanna Go Home" },
+  { at: "4:18:15", artist: "Uffie ft. Pharrell Williams", title: "Add Suv (Dedro Edit)" },
+  { at: "4:23:00", artist: "Tony Amatore & Peppe Salerno & Luis Rodriguez", title: "Who's That Girl" },
+  { at: "4:25:50", artist: "Mason", title: "Exceeder" },
+  { at: "4:29:44", artist: "Tom Novy ft. Michael Marshall", title: "Your Body" },
+  { at: "4:33:18", artist: "Chris Lake & Amber Mark", title: "In My Head (Ragie Ban Remix)" },
+  { at: "4:38:05", artist: "MEDUZA ft. GOODBOYS", title: "Piece Of Your Heart" },
+  { at: "4:44:00", artist: "Inndrive & Zaark", title: "Take Our Flight" },
+  { at: "4:52:15", artist: "George Michael", title: "Careless Whisper" },
+];
