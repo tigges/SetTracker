@@ -763,3 +763,27 @@ export const TL_SKRILLEX_BANCO_DE_CHILE_STAGE_LOLLAPALOOZA_CHILE_2026: Fingerpri
     { at: "1:25:20", artist: "Skrillex ft. Sirah", title: "Kyoto (Skrillex & Virtual Riot VIP)" },
     { at: "1:25:21", artist: "Skrillex", title: "SAN DIEGO (VIP)" },
   ];
+
+/**
+ * Chris Stussy @ Boiler Room Edinburgh, United Kingdom 2024-05-19
+ * Official YouTube: https://youtu.be/42XFNGZrpaQ
+ * https://www.1001tracklists.com/tracklist/2787514k/chris-stassy-boiler-room-edinburgh-united-kingdom-2024-05-19.html
+ * Overlay name TL_Chris-Stassy_Boiler-Room_Edinburgh_2024-05-19 is not a valid identifier.
+ * 1001 title spells Stassy; catalog / official YT seed is Chris Stussy.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-42XFNGZrpaQ"]
+ * No SoundCloud in the operator paste — do not invent an SC slug.
+ * Captured 2026-08-19 — provenance 1001tl.
+ */
+export const TL_CHRIS_STUSSY_BOILER_ROOM_EDINBURGH_2024: FingerprintSeedRow[] =
+  [
+    { at: "0:17", artist: "Moby", title: "Go (Chris Stussy Edit)" },
+    { at: "10:40", artist: "Aaron-Carl", title: "Drive (Downriver Dub)" },
+    { at: "15:10", artist: "Pink Floyd", title: "Another Brick In The Wall (Chris Stussy Edit)" },
+    { at: "39:30", artist: "Across Boundaries", title: "T.M.P." },
+    { at: "44:20", artist: "ID", title: "Be Good To Me" },
+    { at: "48:30", artist: "Across Boundaries", title: "Pumpin'" },
+    { at: "53:20", artist: "Obskür", title: "I've Arrived" },
+    { at: "57:00", artist: "Kosh", title: "Come On" },
+    { at: "59:30", artist: "Chris Stussy", title: "Bounce To The Beat" },
+    { at: "1:11:49", artist: "Todd Terry ft. Martha Wash & Jocelyn Brown", title: "Something Going On (Acappella)" },
+  ];

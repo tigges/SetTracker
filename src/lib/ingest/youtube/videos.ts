@@ -139,6 +139,7 @@ import {
   TL_AUSTIN_KRAMER_UNRELEASED_139_2026,
   TL_JAMIE_JONES_GAS_TOWER_LOST_HORIZON_FESTIVAL_2020,
   TL_SKRILLEX_BANCO_DE_CHILE_STAGE_LOLLAPALOOZA_CHILE_2026,
+  TL_CHRIS_STUSSY_BOILER_ROOM_EDINBURGH_2024,
 } from "../tracklists1001/seeds";
 import type { RawArtist } from "../types";
 import { slugify } from "../types";
@@ -2559,6 +2560,12 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     title: "Chris Stussy | Boiler Room: Edinburgh",
     seriesName: "Boiler Room",
     eventName: "Boiler Room Edinburgh",
+    // Official Boiler Room upload already curated. Operator 1001 paste
+    // 2026-08-19. 1001 title spells Stassy; catalog DJ is Chris Stussy.
+    // No SoundCloud in the paste — do not invent an SC slug.
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2787514k/chris-stassy-boiler-room-edinburgh-united-kingdom-2024-05-19.html",
+    tracklist1001: TL_CHRIS_STUSSY_BOILER_ROOM_EDINBURGH_2024,
   },
   {
     video: "https://www.youtube.com/watch?v=5LqJCIi6p7Y",
