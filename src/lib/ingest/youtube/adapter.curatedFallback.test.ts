@@ -26,6 +26,15 @@ const JOEL_EDGE = YOUTUBE_SETS.find((s) => s.video.includes("soEFl73peVA"));
 const PRR_731 = YOUTUBE_SETS.find((s) => s.video.includes("Rgx-wT9FDaE"));
 const STH_687 = YOUTUBE_SETS.find((s) => s.video.includes("eVjC42MNgkI"));
 const NOTION_PERRY = YOUTUBE_SETS.find((s) => s.video.includes("9vgSTomhCp8"));
+const VC_ULTRA = YOUTUBE_SETS.find((s) => s.video.includes("xXRjglkAmq8"));
+const VC_PACHA_NYC = YOUTUBE_SETS.find((s) => s.video.includes("TDuFnUAo4II"));
+const CLAPTONE_BA = YOUTUBE_SETS.find((s) => s.video.includes("fQweMs-Q3rg"));
+const INDIRA_AWAKENINGS = YOUTUBE_SETS.find((s) =>
+  s.video.includes("xUdcEDryN8o"),
+);
+const KOROLOVA_SNOWATTACK = YOUTUBE_SETS.find((s) =>
+  s.video.includes("7UcyaKbvy2o"),
+);
 const MM_YACHT = YOUTUBE_SETS.find((s) => s.video.includes("0-s_qZRWElA"));
 const PRISMATIC_032 = YOUTUBE_SETS.find((s) => s.video.includes("blP5J6BUG0M"));
 const SPECTRUM_485 = YOUTUBE_SETS.find((s) => s.video.includes("yTRvLrtsM9I"));
@@ -578,6 +587,61 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.durationSec, 59 * 60 + 30 + 180);
   });
 
+  it("builds Vintage Culture Ultra Miami Resistance meta from the curated 1001 capture", () => {
+    assert.ok(VC_ULTRA);
+    const meta = watchMetaFromCuratedSeed(VC_ULTRA);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "xXRjglkAmq8");
+    assert.match(meta.title, /Ultra Music Festival Miami 2026/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=xXRjglkAmq8");
+    // Last cue 1:25:45 + 180s pad.
+    assert.equal(meta.durationSec, 1 * 3600 + 25 * 60 + 45 + 180);
+  });
+
+  it("builds Vintage Culture Pacha NYC meta from the curated 1001 capture", () => {
+    assert.ok(VC_PACHA_NYC);
+    const meta = watchMetaFromCuratedSeed(VC_PACHA_NYC);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "TDuFnUAo4II");
+    assert.match(meta.title, /Pacha New York/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=TDuFnUAo4II");
+    // Last cue 3:23:23 + 180s pad.
+    assert.equal(meta.durationSec, 3 * 3600 + 23 * 60 + 23 + 180);
+  });
+
+  it("builds Claptone Masquerade Buenos Aires meta from the curated 1001 capture", () => {
+    assert.ok(CLAPTONE_BA);
+    const meta = watchMetaFromCuratedSeed(CLAPTONE_BA);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "fQweMs-Q3rg");
+    assert.match(meta.title, /Masquerade/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=fQweMs-Q3rg");
+    // Last cue 1:40:32 + 180s pad.
+    assert.equal(meta.durationSec, 1 * 3600 + 40 * 60 + 32 + 180);
+  });
+
+  it("builds Indira Paganotto Area V Awakenings 2025 meta from the curated 1001 capture", () => {
+    assert.ok(INDIRA_AWAKENINGS);
+    const meta = watchMetaFromCuratedSeed(INDIRA_AWAKENINGS);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "xUdcEDryN8o");
+    assert.match(meta.title, /Awakenings Festival 2025/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=xUdcEDryN8o");
+    // Last cue 1:26:17 + 180s pad.
+    assert.equal(meta.durationSec, 1 * 3600 + 26 * 60 + 17 + 180);
+  });
+
+  it("builds Korolova Snowattack Festival 2026 meta from the curated 1001 capture", () => {
+    assert.ok(KOROLOVA_SNOWATTACK);
+    const meta = watchMetaFromCuratedSeed(KOROLOVA_SNOWATTACK);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "7UcyaKbvy2o");
+    assert.match(meta.title, /Snowattack Festival 2026/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=7UcyaKbvy2o");
+    // Last cue 52:03 + 180s pad.
+    assert.equal(meta.durationSec, 52 * 60 + 3 + 180);
+  });
+
   it("builds Miss Monique Ibiza Yacht meta from the curated 1001 capture", () => {
     assert.ok(MM_YACHT);
     const meta = watchMetaFromCuratedSeed(MM_YACHT);
@@ -901,7 +965,7 @@ describe("curated YouTube 429 fallback", () => {
     assert.equal(sets.length, 1);
     assert.equal(sets[0]!.sourceSlug, "yt-6bJZPDKlq7o");
     assert.equal(sets[0]!.type, "festival");
-    assert.ok(sets[0]!.plays.length >= 27);
+    assert.ok(sets[0]!.plays.length >= 28);
     assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
     assert.ok(sets[0]!.durationSec >= 2 * 3600 + 4 * 60);
     assert.equal(sets[0]?.primaryArtist?.slug, "vintage-culture");
@@ -990,6 +1054,80 @@ describe("curated YouTube 429 fallback", () => {
     assert.ok(sets[0]!.durationSec >= 59 * 60);
     assert.equal(sets[0]?.primaryArtist?.slug, "notion");
     assert.match(String(sets[0]?.eventName ?? ""), /Lollapalooza/i);
+  });
+
+  it("lands Vintage Culture Ultra Miami Resistance from the 1001 seed when watch is 429", async () => {
+    assert.ok(VC_ULTRA);
+    const adapter = createYoutubeAdapter([VC_ULTRA], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-xXRjglkAmq8");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 20);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 1 * 3600 + 25 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "vintage-culture");
+    assert.match(String(sets[0]?.eventName ?? ""), /Ultra Music Festival/i);
+  });
+
+  it("lands Vintage Culture Pacha NYC from the 1001 seed when watch is 429", async () => {
+    assert.ok(VC_PACHA_NYC);
+    const adapter = createYoutubeAdapter([VC_PACHA_NYC], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-TDuFnUAo4II");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 40);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 3 * 3600 + 23 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "vintage-culture");
+    assert.match(String(sets[0]?.eventName ?? ""), /Pacha New York/i);
+  });
+
+  it("lands Claptone Masquerade Buenos Aires from the 1001 seed when watch is 429", async () => {
+    assert.ok(CLAPTONE_BA);
+    const adapter = createYoutubeAdapter([CLAPTONE_BA], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-fQweMs-Q3rg");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 58);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 1 * 3600 + 40 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "claptone");
+    assert.match(String(sets[0]?.eventName ?? ""), /Masquerade/i);
+  });
+
+  it("lands Indira Paganotto Area V Awakenings 2025 from the 1001 seed when watch is 429", async () => {
+    assert.ok(INDIRA_AWAKENINGS);
+    const adapter = createYoutubeAdapter([INDIRA_AWAKENINGS], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-xUdcEDryN8o");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 26);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 1 * 3600 + 26 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "indira-paganotto");
+    assert.match(String(sets[0]?.eventName ?? ""), /Awakenings/i);
+    assert.notEqual(sets[0]!.sourceSlug, "yt-yPCOu0-JKJo");
+    assert.notEqual(sets[0]!.sourceSlug, "yt-i-mFuxbGHzg");
+  });
+
+  it("lands Korolova Snowattack Festival 2026 from the 1001 seed when watch is 429", async () => {
+    assert.ok(KOROLOVA_SNOWATTACK);
+    const adapter = createYoutubeAdapter([KOROLOVA_SNOWATTACK], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-7UcyaKbvy2o");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 13);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 52 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "korolova");
+    assert.match(String(sets[0]?.eventName ?? ""), /Snowattack/i);
+    assert.notEqual(sets[0]!.sourceSlug, "yt-5JxfEjVdQFk");
+    assert.notEqual(sets[0]!.sourceSlug, "yt-RLOghpXjuJI");
   });
 
   it("lands Miss Monique Ibiza Yacht from the 1001 seed when watch is 429", async () => {

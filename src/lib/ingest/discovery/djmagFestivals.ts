@@ -369,6 +369,9 @@ export async function ensureDjMagFestivals(
     if (existing.name === slugify(existing.name) || existing.name === ev.slug) {
       data.name = ev.name;
     }
+    if (!existing.instagram && ev.instagram) data.instagram = ev.instagram;
+    if (!existing.soundcloud && ev.soundcloud) data.soundcloud = ev.soundcloud;
+    if (!existing.twitter && ev.twitter) data.twitter = ev.twitter;
     if (Object.keys(data).length) {
       await prisma.event.update({ where: { id: existing.id }, data });
       updated += 1;

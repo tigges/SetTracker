@@ -48,6 +48,10 @@ producer will say if this bundling rule is abolished.
   a new Prisma client without a regenerate.
 - **Lint / typecheck:** `npm run lint` and `npx tsc --noEmit`. `next lint` was
   removed in Next 16; ESLint runs directly.
+- **Catalog QC:** `npm run qc` (file-side pins / official URLs / leftover
+  hosts, then refresh graduate + Relive reports). `--fix` drops junk track-id
+  pins. `--full` also runs the QC unit tests. Live DB audits run only when
+  the catalog has 200+ sets. Never scrapes Beatport or 1001.
 - **Release version:** bump `package.json` `"version"` on every ship to main.
   Pages workflows inject it as `NEXT_PUBLIC_APP_VERSION` (footer `v…`). Do not
   hardcode the version in workflow YAML.

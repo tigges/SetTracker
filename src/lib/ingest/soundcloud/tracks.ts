@@ -329,6 +329,19 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     fingerprintPlays: FP_KEINEMUSIK_RADIO_FIFI_20260807,
   },
   {
+    // Official Keinemusik upload; guest Lazarusman. 1001TL wired via
+    // sc-keinemusik-keinemusik-radio-show-by-lazarusman-03072026
+    // (never sc-https://…).
+    url: "https://soundcloud.com/keinemusik/keinemusik-radio-show-by-lazarusman-03072026",
+    primaryArtist: dj("Lazarusman", {
+      accent: "#e8c547",
+    }),
+    genre: "Afro House",
+    seriesName: "Keinemusik Radio",
+    type: "radio",
+    minDurationSec: 30 * 60,
+  },
+  {
     // Official Oliver Heldens upload; 1001TL wired via
     // sc-oliverheldens-oliver-heldens-daybreak-session-tomorrowland-weekend-1-2024
     // (same list as yt-wuMQeEJ3YnQ). Never wire sc-https://….
@@ -433,5 +446,32 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     seriesName: "Parookaville",
     type: "festival",
     minDurationSec: 50 * 60,
+  },
+  {
+    // Official Awakenings Relive; 1001TL wired via
+    // sc-awakenings-indira-paganotto-awakenings-festival-2025
+    // (same list as yt-xUdcEDryN8o). Never wire sc-https://….
+    url: "https://soundcloud.com/awakenings/indira-paganotto-awakenings-festival-2025",
+    primaryArtist: dj("Indira Paganotto", {
+      accent: "#ff006e",
+    }),
+    genre: "Hard Techno",
+    seriesName: "Awakenings",
+    type: "festival",
+    minDurationSec: 60 * 60,
+  },
+  {
+    // Official Korolova Relive; 1001TL wired via
+    // sc-korolovadj-korolova-live-snowattack
+    // (same list as yt-7UcyaKbvy2o). Never wire sc-https://….
+    url: "https://soundcloud.com/korolovadj/korolova-live-snowattack",
+    primaryArtist: dj("Korolova", {
+      accent: "#f72585",
+      homeCity: "Ukraine",
+    }),
+    genre: "Melodic Techno",
+    seriesName: "Snowattack",
+    type: "festival",
+    minDurationSec: 45 * 60,
   },
 ];

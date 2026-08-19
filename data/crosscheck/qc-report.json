@@ -1,0 +1,58 @@
+{
+  "generatedAt": "2026-08-19T07:39:19.185Z",
+  "mode": {
+    "fix": true,
+    "full": true,
+    "liveAudits": false,
+    "sets": 82
+  },
+  "static": {
+    "generatedAt": "2026-08-19T07:39:15.421Z",
+    "pins": 3543,
+    "events": 53,
+    "issues": [
+      {
+        "severity": "warn",
+        "area": "discovery",
+        "detail": "30 promoted candidates are already on ARTIST_ROSTER_CURATED (graduate no-ops)"
+      }
+    ],
+    "counts": {
+      "warn:discovery": 1
+    }
+  },
+  "pinsDropped": [],
+  "steps": [
+    {
+      "name": "roster-graduates",
+      "ok": true,
+      "detail": "[graduate-report] graduates=0 ready=0 → /workspace/data/crosscheck/roster-graduate-report.json"
+    },
+    {
+      "name": "held-relives",
+      "ok": true,
+      "detail": "  - waiting Knock2 B2B Zedd · HARD Summer (TL_KNOCK2_ZEDD_HARD_SUMMER_2026) |   - waiting Cole Terrazas · HARD Summer (TL_COLE_TERRAZAS_HARD_SUMMER_2026) | wrote /workspace/data/crosscheck/held-relive-watch.json"
+    },
+    {
+      "name": "next-captures",
+      "ok": true,
+      "detail": "  - yt-C7u7N05uT2I  YDG · density gap  (density:severe) |   - yt-QnENPibFHIo  Defected TV · density gap  (density:severe) | [held-relive] wrote 8 watches → /workspace/data/crosscheck/held-relive-watch.json"
+    },
+    {
+      "name": "static-qc-test",
+      "ok": true,
+      "detail": "qc/staticCatalogQc.test.ts ok 3543 { 'warn:discovery': 1 }"
+    },
+    {
+      "name": "official-urls-test",
+      "ok": true,
+      "detail": "# skipped 0 | # todo 0 | # duration_ms 133.951398"
+    },
+    {
+      "name": "events-test",
+      "ok": true,
+      "detail": "events.test.ts ok"
+    }
+  ],
+  "note": "Seed/small catalog (82 sets) — skipped live audits (need 200+)."
+}

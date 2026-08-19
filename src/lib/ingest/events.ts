@@ -271,7 +271,7 @@ export const KNOWN_EVENTS: Record<string, CanonicalEvent> = {
     name: "Djoon",
     kind: "club",
     location: "Paris, France",
-    website: "https://shotgun.live/venues/djoonclub",
+    website: "https://djoon.com/",
     instagram: "https://www.instagram.com/djoonclub/",
     soundcloud: "https://soundcloud.com/djoon",
     twitter: "https://x.com/djoonclub",

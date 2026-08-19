@@ -1,7 +1,65 @@
 {
   "note": "Operator-collected 1001Tracklists URLs. All listed urls[] rows are now seeded. Prefer new operator pastes over this archive. stillMissing1001 is video-in / no 1001 page — do not invent URLs. heldPendingRelive is 1001-in / no official YT/SC Relive — seed held, do not invent or wire fan playback. pendingCuePaste is official Relive + operator 1001 URL without cue rows — do not scrape 1001 or invent 1001tl seeds.",
-  "updatedAt": "2026-08-17T16:40:00.000Z",
+  "updatedAt": "2026-08-19T00:00:00.000Z",
   "urls": [
+    {
+      "label": "Korolova · Snowattack Festival, Les Deux Alpes 2026-01-21",
+      "slug": "yt-7UcyaKbvy2o",
+      "name": "TL_KOROLOVA_SNOWATTACK_FESTIVAL_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/kcl35g1/korolova-snowattack-festival-les-deux-alpes-france-2026-01-21.html",
+      "youtubeUrl": "https://youtu.be/7UcyaKbvy2o",
+      "soundcloudUrl": "https://soundcloud.com/korolovadj/korolova-live-snowattack",
+      "note": "Operator paste 2026-08-19. 13 timed cues on official YT + korolovadj SC Relives. Distinct from Captive Soul 098 and TML WE2."
+    },
+    {
+      "label": "Indira Paganotto · Area V, Awakenings Festival 2025-07-11",
+      "slug": "yt-xUdcEDryN8o",
+      "name": "TL_INDIRA_PAGANOTTO_AREA_V_AWAKENINGS_2025",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/27bmn1uk/indira-paganotto-area-v-awakenings-festival-netherlands-2025-07-11.html",
+      "youtubeUrl": "https://youtu.be/xUdcEDryN8o",
+      "soundcloudUrl": "https://soundcloud.com/awakenings/indira-paganotto-awakenings-festival-2025",
+      "note": "Operator paste 2026-08-19. 26 timed cues on official YT + Awakenings SC Relives. Distinct from Atmosphere TML WE1 2023 and Reinier Zonneveld Area V same day. Keep ID ft. Bilja Krstic — Magla Padnala."
+    },
+    {
+      "label": "Claptone · The Masquerade, Buenos Aires 2022-11-05",
+      "slug": "yt-fQweMs-Q3rg",
+      "name": "TL_CLAPTONE_MASQUERADE_BUENOS_AIRES_2022",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/2cu77g71/claptone-the-masquerade-buenos-aires-argentina-2022-11-05.html",
+      "youtubeUrl": "https://youtu.be/fQweMs-Q3rg",
+      "note": "Operator paste 2026-08-19. Same 1001 also on curated yt-b-2YA4yC3UA (Movistar Arena upload)."
+    },
+    {
+      "label": "Vintage Culture · Pacha NYC 2026-07-03",
+      "slug": "yt-TDuFnUAo4II",
+      "name": "TL_VINTAGE_CULTURE_PACHA_NYC_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/fnw24vt/vintage-culture-pacha-nyc-united-states-2026-07-03.html",
+      "youtubeUrl": "https://youtu.be/TDuFnUAo4II",
+      "note": "Operator paste 2026-08-19. 40 timed cues on the official Relive."
+    },
+    {
+      "label": "Lazarusman · Keinemusik Radio Show 2026-07-03",
+      "slug": "sc-keinemusik-keinemusik-radio-show-by-lazarusman-03072026",
+      "name": "TL_LAZARUSMAN_KEINEMUSIK_RADIO_SHOW_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/fnvhsz9/lazarusman-keinemusik-radio-show-2026-07-03.html",
+      "soundcloudUrl": "https://soundcloud.com/keinemusik/keinemusik-radio-show-by-lazarusman-03072026",
+      "note": "Operator paste 2026-08-19. Six timed cues. Never sc-https://…."
+    },
+    {
+      "label": "Vintage Culture · Sunset Yacht Party, New York City 2023-08-12",
+      "slug": "yt-6bJZPDKlq7o",
+      "name": "TL_VINTAGE_CULTURE_NYC_YACHT_2023",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/1d6g4y99/vintage-culture-sunset-yacht-party-new-york-city-united-states-2023-08-12.html",
+      "youtubeUrl": "https://youtu.be/6bJZPDKlq7o",
+      "note": "Operator mobile screenshots 2026-08-19. Bare ID–ID dropped; lightbulb guesses and Spring Girl remix warning not accepted."
+    },
+    {
+      "label": "Vintage Culture · Resistance Megastructure, Ultra Miami 2026-03-27",
+      "slug": "yt-xXRjglkAmq8",
+      "name": "TL_VINTAGE_CULTURE_ULTRA_MIAMI_RESISTANCE_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/23nu9rq9/vintage-culture-resistance-megastructure-ultra-music-festival-miami-united-states-2026-03-27.html",
+      "youtubeUrl": "https://youtu.be/xXRjglkAmq8",
+      "note": "Operator paste 2026-08-19. 20 timed cues; ID–ID dropped. soundcloud.com/edmfamilylivesets2025/vintage-culture-live-ultra is a fan reupload — not wired."
+    },
     {
       "label": "BRANDON · Desert Valley, Parookaville 2024-07-28",
       "slug": "yt-AQ6wWT2HaSQ",

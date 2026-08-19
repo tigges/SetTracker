@@ -117,7 +117,13 @@ body {
     padding: 1.1rem 1.2rem 1.2rem;
     margin-inline: -0.35rem;
     border-radius: 18px;
-    background: color-mix(in srgb, var(--bg) 92%, transparent);
+    /* Brighter (panel) at the logo, darker well at the setgraph. */
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--panel-2) 72%, transparent) 0%,
+      color-mix(in srgb, var(--panel) 84%, transparent) 42%,
+      color-mix(in srgb, var(--bg) 95%, transparent) 100%
+    );
     box-shadow:
       0 0 0 1px color-mix(in srgb, var(--line) 70%, transparent),
       0 0 64px 36px color-mix(in srgb, var(--bg) 78%, transparent);

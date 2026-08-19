@@ -147,6 +147,12 @@ import {
   TL_BRANDON_DESERT_VALLEY_PAROOKAVILLE_GERMANY_2024,
   TL_DVLM_SMASH_THE_HOUSE_RADIO_687_2026,
   TL_NOTION_PERRYS_LOLLAPALOOZA_CHICAGO_2026,
+  TL_VINTAGE_CULTURE_ULTRA_MIAMI_RESISTANCE_2026,
+  TL_LAZARUSMAN_KEINEMUSIK_RADIO_SHOW_2026,
+  TL_VINTAGE_CULTURE_PACHA_NYC_2026,
+  TL_CLAPTONE_MASQUERADE_BUENOS_AIRES_2022,
+  TL_INDIRA_PAGANOTTO_AREA_V_AWAKENINGS_2025,
+  TL_KOROLOVA_SNOWATTACK_FESTIVAL_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   tracklist1001RowsToPlays,
@@ -1588,18 +1594,32 @@ for (let i = 1; i < vcPacha.length; i++) {
 }
 
 assertSeedClocks(TL_VINTAGE_CULTURE_NYC_YACHT_2023);
-assert.equal(TL_VINTAGE_CULTURE_NYC_YACHT_2023.length, 27);
+assert.equal(TL_VINTAGE_CULTURE_NYC_YACHT_2023.length, 28);
 assert.equal(
   TRACKLIST_1001_BY_SOURCE_SLUG["yt-6bJZPDKlq7o"],
   TL_VINTAGE_CULTURE_NYC_YACHT_2023,
 );
 const vcYacht = tracklist1001RowsToPlays(TL_VINTAGE_CULTURE_NYC_YACHT_2023);
-assert.equal(vcYacht.length, 27);
+assert.equal(vcYacht.length, 28);
 assert.equal(vcYacht[0]?.provenance, "1001tl");
 assert.equal(vcYacht[0]?.timestamp, 0);
-assert.equal(vcYacht[0]?.trackTitle, "Fallen Leaf");
-assert.equal(vcYacht[26]?.trackTitle, "Spring Girl");
-assert.equal(vcYacht[26]?.timestamp, 2 * 3600 + 4 * 60);
+assert.equal(vcYacht[0]?.artistName, "Vintage Culture & Fideles ft. Be");
+assert.equal(vcYacht[0]?.trackTitle, "No Rain - Fallen Leaf (ID Remix)");
+assert.equal(vcYacht[4]?.trackTitle, "Tina (ID Remix)");
+assert.equal(vcYacht[23]?.trackTitle, "You Give Me A Feeling (Roddy Lima RMX)");
+assert.equal(vcYacht[23]?.timestamp, 3600 + 45 * 60 + 3);
+assert.equal(vcYacht[27]?.trackTitle, "Spring Girl");
+assert.equal(vcYacht[27]?.timestamp, 2 * 3600 + 4 * 60);
+assert.equal(
+  vcYacht.some((p) => /^id$/i.test(p.trackTitle ?? "")),
+  false,
+  "bare ID–ID rows must stay dropped",
+);
+assert.equal(
+  vcYacht.some((p) => /sun in her eyes|what you know/i.test(p.trackTitle ?? "")),
+  false,
+  "1001 lightbulb guesses are not accepted IDs",
+);
 for (let i = 1; i < vcYacht.length; i++) {
   assert.ok(
     (vcYacht[i]!.timestamp ?? 0) > (vcYacht[i - 1]!.timestamp ?? 0),
@@ -1898,6 +1918,254 @@ for (let i = 1; i < notionPerry.length; i++) {
 assert.equal(isWiredTracklistSlug("yt-9vgSTomhCp8"), true);
 assert.equal(
   isWiredTracklistSlug("sc-notiondj-notion-live-at-lollapalooza"),
+  true,
+);
+
+assertSeedClocks(TL_VINTAGE_CULTURE_ULTRA_MIAMI_RESISTANCE_2026);
+assert.equal(TL_VINTAGE_CULTURE_ULTRA_MIAMI_RESISTANCE_2026.length, 20);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-xXRjglkAmq8"],
+  TL_VINTAGE_CULTURE_ULTRA_MIAMI_RESISTANCE_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-edmfamilylivesets2025-vintage-culture-live-ultra"
+  ],
+  undefined,
+);
+const vcUltra = tracklist1001RowsToPlays(
+  TL_VINTAGE_CULTURE_ULTRA_MIAMI_RESISTANCE_2026,
+);
+assert.equal(vcUltra.length, 20);
+assert.equal(vcUltra[0]?.provenance, "1001tl");
+assert.equal(vcUltra[0]?.timestamp, 0);
+assert.equal(vcUltra[0]?.artistName, "Vintage Culture & Nariman & rhys from the sticks");
+assert.equal(vcUltra[0]?.trackTitle, "Think Too Much");
+assert.equal(vcUltra[2]?.trackTitle, "Hands Up");
+assert.equal(vcUltra[2]?.timestamp, 9 * 60 + 20);
+assert.equal(vcUltra[3]?.trackTitle, "Rave");
+assert.equal(vcUltra[3]?.timestamp, 13 * 60 + 55);
+assert.equal(vcUltra[9]?.trackTitle, "Oldskool Flavor");
+assert.equal(vcUltra[9]?.timestamp, 39 * 60 + 40);
+assert.equal(vcUltra[10]?.timestamp, 43 * 60 + 50);
+assert.equal(vcUltra[11]?.timestamp, 48 * 60);
+assert.equal(vcUltra[13]?.trackTitle, "Malabaris");
+assert.equal(vcUltra[13]?.timestamp, 56 * 60 + 20);
+assert.equal(vcUltra[14]?.trackTitle, "Deep Desire");
+assert.equal(vcUltra[15]?.trackTitle, "Funky Bassline (Beltran Remix)");
+assert.equal(vcUltra[16]?.trackTitle, "Tina (Doriann Remix)");
+assert.equal(vcUltra[16]?.timestamp, 3600 + 11 * 60 + 30);
+assert.equal(vcUltra[19]?.trackTitle, "Time To Pretend (ANNA Edit)");
+assert.equal(vcUltra[19]?.timestamp, 3600 + 25 * 60 + 45);
+assert.equal(
+  vcUltra.some((p) => /^id$/i.test(p.trackTitle ?? "")),
+  false,
+  "bare ID–ID rows must stay dropped",
+);
+for (let i = 1; i < vcUltra.length; i++) {
+  assert.ok(
+    (vcUltra[i]!.timestamp ?? 0) > (vcUltra[i - 1]!.timestamp ?? 0),
+    `Vintage Culture Ultra Miami clocks must increase at index ${i}`,
+  );
+}
+assert.equal(isWiredTracklistSlug("yt-xXRjglkAmq8"), true);
+assert.equal(
+  isWiredTracklistSlug("sc-edmfamilylivesets2025-vintage-culture-live-ultra"),
+  false,
+);
+
+assertSeedClocks(TL_LAZARUSMAN_KEINEMUSIK_RADIO_SHOW_2026);
+assert.equal(TL_LAZARUSMAN_KEINEMUSIK_RADIO_SHOW_2026.length, 6);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-keinemusik-keinemusik-radio-show-by-lazarusman-03072026"
+  ],
+  TL_LAZARUSMAN_KEINEMUSIK_RADIO_SHOW_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-https://soundcloud.com/keinemusik/keinemusik-radio-show-by-lazarusman-03072026"
+  ],
+  undefined,
+);
+const kmLazarus = tracklist1001RowsToPlays(
+  TL_LAZARUSMAN_KEINEMUSIK_RADIO_SHOW_2026,
+);
+assert.equal(kmLazarus.length, 6);
+assert.equal(kmLazarus[0]?.provenance, "1001tl");
+assert.equal(kmLazarus[0]?.timestamp, 0);
+assert.equal(kmLazarus[0]?.trackTitle, "In You Go");
+assert.equal(kmLazarus[5]?.trackTitle, "Breakdown");
+assert.equal(kmLazarus[5]?.timestamp, 58 * 60 + 10);
+for (let i = 1; i < kmLazarus.length; i++) {
+  assert.ok(
+    (kmLazarus[i]!.timestamp ?? 0) > (kmLazarus[i - 1]!.timestamp ?? 0),
+    `Lazarusman Keinemusik Radio clocks must increase at index ${i}`,
+  );
+}
+assert.equal(
+  isWiredTracklistSlug(
+    "sc-keinemusik-keinemusik-radio-show-by-lazarusman-03072026",
+  ),
+  true,
+);
+
+assertSeedClocks(TL_VINTAGE_CULTURE_PACHA_NYC_2026);
+assert.equal(TL_VINTAGE_CULTURE_PACHA_NYC_2026.length, 40);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-TDuFnUAo4II"],
+  TL_VINTAGE_CULTURE_PACHA_NYC_2026,
+);
+const vcPachaNyc = tracklist1001RowsToPlays(TL_VINTAGE_CULTURE_PACHA_NYC_2026);
+assert.equal(vcPachaNyc.length, 40);
+assert.equal(vcPachaNyc[0]?.provenance, "1001tl");
+assert.equal(vcPachaNyc[0]?.timestamp, 0);
+assert.equal(vcPachaNyc[0]?.trackTitle, "Hands Up");
+assert.equal(vcPachaNyc[8]?.artistName, "JØRD");
+assert.equal(vcPachaNyc[39]?.trackTitle, "Celebration (Antdot & Maz Edit)");
+assert.equal(vcPachaNyc[39]?.timestamp, 3 * 3600 + 23 * 60 + 23);
+for (let i = 1; i < vcPachaNyc.length; i++) {
+  assert.ok(
+    (vcPachaNyc[i]!.timestamp ?? 0) > (vcPachaNyc[i - 1]!.timestamp ?? 0),
+    `Vintage Culture Pacha NYC clocks must increase at index ${i}`,
+  );
+}
+assert.equal(isWiredTracklistSlug("yt-TDuFnUAo4II"), true);
+
+assertSeedClocks(TL_CLAPTONE_MASQUERADE_BUENOS_AIRES_2022);
+assert.equal(TL_CLAPTONE_MASQUERADE_BUENOS_AIRES_2022.length, 58);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-fQweMs-Q3rg"],
+  TL_CLAPTONE_MASQUERADE_BUENOS_AIRES_2022,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-b-2YA4yC3UA"],
+  TL_CLAPTONE_MASQUERADE_BUENOS_AIRES_2022,
+);
+const clapBa = tracklist1001RowsToPlays(TL_CLAPTONE_MASQUERADE_BUENOS_AIRES_2022);
+assert.equal(clapBa.length, 58);
+assert.equal(clapBa[0]?.provenance, "1001tl");
+assert.equal(clapBa[0]?.timestamp, 4 * 60);
+assert.equal(clapBa[0]?.trackTitle, "Groove Cruise");
+assert.equal(clapBa[13]?.timestamp, 42 * 60);
+assert.equal(clapBa[32]?.timestamp, 42 * 60 + 19);
+assert.equal(clapBa[57]?.trackTitle, "No Eyes (Acappella)");
+assert.equal(clapBa[57]?.timestamp, 3600 + 40 * 60 + 32);
+for (let i = 1; i < clapBa.length; i++) {
+  assert.ok(
+    (clapBa[i]!.timestamp ?? 0) > (clapBa[i - 1]!.timestamp ?? 0),
+    `Claptone Masquerade BA clocks must increase at index ${i}`,
+  );
+}
+assert.equal(isWiredTracklistSlug("yt-fQweMs-Q3rg"), true);
+assert.equal(isWiredTracklistSlug("yt-b-2YA4yC3UA"), true);
+
+assertSeedClocks(TL_INDIRA_PAGANOTTO_AREA_V_AWAKENINGS_2025);
+assert.equal(TL_INDIRA_PAGANOTTO_AREA_V_AWAKENINGS_2025.length, 26);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-xUdcEDryN8o"],
+  TL_INDIRA_PAGANOTTO_AREA_V_AWAKENINGS_2025,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-awakenings-indira-paganotto-awakenings-festival-2025"
+  ],
+  TL_INDIRA_PAGANOTTO_AREA_V_AWAKENINGS_2025,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-https://soundcloud.com/awakenings/indira-paganotto-awakenings-festival-2025"
+  ],
+  undefined,
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-xUdcEDryN8o"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-yPCOu0-JKJo"],
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-xUdcEDryN8o"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-i-mFuxbGHzg"],
+);
+const indiraAwake = tracklist1001RowsToPlays(
+  TL_INDIRA_PAGANOTTO_AREA_V_AWAKENINGS_2025,
+);
+assert.equal(indiraAwake.length, 26);
+assert.equal(indiraAwake[0]?.provenance, "1001tl");
+assert.equal(indiraAwake[0]?.timestamp, 70);
+assert.equal(indiraAwake[0]?.artistName, "Vegas & Vermont");
+assert.equal(indiraAwake[0]?.trackTitle, "Jahbulam");
+assert.equal(indiraAwake[17]?.trackTitle, "Won't Be Possible");
+assert.equal(indiraAwake[17]?.timestamp, 3600 + 60 + 21);
+assert.equal(indiraAwake[24]?.artistName, "ID ft. Bilja Krstic");
+assert.equal(indiraAwake[24]?.trackTitle, "Magla Padnala");
+assert.equal(indiraAwake[24]?.timestamp, 3600 + 22 * 60 + 1);
+assert.equal(indiraAwake[25]?.trackTitle, "Pressure (Indira Paganotto Remix)");
+assert.equal(indiraAwake[25]?.timestamp, 3600 + 26 * 60 + 17);
+assert.equal(
+  indiraAwake.some((p) => /^id$/i.test(p.trackTitle ?? "")),
+  false,
+  "bare ID–ID rows must stay dropped; Magla Padnala is a named title",
+);
+for (let i = 1; i < indiraAwake.length; i++) {
+  assert.ok(
+    (indiraAwake[i]!.timestamp ?? 0) > (indiraAwake[i - 1]!.timestamp ?? 0),
+    `Indira Paganotto Area V Awakenings clocks must increase at index ${i}`,
+  );
+}
+assert.equal(isWiredTracklistSlug("yt-xUdcEDryN8o"), true);
+assert.equal(
+  isWiredTracklistSlug(
+    "sc-awakenings-indira-paganotto-awakenings-festival-2025",
+  ),
+  true,
+);
+
+assertSeedClocks(TL_KOROLOVA_SNOWATTACK_FESTIVAL_2026);
+assert.equal(TL_KOROLOVA_SNOWATTACK_FESTIVAL_2026.length, 13);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-7UcyaKbvy2o"],
+  TL_KOROLOVA_SNOWATTACK_FESTIVAL_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-korolovadj-korolova-live-snowattack"],
+  TL_KOROLOVA_SNOWATTACK_FESTIVAL_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-https://soundcloud.com/korolovadj/korolova-live-snowattack"
+  ],
+  undefined,
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-7UcyaKbvy2o"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-5JxfEjVdQFk"],
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-7UcyaKbvy2o"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-RLOghpXjuJI"],
+);
+const korolovaSnow = tracklist1001RowsToPlays(
+  TL_KOROLOVA_SNOWATTACK_FESTIVAL_2026,
+);
+assert.equal(korolovaSnow.length, 13);
+assert.equal(korolovaSnow[0]?.provenance, "1001tl");
+assert.equal(korolovaSnow[0]?.timestamp, 0);
+assert.equal(korolovaSnow[0]?.artistName, "RÜFÜS DU SOL");
+assert.equal(korolovaSnow[0]?.trackTitle, "In The Moment (Adriatique Remix)");
+assert.equal(korolovaSnow[7]?.trackTitle, "My Mind");
+assert.equal(korolovaSnow[7]?.timestamp, 26 * 60 + 7);
+assert.equal(korolovaSnow[10]?.trackTitle, "Annihilation");
+assert.equal(korolovaSnow[12]?.trackTitle, "The Man With The Red Face");
+assert.equal(korolovaSnow[12]?.timestamp, 52 * 60 + 3);
+for (let i = 1; i < korolovaSnow.length; i++) {
+  assert.ok(
+    (korolovaSnow[i]!.timestamp ?? 0) > (korolovaSnow[i - 1]!.timestamp ?? 0),
+    `Korolova Snowattack clocks must increase at index ${i}`,
+  );
+}
+assert.equal(isWiredTracklistSlug("yt-7UcyaKbvy2o"), true);
+assert.equal(
+  isWiredTracklistSlug("sc-korolovadj-korolova-live-snowattack"),
   true,
 );
 

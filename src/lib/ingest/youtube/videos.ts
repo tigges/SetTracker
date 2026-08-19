@@ -128,6 +128,11 @@ import {
   TL_BRANDON_DESERT_VALLEY_PAROOKAVILLE_GERMANY_2024,
   TL_DVLM_SMASH_THE_HOUSE_RADIO_687_2026,
   TL_NOTION_PERRYS_LOLLAPALOOZA_CHICAGO_2026,
+  TL_VINTAGE_CULTURE_ULTRA_MIAMI_RESISTANCE_2026,
+  TL_VINTAGE_CULTURE_PACHA_NYC_2026,
+  TL_CLAPTONE_MASQUERADE_BUENOS_AIRES_2022,
+  TL_INDIRA_PAGANOTTO_AREA_V_AWAKENINGS_2025,
+  TL_KOROLOVA_SNOWATTACK_FESTIVAL_2026,
 } from "../tracklists1001/seeds";
 import type { RawArtist } from "../types";
 import { slugify } from "../types";
@@ -987,6 +992,23 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_KOROLOVA_CAPTIVE_SOUL_098_2026,
   },
   {
+    // Official Korolova Relive — Snowattack Festival 2026-01-21.
+    // Distinct from Captive Soul 098 and TML WE2 Freedom Stage.
+    video: "https://www.youtube.com/watch?v=7UcyaKbvy2o",
+    primaryArtist: dj("Korolova", {
+      accent: "#f72585",
+      homeCity: "Ukraine",
+    }),
+    genre: "Melodic Techno",
+    type: "festival",
+    title: "Korolova | Snowattack Festival 2026",
+    seriesName: "Snowattack",
+    eventName: "Snowattack Festival",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/kcl35g1/korolova-snowattack-festival-les-deux-alpes-france-2026-01-21.html",
+    tracklist1001: TL_KOROLOVA_SNOWATTACK_FESTIVAL_2026,
+  },
+  {
     // Official Epic Radio 036; timed 1001 capture (same list as SC).
     // Mixcloud is a mirror only — do not wire mixcloud slugs.
     video: "https://www.youtube.com/watch?v=JLIYTueL4TI",
@@ -1523,6 +1545,9 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     title: "Vintage Culture @ Pacha New York City, Affairs (2026)",
     seriesName: "Affairs",
     eventName: "Pacha New York",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/fnw24vt/vintage-culture-pacha-nyc-united-states-2026-07-03.html",
+    tracklist1001: TL_VINTAGE_CULTURE_PACHA_NYC_2026,
   },
   {
     // Artist-channel Relive of the Burning Man Playground set (same 1001 as SC).
@@ -1781,6 +1806,9 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
       "Vintage Culture @ Ultra Music Festival Miami 2026 - Resistance Megastructure",
     seriesName: "Ultra Shows",
     eventName: "Ultra Music Festival",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/23nu9rq9/vintage-culture-resistance-megastructure-ultra-music-festival-miami-united-states-2026-03-27.html",
+    tracklist1001: TL_VINTAGE_CULTURE_ULTRA_MIAMI_RESISTANCE_2026,
   },
   {
     video: "https://www.youtube.com/watch?v=knJyJPP45dg",
@@ -2041,6 +2069,23 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     type: "festival",
     title: "Claptone ‘The Masquerade’ Full Set at Movistar Arena, Buenos Aires",
     eventName: "Movistar Arena Buenos Aires",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2cu77g71/claptone-the-masquerade-buenos-aires-argentina-2022-11-05.html",
+    tracklist1001: TL_CLAPTONE_MASQUERADE_BUENOS_AIRES_2022,
+  },
+  {
+    video: "https://www.youtube.com/watch?v=fQweMs-Q3rg",
+    primaryArtist: dj("Claptone", {
+      accent: "#ffd60a",
+    }),
+    genre: "Deep House",
+    type: "festival",
+    title: "Claptone @ The Masquerade, Buenos Aires 2022",
+    seriesName: "The Masquerade",
+    eventName: "The Masquerade Buenos Aires",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2cu77g71/claptone-the-masquerade-buenos-aires-argentina-2022-11-05.html",
+    tracklist1001: TL_CLAPTONE_MASQUERADE_BUENOS_AIRES_2022,
   },
   {
     video: "https://www.youtube.com/watch?v=OzGpEPZ3BZs",
@@ -2054,6 +2099,9 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     eventName: "Transmission Poland",
   },
   {
+    // Official Awakenings Relive — Area V 2025-07-11. Distinct from
+    // yt-yPCOu0-JKJo (Atmosphere TML WE1 2023) and yt-i-mFuxbGHzg
+    // (Reinier Zonneveld, same stage/day).
     video: "https://www.youtube.com/watch?v=xUdcEDryN8o",
     primaryArtist: dj("Indira Paganotto", {
       accent: "#ff006e"
@@ -2063,6 +2111,9 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     title: "Indira Paganotto | Awakenings Festival 2025",
     seriesName: "Awakenings",
     eventName: "Awakenings Festival",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/27bmn1uk/indira-paganotto-area-v-awakenings-festival-netherlands-2025-07-11.html",
+    tracklist1001: TL_INDIRA_PAGANOTTO_AREA_V_AWAKENINGS_2025,
   },
   {
     // Official Tomorrowland upload — oEmbed-validated festival set.

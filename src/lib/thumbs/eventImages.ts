@@ -129,7 +129,7 @@ export const EVENT_OFFICIAL_SITES: Record<string, string> = {
   "escape-halloween": "https://escapepsychocircus.com/",
   dreamstate: "https://socal.dreamstateusa.com/",
   "countdown-nye": "https://countdownnye.com/",
-  djoon: "https://shotgun.live/venues/djoonclub",
+  djoon: "https://djoon.com/",
   "boiler-room": "https://boilerroom.tv/",
   stereohype: "https://www.stereohype.com/",
   cercle: "https://www.cercle.io/",

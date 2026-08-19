@@ -5,6 +5,8 @@ import { isWeakOfficialUrl } from "./officialUrls";
 describe("isWeakOfficialUrl", () => {
   it("treats rank lists and encyclopedias as weak", () => {
     assert.equal(isWeakOfficialUrl("https://djmag.com/top100clubs"), true);
+    assert.equal(isWeakOfficialUrl("https://djmag.com/"), true);
+    assert.equal(isWeakOfficialUrl("https://djmag.com/livesets"), false);
     assert.equal(isWeakOfficialUrl("https://6amgroup.com/clubs/fabric"), true);
     assert.equal(isWeakOfficialUrl("https://en.wikipedia.org/wiki/Fabric_(club)"), true);
     assert.equal(isWeakOfficialUrl("https://www.wikidata.org/wiki/Q123"), true);
@@ -30,6 +32,7 @@ describe("isWeakOfficialUrl", () => {
   it("keeps first-party club and DJ sites", () => {
     assert.equal(isWeakOfficialUrl("https://fabriclondon.com/"), false);
     assert.equal(isWeakOfficialUrl("https://www.carlcox.com/"), false);
+    assert.equal(isWeakOfficialUrl("https://djoon.com/"), false);
     assert.equal(isWeakOfficialUrl(null), false);
     assert.equal(isWeakOfficialUrl(""), false);
   });
