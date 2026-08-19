@@ -440,9 +440,8 @@ export const DJ_SOCIAL_PINS: DjSocialPin[] = [
     soundcloud: "https://soundcloud.com/reinier-zonneveld",
     youtube: "https://www.youtube.com/@ReinierZonneveld_FilthOnAcid",
     instagram: "https://www.instagram.com/reinierzonneveld/",
-    // Chart page — no separate personal site confirmed in this pass.
-    website: "https://djmag.com/top100djs/2025/22/reinier-zonneveld",
-    bio: "Techno. SC reinier-zonneveld, YT @ReinierZonneveld_FilthOnAcid, IG @reinierzonneveld.",
+    website: "https://linktr.ee/reinierzonneveld",
+    bio: "Techno. Official linktr.ee/reinierzonneveld — SC reinier-zonneveld, YT @ReinierZonneveld_FilthOnAcid, IG @reinierzonneveld.",
   },
   {
     slug: "alan-walker",
@@ -494,8 +493,8 @@ export const DJ_SOCIAL_PINS: DjSocialPin[] = [
     soundcloud: "https://soundcloud.com/skrillex",
     youtube: "https://www.youtube.com/@skrillex",
     instagram: null,
-    website: "https://djmag.com/top100djs/2025/31/skrillex",
-    bio: "Bass / Dubstep. SC skrillex, YT @skrillex.",
+    website: "https://skrillex.com/",
+    bio: "Bass / Dubstep. Official skrillex.com — SC skrillex, YT @skrillex.",
   },
   {
     slug: "vini-vici",
@@ -557,8 +556,8 @@ export const DJ_SOCIAL_PINS: DjSocialPin[] = [
     soundcloud: "https://soundcloud.com/quintino",
     youtube: "https://www.youtube.com/@Quintino",
     instagram: null,
-    website: "https://djmag.com/top100djs/2025/47/quintino",
-    bio: "Big Room. SC quintino, YT @Quintino.",
+    website: "https://linktr.ee/quintino",
+    bio: "Big Room. Official linktr.ee/quintino — SC quintino, YT @Quintino.",
   },
   {
     slug: "boris-brejcha",
@@ -619,8 +618,8 @@ export const DJ_SOCIAL_PINS: DjSocialPin[] = [
     soundcloud: "https://soundcloud.com/aboveandbeyond",
     youtube: "https://www.youtube.com/@aboveandbeyond",
     instagram: null,
-    website: "https://djmag.com/top100djs/2025/61/above-beyond",
-    bio: "Trance. SC aboveandbeyond, YT @aboveandbeyond.",
+    website: "https://www.aboveandbeyond.nu/",
+    bio: "Trance. Official aboveandbeyond.nu — SC aboveandbeyond, YT @aboveandbeyond.",
   },
   {
     slug: "nervo",
@@ -629,8 +628,8 @@ export const DJ_SOCIAL_PINS: DjSocialPin[] = [
     soundcloud: "https://soundcloud.com/nervomusic",
     youtube: "https://www.youtube.com/@NERVO",
     instagram: null,
-    website: "https://djmag.com/top100djs/2025/63/nervo",
-    bio: "Progressive House. SC nervomusic, YT @NERVO.",
+    website: "https://linktr.ee/nervomusic",
+    bio: "Progressive House. Official linktr.ee/nervomusic — SC nervomusic, YT @NERVO.",
   },
   {
     slug: "sub-zero-project",
@@ -639,8 +638,8 @@ export const DJ_SOCIAL_PINS: DjSocialPin[] = [
     soundcloud: "https://soundcloud.com/subzeroproject",
     youtube: "https://www.youtube.com/@SubZeroProject",
     instagram: null,
-    website: "https://djmag.com/top100djs/2025/64/sub-zero-project",
-    bio: "Hardstyle. SC subzeroproject, YT @SubZeroProject.",
+    website: "https://linktr.ee/subzeroproject",
+    bio: "Hardstyle. Official linktr.ee/subzeroproject — SC subzeroproject, YT @SubZeroProject.",
   },
   {
     slug: "lucas-steve",
@@ -694,8 +693,8 @@ export const DJ_SOCIAL_PINS: DjSocialPin[] = [
     youtube: "https://www.youtube.com/@Liumusic",
     instagram: "https://www.instagram.com/liulive/",
     twitter: "https://twitter.com/liulive",
-    website: "https://djmag.com/top100djs/2025/71/liu",
-    bio: "Brazilian Bass. Brazil. Official YT @Liumusic — SC/IG/X liulive. Do not use YT @liulive (different channel).",
+    website: "https://linktr.ee/liulive",
+    bio: "Brazilian Bass. Brazil. Official linktr.ee/liulive — YT @Liumusic, SC/IG/X liulive. Do not use YT @liulive (different channel).",
   },
   {
     slug: "mike-williams",
@@ -704,8 +703,8 @@ export const DJ_SOCIAL_PINS: DjSocialPin[] = [
     soundcloud: "https://soundcloud.com/mikewilliams",
     youtube: "https://www.youtube.com/@mikewilliams",
     instagram: "https://www.instagram.com/mikewilliams/",
-    website: "https://djmag.com/top100djs/2025/72/mike-williams",
-    bio: "Future House. SC mikewilliams, YT/IG @mikewilliams.",
+    website: "https://www.mikewilliams.nl/",
+    bio: "Future House. Official mikewilliams.nl — SC mikewilliams, YT/IG @mikewilliams.",
   },
   {
     slug: "kaaze",
@@ -737,8 +736,8 @@ export const DJ_SOCIAL_PINS: DjSocialPin[] = [
     youtube: "https://www.youtube.com/@letwinsdjs",
     instagram: "https://instagram.com/officialletwins",
     twitter: "https://twitter.com/Letwinsofficial",
-    website: "https://djmag.com/top100djs/2025/78/le-twins",
-    bio: "Melodic Techno. SC le-twins-52553281, YT @letwinsdjs (not @LeTwins), IG @officialletwins.",
+    website: "https://linktr.ee/officialletwins",
+    bio: "Melodic Techno. Official linktr.ee/officialletwins — SC le-twins-52553281, YT @letwinsdjs (not @LeTwins), IG @officialletwins.",
   },
   {
     slug: "i-hate-models",
@@ -768,8 +767,8 @@ export const DJ_SOCIAL_PINS: DjSocialPin[] = [
     youtube: "https://www.youtube.com/@chrisstussy",
     instagram: "https://www.instagram.com/chrisstussydj/",
     twitter: "https://x.com/djchrisstussy",
-    website: "https://djmag.com/top100djs/2025/81/chris-stussy",
-    bio: "Tech House. SC chrisstussy, YT @chrisstussy, IG @chrisstussydj.",
+    website: "https://www.chrisstussy.com/",
+    bio: "Tech House. Official chrisstussy.com — SC chrisstussy, YT @chrisstussy, IG @chrisstussydj.",
   },
   {
     slug: "deadmau5",
@@ -790,8 +789,8 @@ export const DJ_SOCIAL_PINS: DjSocialPin[] = [
     // @wukong / @WUKONG 404 — official handle is @WUKONGofficial (API-resolved).
     youtube: "https://www.youtube.com/@WUKONGofficial",
     instagram: "https://www.instagram.com/wukongmusic/",
-    website: "https://djmag.com/top100djs/2025/83/wukong",
-    bio: "Melodic Techno. SC wukongofficial, YT @WUKONGofficial (not bare @wukong), IG @wukongmusic.",
+    website: "https://linktr.ee/wukongmusic",
+    bio: "Melodic Techno. Official linktr.ee/wukongmusic — SC wukongofficial, YT @WUKONGofficial (not bare @wukong), IG @wukongmusic.",
   },
   {
     slug: "fedde-le-grand",
@@ -811,8 +810,8 @@ export const DJ_SOCIAL_PINS: DjSocialPin[] = [
     soundcloud: "https://soundcloud.com/plastikfunk",
     youtube: "https://www.youtube.com/@plastikfunk",
     instagram: "https://www.instagram.com/plastikfunk/",
-    website: "https://djmag.com/top100djs/2025/86/plastik-funk",
-    bio: "House. SC plastikfunk, YT/IG @plastikfunk.",
+    website: "https://plastik-funk.de/",
+    bio: "House. Official plastik-funk.de — SC plastikfunk, YT/IG @plastikfunk.",
   },
   {
     slug: "dubvision",
@@ -821,8 +820,8 @@ export const DJ_SOCIAL_PINS: DjSocialPin[] = [
     soundcloud: "https://soundcloud.com/dubvision",
     youtube: "https://www.youtube.com/@DubVision",
     instagram: null,
-    website: "https://djmag.com/top100djs/2025/87/dubvision",
-    bio: "Progressive House. SC dubvision, YT @DubVision.",
+    website: "https://linktr.ee/dubvision",
+    bio: "Progressive House. Official linktr.ee/dubvision — SC dubvision, YT @DubVision.",
   },
   {
     slug: "b-jones",
@@ -930,8 +929,8 @@ export const DJ_SOCIAL_PINS: DjSocialPin[] = [
     soundcloud: "https://soundcloud.com/borrego-s",
     youtube: "https://www.youtube.com/@marianabo",
     instagram: "https://www.threads.com/@djmarianabo",
-    website: "https://djmag.com/top100djs/2025/91/mariana-bo",
-    bio: "Hardstyle. SC borrego-s (MARIANA BO Official), YT @marianabo, Threads @djmarianabo.",
+    website: "https://linktr.ee/djmarianabo",
+    bio: "Hardstyle. Official linktr.ee/djmarianabo — SC borrego-s (MARIANA BO Official), YT @marianabo, Threads @djmarianabo.",
   },
   {
     slug: "fantasm",
@@ -952,8 +951,8 @@ export const DJ_SOCIAL_PINS: DjSocialPin[] = [
     // Bare @VINAI resolves to an empty channel — official is @vinaiofficial.
     youtube: "https://www.youtube.com/@vinaiofficial",
     instagram: null,
-    website: "https://djmag.com/top100djs/2025/94/vinai",
-    bio: "Big Room. SC wearevinai, YT @vinaiofficial (not bare @VINAI).",
+    website: "https://linktr.ee/vinaiofficial",
+    bio: "Big Room. Official linktr.ee/vinaiofficial — SC wearevinai, YT @vinaiofficial (not bare @VINAI). Not wearevinai.com (casino).",
   },
   {
     slug: "faustix",
@@ -973,8 +972,8 @@ export const DJ_SOCIAL_PINS: DjSocialPin[] = [
     soundcloud: "https://soundcloud.com/honeydijon",
     youtube: "https://www.youtube.com/@honeydijon",
     instagram: "https://www.instagram.com/honeydijon/",
-    website: "https://djmag.com/top100djs/2025/97/honey-dijon",
-    bio: "House. SC honeydijon, YT/IG @honeydijon. Not the Paris club Djoon.",
+    website: "https://linktr.ee/honeydijon",
+    bio: "House. Official linktr.ee/honeydijon — SC honeydijon, YT/IG @honeydijon. Not the Paris club Djoon. honeydijon.com is a parked lander.",
   },
   {
     slug: "nils-van-zandt",
@@ -984,8 +983,8 @@ export const DJ_SOCIAL_PINS: DjSocialPin[] = [
     soundcloud: "https://soundcloud.com/nilsvanzandtofficial",
     youtube: "https://www.youtube.com/@nilsvanzandt",
     instagram: null,
-    website: "https://djmag.com/top100djs/2025/98/nils-van-zandt",
-    bio: "Big Room. SC nilsvanzandtofficial, YT @nilsvanzandt.",
+    website: "https://linktr.ee/nilsvanzandt",
+    bio: "Big Room. Official linktr.ee/nilsvanzandt — SC nilsvanzandtofficial, YT @nilsvanzandt.",
   },
   {
     slug: "marlon-hoffstadt",
