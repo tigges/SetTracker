@@ -1011,7 +1011,7 @@ describe("curated YouTube 429 fallback", () => {
     assert.equal(sets.length, 1);
     assert.equal(sets[0]!.sourceSlug, "yt-xXRjglkAmq8");
     assert.equal(sets[0]!.type, "festival");
-    assert.ok(sets[0]!.plays.length >= 17);
+    assert.ok(sets[0]!.plays.length >= 20);
     assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
     assert.ok(sets[0]!.durationSec >= 1 * 3600 + 25 * 60);
     assert.equal(sets[0]?.primaryArtist?.slug, "vintage-culture");
