@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { SetEntryLink } from "@/components/SetEntryLink";
 import { notFound, redirect } from "next/navigation";
 import { getDjBySlug, getAllDjSlugs } from "@/lib/queries";
 import { EntityThumb } from "@/components/EntityThumb";
@@ -145,8 +146,9 @@ export default async function DjPage({
                 const type = SET_TYPE_META[s.type] ?? { label: s.type, glyph: "•" };
                 return (
                   <li key={s.slug}>
-                    <Link
+                    <SetEntryLink
                       href={`/sets/${s.slug}`}
+                      label={dj.name}
                       className="flex items-center gap-3 py-3 transition-colors hover:opacity-90"
                     >
                       <EntityThumb
@@ -179,7 +181,7 @@ export default async function DjPage({
                       <span className="mono flex-none text-[12px] text-muted2">
                         {fmtRelative(s.publishedAt)}
                       </span>
-                    </Link>
+                    </SetEntryLink>
                   </li>
                 );
               })}

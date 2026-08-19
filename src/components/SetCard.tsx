@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { useState, type MouseEvent } from "react";
+import { SetEntryLink } from "@/components/SetEntryLink";
 import { EntityThumb } from "@/components/EntityThumb";
 import { StatusBar } from "@/components/StatusBits";
 import { setHostHeadline } from "@/lib/brandHosts";
@@ -16,7 +16,13 @@ import { FEED_SPOTLIGHT_META } from "@/lib/feedPriority";
 import { setDisplayThumb } from "@/lib/setBrowse";
 import type { FeedItem } from "@/lib/queries";
 
-export function SetCard({ set }: { set: FeedItem }) {
+export function SetCard({
+  set,
+  browseLabel,
+}: {
+  set: FeedItem;
+  browseLabel?: string;
+}) {
   const [playing, setPlaying] = useState(false);
   const type = SET_TYPE_META[set.type] ?? { label: set.type, glyph: "•" };
   const accent = set.primaryDj?.accent ?? "var(--brand)";
@@ -57,7 +63,11 @@ export function SetCard({ set }: { set: FeedItem }) {
 
   return (
     <article className="card group relative flex flex-col gap-4 p-4 transition-colors hover:border-[color:var(--muted2)]">
-      <Link href={`/sets/${set.slug}`} className="flex items-start gap-3">
+      <SetEntryLink
+        href={`/sets/${set.slug}`}
+        label={browseLabel}
+        className="flex items-start gap-3"
+      >
         <div className="relative flex-none">
           <EntityThumb
             src={thumb}
@@ -101,7 +111,7 @@ export function SetCard({ set }: { set: FeedItem }) {
             </p>
           ) : null}
         </div>
-      </Link>
+      </SetEntryLink>
 
       <div className="mt-auto space-y-2">
         <StatusBar counts={set.statusCounts} />
@@ -120,12 +130,13 @@ export function SetCard({ set }: { set: FeedItem }) {
               {playing ? "Hide" : "Play"}
             </button>
           ) : (
-            <Link
+            <SetEntryLink
               href={`/sets/${set.slug}`}
+              label={browseLabel}
               className="text-[11px] text-muted hover:text-ink"
             >
               Open
-            </Link>
+            </SetEntryLink>
           )}
         </div>
         {playing && target ? (

@@ -5,6 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { ATLAS_QUERY_EVENT } from "@/lib/atlas/searchItems";
 import { mediaUrl } from "@/lib/mediaUrl";
+import { markBrowseBack } from "@/lib/browseBack";
 import type { SearchIndexItem } from "@/lib/searchIndex";
 
 const KIND_LABEL: Record<SearchIndexItem["kind"], string> = {
@@ -178,6 +179,7 @@ export function GlobalSearch({
           } else if (e.key === "Enter") {
             e.preventDefault();
             if (results[active]) {
+              markBrowseBack();
               router.push(results[active].href);
               setOpen(false);
               if (!embedded) setQ("");
@@ -223,6 +225,7 @@ export function GlobalSearch({
           <Link
             href={r.href}
             onClick={() => {
+              markBrowseBack();
               setOpen(false);
               if (!embedded) setQ("");
             }}

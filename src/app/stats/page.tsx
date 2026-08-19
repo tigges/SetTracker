@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import Link from "next/link";
+import { SetEntryLink } from "@/components/SetEntryLink";
 import { StatsHealthCard, StatsMeter } from "@/components/StatsHealthCard";
 import { getCatalogStats } from "@/lib/catalogStats";
 import { loadDjMagTop100RankBySlug } from "@/lib/djmagTop100";
@@ -295,12 +296,13 @@ export default async function StatsPage() {
             {s.tracklistGaps.slice(0, PREVIEW).map((row) => (
               <li key={row.slug} className="py-1.5">
                 {row.hasSetPage ? (
-                  <Link
+                  <SetEntryLink
                     href={`/sets/${row.slug}`}
+                    label="Stats"
                     className="text-[13px] font-semibold text-ink hover:underline"
                   >
                     {row.title}
-                  </Link>
+                  </SetEntryLink>
                 ) : (
                   <span className="text-[13px] font-semibold text-ink">
                     {row.title}
@@ -334,12 +336,13 @@ export default async function StatsPage() {
           <ul className="divide-y divide-line border-y border-line">
             {s.needsIdsSets.slice(0, PREVIEW).map((row) => (
               <li key={row.slug} className="py-1.5">
-                <Link
+                <SetEntryLink
                   href={`/sets/${row.slug}`}
+                  label="Stats"
                   className="text-[13px] font-semibold text-ink hover:underline"
                 >
                   {row.title}
-                </Link>
+                </SetEntryLink>
                 <div className="mono truncate text-[11px] text-muted2">
                   {[
                     row.primaryDj,

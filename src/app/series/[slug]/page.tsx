@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { EntityThumb } from "@/components/EntityThumb";
+import { SetEntryLink } from "@/components/SetEntryLink";
 import { StatusBar } from "@/components/StatusBits";
 import { getAllSeriesSlugs, getSeriesBySlug } from "@/lib/queries";
 import { pageMeta } from "@/lib/site";
@@ -84,8 +85,9 @@ export default async function SeriesPage({
             const type = SET_TYPE_META[s.type] ?? { label: s.type, glyph: "•" };
             return (
               <li key={s.slug}>
-                <Link
+                <SetEntryLink
                   href={`/sets/${s.slug}`}
+                  label={series.name}
                   className="flex items-center gap-3 py-3 transition-colors hover:opacity-90"
                 >
                   <EntityThumb
@@ -113,7 +115,7 @@ export default async function SeriesPage({
                   <span className="mono flex-none text-[12px] text-muted2">
                     {fmtRelative(s.publishedAt)}
                   </span>
-                </Link>
+                </SetEntryLink>
               </li>
             );
           })}

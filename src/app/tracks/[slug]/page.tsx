@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { EntityThumb } from "@/components/EntityThumb";
+import { SetEntryLink } from "@/components/SetEntryLink";
 import { getAllTrackSlugs, getTrackBySlug } from "@/lib/queries";
 import { pageMeta } from "@/lib/site";
 import {
@@ -174,8 +175,9 @@ export default async function TrackPage({
                   };
                   return (
                     <li key={s.slug}>
-                      <Link
+                      <SetEntryLink
                         href={`/sets/${s.slug}`}
+                        label={track.title}
                         className="flex items-center gap-3 py-3 hover:opacity-90"
                       >
                         <EntityThumb
@@ -203,7 +205,7 @@ export default async function TrackPage({
                         >
                           {fmtRelative(s.publishedAt)}
                         </span>
-                      </Link>
+                      </SetEntryLink>
                     </li>
                   );
                 })}

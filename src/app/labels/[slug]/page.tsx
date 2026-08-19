@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getAllLabelSlugs, getLabelBySlug } from "@/lib/queries";
 import { EntityThumb } from "@/components/EntityThumb";
+import { SetEntryLink } from "@/components/SetEntryLink";
 import { SocialLinks } from "@/components/SocialLinks";
 import { pageMeta } from "@/lib/site";
 import { SET_TYPE_META, fmtDate, fmtDuration, fmtRelative } from "@/lib/status";
@@ -115,7 +116,11 @@ export default async function LabelPage({
                   const type = SET_TYPE_META[s.type] ?? { label: s.type, glyph: "•" };
                   return (
                     <li key={s.slug}>
-                      <Link href={`/sets/${s.slug}`} className="flex items-center gap-3 py-3 hover:opacity-90">
+                      <SetEntryLink
+                        href={`/sets/${s.slug}`}
+                        label={label.name}
+                        className="flex items-center gap-3 py-3 hover:opacity-90"
+                      >
                         <EntityThumb
                           src={s.imageUrl}
                           label={s.title}
@@ -136,7 +141,7 @@ export default async function LabelPage({
                         <span className="mono flex-none text-[12px] text-muted2" title={fmtDate(s.publishedAt)}>
                           {fmtRelative(s.publishedAt)}
                         </span>
-                      </Link>
+                      </SetEntryLink>
                     </li>
                   );
                 })}

@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getSetBySlug, getAllSetSlugs, getRelatedSets } from "@/lib/queries";
+import { BrowseBackLink } from "@/components/BrowseBackLink";
 import { EntityThumb } from "@/components/EntityThumb";
 import { SetExport } from "@/components/SetExport";
 import { SetListen } from "@/components/SetListen";
 import { SetPlayer } from "@/components/SetPlayer";
 import { SetTimeline } from "@/components/SetTimeline";
-import { StatusLegend } from "@/components/StatusBits";
 import { setHostHeadline } from "@/lib/brandHosts";
 import { detectPlaybackHost } from "@/lib/playback";
 import { pageMeta } from "@/lib/site";
@@ -65,15 +65,10 @@ export default async function SetPage({
   return (
     <SetListen>
     <div>
-      <Link
-        href="/sets"
-        className="mono text-[12px] text-muted2 transition-colors hover:text-ink"
-      >
-        ← Sets
-      </Link>
+      <BrowseBackLink />
 
       {/* header */}
-      <div className="mt-4 flex flex-col gap-5 border-b border-line pb-7 sm:flex-row sm:items-start">
+      <div className="mt-3 flex flex-col gap-3 border-b border-line pb-4 sm:mt-4 sm:flex-row sm:items-start sm:gap-5 sm:pb-6">
         <div className="relative flex-none">
           <EntityThumb
             src={set.imageUrl}
@@ -103,7 +98,9 @@ export default async function SetPage({
                 {set.genre}
               </span>
             )}
-            {set.series && (
+            {set.series &&
+              set.series.name.toLowerCase() !==
+                (set.event?.name ?? "").toLowerCase() && (
               <Link
                 href={`/series/${set.series.slug}`}
                 className="eyebrow transition-colors hover:text-ink"
@@ -122,7 +119,7 @@ export default async function SetPage({
             )}
           </div>
 
-          <h1 className="mt-2 text-2xl font-extrabold tracking-tight">
+          <h1 className="mt-1.5 text-2xl font-extrabold tracking-tight">
             {set.title}
           </h1>
 
@@ -145,7 +142,7 @@ export default async function SetPage({
             )}
           </div>
 
-          <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-[12px] text-muted2">
+          <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-[12px] text-muted2">
             <span className="mono">{fmtDate(set.publishedAt)}</span>
             <span className="mono">{fmtDuration(set.durationSec)}</span>
             <span className="mono">{set.plays.length} tracks</span>
@@ -190,18 +187,6 @@ export default async function SetPage({
               );
             })()}
           </div>
-          {(set.sourceName === "SoundCloud" ||
-            set.sourceName === "hearthis.at" ||
-            set.sourceName === "YouTube" ||
-            set.sourceName === "Insomniac") && (
-            <p className="mt-2 max-w-xl text-[12px] text-muted2">
-              Tracklist comes from the source description, timed comments,
-              Insomniac Night Owl Radio pages, or YouTube Music song credits —
-              often partial / untimed. Suggest an ID on unresolved rows to fill
-              gaps.
-            </p>
-          )}
-
           <SetPlayer
             playbackUrl={set.playbackUrl}
             sourceUrl={set.sourceUrl}
@@ -218,15 +203,16 @@ export default async function SetPage({
         setSourceUrl={set.sourceUrl}
       >
         <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
-          <div className="min-w-0 space-y-1">
-            <StatusLegend counts={set.statusCounts} />
+          <p className="min-w-0 text-[12px] text-muted2">
+            <span className="mono">{set.statusCounts.identified ?? 0}</span>{" "}
+            identified
             {coverage.identified > 0 ? (
-              <p className="text-[12px] text-muted2">
-                {coverage.buyable} of {coverage.identified} identified tracks
-                have a Beatport page
-              </p>
+              <>
+                {" · "}
+                <span className="mono">{coverage.buyable}</span> Beatport
+              </>
             ) : null}
-          </div>
+          </p>
           <SetExport
             meta={{
               title: set.title,

@@ -33,7 +33,10 @@ function subscribeDensity(onChange: () => void) {
 
 function getDensityCompact() {
   try {
-    return localStorage.getItem(DENSITY_KEY) === "compact";
+    const stored = localStorage.getItem(DENSITY_KEY);
+    if (stored === "compact") return true;
+    if (stored === "comfortable") return false;
+    return window.matchMedia("(max-width: 639px)").matches;
   } catch {
     return false;
   }
@@ -109,24 +112,24 @@ export function SetTimeline({
   const caption = plays.find((p) => p.id === (hoverId ?? activeId));
 
   return (
-    <div className="mt-6 space-y-6">
+    <div className="mt-4 space-y-4 sm:mt-6 sm:space-y-6">
       {/* ------------------------------- SET STRIP ------------------------------- */}
-      <div className="card p-4">
-        <div className="mb-3 flex items-center justify-between gap-3">
-          <div className="min-w-0">
+      <div className="card p-3 sm:p-4">
+        <div className="mb-2 flex items-center justify-between gap-3 sm:mb-3">
+          <div className="hidden min-w-0 sm:block">
             <span className="eyebrow">Set strip</span>
             <p className="mt-1 text-[11px] text-muted2">
               Click a segment or tracklist row to play from that cue
             </p>
           </div>
-          <div className="flex items-center gap-3 text-[12px] text-muted2">
+          <div className="flex items-center gap-3 text-[12px] text-muted2 sm:ml-auto">
             <span className="mono">00:00</span>
             <span className="text-muted2">→</span>
             <span className="mono">{fmtTimestamp(durationSec)}</span>
           </div>
         </div>
 
-        <div className="flex h-14 w-full gap-[2px]">
+        <div className="flex h-8 w-full gap-[2px] sm:h-14">
           {plays.map((p, i) => {
             const isActive = p.id === activeId;
             const isHover = p.id === hoverId;
