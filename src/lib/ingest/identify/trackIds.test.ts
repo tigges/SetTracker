@@ -3,7 +3,9 @@ import {
   evaluateIsrc,
   exportRowsToIdentifyQueue,
   heldIdentifyJobs,
+  identifyLookupPlan,
   mergeIdentifyQueue,
+  splitEnrichPriorities,
   uniqueIdentifyRows,
 } from "./trackIds";
 import { isPasteOnlyIdentifyUrl } from "./pasteOnly";
@@ -108,5 +110,53 @@ assert.equal(
   fromExport.some((r) => r.slug === "zz-test-enrich-queue-done"),
   false,
 );
+
+assert.equal(identifyLookupPlan({ at: "0:00", artist: "A", title: "B" }).useDeezer, true);
+assert.equal(identifyLookupPlan({ at: "0:00", artist: "A", title: "B" }).mbByIsrc, false);
+assert.deepEqual(
+  identifyLookupPlan({
+    at: "0:00",
+    artist: "A",
+    title: "B",
+    isrc: "NLZ542600064",
+  }),
+  {
+    knownIsrc: "NLZ542600064",
+    needIsrc: false,
+    useDeezer: false,
+    useAudd: false,
+    mbByIsrc: true,
+  },
+);
+
+const split = splitEnrichPriorities(
+  [
+    {
+      slug: "no-isrc-hot",
+      artist: "A",
+      title: "Hot",
+      mix: null,
+      remixer: null,
+      genre: null,
+      plays: 9,
+      isrc: null,
+      beatportUrl: null,
+    },
+    {
+      slug: "has-isrc-no-bp",
+      artist: "B",
+      title: "Also",
+      mix: null,
+      remixer: null,
+      genre: null,
+      plays: 8,
+      isrc: "NLZ542600064",
+      beatportUrl: null,
+    },
+  ],
+  2,
+);
+assert.equal(split[0]?.slug, "no-isrc-hot");
+assert.equal(split[1]?.slug, "has-isrc-no-bp");
 
 console.log("identify/trackIds.test.ts ok");

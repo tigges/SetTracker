@@ -85,8 +85,8 @@ jobs:
           echo "do_thumbs=$DO_THUMBS" >> "$GITHUB_OUTPUT"
           # Chip the 16k Beatport/ISRC pile on every enrich except smoke.
           case "$MODE" in
-            full) TRACK_ID_LIMIT=200 ;;
-            acr)  TRACK_ID_LIMIT=40 ;;
+            full) TRACK_ID_LIMIT=400 ;;
+            acr)  TRACK_ID_LIMIT=120 ;;
             *)    TRACK_ID_LIMIT=0 ;;
           esac
           echo "track_id_limit=$TRACK_ID_LIMIT" >> "$GITHUB_OUTPUT"
@@ -218,7 +218,8 @@ jobs:
           TRACK_ID_APPLY: "1"
           TRACK_ID_LIMIT: ${{ steps.mode.outputs.track_id_limit }}
           TRACK_ID_HELD_LIMIT: "8"
-          TRACK_ID_DELAY_MS: "250"
+          TRACK_ID_DELAY_MS: "0"
+          TRACKRADAR_ARCHIVE: "0"
         run: npm run research:track-ids
         continue-on-error: true
 
