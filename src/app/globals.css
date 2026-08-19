@@ -78,37 +78,52 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Homepage hero — keep collage on the right, lock a dark field under copy */
+/* Homepage hero — phone: bottom fade so the collage reads. sm+: left plate. */
 .hero-scrim {
-  background:
-    linear-gradient(
-      100deg,
-      var(--bg) 0%,
-      color-mix(in srgb, var(--bg) 96%, transparent) 34%,
-      color-mix(in srgb, var(--bg) 72%, transparent) 52%,
-      color-mix(in srgb, var(--bg) 28%, transparent) 72%,
-      transparent 100%
-    ),
-    linear-gradient(
-      180deg,
-      color-mix(in srgb, var(--bg) 42%, transparent) 0%,
-      color-mix(in srgb, var(--bg) 28%, transparent) 32%,
-      color-mix(in srgb, var(--bg) 88%, transparent) 78%,
-      var(--bg) 100%
-    );
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--bg) 12%, transparent) 0%,
+    color-mix(in srgb, var(--bg) 22%, transparent) 36%,
+    color-mix(in srgb, var(--bg) 78%, transparent) 70%,
+    var(--bg) 100%
+  );
 }
 
 .hero-copy {
   max-width: 36rem;
-  padding: 1.1rem 1.2rem 1.2rem;
-  margin-inline: -0.35rem;
-  border-radius: 18px;
-  background: color-mix(in srgb, var(--bg) 92%, transparent);
-  box-shadow:
-    0 0 0 1px color-mix(in srgb, var(--line) 70%, transparent),
-    0 0 64px 36px color-mix(in srgb, var(--bg) 78%, transparent);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+}
+
+@media (min-width: 640px) {
+  .hero-scrim {
+    background:
+      linear-gradient(
+        100deg,
+        var(--bg) 0%,
+        color-mix(in srgb, var(--bg) 96%, transparent) 34%,
+        color-mix(in srgb, var(--bg) 72%, transparent) 52%,
+        color-mix(in srgb, var(--bg) 28%, transparent) 72%,
+        transparent 100%
+      ),
+      linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--bg) 42%, transparent) 0%,
+        color-mix(in srgb, var(--bg) 28%, transparent) 32%,
+        color-mix(in srgb, var(--bg) 88%, transparent) 78%,
+        var(--bg) 100%
+      );
+  }
+
+  .hero-copy {
+    padding: 1.1rem 1.2rem 1.2rem;
+    margin-inline: -0.35rem;
+    border-radius: 18px;
+    background: color-mix(in srgb, var(--bg) 92%, transparent);
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--line) 70%, transparent),
+      0 0 64px 36px color-mix(in srgb, var(--bg) 78%, transparent);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
 }
 
 .hero-title {
@@ -134,9 +149,15 @@ body {
 }
 
 .hero-legend {
-  display: flex;
+  display: none;
   flex-wrap: wrap;
   gap: 0.4rem;
+}
+
+@media (min-width: 640px) {
+  .hero-legend {
+    display: flex;
+  }
 }
 
 .hero-legend-chip {

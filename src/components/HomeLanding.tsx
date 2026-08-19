@@ -265,17 +265,17 @@ export function HomeLanding({
 
   return (
     <div className="space-y-8 sm:space-y-12">
-      <section className="relative min-h-[22rem] overflow-hidden rounded-2xl border border-line bg-bg sm:min-h-[28rem]">
+      <section className="relative min-h-[19rem] overflow-hidden rounded-2xl border border-line bg-bg sm:min-h-[28rem]">
         <FaceCollage faces={collage} />
         <div className="hero-scrim absolute inset-0" aria-hidden />
-        <div className="relative z-10 flex min-h-[22rem] flex-col justify-end p-6 sm:min-h-[28rem] sm:p-10">
-          <div className="hero-copy space-y-5">
+        <div className="relative z-10 flex min-h-[19rem] flex-col justify-end p-5 sm:min-h-[28rem] sm:p-10">
+          <div className="hero-copy space-y-3 sm:space-y-5">
             <div>
-              <BrandLogo className="h-12 w-[8.25rem] sm:h-14 sm:w-[9.6rem]" />
-              <h1 className="hero-title mt-3 text-4xl font-extrabold tracking-tight sm:text-5xl">
+              <BrandLogo className="mb-1 hidden h-14 w-[9.6rem] sm:block" />
+              <h1 className="hero-title text-[1.85rem] font-extrabold leading-[1.12] tracking-tight sm:mt-3 sm:text-5xl">
                 The night, as a graph.
               </h1>
-              <p className="hero-lede mt-3 max-w-md text-[15px] leading-relaxed">
+              <p className="hero-lede mt-2 max-w-md text-[14px] leading-relaxed sm:mt-3 sm:text-[15px]">
                 Timed tracklists from festivals, clubs, and radio.
               </p>
             </div>
