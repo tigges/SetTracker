@@ -154,6 +154,7 @@ import {
   TL_INDIRA_PAGANOTTO_AREA_V_AWAKENINGS_2025,
   TL_KOROLOVA_SNOWATTACK_FESTIVAL_2026,
   TL_KOROLOVA_TULUM_MEXICO_2026,
+  TL_NATTE_VISSTICK_TELETECH_FYM_AFAS_LIVE_AMSTERDAM_2025,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   tracklist1001RowsToPlays,
@@ -2223,6 +2224,36 @@ assert.equal(
   isWiredTracklistSlug("sc-korolovadj-korolova-tulum-mexico-melodic"),
   true,
 );
+
+assertSeedClocks(TL_NATTE_VISSTICK_TELETECH_FYM_AFAS_LIVE_AMSTERDAM_2025);
+assert.equal(TL_NATTE_VISSTICK_TELETECH_FYM_AFAS_LIVE_AMSTERDAM_2025.length, 35);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-Nrl9yBX6Kpw"],
+  TL_NATTE_VISSTICK_TELETECH_FYM_AFAS_LIVE_AMSTERDAM_2025,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-https://youtu.be/Nrl9yBX6Kpw"],
+  undefined,
+);
+const natteAfas = tracklist1001RowsToPlays(
+  TL_NATTE_VISSTICK_TELETECH_FYM_AFAS_LIVE_AMSTERDAM_2025,
+);
+assert.equal(natteAfas.length, 35);
+assert.equal(natteAfas[0]?.provenance, "1001tl");
+assert.equal(natteAfas[0]?.timestamp, 1);
+assert.equal(natteAfas[0]?.artistName, "Natte Visstick");
+assert.equal(natteAfas[0]?.trackTitle, "Show Intro");
+assert.equal(natteAfas[4]?.trackTitle, "Deutsche Techno Bunker X Insomnia (Natte Visstick Mashup)");
+assert.equal(natteAfas[4]?.timestamp, 7 * 60 + 35);
+assert.equal(natteAfas[34]?.trackTitle, "Blood, Sweat And Hardcore (Natte Visstick Live Remix)");
+assert.equal(natteAfas[34]?.timestamp, 56 * 60 + 3);
+for (let i = 1; i < natteAfas.length; i++) {
+  assert.ok(
+    (natteAfas[i]!.timestamp ?? 0) > (natteAfas[i - 1]!.timestamp ?? 0),
+    `Natte Visstick AFAS Live clocks must increase at index ${i}`,
+  );
+}
+assert.equal(isWiredTracklistSlug("yt-Nrl9yBX6Kpw"), true);
 
 assertSeedClocks(TL_NICKY_ROMERO_PROTOCOL_RADIO_731);
 assert.equal(TL_NICKY_ROMERO_PROTOCOL_RADIO_731.length, 16);

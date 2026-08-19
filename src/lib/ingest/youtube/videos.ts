@@ -134,6 +134,7 @@ import {
   TL_INDIRA_PAGANOTTO_AREA_V_AWAKENINGS_2025,
   TL_KOROLOVA_SNOWATTACK_FESTIVAL_2026,
   TL_KOROLOVA_TULUM_MEXICO_2026,
+  TL_NATTE_VISSTICK_TELETECH_FYM_AFAS_LIVE_AMSTERDAM_2025,
 } from "../tracklists1001/seeds";
 import type { RawArtist } from "../types";
 import { slugify } from "../types";
@@ -1024,6 +1025,21 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/20v73731/korolova-tulum-mexico-2026-02-27.html",
     tracklist1001: TL_KOROLOVA_TULUM_MEXICO_2026,
+  },
+  {
+    // Official playback — Teletech x FYM, AFAS Live Amsterdam 2025-12-31.
+    // No SoundCloud in the operator paste — do not invent an SC slug.
+    video: "https://www.youtube.com/watch?v=Nrl9yBX6Kpw",
+    primaryArtist: dj("Natte Visstick", {
+      accent: "#ff4d00",
+    }),
+    genre: "Hard Dance",
+    type: "festival",
+    title: "Natte Visstick | Teletech x FYM, AFAS Live 2025",
+    eventName: "Teletech x FYM",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/25jl14z9/natte-visstick-teletech-x-fym-afas-live-amsterdam-netherlands-2025-12-31.html",
+    tracklist1001: TL_NATTE_VISSTICK_TELETECH_FYM_AFAS_LIVE_AMSTERDAM_2025,
   },
   {
     // Official Epic Radio 036; timed 1001 capture (same list as SC).

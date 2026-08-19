@@ -38,6 +38,7 @@ const KOROLOVA_SNOWATTACK = YOUTUBE_SETS.find((s) =>
 const KOROLOVA_TULUM = YOUTUBE_SETS.find((s) =>
   s.video.includes("HvkAfj1QnK8"),
 );
+const NATTE_AFAS = YOUTUBE_SETS.find((s) => s.video.includes("Nrl9yBX6Kpw"));
 const MM_YACHT = YOUTUBE_SETS.find((s) => s.video.includes("0-s_qZRWElA"));
 const PRISMATIC_032 = YOUTUBE_SETS.find((s) => s.video.includes("blP5J6BUG0M"));
 const SPECTRUM_485 = YOUTUBE_SETS.find((s) => s.video.includes("yTRvLrtsM9I"));
@@ -656,6 +657,17 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.durationSec, 53 * 60 + 8 + 180);
   });
 
+  it("builds Natte Visstick Teletech x FYM AFAS Live 2025 meta from the curated 1001 capture", () => {
+    assert.ok(NATTE_AFAS);
+    const meta = watchMetaFromCuratedSeed(NATTE_AFAS);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "Nrl9yBX6Kpw");
+    assert.match(meta.title, /Teletech x FYM, AFAS Live 2025/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=Nrl9yBX6Kpw");
+    // Last cue 56:03 + 180s pad.
+    assert.equal(meta.durationSec, 56 * 60 + 3 + 180);
+  });
+
   it("builds Miss Monique Ibiza Yacht meta from the curated 1001 capture", () => {
     assert.ok(MM_YACHT);
     const meta = watchMetaFromCuratedSeed(MM_YACHT);
@@ -1159,6 +1171,20 @@ describe("curated YouTube 429 fallback", () => {
     assert.notEqual(sets[0]!.sourceSlug, "yt-7UcyaKbvy2o");
     assert.notEqual(sets[0]!.sourceSlug, "yt-5JxfEjVdQFk");
     assert.notEqual(sets[0]!.sourceSlug, "yt-RLOghpXjuJI");
+  });
+
+  it("lands Natte Visstick Teletech x FYM AFAS Live 2025 from the 1001 seed when watch is 429", async () => {
+    assert.ok(NATTE_AFAS);
+    const adapter = createYoutubeAdapter([NATTE_AFAS], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-Nrl9yBX6Kpw");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 35);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 56 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "natte-visstick");
+    assert.match(String(sets[0]?.eventName ?? ""), /Teletech x FYM/i);
   });
 
   it("lands Miss Monique Ibiza Yacht from the 1001 seed when watch is 429", async () => {

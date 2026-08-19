@@ -270,3 +270,51 @@ export const TL_KOROLOVA_TULUM_MEXICO_2026: FingerprintSeedRow[] = [
   { at: "42:58", artist: "Jan Blomqvist & Rodriguez Jr.", title: "Destination Lost (Helsloot Remix)" },
   { at: "53:08", artist: "Sistersweet", title: "Sunset In Colombo" },
 ];
+
+/**
+ * Natte Visstick @ Teletech x FYM, AFAS Live Amsterdam, Netherlands 2025-12-31
+ * Official YouTube: https://youtu.be/Nrl9yBX6Kpw
+ * https://www.1001tracklists.com/tracklist/25jl14z9/natte-visstick-teletech-x-fym-afas-live-amsterdam-netherlands-2025-12-31.html
+ * Overlay name TL_Natte-Visstick_Teletech_FYM_AFAS-Live_Amsterdam_Netherlands_2025 is not a valid identifier.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-Nrl9yBX6Kpw"] = TL_NATTE_VISSTICK_TELETECH_FYM_AFAS_LIVE_AMSTERDAM_2025
+ * No official SoundCloud in the operator paste — do not invent an SC slug.
+ * Captured 2026-08-19 — provenance 1001tl.
+ */
+export const TL_NATTE_VISSTICK_TELETECH_FYM_AFAS_LIVE_AMSTERDAM_2025: FingerprintSeedRow[] =
+  [
+    { at: "0:01", artist: "Natte Visstick", title: "Show Intro" },
+    { at: "2:27", artist: "Natte Visstick", title: "Kabinet (2026 Live Refix)" },
+    { at: "4:08", artist: "Natte Visstick", title: "Samson & Ket (2026 Live Refix)" },
+    { at: "6:00", artist: "Natte Visstick", title: "Natte Visstick Anthem P.1 (2026 Live Refix)" },
+    { at: "7:35", artist: "Natte Visstick vs. Faithless", title: "Deutsche Techno Bunker X Insomnia (Natte Visstick Mashup)" },
+    { at: "8:20", artist: "Natte Visstick", title: "Deutsche Techno Bunker" },
+    { at: "9:05", artist: "Faithless", title: "Insomnia" },
+    { at: "9:50", artist: "Jengi", title: "Bel Mercy (Natte Visstick Live Remix)" },
+    { at: "12:04", artist: "Natte Visstick & Yellow Claw ft. Ogaquafina", title: "REAL BAD THINGS" },
+    { at: "14:13", artist: "J Balvin & Skrillex", title: "In Da Getto (Natte Visstick Live Remix)" },
+    { at: "15:57", artist: "Natte Visstick & Mr. Polska", title: "Raging Through The Night" },
+    { at: "17:22", artist: "Natte Visstick & Mr. Polska", title: "LA VIDA LOCA" },
+    { at: "20:00", artist: "Natte Visstick", title: "Can't Stop Raving (2026 Live Refix)" },
+    { at: "22:40", artist: "Natte Visstick", title: "Visstick Gooi Die Kanker Kick (2026 Live Refix)" },
+    { at: "24:21", artist: "DIKKE BAAP & Natte Visstick", title: "Ik Trip 'M (2026 Live Refix)" },
+    { at: "26:05", artist: "Natte Visstick & Vieze Asbak", title: "Lekkere Boterham (Voodoo People Mashup)" },
+    { at: "28:11", artist: "Natte Visstick", title: "In De Tram (2026 Live Refix)" },
+    { at: "30:18", artist: "Yellow Claw & Natte Visstick & RHYME", title: "CRUSH (2026 Live Refix)" },
+    { at: "32:54", artist: "Swedish House Mafia", title: "One (Natte Visstick Remix)" },
+    { at: "37:07", artist: "Far East Movement ft. The Cataracs & DEV", title: "Like A G6 (Natte Visstick Live Remix)" },
+    { at: "38:58", artist: "Mr. Polska & Natte Visstick & Vieze Asbak", title: "POLSKA JUMPSTYLE" },
+    { at: "42:26", artist: "David Guetta ft. Ne-Yo & Akon", title: "Play Hard (Natte Visstick Live Remix)" },
+    { at: "44:30", artist: "Natte Visstick & JAZZY (CH)", title: "CRACK!" },
+    { at: "46:14", artist: "Natte Visstick", title: "4 The People" },
+    { at: "48:23", artist: "Natte Visstick & Vieze Asbak", title: "Ravegenerator" },
+    { at: "49:35", artist: "Natte Visstick", title: "Schuurmachine" },
+    { at: "52:00", artist: "Warface", title: "Mashup 6.0 (Madmize Kick Edit / Natte Visstick Re-Edit)" },
+    { at: "52:14", artist: "Gala", title: "Freed From Desire" },
+    { at: "52:28", artist: "Linkin Park", title: "Numb" },
+    { at: "52:42", artist: "Southstylers", title: "Pounding Senses" },
+    { at: "52:56", artist: "Neophyte & Tha Playah", title: "Still Nr. 1" },
+    { at: "53:10", artist: "Twenty One Pilots", title: "Stressed Out" },
+    { at: "53:23", artist: "Natte Visstick", title: "Medicine" },
+    { at: "54:58", artist: "Natte Visstick & Vieze Asbak & Lil Texas", title: "Bassline Slut 2026" },
+    { at: "56:03", artist: "Paul Elstak", title: "Blood, Sweat And Hardcore (Natte Visstick Live Remix)" },
+  ];
