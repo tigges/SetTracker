@@ -141,19 +141,22 @@ export const TL_VINTAGE_CULTURE_PACHA_IBIZA_2026: FingerprintSeedRow[] = [
  * https://www.1001tracklists.com/tracklist/1d6g4y99/vintage-culture-sunset-yacht-party-new-york-city-united-states-2023-08-12.html
  * Official YT: https://youtu.be/6bJZPDKlq7o
  * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-6bJZPDKlq7o"]
- * Captured 2026-08-16 — provenance 1001tl. Official script: 27 tracks, 26 cues.
- * Opening cue untimed on 1001 → 0:00.
+ * Captured 2026-08-16; refreshed from operator mobile screenshots 2026-08-19.
+ * Provenance 1001tl. Opener untimed on 1001 → 0:00.
+ * Dropped bare ID–ID (05, 20, 26). Lightbulb guesses (Sun In Her Eyes,
+ * What you know) and the unnumbered Spring Girl remix warning are not accepted.
+ * Unnumbered Roddy Lima RMX at 1:45:03 is a timed 1001 overlay on track 25.
  */
 export const TL_VINTAGE_CULTURE_NYC_YACHT_2023: FingerprintSeedRow[] = [
-  { at: "0:00", artist: "Vintage Culture & Fideles ft. Be No Rain", title: "Fallen Leaf" },
+  { at: "0:00", artist: "Vintage Culture & Fideles ft. Be", title: "No Rain - Fallen Leaf (ID Remix)" },
   { at: "5:00", artist: "Christian Burkhardt", title: "Delight" },
   { at: "10:30", artist: "Gui Boratto ft. Lhana Marlet", title: "Drink In Paris (Vintage Culture Remix)" },
   { at: "14:00", artist: "Franky Wah & Vintage Culture", title: "Alive (THEMBA Remix)" },
-  { at: "24:00", artist: "Vintage Culture & Bhaskar & Meca ft. The Vic", title: "Tina" },
+  { at: "24:00", artist: "Vintage Culture & Bhaskar & Meca ft. The Vic", title: "Tina (ID Remix)" },
   { at: "28:30", artist: "Parallelle & Nicolas Masseyeff", title: "Renegade (Adam Ten & Mita Gami Remix)" },
-  { at: "33:00", artist: "RÜFÜS DU SOL", title: "New Sky" },
+  { at: "33:00", artist: "RÜFÜS DU SOL", title: "New Sky (ID Remix)" },
   { at: "37:00", artist: "Dean Mickoski", title: "Losing Your Mind" },
-  { at: "41:00", artist: "DEPARTAMENTO", title: "Tears 4 Fears" },
+  { at: "41:00", artist: "DEPARTAMENTO", title: "Tears 4 Fears (ID Remix)" },
   { at: "46:00", artist: "Shouse & Dennis Ferrer & Seth Troxler", title: "(still) WON'T4GETU" },
   { at: "50:00", artist: "Louie Vega & The Martinez Brothers ft. Marc E. Bassy", title: "Let It Go (Vintage Culture Remix)" },
   { at: "55:00", artist: "Mochakk", title: "Jealous" },
@@ -165,9 +168,10 @@ export const TL_VINTAGE_CULTURE_NYC_YACHT_2023: FingerprintSeedRow[] = [
   { at: "1:23:00", artist: "Bedouin", title: "Tijuana (Vintage Culture Remix)" },
   { at: "1:31:00", artist: "Literatura", title: "Dream (Enoo Napa Remix)" },
   { at: "1:33:00", artist: "Daniel Rateuke", title: "Marvelin" },
-  { at: "1:35:00", artist: "Fred again.. & Skrillex & Four Tet ft. Lil Baby", title: "Baby Again.." },
+  { at: "1:35:00", artist: "Fred again.. & Skrillex & Four Tet ft. Lil Baby", title: "Baby Again.. (ID Remix)" },
   { at: "1:39:00", artist: "Matthias Tanzmann & Black Circle", title: "Masina" },
   { at: "1:44:00", artist: "Vintage Culture & James Hype", title: "You Give Me A Feeling" },
+  { at: "1:45:03", artist: "Vintage Culture & James Hype", title: "You Give Me A Feeling (Roddy Lima RMX)" },
   { at: "1:53:00", artist: "Rob Anderson", title: "Cynthi (Rich NxT Remix)" },
   { at: "1:56:00", artist: "HUGEL ft. Cumbiafrica", title: "El Sueno (Matt Sassari Edit)" },
   { at: "1:59:00", artist: "Monolink", title: "The Prey (Gui Boratto & Vintage Culture Remix)" },

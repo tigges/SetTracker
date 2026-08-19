@@ -1589,18 +1589,32 @@ for (let i = 1; i < vcPacha.length; i++) {
 }
 
 assertSeedClocks(TL_VINTAGE_CULTURE_NYC_YACHT_2023);
-assert.equal(TL_VINTAGE_CULTURE_NYC_YACHT_2023.length, 27);
+assert.equal(TL_VINTAGE_CULTURE_NYC_YACHT_2023.length, 28);
 assert.equal(
   TRACKLIST_1001_BY_SOURCE_SLUG["yt-6bJZPDKlq7o"],
   TL_VINTAGE_CULTURE_NYC_YACHT_2023,
 );
 const vcYacht = tracklist1001RowsToPlays(TL_VINTAGE_CULTURE_NYC_YACHT_2023);
-assert.equal(vcYacht.length, 27);
+assert.equal(vcYacht.length, 28);
 assert.equal(vcYacht[0]?.provenance, "1001tl");
 assert.equal(vcYacht[0]?.timestamp, 0);
-assert.equal(vcYacht[0]?.trackTitle, "Fallen Leaf");
-assert.equal(vcYacht[26]?.trackTitle, "Spring Girl");
-assert.equal(vcYacht[26]?.timestamp, 2 * 3600 + 4 * 60);
+assert.equal(vcYacht[0]?.artistName, "Vintage Culture & Fideles ft. Be");
+assert.equal(vcYacht[0]?.trackTitle, "No Rain - Fallen Leaf (ID Remix)");
+assert.equal(vcYacht[4]?.trackTitle, "Tina (ID Remix)");
+assert.equal(vcYacht[23]?.trackTitle, "You Give Me A Feeling (Roddy Lima RMX)");
+assert.equal(vcYacht[23]?.timestamp, 3600 + 45 * 60 + 3);
+assert.equal(vcYacht[27]?.trackTitle, "Spring Girl");
+assert.equal(vcYacht[27]?.timestamp, 2 * 3600 + 4 * 60);
+assert.equal(
+  vcYacht.some((p) => /^id$/i.test(p.trackTitle ?? "")),
+  false,
+  "bare ID–ID rows must stay dropped",
+);
+assert.equal(
+  vcYacht.some((p) => /sun in her eyes|what you know/i.test(p.trackTitle ?? "")),
+  false,
+  "1001 lightbulb guesses are not accepted IDs",
+);
 for (let i = 1; i < vcYacht.length; i++) {
   assert.ok(
     (vcYacht[i]!.timestamp ?? 0) > (vcYacht[i - 1]!.timestamp ?? 0),
