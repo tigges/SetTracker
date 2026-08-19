@@ -5,7 +5,7 @@ import {
   loadAtlasDjs,
   loadAtlasVenues,
 } from "@/lib/atlas/seed";
-import { getDjList, getVenues } from "@/lib/queries";
+import { getDjList, getVenues, type DjListItem, type VenueListItem } from "@/lib/queries";
 import { pageMeta } from "@/lib/site";
 
 export const metadata: Metadata = pageMeta({
@@ -18,13 +18,13 @@ export const metadata: Metadata = pageMeta({
 export default async function AtlasPage() {
   const [events, djs] = await Promise.all([getVenues(), getDjList()]);
   const catalogEvents = new Map(
-    events.map((e) => [
+    events.map((e: VenueListItem) => [
       e.slug,
       { slug: e.slug, setCount: e.setCount, imageUrl: e.imageUrl },
     ]),
   );
   const catalogDjs = new Map(
-    djs.map((d) => [
+    djs.map((d: DjListItem) => [
       d.slug,
       { slug: d.slug, setCount: d.setCount, imageUrl: d.imageUrl },
     ]),
