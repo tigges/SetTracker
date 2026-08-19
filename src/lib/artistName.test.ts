@@ -158,10 +158,19 @@ assert.deepEqual(
 );
 
 assert.equal(isLeftoverHostName("Behind Cercle Odyssey I Chapter Four"), true);
+assert.equal(
+  isLeftoverHostName("Behind Cercle Odyssey I Chapter Four: Curtain"),
+  true,
+);
 assert.equal(isLeftoverHostName("Live in Buenos Aires"), true);
 assert.equal(isLeftoverHostName("Rave Ukraine: DJ Sets"), true);
+assert.equal(isLeftoverHostName("Rave UKraine"), true);
 assert.equal(isLeftoverHostName("Charlotte de Witte"), false);
 assert.equal(isJunkArtistName("Behind Cercle Odyssey I Chapter Four"), true);
+assert.equal(
+  isJunkArtistName("Behind Cercle Odyssey I Chapter Four: Curtain"),
+  true,
+);
 assert.equal(isJunkArtistName("Live in Buenos Aires"), true);
 assert.equal(sanitizeArtistName("Live in Buenos Aires"), null);
 

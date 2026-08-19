@@ -16,6 +16,12 @@ describe("junkDj", () => {
       classifyJunkDj("Pegassi Makes A Trance Track From Scratch"),
       "nonset",
     );
+    assert.equal(
+      classifyJunkDj("Behind Cercle Odyssey I Chapter Four: Curtain"),
+      "other",
+    );
+    assert.equal(classifyJunkDj("Live in Buenos Aires"), "other");
+    assert.equal(classifyJunkDj("Rave UKraine"), "other");
     assert.equal(classifyJunkDj("Dom Dolla"), null);
     assert.equal(classifyJunkDj("Tape B"), null);
     assert.equal(classifyJunkDj("Tape B", "tape-b"), null);
@@ -39,6 +45,19 @@ describe("junkDj", () => {
       "tomorrowland",
     );
     assert.equal(inferJunkHostEvent("Mainstage", ["Mainstage"])?.slug, undefined);
+  });
+
+  it("maps Cercle leftovers onto the Cercle event, not a DJ", () => {
+    assert.equal(
+      inferJunkHostEvent("Behind Cercle Odyssey I Chapter Four: Curtain")?.slug,
+      "cercle",
+    );
+    assert.equal(
+      inferJunkHostEvent("Behind Cercle Odyssey I Chapter Four: Curtain")
+        ?.website,
+      "https://www.cercle.io/",
+    );
+    assert.equal(inferJunkHostEvent("Live in Buenos Aires")?.slug, undefined);
   });
 
   it("maps radio hosts onto a radio / livestream event", () => {

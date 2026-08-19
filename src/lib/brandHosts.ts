@@ -12,6 +12,7 @@ export const BRAND_HOST_SLUGS = new Set([
   "mixmag-nl",
   "dj-mag",
   "djmag",
+  "cercle",
 ]);
 
 /** Recurring shows owned by a media brand — never attach Series.djId. */
@@ -35,6 +36,7 @@ const BRAND_HOST_NAMES = new Set([
   "mixmag nl",
   "dj mag",
   "djmag",
+  "cercle",
 ]);
 
 export function isBrandHostSlug(slug: string | null | undefined): boolean {

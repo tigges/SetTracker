@@ -91,6 +91,22 @@ assert.match(bySlug["bleu-clair"]!.twitter!, /bleuclair/);
 assert.match(bySlug["hot-since-82"]!.soundcloud!, /hotsince-82/);
 assert.match(bySlug["adam-beyer"]!.instagram!, /realadambeyer/);
 assert.equal(bySlug["adam-beyer"]!.soundcloud, null);
+assert.equal(
+  bySlug["adam-beyer"]!.beatport,
+  "https://www.beatport.com/artist/adam-beyer/6824",
+);
+assert.ok(bySlug["bart-skils"]);
+assert.match(bySlug["bart-skils"]!.website, /linktr\.ee\/bartskils/);
+assert.match(bySlug["bart-skils"]!.soundcloud!, /soundcloud\.com\/bart-skils/);
+assert.equal(
+  bySlug["bart-skils"]!.beatport,
+  "https://www.beatport.com/artist/bart-skils/16211",
+);
+assert.ok(bySlug["maceo-plex"]);
+assert.equal(
+  bySlug["maceo-plex"]!.beatport,
+  "https://www.beatport.com/artist/maceo-plex/119538",
+);
 assert.match(bySlug.dijon!.website, /dijondijon\.com/);
 assert.equal(bySlug.dijon!.soundcloud, null);
 assert.match(bySlug["dom-dolla"]!.website, /domdolla\.com\.au/);

@@ -8,7 +8,9 @@ import {
 describe("brandHosts", () => {
   it("recognizes Insomniac as a brand host slug", () => {
     assert.equal(isBrandHostSlug("insomniac"), true);
+    assert.equal(isBrandHostSlug("cercle"), true);
     assert.equal(isBrandHostSlug("dom-dolla"), false);
+    assert.equal(isBrandHostSlug("bart-skils"), false);
   });
 
   it("headlines series for brand-host primaries", () => {

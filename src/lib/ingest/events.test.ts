@@ -16,6 +16,12 @@ assert.equal(
 );
 assert.equal(inferFestivalEvent("Boiler Room London")?.slug, "boiler-room");
 assert.equal(
+  inferFestivalEvent("Behind Cercle Odyssey I Chapter Four: Curtain")?.slug,
+  "cercle",
+);
+assert.equal(resolveEvent("Cercle").website, "https://www.cercle.io/");
+assert.equal(resolveEvent("Cercle").kind, "livestream");
+assert.equal(
   inferFestivalEvent(
     "Night Owl Radio 470 ft. Nocturnal Wonderland 2024 Mega-Mix",
   )?.slug,

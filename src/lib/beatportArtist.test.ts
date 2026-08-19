@@ -37,6 +37,13 @@ assert.equal(
 );
 assert.equal(
   resolveDjBeatport({
+    beatport: "https://www.beatport.com/artist/bart-skils/16211",
+    website: "https://linktr.ee/bartskils",
+  }),
+  "https://www.beatport.com/artist/bart-skils/16211",
+);
+assert.equal(
+  resolveDjBeatport({
     bio: "Bass House. Beatport artist/ac-slater/52351.",
     website: "https://www.djacslater.com/",
   }),
