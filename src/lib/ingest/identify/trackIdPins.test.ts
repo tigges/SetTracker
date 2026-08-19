@@ -13,6 +13,14 @@ assert.equal(isJunkTrackPin({ slug: "youtube-biscits", artist: "Youtube", title:
 assert.equal(isJunkTrackPin({ slug: "convex-id", artist: "Convex", title: "ID" }), true);
 assert.equal(
   isJunkTrackPin({
+    slug: "00-00-05-30-makebo-na-zare-05-30-09-30-sis-tura",
+    artist: "Makebo",
+    title: "Na Zare",
+  }),
+  true,
+);
+assert.equal(
+  isJunkTrackPin({
     slug: "ferry-corsten-connect-intro-edit-flashover",
     artist: "Ferry Corsten",
     title: "Connect (Intro Edit) [Flashover]",
