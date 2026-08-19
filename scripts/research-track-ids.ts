@@ -4,6 +4,7 @@
  *
  *   npm run research:track-ids
  *   TRACK_ID_LIMIT=20 npm run research:track-ids
+ *   Have-ISRC rows skip Deezer/AudD and query MusicBrainz by ISRC.
  *   TRACK_ID_HELD_LIMIT=8 npm run research:track-ids   # held rows before catalog
  *   TRACK_ID_CATALOG=0 npm run research:track-ids      # held seeds only
  *   TRACK_ID_MB=0 npm run research:track-ids      # skip MusicBrainz (on by default)

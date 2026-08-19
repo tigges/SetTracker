@@ -4,8 +4,9 @@
  * Respects MB rate limits via caller sleep; requires a descriptive User-Agent.
  */
 
-import { canonicalBeatportUrl } from "../trackMeta";
+import { canonicalBeatportUrl, normalizeIsrc } from "../trackMeta";
 import { namesClose, primaryArtist, titleRank } from "../ingest/identify/names";
+import { sleep } from "./deezer";
 
 const UA =
   "SetRadar/0.2.7 (https://setradar.ai; track metadata; contact via github.com/tigges/SetTracker)";
@@ -74,6 +75,80 @@ export function beatportUrlFromMbRelations(
   return null;
 }
 
+let lastMbAt = 0;
+
+async function mbGet<T>(url: string): Promise<T | null> {
+  const wait = 1100 - (Date.now() - lastMbAt);
+  if (wait > 0) await sleep(wait);
+  lastMbAt = Date.now();
+  try {
+    const res = await fetch(url, {
+      headers: { "User-Agent": UA, Accept: "application/json" },
+      signal: AbortSignal.timeout(15_000),
+    });
+    if (!res.ok) return null;
+    return (await res.json()) as T;
+  } catch {
+    return null;
+  }
+}
+
+function metaFromRecording(
+  row: MbRecording,
+  extra: { beatportUrl: string | null; isrc: string | null },
+): MusicBrainzTrackMeta {
+  const release = row.releases?.[0];
+  const labelName =
+    release?.["label-info"]?.find((li) => li.label?.name)?.label?.name ??
+    null;
+  const durationSec =
+    typeof row.length === "number" && row.length > 0
+      ? Math.round(row.length / 1000)
+      : null;
+  const releaseDate = release?.date && /^\d{4}/.test(release.date)
+    ? release.date.length === 4
+      ? `${release.date}-01-01`
+      : release.date.length === 7
+        ? `${release.date}-01`
+        : release.date
+    : null;
+  const beatportUrl =
+    beatportUrlFromMbRelations(row.relations) || extra.beatportUrl;
+  const isrc =
+    row.isrcs?.find((x) => /^[A-Z]{2}[A-Z0-9]{3}[0-9]{7}$/i.test(x)) ||
+    extra.isrc;
+  return {
+    durationSec,
+    releaseDate,
+    labelName,
+    beatportUrl,
+    mbid: row.id ?? null,
+    isrc: isrc ? isrc.toUpperCase() : null,
+  };
+}
+
+/** Exact ISRC → recording → Beatport /track url-rel (never scrape). */
+export async function resolveTrackMetaMusicBrainzByIsrc(
+  isrc: string,
+  title?: string,
+  artistName?: string,
+): Promise<MusicBrainzTrackMeta | null> {
+  const code = normalizeIsrc(isrc);
+  if (!code) return null;
+  const json = await mbGet<{ recordings?: MbRecording[] }>(
+    `https://musicbrainz.org/ws/2/isrc/${encodeURIComponent(code)}?fmt=json`,
+  );
+  const recordings = json?.recordings ?? [];
+  if (!recordings.length) return null;
+  const row =
+    title && artistName
+      ? pickBestRecording(title, artistName, recordings) ?? recordings[0]
+      : recordings[0];
+  if (!row?.id) return null;
+  const extra = await lookupRecordingIds(row.id);
+  return metaFromRecording(row, extra);
+}
+
 export async function resolveTrackMetaMusicBrainz(
   title: string,
   artistName: string,
@@ -83,52 +158,11 @@ export async function resolveTrackMetaMusicBrainz(
     `recording:"${title.replace(/"/g, "")}" AND artist:"${primary.replace(/"/g, "")}"`,
   );
   const url = `https://musicbrainz.org/ws/2/recording/?query=${q}&fmt=json&limit=8`;
-
-  try {
-    const res = await fetch(url, {
-      headers: { "User-Agent": UA, Accept: "application/json" },
-      signal: AbortSignal.timeout(15_000),
-    });
-    if (!res.ok) return null;
-    const json = (await res.json()) as { recordings?: MbRecording[] };
-    const row = pickBestRecording(title, artistName, json.recordings ?? []);
-    if (!row?.id) return null;
-
-    const release = row.releases?.[0];
-    const labelName =
-      release?.["label-info"]?.find((li) => li.label?.name)?.label?.name ??
-      null;
-    const durationSec =
-      typeof row.length === "number" && row.length > 0
-        ? Math.round(row.length / 1000)
-        : null;
-    const releaseDate = release?.date && /^\d{4}/.test(release.date)
-      ? release.date.length === 4
-        ? `${release.date}-01-01`
-        : release.date.length === 7
-          ? `${release.date}-01`
-          : release.date
-      : null;
-
-    const extra = await lookupRecordingIds(row.id);
-    const beatportUrl =
-      beatportUrlFromMbRelations(row.relations) || extra.beatportUrl;
-    const isrc =
-      row.isrcs?.find((x) => /^[A-Z]{2}[A-Z0-9]{3}[0-9]{7}$/i.test(x)) ||
-      extra.isrc;
-
-    return {
-      durationSec,
-      releaseDate,
-      labelName,
-      beatportUrl,
-      mbid: row.id,
-      isrc: isrc ? isrc.toUpperCase() : null,
-    };
-  } catch {
-    /* ignore */
-  }
-  return null;
+  const json = await mbGet<{ recordings?: MbRecording[] }>(url);
+  const row = pickBestRecording(title, artistName, json?.recordings ?? []);
+  if (!row?.id) return null;
+  const extra = await lookupRecordingIds(row.id);
+  return metaFromRecording(row, extra);
 }
 
 async function lookupRecordingIds(mbid: string): Promise<{
@@ -136,25 +170,16 @@ async function lookupRecordingIds(mbid: string): Promise<{
   isrc: string | null;
 }> {
   const url = `https://musicbrainz.org/ws/2/recording/${encodeURIComponent(mbid)}?inc=url-rels+isrcs&fmt=json`;
-  try {
-    await new Promise((r) => setTimeout(r, 1100));
-    const res = await fetch(url, {
-      headers: { "User-Agent": UA, Accept: "application/json" },
-      signal: AbortSignal.timeout(15_000),
-    });
-    if (!res.ok) return { beatportUrl: null, isrc: null };
-    const json = (await res.json()) as {
-      relations?: MbUrlRel[];
-      isrcs?: string[];
-    };
-    const isrc = json.isrcs?.find((x) =>
-      /^[A-Z]{2}[A-Z0-9]{3}[0-9]{7}$/i.test(x),
-    );
-    return {
-      beatportUrl: beatportUrlFromMbRelations(json.relations),
-      isrc: isrc ? isrc.toUpperCase() : null,
-    };
-  } catch {
-    return { beatportUrl: null, isrc: null };
-  }
+  const json = await mbGet<{
+    relations?: MbUrlRel[];
+    isrcs?: string[];
+  }>(url);
+  if (!json) return { beatportUrl: null, isrc: null };
+  const isrc = json.isrcs?.find((x) =>
+    /^[A-Z]{2}[A-Z0-9]{3}[0-9]{7}$/i.test(x),
+  );
+  return {
+    beatportUrl: beatportUrlFromMbRelations(json.relations),
+    isrc: isrc ? isrc.toUpperCase() : null,
+  };
 }

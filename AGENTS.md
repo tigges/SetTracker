@@ -146,9 +146,13 @@ unless asked.
   **Track IDs:** `npm run research:track-ids` resolves ISRCs / Beatport URLs
   from held 1001 names, then high-play catalog tracks missing ISRC **or**
   Beatport (`TRACK_ID_HELD_LIMIT`, `TRACK_ID_CATALOG=0` skips catalog).
-  Catalog enrich `acr` (40) and `full` (200) run this automatically with
+  Catalog enrich `acr` (120) and `full` (400) run this automatically with
   `TRACK_ID_APPLY=1` — do not dispatch enrich/Pages to start it while those
-  workflows are already running. No catalog DB → live
+  workflows are already running. Fast path: rows that already have an ISRC
+  skip Deezer/AudD and look up MusicBrainz **by ISRC** (Beatport `/track`
+  url-rels only — release pages are not scraped). Missing-ISRC rows run
+  Deezer + TrackRadar + AudD in parallel, then MB. Queue is ~60% no-ISRC /
+  ~40% have-ISRC-no-Beatport. No catalog DB → live
   `/exports/tracks.csv` (`TRACK_ID_EXPORT=0` skips). Confirmed hits also
   fill-null `data/track-id-pins.json` (verify-urls / Pages). Chain: Deezer,
   MusicBrainz (on unless `TRACK_ID_MB=0` — MBID / ISRC / Beatport url-rels),

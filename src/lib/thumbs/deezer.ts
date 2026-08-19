@@ -185,6 +185,7 @@ function trackRowMatches(
 export async function resolveTrackImage(
   title: string,
   artistName: string,
+  opts?: { metaOnly?: boolean },
 ): Promise<TrackImageResult | null> {
   const primaryArtist =
     artistName.split(/[,&]| b2b | x /i)[0]?.trim() || artistName;
@@ -234,6 +235,8 @@ export async function resolveTrackImage(
       }
     }
   }
+
+  if (opts?.metaOnly) return metaOnly;
 
   // Pass 2: iTunes song artwork (often has covers Deezer misses).
   const itunes = await resolveTrackImageItunes(title, primaryArtist);

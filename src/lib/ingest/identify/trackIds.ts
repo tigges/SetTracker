@@ -20,7 +20,10 @@ import {
   TL_KNOCK2_ZEDD_HARD_SUMMER_2026,
 } from "../tracklists1001/seeds";
 import { resolveTrackImage, sleep } from "../../thumbs/deezer";
-import { resolveTrackMetaMusicBrainz } from "../../thumbs/musicbrainz";
+import {
+  resolveTrackMetaMusicBrainz,
+  resolveTrackMetaMusicBrainzByIsrc,
+} from "../../thumbs/musicbrainz";
 import { normalizeIsrc } from "../../trackMeta";
 import {
   parseTracksCsv,
@@ -49,7 +52,31 @@ import {
   type TrackRadarPlatforms,
 } from "./trackradar";
 
-export type IdentifyQueueRow = FingerprintSeedRow & { slug?: string };
+export type IdentifyQueueRow = FingerprintSeedRow & {
+  slug?: string;
+  isrc?: string | null;
+};
+
+export type IdentifyLookupPlan = {
+  knownIsrc?: string;
+  needIsrc: boolean;
+  useDeezer: boolean;
+  useAudd: boolean;
+  mbByIsrc: boolean;
+};
+
+/** Skip Deezer/AudD when the catalog row already has an ISRC — only Beatport is missing. */
+export function identifyLookupPlan(row: IdentifyQueueRow): IdentifyLookupPlan {
+  const knownIsrc = normalizeIsrc(row.isrc) || undefined;
+  const needIsrc = !knownIsrc;
+  return {
+    knownIsrc,
+    needIsrc,
+    useDeezer: needIsrc,
+    useAudd: needIsrc,
+    mbByIsrc: Boolean(knownIsrc),
+  };
+}
 
 export type TrackIdHit = {
   artist: string;
@@ -172,24 +199,53 @@ export async function catalogNeedIdRows(
     take: Math.max(limit * 8, limit),
     select: { slug: true, artistName: true, title: true, isrc: true, beatportUrl: true },
   });
+  const candidates = tracks.filter((t) => {
+    if (isJunkTrackPin({ slug: t.slug, artist: t.artistName, title: t.title })) {
+      return false;
+    }
+    return !pinCoversNeed(pinBySlug.get(t.slug), {
+      wantIsrc: !normalizeIsrc(t.isrc),
+      wantBeatport: !t.beatportUrl,
+    });
+  });
+  const picked = splitEnrichPriorities(
+    candidates.map((t) => ({
+      slug: t.slug,
+      artist: t.artistName,
+      title: t.title,
+      mix: null,
+      remixer: null,
+      genre: null,
+      plays: 0,
+      isrc: t.isrc,
+      beatportUrl: t.beatportUrl,
+    })),
+    limit,
+  );
   return uniqueIdentifyRows(
-    tracks
-      .filter((t) => {
-        if (isJunkTrackPin({ slug: t.slug, artist: t.artistName, title: t.title })) {
-          return false;
-        }
-        return !pinCoversNeed(pinBySlug.get(t.slug), {
-          wantIsrc: !normalizeIsrc(t.isrc),
-          wantBeatport: !t.beatportUrl,
-        });
-      })
-      .map((t) => ({
-        at: "0:00",
-        artist: t.artistName,
-        title: t.title,
-        slug: t.slug,
-      })),
+    picked.map((t) => ({
+      at: "0:00",
+      artist: t.artist,
+      title: t.title,
+      slug: t.slug,
+      isrc: t.isrc,
+    })),
   ).slice(0, limit);
+}
+
+export function splitEnrichPriorities(
+  rows: ExportTrackRow[],
+  limit: number,
+): ExportTrackRow[] {
+  const noIsrc = rows.filter((r) => !normalizeIsrc(r.isrc));
+  const noBeatport = rows.filter(
+    (r) => Boolean(normalizeIsrc(r.isrc)) && !r.beatportUrl?.trim(),
+  );
+  const isrcBudget = Math.max(1, Math.ceil(limit * 0.6));
+  return [
+    ...noIsrc.slice(0, isrcBudget),
+    ...noBeatport.slice(0, Math.max(0, limit - Math.min(noIsrc.length, isrcBudget))),
+  ].slice(0, Math.max(0, limit));
 }
 
 const LIVE_TRACKS_CSV = "https://www.setradar.ai/exports/tracks.csv";
@@ -200,23 +256,23 @@ export function exportRowsToIdentifyQueue(
 ): IdentifyQueueRow[] {
   const pins = loadTrackIdPins();
   const pinBySlug = new Map(pins.map((p) => [p.slug, p]));
+  const filtered = tracksNeedEnrich(rows).filter((r) => {
+    if (isJunkTrackPin({ slug: r.slug, artist: r.artist, title: r.title })) {
+      return false;
+    }
+    return !pinCoversNeed(pinBySlug.get(r.slug), {
+      wantIsrc: !r.isrc?.trim(),
+      wantBeatport: !r.beatportUrl?.trim(),
+    });
+  });
   return uniqueIdentifyRows(
-    tracksNeedEnrich(rows)
-      .filter((r) => {
-        if (isJunkTrackPin({ slug: r.slug, artist: r.artist, title: r.title })) {
-          return false;
-        }
-        return !pinCoversNeed(pinBySlug.get(r.slug), {
-          wantIsrc: !r.isrc?.trim(),
-          wantBeatport: !r.beatportUrl?.trim(),
-        });
-      })
-      .map((r) => ({
-        at: "0:00",
-        artist: r.artist,
-        title: r.title,
-        slug: r.slug,
-      })),
+    splitEnrichPriorities(filtered, limit).map((r) => ({
+      at: "0:00",
+      artist: r.artist,
+      title: r.title,
+      slug: r.slug,
+      isrc: r.isrc,
+    })),
   ).slice(0, Math.max(0, limit));
 }
 
@@ -233,7 +289,7 @@ export async function loadNeedEnrichExportRows(
   } catch {
     try {
       const res = await fetch(LIVE_TRACKS_CSV, {
-        headers: { Accept: "text/csv", "User-Agent": "SetRadar/0.2.212 (+https://setradar.ai; track-id enrich)" },
+        headers: { Accept: "text/csv", "User-Agent": "SetRadar/0.2.213 (+https://setradar.ai; track-id enrich)" },
         signal: AbortSignal.timeout(60_000),
       });
       if (res.ok) text = await res.text();
@@ -293,47 +349,54 @@ export async function identifySeedRow(
     return { artist: row.artist, title: row.title, at: row.at, reason: "bare id" };
   }
 
+  const plan = identifyLookupPlan(row);
   const queryTitle = catalogQueryTitle(row.title);
-  const deezer = await resolveTrackImage(queryTitle, row.artist);
-  let isrc = normalizeIsrc(deezer?.isrc);
+  let isrc = plan.knownIsrc ?? null;
   let mbid: string | undefined;
   let beatportUrl: string | undefined;
   let usedMb = false;
+  let usedTr = false;
+  let usedAudd = false;
+  let platforms: TrackRadarPlatforms | undefined;
+  let deezer: Awaited<ReturnType<typeof resolveTrackImage>> = null;
+
+  const runDeezer = plan.useDeezer;
+  const runAudd = Boolean(opts.audd) && plan.useAudd;
+  const runTr = Boolean(opts.trackradar);
+
+  const [deezerHit, trHit, auddHit] = await Promise.all([
+    runDeezer
+      ? resolveTrackImage(queryTitle, row.artist, { metaOnly: true })
+      : Promise.resolve(null),
+    runTr ? searchTrackRadar(row.artist, queryTitle) : Promise.resolve(null),
+    runAudd ? searchAuddLyrics(row.artist, queryTitle) : Promise.resolve(null),
+  ]);
+  deezer = deezerHit;
+  if (deezer?.isrc && !isrc) isrc = normalizeIsrc(deezer.isrc);
+  if (trHit) {
+    usedTr = true;
+    platforms = trHit.platforms;
+    if (!isrc && trHit.isrc) isrc = trHit.isrc;
+    beatportUrl = acceptBeatportTrackUrl(trHit.beatportUrl);
+  }
+  if (auddHit) {
+    usedAudd = true;
+    platforms = mergePlatforms(platforms, auddHit.platforms);
+    if (!isrc && auddHit.isrc) isrc = auddHit.isrc;
+  }
 
   if (opts.musicbrainz) {
-    const mb = await resolveTrackMetaMusicBrainz(queryTitle, row.artist);
+    const mb = isrc
+      ? await resolveTrackMetaMusicBrainzByIsrc(isrc, queryTitle, row.artist)
+      : await resolveTrackMetaMusicBrainz(queryTitle, row.artist);
     if (mb?.mbid) {
       usedMb = true;
       mbid = mb.mbid;
     }
-    beatportUrl = acceptBeatportTrackUrl(mb?.beatportUrl);
+    if (!beatportUrl) beatportUrl = acceptBeatportTrackUrl(mb?.beatportUrl);
     if (!isrc && mb?.isrc) {
       const ev = evaluateIsrc(mb.isrc);
       if (ev.ok) isrc = ev.isrc ?? null;
-    }
-  }
-
-  let platforms: TrackRadarPlatforms | undefined;
-  let usedTr = false;
-  if (opts.trackradar) {
-    const tr = await searchTrackRadar(row.artist, queryTitle);
-    if (tr) {
-      usedTr = true;
-      platforms = tr.platforms;
-      if (!isrc && tr.isrc) isrc = tr.isrc;
-      if (!beatportUrl && tr.beatportUrl) {
-        beatportUrl = acceptBeatportTrackUrl(tr.beatportUrl);
-      }
-    }
-  }
-
-  let usedAudd = false;
-  if (opts.audd) {
-    const audd = await searchAuddLyrics(row.artist, queryTitle);
-    if (audd) {
-      usedAudd = true;
-      platforms = mergePlatforms(platforms, audd.platforms);
-      if (!isrc && audd.isrc) isrc = audd.isrc;
     }
   }
 
@@ -403,7 +466,7 @@ export async function identifyHeldSeeds(opts: {
   const slice = mergeIdentifyQueue(held, catalog, { limit });
   const hits: TrackIdHit[] = [];
   const misses: TrackIdMiss[] = [];
-  const delayMs = Number(process.env.TRACK_ID_DELAY_MS || 250);
+  const delayMs = Number(process.env.TRACK_ID_DELAY_MS || 0);
 
   for (const row of slice) {
     const result = await identifySeedRow(row, { musicbrainz, trackradar, audd });

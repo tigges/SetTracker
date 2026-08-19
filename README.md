@@ -266,9 +266,10 @@ tracklist HTML and their paid SoundCloud analyzer are never fetched.
 / TrackId stay operator-paste in `src/lib/ingest/fingerprint/seeds.ts`.
 `TRACKRADAR_ANALYZE=1` / `AUDD_ANALYZE=1` (needs `AUDD_API_TOKEN`) analyze
 fingerprint-only fan clips (quota; never official playback).
-Catalog enrich `acr` / `full` also run `npm run research:track-ids` against
-high-play tracks missing ISRC or Beatport (fill-null only; never scrape
-Beatport HTML).
+Catalog enrich `acr` (120) / `full` (400) also run `npm run research:track-ids`
+against high-play tracks missing ISRC or Beatport. Have-ISRC rows skip
+Deezer/AudD and query MusicBrainz by ISRC. Fill-null only; never scrape
+Beatport HTML.
 Fill-null `Track.isrc` / `beatportUrl` only with `TRACK_ID_APPLY=1`. Report:
 `data/crosscheck/track-id-research.json`.
 
