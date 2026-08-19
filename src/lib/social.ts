@@ -17,6 +17,7 @@ export type DjSocialFields = {
   instagram: string | null;
   twitter: string | null;
   website: string | null;
+  beatport: string | null;
 };
 
 /** No name-derived guesses — null until roster/crosslink/curated map says so. */
@@ -27,6 +28,7 @@ export function djSocials(_name: string): DjSocialFields {
     instagram: null,
     twitter: null,
     website: null,
+    beatport: null,
   };
 }
 
@@ -102,6 +104,7 @@ export function djSocialsFromKnown(opts: {
     instagram: ig ? absUrl(ig, "instagram") : null,
     twitter: tw ? absUrl(tw, "x") : null,
     website: website ? absUrl(website) : null,
+    beatport: null,
   };
 }
 
@@ -433,6 +436,7 @@ export const SOCIAL_LABELS: Record<string, string> = {
   instagram: "Instagram",
   twitter: "X",
   website: "Website",
+  beatport: "Beatport",
 };
 
 export const SOCIAL_SHORT: Record<string, string> = {
@@ -441,6 +445,7 @@ export const SOCIAL_SHORT: Record<string, string> = {
   instagram: "IG",
   twitter: "X",
   website: "WWW",
+  beatport: "BP",
 };
 
 /** Stable pill order on DJ / venue / label profiles. */
@@ -450,4 +455,5 @@ export const SOCIAL_ORDER = [
   "instagram",
   "twitter",
   "website",
+  "beatport",
 ] as const;

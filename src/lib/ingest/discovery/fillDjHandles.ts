@@ -21,9 +21,15 @@ function hasAnyHandle(d: {
   instagram: string | null;
   twitter: string | null;
   website: string | null;
+  beatport?: string | null;
 }): boolean {
   return Boolean(
-    d.soundcloud || d.youtube || d.instagram || d.twitter || d.website,
+    d.soundcloud ||
+      d.youtube ||
+      d.instagram ||
+      d.twitter ||
+      d.website ||
+      d.beatport,
   );
 }
 
@@ -41,6 +47,7 @@ export async function fillDjHandlesFromKnown(
       instagram: true,
       twitter: true,
       website: true,
+      beatport: true,
       _count: { select: { sets: true } },
     },
   });

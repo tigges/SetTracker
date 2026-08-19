@@ -451,6 +451,7 @@ export async function verifyStoredSocialUrls(
       instagram: true,
       twitter: true,
       website: true,
+      beatport: true,
     },
   });
   for (const d of djs) {
@@ -459,6 +460,7 @@ export async function verifyStoredSocialUrls(
     await scrubField(prisma, "dj", d.id, "instagram", d.instagram, stats);
     await scrubField(prisma, "dj", d.id, "twitter", d.twitter, stats);
     await scrubField(prisma, "dj", d.id, "website", d.website, stats);
+    await scrubField(prisma, "dj", d.id, "beatport", d.beatport, stats);
   }
 
   const labels = await prisma.label.findMany({

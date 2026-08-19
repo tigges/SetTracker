@@ -10,6 +10,7 @@ function handleBits(d: DjListItem): string {
   if (d.instagram) bits.push("IG");
   if (d.twitter) bits.push("X");
   if (d.website) bits.push("Web");
+  if (d.beatport) bits.push("BP");
   return bits.join(" · ");
 }
 

@@ -19,6 +19,10 @@ import {
 } from "@/lib/lineupMatch";
 import { CURATED_LABEL_SLUGS } from "@/lib/ingest/curatedLabels";
 import {
+  canonicalBeatportArtistUrl,
+  resolveDjBeatport,
+} from "@/lib/beatportArtist";
+import {
   canonicalBeatportUrl,
   resolveBeatportUrl,
   trackIdentityKey,
@@ -876,7 +880,12 @@ export async function getDjBySlug(slug: string) {
       youtube: dj.youtube,
       instagram: dj.instagram,
       twitter: dj.twitter,
-      website: dj.website,
+      website: canonicalBeatportArtistUrl(dj.website) ? null : dj.website,
+      beatport: resolveDjBeatport({
+        beatport: dj.beatport,
+        website: dj.website,
+        bio: dj.bio,
+      }),
     },
     series: dj.series.map((s) => ({
       slug: s.slug,
@@ -961,6 +970,7 @@ export type DjListItem = {
   instagram: string | null;
   twitter: string | null;
   website: string | null;
+  beatport: string | null;
   setCount: number;
   playCount: number;
   identifiedPlayCount: number;
@@ -1021,6 +1031,7 @@ export async function getDjList(): Promise<DjListItem[]> {
         instagram: true,
         twitter: true,
         website: true,
+        beatport: true,
         _count: { select: { sets: true } },
       },
     }),
@@ -1062,7 +1073,12 @@ export async function getDjList(): Promise<DjListItem[]> {
 
   return rows.map((d) => {
     const hasHandle = Boolean(
-      d.soundcloud || d.youtube || d.instagram || d.twitter || d.website,
+      d.soundcloud ||
+        d.youtube ||
+        d.instagram ||
+        d.twitter ||
+        d.website ||
+        d.beatport,
     );
     const isJunk =
       isBrandHostSlug(d.slug) ||
@@ -1094,6 +1110,7 @@ export async function getDjList(): Promise<DjListItem[]> {
       instagram: d.instagram,
       twitter: d.twitter,
       website: d.website,
+      beatport: d.beatport,
       setCount: d._count.sets,
       playCount: plays.playCount,
       identifiedPlayCount: plays.identifiedPlayCount,
