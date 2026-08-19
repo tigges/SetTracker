@@ -172,6 +172,9 @@ assert.equal(isLeftoverHostName("Le Grand Brand"), true);
 assert.equal(isLeftoverHostName("Charlotte de Witte"), false);
 assert.equal(isLeftoverHostName("Maceo Plex"), false);
 assert.equal(isLeftoverHostName("Monateng Music"), false);
+assert.equal(isJunkArtistName("Monateng Music"), true);
+assert.equal(isJunkArtistName("Monateng"), true);
+assert.equal(sanitizeArtistName("Monateng Music"), null);
 assert.equal(isJunkArtistName("Behind Cercle Odyssey I Chapter Four"), true);
 assert.equal(
   isJunkArtistName("Behind Cercle Odyssey I Chapter Four: Curtain"),

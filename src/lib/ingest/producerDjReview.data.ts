@@ -2,7 +2,7 @@
  * Producer handle-research review (2026-08-18).
  * DISCARD = not an artist (title / show / venue crumb).
  * DROP = wrong identity or not a catalog DJ.
- * KEEP = real act — fill-null verified socials only.
+ * KEEP = real act — pin listed official socials (overwrite stale guesses).
  */
 
 export type ProducerSocials = {
@@ -71,6 +71,8 @@ export const PRODUCER_DISCARD_NAMES = [
   "femi koleoso of ezra collective",
   "knee deep in ibiza mixed",
   "le grand brand",
+  "monateng",
+  "monateng music",
 ] as const;
 
 export const PRODUCER_DISCARD_SLUGS = new Set<string>([
@@ -104,6 +106,8 @@ export const PRODUCER_DISCARD_SLUGS = new Set<string>([
   "femi-koleoso-of-ezra-collective",
   "knee-deep-in-ibiza-mixed",
   "le-grand-brand",
+  "monateng",
+  "monateng-music",
 ]);
 
 /** Wrong channel / not a catalog DJ. Never drop a pin or roster slug. */
@@ -154,6 +158,10 @@ export const PRODUCER_DROP_SLUGS = new Set<string>([
   "boy-pillow",
   "clara-rosa",
   "leftwing-kody",
+  "sonido-tupinamba",
+  "tupinamba",
+  "teedo-love",
+  "dj-teedo-love",
 ]);
 
 export const PRODUCER_KEEP: ProducerKeep[] = [
@@ -286,15 +294,8 @@ export const PRODUCER_KEEP: ProducerKeep[] = [
     name: "Mila Alias",
     socials: {
       instagram: "https://www.instagram.com/djmilaalias/",
-      youtube: "https://www.youtube.com/@MILAALIASDJ",
-    },
-  },
-  {
-    slug: "sonido-tupinamba",
-    name: "Sonido Tupinamba",
-    socials: {
-      instagram: "https://www.instagram.com/sonido_tupinamba/",
-      youtube: "https://www.youtube.com/@sonidotupinamba3225",
+      youtube: "https://www.youtube.com/@Mila_Alias",
+      soundcloud: "https://soundcloud.com/djmilaalias",
     },
   },
   {
@@ -441,11 +442,6 @@ export const PRODUCER_KEEP: ProducerKeep[] = [
     slug: "shee",
     name: "SHEE",
     socials: { youtube: "https://www.youtube.com/@known_as_shee" },
-  },
-  {
-    slug: "teedo-love",
-    name: "Teedo Love",
-    socials: { youtube: "https://www.youtube.com/@djteedolove" },
   },
   {
     slug: "tiffany-day",

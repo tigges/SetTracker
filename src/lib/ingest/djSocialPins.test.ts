@@ -309,5 +309,7 @@ assert.equal(hintForName("MEDUZA")?.soundcloudPermalink, "meduzamusic");
 assert.equal(hintForName("INNELLEA")?.youtubeHandle, "@Innellea");
 assert.equal(hintForName("INNELLEA")?.instagram, undefined);
 assert.equal(hintForName("Cole Terrazas")?.soundcloudPermalink, "coleterrazas");
+assert.equal(hintForName("Mila Alias")?.youtubeHandle, "@Mila_Alias");
+assert.equal(hintForName("Mila Alias")?.soundcloudPermalink, "djmilaalias");
 
 console.log("djSocialPins.test.ts ok");
