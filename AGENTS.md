@@ -92,9 +92,15 @@ unless asked.
   limits (`data/soundcloud-poll-state.json`). **sourceHash refresh** when
   tracklists change; SetArtist links refresh even on hash skip. Optional:
   `HEARTHIS_MAX_SETS`, `SOUNDCLOUD_ARTIST_TRACK_LIMIT`, `INGEST_TOPDJS=1`,
-  `INGEST_SYNTHETIC=1`, `SOUNDCLOUD_CLIENT_ID`. **1001Tracklists:** follow
+  `INGEST_SYNTHETIC=1`, `SOUNDCLOUD_CLIENT_ID`.   **1001Tracklists:** follow
   `1001.tl` / tracklist URLs already linked from a source description (or
   curated browser-capture seeds) — do **not** site-crawl or invent URLs.
+  **setlist.fm:** follow a concrete `/setlist/{artist}/{year}/{venue}.html`
+  URL already linked from a source description (or operator paste) — do
+  **not** crawl `setlist.fm/setlists/` or invent URLs. Concert-first wiki,
+  usually no clocks; not a primary ID source. Official API needs a key +
+  followable attribution and is free only for non-commercial use — do not
+  poll HTML or the API without a producer key and clearance.
   **Atlas:** `/atlas` maps DJ Mag Top 100 Clubs & Festivals 2026
   (`data/venue-seeds/djmag-atlas-2026.json` lat/lng + YoY) plus Top 100 DJs
   2025 (`data/artist-seeds/djmag-atlas-djs-2025.json`). Venue pins link to
