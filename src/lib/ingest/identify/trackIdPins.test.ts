@@ -6,6 +6,7 @@ import {
   evaluateTrackIdPin,
   isJunkTrackPin,
   loadTrackIdPins,
+  slugMatchesLive,
 } from "./trackIdPins";
 
 assert.equal(isJunkTrackPin({ slug: "youtube-biscits", artist: "Youtube", title: "@Biscits" }), true);
@@ -108,6 +109,33 @@ assert.equal(
   ).ok,
   false,
 );
+
+assert.equal(
+  slugMatchesLive("ferry-corsten-connect-intro-edit-flashover", {
+    artist: "Ferry Corsten",
+    title: "Connect",
+  }),
+  true,
+);
+assert.equal(
+  slugMatchesLive("ferry-corsten-connect-intro-edit-flashover", {
+    artist: "Tiësto",
+    title: "Adagio for Strings",
+  }),
+  false,
+);
+
+const slugOnly = evaluateTrackIdPin(
+  {
+    slug: "da-hool-meet-her-at-the-love-parade",
+    artist: "",
+    title: "",
+    isrc: "DEB569701001",
+  },
+  { artist: "Da Hool", title: "Meet Her At The Love Parade", isrc: "DEB569701001" },
+);
+assert.equal(slugOnly.ok, true);
+assert.equal(slugOnly.pin?.isrc, "DEB569701001");
 
 const pins = loadTrackIdPins();
 assert.ok(pins.length >= 200);
