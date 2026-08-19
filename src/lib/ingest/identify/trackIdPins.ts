@@ -11,7 +11,7 @@ import {
   canonicalBeatportUrl,
   normalizeIsrc,
 } from "../../trackMeta";
-import { catalogQueryTitle, namesClose, normName } from "./names";
+import { catalogQueryTitle, namesClose, normName, primaryArtist } from "./names";
 
 export type TrackIdPin = {
   slug: string;
@@ -74,6 +74,60 @@ function coreTitle(s: string): string {
       .replace(/&/g, " and ")
       .replace(/\+/g, " and ")
       .replace(/\b(feat\.?|ft\.?|featuring|with)\b.+$/i, ""),
+  );
+}
+
+const SLUG_STOP = new Set([
+  "the",
+  "and",
+  "feat",
+  "ft",
+  "featuring",
+  "vs",
+  "x",
+  "mix",
+  "extended",
+  "original",
+  "remix",
+  "edit",
+  "vip",
+  "with",
+  "of",
+  "a",
+  "for",
+  "in",
+  "on",
+  "to",
+  "my",
+  "your",
+  "me",
+  "it",
+  "is",
+  "at",
+  "pres",
+]);
+
+function meaningfulTokens(s: string): string[] {
+  return normName(s)
+    .split(" ")
+    .filter((t) => t.length > 2 && !SLUG_STOP.has(t));
+}
+
+/** Catalog slug vs a live Deezer hit — used when Claude strips artist/title. */
+export function slugMatchesLive(
+  slug: string,
+  live: { artist: string; title: string },
+): boolean {
+  const hay = normName(slug.replace(/-/g, " "));
+  if (!hay) return false;
+  const artistTokens = meaningfulTokens(primaryArtist(live.artist));
+  const titleTokens = meaningfulTokens(cleanQueryTitle(live.title));
+  if (artistTokens.length === 0 || titleTokens.length === 0) return false;
+  const artistHits = artistTokens.filter((t) => hay.includes(t)).length;
+  const titleHits = titleTokens.filter((t) => hay.includes(t)).length;
+  return (
+    artistHits / artistTokens.length >= 0.7 &&
+    titleHits / titleTokens.length >= 0.7
   );
 }
 
@@ -145,10 +199,16 @@ export function evaluateTrackIdPin(
   const slug = row.slug.trim();
   const isrc = normalizeIsrc(row.isrc);
   const beatport = canonicalBeatportUrl(row.beatportUrl);
-  if (beatport && !beatportSlugMatchesTitle(beatport, row.title)) {
+  if (beatport && row.title && !beatportSlugMatchesTitle(beatport, row.title)) {
     return { ok: false, reason: "beatport slug mismatch" };
   }
-  if (!deezerConfirmsProposal(row, confirmed)) {
+  const named = deezerConfirmsProposal(row, confirmed);
+  const slugged =
+    Boolean(confirmed) &&
+    Boolean(isrc) &&
+    normalizeIsrc(confirmed?.isrc) === isrc &&
+    slugMatchesLive(slug, confirmed!);
+  if (!named && !slugged) {
     return { ok: false, reason: "not confirmed" };
   }
   if (!isrc && !beatport) return { ok: false, reason: "empty" };
