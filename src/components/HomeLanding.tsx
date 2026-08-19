@@ -95,7 +95,13 @@ function FaceCollage({ faces }: { faces: LandingFace[] }) {
   );
 }
 
-function SetPoster({ set }: { set: FeedItem }) {
+function SetPoster({
+  set,
+  tone = "poster",
+}: {
+  set: FeedItem;
+  tone?: "feature" | "compact" | "poster";
+}) {
   const accent = set.primaryDj?.accent ?? "var(--brand)";
   const headline = setHostHeadline({
     title: set.title,
@@ -111,13 +117,25 @@ function SetPoster({ set }: { set: FeedItem }) {
     eventImageUrl: set.eventImageUrl,
     primaryDjSlug: set.primaryDj?.slug,
   });
+  const feature = tone === "feature";
+  const compact = tone === "compact";
   return (
     <SetEntryLink
       href={`/sets/${set.slug}`}
       label="Home"
-      className="card group relative overflow-hidden"
+      className={`card group relative overflow-hidden ${
+        feature ? "col-span-2 sm:col-span-1" : ""
+      }`}
     >
-      <div className="relative aspect-[4/5] bg-panel2">
+      <div
+        className={`relative bg-panel2 ${
+          feature
+            ? "aspect-[4/3] sm:aspect-[4/5]"
+            : compact
+              ? "aspect-square sm:aspect-[4/5]"
+              : "aspect-[4/5]"
+        }`}
+      >
         <EntityThumb
           fill
           src={thumb}
@@ -127,9 +145,17 @@ function SetPoster({ set }: { set: FeedItem }) {
           monogram={initials(headline)}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-bg via-bg/25 to-transparent" />
-        <div className="absolute inset-x-0 bottom-0 space-y-2 p-4">
+        <div
+          className={`absolute inset-x-0 bottom-0 ${
+            compact ? "space-y-1.5 p-3 sm:space-y-2 sm:p-4" : "space-y-2 p-4"
+          }`}
+        >
           <p className="eyebrow text-muted2">{place}</p>
-          <h3 className="text-[18px] font-bold leading-tight text-ink">
+          <h3
+            className={`font-bold leading-tight text-ink ${
+              compact ? "text-[15px] sm:text-[18px]" : "text-[18px]"
+            }`}
+          >
             {headline}
           </h3>
           <SetgraphStrip counts={set.statusCounts} maxTicks={28} height={8} />
@@ -167,12 +193,12 @@ function MosaicBoard({
           {cta}
         </Link>
       </div>
-      <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+      <div className="scroll-thin flex gap-3 overflow-x-auto pb-1 sm:grid sm:grid-cols-3 sm:gap-2 sm:overflow-visible sm:pb-0">
         {faces.map((f) => (
           <Link
             key={f.href ?? f.src}
             href={f.href ?? href}
-            className="relative aspect-[4/3] overflow-hidden rounded-xl border border-line"
+            className="relative aspect-[4/3] w-[13.75rem] shrink-0 overflow-hidden rounded-xl border border-line sm:w-auto sm:shrink"
           >
             <EntityThumb
               fill
@@ -224,8 +250,8 @@ export function HomeLanding({
   nowMs: number;
 }) {
   const landingSets = pickLandingSets(feed, 3);
-  const festivals = pickVenueMosaic(venues, "festival", 6);
-  const clubs = pickVenueMosaic(venues, "club", 6);
+  const festivals = pickVenueMosaic(venues, "festival", 9);
+  const clubs = pickVenueMosaic(venues, "club", 9);
   const djFaces = pickDjFaces(djs, 10);
   const collage = pickHeroCollage({
     sets: landingSets,
@@ -236,7 +262,7 @@ export function HomeLanding({
   const graphCounts = mergeStatusCounts(landingSets.map((s) => s.statusCounts));
 
   return (
-    <div className="space-y-12">
+    <div className="space-y-8 sm:space-y-12">
       <section className="relative min-h-[22rem] overflow-hidden rounded-2xl border border-line bg-bg sm:min-h-[28rem]">
         <FaceCollage faces={collage} />
         <div className="hero-scrim absolute inset-0" aria-hidden />
@@ -298,15 +324,19 @@ export function HomeLanding({
               All sets →
             </Link>
           </div>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {landingSets.map((s) => (
-              <SetPoster key={s.id} set={s} />
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
+            {landingSets.map((s, i) => (
+              <SetPoster
+                key={s.id}
+                set={s}
+                tone={i === 0 || landingSets.length < 3 ? "feature" : "compact"}
+              />
             ))}
           </div>
         </section>
       ) : null}
 
-      <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-10">
         <MosaicBoard
           title="Festivals"
           blurb="Edition weekends with timed tracklists."
