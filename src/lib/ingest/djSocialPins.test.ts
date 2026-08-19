@@ -358,6 +358,12 @@ assert.match(bySlug.dubvision!.bio, /halo__ofc/);
 assert.equal(hintForName("HALŌ")?.youtubeHandle, "@DubVision");
 assert.equal(hintForName("Halo")?.instagram, "https://www.instagram.com/halo__ofc/");
 assert.equal(hintForName("Halo")?.twitter, "https://x.com/Halo__ofc");
+assert.equal(hintForName("HALŌ")?.website, "https://haloofc.com/");
+assert.match(bySlug.dubvision!.bio, /haloofc\.com/);
+assert.match(bySlug.dubvision!.youtube!, /@DubVision/);
+assert.match(bySlug.quintino!.youtube!, /@Quintino/);
+assert.match(bySlug.quintino!.instagram!, /instagram\.com\/quintino/);
+assert.doesNotMatch(bySlug.quintino!.website, /ra\.co/);
 assert.match(bySlug["mariana-bo"]!.twitter!, /(?:twitter|x)\.com\/djmarianabo/);
 assert.equal(bySlug.vinai!.twitter, undefined);
 

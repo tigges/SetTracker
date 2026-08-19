@@ -558,7 +558,7 @@ export const DJ_SOCIAL_PINS: DjSocialPin[] = [
     instagram: "https://www.instagram.com/quintino/",
     twitter: "https://x.com/quintinoo",
     website: "https://linktr.ee/quintino",
-    bio: "Big Room. Official linktr.ee/quintino — SC quintino, YT @Quintino, IG @quintino, X @quintinoo. djquintino.com SSL is dead.",
+    bio: "Big Room. Official linktr.ee/quintino — SC quintino, YT @Quintino (custom /Quintinotube, same channel), IG @quintino, X @quintinoo. RA ra.co/dj/quintino is a discovery seed only. djquintino.com SSL is dead.",
   },
   {
     slug: "boris-brejcha",
@@ -825,7 +825,7 @@ export const DJ_SOCIAL_PINS: DjSocialPin[] = [
     instagram: "https://www.instagram.com/dubvisionmusic/",
     twitter: "https://x.com/dubvisionmusic",
     website: "https://linktr.ee/dubvision",
-    bio: "Progressive House. Official linktr.ee/dubvision — SC dubvision, YT @DubVision, IG/X @dubvisionmusic. Also performs as HALŌ (IG/X @halo__ofc). dubvisionmusic.com does not resolve.",
+    bio: "Progressive House. Official linktr.ee/dubvision — SC dubvision, YT @DubVision (custom /DubVision, same channel), IG/X @dubvisionmusic. Also performs as HALŌ with Matisse & Sadko and Third Party — official haloofc.com, IG/X @halo__ofc. dubvisionmusic.com does not resolve.",
   },
   {
     slug: "b-jones",

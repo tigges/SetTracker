@@ -1645,6 +1645,14 @@ export const ARTIST_ROSTER_CURATED: ArtistRosterEntry[] = [
     homeCity: "Netherlands",
     youtube: { handle: "@Quintino", status: "ok" },
     soundcloud: { permalink: "quintino", status: "ok" },
+    socials: [
+      "https://www.youtube.com/@Quintino",
+      "https://www.youtube.com/Quintinotube",
+      "https://soundcloud.com/quintino",
+      "https://www.instagram.com/quintino/",
+      "https://linktr.ee/quintino",
+      "https://ra.co/dj/quintino",
+    ],
     priority: "high",
   },
   {
@@ -1904,10 +1912,12 @@ export const ARTIST_ROSTER_CURATED: ArtistRosterEntry[] = [
     soundcloud: { permalink: "dubvision", status: "ok" },
     socials: [
       "https://www.youtube.com/@DubVision",
+      "https://www.youtube.com/DubVision",
       "https://soundcloud.com/dubvision",
       "https://www.instagram.com/dubvisionmusic/",
       "https://x.com/dubvisionmusic",
       "https://linktr.ee/dubvision",
+      "https://haloofc.com/",
       "https://www.instagram.com/halo__ofc/",
       "https://x.com/Halo__ofc",
     ],

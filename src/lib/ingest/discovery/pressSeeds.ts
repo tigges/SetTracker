@@ -130,4 +130,12 @@ export const PRESS_SEEDS: PressSeed[] = [
     skipFetch: true,
     kind: "tour",
   },
+  {
+    url: "https://ra.co/dj/quintino",
+    title: "Quintino RA profile",
+    artists: ["Quintino"],
+    weight: 32,
+    skipFetch: true,
+    kind: "tour",
+  },
 ];
