@@ -132,6 +132,7 @@ import {
   TL_VINTAGE_CULTURE_PACHA_NYC_2026,
   TL_CLAPTONE_MASQUERADE_BUENOS_AIRES_2022,
   TL_INDIRA_PAGANOTTO_AREA_V_AWAKENINGS_2025,
+  TL_KOROLOVA_SNOWATTACK_FESTIVAL_2026,
 } from "../tracklists1001/seeds";
 import type { RawArtist } from "../types";
 import { slugify } from "../types";
@@ -989,6 +990,23 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/1cgr4nqk/korolova-captive-soul-098-2026-08-07.html",
     tracklist1001: TL_KOROLOVA_CAPTIVE_SOUL_098_2026,
+  },
+  {
+    // Official Korolova Relive — Snowattack Festival 2026-01-21.
+    // Distinct from Captive Soul 098 and TML WE2 Freedom Stage.
+    video: "https://www.youtube.com/watch?v=7UcyaKbvy2o",
+    primaryArtist: dj("Korolova", {
+      accent: "#f72585",
+      homeCity: "Ukraine",
+    }),
+    genre: "Melodic Techno",
+    type: "festival",
+    title: "Korolova | Snowattack Festival 2026",
+    seriesName: "Snowattack",
+    eventName: "Snowattack Festival",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/kcl35g1/korolova-snowattack-festival-les-deux-alpes-france-2026-01-21.html",
+    tracklist1001: TL_KOROLOVA_SNOWATTACK_FESTIVAL_2026,
   },
   {
     // Official Epic Radio 036; timed 1001 capture (same list as SC).

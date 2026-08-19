@@ -32,6 +32,9 @@ const CLAPTONE_BA = YOUTUBE_SETS.find((s) => s.video.includes("fQweMs-Q3rg"));
 const INDIRA_AWAKENINGS = YOUTUBE_SETS.find((s) =>
   s.video.includes("xUdcEDryN8o"),
 );
+const KOROLOVA_SNOWATTACK = YOUTUBE_SETS.find((s) =>
+  s.video.includes("7UcyaKbvy2o"),
+);
 const MM_YACHT = YOUTUBE_SETS.find((s) => s.video.includes("0-s_qZRWElA"));
 const PRISMATIC_032 = YOUTUBE_SETS.find((s) => s.video.includes("blP5J6BUG0M"));
 const SPECTRUM_485 = YOUTUBE_SETS.find((s) => s.video.includes("yTRvLrtsM9I"));
@@ -628,6 +631,17 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.durationSec, 1 * 3600 + 26 * 60 + 17 + 180);
   });
 
+  it("builds Korolova Snowattack Festival 2026 meta from the curated 1001 capture", () => {
+    assert.ok(KOROLOVA_SNOWATTACK);
+    const meta = watchMetaFromCuratedSeed(KOROLOVA_SNOWATTACK);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "7UcyaKbvy2o");
+    assert.match(meta.title, /Snowattack Festival 2026/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=7UcyaKbvy2o");
+    // Last cue 52:03 + 180s pad.
+    assert.equal(meta.durationSec, 52 * 60 + 3 + 180);
+  });
+
   it("builds Miss Monique Ibiza Yacht meta from the curated 1001 capture", () => {
     assert.ok(MM_YACHT);
     const meta = watchMetaFromCuratedSeed(MM_YACHT);
@@ -1098,6 +1112,22 @@ describe("curated YouTube 429 fallback", () => {
     assert.match(String(sets[0]?.eventName ?? ""), /Awakenings/i);
     assert.notEqual(sets[0]!.sourceSlug, "yt-yPCOu0-JKJo");
     assert.notEqual(sets[0]!.sourceSlug, "yt-i-mFuxbGHzg");
+  });
+
+  it("lands Korolova Snowattack Festival 2026 from the 1001 seed when watch is 429", async () => {
+    assert.ok(KOROLOVA_SNOWATTACK);
+    const adapter = createYoutubeAdapter([KOROLOVA_SNOWATTACK], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-7UcyaKbvy2o");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 13);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 52 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "korolova");
+    assert.match(String(sets[0]?.eventName ?? ""), /Snowattack/i);
+    assert.notEqual(sets[0]!.sourceSlug, "yt-5JxfEjVdQFk");
+    assert.notEqual(sets[0]!.sourceSlug, "yt-RLOghpXjuJI");
   });
 
   it("lands Miss Monique Ibiza Yacht from the 1001 seed when watch is 429", async () => {

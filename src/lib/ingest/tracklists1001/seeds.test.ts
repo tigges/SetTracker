@@ -152,6 +152,7 @@ import {
   TL_VINTAGE_CULTURE_PACHA_NYC_2026,
   TL_CLAPTONE_MASQUERADE_BUENOS_AIRES_2022,
   TL_INDIRA_PAGANOTTO_AREA_V_AWAKENINGS_2025,
+  TL_KOROLOVA_SNOWATTACK_FESTIVAL_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   tracklist1001RowsToPlays,
@@ -2116,6 +2117,55 @@ assert.equal(
   isWiredTracklistSlug(
     "sc-awakenings-indira-paganotto-awakenings-festival-2025",
   ),
+  true,
+);
+
+assertSeedClocks(TL_KOROLOVA_SNOWATTACK_FESTIVAL_2026);
+assert.equal(TL_KOROLOVA_SNOWATTACK_FESTIVAL_2026.length, 13);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-7UcyaKbvy2o"],
+  TL_KOROLOVA_SNOWATTACK_FESTIVAL_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-korolovadj-korolova-live-snowattack"],
+  TL_KOROLOVA_SNOWATTACK_FESTIVAL_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-https://soundcloud.com/korolovadj/korolova-live-snowattack"
+  ],
+  undefined,
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-7UcyaKbvy2o"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-5JxfEjVdQFk"],
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-7UcyaKbvy2o"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-RLOghpXjuJI"],
+);
+const korolovaSnow = tracklist1001RowsToPlays(
+  TL_KOROLOVA_SNOWATTACK_FESTIVAL_2026,
+);
+assert.equal(korolovaSnow.length, 13);
+assert.equal(korolovaSnow[0]?.provenance, "1001tl");
+assert.equal(korolovaSnow[0]?.timestamp, 0);
+assert.equal(korolovaSnow[0]?.artistName, "RÜFÜS DU SOL");
+assert.equal(korolovaSnow[0]?.trackTitle, "In The Moment (Adriatique Remix)");
+assert.equal(korolovaSnow[7]?.trackTitle, "My Mind");
+assert.equal(korolovaSnow[7]?.timestamp, 26 * 60 + 7);
+assert.equal(korolovaSnow[10]?.trackTitle, "Annihilation");
+assert.equal(korolovaSnow[12]?.trackTitle, "The Man With The Red Face");
+assert.equal(korolovaSnow[12]?.timestamp, 52 * 60 + 3);
+for (let i = 1; i < korolovaSnow.length; i++) {
+  assert.ok(
+    (korolovaSnow[i]!.timestamp ?? 0) > (korolovaSnow[i - 1]!.timestamp ?? 0),
+    `Korolova Snowattack clocks must increase at index ${i}`,
+  );
+}
+assert.equal(isWiredTracklistSlug("yt-7UcyaKbvy2o"), true);
+assert.equal(
+  isWiredTracklistSlug("sc-korolovadj-korolova-live-snowattack"),
   true,
 );
 

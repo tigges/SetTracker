@@ -217,3 +217,30 @@ export const TL_INDIRA_PAGANOTTO_AREA_V_AWAKENINGS_2025: FingerprintSeedRow[] = 
   { at: "1:22:01", artist: "ID ft. Bilja Krstic", title: "Magla Padnala" },
   { at: "1:26:17", artist: "Sara Landry & LEGZDINA", title: "Pressure (Indira Paganotto Remix)" },
 ];
+
+/**
+ * Korolova @ Snowattack Festival, Les Deux Alpes, France 2026-01-21
+ * Official YouTube: https://youtu.be/7UcyaKbvy2o
+ * Official SoundCloud: https://soundcloud.com/korolovadj/korolova-live-snowattack
+ * https://www.1001tracklists.com/tracklist/kcl35g1/korolova-snowattack-festival-les-deux-alpes-france-2026-01-21.html
+ * Overlay name TL_Korolova_Snowattack-Festival_Les-Deux-Alpes_2026 is not a valid identifier.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-7UcyaKbvy2o"] = TL_KOROLOVA_SNOWATTACK_FESTIVAL_2026
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["sc-korolovadj-korolova-live-snowattack"]
+ * Distinct from TL_KOROLOVA_CAPTIVE_SOUL_098_2026 and TL_KOROLOVA_TML_WE2_2026.
+ * Captured 2026-08-19 — provenance 1001tl.
+ */
+export const TL_KOROLOVA_SNOWATTACK_FESTIVAL_2026: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "RÜFÜS DU SOL", title: "In The Moment (Adriatique Remix)" },
+  { at: "5:01", artist: "Yulia Niko ft. Novel", title: "Boundless" },
+  { at: "8:34", artist: "Asal & SEISHŌ", title: "Burning" },
+  { at: "11:50", artist: "Rafael Cerato & MORGANJ", title: "Slow Down" },
+  { at: "15:33", artist: "Sama (US)", title: "EY" },
+  { at: "19:37", artist: "GENESI", title: "Expanse" },
+  { at: "23:06", artist: "Omnya & Eli Huli", title: "Lost In The Sound" },
+  { at: "26:07", artist: "Korolova & JOA", title: "My Mind" },
+  { at: "29:42", artist: "Tiga", title: "Mind Dimension (Adam Sellouk Remix)" },
+  { at: "38:51", artist: "Adam Beyer & GENESI & Aya Anne", title: "DNA" },
+  { at: "44:25", artist: "KREAM & Korolova", title: "Annihilation" },
+  { at: "47:32", artist: "Alex Wann & Aaron Hibell", title: "set me free (CamelPhat Remix)" },
+  { at: "52:03", artist: "Sean Finn & Funkera", title: "The Man With The Red Face" },
+];

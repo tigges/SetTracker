@@ -460,4 +460,18 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     type: "festival",
     minDurationSec: 60 * 60,
   },
+  {
+    // Official Korolova Relive; 1001TL wired via
+    // sc-korolovadj-korolova-live-snowattack
+    // (same list as yt-7UcyaKbvy2o). Never wire sc-https://….
+    url: "https://soundcloud.com/korolovadj/korolova-live-snowattack",
+    primaryArtist: dj("Korolova", {
+      accent: "#f72585",
+      homeCity: "Ukraine",
+    }),
+    genre: "Melodic Techno",
+    seriesName: "Snowattack",
+    type: "festival",
+    minDurationSec: 45 * 60,
+  },
 ];

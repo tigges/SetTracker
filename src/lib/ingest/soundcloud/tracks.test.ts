@@ -430,6 +430,19 @@ assert.equal(
   `sc-awakenings-${slugify("indira-paganotto-awakenings-festival-2025")}`,
   "sc-awakenings-indira-paganotto-awakenings-festival-2025",
 );
+
+const korolovaSnowSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url === "https://soundcloud.com/korolovadj/korolova-live-snowattack",
+);
+assert.ok(korolovaSnowSc);
+assert.equal(korolovaSnowSc.primaryArtist.name, "Korolova");
+assert.equal(korolovaSnowSc.type, "festival");
+assert.equal(korolovaSnowSc.seriesName, "Snowattack");
+assert.equal(
+  `sc-korolovadj-${slugify("korolova-live-snowattack")}`,
+  "sc-korolovadj-korolova-live-snowattack",
+);
 assert.equal(
   SOUNDCLOUD_TRACK_SEEDS.some((s) =>
     s.url.startsWith("sc-https://"),
