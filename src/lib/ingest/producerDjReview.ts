@@ -1,6 +1,6 @@
 /**
  * Apply the producer handle-research review on verify-urls.
- * Rematch discarded set-title DJs, drop junk / non-DJ rows, fill-null keeps.
+ * Rematch discarded set-title DJs, drop junk / non-DJ rows, pin KEEP socials.
  */
 
 import type { PrismaClient } from "@prisma/client";
@@ -169,7 +169,8 @@ function pinPatch(
   for (const field of SOCIAL_FIELDS) {
     const next = socials[field]?.trim();
     if (!next) continue;
-    if (existing[field]) continue;
+    // Producer pins listed fields, including corrections (e.g. a better @handle).
+    if (existing[field] === next) continue;
     data[field] = next;
   }
   return data;

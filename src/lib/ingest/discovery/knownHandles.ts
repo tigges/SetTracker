@@ -1008,7 +1008,9 @@ export const KNOWN_HANDLES: Record<string, HandleHint> = {
     soundcloudPermalink: "miguel_bastida",
   },
   "mila alias": {
-    youtubeHandle: "@MILAALIASDJ",
+    youtubeHandle: "@Mila_Alias",
+    soundcloudPermalink: "djmilaalias",
+    instagram: "https://www.instagram.com/djmilaalias/",
   },
   "miss dre": {
     youtubeHandle: "@missdremusic",

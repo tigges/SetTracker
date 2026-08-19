@@ -41,7 +41,9 @@ describe("producerDjReview.data", () => {
     assert.equal(isProducerDiscardSlug("le-grand-brand"), true);
     assert.equal(isProducerDiscardSlug("bart-skils"), false);
     assert.equal(isProducerDiscardSlug("mila-alias"), false);
-    assert.equal(isProducerDiscardSlug("monateng-music"), false);
+    assert.equal(isProducerDiscardSlug("monateng-music"), true);
+    assert.equal(isProducerDiscardName("Monateng Music"), true);
+    assert.equal(isProducerDiscardName("Monateng"), true);
   });
 
   it("folds known leftovers onto real DJs", () => {
@@ -56,7 +58,11 @@ describe("producerDjReview.data", () => {
   it("drops non-DJ / unverified identities without hiding real names", () => {
     assert.equal(isProducerDropSlug("sg-lewis"), true);
     assert.equal(isProducerDropSlug("sasha"), true);
+    assert.equal(isProducerDropSlug("sonido-tupinamba"), true);
+    assert.equal(isProducerDropSlug("teedo-love"), true);
+    assert.equal(isProducerHiddenSlug("teedo-love"), true);
     assert.equal(isProducerHiddenSlug("franky-wah"), false);
+    assert.equal(isProducerHiddenSlug("mila-alias"), false);
     assert.equal(isProducerDiscardName("Sasha"), false);
   });
 
@@ -69,11 +75,16 @@ describe("producerDjReview.data", () => {
     assert.match(tiffany!.socials.website!, /tiffdidwhat\.com/);
     const mila = PRODUCER_KEEP.find((k) => k.slug === "mila-alias");
     assert.match(mila!.socials.instagram!, /instagram\.com\/djmilaalias/);
-    assert.match(mila!.socials.youtube!, /youtube\.com\/@MILAALIASDJ/);
-    const sonido = PRODUCER_KEEP.find((k) => k.slug === "sonido-tupinamba");
-    assert.match(sonido!.socials.instagram!, /sonido_tupinamba/);
-    const teedo = PRODUCER_KEEP.find((k) => k.slug === "teedo-love");
-    assert.match(teedo!.socials.youtube!, /youtube\.com\/@djteedolove/);
+    assert.match(mila!.socials.youtube!, /youtube\.com\/@Mila_Alias/);
+    assert.match(mila!.socials.soundcloud!, /soundcloud\.com\/djmilaalias/);
+    assert.equal(
+      PRODUCER_KEEP.some((k) => k.slug === "sonido-tupinamba"),
+      false,
+    );
+    assert.equal(
+      PRODUCER_KEEP.some((k) => k.slug === "teedo-love"),
+      false,
+    );
     assert.equal(
       PRODUCER_KEEP.some((k) => k.slug === "monateng-music"),
       false,
