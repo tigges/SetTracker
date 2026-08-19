@@ -374,7 +374,7 @@ async function trackSeedToRawSet(
     primaryArtist: withDescriptionSocials(primary, track.description),
     collaborators,
     seriesName: seed.seriesName,
-    eventName: festival?.name,
+    eventName: festival?.name ?? seed.eventName,
     eventKind: festival?.kind,
     eventLocation: festival?.location,
     publishedAt: publishedAtOf(track),

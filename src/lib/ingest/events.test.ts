@@ -161,5 +161,16 @@ assert.equal(
   inferFestivalEvent("Nameless Festival")?.website,
   "https://www.namelessfestival.it/en/",
 );
+assert.equal(
+  inferFestivalEvent("MEDUZA @ Stereo Montréal, Canada 2026-05-16")?.slug,
+  "stereo-montreal",
+);
+assert.equal(inferFestivalEvent("Stereo Montréal")?.kind, "club");
+assert.equal(inferFestivalEvent("Stereo"), null);
+assert.equal(inferFestivalEvent("stereoBLOOM"), null);
+assert.equal(
+  inferFestivalEvent("R3WIRE - House & Tech Live on STEREOHYPE")?.slug,
+  "stereohype",
+);
 
 console.log("events.test.ts ok");

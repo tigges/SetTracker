@@ -158,6 +158,7 @@ import {
   TL_DEBORAH_DE_LUCA_PYRAMID_AMNESIA_IBIZA_2025,
   TL_GIUSEPPE_OTTAVIANI_DIGITAL_SOCIETY_LEEDS_WAREHOUSE_2026,
   TL_CUEBRICK_CONFERENCE_297_2026,
+  TL_MEDUZA_STEREO_MONTREAL_CANADA_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   tracklist1001RowsToPlays,
@@ -2366,6 +2367,48 @@ assert.equal(
 assert.equal(
   isWiredTracklistSlug(
     "sc-https://soundcloud.com/cuebrick/cuebricks-conference-297",
+  ),
+  false,
+);
+
+assertSeedClocks(TL_MEDUZA_STEREO_MONTREAL_CANADA_2026);
+assert.equal(TL_MEDUZA_STEREO_MONTREAL_CANADA_2026.length, 91);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-meduzamusic-meduza-dj-set"],
+  TL_MEDUZA_STEREO_MONTREAL_CANADA_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-https://soundcloud.com/meduzamusic/meduza_dj_set"
+  ],
+  undefined,
+);
+const meduzaStereo = tracklist1001RowsToPlays(
+  TL_MEDUZA_STEREO_MONTREAL_CANADA_2026,
+);
+assert.equal(meduzaStereo.length, 91);
+assert.equal(meduzaStereo[0]?.provenance, "1001tl");
+assert.equal(meduzaStereo[0]?.timestamp, 0);
+assert.equal(meduzaStereo[0]?.artistName, "The Organism");
+assert.equal(meduzaStereo[0]?.trackTitle, "Gypsy");
+assert.equal(meduzaStereo[8]?.trackTitle, "Tides");
+assert.equal(meduzaStereo[8]?.timestamp, 50 * 60 + 57);
+assert.equal(meduzaStereo[14]?.trackTitle, "Rave Love");
+assert.equal(meduzaStereo[14]?.timestamp, 1 * 3600 + 41 * 60 + 53);
+assert.equal(meduzaStereo[15]?.trackTitle, "A Gira (Emanuel Satie & Maga & Sean Doron & Tim Engelhardt pres. Scenarios Remix)");
+assert.equal(meduzaStereo[15]?.timestamp, 1 * 3600 + 41 * 60 + 54);
+assert.equal(meduzaStereo[90]?.trackTitle, "Black Water (Full Strings Vocal Mix)");
+assert.equal(meduzaStereo[90]?.timestamp, 8 * 3600 + 53 * 60 + 10);
+for (let i = 1; i < meduzaStereo.length; i++) {
+  assert.ok(
+    (meduzaStereo[i]!.timestamp ?? 0) > (meduzaStereo[i - 1]!.timestamp ?? 0),
+    `MEDUZA Stereo Montréal clocks must increase at index ${i}`,
+  );
+}
+assert.equal(isWiredTracklistSlug("sc-meduzamusic-meduza-dj-set"), true);
+assert.equal(
+  isWiredTracklistSlug(
+    "sc-https://soundcloud.com/meduzamusic/meduza_dj_set",
   ),
   false,
 );

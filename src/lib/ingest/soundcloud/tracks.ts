@@ -521,4 +521,18 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     type: "radio",
     minDurationSec: 50 * 60,
   },
+  {
+    // Official MEDUZA Stereo Montréal 2026-05-16; 1001TL wired via
+    // sc-meduzamusic-meduza-dj-set. Never wire sc-https://….
+    // Distinct from Aeterna Radio seeds on the same account.
+    url: "https://soundcloud.com/meduzamusic/meduza_dj_set",
+    primaryArtist: dj("MEDUZA", {
+      accent: "#5cc7e8",
+      homeCity: "Italy",
+    }),
+    genre: "House",
+    eventName: "Stereo Montréal",
+    type: "mix",
+    minDurationSec: 90 * 60,
+  },
 ];

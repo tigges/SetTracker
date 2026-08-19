@@ -378,6 +378,13 @@ export const KNOWN_EVENTS: Record<string, CanonicalEvent> = {
     location: "Lecco, Lake Como, Italy",
     website: "https://www.namelessfestival.it/en/",
   },
+  "stereo-montreal": {
+    slug: "stereo-montreal",
+    name: "Stereo Montréal",
+    kind: "club",
+    location: "Montréal, Canada",
+    // No official site in the operator paste — do not invent a host.
+  },
   "street-parade": {
     slug: "street-parade",
     name: "Street Parade",
@@ -702,6 +709,10 @@ export function inferFestivalEvent(title: string): CanonicalEvent | null {
   if (/\belrow\b/i.test(t)) return KNOWN_EVENTS.elrow;
   if (/\bnameless\s+festival\b/i.test(t)) {
     return KNOWN_EVENTS["nameless-festival"];
+  }
+  // Require Montréal — bare "stereo" is STEREOHYPE / Stereo Love / stereoBLOOM.
+  if (/\bstereo\s+montr[eé]al\b/i.test(t)) {
+    return KNOWN_EVENTS["stereo-montreal"];
   }
   // DJ Mag Top 100 Festivals / Clubs / other club listicles (not Mixmag.net).
   return (

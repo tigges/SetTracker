@@ -504,4 +504,16 @@ assert.equal(
   "sc-cuebrick-cuebricks-conference-297",
 );
 
+const meduzaStereoSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) => s.url === "https://soundcloud.com/meduzamusic/meduza_dj_set",
+);
+assert.ok(meduzaStereoSc);
+assert.equal(meduzaStereoSc.primaryArtist.name, "MEDUZA");
+assert.equal(meduzaStereoSc.eventName, "Stereo Montréal");
+assert.equal(meduzaStereoSc.type, "mix");
+assert.equal(
+  `sc-meduzamusic-${slugify("meduza_dj_set")}`,
+  "sc-meduzamusic-meduza-dj-set",
+);
+
 console.log("soundcloud/tracks.test.ts ok");
