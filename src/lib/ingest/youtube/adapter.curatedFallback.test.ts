@@ -132,6 +132,9 @@ const BRANDON_PAROOKAVILLE = YOUTUBE_SETS.find((s) =>
 const CUEBRICK_SACRE = YOUTUBE_SETS.find((s) =>
   s.video.includes("LLJn_gDMG_M"),
 );
+const AUSTIN_UNRELEASED_139 = YOUTUBE_SETS.find((s) =>
+  s.video.includes("QLpmLx5JUsg"),
+);
 
 describe("watchMetaFromCuratedSeed", () => {
   it("builds ASOT 1290 meta from the curated 1001 capture", () => {
@@ -826,6 +829,17 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=LLJn_gDMG_M");
     // No 1001 cues in the operator paste — default hour pad.
     assert.equal(meta.durationSec, 60 * 60);
+  });
+
+  it("builds Austin Kramer UNreleased 139 meta from the curated 1001 capture", () => {
+    assert.ok(AUSTIN_UNRELEASED_139);
+    const meta = watchMetaFromCuratedSeed(AUSTIN_UNRELEASED_139);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "QLpmLx5JUsg");
+    assert.match(meta.title, /UNreleased/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=QLpmLx5JUsg");
+    // Last cue 57:15 + 180s pad.
+    assert.equal(meta.durationSec, 57 * 60 + 15 + 180);
   });
 
   it("returns null without a title or video id", () => {
@@ -1796,5 +1810,24 @@ describe("curated YouTube 429 fallback", () => {
     assert.equal(sets[0]?.primaryArtist?.slug, "cuebrick");
     assert.match(String(sets[0]?.eventName ?? ""), /Sacr[eé] Paris/i);
     assert.match(String(sets[0]?.title ?? ""), /Mainstage Techno/i);
+  });
+
+  it("lands Austin Kramer UNreleased 139 from the 1001 seed when watch is 429", async () => {
+    assert.ok(AUSTIN_UNRELEASED_139);
+    const adapter = createYoutubeAdapter([AUSTIN_UNRELEASED_139], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-QLpmLx5JUsg");
+    assert.equal(sets[0]!.type, "radio");
+    assert.equal(sets[0]!.genre, "House");
+    assert.ok(sets[0]!.plays.length >= 19);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.equal(sets[0]?.primaryArtist?.slug, "austin-kramer");
+    assert.equal(sets[0]?.seriesName, "UNreleased");
+    assert.equal(
+      (sets[0]?.collaborators ?? []).some((c) => c.slug === "unreleased"),
+      false,
+    );
+    assert.match(String(sets[0]?.title ?? ""), /UNreleased/i);
   });
 });

@@ -136,6 +136,7 @@ import {
   TL_KOROLOVA_TULUM_MEXICO_2026,
   TL_NATTE_VISSTICK_TELETECH_FYM_AFAS_LIVE_AMSTERDAM_2025,
   TL_DEBORAH_DE_LUCA_PYRAMID_AMNESIA_IBIZA_2025,
+  TL_AUSTIN_KRAMER_UNRELEASED_139_2026,
 } from "../tracklists1001/seeds";
 import type { RawArtist } from "../types";
 import { slugify } from "../types";
@@ -2766,6 +2767,19 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     type: "mix",
     title: "Cuebrick – Live from Sacré Paris | Mainstage Techno | Club Set",
     eventName: "Sacré Paris",
+  },
+  {
+    // Official Austin Kramer UNreleased 139. No SoundCloud in the paste —
+    // do not invent an SC slug. "unreleased" is a show leftover, not a DJ.
+    video: "https://youtu.be/QLpmLx5JUsg",
+    primaryArtist: dj("Austin Kramer", { accent: "#ff9f1c" }),
+    genre: "House",
+    type: "radio",
+    title: "Austin Kramer - UNreleased With Austin Kramer 139",
+    seriesName: "UNreleased",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/17r26gu1/austin-kramer-unreleased-with-austin-kramer-139-2026-05-19.html",
+    tracklist1001: TL_AUSTIN_KRAMER_UNRELEASED_139_2026,
   },
   {
     // Official Tape B upload; 1001TL wired via yt-7_O8N_EJg_c

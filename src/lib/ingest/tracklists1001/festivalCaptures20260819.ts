@@ -615,3 +615,34 @@ export const TL_MEDUZA_CLUB_SPACE_MIAMI_2026: FingerprintSeedRow[] = [
   { at: "4:44:00", artist: "Inndrive & Zaark", title: "Take Our Flight" },
   { at: "4:52:15", artist: "George Michael", title: "Careless Whisper" },
 ];
+
+/**
+ * Austin Kramer — UNreleased With Austin Kramer 139 2026-05-19
+ * Official YouTube: https://youtu.be/QLpmLx5JUsg
+ * https://www.1001tracklists.com/tracklist/17r26gu1/austin-kramer-unreleased-with-austin-kramer-139-2026-05-19.html
+ * Overlay name TL_Austin-Kramer_UNreleased-With-Austin-Kramer_139_2026-05-19 is not a valid identifier.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-QLpmLx5JUsg"]
+ * No SoundCloud in the operator paste — do not invent an SC slug.
+ * Captured 2026-08-19 — provenance 1001tl.
+ */
+export const TL_AUSTIN_KRAMER_UNRELEASED_139_2026: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "B JONES & MIDI Kittyy", title: "Universe" },
+  { at: "3:24", artist: "Rimnes", title: "Harmony" },
+  { at: "6:27", artist: "Megisto & Laidback Luke", title: "Don't Look Back" },
+  { at: "8:59", artist: "Selena Faider & Laura Davie & Lewis John", title: "So True" },
+  { at: "11:40", artist: "Saffron Stone", title: "Feel The Bass" },
+  { at: "14:50", artist: "Bingo Players", title: "You Keep It Simple" },
+  { at: "20:48", artist: "Lucas Prata", title: "Back To Heaven (twoDB Remix)" },
+  { at: "24:10", artist: "SNAJDER & MARQUS (DK) & Holmager", title: "Where We Belong" },
+  { at: "27:27", artist: "Janice Robinson", title: "Dreamer" },
+  { at: "30:13", artist: "Leonard A & LEVITATE", title: "Caramel" },
+  { at: "33:27", artist: "Charles D (USA) & Weska & Bexxie", title: "Can't Get Enough" },
+  { at: "36:43", artist: "Zeeo", title: "Quella Musica Lontana" },
+  { at: "40:09", artist: "Isabella Francisco & twoDB & DEEPWTR", title: "Embers (Gil Glaze Remix)" },
+  { at: "42:39", artist: "Isabella Francisco", title: "Ain't Going Back" },
+  { at: "46:06", artist: "BOESE", title: "My Baby" },
+  { at: "48:26", artist: "Hackatone & Jaki Nelson", title: "Models" },
+  { at: "51:17", artist: "Vice ft. Aloe Blacc", title: "Follow Me" },
+  { at: "53:25", artist: "VNDL", title: "You Were Always There" },
+  { at: "57:15", artist: "Dokkodo Sounds", title: "Begin Again" },
+];

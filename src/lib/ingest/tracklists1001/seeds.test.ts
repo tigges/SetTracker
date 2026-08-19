@@ -160,6 +160,7 @@ import {
   TL_CUEBRICK_CONFERENCE_297_2026,
   TL_MEDUZA_STEREO_MONTREAL_CANADA_2026,
   TL_MEDUZA_CLUB_SPACE_MIAMI_2026,
+  TL_AUSTIN_KRAMER_UNRELEASED_139_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   tracklist1001RowsToPlays,
@@ -2467,6 +2468,34 @@ assert.equal(
   ),
   false,
 );
+
+assertSeedClocks(TL_AUSTIN_KRAMER_UNRELEASED_139_2026);
+assert.equal(TL_AUSTIN_KRAMER_UNRELEASED_139_2026.length, 19);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-QLpmLx5JUsg"],
+  TL_AUSTIN_KRAMER_UNRELEASED_139_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-https://youtu.be/QLpmLx5JUsg"],
+  undefined,
+);
+const austin139 = tracklist1001RowsToPlays(TL_AUSTIN_KRAMER_UNRELEASED_139_2026);
+assert.equal(austin139.length, 19);
+assert.equal(austin139[0]?.provenance, "1001tl");
+assert.equal(austin139[0]?.timestamp, 0);
+assert.equal(austin139[0]?.artistName, "B JONES & MIDI Kittyy");
+assert.equal(austin139[0]?.trackTitle, "Universe");
+assert.equal(austin139[5]?.trackTitle, "You Keep It Simple");
+assert.equal(austin139[5]?.timestamp, 14 * 60 + 50);
+assert.equal(austin139[18]?.trackTitle, "Begin Again");
+assert.equal(austin139[18]?.timestamp, 57 * 60 + 15);
+for (let i = 1; i < austin139.length; i++) {
+  assert.ok(
+    (austin139[i]!.timestamp ?? 0) > (austin139[i - 1]!.timestamp ?? 0),
+    `Austin Kramer UNreleased 139 clocks must increase at index ${i}`,
+  );
+}
+assert.equal(isWiredTracklistSlug("yt-QLpmLx5JUsg"), true);
 
 assertSeedClocks(TL_NICKY_ROMERO_PROTOCOL_RADIO_731);
 assert.equal(TL_NICKY_ROMERO_PROTOCOL_RADIO_731.length, 16);
