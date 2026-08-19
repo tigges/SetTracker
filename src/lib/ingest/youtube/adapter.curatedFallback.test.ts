@@ -675,7 +675,7 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.durationSec, 59 * 60 + 10 + 180);
   });
 
-  it("builds Nicky Romero TML artist Relive meta from the curated 1001 capture", () => {
+  it("builds Nicky Romero TML artist playback meta from the curated 1001 capture", () => {
     assert.ok(NICKY_TML_ARTIST);
     const meta = watchMetaFromCuratedSeed(NICKY_TML_ARTIST);
     assert.ok(meta);
@@ -1172,7 +1172,7 @@ describe("curated YouTube 429 fallback", () => {
     assert.equal(sets[0]?.seriesName, "Spectrum Radio");
   });
 
-  it("lands Nicky Romero TML artist Relive from the 1001 seed when watch is 429", async () => {
+  it("lands Nicky Romero TML artist playback from the 1001 seed when watch is 429", async () => {
     assert.ok(NICKY_TML_ARTIST);
     const adapter = createYoutubeAdapter([NICKY_TML_ARTIST], [], [], []);
     const sets = await adapter.fetchRecent();

@@ -230,7 +230,7 @@ assert.equal(
 );
 
 // Identify ranking puts SC first; a mixed slice would drop YT. File Scanning
-// must filter YouTube before slicing so Relives still enter the queue.
+// must filter YouTube before slicing so festival playbacks still enter the queue.
 const mixedCrowd = [
   ...Array.from({ length: 80 }, (_, i) =>
     fsCand({

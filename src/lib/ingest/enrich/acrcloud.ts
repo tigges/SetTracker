@@ -33,7 +33,7 @@
  *   ACRCLOUD_MIN_IDENTIFIED skip sets with ≥ N strong IDs (default 4)
  *   ACRCLOUD_ALLOW_YOUTUBE=1  allow all YT playback (default off)
  *   ACRCLOUD_ALLOW_YOUTUBE_PRIORITY=0  disable YT for Top 20 / festival
- *     unresolved targets (default on — EDC Relive etc. are often YT-only)
+ *     unresolved targets (default on — EDC playbacks etc. are often YT-only)
  *   ACRCLOUD_YT_DLP=0       force-disable yt-dlp sampling (default: use when
  *     yt-dlp is on PATH). YouTube has no anonymous progressive URL — clips
  *     are cut with yt-dlp --download-sections, then Identify as usual.
@@ -83,7 +83,7 @@ export {
 } from "../../unresolvedPriority";
 
 const WEEK_MS = 7 * 24 * 60 * 60 * 1000;
-/** Festival Relive dumps often land weeks after the weekend. */
+/** Festival playback dumps often land weeks after the weekend. */
 const FESTIVAL_DETECT_MS = 45 * 24 * 60 * 60 * 1000;
 const DENSITY_SEVERITY_RANK: Record<DensitySeverity, number> = {
   severe: 0,
@@ -130,7 +130,7 @@ export type AcrEnrichOptions = {
   allowYoutube?: boolean;
   /**
    * Restrict the sparse queue to one playback host. File Scanning passes
-   * `"youtube"` so SoundCloud radio cannot crowd Relives out of the slice.
+   * `"youtube"` so SoundCloud radio cannot crowd festival playbacks out of the slice.
    */
   host?: PlaybackHost;
   /** Cap ACR identify calls per set (resolve cues + gap probes). */
@@ -202,7 +202,7 @@ export function popularityRankForDjSlug(
  * Aligns the ACR queue with sets people actually see — especially pink
  * unresolved IDs on recent festival sets and Top 20 DJs.
  *
- * 4 — unresolved IDs on Top 20 / festival (recent or festival Relive window)
+ * 4 — unresolved IDs on Top 20 / festival (recent or festival playback window)
  * 3 — unresolved on Top 20 / festival (older), or recent spotlight + severe
  * 2 — recent + (spotlight or severe)
  * 1 — older spotlight that is still thin/severe
@@ -216,7 +216,7 @@ export function homepageEnrichBoost(opts: {
   top100: Map<string, number>;
   nowMs?: number;
   unresolvedCount?: number;
-  /** Total cue rows — 0 means Relive with no description/credits yet. */
+  /** Total cue rows — 0 means playback with no description/credits yet. */
   playCount?: number;
   isFestival?: boolean;
   festivalSeason?: boolean;
@@ -237,7 +237,7 @@ export function homepageEnrichBoost(opts: {
   const festFocus = Boolean(opts.isFestival || opts.festivalSeason);
   const emptyFestival = festFocus && (opts.playCount ?? 1) === 0;
 
-  // Empty festival Relives (EDC etc.) — no cues yet; fingerprint must create rows.
+  // Empty festival playbacks (EDC etc.) — no cues yet; fingerprint must create rows.
   if (emptyFestival) {
     if (recent || festWindow) return 4;
     return 3;
@@ -512,7 +512,7 @@ export function ytDlpSectionRange(
 
 /**
  * Cut a short mono mp3 from a YouTube watch URL via yt-dlp (+ ffmpeg post).
- * Uses --download-sections so we never pull the full Relive.
+ * Uses --download-sections so we never pull the full playback.
  */
 export async function sampleClipFromYoutube(
   pageUrl: string,

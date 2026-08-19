@@ -23,6 +23,6 @@ assert.equal(probes[0]!.offsetSec, 17 * 60 + 15);
 assert.equal(probes[1]!.offsetSec, 1 * 3600 + 11 * 60 + 28);
 assert.equal(probes[0]!.videoId, "6DC3xoQF4Zs");
 assert.equal(FINGERPRINT_ONLY_WATCH[0]!.official, false);
-assert.match(FINGERPRINT_ONLY_WATCH[0]!.note, /never Relive/i);
+assert.match(FINGERPRINT_ONLY_WATCH[0]!.note, /never official playback/i);
 
 console.log("identify/fingerprintWatch.test.ts ok");

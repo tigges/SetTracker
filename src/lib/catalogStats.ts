@@ -187,7 +187,7 @@ export type CatalogStats = {
     type: string;
   }>;
   /**
-   * Operator capture queue — this-year chart/festival Relives with a
+   * Operator capture queue — this-year chart/festival playbacks with a
    * duration-vs-cues gap. Not every thin radio stub.
    */
   tracklistGaps: StatsTracklistGap[];

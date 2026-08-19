@@ -37,7 +37,7 @@ async function main() {
     });
   } catch (err) {
     console.warn(
-      "[next-captures] Relive playlist fetch failed:",
+      "[next-captures] Tomorrowland Relive playlist fetch failed:",
       err instanceof Error ? err.message : err,
     );
     live = null;

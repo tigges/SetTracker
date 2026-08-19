@@ -48,7 +48,7 @@ describe("placeTimeline", () => {
     );
   });
 
-  it("orders Relives today, then upcoming, then latest finished first", () => {
+  it("orders playbacks today, then upcoming, then latest finished first", () => {
     const items = [
       { publishedAt: "2025-07-26T00:00:00.000Z", id: "2025" },
       { publishedAt: "2026-08-20T00:00:00.000Z", id: "future" },

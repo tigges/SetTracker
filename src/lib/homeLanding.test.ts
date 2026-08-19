@@ -105,7 +105,7 @@ const playableFirst = pickLandingSets([relive, playable], 3, now);
 assert.equal(playableFirst[0]?.id, "playable");
 assert.ok(
   playableFirst.findIndex((s) => s.id === "relive") !== 0,
-  "Relive is not the homepage teaser when a playable set exists",
+  "Tomorrowland Relive is not the homepage teaser when a playable set exists",
 );
 
 const onlyFiller = pickLandingSets([filler], 3, now);

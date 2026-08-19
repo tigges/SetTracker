@@ -22,7 +22,7 @@ export const FINGERPRINT_ONLY_WATCH: FingerprintOnlyWatch[] = [
     channel: "DerekD2",
     official: false,
     idOffsetsSec: [17 * 60 + 15, 1 * 3600 + 11 * 60 + 28],
-    note: "Fan 4K on 1001. Identify probe only — never Relive wire or FileScan as official.",
+    note: "Fan 4K on 1001. Identify probe only — never official playback wire or FileScan as official.",
   },
 ];
 

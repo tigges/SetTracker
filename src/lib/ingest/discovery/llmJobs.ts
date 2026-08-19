@@ -157,7 +157,7 @@ export function evaluateOfficialWatchUrl(
     if (!id || id.length < 8) return { ok: false, reason: "not a watch URL" };
     const watch = `https://www.youtube.com/watch?v=${id}`;
     if (isFingerprintOnlyWatchUrl(watch)) {
-      return { ok: false, reason: "fingerprint-only fan clip — not an official Relive" };
+      return { ok: false, reason: "fingerprint-only fan clip — not official playback" };
     }
     return { ok: true, url: watch, reason: "watch url" };
   }
@@ -166,7 +166,7 @@ export function evaluateOfficialWatchUrl(
       const id = parsed.searchParams.get("v")!;
       const watch = `https://www.youtube.com/watch?v=${id}`;
       if (isFingerprintOnlyWatchUrl(watch)) {
-        return { ok: false, reason: "fingerprint-only fan clip — not an official Relive" };
+        return { ok: false, reason: "fingerprint-only fan clip — not official playback" };
       }
       return { ok: true, url: watch, reason: "watch url" };
     }
@@ -440,7 +440,7 @@ export async function runLlmOfficialVideoResearch(
     try {
       const text = await complete(
         provider,
-        `Find the official YouTube Relive / livestream watch URL for this DJ set.
+        `Find the official YouTube playback / livestream watch URL for this DJ set.
 Return ONLY JSON: {"watchUrl":"https://www.youtube.com/watch?v=...","confidence":"high|medium|low","notes":"channel + title"}
 Rules: official artist or festival channel only. No fan reuploads. Never invent a 1001tracklists URL. Null if the official video is not up yet.
 Set: ${held.name}
@@ -454,7 +454,7 @@ Search hints: ${held.search.join(" ")}`,
           name: held.name,
           seed: held.seed,
           accepted: null,
-          reason: "fingerprint-only fan clip — not an official Relive",
+          reason: "fingerprint-only fan clip — not official playback",
         });
         continue;
       }
@@ -519,7 +519,7 @@ Search hints: ${held.search.join(" ")}`,
     generatedAt: new Date().toISOString(),
     provider,
     write: false,
-    note: "Report only. Operator wires an official Relive; never invent 1001 URLs.",
+    note: "Report only. Operator wires official playback; never invent 1001 URLs.",
     rows,
   });
   console.log(

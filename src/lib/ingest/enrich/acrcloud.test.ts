@@ -276,7 +276,7 @@ assert.equal(
   }),
   false,
 );
-// Empty EDC Relive (0 cues) still gets YT fingerprint priority.
+// Empty EDC playback (0 cues) still gets YT fingerprint priority.
 assert.equal(
   isUnresolvedDetectPriority({
     unresolvedCount: 0,

@@ -423,7 +423,7 @@ export const TL_OLIVER_HELDENS_TML_WE1_2026: FingerprintSeedRow[] = [
  * Official YT: https://youtu.be/xVWs0ti0J90
  * Capture overlay used TL_Alan-Walker_Main-Stage_Tomorrowland_WE1_Belgium_2018
  * (hyphens illegal); constant is TL_ALAN_WALKER_TML_WE1_2018.
- * Archive-titled Relive — stays off /capture-1001 extras via isArchiveTitledSet.
+ * Archive-titled Tomorrowland Relive — stays off /capture-1001 extras via isArchiveTitledSet.
  * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-xVWs0ti0J90"]
  * Captured 2026-08-17 - provenance 1001tl.
  */
@@ -485,7 +485,7 @@ export const TL_ALAN_WALKER_TML_WE1_2018: FingerprintSeedRow[] = [
  * Capture overlay used TL_GORDO_Freedom-Stage_Tomorrowland_WE2_Belgium_2023
  * (hyphens illegal); constant is TL_GORDO_TML_WE2_2023.
  * Wire slug is yt-lopIWBJ0T5I (strip ?si= share param).
- * Archive-titled Relive — stays off /capture-1001 extras via isArchiveTitledSet.
+ * Archive-titled Tomorrowland Relive — stays off /capture-1001 extras via isArchiveTitledSet.
  * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-lopIWBJ0T5I"]
  * Captured 2026-08-17 - provenance 1001tl.
  */
@@ -528,7 +528,7 @@ export const TL_GORDO_TML_WE2_2023: FingerprintSeedRow[] = [
  * Capture overlay used TL_Lucas&Steve_Library-Stage_Tomorrowland_WE2_Belgium_2024
  * (`&` / hyphens illegal); constant is TL_LUCAS_STEVE_TML_WE2_2024.
  * Distinct from TL_LUCAS_STEVE_TML_WE2_2026 (yt-LE-byccuovI).
- * Archive-titled Relive — stays off /capture-1001 extras via isArchiveTitledSet.
+ * Archive-titled Tomorrowland Relive — stays off /capture-1001 extras via isArchiveTitledSet.
  * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-GbG_OFmdPKk"]
  * Captured 2026-08-17 - provenance 1001tl.
  */
@@ -601,7 +601,7 @@ export const TL_LUCAS_STEVE_TML_WE2_2024: FingerprintSeedRow[] = [
  * https://www.1001tracklists.com/tracklist/lb17sb1/knock2-zedd-hard-stage-hard-summer-festival-united-states-2026-08-02.html
  * Operator paste 2026-08-17. Linked YT yt-6DC3xoQF4Zs is DerekD2 (fan) — do not wire.
  * DOM capture 67 rows / 2 bare ID titles dropped. 27 timed cues; rest lerped
- * across 1001 duration 1:16:07. Seed held until official HARD/Insomniac Relive.
+ * across 1001 duration 1:16:07. Seed held until official HARD/Insomniac playback.
  */
 export const TL_KNOCK2_ZEDD_HARD_SUMMER_2026: FingerprintSeedRow[] = [
   { at: "0:00", artist: "Zedd & Knock2", title: "Niteharts 2025 Intro" },
@@ -676,7 +676,7 @@ export const TL_KNOCK2_ZEDD_HARD_SUMMER_2026: FingerprintSeedRow[] = [
  * https://www.1001tracklists.com/tracklist/2vwfrkc9/cole-terrazas-pink-stage-hard-summer-festival-united-states-2026-08-02.html
  * Operator paste 2026-08-17. 1001 has no media links (HARD site only).
  * 11 rows / 6 IDed — bare ID–ID dropped. Cues kept. Do not wire until an
- * official HARD / Insomniac Relive exists.
+ * official HARD / Insomniac playback exists.
  */
 export const TL_COLE_TERRAZAS_HARD_SUMMER_2026: FingerprintSeedRow[] = [
   { at: "0:01", artist: "Led Zeppelin", title: "No Quarter" },
@@ -821,7 +821,7 @@ export const TL_JOHN_SUMMIT_BURNING_MAN_PLAYA_PACKAGE_MIX_2025: FingerprintSeedR
 /**
  * Claptone - Clapcast 576 2026-07-31
  * https://www.1001tracklists.com/tracklist/uq8g1pk/claptone-clapcast-576-2026-07-31.html
- * Official SC Relive: https://soundcloud.com/claptone/clapcast-576
+ * Official SC playback: https://soundcloud.com/claptone/clapcast-576
  * (sc-claptone-clapcast-576). Mixcloud is a mirror only.
  * Operator sent the 1001 URL without cue rows — do not scrape 1001 or
  * invent TL_CLAPTONE_CLAPCAST_576_2026. Official SC description has 14

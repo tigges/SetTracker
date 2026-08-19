@@ -159,7 +159,7 @@ export type YoutubeSetSource = {
   tracklist1001?: FingerprintSeedRow[];
   /**
    * Known 1001.tl / 1001tracklists.com URL when the YT description omits it
-   * (common on Insomniac Relives). Tried before falling back to seed rows.
+   * (common on Insomniac playbacks). Tried before falling back to seed rows.
    */
   tracklist1001Url?: string;
 };
@@ -329,7 +329,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_DOM_DOLLA_ALLIANZ_SYDNEY,
   },
   {
-    // Official Relive — Creamfields North Steel Yard 2025; timed 1001 capture.
+    // Official playback — Creamfields North Steel Yard 2025; timed 1001 capture.
     video: "https://www.youtube.com/watch?v=NblVVOwQRqw",
     primaryArtist: dj("Dom Dolla", {
       accent: "#00bbf9",
@@ -450,7 +450,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_SOLOMUN_ALLY_PALLY_2026,
   },
   {
-    // Insomniac Relive — promo description only; 1001TL seed from screenshots.
+    // Insomniac playback — promo description only; 1001TL seed from screenshots.
     video: "https://www.youtube.com/watch?v=jQLWYc2UrFY",
     primaryArtist: dj("Westend", {
       accent: "#f72585",
@@ -463,7 +463,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_WESTEND_EDC_LV_2026,
   },
   {
-    // Insomniac Relive — already in catalog via @insomniac; seed fills 0 plays.
+    // Insomniac playback — already in catalog via @insomniac; seed fills 0 plays.
     video: "https://www.youtube.com/watch?v=yXHoHK_jQvc",
     primaryArtist: dj("AHEE", {
       accent: "#7b2cbf",
@@ -476,7 +476,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_AHEE_LIQUID_STRANGER_EDC_LV_2026,
   },
   {
-    // Insomniac Relive — promo description; 1001 URL from operator (CF in CI).
+    // Insomniac playback — promo description; 1001 URL from operator (CF in CI).
     video: "https://www.youtube.com/watch?v=dXBoIY65P8s",
     primaryArtist: dj("Darude", {
       accent: "#00b4d8",
@@ -491,7 +491,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_DARUDE_EDC_LV_2026,
   },
   {
-    // Insomniac Relive — already in catalog via @insomniac; seed fills 0 plays.
+    // Insomniac playback — already in catalog via @insomniac; seed fills 0 plays.
     video: "https://www.youtube.com/watch?v=KIb3psOt9hI",
     primaryArtist: dj("Sarah de Warren", {
       accent: "#c77dff",
@@ -506,7 +506,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_SARAH_DE_WARREN_EDC_LV_2026,
   },
   {
-    // Insomniac Relive — 1001 cues untimed; even-spaced from capture.
+    // Insomniac playback — 1001 cues untimed; even-spaced from capture.
     video: "https://www.youtube.com/watch?v=yUA0Ht2PdG0",
     primaryArtist: dj("Pegassi", {
       accent: "#80ed99",
@@ -521,7 +521,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_PEGASSI_EDC_LV_2026,
   },
   {
-    // Insomniac Relive — circuitGROUNDS solo; 1001 cues untimed.
+    // Insomniac playback — circuitGROUNDS solo; 1001 cues untimed.
     video: "https://www.youtube.com/watch?v=f_p6nfbrm0E",
     primaryArtist: dj("Nico Moreno", {
       accent: "#ff006e",
@@ -536,7 +536,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_NICO_MORENO_EDC_LV_2026,
   },
   {
-    // Insomniac Relive — quantumVALLEY; 11/12 timed cues from 1001 capture.
+    // Insomniac playback — quantumVALLEY; 11/12 timed cues from 1001 capture.
     video: "https://www.youtube.com/watch?v=FZ7pwlNdwBk",
     primaryArtist: dj("Matty Ralph", {
       accent: "#4cc9f0",
@@ -551,7 +551,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_MATTY_RALPH_EDC_LV_2026,
   },
   {
-    // Insomniac Relive — kineticFIELD; 10/10 timed cues from 1001 capture.
+    // Insomniac playback — kineticFIELD; 10/10 timed cues from 1001 capture.
     video: "https://www.youtube.com/watch?v=APt5j9Abwo8",
     primaryArtist: dj("Funk Tribu", {
       accent: "#ffbe0b",
@@ -566,7 +566,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_FUNK_TRIBU_EDC_LV_2026,
   },
   {
-    // Artist upload (not Insomniac Relive) — full timed 1001 capture.
+    // Artist upload (not Insomniac playback) — full timed 1001 capture.
     video: "https://www.youtube.com/watch?v=D8eLxmifH4o",
     primaryArtist: dj("Holy Priest", {
       accent: "#e63946",
@@ -645,7 +645,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_NICKY_ROMERO_TML_WE2_2026,
   },
   {
-    // Artist-channel Relive of the same Mainstage WE2 set (1001.tl/wkty6z9).
+    // Artist-channel playback of the same Mainstage WE2 set (1001.tl/wkty6z9).
     video: "https://www.youtube.com/watch?v=B05MAbsCOLA",
     primaryArtist: dj("Nicky Romero", {
       accent: "#00bbf9",
@@ -709,7 +709,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_STEVE_ANGELLO_TML_WE2_2026,
   },
   {
-    // Artist / Relive — Mainstage WE1; 1001.tl/2jqqmqsk timed capture.
+    // Artist / playback — Mainstage WE1; 1001.tl/2jqqmqsk timed capture.
     video: "https://www.youtube.com/watch?v=4985f9Rfxx0",
     primaryArtist: dj("FISHER", {
       accent: "#ffba08",
@@ -758,7 +758,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_FISHER_TML_WE2_2026,
   },
   {
-    // Official Relive — Freedom Stage WE2; 1001.tl/116uj1x1 timed capture.
+    // Official Tomorrowland Relive — Freedom Stage WE2; 1001.tl/116uj1x1 timed capture.
     video: "https://www.youtube.com/watch?v=eeNljOHahxY",
     primaryArtist: dj("Massano", { accent: "#8338ec" }),
     genre: "Melodic Techno",
@@ -820,7 +820,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_JOHN_SUMMIT_TML_WE2_2026,
   },
   {
-    // Artist upload — short YouTube House set (not Mainstage WE2 Relive).
+    // Artist upload — short YouTube House set (not Mainstage WE2 Tomorrowland Relive).
     video: "https://www.youtube.com/watch?v=I6QA_T-BS6o",
     primaryArtist: dj("Armin van Buuren", {
       accent: "#0077b6",
@@ -992,7 +992,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_KOROLOVA_CAPTIVE_SOUL_098_2026,
   },
   {
-    // Official Korolova Relive — Snowattack Festival 2026-01-21.
+    // Official Korolova playback — Snowattack Festival 2026-01-21.
     // Distinct from Captive Soul 098 and TML WE2 Freedom Stage.
     video: "https://www.youtube.com/watch?v=7UcyaKbvy2o",
     primaryArtist: dj("Korolova", {
@@ -1550,7 +1550,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_VINTAGE_CULTURE_PACHA_NYC_2026,
   },
   {
-    // Artist-channel Relive of the Burning Man Playground set (same 1001 as SC).
+    // Artist-channel playback of the Burning Man Playground set (same 1001 as SC).
     video: "https://www.youtube.com/watch?v=SeKRNa26kug",
     primaryArtist: dj("Vintage Culture", {
       accent: "#e85d04",
@@ -1565,7 +1565,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_VINTAGE_CULTURE_ARODES_BURNING_MAN_2024,
   },
   {
-    // Artist-channel Relive of the Opulent Temple set (same 1001 as SC).
+    // Artist-channel playback of the Opulent Temple set (same 1001 as SC).
     video: "https://www.youtube.com/watch?v=k4Drn6AwAdk",
     primaryArtist: dj("Max Styler", {
       accent: "#ff9f1c",
@@ -1579,7 +1579,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_MAX_STYLER_OPULENT_TEMPLE_BURNING_MAN_2024,
   },
   {
-    // Artist-channel Relive of the Creamfields North set (same 1001 as SC).
+    // Artist-channel playback of the Creamfields North set (same 1001 as SC).
     video: "https://www.youtube.com/watch?v=arowbYnNFGY",
     primaryArtist: dj("Hannah Laing", {
       accent: "#ff006e",
@@ -1593,7 +1593,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_HANNAH_LAING_ZENLESS_ZONE_ZERO_CREAMFIELDS_2024,
   },
   {
-    // Artist-channel Relive of the Tomorrowland WE1 Daybreak Session (same 1001 as SC).
+    // Artist-channel playback of the Tomorrowland WE1 Daybreak Session (same 1001 as SC).
     video: "https://www.youtube.com/watch?v=wuMQeEJ3YnQ",
     primaryArtist: dj("Oliver Heldens", {
       accent: "#7c5cff",
@@ -1922,7 +1922,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     eventName: "Coachella",
   },
   {
-    // Official Coachella Relive — Sahara WE2; timed 1001 capture.
+    // Official Coachella playback — Sahara WE2; timed 1001 capture.
     video: "https://www.youtube.com/watch?v=vpf4LLy42Zc",
     primaryArtist: dj("Marlon Hoffstadt", {
       accent: "#c77dff",
@@ -2047,7 +2047,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_REINIER_ZONNEVELD_AWAKENINGS_2025,
   },
   {
-    // Official DJ Mag Relive; 1001 captured 2026-08-16.
+    // Official DJ Mag playback; 1001 captured 2026-08-16.
     video: "https://www.youtube.com/watch?v=soEFl73peVA",
     primaryArtist: dj("Joel Corry", {
       accent: "#4cc9f0",
@@ -2099,7 +2099,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     eventName: "Transmission Poland",
   },
   {
-    // Official Awakenings Relive — Area V 2025-07-11. Distinct from
+    // Official Awakenings playback — Area V 2025-07-11. Distinct from
     // yt-yPCOu0-JKJo (Atmosphere TML WE1 2023) and yt-i-mFuxbGHzg
     // (Reinier Zonneveld, same stage/day).
     video: "https://www.youtube.com/watch?v=xUdcEDryN8o",
@@ -2240,7 +2240,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     eventName: "Tomorrowland Belgium",
   },
   {
-    // Official Relive — Mainstage WE1; timed 1001 capture.
+    // Official Tomorrowland Relive — Mainstage WE1; timed 1001 capture.
     video: "https://www.youtube.com/watch?v=NpL_bT5vgmU",
     primaryArtist: dj("Boris Brejcha", { accent: "#ff006e" }),
     genre: "Techno",
@@ -2253,7 +2253,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_BORIS_BREJCHA_TML_WE1_2026,
   },
   {
-    // Official Relive — Freedom WE2; timed 1001 capture.
+    // Official Tomorrowland Relive — Freedom WE2; timed 1001 capture.
     video: "https://www.youtube.com/watch?v=g4vR2VlhNtk",
     primaryArtist: dj("Sebastian Ingrosso", { accent: "#4361ee" }),
     genre: "Progressive House",
@@ -2415,7 +2415,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     eventName: "Ultra Melbourne",
   },
   {
-    // Artist-channel Relive (@Liumusic). No 1001Tracklists URL in the
+    // Artist-channel playback (@Liumusic). No 1001Tracklists URL in the
     // description — do not invent one. Capture if a 1001 page appears.
     video: "https://www.youtube.com/watch?v=DWPSLZLKslg",
     primaryArtist: dj("Liu", { accent: "#2a9d8f", homeCity: "Brazil" }),

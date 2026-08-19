@@ -14,7 +14,7 @@ export function isUnresolvedDetectPriority(opts: {
   festivalSeason?: boolean;
   /**
    * Festival (or season) sets with no/thin tracklists — still priority for
-   * YouTube Relive fingerprinting even when unresolvedCount is 0.
+   * YouTube festival playback fingerprinting even when unresolvedCount is 0.
    */
   sparseFestival?: boolean;
 }): boolean {

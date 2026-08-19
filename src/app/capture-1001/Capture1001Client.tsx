@@ -164,7 +164,7 @@ export function Capture1001Client({
         </h2>
         <p className="text-[14px] text-muted">
           Workbench only — YT/SC already in the catalog, 1001 seed still
-          missing. Official Relives and known 1001 URLs first. Wired slugs drop
+          missing. Official playbacks and known 1001 URLs first. Wired slugs drop
           off automatically. CI never fetches 1001.
         </p>
         <label className="block">

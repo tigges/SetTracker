@@ -3,7 +3,7 @@
  *
  * findLyrics is public (no token) and returns artist/title + media links.
  * Audio recognize / enterprise mix analyze needs AUDD_API_TOKEN and is
- * gated by AUDD_ANALYZE=1. Never wires the URL as Relive.
+ * gated by AUDD_ANALYZE=1. Never wires the URL as official playback.
  */
 
 import { normalizeIsrc } from "../../trackMeta";
