@@ -4,6 +4,7 @@ import {
   comparePlaceNights,
   comparePlaceSetTimes,
   groupPlaceSetsByYear,
+  parseDateFromSetTitle,
   placeNightsHeading,
   setBandYear,
   sortPlaceNights,
@@ -13,6 +14,29 @@ import {
 const NOW = Date.parse("2026-08-18T12:00:00Z");
 
 describe("placeTimeline", () => {
+  it("reads a calendar day from titles and 1001 URLs", () => {
+    const now = Date.parse("2026-08-20T12:00:00Z");
+    assert.equal(
+      parseDateFromSetTitle("HoneyLuv @ ANTS Ushuaïa Ibiza 2026-06-17", now)?.toISOString(),
+      "2026-06-17T00:00:00.000Z",
+    );
+    assert.equal(
+      parseDateFromSetTitle(
+        "https://www.1001tracklists.com/tracklist/2787514k/chris-stassy-boiler-room-edinburgh-united-kingdom-2024-05-19.html",
+        now,
+      )?.toISOString(),
+      "2024-05-19T00:00:00.000Z",
+    );
+    assert.equal(
+      parseDateFromSetTitle("Deborah de Luca - Zurich Street Parade 2025", now),
+      null,
+    );
+    assert.equal(
+      parseDateFromSetTitle("Chris Stussy | Boiler Room: Edinburgh", now),
+      null,
+    );
+  });
+
   it("labels the night list from what is actually on the bill", () => {
     assert.equal(
       placeNightsHeading([{ bucket: "recent" }, { bucket: "recent" }]),
