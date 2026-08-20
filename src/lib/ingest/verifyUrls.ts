@@ -38,6 +38,7 @@ import { fillDjHandlesFromKnown, fillDjWebsitesFromWikidata } from "./discovery/
 import { isRejectedWebsiteHost } from "./discovery/wikidataOfficial";
 import { discoverCuratedReliveRemaps } from "./reliveWatch";
 import { applySetSourceRemaps } from "./sourceRemaps";
+import { applyCatalog1001Seeds } from "./tracklists1001/applyToCatalog";
 import { ensureCuratedLabels } from "./curatedLabels";
 import { ensureVenueCalendarNights } from "./discovery/venueCalendars";
 
@@ -199,6 +200,22 @@ export async function applyKnownUrlFixes(prisma: PrismaClient): Promise<number> 
   if (atomic.setsRelinked || atomic.junkRemoved) {
     console.log(
       `[verify-urls] atomic duos relinked=${atomic.setsRelinked} junkRemoved=${atomic.junkRemoved}`,
+    );
+  }
+
+  // Curated 1001 clocks on sets already in the cached DB (no YT/SC poll).
+  try {
+    const overlay = await applyCatalog1001Seeds(prisma);
+    n += overlay.refreshed;
+    if (overlay.refreshed || overlay.missing) {
+      console.log(
+        `[verify-urls] 1001 overlay scanned=${overlay.scanned} refreshed=${overlay.refreshed} missing=${overlay.missing}`,
+      );
+    }
+  } catch (err) {
+    console.warn(
+      "[verify-urls] 1001 overlay:",
+      err instanceof Error ? err.message : err,
     );
   }
 

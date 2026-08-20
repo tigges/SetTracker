@@ -1,24 +1,26 @@
 /**
- * Pages push is restore + export. Light curated YT/SC ingest runs only
- * when catalog sources changed (new seeds). Catalog-deep crawls; enrich
- * fingerprints. Dispatch from those producers never re-polls.
+ * Pages push is restore + export. Light curated YT/SC *poll* runs only
+ * when fetch adapters / roster seeds changed. 1001 clocks and name-folds
+ * overlay in verify-urls (no 20-min YouTube walk). Catalog-deep crawls;
+ * enrich fingerprints. Dispatch from those producers never re-polls.
  * `ingest=force` is the manual Pages re-poll.
  */
 
 export type CuratedIngestMode = "auto" | "skip" | "force";
 
-/** Paths whose edits can introduce new sets on the curated-only ingest. */
+/**
+ * Paths that can introduce *new* sets that are not already in the cached DB.
+ * Overlay-only files (1001 captures, fingerprint pastes, artist-name tidy)
+ * must not live here — they apply in verify-urls.
+ */
 export const CURATED_INGEST_PATHS: RegExp[] = [
   /^prisma\/ingest\.ts$/,
   /^src\/lib\/ingest\/ingest\.ts$/,
   /^src\/lib\/ingest\/sources\.ts$/,
   /^src\/lib\/ingest\/resolutions\.ts$/,
   /^src\/lib\/ingest\/roster\.ts$/,
-  /^src\/lib\/ingest\/festivalDrops\.ts$/,
   /^src\/lib\/ingest\/topDjs\.ts$/,
-  /^src\/lib\/ingest\/artists\.ts$/,
-  /^src\/lib\/ingest\/nextCaptures\.ts$/,
-  /^src\/lib\/ingest\/(soundcloud|youtube|hearthis|bandcamp|djmag|tracklists1001|fingerprint|insomniac|boilerroom)\//,
+  /^src\/lib\/ingest\/(soundcloud|youtube|hearthis|bandcamp|djmag|insomniac|boilerroom)\//,
 ];
 
 export function normalizeRepoPath(path: string): string {
