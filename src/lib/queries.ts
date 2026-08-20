@@ -29,6 +29,7 @@ import {
 } from "@/lib/trackMeta";
 import { relatedSlugsFor } from "@/lib/ingest/discovery/relations";
 import { aliasSlugsFor, resolveSetSlug } from "@/lib/ingest/sourceRemaps";
+import { collapseConsecutivePlays, playCollapseKey } from "@/lib/playCollapse";
 import { canonicalDjSlug, DJ_SLUG_ALIASES } from "@/lib/ingest/djSlugAliases";
 import {
   sortEventSets,
@@ -279,6 +280,75 @@ export async function getSetBySlug(slug: string) {
 
   const primary = set.artists.find((a) => a.isPrimary) ?? set.artists[0];
 
+  const mappedPlays = set.plays.map((p) => {
+    const resolved = p.idTrack?.resolvedTrack ?? null;
+    const title =
+      p.track?.title ??
+      resolved?.title ??
+      p.idTrack?.label ??
+      p.rawText ??
+      "Unknown";
+    const artistName =
+      p.track?.artistName ??
+      resolved?.artistName ??
+      p.idTrack?.suspectedArtist ??
+      null;
+    const label = p.track?.label ?? resolved?.label ?? null;
+    const track = p.track ?? resolved;
+    return {
+      id: p.id,
+      position: p.position,
+      timestamp: p.timestamp,
+      idStatus: p.idStatus,
+      provenance: p.provenance,
+      rawText: p.rawText,
+      title,
+      artistName,
+      imageUrl: track?.imageUrl ?? null,
+      labelName: label?.name ?? null,
+      labelSlug: label?.slug ?? null,
+      labelColor: label?.color ?? null,
+      labelImageUrl: label?.imageUrl ?? null,
+      trackSlug: track?.slug ?? null,
+      bpm: track?.bpm ?? null,
+      musicalKey: track?.musicalKey ?? null,
+      mixName: track?.mixName ?? null,
+      remixerName: track?.remixerName ?? null,
+      genre: normalizeGenre(track?.genre ?? null),
+      trackDurationSec: track?.durationSec ?? null,
+      beatportUrl: track?.beatportUrl ?? null,
+      isrc: track?.isrc ?? null,
+      idNote: p.idTrack?.note ?? null,
+      resolvedTitle: resolved
+        ? `${resolved.artistName} – ${resolved.title}`
+        : null,
+    };
+  });
+  let plays = collapseConsecutivePlays(mappedPlays, (p) =>
+    playCollapseKey({
+      trackSlug: p.trackSlug,
+      artistName: p.artistName,
+      title: p.title,
+    }),
+  ).map((p, i) => ({ ...p, position: i + 1 }));
+  const missing = plays.filter(
+    (p) => !canonicalBeatportUrl(p.beatportUrl) && p.artistName,
+  );
+  if (missing.length > 0) {
+    const catalog = await siblingBeatportMap(missing);
+    if (catalog.size > 0) {
+      plays = plays.map((p) => ({
+        ...p,
+        beatportUrl: resolveBeatportUrl(
+          p.beatportUrl,
+          p.title,
+          p.artistName,
+          catalog,
+        ),
+      }));
+    }
+  }
+
   return {
     id: set.id,
     slug: set.slug,
@@ -319,68 +389,8 @@ export async function getSetBySlug(slug: string) {
         imageUrl: a.dj.imageUrl,
         isPrimary: a.isPrimary,
       })),
-    statusCounts: tallyStatuses(set.plays),
-    plays: await (async () => {
-      const plays = set.plays.map((p) => {
-        const resolved = p.idTrack?.resolvedTrack ?? null;
-        const title =
-          p.track?.title ??
-          resolved?.title ??
-          p.idTrack?.label ??
-          p.rawText ??
-          "Unknown";
-        const artistName =
-          p.track?.artistName ??
-          resolved?.artistName ??
-          p.idTrack?.suspectedArtist ??
-          null;
-        const label = p.track?.label ?? resolved?.label ?? null;
-        const track = p.track ?? resolved;
-        return {
-          id: p.id,
-          position: p.position,
-          timestamp: p.timestamp,
-          idStatus: p.idStatus,
-          provenance: p.provenance,
-          rawText: p.rawText,
-          title,
-          artistName,
-          imageUrl: track?.imageUrl ?? null,
-          labelName: label?.name ?? null,
-          labelSlug: label?.slug ?? null,
-          labelColor: label?.color ?? null,
-          labelImageUrl: label?.imageUrl ?? null,
-          trackSlug: track?.slug ?? null,
-          bpm: track?.bpm ?? null,
-          musicalKey: track?.musicalKey ?? null,
-          mixName: track?.mixName ?? null,
-          remixerName: track?.remixerName ?? null,
-          genre: normalizeGenre(track?.genre ?? null),
-          trackDurationSec: track?.durationSec ?? null,
-          beatportUrl: track?.beatportUrl ?? null,
-          isrc: track?.isrc ?? null,
-          idNote: p.idTrack?.note ?? null,
-          resolvedTitle: resolved
-            ? `${resolved.artistName} – ${resolved.title}`
-            : null,
-        };
-      });
-      const missing = plays.filter(
-        (p) => !canonicalBeatportUrl(p.beatportUrl) && p.artistName,
-      );
-      if (missing.length === 0) return plays;
-      const catalog = await siblingBeatportMap(missing);
-      if (catalog.size === 0) return plays;
-      return plays.map((p) => ({
-        ...p,
-        beatportUrl: resolveBeatportUrl(
-          p.beatportUrl,
-          p.title,
-          p.artistName,
-          catalog,
-        ),
-      }));
-    })(),
+    statusCounts: tallyStatuses(plays),
+    plays,
   };
 }
 
