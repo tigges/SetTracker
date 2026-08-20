@@ -571,15 +571,13 @@ assert.equal(
   false,
 );
 
-const colynInnelleaCoveSc = SOUNDCLOUD_TRACK_SEEDS.find(
-  (s) =>
-    s.url === "https://soundcloud.com/innellea/colyn-b2b-innella-at-ultra",
+assert.equal(
+  SOUNDCLOUD_TRACK_SEEDS.some(
+    (s) =>
+      s.url === "https://soundcloud.com/innellea/colyn-b2b-innella-at-ultra",
+  ),
+  false,
 );
-assert.ok(colynInnelleaCoveSc);
-assert.equal(colynInnelleaCoveSc.primaryArtist.name, "Colyn");
-assert.equal(colynInnelleaCoveSc.eventName, "Ultra Music Festival");
-assert.equal(colynInnelleaCoveSc.seriesName, "Resistance");
-assert.equal(colynInnelleaCoveSc.type, "festival");
 assert.equal(
   `sc-innellea-${slugify("colyn-b2b-innella-at-ultra")}`,
   "sc-innellea-colyn-b2b-innella-at-ultra",

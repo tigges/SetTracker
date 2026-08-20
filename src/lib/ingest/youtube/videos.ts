@@ -1885,8 +1885,9 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_JORIS_VOORN_KOROLOVA_ULTRA_MIAMI_RESISTANCE_COVE_2026,
   },
   {
-    // Official Colyn B2B Innellea Resistance The Cove. Same list as
-    // sc-innellea-colyn-b2b-innella-at-ultra. hearthis razorator is a fan
+    // Official Colyn B2B Innellea Resistance The Cove. SC innellea
+    // permalink (innella typo) folds onto this slug via SET_SOURCE_REMAPS —
+    // do not ingest a second leftover. hearthis razorator is a fan
     // reupload — do not wire. Distinct from Voorn B2B Korolova Cove.
     video: "https://youtu.be/2BPWWYAgUE4",
     primaryArtist: dj("Colyn", { accent: "#7b2cbf" }),

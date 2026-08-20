@@ -10,7 +10,9 @@ import { readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import { isArchiveTitledSet } from "../feedPriority";
 import type { DensitySeverity } from "../setDensity";
+import { SET_SLUG_ALIASES } from "./sourceRemaps";
 import { TRACKLIST_1001_BY_SOURCE_SLUG } from "./tracklists1001/festival2026";
+import { isSecondaryPlaybackSlug } from "./tracklists1001/seeds";
 
 export type CapturePreset = {
   label: string;
@@ -238,6 +240,8 @@ export function skipCaptureNeed(
   nowMs = Date.now(),
 ): string | null {
   if (mapped.has(row.slug)) return "mapped";
+  if (isSecondaryPlaybackSlug(row.slug)) return "mirror";
+  if (SET_SLUG_ALIASES[row.slug]) return "alias";
   if (!captureHost(row.slug)) return "host";
   if (row.durationSec < 20 * 60) return "short";
   if (/\bshorts?\b/i.test(row.title)) return "shorts";

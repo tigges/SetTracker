@@ -168,6 +168,7 @@ import {
   TL_COLYN_INNELLEA_ULTRA_MIAMI_RESISTANCE_COVE_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
+  isSecondaryPlaybackSlug,
   tracklist1001RowsToPlays,
 } from "./seeds";
 import { assertSeedClocks } from "./festival2026";
@@ -2706,6 +2707,15 @@ assert.notEqual(
 assert.notEqual(
   TRACKLIST_1001_BY_SOURCE_SLUG["yt-2BPWWYAgUE4"],
   TRACKLIST_1001_BY_SOURCE_SLUG["yt-xXRjglkAmq8"],
+);
+assert.equal(isSecondaryPlaybackSlug("yt-2BPWWYAgUE4"), false);
+assert.equal(
+  isSecondaryPlaybackSlug("sc-innellea-colyn-b2b-innella-at-ultra"),
+  true,
+);
+assert.equal(
+  isSecondaryPlaybackSlug("sc-korolovadj-joris-voorn-b2b-korolova-live"),
+  true,
 );
 
 assertSeedClocks(TL_NICKY_ROMERO_PROTOCOL_RADIO_731);

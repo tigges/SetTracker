@@ -20,7 +20,11 @@ import {
   tracklistGapReason,
   type TracklistGapFields,
 } from "@/lib/tracklistGap";
-import { isWiredTracklistSlug } from "@/lib/ingest/tracklists1001/seeds";
+import {
+  isSecondaryPlaybackSlug,
+  isWiredTracklistSlug,
+} from "@/lib/ingest/tracklists1001/seeds";
+import { SET_SLUG_ALIASES } from "@/lib/ingest/sourceRemaps";
 import {
   PROVENANCE_META,
   STATUS_META,
@@ -744,6 +748,8 @@ export async function getCatalogStats(): Promise<CatalogStats> {
   ) => {
     if (gapSeen.has(s.id)) return;
     if (isWiredTracklistSlug(s.slug)) return;
+    if (isSecondaryPlaybackSlug(s.slug)) return;
+    if (SET_SLUG_ALIASES[s.slug]) return;
     const fields = toTracklistGapFields(s, playCount);
     if (!isActionableTracklistGap(fields, nowMs)) return;
     gapSeen.add(s.id);

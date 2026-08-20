@@ -852,12 +852,13 @@ export const TL_JORIS_VOORN_KOROLOVA_ULTRA_MIAMI_RESISTANCE_COVE_2026: Fingerpri
 /**
  * Colyn B2B Innellea @ Resistance The Cove, Ultra Music Festival Miami 2026-03-28
  * Official YouTube: https://youtu.be/2BPWWYAgUE4
- * Official SoundCloud: https://soundcloud.com/innellea/colyn-b2b-innella-at-ultra
+ * Official SoundCloud permalink spells innella — fold onto YT
+ * (SET_SOURCE_REMAPS sc-innellea-colyn-b2b-innella-at-ultra → yt-2BPWWYAgUE4).
  * hearthis.at/razorator/… is a fan reupload — do not wire as sourceUrl / playback.
  * https://www.1001tracklists.com/tracklist/27d15hjt/colyn-innellea-resistance-the-cove-ultra-music-festival-miami-united-states-2026-03-28.html
  * Overlay name TL_Colyn&Innellea_Resistance_The-Cove_Ultra-Music-Festival_Miami_2026-03-28 is not a valid identifier.
  * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-2BPWWYAgUE4"]
- *       TRACKLIST_1001_BY_SOURCE_SLUG["sc-innellea-colyn-b2b-innella-at-ultra"]
+ *       TRACKLIST_1001_BY_SOURCE_SLUG["sc-innellea-colyn-b2b-innella-at-ultra"] (hide leftover until fold)
  * Never sc-https://…. Distinct from Joris Voorn B2B Korolova Cove the same night
  * and Vintage Culture Resistance Megastructure.
  * Captured 2026-08-20 — provenance 1001tl.

@@ -578,17 +578,4 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     type: "festival",
     minDurationSec: 90 * 60,
   },
-  {
-    // Official Innellea B2B upload; permalink spells innella. 1001TL wired
-    // via sc-innellea-colyn-b2b-innella-at-ultra (same list as yt-2BPWWYAgUE4).
-    // hearthis razorator is a fan reupload — do not wire. Never sc-https://….
-    // Distinct from Voorn B2B Korolova Cove the same night.
-    url: "https://soundcloud.com/innellea/colyn-b2b-innella-at-ultra",
-    primaryArtist: dj("Colyn", { accent: "#7b2cbf" }),
-    genre: "Melodic Techno",
-    seriesName: "Resistance",
-    eventName: "Ultra Music Festival",
-    type: "festival",
-    minDurationSec: 60 * 60,
-  },
 ];

@@ -224,6 +224,18 @@ export function isWiredTracklistSlug(slug: string): boolean {
 }
 
 /**
+ * SC / other slug that shares a 1001 seed with an official YouTube row.
+ * Leftover and capture queues keep the YT listing only.
+ */
+export function isSecondaryPlaybackSlug(slug: string): boolean {
+  const seed = TRACKLIST_1001_BY_SOURCE_SLUG[slug];
+  if (!seed?.length || slug.startsWith("yt-")) return false;
+  return Object.entries(TRACKLIST_1001_BY_SOURCE_SLUG).some(
+    ([other, rows]) => other.startsWith("yt-") && rows === seed,
+  );
+}
+
+/**
  * MARTEN HØRGER @ kineticFIELD, EDC Las Vegas 2023-05-21
  * https://1001.tl/vfff7hk → 23 tracks / ~59m
  */
