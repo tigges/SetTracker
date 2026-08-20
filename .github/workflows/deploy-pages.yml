@@ -113,9 +113,10 @@ jobs:
           fi
 
       # Curated ingest is the expensive "detection" (YT/SC watch + thumbs).
-      # 1001 live HTML is never fetched here (Cloudflare). Seeds only.
-      # Push ingests only when catalog sources changed. Dispatch never
-      # re-polls. ingest=force is the manual re-poll.
+      # 1001 live HTML is never fetched here (Cloudflare). Clock overlays
+      # apply in verify-urls. Push polls only when YT/SC/roster seeds
+      # changed — not artists.ts / 1001 captures. Dispatch never re-polls.
+      # ingest=force is the manual re-poll.
       - name: Decide curated ingest
         id: need_ingest
         env:
@@ -156,6 +157,9 @@ jobs:
           YOUTUBE_CURATED_PLAYLISTS: "1"
           SOUNDCLOUD_CURATED_ONLY: "1"
           INGEST_SKIP_VERIFY: "1"
+          # Pages is overlay + poll, not discovery. Crosslink/social harvest
+          # belongs on catalog-deep (saved ~minutes on the last 1001 ship).
+          INGEST_LEAN: "1"
         run: npm run ingest
 
       - name: Fill missing thumbs only
