@@ -21,19 +21,19 @@ export function DjList({ djs }: { djs: DjListItem[] }) {
   }
 
   return (
-    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       {djs.map((dj) => (
         <Link
           key={dj.id}
           href={`/djs/${dj.slug}`}
-          className="card flex items-center gap-3 p-4 transition-colors hover:border-[color:var(--muted2)]"
+          className="card flex items-center gap-2.5 p-3 transition-colors hover:border-[color:var(--muted2)]"
         >
           <EntityThumb
             src={dj.imageUrl}
             label={dj.name}
             accent={dj.accent}
-            size={44}
-            radius={12}
+            size={40}
+            radius={10}
           />
           <div className="min-w-0">
             <div className="truncate text-[15px] font-semibold text-ink">

@@ -125,6 +125,21 @@ describe("resolveCanonicalFromSetTitleDj", () => {
     );
   });
 
+  it("folds Chris Lake Full onto Chris Lake", () => {
+    assert.deepEqual(
+      resolveCanonicalFromSetTitleDj("Chris Lake Full", "chris-lake-full"),
+      { slug: "chris-lake", name: "Chris Lake" },
+    );
+    assert.deepEqual(
+      resolveCanonicalFromSetTitleDj(
+        "Chris Lake Full",
+        "chris-lake-full",
+        ["Chris Lake Full Set Live @ Outside Lands Festival 2024"],
+      ),
+      { slug: "chris-lake", name: "Chris Lake" },
+    );
+  });
+
   it("folds Laidback Luke SELECTS onto Laidback Luke", () => {
     assert.deepEqual(
       resolveCanonicalFromSetTitleDj(

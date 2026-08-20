@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { DjList } from "@/components/DjList";
+import { DjDirectory } from "@/components/DjDirectory";
 import { VisualTeaser } from "@/components/VisualTeaser";
 import { getAtlasTeaserFaces, getDjList } from "@/lib/queries";
 import { pageMeta } from "@/lib/site";
@@ -23,7 +23,7 @@ export default async function DjsPage() {
         <h1 className="mt-1 text-3xl font-extrabold tracking-tight">DJs</h1>
         <p className="mt-2 max-w-2xl text-[14px] text-muted">
           {djs.filter((d) => d.isBrowseReady).length} artists with a handle, a
-          set, a tracklist, and artwork.
+          set, a tracklist, and artwork. Jump a letter or search (⌘K).
         </p>
         <div className="mt-5 max-w-xl">
           <VisualTeaser
@@ -42,7 +42,7 @@ export default async function DjsPage() {
         </div>
       </div>
 
-      <DjList djs={djs.filter((d) => d.isBrowseReady)} />
+      <DjDirectory djs={djs.filter((d) => d.isBrowseReady)} />
     </div>
   );
 }
