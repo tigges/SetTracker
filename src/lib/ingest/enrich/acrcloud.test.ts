@@ -4,13 +4,19 @@ import {
   compareSparseSetCandidates,
   homepageEnrichBoost,
   isUnresolvedDetectPriority,
+  isYoutubeBotWall,
+  isYoutubeIdentifyArchive,
   loadDjMagTop100RankBySlug,
   mapAcrMusicHit,
   hasRemainingAcrWork,
   planGapProbes,
   popularityRankForDjSlug,
   rankPlaybackHost,
+  skipYoutubeIdentifySampling,
+  ytDlpFailFast,
+  ytDlpSampleArgs,
   ytDlpSectionRange,
+  youtubeTitleYear,
   type SparseSetCandidate,
 } from "./acrcloud";
 
@@ -392,5 +398,79 @@ assert.equal(ytDlpSectionRange(90, 12), "*90-102");
 assert.equal(ytDlpSectionRange(0, 12), "*0-12");
 assert.equal(ytDlpSectionRange(-5, 12), "*0-12");
 assert.equal(ytDlpSectionRange(100.7, 12.2), "*100-113");
+
+// --- YouTube bot-wall / CI Identify policy ---
+assert.equal(
+  isYoutubeBotWall(
+    "ERROR: [youtube] fz-3arJT8fc: Sign in to confirm you’re not a bot. Use --cookies",
+  ),
+  true,
+);
+assert.equal(
+  isYoutubeBotWall(
+    "ERROR: [youtube] abc: Sign in to confirm you're not a bot.",
+  ),
+  true,
+);
+assert.equal(isYoutubeBotWall("HTTP Error 429: Too Many Requests"), false);
+assert.equal(isYoutubeBotWall("Requested format is not available"), false);
+
+assert.equal(youtubeTitleYear("David Guetta | Miami Ultra Music Festival 2019"), 2019);
+assert.equal(youtubeTitleYear("Above & Beyond kineticFIELD EDC LV 2026"), 2026);
+assert.equal(youtubeTitleYear("Group Therapy 690"), null);
+assert.equal(isYoutubeIdentifyArchive("Ultra 2019", 2026, 3), true);
+assert.equal(isYoutubeIdentifyArchive("EDC LV 2026", 2026, 3), false);
+assert.equal(isYoutubeIdentifyArchive("Group Therapy 690", 2026, 3), false);
+
+assert.equal(
+  skipYoutubeIdentifySampling({ ACRCLOUD_IDENTIFY_YOUTUBE: "0" }),
+  true,
+);
+assert.equal(
+  skipYoutubeIdentifySampling({
+    ACRCLOUD_IDENTIFY_YOUTUBE: "1",
+    CI: "true",
+    ACRCLOUD_FS_TOKEN: "t",
+    ACRCLOUD_FS_CONTAINER_ID: "c",
+  }),
+  false,
+);
+assert.equal(
+  skipYoutubeIdentifySampling({
+    GITHUB_ACTIONS: "true",
+    ACRCLOUD_FS_TOKEN: "t",
+    ACRCLOUD_FS_CONTAINER_ID: "c",
+  }),
+  true,
+);
+assert.equal(
+  skipYoutubeIdentifySampling({ GITHUB_ACTIONS: "true" }),
+  false,
+  "CI without File Scan still allows Identify unless IDENTIFY_YOUTUBE=0",
+);
+
+assert.equal(ytDlpFailFast({ GITHUB_ACTIONS: "true" }), true);
+assert.equal(ytDlpFailFast({ ACRCLOUD_YT_FAIL_FAST: "0", CI: "true" }), false);
+
+const failFastArgs = ytDlpSampleArgs({
+  section: "*420-432",
+  outTpl: "/tmp/clip.%(ext)s",
+  pageUrl: "https://www.youtube.com/watch?v=fz-3arJT8fc",
+  cookiePath: "/tmp/yt-cookies.txt",
+  failFast: true,
+});
+assert.ok(failFastArgs.includes("--retries"));
+assert.equal(failFastArgs[failFastArgs.indexOf("--retries") + 1], "1");
+assert.equal(failFastArgs[failFastArgs.indexOf("--extractor-retries") + 1], "1");
+assert.ok(failFastArgs.includes("--cookies"));
+
+const slowArgs = ytDlpSampleArgs({
+  section: "*0-12",
+  outTpl: "/tmp/clip.%(ext)s",
+  pageUrl: "https://www.youtube.com/watch?v=abc",
+  failFast: false,
+});
+assert.equal(slowArgs[slowArgs.indexOf("--retries") + 1], "5");
+assert.equal(slowArgs[slowArgs.indexOf("--extractor-retries") + 1], "3");
 
 console.log("acrcloud.test.ts ok");

@@ -84,15 +84,18 @@ async function runProbe(p: Probe): Promise<{
   softMatch: boolean | null;
 }> {
   const clip = await sampleClipFromYoutube(p.url, p.offsetSec, SAMPLE_SEC);
-  if (!clip) {
+  if (!clip.ok) {
     return {
       label: p.label,
       ok: false,
-      detail: "clip download failed (yt-dlp/cookies?)",
+      detail:
+        clip.reason === "bot-wall"
+          ? "YouTube bot-wall (File Scan is the CI path)"
+          : `clip download failed (${clip.reason})`,
       softMatch: null,
     };
   }
-  const res = await acrIdentify(clip);
+  const res = await acrIdentify(clip.clip);
   if (!res.ok) {
     return { label: p.label, ok: false, detail: `ERROR ${res.error}`, softMatch: null };
   }

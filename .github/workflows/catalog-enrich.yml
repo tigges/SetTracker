@@ -167,7 +167,7 @@ jobs:
             echo "ACRCLOUD_YTDLP_COOKIES=$RUNNER_TEMP/yt-cookies.txt" >> "$GITHUB_ENV"
             echo "YouTube cookies present for yt-dlp."
           else
-            echo "::notice::No ACRCLOUD_YTDLP_COOKIES secret — YT sampling may hit bot walls. Export cookies.txt from a logged-in browser and add as that secret."
+            echo "::notice::No ACRCLOUD_YTDLP_COOKIES secret. Cookies rarely help on GitHub IPs anyway — File Scanning is the CI path for YouTube."
           fi
 
       - name: ACRCloud fingerprint enrich
@@ -185,9 +185,15 @@ jobs:
           # control only hit ~64) — 70 rejected real hits; 55 is the floor.
           ACRCLOUD_MIN_SCORE: "55"
           ACRCLOUD_MIN_IDENTIFIED: "4"
-          # Prefer SC/hearthis streams; YT via yt-dlp for Top100 / festival priority.
+          # Prefer SC/hearthis streams. YouTube Identify from GHA IPs is
+          # bot-walled even with cookies — File Scanning (next step) owns YT.
           ACRCLOUD_ALLOW_YOUTUBE: "0"
           ACRCLOUD_ALLOW_YOUTUBE_PRIORITY: "1"
+          ACRCLOUD_IDENTIFY_YOUTUBE: "0"
+          ACRCLOUD_YT_FAIL_FAST: "1"
+          # So Identify can say "File Scan owns YT" in the live summary.
+          ACRCLOUD_FS_TOKEN: ${{ secrets.ACRCLOUD_FS_TOKEN }}
+          ACRCLOUD_FS_CONTAINER_ID: ${{ secrets.ACRCLOUD_FS_CONTAINER_ID }}
           # Multi-event focus (density + Top100 gaps) — not Street Parade-only.
           ACRCLOUD_EVENT_SLUGS: "street-parade,tomorrowland,ultra-miami,edc-lv,nature-one"
         run: npm run enrich:fingerprint

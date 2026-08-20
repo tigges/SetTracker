@@ -213,6 +213,11 @@ unless asked.
   **CI caveat:** GitHub Actions datacenter IPs get YouTube bot-walled ("Sign in
   to confirm you're not a bot") even WITH `ACRCLOUD_YTDLP_COOKIES`; only very
   popular videos slip through. SC/hearthis Identify is unaffected.
+  CI Identify sets `ACRCLOUD_IDENTIFY_YOUTUBE=0` so yt-dlp does not burn hours
+  on bot-walls — File Scanning is the YouTube path. A bot-wall still opens a
+  circuit (skip remaining YT Identify, fail-fast yt-dlp) and writes
+  `::notice::` / `::warning::` plus a live Job Summary table without failing
+  the job. Clip failures count toward the per-set probe cap.
 - **File Scanning (YouTube, CI-safe):** `npm run enrich:filescan`
   (`src/lib/ingest/enrich/acrFileScan.ts`; step in `catalog-enrich.yml`).
   Server-side — POST the YouTube URL to an ACRCloud **File Scanning** container;
