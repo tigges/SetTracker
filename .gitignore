@@ -54,6 +54,8 @@ yarn-error.log*
 /data/crosscheck/set-density.json
 # Pages / local snapshot of last Actions runs (never commit tokens)
 /data/crosscheck/actions-status.json
+# Local YouTube Netscape jar (never commit)
+.local/
 
 # vercel
 .vercel

@@ -131,3 +131,20 @@ export function cookieHealthNotice(h: YoutubeCookieHealth): string {
   ];
   return bits.join(" · ");
 }
+
+/** Operator next step — never includes cookie values. */
+export function cookieRefreshHint(
+  h: YoutubeCookieHealth,
+  nowSec = Math.floor(Date.now() / 1000),
+): string {
+  if (!h.present) {
+    return "On a desktop: npm run cookies:export — then gh secret set ACRCLOUD_YTDLP_COOKIES < .local/yt-cookies.txt";
+  }
+  if (h.stale) return `Refresh now — ${h.staleReason}`;
+  if (h.soonestExpirySec != null) {
+    const days = Math.floor((h.soonestExpirySec - nowSec) / 86400);
+    if (days <= 7) return `Refresh this week — persistent cookies expire in ~${days} day(s)`;
+    return `Jar looks logged-in · next refresh in ~${days} days (or after a diagnose bot-wall)`;
+  }
+  return "Jar looks logged-in";
+}

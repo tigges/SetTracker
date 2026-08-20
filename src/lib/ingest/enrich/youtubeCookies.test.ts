@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import {
   cookieHealthNotice,
+  cookieRefreshHint,
   inspectYoutubeCookies,
 } from "./youtubeCookies";
 
@@ -58,5 +59,9 @@ const sparse = inspectYoutubeCookies(
 );
 assert.equal(sparse.stale, true);
 assert.match(sparse.staleReason, /too few/);
+
+assert.match(cookieRefreshHint(empty, now), /cookies:export/);
+assert.match(cookieRefreshHint(expired, now), /Refresh now/);
+assert.match(cookieRefreshHint(loggedIn, now), /next refresh/);
 
 console.log("youtubeCookies.test.ts ok");

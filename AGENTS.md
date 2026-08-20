@@ -222,8 +222,10 @@ unless asked.
   logged-in desktop browser). The device that starts the workflow does not
   matter — `ubuntu-latest` is the IP YouTube sees. Cookies do not make GHA
   YouTube-steady; refresh a throwaway account’s jar when `/stats` Last enrich
-  marks it stale. Identify + File Scan totals land on `/stats` after the next
-  Pages ship (DB snapshot + last enrich/deep/Pages conclusions).
+  marks it stale (`npm run cookies:export` on a desktop, then
+  `gh secret set ACRCLOUD_YTDLP_COOKIES < .local/yt-cookies.txt`). Identify +
+  File Scan totals land on `/stats` after the next Pages ship (DB snapshot +
+  last enrich/deep/Pages conclusions).
 - **File Scanning (YouTube, CI-safe):** `npm run enrich:filescan`
   (`src/lib/ingest/enrich/acrFileScan.ts`; step in `catalog-enrich.yml`).
   Server-side — POST the YouTube URL to an ACRCloud **File Scanning** container;

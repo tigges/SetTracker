@@ -5,6 +5,7 @@
 import { readFileSync } from "node:fs";
 import {
   cookieHealthNotice,
+  cookieRefreshHint,
   inspectYoutubeCookies,
 } from "../src/lib/ingest/enrich/youtubeCookies";
 
@@ -19,6 +20,7 @@ const text = path ? readFileSync(path, "utf8") : "";
 const health = inspectYoutubeCookies(text);
 const notice = cookieHealthNotice(health);
 console.log(`[yt-cookies] ${notice}`);
+console.log(`[yt-cookies] ${cookieRefreshHint(health)}`);
 if (health.stale) {
   console.log(`::warning title=YouTube cookies::${notice}`);
 } else {

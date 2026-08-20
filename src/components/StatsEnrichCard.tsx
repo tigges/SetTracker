@@ -4,6 +4,7 @@ import {
   enrichOutcomeLabel,
 } from "@/lib/actionsStatus";
 import type { EnrichRunReport } from "@/lib/ingest/enrich/enrichRunReport";
+import { cookieRefreshHint } from "@/lib/ingest/enrich/youtubeCookies";
 
 function fmtWhen(iso: string | undefined): string {
   if (!iso) return "—";
@@ -98,9 +99,8 @@ export function StatsEnrichCard({
 
       {cookies ? (
         <p className={`mono mt-1 text-[11px] ${cookies.stale ? "text-amber" : "text-muted2"}`}>
-          Cookies {cookies.present ? "present" : "missing"}
-          {cookies.stale && cookies.staleReason ? ` — ${cookies.staleReason}` : " · jar looks logged-in"}
-          {". Cookies are a GitHub secret, not a machine. GHA IPs still bot-wall YouTube — File Scan is the CI path."}
+          {cookieRefreshHint(cookies)}
+          {" · GitHub-hosted Actions still bot-wall YouTube — File Scan is the CI path."}
         </p>
       ) : null}
 

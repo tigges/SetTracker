@@ -217,26 +217,24 @@ Our submit forces `engine=1` (audio fingerprint; override `ACRCLOUD_FS_ENGINE`).
 
 **YouTube cookies** (Identify / diagnose only — File Scanning does not use them):
 
-- The jar is a **GitHub Actions secret**, not a machine. Export Netscape
-  `cookies.txt` from any logged-in desktop browser (`yt-dlp --cookies-from-browser chrome`
-  or a cookies.txt extension that includes HttpOnly), paste the whole file
-  (including the `# Netscape HTTP Cookie File` header) into
-  `ACRCLOUD_YTDLP_COOKIES`. You can start Catalog enrich from a phone, iPad,
-  or cron — the job still runs on `ubuntu-latest`. The device that clicks
-  **Run workflow** does not need the cookies.
-- Cookies **are** portable across your devices for *export*. They are **not**
-  a bypass for GitHub’s datacenter IPs. YouTube still returns “Sign in to
-  confirm you’re not a bot” from GHA even with a fresh jar. **File Scanning**
-  is the CI YouTube path.
-- Steadiness: use a **dedicated throwaway Google account** (not your main
-  login). Refresh the secret when `/stats` Last enrich says the jar is stale,
-  after `catalog-acr-diagnose` bot-walls, or about weekly. Include
-  `LOGIN_INFO`, `SAPISID`, `__Secure-1PSID`, `__Secure-1PSIDTS`. Session-only
-  rows (expiry `0`) die when the browser closes. Using a personal account
-  from GHA IPs can log that account out.
-- To actually raise yt-dlp hit-rate, run Identify on a **self-hosted runner
-  with a residential IP** and `--cookies-from-browser` on that box. GitHub-hosted
-  runners will not become “steady” by refreshing cookies harder.
+Cookies are a **login session**, stored as the GitHub secret
+`ACRCLOUD_YTDLP_COOKIES`. You can start enrich from any device. The job still
+runs on GitHub’s computers.
+
+1. **Throwaway Google account** — make a dummy Gmail, log into YouTube with it
+   in Chrome (or Firefox) on a desktop. Do not export cookies from your main
+   Google login. GitHub’s IP looks like a stolen session; Google may lock that
+   account. If the dummy account dies, your real Gmail is fine.
+2. **Refresh the jar** — cookies expire like a milk carton. On that desktop:
+   `npm run cookies:export` then `gh secret set ACRCLOUD_YTDLP_COOKIES < .local/yt-cookies.txt`.
+   Inspect without printing values: `npm run cookies:inspect -- --path .local/yt-cookies.txt`.
+   Refresh when `/stats` Last enrich says stale, after a diagnose bot-wall, or
+   about weekly. The file must include the Netscape header and hidden cookies
+   (`LOGIN_INFO`, `SAPISID`, `__Secure-1PSID`). iPad/Safari export is a poor fit.
+3. **Home runner (optional)** — GitHub-hosted machines live in a building
+   YouTube already distrusts. Fresh cookies will not fix that. File Scanning
+   is the CI YouTube path. Only add a self-hosted runner on home internet if
+   you want yt-dlp Identify itself to succeed.
 
 **Catalog junk** (verify-urls / Pages): festival stages (`Freedom Stage`,
 `Mainstage`) fold onto the parent festival; radio/session hosts become
