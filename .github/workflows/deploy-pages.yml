@@ -45,6 +45,8 @@ permissions:
   contents: read
   pages: write
   id-token: write
+  # /stats last-run chip — list enrich / deep / Pages without writing anything.
+  actions: read
 
 concurrency:
   group: pages
@@ -93,6 +95,7 @@ jobs:
           path: prisma/dev.db
           key: setradar-db-${{ github.run_id }}
           restore-keys: |
+            setradar-db-${{ github.run_id }}-
             setradar-db-
 
       - name: Require restored catalog
@@ -206,6 +209,7 @@ jobs:
           # Footer counter — bump package.json version on every release.
           NEXT_PUBLIC_APP_VERSION: ${{ steps.app_version.outputs.version }}
           NEXT_PUBLIC_GIT_SHA: ${{ github.sha }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npm run build
 
       - name: Verify export is the app (not README)

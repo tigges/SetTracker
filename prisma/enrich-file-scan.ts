@@ -8,6 +8,10 @@
 import { appendFileSync } from "node:fs";
 import { PrismaClient } from "@prisma/client";
 import { enrichYoutubeSetsWithFileScan } from "../src/lib/ingest/enrich/acrFileScan";
+import {
+  githubEnrichContext,
+  mergeEnrichRunReport,
+} from "../src/lib/ingest/enrich/enrichRunReport";
 
 const prisma = new PrismaClient();
 
@@ -37,6 +41,20 @@ async function main() {
         "",
       ].join("\n"),
     );
+  }
+  try {
+    await mergeEnrichRunReport(prisma, {
+      github: githubEnrichContext(),
+      filescan: {
+        enabled: stats.enabled,
+        submitted: stats.submitted,
+        ready: stats.ready,
+        identified: stats.identified,
+        skipped: stats.skipped,
+      },
+    });
+  } catch (err) {
+    console.warn("[acr-fs] enrich report write failed (non-fatal):", err);
   }
 }
 

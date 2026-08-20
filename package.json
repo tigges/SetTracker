@@ -1,6 +1,6 @@
 {
   "name": "setradar",
-  "version": "0.2.219",
+  "version": "0.2.220",
   "private": true,
   "prisma": {
     "seed": "tsx prisma/seed.ts"
@@ -9,7 +9,7 @@
     "dev": "next dev",
     "predev": "tsx scripts/write-search-index.ts",
     "build": "next build",
-    "prebuild": "tsx scripts/write-search-index.ts && tsx --env-file=.env scripts/export-tracks.ts --public && tsx --env-file=.env scripts/export-entities.ts --public",
+    "prebuild": "tsx scripts/write-search-index.ts && tsx --env-file=.env scripts/export-tracks.ts --public && tsx --env-file=.env scripts/export-entities.ts --public && tsx scripts/write-actions-status.ts",
     "start": "next start",
     "lint": "eslint",
     "db:migrate": "prisma migrate dev",
@@ -26,6 +26,8 @@
     "thumbs": "tsx prisma/thumbs.ts",
     "enrich:fingerprint": "tsx prisma/enrich-fingerprint.ts",
     "enrich:filescan": "tsx prisma/enrich-file-scan.ts",
+    "cookies:inspect": "tsx scripts/inspect-yt-cookies.ts",
+    "cookies:export": "tsx scripts/export-yt-cookies.ts",
     "graduate-roster": "tsx prisma/graduate-roster.ts",
     "normalize-genres": "tsx prisma/normalize-genres.ts",
     "crosscheck:beatportal-house-2025": "tsx scripts/crosscheck-beatportal-house-2025.ts",

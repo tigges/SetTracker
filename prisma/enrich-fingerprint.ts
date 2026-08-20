@@ -8,6 +8,11 @@
 import { appendFileSync } from "node:fs";
 import { PrismaClient } from "@prisma/client";
 import { enrichSparseSetsWithAcrCloud } from "../src/lib/ingest/enrich/acrcloud";
+import {
+  githubEnrichContext,
+  inspectCookiesFromEnv,
+  mergeEnrichRunReport,
+} from "../src/lib/ingest/enrich/enrichRunReport";
 
 const prisma = new PrismaClient();
 
@@ -18,20 +23,31 @@ function writeStepSummary(stats: {
   identified: number;
   unresolved: number;
   skipped: string;
+  clipFails: number;
+  setsProbed: number;
+  youtubeBotWalls: number;
+  youtubeSkipped: number;
 }): void {
   const path = process.env.GITHUB_STEP_SUMMARY;
   if (!path) return;
   const lines = [
-    "## ACRCloud fingerprint enrich",
+    "",
+    "## ACRCloud Identify totals",
     "",
     `| Field | Value |`,
     `| --- | --- |`,
     `| enabled | ${stats.enabled} |`,
     `| candidates | ${stats.candidates} |`,
-    `| probed | ${stats.probed} |`,
+    `| sets probed | ${stats.setsProbed} |`,
+    `| ACR probes | ${stats.probed} |`,
     `| identified | ${stats.identified} |`,
-    `| unresolved | ${stats.unresolved} |`,
+    `| unresolved / weak | ${stats.unresolved} |`,
+    `| clip fails | ${stats.clipFails} |`,
+    `| YouTube bot-walls | ${stats.youtubeBotWalls} |`,
+    `| YouTube skipped | ${stats.youtubeSkipped} |`,
     `| skipped | ${stats.skipped || "—"} |`,
+    "",
+    "YouTube Identify from GitHub IPs is unreliable even with cookies. File Scanning (next step) is the CI path for YouTube. This step does **not** fail the job on bot-walls.",
     "",
   ];
   if (!stats.enabled && /missing ACRCLOUD/i.test(stats.skipped)) {
@@ -55,10 +71,40 @@ async function main() {
     }
   } else if (stats.enabled) {
     console.log(
-      `[acrcloud] identified=${stats.identified} unresolved=${stats.unresolved} probed=${stats.probed}`,
+      `[acrcloud] identified=${stats.identified} unresolved=${stats.unresolved} probed=${stats.probed} ` +
+        `clipFails=${stats.clipFails} ytBotWalls=${stats.youtubeBotWalls} ytSkipped=${stats.youtubeSkipped}`,
     );
+    if (stats.youtubeBotWalls > 0) {
+      console.log(
+        `::warning title=ACR Identify::${stats.youtubeBotWalls} YouTube bot-wall(s), ${stats.youtubeSkipped} YouTube set(s) skipped. File Scan still runs — this step did not fail.`,
+      );
+    } else {
+      console.log(
+        `::notice title=ACR Identify::done sets=${stats.setsProbed} hits=${stats.identified} probed=${stats.probed} clipFails=${stats.clipFails} ytSkipped=${stats.youtubeSkipped}`,
+      );
+    }
   }
   writeStepSummary(stats);
+  try {
+    await mergeEnrichRunReport(prisma, {
+      github: githubEnrichContext(),
+      cookies: inspectCookiesFromEnv(),
+      identify: {
+        enabled: stats.enabled,
+        candidates: stats.candidates,
+        setsProbed: stats.setsProbed,
+        probed: stats.probed,
+        identified: stats.identified,
+        unresolved: stats.unresolved,
+        clipFails: stats.clipFails,
+        youtubeBotWalls: stats.youtubeBotWalls,
+        youtubeSkipped: stats.youtubeSkipped,
+        skipped: stats.skipped,
+      },
+    });
+  } catch (err) {
+    console.warn("[acrcloud] enrich report write failed (non-fatal):", err);
+  }
 }
 
 main()

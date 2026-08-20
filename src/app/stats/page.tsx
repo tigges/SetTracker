@@ -6,9 +6,13 @@ import {
   LeftoverHostQueue,
   WeakSiteQueue,
 } from "@/components/StatsPlaybook";
+import { StatsEnrichCard } from "@/components/StatsEnrichCard";
 import { StatsHealthCard, StatsMeter } from "@/components/StatsHealthCard";
+import { loadActionsStatusFile } from "@/lib/actionsStatus";
 import { getCatalogStats } from "@/lib/catalogStats";
+import { prisma } from "@/lib/db";
 import { loadDjMagTop100RankBySlug } from "@/lib/djmagTop100";
+import { loadEnrichRunReport } from "@/lib/ingest/enrich/enrichRunReport";
 import { pageMeta } from "@/lib/site";
 import { getStatsHealth } from "@/lib/statsHealthData";
 
@@ -147,7 +151,12 @@ function PlaceGapQueue({
 }
 
 export default async function StatsPage() {
-  const [s, health] = await Promise.all([getCatalogStats(), getStatsHealth()]);
+  const [s, health, enrichReport] = await Promise.all([
+    getCatalogStats(),
+    getStatsHealth(),
+    loadEnrichRunReport(prisma),
+  ]);
+  const actionsStatus = loadActionsStatusFile();
   const top100 = loadDjMagTop100RankBySlug();
   const starFirst = (slug: string) => (top100.has(slug) ? 0 : 1);
   const cueTotal = health.sets.identified.reduce((n, row) => n + row.count, 0);
@@ -173,6 +182,8 @@ export default async function StatsPage() {
           {" · last ship, not a live crawl"}
         </p>
       </div>
+
+      <StatsEnrichCard report={enrichReport} actions={actionsStatus} />
 
       <StatsHealthCard
         id="djs"

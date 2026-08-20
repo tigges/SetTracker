@@ -52,6 +52,10 @@ yarn-error.log*
 /data/venue-candidates.json
 # local / CI density audit (artifact only; committed snapshot is set-density-live.json)
 /data/crosscheck/set-density.json
+# Pages / local snapshot of last Actions runs (never commit tokens)
+/data/crosscheck/actions-status.json
+# Local YouTube Netscape jar (never commit)
+.local/
 
 # vercel
 .vercel

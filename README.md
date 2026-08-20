@@ -141,10 +141,11 @@ catalog DB cache and dispatch it:
 - **6h cron / manual `deep`** (`catalog-deep.yml`) — crawl → save DB cache → dispatch **enrich `full`** (not Pages; avoids a DB-cache race)
 - **`catalog-enrich.yml`** — thumbs/MB + ACRCloud + File Scanning → save DB cache → dispatch deploy
 
-**Enrich modes** (`catalog-enrich.yml`): `full` (weekly cron, after deep, or `data/enrich-full-request`; thumbs + MusicBrainz
-+ deep ACR 40×20 + filescan + LLM), `acr` (priority ACR only, no thumbs, 15×12; also the
-`data/enrich-request` push default), `smoke` (tiny ACR check 4×5 — verify
-creds/cookies). Each mode runs in its own concurrency lane. Do not start deep and enrich at the same time.
+**Enrich modes** (`catalog-enrich.yml`): `full` (weekly / `data/enrich-full-request`;
+null thumbs + MB + Identify 20×12 + File Scan 12 + 80 ISRCs), `acr` (priority
+Identify 12×8 + File Scan 8, no thumbs/LLM; `data/enrich-request`), `smoke`
+(4×5). Each expensive step times out and checkpoints the DB so a 6h GitHub
+cancel cannot throw away Identify hits. Do not start deep and enrich at the same time.
 
 ### ACRCloud fingerprint enrich
 
@@ -166,7 +167,7 @@ the same way. Writes `Played` rows with `provenance: fingerprint` into
 | `ACRCLOUD_ALLOW_YOUTUBE=1` | Allow all YT sets (default off) |
 | `ACRCLOUD_ALLOW_YOUTUBE_PRIORITY=1` | YT for Top20 / festival sparse (default on) |
 | `ACRCLOUD_YT_DLP=0` | Disable yt-dlp YouTube sampling |
-| `ACRCLOUD_YTDLP_COOKIES` | Path to Netscape cookies.txt (bot wall bypass) |
+| `ACRCLOUD_YTDLP_COOKIES` | Path to Netscape cookies.txt (optional; GHA IPs still bot-wall) |
 
 #### YouTube via File Scanning (recommended for CI)
 
@@ -205,7 +206,7 @@ Our submit forces `engine=1` (audio fingerprint; override `ACRCLOUD_FS_ENGINE`).
 | `ACRCLOUD_HOST` | `identify-eu-west-1.acrcloud.com` |
 | `ACRCLOUD_ACCESS_KEY` | project access key |
 | `ACRCLOUD_ACCESS_SECRET` | project access secret |
-| `ACRCLOUD_YTDLP_COOKIES` | optional Netscape `cookies.txt` for YouTube |
+| `ACRCLOUD_YTDLP_COOKIES` | optional Netscape `cookies.txt` (portable secret — see below) |
 | `ACRCLOUD_FS_TOKEN` | File Scanning Console API token (YouTube) |
 | `ACRCLOUD_FS_CONTAINER_ID` | File Scanning container id |
 | `ACRCLOUD_FS_REGION` | optional container region (default `eu-west-1`) |
@@ -214,6 +215,27 @@ Our submit forces `engine=1` (audio fingerprint; override `ACRCLOUD_FS_ENGINE`).
 | `GEMINI_API_KEY` | Gemini **API** key from [AI Studio](https://aistudio.google.com/apikey) (preferred — Search grounding). Aliases: `GEMINI_AGENT_API`, `GEMINI`, `GOOGLE_API_KEY` |
 | `TRACKRADAR_API_KEY` | TrackRadar MCP bearer (`tr_live_…`) for `search_track` / mix analyze |
 | `AUDD_API_TOKEN` | optional AudD recognize (`AUDD_ANALYZE=1`); `findLyrics` needs no key |
+
+**YouTube cookies** (Identify / diagnose only — File Scanning does not use them):
+
+Cookies are a **login session**, stored as the GitHub secret
+`ACRCLOUD_YTDLP_COOKIES`. You can start enrich from any device. The job still
+runs on GitHub’s computers.
+
+1. **Throwaway Google account** — make a dummy Gmail, log into YouTube with it
+   in Chrome (or Firefox) on a desktop. Do not export cookies from your main
+   Google login. GitHub’s IP looks like a stolen session; Google may lock that
+   account. If the dummy account dies, your real Gmail is fine.
+2. **Refresh the jar** — cookies expire like a milk carton. On that desktop:
+   `npm run cookies:export` then `gh secret set ACRCLOUD_YTDLP_COOKIES < .local/yt-cookies.txt`.
+   Inspect without printing values: `npm run cookies:inspect -- --path .local/yt-cookies.txt`.
+   Refresh when `/stats` Last enrich says stale, after a diagnose bot-wall, or
+   about weekly. The file must include the Netscape header and hidden cookies
+   (`LOGIN_INFO`, `SAPISID`, `__Secure-1PSID`). iPad/Safari export is a poor fit.
+3. **Home runner (optional)** — GitHub-hosted machines live in a building
+   YouTube already distrusts. Fresh cookies will not fix that. File Scanning
+   is the CI YouTube path. Only add a self-hosted runner on home internet if
+   you want yt-dlp Identify itself to succeed.
 
 **Catalog junk** (verify-urls / Pages): festival stages (`Freedom Stage`,
 `Mainstage`) fold onto the parent festival; radio/session hosts become

@@ -39,6 +39,9 @@
  *     are cut with yt-dlp --download-sections, then Identify as usual.
  *   ACRCLOUD_YTDLP_COOKIES  path to Netscape cookies.txt (optional; needed when
  *     YouTube returns “Sign in to confirm you’re not a bot”).
+ *   ACRCLOUD_IDENTIFY_YOUTUBE=0  skip yt-dlp Identify (CI default when File
+ *     Scan secrets are present). File Scanning still fingerprints YouTube.
+ *   ACRCLOUD_YT_FAIL_FAST=1      1 extractor retry + short timeout (CI default)
  *   ACRCLOUD_DRY_RUN=1      resolve + probe but do not write DB
  *
  * Hook: `npm run enrich:fingerprint` from catalog-enrich.yml (after thumbs/MB).
@@ -46,6 +49,7 @@
 
 import { createHmac } from "node:crypto";
 import { execFile } from "node:child_process";
+import { appendFileSync } from "node:fs";
 import { mkdtemp, readFile, readdir, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -118,7 +122,45 @@ export type AcrEnrichStats = {
   identified: number;
   unresolved: number;
   skipped: string;
+  /** yt-dlp clips that failed (bot-wall, empty, timeout). */
+  clipFails: number;
+  /** Sets that actually ran Identify (SC/hearthis, or a rare YT clip). */
+  setsProbed: number;
+  /** YouTube videos that returned the CI bot-wall. */
+  youtubeBotWalls: number;
+  /** YouTube candidates skipped (circuit, File Scan owns YT, archive title). */
+  youtubeSkipped: number;
 };
+
+export type ClipSampleResult =
+  | { ok: true; clip: Buffer }
+  | { ok: false; reason: "bot-wall" | "unavailable" | "empty" };
+
+export type AcrSetEnrichResult = {
+  probed: number;
+  identified: number;
+  unresolved: number;
+  clipFails: number;
+  botWall: boolean;
+  skipReason: string;
+};
+
+function emptyStats(
+  partial: Partial<AcrEnrichStats> &
+    Pick<AcrEnrichStats, "enabled" | "skipped">,
+): AcrEnrichStats {
+  return {
+    candidates: 0,
+    probed: 0,
+    identified: 0,
+    unresolved: 0,
+    clipFails: 0,
+    setsProbed: 0,
+    youtubeBotWalls: 0,
+    youtubeSkipped: 0,
+    ...partial,
+  };
+}
 
 export type AcrEnrichOptions = {
   setLimit?: number;
@@ -294,6 +336,14 @@ function hasCredentials(): boolean {
 function numEnv(name: string, fallback: number): number {
   const n = Number(process.env[name]);
   return Number.isFinite(n) && n > 0 ? n : fallback;
+}
+
+/** Wall-clock Identify budget (ms). 0 = no deadline. */
+export function identifyBudgetMs(
+  env: Record<string, string | undefined> = process.env,
+): number {
+  const n = Number(env.ACRCLOUD_DEADLINE_MS);
+  return Number.isFinite(n) && n > 0 ? Math.floor(n) : 0;
 }
 
 function boolEnv(name: string): boolean {
@@ -511,6 +561,135 @@ export function ytDlpSectionRange(
   return `*${start}-${end}`;
 }
 
+type EnvMap = Record<string, string | undefined>;
+
+/** True on GitHub Actions / generic CI. */
+export function isGithubActions(env: EnvMap = process.env): boolean {
+  return env.GITHUB_ACTIONS === "true" || env.CI === "true";
+}
+
+/**
+ * Skip yt-dlp Identify for YouTube. File Scanning is the CI-safe path.
+ * Explicit ACRCLOUD_IDENTIFY_YOUTUBE=0/1 wins; otherwise CI + File Scan secrets.
+ */
+export function skipYoutubeIdentifySampling(env: EnvMap = process.env): boolean {
+  const explicit = (env.ACRCLOUD_IDENTIFY_YOUTUBE || "").trim();
+  if (explicit === "0") return true;
+  if (explicit === "1") return false;
+  const fsReady =
+    Boolean((env.ACRCLOUD_FS_TOKEN || "").trim()) &&
+    Boolean((env.ACRCLOUD_FS_CONTAINER_ID || "").trim());
+  return isGithubActions(env) && fsReady;
+}
+
+/** Fail-fast yt-dlp retries/timeout. Default on in CI. */
+export function ytDlpFailFast(env: EnvMap = process.env): boolean {
+  if (env.ACRCLOUD_YT_FAIL_FAST === "1") return true;
+  if (env.ACRCLOUD_YT_FAIL_FAST === "0") return false;
+  return isGithubActions(env);
+}
+
+const YT_BOT_WALL_RE =
+  /sign in to confirm you.?re not a bot|confirm you.?re not a bot/i;
+
+/** YouTube bot-wall / consent challenge in yt-dlp stderr. */
+export function isYoutubeBotWall(text: string): boolean {
+  return YT_BOT_WALL_RE.test(text);
+}
+
+/** Latest 19xx/20xx year in a set title, if any. */
+export function youtubeTitleYear(title: string | undefined): number | null {
+  if (!title) return null;
+  const years = [...title.matchAll(/\b((?:19|20)\d{2})\b/g)].map((m) =>
+    Number(m[1]),
+  );
+  if (years.length === 0) return null;
+  return Math.max(...years);
+}
+
+/**
+ * Archive-titled YouTube (year ≤ now − 3) is a poor Identify target from CI
+ * IPs. File Scanning still fingerprints those URLs.
+ */
+export function isYoutubeIdentifyArchive(
+  title: string | undefined,
+  nowYear = new Date().getFullYear(),
+  minAgeYears = 3,
+): boolean {
+  const y = youtubeTitleYear(title);
+  return y != null && y <= nowYear - minAgeYears;
+}
+
+export function execErrorText(err: unknown): string {
+  if (!err || typeof err !== "object") return String(err);
+  const e = err as { message?: string; stderr?: unknown; stdout?: unknown };
+  const parts = [e.message, stringifyExecIo(e.stderr), stringifyExecIo(e.stdout)];
+  return parts.filter(Boolean).join("\n");
+}
+
+function stringifyExecIo(v: unknown): string {
+  if (v == null) return "";
+  if (typeof v === "string") return v;
+  if (Buffer.isBuffer(v)) return v.toString("utf8");
+  return String(v);
+}
+
+/** yt-dlp argv for a 12s Identify clip (no full download). */
+export function ytDlpSampleArgs(opts: {
+  section: string;
+  outTpl: string;
+  pageUrl: string;
+  cookiePath?: string;
+  playerClients?: string;
+  failFast?: boolean;
+  sleepRequests?: string;
+}): string[] {
+  const retries = opts.failFast ? "1" : "5";
+  const extractorRetries = opts.failFast ? "1" : "3";
+  const args = [
+    "--no-playlist",
+    "--no-warnings",
+    "-f",
+    "bestaudio/best",
+    "--download-sections",
+    opts.section,
+    "--force-keyframes-at-cuts",
+    "--retries",
+    retries,
+    "--fragment-retries",
+    retries,
+    "--extractor-retries",
+    extractorRetries,
+    "--sleep-requests",
+    opts.sleepRequests || (opts.failFast ? "0.5" : "1.5"),
+    "-x",
+    "--audio-format",
+    "mp3",
+    "--audio-quality",
+    "5",
+    "-o",
+    opts.outTpl,
+  ];
+  if (opts.playerClients) {
+    args.push("--extractor-args", `youtube:player_client=${opts.playerClients}`);
+  }
+  if (opts.cookiePath) {
+    args.push("--cookies", opts.cookiePath);
+  }
+  args.push(opts.pageUrl);
+  return args;
+}
+
+function appendIdentifySummary(lines: string[]): void {
+  const path = process.env.GITHUB_STEP_SUMMARY;
+  if (!path) return;
+  try {
+    appendFileSync(path, `${lines.join("\n")}\n`);
+  } catch {
+    // Visibility only — never fail the enrich.
+  }
+}
+
 /**
  * Cut a short mono mp3 from a YouTube watch URL via yt-dlp (+ ffmpeg post).
  * Uses --download-sections so we never pull the full playback.
@@ -519,10 +698,10 @@ export async function sampleClipFromYoutube(
   pageUrl: string,
   offsetSec: number,
   sampleSec: number,
-): Promise<Buffer | null> {
+): Promise<ClipSampleResult> {
   if (!(await ytDlpAvailable())) {
     console.warn("[acrcloud] yt-dlp not available — cannot sample YouTube");
-    return null;
+    return { ok: false, reason: "unavailable" };
   }
   const dir = await mkdtemp(join(tmpdir(), "setradar-acr-yt-"));
   const outTpl = join(dir, "clip.%(ext)s");
@@ -531,45 +710,24 @@ export async function sampleClipFromYoutube(
   // Retries + request pacing help with transient throttling. NOTE: YouTube
   // bot-walls ("Sign in to confirm you're not a bot") are driven mainly by the
   // caller IP — GitHub Actions datacenter IPs get blocked even WITH valid
-  // cookies, so CI YouTube sampling is unreliable. Prefer running from a
-  // residential IP, or use ACRCloud File Scanning (server-side fetch).
+  // cookies, so CI YouTube sampling is unreliable. Prefer File Scanning.
   // player_client rotation is opt-in only (some clients break format
   // selection, e.g. web_safari → "Requested format is not available").
   const playerClients = (process.env.ACRCLOUD_YT_PLAYER_CLIENTS || "").trim();
-  const args = [
-    "--no-playlist",
-    "--no-warnings",
-    "-f",
-    "bestaudio/best",
-    "--download-sections",
+  const failFast = ytDlpFailFast();
+  const args = ytDlpSampleArgs({
     section,
-    "--force-keyframes-at-cuts",
-    "--retries",
-    "5",
-    "--fragment-retries",
-    "5",
-    "--extractor-retries",
-    "3",
-    "--sleep-requests",
-    process.env.ACRCLOUD_YT_SLEEP_REQUESTS || "1.5",
-    "-x",
-    "--audio-format",
-    "mp3",
-    "--audio-quality",
-    "5",
-    "-o",
     outTpl,
-  ];
-  if (playerClients) {
-    args.push("--extractor-args", `youtube:player_client=${playerClients}`);
-  }
-  if (cookiePath) {
-    args.push("--cookies", cookiePath);
-  }
-  args.push(pageUrl);
+    pageUrl,
+    cookiePath: cookiePath || undefined,
+    playerClients: playerClients || undefined,
+    failFast,
+    sleepRequests: process.env.ACRCLOUD_YT_SLEEP_REQUESTS,
+  });
+  const timeoutMs = failFast ? 45_000 : 180_000;
   try {
     await execFileAsync("yt-dlp", args, {
-      timeout: 180_000,
+      timeout: timeoutMs,
       maxBuffer: 8 * 1024 * 1024,
     });
     const files = await readdir(dir);
@@ -578,17 +736,19 @@ export async function sampleClipFromYoutube(
       console.warn(
         `[acrcloud] yt-dlp produced no mp3 @${offsetSec}s for ${pageUrl}`,
       );
-      return null;
+      return { ok: false, reason: "empty" };
     }
     const buf = await readFile(join(dir, mp3));
-    if (buf.length < 1000) return null;
-    return buf;
+    if (buf.length < 1000) return { ok: false, reason: "empty" };
+    return { ok: true, clip: buf };
   } catch (err) {
+    const text = execErrorText(err);
+    const botWall = isYoutubeBotWall(text);
     console.warn(
-      `[acrcloud] yt-dlp sample @${offsetSec}s failed:`,
+      `[acrcloud] yt-dlp sample @${offsetSec}s failed${botWall ? " (bot-wall)" : ""}:`,
       err instanceof Error ? err.message : err,
     );
-    return null;
+    return { ok: false, reason: botWall ? "bot-wall" : "unavailable" };
   } finally {
     await rm(dir, { recursive: true, force: true }).catch(() => {});
   }
@@ -600,12 +760,14 @@ export async function sampleClipForCandidate(
   streamUrl: string | null,
   offsetSec: number,
   sampleSec: number,
-): Promise<Buffer | null> {
+): Promise<ClipSampleResult> {
   if (candidate.host === "youtube") {
     return sampleClipFromYoutube(candidate.playbackUrl, offsetSec, sampleSec);
   }
-  if (!streamUrl) return null;
-  return sampleClipFromStream(streamUrl, offsetSec, sampleSec);
+  if (!streamUrl) return { ok: false, reason: "unavailable" };
+  const clip = await sampleClipFromStream(streamUrl, offsetSec, sampleSec);
+  if (!clip) return { ok: false, reason: "empty" };
+  return { ok: true, clip };
 }
 
 async function resolveSoundCloudStream(
@@ -1163,7 +1325,15 @@ async function enrichOneSet(
       | "maxProbesPerSet"
     >
   >,
-): Promise<{ probed: number; identified: number; unresolved: number }> {
+): Promise<AcrSetEnrichResult> {
+  const empty: AcrSetEnrichResult = {
+    probed: 0,
+    identified: 0,
+    unresolved: 0,
+    clipFails: 0,
+    botWall: false,
+    skipReason: "",
+  };
   // YouTube: selection already applied allow/priority policy. Clips come from
   // yt-dlp (no progressive stream URL). SC/hearthis still need a stream.
   let streamUrl: string | null = null;
@@ -1172,7 +1342,7 @@ async function enrichOneSet(
       console.log(
         `[acrcloud] skip ${candidate.slug}: YouTube needs yt-dlp on PATH`,
       );
-      return { probed: 0, identified: 0, unresolved: 0 };
+      return { ...empty, skipReason: "yt-dlp missing" };
     }
   } else {
     const stream = await resolvePlaybackStream(candidate.playbackUrl, {
@@ -1182,7 +1352,7 @@ async function enrichOneSet(
       console.log(
         `[acrcloud] skip ${candidate.slug}: no stream (${candidate.host})`,
       );
-      return { probed: 0, identified: 0, unresolved: 0 };
+      return { ...empty, skipReason: "no stream" };
     }
     streamUrl = stream.streamUrl;
   }
@@ -1206,7 +1376,7 @@ async function enrichOneSet(
       },
     },
   });
-  if (!set) return { probed: 0, identified: 0, unresolved: 0 };
+  if (!set) return empty;
 
   const marks: ExistingPlayMark[] = set.plays.map((p) => ({
     timestamp: p.timestamp,
@@ -1227,6 +1397,36 @@ async function enrichOneSet(
   let probed = 0;
   let identified = 0;
   let unresolved = 0;
+  let clipFails = 0;
+  let clipAttempts = 0;
+  let consecutiveFails = 0;
+  let botWall = false;
+
+  const takeClip = async (offsetSec: number): Promise<Buffer | null> => {
+    if (botWall) return null;
+    if (clipAttempts >= opts.maxProbesPerSet) return null;
+    if (consecutiveFails >= 3) return null;
+    clipAttempts += 1;
+    const sample = await sampleClipForCandidate(
+      candidate,
+      streamUrl,
+      offsetSec,
+      opts.sampleSec,
+    );
+    if (sample.ok) {
+      consecutiveFails = 0;
+      return sample.clip;
+    }
+    clipFails += 1;
+    consecutiveFails += 1;
+    if (sample.reason === "bot-wall") {
+      botWall = true;
+      console.warn(
+        `[acrcloud] YouTube bot-wall on ${candidate.slug} — skip remaining probes for this set`,
+      );
+    }
+    return null;
+  };
 
   // 1) Resolve existing unresolved_id cues at their timestamps (Top 100 path).
   const unresolvedPlays = set.plays
@@ -1235,14 +1435,12 @@ async function enrichOneSet(
     .sort((a, b) => a.timestamp - b.timestamp)
     .slice(0, 8);
   for (const play of unresolvedPlays) {
-    if (probed >= opts.maxProbesPerSet) break;
-    const clip = await sampleClipForCandidate(
-      candidate,
-      streamUrl,
-      play.timestamp,
-      opts.sampleSec,
-    );
-    if (!clip) continue;
+    if (botWall || clipAttempts >= opts.maxProbesPerSet) break;
+    const clip = await takeClip(play.timestamp);
+    if (!clip) {
+      if (botWall) break;
+      continue;
+    }
     probed += 1;
     const result = await acrIdentify(clip);
     if (!result.ok) {
@@ -1328,9 +1526,16 @@ async function enrichOneSet(
   ).filter((p) => p.isGap);
 
   for (const plan of plans) {
-    if (probed >= opts.maxProbesPerSet) {
+    if (botWall) break;
+    if (clipAttempts >= opts.maxProbesPerSet) {
       console.log(
         `[acrcloud] probe cap ${opts.maxProbesPerSet} reached for ${candidate.slug}`,
+      );
+      break;
+    }
+    if (consecutiveFails >= 3) {
+      console.log(
+        `[acrcloud] 3 consecutive clip fails — skip rest of ${candidate.slug}`,
       );
       break;
     }
@@ -1345,13 +1550,11 @@ async function enrichOneSet(
       continue;
     }
 
-    const clip = await sampleClipForCandidate(
-      candidate,
-      streamUrl,
-      plan.offsetSec,
-      opts.sampleSec,
-    );
-    if (!clip) continue;
+    const clip = await takeClip(plan.offsetSec);
+    if (!clip) {
+      if (botWall) break;
+      continue;
+    }
     probed += 1;
 
     const result = await acrIdentify(clip);
@@ -1468,7 +1671,7 @@ async function enrichOneSet(
     });
   }
 
-  return { probed, identified, unresolved };
+  return { probed, identified, unresolved, clipFails, botWall, skipReason: "" };
 }
 
 /**
@@ -1479,38 +1682,20 @@ export async function enrichSparseSetsWithAcrCloud(
   opts: AcrEnrichOptions = {},
 ): Promise<AcrEnrichStats> {
   if (!envEnabled()) {
-    return {
-      enabled: false,
-      candidates: 0,
-      probed: 0,
-      identified: 0,
-      unresolved: 0,
-      skipped: "ACRCLOUD_ENABLED!=1",
-    };
+    return emptyStats({ enabled: false, skipped: "ACRCLOUD_ENABLED!=1" });
   }
   if (!hasCredentials()) {
-    return {
+    return emptyStats({
       enabled: false,
-      candidates: 0,
-      probed: 0,
-      identified: 0,
-      unresolved: 0,
       skipped: "missing ACRCLOUD_* credentials",
-    };
+    });
   }
 
   // ffmpeg required for sampling
   try {
     await execFileAsync("ffmpeg", ["-version"], { timeout: 5_000 });
   } catch {
-    return {
-      enabled: false,
-      candidates: 0,
-      probed: 0,
-      identified: 0,
-      unresolved: 0,
-      skipped: "ffmpeg not available",
-    };
+    return emptyStats({ enabled: false, skipped: "ffmpeg not available" });
   }
 
   const sampleSec = opts.sampleSec ?? numEnv("ACRCLOUD_SAMPLE_SEC", 12);
@@ -1527,25 +1712,82 @@ export async function enrichSparseSetsWithAcrCloud(
     ...opts,
     setLimit: Math.max(setLimit * 4, setLimit),
   });
+  const skipYtIdentify = skipYoutubeIdentifySampling();
   console.log(
     `[acrcloud] ${candidates.length} sparse candidates (probe budget ${setLimit}, ` +
       `max ${maxProbesPerSet}/set)` +
-      (dryRun ? " (dry-run)" : ""),
+      (dryRun ? " (dry-run)" : "") +
+      (skipYtIdentify
+        ? "; YouTube Identify off — File Scan / circuit owns YT"
+        : ""),
   );
+  if (skipYtIdentify && isGithubActions()) {
+    console.log(
+      "::notice title=ACR Identify::YouTube Identify skipped in CI. File Scanning (next step) fingerprints YouTube. SoundCloud / hearthis Identify still runs.",
+    );
+  }
+  appendIdentifySummary([
+    "## ACRCloud Identify (live)",
+    "",
+    skipYtIdentify
+      ? "YouTube Identify is off — File Scanning handles YouTube. This table updates as each set finishes."
+      : "Per-set results (updates while this step runs).",
+    "",
+    "| set | host | result |",
+    "| --- | --- | --- |",
+  ]);
 
   let probed = 0;
   let identified = 0;
   let unresolved = 0;
+  let clipFails = 0;
   let setsWithStream = 0;
+  let youtubeBotWalls = 0;
+  let youtubeSkipped = 0;
+  let skipRemainingYoutube = skipYtIdentify;
+  const startedAt = Date.now();
+  const budgetMs = identifyBudgetMs();
+  const stopAt = budgetMs > 0 ? startedAt + budgetMs : Number.POSITIVE_INFINITY;
+  let index = 0;
+  let hitDeadline = false;
 
   for (const c of candidates) {
     if (setsWithStream >= setLimit) break;
+    if (Date.now() >= stopAt) {
+      hitDeadline = true;
+      console.log(
+        `::warning title=ACR Identify::wall-clock budget ${Math.round(budgetMs / 60_000)}m reached — remaining sets skipped so File Scan / save can still run`,
+      );
+      break;
+    }
+    index += 1;
+    const elapsedMin = Math.round((Date.now() - startedAt) / 60_000);
+    if (c.host === "youtube") {
+      let reason = "";
+      if (skipRemainingYoutube) {
+        reason = skipYtIdentify
+          ? "File Scan owns YouTube"
+          : "bot-wall circuit";
+      } else if (isYoutubeIdentifyArchive(c.title)) {
+        reason = "archive title — File Scan";
+      }
+      if (reason) {
+        youtubeSkipped += 1;
+        console.log(
+          `[acrcloud] skip ${c.slug}: ${reason} (${elapsedMin}m elapsed)`,
+        );
+        appendIdentifySummary([`| ${c.slug} | youtube | skipped — ${reason} |`]);
+        continue;
+      }
+    }
+    console.log(`::group::${c.slug} (${c.host})`);
     console.log(
-      `[acrcloud] probing ${c.slug} (${c.host}, home=${c.homepageBoost}, ` +
+      `[acrcloud] ${new Date().toISOString()} probing ${c.slug} ` +
+        `(${index}/${candidates.length}, ${c.host}, home=${c.homepageBoost}, ` +
         `density=${c.densitySeverity}, pop=#${c.popularityRank}, ` +
-        `${c.identifiedStrong} strong, ${c.unresolvedCount} unresolved, ${c.playCount} plays)`,
+        `${c.identifiedStrong} strong, ${c.unresolvedCount} unresolved, ` +
+        `${c.playCount} plays, elapsed=${elapsedMin}m)`,
     );
-    const before = probed;
     const r = await enrichOneSet(prisma, c, {
       sampleSec,
       stepSec,
@@ -1557,20 +1799,46 @@ export async function enrichSparseSetsWithAcrCloud(
     probed += r.probed;
     identified += r.identified;
     unresolved += r.unresolved;
+    clipFails += r.clipFails;
+    if (r.botWall) {
+      youtubeBotWalls += 1;
+      skipRemainingYoutube = true;
+      console.log(
+        `::warning title=YouTube bot-wall::${c.slug} — Identify cannot sample this video from GitHub IPs (cookies do not help). Remaining YouTube Identify probes skipped. File Scan still runs.`,
+      );
+    }
     // Count only sets that actually yielded a stream (probed or dry-run identify loop).
     if (r.probed > 0 || r.identified > 0 || r.unresolved > 0) {
       setsWithStream += 1;
-    } else if (probed === before) {
-      // no stream / empty plan — do not consume budget
     }
+    const result = r.botWall
+      ? `bot-wall (clipFails=${r.clipFails})`
+      : r.skipReason
+        ? `skip — ${r.skipReason}`
+        : `probed=${r.probed} hits=${r.identified} weak=${r.unresolved} clipFails=${r.clipFails}`;
+    console.log(`[acrcloud] done ${c.slug}: ${result}`);
+    console.log("::endgroup::");
+    console.log(
+      `::notice title=ACR Identify::${setsWithStream}/${setLimit} ${c.slug} ${c.host} ${result} elapsed=${elapsedMin}m`,
+    );
+    appendIdentifySummary([`| ${c.slug} | ${c.host} | ${result} |`]);
   }
 
-  return {
+  return emptyStats({
     enabled: true,
     candidates: candidates.length,
     probed,
     identified,
     unresolved,
-    skipped: candidates.length === 0 ? "no sparse candidates" : "",
-  };
+    clipFails,
+    setsProbed: setsWithStream,
+    youtubeBotWalls,
+    youtubeSkipped,
+    skipped:
+      candidates.length === 0
+        ? "no sparse candidates"
+        : hitDeadline
+          ? "Identify wall-clock budget reached"
+          : "",
+  });
 }

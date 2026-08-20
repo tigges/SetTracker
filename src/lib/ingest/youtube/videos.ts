@@ -142,6 +142,7 @@ import {
   TL_CHRIS_STUSSY_BOILER_ROOM_EDINBURGH_2024,
   TL_JORIS_VOORN_KOROLOVA_ULTRA_MIAMI_RESISTANCE_COVE_2026,
   TL_COLYN_INNELLEA_ULTRA_MIAMI_RESISTANCE_COVE_2026,
+  TL_ABOVE_AND_BEYOND_KINETICFIELD_EDC_LV_2026,
 } from "../tracklists1001/seeds";
 import type { RawArtist } from "../types";
 import { slugify } from "../types";
@@ -1047,6 +1048,19 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/25jl14z9/natte-visstick-teletech-x-fym-afas-live-amsterdam-netherlands-2025-12-31.html",
     tracklist1001: TL_NATTE_VISSTICK_TELETECH_FYM_AFAS_LIVE_AMSTERDAM_2025,
+  },
+  {
+    // Official @letwinsdjs upload — Porque No / Cenote Day, Vesica Club Tulum.
+    // Operator 1001 URL recorded — description has no clocks. Do not invent
+    // 1001tl seeds or an SC set slug. Paste timed cues to wire.
+    video: "https://www.youtube.com/watch?v=i7XZBixP9m0",
+    primaryArtist: dj("Le Twins", { accent: "#8338ec" }),
+    genre: "Afro House",
+    type: "festival",
+    title: "Le Twins | Porque No Festival Tulum 2025-01-04",
+    eventName: "Porque No Festival",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2lhgbpq1/le-twins-por-que-no-cenote-day-festival-vesica-club-tulum-mexico-2025-01-04.html",
   },
   {
     // Official playback — Pyramid, Amnesia Ibiza 2025-09-21.
@@ -2468,12 +2482,18 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     eventName: "Château de Chambord",
   },
   {
+    // Official Anjunabeats / Insomniac playback — kineticFIELD 2026-05-16.
+    // Distinct from Group Therapy 690 (yt-phWKhIwgiTo).
+    // No SoundCloud in the operator paste — do not invent an SC slug.
     video: "https://www.youtube.com/watch?v=OI02QgEA1Zw",
     primaryArtist: dj("Above & Beyond", { accent: "#7209b7" }),
     genre: "Trance",
     type: "festival",
     title: "Above & Beyond: Live from EDC Las Vegas 2026 (Official Full Set)",
     eventName: "EDC Las Vegas",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/dqsyhd1/above-beyond-kineticfield-edc-las-vegas-united-states-2026-05-16.html",
+    tracklist1001: TL_ABOVE_AND_BEYOND_KINETICFIELD_EDC_LV_2026,
   },
   {
     video: "https://www.youtube.com/watch?v=HWwmfWovTeI",

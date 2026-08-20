@@ -166,6 +166,7 @@ import {
   TL_CHRIS_STUSSY_BOILER_ROOM_EDINBURGH_2024,
   TL_JORIS_VOORN_KOROLOVA_ULTRA_MIAMI_RESISTANCE_COVE_2026,
   TL_COLYN_INNELLEA_ULTRA_MIAMI_RESISTANCE_COVE_2026,
+  TL_ABOVE_AND_BEYOND_KINETICFIELD_EDC_LV_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   isSecondaryPlaybackSlug,
@@ -2700,6 +2701,40 @@ assert.equal(
   isWiredTracklistSlug("sc-innellea-colyn-b2b-innella-at-ultra"),
   true,
 );
+
+assertSeedClocks(TL_ABOVE_AND_BEYOND_KINETICFIELD_EDC_LV_2026);
+assert.equal(TL_ABOVE_AND_BEYOND_KINETICFIELD_EDC_LV_2026.length, 18);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-OI02QgEA1Zw"],
+  TL_ABOVE_AND_BEYOND_KINETICFIELD_EDC_LV_2026,
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-OI02QgEA1Zw"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-phWKhIwgiTo"],
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-https://youtu.be/OI02QgEA1Zw"],
+  undefined,
+);
+const abEdc = tracklist1001RowsToPlays(
+  TL_ABOVE_AND_BEYOND_KINETICFIELD_EDC_LV_2026,
+);
+assert.equal(abEdc.length, 18);
+assert.equal(abEdc[0]?.provenance, "1001tl");
+assert.equal(abEdc[0]?.timestamp, 1);
+assert.equal(abEdc[0]?.artistName, "Above & Beyond");
+assert.equal(abEdc[0]?.trackTitle, "Stepping In");
+assert.equal(abEdc[3]?.trackTitle, "ID");
+assert.equal(abEdc[3]?.timestamp, 9 * 60 + 9);
+assert.equal(abEdc[17]?.trackTitle, "Sun In Your Eyes");
+assert.equal(abEdc[17]?.timestamp, 1 * 3600 + 11 * 60 + 11);
+for (let i = 1; i < abEdc.length; i++) {
+  assert.ok(
+    (abEdc[i]!.timestamp ?? 0) > (abEdc[i - 1]!.timestamp ?? 0),
+    `Above & Beyond EDC clocks must increase at index ${i}`,
+  );
+}
+assert.equal(isWiredTracklistSlug("yt-OI02QgEA1Zw"), true);
 assert.notEqual(
   TRACKLIST_1001_BY_SOURCE_SLUG["yt-2BPWWYAgUE4"],
   TRACKLIST_1001_BY_SOURCE_SLUG["yt-FQj71mhobYw"],
