@@ -28,6 +28,7 @@
  *   ACRCLOUD_FS_DRY_RUN=1     scan but do not write DB
  */
 import type { PrismaClient } from "@prisma/client";
+import { playCollapseKey } from "../../playCollapse";
 import { detectPlaybackHost } from "../../playback";
 import { HELD_RELIVE_WATCH } from "../nextCaptures";
 import { isFingerprintOnlyVideoId, isFingerprintOnlyWatchUrl } from "../identify/fingerprintWatch";
@@ -382,6 +383,7 @@ type ExistingPlay = {
   timestamp: number;
   provenance: string;
   idStatus: string;
+  track?: { artistName: string; title: string } | null;
 };
 
 const STRONG = new Set([
@@ -404,16 +406,39 @@ export async function applyScanHitsToSet(
   const gap = opts.gapWindowSec ?? 45;
   const existing = (await prisma.played.findMany({
     where: { setId },
-    select: { timestamp: true, provenance: true, idStatus: true },
+    select: {
+      timestamp: true,
+      provenance: true,
+      idStatus: true,
+      track: { select: { artistName: true, title: true } },
+    },
+    orderBy: { timestamp: "asc" },
   })) as ExistingPlay[];
   const marks = existing.map((p) => p.timestamp);
   const strongMarks = existing
     .filter((p) => STRONG.has(p.provenance) || p.idStatus === "identified")
     .map((p) => p.timestamp);
+  let lastIdentifiedKey: string | null = null;
+  for (const p of existing) {
+    const key = playCollapseKey({
+      artistName: p.track?.artistName,
+      title: p.track?.title,
+    });
+    if (key) lastIdentifiedKey = key;
+  }
 
   let written = 0;
   let skipped = 0;
-  for (const { offsetSec, hit } of hits) {
+  const ordered = [...hits].sort((a, b) => a.offsetSec - b.offsetSec);
+  for (const { offsetSec, hit } of ordered) {
+    const hitKey = playCollapseKey({
+      artistName: hit.artist,
+      title: hit.title,
+    });
+    if (hitKey && hitKey === lastIdentifiedKey) {
+      skipped += 1;
+      continue;
+    }
     const nearStrong = strongMarks.some((t) => Math.abs(t - offsetSec) <= gap);
     const nearAny = marks.some((t) => Math.abs(t - offsetSec) <= gap);
     if (nearStrong || nearAny) {
@@ -423,6 +448,7 @@ export async function applyScanHitsToSet(
     if (opts.dryRun) {
       written += 1;
       marks.push(offsetSec);
+      if (hitKey) lastIdentifiedKey = hitKey;
       continue;
     }
     const trackId = await upsertFingerprintTrack(prisma, hit, genre);
@@ -440,6 +466,7 @@ export async function applyScanHitsToSet(
     });
     written += 1;
     marks.push(offsetSec);
+    if (hitKey) lastIdentifiedKey = hitKey;
   }
   return { written, skipped };
 }

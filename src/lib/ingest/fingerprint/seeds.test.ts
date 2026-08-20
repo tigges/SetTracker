@@ -44,13 +44,18 @@ for (let i = 1; i < fifi.length; i++) {
   );
 }
 
-// consecutive dup drop
+// consecutive dup drop — including minutes-apart fingerprint re-hits
 const deduped = fingerprintRowsToPlays([
   { at: "01:00", artist: "A", title: "T" },
   { at: "01:10", artist: "A", title: "T" },
-  { at: "02:00", artist: "B", title: "U" },
+  { at: "05:00", artist: "A", title: "T" },
+  { at: "06:00", artist: "B", title: "U" },
+  { at: "55:00", artist: "A", title: "T" },
 ]);
-assert.equal(deduped.length, 2);
+assert.equal(deduped.length, 3);
+assert.equal(deduped[0]!.timestamp, 60);
+assert.equal(deduped[1]!.trackTitle, "U");
+assert.equal(deduped[2]!.timestamp, 55 * 60);
 
 const sparse: RawPlay[] = [
   {
