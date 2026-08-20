@@ -28,12 +28,13 @@ import { DENSITY_MIN_DURATION_SEC, type DensitySeverity } from "./setDensity";
 import {
   comparePlaceSetTimes,
   groupPlaceSetsByYear,
+  parseDateFromSetTitle,
   sortPlaceSets,
   yearFromSetTitle,
 } from "./placeTimeline";
 import type { IdStatus } from "./status";
 
-export { yearFromSetTitle };
+export { parseDateFromSetTitle, yearFromSetTitle };
 
 export type VenueTier =
   | "festival"
@@ -154,29 +155,74 @@ export function isArchiveTitledSet(
   return year < new Date(nowMs).getUTCFullYear() - 1;
 }
 
-/**
- * When the set was played (or first published by the source).
- * Never uses Prisma createdAt / site ingest time.
- * Title year beats edition/upload so a 2018 playback remapped onto a 2026
- * edition does not rank as this-year.
- */
-export function setPerformanceTime(s: {
+export type PerformanceTimeFields = {
   publishedAt: Date | string;
   performedAt?: Date | string | null;
   editionYear?: number | null;
   title?: string | null;
-}): number {
+};
+
+/** True when we know the calendar day (or month), not just a title year. */
+export function hasPrecisePerformanceDate(
+  s: PerformanceTimeFields,
+  nowMs = Date.now(),
+): boolean {
+  if (s.performedAt) {
+    const t = new Date(s.performedAt).getTime();
+    if (Number.isFinite(t)) return true;
+  }
+  return parseDateFromSetTitle(s.title, nowMs) != null;
+}
+
+/**
+ * When the set was played (or first published by the source).
+ * Never uses Prisma createdAt / site ingest time.
+ * Title calendar day beats title year; title year beats edition/upload so a
+ * 2018 playback remapped onto a 2026 edition does not rank as this-year.
+ */
+export function setPerformanceTime(
+  s: PerformanceTimeFields,
+  nowMs = Date.now(),
+): number {
   if (s.performedAt) {
     const t = new Date(s.performedAt).getTime();
     if (Number.isFinite(t)) return t;
   }
-  const titleYear = yearFromSetTitle(s.title);
+  const titled = parseDateFromSetTitle(s.title, nowMs);
+  if (titled) return titled.getTime();
+  const titleYear = yearFromSetTitle(s.title, nowMs);
   if (titleYear != null) return Date.UTC(titleYear, 6, 1);
   if (s.editionYear && s.editionYear > 1990 && s.editionYear < 2100) {
     return Date.UTC(s.editionYear, 6, 1);
   }
   const t = new Date(s.publishedAt).getTime();
   return Number.isFinite(t) ? t : 0;
+}
+
+/**
+ * Homepage "New this week" / card "today" — a performance near `now`, not
+ * a 2025 Street Parade that was ingested today.
+ * Year-only titles (`… 2025`) are never this-week; dateless uploads still
+ * use the source publish time.
+ */
+export function isRecentPerformance(
+  s: PerformanceTimeFields,
+  days: number,
+  nowMs = Date.now(),
+): boolean {
+  if (!hasPrecisePerformanceDate(s, nowMs)) {
+    const year =
+      yearFromSetTitle(s.title, nowMs) ??
+      (s.editionYear && s.editionYear > 1990 && s.editionYear < 2100
+        ? s.editionYear
+        : null);
+    if (year != null) return false;
+  }
+  const t = setPerformanceTime(s, nowMs);
+  if (!t) return false;
+  const age = nowMs - t;
+  if (age < -12 * 60 * 60 * 1000) return false;
+  return age < days * 24 * 60 * 60 * 1000;
 }
 
 export function setPerformanceYear(
@@ -188,7 +234,7 @@ export function setPerformanceYear(
   },
   nowMs = Date.now(),
 ): number {
-  const y = new Date(setPerformanceTime(s)).getUTCFullYear();
+  const y = new Date(setPerformanceTime(s, nowMs)).getUTCFullYear();
   return Number.isFinite(y) ? y : new Date(nowMs).getUTCFullYear();
 }
 
