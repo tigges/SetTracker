@@ -32,6 +32,7 @@ import {
   loadArtistSocialKeys,
 } from "./eventSocials";
 import { KNOWN_EVENTS } from "./events";
+import { backfillPerformedAt } from "./backfillPerformedAt";
 import { backfillSetEditions } from "./setEditions";
 import { fillDjHandlesFromKnown, fillDjWebsitesFromWikidata } from "./discovery/fillDjHandles";
 import { isRejectedWebsiteHost } from "./discovery/wikidataOfficial";
@@ -279,6 +280,20 @@ export async function applyKnownUrlFixes(prisma: PrismaClient): Promise<number> 
   } catch (err) {
     console.warn(
       "[verify-urls] set editions:",
+      err instanceof Error ? err.message : err,
+    );
+  }
+
+  // Printed night (title / curated 1001 URL) — not ingest time.
+  try {
+    const nights = await backfillPerformedAt(prisma);
+    n += nights;
+    if (nights) {
+      console.log(`[verify-urls] performedAt filled: ${nights}`);
+    }
+  } catch (err) {
+    console.warn(
+      "[verify-urls] performedAt:",
       err instanceof Error ? err.message : err,
     );
   }

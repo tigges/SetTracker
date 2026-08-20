@@ -322,6 +322,50 @@ describe("popularity rails", () => {
     assert.ok(!week.some((s) => s.id === "tl"));
   });
 
+  it("keeps New this week on recent nights, not ingest-today archives", () => {
+    const now = Date.parse("2026-08-20T12:00:00Z");
+    const feed = [
+      item({
+        id: "honeyluv-june",
+        slug: "honeyluv-june",
+        type: "mix",
+        venueTier: "club",
+        title: "HoneyLuv @ ANTS Ushuaïa Ibiza 2026-06-17",
+        publishedAt: new Date("2026-08-20T00:00:00Z"),
+      }),
+      item({
+        id: "street-2025",
+        slug: "street-2025",
+        type: "mix",
+        venueTier: "festival",
+        title: "Deborah de Luca - Zurich Street Parade 2025 - ARTE Concert",
+        publishedAt: new Date("2026-08-20T00:00:00Z"),
+      }),
+      item({
+        id: "stussy-2024",
+        slug: "stussy-2024",
+        type: "mix",
+        venueTier: "livestream",
+        title: "Chris Stussy | Boiler Room: Edinburgh",
+        publishedAt: new Date("2026-08-20T00:00:00Z"),
+        performedAt: new Date("2024-05-19T00:00:00Z"),
+      }),
+      item({
+        id: "fresh",
+        slug: "fresh",
+        type: "mix",
+        venueTier: "club",
+        title: "Artist Live @ Club",
+        publishedAt: new Date("2026-08-18T00:00:00Z"),
+      }),
+    ];
+    const week = newThisWeekSets(feed, 9, now);
+    assert.deepEqual(
+      week.map((s) => s.id),
+      ["fresh"],
+    );
+  });
+
   it("fills New this week from 14 days when the 7-day pool is thin", () => {
     const now = Date.parse("2026-08-16T12:00:00Z");
     const feed = [

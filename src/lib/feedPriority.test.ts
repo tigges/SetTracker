@@ -18,9 +18,11 @@ import {
   idQualityTier,
   nearDuplicateKey,
   isRadarCandidate,
+  isRecentPerformance,
   pickRadarPicks,
   radarPickScore,
   resolveVenueTier,
+  setPerformanceTime,
   setPerformanceYear,
   yearFromSetTitle,
 } from "./feedPriority";
@@ -68,6 +70,66 @@ describe("title year vs upload date", () => {
         now,
       ),
       2018,
+    );
+  });
+
+  it("uses a title calendar day, not ingest publishedAt", () => {
+    const t = setPerformanceTime(
+      {
+        title: "HoneyLuv @ ANTS Ushuaïa Ibiza 2026-06-17",
+        publishedAt: "2026-08-20T00:00:00.000Z",
+      },
+      now,
+    );
+    assert.equal(new Date(t).toISOString().slice(0, 10), "2026-06-17");
+  });
+
+  it("treats this-week as a recent performance, not a newly added archive", () => {
+    const today = Date.parse("2026-08-20T12:00:00.000Z");
+    assert.equal(
+      isRecentPerformance(
+        {
+          title: "HoneyLuv @ ANTS Ushuaïa Ibiza 2026-06-17",
+          publishedAt: "2026-08-20T00:00:00.000Z",
+        },
+        14,
+        today,
+      ),
+      false,
+    );
+    assert.equal(
+      isRecentPerformance(
+        {
+          title: "Deborah de Luca - Zurich Street Parade 2025 - ARTE Concert",
+          publishedAt: "2026-08-20T00:00:00.000Z",
+        },
+        14,
+        today,
+      ),
+      false,
+    );
+    assert.equal(
+      isRecentPerformance(
+        {
+          title: "Chris Stussy | Boiler Room: Edinburgh",
+          publishedAt: "2026-08-20T00:00:00.000Z",
+          performedAt: "2024-05-19T00:00:00.000Z",
+        },
+        14,
+        today,
+      ),
+      false,
+    );
+    assert.equal(
+      isRecentPerformance(
+        {
+          title: "Artist Live @ Club",
+          publishedAt: "2026-08-18T00:00:00.000Z",
+        },
+        7,
+        today,
+      ),
+      true,
     );
   });
 });

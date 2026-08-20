@@ -4,6 +4,7 @@
 
 import {
   isRadioFiller,
+  isRecentPerformance,
   pickRadarPicks,
   radarPickScore,
   type RadarPickFields,
@@ -343,7 +344,7 @@ export function newThisWeekSets(
       (s) =>
         isCompleteTracklist(s) &&
         !isRadioFiller(s) &&
-        withinDays(s.publishedAt, days, nowMs) &&
+        isRecentPerformance(s, days, nowMs) &&
         !isFestivalStorySet(s, nowMs) &&
         !exclude.has(s.id),
     );
