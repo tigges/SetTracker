@@ -26,6 +26,7 @@ assert.equal(
   "Chris Lake",
 );
 assert.equal(tidyPerformingCredit("Chris Lake Full"), "Chris Lake");
+assert.equal(tidyPerformingCredit("James Hype Official"), "James Hype");
 assert.equal(tidyPerformingCredit("James Hype Official Full Set HD"), "James Hype");
 assert.equal(
   tidyPerformingCredit("Biscits Tech House DJ Set"),

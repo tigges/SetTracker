@@ -191,10 +191,8 @@ export default async function DjPage({
             </ul>
           </Panel>
 
-          <Panel title="Most-played tracks" meta="top 8">
-            {dj.mostPlayed.length === 0 ? (
-              <p className="text-[13px] text-muted2">No identified tracks yet.</p>
-            ) : (
+          {dj.mostPlayed.length > 0 && (
+            <Panel title="Most-played tracks" meta="top 8">
               <ul className="space-y-2.5">
                 {dj.mostPlayed.map((t, i) => (
                   <li key={t.slug} className="flex items-center gap-3">
@@ -234,8 +232,8 @@ export default async function DjPage({
                   </li>
                 ))}
               </ul>
-            )}
-          </Panel>
+            </Panel>
+          )}
         </div>
 
         {/* right column: series, collaborators */}
@@ -289,10 +287,8 @@ export default async function DjPage({
             </Panel>
           )}
 
-          <Panel title="Collaborators" meta={`${dj.collaborators.length}`}>
-            {dj.collaborators.length === 0 ? (
-              <p className="text-[13px] text-muted2">No b2b sets logged.</p>
-            ) : (
+          {dj.collaborators.length > 0 && (
+            <Panel title="Collaborators" meta={`${dj.collaborators.length}`}>
               <div className="flex flex-wrap gap-2">
                 {dj.collaborators.map((c) => (
                   <Link
@@ -309,8 +305,8 @@ export default async function DjPage({
                   </Link>
                 ))}
               </div>
-            )}
-          </Panel>
+            </Panel>
+          )}
 
           {dj.related.length > 0 && (
             <Panel title="Related" meta={`${dj.related.length}`}>
