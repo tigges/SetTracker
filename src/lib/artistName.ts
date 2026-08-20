@@ -257,6 +257,8 @@ export function sanitizeArtistName(raw: string): string | null {
   n = n.replace(/\s+presents?\s*$/i, "").trim();
   // "Laidback Luke SELECTS" → "Laidback Luke" (show brand, not a second DJ)
   n = n.replace(/\s+selects\s*$/i, "").trim();
+  // "Chris Lake Full" leftover from "Full Set"
+  n = n.replace(/\s+(?:official\s+)?full(?:\s+sets?)?(?:\s+hd)?\s*$/i, "").trim();
   // Scrape leftover: "Ginger)"
   if (/\)+$/.test(n) && !n.includes("(")) n = n.replace(/\)+$/g, "").trim();
   if (/^\(+/.test(n) && !n.includes(")")) n = n.replace(/^\(+/g, "").trim();
@@ -292,6 +294,8 @@ export function isLeftoverHostName(name: string): boolean {
   if (/knee\s+deep\s+in\s+ibiza/i.test(n)) return true;
   if (/\bof\s+ezra\s+collective\b/i.test(n)) return true;
   if (/^le\s+grand\s+brand$/i.test(n)) return true;
+  // "Chris Lake Full" — title chrome, not a second DJ
+  if (/\s+full\s*$/i.test(n)) return true;
   return false;
 }
 

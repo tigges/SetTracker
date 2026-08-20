@@ -67,6 +67,8 @@ const EXPLICIT_ALIAS: Record<string, string> = {
   "folamour-at-cathedrale-saint-pierre-in-geneva-switzerland-for-cercle":
     "folamour",
   "laidback-luke-selects": "laidback-luke",
+  "chris-lake-full": "chris-lake",
+  "chris-lake-full-set": "chris-lake",
   "recovery-hot-air-balloon": "hot-since-82",
   "recovery-hot-air-balloon-set": "hot-since-82",
   ...PRODUCER_DJ_ALIASES,
@@ -105,7 +107,7 @@ function looksLikeSetTitleDj(name: string, slug: string): boolean {
   if (/\s+\/\/\s+/.test(name) || /⠶/.test(name)) return true;
   if (/\s+at\s+/i.test(name)) return true;
   if (/\bwarm\s*up\b/i.test(name)) return true;
-  if (/\b(live|tour\s*mix)\s*$/i.test(name)) return true;
+  if (/\b(live|tour\s*mix|full)\s*$/i.test(name)) return true;
   if (/\(\s*live/i.test(name)) return true;
   if (/\s+WE\s*[12]\s*$/i.test(name) || /\s+weekend\s*[12]\s*$/i.test(name)) {
     return true;
@@ -219,6 +221,7 @@ function displayNameForSlug(slug: string, fallbackName: string): string {
     mochakk: "Mochakk",
     folamour: "Folamour",
     "hot-since-82": "Hot Since 82",
+    "chris-lake": "Chris Lake",
     "layton-giordani": "Layton Giordani",
     "mau-p": "Mau P",
     mandy: "MANDY",

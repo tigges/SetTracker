@@ -27,6 +27,9 @@ export const DJ_SLUG_ALIASES: Record<string, string> = {
   "defected-virtual-festival-4-0": "dom-dolla",
   "the-sydney-social-podcast-3": "dom-dolla",
   "laidback-luke-selects": "laidback-luke",
+  // "Chris Lake Full Set …" title crumb
+  "chris-lake-full": "chris-lake",
+  "chris-lake-full-set": "chris-lake",
   // DubVision trance/melodic alias (2026 tour: "performing as HALŌ")
   halo: "dubvision",
   // Hot Since 82 destination films mistaken for a DJ
@@ -45,7 +48,17 @@ export function foldSelectsSlug(slug: string): string {
   return slug.replace(/-selects$/i, "");
 }
 
+/** "chris-lake-full" / "james-hype-full-set" → real artist slug. */
+export function foldSetChromeSlug(slug: string): string {
+  return slug
+    .replace(/-(?:official-)?full(?:-set)?(?:-hd)?$/i, "")
+    .replace(/-dj-set$/i, "")
+    .replace(/-live-set$/i, "");
+}
+
 export function canonicalDjSlug(slug: string): string {
-  const folded = foldSelectsSlug(foldWeekendEditionSlug(slug));
+  const folded = foldSetChromeSlug(
+    foldSelectsSlug(foldWeekendEditionSlug(slug)),
+  );
   return DJ_SLUG_ALIASES[slug] ?? DJ_SLUG_ALIASES[folded] ?? folded;
 }

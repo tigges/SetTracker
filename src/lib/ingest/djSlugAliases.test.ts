@@ -50,6 +50,13 @@ describe("djSlugAliases", () => {
     assert.equal(canonicalDjSlug("hot-since-82"), "hot-since-82");
   });
 
+  it("folds Full Set title slugs onto the artist", () => {
+    assert.equal(canonicalDjSlug("chris-lake-full"), "chris-lake");
+    assert.equal(canonicalDjSlug("chris-lake-full-set"), "chris-lake");
+    assert.equal(canonicalDjSlug("james-hype-official-full-set"), "james-hype");
+    assert.equal(canonicalDjSlug("chris-lake"), "chris-lake");
+  });
+
   it("folds Artist SELECTS show slugs onto the artist", () => {
     assert.equal(canonicalDjSlug("laidback-luke-selects"), "laidback-luke");
     assert.equal(canonicalDjSlug("laidback-luke"), "laidback-luke");
