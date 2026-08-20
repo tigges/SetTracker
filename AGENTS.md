@@ -18,15 +18,26 @@ The producer tests on https://setradar.ai/ and publishes to live from GitHub
 (merge the PR / push `main`). Agents do not merge to `main` or start a Pages
 deploy unless the producer explicitly says otherwise.
 
-**One ship = one branch = one draft PR until live.** While a draft PR
-is open against `main`, put every follow-up (pins, leftovers, hero,
-stats, 1001 captures) on that same branch. Do not `checkout -b` a new
-`cursor/…-c78b` branch and do not open a second PR. Bump
-`package.json` `"version"` once for the whole ship, not per prompt.
-After the producer merges to `main` / publishes Pages, the next cycle
-starts a new branch. `deploy-pages.yml` cancels in-progress exports on
-every main push — drip-merging leaves live on an old version. The
-  producer will say if this bundling rule is abolished.
+**One ship = one GitHub branch = one draft PR = one Cursor cycle.**
+New chat threads continue that same branch, PR, and environment
+snapshot. Do not `checkout -b` a new `cursor/…` branch, do not open a
+second PR, and do not start a new Cursor environment build just because
+a new chat started.
+
+Stay on that ship until the producer:
+1. pushes live from GitHub (merge the PR / push `main` / Pages publish), or
+2. explicitly asks in chat for a new ship / new build.
+
+Do not cancel or overwrite in-progress GitHub Actions (Pages,
+catalog-deep, catalog-enrich) or Cursor environment builds. Do not
+dispatch those workflows unless asked. Recurring Cursor snapshots on
+`main` are the live baseline — leave them alone.
+
+Bump `package.json` `"version"` once for the whole ship, not per
+prompt. After a live publish, the next capture starts a new
+`cursor/…-bba0` branch and a new draft PR.
+`deploy-pages.yml` cancels in-progress exports on every main push —
+drip-merging leaves live on an old version.
 
 **Relive is Tomorrowland-only.** Relive is Tomorrowland's product name and
 is confusing used for other festivals. In UI, agent docs, and generic
