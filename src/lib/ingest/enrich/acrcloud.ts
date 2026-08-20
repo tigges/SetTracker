@@ -338,6 +338,14 @@ function numEnv(name: string, fallback: number): number {
   return Number.isFinite(n) && n > 0 ? n : fallback;
 }
 
+/** Wall-clock Identify budget (ms). 0 = no deadline. */
+export function identifyBudgetMs(
+  env: Record<string, string | undefined> = process.env,
+): number {
+  const n = Number(env.ACRCLOUD_DEADLINE_MS);
+  return Number.isFinite(n) && n > 0 ? Math.floor(n) : 0;
+}
+
 function boolEnv(name: string): boolean {
   return process.env[name] === "1";
 }
@@ -1738,10 +1746,20 @@ export async function enrichSparseSetsWithAcrCloud(
   let youtubeSkipped = 0;
   let skipRemainingYoutube = skipYtIdentify;
   const startedAt = Date.now();
+  const budgetMs = identifyBudgetMs();
+  const stopAt = budgetMs > 0 ? startedAt + budgetMs : Number.POSITIVE_INFINITY;
   let index = 0;
+  let hitDeadline = false;
 
   for (const c of candidates) {
     if (setsWithStream >= setLimit) break;
+    if (Date.now() >= stopAt) {
+      hitDeadline = true;
+      console.log(
+        `::warning title=ACR Identify::wall-clock budget ${Math.round(budgetMs / 60_000)}m reached — remaining sets skipped so File Scan / save can still run`,
+      );
+      break;
+    }
     index += 1;
     const elapsedMin = Math.round((Date.now() - startedAt) / 60_000);
     if (c.host === "youtube") {
@@ -1816,6 +1834,11 @@ export async function enrichSparseSetsWithAcrCloud(
     setsProbed: setsWithStream,
     youtubeBotWalls,
     youtubeSkipped,
-    skipped: candidates.length === 0 ? "no sparse candidates" : "",
+    skipped:
+      candidates.length === 0
+        ? "no sparse candidates"
+        : hitDeadline
+          ? "Identify wall-clock budget reached"
+          : "",
   });
 }

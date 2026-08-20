@@ -95,6 +95,7 @@ jobs:
           path: prisma/dev.db
           key: setradar-db-${{ github.run_id }}
           restore-keys: |
+            setradar-db-${{ github.run_id }}-
             setradar-db-
 
       - name: Require restored catalog

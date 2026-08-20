@@ -13,6 +13,7 @@ import {
   popularityRankForDjSlug,
   rankPlaybackHost,
   skipYoutubeIdentifySampling,
+  identifyBudgetMs,
   ytDlpFailFast,
   ytDlpSampleArgs,
   ytDlpSectionRange,
@@ -448,6 +449,10 @@ assert.equal(
   false,
   "CI without File Scan still allows Identify unless IDENTIFY_YOUTUBE=0",
 );
+
+assert.equal(identifyBudgetMs({}), 0);
+assert.equal(identifyBudgetMs({ ACRCLOUD_DEADLINE_MS: "3600000" }), 3_600_000);
+assert.equal(identifyBudgetMs({ ACRCLOUD_DEADLINE_MS: "nope" }), 0);
 
 assert.equal(ytDlpFailFast({ GITHUB_ACTIONS: "true" }), true);
 assert.equal(ytDlpFailFast({ ACRCLOUD_YT_FAIL_FAST: "0", CI: "true" }), false);

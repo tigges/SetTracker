@@ -141,10 +141,11 @@ catalog DB cache and dispatch it:
 - **6h cron / manual `deep`** (`catalog-deep.yml`) — crawl → save DB cache → dispatch **enrich `full`** (not Pages; avoids a DB-cache race)
 - **`catalog-enrich.yml`** — thumbs/MB + ACRCloud + File Scanning → save DB cache → dispatch deploy
 
-**Enrich modes** (`catalog-enrich.yml`): `full` (weekly cron, after deep, or `data/enrich-full-request`; thumbs + MusicBrainz
-+ deep ACR 40×20 + filescan + LLM), `acr` (priority ACR only, no thumbs, 15×12; also the
-`data/enrich-request` push default), `smoke` (tiny ACR check 4×5 — verify
-creds/cookies). Each mode runs in its own concurrency lane. Do not start deep and enrich at the same time.
+**Enrich modes** (`catalog-enrich.yml`): `full` (weekly / `data/enrich-full-request`;
+null thumbs + MB + Identify 20×12 + File Scan 12 + 80 ISRCs), `acr` (priority
+Identify 12×8 + File Scan 8, no thumbs/LLM; `data/enrich-request`), `smoke`
+(4×5). Each expensive step times out and checkpoints the DB so a 6h GitHub
+cancel cannot throw away Identify hits. Do not start deep and enrich at the same time.
 
 ### ACRCloud fingerprint enrich
 

@@ -1,11 +1,13 @@
 name: Catalog enrich
 
-# Artwork / MusicBrainz + ACRCloud fingerprint gap-fill in selectable modes so
-# a quick "did YT ACR work?" run does not cost the full 2.5h weekly pass:
-#   full  — thumbs + MusicBrainz + deep ACR (40 sets × 20 probes)  [weekly]
-#   acr   — priority ACR only, no thumbs (15 sets × 12 probes)     [enrich-request / manual]
-#   smoke — tiny ACR check, no thumbs (4 sets × 5 probes)          [manual: creds/cookies]
-# After a successful enrich, dispatches deploy-pages so IDs ship without a push.
+# Artwork / MusicBrainz + ACRCloud fingerprint gap-fill in selectable modes.
+# GitHub-hosted jobs die at 6h and skip Save/Pages — so every expensive step
+# has a timeout, continue-on-error, and a DB checkpoint. `full` is sized to
+# finish (~3h), not to pack thumbs + 40×20 Identify + File Scan + 400 ISRCs.
+#   full  — null thumbs + MB + Identify 20×12 + File Scan 12  [weekly]
+#   acr   — Identify 12×8 + File Scan 8 (no thumbs/LLM)       [enrich-request]
+#   smoke — tiny ACR check (4×5)                              [creds]
+# After a checkpoint exists, dispatches deploy-pages even if a later step fails.
 on:
   schedule:
     - cron: "30 4 * * 1"
@@ -42,6 +44,8 @@ concurrency:
 jobs:
   enrich:
     runs-on: ubuntu-latest
+    # Hosted cap is 6h; leave headroom so we never rely on the hard cancel.
+    timeout-minutes: 340
     steps:
       - uses: actions/checkout@v4
 
@@ -74,23 +78,34 @@ jobs:
             *)                 MODE="full" ;;   # weekly schedule = full pass
           esac
           case "$MODE" in
-            smoke) SET_LIMIT=4;  MAX_PROBES=5;  DO_THUMBS=0 ;;
-            acr)   SET_LIMIT=15; MAX_PROBES=12; DO_THUMBS=0 ;;
-            full)  SET_LIMIT=40; MAX_PROBES=20; DO_THUMBS=1 ;;
+            smoke)
+              SET_LIMIT=4; MAX_PROBES=5; DO_THUMBS=0; FS_LIMIT=4
+              ID_DEADLINE_MS=600000; ID_STEP=15; FS_STEP=15
+              TRACK_ID_LIMIT=0; FS_WAIT_MS=600000
+              ;;
+            acr)
+              SET_LIMIT=12; MAX_PROBES=8; DO_THUMBS=0; FS_LIMIT=8
+              ID_DEADLINE_MS=2400000; ID_STEP=50; FS_STEP=35
+              TRACK_ID_LIMIT=40; FS_WAIT_MS=900000
+              ;;
+            full)
+              SET_LIMIT=20; MAX_PROBES=12; DO_THUMBS=1; FS_LIMIT=12
+              ID_DEADLINE_MS=3600000; ID_STEP=75; FS_STEP=40
+              TRACK_ID_LIMIT=80; FS_WAIT_MS=1200000
+              ;;
             *)     echo "::error::Unknown mode '$MODE'"; exit 1 ;;
           esac
           echo "mode=$MODE"           >> "$GITHUB_OUTPUT"
           echo "set_limit=$SET_LIMIT" >> "$GITHUB_OUTPUT"
           echo "max_probes=$MAX_PROBES" >> "$GITHUB_OUTPUT"
           echo "do_thumbs=$DO_THUMBS" >> "$GITHUB_OUTPUT"
-          # Chip the 16k Beatport/ISRC pile on every enrich except smoke.
-          case "$MODE" in
-            full) TRACK_ID_LIMIT=400 ;;
-            acr)  TRACK_ID_LIMIT=120 ;;
-            *)    TRACK_ID_LIMIT=0 ;;
-          esac
+          echo "fs_limit=$FS_LIMIT" >> "$GITHUB_OUTPUT"
+          echo "id_deadline_ms=$ID_DEADLINE_MS" >> "$GITHUB_OUTPUT"
+          echo "id_step=$ID_STEP" >> "$GITHUB_OUTPUT"
+          echo "fs_step=$FS_STEP" >> "$GITHUB_OUTPUT"
+          echo "fs_wait_ms=$FS_WAIT_MS" >> "$GITHUB_OUTPUT"
           echo "track_id_limit=$TRACK_ID_LIMIT" >> "$GITHUB_OUTPUT"
-          echo "Enrich mode=$MODE (sets=$SET_LIMIT probes=$MAX_PROBES thumbs=$DO_THUMBS track_ids=$TRACK_ID_LIMIT)"
+          echo "Enrich mode=$MODE (sets=$SET_LIMIT probes=$MAX_PROBES fs=$FS_LIMIT thumbs=$DO_THUMBS track_ids=$TRACK_ID_LIMIT id_step=${ID_STEP}m)"
 
       - name: Restore catalog DB
         id: dbcache
@@ -117,10 +132,13 @@ jobs:
 
       - name: Full thumbs + MusicBrainz
         if: steps.mode.outputs.do_thumbs == '1'
+        timeout-minutes: 25
+        continue-on-error: true
         env:
           THUMBS_DELAY_MS: "120"
-          THUMBS_NULL_ONLY: "0"
-          THUMBS_MB_LIMIT: "80"
+          # Null-only — do not re-fetch art that already shipped.
+          THUMBS_NULL_ONLY: "1"
+          THUMBS_MB_LIMIT: "40"
         run: npm run thumbs
 
       # Fingerprint sparse sets via ACRCloud (direct — never AudioScout/TrackId).
@@ -150,12 +168,9 @@ jobs:
             echo "::warning::ACRCLOUD_HOST / ACRCLOUD_ACCESS_KEY / ACRCLOUD_ACCESS_SECRET not set. Fingerprint enrich will no-op. Add them under Settings → Secrets and variables → Actions, then re-run this workflow."
           fi
 
-      - name: Install ffmpeg + yt-dlp
+      - name: Install ffmpeg
         if: steps.acr.outputs.configured == '1'
-        run: |
-          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
-          # yt-dlp cuts short YouTube playback clips for ACR Identify (no full download).
-          python3 -m pip install -q -U yt-dlp
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
 
       - name: Optional YouTube cookies for yt-dlp
         if: steps.acr.outputs.configured == '1'
@@ -174,30 +189,33 @@ jobs:
       - name: ACRCloud fingerprint enrich
         id: fingerprint
         if: steps.acr.outputs.configured == '1'
+        timeout-minutes: ${{ fromJSON(steps.mode.outputs.id_step) }}
+        continue-on-error: true
         env:
           ACRCLOUD_ENABLED: "1"
           # Severity-ranked sparse queue (SC/hearthis first via compareSparseSetCandidates).
-          # Budgets scale with mode (smoke < acr < full) so quick checks stay cheap.
           ACRCLOUD_SET_LIMIT: ${{ steps.mode.outputs.set_limit }}
           ACRCLOUD_SAMPLE_SEC: "12"
           ACRCLOUD_STEP_SEC: "60"
           ACRCLOUD_MAX_PROBES_PER_SET: ${{ steps.mode.outputs.max_probes }}
-          # yt-dlp-sourced YT clips score lower than studio audio (a clean
-          # control only hit ~64) — 70 rejected real hits; 55 is the floor.
+          ACRCLOUD_DEADLINE_MS: ${{ steps.mode.outputs.id_deadline_ms }}
           ACRCLOUD_MIN_SCORE: "55"
           ACRCLOUD_MIN_IDENTIFIED: "4"
-          # Prefer SC/hearthis streams. YouTube Identify from GHA IPs is
-          # bot-walled even with cookies — File Scanning (next step) owns YT.
           ACRCLOUD_ALLOW_YOUTUBE: "0"
           ACRCLOUD_ALLOW_YOUTUBE_PRIORITY: "1"
           ACRCLOUD_IDENTIFY_YOUTUBE: "0"
           ACRCLOUD_YT_FAIL_FAST: "1"
-          # So Identify can say "File Scan owns YT" in the live summary.
           ACRCLOUD_FS_TOKEN: ${{ secrets.ACRCLOUD_FS_TOKEN }}
           ACRCLOUD_FS_CONTAINER_ID: ${{ secrets.ACRCLOUD_FS_CONTAINER_ID }}
-          # Multi-event focus (density + Top100 gaps) — not Street Parade-only.
           ACRCLOUD_EVENT_SLUGS: "street-parade,tomorrowland,ultra-miami,edc-lv,nature-one"
         run: npm run enrich:fingerprint
+
+      - name: Save checkpoint after Identify
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: prisma/dev.db
+          key: setradar-db-${{ github.run_id }}-1identify
 
       # Server-side YouTube fingerprinting (no yt-dlp / cookies / CI bot walls).
       # YouTube-only sparse queue — does not share Identify's SC-first ranking,
@@ -206,21 +224,31 @@ jobs:
       - name: ACRCloud File Scanning (YouTube)
         id: filescan
         if: steps.acr.outputs.configured == '1'
+        timeout-minutes: ${{ fromJSON(steps.mode.outputs.fs_step) }}
+        continue-on-error: true
         env:
           ACRCLOUD_FS_TOKEN: ${{ secrets.ACRCLOUD_FS_TOKEN }}
           ACRCLOUD_FS_CONTAINER_ID: ${{ secrets.ACRCLOUD_FS_CONTAINER_ID }}
           ACRCLOUD_FS_REGION: ${{ secrets.ACRCLOUD_FS_REGION }}
           ACRCLOUD_FS_MIN_SCORE: "55"
-          ACRCLOUD_FS_SET_LIMIT: ${{ steps.mode.outputs.set_limit }}
-          # Same festival focus as Identify so playbacks at those events rank first.
+          ACRCLOUD_FS_SET_LIMIT: ${{ steps.mode.outputs.fs_limit }}
+          ACRCLOUD_FS_TIMEOUT_MS: ${{ steps.mode.outputs.fs_wait_ms }}
           ACRCLOUD_EVENT_SLUGS: "street-parade,tomorrowland,ultra-miami,edc-lv,nature-one"
         run: npm run enrich:filescan
+
+      - name: Save checkpoint after File Scan
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: prisma/dev.db
+          key: setradar-db-${{ github.run_id }}-2filescan
 
       # Fill-null ISRC / canonical Beatport on high-play catalog tracks.
       # Deezer + MusicBrainz + TrackRadar + AudD — never scrape Beatport HTML.
       # Writes the cached DB (TRACK_ID_APPLY) and data/track-id-pins.json.
       - name: Beatport / ISRC enrich
         if: steps.mode.outputs.track_id_limit != '0'
+        timeout-minutes: 25
         env:
           TRACK_ID_APPLY: "1"
           TRACK_ID_LIMIT: ${{ steps.mode.outputs.track_id_limit }}
@@ -232,25 +260,28 @@ jobs:
 
       - name: LLM handle research
         if: steps.mode.outputs.do_thumbs == '1'
+        timeout-minutes: 12
         env:
           CLAUDE_AGENT_API: ${{ secrets.CLAUDE_AGENT_API }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY || secrets.GEMINI_AGENT_API || secrets.GEMINI || secrets.GOOGLE_API_KEY }}
-          LLM_RESEARCH_LIMIT: "12"
+          LLM_RESEARCH_LIMIT: "8"
           LLM_QUALITY: "1"
         run: npm run research:handles
         continue-on-error: true
 
       - name: Save enriched catalog DB
+        if: always()
         uses: actions/cache/save@v4
         with:
           path: prisma/dev.db
           key: setradar-db-${{ github.run_id }}
 
       # Single deployer: hand off to deploy-pages.yml (restores the saved DB,
-      # builds, publishes). Ships fingerprint IDs without waiting for a push.
+      # builds, publishes). Ships whatever landed in a checkpoint — do not wait
+      # for a green Identify if File Scan / ISRC already wrote rows.
       - name: Dispatch Pages deploy
-        if: success()
+        if: always() && hashFiles('prisma/dev.db') != ''
         uses: actions/github-script@v7
         with:
           script: |
