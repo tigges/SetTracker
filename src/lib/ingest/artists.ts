@@ -44,6 +44,9 @@ export function tidyPerformingCredit(name: string): string {
     .trim()
     // Series / mixtape after "//" ("Dom Dolla // Dancefloor Currency")
     .replace(/\s+\/\/\s+.+$/i, "")
+    // "Chris Lake Full Set Live @ …" must not leave a "Chris Lake Full" DJ.
+    .replace(/\s+(?:official\s+)?full(?:\s+sets?)?(?:\s+hd)?\b.*$/i, "")
+    .replace(/\s+(?:official|hd)\s*$/i, "")
     .replace(
       /\s+(?:tech\s+house\s+|bass\s+house\s+|house\s+)?(?:dj\s*)?sets?\b.*$/i,
       "",

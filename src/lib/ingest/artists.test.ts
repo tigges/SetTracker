@@ -20,6 +20,15 @@ assert.equal(
   "Biscits",
 );
 assert.equal(
+  performingCreditFromTitle(
+    "Chris Lake Full Set Live @ Outside Lands Festival 2024",
+  ),
+  "Chris Lake",
+);
+assert.equal(tidyPerformingCredit("Chris Lake Full"), "Chris Lake");
+assert.equal(tidyPerformingCredit("James Hype Official"), "James Hype");
+assert.equal(tidyPerformingCredit("James Hype Official Full Set HD"), "James Hype");
+assert.equal(
   tidyPerformingCredit("Biscits Tech House DJ Set"),
   "Biscits",
 );

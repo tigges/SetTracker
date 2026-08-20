@@ -73,6 +73,13 @@ describe("statsPlaybook", () => {
       }),
       true,
     );
+    assert.equal(
+      leftoverHostInCatalog({
+        name: "Chris Lake Full",
+        setCount: 1,
+      }),
+      true,
+    );
   });
 
   it("treats empty and directory sites as weak", () => {
