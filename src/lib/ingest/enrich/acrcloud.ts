@@ -52,6 +52,7 @@ import { join } from "node:path";
 import { promisify } from "node:util";
 import type { PrismaClient } from "@prisma/client";
 import { sanitizeArtistName } from "../../artistName";
+import { playCollapseKey } from "../../playCollapse";
 import { loadDjMagTop100RankBySlug } from "../../djmagTop100";
 import { normalizeGenre } from "../../genre";
 import { detectPlaybackHost, type PlaybackHost } from "../../playback";
@@ -1198,6 +1199,8 @@ async function enrichOneSet(
           provenance: true,
           idStatus: true,
           idTrackId: true,
+          rawText: true,
+          track: { select: { artistName: true, title: true } },
           idTrack: { select: { note: true } },
         },
       },
@@ -1210,6 +1213,14 @@ async function enrichOneSet(
     provenance: p.provenance,
     idStatus: p.idStatus,
   }));
+  let lastIdentifiedKey: string | null = null;
+  for (const p of [...set.plays].sort((a, b) => a.timestamp - b.timestamp)) {
+    const key = playCollapseKey({
+      artistName: p.track?.artistName,
+      title: p.track?.title,
+    });
+    if (key) lastIdentifiedKey = key;
+  }
   const half = Math.max(30, Math.floor(opts.stepSec / 2));
   const writeWeakGaps = boolEnv("ACRCLOUD_WRITE_WEAK_GAPS");
 
@@ -1261,6 +1272,11 @@ async function enrichOneSet(
       continue;
     }
     identified += 1;
+    const resolveKey = playCollapseKey({
+      artistName: result.hit.artist,
+      title: result.hit.title,
+    });
+    if (resolveKey) lastIdentifiedKey = resolveKey;
     if (!opts.dryRun) {
       const trackId = await upsertFingerprintTrack(
         prisma,
@@ -1407,6 +1423,18 @@ async function enrichOneSet(
       continue;
     }
 
+    const hitKey = playCollapseKey({
+      artistName: result.hit.artist,
+      title: result.hit.title,
+    });
+    if (hitKey && hitKey === lastIdentifiedKey) {
+      marks.push({
+        timestamp: plan.offsetSec,
+        provenance: "fingerprint",
+        idStatus: "identified",
+      });
+      continue;
+    }
     identified += 1;
     if (!opts.dryRun) {
       const trackId = await upsertFingerprintTrack(
@@ -1431,6 +1459,7 @@ async function enrichOneSet(
         `[acrcloud] dry-run ${candidate.slug}@${plan.offsetSec}: ${result.hit.artist} - ${result.hit.title} (${result.hit.score})`,
       );
     }
+    if (hitKey) lastIdentifiedKey = hitKey;
 
     marks.push({
       timestamp: plan.offsetSec,

@@ -33,6 +33,7 @@ import { eventSocialPayload, KNOWN_EVENTS, resolveEvent } from "./events";
 import { inferFilmSeriesName } from "./filmSeries";
 import { classifyJunkDj, inferJunkHostEvent } from "./junkDj";
 import { previousSlugsFor } from "./sourceRemaps";
+import { collapseConsecutivePlays, playCollapseKey } from "../playCollapse";
 import {
   festivalDropBoostActive,
   matchEditionSeed,
@@ -498,7 +499,13 @@ export async function runIngest(
     plays: RawPlay[],
     setGenre?: string | null,
   ): Promise<void> {
-    for (const p of plays) {
+    const collapsed = collapseConsecutivePlays(plays, (p) =>
+      playCollapseKey({
+        artistName: p.artistName,
+        title: p.trackTitle,
+      }),
+    ).map((p, i) => ({ ...p, position: i + 1 }));
+    for (const p of collapsed) {
       const base = {
         setId,
         position: p.position,

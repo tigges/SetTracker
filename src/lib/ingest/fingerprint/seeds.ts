@@ -12,6 +12,7 @@
  */
 
 import type { RawPlay } from "../types";
+import { playCollapseKey } from "../../playCollapse";
 
 export type FingerprintSeedRow = {
   /** mm:ss or h:mm:ss from set start */
@@ -36,24 +37,22 @@ export function parseClockToSec(raw: string): number | null {
 
 /**
  * Convert seed rows → RawPlay[]. Drops consecutive duplicates (same artist+title
- * within a few seconds — common in fingerprint spam).
+ * — fingerprint spam often re-IDs the same playing track every minute).
  */
 export function fingerprintRowsToPlays(
   rows: FingerprintSeedRow[],
 ): RawPlay[] {
   const out: RawPlay[] = [];
-  let lastKey = "";
-  let lastTs = -9999;
+  let lastKey: string | null = null;
   for (const row of rows) {
     const timestamp = parseClockToSec(row.at);
     if (timestamp == null) continue;
     const artist = row.artist.replace(/\s+/g, " ").trim();
     const title = row.title.replace(/\s+/g, " ").trim();
     if (!artist || !title) continue;
-    const key = `${artist.toLowerCase()}::${title.toLowerCase()}`;
-    if (key === lastKey && timestamp - lastTs < 45) continue;
-    lastKey = key;
-    lastTs = timestamp;
+    const key = playCollapseKey({ artistName: artist, title });
+    if (key && key === lastKey) continue;
+    if (key) lastKey = key;
     out.push({
       position: out.length + 1,
       timestamp,
