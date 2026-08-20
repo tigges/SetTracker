@@ -8,6 +8,11 @@
 import { appendFileSync } from "node:fs";
 import { PrismaClient } from "@prisma/client";
 import { enrichSparseSetsWithAcrCloud } from "../src/lib/ingest/enrich/acrcloud";
+import {
+  githubEnrichContext,
+  inspectCookiesFromEnv,
+  mergeEnrichRunReport,
+} from "../src/lib/ingest/enrich/enrichRunReport";
 
 const prisma = new PrismaClient();
 
@@ -80,6 +85,26 @@ async function main() {
     }
   }
   writeStepSummary(stats);
+  try {
+    await mergeEnrichRunReport(prisma, {
+      github: githubEnrichContext(),
+      cookies: inspectCookiesFromEnv(),
+      identify: {
+        enabled: stats.enabled,
+        candidates: stats.candidates,
+        setsProbed: stats.setsProbed,
+        probed: stats.probed,
+        identified: stats.identified,
+        unresolved: stats.unresolved,
+        clipFails: stats.clipFails,
+        youtubeBotWalls: stats.youtubeBotWalls,
+        youtubeSkipped: stats.youtubeSkipped,
+        skipped: stats.skipped,
+      },
+    });
+  } catch (err) {
+    console.warn("[acrcloud] enrich report write failed (non-fatal):", err);
+  }
 }
 
 main()

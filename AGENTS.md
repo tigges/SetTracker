@@ -218,6 +218,12 @@ unless asked.
   circuit (skip remaining YT Identify, fail-fast yt-dlp) and writes
   `::notice::` / `::warning::` plus a live Job Summary table without failing
   the job. Clip failures count toward the per-set probe cap.
+  `ACRCLOUD_YTDLP_COOKIES` is a portable Netscape secret (export from any
+  logged-in desktop browser). The device that starts the workflow does not
+  matter — `ubuntu-latest` is the IP YouTube sees. Cookies do not make GHA
+  YouTube-steady; refresh a throwaway account’s jar when `/stats` Last enrich
+  marks it stale. Identify + File Scan totals land on `/stats` after the next
+  Pages ship (DB snapshot + last enrich/deep/Pages conclusions).
 - **File Scanning (YouTube, CI-safe):** `npm run enrich:filescan`
   (`src/lib/ingest/enrich/acrFileScan.ts`; step in `catalog-enrich.yml`).
   Server-side — POST the YouTube URL to an ACRCloud **File Scanning** container;

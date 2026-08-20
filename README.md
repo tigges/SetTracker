@@ -166,7 +166,7 @@ the same way. Writes `Played` rows with `provenance: fingerprint` into
 | `ACRCLOUD_ALLOW_YOUTUBE=1` | Allow all YT sets (default off) |
 | `ACRCLOUD_ALLOW_YOUTUBE_PRIORITY=1` | YT for Top20 / festival sparse (default on) |
 | `ACRCLOUD_YT_DLP=0` | Disable yt-dlp YouTube sampling |
-| `ACRCLOUD_YTDLP_COOKIES` | Path to Netscape cookies.txt (bot wall bypass) |
+| `ACRCLOUD_YTDLP_COOKIES` | Path to Netscape cookies.txt (optional; GHA IPs still bot-wall) |
 
 #### YouTube via File Scanning (recommended for CI)
 
@@ -205,7 +205,7 @@ Our submit forces `engine=1` (audio fingerprint; override `ACRCLOUD_FS_ENGINE`).
 | `ACRCLOUD_HOST` | `identify-eu-west-1.acrcloud.com` |
 | `ACRCLOUD_ACCESS_KEY` | project access key |
 | `ACRCLOUD_ACCESS_SECRET` | project access secret |
-| `ACRCLOUD_YTDLP_COOKIES` | optional Netscape `cookies.txt` for YouTube |
+| `ACRCLOUD_YTDLP_COOKIES` | optional Netscape `cookies.txt` (portable secret — see below) |
 | `ACRCLOUD_FS_TOKEN` | File Scanning Console API token (YouTube) |
 | `ACRCLOUD_FS_CONTAINER_ID` | File Scanning container id |
 | `ACRCLOUD_FS_REGION` | optional container region (default `eu-west-1`) |
@@ -214,6 +214,29 @@ Our submit forces `engine=1` (audio fingerprint; override `ACRCLOUD_FS_ENGINE`).
 | `GEMINI_API_KEY` | Gemini **API** key from [AI Studio](https://aistudio.google.com/apikey) (preferred — Search grounding). Aliases: `GEMINI_AGENT_API`, `GEMINI`, `GOOGLE_API_KEY` |
 | `TRACKRADAR_API_KEY` | TrackRadar MCP bearer (`tr_live_…`) for `search_track` / mix analyze |
 | `AUDD_API_TOKEN` | optional AudD recognize (`AUDD_ANALYZE=1`); `findLyrics` needs no key |
+
+**YouTube cookies** (Identify / diagnose only — File Scanning does not use them):
+
+- The jar is a **GitHub Actions secret**, not a machine. Export Netscape
+  `cookies.txt` from any logged-in desktop browser (`yt-dlp --cookies-from-browser chrome`
+  or a cookies.txt extension that includes HttpOnly), paste the whole file
+  (including the `# Netscape HTTP Cookie File` header) into
+  `ACRCLOUD_YTDLP_COOKIES`. You can start Catalog enrich from a phone, iPad,
+  or cron — the job still runs on `ubuntu-latest`. The device that clicks
+  **Run workflow** does not need the cookies.
+- Cookies **are** portable across your devices for *export*. They are **not**
+  a bypass for GitHub’s datacenter IPs. YouTube still returns “Sign in to
+  confirm you’re not a bot” from GHA even with a fresh jar. **File Scanning**
+  is the CI YouTube path.
+- Steadiness: use a **dedicated throwaway Google account** (not your main
+  login). Refresh the secret when `/stats` Last enrich says the jar is stale,
+  after `catalog-acr-diagnose` bot-walls, or about weekly. Include
+  `LOGIN_INFO`, `SAPISID`, `__Secure-1PSID`, `__Secure-1PSIDTS`. Session-only
+  rows (expiry `0`) die when the browser closes. Using a personal account
+  from GHA IPs can log that account out.
+- To actually raise yt-dlp hit-rate, run Identify on a **self-hosted runner
+  with a residential IP** and `--cookies-from-browser` on that box. GitHub-hosted
+  runners will not become “steady” by refreshing cookies harder.
 
 **Catalog junk** (verify-urls / Pages): festival stages (`Freedom Stage`,
 `Mainstage`) fold onto the parent festival; radio/session hosts become

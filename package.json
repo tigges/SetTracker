@@ -9,7 +9,7 @@
     "dev": "next dev",
     "predev": "tsx scripts/write-search-index.ts",
     "build": "next build",
-    "prebuild": "tsx scripts/write-search-index.ts && tsx --env-file=.env scripts/export-tracks.ts --public && tsx --env-file=.env scripts/export-entities.ts --public",
+    "prebuild": "tsx scripts/write-search-index.ts && tsx --env-file=.env scripts/export-tracks.ts --public && tsx --env-file=.env scripts/export-entities.ts --public && tsx scripts/write-actions-status.ts",
     "start": "next start",
     "lint": "eslint",
     "db:migrate": "prisma migrate dev",

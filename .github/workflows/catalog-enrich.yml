@@ -166,6 +166,7 @@ jobs:
             printf '%s\n' "$YT_COOKIES" > "$RUNNER_TEMP/yt-cookies.txt"
             echo "ACRCLOUD_YTDLP_COOKIES=$RUNNER_TEMP/yt-cookies.txt" >> "$GITHUB_ENV"
             echo "YouTube cookies present for yt-dlp."
+            npx tsx scripts/inspect-yt-cookies.ts --path "$RUNNER_TEMP/yt-cookies.txt"
           else
             echo "::notice::No ACRCLOUD_YTDLP_COOKIES secret. Cookies rarely help on GitHub IPs anyway — File Scanning is the CI path for YouTube."
           fi
