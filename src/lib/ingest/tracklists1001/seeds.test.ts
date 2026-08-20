@@ -164,6 +164,7 @@ import {
   TL_JAMIE_JONES_GAS_TOWER_LOST_HORIZON_FESTIVAL_2020,
   TL_SKRILLEX_BANCO_DE_CHILE_STAGE_LOLLAPALOOZA_CHILE_2026,
   TL_CHRIS_STUSSY_BOILER_ROOM_EDINBURGH_2024,
+  TL_JORIS_VOORN_KOROLOVA_ULTRA_MIAMI_RESISTANCE_COVE_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   tracklist1001RowsToPlays,
@@ -2607,6 +2608,55 @@ for (let i = 1; i < stussyEdinburgh.length; i++) {
   );
 }
 assert.equal(isWiredTracklistSlug("yt-42XFNGZrpaQ"), true);
+
+assertSeedClocks(TL_JORIS_VOORN_KOROLOVA_ULTRA_MIAMI_RESISTANCE_COVE_2026);
+assert.equal(TL_JORIS_VOORN_KOROLOVA_ULTRA_MIAMI_RESISTANCE_COVE_2026.length, 33);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-FQj71mhobYw"],
+  TL_JORIS_VOORN_KOROLOVA_ULTRA_MIAMI_RESISTANCE_COVE_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-korolovadj-joris-voorn-b2b-korolova-live"],
+  TL_JORIS_VOORN_KOROLOVA_ULTRA_MIAMI_RESISTANCE_COVE_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-https://soundcloud.com/korolovadj/joris-voorn-b2b-korolova-live"
+  ],
+  undefined,
+);
+const voornKorolovaCove = tracklist1001RowsToPlays(
+  TL_JORIS_VOORN_KOROLOVA_ULTRA_MIAMI_RESISTANCE_COVE_2026,
+);
+assert.equal(voornKorolovaCove.length, 33);
+assert.equal(voornKorolovaCove[0]?.provenance, "1001tl");
+assert.equal(voornKorolovaCove[0]?.timestamp, 10);
+assert.equal(voornKorolovaCove[0]?.artistName, "KREAM & Korolova");
+assert.equal(voornKorolovaCove[0]?.trackTitle, "Annihilation");
+assert.equal(voornKorolovaCove[19]?.trackTitle, "Utopia (Korolova Remix)");
+assert.equal(voornKorolovaCove[19]?.timestamp, 1 * 3600 + 6 * 60 + 40);
+assert.equal(voornKorolovaCove[32]?.trackTitle, "Kids (ANNA Edit)");
+assert.equal(voornKorolovaCove[32]?.timestamp, 1 * 3600 + 54 * 60 + 20);
+for (let i = 1; i < voornKorolovaCove.length; i++) {
+  assert.ok(
+    (voornKorolovaCove[i]!.timestamp ?? 0) >
+      (voornKorolovaCove[i - 1]!.timestamp ?? 0),
+    `Joris Voorn B2B Korolova Ultra Cove clocks must increase at index ${i}`,
+  );
+}
+assert.equal(isWiredTracklistSlug("yt-FQj71mhobYw"), true);
+assert.equal(
+  isWiredTracklistSlug("sc-korolovadj-joris-voorn-b2b-korolova-live"),
+  true,
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-FQj71mhobYw"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-yTRvLrtsM9I"],
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-FQj71mhobYw"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-xXRjglkAmq8"],
+);
 
 assertSeedClocks(TL_NICKY_ROMERO_PROTOCOL_RADIO_731);
 assert.equal(TL_NICKY_ROMERO_PROTOCOL_RADIO_731.length, 16);

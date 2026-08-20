@@ -550,4 +550,25 @@ assert.equal(
   false,
 );
 
+const voornKorolovaCoveSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url ===
+    "https://soundcloud.com/korolovadj/joris-voorn-b2b-korolova-live",
+);
+assert.ok(voornKorolovaCoveSc);
+assert.equal(voornKorolovaCoveSc.primaryArtist.name, "Joris Voorn");
+assert.equal(voornKorolovaCoveSc.eventName, "Ultra Music Festival");
+assert.equal(voornKorolovaCoveSc.seriesName, "Resistance");
+assert.equal(voornKorolovaCoveSc.type, "festival");
+assert.equal(
+  `sc-korolovadj-${slugify("joris-voorn-b2b-korolova-live")}`,
+  "sc-korolovadj-joris-voorn-b2b-korolova-live",
+);
+assert.equal(
+  SOUNDCLOUD_TRACK_SEEDS.some((s) =>
+    /mixcloud\.com\/UMFradio/.test(s.url),
+  ),
+  false,
+);
+
 console.log("soundcloud/tracks.test.ts ok");
