@@ -150,6 +150,8 @@ const VOORN_KOROLOVA_COVE = YOUTUBE_SETS.find((s) =>
 const COLYN_INNELLEA_COVE = YOUTUBE_SETS.find((s) =>
   s.video.includes("2BPWWYAgUE4"),
 );
+const AB_EDC_LV = YOUTUBE_SETS.find((s) => s.video.includes("OI02QgEA1Zw"));
+const LE_TWINS_TULUM = YOUTUBE_SETS.find((s) => s.video.includes("i7XZBixP9m0"));
 
 describe("watchMetaFromCuratedSeed", () => {
   it("builds ASOT 1290 meta from the curated 1001 capture", () => {
@@ -910,6 +912,17 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=2BPWWYAgUE4");
     // Last cue 1:25:00 + 180s pad.
     assert.equal(meta.durationSec, 1 * 3600 + 25 * 60 + 180);
+  });
+
+  it("builds Above & Beyond EDC kineticFIELD meta from the official description clocks", () => {
+    assert.ok(AB_EDC_LV);
+    const meta = watchMetaFromCuratedSeed(AB_EDC_LV);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "OI02QgEA1Zw");
+    assert.match(meta.title, /EDC Las Vegas 2026/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=OI02QgEA1Zw");
+    // Last cue 1:11:11 + 180s pad.
+    assert.equal(meta.durationSec, 1 * 3600 + 11 * 60 + 11 + 180);
   });
 
   it("returns null without a title or video id", () => {
@@ -2005,5 +2018,34 @@ describe("curated YouTube 429 fallback", () => {
     assert.equal(sets[0]?.seriesName, "Resistance");
     assert.match(String(sets[0]?.eventName ?? ""), /Ultra Music Festival/i);
     assert.match(String(sets[0]?.title ?? ""), /INNELLEA/i);
+  });
+
+  it("lands Above & Beyond EDC kineticFIELD 2026 from the official description clocks when watch is 429", async () => {
+    assert.ok(AB_EDC_LV);
+    const adapter = createYoutubeAdapter([AB_EDC_LV], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-OI02QgEA1Zw");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 18);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 1 * 3600 + 11 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "above-beyond");
+    assert.match(String(sets[0]?.eventName ?? ""), /EDC/i);
+    assert.notEqual(sets[0]!.sourceSlug, "yt-phWKhIwgiTo");
+  });
+
+  it("lands Le Twins Porque No Tulum 2025 without inventing 1001 clocks when watch is 429", async () => {
+    assert.ok(LE_TWINS_TULUM);
+    assert.match(String(LE_TWINS_TULUM.tracklist1001Url), /2lhgbpq1/);
+    assert.equal(LE_TWINS_TULUM.tracklist1001, undefined);
+    const adapter = createYoutubeAdapter([LE_TWINS_TULUM], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-i7XZBixP9m0");
+    assert.equal(sets[0]!.type, "festival");
+    assert.equal(sets[0]?.primaryArtist?.slug, "le-twins");
+    assert.match(String(sets[0]?.title ?? ""), /2025-01-04/);
+    assert.match(String(sets[0]?.eventName ?? ""), /Porque No/i);
   });
 });
