@@ -164,8 +164,11 @@ import {
   TL_JAMIE_JONES_GAS_TOWER_LOST_HORIZON_FESTIVAL_2020,
   TL_SKRILLEX_BANCO_DE_CHILE_STAGE_LOLLAPALOOZA_CHILE_2026,
   TL_CHRIS_STUSSY_BOILER_ROOM_EDINBURGH_2024,
+  TL_JORIS_VOORN_KOROLOVA_ULTRA_MIAMI_RESISTANCE_COVE_2026,
+  TL_COLYN_INNELLEA_ULTRA_MIAMI_RESISTANCE_COVE_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
+  isSecondaryPlaybackSlug,
   tracklist1001RowsToPlays,
 } from "./seeds";
 import { assertSeedClocks } from "./festival2026";
@@ -2608,6 +2611,113 @@ for (let i = 1; i < stussyEdinburgh.length; i++) {
 }
 assert.equal(isWiredTracklistSlug("yt-42XFNGZrpaQ"), true);
 
+assertSeedClocks(TL_JORIS_VOORN_KOROLOVA_ULTRA_MIAMI_RESISTANCE_COVE_2026);
+assert.equal(TL_JORIS_VOORN_KOROLOVA_ULTRA_MIAMI_RESISTANCE_COVE_2026.length, 33);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-FQj71mhobYw"],
+  TL_JORIS_VOORN_KOROLOVA_ULTRA_MIAMI_RESISTANCE_COVE_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-korolovadj-joris-voorn-b2b-korolova-live"],
+  TL_JORIS_VOORN_KOROLOVA_ULTRA_MIAMI_RESISTANCE_COVE_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-https://soundcloud.com/korolovadj/joris-voorn-b2b-korolova-live"
+  ],
+  undefined,
+);
+const voornKorolovaCove = tracklist1001RowsToPlays(
+  TL_JORIS_VOORN_KOROLOVA_ULTRA_MIAMI_RESISTANCE_COVE_2026,
+);
+assert.equal(voornKorolovaCove.length, 33);
+assert.equal(voornKorolovaCove[0]?.provenance, "1001tl");
+assert.equal(voornKorolovaCove[0]?.timestamp, 10);
+assert.equal(voornKorolovaCove[0]?.artistName, "KREAM & Korolova");
+assert.equal(voornKorolovaCove[0]?.trackTitle, "Annihilation");
+assert.equal(voornKorolovaCove[19]?.trackTitle, "Utopia (Korolova Remix)");
+assert.equal(voornKorolovaCove[19]?.timestamp, 1 * 3600 + 6 * 60 + 40);
+assert.equal(voornKorolovaCove[32]?.trackTitle, "Kids (ANNA Edit)");
+assert.equal(voornKorolovaCove[32]?.timestamp, 1 * 3600 + 54 * 60 + 20);
+for (let i = 1; i < voornKorolovaCove.length; i++) {
+  assert.ok(
+    (voornKorolovaCove[i]!.timestamp ?? 0) >
+      (voornKorolovaCove[i - 1]!.timestamp ?? 0),
+    `Joris Voorn B2B Korolova Ultra Cove clocks must increase at index ${i}`,
+  );
+}
+assert.equal(isWiredTracklistSlug("yt-FQj71mhobYw"), true);
+assert.equal(
+  isWiredTracklistSlug("sc-korolovadj-joris-voorn-b2b-korolova-live"),
+  true,
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-FQj71mhobYw"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-yTRvLrtsM9I"],
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-FQj71mhobYw"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-xXRjglkAmq8"],
+);
+
+assertSeedClocks(TL_COLYN_INNELLEA_ULTRA_MIAMI_RESISTANCE_COVE_2026);
+assert.equal(TL_COLYN_INNELLEA_ULTRA_MIAMI_RESISTANCE_COVE_2026.length, 16);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-2BPWWYAgUE4"],
+  TL_COLYN_INNELLEA_ULTRA_MIAMI_RESISTANCE_COVE_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-innellea-colyn-b2b-innella-at-ultra"],
+  TL_COLYN_INNELLEA_ULTRA_MIAMI_RESISTANCE_COVE_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-https://soundcloud.com/innellea/colyn-b2b-innella-at-ultra"
+  ],
+  undefined,
+);
+const colynInnelleaCove = tracklist1001RowsToPlays(
+  TL_COLYN_INNELLEA_ULTRA_MIAMI_RESISTANCE_COVE_2026,
+);
+assert.equal(colynInnelleaCove.length, 16);
+assert.equal(colynInnelleaCove[0]?.provenance, "1001tl");
+assert.equal(colynInnelleaCove[0]?.timestamp, 0);
+assert.equal(colynInnelleaCove[0]?.artistName, "Innellea");
+assert.equal(colynInnelleaCove[0]?.trackTitle, "Slave To The Hype");
+assert.equal(colynInnelleaCove[4]?.trackTitle, "Mercy (Innellea Remix)");
+assert.equal(colynInnelleaCove[4]?.timestamp, 20 * 60 + 50);
+assert.equal(colynInnelleaCove[15]?.trackTitle, "My Journey");
+assert.equal(colynInnelleaCove[15]?.timestamp, 1 * 3600 + 25 * 60);
+for (let i = 1; i < colynInnelleaCove.length; i++) {
+  assert.ok(
+    (colynInnelleaCove[i]!.timestamp ?? 0) >
+      (colynInnelleaCove[i - 1]!.timestamp ?? 0),
+    `Colyn B2B Innellea Ultra Cove clocks must increase at index ${i}`,
+  );
+}
+assert.equal(isWiredTracklistSlug("yt-2BPWWYAgUE4"), true);
+assert.equal(
+  isWiredTracklistSlug("sc-innellea-colyn-b2b-innella-at-ultra"),
+  true,
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-2BPWWYAgUE4"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-FQj71mhobYw"],
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-2BPWWYAgUE4"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-xXRjglkAmq8"],
+);
+assert.equal(isSecondaryPlaybackSlug("yt-2BPWWYAgUE4"), false);
+assert.equal(
+  isSecondaryPlaybackSlug("sc-innellea-colyn-b2b-innella-at-ultra"),
+  true,
+);
+assert.equal(
+  isSecondaryPlaybackSlug("sc-korolovadj-joris-voorn-b2b-korolova-live"),
+  true,
+);
+
 assertSeedClocks(TL_NICKY_ROMERO_PROTOCOL_RADIO_731);
 assert.equal(TL_NICKY_ROMERO_PROTOCOL_RADIO_731.length, 16);
 assert.equal(
@@ -3759,6 +3869,26 @@ for (let i = 1; i < brandonPv.length; i++) {
     `BRANDON Parookaville 2024 clocks must increase at index ${i}`,
   );
 }
+
+// Tini Gessler ANTS Ushuaïa — official SC playback in, 1001 URL recorded,
+// screenshots had no clocks. Do not invent 1001tl rows or sc-https://… slugs.
+assert.equal(
+  isWiredTracklistSlug("sc-tini-gessler-tini-gessler-ants-x-ushuaia"),
+  false,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-tini-gessler-tini-gessler-ants-x-ushuaia"
+  ],
+  undefined,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-https://soundcloud.com/tini-gessler/tini-gessler-ants-x-ushuaia"
+  ],
+  undefined,
+);
+assert.equal(isWiredTracklistSlug("yt-sLtNC21myWM"), true);
 
 // Claptone Clapcast 576 — official SC playback in, 1001 URL recorded,
 // no cue paste. Do not invent 1001tl rows or sc-https://… slugs.

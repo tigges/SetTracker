@@ -144,6 +144,12 @@ const SKRILLEX_LOLLA_CHILE = YOUTUBE_SETS.find((s) =>
 const STUSSY_BOILER_EDINBURGH = YOUTUBE_SETS.find((s) =>
   s.video.includes("42XFNGZrpaQ"),
 );
+const VOORN_KOROLOVA_COVE = YOUTUBE_SETS.find((s) =>
+  s.video.includes("FQj71mhobYw"),
+);
+const COLYN_INNELLEA_COVE = YOUTUBE_SETS.find((s) =>
+  s.video.includes("2BPWWYAgUE4"),
+);
 
 describe("watchMetaFromCuratedSeed", () => {
   it("builds ASOT 1290 meta from the curated 1001 capture", () => {
@@ -882,6 +888,28 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=42XFNGZrpaQ");
     // Last cue 1:11:49 + 180s pad.
     assert.equal(meta.durationSec, 1 * 3600 + 11 * 60 + 49 + 180);
+  });
+
+  it("builds Joris Voorn B2B Korolova Ultra Cove meta from the curated 1001 capture", () => {
+    assert.ok(VOORN_KOROLOVA_COVE);
+    const meta = watchMetaFromCuratedSeed(VOORN_KOROLOVA_COVE);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "FQj71mhobYw");
+    assert.match(meta.title, /Resistance The Cove/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=FQj71mhobYw");
+    // Last cue 1:54:20 + 180s pad.
+    assert.equal(meta.durationSec, 1 * 3600 + 54 * 60 + 20 + 180);
+  });
+
+  it("builds Colyn B2B Innellea Ultra Cove meta from the curated 1001 capture", () => {
+    assert.ok(COLYN_INNELLEA_COVE);
+    const meta = watchMetaFromCuratedSeed(COLYN_INNELLEA_COVE);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "2BPWWYAgUE4");
+    assert.match(meta.title, /ULTRA MIAMI 2026/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=2BPWWYAgUE4");
+    // Last cue 1:25:00 + 180s pad.
+    assert.equal(meta.durationSec, 1 * 3600 + 25 * 60 + 180);
   });
 
   it("returns null without a title or video id", () => {
@@ -1943,5 +1971,39 @@ describe("curated YouTube 429 fallback", () => {
       false,
     );
     assert.match(String(sets[0]?.title ?? ""), /Chris Stussy/i);
+  });
+
+  it("lands Joris Voorn B2B Korolova Ultra Cove from the 1001 seed when watch is 429", async () => {
+    assert.ok(VOORN_KOROLOVA_COVE);
+    const adapter = createYoutubeAdapter([VOORN_KOROLOVA_COVE], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-FQj71mhobYw");
+    assert.equal(sets[0]!.type, "festival");
+    assert.equal(sets[0]!.genre, "Melodic Techno");
+    assert.ok(sets[0]!.plays.length >= 33);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.equal(sets[0]?.primaryArtist?.slug, "joris-voorn");
+    assert.ok(sets[0]?.collaborators?.some((c) => c.slug === "korolova"));
+    assert.equal(sets[0]?.seriesName, "Resistance");
+    assert.match(String(sets[0]?.eventName ?? ""), /Ultra Music Festival/i);
+    assert.match(String(sets[0]?.title ?? ""), /B2B Korolova/i);
+  });
+
+  it("lands Colyn B2B Innellea Ultra Cove from the 1001 seed when watch is 429", async () => {
+    assert.ok(COLYN_INNELLEA_COVE);
+    const adapter = createYoutubeAdapter([COLYN_INNELLEA_COVE], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-2BPWWYAgUE4");
+    assert.equal(sets[0]!.type, "festival");
+    assert.equal(sets[0]!.genre, "Melodic Techno");
+    assert.ok(sets[0]!.plays.length >= 16);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.equal(sets[0]?.primaryArtist?.slug, "colyn");
+    assert.ok(sets[0]?.collaborators?.some((c) => c.slug === "innellea"));
+    assert.equal(sets[0]?.seriesName, "Resistance");
+    assert.match(String(sets[0]?.eventName ?? ""), /Ultra Music Festival/i);
+    assert.match(String(sets[0]?.title ?? ""), /INNELLEA/i);
   });
 });

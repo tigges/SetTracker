@@ -24,7 +24,14 @@ export const SET_SOURCE_REMAPS: SetSourceRemap[] = [
     playbackUrl: "https://www.youtube.com/watch?v=Uq1WP8v3U4o",
     note: "Tomorrowland replaced the private Fisher Freedom WE2 Relive (2026-08-12).",
   },
-];
+  {
+    fromSlug: "sc-innellea-colyn-b2b-innella-at-ultra",
+    toSlug: "yt-2BPWWYAgUE4",
+    sourceUrl: "https://youtu.be/2BPWWYAgUE4",
+    playbackUrl: "https://youtu.be/2BPWWYAgUE4",
+    note: "Same Resistance Cove night as official YT. SC permalink spells innella — fold so /stats and /capture-1001 list one set.",
+  },
+]
 
 export const SET_SLUG_ALIASES: Record<string, string> = Object.fromEntries(
   SET_SOURCE_REMAPS.map((r) => [r.fromSlug, r.toSlug]),

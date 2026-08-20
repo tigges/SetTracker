@@ -3,6 +3,24 @@
   "updatedAt": "2026-08-19T00:00:00.000Z",
   "urls": [
     {
+      "label": "Colyn B2B Innellea · Resistance The Cove, Ultra Miami 2026-03-28",
+      "slug": "yt-2BPWWYAgUE4",
+      "name": "TL_COLYN_INNELLEA_ULTRA_MIAMI_RESISTANCE_COVE_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/27d15hjt/colyn-innellea-resistance-the-cove-ultra-music-festival-miami-united-states-2026-03-28.html",
+      "youtubeUrl": "https://youtu.be/2BPWWYAgUE4",
+      "soundcloudUrl": "https://soundcloud.com/innellea/colyn-b2b-innella-at-ultra",
+      "note": "Operator paste 2026-08-20. 16 timed cues on official YT. SC innellea permalink (innella typo) folds onto yt-2BPWWYAgUE4 so leftover/capture list one set. Overlay TL_Colyn&Innellea_Resistance_The-Cove_Ultra-Music-Festival_Miami_2026-03-28 is not a valid identifier. hearthis razorator is a fan reupload — do not wire. Never sc-https://…. Distinct from Voorn B2B Korolova Cove and Vintage Culture Resistance Megastructure."
+    },
+    {
+      "label": "Joris Voorn B2B Korolova · Resistance The Cove, Ultra Miami 2026-03-28",
+      "slug": "yt-FQj71mhobYw",
+      "name": "TL_JORIS_VOORN_KOROLOVA_ULTRA_MIAMI_RESISTANCE_COVE_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/16sym4c1/joris-voorn-korolova-resistance-the-cove-ultra-music-festival-miami-united-states-2026-03-28.html",
+      "youtubeUrl": "https://youtu.be/FQj71mhobYw",
+      "soundcloudUrl": "https://soundcloud.com/korolovadj/joris-voorn-b2b-korolova-live",
+      "note": "Operator paste 2026-08-20. 33 timed cues on official YT + korolovadj SC. Overlay TL_Joris-Voorn&Korolov_Resistance_The-Cove_Ultra-Music-Festival-Miami_2026-03-28 is not a valid identifier. Mixcloud UMF Radio 883 is a mirror only. Never sc-https://…. Distinct from Spectrum Radio 485, Korolova Snowattack/Tulum/Captive Soul, and Vintage Culture Resistance Megastructure."
+    },
+    {
       "label": "Chris Stussy · Boiler Room Edinburgh, United Kingdom 2024-05-19",
       "slug": "yt-42XFNGZrpaQ",
       "name": "TL_CHRIS_STUSSY_BOILER_ROOM_EDINBURGH_2024",
@@ -307,6 +325,13 @@
     }
   ],
   "pendingCuePaste": [
+    {
+      "label": "Tini Gessler · ANTS, Ushuaïa Ibiza 2026-07-04",
+      "slug": "sc-tini-gessler-tini-gessler-ants-x-ushuaia",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/108xuk31/tini-gessler-ants-ushuaia-ibiza-spain-2026-07-04.html",
+      "soundcloudUrl": "https://soundcloud.com/tini-gessler/tini-gessler-ants-x-ushuaia",
+      "note": "Official SC playback wired. Operator 1001 URL + untimed screenshots — do not scrape or invent clocks. Paste timed cues to seed TL_TINI_GESSLER_ANTS_USHUAIA_IBIZA_2026. Distinct from HoneyLuv ANTS yt-sLtNC21myWM. Never sc-https://…."
+    },
     {
       "label": "Claptone · Clapcast 576 2026-07-31",
       "slug": "sc-claptone-clapcast-576",

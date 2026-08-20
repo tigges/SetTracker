@@ -543,5 +543,38 @@ assert.equal(
   ),
   "mapped",
 );
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "yt-2BPWWYAgUE4",
+      title: "COLYN b2b INNELLEA || LIVE @ ULTRA MIAMI 2026",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "sc-innellea-colyn-b2b-innella-at-ultra",
+      title: "COLYN B2B INNELLA AT ULTRA MIAMI 2026",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "sc-innellea-colyn-b2b-innella-at-ultra",
+      title: "COLYN B2B INNELLA AT ULTRA MIAMI 2026",
+    }),
+    new Set(),
+    now,
+  ),
+  "mirror",
+);
 
 console.log("nextCaptures.queue.test.ts ok");

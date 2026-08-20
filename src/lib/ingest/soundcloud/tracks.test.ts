@@ -484,6 +484,21 @@ assert.equal(
   `sc-giuseppeottaviani-${slugify("giuseppe-ottaviani-digitalsociety")}`,
   "sc-giuseppeottaviani-giuseppe-ottaviani-digitalsociety",
 );
+const tiniAntsSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url ===
+    "https://soundcloud.com/tini-gessler/tini-gessler-ants-x-ushuaia",
+);
+assert.ok(tiniAntsSc);
+assert.equal(tiniAntsSc.primaryArtist.name, "Tini Gessler");
+assert.equal(tiniAntsSc.seriesName, "ANTS");
+assert.equal(tiniAntsSc.eventName, "Ushuaïa Ibiza");
+assert.equal(tiniAntsSc.type, "mix");
+assert.equal(
+  `sc-tini-gessler-${slugify("tini-gessler-ants-x-ushuaia")}`,
+  "sc-tini-gessler-tini-gessler-ants-x-ushuaia",
+);
+
 assert.equal(
   SOUNDCLOUD_TRACK_SEEDS.some((s) =>
     s.url.startsWith("sc-https://"),
@@ -532,6 +547,49 @@ assert.equal(
   SOUNDCLOUD_TRACK_SEEDS.some((s) =>
     /meduzamusic\/meduza-club-space$/.test(s.url),
   ),
+  false,
+);
+
+const voornKorolovaCoveSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url ===
+    "https://soundcloud.com/korolovadj/joris-voorn-b2b-korolova-live",
+);
+assert.ok(voornKorolovaCoveSc);
+assert.equal(voornKorolovaCoveSc.primaryArtist.name, "Joris Voorn");
+assert.equal(voornKorolovaCoveSc.eventName, "Ultra Music Festival");
+assert.equal(voornKorolovaCoveSc.seriesName, "Resistance");
+assert.equal(voornKorolovaCoveSc.type, "festival");
+assert.equal(
+  `sc-korolovadj-${slugify("joris-voorn-b2b-korolova-live")}`,
+  "sc-korolovadj-joris-voorn-b2b-korolova-live",
+);
+assert.equal(
+  SOUNDCLOUD_TRACK_SEEDS.some((s) =>
+    /mixcloud\.com\/UMFradio/.test(s.url),
+  ),
+  false,
+);
+
+assert.equal(
+  SOUNDCLOUD_TRACK_SEEDS.some(
+    (s) =>
+      s.url === "https://soundcloud.com/innellea/colyn-b2b-innella-at-ultra",
+  ),
+  false,
+);
+assert.equal(
+  `sc-innellea-${slugify("colyn-b2b-innella-at-ultra")}`,
+  "sc-innellea-colyn-b2b-innella-at-ultra",
+);
+assert.equal(
+  SOUNDCLOUD_TRACK_SEEDS.some((s) =>
+    /hearthis\.at\/razorator/.test(s.url),
+  ),
+  false,
+);
+assert.equal(
+  SOUNDCLOUD_TRACK_SEEDS.some((s) => /mixcloud\.com/.test(s.url)),
   false,
 );
 

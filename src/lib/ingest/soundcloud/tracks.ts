@@ -549,4 +549,33 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     type: "mix",
     minDurationSec: 90 * 60,
   },
+  {
+    // Official Tini Gessler ANTS x Ushuaïa playback. Operator 1001 URL
+    // 108xuk31 recorded in known-1001-urls pendingCuePaste — screenshots
+    // had track names without clocks. Do not scrape or invent 1001tl rows.
+    // Never wire sc-https://…. Distinct from HoneyLuv ANTS yt-sLtNC21myWM.
+    url: "https://soundcloud.com/tini-gessler/tini-gessler-ants-x-ushuaia",
+    primaryArtist: dj("Tini Gessler", { accent: "#ff4d6d" }),
+    genre: "Tech House",
+    seriesName: "ANTS",
+    eventName: "Ushuaïa Ibiza",
+    type: "mix",
+    minDurationSec: 45 * 60,
+  },
+  {
+    // Official korolovadj B2B upload; 1001TL wired via
+    // sc-korolovadj-joris-voorn-b2b-korolova-live (same list as yt-FQj71mhobYw).
+    // Mixcloud UMF Radio 883 is a mirror only. Never wire sc-https://….
+    // Distinct from Snowattack / Tulum / Captive Soul and Spectrum Radio 485.
+    url: "https://soundcloud.com/korolovadj/joris-voorn-b2b-korolova-live",
+    primaryArtist: dj("Joris Voorn", {
+      accent: "#2ec4b6",
+      homeCity: "Rotterdam, NL",
+    }),
+    genre: "Melodic Techno",
+    seriesName: "Resistance",
+    eventName: "Ultra Music Festival",
+    type: "festival",
+    minDurationSec: 90 * 60,
+  },
 ];

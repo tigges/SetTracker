@@ -179,6 +179,8 @@ export {
   TL_JAMIE_JONES_GAS_TOWER_LOST_HORIZON_FESTIVAL_2020,
   TL_SKRILLEX_BANCO_DE_CHILE_STAGE_LOLLAPALOOZA_CHILE_2026,
   TL_CHRIS_STUSSY_BOILER_ROOM_EDINBURGH_2024,
+  TL_JORIS_VOORN_KOROLOVA_ULTRA_MIAMI_RESISTANCE_COVE_2026,
+  TL_COLYN_INNELLEA_ULTRA_MIAMI_RESISTANCE_COVE_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   evenlySpaceRows,
 } from "./festival2026";
@@ -219,6 +221,18 @@ export function applyTracklist1001Seed(
 /** Already-captured 1001 seed — Stats / capture queue should not list these. */
 export function isWiredTracklistSlug(slug: string): boolean {
   return (TRACKLIST_1001_BY_SOURCE_SLUG[slug]?.length ?? 0) > 0;
+}
+
+/**
+ * SC / other slug that shares a 1001 seed with an official YouTube row.
+ * Leftover and capture queues keep the YT listing only.
+ */
+export function isSecondaryPlaybackSlug(slug: string): boolean {
+  const seed = TRACKLIST_1001_BY_SOURCE_SLUG[slug];
+  if (!seed?.length || slug.startsWith("yt-")) return false;
+  return Object.entries(TRACKLIST_1001_BY_SOURCE_SLUG).some(
+    ([other, rows]) => other.startsWith("yt-") && rows === seed,
+  );
 }
 
 /**

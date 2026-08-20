@@ -787,3 +787,98 @@ export const TL_CHRIS_STUSSY_BOILER_ROOM_EDINBURGH_2024: FingerprintSeedRow[] =
     { at: "59:30", artist: "Chris Stussy", title: "Bounce To The Beat" },
     { at: "1:11:49", artist: "Todd Terry ft. Martha Wash & Jocelyn Brown", title: "Something Going On (Acappella)" },
   ];
+
+/**
+ * Tini Gessler @ ANTS, Ushuaïa Ibiza, Spain 2026-07-04
+ * Official SoundCloud: https://soundcloud.com/tini-gessler/tini-gessler-ants-x-ushuaia
+ * https://www.1001tracklists.com/tracklist/108xuk31/tini-gessler-ants-ushuaia-ibiza-spain-2026-07-04.html
+ * Operator sent the 1001 URL + untimed screenshots — do not scrape 1001 or
+ * invent TL_TINI_GESSLER_ANTS_USHUAIA_IBIZA_2026 clocks. Official SC is
+ * sc-tini-gessler-tini-gessler-ants-x-ushuaia (never sc-https://…).
+ * Distinct from HoneyLuv ANTS yt-sLtNC21myWM. Paste timed 1001 cues to wire
+ * TRACKLIST_1001_BY_SOURCE_SLUG["sc-tini-gessler-tini-gessler-ants-x-ushuaia"].
+ */
+
+/**
+ * Joris Voorn B2B Korolova @ Resistance The Cove, Ultra Music Festival Miami 2026-03-28
+ * Official YouTube: https://youtu.be/FQj71mhobYw
+ * Official SoundCloud: https://soundcloud.com/korolovadj/joris-voorn-b2b-korolova-live
+ * Mixcloud https://www.mixcloud.com/UMFradio/umf-radio-883-joris-voorn-b2b-korolova/ is a mirror only.
+ * https://www.1001tracklists.com/tracklist/16sym4c1/joris-voorn-korolova-resistance-the-cove-ultra-music-festival-miami-united-states-2026-03-28.html
+ * Overlay name TL_Joris-Voorn&Korolov_Resistance_The-Cove_Ultra-Music-Festival-Miami_2026-03-28 is not a valid identifier.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-FQj71mhobYw"]
+ *       TRACKLIST_1001_BY_SOURCE_SLUG["sc-korolovadj-joris-voorn-b2b-korolova-live"]
+ * Never sc-https://…. Distinct from Spectrum Radio 485, Korolova Snowattack /
+ * Tulum / Captive Soul, and Vintage Culture Resistance Megastructure.
+ * Captured 2026-08-20 — provenance 1001tl.
+ */
+export const TL_JORIS_VOORN_KOROLOVA_ULTRA_MIAMI_RESISTANCE_COVE_2026: FingerprintSeedRow[] =
+  [
+    { at: "0:10", artist: "KREAM & Korolova", title: "Annihilation" },
+    { at: "3:30", artist: "Two Are & Saint Code", title: "Another Love (Mario Eighta Remix)" },
+    { at: "6:08", artist: "Korolova & JOA", title: "My Mind" },
+    { at: "10:03", artist: "Case Of The Mondays", title: "Don't React" },
+    { at: "17:45", artist: "TH;EN", title: "Ice Lips" },
+    { at: "22:00", artist: "Korolova", title: "Up A Notch" },
+    { at: "25:20", artist: "Joris Voorn & Roddy Lima & Taylr Renee", title: "Machine" },
+    { at: "33:27", artist: "deadmau5 ft. Stevie Appleton", title: "Science" },
+    { at: "34:54", artist: "Roland Clark", title: "Speak To Me (Accapella)" },
+    { at: "38:00", artist: "Korolova", title: "Another Life" },
+    { at: "42:35", artist: "BLOND:ISH & Zeeba", title: "Different Way (ARTBAT Remix)" },
+    { at: "46:30", artist: "Enai & Victor Garde ft. CERES", title: "That's My Sh*t" },
+    { at: "50:40", artist: "Bittermind & Enai", title: "Rayline" },
+    { at: "54:00", artist: "Michael Calfan & Axwell & Bigfett vs. Empire Of The Sun", title: "Resurrection vs. Walking On A Dream (Bigfett Mashup)" },
+    { at: "55:08", artist: "Empire Of The Sun", title: "Walking On A Dream (Acappella)" },
+    { at: "56:16", artist: "Michael Calfan", title: "Resurrection (Axwell Re-Cut Club Version / Bigfett Remix)" },
+    { at: "57:23", artist: "KASIA & Khainz & Mariz", title: "Stop Go" },
+    { at: "1:00:18", artist: "Jules Brand", title: "Kill Em" },
+    { at: "1:03:00", artist: "J Ribbon", title: "Redemption" },
+    { at: "1:06:40", artist: "Joris Voorn & GOODBOYS", title: "Utopia (Korolova Remix)" },
+    { at: "1:09:55", artist: "Joris Voorn & Funk D'Void", title: "Diabla" },
+    { at: "1:14:03", artist: "JOA ft. Rown", title: "No Sleep" },
+    { at: "1:18:00", artist: "Alex Wann & Aaron Hibell", title: "set me free (Joris Voorn Remix)" },
+    { at: "1:21:35", artist: "Korolova & Zamna Soundsystem", title: "Universe" },
+    { at: "1:25:09", artist: "ARTBAT & R3HAB & Stylo & Eli & Dani ft. NAIIM", title: "Fight Machine" },
+    { at: "1:27:58", artist: "Acrobatik & whatlewisdoes", title: "Lamazi" },
+    { at: "1:31:18", artist: "Moonman & Ferry Corsten & Joris Voorn", title: "Don't Be Afraid" },
+    { at: "1:34:58", artist: "RÜFÜS DU SOL", title: "In The Moment (Adriatique Remix)" },
+    { at: "1:38:40", artist: "Alcatraz", title: "Giv Me Luv (Jerome Isma-Ae Remix)" },
+    { at: "1:42:35", artist: "Glowal & DREYA V", title: "Physique" },
+    { at: "1:46:00", artist: "David Guetta & MORTEN ft. Trippie Redd", title: "Locked In" },
+    { at: "1:49:35", artist: "Agents Of Time & Korolova ft. Conor Ross", title: "Made For Love" },
+    { at: "1:54:20", artist: "MGMT", title: "Kids (ANNA Edit)" },
+  ];
+
+/**
+ * Colyn B2B Innellea @ Resistance The Cove, Ultra Music Festival Miami 2026-03-28
+ * Official YouTube: https://youtu.be/2BPWWYAgUE4
+ * Official SoundCloud permalink spells innella — fold onto YT
+ * (SET_SOURCE_REMAPS sc-innellea-colyn-b2b-innella-at-ultra → yt-2BPWWYAgUE4).
+ * hearthis.at/razorator/… is a fan reupload — do not wire as sourceUrl / playback.
+ * https://www.1001tracklists.com/tracklist/27d15hjt/colyn-innellea-resistance-the-cove-ultra-music-festival-miami-united-states-2026-03-28.html
+ * Overlay name TL_Colyn&Innellea_Resistance_The-Cove_Ultra-Music-Festival_Miami_2026-03-28 is not a valid identifier.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-2BPWWYAgUE4"]
+ *       TRACKLIST_1001_BY_SOURCE_SLUG["sc-innellea-colyn-b2b-innella-at-ultra"] (hide leftover until fold)
+ * Never sc-https://…. Distinct from Joris Voorn B2B Korolova Cove the same night
+ * and Vintage Culture Resistance Megastructure.
+ * Captured 2026-08-20 — provenance 1001tl.
+ */
+export const TL_COLYN_INNELLEA_ULTRA_MIAMI_RESISTANCE_COVE_2026: FingerprintSeedRow[] =
+  [
+    { at: "0:00", artist: "Innellea", title: "Slave To The Hype" },
+    { at: "5:00", artist: "Joshlane", title: "Call In Sick" },
+    { at: "8:10", artist: "Volkoder", title: "So Am I" },
+    { at: "17:30", artist: "The Chemical Brothers ft. Q-Tip", title: "Go (VINOA Rework)" },
+    { at: "20:50", artist: "Kanye West ft. Big Sean & Pusha T & 2 Chainz", title: "Mercy (Innellea Remix)" },
+    { at: "25:30", artist: "Colyn", title: "When The Fire Starts To Burn" },
+    { at: "29:30", artist: "Innellea", title: "Bounce Music" },
+    { at: "36:20", artist: "Yubik", title: "Prnstar" },
+    { at: "44:44", artist: "TH;EN & Carlo Whale", title: "Echoes Of You" },
+    { at: "58:00", artist: "GENESI", title: "Expanse" },
+    { at: "1:05:00", artist: "TCTS & Franksy", title: "The Message" },
+    { at: "1:08:20", artist: "Babasonicos", title: "Tiempo Off (Colyn Remix)" },
+    { at: "1:12:00", artist: "Piero Pirupa & Champagne Kenny", title: "Bring The Bassline" },
+    { at: "1:17:00", artist: "Moby", title: "Extreme Ways" },
+    { at: "1:21:00", artist: "Kavinsky ft. Lovefoxxx", title: "Nightcall (Yubik Edit)" },
+    { at: "1:25:00", artist: "Colyn", title: "My Journey" },
+  ];

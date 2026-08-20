@@ -140,6 +140,8 @@ import {
   TL_JAMIE_JONES_GAS_TOWER_LOST_HORIZON_FESTIVAL_2020,
   TL_SKRILLEX_BANCO_DE_CHILE_STAGE_LOLLAPALOOZA_CHILE_2026,
   TL_CHRIS_STUSSY_BOILER_ROOM_EDINBURGH_2024,
+  TL_JORIS_VOORN_KOROLOVA_ULTRA_MIAMI_RESISTANCE_COVE_2026,
+  TL_COLYN_INNELLEA_ULTRA_MIAMI_RESISTANCE_COVE_2026,
 } from "../tracklists1001/seeds";
 import type { RawArtist } from "../types";
 import { slugify } from "../types";
@@ -1862,6 +1864,41 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/23nu9rq9/vintage-culture-resistance-megastructure-ultra-music-festival-miami-united-states-2026-03-27.html",
     tracklist1001: TL_VINTAGE_CULTURE_ULTRA_MIAMI_RESISTANCE_2026,
+  },
+  {
+    // Official Joris Voorn B2B Korolova Resistance The Cove. Same list as
+    // sc-korolovadj-joris-voorn-b2b-korolova-live. Mixcloud UMF Radio 883
+    // is a mirror only. Distinct from Vintage Culture Resistance Megastructure.
+    video: "https://youtu.be/FQj71mhobYw",
+    primaryArtist: dj("Joris Voorn", {
+      accent: "#2ec4b6",
+      homeCity: "Rotterdam, NL",
+    }),
+    genre: "Melodic Techno",
+    type: "festival",
+    title:
+      "Joris Voorn B2B Korolova LIVE @ ULTRA MUSIC FESTIVAL MIAMI 2026 | RESISTANCE THE COVE",
+    seriesName: "Resistance",
+    eventName: "Ultra Music Festival",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/16sym4c1/joris-voorn-korolova-resistance-the-cove-ultra-music-festival-miami-united-states-2026-03-28.html",
+    tracklist1001: TL_JORIS_VOORN_KOROLOVA_ULTRA_MIAMI_RESISTANCE_COVE_2026,
+  },
+  {
+    // Official Colyn B2B Innellea Resistance The Cove. SC innellea
+    // permalink (innella typo) folds onto this slug via SET_SOURCE_REMAPS —
+    // do not ingest a second leftover. hearthis razorator is a fan
+    // reupload — do not wire. Distinct from Voorn B2B Korolova Cove.
+    video: "https://youtu.be/2BPWWYAgUE4",
+    primaryArtist: dj("Colyn", { accent: "#7b2cbf" }),
+    genre: "Melodic Techno",
+    type: "festival",
+    title: "COLYN b2b INNELLEA || LIVE @ ULTRA MIAMI 2026",
+    seriesName: "Resistance",
+    eventName: "Ultra Music Festival",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/27d15hjt/colyn-innellea-resistance-the-cove-ultra-music-festival-miami-united-states-2026-03-28.html",
+    tracklist1001: TL_COLYN_INNELLEA_ULTRA_MIAMI_RESISTANCE_COVE_2026,
   },
   {
     video: "https://www.youtube.com/watch?v=knJyJPP45dg",
