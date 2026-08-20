@@ -848,3 +848,36 @@ export const TL_JORIS_VOORN_KOROLOVA_ULTRA_MIAMI_RESISTANCE_COVE_2026: Fingerpri
     { at: "1:49:35", artist: "Agents Of Time & Korolova ft. Conor Ross", title: "Made For Love" },
     { at: "1:54:20", artist: "MGMT", title: "Kids (ANNA Edit)" },
   ];
+
+/**
+ * Colyn B2B Innellea @ Resistance The Cove, Ultra Music Festival Miami 2026-03-28
+ * Official YouTube: https://youtu.be/2BPWWYAgUE4
+ * Official SoundCloud: https://soundcloud.com/innellea/colyn-b2b-innella-at-ultra
+ * hearthis.at/razorator/… is a fan reupload — do not wire as sourceUrl / playback.
+ * https://www.1001tracklists.com/tracklist/27d15hjt/colyn-innellea-resistance-the-cove-ultra-music-festival-miami-united-states-2026-03-28.html
+ * Overlay name TL_Colyn&Innellea_Resistance_The-Cove_Ultra-Music-Festival_Miami_2026-03-28 is not a valid identifier.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-2BPWWYAgUE4"]
+ *       TRACKLIST_1001_BY_SOURCE_SLUG["sc-innellea-colyn-b2b-innella-at-ultra"]
+ * Never sc-https://…. Distinct from Joris Voorn B2B Korolova Cove the same night
+ * and Vintage Culture Resistance Megastructure.
+ * Captured 2026-08-20 — provenance 1001tl.
+ */
+export const TL_COLYN_INNELLEA_ULTRA_MIAMI_RESISTANCE_COVE_2026: FingerprintSeedRow[] =
+  [
+    { at: "0:00", artist: "Innellea", title: "Slave To The Hype" },
+    { at: "5:00", artist: "Joshlane", title: "Call In Sick" },
+    { at: "8:10", artist: "Volkoder", title: "So Am I" },
+    { at: "17:30", artist: "The Chemical Brothers ft. Q-Tip", title: "Go (VINOA Rework)" },
+    { at: "20:50", artist: "Kanye West ft. Big Sean & Pusha T & 2 Chainz", title: "Mercy (Innellea Remix)" },
+    { at: "25:30", artist: "Colyn", title: "When The Fire Starts To Burn" },
+    { at: "29:30", artist: "Innellea", title: "Bounce Music" },
+    { at: "36:20", artist: "Yubik", title: "Prnstar" },
+    { at: "44:44", artist: "TH;EN & Carlo Whale", title: "Echoes Of You" },
+    { at: "58:00", artist: "GENESI", title: "Expanse" },
+    { at: "1:05:00", artist: "TCTS & Franksy", title: "The Message" },
+    { at: "1:08:20", artist: "Babasonicos", title: "Tiempo Off (Colyn Remix)" },
+    { at: "1:12:00", artist: "Piero Pirupa & Champagne Kenny", title: "Bring The Bassline" },
+    { at: "1:17:00", artist: "Moby", title: "Extreme Ways" },
+    { at: "1:21:00", artist: "Kavinsky ft. Lovefoxxx", title: "Nightcall (Yubik Edit)" },
+    { at: "1:25:00", artist: "Colyn", title: "My Journey" },
+  ];
