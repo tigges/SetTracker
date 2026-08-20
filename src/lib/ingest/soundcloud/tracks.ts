@@ -562,4 +562,20 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     type: "mix",
     minDurationSec: 45 * 60,
   },
+  {
+    // Official korolovadj B2B upload; 1001TL wired via
+    // sc-korolovadj-joris-voorn-b2b-korolova-live (same list as yt-FQj71mhobYw).
+    // Mixcloud UMF Radio 883 is a mirror only. Never wire sc-https://….
+    // Distinct from Snowattack / Tulum / Captive Soul and Spectrum Radio 485.
+    url: "https://soundcloud.com/korolovadj/joris-voorn-b2b-korolova-live",
+    primaryArtist: dj("Joris Voorn", {
+      accent: "#2ec4b6",
+      homeCity: "Rotterdam, NL",
+    }),
+    genre: "Melodic Techno",
+    seriesName: "Resistance",
+    eventName: "Ultra Music Festival",
+    type: "festival",
+    minDurationSec: 90 * 60,
+  },
 ];
