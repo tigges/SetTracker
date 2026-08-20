@@ -165,6 +165,7 @@ import {
   TL_SKRILLEX_BANCO_DE_CHILE_STAGE_LOLLAPALOOZA_CHILE_2026,
   TL_CHRIS_STUSSY_BOILER_ROOM_EDINBURGH_2024,
   TL_JORIS_VOORN_KOROLOVA_ULTRA_MIAMI_RESISTANCE_COVE_2026,
+  TL_COLYN_INNELLEA_ULTRA_MIAMI_RESISTANCE_COVE_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   tracklist1001RowsToPlays,
@@ -2655,6 +2656,55 @@ assert.notEqual(
 );
 assert.notEqual(
   TRACKLIST_1001_BY_SOURCE_SLUG["yt-FQj71mhobYw"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-xXRjglkAmq8"],
+);
+
+assertSeedClocks(TL_COLYN_INNELLEA_ULTRA_MIAMI_RESISTANCE_COVE_2026);
+assert.equal(TL_COLYN_INNELLEA_ULTRA_MIAMI_RESISTANCE_COVE_2026.length, 16);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-2BPWWYAgUE4"],
+  TL_COLYN_INNELLEA_ULTRA_MIAMI_RESISTANCE_COVE_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-innellea-colyn-b2b-innella-at-ultra"],
+  TL_COLYN_INNELLEA_ULTRA_MIAMI_RESISTANCE_COVE_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-https://soundcloud.com/innellea/colyn-b2b-innella-at-ultra"
+  ],
+  undefined,
+);
+const colynInnelleaCove = tracklist1001RowsToPlays(
+  TL_COLYN_INNELLEA_ULTRA_MIAMI_RESISTANCE_COVE_2026,
+);
+assert.equal(colynInnelleaCove.length, 16);
+assert.equal(colynInnelleaCove[0]?.provenance, "1001tl");
+assert.equal(colynInnelleaCove[0]?.timestamp, 0);
+assert.equal(colynInnelleaCove[0]?.artistName, "Innellea");
+assert.equal(colynInnelleaCove[0]?.trackTitle, "Slave To The Hype");
+assert.equal(colynInnelleaCove[4]?.trackTitle, "Mercy (Innellea Remix)");
+assert.equal(colynInnelleaCove[4]?.timestamp, 20 * 60 + 50);
+assert.equal(colynInnelleaCove[15]?.trackTitle, "My Journey");
+assert.equal(colynInnelleaCove[15]?.timestamp, 1 * 3600 + 25 * 60);
+for (let i = 1; i < colynInnelleaCove.length; i++) {
+  assert.ok(
+    (colynInnelleaCove[i]!.timestamp ?? 0) >
+      (colynInnelleaCove[i - 1]!.timestamp ?? 0),
+    `Colyn B2B Innellea Ultra Cove clocks must increase at index ${i}`,
+  );
+}
+assert.equal(isWiredTracklistSlug("yt-2BPWWYAgUE4"), true);
+assert.equal(
+  isWiredTracklistSlug("sc-innellea-colyn-b2b-innella-at-ultra"),
+  true,
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-2BPWWYAgUE4"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-FQj71mhobYw"],
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-2BPWWYAgUE4"],
   TRACKLIST_1001_BY_SOURCE_SLUG["yt-xXRjglkAmq8"],
 );
 
