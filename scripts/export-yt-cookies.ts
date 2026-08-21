@@ -6,7 +6,7 @@
  *   npm run cookies:export -- --browser firefox
  *
  * Then, from the same machine (needs `gh` auth):
- *   gh secret set ACRCLOUD_YTDLP_COOKIES < .local/yt-cookies.txt
+ *   gh secret set YT_DUMMY_COOKIE_LOCAL < .local/yt-cookies.txt
  *
  * This does not make GitHub-hosted Actions YouTube-steady. File Scan is
  * the CI path. Use the jar on a self-hosted residential runner, or for
@@ -97,7 +97,7 @@ async function main() {
     return;
   }
   console.log("[yt-cookies] next (from this machine, values stay local):");
-  console.log(`  gh secret set ACRCLOUD_YTDLP_COOKIES < ${outPath}`);
+  console.log(`  gh secret set YT_DUMMY_COOKIE_LOCAL < ${outPath}`);
 }
 
 const isEntry =

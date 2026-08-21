@@ -37,8 +37,9 @@
  *   ACRCLOUD_YT_DLP=0       force-disable yt-dlp sampling (default: use when
  *     yt-dlp is on PATH). YouTube has no anonymous progressive URL — clips
  *     are cut with yt-dlp --download-sections, then Identify as usual.
- *   ACRCLOUD_YTDLP_COOKIES  path to Netscape cookies.txt (optional; needed when
- *     YouTube returns “Sign in to confirm you’re not a bot”).
+ *   ACRCLOUD_YTDLP_COOKIES  path to Netscape cookies.txt (CI copies
+ *     YT_DUMMY_COOKIE_LOCAL here). Helps when YouTube returns
+ *     “Sign in to confirm you’re not a bot” off GitHub IPs.
  *   ACRCLOUD_IDENTIFY_YOUTUBE=0  skip yt-dlp Identify (CI default when File
  *     Scan secrets are present). File Scanning still fingerprints YouTube.
  *   ACRCLOUD_YT_FAIL_FAST=1      1 extractor retry + short timeout (CI default)

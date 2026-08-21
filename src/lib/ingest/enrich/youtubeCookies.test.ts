@@ -61,6 +61,7 @@ assert.equal(sparse.stale, true);
 assert.match(sparse.staleReason, /too few/);
 
 assert.match(cookieRefreshHint(empty, now), /cookies:export/);
+assert.match(cookieRefreshHint(empty, now), /YT_DUMMY_COOKIE_LOCAL/);
 assert.match(cookieRefreshHint(expired, now), /Refresh now/);
 assert.match(cookieRefreshHint(loggedIn, now), /next refresh/);
 
