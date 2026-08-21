@@ -216,19 +216,19 @@ unless asked.
   **Diagnostic (`npm run` via `catalog-acr-diagnose.yml`):** control track HITs
   at score ~64, so `ACRCLOUD_MIN_SCORE=55` (70 rejected real YT hits).
   **CI caveat:** GitHub Actions datacenter IPs get YouTube bot-walled ("Sign in
-  to confirm you're not a bot") even WITH `ACRCLOUD_YTDLP_COOKIES`; only very
+  to confirm you're not a bot") even WITH `YT_DUMMY_COOKIE_LOCAL`; only very
   popular videos slip through. SC/hearthis Identify is unaffected.
   CI Identify sets `ACRCLOUD_IDENTIFY_YOUTUBE=0` so yt-dlp does not burn hours
   on bot-walls — File Scanning is the YouTube path. A bot-wall still opens a
   circuit (skip remaining YT Identify, fail-fast yt-dlp) and writes
   `::notice::` / `::warning::` plus a live Job Summary table without failing
   the job. Clip failures count toward the per-set probe cap.
-  `ACRCLOUD_YTDLP_COOKIES` is a portable Netscape secret (export from any
-  logged-in desktop browser). The device that starts the workflow does not
-  matter — `ubuntu-latest` is the IP YouTube sees. Cookies do not make GHA
-  YouTube-steady; refresh a throwaway account’s jar when `/stats` Last enrich
-  marks it stale (`npm run cookies:export` on a desktop, then
-  `gh secret set ACRCLOUD_YTDLP_COOKIES < .local/yt-cookies.txt`). Identify +
+  `YT_DUMMY_COOKIE_LOCAL` is a portable Netscape secret (throwaway YouTube
+  login only — never a personal Google jar). The device that starts the
+  workflow does not matter — `ubuntu-latest` is the IP YouTube sees. Cookies
+  do not make GHA YouTube-steady; refresh the dummy jar when `/stats` Last
+  enrich marks it stale (`npm run cookies:export` on a desktop, then
+  `gh secret set YT_DUMMY_COOKIE_LOCAL < .local/yt-cookies.txt`). Identify +
   File Scan totals land on `/stats` after the next Pages ship (DB snapshot +
   last enrich/deep/Pages conclusions).
 - **File Scanning (YouTube, CI-safe):** `npm run enrich:filescan`

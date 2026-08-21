@@ -59,15 +59,15 @@ jobs:
 
       - name: Optional YouTube cookies for yt-dlp
         env:
-          YT_COOKIES: ${{ secrets.ACRCLOUD_YTDLP_COOKIES }}
+          YT_COOKIES: ${{ secrets.YT_DUMMY_COOKIE_LOCAL }}
         run: |
           if [ -n "$YT_COOKIES" ]; then
             printf '%s\n' "$YT_COOKIES" > "$RUNNER_TEMP/yt-cookies.txt"
             echo "ACRCLOUD_YTDLP_COOKIES=$RUNNER_TEMP/yt-cookies.txt" >> "$GITHUB_ENV"
-            echo "YouTube cookies present for yt-dlp."
+            echo "YouTube cookies present for yt-dlp (dummy jar)."
             npx tsx scripts/inspect-yt-cookies.ts --path "$RUNNER_TEMP/yt-cookies.txt"
           else
-            echo "::warning::No ACRCLOUD_YTDLP_COOKIES secret — YouTube sampling will likely hit bot walls."
+            echo "::warning::No YT_DUMMY_COOKIE_LOCAL secret — YouTube sampling will likely hit bot walls."
           fi
 
       - name: Run ACR diagnostic

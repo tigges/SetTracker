@@ -206,7 +206,7 @@ Our submit forces `engine=1` (audio fingerprint; override `ACRCLOUD_FS_ENGINE`).
 | `ACRCLOUD_HOST` | `identify-eu-west-1.acrcloud.com` |
 | `ACRCLOUD_ACCESS_KEY` | project access key |
 | `ACRCLOUD_ACCESS_SECRET` | project access secret |
-| `ACRCLOUD_YTDLP_COOKIES` | optional Netscape `cookies.txt` (portable secret — see below) |
+| `YT_DUMMY_COOKIE_LOCAL` | throwaway YouTube Netscape `cookies.txt` (never a personal Google jar) |
 | `ACRCLOUD_FS_TOKEN` | File Scanning Console API token (YouTube) |
 | `ACRCLOUD_FS_CONTAINER_ID` | File Scanning container id |
 | `ACRCLOUD_FS_REGION` | optional container region (default `eu-west-1`) |
@@ -219,15 +219,17 @@ Our submit forces `engine=1` (audio fingerprint; override `ACRCLOUD_FS_ENGINE`).
 **YouTube cookies** (Identify / diagnose only — File Scanning does not use them):
 
 Cookies are a **login session**, stored as the GitHub secret
-`ACRCLOUD_YTDLP_COOKIES`. You can start enrich from any device. The job still
-runs on GitHub’s computers.
+`YT_DUMMY_COOKIE_LOCAL` (dummy YouTube only). The job still writes that jar
+to a temp path and sets `ACRCLOUD_YTDLP_COOKIES` for yt-dlp. You can start
+enrich from any device. The job still runs on GitHub’s computers.
 
 1. **Throwaway Google account** — make a dummy Gmail, log into YouTube with it
    in Chrome (or Firefox) on a desktop. Do not export cookies from your main
    Google login. GitHub’s IP looks like a stolen session; Google may lock that
    account. If the dummy account dies, your real Gmail is fine.
 2. **Refresh the jar** — cookies expire like a milk carton. On that desktop:
-   `npm run cookies:export` then `gh secret set ACRCLOUD_YTDLP_COOKIES < .local/yt-cookies.txt`.
+   `npm run cookies:export` then `gh secret set YT_DUMMY_COOKIE_LOCAL < .local/yt-cookies.txt`
+   (PowerShell: `Get-Content -Raw .local\yt-cookies.txt | gh secret set YT_DUMMY_COOKIE_LOCAL`).
    Inspect without printing values: `npm run cookies:inspect -- --path .local/yt-cookies.txt`.
    Refresh when `/stats` Last enrich says stale, after a diagnose bot-wall, or
    about weekly. The file must include the Netscape header and hidden cookies
