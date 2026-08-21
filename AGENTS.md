@@ -200,8 +200,8 @@ unless asked.
   `/exports/clubs-need-complete.csv` for Claude. Do not use DJ Mag photos.
 - **Fingerprint enrich:** `npm run enrich:fingerprint` via `catalog-enrich.yml`
   in **modes** (workflow_dispatch `mode`, or `data/enrich-request` bump = `acr`):
-  `full` (weekly cron — null thumbs + MB + Identify 20×12 + File Scan 12),
-  `acr` (priority Identify 12×8 + File Scan 8, no thumbs/LLM),
+  `full` (weekly cron — null thumbs + MB + Identify 28×16 + File Scan 20),
+  `acr` (priority Identify 20×12 + File Scan 16, no thumbs/LLM),
   `smoke` (tiny ACR check, 4×5 — verify creds/cookies). Modes run in separate
   concurrency lanes so a quick check never queues behind the weekly `full`.
   Each expensive step has a timeout + continue-on-error and writes a DB

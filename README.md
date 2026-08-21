@@ -142,8 +142,8 @@ catalog DB cache and dispatch it:
 - **`catalog-enrich.yml`** — thumbs/MB + ACRCloud + File Scanning → save DB cache → dispatch deploy
 
 **Enrich modes** (`catalog-enrich.yml`): `full` (weekly / `data/enrich-full-request`;
-null thumbs + MB + Identify 20×12 + File Scan 12 + 80 ISRCs), `acr` (priority
-Identify 12×8 + File Scan 8, no thumbs/LLM; `data/enrich-request`), `smoke`
+null thumbs + MB + Identify 28×16 + File Scan 20 + 120 ISRCs), `acr` (priority
+Identify 20×12 + File Scan 16, no thumbs/LLM; `data/enrich-request`), `smoke`
 (4×5). Each expensive step times out and checkpoints the DB so a 6h GitHub
 cancel cannot throw away Identify hits. Do not start deep and enrich at the same time.
 
@@ -290,7 +290,7 @@ tracklist HTML and their paid SoundCloud analyzer are never fetched.
 / TrackId stay operator-paste in `src/lib/ingest/fingerprint/seeds.ts`.
 `TRACKRADAR_ANALYZE=1` / `AUDD_ANALYZE=1` (needs `AUDD_API_TOKEN`) analyze
 fingerprint-only fan clips (quota; never official playback).
-Catalog enrich `acr` (120) / `full` (400) also run `npm run research:track-ids`
+Catalog enrich `acr` (80) / `full` (120) also run `npm run research:track-ids`
 against high-play tracks missing ISRC or Beatport. Have-ISRC rows skip
 Deezer/AudD and query MusicBrainz by ISRC. Fill-null only; never scrape
 Beatport HTML.

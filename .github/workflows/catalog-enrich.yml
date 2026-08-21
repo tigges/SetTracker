@@ -4,9 +4,9 @@ name: Catalog enrich
 # GitHub-hosted jobs die at 6h and skip Save/Pages — so every expensive step
 # has a timeout, continue-on-error, and a DB checkpoint. `full` is sized to
 # finish (~3h), not to pack thumbs + 40×20 Identify + File Scan + 400 ISRCs.
-#   full  — null thumbs + MB + Identify 20×12 + File Scan 12  [weekly]
-#   acr   — Identify 12×8 + File Scan 8 (no thumbs/LLM)       [enrich-request]
-#   smoke — tiny ACR check (4×5)                              [creds]
+#   full  — null thumbs + MB + Identify 28×16 + File Scan 20 [weekly / enrich-full-request]
+#   acr   — Identify 20×12 + File Scan 16 (no thumbs/LLM)    [enrich-request]
+#   smoke — tiny ACR check (4×5)                             [creds]
 # After a checkpoint exists, dispatches deploy-pages even if a later step fails.
 on:
   schedule:
@@ -84,14 +84,14 @@ jobs:
               TRACK_ID_LIMIT=0; FS_WAIT_MS=600000
               ;;
             acr)
-              SET_LIMIT=12; MAX_PROBES=8; DO_THUMBS=0; FS_LIMIT=8
-              ID_DEADLINE_MS=2400000; ID_STEP=50; FS_STEP=35
-              TRACK_ID_LIMIT=40; FS_WAIT_MS=900000
+              SET_LIMIT=20; MAX_PROBES=12; DO_THUMBS=0; FS_LIMIT=16
+              ID_DEADLINE_MS=3000000; ID_STEP=65; FS_STEP=45
+              TRACK_ID_LIMIT=80; FS_WAIT_MS=1500000
               ;;
             full)
-              SET_LIMIT=20; MAX_PROBES=12; DO_THUMBS=1; FS_LIMIT=12
-              ID_DEADLINE_MS=3600000; ID_STEP=75; FS_STEP=40
-              TRACK_ID_LIMIT=80; FS_WAIT_MS=1200000
+              SET_LIMIT=28; MAX_PROBES=16; DO_THUMBS=1; FS_LIMIT=20
+              ID_DEADLINE_MS=4200000; ID_STEP=85; FS_STEP=55
+              TRACK_ID_LIMIT=120; FS_WAIT_MS=1800000
               ;;
             *)     echo "::error::Unknown mode '$MODE'"; exit 1 ;;
           esac
