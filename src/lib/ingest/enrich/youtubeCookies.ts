@@ -138,7 +138,7 @@ export function cookieRefreshHint(
   nowSec = Math.floor(Date.now() / 1000),
 ): string {
   if (!h.present) {
-    return "On a desktop: npm run cookies:export — then gh secret set ACRCLOUD_YTDLP_COOKIES < .local/yt-cookies.txt";
+    return "On a desktop: npm run cookies:export — then gh secret set YT_DUMMY_COOKIE_LOCAL < .local/yt-cookies.txt";
   }
   if (h.stale) return `Refresh now — ${h.staleReason}`;
   if (h.soonestExpirySec != null) {
