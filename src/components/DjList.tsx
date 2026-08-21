@@ -1,18 +1,7 @@
 import Link from "next/link";
 import { EntityThumb } from "@/components/EntityThumb";
-import { displayCity } from "@/lib/displayCity";
+import { djCardSubtitle } from "@/lib/djDirectory";
 import type { DjListItem } from "@/lib/queries";
-
-function handleBits(d: DjListItem): string {
-  const bits: string[] = [];
-  if (d.soundcloud) bits.push("SC");
-  if (d.youtube) bits.push("YT");
-  if (d.instagram) bits.push("IG");
-  if (d.twitter) bits.push("X");
-  if (d.website) bits.push("Web");
-  if (d.beatport) bits.push("BP");
-  return bits.join(" · ");
-}
 
 /** Browse-ready DJ directory. Catalog QA queues live on /stats. */
 export function DjList({ djs }: { djs: DjListItem[] }) {
@@ -26,7 +15,7 @@ export function DjList({ djs }: { djs: DjListItem[] }) {
         <Link
           key={dj.id}
           href={`/djs/${dj.slug}`}
-          className="card flex items-center gap-2.5 p-3 transition-colors hover:border-[color:var(--muted2)]"
+          className="card flex h-[64px] items-center gap-2.5 px-3 transition-colors hover:border-[color:var(--muted2)]"
         >
           <EntityThumb
             src={dj.imageUrl}
@@ -35,17 +24,12 @@ export function DjList({ djs }: { djs: DjListItem[] }) {
             size={40}
             radius={10}
           />
-          <div className="min-w-0">
-            <div className="truncate text-[15px] font-semibold text-ink">
+          <div className="min-w-0 flex-1">
+            <div className="truncate leading-5 text-[15px] font-semibold text-ink">
               {dj.name}
             </div>
-            <div className="truncate text-[12px] text-muted2">
-              {(() => {
-                const city = displayCity(dj.homeCity);
-                return city ? `${city} · ` : "";
-              })()}
-              {dj.setCount} {dj.setCount === 1 ? "set" : "sets"}
-              {handleBits(dj) ? ` · ${handleBits(dj)}` : ""}
+            <div className="truncate leading-4 text-[12px] text-muted2">
+              {djCardSubtitle(dj.homeCity, dj.setCount)}
             </div>
           </div>
         </Link>

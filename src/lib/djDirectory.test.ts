@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { djIndexLetter, groupDjsByLetter } from "./djDirectory";
+import { djCardSubtitle, djIndexLetter, groupDjsByLetter } from "./djDirectory";
 import type { DjListItem } from "./queries";
 
 function dj(name: string, slug = name.toLowerCase()): DjListItem {
@@ -25,6 +25,10 @@ function dj(name: string, slug = name.toLowerCase()): DjListItem {
     isBrowseReady: true,
   };
 }
+
+assert.equal(djCardSubtitle("Berlin, DE", 3), "Berlin, DE · 3 sets");
+assert.equal(djCardSubtitle(null, 1), "1 set");
+assert.equal(djCardSubtitle("Unknown.", 12), "12 sets");
 
 assert.equal(djIndexLetter("Chris Lake"), "C");
 assert.equal(djIndexLetter("above & beyond"), "A");
