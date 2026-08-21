@@ -6,6 +6,8 @@ import {
 } from "./eventImages";
 
 assert.ok(officialEventPages("amnesia-ibiza").includes("https://www.amnesia.es/"));
+assert.ok(officialEventPages("amnesia-cap-dagde").includes("https://amnesia.fr/"));
+assert.ok(KNOWN_EVENT_IMAGES["amnesia-cap-dagde"]);
 assert.ok(
   officialEventPages("warehouse-project").includes(
     "https://thewarehouseproject.com/",

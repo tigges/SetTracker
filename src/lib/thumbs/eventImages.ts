@@ -72,6 +72,8 @@ export const KNOWN_EVENT_IMAGES: Record<string, string> = {
     "https://thewarehouseproject.com/wp-content/uploads/2026/05/WHP-2026-ograph-image.jpg",
   "amnesia-ibiza":
     "https://upload.wikimedia.org/wikipedia/commons/9/99/Amnesia_ibiza.jpeg",
+  "amnesia-cap-dagde":
+    "https://www.amnesia.fr/wp-content/uploads/2025/06/miniature_summer_2025.png",
   "pacha-ibiza":
     "https://upload.wikimedia.org/wikipedia/en/f/f1/Pacha_Logo_New.png",
   "silo-dallas": "https://silodallas.com/og-image.png",
@@ -103,6 +105,7 @@ export const EVENT_OFFICIAL_SITES: Record<string, string> = {
   defected: "https://defected.com/",
   "ministry-of-sound": "https://www.ministryofsound.com/",
   "amnesia-ibiza": "https://www.amnesia.es/en/",
+  "amnesia-cap-dagde": "https://amnesia.fr/",
   elrow: "https://elrow.com/",
   "pacha-ibiza": "https://www.pacha.com/",
   "cavo-paradiso": "https://www.cavoparadiso.gr/",

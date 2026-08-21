@@ -113,7 +113,7 @@ export async function getSearchIndex(): Promise<SearchIndexItem[]> {
       title: "Calendar",
       subtitle: "Festival weekends and official club nights",
       href: "/events/calendar",
-      keywords: "calendar festival editions club nights weekends upcoming unvrs hi amnesia",
+      keywords: "calendar festival editions club nights weekends upcoming unvrs hi amnesia cap dagde",
     },
     ...atlasSearchItems(),
   ];

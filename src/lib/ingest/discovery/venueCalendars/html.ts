@@ -55,6 +55,26 @@ const MONTHS: Record<string, number> = {
   november: 11,
   dec: 12,
   december: 12,
+  janvier: 1,
+  janv: 1,
+  février: 2,
+  fevrier: 2,
+  févr: 2,
+  fevr: 2,
+  avril: 4,
+  avr: 4,
+  mai: 5,
+  juin: 6,
+  juillet: 7,
+  juil: 7,
+  août: 8,
+  aout: 8,
+  septembre: 9,
+  octobre: 10,
+  novembre: 11,
+  décembre: 12,
+  decembre: 12,
+  déc: 12,
 };
 
 export function pad2(n: number): string {
@@ -98,7 +118,7 @@ export function parseDayMonth(
     return isoDay(Number(dmyDot[3]), Number(dmyDot[2]), Number(dmyDot[1]));
   }
   const named = s.match(
-    /\b(\d{1,2})(?:st|nd|rd|th)?\s+([A-Za-z]{3,9})(?:\s+(\d{4}))?\b/,
+    /\b(\d{1,2})(?:st|nd|rd|th)?\s+([A-Za-zÀ-ÿ]{3,9})(?:\s+(\d{4}))?\b/,
   );
   if (named) {
     const month = parseMonthName(named[2]!);
@@ -106,7 +126,7 @@ export function parseDayMonth(
     return isoDay(Number(named[3] || defaultYear), month, Number(named[1]));
   }
   const namedFirst = s.match(
-    /\b([A-Za-z]{3,9})\s+(\d{1,2})(?:st|nd|rd|th)?(?:\s*,?\s*(\d{4}))?\b/,
+    /\b([A-Za-zÀ-ÿ]{3,9})\s+(\d{1,2})(?:st|nd|rd|th)?(?:\s*,?\s*(\d{4}))?\b/,
   );
   if (namedFirst) {
     const month = parseMonthName(namedFirst[1]!);
