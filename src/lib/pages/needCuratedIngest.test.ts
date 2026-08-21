@@ -5,13 +5,16 @@ import {
 } from "./needCuratedIngest";
 
 assert.equal(fileNeedsCuratedIngest("src/lib/ingest/soundcloud/tracks.ts"), true);
-assert.equal(
-  fileNeedsCuratedIngest("src/lib/ingest/tracklists1001/festivalCaptures20260814.ts"),
-  true,
-);
 assert.equal(fileNeedsCuratedIngest("src/lib/ingest/youtube/videos.ts"), true);
 assert.equal(fileNeedsCuratedIngest("src/lib/ingest/roster.ts"), true);
 assert.equal(fileNeedsCuratedIngest("prisma/ingest.ts"), true);
+assert.equal(
+  fileNeedsCuratedIngest("src/lib/ingest/tracklists1001/festivalCaptures20260814.ts"),
+  false,
+);
+assert.equal(fileNeedsCuratedIngest("src/lib/ingest/artists.ts"), false);
+assert.equal(fileNeedsCuratedIngest("src/lib/ingest/fingerprint/seeds.ts"), false);
+assert.equal(fileNeedsCuratedIngest("src/lib/ingest/nextCaptures.ts"), false);
 
 assert.equal(fileNeedsCuratedIngest("src/lib/ingest/djSocialPins.data.ts"), false);
 assert.equal(fileNeedsCuratedIngest("src/lib/ingest/discovery/knownHandles.ts"), false);
@@ -68,6 +71,18 @@ const seedPush = decideCuratedIngest({
 });
 assert.equal(seedPush.run, true);
 assert.match(seedPush.reason, /catalog sources changed/);
+
+assert.equal(
+  decideCuratedIngest({
+    eventName: "push",
+    changedFiles: [
+      "src/lib/ingest/tracklists1001/festivalCaptures20260820.ts",
+      "src/lib/ingest/artists.ts",
+      "src/app/djs/page.tsx",
+    ],
+  }).run,
+  false,
+);
 
 assert.equal(
   decideCuratedIngest({
