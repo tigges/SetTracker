@@ -317,6 +317,7 @@ export async function getSetBySlug(slug: string) {
       genre: normalizeGenre(track?.genre ?? null),
       trackDurationSec: track?.durationSec ?? null,
       beatportUrl: track?.beatportUrl ?? null,
+      hasTrackPage: false,
       isrc: track?.isrc ?? null,
       idNote: p.idTrack?.note ?? null,
       resolvedTitle: resolved
@@ -348,6 +349,11 @@ export async function getSetBySlug(slug: string) {
       }));
     }
   }
+  const exportedTrackSlugs = new Set(await getAllTrackSlugs());
+  plays = plays.map((p) => ({
+    ...p,
+    hasTrackPage: Boolean(p.trackSlug && exportedTrackSlugs.has(p.trackSlug)),
+  }));
 
   return {
     id: set.id,
@@ -698,6 +704,7 @@ export type DjPlayedTrack = {
   artistName: string;
   count: number;
   imageUrl: string | null;
+  beatportUrl: string | null;
 };
 
 export type DjCollaborator = {
@@ -857,6 +864,7 @@ export async function getDjBySlug(slug: string): Promise<DjProfile | null> {
     artistName: string;
     count: number;
     imageUrl: string | null;
+    beatportUrl: string | null;
   }[] = [];
   if (setIds.length) {
     const grouped = await prisma.played.groupBy({
@@ -875,6 +883,7 @@ export async function getDjBySlug(slug: string): Promise<DjProfile | null> {
         title: true,
         artistName: true,
         imageUrl: true,
+        beatportUrl: true,
       },
     });
     const byId = new Map(trackRecords.map((t) => [t.id, t]));
@@ -888,6 +897,7 @@ export async function getDjBySlug(slug: string): Promise<DjProfile | null> {
               artistName: t.artistName,
               count: g._count.trackId,
               imageUrl: t.imageUrl,
+              beatportUrl: t.beatportUrl,
             }
           : null;
       })
@@ -898,6 +908,7 @@ export async function getDjBySlug(slug: string): Promise<DjProfile | null> {
           artistName: string;
           count: number;
           imageUrl: string | null;
+          beatportUrl: string | null;
         } => !!x,
       );
   }
@@ -1367,7 +1378,11 @@ export async function getLabelBySlug(slug: string) {
     }),
     topTracks: topTracks.map((t) => {
       const full = label.tracks.find((x) => x.slug === t.slug);
-      return { ...t, imageUrl: full?.imageUrl ?? null };
+      return {
+        ...t,
+        imageUrl: full?.imageUrl ?? null,
+        beatportUrl: full?.beatportUrl ?? null,
+      };
     }),
     artists,
   };
@@ -1812,7 +1827,10 @@ const TRACK_STATIC_EXPORT_CAP = Number(
   process.env.TRACK_STATIC_EXPORT_CAP || 400,
 );
 
+let exportedTrackSlugCache: string[] | null = null;
+
 export async function getAllTrackSlugs(): Promise<string[]> {
+  if (exportedTrackSlugCache) return exportedTrackSlugCache;
   const { ensureTrackSlugs } = await import("@/lib/tracks/ensureSlugs");
   await ensureTrackSlugs(prisma);
   // Prefer frequently played tracks; Music-credit floods otherwise blow the
@@ -1823,7 +1841,8 @@ export async function getAllTrackSlugs(): Promise<string[]> {
     orderBy: { plays: { _count: "desc" } },
     take: Math.max(200, TRACK_STATIC_EXPORT_CAP),
   });
-  return rows.map((r) => r.slug);
+  exportedTrackSlugCache = rows.map((r) => r.slug);
+  return exportedTrackSlugCache;
 }
 
 export async function getTrackBySlug(slug: string) {

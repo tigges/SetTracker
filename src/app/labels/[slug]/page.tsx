@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getAllLabelSlugs, getLabelBySlug } from "@/lib/queries";
+import { getAllLabelSlugs, getAllTrackSlugs, getLabelBySlug } from "@/lib/queries";
 import { EntityThumb } from "@/components/EntityThumb";
 import { SetEntryLink } from "@/components/SetEntryLink";
 import { SocialLinks } from "@/components/SocialLinks";
+import { TrackTitleLink } from "@/components/TrackTitleLink";
 import { pageMeta } from "@/lib/site";
 import { SET_TYPE_META, fmtDate, fmtDuration, fmtRelative } from "@/lib/status";
 
@@ -60,6 +61,7 @@ export default async function LabelPage({
   const { slug } = await params;
   const label = await getLabelBySlug(slug);
   if (!label) notFound();
+  const exportedTrackSlugs = await getAllTrackSlugs();
 
   const color = label.color ?? "#00f0a0";
   const maxPlays = Math.max(1, ...label.topTracks.map((t) => t.count));
@@ -165,13 +167,13 @@ export default async function LabelPage({
                   />
                   <div className="min-w-0 flex-1">
                     <div className="flex items-baseline justify-between gap-3">
-                      <Link
-                        href={`/tracks/${t.slug}`}
-                        className="truncate text-[13px] text-ink transition-colors hover:text-brand"
-                      >
-                        {t.title}
-                        <span className="text-muted"> — {t.artistName}</span>
-                      </Link>
+                      <TrackTitleLink
+                        slug={t.slug}
+                        title={t.title}
+                        artistName={t.artistName}
+                        exportedSlugs={exportedTrackSlugs}
+                        beatportUrl={t.beatportUrl}
+                      />
                       <span className="mono flex-none text-[12px] text-muted2">{t.count}×</span>
                     </div>
                     <div className="mt-1 h-1.5 w-full overflow-hidden rounded-full bg-linesoft">

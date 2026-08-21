@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SetEntryLink } from "@/components/SetEntryLink";
 import { notFound, redirect } from "next/navigation";
-import { getDjBySlug, getAllDjSlugs } from "@/lib/queries";
+import { getDjBySlug, getAllDjSlugs, getAllTrackSlugs } from "@/lib/queries";
 import { EntityThumb } from "@/components/EntityThumb";
 import { StatusBar } from "@/components/StatusBits";
 import { SocialLinks } from "@/components/SocialLinks";
+import { TrackTitleLink } from "@/components/TrackTitleLink";
 import { DjBio } from "@/components/DjBio";
 import { displayDjBio } from "@/lib/djBio";
 import { ATLAS_DJ_YEAR, lookupAtlasDj } from "@/lib/atlas/seed";
@@ -70,6 +71,7 @@ export default async function DjPage({
   const dj = await getDjBySlug(slug);
   if (!dj) notFound();
   if (slug !== dj.slug) redirect(`/djs/${dj.slug}`);
+  const exportedTrackSlugs = await getAllTrackSlugs();
 
   const accent = dj.accent;
   const city = displayCity(dj.homeCity);
@@ -208,13 +210,13 @@ export default async function DjPage({
                     />
                     <div className="min-w-0 flex-1">
                       <div className="flex items-baseline justify-between gap-3">
-                        <Link
-                          href={`/tracks/${t.slug}`}
-                          className="truncate text-[13px] text-ink transition-colors hover:text-brand"
-                        >
-                          {t.title}
-                          <span className="text-muted"> — {t.artistName}</span>
-                        </Link>
+                        <TrackTitleLink
+                          slug={t.slug}
+                          title={t.title}
+                          artistName={t.artistName}
+                          exportedSlugs={exportedTrackSlugs}
+                          beatportUrl={t.beatportUrl}
+                        />
                         <span className="mono flex-none text-[12px] text-muted2">
                           {t.count}×
                         </span>

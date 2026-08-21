@@ -298,7 +298,7 @@ export function SetTimeline({
                       >
                         {p.title}
                       </span>
-                      {p.trackSlug ? (
+                      {p.hasTrackPage && p.trackSlug ? (
                         <Link
                           href={`/tracks/${p.trackSlug}`}
                           onClick={(e) => e.stopPropagation()}
