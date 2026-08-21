@@ -210,4 +210,19 @@ assert.equal(
 );
 assert.equal(inferFestivalEvent("Lollapalooza")?.website, "https://www.lollapalooza.com/");
 
+assert.equal(
+  inferFestivalEvent("Dimitri Vegas at Amnesia Cap d'Agde")?.slug,
+  "amnesia-cap-dagde",
+);
+assert.equal(
+  inferFestivalEvent("Theodora | Amnesia Cap d’Agde")?.website,
+  "https://amnesia.fr/",
+);
+assert.equal(resolveEvent("Amnesia Cap d'Agde").slug, "amnesia-cap-dagde");
+assert.equal(resolveEvent("Amnesia").slug, "amnesia-ibiza");
+assert.notEqual(
+  inferFestivalEvent("Deborah De Luca Pyramid Amnesia Ibiza")?.slug,
+  "amnesia-cap-dagde",
+);
+
 console.log("events.test.ts ok");

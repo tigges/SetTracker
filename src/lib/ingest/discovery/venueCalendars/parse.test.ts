@@ -4,6 +4,7 @@ import { join } from "node:path";
 import { describe, it } from "node:test";
 import { parseIcsEvents } from "./ics";
 import {
+  parseAmnesiaFrHtml,
   parseAmnesiaHtml,
   parseBerghainHtml,
   parseBootshausHtml,
@@ -48,6 +49,7 @@ describe("venue calendar sources", () => {
       "unvrs",
       "hi-ibiza",
       "amnesia-ibiza",
+      "amnesia-cap-dagde",
       "savaya",
       "warehouse-project",
       "pacha-ibiza",
@@ -105,6 +107,26 @@ describe("amnesia", () => {
     assert.match(pyramid?.ticketsUrl ?? "", /ticketing\.cm\.com/);
     const resistance = nights.find((n) => /resistance/i.test(n.title));
     assert.ok(resistance?.artists.some((a) => /artbat/i.test(a)));
+  });
+});
+
+describe("amnesia-fr (Cap d'Agde)", () => {
+  it("reads boutique slugs, French dates, and ticket links", () => {
+    const nights = parseAmnesiaFrHtml(
+      fixture("amnesia-fr.html"),
+      "https://amnesia.fr/",
+      2026,
+    );
+    assert.ok(nights.length >= 3);
+    const dv = nights.find((n) => /dimitri vegas/i.test(n.title));
+    assert.equal(dv?.startsAt, "2026-08-22");
+    assert.ok(dv?.artists.some((a) => /dimitri vegas/i.test(a)));
+    assert.match(dv?.sourceUrl ?? "", /amnesia\.fr\/boutique\/dimitri-vegas/);
+    assert.match(dv?.ticketsUrl ?? "", /#tickets/);
+    const pop = nights.find((n) => /^pop$/i.test(n.title));
+    assert.equal(pop?.startsAt, "2026-08-21");
+    const theodora = nights.find((n) => /theodora/i.test(n.title));
+    assert.equal(theodora?.startsAt, "2026-08-23");
   });
 });
 

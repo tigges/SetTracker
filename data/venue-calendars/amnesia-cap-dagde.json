@@ -1,0 +1,94 @@
+{
+  "venueSlug": "amnesia-cap-dagde",
+  "venueName": "Amnesia Cap d'Agde",
+  "sourceUrl": "https://amnesia.fr/",
+  "fetchedAt": "2026-08-21T15:05:41.812Z",
+  "nights": [
+    {
+      "title": "Pop",
+      "startsAt": "2026-08-21",
+      "sourceUrl": "https://amnesia.fr/boutique/pop-vendredi-21-aout-2026/",
+      "ticketsUrl": "https://amnesia.fr/boutique/pop-vendredi-21-aout-2026/#tickets",
+      "artists": []
+    },
+    {
+      "title": "Dimitri Vegas",
+      "startsAt": "2026-08-22",
+      "sourceUrl": "https://amnesia.fr/boutique/dimitri-vegas-samedi-22-aout-2026/",
+      "ticketsUrl": "https://amnesia.fr/boutique/dimitri-vegas-samedi-22-aout-2026/#tickets",
+      "artists": [
+        "Dimitri Vegas"
+      ]
+    },
+    {
+      "title": "Theodora",
+      "startsAt": "2026-08-23",
+      "sourceUrl": "https://amnesia.fr/boutique/theodora-dimanche-23-aout-2026/",
+      "ticketsUrl": "https://amnesia.fr/boutique/theodora-dimanche-23-aout-2026/#tickets",
+      "artists": [
+        "Theodora"
+      ]
+    },
+    {
+      "title": "Malaa Vs Malaas Alter Ego",
+      "startsAt": "2026-08-24",
+      "sourceUrl": "https://amnesia.fr/boutique/malaa-vs-malaas-alter-ego-lundi-24-aout-2026/",
+      "ticketsUrl": "https://amnesia.fr/boutique/malaa-vs-malaas-alter-ego-lundi-24-aout-2026/#tickets",
+      "artists": [
+        "Malaa"
+      ]
+    },
+    {
+      "title": "Showtek",
+      "startsAt": "2026-08-25",
+      "sourceUrl": "https://amnesia.fr/boutique/showtek-mardi-25-aout-2026/",
+      "ticketsUrl": "https://amnesia.fr/boutique/showtek-mardi-25-aout-2026/#tickets",
+      "artists": [
+        "Showtek"
+      ]
+    },
+    {
+      "title": "Wonderkitsch The Last",
+      "startsAt": "2026-08-26",
+      "sourceUrl": "https://amnesia.fr/boutique/wonderkitsch-the-last-mercredi-26-aout-2026/",
+      "ticketsUrl": "https://amnesia.fr/boutique/wonderkitsch-the-last-mercredi-26-aout-2026/#tickets",
+      "artists": [
+        "Wonderkitsch The Last"
+      ]
+    },
+    {
+      "title": "Velvet By Tdb",
+      "startsAt": "2026-08-27",
+      "sourceUrl": "https://amnesia.fr/boutique/velvet-by-tdb-jeudi-27-aout-2026/",
+      "ticketsUrl": "https://amnesia.fr/boutique/velvet-by-tdb-jeudi-27-aout-2026/#tickets",
+      "artists": [
+        "Velvet By Tdb"
+      ]
+    },
+    {
+      "title": "Pop",
+      "startsAt": "2026-08-28",
+      "sourceUrl": "https://amnesia.fr/boutique/pop-vendredi-28-aout-2026/",
+      "ticketsUrl": "https://amnesia.fr/boutique/pop-vendredi-28-aout-2026/#tickets",
+      "artists": []
+    },
+    {
+      "title": "Feder",
+      "startsAt": "2026-08-29",
+      "sourceUrl": "https://amnesia.fr/boutique/feder-samedi-29-aout-2026/",
+      "ticketsUrl": "https://amnesia.fr/boutique/feder-samedi-29-aout-2026/#tickets",
+      "artists": [
+        "Feder"
+      ]
+    },
+    {
+      "title": "Ninho Act 2",
+      "startsAt": "2026-08-30",
+      "sourceUrl": "https://amnesia.fr/boutique/ninho-act-2-dimanche-30-aout-2026/",
+      "ticketsUrl": "https://amnesia.fr/boutique/ninho-act-2-dimanche-30-aout-2026/#tickets",
+      "artists": [
+        "Ninho Act 2"
+      ]
+    }
+  ]
+}

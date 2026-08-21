@@ -34,6 +34,17 @@ export const VENUE_CALENDAR_SOURCES: VenueCalendarSource[] = [
     weight: 34,
   },
   {
+    venueSlug: "amnesia-cap-dagde",
+    venueName: "Amnesia Cap d'Agde",
+    location: "Cap d'Agde, France",
+    website: "https://amnesia.fr/",
+    calendarUrl: "https://amnesia.fr/",
+    parser: "amnesia-fr",
+    seedFile: "amnesia-cap-dagde.json",
+    defaultYear: 2026,
+    weight: 28,
+  },
+  {
     venueSlug: "savaya",
     venueName: "Savaya",
     location: "Bali",

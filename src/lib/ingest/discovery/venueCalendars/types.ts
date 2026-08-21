@@ -27,6 +27,7 @@ export type VenueCalendarFile = {
 export type VenueCalendarParser =
   | "jsonld"
   | "amnesia"
+  | "amnesia-fr"
   | "savaya"
   | "warehouse-project"
   | "pacha"

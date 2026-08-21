@@ -114,6 +114,13 @@ export const KNOWN_EVENTS: Record<string, CanonicalEvent> = {
     location: "San Rafael, Ibiza",
     website: "https://www.amnesia.es/",
   },
+  "amnesia-cap-dagde": {
+    slug: "amnesia-cap-dagde",
+    name: "Amnesia Cap d'Agde",
+    kind: "club",
+    location: "Cap d'Agde, France",
+    website: "https://amnesia.fr/",
+  },
   "warehouse-project": {
     slug: "warehouse-project",
     name: "The Warehouse Project",
@@ -556,6 +563,11 @@ const ALIAS_TO_SLUG: Record<string, string> = {
   "pacha-ibiza": "pacha-ibiza",
   amnesia: "amnesia-ibiza",
   "amnesia-ibiza": "amnesia-ibiza",
+  "amnesia-cap-dagde": "amnesia-cap-dagde",
+  "amnesia-cap-d-agde": "amnesia-cap-dagde",
+  "amnesia-agde": "amnesia-cap-dagde",
+  "amnesia-france": "amnesia-cap-dagde",
+  "amnesia-fr": "amnesia-cap-dagde",
   "warehouse-project": "warehouse-project",
   "the-warehouse-project": "warehouse-project",
   "club-space": "club-space",
@@ -749,6 +761,12 @@ export function inferFestivalEvent(title: string): CanonicalEvent | null {
   }
   if (/\bclub\s+space\b|\bspace\s+miami\b/i.test(t)) {
     return KNOWN_EVENTS["club-space"];
+  }
+  if (
+    /\bamnesia\b/i.test(t) &&
+    /\b(cap\s*d['’]?agde|agde|amnesia\.fr)\b/i.test(t)
+  ) {
+    return KNOWN_EVENTS["amnesia-cap-dagde"];
   }
   // DJ Mag Top 100 Festivals / Clubs / other club listicles (not Mixmag.net).
   return (

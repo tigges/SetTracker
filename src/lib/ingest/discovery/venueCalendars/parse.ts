@@ -191,6 +191,93 @@ export function parseAmnesiaHtml(
   return nights;
 }
 
+const FR_WEEKDAY = "lundi|mardi|mercredi|jeudi|vendredi|samedi|dimanche";
+const FR_MONTH =
+  "janvier|fevrier|février|mars|avril|mai|juin|juillet|aout|août|septembre|octobre|novembre|decembre|décembre";
+
+function titleCaseSlug(slug: string): string {
+  return slug
+    .split("-")
+    .filter(Boolean)
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(" ");
+}
+
+/** `/boutique/dimitri-vegas-samedi-22-aout-2026/` → title + calendar day. */
+export function parseAmnesiaFrBoutiquePath(pathname: string): {
+  title: string;
+  year: number;
+  day: number;
+  monthName: string;
+} | null {
+  const path = pathname.replace(/\/+$/, "");
+  const re = new RegExp(
+    `^/boutique/(.+)-(${FR_WEEKDAY})-(\\d{1,2})-(${FR_MONTH})-(20\\d{2})$`,
+    "i",
+  );
+  const m = path.match(re);
+  if (!m) return null;
+  return {
+    title: titleCaseSlug(m[1]!),
+    year: Number(m[5]),
+    day: Number(m[3]),
+    monthName: m[4]!,
+  };
+}
+
+/**
+ * Amnesia Cap d'Agde (amnesia.fr) homepage agenda cards.
+ * Title + year live on the boutique slug; `.ei-date` is weekday + day + month.
+ */
+export function parseAmnesiaFrHtml(
+  html: string,
+  pageUrl: string,
+  defaultYear = 2026,
+): VenueNightSeed[] {
+  const nights: VenueNightSeed[] = [];
+  const cards = html.split(/<div class="evenement-item\b/);
+  for (const card of cards.slice(1)) {
+    const href =
+      card.match(
+        /href="(https?:\/\/(?:www\.)?amnesia\.fr\/boutique\/[^"#?]+)"/i,
+      )?.[1] ?? "";
+    if (!href) continue;
+    let path = "";
+    try {
+      path = new URL(href, pageUrl).pathname;
+    } catch {
+      continue;
+    }
+    const fromSlug = parseAmnesiaFrBoutiquePath(path);
+    const dateRaw = stripTags(
+      card.match(/class="ei-date"[^>]*>([\s\S]*?)<\/div>/i)?.[1] ?? "",
+    );
+    const year = fromSlug?.year ?? defaultYear;
+    const startsAt =
+      parseDayMonth(dateRaw, year) ??
+      (fromSlug
+        ? isoDay(
+            fromSlug.year,
+            parseMonthName(fromSlug.monthName) ?? 0,
+            fromSlug.day,
+          )
+        : null);
+    const title = fromSlug?.title;
+    if (!title || !startsAt) continue;
+    const tickets = card.match(
+      /href="(https?:\/\/(?:www\.)?amnesia\.fr\/boutique\/[^"]+#tickets)"/i,
+    )?.[1];
+    nights.push(
+      night(title, startsAt, {
+        sourceUrl: href,
+        ticketsUrl: tickets,
+        artists: uniqueStrings(artistsFromLine(title)),
+      })!,
+    );
+  }
+  return nights;
+}
+
 export function parseSavayaHtml(
   html: string,
   pageUrl: string,
@@ -475,6 +562,9 @@ export function parseVenueCalendarHtml(
       break;
     case "amnesia":
       nights = parseAmnesiaHtml(html, page, year);
+      break;
+    case "amnesia-fr":
+      nights = parseAmnesiaFrHtml(html, page, year);
       break;
     case "savaya":
       nights = parseSavayaHtml(html, page, year);
