@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { parseDescriptionTracklist } from "./parseTracklist";
+import { parseClockedTracklist, parseDescriptionTracklist } from "./parseTracklist";
 
 const timed = `
 Set vibes
@@ -208,5 +208,15 @@ assert.equal(
   clapcast576[13]!.trackTitle,
   "So Good (Extended Mix) [When Stars Align]",
 );
+
+const clockedOnly = parseClockedTracklist(
+  `Artist One - Track A
+[6:12] Artist Two - Track B
+Artist Three - Track C`,
+  3600,
+);
+assert.equal(clockedOnly.length, 1);
+assert.equal(clockedOnly[0]!.trackTitle, "Track B");
+assert.equal(clockedOnly[0]!.timestamp, 6 * 60 + 12);
 
 console.log("parseTracklist.test.ts ok");

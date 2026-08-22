@@ -36,6 +36,7 @@ export const RESEARCH_JOBS = [
   "homecity",
   "videos",
   "tracks",
+  "cues",
   "quality",
 ] as const;
 
@@ -57,6 +58,7 @@ export const LLM_WRITE_JOBS = new Set<ResearchJobId>([
   "events",
   "homecity",
   "tracks",
+  "cues",
 ]);
 
 export function parseResearchJobs(
@@ -626,3 +628,5 @@ Title: ${t.title}`,
   );
   return stats;
 }
+
+export { runLlmCueResearch } from "./llmCues";

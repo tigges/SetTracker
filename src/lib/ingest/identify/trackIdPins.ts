@@ -9,6 +9,7 @@ import { join } from "node:path";
 import type { PrismaClient } from "@prisma/client";
 import {
   canonicalBeatportUrl,
+  canonicalSpotifyUrl,
   normalizeIsrc,
 } from "../../trackMeta";
 import { catalogQueryTitle, namesClose, normName, primaryArtist } from "./names";
@@ -17,6 +18,7 @@ export type TrackIdPin = {
   slug: string;
   isrc?: string;
   beatportUrl?: string;
+  spotifyUrl?: string;
 };
 
 export type TrackIdPinProposal = {
@@ -25,6 +27,7 @@ export type TrackIdPinProposal = {
   title: string;
   isrc?: string | null;
   beatportUrl?: string | null;
+  spotifyUrl?: string | null;
   confidence?: string | null;
   source?: string | null;
 };
@@ -58,10 +61,14 @@ export function mergeTrackIdPins(
     const beatport =
       canonicalBeatportUrl(prev?.beatportUrl) ||
       canonicalBeatportUrl(pin.beatportUrl);
+    const spotify =
+      canonicalSpotifyUrl(prev?.spotifyUrl) ||
+      canonicalSpotifyUrl(pin.spotifyUrl);
     bySlug.set(slug, {
       slug,
       ...(isrc ? { isrc } : {}),
       ...(beatport ? { beatportUrl: beatport } : {}),
+      ...(spotify ? { spotifyUrl: spotify } : {}),
     });
   }
   return [...bySlug.values()].sort((a, b) => a.slug.localeCompare(b.slug));
@@ -74,11 +81,12 @@ export function saveTrackIdPins(pins: TrackIdPin[], path = PINS_PATH): void {
 /** True when the pin already supplies every field this catalog row still needs. */
 export function pinCoversNeed(
   pin: TrackIdPin | undefined,
-  need: { wantIsrc?: boolean; wantBeatport?: boolean },
+  need: { wantIsrc?: boolean; wantBeatport?: boolean; wantSpotify?: boolean },
 ): boolean {
   if (!pin) return false;
   if (need.wantIsrc && !normalizeIsrc(pin.isrc)) return false;
   if (need.wantBeatport && !canonicalBeatportUrl(pin.beatportUrl)) return false;
+  if (need.wantSpotify && !canonicalSpotifyUrl(pin.spotifyUrl)) return false;
   return true;
 }
 
@@ -239,6 +247,7 @@ export function evaluateTrackIdPin(
   const slug = row.slug.trim();
   const isrc = normalizeIsrc(row.isrc);
   const beatport = canonicalBeatportUrl(row.beatportUrl);
+  const spotify = canonicalSpotifyUrl(row.spotifyUrl);
   if (beatport && row.title && !beatportSlugMatchesTitle(beatport, row.title)) {
     return { ok: false, reason: "beatport slug mismatch" };
   }
@@ -251,45 +260,50 @@ export function evaluateTrackIdPin(
   if (!named && !slugged) {
     return { ok: false, reason: "not confirmed" };
   }
-  if (!isrc && !beatport) return { ok: false, reason: "empty" };
+  if (!isrc && !beatport && !spotify) return { ok: false, reason: "empty" };
   return {
     ok: true,
     pin: {
       slug,
       ...(isrc ? { isrc } : {}),
       ...(beatport ? { beatportUrl: beatport } : {}),
+      ...(spotify ? { spotifyUrl: spotify } : {}),
     },
     reason: "deezer isrc",
   };
 }
 
-/** Fill-null by Track.slug. Never overwrites an existing ISRC or Beatport URL. */
+/** Fill-null by Track.slug. Never overwrites an existing ISRC, Beatport, or Spotify URL. */
 export async function applyTrackIdPins(
   prisma: PrismaClient,
   pins = loadTrackIdPins(),
-): Promise<{ matched: number; beatport: number; isrc: number }> {
+): Promise<{ matched: number; beatport: number; isrc: number; spotify: number }> {
   let matched = 0;
   let beatport = 0;
   let isrc = 0;
+  let spotifyN = 0;
   for (const pin of pins) {
     const canon = pin.beatportUrl
       ? canonicalBeatportUrl(pin.beatportUrl)
       : null;
     const code = normalizeIsrc(pin.isrc);
-    if (!canon && !code) continue;
+    const spotifyPin = canonicalSpotifyUrl(pin.spotifyUrl);
+    if (!canon && !code && !spotifyPin) continue;
     const row = await prisma.track.findUnique({
       where: { slug: pin.slug },
-      select: { id: true, isrc: true, beatportUrl: true },
+      select: { id: true, isrc: true, beatportUrl: true, spotifyUrl: true },
     });
     if (!row) continue;
     matched += 1;
-    const data: { isrc?: string; beatportUrl?: string } = {};
+    const data: { isrc?: string; beatportUrl?: string; spotifyUrl?: string } = {};
     if (code && !normalizeIsrc(row.isrc)) data.isrc = code;
     if (canon && !canonicalBeatportUrl(row.beatportUrl)) data.beatportUrl = canon;
+    if (spotifyPin && !canonicalSpotifyUrl(row.spotifyUrl)) data.spotifyUrl = spotifyPin;
     if (!Object.keys(data).length) continue;
     await prisma.track.update({ where: { id: row.id }, data });
     if (data.beatportUrl) beatport += 1;
     if (data.isrc) isrc += 1;
+    if (data.spotifyUrl) spotifyN += 1;
   }
-  return { matched, beatport, isrc };
+  return { matched, beatport, isrc, spotify: spotifyN };
 }

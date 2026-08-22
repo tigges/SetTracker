@@ -164,10 +164,10 @@ export async function applyKnownUrlFixes(prisma: PrismaClient): Promise<number> 
   n += await applyDjSocialPins(prisma);
 
   const trackIds = await applyTrackIdPins(prisma);
-  n += trackIds.beatport + trackIds.isrc;
-  if (trackIds.beatport || trackIds.isrc) {
+  n += trackIds.beatport + trackIds.isrc + trackIds.spotify;
+  if (trackIds.beatport || trackIds.isrc || trackIds.spotify) {
     console.log(
-      `[verify-urls] track id pins matched=${trackIds.matched} beatport=${trackIds.beatport} isrc=${trackIds.isrc}`,
+      `[verify-urls] track id pins matched=${trackIds.matched} beatport=${trackIds.beatport} isrc=${trackIds.isrc} spotify=${trackIds.spotify}`,
     );
   }
 

@@ -4,7 +4,9 @@ name: Catalog enrich
 # GitHub-hosted jobs die at 6h and skip Save/Pages — so every expensive step
 # has a timeout, continue-on-error, and a DB checkpoint. `full` is sized to
 # finish (~3h), not to pack thumbs + 40×20 Identify + File Scan + 400 ISRCs.
-#   full  — null thumbs + MB + Identify 28×16 + File Scan 20 [weekly / enrich-full-request]
+#   full  — null thumbs + MB + Identify 28×16 + File Scan 20
+#           + handles/tracks + cue dry-run + Spotify fill-null
+#           [weekly / enrich-full-request]
 #   acr   — Identify 20×12 + File Scan 16 (no thumbs/LLM)    [enrich-request]
 #   smoke — tiny ACR check (4×5)                             [creds]
 # After a checkpoint exists, dispatches deploy-pages even if a later step fails.
@@ -208,6 +210,8 @@ jobs:
           ACRCLOUD_FS_TOKEN: ${{ secrets.ACRCLOUD_FS_TOKEN }}
           ACRCLOUD_FS_CONTAINER_ID: ${{ secrets.ACRCLOUD_FS_CONTAINER_ID }}
           ACRCLOUD_EVENT_SLUGS: "street-parade,tomorrowland,ultra-miami,edc-lv,nature-one"
+          AUDD_API_TOKEN: ${{ secrets.AUDD_API_TOKEN }}
+          AUDD_ANALYZE: "1"
         run: npm run enrich:fingerprint
 
       - name: Save checkpoint after Identify
@@ -246,7 +250,7 @@ jobs:
       # Fill-null ISRC / canonical Beatport on high-play catalog tracks.
       # Deezer + MusicBrainz + TrackRadar + AudD — never scrape Beatport HTML.
       # Writes the cached DB (TRACK_ID_APPLY) and data/track-id-pins.json.
-      - name: Beatport / ISRC enrich
+      - name: Beatport / ISRC / Spotify enrich
         if: steps.mode.outputs.track_id_limit != '0'
         timeout-minutes: 25
         env:
@@ -255,20 +259,46 @@ jobs:
           TRACK_ID_HELD_LIMIT: "8"
           TRACK_ID_DELAY_MS: "0"
           TRACKRADAR_ARCHIVE: "0"
+          SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
+          SPOTIFY_CLIENT_SECRET: ${{ secrets.SPOTIFY_CLIENT_SECRET }}
         run: npm run research:track-ids
         continue-on-error: true
 
-      - name: LLM handle research
+      - name: LLM handle + track research
         if: steps.mode.outputs.do_thumbs == '1'
         timeout-minutes: 12
         env:
           CLAUDE_AGENT_API: ${{ secrets.CLAUDE_AGENT_API }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY || secrets.GEMINI_AGENT_API || secrets.GEMINI || secrets.GOOGLE_API_KEY }}
+          LLM_RESEARCH_JOBS: "handles,events,quality,tracks"
           LLM_RESEARCH_LIMIT: "8"
           LLM_QUALITY: "1"
         run: npm run research:handles
         continue-on-error: true
+
+      # Dry-run first ship: parser re-reads first-party text; LLM may propose
+      # only clocks that already appear. Flip LLM_RESEARCH_APPLY=1 after review.
+      - name: LLM cue research (dry-run)
+        if: steps.mode.outputs.do_thumbs == '1'
+        timeout-minutes: 12
+        env:
+          CLAUDE_AGENT_API: ${{ secrets.CLAUDE_AGENT_API }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY || secrets.GEMINI_AGENT_API || secrets.GEMINI || secrets.GOOGLE_API_KEY }}
+          LLM_RESEARCH_JOBS: "cues"
+          LLM_RESEARCH_APPLY: "0"
+          LLM_CUE_LIMIT: "16"
+        run: npm run research:handles
+        continue-on-error: true
+
+      - name: Upload cue research report
+        if: steps.mode.outputs.do_thumbs == '1'
+        uses: actions/upload-artifact@v4
+        with:
+          name: llm-cue-research
+          path: data/crosscheck/llm-cue-research.json
+          if-no-files-found: warn
 
       - name: Save enriched catalog DB
         if: always()

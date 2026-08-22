@@ -144,6 +144,8 @@ model Track {
   imageUrl    String?
   // Canonical Beatport track/release URL when known (not a search page)
   beatportUrl String?
+  // Canonical open.spotify.com/track/{22} when known (not a search page)
+  spotifyUrl  String?
   // ISRC when known (ACR / Deezer / MusicBrainz). Join key for store pages.
   isrc        String?
 

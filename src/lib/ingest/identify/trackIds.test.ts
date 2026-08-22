@@ -72,6 +72,7 @@ const fromExport = exportRowsToIdentifyQueue(
       plays: 12,
       isrc: "USUM70000000",
       beatportUrl: null,
+      spotifyUrl: null,
     },
     {
       slug: "convex-id",
@@ -83,6 +84,7 @@ const fromExport = exportRowsToIdentifyQueue(
       plays: 99,
       isrc: null,
       beatportUrl: null,
+      spotifyUrl: null,
     },
     {
       slug: "zz-test-enrich-queue-done",
@@ -94,6 +96,7 @@ const fromExport = exportRowsToIdentifyQueue(
       plays: 20,
       isrc: "USUM70000001",
       beatportUrl: "https://www.beatport.com/track/already/1",
+      spotifyUrl: null,
     },
   ],
   10,
@@ -141,6 +144,7 @@ const split = splitEnrichPriorities(
       plays: 9,
       isrc: null,
       beatportUrl: null,
+      spotifyUrl: null,
     },
     {
       slug: "has-isrc-no-bp",
@@ -152,6 +156,7 @@ const split = splitEnrichPriorities(
       plays: 8,
       isrc: "NLZ542600064",
       beatportUrl: null,
+      spotifyUrl: null,
     },
   ],
   2,

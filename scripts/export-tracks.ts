@@ -32,6 +32,7 @@ async function loadRows(): Promise<ExportTrackRow[]> {
       genre: true,
       isrc: true,
       beatportUrl: true,
+      spotifyUrl: true,
       _count: { select: { plays: true } },
     },
   });
@@ -45,6 +46,7 @@ async function loadRows(): Promise<ExportTrackRow[]> {
     plays: t._count.plays,
     isrc: t.isrc,
     beatportUrl: t.beatportUrl,
+    spotifyUrl: t.spotifyUrl,
   }));
 }
 

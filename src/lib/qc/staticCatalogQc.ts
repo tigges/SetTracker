@@ -15,7 +15,11 @@ import {
 import { ARTIST_ROSTER_CURATED } from "../ingest/roster";
 import { slugify } from "../ingest/types";
 import { isWeakOfficialUrl } from "../officialUrls";
-import { canonicalBeatportUrl, normalizeIsrc } from "../trackMeta";
+import {
+  canonicalBeatportUrl,
+  canonicalSpotifyUrl,
+  normalizeIsrc,
+} from "../trackMeta";
 
 export type QcIssue = {
   severity: "error" | "warn";
@@ -75,6 +79,14 @@ function auditPins(pins: TrackIdPin[]): QcIssue[] {
         area: "track-id-pins",
         slug: pin.slug,
         detail: "Beatport URL is not canonical /track/{slug}/{id}",
+      });
+    }
+    if (pin.spotifyUrl && !canonicalSpotifyUrl(pin.spotifyUrl)) {
+      issues.push({
+        severity: "error",
+        area: "track-id-pins",
+        slug: pin.slug,
+        detail: "Spotify URL is not canonical /track/{22}",
       });
     }
   }

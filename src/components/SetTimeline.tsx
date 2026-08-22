@@ -369,6 +369,7 @@ export function SetTimeline({
                     (() => {
                       const links = listenLinks(p.title, p.artistName, {
                         beatportUrl: p.beatportUrl,
+                        spotifyUrl: p.spotifyUrl,
                         setSourceUrl,
                       });
                       const buyability = beatportBuyability({
@@ -398,10 +399,32 @@ export function SetTimeline({
                             href={links.spotify}
                             target="_blank"
                             rel="noreferrer"
-                            title="Search on Spotify"
+                            title={
+                              links.spotifyIsCanonical
+                                ? "Open on Spotify"
+                                : "Search on Spotify"
+                            }
                             className={`${pill} hidden sm:grid`}
                           >
                             SP
+                          </a>
+                          <a
+                            href={links.discogs}
+                            target="_blank"
+                            rel="noreferrer"
+                            title="Search on Discogs"
+                            className={`${pill} hidden sm:grid`}
+                          >
+                            DC
+                          </a>
+                          <a
+                            href={links.bandcamp}
+                            target="_blank"
+                            rel="noreferrer"
+                            title="Search on Bandcamp"
+                            className={`${pill} hidden sm:grid`}
+                          >
+                            BC
                           </a>
                           {buyability !== "unavailable" && (
                             <a

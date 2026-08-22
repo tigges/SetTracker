@@ -185,3 +185,51 @@ export function spotifySearchUrl(
   );
   return `https://open.spotify.com/search/${q}`;
 }
+
+const SPOTIFY_TRACK_ID = /^[A-Za-z0-9]{22}$/;
+
+/** Canonical open.spotify.com/track/{22} only — never a search or album page. */
+export function canonicalSpotifyUrl(url?: string | null): string | null {
+  if (!url) return null;
+  try {
+    const parsed = new URL(url);
+    const host = parsed.hostname.replace(/^www\./, "").toLowerCase();
+    if (host !== "open.spotify.com" && host !== "spotify.com") return null;
+    const m = parsed.pathname.match(/^\/track\/([A-Za-z0-9]{22})\/?$/);
+    if (!m || !SPOTIFY_TRACK_ID.test(m[1]!)) return null;
+    return `https://open.spotify.com/track/${m[1]}`;
+  } catch {
+    return null;
+  }
+}
+
+/** Canonical /track URL when stored; otherwise the search page. */
+export function spotifyTrackHref(
+  title: string,
+  artistName?: string | null,
+  storedUrl?: string | null,
+): string {
+  return canonicalSpotifyUrl(storedUrl) ?? spotifySearchUrl(title, artistName);
+}
+
+/** Discogs search (not a release page — we do not invent store IDs). */
+export function discogsSearchUrl(
+  title: string,
+  artistName?: string | null,
+): string {
+  const q = encodeURIComponent(
+    [artistName, title].filter(Boolean).join(" ").trim(),
+  );
+  return `https://www.discogs.com/search/?q=${q}&type=release`;
+}
+
+/** Bandcamp search (not a /track page — we do not invent store IDs). */
+export function bandcampSearchUrl(
+  title: string,
+  artistName?: string | null,
+): string {
+  const q = encodeURIComponent(
+    [artistName, title].filter(Boolean).join(" ").trim(),
+  );
+  return `https://bandcamp.com/search?q=${q}`;
+}

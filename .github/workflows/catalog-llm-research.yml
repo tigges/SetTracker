@@ -11,6 +11,16 @@ on:
         required: false
         default: "24"
         type: string
+      jobs:
+        description: "Comma list, or all / cues"
+        required: false
+        default: "handles,events,quality"
+        type: string
+      apply:
+        description: "1 write / 0 dry-run (dry-run skips Pages)"
+        required: false
+        default: "1"
+        type: string
   push:
     branches: [main]
     paths:
@@ -91,6 +101,8 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY || secrets.GEMINI_AGENT_API || secrets.GEMINI || secrets.GOOGLE_API_KEY }}
           LLM_RESEARCH_LIMIT: ${{ github.event.inputs.limit || '24' }}
+          LLM_RESEARCH_JOBS: ${{ github.event.inputs.jobs || 'handles,events,quality' }}
+          LLM_RESEARCH_APPLY: ${{ github.event.inputs.apply || '1' }}
           LLM_QUALITY: "1"
         run: npm run research:handles
 
@@ -101,6 +113,8 @@ jobs:
           path: |
             data/crosscheck/llm-handle-research.json
             data/crosscheck/llm-quality-check.json
+            data/crosscheck/llm-cue-research.json
+            data/crosscheck/llm-track-id-research.json
           if-no-files-found: warn
 
       - name: Save catalog DB
@@ -110,7 +124,7 @@ jobs:
           key: setradar-db-${{ github.run_id }}
 
       - name: Dispatch Pages deploy
-        if: success()
+        if: success() && (github.event.inputs.apply || '1') != '0'
         uses: actions/github-script@v7
         with:
           script: |

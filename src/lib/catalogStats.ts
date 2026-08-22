@@ -26,11 +26,10 @@ import {
 } from "@/lib/ingest/tracklists1001/seeds";
 import { SET_SLUG_ALIASES } from "@/lib/ingest/sourceRemaps";
 import {
-  PROVENANCE_META,
+  provenanceLabelOperator,
   STATUS_META,
   STATUS_ORDER,
   type IdStatus,
-  type Provenance,
 } from "@/lib/status";
 
 export type NamedCount = { key: string; label: string; count: number };
@@ -902,7 +901,7 @@ export async function getCatalogStats(): Promise<CatalogStats> {
           key: g.provenance,
           count: g._count._all,
         })),
-        (k) => PROVENANCE_META[k as Provenance]?.label ?? k,
+        (k) => provenanceLabelOperator(k),
       ),
     },
     tracks: {

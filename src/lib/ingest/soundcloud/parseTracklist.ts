@@ -270,11 +270,12 @@ export function fillSparseTimestamps(
   return rows.map((r, i) => ({ line: r.line, sec: out[i]! }));
 }
 
-export function parseDescriptionTracklist(
+type CollectedRow = { line: string; sec: number | null };
+
+function collectTracklistRows(
   description: string | null | undefined,
   durationSec: number,
-  provenance: Provenance = "soundcloud",
-): RawPlay[] {
+): CollectedRow[] {
   if (!description?.trim()) return [];
   const text = stripHtml(description);
   const lines = text
@@ -282,10 +283,7 @@ export function parseDescriptionTracklist(
     .map((l) => l.trim())
     .filter(Boolean);
 
-  // Collect tracklist rows in document order. Some uploads (hearthis "Track
-  // List:" blocks) are mostly untimed with a few trailing cue annotations —
-  // keeping order matters more than dropping the untimed majority.
-  const rows: { line: string; sec: number | null }[] = [];
+  const rows: CollectedRow[] = [];
   for (const line of lines) {
     let sec: number | null = null;
     let candidate = line;
@@ -314,6 +312,43 @@ export function parseDescriptionTracklist(
       sec: sec != null ? Math.min(durationSec, sec) : null,
     });
   }
+  return rows;
+}
+
+function classifyCollectedRows(
+  rows: { line: string; sec: number }[],
+  provenance: Provenance,
+): RawPlay[] {
+  const plays: RawPlay[] = [];
+  for (let i = 0; i < rows.length; i++) {
+    const row = rows[i]!;
+    const play = classifyLine(row.line, i + 1, row.sec, provenance);
+    if (play) plays.push(play);
+  }
+  return plays.map((p, i) => ({ ...p, position: i + 1 }));
+}
+
+/**
+ * Timed cues only — never interpolates missing clocks.
+ * Used by the cue research job so LLM/parser cannot invent offsets.
+ */
+export function parseClockedTracklist(
+  description: string | null | undefined,
+  durationSec: number,
+  provenance: Provenance = "soundcloud",
+): RawPlay[] {
+  const timed = collectTracklistRows(description, durationSec)
+    .filter((r): r is { line: string; sec: number } => r.sec != null)
+    .sort((a, b) => a.sec - b.sec || a.line.localeCompare(b.line));
+  return classifyCollectedRows(timed, provenance);
+}
+
+export function parseDescriptionTracklist(
+  description: string | null | undefined,
+  durationSec: number,
+  provenance: Provenance = "soundcloud",
+): RawPlay[] {
+  const rows = collectTracklistRows(description, durationSec);
 
   const timedCount = rows.filter((r) => r.sec != null).length;
   const untimedCount = rows.length - timedCount;
@@ -333,13 +368,7 @@ export function parseDescriptionTracklist(
           .map((r) => ({ line: r.line, sec: r.sec as number }))
       : fillSparseTimestamps(rows, durationSec);
 
-  const plays: RawPlay[] = [];
-  for (let i = 0; i < chosen.length; i++) {
-    const row = chosen[i]!;
-    const play = classifyLine(row.line, i + 1, row.sec, provenance);
-    if (play) plays.push(play);
-  }
-  return plays.map((p, i) => ({ ...p, position: i + 1 }));
+  return classifyCollectedRows(chosen, provenance);
 }
 
 export function parseTimedComments(
