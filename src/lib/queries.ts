@@ -29,14 +29,11 @@ import {
   trackIdentityKey,
 } from "@/lib/trackMeta";
 import { relatedSlugsFor } from "@/lib/ingest/discovery/relations";
-import { aliasSlugsFor, resolveSetSlug } from "@/lib/ingest/sourceRemaps";
+import { resolveSetSlug } from "@/lib/ingest/sourceRemaps";
 import { collapseConsecutivePlays, playCollapseKey } from "@/lib/playCollapse";
 import { canonicalDjSlug, DJ_SLUG_ALIASES } from "@/lib/ingest/djSlugAliases";
-import {
-  sortEventSets,
-  nearDuplicateKey,
-  resolvedIdCount,
-} from "@/lib/feedPriority";
+import { sortEventSets, resolvedIdCount } from "@/lib/feedPriority";
+import { staticSetPageSlugs } from "@/lib/setPages";
 import { resolveFeedRanks } from "@/lib/feedPriorityResolve";
 import {
   loadAtlasDjs,
@@ -56,7 +53,7 @@ import {
   editionGapReport,
 } from "@/lib/ingest/festivalDrops";
 import { pickRelatedSets } from "@/lib/relatedSets";
-import { isBrowseReadySet, isEmptyOrPreviewSet } from "@/lib/setBrowse";
+import { isBrowseReadySet } from "@/lib/setBrowse";
 import { isBrowseReadyVenue, isVenueListed } from "@/lib/venueBrowse";
 import type { IdStatus } from "@/lib/status";
 
@@ -1224,38 +1221,8 @@ export async function getDjList(): Promise<DjListItem[]> {
 }
 
 export async function getAllSetSlugs(): Promise<string[]> {
-  const rows = await prisma.set.findMany({
-    select: {
-      slug: true,
-      title: true,
-      publishedAt: true,
-      durationSec: true,
-      _count: { select: { plays: true } },
-      artists: {
-        where: { isPrimary: true },
-        take: 1,
-        select: { dj: { select: { slug: true } } },
-      },
-    },
-  });
-  const ready = rows.filter(
-    (r) =>
-      !isEmptyOrPreviewSet({
-        title: r.title,
-        trackCount: r._count.plays,
-        durationSec: r.durationSec,
-      }),
-  );
-  ready.sort((a, b) => b.publishedAt.getTime() - a.publishedAt.getTime());
-  const seen = new Set<string>();
-  const slugs: string[] = [];
-  for (const r of ready) {
-    const key = nearDuplicateKey(r.title, r.artists[0]?.dj.slug);
-    if (seen.has(key)) continue;
-    seen.add(key);
-    slugs.push(r.slug);
-  }
-  return aliasSlugsFor(slugs);
+  const rows = await prisma.set.findMany({ select: { slug: true } });
+  return staticSetPageSlugs(rows.map((r) => r.slug));
 }
 
 export async function getGenres() {
