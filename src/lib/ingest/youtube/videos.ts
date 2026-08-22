@@ -1880,9 +1880,10 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_VINTAGE_CULTURE_ULTRA_MIAMI_RESISTANCE_2026,
   },
   {
-    // Official Joris Voorn B2B Korolova Resistance The Cove. Same list as
-    // sc-korolovadj-joris-voorn-b2b-korolova-live. Mixcloud UMF Radio 883
-    // is a mirror only. Distinct from Vintage Culture Resistance Megastructure.
+    // Official Joris Voorn B2B Korolova Resistance The Cove. korolovadj SC
+    // folds onto this slug via SET_SOURCE_REMAPS — do not ingest a second
+    // leftover. Mixcloud UMF Radio 883 is a mirror only. Distinct from
+    // Vintage Culture Resistance Megastructure.
     video: "https://youtu.be/FQj71mhobYw",
     primaryArtist: dj("Joris Voorn", {
       accent: "#2ec4b6",

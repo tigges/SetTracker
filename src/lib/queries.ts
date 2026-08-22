@@ -33,6 +33,7 @@ import { resolveSetSlug } from "@/lib/ingest/sourceRemaps";
 import { collapseConsecutivePlays, playCollapseKey } from "@/lib/playCollapse";
 import { canonicalDjSlug, DJ_SLUG_ALIASES } from "@/lib/ingest/djSlugAliases";
 import { sortEventSets, resolvedIdCount } from "@/lib/feedPriority";
+import { collapseHostTwins } from "@/lib/feedQuality";
 import { staticSetPageSlugs } from "@/lib/setPages";
 import { resolveFeedRanks } from "@/lib/feedPriorityResolve";
 import {
@@ -1695,6 +1696,13 @@ export async function getVenueBySlug(slug: string, nowMs = Date.now()) {
       } satisfies FeedItem;
     });
 
+  const listed = collapseHostTwins(
+    sets.map((s) => ({
+      ...s,
+      primaryDjSlug: s.primaryDj?.slug ?? null,
+    })),
+  );
+
   return {
     slug: event.slug,
     name: event.name,
@@ -1707,8 +1715,8 @@ export async function getVenueBySlug(slug: string, nowMs = Date.now()) {
       twitter: event.twitter,
     },
     lineupArtists,
-    setCount: event.sets.length,
-    sets: sortEventSets(sets, nowMs),
+    setCount: listed.length,
+    sets: sortEventSets(listed, nowMs),
     nights,
   };
 }

@@ -31,6 +31,13 @@ export const SET_SOURCE_REMAPS: SetSourceRemap[] = [
     playbackUrl: "https://youtu.be/2BPWWYAgUE4",
     note: "Same Resistance Cove night as official YT. SC permalink spells innella — fold so /stats lists one set.",
   },
+  {
+    fromSlug: "sc-korolovadj-joris-voorn-b2b-korolova-live",
+    toSlug: "yt-FQj71mhobYw",
+    sourceUrl: "https://youtu.be/FQj71mhobYw",
+    playbackUrl: "https://youtu.be/FQj71mhobYw",
+    note: "Same Resistance Cove night as official YT. korolovadj SC is a second host — fold so Ultra lists one set.",
+  },
 ]
 
 export const SET_SLUG_ALIASES: Record<string, string> = Object.fromEntries(

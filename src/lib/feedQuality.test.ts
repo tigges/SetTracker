@@ -60,6 +60,56 @@ describe("feedQuality", () => {
     assert.equal(kept[0]!.id, "yt");
   });
 
+  it("collapses a late SoundCloud upload of the same festival night", () => {
+    const yt = {
+      id: "yt",
+      slug: "yt-FQj71mhobYw",
+      title:
+        "Joris Voorn B2B Korolova LIVE @ ULTRA MUSIC FESTIVAL MIAMI 2026 | RESISTANCE THE COVE",
+      primaryDjSlug: "joris-voorn",
+      eventSlug: "ultra-miami",
+      publishedAt: "2026-04-01T00:00:00Z",
+      durationSec: 7167,
+      trackCount: 33,
+      densitySeverity: "ok" as const,
+      sourceName: "YouTube",
+      dominantProvenance: "1001tl",
+    };
+    const sc = {
+      ...yt,
+      id: "sc",
+      slug: "sc-korolovadj-joris-voorn-b2b-korolova-live",
+      publishedAt: "2026-05-10T00:00:00Z",
+      trackCount: 0,
+      densitySeverity: "severe" as const,
+      sourceName: "SoundCloud",
+      dominantProvenance: "soundcloud",
+    };
+    assert.equal(hostTwinKey(yt), hostTwinKey(sc));
+    const y2014 = {
+      ...yt,
+      id: "g14",
+      slug: "yt-2014",
+      title: "David Guetta | Miami Ultra Music Festival 2014",
+      primaryDjSlug: "david-guetta",
+      publishedAt: "2014-05-22T00:00:00Z",
+      durationSec: 3709,
+      trackCount: 20,
+    };
+    const y2024 = {
+      ...y2014,
+      id: "g24",
+      slug: "yt-2024",
+      title: "David Guetta | Miami Ultra Music Festival 2024",
+      publishedAt: "2024-03-24T00:00:00Z",
+      durationSec: 3549,
+    };
+    assert.notEqual(hostTwinKey(y2014), hostTwinKey(y2024));
+    const kept = collapseHostTwins([sc, yt]);
+    assert.equal(kept.length, 1);
+    assert.equal(kept[0]!.id, "yt");
+  });
+
   it("caps festival-season cards per event brand", () => {
     const out = diversifyByEvent(
       [

@@ -113,9 +113,13 @@ export function hostTwinKey(s: {
 }): string {
   const dj = (s.primaryDjSlug || "").toLowerCase();
   const ev = eventDiversityKey(s) || "";
-  const week = Math.floor(new Date(s.publishedAt).getTime() / (7 * DAY_MS));
+  const when = new Date(s.publishedAt);
+  const week = Math.floor(when.getTime() / (7 * DAY_MS));
+  const year = when.getUTCFullYear();
   const dur = Math.round((s.durationSec || 0) / 300) * 300;
-  if (dj && ev) return `ev|${dj}|${ev}|${week}|${dur}`;
+  // Year, not week: korolovadj SC of the same Cove night landed weeks later.
+  // Year repeats (Guetta Ultra 2014 vs 2024) stay distinct.
+  if (dj && ev) return `ev|${dj}|${ev}|${year}|${dur}`;
   return `nd|${nearDuplicateKey(s.title, s.primaryDjSlug)}|${week}`;
 }
 
