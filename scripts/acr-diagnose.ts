@@ -1,21 +1,18 @@
 /**
- * ACRCloud diagnostic — proves the Identify pipeline end-to-end, independent of
- * the sparse-set queue. Two checks:
+ * ACRCloud diagnostic — proves the CI fingerprint path, independent of
+ * the sparse-set queue.
  *
- *   A) Known-track control: sample a short clip from a track ACRCloud definitely
- *      has in its DB (Rick Astley — Never Gonna Give You Up) via the SAME
- *      yt-dlp → ffmpeg → Identify path used for Relive enrich. A hit here means
- *      the whole YouTube path (cookies included) works; a miss means the
- *      pipeline — not the music — is the problem.
+ *   A) Known-track control via yt-dlp → ffmpeg → Identify. On GitHub IPs
+ *      this usually bot-walls; that is expected, not a pipeline break.
+ *   B) Optional Relive probes on the same yt-dlp path (skipped on CI when
+ *      File Scan is configured — those clips hit the same wall).
+ *   C) File Scanning of the same control video. This is the CI YouTube
+ *      path. A named hit (even below the catalog write floor of 55) means
+ *      the Console token + container work.
  *
- *   B) Real Relive probes: sample our curated YouTube sets at offsets where a
- *      well-known commercial track is playing (from captured 1001 seeds) and
- *      report identify results. This shows the expected hit-rate on live sets.
- *
- * Safe + read-only: never writes the DB. Requires ACRCLOUD_* creds; uses
- * ACRCLOUD_YTDLP_COOKIES when set. Prints a summary and exits non-zero only when
- * the known-track control fails for a transport/auth reason (so CI flags a
- * genuinely broken pipeline, not merely hard-to-match live audio).
+ * Safe + read-only: never writes the DB. Exits non-zero only when File
+ * Scan is configured and does not name the control track, or Identify
+ * fails for a non-YouTube-wall reason (bad HMAC, missing yt-dlp, …).
  *
  * Run: npx tsx scripts/acr-diagnose.ts
  */
@@ -25,6 +22,10 @@ import {
   ytDlpAvailable,
   type AcrHit,
 } from "../src/lib/ingest/enrich/acrcloud";
+import {
+  diagnoseVerdict,
+  isControlTrackMatch,
+} from "../src/lib/ingest/enrich/acrDiagnose";
 import {
   fileScanConfig,
   listFileScanContainers,
@@ -128,35 +129,47 @@ async function main() {
     process.exit(1);
   }
 
-  console.log("\n=== A) Known-track control ===");
+  console.log("\n=== A) Known-track control (yt-dlp Identify) ===");
   const control = await runProbe(CONTROL);
   console.log(`${control.ok ? "•" : "✗"} ${control.label}\n    ${control.detail}`);
 
-  console.log("\n=== B) Relive probes (live-set hit-rate) ===");
-  const results = [];
-  for (const p of RELIVE_PROBES) {
-    const r = await runProbe(p);
-    const mark = r.softMatch === true ? "✓" : r.softMatch === false ? "≈" : "•";
-    console.log(`${mark} ${r.label}\n    ${r.detail}`);
-    results.push(r);
+  const identifyHit =
+    control.ok && /score \d/.test(control.detail) && !/no match/.test(control.detail);
+  const fsCfg = fileScanConfig();
+  const skipRelive =
+    Boolean(fsCfg) && !control.ok && /bot-wall|unavailable/i.test(control.detail);
+
+  let reliveHits = 0;
+  let reliveNote = "";
+  const results: Awaited<ReturnType<typeof runProbe>>[] = [];
+  if (skipRelive) {
+    reliveNote = "skipped (CI YouTube wall; File Scan is the path)";
+    console.log(`\n=== B) Relive probes (yt-dlp) ===\n  ${reliveNote}`);
+  } else {
+    console.log("\n=== B) Relive probes (live-set hit-rate) ===");
+    for (const p of RELIVE_PROBES) {
+      const r = await runProbe(p);
+      const mark = r.softMatch === true ? "✓" : r.softMatch === false ? "≈" : "•";
+      console.log(`${mark} ${r.label}\n    ${r.detail}`);
+      results.push(r);
+    }
+    reliveHits = results.filter((r) => r.ok && !/no match/.test(r.detail)).length;
+    reliveNote = `${reliveHits}/${RELIVE_PROBES.length} clips identified (yt-dlp path)`;
   }
 
-  const controlHit = control.ok && /score \d/.test(control.detail) && !/no match/.test(control.detail);
-  const reliveHits = results.filter((r) => r.ok && !/no match/.test(r.detail)).length;
-
-  // C) File Scanning — server-side scan of ONE real Relive that yt-dlp cannot
-  // fetch from CI. Proves the FS credentials + pipeline bypass the bot wall.
+  // C) File Scanning — server-side scan of the control video. Proves the
+  // FS credentials + pipeline bypass the bot wall. Report every music row
+  // (including scores below the catalog write floor) so a 47-score Astley
+  // still counts as a control HIT.
   let fsLine = "file-scan: not configured (set ACRCLOUD_FS_TOKEN + ACRCLOUD_FS_CONTAINER_ID)";
-  const fsCfg = fileScanConfig();
+  let fsScanFailed = false;
+  let fsControlHit = false;
+  let fsControlDetail = "";
   if (fsCfg) {
-    // Short known track (~3.5m) so the server-side scan completes fast and
-    // gives a definitive pipeline answer; long festival sets take much longer.
     const fsUrl =
       process.env.ACRCLOUD_FS_TEST_URL ||
       "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
     console.log("\n=== C) File Scanning (server-side) ===");
-    // Always list the containers this token can see, so a wrong id/region is
-    // obvious ("Invalid Container").
     try {
       const containers = await listFileScanContainers(fsCfg.token);
       if (containers.length === 0) {
@@ -180,11 +193,24 @@ async function main() {
       const scanHits = await scanYoutube(fsCfg, fsUrl, {
         timeoutMs: Number(process.env.ACRCLOUD_FS_TIMEOUT_MS || 480_000),
         pollMs: Number(process.env.ACRCLOUD_FS_POLL_MS || 15_000),
+        minScore: 1,
       });
       if (scanHits == null) {
+        fsScanFailed = true;
         fsLine = "file-scan: submit/poll FAILED (token/container/region?)";
       } else {
-        fsLine = `file-scan: ${scanHits.length} tracks identified`;
+        const named = scanHits.find((h) =>
+          isControlTrackMatch(h.hit.artist, h.hit.title, CONTROL.expect),
+        );
+        fsControlHit = Boolean(named);
+        if (named) {
+          fsControlDetail = `score ${named.hit.score}`;
+        }
+        const writeFloor = fsCfg.minScore;
+        const aboveFloor = scanHits.filter((h) => h.hit.score >= writeFloor).length;
+        fsLine = named
+          ? `file-scan: ${named.hit.artist} — ${named.hit.title} (${named.hit.score}; ${aboveFloor}/${scanHits.length} ≥ write floor ${writeFloor})`
+          : `file-scan: ${scanHits.length} tracks identified (control not named; ${aboveFloor} ≥ write floor ${writeFloor})`;
         for (const h of scanHits.slice(0, 5)) {
           console.log(
             `  ${String(h.offsetSec).padStart(5)}s  ${h.hit.artist} — ${h.hit.title} (${h.hit.score})`,
@@ -192,16 +218,28 @@ async function main() {
         }
       }
     } catch (err) {
+      fsScanFailed = true;
       fsLine = `file-scan: ERROR ${err instanceof Error ? err.message : String(err)}`;
     }
     console.log(fsLine);
   }
 
+  const verdict = diagnoseVerdict({
+    identifyOk: control.ok,
+    identifyDetail: control.detail,
+    identifyHit,
+    fsConfigured: Boolean(fsCfg),
+    fsScanFailed,
+    fsControlHit,
+    fsControlDetail,
+  });
+
   const summary = [
     "",
     "=== SUMMARY ===",
-    `control: ${controlHit ? "HIT ✓ (pipeline works)" : "MISS ✗"}`,
-    `relive:  ${reliveHits}/${RELIVE_PROBES.length} clips identified (yt-dlp path)`,
+    `control: ${verdict.controlLabel}`,
+    `  yt-dlp: ${control.detail}`,
+    `relive:  ${reliveNote}`,
     fsLine,
   ];
   console.log(summary.join("\n"));
@@ -215,8 +253,9 @@ async function main() {
         "## ACRCloud diagnostic",
         "",
         `- yt-dlp: ${hasYtDlp} · cookies: ${hasCookies}`,
-        `- **control**: ${controlHit ? "HIT ✓" : "MISS ✗"} — ${control.detail}`,
-        `- **relive**: ${reliveHits}/${RELIVE_PROBES.length} identified (yt-dlp)`,
+        `- **control**: ${verdict.controlLabel}`,
+        `- **yt-dlp**: ${control.detail}`,
+        `- **relive**: ${reliveNote}`,
         `- **${fsLine}**`,
         "",
         ...results.map((r) => `  - ${r.label}: ${r.detail}`),
@@ -225,15 +264,13 @@ async function main() {
     );
   }
 
-  // Fail only when the control transport/auth clearly broke — a genuine "no
-  // match" on the control still indicates a pipeline problem worth flagging.
-  if (!control.ok) {
-    console.error(`::error::control probe failed: ${control.detail}`);
+  if (!verdict.ok) {
+    console.error(`::error::control probe failed: ${verdict.failReason ?? control.detail}`);
     process.exit(1);
   }
-  if (!controlHit) {
+  if (!identifyHit && !fsControlHit) {
     console.error(
-      "::warning::control track returned no match — Identify pipeline may be misconfigured (clip/format/score), not just hard live audio",
+      "::warning::control track returned no match — Identify/File Scan may be misconfigured",
     );
   }
 }

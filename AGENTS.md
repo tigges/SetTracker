@@ -213,8 +213,12 @@ unless asked.
   YouTube festival playbacks (Top20 / festival priority by default) use `yt-dlp
   --download-sections` for short clips, then the same Identify path
   (`ACRCLOUD_ALLOW_YOUTUBE_PRIORITY=1`; full YT with `ACRCLOUD_ALLOW_YOUTUBE=1`).
-  **Diagnostic (`npm run` via `catalog-acr-diagnose.yml`):** control track HITs
-  at score ~64, so `ACRCLOUD_MIN_SCORE=55` (70 rejected real YT hits).
+  **Diagnostic (`npm run` via `catalog-acr-diagnose.yml`):** Identify clips
+  HIT around score 64, so `ACRCLOUD_MIN_SCORE=55` (70 rejected real YT hits).
+  File Scan of the Rick Astley control often scores ~47 — diagnose counts
+  that named hit even below the catalog write floor. yt-dlp `unavailable` /
+  bot-wall on GitHub IPs is expected and does not fail the job when File
+  Scan names the control.
   **CI caveat:** GitHub Actions datacenter IPs get YouTube bot-walled ("Sign in
   to confirm you're not a bot") even WITH `YT_DUMMY_COOKIE_LOCAL`; only very
   popular videos slip through. SC/hearthis Identify is unaffected.
