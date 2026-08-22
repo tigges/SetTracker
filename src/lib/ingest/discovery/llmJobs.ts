@@ -68,11 +68,13 @@ export function parseResearchJobs(
   const text = (raw || "").trim().toLowerCase();
   if (!text) return fallback;
   if (text === "all") return [...RESEARCH_JOBS];
+  const aliases: Record<string, ResearchJobId> = { cue: "cues" };
   const allowed = new Set<string>(RESEARCH_JOBS);
   const out: ResearchJobId[] = [];
   for (const part of text.split(/[,\s]+/)) {
-    if (!part || !allowed.has(part)) continue;
-    const job = part as ResearchJobId;
+    if (!part) continue;
+    const job = (aliases[part] ?? part) as ResearchJobId;
+    if (!allowed.has(job)) continue;
     if (!out.includes(job)) out.push(job);
   }
   return out.length ? out : fallback;

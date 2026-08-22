@@ -12,7 +12,7 @@ on:
         default: "24"
         type: string
       jobs:
-        description: "Comma list, or all / cues"
+        description: "Comma list, or all / cues (cue = cues)"
         required: false
         default: "handles,events,quality"
         type: string

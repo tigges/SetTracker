@@ -24,6 +24,8 @@ assert.deepEqual(parseResearchJobs("handles,nope,events"), [
   "handles",
   "events",
 ]);
+assert.deepEqual(parseResearchJobs("cue"), ["cues"]);
+assert.deepEqual(parseResearchJobs("cues"), ["cues"]);
 
 assert.equal(evaluateIdentityClass("Adam Beyer", "touring_dj").ok, true);
 assert.equal(
