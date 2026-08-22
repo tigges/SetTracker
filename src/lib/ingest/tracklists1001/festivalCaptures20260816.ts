@@ -9,7 +9,9 @@ import type { FingerprintSeedRow } from "../fingerprint/seeds";
  * https://www.1001tracklists.com/tracklist/fnz6fv9/alok-mainstage-tomorrowland-weekend-2-belgium-2026-07-24.html
  * Official YT: https://youtu.be/zHAUZ02aCwo
  * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-zHAUZ02aCwo"]
- * Captured 2026-08-16 - provenance 1001tl.
+ * Recapture 2026-08-22 — provenance 1001tl. Adds The Drill @ 33:38 and
+ * Thunderbolt @ 42:50; Pjanoo clock 41:07 → 39:40. Consecutive Don't
+ * Say Goodbye rows collapse on write.
  */
 export const TL_ALOK_TML_WE2_2026: FingerprintSeedRow[] = [
   { at: "0:12", artist: "ALOK", title: "Around" },
@@ -34,12 +36,14 @@ export const TL_ALOK_TML_WE2_2026: FingerprintSeedRow[] = [
   { at: "28:25", artist: "Robin Schulz & MARTEN HØRGER", title: "Arizona" },
   { at: "29:20", artist: "ALOK & DJ Glen & Yves V", title: "Weekend Warriors" },
   { at: "32:35", artist: "ALOK & Ava Max", title: "Car Keys (Ayla) (ALOK Club Mix)" },
+  { at: "33:38", artist: "MORTEN", title: "The Drill" },
   { at: "34:40", artist: "ALOK & Firebeatz vs. D-Jastic & MAKJ", title: "Higher State Of Consciousness vs. Up To No Good (Tiësto Mashup)" },
   { at: "35:08", artist: "D-Jastic", title: "Up To No Good" },
   { at: "35:35", artist: "D-Jastic", title: "Up To No Good (MAKJ Booty Remix)" },
   { at: "36:03", artist: "ALOK & Firebeatz", title: "Higher State Of Consciousness" },
   { at: "36:30", artist: "Underworld", title: "Born Slippy" },
-  { at: "41:07", artist: "Eric Prydz", title: "Pjanoo" },
+  { at: "39:40", artist: "Eric Prydz", title: "Pjanoo" },
+  { at: "42:50", artist: "Rafael Cerato & Laherte", title: "Thunderbolt (Slim Black Edit)" },
   { at: "45:43", artist: "Ratty", title: "Sunrise (Here I Am)" },
   { at: "46:01", artist: "Boombox Cartel", title: "Jefe (Acappella)" },
   { at: "46:20", artist: "Knock2", title: "dashstar* (VIP)" },
