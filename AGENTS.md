@@ -149,11 +149,13 @@ unless asked.
   both keys are missing. Trigger on main by bumping `data/llm-request`.
   Reports in `data/crosscheck/llm-handle-research.json`.
   **Cue job** (`LLM_RESEARCH_JOBS=cues` or `all`): re-parse first-party
-  YT/SC/hearthis on empty/stub lists. Parser path works without an LLM key.
-  LLM may write only clocks that already appear in that text — never
-  interpolate, never overwrite 1001tl / fingerprint / community. Enrich
-  `full` runs this **dry-run** (`LLM_RESEARCH_APPLY=0`) after
-  handles/tracks. Report: `data/crosscheck/llm-cue-research.json`.
+  YT/SC/hearthis on empty/stub lists. Queue ranks live YT/hearthis ahead of
+  weekly radio; radio without clocks does not consume the limit. Parser
+  path works without an LLM key. LLM may write only clocks that already
+  appear in that text — never interpolate, never overwrite 1001tl /
+  fingerprint / community. Enrich `full` and Catalog LLM research default
+  to **dry-run** (`LLM_RESEARCH_APPLY=0`). Report:
+  `data/crosscheck/llm-cue-research.json`.
   **Track export:** `npm run export:tracks` dumps catalog tracks (CSV +
   Claude JSONL) to `data/track-id-export/`. Pages `prebuild` also writes
   `/exports/tracks-need-id.csv` and `.jsonl` (no-ISRC, most-played first).

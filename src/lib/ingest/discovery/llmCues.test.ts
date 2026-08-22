@@ -1,8 +1,13 @@
 import assert from "node:assert/strict";
 import {
   clockStringInText,
+  compareCueQueueSeeds,
+  cueQueueHostRank,
   filterProposedCues,
+  firstPartyTextHasClocks,
+  isCueRadioSet,
   isCueStub,
+  looksLikeCueRadioTitle,
   mergeClockedPlays,
   parseClockToSec,
 } from "./llmCues";
@@ -73,5 +78,67 @@ assert.equal(
   ]),
   false,
 );
+
+assert.equal(looksLikeCueRadioTitle("Smash The House Radio ep. 690"), true);
+assert.equal(looksLikeCueRadioTitle("Clapcast 576", "sc-claptone-clapcast-576"), true);
+assert.equal(
+  looksLikeCueRadioTitle("Bizarrap & Skrillex | Ultra Music Festival Miami"),
+  false,
+);
+assert.equal(
+  isCueRadioSet({
+    title: "Friendship Mix with Topic",
+    type: "festival",
+    seriesName: "Tomorrowland Radio",
+  }),
+  true,
+);
+assert.equal(
+  isCueRadioSet({
+    title: "Bizarrap & Skrillex | Mainstage, Ultra Music Festival Miami",
+    type: "festival",
+    eventKind: "festival",
+  }),
+  false,
+);
+
+assert.equal(
+  cueQueueHostRank("https://www.youtube.com/watch?v=0psLTNmJM38"),
+  0,
+);
+assert.equal(
+  cueQueueHostRank("https://soundcloud.com/claptone/clapcast-576"),
+  2,
+);
+
+const ranked = [
+  {
+    title: "Smash The House Radio ep. 690",
+    type: "radio",
+    playbackUrl: "https://soundcloud.com/x/radio",
+    publishedAt: new Date("2026-08-20"),
+  },
+  {
+    title: "Bizarrap & Skrillex Ultra Mainstage",
+    type: "festival",
+    playbackUrl: "https://www.youtube.com/watch?v=0psLTNmJM38",
+    publishedAt: new Date("2026-03-27"),
+  },
+  {
+    title: "Space 92 Tomorrowland 2026",
+    type: "festival",
+    playbackUrl: "https://soundcloud.com/space92/tml",
+    publishedAt: new Date("2026-08-01"),
+  },
+].sort(compareCueQueueSeeds);
+assert.equal(ranked[0]!.title, "Bizarrap & Skrillex Ultra Mainstage");
+assert.equal(ranked[1]!.title, "Space 92 Tomorrowland 2026");
+assert.equal(ranked[2]!.title, "Smash The House Radio ep. 690");
+
+assert.equal(
+  firstPartyTextHasClocks("0:00 Intro\n45:50 b2b w/ skrillex"),
+  true,
+);
+assert.equal(firstPartyTextHasClocks("1. Artist - Title\n2. Other - Song"), false);
 
 console.log("llmCues.test.ts ok");
