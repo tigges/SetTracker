@@ -3,6 +3,7 @@ import { playablePlaybackUrl } from "@/lib/playback";
 import { isBrandHostSlug } from "@/lib/brandHosts";
 import { isProducerHiddenSlug } from "@/lib/ingest/producerDjReview.data";
 import { isCatalogWorkDj, isTop100DjSlug } from "@/lib/djCatalog";
+import { loadDjMagTop100RankBySlug } from "@/lib/djmagTop100";
 import { isBrowseReadyDj } from "@/lib/djBrowse";
 import { prisma } from "@/lib/db";
 import {
@@ -1074,6 +1075,8 @@ export type DjListItem = {
   isLowSignal: boolean;
   /** Default directory visibility (store everything; hide thin profiles). */
   isBrowseReady: boolean;
+  /** DJ Mag Top 100 rank when listed; omit from the A–Z directory card otherwise. */
+  top100Rank: number | null;
 };
 
 type DjPlayAggRow = {
@@ -1110,6 +1113,7 @@ async function djPlayAggregates(): Promise<
 }
 
 export async function getDjList(): Promise<DjListItem[]> {
+  const ranks = loadDjMagTop100RankBySlug();
   const [rows, playAgg, setLinks] = await Promise.all([
     prisma.dj.findMany({
       orderBy: { name: "asc" },
@@ -1212,6 +1216,7 @@ export async function getDjList(): Promise<DjListItem[]> {
       isJunk,
       isLowSignal,
       isBrowseReady: false,
+      top100Rank: ranks.get(d.slug) ?? null,
     };
     item.isBrowseReady = isBrowseReadyDj(item) && !isLowSignal;
     return item;

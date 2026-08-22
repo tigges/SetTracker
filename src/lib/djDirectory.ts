@@ -9,14 +9,16 @@ export type DjLetterGroup = {
   djs: DjListItem[];
 };
 
-/** Directory card subtitle: city when we have one, then set count. No social shorts. */
+/** Directory card subtitle: #rank · city · N sets. No social shorts. */
 export function djCardSubtitle(
   homeCity: string | null | undefined,
   setCount: number,
+  rank?: number | null,
 ): string {
   const city = displayCity(homeCity);
   const sets = `${setCount} ${setCount === 1 ? "set" : "sets"}`;
-  return city ? `${city} · ${sets}` : sets;
+  const place = city ? `${city} · ${sets}` : sets;
+  return rank != null ? `#${rank} · ${place}` : place;
 }
 
 export function djIndexLetter(name: string): string {

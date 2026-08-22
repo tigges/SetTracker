@@ -29,7 +29,7 @@ export function DjList({ djs }: { djs: DjListItem[] }) {
               {dj.name}
             </div>
             <div className="truncate leading-4 text-[12px] text-muted2">
-              {djCardSubtitle(dj.homeCity, dj.setCount)}
+              {djCardSubtitle(dj.homeCity, dj.setCount, dj.top100Rank)}
             </div>
           </div>
         </Link>
