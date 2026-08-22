@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       limit:
-        description: "Max DJs to research this run"
+        description: "Max rows this job (cues = clocked stubs, not DJs)"
         required: false
         default: "24"
         type: string
@@ -19,7 +19,7 @@ on:
       apply:
         description: "1 write / 0 dry-run (dry-run skips Pages)"
         required: false
-        default: "1"
+        default: "0"
         type: string
   push:
     branches: [main]
@@ -102,7 +102,7 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY || secrets.GEMINI_AGENT_API || secrets.GEMINI || secrets.GOOGLE_API_KEY }}
           LLM_RESEARCH_LIMIT: ${{ github.event.inputs.limit || '24' }}
           LLM_RESEARCH_JOBS: ${{ github.event.inputs.jobs || 'handles,events,quality' }}
-          LLM_RESEARCH_APPLY: ${{ github.event.inputs.apply || '1' }}
+          LLM_RESEARCH_APPLY: ${{ github.event.inputs.apply || '0' }}
           LLM_QUALITY: "1"
         run: npm run research:handles
 
@@ -124,7 +124,7 @@ jobs:
           key: setradar-db-${{ github.run_id }}
 
       - name: Dispatch Pages deploy
-        if: success() && (github.event.inputs.apply || '1') != '0'
+        if: success() && (github.event.inputs.apply || '0') != '0'
         uses: actions/github-script@v7
         with:
           script: |

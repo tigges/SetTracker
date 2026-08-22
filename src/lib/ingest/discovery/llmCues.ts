@@ -8,8 +8,11 @@
  * Never overwrite 1001tl / fingerprint / community.
  *
  *   LLM_RESEARCH_JOBS=cues npm run research:handles
- *   LLM_RESEARCH_APPLY=0   dry-run (default for enrich full)
- *   LLM_CUE_LIMIT=16
+ *   LLM_RESEARCH_APPLY=0   dry-run (default for enrich full + workflow)
+ *   LLM_CUE_LIMIT=16       max clocked stubs to process (not fetch budget)
+ *
+ * Queue: scan a wide stub window, rank live YT/hearthis ahead of radio,
+ * skip radio-without-clocks so they do not consume the limit.
  */
 
 import type { PrismaClient } from "@prisma/client";
@@ -113,6 +116,59 @@ export function isCueStub(plays: { provenance: string }[]): boolean {
   if (plays.some((p) => p.provenance === "1001tl")) return false;
   const sourceOnly = plays.filter((p) => !KEEP_PROVENANCE.has(p.provenance));
   return sourceOnly.length <= 4;
+}
+
+const RADIO_TITLE = /\b(radio|clapcast|one world radio)\b/i;
+
+export type CueQueueSeed = {
+  slug?: string;
+  title: string;
+  type?: string | null;
+  playbackUrl?: string | null;
+  sourceUrl?: string | null;
+  publishedAt?: Date | null;
+  eventKind?: string | null;
+  seriesName?: string | null;
+};
+
+/** Title/slug fallback when Set.type is not `radio`. */
+export function looksLikeCueRadioTitle(title: string, slug = ""): boolean {
+  const hay = `${title} ${slug}`.replace(/[-_]+/g, " ");
+  return RADIO_TITLE.test(hay);
+}
+
+export function isCueRadioSet(seed: CueQueueSeed): boolean {
+  if ((seed.type || "").toLowerCase() === "radio") return true;
+  if ((seed.eventKind || "").toLowerCase() === "radio") return true;
+  if (/\bradio\b/i.test(seed.seriesName || "")) return true;
+  return looksLikeCueRadioTitle(seed.title, seed.slug);
+}
+
+/** youtube 0 · hearthis 1 · soundcloud 2 · other 3 */
+export function cueQueueHostRank(url: string | null | undefined): number {
+  const host = detectPlaybackHost(url || "") ?? "";
+  if (host === "youtube") return 0;
+  if (host === "hearthis") return 1;
+  if (host === "soundcloud") return 2;
+  return 3;
+}
+
+export function firstPartyTextHasClocks(
+  text: string,
+  durationSec = 7200,
+): boolean {
+  return parseClockedTracklist(text, durationSec, "youtube").length > 0;
+}
+
+/** Live rooms + official playback first; weekly radio last. Newer within a class. */
+export function compareCueQueueSeeds(a: CueQueueSeed, b: CueQueueSeed): number {
+  const ar = isCueRadioSet(a) ? 1 : 0;
+  const br = isCueRadioSet(b) ? 1 : 0;
+  if (ar !== br) return ar - br;
+  const ah = cueQueueHostRank(a.playbackUrl || a.sourceUrl);
+  const bh = cueQueueHostRank(b.playbackUrl || b.sourceUrl);
+  if (ah !== bh) return ah - bh;
+  return (b.publishedAt?.getTime() ?? 0) - (a.publishedAt?.getTime() ?? 0);
 }
 
 export async function fetchFirstPartyCueText(
@@ -309,6 +365,9 @@ export async function runLlmCueResearch(
     opts.limit ?? Number(process.env.LLM_CUE_LIMIT || 16),
   );
 
+  const windowSize = Math.max(limit * 40, 240);
+  const probeBudget = Math.min(64, Math.max(limit * 4, 32));
+
   const sets = await prisma.set.findMany({
     where: {
       OR: [{ playbackUrl: { not: null } }, { sourceUrl: { not: null } }],
@@ -317,35 +376,69 @@ export async function runLlmCueResearch(
       id: true,
       slug: true,
       title: true,
+      type: true,
       durationSec: true,
       genre: true,
       playbackUrl: true,
       sourceUrl: true,
+      publishedAt: true,
+      event: { select: { kind: true } },
+      series: { select: { name: true } },
       plays: { select: { provenance: true, timestamp: true, idStatus: true } },
     },
     orderBy: { publishedAt: "desc" },
-    take: Math.max(limit * 6, limit),
+    take: windowSize,
   });
 
+  const stubs = sets
+    .filter((set) => isCueStub(set.plays))
+    .filter((set) => !set.plays.some((p) => p.provenance === "1001tl"))
+    .filter((set) => {
+      const url = set.playbackUrl || set.sourceUrl;
+      return !!url && !isFingerprintOnlyWatchUrl(url);
+    })
+    .map((set) => ({
+      ...set,
+      eventKind: set.event?.kind ?? null,
+      seriesName: set.series?.name ?? null,
+    }))
+    .sort(compareCueQueueSeeds);
+
   const rows: unknown[] = [];
-  for (const set of sets) {
-    if (rows.length >= limit) break;
-    if (!isCueStub(set.plays)) continue;
-    if (set.plays.some((p) => p.provenance === "1001tl")) continue;
+  const skipped: unknown[] = [];
+  let skippedRadio = 0;
+  let skippedNoClocks = 0;
+  let skippedNoText = 0;
+  let accepted = 0;
+  let probes = 0;
+
+  for (const set of stubs) {
+    if (accepted >= limit) break;
+    if (probes >= probeBudget) break;
     const url = set.playbackUrl || set.sourceUrl;
-    if (!url || isFingerprintOnlyWatchUrl(url)) continue;
+    if (!url) continue;
+    probes += 1;
     stats.scanned += 1;
 
     const firstParty = await fetchFirstPartyCueText(url);
     if (!firstParty || firstParty.plays.length === 0) {
       stats.rejected += 1;
-      rows.push({
-        slug: set.slug,
-        accepted: 0,
-        reason: firstParty ? "no clocked cues in first-party text" : "no first-party text",
-      });
+      const radio = isCueRadioSet(set);
+      const reason = !firstParty
+        ? "no first-party text"
+        : radio
+          ? "radio-no-clocks"
+          : "no clocked cues in first-party text";
+      if (radio) skippedRadio += 1;
+      else if (!firstParty) skippedNoText += 1;
+      else skippedNoClocks += 1;
+      if (skipped.length < 24) {
+        skipped.push({ slug: set.slug, reason });
+      }
       continue;
     }
+
+    accepted += 1;
 
     let extra: RawPlay[] = [];
     if (provider && firstParty.text.trim()) {
@@ -416,11 +509,19 @@ ${firstParty.text.slice(0, 8000)}`,
     generatedAt: new Date().toISOString(),
     provider,
     apply,
-    note: "Parser re-reads first-party YT/SC/hearthis. LLM may add only clocks that already appear in that text. Never interpolates. Never overwrites 1001tl / fingerprint / community.",
+    note: "Parser re-reads first-party YT/SC/hearthis. LLM may add only clocks that already appear in that text. Never interpolates. Never overwrites 1001tl / fingerprint / community. Queue ranks live YT/hearthis ahead of radio; radio without clocks does not consume the limit.",
+    window: sets.length,
+    stubs: stubs.length,
+    probed: probes,
+    skippedRadio,
+    skippedNoClocks,
+    skippedNoText,
+    skipped,
     rows,
   });
   console.log(
-    `[llm-cues] provider=${provider ?? "parser"} scanned=${stats.scanned} proposed=${stats.proposed} applied=${stats.applied}`,
+    `[llm-cues] provider=${provider ?? "parser"} scanned=${stats.scanned} proposed=${stats.proposed} applied=${stats.applied}` +
+      ` probed=${probes} skippedRadio=${skippedRadio} skippedNoClocks=${skippedNoClocks}`,
   );
   return stats;
 }

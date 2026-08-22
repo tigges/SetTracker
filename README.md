@@ -252,9 +252,10 @@ handle must overlap the DJ name, it must be live, and it must not belong to
 another catalog DJ. Missing keys → safe no-op. Runs on catalog-deep and
 weekly enrich `full`. Reports: `data/crosscheck/llm-handle-research.json`.
 Cue research (`LLM_RESEARCH_JOBS=cues`) re-parses first-party YT/SC/hearthis
-on empty/stub lists; the parser path works without a key. The model may add
-only clocks that already appear in that text. Enrich `full` runs cues
-dry-run (`LLM_RESEARCH_APPLY=0`). Report:
+on empty/stub lists (live YT/hearthis first; radio without clocks is
+skipped). The parser path works without a key. The model may add only
+clocks that already appear in that text. Enrich `full` and Catalog LLM
+research default to dry-run (`LLM_RESEARCH_APPLY=0`). Report:
 `data/crosscheck/llm-cue-research.json`.
 
 **Export tracks for Claude ID** (`npm run export:tracks`): CSV + JSONL of
