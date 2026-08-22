@@ -38,6 +38,16 @@ Artist Three - Track C
 `;
 assert.equal(parseClockedTracklist(interpolated, 3600).length, 0);
 
+assert.equal(
+  filterProposedCues(
+    [{ at: "1:37:25", artist: null, title: "Duration:" }],
+    "1:37:25 Duration:\nSizz Da Hood",
+    5845,
+    "hearthis",
+  ).length,
+  0,
+);
+
 const kept = filterProposedCues(
   [
     { at: "33:38", artist: null, title: "The Drill" },

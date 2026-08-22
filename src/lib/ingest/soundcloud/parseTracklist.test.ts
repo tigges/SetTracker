@@ -1,5 +1,9 @@
 import assert from "node:assert/strict";
-import { parseClockedTracklist, parseDescriptionTracklist } from "./parseTracklist";
+import {
+  isClockMetadataLabel,
+  parseClockedTracklist,
+  parseDescriptionTracklist,
+} from "./parseTracklist";
 
 const timed = `
 Set vibes
@@ -218,5 +222,17 @@ Artist Three - Track C`,
 assert.equal(clockedOnly.length, 1);
 assert.equal(clockedOnly[0]!.trackTitle, "Track B");
 assert.equal(clockedOnly[0]!.timestamp, 6 * 60 + 12);
+
+assert.equal(isClockMetadataLabel("Duration:"), true);
+assert.equal(isClockMetadataLabel("mix length"), true);
+assert.equal(isClockMetadataLabel("They Will Shade Us With Their Wings"), false);
+const hearthisDuration = parseClockedTracklist(
+  `Gentlemen's Groove #054
+1:37:25 Duration:
+Sizz Da Hood`,
+  5845,
+  "hearthis",
+);
+assert.equal(hearthisDuration.length, 0);
 
 console.log("parseTracklist.test.ts ok");
