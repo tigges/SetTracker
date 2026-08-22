@@ -75,7 +75,7 @@ assert.equal(rankPlaybackHost("youtube", false), null);
 assert.equal(rankPlaybackHost("youtube", true), 3);
 assert.equal(rankPlaybackHost(null, true), null);
 
-// --- gap probes ---
+// --- gap / transition probes (not a 30s grid) ---
 const plans = planGapProbes(
   600,
   [
@@ -85,65 +85,73 @@ const plans = planGapProbes(
   90,
   12,
 );
-assert.ok(plans.length >= 4);
-assert.deepEqual(
-  plans.map((p) => p.offsetSec).slice(0, 4),
-  [90, 180, 270, 360],
+assert.ok(plans.some((p) => p.kind === "gap"));
+assert.ok(plans.some((p) => p.kind === "transition"));
+assert.equal(
+  plans.some((p) => p.offsetSec === 90 && p.isGap),
+  false,
+  "identified cue is not a gap",
 );
-assert.equal(plans[0]!.isGap, false, "SC play blocks 90s probe");
-assert.equal(plans[1]!.isGap, true, "open slot at 180s");
-assert.equal(plans[3]!.isGap, false, "fingerprint play blocks 360s");
-
-// strong provenance blocks even when status is unparsed
-const open = planGapProbes(
-  400,
-  [{ timestamp: 90, provenance: "soundcloud", idStatus: "unparsed" }],
-  90,
-  12,
+assert.ok(
+  plans.some((p) => p.isGap && p.offsetSec > 90 && p.offsetSec < 360),
+  "large 90–360 gap gets a midpoint",
 );
-const at90 = open.find((p) => p.offsetSec === 90);
-assert.ok(at90);
-assert.equal(at90!.isGap, false);
+assert.equal(
+  plans.filter((p, i, all) =>
+    all.some((q, j) => j !== i && Math.abs(q.offsetSec - p.offsetSec) === 90),
+  ).length === plans.length && plans.length >= 6,
+  false,
+  "not a regular 90s grid",
+);
 
-// Fingerprint miss (grey unparsed) also blocks so we do not re-Identify.
+// Empty set: a few interior anchors, not a step grid.
+const emptyPlans = planGapProbes(3600, [], 90, 12);
+assert.ok(emptyPlans.length <= 6);
+assert.ok(emptyPlans.every((p) => p.kind === "empty"));
+assert.ok(emptyPlans.some((p) => p.isGap));
+
+// Fingerprint miss (grey unparsed) blocks that offset.
 const missed = planGapProbes(
   400,
-  [{ timestamp: 180, provenance: "fingerprint", idStatus: "unparsed" }],
+  [{ timestamp: 200, provenance: "fingerprint", idStatus: "unparsed" }],
   90,
   12,
 );
-assert.equal(missed.find((p) => p.offsetSec === 180)?.isGap, false);
+const nearMiss = missed.find((p) => Math.abs(p.offsetSec - 200) <= 24);
+assert.ok(nearMiss, "empty-set probe lands near the recorded miss");
+assert.equal(nearMiss!.isGap, false);
+
 assert.equal(
   hasRemainingAcrWork({
     durationSec: 400,
-    plays: [{ timestamp: 180, provenance: "fingerprint", idStatus: "unparsed" }],
+    plays: [{ timestamp: 200, provenance: "fingerprint", idStatus: "unparsed" }],
     unresolvedCount: 0,
     stepSec: 90,
     sampleSec: 12,
   }),
   true,
-  "other grid slots still open",
+  "other gap/empty slots still open",
 );
 assert.equal(
   hasRemainingAcrWork({
-    durationSec: 200,
+    durationSec: 120,
     plays: [
-      { timestamp: 90, provenance: "fingerprint", idStatus: "unparsed" },
-      { timestamp: 180, provenance: "fingerprint", idStatus: "identified" },
+      { timestamp: 40, provenance: "fingerprint", idStatus: "unparsed" },
+      { timestamp: 80, provenance: "fingerprint", idStatus: "identified" },
     ],
     unresolvedCount: 0,
     stepSec: 90,
     sampleSec: 12,
   }),
   false,
-  "exhausted grid + no unresolved cues → skip set",
+  "short set with blocked interior → skip",
 );
 assert.equal(
   hasRemainingAcrWork({
-    durationSec: 200,
+    durationSec: 120,
     plays: [
-      { timestamp: 90, provenance: "fingerprint", idStatus: "unparsed" },
-      { timestamp: 180, provenance: "fingerprint", idStatus: "identified" },
+      { timestamp: 40, provenance: "fingerprint", idStatus: "unparsed" },
+      { timestamp: 80, provenance: "fingerprint", idStatus: "identified" },
     ],
     unresolvedCount: 2,
     stepSec: 90,

@@ -24,7 +24,8 @@ import {
   resolveTrackMetaMusicBrainz,
   resolveTrackMetaMusicBrainzByIsrc,
 } from "../../thumbs/musicbrainz";
-import { normalizeIsrc } from "../../trackMeta";
+import { canonicalSpotifyUrl, normalizeIsrc } from "../../trackMeta";
+import { resolveSpotifyTrackUrl } from "./spotify";
 import {
   parseTracksCsv,
   tracksNeedEnrich,
@@ -86,6 +87,7 @@ export type TrackIdHit = {
   isrc?: string;
   mbid?: string;
   beatportUrl?: string;
+  spotifyUrl?: string;
   deezerTitle?: string;
   platforms?: TrackRadarPlatforms;
   source: "deezer" | "musicbrainz" | "both" | "trackradar" | "audd";
@@ -219,6 +221,7 @@ export async function catalogNeedIdRows(
       plays: 0,
       isrc: t.isrc,
       beatportUrl: t.beatportUrl,
+      spotifyUrl: null,
     })),
     limit,
   );
@@ -354,6 +357,7 @@ export async function identifySeedRow(
   let isrc = plan.knownIsrc ?? null;
   let mbid: string | undefined;
   let beatportUrl: string | undefined;
+  let spotifyUrl: string | undefined;
   let usedMb = false;
   let usedTr = false;
   let usedAudd = false;
@@ -398,6 +402,7 @@ export async function identifySeedRow(
       mbid = mb.mbid;
     }
     if (!beatportUrl) beatportUrl = acceptBeatportTrackUrl(mb?.beatportUrl);
+    if (!spotifyUrl) spotifyUrl = canonicalSpotifyUrl(mb?.spotifyUrl) ?? undefined;
     if (!isrc && mb?.isrc) {
       const ev = evaluateIsrc(mb.isrc);
       if (ev.ok) isrc = ev.isrc ?? null;
@@ -408,8 +413,19 @@ export async function identifySeedRow(
   if (platforms?.beatport && !beatportUrl) {
     beatportUrl = acceptBeatportTrackUrl(platforms.beatport);
   }
+  if (!spotifyUrl) {
+    spotifyUrl = canonicalSpotifyUrl(platforms?.spotify) ?? undefined;
+  }
+  if (!spotifyUrl) {
+    spotifyUrl =
+      (await resolveSpotifyTrackUrl({
+        artist: row.artist,
+        title: queryTitle,
+        isrc,
+      })) ?? undefined;
+  }
 
-  if (!isrc && !mbid && !beatportUrl && !platforms) {
+  if (!isrc && !mbid && !beatportUrl && !platforms && !spotifyUrl) {
     return {
       artist: row.artist,
       title: row.title,
@@ -426,6 +442,7 @@ export async function identifySeedRow(
     isrc: isrc || undefined,
     mbid,
     beatportUrl,
+    spotifyUrl,
     deezerTitle: deezer?.matchedTitle || undefined,
     platforms,
     source: pickSource({
@@ -510,7 +527,7 @@ export async function identifyHeldSeeds(opts: {
 export function upsertPinsFromHits(hits: TrackIdHit[]): number {
   const incoming = [];
   for (const hit of hits) {
-    if (!hit.slug || (!hit.isrc && !hit.beatportUrl)) continue;
+    if (!hit.slug || (!hit.isrc && !hit.beatportUrl && !hit.spotifyUrl)) continue;
     const ev = evaluateTrackIdPin(
       {
         slug: hit.slug,
@@ -518,6 +535,7 @@ export function upsertPinsFromHits(hits: TrackIdHit[]): number {
         title: hit.title,
         isrc: hit.isrc,
         beatportUrl: hit.beatportUrl,
+        spotifyUrl: hit.spotifyUrl,
         source: hit.source,
       },
       {
@@ -540,18 +558,19 @@ export async function applyTrackIdHits(
 ): Promise<number> {
   let n = 0;
   for (const hit of hits) {
-    if (!hit.isrc && !hit.beatportUrl) continue;
+    if (!hit.isrc && !hit.beatportUrl && !hit.spotifyUrl) continue;
     const tracks = await prisma.track.findMany({
       where: {
         artistName: hit.artist,
         title: hit.title,
       },
-      select: { id: true, isrc: true, beatportUrl: true },
+      select: { id: true, isrc: true, beatportUrl: true, spotifyUrl: true },
     });
     for (const t of tracks) {
-      const data: { isrc?: string; beatportUrl?: string } = {};
+      const data: { isrc?: string; beatportUrl?: string; spotifyUrl?: string } = {};
       if (hit.isrc && !t.isrc) data.isrc = hit.isrc;
       if (hit.beatportUrl && !t.beatportUrl) data.beatportUrl = hit.beatportUrl;
+      if (hit.spotifyUrl && !t.spotifyUrl) data.spotifyUrl = hit.spotifyUrl;
       if (!Object.keys(data).length) continue;
       await prisma.track.update({ where: { id: t.id }, data });
       n += 1;

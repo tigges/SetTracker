@@ -13,10 +13,11 @@ export type ExportTrackRow = {
   plays: number;
   isrc: string | null;
   beatportUrl: string | null;
+  spotifyUrl: string | null;
 };
 
 export const TRACK_CSV_HEADER =
-  "slug,artist,title,mix,remixer,genre,plays,isrc,beatportUrl";
+  "slug,artist,title,mix,remixer,genre,plays,isrc,beatportUrl,spotifyUrl";
 
 export const CLAUDE_TRACK_ID_PROMPT = `You are identifying recordings in the setradar catalog.
 
@@ -51,6 +52,7 @@ export function trackToCsvRow(row: ExportTrackRow): string {
     csvEscape(row.plays),
     csvEscape(row.isrc),
     csvEscape(row.beatportUrl),
+    csvEscape(row.spotifyUrl),
   ].join(",");
 }
 
@@ -93,6 +95,7 @@ export function parseTracksCsv(text: string): ExportTrackRow[] {
   const playsI = idx("plays");
   const isrcI = idx("isrc");
   const beatportI = idx("beatportUrl");
+  const spotifyI = idx("spotifyUrl");
   const rows: ExportTrackRow[] = [];
   for (const line of lines.slice(1)) {
     const cells = splitCsvLine(line);
@@ -110,6 +113,7 @@ export function parseTracksCsv(text: string): ExportTrackRow[] {
       plays: Number(cells[playsI] || 0) || 0,
       isrc: cellOrNull(cells[isrcI]),
       beatportUrl: cellOrNull(cells[beatportI]),
+      spotifyUrl: cellOrNull(cells[spotifyI]),
     });
   }
   return rows;

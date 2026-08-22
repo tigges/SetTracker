@@ -34,6 +34,21 @@ describe("listenLinks", () => {
     assert.equal(links.beatportIsCanonical, true);
     assert.equal(links.soundcloud, "https://soundcloud.com/acslater/set");
     assert.match(links.youtube, /youtube\.com\/results/);
+    assert.match(links.discogs, /discogs\.com\/search/);
+    assert.match(links.bandcamp, /bandcamp\.com\/search/);
+    assert.match(links.spotify, /open\.spotify\.com\/search/);
+    assert.equal(links.spotifyIsCanonical, false);
+  });
+
+  it("uses a canonical Spotify track URL when stored", () => {
+    const links = listenLinks("Beautiful Now", "Zedd", {
+      spotifyUrl: "https://open.spotify.com/track/2ISSQPb9LHHiV6ng2NXosL?si=x",
+    });
+    assert.equal(
+      links.spotify,
+      "https://open.spotify.com/track/2ISSQPb9LHHiV6ng2NXosL",
+    );
+    assert.equal(links.spotifyIsCanonical, true);
   });
 
   it("strips query params from stored Beatport /track URLs", () => {

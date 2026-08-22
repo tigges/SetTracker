@@ -4,7 +4,11 @@
  * Respects MB rate limits via caller sleep; requires a descriptive User-Agent.
  */
 
-import { canonicalBeatportUrl, normalizeIsrc } from "../trackMeta";
+import {
+  canonicalBeatportUrl,
+  canonicalSpotifyUrl,
+  normalizeIsrc,
+} from "../trackMeta";
 import { namesClose, primaryArtist, titleRank } from "../ingest/identify/names";
 import { sleep } from "./deezer";
 
@@ -16,6 +20,7 @@ export type MusicBrainzTrackMeta = {
   releaseDate?: string | null; // ISO date yyyy-mm-dd
   labelName?: string | null;
   beatportUrl?: string | null;
+  spotifyUrl?: string | null;
   mbid?: string | null;
   isrc?: string | null;
 };
@@ -75,6 +80,17 @@ export function beatportUrlFromMbRelations(
   return null;
 }
 
+/** Canonical open.spotify.com/track/{22} from MusicBrainz url-rels. */
+export function spotifyUrlFromMbRelations(
+  relations: MbUrlRel[] | null | undefined,
+): string | null {
+  for (const rel of relations ?? []) {
+    const url = canonicalSpotifyUrl(rel.url?.resource);
+    if (url) return url;
+  }
+  return null;
+}
+
 let lastMbAt = 0;
 
 async function mbGet<T>(url: string): Promise<T | null> {
@@ -95,7 +111,7 @@ async function mbGet<T>(url: string): Promise<T | null> {
 
 function metaFromRecording(
   row: MbRecording,
-  extra: { beatportUrl: string | null; isrc: string | null },
+  extra: { beatportUrl: string | null; isrc: string | null; spotifyUrl?: string | null },
 ): MusicBrainzTrackMeta {
   const release = row.releases?.[0];
   const labelName =
@@ -114,6 +130,8 @@ function metaFromRecording(
     : null;
   const beatportUrl =
     beatportUrlFromMbRelations(row.relations) || extra.beatportUrl;
+  const spotifyUrl =
+    spotifyUrlFromMbRelations(row.relations) || extra.spotifyUrl || null;
   const isrc =
     row.isrcs?.find((x) => /^[A-Z]{2}[A-Z0-9]{3}[0-9]{7}$/i.test(x)) ||
     extra.isrc;
@@ -122,6 +140,7 @@ function metaFromRecording(
     releaseDate,
     labelName,
     beatportUrl,
+    spotifyUrl,
     mbid: row.id ?? null,
     isrc: isrc ? isrc.toUpperCase() : null,
   };
@@ -168,18 +187,20 @@ export async function resolveTrackMetaMusicBrainz(
 async function lookupRecordingIds(mbid: string): Promise<{
   beatportUrl: string | null;
   isrc: string | null;
+  spotifyUrl: string | null;
 }> {
   const url = `https://musicbrainz.org/ws/2/recording/${encodeURIComponent(mbid)}?inc=url-rels+isrcs&fmt=json`;
   const json = await mbGet<{
     relations?: MbUrlRel[];
     isrcs?: string[];
   }>(url);
-  if (!json) return { beatportUrl: null, isrc: null };
+  if (!json) return { beatportUrl: null, isrc: null, spotifyUrl: null };
   const isrc = json.isrcs?.find((x) =>
     /^[A-Z]{2}[A-Z0-9]{3}[0-9]{7}$/i.test(x),
   );
   return {
     beatportUrl: beatportUrlFromMbRelations(json.relations),
     isrc: isrc ? isrc.toUpperCase() : null,
+    spotifyUrl: spotifyUrlFromMbRelations(json.relations),
   };
 }

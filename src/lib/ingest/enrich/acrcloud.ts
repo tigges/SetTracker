@@ -77,6 +77,7 @@ import { isFestivalSeasonSet } from "../festivalDrops";
 import { ARTIST_ROSTER } from "../roster";
 import { getSoundCloudClientId, scGet, type ScTrack } from "../soundcloud/client";
 import { slugify } from "../types";
+import { recognizeAuddClip } from "../identify/audd";
 import {
   isUnresolvedDetectPriority,
   TOP_DJ_UNRESOLVED_PRIORITY,
@@ -316,6 +317,8 @@ export type GapProbePlan = {
   offsetSec: number;
   /** true when no nearby play blocks this probe */
   isGap: boolean;
+  /** gap midpoint vs just-after a known cue */
+  kind?: "gap" | "transition" | "empty";
 };
 
 function envEnabled(): boolean {
@@ -425,16 +428,19 @@ export function mapAcrMusicHit(raw: unknown): AcrHit | null {
 }
 
 /**
- * Probe offsets across a set duration. Marks gaps where no existing play
- * sits within ±halfStep (fingerprint / weak rows do not block).
+ * Probe offsets at gaps and transitions — not a 30s/90s grid.
+ *
+ * - Empty set: a handful of interior anchors (never a dense step grid).
+ * - Sparse set: midpoint of each large gap + just after each known cue.
+ * `stepSec` is the minimum gap worth probing, not the stride.
  */
-export function planGapProbes(
+export function planTransitionProbes(
   durationSec: number,
   existing: ExistingPlayMark[],
-  stepSec: number,
   sampleSec: number,
+  minGapSec = 75,
 ): GapProbePlan[] {
-  const half = Math.max(30, Math.floor(stepSec / 2));
+  const half = Math.max(24, Math.floor(sampleSec));
   const blockers = existing.filter(
     (p) =>
       STRONG_PROVENANCE.has(p.provenance) ||
@@ -442,23 +448,90 @@ export function planGapProbes(
       p.idStatus === "identified" ||
       p.idStatus === "community_resolved",
   );
-  // Align probes to the step grid (90, 180, …), leaving room for the clip.
-  const first = Math.max(stepSec, sampleSec);
+  const blocked = (offsetSec: number) =>
+    blockers.some((p) => Math.abs(p.timestamp - offsetSec) <= half) ||
+    offsetSec < sampleSec ||
+    offsetSec + sampleSec > durationSec;
+
+  const times = [
+    ...new Set(
+      existing
+        .filter(
+          (p) =>
+            p.idStatus === "identified" ||
+            p.idStatus === "community_resolved" ||
+            STRONG_PROVENANCE.has(p.provenance),
+        )
+        .map((p) => Math.max(0, Math.floor(p.timestamp))),
+    ),
+  ].sort((a, b) => a - b);
+
+  const candidates: GapProbePlan[] = [];
+  if (times.length === 0) {
+    for (const frac of [0.18, 0.38, 0.55, 0.72, 0.88]) {
+      const offsetSec = Math.floor(durationSec * frac);
+      candidates.push({
+        offsetSec,
+        isGap: !blocked(offsetSec),
+        kind: "empty",
+      });
+    }
+  } else {
+    const anchors = [0, ...times, Math.floor(durationSec)];
+    for (let i = 0; i < anchors.length - 1; i++) {
+      const a = anchors[i]!;
+      const b = anchors[i + 1]!;
+      const gap = b - a;
+      if (gap >= minGapSec) {
+        const mid = Math.floor((a + b) / 2);
+        candidates.push({
+          offsetSec: mid,
+          isGap: !blocked(mid),
+          kind: "gap",
+        });
+      }
+      if (a > 0 && gap >= minGapSec) {
+        const after = a + sampleSec + 6;
+        if (after + sampleSec < b) {
+          candidates.push({
+            offsetSec: after,
+            isGap: !blocked(after),
+            kind: "transition",
+          });
+        }
+      }
+    }
+  }
+
+  const seen = new Set<number>();
   const plans: GapProbePlan[] = [];
-  for (let t = first; t + sampleSec <= durationSec; t += stepSec) {
-    const offsetSec = Math.floor(t);
-    const blocked = blockers.some(
-      (p) => Math.abs(p.timestamp - offsetSec) <= half,
-    );
-    plans.push({ offsetSec, isGap: !blocked });
+  for (const p of candidates.sort((a, b) => a.offsetSec - b.offsetSec)) {
+    const key = Math.round(p.offsetSec / 8);
+    if (seen.has(key)) continue;
+    seen.add(key);
+    plans.push(p);
   }
   return plans;
 }
 
+/** @deprecated alias — `stepSec` is the min gap, not a grid stride. */
+export function planGapProbes(
+  durationSec: number,
+  existing: ExistingPlayMark[],
+  stepSec: number,
+  sampleSec: number,
+): GapProbePlan[] {
+  return planTransitionProbes(
+    durationSec,
+    existing,
+    sampleSec,
+    Math.max(75, stepSec),
+  );
+}
+
 /**
- * True when Identify still has work: unresolved cues, or gap-grid slots
- * that are not already blocked by a hit *or* a recorded miss.
- * Prevents the same first N offsets from being re-probed every enrich run.
+ * True when Identify still has work: unresolved cues, or gap/transition
+ * slots that are not already blocked by a hit *or* a recorded miss.
  */
 export function hasRemainingAcrWork(opts: {
   durationSec: number;
@@ -922,6 +995,30 @@ export async function sampleClipFromStream(
 type AcrIdentifyResult =
   | { ok: true; hit: AcrHit | null; statusCode: number; statusMsg: string }
   | { ok: false; error: string };
+
+/** AudD on the clip first (when token + AUDD_ANALYZE=1); ACR on miss. */
+async function identifyClipPreferAudd(
+  sample: Buffer,
+): Promise<AcrIdentifyResult> {
+  const audd = await recognizeAuddClip(sample);
+  if (audd?.artist && audd.title) {
+    const cleaned = sanitizeArtistName(audd.artist);
+    if (cleaned) {
+      return {
+        ok: true,
+        hit: {
+          artist: cleaned,
+          title: audd.title,
+          isrc: audd.isrc,
+          score: 80,
+        },
+        statusCode: 0,
+        statusMsg: "audd",
+      };
+    }
+  }
+  return acrIdentify(sample);
+}
 
 /** POST sample bytes to ACRCloud Identify. */
 export async function acrIdentify(
@@ -1443,7 +1540,7 @@ async function enrichOneSet(
       continue;
     }
     probed += 1;
-    const result = await acrIdentify(clip);
+    const result = await identifyClipPreferAudd(clip);
     if (!result.ok) {
       console.warn(
         `[acrcloud] resolve fail ${candidate.slug}@${play.timestamp}: ${result.error}`,
@@ -1517,8 +1614,7 @@ async function enrichOneSet(
     });
   }
 
-  // 2) Gap-fill probes on the step grid (budget-capped so a 5h open-to-close
-  // cannot burn the whole trial run).
+  // 2) Gap + transition probes (not a 30s grid). Budget-capped.
   const plans = planGapProbes(
     set.durationSec,
     marks,
@@ -1558,7 +1654,7 @@ async function enrichOneSet(
     }
     probed += 1;
 
-    const result = await acrIdentify(clip);
+    const result = await identifyClipPreferAudd(clip);
     if (!result.ok) {
       console.warn(
         `[acrcloud] identify fail ${candidate.slug}@${plan.offsetSec}: ${result.error}`,

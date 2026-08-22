@@ -1,5 +1,9 @@
 import assert from "node:assert/strict";
-import { beatportUrlFromMbRelations, pickBestRecording } from "./musicbrainz";
+import {
+  beatportUrlFromMbRelations,
+  pickBestRecording,
+  spotifyUrlFromMbRelations,
+} from "./musicbrainz";
 
 assert.equal(
   beatportUrlFromMbRelations([
@@ -21,6 +25,19 @@ assert.equal(
 
 assert.equal(beatportUrlFromMbRelations([]), null);
 assert.equal(beatportUrlFromMbRelations(undefined), null);
+
+assert.equal(
+  spotifyUrlFromMbRelations([
+    { type: "streaming", url: { resource: "https://open.spotify.com/track/2ISSQPb9LHHiV6ng2NXosL?si=x" } },
+  ]),
+  "https://open.spotify.com/track/2ISSQPb9LHHiV6ng2NXosL",
+);
+assert.equal(
+  spotifyUrlFromMbRelations([
+    { url: { resource: "https://open.spotify.com/search/pressure" } },
+  ]),
+  null,
+);
 
 const best = pickBestRecording("Beautiful Now", "Zedd ft. Jon Bellion", [
   {

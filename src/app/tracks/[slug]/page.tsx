@@ -6,9 +6,12 @@ import { SetEntryLink } from "@/components/SetEntryLink";
 import { getAllTrackSlugs, getTrackBySlug } from "@/lib/queries";
 import { pageMeta } from "@/lib/site";
 import {
+  bandcampSearchUrl,
   beatportTrackHref,
   canonicalBeatportUrl,
-  spotifySearchUrl,
+  canonicalSpotifyUrl,
+  discogsSearchUrl,
+  spotifyTrackHref,
 } from "@/lib/trackMeta";
 import {
   SET_TYPE_META,
@@ -78,7 +81,14 @@ export default async function TrackPage({
     track.artistName,
     track.beatportUrl,
   );
-  const spHref = spotifySearchUrl(track.title, track.artistName);
+  const spCanonical = canonicalSpotifyUrl(track.spotifyUrl);
+  const spHref = spotifyTrackHref(
+    track.title,
+    track.artistName,
+    track.spotifyUrl,
+  );
+  const dcHref = discogsSearchUrl(track.title, track.artistName);
+  const bcHref = bandcampSearchUrl(track.title, track.artistName);
 
   return (
     <div>
@@ -146,7 +156,23 @@ export default async function TrackPage({
                 rel="noreferrer"
                 className="rounded-md border border-line px-2.5 py-1 text-[12px] text-muted2 transition-colors hover:border-brand hover:text-brand"
               >
-                Search Spotify
+                {spCanonical ? "Open Spotify" : "Search Spotify"}
+              </a>
+              <a
+                href={dcHref}
+                target="_blank"
+                rel="noreferrer"
+                className="rounded-md border border-line px-2.5 py-1 text-[12px] text-muted2 transition-colors hover:border-brand hover:text-brand"
+              >
+                Search Discogs
+              </a>
+              <a
+                href={bcHref}
+                target="_blank"
+                rel="noreferrer"
+                className="rounded-md border border-line px-2.5 py-1 text-[12px] text-muted2 transition-colors hover:border-brand hover:text-brand"
+              >
+                Search Bandcamp
               </a>
               <a
                 href={bpHref}

@@ -20,6 +20,7 @@ const plays = [
     musicalKey: "A min",
     trackDurationSec: 360,
     beatportUrl: "https://www.beatport.com/track/pressure/1",
+    spotifyUrl: "https://open.spotify.com/track/2ISSQPb9LHHiV6ng2NXosL",
     isrc: "GBXXXX0000001",
     mixName: "Extended Mix",
     idStatus: "identified",
@@ -33,6 +34,7 @@ const plays = [
     musicalKey: null,
     trackDurationSec: null,
     beatportUrl: null,
+    spotifyUrl: null,
     isrc: null,
     mixName: null,
     idStatus: "unresolved_id",
@@ -46,6 +48,7 @@ const plays = [
     musicalKey: null,
     trackDurationSec: null,
     beatportUrl: "https://www.beatport.com/search/tracks?q=Rave",
+    spotifyUrl: null,
     isrc: null,
     mixName: null,
     idStatus: "community_resolved",
@@ -68,6 +71,9 @@ assert.ok(csv.includes("00:00"));
 assert.ok(csv.includes("GBXXXX0000001"));
 assert.ok(csv.includes("Extended Mix"));
 assert.ok(csv.includes(spotifySearchUrl("Pressure", "AC Slater")));
+assert.ok(csv.includes("open.spotify.com/track/2ISSQPb9LHHiV6ng2NXosL"));
+assert.ok(csv.includes("discogs.com/search"));
+assert.ok(csv.includes("bandcamp.com/search"));
 assert.ok(!csv.includes("beatport.com/search"));
 
 const m3u = buildTracklistM3u(plays, {

@@ -4,7 +4,10 @@ import {
   beatportCoverage,
   beatportSearchUrl,
   beatportTrackHref,
+  bandcampSearchUrl,
   canonicalBeatportUrl,
+  canonicalSpotifyUrl,
+  discogsSearchUrl,
   isLikelyUnbuyable,
   normalizeIsrc,
   parseTrackTitle,
@@ -56,6 +59,14 @@ assert.equal(
   canonicalBeatportUrl("https://www.beatport.com/artist/ac-slater/1"),
   null,
 );
+
+assert.equal(
+  canonicalSpotifyUrl("https://open.spotify.com/track/2ISSQPb9LHHiV6ng2NXosL?si=x"),
+  "https://open.spotify.com/track/2ISSQPb9LHHiV6ng2NXosL",
+);
+assert.equal(canonicalSpotifyUrl("https://open.spotify.com/search/Pressure"), null);
+assert.ok(discogsSearchUrl("Pressure", "AC Slater").includes("discogs.com/search"));
+assert.ok(bandcampSearchUrl("Pressure", "AC Slater").includes("bandcamp.com/search"));
 
 assert.equal(
   beatportTrackHref(

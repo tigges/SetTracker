@@ -228,6 +228,7 @@ export default async function SetPage({
               musicalKey: p.musicalKey,
               trackDurationSec: p.trackDurationSec,
               beatportUrl: p.beatportUrl,
+              spotifyUrl: p.spotifyUrl,
               isrc: p.isrc,
               mixName: p.mixName,
               idStatus: p.idStatus,

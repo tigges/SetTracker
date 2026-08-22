@@ -251,6 +251,11 @@ handle. Junk names are skipped. Proposals are **never written raw** — the URL 
 handle must overlap the DJ name, it must be live, and it must not belong to
 another catalog DJ. Missing keys → safe no-op. Runs on catalog-deep and
 weekly enrich `full`. Reports: `data/crosscheck/llm-handle-research.json`.
+Cue research (`LLM_RESEARCH_JOBS=cues`) re-parses first-party YT/SC/hearthis
+on empty/stub lists; the parser path works without a key. The model may add
+only clocks that already appear in that text. Enrich `full` runs cues
+dry-run (`LLM_RESEARCH_APPLY=0`). Report:
+`data/crosscheck/llm-cue-research.json`.
 
 **Export tracks for Claude ID** (`npm run export:tracks`): CSV + JSONL of
 catalog songs (need-ISRC first) in `data/track-id-export/`. The Pages build
@@ -284,7 +289,9 @@ go to Deezer (ISRC), [MusicBrainz](https://musicbrainz.org/) (on unless
 Apple after name match). `AUDD=0` / `TRACKRADAR=0` skip those sources.
 [Beatport](https://www.beatport.com/) is Cloudflare-walled — we never scrape
 HTML or `api.beatport.com`. Canonical `/track/{slug}/{id}` comes from
-MusicBrainz url-rels or TrackRadar. [Set79](https://set79.com/) is
+MusicBrainz url-rels or TrackRadar. Spotify `/track/{22}` is fill-null via
+Client Credentials (`SPOTIFY_CLIENT_ID` / `SPOTIFY_CLIENT_SECRET`) after
+the same name/ISRC verify — search URLs stay fallback. [Set79](https://set79.com/) is
 **sitemap-only** (published set URLs as hints; `SET79=0` skips). Login-walled
 tracklist HTML and their paid SoundCloud analyzer are never fetched.
 [AudioScout](https://audioscout.io/) / [MusicMate](https://www.getmusicmate.com/)

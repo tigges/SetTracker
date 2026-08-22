@@ -4,6 +4,7 @@
  *
  *   npm run research:handles
  *   LLM_RESEARCH_JOBS=identity,homecity,videos npm run research:handles
+ *   LLM_RESEARCH_JOBS=cues npm run research:handles
  *   LLM_RESEARCH_JOBS=all npm run research:handles
  *   LLM_RESEARCH_APPLY=0 npm run research:handles   # report only
  *   LLM_QUALITY=1 npm run research:handles          # extra model commentary
@@ -19,6 +20,7 @@ import {
   runLlmIdentityResearch,
   runLlmOfficialVideoResearch,
   runLlmTrackIdResearch,
+  runLlmCueResearch,
 } from "../src/lib/ingest/discovery/llmJobs";
 import {
   claudeApiKey,
@@ -113,6 +115,24 @@ async function main() {
       });
     }
     done.tracks = tracks;
+  }
+  if (jobs.includes("cues")) {
+    // Parser path runs without a key. LLM only keeps clocks already in the text.
+    const cues = [];
+    if (providers.length) {
+      for (const provider of providers) {
+        cues.push({
+          provider,
+          research: await runLlmCueResearch(prisma, { provider, reportTag: tag }),
+        });
+      }
+    } else {
+      cues.push({
+        provider: null,
+        research: await runLlmCueResearch(prisma, { reportTag: tag }),
+      });
+    }
+    done.cues = cues;
   }
   if (jobs.includes("videos")) {
     const videos = [];

@@ -4,7 +4,10 @@
  */
 
 import {
+  bandcampSearchUrl,
   canonicalBeatportUrl,
+  canonicalSpotifyUrl,
+  discogsSearchUrl,
   spotifySearchUrl,
 } from "@/lib/trackMeta";
 
@@ -19,6 +22,7 @@ export type ExportPlay = {
   musicalKey: string | null;
   trackDurationSec: number | null;
   beatportUrl: string | null;
+  spotifyUrl: string | null;
   isrc: string | null;
   mixName: string | null;
   idStatus: string;
@@ -83,7 +87,10 @@ export function buildTracklistCsv(
     "duration_sec",
     "isrc",
     "beatport_url",
+    "spotify_url",
     "spotify_search_url",
+    "discogs_search_url",
+    "bandcamp_search_url",
     "id_status",
     "set_slug",
     "set_title",
@@ -101,7 +108,10 @@ export function buildTracklistCsv(
       p.trackDurationSec != null ? String(p.trackDurationSec) : "",
       csvEscape(p.isrc ?? ""),
       csvEscape(canonicalBeatportUrl(p.beatportUrl) ?? ""),
+      csvEscape(canonicalSpotifyUrl(p.spotifyUrl) ?? ""),
       csvEscape(spotifySearchUrl(p.title, p.artistName)),
+      csvEscape(discogsSearchUrl(p.title, p.artistName)),
+      csvEscape(bandcampSearchUrl(p.title, p.artistName)),
       csvEscape(p.idStatus),
       csvEscape(meta.slug),
       csvEscape(meta.title),

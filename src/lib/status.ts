@@ -1,6 +1,13 @@
 // Status color semantics + provenance labels, used everywhere in the UI.
 
-import { beatportSearchUrl, canonicalBeatportUrl } from "./trackMeta";
+import {
+  beatportSearchUrl,
+  bandcampSearchUrl,
+  canonicalBeatportUrl,
+  canonicalSpotifyUrl,
+  discogsSearchUrl,
+  spotifySearchUrl,
+} from "./trackMeta";
 
 export type IdStatus =
   | "identified"
@@ -57,15 +64,19 @@ export const STATUS_ORDER: IdStatus[] = [
 
 export const PROVENANCE_META: Record<
   Provenance,
-  { label: string; short: string }
+  { label: string; short: string; operator?: string }
 > = {
-  "1001tl": { label: "1001TL parse", short: "1001TL" },
+  "1001tl": { label: "Tracklist", short: "Tracklist", operator: "1001TL parse" },
   soundcloud: { label: "SoundCloud parse", short: "SoundCloud" },
   hearthis: { label: "hearthis.at parse", short: "hearthis" },
   youtube: { label: "YouTube parse", short: "YouTube" },
   bandcamp: { label: "Bandcamp", short: "Bandcamp" },
   insomniac: { label: "Insomniac", short: "Insomniac" },
-  fingerprint: { label: "ACRCloud fingerprint", short: "ACRCloud" },
+  fingerprint: {
+    label: "ID identification",
+    short: "ID",
+    operator: "ACRCloud fingerprint",
+  },
   community: { label: "Community", short: "Community" },
 };
 
@@ -79,6 +90,12 @@ export function statusLabel(status: string): string {
 
 export function provenanceLabel(p: string): string {
   return PROVENANCE_META[p as Provenance]?.label ?? p;
+}
+
+/** Operator-facing label for /stats (may name ACR / 1001). */
+export function provenanceLabelOperator(p: string): string {
+  const meta = PROVENANCE_META[p as Provenance];
+  return meta?.operator ?? meta?.label ?? p;
 }
 
 export function fmtDuration(totalSec: number): string {
@@ -103,17 +120,26 @@ export function fmtTimestamp(sec: number): string {
 export function listenLinks(
   title: string,
   artist?: string | null,
-  opts?: { beatportUrl?: string | null; setSourceUrl?: string | null },
+  opts?: {
+    beatportUrl?: string | null;
+    setSourceUrl?: string | null;
+    spotifyUrl?: string | null;
+  },
 ) {
-  const q = encodeURIComponent([artist, title].filter(Boolean).join(" ").trim());
   const src = opts?.setSourceUrl ?? "";
   const scFromSet = /soundcloud\.com\//i.test(src) ? src : null;
   const beatportCanonical = canonicalBeatportUrl(opts?.beatportUrl);
+  const spotifyCanonical = canonicalSpotifyUrl(opts?.spotifyUrl);
   return {
-    youtube: `https://www.youtube.com/results?search_query=${q}`,
+    youtube: `https://www.youtube.com/results?search_query=${encodeURIComponent(
+      [artist, title].filter(Boolean).join(" ").trim(),
+    )}`,
     beatport: beatportCanonical ?? beatportSearchUrl(title, artist),
     beatportIsCanonical: !!beatportCanonical,
-    spotify: `https://open.spotify.com/search/${q}`,
+    spotify: spotifyCanonical ?? spotifySearchUrl(title, artist),
+    spotifyIsCanonical: !!spotifyCanonical,
+    discogs: discogsSearchUrl(title, artist),
+    bandcamp: bandcampSearchUrl(title, artist),
     // Only link SC when we have the set's real upload URL — never a name search.
     soundcloud: scFromSet,
   };

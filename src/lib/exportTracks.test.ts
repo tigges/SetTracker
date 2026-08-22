@@ -30,6 +30,7 @@ const identified: ExportTrackRow = {
   plays: 3,
   isrc: "USUM70000000",
   beatportUrl: "https://www.beatport.com/track/song/1",
+  spotifyUrl: null,
 };
 const held: ExportTrackRow = {
   slug: "held-id",
@@ -41,6 +42,7 @@ const held: ExportTrackRow = {
   plays: 9,
   isrc: null,
   beatportUrl: null,
+  spotifyUrl: null,
 };
 
 assert.equal(needsTrackId(identified), false);

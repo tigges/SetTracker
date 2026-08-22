@@ -130,7 +130,8 @@ unless asked.
   **Single deployer:** `deploy-pages.yml` is the ONLY workflow that builds +
   publishes Pages. Overnight chain: `catalog-deep` saves the DB then
   **dispatches `catalog-enrich` `full`** (thumbs + MusicBrainz + ACR +
-  filescan + LLM). Enrich then dispatches Pages. Do not run deep and
+  filescan + handles/tracks + cue dry-run + Spotify fill-null). Enrich then
+  dispatches Pages. Do not run deep and
   enrich in parallel — both write `prisma/dev.db` cache. Bump
   `data/deep-request` to start the chain; `data/enrich-full-request` starts
   full enrich alone; `data/enrich-request` is the fast `acr` pass. To ship,
@@ -147,6 +148,12 @@ unless asked.
   guesses. No-op without keys on deep/enrich; dedicated workflow fails if
   both keys are missing. Trigger on main by bumping `data/llm-request`.
   Reports in `data/crosscheck/llm-handle-research.json`.
+  **Cue job** (`LLM_RESEARCH_JOBS=cues` or `all`): re-parse first-party
+  YT/SC/hearthis on empty/stub lists. Parser path works without an LLM key.
+  LLM may write only clocks that already appear in that text — never
+  interpolate, never overwrite 1001tl / fingerprint / community. Enrich
+  `full` runs this **dry-run** (`LLM_RESEARCH_APPLY=0`) after
+  handles/tracks. Report: `data/crosscheck/llm-cue-research.json`.
   **Track export:** `npm run export:tracks` dumps catalog tracks (CSV +
   Claude JSONL) to `data/track-id-export/`. Pages `prebuild` also writes
   `/exports/tracks-need-id.csv` and `.jsonl` (no-ISRC, most-played first).
@@ -162,6 +169,8 @@ unless asked.
   (`data/entity-complete-pins.json`, fill-null on verify-urls). Event has no
   `youtube` column — drop venue YouTube rows. Empty / “cannot confirm” rows stay out.
   **Track IDs:** `npm run research:track-ids` resolves ISRCs / Beatport URLs
+  / canonical Spotify `/track/{22}` (Client Credentials, fill-null
+  `Track.spotifyUrl`)
   from held 1001 names, then high-play catalog tracks missing ISRC **or**
   Beatport (`TRACK_ID_HELD_LIMIT`, `TRACK_ID_CATALOG=0` skips catalog).
   Catalog enrich `acr` (120) and `full` (400) run this automatically with
