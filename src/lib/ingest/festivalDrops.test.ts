@@ -118,6 +118,14 @@ describe("festivalDrops", () => {
       "upcoming",
     );
     assert.equal(
+      cal.find((e) => e.slug === "creamfields-chile-2026")?.bucket,
+      "upcoming",
+    );
+    assert.match(
+      editionLabel(cal.find((e) => e.slug === "creamfields-chile-2026")!),
+      /Creamfields Chile/,
+    );
+    assert.equal(
       cal.find((e) => e.slug === "hard-summer-2026")?.bucket,
       "recent",
     );

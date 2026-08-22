@@ -83,6 +83,12 @@
   },
   {
     "kind": "festival",
+    "slug": "creamfields-chile",
+    "website": "https://www.creamfields.cl/",
+    "instagram": "https://www.instagram.com/creamfields_cl/"
+  },
+  {
+    "kind": "festival",
     "slug": "tomorrowland",
     "imageUrl": "https://yt3.googleusercontent.com/bVYSBgDgjx0Onq0N5WPEZkbwlwGNECTsjzQorUshOfrebX0Y5sYWBaVOQ_HhjJUN847tBkw2=s900-c-k-c0x00ffffff-no-rj",
     "twitter": "https://x.com/tomorrowland"

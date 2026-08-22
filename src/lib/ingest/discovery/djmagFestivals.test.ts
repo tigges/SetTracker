@@ -48,6 +48,10 @@ assert.equal(
   "https://magicoftomorrowland.com/",
 );
 assert.equal(
+  seed.festivals.find((f) => f.slug === "creamfields-chile")?.website,
+  "https://www.creamfields.cl/",
+);
+assert.equal(
   djMagFestivalToEvent(
     seed.festivals.find((f) => f.slug === "vision-colour-music-festival")!,
   ).instagram,
