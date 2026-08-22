@@ -32,8 +32,9 @@ import { curatedEventSocialPatch } from "./eventSocials";
 import { eventSocialPayload, KNOWN_EVENTS, resolveEvent } from "./events";
 import { inferFilmSeriesName } from "./filmSeries";
 import { classifyJunkDj, inferJunkHostEvent } from "./junkDj";
-import { previousSlugsFor } from "./sourceRemaps";
+import { previousSlugsFor, resolveSetSlug } from "./sourceRemaps";
 import { collapseConsecutivePlays, playCollapseKey } from "../playCollapse";
+import { mergeFingerprintPlays } from "./fingerprint/seeds";
 import {
   festivalDropBoostActive,
   matchEditionSeed,
@@ -283,6 +284,34 @@ export async function runIngest(
       : parsed.remixerName
         ? normalizeArtistName(parsed.remixerName)
         : undefined;
+    if (isrc) {
+      const byIsrc = await prisma.track.findFirst({ where: { isrc } });
+      if (byIsrc) {
+        const data: Record<string, unknown> = {};
+        if (byIsrc.artistName !== artistName) data.artistName = artistName;
+        if (mixName && !byIsrc.mixName) data.mixName = mixName;
+        if (remixerName && !byIsrc.remixerName) data.remixerName = remixerName;
+        if (play.bpm != null && byIsrc.bpm == null) data.bpm = play.bpm;
+        if (play.musicalKey && !byIsrc.musicalKey) {
+          data.musicalKey = play.musicalKey;
+        }
+        if (!byIsrc.genre) data.genre = ensureGenre(play.genre);
+        if (play.durationSec != null && byIsrc.durationSec == null) {
+          data.durationSec = play.durationSec;
+        }
+        if (play.beatportUrl && !byIsrc.beatportUrl) {
+          data.beatportUrl = play.beatportUrl;
+        }
+        if (play.label && !byIsrc.labelId) {
+          const labelId = await upsertLabel(play.label);
+          if (labelId) data.labelId = labelId;
+        }
+        if (Object.keys(data).length > 0) {
+          await prisma.track.update({ where: { id: byIsrc.id }, data });
+        }
+        return byIsrc.id;
+      }
+    }
     const existing = await prisma.track.findFirst({
       where: { title: play.title, artistName },
     });
@@ -504,7 +533,15 @@ export async function runIngest(
         artistName: p.artistName,
         title: p.trackTitle,
       }),
-    ).map((p, i) => ({ ...p, position: i + 1 }));
+    )
+      .slice()
+      .sort((a, b) => {
+        const ta = a.timestamp ?? Number.POSITIVE_INFINITY;
+        const tb = b.timestamp ?? Number.POSITIVE_INFINITY;
+        if (ta !== tb) return ta - tb;
+        return (a.position ?? 0) - (b.position ?? 0);
+      })
+      .map((p, i) => ({ ...p, position: i + 1 }));
     for (const p of collapsed) {
       const base = {
         setId,
@@ -634,11 +671,31 @@ export async function runIngest(
       .map((p, i) => ({ ...p, position: i + 1 }));
   }
 
+  async function snapshotFingerprintKeeps(setId: string): Promise<RawPlay[]> {
+    const rows = await prisma.played.findMany({
+      where: { setId, provenance: "fingerprint" },
+      include: { track: true },
+      orderBy: { position: "asc" },
+    });
+    return rows
+      .filter((r) => r.track && r.idStatus === "identified")
+      .map((r) => ({
+        position: r.position,
+        timestamp: r.timestamp,
+        idStatus: "identified" as const,
+        provenance: "fingerprint" as const,
+        trackTitle: r.track!.title,
+        artistName: r.track!.artistName,
+        rawText: r.rawText ?? undefined,
+      }));
+  }
+
   async function replacePlays(
     setId: string,
     plays: RawPlay[],
     setGenre?: string | null,
   ): Promise<void> {
+    const fingerprintKeeps = await snapshotFingerprintKeeps(setId);
     const oldPlays = await prisma.played.findMany({
       where: { setId },
       select: { idTrackId: true },
@@ -651,7 +708,11 @@ export async function runIngest(
       const still = await prisma.played.count({ where: { idTrackId: id } });
       if (still === 0) await prisma.idTrack.delete({ where: { id } }).catch(() => {});
     }
-    await writePlays(setId, plays, setGenre);
+    await writePlays(
+      setId,
+      mergeFingerprintPlays(plays, fingerprintKeeps),
+      setGenre,
+    );
   }
 
   async function syncSetArtists(
@@ -698,6 +759,7 @@ export async function runIngest(
 
   async function ingestSet(raw: RawSet): Promise<void> {
     stats.scannedSets += 1;
+    raw.sourceSlug = resolveSetSlug(raw.sourceSlug);
     const seeded = applyTracklist1001Seed(raw.sourceSlug, raw.plays);
     if (seeded !== raw.plays) {
       raw.plays = seeded;

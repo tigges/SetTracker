@@ -114,6 +114,31 @@ describe("popularity rails", () => {
     assert.ok(!popular.some((s) => s.id === "old"));
   });
 
+  it("uses performance time, not ingest publish, for popular rails", () => {
+    const now = Date.parse("2026-08-20T12:00:00Z");
+    const feed = [
+      item({
+        id: "fresh-upload-old-set",
+        slug: "street-parade-2025",
+        title: "Street Parade 2025",
+        publishedAt: new Date(now - 1 * 24 * 60 * 60 * 1000),
+        performedAt: new Date("2025-08-09T00:00:00Z"),
+        top100Rank: 1,
+      }),
+      item({
+        id: "this-week",
+        slug: "ultra-2026",
+        title: "Ultra 2026",
+        publishedAt: new Date(now - 2 * 24 * 60 * 60 * 1000),
+        performedAt: new Date(now - 2 * 24 * 60 * 60 * 1000),
+        top100Rank: 8,
+      }),
+    ];
+    const popular = popularSetsThisWeek(feed, 9, now);
+    assert.ok(popular.some((s) => s.id === "this-week"));
+    assert.ok(!popular.some((s) => s.id === "fresh-upload-old-set"));
+  });
+
   it("aggregates Top 100 DJs and skips brand hosts + hobbyists", () => {
     const feed = [
       item({

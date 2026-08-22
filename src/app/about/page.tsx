@@ -44,13 +44,13 @@ export default function AboutPage() {
         </li>
       </ul>
 
-      <h2 className="mt-10 text-lg font-bold tracking-tight">Sources</h2>
+      <h2 className="mt-10 text-lg font-bold tracking-tight">Where IDs come from</h2>
       <p className="mt-3 text-[14px] leading-relaxed text-muted">
-        Tracklists come from SoundCloud descriptions and timed comments,
-        hearthis.at, YouTube descriptions and song credits, Insomniac Night Owl
-        Radio, and 1001Tracklists seeds already linked from those pages — often
-        partial or untimed. We do not invent cues. Fingerprint enrich
-        (ACRCloud) only fills timeline gaps.
+        Tracklists come from first-party uploads — SoundCloud descriptions and
+        timed comments, hearthis.at, YouTube descriptions and song credits, and
+        official radio series. When a published list is already linked from
+        those pages, we use it. We do not invent cues. Where a set has no
+        published list, ID identification fills timeline gaps only.
       </p>
 
       <h2 className="mt-10 text-lg font-bold tracking-tight">Suggest an ID</h2>

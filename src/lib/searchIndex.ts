@@ -4,8 +4,8 @@ import { atlasVenueBySlug } from "@/lib/atlas/seed";
 import { normalizeGenre } from "@/lib/genre";
 import { isSearchableDj } from "@/lib/djBrowse";
 import { getDjList } from "@/lib/queries";
-import { nearDuplicateKey } from "@/lib/feedPriority";
-import { isBrowseReadySet } from "@/lib/setBrowse";
+import { listableSets } from "@/lib/setList";
+import { isSearchableSet } from "@/lib/setBrowse";
 import { displayCity } from "@/lib/displayCity";
 import { ensureTrackSlugs } from "@/lib/tracks/ensureSlugs";
 
@@ -29,7 +29,8 @@ export async function getSearchIndex(): Promise<SearchIndexItem[]> {
         genre: true,
         imageUrl: true,
         durationSec: true,
-        event: { select: { name: true } },
+        publishedAt: true,
+        event: { select: { name: true, slug: true } },
         series: { select: { name: true } },
         artists: {
           where: { isPrimary: true },
@@ -118,24 +119,35 @@ export async function getSearchIndex(): Promise<SearchIndexItem[]> {
     ...atlasSearchItems(),
   ];
 
-  const seenSetKeys = new Set<string>();
-  for (const s of sets) {
-    const primary = s.artists[0]?.dj;
-    if (
-      !isBrowseReadySet({
-        imageUrl: s.imageUrl,
-        primaryDjImageUrl: primary?.imageUrl,
-        primaryDjName: primary?.name,
-        title: s.title,
-        trackCount: s._count.plays,
-        durationSec: s.durationSec,
+  const searchable = listableSets(
+    sets
+      .filter((s) => {
+        const primary = s.artists[0]?.dj;
+        return isSearchableSet({
+          imageUrl: s.imageUrl,
+          primaryDjImageUrl: primary?.imageUrl,
+          primaryDjName: primary?.name,
+          primaryDjSlug: primary?.slug,
+          title: s.title,
+          trackCount: s._count.plays,
+          durationSec: s.durationSec,
+        });
       })
-    ) {
-      continue;
-    }
-    const dupeKey = nearDuplicateKey(s.title, primary?.slug);
-    if (seenSetKeys.has(dupeKey)) continue;
-    seenSetKeys.add(dupeKey);
+      .map((s) => ({
+        id: s.slug,
+        slug: s.slug,
+        title: s.title,
+        publishedAt: s.publishedAt,
+        durationSec: s.durationSec,
+        primaryDjSlug: s.artists[0]?.dj.slug ?? null,
+        eventSlug: s.event?.slug ?? null,
+        trackCount: s._count.plays,
+        set: s,
+      })),
+  );
+  for (const row of searchable) {
+    const s = row.set;
+    const primary = s.artists[0]?.dj;
     const dj = primary?.name;
     const genre = normalizeGenre(s.genre);
     items.push({

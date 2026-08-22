@@ -1,6 +1,14 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { fmtDate, fmtRelative, listenLinks } from "./status";
+import {
+  consumerIdNote,
+  fmtDate,
+  fmtRelative,
+  isConfirmedProvenance,
+  isConsumerHiddenPlay,
+  listenLinks,
+  provenanceLabel,
+} from "./status";
 
 describe("fmtRelative", () => {
   const now = Date.parse("2026-08-15T12:00:00Z");
@@ -21,6 +29,38 @@ describe("fmtRelative", () => {
 describe("fmtDate", () => {
   it("includes the year", () => {
     assert.match(fmtDate("2014-03-28T00:00:00Z"), /2014/);
+  });
+});
+
+describe("consumer provenance copy", () => {
+  it("uses friendly labels for published lists and audio IDs", () => {
+    assert.equal(provenanceLabel("1001tl"), "Tracklist");
+    assert.equal(provenanceLabel("fingerprint"), "ID identification");
+    assert.equal(isConfirmedProvenance("1001tl"), true);
+    assert.equal(isConfirmedProvenance("youtube"), false);
+  });
+
+  it("hides tool names from track notes and miss rows", () => {
+    assert.equal(consumerIdNote("ACRCloud score 64: Artist - Title"), null);
+    assert.equal(consumerIdNote("acr-miss: no ACRCloud match"), null);
+    assert.equal(consumerIdNote("ID identification"), "ID identification");
+    assert.equal(
+      isConsumerHiddenPlay({
+        rawText: "acr-miss @ 01:00: no match",
+        idNote: null,
+        trackId: null,
+        artistName: null,
+      }),
+      true,
+    );
+    assert.equal(
+      isConsumerHiddenPlay({
+        rawText: "acr-miss leftover",
+        artistName: "Dom Dolla",
+        trackId: "t1",
+      }),
+      false,
+    );
   });
 });
 

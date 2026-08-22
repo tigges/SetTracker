@@ -188,12 +188,18 @@ export function pickDjFaces(
     accent?: string;
     isBrowseReady?: boolean;
     setCount?: number;
+    top100Rank?: number | null;
   }>,
   limit = 10,
 ): LandingFace[] {
   const ranked = [...djs]
     .filter((d) => d.isBrowseReady !== false)
-    .sort((a, b) => (b.setCount ?? 0) - (a.setCount ?? 0));
+    .sort((a, b) => {
+      const ra = a.top100Rank ?? 999;
+      const rb = b.top100Rank ?? 999;
+      if (ra !== rb) return ra - rb;
+      return (b.setCount ?? 0) - (a.setCount ?? 0);
+    });
   return pickVisualFaces(
     ranked.map((d) => ({
       src: d.imageUrl,

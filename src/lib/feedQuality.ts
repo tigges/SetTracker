@@ -15,10 +15,10 @@ export type FeedTypeFilter = "all" | "festival" | "radio" | "mix";
 export type ProvenanceHint = "1001tl" | "comments" | "credits" | "fingerprint" | "source";
 
 export const PROVENANCE_HINT_LABEL: Record<ProvenanceHint, string> = {
-  "1001tl": "1001tl",
+  "1001tl": "tracklist",
   comments: "comments",
   credits: "credits",
-  fingerprint: "fingerprint",
+  fingerprint: "ID identification",
   source: "source",
 };
 
@@ -106,12 +106,13 @@ export function diversifyByEvent<
 
 export function hostTwinKey(s: {
   primaryDjSlug?: string | null;
+  primaryDj?: { slug?: string | null } | null;
   eventSlug?: string | null;
   title: string;
   publishedAt: Date | string;
   durationSec: number;
 }): string {
-  const dj = (s.primaryDjSlug || "").toLowerCase();
+  const dj = (s.primaryDjSlug || s.primaryDj?.slug || "").toLowerCase();
   const ev = eventDiversityKey(s) || "";
   const when = new Date(s.publishedAt);
   const week = Math.floor(when.getTime() / (7 * DAY_MS));
@@ -150,6 +151,7 @@ export function collapseHostTwins<
     slug?: string;
     title: string;
     primaryDjSlug?: string | null;
+    primaryDj?: { slug?: string | null } | null;
     eventSlug?: string | null;
     publishedAt: Date | string;
     durationSec: number;

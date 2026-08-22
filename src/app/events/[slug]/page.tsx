@@ -153,6 +153,11 @@ export default async function EventPage({
                 className="rounded-full border border-line bg-panel px-3 py-1 text-[12px] transition-colors hover:border-[color:var(--muted2)]"
                 style={{ color: a.accent }}
               >
+                {a.top100Rank != null ? (
+                  <span className="mono mr-1 text-[10px] text-muted2">
+                    #{a.top100Rank}
+                  </span>
+                ) : null}
                 {a.name}
               </Link>
             ))}

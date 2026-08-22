@@ -165,6 +165,7 @@ export function HomeLanding({
     accent?: string;
     isBrowseReady?: boolean;
     setCount?: number;
+    top100Rank?: number | null;
   }>;
   venues: Array<{
     slug: string;

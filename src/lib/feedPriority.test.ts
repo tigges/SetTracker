@@ -138,6 +138,11 @@ describe("feedPriority complete → Top 100 → festivals", () => {
   it("loads DJ and festival chart ranks (with event aliases)", () => {
     const djs = loadDjMagTop100RankBySlug();
     assert.equal(djs.get("david-guetta"), 1);
+    assert.equal(
+      djs.get("james-hype-live"),
+      djs.get("james-hype"),
+      "alias slugs share the chart rank",
+    );
 
     const fests = loadDjMagFestivalRankBySlug();
     assert.equal(fests.get("tomorrowland"), 1);
@@ -579,6 +584,41 @@ describe("feedPriority complete → Top 100 → festivals", () => {
       now,
     );
     assert.ok(recent > archive);
+  });
+
+  it("radar score prefers confirmed IDs over description-only fills", () => {
+    const now = Date.parse("2026-08-16T12:00:00.000Z");
+    const confirmed = radarPickScore(
+      {
+        id: "c",
+        densitySeverity: "ok",
+        top100Rank: 20,
+        festivalRank: 5,
+        venueTier: "festival",
+        publishedAt: "2026-08-01T00:00:00.000Z",
+        trackCount: 30,
+        confirmedCount: 28,
+        identifiedRatio: 0.9,
+        primaryDjSlug: "a",
+      },
+      now,
+    );
+    const described = radarPickScore(
+      {
+        id: "d",
+        densitySeverity: "ok",
+        top100Rank: 20,
+        festivalRank: 5,
+        venueTier: "festival",
+        publishedAt: "2026-08-01T00:00:00.000Z",
+        trackCount: 30,
+        confirmedCount: 0,
+        identifiedRatio: 0.9,
+        primaryDjSlug: "b",
+      },
+      now,
+    );
+    assert.ok(confirmed > described);
   });
 
   it("pickRadarPicks keeps one set per DJ and per event", () => {

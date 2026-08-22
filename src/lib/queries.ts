@@ -33,7 +33,12 @@ import { resolveSetSlug } from "@/lib/ingest/sourceRemaps";
 import { collapseConsecutivePlays, playCollapseKey } from "@/lib/playCollapse";
 import { canonicalDjSlug, DJ_SLUG_ALIASES } from "@/lib/ingest/djSlugAliases";
 import { sortEventSets, resolvedIdCount } from "@/lib/feedPriority";
-import { collapseHostTwins } from "@/lib/feedQuality";
+import { listableSets } from "@/lib/setList";
+import {
+  consumerIdNote,
+  isConfirmedProvenance,
+  isConsumerHiddenPlay,
+} from "@/lib/status";
 import { staticSetPageSlugs } from "@/lib/setPages";
 import { resolveFeedRanks } from "@/lib/feedPriorityResolve";
 import {
@@ -104,11 +109,24 @@ async function siblingBeatportMap(
 async function statusCountsBySetIds(
   setIds: string[],
 ): Promise<
-  Map<string, { counts: StatusCounts; trackCount: number; provenance: string | null }>
+  Map<
+    string,
+    {
+      counts: StatusCounts;
+      trackCount: number;
+      provenance: string | null;
+      confirmedCount: number;
+    }
+  >
 > {
   const out = new Map<
     string,
-    { counts: StatusCounts; trackCount: number; provenance: string | null }
+    {
+      counts: StatusCounts;
+      trackCount: number;
+      provenance: string | null;
+      confirmedCount: number;
+    }
   >();
   if (setIds.length === 0) return out;
 
@@ -128,7 +146,12 @@ async function statusCountsBySetIds(
   for (const g of groups) {
     let entry = out.get(g.setId);
     if (!entry) {
-      entry = { counts: emptyCounts(), trackCount: 0, provenance: null };
+      entry = {
+        counts: emptyCounts(),
+        trackCount: 0,
+        provenance: null,
+        confirmedCount: 0,
+      };
       out.set(g.setId, entry);
     }
     entry.trackCount += g._count._all;
@@ -145,6 +168,21 @@ async function statusCountsBySetIds(
     }
     if (!prev || g._count._all > prev.n) {
       provBest.set(g.setId, { provenance: g.provenance, n: g._count._all });
+    }
+  }
+  for (const g of provGroups) {
+    let entry = out.get(g.setId);
+    if (!entry) {
+      entry = {
+        counts: emptyCounts(),
+        trackCount: 0,
+        provenance: null,
+        confirmedCount: 0,
+      };
+      out.set(g.setId, entry);
+    }
+    if (isConfirmedProvenance(g.provenance)) {
+      entry.confirmedCount += g._count._all;
     }
   }
   for (const [id, row] of out) {
@@ -169,7 +207,7 @@ export async function getFeed() {
 
   const tallies = await statusCountsBySetIds(sets.map((s) => s.id));
 
-  return sets
+  const mapped = sets
     .map((s) => {
       const primary = s.artists.find((a) => a.isPrimary) ?? s.artists[0];
       const tally = tallies.get(s.id);
@@ -227,6 +265,7 @@ export async function getFeed() {
         venueTier: ranks.venueTier,
         densitySeverity: ranks.densitySeverity,
         dominantProvenance: tally?.provenance ?? null,
+        confirmedCount: tally?.confirmedCount ?? 0,
       };
     })
     .filter((s) =>
@@ -241,6 +280,7 @@ export async function getFeed() {
         durationSec: s.durationSec,
       }),
     );
+  return listableSets(mapped);
 }
 
 export type FeedItem = Awaited<ReturnType<typeof getFeed>>[number];
@@ -279,7 +319,17 @@ export async function getSetBySlug(slug: string) {
 
   const primary = set.artists.find((a) => a.isPrimary) ?? set.artists[0];
 
-  const mappedPlays = set.plays.map((p) => {
+  const mappedPlays = set.plays
+    .filter(
+      (p) =>
+        !isConsumerHiddenPlay({
+          rawText: p.rawText,
+          idNote: p.idTrack?.note,
+          trackId: p.trackId,
+          artistName: p.track?.artistName ?? p.idTrack?.suspectedArtist,
+        }),
+    )
+    .map((p) => {
     const resolved = p.idTrack?.resolvedTrack ?? null;
     const title =
       p.track?.title ??
@@ -318,7 +368,7 @@ export async function getSetBySlug(slug: string) {
       beatportUrl: track?.beatportUrl ?? null,
       hasTrackPage: false,
       isrc: track?.isrc ?? null,
-      idNote: p.idTrack?.note ?? null,
+      idNote: consumerIdNote(p.idTrack?.note),
       resolvedTitle: resolved
         ? `${resolved.artistName} – ${resolved.title}`
         : null,
@@ -443,6 +493,7 @@ export async function getRelatedSets(slug: string, limit = 6) {
     take: 40,
     orderBy: { publishedAt: "desc" },
     select: {
+      id: true,
       slug: true,
       title: true,
       publishedAt: true,
@@ -458,6 +509,20 @@ export async function getRelatedSets(slug: string, limit = 6) {
     },
   });
 
+  const listed = listableSets(
+    candidates.map((c) => ({
+      id: c.id,
+      slug: c.slug,
+      title: c.title,
+      publishedAt: c.publishedAt,
+      durationSec: c.durationSec,
+      trackCount: c._count.plays,
+      eventSlug: c.event?.slug,
+      seriesSlug: c.series?.slug,
+      primaryDjSlug: c.artists[0]?.dj.slug ?? null,
+    })),
+  );
+
   const picked = pickRelatedSets(
     {
       slug: set.slug,
@@ -465,16 +530,7 @@ export async function getRelatedSets(slug: string, limit = 6) {
       seriesSlug: set.series?.slug,
       primaryDjSlug,
     },
-    candidates.map((c) => ({
-      slug: c.slug,
-      title: c.title,
-      publishedAt: c.publishedAt,
-      trackCount: c._count.plays,
-      durationSec: c.durationSec,
-      eventSlug: c.event?.slug,
-      seriesSlug: c.series?.slug,
-      primaryDjSlug: c.artists[0]?.dj.slug ?? null,
-    })),
+    listed,
     limit,
   );
 
@@ -807,7 +863,15 @@ export async function getDjBySlug(slug: string): Promise<DjProfile | null> {
     return null;
   }
   const setIds = sets.map((s) => s.id);
-  const recent = sets.slice(0, 8);
+  const recent = listableSets(
+    sets.map((s) => ({
+      ...s,
+      primaryDjSlug:
+        (s.artists.find((a) => a.isPrimary) ?? s.artists[0])?.dj.slug ?? null,
+      eventSlug: s.event?.slug ?? null,
+      durationSec: s.durationSec,
+    })),
+  ).slice(0, 8);
 
   const [tallies, provenanceGroups, trackTotal] = await Promise.all([
     statusCountsBySetIds(setIds),
@@ -1214,7 +1278,7 @@ export async function getDjList(): Promise<DjListItem[]> {
       isJunk,
       isLowSignal,
       isBrowseReady: false,
-      top100Rank: ranks.get(d.slug) ?? null,
+      top100Rank: ranks.get(canonicalDjSlug(d.slug)) ?? ranks.get(d.slug) ?? null,
     };
     item.isBrowseReady = isBrowseReadyDj(item) && !isLowSignal;
     return item;
@@ -1364,29 +1428,11 @@ export async function getLabelBySlug(slug: string) {
 export type LabelProfile = NonNullable<Awaited<ReturnType<typeof getLabelBySlug>>>;
 
 export async function getAllDjSlugs(): Promise<string[]> {
-  // Pages export size cliff (~1–2GB): skip discovery stub DJs with no sets.
-  // Always keep social-pinned artist DJs even before their first set lands.
-  // Never export festival / stage / radio-series / brand-host rows as artists.
-  const { DJ_SOCIAL_PINS } = await import("@/lib/ingest/djSocialPins.data");
-  const pinned = new Set(
-    DJ_SOCIAL_PINS.map((p) => p.slug).filter((s) => !isBrandHostSlug(s)),
-  );
-  const rows = await prisma.dj.findMany({
-    where: {
-      OR: [{ sets: { some: {} } }, { slug: { in: [...pinned] } }],
-    },
-    select: { slug: true, name: true },
-  });
-  const slugs = rows
-    .filter(
-      (r) =>
-        !isBrandHostSlug(r.slug) &&
-        !isProducerHiddenSlug(r.slug) &&
-        (pinned.has(r.slug) ||
-          (!isJunkArtistName(r.name) &&
-            !/^view-artist-details-for-/.test(r.slug))),
-    )
-    .map((r) => r.slug);
+  // Same hide rules as the directory / profile: no junk or hearthis-only leaks.
+  const djs = await getDjList();
+  const slugs = djs
+    .filter((d) => !d.isJunk && !d.isLowSignal)
+    .map((d) => d.slug);
   const have = new Set(slugs);
   const aliases = Object.entries(DJ_SLUG_ALIASES)
     .filter(([, canon]) => have.has(canon))
@@ -1521,21 +1567,26 @@ export async function getSeriesBySlug(slug: string) {
           imageUrl: series.dj.imageUrl,
         }
       : null,
-    sets: series.sets.map((s) => {
-      const primary = s.artists.find((a) => a.isPrimary) ?? s.artists[0];
-      const tally = tallies.get(s.id);
-      return {
-        slug: s.slug,
-        title: s.title,
-        type: s.type,
-        publishedAt: s.publishedAt,
-        durationSec: s.durationSec,
-        imageUrl: s.imageUrl ?? primary?.dj.imageUrl ?? null,
-        eventName: s.event?.name ?? null,
-        trackCount: tally?.trackCount ?? 0,
-        statusCounts: tally?.counts ?? emptyCounts(),
-      };
-    }),
+    sets: listableSets(
+      series.sets.map((s) => {
+        const primary = s.artists.find((a) => a.isPrimary) ?? s.artists[0];
+        const tally = tallies.get(s.id);
+        return {
+          id: s.id,
+          slug: s.slug,
+          title: s.title,
+          type: s.type,
+          publishedAt: s.publishedAt,
+          durationSec: s.durationSec,
+          imageUrl: s.imageUrl ?? primary?.dj.imageUrl ?? null,
+          eventName: s.event?.name ?? null,
+          eventSlug: s.event?.slug ?? null,
+          primaryDjSlug: primary?.dj.slug ?? null,
+          trackCount: tally?.trackCount ?? 0,
+          statusCounts: tally?.counts ?? emptyCounts(),
+        };
+      }),
+    ),
   };
 }
 
@@ -1596,13 +1647,11 @@ export async function getVenueBySlug(slug: string, nowMs = Date.now()) {
       });
     }
   }
-  const lineupArtists = [...lineupBySlug.values()]
-    .sort(
-      (a, b) =>
-        (a.top100Rank ?? 999) - (b.top100Rank ?? 999) ||
-        a.name.localeCompare(b.name),
-    )
-    .map(({ top100Rank: _rank, ...rest }) => rest);
+  const lineupArtists = [...lineupBySlug.values()].sort(
+    (a, b) =>
+      (a.top100Rank ?? 999) - (b.top100Rank ?? 999) ||
+      a.name.localeCompare(b.name),
+  );
 
   const [nightRows, catalogRows] = await Promise.all([
     prisma.venueNight.findMany({
@@ -1693,15 +1742,11 @@ export async function getVenueBySlug(slug: string, nowMs = Date.now()) {
         clubRank: ranks.clubRank,
         venueTier: ranks.venueTier,
         densitySeverity: ranks.densitySeverity,
+        confirmedCount: tally?.confirmedCount ?? 0,
       } satisfies FeedItem;
     });
 
-  const listed = collapseHostTwins(
-    sets.map((s) => ({
-      ...s,
-      primaryDjSlug: s.primaryDj?.slug ?? null,
-    })),
-  );
+  const listed = listableSets(sets);
 
   return {
     slug: event.slug,

@@ -59,15 +59,47 @@ export const PROVENANCE_META: Record<
   Provenance,
   { label: string; short: string }
 > = {
-  "1001tl": { label: "1001TL parse", short: "1001TL" },
-  soundcloud: { label: "SoundCloud parse", short: "SoundCloud" },
-  hearthis: { label: "hearthis.at parse", short: "hearthis" },
-  youtube: { label: "YouTube parse", short: "YouTube" },
+  "1001tl": { label: "Tracklist", short: "TL" },
+  soundcloud: { label: "SoundCloud", short: "SoundCloud" },
+  hearthis: { label: "hearthis.at", short: "hearthis" },
+  youtube: { label: "YouTube", short: "YouTube" },
   bandcamp: { label: "Bandcamp", short: "Bandcamp" },
   insomniac: { label: "Insomniac", short: "Insomniac" },
-  fingerprint: { label: "ACRCloud fingerprint", short: "ACRCloud" },
+  fingerprint: { label: "ID identification", short: "ID" },
   community: { label: "Community", short: "Community" },
 };
+
+/** Published list or audio ID — not a description-line guess. */
+export const CONFIRMED_PROVENANCE = new Set<string>([
+  "1001tl",
+  "fingerprint",
+  "community",
+]);
+
+export function isConfirmedProvenance(p: string | null | undefined): boolean {
+  return CONFIRMED_PROVENANCE.has(p ?? "");
+}
+
+const TECH_ID_NOTE =
+  /acr-miss|acrcloud|acr\s*cloud|file\s*scanning|\bfilescan\b|1001\s*tracklists?|1001\.tl|\b1001tl\b|\baudd\b|yt-?dlp|aha-music/i;
+
+/** Hide tool names and probe leftovers from set / track copy. */
+export function consumerIdNote(note: string | null | undefined): string | null {
+  if (!note?.trim()) return null;
+  if (TECH_ID_NOTE.test(note)) return null;
+  return note.trim();
+}
+
+/** Grey ID-probe rows (no track) stay in the DB but not on the public timeline. */
+export function isConsumerHiddenPlay(p: {
+  rawText?: string | null;
+  idNote?: string | null;
+  trackId?: string | null;
+  artistName?: string | null;
+}): boolean {
+  if (p.trackId || p.artistName) return false;
+  return TECH_ID_NOTE.test(`${p.rawText ?? ""} ${p.idNote ?? ""}`);
+}
 
 export function statusColor(status: string): string {
   return STATUS_META[status as IdStatus]?.color ?? "var(--grey)";

@@ -15,6 +15,7 @@ import { EntityThumb } from "@/components/EntityThumb";
 import { SuggestIdButton } from "@/components/SuggestId";
 import {
   STATUS_META,
+  consumerIdNote,
   fmtTimestamp,
   listenLinks,
   statusColor,
@@ -346,8 +347,10 @@ export function SetTimeline({
                       {p.resolvedTitle && (
                         <span className="truncate text-teal">→ {p.resolvedTitle}</span>
                       )}
-                      {p.idNote && !p.artistName && (
-                        <span className="truncate text-muted2 italic">{p.idNote}</span>
+                      {consumerIdNote(p.idNote) && !p.artistName && (
+                        <span className="truncate text-muted2 italic">
+                          {consumerIdNote(p.idNote)}
+                        </span>
                       )}
                     </div>
                   </div>

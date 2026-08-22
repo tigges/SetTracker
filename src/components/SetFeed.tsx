@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState, useSyncExternalStore } from "react";
+import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
 import { GenreFilter } from "@/components/GenreFilter";
 import { PopularRails } from "@/components/PopularRails";
 import { SetCard } from "@/components/SetCard";
@@ -13,8 +13,13 @@ import {
   isRadarCandidate,
   isThisPerformanceYear,
   pickRadarPicks,
+  setPerformanceTime,
 } from "@/lib/feedPriority";
-import { collapseHostTwins, identifiedRatio } from "@/lib/feedQuality";
+import {
+  collapseHostTwins,
+  groupByDeepWeek,
+  identifiedRatio,
+} from "@/lib/feedQuality";
 import { setMatchesGenreFilter } from "@/lib/genreFamilies";
 import {
   festivalSeasonSets,
@@ -79,6 +84,20 @@ function writePrefs(next: FeedPrefs) {
   prefsListeners.forEach((l) => l());
 }
 
+function readGenreParam(): string | null {
+  if (typeof window === "undefined") return null;
+  const g = new URLSearchParams(window.location.search).get("g");
+  return g && g.trim() ? g.trim() : null;
+}
+
+function writeGenreParam(genre: string) {
+  if (typeof window === "undefined") return;
+  const url = new URL(window.location.href);
+  if (!genre || genre === "all") url.searchParams.delete("g");
+  else url.searchParams.set("g", genre);
+  window.history.replaceState(null, "", `${url.pathname}${url.search}${url.hash}`);
+}
+
 /**
  * Sets catalog feed (`/sets`):
  * New this week → Festival season → Popular sets → In-demand DJs / Top events →
@@ -95,8 +114,19 @@ export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }
   const [visible, setVisible] = useState(PAGE_SIZE);
   const [showEarlier, setShowEarlier] = useState(false);
 
+  useEffect(() => {
+    const fromUrl = readGenreParam();
+    if (fromUrl && fromUrl !== prefs.genre) {
+      writePrefs({ ...prefs, genre: fromUrl });
+    }
+    // URL wins once on mount; later changes write both.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   function patchPrefs(next: Partial<FeedPrefs>) {
-    writePrefs({ ...prefs, ...next });
+    const merged = { ...prefs, ...next };
+    writePrefs(merged);
+    if (next.genre != null) writeGenreParam(next.genre);
     setVisible(PAGE_SIZE);
     setShowEarlier(false);
   }
@@ -119,6 +149,7 @@ export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }
     popularVenues,
     radarPicks,
     deepShown,
+    deepGroups,
     deepRemaining,
     thisYearDeepCount,
     earlierDeepCount,
@@ -162,6 +193,12 @@ export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }
     const earlierDeep = deepRanked.filter((s) => !isThisPerformanceYear(s));
     const deepPool = showEarlier ? [...thisYearDeep, ...earlierDeep] : thisYearDeep;
     const deepShown = deepPool.slice(0, visible);
+    const deepGroups = groupByDeepWeek(
+      deepShown.map((s) => ({
+        ...s,
+        publishedAt: new Date(setPerformanceTime(s)),
+      })),
+    );
     return {
       newWeek,
       festivalSeason,
@@ -170,6 +207,7 @@ export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }
       popularVenues,
       radarPicks,
       deepShown,
+      deepGroups,
       deepRemaining: deepPool.length - deepShown.length,
       thisYearDeepCount: thisYearDeep.length,
       earlierDeepCount: earlierDeep.length,
@@ -216,7 +254,29 @@ export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }
           {(deepShown.length > 0 || earlierDeepCount > 0) && (
             <>
               {deepShown.length > 0 ? (
-                <Section title="Deep catalog" sets={deepShown} />
+                <section className="mb-10">
+                  <div className="mb-4 flex items-baseline gap-3">
+                    <h2 className="text-[13px] font-semibold uppercase tracking-[0.14em] text-muted">
+                      Deep catalog
+                    </h2>
+                    <span className="mono text-[12px] text-muted2">
+                      {deepShown.length}
+                    </span>
+                    <div className="h-px flex-1 bg-line" />
+                  </div>
+                  {deepGroups.map((g) => (
+                    <div key={g.label} className="mb-8 last:mb-0">
+                      <h3 className="mb-3 text-[12px] font-semibold uppercase tracking-[0.12em] text-muted2">
+                        {g.label}
+                      </h3>
+                      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                        {g.items.map((s) => (
+                          <SetCard key={s.id} set={s} />
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </section>
               ) : (
                 <section className="mb-10">
                   <div className="mb-4 flex items-baseline gap-3">

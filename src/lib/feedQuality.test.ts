@@ -8,6 +8,7 @@ import {
   eventDiversityKey,
   groupByDeepWeek,
   hostTwinKey,
+  PROVENANCE_HINT_LABEL,
   setMatchesTypeFilter,
   tracklistProvenanceHint,
 } from "./feedQuality";
@@ -18,6 +19,8 @@ describe("feedQuality", () => {
     assert.equal(tracklistProvenanceHint("SoundCloud", "sc-x"), "comments");
     assert.equal(tracklistProvenanceHint("YouTube", "yt-x"), "credits");
     assert.equal(tracklistProvenanceHint(null, "yt-x", "fingerprint"), "fingerprint");
+    assert.equal(PROVENANCE_HINT_LABEL["1001tl"], "tracklist");
+    assert.equal(PROVENANCE_HINT_LABEL.fingerprint, "ID identification");
   });
 
   it("matches festival / radio / mix types for ingest and stats", () => {

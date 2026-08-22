@@ -604,7 +604,7 @@ export function AtlasMap({
                         href={capture1001StatsHref(selected.name)}
                         className="text-brand hover:text-brandstrong"
                       >
-                        Queue a 1001 capture →
+                        Find a tracklist →
                       </Link>
                     </p>
                   )}

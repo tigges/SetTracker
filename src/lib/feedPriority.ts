@@ -432,6 +432,8 @@ export type RadarPickFields = FeedPriorityFields & {
   eventSlug?: string | null;
   /** Optional ID health 0–1 (identified / total plays). */
   identifiedRatio?: number | null;
+  /** Published-list / ID-identification / community rows. */
+  confirmedCount?: number | null;
 };
 
 /**
@@ -478,7 +480,10 @@ export function radarPickScore(s: RadarPickFields, nowMs = Date.now()): number {
   const idRatio =
     s.identifiedRatio ?? resolvedIdRatio(s.statusCounts, s.trackCount ?? 0);
   // Mostly-orange bars beat chart fame when the strip is mostly grey/pink.
-  score += idRatio * 40;
+  score += idRatio * 24;
+  const playCount = Math.max(s.trackCount ?? 0, 1);
+  const confirmedRatio = (s.confirmedCount ?? 0) / playCount;
+  score += Math.min(22, Math.round(confirmedRatio * 22));
   score -= idCoverageTier(s.statusCounts, s.trackCount ?? 0) * 18;
 
   return score;

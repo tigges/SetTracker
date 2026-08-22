@@ -4,6 +4,7 @@ import {
   isBrowseReadySet,
   isEmptyOrPreviewSet,
   isNonCatalogSet,
+  isSearchableSet,
   setDisplayThumb,
 } from "./setBrowse";
 
@@ -37,6 +38,23 @@ describe("setBrowse", () => {
         primaryDjImageUrl: null,
       }),
       true,
+    );
+    assert.equal(
+      isSearchableSet({
+        imageUrl: null,
+        title: "Dom Dolla | Creamfields 2025",
+        trackCount: 20,
+        durationSec: 3600,
+      }),
+      true,
+    );
+    assert.equal(
+      isSearchableSet({
+        imageUrl: null,
+        title: "ASOT Mix 2 [Preview]",
+        trackCount: 0,
+      }),
+      false,
     );
   });
 

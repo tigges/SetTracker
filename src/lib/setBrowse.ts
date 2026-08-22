@@ -86,3 +86,20 @@ export function isBrowseReadySet(s: SetBrowseSignals): boolean {
   if (isEmptyOrPreviewSet(s)) return false;
   return setDisplayThumb(s) != null;
 }
+
+/**
+ * Search can surface a set before artwork lands. Still hide previews,
+ * junk credits, and empty shells.
+ */
+export function isSearchableSet(s: SetBrowseSignals): boolean {
+  const brandHost = isBrandHostSlug(s.primaryDjSlug);
+  if (
+    !brandHost &&
+    s.primaryDjName &&
+    isJunkArtistName(s.primaryDjName)
+  ) {
+    return false;
+  }
+  if (isEmptyOrPreviewSet(s)) return false;
+  return Boolean(s.title?.trim());
+}

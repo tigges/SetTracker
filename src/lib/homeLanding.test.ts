@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import {
   landingPlaybackTier,
   mergeStatusCounts,
+  pickDjFaces,
   pickHeroCollage,
   pickLandingSets,
   pickVenueMosaic,
@@ -113,6 +114,30 @@ assert.deepEqual(
   onlyFiller.map((s) => s.id),
   ["c"],
 );
+
+const djFaces = pickDjFaces(
+  [
+    {
+      slug: "volume",
+      name: "Volume",
+      imageUrl: "/djs/vol.jpg",
+      isBrowseReady: true,
+      setCount: 40,
+      top100Rank: null,
+    },
+    {
+      slug: "chart",
+      name: "Chart",
+      imageUrl: "/djs/chart.jpg",
+      isBrowseReady: true,
+      setCount: 4,
+      top100Rank: 2,
+    },
+  ],
+  2,
+);
+assert.equal(djFaces[0]?.href, "/djs/chart");
+assert.equal(djFaces[1]?.href, "/djs/volume");
 
 assert.deepEqual(
   pickVisualFaces(

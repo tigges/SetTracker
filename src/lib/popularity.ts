@@ -81,7 +81,7 @@ function pickRecentSets(
       (s) =>
         isCompleteTracklist(s) &&
         !isRadioFiller(s) &&
-        withinDays(s.publishedAt, lookbackDays, nowMs) &&
+        isRecentPerformance(s, lookbackDays, nowMs) &&
         !excludeIds?.has(s.id),
     )
     .map(toRadarFields);
@@ -134,7 +134,7 @@ export function popularDjsThisWeek(
   limit = 9,
   nowMs = Date.now(),
 ): PopularDjRail[] {
-  const week = feed.filter((s) => withinDays(s.publishedAt, 7, nowMs));
+  const week = feed.filter((s) => isRecentPerformance(s, 7, nowMs));
   const bySlug = new Map<string, PopularDjRail>();
   const chartRank = new Map<string, number>();
 
@@ -285,14 +285,14 @@ export function popularVenuesThisWeek(
   nowMs = Date.now(),
 ): PopularVenueRail[] {
   const primarySets = feed.filter((s) =>
-    withinDays(s.publishedAt, POPULAR_VENUES_LOOKBACK_DAYS, nowMs),
+    isRecentPerformance(s, POPULAR_VENUES_LOOKBACK_DAYS, nowMs),
   );
   const primary = rankVenueRails(aggregateVenues(primarySets, nowMs), limit);
   if (primary.length >= Math.min(limit, RAIL_FILL_MIN)) return primary;
 
   const used = new Set(primary.map((v) => v.slug));
   const fillSets = feed.filter((s) =>
-    withinDays(s.publishedAt, POPULAR_VENUES_FILL_DAYS, nowMs),
+    isRecentPerformance(s, POPULAR_VENUES_FILL_DAYS, nowMs),
   );
   const fill = rankVenueRails(
     aggregateVenues(fillSets, nowMs),
