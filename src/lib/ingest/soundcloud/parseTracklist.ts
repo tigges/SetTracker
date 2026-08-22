@@ -101,10 +101,18 @@ function looksLikeTracklistLine(line: string): boolean {
   return false;
 }
 
+/** Hearthis / host "1:37:25 Duration:" — mix length, not a track. */
+export function isClockMetadataLabel(line: string): boolean {
+  return /^(duration|length|runtime|total\s*time|mix\s*length)\b[:\s]*$/i.test(
+    line.trim(),
+  );
+}
+
 /** Title-only cue after a timestamp (Cercle / some venue uploads). */
 function looksLikeTimestampedTitle(line: string): boolean {
   if (!line || line.length < 2 || line.length > 200) return false;
   if (SKIP_LINE.test(line)) return false;
+  if (isClockMetadataLabel(line)) return false;
   if (/^[#@]/.test(line)) return false;
   if (/^(track\s*list|set\s*list|tracklist|setlist)\b[:\s]*$/i.test(line)) {
     return false;

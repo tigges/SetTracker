@@ -20,7 +20,10 @@ import { detectPlaybackHost } from "../../playback";
 import { fmtTimestamp } from "../../status";
 import type { Provenance } from "../../status";
 import { allocateTrackSlug, trackSlugBase } from "../../tracks/slug";
-import { parseClockedTracklist } from "../soundcloud/parseTracklist";
+import {
+  isClockMetadataLabel,
+  parseClockedTracklist,
+} from "../soundcloud/parseTracklist";
 import { resolveTrack } from "../soundcloud/client";
 import {
   fetchTrackDetail,
@@ -78,7 +81,7 @@ export function filterProposedCues(
     if (sec == null || sec < 0 || sec > durationSec) continue;
     const artist = String(row.artist || "").trim();
     const title = String(row.title || "").trim();
-    if (!title) continue;
+    if (!title || isClockMetadataLabel(title)) continue;
     if (artist && !sourceText.toLowerCase().includes(artist.toLowerCase())) {
       continue;
     }
