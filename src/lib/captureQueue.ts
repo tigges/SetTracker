@@ -1,5 +1,5 @@
 /**
- * Live /capture-1001 queue from the catalog DB (Pages build time).
+ * Live /stats#capture-1001 queue from the catalog DB (Pages build time).
  */
 import { prisma } from "@/lib/db";
 import { loadDjMagTop100RankBySlug } from "@/lib/djmagTop100";
@@ -16,6 +16,7 @@ import {
 } from "@/lib/ingest/nextCaptures";
 import { curated1001UrlBySourceSlug } from "@/lib/ingest/youtube/videos";
 import { assessSetDensity } from "@/lib/setDensity";
+import nextCaptures from "../../data/crosscheck/next-captures.json";
 
 export type CaptureQueue = {
   generatedAt: string;
@@ -107,4 +108,22 @@ export async function getCaptureQueue(
     generatedAt: new Date().toISOString(),
     presets: buildCaptureQueueFromNeeds(rows, { limit, extra, nowMs }),
   };
+}
+
+/** Stats workbench: live catalog rank, else Relive extras / committed snapshot. */
+export async function loadOperatorCaptureQueue(
+  limit = 20,
+): Promise<CaptureQueue> {
+  const extras = ((nextCaptures.presets ?? []) as CapturePreset[]).filter(
+    (p) => p.reason === "relive:official-unwired",
+  );
+  let presets: CapturePreset[] = extras.slice(0, 12);
+  let generatedAt = String(nextCaptures.generatedAt ?? "");
+  try {
+    const queue = await getCaptureQueue(limit, extras);
+    if (queue.presets.length) return queue;
+  } catch {
+    /* no catalog DB — keep playback extras / committed snapshot */
+  }
+  return { generatedAt, presets };
 }

@@ -4,7 +4,7 @@
  * Phase 0–1: YT official playback playlists / SC venue accounts / deeper channel polls.
  * Phase 2: edition calendar (Events page).
  * Phase 3: post-weekend poll + Festival season rail boost.
- * Phase 4: gap reporting → capture-1001 scoring.
+ * Phase 4: gap reporting → /stats#capture-1001 scoring.
  */
 
 export type FestivalEditionSeed = {

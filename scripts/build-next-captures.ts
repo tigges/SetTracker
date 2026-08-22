@@ -1,5 +1,5 @@
 /**
- * Rebuild data/crosscheck/next-captures.json for /capture-1001.
+ * Rebuild data/crosscheck/next-captures.json for /stats#capture-1001.
  * Usage: npx tsx scripts/build-next-captures.ts
  */
 import { writeFileSync, mkdirSync } from "node:fs";

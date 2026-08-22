@@ -29,7 +29,7 @@ export const SET_SOURCE_REMAPS: SetSourceRemap[] = [
     toSlug: "yt-2BPWWYAgUE4",
     sourceUrl: "https://youtu.be/2BPWWYAgUE4",
     playbackUrl: "https://youtu.be/2BPWWYAgUE4",
-    note: "Same Resistance Cove night as official YT. SC permalink spells innella — fold so /stats and /capture-1001 list one set.",
+    note: "Same Resistance Cove night as official YT. SC permalink spells innella — fold so /stats lists one set.",
   },
 ]
 

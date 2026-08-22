@@ -11,6 +11,7 @@ import {
 } from "react";
 import { EntityThumb } from "@/components/EntityThumb";
 import { ATLAS_QUERY_EVENT } from "@/lib/atlas/searchItems";
+import { capture1001StatsHref } from "@/lib/captureHref";
 import { WORLD_LAND_PATH } from "@/lib/atlas/worldLandPath";
 import {
   atlasAccent,
@@ -600,7 +601,7 @@ export function AtlasMap({
                     <p className="mt-2 text-[12px] text-muted2">
                       Not in the catalog yet.{" "}
                       <Link
-                        href={`/capture-1001?q=${encodeURIComponent(selected.name)}`}
+                        href={capture1001StatsHref(selected.name)}
                         className="text-brand hover:text-brandstrong"
                       >
                         Queue a 1001 capture →

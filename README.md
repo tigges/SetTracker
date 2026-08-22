@@ -59,11 +59,12 @@ Provenance per row: `1001TL parse`, `SoundCloud parse`, `fingerprint`, `communit
    (`/events/calendar`) — a month grid of curated edition weekends.
 5. **Atlas** (`/atlas`) — DJ Mag Top 100 clubs, festivals, and DJs. Layer
    chips are multi-select; pin tap selects (nearby stack listed); Hide ranks
-   keeps the legend. Header search; empty pins link to `/capture-1001?q=…`.
+   keeps the legend. Header search; empty pins link to `/stats?q=…#capture-1001`.
 6. **Stats** (`/stats`) — operator catalog health (incomplete sets, needs IDs,
    DJ gaps, festival capture gaps). Queues show 10 rows, then **N more**.
-   Every Pages export rebuilds this page from the current catalog DB.
-   Footer link only; not in the main nav.
+   Capture 1001 lives here (`#capture-1001`) after Fill thin lists / ID cues;
+   `/capture-1001` redirects in. Every Pages export rebuilds this page from
+   the current catalog DB. Footer link only; not in the main nav.
 7. **Search / About** — catalog search and product notes.
 8. **Tracks / Labels** — still in the catalog and sitemap; not in the main nav.
 
