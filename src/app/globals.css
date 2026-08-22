@@ -243,6 +243,17 @@ a {
   color: inherit;
 }
 
+/* Ink fill + page bg type. `text-bg` loses to `a { color: inherit }` (white on white). */
+.chip-ink {
+  background: var(--ink);
+  color: var(--bg);
+}
+a.chip-ink,
+a.chip-ink:visited,
+a.chip-ink:hover {
+  color: var(--bg);
+}
+
 :focus-visible {
   outline: 2px solid color-mix(in srgb, var(--brand) 55%, transparent);
   outline-offset: 2px;

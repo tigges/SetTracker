@@ -112,7 +112,7 @@ function Capture1001Workbench({
       <div className="flex flex-wrap gap-1.5">
         <button
           type="button"
-          className="rounded-md bg-ink px-2.5 py-1 text-[12px] font-bold text-bg"
+          className="chip-ink rounded-md px-2.5 py-1 text-[12px] font-bold"
           onClick={() => onCopy("bookmarklet", generic)}
         >
           Copy bookmarklet
@@ -190,7 +190,7 @@ function Capture1001Workbench({
                   href={watchFromPreset(p)}
                   target="_blank"
                   rel="noreferrer"
-                  className="rounded-md bg-ink px-2.5 py-1 text-[12px] font-bold text-bg"
+                  className="chip-ink rounded-md px-2.5 py-1 text-[12px] font-bold"
                 >
                   {p.host === "soundcloud" || p.slug.startsWith("sc-")
                     ? "Open SC"
