@@ -152,6 +152,9 @@ const COLYN_INNELLEA_COVE = YOUTUBE_SETS.find((s) =>
 );
 const AB_EDC_LV = YOUTUBE_SETS.find((s) => s.video.includes("OI02QgEA1Zw"));
 const LE_TWINS_TULUM = YOUTUBE_SETS.find((s) => s.video.includes("i7XZBixP9m0"));
+const BIZARRAP_ULTRA = YOUTUBE_SETS.find((s) =>
+  s.video.includes("0psLTNmJM38"),
+);
 
 describe("watchMetaFromCuratedSeed", () => {
   it("builds ASOT 1290 meta from the curated 1001 capture", () => {
@@ -2047,5 +2050,20 @@ describe("curated YouTube 429 fallback", () => {
     assert.equal(sets[0]?.primaryArtist?.slug, "le-twins");
     assert.match(String(sets[0]?.title ?? ""), /2025-01-04/);
     assert.match(String(sets[0]?.eventName ?? ""), /Porque No/i);
+  });
+
+  it("lands Bizarrap Ultra Mainstage 2026 without inventing 1001 clocks when watch is 429", async () => {
+    assert.ok(BIZARRAP_ULTRA);
+    assert.match(String(BIZARRAP_ULTRA.tracklist1001Url), /2pc23jck/);
+    assert.equal(BIZARRAP_ULTRA.tracklist1001, undefined);
+    const adapter = createYoutubeAdapter([BIZARRAP_ULTRA], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-0psLTNmJM38");
+    assert.equal(sets[0]!.type, "festival");
+    assert.equal(sets[0]?.primaryArtist?.slug, "bizarrap");
+    assert.match(String(sets[0]?.title ?? ""), /Skrillex/i);
+    assert.match(String(sets[0]?.eventName ?? ""), /Ultra/i);
+    assert.notEqual(sets[0]!.sourceSlug, "yt-loD-whuR5zc");
   });
 });

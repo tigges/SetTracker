@@ -22,6 +22,9 @@ assert.ok(KNOWN_EVENT_IMAGES["concourse-project"]);
 assert.ok(EVENT_OFFICIAL_SITES["avalon-hollywood"]);
 assert.ok(EVENT_OFFICIAL_SITES["silo-dallas"]);
 assert.ok(
+  officialEventPages("creamfields-chile").includes("https://www.creamfields.cl/"),
+);
+assert.ok(
   officialEventPages("nameless-festival").includes(
     "https://www.namelessfestival.it/en/",
   ),

@@ -39,4 +39,20 @@ assert.deepEqual(previousSlugsFor("yt-2BPWWYAgUE4"), [
 const colynAliased = aliasSlugsFor(["yt-2BPWWYAgUE4"]);
 assert.ok(colynAliased.includes("sc-innellea-colyn-b2b-innella-at-ultra"));
 
+const voornSc = SET_SOURCE_REMAPS.find(
+  (r) => r.fromSlug === "sc-korolovadj-joris-voorn-b2b-korolova-live",
+);
+assert.ok(voornSc);
+assert.equal(voornSc!.toSlug, "yt-FQj71mhobYw");
+assert.match(voornSc!.sourceUrl, /FQj71mhobYw/);
+assert.equal(
+  resolveSetSlug("sc-korolovadj-joris-voorn-b2b-korolova-live"),
+  "yt-FQj71mhobYw",
+);
+assert.deepEqual(previousSlugsFor("yt-FQj71mhobYw"), [
+  "sc-korolovadj-joris-voorn-b2b-korolova-live",
+]);
+const voornAliased = aliasSlugsFor(["yt-FQj71mhobYw"]);
+assert.ok(voornAliased.includes("sc-korolovadj-joris-voorn-b2b-korolova-live"));
+
 console.log("sourceRemaps.test.ts ok");

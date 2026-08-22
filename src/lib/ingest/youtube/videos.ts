@@ -418,6 +418,11 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     title: "ARTBAT live set",
   },
   {
+    // Official Ultra Shows Mainstage. Operator 1001 URL 2pc23jck recorded —
+    // no cue paste. Do not scrape or invent 1001tl seeds. Paste timed cues
+    // to seed TL_BIZARRAP_SKRILLEX_ULTRA_MIAMI_MAINSTAGE_2026.
+    // Distinct from Skrillex Lollapalooza Chile yt-loD-whuR5zc.
+    // Never sc-https://…. No SC in the paste.
     video: "https://www.youtube.com/watch?v=0psLTNmJM38",
     primaryArtist: dj("Bizarrap", {
       accent: "#f4a261",
@@ -429,6 +434,8 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
       "BIZARRAP || LIVE @ ULTRA MIAMI MAIN STAGE 2026 (ft. Skrillex & Daddy Yankee)",
     seriesName: "Ultra Shows",
     eventName: "Ultra Music Festival",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2pc23jck/bizarrap-skrillex-mainstage-ultra-music-festival-miami-united-states-2026-03-27.html",
   },
   {
     video: "https://www.youtube.com/watch?v=g1vH9C_o-vo",
@@ -1880,9 +1887,10 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_VINTAGE_CULTURE_ULTRA_MIAMI_RESISTANCE_2026,
   },
   {
-    // Official Joris Voorn B2B Korolova Resistance The Cove. Same list as
-    // sc-korolovadj-joris-voorn-b2b-korolova-live. Mixcloud UMF Radio 883
-    // is a mirror only. Distinct from Vintage Culture Resistance Megastructure.
+    // Official Joris Voorn B2B Korolova Resistance The Cove. korolovadj SC
+    // folds onto this slug via SET_SOURCE_REMAPS — do not ingest a second
+    // leftover. Mixcloud UMF Radio 883 is a mirror only. Distinct from
+    // Vintage Culture Resistance Megastructure.
     video: "https://youtu.be/FQj71mhobYw",
     primaryArtist: dj("Joris Voorn", {
       accent: "#2ec4b6",

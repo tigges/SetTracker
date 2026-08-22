@@ -23,12 +23,15 @@ function dj(name: string, slug = name.toLowerCase()): DjListItem {
     isJunk: false,
     isLowSignal: false,
     isBrowseReady: true,
+    top100Rank: null,
   };
 }
 
 assert.equal(djCardSubtitle("Berlin, DE", 3), "Berlin, DE · 3 sets");
 assert.equal(djCardSubtitle(null, 1), "1 set");
 assert.equal(djCardSubtitle("Unknown.", 12), "12 sets");
+assert.equal(djCardSubtitle("Berlin, DE", 12, 1), "#1 · Berlin, DE · 12 sets");
+assert.equal(djCardSubtitle(null, 3, 47), "#47 · 3 sets");
 
 assert.equal(djIndexLetter("Chris Lake"), "C");
 assert.equal(djIndexLetter("above & beyond"), "A");

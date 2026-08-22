@@ -138,6 +138,8 @@ export const EVENT_OFFICIAL_SITES: Record<string, string> = {
   cercle: "https://www.cercle.io/",
   mixmag: "https://mixmag.net/",
   "nameless-festival": "https://www.namelessfestival.it/en/",
+  creamfields: "https://www.creamfields.com/",
+  "creamfields-chile": "https://www.creamfields.cl/",
 };
 
 export type EventImageStats = {

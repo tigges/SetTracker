@@ -4,7 +4,7 @@
  * Phase 0–1: YT official playback playlists / SC venue accounts / deeper channel polls.
  * Phase 2: edition calendar (Events page).
  * Phase 3: post-weekend poll + Festival season rail boost.
- * Phase 4: gap reporting → capture-1001 scoring.
+ * Phase 4: gap reporting → /stats#capture-1001 scoring.
  */
 
 export type FestivalEditionSeed = {
@@ -263,6 +263,14 @@ export const FESTIVAL_EDITION_SEEDS: FestivalEditionSeed[] = [
     endsAt: "2025-08-24",
   },
   {
+    eventSlug: "creamfields-chile",
+    slug: "creamfields-chile-2026",
+    year: 2026,
+    label: "Santiago",
+    startsAt: "2026-11-14",
+    endsAt: "2026-11-15",
+  },
+  {
     eventSlug: "defqon1",
     slug: "defqon1-2026",
     year: 2026,
@@ -457,6 +465,7 @@ export function editionHintsFromTitle(title: string): {
   else if (/\bchicago\b|\bgrant\s*park\b/i.test(title)) labelHint = "Chicago";
   else if (/\bcluj\b|\btransylvania\b/i.test(title)) labelHint = "Cluj-Napoca";
   else if (/\bdaresbury\b|\bwarrington\b/i.test(title)) labelHint = "Daresbury";
+  else if (/\bsantiago\b|\bclub\s+h[ií]pico\b/i.test(title)) labelHint = "Santiago";
   else if (/\bbiddinghuizen\b/i.test(title)) labelHint = "Biddinghuizen";
   else if (/\bmannheim\b/i.test(title)) labelHint = "Mannheim";
   else if (/\bsalzburg\b|\bplainfeld\b/i.test(title)) labelHint = "Salzburg";
@@ -556,6 +565,7 @@ const EVENT_BRAND_LABEL: Record<string, string> = {
   lollapalooza: "Lollapalooza",
   untold: "Untold",
   creamfields: "Creamfields",
+  "creamfields-chile": "Creamfields Chile",
   defqon1: "Defqon.1",
   mysteryland: "Mysteryland",
   "electric-love": "Electric Love",

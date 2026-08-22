@@ -333,6 +333,14 @@ export const KNOWN_EVENTS: Record<string, CanonicalEvent> = {
     website: "https://www.creamfields.com/",
     instagram: "https://www.instagram.com/creamfields/",
   },
+  "creamfields-chile": {
+    slug: "creamfields-chile",
+    name: "Creamfields Chile",
+    kind: "festival",
+    location: "Club Hípico, Santiago, Chile",
+    website: "https://www.creamfields.cl/",
+    instagram: "https://www.instagram.com/creamfields_cl/",
+  },
   defqon1: {
     slug: "defqon1",
     name: "Defqon.1",
@@ -597,6 +605,8 @@ const ALIAS_TO_SLUG: Record<string, string> = {
   untold: "untold",
   "untold-festival": "untold",
   creamfields: "creamfields",
+  "creamfields-chile": "creamfields-chile",
+  "creamfields-chile-2026": "creamfields-chile",
   defqon1: "defqon1",
   "defqon-1": "defqon1",
   "electric-love": "electric-love",
@@ -737,6 +747,13 @@ export function inferFestivalEvent(title: string): CanonicalEvent | null {
   if (/\bstereo\s*hype\b/i.test(t)) return KNOWN_EVENTS.stereohype;
   if (/\bdjoon\b|\bdjøøn\b/i.test(t)) return KNOWN_EVENTS.djoon;
   if (/\buntold\b/i.test(t) && !/\bdubai\b/i.test(t)) return KNOWN_EVENTS.untold;
+  // Chile before generic Creamfields — UK Daresbury must not win Santiago titles.
+  if (
+    /\bcreamfields\s+chile\b/i.test(t) ||
+    (/\bcreamfields\b/i.test(t) && /\b(santiago|club\s+h[ií]pico)\b/i.test(t))
+  ) {
+    return KNOWN_EVENTS["creamfields-chile"];
+  }
   if (/\bcreamfields\b/i.test(t)) return KNOWN_EVENTS.creamfields;
   if (/\bdefqon\.?\s*1\b/i.test(t)) return KNOWN_EVENTS.defqon1;
   if (/\belectric\s*love\b/i.test(t)) return KNOWN_EVENTS["electric-love"];

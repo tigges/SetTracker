@@ -76,6 +76,19 @@ assert.equal(
   "creamfields",
 );
 assert.equal(resolveEvent("Creamfields").website, "https://www.creamfields.com/");
+assert.equal(
+  inferFestivalEvent("Calvin Harris Creamfields Chile 2026")?.slug,
+  "creamfields-chile",
+);
+assert.equal(
+  inferFestivalEvent("Fisher @ Club Hípico, Creamfields 2026")?.slug,
+  "creamfields-chile",
+);
+assert.equal(
+  resolveEvent("Creamfields Chile").website,
+  "https://www.creamfields.cl/",
+);
+assert.equal(resolveEvent("Creamfields Chile").kind, "festival");
 assert.equal(resolveEvent("Untold Festival").slug, "untold");
 assert.equal(inferFestivalEvent("B2B at Awakenings Festival")?.slug, "awakenings");
 assert.equal(

@@ -2702,6 +2702,16 @@ assert.equal(
   true,
 );
 
+// Bizarrap & Skrillex Ultra Mainstage — official YT playback in, 1001 URL
+// recorded, no cue paste. Do not invent 1001tl rows or sc-https://… slugs.
+assert.equal(isWiredTracklistSlug("yt-0psLTNmJM38"), false);
+assert.equal(TRACKLIST_1001_BY_SOURCE_SLUG["yt-0psLTNmJM38"], undefined);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-https://youtu.be/0psLTNmJM38"],
+  undefined,
+);
+assert.equal(isWiredTracklistSlug("yt-loD-whuR5zc"), true);
+
 assertSeedClocks(TL_ABOVE_AND_BEYOND_KINETICFIELD_EDC_LV_2026);
 assert.equal(TL_ABOVE_AND_BEYOND_KINETICFIELD_EDC_LV_2026.length, 18);
 assert.equal(

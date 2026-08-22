@@ -58,6 +58,7 @@ const ALIAS_TO_KNOWN: Record<string, string> = {
   "untold-festival": "untold",
   untold: "untold",
   creamfields: "creamfields",
+  "creamfields-chile": "creamfields-chile",
   defqon1: "defqon1",
   "electric-love": "electric-love",
   parklife: "parklife",
@@ -101,6 +102,7 @@ const EXTRA_OFFICIAL: Record<string, string> = {
   "gmo-sonic": "https://sonic.gmo/en/",
   "magic-of-tomorrowland": "https://magicoftomorrowland.com/",
   "nameless-festival": "https://www.namelessfestival.it/en/",
+  "creamfields-chile": "https://www.creamfields.cl/",
 };
 
 let cached: DjMagFestival[] | null = null;

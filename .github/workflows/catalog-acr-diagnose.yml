@@ -1,8 +1,9 @@
 name: ACRCloud diagnose
 
-# End-to-end ACR Identify check (independent of the sparse-set queue):
-#   A) known-track control via yt-dlp → ffmpeg → Identify (proves the pipeline)
-#   B) real playback probes at known commercial-track offsets (live-set hit-rate)
+# End-to-end ACR check (independent of the sparse-set queue):
+#   A) known-track control via yt-dlp Identify (informational on GHA — bot-wall)
+#   B) Relive probes (skipped on CI when File Scan is configured)
+#   C) File Scan of the same control video — this is the CI pass/fail
 # Trigger: manual, or bump data/acr-diagnose-request on main.
 on:
   workflow_dispatch:

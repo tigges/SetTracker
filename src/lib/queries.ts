@@ -3,6 +3,7 @@ import { playablePlaybackUrl } from "@/lib/playback";
 import { isBrandHostSlug } from "@/lib/brandHosts";
 import { isProducerHiddenSlug } from "@/lib/ingest/producerDjReview.data";
 import { isCatalogWorkDj, isTop100DjSlug } from "@/lib/djCatalog";
+import { loadDjMagTop100RankBySlug } from "@/lib/djmagTop100";
 import { isBrowseReadyDj } from "@/lib/djBrowse";
 import { prisma } from "@/lib/db";
 import {
@@ -28,14 +29,12 @@ import {
   trackIdentityKey,
 } from "@/lib/trackMeta";
 import { relatedSlugsFor } from "@/lib/ingest/discovery/relations";
-import { aliasSlugsFor, resolveSetSlug } from "@/lib/ingest/sourceRemaps";
+import { resolveSetSlug } from "@/lib/ingest/sourceRemaps";
 import { collapseConsecutivePlays, playCollapseKey } from "@/lib/playCollapse";
 import { canonicalDjSlug, DJ_SLUG_ALIASES } from "@/lib/ingest/djSlugAliases";
-import {
-  sortEventSets,
-  nearDuplicateKey,
-  resolvedIdCount,
-} from "@/lib/feedPriority";
+import { sortEventSets, resolvedIdCount } from "@/lib/feedPriority";
+import { collapseHostTwins } from "@/lib/feedQuality";
+import { staticSetPageSlugs } from "@/lib/setPages";
 import { resolveFeedRanks } from "@/lib/feedPriorityResolve";
 import {
   loadAtlasDjs,
@@ -55,7 +54,7 @@ import {
   editionGapReport,
 } from "@/lib/ingest/festivalDrops";
 import { pickRelatedSets } from "@/lib/relatedSets";
-import { isBrowseReadySet, isEmptyOrPreviewSet } from "@/lib/setBrowse";
+import { isBrowseReadySet } from "@/lib/setBrowse";
 import { isBrowseReadyVenue, isVenueListed } from "@/lib/venueBrowse";
 import type { IdStatus } from "@/lib/status";
 
@@ -1074,6 +1073,8 @@ export type DjListItem = {
   isLowSignal: boolean;
   /** Default directory visibility (store everything; hide thin profiles). */
   isBrowseReady: boolean;
+  /** DJ Mag Top 100 rank when listed; omit from the A–Z directory card otherwise. */
+  top100Rank: number | null;
 };
 
 type DjPlayAggRow = {
@@ -1110,6 +1111,7 @@ async function djPlayAggregates(): Promise<
 }
 
 export async function getDjList(): Promise<DjListItem[]> {
+  const ranks = loadDjMagTop100RankBySlug();
   const [rows, playAgg, setLinks] = await Promise.all([
     prisma.dj.findMany({
       orderBy: { name: "asc" },
@@ -1212,6 +1214,7 @@ export async function getDjList(): Promise<DjListItem[]> {
       isJunk,
       isLowSignal,
       isBrowseReady: false,
+      top100Rank: ranks.get(d.slug) ?? null,
     };
     item.isBrowseReady = isBrowseReadyDj(item) && !isLowSignal;
     return item;
@@ -1219,38 +1222,8 @@ export async function getDjList(): Promise<DjListItem[]> {
 }
 
 export async function getAllSetSlugs(): Promise<string[]> {
-  const rows = await prisma.set.findMany({
-    select: {
-      slug: true,
-      title: true,
-      publishedAt: true,
-      durationSec: true,
-      _count: { select: { plays: true } },
-      artists: {
-        where: { isPrimary: true },
-        take: 1,
-        select: { dj: { select: { slug: true } } },
-      },
-    },
-  });
-  const ready = rows.filter(
-    (r) =>
-      !isEmptyOrPreviewSet({
-        title: r.title,
-        trackCount: r._count.plays,
-        durationSec: r.durationSec,
-      }),
-  );
-  ready.sort((a, b) => b.publishedAt.getTime() - a.publishedAt.getTime());
-  const seen = new Set<string>();
-  const slugs: string[] = [];
-  for (const r of ready) {
-    const key = nearDuplicateKey(r.title, r.artists[0]?.dj.slug);
-    if (seen.has(key)) continue;
-    seen.add(key);
-    slugs.push(r.slug);
-  }
-  return aliasSlugsFor(slugs);
+  const rows = await prisma.set.findMany({ select: { slug: true } });
+  return staticSetPageSlugs(rows.map((r) => r.slug));
 }
 
 export async function getGenres() {
@@ -1723,6 +1696,13 @@ export async function getVenueBySlug(slug: string, nowMs = Date.now()) {
       } satisfies FeedItem;
     });
 
+  const listed = collapseHostTwins(
+    sets.map((s) => ({
+      ...s,
+      primaryDjSlug: s.primaryDj?.slug ?? null,
+    })),
+  );
+
   return {
     slug: event.slug,
     name: event.name,
@@ -1735,8 +1715,8 @@ export async function getVenueBySlug(slug: string, nowMs = Date.now()) {
       twitter: event.twitter,
     },
     lineupArtists,
-    setCount: event.sets.length,
-    sets: sortEventSets(sets, nowMs),
+    setCount: listed.length,
+    sets: sortEventSets(listed, nowMs),
     nights,
   };
 }

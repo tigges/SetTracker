@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import { Suspense } from "react";
 import Link from "next/link";
+import { Capture1001Client } from "@/components/Capture1001Client";
 import { SetEntryLink } from "@/components/SetEntryLink";
 import {
   LeftoverHostQueue,
@@ -9,6 +11,8 @@ import {
 import { StatsEnrichCard } from "@/components/StatsEnrichCard";
 import { StatsHealthCard, StatsMeter } from "@/components/StatsHealthCard";
 import { loadActionsStatusFile } from "@/lib/actionsStatus";
+import { capture1001StatsHref } from "@/lib/captureHref";
+import { loadOperatorCaptureQueue } from "@/lib/captureQueue";
 import { getCatalogStats } from "@/lib/catalogStats";
 import { prisma } from "@/lib/db";
 import { loadDjMagTop100RankBySlug } from "@/lib/djmagTop100";
@@ -47,15 +51,20 @@ function QueueFold({
   title,
   count,
   hint,
+  open,
   children,
 }: {
   title: string;
   count: number;
   hint: string;
+  open?: boolean;
   children: ReactNode;
 }) {
   return (
-    <details className="mb-2 rounded-lg border border-line bg-panel px-2.5 py-1.5">
+    <details
+      open={open}
+      className="mb-2 rounded-lg border border-line bg-panel px-2.5 py-1.5"
+    >
       <summary className="cursor-pointer list-none [&::-webkit-details-marker]:hidden">
         <div className="flex items-baseline justify-between gap-3">
           <h2 className="text-[14px] font-bold tracking-tight">{title}</h2>
@@ -133,7 +142,7 @@ function PlaceGapQueue({
             {row.name}
           </Link>
           <Link
-            href={`/capture-1001?q=${encodeURIComponent(row.name)}`}
+            href={capture1001StatsHref(row.name)}
             className="mono shrink-0 text-[11px] text-brand hover:underline"
           >
             capture
@@ -151,10 +160,11 @@ function PlaceGapQueue({
 }
 
 export default async function StatsPage() {
-  const [s, health, enrichReport] = await Promise.all([
+  const [s, health, enrichReport, captureQueue] = await Promise.all([
     getCatalogStats(),
     getStatsHealth(),
     loadEnrichRunReport(prisma),
+    loadOperatorCaptureQueue(20),
   ]);
   const actionsStatus = loadActionsStatusFile();
   const top100 = loadDjMagTop100RankBySlug();
@@ -219,7 +229,18 @@ export default async function StatsPage() {
         hint="A set is the list of tracks · playback is the official recording"
         slices={health.sets.slices}
         onChart={health.sets.onChart}
-        actions={health.sets.actions}
+        actions={[
+          ...health.sets.actions,
+          ...(captureQueue.presets.length
+            ? [
+                {
+                  href: "#capture-1001",
+                  label: "Capture 1001",
+                  count: captureQueue.presets.length,
+                },
+              ]
+            : []),
+        ]}
       >
         <StatsMeter
           label="Identified"
@@ -388,6 +409,21 @@ export default async function StatsPage() {
               </li>
             ))}
           </ul>
+        </QueueFold>
+      </div>
+      <div id="capture-1001" className="scroll-mt-20">
+        <QueueFold
+          title="Capture 1001"
+          count={captureQueue.presets.length}
+          hint="Overlay clocks onto existing YT/SC sets. Bookmarklet + ranked queue. Do not invent 1001 URLs."
+          open
+        >
+          <Suspense fallback={null}>
+            <Capture1001Client
+              presets={captureQueue.presets}
+              generatedAt={captureQueue.generatedAt}
+            />
+          </Suspense>
         </QueueFold>
       </div>
     </div>

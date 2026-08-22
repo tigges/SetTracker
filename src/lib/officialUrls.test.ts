@@ -28,6 +28,10 @@ describe("isWeakOfficialUrl", () => {
       isWeakOfficialUrl("https://www.eventpop.me/e/159292/wpbkk2027amaxon"),
       true,
     );
+    assert.equal(
+      isWeakOfficialUrl("https://www.puntoticket.com/creamfields-2026"),
+      true,
+    );
   });
 
   it("keeps first-party club and DJ sites", () => {
@@ -40,6 +44,7 @@ describe("isWeakOfficialUrl", () => {
     assert.equal(isWeakOfficialUrl("https://plastik-funk.de/"), false);
     assert.equal(isWeakOfficialUrl("https://www.aboveandbeyond.nu/"), false);
     assert.equal(isWeakOfficialUrl("https://haloofc.com/"), false);
+    assert.equal(isWeakOfficialUrl("https://www.creamfields.cl/"), false);
     assert.equal(isWeakOfficialUrl(null), false);
     assert.equal(isWeakOfficialUrl(""), false);
   });

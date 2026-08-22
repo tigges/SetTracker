@@ -423,7 +423,7 @@ export const TL_OLIVER_HELDENS_TML_WE1_2026: FingerprintSeedRow[] = [
  * Official YT: https://youtu.be/xVWs0ti0J90
  * Capture overlay used TL_Alan-Walker_Main-Stage_Tomorrowland_WE1_Belgium_2018
  * (hyphens illegal); constant is TL_ALAN_WALKER_TML_WE1_2018.
- * Archive-titled Tomorrowland Relive — stays off /capture-1001 extras via isArchiveTitledSet.
+ * Archive-titled Tomorrowland Relive — stays off /stats#capture-1001 extras via isArchiveTitledSet.
  * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-xVWs0ti0J90"]
  * Captured 2026-08-17 - provenance 1001tl.
  */
@@ -485,7 +485,7 @@ export const TL_ALAN_WALKER_TML_WE1_2018: FingerprintSeedRow[] = [
  * Capture overlay used TL_GORDO_Freedom-Stage_Tomorrowland_WE2_Belgium_2023
  * (hyphens illegal); constant is TL_GORDO_TML_WE2_2023.
  * Wire slug is yt-lopIWBJ0T5I (strip ?si= share param).
- * Archive-titled Tomorrowland Relive — stays off /capture-1001 extras via isArchiveTitledSet.
+ * Archive-titled Tomorrowland Relive — stays off /stats#capture-1001 extras via isArchiveTitledSet.
  * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-lopIWBJ0T5I"]
  * Captured 2026-08-17 - provenance 1001tl.
  */
@@ -528,7 +528,7 @@ export const TL_GORDO_TML_WE2_2023: FingerprintSeedRow[] = [
  * Capture overlay used TL_Lucas&Steve_Library-Stage_Tomorrowland_WE2_Belgium_2024
  * (`&` / hyphens illegal); constant is TL_LUCAS_STEVE_TML_WE2_2024.
  * Distinct from TL_LUCAS_STEVE_TML_WE2_2026 (yt-LE-byccuovI).
- * Archive-titled Tomorrowland Relive — stays off /capture-1001 extras via isArchiveTitledSet.
+ * Archive-titled Tomorrowland Relive — stays off /stats#capture-1001 extras via isArchiveTitledSet.
  * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-GbG_OFmdPKk"]
  * Captured 2026-08-17 - provenance 1001tl.
  */

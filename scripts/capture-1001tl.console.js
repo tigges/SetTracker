@@ -6,7 +6,7 @@
  *   3. DevTools → Console → type: allow pasting → Enter → Paste → Enter.
  *   4. Overlay appears — Copy seed (or Select all).
  *
- * Mobile bookmarklet: https://tigges.github.io/SetTracker/capture-1001/
+ * Mobile bookmarklet: https://setradar.ai/stats#capture-1001
  * (hosts public/capture-1001tl.js — keep this file in sync).
  *
  * Optional before paste:

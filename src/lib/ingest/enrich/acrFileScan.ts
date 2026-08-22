@@ -323,10 +323,11 @@ async function findFileById(
 export async function scanYoutube(
   cfg: FileScanConfig,
   url: string,
-  opts: { pollMs?: number; timeoutMs?: number } = {},
+  opts: { pollMs?: number; timeoutMs?: number; minScore?: number } = {},
 ): Promise<ScanHit[] | null> {
   const pollMs = opts.pollMs ?? numEnv("ACRCLOUD_FS_POLL_MS", 15_000);
   const timeoutMs = opts.timeoutMs ?? numEnv("ACRCLOUD_FS_TIMEOUT_MS", 600_000);
+  const minScore = opts.minScore ?? cfg.minScore;
   const fileId = await submitPlatformScan(cfg, url);
   if (!fileId) return null;
   console.log(`[acr-fs] submitted file ${fileId} for ${url}`);
@@ -350,7 +351,7 @@ export async function scanYoutube(
       console.log(
         `[acr-fs] ready: results keys=[${keys.join(",")}] music=${musicLen}`,
       );
-      const hits = parseScanHits(file, cfg.minScore);
+      const hits = parseScanHits(file, minScore);
       if (musicLen === 0) {
         // Help diagnose empty results (e.g. container missing the Music DB).
         try {
@@ -362,7 +363,7 @@ export async function scanYoutube(
         try {
           const first = file.results?.music?.[0];
           console.log(
-            `[acr-fs] dropped ${musicLen} music row(s) (minScore ${cfg.minScore}): ${JSON.stringify(first).slice(0, 600)}`,
+            `[acr-fs] dropped ${musicLen} music row(s) (minScore ${minScore}): ${JSON.stringify(first).slice(0, 600)}`,
           );
         } catch {}
       }
