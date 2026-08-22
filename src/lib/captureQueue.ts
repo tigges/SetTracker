@@ -117,8 +117,8 @@ export async function loadOperatorCaptureQueue(
   const extras = ((nextCaptures.presets ?? []) as CapturePreset[]).filter(
     (p) => p.reason === "relive:official-unwired",
   );
-  let presets: CapturePreset[] = extras.slice(0, 12);
-  let generatedAt = String(nextCaptures.generatedAt ?? "");
+  const presets: CapturePreset[] = extras.slice(0, 12);
+  const generatedAt = String(nextCaptures.generatedAt ?? "");
   try {
     const queue = await getCaptureQueue(limit, extras);
     if (queue.presets.length) return queue;

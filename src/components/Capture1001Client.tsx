@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
 const LIVE_SCRIPT = "https://setradar.ai/capture-1001tl.js";
@@ -54,12 +54,22 @@ async function copyText(text: string): Promise<boolean> {
   }
 }
 
-export function Capture1001Client({
+export function Capture1001Client(props: {
+  presets: CapturePreset[];
+  generatedAt?: string;
+}) {
+  const urlQ = useSearchParams().get("q") ?? "";
+  return <Capture1001Workbench key={urlQ} initialQuery={urlQ} {...props} />;
+}
+
+function Capture1001Workbench({
   presets,
   generatedAt,
+  initialQuery,
 }: {
   presets: CapturePreset[];
   generatedAt?: string;
+  initialQuery: string;
 }) {
   const scriptUrl = useMemo(() => {
     if (typeof window === "undefined") return LIVE_SCRIPT;
@@ -67,14 +77,8 @@ export function Capture1001Client({
     return `${window.location.origin}${base}/capture-1001tl.js`;
   }, []);
 
-  const params = useSearchParams();
-  const urlQ = params.get("q") ?? "";
-  const [query, setQuery] = useState(urlQ);
+  const [query, setQuery] = useState(initialQuery);
   const [status, setStatus] = useState<string>("");
-
-  useEffect(() => {
-    setQuery(urlQ);
-  }, [urlQ]);
 
   const generic = bookmarkletFor(scriptUrl);
   const filtered = useMemo(() => {
