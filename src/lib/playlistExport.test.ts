@@ -6,6 +6,8 @@ import {
   buildTracklistPlain,
   exportTimestamp,
   exportablePlays,
+  bandcampSearchUrl,
+  discogsSearchUrl,
   spotifySearchUrl,
   trackDisplayLine,
 } from "./playlistExport";
@@ -68,6 +70,9 @@ assert.ok(csv.includes("00:00"));
 assert.ok(csv.includes("GBXXXX0000001"));
 assert.ok(csv.includes("Extended Mix"));
 assert.ok(csv.includes(spotifySearchUrl("Pressure", "AC Slater")));
+assert.ok(csv.includes(discogsSearchUrl("Pressure", "AC Slater")));
+assert.ok(csv.includes(bandcampSearchUrl("Pressure", "AC Slater")));
+assert.ok(csv.includes("discogs_search_url"));
 assert.ok(!csv.includes("beatport.com/search"));
 
 const m3u = buildTracklistM3u(plays, {

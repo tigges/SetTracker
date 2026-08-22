@@ -6,8 +6,10 @@ import { SetEntryLink } from "@/components/SetEntryLink";
 import { getAllTrackSlugs, getTrackBySlug } from "@/lib/queries";
 import { pageMeta } from "@/lib/site";
 import {
+  bandcampSearchUrl,
   beatportTrackHref,
   canonicalBeatportUrl,
+  discogsSearchUrl,
   spotifySearchUrl,
 } from "@/lib/trackMeta";
 import {
@@ -79,6 +81,8 @@ export default async function TrackPage({
     track.beatportUrl,
   );
   const spHref = spotifySearchUrl(track.title, track.artistName);
+  const dcHref = discogsSearchUrl(track.title, track.artistName);
+  const bcHref = bandcampSearchUrl(track.title, track.artistName);
 
   return (
     <div>
@@ -155,6 +159,22 @@ export default async function TrackPage({
                 className="rounded-md border border-line px-2.5 py-1 text-[12px] text-muted2 transition-colors hover:border-brand hover:text-brand"
               >
                 {bpCanonical ? "Buy on Beatport" : "Search Beatport"}
+              </a>
+              <a
+                href={dcHref}
+                target="_blank"
+                rel="noreferrer"
+                className="rounded-md border border-line px-2.5 py-1 text-[12px] text-muted2 transition-colors hover:border-brand hover:text-brand"
+              >
+                Search Discogs
+              </a>
+              <a
+                href={bcHref}
+                target="_blank"
+                rel="noreferrer"
+                className="rounded-md border border-line px-2.5 py-1 text-[12px] text-muted2 transition-colors hover:border-brand hover:text-brand"
+              >
+                Search Bandcamp
               </a>
             </div>
           </div>

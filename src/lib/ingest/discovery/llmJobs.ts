@@ -6,8 +6,10 @@
  *   2. Deterministic verify (shape, name match, live URL, not owned).
  *   3. Fill-null write, or report-only when a write would invent catalog facts.
  *
- * Never: invent 1001Tracklists URLs, invent tracklist cues, overwrite
- * sourceUrl / sourceName, or promote hearthis crumbs to roster.
+ * Never: invent 1001Tracklists URLs, invent or interpolate tracklist
+ * clocks, overwrite sourceUrl / sourceName, or promote hearthis crumbs
+ * to roster. The `cues` job re-parses first-party text, then may propose
+ * clocks that already appear in that text.
  */
 
 import type { PrismaClient } from "@prisma/client";
@@ -36,6 +38,7 @@ export const RESEARCH_JOBS = [
   "homecity",
   "videos",
   "tracks",
+  "cues",
   "quality",
 ] as const;
 
@@ -57,6 +60,7 @@ export const LLM_WRITE_JOBS = new Set<ResearchJobId>([
   "events",
   "homecity",
   "tracks",
+  "cues",
 ]);
 
 export function parseResearchJobs(

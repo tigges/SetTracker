@@ -4,7 +4,10 @@ import {
   beatportCoverage,
   beatportSearchUrl,
   beatportTrackHref,
+  bandcampSearchUrl,
   canonicalBeatportUrl,
+  canonicalSpotifyUrl,
+  discogsSearchUrl,
   isLikelyUnbuyable,
   normalizeIsrc,
   parseTrackTitle,
@@ -30,6 +33,24 @@ assert.equal(plain.remixerName, null);
 const bp = beatportSearchUrl("Pressure", "AC Slater");
 assert.ok(bp.includes("beatport.com/search/tracks?q="));
 assert.ok(bp.includes("AC"));
+
+const dc = discogsSearchUrl("Pressure", "AC Slater");
+assert.ok(dc.includes("discogs.com/search/"));
+assert.ok(dc.includes("type=release"));
+assert.ok(dc.includes("AC"));
+
+const bc = bandcampSearchUrl("Pressure", "AC Slater");
+assert.ok(bc.startsWith("https://bandcamp.com/search?q="));
+assert.ok(bc.includes("Pressure"));
+
+assert.equal(
+  canonicalSpotifyUrl("https://open.spotify.com/track/3n3Ppam7vgaVa1iaRUc9Lp"),
+  "https://open.spotify.com/track/3n3Ppam7vgaVa1iaRUc9Lp",
+);
+assert.equal(
+  canonicalSpotifyUrl("https://open.spotify.com/search/Pressure"),
+  null,
+);
 
 assert.equal(normalizeIsrc("gb-xxx-00-00001"), "GBXXX0000001");
 assert.equal(normalizeIsrc("GBXXX0000001"), "GBXXX0000001");

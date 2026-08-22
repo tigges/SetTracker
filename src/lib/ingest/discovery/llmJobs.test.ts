@@ -7,6 +7,12 @@ import {
   parseResearchJobs,
   RESEARCH_JOBS,
 } from "./llmJobs";
+import {
+  evaluateCueProposal,
+  parseCueClock,
+  parseCueProposalJson,
+  setAllowsCueWrite,
+} from "./llmCues";
 
 assert.deepEqual(parseResearchJobs(undefined), [
   "handles",
@@ -14,11 +20,12 @@ assert.deepEqual(parseResearchJobs(undefined), [
   "quality",
 ]);
 assert.deepEqual(parseResearchJobs("all"), [...RESEARCH_JOBS]);
-assert.deepEqual(parseResearchJobs("identity,homecity,videos,tracks"), [
+assert.deepEqual(parseResearchJobs("identity,homecity,videos,tracks,cues"), [
   "identity",
   "homecity",
   "videos",
   "tracks",
+  "cues",
 ]);
 assert.deepEqual(parseResearchJobs("handles,nope,events"), [
   "handles",
@@ -85,6 +92,70 @@ assert.equal(
 );
 assert.equal(
   evaluateConfirmedTrackIds({ isrc: "USUM71502634" }, null).ok,
+  false,
+);
+
+const src = `00:00 AC Slater - Pressure
+12:30 Biscits - Rave
+1:02:03 Walker & Royce - Utopia`;
+assert.deepEqual(
+  parseCueProposalJson({
+    cues: [{ at: "12:30", artist: "Biscits", title: "Rave" }],
+  }),
+  [{ at: "12:30", artist: "Biscits", title: "Rave" }],
+);
+assert.equal(parseCueClock("1:02:03"), 3723);
+assert.equal(parseCueClock("62:03"), 3723);
+assert.equal(
+  evaluateCueProposal(src, {
+    at: "12:30",
+    artist: "Biscits",
+    title: "Rave",
+  }).ok,
+  true,
+);
+assert.equal(
+  evaluateCueProposal(src, {
+    at: "45:00",
+    artist: "Biscits",
+    title: "Rave",
+  }).reason,
+  "clock not in source",
+);
+assert.equal(
+  evaluateCueProposal(src, {
+    at: "12:30",
+    artist: "Made Up",
+    title: "Rave",
+  }).reason,
+  "artist not in source",
+);
+assert.equal(
+  evaluateCueProposal(src, {
+    artist: "Biscits",
+    title: "Rave",
+  }).reason,
+  "untimed — report only, never interpolate",
+);
+assert.equal(
+  setAllowsCueWrite({
+    sourceName: "YouTube",
+    plays: [],
+  }).ok,
+  true,
+);
+assert.equal(
+  setAllowsCueWrite({
+    sourceName: "1001Tracklists",
+    plays: [],
+  }).ok,
+  false,
+);
+assert.equal(
+  setAllowsCueWrite({
+    sourceName: "YouTube",
+    plays: [{ provenance: "1001tl", idStatus: "identified" }],
+  }).ok,
   false,
 );
 

@@ -1,8 +1,10 @@
 /**
- * Claude / Gemini research jobs (handles, events, identity, home city, videos, tracks).
- * No-op without a Claude or Gemini key.
+ * Claude / Gemini research jobs (handles, events, identity, home city,
+ * videos, tracks, cues). Handle / ID jobs no-op without a Claude or
+ * Gemini key. Job `cues` still re-parses first-party text without a key.
  *
  *   npm run research:handles
+ *   LLM_RESEARCH_JOBS=cues npm run research:handles
  *   LLM_RESEARCH_JOBS=identity,homecity,videos npm run research:handles
  *   LLM_RESEARCH_JOBS=all npm run research:handles
  *   LLM_RESEARCH_APPLY=0 npm run research:handles   # report only
@@ -20,6 +22,7 @@ import {
   runLlmOfficialVideoResearch,
   runLlmTrackIdResearch,
 } from "../src/lib/ingest/discovery/llmJobs";
+import { runLlmCueResearch } from "../src/lib/ingest/discovery/llmCues";
 import {
   claudeApiKey,
   detectLlmProvider,
@@ -113,6 +116,12 @@ async function main() {
       });
     }
     done.tracks = tracks;
+  }
+  if (jobs.includes("cues")) {
+    done.cues = await runLlmCueResearch(prisma, {
+      provider: providers[0],
+      reportTag: tag,
+    });
   }
   if (jobs.includes("videos")) {
     const videos = [];

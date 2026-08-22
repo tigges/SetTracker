@@ -1,6 +1,13 @@
 // Status color semantics + provenance labels, used everywhere in the UI.
 
-import { beatportSearchUrl, canonicalBeatportUrl } from "./trackMeta";
+import {
+  bandcampSearchUrl,
+  beatportSearchUrl,
+  canonicalBeatportUrl,
+  canonicalSpotifyUrl,
+  discogsSearchUrl,
+  spotifySearchUrl,
+} from "./trackMeta";
 
 export type IdStatus =
   | "identified"
@@ -135,17 +142,25 @@ export function fmtTimestamp(sec: number): string {
 export function listenLinks(
   title: string,
   artist?: string | null,
-  opts?: { beatportUrl?: string | null; setSourceUrl?: string | null },
+  opts?: {
+    beatportUrl?: string | null;
+    setSourceUrl?: string | null;
+    spotifyUrl?: string | null;
+  },
 ) {
   const q = encodeURIComponent([artist, title].filter(Boolean).join(" ").trim());
   const src = opts?.setSourceUrl ?? "";
   const scFromSet = /soundcloud\.com\//i.test(src) ? src : null;
   const beatportCanonical = canonicalBeatportUrl(opts?.beatportUrl);
+  const spotifyCanonical = canonicalSpotifyUrl(opts?.spotifyUrl);
   return {
     youtube: `https://www.youtube.com/results?search_query=${q}`,
     beatport: beatportCanonical ?? beatportSearchUrl(title, artist),
     beatportIsCanonical: !!beatportCanonical,
-    spotify: `https://open.spotify.com/search/${q}`,
+    spotify: spotifyCanonical ?? spotifySearchUrl(title, artist),
+    spotifyIsCanonical: !!spotifyCanonical,
+    discogs: discogsSearchUrl(title, artist),
+    bandcamp: bandcampSearchUrl(title, artist),
     // Only link SC when we have the set's real upload URL — never a name search.
     soundcloud: scFromSet,
   };

@@ -175,13 +175,56 @@ export function trackIdentityKey(
   return `${norm(title)}::${norm(artistName ?? "")}`;
 }
 
+function listenQuery(title: string, artistName?: string | null): string {
+  return [artistName, title].filter(Boolean).join(" ").trim();
+}
+
 /** Spotify search URL (not a track URI). Prefer a stored Spotify ID when we have one. */
 export function spotifySearchUrl(
   title: string,
   artistName?: string | null,
 ): string {
-  const q = encodeURIComponent(
-    [artistName, title].filter(Boolean).join(" ").trim(),
-  );
-  return `https://open.spotify.com/search/${q}`;
+  return `https://open.spotify.com/search/${encodeURIComponent(listenQuery(title, artistName))}`;
+}
+
+/** Spotify /track/{id} only — never a search, artist, or album page. */
+export function canonicalSpotifyUrl(url?: string | null): string | null {
+  if (!url) return null;
+  try {
+    const parsed = new URL(url);
+    const host = parsed.hostname.replace(/^www\./, "").toLowerCase();
+    if (host !== "open.spotify.com") return null;
+    const m = parsed.pathname.match(/^\/track\/([A-Za-z0-9]{22})\/?$/);
+    if (!m) return null;
+    return `https://open.spotify.com/track/${m[1]}`;
+  } catch {
+    return null;
+  }
+}
+
+/** Canonical /track URL when stored; otherwise the search page. */
+export function spotifyTrackHref(
+  title: string,
+  artistName?: string | null,
+  storedUrl?: string | null,
+): string {
+  return canonicalSpotifyUrl(storedUrl) ?? spotifySearchUrl(title, artistName);
+}
+
+/** Discogs release search (no key, never scraped). */
+export function discogsSearchUrl(
+  title: string,
+  artistName?: string | null,
+): string {
+  const q = encodeURIComponent(listenQuery(title, artistName));
+  return `https://www.discogs.com/search/?q=${q}&type=release`;
+}
+
+/** Bandcamp catalog search (no key, never scraped). */
+export function bandcampSearchUrl(
+  title: string,
+  artistName?: string | null,
+): string {
+  const q = encodeURIComponent(listenQuery(title, artistName));
+  return `https://bandcamp.com/search?q=${q}`;
 }

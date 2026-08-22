@@ -144,7 +144,10 @@ unless asked.
   preferred when present (Search grounding). Propose official socials for DJs
   that have sets but no handle. **Verify-then-write:** live profile URL +
   handle matches the DJ name + not owned by another Dj. Never invents `@slug`
-  guesses. No-op without keys on deep/enrich; dedicated workflow fails if
+  guesses. Job `cues` re-parses first-party YT/SC/hearthis text on empty
+  / stub tracklists, then may extract clocks that already appear in that
+  text — never interpolates or invents 1001 URLs. `LLM_RESEARCH_JOBS=cues`
+  or `all`. No-op without keys on deep/enrich; dedicated workflow fails if
   both keys are missing. Trigger on main by bumping `data/llm-request`.
   Reports in `data/crosscheck/llm-handle-research.json`.
   **Track export:** `npm run export:tracks` dumps catalog tracks (CSV +

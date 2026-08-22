@@ -74,6 +74,10 @@ describe("listenLinks", () => {
     assert.equal(links.beatportIsCanonical, true);
     assert.equal(links.soundcloud, "https://soundcloud.com/acslater/set");
     assert.match(links.youtube, /youtube\.com\/results/);
+    assert.match(links.discogs, /discogs\.com\/search\/\?q=/);
+    assert.match(links.discogs, /type=release/);
+    assert.match(links.bandcamp, /bandcamp\.com\/search\?q=/);
+    assert.equal(links.spotifyIsCanonical, false);
   });
 
   it("strips query params from stored Beatport /track URLs", () => {
@@ -91,5 +95,18 @@ describe("listenLinks", () => {
     assert.match(links.beatport, /beatport\.com\/search\/tracks\?q=/);
     assert.equal(links.beatportIsCanonical, false);
     assert.equal(links.soundcloud, null);
+    assert.match(links.discogs, /discogs\.com\/search/);
+    assert.match(links.bandcamp, /bandcamp\.com\/search/);
+  });
+
+  it("uses a stored Spotify track URL when it is canonical", () => {
+    const links = listenLinks("Pressure", "AC Slater", {
+      spotifyUrl: "https://open.spotify.com/track/3n3Ppam7vgaVa1iaRUc9Lp",
+    });
+    assert.equal(
+      links.spotify,
+      "https://open.spotify.com/track/3n3Ppam7vgaVa1iaRUc9Lp",
+    );
+    assert.equal(links.spotifyIsCanonical, true);
   });
 });
