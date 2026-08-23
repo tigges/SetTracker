@@ -28,6 +28,7 @@ import {
   type FingerprintSeedRow,
 } from "../fingerprint/seeds";
 import { hashRawSetContent } from "../hash";
+import { shouldFetchCuratedSlug } from "../skipExistingCurated";
 import { playerUrlsForSet } from "../setHostUrls";
 import { parseDescriptionTracklist } from "../soundcloud/parseTracklist";
 import { curatedSetImage } from "../../thumbs/setImages";
@@ -727,6 +728,12 @@ export function createYoutubeAdapter(
       const relatedQueue: string[] = [];
 
       for (const src of videos) {
+        const videoId = extractVideoId(src.video);
+        const curatedSlug = videoId ? `yt-${videoId}`.slice(0, 120) : null;
+        if (!shouldFetchCuratedSlug(curatedSlug)) {
+          console.log(`[youtube] skip existing ${curatedSlug}`);
+          continue;
+        }
         try {
           const hit = await curatedToHit(src);
           await sleep(250);

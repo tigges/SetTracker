@@ -70,6 +70,8 @@ import {
   SOUNDCLOUD_TRACK_SEEDS,
   type SoundCloudTrackSeed,
 } from "./tracks";
+import { soundcloudSlugFromUrl } from "../setHostUrls";
+import { shouldFetchCuratedSlug } from "../skipExistingCurated";
 
 const ACCENT_FALLBACK = "#00f0a0";
 
@@ -429,6 +431,11 @@ async function pollTrackSeeds(
   out: RawSet[],
 ): Promise<void> {
   for (const seed of seeds) {
+    const curatedSlug = soundcloudSlugFromUrl(seed.url);
+    if (!shouldFetchCuratedSlug(curatedSlug)) {
+      console.log(`[soundcloud] skip existing ${curatedSlug}`);
+      continue;
+    }
     try {
       const track = await resolveTrack(seed.url);
       await sleep(120);

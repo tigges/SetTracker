@@ -23,6 +23,10 @@ import {
   resolveSoundCloudTrackUrl,
 } from "./hearthis/playback";
 import { adapters as defaultAdapters } from "./sources";
+import {
+  setExistingCuratedSlugs,
+  skipExistingCuratedEnabled,
+} from "./skipExistingCurated";
 import { ensureGenre, normalizeGenre } from "../genre";
 import { rosterGenreForArtist } from "./roster";
 import { allocateTrackSlug, trackSlugBase } from "../tracks/slug";
@@ -1090,6 +1094,16 @@ export async function runIngest(
     }
   }
 
+  if (skipExistingCuratedEnabled()) {
+    const rows = await prisma.set.findMany({ select: { slug: true } });
+    setExistingCuratedSlugs(rows.map((r) => r.slug));
+    console.log(
+      `[ingest] skip existing curated: ${rows.length} catalog slugs`,
+    );
+  } else {
+    setExistingCuratedSlugs(null);
+  }
+
   for (const adapter of adapters) {
     const before = {
       new: stats.newSets,
@@ -1269,6 +1283,7 @@ export async function runIngest(
     );
   }
 
+  setExistingCuratedSlugs(null);
   return stats;
 }
 

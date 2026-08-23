@@ -12,6 +12,8 @@ export type CuratedIngestMode = "auto" | "skip" | "force";
  * Paths that can introduce *new* sets that are not already in the cached DB.
  * Overlay-only files (1001 captures, fingerprint pastes, artist-name tidy)
  * must not live here — they apply in verify-urls.
+ * When this poll does run, INGEST_SKIP_EXISTING_CURATED skips catalogued
+ * YT/SC slugs (new seeds still fetch).
  */
 export const CURATED_INGEST_PATHS: RegExp[] = [
   /^prisma\/ingest\.ts$/,

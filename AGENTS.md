@@ -140,7 +140,8 @@ unless asked.
   (`soundcloud/`, `youtube/`, `tracklists1001/`, roster, …). Default path:
   restore cached `prisma/dev.db` → `verify-urls` (pins/remaps) → static
   export → deploy (~minutes). New SC/YT roster seeds on the same push still
-  run the light curated ingest. 1001 clocks overlay in verify-urls (no poll).
+  run the light curated ingest (existing catalog slugs are not re-watched).
+  1001 clocks overlay in verify-urls (no poll).
   `catalog-deep` / enrich **dispatch** this
   workflow and never re-poll. Next `output: "export"` still regenerates
   all HTML (no ISR on GitHub Pages). **cron/manual `deep` = full ingest +
