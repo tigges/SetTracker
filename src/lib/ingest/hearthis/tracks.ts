@@ -38,4 +38,21 @@ export const HEARTHIS_TRACKS: HearthisTrackSource[] = [
     type: "festival",
     minDurationSec: 20 * 60,
   },
+  {
+    // Fan archive edmliveset — 1001 overlay only. Never playbackUrl.
+    url: "https://hearthis.at/edmliveset/nico-moreno-holy-priestaa-live-at-edc-las-vegas-2026-las-vegas-usa-17-05-2026/",
+    primaryArtist: {
+      name: "Nico Moreno",
+      slug: "nico-moreno",
+      accent: "#ff006e",
+      homeCity: "Berlin, DE",
+    },
+    genre: "Hard Techno",
+    eventName: "EDC Las Vegas",
+    eventKind: "festival",
+    eventLocation: "Las Vegas, US",
+    performedOn: "2026-05-17",
+    type: "festival",
+    minDurationSec: 20 * 60,
+  },
 ];

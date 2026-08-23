@@ -167,8 +167,14 @@ import {
   TL_JORIS_VOORN_KOROLOVA_ULTRA_MIAMI_RESISTANCE_COVE_2026,
   TL_COLYN_INNELLEA_ULTRA_MIAMI_RESISTANCE_COVE_2026,
   TL_ABOVE_AND_BEYOND_KINETICFIELD_EDC_LV_2026,
+  TL_BEBE_REXHA_TML_WE2_2026,
   TL_DAVID_GUETTA_TML_WE1_2026,
+  TL_DINO_LENNY_CORE_019_2022,
+  TL_DYEN_MADDIX_TML_WE2_2026,
+  TL_LAIDBACK_LUKE_OWR_SELECTS_017_2026,
+  TL_MADDIX_TML_WE1_2026,
   TL_MARLON_HOFFSTADT_TML_WE1_2026,
+  TL_SARA_LANDRY_TML_FRIENDSHIP_MIX_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   isSecondaryPlaybackSlug,
@@ -535,10 +541,22 @@ const nicoHp = tracklist1001RowsToPlays(TL_NICO_MORENO_HOLY_PRIEST_EDC_LV_2026);
 assert.equal(nicoHp.length, 47);
 assert.equal(nicoHp[0]!.trackTitle, "Overdose");
 assert.match(nicoHp[nicoHp.length - 1]!.trackTitle!, /Move Ma Body/);
-// B2B playback not published officially yet — seed held, not slug-mapped.
+// Fan YT still held. hearthis edmliveset is the tracklist host (never playback).
 assert.equal(
   TRACKLIST_1001_BY_SOURCE_SLUG["yt-nZS9gvjlPIs"],
   undefined,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "ht-edmliveset-nico-moreno-holy-priestaa-live-at-edc-las-vegas-2026-las-vegas-usa-17-05-2026"
+  ],
+  TL_NICO_MORENO_HOLY_PRIEST_EDC_LV_2026,
+);
+assert.equal(
+  isWiredTracklistSlug(
+    "ht-edmliveset-nico-moreno-holy-priestaa-live-at-edc-las-vegas-2026-las-vegas-usa-17-05-2026",
+  ),
+  true,
 );
 
 assertSeedClocks(TL_MATTY_RALPH_EDC_LV_2026);
@@ -914,8 +932,12 @@ const dyzen = tracklist1001RowsToPlays(TL_DYZEN_TML_WE2_2026);
 assert.equal(dyzen.length, 4);
 assert.equal(dyzen[0]!.trackTitle, "Mutant Quasars");
 assert.equal(dyzen[dyzen.length - 1]!.trackTitle, "Try");
-// Thin partial TL + no official Tomorrowland Relive — held (not Dyen b2b Maddix).
-assert.equal(TRACKLIST_1001_BY_SOURCE_SLUG["yt-VABm0tIRn2U"], undefined);
+// Thin partial TL + no official Tomorrowland Relive — held.
+// yt-VABm0tIRn2U is DYEN B2B Maddix Atmosphere WE2, not this Dyzen seed.
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-VABm0tIRn2U"],
+  TL_DYZEN_TML_WE2_2026,
+);
 assert.equal(
   Object.values(TRACKLIST_1001_BY_SOURCE_SLUG).includes(TL_DYZEN_TML_WE2_2026),
   false,
@@ -2853,6 +2875,217 @@ assert.equal(
   undefined,
 );
 assert.equal(isWiredTracklistSlug("yt-rG1DvjvXCls"), true);
+
+assertSeedClocks(TL_MADDIX_TML_WE1_2026);
+assert.equal(TL_MADDIX_TML_WE1_2026.length, 21);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-1Fu89dxrXI0"],
+  TL_MADDIX_TML_WE1_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-maddixmusic-maddix-live-tomorrowland-2026"],
+  TL_MADDIX_TML_WE1_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-maddixmusic-maddix-live-tomorrowland-2026"],
+  undefined,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-https://soundcloud.com/maddixmusic/maddix-live-tomorrowland-2026"],
+  undefined,
+);
+assert.equal(isWiredTracklistSlug("yt-1Fu89dxrXI0"), true);
+assert.equal(
+  isSecondaryPlaybackSlug("sc-maddixmusic-maddix-live-tomorrowland-2026"),
+  true,
+);
+assert.equal(isSecondaryPlaybackSlug("yt-1Fu89dxrXI0"), false);
+
+assertSeedClocks(TL_DYEN_MADDIX_TML_WE2_2026);
+assert.equal(TL_DYEN_MADDIX_TML_WE2_2026.length, 28);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-VABm0tIRn2U"],
+  TL_DYEN_MADDIX_TML_WE2_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-maddixmusic-dyen-b2b-maddix-live"],
+  TL_DYEN_MADDIX_TML_WE2_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-maddixmusic-dyen-b2b-maddix-live"],
+  undefined,
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-VABm0tIRn2U"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-1Fu89dxrXI0"],
+);
+assert.equal(isWiredTracklistSlug("yt-VABm0tIRn2U"), true);
+assert.equal(
+  isSecondaryPlaybackSlug("sc-maddixmusic-dyen-b2b-maddix-live"),
+  true,
+);
+assert.equal(isSecondaryPlaybackSlug("yt-VABm0tIRn2U"), false);
+const dyenMaddix = tracklist1001RowsToPlays(TL_DYEN_MADDIX_TML_WE2_2026);
+assert.equal(dyenMaddix.length, 28);
+assert.equal(dyenMaddix[0]?.provenance, "1001tl");
+assert.equal(dyenMaddix[0]?.timestamp, 12);
+assert.equal(dyenMaddix[0]?.trackTitle, "We Rave");
+assert.equal(dyenMaddix[27]?.trackTitle, "Machinegun");
+assert.equal(dyenMaddix[27]?.timestamp, 55 * 60 + 26);
+for (let i = 1; i < dyenMaddix.length; i++) {
+  assert.ok(
+    (dyenMaddix[i]!.timestamp ?? 0) > (dyenMaddix[i - 1]!.timestamp ?? 0),
+    `DYEN Maddix TML WE2 2026 clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_SARA_LANDRY_TML_FRIENDSHIP_MIX_2026);
+assert.equal(TL_SARA_LANDRY_TML_FRIENDSHIP_MIX_2026.length, 26);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-tomorrowland-tomorrowland-friendship-mix-with-sara-landry-july-2026"
+  ],
+  TL_SARA_LANDRY_TML_FRIENDSHIP_MIX_2026,
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-tomorrowland-tomorrowland-friendship-mix-with-sara-landry-july-2026"
+  ],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-aDAWctObTvI"],
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-sara-landry-friendship-mix"],
+  undefined,
+);
+assert.equal(
+  isSecondaryPlaybackSlug(
+    "sc-tomorrowland-tomorrowland-friendship-mix-with-sara-landry-july-2026",
+  ),
+  false,
+);
+const saraFriendship = tracklist1001RowsToPlays(
+  TL_SARA_LANDRY_TML_FRIENDSHIP_MIX_2026,
+);
+assert.equal(saraFriendship.length, 26);
+assert.equal(saraFriendship[0]?.trackTitle, "Comfort In Chaos");
+assert.equal(saraFriendship[0]?.timestamp, 2 * 60 + 44);
+assert.equal(saraFriendship[25]?.trackTitle, "Modulation Depth");
+assert.equal(saraFriendship[25]?.timestamp, 59 * 60 + 12);
+for (let i = 1; i < saraFriendship.length; i++) {
+  assert.ok(
+    (saraFriendship[i]!.timestamp ?? 0) >
+      (saraFriendship[i - 1]!.timestamp ?? 0),
+    `Sara Landry Friendship Mix 2026 clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_LAIDBACK_LUKE_OWR_SELECTS_017_2026);
+assert.equal(TL_LAIDBACK_LUKE_OWR_SELECTS_017_2026.length, 60);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-tomorrowland-laidback-luke-selects-august-2026"
+  ],
+  TL_LAIDBACK_LUKE_OWR_SELECTS_017_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-laidback-luke-selects"],
+  undefined,
+);
+assert.equal(
+  isSecondaryPlaybackSlug(
+    "sc-tomorrowland-laidback-luke-selects-august-2026",
+  ),
+  false,
+);
+const lukeSelects = tracklist1001RowsToPlays(
+  TL_LAIDBACK_LUKE_OWR_SELECTS_017_2026,
+);
+assert.equal(lukeSelects.length, 60);
+assert.equal(lukeSelects[0]?.trackTitle, "Comes and Goes");
+assert.equal(lukeSelects[0]?.timestamp, 20);
+assert.equal(lukeSelects[59]?.trackTitle, "Sweet Lovin (Sunset Edition)");
+assert.equal(lukeSelects[59]?.timestamp, 58 * 60 + 21);
+for (let i = 1; i < lukeSelects.length; i++) {
+  assert.ok(
+    (lukeSelects[i]!.timestamp ?? 0) > (lukeSelects[i - 1]!.timestamp ?? 0),
+    `Laidback Luke Selects 017 2026 clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_BEBE_REXHA_TML_WE2_2026);
+assert.equal(TL_BEBE_REXHA_TML_WE2_2026.length, 24);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-KCeluZt3H9o"],
+  TL_BEBE_REXHA_TML_WE2_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-bebe-rexha-freedom"],
+  undefined,
+);
+assert.equal(isWiredTracklistSlug("yt-KCeluZt3H9o"), true);
+assert.equal(isSecondaryPlaybackSlug("yt-KCeluZt3H9o"), false);
+assert.equal(TL_BEBE_REXHA_TML_WE2_2026[22]?.at, "24:10");
+assert.equal(TL_BEBE_REXHA_TML_WE2_2026[23]?.at, "59:30");
+assert.equal(TL_BEBE_REXHA_TML_WE2_2026[22]?.title, "In The Name Of Love");
+assert.equal(TL_BEBE_REXHA_TML_WE2_2026[23]?.title, "In The Name Of Love");
+const bebeWe2 = tracklist1001RowsToPlays(TL_BEBE_REXHA_TML_WE2_2026);
+assert.equal(bebeWe2[0]?.trackTitle, "I'm Good (Blue) (Cedric Gervais Remix)");
+assert.equal(bebeWe2[0]?.timestamp, 12);
+assert.ok(bebeWe2.length >= 23);
+for (let i = 1; i < bebeWe2.length; i++) {
+  assert.ok(
+    (bebeWe2[i]!.timestamp ?? 0) > (bebeWe2[i - 1]!.timestamp ?? 0),
+    `Bebe Rexha TML WE2 2026 clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_DINO_LENNY_CORE_019_2022);
+assert.equal(TL_DINO_LENNY_CORE_019_2022.length, 9);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-90ExlZnu_Xg"],
+  TL_DINO_LENNY_CORE_019_2022,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-tomorrowland-core-i-dino-lenny-0190"],
+  TL_DINO_LENNY_CORE_019_2022,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-tomorrowland-core-radio-show-july-2026"],
+  undefined,
+);
+assert.equal(isWiredTracklistSlug("yt-90ExlZnu_Xg"), true);
+assert.equal(
+  isSecondaryPlaybackSlug("sc-tomorrowland-core-i-dino-lenny-0190"),
+  true,
+);
+assert.equal(isSecondaryPlaybackSlug("yt-90ExlZnu_Xg"), false);
+const dinoCore = tracklist1001RowsToPlays(TL_DINO_LENNY_CORE_019_2022);
+assert.equal(dinoCore.length, 9);
+assert.equal(dinoCore[0]?.trackTitle, "Mind Dimension (Ben Sterling Remix)");
+assert.equal(dinoCore[0]?.timestamp, 4 * 60 + 40);
+assert.equal(dinoCore[8]?.trackTitle, "Learn To Fly (Maceo Plex 808 Dub)");
+assert.equal(dinoCore[8]?.timestamp, 49 * 60 + 50);
+for (let i = 1; i < dinoCore.length; i++) {
+  assert.ok(
+    (dinoCore[i]!.timestamp ?? 0) > (dinoCore[i - 1]!.timestamp ?? 0),
+    `Dino Lenny CORE 019 clocks must increase at index ${i}`,
+  );
+}
+
+const maddixWe1 = tracklist1001RowsToPlays(TL_MADDIX_TML_WE1_2026);
+assert.equal(maddixWe1.length, 21);
+assert.equal(maddixWe1[0]?.provenance, "1001tl");
+assert.equal(maddixWe1[0]?.timestamp, 12);
+assert.equal(maddixWe1[0]?.trackTitle, "We Rave");
+assert.equal(maddixWe1[20]?.trackTitle, "Heart Of Courage");
+assert.equal(maddixWe1[20]?.timestamp, 55 * 60 + 22);
+for (let i = 1; i < maddixWe1.length; i++) {
+  assert.ok(
+    (maddixWe1[i]!.timestamp ?? 0) > (maddixWe1[i - 1]!.timestamp ?? 0),
+    `Maddix TML WE1 2026 clocks must increase at index ${i}`,
+  );
+}
+
 const marlonWe1 = tracklist1001RowsToPlays(TL_MARLON_HOFFSTADT_TML_WE1_2026);
 assert.equal(marlonWe1.length, 16);
 assert.equal(marlonWe1[0]?.provenance, "1001tl");

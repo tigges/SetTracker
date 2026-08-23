@@ -49,6 +49,16 @@ assert.ok(
     "https://music.apple.com/us/album/ministry-of-sound-ibiza-boat-party-dj-mix/6779843676",
   )?.includes("6779843676"),
 );
+assert.deepEqual(
+  mixesdbPlayerQuery(
+    "https://music.apple.com/us/album/tomorrowland-belgium-2026-maddix-at-mainstage-weekend/6802795931",
+  ),
+  {
+    host: "applemusic",
+    search: "music.apple.com/album/6802795931",
+    insource: "6802795931",
+  },
+);
 
 assert.equal(mixesdbPlayerQuery("Korolova Captive Soul"), null);
 assert.equal(mixesdbPlayerQuery("https://www.mixesdb.com/w/Category:2026"), null);

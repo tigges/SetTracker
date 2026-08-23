@@ -291,6 +291,70 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     minDurationSec: 15 * 60,
   },
   {
+    // Official Maddix TML WE1 Mainstage; 1001TL wired via
+    // sc-maddixmusic-maddix-live-tomorrowland-2026 (same list as yt-1Fu89dxrXI0).
+    // Never sc-https://… or yt-maddixmusic-….
+    url: "https://soundcloud.com/maddixmusic/maddix-live-tomorrowland-2026",
+    primaryArtist: dj("Maddix", {
+      accent: "#ff4d6d",
+    }),
+    genre: "Techno",
+    type: "festival",
+    minDurationSec: 15 * 60,
+  },
+  {
+    // Official Maddix upload of DYEN B2B TML WE2; 1001TL wired via
+    // sc-maddixmusic-dyen-b2b-maddix-live (same list as yt-VABm0tIRn2U).
+    // Distinct from Maddix Mainstage WE1. Never sc-https://… or yt-maddixmusic-….
+    url: "https://soundcloud.com/maddixmusic/dyen-b2b-maddix-live",
+    primaryArtist: dj("DYEN", {
+      accent: "#fb5607",
+    }),
+    genre: "Hard Dance",
+    type: "festival",
+    minDurationSec: 15 * 60,
+  },
+  {
+    // Official Tomorrowland Friendship Mix; 1001TL wired via
+    // sc-tomorrowland-tomorrowland-friendship-mix-with-sara-landry-july-2026.
+    // Distinct from Mainstage WE2 (yt-aDAWctObTvI). No YT in the paste.
+    url: "https://soundcloud.com/tomorrowland/tomorrowland-friendship-mix-with-sara-landry-july-2026",
+    primaryArtist: dj("Sara Landry", {
+      accent: "#e63946",
+      homeCity: "Los Angeles, US",
+    }),
+    genre: "Hard Techno",
+    seriesName: "Tomorrowland Friendship Mix",
+    type: "mix",
+    minDurationSec: 30 * 60,
+  },
+  {
+    // Official Tomorrowland One World Radio Selects 017; 1001TL wired via
+    // sc-tomorrowland-laidback-luke-selects-august-2026. No YT in the paste.
+    // laidback-luke-selects aliases to laidback-luke.
+    url: "https://soundcloud.com/tomorrowland/laidback-luke-selects-august-2026",
+    primaryArtist: dj("Laidback Luke", {
+      accent: "#f4a261",
+    }),
+    genre: "House",
+    seriesName: "One World Radio Selects",
+    type: "radio",
+    minDurationSec: 30 * 60,
+  },
+  {
+    // Official Tomorrowland CORE Radio Show 019; 1001TL wired via
+    // sc-tomorrowland-core-i-dino-lenny-0190 (same list as yt-90ExlZnu_Xg).
+    // Capture paste used yt-tomorrowland-core-radio-show-july-2026 (invalid).
+    url: "https://soundcloud.com/tomorrowland/core-i-dino-lenny-0190",
+    primaryArtist: dj("Dino Lenny", {
+      accent: "#6c5ce7",
+    }),
+    genre: "Tech House",
+    seriesName: "CORE Radio Show",
+    type: "radio",
+    minDurationSec: 30 * 60,
+  },
+  {
     // Official James Hype upload; 1001TL wired via
     // sc-jameshypethedj-sync-london-full-set (same list as yt-rLTCLSsqrXY).
     url: "https://soundcloud.com/jameshypethedj/sync-london-full-set",

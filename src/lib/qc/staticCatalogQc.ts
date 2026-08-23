@@ -180,11 +180,19 @@ function auditOperatorSearchUrls(): QcIssue[] {
   ]) {
     const raw = loadJson<unknown>(rel, null);
     if (!raw) continue;
-    if (/google\.com\/search/i.test(JSON.stringify(raw))) {
+    const blob = JSON.stringify(raw);
+    if (/google\.com\/search/i.test(blob)) {
       issues.push({
         severity: "error",
         area: "operator-reports",
         detail: `${rel} still has Google site:1001 search URLs — run npm run build:next-captures`,
+      });
+    }
+    if (/1001tracklists\.com\/search\?q=/i.test(blob)) {
+      issues.push({
+        severity: "error",
+        area: "operator-reports",
+        detail: `${rel} still has GET /search?q= 404 URLs — run npm run build:next-captures`,
       });
     }
   }
