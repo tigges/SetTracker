@@ -1,9 +1,10 @@
 /**
  * Operator assist + ingest lookup key: MixesDB “search by player URL”.
  *
- * Paste a YT / SC / hearthis / Mixcloud URL we already store. MixesDB
- * jumps to the mix page when they indexed that player. Do not search by
- * artist name, do not invent `/w/…` titles, do not browse Explorer.
+ * Paste a YT / SC / hearthis / Mixcloud / Apple Music album URL.
+ * MixesDB jumps to the mix page when they indexed that player.
+ * Apple Music is a MixesDB lookup key only — never on-site playback.
+ * Do not search by artist name, invent `/w/…` titles, or browse Explorer.
  * CI never fetches MixesDB.
  *
  * @see https://www.mixesdb.com/w/Article:Search_By_Player_Url
@@ -13,7 +14,8 @@ export type MixesdbPlayerHost =
   | "youtube"
   | "soundcloud"
   | "hearthis"
-  | "mixcloud";
+  | "mixcloud"
+  | "applemusic";
 
 export type MixesdbPlayerQuery = {
   host: MixesdbPlayerHost;
@@ -113,7 +115,37 @@ export function mixesdbPlayerQuery(
     };
   }
 
+  const apple = appleMusicAlbumId(raw);
+  if (apple) {
+    return {
+      host: "applemusic",
+      search: `music.apple.com/album/${apple}`,
+      insource: apple,
+    };
+  }
+
   return null;
+}
+
+/** `…/album/{slug}/{id}` or `…/album/id{id}` — MixesDB player key, not playback. */
+function appleMusicAlbumId(raw: string): string | null {
+  try {
+    const href = /^https?:\/\//i.test(raw) ? raw : `https://${raw}`;
+    const u = new URL(href);
+    const host = u.hostname.replace(/^www\./, "").toLowerCase();
+    if (host !== "music.apple.com" && host !== "itunes.apple.com") return null;
+    const segs = u.pathname.split("/").filter(Boolean);
+    const albumAt = segs.findIndex((s) => s.toLowerCase() === "album");
+    if (albumAt < 0) return null;
+    const after = segs.slice(albumAt + 1);
+    for (const s of after.reverse()) {
+      const id = s.replace(/^id/i, "");
+      if (/^\d{6,12}$/.test(id)) return id;
+    }
+    return null;
+  } catch {
+    return null;
+  }
 }
 
 /** MixesDB Special:Search with `go=Go` — browser JS may jump to the mix page. */

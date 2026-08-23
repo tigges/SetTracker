@@ -34,6 +34,22 @@ assert.deepEqual(
   },
 );
 
+assert.deepEqual(
+  mixesdbPlayerQuery(
+    "https://music.apple.com/us/album/ministry-of-sound-ibiza-boat-party-dj-mix/6779843676?at=1000l5EX",
+  ),
+  {
+    host: "applemusic",
+    search: "music.apple.com/album/6779843676",
+    insource: "6779843676",
+  },
+);
+assert.ok(
+  searchMixesdbByPlayerUrl(
+    "https://music.apple.com/us/album/ministry-of-sound-ibiza-boat-party-dj-mix/6779843676",
+  )?.includes("6779843676"),
+);
+
 assert.equal(mixesdbPlayerQuery("Korolova Captive Soul"), null);
 assert.equal(mixesdbPlayerQuery("https://www.mixesdb.com/w/Category:2026"), null);
 assert.equal(mixesdbPlayerQuery("https://soundcloud.com/search?q=korolova"), null);

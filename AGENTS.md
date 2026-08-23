@@ -115,7 +115,8 @@ unless asked.
   **MixesDB:** follow a concrete `/w/YYYY-MM-DD_-_…` mix page already
   linked from a source description (or operator paste), **or** one
   `insource:` lookup keyed by a YT/SC/hearthis/Mixcloud URL we already
-  store (their “search by player URL”). Do **not** crawl Category /
+  store, or an Apple Music album id MixesDB indexed as a player (lookup
+  key only — never on-site playback). Do **not** crawl Category /
   Explorer, search by artist name, or invent `/w/…` titles. Never create
   sets from MixesDB-only pages. Timed `[mm:ss]` / `[mm]` marks overlay
   clocks (`provenance: "mixesdb"`); untimed numbered lists stay out. Live
