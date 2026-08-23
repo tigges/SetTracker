@@ -12,7 +12,10 @@ import { artistsForSet } from "../artists";
 import { inferFestivalEvent, KNOWN_EVENTS } from "../events";
 import { hashRawSetContent } from "../hash";
 import { parseDescriptionTracklist } from "../soundcloud/parseTracklist";
-import { playsFromDescriptionMixesdbLinks } from "../mixesdb/client";
+import {
+  playsFromDescriptionMixesdbLinks,
+  playsFromPlaybackMixesdbLookup,
+} from "../mixesdb/client";
 import { playsFromDescription1001Links } from "../tracklists1001/client";
 import { merge1001Plays } from "../tracklists1001/seeds";
 import { slugify, type RawPlay, type RawSet, type SourceAdapter } from "../types";
@@ -165,10 +168,17 @@ async function teaserToRawSet(
   primary.accent = primary.accent || ACCENT;
 
   let plays = playsFromMeta(meta);
-  const fromMixesdb = await playsFromDescriptionMixesdbLinks(
+  let fromMixesdb = await playsFromDescriptionMixesdbLinks(
     meta.description,
     meta.durationSec,
   );
+  if (fromMixesdb.length < 5) {
+    const fromPlayer = await playsFromPlaybackMixesdbLookup(
+      meta.watchUrl,
+      meta.durationSec,
+    );
+    if (fromPlayer.length > fromMixesdb.length) fromMixesdb = fromPlayer;
+  }
   plays = merge1001Plays(plays, fromMixesdb);
   const from1001 = await playsFromDescription1001Links(
     meta.description,

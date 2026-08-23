@@ -4,6 +4,7 @@ import {
   allowMixesdbLiveFetch,
   playsFromDescriptionMixesdbLinks,
   playsFromMixesdbUrls,
+  playsFromPlaybackMixesdbLookup,
 } from "./client";
 
 describe("MixesDB live fetch gate", () => {
@@ -30,6 +31,11 @@ describe("MixesDB live fetch gate", () => {
       3600,
     );
     assert.deepEqual(fromDesc, []);
+    const fromPlayer = await playsFromPlaybackMixesdbLookup(
+      "https://www.youtube.com/watch?v=ViNSjYircPs",
+      3600,
+    );
+    assert.deepEqual(fromPlayer, []);
     if (prev === undefined) delete process.env.INGEST_ALLOW_MIXESDB_FETCH;
     else process.env.INGEST_ALLOW_MIXESDB_FETCH = prev;
   });

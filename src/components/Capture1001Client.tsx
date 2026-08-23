@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { search1001, search1001QueryFromUrl } from "@/lib/search1001";
+import { searchMixesdbByPlayerUrl } from "@/lib/searchMixesdb";
 
 const LIVE_SCRIPT = "https://setradar.ai/capture-1001tl.js";
 
@@ -101,12 +102,17 @@ function Capture1001Workbench({
   return (
     <div className="space-y-3">
       <p className="text-[12px] text-muted">
-        YT/SC already in the catalog. Open the 1001 page, run the bookmarklet
-        (or paste{" "}
+        YT/SC already in the catalog. Open 1001 or Search MixesDB with the
+        player URL (jumps to their page when they indexed it), run the
+        bookmarklet (or paste{" "}
         <span className="mono text-[11px] text-ink">
           scripts/capture-1001tl.console.js
         </span>
-        ), copy the seed. CI never fetches 1001.
+        {" / "}
+        <span className="mono text-[11px] text-ink">
+          scripts/capture-mixesdb.console.js
+        </span>
+        ), copy the seed. CI never fetches 1001 or MixesDB.
       </p>
       <div className="flex flex-wrap gap-1.5">
         <button
@@ -172,7 +178,10 @@ function Capture1001Workbench({
         </p>
       ) : null}
       <ol className="divide-y divide-line border-y border-line">
-        {filtered.map((p, i) => (
+        {filtered.map((p, i) => {
+          const watch = watchFromPreset(p);
+          const mixesdbSearch = searchMixesdbByPlayerUrl(watch);
+          return (
           <li
             key={p.slug}
             className="flex flex-col gap-1.5 py-1.5 sm:flex-row sm:items-center sm:justify-between"
@@ -188,9 +197,9 @@ function Capture1001Workbench({
               </div>
             </div>
             <div className="flex flex-wrap gap-1.5">
-              {watchFromPreset(p) ? (
+              {watch ? (
                 <a
-                  href={watchFromPreset(p)}
+                  href={watch}
                   target="_blank"
                   rel="noreferrer"
                   className="chip-ink rounded-md px-2.5 py-1 text-[12px] font-bold"
@@ -223,6 +232,16 @@ function Capture1001Workbench({
                   Search 1001
                 </a>
               )}
+              {mixesdbSearch ? (
+                <a
+                  href={mixesdbSearch}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="rounded-md border border-line px-2.5 py-1 text-[12px] font-bold"
+                >
+                  Search MixesDB
+                </a>
+              ) : null}
               <button
                 type="button"
                 className="rounded-md border border-line px-2.5 py-1 text-[12px] font-bold"
@@ -232,7 +251,8 @@ function Capture1001Workbench({
               </button>
             </div>
           </li>
-        ))}
+          );
+        })}
       </ol>
     </div>
   );

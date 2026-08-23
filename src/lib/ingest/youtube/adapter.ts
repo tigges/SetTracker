@@ -34,6 +34,7 @@ import { pickYoutubeThumbnail } from "../../thumbs/youtubeThumb";
 import {
   playsFromMixesdbUrls,
   playsFromDescriptionMixesdbLinks,
+  playsFromPlaybackMixesdbLookup,
 } from "../mixesdb/client";
 import {
   playsFrom1001Urls,
@@ -183,6 +184,13 @@ async function enrichWith1001Tracklist(
       meta.durationSec,
     );
     if (extra.length > fromMixesdb.length) fromMixesdb = extra;
+  }
+  if (fromMixesdb.length < 5) {
+    const fromPlayer = await playsFromPlaybackMixesdbLookup(
+      meta.watchUrl,
+      meta.durationSec,
+    );
+    if (fromPlayer.length > fromMixesdb.length) fromMixesdb = fromPlayer;
   }
   if (fromMixesdb.length) plays = merge1001Plays(plays, fromMixesdb);
 

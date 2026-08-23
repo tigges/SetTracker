@@ -31,7 +31,10 @@ import {
   fingerprintRowsToPlays,
   mergeFingerprintPlays,
 } from "../fingerprint/seeds";
-import { playsFromDescriptionMixesdbLinks } from "../mixesdb/client";
+import {
+  playsFromDescriptionMixesdbLinks,
+  playsFromPlaybackMixesdbLookup,
+} from "../mixesdb/client";
 import { playsFromDescription1001Links } from "../tracklists1001/client";
 import {
   applyTracklist1001Seed,
@@ -83,17 +86,25 @@ async function enrichScPlaysWith1001(
   sourceSlug: string,
   base: RawPlay[],
   durationSec: number,
+  playbackUrl?: string | null,
 ): Promise<RawPlay[]> {
   let plays = base;
   try {
-    const fromMixesdb = await playsFromDescriptionMixesdbLinks(
+    let fromMixesdb = await playsFromDescriptionMixesdbLinks(
       description,
       durationSec,
     );
+    if (fromMixesdb.length < 5 && playbackUrl) {
+      const fromPlayer = await playsFromPlaybackMixesdbLookup(
+        playbackUrl,
+        durationSec,
+      );
+      if (fromPlayer.length > fromMixesdb.length) fromMixesdb = fromPlayer;
+    }
     if (fromMixesdb.length) {
       plays = merge1001Plays(plays, fromMixesdb);
       console.log(
-        `[soundcloud] mixesdb ${sourceSlug}: ${fromMixesdb.length} plays from description link`,
+        `[soundcloud] mixesdb ${sourceSlug}: ${fromMixesdb.length} plays from MixesDB`,
       );
     }
   } catch (err) {
@@ -191,6 +202,7 @@ async function trackToRawSet(
     sourceSlug,
     mergeTracklistSignals(fromDescription, fromComments),
     durationSec,
+    sourceUrl,
   );
   const artistImage = scImageUrl(track.user?.avatar_url);
   const setImage =
@@ -290,6 +302,7 @@ async function playlistTrackToRawSet(
     sourceSlug,
     mergeTracklistSignals(fromDescription, fromComments),
     durationSec,
+    sourceUrl,
   );
   const artistImage = scImageUrl(track.user?.avatar_url);
   const setImage = scImageUrl(track.artwork_url) || artistImage;
@@ -367,6 +380,7 @@ async function trackSeedToRawSet(
     sourceSlug,
     mergeTracklistSignals(fromDescription, fromComments),
     durationSec,
+    sourceUrl,
   );
   if (seed.fingerprintPlays?.length) {
     plays = mergeFingerprintPlays(

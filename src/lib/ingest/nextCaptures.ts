@@ -14,8 +14,9 @@ import { SET_SLUG_ALIASES } from "./sourceRemaps";
 import { TRACKLIST_1001_BY_SOURCE_SLUG } from "./tracklists1001/festival2026";
 import { isSecondaryPlaybackSlug } from "./tracklists1001/seeds";
 import { search1001 } from "../search1001";
+import { searchMixesdbByPlayerUrl } from "../searchMixesdb";
 
-export { search1001 };
+export { search1001, searchMixesdbByPlayerUrl };
 
 export type CapturePreset = {
   label: string;

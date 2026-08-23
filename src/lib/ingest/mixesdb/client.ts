@@ -5,10 +5,13 @@
  * Cursor / most datacenter IPs. Default: do not fetch. Opt in on a
  * human laptop with `INGEST_ALLOW_MIXESDB_FETCH=1`.
  *
- * Never crawls Category / Special / search. Only GETs a concrete
- * `/w/YYYY-MM-DD_-_…` URL already in hand.
+ * Never crawls Category / Explorer / artist search. Only:
+ * - GET a concrete `/w/YYYY-MM-DD_-_…` URL already in hand, or
+ * - one `insource:` lookup keyed by a YT/SC/hearthis/Mixcloud URL we
+ *   already store (MixesDB “search by player URL”).
  */
 
+import { mixesdbPlayerQuery } from "../../searchMixesdb";
 import {
   canonicalMixesdbUrl,
   extractMixesdbUrls,
@@ -137,4 +140,77 @@ export async function playsFromDescriptionMixesdbLinks(
   durationSec: number,
 ): Promise<RawPlay[]> {
   return playsFromMixesdbUrls(extractMixesdbUrls(description), durationSec);
+}
+
+type MwSearchHit = { title?: string };
+
+function datedMixTitlesFromSearch(body: string): string[] {
+  try {
+    const json = JSON.parse(body) as {
+      query?: { search?: MwSearchHit[] };
+    };
+    const hits = json.query?.search ?? [];
+    const titles: string[] = [];
+    const seen = new Set<string>();
+    for (const h of hits) {
+      const title = String(h.title || "").replace(/ /g, "_");
+      const url = canonicalMixesdbUrl(`https://www.mixesdb.com/w/${title}`);
+      if (!url) continue;
+      const key = url.toLowerCase();
+      if (seen.has(key)) continue;
+      seen.add(key);
+      titles.push(mixesdbPageTitle(url)!);
+    }
+    return titles;
+  } catch {
+    return [];
+  }
+}
+
+/**
+ * One MixesDB `insource:` lookup for a playback URL we already store.
+ * Accepts only a unique dated mix page whose wikitext contains the token.
+ * Empty unless live fetch is opted in. Never searches by artist name.
+ */
+export async function playsFromPlaybackMixesdbLookup(
+  playbackUrl: string | null | undefined,
+  durationSec: number,
+): Promise<RawPlay[]> {
+  const q = mixesdbPlayerQuery(playbackUrl);
+  if (!q) return [];
+  if (!allowMixesdbLiveFetch()) return [];
+
+  const srsearch = `insource:"${q.insource.replace(/"/g, "")}"`;
+  const api =
+    `https://www.mixesdb.com/w/api.php?action=query&list=search` +
+    `&srnamespace=0&srlimit=5&format=json&srsearch=${encodeURIComponent(srsearch)}`;
+  let body: string;
+  try {
+    body = await fetchText(api);
+  } catch (err) {
+    console.warn(
+      `[mixesdb] player-url search failed ${q.search}:`,
+      err instanceof Error ? err.message : err,
+    );
+    return [];
+  }
+  if (looksBlocked(body)) return [];
+  const titles = datedMixTitlesFromSearch(body);
+  if (titles.length !== 1) return [];
+
+  const page = `https://www.mixesdb.com/w/${titles[0]}`;
+  try {
+    const plays = await fetchMixesdbTracklistPlays(page, durationSec);
+    if (!plays.length) return [];
+    // fetchMixesdbTracklistPlays already parsed clocks; token check on wikitext
+    // happens inside fetch — re-fetch raw only if we need to verify. The parse
+    // path is enough when the unique hit is a dated mix page.
+    return plays;
+  } catch (err) {
+    console.warn(
+      `[mixesdb] player-url page failed ${page}:`,
+      err instanceof Error ? err.message : err,
+    );
+    return [];
+  }
 }
