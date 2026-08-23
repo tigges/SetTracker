@@ -1806,6 +1806,10 @@ describe("curated YouTube 429 fallback", () => {
     assert.ok(sets[0]!.durationSec >= 1 * 3600 + 25 * 60 + 14);
     assert.equal(sets[0]?.primaryArtist?.slug, "korolova");
     assert.notEqual(sets[0]!.sourceSlug, "yt-5JxfEjVdQFk");
+    assert.notEqual(
+      sets[0]!.sourceSlug,
+      "sc-korolovadj-korolova-live-tomorrowland-1",
+    );
     assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
   });
 
