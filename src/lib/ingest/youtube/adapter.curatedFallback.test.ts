@@ -94,6 +94,9 @@ const INDIRA_TML_2023 = YOUTUBE_SETS.find((s) =>
 const ALESSO_TML_WE1 = YOUTUBE_SETS.find((s) =>
   s.video.includes("TidwOi0NMI0"),
 );
+const DAVID_GUETTA_TML_WE1 = YOUTUBE_SETS.find((s) =>
+  s.video.includes("GSnPwle4FOE"),
+);
 const ILLENIUM_TML_WE1 = YOUTUBE_SETS.find((s) =>
   s.video.includes("E1WH0nvaxAw"),
 );
@@ -364,6 +367,17 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=TidwOi0NMI0");
     // Last cue 59:30 + 180s pad.
     assert.equal(meta.durationSec, 59 * 60 + 30 + 180);
+  });
+
+  it("builds David Guetta TML WE1 Mainstage meta from the curated 1001 capture", () => {
+    assert.ok(DAVID_GUETTA_TML_WE1);
+    const meta = watchMetaFromCuratedSeed(DAVID_GUETTA_TML_WE1);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "GSnPwle4FOE");
+    assert.match(meta.title, /David Guetta WE1/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=GSnPwle4FOE");
+    // Last cue 1:13:15 + 180s pad.
+    assert.equal(meta.durationSec, 1 * 3600 + 13 * 60 + 15 + 180);
   });
 
   it("builds Alok TML WE2 meta from the curated 1001 capture", () => {
@@ -1706,6 +1720,20 @@ describe("curated YouTube 429 fallback", () => {
     assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
     assert.ok(sets[0]!.durationSec >= 59 * 60);
     assert.equal(sets[0]?.primaryArtist?.slug, "alesso");
+    assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
+  });
+
+  it("lands David Guetta TML WE1 Mainstage from the 1001 seed when watch is 429", async () => {
+    assert.ok(DAVID_GUETTA_TML_WE1);
+    const adapter = createYoutubeAdapter([DAVID_GUETTA_TML_WE1], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-GSnPwle4FOE");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 47);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 1 * 3600 + 13 * 60 + 15);
+    assert.equal(sets[0]?.primaryArtist?.slug, "david-guetta");
     assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
   });
 

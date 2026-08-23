@@ -114,6 +114,7 @@ import {
   TL_VINTAGE_CULTURE_ULTRA_MIAMI_RESISTANCE_2026,
 } from "./festivalCaptures20260819";
 import { TL_ABOVE_AND_BEYOND_KINETICFIELD_EDC_LV_2026 } from "./festivalCaptures20260820";
+import { TL_DAVID_GUETTA_TML_WE1_2026 } from "./festivalCaptures20260823";
 
 export {
   TL_ALESSO_TML_WE2_2026,
@@ -212,6 +213,7 @@ export {
   TL_JORIS_VOORN_KOROLOVA_ULTRA_MIAMI_RESISTANCE_COVE_2026,
   TL_COLYN_INNELLEA_ULTRA_MIAMI_RESISTANCE_COVE_2026,
   TL_ABOVE_AND_BEYOND_KINETICFIELD_EDC_LV_2026,
+  TL_DAVID_GUETTA_TML_WE1_2026,
 };
 
 function formatClock(sec: number): string {
@@ -4786,6 +4788,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "sc-innellea-colyn-b2b-innella-at-ultra":
     TL_COLYN_INNELLEA_ULTRA_MIAMI_RESISTANCE_COVE_2026,
   "yt-OI02QgEA1Zw": TL_ABOVE_AND_BEYOND_KINETICFIELD_EDC_LV_2026,
+  "yt-GSnPwle4FOE": TL_DAVID_GUETTA_TML_WE1_2026,
 };
 
 /** Sanity: every seeded clock must parse. */
