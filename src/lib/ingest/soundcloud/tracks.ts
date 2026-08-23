@@ -70,6 +70,18 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     minDurationSec: 15 * 60,
   },
   {
+    // Official John Summit Lollapalooza; 1001TL wired via
+    // sc-johnsummit-john-summit-live-lollapalooza (same list as yt-9TKqqBCmDHA).
+    url: "https://soundcloud.com/johnsummit/john-summit-live-lollapalooza",
+    primaryArtist: dj("John Summit", {
+      accent: "#7cffb2",
+      homeCity: "Chicago, US",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    minDurationSec: 15 * 60,
+  },
+  {
     // Official NOTION Perry's Lollapalooza; 1001TL wired via
     // sc-notiondj-notion-live-at-lollapalooza (same list as yt-9vgSTomhCp8).
     url: "https://soundcloud.com/notiondj/notion-live-at-lollapalooza",

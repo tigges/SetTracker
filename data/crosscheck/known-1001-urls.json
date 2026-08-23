@@ -3,6 +3,22 @@
   "updatedAt": "2026-08-23T00:00:00.000Z",
   "urls": [
     {
+      "label": "Marlon Hoffstadt · Mainstage, Tomorrowland Weekend 1, Belgium 2026-07-17",
+      "slug": "yt-rG1DvjvXCls",
+      "name": "TL_MARLON_HOFFSTADT_TML_WE1_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/25k2c8zk/marlon-hoffstadt-mainstage-tomorrowland-weekend-1-belgium-2026-07-17.html",
+      "youtubeUrl": "https://youtu.be/rG1DvjvXCls",
+      "note": "Operator paste 2026-08-23. 16 timed cues on official Tomorrowland Relive YT. Overlay TL_MARLON_HOFFSTADT is too generic (Coachella Sahara WE2 yt-vpf4LLy42Zc). No SC in the paste — do not invent an SC slug."
+    },
+    {
+      "label": "Korolova · Captive Soul, Freedom Stage, Tomorrowland Weekend 2, Belgium 2026-07-26",
+      "slug": "yt-RLOghpXjuJI",
+      "name": "TL_KOROLOVA_TML_WE2_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/hjlt23k/korolova-captive-soul-freedom-stage-tomorrowland-weekend-2-belgium-2026-07-26.html",
+      "youtubeUrl": "https://youtu.be/RLOghpXjuJI",
+      "note": "Operator recapture 2026-08-23. 22 timed cues (added Cherry Buka @ 2:29). Overlay TL_KOROLOVA is too generic. Operator named sc-korolovadj-korolova-live-tomorrowland-1 but no SC URL was in the paste — do not invent an SC slug. Distinct from Captive Soul 098 / Snowattack / Tulum."
+    },
+    {
       "label": "David Guetta · Mainstage, Tomorrowland Weekend 1, Belgium 2026-07-18",
       "slug": "yt-GSnPwle4FOE",
       "name": "TL_DAVID_GUETTA_TML_WE1_2026",
@@ -285,11 +301,13 @@
       "youtubeUrl": "https://www.youtube.com/watch?v=1LpQZ5GTRDg"
     },
     {
-      "label": "John Summit · Lollapalooza Chicago",
+      "label": "John Summit · Bud Light Stage, Lollapalooza Chicago 2026-07-30",
       "slug": "yt-9TKqqBCmDHA",
       "name": "TL_JOHN_SUMMIT_LOLLAPALOOZA",
       "tracklistUrl": "https://www.1001tracklists.com/tracklist/dr6kbf9/john-summit-bud-light-stage-lollapalooza-united-states-chicago-2026-07-30.html",
-      "youtubeUrl": "https://www.youtube.com/watch?v=9TKqqBCmDHA"
+      "youtubeUrl": "https://youtu.be/9TKqqBCmDHA",
+      "soundcloudUrl": "https://soundcloud.com/johnsummit/john-summit-live-lollapalooza",
+      "note": "Operator recapture 2026-08-23. 41 timed cues on official johnsummit SC + YT. Added Mesto 7:55; last clocks 1:27:51/52/53 kept as pasted. Overlay TL_JOHN_SUMMIT is too generic. SC folds as secondary leftover onto yt-9TKqqBCmDHA. Distinct from TML WE2 yt-PlArfyuzuqo and Burning Man."
     },
     {
       "label": "Peggy Gou · Cercle Lille 2018-12-03",

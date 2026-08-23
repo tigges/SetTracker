@@ -114,18 +114,24 @@ export const TL_PEGGY_GOU_EDC_LV_2026: FingerprintSeedRow[] = [
 
 /**
  * John Summit @ Bud Light Stage, Lollapalooza United States Chicago 2026-07-30
+ * Official SC: https://soundcloud.com/johnsummit/john-summit-live-lollapalooza
+ * Official YT: https://youtu.be/9TKqqBCmDHA
  * https://www.1001tracklists.com/tracklist/dr6kbf9/john-summit-bud-light-stage-lollapalooza-united-states-chicago-2026-07-30.html
- * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-9TKqqBCmDHA"] = TL_JOHN_SUMMIT_LOLLAPALOOZA
- * Captured 2026-08-13 - provenance 1001tl.
+ * Overlay name TL_JOHN_SUMMIT is too generic (TML WE2 / Burning Man already exist).
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["sc-johnsummit-john-summit-live-lollapalooza"]
+ *       TRACKLIST_1001_BY_SOURCE_SLUG["yt-9TKqqBCmDHA"]
+ * Recapture 2026-08-23 — added Mesto 7:55; early mashup clocks from 1001.
+ * Last two clocks 1:27:52 / 1:27:53 kept as pasted.
  */
 export const TL_JOHN_SUMMIT_LOLLAPALOOZA: FingerprintSeedRow[] = [
   { at: "0:00", artist: "John Summit & LAVINIA", title: "SHADOWS" },
   { at: "2:45", artist: "Walker & Royce & FENIK", title: "Utopia" },
   { at: "5:20", artist: "The Prodigy vs. Benny Benassi", title: "Smack My Bitch Up vs. Satisfaction (ALOK Edit)" },
-  { at: "6:14", artist: "The Prodigy", title: "Smack My Bitch Up" },
-  { at: "7:08", artist: "Benny Benassi pres. The Biz", title: "Satisfaction" },
-  { at: "8:02", artist: "John Summit", title: "In Chicago" },
-  { at: "8:56", artist: "Tiësto", title: "Lethal Industry" },
+  { at: "6:12", artist: "The Prodigy", title: "Smack My Bitch Up" },
+  { at: "7:04", artist: "Benny Benassi pres. The Biz", title: "Satisfaction" },
+  { at: "7:55", artist: "Mesto", title: "Are You Feeling The Vibe" },
+  { at: "8:33", artist: "John Summit", title: "In Chicago" },
+  { at: "9:12", artist: "Tiësto", title: "Lethal Industry" },
   { at: "9:50", artist: "John Summit & HAYLA", title: "Shiver" },
   { at: "13:30", artist: "G-POL", title: "Proper Education" },
   { at: "15:40", artist: "John Summit & Devault ft. Julia Church", title: "SHADES OF BLUE" },

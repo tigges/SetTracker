@@ -24,6 +24,19 @@ assert.equal(
   "sc-sidepiece-sidepiece-lollapalooza-perry",
 );
 
+const summitLollaSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url ===
+    "https://soundcloud.com/johnsummit/john-summit-live-lollapalooza",
+);
+assert.ok(summitLollaSc);
+assert.equal(summitLollaSc.primaryArtist.name, "John Summit");
+assert.equal(summitLollaSc.type, "festival");
+assert.equal(
+  `sc-johnsummit-${slugify("john-summit-live-lollapalooza")}`,
+  "sc-johnsummit-john-summit-live-lollapalooza",
+);
+
 const notionPerrySc = SOUNDCLOUD_TRACK_SEEDS.find(
   (s) =>
     s.url === "https://soundcloud.com/notiondj/notion-live-at-lollapalooza",

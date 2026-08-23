@@ -144,6 +144,7 @@ import {
   TL_COLYN_INNELLEA_ULTRA_MIAMI_RESISTANCE_COVE_2026,
   TL_ABOVE_AND_BEYOND_KINETICFIELD_EDC_LV_2026,
   TL_DAVID_GUETTA_TML_WE1_2026,
+  TL_MARLON_HOFFSTADT_TML_WE1_2026,
 } from "../tracklists1001/seeds";
 import type { RawArtist } from "../types";
 import { slugify } from "../types";
@@ -1194,6 +1195,22 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_THE_CHAINSMOKERS_TML_WE1_2026,
   },
   {
+    // Tomorrowland official Relive — Mainstage WE1; 1001.tl/25k2c8zk timed capture.
+    video: "https://www.youtube.com/watch?v=rG1DvjvXCls",
+    primaryArtist: dj("Marlon Hoffstadt", {
+      accent: "#c77dff",
+      homeCity: "Berlin, DE",
+    }),
+    genre: "Hard Dance",
+    type: "festival",
+    title: "Marlon Hoffstadt WE1 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/25k2c8zk/marlon-hoffstadt-mainstage-tomorrowland-weekend-1-belgium-2026-07-17.html",
+    tracklist1001: TL_MARLON_HOFFSTADT_TML_WE1_2026,
+  },
+  {
     // Tomorrowland official Relive — Mainstage WE1; 1001.tl/2q9jpt9k timed capture.
     video: "https://www.youtube.com/watch?v=GSnPwle4FOE",
     primaryArtist: dj("David Guetta", {
@@ -1316,7 +1333,8 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_ALESSO_TML_WE2_2026,
   },
   {
-    // Tomorrowland official — Captive Soul / Freedom Stage WE2; 19/21 timed.
+    // Tomorrowland official — Captive Soul / Freedom Stage WE2; 22 timed
+    // (2026-08-23 recapture adds Cherry Buka @ 2:29).
     video: "https://www.youtube.com/watch?v=RLOghpXjuJI",
     primaryArtist: dj("Korolova", {
       accent: "#9b5de5",
@@ -2435,7 +2453,8 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_MISS_MONIQUE_BIORHYTHM,
   },
   {
-    // Bud Light Stage Chicago; 1001 captured 2026-08-13.
+    // Bud Light Stage Chicago; 1001 recapture 2026-08-23. Official SC twin:
+    // sc-johnsummit-john-summit-live-lollapalooza.
     video: "https://www.youtube.com/watch?v=9TKqqBCmDHA",
     primaryArtist: dj("John Summit", { accent: "#4cc9f0" }),
     genre: "Tech House",
