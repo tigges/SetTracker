@@ -103,6 +103,12 @@ const MADDIX_TML_WE1 = YOUTUBE_SETS.find((s) =>
 const DYEN_MADDIX_TML_WE2 = YOUTUBE_SETS.find((s) =>
   s.video.includes("VABm0tIRn2U"),
 );
+const BEBE_REXHA_TML_WE2 = YOUTUBE_SETS.find((s) =>
+  s.video.includes("KCeluZt3H9o"),
+);
+const DINO_LENNY_CORE_019 = YOUTUBE_SETS.find((s) =>
+  s.video.includes("90ExlZnu_Xg"),
+);
 const MARLON_TML_WE1 = YOUTUBE_SETS.find((s) =>
   s.video.includes("rG1DvjvXCls"),
 );
@@ -404,6 +410,28 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=VABm0tIRn2U");
     // Last cue 55:26 + 180s pad.
     assert.equal(meta.durationSec, 55 * 60 + 26 + 180);
+  });
+
+  it("builds Bebe Rexha TML WE2 Freedom Stage meta from the curated 1001 capture", () => {
+    assert.ok(BEBE_REXHA_TML_WE2);
+    const meta = watchMetaFromCuratedSeed(BEBE_REXHA_TML_WE2);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "KCeluZt3H9o");
+    assert.match(meta.title, /Bebe Rexha WE2/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=KCeluZt3H9o");
+    // Last cue 59:30 + 180s pad.
+    assert.equal(meta.durationSec, 59 * 60 + 30 + 180);
+  });
+
+  it("builds Dino Lenny CORE Radio Show 019 meta from the curated 1001 capture", () => {
+    assert.ok(DINO_LENNY_CORE_019);
+    const meta = watchMetaFromCuratedSeed(DINO_LENNY_CORE_019);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "90ExlZnu_Xg");
+    assert.match(meta.title, /CORE Radio Show 019/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=90ExlZnu_Xg");
+    // Last cue 49:50 + 180s pad.
+    assert.equal(meta.durationSec, 49 * 60 + 50 + 180);
   });
 
   it("builds Maddix TML WE1 Mainstage meta from the curated 1001 capture", () => {
@@ -1820,6 +1848,38 @@ describe("curated YouTube 429 fallback", () => {
     assert.equal(sets[0]?.primaryArtist?.slug, "dyen");
     assert.notEqual(sets[0]!.sourceSlug, "yt-1Fu89dxrXI0");
     assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
+  });
+
+  it("lands Bebe Rexha TML WE2 Freedom Stage from the 1001 seed when watch is 429", async () => {
+    assert.ok(BEBE_REXHA_TML_WE2);
+    const adapter = createYoutubeAdapter([BEBE_REXHA_TML_WE2], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-KCeluZt3H9o");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 23);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 59 * 60 + 30);
+    assert.equal(sets[0]?.primaryArtist?.slug, "bebe-rexha");
+    assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
+  });
+
+  it("lands Dino Lenny CORE Radio Show 019 from the 1001 seed when watch is 429", async () => {
+    assert.ok(DINO_LENNY_CORE_019);
+    const adapter = createYoutubeAdapter([DINO_LENNY_CORE_019], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-90ExlZnu_Xg");
+    assert.equal(sets[0]!.type, "radio");
+    assert.ok(sets[0]!.plays.length >= 9);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 49 * 60 + 50);
+    assert.equal(sets[0]?.primaryArtist?.slug, "dino-lenny");
+    assert.notEqual(
+      sets[0]!.sourceSlug,
+      "yt-tomorrowland-core-radio-show-july-2026",
+    );
+    assert.equal(sets[0]!.seriesName, "CORE Radio Show");
   });
 
   it("lands Maddix TML WE1 Mainstage from the 1001 seed when watch is 429", async () => {

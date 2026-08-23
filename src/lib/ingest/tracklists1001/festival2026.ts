@@ -115,10 +115,14 @@ import {
 } from "./festivalCaptures20260819";
 import { TL_ABOVE_AND_BEYOND_KINETICFIELD_EDC_LV_2026 } from "./festivalCaptures20260820";
 import {
+  TL_BEBE_REXHA_TML_WE2_2026,
   TL_DAVID_GUETTA_TML_WE1_2026,
+  TL_DINO_LENNY_CORE_019_2022,
   TL_DYEN_MADDIX_TML_WE2_2026,
+  TL_LAIDBACK_LUKE_OWR_SELECTS_017_2026,
   TL_MADDIX_TML_WE1_2026,
   TL_MARLON_HOFFSTADT_TML_WE1_2026,
+  TL_SARA_LANDRY_TML_FRIENDSHIP_MIX_2026,
 } from "./festivalCaptures20260823";
 
 export {
@@ -218,10 +222,14 @@ export {
   TL_JORIS_VOORN_KOROLOVA_ULTRA_MIAMI_RESISTANCE_COVE_2026,
   TL_COLYN_INNELLEA_ULTRA_MIAMI_RESISTANCE_COVE_2026,
   TL_ABOVE_AND_BEYOND_KINETICFIELD_EDC_LV_2026,
+  TL_BEBE_REXHA_TML_WE2_2026,
   TL_DAVID_GUETTA_TML_WE1_2026,
+  TL_DINO_LENNY_CORE_019_2022,
   TL_DYEN_MADDIX_TML_WE2_2026,
+  TL_LAIDBACK_LUKE_OWR_SELECTS_017_2026,
   TL_MADDIX_TML_WE1_2026,
   TL_MARLON_HOFFSTADT_TML_WE1_2026,
+  TL_SARA_LANDRY_TML_FRIENDSHIP_MIX_2026,
 };
 
 function formatClock(sec: number): string {
@@ -4783,6 +4791,13 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "sc-maddixmusic-maddix-live-tomorrowland-2026": TL_MADDIX_TML_WE1_2026,
   "yt-VABm0tIRn2U": TL_DYEN_MADDIX_TML_WE2_2026,
   "sc-maddixmusic-dyen-b2b-maddix-live": TL_DYEN_MADDIX_TML_WE2_2026,
+  "sc-tomorrowland-tomorrowland-friendship-mix-with-sara-landry-july-2026":
+    TL_SARA_LANDRY_TML_FRIENDSHIP_MIX_2026,
+  "sc-tomorrowland-laidback-luke-selects-august-2026":
+    TL_LAIDBACK_LUKE_OWR_SELECTS_017_2026,
+  "yt-KCeluZt3H9o": TL_BEBE_REXHA_TML_WE2_2026,
+  "yt-90ExlZnu_Xg": TL_DINO_LENNY_CORE_019_2022,
+  "sc-tomorrowland-core-i-dino-lenny-0190": TL_DINO_LENNY_CORE_019_2022,
   "ht-edmliveset-nico-moreno-holy-priestaa-live-at-edc-las-vegas-2026-las-vegas-usa-17-05-2026":
     TL_NICO_MORENO_HOLY_PRIEST_EDC_LV_2026,
 };

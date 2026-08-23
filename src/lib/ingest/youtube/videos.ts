@@ -143,7 +143,9 @@ import {
   TL_JORIS_VOORN_KOROLOVA_ULTRA_MIAMI_RESISTANCE_COVE_2026,
   TL_COLYN_INNELLEA_ULTRA_MIAMI_RESISTANCE_COVE_2026,
   TL_ABOVE_AND_BEYOND_KINETICFIELD_EDC_LV_2026,
+  TL_BEBE_REXHA_TML_WE2_2026,
   TL_DAVID_GUETTA_TML_WE1_2026,
+  TL_DINO_LENNY_CORE_019_2022,
   TL_DYEN_MADDIX_TML_WE2_2026,
   TL_MADDIX_TML_WE1_2026,
   TL_MARLON_HOFFSTADT_TML_WE1_2026,
@@ -1260,6 +1262,39 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/1qn9j3b1/dyen-maddix-atmosphere-stage-tomorrowland-weekend-2-belgium-2026-07-24.html",
     tracklist1001: TL_DYEN_MADDIX_TML_WE2_2026,
+  },
+  {
+    // Tomorrowland official Relive — Freedom Stage WE2; 1001.tl/28bjnz11.
+    // No SoundCloud in the operator paste — do not invent an SC slug.
+    video: "https://www.youtube.com/watch?v=KCeluZt3H9o",
+    primaryArtist: dj("Bebe Rexha", {
+      accent: "#ff85a1",
+    }),
+    genre: "Dance",
+    type: "festival",
+    title: "Bebe Rexha WE2 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/28bjnz11/bebe-rexha-freedom-stage-tomorrowland-weekend-2-belgium-2026-07-24.html",
+    tracklist1001: TL_BEBE_REXHA_TML_WE2_2026,
+  },
+  {
+    // Official CORE Radio Show 019 (Core Stage TML WE1 2022 recording).
+    // Official SC twin: tomorrowland/core-i-dino-lenny-0190.
+    // Capture paste used yt-tomorrowland-core-radio-show-july-2026 (invalid).
+    video: "https://www.youtube.com/watch?v=90ExlZnu_Xg",
+    primaryArtist: dj("Dino Lenny", {
+      accent: "#6c5ce7",
+    }),
+    genre: "Tech House",
+    type: "radio",
+    title: "Dino Lenny — CORE Radio Show 019",
+    seriesName: "CORE Radio Show",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/19c3lcn9/dino-lenny-one-world-radio-core-radio-show-019-core-stage-tomorrowland-weekend-1-belgium-2022-07-15-2022-07-31.html",
+    tracklist1001: TL_DINO_LENNY_CORE_019_2022,
   },
   {
     // Tomorrowland official Relive — Mainstage WE1.

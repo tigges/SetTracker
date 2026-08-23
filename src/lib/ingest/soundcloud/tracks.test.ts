@@ -277,6 +277,47 @@ assert.equal(
   "sc-maddixmusic-dyen-b2b-maddix-live",
 );
 
+const saraFriendshipSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url ===
+    "https://soundcloud.com/tomorrowland/tomorrowland-friendship-mix-with-sara-landry-july-2026",
+);
+assert.ok(saraFriendshipSc);
+assert.equal(saraFriendshipSc.primaryArtist.name, "Sara Landry");
+assert.equal(saraFriendshipSc.type, "mix");
+assert.equal(saraFriendshipSc.seriesName, "Tomorrowland Friendship Mix");
+assert.equal(
+  `sc-tomorrowland-${slugify("tomorrowland-friendship-mix-with-sara-landry-july-2026")}`,
+  "sc-tomorrowland-tomorrowland-friendship-mix-with-sara-landry-july-2026",
+);
+
+const lukeSelectsSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url ===
+    "https://soundcloud.com/tomorrowland/laidback-luke-selects-august-2026",
+);
+assert.ok(lukeSelectsSc);
+assert.equal(lukeSelectsSc.primaryArtist.name, "Laidback Luke");
+assert.equal(lukeSelectsSc.type, "radio");
+assert.equal(lukeSelectsSc.seriesName, "One World Radio Selects");
+assert.equal(
+  `sc-tomorrowland-${slugify("laidback-luke-selects-august-2026")}`,
+  "sc-tomorrowland-laidback-luke-selects-august-2026",
+);
+
+const dinoCoreSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url === "https://soundcloud.com/tomorrowland/core-i-dino-lenny-0190",
+);
+assert.ok(dinoCoreSc);
+assert.equal(dinoCoreSc.primaryArtist.name, "Dino Lenny");
+assert.equal(dinoCoreSc.type, "radio");
+assert.equal(dinoCoreSc.seriesName, "CORE Radio Show");
+assert.equal(
+  `sc-tomorrowland-${slugify("core-i-dino-lenny-0190")}`,
+  "sc-tomorrowland-core-i-dino-lenny-0190",
+);
+
 const hypeSyncSc = SOUNDCLOUD_TRACK_SEEDS.find(
   (s) =>
     s.url === "https://soundcloud.com/jameshypethedj/sync-london-full-set",

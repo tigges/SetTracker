@@ -168,3 +168,173 @@ export const TL_DYEN_MADDIX_TML_WE2_2026: FingerprintSeedRow[] = [
   { at: "53:37", artist: "Darren Styles", title: "Pump This Party" },
   { at: "55:26", artist: "Activator & GRAVEDGR", title: "Machinegun" },
 ];
+
+/**
+ * Sara Landry - Tomorrowland Friendship Mix 2026-07-09
+ * Official SC: https://soundcloud.com/tomorrowland/tomorrowland-friendship-mix-with-sara-landry-july-2026
+ * https://www.1001tracklists.com/tracklist/jg9hxck/saralandry-tomorrowland-friendship-mix-2026-07-09.html
+ * Overlay name TL_SARA_LANDRY is already Mainstage WE2 (yt-aDAWctObTvI).
+ * No YouTube in the operator paste — do not invent a YT slug.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["sc-tomorrowland-tomorrowland-friendship-mix-with-sara-landry-july-2026"]
+ * Captured 2026-08-23 — provenance 1001tl.
+ */
+export const TL_SARA_LANDRY_TML_FRIENDSHIP_MIX_2026: FingerprintSeedRow[] = [
+  { at: "2:44", artist: "Alex Farell & MXGN", title: "Comfort In Chaos" },
+  { at: "7:37", artist: "Alex Farell", title: "Rave Machine" },
+  { at: "9:03", artist: "Sara Landry & Alex Farell", title: "Angel Dust" },
+  { at: "11:27", artist: "ANNIE", title: "Work On It" },
+  { at: "13:00", artist: "Akari", title: "Bring It Up" },
+  { at: "18:38", artist: "Sara Landry & Alt8", title: "Hands Up" },
+  { at: "21:25", artist: "ANNIE", title: "2 The Floor" },
+  { at: "23:16", artist: "Fin Carroll", title: "Time Theft" },
+  { at: "24:54", artist: "BOY&GIRL", title: "FOURplay (Bounce Edit)" },
+  { at: "27:45", artist: "APHØTIC", title: "Thalassophobia" },
+  { at: "29:01", artist: "Bollman", title: "Rampage (Creeds Remix)" },
+  { at: "30:05", artist: "Benny Benassi pres. The Biz", title: "Satisfaction (BEAUZ Hard Techno Remix)" },
+  { at: "31:42", artist: "AREA ØNE", title: "Your Mind" },
+  { at: "34:43", artist: "Nico Moreno & Sarah de Warren", title: "Dance In The Light" },
+  { at: "36:14", artist: "Fin Carroll", title: "Adrenaline Junkie" },
+  { at: "38:21", artist: "Sara Landry & Nico Moreno", title: "Because They Want Our Seat" },
+  { at: "40:33", artist: "SIKOTI", title: "Lost In Translation" },
+  { at: "42:11", artist: "NMO", title: "OIIA OIIA OIIA (Spinning Cat)" },
+  { at: "43:35", artist: "Alex Farell", title: "Sonic Pulse" },
+  { at: "44:35", artist: "Enrico Sangiuliano", title: "The Techno Code (Avalon & Tristan Remix)" },
+  { at: "47:40", artist: "Killerwatts & Mandala", title: "Rescue Remedy (Burn In Noise Remix)" },
+  { at: "49:12", artist: "Avan7 & Burn In Noise & Altruism", title: "Divine Fortune" },
+  { at: "51:31", artist: "Electric Universe", title: "Mongolia" },
+  { at: "54:31", artist: "Ace Ventura", title: "Rebirth (Blazy & Faders Remix)" },
+  { at: "57:37", artist: "Stryker & Mekkanikka", title: "Macho Man" },
+  { at: "59:12", artist: "Spectra Sonics & Mirok", title: "Modulation Depth" },
+];
+
+/**
+ * Laidback Luke - One World Radio Selects 017 2026-08-11
+ * Official SC: https://soundcloud.com/tomorrowland/laidback-luke-selects-august-2026
+ * https://www.1001tracklists.com/tracklist/1qnd3h91/laidback-luke-one-world-radio-selects-017-2026-08-11.html
+ * Overlay name TL_LAIDBACK_LUKE is too generic.
+ * No YouTube in the operator paste — do not invent a YT slug.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["sc-tomorrowland-laidback-luke-selects-august-2026"]
+ * Captured 2026-08-23 — provenance 1001tl.
+ */
+export const TL_LAIDBACK_LUKE_OWR_SELECTS_017_2026: FingerprintSeedRow[] = [
+  { at: "0:20", artist: "KETTAMA", title: "Comes and Goes" },
+  { at: "1:19", artist: "Riordan", title: "WGTF?" },
+  { at: "2:18", artist: "Laidback Luke vs. A.S.H.A vs. Ivan Gough & Feenixpawl vs. Roger Sanchez", title: "Ball & Chain (JJ Tribute) vs. In My Mind vs. Another Chance (Laidback Luke Heavy Mashup)" },
+  { at: "3:17", artist: "HotLap", title: "Recall" },
+  { at: "4:16", artist: "Yellow Claw & Stoltenhoff ft. Maleigh Zan", title: "Freak Is On" },
+  { at: "5:15", artist: "Activator & GRAVEDGR", title: "Machinegun" },
+  { at: "6:14", artist: "Faithless", title: "Insomnia (Acappella)" },
+  { at: "7:13", artist: "HARDSOK", title: "Forever" },
+  { at: "8:12", artist: "Timmy Trumpet & Felix", title: "Don't You Want Me" },
+  { at: "9:11", artist: "Hardwell & MAKJ", title: "Countdown" },
+  { at: "10:10", artist: "Loofy", title: "Last Night" },
+  { at: "11:09", artist: "David Guetta & Martin Garrix & Brooks", title: "Like I Do" },
+  { at: "12:08", artist: "Deorro & MAKJ & Quintino", title: "Knockout" },
+  { at: "13:07", artist: "Gala", title: "Freed From Desire (Diplo Remix)" },
+  { at: "14:06", artist: "Knife Party ft. Harrison", title: "Death & Desire (Laidback Luke Remix)" },
+  { at: "15:05", artist: "Ian Asher & Olly Alexander", title: "Desire" },
+  { at: "16:04", artist: "WHIPPED CREAM", title: "stranger" },
+  { at: "17:03", artist: "bradeazy & Crazy Town", title: "Butterfly 2026" },
+  { at: "18:02", artist: "Robin Schulz ft. Francesco Yates", title: "Sugar (Stadiumx Remix)" },
+  { at: "19:01", artist: "John Newman", title: "Love Me Again (Acappella)" },
+  { at: "20:00", artist: "Myles Smith", title: "Stargazing" },
+  { at: "20:59", artist: "eric404", title: "Lonely" },
+  { at: "21:58", artist: "ARTY & Laidback Luke ft. James Hersey", title: "Lost In The Crowd" },
+  { at: "22:57", artist: "Fedde Le Grand", title: "Put Your Hands Up For Detroit (Acappella)" },
+  { at: "23:56", artist: "Katy Perry ft. Skip Marley", title: "Chained To The Rhythm" },
+  { at: "24:55", artist: "System F", title: "Out Of The Blue (Laidback Luke 2010 Remix)" },
+  { at: "25:54", artist: "Laidback Luke & TUJAMO", title: "S.A.X." },
+  { at: "26:53", artist: "Porter Robinson ft. Bright Lights", title: "Language" },
+  { at: "27:52", artist: "Valentino Khan", title: "SUMMERTIMEBADDIE" },
+  { at: "28:51", artist: "Bingo Players", title: "Hit It Pump It" },
+  { at: "29:50", artist: "Kanye West ft. Rihanna", title: "All Of The Lights (Manteya vs. Laidback Luke Edit)" },
+  { at: "30:49", artist: "Swedish House Mafia vs. Pitbull & Bingo Players", title: "Save Everything Tonight (Laidback Luke Mashup)" },
+  { at: "31:48", artist: "Swedish House Mafia ft. John Martin", title: "Save The World" },
+  { at: "32:47", artist: "Pitbull ft. Ne-Yo & Afrojack & Nayer", title: "Give Me Everything (Bingo Players Remix)" },
+  { at: "33:46", artist: "David Guetta ft. Kid Cudi", title: "Memories" },
+  { at: "34:45", artist: "BIGGS", title: "Whistle" },
+  { at: "35:44", artist: "Khia", title: "My Neck, My Back (Lick It)" },
+  { at: "36:43", artist: "Valentino Khan", title: "Lick It" },
+  { at: "37:42", artist: "Laidback Luke & Dimitri Vegas & Like Mike", title: "More (Blasterjaxx Remix)" },
+  { at: "38:41", artist: "Duck Sauce", title: "NRG" },
+  { at: "39:40", artist: "Chuckie & Kronic & Krunk!", title: "Vamonos" },
+  { at: "40:39", artist: "Nico & Vinz", title: "Am I Wrong (Acappella)" },
+  { at: "41:38", artist: "Major Lazer & DJ Snake ft. MØ", title: "Lean On" },
+  { at: "42:37", artist: "Megisto & Laidback Luke", title: "Don't Look Back" },
+  { at: "43:36", artist: "Chuckie & Kronic & Krunk!", title: "Vamonos" },
+  { at: "44:35", artist: "Hardwell & MAKJ", title: "Countdown" },
+  { at: "45:34", artist: "Bassjackers & MAKJ", title: "Derp" },
+  { at: "46:33", artist: "Rihanna", title: "Disturbia (Rated Rico Edit)" },
+  { at: "47:32", artist: "Dannic", title: "Up & Down" },
+  { at: "48:31", artist: "Topanga Hills Mafia", title: "I Found Luv" },
+  { at: "49:30", artist: "Calvin Harris & Rag'n'Bone Man", title: "Giant (Laidback Luke Remix)" },
+  { at: "50:29", artist: "Tommy Richman", title: "MILLION DOLLAR BABY" },
+  { at: "51:28", artist: "Prospa & Murda Beatz", title: "Baby" },
+  { at: "52:27", artist: "Daft Punk", title: "Human After All" },
+  { at: "53:26", artist: "Bright Lights & Laidback Luke", title: "Human Again II" },
+  { at: "54:25", artist: "David Guetta & Third ≡ Party ft. John Martin", title: "Human" },
+  { at: "55:24", artist: "Rag 'N' Bone Man", title: "Human" },
+  { at: "56:23", artist: "John Summit ft. Echoes", title: "Human" },
+  { at: "57:22", artist: "Laidback Luke", title: "Heat It Up" },
+  { at: "58:21", artist: "Me N U & Bienk", title: "Sweet Lovin (Sunset Edition)" },
+];
+
+/**
+ * Bebe Rexha @ Freedom Stage, Tomorrowland Weekend 2, Belgium 2026-07-24
+ * Official YT: https://youtu.be/KCeluZt3H9o
+ * https://www.1001tracklists.com/tracklist/28bjnz11/bebe-rexha-freedom-stage-tomorrowland-weekend-2-belgium-2026-07-24.html
+ * Overlay name TL_BEBE_REXHA is too generic.
+ * No SoundCloud in the operator paste — do not invent an SC slug.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-KCeluZt3H9o"]
+ * Captured 2026-08-23 — provenance 1001tl.
+ */
+export const TL_BEBE_REXHA_TML_WE2_2026: FingerprintSeedRow[] = [
+  { at: "0:12", artist: "David Guetta ft. Bebe Rexha", title: "I'm Good (Blue) (Cedric Gervais Remix)" },
+  { at: "2:12", artist: "Sandro Silva & Quintino", title: "Epic" },
+  { at: "4:12", artist: "Bebe Rexha", title: "Hysteria" },
+  { at: "6:45", artist: "Bebe Rexha & Faithless", title: "New Religion" },
+  { at: "9:35", artist: "Supermode", title: "Tell Me Why" },
+  { at: "10:16", artist: "G-Eazy & Bebe Rexha", title: "Me, Myself & I" },
+  { at: "10:57", artist: "David Guetta vs. Benny Benassi", title: "Satisfaction" },
+  { at: "11:38", artist: "David Guetta & Nicki Minaj & Bebe Rexha & AFROJACK vs. Netsky & Urbandawn", title: "Hey Mama vs. Power (David Guetta Mashup)" },
+  { at: "12:02", artist: "David Guetta ft. Nicki Minaj, Bebe Rexha & Afrojack", title: "Hey Mama" },
+  { at: "12:26", artist: "Netsky & Urbandawn", title: "Power" },
+  { at: "12:50", artist: "Creeds", title: "Push Up" },
+  { at: "14:04", artist: "Bebe Rexha", title: "Tokyo" },
+  { at: "15:18", artist: "Ariana Grande", title: "7 Rings" },
+  { at: "15:55", artist: "Avicii", title: "Levels" },
+  { at: "16:32", artist: "Bebe Rexha ft. Ty Dolla $ign", title: "Bad Bitch" },
+  { at: "17:09", artist: "Darude", title: "Sandstorm" },
+  { at: "17:45", artist: "David Guetta ft. Bebe Rexha & J Balvin", title: "Say My Name" },
+  { at: "18:39", artist: "Zombie Nation", title: "Kernkraft 400" },
+  { at: "19:33", artist: "KAAZE ft. Alina Pozi", title: "Papi" },
+  { at: "20:21", artist: "Bebe Rexha", title: "Çike Çike" },
+  { at: "21:08", artist: "Bebe Rexha & David Guetta", title: "Sad Girls" },
+  { at: "22:39", artist: "Bebe Rexha & David Guetta", title: "Sad Girls (DJs From Mars Remix)" },
+  { at: "24:10", artist: "Martin Garrix & Bebe Rexha", title: "In The Name Of Love" },
+  { at: "59:30", artist: "Martin Garrix & Bebe Rexha", title: "In The Name Of Love" },
+];
+
+/**
+ * Dino Lenny @ One World Radio CORE Radio Show 019
+ * (Core Stage, Tomorrowland Weekend 1, Belgium 2022-07-15) 2022-07-31
+ * Official YT: https://youtu.be/90ExlZnu_Xg
+ * Official SC: https://soundcloud.com/tomorrowland/core-i-dino-lenny-0190
+ * https://www.1001tracklists.com/tracklist/19c3lcn9/dino-lenny-one-world-radio-core-radio-show-019-core-stage-tomorrowland-weekend-1-belgium-2022-07-15-2022-07-31.html
+ * Overlay name TL_DINO_LENNY is too generic.
+ * Capture paste used yt-tomorrowland-core-radio-show-july-2026 (invalid).
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-90ExlZnu_Xg"]
+ *       TRACKLIST_1001_BY_SOURCE_SLUG["sc-tomorrowland-core-i-dino-lenny-0190"]
+ * Captured 2026-08-23 — provenance 1001tl.
+ */
+export const TL_DINO_LENNY_CORE_019_2022: FingerprintSeedRow[] = [
+  { at: "4:40", artist: "Tiga", title: "Mind Dimension (Ben Sterling Remix)" },
+  { at: "8:30", artist: "Alan Dixon", title: "Take A Trip" },
+  { at: "20:00", artist: "Shadow Child", title: "Space Riot" },
+  { at: "25:00", artist: "Skream & Jackmaster", title: "The Attention Deficit Track (Terrace Mix)" },
+  { at: "32:30", artist: "Andrea Oliva", title: "Alley Rave" },
+  { at: "38:05", artist: "Notelle & Jansons", title: "Stutter" },
+  { at: "41:30", artist: "Matthias Tanzmann & Black Circle", title: "Aftermath" },
+  { at: "45:10", artist: "Aera", title: "Acido" },
+  { at: "49:50", artist: "Odd Parents", title: "Learn To Fly (Maceo Plex 808 Dub)" },
+];

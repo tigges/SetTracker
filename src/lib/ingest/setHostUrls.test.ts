@@ -77,6 +77,22 @@ assert.notEqual(
   maddixYt?.soundcloudUrl,
 );
 
+const dinoCoreYt = extras["yt-90ExlZnu_Xg"];
+assert.equal(
+  dinoCoreYt?.soundcloudUrl,
+  "https://soundcloud.com/tomorrowland/core-i-dino-lenny-0190",
+);
+assert.equal(
+  extras["sc-tomorrowland-core-i-dino-lenny-0190"]?.youtubeUrl,
+  "https://www.youtube.com/watch?v=90ExlZnu_Xg",
+);
+assert.ok(!extras["yt-KCeluZt3H9o"]?.soundcloudUrl);
+assert.ok(
+  !extras[
+    "sc-tomorrowland-tomorrowland-friendship-mix-with-sara-landry-july-2026"
+  ]?.youtubeUrl,
+);
+
 const clapcast = extras["sc-claptone-clapcast-576"];
 assert.equal(
   clapcast?.mixcloudUrl,
