@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import { search1001, search1001QueryFromUrl } from "@/lib/search1001";
 
 const LIVE_SCRIPT = "https://setradar.ai/capture-1001tl.js";
 
@@ -90,9 +91,7 @@ function Capture1001Workbench({
         .includes(q),
     );
   }, [presets, query]);
-  const find1001 = query.trim()
-    ? `https://www.google.com/search?q=${encodeURIComponent(`${query.trim()} site:1001tracklists.com`)}`
-    : "";
+  const find1001 = query.trim() ? search1001(query.trim()) : "";
 
   async function onCopy(label: string, text: string) {
     const ok = await copyText(text);
@@ -162,8 +161,12 @@ function Capture1001Workbench({
               target="_blank"
               rel="noreferrer"
               className="text-brand hover:underline"
+              onClick={() => {
+                const q = search1001QueryFromUrl(find1001);
+                if (q) void onCopy("1001 search", q);
+              }}
             >
-              Find 1001
+              Search 1001
             </a>
           ) : null}
         </p>
@@ -212,8 +215,12 @@ function Capture1001Workbench({
                   target="_blank"
                   rel="noreferrer"
                   className="rounded-md border border-line px-2.5 py-1 text-[12px] font-bold"
+                  onClick={() => {
+                    const q = search1001QueryFromUrl(p.searchUrl);
+                    if (q) void onCopy("1001 search", q);
+                  }}
                 >
-                  Find 1001
+                  Search 1001
                 </a>
               )}
               <button

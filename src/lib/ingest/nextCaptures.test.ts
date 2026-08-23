@@ -8,7 +8,8 @@ import {
 import { TRACKLIST_1001_BY_SOURCE_SLUG } from "./tracklists1001/festival2026";
 
 assert.ok(PRIORITY_CAPTURES.length <= 12);
-assert.ok(search1001("fisher").includes("1001tracklists.com"));
+assert.ok(search1001("fisher").includes("1001tracklists.com/search"));
+assert.ok(!search1001("fisher").includes("google.com"));
 
 const presets = buildNextCaptures({ limit: 10 });
 assert.ok(presets.length <= 10);
