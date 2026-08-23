@@ -49,6 +49,20 @@ assert.equal(
   "https://soundcloud.com/korolovadj/korolova-live-tomorrowland-1",
 );
 
+const maddixYt = extras["yt-1Fu89dxrXI0"];
+assert.equal(
+  maddixYt?.soundcloudUrl,
+  "https://soundcloud.com/maddixmusic/maddix-live-tomorrowland-2026",
+);
+assert.equal(
+  maddixYt?.youtubeUrl,
+  "https://www.youtube.com/watch?v=1Fu89dxrXI0",
+);
+assert.equal(
+  extras["sc-maddixmusic-maddix-live-tomorrowland-2026"]?.youtubeUrl,
+  "https://www.youtube.com/watch?v=1Fu89dxrXI0",
+);
+
 const clapcast = extras["sc-claptone-clapcast-576"];
 assert.equal(
   clapcast?.mixcloudUrl,

@@ -116,6 +116,7 @@ import {
 import { TL_ABOVE_AND_BEYOND_KINETICFIELD_EDC_LV_2026 } from "./festivalCaptures20260820";
 import {
   TL_DAVID_GUETTA_TML_WE1_2026,
+  TL_MADDIX_TML_WE1_2026,
   TL_MARLON_HOFFSTADT_TML_WE1_2026,
 } from "./festivalCaptures20260823";
 
@@ -217,6 +218,7 @@ export {
   TL_COLYN_INNELLEA_ULTRA_MIAMI_RESISTANCE_COVE_2026,
   TL_ABOVE_AND_BEYOND_KINETICFIELD_EDC_LV_2026,
   TL_DAVID_GUETTA_TML_WE1_2026,
+  TL_MADDIX_TML_WE1_2026,
   TL_MARLON_HOFFSTADT_TML_WE1_2026,
 };
 
@@ -3813,9 +3815,12 @@ export const TL_HOLY_PRIEST_TML_WE1_2026: FingerprintSeedRow[] = evenlySpaceRows
 
 /**
  * Nico Moreno & Holy Priest @ cosmicMEADOW, EDC Las Vegas 2026-05-17
- * 1001TL: https://1001.tl/n56kgj1 — operator console capture 2026-08-01
- * (0/47 timed cues — evenly spaced across ~60m festival slot).
- * No official Insomniac playback yet — seed ready; do not wire fan uploads.
+ * 1001TL: https://www.1001tracklists.com/tracklist/n56kgj1/nico-moreno-holy-priest-cosmicmeadow-edc-las-vegas-united-states-2026-05-17.html
+ * Operator console capture 2026-08-01 (0/47 timed cues — evenly spaced
+ * across ~60m festival slot). Still no clocks in the 2026-08-23 paste.
+ * hearthis.at/edmliveset/… is a fan archive — tracklist host only, never
+ * playbackUrl. Do not wire fan YT yt-nZS9gvjlPIs.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["ht-edmliveset-nico-moreno-holy-priestaa-live-at-edc-las-vegas-2026-las-vegas-usa-17-05-2026"]
  */
 export const TL_NICO_MORENO_HOLY_PRIEST_EDC_LV_2026: FingerprintSeedRow[] =
   evenlySpaceRows(
@@ -4772,6 +4777,10 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-OI02QgEA1Zw": TL_ABOVE_AND_BEYOND_KINETICFIELD_EDC_LV_2026,
   "yt-GSnPwle4FOE": TL_DAVID_GUETTA_TML_WE1_2026,
   "yt-rG1DvjvXCls": TL_MARLON_HOFFSTADT_TML_WE1_2026,
+  "yt-1Fu89dxrXI0": TL_MADDIX_TML_WE1_2026,
+  "sc-maddixmusic-maddix-live-tomorrowland-2026": TL_MADDIX_TML_WE1_2026,
+  "ht-edmliveset-nico-moreno-holy-priestaa-live-at-edc-las-vegas-2026-las-vegas-usa-17-05-2026":
+    TL_NICO_MORENO_HOLY_PRIEST_EDC_LV_2026,
 };
 
 /** Sanity: every seeded clock must parse. */

@@ -251,6 +251,19 @@ assert.equal(
   "sc-korolovadj-korolova-live-tomorrowland-1",
 );
 
+const maddixTmlSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url ===
+    "https://soundcloud.com/maddixmusic/maddix-live-tomorrowland-2026",
+);
+assert.ok(maddixTmlSc);
+assert.equal(maddixTmlSc.primaryArtist.name, "Maddix");
+assert.equal(maddixTmlSc.type, "festival");
+assert.equal(
+  `sc-maddixmusic-${slugify("maddix-live-tomorrowland-2026")}`,
+  "sc-maddixmusic-maddix-live-tomorrowland-2026",
+);
+
 const hypeSyncSc = SOUNDCLOUD_TRACK_SEEDS.find(
   (s) =>
     s.url === "https://soundcloud.com/jameshypethedj/sync-london-full-set",

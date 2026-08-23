@@ -291,6 +291,18 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     minDurationSec: 15 * 60,
   },
   {
+    // Official Maddix TML WE1 Mainstage; 1001TL wired via
+    // sc-maddixmusic-maddix-live-tomorrowland-2026 (same list as yt-1Fu89dxrXI0).
+    // Never sc-https://… or yt-maddixmusic-….
+    url: "https://soundcloud.com/maddixmusic/maddix-live-tomorrowland-2026",
+    primaryArtist: dj("Maddix", {
+      accent: "#ff4d6d",
+    }),
+    genre: "Techno",
+    type: "festival",
+    minDurationSec: 15 * 60,
+  },
+  {
     // Official James Hype upload; 1001TL wired via
     // sc-jameshypethedj-sync-london-full-set (same list as yt-rLTCLSsqrXY).
     url: "https://soundcloud.com/jameshypethedj/sync-london-full-set",

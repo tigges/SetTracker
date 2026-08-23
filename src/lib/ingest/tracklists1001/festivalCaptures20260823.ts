@@ -88,3 +88,40 @@ export const TL_MARLON_HOFFSTADT_TML_WE1_2026: FingerprintSeedRow[] = [
   { at: "49:21", artist: "Marlon Hoffstadt", title: "You're The One" },
   { at: "56:00", artist: "Olive", title: "You're Not Alone (Marlon Hoffstadt Edit)" },
 ];
+
+/**
+ * Maddix @ Mainstage, Tomorrowland Weekend 1, Belgium 2026-07-18
+ * Official YT: https://youtu.be/1Fu89dxrXI0
+ * Official SC: https://soundcloud.com/maddixmusic/maddix-live-tomorrowland-2026
+ * Apple Music album 6802795931 is a MixesDB lookup key only — never on-site
+ * playback. 1001 clocks are set times, not Apple Music segment lengths.
+ * https://www.1001tracklists.com/tracklist/1lx100pt/maddix-mainstage-tomorrowland-weekend-1-belgium-2026-07-18.html
+ * Overlay name TL_MADDIX is too generic. Capture paste used
+ * yt-maddixmusic-maddix-live-tomorrowland-2026 (invalid — YT prefix + SC path).
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-1Fu89dxrXI0"]
+ *       TRACKLIST_1001_BY_SOURCE_SLUG["sc-maddixmusic-maddix-live-tomorrowland-2026"]
+ * Captured 2026-08-23 — provenance 1001tl.
+ */
+export const TL_MADDIX_TML_WE1_2026: FingerprintSeedRow[] = [
+  { at: "0:12", artist: "Maddix", title: "We Rave" },
+  { at: "3:03", artist: "Maddix ft. RYVM", title: "Over The Edge" },
+  { at: "6:25", artist: "Maddix & The Rocketman ft. 2 Brothers On The 4th Floor", title: "Never Alone" },
+  { at: "10:37", artist: "Ueberrest", title: "Disturbing Paradise" },
+  { at: "12:40", artist: "Maddix", title: "Fk Being Polite" },
+  { at: "15:50", artist: "Maddix & The Rocketman & CRW & Dimitri Vegas", title: "I Feel Love" },
+  { at: "17:49", artist: "MXGN", title: "Hear The Bass (Rave Rework)" },
+  { at: "19:28", artist: "Maddix", title: "Acid For Breakfast" },
+  { at: "22:56", artist: "Maddix & Will Atkinson", title: "My Favourite Regrets" },
+  { at: "25:40", artist: "Maddix & Caroline Roxy", title: "Coming Home" },
+  { at: "31:03", artist: "Dimitri Vegas & Pat B ft. Sylver", title: "Turn The Tide" },
+  { at: "32:55", artist: "Bassjackers & Maddix", title: "Rave Is My Therapy" },
+  { at: "35:44", artist: "Maddix ft. Fēlēs", title: "My Gasoline" },
+  { at: "38:25", artist: "Maddix & TMPL", title: "The Ultimate Seduction" },
+  { at: "40:57", artist: "Hardwell & Bassjackers", title: "Bang On The Drums" },
+  { at: "43:35", artist: "Hardwell & Maddix", title: "AI CARALHO" },
+  { at: "46:10", artist: "DYEN & Maddix", title: "GABBER" },
+  { at: "49:22", artist: "KX CHR", title: "Jump" },
+  { at: "51:00", artist: "Maddix ft. Leila K", title: "Open Sesame (Abracadabra)" },
+  { at: "53:45", artist: "Maddix", title: "Favela" },
+  { at: "55:22", artist: "Two Steps From Hell", title: "Heart Of Courage" },
+];

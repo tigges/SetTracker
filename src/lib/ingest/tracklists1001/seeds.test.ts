@@ -168,6 +168,7 @@ import {
   TL_COLYN_INNELLEA_ULTRA_MIAMI_RESISTANCE_COVE_2026,
   TL_ABOVE_AND_BEYOND_KINETICFIELD_EDC_LV_2026,
   TL_DAVID_GUETTA_TML_WE1_2026,
+  TL_MADDIX_TML_WE1_2026,
   TL_MARLON_HOFFSTADT_TML_WE1_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
@@ -535,10 +536,22 @@ const nicoHp = tracklist1001RowsToPlays(TL_NICO_MORENO_HOLY_PRIEST_EDC_LV_2026);
 assert.equal(nicoHp.length, 47);
 assert.equal(nicoHp[0]!.trackTitle, "Overdose");
 assert.match(nicoHp[nicoHp.length - 1]!.trackTitle!, /Move Ma Body/);
-// B2B playback not published officially yet — seed held, not slug-mapped.
+// Fan YT still held. hearthis edmliveset is the tracklist host (never playback).
 assert.equal(
   TRACKLIST_1001_BY_SOURCE_SLUG["yt-nZS9gvjlPIs"],
   undefined,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "ht-edmliveset-nico-moreno-holy-priestaa-live-at-edc-las-vegas-2026-las-vegas-usa-17-05-2026"
+  ],
+  TL_NICO_MORENO_HOLY_PRIEST_EDC_LV_2026,
+);
+assert.equal(
+  isWiredTracklistSlug(
+    "ht-edmliveset-nico-moreno-holy-priestaa-live-at-edc-las-vegas-2026-las-vegas-usa-17-05-2026",
+  ),
+  true,
 );
 
 assertSeedClocks(TL_MATTY_RALPH_EDC_LV_2026);
@@ -2853,6 +2866,45 @@ assert.equal(
   undefined,
 );
 assert.equal(isWiredTracklistSlug("yt-rG1DvjvXCls"), true);
+
+assertSeedClocks(TL_MADDIX_TML_WE1_2026);
+assert.equal(TL_MADDIX_TML_WE1_2026.length, 21);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-1Fu89dxrXI0"],
+  TL_MADDIX_TML_WE1_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-maddixmusic-maddix-live-tomorrowland-2026"],
+  TL_MADDIX_TML_WE1_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-maddixmusic-maddix-live-tomorrowland-2026"],
+  undefined,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-https://soundcloud.com/maddixmusic/maddix-live-tomorrowland-2026"],
+  undefined,
+);
+assert.equal(isWiredTracklistSlug("yt-1Fu89dxrXI0"), true);
+assert.equal(
+  isSecondaryPlaybackSlug("sc-maddixmusic-maddix-live-tomorrowland-2026"),
+  true,
+);
+assert.equal(isSecondaryPlaybackSlug("yt-1Fu89dxrXI0"), false);
+const maddixWe1 = tracklist1001RowsToPlays(TL_MADDIX_TML_WE1_2026);
+assert.equal(maddixWe1.length, 21);
+assert.equal(maddixWe1[0]?.provenance, "1001tl");
+assert.equal(maddixWe1[0]?.timestamp, 12);
+assert.equal(maddixWe1[0]?.trackTitle, "We Rave");
+assert.equal(maddixWe1[20]?.trackTitle, "Heart Of Courage");
+assert.equal(maddixWe1[20]?.timestamp, 55 * 60 + 22);
+for (let i = 1; i < maddixWe1.length; i++) {
+  assert.ok(
+    (maddixWe1[i]!.timestamp ?? 0) > (maddixWe1[i - 1]!.timestamp ?? 0),
+    `Maddix TML WE1 2026 clocks must increase at index ${i}`,
+  );
+}
+
 const marlonWe1 = tracklist1001RowsToPlays(TL_MARLON_HOFFSTADT_TML_WE1_2026);
 assert.equal(marlonWe1.length, 16);
 assert.equal(marlonWe1[0]?.provenance, "1001tl");
