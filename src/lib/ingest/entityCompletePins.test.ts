@@ -136,6 +136,17 @@ assert.equal(
 assert.equal(
   evaluateEntityCompleteRow({
     kind: "dj",
+    slug: "fantasm",
+    name: "Fantasm",
+    field: "website",
+    value: "https://technomusicworld.com/artist/fantasm/about",
+    evidence: "third-party bio",
+  }).drop,
+  "weak or invalid website",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
     slug: "i-hate-models",
     name: "I Hate Models",
     field: "website",

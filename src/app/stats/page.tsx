@@ -292,7 +292,7 @@ export default async function StatsPage() {
         <QueueFold
           title="Weak chart websites"
           count={health.playbook.weakSites.length}
-          hint="Official www only. DJ Mag, 6am, Wikipedia, RA, DICE, and Shotgun are not the homepage. RA is a tour/profile seed — do not pin ra.co."
+          hint="Official www only. DJ Mag, 6am, Wikipedia, RA, Techno Music World, DICE, and Shotgun are not the homepage. RA / TMW are tour or bio seeds — do not pin them as www."
         >
           <WeakSiteQueue rows={health.playbook.weakSites} />
         </QueueFold>
