@@ -67,7 +67,10 @@ export async function getCaptureQueue(
   const rows: CaptureNeedRow[] = sets.map((s) => {
     const playCount = s.plays.length;
     const plays1001 = s.plays.filter(
-      (p) => p.provenance === "1001tl" || p.provenance === "mixesdb",
+      (p) =>
+        p.provenance === "1001tl" ||
+        p.provenance === "mixesdb" ||
+        p.provenance === "applemusic",
     ).length;
     const identifiedStrong = s.plays.filter(isStrongIdentifiedPlay).length;
     const primary = s.artists[0]?.dj;

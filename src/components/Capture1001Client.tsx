@@ -112,7 +112,12 @@ function Capture1001Workbench({
         <span className="mono text-[11px] text-ink">
           scripts/capture-mixesdb.console.js
         </span>
-        ), copy the seed. CI never fetches 1001 or MixesDB.
+        {" / "}
+        <span className="mono text-[11px] text-ink">
+          scripts/capture-applemusic.console.js
+        </span>
+        ). Apple Music mix times are segment lengths — accumulate, do not
+        even-space. CI never fetches 1001, MixesDB, or Apple Music.
       </p>
       <div className="flex flex-wrap gap-1.5">
         <button

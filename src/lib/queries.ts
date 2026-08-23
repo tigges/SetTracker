@@ -152,7 +152,11 @@ async function statusCountsBySetIds(
   const provBest = new Map<string, { provenance: string; n: number }>();
   for (const g of provGroups) {
     const prev = provBest.get(g.setId);
-    if (g.provenance === "1001tl" || g.provenance === "mixesdb") {
+    if (
+      g.provenance === "1001tl" ||
+      g.provenance === "mixesdb" ||
+      g.provenance === "applemusic"
+    ) {
       provBest.set(g.setId, { provenance: g.provenance, n: g._count._all + 10_000 });
       continue;
     }

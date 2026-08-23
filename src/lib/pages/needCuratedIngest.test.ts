@@ -13,6 +13,7 @@ assert.equal(
   false,
 );
 assert.equal(fileNeedsCuratedIngest("src/lib/ingest/mixesdb/parse.ts"), false);
+assert.equal(fileNeedsCuratedIngest("src/lib/ingest/applemusic/parse.ts"), false);
 assert.equal(fileNeedsCuratedIngest("src/lib/ingest/setlistfm/parse.ts"), false);
 assert.equal(fileNeedsCuratedIngest("src/lib/ingest/artists.ts"), false);
 assert.equal(fileNeedsCuratedIngest("src/lib/ingest/fingerprint/seeds.ts"), false);

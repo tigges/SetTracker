@@ -192,6 +192,7 @@ const STRONG_ID = new Set([
   "community",
   "1001tl",
   "mixesdb",
+  "applemusic",
 ]);
 
 export type CaptureNeedRow = {

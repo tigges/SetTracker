@@ -51,7 +51,7 @@ export function tracklistProvenanceHint(
   dominantProvenance?: string | null,
 ): ProvenanceHint {
   const p = (dominantProvenance || "").toLowerCase();
-  if (p === "1001tl" || p === "mixesdb") return "1001tl";
+  if (p === "1001tl" || p === "mixesdb" || p === "applemusic") return "1001tl";
   if (p === "fingerprint") return "fingerprint";
   if (p === "soundcloud" || p === "hearthis") return "comments";
   if (p === "youtube" || p === "insomniac") return "credits";
