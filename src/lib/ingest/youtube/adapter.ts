@@ -28,13 +28,14 @@ import {
   type FingerprintSeedRow,
 } from "../fingerprint/seeds";
 import { hashRawSetContent } from "../hash";
+import { playerUrlsForSet } from "../setHostUrls";
 import { parseDescriptionTracklist } from "../soundcloud/parseTracklist";
 import { curatedSetImage } from "../../thumbs/setImages";
 import { pickYoutubeThumbnail } from "../../thumbs/youtubeThumb";
 import {
   playsFromMixesdbUrls,
   playsFromDescriptionMixesdbLinks,
-  playsFromPlaybackMixesdbLookup,
+  playsFromAnyPlayerMixesdbLookup,
 } from "../mixesdb/client";
 import {
   playsFrom1001Urls,
@@ -186,8 +187,11 @@ async function enrichWith1001Tracklist(
     if (extra.length > fromMixesdb.length) fromMixesdb = extra;
   }
   if (fromMixesdb.length < 5) {
-    const fromPlayer = await playsFromPlaybackMixesdbLookup(
-      meta.watchUrl,
+    const fromPlayer = await playsFromAnyPlayerMixesdbLookup(
+      playerUrlsForSet({
+        slug: `yt-${meta.videoId}`.slice(0, 120),
+        playbackUrl: meta.watchUrl,
+      }),
       meta.durationSec,
     );
     if (fromPlayer.length > fromMixesdb.length) fromMixesdb = fromPlayer;

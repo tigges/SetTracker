@@ -40,7 +40,10 @@ import { isWeakOfficialUrl } from "../officialUrls";
 import { discoverCuratedReliveRemaps } from "./reliveWatch";
 import { applySetSourceRemaps } from "./sourceRemaps";
 import { applySetHostUrls } from "./setHostUrls";
-import { applyCatalog1001Seeds } from "./tracklists1001/applyToCatalog";
+import {
+  applyCatalog1001Seeds,
+  applyShareTwinTracklists,
+} from "./tracklists1001/applyToCatalog";
 import { ensureCuratedLabels } from "./curatedLabels";
 import { ensureVenueCalendarNights } from "./discovery/venueCalendars";
 
@@ -225,6 +228,13 @@ export async function applyKnownUrlFixes(prisma: PrismaClient): Promise<number> 
     if (overlay.refreshed || overlay.missing) {
       console.log(
         `[verify-urls] 1001 overlay scanned=${overlay.scanned} refreshed=${overlay.refreshed} missing=${overlay.missing}`,
+      );
+    }
+    const twins = await applyShareTwinTracklists(prisma);
+    n += twins.copied;
+    if (twins.copied) {
+      console.log(
+        `[verify-urls] twin tracklists scanned=${twins.scanned} copied=${twins.copied}`,
       );
     }
   } catch (err) {

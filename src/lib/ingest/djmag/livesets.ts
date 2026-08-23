@@ -14,9 +14,10 @@ import { hashRawSetContent } from "../hash";
 import { parseDescriptionTracklist } from "../soundcloud/parseTracklist";
 import {
   playsFromDescriptionMixesdbLinks,
-  playsFromPlaybackMixesdbLookup,
+  playsFromAnyPlayerMixesdbLookup,
 } from "../mixesdb/client";
 import { playsFromDescription1001Links } from "../tracklists1001/client";
+import { playerUrlsForSet } from "../setHostUrls";
 import { merge1001Plays } from "../tracklists1001/seeds";
 import { slugify, type RawPlay, type RawSet, type SourceAdapter } from "../types";
 import {
@@ -173,8 +174,11 @@ async function teaserToRawSet(
     meta.durationSec,
   );
   if (fromMixesdb.length < 5) {
-    const fromPlayer = await playsFromPlaybackMixesdbLookup(
-      meta.watchUrl,
+    const fromPlayer = await playsFromAnyPlayerMixesdbLookup(
+      playerUrlsForSet({
+        slug: `yt-${meta.videoId}`.slice(0, 120),
+        playbackUrl: meta.watchUrl,
+      }),
       meta.durationSec,
     );
     if (fromPlayer.length > fromMixesdb.length) fromMixesdb = fromPlayer;

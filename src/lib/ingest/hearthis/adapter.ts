@@ -49,8 +49,9 @@ import {
 import { playlistEntriesToPlays } from "./playlist";
 import {
   playsFromDescriptionMixesdbLinks,
-  playsFromPlaybackMixesdbLookup,
+  playsFromAnyPlayerMixesdbLookup,
 } from "../mixesdb/client";
+import { playerUrlsForSet } from "../setHostUrls";
 import { applyTracklist1001Seed, merge1001Plays } from "../tracklists1001/seeds";
 
 const ACCENTS = [
@@ -81,7 +82,10 @@ async function hearthisMixesdbPlays(
 ): Promise<RawPlay[]> {
   let from = await playsFromDescriptionMixesdbLinks(description, durationSec);
   if (from.length < 5) {
-    const lookup = await playsFromPlaybackMixesdbLookup(playbackUrl, durationSec);
+    const lookup = await playsFromAnyPlayerMixesdbLookup(
+      playerUrlsForSet({ playbackUrl }),
+      durationSec,
+    );
     if (lookup.length > from.length) from = lookup;
   }
   return from;

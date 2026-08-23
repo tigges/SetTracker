@@ -33,8 +33,9 @@ import {
 } from "../fingerprint/seeds";
 import {
   playsFromDescriptionMixesdbLinks,
-  playsFromPlaybackMixesdbLookup,
+  playsFromAnyPlayerMixesdbLookup,
 } from "../mixesdb/client";
+import { playerUrlsForSet } from "../setHostUrls";
 import { playsFromDescription1001Links } from "../tracklists1001/client";
 import {
   applyTracklist1001Seed,
@@ -94,9 +95,9 @@ async function enrichScPlaysWith1001(
       description,
       durationSec,
     );
-    if (fromMixesdb.length < 5 && playbackUrl) {
-      const fromPlayer = await playsFromPlaybackMixesdbLookup(
-        playbackUrl,
+    if (fromMixesdb.length < 5) {
+      const fromPlayer = await playsFromAnyPlayerMixesdbLookup(
+        playerUrlsForSet({ slug: sourceSlug, playbackUrl }),
         durationSec,
       );
       if (fromPlayer.length > fromMixesdb.length) fromMixesdb = fromPlayer;

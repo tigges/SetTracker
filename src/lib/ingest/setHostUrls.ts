@@ -10,6 +10,7 @@ import type { PrismaClient } from "@prisma/client";
 import {
   hostUrlFillNull,
   hostUrlsFromKnown,
+  mergeHostUrlFields,
   mixcloudPageUrl,
   soundcloudPageUrl,
   youtubeWatchUrl,
@@ -113,8 +114,11 @@ function canonicalizePin(pin: SetHostUrls): SetHostUrls {
   };
 }
 
+let extrasCache: Record<string, SetHostUrls> | null = null;
+
 /** Extra official hosts keyed by set slug (twins + documented Mixcloud). */
 export function extraHostUrlsBySlug(): Record<string, SetHostUrls> {
+  if (extrasCache) return extrasCache;
   const scBySlug = soundcloudUrlBySlug();
   const grouped = new Map<object, string[]>();
   for (const [slug, rows] of Object.entries(TRACKLIST_1001_BY_SOURCE_SLUG)) {
@@ -171,6 +175,43 @@ export function extraHostUrlsBySlug(): Record<string, SetHostUrls> {
     assign(remap.toSlug, shared);
   }
 
+  extrasCache = out;
+  return out;
+}
+
+/**
+ * Official SC / YT / Mixcloud player URLs for one performance.
+ * Used to look up MixesDB / share tracklists — never invents clocks.
+ */
+export function playerUrlsForSet(
+  input: {
+    slug?: string;
+    playbackUrl?: string | null;
+    sourceUrl?: string | null;
+    soundcloudUrl?: string | null;
+    youtubeUrl?: string | null;
+    mixcloudUrl?: string | null;
+  },
+  extras = extraHostUrlsBySlug(),
+): string[] {
+  const hosts = mergeHostUrlFields(
+    hostUrlsFromKnown(
+      input.playbackUrl,
+      input.sourceUrl,
+      input.soundcloudUrl,
+      input.youtubeUrl,
+      input.mixcloudUrl,
+    ),
+    input.slug ? (extras[input.slug] ?? {}) : {},
+  );
+  const out: string[] = [];
+  for (const url of [
+    hosts.soundcloudUrl,
+    hosts.youtubeUrl,
+    hosts.mixcloudUrl,
+  ]) {
+    if (url && !out.includes(url)) out.push(url);
+  }
   return out;
 }
 
