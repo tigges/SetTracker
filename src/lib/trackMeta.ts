@@ -97,13 +97,32 @@ export function resolveBeatportUrl(
   );
 }
 
+export type EditKind = "mashup" | "bootleg" | "acapella";
+
+export const EDIT_KIND_LABEL: Record<EditKind, string> = {
+  mashup: "Mashup",
+  bootleg: "Bootleg",
+  acapella: "Acapella",
+};
+
+/** Title/artist looks like a mashup, bootleg, or acapella. */
+export function editKind(
+  title: string,
+  artistName?: string | null,
+): EditKind | null {
+  const blob = `${artistName ?? ""} ${title}`;
+  if (/\b(mash[\s-]?up)\b/i.test(blob)) return "mashup";
+  if (/\bbootleg\b/i.test(blob)) return "bootleg";
+  if (/\b(acappella|acapella)\b/i.test(blob)) return "acapella";
+  return null;
+}
+
 /** Mashups / bootlegs / acapellas are usually not a single store SKU. */
 export function isLikelyUnbuyable(
   title: string,
   artistName?: string | null,
 ): boolean {
-  const blob = `${artistName ?? ""} ${title}`;
-  return /\b(mash[\s-]?up|bootleg|acappella|acapella)\b/i.test(blob);
+  return editKind(title, artistName) != null;
 }
 
 export type BeatportBuyability = "buy" | "search" | "unavailable";

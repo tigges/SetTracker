@@ -4,12 +4,14 @@ import { notFound } from "next/navigation";
 import { EntityThumb } from "@/components/EntityThumb";
 import { SetEntryLink } from "@/components/SetEntryLink";
 import { getAllTrackSlugs, getTrackBySlug } from "@/lib/queries";
+import { setCueHref } from "@/lib/setCue";
 import { pageMeta } from "@/lib/site";
 import {
-  beatportBuyability,
+  EDIT_KIND_LABEL,
   beatportTrackHref,
   canonicalBeatportUrl,
   canonicalSpotifyUrl,
+  editKind,
   spotifyTrackHref,
 } from "@/lib/trackMeta";
 import {
@@ -86,13 +88,7 @@ export default async function TrackPage({
     track.artistName,
     track.spotifyUrl,
   );
-  const showBeatport =
-    beatportBuyability({
-      idStatus: "identified",
-      title: track.title,
-      artistName: track.artistName,
-      beatportUrl: track.beatportUrl,
-    }) !== "unavailable";
+  const kind = editKind(track.title, track.artistName);
 
   return (
     <div>
@@ -154,6 +150,11 @@ export default async function TrackPage({
                   {track.label.name}
                 </Link>
               )}
+              {kind ? (
+                <span className="rounded-full border border-line px-2.5 py-1 text-[12px] text-muted2">
+                  {EDIT_KIND_LABEL[kind]}
+                </span>
+              ) : null}
               <a
                 href={spHref}
                 target="_blank"
@@ -162,16 +163,14 @@ export default async function TrackPage({
               >
                 {spCanonical ? "Play on Spotify" : "Search Spotify"}
               </a>
-              {showBeatport && (
-                <a
-                  href={bpHref}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="rounded-md border border-line px-2.5 py-1 text-[12px] text-muted2 transition-colors hover:border-brand hover:text-brand"
-                >
-                  {bpCanonical ? "Buy on Beatport" : "Search Beatport"}
-                </a>
-              )}
+              <a
+                href={bpHref}
+                target="_blank"
+                rel="noreferrer"
+                className="rounded-md border border-line px-2.5 py-1 text-[12px] text-muted2 transition-colors hover:border-brand hover:text-brand"
+              >
+                {bpCanonical ? "Buy on Beatport" : "Search Beatport"}
+              </a>
             </div>
           </div>
         </div>
@@ -190,11 +189,14 @@ export default async function TrackPage({
                     glyph: "•",
                   };
                   return (
-                    <li key={s.slug}>
+                    <li
+                      key={s.slug}
+                      className="flex items-center gap-3 py-3"
+                    >
                       <SetEntryLink
-                        href={`/sets/${s.slug}`}
+                        href={setCueHref(s.slug, s.timestamp)}
                         label={track.title}
-                        className="flex items-center gap-3 py-3 hover:opacity-90"
+                        className="flex min-w-0 flex-1 items-center gap-3 hover:opacity-90"
                       >
                         <EntityThumb
                           src={s.imageUrl}
@@ -210,18 +212,32 @@ export default async function TrackPage({
                           </div>
                           <div className="mono text-[12px] text-muted2">
                             {s.title}
-                            {s.eventName ? ` · ${s.eventName}` : ""}
                             {s.genre ? ` · ${s.genre}` : ""} ·{" "}
                             {fmtDuration(s.durationSec)}
+                            {s.timestamp != null ? (
+                              <> · {fmtTimestamp(s.timestamp)}</>
+                            ) : null}
                           </div>
                         </div>
-                        <span
-                          className="mono flex-none text-[12px] text-muted2"
-                          title={fmtDate(s.publishedAt)}
-                        >
-                          {fmtRelative(s.publishedAt)}
-                        </span>
                       </SetEntryLink>
+                      {s.eventSlug && s.eventName ? (
+                        <Link
+                          href={`/events/${s.eventSlug}`}
+                          className="mono max-w-[9.5rem] flex-none truncate text-[12px] text-muted2 transition-colors hover:text-brand"
+                        >
+                          {s.eventName}
+                        </Link>
+                      ) : s.eventName ? (
+                        <span className="mono max-w-[9.5rem] flex-none truncate text-[12px] text-muted2">
+                          {s.eventName}
+                        </span>
+                      ) : null}
+                      <span
+                        className="mono flex-none text-[12px] text-muted2"
+                        title={fmtDate(s.publishedAt)}
+                      >
+                        {fmtRelative(s.publishedAt)}
+                      </span>
                     </li>
                   );
                 })}
@@ -262,6 +278,42 @@ export default async function TrackPage({
               </ul>
             )}
           </Panel>
+
+          {track.related.length > 0 && (
+            <Panel title="Related tracks" meta={`${track.related.length}`}>
+              <ul className="space-y-2">
+                {track.related.map((t) => (
+                  <li key={t.slug}>
+                    <Link
+                      href={`/tracks/${t.slug}`}
+                      className="flex items-center gap-2.5 rounded-lg border border-transparent px-1 py-1.5 transition-colors hover:border-line hover:bg-bg2"
+                    >
+                      <EntityThumb
+                        src={t.imageUrl}
+                        label={t.title}
+                        accent={t.labelColor ?? accent}
+                        size={28}
+                        radius={6}
+                      />
+                      <span className="min-w-0 flex-1">
+                        <span className="block truncate text-[13px] text-ink">
+                          {t.title}
+                          {t.mixName ? (
+                            <span className="ml-1.5 text-[11px] font-normal text-muted2">
+                              {t.mixName}
+                            </span>
+                          ) : null}
+                        </span>
+                        <span className="mono block truncate text-[11px] text-muted2">
+                          {t.artistName}
+                        </span>
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </Panel>
+          )}
 
           {(track.releaseDate || track.remixerName) && (
             <Panel title="Release">

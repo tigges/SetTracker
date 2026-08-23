@@ -10,6 +10,7 @@ import {
   canonicalSpotifyUrl,
   spotifyTrackUri,
   discogsSearchUrl,
+  editKind,
   isLikelyUnbuyable,
   normalizeIsrc,
   parseTrackTitle,
@@ -105,6 +106,10 @@ assert.equal(
 
 assert.equal(isLikelyUnbuyable("Mash-Up Universe", "DJs From Mars"), true);
 assert.equal(isLikelyUnbuyable("Pressure", "AC Slater"), false);
+assert.equal(editKind("Bangkok vs. I Run Mashup", "Hardwell"), "mashup");
+assert.equal(editKind("Put Your Hands Up In The Air Acappella", null), "acapella");
+assert.equal(editKind("Secret Bootleg", "Someone"), "bootleg");
+assert.equal(editKind("Pressure", "AC Slater"), null);
 
 assert.equal(
   beatportBuyability({

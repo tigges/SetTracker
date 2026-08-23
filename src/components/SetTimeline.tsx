@@ -23,8 +23,9 @@ import {
 } from "@/lib/status";
 import type { PlayRow } from "@/lib/queries";
 import { playablePlaybackUrl } from "@/lib/playback";
-import { beatportBuyability } from "@/lib/trackMeta";
-import { useSetSeek } from "@/components/SetListen";
+import { EDIT_KIND_LABEL, editKind } from "@/lib/trackMeta";
+import { useSetListen, useSetSeek } from "@/components/SetListen";
+import { nearestPlayByCue } from "@/lib/setCue";
 import { cueIndexAtRatio, playSpans, stripIsDense } from "@/lib/setStrip";
 
 const DENSITY_KEY = "setradar.tracklistDensity";
@@ -79,8 +80,9 @@ export function SetTimeline({
   children?: ReactNode;
 }) {
   const seek = useSetSeek();
+  const listen = useSetListen();
   const canSeek = !!seek && !!playablePlaybackUrl(setPlaybackUrl, setSourceUrl);
-  const [activeId, setActiveId] = useState<string | null>(plays[0]?.id ?? null);
+  const [pickedId, setPickedId] = useState<string | null>(plays[0]?.id ?? null);
   const [flashId, setFlashId] = useState<string | null>(null);
   const [hoverId, setHoverId] = useState<string | null>(null);
   const compact = useSyncExternalStore(
@@ -110,6 +112,20 @@ export function SetTimeline({
     return () => clearTimeout(t);
   }, [flashId]);
 
+  const cueSec = listen?.startSec ?? null;
+  const cueNonce = listen?.seekNonce ?? 0;
+  const cuedPlayId =
+    cueNonce > 0 && cueSec != null
+      ? (nearestPlayByCue(plays, cueSec)?.id ?? null)
+      : null;
+  const activeId = cuedPlayId ?? pickedId;
+
+  useEffect(() => {
+    if (!cuedPlayId) return;
+    const el = rowRefs.current[cuedPlayId];
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
+  }, [cuedPlayId, cueNonce]);
+
   function cueIdAtClientX(clientX: number): string | null {
     const el = stripRef.current;
     if (!el || plays.length === 0) return null;
@@ -130,7 +146,7 @@ export function SetTimeline({
   }
 
   function focusRow(id: string) {
-    setActiveId(id);
+    setPickedId(id);
     const el = rowRefs.current[id];
     if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
     setFlashId(null);
@@ -255,6 +271,7 @@ export function SetTimeline({
           {plays.map((p) => {
             const isActive = p.id === activeId;
             const meta = STATUS_META[p.idStatus as IdStatus];
+            const kind = editKind(p.title, p.artistName);
             return (
               <li key={p.id}>
                 <div
@@ -303,6 +320,14 @@ export function SetTimeline({
                       >
                         {p.title}
                       </span>
+                      {kind ? (
+                          <span
+                            className="flex-none rounded-full border border-line px-1.5 py-0.5 text-[10px] text-muted2"
+                            title="May not have a store page yet"
+                          >
+                            {EDIT_KIND_LABEL[kind]}
+                          </span>
+                      ) : null}
                       {p.hasTrackPage && p.trackSlug ? (
                         <Link
                           href={`/tracks/${p.trackSlug}`}
@@ -313,7 +338,7 @@ export function SetTimeline({
                           track
                         </Link>
                       ) : null}
-                      {p.mixName && !compact && (
+                      {p.mixName && !compact && !kind && (
                         <span
                           className="hidden truncate text-[11px] text-muted2 sm:inline"
                           title={p.remixerName ? `Remixer: ${p.remixerName}` : p.mixName}
@@ -379,21 +404,9 @@ export function SetTimeline({
                           spotifyUrl: p.spotifyUrl,
                         })
                       : null;
-                    const buyability = identified
-                      ? beatportBuyability({
-                          idStatus: p.idStatus,
-                          title: p.title,
-                          artistName: p.artistName,
-                          beatportUrl: p.beatportUrl,
-                        })
-                      : "unavailable";
-                    const beatportHref =
-                      links && buyability !== "unavailable"
-                        ? links.beatport
-                        : null;
                     if (!canSeek && !links) return null;
                     const pill =
-                      "grid h-6 place-items-center rounded-md border border-line px-1.5 text-[10px] text-muted2 transition-colors hover:border-brand hover:text-brand";
+                      "grid h-6 w-6 place-items-center rounded-md border border-line text-[10px] text-muted2 transition-colors hover:border-brand hover:text-brand";
                     return (
                       <div
                         className="flex flex-none items-center gap-1"
@@ -405,7 +418,7 @@ export function SetTimeline({
                             onClick={() => focusRow(p.id)}
                             title={`Play from ${fmtTimestamp(p.timestamp)}`}
                             aria-label={`Play from ${fmtTimestamp(p.timestamp)}`}
-                            className={`${pill} w-6`}
+                            className={pill}
                           >
                             ▶
                           </button>
@@ -425,13 +438,13 @@ export function SetTimeline({
                             SP
                           </a>
                         )}
-                        {beatportHref && (
+                        {links?.beatport && (
                           <a
-                            href={beatportHref}
+                            href={links.beatport}
                             target="_blank"
                             rel="noreferrer"
                             title={
-                              links?.beatportIsCanonical
+                              links.beatportIsCanonical
                                 ? "Buy on Beatport"
                                 : "Search on Beatport"
                             }
@@ -449,7 +462,7 @@ export function SetTimeline({
                       <Link
                         href={`/labels/${p.labelSlug}`}
                         onClick={(e) => e.stopPropagation()}
-                        className="hidden flex-none items-center gap-1.5 rounded-full border border-line bg-bg2 py-0.5 pl-0.5 pr-2 text-[11px] text-muted transition-colors hover:border-brand hover:text-brand lg:inline-flex"
+                        className="hidden flex-none items-center gap-1.5 rounded-full border border-line bg-bg2 py-0.5 pl-0.5 pr-2 text-[11px] text-muted transition-colors hover:border-brand hover:text-brand md:inline-flex"
                       >
                         <EntityThumb
                           src={p.labelImageUrl}
@@ -462,7 +475,7 @@ export function SetTimeline({
                         {p.labelName}
                       </Link>
                     ) : (
-                      <span className="hidden flex-none items-center gap-1.5 rounded-full border border-line bg-bg2 py-0.5 pl-0.5 pr-2 text-[11px] text-muted lg:inline-flex">
+                      <span className="hidden flex-none items-center gap-1.5 rounded-full border border-line bg-bg2 py-0.5 pl-0.5 pr-2 text-[11px] text-muted md:inline-flex">
                         <EntityThumb
                           src={p.labelImageUrl}
                           label={p.labelName}
