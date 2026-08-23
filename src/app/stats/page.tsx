@@ -270,10 +270,16 @@ export default async function StatsPage() {
         id="tracks"
         noun="Tracks"
         total={health.tracks.total}
-        hint="Songs, not sets"
+        hint="Songs, not sets · chips stay visible; search shrinks as /track URLs fill"
         slices={health.tracks.slices}
         actions={health.tracks.actions}
-      />
+      >
+        <StatsMeter
+          label="Spotify"
+          slices={health.tracks.spotify}
+          total={health.tracks.total}
+        />
+      </StatsHealthCard>
 
       <p className="mb-2 mt-5 text-[12px] font-semibold uppercase tracking-[0.14em] text-muted">
         Queues

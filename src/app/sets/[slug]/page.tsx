@@ -211,6 +211,8 @@ export default async function SetPage({
               <>
                 {" · "}
                 <span className="mono">{coverage.buyable}</span> Beatport
+                {" · "}
+                <span className="mono">{coverage.spotifyDirect}</span> Spotify
               </>
             ) : null}
           </p>

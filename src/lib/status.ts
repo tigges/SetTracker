@@ -6,7 +6,12 @@ import {
   soundcloudSeekUrl,
   youtubeSeekUrl,
 } from "./playback";
-import { canonicalBeatportUrl, canonicalSpotifyUrl } from "./trackMeta";
+import {
+  beatportSearchUrl,
+  canonicalBeatportUrl,
+  canonicalSpotifyUrl,
+  spotifySearchUrl,
+} from "./trackMeta";
 
 export type IdStatus =
   | "identified"
@@ -132,25 +137,25 @@ export type ListenLinks = {
 };
 
 /**
- * External listen links — hide empty, never search.
- * YouTube / SoundCloud open the actual set at this cue.
- * Spotify / Beatport only when we have a canonical track URL.
+ * External listen links. YouTube / SoundCloud open the actual set at this cue.
+ * Spotify / Beatport prefer a stored /track URL and fall back to search so the
+ * chip stays visible while we fill-null toward 100% direct links.
  */
 export function listenLinks(
-  _title: string,
-  _artist?: string | null,
+  title: string,
+  artist?: string | null,
   opts?: ListenLinkOpts,
 ): ListenLinks {
   const ytWatch = setYoutubeWatchUrl(opts?.setPlaybackUrl, opts?.setSourceUrl);
   const scPage = setSoundcloudPageUrl(opts?.setPlaybackUrl, opts?.setSourceUrl);
-  const beatport = canonicalBeatportUrl(opts?.beatportUrl);
-  const spotify = canonicalSpotifyUrl(opts?.spotifyUrl);
+  const beatportCanonical = canonicalBeatportUrl(opts?.beatportUrl);
+  const spotifyCanonical = canonicalSpotifyUrl(opts?.spotifyUrl);
   return {
     youtube: ytWatch ? youtubeSeekUrl(ytWatch, opts?.startSec) : null,
-    beatport,
-    beatportIsCanonical: !!beatport,
-    spotify,
-    spotifyIsCanonical: !!spotify,
+    beatport: beatportCanonical ?? beatportSearchUrl(title, artist),
+    beatportIsCanonical: !!beatportCanonical,
+    spotify: spotifyCanonical ?? spotifySearchUrl(title, artist),
+    spotifyIsCanonical: !!spotifyCanonical,
     soundcloud: scPage ? soundcloudSeekUrl(scPage, opts?.startSec) : null,
   };
 }

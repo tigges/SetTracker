@@ -406,7 +406,11 @@ export function SetTimeline({
                               href={links.spotify}
                               target="_blank"
                               rel="noreferrer"
-                              title="Open track on Spotify"
+                              title={
+                                links.spotifyIsCanonical
+                                  ? "Open track on Spotify"
+                                  : "Search on Spotify"
+                              }
                               className={`${pill} hidden sm:grid`}
                             >
                               SP
@@ -417,8 +421,12 @@ export function SetTimeline({
                               href={links.beatport}
                               target="_blank"
                               rel="noreferrer"
-                              title="Buy on Beatport"
-                              className={pill}
+                              title={
+                                links.beatportIsCanonical
+                                  ? "Buy on Beatport"
+                                  : "Search on Beatport"
+                              }
+                              className={`${pill} ${links.beatportIsCanonical ? "" : "hidden sm:grid"}`}
                             >
                               BP
                             </a>

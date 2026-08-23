@@ -38,7 +38,7 @@ describe("listenLinks", () => {
       "https://soundcloud.com/acslater/set#t=93",
     );
     assert.equal(links.youtube, null);
-    assert.equal(links.spotify, null);
+    assert.match(links.spotify, /open\.spotify\.com\/search/);
     assert.equal(links.spotifyIsCanonical, false);
   });
 
@@ -74,13 +74,14 @@ describe("listenLinks", () => {
     assert.equal(links.beatportIsCanonical, true);
   });
 
-  it("hides Beatport / Spotify / YouTube / SoundCloud when there is no real URL", () => {
+  it("falls back to store search when the stored URL is not a /track page", () => {
     const links = listenLinks("Pressure", "AC Slater", {
       beatportUrl: "https://www.beatport.com/search?q=Pressure",
     });
-    assert.equal(links.beatport, null);
+    assert.match(links.beatport, /beatport\.com\/search\/tracks\?q=/);
     assert.equal(links.beatportIsCanonical, false);
-    assert.equal(links.spotify, null);
+    assert.match(links.spotify, /open\.spotify\.com\/search/);
+    assert.equal(links.spotifyIsCanonical, false);
     assert.equal(links.youtube, null);
     assert.equal(links.soundcloud, null);
   });
