@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import {
+  nativeCaptureSearchUrl,
   search1001,
   search1001Query,
   search1001QueryFromUrl,
@@ -37,5 +38,17 @@ assert.equal(
   search1001Query("calvin harris", "tomorrowland", "weekend 2", "2026", "relive", "youtube"),
   "calvin harris tomorrowland weekend 2 2026",
 );
+
+const native = search1001("calvin harris", "tomorrowland", "weekend 2", "2026");
+assert.equal(nativeCaptureSearchUrl(native), native);
+assert.equal(
+  nativeCaptureSearchUrl(
+    "https://www.google.com/search?q=calvin%20harris%20tomorrowland%20weekend%202%202026%20relive%20youtube%20site%3A1001tracklists.com",
+  ),
+  native,
+);
+assert.ok(!nativeCaptureSearchUrl(
+  "https://www.google.com/search?q=Kaskade%20site%3A1001tracklists.com",
+).includes("google.com"));
 
 console.log("search1001.test.ts ok");

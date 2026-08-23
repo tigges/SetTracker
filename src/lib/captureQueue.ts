@@ -9,6 +9,7 @@ import {
 } from "@/lib/ingest/festivalDrops";
 import {
   buildCaptureQueueFromNeeds,
+  extrasFromCaptureSnapshot,
   type CaptureNeedRow,
   type CapturePreset,
   isStrongIdentifiedPlay,
@@ -119,8 +120,8 @@ export async function getCaptureQueue(
 export async function loadOperatorCaptureQueue(
   limit = 20,
 ): Promise<CaptureQueue> {
-  const extras = ((nextCaptures.presets ?? []) as CapturePreset[]).filter(
-    (p) => p.reason === "relive:official-unwired",
+  const extras = extrasFromCaptureSnapshot(
+    nextCaptures as { presets?: CapturePreset[] },
   );
   const presets: CapturePreset[] = extras.slice(0, 12);
   const generatedAt = String(nextCaptures.generatedAt ?? "");

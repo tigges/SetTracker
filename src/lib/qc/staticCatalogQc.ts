@@ -172,6 +172,25 @@ function auditRosterAndGraduates(): QcIssue[] {
   return issues;
 }
 
+function auditOperatorSearchUrls(): QcIssue[] {
+  const issues: QcIssue[] = [];
+  for (const rel of [
+    "data/crosscheck/next-captures.json",
+    "data/crosscheck/held-relive-watch.json",
+  ]) {
+    const raw = loadJson<unknown>(rel, null);
+    if (!raw) continue;
+    if (/google\.com\/search/i.test(JSON.stringify(raw))) {
+      issues.push({
+        severity: "error",
+        area: "operator-reports",
+        detail: `${rel} still has Google site:1001 search URLs — run npm run build:next-captures`,
+      });
+    }
+  }
+  return issues;
+}
+
 export function dropJunkTrackIdPins(pins: TrackIdPin[]): {
   next: TrackIdPin[];
   dropped: string[];
@@ -194,6 +213,7 @@ export function runStaticCatalogQc(): StaticCatalogQc {
     ...auditKnownEvents(),
     ...auditEntityPins(),
     ...auditRosterAndGraduates(),
+    ...auditOperatorSearchUrls(),
   ];
   const counts: Record<string, number> = {};
   for (const i of issues) {

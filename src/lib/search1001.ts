@@ -49,3 +49,20 @@ export function search1001QueryFromUrl(url: string): string {
     return "";
   }
 }
+
+/**
+ * Prefer a native 1001 search page. Remap leftover Google site:1001 URLs
+ * from pre-native operator reports so /stats never opens Google.
+ */
+export function nativeCaptureSearchUrl(
+  searchUrl: string,
+  ...fallbackParts: string[]
+): string {
+  const trimmed = searchUrl.trim();
+  if (trimmed.includes("1001tracklists.com/search")) return trimmed;
+  const fromUrl = search1001QueryFromUrl(trimmed).replace(
+    /\b(?:relive|youtube)\b/gi,
+    " ",
+  );
+  return search1001(fromUrl, ...fallbackParts);
+}

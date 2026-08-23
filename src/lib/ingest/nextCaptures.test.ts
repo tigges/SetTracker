@@ -3,6 +3,7 @@ import {
   PRIORITY_CAPTURES,
   buildHeldReliveWatch,
   buildNextCaptures,
+  extrasFromCaptureSnapshot,
   search1001,
   searchMixesdbByPlayerUrl,
 } from "./nextCaptures";
@@ -36,6 +37,8 @@ for (const p of PRIORITY_CAPTURES) {
 for (const p of presets) {
   assert.ok(p.slug.startsWith("yt-"), p.slug);
   assert.ok(p.name.startsWith("TL_"), p.name);
+  assert.ok(p.searchUrl.includes("1001tracklists.com/search"), p.searchUrl);
+  assert.ok(!p.searchUrl.includes("google.com"), p.searchUrl);
   assert.equal(
     Object.prototype.hasOwnProperty.call(TRACKLIST_1001_BY_SOURCE_SLUG, p.slug),
     false,
@@ -46,5 +49,42 @@ for (const p of presets) {
 const held = buildHeldReliveWatch();
 assert.ok(held.held.length >= 5);
 assert.ok(held.held.every((h) => h.status === "waiting"));
+assert.ok(
+  held.held.every((h) => h.searchUrl.includes("1001tracklists.com/search")),
+);
+assert.ok(held.held.every((h) => !h.searchUrl.includes("google.com")));
+
+const extras = extrasFromCaptureSnapshot({
+  presets: [
+    {
+      label: "Marlon Hoffstadt WE1",
+      slug: "yt-rG1DvjvXCls",
+      name: "TL_MARLON_HOFFSTADT_TML_WE1_2026",
+      searchUrl:
+        "https://www.google.com/search?q=marlon%20hoffstadt%20site%3A1001tracklists.com",
+      reason: "relive:official-unwired",
+    },
+    {
+      label: "Someone still unwired",
+      slug: "yt-unwired-relive",
+      name: "TL_SOMEONE_STILL_UNWIRED",
+      searchUrl:
+        "https://www.google.com/search?q=someone%20tomorrowland%20site%3A1001tracklists.com",
+      reason: "relive:official-unwired",
+    },
+    {
+      label: "Density leftover",
+      slug: "yt-density",
+      name: "TL_DENSITY",
+      searchUrl: search1001("density leftover"),
+      reason: "density:severe",
+    },
+  ],
+});
+assert.ok(!extras.some((p) => p.slug === "yt-rG1DvjvXCls"));
+assert.equal(extras.length, 1);
+assert.equal(extras[0]?.slug, "yt-unwired-relive");
+assert.ok(extras[0]?.searchUrl.includes("1001tracklists.com/search"));
+assert.ok(!extras[0]?.searchUrl.includes("google.com"));
 
 console.log("nextCaptures.test.ts ok");
