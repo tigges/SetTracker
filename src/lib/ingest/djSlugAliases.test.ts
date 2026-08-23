@@ -68,4 +68,10 @@ describe("djSlugAliases", () => {
     assert.equal(canonicalDjSlug(slugify("HALŌ")), "dubvision");
     assert.equal(canonicalDjSlug("dubvision"), "dubvision");
   });
+
+  it("does not alias leftover lucas onto the duo (solo profile may remain)", () => {
+    assert.equal(canonicalDjSlug("lucas"), "lucas");
+    assert.equal(canonicalDjSlug("lucas-steve"), "lucas-steve");
+    assert.equal(canonicalDjSlug("steve-aoki"), "steve-aoki");
+  });
 });

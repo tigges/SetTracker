@@ -193,7 +193,7 @@ assert.equal(
 );
 const duoPin = duoFromHalf.pins.find((p) => p.slug === "lucas-steve");
 assert.ok(duoPin);
-assert.equal(duoPin.website, "https://www.lucasandsteve.com/");
+assert.equal(duoPin.website, "https://lucasandsteve.com");
 assert.equal(duoPin.genre, undefined);
 assert.ok(
   duoFromHalf.dropped.some(
