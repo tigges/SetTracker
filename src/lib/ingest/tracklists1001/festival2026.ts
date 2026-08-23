@@ -114,7 +114,10 @@ import {
   TL_VINTAGE_CULTURE_ULTRA_MIAMI_RESISTANCE_2026,
 } from "./festivalCaptures20260819";
 import { TL_ABOVE_AND_BEYOND_KINETICFIELD_EDC_LV_2026 } from "./festivalCaptures20260820";
-import { TL_DAVID_GUETTA_TML_WE1_2026 } from "./festivalCaptures20260823";
+import {
+  TL_DAVID_GUETTA_TML_WE1_2026,
+  TL_MARLON_HOFFSTADT_TML_WE1_2026,
+} from "./festivalCaptures20260823";
 
 export {
   TL_ALESSO_TML_WE2_2026,
@@ -214,6 +217,7 @@ export {
   TL_COLYN_INNELLEA_ULTRA_MIAMI_RESISTANCE_COVE_2026,
   TL_ABOVE_AND_BEYOND_KINETICFIELD_EDC_LV_2026,
   TL_DAVID_GUETTA_TML_WE1_2026,
+  TL_MARLON_HOFFSTADT_TML_WE1_2026,
 };
 
 function formatClock(sec: number): string {
@@ -2522,63 +2526,37 @@ export const TL_ARMIN_VAN_BUUREN_YT_HOUSE_TML_2026: FingerprintSeedRow[] = [
 
 /**
  * Korolova @ Captive Soul, Freedom Stage, Tomorrowland Weekend 2, Belgium 2026-07-26
- * Official YT: https://www.youtube.com/watch?v=RLOghpXjuJI (~89:53)
- * 1001TL: https://1001.tl/hjlt23k — operator console capture 2026-08-01
- * (19/21 timed cues; missing clocks already lerped in capture).
+ * Official YT: https://www.youtube.com/watch?v=RLOghpXjuJI
+ * https://www.1001tracklists.com/tracklist/hjlt23k/korolova-captive-soul-freedom-stage-tomorrowland-weekend-2-belgium-2026-07-26.html
+ * Overlay name TL_KOROLOVA is too generic (Captive Soul 098 / Snowattack / Tulum).
+ * Official SC: https://soundcloud.com/korolovadj/korolova-live-tomorrowland-1
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-RLOghpXjuJI"]
+ *       TRACKLIST_1001_BY_SOURCE_SLUG["sc-korolovadj-korolova-live-tomorrowland-1"]
+ * Recapture 2026-08-23 — added Cherry "Buka" at 2:29 (was 21 cues from 6:10).
+ * Distinct from Captive Soul 098 (sc-korolovadj-korolova-captive-soul-98).
  */
 export const TL_KOROLOVA_TML_WE2_2026: FingerprintSeedRow[] = [
+  { at: "2:29", artist: "Cherry", title: "Buka" },
   { at: "6:10", artist: "Argy & SOLANCE", title: "Window Shake" },
   { at: "9:34", artist: "Jast", title: "Rhythm" },
   { at: "12:52", artist: "Korolova & Switch Disco", title: "Empty Skies" },
   { at: "16:31", artist: "GENESI", title: "94" },
-  {
-    at: "21:19",
-    artist: "Darude",
-    title: "Sandstorm (Cherry & Kostyn & UNDERMOON Remix)",
-  },
+  { at: "21:19", artist: "Darude", title: "Sandstorm (Cherry & Kostyn & UNDERMOON Remix)" },
   { at: "24:14", artist: "Volkoder & Korolova", title: "Waiting For You" },
   { at: "28:26", artist: "Korolova & R3HAB", title: "Hi Hello" },
   { at: "31:48", artist: "Korolova & JOA", title: "My Mind" },
-  {
-    at: "35:26",
-    artist: "Noir & Haze",
-    title: "Around (Seth Hills & Victor Garde Remix)",
-  },
-  {
-    at: "39:27",
-    artist: "Michael Calfan & Axwell & Bigfett vs. Empire Of The Sun",
-    title: "Resurrection vs. Walking On A Dream (Bigfett Mashup)",
-  },
-  {
-    at: "40:49",
-    artist: "Empire Of The Sun",
-    title: "Walking On A Dream (Acappella)",
-  },
-  {
-    at: "42:12",
-    artist: "Michael Calfan",
-    title: "Resurrection (Axwell Re-Cut Club Version / Bigfett Remix)",
-  },
+  { at: "35:26", artist: "Noir & Haze", title: "Around (Seth Hills & Victor Garde Remix)" },
+  { at: "39:27", artist: "Michael Calfan & Axwell & Bigfett vs. Empire Of The Sun", title: "Resurrection vs. Walking On A Dream (Bigfett Mashup)" },
+  { at: "40:49", artist: "Empire Of The Sun", title: "Walking On A Dream (Acappella)" },
+  { at: "42:12", artist: "Michael Calfan", title: "Resurrection (Axwell Re-Cut Club Version / Bigfett Remix)" },
   { at: "43:34", artist: "KREAM & Korolova", title: "Annihilation" },
   { at: "46:53", artist: "Korolova", title: "Another Life" },
   { at: "51:05", artist: "Glowal & DREYA V", title: "Physique" },
-  {
-    at: "1:03:01",
-    artist: "Tiësto ft. BT",
-    title: "Love Comes Again (Zarka Remix)",
-  },
+  { at: "1:03:01", artist: "Tiësto ft. BT", title: "Love Comes Again (Zarka Remix)" },
   { at: "1:07:04", artist: "MORTEN & David Guetta", title: "La Révolution" },
-  {
-    at: "1:09:41",
-    artist: "Korolova & Go_A & Rokston ft. Monokate",
-    title: "Vorozhyla",
-  },
+  { at: "1:09:41", artist: "Korolova & Go_A & Rokston ft. Monokate", title: "Vorozhyla" },
   { at: "1:14:15", artist: "Carl Bee", title: "Suspicious" },
-  {
-    at: "1:20:20",
-    artist: "Agents Of Time & Korolova ft. Conor Ross",
-    title: "Made For Love",
-  },
+  { at: "1:20:20", artist: "Agents Of Time & Korolova ft. Conor Ross", title: "Made For Love" },
   { at: "1:25:14", artist: "Korolova ft. Clér Letiv", title: "Paradise" },
 ];
 
@@ -2707,7 +2685,9 @@ export const TL_SARA_LANDRY_TML_WE2_2026: FingerprintSeedRow[] = [
  * (`&` illegal); constant is TL_AFROJACK_R3HAB_TML_WE2_2026.
  * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-lEIGnx7qLl0"]
  *       TRACKLIST_1001_BY_SOURCE_SLUG["yt-AjQeohYmg3A"]
- * Captured 2026-08-16 - provenance 1001tl.
+ * Recapture 2026-08-23 — same 54 cues as 2026-08-16.
+ * Overlay TL_AFROJACK_R3HAB_Mainstage_Tomorrowland_WE2_Belgium_2026-07-26
+ * is not a valid identifier.
  */
 export const TL_AFROJACK_R3HAB_TML_WE2_2026: FingerprintSeedRow[] = [
   { at: "0:12", artist: "R3HAB & Vion Konger & Skytech", title: "Ultimate" },
@@ -4614,6 +4594,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-PlArfyuzuqo": TL_JOHN_SUMMIT_TML_WE2_2026,
   "yt-I6QA_T-BS6o": TL_ARMIN_VAN_BUUREN_YT_HOUSE_TML_2026,
   "yt-RLOghpXjuJI": TL_KOROLOVA_TML_WE2_2026,
+  "sc-korolovadj-korolova-live-tomorrowland-1": TL_KOROLOVA_TML_WE2_2026,
   "yt-LE-byccuovI": TL_LUCAS_STEVE_TML_WE2_2026,
   "yt-aDAWctObTvI": TL_SARA_LANDRY_TML_WE2_2026,
   "yt-AjQeohYmg3A": TL_AFROJACK_R3HAB_TML_WE2_2026,
@@ -4642,6 +4623,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-sLtNC21myWM": TL_HONEYLUV_ANTS_USHUAIA_2026,
   "yt-CMhFNEo0glw": TL_PEGGY_GOU_EDC_LV_2026,
   "yt-9TKqqBCmDHA": TL_JOHN_SUMMIT_LOLLAPALOOZA,
+  "sc-johnsummit-john-summit-live-lollapalooza": TL_JOHN_SUMMIT_LOLLAPALOOZA,
   "yt--UOMvxh4MYU": TL_PEGGY_GOU_CERCLE_LILLE,
   "yt-BUsCIK_kh_A": TL_MARTIN_GARRIX_TML_WE2_2026,
   "yt-1lqmFLr-SkA": TL_THE_CHAINSMOKERS_TML_WE1_2026,
@@ -4789,6 +4771,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
     TL_COLYN_INNELLEA_ULTRA_MIAMI_RESISTANCE_COVE_2026,
   "yt-OI02QgEA1Zw": TL_ABOVE_AND_BEYOND_KINETICFIELD_EDC_LV_2026,
   "yt-GSnPwle4FOE": TL_DAVID_GUETTA_TML_WE1_2026,
+  "yt-rG1DvjvXCls": TL_MARLON_HOFFSTADT_TML_WE1_2026,
 };
 
 /** Sanity: every seeded clock must parse. */

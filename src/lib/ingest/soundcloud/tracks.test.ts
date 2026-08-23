@@ -24,6 +24,19 @@ assert.equal(
   "sc-sidepiece-sidepiece-lollapalooza-perry",
 );
 
+const summitLollaSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url ===
+    "https://soundcloud.com/johnsummit/john-summit-live-lollapalooza",
+);
+assert.ok(summitLollaSc);
+assert.equal(summitLollaSc.primaryArtist.name, "John Summit");
+assert.equal(summitLollaSc.type, "festival");
+assert.equal(
+  `sc-johnsummit-${slugify("john-summit-live-lollapalooza")}`,
+  "sc-johnsummit-john-summit-live-lollapalooza",
+);
+
 const notionPerrySc = SOUNDCLOUD_TRACK_SEEDS.find(
   (s) =>
     s.url === "https://soundcloud.com/notiondj/notion-live-at-lollapalooza",
@@ -222,6 +235,20 @@ assert.equal(captive098Sc.seriesName, "Captive Soul");
 assert.equal(
   `sc-korolovadj-${slugify("korolova-captive-soul-98")}`,
   "sc-korolovadj-korolova-captive-soul-98",
+);
+
+const korolovaTmlSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url ===
+    "https://soundcloud.com/korolovadj/korolova-live-tomorrowland-1",
+);
+assert.ok(korolovaTmlSc);
+assert.equal(korolovaTmlSc.primaryArtist.name, "Korolova");
+assert.equal(korolovaTmlSc.type, "festival");
+assert.notEqual(korolovaTmlSc.url, captive098Sc.url);
+assert.equal(
+  `sc-korolovadj-${slugify("korolova-live-tomorrowland-1")}`,
+  "sc-korolovadj-korolova-live-tomorrowland-1",
 );
 
 const hypeSyncSc = SOUNDCLOUD_TRACK_SEEDS.find(

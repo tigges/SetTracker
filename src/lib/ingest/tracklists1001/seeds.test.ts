@@ -168,6 +168,7 @@ import {
   TL_COLYN_INNELLEA_ULTRA_MIAMI_RESISTANCE_COVE_2026,
   TL_ABOVE_AND_BEYOND_KINETICFIELD_EDC_LV_2026,
   TL_DAVID_GUETTA_TML_WE1_2026,
+  TL_MARLON_HOFFSTADT_TML_WE1_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   isSecondaryPlaybackSlug,
@@ -951,8 +952,10 @@ assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-I6QA_T-BS6o"]!.length >= 7);
 
 assertSeedClocks(TL_KOROLOVA_TML_WE2_2026);
 const korolova = tracklist1001RowsToPlays(TL_KOROLOVA_TML_WE2_2026);
-assert.equal(korolova.length, 21);
-assert.equal(korolova[0]!.trackTitle, "Window Shake");
+assert.equal(korolova.length, 22);
+assert.equal(korolova[0]!.trackTitle, "Buka");
+assert.equal(korolova[0]!.timestamp, 2 * 60 + 29);
+assert.equal(korolova[1]!.trackTitle, "Window Shake");
 assert.equal(korolova[korolova.length - 1]!.trackTitle, "Paradise");
 assert.equal(korolova[korolova.length - 1]!.timestamp, 85 * 60 + 14);
 let korPrev = -1;
@@ -963,7 +966,31 @@ for (const p of korolova) {
   );
   korPrev = p.timestamp;
 }
-assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-RLOghpXjuJI"]!.length >= 21);
+assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-RLOghpXjuJI"]!.length >= 22);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-korolovadj-korolova-live-tomorrowland-1"],
+  TL_KOROLOVA_TML_WE2_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-https://soundcloud.com/korolovadj/korolova-live-tomorrowland-1"
+  ],
+  undefined,
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-korolovadj-korolova-live-tomorrowland-1"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-korolovadj-korolova-captive-soul-98"],
+);
+assert.equal(isWiredTracklistSlug("yt-RLOghpXjuJI"), true);
+assert.equal(
+  isWiredTracklistSlug("sc-korolovadj-korolova-live-tomorrowland-1"),
+  true,
+);
+assert.equal(
+  isSecondaryPlaybackSlug("sc-korolovadj-korolova-live-tomorrowland-1"),
+  true,
+);
+assert.equal(isSecondaryPlaybackSlug("yt-RLOghpXjuJI"), false);
 
 assertSeedClocks(TL_LUCAS_STEVE_TML_WE2_2026);
 const lucasSteve = tracklist1001RowsToPlays(TL_LUCAS_STEVE_TML_WE2_2026);
@@ -1255,15 +1282,49 @@ assert.equal(
 );
 
 assertSeedClocks(TL_JOHN_SUMMIT_LOLLAPALOOZA);
-assert.equal(TL_JOHN_SUMMIT_LOLLAPALOOZA.length, 40);
+assert.equal(TL_JOHN_SUMMIT_LOLLAPALOOZA.length, 41);
 assert.equal(
   TRACKLIST_1001_BY_SOURCE_SLUG["yt-9TKqqBCmDHA"],
   TL_JOHN_SUMMIT_LOLLAPALOOZA,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-johnsummit-john-summit-live-lollapalooza"],
+  TL_JOHN_SUMMIT_LOLLAPALOOZA,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-https://soundcloud.com/johnsummit/john-summit-live-lollapalooza"
+  ],
+  undefined,
 );
 assert.notEqual(
   TRACKLIST_1001_BY_SOURCE_SLUG["yt-9TKqqBCmDHA"],
   TRACKLIST_1001_BY_SOURCE_SLUG["yt-PlArfyuzuqo"],
 );
+assert.equal(isWiredTracklistSlug("yt-9TKqqBCmDHA"), true);
+assert.equal(
+  isWiredTracklistSlug("sc-johnsummit-john-summit-live-lollapalooza"),
+  true,
+);
+assert.equal(
+  isSecondaryPlaybackSlug("sc-johnsummit-john-summit-live-lollapalooza"),
+  true,
+);
+assert.equal(isSecondaryPlaybackSlug("yt-9TKqqBCmDHA"), false);
+const summitLolla = tracklist1001RowsToPlays(TL_JOHN_SUMMIT_LOLLAPALOOZA);
+assert.equal(summitLolla.length, 41);
+assert.equal(summitLolla[0]?.provenance, "1001tl");
+assert.equal(summitLolla[0]?.trackTitle, "SHADOWS");
+assert.equal(summitLolla[5]?.trackTitle, "Are You Feeling The Vibe");
+assert.equal(summitLolla[5]?.timestamp, 7 * 60 + 55);
+assert.equal(summitLolla[40]?.trackTitle, "Delilah (Pull Me Out Of This)");
+assert.equal(summitLolla[40]?.timestamp, 1 * 3600 + 27 * 60 + 53);
+for (let i = 1; i < summitLolla.length; i++) {
+  assert.ok(
+    (summitLolla[i]!.timestamp ?? 0) > (summitLolla[i - 1]!.timestamp ?? 0),
+    `John Summit Lollapalooza clocks must increase at index ${i}`,
+  );
+}
 
 assertSeedClocks(TL_PEGGY_GOU_CERCLE_LILLE);
 assert.equal(TL_PEGGY_GOU_CERCLE_LILLE.length, 20);
@@ -2774,6 +2835,35 @@ for (let i = 1; i < 47; i++) {
   assert.ok(
     (guettaWe1[i]!.timestamp ?? 0) > (guettaWe1[i - 1]!.timestamp ?? 0),
     `David Guetta TML WE1 2026 clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_MARLON_HOFFSTADT_TML_WE1_2026);
+assert.equal(TL_MARLON_HOFFSTADT_TML_WE1_2026.length, 16);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-rG1DvjvXCls"],
+  TL_MARLON_HOFFSTADT_TML_WE1_2026,
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-rG1DvjvXCls"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-vpf4LLy42Zc"],
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-https://youtu.be/rG1DvjvXCls"],
+  undefined,
+);
+assert.equal(isWiredTracklistSlug("yt-rG1DvjvXCls"), true);
+const marlonWe1 = tracklist1001RowsToPlays(TL_MARLON_HOFFSTADT_TML_WE1_2026);
+assert.equal(marlonWe1.length, 16);
+assert.equal(marlonWe1[0]?.provenance, "1001tl");
+assert.equal(marlonWe1[0]?.timestamp, 12);
+assert.equal(marlonWe1[0]?.trackTitle, "One Time For The Dj");
+assert.equal(marlonWe1[15]?.trackTitle, "You're Not Alone (Marlon Hoffstadt Edit)");
+assert.equal(marlonWe1[15]?.timestamp, 56 * 60);
+for (let i = 1; i < marlonWe1.length; i++) {
+  assert.ok(
+    (marlonWe1[i]!.timestamp ?? 0) > (marlonWe1[i - 1]!.timestamp ?? 0),
+    `Marlon Hoffstadt TML WE1 2026 clocks must increase at index ${i}`,
   );
 }
 

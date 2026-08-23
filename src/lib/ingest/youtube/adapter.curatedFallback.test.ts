@@ -97,6 +97,15 @@ const ALESSO_TML_WE1 = YOUTUBE_SETS.find((s) =>
 const DAVID_GUETTA_TML_WE1 = YOUTUBE_SETS.find((s) =>
   s.video.includes("GSnPwle4FOE"),
 );
+const MARLON_TML_WE1 = YOUTUBE_SETS.find((s) =>
+  s.video.includes("rG1DvjvXCls"),
+);
+const KOROLOVA_TML_WE2 = YOUTUBE_SETS.find((s) =>
+  s.video.includes("RLOghpXjuJI"),
+);
+const SUMMIT_LOLLA = YOUTUBE_SETS.find((s) =>
+  s.video.includes("9TKqqBCmDHA"),
+);
 const ILLENIUM_TML_WE1 = YOUTUBE_SETS.find((s) =>
   s.video.includes("E1WH0nvaxAw"),
 );
@@ -378,6 +387,39 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=GSnPwle4FOE");
     // Last cue 1:13:15 + 180s pad.
     assert.equal(meta.durationSec, 1 * 3600 + 13 * 60 + 15 + 180);
+  });
+
+  it("builds Marlon Hoffstadt TML WE1 Mainstage meta from the curated 1001 capture", () => {
+    assert.ok(MARLON_TML_WE1);
+    const meta = watchMetaFromCuratedSeed(MARLON_TML_WE1);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "rG1DvjvXCls");
+    assert.match(meta.title, /Marlon Hoffstadt WE1/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=rG1DvjvXCls");
+    // Last cue 56:00 + 180s pad.
+    assert.equal(meta.durationSec, 56 * 60 + 180);
+  });
+
+  it("builds Korolova TML WE2 Captive Soul meta from the curated 1001 capture", () => {
+    assert.ok(KOROLOVA_TML_WE2);
+    const meta = watchMetaFromCuratedSeed(KOROLOVA_TML_WE2);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "RLOghpXjuJI");
+    assert.match(meta.title, /Korolova WE2/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=RLOghpXjuJI");
+    // Last cue 1:25:14 + 180s pad.
+    assert.equal(meta.durationSec, 1 * 3600 + 25 * 60 + 14 + 180);
+  });
+
+  it("builds John Summit Lollapalooza meta from the curated 1001 capture", () => {
+    assert.ok(SUMMIT_LOLLA);
+    const meta = watchMetaFromCuratedSeed(SUMMIT_LOLLA);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "9TKqqBCmDHA");
+    assert.match(meta.title, /John Summit/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=9TKqqBCmDHA");
+    // Last cue 1:27:53 + 180s pad.
+    assert.equal(meta.durationSec, 1 * 3600 + 27 * 60 + 53 + 180);
   });
 
   it("builds Alok TML WE2 meta from the curated 1001 capture", () => {
@@ -1735,6 +1777,55 @@ describe("curated YouTube 429 fallback", () => {
     assert.ok(sets[0]!.durationSec >= 1 * 3600 + 13 * 60 + 15);
     assert.equal(sets[0]?.primaryArtist?.slug, "david-guetta");
     assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
+  });
+
+  it("lands Marlon Hoffstadt TML WE1 Mainstage from the 1001 seed when watch is 429", async () => {
+    assert.ok(MARLON_TML_WE1);
+    const adapter = createYoutubeAdapter([MARLON_TML_WE1], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-rG1DvjvXCls");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 16);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 56 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "marlon-hoffstadt");
+    assert.notEqual(sets[0]!.sourceSlug, "yt-vpf4LLy42Zc");
+    assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
+  });
+
+  it("lands Korolova TML WE2 Captive Soul from the 1001 seed when watch is 429", async () => {
+    assert.ok(KOROLOVA_TML_WE2);
+    const adapter = createYoutubeAdapter([KOROLOVA_TML_WE2], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-RLOghpXjuJI");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 22);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 1 * 3600 + 25 * 60 + 14);
+    assert.equal(sets[0]?.primaryArtist?.slug, "korolova");
+    assert.notEqual(sets[0]!.sourceSlug, "yt-5JxfEjVdQFk");
+    assert.notEqual(
+      sets[0]!.sourceSlug,
+      "sc-korolovadj-korolova-live-tomorrowland-1",
+    );
+    assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
+  });
+
+  it("lands John Summit Lollapalooza from the 1001 seed when watch is 429", async () => {
+    assert.ok(SUMMIT_LOLLA);
+    const adapter = createYoutubeAdapter([SUMMIT_LOLLA], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-9TKqqBCmDHA");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 41);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 1 * 3600 + 27 * 60 + 53);
+    assert.equal(sets[0]?.primaryArtist?.slug, "john-summit");
+    assert.notEqual(sets[0]!.sourceSlug, "yt-PlArfyuzuqo");
+    assert.match(String(sets[0]?.eventName ?? ""), /Lollapalooza/i);
   });
 
   it("lands ILLENIUM TML WE1 Great Library from the 1001 seed when watch is 429", async () => {

@@ -70,6 +70,18 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     minDurationSec: 15 * 60,
   },
   {
+    // Official John Summit Lollapalooza; 1001TL wired via
+    // sc-johnsummit-john-summit-live-lollapalooza (same list as yt-9TKqqBCmDHA).
+    url: "https://soundcloud.com/johnsummit/john-summit-live-lollapalooza",
+    primaryArtist: dj("John Summit", {
+      accent: "#7cffb2",
+      homeCity: "Chicago, US",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    minDurationSec: 15 * 60,
+  },
+  {
     // Official NOTION Perry's Lollapalooza; 1001TL wired via
     // sc-notiondj-notion-live-at-lollapalooza (same list as yt-9vgSTomhCp8).
     url: "https://soundcloud.com/notiondj/notion-live-at-lollapalooza",
@@ -264,6 +276,19 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     seriesName: "Captive Soul",
     type: "radio",
     minDurationSec: 30 * 60,
+  },
+  {
+    // Official Korolova Tomorrowland Captive Soul WE2; 1001TL wired via
+    // sc-korolovadj-korolova-live-tomorrowland-1 (same list as yt-RLOghpXjuJI).
+    // Distinct from Captive Soul 098 / Snowattack / Tulum. Never sc-https://….
+    url: "https://soundcloud.com/korolovadj/korolova-live-tomorrowland-1",
+    primaryArtist: dj("Korolova", {
+      accent: "#9b5de5",
+      homeCity: "Kyiv, UA",
+    }),
+    genre: "Melodic Techno",
+    type: "festival",
+    minDurationSec: 15 * 60,
   },
   {
     // Official James Hype upload; 1001TL wired via

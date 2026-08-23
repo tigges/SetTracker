@@ -59,3 +59,32 @@ export const TL_DAVID_GUETTA_TML_WE1_2026: FingerprintSeedRow[] = [
   { at: "1:09:50", artist: "David Guetta ft. Chris Willis", title: "Just A Little More Love (David Guetta 2026 Remix)" },
   { at: "1:13:15", artist: "Hypaton & David Guetta ft. Bonnie Tyler", title: "Together" },
 ];
+
+/**
+ * Marlon Hoffstadt @ Mainstage, Tomorrowland Weekend 1, Belgium 2026-07-17
+ * Official YouTube: https://youtu.be/rG1DvjvXCls
+ * https://www.1001tracklists.com/tracklist/25k2c8zk/marlon-hoffstadt-mainstage-tomorrowland-weekend-1-belgium-2026-07-17.html
+ * Overlay name TL_MARLON_HOFFSTADT is too generic (Coachella Sahara WE2 exists).
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-rG1DvjvXCls"] = TL_MARLON_HOFFSTADT_TML_WE1_2026
+ * Captured 2026-08-23 — provenance 1001tl.
+ * No SoundCloud in the operator paste — do not invent an SC slug.
+ * Distinct from Coachella Sahara WE2 (yt-vpf4LLy42Zc).
+ */
+export const TL_MARLON_HOFFSTADT_TML_WE1_2026: FingerprintSeedRow[] = [
+  { at: "0:12", artist: "Marlon Hoffstadt", title: "One Time For The Dj" },
+  { at: "3:09", artist: "Marlon Hoffstadt", title: "Get Buck" },
+  { at: "6:08", artist: "Marlon Hoffstadt", title: "Party People" },
+  { at: "10:00", artist: "David Guetta ft. Kid Cudi", title: "Memories (Marlon Hoffstadt Edit)" },
+  { at: "13:48", artist: "Marlon Hoffstadt", title: "Don't Give A Shit" },
+  { at: "17:12", artist: "Dan Heist", title: "Kids" },
+  { at: "21:11", artist: "Marlon Hoffstadt & Coach Harrison", title: "Daddy's In The Club" },
+  { at: "24:48", artist: "Dimitri Vegas & Like Mike & Marlon Hoffstadt & DJ Konik", title: "Makina Time" },
+  { at: "27:54", artist: "Marlon Hoffstadt & KI/KI", title: "Losing Control" },
+  { at: "30:18", artist: "Marlon Hoffstadt", title: "Breathe (Morgan Seatree & Marlon Hoffstadt Remix)" },
+  { at: "33:52", artist: "Marlon Hoffstadt", title: "Turn It Up" },
+  { at: "38:15", artist: "Marlon Hoffstadt & Niko Rubio", title: "Water" },
+  { at: "42:51", artist: "Marlon Hoffstadt ft. rhys from the sticks", title: "Come Up For Air" },
+  { at: "45:35", artist: "Marlon Hoffstadt aka DJ Daddy Trance", title: "I Got You" },
+  { at: "49:21", artist: "Marlon Hoffstadt", title: "You're The One" },
+  { at: "56:00", artist: "Olive", title: "You're Not Alone (Marlon Hoffstadt Edit)" },
+];
