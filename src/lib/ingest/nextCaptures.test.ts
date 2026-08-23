@@ -4,11 +4,18 @@ import {
   buildHeldReliveWatch,
   buildNextCaptures,
   search1001,
+  searchMixesdbByPlayerUrl,
 } from "./nextCaptures";
 import { TRACKLIST_1001_BY_SOURCE_SLUG } from "./tracklists1001/festival2026";
 
 assert.ok(PRIORITY_CAPTURES.length <= 12);
-assert.ok(search1001("fisher").includes("1001tracklists.com"));
+assert.ok(search1001("fisher").includes("1001tracklists.com/search"));
+assert.ok(!search1001("fisher").includes("google.com"));
+assert.ok(
+  searchMixesdbByPlayerUrl("https://www.youtube.com/watch?v=ViNSjYircPs")
+    ?.includes("mixesdb.com"),
+);
+assert.equal(searchMixesdbByPlayerUrl("Korolova"), null);
 
 const presets = buildNextCaptures({ limit: 10 });
 assert.ok(presets.length <= 10);

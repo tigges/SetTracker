@@ -17,7 +17,7 @@ import {
   parseDescriptionTracklist,
   parseTimedComments,
 } from "../soundcloud/parseTracklist";
-import { slugify, type RawSet, type SourceAdapter } from "../types";
+import { slugify, type RawPlay, type RawSet, type SourceAdapter } from "../types";
 import { withDescriptionSocials } from "../youtube/client";
 import {
   HEARTHIS_ARTISTS,
@@ -47,7 +47,11 @@ import {
   resolveSoundCloudTrackUrl,
 } from "./playback";
 import { playlistEntriesToPlays } from "./playlist";
-import { applyTracklist1001Seed } from "../tracklists1001/seeds";
+import {
+  playsFromDescriptionMixesdbLinks,
+  playsFromPlaybackMixesdbLookup,
+} from "../mixesdb/client";
+import { applyTracklist1001Seed, merge1001Plays } from "../tracklists1001/seeds";
 
 const ACCENTS = [
   "#ff7a45",
@@ -68,6 +72,19 @@ function pickAccent(seed: string): string {
 
 function durationSecOf(track: HtTrack): number {
   return Math.max(0, asInt(track.duration));
+}
+
+async function hearthisMixesdbPlays(
+  description: string,
+  playbackUrl: string,
+  durationSec: number,
+): Promise<RawPlay[]> {
+  let from = await playsFromDescriptionMixesdbLinks(description, durationSec);
+  if (from.length < 5) {
+    const lookup = await playsFromPlaybackMixesdbLookup(playbackUrl, durationSec);
+    if (lookup.length > from.length) from = lookup;
+  }
+  return from;
 }
 
 function publishedAtOf(track: HtTrack): Date {
@@ -262,7 +279,13 @@ export async function trackToRawSet(
     playbackUrl,
     cover: pickAccent(sourceSlug),
     imageUrl: setImage ?? undefined,
-    plays: applyTracklist1001Seed(sourceSlug, plays),
+    plays: applyTracklist1001Seed(
+      sourceSlug,
+      merge1001Plays(
+        plays,
+        await hearthisMixesdbPlays(description, sourceUrl, durationSec),
+      ),
+    ),
   };
   raw.sourceHash = hashRawSetContent(raw);
   return raw;

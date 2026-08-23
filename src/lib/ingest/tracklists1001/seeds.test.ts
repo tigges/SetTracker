@@ -167,6 +167,7 @@ import {
   TL_JORIS_VOORN_KOROLOVA_ULTRA_MIAMI_RESISTANCE_COVE_2026,
   TL_COLYN_INNELLEA_ULTRA_MIAMI_RESISTANCE_COVE_2026,
   TL_ABOVE_AND_BEYOND_KINETICFIELD_EDC_LV_2026,
+  TL_DAVID_GUETTA_TML_WE1_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   isSecondaryPlaybackSlug,
@@ -2745,6 +2746,37 @@ for (let i = 1; i < abEdc.length; i++) {
   );
 }
 assert.equal(isWiredTracklistSlug("yt-OI02QgEA1Zw"), true);
+
+assertSeedClocks(TL_DAVID_GUETTA_TML_WE1_2026);
+assert.equal(TL_DAVID_GUETTA_TML_WE1_2026.length, 47);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-GSnPwle4FOE"],
+  TL_DAVID_GUETTA_TML_WE1_2026,
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-GSnPwle4FOE"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-NTLDGnoWIRg"],
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-https://youtu.be/GSnPwle4FOE"],
+  undefined,
+);
+assert.equal(isWiredTracklistSlug("yt-GSnPwle4FOE"), true);
+const guettaWe1 = tracklist1001RowsToPlays(TL_DAVID_GUETTA_TML_WE1_2026);
+assert.equal(guettaWe1.length, 47);
+assert.equal(guettaWe1[0]?.provenance, "1001tl");
+assert.equal(guettaWe1[0]?.timestamp, 2 * 60 + 4);
+assert.equal(guettaWe1[0]?.artistName, "David Guetta ft. Sia");
+assert.equal(guettaWe1[0]?.trackTitle, "Titanium (Alesso Remix)");
+assert.equal(guettaWe1[46]?.trackTitle, "Together");
+assert.equal(guettaWe1[46]?.timestamp, 1 * 3600 + 13 * 60 + 15);
+for (let i = 1; i < 47; i++) {
+  assert.ok(
+    (guettaWe1[i]!.timestamp ?? 0) > (guettaWe1[i - 1]!.timestamp ?? 0),
+    `David Guetta TML WE1 2026 clocks must increase at index ${i}`,
+  );
+}
+
 assert.notEqual(
   TRACKLIST_1001_BY_SOURCE_SLUG["yt-2BPWWYAgUE4"],
   TRACKLIST_1001_BY_SOURCE_SLUG["yt-FQj71mhobYw"],

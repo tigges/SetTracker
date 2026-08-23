@@ -149,6 +149,9 @@ export function evaluateOfficialWatchUrl(
   if (/1001tracklists\.com|1001\.tl/i.test(url)) {
     return { ok: false, reason: "never invent or accept 1001 URLs from the model" };
   }
+  if (/mixesdb\.com/i.test(url)) {
+    return { ok: false, reason: "never invent or accept MixesDB URLs as official playback" };
+  }
   let parsed: URL;
   try {
     parsed = new URL(url);

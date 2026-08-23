@@ -31,6 +31,10 @@ import {
   fingerprintRowsToPlays,
   mergeFingerprintPlays,
 } from "../fingerprint/seeds";
+import {
+  playsFromDescriptionMixesdbLinks,
+  playsFromPlaybackMixesdbLookup,
+} from "../mixesdb/client";
 import { playsFromDescription1001Links } from "../tracklists1001/client";
 import {
   applyTracklist1001Seed,
@@ -74,16 +78,41 @@ function durationSecOf(track: ScTrack): number {
 }
 
 /**
- * Follow 1001.tl links in the SC description (same as YouTube adapter), then
- * apply curated seed fallbacks keyed by sourceSlug.
+ * Follow MixesDB mix pages then 1001.tl links in the SC description
+ * (same as YouTube adapter), then apply curated 1001 seed fallbacks.
  */
 async function enrichScPlaysWith1001(
   description: string | null | undefined,
   sourceSlug: string,
   base: RawPlay[],
   durationSec: number,
+  playbackUrl?: string | null,
 ): Promise<RawPlay[]> {
   let plays = base;
+  try {
+    let fromMixesdb = await playsFromDescriptionMixesdbLinks(
+      description,
+      durationSec,
+    );
+    if (fromMixesdb.length < 5 && playbackUrl) {
+      const fromPlayer = await playsFromPlaybackMixesdbLookup(
+        playbackUrl,
+        durationSec,
+      );
+      if (fromPlayer.length > fromMixesdb.length) fromMixesdb = fromPlayer;
+    }
+    if (fromMixesdb.length) {
+      plays = merge1001Plays(plays, fromMixesdb);
+      console.log(
+        `[soundcloud] mixesdb ${sourceSlug}: ${fromMixesdb.length} plays from MixesDB`,
+      );
+    }
+  } catch (err) {
+    console.warn(
+      `[soundcloud] mixesdb follow failed ${sourceSlug}:`,
+      err instanceof Error ? err.message : err,
+    );
+  }
   try {
     const from1001 = await playsFromDescription1001Links(
       description,
@@ -173,6 +202,7 @@ async function trackToRawSet(
     sourceSlug,
     mergeTracklistSignals(fromDescription, fromComments),
     durationSec,
+    sourceUrl,
   );
   const artistImage = scImageUrl(track.user?.avatar_url);
   const setImage =
@@ -272,6 +302,7 @@ async function playlistTrackToRawSet(
     sourceSlug,
     mergeTracklistSignals(fromDescription, fromComments),
     durationSec,
+    sourceUrl,
   );
   const artistImage = scImageUrl(track.user?.avatar_url);
   const setImage = scImageUrl(track.artwork_url) || artistImage;
@@ -349,6 +380,7 @@ async function trackSeedToRawSet(
     sourceSlug,
     mergeTracklistSignals(fromDescription, fromComments),
     durationSec,
+    sourceUrl,
   );
   if (seed.fingerprintPlays?.length) {
     plays = mergeFingerprintPlays(

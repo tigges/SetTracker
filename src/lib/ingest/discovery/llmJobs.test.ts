@@ -57,6 +57,12 @@ assert.equal(
   evaluateOfficialWatchUrl("https://www.1001tracklists.com/tracklist/foo").ok,
   false,
 );
+assert.equal(
+  evaluateOfficialWatchUrl(
+    "https://www.mixesdb.com/w/2026-08-07_-_Korolova_-_Captive_Soul_098",
+  ).ok,
+  false,
+);
 assert.match(
   evaluateOfficialWatchUrl("https://1001.tl/abc").reason,
   /1001/,

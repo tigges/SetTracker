@@ -38,7 +38,7 @@ Entities: `Dj`, `Set`, `Track`, `Label`, `Event`, `Series`, and a first-class
 | teal    | `community_resolved` | Was an ID, resolved by the community      |
 | grey    | `unparsed`           | Raw source text, not matched to a record  |
 
-Provenance per row: `1001TL parse`, `SoundCloud parse`, `fingerprint`, `community`.
+Provenance per row: `1001TL parse`, `MixesDB`, `SoundCloud parse`, `fingerprint`, `community`.
 
 ## Pages
 

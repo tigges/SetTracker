@@ -2,8 +2,8 @@
  * DJ Mag Live Sets → RawSet.
  *
  * Discovery: https://djmag.com/livesets (paginated YouTube embeds).
- * Tracklists: YouTube description + Music credits + 1001.tl follow-links
- * (editorial /watch pages do not embed cue sheets).
+ * Tracklists: YouTube description + Music credits + MixesDB / 1001.tl
+ * follow-links (editorial /watch pages do not embed cue sheets).
  *
  * Dedupes with the @DJMag YouTube venue via sourceSlug `yt-{videoId}`.
  */
@@ -12,6 +12,10 @@ import { artistsForSet } from "../artists";
 import { inferFestivalEvent, KNOWN_EVENTS } from "../events";
 import { hashRawSetContent } from "../hash";
 import { parseDescriptionTracklist } from "../soundcloud/parseTracklist";
+import {
+  playsFromDescriptionMixesdbLinks,
+  playsFromPlaybackMixesdbLookup,
+} from "../mixesdb/client";
 import { playsFromDescription1001Links } from "../tracklists1001/client";
 import { merge1001Plays } from "../tracklists1001/seeds";
 import { slugify, type RawPlay, type RawSet, type SourceAdapter } from "../types";
@@ -164,6 +168,18 @@ async function teaserToRawSet(
   primary.accent = primary.accent || ACCENT;
 
   let plays = playsFromMeta(meta);
+  let fromMixesdb = await playsFromDescriptionMixesdbLinks(
+    meta.description,
+    meta.durationSec,
+  );
+  if (fromMixesdb.length < 5) {
+    const fromPlayer = await playsFromPlaybackMixesdbLookup(
+      meta.watchUrl,
+      meta.durationSec,
+    );
+    if (fromPlayer.length > fromMixesdb.length) fromMixesdb = fromPlayer;
+  }
+  plays = merge1001Plays(plays, fromMixesdb);
   const from1001 = await playsFromDescription1001Links(
     meta.description,
     meta.durationSec,

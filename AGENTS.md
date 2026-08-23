@@ -112,6 +112,25 @@ unless asked.
   usually no clocks; not a primary ID source. Official API needs a key +
   followable attribution and is free only for non-commercial use — do not
   poll HTML or the API without a producer key and clearance.
+  **MixesDB:** follow a concrete `/w/YYYY-MM-DD_-_…` mix page already
+  linked from a source description (or operator paste), **or** one
+  `insource:` lookup keyed by a YT/SC/hearthis/Mixcloud URL we already
+  store, or an Apple Music album id MixesDB indexed as a player (lookup
+  key only — never on-site playback). Do **not** crawl Category /
+  Explorer, search by artist name, or invent `/w/…` titles. Never create
+  sets from MixesDB-only pages. Timed `[mm:ss]` / `[mm]` marks overlay
+  clocks (`provenance: "mixesdb"`); untimed numbered lists stay out. Live
+  HTML/API is Cloudflare-gated — default do not fetch
+  (`INGEST_ALLOW_MIXESDB_FETCH=1` on a human laptop). `/stats` **Search
+  MixesDB** opens that player-URL search. CC-BY-SA 3.0 attribution is the
+  MixesDB provenance label. Never a set/playback source.
+  **Apple Music DJ-mix albums:** first-party per-track times are *segment
+  lengths* (often “(Mixed)”), not MixesDB `[mm:ss]` cues. Accumulate those
+  official lengths into start clocks (`provenance: "applemusic"`) from
+  operator paste or `scripts/capture-applemusic.console.js` on the album
+  page already open. iTunes Lookup returns the album shell only for many
+  AM-only mixes — do **not** scrape `music.apple.com` from CI. Never
+  on-site playback (embed SC / Mixcloud / YT only).
   **Atlas:** `/atlas` maps DJ Mag Top 100 Clubs & Festivals 2026
   (`data/venue-seeds/djmag-atlas-2026.json` lat/lng + YoY) plus Top 100 DJs
   2025 (`data/artist-seeds/djmag-atlas-djs-2025.json`). Venue pins link to

@@ -143,6 +143,7 @@ import {
   TL_JORIS_VOORN_KOROLOVA_ULTRA_MIAMI_RESISTANCE_COVE_2026,
   TL_COLYN_INNELLEA_ULTRA_MIAMI_RESISTANCE_COVE_2026,
   TL_ABOVE_AND_BEYOND_KINETICFIELD_EDC_LV_2026,
+  TL_DAVID_GUETTA_TML_WE1_2026,
 } from "../tracklists1001/seeds";
 import type { RawArtist } from "../types";
 import { slugify } from "../types";
@@ -172,6 +173,11 @@ export type YoutubeSetSource = {
    * (common on Insomniac playbacks). Tried before falling back to seed rows.
    */
   tracklist1001Url?: string;
+  /**
+   * Known MixesDB `/w/YYYY-MM-DD_-_…` mix page when the YT description
+   * omits it. Follow-only — never invent titles. Live fetch is gated.
+   */
+  tracklistMixesdbUrl?: string;
 };
 
 function dj(name: string, extra: Partial<RawArtist> = {}): RawArtist {
@@ -1186,6 +1192,22 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/1ucg9n01/the-chainsmokers-mainstage-tomorrowland-weekend-1-belgium-2026-07-17.html",
     tracklist1001: TL_THE_CHAINSMOKERS_TML_WE1_2026,
+  },
+  {
+    // Tomorrowland official Relive — Mainstage WE1; 1001.tl/2q9jpt9k timed capture.
+    video: "https://www.youtube.com/watch?v=GSnPwle4FOE",
+    primaryArtist: dj("David Guetta", {
+      accent: "#1e90ff",
+      homeCity: "Paris, FR",
+    }),
+    genre: "House",
+    type: "festival",
+    title: "David Guetta WE1 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2q9jpt9k/david-guetta-mainstage-tomorrowland-weekend-1-belgium-2026-07-18.html",
+    tracklist1001: TL_DAVID_GUETTA_TML_WE1_2026,
   },
   {
     // Tomorrowland official Relive — Mainstage WE1.

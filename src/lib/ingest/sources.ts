@@ -102,7 +102,8 @@ function withOptionalSynthetic(base: SourceAdapter[]): SourceAdapter[] {
 /**
  * Primary pipeline (SC/YT first — hearthis is a niche tracklist supplement):
  * - SoundCloud curated shows + playlists (anonymous client_id)
- * - YouTube curated sets + venue channels (description + Music credits)
+ * - YouTube curated sets + venue channels (description + Music credits;
+ *   MixesDB / 1001 follow-links overlay clocks, never set discovery)
  * - DJ Mag Live Sets (djmag.com/livesets index → YT playback + tracklists)
  * - Insomniac Night Owl Radio + /music/mixes (SC/YT audio + Insomniac tracklists)
  * - Boiler Room sessions (boilerroom.tv provenance + SC/YT playback)

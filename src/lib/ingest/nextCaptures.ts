@@ -13,6 +13,10 @@ import type { DensitySeverity } from "../setDensity";
 import { SET_SLUG_ALIASES } from "./sourceRemaps";
 import { TRACKLIST_1001_BY_SOURCE_SLUG } from "./tracklists1001/festival2026";
 import { isSecondaryPlaybackSlug } from "./tracklists1001/seeds";
+import { search1001 } from "../search1001";
+import { searchMixesdbByPlayerUrl } from "../searchMixesdb";
+
+export { search1001, searchMixesdbByPlayerUrl };
 
 export type CapturePreset = {
   label: string;
@@ -27,11 +31,6 @@ export type CapturePreset = {
   watchUrl?: string;
   host?: "youtube" | "soundcloud";
 };
-
-export function search1001(...parts: string[]): string {
-  const q = [...parts, "site:1001tracklists.com"].join(" ");
-  return `https://www.google.com/search?q=${encodeURIComponent(q)}`;
-}
 
 /** Hand-curated high-value assists (official YT, 1001 TBD). Empty when wired. */
 export const PRIORITY_CAPTURES: CapturePreset[] = [];
@@ -192,6 +191,8 @@ const STRONG_ID = new Set([
   "bandcamp",
   "community",
   "1001tl",
+  "mixesdb",
+  "applemusic",
 ]);
 
 export type CaptureNeedRow = {
