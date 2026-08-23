@@ -264,6 +264,19 @@ assert.equal(
   "sc-maddixmusic-maddix-live-tomorrowland-2026",
 );
 
+const dyenMaddixSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url === "https://soundcloud.com/maddixmusic/dyen-b2b-maddix-live",
+);
+assert.ok(dyenMaddixSc);
+assert.equal(dyenMaddixSc.primaryArtist.name, "DYEN");
+assert.equal(dyenMaddixSc.type, "festival");
+assert.notEqual(dyenMaddixSc.url, maddixTmlSc.url);
+assert.equal(
+  `sc-maddixmusic-${slugify("dyen-b2b-maddix-live")}`,
+  "sc-maddixmusic-dyen-b2b-maddix-live",
+);
+
 const hypeSyncSc = SOUNDCLOUD_TRACK_SEEDS.find(
   (s) =>
     s.url === "https://soundcloud.com/jameshypethedj/sync-london-full-set",

@@ -63,6 +63,20 @@ assert.equal(
   "https://www.youtube.com/watch?v=1Fu89dxrXI0",
 );
 
+const dyenMaddixYt = extras["yt-VABm0tIRn2U"];
+assert.equal(
+  dyenMaddixYt?.soundcloudUrl,
+  "https://soundcloud.com/maddixmusic/dyen-b2b-maddix-live",
+);
+assert.equal(
+  extras["sc-maddixmusic-dyen-b2b-maddix-live"]?.youtubeUrl,
+  "https://www.youtube.com/watch?v=VABm0tIRn2U",
+);
+assert.notEqual(
+  dyenMaddixYt?.soundcloudUrl,
+  maddixYt?.soundcloudUrl,
+);
+
 const clapcast = extras["sc-claptone-clapcast-576"];
 assert.equal(
   clapcast?.mixcloudUrl,

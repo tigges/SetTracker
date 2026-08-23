@@ -100,6 +100,9 @@ const DAVID_GUETTA_TML_WE1 = YOUTUBE_SETS.find((s) =>
 const MADDIX_TML_WE1 = YOUTUBE_SETS.find((s) =>
   s.video.includes("1Fu89dxrXI0"),
 );
+const DYEN_MADDIX_TML_WE2 = YOUTUBE_SETS.find((s) =>
+  s.video.includes("VABm0tIRn2U"),
+);
 const MARLON_TML_WE1 = YOUTUBE_SETS.find((s) =>
   s.video.includes("rG1DvjvXCls"),
 );
@@ -390,6 +393,17 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=GSnPwle4FOE");
     // Last cue 1:13:15 + 180s pad.
     assert.equal(meta.durationSec, 1 * 3600 + 13 * 60 + 15 + 180);
+  });
+
+  it("builds DYEN B2B Maddix TML WE2 Atmosphere meta from the curated 1001 capture", () => {
+    assert.ok(DYEN_MADDIX_TML_WE2);
+    const meta = watchMetaFromCuratedSeed(DYEN_MADDIX_TML_WE2);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "VABm0tIRn2U");
+    assert.match(meta.title, /DYEN B2B Maddix WE2/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=VABm0tIRn2U");
+    // Last cue 55:26 + 180s pad.
+    assert.equal(meta.durationSec, 55 * 60 + 26 + 180);
   });
 
   it("builds Maddix TML WE1 Mainstage meta from the curated 1001 capture", () => {
@@ -1790,6 +1804,21 @@ describe("curated YouTube 429 fallback", () => {
     assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
     assert.ok(sets[0]!.durationSec >= 1 * 3600 + 13 * 60 + 15);
     assert.equal(sets[0]?.primaryArtist?.slug, "david-guetta");
+    assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
+  });
+
+  it("lands DYEN B2B Maddix TML WE2 Atmosphere from the 1001 seed when watch is 429", async () => {
+    assert.ok(DYEN_MADDIX_TML_WE2);
+    const adapter = createYoutubeAdapter([DYEN_MADDIX_TML_WE2], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-VABm0tIRn2U");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 28);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 55 * 60 + 26);
+    assert.equal(sets[0]?.primaryArtist?.slug, "dyen");
+    assert.notEqual(sets[0]!.sourceSlug, "yt-1Fu89dxrXI0");
     assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
   });
 

@@ -303,6 +303,18 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     minDurationSec: 15 * 60,
   },
   {
+    // Official Maddix upload of DYEN B2B TML WE2; 1001TL wired via
+    // sc-maddixmusic-dyen-b2b-maddix-live (same list as yt-VABm0tIRn2U).
+    // Distinct from Maddix Mainstage WE1. Never sc-https://… or yt-maddixmusic-….
+    url: "https://soundcloud.com/maddixmusic/dyen-b2b-maddix-live",
+    primaryArtist: dj("DYEN", {
+      accent: "#fb5607",
+    }),
+    genre: "Hard Dance",
+    type: "festival",
+    minDurationSec: 15 * 60,
+  },
+  {
     // Official James Hype upload; 1001TL wired via
     // sc-jameshypethedj-sync-london-full-set (same list as yt-rLTCLSsqrXY).
     url: "https://soundcloud.com/jameshypethedj/sync-london-full-set",

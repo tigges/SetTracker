@@ -144,6 +144,7 @@ import {
   TL_COLYN_INNELLEA_ULTRA_MIAMI_RESISTANCE_COVE_2026,
   TL_ABOVE_AND_BEYOND_KINETICFIELD_EDC_LV_2026,
   TL_DAVID_GUETTA_TML_WE1_2026,
+  TL_DYEN_MADDIX_TML_WE2_2026,
   TL_MADDIX_TML_WE1_2026,
   TL_MARLON_HOFFSTADT_TML_WE1_2026,
 } from "../tracklists1001/seeds";
@@ -1242,6 +1243,23 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/1lx100pt/maddix-mainstage-tomorrowland-weekend-1-belgium-2026-07-18.html",
     tracklist1001: TL_MADDIX_TML_WE1_2026,
+  },
+  {
+    // Tomorrowland official Relive — Atmosphere WE2 B2B; title drives collaborator.
+    // Official SC twin: maddixmusic/dyen-b2b-maddix-live.
+    // Distinct from Dyzen Planaxis WE2 (held).
+    video: "https://www.youtube.com/watch?v=VABm0tIRn2U",
+    primaryArtist: dj("DYEN", {
+      accent: "#fb5607",
+    }),
+    genre: "Hard Dance",
+    type: "festival",
+    title: "DYEN B2B Maddix WE2 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1qn9j3b1/dyen-maddix-atmosphere-stage-tomorrowland-weekend-2-belgium-2026-07-24.html",
+    tracklist1001: TL_DYEN_MADDIX_TML_WE2_2026,
   },
   {
     // Tomorrowland official Relive — Mainstage WE1.

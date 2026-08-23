@@ -125,3 +125,46 @@ export const TL_MADDIX_TML_WE1_2026: FingerprintSeedRow[] = [
   { at: "53:45", artist: "Maddix", title: "Favela" },
   { at: "55:22", artist: "Two Steps From Hell", title: "Heart Of Courage" },
 ];
+
+/**
+ * DYEN & Maddix @ Atmosphere Stage, Tomorrowland Weekend 2, Belgium 2026-07-24
+ * Official YT Relive: https://youtu.be/VABm0tIRn2U
+ * Official SC: https://soundcloud.com/maddixmusic/dyen-b2b-maddix-live
+ * https://www.1001tracklists.com/tracklist/1qn9j3b1/dyen-maddix-atmosphere-stage-tomorrowland-weekend-2-belgium-2026-07-24.html
+ * Overlay name TL_MADDIX is already Maddix Mainstage WE1.
+ * Capture paste used yt-maddixmusic-dyen-b2b-maddix-live (invalid — YT prefix + SC path).
+ * Distinct from Dyzen Planaxis WE2 (held, untimed).
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-VABm0tIRn2U"]
+ *       TRACKLIST_1001_BY_SOURCE_SLUG["sc-maddixmusic-dyen-b2b-maddix-live"]
+ * Captured 2026-08-23 — provenance 1001tl.
+ */
+export const TL_DYEN_MADDIX_TML_WE2_2026: FingerprintSeedRow[] = [
+  { at: "0:12", artist: "Maddix", title: "We Rave" },
+  { at: "2:50", artist: "NIIKITA", title: "Beat Controller" },
+  { at: "5:30", artist: "Maddix", title: "Acid For Breakfast" },
+  { at: "8:50", artist: "Jacidorex & Vespera", title: "Front To Back" },
+  { at: "10:20", artist: "Maddix", title: "Fk Being Polite" },
+  { at: "12:00", artist: "SMR", title: "Attention" },
+  { at: "13:40", artist: "Maddix & Gabry Ponte", title: "Hellfire" },
+  { at: "16:00", artist: "Pegassi", title: "Yoyoyo (DYEN Edit)" },
+  { at: "17:33", artist: "Hardwell & Maddix ft. Villain", title: "Rave Till My Grave" },
+  { at: "20:35", artist: "will.i.am & Britney Spears", title: "Scream & Shout (Junkie Kid Edit)" },
+  { at: "22:02", artist: "Bassjackers & Maddix", title: "Rave Is My Therapy" },
+  { at: "24:46", artist: "Ray Volpe", title: "SONG REQUEST (Creeds Remix)" },
+  { at: "26:55", artist: "Lykke Li", title: "I Follow Rivers" },
+  { at: "28:24", artist: "Mr. Polska & Natte Visstick & Vieze Asbak", title: "POLSKA JUMPSTYLE (VIP)" },
+  { at: "29:50", artist: "Dimitri Vegas & Pat B ft. Sylver", title: "Turn The Tide" },
+  { at: "33:10", artist: "Junkie Kid & Lister", title: "90s Baby" },
+  { at: "34:38", artist: "DYEN & Maddix", title: "GABBER" },
+  { at: "40:00", artist: "Warp Brothers & Lupage", title: "Phatt Bass Reloaded" },
+  { at: "41:44", artist: "Bountyhunter", title: "Woops (Dimitri Vegas & Junkie Kid Remix)" },
+  { at: "42:22", artist: "Jones & Stephenson", title: "The First Rebirth (DJ Mad Dog Remix)" },
+  { at: "43:00", artist: "Paul Elstak & Ricardo Moreno & Boogshe", title: "Heavy Kickdrum" },
+  { at: "44:00", artist: "Maddix ft. Leila K", title: "Open Sesame (Abracadabra)" },
+  { at: "45:40", artist: "KX CHR", title: "Charmer" },
+  { at: "46:50", artist: "The Prodigy", title: "No Good (Start The Dance) (Samuel Moriero & RBX Remix)" },
+  { at: "48:39", artist: "Dutch Disorder", title: "Heroine (Samuel Moriero Remix)" },
+  { at: "51:51", artist: "Swedish House Mafia ft. John Martin", title: "Don't You Worry Child (DYEN Edit)" },
+  { at: "53:37", artist: "Darren Styles", title: "Pump This Party" },
+  { at: "55:26", artist: "Activator & GRAVEDGR", title: "Machinegun" },
+];

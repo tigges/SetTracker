@@ -168,6 +168,7 @@ import {
   TL_COLYN_INNELLEA_ULTRA_MIAMI_RESISTANCE_COVE_2026,
   TL_ABOVE_AND_BEYOND_KINETICFIELD_EDC_LV_2026,
   TL_DAVID_GUETTA_TML_WE1_2026,
+  TL_DYEN_MADDIX_TML_WE2_2026,
   TL_MADDIX_TML_WE1_2026,
   TL_MARLON_HOFFSTADT_TML_WE1_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
@@ -927,8 +928,12 @@ const dyzen = tracklist1001RowsToPlays(TL_DYZEN_TML_WE2_2026);
 assert.equal(dyzen.length, 4);
 assert.equal(dyzen[0]!.trackTitle, "Mutant Quasars");
 assert.equal(dyzen[dyzen.length - 1]!.trackTitle, "Try");
-// Thin partial TL + no official Tomorrowland Relive — held (not Dyen b2b Maddix).
-assert.equal(TRACKLIST_1001_BY_SOURCE_SLUG["yt-VABm0tIRn2U"], undefined);
+// Thin partial TL + no official Tomorrowland Relive — held.
+// yt-VABm0tIRn2U is DYEN B2B Maddix Atmosphere WE2, not this Dyzen seed.
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-VABm0tIRn2U"],
+  TL_DYZEN_TML_WE2_2026,
+);
 assert.equal(
   Object.values(TRACKLIST_1001_BY_SOURCE_SLUG).includes(TL_DYZEN_TML_WE2_2026),
   false,
@@ -2891,6 +2896,45 @@ assert.equal(
   true,
 );
 assert.equal(isSecondaryPlaybackSlug("yt-1Fu89dxrXI0"), false);
+
+assertSeedClocks(TL_DYEN_MADDIX_TML_WE2_2026);
+assert.equal(TL_DYEN_MADDIX_TML_WE2_2026.length, 28);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-VABm0tIRn2U"],
+  TL_DYEN_MADDIX_TML_WE2_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-maddixmusic-dyen-b2b-maddix-live"],
+  TL_DYEN_MADDIX_TML_WE2_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-maddixmusic-dyen-b2b-maddix-live"],
+  undefined,
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-VABm0tIRn2U"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-1Fu89dxrXI0"],
+);
+assert.equal(isWiredTracklistSlug("yt-VABm0tIRn2U"), true);
+assert.equal(
+  isSecondaryPlaybackSlug("sc-maddixmusic-dyen-b2b-maddix-live"),
+  true,
+);
+assert.equal(isSecondaryPlaybackSlug("yt-VABm0tIRn2U"), false);
+const dyenMaddix = tracklist1001RowsToPlays(TL_DYEN_MADDIX_TML_WE2_2026);
+assert.equal(dyenMaddix.length, 28);
+assert.equal(dyenMaddix[0]?.provenance, "1001tl");
+assert.equal(dyenMaddix[0]?.timestamp, 12);
+assert.equal(dyenMaddix[0]?.trackTitle, "We Rave");
+assert.equal(dyenMaddix[27]?.trackTitle, "Machinegun");
+assert.equal(dyenMaddix[27]?.timestamp, 55 * 60 + 26);
+for (let i = 1; i < dyenMaddix.length; i++) {
+  assert.ok(
+    (dyenMaddix[i]!.timestamp ?? 0) > (dyenMaddix[i - 1]!.timestamp ?? 0),
+    `DYEN Maddix TML WE2 2026 clocks must increase at index ${i}`,
+  );
+}
+
 const maddixWe1 = tracklist1001RowsToPlays(TL_MADDIX_TML_WE1_2026);
 assert.equal(maddixWe1.length, 21);
 assert.equal(maddixWe1[0]?.provenance, "1001tl");
