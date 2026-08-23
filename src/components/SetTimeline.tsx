@@ -22,6 +22,8 @@ import {
   type IdStatus,
 } from "@/lib/status";
 import type { PlayRow } from "@/lib/queries";
+import { playablePlaybackUrl } from "@/lib/playback";
+import { beatportBuyability } from "@/lib/trackMeta";
 import { useSetSeek } from "@/components/SetListen";
 import { cueIndexAtRatio, playSpans, stripIsDense } from "@/lib/setStrip";
 
@@ -69,7 +71,7 @@ export function SetTimeline({
   setSlug: string;
   /** When set, per-track genre is only shown if it differs (avoids clutter). */
   setGenre?: string | null;
-  /** Provenance / upload URL — used for YT / SC cue pills. */
+  /** Provenance / upload URL — used with playback to decide on-site Play. */
   setSourceUrl?: string | null;
   /** Playable host URL when it differs from source (official YT vs SC upload). */
   setPlaybackUrl?: string | null;
@@ -77,6 +79,7 @@ export function SetTimeline({
   children?: ReactNode;
 }) {
   const seek = useSetSeek();
+  const canSeek = !!seek && !!playablePlaybackUrl(setPlaybackUrl, setSourceUrl);
   const [activeId, setActiveId] = useState<string | null>(plays[0]?.id ?? null);
   const [flashId, setFlashId] = useState<string | null>(null);
   const [hoverId, setHoverId] = useState<string | null>(null);
@@ -366,85 +369,80 @@ export function SetTimeline({
                     />
                   )}
 
-                  {(p.idStatus === "identified" ||
-                    p.idStatus === "community_resolved") &&
-                    (() => {
-                      const links = listenLinks(p.title, p.artistName, {
-                        beatportUrl: p.beatportUrl,
-                        spotifyUrl: p.spotifyUrl,
-                        setSourceUrl,
-                        setPlaybackUrl,
-                        startSec: p.timestamp,
-                      });
-                      const hasLinks =
-                        links.youtube ||
-                        links.spotify ||
-                        links.beatport ||
-                        links.soundcloud;
-                      if (!hasLinks) return null;
-                      const pill =
-                        "grid h-6 place-items-center rounded-md border border-line px-1.5 text-[10px] text-muted2 transition-colors hover:border-brand hover:text-brand";
-                      return (
-                        <div
-                          className="flex flex-none items-center gap-1"
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          {links.youtube && (
-                            <a
-                              href={links.youtube}
-                              target="_blank"
-                              rel="noreferrer"
-                              title="Play this cue on YouTube"
-                              className={`${pill} w-6`}
-                              aria-label="Play this cue on YouTube"
-                            >
-                              ▶
-                            </a>
-                          )}
-                          {links.spotify && (
-                            <a
-                              href={links.spotify}
-                              target="_blank"
-                              rel="noreferrer"
-                              title={
-                                links.spotifyIsCanonical
-                                  ? "Open track on Spotify"
-                                  : "Search on Spotify"
-                              }
-                              className={`${pill} hidden sm:grid`}
-                            >
-                              SP
-                            </a>
-                          )}
-                          {links.beatport && (
-                            <a
-                              href={links.beatport}
-                              target="_blank"
-                              rel="noreferrer"
-                              title={
-                                links.beatportIsCanonical
-                                  ? "Buy on Beatport"
-                                  : "Search on Beatport"
-                              }
-                              className={`${pill} ${links.beatportIsCanonical ? "" : "hidden sm:grid"}`}
-                            >
-                              BP
-                            </a>
-                          )}
-                          {links.soundcloud && (
-                            <a
-                              href={links.soundcloud}
-                              target="_blank"
-                              rel="noreferrer"
-                              title="Play this cue on SoundCloud"
-                              className={pill}
-                            >
-                              SC
-                            </a>
-                          )}
-                        </div>
-                      );
-                    })()}
+                  {(() => {
+                    const identified =
+                      p.idStatus === "identified" ||
+                      p.idStatus === "community_resolved";
+                    const links = identified
+                      ? listenLinks(p.title, p.artistName, {
+                          beatportUrl: p.beatportUrl,
+                          spotifyUrl: p.spotifyUrl,
+                        })
+                      : null;
+                    const buyability = identified
+                      ? beatportBuyability({
+                          idStatus: p.idStatus,
+                          title: p.title,
+                          artistName: p.artistName,
+                          beatportUrl: p.beatportUrl,
+                        })
+                      : "unavailable";
+                    const beatportHref =
+                      links && buyability !== "unavailable"
+                        ? links.beatport
+                        : null;
+                    if (!canSeek && !links) return null;
+                    const pill =
+                      "grid h-6 place-items-center rounded-md border border-line px-1.5 text-[10px] text-muted2 transition-colors hover:border-brand hover:text-brand";
+                    return (
+                      <div
+                        className="flex flex-none items-center gap-1"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        {canSeek && (
+                          <button
+                            type="button"
+                            onClick={() => focusRow(p.id)}
+                            title={`Play from ${fmtTimestamp(p.timestamp)}`}
+                            aria-label={`Play from ${fmtTimestamp(p.timestamp)}`}
+                            className={`${pill} w-6`}
+                          >
+                            ▶
+                          </button>
+                        )}
+                        {links?.spotify && (
+                          <a
+                            href={links.spotify}
+                            target="_blank"
+                            rel="noreferrer"
+                            title={
+                              links.spotifyIsCanonical
+                                ? "Play on Spotify"
+                                : "Search on Spotify"
+                            }
+                            className={pill}
+                          >
+                            SP
+                          </a>
+                        )}
+                        {beatportHref && (
+                          <a
+                            href={beatportHref}
+                            target="_blank"
+                            rel="noreferrer"
+                            title={
+                              links?.beatportIsCanonical
+                                ? "Buy on Beatport"
+                                : "Search on Beatport"
+                            }
+                            className={pill}
+                          >
+                            BP
+                          </a>
+                        )}
+                      </div>
+                    );
+                  })()}
 
                   {p.labelName &&
                     (p.labelSlug ? (

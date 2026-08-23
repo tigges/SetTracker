@@ -152,7 +152,7 @@ export default async function TrackPage({
                 rel="noreferrer"
                 className="rounded-md border border-line px-2.5 py-1 text-[12px] text-muted2 transition-colors hover:border-brand hover:text-brand"
               >
-                {spCanonical ? "Open Spotify" : "Search Spotify"}
+                {spCanonical ? "Play on Spotify" : "Search Spotify"}
               </a>
               <a
                 href={bpHref}
