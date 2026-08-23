@@ -1,6 +1,7 @@
 import { isJunkArtistName } from "@/lib/artistName";
 import { playablePlaybackUrl } from "@/lib/playback";
 import { isBrandHostSlug } from "@/lib/brandHosts";
+import { isAtomicActJunkSlug } from "@/lib/ingest/atomicActs";
 import { isProducerHiddenSlug } from "@/lib/ingest/producerDjReview.data";
 import { isCatalogWorkDj, isTop100DjSlug } from "@/lib/djCatalog";
 import { loadDjMagTop100RankBySlug } from "@/lib/djmagTop100";
@@ -1180,6 +1181,7 @@ export async function getDjList(): Promise<DjListItem[]> {
     const isJunk =
       isBrandHostSlug(d.slug) ||
       isProducerHiddenSlug(d.slug) ||
+      isAtomicActJunkSlug(d.slug) ||
       isJunkArtistName(d.name) ||
       isJunkArtistName(d.slug.replace(/-/g, " ")) ||
       /^view-artist-details-for-/.test(d.slug);

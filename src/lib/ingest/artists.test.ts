@@ -126,6 +126,17 @@ assert.equal(lucasSteve.collaborators.length, 1);
 assert.equal(lucasSteve.collaborators[0]?.name, "Mike Williams");
 assert.equal(lucasSteve.collaborators[0]?.slug, "mike-williams");
 
+const lucasSteveSolo = splitArtistsFromSetTitle(
+  "Lucas & Steve | Tomorrowland Weekend 2 2026",
+);
+assert.equal(lucasSteveSolo.primary.slug, "lucas-steve");
+assert.equal(lucasSteveSolo.collaborators.length, 0);
+
+const soloLucas = splitArtistsFromSetTitle("Lucas | Club Night 2024");
+assert.equal(soloLucas.primary.name, "Lucas");
+assert.equal(soloLucas.primary.slug, "lucas");
+assert.equal(soloLucas.collaborators.length, 0);
+
 const lucasStevePreferred = artistsForSet(
   "Lucas & Steve B2B Mike Williams | Don't Let Daddy Know, Ziggo Dome 2026",
   { name: "Lucas & Steve", slug: "lucas-steve", accent: "#ffb703" },

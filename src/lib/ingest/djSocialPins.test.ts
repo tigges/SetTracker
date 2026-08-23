@@ -372,5 +372,8 @@ assert.match(bySlug.cuebrick!.twitter!, /(?:twitter|x)\.com\/cuebrick_dj/);
 assert.match(bySlug.cuebrick!.youtube!, /@cuebrick/i);
 assert.equal(hintForName("Cuebrick")?.soundcloudPermalink, "cuebrick");
 assert.equal(hintForName("Cuebrick")?.youtubeHandle, "@Cuebrick");
+assert.match(bySlug["lucas-steve"]!.bio, /Lucas de Wert/);
+assert.match(bySlug["lucas-steve"]!.bio, /Steven Jansen/);
+assert.match(bySlug["lucas-steve"]!.website!, /lucasandsteve\.com/);
 
 console.log("djSocialPins.test.ts ok");

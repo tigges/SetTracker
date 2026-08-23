@@ -9,6 +9,7 @@ import type { PrismaClient } from "@prisma/client";
 import { normalizeGenre } from "../genre";
 import { isWeakOfficialUrl } from "../officialUrls";
 import { youtubeChannelUrl } from "../social";
+import { remapAtomicActHalfSlug, remapAtomicActPin } from "./atomicActs";
 import { evaluateHomeCity } from "./discovery/llmJobs";
 import { normalizeSocialUrl } from "./eventSocials";
 
@@ -338,6 +339,13 @@ export function evaluateEntityCompleteRow(row: EntityCompleteAuditRow): {
   return { field, value: n };
 }
 
+function remapDjAuditRow(row: EntityCompleteAuditRow): EntityCompleteAuditRow {
+  if (row.kind !== "dj") return row;
+  const mapped = remapAtomicActPin(row.slug, row.name);
+  if (!mapped) return row;
+  return { ...row, slug: mapped.slug, name: mapped.name };
+}
+
 export function pinsFromAudit(rows: EntityCompleteAuditRow[]): {
   pins: EntityCompletePin[];
   dropped: EntityCompleteDrop[];
@@ -345,7 +353,19 @@ export function pinsFromAudit(rows: EntityCompleteAuditRow[]): {
   const dropped: EntityCompleteDrop[] = [];
   const byKey = new Map<string, EntityCompletePin>();
   for (const row of rows) {
-    const judged = evaluateEntityCompleteRow(row);
+    const mapped = remapDjAuditRow(row);
+    const halfSlugGenre =
+      mapped.slug !== row.slug && row.field === "genre";
+    if (halfSlugGenre) {
+      dropped.push({
+        kind: row.kind,
+        slug: row.slug,
+        field: row.field || "",
+        reason: "atomic-act half genre",
+      });
+      continue;
+    }
+    const judged = evaluateEntityCompleteRow(mapped);
     if (judged.drop || !judged.field || !judged.value) {
       dropped.push({
         kind: row.kind,
@@ -355,10 +375,10 @@ export function pinsFromAudit(rows: EntityCompleteAuditRow[]): {
       });
       continue;
     }
-    const key = `${row.kind}:${row.slug}`;
+    const key = `${mapped.kind}:${mapped.slug}`;
     const pin = byKey.get(key) ?? {
-      kind: row.kind as EntityCompleteKind,
-      slug: row.slug,
+      kind: mapped.kind as EntityCompleteKind,
+      slug: mapped.slug,
     };
     pin[judged.field] = judged.value;
     byKey.set(key, pin);
@@ -375,27 +395,38 @@ function sortPins(pins: EntityCompletePin[]): EntityCompletePin[] {
   );
 }
 
+function remapDjPin(pin: EntityCompletePin): EntityCompletePin {
+  if (pin.kind !== "dj") return pin;
+  const slug = remapAtomicActHalfSlug(pin.slug);
+  return slug ? { ...pin, slug } : pin;
+}
+
+function mergePinFields(
+  cur: EntityCompletePin,
+  pin: EntityCompletePin,
+): EntityCompletePin {
+  const next = { ...cur };
+  for (const field of FIELDS) {
+    const value = pin[field];
+    if (!value) continue;
+    const have = next[field];
+    if (!have || (field === "website" && isWeakOfficialUrl(have))) {
+      next[field] = value;
+    }
+  }
+  return next;
+}
+
 /** Fill-null merge. Never replaces a strong existing pin field. */
 export function mergeEntityCompletePins(
   existing: EntityCompletePin[],
   incoming: EntityCompletePin[],
 ): EntityCompletePin[] {
   const byKey = new Map<string, EntityCompletePin>();
-  for (const pin of existing) {
-    byKey.set(`${pin.kind}:${pin.slug}`, { ...pin });
-  }
-  for (const pin of incoming) {
+  for (const pin of [...existing, ...incoming].map(remapDjPin)) {
     const key = `${pin.kind}:${pin.slug}`;
     const cur = byKey.get(key) ?? { kind: pin.kind, slug: pin.slug };
-    for (const field of FIELDS) {
-      const next = pin[field];
-      if (!next) continue;
-      const have = cur[field];
-      if (!have || (field === "website" && isWeakOfficialUrl(have))) {
-        cur[field] = next;
-      }
-    }
-    byKey.set(key, cur);
+    byKey.set(key, mergePinFields(cur, pin));
   }
   return sortPins([...byKey.values()]);
 }
@@ -432,7 +463,7 @@ export async function applyEntityCompletePins(
 ): Promise<{ matched: number; filled: number }> {
   let matched = 0;
   let filled = 0;
-  for (const pin of pins) {
+  for (const pin of pins.map(remapDjPin)) {
     if (pin.kind === "dj") {
       const row = await prisma.dj.findUnique({
         where: { slug: pin.slug },

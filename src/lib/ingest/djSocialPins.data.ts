@@ -3,6 +3,8 @@
  * Safe to import from Next.js page queries during static export.
  */
 
+import { LUCAS_STEVE_BIO } from "./atomicActs";
+
 export type DjSocialPin = {
   slug: string;
   name: string;
@@ -653,7 +655,7 @@ export const DJ_SOCIAL_PINS: DjSocialPin[] = [
     instagram: "https://www.instagram.com/lucasandsteve/",
     twitter: "https://x.com/lucasandsteve",
     website: "https://www.lucasandsteve.com/",
-    bio: "Future House. SC lucasandsteve, YT channel UCIAzXmeDqLu-HY9yJ5Rd4pg, IG @lucasandsteve.",
+    bio: LUCAS_STEVE_BIO,
   },
   {
     slug: "nico-moreno",

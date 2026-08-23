@@ -1454,10 +1454,16 @@
   },
   {
     "kind": "dj",
-    "slug": "lucas",
+    "slug": "lucas-steve",
     "imageUrl": "https://cdn-images.dzcdn.net/images/artist/dfc010a40b035fd85f4089fccb25a5cc/250x250-000000-80-0-0.jpg",
+    "website": "https://www.lucasandsteve.com/",
+    "instagram": "https://www.instagram.com/lucasandsteve/",
+    "youtube": "https://www.youtube.com/@lucasandsteve",
+    "soundcloud": "https://soundcloud.com/lucasandsteve",
+    "twitter": "https://x.com/lucasandsteve",
     "homeCity": "Maastricht, Netherlands",
-    "genre": "Trance"
+    "bio": "Lucas & Steve are a Dutch house music duo formed by DJs and record producers Lucas de Wert and Steven Jansen from Maastricht. The duo was formed in 2010 and joined Spinnin' Records in December 2014. They released many singles on the sub-label Spinnin' Deep.",
+    "genre": "House"
   },
   {
     "kind": "dj",

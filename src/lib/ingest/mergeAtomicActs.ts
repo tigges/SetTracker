@@ -4,7 +4,7 @@
  */
 
 import type { PrismaClient } from "@prisma/client";
-import { ATOMIC_ACTS, atomicActPattern } from "./atomicActs";
+import { ATOMIC_ACTS, atomicActPattern, type AtomicAct } from "./atomicActs";
 
 export type MergeAtomicStats = {
   ensured: number;
@@ -21,43 +21,32 @@ function titleNeedles(name: string): string[] {
 
 async function ensureCanonical(
   prisma: PrismaClient,
-  slug: string,
-  name: string,
+  act: AtomicAct,
 ): Promise<string> {
-  const existing = await prisma.dj.findUnique({ where: { slug } });
+  const existing = await prisma.dj.findUnique({ where: { slug: act.slug } });
   if (existing) {
-    if (existing.name !== name) {
-      await prisma.dj.update({
-        where: { id: existing.id },
-        data: { name },
-      });
+    const data: Record<string, string> = {};
+    if (existing.name !== act.name) data.name = act.name;
+    if (act.website && existing.website !== act.website) {
+      data.website = act.website;
     }
-    if (
-      slug === "walker-royce" &&
-      existing.website !== "https://www.walkerandroyce.com/"
-    ) {
-      await prisma.dj.update({
-        where: { id: existing.id },
-        data: {
-          website: "https://www.walkerandroyce.com/",
-          homeCity: existing.homeCity ?? "New York, US",
-        },
-      });
+    if (act.homeCity && !existing.homeCity?.trim()) data.homeCity = act.homeCity;
+    if (act.bio && !existing.bio?.trim()) data.bio = act.bio;
+    if (act.genre && !existing.genre?.trim()) data.genre = act.genre;
+    if (Object.keys(data).length) {
+      await prisma.dj.update({ where: { id: existing.id }, data });
     }
     return existing.id;
   }
   const created = await prisma.dj.create({
     data: {
-      slug,
-      name,
-      accent: slug === "walker-royce" ? "#9ef01a" : "#f77f00",
-      homeCity: slug === "walker-royce" ? "New York, US" : null,
-      website:
-        slug === "walker-royce" ? "https://www.walkerandroyce.com/" : null,
-      bio:
-        slug === "walker-royce"
-          ? "Tech House. NYC duo (Sam Walker & Gavin Royce)."
-          : null,
+      slug: act.slug,
+      name: act.name,
+      accent: act.accent ?? "#f77f00",
+      homeCity: act.homeCity ?? null,
+      website: act.website ?? null,
+      bio: act.bio ?? null,
+      genre: act.genre ?? null,
     },
   });
   return created.id;
@@ -75,7 +64,7 @@ export async function mergeSplitAtomicActs(
   let junkRemoved = 0;
 
   for (const act of ATOMIC_ACTS) {
-    const canonicalId = await ensureCanonical(prisma, act.slug, act.name);
+    const canonicalId = await ensureCanonical(prisma, act);
     ensured += 1;
     const titleRe = atomicActPattern(act.name);
 

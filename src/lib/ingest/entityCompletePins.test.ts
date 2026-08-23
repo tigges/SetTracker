@@ -3,6 +3,7 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import {
   evaluateEntityCompleteRow,
+  mergeEntityCompletePins,
   nameOverlapsHandle,
   parseEntityCompleteCsv,
   pinsFromAudit,
@@ -15,6 +16,10 @@ assert.equal(nameOverlapsHandle("elrow", "https://elrow.com/"), true);
 assert.equal(nameOverlapsHandle("Westend", "https://www.itsthewestend.com/"), true);
 assert.equal(nameOverlapsHandle("PLS&TY", "https://plsandty.com/"), true);
 assert.equal(nameOverlapsHandle("Lucas", "https://www.lucasandsteve.com/"), false);
+assert.equal(
+  nameOverlapsHandle("Lucas & Steve", "https://www.lucasandsteve.com/"),
+  true,
+);
 assert.equal(nameOverlapsHandle("Joris Voorn", "https://soundcloud.com/korolovadj"), false);
 assert.equal(nameOverlapsHandle("Ferry Corsten", "https://www.instagram.com/someoneelse/"), false);
 
@@ -163,5 +168,60 @@ assert.equal(
   }).value,
   "Tech House",
 );
+
+const duoFromHalf = pinsFromAudit([
+  {
+    kind: "dj",
+    slug: "lucas",
+    name: "Lucas",
+    field: "website",
+    value: "https://www.lucasandsteve.com/",
+    evidence: "official duo site",
+  },
+  {
+    kind: "dj",
+    slug: "lucas",
+    name: "Lucas",
+    field: "genre",
+    value: "Trance / Psytrance",
+    evidence: "half-name guess",
+  },
+]);
+assert.equal(
+  duoFromHalf.pins.some((p) => p.slug === "lucas"),
+  false,
+);
+const duoPin = duoFromHalf.pins.find((p) => p.slug === "lucas-steve");
+assert.ok(duoPin);
+assert.equal(duoPin.website, "https://www.lucasandsteve.com/");
+assert.equal(duoPin.genre, undefined);
+assert.ok(
+  duoFromHalf.dropped.some(
+    (d) => d.slug === "lucas" && d.reason === "atomic-act half genre",
+  ),
+);
+
+const mergedHalf = mergeEntityCompletePins(
+  [
+    {
+      kind: "dj",
+      slug: "lucas",
+      homeCity: "Maastricht, Netherlands",
+    },
+  ],
+  [
+    {
+      kind: "dj",
+      slug: "lucas-steve",
+      website: "https://www.lucasandsteve.com/",
+      genre: "House",
+    },
+  ],
+);
+assert.equal(mergedHalf.length, 1);
+assert.equal(mergedHalf[0]?.slug, "lucas-steve");
+assert.equal(mergedHalf[0]?.website, "https://www.lucasandsteve.com/");
+assert.equal(mergedHalf[0]?.homeCity, "Maastricht, Netherlands");
+assert.equal(mergedHalf[0]?.genre, "House");
 
 console.log("entityCompletePins.test.ts ok");
