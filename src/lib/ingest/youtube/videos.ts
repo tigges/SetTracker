@@ -172,6 +172,11 @@ export type YoutubeSetSource = {
    * (common on Insomniac playbacks). Tried before falling back to seed rows.
    */
   tracklist1001Url?: string;
+  /**
+   * Known MixesDB `/w/YYYY-MM-DD_-_…` mix page when the YT description
+   * omits it. Follow-only — never invent titles. Live fetch is gated.
+   */
+  tracklistMixesdbUrl?: string;
 };
 
 function dj(name: string, extra: Partial<RawArtist> = {}): RawArtist {

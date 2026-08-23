@@ -9,6 +9,12 @@ describe("isWeakOfficialUrl", () => {
     assert.equal(isWeakOfficialUrl("https://djmag.com/livesets"), false);
     assert.equal(isWeakOfficialUrl("https://6amgroup.com/clubs/fabric"), true);
     assert.equal(isWeakOfficialUrl("https://en.wikipedia.org/wiki/Fabric_(club)"), true);
+    assert.equal(
+      isWeakOfficialUrl(
+        "https://www.mixesdb.com/w/2026-08-07_-_Korolova_-_Captive_Soul_098",
+      ),
+      true,
+    );
     assert.equal(isWeakOfficialUrl("https://www.wikidata.org/wiki/Q123"), true);
   });
 

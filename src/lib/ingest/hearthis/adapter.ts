@@ -47,7 +47,8 @@ import {
   resolveSoundCloudTrackUrl,
 } from "./playback";
 import { playlistEntriesToPlays } from "./playlist";
-import { applyTracklist1001Seed } from "../tracklists1001/seeds";
+import { playsFromDescriptionMixesdbLinks } from "../mixesdb/client";
+import { applyTracklist1001Seed, merge1001Plays } from "../tracklists1001/seeds";
 
 const ACCENTS = [
   "#ff7a45",
@@ -262,7 +263,13 @@ export async function trackToRawSet(
     playbackUrl,
     cover: pickAccent(sourceSlug),
     imageUrl: setImage ?? undefined,
-    plays: applyTracklist1001Seed(sourceSlug, plays),
+    plays: applyTracklist1001Seed(
+      sourceSlug,
+      merge1001Plays(
+        plays,
+        await playsFromDescriptionMixesdbLinks(description, durationSec),
+      ),
+    ),
   };
   raw.sourceHash = hashRawSetContent(raw);
   return raw;

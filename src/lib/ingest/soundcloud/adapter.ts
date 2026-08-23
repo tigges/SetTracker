@@ -31,6 +31,7 @@ import {
   fingerprintRowsToPlays,
   mergeFingerprintPlays,
 } from "../fingerprint/seeds";
+import { playsFromDescriptionMixesdbLinks } from "../mixesdb/client";
 import { playsFromDescription1001Links } from "../tracklists1001/client";
 import {
   applyTracklist1001Seed,
@@ -74,8 +75,8 @@ function durationSecOf(track: ScTrack): number {
 }
 
 /**
- * Follow 1001.tl links in the SC description (same as YouTube adapter), then
- * apply curated seed fallbacks keyed by sourceSlug.
+ * Follow MixesDB mix pages then 1001.tl links in the SC description
+ * (same as YouTube adapter), then apply curated 1001 seed fallbacks.
  */
 async function enrichScPlaysWith1001(
   description: string | null | undefined,
@@ -84,6 +85,23 @@ async function enrichScPlaysWith1001(
   durationSec: number,
 ): Promise<RawPlay[]> {
   let plays = base;
+  try {
+    const fromMixesdb = await playsFromDescriptionMixesdbLinks(
+      description,
+      durationSec,
+    );
+    if (fromMixesdb.length) {
+      plays = merge1001Plays(plays, fromMixesdb);
+      console.log(
+        `[soundcloud] mixesdb ${sourceSlug}: ${fromMixesdb.length} plays from description link`,
+      );
+    }
+  } catch (err) {
+    console.warn(
+      `[soundcloud] mixesdb follow failed ${sourceSlug}:`,
+      err instanceof Error ? err.message : err,
+    );
+  }
   try {
     const from1001 = await playsFromDescription1001Links(
       description,

@@ -12,6 +12,8 @@ assert.equal(
   fileNeedsCuratedIngest("src/lib/ingest/tracklists1001/festivalCaptures20260814.ts"),
   false,
 );
+assert.equal(fileNeedsCuratedIngest("src/lib/ingest/mixesdb/parse.ts"), false);
+assert.equal(fileNeedsCuratedIngest("src/lib/ingest/setlistfm/parse.ts"), false);
 assert.equal(fileNeedsCuratedIngest("src/lib/ingest/artists.ts"), false);
 assert.equal(fileNeedsCuratedIngest("src/lib/ingest/fingerprint/seeds.ts"), false);
 assert.equal(fileNeedsCuratedIngest("src/lib/ingest/nextCaptures.ts"), false);

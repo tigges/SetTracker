@@ -51,12 +51,12 @@ export function tracklistProvenanceHint(
   dominantProvenance?: string | null,
 ): ProvenanceHint {
   const p = (dominantProvenance || "").toLowerCase();
-  if (p === "1001tl") return "1001tl";
+  if (p === "1001tl" || p === "mixesdb") return "1001tl";
   if (p === "fingerprint") return "fingerprint";
   if (p === "soundcloud" || p === "hearthis") return "comments";
   if (p === "youtube" || p === "insomniac") return "credits";
   const n = (sourceName || "").toLowerCase();
-  if (n.includes("1001")) return "1001tl";
+  if (n.includes("1001") || n.includes("mixesdb")) return "1001tl";
   if (n.includes("soundcloud") || n.includes("hearthis")) return "comments";
   if (n.includes("youtube") || n.includes("insomniac")) return "credits";
   if (slug?.startsWith("sc-") || slug?.startsWith("ht-")) return "comments";

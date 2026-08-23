@@ -15,6 +15,7 @@ export type IdStatus =
 
 export type Provenance =
   | "1001tl"
+  | "mixesdb"
   | "soundcloud"
   | "hearthis"
   | "youtube"
@@ -65,6 +66,7 @@ export const PROVENANCE_META: Record<
   { label: string; short: string; operator?: string }
 > = {
   "1001tl": { label: "Tracklist", short: "Tracklist", operator: "1001TL parse" },
+  mixesdb: { label: "MixesDB", short: "MixesDB", operator: "MixesDB parse" },
   soundcloud: { label: "SoundCloud parse", short: "SoundCloud" },
   hearthis: { label: "hearthis.at parse", short: "hearthis" },
   youtube: { label: "YouTube parse", short: "YouTube" },

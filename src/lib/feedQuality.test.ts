@@ -15,6 +15,7 @@ import {
 describe("feedQuality", () => {
   it("maps source + dominant provenance to a card hint", () => {
     assert.equal(tracklistProvenanceHint("YouTube", "yt-abc", "1001tl"), "1001tl");
+    assert.equal(tracklistProvenanceHint("YouTube", "yt-abc", "mixesdb"), "1001tl");
     assert.equal(tracklistProvenanceHint("SoundCloud", "sc-x"), "comments");
     assert.equal(tracklistProvenanceHint("YouTube", "yt-x"), "credits");
     assert.equal(tracklistProvenanceHint(null, "yt-x", "fingerprint"), "fingerprint");

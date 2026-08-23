@@ -32,6 +32,10 @@ import { parseDescriptionTracklist } from "../soundcloud/parseTracklist";
 import { curatedSetImage } from "../../thumbs/setImages";
 import { pickYoutubeThumbnail } from "../../thumbs/youtubeThumb";
 import {
+  playsFromMixesdbUrls,
+  playsFromDescriptionMixesdbLinks,
+} from "../mixesdb/client";
+import {
   playsFrom1001Urls,
   playsFromDescription1001Links,
 } from "../tracklists1001/client";
@@ -157,15 +161,31 @@ function playsFromMeta(meta: YtWatchMeta): RawPlay[] {
 }
 
 /**
- * Follow 1001.tl links in the description; fall back to curated seed rows.
- * Dense 1001 lists replace thin Music-credit stubs.
+ * Follow MixesDB mix pages then 1001.tl links in the description;
+ * fall back to curated 1001 seed rows. Dense followed lists replace
+ * thin Music-credit stubs. 1001 wins when both are dense.
  */
 async function enrichWith1001Tracklist(
   meta: YtWatchMeta,
   base: RawPlay[],
   seed?: FingerprintSeedRow[],
   extraUrls?: string[],
+  extraMixesdbUrls?: string[],
 ): Promise<RawPlay[]> {
+  let plays = base;
+  let fromMixesdb = await playsFromDescriptionMixesdbLinks(
+    meta.description,
+    meta.durationSec,
+  );
+  if (fromMixesdb.length < 5 && extraMixesdbUrls?.length) {
+    const extra = await playsFromMixesdbUrls(
+      extraMixesdbUrls,
+      meta.durationSec,
+    );
+    if (extra.length > fromMixesdb.length) fromMixesdb = extra;
+  }
+  if (fromMixesdb.length) plays = merge1001Plays(plays, fromMixesdb);
+
   let from1001 = await playsFromDescription1001Links(
     meta.description,
     meta.durationSec,
@@ -183,7 +203,7 @@ async function enrichWith1001Tracklist(
   } else if (from1001.length < 5 && effectiveSeed?.length) {
     from1001 = tracklist1001RowsToPlays(effectiveSeed);
   }
-  return merge1001Plays(base, from1001);
+  return merge1001Plays(plays, from1001);
 }
 
 function mergeArtistChannels(
@@ -254,7 +274,9 @@ export function watchMetaFromCuratedSeed(
     channelId: null,
     channelHandle: null,
     durationSec,
-    description: src.tracklist1001Url ?? "",
+    description: [src.tracklist1001Url, src.tracklistMixesdbUrl]
+      .filter(Boolean)
+      .join("\n"),
     publishedAt: null,
     musicCredits: [],
     relatedVideos: [],
@@ -297,6 +319,7 @@ async function curatedToHit(src: YoutubeSetSource): Promise<YtHit | null> {
     plays,
     src.tracklist1001,
     src.tracklist1001Url ? [src.tracklist1001Url] : undefined,
+    src.tracklistMixesdbUrl ? [src.tracklistMixesdbUrl] : undefined,
   );
   if (src.fingerprintPlays?.length) {
     plays = mergeFingerprintPlays(
@@ -337,10 +360,12 @@ async function curatedToHit(src: YoutubeSetSource): Promise<YtHit | null> {
   raw.sourceHash = hashRawSetContent(raw);
 
   const from1001 = plays.filter((p) => p.provenance === "1001tl").length;
+  const fromMixesdb = plays.filter((p) => p.provenance === "mixesdb").length;
   console.log(
     `[youtube] + ${sourceSlug} (${plays.length} plays;` +
       ` curated; ${durationSec}s` +
       (from1001 ? `; 1001tl=${from1001}` : "") +
+      (fromMixesdb ? `; mixesdb=${fromMixesdb}` : "") +
       (collaborators.length ? `; +${collaborators.length} collab` : "") +
       `; related=${meta.relatedVideos.length}` +
       `)`,

@@ -190,6 +190,7 @@ const STRONG_ID = new Set([
   "bandcamp",
   "community",
   "1001tl",
+  "mixesdb",
 ]);
 
 export type CaptureNeedRow = {
