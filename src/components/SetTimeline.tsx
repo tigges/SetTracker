@@ -387,13 +387,15 @@ export function SetTimeline({
                           beatportUrl: p.beatportUrl,
                         })
                       : "unavailable";
-                    const beatportHref =
-                      links && buyability !== "unavailable"
-                        ? links.beatport
-                        : null;
                     if (!canSeek && !links) return null;
                     const pill =
-                      "grid h-6 place-items-center rounded-md border border-line px-1.5 text-[10px] text-muted2 transition-colors hover:border-brand hover:text-brand";
+                      "grid h-6 w-6 place-items-center rounded-md border border-line text-[10px] text-muted2 transition-colors hover:border-brand hover:text-brand";
+                    const beatportTitle =
+                      buyability === "unavailable"
+                        ? "No Beatport page for mashups / acapellas"
+                        : links?.beatportIsCanonical
+                          ? "Buy on Beatport"
+                          : "Search on Beatport";
                     return (
                       <div
                         className="flex flex-none items-center gap-1"
@@ -405,7 +407,7 @@ export function SetTimeline({
                             onClick={() => focusRow(p.id)}
                             title={`Play from ${fmtTimestamp(p.timestamp)}`}
                             aria-label={`Play from ${fmtTimestamp(p.timestamp)}`}
-                            className={`${pill} w-6`}
+                            className={pill}
                           >
                             ▶
                           </button>
@@ -425,20 +427,25 @@ export function SetTimeline({
                             SP
                           </a>
                         )}
-                        {beatportHref && (
+                        {links && buyability !== "unavailable" && (
                           <a
-                            href={beatportHref}
+                            href={links.beatport}
                             target="_blank"
                             rel="noreferrer"
-                            title={
-                              links?.beatportIsCanonical
-                                ? "Buy on Beatport"
-                                : "Search on Beatport"
-                            }
+                            title={beatportTitle}
                             className={pill}
                           >
                             BP
                           </a>
+                        )}
+                        {links && buyability === "unavailable" && (
+                          <span
+                            title={beatportTitle}
+                            aria-label={beatportTitle}
+                            className="grid h-6 w-6 place-items-center rounded-md border border-dashed border-line text-[10px] text-muted2/50"
+                          >
+                            BP
+                          </span>
                         )}
                       </div>
                     );
@@ -449,7 +456,7 @@ export function SetTimeline({
                       <Link
                         href={`/labels/${p.labelSlug}`}
                         onClick={(e) => e.stopPropagation()}
-                        className="hidden flex-none items-center gap-1.5 rounded-full border border-line bg-bg2 py-0.5 pl-0.5 pr-2 text-[11px] text-muted transition-colors hover:border-brand hover:text-brand lg:inline-flex"
+                        className="hidden flex-none items-center gap-1.5 rounded-full border border-line bg-bg2 py-0.5 pl-0.5 pr-2 text-[11px] text-muted transition-colors hover:border-brand hover:text-brand md:inline-flex"
                       >
                         <EntityThumb
                           src={p.labelImageUrl}
@@ -462,7 +469,7 @@ export function SetTimeline({
                         {p.labelName}
                       </Link>
                     ) : (
-                      <span className="hidden flex-none items-center gap-1.5 rounded-full border border-line bg-bg2 py-0.5 pl-0.5 pr-2 text-[11px] text-muted lg:inline-flex">
+                      <span className="hidden flex-none items-center gap-1.5 rounded-full border border-line bg-bg2 py-0.5 pl-0.5 pr-2 text-[11px] text-muted md:inline-flex">
                         <EntityThumb
                           src={p.labelImageUrl}
                           label={p.labelName}
