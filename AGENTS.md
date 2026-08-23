@@ -168,7 +168,10 @@ unless asked.
   `entities-need-complete.csv` / `.jsonl` and `claude-entity-complete-prompt.md`.
   `/stats` links **Export for Claude complete**. Never invent `@slug` handles;
   DJ Mag / 6am / Wikipedia are not official websites. Verify-then-pin
-  (`data/entity-complete-pins.json`, fill-null on verify-urls). Event has no
+  (`data/entity-complete-pins.json`, fill-null on verify-urls). Wide
+  `djs-need-complete` CSV also fills-null `homeCity` / distinctive `bio` /
+  canonical `genre` on Dj. Template bios, DJ Mag / RA / Linktree websites,
+  and name-mismatched handles stay out. Event has no
   `youtube` column — drop venue YouTube rows. Empty / “cannot confirm” rows stay out.
   **Track IDs:** `npm run research:track-ids` resolves ISRCs / Beatport URLs
   / canonical Spotify `/track/{22}` (Client Credentials, fill-null

@@ -6,8 +6,10 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import type { PrismaClient } from "@prisma/client";
+import { normalizeGenre } from "../genre";
 import { isWeakOfficialUrl } from "../officialUrls";
 import { youtubeChannelUrl } from "../social";
+import { evaluateHomeCity } from "./discovery/llmJobs";
 import { normalizeSocialUrl } from "./eventSocials";
 
 export type EntityCompleteKind = "dj" | "festival" | "club";
@@ -18,7 +20,10 @@ export type EntityCompleteField =
   | "instagram"
   | "youtube"
   | "soundcloud"
-  | "twitter";
+  | "twitter"
+  | "homeCity"
+  | "bio"
+  | "genre";
 
 export type EntityCompletePin = {
   kind: EntityCompleteKind;
@@ -29,6 +34,9 @@ export type EntityCompletePin = {
   youtube?: string;
   soundcloud?: string;
   twitter?: string;
+  homeCity?: string;
+  bio?: string;
+  genre?: string;
 };
 
 export type EntityCompleteAuditRow = {
@@ -57,17 +65,66 @@ const FIELDS = new Set<EntityCompleteField>([
   "youtube",
   "soundcloud",
   "twitter",
+  "homeCity",
+  "bio",
+  "genre",
 ]);
 
+const PROFILE_FIELDS = new Set<EntityCompleteField>([
+  "homeCity",
+  "bio",
+  "genre",
+]);
+
+const WEAK_WEBSITE_HUB =
+  /linktr\.ee|mixcloud\.com|hearthis\.at|\.gov\b|music\.youtube\.com/i;
+
+const TEMPLATE_BIO =
+  /is an? (?:.+based )?DJ, producer or electronic artist whose work centers on/i;
+
+const GENERIC_HANDLE_LEFTOVER =
+  /^(the|its|itsthe|official|real|dj|music|live|tv|hq|ok|iam|im|weare|and|com|dot|dotcom)*$/;
+
+const WIDE_FIELD_MAP: Record<string, EntityCompleteField> = {
+  imageurl: "imageUrl",
+  website: "website",
+  instagram: "instagram",
+  youtube: "youtube",
+  soundcloud: "soundcloud",
+  twitter: "twitter",
+  location: "homeCity",
+  homecity: "homeCity",
+  "short bio": "bio",
+  bio: "bio",
+  genre: "genre",
+};
+
 const CANNOT_CONFIRM = /cannot confirm|no published links|unsure/i;
+
+export function decodeMojibake(value: string): string {
+  if (!/[ÃÂ]/.test(value) && !/â[€™]/.test(value)) return value;
+  try {
+    return Buffer.from(value, "latin1").toString("utf8");
+  } catch {
+    return value;
+  }
+}
 
 export function parseEntityCompleteCsv(text: string): EntityCompleteAuditRow[] {
   const lines = text.replace(/^\uFEFF/, "").split(/\r?\n/);
   const rows: EntityCompleteAuditRow[] = [];
+  let header: string[] | null = null;
   for (const line of lines) {
     if (!line.trim()) continue;
-    const cells = splitCsvLine(line);
-    if (cells[0] === "kind" && cells[1] === "slug") continue;
+    const cells = splitCsvLine(line).map((c) => decodeMojibake(c.trim()));
+    if (!header && cells[0] === "kind" && cells[1] === "slug") {
+      header = cells.map((c) => c.toLowerCase());
+      continue;
+    }
+    if (header && header.includes("setcount")) {
+      rows.push(...wideRowToAudit(header, cells));
+      continue;
+    }
     rows.push({
       kind: (cells[0] ?? "").trim(),
       slug: (cells[1] ?? "").trim(),
@@ -78,6 +135,31 @@ export function parseEntityCompleteCsv(text: string): EntityCompleteAuditRow[] {
     });
   }
   return rows;
+}
+
+function wideRowToAudit(header: string[], cells: string[]): EntityCompleteAuditRow[] {
+  const get = (name: string) => {
+    const i = header.indexOf(name);
+    return i >= 0 ? (cells[i] ?? "").trim() : "";
+  };
+  const kind = get("kind");
+  const slug = get("slug");
+  const name = get("name");
+  const out: EntityCompleteAuditRow[] = [];
+  for (let i = 0; i < header.length; i++) {
+    const field = WIDE_FIELD_MAP[header[i] ?? ""];
+    const value = (cells[i] ?? "").trim();
+    if (!field || !value) continue;
+    out.push({
+      kind,
+      slug,
+      name,
+      field,
+      value,
+      evidence: "producer completeness csv 2026-08-23",
+    });
+  }
+  return out;
 }
 
 function splitCsvLine(line: string): string[] {
@@ -118,22 +200,63 @@ export function coreName(value: string): string {
   return value.toLowerCase().replace(/[^a-z0-9]/g, "");
 }
 
+function handleHaystack(value: string): string {
+  try {
+    const u = new URL(value);
+    const host = u.hostname.replace(/^www\./, "").toLowerCase();
+    if (
+      /(^|\.)(youtube|youtu\.be|instagram|soundcloud|twitter|x)\.com$/.test(host) ||
+      host === "youtu.be" ||
+      host === "x.com"
+    ) {
+      return coreName(u.pathname);
+    }
+    return coreName(`${host} ${u.pathname}`);
+  } catch {
+    return coreName(value);
+  }
+}
+
+function leftoverAfterName(nameKey: string, handleKey: string): string {
+  return handleKey.split(nameKey).join("");
+}
+
+/** Extra tokens after the name must be generic (music/official), not another act. */
+export function handleLeftoverOk(name: string, value: string): boolean {
+  const handleKey = handleHaystack(value);
+  const nameKey = coreName(name);
+  if (!handleKey) return false;
+  let leftover = handleKey;
+  if (nameKey && handleKey.includes(nameKey)) {
+    leftover = leftoverAfterName(nameKey, handleKey);
+  } else {
+    const tokens = name
+      .toLowerCase()
+      .split(/[^a-z0-9]+/)
+      .filter((t) => t.length >= 2);
+    if (!tokens.length) return false;
+    for (const t of tokens) leftover = leftover.split(t).join("");
+  }
+  return GENERIC_HANDLE_LEFTOVER.test(leftover);
+}
+
 /** Handle or host must overlap the catalog name (never @slug guesses). */
 export function nameOverlapsHandle(name: string, value: string): boolean {
   const nameKey = coreName(name);
   if (nameKey.length < 3) return false;
-  let hay = value;
-  try {
-    const u = new URL(value);
-    hay = `${u.hostname} ${u.pathname}`;
-  } catch {
-    /* bare handle */
-  }
-  const handleKey = coreName(hay.replace(/^www/, ""));
-  if (handleKey.includes(nameKey) || nameKey.includes(handleKey)) return true;
-  // "AC Slater" → acslater inside djacslater / "Dr. Fresch" → drfresch.
-  if (nameKey.length >= 5 && handleKey.includes(nameKey)) return true;
-  return false;
+  const handleKey = handleHaystack(value);
+  const tokens = name
+    .toLowerCase()
+    .split(/[^a-z0-9]+/)
+    .filter((t) => t.length >= 2);
+  const tokenHit =
+    tokens.length >= 2 && tokens.every((t) => handleKey.includes(t));
+  const coreHit =
+    handleKey.includes(nameKey) ||
+    nameKey.includes(handleKey) ||
+    (nameKey.length >= 5 && handleKey.includes(nameKey));
+  if (!coreHit && !tokenHit) return false;
+  return handleLeftoverOk(name, value);
 }
 
 export function isHttpsImageUrl(url: string): boolean {
@@ -164,15 +287,40 @@ export function evaluateEntityCompleteRow(row: EntityCompleteAuditRow): {
   if (row.kind !== "dj" && field === "youtube") {
     return { drop: "event has no youtube column" };
   }
+  if (row.kind !== "dj" && PROFILE_FIELDS.has(field)) {
+    return { drop: "profile field is DJ-only" };
+  }
 
   if (field === "imageUrl") {
     if (!isHttpsImageUrl(row.value)) return { drop: "image url not allowed" };
     return { field, value: row.value };
   }
 
+  if (field === "homeCity") {
+    const city = evaluateHomeCity(row.name, row.value);
+    if (!city.ok || !city.value) return { drop: city.reason };
+    return { field, value: city.value };
+  }
+
+  if (field === "bio") {
+    const bio = decodeMojibake(row.value).replace(/\s+/g, " ").trim();
+    if (bio.length < 24) return { drop: "bio too short" };
+    if (TEMPLATE_BIO.test(bio)) return { drop: "template bio" };
+    if (/[ÃÂ\uFFFD]/.test(bio)) return { drop: "bio encoding" };
+    return { field, value: bio };
+  }
+
+  if (field === "genre") {
+    const genre = normalizeGenre(row.value);
+    if (!genre) return { drop: "genre not canonical" };
+    return { field, value: genre };
+  }
+
   if (field === "website") {
     const n = normalizeSocialUrl(row.value);
-    if (!n || isWeakOfficialUrl(n)) return { drop: "weak or invalid website" };
+    if (!n || isWeakOfficialUrl(n) || WEAK_WEBSITE_HUB.test(n)) {
+      return { drop: "weak or invalid website" };
+    }
     if (!nameOverlapsHandle(row.name, n)) return { drop: "website name mismatch" };
     return { field, value: n };
   }
@@ -216,11 +364,40 @@ export function pinsFromAudit(rows: EntityCompleteAuditRow[]): {
     byKey.set(key, pin);
   }
   return {
-    pins: [...byKey.values()].sort(
-      (a, b) => a.kind.localeCompare(b.kind) || a.slug.localeCompare(b.slug),
-    ),
+    pins: sortPins([...byKey.values()]),
     dropped,
   };
+}
+
+function sortPins(pins: EntityCompletePin[]): EntityCompletePin[] {
+  return [...pins].sort(
+    (a, b) => a.kind.localeCompare(b.kind) || a.slug.localeCompare(b.slug),
+  );
+}
+
+/** Fill-null merge. Never replaces a strong existing pin field. */
+export function mergeEntityCompletePins(
+  existing: EntityCompletePin[],
+  incoming: EntityCompletePin[],
+): EntityCompletePin[] {
+  const byKey = new Map<string, EntityCompletePin>();
+  for (const pin of existing) {
+    byKey.set(`${pin.kind}:${pin.slug}`, { ...pin });
+  }
+  for (const pin of incoming) {
+    const key = `${pin.kind}:${pin.slug}`;
+    const cur = byKey.get(key) ?? { kind: pin.kind, slug: pin.slug };
+    for (const field of FIELDS) {
+      const next = pin[field];
+      if (!next) continue;
+      const have = cur[field];
+      if (!have || (field === "website" && isWeakOfficialUrl(have))) {
+        cur[field] = next;
+      }
+    }
+    byKey.set(key, cur);
+  }
+  return sortPins([...byKey.values()]);
 }
 
 export function loadEntityCompletePins(): EntityCompletePin[] {
@@ -267,6 +444,9 @@ export async function applyEntityCompletePins(
           youtube: true,
           soundcloud: true,
           twitter: true,
+          homeCity: true,
+          bio: true,
+          genre: true,
         },
       });
       if (!row) continue;
@@ -275,7 +455,9 @@ export async function applyEntityCompletePins(
       for (const field of FIELDS) {
         const next = pin[field];
         if (!next) continue;
-        if (shouldFill(field, row[field])) data[field] = next;
+        if (shouldFill(field, row[field as keyof typeof row] as string | null)) {
+          data[field] = next;
+        }
       }
       if (!Object.keys(data).length) continue;
       await prisma.dj.update({ where: { id: row.id }, data });

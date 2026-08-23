@@ -988,7 +988,7 @@ export async function getDjBySlug(slug: string): Promise<DjProfile | null> {
       name: s.name,
       setCount: s._count.sets,
     })),
-    genre: modeGenre(sets.map((s) => s.genre)),
+    genre: normalizeGenre(dj.genre) ?? modeGenre(sets.map((s) => s.genre)),
     upcomingNights: await upcomingNightsForDj({
       slug: dj.slug,
       name: dj.name,

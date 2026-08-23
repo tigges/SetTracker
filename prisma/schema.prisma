@@ -19,6 +19,8 @@ model Dj {
   realName   String?
   homeCity   String?
   bio        String?
+  // Optional preferred style when set genres are mixed / empty.
+  genre      String?
   accent     String // hex color used as the profile accent in the UI
 
   // main social accounts (nullable; crawler can fill real handles later)
