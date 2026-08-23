@@ -229,6 +229,14 @@ export function canonicalSpotifyUrl(url?: string | null): string | null {
   }
 }
 
+/** `spotify:track:{22}` from a stored open.spotify.com/track URL. */
+export function spotifyTrackUri(url?: string | null): string | null {
+  const href = canonicalSpotifyUrl(url);
+  if (!href) return null;
+  const id = href.split("/track/")[1];
+  return id ? `spotify:track:${id}` : null;
+}
+
 /** Canonical /track URL when stored; otherwise the search page. */
 export function spotifyTrackHref(
   title: string,

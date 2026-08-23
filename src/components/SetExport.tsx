@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   buildBeatportUrlList,
-  buildSpotifyUrlList,
+  buildSpotifyUriList,
   buildTracklistCsv,
   buildTracklistM3u,
   buildTracklistPlain,
@@ -27,14 +27,13 @@ function downloadText(filename: string, body: string, mime: string) {
   URL.revokeObjectURL(url);
 }
 
-const MENU_WIDTH = 240;
+const MENU_WIDTH = 268;
 
 const itemClass =
   "flex w-full items-center rounded-md px-2.5 py-1.5 text-left text-[13px] text-muted transition-colors hover:bg-panel2 hover:text-ink disabled:cursor-not-allowed disabled:opacity-40";
 
 /**
- * Set-level export / open actions (CSV, M3U, text, Beatport / Spotify URL lists).
- * Single button + menu. Uses identified plays when available; no OAuth.
+ * Destination-named set exports. Identified rows when available; no OAuth.
  */
 export function SetExport({
   plays,
@@ -54,11 +53,10 @@ export function SetExport({
   const root = useRef<HTMLDivElement>(null);
   const rows = useMemo(() => exportablePlays(plays), [plays]);
   const beatportBuyList = useMemo(() => buildBeatportUrlList(plays), [plays]);
-  const spotifyUrlList = useMemo(() => buildSpotifyUrlList(plays), [plays]);
+  const spotifyUriList = useMemo(() => buildSpotifyUriList(plays), [plays]);
   const base = slugifyFilename(meta.title || meta.slug);
   const disabled = rows.length === 0;
   const beatportDisabled = beatportBuyList.length === 0;
-  const spotifyDisabled = spotifyUrlList.length === 0;
 
   function placeMenu() {
     const el = root.current;
@@ -165,6 +163,50 @@ export function SetExport({
             type="button"
             role="menuitem"
             className={itemClass}
+            title="M3U for Rekordbox, Serato, and Traktor (library match by artist/title)"
+            onClick={() =>
+              run(() =>
+                downloadText(
+                  `${base}.m3u`,
+                  buildTracklistM3u(plays, meta),
+                  "audio/x-mpegurl;charset=utf-8",
+                ),
+              )
+            }
+          >
+            Rekordbox / Serato
+          </button>
+          <button
+            type="button"
+            role="menuitem"
+            className={itemClass}
+            title="Artist – Title text, plus spotify:track URIs when we have IDs"
+            onClick={() =>
+              run(() => {
+                downloadText(
+                  `${base}.txt`,
+                  buildTracklistPlain(plays),
+                  "text/plain;charset=utf-8",
+                );
+                if (spotifyUriList) {
+                  window.setTimeout(() => {
+                    downloadText(
+                      `${base}-spotify-uris.txt`,
+                      spotifyUriList,
+                      "text/plain;charset=utf-8",
+                    );
+                  }, 80);
+                }
+              })
+            }
+          >
+            Spotify
+          </button>
+          <button
+            type="button"
+            role="menuitem"
+            className={itemClass}
+            title="Cue, mix, ISRC, and canonical store URLs — DJ.Studio / spreadsheets"
             onClick={() =>
               run(() =>
                 downloadText(
@@ -176,70 +218,6 @@ export function SetExport({
             }
           >
             CSV
-          </button>
-          <button
-            type="button"
-            role="menuitem"
-            className={itemClass}
-            title="M3U for Rekordbox / players (matches library by artist/title)"
-            onClick={() =>
-              run(() =>
-                downloadText(
-                  `${base}.m3u`,
-                  buildTracklistM3u(plays, meta),
-                  "audio/x-mpegurl;charset=utf-8",
-                ),
-              )
-            }
-          >
-            M3U · Rekordbox
-          </button>
-          <button
-            type="button"
-            role="menuitem"
-            className={itemClass}
-            title="Artist - Title lines for Spotify playlist importers"
-            onClick={() =>
-              run(() =>
-                downloadText(
-                  `${base}.txt`,
-                  buildTracklistPlain(plays),
-                  "text/plain;charset=utf-8",
-                ),
-              )
-            }
-          >
-            Text · Spotify
-          </button>
-          <button
-            type="button"
-            role="menuitem"
-            className={itemClass}
-            onClick={() => void copyPlain()}
-          >
-            Copy tracklist
-          </button>
-          <button
-            type="button"
-            role="menuitem"
-            className={itemClass}
-            disabled={spotifyDisabled}
-            title={
-              spotifyDisabled
-                ? "No canonical Spotify /track pages on this set"
-                : "Canonical Spotify /track URLs only"
-            }
-            onClick={() =>
-              run(() =>
-                downloadText(
-                  `${base}-spotify-urls.txt`,
-                  spotifyUrlList,
-                  "text/plain;charset=utf-8",
-                ),
-              )
-            }
-          >
-            Spotify URLs
           </button>
           <button
             type="button"
@@ -262,6 +240,14 @@ export function SetExport({
             }
           >
             Beatport buy list
+          </button>
+          <button
+            type="button"
+            role="menuitem"
+            className={itemClass}
+            onClick={() => void copyPlain()}
+          >
+            Copy tracklist
           </button>
         </div>
       ) : null}
