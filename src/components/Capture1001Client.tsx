@@ -3,8 +3,10 @@
 import { useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import {
+  SEARCH_1001_RESULT,
+  SEARCH_1001_TRACKLISTS,
   nativeCaptureSearchUrl,
-  search1001,
+  search1001Query,
   search1001QueryFromUrl,
 } from "@/lib/search1001";
 import { searchMixesdbByPlayerUrl } from "@/lib/searchMixesdb";
@@ -30,6 +32,37 @@ function watchFromPreset(p: CapturePreset): string {
     return `https://www.youtube.com/watch?v=${p.slug.slice(3)}`;
   }
   return "";
+}
+
+const SEARCH_BTN =
+  "rounded-md border border-line bg-transparent px-2.5 py-1 text-[12px] font-bold text-ink";
+
+/** 1001 search is POST /search/result.php — GET ?q= is their 404 page. */
+function Search1001Button({
+  query,
+  onSearch,
+}: {
+  query: string;
+  onSearch?: (q: string) => void;
+}) {
+  const q = query.trim();
+  if (q.length < 2) return null;
+  return (
+    <form
+      action={SEARCH_1001_RESULT}
+      method="post"
+      target="_blank"
+      acceptCharset="utf-8"
+      className="inline"
+      onSubmit={() => onSearch?.(q)}
+    >
+      <input type="hidden" name="main_search" value={q} />
+      <input type="hidden" name="search_selection" value={SEARCH_1001_TRACKLISTS} />
+      <button type="submit" className={SEARCH_BTN}>
+        Search 1001
+      </button>
+    </form>
+  );
 }
 
 function bookmarkletFor(scriptBase: string, preset?: CapturePreset): string {
@@ -96,7 +129,7 @@ function Capture1001Workbench({
         .includes(q),
     );
   }, [presets, query]);
-  const find1001 = query.trim() ? search1001(query.trim()) : "";
+  const findQuery = search1001Query(query.trim());
 
   async function onCopy(label: string, text: string) {
     const ok = await copyText(text);
@@ -106,7 +139,8 @@ function Capture1001Workbench({
   return (
     <div className="space-y-3">
       <p className="text-[12px] text-muted">
-        YT/SC already in the catalog. Open 1001 or Search MixesDB with the
+        YT/SC already in the catalog. Search 1001 POSTs their tracklist
+        form (GET /search?q= is a 404). Open MixesDB with the
         player URL (jumps to their page when they indexed it), run the
         bookmarklet (or paste{" "}
         <span className="mono text-[11px] text-ink">
@@ -170,19 +204,11 @@ function Capture1001Workbench({
       {filtered.length === 0 ? (
         <p className="text-[13px] text-muted">
           No queued gap matches “{query.trim()}”.{" "}
-          {find1001 ? (
-            <a
-              href={find1001}
-              target="_blank"
-              rel="noreferrer"
-              className="text-brand hover:underline"
-              onClick={() => {
-                const q = search1001QueryFromUrl(find1001);
-                if (q) void onCopy("1001 search", q);
-              }}
-            >
-              Search 1001
-            </a>
+          {findQuery ? (
+            <Search1001Button
+              query={findQuery}
+              onSearch={(q) => void onCopy("1001 search", q)}
+            />
           ) : null}
         </p>
       ) : null}
@@ -228,19 +254,14 @@ function Capture1001Workbench({
                   Open 1001
                 </a>
               ) : (
-                <a
-                  href={nativeCaptureSearchUrl(p.searchUrl, p.label)}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="rounded-md border border-line px-2.5 py-1 text-[12px] font-bold"
-                  onClick={() => {
-                    const href = nativeCaptureSearchUrl(p.searchUrl, p.label);
-                    const q = search1001QueryFromUrl(href);
-                    if (q) void onCopy("1001 search", q);
-                  }}
-                >
-                  Search 1001
-                </a>
+                <Search1001Button
+                  query={
+                    search1001QueryFromUrl(
+                      nativeCaptureSearchUrl(p.searchUrl, p.label),
+                    ) || search1001Query(p.label)
+                  }
+                  onSearch={(q) => void onCopy("1001 search", q)}
+                />
               )}
               {mixesdbSearch ? (
                 <a
