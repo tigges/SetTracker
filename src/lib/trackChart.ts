@@ -6,6 +6,10 @@
  */
 
 export const TRACK_CHART_MIN_DJS = 2;
+/** `/tracks` index — top crossing tracks by DJ spread. */
+export const TRACK_CHART_INDEX_LIMIT = 100;
+/** Static `/tracks/[slug]` pages. Drop weakest 2-DJ rows first if over cap. */
+export const TRACK_PAGE_EXPORT_CAP = 400;
 
 export type TrackChartAgg = {
   trackId: string;

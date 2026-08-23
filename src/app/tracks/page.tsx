@@ -3,6 +3,7 @@ import Link from "next/link";
 import { EntityThumb } from "@/components/EntityThumb";
 import { getTracks } from "@/lib/queries";
 import { pageMeta } from "@/lib/site";
+import { TRACK_CHART_INDEX_LIMIT } from "@/lib/trackChart";
 
 export const metadata: Metadata = pageMeta({
   title: "Tracks",
@@ -12,7 +13,7 @@ export const metadata: Metadata = pageMeta({
 });
 
 export default async function TracksPage() {
-  const tracks = await getTracks(160);
+  const tracks = await getTracks(TRACK_CHART_INDEX_LIMIT);
 
   return (
     <div>
@@ -21,7 +22,8 @@ export default async function TracksPage() {
         <h1 className="mt-1 text-3xl font-extrabold tracking-tight">Tracks</h1>
         <p className="mt-2 max-w-2xl text-[14px] text-muted">
           Tracks mixed by more than one DJ, ranked by DJ spread — not how many
-          episodes we ingested. Open a track for every set that spun it.
+          episodes we ingested. This list is the top {TRACK_CHART_INDEX_LIMIT}.
+          Open a track for every set that spun it.
         </p>
       </div>
 

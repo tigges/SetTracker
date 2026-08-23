@@ -24,7 +24,8 @@ import {
 import type { PlayRow } from "@/lib/queries";
 import { playablePlaybackUrl } from "@/lib/playback";
 import { EDIT_KIND_LABEL, editKind } from "@/lib/trackMeta";
-import { useSetSeek } from "@/components/SetListen";
+import { useSetListen, useSetSeek } from "@/components/SetListen";
+import { nearestPlayByCue } from "@/lib/setCue";
 import { cueIndexAtRatio, playSpans, stripIsDense } from "@/lib/setStrip";
 
 const DENSITY_KEY = "setradar.tracklistDensity";
@@ -79,8 +80,9 @@ export function SetTimeline({
   children?: ReactNode;
 }) {
   const seek = useSetSeek();
+  const listen = useSetListen();
   const canSeek = !!seek && !!playablePlaybackUrl(setPlaybackUrl, setSourceUrl);
-  const [activeId, setActiveId] = useState<string | null>(plays[0]?.id ?? null);
+  const [pickedId, setPickedId] = useState<string | null>(plays[0]?.id ?? null);
   const [flashId, setFlashId] = useState<string | null>(null);
   const [hoverId, setHoverId] = useState<string | null>(null);
   const compact = useSyncExternalStore(
@@ -110,6 +112,20 @@ export function SetTimeline({
     return () => clearTimeout(t);
   }, [flashId]);
 
+  const cueSec = listen?.startSec ?? null;
+  const cueNonce = listen?.seekNonce ?? 0;
+  const cuedPlayId =
+    cueNonce > 0 && cueSec != null
+      ? (nearestPlayByCue(plays, cueSec)?.id ?? null)
+      : null;
+  const activeId = cuedPlayId ?? pickedId;
+
+  useEffect(() => {
+    if (!cuedPlayId) return;
+    const el = rowRefs.current[cuedPlayId];
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
+  }, [cuedPlayId, cueNonce]);
+
   function cueIdAtClientX(clientX: number): string | null {
     const el = stripRef.current;
     if (!el || plays.length === 0) return null;
@@ -130,7 +146,7 @@ export function SetTimeline({
   }
 
   function focusRow(id: string) {
-    setActiveId(id);
+    setPickedId(id);
     const el = rowRefs.current[id];
     if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
     setFlashId(null);

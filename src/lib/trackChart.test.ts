@@ -67,6 +67,42 @@ describe("trackChart", () => {
     assert.ok(compareTrackChart(crossing, twoDjs) < 0);
   });
 
+  it("drops weakest 2-DJ rows first when the export cap is tight", () => {
+    const strong = row({
+      trackId: "spread",
+      djCount: 5,
+      eventCount: 4,
+      setCount: 6,
+      playCount: 6,
+    });
+    const mid = row({
+      trackId: "club-circuit",
+      djCount: 2,
+      eventCount: 2,
+      setCount: 4,
+      playCount: 4,
+    });
+    const tail = row({
+      trackId: "thin-cross",
+      djCount: 2,
+      eventCount: 1,
+      setCount: 2,
+      playCount: 2,
+    });
+    const ident = row({
+      trackId: "radio-ident",
+      djCount: 1,
+      eventCount: 0,
+      setCount: 40,
+      playCount: 40,
+    });
+    const ranked = rankTrackChart([tail, ident, mid, strong], 2);
+    assert.deepEqual(
+      ranked.map((r) => r.trackId),
+      ["spread", "club-circuit"],
+    );
+  });
+
   it("breaks DJ ties with venues, then sets", () => {
     const moreVenues = row({
       trackId: "festivals",

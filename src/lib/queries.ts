@@ -6,6 +6,7 @@ import { isProducerHiddenSlug } from "@/lib/ingest/producerDjReview.data";
 import { isCatalogWorkDj, isTop100DjSlug } from "@/lib/djCatalog";
 import { loadDjMagTop100RankBySlug } from "@/lib/djmagTop100";
 import { isBrowseReadyDj } from "@/lib/djBrowse";
+import { Prisma } from "@prisma/client";
 import { prisma } from "@/lib/db";
 import {
   expandGenres,
@@ -44,7 +45,18 @@ import {
 } from "@/lib/atlas/seed";
 import { daysCoveredByEditions, isoUTC } from "@/lib/calendarGrid";
 import { sortPlaceNights } from "@/lib/placeTimeline";
-import { rankTrackChart, type TrackChartAgg } from "@/lib/trackChart";
+import { pickRelatedSets } from "@/lib/relatedSets";
+import {
+  rankRelatedTracks,
+  TRACK_RELATED_LIMIT,
+  type RelatedTrackScore,
+} from "@/lib/relatedTracks";
+import {
+  rankTrackChart,
+  TRACK_CHART_INDEX_LIMIT,
+  TRACK_PAGE_EXPORT_CAP,
+  type TrackChartAgg,
+} from "@/lib/trackChart";
 import {
   bucketVenueNight,
   parseJsonStringList,
@@ -55,7 +67,6 @@ import {
   editionCalendar,
   editionGapReport,
 } from "@/lib/ingest/festivalDrops";
-import { pickRelatedSets } from "@/lib/relatedSets";
 import { isBrowseReadySet } from "@/lib/setBrowse";
 import { isBrowseReadyVenue, isVenueListed } from "@/lib/venueBrowse";
 import type { IdStatus } from "@/lib/status";
@@ -1741,7 +1752,10 @@ type TrackChartSqlRow = {
   eventCount: number | bigint;
 };
 
-export async function getTracks(limit = 120) {
+let trackChartAggCache: TrackChartAgg[] | null = null;
+
+async function loadTrackChartAggs(): Promise<TrackChartAgg[]> {
+  if (trackChartAggCache) return trackChartAggCache;
   const grouped = await prisma.$queryRaw<TrackChartSqlRow[]>`
     SELECT
       p.trackId AS trackId,
@@ -1755,18 +1769,20 @@ export async function getTracks(limit = 120) {
     WHERE p.trackId IS NOT NULL
     GROUP BY p.trackId
   `;
-  const ranked = rankTrackChart(
-    grouped.map(
-      (g): TrackChartAgg => ({
-        trackId: g.trackId,
-        playCount: Number(g.playCount ?? 0),
-        setCount: Number(g.setCount ?? 0),
-        djCount: Number(g.djCount ?? 0),
-        eventCount: Number(g.eventCount ?? 0),
-      }),
-    ),
-    limit,
+  trackChartAggCache = grouped.map(
+    (g): TrackChartAgg => ({
+      trackId: g.trackId,
+      playCount: Number(g.playCount ?? 0),
+      setCount: Number(g.setCount ?? 0),
+      djCount: Number(g.djCount ?? 0),
+      eventCount: Number(g.eventCount ?? 0),
+    }),
   );
+  return trackChartAggCache;
+}
+
+export async function getTracks(limit = TRACK_CHART_INDEX_LIMIT) {
+  const ranked = rankTrackChart(await loadTrackChartAggs(), limit);
   const ids = ranked.map((g) => g.trackId);
   if (ids.length === 0) return [];
   const rows = await prisma.track.findMany({
@@ -1809,9 +1825,9 @@ export async function getTracks(limit = 120) {
     .filter((x): x is NonNullable<typeof x> => !!x);
 }
 
-/** Cap static track pages so GitHub Pages stays under the 10GB unpack limit. */
+/** Cap static track pages so GitHub Pages stays under the unpack limit. */
 const TRACK_STATIC_EXPORT_CAP = Number(
-  process.env.TRACK_STATIC_EXPORT_CAP || 400,
+  process.env.TRACK_STATIC_EXPORT_CAP || TRACK_PAGE_EXPORT_CAP,
 );
 
 let exportedTrackSlugCache: string[] | null = null;
@@ -1820,15 +1836,25 @@ export async function getAllTrackSlugs(): Promise<string[]> {
   if (exportedTrackSlugCache) return exportedTrackSlugCache;
   const { ensureTrackSlugs } = await import("@/lib/tracks/ensureSlugs");
   await ensureTrackSlugs(prisma);
-  // Prefer frequently played tracks; Music-credit floods otherwise blow the
-  // static export past GitHub Pages' practical ~1GB artifact limit.
+  // Crossing DJs only — same rank as /tracks. Long-tail 2-DJ/2-set rows
+  // drop first if we are over the Pages cap. One-DJ radio idents stay off.
+  const ranked = rankTrackChart(
+    await loadTrackChartAggs(),
+    Math.max(1, TRACK_STATIC_EXPORT_CAP),
+  );
+  const ids = ranked.map((g) => g.trackId);
+  if (ids.length === 0) {
+    exportedTrackSlugCache = [];
+    return exportedTrackSlugCache;
+  }
   const rows = await prisma.track.findMany({
-    where: { plays: { some: {} } },
-    select: { slug: true },
-    orderBy: { plays: { _count: "desc" } },
-    take: Math.max(200, TRACK_STATIC_EXPORT_CAP),
+    where: { id: { in: ids } },
+    select: { id: true, slug: true },
   });
-  exportedTrackSlugCache = rows.map((r) => r.slug);
+  const byId = new Map(rows.map((t) => [t.id, t.slug]));
+  exportedTrackSlugCache = ids
+    .map((id) => byId.get(id))
+    .filter((slug): slug is string => Boolean(slug));
   return exportedTrackSlugCache;
 }
 
@@ -1853,15 +1879,28 @@ export async function getTrackBySlug(slug: string) {
     orderBy: { set: { publishedAt: "desc" } },
   });
 
-  const setMap = new Map<string, (typeof plays)[number]["set"]>();
+  const setMap = new Map<
+    string,
+    { set: (typeof plays)[number]["set"]; timestamp: number }
+  >();
   for (const p of plays) {
-    if (!setMap.has(p.setId)) setMap.set(p.setId, p.set);
+    const cur = setMap.get(p.setId);
+    if (!cur) setMap.set(p.setId, { set: p.set, timestamp: p.timestamp });
+    else if (p.timestamp < cur.timestamp) cur.timestamp = p.timestamp;
   }
-  const sets = [...setMap.values()];
+  const setEntries = [...setMap.values()];
+  const sets = setEntries.map((row) => row.set);
 
   const djMap = new Map<
     string,
-    { name: string; slug: string; accent: string; imageUrl: string | null; count: number }
+    {
+      id: string;
+      name: string;
+      slug: string;
+      accent: string;
+      imageUrl: string | null;
+      count: number;
+    }
   >();
   for (const s of sets) {
     const prim = s.artists.find((a) => a.isPrimary) ?? s.artists[0];
@@ -1870,6 +1909,7 @@ export async function getTrackBySlug(slug: string) {
     if (cur) cur.count += 1;
     else
       djMap.set(prim.dj.id, {
+        id: prim.dj.id,
         name: prim.dj.name,
         slug: prim.dj.slug,
         accent: prim.dj.accent,
@@ -1914,9 +1954,23 @@ export async function getTrackBySlug(slug: string) {
         }
       : null,
     playCount: plays.length,
-    setCount: sets.length,
-    djs: [...djMap.values()].sort((a, b) => b.count - a.count),
-    sets: sets.map((s) => {
+    setCount: setEntries.length,
+    djs: [...djMap.values()]
+      .sort((a, b) => b.count - a.count)
+      .map((d) => ({
+        name: d.name,
+        slug: d.slug,
+        accent: d.accent,
+        imageUrl: d.imageUrl,
+        count: d.count,
+      })),
+    related: await relatedTracksFor({
+      trackId: track.id,
+      artistName: track.artistName,
+      labelId: track.labelId,
+      djIds: [...djMap.keys()],
+    }),
+    sets: setEntries.map(({ set: s, timestamp }) => {
       const prim = s.artists.find((a) => a.isPrimary) ?? s.artists[0];
       return {
         slug: s.slug,
@@ -1929,9 +1983,90 @@ export async function getTrackBySlug(slug: string) {
         primaryDjName: prim?.dj.name ?? null,
         primaryDjSlug: prim?.dj.slug ?? null,
         eventName: s.event?.name ?? null,
+        eventSlug: s.event?.slug ?? null,
+        timestamp,
       };
     }),
   };
+}
+
+async function relatedTracksFor(opts: {
+  trackId: string;
+  artistName: string;
+  labelId: string | null;
+  djIds: string[];
+}) {
+  const exportedSlugs = await getAllTrackSlugs();
+  if (exportedSlugs.length === 0) return [];
+  const exportedRows = await prisma.track.findMany({
+    where: { slug: { in: exportedSlugs }, id: { not: opts.trackId } },
+    select: {
+      id: true,
+      slug: true,
+      title: true,
+      artistName: true,
+      mixName: true,
+      imageUrl: true,
+      labelId: true,
+      label: { select: { name: true, slug: true, color: true } },
+    },
+  });
+  if (exportedRows.length === 0) return [];
+
+  const exportedIds = exportedRows.map((t) => t.id);
+  const sharedById = new Map<string, number>();
+  if (opts.djIds.length > 0) {
+    const shared = await prisma.$queryRaw<
+      { trackId: string; sharedDjCount: number | bigint }[]
+    >`
+      SELECT p.trackId AS trackId, COUNT(DISTINCT sa.djId) AS sharedDjCount
+      FROM Played p
+      INNER JOIN SetArtist sa ON sa.setId = p.setId AND sa.isPrimary = 1
+      WHERE p.trackId IN (${Prisma.join(exportedIds)})
+        AND sa.djId IN (${Prisma.join(opts.djIds)})
+      GROUP BY p.trackId
+    `;
+    for (const row of shared) {
+      sharedById.set(row.trackId, Number(row.sharedDjCount ?? 0));
+    }
+  }
+
+  const statsBy = new Map(
+    (await loadTrackChartAggs()).map((row) => [row.trackId, row]),
+  );
+  const scored: RelatedTrackScore[] = exportedRows.map((t) => {
+    const stats = statsBy.get(t.id);
+    return {
+      trackId: t.id,
+      sharedDjCount: sharedById.get(t.id) ?? 0,
+      sameArtist: t.artistName === opts.artistName,
+      sameLabel: Boolean(opts.labelId && t.labelId === opts.labelId),
+      playCount: stats?.playCount ?? 0,
+      setCount: stats?.setCount ?? 0,
+      djCount: stats?.djCount ?? 0,
+      eventCount: stats?.eventCount ?? 0,
+    };
+  });
+  const ranked = rankRelatedTracks(scored, TRACK_RELATED_LIMIT);
+  const byId = new Map(exportedRows.map((t) => [t.id, t]));
+  return ranked
+    .map((row) => {
+      const t = byId.get(row.trackId);
+      if (!t) return null;
+      return {
+        slug: t.slug,
+        title: t.title,
+        artistName: t.artistName,
+        mixName: t.mixName,
+        imageUrl: t.imageUrl,
+        labelName: t.label?.name ?? null,
+        labelColor: t.label?.color ?? null,
+        sharedDjCount: row.sharedDjCount,
+        sameArtist: row.sameArtist,
+        sameLabel: row.sameLabel,
+      };
+    })
+    .filter((x): x is NonNullable<typeof x> => !!x);
 }
 
 export type TrackProfile = NonNullable<Awaited<ReturnType<typeof getTrackBySlug>>>;
