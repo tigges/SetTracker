@@ -36,6 +36,7 @@ import { backfillPerformedAt } from "./backfillPerformedAt";
 import { backfillSetEditions } from "./setEditions";
 import { fillDjHandlesFromKnown, fillDjWebsitesFromWikidata } from "./discovery/fillDjHandles";
 import { isRejectedWebsiteHost } from "./discovery/wikidataOfficial";
+import { isWeakOfficialUrl } from "../officialUrls";
 import { discoverCuratedReliveRemaps } from "./reliveWatch";
 import { applySetSourceRemaps } from "./sourceRemaps";
 import { applyCatalog1001Seeds } from "./tracklists1001/applyToCatalog";
@@ -177,7 +178,12 @@ export async function applyKnownUrlFixes(prisma: PrismaClient): Promise<number> 
     select: { id: true, website: true },
   });
   for (const row of rejectedSites) {
-    if (!row.website || !isRejectedWebsiteHost(row.website)) continue;
+    if (
+      !row.website ||
+      (!isRejectedWebsiteHost(row.website) && !isWeakOfficialUrl(row.website))
+    ) {
+      continue;
+    }
     await prisma.dj.update({
       where: { id: row.id },
       data: { website: null },

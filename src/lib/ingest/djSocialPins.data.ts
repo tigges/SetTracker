@@ -16,8 +16,8 @@ export type DjSocialPin = {
   /** Null when no verified IG — do not invent handles. */
   instagram: string | null;
   twitter?: string | null;
-  /** Official homepage. Beatport artist hubs go on `beatport`, not here. */
-  website: string;
+  /** Official homepage. Null when none is confirmed — never a DJ Mag rank page. */
+  website: string | null;
   /** Canonical https://www.beatport.com/artist/{slug}/{id} only. */
   beatport?: string | null;
   bio: string;
@@ -506,8 +506,9 @@ export const DJ_SOCIAL_PINS: DjSocialPin[] = [
     youtube: "https://www.youtube.com/@ViniViciMusic",
     instagram: "https://www.instagram.com/vinivicimusic/",
     twitter: "https://x.com/vinivicimusic",
-    website: "https://djmag.com/top100djs/2025/32/vini-vici",
-    bio: "Psytrance. SC vinivicimusic, YT @ViniViciMusic, IG @vinivicimusic.",
+    website: null,
+    beatport: "https://www.beatport.com/artist/vini-vici/370281",
+    bio: "Psytrance duo Aviram Saharai and Matan Kadosh. Armin van Buuren: “Few acts have such a well-defined signature sound.” Official YT @ViniViciMusic, SC/IG vinivicimusic — no first-party homepage confirmed.",
   },
   {
     slug: "indira-paganotto",
@@ -715,13 +716,14 @@ export const DJ_SOCIAL_PINS: DjSocialPin[] = [
     slug: "kaaze",
     name: "KAAZE",
     accent: "#9b5de5",
-    soundcloud: "https://soundcloud.com/kaaze",
+    soundcloud: "https://soundcloud.com/iamkaaze",
     // @KAAZE 404 — official handle is @KAAZEOfficial (API-resolved).
     youtube: "https://www.youtube.com/@KAAZEOfficial",
     instagram: "https://www.instagram.com/iamkaaze/",
     twitter: "https://x.com/iamkaaze",
-    website: "https://djmag.com/top100djs/2025/74/kaaze",
-    bio: "Progressive House. SC kaaze, YT @KAAZEOfficial (not bare @KAAZE), IG @iamkaaze.",
+    website: null,
+    beatport: "https://www.beatport.com/artist/kaaze/384598",
+    bio: "Progressive House. Sweden. Official YT @KAAZEOfficial (not bare @KAAZE), SC/IG/X iamkaaze — no first-party homepage confirmed.",
   },
   {
     slug: "burak-yeter",
@@ -751,8 +753,8 @@ export const DJ_SOCIAL_PINS: DjSocialPin[] = [
     soundcloud: "https://soundcloud.com/ihatemodels",
     youtube: "https://www.youtube.com/@ihatemodels",
     instagram: null,
-    website: "https://djmag.com/top100djs/2025/79/i-hate-models",
-    bio: "Techno. SC ihatemodels, YT @ihatemodels.",
+    website: "https://www.ihatemodelsmusic.com/",
+    bio: "Techno. Official ihatemodelsmusic.com — SC ihatemodels, YT @ihatemodels.",
   },
   {
     slug: "marnik",
@@ -761,8 +763,8 @@ export const DJ_SOCIAL_PINS: DjSocialPin[] = [
     soundcloud: "https://soundcloud.com/marnikofficial",
     youtube: "https://www.youtube.com/@marnikofficial",
     instagram: null,
-    website: "https://djmag.com/top100djs/2025/80/marnik",
-    bio: "Big Room. SC marnikofficial, YT @marnikofficial.",
+    website: "https://www.marnikofficial.com/",
+    bio: "Big Room. Official marnikofficial.com — SC/YT @marnikofficial.",
   },
   {
     slug: "chris-stussy",
@@ -948,8 +950,8 @@ export const DJ_SOCIAL_PINS: DjSocialPin[] = [
     soundcloud: "https://soundcloud.com/kenzo-meservey",
     youtube: "https://www.youtube.com/@fantasm_techno",
     instagram: "https://www.instagram.com/fantasm_techno/",
-    website: "https://djmag.com/top100djs/2025/93/fantasm",
-    bio: "Hard Techno. SC kenzo-meservey, YT/IG @fantasm_techno (not bare @fantasm).",
+    website: null,
+    bio: "Hard Techno. SC kenzo-meservey, YT/IG @fantasm_techno (not bare @fantasm). No first-party homepage confirmed — Techno Music World is a third-party bio.",
   },
   {
     slug: "vinai",
@@ -970,8 +972,8 @@ export const DJ_SOCIAL_PINS: DjSocialPin[] = [
     // Bare @faustix is Faust-IX — Danish Faustix is @faustixmusic.
     youtube: "https://www.youtube.com/@faustixmusic",
     instagram: "https://www.instagram.com/faustix/",
-    website: "https://djmag.com/top100djs/2025/96/faustix",
-    bio: "Future House. SC faustix, YT @faustixmusic (not bare @faustix), IG @faustix.",
+    website: null,
+    bio: "Future House. Denmark. Diplo ‘Revolution’ collab; 2016 UEFA EURO remix of David Guetta & Zara Larsson. Official YT @faustixmusic (not bare @faustix), SC/IG faustix — no first-party homepage confirmed.",
   },
   {
     slug: "honey-dijon",

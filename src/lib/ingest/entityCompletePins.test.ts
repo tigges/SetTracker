@@ -17,6 +17,18 @@ assert.equal(nameOverlapsHandle("Westend", "https://www.itsthewestend.com/"), tr
 assert.equal(nameOverlapsHandle("PLS&TY", "https://plsandty.com/"), true);
 assert.equal(nameOverlapsHandle("Lucas", "https://www.lucasandsteve.com/"), false);
 assert.equal(
+  nameOverlapsHandle("I Hate Models", "https://www.ihatemodelsmusic.com/"),
+  true,
+);
+assert.equal(
+  nameOverlapsHandle("Marnik", "https://www.marnikofficial.com/"),
+  true,
+);
+assert.equal(
+  nameOverlapsHandle("Fantasm", "https://technomusicworld.com/artist/fantasm/about"),
+  false,
+);
+assert.equal(
   nameOverlapsHandle("Lucas & Steve", "https://www.lucasandsteve.com/"),
   true,
 );
@@ -109,6 +121,28 @@ assert.equal(
     evidence: "listicle",
   }).drop,
   "weak or invalid website",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "i-hate-models",
+    name: "I Hate Models",
+    field: "website",
+    value: "https://en.wikipedia.org/wiki/I_Hate_Models",
+    evidence: "encyclopedia",
+  }).drop,
+  "weak or invalid website",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "i-hate-models",
+    name: "I Hate Models",
+    field: "website",
+    value: "https://www.ihatemodelsmusic.com/",
+    evidence: "official",
+  }).value,
+  "https://ihatemodelsmusic.com",
 );
 assert.equal(
   evaluateEntityCompleteRow({

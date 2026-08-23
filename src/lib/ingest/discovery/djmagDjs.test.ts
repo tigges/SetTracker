@@ -36,6 +36,14 @@ assert.equal(
   seed.djs.find((d) => d.slug === "fred-again")?.website,
   "https://www.fredagain.com/",
 );
+assert.equal(
+  seed.djs.find((d) => d.slug === "i-hate-models")?.website,
+  "https://www.ihatemodelsmusic.com/",
+);
+assert.equal(
+  seed.djs.find((d) => d.slug === "marnik")?.website,
+  "https://www.marnikofficial.com/",
+);
 
 assert.equal(
   parseHomeFromDjHtml(

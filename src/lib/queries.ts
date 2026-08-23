@@ -24,6 +24,7 @@ import {
   canonicalBeatportArtistUrl,
   resolveDjBeatport,
 } from "@/lib/beatportArtist";
+import { isWeakOfficialUrl } from "@/lib/officialUrls";
 import {
   canonicalBeatportUrl,
   resolveBeatportUrl,
@@ -977,7 +978,10 @@ export async function getDjBySlug(slug: string): Promise<DjProfile | null> {
       youtube: dj.youtube,
       instagram: dj.instagram,
       twitter: dj.twitter,
-      website: canonicalBeatportArtistUrl(dj.website) ? null : dj.website,
+      website:
+        canonicalBeatportArtistUrl(dj.website) || isWeakOfficialUrl(dj.website)
+          ? null
+          : dj.website,
       beatport: resolveDjBeatport({
         beatport: dj.beatport,
         website: dj.website,

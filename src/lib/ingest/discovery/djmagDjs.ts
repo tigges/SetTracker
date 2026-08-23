@@ -105,6 +105,8 @@ const EXTRA_OFFICIAL: Record<string, string> = {
   "indira-paganotto": "https://indirapaganotto.com/",
   "joel-corry": "https://www.joelcorry.com/",
   "deborah-de-luca": "https://deborahdeluca.it/",
+  "i-hate-models": "https://www.ihatemodelsmusic.com/",
+  marnik: "https://www.marnikofficial.com/",
 };
 
 /** Official site already known from roster / social pins / EXTRA_OFFICIAL. */
