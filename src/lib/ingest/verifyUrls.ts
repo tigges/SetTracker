@@ -39,7 +39,11 @@ import { isRejectedWebsiteHost } from "./discovery/wikidataOfficial";
 import { isWeakOfficialUrl } from "../officialUrls";
 import { discoverCuratedReliveRemaps } from "./reliveWatch";
 import { applySetSourceRemaps } from "./sourceRemaps";
-import { applyCatalog1001Seeds } from "./tracklists1001/applyToCatalog";
+import { applySetHostUrls } from "./setHostUrls";
+import {
+  applyCatalog1001Seeds,
+  applyShareTwinTracklists,
+} from "./tracklists1001/applyToCatalog";
 import { ensureCuratedLabels } from "./curatedLabels";
 import { ensureVenueCalendarNights } from "./discovery/venueCalendars";
 
@@ -200,6 +204,14 @@ export async function applyKnownUrlFixes(prisma: PrismaClient): Promise<number> 
     console.log(`[verify-urls] set source remaps: ${remaps}`);
   }
 
+  const hosts = await applySetHostUrls(prisma);
+  n += hosts.filled;
+  if (hosts.filled) {
+    console.log(
+      `[verify-urls] set host URLs scanned=${hosts.scanned} filled=${hosts.filled}`,
+    );
+  }
+
   // Walker & Royce etc. — fold false b2b half-name Dj rows onto the duo.
   const atomic = await mergeSplitAtomicActs(prisma);
   n += atomic.setsRelinked + atomic.junkRemoved;
@@ -216,6 +228,13 @@ export async function applyKnownUrlFixes(prisma: PrismaClient): Promise<number> 
     if (overlay.refreshed || overlay.missing) {
       console.log(
         `[verify-urls] 1001 overlay scanned=${overlay.scanned} refreshed=${overlay.refreshed} missing=${overlay.missing}`,
+      );
+    }
+    const twins = await applyShareTwinTracklists(prisma);
+    n += twins.copied;
+    if (twins.copied) {
+      console.log(
+        `[verify-urls] twin tracklists scanned=${twins.scanned} copied=${twins.copied}`,
       );
     }
   } catch (err) {

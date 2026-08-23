@@ -9,8 +9,15 @@ import { allocateTrackSlug, trackSlugBase } from "../../tracks/slug";
 import type { RawPlay } from "../types";
 import {
   applyTracklist1001Seed,
+  merge1001Plays,
   TRACKLIST_1001_BY_SOURCE_SLUG,
 } from "./seeds";
+import {
+  SHAREABLE_TRACKLIST_PROVENANCE,
+  shareablePlayCount,
+  shouldCopyTwinTracklist,
+  twinSlugGroupsFromCatalog,
+} from "../hostTwins";
 
 export function seedNeedsCatalogRefresh(
   stored1001: number,
@@ -164,4 +171,73 @@ export async function applyCatalog1001Seeds(prisma: PrismaClient): Promise<{
   }
 
   return { scanned, refreshed, missing };
+}
+
+/**
+ * Copy dense timed 1001 / MixesDB / Apple Music clocks onto a thin twin
+ * when durations match. Does not rescale clocks or copy fingerprints.
+ */
+export async function applyShareTwinTracklists(
+  prisma: PrismaClient,
+): Promise<{ scanned: number; copied: number }> {
+  const sets = await prisma.set.findMany({
+    select: {
+      id: true,
+      slug: true,
+      durationSec: true,
+      soundcloudUrl: true,
+      youtubeUrl: true,
+      mixcloudUrl: true,
+      plays: {
+        include: { track: { select: { title: true, artistName: true } } },
+        orderBy: { position: "asc" },
+      },
+    },
+  });
+  const bySlug = new Map(sets.map((s) => [s.slug, s]));
+  const groups = twinSlugGroupsFromCatalog(sets);
+  let scanned = 0;
+  let copied = 0;
+
+  for (const slugs of groups) {
+    const rows = slugs
+      .map((slug) => bySlug.get(slug))
+      .filter((row): row is (typeof sets)[number] => Boolean(row));
+    if (rows.length < 2) continue;
+    scanned += rows.length;
+    const ranked = [...rows].sort(
+      (a, b) => shareablePlayCount(b.plays) - shareablePlayCount(a.plays),
+    );
+    const donor = ranked[0]!;
+    const donorShare = shareablePlayCount(donor.plays);
+    const donorRaw = donor.plays
+      .filter((p) => SHAREABLE_TRACKLIST_PROVENANCE.has(p.provenance))
+      .map(playedToRaw);
+    if (donorRaw.length < 12) continue;
+
+    for (const recip of ranked.slice(1)) {
+      if (
+        !shouldCopyTwinTracklist(
+          { durationSec: donor.durationSec, shareable: donorShare },
+          {
+            durationSec: recip.durationSec,
+            shareable: shareablePlayCount(recip.plays),
+          },
+        )
+      ) {
+        continue;
+      }
+      const merged = merge1001Plays(recip.plays.map(playedToRaw), donorRaw);
+      if (shareablePlayCount(merged) <= shareablePlayCount(recip.plays)) {
+        continue;
+      }
+      await writePlays(prisma, recip.id, merged);
+      copied += 1;
+      console.log(
+        `[verify-urls] twin tracklist ${donor.slug} → ${recip.slug} ${shareablePlayCount(recip.plays)} → ${shareablePlayCount(merged)}`,
+      );
+    }
+  }
+
+  return { scanned, copied };
 }

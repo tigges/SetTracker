@@ -2,7 +2,11 @@
 
 import { useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { search1001, search1001QueryFromUrl } from "@/lib/search1001";
+import {
+  nativeCaptureSearchUrl,
+  search1001,
+  search1001QueryFromUrl,
+} from "@/lib/search1001";
 import { searchMixesdbByPlayerUrl } from "@/lib/searchMixesdb";
 
 const LIVE_SCRIPT = "https://setradar.ai/capture-1001tl.js";
@@ -225,12 +229,13 @@ function Capture1001Workbench({
                 </a>
               ) : (
                 <a
-                  href={p.searchUrl}
+                  href={nativeCaptureSearchUrl(p.searchUrl, p.label)}
                   target="_blank"
                   rel="noreferrer"
                   className="rounded-md border border-line px-2.5 py-1 text-[12px] font-bold"
                   onClick={() => {
-                    const q = search1001QueryFromUrl(p.searchUrl);
+                    const href = nativeCaptureSearchUrl(p.searchUrl, p.label);
+                    const q = search1001QueryFromUrl(href);
                     if (q) void onCopy("1001 search", q);
                   }}
                 >

@@ -49,8 +49,9 @@ import {
 import { playlistEntriesToPlays } from "./playlist";
 import {
   playsFromDescriptionMixesdbLinks,
-  playsFromPlaybackMixesdbLookup,
+  playsFromAnyPlayerMixesdbLookup,
 } from "../mixesdb/client";
+import { playerUrlsForSet } from "../setHostUrls";
 import { applyTracklist1001Seed, merge1001Plays } from "../tracklists1001/seeds";
 
 const ACCENTS = [
@@ -78,10 +79,14 @@ async function hearthisMixesdbPlays(
   description: string,
   playbackUrl: string,
   durationSec: number,
+  sourceSlug?: string,
 ): Promise<RawPlay[]> {
   let from = await playsFromDescriptionMixesdbLinks(description, durationSec);
   if (from.length < 5) {
-    const lookup = await playsFromPlaybackMixesdbLookup(playbackUrl, durationSec);
+    const lookup = await playsFromAnyPlayerMixesdbLookup(
+      playerUrlsForSet({ slug: sourceSlug, playbackUrl }),
+      durationSec,
+    );
     if (lookup.length > from.length) from = lookup;
   }
   return from;
@@ -283,7 +288,7 @@ export async function trackToRawSet(
       sourceSlug,
       merge1001Plays(
         plays,
-        await hearthisMixesdbPlays(description, sourceUrl, durationSec),
+        await hearthisMixesdbPlays(description, sourceUrl, durationSec, sourceSlug),
       ),
     ),
   };

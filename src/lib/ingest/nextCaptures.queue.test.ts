@@ -576,5 +576,82 @@ assert.equal(
   ),
   "mirror",
 );
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "yt-rG1DvjvXCls",
+      title: "Marlon Hoffstadt WE1 | Tomorrowland 2026",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "yt-RLOghpXjuJI",
+      title: "Korolova Captive Soul | Tomorrowland 2026",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "yt-9TKqqBCmDHA",
+      title: "John Summit Lollapalooza Chicago 2026",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "yt-AjQeohYmg3A",
+      title: "Afrojack & R3HAB Mainstage Tomorrowland 2026",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "yt-GSnPwle4FOE",
+      title: "David Guetta WE1 | Tomorrowland 2026",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "sc-korolovadj-korolova-live-tomorrowland-1",
+      title: "Korolova Live Tomorrowland",
+    }),
+    new Set(),
+    now,
+  ),
+  "mirror",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "sc-johnsummit-john-summit-live-lollapalooza",
+      title: "John Summit Live Lollapalooza",
+    }),
+    new Set(),
+    now,
+  ),
+  "mirror",
+);
 
 console.log("nextCaptures.queue.test.ts ok");

@@ -288,6 +288,88 @@ export function setSoundcloudPageUrl(
   return firstMatch([playbackUrl, sourceUrl], soundcloudPageUrl);
 }
 
+/** Canonical Mixcloud show URL (never widget / discover). */
+export function mixcloudPageUrl(
+  url: string | null | undefined,
+): string | null {
+  if (!url?.trim()) return null;
+  if (detectPlaybackHost(url) !== "mixcloud") return null;
+  try {
+    const u = new URL(url.trim());
+    const parts = u.pathname.split("/").filter(Boolean);
+    if (parts.length < 2) return null;
+    const user = parts[0]!.toLowerCase();
+    const show = parts[1]!;
+    if (user === "widget" || user === "discover" || user === "search") {
+      return null;
+    }
+    return `https://www.mixcloud.com/${user}/${show}/`;
+  } catch {
+    return null;
+  }
+}
+
+/** Mixcloud show URL from playback or source. */
+export function setMixcloudPageUrl(
+  playbackUrl?: string | null,
+  sourceUrl?: string | null,
+): string | null {
+  return firstMatch([playbackUrl, sourceUrl], mixcloudPageUrl);
+}
+
+export type SetHostUrls = {
+  soundcloudUrl?: string | null;
+  youtubeUrl?: string | null;
+  mixcloudUrl?: string | null;
+};
+
+/** Pick official SC / YT / Mixcloud links from known URLs. Never invents. */
+export function hostUrlsFromKnown(
+  ...urls: Array<string | null | undefined>
+): SetHostUrls {
+  return {
+    soundcloudUrl: firstMatch(urls, soundcloudPageUrl),
+    youtubeUrl: firstMatch(urls, youtubeWatchUrl),
+    mixcloudUrl: firstMatch(urls, mixcloudPageUrl),
+  };
+}
+
+/** Fill-null merge. Existing values win. */
+export function mergeHostUrlFields(...parts: SetHostUrls[]): SetHostUrls {
+  const out: SetHostUrls = {};
+  for (const part of parts) {
+    if (!out.soundcloudUrl && part.soundcloudUrl) {
+      out.soundcloudUrl = part.soundcloudUrl;
+    }
+    if (!out.youtubeUrl && part.youtubeUrl) {
+      out.youtubeUrl = part.youtubeUrl;
+    }
+    if (!out.mixcloudUrl && part.mixcloudUrl) {
+      out.mixcloudUrl = part.mixcloudUrl;
+    }
+  }
+  return out;
+}
+
+/** Only the host columns that are currently empty and have a known fill. */
+export function hostUrlFillNull(
+  existing: SetHostUrls,
+  ...incoming: SetHostUrls[]
+): SetHostUrls {
+  const merged = mergeHostUrlFields(existing, ...incoming);
+  const patch: SetHostUrls = {};
+  if (!existing.soundcloudUrl && merged.soundcloudUrl) {
+    patch.soundcloudUrl = merged.soundcloudUrl;
+  }
+  if (!existing.youtubeUrl && merged.youtubeUrl) {
+    patch.youtubeUrl = merged.youtubeUrl;
+  }
+  if (!existing.mixcloudUrl && merged.mixcloudUrl) {
+    patch.mixcloudUrl = merged.mixcloudUrl;
+  }
+  return patch;
+}
+
 /** SoundCloud permalink with an optional `#t=` cue (seconds). */
 export function soundcloudSeekUrl(
   page: string,

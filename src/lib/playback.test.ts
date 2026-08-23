@@ -4,10 +4,14 @@ import {
   hearthisEmbedUrl,
   hearthisPublicUrl,
   hearthisSeekUrl,
+  hostUrlFillNull,
+  hostUrlsFromKnown,
   isPlayablePlaybackUrl,
+  mixcloudPageUrl,
   playablePlaybackUrl,
   playbackUrlFromSource,
   resolvePlaybackTarget,
+  setMixcloudPageUrl,
   setSoundcloudPageUrl,
   setYoutubeWatchUrl,
   soundcloudPageUrl,
@@ -159,6 +163,54 @@ assert.equal(
     "https://soundcloud.com/a/b",
   ),
   "https://soundcloud.com/a/b",
+);
+
+assert.equal(
+  mixcloudPageUrl(
+    "https://www.mixcloud.com/Claptone/clapcast-576/?utm=1",
+  ),
+  "https://www.mixcloud.com/claptone/clapcast-576/",
+);
+assert.equal(
+  mixcloudPageUrl(
+    "https://www.mixcloud.com/widget/iframe/?feed=%2Fclaptone%2Fclapcast-576%2F",
+  ),
+  null,
+);
+assert.equal(
+  setMixcloudPageUrl(
+    "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "https://www.mixcloud.com/JamieJones/hot-robot-radio-225/",
+  ),
+  "https://www.mixcloud.com/jamiejones/hot-robot-radio-225/",
+);
+
+const known = hostUrlsFromKnown(
+  "https://youtu.be/9TKqqBCmDHA",
+  "https://soundcloud.com/johnsummit/john-summit-live-lollapalooza",
+  "https://www.mixcloud.com/Claptone/clapcast-576/",
+);
+assert.equal(known.youtubeUrl, "https://www.youtube.com/watch?v=9TKqqBCmDHA");
+assert.equal(
+  known.soundcloudUrl,
+  "https://soundcloud.com/johnsummit/john-summit-live-lollapalooza",
+);
+assert.equal(
+  known.mixcloudUrl,
+  "https://www.mixcloud.com/claptone/clapcast-576/",
+);
+
+const filled = hostUrlFillNull(
+  { youtubeUrl: "https://www.youtube.com/watch?v=9TKqqBCmDHA" },
+  {
+    youtubeUrl: "https://www.youtube.com/watch?v=otherVideo1",
+    soundcloudUrl: "https://soundcloud.com/johnsummit/john-summit-live-lollapalooza",
+  },
+);
+assert.equal(filled.youtubeUrl, undefined);
+assert.equal(
+  filled.soundcloudUrl,
+  "https://soundcloud.com/johnsummit/john-summit-live-lollapalooza",
 );
 
 console.log("playback.test.ts ok");

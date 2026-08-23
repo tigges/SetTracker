@@ -4,6 +4,7 @@ import {
   allowMixesdbLiveFetch,
   playsFromDescriptionMixesdbLinks,
   playsFromMixesdbUrls,
+  playsFromAnyPlayerMixesdbLookup,
   playsFromPlaybackMixesdbLookup,
 } from "./client";
 
@@ -36,6 +37,15 @@ describe("MixesDB live fetch gate", () => {
       3600,
     );
     assert.deepEqual(fromPlayer, []);
+    const fromHosts = await playsFromAnyPlayerMixesdbLookup(
+      [
+        "https://www.youtube.com/watch?v=ViNSjYircPs",
+        "https://soundcloud.com/johnsummit/john-summit-live-lollapalooza",
+        "https://www.mixcloud.com/claptone/clapcast-576/",
+      ],
+      3600,
+    );
+    assert.deepEqual(fromHosts, []);
     if (prev === undefined) delete process.env.INGEST_ALLOW_MIXESDB_FETCH;
     else process.env.INGEST_ALLOW_MIXESDB_FETCH = prev;
   });

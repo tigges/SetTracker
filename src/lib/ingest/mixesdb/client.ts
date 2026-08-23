@@ -172,6 +172,28 @@ function datedMixTitlesFromSearch(body: string): string[] {
  * Accepts only a unique dated mix page whose wikitext contains the token.
  * Empty unless live fetch is opted in. Never searches by artist name.
  */
+/**
+ * Try MixesDB player-URL search on each official host we already store
+ * (SC / YT / Mixcloud). First unique dated list wins. Never invents
+ * clocks or searches by artist name.
+ */
+export async function playsFromAnyPlayerMixesdbLookup(
+  urls: Array<string | null | undefined>,
+  durationSec: number,
+): Promise<RawPlay[]> {
+  const seen = new Set<string>();
+  let best: RawPlay[] = [];
+  for (const url of urls) {
+    const q = mixesdbPlayerQuery(url);
+    if (!q || seen.has(q.insource)) continue;
+    seen.add(q.insource);
+    const plays = await playsFromPlaybackMixesdbLookup(url, durationSec);
+    if (plays.length > best.length) best = plays;
+    if (best.length >= 12) break;
+  }
+  return best;
+}
+
 export async function playsFromPlaybackMixesdbLookup(
   playbackUrl: string | null | undefined,
   durationSec: number,

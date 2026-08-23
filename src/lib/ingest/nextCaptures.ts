@@ -13,10 +13,10 @@ import type { DensitySeverity } from "../setDensity";
 import { SET_SLUG_ALIASES } from "./sourceRemaps";
 import { TRACKLIST_1001_BY_SOURCE_SLUG } from "./tracklists1001/festival2026";
 import { isSecondaryPlaybackSlug } from "./tracklists1001/seeds";
-import { search1001 } from "../search1001";
+import { nativeCaptureSearchUrl, search1001 } from "../search1001";
 import { searchMixesdbByPlayerUrl } from "../searchMixesdb";
 
-export { search1001, searchMixesdbByPlayerUrl };
+export { nativeCaptureSearchUrl, search1001, searchMixesdbByPlayerUrl };
 
 export type CapturePreset = {
   label: string;
@@ -122,6 +122,20 @@ type Top100Row = {
 
 function mappedSlugs(): Set<string> {
   return new Set(Object.keys(TRACKLIST_1001_BY_SOURCE_SLUG));
+}
+
+/** Relive extras from the committed snapshot — drop wired slugs + remap Google. */
+export function extrasFromCaptureSnapshot(snapshot: {
+  presets?: CapturePreset[];
+}): CapturePreset[] {
+  const mapped = mappedSlugs();
+  return (snapshot.presets ?? [])
+    .filter((p) => p.reason === "relive:official-unwired")
+    .filter((p) => !mapped.has(p.slug) && !isSecondaryPlaybackSlug(p.slug))
+    .map((p) => ({
+      ...p,
+      searchUrl: nativeCaptureSearchUrl(p.searchUrl, p.label),
+    }));
 }
 
 export function tlNameFromLabel(label: string): string {
@@ -342,9 +356,13 @@ export function buildCaptureQueueFromNeeds(
 
   const push = (p: CapturePreset) => {
     if (seen.has(p.slug) || mapped.has(p.slug)) return;
+    if (isSecondaryPlaybackSlug(p.slug)) return;
     if (out.length >= limit) return;
     seen.add(p.slug);
-    out.push(p);
+    out.push({
+      ...p,
+      searchUrl: nativeCaptureSearchUrl(p.searchUrl, p.label),
+    });
   };
 
   for (const p of PRIORITY_CAPTURES) push(p);
@@ -389,9 +407,13 @@ export function buildNextCaptures(
 
   const push = (p: CapturePreset) => {
     if (seen.has(p.slug) || mapped.has(p.slug)) return;
+    if (isSecondaryPlaybackSlug(p.slug)) return;
     if (out.length >= limit) return;
     seen.add(p.slug);
-    out.push(p);
+    out.push({
+      ...p,
+      searchUrl: nativeCaptureSearchUrl(p.searchUrl, p.label),
+    });
   };
 
   for (const p of PRIORITY_CAPTURES) push(p);
