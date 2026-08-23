@@ -234,6 +234,60 @@ export function hearthisSeekUrl(
   return `${base}#t=${Math.floor(startSec)}`;
 }
 
+/** Canonical `watch?v=` URL from a YouTube link. Never a search page. */
+export function youtubeWatchUrl(url: string | null | undefined): string | null {
+  if (!url?.trim()) return null;
+  const id = youtubeId(url.trim());
+  if (!id) return null;
+  return `https://www.youtube.com/watch?v=${id}`;
+}
+
+/** Public SoundCloud permalink (never the widget / API host). */
+export function soundcloudPageUrl(
+  url: string | null | undefined,
+): string | null {
+  if (!url?.trim()) return null;
+  if (detectPlaybackHost(url) !== "soundcloud") return null;
+  try {
+    const u = new URL(url.trim());
+    const host = u.hostname.replace(/^www\./, "").toLowerCase();
+    if (host === "w.soundcloud.com" || host === "api.soundcloud.com") {
+      return null;
+    }
+    u.hash = "";
+    return u.toString();
+  } catch {
+    return null;
+  }
+}
+
+function firstMatch<T>(
+  urls: Array<string | null | undefined>,
+  pick: (url: string) => T | null,
+): T | null {
+  for (const raw of urls) {
+    const hit = pick(raw ?? "");
+    if (hit) return hit;
+  }
+  return null;
+}
+
+/** YouTube watch URL from playback or source, if either is a real video. */
+export function setYoutubeWatchUrl(
+  playbackUrl?: string | null,
+  sourceUrl?: string | null,
+): string | null {
+  return firstMatch([playbackUrl, sourceUrl], youtubeWatchUrl);
+}
+
+/** SoundCloud permalink from playback or source. */
+export function setSoundcloudPageUrl(
+  playbackUrl?: string | null,
+  sourceUrl?: string | null,
+): string | null {
+  return firstMatch([playbackUrl, sourceUrl], soundcloudPageUrl);
+}
+
 /** SoundCloud permalink with an optional `#t=` cue (seconds). */
 export function soundcloudSeekUrl(
   page: string,

@@ -37,5 +37,19 @@ describe("brandHosts", () => {
       }),
       "Loofy b2b D.O.D",
     );
+    assert.equal(
+      setHostHeadline({
+        primaryDj: { name: "Lucas & Steve", slug: "lucas-steve" },
+        collaborators: [],
+      }),
+      "Lucas & Steve",
+    );
+    assert.equal(
+      setHostHeadline({
+        primaryDj: { name: "Lucas & Steve", slug: "lucas-steve" },
+        collaborators: [{ name: "Mike Williams" }],
+      }),
+      "Lucas & Steve b2b Mike Williams",
+    );
   });
 });

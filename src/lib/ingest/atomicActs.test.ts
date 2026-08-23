@@ -1,7 +1,32 @@
 import assert from "node:assert/strict";
-import { ATOMIC_ACTS, atomicActPattern, shieldAtomicActs } from "./atomicActs";
+import {
+  ATOMIC_ACTS,
+  atomicActPattern,
+  isAtomicActJunkSlug,
+  remapAtomicActHalfSlug,
+  remapAtomicActPin,
+  shieldAtomicActs,
+} from "./atomicActs";
 
 assert.ok(ATOMIC_ACTS.some((a) => a.slug === "walker-royce"));
+const lucasSteve = ATOMIC_ACTS.find((a) => a.slug === "lucas-steve");
+assert.ok(lucasSteve);
+assert.deepEqual(lucasSteve.junkSlugs, ["lucas"]);
+assert.equal(lucasSteve.junkSlugs.includes("steve"), false);
+assert.equal(lucasSteve.homeCity, "Maastricht, Netherlands");
+assert.equal(isAtomicActJunkSlug("lucas"), true);
+assert.equal(isAtomicActJunkSlug("steve"), false);
+assert.equal(isAtomicActJunkSlug("steve-aoki"), false);
+assert.equal(remapAtomicActHalfSlug("lucas"), "lucas-steve");
+assert.equal(remapAtomicActHalfSlug("steve"), undefined);
+assert.deepEqual(remapAtomicActPin("lucas", "Lucas"), {
+  slug: "lucas-steve",
+  name: "Lucas & Steve",
+});
+assert.deepEqual(remapAtomicActPin("lucas-steve", "Lucas & Steve"), {
+  slug: "lucas-steve",
+  name: "Lucas & Steve",
+});
 
 const re = atomicActPattern("Walker & Royce");
 assert.ok(re.test("Walker & Royce | Fresh Start SF 2026"));

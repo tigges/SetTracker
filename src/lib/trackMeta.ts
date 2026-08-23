@@ -134,19 +134,22 @@ export function beatportBuyability(opts: {
 export type BeatportCoverage = {
   identified: number;
   buyable: number;
+  spotifyDirect: number;
 };
 
-/** Identified rows that have a real Beatport /track page. */
+/** Identified rows that have a real Beatport / Spotify /track page. */
 export function beatportCoverage(
   plays: {
     idStatus: string;
     title: string;
     artistName?: string | null;
     beatportUrl?: string | null;
+    spotifyUrl?: string | null;
   }[],
 ): BeatportCoverage {
   let identified = 0;
   let buyable = 0;
+  let spotifyDirect = 0;
   for (const p of plays) {
     if (
       p.idStatus !== "identified" &&
@@ -156,8 +159,31 @@ export function beatportCoverage(
     }
     identified += 1;
     if (beatportBuyability(p) === "buy") buyable += 1;
+    if (canonicalSpotifyUrl(p.spotifyUrl)) spotifyDirect += 1;
   }
-  return { identified, buyable };
+  return { identified, buyable, spotifyDirect };
+}
+
+export type StoreLinkCoverage = {
+  total: number;
+  beatportDirect: number;
+  spotifyDirect: number;
+};
+
+/** Catalog tracks with a canonical store /track URL (not a search page). */
+export function storeLinkCoverage(
+  tracks: {
+    beatportUrl?: string | null;
+    spotifyUrl?: string | null;
+  }[],
+): StoreLinkCoverage {
+  let beatportDirect = 0;
+  let spotifyDirect = 0;
+  for (const t of tracks) {
+    if (canonicalBeatportUrl(t.beatportUrl)) beatportDirect += 1;
+    if (canonicalSpotifyUrl(t.spotifyUrl)) spotifyDirect += 1;
+  }
+  return { total: tracks.length, beatportDirect, spotifyDirect };
 }
 
 /** Stable key for copying store IDs across identical catalog tracks. */

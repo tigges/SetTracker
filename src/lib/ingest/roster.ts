@@ -1818,7 +1818,7 @@ export const ARTIST_ROSTER_CURATED: ArtistRosterEntry[] = [
     genre: "Progressive House",
     accent: "#9b5de5",
     youtube: { handle: "@KAAZEOfficial", status: "ok" },
-    soundcloud: { permalink: "kaaze", status: "ok" },
+    soundcloud: { permalink: "iamkaaze", status: "ok" },
     priority: "high",
   },
   {

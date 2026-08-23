@@ -1,6 +1,7 @@
 import { isJunkArtistName } from "@/lib/artistName";
 import { playablePlaybackUrl } from "@/lib/playback";
 import { isBrandHostSlug } from "@/lib/brandHosts";
+import { isAtomicActJunkSlug } from "@/lib/ingest/atomicActs";
 import { isProducerHiddenSlug } from "@/lib/ingest/producerDjReview.data";
 import { isCatalogWorkDj, isTop100DjSlug } from "@/lib/djCatalog";
 import { loadDjMagTop100RankBySlug } from "@/lib/djmagTop100";
@@ -23,6 +24,7 @@ import {
   canonicalBeatportArtistUrl,
   resolveDjBeatport,
 } from "@/lib/beatportArtist";
+import { isWeakOfficialUrl } from "@/lib/officialUrls";
 import {
   canonicalBeatportUrl,
   resolveBeatportUrl,
@@ -976,7 +978,10 @@ export async function getDjBySlug(slug: string): Promise<DjProfile | null> {
       youtube: dj.youtube,
       instagram: dj.instagram,
       twitter: dj.twitter,
-      website: canonicalBeatportArtistUrl(dj.website) ? null : dj.website,
+      website:
+        canonicalBeatportArtistUrl(dj.website) || isWeakOfficialUrl(dj.website)
+          ? null
+          : dj.website,
       beatport: resolveDjBeatport({
         beatport: dj.beatport,
         website: dj.website,
@@ -988,7 +993,7 @@ export async function getDjBySlug(slug: string): Promise<DjProfile | null> {
       name: s.name,
       setCount: s._count.sets,
     })),
-    genre: modeGenre(sets.map((s) => s.genre)),
+    genre: normalizeGenre(dj.genre) ?? modeGenre(sets.map((s) => s.genre)),
     upcomingNights: await upcomingNightsForDj({
       slug: dj.slug,
       name: dj.name,
@@ -1180,6 +1185,7 @@ export async function getDjList(): Promise<DjListItem[]> {
     const isJunk =
       isBrandHostSlug(d.slug) ||
       isProducerHiddenSlug(d.slug) ||
+      isAtomicActJunkSlug(d.slug) ||
       isJunkArtistName(d.name) ||
       isJunkArtistName(d.slug.replace(/-/g, " ")) ||
       /^view-artist-details-for-/.test(d.slug);

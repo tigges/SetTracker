@@ -8,8 +8,12 @@ import {
   playablePlaybackUrl,
   playbackUrlFromSource,
   resolvePlaybackTarget,
+  setSoundcloudPageUrl,
+  setYoutubeWatchUrl,
+  soundcloudPageUrl,
   soundcloudSeekUrl,
   youtubeSeekUrl,
+  youtubeWatchUrl,
 } from "./playback";
 
 assert.equal(detectPlaybackHost("https://soundcloud.com/a/b"), "soundcloud");
@@ -131,5 +135,30 @@ assert.equal(
   "https://hearthis.at/a/b/#t=125",
 );
 assert.equal(hearthisSeekUrl("https://hearthis.at/a/b/", 0), "https://hearthis.at/a/b/");
+
+assert.equal(
+  youtubeWatchUrl("https://youtu.be/dQw4w9WgXcQ"),
+  "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+);
+assert.equal(youtubeWatchUrl("https://soundcloud.com/a/b"), null);
+assert.equal(soundcloudPageUrl("https://soundcloud.com/a/b#t=9"), "https://soundcloud.com/a/b");
+assert.equal(
+  soundcloudPageUrl("https://w.soundcloud.com/player/?url=https://soundcloud.com/a/b"),
+  null,
+);
+assert.equal(
+  setYoutubeWatchUrl(
+    "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "https://soundcloud.com/a/b",
+  ),
+  "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+);
+assert.equal(
+  setSoundcloudPageUrl(
+    "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "https://soundcloud.com/a/b",
+  ),
+  "https://soundcloud.com/a/b",
+);
 
 console.log("playback.test.ts ok");

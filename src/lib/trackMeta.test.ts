@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import {
   beatportBuyability,
   beatportCoverage,
+  storeLinkCoverage,
   beatportSearchUrl,
   beatportTrackHref,
   bandcampSearchUrl,
@@ -147,5 +148,21 @@ const coverage = beatportCoverage([
 ]);
 assert.equal(coverage.identified, 3);
 assert.equal(coverage.buyable, 2);
+assert.equal(coverage.spotifyDirect, 0);
+
+const stores = storeLinkCoverage([
+  {
+    beatportUrl: "https://www.beatport.com/track/pressure/1",
+    spotifyUrl: "https://open.spotify.com/track/2ISSQPb9LHHiV6ng2NXosL",
+  },
+  {
+    beatportUrl: "https://www.beatport.com/search/tracks?q=Rave",
+    spotifyUrl: "https://open.spotify.com/search/Rave",
+  },
+  { beatportUrl: null, spotifyUrl: null },
+]);
+assert.equal(stores.total, 3);
+assert.equal(stores.beatportDirect, 1);
+assert.equal(stores.spotifyDirect, 1);
 
 console.log("trackMeta.test.ts ok");

@@ -22,7 +22,6 @@ import {
   type IdStatus,
 } from "@/lib/status";
 import type { PlayRow } from "@/lib/queries";
-import { beatportBuyability } from "@/lib/trackMeta";
 import { useSetSeek } from "@/components/SetListen";
 import { cueIndexAtRatio, playSpans, stripIsDense } from "@/lib/setStrip";
 
@@ -61,6 +60,7 @@ export function SetTimeline({
   setSlug,
   setGenre,
   setSourceUrl,
+  setPlaybackUrl,
   children,
 }: {
   plays: PlayRow[];
@@ -69,8 +69,10 @@ export function SetTimeline({
   setSlug: string;
   /** When set, per-track genre is only shown if it differs (avoids clutter). */
   setGenre?: string | null;
-  /** Real upload URL — used for SC listen pill instead of search guesses. */
+  /** Provenance / upload URL — used for YT / SC cue pills. */
   setSourceUrl?: string | null;
+  /** Playable host URL when it differs from source (official YT vs SC upload). */
+  setPlaybackUrl?: string | null;
   /** Rendered between the set strip and the tracklist (legend, export). */
   children?: ReactNode;
 }) {
@@ -371,13 +373,15 @@ export function SetTimeline({
                         beatportUrl: p.beatportUrl,
                         spotifyUrl: p.spotifyUrl,
                         setSourceUrl,
+                        setPlaybackUrl,
+                        startSec: p.timestamp,
                       });
-                      const buyability = beatportBuyability({
-                        idStatus: p.idStatus,
-                        title: p.title,
-                        artistName: p.artistName,
-                        beatportUrl: p.beatportUrl,
-                      });
+                      const hasLinks =
+                        links.youtube ||
+                        links.spotify ||
+                        links.beatport ||
+                        links.soundcloud;
+                      if (!hasLinks) return null;
                       const pill =
                         "grid h-6 place-items-center rounded-md border border-line px-1.5 text-[10px] text-muted2 transition-colors hover:border-brand hover:text-brand";
                       return (
@@ -385,58 +389,44 @@ export function SetTimeline({
                           className="flex flex-none items-center gap-1"
                           onClick={(e) => e.stopPropagation()}
                         >
-                          <a
-                            href={links.youtube}
-                            target="_blank"
-                            rel="noreferrer"
-                            title="Play / search on YouTube"
-                            className={`${pill} w-6`}
-                            aria-label="Play on YouTube"
-                          >
-                            ▶
-                          </a>
-                          <a
-                            href={links.spotify}
-                            target="_blank"
-                            rel="noreferrer"
-                            title={
-                              links.spotifyIsCanonical
-                                ? "Open on Spotify"
-                                : "Search on Spotify"
-                            }
-                            className={`${pill} hidden sm:grid`}
-                          >
-                            SP
-                          </a>
-                          <a
-                            href={links.discogs}
-                            target="_blank"
-                            rel="noreferrer"
-                            title="Search on Discogs"
-                            className={`${pill} hidden sm:grid`}
-                          >
-                            DC
-                          </a>
-                          <a
-                            href={links.bandcamp}
-                            target="_blank"
-                            rel="noreferrer"
-                            title="Search on Bandcamp"
-                            className={`${pill} hidden sm:grid`}
-                          >
-                            BC
-                          </a>
-                          {buyability !== "unavailable" && (
+                          {links.youtube && (
+                            <a
+                              href={links.youtube}
+                              target="_blank"
+                              rel="noreferrer"
+                              title="Play this cue on YouTube"
+                              className={`${pill} w-6`}
+                              aria-label="Play this cue on YouTube"
+                            >
+                              ▶
+                            </a>
+                          )}
+                          {links.spotify && (
+                            <a
+                              href={links.spotify}
+                              target="_blank"
+                              rel="noreferrer"
+                              title={
+                                links.spotifyIsCanonical
+                                  ? "Open track on Spotify"
+                                  : "Search on Spotify"
+                              }
+                              className={`${pill} hidden sm:grid`}
+                            >
+                              SP
+                            </a>
+                          )}
+                          {links.beatport && (
                             <a
                               href={links.beatport}
                               target="_blank"
                               rel="noreferrer"
                               title={
-                                buyability === "buy"
+                                links.beatportIsCanonical
                                   ? "Buy on Beatport"
                                   : "Search on Beatport"
                               }
-                              className={`${pill} ${buyability === "buy" ? "" : "hidden sm:grid"}`}
+                              className={`${pill} ${links.beatportIsCanonical ? "" : "hidden sm:grid"}`}
                             >
                               BP
                             </a>
@@ -446,7 +436,7 @@ export function SetTimeline({
                               href={links.soundcloud}
                               target="_blank"
                               rel="noreferrer"
-                              title="Open set on SoundCloud"
+                              title="Play this cue on SoundCloud"
                               className={pill}
                             >
                               SC

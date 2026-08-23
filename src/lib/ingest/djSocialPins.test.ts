@@ -372,5 +372,27 @@ assert.match(bySlug.cuebrick!.twitter!, /(?:twitter|x)\.com\/cuebrick_dj/);
 assert.match(bySlug.cuebrick!.youtube!, /@cuebrick/i);
 assert.equal(hintForName("Cuebrick")?.soundcloudPermalink, "cuebrick");
 assert.equal(hintForName("Cuebrick")?.youtubeHandle, "@Cuebrick");
+assert.match(bySlug["lucas-steve"]!.bio, /Lucas de Wert/);
+assert.match(bySlug["lucas-steve"]!.bio, /Steven Jansen/);
+assert.match(bySlug["lucas-steve"]!.website!, /lucasandsteve\.com/);
+
+assert.match(bySlug["i-hate-models"]!.website!, /ihatemodelsmusic\.com/);
+assert.match(bySlug.marnik!.website!, /marnikofficial\.com/);
+assert.equal(bySlug["vini-vici"]!.website, null);
+assert.equal(bySlug.kaaze!.website, null);
+assert.equal(bySlug.fantasm!.website, null);
+assert.equal(bySlug.faustix!.website, null);
+assert.match(bySlug["vini-vici"]!.beatport!, /beatport\.com\/artist\/vini-vici\/370281/);
+assert.match(bySlug.kaaze!.beatport!, /beatport\.com\/artist\/kaaze\/384598/);
+assert.match(bySlug.kaaze!.soundcloud!, /soundcloud\.com\/iamkaaze/);
+assert.match(bySlug.faustix!.bio, /Diplo/);
+assert.match(bySlug["vini-vici"]!.bio, /Aviram Saharai/);
+for (const pin of DJ_SOCIAL_PINS) {
+  assert.equal(
+    Boolean(pin.website && /djmag\.com/i.test(pin.website)),
+    false,
+    `${pin.slug} must not use a DJ Mag rank page as website`,
+  );
+}
 
 console.log("djSocialPins.test.ts ok");

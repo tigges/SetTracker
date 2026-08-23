@@ -1,11 +1,15 @@
 // Status color semantics + provenance labels, used everywhere in the UI.
 
 import {
+  setSoundcloudPageUrl,
+  setYoutubeWatchUrl,
+  soundcloudSeekUrl,
+  youtubeSeekUrl,
+} from "./playback";
+import {
   beatportSearchUrl,
-  bandcampSearchUrl,
   canonicalBeatportUrl,
   canonicalSpotifyUrl,
-  discogsSearchUrl,
   spotifySearchUrl,
 } from "./trackMeta";
 
@@ -115,33 +119,44 @@ export function fmtTimestamp(sec: number): string {
   return h > 0 ? `${h}:${mm}:${ss}` : `${mm}:${ss}`;
 }
 
-// External "listen" deep links. Prefer canonical URLs; avoid SC search guesses
-// (they often land on the wrong upload / gated page).
+export type ListenLinkOpts = {
+  beatportUrl?: string | null;
+  spotifyUrl?: string | null;
+  setPlaybackUrl?: string | null;
+  setSourceUrl?: string | null;
+  startSec?: number | null;
+};
+
+export type ListenLinks = {
+  youtube: string | null;
+  beatport: string | null;
+  beatportIsCanonical: boolean;
+  spotify: string | null;
+  spotifyIsCanonical: boolean;
+  soundcloud: string | null;
+};
+
+/**
+ * External listen links. YouTube / SoundCloud open the actual set at this cue.
+ * Spotify / Beatport prefer a stored /track URL and fall back to search so the
+ * chip stays visible while we fill-null toward 100% direct links.
+ */
 export function listenLinks(
   title: string,
   artist?: string | null,
-  opts?: {
-    beatportUrl?: string | null;
-    setSourceUrl?: string | null;
-    spotifyUrl?: string | null;
-  },
-) {
-  const src = opts?.setSourceUrl ?? "";
-  const scFromSet = /soundcloud\.com\//i.test(src) ? src : null;
+  opts?: ListenLinkOpts,
+): ListenLinks {
+  const ytWatch = setYoutubeWatchUrl(opts?.setPlaybackUrl, opts?.setSourceUrl);
+  const scPage = setSoundcloudPageUrl(opts?.setPlaybackUrl, opts?.setSourceUrl);
   const beatportCanonical = canonicalBeatportUrl(opts?.beatportUrl);
   const spotifyCanonical = canonicalSpotifyUrl(opts?.spotifyUrl);
   return {
-    youtube: `https://www.youtube.com/results?search_query=${encodeURIComponent(
-      [artist, title].filter(Boolean).join(" ").trim(),
-    )}`,
+    youtube: ytWatch ? youtubeSeekUrl(ytWatch, opts?.startSec) : null,
     beatport: beatportCanonical ?? beatportSearchUrl(title, artist),
     beatportIsCanonical: !!beatportCanonical,
     spotify: spotifyCanonical ?? spotifySearchUrl(title, artist),
     spotifyIsCanonical: !!spotifyCanonical,
-    discogs: discogsSearchUrl(title, artist),
-    bandcamp: bandcampSearchUrl(title, artist),
-    // Only link SC when we have the set's real upload URL — never a name search.
-    soundcloud: scFromSet,
+    soundcloud: scPage ? soundcloudSeekUrl(scPage, opts?.startSec) : null,
   };
 }
 

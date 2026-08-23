@@ -117,7 +117,7 @@ body {
     padding: 1.1rem 1.2rem 1.2rem;
     margin-inline: -0.35rem;
     border-radius: 18px;
-    /* Brighter (panel) at the logo, darker well at the setgraph. */
+    /* Brighter (panel) at the wordmark, darker well at the setgraph. */
     background: linear-gradient(
       180deg,
       color-mix(in srgb, var(--panel-2) 72%, transparent) 0%,
@@ -132,6 +132,7 @@ body {
   }
 }
 
+.hero-wordmark,
 .hero-title {
   color: var(--ink);
   text-shadow:

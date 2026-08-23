@@ -15,6 +15,7 @@ import {
   canonicalBeatportArtistUrl,
   resolveDjBeatport,
 } from "../beatportArtist";
+import { isWeakOfficialUrl } from "../officialUrls";
 import { youtubeChannelUrl } from "../social";
 import { slugify } from "./types";
 import { DJ_SOCIAL_PINS, type DjSocialPin } from "./djSocialPins.data";
@@ -29,6 +30,8 @@ export async function applyDjSocialPins(prisma: PrismaClient): Promise<number> {
     const existing = await prisma.dj.findUnique({ where: { slug: pin.slug } });
     const beatport = resolveDjBeatport(pin);
     const websiteIsBeatport = !!canonicalBeatportArtistUrl(pin.website);
+    const website =
+      websiteIsBeatport || isWeakOfficialUrl(pin.website) ? null : pin.website;
     const data = {
       name: pin.name,
       accent: pin.accent,
@@ -36,7 +39,7 @@ export async function applyDjSocialPins(prisma: PrismaClient): Promise<number> {
       youtube: pin.youtube ?? null,
       instagram: pin.instagram ?? null,
       twitter: pin.twitter ?? null,
-      website: websiteIsBeatport ? null : pin.website,
+      website,
       beatport,
       bio: pin.bio,
     };

@@ -9,6 +9,7 @@ import {
 } from "@/lib/exportEntities";
 import { resolveFeedRanks } from "@/lib/feedPriorityResolve";
 import { STATUS_META, STATUS_ORDER, type IdStatus } from "@/lib/status";
+import { storeLinkCoverage } from "@/lib/trackMeta";
 import { isVenueListed } from "@/lib/venueBrowse";
 import {
   isDjOnHealthBar,
@@ -74,6 +75,7 @@ export type StatsHealth = {
   tracks: {
     total: number;
     slices: HealthSlice[];
+    spotify: HealthSlice[];
     actions: HealthAction[];
   };
   playbook: {
@@ -134,7 +136,7 @@ function placeGaps(places: PlaceHealthInput[]) {
 
 export async function getStatsHealth(): Promise<StatsHealth> {
   const top100 = loadDjMagTop100RankBySlug();
-  const [djs, events, sets, playStatus, trackTotal, tracksWithBeatport, tracksWithIsrc, tracksNoArt] =
+  const [djs, events, sets, playStatus, trackUrls, tracksWithIsrc, tracksNoArt] =
     await Promise.all([
       getDjList(),
       prisma.event.findMany({
@@ -169,8 +171,9 @@ export async function getStatsHealth(): Promise<StatsHealth> {
         by: ["idStatus"],
         _count: { _all: true },
       }),
-      prisma.track.count(),
-      prisma.track.count({ where: { beatportUrl: { not: null } } }),
+      prisma.track.findMany({
+        select: { beatportUrl: true, spotifyUrl: true },
+      }),
       prisma.track.count({ where: { isrc: { not: null } } }),
       prisma.track.count({ where: { imageUrl: null } }),
     ]);
@@ -320,7 +323,11 @@ export async function getStatsHealth(): Promise<StatsHealth> {
       Number(b.onChart) - Number(a.onChart) || a.name.localeCompare(b.name),
   );
 
+  const storeLinks = storeLinkCoverage(trackUrls);
+  const trackTotal = storeLinks.total;
   const tracksNeedIsrc = Math.max(0, trackTotal - tracksWithIsrc);
+  const beatportSearch = Math.max(0, trackTotal - storeLinks.beatportDirect);
+  const spotifySearch = Math.max(0, trackTotal - storeLinks.spotifyDirect);
 
   return {
     chartNote: `★ current Top 100 · DJs ${ATLAS_DJ_YEAR} · clubs / fests ${ATLAS_YEAR}`,
@@ -397,15 +404,31 @@ export async function getStatsHealth(): Promise<StatsHealth> {
       slices: [
         {
           key: "beatport",
-          label: "on Beatport",
-          count: tracksWithBeatport,
+          label: "Beatport /track",
+          count: storeLinks.beatportDirect,
           color: "var(--brand)",
           star: 0,
         },
         {
           key: "other",
-          label: "not on Beatport",
-          count: Math.max(0, trackTotal - tracksWithBeatport),
+          label: "Beatport search",
+          count: beatportSearch,
+          color: "var(--grey)",
+          star: 0,
+        },
+      ],
+      spotify: [
+        {
+          key: "spotify_direct",
+          label: "direct",
+          count: storeLinks.spotifyDirect,
+          color: "var(--teal)",
+          star: 0,
+        },
+        {
+          key: "spotify_search",
+          label: "search",
+          count: spotifySearch,
           color: "var(--grey)",
           star: 0,
         },
@@ -415,7 +438,12 @@ export async function getStatsHealth(): Promise<StatsHealth> {
         {
           href: "#tracks",
           label: "Beatport / ISRC enrich",
-          count: Math.max(0, trackTotal - tracksWithBeatport),
+          count: beatportSearch,
+        },
+        {
+          href: "#tracks",
+          label: "Spotify /track enrich",
+          count: spotifySearch,
         },
         {
           href: "/exports/tracks-need-id.csv",

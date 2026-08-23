@@ -15,6 +15,10 @@ describe("isWeakOfficialUrl", () => {
   it("treats ticket / directory hosts as weak", () => {
     assert.equal(isWeakOfficialUrl("https://ra.co/clubs/123"), true);
     assert.equal(isWeakOfficialUrl("https://ra.co/dj/korolova"), true);
+    assert.equal(
+      isWeakOfficialUrl("https://technomusicworld.com/artist/fantasm/about"),
+      true,
+    );
     assert.equal(isWeakOfficialUrl("https://www.residentadvisor.net/club.aspx?id=1"), true);
     assert.equal(isWeakOfficialUrl("https://dice.fm/venue/fabric-london"), true);
     assert.equal(isWeakOfficialUrl("https://shotgun.live/venues/fabric"), true);

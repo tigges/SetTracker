@@ -8,6 +8,8 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import {
+  loadEntityCompletePins,
+  mergeEntityCompletePins,
   parseEntityCompleteCsv,
   pinsFromAudit,
 } from "../src/lib/ingest/entityCompletePins";
@@ -23,7 +25,19 @@ const reportPath = join(
 
 async function main() {
   const text = await readFile(csvPath, "utf8");
-  const { pins, dropped } = pinsFromAudit(parseEntityCompleteCsv(text));
+  const { pins: incoming, dropped } = pinsFromAudit(parseEntityCompleteCsv(text));
+  const pins = mergeEntityCompletePins(loadEntityCompletePins(), incoming);
+  const fields = [
+    "imageUrl",
+    "website",
+    "instagram",
+    "youtube",
+    "soundcloud",
+    "twitter",
+    "homeCity",
+    "bio",
+    "genre",
+  ] as const;
   await mkdir(dirname(pinsPath), { recursive: true });
   await writeFile(pinsPath, `${JSON.stringify(pins, null, 2)}\n`);
   await writeFile(
@@ -32,14 +46,11 @@ async function main() {
       {
         source: csvPath,
         acceptedFields: pins.reduce(
-          (n, p) =>
-            n +
-            ["imageUrl", "website", "instagram", "youtube", "soundcloud", "twitter"].filter(
-              (k) => p[k as keyof typeof p],
-            ).length,
+          (n, p) => n + fields.filter((k) => p[k]).length,
           0,
         ),
         pinRows: pins.length,
+        incomingRows: incoming.length,
         dropped: dropped.length,
         pins,
         drops: dropped,
@@ -49,7 +60,7 @@ async function main() {
     )}\n`,
   );
   console.log(
-    `entity-complete ${pins.length} pins · ${dropped.length} dropped → ${pinsPath}`,
+    `entity-complete ${pins.length} pins · ${incoming.length} incoming · ${dropped.length} dropped → ${pinsPath}`,
   );
 }
 
