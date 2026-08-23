@@ -8,6 +8,7 @@ import {
   bandcampSearchUrl,
   canonicalBeatportUrl,
   canonicalSpotifyUrl,
+  spotifyTrackUri,
   discogsSearchUrl,
   isLikelyUnbuyable,
   normalizeIsrc,
@@ -66,6 +67,11 @@ assert.equal(
   "https://open.spotify.com/track/2ISSQPb9LHHiV6ng2NXosL",
 );
 assert.equal(canonicalSpotifyUrl("https://open.spotify.com/search/Pressure"), null);
+assert.equal(
+  spotifyTrackUri("https://open.spotify.com/track/2ISSQPb9LHHiV6ng2NXosL?si=x"),
+  "spotify:track:2ISSQPb9LHHiV6ng2NXosL",
+);
+assert.equal(spotifyTrackUri("https://open.spotify.com/search/Pressure"), null);
 assert.ok(discogsSearchUrl("Pressure", "AC Slater").includes("discogs.com/search"));
 assert.ok(bandcampSearchUrl("Pressure", "AC Slater").includes("bandcamp.com/search"));
 

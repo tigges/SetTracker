@@ -25,34 +25,14 @@ describe("fmtDate", () => {
 });
 
 describe("listenLinks", () => {
-  it("timestamps SoundCloud to the set upload and keeps canonical Beatport", () => {
+  it("uses a canonical Beatport /track URL when stored", () => {
     const links = listenLinks("Pressure", "AC Slater", {
       beatportUrl: "https://www.beatport.com/track/pressure/12345",
-      setSourceUrl: "https://soundcloud.com/acslater/set",
-      startSec: 93,
     });
     assert.equal(links.beatport, "https://www.beatport.com/track/pressure/12345");
     assert.equal(links.beatportIsCanonical, true);
-    assert.equal(
-      links.soundcloud,
-      "https://soundcloud.com/acslater/set#t=93",
-    );
-    assert.equal(links.youtube, null);
     assert.match(links.spotify, /open\.spotify\.com\/search/);
     assert.equal(links.spotifyIsCanonical, false);
-  });
-
-  it("timestamps YouTube playback and can keep a SoundCloud source", () => {
-    const links = listenLinks("Pressure", "AC Slater", {
-      setPlaybackUrl: "https://youtu.be/dQw4w9WgXcQ",
-      setSourceUrl: "https://soundcloud.com/acslater/set",
-      startSec: 40,
-    });
-    assert.equal(
-      links.youtube,
-      "https://www.youtube.com/watch?v=dQw4w9WgXcQ&t=40s",
-    );
-    assert.equal(links.soundcloud, "https://soundcloud.com/acslater/set#t=40");
   });
 
   it("uses a canonical Spotify track URL when stored", () => {
@@ -82,7 +62,5 @@ describe("listenLinks", () => {
     assert.equal(links.beatportIsCanonical, false);
     assert.match(links.spotify, /open\.spotify\.com\/search/);
     assert.equal(links.spotifyIsCanonical, false);
-    assert.equal(links.youtube, null);
-    assert.equal(links.soundcloud, null);
   });
 });

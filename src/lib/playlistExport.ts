@@ -3,7 +3,11 @@
  * Static-site friendly: downloads only — no Spotify/Beatport OAuth.
  */
 
-import { canonicalBeatportUrl, canonicalSpotifyUrl } from "@/lib/trackMeta";
+import {
+  canonicalBeatportUrl,
+  canonicalSpotifyUrl,
+  spotifyTrackUri,
+} from "@/lib/trackMeta";
 
 export type ExportPlay = {
   position: number;
@@ -80,6 +84,7 @@ export function buildTracklistCsv(
     "isrc",
     "beatport_url",
     "spotify_url",
+    "spotify_uri",
     "id_status",
     "set_slug",
     "set_title",
@@ -98,6 +103,7 @@ export function buildTracklistCsv(
       csvEscape(p.isrc ?? ""),
       csvEscape(canonicalBeatportUrl(p.beatportUrl) ?? ""),
       csvEscape(canonicalSpotifyUrl(p.spotifyUrl) ?? ""),
+      csvEscape(spotifyTrackUri(p.spotifyUrl) ?? ""),
       csvEscape(p.idStatus),
       csvEscape(meta.slug),
       csvEscape(meta.title),
@@ -138,6 +144,8 @@ export function buildTracklistM3u(
     if (p.isrc) lines.push(`# isrc:${p.isrc}`);
     const bp = canonicalBeatportUrl(p.beatportUrl);
     if (bp) lines.push(`# beatport:${bp}`);
+    const sp = spotifyTrackUri(p.spotifyUrl);
+    if (sp) lines.push(`# ${sp}`);
     lines.push(display);
   }
 
@@ -167,6 +175,14 @@ export function buildSpotifyUrlList(plays: ExportPlay[]): string {
     .map((p) => canonicalSpotifyUrl(p.spotifyUrl))
     .filter((url): url is string => !!url);
   return urls.length ? urls.join("\n") + "\n" : "";
+}
+
+/** `spotify:track:{id}` lines only — empty when no stored IDs. */
+export function buildSpotifyUriList(plays: ExportPlay[]): string {
+  const uris = exportablePlays(plays)
+    .map((p) => spotifyTrackUri(p.spotifyUrl))
+    .filter((uri): uri is string => !!uri);
+  return uris.length ? uris.join("\n") + "\n" : "";
 }
 
 export function slugifyFilename(title: string): string {

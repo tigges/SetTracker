@@ -1,12 +1,6 @@
 // Status color semantics + provenance labels, used everywhere in the UI.
 
 import {
-  setSoundcloudPageUrl,
-  setYoutubeWatchUrl,
-  soundcloudSeekUrl,
-  youtubeSeekUrl,
-} from "./playback";
-import {
   beatportSearchUrl,
   canonicalBeatportUrl,
   canonicalSpotifyUrl,
@@ -122,41 +116,32 @@ export function fmtTimestamp(sec: number): string {
 export type ListenLinkOpts = {
   beatportUrl?: string | null;
   spotifyUrl?: string | null;
-  setPlaybackUrl?: string | null;
-  setSourceUrl?: string | null;
-  startSec?: number | null;
 };
 
 export type ListenLinks = {
-  youtube: string | null;
   beatport: string | null;
   beatportIsCanonical: boolean;
   spotify: string | null;
   spotifyIsCanonical: boolean;
-  soundcloud: string | null;
 };
 
 /**
- * External listen links. YouTube / SoundCloud open the actual set at this cue.
- * Spotify / Beatport prefer a stored /track URL and fall back to search so the
- * chip stays visible while we fill-null toward 100% direct links.
+ * Track-level store jumps. Prefer a stored /track URL; fall back to search
+ * so the chip stays visible while we fill-null toward 100% direct links.
+ * Set playback is on-site (cue seek) — not these links.
  */
 export function listenLinks(
   title: string,
   artist?: string | null,
   opts?: ListenLinkOpts,
 ): ListenLinks {
-  const ytWatch = setYoutubeWatchUrl(opts?.setPlaybackUrl, opts?.setSourceUrl);
-  const scPage = setSoundcloudPageUrl(opts?.setPlaybackUrl, opts?.setSourceUrl);
   const beatportCanonical = canonicalBeatportUrl(opts?.beatportUrl);
   const spotifyCanonical = canonicalSpotifyUrl(opts?.spotifyUrl);
   return {
-    youtube: ytWatch ? youtubeSeekUrl(ytWatch, opts?.startSec) : null,
     beatport: beatportCanonical ?? beatportSearchUrl(title, artist),
     beatportIsCanonical: !!beatportCanonical,
     spotify: spotifyCanonical ?? spotifySearchUrl(title, artist),
     spotifyIsCanonical: !!spotifyCanonical,
-    soundcloud: scPage ? soundcloudSeekUrl(scPage, opts?.startSec) : null,
   };
 }
 

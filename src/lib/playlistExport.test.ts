@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import {
   buildBeatportUrlList,
+  buildSpotifyUriList,
   buildSpotifyUrlList,
   buildTracklistCsv,
   buildTracklistM3u,
@@ -87,6 +88,8 @@ assert.ok(m3u.includes("#EXTINF:360,AC Slater - Pressure"));
 assert.ok(m3u.includes("# setradar-cue:00:00"));
 assert.ok(m3u.includes("# isrc:GBXXXX0000001"));
 assert.ok(m3u.includes("# mix:Extended Mix"));
+assert.ok(m3u.includes("# beatport:https://www.beatport.com/track/pressure/1"));
+assert.ok(m3u.includes("# spotify:track:2ISSQPb9LHHiV6ng2NXosL"));
 
 const bp = buildBeatportUrlList(plays);
 assert.ok(bp.includes("https://www.beatport.com/track/pressure/1"));
@@ -95,5 +98,9 @@ assert.ok(!bp.includes("beatport.com/search"));
 const sp = buildSpotifyUrlList(plays);
 assert.ok(sp.includes("https://open.spotify.com/track/2ISSQPb9LHHiV6ng2NXosL"));
 assert.ok(!sp.includes("open.spotify.com/search"));
+
+const uris = buildSpotifyUriList(plays);
+assert.equal(uris.trim(), "spotify:track:2ISSQPb9LHHiV6ng2NXosL");
+assert.ok(csv.includes("spotify:track:2ISSQPb9LHHiV6ng2NXosL"));
 
 console.log("playlistExport.test.ts ok");
