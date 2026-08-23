@@ -1,6 +1,7 @@
 /**
  * Client-safe playlist export helpers for set tracklists.
- * Static-site friendly: downloads only — no Spotify/Beatport OAuth.
+ * Static-site friendly: files + destination URLs — no Spotify/Beatport OAuth.
+ * Launch / open wiring lives in exportLaunch.ts.
  */
 
 import {
