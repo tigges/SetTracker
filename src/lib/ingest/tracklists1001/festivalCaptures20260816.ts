@@ -1026,6 +1026,7 @@ export const TL_OLIVER_HELDENS_DAYBREAK_SESSION_TOMORROWLAND_WE1_2024: Fingerpri
  * Capture overlay used TL_Robin-Schulz_Pacha_Ibiza_2026 (hyphens illegal);
  * constant is TL_ROBIN_SCHULZ_PACHA_IBIZA_2026.
  * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["ht-toccoscuro-1live-dj-session-mit-robin-schulz-live-aus-dem-pacha-ibiza-vom-0"]
+ *       TRACKLIST_1001_BY_SOURCE_SLUG["sc-robin-schulz-robin-schulz-dj-set-live-pacha-ibiza"]
  * (not ht-https://…).
  * Captured 2026-08-16 - provenance 1001tl.
  */

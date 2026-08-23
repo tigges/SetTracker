@@ -122,6 +122,7 @@ import {
   TL_LAIDBACK_LUKE_OWR_SELECTS_017_2026,
   TL_MADDIX_TML_WE1_2026,
   TL_MARLON_HOFFSTADT_TML_WE1_2026,
+  TL_ROBIN_SCHULZ_SUGAR_RADIO_555_2026,
   TL_SARA_LANDRY_TML_FRIENDSHIP_MIX_2026,
 } from "./festivalCaptures20260823";
 
@@ -229,6 +230,7 @@ export {
   TL_LAIDBACK_LUKE_OWR_SELECTS_017_2026,
   TL_MADDIX_TML_WE1_2026,
   TL_MARLON_HOFFSTADT_TML_WE1_2026,
+  TL_ROBIN_SCHULZ_SUGAR_RADIO_555_2026,
   TL_SARA_LANDRY_TML_FRIENDSHIP_MIX_2026,
 };
 
@@ -4709,6 +4711,8 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
     TL_OLIVER_HELDENS_DAYBREAK_SESSION_TOMORROWLAND_WE1_2024,
   "ht-toccoscuro-1live-dj-session-mit-robin-schulz-live-aus-dem-pacha-ibiza-vom-0":
     TL_ROBIN_SCHULZ_PACHA_IBIZA_2026,
+  "sc-robin-schulz-robin-schulz-dj-set-live-pacha-ibiza":
+    TL_ROBIN_SCHULZ_PACHA_IBIZA_2026,
   "yt-pnzSuCiAGdk": TL_CALVIN_HARRIS_MAINSTAGE_DANCE_VALLEY_NETHERLANDS_2026,
   "yt-JhpL-KKGoO8": TL_TUJAMO_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
   "yt-IwNPc_4ux84":
@@ -4800,6 +4804,8 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "sc-tomorrowland-core-i-dino-lenny-0190": TL_DINO_LENNY_CORE_019_2022,
   "ht-edmliveset-nico-moreno-holy-priestaa-live-at-edc-las-vegas-2026-las-vegas-usa-17-05-2026":
     TL_NICO_MORENO_HOLY_PRIEST_EDC_LV_2026,
+  "ht-toccoscuro-robin-schulz-sugar-radio-555":
+    TL_ROBIN_SCHULZ_SUGAR_RADIO_555_2026,
 };
 
 /** Sanity: every seeded clock must parse. */
