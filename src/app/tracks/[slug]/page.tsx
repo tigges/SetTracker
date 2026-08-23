@@ -6,10 +6,11 @@ import { SetEntryLink } from "@/components/SetEntryLink";
 import { getAllTrackSlugs, getTrackBySlug } from "@/lib/queries";
 import { pageMeta } from "@/lib/site";
 import {
-  beatportBuyability,
+  EDIT_KIND_LABEL,
   beatportTrackHref,
   canonicalBeatportUrl,
   canonicalSpotifyUrl,
+  editKind,
   spotifyTrackHref,
 } from "@/lib/trackMeta";
 import {
@@ -86,13 +87,7 @@ export default async function TrackPage({
     track.artistName,
     track.spotifyUrl,
   );
-  const showBeatport =
-    beatportBuyability({
-      idStatus: "identified",
-      title: track.title,
-      artistName: track.artistName,
-      beatportUrl: track.beatportUrl,
-    }) !== "unavailable";
+  const kind = editKind(track.title, track.artistName);
 
   return (
     <div>
@@ -154,6 +149,11 @@ export default async function TrackPage({
                   {track.label.name}
                 </Link>
               )}
+              {kind ? (
+                <span className="rounded-full border border-line px-2.5 py-1 text-[12px] text-muted2">
+                  {EDIT_KIND_LABEL[kind]}
+                </span>
+              ) : null}
               <a
                 href={spHref}
                 target="_blank"
@@ -162,16 +162,14 @@ export default async function TrackPage({
               >
                 {spCanonical ? "Play on Spotify" : "Search Spotify"}
               </a>
-              {showBeatport && (
-                <a
-                  href={bpHref}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="rounded-md border border-line px-2.5 py-1 text-[12px] text-muted2 transition-colors hover:border-brand hover:text-brand"
-                >
-                  {bpCanonical ? "Buy on Beatport" : "Search Beatport"}
-                </a>
-              )}
+              <a
+                href={bpHref}
+                target="_blank"
+                rel="noreferrer"
+                className="rounded-md border border-line px-2.5 py-1 text-[12px] text-muted2 transition-colors hover:border-brand hover:text-brand"
+              >
+                {bpCanonical ? "Buy on Beatport" : "Search Beatport"}
+              </a>
             </div>
           </div>
         </div>

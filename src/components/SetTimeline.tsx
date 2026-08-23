@@ -23,7 +23,7 @@ import {
 } from "@/lib/status";
 import type { PlayRow } from "@/lib/queries";
 import { playablePlaybackUrl } from "@/lib/playback";
-import { beatportBuyability } from "@/lib/trackMeta";
+import { EDIT_KIND_LABEL, editKind } from "@/lib/trackMeta";
 import { useSetSeek } from "@/components/SetListen";
 import { cueIndexAtRatio, playSpans, stripIsDense } from "@/lib/setStrip";
 
@@ -255,6 +255,7 @@ export function SetTimeline({
           {plays.map((p) => {
             const isActive = p.id === activeId;
             const meta = STATUS_META[p.idStatus as IdStatus];
+            const kind = editKind(p.title, p.artistName);
             return (
               <li key={p.id}>
                 <div
@@ -303,6 +304,14 @@ export function SetTimeline({
                       >
                         {p.title}
                       </span>
+                      {kind ? (
+                          <span
+                            className="flex-none rounded-full border border-line px-1.5 py-0.5 text-[10px] text-muted2"
+                            title="May not have a store page yet"
+                          >
+                            {EDIT_KIND_LABEL[kind]}
+                          </span>
+                      ) : null}
                       {p.hasTrackPage && p.trackSlug ? (
                         <Link
                           href={`/tracks/${p.trackSlug}`}
@@ -313,7 +322,7 @@ export function SetTimeline({
                           track
                         </Link>
                       ) : null}
-                      {p.mixName && !compact && (
+                      {p.mixName && !compact && !kind && (
                         <span
                           className="hidden truncate text-[11px] text-muted2 sm:inline"
                           title={p.remixerName ? `Remixer: ${p.remixerName}` : p.mixName}
@@ -379,23 +388,9 @@ export function SetTimeline({
                           spotifyUrl: p.spotifyUrl,
                         })
                       : null;
-                    const buyability = identified
-                      ? beatportBuyability({
-                          idStatus: p.idStatus,
-                          title: p.title,
-                          artistName: p.artistName,
-                          beatportUrl: p.beatportUrl,
-                        })
-                      : "unavailable";
                     if (!canSeek && !links) return null;
                     const pill =
                       "grid h-6 w-6 place-items-center rounded-md border border-line text-[10px] text-muted2 transition-colors hover:border-brand hover:text-brand";
-                    const beatportTitle =
-                      buyability === "unavailable"
-                        ? "No Beatport page for mashups / acapellas"
-                        : links?.beatportIsCanonical
-                          ? "Buy on Beatport"
-                          : "Search on Beatport";
                     return (
                       <div
                         className="flex flex-none items-center gap-1"
@@ -427,25 +422,20 @@ export function SetTimeline({
                             SP
                           </a>
                         )}
-                        {links && buyability !== "unavailable" && (
+                        {links?.beatport && (
                           <a
                             href={links.beatport}
                             target="_blank"
                             rel="noreferrer"
-                            title={beatportTitle}
+                            title={
+                              links.beatportIsCanonical
+                                ? "Buy on Beatport"
+                                : "Search on Beatport"
+                            }
                             className={pill}
                           >
                             BP
                           </a>
-                        )}
-                        {links && buyability === "unavailable" && (
-                          <span
-                            title={beatportTitle}
-                            aria-label={beatportTitle}
-                            className="grid h-6 w-6 place-items-center rounded-md border border-dashed border-line text-[10px] text-muted2/50"
-                          >
-                            BP
-                          </span>
                         )}
                       </div>
                     );
