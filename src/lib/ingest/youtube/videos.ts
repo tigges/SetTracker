@@ -1334,7 +1334,8 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
   },
   {
     // Tomorrowland official — Captive Soul / Freedom Stage WE2; 22 timed
-    // (2026-08-23 recapture adds Cherry Buka @ 2:29).
+    // (2026-08-23 recapture adds Cherry Buka @ 2:29). Official SC twin:
+    // sc-korolovadj-korolova-live-tomorrowland-1.
     video: "https://www.youtube.com/watch?v=RLOghpXjuJI",
     primaryArtist: dj("Korolova", {
       accent: "#9b5de5",

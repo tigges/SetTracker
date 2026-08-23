@@ -969,8 +969,28 @@ for (const p of korolova) {
 assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-RLOghpXjuJI"]!.length >= 22);
 assert.equal(
   TRACKLIST_1001_BY_SOURCE_SLUG["sc-korolovadj-korolova-live-tomorrowland-1"],
+  TL_KOROLOVA_TML_WE2_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-https://soundcloud.com/korolovadj/korolova-live-tomorrowland-1"
+  ],
   undefined,
 );
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-korolovadj-korolova-live-tomorrowland-1"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-korolovadj-korolova-captive-soul-98"],
+);
+assert.equal(isWiredTracklistSlug("yt-RLOghpXjuJI"), true);
+assert.equal(
+  isWiredTracklistSlug("sc-korolovadj-korolova-live-tomorrowland-1"),
+  true,
+);
+assert.equal(
+  isSecondaryPlaybackSlug("sc-korolovadj-korolova-live-tomorrowland-1"),
+  true,
+);
+assert.equal(isSecondaryPlaybackSlug("yt-RLOghpXjuJI"), false);
 
 assertSeedClocks(TL_LUCAS_STEVE_TML_WE2_2026);
 const lucasSteve = tracklist1001RowsToPlays(TL_LUCAS_STEVE_TML_WE2_2026);

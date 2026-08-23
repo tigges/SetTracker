@@ -2529,10 +2529,11 @@ export const TL_ARMIN_VAN_BUUREN_YT_HOUSE_TML_2026: FingerprintSeedRow[] = [
  * Official YT: https://www.youtube.com/watch?v=RLOghpXjuJI
  * https://www.1001tracklists.com/tracklist/hjlt23k/korolova-captive-soul-freedom-stage-tomorrowland-weekend-2-belgium-2026-07-26.html
  * Overlay name TL_KOROLOVA is too generic (Captive Soul 098 / Snowattack / Tulum).
- * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-RLOghpXjuJI"] = TL_KOROLOVA_TML_WE2_2026
+ * Official SC: https://soundcloud.com/korolovadj/korolova-live-tomorrowland-1
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-RLOghpXjuJI"]
+ *       TRACKLIST_1001_BY_SOURCE_SLUG["sc-korolovadj-korolova-live-tomorrowland-1"]
  * Recapture 2026-08-23 — added Cherry "Buka" at 2:29 (was 21 cues from 6:10).
- * Operator overlay named sc-korolovadj-korolova-live-tomorrowland-1 but no SC URL
- * was in the paste — do not invent an SC slug.
+ * Distinct from Captive Soul 098 (sc-korolovadj-korolova-captive-soul-98).
  */
 export const TL_KOROLOVA_TML_WE2_2026: FingerprintSeedRow[] = [
   { at: "2:29", artist: "Cherry", title: "Buka" },
@@ -4593,6 +4594,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-PlArfyuzuqo": TL_JOHN_SUMMIT_TML_WE2_2026,
   "yt-I6QA_T-BS6o": TL_ARMIN_VAN_BUUREN_YT_HOUSE_TML_2026,
   "yt-RLOghpXjuJI": TL_KOROLOVA_TML_WE2_2026,
+  "sc-korolovadj-korolova-live-tomorrowland-1": TL_KOROLOVA_TML_WE2_2026,
   "yt-LE-byccuovI": TL_LUCAS_STEVE_TML_WE2_2026,
   "yt-aDAWctObTvI": TL_SARA_LANDRY_TML_WE2_2026,
   "yt-AjQeohYmg3A": TL_AFROJACK_R3HAB_TML_WE2_2026,

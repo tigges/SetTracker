@@ -237,6 +237,20 @@ assert.equal(
   "sc-korolovadj-korolova-captive-soul-98",
 );
 
+const korolovaTmlSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url ===
+    "https://soundcloud.com/korolovadj/korolova-live-tomorrowland-1",
+);
+assert.ok(korolovaTmlSc);
+assert.equal(korolovaTmlSc.primaryArtist.name, "Korolova");
+assert.equal(korolovaTmlSc.type, "festival");
+assert.notEqual(korolovaTmlSc.url, captive098Sc.url);
+assert.equal(
+  `sc-korolovadj-${slugify("korolova-live-tomorrowland-1")}`,
+  "sc-korolovadj-korolova-live-tomorrowland-1",
+);
+
 const hypeSyncSc = SOUNDCLOUD_TRACK_SEEDS.find(
   (s) =>
     s.url === "https://soundcloud.com/jameshypethedj/sync-london-full-set",

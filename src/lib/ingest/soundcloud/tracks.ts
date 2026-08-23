@@ -278,6 +278,19 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     minDurationSec: 30 * 60,
   },
   {
+    // Official Korolova Tomorrowland Captive Soul WE2; 1001TL wired via
+    // sc-korolovadj-korolova-live-tomorrowland-1 (same list as yt-RLOghpXjuJI).
+    // Distinct from Captive Soul 098 / Snowattack / Tulum. Never sc-https://….
+    url: "https://soundcloud.com/korolovadj/korolova-live-tomorrowland-1",
+    primaryArtist: dj("Korolova", {
+      accent: "#9b5de5",
+      homeCity: "Kyiv, UA",
+    }),
+    genre: "Melodic Techno",
+    type: "festival",
+    minDurationSec: 15 * 60,
+  },
+  {
     // Official James Hype upload; 1001TL wired via
     // sc-jameshypethedj-sync-london-full-set (same list as yt-rLTCLSsqrXY).
     url: "https://soundcloud.com/jameshypethedj/sync-london-full-set",
