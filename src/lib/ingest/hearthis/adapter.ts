@@ -79,11 +79,12 @@ async function hearthisMixesdbPlays(
   description: string,
   playbackUrl: string,
   durationSec: number,
+  sourceSlug?: string,
 ): Promise<RawPlay[]> {
   let from = await playsFromDescriptionMixesdbLinks(description, durationSec);
   if (from.length < 5) {
     const lookup = await playsFromAnyPlayerMixesdbLookup(
-      playerUrlsForSet({ playbackUrl }),
+      playerUrlsForSet({ slug: sourceSlug, playbackUrl }),
       durationSec,
     );
     if (lookup.length > from.length) from = lookup;
@@ -287,7 +288,7 @@ export async function trackToRawSet(
       sourceSlug,
       merge1001Plays(
         plays,
-        await hearthisMixesdbPlays(description, sourceUrl, durationSec),
+        await hearthisMixesdbPlays(description, sourceUrl, durationSec, sourceSlug),
       ),
     ),
   };
