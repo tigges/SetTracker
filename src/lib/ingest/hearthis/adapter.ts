@@ -24,6 +24,7 @@ import {
   type HearthisArtistSource,
 } from "./artists";
 import { HEARTHIS_TRACKS, type HearthisTrackSource } from "./tracks";
+import { shouldFetchCuratedSlug } from "../skipExistingCurated";
 import {
   HEARTHIS_HOUSE_CATEGORIES,
   HEARTHIS_MAX_SETS,
@@ -346,6 +347,11 @@ export function createHearthisAdapter(
         const parsed = parseHearthisUrl(seed.url);
         if (!parsed?.user || !parsed.track) {
           console.warn(`[hearthis] bad curated url ${seed.url}`);
+          continue;
+        }
+        const curatedSlug = hearthisSourceSlug(parsed.user, parsed.track);
+        if (!shouldFetchCuratedSlug(curatedSlug)) {
+          console.log(`[hearthis] skip existing ${curatedSlug}`);
           continue;
         }
         try {

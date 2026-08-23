@@ -39,6 +39,21 @@ export const HEARTHIS_TRACKS: HearthisTrackSource[] = [
     minDurationSec: 20 * 60,
   },
   {
+    // Fan radio rehost — 1001 overlay only. Never playbackUrl.
+    url: "https://hearthis.at/toccoscuro/robin-schulz-sugar-radio-555/",
+    primaryArtist: {
+      name: "Robin Schulz",
+      slug: "robin-schulz",
+      accent: "#5aa9e6",
+      homeCity: "Germany",
+    },
+    genre: "House",
+    seriesName: "Sugar Radio",
+    performedOn: "2026-08-16",
+    type: "radio",
+    minDurationSec: 20 * 60,
+  },
+  {
     // Fan archive edmliveset — 1001 overlay only. Never playbackUrl.
     url: "https://hearthis.at/edmliveset/nico-moreno-holy-priestaa-live-at-edc-las-vegas-2026-las-vegas-usa-17-05-2026/",
     primaryArtist: {

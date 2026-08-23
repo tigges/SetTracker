@@ -338,3 +338,33 @@ export const TL_DINO_LENNY_CORE_019_2022: FingerprintSeedRow[] = [
   { at: "45:10", artist: "Aera", title: "Acido" },
   { at: "49:50", artist: "Odd Parents", title: "Learn To Fly (Maceo Plex 808 Dub)" },
 ];
+
+/**
+ * Robin Schulz - Sugar Radio 555 2026-08-16
+ * https://www.1001tracklists.com/tracklist/24mg1qdk/robin-schulz-sugar-radio-555-2026-08-16.html
+ * Hearthis: https://hearthis.at/toccoscuro/robin-schulz-sugar-radio-555/
+ * Capture paste used TL_CAPTURED and ht_Robin-Schulz_Sugar-Radio-555_2026-08-16
+ * (invalid). Operator also pasted the Pacha Ibiza SC set page — that is a
+ * different night; do not overlay these clocks there.
+ * No official YT/SC in the paste or catalog — do not invent a slug.
+ * Hearthis toccoscoro is a radio rehost — tracklist host only, never playbackUrl.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["ht-toccoscuro-robin-schulz-sugar-radio-555"]
+ * Captured 2026-08-23 — provenance 1001tl.
+ */
+export const TL_ROBIN_SCHULZ_SUGAR_RADIO_555_2026: FingerprintSeedRow[] = [
+  { at: "0:20", artist: "unfazed", title: "A Gira (Emanuel Satie & Maga & Sean Doron & Tim Engelhardt pres. Scenarios Remix)" },
+  { at: "4:17", artist: "Jackie Hollander", title: "High On You" },
+  { at: "8:14", artist: "Notre Dame", title: "No Rules" },
+  { at: "12:11", artist: "ACRAZE & Rello", title: "Pump That Body" },
+  { at: "16:08", artist: "Mesto", title: "Listen To Me" },
+  { at: "20:05", artist: "Gigi D'Agostino", title: "Bla Bla Bla" },
+  { at: "24:02", artist: "TH;EN & Carlo Whale", title: "Echoes Of You" },
+  { at: "27:59", artist: "Martin Garrix & R3HAB & Skytech", title: "Voodoo" },
+  { at: "31:56", artist: "Pavel Petrov & Rafael Cerato", title: "Reflections (Oliver Koletzki Remix)" },
+  { at: "35:53", artist: "Shakedown", title: "At Night (AtcG VIP Edit)" },
+  { at: "39:50", artist: "Adam Ten & J.views", title: "Rivers And Homes Retake" },
+  { at: "43:47", artist: "David Guetta vs. Benny Benassi", title: "Satisfaction" },
+  { at: "47:44", artist: "Robin Schulz & MARTEN HØRGER", title: "Arizona" },
+  { at: "51:41", artist: "Leblanc", title: "Strings Anthem" },
+  { at: "55:38", artist: "The Rocketman", title: "Loca" },
+];

@@ -174,6 +174,7 @@ import {
   TL_LAIDBACK_LUKE_OWR_SELECTS_017_2026,
   TL_MADDIX_TML_WE1_2026,
   TL_MARLON_HOFFSTADT_TML_WE1_2026,
+  TL_ROBIN_SCHULZ_SUGAR_RADIO_555_2026,
   TL_SARA_LANDRY_TML_FRIENDSHIP_MIX_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
@@ -3072,6 +3073,49 @@ for (let i = 1; i < dinoCore.length; i++) {
   );
 }
 
+assertSeedClocks(TL_ROBIN_SCHULZ_SUGAR_RADIO_555_2026);
+assert.equal(TL_ROBIN_SCHULZ_SUGAR_RADIO_555_2026.length, 15);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["ht-toccoscuro-robin-schulz-sugar-radio-555"],
+  TL_ROBIN_SCHULZ_SUGAR_RADIO_555_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["ht_Robin-Schulz_Sugar-Radio-555_2026-08-16"],
+  undefined,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["ht-https://hearthis.at/toccoscuro/robin-schulz-sugar-radio-555/"],
+  undefined,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-robin-schulz-robin-schulz-dj-set-live-pacha-ibiza"
+  ],
+  TL_ROBIN_SCHULZ_PACHA_IBIZA_2026,
+);
+assert.equal(
+  isSecondaryPlaybackSlug("ht-toccoscuro-robin-schulz-sugar-radio-555"),
+  false,
+);
+const schulzSugar = tracklist1001RowsToPlays(
+  TL_ROBIN_SCHULZ_SUGAR_RADIO_555_2026,
+);
+assert.equal(schulzSugar.length, 15);
+assert.equal(schulzSugar[0]?.provenance, "1001tl");
+assert.equal(schulzSugar[0]?.timestamp, 20);
+assert.equal(
+  schulzSugar[0]?.trackTitle,
+  "A Gira (Emanuel Satie & Maga & Sean Doron & Tim Engelhardt pres. Scenarios Remix)",
+);
+assert.equal(schulzSugar[14]?.trackTitle, "Loca");
+assert.equal(schulzSugar[14]?.timestamp, 55 * 60 + 38);
+for (let i = 1; i < schulzSugar.length; i++) {
+  assert.ok(
+    (schulzSugar[i]!.timestamp ?? 0) > (schulzSugar[i - 1]!.timestamp ?? 0),
+    `Robin Schulz Sugar Radio 555 clocks must increase at index ${i}`,
+  );
+}
+
 const maddixWe1 = tracklist1001RowsToPlays(TL_MADDIX_TML_WE1_2026);
 assert.equal(maddixWe1.length, 21);
 assert.equal(maddixWe1[0]?.provenance, "1001tl");
@@ -3519,6 +3563,18 @@ assert.equal(
     "ht-https://hearthis.at/toccoscuro/1live-dj-session-mit-robin-schulz-live-aus-dem-pacha-ibiza-vom-0/"
   ],
   undefined,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-robin-schulz-robin-schulz-dj-set-live-pacha-ibiza"
+  ],
+  TL_ROBIN_SCHULZ_PACHA_IBIZA_2026,
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-robin-schulz-robin-schulz-dj-set-live-pacha-ibiza"
+  ],
+  TL_ROBIN_SCHULZ_SUGAR_RADIO_555_2026,
 );
 const schulzPacha = tracklist1001RowsToPlays(TL_ROBIN_SCHULZ_PACHA_IBIZA_2026);
 assert.equal(schulzPacha.length, 32);

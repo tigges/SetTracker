@@ -157,6 +157,9 @@ jobs:
           YOUTUBE_CURATED_PLAYLISTS: "1"
           SOUNDCLOUD_CURATED_ONLY: "1"
           INGEST_SKIP_VERIFY: "1"
+          # New curated seeds only — do not re-watch catalogued YT/SC rows.
+          # 1001 clocks overlay in verify-urls.
+          INGEST_SKIP_EXISTING_CURATED: "1"
           # Pages is overlay + poll, not discovery. Crosslink/social harvest
           # belongs on catalog-deep (saved ~minutes on the last 1001 ship).
           INGEST_LEAN: "1"

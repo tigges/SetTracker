@@ -24,6 +24,26 @@ describe("hearthis curated tracks", () => {
     assert.equal(seed!.performedOn, "2026-06-06");
   });
 
+  it("wires Robin Schulz Sugar Radio 555 via ht-{user}-{slugify(track)}", () => {
+    const seed = HEARTHIS_TRACKS.find((t) =>
+      /robin-schulz-sugar-radio-555/i.test(t.url),
+    );
+    assert.ok(seed);
+    const parsed = parseHearthisUrl(seed!.url);
+    assert.deepEqual(parsed, {
+      user: "toccoscuro",
+      track: "robin-schulz-sugar-radio-555",
+    });
+    assert.equal(
+      hearthisSourceSlug(parsed!.user, parsed!.track!),
+      "ht-toccoscuro-robin-schulz-sugar-radio-555",
+    );
+    assert.equal(seed!.primaryArtist.slug, "robin-schulz");
+    assert.equal(seed!.seriesName, "Sugar Radio");
+    assert.equal(seed!.type, "radio");
+    assert.equal(seed!.performedOn, "2026-08-16");
+  });
+
   it("wires Nico Moreno B2B Holy Priest EDC via ht-{user}-{slugify(track)}", () => {
     const seed = HEARTHIS_TRACKS.find((t) =>
       /nico-moreno-holy-priestaa-live-at-edc/i.test(t.url),

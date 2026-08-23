@@ -34,6 +34,30 @@ assert.equal(
 );
 assert.equal(
   skipCaptureNeed(
+    row({
+      slug: "ht-toccoscuro-robin-schulz-sugar-radio-555",
+      title: "Robin Schulz - Sugar Radio 555",
+      primaryDj: "Robin Schulz",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "sc-robin-schulz-robin-schulz-dj-set-live-pacha-ibiza",
+      title: "Robin Schulz DJ Set live @Pacha, Ibiza",
+      primaryDj: "Robin Schulz",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
+assert.equal(
+  skipCaptureNeed(
     row({ slug: "yt-short1", title: "Freedom Stage Shorts", durationSec: 90 }),
     mapped,
     now,
