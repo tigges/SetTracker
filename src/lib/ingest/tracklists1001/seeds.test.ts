@@ -2980,7 +2980,7 @@ for (let i = 1; i < saraFriendship.length; i++) {
 }
 
 assertSeedClocks(TL_LAIDBACK_LUKE_OWR_SELECTS_017_2026);
-assert.equal(TL_LAIDBACK_LUKE_OWR_SELECTS_017_2026.length, 59);
+assert.equal(TL_LAIDBACK_LUKE_OWR_SELECTS_017_2026.length, 60);
 assert.equal(
   TRACKLIST_1001_BY_SOURCE_SLUG[
     "sc-tomorrowland-laidback-luke-selects-august-2026"
@@ -3000,11 +3000,11 @@ assert.equal(
 const lukeSelects = tracklist1001RowsToPlays(
   TL_LAIDBACK_LUKE_OWR_SELECTS_017_2026,
 );
-assert.equal(lukeSelects.length, 59);
+assert.equal(lukeSelects.length, 60);
 assert.equal(lukeSelects[0]?.trackTitle, "Comes and Goes");
 assert.equal(lukeSelects[0]?.timestamp, 20);
-assert.equal(lukeSelects[58]?.trackTitle, "Sweet Lovin (Sunset Edition)");
-assert.equal(lukeSelects[58]?.timestamp, 58 * 60 + 21);
+assert.equal(lukeSelects[59]?.trackTitle, "Sweet Lovin (Sunset Edition)");
+assert.equal(lukeSelects[59]?.timestamp, 58 * 60 + 21);
 for (let i = 1; i < lukeSelects.length; i++) {
   assert.ok(
     (lukeSelects[i]!.timestamp ?? 0) > (lukeSelects[i - 1]!.timestamp ?? 0),
