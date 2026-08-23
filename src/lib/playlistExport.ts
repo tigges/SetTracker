@@ -3,15 +3,7 @@
  * Static-site friendly: downloads only — no Spotify/Beatport OAuth.
  */
 
-import {
-  bandcampSearchUrl,
-  canonicalBeatportUrl,
-  canonicalSpotifyUrl,
-  discogsSearchUrl,
-  spotifySearchUrl,
-} from "@/lib/trackMeta";
-
-export { spotifySearchUrl };
+import { canonicalBeatportUrl, canonicalSpotifyUrl } from "@/lib/trackMeta";
 
 export type ExportPlay = {
   position: number;
@@ -88,9 +80,6 @@ export function buildTracklistCsv(
     "isrc",
     "beatport_url",
     "spotify_url",
-    "spotify_search_url",
-    "discogs_search_url",
-    "bandcamp_search_url",
     "id_status",
     "set_slug",
     "set_title",
@@ -109,9 +98,6 @@ export function buildTracklistCsv(
       csvEscape(p.isrc ?? ""),
       csvEscape(canonicalBeatportUrl(p.beatportUrl) ?? ""),
       csvEscape(canonicalSpotifyUrl(p.spotifyUrl) ?? ""),
-      csvEscape(spotifySearchUrl(p.title, p.artistName)),
-      csvEscape(discogsSearchUrl(p.title, p.artistName)),
-      csvEscape(bandcampSearchUrl(p.title, p.artistName)),
       csvEscape(p.idStatus),
       csvEscape(meta.slug),
       csvEscape(meta.title),
@@ -175,13 +161,12 @@ export function buildBeatportUrlList(plays: ExportPlay[]): string {
   return urls.length ? urls.join("\n") + "\n" : "";
 }
 
-/** One Spotify search URL per exportable play. */
-export function buildSpotifySearchUrlList(plays: ExportPlay[]): string {
-  return (
-    exportablePlays(plays)
-      .map((p) => spotifySearchUrl(p.title, p.artistName))
-      .join("\n") + "\n"
-  );
+/** Canonical Spotify /track URLs only. */
+export function buildSpotifyUrlList(plays: ExportPlay[]): string {
+  const urls = exportablePlays(plays)
+    .map((p) => canonicalSpotifyUrl(p.spotifyUrl))
+    .filter((url): url is string => !!url);
+  return urls.length ? urls.join("\n") + "\n" : "";
 }
 
 export function slugifyFilename(title: string): string {

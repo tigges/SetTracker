@@ -201,6 +201,7 @@ export default async function SetPage({
         setSlug={set.slug}
         setGenre={set.genre}
         setSourceUrl={set.sourceUrl}
+        setPlaybackUrl={set.playbackUrl}
       >
         <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
           <p className="min-w-0 text-[12px] text-muted2">

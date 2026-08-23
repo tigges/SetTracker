@@ -5,14 +5,7 @@ import { EntityThumb } from "@/components/EntityThumb";
 import { SetEntryLink } from "@/components/SetEntryLink";
 import { getAllTrackSlugs, getTrackBySlug } from "@/lib/queries";
 import { pageMeta } from "@/lib/site";
-import {
-  bandcampSearchUrl,
-  beatportTrackHref,
-  canonicalBeatportUrl,
-  canonicalSpotifyUrl,
-  discogsSearchUrl,
-  spotifyTrackHref,
-} from "@/lib/trackMeta";
+import { canonicalBeatportUrl, canonicalSpotifyUrl } from "@/lib/trackMeta";
 import {
   SET_TYPE_META,
   fmtDate,
@@ -76,19 +69,7 @@ export default async function TrackPage({
 
   const accent = track.label?.color ?? "var(--brand)";
   const bpCanonical = canonicalBeatportUrl(track.beatportUrl);
-  const bpHref = beatportTrackHref(
-    track.title,
-    track.artistName,
-    track.beatportUrl,
-  );
   const spCanonical = canonicalSpotifyUrl(track.spotifyUrl);
-  const spHref = spotifyTrackHref(
-    track.title,
-    track.artistName,
-    track.spotifyUrl,
-  );
-  const dcHref = discogsSearchUrl(track.title, track.artistName);
-  const bcHref = bandcampSearchUrl(track.title, track.artistName);
 
   return (
     <div>
@@ -150,38 +131,26 @@ export default async function TrackPage({
                   {track.label.name}
                 </Link>
               )}
-              <a
-                href={spHref}
-                target="_blank"
-                rel="noreferrer"
-                className="rounded-md border border-line px-2.5 py-1 text-[12px] text-muted2 transition-colors hover:border-brand hover:text-brand"
-              >
-                {spCanonical ? "Open Spotify" : "Search Spotify"}
-              </a>
-              <a
-                href={dcHref}
-                target="_blank"
-                rel="noreferrer"
-                className="rounded-md border border-line px-2.5 py-1 text-[12px] text-muted2 transition-colors hover:border-brand hover:text-brand"
-              >
-                Search Discogs
-              </a>
-              <a
-                href={bcHref}
-                target="_blank"
-                rel="noreferrer"
-                className="rounded-md border border-line px-2.5 py-1 text-[12px] text-muted2 transition-colors hover:border-brand hover:text-brand"
-              >
-                Search Bandcamp
-              </a>
-              <a
-                href={bpHref}
-                target="_blank"
-                rel="noreferrer"
-                className="rounded-md border border-line px-2.5 py-1 text-[12px] text-muted2 transition-colors hover:border-brand hover:text-brand"
-              >
-                {bpCanonical ? "Buy on Beatport" : "Search Beatport"}
-              </a>
+              {spCanonical && (
+                <a
+                  href={spCanonical}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="rounded-md border border-line px-2.5 py-1 text-[12px] text-muted2 transition-colors hover:border-brand hover:text-brand"
+                >
+                  Open Spotify
+                </a>
+              )}
+              {bpCanonical && (
+                <a
+                  href={bpCanonical}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="rounded-md border border-line px-2.5 py-1 text-[12px] text-muted2 transition-colors hover:border-brand hover:text-brand"
+                >
+                  Buy on Beatport
+                </a>
+              )}
             </div>
           </div>
         </div>

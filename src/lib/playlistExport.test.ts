@@ -1,12 +1,12 @@
 import assert from "node:assert/strict";
 import {
   buildBeatportUrlList,
+  buildSpotifyUrlList,
   buildTracklistCsv,
   buildTracklistM3u,
   buildTracklistPlain,
   exportTimestamp,
   exportablePlays,
-  spotifySearchUrl,
   trackDisplayLine,
 } from "./playlistExport";
 
@@ -70,11 +70,12 @@ assert.ok(csv.includes("AC Slater"));
 assert.ok(csv.includes("00:00"));
 assert.ok(csv.includes("GBXXXX0000001"));
 assert.ok(csv.includes("Extended Mix"));
-assert.ok(csv.includes(spotifySearchUrl("Pressure", "AC Slater")));
 assert.ok(csv.includes("open.spotify.com/track/2ISSQPb9LHHiV6ng2NXosL"));
-assert.ok(csv.includes("discogs.com/search"));
-assert.ok(csv.includes("bandcamp.com/search"));
+assert.ok(!csv.includes("open.spotify.com/search"));
+assert.ok(!csv.includes("discogs.com/search"));
+assert.ok(!csv.includes("bandcamp.com/search"));
 assert.ok(!csv.includes("beatport.com/search"));
+assert.ok(!csv.includes("spotify_search_url"));
 
 const m3u = buildTracklistM3u(plays, {
   title: "Test Set",
@@ -91,10 +92,8 @@ const bp = buildBeatportUrlList(plays);
 assert.ok(bp.includes("https://www.beatport.com/track/pressure/1"));
 assert.ok(!bp.includes("beatport.com/search"));
 
-assert.ok(
-  spotifySearchUrl("Pressure", "AC Slater").startsWith(
-    "https://open.spotify.com/search/",
-  ),
-);
+const sp = buildSpotifyUrlList(plays);
+assert.ok(sp.includes("https://open.spotify.com/track/2ISSQPb9LHHiV6ng2NXosL"));
+assert.ok(!sp.includes("open.spotify.com/search"));
 
 console.log("playlistExport.test.ts ok");
