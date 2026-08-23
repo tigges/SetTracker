@@ -2,10 +2,13 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
-  buildBeatportUrlList,
-  buildSpotifyUriList,
+  planBeatportLaunch,
+  planRekordboxLaunch,
+  planSpotifyLaunch,
+  type ExportLaunchPlan,
+} from "@/lib/exportLaunch";
+import {
   buildTracklistCsv,
-  buildTracklistM3u,
   buildTracklistPlain,
   exportablePlays,
   slugifyFilename,
@@ -27,13 +30,41 @@ function downloadText(filename: string, body: string, mime: string) {
   URL.revokeObjectURL(url);
 }
 
-const MENU_WIDTH = 268;
+async function copyText(text: string): Promise<boolean> {
+  if (!text) return false;
+  try {
+    await navigator.clipboard.writeText(text);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+/** Open the desktop URI (if any) and the https destination in a new tab. */
+function openExportDestination(plan: ExportLaunchPlan) {
+  if (plan.protocolHref && typeof document !== "undefined") {
+    const iframe = document.createElement("iframe");
+    iframe.setAttribute("hidden", "");
+    iframe.setAttribute("aria-hidden", "true");
+    iframe.src = plan.protocolHref;
+    document.body.appendChild(iframe);
+    window.setTimeout(() => iframe.remove(), 2000);
+  }
+  if (plan.openHref) {
+    window.open(plan.openHref, "_blank", "noopener,noreferrer");
+  }
+}
+
+const MENU_WIDTH = 300;
 
 const itemClass =
-  "flex w-full items-center rounded-md px-2.5 py-1.5 text-left text-[13px] text-muted transition-colors hover:bg-panel2 hover:text-ink disabled:cursor-not-allowed disabled:opacity-40";
+  "flex w-full flex-col items-stretch rounded-md px-2.5 py-1.5 text-left transition-colors hover:bg-panel2 disabled:cursor-not-allowed disabled:opacity-40";
+
+type ExportStatus = "idle" | "copied" | "saved" | "opened";
 
 /**
- * Destination-named set exports. Identified rows when available; no OAuth.
+ * Destination-named set exports. Web hosts open immediately; DJ apps
+ * download an M3U8 (browsers cannot write Rekordbox / Serato).
  */
 export function SetExport({
   plays,
@@ -43,7 +74,8 @@ export function SetExport({
   meta: ExportSetMeta;
 }) {
   const [open, setOpen] = useState(false);
-  const [copied, setCopied] = useState(false);
+  const [status, setStatus] = useState<ExportStatus>("idle");
+  const [statusLabel, setStatusLabel] = useState("Export");
   const [pos, setPos] = useState<{
     top: number;
     left: number;
@@ -52,11 +84,23 @@ export function SetExport({
   } | null>(null);
   const root = useRef<HTMLDivElement>(null);
   const rows = useMemo(() => exportablePlays(plays), [plays]);
-  const beatportBuyList = useMemo(() => buildBeatportUrlList(plays), [plays]);
-  const spotifyUriList = useMemo(() => buildSpotifyUriList(plays), [plays]);
+  const rekordbox = useMemo(
+    () => planRekordboxLaunch(plays, meta),
+    [plays, meta],
+  );
+  const spotify = useMemo(() => planSpotifyLaunch(plays, meta), [plays, meta]);
+  const beatport = useMemo(() => planBeatportLaunch(plays), [plays]);
   const base = slugifyFilename(meta.title || meta.slug);
   const disabled = rows.length === 0;
-  const beatportDisabled = beatportBuyList.length === 0;
+
+  function flash(next: ExportStatus, label: string) {
+    setStatus(next);
+    setStatusLabel(label);
+    window.setTimeout(() => {
+      setStatus("idle");
+      setStatusLabel("Export");
+    }, 1800);
+  }
 
   function placeMenu() {
     const el = root.current;
@@ -110,20 +154,35 @@ export function SetExport({
     };
   }, []);
 
-  function run(fn: () => void) {
-    fn();
+  async function runLaunch(plan: ExportLaunchPlan, openedLabel: string) {
+    if (plan.disabled) return;
+    const copied = await copyText(plan.clipboard);
+    if (!copied && plan.clipboard && !plan.download) {
+      downloadText(
+        `${base}-${plan.id}.txt`,
+        plan.clipboard,
+        "text/plain;charset=utf-8",
+      );
+    }
+    if (plan.download) {
+      downloadText(
+        plan.download.filename,
+        plan.download.body,
+        plan.download.mime,
+      );
+      flash("saved", "Saved");
+    } else {
+      openExportDestination(plan);
+      flash("opened", openedLabel);
+    }
     setOpen(false);
   }
 
   async function copyPlain() {
     const text = buildTracklistPlain(plays);
-    try {
-      await navigator.clipboard.writeText(text);
-      setCopied(true);
-      window.setTimeout(() => setCopied(false), 1600);
-    } catch {
-      downloadText(`${base}.txt`, text, "text/plain;charset=utf-8");
-    }
+    const ok = await copyText(text);
+    if (!ok) downloadText(`${base}.txt`, text, "text/plain;charset=utf-8");
+    flash("copied", "Copied");
     setOpen(false);
   }
 
@@ -138,7 +197,9 @@ export function SetExport({
         onClick={toggle}
         className="inline-flex items-center gap-1.5 rounded-full border border-line px-3 py-1 text-[12px] text-muted transition-colors hover:border-brand hover:text-brand disabled:cursor-not-allowed disabled:opacity-40"
       >
-        <span>{copied ? "Copied" : "Export"}</span>
+        <span>
+          {status === "idle" ? "Export" : statusLabel}
+        </span>
         <span aria-hidden className="text-[10px] text-muted2">
           {open ? "▴" : "▾"}
         </span>
@@ -159,87 +220,37 @@ export function SetExport({
             Identified rows
             {rows.length > 0 ? ` · ${rows.length} tracks` : ""}
           </p>
+          <LaunchItem
+            plan={rekordbox}
+            onClick={() => void runLaunch(rekordbox, "Saved")}
+          />
+          <LaunchItem
+            plan={spotify}
+            onClick={() => void runLaunch(spotify, "Opened Spotify")}
+          />
+          <LaunchItem
+            plan={beatport}
+            onClick={() => void runLaunch(beatport, "Opened Beatport")}
+          />
           <button
             type="button"
             role="menuitem"
             className={itemClass}
-            title="M3U for Rekordbox, Serato, and Traktor (library match by artist/title)"
-            onClick={() =>
-              run(() =>
-                downloadText(
-                  `${base}.m3u`,
-                  buildTracklistM3u(plays, meta),
-                  "audio/x-mpegurl;charset=utf-8",
-                ),
-              )
-            }
+            title="Cue, mix, ISRC, and canonical store URLs"
+            onClick={() => {
+              downloadText(
+                `${base}.csv`,
+                buildTracklistCsv(plays, meta),
+                "text/csv;charset=utf-8",
+              );
+              flash("saved", "Saved");
+              setOpen(false);
+            }}
           >
-            Rekordbox / Serato
-          </button>
-          <button
-            type="button"
-            role="menuitem"
-            className={itemClass}
-            title="Artist – Title text, plus spotify:track URIs when we have IDs"
-            onClick={() =>
-              run(() => {
-                downloadText(
-                  `${base}.txt`,
-                  buildTracklistPlain(plays),
-                  "text/plain;charset=utf-8",
-                );
-                if (spotifyUriList) {
-                  window.setTimeout(() => {
-                    downloadText(
-                      `${base}-spotify-uris.txt`,
-                      spotifyUriList,
-                      "text/plain;charset=utf-8",
-                    );
-                  }, 80);
-                }
-              })
-            }
-          >
-            Spotify
-          </button>
-          <button
-            type="button"
-            role="menuitem"
-            className={itemClass}
-            title="Cue, mix, ISRC, and canonical store URLs — DJ.Studio / spreadsheets"
-            onClick={() =>
-              run(() =>
-                downloadText(
-                  `${base}.csv`,
-                  buildTracklistCsv(plays, meta),
-                  "text/csv;charset=utf-8",
-                ),
-              )
-            }
-          >
-            CSV
-          </button>
-          <button
-            type="button"
-            role="menuitem"
-            className={itemClass}
-            disabled={beatportDisabled}
-            title={
-              beatportDisabled
-                ? "No canonical Beatport /track pages on this set"
-                : "Canonical Beatport /track URLs only — buy list for Rekordbox"
-            }
-            onClick={() =>
-              run(() =>
-                downloadText(
-                  `${base}-beatport-buy.txt`,
-                  beatportBuyList,
-                  "text/plain;charset=utf-8",
-                ),
-              )
-            }
-          >
-            Beatport buy list
+            <span className="text-[13px] text-ink">CSV</span>
+            <span className="text-[11px] text-muted2">
+              Spreadsheet · cues and store URLs
+            </span>
           </button>
           <button
             type="button"
@@ -247,10 +258,40 @@ export function SetExport({
             className={itemClass}
             onClick={() => void copyPlain()}
           >
-            Copy tracklist
+            <span className="text-[13px] text-ink">Copy tracklist</span>
+            <span className="text-[11px] text-muted2">
+              Artist – Title text
+            </span>
           </button>
         </div>
       ) : null}
     </div>
+  );
+}
+
+function LaunchItem({
+  plan,
+  onClick,
+}: {
+  plan: ExportLaunchPlan;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      role="menuitem"
+      className={itemClass}
+      disabled={plan.disabled}
+      title={plan.disabledReason ?? plan.hint}
+      onClick={onClick}
+    >
+      <span className="flex items-baseline justify-between gap-2">
+        <span className="text-[13px] text-ink">{plan.label}</span>
+        <span className="shrink-0 text-[11px] text-brand">
+          {plan.actionLabel}
+        </span>
+      </span>
+      <span className="text-[11px] text-muted2">{plan.hint}</span>
+    </button>
   );
 }
