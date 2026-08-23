@@ -39,6 +39,7 @@ import { isRejectedWebsiteHost } from "./discovery/wikidataOfficial";
 import { isWeakOfficialUrl } from "../officialUrls";
 import { discoverCuratedReliveRemaps } from "./reliveWatch";
 import { applySetSourceRemaps } from "./sourceRemaps";
+import { applySetHostUrls } from "./setHostUrls";
 import { applyCatalog1001Seeds } from "./tracklists1001/applyToCatalog";
 import { ensureCuratedLabels } from "./curatedLabels";
 import { ensureVenueCalendarNights } from "./discovery/venueCalendars";
@@ -198,6 +199,14 @@ export async function applyKnownUrlFixes(prisma: PrismaClient): Promise<number> 
   n += remaps;
   if (remaps) {
     console.log(`[verify-urls] set source remaps: ${remaps}`);
+  }
+
+  const hosts = await applySetHostUrls(prisma);
+  n += hosts.filled;
+  if (hosts.filled) {
+    console.log(
+      `[verify-urls] set host URLs scanned=${hosts.scanned} filled=${hosts.filled}`,
+    );
   }
 
   // Walker & Royce etc. — fold false b2b half-name Dj rows onto the duo.

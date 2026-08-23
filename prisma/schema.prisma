@@ -196,7 +196,14 @@ model Set {
   sourceName  String? // e.g. "1001Tracklists", "SoundCloud"
   // Original audio host URL used for on-site embed (SC track, hearthis embed, YT).
   // May differ from sourceUrl when discovery host ≠ audio host.
+  // Rank stays SoundCloud > Mixcloud > YouTube — one embed, even when
+  // extra official hosts are stored below.
   playbackUrl String?
+  // Extra official hosts for the same performance (fill-null). Not embeds.
+  // Never invent; Mixcloud is a stored mirror only (no Mixcloud set slug).
+  soundcloudUrl String?
+  youtubeUrl    String?
+  mixcloudUrl   String?
   cover       String // hex color for the cover gradient seed
   // resolved set/mix artwork (or primary DJ image); null → monogram fallback
   imageUrl    String?

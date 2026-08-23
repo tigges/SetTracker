@@ -6,7 +6,7 @@ import {
   isBrandHostSlug,
   isBrandSeriesSlug,
 } from "../brandHosts";
-import { playbackUrlFromSource } from "../playback";
+import { hostUrlFillNull, hostUrlsFromKnown, playbackUrlFromSource } from "../playback";
 import { djSocialsFromKnown, labelSocials } from "../social";
 import { ARTIST_ROSTER } from "./roster";
 import { normalizeIsrc, parseTrackTitle } from "../trackMeta";
@@ -856,7 +856,25 @@ export async function runIngest(
           type?: string;
           playbackUrl?: string | null;
           sourceUrl?: string | null;
-        } = {};
+          soundcloudUrl?: string | null;
+          youtubeUrl?: string | null;
+          mixcloudUrl?: string | null;
+        } = {
+          ...hostUrlFillNull(
+            {
+              soundcloudUrl: existing.soundcloudUrl,
+              youtubeUrl: existing.youtubeUrl,
+              mixcloudUrl: existing.mixcloudUrl,
+            },
+            hostUrlsFromKnown(
+              softPlayback,
+              raw.playbackUrl,
+              raw.sourceUrl,
+              existing.playbackUrl,
+              existing.sourceUrl,
+            ),
+          ),
+        };
         if (existing.slug !== raw.sourceSlug) {
           softPatch.slug = raw.sourceSlug;
           if (raw.sourceUrl) softPatch.sourceUrl = raw.sourceUrl;
@@ -903,7 +921,23 @@ export async function runIngest(
               raw.playbackUrl ?? derived,
               existing.playbackUrl,
             );
-            return next ? { playbackUrl: next } : {};
+            return {
+              ...(next ? { playbackUrl: next } : {}),
+              ...hostUrlFillNull(
+                {
+                  soundcloudUrl: existing.soundcloudUrl,
+                  youtubeUrl: existing.youtubeUrl,
+                  mixcloudUrl: existing.mixcloudUrl,
+                },
+                hostUrlsFromKnown(
+                  next,
+                  raw.playbackUrl,
+                  raw.sourceUrl,
+                  existing.playbackUrl,
+                  existing.sourceUrl,
+                ),
+              ),
+            };
           })(),
           ...(raw.imageUrl && !existing.imageUrl
             ? { imageUrl: raw.imageUrl }
@@ -952,6 +986,10 @@ export async function runIngest(
           raw.playbackUrl ??
           playbackUrlFromSource(raw.sourceName, raw.sourceUrl) ??
           null,
+        ...hostUrlsFromKnown(
+          raw.playbackUrl,
+          raw.sourceUrl,
+        ),
         cover: raw.cover,
         imageUrl: raw.imageUrl ?? null,
         sourceHash,

@@ -7,6 +7,7 @@
  */
 
 import type { PrismaClient } from "@prisma/client";
+import { hostUrlFillNull, hostUrlsFromKnown } from "../playback";
 
 export type SetSourceRemap = {
   fromSlug: string;
@@ -83,10 +84,25 @@ export async function applySetSourceRemaps(
       sourceUrl: r.sourceUrl,
       playbackUrl: r.playbackUrl ?? r.sourceUrl,
     };
+    const fromHosts = from
+      ? hostUrlsFromKnown(from.playbackUrl, from.sourceUrl)
+      : {};
     if (from && !to) {
       await prisma.set.update({
         where: { id: from.id },
-        data: { slug: r.toSlug, ...urls },
+        data: {
+          slug: r.toSlug,
+          ...urls,
+          ...hostUrlFillNull(
+            {
+              soundcloudUrl: from.soundcloudUrl,
+              youtubeUrl: from.youtubeUrl,
+              mixcloudUrl: from.mixcloudUrl,
+            },
+            fromHosts,
+            hostUrlsFromKnown(urls.playbackUrl, urls.sourceUrl),
+          ),
+        },
       });
       n += 1;
       continue;
@@ -94,7 +110,23 @@ export async function applySetSourceRemaps(
     if (from && to && from.id !== to.id) {
       await prisma.set.update({
         where: { id: to.id },
-        data: urls,
+        data: {
+          ...urls,
+          ...hostUrlFillNull(
+            {
+              soundcloudUrl: to.soundcloudUrl,
+              youtubeUrl: to.youtubeUrl,
+              mixcloudUrl: to.mixcloudUrl,
+            },
+            fromHosts,
+            {
+              soundcloudUrl: from.soundcloudUrl,
+              youtubeUrl: from.youtubeUrl,
+              mixcloudUrl: from.mixcloudUrl,
+            },
+            hostUrlsFromKnown(urls.playbackUrl, urls.sourceUrl),
+          ),
+        },
       });
       await prisma.played.deleteMany({ where: { setId: from.id } });
       await prisma.setArtist.deleteMany({ where: { setId: from.id } });
@@ -103,7 +135,23 @@ export async function applySetSourceRemaps(
       continue;
     }
     if (to) {
-      const patch: { sourceUrl?: string; playbackUrl?: string } = {};
+      const patch: {
+        sourceUrl?: string;
+        playbackUrl?: string;
+        soundcloudUrl?: string | null;
+        youtubeUrl?: string | null;
+        mixcloudUrl?: string | null;
+      } = {
+        ...hostUrlFillNull(
+          {
+            soundcloudUrl: to.soundcloudUrl,
+            youtubeUrl: to.youtubeUrl,
+            mixcloudUrl: to.mixcloudUrl,
+          },
+          fromHosts,
+          hostUrlsFromKnown(urls.playbackUrl, urls.sourceUrl),
+        ),
+      };
       if (to.sourceUrl !== urls.sourceUrl) patch.sourceUrl = urls.sourceUrl;
       if (to.playbackUrl !== urls.playbackUrl) {
         patch.playbackUrl = urls.playbackUrl;
