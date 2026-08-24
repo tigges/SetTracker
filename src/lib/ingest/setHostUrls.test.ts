@@ -123,6 +123,28 @@ assert.equal(
   "https://www.mixcloud.com/dimitrivegasandlikemike/smash-the-house-radio-ep-687/",
 );
 
+const smash690 = extras["yt-OcUFACTYqL8"];
+assert.equal(
+  smash690?.soundcloudUrl,
+  "https://soundcloud.com/dimitrivegasandlikemike/smash-the-house-radio-ep-690",
+);
+assert.equal(
+  smash690?.youtubeUrl,
+  "https://www.youtube.com/watch?v=OcUFACTYqL8",
+);
+assert.ok(!smash690?.mixcloudUrl);
+assert.equal(
+  extras["sc-dimitrivegasandlikemike-smash-the-house-radio-ep-690"]?.youtubeUrl,
+  "https://www.youtube.com/watch?v=OcUFACTYqL8",
+);
+assert.equal(
+  extras["sc-dimitrivegasandlikemike-smash-the-house-radio-ep-690"]?.soundcloudUrl,
+  "https://soundcloud.com/dimitrivegasandlikemike/smash-the-house-radio-ep-690",
+);
+assert.ok(
+  !extras["sc-dimitrivegasandlikemike-smash-the-house-radio-ep-690"]?.mixcloudUrl,
+);
+
 const voorn = extras["yt-FQj71mhobYw"];
 assert.equal(
   voorn?.soundcloudUrl,

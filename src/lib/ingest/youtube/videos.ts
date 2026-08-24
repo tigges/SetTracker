@@ -127,6 +127,7 @@ import {
   TL_JOHN_SUMMIT_BURNING_MAN_PLAYA_PACKAGE_MIX_2025,
   TL_BRANDON_DESERT_VALLEY_PAROOKAVILLE_GERMANY_2024,
   TL_DVLM_SMASH_THE_HOUSE_RADIO_687_2026,
+  TL_DVLM_SMASH_THE_HOUSE_RADIO_690_2026,
   TL_NOTION_PERRYS_LOLLAPALOOZA_CHICAGO_2026,
   TL_VINTAGE_CULTURE_ULTRA_MIAMI_RESISTANCE_2026,
   TL_VINTAGE_CULTURE_PACHA_NYC_2026,
@@ -991,6 +992,23 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/124p2t0t/dimitri-vegas-like-mike-smash-the-house-radio-687-2026-07-31.html",
     tracklist1001: TL_DVLM_SMASH_THE_HOUSE_RADIO_687_2026,
+  },
+  {
+    // Official Smash The House Radio 690; timed 1001 capture. SC twin:
+    // sc-dimitrivegasandlikemike-smash-the-house-radio-ep-690.
+    // Distinct from 687 (yt-eVjC42MNgkI). No Mixcloud in the paste.
+    video: "https://www.youtube.com/watch?v=OcUFACTYqL8",
+    primaryArtist: dj("Dimitri Vegas & Like Mike", {
+      accent: "#f7b801",
+      homeCity: "Belgium",
+    }),
+    genre: "Big Room",
+    type: "radio",
+    title: "Dimitri Vegas & Like Mike - Smash The House Radio 690 2026-08-21",
+    seriesName: "Smash The House Radio",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/20w8cgs9/dimitri-vegas-like-mike-smash-the-house-radio-690-2026-08-21.html",
+    tracklist1001: TL_DVLM_SMASH_THE_HOUSE_RADIO_690_2026,
   },
   {
     // Official Purified Radio 520; timed 1001 capture (same list as SC).

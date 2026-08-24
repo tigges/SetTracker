@@ -126,6 +126,21 @@ assert.equal(
   "sc-dimitrivegasandlikemike-smash-the-house-radio-ep-687",
 );
 
+const sth690Sc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url ===
+    "https://soundcloud.com/dimitrivegasandlikemike/smash-the-house-radio-ep-690",
+);
+assert.ok(sth690Sc);
+assert.equal(sth690Sc.primaryArtist.name, "Dimitri Vegas & Like Mike");
+assert.equal(sth690Sc.type, "radio");
+assert.equal(sth690Sc.seriesName, "Smash The House Radio");
+assert.equal(
+  `sc-dimitrivegasandlikemike-${slugify("smash-the-house-radio-ep-690")}`,
+  "sc-dimitrivegasandlikemike-smash-the-house-radio-ep-690",
+);
+assert.notEqual(sth690Sc.url, sth687Sc.url);
+
 const hrr225Sc = SOUNDCLOUD_TRACK_SEEDS.find(
   (s) => s.url === "https://soundcloud.com/jamie-jones/hot-robot-radio-225",
 );
