@@ -99,6 +99,8 @@ assert.equal(
 );
 assert.ok(!extras["yt-0Fq24R47sDY"]?.soundcloudUrl);
 assert.ok(!extras["yt-G-DciaWb5KY"]?.soundcloudUrl);
+assert.ok(!extras["yt-7jUXS12-7f0"]?.soundcloudUrl);
+assert.ok(!extras["yt-_4P9Y5KN9n4"]?.soundcloudUrl);
 assert.ok(!extras["yt-5V5qDFSw8Hs"]?.soundcloudUrl);
 assert.ok(!extras["yt-VuwLOFniScA"]?.soundcloudUrl);
 assert.ok(!extras["yt-czU0VhOB_Lg"]?.soundcloudUrl);

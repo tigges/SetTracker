@@ -3,7 +3,9 @@ import { describe, it } from "node:test";
 import {
   isBrowseReadySet,
   isEmptyOrPreviewSet,
+  isListPendingOfficialSet,
   isNonCatalogSet,
+  isProfileVisibleSet,
   setDisplayThumb,
 } from "./setBrowse";
 
@@ -76,6 +78,58 @@ describe("setBrowse", () => {
         imageUrl: "https://example.com/set.jpg",
         title: "ASOT Mix 2 [Preview]",
         trackCount: 0,
+      }),
+      false,
+    );
+  });
+
+  it("keeps official empty festival playbacks as list pending", () => {
+    const officialEmpty = {
+      title: "4444 OF A KIND Freedom WE1 | Tomorrowland 2026",
+      trackCount: 0,
+      durationSec: 60 * 60,
+      playbackUrl: "https://www.youtube.com/watch?v=VuwLOFniScA",
+      type: "festival",
+      eventKind: "festival",
+      imageUrl: "https://example.com/set.jpg",
+    };
+    assert.equal(isListPendingOfficialSet(officialEmpty), true);
+    assert.equal(isProfileVisibleSet(officialEmpty), true);
+    assert.equal(isBrowseReadySet(officialEmpty), false);
+    assert.equal(
+      isEmptyOrPreviewSet({
+        title: officialEmpty.title,
+        trackCount: 0,
+      }),
+      true,
+    );
+    assert.equal(
+      isListPendingOfficialSet({
+        ...officialEmpty,
+        playbackUrl: null,
+        sourceUrl: null,
+      }),
+      false,
+    );
+    assert.equal(
+      isProfileVisibleSet({
+        imageUrl: null,
+        title: "Smash The House Radio 690",
+        trackCount: 0,
+        durationSec: 60 * 60,
+        playbackUrl: "https://www.youtube.com/watch?v=OcUFACTYqL8",
+        type: "radio",
+      }),
+      false,
+    );
+    assert.equal(
+      isProfileVisibleSet({
+        imageUrl: null,
+        title: "A State of Trance 2026 - Mix 2 [Preview]",
+        trackCount: 0,
+        durationSec: 600,
+        playbackUrl: "https://www.youtube.com/watch?v=abc",
+        type: "festival",
       }),
       false,
     );

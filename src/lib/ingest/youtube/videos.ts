@@ -150,6 +150,8 @@ import {
   TL_DYEN_MADDIX_TML_WE2_2026,
   TL_MADDIX_TML_WE1_2026,
   TL_MARLON_HOFFSTADT_TML_WE1_2026,
+  TL_4444_OF_A_KIND_TML_WE1_FREEDOM_2026,
+  TL_BULLET_TOOTH_TML_WE2_CORE_2026,
 } from "../tracklists1001/seeds";
 import type { RawArtist } from "../types";
 import { slugify } from "../types";
@@ -754,7 +756,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_FISHER_TML_WE1_2026,
   },
   {
-    // Official Tomorrowland Relive — Mainstage WE1. Same 1001 seed as the
+    // Official Tomorrowland playback — Mainstage WE1. Same 1001 seed as the
     // SoundCloud upload (sc-charlottedewittemusic-charlotte-de-witte-at).
     video: "https://www.youtube.com/watch?v=uMgz40hvySQ",
     primaryArtist: dj("Charlotte de Witte", {
@@ -787,7 +789,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_FISHER_TML_WE2_2026,
   },
   {
-    // Official Tomorrowland Relive — Freedom Stage WE2; 1001.tl/116uj1x1 timed capture.
+    // Official Tomorrowland playback — Freedom Stage WE2; 1001.tl/116uj1x1 timed capture.
     video: "https://www.youtube.com/watch?v=eeNljOHahxY",
     primaryArtist: dj("Massano", { accent: "#8338ec" }),
     genre: "Melodic Techno",
@@ -849,7 +851,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_JOHN_SUMMIT_TML_WE2_2026,
   },
   {
-    // Artist upload — short YouTube House set (not Mainstage WE2 Tomorrowland Relive).
+    // Artist upload — short YouTube House set (not Mainstage WE2 Tomorrowland playback).
     video: "https://www.youtube.com/watch?v=I6QA_T-BS6o",
     primaryArtist: dj("Armin van Buuren", {
       accent: "#0077b6",
@@ -865,7 +867,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_ARMIN_VAN_BUUREN_YT_HOUSE_TML_2026,
   },
   {
-    // Tomorrowland official Relive — Mainstage WE2.
+    // Tomorrowland official playback — Mainstage WE2.
     video: "https://www.youtube.com/watch?v=tg_QLGpes0k",
     primaryArtist: dj("Armin van Buuren", {
       accent: "#0077b6",
@@ -881,7 +883,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_ARMIN_VAN_BUUREN_TML_WE2_2026,
   },
   {
-    // Tomorrowland official Relive — Freedom Stage WE1.
+    // Tomorrowland official playback — Freedom Stage WE1.
     video: "https://www.youtube.com/watch?v=pwXGm4HEQdo",
     primaryArtist: dj("Armin van Buuren", {
       accent: "#0077b6",
@@ -897,7 +899,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_ARMIN_VAN_BUUREN_TML_WE1_FREEDOM_2026,
   },
   {
-    // Tomorrowland official Relive — Mainstage WE2.
+    // Tomorrowland official playback — Mainstage WE2.
     video: "https://www.youtube.com/watch?v=zHAUZ02aCwo",
     primaryArtist: dj("Alok", {
       accent: "#ff6b35",
@@ -1009,6 +1011,72 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/20w8cgs9/dimitri-vegas-like-mike-smash-the-house-radio-690-2026-08-21.html",
     tracklist1001: TL_DVLM_SMASH_THE_HOUSE_RADIO_690_2026,
+  },
+  {
+    // Tomorrowland official playback — Freedom Stage WE1. No SoundCloud
+    // in the operator paste — do not invent an SC slug. Distinct from
+    // Rose Ringed Freedom WE1 (yt-KAZd25mCHp8).
+    video: "https://www.youtube.com/watch?v=VuwLOFniScA",
+    primaryArtist: dj("4444 OF A KIND", {
+      accent: "#ff006e",
+      bio: "Exclusive live act of D-Block & S-te-Fan and Sub Zero Project. First release Waiting 4 is on Tomorrowland Music.",
+      youtubeHandle: "@4444fourofakind",
+      socialLinks: [
+        "https://www.youtube.com/@4444fourofakind",
+        "https://www.instagram.com/4444fourofakind/",
+        "https://www.facebook.com/4444fourofakind/",
+      ],
+    }),
+    genre: "Hard House",
+    type: "festival",
+    title: "4444 OF A KIND Freedom WE1 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/132dgbd9/4444-of-a-kind-freedom-stage-tomorrowland-weekend-1-belgium-2026-07-17.html",
+    tracklist1001: TL_4444_OF_A_KIND_TML_WE1_FREEDOM_2026,
+  },
+  {
+    // Tomorrowland official playback — CORE Stage WE2. Existing 9-clock
+    // overlay TL_BULLET_TOOTH_TML_WE2_CORE_2026. No SoundCloud in the
+    // operator paste — do not invent an SC slug. Distinct from DJ Mag HQ
+    // (yt-7jUXS12-7f0) and Beatport Live Mint (yt-_4P9Y5KN9n4).
+    video: "https://www.youtube.com/watch?v=G-DciaWb5KY",
+    primaryArtist: dj("Bullet Tooth", { accent: "#ff6b35" }),
+    genre: "UK Garage",
+    type: "festival",
+    title: "Bullet Tooth WE2 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1rl30xh1/bullet-tooth-core-stage-tomorrowland-weekend-2-belgium-2026-07-24.html",
+    tracklist1001: TL_BULLET_TOOTH_TML_WE2_CORE_2026,
+  },
+  {
+    // Official DJ Mag HQ studio set. No 1001 URL or SoundCloud in the
+    // operator paste — do not invent clocks or an SC slug. Distinct from
+    // CORE WE2 and Beatport Live Mint.
+    video: "https://www.youtube.com/watch?v=7jUXS12-7f0",
+    primaryArtist: dj("Bullet Tooth", { accent: "#ff6b35" }),
+    genre: "UK Garage",
+    type: "mix",
+    title: "Bullet Tooth DJ Set Live From DJ Mag HQ",
+    seriesName: "DJ Mag HQ",
+    eventName: "DJ Mag",
+  },
+  {
+    // Official Beatport Live upload — The Block x Mint Festival 2026.
+    // No 1001 URL or SoundCloud in the operator paste — do not invent
+    // clocks, scrape Beatport HTML, or invent an SC slug. Distinct from
+    // CORE WE2 and DJ Mag HQ.
+    video: "https://www.youtube.com/watch?v=_4P9Y5KN9n4",
+    primaryArtist: dj("Bullet Tooth", { accent: "#ff6b35" }),
+    genre: "UK Garage",
+    type: "festival",
+    title:
+      "Bullet Tooth DJ Set | The Block x Mint Festival 2026 | @beatport Live",
+    seriesName: "Beatport Live",
+    eventName: "Mint Festival",
   },
   {
     // Official Purified Radio 520; timed 1001 capture (same list as SC).
@@ -1188,7 +1256,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_ABOVE_AND_BEYOND_ESTIVA_GROUP_THERAPY_RADIO_690_2026,
   },
   {
-    // Tomorrowland official Relive — Mainstage WE2.
+    // Tomorrowland official playback — Mainstage WE2.
     video: "https://www.youtube.com/watch?v=BUsCIK_kh_A",
     primaryArtist: dj("Martin Garrix", {
       accent: "#00d4ff",
@@ -1204,7 +1272,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_MARTIN_GARRIX_TML_WE2_2026,
   },
   {
-    // Tomorrowland official Relive — Mainstage WE1.
+    // Tomorrowland official playback — Mainstage WE1.
     video: "https://www.youtube.com/watch?v=1lqmFLr-SkA",
     primaryArtist: dj("The Chainsmokers", { accent: "#4cc9f0" }),
     genre: "Future Bass",
@@ -1217,7 +1285,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_THE_CHAINSMOKERS_TML_WE1_2026,
   },
   {
-    // Tomorrowland official Relive — Mainstage WE1; 1001.tl/25k2c8zk timed capture.
+    // Tomorrowland official playback — Mainstage WE1; 1001.tl/25k2c8zk timed capture.
     video: "https://www.youtube.com/watch?v=rG1DvjvXCls",
     primaryArtist: dj("Marlon Hoffstadt", {
       accent: "#c77dff",
@@ -1233,7 +1301,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_MARLON_HOFFSTADT_TML_WE1_2026,
   },
   {
-    // Tomorrowland official Relive — Mainstage WE1; 1001.tl/2q9jpt9k timed capture.
+    // Tomorrowland official playback — Mainstage WE1; 1001.tl/2q9jpt9k timed capture.
     video: "https://www.youtube.com/watch?v=GSnPwle4FOE",
     primaryArtist: dj("David Guetta", {
       accent: "#1e90ff",
@@ -1265,7 +1333,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_MADDIX_TML_WE1_2026,
   },
   {
-    // Tomorrowland official Relive — Atmosphere WE2 B2B; title drives collaborator.
+    // Tomorrowland official playback — Atmosphere WE2 B2B; title drives collaborator.
     // Official SC twin: maddixmusic/dyen-b2b-maddix-live.
     // Distinct from Dyzen Planaxis WE2 (held).
     video: "https://www.youtube.com/watch?v=VABm0tIRn2U",
@@ -1282,7 +1350,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_DYEN_MADDIX_TML_WE2_2026,
   },
   {
-    // Tomorrowland official Relive — Freedom Stage WE2; 1001.tl/28bjnz11.
+    // Tomorrowland official playback — Freedom Stage WE2; 1001.tl/28bjnz11.
     // No SoundCloud in the operator paste — do not invent an SC slug.
     video: "https://www.youtube.com/watch?v=KCeluZt3H9o",
     primaryArtist: dj("Bebe Rexha", {
@@ -1315,7 +1383,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_DINO_LENNY_CORE_019_2022,
   },
   {
-    // Tomorrowland official Relive — Mainstage WE1.
+    // Tomorrowland official playback — Mainstage WE1.
     video: "https://www.youtube.com/watch?v=TidwOi0NMI0",
     primaryArtist: dj("Alesso", {
       accent: "#4895ef",
@@ -1331,7 +1399,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_ALESSO_TML_WE1_2026,
   },
   {
-    // Tomorrowland official Relive — Great Library WE1.
+    // Tomorrowland official playback — Great Library WE1.
     video: "https://www.youtube.com/watch?v=E1WH0nvaxAw",
     primaryArtist: dj("Illenium", {
       accent: "#7b2cbf",
@@ -1347,7 +1415,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_ILLENIUM_TML_WE1_2026,
   },
   {
-    // Tomorrowland official Relive — Mainstage WE2.
+    // Tomorrowland official playback — Mainstage WE2.
     video: "https://www.youtube.com/watch?v=jSJEkiV3cCs",
     primaryArtist: dj("Chase & Status", {
       accent: "#f77f00",
@@ -1363,7 +1431,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_CHASE_STATUS_TML_WE2_2026,
   },
   {
-    // Tomorrowland official Relive — Freedom Stage WE1.
+    // Tomorrowland official playback — Freedom Stage WE1.
     video: "https://www.youtube.com/watch?v=zMW5SQPS1cY",
     primaryArtist: dj("I Hate Models", { accent: "#212529" }),
     genre: "Techno",
@@ -1376,7 +1444,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_I_HATE_MODELS_TML_WE1_2026,
   },
   {
-    // Tomorrowland official Relive — Freedom Stage WE1.
+    // Tomorrowland official playback — Freedom Stage WE1.
     video: "https://www.youtube.com/watch?v=_e1H9pkcjsQ",
     primaryArtist: dj("Netsky", { accent: "#c8e600" }),
     genre: "Drum & Bass",
@@ -1389,7 +1457,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_NETSKY_TML_WE1_2026,
   },
   {
-    // Tomorrowland official Relive — Great Library WE1 2026 (not Daybreak 2024).
+    // Tomorrowland official playback — Great Library WE1 2026 (not Daybreak 2024).
     video: "https://www.youtube.com/watch?v=2i3XOxbp54U",
     primaryArtist: dj("Oliver Heldens", {
       accent: "#7c5cff",
@@ -1405,7 +1473,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_OLIVER_HELDENS_TML_WE1_2026,
   },
   {
-    // Tomorrowland official Relive — Freedom Stage WE2.
+    // Tomorrowland official playback — Freedom Stage WE2.
     video: "https://www.youtube.com/watch?v=fhiZ1Rj9o-A",
     primaryArtist: dj("Alesso", {
       accent: "#4895ef",
@@ -2502,7 +2570,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     eventName: "Tomorrowland Belgium",
   },
   {
-    // Official Tomorrowland Relive — Mainstage WE1; timed 1001 capture.
+    // Official Tomorrowland playback — Mainstage WE1; timed 1001 capture.
     video: "https://www.youtube.com/watch?v=NpL_bT5vgmU",
     primaryArtist: dj("Boris Brejcha", { accent: "#ff006e" }),
     genre: "Techno",
@@ -2515,7 +2583,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_BORIS_BREJCHA_TML_WE1_2026,
   },
   {
-    // Official Tomorrowland Relive — Freedom WE2; timed 1001 capture.
+    // Official Tomorrowland playback — Freedom WE2; timed 1001 capture.
     video: "https://www.youtube.com/watch?v=g4vR2VlhNtk",
     primaryArtist: dj("Sebastian Ingrosso", { accent: "#4361ee" }),
     genre: "Progressive House",

@@ -78,8 +78,8 @@ assert.equal(
 );
 assert.equal(landingPlaybackTier({ title: "No audio" }), 0);
 
-const relive = set({
-  id: "relive",
+const tmlDump = set({
+  id: "tml-dump",
   title: "David Guetta WE1 | Tomorrowland 2026",
   seriesName: "Tomorrowland Relive",
   playbackUrl: "https://www.youtube.com/watch?v=blocked",
@@ -98,14 +98,14 @@ const playable = set({
   primaryDj: { name: "Charlotte de Witte", slug: "charlotte-de-witte" },
 });
 assert.deepEqual(
-  preferLandingPlayback([relive, playable]).map((s) => s.id),
+  preferLandingPlayback([tmlDump, playable]).map((s) => s.id),
   ["playable"],
 );
-const playableFirst = pickLandingSets([relive, playable], 3, now);
+const playableFirst = pickLandingSets([tmlDump, playable], 3, now);
 assert.equal(playableFirst[0]?.id, "playable");
 assert.ok(
-  playableFirst.findIndex((s) => s.id === "relive") !== 0,
-  "Tomorrowland Relive is not the homepage teaser when a playable set exists",
+  playableFirst.findIndex((s) => s.id === "tml-dump") !== 0,
+  "Tomorrowland series dumps are not the homepage teaser when a playable set exists",
 );
 
 const onlyFiller = pickLandingSets([filler], 3, now);

@@ -8,7 +8,7 @@ import {
   reliveEditionToken,
   remapsFromCuratedRelives,
 } from "./reliveWatch";
-import { HELD_RELIVE_WATCH } from "./nextCaptures";
+import { HELD_PLAYBACK_WATCH } from "./nextCaptures";
 
 assert.equal(reliveEditionToken("Fisher WE2 | Tomorrowland 2026"), "tml-we2");
 assert.equal(
@@ -79,7 +79,7 @@ const entries = [
   },
 ];
 
-const held = matchHeldRelives(entries, HELD_RELIVE_WATCH);
+const held = matchHeldRelives(entries, HELD_PLAYBACK_WATCH);
 const calvin = held.find((h) => /calvin/i.test(h.name));
 assert.ok(calvin);
 assert.equal(calvin!.status, "candidate");
@@ -121,7 +121,7 @@ const knockEntries = [
     channel: "Tomorrowland",
   },
 ];
-const knockHeld = matchHeldRelives(knockEntries, HELD_RELIVE_WATCH);
+const knockHeld = matchHeldRelives(knockEntries, HELD_PLAYBACK_WATCH);
 const knockHit = knockHeld.find((h) => /knock2/i.test(h.name));
 assert.equal(knockHit!.status, "candidate");
 assert.equal(knockHit!.videoId, "KNOCKHARD01");
@@ -142,7 +142,7 @@ const coleEntries = [
     channel: "Tomorrowland",
   },
 ];
-const coleHeld = matchHeldRelives(coleEntries, HELD_RELIVE_WATCH);
+const coleHeld = matchHeldRelives(coleEntries, HELD_PLAYBACK_WATCH);
 const coleHit = coleHeld.find((h) => /cole/i.test(h.name));
 assert.equal(coleHit!.status, "candidate");
 assert.equal(coleHit!.videoId, "COLEHARD001");

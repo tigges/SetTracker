@@ -9,7 +9,10 @@
   {
     "kind": "dj",
     "slug": "4444-of-a-kind",
-    "imageUrl": "https://cdn-images.dzcdn.net/images/artist/169c16746dd29c04218604fe57eb0786/250x250-000000-80-0-0.jpg"
+    "imageUrl": "https://cdn-images.dzcdn.net/images/artist/169c16746dd29c04218604fe57eb0786/250x250-000000-80-0-0.jpg",
+    "youtube": "https://www.youtube.com/@4444fourofakind",
+    "instagram": "https://www.instagram.com/4444fourofakind/",
+    "bio": "Exclusive live act of D-Block & S-te-Fan and Sub Zero Project. First release Waiting 4 is on Tomorrowland Music."
   },
   {
     "kind": "dj",
@@ -20,7 +23,10 @@
   {
     "kind": "dj",
     "slug": "adrian-mills",
-    "imageUrl": "https://cdn-images.dzcdn.net/images/artist/8ed0d830157f6c645288ac93b105e59f/250x250-000000-80-0-0.jpg"
+    "imageUrl": "https://cdn-images.dzcdn.net/images/artist/8ed0d830157f6c645288ac93b105e59f/250x250-000000-80-0-0.jpg",
+    "soundcloud": "https://soundcloud.com/adrianxmills",
+    "instagram": "https://www.instagram.com/adrianxmills/",
+    "genre": "Techno"
   },
   {
     "kind": "dj",
@@ -413,7 +419,8 @@
   {
     "kind": "dj",
     "slug": "bullet-tooth",
-    "imageUrl": "https://cdn-images.dzcdn.net/images/artist/5b7361f2f22e7d6f6fae99ebd4ab710b/250x250-000000-80-0-0.jpg"
+    "imageUrl": "https://cdn-images.dzcdn.net/images/artist/5b7361f2f22e7d6f6fae99ebd4ab710b/250x250-000000-80-0-0.jpg",
+    "genre": "UK Garage"
   },
   {
     "kind": "dj",

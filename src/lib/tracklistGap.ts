@@ -14,7 +14,11 @@ import {
 } from "./djCatalog";
 import { isArchiveTitledSet, setPerformanceYear } from "./feedPriority";
 import { isFestivalSeasonSet } from "./ingest/festivalDrops";
-import { isEmptyOrPreviewSet, isNonCatalogSet } from "./setBrowse";
+import {
+  isEmptyOrPreviewSet,
+  isListPendingOfficialSet,
+  isNonCatalogSet,
+} from "./setBrowse";
 import { assessSetDensity, DENSITY_MIN_DURATION_SEC } from "./setDensity";
 
 export type TracklistGapFields = {
@@ -26,6 +30,7 @@ export type TracklistGapFields = {
   eventSlug?: string | null;
   sourceName?: string | null;
   sourceUrl?: string | null;
+  playbackUrl?: string | null;
   primaryDjSlug?: string | null;
   top100Rank?: number | null;
   festivalRank?: number | null;
@@ -73,7 +78,24 @@ export function setPageIsPublished(s: {
   title: string;
   playCount: number;
   durationSec: number;
+  playbackUrl?: string | null;
+  sourceUrl?: string | null;
+  type?: string | null;
+  eventKind?: string | null;
 }): boolean {
+  if (
+    isListPendingOfficialSet({
+      title: s.title,
+      trackCount: s.playCount,
+      durationSec: s.durationSec,
+      playbackUrl: s.playbackUrl,
+      sourceUrl: s.sourceUrl,
+      type: s.type,
+      eventKind: s.eventKind,
+    })
+  ) {
+    return true;
+  }
   return !isEmptyOrPreviewSet({
     title: s.title,
     trackCount: s.playCount,

@@ -9,6 +9,7 @@
 import { isJunkArtistName } from "./artistName";
 import { isBrandHostSlug } from "./brandHosts";
 import { isGenreTagName } from "./genre";
+import { playablePlaybackUrl } from "./playback";
 
 export type SetBrowseSignals = {
   /** Set cover URL (preferred). */
@@ -24,6 +25,10 @@ export type SetBrowseSignals = {
   title?: string | null | undefined;
   trackCount?: number | null | undefined;
   durationSec?: number | null | undefined;
+  playbackUrl?: string | null | undefined;
+  sourceUrl?: string | null | undefined;
+  type?: string | null | undefined;
+  eventKind?: string | null | undefined;
 };
 
 /** Album previews and unparsed shells — hide from browse / search / feed. */
@@ -71,6 +76,56 @@ export function setDisplayThumb(s: SetBrowseSignals): string | null {
   const dj = s.primaryDjImageUrl?.trim() || null;
   if (dj) return dj;
   return s.eventImageUrl?.trim() || null;
+}
+
+/**
+ * Official playable festival/club set with no clocks yet.
+ * Hidden from home/search; shown on DJ / event pages as list pending.
+ */
+export function isListPendingOfficialSet(s: {
+  title?: string | null;
+  trackCount?: number | null;
+  durationSec?: number | null;
+  playbackUrl?: string | null;
+  sourceUrl?: string | null;
+  type?: string | null;
+  eventKind?: string | null;
+}): boolean {
+  if ((s.trackCount ?? 0) > 0) return false;
+  if (isNonCatalogSet({ title: s.title, durationSec: s.durationSec })) {
+    return false;
+  }
+  const title = s.title ?? "";
+  if (/\[preview\]|\(preview\)/i.test(title)) return false;
+  const dur = s.durationSec ?? 0;
+  if (/\bpreview\b/i.test(title) && dur > 0 && dur <= 12 * 60) return false;
+  if (!playablePlaybackUrl(s.playbackUrl, s.sourceUrl)) return false;
+  return (
+    s.eventKind === "festival" ||
+    s.eventKind === "club" ||
+    s.type === "festival"
+  );
+}
+
+/** DJ / event lists — clocks or official empty playback. Not junk/preview. */
+export function isProfileVisibleSet(s: SetBrowseSignals): boolean {
+  if (isNonCatalogSet({ title: s.title, durationSec: s.durationSec })) {
+    return false;
+  }
+  const title = s.title ?? "";
+  if (/\[preview\]|\(preview\)/i.test(title)) return false;
+  const dur = s.durationSec ?? 0;
+  if (/\bpreview\b/i.test(title) && dur > 0 && dur <= 12 * 60) return false;
+  if (
+    !isBrandHostSlug(s.primaryDjSlug) &&
+    s.primaryDjName &&
+    isJunkArtistName(s.primaryDjName)
+  ) {
+    return false;
+  }
+  if (isListPendingOfficialSet(s)) return true;
+  if (isEmptyOrPreviewSet(s)) return false;
+  return true;
 }
 
 /** Ready for the home feed / set grids — must have a real image URL. */

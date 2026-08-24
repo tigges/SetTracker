@@ -14,7 +14,7 @@ import type { PrismaClient } from "@prisma/client";
 import { writeReport } from "../discovery/llmResearch";
 import { isBareIdRow } from "../tracklists1001/toSeed";
 import type { FingerprintSeedRow } from "../fingerprint/seeds";
-import { HELD_RELIVE_WATCH } from "../nextCaptures";
+import { HELD_PLAYBACK_WATCH } from "../nextCaptures";
 import {
   TL_COLE_TERRAZAS_HARD_SUMMER_2026,
   TL_KNOCK2_ZEDD_HARD_SUMMER_2026,
@@ -149,7 +149,7 @@ export function heldIdentifyJobs(): {
   seed: string;
   rows: FingerprintSeedRow[];
 }[] {
-  return HELD_RELIVE_WATCH.filter((h) => HELD_SEED_ROWS[h.seed]).map((h) => ({
+  return HELD_PLAYBACK_WATCH.filter((h) => HELD_SEED_ROWS[h.seed]).map((h) => ({
     name: h.name,
     seed: h.seed,
     rows: HELD_SEED_ROWS[h.seed]!,

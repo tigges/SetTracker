@@ -73,8 +73,8 @@ function looksLikeRelive(s: {
 
 /**
  * Homepage teasers should click through to something that plays.
- * SoundCloud / Mixcloud first. Official YouTube next. Tomorrowland Relive
- * titles last — those dumps often keep a watch URL after UMG blocks the embed.
+ * SoundCloud / Mixcloud first. Official YouTube next. Tomorrowland series
+ * dumps last — those often keep a watch URL after UMG blocks the embed.
  */
 export function landingPlaybackTier(s: {
   playbackUrl?: string | null;

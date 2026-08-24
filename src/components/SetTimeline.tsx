@@ -263,8 +263,12 @@ export function SetTimeline({
         </div>
         {plays.length === 0 ? (
           <p className="px-4 py-10 text-center text-[13px] text-muted2">
-            No tracklist parsed from the source yet. We only show tracks found in
-            the upload description or timed comments — nothing invented.
+            <span className="mb-1 block text-[14px] font-medium text-ink">
+              List pending
+            </span>
+            Official playback is up. The tracklist has not been parsed yet —
+            we only show clocks from the upload or a timed overlay, never
+            invented cues.
           </p>
         ) : null}
         <ol>

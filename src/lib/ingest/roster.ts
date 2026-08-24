@@ -1709,6 +1709,23 @@ export const ARTIST_ROSTER_CURATED: ArtistRosterEntry[] = [
     priority: "high",
   },
   {
+    name: "Adrián Mills",
+    genre: "Techno",
+    accent: "#40916c",
+    // Official SC / IG adrianxmills. RA is discovery only — never website.
+    // Facebook adrianmillstechno stays roster socials (Dj has no facebook column).
+    // Spotify artist URL is not a Dj column. No YouTube in the operator paste.
+    soundcloud: { permalink: "adrianxmills", status: "ok" },
+    socials: [
+      "https://soundcloud.com/adrianxmills",
+      "https://www.instagram.com/adrianxmills/",
+      "https://www.facebook.com/adrianmillstechno",
+      "https://open.spotify.com/artist/6H9sRmDCsXzsWK7jEg1thF",
+      "https://ra.co/dj/adrianmills",
+    ],
+    priority: "normal",
+  },
+  {
     name: "Above & Beyond",
     genre: "Trance",
     accent: "#7209b7",
@@ -1731,6 +1748,32 @@ export const ARTIST_ROSTER_CURATED: ArtistRosterEntry[] = [
     youtube: { handle: "@SubZeroProject", status: "ok" },
     soundcloud: { permalink: "subzeroproject", status: "ok" },
     priority: "high",
+  },
+  {
+    name: "4444 OF A KIND",
+    genre: "Hard House",
+    accent: "#ff006e",
+    // Official channel @4444fourofakind (UCbkjgAyvXyD8y6Y-_N2gmNQ).
+    // No SoundCloud in the operator paste — do not invent an SC permalink.
+    youtube: { handle: "@4444fourofakind", status: "ok" },
+    socials: [
+      "https://www.youtube.com/@4444fourofakind",
+      "https://www.youtube.com/channel/UCbkjgAyvXyD8y6Y-_N2gmNQ",
+      "https://www.instagram.com/4444fourofakind/",
+      "https://www.facebook.com/4444fourofakind/",
+    ],
+    priority: "high",
+  },
+  {
+    name: "Bullet Tooth",
+    genre: "UK Garage",
+    accent: "#ff6b35",
+    // Official Beatport artist/bullet-tooth/1146765. No SoundCloud or
+    // YouTube channel in the operator paste — do not invent handles.
+    // Festival watches live in youtube/videos.ts (CORE WE2, DJ Mag HQ,
+    // Beatport Live Mint). Beatport is discovery only — never website.
+    socials: ["https://www.beatport.com/artist/bullet-tooth/1146765"],
+    priority: "normal",
   },
   {
     name: "Lucas & Steve",

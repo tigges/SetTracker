@@ -178,7 +178,7 @@ export const KNOWN_EVENTS: Record<string, CanonicalEvent> = {
     website: "https://www.tomorrowland.com/",
     soundcloud: "https://soundcloud.com/tomorrowland",
     // Lineup page scanned every deep ingest (CDN + HTML + seed fallback).
-    // See discovery/lineupSources.ts — Tomorrowland Relive YT playlist + SC in festivalDrops.
+    // See discovery/lineupSources.ts — Tomorrowland YT playlist + SC in festivalDrops.
     instagram: "https://instagram.com/tomorrowland",
     twitter: "https://x.com/tomorrowland",
   },

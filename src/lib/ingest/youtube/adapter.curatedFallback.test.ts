@@ -26,6 +26,10 @@ const JOEL_EDGE = YOUTUBE_SETS.find((s) => s.video.includes("soEFl73peVA"));
 const PRR_731 = YOUTUBE_SETS.find((s) => s.video.includes("Rgx-wT9FDaE"));
 const STH_687 = YOUTUBE_SETS.find((s) => s.video.includes("eVjC42MNgkI"));
 const STH_690 = YOUTUBE_SETS.find((s) => s.video.includes("OcUFACTYqL8"));
+const KIND_FREEDOM = YOUTUBE_SETS.find((s) => s.video.includes("VuwLOFniScA"));
+const BULLET_CORE = YOUTUBE_SETS.find((s) => s.video.includes("G-DciaWb5KY"));
+const BULLET_DJMAG = YOUTUBE_SETS.find((s) => s.video.includes("7jUXS12-7f0"));
+const BULLET_MINT = YOUTUBE_SETS.find((s) => s.video.includes("_4P9Y5KN9n4"));
 const NOTION_PERRY = YOUTUBE_SETS.find((s) => s.video.includes("9vgSTomhCp8"));
 const VC_ULTRA = YOUTUBE_SETS.find((s) => s.video.includes("xXRjglkAmq8"));
 const VC_PACHA_NYC = YOUTUBE_SETS.find((s) => s.video.includes("TDuFnUAo4II"));
@@ -732,6 +736,28 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.durationSec, 57 * 60 + 28 + 180);
   });
 
+  it("builds 4444 OF A KIND Freedom WE1 meta from the curated 1001 capture", () => {
+    assert.ok(KIND_FREEDOM);
+    const meta = watchMetaFromCuratedSeed(KIND_FREEDOM);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "VuwLOFniScA");
+    assert.match(meta.title, /4444 OF A KIND/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=VuwLOFniScA");
+    // Last cue 56:32 + 180s pad.
+    assert.equal(meta.durationSec, 56 * 60 + 32 + 180);
+  });
+
+  it("builds Bullet Tooth CORE WE2 meta from the curated 1001 capture", () => {
+    assert.ok(BULLET_CORE);
+    const meta = watchMetaFromCuratedSeed(BULLET_CORE);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "G-DciaWb5KY");
+    assert.match(meta.title, /Bullet Tooth/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=G-DciaWb5KY");
+    // Last cue 1:23:40 + 180s pad.
+    assert.equal(meta.durationSec, 1 * 3600 + 23 * 60 + 40 + 180);
+  });
+
   it("builds NOTION Perry's Lollapalooza meta from the curated 1001 capture", () => {
     assert.ok(NOTION_PERRY);
     const meta = watchMetaFromCuratedSeed(NOTION_PERRY);
@@ -1332,6 +1358,70 @@ describe("curated YouTube 429 fallback", () => {
     assert.ok(sets[0]!.durationSec >= 57 * 60);
     assert.equal(sets[0]?.primaryArtist?.slug, "dimitri-vegas-like-mike");
     assert.equal(sets[0]?.seriesName, "Smash The House Radio");
+  });
+
+  it("lands 4444 OF A KIND Freedom WE1 from the 1001 seed when watch is 429", async () => {
+    assert.ok(KIND_FREEDOM);
+    const adapter = createYoutubeAdapter([KIND_FREEDOM], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-VuwLOFniScA");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 21);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 56 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "4444-of-a-kind");
+    assert.equal(sets[0]?.seriesName, "Tomorrowland");
+    assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
+  });
+
+  it("lands Bullet Tooth CORE WE2 from the 1001 seed when watch is 429", async () => {
+    assert.ok(BULLET_CORE);
+    const adapter = createYoutubeAdapter([BULLET_CORE], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-G-DciaWb5KY");
+    assert.equal(sets[0]!.type, "festival");
+    assert.equal(sets[0]!.genre, "UK Garage");
+    assert.ok(sets[0]!.plays.length >= 9);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 1 * 3600 + 23 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "bullet-tooth");
+    assert.equal(sets[0]?.seriesName, "Tomorrowland");
+    assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
+    assert.notEqual(sets[0]!.sourceSlug, "yt-7jUXS12-7f0");
+    assert.notEqual(sets[0]!.sourceSlug, "yt-_4P9Y5KN9n4");
+  });
+
+  it("lands Bullet Tooth DJ Mag HQ without inventing 1001 clocks when watch is 429", async () => {
+    assert.ok(BULLET_DJMAG);
+    assert.equal(BULLET_DJMAG.tracklist1001, undefined);
+    assert.equal(BULLET_DJMAG.tracklist1001Url, undefined);
+    const adapter = createYoutubeAdapter([BULLET_DJMAG], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-7jUXS12-7f0");
+    assert.equal(sets[0]!.type, "mix");
+    assert.equal(sets[0]?.primaryArtist?.slug, "bullet-tooth");
+    assert.equal(sets[0]?.seriesName, "DJ Mag HQ");
+    assert.match(String(sets[0]?.title ?? ""), /DJ Mag HQ/i);
+    assert.equal(sets[0]!.plays.length, 0);
+  });
+
+  it("lands Bullet Tooth Beatport Live Mint without inventing 1001 clocks when watch is 429", async () => {
+    assert.ok(BULLET_MINT);
+    assert.equal(BULLET_MINT.tracklist1001, undefined);
+    assert.equal(BULLET_MINT.tracklist1001Url, undefined);
+    const adapter = createYoutubeAdapter([BULLET_MINT], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-_4P9Y5KN9n4");
+    assert.equal(sets[0]!.type, "festival");
+    assert.equal(sets[0]?.primaryArtist?.slug, "bullet-tooth");
+    assert.equal(sets[0]?.seriesName, "Beatport Live");
+    assert.match(String(sets[0]?.eventName ?? ""), /Mint Festival/i);
+    assert.match(String(sets[0]?.title ?? ""), /Mint Festival/i);
+    assert.equal(sets[0]!.plays.length, 0);
   });
 
   it("lands NOTION Perry's Lollapalooza from the 1001 seed when watch is 429", async () => {

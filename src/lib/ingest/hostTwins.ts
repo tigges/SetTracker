@@ -2,6 +2,7 @@
  * Same-performance host twins (SC / YT / Mixcloud).
  *
  * Share timed 1001 / MixesDB / Apple Music clocks when durations match.
+ * Fold also copies first-party clocks onto the survivor before delete.
  * Never interpolate, never rescale, never copy ACR fingerprint offsets
  * (those belong to one audio file).
  */
@@ -16,6 +17,21 @@ export const SHAREABLE_TRACKLIST_PROVENANCE = new Set([
   "1001tl",
   "mixesdb",
   "applemusic",
+]);
+
+/** First-party clocks (SC comments, YT description). Not ACR. */
+export const FIRST_PARTY_TRACKLIST_PROVENANCE = new Set([
+  "youtube",
+  "soundcloud",
+  "hearthis",
+  "bandcamp",
+  "insomniac",
+]);
+
+/** Clocks that may move with a host-twin fold. Never fingerprint. */
+export const FOLD_COPY_PROVENANCE = new Set([
+  ...SHAREABLE_TRACKLIST_PROVENANCE,
+  ...FIRST_PARTY_TRACKLIST_PROVENANCE,
 ]);
 
 const MIN_SHARE_DURATION_SEC = 20 * 60;
@@ -43,6 +59,71 @@ export function shouldCopyTwinTracklist(
     recipient.shareable < donor.shareable &&
     durationsCompatible(donor.durationSec, recipient.durationSec)
   );
+}
+
+export function foldCopyPlayCount(
+  plays: Array<{ provenance: string }>,
+): number {
+  return plays.filter((p) => FOLD_COPY_PROVENANCE.has(p.provenance)).length;
+}
+
+export function firstPartyPlayCount(
+  plays: Array<{ provenance: string }>,
+): number {
+  return plays.filter((p) =>
+    FIRST_PARTY_TRACKLIST_PROVENANCE.has(p.provenance),
+  ).length;
+}
+
+/**
+ * Copy clocks onto the fold survivor when the secondary list is richer.
+ * ACR / fingerprint offsets stay on the file they came from.
+ */
+export function shouldCopyFoldTracklist(
+  donor: {
+    durationSec: number;
+    foldCopy: number;
+    firstParty: number;
+  },
+  recipient: { durationSec: number; foldCopy: number },
+): boolean {
+  if (
+    donor.durationSec >= MIN_SHARE_DURATION_SEC &&
+    recipient.durationSec >= MIN_SHARE_DURATION_SEC &&
+    !durationsCompatible(donor.durationSec, recipient.durationSec)
+  ) {
+    return false;
+  }
+  if (donor.foldCopy < 1) return false;
+  if (recipient.foldCopy >= donor.foldCopy) return false;
+  if (donor.foldCopy >= 12) return true;
+  return recipient.foldCopy === 0 && donor.firstParty >= 1;
+}
+
+const FOLD_FP_GAP_HALF_SEC = 40;
+
+/** Donor overlay/first-party spine; keep survivor fingerprints in gaps. */
+export function mergeFoldCopyPlays<
+  T extends { provenance: string; timestamp: number; position?: number },
+>(survivor: T[], donor: T[]): T[] {
+  const donorCopy = donor.filter((p) => FOLD_COPY_PROVENANCE.has(p.provenance));
+  if (!donorCopy.length) return survivor;
+  const merged = [...donorCopy];
+  for (const fp of survivor.filter((p) => p.provenance === "fingerprint")) {
+    if (
+      merged.some(
+        (p) => Math.abs(p.timestamp - fp.timestamp) <= FOLD_FP_GAP_HALF_SEC,
+      )
+    ) {
+      continue;
+    }
+    merged.push(fp);
+  }
+  return merged
+    .sort(
+      (a, b) => a.timestamp - b.timestamp || (a.position ?? 0) - (b.position ?? 0),
+    )
+    .map((p, i) => ({ ...p, position: i + 1 }));
 }
 
 function unionSlugGroups(groups: string[][]): string[][] {

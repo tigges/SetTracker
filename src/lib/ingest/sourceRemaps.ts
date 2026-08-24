@@ -23,7 +23,7 @@ export const SET_SOURCE_REMAPS: SetSourceRemap[] = [
     toSlug: "yt-Uq1WP8v3U4o",
     sourceUrl: "https://www.youtube.com/watch?v=Uq1WP8v3U4o",
     playbackUrl: "https://www.youtube.com/watch?v=Uq1WP8v3U4o",
-    note: "Tomorrowland replaced the private Fisher Freedom WE2 Relive (2026-08-12).",
+    note: "Tomorrowland replaced the private Fisher Freedom WE2 playback (2026-08-12).",
   },
   {
     fromSlug: "sc-innellea-colyn-b2b-innella-at-ultra",

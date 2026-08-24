@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import {
   CAPTURE_QUEUE_LIMIT,
   PRIORITY_CAPTURES,
-  buildHeldReliveWatch,
+  buildHeldPlaybackWatch,
   buildNextCaptures,
   extrasFromCaptureSnapshot,
   search1001,
@@ -67,7 +67,7 @@ for (const p of presets) {
   );
 }
 
-const held = buildHeldReliveWatch();
+const held = buildHeldPlaybackWatch();
 assert.ok(held.held.length >= 5);
 assert.ok(held.held.every((h) => h.status === "waiting"));
 assert.ok(

@@ -384,6 +384,15 @@ assert.equal(bySlug.fantasm!.website, null);
 assert.equal(bySlug.faustix!.website, null);
 assert.match(bySlug["vini-vici"]!.beatport!, /beatport\.com\/artist\/vini-vici\/370281/);
 assert.match(bySlug.kaaze!.beatport!, /beatport\.com\/artist\/kaaze\/384598/);
+assert.equal(bySlug["bullet-tooth"]!.website, null);
+assert.equal(bySlug["bullet-tooth"]!.soundcloud, null);
+assert.equal(bySlug["bullet-tooth"]!.youtube, null);
+assert.equal(bySlug["bullet-tooth"]!.instagram, null);
+assert.match(
+  bySlug["bullet-tooth"]!.beatport!,
+  /beatport\.com\/artist\/bullet-tooth\/1146765/,
+);
+assert.match(bySlug["bullet-tooth"]!.bio, /UK Garage/);
 assert.match(bySlug.kaaze!.soundcloud!, /soundcloud\.com\/iamkaaze/);
 assert.match(bySlug.faustix!.bio, /Diplo/);
 assert.match(bySlug["vini-vici"]!.bio, /Aviram Saharai/);

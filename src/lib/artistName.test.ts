@@ -3,7 +3,9 @@ import {
   extraArtistsFromCombinedName,
   isJunkArtistName,
   isLeftoverHostName,
+  looksLikeShowSeriesPrefix,
   sanitizeArtistName,
+  stripFestivalEditionSuffix,
 } from "./artistName";
 
 assert.equal(
@@ -99,6 +101,17 @@ assert.equal(isJunkArtistName("May, 2026"), true);
 assert.equal(sanitizeArtistName("Armin van Buuren WE1"), "Armin van Buuren");
 assert.equal(sanitizeArtistName("David Guetta WE2"), "David Guetta");
 assert.equal(sanitizeArtistName("Fisher Mainstage WE1"), "Fisher");
+assert.equal(
+  looksLikeShowSeriesPrefix("Group Therapy 674"),
+  true,
+);
+assert.equal(looksLikeShowSeriesPrefix("4444 OF A KIND"), false);
+assert.equal(looksLikeShowSeriesPrefix("4444 OF A KIND Freedom WE1"), false);
+assert.equal(stripFestivalEditionSuffix("4444 OF A KIND Freedom WE1"), "4444 OF A KIND");
+assert.equal(sanitizeArtistName("4444 OF A KIND Freedom WE1"), "4444 OF A KIND");
+assert.equal(sanitizeArtistName("4444 OF A KIND"), "4444 OF A KIND");
+assert.equal(stripFestivalEditionSuffix("Bullet Tooth WE2"), "Bullet Tooth");
+assert.equal(sanitizeArtistName("Bullet Tooth WE2"), "Bullet Tooth");
 assert.equal(sanitizeArtistName("June, 2026"), null);
 assert.equal(sanitizeArtistName("July, 2026"), null);
 

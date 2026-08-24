@@ -295,9 +295,9 @@ describe("DJ Mag 2025 atlas DJs", () => {
     const missing = pins.find((p) => p.slug === "claptone");
     assert.equal(missing?.href, null);
     assert.equal(missing?.nomap, true);
-    const noRelive = pins.find((p) => p.slug === "martin-garrix");
-    assert.equal(noRelive?.setCount, 0);
-    assert.equal(noRelive?.nomap, true);
+    const noSet = pins.find((p) => p.slug === "martin-garrix");
+    assert.equal(noSet?.setCount, 0);
+    assert.equal(noSet?.nomap, true);
   });
 
   it("spirals stacked country pins and skips nomap on the combined map", () => {

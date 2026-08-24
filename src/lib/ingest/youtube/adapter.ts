@@ -693,7 +693,7 @@ async function pollPlaylistVideos(
         )
       ) {
         console.log(
-          `[youtube] skip redundant Tomorrowland Relive ${id}: ${hit.raw.title}`,
+          `[youtube] skip redundant Tomorrowland playback ${id}: ${hit.raw.title}`,
         );
         continue;
       }

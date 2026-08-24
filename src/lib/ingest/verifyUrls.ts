@@ -197,7 +197,7 @@ export async function applyKnownUrlFixes(prisma: PrismaClient): Promise<number> 
     console.log(`[verify-urls] cleared rejected website ${row.website}`);
   }
 
-  // Retired Tomorrowland Relive (private Fisher WE2 → public re-upload).
+  // Retired Tomorrowland playback (private Fisher WE2 → public re-upload).
   const discovered = await discoverCuratedReliveRemaps(prisma);
   const remaps = await applySetSourceRemaps(prisma, discovered);
   n += remaps;
@@ -217,7 +217,7 @@ export async function applyKnownUrlFixes(prisma: PrismaClient): Promise<number> 
   n += twinFolds.folded;
   if (twinFolds.folded || twinFolds.skipped) {
     console.log(
-      `[verify-urls] host twin folds folded=${twinFolds.folded} skipped=${twinFolds.skipped}`,
+      `[verify-urls] host twin folds folded=${twinFolds.folded} skipped=${twinFolds.skipped} clocksCopied=${twinFolds.clocksCopied}`,
     );
   }
 

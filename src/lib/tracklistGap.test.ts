@@ -192,7 +192,7 @@ describe("tracklistGap", () => {
     );
   });
 
-  it("empty shells have no set page; thin playbacks do", () => {
+  it("empty shells have no set page; official empties and thin playbacks do", () => {
     assert.equal(
       setPageIsPublished({
         title: "Giuseppe Ottaviani at Luminosity Beach Festival 2026",
@@ -200,6 +200,17 @@ describe("tracklistGap", () => {
         durationSec: 3600,
       }),
       false,
+    );
+    assert.equal(
+      setPageIsPublished({
+        title: "4444 OF A KIND Freedom WE1 | Tomorrowland 2026",
+        playCount: 0,
+        durationSec: 3600,
+        playbackUrl: "https://www.youtube.com/watch?v=VuwLOFniScA",
+        type: "festival",
+        eventKind: "festival",
+      }),
+      true,
     );
     assert.equal(
       setPageIsPublished({

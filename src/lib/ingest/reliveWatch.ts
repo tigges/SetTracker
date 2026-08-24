@@ -1,15 +1,15 @@
 /**
- * Official Relive playlist watchers.
+ * Tomorrowland Relive playlist watchers.
  *
- * Polls curated YouTube playlists whose seriesName contains "Relive"
- * (currently Tomorrowland Belgium livesets), matches held 1001 seeds that
- * are waiting on official uploads, and queues Top 100 Relives that are not
- * yet curated / 1001-mapped. Never follows fan clips.
+ * Polls curated YouTube playlists whose seriesName is "Tomorrowland Relive",
+ * matches held 1001 seeds that are waiting on official uploads, and queues
+ * Top 100 official playbacks that are not yet curated / 1001-mapped.
+ * Never follows fan clips. Elsewhere say playback — Relive is this series only.
  */
 
 import type { PrismaClient } from "@prisma/client";
 import {
-  HELD_RELIVE_WATCH,
+  HELD_PLAYBACK_WATCH,
   search1001,
   type CapturePreset,
 } from "./nextCaptures";
@@ -91,7 +91,7 @@ function tlNameFromLabel(label: string): string {
   );
 }
 
-/** Longest Top 100 name that the Relive title starts with. */
+/** Longest Top 100 name that the Tomorrowland series title starts with. */
 export function artistFromReliveTitle(
   title: string,
   names: string[] = top100DjNames(),
@@ -107,8 +107,8 @@ export function artistFromReliveTitle(
 }
 
 /**
- * When a curated Relive seed moves to a new video id (private → re-upload),
- * emit a slug remap for the retired `yt-{oldId}` row.
+ * When a curated Tomorrowland playback seed moves to a new video id
+ * (private → re-upload), emit a slug remap for the retired `yt-{oldId}` row.
  */
 export function remapsFromCuratedRelives(
   dbSets: { slug: string; title: string; artistSlug: string }[],
@@ -139,7 +139,7 @@ export function remapsFromCuratedRelives(
       toSlug,
       sourceUrl: `https://www.youtube.com/watch?v=${next.videoId}`,
       playbackUrl: `https://www.youtube.com/watch?v=${next.videoId}`,
-      note: `Curated Relive replaced ${oldId} (${s.title}).`,
+      note: `Curated playback replaced ${oldId} (${s.title}).`,
     });
   }
   return out;
@@ -178,14 +178,14 @@ export async function discoverCuratedReliveRemaps(
 
 export function matchHeldRelives(
   entries: YtPlaylistEntry[],
-  watches = HELD_RELIVE_WATCH,
+  watches = HELD_PLAYBACK_WATCH,
 ): HeldReliveHit[] {
   return watches.map((h) => {
     const wantWe = weekendFromHeldName(h.name);
     const venue = h.venue ?? /tomorrowland/i;
     const waitNote =
       h.waitNote ??
-      "Do not wire fan clips — wait for official Tomorrowland Relive / artist playback.";
+      "Do not wire fan clips — wait for official playback.";
     const hits = entries.filter((e) => {
       if (!h.match.test(e.title)) return false;
       if (!venue.test(e.title)) return false;
@@ -201,7 +201,7 @@ export function matchHeldRelives(
       return {
         name: h.name,
         seed: h.seed,
-        searchUrl: search1001(...h.search, "relive", "youtube"),
+        searchUrl: search1001(...h.search),
         status: "waiting" as const,
         note: waitNote,
       };
@@ -209,7 +209,7 @@ export function matchHeldRelives(
     return {
       name: h.name,
       seed: h.seed,
-      searchUrl: search1001(...h.search, "relive", "youtube"),
+      searchUrl: search1001(...h.search),
       status: "candidate" as const,
       note: `Official playback found — wire ${h.seed} to yt-${hit.videoId}.`,
       youtubeUrl: `https://www.youtube.com/watch?v=${hit.videoId}`,

@@ -53,7 +53,7 @@ export function stripFestivalEditionSuffix(name: string): string {
     .trim()
     .replace(WEEKEND_EDITION_RE, "")
     .replace(WEEKEND_WORD_RE, "")
-    .replace(/\s+(main\s*stage|mainstage)\s*$/i, "")
+    .replace(/\s+(main\s*stage|mainstage|freedom)\s*$/i, "")
     .trim();
 }
 
@@ -61,7 +61,15 @@ export function stripFestivalEditionSuffix(name: string): string {
 export function looksLikeShowSeriesPrefix(name: string): boolean {
   const n = name.replace(/\s+/g, " ").trim();
   if (!n) return false;
-  if (/\b\d{2,4}\b/.test(n) && /[a-z]/i.test(n)) return true;
+  // Episode / year in a show title ("Group Therapy 674") — not a leading
+  // act number ("4444 OF A KIND").
+  if (
+    /\b\d{2,4}\b/.test(n) &&
+    /[a-z]/i.test(n) &&
+    !/^\d{2,4}\b/.test(n)
+  ) {
+    return true;
+  }
   return SHOW_SERIES_HINT.test(n);
 }
 

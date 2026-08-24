@@ -265,6 +265,7 @@ function toTracklistGapFields(
     performedAt: Date | null;
     sourceName: string | null;
     sourceUrl: string | null;
+    playbackUrl?: string | null;
     event: { slug: string; kind: string | null } | null;
     edition: { year: number; endsAt: Date | null } | null;
     artists: Array<{ dj: { name: string; slug: string } }>;
@@ -289,6 +290,7 @@ function toTracklistGapFields(
     eventSlug: s.event?.slug,
     sourceName: s.sourceName,
     sourceUrl: s.sourceUrl,
+    playbackUrl: s.playbackUrl,
     primaryDjSlug: primary?.slug,
     top100Rank: ranks.top100Rank,
     festivalRank: ranks.festivalRank,
@@ -381,6 +383,7 @@ export async function getCatalogStats(): Promise<CatalogStats> {
         title: true,
         sourceName: true,
         sourceUrl: true,
+        playbackUrl: true,
         type: true,
         durationSec: true,
         publishedAt: true,
@@ -402,6 +405,7 @@ export async function getCatalogStats(): Promise<CatalogStats> {
         title: true,
         sourceName: true,
         sourceUrl: true,
+        playbackUrl: true,
         type: true,
         durationSec: true,
         publishedAt: true,

@@ -224,8 +224,10 @@ export const TL_ELY_OAKS_TML_WE2_MAINSTAGE_2026: FingerprintSeedRow[] = [
  * https://www.1001tracklists.com/tracklist/1rl30xh1/bullet-tooth-core-stage-tomorrowland-weekend-2-belgium-2026-07-24.html
  * Overlay name TL_BULLET_TOOTH is too generic.
  * No SoundCloud in the operator paste — do not invent an SC slug.
+ * Sister official watches (no 1001 in the paste — do not invent clocks):
+ * DJ Mag HQ yt-7jUXS12-7f0, Beatport Live Mint yt-_4P9Y5KN9n4.
  * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-G-DciaWb5KY"] = TL_BULLET_TOOTH_TML_WE2_CORE_2026
- * Captured 2026-08-24 — provenance 1001tl.
+ * Curated in youtube/videos.ts. Captured 2026-08-24 — provenance 1001tl.
  */
 export const TL_BULLET_TOOTH_TML_WE2_CORE_2026: FingerprintSeedRow[] = [
   { at: "0:12", artist: "Running Hot", title: "Bumpin'" },
@@ -271,6 +273,9 @@ export const TL_JOHN_NEWMAN_TML_WE2_FREEDOM_2026: FingerprintSeedRow[] = [
  * https://www.1001tracklists.com/tracklist/132dgbd9/4444-of-a-kind-freedom-stage-tomorrowland-weekend-1-belgium-2026-07-17.html
  * Overlay name TL_4444_OF_A_KIND is too generic.
  * No SoundCloud in the operator paste — do not invent an SC slug.
+ * Official socials (fill-null): youtube.com/@4444fourofakind,
+ * instagram.com/4444fourofakind, facebook.com/4444fourofakind.
+ * Paste name TL_4444-OF-A-KIND_Tomorrowland_2026 is not a valid identifier.
  * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-VuwLOFniScA"] = TL_4444_OF_A_KIND_TML_WE1_FREEDOM_2026
  * Captured 2026-08-24 — provenance 1001tl.
  * Distinct from Rose Ringed Freedom WE1 (yt-KAZd25mCHp8).
