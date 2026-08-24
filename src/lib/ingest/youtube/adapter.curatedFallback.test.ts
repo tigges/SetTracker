@@ -26,6 +26,7 @@ const JOEL_EDGE = YOUTUBE_SETS.find((s) => s.video.includes("soEFl73peVA"));
 const PRR_731 = YOUTUBE_SETS.find((s) => s.video.includes("Rgx-wT9FDaE"));
 const STH_687 = YOUTUBE_SETS.find((s) => s.video.includes("eVjC42MNgkI"));
 const STH_690 = YOUTUBE_SETS.find((s) => s.video.includes("OcUFACTYqL8"));
+const KIND_FREEDOM = YOUTUBE_SETS.find((s) => s.video.includes("VuwLOFniScA"));
 const NOTION_PERRY = YOUTUBE_SETS.find((s) => s.video.includes("9vgSTomhCp8"));
 const VC_ULTRA = YOUTUBE_SETS.find((s) => s.video.includes("xXRjglkAmq8"));
 const VC_PACHA_NYC = YOUTUBE_SETS.find((s) => s.video.includes("TDuFnUAo4II"));
@@ -732,6 +733,17 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.durationSec, 57 * 60 + 28 + 180);
   });
 
+  it("builds 4444 OF A KIND Freedom WE1 meta from the curated 1001 capture", () => {
+    assert.ok(KIND_FREEDOM);
+    const meta = watchMetaFromCuratedSeed(KIND_FREEDOM);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "VuwLOFniScA");
+    assert.match(meta.title, /4444 OF A KIND/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=VuwLOFniScA");
+    // Last cue 56:32 + 180s pad.
+    assert.equal(meta.durationSec, 56 * 60 + 32 + 180);
+  });
+
   it("builds NOTION Perry's Lollapalooza meta from the curated 1001 capture", () => {
     assert.ok(NOTION_PERRY);
     const meta = watchMetaFromCuratedSeed(NOTION_PERRY);
@@ -1332,6 +1344,21 @@ describe("curated YouTube 429 fallback", () => {
     assert.ok(sets[0]!.durationSec >= 57 * 60);
     assert.equal(sets[0]?.primaryArtist?.slug, "dimitri-vegas-like-mike");
     assert.equal(sets[0]?.seriesName, "Smash The House Radio");
+  });
+
+  it("lands 4444 OF A KIND Freedom WE1 from the 1001 seed when watch is 429", async () => {
+    assert.ok(KIND_FREEDOM);
+    const adapter = createYoutubeAdapter([KIND_FREEDOM], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-VuwLOFniScA");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 21);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 56 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "4444-of-a-kind");
+    assert.equal(sets[0]?.seriesName, "Tomorrowland");
+    assert.match(String(sets[0]?.eventName ?? ""), /Tomorrowland/i);
   });
 
   it("lands NOTION Perry's Lollapalooza from the 1001 seed when watch is 429", async () => {

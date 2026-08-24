@@ -150,6 +150,7 @@ import {
   TL_DYEN_MADDIX_TML_WE2_2026,
   TL_MADDIX_TML_WE1_2026,
   TL_MARLON_HOFFSTADT_TML_WE1_2026,
+  TL_4444_OF_A_KIND_TML_WE1_FREEDOM_2026,
 } from "../tracklists1001/seeds";
 import type { RawArtist } from "../types";
 import { slugify } from "../types";
@@ -1009,6 +1010,30 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/20w8cgs9/dimitri-vegas-like-mike-smash-the-house-radio-690-2026-08-21.html",
     tracklist1001: TL_DVLM_SMASH_THE_HOUSE_RADIO_690_2026,
+  },
+  {
+    // Tomorrowland official playback — Freedom Stage WE1. No SoundCloud
+    // in the operator paste — do not invent an SC slug. Distinct from
+    // Rose Ringed Freedom WE1 (yt-KAZd25mCHp8).
+    video: "https://www.youtube.com/watch?v=VuwLOFniScA",
+    primaryArtist: dj("4444 OF A KIND", {
+      accent: "#ff006e",
+      bio: "Exclusive live act of D-Block & S-te-Fan and Sub Zero Project. First release Waiting 4 is on Tomorrowland Music.",
+      youtubeHandle: "@4444fourofakind",
+      socialLinks: [
+        "https://www.youtube.com/@4444fourofakind",
+        "https://www.instagram.com/4444fourofakind/",
+        "https://www.facebook.com/4444fourofakind/",
+      ],
+    }),
+    genre: "Hard House",
+    type: "festival",
+    title: "4444 OF A KIND Freedom WE1 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/132dgbd9/4444-of-a-kind-freedom-stage-tomorrowland-weekend-1-belgium-2026-07-17.html",
+    tracklist1001: TL_4444_OF_A_KIND_TML_WE1_FREEDOM_2026,
   },
   {
     // Official Purified Radio 520; timed 1001 capture (same list as SC).

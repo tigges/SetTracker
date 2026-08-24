@@ -1733,6 +1733,21 @@ export const ARTIST_ROSTER_CURATED: ArtistRosterEntry[] = [
     priority: "high",
   },
   {
+    name: "4444 OF A KIND",
+    genre: "Hard House",
+    accent: "#ff006e",
+    // Official channel @4444fourofakind (UCbkjgAyvXyD8y6Y-_N2gmNQ).
+    // No SoundCloud in the operator paste — do not invent an SC permalink.
+    youtube: { handle: "@4444fourofakind", status: "ok" },
+    socials: [
+      "https://www.youtube.com/@4444fourofakind",
+      "https://www.youtube.com/channel/UCbkjgAyvXyD8y6Y-_N2gmNQ",
+      "https://www.instagram.com/4444fourofakind/",
+      "https://www.facebook.com/4444fourofakind/",
+    ],
+    priority: "high",
+  },
+  {
     name: "Lucas & Steve",
     genre: "Future House",
     accent: "#ffb703",

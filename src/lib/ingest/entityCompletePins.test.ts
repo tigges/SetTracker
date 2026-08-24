@@ -47,6 +47,14 @@ assert.equal(
   nameOverlapsHandle("Lucas & Steve", "https://www.lucasandsteve.com/"),
   true,
 );
+assert.equal(
+  nameOverlapsHandle("4444 OF A KIND", "https://www.youtube.com/@4444fourofakind"),
+  true,
+);
+assert.equal(
+  nameOverlapsHandle("4444 OF A KIND", "https://www.instagram.com/4444fourofakind/"),
+  true,
+);
 assert.equal(nameOverlapsHandle("Joris Voorn", "https://soundcloud.com/korolovadj"), false);
 assert.equal(nameOverlapsHandle("Ferry Corsten", "https://www.instagram.com/someoneelse/"), false);
 
@@ -286,6 +294,40 @@ assert.equal(
     value:
       "Dutch DJ and producer whose punchy, techno-leaning house records have made him a major contemporary club and festival act.",
     evidence: "producer",
+  }).field,
+  "bio",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "4444-of-a-kind",
+    name: "4444 OF A KIND",
+    field: "youtube",
+    value: "https://www.youtube.com/@4444fourofakind",
+    evidence: "official channel About",
+  }).value,
+  "https://www.youtube.com/@4444fourofakind",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "4444-of-a-kind",
+    name: "4444 OF A KIND",
+    field: "instagram",
+    value: "https://www.instagram.com/4444fourofakind/",
+    evidence: "official profile",
+  }).value,
+  "https://instagram.com/4444fourofakind",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "4444-of-a-kind",
+    name: "4444 OF A KIND",
+    field: "bio",
+    value:
+      "Exclusive live act of D-Block & S-te-Fan and Sub Zero Project. First release Waiting 4 is on Tomorrowland Music.",
+    evidence: "official YouTube About",
   }).field,
   "bio",
 );

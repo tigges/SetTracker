@@ -254,6 +254,20 @@ assert.equal(
 );
 assert.equal(
   performingCreditFromTitle(
+    "4444 OF A KIND Freedom WE1 | Tomorrowland 2026",
+  ),
+  "4444 OF A KIND",
+);
+assert.equal(tidyPerformingCredit("4444 OF A KIND Freedom WE1"), "4444 OF A KIND");
+const kindFreedom = artistsForSet(
+  "4444 OF A KIND Freedom WE1 | Tomorrowland 2026",
+  { name: "4444 OF A KIND", slug: "4444-of-a-kind", accent: "#ff006e" },
+);
+assert.equal(kindFreedom.primary.slug, "4444-of-a-kind");
+assert.equal(kindFreedom.primary.name, "4444 OF A KIND");
+assert.equal(kindFreedom.collaborators.length, 0);
+assert.equal(
+  performingCreditFromTitle(
     "Tomorrowland Friendship Mix with Steve Aoki - August, 2026",
   ),
   "Steve Aoki",

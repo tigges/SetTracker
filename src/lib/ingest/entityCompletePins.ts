@@ -88,6 +88,37 @@ const TEMPLATE_BIO =
 const GENERIC_HANDLE_LEFTOVER =
   /^(the|its|itsthe|thisis|official|real|dj|music|beats|sound|sounds|channel|video|live|tv|hq|ok|iam|im|weare|and|com|net|org|nu|io|co|uk|dot|dotcom|[0-9]+)*$/;
 
+/** Spoken digit used in handles like @4444fourofakind for "4444 OF A KIND". */
+const DIGIT_WORD: Record<string, string> = {
+  "0": "zero",
+  "1": "one",
+  "2": "two",
+  "3": "three",
+  "4": "four",
+  "5": "five",
+  "6": "six",
+  "7": "seven",
+  "8": "eight",
+  "9": "nine",
+};
+
+/** Name pieces to strip from a handle leftover, longest first. */
+function leftoverStripTokens(name: string): string[] {
+  const words = name
+    .toLowerCase()
+    .split(/[^a-z0-9]+/)
+    .filter(Boolean);
+  const tokens = new Set<string>();
+  for (const w of words) {
+    tokens.add(w);
+    for (const ch of w) {
+      const spoken = DIGIT_WORD[ch];
+      if (spoken) tokens.add(spoken);
+    }
+  }
+  return [...tokens].sort((a, b) => b.length - a.length);
+}
+
 const WIDE_FIELD_MAP: Record<string, EntityCompleteField> = {
   imageurl: "imageUrl",
   website: "website",
@@ -296,10 +327,7 @@ export function handleLeftoverOk(name: string, value: string): boolean {
   if (nameKey && handleKey.includes(nameKey)) {
     leftover = leftoverAfterName(nameKey, handleKey);
   } else {
-    const tokens = name
-      .toLowerCase()
-      .split(/[^a-z0-9]+/)
-      .filter((t) => t.length >= 2);
+    const tokens = leftoverStripTokens(name);
     if (!tokens.length) return false;
     for (const t of tokens) leftover = leftover.split(t).join("");
   }
