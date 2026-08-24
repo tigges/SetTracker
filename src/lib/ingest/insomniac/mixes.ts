@@ -193,6 +193,9 @@ async function mixToRawSet(slug: string): Promise<RawSet | null> {
     sourceName: "Insomniac",
     sourceUrl,
     playbackUrl,
+    mixcloudUrl: mixcloudUrlFromHtml(html),
+    soundcloudUrl: soundcloudTrackUrlFromHtml(html),
+    youtubeUrl: youtubeWatchFromHtml(html),
     cover: ACCENT,
     plays,
   };

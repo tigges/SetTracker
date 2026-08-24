@@ -280,12 +280,15 @@ export function homepageEnrichBoost(opts: {
   const thinOrWorse = opts.densitySeverity !== "ok";
   const hasUnresolved = (opts.unresolvedCount ?? 0) > 0;
   const festFocus = Boolean(opts.isFestival || opts.festivalSeason);
-  const emptyFestival = festFocus && (opts.playCount ?? 1) === 0;
+  const emptyOfficial = (opts.playCount ?? 1) === 0;
 
-  // Empty festival playbacks (EDC etc.) — no cues yet; fingerprint must create rows.
-  if (emptyFestival) {
-    if (recent || festWindow) return 4;
-    return 3;
+  // Empty official playbacks — Identify / File Scan must create rows.
+  // Festival stays ahead of radio / studio so academy mixes do not crowd EDC.
+  if (emptyOfficial) {
+    if (festFocus && (recent || festWindow)) return 4;
+    if (festFocus) return 3;
+    if (recent) return 3;
+    return 2;
   }
 
   if (hasUnresolved && (top20 || festFocus)) {

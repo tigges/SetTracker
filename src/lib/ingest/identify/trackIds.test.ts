@@ -55,6 +55,28 @@ assert.equal(queued[0]?.title, "One");
 assert.equal(queued[1]?.title, "Two");
 assert.equal(queued[2]?.artist, "Catalog");
 assert.equal(queued[2]?.title, "Hot");
+
+const withFp = mergeIdentifyQueue(
+  [{ at: "0:00", artist: "Held", title: "One" }],
+  [
+    { at: "0:00", artist: "Catalog", title: "Hot" },
+    { at: "0:00", artist: "Catalog", title: "Also" },
+  ],
+  {
+    limit: 4,
+    heldCap: 1,
+    fingerprintCap: 2,
+    fingerprint: [
+      { at: "0:00", artist: "ACR", title: "Hit" },
+      { at: "0:00", artist: "Held", title: "One" },
+      { at: "0:00", artist: "ACR", title: "Second" },
+    ],
+  },
+);
+assert.deepEqual(
+  withFp.map((r) => r.title),
+  ["One", "Hit", "Second", "Hot"],
+);
 assert.equal(
   acceptBeatportTrackUrl("https://www.beatport.com/search?q=clarity"),
   undefined,

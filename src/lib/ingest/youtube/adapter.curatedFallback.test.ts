@@ -25,6 +25,7 @@ const RZ_AWAKE = YOUTUBE_SETS.find((s) => s.video.includes("i-mFuxbGHzg"));
 const JOEL_EDGE = YOUTUBE_SETS.find((s) => s.video.includes("soEFl73peVA"));
 const PRR_731 = YOUTUBE_SETS.find((s) => s.video.includes("Rgx-wT9FDaE"));
 const STH_687 = YOUTUBE_SETS.find((s) => s.video.includes("eVjC42MNgkI"));
+const STH_690 = YOUTUBE_SETS.find((s) => s.video.includes("OcUFACTYqL8"));
 const NOTION_PERRY = YOUTUBE_SETS.find((s) => s.video.includes("9vgSTomhCp8"));
 const VC_ULTRA = YOUTUBE_SETS.find((s) => s.video.includes("xXRjglkAmq8"));
 const VC_PACHA_NYC = YOUTUBE_SETS.find((s) => s.video.includes("TDuFnUAo4II"));
@@ -720,6 +721,17 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.durationSec, 57 * 60 + 17 + 180);
   });
 
+  it("builds Smash The House Radio 690 meta from the curated 1001 capture", () => {
+    assert.ok(STH_690);
+    const meta = watchMetaFromCuratedSeed(STH_690);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "OcUFACTYqL8");
+    assert.match(meta.title, /Smash The House Radio 690/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=OcUFACTYqL8");
+    // Last cue 57:28 + 180s pad.
+    assert.equal(meta.durationSec, 57 * 60 + 28 + 180);
+  });
+
   it("builds NOTION Perry's Lollapalooza meta from the curated 1001 capture", () => {
     assert.ok(NOTION_PERRY);
     const meta = watchMetaFromCuratedSeed(NOTION_PERRY);
@@ -1302,6 +1314,20 @@ describe("curated YouTube 429 fallback", () => {
     assert.equal(sets[0]!.sourceSlug, "yt-eVjC42MNgkI");
     assert.equal(sets[0]!.type, "radio");
     assert.ok(sets[0]!.plays.length >= 22);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 57 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "dimitri-vegas-like-mike");
+    assert.equal(sets[0]?.seriesName, "Smash The House Radio");
+  });
+
+  it("lands Smash The House Radio 690 from the 1001 seed when watch is 429", async () => {
+    assert.ok(STH_690);
+    const adapter = createYoutubeAdapter([STH_690], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-OcUFACTYqL8");
+    assert.equal(sets[0]!.type, "radio");
+    assert.ok(sets[0]!.plays.length >= 21);
     assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
     assert.ok(sets[0]!.durationSec >= 57 * 60);
     assert.equal(sets[0]?.primaryArtist?.slug, "dimitri-vegas-like-mike");

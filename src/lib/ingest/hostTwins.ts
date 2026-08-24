@@ -6,8 +6,11 @@
  * (those belong to one audio file).
  */
 
+import type { SetHostUrls } from "../playback";
+import { extraHostUrlsBySlug } from "./setHostUrls";
 import { SET_SOURCE_REMAPS } from "./sourceRemaps";
 import { TRACKLIST_1001_BY_SOURCE_SLUG } from "./tracklists1001/festival2026";
+import { isSecondaryPlaybackSlug } from "./tracklists1001/seeds";
 
 export const SHAREABLE_TRACKLIST_PROVENANCE = new Set([
   "1001tl",
@@ -116,4 +119,57 @@ export function twinSlugGroupsFromCatalog(
     if (unique.length > 1) groups.push(unique);
   }
   return unionSlugGroups(groups);
+}
+
+export type HostTwinFoldCandidate = {
+  fromSlug: string;
+  toSlug: string;
+  hosts: SetHostUrls;
+};
+
+function seedSlugGroups(): string[][] {
+  const bySeed = new Map<object, string[]>();
+  for (const [slug, seed] of Object.entries(TRACKLIST_1001_BY_SOURCE_SLUG)) {
+    if (!seed?.length) continue;
+    const list = bySeed.get(seed) ?? [];
+    list.push(slug);
+    bySeed.set(seed, list);
+  }
+  return [...bySeed.values()].filter((g) => g.length > 1);
+}
+
+/**
+ * Official YT + SC twins that share one 1001 seed object and already
+ * have both permalinks. Never invents a missing host.
+ */
+export function hostTwinFoldCandidatesFromSeeds(
+  extras = extraHostUrlsBySlug(),
+): HostTwinFoldCandidate[] {
+  const out: HostTwinFoldCandidate[] = [];
+  const seen = new Set<string>();
+  for (const slugs of seedSlugGroups()) {
+    const survivors = slugs.filter((s) => !isSecondaryPlaybackSlug(s));
+    const secondaries = slugs.filter((s) => isSecondaryPlaybackSlug(s));
+    const toSlug =
+      survivors.find((s) => s.startsWith("yt-")) ?? survivors[0] ?? null;
+    if (!toSlug || secondaries.length === 0) continue;
+    const hosts = extras[toSlug] ?? extras[secondaries[0]!] ?? {};
+    if (!hosts.youtubeUrl || !hosts.soundcloudUrl) continue;
+    for (const fromSlug of secondaries) {
+      const key = `${fromSlug}→${toSlug}`;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      out.push({ fromSlug, toSlug, hosts });
+    }
+  }
+  return out;
+}
+
+/** SC/hearthis slug that should land on an existing official YT survivor. */
+export function survivorSlugForSecondary(slug: string): string | null {
+  if (!isSecondaryPlaybackSlug(slug)) return null;
+  return (
+    hostTwinFoldCandidatesFromSeeds().find((c) => c.fromSlug === slug)?.toSlug ??
+    null
+  );
 }

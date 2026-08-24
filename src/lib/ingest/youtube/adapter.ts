@@ -370,6 +370,7 @@ async function curatedToHit(src: YoutubeSetSource): Promise<YtHit | null> {
     imageUrl: curatedSetImage(sourceSlug) ?? meta.imageUrl,
     plays,
   };
+  raw.description = meta.description;
   raw.sourceHash = hashRawSetContent(raw);
 
   const from1001 = plays.filter((p) => p.provenance === "1001tl").length;
@@ -440,6 +441,7 @@ async function venueVideoToHit(
     imageUrl: meta.imageUrl,
     plays,
   };
+  raw.description = meta.description;
   raw.sourceHash = hashRawSetContent(raw);
 
   console.log(
@@ -485,6 +487,7 @@ async function artistChannelVideoToHit(
     imageUrl: meta.imageUrl,
     plays,
   };
+  raw.description = meta.description;
   raw.sourceHash = hashRawSetContent(raw);
 
   console.log(
@@ -548,6 +551,7 @@ async function relatedVideoToHit(
     imageUrl: meta.imageUrl,
     plays,
   };
+  raw.description = meta.description;
   raw.sourceHash = hashRawSetContent(raw);
 
   console.log(

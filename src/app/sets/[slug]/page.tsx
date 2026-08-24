@@ -9,7 +9,7 @@ import { SetListen } from "@/components/SetListen";
 import { SetPlayer } from "@/components/SetPlayer";
 import { SetTimeline } from "@/components/SetTimeline";
 import { setHostHeadline } from "@/lib/brandHosts";
-import { detectPlaybackHost } from "@/lib/playback";
+import { detectPlaybackHost, unusedOfficialHostLinks } from "@/lib/playback";
 import { pageMeta } from "@/lib/site";
 import { SET_TYPE_META, fmtDate, fmtDuration } from "@/lib/status";
 import { beatportCoverage } from "@/lib/trackMeta";
@@ -191,6 +191,33 @@ export default async function SetPage({
             playbackUrl={set.playbackUrl}
             sourceUrl={set.sourceUrl}
           />
+          {(() => {
+            const alsoOn = unusedOfficialHostLinks({
+              playbackUrl: set.playbackUrl,
+              soundcloudUrl: set.soundcloudUrl,
+              youtubeUrl: set.youtubeUrl,
+              mixcloudUrl: set.mixcloudUrl,
+            });
+            if (!alsoOn.length) return null;
+            return (
+              <p className="mt-2 text-[12px] text-muted2">
+                Also on{" "}
+                {alsoOn.map((link, i) => (
+                  <span key={link.host}>
+                    {i > 0 ? " · " : null}
+                    <a
+                      href={link.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-muted underline decoration-dotted underline-offset-2 hover:text-ink"
+                    >
+                      {link.label}
+                    </a>
+                  </span>
+                ))}
+              </p>
+            );
+          })()}
         </div>
       </div>
 

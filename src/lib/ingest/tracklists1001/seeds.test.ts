@@ -184,6 +184,7 @@ import {
   TL_JOHN_NEWMAN_TML_WE2_FREEDOM_2026,
   TL_4444_OF_A_KIND_TML_WE1_FREEDOM_2026,
   TL_JOHN_NEWMAN_TML_WE1_MAINSTAGE_2026,
+  TL_DVLM_SMASH_THE_HOUSE_RADIO_690_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   isSecondaryPlaybackSlug,
@@ -1989,6 +1990,56 @@ for (let i = 1; i < sth687.length; i++) {
 assert.equal(isWiredTracklistSlug("yt-eVjC42MNgkI"), true);
 assert.equal(
   isWiredTracklistSlug("sc-dimitrivegasandlikemike-smash-the-house-radio-ep-687"),
+  true,
+);
+
+assertSeedClocks(TL_DVLM_SMASH_THE_HOUSE_RADIO_690_2026);
+assert.equal(TL_DVLM_SMASH_THE_HOUSE_RADIO_690_2026.length, 21);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-OcUFACTYqL8"],
+  TL_DVLM_SMASH_THE_HOUSE_RADIO_690_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-dimitrivegasandlikemike-smash-the-house-radio-ep-690"
+  ],
+  TL_DVLM_SMASH_THE_HOUSE_RADIO_690_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "https://soundcloud.com/dimitrivegasandlikemike/smash-the-house-radio-ep-690"
+  ],
+  undefined,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-https://soundcloud.com/dimitrivegasandlikemike/smash-the-house-radio-ep-690"],
+  undefined,
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-OcUFACTYqL8"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-eVjC42MNgkI"],
+);
+const sth690 = tracklist1001RowsToPlays(TL_DVLM_SMASH_THE_HOUSE_RADIO_690_2026);
+assert.equal(sth690.length, 21);
+assert.equal(sth690[0]?.provenance, "1001tl");
+assert.equal(sth690[0]?.timestamp, 0);
+assert.equal(sth690[0]?.trackTitle, "Bless The Rain");
+assert.equal(sth690[20]?.trackTitle, "Burn It Down");
+assert.equal(sth690[20]?.timestamp, 57 * 60 + 28);
+for (let i = 1; i < sth690.length; i++) {
+  assert.ok(
+    (sth690[i]!.timestamp ?? 0) > (sth690[i - 1]!.timestamp ?? 0),
+    `Smash The House Radio 690 clocks must increase at index ${i}`,
+  );
+}
+assert.equal(isWiredTracklistSlug("yt-OcUFACTYqL8"), true);
+assert.equal(
+  isWiredTracklistSlug("sc-dimitrivegasandlikemike-smash-the-house-radio-ep-690"),
+  true,
+);
+assert.equal(isSecondaryPlaybackSlug("yt-OcUFACTYqL8"), false);
+assert.equal(
+  isSecondaryPlaybackSlug("sc-dimitrivegasandlikemike-smash-the-house-radio-ep-690"),
   true,
 );
 

@@ -1,6 +1,8 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import {
+  hostUrlsFromText,
+  mixcloudShowUrlFromText,
   preferPlaybackUrl,
   preferredExternalPlaybackFromText,
   soundcloudTrackUrlFromText,
@@ -42,13 +44,59 @@ describe("hearthis preferred playback extractors", () => {
     );
   });
 
-  it("prefers SoundCloud over YouTube when both appear", () => {
+  it("extracts Mixcloud show URLs and ignores profiles", () => {
+    assert.equal(
+      mixcloudShowUrlFromText(
+        "Mirror https://www.mixcloud.com/DimitriVegasAndLikeMike/smash-the-house-radio-ep-690/",
+      ),
+      "https://www.mixcloud.com/dimitrivegasandlikemike/smash-the-house-radio-ep-690/",
+    );
+    assert.equal(
+      mixcloudShowUrlFromText("Follow mixcloud.com/DimitriVegasAndLikeMike"),
+      null,
+    );
+    assert.equal(
+      mixcloudShowUrlFromText(
+        "https://www.mixcloud.com/widget/iframe/?feed=%2Fclaptone%2Fclapcast-576%2F",
+      ),
+      null,
+    );
+  });
+
+  it("keeps every official host from the same text", () => {
+    const hosts = hostUrlsFromText(`
+      SC https://soundcloud.com/dimitrivegasandlikemike/smash-the-house-radio-ep-690
+      YT https://youtu.be/OcUFACTYqL8
+      Mixcloud https://www.mixcloud.com/DimitriVegasAndLikeMike/smash-the-house-radio-ep-690/
+    `);
+    assert.equal(
+      hosts.soundcloudUrl,
+      "https://soundcloud.com/dimitrivegasandlikemike/smash-the-house-radio-ep-690",
+    );
+    assert.equal(
+      hosts.youtubeUrl,
+      "https://www.youtube.com/watch?v=OcUFACTYqL8",
+    );
+    assert.equal(
+      hosts.mixcloudUrl,
+      "https://www.mixcloud.com/dimitrivegasandlikemike/smash-the-house-radio-ep-690/",
+    );
+  });
+
+  it("prefers SoundCloud over Mixcloud over YouTube when both appear", () => {
     const hit = preferredExternalPlaybackFromText(
       "SC https://soundcloud.com/a/b-mix and YT youtube.com/watch?v=abcDEF12345",
     );
     assert.deepEqual(hit, {
       playbackUrl: "https://soundcloud.com/a/b-mix",
       host: "soundcloud",
+    });
+    const mixOverYt = preferredExternalPlaybackFromText(
+      "YT youtube.com/watch?v=abcDEF12345 Mixcloud https://www.mixcloud.com/claptone/clapcast-576/",
+    );
+    assert.deepEqual(mixOverYt, {
+      playbackUrl: "https://www.mixcloud.com/claptone/clapcast-576/",
+      host: "mixcloud",
     });
   });
 

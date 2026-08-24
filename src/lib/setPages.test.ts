@@ -22,4 +22,11 @@ assert.ok(pages.includes("yt-P2x3-b6JEj8"));
 
 assert.deepEqual(staticSetPageSlugs(["yt-a", "yt-a"]), ["yt-a"]);
 
+const folded = staticSetPageSlugs(["yt-9TKqqBCmDHA"]);
+assert.ok(folded.includes("yt-9TKqqBCmDHA"));
+assert.ok(
+  folded.includes("sc-johnsummit-john-summit-live-lollapalooza"),
+  "folded SC slug still statically exports as an alias",
+);
+
 console.log("setPages.test.ts ok");

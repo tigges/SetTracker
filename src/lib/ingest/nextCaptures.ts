@@ -2,8 +2,9 @@
  * Build the operator capture queue.
  *
  * Offline JSON (set-density / top100 reports) is a fallback for CI scripts.
- * The /stats#capture-1001 workbench ranks from the catalog DB at Pages
- * build time so every deploy after deep/enrich shows current gaps.
+ * The /stats#workbench ranks from the catalog DB at Pages build time
+ * so every deploy after deep/enrich shows current gaps. Capture 1001
+ * stays a closed #capture-1001 anchor — last lane, not the default.
  */
 
 import { readFileSync, existsSync } from "node:fs";

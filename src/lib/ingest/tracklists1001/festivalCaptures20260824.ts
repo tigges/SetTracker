@@ -328,3 +328,39 @@ export const TL_JOHN_NEWMAN_TML_WE1_MAINSTAGE_2026: FingerprintSeedRow[] = [
   { at: "47:34", artist: "John Newman", title: "Love Me Again (John Newman Rework)" },
   { at: "53:27", artist: "John Newman", title: "Only You" },
 ];
+
+/**
+ * Dimitri Vegas & Like Mike - Smash The House Radio 690 2026-08-21
+ * Official YouTube: https://youtu.be/OcUFACTYqL8
+ * Official SoundCloud: https://soundcloud.com/dimitrivegasandlikemike/smash-the-house-radio-ep-690
+ * https://www.1001tracklists.com/tracklist/20w8cgs9/dimitri-vegas-like-mike-smash-the-house-radio-690-2026-08-21.html
+ * Overlay name TL_Dimitri-Vegas_Like Mike_Smash-The-House-Radio_690_2026-08-21 is not a valid identifier.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-OcUFACTYqL8"] = TL_DVLM_SMASH_THE_HOUSE_RADIO_690_2026
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["sc-dimitrivegasandlikemike-smash-the-house-radio-ep-690"] = TL_DVLM_SMASH_THE_HOUSE_RADIO_690_2026
+ * Captured 2026-08-24 — provenance 1001tl.
+ * Distinct from Smash The House Radio 687 (yt-eVjC42MNgkI).
+ * No Mixcloud in the operator paste — do not invent a Mixcloud URL.
+ */
+export const TL_DVLM_SMASH_THE_HOUSE_RADIO_690_2026: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "Div Eadie & Awakcn & Jay-q", title: "Bless The Rain" },
+  { at: "3:58", artist: "Benny Benassi & Hypaton ft. Sandy Chambers", title: "Illusion" },
+  { at: "7:12", artist: "Deran K.", title: "Don't Let Go" },
+  { at: "9:39", artist: "Dimitri Vegas & Like Mike & Marlon Hoffstadt & DJ Konik", title: "Makina Time (BRANDON Remix)" },
+  { at: "12:11", artist: "Mazay", title: "Raw" },
+  { at: "14:51", artist: "OMNOM ft. Tommy Genesis", title: "Pressure" },
+  { at: "17:33", artist: "DAMEN & Gil Glaze", title: "Dolce" },
+  { at: "20:46", artist: "Alesso", title: "Smoke Machine" },
+  { at: "23:28", artist: "Bolier & AMRV", title: "Everybody Lookin' 4" },
+  { at: "27:07", artist: "Ferry Corsten & Leon Bolier & Mostly Cloudy", title: "Bring Me Back To Life" },
+  { at: "30:06", artist: "KAAZE", title: "RUN IT" },
+  { at: "32:38", artist: "Space 92 & Marie Vaunt", title: "Go Go Go" },
+  { at: "35:07", artist: "D-Devils", title: "An Eye For An Eye" },
+  { at: "37:45", artist: "Yomanda", title: "Synth & Strings (LAWTON Lick)" },
+  { at: "40:16", artist: "Dimitri Vegas & Like Mike & Tiësto & W&W ft. Dido", title: "Thank You (Not So Bad) (Dimitri Vegas Edit)" },
+  { at: "44:02", artist: "KUKO", title: "Voicemail (Tiësto Remix)" },
+  { at: "47:07", artist: "Bassjackers & Hannah Laing", title: "New Bass, New Kick" },
+  { at: "48:46", artist: "Dimitri Vegas & Pat B ft. Sylver", title: "Turn The Tide" },
+  { at: "52:14", artist: "VINAI", title: "Lose Myself" },
+  { at: "54:39", artist: "Faustix", title: "Kick So Loud" },
+  { at: "57:28", artist: "OBS", title: "Burn It Down" },
+];

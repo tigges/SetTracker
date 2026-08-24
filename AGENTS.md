@@ -171,11 +171,17 @@ unless asked.
   **Cue job** (`LLM_RESEARCH_JOBS=cues` or `all`): re-parse first-party
   YT/SC/hearthis on empty/stub lists. Queue ranks live YT/hearthis ahead of
   weekly radio; radio without clocks does not consume the limit. Parser
-  path works without an LLM key. LLM may write only clocks that already
-  appear in that text — never interpolate, never overwrite 1001tl /
-  fingerprint / community. Enrich `full` and Catalog LLM research default
-  to **dry-run** (`LLM_RESEARCH_APPLY=0`). Report:
-  `data/crosscheck/llm-cue-research.json`.
+  clocks always write (no LLM key needed). `LLM_RESEARCH_APPLY=0` gates
+  **LLM extras only** — extras must already appear in that text; never
+  interpolate; never overwrite 1001tl / fingerprint / community. Enrich
+  `full` and Catalog LLM research default to parser apply / LLM extras
+  dry-run. Report: `data/crosscheck/llm-cue-research.json`.
+  **/stats workbench:** one ranked Tracklist workbench (first-party text →
+  ACR → IDs → optional 1001 last). Capture 1001 stays a closed anchor.
+  **Host-twin fold:** same 1001 seed + both official YT and SC permalinks
+  already known → one catalog row, both URLs kept, SC-first playback,
+  secondary slug aliases to the survivor. Never invents a missing host.
+  Distinct performances stay separate.
   **Track export:** `npm run export:tracks` dumps catalog tracks (CSV +
   Claude JSONL) to `data/track-id-export/`. Pages `prebuild` also writes
   `/exports/tracks-need-id.csv` and `.jsonl` (no-ISRC, most-played first).
@@ -197,8 +203,11 @@ unless asked.
   **Track IDs:** `npm run research:track-ids` resolves ISRCs / Beatport URLs
   / canonical Spotify `/track/{22}` (Client Credentials, fill-null
   `Track.spotifyUrl`)
-  from held 1001 names, then high-play catalog tracks missing ISRC **or**
-  Beatport (`TRACK_ID_HELD_LIMIT`, `TRACK_ID_CATALOG=0` skips catalog).
+  from held 1001 names, then ACR Identify / File Scan hits still missing
+  ISRC or Beatport (`TRACK_ID_FINGERPRINT_LIMIT`), then high-play catalog
+  tracks missing ISRC **or** Beatport (`TRACK_ID_HELD_LIMIT`,
+  `TRACK_ID_CATALOG=0` skips catalog). Empty official playbacks rank first
+  for Identify / File Scan so those hits can hand off here.
   Catalog enrich `acr` (120) and `full` (400) run this automatically with
   `TRACK_ID_APPLY=1` — do not dispatch enrich/Pages to start it while those
   workflows are already running. Fast path: rows that already have an ISRC

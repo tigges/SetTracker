@@ -383,6 +383,9 @@ export async function getSetBySlug(slug: string) {
     sourceName: set.sourceName,
     sourceUrl: set.sourceUrl,
     playbackUrl: playablePlaybackUrl(set.playbackUrl, set.sourceUrl),
+    soundcloudUrl: set.soundcloudUrl,
+    youtubeUrl: set.youtubeUrl,
+    mixcloudUrl: set.mixcloudUrl,
     cover: set.cover,
     imageUrl:
       set.imageUrl ??

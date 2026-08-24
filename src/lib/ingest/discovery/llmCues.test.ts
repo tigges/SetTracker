@@ -9,6 +9,7 @@ import {
   isCueStub,
   looksLikeCueRadioTitle,
   mergeClockedPlays,
+  cuePlaysForWrite,
   parseClockToSec,
 } from "./llmCues";
 import { parseClockedTracklist } from "../soundcloud/parseTracklist";
@@ -64,6 +65,20 @@ assert.equal(kept[0]!.trackTitle, "The Drill");
 
 const merged = mergeClockedPlays(clocked, kept);
 assert.equal(merged.filter((p) => p.timestamp === 33 * 60 + 38).length, 1);
+
+const parserOnly = cuePlaysForWrite(clocked, kept, false);
+assert.equal(parserOnly.length, clocked.length);
+assert.equal(
+  parserOnly.some((p) => p.trackTitle === "The Drill" && p.artistName == null),
+  true,
+);
+const withLlm = cuePlaysForWrite(
+  [{ ...clocked[0]!, timestamp: 10 }],
+  kept,
+  true,
+);
+assert.ok(withLlm.some((p) => p.trackTitle === "The Drill"));
+assert.equal(cuePlaysForWrite(clocked, kept, false).length, clocked.length);
 
 assert.equal(isCueStub([]), true);
 assert.equal(

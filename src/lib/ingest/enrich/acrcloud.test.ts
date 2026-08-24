@@ -326,6 +326,30 @@ assert.equal(
   3,
   "empty festival outside detect window",
 );
+assert.equal(
+  homepageEnrichBoost({
+    publishedAt: new Date(),
+    primaryDjSlug: "unknown-local",
+    genre: "House",
+    densitySeverity: "severe",
+    top100,
+    playCount: 0,
+  }),
+  3,
+  "empty official recent non-festival",
+);
+assert.equal(
+  homepageEnrichBoost({
+    publishedAt: new Date(Date.now() - 120 * 864e5),
+    primaryDjSlug: "unknown-local",
+    genre: "House",
+    densitySeverity: "severe",
+    top100,
+    playCount: 0,
+  }),
+  2,
+  "empty official older non-festival",
+);
 // Event-focus boost (ACRCLOUD_EVENT_SLUGS) beats same-host non-focus.
 const eventFocusFirst = [
   cand({
