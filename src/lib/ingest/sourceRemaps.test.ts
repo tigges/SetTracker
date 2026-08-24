@@ -55,4 +55,10 @@ assert.deepEqual(previousSlugsFor("yt-FQj71mhobYw"), [
 const voornAliased = aliasSlugsFor(["yt-FQj71mhobYw"]);
 assert.ok(voornAliased.includes("sc-korolovadj-joris-voorn-b2b-korolova-live"));
 
+const extraAliased = aliasSlugsFor(
+  ["yt-keep"],
+  [{ fromSlug: "sc-keep-mirror", toSlug: "yt-keep" }],
+);
+assert.ok(extraAliased.includes("sc-keep-mirror"));
+
 console.log("sourceRemaps.test.ts ok");

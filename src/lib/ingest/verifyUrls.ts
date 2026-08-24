@@ -38,6 +38,7 @@ import { fillDjHandlesFromKnown, fillDjWebsitesFromWikidata } from "./discovery/
 import { isRejectedWebsiteHost } from "./discovery/wikidataOfficial";
 import { isWeakOfficialUrl } from "../officialUrls";
 import { discoverCuratedReliveRemaps } from "./reliveWatch";
+import { applySetHostTwinFolds } from "./hostTwinFolds";
 import { applySetSourceRemaps } from "./sourceRemaps";
 import { applySetHostUrls } from "./setHostUrls";
 import {
@@ -209,6 +210,14 @@ export async function applyKnownUrlFixes(prisma: PrismaClient): Promise<number> 
   if (hosts.filled) {
     console.log(
       `[verify-urls] set host URLs scanned=${hosts.scanned} filled=${hosts.filled}`,
+    );
+  }
+
+  const twinFolds = await applySetHostTwinFolds(prisma);
+  n += twinFolds.folded;
+  if (twinFolds.folded || twinFolds.skipped) {
+    console.log(
+      `[verify-urls] host twin folds folded=${twinFolds.folded} skipped=${twinFolds.skipped}`,
     );
   }
 

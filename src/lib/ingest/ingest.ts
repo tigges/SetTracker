@@ -8,6 +8,7 @@ import {
 } from "../brandHosts";
 import { hostUrlFillNull, playbackUrlFromSource } from "../playback";
 import { harvestSetHostUrls } from "./setHostUrls";
+import { survivorSlugForSecondary } from "./hostTwins";
 import { djSocialsFromKnown, labelSocials } from "../social";
 import { ARTIST_ROSTER } from "./roster";
 import { normalizeIsrc, parseTrackTitle } from "../trackMeta";
@@ -732,6 +733,39 @@ export async function runIngest(
         }
         return null;
       })());
+    if (!existing) {
+      const survivorSlug = survivorSlugForSecondary(raw.sourceSlug);
+      if (survivorSlug) {
+        const survivor = await prisma.set.findUnique({
+          where: { slug: survivorSlug },
+        });
+        if (survivor) {
+          const hosts = harvestedHosts(raw);
+          const playback = preferPlaybackUrl(
+            preferPlaybackUrl(survivor.playbackUrl, raw.playbackUrl),
+            hosts.soundcloudUrl,
+          );
+          await prisma.set.update({
+            where: { id: survivor.id },
+            data: {
+              ...(playback && playback !== survivor.playbackUrl
+                ? { playbackUrl: playback }
+                : {}),
+              ...hostUrlFillNull(
+                {
+                  soundcloudUrl: survivor.soundcloudUrl,
+                  youtubeUrl: survivor.youtubeUrl,
+                  mixcloudUrl: survivor.mixcloudUrl,
+                },
+                hosts,
+              ),
+            },
+          });
+          stats.skippedSets += 1;
+          return;
+        }
+      }
+    }
     if (isNonCatalogSet({ title: raw.title, durationSec: raw.durationSec })) {
       if (existing) {
         await prisma.played.deleteMany({ where: { setId: existing.id } });

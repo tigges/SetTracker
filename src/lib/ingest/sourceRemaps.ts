@@ -56,10 +56,13 @@ export function previousSlugsFor(toSlug: string): string[] {
 }
 
 /** Include retired slugs so /sets/{oldId}/ still statically exports. */
-export function aliasSlugsFor(slugs: string[]): string[] {
+export function aliasSlugsFor(
+  slugs: string[],
+  extraRemaps: Array<{ fromSlug: string; toSlug: string }> = [],
+): string[] {
   const have = new Set(slugs);
   const extra: string[] = [];
-  for (const r of SET_SOURCE_REMAPS) {
+  for (const r of [...SET_SOURCE_REMAPS, ...extraRemaps]) {
     if (have.has(r.toSlug) || have.has(r.fromSlug)) extra.push(r.fromSlug);
   }
   return [...new Set([...slugs, ...extra])];

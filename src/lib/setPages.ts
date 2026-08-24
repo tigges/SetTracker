@@ -7,9 +7,10 @@
  * and DJ / event / related lists link every catalog year.
  */
 
+import { hostTwinFoldCandidatesFromSeeds } from "@/lib/ingest/hostTwins";
 import { aliasSlugsFor } from "@/lib/ingest/sourceRemaps";
 
 /** Unique catalog slugs that must get a static set page, plus retired aliases. */
 export function staticSetPageSlugs(slugs: Iterable<string>): string[] {
-  return aliasSlugsFor([...new Set(slugs)]);
+  return aliasSlugsFor([...new Set(slugs)], hostTwinFoldCandidatesFromSeeds());
 }
