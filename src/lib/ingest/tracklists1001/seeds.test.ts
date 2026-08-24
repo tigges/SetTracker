@@ -174,6 +174,7 @@ import {
   TL_LAIDBACK_LUKE_OWR_SELECTS_017_2026,
   TL_MADDIX_TML_WE1_2026,
   TL_MARLON_HOFFSTADT_TML_WE1_2026,
+  TL_ERIC_PRYDZ_EPIC_RADIO_026_2026,
   TL_ROBIN_SCHULZ_SUGAR_RADIO_555_2026,
   TL_SARA_LANDRY_TML_FRIENDSHIP_MIX_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
@@ -3113,6 +3114,38 @@ for (let i = 1; i < schulzSugar.length; i++) {
   assert.ok(
     (schulzSugar[i]!.timestamp ?? 0) > (schulzSugar[i - 1]!.timestamp ?? 0),
     `Robin Schulz Sugar Radio 555 clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_ERIC_PRYDZ_EPIC_RADIO_026_2026);
+assert.equal(TL_ERIC_PRYDZ_EPIC_RADIO_026_2026.length, 12);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-eric-prydz-eric-prydz-presents-epic-1"],
+  TL_ERIC_PRYDZ_EPIC_RADIO_026_2026,
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-eric-prydz-eric-prydz-presents-epic-1"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-eric-prydz-eric-prydz-presents-463760700"],
+);
+assert.equal(isSecondaryPlaybackSlug("sc-eric-prydz-eric-prydz-presents-epic-1"), false);
+const epic026 = tracklist1001RowsToPlays(TL_ERIC_PRYDZ_EPIC_RADIO_026_2026);
+assert.equal(epic026.length, 12);
+assert.equal(epic026[0]?.provenance, "1001tl");
+assert.equal(epic026[0]?.timestamp, 30);
+assert.equal(epic026[0]?.trackTitle, "Heavy");
+assert.equal(
+  epic026[9]?.trackTitle,
+  "Turn Around (Âme Remix / Eric Prydz Private Edit)",
+);
+assert.equal(epic026[9]?.timestamp, 44 * 60 + 17);
+assert.equal(epic026[10]?.trackTitle, "Tomorrowland 2019 ID (Working Title)");
+assert.equal(epic026[10]?.timestamp, 51 * 60 + 30);
+assert.equal(epic026[11]?.trackTitle, "Somebody's Watching Me");
+assert.equal(epic026[11]?.timestamp, 59 * 60 + 22);
+for (let i = 1; i < epic026.length; i++) {
+  assert.ok(
+    (epic026[i]!.timestamp ?? 0) > (epic026[i - 1]!.timestamp ?? 0),
+    `Eric Prydz EPIC Radio 026 clocks must increase at index ${i}`,
   );
 }
 
