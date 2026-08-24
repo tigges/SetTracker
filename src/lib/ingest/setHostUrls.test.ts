@@ -99,6 +99,28 @@ assert.equal(
 );
 assert.ok(!extras["yt-0Fq24R47sDY"]?.soundcloudUrl);
 assert.ok(!extras["yt-G-DciaWb5KY"]?.soundcloudUrl);
+assert.equal(
+  extras["yt-xv6hpdqKlxg"]?.soundcloudUrl,
+  "https://soundcloud.com/eric-prydz/epic-radio-025",
+);
+assert.equal(
+  extras["yt-xv6hpdqKlxg"]?.youtubeUrl,
+  "https://www.youtube.com/watch?v=xv6hpdqKlxg",
+);
+assert.ok(!extras["yt-xv6hpdqKlxg"]?.mixcloudUrl);
+assert.equal(
+  extras["sc-eric-prydz-epic-radio-025"]?.youtubeUrl,
+  "https://www.youtube.com/watch?v=xv6hpdqKlxg",
+);
+assert.equal(
+  extras["sc-eric-prydz-epic-radio-025"]?.soundcloudUrl,
+  "https://soundcloud.com/eric-prydz/epic-radio-025",
+);
+assert.ok(!extras["sc-eric-prydz-epic-radio-025"]?.mixcloudUrl);
+assert.notEqual(
+  extras["yt-xv6hpdqKlxg"]?.soundcloudUrl,
+  extras["yt-JLIYTueL4TI"]?.soundcloudUrl,
+);
 assert.ok(!extras["yt-7jUXS12-7f0"]?.soundcloudUrl);
 assert.ok(!extras["yt-_4P9Y5KN9n4"]?.soundcloudUrl);
 assert.ok(!extras["yt-5V5qDFSw8Hs"]?.soundcloudUrl);

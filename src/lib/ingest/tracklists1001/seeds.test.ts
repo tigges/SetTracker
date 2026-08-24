@@ -185,6 +185,7 @@ import {
   TL_4444_OF_A_KIND_TML_WE1_FREEDOM_2026,
   TL_JOHN_NEWMAN_TML_WE1_MAINSTAGE_2026,
   TL_DVLM_SMASH_THE_HOUSE_RADIO_690_2026,
+  TL_ERIC_PRYDZ_EPIC_RADIO_025_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   isSecondaryPlaybackSlug,
@@ -1818,6 +1819,14 @@ assert.equal(
   isWiredTracklistSlug("sc-eric-prydz-eric-prydz-presents-463760700"),
   true,
 );
+assert.equal(isWiredTracklistSlug("yt-xv6hpdqKlxg"), true);
+assert.equal(isWiredTracklistSlug("sc-eric-prydz-epic-radio-025"), true);
+assert.equal(
+  isWiredTracklistSlug(
+    "sc-https://soundcloud.com/eric-prydz/epic-radio-025",
+  ),
+  false,
+);
 assert.equal(
   isWiredTracklistSlug("sc-bradeazy-bradeazy-live-lollapalooza"),
   true,
@@ -3399,6 +3408,8 @@ assert.notEqual(
   TRACKLIST_1001_BY_SOURCE_SLUG["sc-eric-prydz-eric-prydz-presents-463760700"],
 );
 assert.equal(isSecondaryPlaybackSlug("sc-eric-prydz-eric-prydz-presents-epic-1"), false);
+assert.equal(isSecondaryPlaybackSlug("yt-xv6hpdqKlxg"), false);
+assert.equal(isSecondaryPlaybackSlug("sc-eric-prydz-epic-radio-025"), true);
 const epic026 = tracklist1001RowsToPlays(TL_ERIC_PRYDZ_EPIC_RADIO_026_2026);
 assert.equal(epic026.length, 12);
 assert.equal(epic026[0]?.provenance, "1001tl");
@@ -3750,6 +3761,41 @@ for (let i = 1; i < hypeSync.length; i++) {
   assert.ok(
     (hypeSync[i]!.timestamp ?? 0) > (hypeSync[i - 1]!.timestamp ?? 0),
     `James Hype SYNC London clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_ERIC_PRYDZ_EPIC_RADIO_025_2026);
+assert.equal(TL_ERIC_PRYDZ_EPIC_RADIO_025_2026.length, 12);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-xv6hpdqKlxg"],
+  TL_ERIC_PRYDZ_EPIC_RADIO_025_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-eric-prydz-epic-radio-025"],
+  TL_ERIC_PRYDZ_EPIC_RADIO_025_2026,
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-xv6hpdqKlxg"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-JLIYTueL4TI"],
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-eric-prydz-epic-radio-025"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-eric-prydz-eric-prydz-presents-epic-1"],
+);
+assert.equal(TL_ERIC_PRYDZ_EPIC_RADIO_025_2026[0]?.title, "EPIC Radio 025 Intro ID (Working Title)");
+assert.equal(
+  TL_ERIC_PRYDZ_EPIC_RADIO_025_2026[11]?.title,
+  "Marquee Las Vegas 2025 ID (Working Title)",
+);
+const epic025 = tracklist1001RowsToPlays(TL_ERIC_PRYDZ_EPIC_RADIO_025_2026);
+assert.equal(epic025.length, 12);
+assert.equal(epic025[0]?.provenance, "1001tl");
+assert.equal(epic025[0]?.timestamp, 30);
+assert.equal(epic025[11]?.timestamp, 56 * 60 + 5);
+for (let i = 1; i < epic025.length; i++) {
+  assert.ok(
+    (epic025[i]!.timestamp ?? 0) > (epic025[i - 1]!.timestamp ?? 0),
+    `Epic Radio 025 clocks must increase at index ${i}`,
   );
 }
 

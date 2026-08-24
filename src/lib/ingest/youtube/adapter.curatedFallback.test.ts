@@ -61,6 +61,7 @@ const PURIFIED_520 = YOUTUBE_SETS.find((s) => s.video.includes("8aDoUu4GDrc"));
 const CAPTIVE_098 = YOUTUBE_SETS.find((s) => s.video.includes("5JxfEjVdQFk"));
 const HYPE_SYNC = YOUTUBE_SETS.find((s) => s.video.includes("rLTCLSsqrXY"));
 const EPIC_036 = YOUTUBE_SETS.find((s) => s.video.includes("JLIYTueL4TI"));
+const EPIC_025 = YOUTUBE_SETS.find((s) => s.video.includes("xv6hpdqKlxg"));
 const HELDENS_DAYBREAK = YOUTUBE_SETS.find((s) =>
   s.video.includes("wuMQeEJ3YnQ"),
 );
@@ -990,6 +991,17 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.durationSec, 59 * 60 + 10 + 180);
   });
 
+  it("builds Epic Radio 025 meta from the curated 1001 capture", () => {
+    assert.ok(EPIC_025);
+    const meta = watchMetaFromCuratedSeed(EPIC_025);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "xv6hpdqKlxg");
+    assert.match(meta.title, /Epic Radio 025/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=xv6hpdqKlxg");
+    // Last cue 56:05 + 180s pad.
+    assert.equal(meta.durationSec, 56 * 60 + 5 + 180);
+  });
+
   it("builds Cuebrick Sacré Paris meta from the official @Cuebrick seed", () => {
     assert.ok(CUEBRICK_SACRE);
     const meta = watchMetaFromCuratedSeed(CUEBRICK_SACRE);
@@ -1727,6 +1739,21 @@ describe("curated YouTube 429 fallback", () => {
     assert.ok(sets[0]!.durationSec >= 59 * 60);
     assert.equal(sets[0]?.primaryArtist?.slug, "eric-prydz");
     assert.equal(sets[0]?.seriesName, "Epic Radio");
+  });
+
+  it("lands Epic Radio 025 from the 1001 seed when watch is 429", async () => {
+    assert.ok(EPIC_025);
+    const adapter = createYoutubeAdapter([EPIC_025], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-xv6hpdqKlxg");
+    assert.equal(sets[0]!.type, "radio");
+    assert.ok(sets[0]!.plays.length >= 12);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 56 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "eric-prydz");
+    assert.equal(sets[0]?.seriesName, "Epic Radio");
+    assert.notEqual(sets[0]!.sourceSlug, "yt-JLIYTueL4TI");
   });
 
   it("lands Oliver Heldens Daybreak TML WE1 from the 1001 seed when watch is 429", async () => {

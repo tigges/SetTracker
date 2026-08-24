@@ -526,6 +526,30 @@ assert.equal(
 assert.equal(
   skipCaptureNeed(
     row({
+      slug: "yt-xv6hpdqKlxg",
+      title: "Eric Prydz - Epic Radio 025 2026-03-05",
+      type: "radio",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "sc-eric-prydz-epic-radio-025",
+      title: "Eric Prydz - Epic Radio 025 2026-03-05",
+      type: "radio",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
       slug: "sc-eric-prydz-eric-prydz-presents-463760700",
       title: "Eric Prydz presents EPIC Radio 036",
       type: "radio",

@@ -369,3 +369,32 @@ export const TL_DVLM_SMASH_THE_HOUSE_RADIO_690_2026: FingerprintSeedRow[] = [
   { at: "54:39", artist: "Faustix", title: "Kick So Loud" },
   { at: "57:28", artist: "OBS", title: "Burn It Down" },
 ];
+
+/**
+ * Eric Prydz - Epic Radio 025 2026-03-05
+ * https://www.1001tracklists.com/tracklist/1lw7ktzt/eric-prydz-epic-radio-025-2026-03-05.html
+ * Official YT: https://youtu.be/xv6hpdqKlxg
+ * Official SC: https://soundcloud.com/eric-prydz/epic-radio-025
+ * Paste name TL_Eric-Prydz_Epic-Radio_025_2026-03-05 is not a valid identifier.
+ * No Mixcloud in the operator paste — do not invent a Mixcloud slug.
+ * Distinct from EPIC 026 (sc-eric-prydz-eric-prydz-presents-epic-1) and
+ * EPIC 036 (yt-JLIYTueL4TI / sc-eric-prydz-eric-prydz-presents-463760700).
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-xv6hpdqKlxg"]
+ *       TRACKLIST_1001_BY_SOURCE_SLUG["sc-eric-prydz-epic-radio-025"]
+ * Curated in youtube/videos.ts + soundcloud/tracks.ts.
+ * Captured 2026-08-24 — provenance 1001tl.
+ */
+export const TL_ERIC_PRYDZ_EPIC_RADIO_025_2026: FingerprintSeedRow[] = [
+  { at: "0:30", artist: "Pryda", title: "EPIC Radio 025 Intro ID (Working Title)" },
+  { at: "6:35", artist: "Pryda", title: "Sonar Barcelona 2025 ID (Working Title)" },
+  { at: "13:35", artist: "Cirez D", title: "Exit 2025 ID (Working Title)" },
+  { at: "20:35", artist: "Pryda", title: "Hi Ibiza 2018 ID (Working Title)" },
+  { at: "24:47", artist: "Cirez D", title: "Inter Expo Center 2025 ID (Working Title)" },
+  { at: "30:14", artist: "Cirez D", title: "EPIC Radio 025 ID (Working Title)" },
+  { at: "33:44", artist: "Cirez D", title: "Poney Club 2025 ID (Working Title)" },
+  { at: "38:44", artist: "Pryda", title: "Twitter 2025 ID 01 (Working Title)" },
+  { at: "42:00", artist: "Pryda", title: "Twitter 2025 ID 02 (Working Title)" },
+  { at: "47:50", artist: "Cirez D", title: "Sunset Square 2025 ID (Working Title)" },
+  { at: "51:51", artist: "Pryda", title: "CELL Hï Ibiza 2024 ID 01 (Working Title)" },
+  { at: "56:05", artist: "Pryda", title: "Marquee Las Vegas 2025 ID (Working Title)" },
+];

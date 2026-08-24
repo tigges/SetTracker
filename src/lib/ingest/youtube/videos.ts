@@ -152,6 +152,7 @@ import {
   TL_MARLON_HOFFSTADT_TML_WE1_2026,
   TL_4444_OF_A_KIND_TML_WE1_FREEDOM_2026,
   TL_BULLET_TOOTH_TML_WE2_CORE_2026,
+  TL_ERIC_PRYDZ_EPIC_RADIO_025_2026,
 } from "../tracklists1001/seeds";
 import type { RawArtist } from "../types";
 import { slugify } from "../types";
@@ -1196,6 +1197,23 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/9xurh1t/eric-prydz-epic-radio-036-2026-08-06.html",
     tracklist1001: TL_ERIC_PRYDZ_EPIC_RADIO_036_2026,
+  },
+  {
+    // Official Epic Radio 025; timed 1001 capture (same list as SC
+    // sc-eric-prydz-epic-radio-025). No Mixcloud in the paste — do not
+    // invent a Mixcloud slug. Distinct from 026 (SC-only) and 036.
+    video: "https://www.youtube.com/watch?v=xv6hpdqKlxg",
+    primaryArtist: dj("Eric Prydz", {
+      accent: "#7209b7",
+      homeCity: "Sweden",
+    }),
+    genre: "Progressive House",
+    type: "radio",
+    title: "Eric Prydz - Epic Radio 025 2026-03-05",
+    seriesName: "Epic Radio",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1lw7ktzt/eric-prydz-epic-radio-025-2026-03-05.html",
+    tracklist1001: TL_ERIC_PRYDZ_EPIC_RADIO_025_2026,
   },
   {
     // Official Miss Monique upload; timed 1001 capture.
