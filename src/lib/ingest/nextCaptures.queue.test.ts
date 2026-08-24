@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import {
+  CAPTURE_QUEUE_LIMIT,
   buildCaptureQueueFromNeeds,
   scoreCaptureNeed,
   skipCaptureNeed,
@@ -689,5 +690,19 @@ assert.equal(
   ),
   "mirror",
 );
+
+const many = Array.from({ length: 55 }, (_, i) =>
+  row({
+    slug: `yt-cap-${i}`,
+    title: `Festival gap ${i}`,
+    festivalSeason: true,
+    isFestival: true,
+    playCount: 0,
+    publishedAt: `2026-08-${String((i % 28) + 1).padStart(2, "0")}T00:00:00Z`,
+  }),
+);
+const defaultQueue = buildCaptureQueueFromNeeds(many, { nowMs: now });
+assert.equal(defaultQueue.length, CAPTURE_QUEUE_LIMIT);
+assert.equal(CAPTURE_QUEUE_LIMIT, 40);
 
 console.log("nextCaptures.queue.test.ts ok");

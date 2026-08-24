@@ -231,6 +231,66 @@ export function summarizeSetHealth(sets: SetHealthInput[]): {
   };
 }
 
+type CueMixLike = {
+  key: string;
+  label: string;
+  count: number;
+  color: string;
+};
+
+const FIRST_PARTY_CLOCK = new Set([
+  "youtube",
+  "soundcloud",
+  "hearthis",
+  "bandcamp",
+  "insomniac",
+]);
+const OVERLAY_CLOCK = new Set(["1001tl", "mixesdb", "applemusic"]);
+
+/** Group play provenance for /stats — first-party + fingerprint vs community overlays. */
+export function clockSourceSlices(
+  rows: Array<{ key: string; count: number }>,
+): CueMixLike[] {
+  const buckets = {
+    first_party: 0,
+    fingerprint: 0,
+    overlay: 0,
+    community: 0,
+  };
+  for (const row of rows) {
+    if (FIRST_PARTY_CLOCK.has(row.key)) buckets.first_party += row.count;
+    else if (row.key === "fingerprint") buckets.fingerprint += row.count;
+    else if (OVERLAY_CLOCK.has(row.key)) buckets.overlay += row.count;
+    else if (row.key === "community") buckets.community += row.count;
+  }
+  return [
+    {
+      key: "first_party",
+      label: "first-party",
+      count: buckets.first_party,
+      color: "var(--brand)",
+    },
+    {
+      key: "fingerprint",
+      label: "fingerprint",
+      count: buckets.fingerprint,
+      color: "var(--amber)",
+    },
+    {
+      key: "overlay",
+      label: "1001 / MixesDB overlay",
+      count: buckets.overlay,
+      color: "#8b9cff",
+    },
+    {
+      key: "community",
+      label: "community",
+      count: buckets.community,
+      color: "var(--grey)",
+    },
+  ].filter((s) => s.count > 0);
+}
+
 export function slicePct(count: number, total: number): number {
   if (total <= 0 || count <= 0) return 0;
   return Math.max(2, Math.round((count / total) * 100));

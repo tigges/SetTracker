@@ -138,8 +138,10 @@ function Capture1001Workbench({
   return (
     <div className="space-y-3">
       <p className="text-[12px] text-muted">
-        YT/SC already in the catalog. Search 1001 POSTs their tracklist
-        form (GET /search?q= is a 404). Run the
+        Official playback is already in the catalog. First-party
+        descriptions, timed comments, and ACR fingerprints fill clocks
+        without 1001. Search 1001 POSTs their tracklist form (GET /search?q=
+        is a 404) only for community overlays. Run the
         bookmarklet (or paste{" "}
         <span className="mono text-[11px] text-ink">
           scripts/capture-1001tl.console.js

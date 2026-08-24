@@ -18,6 +18,9 @@ import { searchMixesdbByPlayerUrl } from "../searchMixesdb";
 
 export { nativeCaptureSearchUrl, search1001, searchMixesdbByPlayerUrl };
 
+/** /stats#capture-1001 ranked queue size (live DB + committed snapshot). */
+export const CAPTURE_QUEUE_LIMIT = 40;
+
 export type CapturePreset = {
   label: string;
   slug: string;
@@ -348,7 +351,7 @@ export function buildCaptureQueueFromNeeds(
   rows: CaptureNeedRow[],
   opts: { limit?: number; extra?: CapturePreset[]; nowMs?: number } = {},
 ): CapturePreset[] {
-  const limit = opts.limit ?? 20;
+  const limit = opts.limit ?? CAPTURE_QUEUE_LIMIT;
   const mapped = mappedSlugs();
   const nowMs = opts.nowMs ?? Date.now();
   const seen = new Set<string>();

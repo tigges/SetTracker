@@ -5,6 +5,7 @@
 import { writeFileSync, mkdirSync } from "node:fs";
 import { join } from "node:path";
 import {
+  CAPTURE_QUEUE_LIMIT,
   buildHeldReliveWatch,
   buildNextCaptures,
 } from "../src/lib/ingest/nextCaptures";
@@ -46,12 +47,12 @@ async function main() {
   const extra = live?.unwiredOfficial ?? [];
   let presets = buildNextCaptures({
     cwd,
-    limit: 12,
+    limit: CAPTURE_QUEUE_LIMIT,
     extra,
   });
   try {
     const { getCaptureQueue } = await import("../src/lib/captureQueue");
-    const liveQueue = await getCaptureQueue(12, extra);
+    const liveQueue = await getCaptureQueue(CAPTURE_QUEUE_LIMIT, extra);
     if (liveQueue.presets.length) presets = liveQueue.presets;
   } catch (err) {
     console.warn(

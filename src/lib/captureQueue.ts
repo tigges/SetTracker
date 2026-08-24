@@ -8,6 +8,7 @@ import {
   isFestivalSeasonSet,
 } from "@/lib/ingest/festivalDrops";
 import {
+  CAPTURE_QUEUE_LIMIT,
   buildCaptureQueueFromNeeds,
   extrasFromCaptureSnapshot,
   type CaptureNeedRow,
@@ -25,7 +26,7 @@ export type CaptureQueue = {
 };
 
 export async function getCaptureQueue(
-  limit = 20,
+  limit = CAPTURE_QUEUE_LIMIT,
   extra: CapturePreset[] = [],
 ): Promise<CaptureQueue> {
   const top100 = loadDjMagTop100RankBySlug();
@@ -118,12 +119,12 @@ export async function getCaptureQueue(
 
 /** Stats workbench: live catalog rank, else Relive extras / committed snapshot. */
 export async function loadOperatorCaptureQueue(
-  limit = 20,
+  limit = CAPTURE_QUEUE_LIMIT,
 ): Promise<CaptureQueue> {
   const extras = extrasFromCaptureSnapshot(
     nextCaptures as { presets?: CapturePreset[] },
   );
-  const presets: CapturePreset[] = extras.slice(0, 12);
+  const presets: CapturePreset[] = extras.slice(0, limit);
   const generatedAt = String(nextCaptures.generatedAt ?? "");
   try {
     const queue = await getCaptureQueue(limit, extras);

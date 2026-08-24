@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import {
+  clockSourceSlices,
   djHealthSlice,
   isChartTouchingSet,
   isDjOnHealthBar,
@@ -111,5 +112,20 @@ describe("statsHealth", () => {
     assert.equal(out.chartTouching, 2);
     assert.equal(out.slices.find((s) => s.key === "thin")?.star, 1);
     assert.equal(out.noPlaybackStar, 1);
+  });
+
+  it("groups clock provenance into first-party, fingerprint, and overlays", () => {
+    const slices = clockSourceSlices([
+      { key: "youtube", count: 10 },
+      { key: "soundcloud", count: 4 },
+      { key: "fingerprint", count: 6 },
+      { key: "1001tl", count: 20 },
+      { key: "mixesdb", count: 2 },
+      { key: "community", count: 1 },
+    ]);
+    assert.equal(slices.find((s) => s.key === "first_party")?.count, 14);
+    assert.equal(slices.find((s) => s.key === "fingerprint")?.count, 6);
+    assert.equal(slices.find((s) => s.key === "overlay")?.count, 22);
+    assert.equal(slices.find((s) => s.key === "community")?.count, 1);
   });
 });
