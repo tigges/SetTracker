@@ -2,13 +2,28 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import {
+  decodeMojibake,
   evaluateEntityCompleteRow,
+  isFallbackWebsiteHub,
   mergeEntityCompletePins,
   nameOverlapsHandle,
   parseEntityCompleteCsv,
   pinsFromAudit,
 } from "./entityCompletePins";
 
+assert.equal(decodeMojibake("\u00C3\u2020ON:MODE"), "ÆON:MODE");
+assert.equal(decodeMojibake("\u00C3\u201Clafur Arnalds"), "Ólafur Arnalds");
+assert.equal(decodeMojibake("Mal\u00C3\u00B3ne"), "Malóne");
+assert.equal(nameOverlapsHandle("Coco María", "https://cocomaria.net/"), true);
+assert.equal(nameOverlapsHandle("Noizu", "https://www.youtube.com/@NoizuSound"), true);
+assert.equal(
+  nameOverlapsHandle("Third Party", "https://www.youtube.com/@thirdpartychannel"),
+  true,
+);
+assert.equal(
+  nameOverlapsHandle("Fantasm", "https://www.instagram.com/fantasm_techno/"),
+  false,
+);
 assert.equal(nameOverlapsHandle("Matroda", "https://www.youtube.com/@MATRODAMUSIC"), true);
 assert.equal(nameOverlapsHandle("AC Slater", "https://x.com/djacslater"), true);
 assert.equal(nameOverlapsHandle("Dr. Fresch", "https://www.youtube.com/@DrFreschTV"), true);
@@ -100,6 +115,8 @@ assert.equal(
   false,
 );
 
+assert.equal(isFallbackWebsiteHub("https://linktr.ee/hannahlaingdj"), true);
+assert.equal(isFallbackWebsiteHub("https://space92.komi.io/"), true);
 assert.equal(
   evaluateEntityCompleteRow({
     kind: "dj",
@@ -107,9 +124,90 @@ assert.equal(
     name: "Hannah Laing",
     field: "website",
     value: "https://linktr.ee/hannahlaingdj",
-    evidence: "hub",
+    evidence: "hub fallback",
+  }).value,
+  "https://linktr.ee/hannahlaingdj",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "space-92",
+    name: "Space 92",
+    field: "website",
+    value: "https://space92.komi.io/",
+    evidence: "hub fallback",
+  }).value,
+  "https://space92.komi.io",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "angelphroot",
+    name: "Angelphroot",
+    field: "website",
+    value: "https://linktr.ee/angieloopi",
+    evidence: "hub fallback",
+  }).value,
+  "https://linktr.ee/angieloopi",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "ahee",
+    name: "AHEE",
+    field: "website",
+    value: "https://linktr.ee/",
+    evidence: "empty hub",
   }).drop,
   "weak or invalid website",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "eli-brown",
+    name: "Eli Brown",
+    field: "website",
+    value: "https://elibrownbeats.com/",
+    evidence: "official",
+  }).value,
+  "https://elibrownbeats.com",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "coco-maria",
+    name: "Coco María",
+    field: "website",
+    value: "https://cocomaria.net/",
+    evidence: "official",
+  }).value,
+  "https://cocomaria.net",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "imanu",
+    name: "IMANU",
+    field: "website",
+    value: "https://www.imanu.nu/",
+    evidence: "official",
+  }).value,
+  "https://imanu.nu",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "rules",
+    name: "Rules",
+    field: "website",
+    value: "https://thisisrules.com/",
+    evidence: "official",
+  }).value,
+  "https://thisisrules.com",
+);
+assert.equal(
+  nameOverlapsHandle("Chase", "https://chaseandstatus.co.uk/"),
+  false,
 );
 assert.equal(
   evaluateEntityCompleteRow({
@@ -205,6 +303,17 @@ assert.equal(
 assert.equal(
   evaluateEntityCompleteRow({
     kind: "dj",
+    slug: "max-styler",
+    name: "Max Styler",
+    field: "homeCity",
+    value: "Not found",
+    evidence: "export placeholder",
+  }).drop,
+  "placeholder city",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
     slug: "mau-p",
     name: "Mau P",
     field: "genre",
@@ -268,5 +377,16 @@ assert.equal(mergedHalf[0]?.slug, "lucas-steve");
 assert.equal(mergedHalf[0]?.website, "https://www.lucasandsteve.com/");
 assert.equal(mergedHalf[0]?.homeCity, "Maastricht, Netherlands");
 assert.equal(mergedHalf[0]?.genre, "House");
+
+const hubThenOfficial = mergeEntityCompletePins(
+  [{ kind: "dj", slug: "green-velvet", website: "https://linktr.ee/officialgreenvelvet" }],
+  [{ kind: "dj", slug: "green-velvet", website: "https://officialgreenvelvet.com" }],
+);
+assert.equal(hubThenOfficial[0]?.website, "https://officialgreenvelvet.com");
+const officialThenHub = mergeEntityCompletePins(
+  [{ kind: "dj", slug: "green-velvet", website: "https://officialgreenvelvet.com" }],
+  [{ kind: "dj", slug: "green-velvet", website: "https://linktr.ee/officialgreenvelvet" }],
+);
+assert.equal(officialThenHub[0]?.website, "https://officialgreenvelvet.com");
 
 console.log("entityCompletePins.test.ts ok");

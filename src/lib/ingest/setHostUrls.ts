@@ -74,6 +74,14 @@ export const SET_HOST_PINS: Record<string, SetHostUrls> = {
   "sc-innellea-colyn-b2b-innella-at-ultra": {
     soundcloudUrl: "https://soundcloud.com/innellea/colyn-b2b-innella-at-ultra",
   },
+  "yt-KAZd25mCHp8": {
+    soundcloudUrl:
+      "https://soundcloud.com/rose-ringed/rose-ringed-freedomstage-we1",
+  },
+  "sc-rose-ringed-rose-ringed-freedomstage-we1": {
+    soundcloudUrl:
+      "https://soundcloud.com/rose-ringed/rose-ringed-freedomstage-we1",
+  },
 };
 
 export function soundcloudSlugFromUrl(url: string): string | null {

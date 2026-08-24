@@ -107,7 +107,9 @@ export function evaluateHomeCity(
   const value = String(raw || "").replace(/\s+/g, " ").trim();
   if (!value) return { ok: false, reason: "empty" };
   if (/https?:\/\//i.test(value)) return { ok: false, reason: "not a city" };
-  if (/^(unknown|n\/?a|none|worldwide|internet|global)$/i.test(value)) {
+  if (
+    /^(unknown|n\/?a|none|not found|worldwide|internet|global)$/i.test(value)
+  ) {
     return { ok: false, reason: "placeholder city" };
   }
   if (!CITY_RE.test(value)) return { ok: false, reason: "city shape rejected" };

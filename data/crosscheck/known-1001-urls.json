@@ -1,7 +1,64 @@
 {
   "note": "Operator-collected 1001Tracklists URLs. All listed urls[] rows are now seeded. Prefer new operator pastes over this archive. stillMissing1001 is video-in / no 1001 page — do not invent URLs. heldPendingRelive is 1001-in / no official YT/SC playback — seed held, do not invent or wire fan playback. pendingCuePaste is official playback + operator 1001 URL without cue rows — do not scrape 1001 or invent 1001tl seeds.",
-  "updatedAt": "2026-08-23T00:00:00.000Z",
+  "updatedAt": "2026-08-24T00:00:00.000Z",
   "urls": [
+    {
+      "label": "Timmy Trumpet · Freedom Stage, Tomorrowland Weekend 2, Belgium 2026-07-25",
+      "slug": "yt-QcvGuOhSVlc",
+      "name": "TL_TIMMY_TRUMPET_TML_WE2_FREEDOM_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/2nfymhx9/timmy-trumpet-freedom-stage-tomorrowland-weekend-2-belgium-2026-07-25.html",
+      "youtubeUrl": "https://youtu.be/QcvGuOhSVlc",
+      "note": "Operator paste 2026-08-24. 119 timed cues on official YT. Overlay TL_TIMMY_TRUMPET is too generic. No SC in the paste — do not invent an SC slug. Distinct from Bebe Rexha Freedom WE2 yt-KCeluZt3H9o."
+    },
+    {
+      "label": "Rose Ringed · Freedom Stage, Tomorrowland Weekend 1, Belgium 2026-07-17",
+      "slug": "yt-KAZd25mCHp8",
+      "name": "TL_ROSE_RINGED_TML_WE1_FREEDOM_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/bvjz6x1/rose-ringed-freedom-stage-tomorrowland-weekend-1-belgium-2026-07-17.html",
+      "youtubeUrl": "https://youtu.be/KAZd25mCHp8",
+      "soundcloudUrl": "https://soundcloud.com/rose-ringed/rose-ringed-freedomstage-we1",
+      "note": "Operator paste 2026-08-24. 21 timed cues on official YT + rose-ringed SC. Overlay TL_ROSE_RINGED is too generic. SC folds as secondary leftover onto yt-KAZd25mCHp8. Never sc-https://…. Distinct from 4444 OF A KIND Freedom WE1 yt-VuwLOFniScA."
+    },
+    {
+      "label": "Ely Oaks · Mainstage, Tomorrowland Weekend 2, Belgium 2026-07-24",
+      "slug": "yt-0Fq24R47sDY",
+      "name": "TL_ELY_OAKS_TML_WE2_MAINSTAGE_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/hjlfquk/ely-oaks-mainstage-tomorrowland-weekend-2-belgium-2026-07-24.html",
+      "youtubeUrl": "https://youtu.be/0Fq24R47sDY",
+      "note": "Operator paste 2026-08-24. 40 timed cues on official YT. Overlay TL_ELY_OAKS is too generic. No SC in the paste — do not invent an SC slug."
+    },
+    {
+      "label": "bullet tooth · CORE Stage, Tomorrowland Weekend 2, Belgium 2026-07-24",
+      "slug": "yt-G-DciaWb5KY",
+      "name": "TL_BULLET_TOOTH_TML_WE2_CORE_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/1rl30xh1/bullet-tooth-core-stage-tomorrowland-weekend-2-belgium-2026-07-24.html",
+      "youtubeUrl": "https://youtu.be/G-DciaWb5KY",
+      "note": "Operator paste 2026-08-24. 9 timed cues on official YT. Overlay TL_BULLET_TOOTH is too generic. No SC in the paste — do not invent an SC slug."
+    },
+    {
+      "label": "John Newman Live Band · Freedom Stage, Tomorrowland Weekend 2, Belgium 2026-07-24",
+      "slug": "yt-5V5qDFSw8Hs",
+      "name": "TL_JOHN_NEWMAN_TML_WE2_FREEDOM_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/298c0gqk/john-newman-live-band-freedom-stage-tomorrowland-weekend-2-belgium-2026-07-24.html",
+      "youtubeUrl": "https://youtu.be/5V5qDFSw8Hs",
+      "note": "Operator paste 2026-08-24. 12 timed cues on official YT. Overlay TL_JOHN_NEWMAN is too generic. No SC in the paste — do not invent an SC slug. Distinct from John Newman Mainstage WE1 yt-czU0VhOB_Lg."
+    },
+    {
+      "label": "John Newman · Mainstage, Tomorrowland Weekend 1, Belgium 2026-07-18",
+      "slug": "yt-czU0VhOB_Lg",
+      "name": "TL_JOHN_NEWMAN_TML_WE1_MAINSTAGE_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/zc5vnm1/john-newman-mainstage-tomorrowland-weekend-1-belgium-2026-07-18.html",
+      "youtubeUrl": "https://youtu.be/czU0VhOB_Lg",
+      "note": "Operator paste 2026-08-24. 17 timed cues on official YT. Overlay TL_JOHN_NEWMAN is too generic (Freedom WE2 live band yt-5V5qDFSw8Hs). No SC in the paste — do not invent an SC slug."
+    },
+    {
+      "label": "4444 OF A KIND · Freedom Stage, Tomorrowland Weekend 1, Belgium 2026-07-17",
+      "slug": "yt-VuwLOFniScA",
+      "name": "TL_4444_OF_A_KIND_TML_WE1_FREEDOM_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/132dgbd9/4444-of-a-kind-freedom-stage-tomorrowland-weekend-1-belgium-2026-07-17.html",
+      "youtubeUrl": "https://youtu.be/VuwLOFniScA",
+      "note": "Operator paste 2026-08-24. 21 timed cues on official YT. Overlay TL_4444_OF_A_KIND is too generic. No SC in the paste — do not invent an SC slug. Distinct from Rose Ringed Freedom WE1 yt-KAZd25mCHp8."
+    },
     {
       "label": "Marlon Hoffstadt · Mainstage, Tomorrowland Weekend 1, Belgium 2026-07-17",
       "slug": "yt-rG1DvjvXCls",

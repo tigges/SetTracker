@@ -106,6 +106,21 @@ assert.equal(ok.ok, true);
 assert.equal(ok.pin?.beatportUrl, "https://www.beatport.com/track/weirder-things/26745003");
 assert.equal(ok.pin?.isrc, "USA2P2570495");
 
+const withSpotify = evaluateTrackIdPin(
+  {
+    slug: "steve-aoki-weirder-things-lucas-steve-remix",
+    artist: "Steve Aoki",
+    title: "Weirder Things (Lucas & Steve Remix)",
+    isrc: "USA2P2570495",
+    spotifyUrl: "https://open.spotify.com/track/7ouMYWpwJ422jRcDASZB7P",
+  },
+  { artist: "Steve Aoki", title: "Weirder Things", isrc: "USA2P2570495" },
+);
+assert.equal(
+  withSpotify.pin?.spotifyUrl,
+  "https://open.spotify.com/track/7ouMYWpwJ422jRcDASZB7P",
+);
+
 assert.equal(
   evaluateTrackIdPin(
     {

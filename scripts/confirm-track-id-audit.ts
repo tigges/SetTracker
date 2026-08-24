@@ -11,9 +11,19 @@ import {
   evaluateTrackIdPin,
   isJunkTrackPin,
   loadTrackIdPins,
+  mergeTrackIdPins,
   type TrackIdPin,
 } from "../src/lib/ingest/identify/trackIdPins";
-import { canonicalBeatportUrl, normalizeIsrc } from "../src/lib/trackMeta";
+import {
+  catalogQueryTitle,
+  namesClose,
+  primaryArtist,
+} from "../src/lib/ingest/identify/names";
+import {
+  canonicalBeatportUrl,
+  canonicalSpotifyUrl,
+  normalizeIsrc,
+} from "../src/lib/trackMeta";
 
 const UA = "SetRadar/0.2.190 (+https://setradar.ai; track-id confirm)";
 
@@ -24,6 +34,7 @@ type AuditRow = {
   plays: string;
   isrc: string;
   beatportUrl: string;
+  spotifyUrl: string;
   confidence: string;
   source: string;
 };
@@ -137,6 +148,7 @@ async function readJsonlAudit(path: string): Promise<AuditRow[]> {
       plays: String(obj.plays ?? prev?.plays ?? ""),
       isrc: String(obj.isrc ?? ""),
       beatportUrl: cleanBeatport(String(obj.beatportUrl ?? "")),
+      spotifyUrl: String(obj.spotifyUrl ?? ""),
       confidence: String(obj.confidence ?? obj.alignment ?? ""),
       source: String(obj.source ?? "jsonl"),
     });
@@ -147,6 +159,41 @@ async function readJsonlAudit(path: string): Promise<AuditRow[]> {
 async function readAudit(path: string): Promise<AuditRow[]> {
   if (path.endsWith(".jsonl")) return readJsonlAudit(path);
   return readCsvAudit(path);
+}
+
+function hasProposedId(row: AuditRow): boolean {
+  return Boolean(
+    normalizeIsrc(row.isrc) ||
+      canonicalBeatportUrl(row.beatportUrl) ||
+      canonicalSpotifyUrl(row.spotifyUrl),
+  );
+}
+
+function coreTitle(value: string): string {
+  return catalogQueryTitle(value)
+    .replace(/\b(feat\.?|ft\.?|featuring)\b.+$/i, "")
+    .replace(/\s*[(\[].*?[)\]]\s*/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+/** Name-search hits must keep remix/bootleg when the catalog title has one. */
+function searchTitleOk(catalogTitle: string, liveTitle: string): boolean {
+  const wantMix = /\b(remix|bootleg)\b/i.test(catalogTitle);
+  const gotMix = /\b(remix|bootleg)\b/i.test(liveTitle);
+  if (wantMix && !gotMix) return false;
+  if (namesClose(catalogTitle, liveTitle)) return true;
+  return namesClose(coreTitle(catalogTitle), coreTitle(liveTitle));
+}
+
+function artistOk(catalogArtist: string, liveArtist: string): boolean {
+  if (!liveArtist) return false;
+  const primary = primaryArtist(catalogArtist);
+  return (
+    namesClose(primary, liveArtist) ||
+    namesClose(catalogArtist, liveArtist) ||
+    catalogArtist.toLowerCase().includes(liveArtist.toLowerCase())
+  );
 }
 
 async function lookupDeezerIsrc(
@@ -176,6 +223,78 @@ async function lookupDeezerIsrc(
   } catch {
     return null;
   }
+}
+
+async function fetchDeezerTrackIsrc(id: number): Promise<string | null> {
+  try {
+    const res = await fetch(`https://api.deezer.com/track/${id}`, {
+      headers: { "User-Agent": UA, Accept: "application/json" },
+      signal: AbortSignal.timeout(12_000),
+    });
+    if (!res.ok) return null;
+    const json = (await res.json()) as { isrc?: string };
+    return normalizeIsrc(json.isrc);
+  } catch {
+    return null;
+  }
+}
+
+async function lookupDeezerByName(
+  artist: string,
+  title: string,
+): Promise<{ artist: string; title: string; isrc: string } | null> {
+  const primary = primaryArtist(artist);
+  const core = coreTitle(title);
+  const queries = [`artist:"${primary}" track:"${core}"`, `${core} ${primary}`];
+  if (/\b(remix|bootleg)\b/i.test(title)) {
+    queries.unshift(`${title} ${primary}`, `${core} remix ${primary}`);
+  }
+  for (const q of queries) {
+    try {
+      const res = await fetch(
+        `https://api.deezer.com/search/track?q=${encodeURIComponent(q)}&limit=8`,
+        {
+          headers: { "User-Agent": UA, Accept: "application/json" },
+          signal: AbortSignal.timeout(12_000),
+        },
+      );
+      if (!res.ok) continue;
+      const json = (await res.json()) as {
+        data?: Array<{
+          id?: number;
+          title?: string;
+          isrc?: string;
+          artist?: { name?: string };
+        }>;
+      };
+      for (const row of json.data ?? []) {
+        const liveArtist = row.artist?.name ?? "";
+        const liveTitle = row.title ?? "";
+        if (!artistOk(artist, liveArtist) || !searchTitleOk(title, liveTitle)) {
+          continue;
+        }
+        const isrc =
+          normalizeIsrc(row.isrc) ||
+          (row.id ? await fetchDeezerTrackIsrc(row.id) : null);
+        if (!isrc) continue;
+        return { artist: liveArtist, title: liveTitle, isrc };
+      }
+    } catch {
+      /* try the next query */
+    }
+  }
+  return null;
+}
+
+async function confirmLive(
+  row: AuditRow,
+): Promise<{ artist: string; title: string; isrc: string } | null> {
+  const known = normalizeIsrc(row.isrc);
+  if (known) {
+    const live = await lookupDeezerIsrc(known);
+    if (live) return live;
+  }
+  return lookupDeezerByName(row.artist, row.title);
 }
 
 async function probeBeatport(url: string): Promise<{
@@ -227,19 +346,17 @@ async function main() {
   const probes = await Promise.all(probeSample.map(probeBeatport));
 
   const junkSkipped = rows.filter(
-    (r) => normalizeIsrc(r.isrc) && isJunkTrackPin(r),
+    (r) => hasProposedId(r) && isJunkTrackPin(r),
   ).length;
-  const needConfirm = rows.filter(
-    (r) => normalizeIsrc(r.isrc) && !isJunkTrackPin(r),
-  );
-  const lives = await mapPool(needConfirm, 8, async (row) => {
-    const isrc = normalizeIsrc(row.isrc)!;
-    const live = await lookupDeezerIsrc(isrc);
+  const needConfirm = rows.filter((r) => hasProposedId(r) && !isJunkTrackPin(r));
+  const lives = await mapPool(needConfirm, 2, async (row) => {
+    const live = await confirmLive(row);
     return { row, live };
   });
 
   const pins: TrackIdPin[] = [];
   const rejected: Record<string, number> = {};
+  const rejectedRows: Array<{ slug: string; reason: string }> = [];
   let confirmed = 0;
   for (const { row, live } of lives) {
     const ev = evaluateTrackIdPin(
@@ -247,8 +364,9 @@ async function main() {
         slug: row.slug,
         artist: row.artist,
         title: row.title,
-        isrc: row.isrc,
+        isrc: row.isrc || live?.isrc,
         beatportUrl: row.beatportUrl,
+        spotifyUrl: row.spotifyUrl,
         confidence: row.confidence,
         source: row.source,
       },
@@ -259,23 +377,12 @@ async function main() {
       pins.push(ev.pin);
     } else {
       rejected[ev.reason] = (rejected[ev.reason] ?? 0) + 1;
+      rejectedRows.push({ slug: row.slug, reason: ev.reason });
     }
   }
 
   const existing = loadTrackIdPins();
-  const bySlug = new Map(existing.map((p) => [p.slug, { ...p }]));
-  for (const pin of pins) {
-    const prev = bySlug.get(pin.slug);
-    bySlug.set(pin.slug, {
-      slug: pin.slug,
-      ...(pin.isrc || prev?.isrc ? { isrc: pin.isrc || prev?.isrc } : {}),
-      ...(pin.beatportUrl || prev?.beatportUrl
-        ? { beatportUrl: pin.beatportUrl || prev?.beatportUrl }
-        : {}),
-    });
-  }
-
-  const merged = [...bySlug.values()].sort((a, b) => a.slug.localeCompare(b.slug));
+  const merged = mergeTrackIdPins(existing, pins);
   const pinUrls = [
     ...new Set(
       pins.map((p) => p.beatportUrl).filter((u): u is string => Boolean(u)),
@@ -305,6 +412,7 @@ async function main() {
     csv: csvPath,
     rows: rows.length,
     withBeatport: withBp.length,
+    withSpotify: rows.filter((r) => canonicalSpotifyUrl(r.spotifyUrl)).length,
     withIsrc: withIsrc.length,
     beatportProbes: probes,
     deezerConfirmed: confirmed,
@@ -316,15 +424,18 @@ async function main() {
     beatport404dropped: [...dead],
     junkSkipped,
     rejected,
-    note: "Beatport HTML is never scraped. Pins require a Deezer ISRC hit plus a canonical /track URL whose slug matches the title. Merge with existing pins; drop HEAD 404 Beatport URLs (keep ISRC).",
+    rejectedRows,
+    note: "Beatport HTML is never scraped. Pins require a Deezer ISRC hit plus a canonical /track URL whose slug matches the title. Name-search fills ISRC for leftover Beatport/Spotify rows when the live title keeps remix/bootleg. Merge with existing pins; drop HEAD 404 Beatport URLs (keep ISRC).",
   };
   const reportName = csvPath.includes("jsonl-4")
     ? "track-id-jsonl-4-confirm.json"
     : csvPath.includes("completed")
       ? "track-id-completed-confirm.json"
-      : csvPath.endsWith(".jsonl")
-        ? "track-id-jsonl-confirm.json"
-        : "track-id-audit-confirm.json";
+      : csvPath.includes("20260824") || csvPath.includes("leftover")
+        ? "track-id-leftover-confirm.json"
+        : csvPath.endsWith(".jsonl")
+          ? "track-id-jsonl-confirm.json"
+          : "track-id-audit-confirm.json";
   await writeFile(
     join(process.cwd(), "data/crosscheck", reportName),
     `${JSON.stringify(report, null, 2)}\n`,

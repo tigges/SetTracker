@@ -25,6 +25,25 @@ assert.ok(presets.length <= 10);
 assert.ok(!presets.some((p) => p.slug === "yt-4Lqyh7cWRxQ"));
 assert.ok(!presets.some((p) => p.slug === "yt-hU-z3iV0LOg"));
 assert.ok(!presets.some((p) => p.slug === "yt-1Mp9Pl6YgDM"));
+for (const slug of [
+  "yt-QcvGuOhSVlc",
+  "yt-KAZd25mCHp8",
+  "sc-rose-ringed-rose-ringed-freedomstage-we1",
+  "yt-0Fq24R47sDY",
+  "yt-G-DciaWb5KY",
+  "yt-5V5qDFSw8Hs",
+  "yt-czU0VhOB_Lg",
+  "yt-VuwLOFniScA",
+]) {
+  assert.ok(
+    TRACKLIST_1001_BY_SOURCE_SLUG[slug]?.length,
+    `missing 1001 overlay for ${slug}`,
+  );
+  assert.ok(
+    !presets.some((p) => p.slug === slug),
+    `wired slug leaked into Capture 1001 queue: ${slug}`,
+  );
+}
 
 for (const p of PRIORITY_CAPTURES) {
   assert.equal(
@@ -82,6 +101,26 @@ const extras = extrasFromCaptureSnapshot({
   ],
 });
 assert.ok(!extras.some((p) => p.slug === "yt-rG1DvjvXCls"));
+assert.ok(
+  !extrasFromCaptureSnapshot({
+    presets: [
+      {
+        label: "Timmy Trumpet Freedom WE2",
+        slug: "yt-QcvGuOhSVlc",
+        name: "TL_TIMMY_TRUMPET_TML_WE2_FREEDOM_2026",
+        searchUrl: search1001("timmy trumpet tomorrowland"),
+        reason: "relive:official-unwired",
+      },
+      {
+        label: "John Newman Mainstage WE1",
+        slug: "yt-czU0VhOB_Lg",
+        name: "TL_JOHN_NEWMAN_TML_WE1_MAINSTAGE_2026",
+        searchUrl: search1001("john newman tomorrowland"),
+        reason: "relive:official-unwired",
+      },
+    ],
+  }).length,
+);
 assert.equal(extras.length, 1);
 assert.equal(extras[0]?.slug, "yt-unwired-relive");
 assert.ok(extras[0]?.searchUrl.includes("1001tracklists.com/search"));

@@ -78,13 +78,15 @@ const PROFILE_FIELDS = new Set<EntityCompleteField>([
 ]);
 
 const WEAK_WEBSITE_HUB =
-  /linktr\.ee|mixcloud\.com|hearthis\.at|\.gov\b|music\.youtube\.com/i;
+  /mixcloud\.com|hearthis\.at|\.gov\b|music\.youtube\.com/i;
+
+const FALLBACK_WEBSITE_HUB = /linktr\.ee|(^|[./])komi\.io/i;
 
 const TEMPLATE_BIO =
   /is an? (?:.+based )?DJ, producer or electronic artist whose work centers on/i;
 
 const GENERIC_HANDLE_LEFTOVER =
-  /^(the|its|itsthe|official|real|dj|music|live|tv|hq|ok|iam|im|weare|and|com|dot|dotcom)*$/;
+  /^(the|its|itsthe|thisis|official|real|dj|music|beats|sound|sounds|channel|video|live|tv|hq|ok|iam|im|weare|and|com|net|org|nu|io|co|uk|dot|dotcom|[0-9]+)*$/;
 
 const WIDE_FIELD_MAP: Record<string, EntityCompleteField> = {
   imageurl: "imageUrl",
@@ -102,10 +104,47 @@ const WIDE_FIELD_MAP: Record<string, EntityCompleteField> = {
 
 const CANNOT_CONFIRM = /cannot confirm|no published links|unsure/i;
 
+/** Windows-1252 bytes that UTF-8 misread as those Unicode chars. */
+const CP1252_EXTRA: Record<string, number> = {
+  "\u20ac": 0x80,
+  "\u201a": 0x82,
+  "\u0192": 0x83,
+  "\u201e": 0x84,
+  "\u2026": 0x85,
+  "\u2020": 0x86,
+  "\u2021": 0x87,
+  "\u02c6": 0x88,
+  "\u2030": 0x89,
+  "\u0160": 0x8a,
+  "\u2039": 0x8b,
+  "\u0152": 0x8c,
+  "\u2018": 0x91,
+  "\u2019": 0x92,
+  "\u201c": 0x93,
+  "\u201d": 0x94,
+  "\u2022": 0x95,
+  "\u2013": 0x96,
+  "\u2014": 0x97,
+  "\u02dc": 0x98,
+  "\u2122": 0x99,
+  "\u0161": 0x9a,
+  "\u203a": 0x9b,
+  "\u0153": 0x9c,
+  "\u0178": 0x9f,
+};
+
 export function decodeMojibake(value: string): string {
   if (!/[ÃÂ]/.test(value) && !/â[€™]/.test(value)) return value;
   try {
-    return Buffer.from(value, "latin1").toString("utf8");
+    const bytes = Uint8Array.from(
+      [...value].map((ch) => {
+        const code = ch.charCodeAt(0);
+        if (code <= 0xff) return code;
+        return CP1252_EXTRA[ch] ?? 0x3f;
+      }),
+    );
+    const decoded = Buffer.from(bytes).toString("utf8");
+    return decoded.includes("\uFFFD") ? value : decoded;
   } catch {
     return value;
   }
@@ -151,6 +190,7 @@ function wideRowToAudit(header: string[], cells: string[]): EntityCompleteAuditR
     const field = WIDE_FIELD_MAP[header[i] ?? ""];
     const value = (cells[i] ?? "").trim();
     if (!field || !value) continue;
+    if (/^(not found|n\/?a|none|-)$/i.test(value)) continue;
     out.push({
       kind,
       slug,
@@ -198,13 +238,21 @@ function splitCsvLine(line: string): string[] {
 }
 
 export function coreName(value: string): string {
-  return value.toLowerCase().replace(/[^a-z0-9]/g, "");
+  return value
+    .toLowerCase()
+    .replace(/[øØ]/g, "o")
+    .replace(/[æÆ]/g, "ae")
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]/g, "");
 }
 
 function handleHaystack(value: string): string {
   try {
     const u = new URL(value);
     const host = u.hostname.replace(/^www\./, "").toLowerCase();
+    const hub = fallbackHubHandle(u);
+    if (hub) return hub;
     if (
       /(^|\.)(youtube|youtu\.be|instagram|soundcloud|twitter|x)\.com$/.test(host) ||
       host === "youtu.be" ||
@@ -216,6 +264,23 @@ function handleHaystack(value: string): string {
   } catch {
     return coreName(value);
   }
+}
+
+/** Linktree path or Komi subdomain — used only as a website fallback. */
+export function isFallbackWebsiteHub(url: string): boolean {
+  return FALLBACK_WEBSITE_HUB.test(url);
+}
+
+function fallbackHubHandle(u: URL): string | null {
+  const host = u.hostname.replace(/^www\./, "").toLowerCase();
+  if (host === "linktr.ee" || host.endsWith(".linktr.ee")) {
+    return coreName(u.pathname) || null;
+  }
+  if (host === "komi.io") return coreName(u.pathname) || null;
+  if (host.endsWith(".komi.io")) {
+    return coreName(host.slice(0, -".komi.io".length)) || null;
+  }
+  return null;
 }
 
 function leftoverAfterName(nameKey: string, handleKey: string): string {
@@ -322,6 +387,16 @@ export function evaluateEntityCompleteRow(row: EntityCompleteAuditRow): {
     if (!n || isWeakOfficialUrl(n) || WEAK_WEBSITE_HUB.test(n)) {
       return { drop: "weak or invalid website" };
     }
+    if (isFallbackWebsiteHub(n)) {
+      try {
+        if (!fallbackHubHandle(new URL(n))) {
+          return { drop: "weak or invalid website" };
+        }
+      } catch {
+        return { drop: "weak or invalid website" };
+      }
+      return { field, value: n };
+    }
     if (!nameOverlapsHandle(row.name, n)) return { drop: "website name mismatch" };
     return { field, value: n };
   }
@@ -410,7 +485,16 @@ function mergePinFields(
     const value = pin[field];
     if (!value) continue;
     const have = next[field];
-    if (!have || (field === "website" && isWeakOfficialUrl(have))) {
+    if (!have) {
+      next[field] = value;
+      continue;
+    }
+    if (
+      field === "website" &&
+      (isWeakOfficialUrl(have) || isFallbackWebsiteHub(have)) &&
+      !isWeakOfficialUrl(value) &&
+      !isFallbackWebsiteHub(value)
+    ) {
       next[field] = value;
     }
   }
@@ -452,7 +536,12 @@ function shouldFill(
 ): boolean {
   const cur = current?.trim();
   if (!cur) return true;
-  if (field === "website" && isWeakOfficialUrl(cur)) return true;
+  if (
+    field === "website" &&
+    (isWeakOfficialUrl(cur) || isFallbackWebsiteHub(cur))
+  ) {
+    return true;
+  }
   return false;
 }
 
