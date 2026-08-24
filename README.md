@@ -272,7 +272,9 @@ social. Writes `data/entity-complete-export/` and, on Pages `prebuild`,
 `clubs-need-complete.csv`, plus combined `entities-need-complete.csv` /
 `.jsonl` and `claude-entity-complete-prompt.md`. `/stats` links
 **Export for Claude complete**. Never invent `@slug` handles; DJ Mag / 6am /
-Wikipedia pages are not official websites. Confirmed rows pin fill-null via
+Wikipedia pages are not official websites. `linktr.ee` / `komi.io` may
+fill-null `website` when no artist site is on file; a later official site
+replaces the hub. Confirmed rows pin fill-null via
 `data/entity-complete-pins.json` (`npx tsx scripts/confirm-entity-complete-audit.ts`).
 Venue YouTube is dropped (Event has no youtube column).
 

@@ -78,7 +78,9 @@ const PROFILE_FIELDS = new Set<EntityCompleteField>([
 ]);
 
 const WEAK_WEBSITE_HUB =
-  /linktr\.ee|komi\.io|mixcloud\.com|hearthis\.at|\.gov\b|music\.youtube\.com/i;
+  /mixcloud\.com|hearthis\.at|\.gov\b|music\.youtube\.com/i;
+
+const FALLBACK_WEBSITE_HUB = /linktr\.ee|(^|[./])komi\.io/i;
 
 const TEMPLATE_BIO =
   /is an? (?:.+based )?DJ, producer or electronic artist whose work centers on/i;
@@ -249,6 +251,8 @@ function handleHaystack(value: string): string {
   try {
     const u = new URL(value);
     const host = u.hostname.replace(/^www\./, "").toLowerCase();
+    const hub = fallbackHubHandle(u);
+    if (hub) return hub;
     if (
       /(^|\.)(youtube|youtu\.be|instagram|soundcloud|twitter|x)\.com$/.test(host) ||
       host === "youtu.be" ||
@@ -260,6 +264,23 @@ function handleHaystack(value: string): string {
   } catch {
     return coreName(value);
   }
+}
+
+/** Linktree path or Komi subdomain — used only as a website fallback. */
+export function isFallbackWebsiteHub(url: string): boolean {
+  return FALLBACK_WEBSITE_HUB.test(url);
+}
+
+function fallbackHubHandle(u: URL): string | null {
+  const host = u.hostname.replace(/^www\./, "").toLowerCase();
+  if (host === "linktr.ee" || host.endsWith(".linktr.ee")) {
+    return coreName(u.pathname) || null;
+  }
+  if (host === "komi.io") return coreName(u.pathname) || null;
+  if (host.endsWith(".komi.io")) {
+    return coreName(host.slice(0, -".komi.io".length)) || null;
+  }
+  return null;
 }
 
 function leftoverAfterName(nameKey: string, handleKey: string): string {
@@ -366,6 +387,16 @@ export function evaluateEntityCompleteRow(row: EntityCompleteAuditRow): {
     if (!n || isWeakOfficialUrl(n) || WEAK_WEBSITE_HUB.test(n)) {
       return { drop: "weak or invalid website" };
     }
+    if (isFallbackWebsiteHub(n)) {
+      try {
+        if (!fallbackHubHandle(new URL(n))) {
+          return { drop: "weak or invalid website" };
+        }
+      } catch {
+        return { drop: "weak or invalid website" };
+      }
+      return { field, value: n };
+    }
     if (!nameOverlapsHandle(row.name, n)) return { drop: "website name mismatch" };
     return { field, value: n };
   }
@@ -454,7 +485,16 @@ function mergePinFields(
     const value = pin[field];
     if (!value) continue;
     const have = next[field];
-    if (!have || (field === "website" && isWeakOfficialUrl(have))) {
+    if (!have) {
+      next[field] = value;
+      continue;
+    }
+    if (
+      field === "website" &&
+      (isWeakOfficialUrl(have) || isFallbackWebsiteHub(have)) &&
+      !isWeakOfficialUrl(value) &&
+      !isFallbackWebsiteHub(value)
+    ) {
       next[field] = value;
     }
   }
@@ -496,7 +536,12 @@ function shouldFill(
 ): boolean {
   const cur = current?.trim();
   if (!cur) return true;
-  if (field === "website" && isWeakOfficialUrl(cur)) return true;
+  if (
+    field === "website" &&
+    (isWeakOfficialUrl(cur) || isFallbackWebsiteHub(cur))
+  ) {
+    return true;
+  }
   return false;
 }
 

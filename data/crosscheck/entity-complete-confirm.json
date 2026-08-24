@@ -1,9 +1,9 @@
 {
   "source": "data/crosscheck/djs-need-complete-20260824.csv",
-  "acceptedFields": 1578,
+  "acceptedFields": 1589,
   "pinRows": 333,
   "incomingRows": 253,
-  "dropped": 106,
+  "dropped": 95,
   "pins": [
     {
       "kind": "club",
@@ -32,10 +32,11 @@
       "kind": "dj",
       "slug": "aeon-mode",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/7cd5c9575f5be61e34ecc902cf2827c1/250x250-000000-80-0-0.jpg",
+      "youtube": "https://www.youtube.com/@aeon__mode",
+      "soundcloud": "https://soundcloud.com/aeonmode",
       "homeCity": "Denver, US",
       "genre": "House",
-      "youtube": "https://www.youtube.com/@aeon__mode",
-      "soundcloud": "https://soundcloud.com/aeonmode"
+      "website": "https://linktr.ee/aeon_mode"
     },
     {
       "kind": "dj",
@@ -101,7 +102,8 @@
       "soundcloud": "https://soundcloud.com/angelphroot",
       "twitter": "https://x.com/angelphroot",
       "homeCity": "Toronto, Canada",
-      "genre": "House"
+      "genre": "House",
+      "website": "https://linktr.ee/angieloopi"
     },
     {
       "kind": "dj",
@@ -149,7 +151,8 @@
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/4d2d84d3ed0218014ce5ffd4497dddc7/250x250-000000-80-0-0.jpg",
       "instagram": "https://instagram.com/ariellefree",
       "youtube": "https://www.youtube.com/@ArielleFree",
-      "homeCity": "Scotland, UK"
+      "homeCity": "Scotland, UK",
+      "website": "https://linktr.ee/ariellefree"
     },
     {
       "kind": "dj",
@@ -225,10 +228,10 @@
       "slug": "beltran",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/23d2cbad697ebcbcf2b9cef4366652ec/250x250-000000-80-0-0.jpg",
       "instagram": "https://instagram.com/beltranmusic",
+      "youtube": "https://www.youtube.com/@beltran1337",
       "soundcloud": "https://soundcloud.com/beltranmusic",
       "homeCity": "Brazil",
-      "genre": "Tech House",
-      "youtube": "https://www.youtube.com/@beltran1337"
+      "genre": "Tech House"
     },
     {
       "kind": "dj",
@@ -245,10 +248,11 @@
       "slug": "ben-sterling",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/27726e8a087f946c9bbd840498b87a05/250x250-000000-80-0-0.jpg",
       "instagram": "https://instagram.com/bensterlingmusic",
+      "youtube": "https://www.youtube.com/@bensterlinguk",
       "soundcloud": "https://soundcloud.com/bensterling",
       "homeCity": "London, UK",
       "genre": "Tech House",
-      "youtube": "https://www.youtube.com/@bensterlinguk"
+      "website": "https://bensterling.komi.io"
     },
     {
       "kind": "dj",
@@ -269,7 +273,8 @@
       "soundcloud": "https://soundcloud.com/biancaoblivion",
       "twitter": "https://x.com/biancaoblivion",
       "homeCity": "Los Angeles, US",
-      "genre": "House"
+      "genre": "House",
+      "website": "https://biancaoblivion.komi.io"
     },
     {
       "kind": "dj",
@@ -340,7 +345,8 @@
       "youtube": "https://www.youtube.com/@Blasterjaxx",
       "soundcloud": "https://soundcloud.com/blasterjaxx",
       "twitter": "https://x.com/Blasterjaxx",
-      "homeCity": "The Hague, Netherlands"
+      "homeCity": "The Hague, Netherlands",
+      "website": "https://linktr.ee/Blasterjaxxofficial"
     },
     {
       "kind": "dj",
@@ -396,10 +402,10 @@
       "slug": "brandy-maina",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/00fbab10bcceb2e7bb2ecdaaff2ad339/250x250-000000-80-0-0.jpg",
       "instagram": "https://instagram.com/brandy_maina",
-      "homeCity": "Nairobi, Kenya",
-      "genre": "Hip Hop",
       "youtube": "https://www.youtube.com/@brandymaina9393",
-      "soundcloud": "https://soundcloud.com/brandy-maina"
+      "soundcloud": "https://soundcloud.com/brandy-maina",
+      "homeCity": "Nairobi, Kenya",
+      "genre": "Hip Hop"
     },
     {
       "kind": "dj",
@@ -445,12 +451,12 @@
       "kind": "dj",
       "slug": "chaney",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/78bd6584d98e02790915b24ba8ff330b/250x250-000000-80-0-0.jpg",
-      "soundcloud": "https://soundcloud.com/chaneymusic",
-      "homeCity": "Swindon, UK",
-      "genre": "Tech House",
       "instagram": "https://instagram.com/chaneyuk",
       "youtube": "https://www.youtube.com/@CHANEYUK",
-      "twitter": "https://x.com/chaney_uk"
+      "soundcloud": "https://soundcloud.com/chaneymusic",
+      "twitter": "https://x.com/chaney_uk",
+      "homeCity": "Swindon, UK",
+      "genre": "Tech House"
     },
     {
       "kind": "dj",
@@ -495,11 +501,11 @@
       "kind": "dj",
       "slug": "coco-maria",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/2f4691dba900d5176d983dc3744b4d98/250x250-000000-80-0-0.jpg",
-      "homeCity": "Berlin, Germany",
-      "genre": "House",
       "website": "https://cocomaria.net",
       "instagram": "https://instagram.com/cocomaria___",
-      "soundcloud": "https://soundcloud.com/cocomariamusic"
+      "soundcloud": "https://soundcloud.com/cocomariamusic",
+      "homeCity": "Berlin, Germany",
+      "genre": "House"
     },
     {
       "kind": "dj",
@@ -531,11 +537,11 @@
       "kind": "dj",
       "slug": "cristoph",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/ff27f3c85580e715218626aa78af1647/250x250-000000-80-0-0.jpg",
+      "youtube": "https://www.youtube.com/@cristophmusic6732",
       "soundcloud": "https://soundcloud.com/cristophmusic",
       "twitter": "https://x.com/Cristophmusic",
       "homeCity": "Newcastle, UK",
-      "genre": "Tech House",
-      "youtube": "https://www.youtube.com/@cristophmusic6732"
+      "genre": "Tech House"
     },
     {
       "kind": "dj",
@@ -594,11 +600,11 @@
       "kind": "dj",
       "slug": "demi-riquisimo",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/a4628e48eeedf49e59005cca7f9eb9f6/250x250-000000-80-0-0.jpg",
-      "homeCity": "London, UK",
-      "genre": "House",
       "instagram": "https://instagram.com/demi_riquisimo_",
       "soundcloud": "https://soundcloud.com/demiriquisimo",
-      "twitter": "https://x.com/demiriquisimo"
+      "twitter": "https://x.com/demiriquisimo",
+      "homeCity": "London, UK",
+      "genre": "House"
     },
     {
       "kind": "dj",
@@ -680,9 +686,9 @@
       "kind": "dj",
       "slug": "dj-lesoul",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/7dfcf3c8efcd112a149652656ad8b6bf/250x250-000000-80-0-0.jpg",
+      "youtube": "https://www.youtube.com/@djlesoul7811",
       "homeCity": "Johannesburg, South Africa",
-      "genre": "Gqom",
-      "youtube": "https://www.youtube.com/@djlesoul7811"
+      "genre": "Gqom"
     },
     {
       "kind": "dj",
@@ -752,7 +758,8 @@
       "soundcloud": "https://soundcloud.com/dustycloud",
       "twitter": "https://x.com/Dustycloudmusic",
       "homeCity": "Paris, France",
-      "genre": "Bass House"
+      "genre": "Bass House",
+      "website": "https://linktr.ee/Dustycloud"
     },
     {
       "kind": "dj",
@@ -785,12 +792,12 @@
       "kind": "dj",
       "slug": "eli-brown",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/97ebf1084bb11f8febd76a2b5e926eee/250x250-000000-80-0-0.jpg",
-      "homeCity": "Bristol, UK",
-      "genre": "Tech House",
       "website": "https://elibrownbeats.com",
       "instagram": "https://instagram.com/elibrownbeats",
       "youtube": "https://www.youtube.com/@elibrownbeats",
-      "soundcloud": "https://soundcloud.com/elibrownbeats"
+      "soundcloud": "https://soundcloud.com/elibrownbeats",
+      "homeCity": "Bristol, UK",
+      "genre": "Tech House"
     },
     {
       "kind": "dj",
@@ -852,11 +859,11 @@
       "kind": "dj",
       "slug": "erick-morillo",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/7b194f558cde2a5f55304591b13c8168/250x250-000000-80-0-0.jpg",
+      "youtube": "https://www.youtube.com/@erickmorillovideo",
       "soundcloud": "https://soundcloud.com/erickmorillo",
       "twitter": "https://x.com/ErickMorillo",
       "homeCity": "New York, US",
-      "genre": "House",
-      "youtube": "https://www.youtube.com/@erickmorillovideo"
+      "genre": "House"
     },
     {
       "kind": "dj",
@@ -1053,9 +1060,10 @@
       "slug": "green-velvet",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/b0a56315df2977ebb0740c414330b831/250x250-000000-80-0-0.jpg",
       "youtube": "https://www.youtube.com/@officialgreenvelvet",
+      "soundcloud": "https://soundcloud.com/green-velvet-1",
       "homeCity": "Chicago, US",
       "genre": "Tech House",
-      "soundcloud": "https://soundcloud.com/green-velvet-1"
+      "website": "https://linktr.ee/officialgreenvelvet"
     },
     {
       "kind": "dj",
@@ -1181,12 +1189,12 @@
       "kind": "dj",
       "slug": "imanu",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/046fae4c46f963bbbc555e19aa34844d/250x250-000000-80-0-0.jpg",
+      "website": "https://imanu.nu",
       "youtube": "https://www.youtube.com/@IMANU",
       "soundcloud": "https://soundcloud.com/imanumusic",
+      "twitter": "https://x.com/imanumusic",
       "homeCity": "Rotterdam, Netherlands",
-      "genre": "Drum & Bass",
-      "website": "https://imanu.nu",
-      "twitter": "https://x.com/imanumusic"
+      "genre": "Drum & Bass"
     },
     {
       "kind": "dj",
@@ -1211,9 +1219,9 @@
       "slug": "jackie-hollander",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/229781de19cf9463c38f91ac73236ec5/250x250-000000-80-0-0.jpg",
       "youtube": "https://www.youtube.com/@JackieHollander",
+      "soundcloud": "https://soundcloud.com/jackiehollander",
       "homeCity": "San Francisco, US",
-      "genre": "House",
-      "soundcloud": "https://soundcloud.com/jackiehollander"
+      "genre": "House"
     },
     {
       "kind": "dj",
@@ -1259,10 +1267,10 @@
       "kind": "dj",
       "slug": "jeremy-olander",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/524be48384a223f910fb02a2f9ae7ae9/250x250-000000-80-0-0.jpg",
+      "youtube": "https://www.youtube.com/@jeremy_olander",
       "soundcloud": "https://soundcloud.com/jeremyolander",
       "homeCity": "Stockholm, Sweden",
-      "genre": "Melodic House",
-      "youtube": "https://www.youtube.com/@jeremy_olander"
+      "genre": "Melodic House"
     },
     {
       "kind": "dj",
@@ -1314,9 +1322,9 @@
       "kind": "dj",
       "slug": "joshwa",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/c3215c46437150964c910ec22ad24de7/250x250-000000-80-0-0.jpg",
+      "soundcloud": "https://soundcloud.com/joshwauk",
       "homeCity": "London, UK",
-      "genre": "Tech House",
-      "soundcloud": "https://soundcloud.com/joshwauk"
+      "genre": "Tech House"
     },
     {
       "kind": "dj",
@@ -1325,9 +1333,9 @@
       "instagram": "https://instagram.com/joyhauser_",
       "youtube": "https://www.youtube.com/@Joyhauser",
       "soundcloud": "https://soundcloud.com/joyhauser",
+      "twitter": "https://x.com/Joyhauser1",
       "homeCity": "Hasselt, Belgium",
-      "genre": "Techno",
-      "twitter": "https://x.com/Joyhauser1"
+      "genre": "Techno"
     },
     {
       "kind": "dj",
@@ -1340,10 +1348,11 @@
       "kind": "dj",
       "slug": "julian-fijma",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/fea26c0826a7d241b49ef45c5f393051/250x250-000000-80-0-0.jpg",
+      "instagram": "https://instagram.com/julianfijma",
       "soundcloud": "https://soundcloud.com/julianfijma",
       "homeCity": "Netherlands",
       "genre": "House",
-      "instagram": "https://instagram.com/julianfijma"
+      "website": "https://linktr.ee/julianfijma"
     },
     {
       "kind": "dj",
@@ -1374,9 +1383,9 @@
       "kind": "dj",
       "slug": "k-dot",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/6c2dd4daa1db3cce02dbf2a70dfa4b77/250x250-000000-80-0-0.jpg",
+      "youtube": "https://www.youtube.com/@kdot0114",
       "homeCity": "Sheffield, UK",
-      "genre": "Hip Hop",
-      "youtube": "https://www.youtube.com/@kdot0114"
+      "genre": "Hip Hop"
     },
     {
       "kind": "dj",
@@ -1393,9 +1402,9 @@
       "kind": "dj",
       "slug": "kamo-mphela",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/03ea37a62861544a55a22ff3d9bcc0e6/250x250-000000-80-0-0.jpg",
+      "soundcloud": "https://soundcloud.com/kamomphela",
       "homeCity": "Johannesburg, South Africa",
-      "genre": "Gqom",
-      "soundcloud": "https://soundcloud.com/kamomphela"
+      "genre": "Gqom"
     },
     {
       "kind": "dj",
@@ -1492,10 +1501,10 @@
       "kind": "dj",
       "slug": "kyle-starkey",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/0a1fec985091fae9b0e7077f95865c74/250x250-000000-80-0-0.jpg",
-      "homeCity": "Liverpool, UK",
-      "genre": "House",
       "youtube": "https://www.youtube.com/@kylestarkey4319",
-      "soundcloud": "https://soundcloud.com/kyle_starkey43"
+      "soundcloud": "https://soundcloud.com/kyle_starkey43",
+      "homeCity": "Liverpool, UK",
+      "genre": "House"
     },
     {
       "kind": "dj",
@@ -1584,9 +1593,9 @@
       "kind": "dj",
       "slug": "loofy",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/8b6acb010dd58497f9cc594fbdf46dc2/250x250-000000-80-0-0.jpg",
+      "soundcloud": "https://soundcloud.com/loofy-644934783",
       "homeCity": "United States",
-      "genre": "Tech House",
-      "soundcloud": "https://soundcloud.com/loofy-644934783"
+      "genre": "Tech House"
     },
     {
       "kind": "dj",
@@ -1657,9 +1666,9 @@
       "kind": "dj",
       "slug": "malone",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/e7234aeff0081367e7e856b5fd54058e/250x250-000000-80-0-0.jpg",
+      "soundcloud": "https://soundcloud.com/malone-music",
       "homeCity": "Miami, US",
-      "genre": "Tech House",
-      "soundcloud": "https://soundcloud.com/malone-music"
+      "genre": "Tech House"
     },
     {
       "kind": "dj",
@@ -1685,10 +1694,10 @@
       "kind": "dj",
       "slug": "mason-collective",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/42a95684e854e0d34750be163eb34ae5/250x250-000000-80-0-0.jpg",
+      "youtube": "https://www.youtube.com/@masoncollective5299",
       "soundcloud": "https://soundcloud.com/masoncollective",
       "homeCity": "Manchester, UK",
-      "genre": "Tech House",
-      "youtube": "https://www.youtube.com/@masoncollective5299"
+      "genre": "Tech House"
     },
     {
       "kind": "dj",
@@ -1882,7 +1891,8 @@
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/97336642f0945612965f508f6ddf4382/250x250-000000-80-0-0.jpg",
       "soundcloud": "https://soundcloud.com/milena-adamis",
       "homeCity": "Buenos Aires, Argentina",
-      "genre": "Techno"
+      "genre": "Techno",
+      "website": "https://linktr.ee/milenaadamis"
     },
     {
       "kind": "dj",
@@ -2054,11 +2064,11 @@
       "kind": "dj",
       "slug": "noizu",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/1129a6acbcb761540648a895178014b7/250x250-000000-80-0-0.jpg",
+      "youtube": "https://www.youtube.com/@NoizuSound",
+      "soundcloud": "https://soundcloud.com/noizusound",
       "twitter": "https://x.com/noizu",
       "homeCity": "Los Angeles, US",
-      "genre": "House",
-      "youtube": "https://www.youtube.com/@NoizuSound",
-      "soundcloud": "https://soundcloud.com/noizusound"
+      "genre": "House"
     },
     {
       "kind": "dj",
@@ -2081,9 +2091,9 @@
       "kind": "dj",
       "slug": "olafur-arnalds",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/39c599372c3484a872a160243da08f09/250x250-000000-80-0-0.jpg",
-      "genre": "House",
       "youtube": "https://www.youtube.com/@olafurarnalds",
-      "soundcloud": "https://soundcloud.com/olafur-arnalds"
+      "soundcloud": "https://soundcloud.com/olafur-arnalds",
+      "genre": "House"
     },
     {
       "kind": "dj",
@@ -2170,10 +2180,10 @@
       "kind": "dj",
       "slug": "prospa",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/b53c414019fa4abe85227ccdf33c8a13/250x250-000000-80-0-0.jpg",
-      "homeCity": "Leeds, UK",
-      "genre": "UK Garage",
       "youtube": "https://www.youtube.com/@ProspaUK",
-      "soundcloud": "https://soundcloud.com/prospauk"
+      "soundcloud": "https://soundcloud.com/prospauk",
+      "homeCity": "Leeds, UK",
+      "genre": "UK Garage"
     },
     {
       "kind": "dj",
@@ -2253,10 +2263,10 @@
       "kind": "dj",
       "slug": "riordan",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/6e6bb7f4379130f3725c7374afe3de9a/250x250-000000-80-0-0.jpg",
-      "homeCity": "UK",
-      "genre": "UK Garage",
       "youtube": "https://www.youtube.com/@riordanuk",
-      "soundcloud": "https://soundcloud.com/riordanuk"
+      "soundcloud": "https://soundcloud.com/riordanuk",
+      "homeCity": "UK",
+      "genre": "UK Garage"
     },
     {
       "kind": "dj",
@@ -2300,17 +2310,17 @@
       "kind": "dj",
       "slug": "rossi",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/ae28f7a1f663122812957fc3691f9a33/250x250-000000-80-0-0.jpg",
+      "youtube": "https://www.youtube.com/@rossi4524",
       "homeCity": "London, UK",
-      "genre": "House",
-      "youtube": "https://www.youtube.com/@rossi4524"
+      "genre": "House"
     },
     {
       "kind": "dj",
       "slug": "rules",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/74ca932207e98ab87bbb9d37cca7cebe/250x250-000000-80-0-0.jpg",
+      "website": "https://thisisrules.com",
       "homeCity": "London, UK",
-      "genre": "Hip Hop",
-      "website": "https://thisisrules.com"
+      "genre": "Hip Hop"
     },
     {
       "kind": "dj",
@@ -2415,11 +2425,11 @@
       "kind": "dj",
       "slug": "shimza",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/d402f0f4fd6cb463501b00c920235b97/250x250-000000-80-0-0.jpg",
-      "instagram": "https://instagram.com/shimza.dj",
-      "homeCity": "Tembisa, South Africa",
-      "genre": "Afro House",
       "website": "https://djshimza.com",
-      "twitter": "https://x.com/Shimza01"
+      "instagram": "https://instagram.com/shimza.dj",
+      "twitter": "https://x.com/Shimza01",
+      "homeCity": "Tembisa, South Africa",
+      "genre": "Afro House"
     },
     {
       "kind": "dj",
@@ -2454,7 +2464,8 @@
       "youtube": "https://www.youtube.com/@space92music",
       "soundcloud": "https://soundcloud.com/space92",
       "homeCity": "Toulouse, France",
-      "genre": "Techno"
+      "genre": "Techno",
+      "website": "https://space92.komi.io"
     },
     {
       "kind": "dj",
@@ -2476,10 +2487,10 @@
       "kind": "dj",
       "slug": "steller",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/96a947afe24327afc6404ce229950391/250x250-000000-80-0-0.jpg",
-      "homeCity": "Florida, US",
-      "genre": "Bass House",
       "youtube": "https://www.youtube.com/@stellersounds",
-      "soundcloud": "https://soundcloud.com/stellersounds"
+      "soundcloud": "https://soundcloud.com/stellersounds",
+      "homeCity": "Florida, US",
+      "genre": "Bass House"
     },
     {
       "kind": "dj",
@@ -2582,11 +2593,11 @@
       "slug": "third-party",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/8c2bc22d317f251efbfd2379d1564349/250x250-000000-80-0-0.jpg",
       "instagram": "https://instagram.com/thirdpartylive",
+      "youtube": "https://www.youtube.com/@thirdpartychannel",
       "soundcloud": "https://soundcloud.com/thirdpartymusic",
       "twitter": "https://x.com/thirdpartylive",
       "homeCity": "London, UK",
-      "genre": "Trance",
-      "youtube": "https://www.youtube.com/@thirdpartychannel"
+      "genre": "Trance"
     },
     {
       "kind": "dj",
@@ -2677,12 +2688,12 @@
       "kind": "dj",
       "slug": "ts7",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/09ecc536d594b6a8c35a6bc82aa7ad4f/250x250-000000-80-0-0.jpg",
+      "website": "https://ts7music.com",
       "instagram": "https://instagram.com/ts7music",
       "youtube": "https://www.youtube.com/@ts7music",
       "twitter": "https://x.com/ts7music",
       "homeCity": "Bradford, UK",
-      "genre": "UK Garage",
-      "website": "https://ts7music.com"
+      "genre": "UK Garage"
     },
     {
       "kind": "dj",
@@ -2726,9 +2737,9 @@
       "slug": "vltra",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/4cd14ece9487433c69c13b1ea83e8345/250x250-000000-80-0-0.jpg",
       "youtube": "https://www.youtube.com/@vltramusic",
+      "soundcloud": "https://soundcloud.com/vltramusic1719",
       "homeCity": "Palermo, Italy",
-      "genre": "Tech House",
-      "soundcloud": "https://soundcloud.com/vltramusic1719"
+      "genre": "Tech House"
     },
     {
       "kind": "dj",
@@ -2818,9 +2829,9 @@
       "kind": "dj",
       "slug": "worthy",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/c0159f2f33c98021cde0380508fac53c/250x250-000000-80-0-0.jpg",
+      "twitter": "https://x.com/worthy27_",
       "homeCity": "San Francisco, US",
-      "genre": "Bass House",
-      "twitter": "https://x.com/worthy27_"
+      "genre": "Bass House"
     },
     {
       "kind": "dj",
@@ -2856,10 +2867,10 @@
       "kind": "dj",
       "slug": "yuvee",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/252dabd72b3c9d349aa548262e77e3f9/250x250-000000-80-0-0.jpg",
-      "homeCity": "Tel Aviv, Israel",
-      "genre": "Melodic House",
       "instagram": "https://instagram.com/yuvee_music",
-      "youtube": "https://www.youtube.com/@Yuveemusic"
+      "youtube": "https://www.youtube.com/@Yuveemusic",
+      "homeCity": "Tel Aviv, Israel",
+      "genre": "Melodic House"
     },
     {
       "kind": "dj",
@@ -2961,18 +2972,6 @@
     },
     {
       "kind": "dj",
-      "slug": "space-92",
-      "field": "website",
-      "reason": "weak or invalid website"
-    },
-    {
-      "kind": "dj",
-      "slug": "ben-sterling",
-      "field": "website",
-      "reason": "weak or invalid website"
-    },
-    {
-      "kind": "dj",
       "slug": "argy",
       "field": "youtube",
       "reason": "youtube name mismatch"
@@ -2998,12 +2997,6 @@
     {
       "kind": "dj",
       "slug": "estiva",
-      "field": "website",
-      "reason": "weak or invalid website"
-    },
-    {
-      "kind": "dj",
-      "slug": "green-velvet",
       "field": "website",
       "reason": "weak or invalid website"
     },
@@ -3063,12 +3056,6 @@
     },
     {
       "kind": "dj",
-      "slug": "aeon-mode",
-      "field": "website",
-      "reason": "weak or invalid website"
-    },
-    {
-      "kind": "dj",
       "slug": "ahee",
       "field": "instagram",
       "reason": "handle name mismatch"
@@ -3093,12 +3080,6 @@
     },
     {
       "kind": "dj",
-      "slug": "angelphroot",
-      "field": "website",
-      "reason": "weak or invalid website"
-    },
-    {
-      "kind": "dj",
       "slug": "aqutie",
       "field": "instagram",
       "reason": "handle name mismatch"
@@ -3108,12 +3089,6 @@
       "slug": "archie",
       "field": "soundcloud",
       "reason": "handle name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "arielle-free",
-      "field": "website",
-      "reason": "weak or invalid website"
     },
     {
       "kind": "dj",
@@ -3135,21 +3110,9 @@
     },
     {
       "kind": "dj",
-      "slug": "bianca-oblivion",
-      "field": "website",
-      "reason": "weak or invalid website"
-    },
-    {
-      "kind": "dj",
       "slug": "black-carl",
       "field": "twitter",
       "reason": "handle name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "blasterjaxx",
-      "field": "website",
-      "reason": "weak or invalid website"
     },
     {
       "kind": "dj",
@@ -3174,12 +3137,6 @@
       "slug": "cyril",
       "field": "youtube",
       "reason": "youtube name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "dustycloud",
-      "field": "website",
-      "reason": "weak or invalid website"
     },
     {
       "kind": "dj",
@@ -3327,12 +3284,6 @@
     },
     {
       "kind": "dj",
-      "slug": "julian-fijma",
-      "field": "website",
-      "reason": "weak or invalid website"
-    },
-    {
-      "kind": "dj",
       "slug": "just-bee",
       "field": "youtube",
       "reason": "youtube name mismatch"
@@ -3420,12 +3371,6 @@
       "slug": "miguelle",
       "field": "soundcloud",
       "reason": "handle name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "milena-adamis",
-      "field": "website",
-      "reason": "weak or invalid website"
     },
     {
       "kind": "dj",

@@ -4,6 +4,7 @@ import { join } from "node:path";
 import {
   decodeMojibake,
   evaluateEntityCompleteRow,
+  isFallbackWebsiteHub,
   mergeEntityCompletePins,
   nameOverlapsHandle,
   parseEntityCompleteCsv,
@@ -114,6 +115,8 @@ assert.equal(
   false,
 );
 
+assert.equal(isFallbackWebsiteHub("https://linktr.ee/hannahlaingdj"), true);
+assert.equal(isFallbackWebsiteHub("https://space92.komi.io/"), true);
 assert.equal(
   evaluateEntityCompleteRow({
     kind: "dj",
@@ -121,9 +124,9 @@ assert.equal(
     name: "Hannah Laing",
     field: "website",
     value: "https://linktr.ee/hannahlaingdj",
-    evidence: "hub",
-  }).drop,
-  "weak or invalid website",
+    evidence: "hub fallback",
+  }).value,
+  "https://linktr.ee/hannahlaingdj",
 );
 assert.equal(
   evaluateEntityCompleteRow({
@@ -132,7 +135,29 @@ assert.equal(
     name: "Space 92",
     field: "website",
     value: "https://space92.komi.io/",
-    evidence: "hub",
+    evidence: "hub fallback",
+  }).value,
+  "https://space92.komi.io",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "angelphroot",
+    name: "Angelphroot",
+    field: "website",
+    value: "https://linktr.ee/angieloopi",
+    evidence: "hub fallback",
+  }).value,
+  "https://linktr.ee/angieloopi",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "ahee",
+    name: "AHEE",
+    field: "website",
+    value: "https://linktr.ee/",
+    evidence: "empty hub",
   }).drop,
   "weak or invalid website",
 );
@@ -352,5 +377,16 @@ assert.equal(mergedHalf[0]?.slug, "lucas-steve");
 assert.equal(mergedHalf[0]?.website, "https://www.lucasandsteve.com/");
 assert.equal(mergedHalf[0]?.homeCity, "Maastricht, Netherlands");
 assert.equal(mergedHalf[0]?.genre, "House");
+
+const hubThenOfficial = mergeEntityCompletePins(
+  [{ kind: "dj", slug: "green-velvet", website: "https://linktr.ee/officialgreenvelvet" }],
+  [{ kind: "dj", slug: "green-velvet", website: "https://officialgreenvelvet.com" }],
+);
+assert.equal(hubThenOfficial[0]?.website, "https://officialgreenvelvet.com");
+const officialThenHub = mergeEntityCompletePins(
+  [{ kind: "dj", slug: "green-velvet", website: "https://officialgreenvelvet.com" }],
+  [{ kind: "dj", slug: "green-velvet", website: "https://linktr.ee/officialgreenvelvet" }],
+);
+assert.equal(officialThenHub[0]?.website, "https://officialgreenvelvet.com");
 
 console.log("entityCompletePins.test.ts ok");
