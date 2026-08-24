@@ -478,7 +478,7 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     // Official Tomorrowland One World Radio upload; 1001TL wired via
     // sc-tomorrowland-mandy-mondays-august-2026. Tomorrowland poll
     // titleMatch does not include "mondays", so this seed is required.
-    // Never wire sc-https://…. yt-J7b0G4XX8pg is the TML WE1 B2B Relive.
+    // Never wire sc-https://…. yt-J7b0G4XX8pg is the TML WE1 B2B playback.
     url: "https://soundcloud.com/tomorrowland/mandy-mondays-august-2026",
     primaryArtist: dj("MANDY", {
       accent: "#ff006e",

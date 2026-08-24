@@ -30,7 +30,7 @@
 import type { PrismaClient } from "@prisma/client";
 import { playCollapseKey } from "../../playCollapse";
 import { detectPlaybackHost } from "../../playback";
-import { HELD_RELIVE_WATCH } from "../nextCaptures";
+import { HELD_PLAYBACK_WATCH } from "../nextCaptures";
 import { isFingerprintOnlyVideoId, isFingerprintOnlyWatchUrl } from "../identify/fingerprintWatch";
 import {
   mapAcrMusicHit,
@@ -497,7 +497,7 @@ export function isHeldFileScanTarget(opts: {
     .join(" ")
     .trim();
   if (!hay) return false;
-  return HELD_RELIVE_WATCH.some((h) => h.match.test(hay));
+  return HELD_PLAYBACK_WATCH.some((h) => h.match.test(hay));
 }
 
 /** Fan Identify-only clips must never enter the File Scanning playback queue. */

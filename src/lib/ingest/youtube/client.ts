@@ -824,7 +824,7 @@ export async function fetchChannelVideoIds(
 /**
  * Video IDs from a public playlist (no API key).
  * Accepts a full playlist URL or bare `PL…` / `UU…` list id.
- * Paginates Innertube continuations so Tomorrowland Relive dumps (100+ videos) are complete.
+ * Paginates Innertube continuations so Tomorrowland official dumps (100+ videos) are complete.
  */
 export async function fetchPlaylistVideoIds(
   playlistIdOrUrl: string,

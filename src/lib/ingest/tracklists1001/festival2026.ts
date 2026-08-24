@@ -1549,7 +1549,7 @@ export const TL_JAMES_HYPE_MELKWEG_ADE_2025: FingerprintSeedRow[] = [
  * Official YT: https://www.youtube.com/watch?v=ra8NYbzPMnk (~59:06)
  * 1001TL: https://1001.tl/2u0sgrq9 — operator console capture 2026-08-01
  * (16/19 timed cues; missing clocks already lerped in capture).
- * Note: last cue @ 59:30 slightly past Relive duration.
+ * Note: last cue @ 59:30 slightly past playback duration.
  */
 export const TL_KOLSCH_TML_WE2_2026: FingerprintSeedRow[] = [
   { at: "4:31", artist: "CamelPhat & Kölsch", title: "Waste My Time" },
@@ -1991,7 +1991,7 @@ export const TL_HARDWELL_TML_WE2_2026: FingerprintSeedRow[] = [
  * Chris Lorenzo @ The Great Library Stage, Tomorrowland Weekend 2, Belgium 2026-07-25
  * 1001TL: https://1001.tl/2llc7mh9 — operator console capture 2026-08-01
  * (0/10 timed cues — evenly spaced across ~60m).
- * No official Tomorrowland Relive / artist full-set playback yet — seed ready; do not wire clips.
+ * No official Tomorrowland / artist full-set playback yet — seed ready; do not wire clips.
  */
 export const TL_CHRIS_LORENZO_TML_WE2_2026: FingerprintSeedRow[] =
   evenlySpaceRows(
@@ -2180,7 +2180,7 @@ export const TL_DIMITRI_VEGAS_NICO_MORENO_TML_WE2_2026: FingerprintSeedRow[] = [
  * Calvin Harris @ Mainstage, Tomorrowland Weekend 2, Belgium 2026-07-25
  * 1001TL: https://1001.tl/1z0j2zlk — operator console capture 2026-08-01
  * (0/30 timed cues — evenly spaced across ~60m).
- * No official Tomorrowland Relive yet — seed ready; do not wire fan uploads.
+ * No official Tomorrowland playback yet — seed ready; do not wire fan uploads.
  */
 export const TL_CALVIN_HARRIS_TML_WE2_2026: FingerprintSeedRow[] =
   evenlySpaceRows(
@@ -2223,7 +2223,7 @@ export const TL_CALVIN_HARRIS_TML_WE2_2026: FingerprintSeedRow[] =
  * Sonny Fodera @ The Great Library Stage, Tomorrowland Weekend 2, Belgium 2026-07-25
  * 1001TL: https://1001.tl/1muw1md9 — operator console capture 2026-08-01
  * (0/16 timed cues — evenly spaced across ~60m).
- * No official Tomorrowland Relive yet — seed ready; do not wire clips.
+ * No official Tomorrowland playback yet — seed ready; do not wire clips.
  */
 export const TL_SONNY_FODERA_TML_WE2_2026: FingerprintSeedRow[] =
   evenlySpaceRows(
@@ -2252,7 +2252,7 @@ export const TL_SONNY_FODERA_TML_WE2_2026: FingerprintSeedRow[] =
  * Darren Styles @ The Great Library Stage, Tomorrowland Weekend 2, Belgium 2026-07-26
  * 1001TL: https://1001.tl/2jqs739k — operator console capture 2026-08-01
  * (0/33 timed cues — evenly spaced across ~60m).
- * No official Tomorrowland Relive yet — seed ready; do not wire clips.
+ * No official Tomorrowland playback yet — seed ready; do not wire clips.
  */
 export const TL_DARREN_STYLES_TML_WE2_2026: FingerprintSeedRow[] =
   evenlySpaceRows(
@@ -2401,7 +2401,7 @@ export const TL_AYYBO_ODD_MOB_TML_WE2_2026: FingerprintSeedRow[] = [
  * Dyzen @ Planaxis Stage, Tomorrowland Weekend 2, Belgium 2026-07-25
  * 1001TL: https://1001.tl/1muw64wk — operator console capture 2026-08-01
  * (0/4 timed cues — evenly spaced across ~60m; thin/partial TL).
- * No official Tomorrowland Relive yet — seed ready; do not wire clips.
+ * No official Tomorrowland playback yet — seed ready; do not wire clips.
  * Note: not "Dyen b2b Maddix" (different artist / set).
  */
 export const TL_DYZEN_TML_WE2_2026: FingerprintSeedRow[] = evenlySpaceRows(
@@ -3765,7 +3765,7 @@ export const TL_HOLY_PRIEST_EDC_LV_2026: FingerprintSeedRow[] = [
  * Holy Priest @ Freedom Stage, Tomorrowland Weekend 1, Belgium 2026-07-17
  * 1001TL: https://1001.tl/20w2107t — operator console capture 2026-08-01
  * (0/45 timed cues — evenly spaced across ~60m).
- * No official Tomorrowland full-set Relive yet — seed ready; do not wire clips.
+ * No official Tomorrowland full-set playback yet — seed ready; do not wire clips.
  */
 export const TL_HOLY_PRIEST_TML_WE1_2026: FingerprintSeedRow[] = evenlySpaceRows(
   [

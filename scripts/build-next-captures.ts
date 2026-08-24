@@ -6,7 +6,7 @@ import { writeFileSync, mkdirSync } from "node:fs";
 import { join } from "node:path";
 import {
   CAPTURE_QUEUE_LIMIT,
-  buildHeldReliveWatch,
+  buildHeldPlaybackWatch,
   buildNextCaptures,
 } from "../src/lib/ingest/nextCaptures";
 import { extractVideoId } from "../src/lib/ingest/youtube/client";
@@ -38,7 +38,7 @@ async function main() {
     });
   } catch (err) {
     console.warn(
-      "[next-captures] Tomorrowland Relive playlist fetch failed:",
+      "[next-captures] Tomorrowland playback playlist fetch failed:",
       err instanceof Error ? err.message : err,
     );
     live = null;
@@ -61,7 +61,7 @@ async function main() {
     );
   }
   const held = live ?? {
-    ...buildHeldReliveWatch(),
+    ...buildHeldPlaybackWatch(),
     playlists: [],
     unwiredOfficial: [],
   };
@@ -89,7 +89,7 @@ async function main() {
   for (const p of presets) {
     console.log(`  - ${p.slug}  ${p.label}  (${p.reason ?? ""})`);
   }
-  console.log(`[held-relive] wrote ${held.held.length} watches → ${heldPath}`);
+  console.log(`[held-playback] wrote ${held.held.length} watches → ${heldPath}`);
 }
 
 main();

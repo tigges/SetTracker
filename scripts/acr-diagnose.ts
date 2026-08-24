@@ -4,8 +4,8 @@
  *
  *   A) Known-track control via yt-dlp → ffmpeg → Identify. On GitHub IPs
  *      this usually bot-walls; that is expected, not a pipeline break.
- *   B) Optional Relive probes on the same yt-dlp path (skipped on CI when
- *      File Scan is configured — those clips hit the same wall).
+ *   B) Optional official-playback probes on the same yt-dlp path (skipped
+ *      on CI when File Scan is configured — those clips hit the same wall).
  *   C) File Scanning of the same control video. This is the CI YouTube
  *      path. A named hit (even below the catalog write floor of 55) means
  *      the Console token + container work.
@@ -50,8 +50,8 @@ const CONTROL: Probe = {
   expect: "astley",
 };
 
-// B) Real Relive probes at offsets of known commercial tracks (from 1001 seeds).
-const RELIVE_PROBES: Probe[] = [
+// B) Official-playback probes at offsets of known commercial tracks (from 1001 seeds).
+const PLAYBACK_PROBES: Probe[] = [
   {
     label: "Ingrosso TML WE2 @ 40:13 (Don't You Worry Child)",
     url: "https://www.youtube.com/watch?v=g4vR2VlhNtk",
@@ -136,25 +136,25 @@ async function main() {
   const identifyHit =
     control.ok && /score \d/.test(control.detail) && !/no match/.test(control.detail);
   const fsCfg = fileScanConfig();
-  const skipRelive =
+  const skipPlayback =
     Boolean(fsCfg) && !control.ok && /bot-wall|unavailable/i.test(control.detail);
 
-  let reliveHits = 0;
-  let reliveNote = "";
+  let playbackHits = 0;
+  let playbackNote = "";
   const results: Awaited<ReturnType<typeof runProbe>>[] = [];
-  if (skipRelive) {
-    reliveNote = "skipped (CI YouTube wall; File Scan is the path)";
-    console.log(`\n=== B) Relive probes (yt-dlp) ===\n  ${reliveNote}`);
+  if (skipPlayback) {
+    playbackNote = "skipped (CI YouTube wall; File Scan is the path)";
+    console.log(`\n=== B) Playback probes (yt-dlp) ===\n  ${playbackNote}`);
   } else {
-    console.log("\n=== B) Relive probes (live-set hit-rate) ===");
-    for (const p of RELIVE_PROBES) {
+    console.log("\n=== B) Playback probes (live-set hit-rate) ===");
+    for (const p of PLAYBACK_PROBES) {
       const r = await runProbe(p);
       const mark = r.softMatch === true ? "✓" : r.softMatch === false ? "≈" : "•";
       console.log(`${mark} ${r.label}\n    ${r.detail}`);
       results.push(r);
     }
-    reliveHits = results.filter((r) => r.ok && !/no match/.test(r.detail)).length;
-    reliveNote = `${reliveHits}/${RELIVE_PROBES.length} clips identified (yt-dlp path)`;
+    playbackHits = results.filter((r) => r.ok && !/no match/.test(r.detail)).length;
+    playbackNote = `${playbackHits}/${PLAYBACK_PROBES.length} clips identified (yt-dlp path)`;
   }
 
   // C) File Scanning — server-side scan of the control video. Proves the
@@ -239,7 +239,7 @@ async function main() {
     "=== SUMMARY ===",
     `control: ${verdict.controlLabel}`,
     `  yt-dlp: ${control.detail}`,
-    `relive:  ${reliveNote}`,
+    `playback:  ${playbackNote}`,
     fsLine,
   ];
   console.log(summary.join("\n"));
@@ -255,7 +255,7 @@ async function main() {
         `- yt-dlp: ${hasYtDlp} · cookies: ${hasCookies}`,
         `- **control**: ${verdict.controlLabel}`,
         `- **yt-dlp**: ${control.detail}`,
-        `- **relive**: ${reliveNote}`,
+        `- **playback**: ${playbackNote}`,
         `- **${fsLine}**`,
         "",
         ...results.map((r) => `  - ${r.label}: ${r.detail}`),

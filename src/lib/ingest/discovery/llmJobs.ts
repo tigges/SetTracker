@@ -12,7 +12,7 @@
 
 import type { PrismaClient } from "@prisma/client";
 import { isJunkArtistName } from "../../artistName";
-import { HELD_RELIVE_WATCH } from "../nextCaptures";
+import { HELD_PLAYBACK_WATCH } from "../nextCaptures";
 import {
   complete,
   detectLlmProvider,
@@ -444,7 +444,7 @@ export async function runLlmOfficialVideoResearch(
   if (!provider) return stats;
 
   const rows = [];
-  for (const held of HELD_RELIVE_WATCH) {
+  for (const held of HELD_PLAYBACK_WATCH) {
     stats.scanned += 1;
     try {
       const text = await complete(

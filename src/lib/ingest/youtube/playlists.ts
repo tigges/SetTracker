@@ -94,7 +94,7 @@ export const YOUTUBE_PLAYLISTS: YoutubePlaylistSource[] = [
       /\b(biscits|dj\s*set|live|set|stream|inflight|nocturnal|academy|space|defected|insomniac|mad\s*decent|exchange|kings?\s*hall|daytrip|in\s+the\s+loop|ready\s*2\s*dance)\b/i,
   },
   {
-    // Official Tomorrowland Belgium Relive full sets (YT playlist from Relive article).
+    // Official Tomorrowland Belgium full-set playbacks (YT playlist).
     // 2026 dump is 125+ videos — keep the base cap above one HTML page (~100).
     playlist: "PLeeZgE3_zp1w",
     seriesName: "Tomorrowland Relive",
@@ -133,7 +133,7 @@ export function isPlaylistSetCandidate(
   return isVenueSetCandidate(title, durationSec, playlistAsVenue(pl));
 }
 
-/** Tomorrowland Relive playlists (official dumps — not artist-owned mix lists). */
+/** Tomorrowland Relive series playlists (official dumps — not artist-owned mix lists). */
 export function officialRelivePlaylists(): YoutubePlaylistSource[] {
   return YOUTUBE_PLAYLISTS.filter((p) => /relive/i.test(p.seriesName));
 }

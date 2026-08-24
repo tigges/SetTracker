@@ -1,6 +1,6 @@
 /**
  * Report held 1001 seeds waiting on official playback, and queue Top 100
- * Tomorrowland Relives that are not yet curated.
+ * Tomorrowland official playbacks that are not yet curated.
  * Usage: npx tsx scripts/watch-held-relives.ts
  */
 import { writeFileSync, mkdirSync } from "node:fs";
@@ -14,7 +14,7 @@ import {
   reliveDedupeKey,
   type ReliveWatchReport,
 } from "../src/lib/ingest/reliveWatch";
-import { buildHeldReliveWatch } from "../src/lib/ingest/nextCaptures";
+import { buildHeldPlaybackWatch } from "../src/lib/ingest/nextCaptures";
 
 function curatedVideoIds(): Set<string> {
   const ids = new Set<string>();
@@ -46,10 +46,10 @@ async function main() {
     });
   } catch (err) {
     console.warn(
-      "[held-relive] live playlist fetch failed, writing offline watch:",
+      "[held-playback] live playlist fetch failed, writing offline watch:",
       err instanceof Error ? err.message : err,
     );
-    const offline = buildHeldReliveWatch();
+    const offline = buildHeldPlaybackWatch();
     report = {
       generatedAt: offline.generatedAt,
       playlists: [],
@@ -65,7 +65,7 @@ async function main() {
   const waiting = report.held.filter((h) => h.status === "waiting").length;
   const ready = report.held.filter((h) => h.status === "candidate").length;
   console.log(
-    `[held-relive] ${report.held.length} held (${ready} official playback found, ${waiting} still waiting)`,
+    `[held-playback] ${report.held.length} held (${ready} official playback found, ${waiting} still waiting)`,
   );
   for (const h of report.held) {
     const extra = h.youtubeUrl ? ` → ${h.youtubeUrl}` : "";
@@ -73,7 +73,7 @@ async function main() {
   }
   if (report.unwiredOfficial.length) {
     console.log(
-      `[held-relive] ${report.unwiredOfficial.length} Top 100 Tomorrowland Relives not yet curated`,
+      `[held-playback] ${report.unwiredOfficial.length} Top 100 Tomorrowland official playbacks not yet curated`,
     );
     for (const p of report.unwiredOfficial) {
       console.log(`  - ${p.slug}  ${p.label}`);

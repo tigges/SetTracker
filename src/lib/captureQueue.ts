@@ -117,7 +117,7 @@ export async function getCaptureQueue(
   };
 }
 
-/** Stats workbench: live catalog rank, else Relive extras / committed snapshot. */
+/** Stats workbench: live catalog rank, else official-playback extras / committed snapshot. */
 export async function loadOperatorCaptureQueue(
   limit = CAPTURE_QUEUE_LIMIT,
 ): Promise<CaptureQueue> {

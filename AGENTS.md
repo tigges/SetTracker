@@ -39,13 +39,14 @@ prompt. After a live publish, the next capture starts a new
 `deploy-pages.yml` cancels in-progress exports on every main push —
 drip-merging leaves live on an old version.
 
-**Relive is Tomorrowland-only.** Relive is Tomorrowland's product name and
-is confusing used for other festivals. In UI, agent docs, and generic
-comments, say **playback** (or official playback). Keep Relive only for
-the Tomorrowland Relive series (`seriesName: "Tomorrowland Relive"`,
-`officialRelivePlaylists()`, `looksLikeRelive()`, `reliveWatch` files,
+**Say playback, not Relive.** Relive is Tomorrowland's product name and
+is confusing for every other festival. In UI, agent docs, operator notes,
+and generic comments, say **playback** (or official playback). Keep Relive
+only for the Tomorrowland Relive series internals
+(`seriesName: "Tomorrowland Relive"`, `officialRelivePlaylists()`,
+`looksLikeRelive()`, `reliveWatch` files,
 `reason: "relive:official-unwired"`). Do not rename those internals
-unless asked.
+unless asked. Never write Relive for HARD / Insomniac / Nameless / Ultra.
 
 - **Run the app:** `npm run dev` (Turbopack, http://localhost:3000). Dev output
   goes to `.next/dev` in Next 16.

@@ -40,12 +40,12 @@ export type CapturePreset = {
 export const PRIORITY_CAPTURES: CapturePreset[] = [];
 
 /** Held 1001 seeds waiting on official playback — do not queue fan clips. */
-export const HELD_RELIVE_WATCH: {
+export const HELD_PLAYBACK_WATCH: {
   name: string;
   seed: string;
   match: RegExp;
   search: string[];
-  /** Official playback title must also match (default: Tomorrowland Relive). */
+  /** Official playback title must also match (default: Tomorrowland). */
   venue?: RegExp;
   waitNote?: string;
   /** Extra title token required (e.g. B2B partner). */
@@ -128,7 +128,7 @@ function mappedSlugs(): Set<string> {
   return new Set(Object.keys(TRACKLIST_1001_BY_SOURCE_SLUG));
 }
 
-/** Relive extras from the committed snapshot — drop wired slugs + remap Google. */
+/** Official-playback extras from the committed snapshot — drop wired slugs + remap Google. */
 export function extrasFromCaptureSnapshot(snapshot: {
   presets?: CapturePreset[];
 }): CapturePreset[] {
@@ -438,7 +438,7 @@ export function buildNextCaptures(
   return out.slice(0, limit);
 }
 
-export type HeldReliveReport = {
+export type HeldPlaybackReport = {
   generatedAt: string;
   held: {
     name: string;
@@ -450,17 +450,17 @@ export type HeldReliveReport = {
 };
 
 /** Offline held-seed watch report (operator finds official playback, then wires). */
-export function buildHeldReliveWatch(): HeldReliveReport {
+export function buildHeldPlaybackWatch(): HeldPlaybackReport {
   return {
     generatedAt: new Date().toISOString(),
-    held: HELD_RELIVE_WATCH.map((h) => ({
+    held: HELD_PLAYBACK_WATCH.map((h) => ({
       name: h.name,
       seed: h.seed,
-      searchUrl: search1001(...h.search, "relive", "youtube"),
+      searchUrl: search1001(...h.search),
       status: "waiting" as const,
       note:
         h.waitNote ??
-        "Do not wire fan clips — wait for official Tomorrowland Relive / artist playback.",
+        "Do not wire fan clips — wait for official playback.",
     })),
   };
 }

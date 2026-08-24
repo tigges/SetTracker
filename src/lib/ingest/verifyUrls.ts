@@ -197,7 +197,7 @@ export async function applyKnownUrlFixes(prisma: PrismaClient): Promise<number> 
     console.log(`[verify-urls] cleared rejected website ${row.website}`);
   }
 
-  // Retired Tomorrowland Relive (private Fisher WE2 → public re-upload).
+  // Retired Tomorrowland playback (private Fisher WE2 → public re-upload).
   const discovered = await discoverCuratedReliveRemaps(prisma);
   const remaps = await applySetSourceRemaps(prisma, discovered);
   n += remaps;

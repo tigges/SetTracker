@@ -1,5 +1,5 @@
 {
-  "note": "Operator-collected 1001Tracklists URLs. All listed urls[] rows are now seeded. Prefer new operator pastes over this archive. stillMissing1001 is video-in / no 1001 page — do not invent URLs. heldPendingRelive is 1001-in / no official YT/SC playback — seed held, do not invent or wire fan playback. pendingCuePaste is official playback + operator 1001 URL without cue rows — do not scrape 1001 or invent 1001tl seeds.",
+  "note": "Operator-collected 1001Tracklists URLs. All listed urls[] rows are now seeded. Prefer new operator pastes over this archive. stillMissing1001 is video-in / no 1001 page — do not invent URLs. heldPendingPlayback is 1001-in / no official YT/SC playback — seed held, do not invent or wire fan playback. pendingCuePaste is official playback + operator 1001 URL without cue rows — do not scrape 1001 or invent 1001tl seeds.",
   "updatedAt": "2026-08-24T00:00:00.000Z",
   "urls": [
     {
@@ -74,7 +74,7 @@
       "name": "TL_MARLON_HOFFSTADT_TML_WE1_2026",
       "tracklistUrl": "https://www.1001tracklists.com/tracklist/25k2c8zk/marlon-hoffstadt-mainstage-tomorrowland-weekend-1-belgium-2026-07-17.html",
       "youtubeUrl": "https://youtu.be/rG1DvjvXCls",
-      "note": "Operator paste 2026-08-23. 16 timed cues on official Tomorrowland Relive YT. Overlay TL_MARLON_HOFFSTADT is too generic (Coachella Sahara WE2 yt-vpf4LLy42Zc). No SC in the paste — do not invent an SC slug."
+      "note": "Operator paste 2026-08-23. 16 timed cues on official Tomorrowland playback YT. Overlay TL_MARLON_HOFFSTADT is too generic (Coachella Sahara WE2 yt-vpf4LLy42Zc). No SC in the paste — do not invent an SC slug."
     },
     {
       "label": "Korolova · Captive Soul, Freedom Stage, Tomorrowland Weekend 2, Belgium 2026-07-26",
@@ -91,7 +91,7 @@
       "name": "TL_DAVID_GUETTA_TML_WE1_2026",
       "tracklistUrl": "https://www.1001tracklists.com/tracklist/2q9jpt9k/david-guetta-mainstage-tomorrowland-weekend-1-belgium-2026-07-18.html",
       "youtubeUrl": "https://youtu.be/GSnPwle4FOE",
-      "note": "Operator paste 2026-08-23. 47 timed cues on official Tomorrowland Relive YT. Overlay TL_David-Guetta_Mainstage_Tomorrowland_WE1_Belgium_2026-07-18 is not a valid identifier. No SC in the paste — do not invent an SC slug. Distinct from Men Machine exclusive yt-NTLDGnoWIRg and Ultra year repeats."
+      "note": "Operator paste 2026-08-23. 47 timed cues on official Tomorrowland playback YT. Overlay TL_David-Guetta_Mainstage_Tomorrowland_WE1_Belgium_2026-07-18 is not a valid identifier. No SC in the paste — do not invent an SC slug. Distinct from Men Machine exclusive yt-NTLDGnoWIRg and Ultra year repeats."
     },
     {
       "label": "Colyn B2B Innellea · Resistance The Cove, Ultra Miami 2026-03-28",
@@ -394,7 +394,7 @@
       "note": "Artist-channel playback (@Liumusic). No 1001 page in the description — capture if one appears."
     }
   ],
-  "heldPendingRelive": [
+  "heldPendingPlayback": [
     {
       "label": "MARNIK · Nameless Festival 2016-06-04",
       "name": "TL_MARNIK_NAMELESS_FESTIVAL_2016",

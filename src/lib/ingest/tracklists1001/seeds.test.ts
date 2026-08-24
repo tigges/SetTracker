@@ -618,7 +618,7 @@ const holyTml = tracklist1001RowsToPlays(TL_HOLY_PRIEST_TML_WE1_2026);
 assert.equal(holyTml.length, 45);
 assert.equal(holyTml[0]!.trackTitle, "Ameno");
 assert.equal(holyTml[holyTml.length - 1]!.trackTitle, "Holy Atlantis");
-// No official TML Relive yet — seed held.
+// No official TML playback yet — seed held.
 assert.equal(TRACKLIST_1001_BY_SOURCE_SLUG["yt-OlNdG4SCPdQ"], undefined);
 
 assertSeedClocks(TL_ODD_MOB_TML_WE2_2026);
@@ -716,7 +716,7 @@ for (const p of jhMelkweg) {
   jhMkPrev = p.timestamp;
 }
 assert.ok(TRACKLIST_1001_BY_SOURCE_SLUG["yt-QThaqlzSqLw"]!.length >= 51);
-// Distinct from TML WE2 Relive.
+// Distinct from TML WE2 playback.
 assert.notEqual(
   TRACKLIST_1001_BY_SOURCE_SLUG["yt-QThaqlzSqLw"],
   TRACKLIST_1001_BY_SOURCE_SLUG["yt-dmhUJYEdkKo"],
@@ -838,7 +838,7 @@ const chrisL = tracklist1001RowsToPlays(TL_CHRIS_LORENZO_TML_WE2_2026);
 assert.equal(chrisL.length, 10);
 assert.match(chrisL[0]!.trackTitle!, /Appetite/);
 assert.equal(chrisL[chrisL.length - 1]!.trackTitle, "House Every Weekend");
-// No official Tomorrowland Relive yet — seed held, not slug-mapped.
+// No official Tomorrowland playback yet — seed held, not slug-mapped.
 assert.equal(
   Object.values(TRACKLIST_1001_BY_SOURCE_SLUG).includes(
     TL_CHRIS_LORENZO_TML_WE2_2026,
@@ -874,7 +874,7 @@ for (const p of dvNm) {
   );
   dvNmPrev = p.timestamp;
 }
-// B2B Great Library Relive — distinct from held solo Mainstage seed.
+// B2B Great Library playback — distinct from held solo Mainstage seed.
 assert.equal(
   TRACKLIST_1001_BY_SOURCE_SLUG["yt-OTKgBZS8if0"],
   TL_DIMITRI_VEGAS_NICO_MORENO_TML_WE2_2026,
@@ -913,7 +913,7 @@ const darrenStyles = tracklist1001RowsToPlays(TL_DARREN_STYLES_TML_WE2_2026);
 assert.equal(darrenStyles.length, 33);
 assert.equal(darrenStyles[0]!.trackTitle, "Be Somebody");
 assert.match(darrenStyles[darrenStyles.length - 1]!.trackTitle!, /Save Me/);
-// No official TML WE2 Relive yet — seed held, not slug-mapped.
+// No official TML WE2 playback yet — seed held, not slug-mapped.
 assert.equal(
   Object.values(TRACKLIST_1001_BY_SOURCE_SLUG).includes(
     TL_DARREN_STYLES_TML_WE2_2026,
@@ -942,7 +942,7 @@ const dyzen = tracklist1001RowsToPlays(TL_DYZEN_TML_WE2_2026);
 assert.equal(dyzen.length, 4);
 assert.equal(dyzen[0]!.trackTitle, "Mutant Quasars");
 assert.equal(dyzen[dyzen.length - 1]!.trackTitle, "Try");
-// Thin partial TL + no official Tomorrowland Relive — held.
+// Thin partial TL + no official Tomorrowland playback — held.
 // yt-VABm0tIRn2U is DYEN B2B Maddix Atmosphere WE2, not this Dyzen seed.
 assert.notEqual(
   TRACKLIST_1001_BY_SOURCE_SLUG["yt-VABm0tIRn2U"],
@@ -975,7 +975,7 @@ assert.equal(arminYt.length, 7);
 assert.match(arminYt[0]!.trackTitle!, /Everlasting/);
 assert.match(arminYt[arminYt.length - 1]!.trackTitle!, /Blah Blah Blah/);
 assert.equal(arminYt[arminYt.length - 1]!.timestamp, 11 * 60);
-// Distinct from Mainstage WE2 Relive.
+// Distinct from Mainstage WE2 playback.
 assert.notEqual(
   TRACKLIST_1001_BY_SOURCE_SLUG["yt-I6QA_T-BS6o"],
   TRACKLIST_1001_BY_SOURCE_SLUG["yt-tg_QLGpes0k"],
