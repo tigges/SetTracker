@@ -20,6 +20,10 @@ import { loadEnrichRunReport } from "@/lib/ingest/enrich/enrichRunReport";
 import { pageMeta } from "@/lib/site";
 import { clockSourceSlices } from "@/lib/statsHealth";
 import { getStatsHealth } from "@/lib/statsHealthData";
+import {
+  buildTracklistWorkbench,
+  WORKBENCH_LANE_LABEL,
+} from "@/lib/statsWorkbench";
 
 export const metadata: Metadata = pageMeta({
   title: "Stats",
@@ -178,6 +182,13 @@ export default async function StatsPage() {
   const noPlayback = health.sets.playback.find((row) => row.key === "no_playback");
   const clockSources = clockSourceSlices(s.plays.byProvenance);
   const clockTotal = clockSources.reduce((n, row) => n + row.count, 0);
+  const workbench = buildTracklistWorkbench({
+    emptySets: s.emptySets,
+    sparseSets: s.sparseSets,
+    tracklistGaps: s.tracklistGaps,
+    needsIdsSets: s.needsIdsSets,
+    capturePresets: captureQueue.presets,
+  });
 
   return (
     <div>
@@ -233,6 +244,15 @@ export default async function StatsPage() {
         slices={health.sets.slices}
         onChart={health.sets.onChart}
         actions={[
+          ...(workbench.length
+            ? [
+                {
+                  href: "#workbench",
+                  label: "Tracklist workbench",
+                  count: workbench.length,
+                },
+              ]
+            : []),
           ...health.sets.actions,
           ...(captureQueue.presets.length
             ? [
@@ -297,6 +317,46 @@ export default async function StatsPage() {
         Queues
       </p>
 
+      <div id="workbench" className="scroll-mt-20">
+        <QueueFold
+          title="Tracklist workbench"
+          count={workbench.length}
+          hint="First-party text, then ACR, then IDs. Capture 1001 is last and optional — do not invent a URL."
+          open
+        >
+          {workbench.length === 0 ? (
+            <p className="text-[13px] text-muted2">None in this queue.</p>
+          ) : (
+            <ul className="divide-y divide-line border-y border-line">
+              {workbench.map((row) => (
+                <li key={`${row.lane}-${row.slug}`} className="py-1">
+                  <div className="flex items-baseline gap-2">
+                    <span className="mono flex-none rounded-full border border-line px-1.5 py-0.5 text-[10px] uppercase tracking-[0.08em] text-muted2">
+                      {WORKBENCH_LANE_LABEL[row.lane]}
+                    </span>
+                    {row.href ? (
+                      <SetEntryLink
+                        href={row.href}
+                        label="Stats"
+                        className="truncate text-[13px] font-semibold text-ink hover:underline"
+                      >
+                        {row.title}
+                      </SetEntryLink>
+                    ) : (
+                      <span className="truncate text-[13px] font-semibold text-ink">
+                        {row.title}
+                      </span>
+                    )}
+                  </div>
+                  <div className="mono truncate text-[11px] text-muted2">
+                    {row.detail}
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )}
+        </QueueFold>
+      </div>
       <div id="leftover-hosts">
         <QueueFold
           title="Leftover hosts"
@@ -363,7 +423,7 @@ export default async function StatsPage() {
         <QueueFold
           title="Fill thin lists"
           count={s.tracklistGaps.length}
-          hint="This-year / last-year chart sets with a thin list. Do not invent 1001 URLs."
+          hint="Also ranked in Tracklist workbench. This-year / last-year chart sets with a thin list. Do not invent 1001 URLs."
         >
           <ul className="divide-y divide-line border-y border-line">
             {s.tracklistGaps.slice(0, PREVIEW).map((row) => (
@@ -404,7 +464,7 @@ export default async function StatsPage() {
         <QueueFold
           title="ID cues"
           count={s.sets.needsIds}
-          hint="Lowest identified share first."
+          hint="Also ranked in Tracklist workbench. Lowest identified share first."
         >
           <ul className="divide-y divide-line border-y border-line">
             {s.needsIdsSets.slice(0, PREVIEW).map((row) => (
@@ -433,8 +493,7 @@ export default async function StatsPage() {
         <QueueFold
           title="Capture 1001"
           count={captureQueue.presets.length}
-          hint="Optional community overlay on sets that already have official playback. First-party text + ACR fill clocks without 1001. Do not invent 1001 URLs."
-          open
+          hint="Last resort. Optional community overlay on sets that already have official playback. First-party text + ACR fill clocks without 1001. Do not invent 1001 URLs."
         >
           <Suspense fallback={null}>
             <Capture1001Client
