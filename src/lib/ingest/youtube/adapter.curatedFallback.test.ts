@@ -62,6 +62,9 @@ const CAPTIVE_098 = YOUTUBE_SETS.find((s) => s.video.includes("5JxfEjVdQFk"));
 const HYPE_SYNC = YOUTUBE_SETS.find((s) => s.video.includes("rLTCLSsqrXY"));
 const EPIC_036 = YOUTUBE_SETS.find((s) => s.video.includes("JLIYTueL4TI"));
 const EPIC_025 = YOUTUBE_SETS.find((s) => s.video.includes("xv6hpdqKlxg"));
+const HONEY_DEKMANTEL = YOUTUBE_SETS.find((s) =>
+  s.video.includes("t5KwF_VsM50"),
+);
 const HELDENS_DAYBREAK = YOUTUBE_SETS.find((s) =>
   s.video.includes("wuMQeEJ3YnQ"),
 );
@@ -1002,6 +1005,18 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.durationSec, 56 * 60 + 5 + 180);
   });
 
+  it("builds Honey Dijon Dekmantel The Loop meta from the curated 1001 capture", () => {
+    assert.ok(HONEY_DEKMANTEL);
+    const meta = watchMetaFromCuratedSeed(HONEY_DEKMANTEL);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "t5KwF_VsM50");
+    assert.match(meta.title, /Honey Dijon/i);
+    assert.match(meta.title, /Dekmantel/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=t5KwF_VsM50");
+    // Last cue 1:52:00 + 180s pad.
+    assert.equal(meta.durationSec, 1 * 3600 + 52 * 60 + 180);
+  });
+
   it("builds Cuebrick Sacré Paris meta from the official @Cuebrick seed", () => {
     assert.ok(CUEBRICK_SACRE);
     const meta = watchMetaFromCuratedSeed(CUEBRICK_SACRE);
@@ -1754,6 +1769,20 @@ describe("curated YouTube 429 fallback", () => {
     assert.equal(sets[0]?.primaryArtist?.slug, "eric-prydz");
     assert.equal(sets[0]?.seriesName, "Epic Radio");
     assert.notEqual(sets[0]!.sourceSlug, "yt-JLIYTueL4TI");
+  });
+
+  it("lands Honey Dijon Dekmantel The Loop from the 1001 seed when watch is 429", async () => {
+    assert.ok(HONEY_DEKMANTEL);
+    const adapter = createYoutubeAdapter([HONEY_DEKMANTEL], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-t5KwF_VsM50");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 28);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 1 * 3600 + 52 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "honey-dijon");
+    assert.match(String(sets[0]?.eventName ?? ""), /Dekmantel/i);
   });
 
   it("lands Oliver Heldens Daybreak TML WE1 from the 1001 seed when watch is 429", async () => {

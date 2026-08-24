@@ -153,6 +153,7 @@ import {
   TL_4444_OF_A_KIND_TML_WE1_FREEDOM_2026,
   TL_BULLET_TOOTH_TML_WE2_CORE_2026,
   TL_ERIC_PRYDZ_EPIC_RADIO_025_2026,
+  TL_HONEY_DIJON_THE_LOOP_DEKMANTEL_NETHERLANDS_2025,
 } from "../tracklists1001/seeds";
 import type { RawArtist } from "../types";
 import { slugify } from "../types";
@@ -3044,6 +3045,8 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     eventName: "Nibe Festival",
   },
   {
+    // Official Dekmantel The Loop 2025 playback. Timed 1001 capture.
+    // No SoundCloud in the operator paste — do not invent an SC slug.
     video: "https://www.youtube.com/watch?v=t5KwF_VsM50",
     primaryArtist: dj("Honey Dijon", { accent: "#f72585" }),
     genre: "House",
@@ -3051,6 +3054,9 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     title: "Honey Dijon at The Loop - Dekmantel Festival 2025",
     seriesName: "Dekmantel",
     eventName: "Dekmantel Festival",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2r7hm01t/honey-dijon-the-loop-dekmantel-festival-netherlands-2025-08-02.html",
+    tracklist1001: TL_HONEY_DIJON_THE_LOOP_DEKMANTEL_NETHERLANDS_2025,
   },
   {
     video: "https://www.youtube.com/watch?v=knbEv8vj-2c",

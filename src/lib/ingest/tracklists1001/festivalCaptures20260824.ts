@@ -398,3 +398,45 @@ export const TL_ERIC_PRYDZ_EPIC_RADIO_025_2026: FingerprintSeedRow[] = [
   { at: "51:51", artist: "Pryda", title: "CELL Hï Ibiza 2024 ID 01 (Working Title)" },
   { at: "56:05", artist: "Pryda", title: "Marquee Las Vegas 2025 ID (Working Title)" },
 ];
+
+/**
+ * Honey Dijon @ The Loop, Dekmantel Festival, Netherlands 2025-08-02
+ * Official YouTube: https://youtu.be/t5KwF_VsM50
+ * https://www.1001tracklists.com/tracklist/2r7hm01t/honey-dijon-the-loop-dekmantel-festival-netherlands-2025-08-02.html
+ * Paste name TL_Honey-Dijon_The-Loop_Dekmantel-Festival_Netherlands_2025-08-02
+ * is not a valid identifier.
+ * No SoundCloud in the operator paste — do not invent an SC slug.
+ * Watch already curated in youtube/videos.ts.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-t5KwF_VsM50"]
+ * Captured 2026-08-24 — provenance 1001tl.
+ */
+export const TL_HONEY_DIJON_THE_LOOP_DEKMANTEL_NETHERLANDS_2025: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "Barbara Tucker", title: "I Get Lifted (Go To Church Mix)" },
+  { at: "6:00", artist: "Harry Romero", title: "Mood Vision" },
+  { at: "9:00", artist: "Cratebug & Junior Sanchez", title: "Sinna Mann" },
+  { at: "14:00", artist: "Derrick Carter", title: "Where U At?" },
+  { at: "17:00", artist: "Scrubfish", title: "Jazzlix" },
+  { at: "20:00", artist: "Mary J. Blige", title: "Ain't Nobody" },
+  { at: "22:00", artist: "Trevor Rockcliffe", title: "A Sound Called House" },
+  { at: "28:00", artist: "James Burton", title: "Breakfast Club (Dennis Ferrer Morning Mix)" },
+  { at: "31:00", artist: "Squirell", title: "Get Up" },
+  { at: "36:00", artist: "Sylvester", title: "You Make Me Feel (Mighty Real)" },
+  { at: "41:00", artist: "Jay Lumen", title: "Can You Dance" },
+  { at: "41:01", artist: "Cardi B", title: "Bodak Yellow" },
+  { at: "48:00", artist: "Harry Romero", title: "Paradise II (Avision Remix)" },
+  { at: "51:00", artist: "Sweet Pussy Pauline", title: "Work This Pussy (Acappella)" },
+  { at: "54:00", artist: "Tommy Bones", title: "Next Level" },
+  { at: "59:30", artist: "Danny Tenaglia ft. Celeda", title: "Music Is The Answer (Dancin' And Prancin') (Acappella)" },
+  { at: "1:00:00", artist: "Harry Romero", title: "Scatter" },
+  { at: "1:04:00", artist: "The Red Zone Project ft. Keith Anthony Fluitt", title: "Everybody Get Up! (Tedd Patterson Funk Of Forty Years Dub)" },
+  { at: "1:10:00", artist: "Kenny Dope pres. The Bucketheads", title: "The Bomb! (These Sounds Fall Into My Mind) (Armand van Helden Re-edit)" },
+  { at: "1:15:00", artist: "Honey Dijon ft. Chloë", title: "The Nightlife (Round & Round Remix)" },
+  { at: "1:22:00", artist: "Colonel Abrams", title: "Music Is The Answer" },
+  { at: "1:25:00", artist: "Mila Journée", title: "No Es No" },
+  { at: "1:29:00", artist: "Harry Romero", title: "Light It Up" },
+  { at: "1:33:00", artist: "Riva Starr & Mark Broom pres. Star B", title: "I've Got Joy" },
+  { at: "1:38:00", artist: "LaShun Pace", title: "I Know I've Been Changed" },
+  { at: "1:44:00", artist: "Sasha", title: "Fleuron Drift" },
+  { at: "1:48:00", artist: "CASSIMM", title: "Love Desire" },
+  { at: "1:52:00", artist: "Soul Central ft. Kathy Brown", title: "Strings Of Life (Stronger On My Own) (Supernova Remix)" },
+];

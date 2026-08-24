@@ -550,6 +550,17 @@ assert.equal(
 assert.equal(
   skipCaptureNeed(
     row({
+      slug: "yt-t5KwF_VsM50",
+      title: "Honey Dijon at The Loop - Dekmantel Festival 2025",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
       slug: "sc-eric-prydz-eric-prydz-presents-463760700",
       title: "Eric Prydz presents EPIC Radio 036",
       type: "radio",

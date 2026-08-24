@@ -3,6 +3,14 @@
   "updatedAt": "2026-08-24T00:00:00.000Z",
   "urls": [
     {
+      "label": "Honey Dijon · The Loop, Dekmantel Festival, Netherlands 2025-08-02",
+      "slug": "yt-t5KwF_VsM50",
+      "name": "TL_HONEY_DIJON_THE_LOOP_DEKMANTEL_NETHERLANDS_2025",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/2r7hm01t/honey-dijon-the-loop-dekmantel-festival-netherlands-2025-08-02.html",
+      "youtubeUrl": "https://youtu.be/t5KwF_VsM50",
+      "note": "Operator paste 2026-08-24. 28 timed cues on official YT already curated in videos.ts. Overlay TL_Honey-Dijon_The-Loop_Dekmantel-Festival_Netherlands_2025-08-02 is not a valid identifier. No SC in the paste — do not invent an SC slug."
+    },
+    {
       "label": "Eric Prydz · Epic Radio 025 2026-03-05",
       "slug": "yt-xv6hpdqKlxg",
       "name": "TL_ERIC_PRYDZ_EPIC_RADIO_025_2026",

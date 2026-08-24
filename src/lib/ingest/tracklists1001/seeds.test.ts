@@ -186,6 +186,7 @@ import {
   TL_JOHN_NEWMAN_TML_WE1_MAINSTAGE_2026,
   TL_DVLM_SMASH_THE_HOUSE_RADIO_690_2026,
   TL_ERIC_PRYDZ_EPIC_RADIO_025_2026,
+  TL_HONEY_DIJON_THE_LOOP_DEKMANTEL_NETHERLANDS_2025,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   isSecondaryPlaybackSlug,
@@ -1821,6 +1822,8 @@ assert.equal(
 );
 assert.equal(isWiredTracklistSlug("yt-xv6hpdqKlxg"), true);
 assert.equal(isWiredTracklistSlug("sc-eric-prydz-epic-radio-025"), true);
+assert.equal(isWiredTracklistSlug("yt-t5KwF_VsM50"), true);
+assert.equal(isWiredTracklistSlug("sc-honey-dijon-dekmantel"), false);
 assert.equal(
   isWiredTracklistSlug(
     "sc-https://soundcloud.com/eric-prydz/epic-radio-025",
@@ -3796,6 +3799,40 @@ for (let i = 1; i < epic025.length; i++) {
   assert.ok(
     (epic025[i]!.timestamp ?? 0) > (epic025[i - 1]!.timestamp ?? 0),
     `Epic Radio 025 clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_HONEY_DIJON_THE_LOOP_DEKMANTEL_NETHERLANDS_2025);
+assert.equal(TL_HONEY_DIJON_THE_LOOP_DEKMANTEL_NETHERLANDS_2025.length, 28);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-t5KwF_VsM50"],
+  TL_HONEY_DIJON_THE_LOOP_DEKMANTEL_NETHERLANDS_2025,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-honey-dijon-dekmantel"],
+  undefined,
+);
+assert.equal(isSecondaryPlaybackSlug("yt-t5KwF_VsM50"), false);
+assert.equal(
+  TL_HONEY_DIJON_THE_LOOP_DEKMANTEL_NETHERLANDS_2025[0]?.title,
+  "I Get Lifted (Go To Church Mix)",
+);
+assert.equal(
+  TL_HONEY_DIJON_THE_LOOP_DEKMANTEL_NETHERLANDS_2025[27]?.title,
+  "Strings Of Life (Stronger On My Own) (Supernova Remix)",
+);
+const honeyDekmantel = tracklist1001RowsToPlays(
+  TL_HONEY_DIJON_THE_LOOP_DEKMANTEL_NETHERLANDS_2025,
+);
+assert.equal(honeyDekmantel.length, 28);
+assert.equal(honeyDekmantel[0]?.provenance, "1001tl");
+assert.equal(honeyDekmantel[0]?.timestamp, 0);
+assert.equal(honeyDekmantel[27]?.timestamp, 1 * 3600 + 52 * 60);
+for (let i = 1; i < honeyDekmantel.length; i++) {
+  assert.ok(
+    (honeyDekmantel[i]!.timestamp ?? 0) >
+      (honeyDekmantel[i - 1]!.timestamp ?? 0),
+    `Honey Dijon Dekmantel clocks must increase at index ${i}`,
   );
 }
 

@@ -99,6 +99,7 @@ assert.equal(
 );
 assert.ok(!extras["yt-0Fq24R47sDY"]?.soundcloudUrl);
 assert.ok(!extras["yt-G-DciaWb5KY"]?.soundcloudUrl);
+assert.ok(!extras["yt-t5KwF_VsM50"]?.soundcloudUrl);
 assert.equal(
   extras["yt-xv6hpdqKlxg"]?.soundcloudUrl,
   "https://soundcloud.com/eric-prydz/epic-radio-025",
