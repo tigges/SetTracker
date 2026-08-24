@@ -167,18 +167,83 @@ function rowKey(row: Pick<FingerprintSeedRow, "artist" | "title">): string {
 export function mergeIdentifyQueue(
   held: IdentifyQueueRow[],
   catalog: IdentifyQueueRow[],
-  opts: { limit: number; heldCap?: number },
+  opts: {
+    limit: number;
+    heldCap?: number;
+    fingerprint?: IdentifyQueueRow[];
+    fingerprintCap?: number;
+  },
 ): IdentifyQueueRow[] {
   const heldCap = opts.heldCap ?? Number(process.env.TRACK_ID_HELD_LIMIT || 8);
+  const fingerprintCap =
+    opts.fingerprintCap ?? Number(process.env.TRACK_ID_FINGERPRINT_LIMIT || 16);
   const heldSlice = uniqueIdentifyRows(held).slice(0, Math.max(0, heldCap));
   const seen = new Set(heldSlice.map(rowKey));
-  const catalogSlice = uniqueIdentifyRows(catalog).filter((r) => {
-    const key = rowKey(r);
-    if (seen.has(key)) return false;
-    seen.add(key);
-    return true;
+  const takeUnused = (rows: IdentifyQueueRow[], cap: number) => {
+    const out: IdentifyQueueRow[] = [];
+    for (const row of uniqueIdentifyRows(rows)) {
+      if (out.length >= cap) break;
+      const key = rowKey(row);
+      if (seen.has(key)) continue;
+      seen.add(key);
+      out.push(row);
+    }
+    return out;
+  };
+  const fingerprintSlice = takeUnused(opts.fingerprint ?? [], fingerprintCap);
+  const catalogSlice = takeUnused(catalog, Math.max(0, opts.limit));
+  return [...heldSlice, ...fingerprintSlice, ...catalogSlice].slice(
+    0,
+    Math.max(0, opts.limit),
+  );
+}
+
+/** Tracks landed by ACR Identify / File Scan that still need ISRC or Beatport. */
+export async function fingerprintNeedIdRows(
+  prisma: PrismaClient,
+  limit: number,
+): Promise<IdentifyQueueRow[]> {
+  if (limit <= 0) return [];
+  const pins = loadTrackIdPins();
+  const pinBySlug = new Map(pins.map((p) => [p.slug, p]));
+  const tracks = await prisma.track.findMany({
+    where: {
+      AND: [
+        { artistName: { not: "" } },
+        { title: { not: "" } },
+        { OR: [{ isrc: null }, { beatportUrl: null }] },
+        { plays: { some: { provenance: "fingerprint" } } },
+      ],
+    },
+    orderBy: { plays: { _count: "desc" } },
+    take: Math.max(limit * 4, limit),
+    select: {
+      slug: true,
+      artistName: true,
+      title: true,
+      isrc: true,
+      beatportUrl: true,
+    },
   });
-  return [...heldSlice, ...catalogSlice].slice(0, Math.max(0, opts.limit));
+  return uniqueIdentifyRows(
+    tracks
+      .filter((t) => {
+        if (isJunkTrackPin({ slug: t.slug, artist: t.artistName, title: t.title })) {
+          return false;
+        }
+        return !pinCoversNeed(pinBySlug.get(t.slug), {
+          wantIsrc: !normalizeIsrc(t.isrc),
+          wantBeatport: !t.beatportUrl,
+        });
+      })
+      .map((t) => ({
+        at: "0:00",
+        artist: t.artistName,
+        title: t.title,
+        slug: t.slug,
+        isrc: t.isrc,
+      })),
+  ).slice(0, limit);
 }
 
 /** High-play catalog tracks missing ISRC and/or a canonical Beatport URL. */
@@ -474,17 +539,26 @@ export async function identifyHeldSeeds(opts: {
     Boolean(opts.prisma) && process.env.TRACK_ID_CATALOG !== "0";
   const held = heldIdentifyJobs().flatMap((j) => j.rows);
   let catalog: IdentifyQueueRow[] = [];
+  let fingerprint: IdentifyQueueRow[] = [];
   if (useCatalog) {
     try {
       catalog = await catalogNeedIdRows(opts.prisma!, Math.max(0, limit));
     } catch {
       catalog = [];
     }
+    try {
+      fingerprint = await fingerprintNeedIdRows(
+        opts.prisma!,
+        Math.max(0, Number(process.env.TRACK_ID_FINGERPRINT_LIMIT || 16)),
+      );
+    } catch {
+      fingerprint = [];
+    }
   }
   if (catalog.length === 0 && process.env.TRACK_ID_EXPORT !== "0") {
     catalog = await loadNeedEnrichExportRows(Math.max(0, limit));
   }
-  const slice = mergeIdentifyQueue(held, catalog, { limit });
+  const slice = mergeIdentifyQueue(held, catalog, { limit, fingerprint });
   const hits: TrackIdHit[] = [];
   const misses: TrackIdMiss[] = [];
   const delayMs = Number(process.env.TRACK_ID_DELAY_MS || 0);
