@@ -1,9 +1,9 @@
 {
-  "source": "data/crosscheck/djs-need-complete-20260823.csv",
-  "acceptedFields": 1468,
-  "pinRows": 310,
-  "incomingRows": 296,
-  "dropped": 518,
+  "source": "data/crosscheck/djs-need-complete-20260824.csv",
+  "acceptedFields": 1578,
+  "pinRows": 333,
+  "incomingRows": 253,
+  "dropped": 106,
   "pins": [
     {
       "kind": "club",
@@ -14,16 +14,28 @@
     },
     {
       "kind": "dj",
+      "slug": "4444-of-a-kind",
+      "imageUrl": "https://cdn-images.dzcdn.net/images/artist/169c16746dd29c04218604fe57eb0786/250x250-000000-80-0-0.jpg"
+    },
+    {
+      "kind": "dj",
       "slug": "ac-slater",
       "imageUrl": "https://yt3.googleusercontent.com/_CL0j27_sUyWKsKiRMZykqppprvP475TFDgnz-1IjIs1LWNVFrk9egaEbgVklSt_snNsmbdMSw=s900-c-k-c0x00ffffff-no-rj",
       "twitter": "https://x.com/djacslater"
     },
     {
       "kind": "dj",
+      "slug": "adrian-mills",
+      "imageUrl": "https://cdn-images.dzcdn.net/images/artist/8ed0d830157f6c645288ac93b105e59f/250x250-000000-80-0-0.jpg"
+    },
+    {
+      "kind": "dj",
       "slug": "aeon-mode",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/7cd5c9575f5be61e34ecc902cf2827c1/250x250-000000-80-0-0.jpg",
       "homeCity": "Denver, US",
-      "genre": "House"
+      "genre": "House",
+      "youtube": "https://www.youtube.com/@aeon__mode",
+      "soundcloud": "https://soundcloud.com/aeonmode"
     },
     {
       "kind": "dj",
@@ -77,6 +89,11 @@
     },
     {
       "kind": "dj",
+      "slug": "anetha",
+      "imageUrl": "https://cdn-images.dzcdn.net/images/artist/124079d469e467dae3b0a417e8fe2fd9/250x250-000000-80-0-0.jpg"
+    },
+    {
+      "kind": "dj",
       "slug": "angelphroot",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/da0e90d931ecfe50672ab4a1ef9d3fda/250x250-000000-80-0-0.jpg",
       "instagram": "https://instagram.com/angelphroot",
@@ -85,6 +102,11 @@
       "twitter": "https://x.com/angelphroot",
       "homeCity": "Toronto, Canada",
       "genre": "House"
+    },
+    {
+      "kind": "dj",
+      "slug": "angemi",
+      "imageUrl": "https://cdn-images.dzcdn.net/images/artist/a8f60be29b240fc06d816c4fffa8f876/250x250-000000-80-0-0.jpg"
     },
     {
       "kind": "dj",
@@ -114,6 +136,20 @@
       "slug": "ardalan",
       "imageUrl": "https://yt3.googleusercontent.com/_p3W6CjFv5CUFHgHJrQWAD8kNERSpd3GWkgrmkJjX8gtz1FL0Qu8ILjLSiSmys8z89wQRROqsg=s900-c-k-c0x00ffffff-no-rj",
       "youtube": "https://www.youtube.com/@Ardalan-music"
+    },
+    {
+      "kind": "dj",
+      "slug": "argy",
+      "imageUrl": "https://cdn-images.dzcdn.net/images/artist/e71e56891f8a5bf21c9b78ce31d70a8c/250x250-000000-80-0-0.jpg",
+      "soundcloud": "https://soundcloud.com/argyofficial"
+    },
+    {
+      "kind": "dj",
+      "slug": "arielle-free",
+      "imageUrl": "https://cdn-images.dzcdn.net/images/artist/4d2d84d3ed0218014ce5ffd4497dddc7/250x250-000000-80-0-0.jpg",
+      "instagram": "https://instagram.com/ariellefree",
+      "youtube": "https://www.youtube.com/@ArielleFree",
+      "homeCity": "Scotland, UK"
     },
     {
       "kind": "dj",
@@ -191,7 +227,8 @@
       "instagram": "https://instagram.com/beltranmusic",
       "soundcloud": "https://soundcloud.com/beltranmusic",
       "homeCity": "Brazil",
-      "genre": "Tech House"
+      "genre": "Tech House",
+      "youtube": "https://www.youtube.com/@beltran1337"
     },
     {
       "kind": "dj",
@@ -210,7 +247,8 @@
       "instagram": "https://instagram.com/bensterlingmusic",
       "soundcloud": "https://soundcloud.com/bensterling",
       "homeCity": "London, UK",
-      "genre": "Tech House"
+      "genre": "Tech House",
+      "youtube": "https://www.youtube.com/@bensterlinguk"
     },
     {
       "kind": "dj",
@@ -239,6 +277,11 @@
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/0f3ec49aeb04d8a3f31670362a338fbd/250x250-000000-80-0-0.jpg",
       "youtube": "https://www.youtube.com/@biblemami",
       "genre": "Hip Hop"
+    },
+    {
+      "kind": "dj",
+      "slug": "biianco",
+      "imageUrl": "https://cdn-images.dzcdn.net/images/artist/47855006e34802391641d1c8a4ec1499/250x250-000000-80-0-0.jpg"
     },
     {
       "kind": "dj",
@@ -288,6 +331,16 @@
       "youtube": "https://www.youtube.com/@BlackCircle",
       "homeCity": "Zurich, Switzerland",
       "genre": "Afro House"
+    },
+    {
+      "kind": "dj",
+      "slug": "blasterjaxx",
+      "imageUrl": "https://cdn-images.dzcdn.net/images/artist/bc2d91a6dc0a8f8a381ffbbae956745b/250x250-000000-80-0-0.jpg",
+      "instagram": "https://instagram.com/blasterjaxx",
+      "youtube": "https://www.youtube.com/@Blasterjaxx",
+      "soundcloud": "https://soundcloud.com/blasterjaxx",
+      "twitter": "https://x.com/Blasterjaxx",
+      "homeCity": "The Hague, Netherlands"
     },
     {
       "kind": "dj",
@@ -344,7 +397,9 @@
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/00fbab10bcceb2e7bb2ecdaaff2ad339/250x250-000000-80-0-0.jpg",
       "instagram": "https://instagram.com/brandy_maina",
       "homeCity": "Nairobi, Kenya",
-      "genre": "Hip Hop"
+      "genre": "Hip Hop",
+      "youtube": "https://www.youtube.com/@brandymaina9393",
+      "soundcloud": "https://soundcloud.com/brandy-maina"
     },
     {
       "kind": "dj",
@@ -354,6 +409,16 @@
       "soundcloud": "https://soundcloud.com/budalagi",
       "homeCity": "Nairobi, Kenya",
       "genre": "Gqom"
+    },
+    {
+      "kind": "dj",
+      "slug": "bullet-tooth",
+      "imageUrl": "https://cdn-images.dzcdn.net/images/artist/5b7361f2f22e7d6f6fae99ebd4ab710b/250x250-000000-80-0-0.jpg"
+    },
+    {
+      "kind": "dj",
+      "slug": "callush",
+      "imageUrl": "https://cdn-images.dzcdn.net/images/artist/e776e9da70fef20eb3cfe3addcaff379/250x250-000000-80-0-0.jpg"
     },
     {
       "kind": "dj",
@@ -382,7 +447,10 @@
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/78bd6584d98e02790915b24ba8ff330b/250x250-000000-80-0-0.jpg",
       "soundcloud": "https://soundcloud.com/chaneymusic",
       "homeCity": "Swindon, UK",
-      "genre": "Tech House"
+      "genre": "Tech House",
+      "instagram": "https://instagram.com/chaneyuk",
+      "youtube": "https://www.youtube.com/@CHANEYUK",
+      "twitter": "https://x.com/chaney_uk"
     },
     {
       "kind": "dj",
@@ -428,7 +496,10 @@
       "slug": "coco-maria",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/2f4691dba900d5176d983dc3744b4d98/250x250-000000-80-0-0.jpg",
       "homeCity": "Berlin, Germany",
-      "genre": "House"
+      "genre": "House",
+      "website": "https://cocomaria.net",
+      "instagram": "https://instagram.com/cocomaria___",
+      "soundcloud": "https://soundcloud.com/cocomariamusic"
     },
     {
       "kind": "dj",
@@ -438,6 +509,11 @@
       "soundcloud": "https://soundcloud.com/colynmusic",
       "homeCity": "Leiden, Netherlands",
       "genre": "Melodic House"
+    },
+    {
+      "kind": "dj",
+      "slug": "conrad-taylor",
+      "imageUrl": "https://cdn-images.dzcdn.net/images/artist/b85c4d022cf733667890174c4a003301/250x250-000000-80-0-0.jpg"
     },
     {
       "kind": "dj",
@@ -458,7 +534,8 @@
       "soundcloud": "https://soundcloud.com/cristophmusic",
       "twitter": "https://x.com/Cristophmusic",
       "homeCity": "Newcastle, UK",
-      "genre": "Tech House"
+      "genre": "Tech House",
+      "youtube": "https://www.youtube.com/@cristophmusic6732"
     },
     {
       "kind": "dj",
@@ -518,7 +595,10 @@
       "slug": "demi-riquisimo",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/a4628e48eeedf49e59005cca7f9eb9f6/250x250-000000-80-0-0.jpg",
       "homeCity": "London, UK",
-      "genre": "House"
+      "genre": "House",
+      "instagram": "https://instagram.com/demi_riquisimo_",
+      "soundcloud": "https://soundcloud.com/demiriquisimo",
+      "twitter": "https://x.com/demiriquisimo"
     },
     {
       "kind": "dj",
@@ -534,7 +614,7 @@
     },
     {
       "kind": "dj",
-      "slug": "dimitri-vegas",
+      "slug": "dimitri-vegas-like-mike",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/bc27fdffb6c00bc280e0500b5171a9e3/250x250-000000-80-0-0.jpg",
       "homeCity": "Willebroek, Belgium",
       "genre": "House"
@@ -553,11 +633,24 @@
     },
     {
       "kind": "dj",
+      "slug": "disco-lines",
+      "imageUrl": "https://cdn-images.dzcdn.net/images/artist/8d07e4515ef235b97becd5c28d23ea75/250x250-000000-80-0-0.jpg",
+      "youtube": "https://www.youtube.com/@discolines",
+      "soundcloud": "https://soundcloud.com/discolines"
+    },
+    {
+      "kind": "dj",
       "slug": "dj-boboss",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/f464fea20ae32b8920137e1b20441b22/250x250-000000-80-0-0.jpg",
       "youtube": "https://www.youtube.com/@djboboss",
       "homeCity": "France",
       "genre": "Hip Hop"
+    },
+    {
+      "kind": "dj",
+      "slug": "dj-gigola",
+      "imageUrl": "https://cdn-images.dzcdn.net/images/artist/1b3ffa2abe8ca2e7b30153e1fa8f8ed9/250x250-000000-80-0-0.jpg",
+      "youtube": "https://www.youtube.com/@dj_gigola"
     },
     {
       "kind": "dj",
@@ -588,7 +681,8 @@
       "slug": "dj-lesoul",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/7dfcf3c8efcd112a149652656ad8b6bf/250x250-000000-80-0-0.jpg",
       "homeCity": "Johannesburg, South Africa",
-      "genre": "Gqom"
+      "genre": "Gqom",
+      "youtube": "https://www.youtube.com/@djlesoul7811"
     },
     {
       "kind": "dj",
@@ -682,10 +776,21 @@
     },
     {
       "kind": "dj",
+      "slug": "elfigo",
+      "imageUrl": "https://cdn-images.dzcdn.net/images/artist/9a5ca90ebf5216924ef32f0771cd0d38/250x250-000000-80-0-0.jpg",
+      "youtube": "https://www.youtube.com/@djelfigo",
+      "soundcloud": "https://soundcloud.com/djelfigo"
+    },
+    {
+      "kind": "dj",
       "slug": "eli-brown",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/97ebf1084bb11f8febd76a2b5e926eee/250x250-000000-80-0-0.jpg",
       "homeCity": "Bristol, UK",
-      "genre": "Tech House"
+      "genre": "Tech House",
+      "website": "https://elibrownbeats.com",
+      "instagram": "https://instagram.com/elibrownbeats",
+      "youtube": "https://www.youtube.com/@elibrownbeats",
+      "soundcloud": "https://soundcloud.com/elibrownbeats"
     },
     {
       "kind": "dj",
@@ -693,6 +798,15 @@
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/c876a2f6c210a875cf905ad251d78221/250x250-000000-80-0-0.jpg",
       "homeCity": "Berlin, Germany",
       "genre": "House"
+    },
+    {
+      "kind": "dj",
+      "slug": "ely-oaks",
+      "imageUrl": "https://cdn-images.dzcdn.net/images/artist/a59804f23181151d539791823330da58/250x250-000000-80-0-0.jpg",
+      "instagram": "https://instagram.com/elyoaksmusic",
+      "youtube": "https://www.youtube.com/@elyoaks",
+      "soundcloud": "https://soundcloud.com/ely-oaks",
+      "homeCity": "Berlin, Germany"
     },
     {
       "kind": "dj",
@@ -741,7 +855,8 @@
       "soundcloud": "https://soundcloud.com/erickmorillo",
       "twitter": "https://x.com/ErickMorillo",
       "homeCity": "New York, US",
-      "genre": "House"
+      "genre": "House",
+      "youtube": "https://www.youtube.com/@erickmorillovideo"
     },
     {
       "kind": "dj",
@@ -939,7 +1054,8 @@
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/b0a56315df2977ebb0740c414330b831/250x250-000000-80-0-0.jpg",
       "youtube": "https://www.youtube.com/@officialgreenvelvet",
       "homeCity": "Chicago, US",
-      "genre": "Tech House"
+      "genre": "Tech House",
+      "soundcloud": "https://soundcloud.com/green-velvet-1"
     },
     {
       "kind": "dj",
@@ -990,6 +1106,13 @@
     },
     {
       "kind": "dj",
+      "slug": "helena-lauwaert",
+      "instagram": "https://instagram.com/helenalauwaert",
+      "soundcloud": "https://soundcloud.com/helenalauwaert",
+      "homeCity": "Ghent, Belgium"
+    },
+    {
+      "kind": "dj",
       "slug": "hi-lo",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/64518b1e37ab7cf8782c0b016c62e199/250x250-000000-80-0-0.jpg",
       "youtube": "https://www.youtube.com/@HILOofficial",
@@ -1018,6 +1141,7 @@
       "kind": "dj",
       "slug": "i-hate-models",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/7d0aa499f17559d34daf84762232b400/250x250-000000-80-0-0.jpg",
+      "website": "https://ihatemodelsmusic.com",
       "youtube": "https://www.youtube.com/@ihatemodels",
       "soundcloud": "https://soundcloud.com/ihatemodels",
       "homeCity": "France",
@@ -1060,7 +1184,9 @@
       "youtube": "https://www.youtube.com/@IMANU",
       "soundcloud": "https://soundcloud.com/imanumusic",
       "homeCity": "Rotterdam, Netherlands",
-      "genre": "Drum & Bass"
+      "genre": "Drum & Bass",
+      "website": "https://imanu.nu",
+      "twitter": "https://x.com/imanumusic"
     },
     {
       "kind": "dj",
@@ -1086,7 +1212,8 @@
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/229781de19cf9463c38f91ac73236ec5/250x250-000000-80-0-0.jpg",
       "youtube": "https://www.youtube.com/@JackieHollander",
       "homeCity": "San Francisco, US",
-      "genre": "House"
+      "genre": "House",
+      "soundcloud": "https://soundcloud.com/jackiehollander"
     },
     {
       "kind": "dj",
@@ -1134,7 +1261,8 @@
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/524be48384a223f910fb02a2f9ae7ae9/250x250-000000-80-0-0.jpg",
       "soundcloud": "https://soundcloud.com/jeremyolander",
       "homeCity": "Stockholm, Sweden",
-      "genre": "Melodic House"
+      "genre": "Melodic House",
+      "youtube": "https://www.youtube.com/@jeremy_olander"
     },
     {
       "kind": "dj",
@@ -1187,7 +1315,8 @@
       "slug": "joshwa",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/c3215c46437150964c910ec22ad24de7/250x250-000000-80-0-0.jpg",
       "homeCity": "London, UK",
-      "genre": "Tech House"
+      "genre": "Tech House",
+      "soundcloud": "https://soundcloud.com/joshwauk"
     },
     {
       "kind": "dj",
@@ -1197,7 +1326,8 @@
       "youtube": "https://www.youtube.com/@Joyhauser",
       "soundcloud": "https://soundcloud.com/joyhauser",
       "homeCity": "Hasselt, Belgium",
-      "genre": "Techno"
+      "genre": "Techno",
+      "twitter": "https://x.com/Joyhauser1"
     },
     {
       "kind": "dj",
@@ -1212,7 +1342,8 @@
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/fea26c0826a7d241b49ef45c5f393051/250x250-000000-80-0-0.jpg",
       "soundcloud": "https://soundcloud.com/julianfijma",
       "homeCity": "Netherlands",
-      "genre": "House"
+      "genre": "House",
+      "instagram": "https://instagram.com/julianfijma"
     },
     {
       "kind": "dj",
@@ -1244,7 +1375,8 @@
       "slug": "k-dot",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/6c2dd4daa1db3cce02dbf2a70dfa4b77/250x250-000000-80-0-0.jpg",
       "homeCity": "Sheffield, UK",
-      "genre": "Hip Hop"
+      "genre": "Hip Hop",
+      "youtube": "https://www.youtube.com/@kdot0114"
     },
     {
       "kind": "dj",
@@ -1262,7 +1394,8 @@
       "slug": "kamo-mphela",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/03ea37a62861544a55a22ff3d9bcc0e6/250x250-000000-80-0-0.jpg",
       "homeCity": "Johannesburg, South Africa",
-      "genre": "Gqom"
+      "genre": "Gqom",
+      "soundcloud": "https://soundcloud.com/kamomphela"
     },
     {
       "kind": "dj",
@@ -1360,7 +1493,9 @@
       "slug": "kyle-starkey",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/0a1fec985091fae9b0e7077f95865c74/250x250-000000-80-0-0.jpg",
       "homeCity": "Liverpool, UK",
-      "genre": "House"
+      "genre": "House",
+      "youtube": "https://www.youtube.com/@kylestarkey4319",
+      "soundcloud": "https://soundcloud.com/kyle_starkey43"
     },
     {
       "kind": "dj",
@@ -1382,6 +1517,11 @@
       "twitter": "https://x.com/laidbackluke",
       "homeCity": "Manila, Philippines",
       "genre": "House"
+    },
+    {
+      "kind": "dj",
+      "slug": "lammer",
+      "imageUrl": "https://cdn-images.dzcdn.net/images/artist/7d9bd48e090e2b93e132ce457f03986c/250x250-000000-80-0-0.jpg"
     },
     {
       "kind": "dj",
@@ -1445,7 +1585,8 @@
       "slug": "loofy",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/8b6acb010dd58497f9cc594fbdf46dc2/250x250-000000-80-0-0.jpg",
       "homeCity": "United States",
-      "genre": "Tech House"
+      "genre": "Tech House",
+      "soundcloud": "https://soundcloud.com/loofy-644934783"
     },
     {
       "kind": "dj",
@@ -1460,10 +1601,21 @@
     },
     {
       "kind": "dj",
-      "slug": "lucas",
+      "slug": "lp-giobbi",
+      "imageUrl": "https://cdn-images.dzcdn.net/images/artist/37ead287e40944952513af37a7f43bab/250x250-000000-80-0-0.jpg"
+    },
+    {
+      "kind": "dj",
+      "slug": "lucas-steve",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/dfc010a40b035fd85f4089fccb25a5cc/250x250-000000-80-0-0.jpg",
+      "website": "https://lucasandsteve.com",
+      "instagram": "https://instagram.com/lucasandsteve",
+      "youtube": "https://www.youtube.com/@lucasandsteve",
+      "soundcloud": "https://soundcloud.com/lucasandsteve",
+      "twitter": "https://x.com/lucasandsteve",
       "homeCity": "Maastricht, Netherlands",
-      "genre": "Trance"
+      "bio": "Lucas & Steve are a Dutch house music duo formed by DJs and record producers Lucas de Wert and Steven Jansen from Maastricht. The duo was formed in 2010 and joined Spinnin' Records in December 2014. They released many singles on the sub-label Spinnin' Deep.",
+      "genre": "House"
     },
     {
       "kind": "dj",
@@ -1506,7 +1658,8 @@
       "slug": "malone",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/e7234aeff0081367e7e856b5fd54058e/250x250-000000-80-0-0.jpg",
       "homeCity": "Miami, US",
-      "genre": "Tech House"
+      "genre": "Tech House",
+      "soundcloud": "https://soundcloud.com/malone-music"
     },
     {
       "kind": "dj",
@@ -1522,6 +1675,7 @@
       "kind": "dj",
       "slug": "marnik",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/05dbae4e288e0f459e522053c991e3f4/250x250-000000-80-0-0.jpg",
+      "website": "https://marnikofficial.com",
       "youtube": "https://www.youtube.com/@marnikofficial",
       "soundcloud": "https://soundcloud.com/marnikofficial",
       "homeCity": "Milan, Italy",
@@ -1533,7 +1687,8 @@
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/42a95684e854e0d34750be163eb34ae5/250x250-000000-80-0-0.jpg",
       "soundcloud": "https://soundcloud.com/masoncollective",
       "homeCity": "Manchester, UK",
-      "genre": "Tech House"
+      "genre": "Tech House",
+      "youtube": "https://www.youtube.com/@masoncollective5299"
     },
     {
       "kind": "dj",
@@ -1633,6 +1788,18 @@
       "homeCity": "London, UK",
       "bio": "Composer whose work blends contemporary classical writing, ambient electronics and music for film and performance.",
       "genre": "House"
+    },
+    {
+      "kind": "dj",
+      "slug": "max-styler",
+      "imageUrl": "https://cdn-images.dzcdn.net/images/artist/eb050be68c88feb90e8aa975c7aad42f/250x250-000000-80-0-0.jpg",
+      "youtube": "https://www.youtube.com/@MaxStyler",
+      "soundcloud": "https://soundcloud.com/maxstyler"
+    },
+    {
+      "kind": "dj",
+      "slug": "meduza3",
+      "imageUrl": "https://cdn-images.dzcdn.net/images/artist/ab9d5b17af04e65b048b33fc2806f910/250x250-000000-80-0-0.jpg"
     },
     {
       "kind": "dj",
@@ -1793,6 +1960,11 @@
     },
     {
       "kind": "dj",
+      "slug": "mosimann",
+      "imageUrl": "https://cdn-images.dzcdn.net/images/artist/618c72b1fc694c83053ab797fe813274/250x250-000000-80-0-0.jpg"
+    },
+    {
+      "kind": "dj",
       "slug": "muchakk-mu540",
       "genre": "House"
     },
@@ -1884,7 +2056,9 @@
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/1129a6acbcb761540648a895178014b7/250x250-000000-80-0-0.jpg",
       "twitter": "https://x.com/noizu",
       "homeCity": "Los Angeles, US",
-      "genre": "House"
+      "genre": "House",
+      "youtube": "https://www.youtube.com/@NoizuSound",
+      "soundcloud": "https://soundcloud.com/noizusound"
     },
     {
       "kind": "dj",
@@ -1907,7 +2081,9 @@
       "kind": "dj",
       "slug": "olafur-arnalds",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/39c599372c3484a872a160243da08f09/250x250-000000-80-0-0.jpg",
-      "genre": "House"
+      "genre": "House",
+      "youtube": "https://www.youtube.com/@olafurarnalds",
+      "soundcloud": "https://soundcloud.com/olafur-arnalds"
     },
     {
       "kind": "dj",
@@ -1995,7 +2171,9 @@
       "slug": "prospa",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/b53c414019fa4abe85227ccdf33c8a13/250x250-000000-80-0-0.jpg",
       "homeCity": "Leeds, UK",
-      "genre": "UK Garage"
+      "genre": "UK Garage",
+      "youtube": "https://www.youtube.com/@ProspaUK",
+      "soundcloud": "https://soundcloud.com/prospauk"
     },
     {
       "kind": "dj",
@@ -2076,7 +2254,9 @@
       "slug": "riordan",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/6e6bb7f4379130f3725c7374afe3de9a/250x250-000000-80-0-0.jpg",
       "homeCity": "UK",
-      "genre": "UK Garage"
+      "genre": "UK Garage",
+      "youtube": "https://www.youtube.com/@riordanuk",
+      "soundcloud": "https://soundcloud.com/riordanuk"
     },
     {
       "kind": "dj",
@@ -2113,17 +2293,24 @@
     },
     {
       "kind": "dj",
+      "slug": "rose-ringed",
+      "imageUrl": "https://cdn-images.dzcdn.net/images/artist/e77b07df134ac396d026eb2366dd4ef5/250x250-000000-80-0-0.jpg"
+    },
+    {
+      "kind": "dj",
       "slug": "rossi",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/ae28f7a1f663122812957fc3691f9a33/250x250-000000-80-0-0.jpg",
       "homeCity": "London, UK",
-      "genre": "House"
+      "genre": "House",
+      "youtube": "https://www.youtube.com/@rossi4524"
     },
     {
       "kind": "dj",
       "slug": "rules",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/74ca932207e98ab87bbb9d37cca7cebe/250x250-000000-80-0-0.jpg",
       "homeCity": "London, UK",
-      "genre": "Hip Hop"
+      "genre": "Hip Hop",
+      "website": "https://thisisrules.com"
     },
     {
       "kind": "dj",
@@ -2214,6 +2401,11 @@
     },
     {
       "kind": "dj",
+      "slug": "shdw",
+      "imageUrl": "https://cdn-images.dzcdn.net/images/artist/8674ed6691b480cf50347d74a44cd2af/250x250-000000-80-0-0.jpg"
+    },
+    {
+      "kind": "dj",
       "slug": "shee",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/be247dc7d2d7d58dd4044f03f7bfb97a/250x250-000000-80-0-0.jpg",
       "homeCity": "Ireland",
@@ -2225,7 +2417,9 @@
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/d402f0f4fd6cb463501b00c920235b97/250x250-000000-80-0-0.jpg",
       "instagram": "https://instagram.com/shimza.dj",
       "homeCity": "Tembisa, South Africa",
-      "genre": "Afro House"
+      "genre": "Afro House",
+      "website": "https://djshimza.com",
+      "twitter": "https://x.com/Shimza01"
     },
     {
       "kind": "dj",
@@ -2283,7 +2477,9 @@
       "slug": "steller",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/96a947afe24327afc6404ce229950391/250x250-000000-80-0-0.jpg",
       "homeCity": "Florida, US",
-      "genre": "Bass House"
+      "genre": "Bass House",
+      "youtube": "https://www.youtube.com/@stellersounds",
+      "soundcloud": "https://soundcloud.com/stellersounds"
     },
     {
       "kind": "dj",
@@ -2389,7 +2585,8 @@
       "soundcloud": "https://soundcloud.com/thirdpartymusic",
       "twitter": "https://x.com/thirdpartylive",
       "homeCity": "London, UK",
-      "genre": "Trance"
+      "genre": "Trance",
+      "youtube": "https://www.youtube.com/@thirdpartychannel"
     },
     {
       "kind": "dj",
@@ -2484,7 +2681,8 @@
       "youtube": "https://www.youtube.com/@ts7music",
       "twitter": "https://x.com/ts7music",
       "homeCity": "Bradford, UK",
-      "genre": "UK Garage"
+      "genre": "UK Garage",
+      "website": "https://ts7music.com"
     },
     {
       "kind": "dj",
@@ -2529,7 +2727,8 @@
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/4cd14ece9487433c69c13b1ea83e8345/250x250-000000-80-0-0.jpg",
       "youtube": "https://www.youtube.com/@vltramusic",
       "homeCity": "Palermo, Italy",
-      "genre": "Tech House"
+      "genre": "Tech House",
+      "soundcloud": "https://soundcloud.com/vltramusic1719"
     },
     {
       "kind": "dj",
@@ -2620,7 +2819,8 @@
       "slug": "worthy",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/c0159f2f33c98021cde0380508fac53c/250x250-000000-80-0-0.jpg",
       "homeCity": "San Francisco, US",
-      "genre": "Bass House"
+      "genre": "Bass House",
+      "twitter": "https://x.com/worthy27_"
     },
     {
       "kind": "dj",
@@ -2657,7 +2857,9 @@
       "slug": "yuvee",
       "imageUrl": "https://cdn-images.dzcdn.net/images/artist/252dabd72b3c9d349aa548262e77e3f9/250x250-000000-80-0-0.jpg",
       "homeCity": "Tel Aviv, Israel",
-      "genre": "Melodic House"
+      "genre": "Melodic House",
+      "instagram": "https://instagram.com/yuvee_music",
+      "youtube": "https://www.youtube.com/@Yuveemusic"
     },
     {
       "kind": "dj",
@@ -2717,261 +2919,21 @@
   "drops": [
     {
       "kind": "dj",
-      "slug": "vini-vici",
-      "field": "website",
-      "reason": "weak or invalid website"
-    },
-    {
-      "kind": "dj",
-      "slug": "westend",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "cloonee",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "hannah-laing",
-      "field": "website",
-      "reason": "weak or invalid website"
-    },
-    {
-      "kind": "dj",
-      "slug": "biscits",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
       "slug": "joseph-capriati",
       "field": "youtube",
       "reason": "youtube name mismatch"
     },
     {
       "kind": "dj",
-      "slug": "joseph-capriati",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "pls-ty",
-      "field": "youtube",
-      "reason": "youtube name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "pls-ty",
-      "field": "twitter",
-      "reason": "handle name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "pls-ty",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "castion",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "paco-osuna",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "lucas",
-      "field": "website",
-      "reason": "website name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "lucas",
-      "field": "youtube",
-      "reason": "youtube name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "lucas",
-      "field": "soundcloud",
-      "reason": "handle name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "lucas",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "gorgon-city",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "innellea",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "crusy",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "jazzy",
-      "field": "website",
-      "reason": "website name mismatch"
-    },
-    {
-      "kind": "dj",
       "slug": "jazzy",
       "field": "soundcloud",
       "reason": "handle name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "jazzy",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "liquid-stranger",
-      "field": "youtube",
-      "reason": "youtube name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "mason-collective",
-      "field": "website",
-      "reason": "website name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "mason-collective",
-      "field": "youtube",
-      "reason": "youtube name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "mason-collective",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "agents-of-time",
-      "field": "bio",
-      "reason": "template bio"
     },
     {
       "kind": "dj",
       "slug": "dj-sredna",
       "field": "youtube",
       "reason": "youtube name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "dj-sredna",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "eli-brown",
-      "field": "website",
-      "reason": "website name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "eli-brown",
-      "field": "instagram",
-      "reason": "handle name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "eli-brown",
-      "field": "youtube",
-      "reason": "youtube name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "eli-brown",
-      "field": "soundcloud",
-      "reason": "handle name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "eli-brown",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "laidback-luke",
-      "field": "youtube",
-      "reason": "youtube name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "laidback-luke",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "loofy",
-      "field": "website",
-      "reason": "weak or invalid website"
-    },
-    {
-      "kind": "dj",
-      "slug": "loofy",
-      "field": "soundcloud",
-      "reason": "handle name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "loofy",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "third-party",
-      "field": "website",
-      "reason": "website name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "third-party",
-      "field": "youtube",
-      "reason": "youtube name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "third-party",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "wax-motif",
-      "field": "bio",
-      "reason": "template bio"
     },
     {
       "kind": "dj",
@@ -2982,12 +2944,6 @@
     {
       "kind": "dj",
       "slug": "fantasm",
-      "field": "website",
-      "reason": "weak or invalid website"
-    },
-    {
-      "kind": "dj",
-      "slug": "fantasm",
       "field": "instagram",
       "reason": "handle name mismatch"
     },
@@ -3002,228 +2958,6 @@
       "slug": "fantasm",
       "field": "soundcloud",
       "reason": "handle name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "fantasm",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "i-hate-models",
-      "field": "website",
-      "reason": "weak or invalid website"
-    },
-    {
-      "kind": "dj",
-      "slug": "i-hate-models",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "kyle-starkey",
-      "field": "website",
-      "reason": "weak or invalid website"
-    },
-    {
-      "kind": "dj",
-      "slug": "kyle-starkey",
-      "field": "youtube",
-      "reason": "youtube name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "kyle-starkey",
-      "field": "soundcloud",
-      "reason": "handle name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "kyle-starkey",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "noizu",
-      "field": "website",
-      "reason": "website name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "noizu",
-      "field": "instagram",
-      "reason": "handle name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "noizu",
-      "field": "youtube",
-      "reason": "youtube name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "noizu",
-      "field": "soundcloud",
-      "reason": "handle name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "noizu",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "rossi",
-      "field": "website",
-      "reason": "weak or invalid website"
-    },
-    {
-      "kind": "dj",
-      "slug": "rossi",
-      "field": "youtube",
-      "reason": "youtube name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "rossi",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "the-shapeshifters",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "tripolism",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "yotto-s-odd-world",
-      "field": "website",
-      "reason": "website name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "yotto-s-odd-world",
-      "field": "instagram",
-      "reason": "handle name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "yotto-s-odd-world",
-      "field": "youtube",
-      "reason": "youtube name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "yotto-s-odd-world",
-      "field": "twitter",
-      "reason": "handle name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "axwell",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "ben-sterling",
-      "field": "youtube",
-      "reason": "youtube name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "ben-sterling",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "dimitri-vegas",
-      "field": "youtube",
-      "reason": "youtube name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "dimitri-vegas",
-      "field": "soundcloud",
-      "reason": "handle name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "dimitri-vegas",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "jonas-blue",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "malive",
-      "field": "website",
-      "reason": "weak or invalid website"
-    },
-    {
-      "kind": "dj",
-      "slug": "malive",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "marnik",
-      "field": "website",
-      "reason": "weak or invalid website"
-    },
-    {
-      "kind": "dj",
-      "slug": "marnik",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "massano",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "notion",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "prospa",
-      "field": "youtube",
-      "reason": "youtube name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "prospa",
-      "field": "soundcloud",
-      "reason": "handle name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "prospa",
-      "field": "bio",
-      "reason": "template bio"
     },
     {
       "kind": "dj",
@@ -3233,87 +2967,33 @@
     },
     {
       "kind": "dj",
-      "slug": "space-92",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "steller",
+      "slug": "ben-sterling",
       "field": "website",
-      "reason": "website name mismatch"
+      "reason": "weak or invalid website"
     },
     {
       "kind": "dj",
-      "slug": "steller",
+      "slug": "argy",
       "field": "youtube",
       "reason": "youtube name mismatch"
     },
     {
       "kind": "dj",
-      "slug": "steller",
+      "slug": "blond",
       "field": "soundcloud",
       "reason": "handle name mismatch"
     },
     {
       "kind": "dj",
-      "slug": "steller",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "sullivan-king",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "ahmed-spins",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "austin-kramer",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "beltran",
+      "slug": "dyen",
       "field": "website",
       "reason": "website name mismatch"
     },
     {
       "kind": "dj",
-      "slug": "beltran",
-      "field": "youtube",
-      "reason": "youtube name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "beltran",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "bijou",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "erick-morillo",
-      "field": "youtube",
-      "reason": "youtube name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "erick-morillo",
-      "field": "bio",
-      "reason": "template bio"
+      "slug": "elfigo",
+      "field": "homeCity",
+      "reason": "city shape rejected"
     },
     {
       "kind": "dj",
@@ -3323,99 +3003,9 @@
     },
     {
       "kind": "dj",
-      "slug": "estiva",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "faster-horses",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "goodboys",
-      "field": "website",
-      "reason": "website name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "goodboys",
-      "field": "instagram",
-      "reason": "handle name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "goodboys",
-      "field": "youtube",
-      "reason": "youtube name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "goodboys",
-      "field": "soundcloud",
-      "reason": "handle name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "goodboys",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
       "slug": "green-velvet",
       "field": "website",
       "reason": "weak or invalid website"
-    },
-    {
-      "kind": "dj",
-      "slug": "green-velvet",
-      "field": "soundcloud",
-      "reason": "handle name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "green-velvet",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "illenium",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "joris-voorn",
-      "field": "soundcloud",
-      "reason": "handle name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "joris-voorn",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "justin-jay",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "malone",
-      "field": "soundcloud",
-      "reason": "handle name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "malone",
-      "field": "bio",
-      "reason": "template bio"
     },
     {
       "kind": "dj",
@@ -3443,63 +3033,21 @@
     },
     {
       "kind": "dj",
-      "slug": "men-machine",
-      "field": "bio",
-      "reason": "template bio"
+      "slug": "samm",
+      "field": "youtube",
+      "reason": "youtube name mismatch"
     },
     {
       "kind": "dj",
-      "slug": "mythm",
-      "field": "bio",
-      "reason": "template bio"
+      "slug": "samm",
+      "field": "soundcloud",
+      "reason": "handle name mismatch"
     },
     {
       "kind": "dj",
-      "slug": "ray-volpe",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "riordan",
+      "slug": "sunnery-james",
       "field": "website",
       "reason": "website name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "riordan",
-      "field": "youtube",
-      "reason": "youtube name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "riordan",
-      "field": "soundcloud",
-      "reason": "handle name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "riordan",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "samm",
-      "field": "youtube",
-      "reason": "youtube name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "samm",
-      "field": "soundcloud",
-      "reason": "handle name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "samm",
-      "field": "bio",
-      "reason": "template bio"
     },
     {
       "kind": "dj",
@@ -3509,81 +3057,15 @@
     },
     {
       "kind": "dj",
-      "slug": "sunnery-james",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "tini-gessler",
-      "field": "website",
-      "reason": "weak or invalid website"
-    },
-    {
-      "kind": "dj",
-      "slug": "tini-gessler",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "vik-benno",
-      "field": "website",
-      "reason": "weak or invalid website"
-    },
-    {
-      "kind": "dj",
-      "slug": "vik-benno",
-      "field": "youtube",
-      "reason": "youtube name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "vik-benno",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "zuezeu",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "monrhea",
-      "field": "website",
-      "reason": "weak or invalid website"
-    },
-    {
-      "kind": "dj",
       "slug": "monrhea",
       "field": "soundcloud",
       "reason": "handle name mismatch"
     },
     {
       "kind": "dj",
-      "slug": "monrhea",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
       "slug": "aeon-mode",
-      "field": "soundcloud",
-      "reason": "handle name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "aeon-mode",
-      "field": "bio",
-      "reason": "bio encoding"
-    },
-    {
-      "kind": "dj",
-      "slug": "ahee",
       "field": "website",
-      "reason": "website name mismatch"
+      "reason": "weak or invalid website"
     },
     {
       "kind": "dj",
@@ -3599,33 +3081,9 @@
     },
     {
       "kind": "dj",
-      "slug": "ahee",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "aizo-clutch",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
       "slug": "akiid",
       "field": "instagram",
       "reason": "handle name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "akiid",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "anastazja",
-      "field": "website",
-      "reason": "weak or invalid website"
     },
     {
       "kind": "dj",
@@ -3635,33 +3093,9 @@
     },
     {
       "kind": "dj",
-      "slug": "anastazja",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
       "slug": "angelphroot",
       "field": "website",
       "reason": "weak or invalid website"
-    },
-    {
-      "kind": "dj",
-      "slug": "angelphroot",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "annicka",
-      "field": "website",
-      "reason": "weak or invalid website"
-    },
-    {
-      "kind": "dj",
-      "slug": "annicka",
-      "field": "bio",
-      "reason": "template bio"
     },
     {
       "kind": "dj",
@@ -3671,57 +3105,15 @@
     },
     {
       "kind": "dj",
-      "slug": "aqutie",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "archie",
-      "field": "website",
-      "reason": "weak or invalid website"
-    },
-    {
-      "kind": "dj",
       "slug": "archie",
       "field": "soundcloud",
       "reason": "handle name mismatch"
     },
     {
       "kind": "dj",
-      "slug": "archie",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "atlantis",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "audiomarc",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "avangart-tabldot",
+      "slug": "arielle-free",
       "field": "website",
       "reason": "weak or invalid website"
-    },
-    {
-      "kind": "dj",
-      "slug": "avangart-tabldot",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "ayybo",
-      "field": "bio",
-      "reason": "template bio"
     },
     {
       "kind": "dj",
@@ -3740,48 +3132,12 @@
       "slug": "bdk",
       "field": "twitter",
       "reason": "handle name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "bdk",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "ben-rau",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "bhaskar",
-      "field": "bio",
-      "reason": "template bio"
     },
     {
       "kind": "dj",
       "slug": "bianca-oblivion",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "biblemami",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "bizarrap",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "black-carl",
       "field": "website",
-      "reason": "website name mismatch"
+      "reason": "weak or invalid website"
     },
     {
       "kind": "dj",
@@ -3791,45 +3147,9 @@
     },
     {
       "kind": "dj",
-      "slug": "black-carl",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "black-circle",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "blond",
+      "slug": "blasterjaxx",
       "field": "website",
-      "reason": "website name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "blond",
-      "field": "soundcloud",
-      "reason": "handle name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "blossom",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "bonobo-solo",
-      "field": "website",
-      "reason": "website name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "born-dirty",
-      "field": "bio",
-      "reason": "template bio"
+      "reason": "weak or invalid website"
     },
     {
       "kind": "dj",
@@ -3842,60 +3162,6 @@
       "slug": "boutross",
       "field": "youtube",
       "reason": "youtube name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "boutross",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "brandy-maina",
-      "field": "youtube",
-      "reason": "youtube name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "brandy-maina",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "budalagi",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "camelphat",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "chaney",
-      "field": "instagram",
-      "reason": "handle name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "chaney",
-      "field": "youtube",
-      "reason": "youtube name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "chaney",
-      "field": "twitter",
-      "reason": "handle name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "chaney",
-      "field": "bio",
-      "reason": "template bio"
     },
     {
       "kind": "dj",
@@ -3905,279 +3171,21 @@
     },
     {
       "kind": "dj",
-      "slug": "chase",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "chase-status",
-      "field": "website",
-      "reason": "website name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "coco-em",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "coco-maria",
-      "field": "website",
-      "reason": "website name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "coco-maria",
-      "field": "instagram",
-      "reason": "handle name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "coco-maria",
-      "field": "soundcloud",
-      "reason": "handle name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "coco-maria",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "colyn",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "crankdat",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "cristoph",
-      "field": "website",
-      "reason": "website name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "cristoph",
-      "field": "youtube",
-      "reason": "youtube name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "cristoph",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "curtiba",
-      "field": "website",
-      "reason": "website name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "curtiba",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
       "slug": "cyril",
       "field": "youtube",
       "reason": "youtube name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "cyril",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "da-africa-deep",
-      "field": "website",
-      "reason": "weak or invalid website"
-    },
-    {
-      "kind": "dj",
-      "slug": "da-africa-deep",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "das-kapital",
-      "field": "website",
-      "reason": "weak or invalid website"
-    },
-    {
-      "kind": "dj",
-      "slug": "das-kapital",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "david-herrlich",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "demi-riquisimo",
-      "field": "website",
-      "reason": "weak or invalid website"
-    },
-    {
-      "kind": "dj",
-      "slug": "demi-riquisimo",
-      "field": "instagram",
-      "reason": "handle name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "demi-riquisimo",
-      "field": "soundcloud",
-      "reason": "handle name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "demi-riquisimo",
-      "field": "twitter",
-      "reason": "handle name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "demi-riquisimo",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "dillon-francis",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "diplo",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "dj-boboss",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "dj-gregory",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "dj-iv",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "dj-l-a-j",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "dj-lesoul",
-      "field": "youtube",
-      "reason": "youtube name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "dj-lesoul",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "dj-swisha",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "dj-topgun",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "djknator",
-      "field": "website",
-      "reason": "website name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "djknator",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "dombresky",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "drybabe",
-      "field": "bio",
-      "reason": "template bio"
     },
     {
       "kind": "dj",
       "slug": "dustycloud",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "dyen",
-      "field": "website",
-      "reason": "website name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "dyen",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "ebenezer",
-      "field": "website",
-      "reason": "website name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "ebenezer",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "ede",
       "field": "website",
       "reason": "weak or invalid website"
+    },
+    {
+      "kind": "dj",
+      "slug": "ebenezer",
+      "field": "website",
+      "reason": "website name mismatch"
     },
     {
       "kind": "dj",
@@ -4193,39 +3201,9 @@
     },
     {
       "kind": "dj",
-      "slug": "ede",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
       "slug": "elva",
       "field": "website",
       "reason": "website name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "elva",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "emi-navarro",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "enrico-sangiuliano",
-      "field": "twitter",
-      "reason": "handle name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "enrico-sangiuliano",
-      "field": "bio",
-      "reason": "template bio"
     },
     {
       "kind": "dj",
@@ -4235,42 +3213,6 @@
     },
     {
       "kind": "dj",
-      "slug": "ephwurd",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "eskuche",
-      "field": "website",
-      "reason": "weak or invalid website"
-    },
-    {
-      "kind": "dj",
-      "slug": "eskuche",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "eyes-everywhere",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "faustix",
-      "field": "website",
-      "reason": "weak or invalid website"
-    },
-    {
-      "kind": "dj",
-      "slug": "faustix",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
       "slug": "fifi",
       "field": "instagram",
       "reason": "handle name mismatch"
@@ -4280,30 +3222,12 @@
       "slug": "fifi",
       "field": "youtube",
       "reason": "youtube name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "fifi",
-      "field": "bio",
-      "reason": "template bio"
     },
     {
       "kind": "dj",
       "slug": "fish56octagon",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "flava-d",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "folamour",
-      "field": "website",
-      "reason": "website name mismatch"
+      "field": "soundcloud",
+      "reason": "handle name mismatch"
     },
     {
       "kind": "dj",
@@ -4316,12 +3240,6 @@
       "slug": "folamour",
       "field": "twitter",
       "reason": "handle name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "folamour",
-      "field": "bio",
-      "reason": "template bio"
     },
     {
       "kind": "dj",
@@ -4343,51 +3261,9 @@
     },
     {
       "kind": "dj",
-      "slug": "fonzo",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "franky-rizardo",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "franky-wah",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
       "slug": "funtcase",
       "field": "youtube",
       "reason": "youtube name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "funtcase",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "gallya",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "general-c-mamane",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "giant",
-      "field": "bio",
-      "reason": "template bio"
     },
     {
       "kind": "dj",
@@ -4397,99 +3273,27 @@
     },
     {
       "kind": "dj",
-      "slug": "goldmax",
-      "field": "bio",
-      "reason": "template bio"
+      "slug": "goodboys",
+      "field": "instagram",
+      "reason": "handle name mismatch"
     },
     {
       "kind": "dj",
-      "slug": "grabba-ranks",
-      "field": "bio",
-      "reason": "template bio"
+      "slug": "goodboys",
+      "field": "youtube",
+      "reason": "youtube name mismatch"
     },
     {
       "kind": "dj",
-      "slug": "guido-penno",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "hania-rani",
-      "field": "homeCity",
-      "reason": "city shape rejected"
-    },
-    {
-      "kind": "dj",
-      "slug": "hania-rani",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "harpriya",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "hayden-james",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "hi-lo",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "hu-dat",
-      "field": "website",
-      "reason": "weak or invalid website"
-    },
-    {
-      "kind": "dj",
-      "slug": "hu-dat",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "hyperbeam",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "ilan-bluestone",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "imaniii",
-      "field": "website",
-      "reason": "weak or invalid website"
-    },
-    {
-      "kind": "dj",
-      "slug": "imaniii",
-      "field": "bio",
-      "reason": "template bio"
+      "slug": "goodboys",
+      "field": "soundcloud",
+      "reason": "handle name mismatch"
     },
     {
       "kind": "dj",
       "slug": "imanu",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "internet-girl",
-      "field": "bio",
-      "reason": "template bio"
+      "field": "instagram",
+      "reason": "handle name mismatch"
     },
     {
       "kind": "dj",
@@ -4499,24 +3303,12 @@
     },
     {
       "kind": "dj",
-      "slug": "jackie-hollander",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
       "slug": "jackson",
       "field": "website",
       "reason": "website name mismatch"
     },
     {
       "kind": "dj",
-      "slug": "jackson",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
       "slug": "jaded",
       "field": "youtube",
       "reason": "youtube name mismatch"
@@ -4529,99 +3321,15 @@
     },
     {
       "kind": "dj",
-      "slug": "jaded",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "jamiie",
-      "field": "website",
-      "reason": "weak or invalid website"
-    },
-    {
-      "kind": "dj",
-      "slug": "jamiie",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "jaytech",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "jeremy-olander",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "jessica-audiffred",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "joe-kay",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "joshwa",
-      "field": "website",
-      "reason": "weak or invalid website"
-    },
-    {
-      "kind": "dj",
       "slug": "joshwa",
       "field": "youtube",
       "reason": "youtube name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "joshwa",
-      "field": "soundcloud",
-      "reason": "handle name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "joshwa",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "joyhauser",
-      "field": "twitter",
-      "reason": "handle name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "joyhauser",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "judeline",
-      "field": "homeCity",
-      "reason": "city shape rejected"
-    },
-    {
-      "kind": "dj",
-      "slug": "judeline",
-      "field": "bio",
-      "reason": "template bio"
     },
     {
       "kind": "dj",
       "slug": "julian-fijma",
-      "field": "bio",
-      "reason": "template bio"
+      "field": "website",
+      "reason": "weak or invalid website"
     },
     {
       "kind": "dj",
@@ -4637,135 +3345,15 @@
     },
     {
       "kind": "dj",
-      "slug": "just-bee",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "k-dot",
-      "field": "youtube",
-      "reason": "youtube name mismatch"
-    },
-    {
-      "kind": "dj",
       "slug": "k-dot",
       "field": "soundcloud",
       "reason": "handle name mismatch"
     },
     {
       "kind": "dj",
-      "slug": "k-dot",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "k-c-driller",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "kaaze",
-      "field": "website",
-      "reason": "weak or invalid website"
-    },
-    {
-      "kind": "dj",
-      "slug": "kaaze",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
       "slug": "kamo-mphela",
       "field": "youtube",
       "reason": "youtube name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "kamo-mphela",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "karaba",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "kaskade",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "kayzo",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "kendoll",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "khalil",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "khomha",
-      "field": "homeCity",
-      "reason": "city shape rejected"
-    },
-    {
-      "kind": "dj",
-      "slug": "khomha",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "kiasmos",
-      "field": "homeCity",
-      "reason": "city shape rejected"
-    },
-    {
-      "kind": "dj",
-      "slug": "kiasmos",
-      "field": "website",
-      "reason": "website name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "kiasmos",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "kilopatrah-jones",
-      "field": "website",
-      "reason": "weak or invalid website"
-    },
-    {
-      "kind": "dj",
-      "slug": "kilopatrah-jones",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "kloyd",
-      "field": "bio",
-      "reason": "template bio"
     },
     {
       "kind": "dj",
@@ -4778,18 +3366,6 @@
       "slug": "kora",
       "field": "youtube",
       "reason": "youtube name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "kora",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "kyle-watson",
-      "field": "bio",
-      "reason": "template bio"
     },
     {
       "kind": "dj",
@@ -4805,78 +3381,6 @@
     },
     {
       "kind": "dj",
-      "slug": "lazarusman",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "len-faki",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "liva-k",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "locklead",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "loud-luxury",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "luuk-van-dijk",
-      "field": "website",
-      "reason": "website name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "luuk-van-dijk",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "maceo-plex",
-      "field": "website",
-      "reason": "website name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "maceo-plex",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "marcel-vautier",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "massane",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "matisse",
-      "field": "website",
-      "reason": "website name mismatch"
-    },
-    {
-      "kind": "dj",
       "slug": "matisse",
       "field": "youtube",
       "reason": "youtube name mismatch"
@@ -4886,18 +3390,6 @@
       "slug": "matisse",
       "field": "soundcloud",
       "reason": "handle name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "matisse",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "matt-fax",
-      "field": "bio",
-      "reason": "template bio"
     },
     {
       "kind": "dj",
@@ -4913,75 +3405,9 @@
     },
     {
       "kind": "dj",
-      "slug": "matty-ralph",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "max-graham",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "max-mylo",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "melanie-ribbe",
-      "field": "youtube",
-      "reason": "youtube name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "melanie-ribbe",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "menesix",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "mengzy",
-      "field": "website",
-      "reason": "weak or invalid website"
-    },
-    {
-      "kind": "dj",
-      "slug": "mengzy",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
       "slug": "michael-cassette",
       "field": "instagram",
       "reason": "handle name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "michael-cassette",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "miguel-bastida",
-      "field": "website",
-      "reason": "weak or invalid website"
-    },
-    {
-      "kind": "dj",
-      "slug": "miguel-bastida",
-      "field": "bio",
-      "reason": "template bio"
     },
     {
       "kind": "dj",
@@ -4997,135 +3423,9 @@
     },
     {
       "kind": "dj",
-      "slug": "miguelle",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "mihalis-safras",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "mila-alias",
-      "field": "website",
-      "reason": "website name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "mila-alias",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
       "slug": "milena-adamis",
       "field": "website",
       "reason": "weak or invalid website"
-    },
-    {
-      "kind": "dj",
-      "slug": "milena-adamis",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "miss-dre",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "mita-gami",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "mitis",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "monolink",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "moon-boots",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "morena-leraba",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "morten",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "muchakk-mu540",
-      "field": "homeCity",
-      "reason": "city shape rejected"
-    },
-    {
-      "kind": "dj",
-      "slug": "muchakk-mu540",
-      "field": "bio",
-      "reason": "bio encoding"
-    },
-    {
-      "kind": "dj",
-      "slug": "myles-o-neal",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "natte-visstick",
-      "field": "website",
-      "reason": "weak or invalid website"
-    },
-    {
-      "kind": "dj",
-      "slug": "natte-visstick",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "neon-deluz",
-      "field": "website",
-      "reason": "weak or invalid website"
-    },
-    {
-      "kind": "dj",
-      "slug": "neon-deluz",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "netsky",
-      "field": "youtube",
-      "reason": "youtube name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "netsky",
-      "field": "bio",
-      "reason": "template bio"
     },
     {
       "kind": "dj",
@@ -5135,75 +3435,9 @@
     },
     {
       "kind": "dj",
-      "slug": "nikolina",
-      "field": "website",
-      "reason": "weak or invalid website"
-    },
-    {
-      "kind": "dj",
-      "slug": "nikolina",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "nitti-gritti",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "njelic",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
       "slug": "nosi",
       "field": "instagram",
       "reason": "handle name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "nosi",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "olafur-arnalds",
-      "field": "homeCity",
-      "reason": "city shape rejected"
-    },
-    {
-      "kind": "dj",
-      "slug": "olafur-arnalds",
-      "field": "website",
-      "reason": "website name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "olafur-arnalds",
-      "field": "youtube",
-      "reason": "youtube name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "olafur-arnalds",
-      "field": "soundcloud",
-      "reason": "handle name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "olafur-arnalds",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "omnom",
-      "field": "bio",
-      "reason": "template bio"
     },
     {
       "kind": "dj",
@@ -5222,30 +3456,6 @@
       "slug": "pegassi",
       "field": "twitter",
       "reason": "handle name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "pegassi",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "phelimuncasi",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "phlegmatic-dogs",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "pigeon-hole",
-      "field": "bio",
-      "reason": "template bio"
     },
     {
       "kind": "dj",
@@ -5255,60 +3465,6 @@
     },
     {
       "kind": "dj",
-      "slug": "pnny",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "porter-robinson",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "push",
-      "field": "website",
-      "reason": "website name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "quackson",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "rampa",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "raw-district",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "restricted",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "rinzen",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "rohaan",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
       "slug": "rommii",
       "field": "instagram",
       "reason": "handle name mismatch"
@@ -5318,108 +3474,6 @@
       "slug": "rommii",
       "field": "youtube",
       "reason": "youtube name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "rommii",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "ronski-speed",
-      "field": "website",
-      "reason": "weak or invalid website"
-    },
-    {
-      "kind": "dj",
-      "slug": "ronski-speed",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "rony-seikaly",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "rules",
-      "field": "website",
-      "reason": "website name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "rules",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "ry-x",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "saint-ludo",
-      "field": "website",
-      "reason": "weak or invalid website"
-    },
-    {
-      "kind": "dj",
-      "slug": "saint-ludo",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "samantha-loveridge",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "sammy-virji",
-      "field": "website",
-      "reason": "website name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "sammy-virji",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "san-holo",
-      "field": "instagram",
-      "reason": "handle name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "san-holo",
-      "field": "youtube",
-      "reason": "youtube name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "san-holo",
-      "field": "twitter",
-      "reason": "handle name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "san-holo",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "sandra-raw",
-      "field": "bio",
-      "reason": "template bio"
     },
     {
       "kind": "dj",
@@ -5438,18 +3492,6 @@
       "slug": "sarah-de-warren",
       "field": "twitter",
       "reason": "handle name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "sarah-de-warren",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "second-sine",
-      "field": "bio",
-      "reason": "template bio"
     },
     {
       "kind": "dj",
@@ -5459,45 +3501,15 @@
     },
     {
       "kind": "dj",
-      "slug": "shanti-celeste",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
       "slug": "shee",
       "field": "youtube",
       "reason": "youtube name mismatch"
     },
     {
       "kind": "dj",
-      "slug": "shee",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
       "slug": "shimza",
       "field": "youtube",
       "reason": "youtube name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "shimza",
-      "field": "twitter",
-      "reason": "handle name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "shimza",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "sidequest",
-      "field": "bio",
-      "reason": "template bio"
     },
     {
       "kind": "dj",
@@ -5507,48 +3519,6 @@
     },
     {
       "kind": "dj",
-      "slug": "skepsis",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "soulidan",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "spartaque",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "spfdj",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "sub-focus",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "subez",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "sultan-shepard",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
       "slug": "tereza",
       "field": "instagram",
       "reason": "handle name mismatch"
@@ -5558,54 +3528,6 @@
       "slug": "tereza",
       "field": "youtube",
       "reason": "youtube name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "tereza",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "the-blaze",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "the-prototypes",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "tim-engelhardt",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "tim-green",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "tobehonest",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "tons",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "tony-romera",
-      "field": "bio",
-      "reason": "template bio"
     },
     {
       "kind": "dj",
@@ -5615,127 +3537,7 @@
     },
     {
       "kind": "dj",
-      "slug": "torren-foot",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
       "slug": "toyzz",
-      "field": "website",
-      "reason": "website name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "toyzz",
-      "field": "soundcloud",
-      "reason": "handle name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "toyzz",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "trevormusiq",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "ts7",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "tuta-m",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "umlilo",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "vltra",
-      "field": "soundcloud",
-      "reason": "handle name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "vltra",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "vnssa",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "wakyin",
-      "field": "website",
-      "reason": "website name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "wakyin",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "wavhart",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "wes-pierce",
-      "field": "website",
-      "reason": "website name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "wes-pierce",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "whomadewho",
-      "field": "website",
-      "reason": "website name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "wooli",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "worship",
-      "field": "website",
-      "reason": "website name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "worship",
-      "field": "youtube",
-      "reason": "youtube name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "worship",
       "field": "soundcloud",
       "reason": "handle name mismatch"
     },
@@ -5750,78 +3552,6 @@
       "slug": "worthy",
       "field": "youtube",
       "reason": "youtube name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "worthy",
-      "field": "twitter",
-      "reason": "handle name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "worthy",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "ydg",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "yousuke-yukimatsu",
-      "field": "website",
-      "reason": "weak or invalid website"
-    },
-    {
-      "kind": "dj",
-      "slug": "yousuke-yukimatsu",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "yuvee",
-      "field": "instagram",
-      "reason": "handle name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "yuvee",
-      "field": "youtube",
-      "reason": "youtube name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "yuvee",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "zhu",
-      "field": "youtube",
-      "reason": "youtube name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "zhu",
-      "field": "bio",
-      "reason": "template bio"
-    },
-    {
-      "kind": "dj",
-      "slug": "zomboy",
-      "field": "youtube",
-      "reason": "youtube name mismatch"
-    },
-    {
-      "kind": "dj",
-      "slug": "zomboy",
-      "field": "bio",
-      "reason": "template bio"
     }
   ]
 }
