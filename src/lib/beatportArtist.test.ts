@@ -44,6 +44,13 @@ assert.equal(
 );
 assert.equal(
   resolveDjBeatport({
+    beatport: "https://www.beatport.com/artist/bullet-tooth/1146765",
+    website: null,
+  }),
+  "https://www.beatport.com/artist/bullet-tooth/1146765",
+);
+assert.equal(
+  resolveDjBeatport({
     bio: "Bass House. Beatport artist/ac-slater/52351.",
     website: "https://www.djacslater.com/",
   }),

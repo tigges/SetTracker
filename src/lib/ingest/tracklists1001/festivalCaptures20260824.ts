@@ -224,8 +224,10 @@ export const TL_ELY_OAKS_TML_WE2_MAINSTAGE_2026: FingerprintSeedRow[] = [
  * https://www.1001tracklists.com/tracklist/1rl30xh1/bullet-tooth-core-stage-tomorrowland-weekend-2-belgium-2026-07-24.html
  * Overlay name TL_BULLET_TOOTH is too generic.
  * No SoundCloud in the operator paste — do not invent an SC slug.
+ * Sister official watches (no 1001 in the paste — do not invent clocks):
+ * DJ Mag HQ yt-7jUXS12-7f0, Beatport Live Mint yt-_4P9Y5KN9n4.
  * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-G-DciaWb5KY"] = TL_BULLET_TOOTH_TML_WE2_CORE_2026
- * Captured 2026-08-24 — provenance 1001tl.
+ * Curated in youtube/videos.ts. Captured 2026-08-24 — provenance 1001tl.
  */
 export const TL_BULLET_TOOTH_TML_WE2_CORE_2026: FingerprintSeedRow[] = [
   { at: "0:12", artist: "Running Hot", title: "Bumpin'" },

@@ -151,6 +151,7 @@ import {
   TL_MADDIX_TML_WE1_2026,
   TL_MARLON_HOFFSTADT_TML_WE1_2026,
   TL_4444_OF_A_KIND_TML_WE1_FREEDOM_2026,
+  TL_BULLET_TOOTH_TML_WE2_CORE_2026,
 } from "../tracklists1001/seeds";
 import type { RawArtist } from "../types";
 import { slugify } from "../types";
@@ -1034,6 +1035,48 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/132dgbd9/4444-of-a-kind-freedom-stage-tomorrowland-weekend-1-belgium-2026-07-17.html",
     tracklist1001: TL_4444_OF_A_KIND_TML_WE1_FREEDOM_2026,
+  },
+  {
+    // Tomorrowland official playback — CORE Stage WE2. Existing 9-clock
+    // overlay TL_BULLET_TOOTH_TML_WE2_CORE_2026. No SoundCloud in the
+    // operator paste — do not invent an SC slug. Distinct from DJ Mag HQ
+    // (yt-7jUXS12-7f0) and Beatport Live Mint (yt-_4P9Y5KN9n4).
+    video: "https://www.youtube.com/watch?v=G-DciaWb5KY",
+    primaryArtist: dj("Bullet Tooth", { accent: "#ff6b35" }),
+    genre: "UK Garage",
+    type: "festival",
+    title: "Bullet Tooth WE2 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1rl30xh1/bullet-tooth-core-stage-tomorrowland-weekend-2-belgium-2026-07-24.html",
+    tracklist1001: TL_BULLET_TOOTH_TML_WE2_CORE_2026,
+  },
+  {
+    // Official DJ Mag HQ studio set. No 1001 URL or SoundCloud in the
+    // operator paste — do not invent clocks or an SC slug. Distinct from
+    // CORE WE2 and Beatport Live Mint.
+    video: "https://www.youtube.com/watch?v=7jUXS12-7f0",
+    primaryArtist: dj("Bullet Tooth", { accent: "#ff6b35" }),
+    genre: "UK Garage",
+    type: "mix",
+    title: "Bullet Tooth DJ Set Live From DJ Mag HQ",
+    seriesName: "DJ Mag HQ",
+    eventName: "DJ Mag",
+  },
+  {
+    // Official Beatport Live upload — The Block x Mint Festival 2026.
+    // No 1001 URL or SoundCloud in the operator paste — do not invent
+    // clocks, scrape Beatport HTML, or invent an SC slug. Distinct from
+    // CORE WE2 and DJ Mag HQ.
+    video: "https://www.youtube.com/watch?v=_4P9Y5KN9n4",
+    primaryArtist: dj("Bullet Tooth", { accent: "#ff6b35" }),
+    genre: "UK Garage",
+    type: "festival",
+    title:
+      "Bullet Tooth DJ Set | The Block x Mint Festival 2026 | @beatport Live",
+    seriesName: "Beatport Live",
+    eventName: "Mint Festival",
   },
   {
     // Official Purified Radio 520; timed 1001 capture (same list as SC).

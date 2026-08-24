@@ -386,6 +386,17 @@ assert.equal(
 assert.equal(
   evaluateEntityCompleteRow({
     kind: "dj",
+    slug: "bullet-tooth",
+    name: "Bullet Tooth",
+    field: "genre",
+    value: "UK Garage",
+    evidence: "Beatport artist page",
+  }).value,
+  "UK Garage",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
     slug: "mau-p",
     name: "Mau P",
     field: "homeCity",

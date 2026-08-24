@@ -110,6 +110,8 @@ assert.equal(looksLikeShowSeriesPrefix("4444 OF A KIND Freedom WE1"), false);
 assert.equal(stripFestivalEditionSuffix("4444 OF A KIND Freedom WE1"), "4444 OF A KIND");
 assert.equal(sanitizeArtistName("4444 OF A KIND Freedom WE1"), "4444 OF A KIND");
 assert.equal(sanitizeArtistName("4444 OF A KIND"), "4444 OF A KIND");
+assert.equal(stripFestivalEditionSuffix("Bullet Tooth WE2"), "Bullet Tooth");
+assert.equal(sanitizeArtistName("Bullet Tooth WE2"), "Bullet Tooth");
 assert.equal(sanitizeArtistName("June, 2026"), null);
 assert.equal(sanitizeArtistName("July, 2026"), null);
 

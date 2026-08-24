@@ -267,6 +267,21 @@ assert.equal(kindFreedom.primary.slug, "4444-of-a-kind");
 assert.equal(kindFreedom.primary.name, "4444 OF A KIND");
 assert.equal(kindFreedom.collaborators.length, 0);
 assert.equal(
+  performingCreditFromTitle("Bullet Tooth WE2 | Tomorrowland 2026"),
+  "Bullet Tooth",
+);
+assert.equal(
+  performingCreditFromTitle("Bullet Tooth DJ Set Live From DJ Mag HQ"),
+  "Bullet Tooth",
+);
+const bulletMint = artistsForSet(
+  "Bullet Tooth DJ Set | The Block x Mint Festival 2026 | @beatport Live",
+  { name: "Bullet Tooth", slug: "bullet-tooth", accent: "#ff6b35" },
+);
+assert.equal(bulletMint.primary.slug, "bullet-tooth");
+assert.equal(bulletMint.primary.name, "Bullet Tooth");
+assert.equal(bulletMint.collaborators.length, 0);
+assert.equal(
   performingCreditFromTitle(
     "Tomorrowland Friendship Mix with Steve Aoki - August, 2026",
   ),

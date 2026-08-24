@@ -1268,4 +1268,15 @@ export const DJ_SOCIAL_PINS: DjSocialPin[] = [
     website: "https://www.steveangello.com/",
     bio: "Progressive House. Stockholm. Official steveangello.com — SC steveangello, YT /steveangello, IG @steveangello, X @SteveAngello. Facebook / TikTok / Spotify on roster.",
   },
+  {
+    slug: "bullet-tooth",
+    name: "Bullet Tooth",
+    accent: "#ff6b35",
+    soundcloud: null,
+    youtube: null,
+    instagram: null,
+    website: null,
+    beatport: "https://www.beatport.com/artist/bullet-tooth/1146765",
+    bio: "UK Garage. Beatport artist/bullet-tooth/1146765 — no first-party homepage, SoundCloud, or YouTube channel confirmed.",
+  },
 ];

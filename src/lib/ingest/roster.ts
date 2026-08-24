@@ -1765,6 +1765,17 @@ export const ARTIST_ROSTER_CURATED: ArtistRosterEntry[] = [
     priority: "high",
   },
   {
+    name: "Bullet Tooth",
+    genre: "UK Garage",
+    accent: "#ff6b35",
+    // Official Beatport artist/bullet-tooth/1146765. No SoundCloud or
+    // YouTube channel in the operator paste — do not invent handles.
+    // Festival watches live in youtube/videos.ts (CORE WE2, DJ Mag HQ,
+    // Beatport Live Mint). Beatport is discovery only — never website.
+    socials: ["https://www.beatport.com/artist/bullet-tooth/1146765"],
+    priority: "normal",
+  },
+  {
     name: "Lucas & Steve",
     genre: "Future House",
     accent: "#ffb703",
