@@ -4,6 +4,10 @@ import { cueIndexAtRatio, playSpans, stripIsDense } from "./setStrip";
 const spans = playSpans([0, 10, 30], 60);
 assert.deepEqual(spans, [10, 20, 30]);
 assert.deepEqual(playSpans([5, 5, 20], 40), [1, 15, 20]);
+assert.deepEqual(
+  playSpans([{ timestamp: 0, until: 150 }, 804], 3441),
+  [150, 3441 - 804],
+);
 
 assert.equal(cueIndexAtRatio(0, spans), 0);
 assert.equal(cueIndexAtRatio(0.1, spans), 0);

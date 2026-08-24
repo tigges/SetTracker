@@ -36,6 +36,7 @@ import { resolveSetSlug } from "@/lib/ingest/sourceRemaps";
 import { collapseConsecutivePlays, playCollapseKey } from "@/lib/playCollapse";
 import {
   isPublishSpineProvenance,
+  isTalkPlay,
   publishListTally,
   publishSetPlays,
 } from "@/lib/publishPlays";
@@ -488,7 +489,8 @@ export async function getSetBySlug(slug: string) {
         imageUrl: a.dj.imageUrl,
         isPrimary: a.isPrimary,
       })),
-    statusCounts: tallyStatuses(plays),
+    statusCounts: tallyStatuses(plays.filter((p) => !isTalkPlay(p))),
+    trackCount: plays.filter((p) => !isTalkPlay(p)).length,
     plays,
   };
 }

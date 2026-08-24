@@ -71,18 +71,37 @@ export function looksLikeLiveFestivalRadio(title?: string | null): boolean {
   return !!title && LIVE_FESTIVAL_RADIO.test(title);
 }
 
+export const RADIO_TALK_OPEN_SEC = 150;
+export const RADIO_TALK_CLOSE_SEC = 75;
+
+export type TalkRegion = { startSec: number; endSec: number };
+
+/** Weekly radio open/close — not live-from-festival mixes. */
+export function radioTalkRegions(
+  durationSec: number,
+  meta: { type?: string | null; title?: string | null },
+): TalkRegion[] {
+  if (meta.type !== "radio") return [];
+  if (looksLikeLiveFestivalRadio(meta.title)) return [];
+  if (durationSec < 20 * 60) return [];
+  const openEnd = Math.min(RADIO_TALK_OPEN_SEC, durationSec);
+  const regions: TalkRegion[] = [{ startSec: 0, endSec: openEnd }];
+  const closeStart = durationSec - RADIO_TALK_CLOSE_SEC;
+  if (closeStart > openEnd) {
+    regions.push({ startSec: closeStart, endSec: durationSec });
+  }
+  return regions;
+}
+
 /** Weekly radio-with-links: skip invented cues in the open/close. */
 export function isRadioTalkWindow(
   timestamp: number,
   durationSec: number,
   meta: { type?: string | null; title?: string | null },
 ): boolean {
-  if (meta.type !== "radio") return false;
-  if (looksLikeLiveFestivalRadio(meta.title)) return false;
-  if (durationSec < 20 * 60) return false;
-  if (timestamp < 150) return true;
-  if (timestamp > durationSec - 75) return true;
-  return false;
+  return radioTalkRegions(durationSec, meta).some(
+    (r) => timestamp >= r.startSec && timestamp < r.endSec,
+  );
 }
 
 export function commentCueRank(kind: SourceCommentKind): number {

@@ -1,12 +1,18 @@
+export type StripCue = number | { timestamp: number; until?: number | null };
+
 /** Cue lengths for the set strip. Zero-length gaps become 1s so they still paint. */
 export function playSpans(
-  timestamps: number[],
+  timestamps: StripCue[],
   durationSec: number,
 ): number[] {
   const end = Math.max(durationSec, 0);
-  return timestamps.map((start, i) => {
-    const next = i < timestamps.length - 1 ? timestamps[i + 1] : end;
-    return Math.max(next - start, 1);
+  const cues = timestamps.map((t) =>
+    typeof t === "number" ? { timestamp: t, until: null } : t,
+  );
+  return cues.map((cue, i) => {
+    const next = i < cues.length - 1 ? cues[i + 1]!.timestamp : end;
+    const hard = cue.until != null ? Math.min(cue.until, next) : next;
+    return Math.max(hard - cue.timestamp, 1);
   });
 }
 

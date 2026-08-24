@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import {
+  COMMENT_LIKELY_TALK,
   COMMENT_LOW_CONFIDENCE,
   COMMENT_NOT_DETECTED,
   hasVendorDetectionCopy,
@@ -54,7 +55,7 @@ describe("publishSetPlays", () => {
     const published = publishSetPlays(plays, {
       durationSec: 3600,
       genre: "Techno",
-      type: "radio",
+      type: "festival",
     });
     assert.ok(published.length >= 15 && published.length <= 20);
     assert.ok(published.every((p) => !hasVendorDetectionCopy(p.title, p.rawText, p.idNote)));
@@ -178,6 +179,76 @@ describe("publishSetPlays", () => {
         .filter((p) => p.id.startsWith("expected:"))
         .every((p) => p.timestamp >= 150),
     );
+  });
+
+  it("labels weekly radio open and close as likely talk", () => {
+    const published = publishSetPlays(
+      [
+        play({
+          id: "ask",
+          timestamp: 804,
+          provenance: "soundcloud",
+          idStatus: "unresolved_id",
+          title: "ID - ID",
+          idNote: "What is this track!",
+        }),
+      ],
+      {
+        durationSec: 3441,
+        genre: "Techno",
+        type: "radio",
+        title: "Amelie Lens Radio Show 015",
+      },
+    );
+    const talks = published.filter((p) => p.segmentKind === "talk");
+    assert.equal(talks.length, 2);
+    assert.equal(talks[0]!.timestamp, 0);
+    assert.equal(talks[0]!.talkUntil, 150);
+    assert.equal(talks[0]!.detectionComment, COMMENT_LIKELY_TALK);
+    assert.equal(talks[1]!.timestamp, 3441 - 75);
+    assert.ok(published.filter((p) => p.segmentKind !== "talk").every((p) => p.position > 0));
+  });
+
+  it("does not label talk on live-from-festival radio or when a cue sits in the open", () => {
+    const live = publishSetPlays(
+      [
+        play({
+          id: "hit",
+          timestamp: 90,
+          idStatus: "identified",
+          title: "Exhale",
+          artistName: "Amelie Lens",
+          trackSlug: "exhale",
+        }),
+      ],
+      {
+        durationSec: 3600,
+        genre: "Techno",
+        type: "radio",
+        title: "Exhale Radio 121 live from Tomorrowland",
+      },
+    );
+    assert.equal(live.filter((p) => p.segmentKind === "talk").length, 0);
+
+    const blocked = publishSetPlays(
+      [
+        play({
+          id: "ask",
+          timestamp: 30,
+          provenance: "soundcloud",
+          idStatus: "unresolved_id",
+          title: "ID - ID",
+          idNote: "id?",
+        }),
+      ],
+      {
+        durationSec: 3600,
+        genre: "Techno",
+        type: "radio",
+        title: "Amelie Lens Radio Show 015",
+      },
+    );
+    assert.ok(!blocked.some((p) => p.segmentKind === "talk" && p.timestamp === 0));
   });
 
   it("keeps a title-only first-party clock", () => {

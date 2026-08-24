@@ -6,6 +6,7 @@ import {
   extractQuotedTitle,
   isRadioTalkWindow,
   looksLikeLiveFestivalRadio,
+  radioTalkRegions,
 } from "./sourceComments";
 
 describe("classifySourceComment", () => {
@@ -64,6 +65,21 @@ describe("radio talk windows", () => {
         title: "Exhale Radio 121 live from Tomorrowland",
       }),
       false,
+    );
+    const weekly = radioTalkRegions(3441, {
+      type: "radio",
+      title: "Amelie Lens Radio Show 015",
+    });
+    assert.deepEqual(weekly, [
+      { startSec: 0, endSec: 150 },
+      { startSec: 3441 - 75, endSec: 3441 },
+    ]);
+    assert.deepEqual(
+      radioTalkRegions(3600, {
+        type: "radio",
+        title: "Exhale Radio 121 live from Tomorrowland",
+      }),
+      [],
     );
   });
 });

@@ -12,6 +12,7 @@ import { setHostHeadline } from "@/lib/brandHosts";
 import { detectPlaybackHost, unusedOfficialHostLinks } from "@/lib/playback";
 import { pageMeta } from "@/lib/site";
 import { SET_TYPE_META, fmtDate, fmtDuration } from "@/lib/status";
+import { isTalkPlay } from "@/lib/publishPlays";
 import { beatportCoverage } from "@/lib/trackMeta";
 
 export async function generateStaticParams() {
@@ -32,7 +33,7 @@ export async function generateMetadata({
   const artists = set.artists.map((a) => a.name).join(" b2b ");
   return pageMeta({
     title: set.title,
-    description: [artists, set.event?.name, fmtDate(set.publishedAt), `${set.plays.length} tracks`]
+    description: [artists, set.event?.name, fmtDate(set.publishedAt), `${set.trackCount} tracks`]
       .filter(Boolean)
       .join(" · "),
     path: `/sets/${set.slug}`,
@@ -61,7 +62,7 @@ export default async function SetPage({
     seriesName: set.series?.name,
     eventName: set.event?.name,
   });
-  const coverage = beatportCoverage(set.plays);
+  const coverage = beatportCoverage(set.plays.filter((p) => !isTalkPlay(p)));
   return (
     <SetListen>
     <div>
@@ -145,7 +146,7 @@ export default async function SetPage({
           <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-[12px] text-muted2">
             <span className="mono">{fmtDate(set.publishedAt)}</span>
             <span className="mono">{fmtDuration(set.durationSec)}</span>
-            <span className="mono">{set.plays.length} tracks</span>
+            <span className="mono">{set.trackCount} tracks</span>
             {set.sourceName && (
               <span>
                 Source:{" "}
@@ -249,7 +250,7 @@ export default async function SetPage({
               slug: set.slug,
               artistLine: set.artists.map((a) => a.name).join(" b2b "),
             }}
-            plays={set.plays.map((p) => ({
+            plays={set.plays.filter((p) => !isTalkPlay(p)).map((p) => ({
               position: p.position,
               timestamp: p.timestamp,
               title: p.title,

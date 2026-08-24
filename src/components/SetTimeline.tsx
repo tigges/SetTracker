@@ -17,13 +17,15 @@ import {
   STATUS_META,
   fmtTimestamp,
   listenLinks,
-  statusColor,
   type IdStatus,
 } from "@/lib/status";
 import {
+  COMMENT_LIKELY_TALK,
   COMMENT_LOW_CONFIDENCE,
   hasVendorDetectionCopy,
+  isTalkPlay,
   publicStatusLabel,
+  segmentColor,
 } from "@/lib/publishPlays";
 import type { PlayRow } from "@/lib/queries";
 import { playablePlaybackUrl } from "@/lib/playback";
@@ -103,11 +105,12 @@ export function SetTimeline({
 
   const spans = useMemo(
     () => playSpans(
-      plays.map((p) => p.timestamp),
+      plays.map((p) => ({ timestamp: p.timestamp, until: p.talkUntil })),
       durationSec,
     ),
     [plays, durationSec],
   );
+  const trackCount = plays.filter((p) => !isTalkPlay(p)).length;
   const dense = stripIsDense(plays.length);
 
   useEffect(() => {
@@ -182,7 +185,7 @@ export function SetTimeline({
         <div
           ref={stripRef}
           role="img"
-          aria-label={`Set timeline, ${plays.length} cues. Click to play from a cue.`}
+          aria-label={`Set timeline, ${trackCount} tracks. Click to play from a cue.`}
           className={`flex h-8 w-full min-w-0 cursor-pointer sm:h-14 ${
             dense ? "gap-px" : "gap-[2px]"
           }`}
@@ -193,24 +196,28 @@ export function SetTimeline({
           {plays.map((p, i) => {
             const isActive = p.id === activeId;
             const isHover = p.id === hoverId;
+            const color = segmentColor(p);
+            const talk = isTalkPlay(p);
             return (
               <div
                 key={p.id}
                 className="relative h-full min-w-0 rounded-[3px] transition-all duration-150"
                 style={{
                   flex: `${spans[i]} 1 0%`,
-                  background: statusColor(p.idStatus),
-                  opacity: isActive ? 1 : isHover ? 0.92 : 0.72,
+                  background: talk
+                    ? `repeating-linear-gradient(135deg, ${color} 0 3px, transparent 3px 6px), ${color}`
+                    : color,
+                  opacity: isActive ? 1 : isHover ? 0.92 : talk ? 0.42 : 0.72,
                   transform: isActive ? "scaleY(1.06)" : "scaleY(1)",
                   boxShadow: isActive
-                    ? `0 0 0 1.5px var(--bg), 0 0 14px ${statusColor(p.idStatus)}`
+                    ? `0 0 0 1.5px var(--bg), 0 0 14px ${color}`
                     : "none",
                 }}
               >
                 {isActive && (
                   <span
                     className="absolute -bottom-[7px] left-1/2 h-[6px] w-[6px] -translate-x-1/2 rotate-45"
-                    style={{ background: statusColor(p.idStatus) }}
+                    style={{ background: color }}
                   />
                 )}
               </div>
@@ -224,20 +231,25 @@ export function SetTimeline({
             <>
               <span
                 className="dot"
-                style={{ background: statusColor(caption.idStatus), width: 10, height: 10 }}
+                style={{ background: segmentColor(caption), width: 10, height: 10 }}
               />
               <span className="mono text-[12px] text-muted2">
-                {fmtTimestamp(caption.timestamp)}
+                {isTalkPlay(caption) && caption.talkUntil != null
+                  ? `${fmtTimestamp(caption.timestamp)}–${fmtTimestamp(caption.talkUntil)}`
+                  : fmtTimestamp(caption.timestamp)}
               </span>
               <span className="truncate text-[13px] text-ink">
-                {caption.artistName ? `${caption.artistName} – ` : ""}
-                {caption.title}
+                {isTalkPlay(caption)
+                  ? COMMENT_LIKELY_TALK
+                  : caption.artistName
+                    ? `${caption.artistName} – ${caption.title}`
+                    : caption.title}
               </span>
               <span
                 className="ml-auto rounded-full px-2 py-0.5 text-[11px]"
                 style={{
-                  color: statusColor(caption.idStatus),
-                  background: `${statusColor(caption.idStatus)}1f`,
+                  color: segmentColor(caption),
+                  background: `${segmentColor(caption)}1f`,
                 }}
               >
                 {publicStatusLabel(caption)}
@@ -262,7 +274,9 @@ export function SetTimeline({
             >
               {compact ? "Comfortable" : "Compact"}
             </button>
-            <span className="mono text-[12px] text-muted2">{plays.length} rows</span>
+            <span className="mono text-[12px] text-muted2">
+              {trackCount} {trackCount === 1 ? "track" : "tracks"}
+            </span>
           </div>
         </div>
         {plays.length === 0 ? (
@@ -278,8 +292,10 @@ export function SetTimeline({
         <ol>
           {plays.map((p) => {
             const isActive = p.id === activeId;
+            const talk = isTalkPlay(p);
             const meta = STATUS_META[p.idStatus as IdStatus];
-            const kind = editKind(p.title, p.artistName);
+            const kind = talk ? null : editKind(p.title, p.artistName);
+            const color = segmentColor(p);
             return (
               <li key={p.id}>
                 <div
@@ -297,23 +313,29 @@ export function SetTimeline({
                   }}
                 >
                   <span className="mono w-6 flex-none text-right text-[12px] text-muted2">
-                    {p.position}
+                    {talk ? "—" : p.position}
                   </span>
-                  <span className="mono w-16 flex-none text-[12px] text-muted">
-                    {fmtTimestamp(p.timestamp)}
+                  <span
+                    className={`mono flex-none text-[12px] text-muted ${
+                      talk ? "w-[5.75rem]" : "w-16"
+                    }`}
+                  >
+                    {talk && p.talkUntil != null
+                      ? `${fmtTimestamp(p.timestamp)}–${fmtTimestamp(p.talkUntil)}`
+                      : fmtTimestamp(p.timestamp)}
                   </span>
                   <EntityThumb
-                    src={p.imageUrl}
-                    label={p.title}
-                    accent={statusColor(p.idStatus)}
+                    src={talk ? null : p.imageUrl}
+                    label={talk ? "Talk" : p.title}
+                    accent={color}
                     size={compact ? 24 : 32}
                     radius={6}
                   />
                   {!compact && (
                     <span
                       className="dot"
-                      title={meta?.label}
-                      style={{ background: statusColor(p.idStatus) }}
+                      title={talk ? COMMENT_LIKELY_TALK : meta?.label}
+                      style={{ background: color }}
                     />
                   )}
                   <div className="min-w-0 flex-1">
@@ -321,12 +343,14 @@ export function SetTimeline({
                       <span
                         className="truncate text-[14px] text-ink"
                         style={
-                          p.idStatus === "unresolved_id"
-                            ? { color: "var(--magenta)" }
-                            : undefined
+                          talk
+                            ? { color: "var(--slate)" }
+                            : p.idStatus === "unresolved_id"
+                              ? { color: "var(--magenta)" }
+                              : undefined
                         }
                       >
-                        {p.title}
+                        {talk ? COMMENT_LIKELY_TALK : p.title}
                       </span>
                       {kind ? (
                           <span
@@ -384,7 +408,7 @@ export function SetTimeline({
                       {p.resolvedTitle && (
                         <span className="truncate text-teal">→ {p.resolvedTitle}</span>
                       )}
-                      {p.detectionComment ? (
+                      {talk ? null : p.detectionComment ? (
                         <span className="truncate text-muted2 italic">
                           {p.detectionComment}
                         </span>
@@ -396,8 +420,16 @@ export function SetTimeline({
                     </div>
                   </div>
 
-                  {(p.idStatus === "unresolved_id" ||
-                    p.idStatus === "unparsed") && (
+                  {talk ? (
+                    <SuggestIdButton
+                      setSlug={setSlug}
+                      position={p.position}
+                      timestamp={p.timestamp}
+                      currentLabel={`Talk at ${fmtTimestamp(p.timestamp)}`}
+                      actionLabel="This is a track"
+                    />
+                  ) : p.idStatus === "unresolved_id" ||
+                    p.idStatus === "unparsed" ? (
                     <SuggestIdButton
                       setSlug={setSlug}
                       position={p.position}
@@ -412,7 +444,7 @@ export function SetTimeline({
                           p.detectionComment === COMMENT_LOW_CONFIDENCE,
                       )}
                     />
-                  )}
+                  ) : null}
 
                   {(() => {
                     const identified =

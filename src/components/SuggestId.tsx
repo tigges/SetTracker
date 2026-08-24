@@ -17,6 +17,7 @@ export function SuggestIdButton({
   suggestedArtist,
   suggestedTitle,
   confirmHint,
+  actionLabel: actionLabelProp,
 }: {
   setSlug: string;
   position: number;
@@ -25,11 +26,13 @@ export function SuggestIdButton({
   suggestedArtist?: string | null;
   suggestedTitle?: string | null;
   confirmHint?: boolean;
+  actionLabel?: string;
 }) {
   const [open, setOpen] = useState(false);
   const [artist, setArtist] = useState(suggestedArtist ?? "");
   const [title, setTitle] = useState(suggestedTitle ?? "");
-  const actionLabel = confirmHint ? "Confirm ID" : "Suggest ID";
+  const actionLabel =
+    actionLabelProp ?? (confirmHint ? "Confirm ID" : "Suggest ID");
   const [copied, setCopied] = useState(false);
 
   const ready = Boolean(artist.trim() && title.trim());

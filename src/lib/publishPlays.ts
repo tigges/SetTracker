@@ -21,12 +21,15 @@ import {
   extractQuotedTitle,
   isHostCommentProvenance,
   isRadioTalkWindow,
+  radioTalkRegions,
   type SourceCommentKind,
 } from "./sourceComments";
 import type { IdStatus } from "./status";
 
 export const COMMENT_NOT_DETECTED = "Not detected";
 export const COMMENT_LOW_CONFIDENCE = "Auto track detection with low confidence";
+export const COMMENT_LIKELY_TALK = "Likely talk";
+export const TALK_COLOR = "var(--slate)";
 
 const SPINE_PROVENANCE = new Set([
   "1001tl",
@@ -64,6 +67,8 @@ export type PublishablePlay = {
   detectionComment?: string | null;
   suggestedArtist?: string | null;
   suggestedTitle?: string | null;
+  segmentKind?: "track" | "talk" | null;
+  talkUntil?: number | null;
 };
 
 export type PublishedPlay<T extends PublishablePlay = PublishablePlay> = T & {
@@ -116,9 +121,26 @@ export function publicDetectionComment(
   return null;
 }
 
-export function publicStatusLabel(
-  play: Pick<PublishablePlay, "idStatus" | "detectionComment">,
+export function isTalkPlay(
+  play: Pick<PublishablePlay, "segmentKind" | "detectionComment">,
+): boolean {
+  return play.segmentKind === "talk" || play.detectionComment === COMMENT_LIKELY_TALK;
+}
+
+export function segmentColor(
+  play: Pick<PublishablePlay, "idStatus" | "segmentKind" | "detectionComment">,
 ): string {
+  if (isTalkPlay(play)) return TALK_COLOR;
+  if (play.idStatus === "identified") return "var(--amber)";
+  if (play.idStatus === "community_resolved") return "var(--teal)";
+  if (play.idStatus === "unresolved_id") return "var(--magenta)";
+  return "var(--grey)";
+}
+
+export function publicStatusLabel(
+  play: Pick<PublishablePlay, "idStatus" | "detectionComment" | "segmentKind">,
+): string {
+  if (isTalkPlay(play)) return COMMENT_LIKELY_TALK;
   if (play.detectionComment === COMMENT_NOT_DETECTED) return COMMENT_NOT_DETECTED;
   if (play.detectionComment === COMMENT_LOW_CONFIDENCE) return "Low confidence";
   if (play.idStatus === "unparsed") return "Unparsed";
@@ -233,12 +255,95 @@ function emptySlot<T extends PublishablePlay>(
     detectionComment: COMMENT_NOT_DETECTED,
     suggestedArtist: null,
     suggestedTitle: null,
+    segmentKind: "track" as const,
+    talkUntil: null,
   };
   if (!template) return base as unknown as PublishedPlay<T>;
   return {
     ...template,
     ...base,
   } as unknown as PublishedPlay<T>;
+}
+
+function talkSlot<T extends PublishablePlay>(
+  startSec: number,
+  endSec: number,
+  template: T | null,
+): PublishedPlay<T> {
+  const base = {
+    id: `talk:${startSec}`,
+    position: 0,
+    timestamp: startSec,
+    idStatus: "unparsed" as const,
+    provenance: "community",
+    rawText: null,
+    title: "Talk",
+    artistName: null,
+    idNote: null,
+    trackSlug: null,
+    imageUrl: null,
+    labelName: null,
+    labelSlug: null,
+    labelColor: null,
+    labelImageUrl: null,
+    bpm: null,
+    musicalKey: null,
+    mixName: null,
+    remixerName: null,
+    genre: null,
+    trackDurationSec: null,
+    beatportUrl: null,
+    spotifyUrl: null,
+    hasTrackPage: false,
+    isrc: null,
+    resolvedTitle: null,
+    detectionComment: COMMENT_LIKELY_TALK,
+    suggestedArtist: null,
+    suggestedTitle: null,
+    segmentKind: "talk" as const,
+    talkUntil: endSec,
+  };
+  if (!template) return base as unknown as PublishedPlay<T>;
+  return {
+    ...template,
+    ...base,
+  } as unknown as PublishedPlay<T>;
+}
+
+function attachTalkRegions<T extends PublishablePlay>(
+  plays: PublishedPlay<T>[],
+  meta: PublishPlayMeta,
+  template: T | null,
+): PublishedPlay<T>[] {
+  const regions = radioTalkRegions(meta.durationSec, meta);
+  if (regions.length === 0) {
+    return numberPublished(plays);
+  }
+  const extras: PublishedPlay<T>[] = [];
+  for (const region of regions) {
+    const blocked = plays.some(
+      (p) =>
+        !isTalkPlay(p) &&
+        p.timestamp >= region.startSec &&
+        p.timestamp < region.endSec,
+    );
+    if (blocked) continue;
+    extras.push(talkSlot(region.startSec, region.endSec, template));
+  }
+  return numberPublished(
+    [...plays, ...extras].sort((a, b) => a.timestamp - b.timestamp),
+  );
+}
+
+function numberPublished<T extends PublishablePlay>(
+  plays: PublishedPlay<T>[],
+): PublishedPlay<T>[] {
+  let n = 0;
+  return plays.map((p) => {
+    if (isTalkPlay(p)) return { ...p, position: 0 };
+    n += 1;
+    return { ...p, position: n };
+  });
 }
 
 function commentText(play: Pick<PublishablePlay, "title" | "rawText" | "idNote">): string {
@@ -437,14 +542,15 @@ export function publishSetPlays<T extends PublishablePlay>(
   });
 
   const sorted = [...kept].sort((a, b) => a.timestamp - b.timestamp);
+  const template = sorted[0] ?? annotated[0] ?? null;
   if (!fill) {
-    return sorted.map((p, i) => ({ ...p, position: i + 1 }));
+    return attachTalkRegions(sorted, meta, template);
   }
 
   const expected = expectedPlayCount(meta.durationSec, meta);
   const need = Math.max(0, expected - sorted.length);
   if (need === 0) {
-    return sorted.map((p, i) => ({ ...p, position: i + 1 }));
+    return attachTalkRegions(sorted, meta, template);
   }
 
   const existingTs = sorted.map((p) => p.timestamp);
@@ -453,14 +559,15 @@ export function publishSetPlays<T extends PublishablePlay>(
     if (isRadioTalkWindow(ts, meta.durationSec, meta)) return false;
     return true;
   });
-  const template = sorted[0] ?? annotated[0] ?? null;
   const extras = candidates
     .slice(0, need)
     .map((ts, i) => emptySlot(ts, i, template));
 
-  return [...sorted, ...extras]
-    .sort((a, b) => a.timestamp - b.timestamp)
-    .map((p, i) => ({ ...p, position: i + 1 }));
+  return attachTalkRegions(
+    [...sorted, ...extras].sort((a, b) => a.timestamp - b.timestamp),
+    meta,
+    template,
+  );
 }
 
 export type StatusCounts = Record<IdStatus, number>;

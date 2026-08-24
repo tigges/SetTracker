@@ -9,6 +9,7 @@
     magenta = unresolved ID
     teal    = community-resolved
     grey    = unparsed
+    slate   = likely talk (radio link — not an ID)
 */
 
 :root {
@@ -35,6 +36,8 @@
   --teal: #29c7dd;
   --violet: #c08bff;
   --grey: #b4bac4;
+  /* Cooler / paler than grey so talk spans are not another miss. */
+  --slate: #7d8b9c;
 
   --accent: var(--brand);
 }
@@ -56,6 +59,7 @@
   --color-teal: var(--teal);
   --color-violet: var(--violet);
   --color-grey: var(--grey);
+  --color-slate: var(--slate);
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
