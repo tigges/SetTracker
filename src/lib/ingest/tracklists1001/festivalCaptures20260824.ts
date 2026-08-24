@@ -263,3 +263,37 @@ export const TL_JOHN_NEWMAN_TML_WE2_FREEDOM_2026: FingerprintSeedRow[] = [
   { at: "47:56", artist: "Calvin Harris ft. John Newman", title: "Blame (John Newman 2026 VIP)" },
   { at: "50:09", artist: "John Newman", title: "Love Me Again (John Newman 2026 VIP)" },
 ];
+
+/**
+ * 4444 OF A KIND @ Freedom Stage, Tomorrowland Weekend 1, Belgium 2026-07-17
+ * Official YouTube: https://youtu.be/VuwLOFniScA
+ * https://www.1001tracklists.com/tracklist/132dgbd9/4444-of-a-kind-freedom-stage-tomorrowland-weekend-1-belgium-2026-07-17.html
+ * Overlay name TL_4444_OF_A_KIND is too generic.
+ * No SoundCloud in the operator paste — do not invent an SC slug.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-VuwLOFniScA"] = TL_4444_OF_A_KIND_TML_WE1_FREEDOM_2026
+ * Captured 2026-08-24 — provenance 1001tl.
+ * Distinct from Rose Ringed Freedom WE1 (yt-KAZd25mCHp8).
+ */
+export const TL_4444_OF_A_KIND_TML_WE1_FREEDOM_2026: FingerprintSeedRow[] = [
+  { at: "0:14", artist: "4444 OF A KIND", title: "LAST 4 EVER" },
+  { at: "4:35", artist: "David Guetta ft. Sia", title: "Titanium (Rebelion Bootleg)" },
+  { at: "6:07", artist: "4444 OF A KIND", title: "4 TO THE FLOOR" },
+  { at: "7:27", artist: "The Ultimate Seduction", title: "The Ultimate Seduction (Acappella)" },
+  { at: "9:12", artist: "4444 OF A KIND", title: "TWENTY 4 SEVEN" },
+  { at: "12:09", artist: "4444 OF A KIND", title: "SECRETS" },
+  { at: "15:42", artist: "4444 OF A KIND", title: "MAXIMUM 4444" },
+  { at: "18:50", artist: "4444 OF A KIND", title: "Where Have You Been" },
+  { at: "21:55", artist: "4444 OF A KIND", title: "4 THE RAVE" },
+  { at: "25:32", artist: "4444 OF A KIND & Hardwell", title: "RE4SON" },
+  { at: "29:06", artist: "4444 OF A KIND", title: "O4DRIVE" },
+  { at: "32:51", artist: "David Guetta ft. Akon", title: "Sexy Bitch (4444 OF A KIND Bootleg)" },
+  { at: "35:36", artist: "4444 OF A KIND", title: "4 THE SCENE" },
+  { at: "39:02", artist: "4444 OF A KIND", title: "4 THE PEOPLE" },
+  { at: "42:08", artist: "4444 OF A KIND", title: "WAITING 4" },
+  { at: "45:39", artist: "Anyma & LISA", title: "Bad Angel (4444 OF A KIND Bootleg)" },
+  { at: "48:02", artist: "4444 OF A KIND", title: "4 OF A KIND" },
+  { at: "49:22", artist: "The Temper Trap", title: "Sweet Disposition (Acappella)" },
+  { at: "51:29", artist: "4444 OF A KIND ft. MC Stretch", title: "4 AM" },
+  { at: "55:09", artist: "D-Block & S-te-Fan & Sub Zero Project", title: "Darkest Hour (The Clock)" },
+  { at: "56:32", artist: "4444 OF A KIND", title: "HERE AND NOW" },
+];

@@ -99,6 +99,7 @@ assert.equal(
 assert.ok(!extras["yt-0Fq24R47sDY"]?.soundcloudUrl);
 assert.ok(!extras["yt-G-DciaWb5KY"]?.soundcloudUrl);
 assert.ok(!extras["yt-5V5qDFSw8Hs"]?.soundcloudUrl);
+assert.ok(!extras["yt-VuwLOFniScA"]?.soundcloudUrl);
 assert.ok(
   !extras[
     "sc-tomorrowland-tomorrowland-friendship-mix-with-sara-landry-july-2026"
