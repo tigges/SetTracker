@@ -78,7 +78,7 @@ async function upsertTrack(
   return created.id;
 }
 
-async function writePlays(
+export async function writePlays(
   prisma: PrismaClient,
   setId: string,
   plays: RawPlay[],

@@ -1,8 +1,12 @@
 import assert from "node:assert/strict";
 import {
   durationsCompatible,
+  firstPartyPlayCount,
+  foldCopyPlayCount,
   hostTwinFoldCandidatesFromSeeds,
+  mergeFoldCopyPlays,
   shareablePlayCount,
+  shouldCopyFoldTracklist,
   shouldCopyTwinTracklist,
   survivorSlugForSecondary,
   twinSlugGroupsFromCatalog,
@@ -43,6 +47,88 @@ assert.equal(
     { durationSec: 90 * 60, shareable: 2 },
   ),
   false,
+);
+
+assert.equal(
+  foldCopyPlayCount([
+    { provenance: "soundcloud" },
+    { provenance: "1001tl" },
+    { provenance: "fingerprint" },
+  ]),
+  2,
+);
+assert.equal(
+  firstPartyPlayCount([
+    { provenance: "soundcloud" },
+    { provenance: "1001tl" },
+    { provenance: "fingerprint" },
+  ]),
+  1,
+);
+
+assert.equal(
+  shouldCopyFoldTracklist(
+    { durationSec: 90 * 60, foldCopy: 22, firstParty: 0 },
+    { durationSec: 90 * 60, foldCopy: 2 },
+  ),
+  true,
+);
+assert.equal(
+  shouldCopyFoldTracklist(
+    { durationSec: 90 * 60, foldCopy: 8, firstParty: 8 },
+    { durationSec: 90 * 60, foldCopy: 0 },
+  ),
+  true,
+  "thin survivor keeps SC comment clocks under the 12-cue overlay floor",
+);
+assert.equal(
+  shouldCopyFoldTracklist(
+    { durationSec: 90 * 60, foldCopy: 8, firstParty: 8 },
+    { durationSec: 90 * 60, foldCopy: 21 },
+  ),
+  false,
+  "no-op when survivor is already denser",
+);
+assert.equal(
+  shouldCopyFoldTracklist(
+    { durationSec: 90 * 60, foldCopy: 0, firstParty: 0 },
+    { durationSec: 90 * 60, foldCopy: 0 },
+  ),
+  false,
+  "fingerprint-only donor is not copy-eligible",
+);
+assert.equal(
+  shouldCopyFoldTracklist(
+    { durationSec: 60 * 60, foldCopy: 22, firstParty: 0 },
+    { durationSec: 90 * 60, foldCopy: 0 },
+  ),
+  false,
+  "duration-incompatible twins stay unshared",
+);
+
+const foldMerged = mergeFoldCopyPlays(
+  [
+    { provenance: "fingerprint", timestamp: 600, position: 1 },
+    { provenance: "fingerprint", timestamp: 400, position: 2 },
+  ],
+  [
+    { provenance: "soundcloud", timestamp: 90, position: 1 },
+    { provenance: "soundcloud", timestamp: 380, position: 2 },
+    { provenance: "fingerprint", timestamp: 900, position: 3 },
+  ],
+);
+assert.deepEqual(
+  foldMerged.map((p) => ({ provenance: p.provenance, timestamp: p.timestamp })),
+  [
+    { provenance: "soundcloud", timestamp: 90 },
+    { provenance: "soundcloud", timestamp: 380 },
+    { provenance: "fingerprint", timestamp: 600 },
+  ],
+);
+assert.equal(
+  foldMerged.some((p) => p.timestamp === 900),
+  false,
+  "donor ACR offsets stay on the file they came from",
 );
 
 const summitUrls = playerUrlsForSet({ slug: "yt-9TKqqBCmDHA" });

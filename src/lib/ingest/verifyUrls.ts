@@ -217,7 +217,7 @@ export async function applyKnownUrlFixes(prisma: PrismaClient): Promise<number> 
   n += twinFolds.folded;
   if (twinFolds.folded || twinFolds.skipped) {
     console.log(
-      `[verify-urls] host twin folds folded=${twinFolds.folded} skipped=${twinFolds.skipped}`,
+      `[verify-urls] host twin folds folded=${twinFolds.folded} skipped=${twinFolds.skipped} clocksCopied=${twinFolds.clocksCopied}`,
     );
   }
 
