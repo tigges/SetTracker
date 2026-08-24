@@ -6,7 +6,7 @@
  *   LLM_RESEARCH_JOBS=identity,homecity,videos npm run research:handles
  *   LLM_RESEARCH_JOBS=cues npm run research:handles
  *   LLM_RESEARCH_JOBS=all npm run research:handles
- *   LLM_RESEARCH_APPLY=0 npm run research:handles   # report only
+ *   LLM_RESEARCH_APPLY=0 npm run research:handles   # parser clocks write; LLM extras report-only
  *   LLM_QUALITY=1 npm run research:handles          # extra model commentary
  *   LLM_RESEARCH_PROVIDER=gemini|claude|both
  *

@@ -5,7 +5,7 @@ name: Catalog enrich
 # has a timeout, continue-on-error, and a DB checkpoint. `full` is sized to
 # finish (~3h), not to pack thumbs + 40×20 Identify + File Scan + 400 ISRCs.
 #   full  — null thumbs + MB + Identify 28×16 + File Scan 20
-#           + handles/tracks + cue dry-run + Spotify fill-null
+#           + handles/tracks + cue parser apply / LLM extras dry-run + Spotify fill-null
 #           [weekly / enrich-full-request]
 #   acr   — Identify 20×12 + File Scan 16 (no thumbs/LLM)    [enrich-request]
 #   smoke — tiny ACR check (4×5)                             [creds]
@@ -277,9 +277,9 @@ jobs:
         run: npm run research:handles
         continue-on-error: true
 
-      # Dry-run first ship: parser re-reads first-party text; LLM may propose
-      # only clocks that already appear. Flip LLM_RESEARCH_APPLY=1 after review.
-      - name: LLM cue research (dry-run)
+      # Parser clocks always write. LLM extras stay report-only unless
+      # LLM_RESEARCH_APPLY=1 after review. Never interpolates.
+      - name: Cue research (parser apply; LLM extras dry-run)
         if: steps.mode.outputs.do_thumbs == '1'
         timeout-minutes: 12
         env:

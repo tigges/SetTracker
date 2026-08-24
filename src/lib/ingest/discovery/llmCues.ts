@@ -8,7 +8,7 @@
  * Never overwrite 1001tl / fingerprint / community.
  *
  *   LLM_RESEARCH_JOBS=cues npm run research:handles
- *   LLM_RESEARCH_APPLY=0   dry-run (default for enrich full + workflow)
+ *   LLM_RESEARCH_APPLY=0   parser clocks still write; LLM extras stay report-only
  *   LLM_CUE_LIMIT=16       max clocked stubs to process (not fetch budget)
  *
  * Queue: scan a wide stub window, rank live YT/hearthis ahead of radio,
@@ -99,6 +99,15 @@ export function filterProposedCues(
     });
   }
   return plays;
+}
+
+/** Parser clocks always write. LLM extras only when applyLlm is true. */
+export function cuePlaysForWrite(
+  firstParty: RawPlay[],
+  extra: RawPlay[],
+  applyLlm: boolean,
+): RawPlay[] {
+  return mergeClockedPlays(firstParty, applyLlm ? extra : []);
 }
 
 export function mergeClockedPlays(...lists: RawPlay[][]): RawPlay[] {
@@ -362,7 +371,7 @@ export async function runLlmCueResearch(
 ): Promise<ResearchStats> {
   const provider = opts.provider ?? detectLlmProvider();
   const stats = emptyStats(provider);
-  const apply = process.env.LLM_RESEARCH_APPLY !== "0";
+  const applyLlm = process.env.LLM_RESEARCH_APPLY !== "0";
   const limit = Math.max(
     1,
     opts.limit ?? Number(process.env.LLM_CUE_LIMIT || 16),
@@ -444,7 +453,7 @@ export async function runLlmCueResearch(
     accepted += 1;
 
     let extra: RawPlay[] = [];
-    if (provider && firstParty.text.trim()) {
+    if (applyLlm && provider && firstParty.text.trim()) {
       try {
         const text = await complete(
           provider,
@@ -473,7 +482,7 @@ ${firstParty.text.slice(0, 8000)}`,
       }
     }
 
-    const merged = mergeClockedPlays(firstParty.plays, extra);
+    const merged = cuePlaysForWrite(firstParty.plays, extra, applyLlm);
     if (merged.length === 0) {
       stats.rejected += 1;
       rows.push({
@@ -485,11 +494,8 @@ ${firstParty.text.slice(0, 8000)}`,
     }
     stats.proposed += merged.length;
 
-    let applied = 0;
-    if (apply) {
-      applied = await applyCuePlays(prisma, set.id, merged, set.genre);
-      stats.applied += applied;
-    }
+    const applied = await applyCuePlays(prisma, set.id, merged, set.genre);
+    stats.applied += applied;
 
     rows.push({
       slug: set.slug,
@@ -503,7 +509,8 @@ ${firstParty.text.slice(0, 8000)}`,
         title: p.trackTitle ?? p.idLabel ?? null,
       })),
       applied,
-      write: apply,
+      write: true,
+      applyLlm,
     });
   }
 
@@ -511,8 +518,9 @@ ${firstParty.text.slice(0, 8000)}`,
   writeReport(`llm-cue-research${tag}.json`, {
     generatedAt: new Date().toISOString(),
     provider,
-    apply,
-    note: "Parser re-reads first-party YT/SC/hearthis. LLM may add only clocks that already appear in that text. Never interpolates. Never overwrites 1001tl / fingerprint / community. Queue ranks live YT/hearthis ahead of radio; radio without clocks does not consume the limit.",
+    apply: true,
+    applyLlm,
+    note: "Parser clocks always write. LLM extras only when LLM_RESEARCH_APPLY≠0, and only clocks that already appear in that text. Never interpolates. Never overwrites 1001tl / fingerprint / community. Queue ranks live YT/hearthis ahead of radio; radio without clocks does not consume the limit.",
     window: sets.length,
     stubs: stubs.length,
     probed: probes,
