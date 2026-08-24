@@ -87,6 +87,7 @@ assert.equal(
   "https://www.youtube.com/watch?v=90ExlZnu_Xg",
 );
 assert.ok(!extras["yt-KCeluZt3H9o"]?.soundcloudUrl);
+assert.ok(!extras["yt-QcvGuOhSVlc"]?.soundcloudUrl);
 assert.ok(
   !extras[
     "sc-tomorrowland-tomorrowland-friendship-mix-with-sara-landry-july-2026"

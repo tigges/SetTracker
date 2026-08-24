@@ -126,6 +126,7 @@ import {
   TL_ROBIN_SCHULZ_SUGAR_RADIO_555_2026,
   TL_SARA_LANDRY_TML_FRIENDSHIP_MIX_2026,
 } from "./festivalCaptures20260823";
+import { TL_TIMMY_TRUMPET_TML_WE2_FREEDOM_2026 } from "./festivalCaptures20260824";
 
 export {
   TL_ALESSO_TML_WE2_2026,
@@ -234,6 +235,7 @@ export {
   TL_ERIC_PRYDZ_EPIC_RADIO_026_2026,
   TL_ROBIN_SCHULZ_SUGAR_RADIO_555_2026,
   TL_SARA_LANDRY_TML_FRIENDSHIP_MIX_2026,
+  TL_TIMMY_TRUMPET_TML_WE2_FREEDOM_2026,
 };
 
 function formatClock(sec: number): string {
@@ -4810,6 +4812,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
     TL_ROBIN_SCHULZ_SUGAR_RADIO_555_2026,
   "sc-eric-prydz-eric-prydz-presents-epic-1":
     TL_ERIC_PRYDZ_EPIC_RADIO_026_2026,
+  "yt-QcvGuOhSVlc": TL_TIMMY_TRUMPET_TML_WE2_FREEDOM_2026,
 };
 
 /** Sanity: every seeded clock must parse. */

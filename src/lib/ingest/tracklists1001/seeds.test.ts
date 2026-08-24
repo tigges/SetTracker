@@ -177,6 +177,7 @@ import {
   TL_ERIC_PRYDZ_EPIC_RADIO_026_2026,
   TL_ROBIN_SCHULZ_SUGAR_RADIO_555_2026,
   TL_SARA_LANDRY_TML_FRIENDSHIP_MIX_2026,
+  TL_TIMMY_TRUMPET_TML_WE2_FREEDOM_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   isSecondaryPlaybackSlug,
@@ -3038,6 +3039,43 @@ for (let i = 1; i < bebeWe2.length; i++) {
   assert.ok(
     (bebeWe2[i]!.timestamp ?? 0) > (bebeWe2[i - 1]!.timestamp ?? 0),
     `Bebe Rexha TML WE2 2026 clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_TIMMY_TRUMPET_TML_WE2_FREEDOM_2026);
+assert.equal(TL_TIMMY_TRUMPET_TML_WE2_FREEDOM_2026.length, 119);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-QcvGuOhSVlc"],
+  TL_TIMMY_TRUMPET_TML_WE2_FREEDOM_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-timmy-trumpet-freedom"],
+  undefined,
+);
+assert.equal(isWiredTracklistSlug("yt-QcvGuOhSVlc"), true);
+assert.equal(isSecondaryPlaybackSlug("yt-QcvGuOhSVlc"), false);
+assert.equal(TL_TIMMY_TRUMPET_TML_WE2_FREEDOM_2026[0]?.at, "0:12");
+assert.equal(
+  TL_TIMMY_TRUMPET_TML_WE2_FREEDOM_2026[0]?.title,
+  "The Future (Timmy Trumpet Edit)",
+);
+assert.equal(TL_TIMMY_TRUMPET_TML_WE2_FREEDOM_2026[77]?.at, "50:02");
+assert.equal(TL_TIMMY_TRUMPET_TML_WE2_FREEDOM_2026[77]?.title, "POLSKA JUMPSTYLE");
+assert.equal(TL_TIMMY_TRUMPET_TML_WE2_FREEDOM_2026[102]?.at, "1:07:45");
+assert.equal(TL_TIMMY_TRUMPET_TML_WE2_FREEDOM_2026[102]?.title, "POLSKA JUMPSTYLE");
+assert.equal(TL_TIMMY_TRUMPET_TML_WE2_FREEDOM_2026[118]?.at, "1:25:53");
+assert.equal(TL_TIMMY_TRUMPET_TML_WE2_FREEDOM_2026[118]?.title, "Nessun Dorma");
+const timmyFreedom = tracklist1001RowsToPlays(
+  TL_TIMMY_TRUMPET_TML_WE2_FREEDOM_2026,
+);
+assert.equal(timmyFreedom[0]?.trackTitle, "The Future (Timmy Trumpet Edit)");
+assert.equal(timmyFreedom[0]?.timestamp, 12);
+assert.equal(timmyFreedom[0]?.provenance, "1001tl");
+assert.ok(timmyFreedom.length >= 115);
+for (let i = 1; i < timmyFreedom.length; i++) {
+  assert.ok(
+    (timmyFreedom[i]!.timestamp ?? 0) > (timmyFreedom[i - 1]!.timestamp ?? 0),
+    `Timmy Trumpet TML WE2 Freedom 2026 clocks must increase at index ${i}`,
   );
 }
 
