@@ -247,7 +247,8 @@ export const TL_BULLET_TOOTH_TML_WE2_CORE_2026: FingerprintSeedRow[] = [
  * No SoundCloud in the operator paste — do not invent an SC slug.
  * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-5V5qDFSw8Hs"] = TL_JOHN_NEWMAN_TML_WE2_FREEDOM_2026
  * Captured 2026-08-24 — provenance 1001tl.
- * Distinct from Bebe Rexha Freedom WE2 (yt-KCeluZt3H9o) and Timmy Trumpet Freedom WE2 (yt-QcvGuOhSVlc).
+ * Distinct from Bebe Rexha Freedom WE2 (yt-KCeluZt3H9o), Timmy Trumpet Freedom WE2 (yt-QcvGuOhSVlc),
+ * and John Newman Mainstage WE1 (yt-czU0VhOB_Lg).
  */
 export const TL_JOHN_NEWMAN_TML_WE2_FREEDOM_2026: FingerprintSeedRow[] = [
   { at: "4:10", artist: "Alesso & John Newman", title: "Call Your Name (John Newman Tech Remix)" },
@@ -296,4 +297,34 @@ export const TL_4444_OF_A_KIND_TML_WE1_FREEDOM_2026: FingerprintSeedRow[] = [
   { at: "51:29", artist: "4444 OF A KIND ft. MC Stretch", title: "4 AM" },
   { at: "55:09", artist: "D-Block & S-te-Fan & Sub Zero Project", title: "Darkest Hour (The Clock)" },
   { at: "56:32", artist: "4444 OF A KIND", title: "HERE AND NOW" },
+];
+
+/**
+ * John Newman @ Mainstage, Tomorrowland Weekend 1, Belgium 2026-07-18
+ * Official YouTube: https://youtu.be/czU0VhOB_Lg
+ * https://www.1001tracklists.com/tracklist/zc5vnm1/john-newman-mainstage-tomorrowland-weekend-1-belgium-2026-07-18.html
+ * Overlay name TL_JOHN_NEWMAN is too generic and already used for Freedom WE2.
+ * No SoundCloud in the operator paste — do not invent an SC slug.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-czU0VhOB_Lg"] = TL_JOHN_NEWMAN_TML_WE1_MAINSTAGE_2026
+ * Captured 2026-08-24 — provenance 1001tl.
+ * Distinct from John Newman Live Band Freedom WE2 (yt-5V5qDFSw8Hs).
+ */
+export const TL_JOHN_NEWMAN_TML_WE1_MAINSTAGE_2026: FingerprintSeedRow[] = [
+  { at: "0:12", artist: "Calvin Harris ft. John Newman", title: "Blame" },
+  { at: "4:56", artist: "Alesso & John Newman", title: "Call Your Name (John Newman Tech Remix)" },
+  { at: "6:39", artist: "John Newman ft. Charlie Wilson", title: "Tiring Game (John Newman Main Stage Remix)" },
+  { at: "7:46", artist: "Blokkkbaby", title: "Revenge" },
+  { at: "11:42", artist: "John Newman", title: "Waiting For A Lifetime (VIP 2025)" },
+  { at: "13:55", artist: "SIX40TWO", title: "Something In The Water (VIP Mix)" },
+  { at: "16:52", artist: "Cirez D", title: "On Off (Kapuchon Edit)" },
+  { at: "19:20", artist: "John Newman", title: "Love Me Again (Acappella)" },
+  { at: "21:03", artist: "David Guetta & MistaJam & John Newman", title: "If You Really Love Me (How Will I Know) (SIX40TWO Remix)" },
+  { at: "26:21", artist: "NOME. ft. Kris Kiss", title: "Arsonist" },
+  { at: "27:50", artist: "Sigala ft. John Newman & Nile Rodgers", title: "Give Me Your Love (John Newman Main Stage Remix)" },
+  { at: "33:55", artist: "Chris Lorenzo", title: "Pump (John Newman TML 25 Edit)" },
+  { at: "34:08", artist: "Travis Scott ft. Kendrick Lamar", title: "Goosebumps (Acappella)" },
+  { at: "41:21", artist: "Calvin Harris ft. John Newman", title: "Blame (John Newman VIP Mix)" },
+  { at: "46:42", artist: "Sebastian Ingrosso & Alesso", title: "Calling" },
+  { at: "47:34", artist: "John Newman", title: "Love Me Again (John Newman Rework)" },
+  { at: "53:27", artist: "John Newman", title: "Only You" },
 ];

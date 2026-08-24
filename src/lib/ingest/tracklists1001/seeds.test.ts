@@ -183,6 +183,7 @@ import {
   TL_BULLET_TOOTH_TML_WE2_CORE_2026,
   TL_JOHN_NEWMAN_TML_WE2_FREEDOM_2026,
   TL_4444_OF_A_KIND_TML_WE1_FREEDOM_2026,
+  TL_JOHN_NEWMAN_TML_WE1_MAINSTAGE_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   isSecondaryPlaybackSlug,
@@ -3229,6 +3230,34 @@ for (let i = 1; i < kindFreedom.length; i++) {
   assert.ok(
     (kindFreedom[i]!.timestamp ?? 0) > (kindFreedom[i - 1]!.timestamp ?? 0),
     `4444 OF A KIND TML WE1 Freedom 2026 clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_JOHN_NEWMAN_TML_WE1_MAINSTAGE_2026);
+assert.equal(TL_JOHN_NEWMAN_TML_WE1_MAINSTAGE_2026.length, 17);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-czU0VhOB_Lg"],
+  TL_JOHN_NEWMAN_TML_WE1_MAINSTAGE_2026,
+);
+assert.equal(TRACKLIST_1001_BY_SOURCE_SLUG["sc-john-newman-mainstage"], undefined);
+assert.equal(isWiredTracklistSlug("yt-czU0VhOB_Lg"), true);
+assert.equal(isSecondaryPlaybackSlug("yt-czU0VhOB_Lg"), false);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-czU0VhOB_Lg"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-5V5qDFSw8Hs"],
+);
+assert.equal(TL_JOHN_NEWMAN_TML_WE1_MAINSTAGE_2026[0]?.title, "Blame");
+assert.equal(TL_JOHN_NEWMAN_TML_WE1_MAINSTAGE_2026[16]?.title, "Only You");
+const johnNewmanWe1 = tracklist1001RowsToPlays(
+  TL_JOHN_NEWMAN_TML_WE1_MAINSTAGE_2026,
+);
+assert.equal(johnNewmanWe1.length, 17);
+assert.equal(johnNewmanWe1[0]?.timestamp, 12);
+assert.equal(johnNewmanWe1[16]?.timestamp, 53 * 60 + 27);
+for (let i = 1; i < johnNewmanWe1.length; i++) {
+  assert.ok(
+    (johnNewmanWe1[i]!.timestamp ?? 0) > (johnNewmanWe1[i - 1]!.timestamp ?? 0),
+    `John Newman TML WE1 Mainstage 2026 clocks must increase at index ${i}`,
   );
 }
 
