@@ -368,3 +368,30 @@ export const TL_ROBIN_SCHULZ_SUGAR_RADIO_555_2026: FingerprintSeedRow[] = [
   { at: "51:41", artist: "Leblanc", title: "Strings Anthem" },
   { at: "55:38", artist: "The Rocketman", title: "Loca" },
 ];
+
+/**
+ * Eric Prydz - Epic Radio 026 2026-03-19
+ * https://www.1001tracklists.com/tracklist/25jcxyw9/eric-prydz-epic-radio-026-2026-03-19.html
+ * Official SC: https://soundcloud.com/eric-prydz/eric-prydz-presents-epic-1
+ * Capture paste used TL_CAPTURED (too generic). Distinct from EPIC 036
+ * (yt-JLIYTueL4TI / sc-eric-prydz-eric-prydz-presents-463760700).
+ * No YouTube in the operator paste — do not invent a watch id (1001's
+ * on-page player is not a source URL).
+ * 1001 listed 12 IDed cues; screenshots covered 01–10 (w/ at 44:17 kept
+ * as its own clock). Cues 11–12 wait on the remaining screenshots — a
+ * <12 overlay gap-fills the 33 SC comment stubs instead of replacing.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["sc-eric-prydz-eric-prydz-presents-epic-1"]
+ * Captured 2026-08-23 — provenance 1001tl.
+ */
+export const TL_ERIC_PRYDZ_EPIC_RADIO_026_2026: FingerprintSeedRow[] = [
+  { at: "0:30", artist: "Eric Prydz", title: "Heavy" },
+  { at: "4:16", artist: "Pryda", title: "HOLO Tomorrowland 2022 Intro ID (Working Title)" },
+  { at: "10:16", artist: "Pryda", title: "Creamfields South 2023 ID 01 (Working Title)" },
+  { at: "16:27", artist: "The Indicators", title: "We Are The Indicators" },
+  { at: "20:55", artist: "Pryda", title: "Creamfields South 2023 Intro ID (Working Title)" },
+  { at: "24:30", artist: "Pryda", title: "Euro T" },
+  { at: "31:12", artist: "Pryda", title: "Nate Diaz ID (Working Title)" },
+  { at: "35:13", artist: "Pryda", title: "Loving You" },
+  { at: "40:30", artist: "Pryda", title: "Terminal 5" },
+  { at: "44:17", artist: "Sailor & I", title: "Turn Around (Âme Remix / Eric Prydz Private Edit)" },
+];

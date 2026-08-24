@@ -58,6 +58,18 @@ assert.equal(
 );
 assert.equal(
   skipCaptureNeed(
+    row({
+      slug: "sc-eric-prydz-eric-prydz-presents-epic-1",
+      title: "Eric Prydz presents EPIC Radio 026",
+      primaryDj: "Eric Prydz",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
+assert.equal(
+  skipCaptureNeed(
     row({ slug: "yt-short1", title: "Freedom Stage Shorts", durationSec: 90 }),
     mapped,
     now,
