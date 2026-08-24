@@ -18,6 +18,7 @@ import { prisma } from "@/lib/db";
 import { loadDjMagTop100RankBySlug } from "@/lib/djmagTop100";
 import { loadEnrichRunReport } from "@/lib/ingest/enrich/enrichRunReport";
 import { pageMeta } from "@/lib/site";
+import { clockSourceSlices } from "@/lib/statsHealth";
 import { getStatsHealth } from "@/lib/statsHealthData";
 
 export const metadata: Metadata = pageMeta({
@@ -164,7 +165,7 @@ export default async function StatsPage() {
     getCatalogStats(),
     getStatsHealth(),
     loadEnrichRunReport(prisma),
-    loadOperatorCaptureQueue(20),
+    loadOperatorCaptureQueue(),
   ]);
   const actionsStatus = loadActionsStatusFile();
   const top100 = loadDjMagTop100RankBySlug();
@@ -175,6 +176,8 @@ export default async function StatsPage() {
     0,
   );
   const noPlayback = health.sets.playback.find((row) => row.key === "no_playback");
+  const clockSources = clockSourceSlices(s.plays.byProvenance);
+  const clockTotal = clockSources.reduce((n, row) => n + row.count, 0);
 
   return (
     <div>
@@ -262,8 +265,17 @@ export default async function StatsPage() {
               : undefined
           }
         />
+        {clockTotal > 0 ? (
+          <StatsMeter
+            label="Clock source"
+            slices={clockSources}
+            total={clockTotal}
+          />
+        ) : null}
         <p className="mt-2 text-[11px] text-muted2">
-          No playback has no button — wait for an official full-set upload.
+          Clocks come from official YT/SC/hearthis text and ACR fingerprints.
+          1001 is a community overlay only. No playback has no button — wait
+          for an official full-set upload.
         </p>
       </StatsHealthCard>
       <StatsHealthCard
@@ -421,7 +433,7 @@ export default async function StatsPage() {
         <QueueFold
           title="Capture 1001"
           count={captureQueue.presets.length}
-          hint="Overlay clocks onto existing YT/SC sets. Bookmarklet + ranked queue. Do not invent 1001 URLs."
+          hint="Optional community overlay on sets that already have official playback. First-party text + ACR fill clocks without 1001. Do not invent 1001 URLs."
           open
         >
           <Suspense fallback={null}>

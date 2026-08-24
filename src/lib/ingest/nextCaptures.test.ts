@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import {
+  CAPTURE_QUEUE_LIMIT,
   PRIORITY_CAPTURES,
   buildHeldReliveWatch,
   buildNextCaptures,
@@ -9,6 +10,7 @@ import {
 } from "./nextCaptures";
 import { TRACKLIST_1001_BY_SOURCE_SLUG } from "./tracklists1001/festival2026";
 
+assert.equal(CAPTURE_QUEUE_LIMIT, 40);
 assert.ok(PRIORITY_CAPTURES.length <= 12);
 assert.ok(search1001("fisher").includes("1001tracklists.com/search"));
 assert.ok(!search1001("fisher").includes("google.com"));
