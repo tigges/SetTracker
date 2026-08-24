@@ -1709,6 +1709,23 @@ export const ARTIST_ROSTER_CURATED: ArtistRosterEntry[] = [
     priority: "high",
   },
   {
+    name: "Adrián Mills",
+    genre: "Techno",
+    accent: "#40916c",
+    // Official SC / IG adrianxmills. RA is discovery only — never website.
+    // Facebook adrianmillstechno stays roster socials (Dj has no facebook column).
+    // Spotify artist URL is not a Dj column. No YouTube in the operator paste.
+    soundcloud: { permalink: "adrianxmills", status: "ok" },
+    socials: [
+      "https://soundcloud.com/adrianxmills",
+      "https://www.instagram.com/adrianxmills/",
+      "https://www.facebook.com/adrianmillstechno",
+      "https://open.spotify.com/artist/6H9sRmDCsXzsWK7jEg1thF",
+      "https://ra.co/dj/adrianmills",
+    ],
+    priority: "normal",
+  },
+  {
     name: "Above & Beyond",
     genre: "Trance",
     accent: "#7209b7",

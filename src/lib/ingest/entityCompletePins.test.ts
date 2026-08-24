@@ -55,6 +55,14 @@ assert.equal(
   nameOverlapsHandle("4444 OF A KIND", "https://www.instagram.com/4444fourofakind/"),
   true,
 );
+assert.equal(
+  nameOverlapsHandle("Adrián Mills", "https://soundcloud.com/adrianxmills"),
+  true,
+);
+assert.equal(
+  nameOverlapsHandle("Adrian Mills", "https://www.instagram.com/adrianxmills/"),
+  true,
+);
 assert.equal(nameOverlapsHandle("Joris Voorn", "https://soundcloud.com/korolovadj"), false);
 assert.equal(nameOverlapsHandle("Ferry Corsten", "https://www.instagram.com/someoneelse/"), false);
 
@@ -330,6 +338,50 @@ assert.equal(
     evidence: "official YouTube About",
   }).field,
   "bio",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "adrian-mills",
+    name: "Adrián Mills",
+    field: "soundcloud",
+    value: "https://soundcloud.com/adrianxmills",
+    evidence: "official profile",
+  }).value,
+  "https://soundcloud.com/adrianxmills",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "adrian-mills",
+    name: "Adrián Mills",
+    field: "instagram",
+    value: "https://www.instagram.com/adrianxmills/",
+    evidence: "official profile",
+  }).value,
+  "https://instagram.com/adrianxmills",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "adrian-mills",
+    name: "Adrián Mills",
+    field: "website",
+    value: "https://ra.co/dj/adrianmills",
+    evidence: "RA profile",
+  }).drop,
+  "weak or invalid website",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "adrian-mills",
+    name: "Adrián Mills",
+    field: "genre",
+    value: "Techno",
+    evidence: "official Facebook",
+  }).value,
+  "Techno",
 );
 assert.equal(
   evaluateEntityCompleteRow({

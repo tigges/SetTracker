@@ -86,7 +86,7 @@ const TEMPLATE_BIO =
   /is an? (?:.+based )?DJ, producer or electronic artist whose work centers on/i;
 
 const GENERIC_HANDLE_LEFTOVER =
-  /^(the|its|itsthe|thisis|official|real|dj|music|beats|sound|sounds|channel|video|live|tv|hq|ok|iam|im|weare|and|com|net|org|nu|io|co|uk|dot|dotcom|[0-9]+)*$/;
+  /^(the|its|itsthe|thisis|official|real|dj|music|beats|sound|sounds|channel|video|live|tv|hq|ok|iam|im|weare|and|x|com|net|org|nu|io|co|uk|dot|dotcom|[0-9]+)*$/;
 
 /** Spoken digit used in handles like @4444fourofakind for "4444 OF A KIND". */
 const DIGIT_WORD: Record<string, string> = {
@@ -106,6 +106,10 @@ const DIGIT_WORD: Record<string, string> = {
 function leftoverStripTokens(name: string): string[] {
   const words = name
     .toLowerCase()
+    .replace(/[øØ]/g, "o")
+    .replace(/[æÆ]/g, "ae")
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
     .split(/[^a-z0-9]+/)
     .filter(Boolean);
   const tokens = new Set<string>();
@@ -341,6 +345,10 @@ export function nameOverlapsHandle(name: string, value: string): boolean {
   const handleKey = handleHaystack(value);
   const tokens = name
     .toLowerCase()
+    .replace(/[øØ]/g, "o")
+    .replace(/[æÆ]/g, "ae")
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
     .split(/[^a-z0-9]+/)
     .filter((t) => t.length >= 2);
   const tokenHit =
