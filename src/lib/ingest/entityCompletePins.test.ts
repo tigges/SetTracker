@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import {
+  decodeMojibake,
   evaluateEntityCompleteRow,
   mergeEntityCompletePins,
   nameOverlapsHandle,
@@ -9,6 +10,19 @@ import {
   pinsFromAudit,
 } from "./entityCompletePins";
 
+assert.equal(decodeMojibake("\u00C3\u2020ON:MODE"), "ÆON:MODE");
+assert.equal(decodeMojibake("\u00C3\u201Clafur Arnalds"), "Ólafur Arnalds");
+assert.equal(decodeMojibake("Mal\u00C3\u00B3ne"), "Malóne");
+assert.equal(nameOverlapsHandle("Coco María", "https://cocomaria.net/"), true);
+assert.equal(nameOverlapsHandle("Noizu", "https://www.youtube.com/@NoizuSound"), true);
+assert.equal(
+  nameOverlapsHandle("Third Party", "https://www.youtube.com/@thirdpartychannel"),
+  true,
+);
+assert.equal(
+  nameOverlapsHandle("Fantasm", "https://www.instagram.com/fantasm_techno/"),
+  false,
+);
 assert.equal(nameOverlapsHandle("Matroda", "https://www.youtube.com/@MATRODAMUSIC"), true);
 assert.equal(nameOverlapsHandle("AC Slater", "https://x.com/djacslater"), true);
 assert.equal(nameOverlapsHandle("Dr. Fresch", "https://www.youtube.com/@DrFreschTV"), true);
@@ -114,6 +128,65 @@ assert.equal(
 assert.equal(
   evaluateEntityCompleteRow({
     kind: "dj",
+    slug: "space-92",
+    name: "Space 92",
+    field: "website",
+    value: "https://space92.komi.io/",
+    evidence: "hub",
+  }).drop,
+  "weak or invalid website",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "eli-brown",
+    name: "Eli Brown",
+    field: "website",
+    value: "https://elibrownbeats.com/",
+    evidence: "official",
+  }).value,
+  "https://elibrownbeats.com",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "coco-maria",
+    name: "Coco María",
+    field: "website",
+    value: "https://cocomaria.net/",
+    evidence: "official",
+  }).value,
+  "https://cocomaria.net",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "imanu",
+    name: "IMANU",
+    field: "website",
+    value: "https://www.imanu.nu/",
+    evidence: "official",
+  }).value,
+  "https://imanu.nu",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "rules",
+    name: "Rules",
+    field: "website",
+    value: "https://thisisrules.com/",
+    evidence: "official",
+  }).value,
+  "https://thisisrules.com",
+);
+assert.equal(
+  nameOverlapsHandle("Chase", "https://chaseandstatus.co.uk/"),
+  false,
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
     slug: "vini-vici",
     name: "Vini Vici",
     field: "website",
@@ -201,6 +274,17 @@ assert.equal(
     evidence: "producer",
   }).value,
   "Amsterdam, Netherlands",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "max-styler",
+    name: "Max Styler",
+    field: "homeCity",
+    value: "Not found",
+    evidence: "export placeholder",
+  }).drop,
+  "placeholder city",
 );
 assert.equal(
   evaluateEntityCompleteRow({

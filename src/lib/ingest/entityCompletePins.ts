@@ -78,13 +78,13 @@ const PROFILE_FIELDS = new Set<EntityCompleteField>([
 ]);
 
 const WEAK_WEBSITE_HUB =
-  /linktr\.ee|mixcloud\.com|hearthis\.at|\.gov\b|music\.youtube\.com/i;
+  /linktr\.ee|komi\.io|mixcloud\.com|hearthis\.at|\.gov\b|music\.youtube\.com/i;
 
 const TEMPLATE_BIO =
   /is an? (?:.+based )?DJ, producer or electronic artist whose work centers on/i;
 
 const GENERIC_HANDLE_LEFTOVER =
-  /^(the|its|itsthe|official|real|dj|music|live|tv|hq|ok|iam|im|weare|and|com|dot|dotcom)*$/;
+  /^(the|its|itsthe|thisis|official|real|dj|music|beats|sound|sounds|channel|video|live|tv|hq|ok|iam|im|weare|and|com|net|org|nu|io|co|uk|dot|dotcom|[0-9]+)*$/;
 
 const WIDE_FIELD_MAP: Record<string, EntityCompleteField> = {
   imageurl: "imageUrl",
@@ -102,10 +102,47 @@ const WIDE_FIELD_MAP: Record<string, EntityCompleteField> = {
 
 const CANNOT_CONFIRM = /cannot confirm|no published links|unsure/i;
 
+/** Windows-1252 bytes that UTF-8 misread as those Unicode chars. */
+const CP1252_EXTRA: Record<string, number> = {
+  "\u20ac": 0x80,
+  "\u201a": 0x82,
+  "\u0192": 0x83,
+  "\u201e": 0x84,
+  "\u2026": 0x85,
+  "\u2020": 0x86,
+  "\u2021": 0x87,
+  "\u02c6": 0x88,
+  "\u2030": 0x89,
+  "\u0160": 0x8a,
+  "\u2039": 0x8b,
+  "\u0152": 0x8c,
+  "\u2018": 0x91,
+  "\u2019": 0x92,
+  "\u201c": 0x93,
+  "\u201d": 0x94,
+  "\u2022": 0x95,
+  "\u2013": 0x96,
+  "\u2014": 0x97,
+  "\u02dc": 0x98,
+  "\u2122": 0x99,
+  "\u0161": 0x9a,
+  "\u203a": 0x9b,
+  "\u0153": 0x9c,
+  "\u0178": 0x9f,
+};
+
 export function decodeMojibake(value: string): string {
   if (!/[ÃÂ]/.test(value) && !/â[€™]/.test(value)) return value;
   try {
-    return Buffer.from(value, "latin1").toString("utf8");
+    const bytes = Uint8Array.from(
+      [...value].map((ch) => {
+        const code = ch.charCodeAt(0);
+        if (code <= 0xff) return code;
+        return CP1252_EXTRA[ch] ?? 0x3f;
+      }),
+    );
+    const decoded = Buffer.from(bytes).toString("utf8");
+    return decoded.includes("\uFFFD") ? value : decoded;
   } catch {
     return value;
   }
@@ -151,6 +188,7 @@ function wideRowToAudit(header: string[], cells: string[]): EntityCompleteAuditR
     const field = WIDE_FIELD_MAP[header[i] ?? ""];
     const value = (cells[i] ?? "").trim();
     if (!field || !value) continue;
+    if (/^(not found|n\/?a|none|-)$/i.test(value)) continue;
     out.push({
       kind,
       slug,
@@ -198,7 +236,13 @@ function splitCsvLine(line: string): string[] {
 }
 
 export function coreName(value: string): string {
-  return value.toLowerCase().replace(/[^a-z0-9]/g, "");
+  return value
+    .toLowerCase()
+    .replace(/[øØ]/g, "o")
+    .replace(/[æÆ]/g, "ae")
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]/g, "");
 }
 
 function handleHaystack(value: string): string {

@@ -39,6 +39,7 @@ assert.equal(evaluateHomeCity("ILLENIUM", "St. Louis, US").ok, true);
 assert.equal(evaluateHomeCity("MEDUZA", "Italy").ok, true);
 assert.equal(evaluateHomeCity("MEDUZA", "https://meduzamusic.net").ok, false);
 assert.equal(evaluateHomeCity("MEDUZA", "unknown").ok, false);
+assert.equal(evaluateHomeCity("MEDUZA", "Not found").ok, false);
 assert.equal(evaluateHomeCity("MEDUZA", "MEDUZA").ok, false);
 
 assert.equal(
