@@ -67,7 +67,7 @@ import {
   editionCalendar,
   editionGapReport,
 } from "@/lib/ingest/festivalDrops";
-import { isBrowseReadySet } from "@/lib/setBrowse";
+import { isBrowseReadySet, isProfileVisibleSet } from "@/lib/setBrowse";
 import { isBrowseReadyVenue, isVenueListed } from "@/lib/venueBrowse";
 import type { IdStatus } from "@/lib/status";
 
@@ -828,7 +828,6 @@ export async function getDjBySlug(slug: string): Promise<DjProfile | null> {
     return null;
   }
   const setIds = sets.map((s) => s.id);
-  const recent = sets.slice(0, 8);
 
   const [tallies, provenanceGroups, trackTotal] = await Promise.all([
     statusCountsBySetIds(setIds),
@@ -858,24 +857,47 @@ export async function getDjBySlug(slug: string): Promise<DjProfile | null> {
     provenance[g.provenance] = g._count._all;
   }
 
-  const recentSets = recent.map((s) => {
-    const primary = s.artists.find((a) => a.isPrimary) ?? s.artists[0];
-    const tally = tallies.get(s.id);
-    return {
-      slug: s.slug,
-      title: s.title,
-      type: s.type,
-      publishedAt: s.publishedAt,
-      durationSec: s.durationSec,
-      cover: s.cover,
-      imageUrl: s.imageUrl ?? primary?.dj.imageUrl ?? null,
-      eventName: s.event?.name ?? null,
-      seriesName: s.series?.name ?? null,
-      trackCount: tally?.trackCount ?? 0,
-      statusCounts: tally?.counts ?? emptyCounts(),
-      isPrimary: primary?.dj.id === dj.id,
-    };
-  });
+  const recentSets = sets
+    .filter((s) => {
+      const primary = s.artists.find((a) => a.isPrimary) ?? s.artists[0];
+      const tally = tallies.get(s.id);
+      return isProfileVisibleSet({
+        imageUrl: s.imageUrl,
+        primaryDjImageUrl: primary?.dj.imageUrl,
+        eventImageUrl: s.event?.imageUrl,
+        primaryDjName: primary?.dj.name,
+        primaryDjSlug: primary?.dj.slug,
+        title: s.title,
+        trackCount: tally?.trackCount ?? 0,
+        durationSec: s.durationSec,
+        playbackUrl: s.playbackUrl,
+        sourceUrl: s.sourceUrl,
+        type: s.type,
+        eventKind: s.event?.kind,
+      });
+    })
+    .slice(0, 8)
+    .map((s) => {
+      const primary = s.artists.find((a) => a.isPrimary) ?? s.artists[0];
+      const tally = tallies.get(s.id);
+      return {
+        slug: s.slug,
+        title: s.title,
+        type: s.type,
+        publishedAt: s.publishedAt,
+        durationSec: s.durationSec,
+        cover: s.cover,
+        imageUrl: s.imageUrl ?? primary?.dj.imageUrl ?? null,
+        eventName: s.event?.name ?? null,
+        seriesName: s.series?.name ?? null,
+        trackCount: tally?.trackCount ?? 0,
+        playbackUrl: playablePlaybackUrl(s.playbackUrl, s.sourceUrl),
+        sourceUrl: s.sourceUrl,
+        eventKind: s.event?.kind ?? null,
+        statusCounts: tally?.counts ?? emptyCounts(),
+        isPrimary: primary?.dj.id === dj.id,
+      };
+    });
 
   // most-played tracks (identified + community-resolved carry a trackId)
   let mostPlayed: {
@@ -1726,6 +1748,21 @@ export async function getVenueBySlug(slug: string, nowMs = Date.now()) {
       ...s,
       primaryDjSlug: s.primaryDj?.slug ?? null,
     })),
+  ).filter((s) =>
+    isProfileVisibleSet({
+      imageUrl: s.imageUrl,
+      primaryDjImageUrl: s.primaryDj?.imageUrl,
+      eventImageUrl: s.eventImageUrl,
+      primaryDjName: s.primaryDj?.name,
+      primaryDjSlug: s.primaryDj?.slug,
+      title: s.title,
+      trackCount: s.trackCount,
+      durationSec: s.durationSec,
+      playbackUrl: s.playbackUrl,
+      sourceUrl: s.sourceUrl,
+      type: s.type,
+      eventKind: s.eventKind,
+    }),
   );
 
   return {

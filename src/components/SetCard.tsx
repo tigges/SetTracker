@@ -13,7 +13,7 @@ import {
   fmtRelative,
 } from "@/lib/status";
 import { FEED_SPOTLIGHT_META, setPerformanceTime } from "@/lib/feedPriority";
-import { setDisplayThumb } from "@/lib/setBrowse";
+import { isListPendingOfficialSet, setDisplayThumb } from "@/lib/setBrowse";
 import type { FeedItem } from "@/lib/queries";
 
 export function SetCard({
@@ -119,7 +119,11 @@ export function SetCard({
         {statusHint ? <p className="sr-only">{statusHint}</p> : null}
         <div className="flex items-center justify-between gap-2 text-[12px] text-muted2">
           <span className="mono" title={statusHint || undefined}>
-            {set.trackCount} tracks
+            {set.trackCount > 0
+              ? `${set.trackCount} tracks`
+              : isListPendingOfficialSet(set)
+                ? "List pending"
+                : "0 tracks"}
           </span>
           <span className="mono">{fmtDuration(set.durationSec)}</span>
           {target ? (

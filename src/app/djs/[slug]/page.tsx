@@ -177,7 +177,10 @@ export default async function DjPage({
                         </div>
                         <div className="mono text-[12px] text-muted2">
                           {type.label} · {fmtDate(s.publishedAt)} ·{" "}
-                          {fmtDuration(s.durationSec)} · {s.trackCount} tracks
+                          {fmtDuration(s.durationSec)} ·{" "}
+                          {s.trackCount > 0
+                            ? `${s.trackCount} tracks`
+                            : "List pending"}
                         </div>
                       </div>
                       <div className="hidden w-28 flex-none sm:block">
