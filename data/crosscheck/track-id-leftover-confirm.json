@@ -1,0 +1,73 @@
+{
+  "generatedAt": "2026-08-24T02:52:47.553Z",
+  "csv": "data/crosscheck/tracks-need-id-20260824-filled.csv",
+  "sourceLeftoverRows": 6119,
+  "rows": 14,
+  "withBeatport": 12,
+  "withSpotify": 2,
+  "withIsrc": 0,
+  "beatportProbes": [
+    {
+      "url": "https://www.beatport.com/track/moving-on/27790487",
+      "status": 200,
+      "finalUrl": "https://www.beatport.com/track/moving-on/27790487"
+    },
+    {
+      "url": "https://www.beatport.com/track/they-want-your-soul/29654081",
+      "status": 200,
+      "finalUrl": "https://www.beatport.com/track/they-want-your-soul/29654081"
+    },
+    {
+      "url": "https://www.beatport.com/track/home-feat-mr-v/28443056",
+      "status": 200,
+      "finalUrl": "https://www.beatport.com/track/home-feat-mr-v/28443056"
+    },
+    {
+      "url": "https://www.beatport.com/track/enigma/23447664",
+      "status": 200,
+      "finalUrl": "https://www.beatport.com/track/enigma/23447664"
+    },
+    {
+      "url": "https://www.beatport.com/track/fade/28779311",
+      "status": 200,
+      "finalUrl": "https://www.beatport.com/track/fade/28779311"
+    },
+    {
+      "url": "https://www.beatport.com/track/destiny/22279721",
+      "status": 200,
+      "finalUrl": "https://www.beatport.com/track/destiny/22279721"
+    },
+    {
+      "url": "https://www.beatport.com/track/rave-the-world-feat-jim-cummings/29654082",
+      "status": 200,
+      "finalUrl": "https://www.beatport.com/track/rave-the-world-feat-jim-cummings/29654082"
+    },
+    {
+      "url": "https://www.beatport.com/track/crush/20362602",
+      "status": 200,
+      "finalUrl": "https://www.beatport.com/track/crush/20362602"
+    }
+  ],
+  "deezerConfirmed": 12,
+  "newPins": 12,
+  "keptExisting": 3730,
+  "pins": 3742,
+  "pinsWithBeatport": 3487,
+  "pinsWithIsrc": 3742,
+  "beatport404dropped": [],
+  "junkSkipped": 0,
+  "rejected": {
+    "not confirmed": 2
+  },
+  "rejectedRows": [
+    {
+      "slug": "arabella-nabucco-m-i-d-o-r-remix",
+      "reason": "not confirmed"
+    },
+    {
+      "slug": "joseph-armani-pres-corkscrew-elbow-koster-remix",
+      "reason": "not confirmed"
+    }
+  ],
+  "note": "Beatport HTML is never scraped. Pins require a Deezer ISRC hit plus a canonical /track URL whose slug matches the title. Name-search fills ISRC for leftover Beatport/Spotify rows when the live title keeps remix/bootleg. Merge with existing pins; drop HEAD 404 Beatport URLs (keep ISRC)."
+}
