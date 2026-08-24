@@ -15,6 +15,14 @@ import {
   playCollapseKey,
 } from "./playCollapse";
 import { expectedPlayCount, expectedPlaySec } from "./setDensity";
+import {
+  classifySourceComment,
+  collapseHostCommentTimes,
+  extractQuotedTitle,
+  isHostCommentProvenance,
+  isRadioTalkWindow,
+  type SourceCommentKind,
+} from "./sourceComments";
 import type { IdStatus } from "./status";
 
 export const COMMENT_NOT_DETECTED = "Not detected";
@@ -39,6 +47,7 @@ export type PublishPlayMeta = {
   durationSec: number;
   genre?: string | null;
   type?: string | null;
+  title?: string | null;
 };
 
 export type PublishablePlay = {
@@ -151,15 +160,24 @@ export function shouldFillExpectedSlots(input: {
   namedCount: number;
   placeholderCount: number;
   spineCount: number;
+  idAskCount?: number;
+  droppedChat?: boolean;
   genre?: string | null;
   type?: string | null;
+  title?: string | null;
 }): boolean {
   if (input.durationSec < 10 * 60) return false;
-  if (input.placeholderCount < 3) return false;
-  if (input.spineCount >= 5) return false;
   const expected = expectedPlayCount(input.durationSec, input);
   if (expected <= 0) return false;
-  return input.namedCount < Math.ceil(expected * 0.6);
+  if (input.namedCount >= Math.ceil(expected * 0.6)) return false;
+  const idAsks = input.idAskCount ?? 0;
+  if (input.spineCount >= 5 && input.placeholderCount < 3 && idAsks === 0) {
+    return false;
+  }
+  if (input.placeholderCount >= 3) return true;
+  if (idAsks > 0) return true;
+  if (input.droppedChat && input.durationSec >= 30 * 60) return true;
+  return false;
 }
 
 function cadenceTimestamps(durationSec: number, count: number): number[] {
@@ -223,6 +241,97 @@ function emptySlot<T extends PublishablePlay>(
   } as unknown as PublishedPlay<T>;
 }
 
+function commentText(play: Pick<PublishablePlay, "title" | "rawText" | "idNote">): string {
+  return [play.idNote, play.rawText, play.title].filter(Boolean).join(" \n ");
+}
+
+function sourceCommentKind(play: PublishablePlay): SourceCommentKind {
+  return classifySourceComment(commentText(play));
+}
+
+function isNamedPlay(play: PublishablePlay): boolean {
+  return (
+    !!playCollapseKey(play) ||
+    isConfirmedId(play.idStatus) ||
+    sourceCommentKind(play) === "named"
+  );
+}
+
+function isHostIdAsk(play: PublishablePlay): boolean {
+  if (!isHostCommentProvenance(play.provenance)) return false;
+  if (isNamedPlay(play) && sourceCommentKind(play) === "named") return false;
+  if (sourceCommentKind(play) === "id-ask") return true;
+  const title = (play.title ?? "").trim();
+  return /^id\s*[-–—]\s*id$/i.test(title) || title.toLowerCase() === "unknown";
+}
+
+function isHostChatPlay(play: PublishablePlay): boolean {
+  if (!isHostCommentProvenance(play.provenance)) return false;
+  if (isConfirmedId(play.idStatus)) return false;
+  if (playCollapseKey(play)) return false;
+  const kind = sourceCommentKind(play);
+  if (kind === "named" || kind === "id-ask") return false;
+  const title = (play.title ?? "").trim();
+  if (
+    title &&
+    !isPlaceholderTitle(title.toLowerCase()) &&
+    !/^id\s*[-–—]\s*id$/i.test(title) &&
+    !/[?]/.test(title) &&
+    !hasVendorDetectionCopy(title)
+  ) {
+    return false;
+  }
+  return true;
+}
+
+function nearestWithin<T extends { timestamp: number }>(
+  ts: number,
+  rows: T[],
+  maxSec: number,
+): T | null {
+  let best: T | null = null;
+  let bestDist = maxSec;
+  for (const row of rows) {
+    const d = Math.abs(row.timestamp - ts);
+    if (d <= bestDist) {
+      best = row;
+      bestDist = d;
+    }
+  }
+  return best;
+}
+
+function normalizeHostAsk<T extends PublishablePlay>(play: PublishedPlay<T>): PublishedPlay<T> {
+  if (!isHostCommentProvenance(play.provenance)) return play;
+  if (isNamedPlay(play) && sourceCommentKind(play) === "named") {
+    const quoted = extractQuotedTitle(commentText(play));
+    if (quoted && isPlaceholderTitle((play.title ?? "").toLowerCase())) {
+      return {
+        ...play,
+        title: quoted,
+        suggestedTitle: play.suggestedTitle ?? quoted,
+        idStatus: play.idStatus === "unparsed" ? "unresolved_id" : play.idStatus,
+      };
+    }
+    return play;
+  }
+  if (!isHostIdAsk(play)) return play;
+  const quoted = extractQuotedTitle(commentText(play));
+  const note = [play.idNote, play.rawText].find(
+    (t) => t && classifySourceComment(t) !== "chat" && !hasVendorDetectionCopy(t),
+  ) ?? null;
+  return {
+    ...play,
+    title: quoted ?? "Unknown",
+    artistName: play.artistName,
+    suggestedTitle: play.suggestedTitle ?? quoted,
+    idStatus: "unresolved_id",
+    idNote: note,
+    rawText: note,
+    detectionComment: null,
+  };
+}
+
 function annotatePlay<T extends PublishablePlay>(play: T): PublishedPlay<T> {
   const hint = parseWeakFingerprintHint(play.idNote, play.rawText);
   const suggestedArtist = hint?.artist ?? play.suggestedArtist ?? null;
@@ -253,7 +362,8 @@ function annotatePlay<T extends PublishablePlay>(play: T): PublishedPlay<T> {
 
 /**
  * Project stored plays onto the public setgraph.
- * Never drops a confirmed / first-party named cue.
+ * Host comment times outrank cadence / fingerprint grids.
+ * Never drops a confirmed / overlay named cue.
  */
 export function publishSetPlays<T extends PublishablePlay>(
   plays: T[],
@@ -261,23 +371,69 @@ export function publishSetPlays<T extends PublishablePlay>(
 ): PublishedPlay<T>[] {
   const annotated = plays.map((p) => annotatePlay(p));
   const placeholders = annotated.filter((p) => isFingerprintPlaceholder(p));
-  const kept = collapseConsecutivePlays(
-    annotated.filter((p) => !isFingerprintPlaceholder(p)),
+  const droppedChat = annotated.some(
+    (p) => !isFingerprintPlaceholder(p) && isHostChatPlay(p),
   );
-  const named = kept.filter(
+  const withoutChat = annotated
+    .filter((p) => !isFingerprintPlaceholder(p) && !isHostChatPlay(p))
+    .map((p) => normalizeHostAsk(p));
+
+  const hostAsks = withoutChat.filter(
+    (p) => isHostCommentProvenance(p.provenance) && !isNamedPlay(p),
+  );
+  const rest = withoutChat.filter((p) => !hostAsks.includes(p));
+  const collapsedAsks = collapseHostCommentTimes(hostAsks, sourceCommentKind);
+  let kept = collapseConsecutivePlays([...rest, ...collapsedAsks]);
+
+  const half = expectedPlaySec(meta) / 2;
+  const hostTimes = kept.filter(
+    (p) => isHostCommentProvenance(p.provenance) || p.provenance === "1001tl",
+  );
+  const fpHits = kept.filter(
+    (p) => p.provenance === "fingerprint" && !isFingerprintPlaceholder(p),
+  );
+  const other = kept.filter((p) => !hostTimes.includes(p) && !fpHits.includes(p));
+  const mergedHosts = hostTimes.map((h) => ({ ...h }));
+  const unsnapped: PublishedPlay<T>[] = [];
+  for (const fp of fpHits) {
+    const host = nearestWithin(fp.timestamp, mergedHosts, half);
+    if (!host) {
+      unsnapped.push(fp);
+      continue;
+    }
+    const idx = mergedHosts.indexOf(host);
+    mergedHosts[idx] = {
+      ...host,
+      title: playCollapseKey(fp) ? fp.title : host.title,
+      artistName: fp.artistName ?? host.artistName,
+      suggestedArtist: fp.suggestedArtist ?? host.suggestedArtist,
+      suggestedTitle: fp.suggestedTitle ?? host.suggestedTitle,
+      idStatus: isConfirmedId(fp.idStatus) ? fp.idStatus : host.idStatus,
+      trackSlug: fp.trackSlug ?? host.trackSlug,
+      detectionComment: fp.detectionComment ?? host.detectionComment,
+      timestamp: host.timestamp,
+    };
+  }
+  kept = collapseConsecutivePlays([...mergedHosts, ...other, ...unsnapped]);
+
+  const named = kept.filter((p) => isNamedPlay(p));
+  const idAsks = kept.filter((p) => isHostIdAsk(p) && !isNamedPlay(p));
+  const spineCount = kept.filter(
     (p) =>
-      !!playCollapseKey(p) ||
-      isConfirmedId(p.idStatus) ||
-      isPublishSpineProvenance(p.provenance),
-  );
-  const spineCount = kept.filter((p) => isPublishSpineProvenance(p.provenance)).length;
+      isPublishSpineProvenance(p.provenance) &&
+      isNamedPlay(p) &&
+      p.provenance !== "fingerprint",
+  ).length;
   const fill = shouldFillExpectedSlots({
     durationSec: meta.durationSec,
     namedCount: named.length,
     placeholderCount: placeholders.length,
     spineCount,
+    idAskCount: idAsks.length,
+    droppedChat,
     genre: meta.genre,
     type: meta.type,
+    title: meta.title,
   });
 
   const sorted = [...kept].sort((a, b) => a.timestamp - b.timestamp);
@@ -292,10 +448,11 @@ export function publishSetPlays<T extends PublishablePlay>(
   }
 
   const existingTs = sorted.map((p) => p.timestamp);
-  const half = expectedPlaySec(meta) / 2;
-  const candidates = cadenceTimestamps(meta.durationSec, expected).filter(
-    (ts) => nearestDistance(ts, existingTs) > half,
-  );
+  const candidates = cadenceTimestamps(meta.durationSec, expected).filter((ts) => {
+    if (nearestDistance(ts, existingTs) <= half) return false;
+    if (isRadioTalkWindow(ts, meta.durationSec, meta)) return false;
+    return true;
+  });
   const template = sorted[0] ?? annotated[0] ?? null;
   const extras = candidates
     .slice(0, need)
@@ -313,6 +470,8 @@ export type RawPlayTally = {
   trackCount: number;
   fingerprintUnparsed: number;
   spineCount: number;
+  hostUnparsed?: number;
+  hostUnresolved?: number;
 };
 
 /** Card / feed counts: hide miss-grid rows; fill expected slots when needed. */
@@ -321,20 +480,25 @@ export function publishListTally(
   meta: PublishPlayMeta,
 ): { counts: StatusCounts; trackCount: number } {
   const fpUnparsed = Math.max(0, raw.fingerprintUnparsed);
-  const named = Math.max(0, raw.trackCount - fpUnparsed);
+  const hostUnparsed = Math.max(0, raw.hostUnparsed ?? 0);
+  const idAsks = Math.max(0, raw.hostUnresolved ?? 0);
+  const named = Math.max(0, raw.trackCount - fpUnparsed - hostUnparsed);
   const counts: StatusCounts = {
     identified: raw.counts.identified,
     community_resolved: raw.counts.community_resolved,
     unresolved_id: raw.counts.unresolved_id,
-    unparsed: Math.max(0, raw.counts.unparsed - fpUnparsed),
+    unparsed: Math.max(0, raw.counts.unparsed - fpUnparsed - hostUnparsed),
   };
   const fill = shouldFillExpectedSlots({
     durationSec: meta.durationSec,
-    namedCount: named,
+    namedCount: Math.max(0, named - idAsks),
     placeholderCount: fpUnparsed,
     spineCount: raw.spineCount,
+    idAskCount: idAsks,
+    droppedChat: hostUnparsed > 0,
     genre: meta.genre,
     type: meta.type,
+    title: meta.title,
   });
   if (!fill) {
     return { counts, trackCount: named };

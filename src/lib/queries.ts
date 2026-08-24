@@ -138,7 +138,7 @@ async function statusCountsBySetIds(
     }),
     prisma.set.findMany({
       where: { id: { in: setIds } },
-      select: { id: true, durationSec: true, genre: true, type: true },
+      select: { id: true, durationSec: true, genre: true, type: true, title: true },
     }),
   ]);
 
@@ -149,6 +149,8 @@ async function statusCountsBySetIds(
       trackCount: number;
       fingerprintUnparsed: number;
       spineCount: number;
+      hostUnparsed: number;
+      hostUnresolved: number;
     }
   >();
   const provBest = new Map<string, { provenance: string; n: number }>();
@@ -160,6 +162,8 @@ async function statusCountsBySetIds(
         trackCount: 0,
         fingerprintUnparsed: 0,
         spineCount: 0,
+        hostUnparsed: 0,
+        hostUnresolved: 0,
       };
       raw.set(g.setId, entry);
     }
@@ -170,7 +174,26 @@ async function statusCountsBySetIds(
     if (g.provenance === "fingerprint" && g.idStatus === "unparsed") {
       entry.fingerprintUnparsed += g._count._all;
     }
-    if (isPublishSpineProvenance(g.provenance)) {
+    if (
+      g.provenance === "soundcloud" ||
+      g.provenance === "youtube" ||
+      g.provenance === "hearthis"
+    ) {
+      if (g.idStatus === "unparsed") entry.hostUnparsed += g._count._all;
+      if (g.idStatus === "unresolved_id") entry.hostUnresolved += g._count._all;
+    }
+    const namedHost =
+      (g.provenance === "soundcloud" ||
+        g.provenance === "youtube" ||
+        g.provenance === "hearthis") &&
+      (g.idStatus === "identified" || g.idStatus === "community_resolved");
+    if (
+      (isPublishSpineProvenance(g.provenance) &&
+        g.provenance !== "soundcloud" &&
+        g.provenance !== "youtube" &&
+        g.provenance !== "hearthis") ||
+      namedHost
+    ) {
       entry.spineCount += g._count._all;
     }
     const prev = provBest.get(g.setId);
@@ -201,6 +224,7 @@ async function statusCountsBySetIds(
       durationSec: meta?.durationSec ?? 0,
       genre: meta?.genre,
       type: meta?.type,
+      title: meta?.title,
     });
     out.set(id, {
       counts: published.counts,
@@ -395,6 +419,7 @@ export async function getSetBySlug(slug: string) {
       durationSec: set.durationSec,
       genre: normalizeGenre(set.genre),
       type: set.type,
+      title: set.title,
     },
   );
   const missing = plays.filter(

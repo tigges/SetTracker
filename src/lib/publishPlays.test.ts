@@ -124,6 +124,115 @@ describe("publishSetPlays", () => {
     assert.ok(published.every((p) => p.provenance === "1001tl"));
   });
 
+  it("keeps host comment times and drops chat on a radio show", () => {
+    const plays = [
+      play({
+        id: "berlin",
+        timestamp: 21,
+        provenance: "soundcloud",
+        title: "where's the Berlin set???",
+        rawText: "where's the Berlin set???",
+      }),
+      play({
+        id: "nein",
+        timestamp: 792,
+        provenance: "soundcloud",
+        title: "Nein?",
+        rawText: "Nein?",
+      }),
+      play({
+        id: "ask",
+        timestamp: 804,
+        provenance: "soundcloud",
+        idStatus: "unresolved_id",
+        title: "ID - ID",
+        idNote: "What is this track! I fkn love it!",
+      }),
+      play({
+        id: "acid",
+        timestamp: 1944,
+        provenance: "soundcloud",
+        idStatus: "unresolved_id",
+        title: "Acid Is My Therapy",
+        idNote: "Thank you for Supporting my Track 'Acid Is My Therapy'",
+      }),
+    ];
+    const published = publishSetPlays(plays, {
+      durationSec: 3441,
+      genre: "Techno",
+      type: "radio",
+      title: "Amelie Lens Radio Show 015",
+    });
+    assert.ok(!published.some((p) => /Berlin|Nein/i.test(p.title)));
+    const ask = published.find((p) => p.id === "ask");
+    assert.ok(ask);
+    assert.equal(ask!.timestamp, 804);
+    assert.equal(ask!.title, "Unknown");
+    assert.equal(ask!.idStatus, "unresolved_id");
+    const acid = published.find((p) => /Acid Is My Therapy/i.test(p.title));
+    assert.ok(acid);
+    assert.equal(acid!.timestamp, 1944);
+    assert.ok(published.length >= 12 && published.length <= 20);
+    assert.ok(
+      published
+        .filter((p) => p.id.startsWith("expected:"))
+        .every((p) => p.timestamp >= 150),
+    );
+  });
+
+  it("keeps a title-only first-party clock", () => {
+    const published = publishSetPlays(
+      [
+        play({
+          id: "yt1",
+          timestamp: 0,
+          provenance: "youtube",
+          idStatus: "identified",
+          title: "They Will Shade Us With Their Wings",
+        }),
+        play({
+          id: "yt2",
+          timestamp: 581,
+          provenance: "youtube",
+          idStatus: "identified",
+          title: "Life Study 1",
+        }),
+      ],
+      { durationSec: 3600, genre: "Other", type: "festival", title: "Max Richter" },
+    );
+    assert.equal(published.length, 2);
+    assert.equal(published[0]!.title, "They Will Shade Us With Their Wings");
+  });
+
+  it("snaps a fingerprint hit onto a nearby host comment time", () => {
+    const published = publishSetPlays(
+      [
+        play({
+          id: "ask",
+          timestamp: 800,
+          provenance: "soundcloud",
+          idStatus: "unresolved_id",
+          title: "ID - ID",
+          idNote: "What is this track!",
+        }),
+        play({
+          id: "fp",
+          timestamp: 830,
+          provenance: "fingerprint",
+          idStatus: "identified",
+          title: "Exhale",
+          artistName: "Amelie Lens",
+          trackSlug: "exhale",
+        }),
+      ],
+      { durationSec: 3600, genre: "Techno", type: "radio", title: "Radio Show 015" },
+    );
+    const row = published.find((p) => p.trackSlug === "exhale");
+    assert.ok(row);
+    assert.equal(row!.timestamp, 800);
+    assert.equal(published.filter((p) => p.trackSlug === "exhale").length, 1);
+  });
+
   it("never drops a confirmed fingerprint ID", () => {
     const plays = [
       play({
@@ -173,6 +282,20 @@ describe("shouldFillExpectedSlots", () => {
         genre: "House",
       }),
       false,
+    );
+    assert.equal(
+      shouldFillExpectedSlots({
+        durationSec: 3441,
+        namedCount: 0,
+        placeholderCount: 0,
+        spineCount: 0,
+        idAskCount: 3,
+        droppedChat: true,
+        genre: "Techno",
+        type: "radio",
+        title: "Amelie Lens Radio Show 015",
+      }),
+      true,
     );
   });
 });
