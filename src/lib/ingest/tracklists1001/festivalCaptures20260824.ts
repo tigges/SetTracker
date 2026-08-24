@@ -440,3 +440,52 @@ export const TL_HONEY_DIJON_THE_LOOP_DEKMANTEL_NETHERLANDS_2025: FingerprintSeed
   { at: "1:48:00", artist: "CASSIMM", title: "Love Desire" },
   { at: "1:52:00", artist: "Soul Central ft. Kathy Brown", title: "Strings Of Life (Stronger On My Own) (Supernova Remix)" },
 ];
+
+/**
+ * VINAI @ S2O Songkran Music Festival Thailand 2023-04-15
+ * Official YouTube: https://youtu.be/193z2Yyb-4g
+ * https://www.1001tracklists.com/tracklist/2urv8pq1/vinai-s2o-songkran-music-festival-thailand-2023-04-15.html
+ * Paste name TL_VINAI_S2O_Songkran-Music-Festival_Thailand_2023-04-15 is not
+ * a valid identifier. Paste wire yt-/193z2Yyb-4g is a typo — slug is
+ * yt-193z2Yyb-4g.
+ * No SoundCloud in the operator paste — do not invent an SC slug.
+ * Distinct from VINAI LIVE @ S2O BANGKOK 2023 (yt-VEA6D7c758s).
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-193z2Yyb-4g"]
+ * Curated in youtube/videos.ts. Captured 2026-08-24 — provenance 1001tl.
+ */
+export const TL_VINAI_S2O_SONGKRAN_THAILAND_2023: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "VINAI & Le Pedre", title: "I Was Made (RAAKMO Remix)" },
+  { at: "1:53", artist: "Lil Nas X", title: "STAR WALKIN' (League Of Legends Worlds Anthem) (VINAI x RAAKMO Remix)" },
+  { at: "3:18", artist: "Ray Volpe", title: "Laserbeam (Sullivan King Remix)" },
+  { at: "4:43", artist: "VINAI & VAMERO ft. Chris Crone", title: "That Way (RAAKMO Remix)" },
+  { at: "6:08", artist: "Oasis", title: "Wonderwall" },
+  { at: "7:33", artist: "R3HAB & VINAI", title: "How We Party" },
+  { at: "8:58", artist: "TJR & VINAI", title: "Bounce Generation" },
+  { at: "10:23", artist: "Dimitri Vegas & Like Mike vs. VINAI", title: "Louder" },
+  { at: "11:48", artist: "W&W & VINAI", title: "GANGSTER" },
+  { at: "13:12", artist: "Linkin Park", title: "In The End" },
+  { at: "14:37", artist: "Husman", title: "Heroic" },
+  { at: "16:01", artist: "Travis Scott ft. Drake", title: "Sicko Mode" },
+  { at: "17:26", artist: "Crankdat & Bandlez", title: "Ground Shake" },
+  { at: "18:50", artist: "David Guetta ft. Bebe Rexha", title: "I'm Good (Blue) (VINAI Remix)" },
+  { at: "20:15", artist: "Sean Paul", title: "Temperature" },
+  { at: "21:39", artist: "Carnage & VINAI", title: "Time For The Techno" },
+  { at: "23:04", artist: "BLACKPINK", title: "How You Like That" },
+  { at: "24:28", artist: "BLACKPINK", title: "How You Like That (RΛKHZ Remix)" },
+  { at: "25:53", artist: "Ran-D & Digital Punk vs. Bon Jovi", title: "Born To Die vs. Livin' On A Prayer (Code Black Mashup)" },
+  { at: "27:17", artist: "Bon Jovi", title: "Livin' On A Prayer" },
+  { at: "28:42", artist: "Ran-D & Digital Punk", title: "Born To Die" },
+  { at: "30:06", artist: "David Guetta ft. Sia", title: "Titanium (David Guetta & MORTEN Future Rave Remix)" },
+  { at: "31:31", artist: "Lit Lords", title: "From The Mud (RAAKMO Remix)" },
+  { at: "32:55", artist: "VINAI x RAAKMO", title: "Numb" },
+  { at: "35:35", artist: "Eminem", title: "Lose Yourself" },
+  { at: "38:14", artist: "ROSSY", title: "DEITY" },
+  { at: "40:54", artist: "Alesso & OneRepublic vs. VINAI & Naeleck & RAAKMO", title: "If I Lose Myself vs. The Sinner (VINAI Mashup)" },
+  { at: "43:33", artist: "Alesso & OneRepublic", title: "If I Lose Myself" },
+  { at: "46:13", artist: "VINAI & Naeleck & RAAKMO", title: "The Sinner" },
+  { at: "48:52", artist: "VINAI ft. Harrison", title: "The Wave (VINAI Live Edit)" },
+  { at: "51:32", artist: "Queen", title: "We Will Rock You" },
+  { at: "54:11", artist: "Gammer", title: "The Drop" },
+  { at: "56:51", artist: "The Kid LAROI & Justin Bieber", title: "STAY (Dimatik & Twisted Melodiez Remix)" },
+  { at: "59:30", artist: "Ran-D", title: "Zombie" },
+];

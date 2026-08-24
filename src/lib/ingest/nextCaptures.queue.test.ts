@@ -561,6 +561,17 @@ assert.equal(
 assert.equal(
   skipCaptureNeed(
     row({
+      slug: "yt-193z2Yyb-4g",
+      title: "VINAI @ S2O Songkran Music Festival Thailand 2023-04-15",
+    }),
+    mapped,
+    now,
+  ),
+  "mapped",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
       slug: "sc-eric-prydz-eric-prydz-presents-463760700",
       title: "Eric Prydz presents EPIC Radio 036",
       type: "radio",

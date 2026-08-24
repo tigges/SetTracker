@@ -187,6 +187,7 @@ import {
   TL_DVLM_SMASH_THE_HOUSE_RADIO_690_2026,
   TL_ERIC_PRYDZ_EPIC_RADIO_025_2026,
   TL_HONEY_DIJON_THE_LOOP_DEKMANTEL_NETHERLANDS_2025,
+  TL_VINAI_S2O_SONGKRAN_THAILAND_2023,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   isSecondaryPlaybackSlug,
@@ -1824,6 +1825,9 @@ assert.equal(isWiredTracklistSlug("yt-xv6hpdqKlxg"), true);
 assert.equal(isWiredTracklistSlug("sc-eric-prydz-epic-radio-025"), true);
 assert.equal(isWiredTracklistSlug("yt-t5KwF_VsM50"), true);
 assert.equal(isWiredTracklistSlug("sc-honey-dijon-dekmantel"), false);
+assert.equal(isWiredTracklistSlug("yt-193z2Yyb-4g"), true);
+assert.equal(isWiredTracklistSlug("yt-/193z2Yyb-4g"), false);
+assert.equal(isWiredTracklistSlug("sc-vinai-s2o"), false);
 assert.equal(
   isWiredTracklistSlug(
     "sc-https://soundcloud.com/eric-prydz/epic-radio-025",
@@ -3833,6 +3837,29 @@ for (let i = 1; i < honeyDekmantel.length; i++) {
     (honeyDekmantel[i]!.timestamp ?? 0) >
       (honeyDekmantel[i - 1]!.timestamp ?? 0),
     `Honey Dijon Dekmantel clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_VINAI_S2O_SONGKRAN_THAILAND_2023);
+assert.equal(TL_VINAI_S2O_SONGKRAN_THAILAND_2023.length, 34);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-193z2Yyb-4g"],
+  TL_VINAI_S2O_SONGKRAN_THAILAND_2023,
+);
+assert.equal(TRACKLIST_1001_BY_SOURCE_SLUG["yt-/193z2Yyb-4g"], undefined);
+assert.equal(TRACKLIST_1001_BY_SOURCE_SLUG["sc-vinai-s2o"], undefined);
+assert.equal(isSecondaryPlaybackSlug("yt-193z2Yyb-4g"), false);
+assert.equal(TL_VINAI_S2O_SONGKRAN_THAILAND_2023[0]?.title, "I Was Made (RAAKMO Remix)");
+assert.equal(TL_VINAI_S2O_SONGKRAN_THAILAND_2023[33]?.title, "Zombie");
+const vinaiS2o = tracklist1001RowsToPlays(TL_VINAI_S2O_SONGKRAN_THAILAND_2023);
+assert.equal(vinaiS2o.length, 34);
+assert.equal(vinaiS2o[0]?.provenance, "1001tl");
+assert.equal(vinaiS2o[0]?.timestamp, 0);
+assert.equal(vinaiS2o[33]?.timestamp, 59 * 60 + 30);
+for (let i = 1; i < vinaiS2o.length; i++) {
+  assert.ok(
+    (vinaiS2o[i]!.timestamp ?? 0) > (vinaiS2o[i - 1]!.timestamp ?? 0),
+    `VINAI S2O Songkran clocks must increase at index ${i}`,
   );
 }
 
