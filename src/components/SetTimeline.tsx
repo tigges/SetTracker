@@ -18,9 +18,13 @@ import {
   fmtTimestamp,
   listenLinks,
   statusColor,
-  statusLabel,
   type IdStatus,
 } from "@/lib/status";
+import {
+  COMMENT_LOW_CONFIDENCE,
+  hasVendorDetectionCopy,
+  publicStatusLabel,
+} from "@/lib/publishPlays";
 import type { PlayRow } from "@/lib/queries";
 import { playablePlaybackUrl } from "@/lib/playback";
 import { EDIT_KIND_LABEL, editKind } from "@/lib/trackMeta";
@@ -236,7 +240,7 @@ export function SetTimeline({
                   background: `${statusColor(caption.idStatus)}1f`,
                 }}
               >
-                {statusLabel(caption.idStatus)}
+                {publicStatusLabel(caption)}
               </span>
             </>
           )}
@@ -380,9 +384,15 @@ export function SetTimeline({
                       {p.resolvedTitle && (
                         <span className="truncate text-teal">→ {p.resolvedTitle}</span>
                       )}
-                      {p.idNote && !p.artistName && (
+                      {p.detectionComment ? (
+                        <span className="truncate text-muted2 italic">
+                          {p.detectionComment}
+                        </span>
+                      ) : p.idNote &&
+                        !p.artistName &&
+                        !hasVendorDetectionCopy(p.idNote) ? (
                         <span className="truncate text-muted2 italic">{p.idNote}</span>
-                      )}
+                      ) : null}
                     </div>
                   </div>
 
@@ -395,6 +405,12 @@ export function SetTimeline({
                       currentLabel={
                         p.artistName ? `${p.artistName} – ${p.title}` : p.title
                       }
+                      suggestedArtist={p.suggestedArtist ?? p.artistName}
+                      suggestedTitle={p.suggestedTitle ?? (p.artistName ? p.title : null)}
+                      confirmHint={Boolean(
+                        p.suggestedTitle ||
+                          p.detectionComment === COMMENT_LOW_CONFIDENCE,
+                      )}
                     />
                   )}
 

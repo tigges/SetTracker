@@ -16,7 +16,7 @@ function norm(raw: string | null | undefined): string {
   return (raw ?? "").replace(/\s+/g, " ").trim().toLowerCase();
 }
 
-function isPlaceholderTitle(title: string): boolean {
+export function isPlaceholderTitle(title: string): boolean {
   if (!title || title === "unknown") return true;
   if (/^id\s*@/i.test(title)) return true;
   if (/^acr-miss\b/i.test(title)) return true;

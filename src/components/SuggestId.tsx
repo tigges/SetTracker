@@ -14,15 +14,22 @@ export function SuggestIdButton({
   position,
   timestamp,
   currentLabel,
+  suggestedArtist,
+  suggestedTitle,
+  confirmHint,
 }: {
   setSlug: string;
   position: number;
   timestamp: number;
   currentLabel: string;
+  suggestedArtist?: string | null;
+  suggestedTitle?: string | null;
+  confirmHint?: boolean;
 }) {
   const [open, setOpen] = useState(false);
-  const [artist, setArtist] = useState("");
-  const [title, setTitle] = useState("");
+  const [artist, setArtist] = useState(suggestedArtist ?? "");
+  const [title, setTitle] = useState(suggestedTitle ?? "");
+  const actionLabel = confirmHint ? "Confirm ID" : "Suggest ID";
   const [copied, setCopied] = useState(false);
 
   const ready = Boolean(artist.trim() && title.trim());
@@ -91,14 +98,20 @@ export function SuggestIdButton({
         type="button"
         onClick={() => setOpen((v) => !v)}
         className="rounded-md border border-line px-1.5 py-0.5 text-[10px] text-muted2 transition-colors hover:border-brand hover:text-brand"
-        title="Suggest an ID for this row"
+        title={
+          confirmHint
+            ? "Confirm or correct this suggested ID"
+            : "Suggest an ID for this row"
+        }
       >
-        Suggest ID
+        {actionLabel}
       </button>
       {open && (
         <div className="absolute right-0 z-20 mt-1 w-64 rounded-lg border border-line bg-panel p-3 shadow-lg">
           <p className="mb-2 text-[11px] text-muted">
-            Suggest a release for{" "}
+            {confirmHint
+              ? "Confirm this suggested release for "
+              : "Suggest a release for "}
             <span className="text-ink">{currentLabel}</span>
           </p>
           <label className="mb-1 block text-[10px] uppercase tracking-wider text-muted2">

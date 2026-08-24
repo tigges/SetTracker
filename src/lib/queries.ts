@@ -34,6 +34,11 @@ import {
 import { relatedSlugsFor } from "@/lib/ingest/discovery/relations";
 import { resolveSetSlug } from "@/lib/ingest/sourceRemaps";
 import { collapseConsecutivePlays, playCollapseKey } from "@/lib/playCollapse";
+import {
+  isPublishSpineProvenance,
+  publishListTally,
+  publishSetPlays,
+} from "@/lib/publishPlays";
 import { canonicalDjSlug, DJ_SLUG_ALIASES } from "@/lib/ingest/djSlugAliases";
 import { sortEventSets, resolvedIdCount } from "@/lib/feedPriority";
 import { collapseHostTwins } from "@/lib/feedQuality";
@@ -125,32 +130,49 @@ async function statusCountsBySetIds(
   >();
   if (setIds.length === 0) return out;
 
-  const [groups, provGroups] = await Promise.all([
+  const [groups, sets] = await Promise.all([
     prisma.played.groupBy({
-      by: ["setId", "idStatus"],
+      by: ["setId", "idStatus", "provenance"],
       where: { setId: { in: setIds } },
       _count: { _all: true },
     }),
-    prisma.played.groupBy({
-      by: ["setId", "provenance"],
-      where: { setId: { in: setIds } },
-      _count: { _all: true },
+    prisma.set.findMany({
+      where: { id: { in: setIds } },
+      select: { id: true, durationSec: true, genre: true, type: true },
     }),
   ]);
 
+  const raw = new Map<
+    string,
+    {
+      counts: StatusCounts;
+      trackCount: number;
+      fingerprintUnparsed: number;
+      spineCount: number;
+    }
+  >();
+  const provBest = new Map<string, { provenance: string; n: number }>();
   for (const g of groups) {
-    let entry = out.get(g.setId);
+    let entry = raw.get(g.setId);
     if (!entry) {
-      entry = { counts: emptyCounts(), trackCount: 0, provenance: null };
-      out.set(g.setId, entry);
+      entry = {
+        counts: emptyCounts(),
+        trackCount: 0,
+        fingerprintUnparsed: 0,
+        spineCount: 0,
+      };
+      raw.set(g.setId, entry);
     }
     entry.trackCount += g._count._all;
     if (g.idStatus in entry.counts) {
       entry.counts[g.idStatus as IdStatus] += g._count._all;
     }
-  }
-  const provBest = new Map<string, { provenance: string; n: number }>();
-  for (const g of provGroups) {
+    if (g.provenance === "fingerprint" && g.idStatus === "unparsed") {
+      entry.fingerprintUnparsed += g._count._all;
+    }
+    if (isPublishSpineProvenance(g.provenance)) {
+      entry.spineCount += g._count._all;
+    }
     const prev = provBest.get(g.setId);
     if (
       g.provenance === "1001tl" ||
@@ -158,14 +180,33 @@ async function statusCountsBySetIds(
       g.provenance === "applemusic"
     ) {
       provBest.set(g.setId, { provenance: g.provenance, n: g._count._all + 10_000 });
-      continue;
-    }
-    if (!prev || g._count._all > prev.n) {
+    } else if (!prev || g._count._all > prev.n) {
       provBest.set(g.setId, { provenance: g.provenance, n: g._count._all });
     }
   }
-  for (const [id, row] of out) {
-    row.provenance = provBest.get(id)?.provenance ?? null;
+
+  const metaById = new Map(sets.map((s) => [s.id, s]));
+  for (const id of setIds) {
+    const row = raw.get(id);
+    const meta = metaById.get(id);
+    if (!row) {
+      out.set(id, {
+        counts: emptyCounts(),
+        trackCount: 0,
+        provenance: provBest.get(id)?.provenance ?? null,
+      });
+      continue;
+    }
+    const published = publishListTally(row, {
+      durationSec: meta?.durationSec ?? 0,
+      genre: meta?.genre,
+      type: meta?.type,
+    });
+    out.set(id, {
+      counts: published.counts,
+      trackCount: published.trackCount,
+      provenance: provBest.get(id)?.provenance ?? null,
+    });
   }
   return out;
 }
@@ -342,13 +383,20 @@ export async function getSetBySlug(slug: string) {
         : null,
     };
   });
-  let plays = collapseConsecutivePlays(mappedPlays, (p) =>
-    playCollapseKey({
-      trackSlug: p.trackSlug,
-      artistName: p.artistName,
-      title: p.title,
-    }),
-  ).map((p, i) => ({ ...p, position: i + 1 }));
+  let plays = publishSetPlays(
+    collapseConsecutivePlays(mappedPlays, (p) =>
+      playCollapseKey({
+        trackSlug: p.trackSlug,
+        artistName: p.artistName,
+        title: p.title,
+      }),
+    ),
+    {
+      durationSec: set.durationSec,
+      genre: normalizeGenre(set.genre),
+      type: set.type,
+    },
+  );
   const missing = plays.filter(
     (p) => !canonicalBeatportUrl(p.beatportUrl) && p.artistName,
   );
@@ -464,11 +512,11 @@ export async function getRelatedSets(slug: string, limit = 6) {
     take: 40,
     orderBy: { publishedAt: "desc" },
     select: {
+      id: true,
       slug: true,
       title: true,
       publishedAt: true,
       durationSec: true,
-      _count: { select: { plays: true } },
       event: { select: { slug: true, name: true } },
       series: { select: { slug: true, name: true } },
       artists: {
@@ -478,6 +526,9 @@ export async function getRelatedSets(slug: string, limit = 6) {
       },
     },
   });
+  const relatedTallies = await statusCountsBySetIds(
+    candidates.map((c) => c.id),
+  );
 
   const picked = pickRelatedSets(
     {
@@ -490,7 +541,7 @@ export async function getRelatedSets(slug: string, limit = 6) {
       slug: c.slug,
       title: c.title,
       publishedAt: c.publishedAt,
-      trackCount: c._count.plays,
+      trackCount: relatedTallies.get(c.id)?.trackCount ?? 0,
       durationSec: c.durationSec,
       eventSlug: c.event?.slug,
       seriesSlug: c.series?.slug,
@@ -507,7 +558,7 @@ export async function getRelatedSets(slug: string, limit = 6) {
       title: raw.title,
       publishedAt: raw.publishedAt,
       durationSec: raw.durationSec,
-      trackCount: raw._count.plays,
+      trackCount: relatedTallies.get(raw.id)?.trackCount ?? 0,
       reason,
       reasonLabel: RELATED_REASON[reason],
       eventName: raw.event?.name ?? null,

@@ -9,13 +9,21 @@
  * Songkick / Songstats are not scraped — density is computed from our catalog.
  */
 
+import { familyIdForGenre } from "./genreFamilies";
+import { normalizeGenre } from "./genre";
+
 export type DensitySeverity = "ok" | "thin" | "severe";
+
+export type SetCadenceInput = {
+  genre?: string | null;
+  type?: string | null;
+};
 
 export type SetDensityInput = {
   durationSec: number;
   /** Logged plays on the timeline (any status). */
   playCount: number;
-};
+} & SetCadenceInput;
 
 export type SetDensity = {
   durationSec: number;
@@ -38,8 +46,36 @@ export type SetDensity = {
 /** Typical audible time per track in a house/tech-house DJ set. */
 export const EXPECTED_PLAY_SEC = 3.5 * 60;
 
+/** Hard ceiling — a miss grid is not 40+ real IDs per hour. */
+export const MAX_TRACKS_PER_HOUR = 24;
+
 /** Only flag sets at least this long (short uploads are noisy). */
 export const DENSITY_MIN_DURATION_SEC = 30 * 60;
+
+/**
+ * Genre / set-type cadence. Evolves from confirmed catalog mixes, not
+ * fingerprint miss grids. Radio house runs a bit longer (talk); peak
+ * techno and bass are shorter on deck.
+ */
+export function expectedPlaySec(input: SetCadenceInput = {}): number {
+  const family = familyIdForGenre(normalizeGenre(input.genre));
+  if (family === "bass") return Math.round(2.75 * 60);
+  if (family === "techno") return Math.round(3.25 * 60);
+  if (input.type === "radio" && family === "house") return 4 * 60;
+  return EXPECTED_PLAY_SEC;
+}
+
+/** Likely track count for a published mix graph. */
+export function expectedPlayCount(
+  durationSec: number,
+  input: SetCadenceInput = {},
+): number {
+  const duration = Math.max(0, durationSec || 0);
+  if (duration <= 0) return 0;
+  const raw = Math.max(1, Math.round(duration / expectedPlaySec(input)));
+  const cap = Math.max(1, Math.round((duration / 3600) * MAX_TRACKS_PER_HOUR));
+  return Math.min(raw, cap);
+}
 
 /**
  * Severe: avg ≥ 10 min/play OR < 5 tracks/hour.
@@ -51,8 +87,7 @@ export function assessSetDensity(input: SetDensityInput): SetDensity {
   const hours = durationSec / 3600;
   const tracksPerHour = hours > 0 ? playCount / hours : 0;
   const avgSecPerPlay = playCount > 0 ? durationSec / playCount : Number.POSITIVE_INFINITY;
-  const expectedPlays =
-    durationSec > 0 ? Math.max(1, Math.round(durationSec / EXPECTED_PLAY_SEC)) : 0;
+  const expectedPlays = expectedPlayCount(durationSec, input);
   const coverage = expectedPlays > 0 ? playCount / expectedPlays : 0;
 
   if (durationSec < DENSITY_MIN_DURATION_SEC) {
