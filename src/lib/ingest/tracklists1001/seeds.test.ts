@@ -178,6 +178,10 @@ import {
   TL_ROBIN_SCHULZ_SUGAR_RADIO_555_2026,
   TL_SARA_LANDRY_TML_FRIENDSHIP_MIX_2026,
   TL_TIMMY_TRUMPET_TML_WE2_FREEDOM_2026,
+  TL_ROSE_RINGED_TML_WE1_FREEDOM_2026,
+  TL_ELY_OAKS_TML_WE2_MAINSTAGE_2026,
+  TL_BULLET_TOOTH_TML_WE2_CORE_2026,
+  TL_JOHN_NEWMAN_TML_WE2_FREEDOM_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   isSecondaryPlaybackSlug,
@@ -3076,6 +3080,128 @@ for (let i = 1; i < timmyFreedom.length; i++) {
   assert.ok(
     (timmyFreedom[i]!.timestamp ?? 0) > (timmyFreedom[i - 1]!.timestamp ?? 0),
     `Timmy Trumpet TML WE2 Freedom 2026 clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_ROSE_RINGED_TML_WE1_FREEDOM_2026);
+assert.equal(TL_ROSE_RINGED_TML_WE1_FREEDOM_2026.length, 21);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-KAZd25mCHp8"],
+  TL_ROSE_RINGED_TML_WE1_FREEDOM_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-rose-ringed-rose-ringed-freedomstage-we1"],
+  TL_ROSE_RINGED_TML_WE1_FREEDOM_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-https://soundcloud.com/rose-ringed/rose-ringed-freedomstage-we1"
+  ],
+  undefined,
+);
+assert.equal(isWiredTracklistSlug("yt-KAZd25mCHp8"), true);
+assert.equal(
+  isSecondaryPlaybackSlug("sc-rose-ringed-rose-ringed-freedomstage-we1"),
+  true,
+);
+assert.equal(isSecondaryPlaybackSlug("yt-KAZd25mCHp8"), false);
+assert.equal(TL_ROSE_RINGED_TML_WE1_FREEDOM_2026[0]?.title, "Freedom Mountain");
+assert.equal(TL_ROSE_RINGED_TML_WE1_FREEDOM_2026[20]?.title, "Don't Take It Away");
+const roseFreedom = tracklist1001RowsToPlays(TL_ROSE_RINGED_TML_WE1_FREEDOM_2026);
+assert.equal(roseFreedom.length, 21);
+assert.equal(roseFreedom[0]?.timestamp, 11);
+assert.equal(roseFreedom[0]?.provenance, "1001tl");
+assert.equal(roseFreedom[20]?.timestamp, 1 * 3600 + 25 * 60 + 55);
+for (let i = 1; i < roseFreedom.length; i++) {
+  assert.ok(
+    (roseFreedom[i]!.timestamp ?? 0) > (roseFreedom[i - 1]!.timestamp ?? 0),
+    `Rose Ringed TML WE1 Freedom 2026 clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_ELY_OAKS_TML_WE2_MAINSTAGE_2026);
+assert.equal(TL_ELY_OAKS_TML_WE2_MAINSTAGE_2026.length, 40);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-0Fq24R47sDY"],
+  TL_ELY_OAKS_TML_WE2_MAINSTAGE_2026,
+);
+assert.equal(TRACKLIST_1001_BY_SOURCE_SLUG["sc-ely-oaks-mainstage"], undefined);
+assert.equal(isWiredTracklistSlug("yt-0Fq24R47sDY"), true);
+assert.equal(isSecondaryPlaybackSlug("yt-0Fq24R47sDY"), false);
+assert.equal(
+  TL_ELY_OAKS_TML_WE2_MAINSTAGE_2026[0]?.title,
+  "Get The Party Started (Ely Oaks Remix)",
+);
+assert.equal(TL_ELY_OAKS_TML_WE2_MAINSTAGE_2026[39]?.title, "Impossible");
+const elyOaks = tracklist1001RowsToPlays(TL_ELY_OAKS_TML_WE2_MAINSTAGE_2026);
+assert.equal(elyOaks.length, 40);
+assert.equal(elyOaks[0]?.timestamp, 20);
+assert.equal(elyOaks[39]?.timestamp, 57 * 60 + 32);
+for (let i = 1; i < elyOaks.length; i++) {
+  assert.ok(
+    (elyOaks[i]!.timestamp ?? 0) > (elyOaks[i - 1]!.timestamp ?? 0),
+    `Ely Oaks TML WE2 Mainstage 2026 clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_BULLET_TOOTH_TML_WE2_CORE_2026);
+assert.equal(TL_BULLET_TOOTH_TML_WE2_CORE_2026.length, 9);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-G-DciaWb5KY"],
+  TL_BULLET_TOOTH_TML_WE2_CORE_2026,
+);
+assert.equal(TRACKLIST_1001_BY_SOURCE_SLUG["sc-bullet-tooth-core"], undefined);
+assert.equal(isWiredTracklistSlug("yt-G-DciaWb5KY"), true);
+assert.equal(isSecondaryPlaybackSlug("yt-G-DciaWb5KY"), false);
+assert.equal(TL_BULLET_TOOTH_TML_WE2_CORE_2026[0]?.title, "Bumpin'");
+assert.equal(
+  TL_BULLET_TOOTH_TML_WE2_CORE_2026[8]?.title,
+  "Pasion (Alex Kassian Mandarine Dance Mix)",
+);
+const bulletTooth = tracklist1001RowsToPlays(TL_BULLET_TOOTH_TML_WE2_CORE_2026);
+assert.equal(bulletTooth.length, 9);
+assert.equal(bulletTooth[0]?.timestamp, 12);
+assert.equal(bulletTooth[8]?.timestamp, 1 * 3600 + 23 * 60 + 40);
+for (let i = 1; i < bulletTooth.length; i++) {
+  assert.ok(
+    (bulletTooth[i]!.timestamp ?? 0) > (bulletTooth[i - 1]!.timestamp ?? 0),
+    `bullet tooth TML WE2 CORE 2026 clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_JOHN_NEWMAN_TML_WE2_FREEDOM_2026);
+assert.equal(TL_JOHN_NEWMAN_TML_WE2_FREEDOM_2026.length, 12);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-5V5qDFSw8Hs"],
+  TL_JOHN_NEWMAN_TML_WE2_FREEDOM_2026,
+);
+assert.equal(TRACKLIST_1001_BY_SOURCE_SLUG["sc-john-newman-freedom"], undefined);
+assert.equal(isWiredTracklistSlug("yt-5V5qDFSw8Hs"), true);
+assert.equal(isSecondaryPlaybackSlug("yt-5V5qDFSw8Hs"), false);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-5V5qDFSw8Hs"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-QcvGuOhSVlc"],
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-5V5qDFSw8Hs"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-KCeluZt3H9o"],
+);
+assert.equal(
+  TL_JOHN_NEWMAN_TML_WE2_FREEDOM_2026[0]?.title,
+  "Call Your Name (John Newman Tech Remix)",
+);
+assert.equal(
+  TL_JOHN_NEWMAN_TML_WE2_FREEDOM_2026[11]?.title,
+  "Love Me Again (John Newman 2026 VIP)",
+);
+const johnNewman = tracklist1001RowsToPlays(TL_JOHN_NEWMAN_TML_WE2_FREEDOM_2026);
+assert.equal(johnNewman.length, 12);
+assert.equal(johnNewman[0]?.timestamp, 4 * 60 + 10);
+assert.equal(johnNewman[11]?.timestamp, 50 * 60 + 9);
+for (let i = 1; i < johnNewman.length; i++) {
+  assert.ok(
+    (johnNewman[i]!.timestamp ?? 0) > (johnNewman[i - 1]!.timestamp ?? 0),
+    `John Newman TML WE2 Freedom 2026 clocks must increase at index ${i}`,
   );
 }
 

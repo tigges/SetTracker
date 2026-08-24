@@ -131,3 +131,135 @@ export const TL_TIMMY_TRUMPET_TML_WE2_FREEDOM_2026: FingerprintSeedRow[] = [
   { at: "1:24:55", artist: "STVW & Chockablock", title: "Mr. Brightside" },
   { at: "1:25:53", artist: "Timmy Trumpet & Steve Aoki & 3rd Wall ft. Luciano Pavarotti", title: "Nessun Dorma" },
 ];
+
+/**
+ * Rose Ringed @ Freedom Stage, Tomorrowland Weekend 1, Belgium 2026-07-17
+ * Official YouTube: https://youtu.be/KAZd25mCHp8
+ * Official SoundCloud: https://soundcloud.com/rose-ringed/rose-ringed-freedomstage-we1
+ * https://www.1001tracklists.com/tracklist/bvjz6x1/rose-ringed-freedom-stage-tomorrowland-weekend-1-belgium-2026-07-17.html
+ * Overlay name TL_ROSE_RINGED is too generic.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-KAZd25mCHp8"]
+ *       TRACKLIST_1001_BY_SOURCE_SLUG["sc-rose-ringed-rose-ringed-freedomstage-we1"]
+ * Captured 2026-08-24 — provenance 1001tl.
+ */
+export const TL_ROSE_RINGED_TML_WE1_FREEDOM_2026: FingerprintSeedRow[] = [
+  { at: "0:11", artist: "Rose Ringed", title: "Freedom Mountain" },
+  { at: "2:08", artist: "Estiva & Rose Ringed", title: "Growl" },
+  { at: "6:12", artist: "Rose Ringed", title: "Twilight" },
+  { at: "9:44", artist: "Rose Ringed & RYVM", title: "Pull Me Close" },
+  { at: "13:15", artist: "Haddaway", title: "What Is Love (Rose Ringed Dub)" },
+  { at: "16:32", artist: "Rose Ringed", title: "Take You Up" },
+  { at: "21:04", artist: "Rose Ringed", title: "Holding On" },
+  { at: "25:04", artist: "Rihanna ft. Mikky Ekko", title: "Stay (Estiva Remix)" },
+  { at: "29:57", artist: "Rose Ringed", title: "Planet Apex" },
+  { at: "35:34", artist: "Rose Ringed", title: "Never Again" },
+  { at: "40:31", artist: "Rose Ringed", title: "The Letter" },
+  { at: "44:45", artist: "Rose Ringed", title: "Don't Let This Love Be Over" },
+  { at: "50:19", artist: "Moby ft. The Shining Light Gospel Choir", title: "Why Does My Heart Feel So Bad? (Rose Ringed Remix)" },
+  { at: "55:08", artist: "Rose Ringed", title: "Till The End" },
+  { at: "58:48", artist: "Joris Voorn & Rose Ringed", title: "You've Made It" },
+  { at: "1:03:15", artist: "Rose Ringed", title: "Warehouse Anthem" },
+  { at: "1:07:49", artist: "Armin van Buuren", title: "Orbion (Rose Ringed Remix)" },
+  { at: "1:12:46", artist: "Tiësto", title: "Lethal Industry (Rose Ringed Remix)" },
+  { at: "1:17:08", artist: "Rose Ringed", title: "Gotta Let You Go" },
+  { at: "1:21:23", artist: "YOUDOYOU", title: "Feel Alive" },
+  { at: "1:25:55", artist: "Rose Ringed", title: "Don't Take It Away" },
+];
+
+/**
+ * Ely Oaks @ Mainstage, Tomorrowland Weekend 2, Belgium 2026-07-24
+ * Official YouTube: https://youtu.be/0Fq24R47sDY
+ * https://www.1001tracklists.com/tracklist/hjlfquk/ely-oaks-mainstage-tomorrowland-weekend-2-belgium-2026-07-24.html
+ * Overlay name TL_ELY_OAKS is too generic.
+ * No SoundCloud in the operator paste — do not invent an SC slug.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-0Fq24R47sDY"] = TL_ELY_OAKS_TML_WE2_MAINSTAGE_2026
+ * Captured 2026-08-24 — provenance 1001tl.
+ */
+export const TL_ELY_OAKS_TML_WE2_MAINSTAGE_2026: FingerprintSeedRow[] = [
+  { at: "0:20", artist: "P!nk", title: "Get The Party Started (Ely Oaks Remix)" },
+  { at: "1:48", artist: "Black Eyed Peas", title: "Boom Boom Pow (Ely Oaks & Paracek Techno Remix)" },
+  { at: "3:16", artist: "Henk & August Kind", title: "Laser Beams" },
+  { at: "4:44", artist: "Ely Oaks", title: "Breakin' Dishes" },
+  { at: "6:12", artist: "Daft Punk", title: "Harder, Better, Faster, Stronger (Ely Oaks Trance Remix)" },
+  { at: "7:40", artist: "LAVINIA & Ely Oaks", title: "Borderline" },
+  { at: "9:08", artist: "Marlon Hoffstadt vs. Anyma & Argy & Son Of Son", title: "It's That Time vs. Voices In My Head (Ely Oaks Edit)" },
+  { at: "10:36", artist: "Danzel", title: "Put Your Hands Up In The Air (Ely Oaks Remix)" },
+  { at: "12:04", artist: "IN PARALLEL", title: "NOW IT'S GONE (Ely Oaks Remix)" },
+  { at: "13:32", artist: "Bicep", title: "Glue (Ely Oaks Remix)" },
+  { at: "15:00", artist: "Tove Lo", title: "Habits (Stay High) (Acappella)" },
+  { at: "16:28", artist: "Noise Mafia", title: "Ay Papi" },
+  { at: "17:56", artist: "Madonna", title: "Like A Prayer (Ely Oaks Trance Remix)" },
+  { at: "19:24", artist: "August Kind", title: "Cosmic" },
+  { at: "20:52", artist: "Ely Oaks & Elle King", title: "Ex's & Oh's" },
+  { at: "22:20", artist: "EURO 93", title: "Lost In The Music" },
+  { at: "23:48", artist: "LAVINIA & Ely Oaks", title: "Dumb Decisions" },
+  { at: "25:16", artist: "Riva Starr & Fatboy Slim ft. Beardyman", title: "Eat Sleep Rave Repeat" },
+  { at: "26:44", artist: "LAVINIA & Ely Oaks", title: "Money Made Me A Savage (Calabria)" },
+  { at: "28:12", artist: "Kylie Minogue", title: "Can't Get You Out Of My Head" },
+  { at: "29:40", artist: "Skin On Skin", title: "Burn Dem Bridges" },
+  { at: "31:08", artist: "ALOK & Ava Max", title: "Car Keys (Ayla)" },
+  { at: "32:36", artist: "Ely Oaks", title: "BABYDOLL" },
+  { at: "34:04", artist: "Kelly Clarkson", title: "Since U Been Gone (Ely Oaks Trance Remix)" },
+  { at: "35:32", artist: "David Guetta ft. Akon", title: "Sexy Bitch (Ely Oaks Techno Remix)" },
+  { at: "37:00", artist: "John Summit", title: "LIGHTS GO OUT" },
+  { at: "38:28", artist: "Dead Or Alive", title: "You Spin Me Round (Ely Oaks Remix)" },
+  { at: "39:56", artist: "DJ IP & Sticky Pages", title: "Free Yourself" },
+  { at: "41:24", artist: "Sidney Samson", title: "Riverside" },
+  { at: "42:52", artist: "Jennifer Lopez ft. Pitbull", title: "On The Floor (DJ Tallboy & Paracek Remix)" },
+  { at: "44:20", artist: "Pegassi", title: "MOAA" },
+  { at: "45:48", artist: "Temper City", title: "Self Aware (Ely Oaks Remix)" },
+  { at: "47:16", artist: "2HOT2PLAY & Glen West", title: "20mm" },
+  { at: "48:44", artist: "David Guetta ft. Rihanna", title: "Who's That Chick?" },
+  { at: "50:12", artist: "ANTONYM", title: "Bass Go" },
+  { at: "51:40", artist: "LAVINIA & Ely Oaks", title: "I Wanna Go" },
+  { at: "53:08", artist: "Sean Paul", title: "Temperature" },
+  { at: "54:36", artist: "Beyoncé", title: "Run The World (Girls) (Ely Oaks Remix)" },
+  { at: "56:04", artist: "Ely Oaks", title: "Running Around" },
+  { at: "57:32", artist: "Ely Oaks", title: "Impossible" },
+];
+
+/**
+ * bullet tooth @ CORE Stage, Tomorrowland Weekend 2, Belgium 2026-07-24
+ * Official YouTube: https://youtu.be/G-DciaWb5KY
+ * https://www.1001tracklists.com/tracklist/1rl30xh1/bullet-tooth-core-stage-tomorrowland-weekend-2-belgium-2026-07-24.html
+ * Overlay name TL_BULLET_TOOTH is too generic.
+ * No SoundCloud in the operator paste — do not invent an SC slug.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-G-DciaWb5KY"] = TL_BULLET_TOOTH_TML_WE2_CORE_2026
+ * Captured 2026-08-24 — provenance 1001tl.
+ */
+export const TL_BULLET_TOOTH_TML_WE2_CORE_2026: FingerprintSeedRow[] = [
+  { at: "0:12", artist: "Running Hot", title: "Bumpin'" },
+  { at: "6:30", artist: "All Saints", title: "Never Ever (Booker T Vocal Mix)" },
+  { at: "28:30", artist: "Isaac Carter", title: "Disconnected" },
+  { at: "44:10", artist: "Groove Armada ft. Gramma Funk", title: "I See You Baby (DJ Boring Remix)" },
+  { at: "48:10", artist: "Chris Gialanze", title: "Gunna Be" },
+  { at: "52:40", artist: "William Kiss", title: "Midnight Club" },
+  { at: "56:40", artist: "Scarlett O'Malley", title: "Juice Break" },
+  { at: "1:05:30", artist: "Burnski", title: "Afters" },
+  { at: "1:23:40", artist: "Pianoman", title: "Pasion (Alex Kassian Mandarine Dance Mix)" },
+];
+
+/**
+ * John Newman @ Live Band, Freedom Stage, Tomorrowland Weekend 2, Belgium 2026-07-24
+ * Official YouTube: https://youtu.be/5V5qDFSw8Hs
+ * https://www.1001tracklists.com/tracklist/298c0gqk/john-newman-live-band-freedom-stage-tomorrowland-weekend-2-belgium-2026-07-24.html
+ * Overlay name TL_JOHN_NEWMAN is too generic.
+ * No SoundCloud in the operator paste — do not invent an SC slug.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-5V5qDFSw8Hs"] = TL_JOHN_NEWMAN_TML_WE2_FREEDOM_2026
+ * Captured 2026-08-24 — provenance 1001tl.
+ * Distinct from Bebe Rexha Freedom WE2 (yt-KCeluZt3H9o) and Timmy Trumpet Freedom WE2 (yt-QcvGuOhSVlc).
+ */
+export const TL_JOHN_NEWMAN_TML_WE2_FREEDOM_2026: FingerprintSeedRow[] = [
+  { at: "4:10", artist: "Alesso & John Newman", title: "Call Your Name (John Newman Tech Remix)" },
+  { at: "10:57", artist: "John Newman", title: "Waiting For A Lifetime (VIP 2025)" },
+  { at: "14:50", artist: "SIX40TWO", title: "Something In The Water (VIP Mix)" },
+  { at: "18:28", artist: "Sigala ft. John Newman & Nile Rodgers", title: "Give Me Your Love (John Newman Main Stage Remix)" },
+  { at: "24:43", artist: "David Guetta & MistaJam & John Newman", title: "If You Really Love Me (How Will I Know) (SIX40TWO Remix)" },
+  { at: "30:13", artist: "SIX40TWO", title: "What Would I Do (Deniz Koyu & SIX40TWO VIP Remix)" },
+  { at: "32:18", artist: "SIX40TWO", title: "What Would I Do" },
+  { at: "34:23", artist: "John Newman", title: "Merry Go" },
+  { at: "41:24", artist: "Rudimental ft. John Newman", title: "Feel The Love (John Newman VIP 2025)" },
+  { at: "45:43", artist: "Calvin Harris ft. John Newman", title: "Blame" },
+  { at: "47:56", artist: "Calvin Harris ft. John Newman", title: "Blame (John Newman 2026 VIP)" },
+  { at: "50:09", artist: "John Newman", title: "Love Me Again (John Newman 2026 VIP)" },
+];

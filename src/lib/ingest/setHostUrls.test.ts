@@ -88,6 +88,17 @@ assert.equal(
 );
 assert.ok(!extras["yt-KCeluZt3H9o"]?.soundcloudUrl);
 assert.ok(!extras["yt-QcvGuOhSVlc"]?.soundcloudUrl);
+assert.equal(
+  extras["yt-KAZd25mCHp8"]?.soundcloudUrl,
+  "https://soundcloud.com/rose-ringed/rose-ringed-freedomstage-we1",
+);
+assert.equal(
+  extras["sc-rose-ringed-rose-ringed-freedomstage-we1"]?.youtubeUrl,
+  "https://www.youtube.com/watch?v=KAZd25mCHp8",
+);
+assert.ok(!extras["yt-0Fq24R47sDY"]?.soundcloudUrl);
+assert.ok(!extras["yt-G-DciaWb5KY"]?.soundcloudUrl);
+assert.ok(!extras["yt-5V5qDFSw8Hs"]?.soundcloudUrl);
 assert.ok(
   !extras[
     "sc-tomorrowland-tomorrowland-friendship-mix-with-sara-landry-july-2026"
