@@ -7,6 +7,7 @@
  */
 
 import type { PrismaClient } from "@prisma/client";
+import { hostUrlFillNull } from "../../playback";
 import {
   fetchInsomniacHtml,
   mixcloudUrlFromHtml,
@@ -77,6 +78,9 @@ export async function repairInsomniacMixPlayback(
       title: true,
       sourceUrl: true,
       playbackUrl: true,
+      soundcloudUrl: true,
+      youtubeUrl: true,
+      mixcloudUrl: true,
       publishedAt: true,
       createdAt: true,
       type: true,
@@ -112,7 +116,26 @@ export async function repairInsomniacMixPlayback(
       playbackUrl?: string;
       publishedAt?: Date;
       type?: string;
+      soundcloudUrl?: string | null;
+      youtubeUrl?: string | null;
+      mixcloudUrl?: string | null;
     } = {};
+
+    Object.assign(
+      patch,
+      hostUrlFillNull(
+        {
+          soundcloudUrl: row.soundcloudUrl,
+          youtubeUrl: row.youtubeUrl,
+          mixcloudUrl: row.mixcloudUrl,
+        },
+        {
+          mixcloudUrl: mixcloudUrlFromHtml(html),
+          soundcloudUrl: soundcloudTrackUrlFromHtml(html),
+          youtubeUrl: youtubeWatchFromHtml(html),
+        },
+      ),
+    );
 
     if (fixPlayback) {
       const next = pickPlayback(html);

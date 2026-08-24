@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { preferPlaybackUrl } from "./hearthis/playback";
 import {
   extraHostUrlsBySlug,
+  harvestSetHostUrls,
   SET_HOST_PINS,
   soundcloudSlugFromUrl,
   youtubeUrlFromSlug,
@@ -143,6 +144,31 @@ assert.equal(
 );
 assert.ok(
   !extras["sc-dimitrivegasandlikemike-smash-the-house-radio-ep-690"]?.mixcloudUrl,
+);
+
+const harvested690 = harvestSetHostUrls({
+  slug: "yt-OcUFACTYqL8",
+  playbackUrl: "https://www.youtube.com/watch?v=OcUFACTYqL8",
+  text: "Also on https://www.mixcloud.com/DimitriVegasAndLikeMike/smash-the-house-radio-ep-690/",
+});
+assert.equal(
+  harvested690.youtubeUrl,
+  "https://www.youtube.com/watch?v=OcUFACTYqL8",
+);
+assert.equal(
+  harvested690.soundcloudUrl,
+  "https://soundcloud.com/dimitrivegasandlikemike/smash-the-house-radio-ep-690",
+);
+assert.equal(
+  harvested690.mixcloudUrl,
+  "https://www.mixcloud.com/dimitrivegasandlikemike/smash-the-house-radio-ep-690/",
+);
+assert.equal(
+  harvestSetHostUrls({
+    playbackUrl: "https://www.youtube.com/watch?v=OcUFACTYqL8",
+    text: "no official mirrors listed",
+  }).soundcloudUrl,
+  undefined,
 );
 
 const voorn = extras["yt-FQj71mhobYw"];

@@ -16,6 +16,7 @@ import {
   setYoutubeWatchUrl,
   soundcloudPageUrl,
   soundcloudSeekUrl,
+  unusedOfficialHostLinks,
   youtubeSeekUrl,
   youtubeWatchUrl,
 } from "./playback";
@@ -211,6 +212,28 @@ assert.equal(filled.youtubeUrl, undefined);
 assert.equal(
   filled.soundcloudUrl,
   "https://soundcloud.com/johnsummit/john-summit-live-lollapalooza",
+);
+
+const alsoOn = unusedOfficialHostLinks({
+  playbackUrl: "https://soundcloud.com/johnsummit/john-summit-live-lollapalooza",
+  soundcloudUrl: "https://soundcloud.com/johnsummit/john-summit-live-lollapalooza",
+  youtubeUrl: "https://www.youtube.com/watch?v=9TKqqBCmDHA",
+  mixcloudUrl: "https://www.mixcloud.com/claptone/clapcast-576/",
+});
+assert.deepEqual(
+  alsoOn.map((l) => l.host),
+  ["youtube", "mixcloud"],
+);
+assert.equal(
+  alsoOn.find((l) => l.host === "youtube")?.url,
+  "https://www.youtube.com/watch?v=9TKqqBCmDHA",
+);
+assert.equal(
+  unusedOfficialHostLinks({
+    playbackUrl: "https://www.youtube.com/watch?v=9TKqqBCmDHA",
+    youtubeUrl: "https://www.youtube.com/watch?v=9TKqqBCmDHA",
+  }).length,
+  0,
 );
 
 console.log("playback.test.ts ok");

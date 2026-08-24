@@ -245,6 +245,7 @@ async function trackToRawSet(
     imageUrl: setImage,
     plays,
   };
+  raw.description = track.description ?? undefined;
   raw.sourceHash = hashRawSetContent(raw);
   return raw;
 }
@@ -334,6 +335,7 @@ async function playlistTrackToRawSet(
     imageUrl: setImage,
     plays,
   };
+  raw.description = track.description ?? undefined;
   raw.sourceHash = hashRawSetContent(raw);
   return raw;
 }
@@ -421,6 +423,7 @@ async function trackSeedToRawSet(
     imageUrl: setImage,
     plays,
   };
+  raw.description = track.description ?? undefined;
   raw.sourceHash = hashRawSetContent(raw);
   return raw;
 }

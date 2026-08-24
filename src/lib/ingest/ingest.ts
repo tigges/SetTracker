@@ -6,7 +6,8 @@ import {
   isBrandHostSlug,
   isBrandSeriesSlug,
 } from "../brandHosts";
-import { hostUrlFillNull, hostUrlsFromKnown, playbackUrlFromSource } from "../playback";
+import { hostUrlFillNull, playbackUrlFromSource } from "../playback";
+import { harvestSetHostUrls } from "./setHostUrls";
 import { djSocialsFromKnown, labelSocials } from "../social";
 import { ARTIST_ROSTER } from "./roster";
 import { normalizeIsrc, parseTrackTitle } from "../trackMeta";
@@ -700,6 +701,18 @@ export async function runIngest(
     }
   }
 
+  function harvestedHosts(raw: RawSet, playbackUrl?: string | null) {
+    return harvestSetHostUrls({
+      slug: raw.sourceSlug,
+      playbackUrl: playbackUrl ?? raw.playbackUrl,
+      sourceUrl: raw.sourceUrl,
+      soundcloudUrl: raw.soundcloudUrl,
+      youtubeUrl: raw.youtubeUrl,
+      mixcloudUrl: raw.mixcloudUrl,
+      text: raw.description,
+    });
+  }
+
   async function ingestSet(raw: RawSet): Promise<void> {
     stats.scannedSets += 1;
     const seeded = applyTracklist1001Seed(raw.sourceSlug, raw.plays);
@@ -870,13 +883,7 @@ export async function runIngest(
               youtubeUrl: existing.youtubeUrl,
               mixcloudUrl: existing.mixcloudUrl,
             },
-            hostUrlsFromKnown(
-              softPlayback,
-              raw.playbackUrl,
-              raw.sourceUrl,
-              existing.playbackUrl,
-              existing.sourceUrl,
-            ),
+            harvestedHosts(raw, softPlayback),
           ),
         };
         if (existing.slug !== raw.sourceSlug) {
@@ -933,13 +940,7 @@ export async function runIngest(
                   youtubeUrl: existing.youtubeUrl,
                   mixcloudUrl: existing.mixcloudUrl,
                 },
-                hostUrlsFromKnown(
-                  next,
-                  raw.playbackUrl,
-                  raw.sourceUrl,
-                  existing.playbackUrl,
-                  existing.sourceUrl,
-                ),
+                harvestedHosts(raw, next),
               ),
             };
           })(),
@@ -990,10 +991,7 @@ export async function runIngest(
           raw.playbackUrl ??
           playbackUrlFromSource(raw.sourceName, raw.sourceUrl) ??
           null,
-        ...hostUrlsFromKnown(
-          raw.playbackUrl,
-          raw.sourceUrl,
-        ),
+        ...harvestedHosts(raw),
         cover: raw.cover,
         imageUrl: raw.imageUrl ?? null,
         sourceHash,

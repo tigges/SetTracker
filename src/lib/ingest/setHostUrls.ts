@@ -16,6 +16,7 @@ import {
   youtubeWatchUrl,
   type SetHostUrls,
 } from "../playback";
+import { hostUrlsFromText } from "./hearthis/playback";
 import { SOUNDCLOUD_TRACK_SEEDS } from "./soundcloud/tracks";
 import { SET_SOURCE_REMAPS } from "./sourceRemaps";
 import { TRACKLIST_1001_BY_SOURCE_SLUG } from "./tracklists1001/festival2026";
@@ -123,6 +124,33 @@ function canonicalizePin(pin: SetHostUrls): SetHostUrls {
 }
 
 let extrasCache: Record<string, SetHostUrls> | null = null;
+
+/**
+ * Keep every official SC / YT / Mixcloud permalink already on the
+ * performance. One ranked embed stays on playbackUrl — unused hosts
+ * are stored, never invented, never crawled as a second set.
+ */
+export function harvestSetHostUrls(input: {
+  slug?: string;
+  playbackUrl?: string | null;
+  sourceUrl?: string | null;
+  soundcloudUrl?: string | null;
+  youtubeUrl?: string | null;
+  mixcloudUrl?: string | null;
+  text?: string | null;
+}): SetHostUrls {
+  return mergeHostUrlFields(
+    hostUrlsFromKnown(
+      input.playbackUrl,
+      input.sourceUrl,
+      input.soundcloudUrl,
+      input.youtubeUrl,
+      input.mixcloudUrl,
+    ),
+    hostUrlsFromText(input.text),
+    input.slug ? (extraHostUrlsBySlug()[input.slug] ?? {}) : {},
+  );
+}
 
 /** Extra official hosts keyed by set slug (twins + documented Mixcloud). */
 export function extraHostUrlsBySlug(): Record<string, SetHostUrls> {
@@ -258,7 +286,11 @@ export async function applySetHostUrls(
         youtubeUrl: row.youtubeUrl,
         mixcloudUrl: row.mixcloudUrl,
       },
-      hostUrlsFromKnown(row.playbackUrl, row.sourceUrl),
+      harvestSetHostUrls({
+        slug: row.slug,
+        playbackUrl: row.playbackUrl,
+        sourceUrl: row.sourceUrl,
+      }),
       extras[row.slug] ?? {},
     );
     if (!Object.keys(patch).length) continue;

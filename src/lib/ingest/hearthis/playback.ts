@@ -5,6 +5,7 @@
  * Never invent mirrors — only track-level SC permalinks and watch URLs.
  */
 
+import type { SetHostUrls } from "../../playback";
 import { scGet, type ScTrack } from "../soundcloud/client";
 import { sleep } from "./client";
 
@@ -16,6 +17,18 @@ const YT_BE_RE =
   /(?:https?:\/\/)?(?:www\.)?youtu\.be\/([a-zA-Z0-9_-]{6,})(?:[/?#"'\s]|$)/gi;
 const YT_EMBED_RE =
   /(?:https?:\/\/)?(?:(?:www|m)\.)?youtube\.com\/embed\/([a-zA-Z0-9_-]{6,})(?:[/?#"'\s]|$)/gi;
+const MIXCLOUD_SHOW_RE =
+  /(?:https?:\/\/)?(?:www\.)?mixcloud\.com\/([a-z0-9_-]+)\/([a-z0-9_-]+)\/?/gi;
+
+const MIXCLOUD_SKIP_USERS = new Set([
+  "widget",
+  "discover",
+  "search",
+  "live",
+  "about",
+  "upload",
+  "tag",
+]);
 
 function stripHtml(text: string): string {
   return text.replace(/<[^>]+>/g, "\n");
@@ -61,15 +74,53 @@ export function youtubeWatchUrlFromText(text: string): string | null {
   return null;
 }
 
+/** Mixcloud show URL from free text (profile / widget / discover ignored). */
+export function mixcloudShowUrlFromText(text: string): string | null {
+  if (!text?.trim()) return null;
+  const hay = stripHtml(text);
+  for (const m of hay.matchAll(MIXCLOUD_SHOW_RE)) {
+    const user = (m[1] || "").toLowerCase();
+    const show = m[2] || "";
+    if (!user || !show) continue;
+    if (MIXCLOUD_SKIP_USERS.has(user)) continue;
+    if (show === "stream" || show === "favorites" || show === "listens") {
+      continue;
+    }
+    return `https://www.mixcloud.com/${user}/${show}/`;
+  }
+  return null;
+}
+
 export function preferredExternalPlaybackFromText(
   ...parts: Array<string | null | undefined>
-): { playbackUrl: string; host: "soundcloud" | "youtube" } | null {
+): {
+  playbackUrl: string;
+  host: "soundcloud" | "mixcloud" | "youtube";
+} | null {
   const hay = parts.filter(Boolean).join("\n");
   const sc = soundcloudTrackUrlFromText(hay);
   if (sc) return { playbackUrl: sc, host: "soundcloud" };
+  const mixcloud = mixcloudShowUrlFromText(hay);
+  if (mixcloud) return { playbackUrl: mixcloud, host: "mixcloud" };
   const yt = youtubeWatchUrlFromText(hay);
   if (yt) return { playbackUrl: yt, host: "youtube" };
   return null;
+}
+
+/**
+ * Official SC / YT / Mixcloud permalinks already written on the
+ * performance (description, buy link, page HTML). Never invents.
+ */
+export function hostUrlsFromText(
+  ...parts: Array<string | null | undefined>
+): SetHostUrls {
+  const hay = parts.filter((p) => p?.trim()).join("\n");
+  if (!hay.trim()) return {};
+  return {
+    soundcloudUrl: soundcloudTrackUrlFromText(hay),
+    youtubeUrl: youtubeWatchUrlFromText(hay),
+    mixcloudUrl: mixcloudShowUrlFromText(hay),
+  };
 }
 
 /** Resolve SC permalink via api-v2 when possible; fall back to the parsed URL. */

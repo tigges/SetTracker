@@ -114,7 +114,7 @@ function hasTracklistSignal(description: string | null | undefined): boolean {
 
 function setTypeFor(
   title: string,
-  playbackHost?: "soundcloud" | "youtube",
+  playbackHost?: "soundcloud" | "mixcloud" | "youtube",
 ): RawSet["type"] {
   if (/\b(festival|open air|boiler|creamfields|ultra|edc)\b/i.test(title)) {
     return "festival";
@@ -131,12 +131,15 @@ async function resolvePreferredPlayback(
   buyLink: string | null | undefined,
 ): Promise<{
   playbackUrl: string | undefined;
-  host: "soundcloud" | "youtube" | undefined;
+  host: "soundcloud" | "mixcloud" | "youtube" | undefined;
 }> {
   const external = preferredExternalPlaybackFromText(description, buyLink);
   if (external?.host === "soundcloud") {
     const resolved = await resolveSoundCloudTrackUrl(external.playbackUrl);
     if (resolved) return { playbackUrl: resolved, host: "soundcloud" };
+  }
+  if (external?.host === "mixcloud") {
+    return { playbackUrl: external.playbackUrl, host: "mixcloud" };
   }
   if (external?.host === "youtube") {
     return { playbackUrl: external.playbackUrl, host: "youtube" };
@@ -283,6 +286,7 @@ export async function trackToRawSet(
     sourceName: "hearthis.at",
     sourceUrl,
     playbackUrl,
+    description,
     cover: pickAccent(sourceSlug),
     imageUrl: setImage ?? undefined,
     plays: applyTracklist1001Seed(

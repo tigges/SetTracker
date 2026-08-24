@@ -33,8 +33,10 @@ import {
   fetchInsomniacHtml,
   fetchMusicSectionSlugs,
   insomniacMusicUrl,
+  mixcloudUrlFromHtml,
   publishedAtFromInsomniacHtml,
   titleFromInsomniacHtml,
+  youtubeWatchFromHtml,
 } from "./client";
 import { parseInsomniacTrackRows, rowsToPlays } from "./parseTracklist";
 
@@ -248,6 +250,10 @@ async function episodeToRawSet(
     sourceName: "Insomniac",
     sourceUrl,
     playbackUrl,
+    description: scTrack?.description,
+    soundcloudUrl: scTrack?.permalink_url ?? playbackUrl,
+    mixcloudUrl: mixcloudUrlFromHtml(html),
+    youtubeUrl: youtubeWatchFromHtml(html),
     cover: ACCENT,
     plays,
   };

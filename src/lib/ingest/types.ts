@@ -75,6 +75,17 @@ export type RawSet = {
    * hearthis: prefer app.hearthis.at/embed/{id}/… (page URL alone is not embeddable).
    */
   playbackUrl?: string;
+  /**
+   * First-party description / page text. Ingest harvests official SC / YT /
+   * Mixcloud permalinks from it into Set host columns. Not part of sourceHash.
+   */
+  description?: string;
+  /** Official SoundCloud permalink when already resolved (fill-null). */
+  soundcloudUrl?: string | null;
+  /** Official YouTube watch URL when already resolved (fill-null). */
+  youtubeUrl?: string | null;
+  /** Official Mixcloud show URL when already resolved (fill-null). */
+  mixcloudUrl?: string | null;
   cover: string;
   /** Source-native set artwork URL (hearthis/SC cover), when known. */
   imageUrl?: string;

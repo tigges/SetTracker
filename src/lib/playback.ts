@@ -351,6 +351,33 @@ export function mergeHostUrlFields(...parts: SetHostUrls[]): SetHostUrls {
   return out;
 }
 
+/**
+ * Alternate official hosts that are not the on-site embed.
+ * One player stays on playbackUrl; these are outbound links only.
+ */
+export function unusedOfficialHostLinks(input: {
+  playbackUrl?: string | null;
+  soundcloudUrl?: string | null;
+  youtubeUrl?: string | null;
+  mixcloudUrl?: string | null;
+}): Array<{ host: PlaybackHost; label: string; url: string }> {
+  const playing = detectPlaybackHost(input.playbackUrl);
+  const out: Array<{ host: PlaybackHost; label: string; url: string }> = [];
+  const sc = soundcloudPageUrl(input.soundcloudUrl);
+  if (sc && playing !== "soundcloud") {
+    out.push({ host: "soundcloud", label: HOST_LABEL.soundcloud, url: sc });
+  }
+  const yt = youtubeWatchUrl(input.youtubeUrl);
+  if (yt && playing !== "youtube") {
+    out.push({ host: "youtube", label: HOST_LABEL.youtube, url: yt });
+  }
+  const mix = mixcloudPageUrl(input.mixcloudUrl);
+  if (mix && playing !== "mixcloud") {
+    out.push({ host: "mixcloud", label: HOST_LABEL.mixcloud, url: mix });
+  }
+  return out;
+}
+
 /** Only the host columns that are currently empty and have a known fill. */
 export function hostUrlFillNull(
   existing: SetHostUrls,
