@@ -377,9 +377,7 @@ export const TL_ROBIN_SCHULZ_SUGAR_RADIO_555_2026: FingerprintSeedRow[] = [
  * (yt-JLIYTueL4TI / sc-eric-prydz-eric-prydz-presents-463760700).
  * No YouTube in the operator paste — do not invent a watch id (1001's
  * on-page player is not a source URL).
- * 1001 listed 12 IDed cues; screenshots covered 01–10 (w/ at 44:17 kept
- * as its own clock). Cues 11–12 wait on the remaining screenshots — a
- * <12 overlay gap-fills the 33 SC comment stubs instead of replacing.
+ * 1001 listed 12 IDed cues: numbered 01–11 plus the 44:17 w/ row.
  * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["sc-eric-prydz-eric-prydz-presents-epic-1"]
  * Captured 2026-08-23 — provenance 1001tl.
  */
@@ -394,4 +392,6 @@ export const TL_ERIC_PRYDZ_EPIC_RADIO_026_2026: FingerprintSeedRow[] = [
   { at: "35:13", artist: "Pryda", title: "Loving You" },
   { at: "40:30", artist: "Pryda", title: "Terminal 5" },
   { at: "44:17", artist: "Sailor & I", title: "Turn Around (Âme Remix / Eric Prydz Private Edit)" },
+  { at: "51:30", artist: "Pryda", title: "Tomorrowland 2019 ID (Working Title)" },
+  { at: "59:22", artist: "Eric Prydz & Anyma", title: "Somebody's Watching Me" },
 ];
