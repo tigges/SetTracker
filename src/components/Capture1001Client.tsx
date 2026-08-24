@@ -9,7 +9,6 @@ import {
   search1001Query,
   search1001QueryFromUrl,
 } from "@/lib/search1001";
-import { searchMixesdbByPlayerUrl } from "@/lib/searchMixesdb";
 
 const LIVE_SCRIPT = "https://setradar.ai/capture-1001tl.js";
 
@@ -140,8 +139,7 @@ function Capture1001Workbench({
     <div className="space-y-3">
       <p className="text-[12px] text-muted">
         YT/SC already in the catalog. Search 1001 POSTs their tracklist
-        form (GET /search?q= is a 404). Open MixesDB with the
-        player URL (jumps to their page when they indexed it), run the
+        form (GET /search?q= is a 404). Run the
         bookmarklet (or paste{" "}
         <span className="mono text-[11px] text-ink">
           scripts/capture-1001tl.console.js
@@ -215,7 +213,6 @@ function Capture1001Workbench({
       <ol className="divide-y divide-line border-y border-line">
         {filtered.map((p, i) => {
           const watch = watchFromPreset(p);
-          const mixesdbSearch = searchMixesdbByPlayerUrl(watch);
           return (
           <li
             key={p.slug}
@@ -263,16 +260,6 @@ function Capture1001Workbench({
                   onSearch={(q) => void onCopy("1001 search", q)}
                 />
               )}
-              {mixesdbSearch ? (
-                <a
-                  href={mixesdbSearch}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="rounded-md border border-line px-2.5 py-1 text-[12px] font-bold"
-                >
-                  Search MixesDB
-                </a>
-              ) : null}
               <button
                 type="button"
                 className="rounded-md border border-line px-2.5 py-1 text-[12px] font-bold"
