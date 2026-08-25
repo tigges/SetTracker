@@ -126,7 +126,7 @@ export default async function EventsPage() {
         <h1 className="mt-1 text-3xl font-extrabold tracking-tight">Events</h1>
         <p className="mt-2 max-w-2xl text-[14px] text-muted">
           Festivals, clubs, and livestream channels with sets in the catalog.
-          Directory stubs without sets stay below.
+          Directory stubs without sets stay in a closed list at the bottom.
         </p>
         <div className="mt-5 grid grid-cols-1 gap-3 lg:grid-cols-2">
           <VisualTeaser
@@ -189,33 +189,31 @@ export default async function EventsPage() {
         )}
 
         {directory.length > 0 ? (
-          <section id="directory">
-            <div className="mb-3 flex items-baseline justify-between gap-3">
-              <div>
-                <h2 className="text-lg font-bold tracking-tight">
-                  Directory · no sets yet
-                </h2>
-                <p className="mt-0.5 text-[13px] text-muted2">
-                  Curated clubs and festivals with an official site — waiting
-                  for ingest to attach sets. Detail pages stay live.
-                </p>
-              </div>
-              <span className="mono text-[12px] text-muted2">
+          <details id="directory" className="rounded-lg border border-line px-4 py-3">
+            <summary className="cursor-pointer text-[14px] font-semibold text-ink">
+              Directory · no sets yet
+              <span className="mono ml-2 text-[12px] font-normal text-muted2">
                 {directory.length}
               </span>
+            </summary>
+            <p className="mt-2 text-[13px] text-muted2">
+              Curated clubs and festivals with an official site — waiting
+              for ingest to attach sets.
+            </p>
+            <div className="mt-3">
+              <ExpandableCardGrid
+                previewCount={DIRECTORY_PREVIEW}
+                moreLabel="events"
+                items={directory.map((v) => (
+                  <EventCard
+                    key={v.id}
+                    v={v}
+                    rank={chart.get(v.slug)?.rank}
+                  />
+                ))}
+              />
             </div>
-            <ExpandableCardGrid
-              previewCount={DIRECTORY_PREVIEW}
-              moreLabel="events"
-              items={directory.map((v) => (
-                <EventCard
-                  key={v.id}
-                  v={v}
-                  rank={chart.get(v.slug)?.rank}
-                />
-              ))}
-            />
-          </section>
+          </details>
         ) : null}
       </div>
 

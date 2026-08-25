@@ -1,6 +1,5 @@
 "use client";
 
-import { useState, type MouseEvent } from "react";
 import { SetEntryLink } from "@/components/SetEntryLink";
 import { EntityThumb } from "@/components/EntityThumb";
 import { StatusBar } from "@/components/StatusBits";
@@ -23,7 +22,6 @@ export function SetCard({
   set: FeedItem;
   browseLabel?: string;
 }) {
-  const [playing, setPlaying] = useState(false);
   const type = SET_TYPE_META[set.type] ?? { label: set.type, glyph: "•" };
   const accent = set.primaryDj?.accent ?? "var(--brand)";
   const headline = setHostHeadline({
@@ -53,14 +51,7 @@ export function SetCard({
     .join(" · ");
   const target = resolvePlaybackTarget(set.playbackUrl, {
     sourceUrl: set.sourceUrl,
-    autoplay: true,
   });
-
-  function togglePlay(e: MouseEvent) {
-    e.preventDefault();
-    e.stopPropagation();
-    setPlaying((v) => !v);
-  }
 
   return (
     <article className="card group relative flex flex-col gap-4 p-4 transition-colors hover:border-[color:var(--muted2)]">
@@ -126,36 +117,14 @@ export function SetCard({
                 : "0 tracks"}
           </span>
           <span className="mono">{fmtDuration(set.durationSec)}</span>
-          {target ? (
-            <button
-              type="button"
-              onClick={togglePlay}
-              className="rounded-full border border-line px-2 py-0.5 text-[11px] font-medium text-ink hover:border-[color:var(--muted2)]"
-            >
-              {playing ? "Hide" : "Play"}
-            </button>
-          ) : (
-            <SetEntryLink
-              href={`/sets/${set.slug}`}
-              label={browseLabel}
-              className="text-[11px] text-muted hover:text-ink"
-            >
-              Open
-            </SetEntryLink>
-          )}
+          <SetEntryLink
+            href={target ? `/sets/${set.slug}?t=0` : `/sets/${set.slug}`}
+            label={browseLabel}
+            className="rounded-full border border-line px-2 py-0.5 text-[11px] font-medium text-ink hover:border-[color:var(--muted2)]"
+          >
+            {target ? "Play" : "Open"}
+          </SetEntryLink>
         </div>
-        {playing && target ? (
-          <iframe
-            title={`${target.label} player`}
-            src={target.embedSrc}
-            width="100%"
-            height={Math.min(target.embedHeight, 166)}
-            loading="lazy"
-            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-            allowFullScreen
-            className="w-full rounded-lg border-0"
-          />
-        ) : null}
       </div>
     </article>
   );

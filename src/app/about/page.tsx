@@ -6,7 +6,7 @@ import { pageMeta } from "@/lib/site";
 export const metadata: Metadata = pageMeta({
   title: "About",
   description:
-    "What setradar.ai is: a DJ set database with tracklist IDs, provenance, and source health.",
+    "setradar.ai is a DJ-set database: play the recording and see the timed tracklist.",
   path: "/about",
 });
 
@@ -16,50 +16,50 @@ export default function AboutPage() {
       <p className="eyebrow">setradar.ai</p>
       <h1 className="mt-1 text-3xl font-extrabold tracking-tight">About</h1>
       <p className="mt-4 text-[15px] leading-relaxed text-muted">
-        A database of electronic DJ sets — festivals, clubs, livestreams, and radio.
-        Every track row has a status and a provenance so you can see what is
-        identified and what is still an ID.
+        Play a festival, club, or livestream set and see the timed tracklist.
+        Colors tell you what is identified and what is still an ID.
       </p>
 
-      <h2 className="mt-10 text-lg font-bold tracking-tight">ID colors</h2>
+      <h2 className="mt-10 text-lg font-bold tracking-tight">Track colors</h2>
       <div className="mt-3">
         <StatusLegend />
       </div>
       <ul className="mt-4 space-y-2 text-[14px] text-muted">
         <li>
-          <span className="text-amber">Identified</span> — released track, matched
-          to a catalog record.
+          <span className="text-amber">Identified</span> — a named release we
+          matched.
         </li>
         <li>
-          <span className="text-magenta">Unresolved ID</span> — unreleased or
-          unknown; waiting for a name.
+          <span className="text-magenta">Unresolved ID</span> — played, name
+          still open.
         </li>
         <li>
-          <span className="text-teal">Community resolved</span> — was an ID,
-          confirmed from a suggestion.
+          <span className="text-teal">Community resolved</span> — confirmed from
+          a suggestion.
         </li>
         <li>
-          <span className="text-grey">Unparsed</span> — raw source text, not
-          matched yet.
+          <span className="text-grey">Not detected</span> — no name at that
+          point in the set.
         </li>
       </ul>
 
-      <h2 className="mt-10 text-lg font-bold tracking-tight">Sources</h2>
-      <p className="mt-3 text-[14px] leading-relaxed text-muted">
-        Tracklists come from SoundCloud descriptions and timed comments,
-        hearthis.at, YouTube descriptions and song credits, Insomniac Night Owl
-        Radio, and 1001Tracklists seeds already linked from those pages — often
-        partial or untimed. We do not invent cues. Fingerprint enrich
-        (ACRCloud) only fills timeline gaps.
-      </p>
-
       <h2 className="mt-10 text-lg font-bold tracking-tight">Suggest an ID</h2>
       <p className="mt-3 text-[14px] leading-relaxed text-muted">
-        On unresolved or unparsed rows, Suggest ID copies a snippet you can
-        email — no GitHub account required. Maintainers paste it into{" "}
-        <span className="mono text-[12px]">data/resolutions.json</span> and the
-        next ingest applies it.
+        On an open row, Suggest ID copies a short email you can send. No
+        account required.
       </p>
+
+      <details className="mt-10 rounded-lg border border-line bg-panel px-4 py-3">
+        <summary className="cursor-pointer text-[14px] font-semibold text-ink">
+          How this is built
+        </summary>
+        <p className="mt-3 text-[14px] leading-relaxed text-muted">
+          Tracklists come from official playback descriptions and timed
+          comments, plus lists already linked from those pages. We do not
+          invent cues. Fingerprint enrich only fills timeline gaps and never
+          appears as a vendor score on the set page.
+        </p>
+      </details>
 
       <p className="mt-10 text-[14px] text-muted">
         <Link href="/sets" className="text-brand hover:text-brandstrong">

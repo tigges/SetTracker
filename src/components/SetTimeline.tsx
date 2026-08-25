@@ -121,17 +121,20 @@ export function SetTimeline({
 
   const cueSec = listen?.startSec ?? null;
   const cueNonce = listen?.seekNonce ?? 0;
+  const nowSec = listen?.nowSec ?? null;
+  const followSec = nowSec ?? (cueNonce > 0 ? cueSec : null);
   const cuedPlayId =
-    cueNonce > 0 && cueSec != null
-      ? (nearestPlayByCue(plays, cueSec)?.id ?? null)
+    followSec != null
+      ? (nearestPlayByCue(plays, followSec)?.id ?? null)
       : null;
   const activeId = cuedPlayId ?? pickedId;
+  const showStrip = nowSec != null;
 
   useEffect(() => {
-    if (!cuedPlayId) return;
+    if (!cuedPlayId || nowSec != null) return;
     const el = rowRefs.current[cuedPlayId];
     if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
-  }, [cuedPlayId, cueNonce]);
+  }, [cuedPlayId, cueNonce, nowSec]);
 
   function cueIdAtClientX(clientX: number): string | null {
     const el = stripRef.current;
@@ -166,13 +169,14 @@ export function SetTimeline({
 
   return (
     <div className="mt-4 space-y-4 sm:mt-6 sm:space-y-6">
-      {/* ------------------------------- SET STRIP ------------------------------- */}
+      {/* Strip is a now-playing view during SoundCloud playback, not a second cue picker. */}
+      {showStrip ? (
       <div className="card min-w-0 overflow-x-clip p-3 sm:p-4">
         <div className="mb-2 flex items-center justify-between gap-3 sm:mb-3">
           <div className="min-w-0">
-            <span className="eyebrow">Set strip</span>
+            <span className="eyebrow">Now playing</span>
             <p className="mt-1 text-[11px] text-muted2">
-              Tap a segment or row to play from that cue
+              Follows the playback clock
             </p>
           </div>
           <div className="flex items-center gap-3 text-[12px] text-muted2 sm:ml-auto">
@@ -258,6 +262,7 @@ export function SetTimeline({
           )}
         </div>
       </div>
+      ) : null}
 
       {children}
 
@@ -265,6 +270,7 @@ export function SetTimeline({
       <div className="card overflow-hidden">
         <div className="flex items-center justify-between border-b border-line px-4 py-3">
           <span className="eyebrow">Tracklist</span>
+          <span className="sr-only">Tap a row to play from that cue</span>
           <div className="flex items-center gap-3">
             <button
               type="button"

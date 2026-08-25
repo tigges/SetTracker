@@ -13,6 +13,8 @@ type SetListenValue = {
   seek: (sec: number) => void;
   startSec: number | null;
   seekNonce: number;
+  nowSec: number | null;
+  setNowSec: (sec: number | null) => void;
 };
 
 const SetListenContext = createContext<SetListenValue | null>(null);
@@ -56,6 +58,7 @@ export function SetListen({ children }: { children: React.ReactNode }) {
     sec: number;
     nonce: number;
   } | null>(null);
+  const [nowSec, setNowSec] = useState<number | null>(null);
 
   const startSec = userCue?.sec ?? urlCue;
   const seekNonce = userCue?.nonce ?? (urlCue != null ? 1 : 0);
@@ -69,7 +72,7 @@ export function SetListen({ children }: { children: React.ReactNode }) {
   }, [urlCue]);
 
   return (
-    <SetListenContext.Provider value={{ seek, startSec, seekNonce }}>
+    <SetListenContext.Provider value={{ seek, startSec, seekNonce, nowSec, setNowSec }}>
       {children}
     </SetListenContext.Provider>
   );

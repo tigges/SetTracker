@@ -12,8 +12,8 @@ import {
 import { pageMeta } from "@/lib/site";
 
 export const metadata: Metadata = pageMeta({
-  title: "The night, as a graph",
-  description: "Timed tracklists from festivals, clubs, livestreams, and radio.",
+  title: "Timed tracklists",
+  description: "Festivals, clubs, and livestreams — play the set, see the tracks.",
   path: "/",
 });
 

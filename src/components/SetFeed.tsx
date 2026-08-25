@@ -35,10 +35,12 @@ const PREFS_KEY = "setradar.feedPrefs";
 
 type FeedPrefs = {
   genre: string;
+  moreSections: boolean;
 };
 
 const DEFAULT_PREFS: FeedPrefs = {
   genre: "all",
+  moreSections: false,
 };
 
 const prefsListeners = new Set<() => void>();
@@ -64,6 +66,7 @@ function parsePrefs(raw: string): FeedPrefs {
     const parsed = JSON.parse(raw) as Partial<FeedPrefs>;
     return {
       genre: typeof parsed.genre === "string" ? parsed.genre : "all",
+      moreSections: parsed.moreSections === true,
     };
   } catch {
     return DEFAULT_PREFS;
@@ -196,32 +199,46 @@ export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }
       ) : (
         <>
           {newWeek.length > 0 && (
-            <Section title="New this week" sets={newWeek} />
+            <Section title="This week" sets={newWeek} />
           )}
-          {festivalSeason.length > 0 && (
-            <Section title="Festival season" sets={festivalSeason} />
-          )}
-          {popularWeek.length > 0 && (
-            <Section title="Popular sets" sets={popularWeek} />
-          )}
-          <PopularRails
-            djs={popularDjs.length >= MIN_RAIL_SHOW ? popularDjs : []}
-            venues={
-              popularVenues.length >= MIN_RAIL_SHOW ? popularVenues : []
-            }
-          />
-          {radarPicks.length > 0 && (
-            <Section title="Radar picks" sets={radarPicks} />
+          {prefs.moreSections ? (
+            <>
+              {festivalSeason.length > 0 && (
+                <Section title="Festival season" sets={festivalSeason} />
+              )}
+              {popularWeek.length > 0 && (
+                <Section title="Popular sets" sets={popularWeek} />
+              )}
+              <PopularRails
+                djs={popularDjs.length >= MIN_RAIL_SHOW ? popularDjs : []}
+                venues={
+                  popularVenues.length >= MIN_RAIL_SHOW ? popularVenues : []
+                }
+              />
+              {radarPicks.length > 0 && (
+                <Section title="Radar picks" sets={radarPicks} />
+              )}
+            </>
+          ) : (
+            <div className="mb-8 flex justify-center">
+              <button
+                type="button"
+                onClick={() => patchPrefs({ moreSections: true })}
+                className="text-[13px] text-muted underline-offset-4 transition-colors hover:text-brand hover:underline"
+              >
+                More ways to browse
+              </button>
+            </div>
           )}
           {(deepShown.length > 0 || earlierDeepCount > 0) && (
             <>
               {deepShown.length > 0 ? (
-                <Section title="Deep catalog" sets={deepShown} />
+                <Section title="All sets" sets={deepShown} />
               ) : (
                 <section className="mb-10">
                   <div className="mb-4 flex items-baseline gap-3">
                     <h2 className="text-[13px] font-semibold uppercase tracking-[0.14em] text-muted">
-                      Deep catalog
+                      All sets
                     </h2>
                     <div className="h-px flex-1 bg-line" />
                   </div>

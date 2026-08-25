@@ -47,6 +47,7 @@ export function SetPlayer({
   const [userOpen, setUserOpen] = useState(false);
   const [dismissedNonce, setDismissedNonce] = useState(0);
   const open = userOpen || (seeking && seekNonce !== dismissedNonce);
+  const setNowSec = listen?.setNowSec;
   const iframeRef = useRef<HTMLIFrameElement | null>(null);
   const widgetRef = useRef<SoundCloudWidget | null>(null);
   const cueRef = useRef({ startSec, seeking });
@@ -59,6 +60,7 @@ export function SetPlayer({
     }
     if (!iframeRef.current) return;
     let cancelled = false;
+    const timer = { id: 0 };
 
     loadSoundCloudWidgetApi()
       .then((api) => {
@@ -76,6 +78,16 @@ export function SetPlayer({
           if (!cue.seeking) return;
           widget.seekTo(Math.max(0, Math.floor(cue.startSec ?? 0) * 1000));
         });
+        const tick = () => {
+          widget.getPosition?.((ms) => {
+            if (typeof ms === "number" && ms >= 0) {
+              setNowSec?.(Math.floor(ms / 1000));
+            }
+          });
+        };
+        widget.bind(api.Widget.Events.PLAY, tick);
+        widget.bind(api.Widget.Events.PLAY_PROGRESS ?? "playProgress", tick);
+        timer.id = window.setInterval(tick, 750);
         apply();
       })
       .catch(() => {
@@ -84,8 +96,10 @@ export function SetPlayer({
 
     return () => {
       cancelled = true;
+      if (timer.id) window.clearInterval(timer.id);
+      setNowSec?.(null);
     };
-  }, [open, isSoundCloud, target?.embedSrc]);
+  }, [open, isSoundCloud, target?.embedSrc, setNowSec]);
 
   useEffect(() => {
     if (!seeking || !widgetRef.current) return;
@@ -139,7 +153,7 @@ export function SetPlayer({
           className="inline-flex items-center gap-2 rounded-full border border-line px-3 py-1 text-[12px] font-medium text-ink transition-colors hover:border-[color:var(--muted2)]"
         >
           <span aria-hidden>{open ? "▾" : "▶"}</span>
-          {open ? "Hide player" : "Play on site"}
+          {open ? "Hide player" : "Play"}
           <span className="text-muted2">· {target.label}</span>
         </button>
         {seeking && startSec != null ? (
