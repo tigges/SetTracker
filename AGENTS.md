@@ -82,9 +82,10 @@ unless asked. Never write Relive for HARD / Insomniac / Nameless / Ultra.
   (`src/lib/ingest/hearthis/` — structured `/{user}/{track}/playlist/` cues,
   then description / timed comments; e.g. Gentlemen's Groove) +
   **YouTube** curated sets + venue channels + tracklist-heavy artist channels
-  (`src/lib/ingest/youtube/` — Boiler Room / Cercle / Mixmag / DJ Mag + James
-  Hype–style artist channels; description tracklists and YouTube Music song
-  credits) + **DJ Mag Live Sets** (`src/lib/ingest/djmag/` — scrape
+  (`src/lib/ingest/youtube/` — Boiler Room / Cercle / Mixmag / DJ Mag /
+  SECTION. (`@section_hq`, filmed techno DJ sets, YT Music song credits) +
+  James Hype–style artist channels; description tracklists and YouTube Music
+  song credits) + **DJ Mag Live Sets** (`src/lib/ingest/djmag/` — scrape
   `djmag.com/livesets` for YT embeds, tracklists from YT description/credits;
   dedupes `@DJMag` via `yt-{videoId}`) +
   **Bandcamp** curated tracks/albums (`src/lib/ingest/bandcamp/`).

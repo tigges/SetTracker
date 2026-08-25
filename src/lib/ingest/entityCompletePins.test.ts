@@ -494,4 +494,29 @@ const officialThenHub = mergeEntityCompletePins(
 );
 assert.equal(officialThenHub[0]?.website, "https://officialgreenvelvet.com");
 
+// A label domain is not the artist's website, even when the artist links it
+// that way. SHDW has no homepage, so his linktree is the fallback we keep.
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "shdw",
+    name: "SHDW",
+    field: "website",
+    value: "https://mutual-rytm.com/",
+    evidence: "operator paste",
+  }).drop,
+  "website name mismatch",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "shdw",
+    name: "SHDW",
+    field: "website",
+    value: "https://linktr.ee/i.am.shdw",
+    evidence: "operator paste",
+  }).value,
+  "https://linktr.ee/i.am.shdw",
+);
+
 console.log("entityCompletePins.test.ts ok");
