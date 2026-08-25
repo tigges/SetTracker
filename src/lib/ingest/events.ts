@@ -226,6 +226,15 @@ export const KNOWN_EVENTS: Record<string, CanonicalEvent> = {
     website: "https://djmag.com/livesets",
     soundcloud: "https://soundcloud.com/djmag",
   },
+  // Filmed techno DJ-set series (@section_hq). Uploads carry YouTube Music
+  // song credits, so cues land without 1001.
+  section: {
+    slug: "section",
+    name: "SECTION.",
+    kind: "livestream",
+    website: "https://sectionhq.com/",
+    instagram: "https://www.instagram.com/section_hq/",
+  },
   insomniac: {
     slug: "insomniac",
     name: "Insomniac",
@@ -543,6 +552,9 @@ const ALIAS_TO_SLUG: Record<string, string> = {
   djmag: "dj-mag",
   "djmag-com": "dj-mag",
   mixmag: "mixmag",
+  section: "section",
+  "section-hq": "section",
+  sectionhq: "section",
   ushuaia: "ushuaia-ibiza",
   "ushuaia-ibiza": "ushuaia-ibiza",
   "ushuaiaibiza": "ushuaia-ibiza",

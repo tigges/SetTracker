@@ -2173,6 +2173,29 @@ export const ARTIST_ROSTER_CURATED: ArtistRosterEntry[] = [
     priority: "normal",
   },
   {
+    // Operator paste 2026-08-25, verified live. Solo Marco Blaesi — not the
+    // SHDW & Obscure Shape duo. Own channel holds the Warsaw EXPO XXI set.
+    name: "SHDW",
+    genre: "Techno",
+    accent: "#5a189a",
+    homeCity: "Stuttgart, DE",
+    youtube: { handle: "@shdw-mutual-rytm", status: "ok" },
+    soundcloud: { permalink: "shdw-mutual-rytm", status: "ok" },
+    // He has no artist homepage — the linktree is the de-facto one. His own
+    // linktree labels mutual-rytm.com "SHDW Website", but that is the label
+    // domain and fails the name-overlap check, so it stays a social only.
+    website: "https://linktr.ee/i.am.shdw",
+    socials: [
+      "https://www.youtube.com/@shdw-mutual-rytm",
+      "https://soundcloud.com/shdw-mutual-rytm",
+      "https://www.instagram.com/i.am.shdw/",
+      "https://linktr.ee/i.am.shdw",
+      "https://mutual-rytm.com/",
+      "https://mutual-rytm.bandcamp.com",
+    ],
+    priority: "normal",
+  },
+  {
     name: "MANDY",
     genre: "Hard Dance",
     accent: "#ff006e",

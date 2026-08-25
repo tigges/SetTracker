@@ -22,6 +22,10 @@ concurrency:
 jobs:
   diagnose:
     runs-on: ubuntu-latest
+    # Small but still billable — same approval gate as the enrich pass.
+    environment: acr-spend
+    env:
+      ACRCLOUD_CONFIRM_SPEND: "1"
     steps:
       - uses: actions/checkout@v4
 

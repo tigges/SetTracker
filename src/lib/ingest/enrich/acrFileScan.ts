@@ -28,6 +28,12 @@
  *   ACRCLOUD_FS_DRY_RUN=1     scan but do not write DB
  */
 import type { PrismaClient } from "@prisma/client";
+import {
+  acrSpendConfirmed,
+  announceAcrPlan,
+  assertAcrSpendAllowed,
+  estimateAcrFileScanSpend,
+} from "./acrCost";
 import { playCollapseKey } from "../../playCollapse";
 import { detectPlaybackHost } from "../../playback";
 import { HELD_PLAYBACK_WATCH } from "../nextCaptures";
@@ -166,6 +172,8 @@ export async function submitPlatformScan(
   cfg: FileScanConfig,
   url: string,
 ): Promise<string | null> {
+  // Billable. Blocked until the plan was printed and spend confirmed.
+  assertAcrSpendAllowed("filescan");
   const res = await fetch(
     `${cfg.base}/api/fs-containers/${cfg.containerId}/files`,
     {
@@ -568,6 +576,23 @@ export async function enrichYoutubeSetsWithFileScan(
   }
   const setLimit = numEnv("ACRCLOUD_FS_SET_LIMIT", 10);
   const dryRun = process.env.ACRCLOUD_FS_DRY_RUN === "1";
+
+  // Disclose the worst-case spend, then require confirmation for this run.
+  const estimate = estimateAcrFileScanSpend({ videos: setLimit });
+  announceAcrPlan(estimate);
+  if (!dryRun && !acrSpendConfirmed()) {
+    console.log(
+      "[acr-fs] no requests — set ACRCLOUD_CONFIRM_SPEND=1 for this run (Catalog enrich: check Accept ACR spend)",
+    );
+    return {
+      enabled: false,
+      submitted: 0,
+      ready: 0,
+      identified: 0,
+      skipped: `spend not confirmed (${estimate.summary})`,
+    };
+  }
+
   const pollMs = numEnv("ACRCLOUD_FS_POLL_MS", 20_000);
   const timeoutMs = numEnv("ACRCLOUD_FS_TIMEOUT_MS", 1_500_000); // 25m default
 

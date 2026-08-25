@@ -48,6 +48,14 @@
  * Hook: `npm run enrich:fingerprint` from catalog-enrich.yml (after thumbs/MB).
  */
 
+import {
+  acrSpendConfirmed,
+  announceAcrPlan,
+  assertAcrSpendAllowed,
+  estimateAcrIdentifySpend,
+  estimateAuddSpend,
+  formatAcrPlanMarkdown,
+} from "./acrCost";
 import { createHmac } from "node:crypto";
 import { execFile } from "node:child_process";
 import { appendFileSync } from "node:fs";
@@ -86,7 +94,7 @@ import {
 import { ARTIST_ROSTER } from "../roster";
 import { getSoundCloudClientId, scGet, type ScTrack } from "../soundcloud/client";
 import { slugify } from "../types";
-import { recognizeAuddClip } from "../identify/audd";
+import { auddApiToken, recognizeAuddClip } from "../identify/audd";
 import {
   isUnresolvedDetectPriority,
   TOP_DJ_UNRESOLVED_PRIORITY,
@@ -1042,6 +1050,8 @@ export async function acrIdentify(
   sample: Buffer,
   opts?: { host?: string; accessKey?: string; accessSecret?: string },
 ): Promise<AcrIdentifyResult> {
+  // Billable. Blocked until the plan was printed and spend confirmed.
+  assertAcrSpendAllowed("identify");
   const host = (opts?.host ?? cred("ACRCLOUD_HOST")).replace(
     /^https?:\/\//,
     "",
@@ -1837,6 +1847,32 @@ export async function enrichSparseSetsWithAcrCloud(
 
   // Over-fetch candidates so SNIP/preview-only SC tracks don't burn the set budget.
   const setLimit = opts.setLimit ?? numEnv("ACRCLOUD_SET_LIMIT", 5);
+
+  // Disclose the worst-case spend, then require confirmation for this run.
+  const estimate = estimateAcrIdentifySpend({
+    sets: setLimit,
+    probesPerSet: maxProbesPerSet,
+  });
+  announceAcrPlan(estimate);
+  appendIdentifySummary([formatAcrPlanMarkdown(estimate), ""]);
+  // AudD is tried before ACR on each clip when enabled — disclose it too.
+  if (auddApiToken() && process.env.AUDD_ANALYZE === "1") {
+    const auddEstimate = estimateAuddSpend({
+      clips: setLimit * maxProbesPerSet,
+    });
+    announceAcrPlan(auddEstimate);
+    appendIdentifySummary([formatAcrPlanMarkdown(auddEstimate), ""]);
+  }
+  if (!dryRun && !acrSpendConfirmed()) {
+    console.log(
+      "[acrcloud] no requests — set ACRCLOUD_CONFIRM_SPEND=1 for this run (Catalog enrich: check Accept ACR spend)",
+    );
+    return emptyStats({
+      enabled: false,
+      skipped: `spend not confirmed (${estimate.summary})`,
+    });
+  }
+
   const candidates = await selectSparseSetsForFingerprint(prisma, {
     ...opts,
     setLimit: Math.max(setLimit * 4, setLimit),

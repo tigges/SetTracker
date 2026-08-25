@@ -24,6 +24,10 @@ on:
           - acr
           - smoke
           - full
+      confirm_acr_spend:
+        description: "Accept ACR spend — Identify ≈ $0.002–$0.006 / clip, File Scan ≈ $0.05–$0.15 / audio-hour. Unchecked = print the estimate and send nothing."
+        type: boolean
+        default: false
   # Agents often lack workflow_dispatch; bump on main to start:
   #   data/enrich-request      → acr (fast)
   #   data/enrich-full-request → full (thumbs + MB + deep ACR + filescan)
@@ -46,8 +50,16 @@ concurrency:
 jobs:
   enrich:
     runs-on: ubuntu-latest
+    # ACR is billable, so the whole pass sits behind the acr-spend
+    # environment. Add a required reviewer (Settings → Environments) and
+    # Actions pauses here until someone reads the estimate and approves.
+    environment: acr-spend
     # Hosted cap is 6h; leave headroom so we never rely on the hard cancel.
     timeout-minutes: 340
+    env:
+      # Every billable ACR request needs this for the run. Unchecked (and
+      # cron / data/enrich-request pushes) print the estimate and send nothing.
+      ACRCLOUD_CONFIRM_SPEND: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.confirm_acr_spend == 'true' && '1' || '0' }}
     steps:
       - uses: actions/checkout@v4
 
@@ -264,32 +276,25 @@ jobs:
         run: npm run research:track-ids
         continue-on-error: true
 
-      # Prints a spend estimate; skips the model unless LLM_RESEARCH_CONFIRM=1.
-      # Overnight stays estimate-only. Use Catalog LLM research + Accept spend.
-      - name: LLM handle + track research
+      # No LLM here. Model spend only happens in Catalog LLM research, where
+      # the plan and cost are disclosed and a reviewer approves first.
+      - name: LLM research plan (sends nothing)
         if: steps.mode.outputs.do_thumbs == '1'
-        timeout-minutes: 12
         env:
-          CLAUDE_AGENT_API: ${{ secrets.CLAUDE_AGENT_API }}
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY || secrets.GEMINI_AGENT_API || secrets.GEMINI || secrets.GOOGLE_API_KEY }}
           LLM_RESEARCH_JOBS: "handles,events,quality,tracks"
           LLM_RESEARCH_LIMIT: "8"
-          LLM_QUALITY: "1"
-        run: npm run research:handles
+        run: npm run research:plan
         continue-on-error: true
 
-      # Parser clocks always write. LLM extras stay report-only unless
-      # LLM_RESEARCH_APPLY=1 and spend is confirmed. Never interpolates.
-      - name: Cue research (parser apply; LLM extras dry-run)
+      # Deterministic parser only — no API keys are passed, so no model can
+      # be called. Clocks come from first-party text we already store.
+      - name: Cue clocks (parser only, no model)
         if: steps.mode.outputs.do_thumbs == '1'
         timeout-minutes: 12
         env:
-          CLAUDE_AGENT_API: ${{ secrets.CLAUDE_AGENT_API }}
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY || secrets.GEMINI_AGENT_API || secrets.GEMINI || secrets.GOOGLE_API_KEY }}
           LLM_RESEARCH_JOBS: "cues"
           LLM_RESEARCH_APPLY: "0"
+          LLM_RESEARCH: "0"
           LLM_CUE_LIMIT: "16"
         run: npm run research:handles
         continue-on-error: true

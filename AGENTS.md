@@ -82,9 +82,10 @@ unless asked. Never write Relive for HARD / Insomniac / Nameless / Ultra.
   (`src/lib/ingest/hearthis/` — structured `/{user}/{track}/playlist/` cues,
   then description / timed comments; e.g. Gentlemen's Groove) +
   **YouTube** curated sets + venue channels + tracklist-heavy artist channels
-  (`src/lib/ingest/youtube/` — Boiler Room / Cercle / Mixmag / DJ Mag + James
-  Hype–style artist channels; description tracklists and YouTube Music song
-  credits) + **DJ Mag Live Sets** (`src/lib/ingest/djmag/` — scrape
+  (`src/lib/ingest/youtube/` — Boiler Room / Cercle / Mixmag / DJ Mag /
+  SECTION. (`@section_hq`, filmed techno DJ sets, YT Music song credits) +
+  James Hype–style artist channels; description tracklists and YouTube Music
+  song credits) + **DJ Mag Live Sets** (`src/lib/ingest/djmag/` — scrape
   `djmag.com/livesets` for YT embeds, tracklists from YT description/credits;
   dedupes `@DJMag` via `yt-{videoId}`) +
   **Bandcamp** curated tracks/albums (`src/lib/ingest/bandcamp/`).
@@ -171,12 +172,21 @@ unless asked. Never write Relive for HARD / Insomniac / Nameless / Ultra.
   preferred when present (Search grounding). Propose official socials for DJs
   that have sets but no handle. **Verify-then-write:** live profile URL +
   handle matches the DJ name + not owned by another Dj. Never invents `@slug`
-  guesses. **Confirm spend** before a model call (`LLM_RESEARCH_CONFIRM=1`,
-  TTY `yes`, or Catalog LLM research **Accept spend**). Deep / enrich and
-  `data/llm-request` print the estimate and skip the model unless confirmed.
-  Cue parser still writes clocks. `/stats` cannot dispatch LLM. No-op
-  without keys on deep/enrich; dedicated workflow fails if both keys are
-  missing. Reports in `data/crosscheck/llm-handle-research.json`.
+  guesses. **Disclose, then confirm — no exceptions.** `complete()` is the
+  only model path and throws unless (1) `announceLlmPlan()` has printed what
+  each job researches, what is sent, what may be written, and the USD range,
+  and (2) spend is confirmed (`LLM_RESEARCH_CONFIRM=1`, TTY `yes`, or Catalog
+  LLM research **Accept spend**). Job wording lives in `LLM_JOB_DISCLOSURE`
+  (`llmPlan.ts`) — update it when a job's prompt or writes change; a test
+  fails if a job has no disclosure. `npm run research:plan` prints the plan
+  and sends nothing. **Deep / enrich never call a model** — they run
+  `research:plan` plus the parser-only cue step (`LLM_RESEARCH=0`, no keys
+  passed). Bumping `data/llm-request` only produces the plan. Spend lives in
+  `catalog-llm-research.yml`: a `plan` job prints the disclosure (also on the
+  run summary), then the `spend` job needs **Accept spend** *and* the
+  `llm-spend` environment approval (add a required reviewer in Settings →
+  Environments). `/stats` cannot dispatch LLM. Reports in
+  `data/crosscheck/llm-handle-research.json`.
   **Cue job** (`LLM_RESEARCH_JOBS=cues` or `all`): re-parse first-party
   YT/SC/hearthis on empty/stub lists. Queue ranks live YT/hearthis ahead of
   weekly radio; radio without clocks does not consume the limit. Parser
@@ -185,10 +195,13 @@ unless asked. Never write Relive for HARD / Insomniac / Nameless / Ultra.
   interpolate; never overwrite 1001tl / fingerprint / community. Enrich
   `full` and Catalog LLM research default to parser apply / LLM extras
   dry-run. Report: `data/crosscheck/llm-cue-research.json`.
-  **/stats workbench:** one ranked Tracklist workbench (first-party text →
-  ACR → IDs → optional 1001 last). Capture 1001 is a nested operator fold
-  (`#capture-1001`). Thin-list / ID cue folds are gone — use the workbench.
-  DJ complete and places-without-a-set are the other entity queues.
+  **/stats queues:** flat, no nesting. **Capture 1001** (`#capture-1001`) is
+  the only set queue on the page — it has real actions (Open SC/YT, Search
+  1001, Copy capture). `statsWorkbench.ts` still ranks text / ACR / IDs lanes
+  and keeps its tests, but nothing renders it: those lanes had no operator
+  action and starved each other at the 40-row cut. Do not re-add a workbench
+  fold without per-row actions and a per-lane quota. DJ complete and
+  places-without-a-set are the other queues.
   **Host-twin fold:** same 1001 seed + both official YT and SC permalinks
   already known → one catalog row, both URLs kept, SC-first playback,
   secondary slug aliases to the survivor. Never invents a missing host.
@@ -263,8 +276,20 @@ unless asked. Never write Relive for HARD / Insomniac / Nameless / Ultra.
   checkpoint (`setradar-db-<run>-1identify` / `-2filescan` / exact run id).
   GitHub hosted jobs die at 6h and otherwise skip Save/Pages — do not pack
   thumbs + a 40×20 Identify loop + File Scan + 400 ISRCs into one uncapped job.
+  **Disclose, then confirm — audio ID is billable.** Every pass prints what is
+ sent (12s audio clips for Identify / AudD; the YouTube URL for File Scan),
+ what is written (`provenance: "fingerprint"` gap-fill only), and a USD range,
+ then sends nothing unless `ACRCLOUD_CONFIRM_SPEND=1` for that run.
+ `acrIdentify()`, `submitPlatformScan()` and the AudD recognize calls throw
+ without both, so no call site can bill quietly. **AudD is tried before ACR
+ on each clip** when `AUDD_ANALYZE=1` + `AUDD_API_TOKEN`, so it discloses its
+ own estimate (`ACR_USD_PER_AUDD_LOW/HIGH`). One confirm covers all three. Catalog enrich has an **Accept ACR spend** checkbox and sits behind
+ the `acr-spend` environment (add a required reviewer) — cron and
+ `data/enrich-request` pushes print the estimate and stop. Rates are rounded
+ operator guesses; set `ACR_USD_PER_IDENTIFY_LOW/HIGH` and
+ `ACR_USD_PER_FS_HOUR_LOW/HIGH` to your real plan rate.
   Samples SC/hearthis `playbackUrl`
-  via ffmpeg → ACRCloud Identify (`ACRCLOUD_*` secrets + `ACRCLOUD_ENABLED=1`).
+ via ffmpeg → ACRCloud Identify (`ACRCLOUD_*` secrets + `ACRCLOUD_ENABLED=1`).
   YouTube festival playbacks (Top20 / festival priority by default) use `yt-dlp
   --download-sections` for short clips, then the same Identify path
   (`ACRCLOUD_ALLOW_YOUTUBE_PRIORITY=1`; full YT with `ACRCLOUD_ALLOW_YOUTUBE=1`).

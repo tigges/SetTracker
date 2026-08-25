@@ -3,9 +3,13 @@
  *
  * findLyrics is public (no token) and returns artist/title + media links.
  * Audio recognize / enterprise mix analyze needs AUDD_API_TOKEN and is
- * gated by AUDD_ANALYZE=1. Never wires the URL as official playback.
+ * gated by AUDD_ANALYZE=1. That path is billable, so it also needs a
+ * printed plan + ACRCLOUD_CONFIRM_SPEND (see enrich/acrCost.ts) — AudD is
+ * tried before ACR on each clip, so it could otherwise bill on its own.
+ * Never wires the URL as official playback.
  */
 
+import { assertAcrSpendAllowed } from "../enrich/acrCost";
 import { normalizeIsrc } from "../../trackMeta";
 import { namesClose, primaryArtist, titleRank } from "./names";
 import type { TrackRadarPlatforms, TrackRadarTrack } from "./trackradar";
@@ -123,6 +127,8 @@ export async function recognizeAuddClip(
 ): Promise<TrackRadarTrack | null> {
   const token = auddApiToken();
   if (!token || process.env.AUDD_ANALYZE !== "1") return null;
+  // Paid tier. Blocked until the plan was printed and spend confirmed.
+  assertAcrSpendAllowed("audd");
   try {
     const form = new FormData();
     form.append("api_token", token);
@@ -154,6 +160,8 @@ export async function recognizeAuddUrl(
 ): Promise<TrackRadarTrack | null> {
   const token = auddApiToken();
   if (!token || process.env.AUDD_ANALYZE !== "1") return null;
+  // Paid tier. Blocked until the plan was printed and spend confirmed.
+  assertAcrSpendAllowed("audd");
   try {
     const body = new URLSearchParams({
       api_token: token,

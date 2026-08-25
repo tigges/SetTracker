@@ -23,6 +23,12 @@ import {
   type AcrHit,
 } from "../src/lib/ingest/enrich/acrcloud";
 import {
+  acrSpendConfirmed,
+  announceAcrPlan,
+  estimateAcrFileScanSpend,
+  estimateAcrIdentifySpend,
+} from "../src/lib/ingest/enrich/acrCost";
+import {
   diagnoseVerdict,
   isControlTrackMatch,
 } from "../src/lib/ingest/enrich/acrDiagnose";
@@ -119,6 +125,19 @@ async function main() {
     console.error("::error::ACRCLOUD_HOST / ACCESS_KEY / ACCESS_SECRET missing");
     process.exit(1);
   }
+  // Small but billable — disclose before the control probes, same as enrich.
+  const probeCount = 1 + PLAYBACK_PROBES.length;
+  announceAcrPlan(
+    estimateAcrIdentifySpend({ sets: 1, probesPerSet: probeCount }),
+  );
+  announceAcrPlan(estimateAcrFileScanSpend({ videos: 1, avgHours: 0.1 }));
+  if (!acrSpendConfirmed()) {
+    console.error(
+      "::error::ACR diagnose blocked — set ACRCLOUD_CONFIRM_SPEND=1 to accept the estimate above",
+    );
+    process.exit(1);
+  }
+
   const hasYtDlp = await ytDlpAvailable();
   const hasCookies = Boolean((process.env.ACRCLOUD_YTDLP_COOKIES || "").trim());
   console.log(
