@@ -100,6 +100,41 @@ export function Capture1001Client(props: {
   return <Capture1001Workbench key={urlQ} initialQuery={urlQ} {...props} />;
 }
 
+/** Nested /stats fold. Reads `?q=` in the browser so /stats stays static. */
+export function Capture1001Fold(props: {
+  presets: CapturePreset[];
+  generatedAt?: string;
+}) {
+  const q = (useSearchParams().get("q") ?? "").trim();
+  return (
+    <details
+      id="capture-1001"
+      open={Boolean(q)}
+      className="mt-3 scroll-mt-20 rounded-md border border-amber/40 bg-amber/5 px-2 py-1.5"
+    >
+      <summary className="cursor-pointer text-[12px] font-semibold text-ink">
+        Capture 1001{" "}
+        <span className="mono text-muted2">
+          ({props.presets.length.toLocaleString()})
+        </span>{" "}
+        <span className="mono inline-block rounded-full border border-amber/40 bg-amber/10 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.08em] text-amber">
+          operator
+        </span>
+      </summary>
+      <p className="mt-1 text-[11px] leading-snug text-muted2">
+        Last resort community overlay on official playback. First-party text +
+        ACR fill clocks without 1001. Do not invent 1001 URLs.
+      </p>
+      <div className="mt-2">
+        <Capture1001Client
+          presets={props.presets}
+          generatedAt={props.generatedAt}
+        />
+      </div>
+    </details>
+  );
+}
+
 function Capture1001Workbench({
   presets,
   generatedAt,
