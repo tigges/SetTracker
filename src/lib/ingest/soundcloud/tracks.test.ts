@@ -358,6 +358,26 @@ assert.equal(
   "sc-eric-prydz-eric-prydz-presents-epic-1",
 );
 
+const epic025Sc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) => s.url === "https://soundcloud.com/eric-prydz/epic-radio-025",
+);
+assert.ok(epic025Sc);
+assert.equal(epic025Sc.primaryArtist.name, "Eric Prydz");
+assert.equal(epic025Sc.type, "radio");
+assert.equal(epic025Sc.seriesName, "Epic Radio");
+assert.equal(
+  `sc-eric-prydz-${slugify("epic-radio-025")}`,
+  "sc-eric-prydz-epic-radio-025",
+);
+assert.notEqual(
+  epic025Sc.url,
+  "https://soundcloud.com/eric-prydz/eric-prydz-presents-epic-1",
+);
+assert.notEqual(
+  epic025Sc.url,
+  "https://soundcloud.com/eric-prydz/eric-prydz-presents-463760700",
+);
+
 const epic036Sc = SOUNDCLOUD_TRACK_SEEDS.find(
   (s) =>
     s.url ===

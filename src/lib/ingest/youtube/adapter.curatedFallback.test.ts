@@ -61,6 +61,14 @@ const PURIFIED_520 = YOUTUBE_SETS.find((s) => s.video.includes("8aDoUu4GDrc"));
 const CAPTIVE_098 = YOUTUBE_SETS.find((s) => s.video.includes("5JxfEjVdQFk"));
 const HYPE_SYNC = YOUTUBE_SETS.find((s) => s.video.includes("rLTCLSsqrXY"));
 const EPIC_036 = YOUTUBE_SETS.find((s) => s.video.includes("JLIYTueL4TI"));
+const EPIC_025 = YOUTUBE_SETS.find((s) => s.video.includes("xv6hpdqKlxg"));
+const HONEY_DEKMANTEL = YOUTUBE_SETS.find((s) =>
+  s.video.includes("t5KwF_VsM50"),
+);
+const VINAI_S2O = YOUTUBE_SETS.find((s) => s.video.includes("193z2Yyb-4g"));
+const VINAI_S2O_BANGKOK = YOUTUBE_SETS.find((s) =>
+  s.video.includes("VEA6D7c758s"),
+);
 const HELDENS_DAYBREAK = YOUTUBE_SETS.find((s) =>
   s.video.includes("wuMQeEJ3YnQ"),
 );
@@ -990,6 +998,42 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.durationSec, 59 * 60 + 10 + 180);
   });
 
+  it("builds Epic Radio 025 meta from the curated 1001 capture", () => {
+    assert.ok(EPIC_025);
+    const meta = watchMetaFromCuratedSeed(EPIC_025);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "xv6hpdqKlxg");
+    assert.match(meta.title, /Epic Radio 025/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=xv6hpdqKlxg");
+    // Last cue 56:05 + 180s pad.
+    assert.equal(meta.durationSec, 56 * 60 + 5 + 180);
+  });
+
+  it("builds Honey Dijon Dekmantel The Loop meta from the curated 1001 capture", () => {
+    assert.ok(HONEY_DEKMANTEL);
+    const meta = watchMetaFromCuratedSeed(HONEY_DEKMANTEL);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "t5KwF_VsM50");
+    assert.match(meta.title, /Honey Dijon/i);
+    assert.match(meta.title, /Dekmantel/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=t5KwF_VsM50");
+    // Last cue 1:52:00 + 180s pad.
+    assert.equal(meta.durationSec, 1 * 3600 + 52 * 60 + 180);
+  });
+
+  it("builds VINAI S2O Songkran Thailand meta from the curated 1001 capture", () => {
+    assert.ok(VINAI_S2O);
+    const meta = watchMetaFromCuratedSeed(VINAI_S2O);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "193z2Yyb-4g");
+    assert.match(meta.title, /VINAI/i);
+    assert.match(meta.title, /S2O/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=193z2Yyb-4g");
+    // Last cue 59:30 + 180s pad.
+    assert.equal(meta.durationSec, 59 * 60 + 30 + 180);
+    assert.notEqual(VINAI_S2O.video, VINAI_S2O_BANGKOK?.video);
+  });
+
   it("builds Cuebrick Sacré Paris meta from the official @Cuebrick seed", () => {
     assert.ok(CUEBRICK_SACRE);
     const meta = watchMetaFromCuratedSeed(CUEBRICK_SACRE);
@@ -1727,6 +1771,50 @@ describe("curated YouTube 429 fallback", () => {
     assert.ok(sets[0]!.durationSec >= 59 * 60);
     assert.equal(sets[0]?.primaryArtist?.slug, "eric-prydz");
     assert.equal(sets[0]?.seriesName, "Epic Radio");
+  });
+
+  it("lands Epic Radio 025 from the 1001 seed when watch is 429", async () => {
+    assert.ok(EPIC_025);
+    const adapter = createYoutubeAdapter([EPIC_025], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-xv6hpdqKlxg");
+    assert.equal(sets[0]!.type, "radio");
+    assert.ok(sets[0]!.plays.length >= 12);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 56 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "eric-prydz");
+    assert.equal(sets[0]?.seriesName, "Epic Radio");
+    assert.notEqual(sets[0]!.sourceSlug, "yt-JLIYTueL4TI");
+  });
+
+  it("lands Honey Dijon Dekmantel The Loop from the 1001 seed when watch is 429", async () => {
+    assert.ok(HONEY_DEKMANTEL);
+    const adapter = createYoutubeAdapter([HONEY_DEKMANTEL], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-t5KwF_VsM50");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 28);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 1 * 3600 + 52 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "honey-dijon");
+    assert.match(String(sets[0]?.eventName ?? ""), /Dekmantel/i);
+  });
+
+  it("lands VINAI S2O Songkran Thailand from the 1001 seed when watch is 429", async () => {
+    assert.ok(VINAI_S2O);
+    const adapter = createYoutubeAdapter([VINAI_S2O], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-193z2Yyb-4g");
+    assert.equal(sets[0]!.type, "festival");
+    assert.ok(sets[0]!.plays.length >= 34);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 59 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "vinai");
+    assert.match(String(sets[0]?.eventName ?? ""), /S2O/i);
+    assert.notEqual(sets[0]!.sourceSlug, "yt-VEA6D7c758s");
   });
 
   it("lands Oliver Heldens Daybreak TML WE1 from the 1001 seed when watch is 429", async () => {

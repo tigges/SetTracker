@@ -9,6 +9,11 @@
  * - non-tracklist noise (links, follow CTAs) is dropped
  */
 
+import {
+  classifySourceComment,
+  collapseHostCommentTimes,
+  extractQuotedTitle,
+} from "../../sourceComments";
 import type { Provenance } from "../../status";
 import type { RawPlay } from "../types";
 
@@ -396,29 +401,44 @@ export function parseTimedComments(
   const plays: RawPlay[] = [];
   let pos = startPosition;
   for (const c of timed) {
-    // Only keep comments that look like track IDs / tracklist rows
-    if (!looksLikeTracklistLine(c.body) && !ID_LINE.test(c.body) && !/\?/.test(c.body)) {
-      // "what is this" style ID requests → unresolved at that timestamp
-      if (/\b(id|track|song|tune)\b/i.test(c.body)) {
+    const kind = classifySourceComment(c.body);
+    if (kind === "chat") continue;
+    if (kind === "named") {
+      const quoted = extractQuotedTitle(c.body);
+      const play = classifyLine(c.body, pos, c.sec, provenance);
+      if (quoted && !play?.artistName) {
         plays.push({
           position: pos++,
           timestamp: c.sec,
           provenance,
           idStatus: "unresolved_id",
-          idLabel: "ID - ID",
+          idLabel: quoted,
           note: c.body.slice(0, 160),
           rawText: c.body,
+          trackTitle: quoted,
         });
+        continue;
+      }
+      if (play) {
+        plays.push(play);
+        pos += 1;
+        continue;
       }
       continue;
     }
-    const play = classifyLine(c.body, pos, c.sec, provenance);
-    if (play) {
-      plays.push(play);
-      pos += 1;
-    }
+    plays.push({
+      position: pos++,
+      timestamp: c.sec,
+      provenance,
+      idStatus: "unresolved_id",
+      idLabel: "ID - ID",
+      note: c.body.slice(0, 160),
+      rawText: c.body,
+    });
   }
-  return plays;
+  return collapseHostCommentTimes(plays, (p) =>
+    classifySourceComment(p.note ?? p.rawText ?? p.idLabel ?? ""),
+  ).map((p, i) => ({ ...p, position: startPosition + i }));
 }
 
 /**

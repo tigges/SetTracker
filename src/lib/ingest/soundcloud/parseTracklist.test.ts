@@ -3,6 +3,7 @@ import {
   isClockMetadataLabel,
   parseClockedTracklist,
   parseDescriptionTracklist,
+  parseTimedComments,
 } from "./parseTracklist";
 
 const timed = `
@@ -234,5 +235,25 @@ Sizz Da Hood`,
   "hearthis",
 );
 assert.equal(hearthisDuration.length, 0);
+
+const radioComments = parseTimedComments(
+  [
+    { body: "where's the Berlin set???", timestamp: 21_000 },
+    { body: "Nein?", timestamp: 792_000 },
+    { body: "What is this track! I fkn love it!", timestamp: 804_000 },
+    { body: "Diabolical track!", timestamp: 1_030_000 },
+    { body: "id?", timestamp: 1_959_000 },
+    {
+      body: "Thank you for Supporting my Track 'Acid Is My Therapy'",
+      timestamp: 1_944_000,
+    },
+  ],
+  3441,
+);
+assert.ok(radioComments.every((p) => p.timestamp !== 21));
+assert.ok(!radioComments.some((p) => /Berlin|Nein|Diabolical/i.test(p.rawText ?? "")));
+assert.ok(radioComments.some((p) => /What is this track/i.test(p.note ?? "")));
+assert.ok(radioComments.some((p) => p.trackTitle === "Acid Is My Therapy" || p.idLabel === "Acid Is My Therapy"));
+assert.ok(radioComments.length >= 2 && radioComments.length <= 4);
 
 console.log("parseTracklist.test.ts ok");

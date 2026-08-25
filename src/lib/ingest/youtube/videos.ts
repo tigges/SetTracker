@@ -152,6 +152,9 @@ import {
   TL_MARLON_HOFFSTADT_TML_WE1_2026,
   TL_4444_OF_A_KIND_TML_WE1_FREEDOM_2026,
   TL_BULLET_TOOTH_TML_WE2_CORE_2026,
+  TL_ERIC_PRYDZ_EPIC_RADIO_025_2026,
+  TL_HONEY_DIJON_THE_LOOP_DEKMANTEL_NETHERLANDS_2025,
+  TL_VINAI_S2O_SONGKRAN_THAILAND_2023,
 } from "../tracklists1001/seeds";
 import type { RawArtist } from "../types";
 import { slugify } from "../types";
@@ -1196,6 +1199,23 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/9xurh1t/eric-prydz-epic-radio-036-2026-08-06.html",
     tracklist1001: TL_ERIC_PRYDZ_EPIC_RADIO_036_2026,
+  },
+  {
+    // Official Epic Radio 025; timed 1001 capture (same list as SC
+    // sc-eric-prydz-epic-radio-025). No Mixcloud in the paste — do not
+    // invent a Mixcloud slug. Distinct from 026 (SC-only) and 036.
+    video: "https://www.youtube.com/watch?v=xv6hpdqKlxg",
+    primaryArtist: dj("Eric Prydz", {
+      accent: "#7209b7",
+      homeCity: "Sweden",
+    }),
+    genre: "Progressive House",
+    type: "radio",
+    title: "Eric Prydz - Epic Radio 025 2026-03-05",
+    seriesName: "Epic Radio",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1lw7ktzt/eric-prydz-epic-radio-025-2026-03-05.html",
+    tracklist1001: TL_ERIC_PRYDZ_EPIC_RADIO_025_2026,
   },
   {
     // Official Miss Monique upload; timed 1001 capture.
@@ -3018,6 +3038,20 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     eventName: "S2O Bangkok",
   },
   {
+    // Official S2O Songkran Thailand 2023-04-15 playback. Timed 1001
+    // capture. No SoundCloud in the operator paste — do not invent an
+    // SC slug. Distinct from VINAI LIVE @ S2O BANGKOK 2023 (yt-VEA6D7c758s).
+    video: "https://www.youtube.com/watch?v=193z2Yyb-4g",
+    primaryArtist: dj("VINAI", { accent: "#ff006e" }),
+    genre: "Big Room",
+    type: "festival",
+    title: "VINAI @ S2O Songkran Music Festival Thailand 2023-04-15",
+    eventName: "S2O Songkran Music Festival",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2urv8pq1/vinai-s2o-songkran-music-festival-thailand-2023-04-15.html",
+    tracklist1001: TL_VINAI_S2O_SONGKRAN_THAILAND_2023,
+  },
+  {
     video: "https://www.youtube.com/watch?v=UZwZ4iyvWDo",
     primaryArtist: dj("Faustix", { accent: "#ffba08" }),
     genre: "Future House",
@@ -3026,6 +3060,8 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     eventName: "Nibe Festival",
   },
   {
+    // Official Dekmantel The Loop 2025 playback. Timed 1001 capture.
+    // No SoundCloud in the operator paste — do not invent an SC slug.
     video: "https://www.youtube.com/watch?v=t5KwF_VsM50",
     primaryArtist: dj("Honey Dijon", { accent: "#f72585" }),
     genre: "House",
@@ -3033,6 +3069,9 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     title: "Honey Dijon at The Loop - Dekmantel Festival 2025",
     seriesName: "Dekmantel",
     eventName: "Dekmantel Festival",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2r7hm01t/honey-dijon-the-loop-dekmantel-festival-netherlands-2025-08-02.html",
+    tracklist1001: TL_HONEY_DIJON_THE_LOOP_DEKMANTEL_NETHERLANDS_2025,
   },
   {
     video: "https://www.youtube.com/watch?v=knbEv8vj-2c",

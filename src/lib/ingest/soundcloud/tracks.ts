@@ -384,8 +384,23 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
   {
     // Official Eric Prydz upload; 1001TL wired via
     // sc-eric-prydz-eric-prydz-presents-epic-1
-    // (EPIC Radio 026 — distinct from 036 / presents-463760700).
+    // (EPIC Radio 026 — distinct from 025 / epic-radio-025 and
+    // 036 / presents-463760700).
     url: "https://soundcloud.com/eric-prydz/eric-prydz-presents-epic-1",
+    primaryArtist: dj("Eric Prydz", {
+      accent: "#7209b7",
+      homeCity: "Sweden",
+    }),
+    genre: "Progressive House",
+    seriesName: "Epic Radio",
+    type: "radio",
+    minDurationSec: 30 * 60,
+  },
+  {
+    // Official Eric Prydz upload; 1001TL wired via
+    // sc-eric-prydz-epic-radio-025 (same list as yt-xv6hpdqKlxg).
+    // No Mixcloud in the paste. Distinct from 026 / 036.
+    url: "https://soundcloud.com/eric-prydz/epic-radio-025",
     primaryArtist: dj("Eric Prydz", {
       accent: "#7209b7",
       homeCity: "Sweden",

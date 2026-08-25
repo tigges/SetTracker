@@ -1,5 +1,9 @@
 import assert from "node:assert/strict";
-import { assessSetDensity, isThinTracklist } from "./setDensity";
+import {
+  assessSetDensity,
+  expectedPlayCount,
+  isThinTracklist,
+} from "./setDensity";
 
 // Healthy ~1h house set (~15 plays).
 const ok = assessSetDensity({ durationSec: 3600, playCount: 15 });
@@ -25,4 +29,9 @@ assert.equal(short.severity, "ok");
 assert.equal(isThinTracklist({ durationSec: 3600, playCount: 6 }), true);
 assert.equal(isThinTracklist({ durationSec: 3600, playCount: 18 }), false);
 
-console.log("setDensity.test.ts ok");
+// Genre cadence: techno ~18/hour, house default ~17, never a miss-grid 69.
+assert.equal(expectedPlayCount(3600), 17);
+assert.ok(expectedPlayCount(3600, { genre: "Techno" }) >= 16);
+assert.ok(expectedPlayCount(3600, { genre: "Techno" }) <= 20);
+assert.ok(expectedPlayCount(3600, { genre: "Techno" }) < 25);
+

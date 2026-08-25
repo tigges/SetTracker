@@ -369,3 +369,123 @@ export const TL_DVLM_SMASH_THE_HOUSE_RADIO_690_2026: FingerprintSeedRow[] = [
   { at: "54:39", artist: "Faustix", title: "Kick So Loud" },
   { at: "57:28", artist: "OBS", title: "Burn It Down" },
 ];
+
+/**
+ * Eric Prydz - Epic Radio 025 2026-03-05
+ * https://www.1001tracklists.com/tracklist/1lw7ktzt/eric-prydz-epic-radio-025-2026-03-05.html
+ * Official YT: https://youtu.be/xv6hpdqKlxg
+ * Official SC: https://soundcloud.com/eric-prydz/epic-radio-025
+ * Paste name TL_Eric-Prydz_Epic-Radio_025_2026-03-05 is not a valid identifier.
+ * No Mixcloud in the operator paste — do not invent a Mixcloud slug.
+ * Distinct from EPIC 026 (sc-eric-prydz-eric-prydz-presents-epic-1) and
+ * EPIC 036 (yt-JLIYTueL4TI / sc-eric-prydz-eric-prydz-presents-463760700).
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-xv6hpdqKlxg"]
+ *       TRACKLIST_1001_BY_SOURCE_SLUG["sc-eric-prydz-epic-radio-025"]
+ * Curated in youtube/videos.ts + soundcloud/tracks.ts.
+ * Captured 2026-08-24 — provenance 1001tl.
+ */
+export const TL_ERIC_PRYDZ_EPIC_RADIO_025_2026: FingerprintSeedRow[] = [
+  { at: "0:30", artist: "Pryda", title: "EPIC Radio 025 Intro ID (Working Title)" },
+  { at: "6:35", artist: "Pryda", title: "Sonar Barcelona 2025 ID (Working Title)" },
+  { at: "13:35", artist: "Cirez D", title: "Exit 2025 ID (Working Title)" },
+  { at: "20:35", artist: "Pryda", title: "Hi Ibiza 2018 ID (Working Title)" },
+  { at: "24:47", artist: "Cirez D", title: "Inter Expo Center 2025 ID (Working Title)" },
+  { at: "30:14", artist: "Cirez D", title: "EPIC Radio 025 ID (Working Title)" },
+  { at: "33:44", artist: "Cirez D", title: "Poney Club 2025 ID (Working Title)" },
+  { at: "38:44", artist: "Pryda", title: "Twitter 2025 ID 01 (Working Title)" },
+  { at: "42:00", artist: "Pryda", title: "Twitter 2025 ID 02 (Working Title)" },
+  { at: "47:50", artist: "Cirez D", title: "Sunset Square 2025 ID (Working Title)" },
+  { at: "51:51", artist: "Pryda", title: "CELL Hï Ibiza 2024 ID 01 (Working Title)" },
+  { at: "56:05", artist: "Pryda", title: "Marquee Las Vegas 2025 ID (Working Title)" },
+];
+
+/**
+ * Honey Dijon @ The Loop, Dekmantel Festival, Netherlands 2025-08-02
+ * Official YouTube: https://youtu.be/t5KwF_VsM50
+ * https://www.1001tracklists.com/tracklist/2r7hm01t/honey-dijon-the-loop-dekmantel-festival-netherlands-2025-08-02.html
+ * Paste name TL_Honey-Dijon_The-Loop_Dekmantel-Festival_Netherlands_2025-08-02
+ * is not a valid identifier.
+ * No SoundCloud in the operator paste — do not invent an SC slug.
+ * Watch already curated in youtube/videos.ts.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-t5KwF_VsM50"]
+ * Captured 2026-08-24 — provenance 1001tl.
+ */
+export const TL_HONEY_DIJON_THE_LOOP_DEKMANTEL_NETHERLANDS_2025: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "Barbara Tucker", title: "I Get Lifted (Go To Church Mix)" },
+  { at: "6:00", artist: "Harry Romero", title: "Mood Vision" },
+  { at: "9:00", artist: "Cratebug & Junior Sanchez", title: "Sinna Mann" },
+  { at: "14:00", artist: "Derrick Carter", title: "Where U At?" },
+  { at: "17:00", artist: "Scrubfish", title: "Jazzlix" },
+  { at: "20:00", artist: "Mary J. Blige", title: "Ain't Nobody" },
+  { at: "22:00", artist: "Trevor Rockcliffe", title: "A Sound Called House" },
+  { at: "28:00", artist: "James Burton", title: "Breakfast Club (Dennis Ferrer Morning Mix)" },
+  { at: "31:00", artist: "Squirell", title: "Get Up" },
+  { at: "36:00", artist: "Sylvester", title: "You Make Me Feel (Mighty Real)" },
+  { at: "41:00", artist: "Jay Lumen", title: "Can You Dance" },
+  { at: "41:01", artist: "Cardi B", title: "Bodak Yellow" },
+  { at: "48:00", artist: "Harry Romero", title: "Paradise II (Avision Remix)" },
+  { at: "51:00", artist: "Sweet Pussy Pauline", title: "Work This Pussy (Acappella)" },
+  { at: "54:00", artist: "Tommy Bones", title: "Next Level" },
+  { at: "59:30", artist: "Danny Tenaglia ft. Celeda", title: "Music Is The Answer (Dancin' And Prancin') (Acappella)" },
+  { at: "1:00:00", artist: "Harry Romero", title: "Scatter" },
+  { at: "1:04:00", artist: "The Red Zone Project ft. Keith Anthony Fluitt", title: "Everybody Get Up! (Tedd Patterson Funk Of Forty Years Dub)" },
+  { at: "1:10:00", artist: "Kenny Dope pres. The Bucketheads", title: "The Bomb! (These Sounds Fall Into My Mind) (Armand van Helden Re-edit)" },
+  { at: "1:15:00", artist: "Honey Dijon ft. Chloë", title: "The Nightlife (Round & Round Remix)" },
+  { at: "1:22:00", artist: "Colonel Abrams", title: "Music Is The Answer" },
+  { at: "1:25:00", artist: "Mila Journée", title: "No Es No" },
+  { at: "1:29:00", artist: "Harry Romero", title: "Light It Up" },
+  { at: "1:33:00", artist: "Riva Starr & Mark Broom pres. Star B", title: "I've Got Joy" },
+  { at: "1:38:00", artist: "LaShun Pace", title: "I Know I've Been Changed" },
+  { at: "1:44:00", artist: "Sasha", title: "Fleuron Drift" },
+  { at: "1:48:00", artist: "CASSIMM", title: "Love Desire" },
+  { at: "1:52:00", artist: "Soul Central ft. Kathy Brown", title: "Strings Of Life (Stronger On My Own) (Supernova Remix)" },
+];
+
+/**
+ * VINAI @ S2O Songkran Music Festival Thailand 2023-04-15
+ * Official YouTube: https://youtu.be/193z2Yyb-4g
+ * https://www.1001tracklists.com/tracklist/2urv8pq1/vinai-s2o-songkran-music-festival-thailand-2023-04-15.html
+ * Paste name TL_VINAI_S2O_Songkran-Music-Festival_Thailand_2023-04-15 is not
+ * a valid identifier. Paste wire yt-/193z2Yyb-4g is a typo — slug is
+ * yt-193z2Yyb-4g.
+ * No SoundCloud in the operator paste — do not invent an SC slug.
+ * Distinct from VINAI LIVE @ S2O BANGKOK 2023 (yt-VEA6D7c758s).
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-193z2Yyb-4g"]
+ * Curated in youtube/videos.ts. Captured 2026-08-24 — provenance 1001tl.
+ */
+export const TL_VINAI_S2O_SONGKRAN_THAILAND_2023: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "VINAI & Le Pedre", title: "I Was Made (RAAKMO Remix)" },
+  { at: "1:53", artist: "Lil Nas X", title: "STAR WALKIN' (League Of Legends Worlds Anthem) (VINAI x RAAKMO Remix)" },
+  { at: "3:18", artist: "Ray Volpe", title: "Laserbeam (Sullivan King Remix)" },
+  { at: "4:43", artist: "VINAI & VAMERO ft. Chris Crone", title: "That Way (RAAKMO Remix)" },
+  { at: "6:08", artist: "Oasis", title: "Wonderwall" },
+  { at: "7:33", artist: "R3HAB & VINAI", title: "How We Party" },
+  { at: "8:58", artist: "TJR & VINAI", title: "Bounce Generation" },
+  { at: "10:23", artist: "Dimitri Vegas & Like Mike vs. VINAI", title: "Louder" },
+  { at: "11:48", artist: "W&W & VINAI", title: "GANGSTER" },
+  { at: "13:12", artist: "Linkin Park", title: "In The End" },
+  { at: "14:37", artist: "Husman", title: "Heroic" },
+  { at: "16:01", artist: "Travis Scott ft. Drake", title: "Sicko Mode" },
+  { at: "17:26", artist: "Crankdat & Bandlez", title: "Ground Shake" },
+  { at: "18:50", artist: "David Guetta ft. Bebe Rexha", title: "I'm Good (Blue) (VINAI Remix)" },
+  { at: "20:15", artist: "Sean Paul", title: "Temperature" },
+  { at: "21:39", artist: "Carnage & VINAI", title: "Time For The Techno" },
+  { at: "23:04", artist: "BLACKPINK", title: "How You Like That" },
+  { at: "24:28", artist: "BLACKPINK", title: "How You Like That (RΛKHZ Remix)" },
+  { at: "25:53", artist: "Ran-D & Digital Punk vs. Bon Jovi", title: "Born To Die vs. Livin' On A Prayer (Code Black Mashup)" },
+  { at: "27:17", artist: "Bon Jovi", title: "Livin' On A Prayer" },
+  { at: "28:42", artist: "Ran-D & Digital Punk", title: "Born To Die" },
+  { at: "30:06", artist: "David Guetta ft. Sia", title: "Titanium (David Guetta & MORTEN Future Rave Remix)" },
+  { at: "31:31", artist: "Lit Lords", title: "From The Mud (RAAKMO Remix)" },
+  { at: "32:55", artist: "VINAI x RAAKMO", title: "Numb" },
+  { at: "35:35", artist: "Eminem", title: "Lose Yourself" },
+  { at: "38:14", artist: "ROSSY", title: "DEITY" },
+  { at: "40:54", artist: "Alesso & OneRepublic vs. VINAI & Naeleck & RAAKMO", title: "If I Lose Myself vs. The Sinner (VINAI Mashup)" },
+  { at: "43:33", artist: "Alesso & OneRepublic", title: "If I Lose Myself" },
+  { at: "46:13", artist: "VINAI & Naeleck & RAAKMO", title: "The Sinner" },
+  { at: "48:52", artist: "VINAI ft. Harrison", title: "The Wave (VINAI Live Edit)" },
+  { at: "51:32", artist: "Queen", title: "We Will Rock You" },
+  { at: "54:11", artist: "Gammer", title: "The Drop" },
+  { at: "56:51", artist: "The Kid LAROI & Justin Bieber", title: "STAY (Dimatik & Twisted Melodiez Remix)" },
+  { at: "59:30", artist: "Ran-D", title: "Zombie" },
+];

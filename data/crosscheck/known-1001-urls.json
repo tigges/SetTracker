@@ -3,6 +3,31 @@
   "updatedAt": "2026-08-24T00:00:00.000Z",
   "urls": [
     {
+      "label": "VINAI · S2O Songkran Music Festival Thailand 2023-04-15",
+      "slug": "yt-193z2Yyb-4g",
+      "name": "TL_VINAI_S2O_SONGKRAN_THAILAND_2023",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/2urv8pq1/vinai-s2o-songkran-music-festival-thailand-2023-04-15.html",
+      "youtubeUrl": "https://youtu.be/193z2Yyb-4g",
+      "note": "Operator paste 2026-08-24. 34 timed cues on official YT. Overlay TL_VINAI_S2O_Songkran-Music-Festival_Thailand_2023-04-15 is not a valid identifier. Paste wire yt-/193z2Yyb-4g is a typo — slug is yt-193z2Yyb-4g. No SC in the paste — do not invent an SC slug. Distinct from VINAI LIVE @ S2O BANGKOK 2023 yt-VEA6D7c758s."
+    },
+    {
+      "label": "Honey Dijon · The Loop, Dekmantel Festival, Netherlands 2025-08-02",
+      "slug": "yt-t5KwF_VsM50",
+      "name": "TL_HONEY_DIJON_THE_LOOP_DEKMANTEL_NETHERLANDS_2025",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/2r7hm01t/honey-dijon-the-loop-dekmantel-festival-netherlands-2025-08-02.html",
+      "youtubeUrl": "https://youtu.be/t5KwF_VsM50",
+      "note": "Operator paste 2026-08-24. 28 timed cues on official YT already curated in videos.ts. Overlay TL_Honey-Dijon_The-Loop_Dekmantel-Festival_Netherlands_2025-08-02 is not a valid identifier. No SC in the paste — do not invent an SC slug."
+    },
+    {
+      "label": "Eric Prydz · Epic Radio 025 2026-03-05",
+      "slug": "yt-xv6hpdqKlxg",
+      "name": "TL_ERIC_PRYDZ_EPIC_RADIO_025_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/1lw7ktzt/eric-prydz-epic-radio-025-2026-03-05.html",
+      "youtubeUrl": "https://youtu.be/xv6hpdqKlxg",
+      "soundcloudUrl": "https://soundcloud.com/eric-prydz/epic-radio-025",
+      "note": "Operator paste 2026-08-24. 12 timed cues on official YT + eric-prydz/epic-radio-025. Overlay TL_Eric-Prydz_Epic-Radio_025_2026-03-05 is not a valid identifier. SC folds as secondary leftover onto yt-xv6hpdqKlxg. Never sc-https://…. No Mixcloud in the paste. Distinct from EPIC 026 sc-eric-prydz-eric-prydz-presents-epic-1 and EPIC 036 yt-JLIYTueL4TI."
+    },
+    {
       "label": "Dimitri Vegas & Like Mike · Smash The House Radio 690 2026-08-21",
       "slug": "yt-OcUFACTYqL8",
       "name": "TL_DVLM_SMASH_THE_HOUSE_RADIO_690_2026",

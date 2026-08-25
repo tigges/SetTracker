@@ -373,7 +373,8 @@ export const TL_ROBIN_SCHULZ_SUGAR_RADIO_555_2026: FingerprintSeedRow[] = [
  * Eric Prydz - Epic Radio 026 2026-03-19
  * https://www.1001tracklists.com/tracklist/25jcxyw9/eric-prydz-epic-radio-026-2026-03-19.html
  * Official SC: https://soundcloud.com/eric-prydz/eric-prydz-presents-epic-1
- * Capture paste used TL_CAPTURED (too generic). Distinct from EPIC 036
+ * Capture paste used TL_CAPTURED (too generic). Distinct from EPIC 025
+ * (yt-xv6hpdqKlxg / sc-eric-prydz-epic-radio-025) and EPIC 036
  * (yt-JLIYTueL4TI / sc-eric-prydz-eric-prydz-presents-463760700).
  * No YouTube in the operator paste — do not invent a watch id (1001's
  * on-page player is not a source URL).

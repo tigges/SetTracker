@@ -185,6 +185,9 @@ import {
   TL_4444_OF_A_KIND_TML_WE1_FREEDOM_2026,
   TL_JOHN_NEWMAN_TML_WE1_MAINSTAGE_2026,
   TL_DVLM_SMASH_THE_HOUSE_RADIO_690_2026,
+  TL_ERIC_PRYDZ_EPIC_RADIO_025_2026,
+  TL_HONEY_DIJON_THE_LOOP_DEKMANTEL_NETHERLANDS_2025,
+  TL_VINAI_S2O_SONGKRAN_THAILAND_2023,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   isSecondaryPlaybackSlug,
@@ -1818,6 +1821,19 @@ assert.equal(
   isWiredTracklistSlug("sc-eric-prydz-eric-prydz-presents-463760700"),
   true,
 );
+assert.equal(isWiredTracklistSlug("yt-xv6hpdqKlxg"), true);
+assert.equal(isWiredTracklistSlug("sc-eric-prydz-epic-radio-025"), true);
+assert.equal(isWiredTracklistSlug("yt-t5KwF_VsM50"), true);
+assert.equal(isWiredTracklistSlug("sc-honey-dijon-dekmantel"), false);
+assert.equal(isWiredTracklistSlug("yt-193z2Yyb-4g"), true);
+assert.equal(isWiredTracklistSlug("yt-/193z2Yyb-4g"), false);
+assert.equal(isWiredTracklistSlug("sc-vinai-s2o"), false);
+assert.equal(
+  isWiredTracklistSlug(
+    "sc-https://soundcloud.com/eric-prydz/epic-radio-025",
+  ),
+  false,
+);
 assert.equal(
   isWiredTracklistSlug("sc-bradeazy-bradeazy-live-lollapalooza"),
   true,
@@ -3399,6 +3415,8 @@ assert.notEqual(
   TRACKLIST_1001_BY_SOURCE_SLUG["sc-eric-prydz-eric-prydz-presents-463760700"],
 );
 assert.equal(isSecondaryPlaybackSlug("sc-eric-prydz-eric-prydz-presents-epic-1"), false);
+assert.equal(isSecondaryPlaybackSlug("yt-xv6hpdqKlxg"), false);
+assert.equal(isSecondaryPlaybackSlug("sc-eric-prydz-epic-radio-025"), true);
 const epic026 = tracklist1001RowsToPlays(TL_ERIC_PRYDZ_EPIC_RADIO_026_2026);
 assert.equal(epic026.length, 12);
 assert.equal(epic026[0]?.provenance, "1001tl");
@@ -3750,6 +3768,98 @@ for (let i = 1; i < hypeSync.length; i++) {
   assert.ok(
     (hypeSync[i]!.timestamp ?? 0) > (hypeSync[i - 1]!.timestamp ?? 0),
     `James Hype SYNC London clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_ERIC_PRYDZ_EPIC_RADIO_025_2026);
+assert.equal(TL_ERIC_PRYDZ_EPIC_RADIO_025_2026.length, 12);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-xv6hpdqKlxg"],
+  TL_ERIC_PRYDZ_EPIC_RADIO_025_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-eric-prydz-epic-radio-025"],
+  TL_ERIC_PRYDZ_EPIC_RADIO_025_2026,
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-xv6hpdqKlxg"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-JLIYTueL4TI"],
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-eric-prydz-epic-radio-025"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-eric-prydz-eric-prydz-presents-epic-1"],
+);
+assert.equal(TL_ERIC_PRYDZ_EPIC_RADIO_025_2026[0]?.title, "EPIC Radio 025 Intro ID (Working Title)");
+assert.equal(
+  TL_ERIC_PRYDZ_EPIC_RADIO_025_2026[11]?.title,
+  "Marquee Las Vegas 2025 ID (Working Title)",
+);
+const epic025 = tracklist1001RowsToPlays(TL_ERIC_PRYDZ_EPIC_RADIO_025_2026);
+assert.equal(epic025.length, 12);
+assert.equal(epic025[0]?.provenance, "1001tl");
+assert.equal(epic025[0]?.timestamp, 30);
+assert.equal(epic025[11]?.timestamp, 56 * 60 + 5);
+for (let i = 1; i < epic025.length; i++) {
+  assert.ok(
+    (epic025[i]!.timestamp ?? 0) > (epic025[i - 1]!.timestamp ?? 0),
+    `Epic Radio 025 clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_HONEY_DIJON_THE_LOOP_DEKMANTEL_NETHERLANDS_2025);
+assert.equal(TL_HONEY_DIJON_THE_LOOP_DEKMANTEL_NETHERLANDS_2025.length, 28);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-t5KwF_VsM50"],
+  TL_HONEY_DIJON_THE_LOOP_DEKMANTEL_NETHERLANDS_2025,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-honey-dijon-dekmantel"],
+  undefined,
+);
+assert.equal(isSecondaryPlaybackSlug("yt-t5KwF_VsM50"), false);
+assert.equal(
+  TL_HONEY_DIJON_THE_LOOP_DEKMANTEL_NETHERLANDS_2025[0]?.title,
+  "I Get Lifted (Go To Church Mix)",
+);
+assert.equal(
+  TL_HONEY_DIJON_THE_LOOP_DEKMANTEL_NETHERLANDS_2025[27]?.title,
+  "Strings Of Life (Stronger On My Own) (Supernova Remix)",
+);
+const honeyDekmantel = tracklist1001RowsToPlays(
+  TL_HONEY_DIJON_THE_LOOP_DEKMANTEL_NETHERLANDS_2025,
+);
+assert.equal(honeyDekmantel.length, 28);
+assert.equal(honeyDekmantel[0]?.provenance, "1001tl");
+assert.equal(honeyDekmantel[0]?.timestamp, 0);
+assert.equal(honeyDekmantel[27]?.timestamp, 1 * 3600 + 52 * 60);
+for (let i = 1; i < honeyDekmantel.length; i++) {
+  assert.ok(
+    (honeyDekmantel[i]!.timestamp ?? 0) >
+      (honeyDekmantel[i - 1]!.timestamp ?? 0),
+    `Honey Dijon Dekmantel clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_VINAI_S2O_SONGKRAN_THAILAND_2023);
+assert.equal(TL_VINAI_S2O_SONGKRAN_THAILAND_2023.length, 34);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-193z2Yyb-4g"],
+  TL_VINAI_S2O_SONGKRAN_THAILAND_2023,
+);
+assert.equal(TRACKLIST_1001_BY_SOURCE_SLUG["yt-/193z2Yyb-4g"], undefined);
+assert.equal(TRACKLIST_1001_BY_SOURCE_SLUG["sc-vinai-s2o"], undefined);
+assert.equal(isSecondaryPlaybackSlug("yt-193z2Yyb-4g"), false);
+assert.equal(TL_VINAI_S2O_SONGKRAN_THAILAND_2023[0]?.title, "I Was Made (RAAKMO Remix)");
+assert.equal(TL_VINAI_S2O_SONGKRAN_THAILAND_2023[33]?.title, "Zombie");
+const vinaiS2o = tracklist1001RowsToPlays(TL_VINAI_S2O_SONGKRAN_THAILAND_2023);
+assert.equal(vinaiS2o.length, 34);
+assert.equal(vinaiS2o[0]?.provenance, "1001tl");
+assert.equal(vinaiS2o[0]?.timestamp, 0);
+assert.equal(vinaiS2o[33]?.timestamp, 59 * 60 + 30);
+for (let i = 1; i < vinaiS2o.length; i++) {
+  assert.ok(
+    (vinaiS2o[i]!.timestamp ?? 0) > (vinaiS2o[i - 1]!.timestamp ?? 0),
+    `VINAI S2O Songkran clocks must increase at index ${i}`,
   );
 }
 
