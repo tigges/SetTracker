@@ -108,6 +108,44 @@ assert.equal(
   "Odd Mob",
 );
 
+// SECTION. — "Artist | Techno DJ Set | SECTION. | Month Year", sets ~55–65m.
+const section = YOUTUBE_VENUES.find((v) => v.seriesName === "SECTION.")!;
+assert.equal(section.eventSlug, "section");
+assert.equal(section.genre, "Techno");
+assert.equal(
+  artistFromVenueTitle("SHDW | Techno DJ Set | SECTION. | January 2026"),
+  "SHDW",
+);
+assert.equal(
+  artistFromVenueTitle("Phil Berg | Techno DJ Set | SECTION. | August 2026"),
+  "Phil Berg",
+);
+assert.equal(
+  artistFromVenueTitle("Philippa Pacho | Techno DJ Set | SECTION. | June 2026"),
+  "Philippa Pacho",
+);
+assert.equal(
+  isVenueSetCandidate(
+    "SHDW | Techno DJ Set | SECTION. | January 2026",
+    5293,
+    section,
+  ),
+  true,
+);
+// Shorter than 30m still qualifies on a title match (their sets run ~55m).
+assert.equal(
+  isVenueSetCandidate(
+    "Chlär | Techno DJ Set | SECTION. | March 2026",
+    3551,
+    section,
+  ),
+  true,
+);
+assert.equal(
+  isVenueSetCandidate("SECTION. Label Night Trailer", 3600, section),
+  false,
+);
+
 const tml = YOUTUBE_VENUES.find((v) => v.seriesName === "Tomorrowland")!;
 assert.equal(
   isVenueSetCandidate("Freedom Stage - Tomorrowland 2026 LIVE", 7200, tml),

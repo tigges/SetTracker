@@ -196,6 +196,19 @@ export const YOUTUBE_VENUES: YoutubeVenueChannel[] = [
     titleMatch: /\b(awakenings|live|set|techno)\b/i,
   },
   {
+    // Filmed techno DJ-set series. Titles are "Artist | Techno DJ Set |
+    // SECTION. | Month Year" and uploads carry YouTube Music song credits,
+    // so these land with cues without touching 1001. Sets run ~55–65m.
+    channel: "@section_hq",
+    seriesName: "SECTION.",
+    eventSlug: "section",
+    genre: "Techno",
+    accent: "#1f1f24",
+    limit: VENUE_LIMIT,
+    minDurationSec: 30 * 60,
+    titleMatch: /\b(section|techno|dj\s*set|live|b2b)\b/i,
+  },
+  {
     // Official channel ID — handle @UNTOLD can drift; ID is stable.
     channel: "https://www.youtube.com/channel/UCeDqemm8j1o4u90IHkC0h0w",
     seriesName: "Untold Festival",
