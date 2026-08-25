@@ -22,6 +22,7 @@ import {
 import {
   COMMENT_LIKELY_TALK,
   COMMENT_LOW_CONFIDENCE,
+  displayPlayTitle,
   hasVendorDetectionCopy,
   isTalkPlay,
   publicStatusLabel,
@@ -246,8 +247,8 @@ export function SetTimeline({
                 {isTalkPlay(caption)
                   ? COMMENT_LIKELY_TALK
                   : caption.artistName
-                    ? `${caption.artistName} – ${caption.title}`
-                    : caption.title}
+                    ? `${caption.artistName} – ${displayPlayTitle(caption.title)}`
+                    : displayPlayTitle(caption.title)}
               </span>
               <span
                 className="ml-auto rounded-full px-2 py-0.5 text-[11px]"
@@ -332,7 +333,7 @@ export function SetTimeline({
                   </span>
                   <EntityThumb
                     src={talk ? null : p.imageUrl}
-                    label={talk ? "Talk" : p.title}
+                    label={talk ? "Talk" : displayPlayTitle(p.title)}
                     accent={color}
                     size={compact ? 24 : 32}
                     radius={6}
@@ -356,7 +357,7 @@ export function SetTimeline({
                               : undefined
                         }
                       >
-                        {talk ? COMMENT_LIKELY_TALK : p.title}
+                        {talk ? COMMENT_LIKELY_TALK : displayPlayTitle(p.title)}
                       </span>
                       {kind ? (
                           <span
@@ -441,7 +442,9 @@ export function SetTimeline({
                       position={p.position}
                       timestamp={p.timestamp}
                       currentLabel={
-                        p.artistName ? `${p.artistName} – ${p.title}` : p.title
+                        p.artistName
+                          ? `${p.artistName} – ${displayPlayTitle(p.title)}`
+                          : displayPlayTitle(p.title)
                       }
                       suggestedArtist={p.suggestedArtist ?? p.artistName}
                       suggestedTitle={p.suggestedTitle ?? (p.artistName ? p.title : null)}

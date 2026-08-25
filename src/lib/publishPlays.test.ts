@@ -4,8 +4,11 @@ import {
   COMMENT_LIKELY_TALK,
   COMMENT_LOW_CONFIDENCE,
   COMMENT_NOT_DETECTED,
+  UNKNOWN_TRACK_TITLE,
+  displayPlayTitle,
   hasVendorDetectionCopy,
   parseWeakFingerprintHint,
+  publicStatusLabel,
   publishListTally,
   publishSetPlays,
   shouldFillExpectedSlots,
@@ -168,7 +171,7 @@ describe("publishSetPlays", () => {
     const ask = published.find((p) => p.id === "ask");
     assert.ok(ask);
     assert.equal(ask!.timestamp, 804);
-    assert.equal(ask!.title, "Unknown");
+    assert.equal(ask!.title, UNKNOWN_TRACK_TITLE);
     assert.equal(ask!.idStatus, "unresolved_id");
     const acid = published.find((p) => /Acid Is My Therapy/i.test(p.title));
     assert.ok(acid);
@@ -421,5 +424,32 @@ describe("publishListTally", () => {
     assert.equal(published.trackCount, 16);
     assert.equal(published.counts.unparsed, 0);
     assert.equal(published.counts.identified, 16);
+  });
+});
+
+describe("listener-facing unknown copy", () => {
+  it("maps leftover Unknown titles to Unknown track", () => {
+    assert.equal(displayPlayTitle("Unknown"), UNKNOWN_TRACK_TITLE);
+    assert.equal(displayPlayTitle("unknown tracks"), UNKNOWN_TRACK_TITLE);
+    assert.equal(displayPlayTitle("Exhale"), "Exhale");
+  });
+
+  it("labels unresolved rows as Unknown track, not Unresolved ID", () => {
+    assert.equal(
+      publicStatusLabel({
+        idStatus: "unresolved_id",
+        detectionComment: null,
+        segmentKind: "track",
+      }),
+      UNKNOWN_TRACK_TITLE,
+    );
+    assert.equal(
+      publicStatusLabel({
+        idStatus: "unparsed",
+        detectionComment: COMMENT_NOT_DETECTED,
+        segmentKind: "track",
+      }),
+      COMMENT_NOT_DETECTED,
+    );
   });
 });

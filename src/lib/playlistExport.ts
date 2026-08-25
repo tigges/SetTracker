@@ -4,6 +4,7 @@
  * Launch / open wiring lives in exportLaunch.ts.
  */
 
+import { displayPlayTitle } from "@/lib/publishPlays";
 import {
   canonicalBeatportUrl,
   canonicalSpotifyUrl,
@@ -47,9 +48,9 @@ export function exportTimestamp(sec: number): string {
 
 export function trackDisplayLine(p: ExportPlay): string {
   const artist = (p.artistName ?? "").trim();
-  const title = p.title.trim();
+  const title = displayPlayTitle(p.title);
   if (artist && title) return `${artist} - ${title}`;
-  return title || artist || "Unknown";
+  return title || artist;
 }
 
 /** Identified / community-resolved rows first; fall back to all non-empty titles. */

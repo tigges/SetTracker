@@ -30,7 +30,16 @@ import type { IdStatus } from "./status";
 export const COMMENT_NOT_DETECTED = "Not detected";
 export const COMMENT_LOW_CONFIDENCE = "Auto track detection with low confidence";
 export const COMMENT_LIKELY_TALK = "Likely talk";
+/** Per-row title when the cue has no name yet. */
+export const UNKNOWN_TRACK_TITLE = "Unknown track";
 export const TALK_COLOR = "var(--slate)";
+
+/** Listener-facing title. Maps leftover "Unknown" rows to the same copy. */
+export function displayPlayTitle(title: string | null | undefined): string {
+  const t = (title ?? "").trim();
+  if (!t || isPlaceholderTitle(t)) return UNKNOWN_TRACK_TITLE;
+  return t;
+}
 
 const SPINE_PROVENANCE = new Set([
   "1001tl",
@@ -144,8 +153,8 @@ export function publicStatusLabel(
   if (isTalkPlay(play)) return COMMENT_LIKELY_TALK;
   if (play.detectionComment === COMMENT_NOT_DETECTED) return COMMENT_NOT_DETECTED;
   if (play.detectionComment === COMMENT_LOW_CONFIDENCE) return "Low confidence";
-  if (play.idStatus === "unparsed") return "Unparsed";
-  if (play.idStatus === "unresolved_id") return "Unresolved ID";
+  if (play.idStatus === "unparsed") return COMMENT_NOT_DETECTED;
+  if (play.idStatus === "unresolved_id") return UNKNOWN_TRACK_TITLE;
   if (play.idStatus === "community_resolved") return "Community resolved";
   if (play.idStatus === "identified") return "Identified";
   return play.idStatus;
@@ -235,7 +244,7 @@ function emptySlot<T extends PublishablePlay>(
     idStatus: "unparsed" as const,
     provenance: "community",
     rawText: null,
-    title: "Unknown",
+    title: UNKNOWN_TRACK_TITLE,
     artistName: null,
     idNote: null,
     trackSlug: null,
@@ -370,7 +379,7 @@ function isHostIdAsk(play: PublishablePlay): boolean {
   if (isNamedPlay(play) && sourceCommentKind(play) === "named") return false;
   if (sourceCommentKind(play) === "id-ask") return true;
   const title = (play.title ?? "").trim();
-  return /^id\s*[-–—]\s*id$/i.test(title) || title.toLowerCase() === "unknown";
+  return /^id\s*[-–—]\s*id$/i.test(title) || isPlaceholderTitle(title);
 }
 
 function isHostChatPlay(play: PublishablePlay): boolean {
@@ -430,7 +439,7 @@ function normalizeHostAsk<T extends PublishablePlay>(play: PublishedPlay<T>): Pu
   ) ?? null;
   return {
     ...play,
-    title: quoted ?? "Unknown",
+    title: quoted ?? UNKNOWN_TRACK_TITLE,
     artistName: play.artistName,
     suggestedTitle: play.suggestedTitle ?? quoted,
     idStatus: "unresolved_id",
@@ -453,9 +462,10 @@ function annotatePlay<T extends PublishablePlay>(play: T): PublishedPlay<T> {
       : play.idStatus;
   const annotated = {
     ...play,
-    title: vendor && !suggestedTitle && isPlaceholderTitle((play.title ?? "").toLowerCase())
-      ? "Unknown"
-      : title,
+    title:
+      !suggestedTitle && isPlaceholderTitle(play.title ?? "")
+        ? UNKNOWN_TRACK_TITLE
+        : title,
     artistName,
     idStatus,
     idNote: vendor ? null : (play.idNote ?? null),

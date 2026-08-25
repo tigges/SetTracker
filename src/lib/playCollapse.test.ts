@@ -1,6 +1,10 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { collapseConsecutivePlays, playCollapseKey } from "./playCollapse";
+import {
+  collapseConsecutivePlays,
+  isPlaceholderTitle,
+  playCollapseKey,
+} from "./playCollapse";
 
 describe("playCollapse", () => {
   it("collapses consecutive fingerprint hits of the same song", () => {
@@ -35,6 +39,13 @@ describe("playCollapse", () => {
     assert.equal(kept.length, 3);
     assert.equal(kept[0]!.title, "Opener");
     assert.equal(kept[2]!.title, "Opener");
+  });
+
+  it("treats Unknown and Unknown track as placeholders", () => {
+    assert.equal(isPlaceholderTitle("Unknown"), true);
+    assert.equal(isPlaceholderTitle("Unknown track"), true);
+    assert.equal(isPlaceholderTitle("Unknown tracks"), true);
+    assert.equal(isPlaceholderTitle("Exhale"), false);
   });
 
   it("does not collapse unidentified / acr-miss rows", () => {
