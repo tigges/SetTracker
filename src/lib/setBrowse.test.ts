@@ -94,6 +94,24 @@ describe("setBrowse", () => {
       imageUrl: "https://example.com/set.jpg",
     };
     assert.equal(isListPendingOfficialSet(officialEmpty), true);
+    assert.equal(
+      isListPendingOfficialSet({
+        ...officialEmpty,
+        title: "Robin Schulz live @ Pacha Ibiza",
+        type: "club",
+        eventKind: "club",
+      }),
+      true,
+    );
+    assert.equal(
+      isListPendingOfficialSet({
+        ...officialEmpty,
+        title: "Charlotte de Witte | Cercle",
+        type: "livestream",
+        eventKind: "livestream",
+      }),
+      true,
+    );
     assert.equal(isProfileVisibleSet(officialEmpty), true);
     assert.equal(isBrowseReadySet(officialEmpty), false);
     assert.equal(

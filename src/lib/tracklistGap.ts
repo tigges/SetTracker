@@ -73,6 +73,18 @@ export function isLivestreamHubTitle(title: string): boolean {
   return /\bLIVE\b/.test(title) && /\b(mainstage|freedom stage|core stage)\b/i.test(title);
 }
 
+/**
+ * Bare stage / radio-hub feeds only. "Artist | Freedom Stage … LIVE"
+ * stays a DJ set.
+ */
+export function isLivestreamHubFeedTitle(title: string): boolean {
+  if (!isLivestreamHubTitle(title)) return false;
+  if (/^[A-Z0-9][\w$.''*-]{1,40}(?:\s+[A-Z0-9][\w$.''*-]{1,30}){0,4}\s*[|·]\s+/.test(title)) {
+    return false;
+  }
+  return true;
+}
+
 /** Static export only builds set pages for non-empty, non-preview slugs. */
 export function setPageIsPublished(s: {
   title: string;

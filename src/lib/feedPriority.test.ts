@@ -148,6 +148,8 @@ describe("feedPriority complete → Top 100 → festivals", () => {
   it("prefers Event.kind over Set.type for venue tier", () => {
     assert.equal(resolveVenueTier("club", "festival"), "club");
     assert.equal(resolveVenueTier(null, "festival"), "festival");
+    assert.equal(resolveVenueTier(null, "club"), "club");
+    assert.equal(resolveVenueTier(null, "livestream"), "livestream");
     assert.equal(resolveVenueTier(null, "soundcloud"), "other");
   });
 

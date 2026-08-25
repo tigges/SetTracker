@@ -8,12 +8,13 @@ export type SoundCloudWidget = {
   seekTo: (ms: number) => void;
   play: () => void;
   getDuration?: (cb: (durationMs: number) => void) => void;
+  getPosition?: (cb: (positionMs: number) => void) => void;
 };
 
 export type SoundCloudWidgetApi = {
   Widget: {
     (el: HTMLIFrameElement): SoundCloudWidget;
-    Events: { READY: string; PLAY: string };
+    Events: { READY: string; PLAY: string; PLAY_PROGRESS?: string; PAUSE?: string };
   };
 };
 

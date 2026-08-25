@@ -9,6 +9,7 @@
  * Users never see ACR Cloud / acr-miss / vendor miss wording.
  */
 
+import { clocksLookInterpolated } from "./clockHonesty";
 import {
   collapseConsecutivePlays,
   isPlaceholderTitle,
@@ -184,6 +185,7 @@ export function shouldFillExpectedSlots(input: {
   spineCount: number;
   idAskCount?: number;
   droppedChat?: boolean;
+  interpolatedSpine?: boolean;
   genre?: string | null;
   type?: string | null;
   title?: string | null;
@@ -192,6 +194,7 @@ export function shouldFillExpectedSlots(input: {
   const expected = expectedPlayCount(input.durationSec, input);
   if (expected <= 0) return false;
   if (input.namedCount >= Math.ceil(expected * 0.6)) return false;
+  if (input.interpolatedSpine) return false;
   const idAsks = input.idAskCount ?? 0;
   if (input.spineCount >= 5 && input.placeholderCount < 3 && idAsks === 0) {
     return false;
@@ -529,6 +532,10 @@ export function publishSetPlays<T extends PublishablePlay>(
       isNamedPlay(p) &&
       p.provenance !== "fingerprint",
   ).length;
+  const interpolatedSpine = clocksLookInterpolated(
+    named.map((p) => p.timestamp),
+    meta.durationSec,
+  );
   const fill = shouldFillExpectedSlots({
     durationSec: meta.durationSec,
     namedCount: named.length,
@@ -536,6 +543,7 @@ export function publishSetPlays<T extends PublishablePlay>(
     spineCount,
     idAskCount: idAsks.length,
     droppedChat,
+    interpolatedSpine,
     genre: meta.genre,
     type: meta.type,
     title: meta.title,

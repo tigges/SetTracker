@@ -147,44 +147,27 @@ export default async function SetPage({
             <span className="mono">{fmtDate(set.publishedAt)}</span>
             <span className="mono">{fmtDuration(set.durationSec)}</span>
             <span className="mono">{set.trackCount} tracks</span>
-            {set.sourceName && (
-              <span>
-                Source:{" "}
-                {set.sourceUrl ? (
-                  <a
-                    href={set.sourceUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-muted underline decoration-dotted underline-offset-2 hover:text-ink"
-                  >
-                    {set.sourceName}
-                  </a>
-                ) : (
-                  <span className="text-muted">{set.sourceName}</span>
-                )}
-              </span>
-            )}
             {(() => {
-              const host = detectPlaybackHost(set.playbackUrl);
-              if (!host) return null;
-              if (host === "hearthis") return null;
+              const host = detectPlaybackHost(set.playbackUrl ?? set.sourceUrl);
+              const href = set.playbackUrl ?? set.sourceUrl;
+              if (!href || host === "hearthis") return null;
               const label =
                 host === "soundcloud"
                   ? "SoundCloud"
                   : host === "mixcloud"
                     ? "Mixcloud"
-                    : "YouTube";
-              // Only show when playback host differs from discovery source label.
-              if (
-                set.sourceName &&
-                set.sourceName.toLowerCase().includes(label.toLowerCase())
-              ) {
-                return null;
-              }
+                    : host === "youtube"
+                      ? "YouTube"
+                      : "Official playback";
               return (
-                <span>
-                  Audio: <span className="text-muted">{label}</span>
-                </span>
+                <a
+                  href={href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-muted underline decoration-dotted underline-offset-2 hover:text-ink"
+                >
+                  Official playback ↗ {label}
+                </a>
               );
             })()}
           </div>

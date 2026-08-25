@@ -47,6 +47,11 @@ export type YtChannelShelfDiscovery = {
   relatedVideoIds: string[];
 };
 
+export type YtChapter = {
+  title: string;
+  startSec: number;
+};
+
 export type YtWatchMeta = {
   videoId: string;
   title: string;
@@ -59,6 +64,8 @@ export type YtWatchMeta = {
   description: string;
   publishedAt: Date | null;
   musicCredits: YtMusicCredit[];
+  /** Watch-page chapter markers — real clocks, not even-spaced credits. */
+  chapters: YtChapter[];
   /** Related / suggested / "other tracks" video ids from the watch page. */
   relatedVideos: YtRelatedVideo[];
   watchUrl: string;
@@ -516,6 +523,7 @@ async function fetchWatchMetaViaDataApi(
     publishedAt:
       publishedAt && !Number.isNaN(publishedAt.getTime()) ? publishedAt : null,
     musicCredits: [],
+    chapters: [],
     relatedVideos: [],
     watchUrl: `https://www.youtube.com/watch?v=${videoId}`,
     imageUrl: pickYoutubeThumbnail(videoId, thumbs),
@@ -614,10 +622,71 @@ export async function fetchWatchMeta(videoIdOrUrl: string): Promise<YtWatchMeta>
     description,
     publishedAt: player ? publishedFromPlayer(player) : null,
     musicCredits: uniqueCredits,
+    chapters: extractChapters(player, initial),
     relatedVideos: relatedFiltered,
     watchUrl,
     imageUrl: pickYoutubeThumbnail(videoId, thumbnails),
   };
+}
+
+function chapterStartSec(value: unknown): number | null {
+  if (typeof value === "number" && Number.isFinite(value) && value >= 0) {
+    return value > 10_000 ? Math.round(value / 1000) : Math.round(value);
+  }
+  if (typeof value === "string" && /^\d+$/.test(value)) {
+    return chapterStartSec(Number(value));
+  }
+  return null;
+}
+
+function chapterTitleOf(node: Record<string, unknown>): string {
+  const title = node.title;
+  if (typeof title === "string") return title.trim();
+  if (title && typeof title === "object") {
+    const simple = (title as { simpleText?: string }).simpleText;
+    if (typeof simple === "string") return simple.trim();
+    const runs = (title as { runs?: Array<{ text?: string }> }).runs;
+    if (Array.isArray(runs)) {
+      return runs.map((r) => r.text ?? "").join("").trim();
+    }
+  }
+  if (typeof node.chapterTitle === "string") return node.chapterTitle.trim();
+  return "";
+}
+
+/** Chapter markers from player overlays / engagement panels. */
+export function extractChapters(...roots: unknown[]): YtChapter[] {
+  const out: YtChapter[] = [];
+  const seen = new Set<number>();
+  const walk = (node: unknown, depth: number) => {
+    if (!node || typeof node !== "object" || depth > 18) return;
+    if (Array.isArray(node)) {
+      for (const child of node) walk(child, depth + 1);
+      return;
+    }
+    const rec = node as Record<string, unknown>;
+    const title = chapterTitleOf(rec);
+    const start =
+      chapterStartSec(rec.startTimeSeconds) ??
+      chapterStartSec(rec.startTimeMs) ??
+      chapterStartSec(rec.timeRangeStartMillis);
+    if (title && start != null && !seen.has(start)) {
+      seen.add(start);
+      out.push({ title, startSec: start });
+    }
+    if (
+      rec.chapteredPlayerBarRenderer ||
+      rec.macroMarkersListRenderer ||
+      rec.macroMarkersListItemRenderer ||
+      rec.chapterRenderer
+    ) {
+      for (const child of Object.values(rec)) walk(child, depth + 1);
+      return;
+    }
+    for (const child of Object.values(rec)) walk(child, depth + 1);
+  };
+  for (const root of roots) walk(root, 0);
+  return out.sort((a, b) => a.startSec - b.startSec);
 }
 
 /** Pull @handle from ownerProfileUrl / canonicalBaseUrl when present. */

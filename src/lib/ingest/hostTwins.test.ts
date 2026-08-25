@@ -48,6 +48,13 @@ assert.equal(
   ),
   false,
 );
+assert.equal(
+  shouldCopyTwinTracklist(
+    { durationSec: 90 * 60, shareable: 0, firstParty: 18 },
+    { durationSec: 90 * 60, shareable: 0, firstParty: 2 },
+  ),
+  true,
+);
 
 assert.equal(
   foldCopyPlayCount([

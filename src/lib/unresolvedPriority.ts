@@ -11,6 +11,8 @@ export function isUnresolvedDetectPriority(opts: {
   unresolvedCount: number;
   top100Rank?: number | null;
   isFestival?: boolean;
+  /** Club night or official livestream — same detect budget as a festival. */
+  isLiveFocus?: boolean;
   festivalSeason?: boolean;
   /**
    * Festival (or season) sets with no/thin tracklists — still priority for
@@ -18,12 +20,13 @@ export function isUnresolvedDetectPriority(opts: {
    */
   sparseFestival?: boolean;
 }): boolean {
-  if (opts.sparseFestival && (opts.isFestival || opts.festivalSeason)) {
+  const live = Boolean(opts.isFestival || opts.isLiveFocus || opts.festivalSeason);
+  if (opts.sparseFestival && live) {
     return true;
   }
   if (opts.unresolvedCount < 1) return false;
   const top20 =
     opts.top100Rank != null &&
     opts.top100Rank <= TOP_DJ_UNRESOLVED_PRIORITY;
-  return top20 || Boolean(opts.isFestival || opts.festivalSeason);
+  return top20 || live;
 }

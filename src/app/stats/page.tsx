@@ -30,6 +30,7 @@ export const metadata: Metadata = pageMeta({
   description:
     "Catalog health dashboard — DJs, festivals, clubs, sets, and the work left.",
   path: "/stats",
+  robots: { index: false, follow: false },
 });
 
 const PREVIEW = 10;
@@ -204,6 +205,21 @@ export default async function StatsPage() {
             ? ` · v${process.env.NEXT_PUBLIC_APP_VERSION}`
             : ""}
           {" · last ship, not a live crawl"}
+        </p>
+      </div>
+
+      <div className="mb-3 rounded-lg border border-line bg-panel px-2.5 py-2">
+        <p className="text-[12px] font-semibold text-ink">Detection funnel</p>
+        <p className="mono mt-1 text-[11px] text-muted2">
+          {s.detection.ingested.toLocaleString()} ingested ·{" "}
+          {s.detection.withPlayback.toLocaleString()} playback ·{" "}
+          {s.detection.withList.toLocaleString()} with a list ·{" "}
+          {s.detection.empty.toLocaleString()} empty
+        </p>
+        <p className="mono mt-0.5 text-[11px] text-muted2">
+          {s.detection.festival} festival · {s.detection.club} club ·{" "}
+          {s.detection.livestream} livestream · {s.detection.weeklyRadio} radio
+          · {s.detection.communityResolved} community IDs
         </p>
       </div>
 

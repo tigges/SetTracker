@@ -136,44 +136,49 @@ export function SuggestIdButton({
             />
           </label>
           <div className="flex flex-col gap-1.5">
-            <button
-              type="button"
-              disabled={!ready}
-              onClick={() => void copySnippet()}
-              className={`rounded-md px-2 py-1 text-center text-[11px] font-semibold ${
-                ready
-                  ? "bg-brand text-bg hover:opacity-90"
-                  : "cursor-not-allowed bg-linesoft text-muted2"
-              }`}
-            >
-              {copied ? "Copied" : "Copy suggestion"}
-            </button>
             <a
               href={ready ? mailUrl : undefined}
               aria-disabled={!ready}
-              className={`rounded-md border border-line px-2 py-1 text-center text-[11px] ${
-                ready ? "text-ink hover:border-brand" : "pointer-events-none text-muted2"
+              className={`rounded-md px-2 py-1 text-center text-[11px] font-semibold ${
+                ready
+                  ? "bg-brand text-bg hover:opacity-90"
+                  : "pointer-events-none bg-linesoft text-muted2"
               }`}
               onClick={(e) => {
                 if (!ready) e.preventDefault();
               }}
             >
-              Email suggestion
+              Copy email
             </a>
-            <a
-              href={ready ? issueUrl : undefined}
-              target="_blank"
-              rel="noreferrer"
-              aria-disabled={!ready}
-              className={`rounded-md border border-line px-2 py-1 text-center text-[11px] ${
-                ready ? "text-ink hover:border-brand" : "pointer-events-none text-muted2"
-              }`}
-              onClick={(e) => {
-                if (!ready) e.preventDefault();
-              }}
-            >
-              Open GitHub issue
-            </a>
+            <details className="text-[11px] text-muted">
+              <summary className="cursor-pointer hover:text-ink">Advanced</summary>
+              <div className="mt-1.5 flex flex-col gap-1.5">
+                <button
+                  type="button"
+                  disabled={!ready}
+                  onClick={() => void copySnippet()}
+                  className={`rounded-md border border-line px-2 py-1 text-center ${
+                    ready ? "text-ink hover:border-brand" : "cursor-not-allowed text-muted2"
+                  }`}
+                >
+                  {copied ? "Copied JSON" : "Copy JSON"}
+                </button>
+                <a
+                  href={ready ? issueUrl : undefined}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-disabled={!ready}
+                  className={`rounded-md border border-line px-2 py-1 text-center ${
+                    ready ? "text-ink hover:border-brand" : "pointer-events-none text-muted2"
+                  }`}
+                  onClick={(e) => {
+                    if (!ready) e.preventDefault();
+                  }}
+                >
+                  Open GitHub issue
+                </a>
+              </div>
+            </details>
             <button
               type="button"
               className="text-[10px] text-muted hover:text-ink"

@@ -350,6 +350,45 @@ assert.equal(
   2,
   "empty official older non-festival",
 );
+assert.equal(
+  homepageEnrichBoost({
+    publishedAt: new Date(),
+    primaryDjSlug: "unknown-local",
+    genre: "Techno",
+    densitySeverity: "severe",
+    top100,
+    playCount: 0,
+    isWeeklyRadio: true,
+  }),
+  1,
+  "empty weekly radio stays behind live rooms",
+);
+assert.equal(
+  homepageEnrichBoost({
+    publishedAt: new Date(),
+    primaryDjSlug: "unknown-local",
+    genre: "House",
+    densitySeverity: "severe",
+    top100,
+    playCount: 0,
+    isLivestream: true,
+  }),
+  4,
+  "empty official livestream matches festival detect budget",
+);
+assert.equal(
+  homepageEnrichBoost({
+    publishedAt: new Date(),
+    primaryDjSlug: "unknown-local",
+    genre: "House",
+    densitySeverity: "ok",
+    top100,
+    playCount: 0,
+    isFestival: true,
+  }),
+  4,
+  "empty club/festival room still leads the Identify queue",
+);
 // Event-focus boost (ACRCLOUD_EVENT_SLUGS) beats same-host non-focus.
 const eventFocusFirst = [
   cand({

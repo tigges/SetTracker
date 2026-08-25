@@ -7,7 +7,7 @@ export const SITE_NAME = "setradar.ai";
 export const SITE_TAGLINE = "DJ set database";
 
 export const SITE_DESCRIPTION =
-  "Tracklists, IDs, and provenance for electronic DJ sets — festivals, radio, and mixes from SoundCloud, YouTube, hearthis.at, and the community.";
+  "Tracklists, IDs, and provenance for electronic DJ sets — festivals, clubs, livestreams, and radio from SoundCloud, YouTube, hearthis.at, and the community.";
 
 export function absoluteUrl(path = "/"): string {
   const p = path.startsWith("/") ? path : `/${path}`;
@@ -24,6 +24,7 @@ export function pageMeta(opts: {
   description: string;
   path: string;
   image?: string | null;
+  robots?: Metadata["robots"];
 }): Metadata {
   const url = absoluteUrl(opts.path);
   const images = opts.image ? [{ url: opts.image }] : undefined;
@@ -31,6 +32,7 @@ export function pageMeta(opts: {
     title: opts.title,
     description: opts.description,
     alternates: { canonical: opts.path },
+    ...(opts.robots ? { robots: opts.robots } : {}),
     openGraph: {
       title: `${opts.title} — ${SITE_NAME}`,
       description: opts.description,

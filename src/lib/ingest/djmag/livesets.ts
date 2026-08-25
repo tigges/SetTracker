@@ -8,6 +8,7 @@
  * Dedupes with the @DJMag YouTube venue via sourceSlug `yt-{videoId}`.
  */
 
+import { inferSetType } from "../../setType";
 import { artistsForSet } from "../artists";
 import { inferFestivalEvent, KNOWN_EVENTS } from "../events";
 import { hashRawSetContent } from "../hash";
@@ -111,6 +112,23 @@ function playsFromMeta(meta: YtWatchMeta): RawPlay[] {
     meta.durationSec,
     "youtube",
   );
+  const fromChapters = (meta.chapters ?? []).map((chapter, i) => {
+    const line = chapter.title.replace(/\s+/g, " ").trim();
+    const split = line.match(/^(.+?)\s+[-–—]\s+(.+)$/);
+    return {
+      position: i + 1,
+      timestamp: chapter.startSec,
+      provenance: "youtube" as const,
+      idStatus: split ? ("identified" as const) : ("unparsed" as const),
+      artistName: split?.[1]?.trim(),
+      trackTitle: split?.[2]?.trim(),
+      rawText: split ? undefined : line,
+    };
+  });
+  if (fromChapters.length >= 2) {
+    return mergeDescriptionAndCredits(fromDescription, fromChapters);
+  }
+  if (fromDescription.length >= 5) return fromDescription;
   const fromMusic = musicCreditsToPlays(meta.musicCredits, meta.durationSec);
   return mergeDescriptionAndCredits(fromDescription, fromMusic);
 }
@@ -199,7 +217,12 @@ async function teaserToRawSet(
   const raw: RawSet = {
     sourceSlug: `yt-${meta.videoId}`.slice(0, 120),
     title,
-    type: "festival",
+    type: inferSetType({
+      title,
+      eventKind: festival?.kind ?? CHANNEL_EVENT?.kind ?? "livestream",
+      hintedType: "livestream",
+      playbackHost: "youtube",
+    }),
     genre: genreFromTitle(title),
     primaryArtist: primary,
     collaborators,

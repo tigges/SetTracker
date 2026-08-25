@@ -13,7 +13,9 @@ import {
   TRACKLIST_1001_BY_SOURCE_SLUG,
 } from "./seeds";
 import {
+  FIRST_PARTY_TRACKLIST_PROVENANCE,
   SHAREABLE_TRACKLIST_PROVENANCE,
+  firstPartyPlayCount,
   shareablePlayCount,
   shouldCopyTwinTracklist,
   twinSlugGroupsFromCatalog,
@@ -206,22 +208,37 @@ export async function applyShareTwinTracklists(
     if (rows.length < 2) continue;
     scanned += rows.length;
     const ranked = [...rows].sort(
-      (a, b) => shareablePlayCount(b.plays) - shareablePlayCount(a.plays),
+      (a, b) =>
+        shareablePlayCount(b.plays) + firstPartyPlayCount(b.plays) -
+        (shareablePlayCount(a.plays) + firstPartyPlayCount(a.plays)),
     );
     const donor = ranked[0]!;
     const donorShare = shareablePlayCount(donor.plays);
+    const donorFirst = firstPartyPlayCount(donor.plays);
+    const copyProv =
+      donorShare >= 12
+        ? SHAREABLE_TRACKLIST_PROVENANCE
+        : new Set([
+            ...SHAREABLE_TRACKLIST_PROVENANCE,
+            ...FIRST_PARTY_TRACKLIST_PROVENANCE,
+          ]);
     const donorRaw = donor.plays
-      .filter((p) => SHAREABLE_TRACKLIST_PROVENANCE.has(p.provenance))
+      .filter((p) => copyProv.has(p.provenance))
       .map(playedToRaw);
     if (donorRaw.length < 12) continue;
 
     for (const recip of ranked.slice(1)) {
       if (
         !shouldCopyTwinTracklist(
-          { durationSec: donor.durationSec, shareable: donorShare },
+          {
+            durationSec: donor.durationSec,
+            shareable: donorShare,
+            firstParty: donorFirst,
+          },
           {
             durationSec: recip.durationSec,
             shareable: shareablePlayCount(recip.plays),
+            firstParty: firstPartyPlayCount(recip.plays),
           },
         )
       ) {

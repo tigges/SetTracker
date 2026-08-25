@@ -78,12 +78,6 @@ export default function RootLayout({
               <Link href="/events/calendar" className="underline decoration-dotted underline-offset-2 hover:text-ink">
                 Calendar
               </Link>
-              <Link href="/stats" className="underline decoration-dotted underline-offset-2 hover:text-ink">
-                Stats
-              </Link>
-              <Link href="/search" className="underline decoration-dotted underline-offset-2 hover:text-ink">
-                Search
-              </Link>
             </span>
             <span className="mono text-[11px]" title="Build version">
               v{process.env.NEXT_PUBLIC_APP_VERSION ?? "0.1.0"}

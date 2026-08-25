@@ -9,10 +9,10 @@ const PRIMARY = [
   { href: "/sets", label: "Sets" },
   { href: "/djs", label: "DJs" },
   { href: "/events", label: "Events" },
+  { href: "/atlas", label: "Atlas" },
 ] as const;
 
 const MORE = [
-  { href: "/atlas", label: "Atlas" },
   { href: "/tracks", label: "Tracks" },
   { href: "/labels", label: "Labels" },
 ] as const;

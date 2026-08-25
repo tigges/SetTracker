@@ -115,7 +115,7 @@ async function sessionScToRawSet(
   const raw: RawSet = {
     sourceSlug: `br-${session.slug}-${track.id}`.slice(0, 120),
     title: session.title,
-    type: "festival",
+    type: "livestream",
     genre: "House",
     primaryArtist: primary,
     collaborators,

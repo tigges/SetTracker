@@ -15,6 +15,7 @@ import {
   promotedYoutubeChannels,
   queueYoutubeSimilarChannels,
 } from "../discovery/run";
+import { inferSetType } from "../../setType";
 import { inferFestivalEvent, KNOWN_EVENTS } from "../events";
 import {
   FESTIVAL_DROP_YT_LIMIT,
@@ -61,6 +62,7 @@ import {
   fetchWatchMeta,
   sleep,
   withDescriptionSocials,
+  type YtChapter,
   type YtMusicCredit,
   type YtRelatedVideo,
   type YtWatchMeta,
@@ -130,6 +132,33 @@ function musicCreditsToPlays(
   }));
 }
 
+function chapterToPlay(chapter: YtChapter, index: number): RawPlay {
+  const line = chapter.title.replace(/\s+/g, " ").trim();
+  const split = line.match(/^(.+?)\s+[-–—]\s+(.+)$/);
+  if (split) {
+    return {
+      position: index + 1,
+      timestamp: chapter.startSec,
+      provenance: "youtube",
+      idStatus: "identified",
+      artistName: split[1]!.trim(),
+      trackTitle: split[2]!.trim(),
+    };
+  }
+  return {
+    position: index + 1,
+    timestamp: chapter.startSec,
+    provenance: "youtube",
+    idStatus: "unparsed",
+    rawText: line,
+  };
+}
+
+function chaptersToPlays(chapters: YtChapter[]): RawPlay[] {
+  if (chapters.length < 2) return [];
+  return chapters.map(chapterToPlay);
+}
+
 function sameTrack(a: RawPlay, b: RawPlay): boolean {
   const at = (a.trackTitle || "").toLowerCase();
   const bt = (b.trackTitle || "").toLowerCase();
@@ -159,6 +188,12 @@ function playsFromMeta(meta: YtWatchMeta): RawPlay[] {
     meta.durationSec,
     "youtube",
   );
+  const fromChapters = chaptersToPlays(meta.chapters ?? []);
+  if (fromChapters.length >= 2) {
+    return mergeDescriptionAndCredits(fromDescription, fromChapters);
+  }
+  // Credits have no clocks — skip when a real description list already exists.
+  if (fromDescription.length >= 5) return fromDescription;
   const fromMusic = musicCreditsToPlays(meta.musicCredits, meta.durationSec);
   return mergeDescriptionAndCredits(fromDescription, fromMusic);
 }
@@ -292,6 +327,7 @@ export function watchMetaFromCuratedSeed(
       .join("\n"),
     publishedAt: null,
     musicCredits: [],
+    chapters: [],
     relatedVideos: [],
     watchUrl: `https://www.youtube.com/watch?v=${videoId}`,
     imageUrl:
@@ -353,7 +389,12 @@ async function curatedToHit(src: YoutubeSetSource): Promise<YtHit | null> {
   const raw: RawSet = {
     sourceSlug,
     title,
-    type: src.type ?? (festival?.kind === "festival" ? "festival" : "soundcloud"),
+    type: inferSetType({
+      title,
+      eventKind: festival?.kind,
+      hintedType: src.type,
+      playbackHost: "youtube",
+    }),
     genre: src.genre,
     primaryArtist: withDescriptionSocials(primary, meta.description),
     collaborators,
@@ -424,7 +465,12 @@ async function venueVideoToHit(
   const raw: RawSet = {
     sourceSlug,
     title: meta.title.trim(),
-    type: "festival",
+    type: inferSetType({
+      title: meta.title,
+      eventKind: festival?.kind ?? channelEvent?.kind ?? "livestream",
+      hintedType: "livestream",
+      playbackHost: "youtube",
+    }),
     genre: venue.genre,
     primaryArtist: withDescriptionSocials(primary, meta.description),
     collaborators,
@@ -473,7 +519,11 @@ async function artistChannelVideoToHit(
   const raw: RawSet = {
     sourceSlug,
     title: meta.title.trim(),
-    type: /\bradio\b|heldeep/i.test(meta.title) ? "radio" : "festival",
+    type: inferSetType({
+      title: meta.title,
+      hintedType: "livestream",
+      playbackHost: "youtube",
+    }),
     genre: ch.genre,
     primaryArtist: withDescriptionSocials(primary, meta.description),
     collaborators,
@@ -534,7 +584,11 @@ async function relatedVideoToHit(
   const raw: RawSet = {
     sourceSlug,
     title: meta.title.trim(),
-    type: festival ? "festival" : "soundcloud",
+    type: inferSetType({
+      title: meta.title,
+      eventKind: festival?.kind,
+      playbackHost: "youtube",
+    }),
     genre: seed.genre,
     primaryArtist: withDescriptionSocials(primary, meta.description),
     collaborators,

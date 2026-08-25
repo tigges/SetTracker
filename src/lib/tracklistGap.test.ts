@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import {
   isActionableTracklistGap,
+  isLivestreamHubFeedTitle,
   isLivestreamHubTitle,
   isSourceCompleteRadioStub,
   setPageIsPublished,
@@ -346,6 +347,11 @@ describe("tracklistGap", () => {
       false,
     );
     assert.equal(isLivestreamHubTitle("Mainstage - Tomorrowland 2026 LIVE"), true);
+    assert.equal(isLivestreamHubFeedTitle("Mainstage - Tomorrowland 2026 LIVE"), true);
+    assert.equal(
+      isLivestreamHubFeedTitle("Amelie Lens | Freedom Stage | Tomorrowland 2026 LIVE"),
+      false,
+    );
     assert.equal(
       isActionableTracklistGap(
         {

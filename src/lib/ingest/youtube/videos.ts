@@ -164,7 +164,7 @@ export type YoutubeSetSource = {
   video: string;
   primaryArtist: RawArtist;
   genre: string;
-  type?: "radio" | "festival" | "soundcloud" | "mix";
+  type?: "radio" | "festival" | "club" | "livestream" | "soundcloud" | "mix";
   /** Optional override title */
   title?: string;
   seriesName?: string;

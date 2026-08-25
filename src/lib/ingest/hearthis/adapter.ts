@@ -10,7 +10,9 @@
  * 6) merge → RawPlay[] (provenance: hearthis)
  */
 
+import { inferSetType } from "../../setType";
 import { artistsForSet } from "../artists";
+import { inferFestivalEvent } from "../events";
 import { hashRawSetContent } from "../hash";
 import {
   mergeTracklistSignals,
@@ -116,14 +118,12 @@ function setTypeFor(
   title: string,
   playbackHost?: "soundcloud" | "mixcloud" | "youtube",
 ): RawSet["type"] {
-  if (/\b(festival|open air|boiler|creamfields|ultra|edc)\b/i.test(title)) {
-    return "festival";
-  }
-  if (/\b(radio|broadcast|show\s*#?\d+)\b/i.test(title)) return "radio";
-  // Only label SoundCloud when audio actually plays there — hearthis-native
-  // uploads used to default to "soundcloud" and polluted the SC filter.
-  if (playbackHost === "soundcloud") return "soundcloud";
-  return "mix";
+  const event = inferFestivalEvent(title);
+  return inferSetType({
+    title,
+    eventKind: event?.kind,
+    playbackHost: playbackHost === "mixcloud" ? undefined : playbackHost,
+  });
 }
 
 async function resolvePreferredPlayback(
@@ -325,7 +325,11 @@ function applyTrackSeedMeta(
   if (seed.eventKind) raw.eventKind = seed.eventKind;
   if (seed.eventLocation) raw.eventLocation = seed.eventLocation;
   if (seed.seriesName) raw.seriesName = seed.seriesName;
-  if (seed.type) raw.type = seed.type;
+  raw.type = inferSetType({
+    title: raw.title,
+    eventKind: seed.eventKind ?? raw.eventKind,
+    hintedType: seed.type ?? raw.type,
+  });
   if (seed.performedOn) {
     const d = new Date(`${seed.performedOn}T00:00:00.000Z`);
     if (!Number.isNaN(d.getTime())) raw.publishedAt = d;

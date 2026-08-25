@@ -368,6 +368,17 @@ describe("shouldFillExpectedSlots", () => {
       }),
       true,
     );
+    assert.equal(
+      shouldFillExpectedSlots({
+        durationSec: 3600,
+        namedCount: 2,
+        placeholderCount: 8,
+        spineCount: 12,
+        interpolatedSpine: true,
+        genre: "House",
+      }),
+      false,
+    );
   });
 });
 

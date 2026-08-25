@@ -1,6 +1,5 @@
 "use client";
 
-import { useState, type MouseEvent } from "react";
 import { SetEntryLink } from "@/components/SetEntryLink";
 import { EntityThumb } from "@/components/EntityThumb";
 import { setHostHeadline } from "@/lib/brandHosts";
@@ -50,7 +49,6 @@ export function LandingSetPoster({
   set: FeedItem;
   tone?: "feature" | "compact" | "poster";
 }) {
-  const [playing, setPlaying] = useState(false);
   const accent = set.primaryDj?.accent ?? "var(--brand)";
   const headline = setHostHeadline({
     title: set.title,
@@ -70,14 +68,7 @@ export function LandingSetPoster({
   const compact = tone === "compact";
   const target = resolvePlaybackTarget(set.playbackUrl, {
     sourceUrl: set.sourceUrl,
-    autoplay: true,
   });
-
-  function togglePlay(e: MouseEvent) {
-    e.preventDefault();
-    e.stopPropagation();
-    setPlaying((v) => !v);
-  }
 
   return (
     <article
@@ -127,27 +118,13 @@ export function LandingSetPoster({
       </SetEntryLink>
       {target ? (
         <div className="absolute right-3 top-3 z-10">
-          <button
-            type="button"
-            onClick={togglePlay}
+          <SetEntryLink
+            href={`/sets/${set.slug}?t=0`}
+            label="Home"
             className="rounded-full border border-line bg-bg/80 px-2.5 py-1 text-[11px] font-semibold text-ink backdrop-blur-sm hover:border-brand hover:text-brand"
           >
-            {playing ? "Hide" : "Play"}
-          </button>
-        </div>
-      ) : null}
-      {playing && target ? (
-        <div className="border-t border-line bg-bg p-2">
-          <iframe
-            title={`${target.label} player`}
-            src={target.embedSrc}
-            width="100%"
-            height={Math.min(target.embedHeight, 166)}
-            loading="lazy"
-            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-            allowFullScreen
-            className="w-full rounded-lg border-0"
-          />
+            Play
+          </SetEntryLink>
         </div>
       ) : null}
     </article>
