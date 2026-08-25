@@ -7,6 +7,7 @@ import {
   assertAcrSpendAllowed,
   estimateAcrFileScanSpend,
   estimateAcrIdentifySpend,
+  estimateAuddSpend,
   formatAcrPlan,
   formatAcrPlanMarkdown,
   resetAcrPlanForTests,
@@ -52,7 +53,10 @@ assert.match(text, /Researches:/);
 assert.match(text, /Sends:/);
 assert.match(text, /Writes:/);
 assert.match(text, /Estimated cost: ≈ \$0\.48–\$1\.44/);
-assert.match(formatAcrPlanMarkdown(fs), /### ACRCloud File Scanning plan/);
+assert.match(
+  formatAcrPlanMarkdown(fs),
+  /### ACRCloud File Scanning \(YouTube URLs\) plan/,
+);
 
 // The gate: disclosure and confirmation are both required, per mode.
 resetAcrPlanForTests();
@@ -76,6 +80,28 @@ assert.throws(
   () => assertAcrSpendAllowed("filescan", { ACRCLOUD_CONFIRM_SPEND: "1" }),
   /announceAcrPlan/,
   "filescan needs its own disclosure",
+);
+
+// AudD runs before ACR on each clip and bills on its own token.
+resetAcrPlanForTests();
+const audd = estimateAuddSpend({ clips: 100, env: {} });
+assert.equal(audd.mode, "audd");
+assert.equal(Number(audd.usdLow.toFixed(2)), 0.3);
+assert.equal(Number(audd.usdHigh.toFixed(2)), 0.8);
+assert.match(acrDisclosure("audd").sends, /api_token/);
+assert.match(formatAcrPlan(audd), /AudD recognize/);
+assert.match(formatAcrPlan(audd), /ACR_USD_PER_AUDD_LOW\/HIGH/);
+assert.throws(
+  () => assertAcrSpendAllowed("audd", { ACRCLOUD_CONFIRM_SPEND: "1" }),
+  /announceAcrPlan/,
+  "AudD needs its own disclosure",
+);
+announceAcrPlan(audd, () => {});
+assertAcrSpendAllowed("audd", { ACRCLOUD_CONFIRM_SPEND: "1" });
+assert.throws(
+  () => assertAcrSpendAllowed("audd", {}),
+  /confirm spend/,
+  "AudD still needs the confirm",
 );
 
 resetAcrPlanForTests();

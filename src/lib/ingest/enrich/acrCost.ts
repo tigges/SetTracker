@@ -1,10 +1,12 @@
 /**
- * Mandatory pre-flight disclosure for ACRCloud spend.
+ * Mandatory pre-flight disclosure for billable audio recognition
+ * (ACRCloud Identify, ACRCloud File Scanning, AudD recognize).
  *
- * ACR runs in the program (not by hand), but no billable request is sent
+ * These run in the program (not by hand), but no billable request is sent
  * until this plan has been printed for the current process AND spend is
- * confirmed for that run. `acrIdentify()` / File Scanning submit throw
- * otherwise, so a new call site cannot quietly bill.
+ * confirmed for that run. `acrIdentify()`, `submitPlatformScan()` and the
+ * AudD recognize calls throw otherwise, so a new call site cannot quietly
+ * bill. One confirm (`ACRCLOUD_CONFIRM_SPEND`) covers all three.
  *
  * Pure module (no fs) so /stats can show the same wording.
  *
@@ -13,7 +15,8 @@
  * ACR_USD_PER_FS_HOUR_LOW/HIGH once you have the real plan rate.
  */
 
-export type AcrSpendMode = "identify" | "filescan";
+/** Billable audio-recognition calls. AudD runs inside the Identify pass. */
+export type AcrSpendMode = "identify" | "filescan" | "audd";
 
 export type AcrUnitPrice = { low: number; high: number };
 
@@ -22,6 +25,9 @@ export const ACR_USD_PER_IDENTIFY: AcrUnitPrice = { low: 0.002, high: 0.006 };
 
 /** Per audio-hour submitted to a File Scanning container. */
 export const ACR_USD_PER_FS_HOUR: AcrUnitPrice = { low: 0.05, high: 0.15 };
+
+/** Per AudD recognize request (paid tier, api_token). */
+export const ACR_USD_PER_AUDD: AcrUnitPrice = { low: 0.003, high: 0.008 };
 
 function priceFromEnv(
   base: AcrUnitPrice,
@@ -55,6 +61,17 @@ export function acrFileScanHourPrice(
     ACR_USD_PER_FS_HOUR,
     "ACR_USD_PER_FS_HOUR_LOW",
     "ACR_USD_PER_FS_HOUR_HIGH",
+    env,
+  );
+}
+
+export function auddPrice(
+  env: Record<string, string | undefined> = process.env,
+): AcrUnitPrice {
+  return priceFromEnv(
+    ACR_USD_PER_AUDD,
+    "ACR_USD_PER_AUDD_LOW",
+    "ACR_USD_PER_AUDD_HIGH",
     env,
   );
 }
@@ -124,6 +141,34 @@ export function estimateAcrFileScanSpend(input: {
   };
 }
 
+/** AudD is tried before ACR on each clip, so it can bill on its own. */
+export function estimateAuddSpend(input: {
+  clips: number;
+  env?: Record<string, string | undefined>;
+}): AcrSpendEstimate {
+  const price = auddPrice(input.env ?? process.env);
+  const units = Math.max(0, input.clips);
+  const usdLow = units * price.low;
+  const usdHigh = units * price.high;
+  return {
+    mode: "audd",
+    units,
+    unitLabel: "clips",
+    usdLow,
+    usdHigh,
+    summary: `${formatUsdRange(usdLow, usdHigh)} · up to ${units} clips`,
+  };
+}
+
+const AUDD_DISCLOSURE = {
+  researches:
+    "Same question as ACR Identify — which track plays at a sampled offset — tried first on each clip when AUDD_ANALYZE=1",
+  sends:
+    "The same short audio clip, plus your AudD api_token (paid tier)",
+  writes:
+    "Feeds the ACR Identify result path, so writes are the same gap-fill \"fingerprint\" rows",
+};
+
 const IDENTIFY_DISCLOSURE = {
   researches:
     "Which tracks play at sampled offsets inside a set we already host, so unnamed cues get a title",
@@ -143,15 +188,19 @@ const FILESCAN_DISCLOSURE = {
 };
 
 export function acrDisclosure(mode: AcrSpendMode) {
+  if (mode === "audd") return AUDD_DISCLOSURE;
   return mode === "identify" ? IDENTIFY_DISCLOSURE : FILESCAN_DISCLOSURE;
 }
 
+const MODE_TITLE: Record<AcrSpendMode, string> = {
+  identify: "ACRCloud Identify (audio clips)",
+  filescan: "ACRCloud File Scanning (YouTube URLs)",
+  audd: "AudD recognize (audio clips, paid token)",
+};
+
 export function formatAcrPlan(est: AcrSpendEstimate): string {
   const d = acrDisclosure(est.mode);
-  const title =
-    est.mode === "identify"
-      ? "ACRCloud Identify (audio clips)"
-      : "ACRCloud File Scanning (YouTube URLs)";
+  const title = MODE_TITLE[est.mode];
   return [
     `=== ${title} — nothing has been sent yet ===`,
     `Researches: ${d.researches}`,
@@ -162,7 +211,9 @@ export function formatAcrPlan(est: AcrSpendEstimate): string {
     "Estimate only — a rounded operator range, not a billing quote. Set",
     est.mode === "identify"
       ? "ACR_USD_PER_IDENTIFY_LOW/HIGH to match your plan rate."
-      : "ACR_USD_PER_FS_HOUR_LOW/HIGH to match your plan rate.",
+      : est.mode === "audd"
+        ? "ACR_USD_PER_AUDD_LOW/HIGH to match your plan rate."
+        : "ACR_USD_PER_FS_HOUR_LOW/HIGH to match your plan rate.",
     "===============================================",
   ].join("\n");
 }
@@ -170,7 +221,7 @@ export function formatAcrPlan(est: AcrSpendEstimate): string {
 export function formatAcrPlanMarkdown(est: AcrSpendEstimate): string {
   const d = acrDisclosure(est.mode);
   return [
-    `### ACRCloud ${est.mode === "identify" ? "Identify" : "File Scanning"} plan (pre-flight)`,
+    `### ${MODE_TITLE[est.mode]} plan (pre-flight)`,
     "",
     `**Estimated cost:** ${formatUsdRange(est.usdLow, est.usdHigh)} · up to ${est.units} ${est.unitLabel}`,
     "",

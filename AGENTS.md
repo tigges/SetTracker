@@ -276,12 +276,14 @@ unless asked. Never write Relive for HARD / Insomniac / Nameless / Ultra.
   checkpoint (`setradar-db-<run>-1identify` / `-2filescan` / exact run id).
   GitHub hosted jobs die at 6h and otherwise skip Save/Pages — do not pack
   thumbs + a 40×20 Identify loop + File Scan + 400 ISRCs into one uncapped job.
-  **Disclose, then confirm — ACR is billable.** Every pass prints what is
- sent (12s audio clips for Identify; the YouTube URL for File Scan), what is
- written (`provenance: "fingerprint"` gap-fill only), and a USD range, then
- sends nothing unless `ACRCLOUD_CONFIRM_SPEND=1` for that run. `acrIdentify()`
- and `submitPlatformScan()` throw without both, so no call site can bill
- quietly. Catalog enrich has an **Accept ACR spend** checkbox and sits behind
+  **Disclose, then confirm — audio ID is billable.** Every pass prints what is
+ sent (12s audio clips for Identify / AudD; the YouTube URL for File Scan),
+ what is written (`provenance: "fingerprint"` gap-fill only), and a USD range,
+ then sends nothing unless `ACRCLOUD_CONFIRM_SPEND=1` for that run.
+ `acrIdentify()`, `submitPlatformScan()` and the AudD recognize calls throw
+ without both, so no call site can bill quietly. **AudD is tried before ACR
+ on each clip** when `AUDD_ANALYZE=1` + `AUDD_API_TOKEN`, so it discloses its
+ own estimate (`ACR_USD_PER_AUDD_LOW/HIGH`). One confirm covers all three. Catalog enrich has an **Accept ACR spend** checkbox and sits behind
  the `acr-spend` environment (add a required reviewer) — cron and
  `data/enrich-request` pushes print the estimate and stop. Rates are rounded
  operator guesses; set `ACR_USD_PER_IDENTIFY_LOW/HIGH` and

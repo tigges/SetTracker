@@ -161,7 +161,8 @@ the same way. Writes `Played` rows with `provenance: fingerprint` into
 | Env | Effect |
 | --- | --- |
 | `ACRCLOUD_ENABLED=1` | Hard gate (no network without this) |
-| `ACRCLOUD_CONFIRM_SPEND=1` | **Required per run.** Without it the pass prints the cost estimate and sends nothing |
+| `ACRCLOUD_CONFIRM_SPEND=1` | **Required per run**, covers ACR Identify + File Scan + AudD recognize. Without it the pass prints the cost estimate and sends nothing |
+| `ACR_USD_PER_AUDD_LOW` / `_HIGH` | Override the AudD per-clip estimate (default ≈ $0.003–$0.008) |
 | `ACR_USD_PER_IDENTIFY_LOW` / `_HIGH` | Override the per-clip estimate (default ≈ $0.002–$0.006) |
 | `ACR_USD_PER_FS_HOUR_LOW` / `_HIGH` | Override the File Scan per-audio-hour estimate (default ≈ $0.05–$0.15) |
 | `ACRCLOUD_HOST` | Identify host, e.g. `[REDACTED]` |
