@@ -2413,7 +2413,14 @@
   {
     "kind": "dj",
     "slug": "shdw",
-    "imageUrl": "https://cdn-images.dzcdn.net/images/artist/8674ed6691b480cf50347d74a44cd2af/250x250-000000-80-0-0.jpg"
+    "imageUrl": "https://cdn-images.dzcdn.net/images/artist/8674ed6691b480cf50347d74a44cd2af/250x250-000000-80-0-0.jpg",
+    "website": "https://mutual-rytm.com/",
+    "instagram": "https://www.instagram.com/i.am.shdw/",
+    "youtube": "https://www.youtube.com/@shdw-mutual-rytm",
+    "soundcloud": "https://soundcloud.com/shdw-mutual-rytm",
+    "homeCity": "Stuttgart, Germany",
+    "genre": "Techno",
+    "bio": "Solo project of Marco Blaesi, for a decade one half of Stuttgart duo SHDW & Obscure Shape. Runs the Mutual Rytm label, launched 2022 - acid, rave, and EBM-leaning techno with Detroit melodies."
   },
   {
     "kind": "dj",
