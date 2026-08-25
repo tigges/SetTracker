@@ -5,6 +5,7 @@
  * We only keep long uploads and skip trailers / aftermovies.
  */
 
+import { isLivestreamHubFeedTitle } from "../../tracklistGap";
 import type { RawArtist } from "../types";
 
 export type YoutubeVenueChannel = {
@@ -208,7 +209,7 @@ export const YOUTUBE_VENUES: YoutubeVenueChannel[] = [
 ];
 
 const SKIP_TITLE =
-  /\b(aftermovie|trailer|teaser|tickets?|announcement|#shorts|short film|documentary|vlog)\b/i;
+  /\b(aftermovie|trailer|teaser|tickets?|announcement|#shorts|shorts?\b|short film|documentary|vlog)\b/i;
 
 export function isVenueSetCandidate(
   title: string,
@@ -216,6 +217,7 @@ export function isVenueSetCandidate(
   venue: YoutubeVenueChannel,
 ): boolean {
   if (SKIP_TITLE.test(title)) return false;
+  if (isLivestreamHubFeedTitle(title)) return false;
   const min = venue.minDurationSec ?? 30 * 60;
   if (durationSec >= min) return true;
   if (venue.titleMatch?.test(title) && durationSec >= 15 * 60) return true;

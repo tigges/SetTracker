@@ -58,6 +58,10 @@ import { promisify } from "node:util";
 import type { PrismaClient } from "@prisma/client";
 import { sanitizeArtistName } from "../../artistName";
 import { playCollapseKey } from "../../playCollapse";
+import {
+  classifySourceComment,
+  isHostCommentProvenance,
+} from "../../sourceComments";
 import { loadDjMagTop100RankBySlug } from "../../djmagTop100";
 import { normalizeGenre } from "../../genre";
 import { detectPlaybackHost, type PlaybackHost } from "../../playback";
@@ -1548,10 +1552,16 @@ async function enrichOneSet(
     return null;
   };
 
-  // 1) Resolve existing unresolved_id cues at their timestamps (Top 100 path).
+  // 1) Resolve existing unresolved_id cues and host ID-asks at those times.
   const unresolvedPlays = set.plays
-    .filter((p) => p.idStatus === "unresolved_id")
-    .filter((p) => !/acr-miss/i.test(p.idTrack?.note ?? ""))
+    .filter((p) => {
+      if (/acr-miss/i.test(p.idTrack?.note ?? "")) return false;
+      if (p.idStatus === "unresolved_id") return true;
+      return (
+        isHostCommentProvenance(p.provenance) &&
+        classifySourceComment(p.rawText ?? "") === "id-ask"
+      );
+    })
     .sort((a, b) => a.timestamp - b.timestamp)
     .slice(0, 8);
   for (const play of unresolvedPlays) {

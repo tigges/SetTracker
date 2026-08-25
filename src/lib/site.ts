@@ -24,6 +24,7 @@ export function pageMeta(opts: {
   description: string;
   path: string;
   image?: string | null;
+  robots?: Metadata["robots"];
 }): Metadata {
   const url = absoluteUrl(opts.path);
   const images = opts.image ? [{ url: opts.image }] : undefined;
@@ -31,6 +32,7 @@ export function pageMeta(opts: {
     title: opts.title,
     description: opts.description,
     alternates: { canonical: opts.path },
+    ...(opts.robots ? { robots: opts.robots } : {}),
     openGraph: {
       title: `${opts.title} — ${SITE_NAME}`,
       description: opts.description,

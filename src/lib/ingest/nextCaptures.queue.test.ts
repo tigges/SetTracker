@@ -825,4 +825,34 @@ assert.ok(
   "club nights outrank livestreams in the 1001 capture queue",
 );
 
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "yt-owr-live",
+      title: "One World Radio Tomorrowland 2026 LIVE",
+      type: "livestream",
+      isLivestream: true,
+      playCount: 0,
+      density: "severe",
+    }),
+    mapped,
+    now,
+  ),
+  "livestream-hub",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "yt-freedom-live",
+      title: "Freedom Stage - Tomorrowland 2026 LIVE",
+      type: "festival",
+      playCount: 0,
+      density: "severe",
+    }),
+    mapped,
+    now,
+  ),
+  "livestream-hub",
+);
+
 console.log("nextCaptures.queue.test.ts ok");

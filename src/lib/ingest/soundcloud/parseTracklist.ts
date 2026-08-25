@@ -369,9 +369,11 @@ export function parseDescriptionTracklist(
   // Dense untimed tracklist + sparse cue annotations → keep all rows and
   // interpolate. Otherwise prefer timed-only (avoids promo "Artist - Title"
   // crumbs next to a real timed list) or even-space a fully untimed list.
+  const numberedUntimed =
+    untimedCount >= 12 && durationSec >= 60 * 60;
   const keepSparseUntimed =
-    timedCount > 0 &&
-    untimedCount >= Math.max(5, timedCount * 2);
+    numberedUntimed ||
+    (timedCount > 0 && untimedCount >= Math.max(5, timedCount * 2));
 
   const chosen = keepSparseUntimed
     ? fillSparseTimestamps(rows, durationSec)

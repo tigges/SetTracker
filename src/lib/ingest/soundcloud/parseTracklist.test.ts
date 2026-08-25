@@ -256,4 +256,16 @@ assert.ok(radioComments.some((p) => /What is this track/i.test(p.note ?? "")));
 assert.ok(radioComments.some((p) => p.trackTitle === "Acid Is My Therapy" || p.idLabel === "Acid Is My Therapy"));
 assert.ok(radioComments.length >= 2 && radioComments.length <= 4);
 
+const numberedHour = Array.from({ length: 14 }, (_, i) =>
+  `${i + 1}. Artist ${i} - Title ${i}`,
+).join("\n");
+const numberedHourPlays = parseDescriptionTracklist(
+  `[0:00] Host - Intro\n${numberedHour}`,
+  3600,
+);
+assert.ok(
+  numberedHourPlays.length >= 12,
+  "keep a numbered hour-long list next to a single clock",
+);
+
 console.log("parseTracklist.test.ts ok");

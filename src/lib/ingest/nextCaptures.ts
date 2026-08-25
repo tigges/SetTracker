@@ -11,6 +11,7 @@ import { readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import { isArchiveTitledSet } from "../feedPriority";
 import { looksLikeLiveFestivalRadio } from "../sourceComments";
+import { isLivestreamHubFeedTitle } from "../tracklistGap";
 import type { DensitySeverity } from "../setDensity";
 import { SET_SLUG_ALIASES } from "./sourceRemaps";
 import { TRACKLIST_1001_BY_SOURCE_SLUG } from "./tracklists1001/festival2026";
@@ -130,6 +131,51 @@ function mappedSlugs(): Set<string> {
 }
 
 /** Official-playback extras from the committed snapshot — drop wired slugs + remap Google. */
+/** Held Relive/HARD rows that already have an official watch URL — never invent one. */
+export function extrasFromHeldReliveWatch(
+  cwd = process.cwd(),
+): CapturePreset[] {
+  const p = join(cwd, "data/crosscheck/held-relive-watch.json");
+  if (!existsSync(p)) return [];
+  try {
+    const d = JSON.parse(readFileSync(p, "utf8")) as {
+      held?: Array<{
+        name: string;
+        seed: string;
+        searchUrl: string;
+        status?: string;
+        youtubeUrl?: string;
+        videoId?: string;
+        title?: string;
+      }>;
+    };
+    return (d.held ?? [])
+      .filter((h) => h.status === "candidate" && (h.youtubeUrl || h.videoId))
+      .flatMap((h) => {
+        const videoId =
+          h.videoId ||
+          h.youtubeUrl?.match(/[?&]v=([\w-]{11})/)?.[1] ||
+          "";
+        if (!videoId) return [];
+        const watchUrl =
+          h.youtubeUrl || `https://www.youtube.com/watch?v=${videoId}`;
+        return [
+          {
+            label: (h.title || h.name).slice(0, 90),
+            slug: `yt-${videoId}`,
+            name: h.seed,
+            searchUrl: h.searchUrl,
+            watchUrl,
+            host: "youtube" as const,
+            reason: "relive:official-unwired",
+          },
+        ];
+      });
+  } catch {
+    return [];
+  }
+}
+
 export function extrasFromCaptureSnapshot(snapshot: {
   presets?: CapturePreset[];
 }): CapturePreset[] {
@@ -267,6 +313,7 @@ export function skipCaptureNeed(
   if (!captureHost(row.slug)) return "host";
   if (row.durationSec < 20 * 60) return "short";
   if (/\bshorts?\b/i.test(row.title)) return "shorts";
+  if (isLivestreamHubFeedTitle(row.title)) return "livestream-hub";
   if (isArchiveTitledSet(row.title, nowMs)) return "archive-title";
   if (row.plays1001 >= 12) return "has-1001";
   if (

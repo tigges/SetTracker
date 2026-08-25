@@ -51,13 +51,21 @@ export function shareablePlayCount(
 }
 
 export function shouldCopyTwinTracklist(
-  donor: { durationSec: number; shareable: number },
-  recipient: { durationSec: number; shareable: number },
+  donor: { durationSec: number; shareable: number; firstParty?: number },
+  recipient: { durationSec: number; shareable: number; firstParty?: number },
 ): boolean {
+  if (!durationsCompatible(donor.durationSec, recipient.durationSec)) {
+    return false;
+  }
+  if (donor.shareable >= 12 && recipient.shareable < donor.shareable) {
+    return true;
+  }
+  const donorFirst = donor.firstParty ?? 0;
+  const recipFirst = recipient.firstParty ?? 0;
   return (
-    donor.shareable >= 12 &&
-    recipient.shareable < donor.shareable &&
-    durationsCompatible(donor.durationSec, recipient.durationSec)
+    donorFirst >= 12 &&
+    recipient.shareable === 0 &&
+    recipFirst < 8
   );
 }
 

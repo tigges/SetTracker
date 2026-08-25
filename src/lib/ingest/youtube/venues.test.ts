@@ -108,4 +108,26 @@ assert.equal(
   "Odd Mob",
 );
 
+const tml = YOUTUBE_VENUES.find((v) => v.seriesName === "Tomorrowland")!;
+assert.equal(
+  isVenueSetCandidate("Freedom Stage - Tomorrowland 2026 LIVE", 7200, tml),
+  false,
+);
+assert.equal(
+  isVenueSetCandidate("One World Radio Tomorrowland 2026 LIVE", 7200, tml),
+  false,
+);
+assert.equal(
+  isVenueSetCandidate("Amelie Lens | Freedom Stage | Tomorrowland 2026", 3600, tml),
+  true,
+);
+assert.equal(
+  isVenueSetCandidate(
+    "Amelie Lens | Freedom Stage | Tomorrowland 2026 LIVE",
+    3600,
+    tml,
+  ),
+  true,
+);
+
 console.log("venues.test.ts ok");

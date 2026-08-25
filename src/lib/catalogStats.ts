@@ -222,6 +222,18 @@ export type CatalogStats = {
   priorityUnresolvedIds: StatsUnresolvedId[];
   /** Sets with unresolved cues, lowest identified ratio first. */
   needsIdsSets: StatsNeedsIdSet[];
+  /** Candidate → playback → list. Operator funnel, not a consumer metric. */
+  detection: {
+    ingested: number;
+    withPlayback: number;
+    withList: number;
+    empty: number;
+    festival: number;
+    club: number;
+    livestream: number;
+    weeklyRadio: number;
+    communityResolved: number;
+  };
 };
 
 function toStatsRow(d: DjListItem): StatsDjRow {
@@ -960,5 +972,21 @@ export async function getCatalogStats(): Promise<CatalogStats> {
     topUnresolvedIds,
     priorityUnresolvedIds,
     needsIdsSets,
+    detection: {
+      ingested: setCount,
+      withPlayback: setsWithPlayback,
+      withList: setsWithPlays,
+      empty: setCount - setsWithPlays,
+      festival:
+        setTypeGroups.find((g) => g.type === "festival")?._count._all ?? 0,
+      club: setTypeGroups.find((g) => g.type === "club")?._count._all ?? 0,
+      livestream:
+        setTypeGroups.find((g) => g.type === "livestream")?._count._all ?? 0,
+      weeklyRadio:
+        setTypeGroups.find((g) => g.type === "radio")?._count._all ?? 0,
+      communityResolved:
+        playStatusGroups.find((g) => g.idStatus === "community_resolved")
+          ?._count._all ?? 0,
+    },
   };
 }

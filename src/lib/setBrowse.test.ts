@@ -103,6 +103,15 @@ describe("setBrowse", () => {
       }),
       true,
     );
+    assert.equal(
+      isListPendingOfficialSet({
+        ...officialEmpty,
+        title: "Charlotte de Witte | Cercle",
+        type: "livestream",
+        eventKind: "livestream",
+      }),
+      true,
+    );
     assert.equal(isProfileVisibleSet(officialEmpty), true);
     assert.equal(isBrowseReadySet(officialEmpty), false);
     assert.equal(

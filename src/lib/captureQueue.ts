@@ -12,6 +12,7 @@ import {
   CAPTURE_QUEUE_LIMIT,
   buildCaptureQueueFromNeeds,
   extrasFromCaptureSnapshot,
+  extrasFromHeldReliveWatch,
   type CaptureNeedRow,
   type CapturePreset,
   isStrongIdentifiedPlay,
@@ -129,9 +130,12 @@ export async function getCaptureQueue(
 export async function loadOperatorCaptureQueue(
   limit = CAPTURE_QUEUE_LIMIT,
 ): Promise<CaptureQueue> {
-  const extras = extrasFromCaptureSnapshot(
-    nextCaptures as { presets?: CapturePreset[] },
-  );
+  const extras = [
+    ...extrasFromHeldReliveWatch(),
+    ...extrasFromCaptureSnapshot(
+      nextCaptures as { presets?: CapturePreset[] },
+    ),
+  ];
   const presets: CapturePreset[] = extras.slice(0, limit);
   const generatedAt = String(nextCaptures.generatedAt ?? "");
   try {
