@@ -36,10 +36,10 @@ export const STATUS_META: Record<
     description: "Released track, positively identified",
   },
   unresolved_id: {
-    label: "Unresolved ID",
+    label: "Unknown tracks",
     short: "?",
     color: "var(--magenta)",
-    description: "Unreleased / unknown — awaiting an ID",
+    description: "Played, name still open",
   },
   community_resolved: {
     label: "Community resolved",
@@ -48,10 +48,10 @@ export const STATUS_META: Record<
     description: "Was an ID, resolved by the community",
   },
   unparsed: {
-    label: "Unparsed",
+    label: "Not detected",
     short: "—",
     color: "var(--grey)",
-    description: "Raw source text, not matched to a record",
+    description: "No name at that point in the set",
   },
 };
 

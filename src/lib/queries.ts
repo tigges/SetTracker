@@ -35,6 +35,7 @@ import { relatedSlugsFor } from "@/lib/ingest/discovery/relations";
 import { resolveSetSlug } from "@/lib/ingest/sourceRemaps";
 import { collapseConsecutivePlays, playCollapseKey } from "@/lib/playCollapse";
 import {
+  UNKNOWN_TRACK_TITLE,
   isPublishSpineProvenance,
   isTalkPlay,
   publishListTally,
@@ -369,7 +370,7 @@ export async function getSetBySlug(slug: string) {
       resolved?.title ??
       p.idTrack?.label ??
       p.rawText ??
-      "Unknown";
+      UNKNOWN_TRACK_TITLE;
     const artistName =
       p.track?.artistName ??
       resolved?.artistName ??

@@ -17,7 +17,7 @@ export default function AboutPage() {
       <h1 className="mt-1 text-3xl font-extrabold tracking-tight">About</h1>
       <p className="mt-4 text-[15px] leading-relaxed text-muted">
         Play a festival, club, or livestream set and see the timed tracklist.
-        Colors tell you what is identified and what is still an ID.
+        Colors tell you what is identified and which tracks are still unknown.
       </p>
 
       <h2 className="mt-10 text-lg font-bold tracking-tight">Track colors</h2>
@@ -30,7 +30,7 @@ export default function AboutPage() {
           matched.
         </li>
         <li>
-          <span className="text-magenta">Unresolved ID</span> — played, name
+          <span className="text-magenta">Unknown tracks</span> — played, name
           still open.
         </li>
         <li>

@@ -17,9 +17,12 @@ function norm(raw: string | null | undefined): string {
 }
 
 export function isPlaceholderTitle(title: string): boolean {
-  if (!title || title === "unknown") return true;
-  if (/^id\s*@/i.test(title)) return true;
-  if (/^acr-miss\b/i.test(title)) return true;
+  const t = title.trim().toLowerCase();
+  if (!t || t === "unknown" || t === "unknown track" || t === "unknown tracks") {
+    return true;
+  }
+  if (/^id\s*@/i.test(t)) return true;
+  if (/^acr-miss\b/i.test(t)) return true;
   return false;
 }
 
