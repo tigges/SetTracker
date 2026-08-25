@@ -61,12 +61,11 @@ Provenance per row: `1001TL parse`, `MixesDB`, `SoundCloud parse`, `fingerprint`
    chips are multi-select; pin tap selects (nearby stack listed); Hide ranks
    keeps the legend. Header search; empty pins link to `/stats?q=…#capture-1001`.
 6. **Stats** (`/stats`) — operator catalog health (incomplete sets, needs IDs,
-   DJ gaps, festival capture gaps). Five queues: Tracklist workbench, DJ
-   complete, Places without a set, leftover hosts, weak chart websites.
-   Lists show 10 rows, then **N more**. Capture 1001 is nested in the
-   workbench (`#capture-1001`); `/capture-1001` redirects in. Every Pages
-   export rebuilds this page from the current catalog DB. Footer link only;
-   not in the main nav.
+   DJ gaps, festival capture gaps). Five flat queues, no nesting: Capture 1001,
+   DJ complete, Places without a set, leftover hosts, weak chart websites.
+   Lists show 10 rows, then **N more**. `/capture-1001` redirects into
+   `#capture-1001`. Every Pages export rebuilds this page from the current
+   catalog DB. Footer link only; not in the main nav.
 7. **Search / About** — catalog search and product notes.
 8. **Tracks / Labels** — still in the catalog and sitemap; not in the main nav.
 
@@ -162,6 +161,9 @@ the same way. Writes `Played` rows with `provenance: fingerprint` into
 | Env | Effect |
 | --- | --- |
 | `ACRCLOUD_ENABLED=1` | Hard gate (no network without this) |
+| `ACRCLOUD_CONFIRM_SPEND=1` | **Required per run.** Without it the pass prints the cost estimate and sends nothing |
+| `ACR_USD_PER_IDENTIFY_LOW` / `_HIGH` | Override the per-clip estimate (default ≈ $0.002–$0.006) |
+| `ACR_USD_PER_FS_HOUR_LOW` / `_HIGH` | Override the File Scan per-audio-hour estimate (default ≈ $0.05–$0.15) |
 | `ACRCLOUD_HOST` | Identify host, e.g. `[REDACTED]` |
 | `ACRCLOUD_ACCESS_KEY` / `ACRCLOUD_ACCESS_SECRET` | Project credentials |
 | `ACRCLOUD_SET_LIMIT` | Max sets per run (default 5) |

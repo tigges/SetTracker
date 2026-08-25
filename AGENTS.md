@@ -194,10 +194,13 @@ unless asked. Never write Relive for HARD / Insomniac / Nameless / Ultra.
   interpolate; never overwrite 1001tl / fingerprint / community. Enrich
   `full` and Catalog LLM research default to parser apply / LLM extras
   dry-run. Report: `data/crosscheck/llm-cue-research.json`.
-  **/stats workbench:** one ranked Tracklist workbench (first-party text →
-  ACR → IDs → optional 1001 last). Capture 1001 is a nested operator fold
-  (`#capture-1001`). Thin-list / ID cue folds are gone — use the workbench.
-  DJ complete and places-without-a-set are the other entity queues.
+  **/stats queues:** flat, no nesting. **Capture 1001** (`#capture-1001`) is
+  the only set queue on the page — it has real actions (Open SC/YT, Search
+  1001, Copy capture). `statsWorkbench.ts` still ranks text / ACR / IDs lanes
+  and keeps its tests, but nothing renders it: those lanes had no operator
+  action and starved each other at the 40-row cut. Do not re-add a workbench
+  fold without per-row actions and a per-lane quota. DJ complete and
+  places-without-a-set are the other queues.
   **Host-twin fold:** same 1001 seed + both official YT and SC permalinks
   already known → one catalog row, both URLs kept, SC-first playback,
   secondary slug aliases to the survivor. Never invents a missing host.
@@ -272,8 +275,18 @@ unless asked. Never write Relive for HARD / Insomniac / Nameless / Ultra.
   checkpoint (`setradar-db-<run>-1identify` / `-2filescan` / exact run id).
   GitHub hosted jobs die at 6h and otherwise skip Save/Pages — do not pack
   thumbs + a 40×20 Identify loop + File Scan + 400 ISRCs into one uncapped job.
+  **Disclose, then confirm — ACR is billable.** Every pass prints what is
+ sent (12s audio clips for Identify; the YouTube URL for File Scan), what is
+ written (`provenance: "fingerprint"` gap-fill only), and a USD range, then
+ sends nothing unless `ACRCLOUD_CONFIRM_SPEND=1` for that run. `acrIdentify()`
+ and `submitPlatformScan()` throw without both, so no call site can bill
+ quietly. Catalog enrich has an **Accept ACR spend** checkbox and sits behind
+ the `acr-spend` environment (add a required reviewer) — cron and
+ `data/enrich-request` pushes print the estimate and stop. Rates are rounded
+ operator guesses; set `ACR_USD_PER_IDENTIFY_LOW/HIGH` and
+ `ACR_USD_PER_FS_HOUR_LOW/HIGH` to your real plan rate.
   Samples SC/hearthis `playbackUrl`
-  via ffmpeg → ACRCloud Identify (`ACRCLOUD_*` secrets + `ACRCLOUD_ENABLED=1`).
+ via ffmpeg → ACRCloud Identify (`ACRCLOUD_*` secrets + `ACRCLOUD_ENABLED=1`).
   YouTube festival playbacks (Top20 / festival priority by default) use `yt-dlp
   --download-sections` for short clips, then the same Identify path
   (`ACRCLOUD_ALLOW_YOUTUBE_PRIORITY=1`; full YT with `ACRCLOUD_ALLOW_YOUTUBE=1`).

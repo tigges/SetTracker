@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { Suspense } from "react";
 import Link from "next/link";
-import { Capture1001Fold } from "@/components/Capture1001Client";
-import { SetEntryLink } from "@/components/SetEntryLink";
+import { Capture1001Client } from "@/components/Capture1001Client";
 import {
   LeftoverHostQueue,
   WeakSiteQueue,
@@ -26,14 +25,8 @@ import {
   mergePlaceGapQueue,
   queueFollowUpHint,
   queueFollowUpLabel,
-  workbenchLaneFollowUp,
   type QueueFollowUp,
 } from "@/lib/statsQueues";
-import {
-  buildTracklistWorkbench,
-  WORKBENCH_LANE_LABEL,
-  type WorkbenchLane,
-} from "@/lib/statsWorkbench";
 
 const LLM_QUEUE_ESTIMATE = estimateLlmSpend({
   jobs: ["handles", "events", "quality"],
@@ -52,12 +45,6 @@ const FOLLOW_UP_FOLD: Record<QueueFollowUp, string> = {
   operator: "border-l-amber",
   both: "border-l-muted2",
 };
-
-function lanePillClass(lane: WorkbenchLane): string {
-  return workbenchLaneFollowUp(lane) === "operator"
-    ? FOLLOW_UP_PILL.operator
-    : FOLLOW_UP_PILL.auto;
-}
 
 export const metadata: Metadata = pageMeta({
   title: "Stats",
@@ -257,20 +244,6 @@ export default async function StatsPage() {
   const noPlayback = health.sets.playback.find((row) => row.key === "no_playback");
   const clockSources = clockSourceSlices(s.plays.byProvenance);
   const clockTotal = clockSources.reduce((n, row) => n + row.count, 0);
-  const workbench = buildTracklistWorkbench({
-    emptySets: s.emptySets,
-    sparseSets: s.sparseSets,
-    tracklistGaps: s.tracklistGaps,
-    needsIdsSets: s.needsIdsSets,
-    capturePresets: captureQueue.presets,
-  });
-  const workbenchLanes = {
-    first_party: 0,
-    fingerprint: 0,
-    track_id: 0,
-    capture_1001: 0,
-  };
-  for (const row of workbench) workbenchLanes[row.lane] += 1;
   const djComplete = mergeDjCompleteQueue(
     s.djs.missingHandleWithSets,
     s.djs.noThumbWithSets,
@@ -351,17 +324,8 @@ export default async function StatsPage() {
         hint="A set is the list of tracks · playback is the official recording"
         slices={health.sets.slices}
         onChart={health.sets.onChart}
-        actions={[
-          ...(workbench.length
-            ? [
-                {
-                  href: "#workbench",
-                  label: "Tracklist workbench",
-                  count: workbench.length,
-                },
-              ]
-            : []),
-          ...(captureQueue.presets.length
+        actions={
+          captureQueue.presets.length
             ? [
                 {
                   href: "#capture-1001",
@@ -369,8 +333,8 @@ export default async function StatsPage() {
                   count: captureQueue.presets.length,
                 },
               ]
-            : []),
-        ]}
+            : []
+        }
       >
         <StatsMeter
           label="Identified"
@@ -456,51 +420,19 @@ export default async function StatsPage() {
         {formatLlmSpend(LLM_QUEUE_ESTIMATE)}.
       </p>
 
-      <div id="workbench" className="scroll-mt-20">
+      <div id="capture-1001" className="scroll-mt-20">
+        <span id="workbench" />
         <span id="lists" />
         <span id="cues" />
         <QueueFold
-          title="Tracklist workbench"
-          count={workbench.length}
-          hint={`${workbenchLanes.first_party} text · ${workbenchLanes.fingerprint} ACR · ${workbenchLanes.track_id} IDs · ${workbenchLanes.capture_1001} 1001. Text / ACR / IDs are automatic; 1001 is last and operator-only — do not invent a URL.`}
-          followUp="both"
+          title="Capture 1001"
+          count={captureQueue.presets.length}
+          hint="Community tracklist overlay for sets that already have official playback. Open the playback, search 1001, run the bookmarklet. Never invent a 1001 URL."
+          followUp="operator"
           open
         >
-          {workbench.length === 0 ? (
-            <p className="text-[13px] text-muted2">None in this queue.</p>
-          ) : (
-            <ul className="divide-y divide-line border-y border-line">
-              {workbench.map((row) => (
-                <li key={`${row.lane}-${row.slug}`} className="py-1">
-                  <div className="flex items-baseline gap-2">
-                    <span
-                      className={`mono flex-none rounded-full border px-1.5 py-0.5 text-[10px] uppercase tracking-[0.08em] ${lanePillClass(row.lane)}`}
-                    >
-                      {WORKBENCH_LANE_LABEL[row.lane]}
-                    </span>
-                    {row.href ? (
-                      <SetEntryLink
-                        href={row.href}
-                        label="Stats"
-                        className="truncate text-[13px] font-semibold text-ink hover:underline"
-                      >
-                        {row.title}
-                      </SetEntryLink>
-                    ) : (
-                      <span className="truncate text-[13px] font-semibold text-ink">
-                        {row.title}
-                      </span>
-                    )}
-                  </div>
-                  <div className="mono truncate text-[11px] text-muted2">
-                    {row.detail}
-                  </div>
-                </li>
-              ))}
-            </ul>
-          )}
           <Suspense fallback={null}>
-            <Capture1001Fold
+            <Capture1001Client
               presets={captureQueue.presets}
               generatedAt={captureQueue.generatedAt}
             />

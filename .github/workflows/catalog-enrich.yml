@@ -24,6 +24,10 @@ on:
           - acr
           - smoke
           - full
+      confirm_acr_spend:
+        description: "Accept ACR spend — Identify ≈ $0.002–$0.006 / clip, File Scan ≈ $0.05–$0.15 / audio-hour. Unchecked = print the estimate and send nothing."
+        type: boolean
+        default: false
   # Agents often lack workflow_dispatch; bump on main to start:
   #   data/enrich-request      → acr (fast)
   #   data/enrich-full-request → full (thumbs + MB + deep ACR + filescan)
@@ -46,8 +50,16 @@ concurrency:
 jobs:
   enrich:
     runs-on: ubuntu-latest
+    # ACR is billable, so the whole pass sits behind the acr-spend
+    # environment. Add a required reviewer (Settings → Environments) and
+    # Actions pauses here until someone reads the estimate and approves.
+    environment: acr-spend
     # Hosted cap is 6h; leave headroom so we never rely on the hard cancel.
     timeout-minutes: 340
+    env:
+      # Every billable ACR request needs this for the run. Unchecked (and
+      # cron / data/enrich-request pushes) print the estimate and send nothing.
+      ACRCLOUD_CONFIRM_SPEND: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.confirm_acr_spend == 'true' && '1' || '0' }}
     steps:
       - uses: actions/checkout@v4
 

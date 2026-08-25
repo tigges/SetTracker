@@ -240,7 +240,7 @@ jobs:
           test -d out/venues
           test -f out/stats/index.html
           grep -qi "catalog health" out/stats/index.html
-          grep -qi "tracklist workbench" out/stats/index.html
+          grep -qi "capture 1001" out/stats/index.html
           grep -qi "dj complete" out/stats/index.html
           grep -qi "export for claude complete" out/stats/index.html
           SET_PAGES=$(find out/sets -mindepth 1 -maxdepth 1 -type d ! -name '_placeholder' | wc -l)
