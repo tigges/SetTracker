@@ -61,10 +61,12 @@ Provenance per row: `1001TL parse`, `MixesDB`, `SoundCloud parse`, `fingerprint`
    chips are multi-select; pin tap selects (nearby stack listed); Hide ranks
    keeps the legend. Header search; empty pins link to `/stats?q=…#capture-1001`.
 6. **Stats** (`/stats`) — operator catalog health (incomplete sets, needs IDs,
-   DJ gaps, festival capture gaps). Queues show 10 rows, then **N more**.
-   Capture 1001 lives here (`#capture-1001`) after Fill thin lists / ID cues;
-   `/capture-1001` redirects in. Every Pages export rebuilds this page from
-   the current catalog DB. Footer link only; not in the main nav.
+   DJ gaps, festival capture gaps). Five queues: Tracklist workbench, DJ
+   complete, Places without a set, leftover hosts, weak chart websites.
+   Lists show 10 rows, then **N more**. Capture 1001 is nested in the
+   workbench (`#capture-1001`); `/capture-1001` redirects in. Every Pages
+   export rebuilds this page from the current catalog DB. Footer link only;
+   not in the main nav.
 7. **Search / About** — catalog search and product notes.
 8. **Tracks / Labels** — still in the catalog and sitemap; not in the main nav.
 

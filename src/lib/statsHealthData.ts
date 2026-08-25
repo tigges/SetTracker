@@ -276,10 +276,6 @@ export async function getStatsHealth(): Promise<StatsHealth> {
     },
   });
 
-  const thin = setBar.slices.find((s) => s.key === "thin")?.count ?? 0;
-  const unresolved =
-    (statusMap.get("unresolved_id") ?? 0) + (statusMap.get("unparsed") ?? 0);
-
   const leftoverHosts: PlaybookHost[] = djs
     .filter((d) => leftoverHostInCatalog(d))
     .map((d) => ({
@@ -394,10 +390,7 @@ export async function getStatsHealth(): Promise<StatsHealth> {
       playback: setBar.playback,
       identified,
       identifiedStarGap,
-      actions: [
-        { href: "#lists", label: "Fill thin lists", count: thin },
-        { href: "#cues", label: "ID cues", count: unresolved },
-      ].filter((a) => a.count > 0),
+      actions: [],
     },
     tracks: {
       total: trackTotal,

@@ -181,7 +181,9 @@ unless asked. Never write Relive for HARD / Insomniac / Nameless / Ultra.
   `full` and Catalog LLM research default to parser apply / LLM extras
   dry-run. Report: `data/crosscheck/llm-cue-research.json`.
   **/stats workbench:** one ranked Tracklist workbench (first-party text →
-  ACR → IDs → optional 1001 last). Capture 1001 stays a closed anchor.
+  ACR → IDs → optional 1001 last). Capture 1001 is a nested operator fold
+  (`#capture-1001`). Thin-list / ID cue folds are gone — use the workbench.
+  DJ complete and places-without-a-set are the other entity queues.
   **Host-twin fold:** same 1001 seed + both official YT and SC permalinks
   already known → one catalog row, both URLs kept, SC-first playback,
   secondary slug aliases to the survivor. Never invents a missing host.

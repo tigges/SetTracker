@@ -22,6 +22,8 @@ import { clockSourceSlices } from "@/lib/statsHealth";
 import { getStatsHealth } from "@/lib/statsHealthData";
 import { estimateLlmSpend, formatLlmSpend } from "@/lib/ingest/discovery/llmCost";
 import {
+  mergeDjCompleteQueue,
+  mergePlaceGapQueue,
   queueFollowUpHint,
   queueFollowUpLabel,
   workbenchLaneFollowUp,
@@ -127,10 +129,26 @@ function QueueFold({
   );
 }
 
-function DjQueue({
+function NeedPill({
+  label,
+  className,
+}: {
+  label: string;
+  className: string;
+}) {
+  return (
+    <span
+      className={`mono flex-none rounded-full border px-1.5 py-0.5 text-[10px] uppercase tracking-[0.08em] ${className}`}
+    >
+      {label}
+    </span>
+  );
+}
+
+function DjCompleteQueue({
   rows,
 }: {
-  rows: Array<{ slug: string; name: string; setCount: number; playCount: number }>;
+  rows: ReturnType<typeof mergeDjCompleteQueue>;
 }) {
   if (rows.length === 0) {
     return <p className="text-[13px] text-muted2">None.</p>;
@@ -144,12 +162,20 @@ function DjQueue({
           key={d.slug}
           className="flex items-baseline justify-between gap-2 py-1"
         >
-          <Link
-            href={`/djs/${d.slug}`}
-            className="truncate text-[13px] font-semibold text-ink hover:underline"
-          >
-            {d.name}
-          </Link>
+          <div className="flex min-w-0 items-baseline gap-1.5">
+            {d.needsHandle ? (
+              <NeedPill label="handle" className={FOLLOW_UP_PILL.auto} />
+            ) : null}
+            {d.needsArt ? (
+              <NeedPill label="art" className={FOLLOW_UP_PILL.auto} />
+            ) : null}
+            <Link
+              href={`/djs/${d.slug}`}
+              className="truncate text-[13px] font-semibold text-ink hover:underline"
+            >
+              {d.name}
+            </Link>
+          </div>
           <span className="mono shrink-0 text-[11px] text-muted2">
             {d.setCount}s · {d.playCount}p
           </span>
@@ -168,7 +194,7 @@ function DjQueue({
 function PlaceGapQueue({
   rows,
 }: {
-  rows: Array<{ slug: string; name: string; onChart: boolean }>;
+  rows: ReturnType<typeof mergePlaceGapQueue>;
 }) {
   if (rows.length === 0) {
     return <p className="text-[13px] text-muted2">None in this queue.</p>;
@@ -179,16 +205,22 @@ function PlaceGapQueue({
     <ul className="divide-y divide-line border-y border-line">
       {items.map((row) => (
         <li
-          key={row.slug}
+          key={`${row.kind}-${row.slug}`}
           className="flex items-baseline justify-between gap-2 py-1"
         >
-          <Link
-            href={`/events/${row.slug}`}
-            className="truncate text-[13px] font-semibold text-ink hover:underline"
-          >
-            {row.onChart ? "★ " : ""}
-            {row.name}
-          </Link>
+          <div className="flex min-w-0 items-baseline gap-1.5">
+            <NeedPill
+              label={row.kind === "festival" ? "fest" : "club"}
+              className={FOLLOW_UP_PILL.operator}
+            />
+            <Link
+              href={`/events/${row.slug}`}
+              className="truncate text-[13px] font-semibold text-ink hover:underline"
+            >
+              {row.onChart ? "★ " : ""}
+              {row.name}
+            </Link>
+          </div>
           <Link
             href={capture1001StatsHref(row.name)}
             className="mono shrink-0 text-[11px] text-brand hover:underline"
@@ -207,7 +239,13 @@ function PlaceGapQueue({
   );
 }
 
-export default async function StatsPage() {
+export default async function StatsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ q?: string | string[] }>;
+}) {
+  const qRaw = (await searchParams).q;
+  const captureQuery = (Array.isArray(qRaw) ? qRaw[0] : qRaw)?.trim() ?? "";
   const [s, health, enrichReport, captureQueue] = await Promise.all([
     getCatalogStats(),
     getStatsHealth(),
@@ -232,6 +270,24 @@ export default async function StatsPage() {
     needsIdsSets: s.needsIdsSets,
     capturePresets: captureQueue.presets,
   });
+  const workbenchLanes = {
+    first_party: 0,
+    fingerprint: 0,
+    track_id: 0,
+    capture_1001: 0,
+  };
+  for (const row of workbench) workbenchLanes[row.lane] += 1;
+  const djComplete = mergeDjCompleteQueue(
+    s.djs.missingHandleWithSets,
+    s.djs.noThumbWithSets,
+    starFirst,
+  );
+  const handleCount = djComplete.filter((d) => d.needsHandle).length;
+  const artCount = djComplete.filter((d) => d.needsArt).length;
+  const placeGaps = mergePlaceGapQueue(
+    health.festivals.gaps,
+    health.clubs.gaps,
+  );
 
   return (
     <div>
@@ -311,7 +367,6 @@ export default async function StatsPage() {
                 },
               ]
             : []),
-          ...health.sets.actions,
           ...(captureQueue.presets.length
             ? [
                 {
@@ -408,10 +463,12 @@ export default async function StatsPage() {
       </p>
 
       <div id="workbench" className="scroll-mt-20">
+        <span id="lists" />
+        <span id="cues" />
         <QueueFold
           title="Tracklist workbench"
           count={workbench.length}
-          hint="First-party text, then ACR, then IDs (automatic). Capture 1001 is last and operator-only — do not invent a URL."
+          hint={`${workbenchLanes.first_party} text · ${workbenchLanes.fingerprint} ACR · ${workbenchLanes.track_id} IDs · ${workbenchLanes.capture_1001} 1001. Text / ACR / IDs are automatic; 1001 is last and operator-only — do not invent a URL.`}
           followUp="both"
           open
         >
@@ -448,6 +505,55 @@ export default async function StatsPage() {
               ))}
             </ul>
           )}
+          <details
+            id="capture-1001"
+            open={Boolean(captureQuery)}
+            className="mt-3 scroll-mt-20 rounded-md border border-amber/40 bg-amber/5 px-2 py-1.5"
+          >
+            <summary className="cursor-pointer text-[12px] font-semibold text-ink">
+              Capture 1001{" "}
+              <span className="mono text-muted2">
+                ({captureQueue.presets.length.toLocaleString()})
+              </span>{" "}
+              <NeedPill label="operator" className={FOLLOW_UP_PILL.operator} />
+            </summary>
+            <p className="mt-1 text-[11px] leading-snug text-muted2">
+              Last resort community overlay on official playback. First-party
+              text + ACR fill clocks without 1001. Do not invent 1001 URLs.
+            </p>
+            <div className="mt-2">
+              <Suspense fallback={null}>
+                <Capture1001Client
+                  presets={captureQueue.presets}
+                  generatedAt={captureQueue.generatedAt}
+                />
+              </Suspense>
+            </div>
+          </details>
+        </QueueFold>
+      </div>
+      <div id="dj-complete" className="scroll-mt-20">
+        <span id="dj-handles" />
+        <span id="dj-art" />
+        <QueueFold
+          title="DJ complete"
+          count={djComplete.length}
+          hint={`${handleCount} handle · ${artCount} art. ★ current Top 100 first. Junk omitted. LLM handles need a confirm — ${formatLlmSpend(LLM_QUEUE_ESTIMATE)}.`}
+          followUp="auto"
+        >
+          <DjCompleteQueue rows={djComplete} />
+        </QueueFold>
+      </div>
+      <div id="places" className="scroll-mt-20">
+        <span id="festivals" />
+        <span id="clubs" />
+        <QueueFold
+          title="Places without a set"
+          count={placeGaps.length}
+          hint={`${health.festivals.gaps.length} festivals · ${health.clubs.gaps.length} clubs. Link an official set. ★ current Top 100 first.`}
+          followUp="operator"
+        >
+          <PlaceGapQueue rows={placeGaps} />
         </QueueFold>
       </div>
       <div id="leftover-hosts">
@@ -468,141 +574,6 @@ export default async function StatsPage() {
           followUp="both"
         >
           <WeakSiteQueue rows={health.playbook.weakSites} />
-        </QueueFold>
-      </div>
-      <div id="dj-handles">
-        <QueueFold
-          title="Pin handles"
-          count={s.djs.missingHandleWithSets.length}
-          hint={`DJs with a set and no social/web handle. ★ current Top 100 first. Junk omitted. LLM needs a confirm — ${formatLlmSpend(LLM_QUEUE_ESTIMATE)}.`}
-          followUp="auto"
-        >
-          <DjQueue
-            rows={[...s.djs.missingHandleWithSets].sort(
-              (a, b) => starFirst(a.slug) - starFirst(b.slug),
-            )}
-          />
-        </QueueFold>
-      </div>
-      <div id="dj-art">
-        <QueueFold
-          title="Fill artwork"
-          count={s.djs.noThumbWithSets.length}
-          hint="DJs with a set and no image. ★ current Top 100 first."
-          followUp="auto"
-        >
-          <DjQueue
-            rows={[...s.djs.noThumbWithSets].sort(
-              (a, b) => starFirst(a.slug) - starFirst(b.slug),
-            )}
-          />
-        </QueueFold>
-      </div>
-      <div id="festivals">
-        <QueueFold
-          title="Festivals without a set"
-          count={health.festivals.gaps.length}
-          hint="Link an official set. ★ current Top 100 first."
-          followUp="operator"
-        >
-          <PlaceGapQueue rows={health.festivals.gaps} />
-        </QueueFold>
-      </div>
-      <div id="clubs">
-        <QueueFold
-          title="Clubs without a set"
-          count={health.clubs.gaps.length}
-          hint="Link an official set. ★ current Top 100 first."
-          followUp="operator"
-        >
-          <PlaceGapQueue rows={health.clubs.gaps} />
-        </QueueFold>
-      </div>
-      <div id="lists">
-        <QueueFold
-          title="Fill thin lists"
-          count={s.tracklistGaps.length}
-          hint="Also ranked in Tracklist workbench. This-year / last-year chart sets with a thin list. Do not invent 1001 URLs."
-          followUp="auto"
-        >
-          <ul className="divide-y divide-line border-y border-line">
-            {s.tracklistGaps.slice(0, PREVIEW).map((row) => (
-              <li key={row.slug} className="py-1">
-                {row.hasSetPage ? (
-                  <SetEntryLink
-                    href={`/sets/${row.slug}`}
-                    label="Stats"
-                    className="text-[13px] font-semibold text-ink hover:underline"
-                  >
-                    {row.title}
-                  </SetEntryLink>
-                ) : (
-                  <span className="text-[13px] font-semibold text-ink">
-                    {row.title}
-                  </span>
-                )}
-                <div className="mono truncate text-[11px] text-muted2">
-                  {[row.primaryDj, row.reason].filter(Boolean).join(" · ")}
-                </div>
-              </li>
-            ))}
-          </ul>
-          <MoreFold restCount={Math.max(0, s.tracklistGaps.length - PREVIEW)}>
-            <ul className="divide-y divide-line border-y border-line">
-              {s.tracklistGaps.slice(PREVIEW).map((row) => (
-                <li key={row.slug} className="py-1">
-                  <span className="text-[13px] font-semibold text-ink">
-                    {row.title}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </MoreFold>
-        </QueueFold>
-      </div>
-      <div id="cues">
-        <QueueFold
-          title="ID cues"
-          count={s.sets.needsIds}
-          hint="Also ranked in Tracklist workbench. Lowest identified share first."
-          followUp="auto"
-        >
-          <ul className="divide-y divide-line border-y border-line">
-            {s.needsIdsSets.slice(0, PREVIEW).map((row) => (
-              <li key={row.slug} className="py-1">
-                <SetEntryLink
-                  href={`/sets/${row.slug}`}
-                  label="Stats"
-                  className="text-[13px] font-semibold text-ink hover:underline"
-                >
-                  {row.title}
-                </SetEntryLink>
-                <div className="mono truncate text-[11px] text-muted2">
-                  {[
-                    row.primaryDj,
-                    `${Math.round(row.identifiedRatio * 100)}% ID`,
-                  ]
-                    .filter(Boolean)
-                    .join(" · ")}
-                </div>
-              </li>
-            ))}
-          </ul>
-        </QueueFold>
-      </div>
-      <div id="capture-1001" className="scroll-mt-20">
-        <QueueFold
-          title="Capture 1001"
-          count={captureQueue.presets.length}
-          hint="Last resort. Optional community overlay on sets that already have official playback. First-party text + ACR fill clocks without 1001. Do not invent 1001 URLs."
-          followUp="operator"
-        >
-          <Suspense fallback={null}>
-            <Capture1001Client
-              presets={captureQueue.presets}
-              generatedAt={captureQueue.generatedAt}
-            />
-          </Suspense>
         </QueueFold>
       </div>
     </div>
