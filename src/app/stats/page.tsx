@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { Suspense } from "react";
 import Link from "next/link";
-import { Capture1001Client } from "@/components/Capture1001Client";
+import { Capture1001Fold } from "@/components/Capture1001Client";
 import { SetEntryLink } from "@/components/SetEntryLink";
 import {
   LeftoverHostQueue,
@@ -239,13 +239,7 @@ function PlaceGapQueue({
   );
 }
 
-export default async function StatsPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ q?: string | string[] }>;
-}) {
-  const qRaw = (await searchParams).q;
-  const captureQuery = (Array.isArray(qRaw) ? qRaw[0] : qRaw)?.trim() ?? "";
+export default async function StatsPage() {
   const [s, health, enrichReport, captureQueue] = await Promise.all([
     getCatalogStats(),
     getStatsHealth(),
@@ -505,31 +499,12 @@ export default async function StatsPage({
               ))}
             </ul>
           )}
-          <details
-            id="capture-1001"
-            open={Boolean(captureQuery)}
-            className="mt-3 scroll-mt-20 rounded-md border border-amber/40 bg-amber/5 px-2 py-1.5"
-          >
-            <summary className="cursor-pointer text-[12px] font-semibold text-ink">
-              Capture 1001{" "}
-              <span className="mono text-muted2">
-                ({captureQueue.presets.length.toLocaleString()})
-              </span>{" "}
-              <NeedPill label="operator" className={FOLLOW_UP_PILL.operator} />
-            </summary>
-            <p className="mt-1 text-[11px] leading-snug text-muted2">
-              Last resort community overlay on official playback. First-party
-              text + ACR fill clocks without 1001. Do not invent 1001 URLs.
-            </p>
-            <div className="mt-2">
-              <Suspense fallback={null}>
-                <Capture1001Client
-                  presets={captureQueue.presets}
-                  generatedAt={captureQueue.generatedAt}
-                />
-              </Suspense>
-            </div>
-          </details>
+          <Suspense fallback={null}>
+            <Capture1001Fold
+              presets={captureQueue.presets}
+              generatedAt={captureQueue.generatedAt}
+            />
+          </Suspense>
         </QueueFold>
       </div>
       <div id="dj-complete" className="scroll-mt-20">
