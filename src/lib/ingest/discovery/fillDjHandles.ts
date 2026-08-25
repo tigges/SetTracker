@@ -8,6 +8,12 @@ import { djSocialsFromKnown } from "../../social";
 import { ARTIST_ROSTER } from "../roster";
 import { slugify } from "../types";
 import { hintForName } from "./knownHandles";
+import {
+  officialSiteMissClear,
+  officialSiteMissIsFresh,
+  officialSiteMissRecord,
+  persistOfficialSiteMissCache,
+} from "./officialSiteMiss";
 import { resolveWikidataOfficialWebsite } from "./wikidataOfficial";
 
 export type FillHandleStats = {
@@ -110,22 +116,28 @@ export async function fillDjWebsitesFromWikidata(
       website: null,
       sets: { some: {} },
     },
-    select: { id: true, name: true },
+    select: { id: true, slug: true, name: true },
     take: limit,
     orderBy: { name: "asc" },
   });
   let n = 0;
   for (const d of djs) {
+    if (officialSiteMissIsFresh("dj", d.slug)) continue;
     const site = await resolveWikidataOfficialWebsite(d.name, "dj", {
       delayMs: opts?.delayMs ?? 150,
     });
-    if (!site) continue;
+    if (!site) {
+      officialSiteMissRecord("dj", d.slug, "wikidata");
+      continue;
+    }
+    officialSiteMissClear("dj", d.slug);
     await prisma.dj.update({
       where: { id: d.id },
       data: { website: site },
     });
     n += 1;
   }
+  persistOfficialSiteMissCache();
   if (n) console.log(`[dj-handles] wikidata websites: ${n}`);
   return n;
 }

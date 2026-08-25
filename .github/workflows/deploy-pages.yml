@@ -80,6 +80,8 @@ jobs:
             data/venue-candidates.json
             data/roster-graduates.json
             data/soundcloud-poll-state.json
+            data/crosscheck/official-site-miss.json
+            data/crosscheck/url-probe.json
           key: setradar-discovery-${{ github.run_id }}
           restore-keys: |
             setradar-discovery-

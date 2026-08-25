@@ -242,6 +242,12 @@ enrich from any device. The job still runs on GitHub’s computers.
    is the CI YouTube path. Only add a self-hosted runner on home internet if
    you want yt-dlp Identify itself to succeed.
 
+**Deep verify skips:** after a Wikidata official-site miss, the same DJ or
+festival is not looked up again for 21 days (`DJMAG_ENRICH_FORCE=1` recrawls).
+Stored social/www URLs are HEADed only when new or last-ok is older than 30
+days (`VERIFY_URLS_FORCE=1` re-probes). Skip files live in the Actions
+discovery cache, not git.
+
 **Catalog junk** (verify-urls / Pages): festival stages (`Freedom Stage`,
 `Mainstage`) fold onto the parent festival; radio/session hosts become
 `Event` rows (`radio` / livestream); YouTube Shorts and “makes a track”

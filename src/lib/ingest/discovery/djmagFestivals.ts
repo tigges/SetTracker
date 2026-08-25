@@ -15,6 +15,12 @@ import { join } from "node:path";
 import type { PrismaClient } from "@prisma/client";
 import { KNOWN_EVENTS, type CanonicalEvent } from "../events";
 import { slugify } from "../types";
+import {
+  officialSiteMissClear,
+  officialSiteMissIsFresh,
+  officialSiteMissRecord,
+  persistOfficialSiteMissCache,
+} from "./officialSiteMiss";
 import { resolveWikidataOfficialWebsite } from "./wikidataOfficial";
 
 export type DjMagFestival = {
@@ -245,6 +251,7 @@ export async function enrichDjMagFestivalWebsites(opts?: {
     const knownSlug = ALIAS_TO_KNOWN[fest.slug];
     const known = knownSlug ? KNOWN_EVENTS[knownSlug] : undefined;
     if (known?.website) {
+      officialSiteMissClear("festival", fest.slug);
       fest.website = known.website;
       if (known.location) fest.location = known.location;
       found += 1;
@@ -253,18 +260,25 @@ export async function enrichDjMagFestivalWebsites(opts?: {
     }
     const extra = EXTRA_OFFICIAL[fest.slug] ?? EXTRA_OFFICIAL[slugify(fest.name)];
     if (extra) {
+      officialSiteMissClear("festival", fest.slug);
       fest.website = extra;
       found += 1;
       console.log(`[djmag-festivals] ${fest.slug} → ${extra} (extra)`);
+      continue;
+    }
+    if (officialSiteMissIsFresh("festival", fest.slug)) {
+      console.log(`[djmag-festivals] skip site ${fest.slug} (recent miss)`);
       continue;
     }
     const website = await resolveWikidataOfficialWebsite(fest.name, "festival", {
       delayMs: opts?.delayMs,
     });
     if (!website) {
+      officialSiteMissRecord("festival", fest.slug, "wikidata");
       console.log(`[djmag-festivals] no site ${fest.slug}`);
       continue;
     }
+    officialSiteMissClear("festival", fest.slug);
     fest.website = website;
     found += 1;
     console.log(`[djmag-festivals] ${fest.slug} → ${website}`);
@@ -304,6 +318,7 @@ export async function enrichDjMagFestivalWebsites(opts?: {
     );
     console.log(`[djmag-festivals] wrote seed (${found} websites)`);
   }
+  persistOfficialSiteMissCache();
   return { fetched, found, festivals };
 }
 
