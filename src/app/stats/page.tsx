@@ -380,7 +380,7 @@ export default async function StatsPage() {
             className={`mr-1 inline-block rounded-full border px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.08em] ${FOLLOW_UP_PILL.auto}`}
           >
             Automatic
-          </span>
+          </span>{" "}
           jobs drain
         </span>
         <span>
@@ -388,7 +388,7 @@ export default async function StatsPage() {
             className={`mr-1 inline-block rounded-full border px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.08em] ${FOLLOW_UP_PILL.operator}`}
           >
             Operator
-          </span>
+          </span>{" "}
           you link or paste
         </span>
         <span>
@@ -396,7 +396,7 @@ export default async function StatsPage() {
             className={`mr-1 inline-block rounded-full border px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.08em] ${FOLLOW_UP_PILL.both}`}
           >
             Automatic + operator
-          </span>
+          </span>{" "}
           jobs first, leftovers on you
         </span>
       </div>
