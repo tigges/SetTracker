@@ -186,7 +186,7 @@ model Set {
   id          String   @id @default(cuid())
   slug        String   @unique
   title       String
-  // "radio" | "festival" | "soundcloud" | "mix"
+  // "festival" | "club" | "livestream" | "radio" | "soundcloud" | "mix"
   type        String
   // music genre, e.g. "Bass House", "Tech House", "UK Garage"
   genre       String?

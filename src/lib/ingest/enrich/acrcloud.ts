@@ -74,6 +74,11 @@ import {
   type HtTrack,
 } from "../hearthis/client";
 import { isFestivalSeasonSet } from "../festivalDrops";
+import {
+  isLiveVenueSet,
+  isLivestreamSet,
+  isWeeklyRadioSet,
+} from "../../setType";
 import { ARTIST_ROSTER } from "../roster";
 import { getSoundCloudClientId, scGet, type ScTrack } from "../soundcloud/client";
 import { slugify } from "../types";
@@ -265,6 +270,8 @@ export function homepageEnrichBoost(opts: {
   playCount?: number;
   isFestival?: boolean;
   festivalSeason?: boolean;
+  isLivestream?: boolean;
+  isWeeklyRadio?: boolean;
 }): number {
   const now = opts.nowMs ?? Date.now();
   const ageMs = now - opts.publishedAt.getTime();
@@ -279,12 +286,15 @@ export function homepageEnrichBoost(opts: {
   const severe = opts.densitySeverity === "severe";
   const thinOrWorse = opts.densitySeverity !== "ok";
   const hasUnresolved = (opts.unresolvedCount ?? 0) > 0;
-  const festFocus = Boolean(opts.isFestival || opts.festivalSeason);
+  const festFocus = Boolean(
+    opts.isFestival || opts.festivalSeason || opts.isLivestream,
+  );
   const emptyOfficial = (opts.playCount ?? 1) === 0;
 
   // Empty official playbacks — Identify / File Scan must create rows.
-  // Festival stays ahead of radio / studio so academy mixes do not crowd EDC.
+  // Live rooms and livestreams stay ahead of weekly radio.
   if (emptyOfficial) {
+    if (opts.isWeeklyRadio) return recent ? 1 : 0;
     if (festFocus && (recent || festWindow)) return 4;
     if (festFocus) return 3;
     if (recent) return 3;
@@ -1188,8 +1198,14 @@ export async function selectSparseSetsForFingerprint(
 
     const primarySlug = row.artists[0]?.dj.slug;
     const top100Rank = primarySlug ? (top100.get(primarySlug) ?? null) : null;
-    const isFestival =
-      row.type === "festival" || row.event?.kind === "festival";
+    const liveSignals = {
+      type: row.type,
+      eventKind: row.event?.kind,
+      title: row.title,
+    };
+    const isFestival = isLiveVenueSet(liveSignals);
+    const isLivestream = isLivestreamSet(liveSignals);
+    const isWeeklyRadio = isWeeklyRadioSet(liveSignals);
     const festivalSeason = isFestivalSeasonSet(
       {
         eventSlug: row.event?.slug,
@@ -1201,12 +1217,13 @@ export async function selectSparseSetsForFingerprint(
       nowMs,
     );
     const sparseFestival =
-      isFestival &&
+      (isFestival || isLivestream) &&
       (row.plays.length === 0 || identifiedStrong < expectedFloor);
     const priorityTarget = isUnresolvedDetectPriority({
       unresolvedCount,
       top100Rank,
       isFestival,
+      isLiveFocus: isLivestream,
       festivalSeason,
       sparseFestival,
     });
@@ -1247,6 +1264,8 @@ export async function selectSparseSetsForFingerprint(
         playCount: row.plays.length,
         isFestival,
         festivalSeason,
+        isLivestream,
+        isWeeklyRadio,
       }),
       eventBoost:
         eventFocus.size > 0 && eventSlug && eventFocus.has(eventSlug) ? 1 : 0,

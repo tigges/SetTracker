@@ -10,6 +10,7 @@
 import { readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import { isArchiveTitledSet } from "../feedPriority";
+import { looksLikeLiveFestivalRadio } from "../sourceComments";
 import type { DensitySeverity } from "../setDensity";
 import { SET_SLUG_ALIASES } from "./sourceRemaps";
 import { TRACKLIST_1001_BY_SOURCE_SLUG } from "./tracklists1001/festival2026";
@@ -227,6 +228,8 @@ export type CaptureNeedRow = {
   identifiedStrong: number;
   top100Rank: number | null;
   isFestival: boolean;
+  /** Official venue or DJ livestream — above weekly radio, below a room. */
+  isLivestream?: boolean;
   festivalSeason: boolean;
   /** Event brand is in an edition-gap window (few complete playbacks). */
   editionGap?: boolean;
@@ -266,6 +269,15 @@ export function skipCaptureNeed(
   if (/\bshorts?\b/i.test(row.title)) return "shorts";
   if (isArchiveTitledSet(row.title, nowMs)) return "archive-title";
   if (row.plays1001 >= 12) return "has-1001";
+  if (
+    row.type === "radio" &&
+    !row.isFestival &&
+    !row.isLivestream &&
+    !row.festivalSeason &&
+    !looksLikeLiveFestivalRadio(row.title)
+  ) {
+    return "weekly-radio";
+  }
   const ageDays =
     (nowMs - new Date(row.publishedAt).getTime()) / DAY_MS;
   if (
@@ -296,6 +308,8 @@ export function scoreCaptureNeed(row: CaptureNeedRow, nowMs = Date.now()): numbe
     s += Math.max(0, 25 - row.top100Rank);
   }
   if (row.isFestival) s += 40;
+  else if (row.isLivestream) s += 25;
+  if (row.type === "radio" && !row.isFestival) s -= 40;
   if (row.slug.startsWith("yt-")) s += 15;
   if (row.density === "severe") s += 50;
   else if (row.density === "thin") s += 25;
@@ -326,7 +340,10 @@ export function captureReason(row: CaptureNeedRow): string {
   if (row.density === "severe") return "thin tracklist · capture 1001";
   if (row.density === "thin") return "thin tracklist · capture 1001";
   if (row.top100Rank != null && row.top100Rank <= 20) return "Top 20 · no 1001 seed";
-  if (row.isFestival) return "festival · no 1001 seed";
+  if (row.isFestival) {
+    return row.type === "club" ? "club · no 1001 seed" : "festival · no 1001 seed";
+  }
+  if (row.isLivestream) return "livestream · no 1001 seed";
   return "catalog gap · no 1001 seed";
 }
 

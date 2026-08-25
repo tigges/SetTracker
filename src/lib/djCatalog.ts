@@ -37,7 +37,7 @@ export function isHearthisSource(s: SetCatalogSignal): boolean {
 }
 
 export function isFestivalOrClubSet(s: SetCatalogSignal): boolean {
-  if (s.type === "festival") return true;
+  if (s.type === "festival" || s.type === "club") return true;
   return s.eventKind === "festival" || s.eventKind === "club";
 }
 

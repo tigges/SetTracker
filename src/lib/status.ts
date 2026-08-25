@@ -182,8 +182,10 @@ export const SET_TYPE_META: Record<
   string,
   { label: string; glyph: string }
 > = {
-  radio: { label: "Radio", glyph: "◉" },
   festival: { label: "Festival", glyph: "▲" },
+  club: { label: "Club", glyph: "●" },
+  livestream: { label: "Livestream", glyph: "▶" },
+  radio: { label: "Radio", glyph: "◉" },
   soundcloud: { label: "SoundCloud", glyph: "☁" },
   /** Long-form mix whose discovery host is not SC/YT (e.g. hearthis.at). */
   mix: { label: "Mix", glyph: "◈" },

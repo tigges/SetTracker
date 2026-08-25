@@ -28,7 +28,7 @@ export type SoundCloudShow = {
   /** Default genre when the track doesn't provide one */
   genre: string;
   /** Default set type */
-  type: "radio" | "festival" | "soundcloud";
+  type: "radio" | "festival" | "club" | "livestream" | "soundcloud";
   /** Optional fixed series name (else inferred from title) */
   seriesName?: string;
   /** Canonical Event slug when this account is a festival/media brand. */

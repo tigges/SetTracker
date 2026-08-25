@@ -7,7 +7,7 @@ export const SITE_NAME = "setradar.ai";
 export const SITE_TAGLINE = "DJ set database";
 
 export const SITE_DESCRIPTION =
-  "Tracklists, IDs, and provenance for electronic DJ sets — festivals, radio, and mixes from SoundCloud, YouTube, hearthis.at, and the community.";
+  "Tracklists, IDs, and provenance for electronic DJ sets — festivals, clubs, livestreams, and radio from SoundCloud, YouTube, hearthis.at, and the community.";
 
 export function absoluteUrl(path = "/"): string {
   const p = path.startsWith("/") ? path : `/${path}`;

@@ -751,4 +751,78 @@ const defaultQueue = buildCaptureQueueFromNeeds(many, { nowMs: now });
 assert.equal(defaultQueue.length, CAPTURE_QUEUE_LIMIT);
 assert.equal(CAPTURE_QUEUE_LIMIT, 40);
 
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "sc-amelielens-exhale-radio-121",
+      title: "Amelie Lens Exhale Radio 121",
+      type: "radio",
+      isFestival: false,
+      festivalSeason: false,
+      playCount: 2,
+      density: "severe",
+    }),
+    mapped,
+    now,
+  ),
+  "weekly-radio",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "yt-lens-live-from-tml",
+      title: "Amelie Lens live from Tomorrowland 2026",
+      type: "radio",
+      isFestival: false,
+      festivalSeason: false,
+      playCount: 0,
+      density: "severe",
+    }),
+    mapped,
+    now,
+  ),
+  null,
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "yt-cercle-charlotte",
+      title: "Charlotte de Witte | Cercle",
+      type: "livestream",
+      isFestival: false,
+      isLivestream: true,
+      festivalSeason: false,
+      playCount: 0,
+      density: "severe",
+    }),
+    mapped,
+    now,
+  ),
+  null,
+);
+assert.ok(
+  scoreCaptureNeed(
+    row({
+      slug: "yt-pacha-night",
+      title: "Live at Pacha Ibiza",
+      type: "club",
+      isFestival: true,
+      festivalSeason: false,
+    }),
+    now,
+  ) >
+    scoreCaptureNeed(
+      row({
+        slug: "yt-cercle-stream",
+        title: "Cercle livestream",
+        type: "livestream",
+        isFestival: false,
+        isLivestream: true,
+        festivalSeason: false,
+      }),
+      now,
+    ),
+  "club nights outrank livestreams in the 1001 capture queue",
+);
+
 console.log("nextCaptures.queue.test.ts ok");

@@ -646,7 +646,12 @@ export async function getCatalogStats(): Promise<CatalogStats> {
         const djSlug = set.artists[0]?.dj.slug;
         const top100Rank = djSlug ? (top100.get(djSlug) ?? null) : null;
         const isFestival =
-          set.type === "festival" || set.event?.kind === "festival";
+          set.type === "festival" ||
+          set.type === "club" ||
+          set.event?.kind === "festival" ||
+          set.event?.kind === "club" ||
+          set.type === "livestream" ||
+          set.event?.kind === "livestream";
         const festivalSeason = isFestivalSeasonSet(
           {
             eventSlug: set.event?.slug,

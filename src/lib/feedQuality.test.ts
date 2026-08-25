@@ -23,8 +23,13 @@ describe("feedQuality", () => {
 
   it("matches festival / radio / mix types for ingest and stats", () => {
     assert.equal(setMatchesTypeFilter({ type: "festival" }, "festival"), true);
+    assert.equal(setMatchesTypeFilter({ type: "club" }, "festival"), true);
     assert.equal(
       setMatchesTypeFilter({ type: "mix", venueTier: "festival" }, "festival"),
+      true,
+    );
+    assert.equal(
+      setMatchesTypeFilter({ type: "mix", venueTier: "club" }, "festival"),
       true,
     );
     assert.equal(setMatchesTypeFilter({ type: "radio" }, "mix"), false);

@@ -103,7 +103,8 @@ export function isListPendingOfficialSet(s: {
   return (
     s.eventKind === "festival" ||
     s.eventKind === "club" ||
-    s.type === "festival"
+    s.type === "festival" ||
+    s.type === "club"
   );
 }
 

@@ -15,6 +15,7 @@ import {
   promotedYoutubeChannels,
   queueYoutubeSimilarChannels,
 } from "../discovery/run";
+import { inferSetType } from "../../setType";
 import { inferFestivalEvent, KNOWN_EVENTS } from "../events";
 import {
   FESTIVAL_DROP_YT_LIMIT,
@@ -353,7 +354,12 @@ async function curatedToHit(src: YoutubeSetSource): Promise<YtHit | null> {
   const raw: RawSet = {
     sourceSlug,
     title,
-    type: src.type ?? (festival?.kind === "festival" ? "festival" : "soundcloud"),
+    type: inferSetType({
+      title,
+      eventKind: festival?.kind,
+      hintedType: src.type,
+      playbackHost: "youtube",
+    }),
     genre: src.genre,
     primaryArtist: withDescriptionSocials(primary, meta.description),
     collaborators,
@@ -424,7 +430,12 @@ async function venueVideoToHit(
   const raw: RawSet = {
     sourceSlug,
     title: meta.title.trim(),
-    type: "festival",
+    type: inferSetType({
+      title: meta.title,
+      eventKind: festival?.kind ?? channelEvent?.kind ?? "livestream",
+      hintedType: "livestream",
+      playbackHost: "youtube",
+    }),
     genre: venue.genre,
     primaryArtist: withDescriptionSocials(primary, meta.description),
     collaborators,
@@ -473,7 +484,11 @@ async function artistChannelVideoToHit(
   const raw: RawSet = {
     sourceSlug,
     title: meta.title.trim(),
-    type: /\bradio\b|heldeep/i.test(meta.title) ? "radio" : "festival",
+    type: inferSetType({
+      title: meta.title,
+      hintedType: "livestream",
+      playbackHost: "youtube",
+    }),
     genre: ch.genre,
     primaryArtist: withDescriptionSocials(primary, meta.description),
     collaborators,
@@ -534,7 +549,11 @@ async function relatedVideoToHit(
   const raw: RawSet = {
     sourceSlug,
     title: meta.title.trim(),
-    type: festival ? "festival" : "soundcloud",
+    type: inferSetType({
+      title: meta.title,
+      eventKind: festival?.kind,
+      playbackHost: "youtube",
+    }),
     genre: seed.genre,
     primaryArtist: withDescriptionSocials(primary, meta.description),
     collaborators,

@@ -124,6 +124,8 @@ export function resolveVenueTier(
   }
   const t = (setType || "").toLowerCase();
   if (t === "festival") return "festival";
+  if (t === "club") return "club";
+  if (t === "livestream") return "livestream";
   if (t === "radio") return "radio";
   return "other";
 }

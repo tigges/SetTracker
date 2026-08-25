@@ -8,6 +8,7 @@
  * Dedupes with the @DJMag YouTube venue via sourceSlug `yt-{videoId}`.
  */
 
+import { inferSetType } from "../../setType";
 import { artistsForSet } from "../artists";
 import { inferFestivalEvent, KNOWN_EVENTS } from "../events";
 import { hashRawSetContent } from "../hash";
@@ -199,7 +200,12 @@ async function teaserToRawSet(
   const raw: RawSet = {
     sourceSlug: `yt-${meta.videoId}`.slice(0, 120),
     title,
-    type: "festival",
+    type: inferSetType({
+      title,
+      eventKind: festival?.kind ?? CHANNEL_EVENT?.kind ?? "livestream",
+      hintedType: "livestream",
+      playbackHost: "youtube",
+    }),
     genre: genreFromTitle(title),
     primaryArtist: primary,
     collaborators,

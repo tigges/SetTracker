@@ -16,7 +16,7 @@ export default function AboutPage() {
       <p className="eyebrow">setradar.ai</p>
       <h1 className="mt-1 text-3xl font-extrabold tracking-tight">About</h1>
       <p className="mt-4 text-[15px] leading-relaxed text-muted">
-        A database of electronic DJ sets — festivals, radio shows, and mixes.
+        A database of electronic DJ sets — festivals, clubs, livestreams, and radio.
         Every track row has a status and a provenance so you can see what is
         identified and what is still an ID.
       </p>

@@ -18,7 +18,7 @@ export type HearthisTrackSource = {
   /** YYYY-MM-DD when the set was performed (not the rehost upload date). */
   performedOn?: string;
   minDurationSec?: number;
-  type?: "radio" | "festival" | "soundcloud" | "mix";
+  type?: "radio" | "festival" | "club" | "livestream" | "soundcloud" | "mix";
 };
 
 export const HEARTHIS_TRACKS: HearthisTrackSource[] = [
@@ -35,7 +35,7 @@ export const HEARTHIS_TRACKS: HearthisTrackSource[] = [
     eventKind: "club",
     eventLocation: "Ibiza, Spain",
     performedOn: "2026-06-06",
-    type: "festival",
+    type: "club",
     minDurationSec: 20 * 60,
   },
   {

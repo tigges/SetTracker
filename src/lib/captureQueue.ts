@@ -2,6 +2,7 @@
  * Live /stats#capture-1001 queue from the catalog DB (Pages build time).
  */
 import { prisma } from "@/lib/db";
+import { isLiveVenueSet, isLivestreamSet } from "@/lib/setType";
 import { loadDjMagTop100RankBySlug } from "@/lib/djmagTop100";
 import {
   editionGapEventSlugs,
@@ -76,7 +77,13 @@ export async function getCaptureQueue(
     ).length;
     const identifiedStrong = s.plays.filter(isStrongIdentifiedPlay).length;
     const primary = s.artists[0]?.dj;
-    const isFestival = s.type === "festival" || s.event?.kind === "festival";
+    const liveSignals = {
+      type: s.type,
+      eventKind: s.event?.kind,
+      title: s.title,
+    };
+    const isFestival = isLiveVenueSet(liveSignals);
+    const isLivestream = isLivestreamSet(liveSignals);
     return {
       slug: s.slug,
       title: s.title,
@@ -91,6 +98,7 @@ export async function getCaptureQueue(
       identifiedStrong,
       top100Rank: primary?.slug ? (top100.get(primary.slug) ?? null) : null,
       isFestival,
+      isLivestream,
       editionGap: Boolean(s.event?.slug && gapEvents.has(s.event.slug)),
       festivalSeason: isFestivalSeasonSet(
         {

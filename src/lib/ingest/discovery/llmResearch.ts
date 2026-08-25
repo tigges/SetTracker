@@ -507,6 +507,7 @@ export async function runLlmHandleResearch(
         festivalSets: d.sets.filter(
           (s) =>
             s.set.type === "festival" ||
+            s.set.type === "club" ||
             s.set.event?.kind === "festival" ||
             s.set.event?.kind === "club",
         ).length,

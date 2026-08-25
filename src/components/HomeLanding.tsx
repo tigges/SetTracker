@@ -203,7 +203,7 @@ export function HomeLanding({
                 <span className="mt-2 block sm:mt-3">The night, as a graph.</span>
               </h1>
               <p className="hero-lede mt-2 max-w-md text-[14px] leading-relaxed sm:mt-3 sm:text-[15px]">
-                Timed tracklists from festivals, clubs, and radio.
+                Timed tracklists from festivals, clubs, livestreams, and radio.
               </p>
             </div>
             <div className="flex flex-wrap items-center gap-3">

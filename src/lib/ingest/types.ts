@@ -52,8 +52,8 @@ export type RawPlay = {
 export type RawSet = {
   sourceSlug: string; // stable id from the source → becomes set.slug
   title: string;
-  /** Platform / format hint for filters — not the discovery host. */
-  type: "radio" | "festival" | "soundcloud" | "mix";
+  /** Performance class — live room, stream, radio, or leftover format. */
+  type: "radio" | "festival" | "club" | "livestream" | "soundcloud" | "mix";
   genre?: string;
   /**
    * Performing DJ when known. Optional for brand-hosted series/festival

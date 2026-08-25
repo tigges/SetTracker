@@ -13,7 +13,7 @@ import { pageMeta } from "@/lib/site";
 
 export const metadata: Metadata = pageMeta({
   title: "The night, as a graph",
-  description: "Timed tracklists from festivals, clubs, and radio.",
+  description: "Timed tracklists from festivals, clubs, livestreams, and radio.",
   path: "/",
 });
 

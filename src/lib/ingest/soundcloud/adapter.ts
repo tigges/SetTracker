@@ -16,6 +16,7 @@ import { artistsForSet } from "../artists";
 import { promotedSoundcloudPermalinks } from "../discovery/run";
 import { inferFestivalEvent, KNOWN_EVENTS } from "../events";
 import { hashRawSetContent } from "../hash";
+import { inferSetType } from "../../setType";
 import { slugify, type RawSet, type SourceAdapter } from "../types";
 import { withDescriptionSocials } from "../youtube/client";
 import {
@@ -157,12 +158,16 @@ function scImageUrl(url?: string | null): string | undefined {
 
 function setTypeFor(track: ScTrack, show: SoundCloudShow): RawSet["type"] {
   const title = track.title || "";
-  if (show.eventSlug || show.type === "festival") return "festival";
-  if (/\b(festival|edc|ultra|parookaville|boiler\s*room|tomorrowland)\b/i.test(title)) {
-    return "festival";
-  }
-  if (show.type === "radio" || /\bradio\b/i.test(title)) return "radio";
-  return "soundcloud";
+  const channelEvent = show.eventSlug
+    ? KNOWN_EVENTS[show.eventSlug]
+    : undefined;
+  const event = inferFestivalEvent(title) || channelEvent;
+  return inferSetType({
+    title,
+    eventKind: event?.kind,
+    hintedType: show.type,
+    playbackHost: "soundcloud",
+  });
 }
 
 async function trackToRawSet(
@@ -256,11 +261,12 @@ function durationSecOfTrack(track: ScTrack): number {
 }
 
 function setTypeFromTitle(title: string): RawSet["type"] {
-  if (/\b(festival|edc|ultra|parookaville|boiler\s*room|tomorrowland)\b/i.test(title)) {
-    return "festival";
-  }
-  if (/\bradio\b/i.test(title)) return "radio";
-  return "soundcloud";
+  const event = inferFestivalEvent(title);
+  return inferSetType({
+    title,
+    eventKind: event?.kind,
+    playbackHost: "soundcloud",
+  });
 }
 
 /**
@@ -406,7 +412,12 @@ async function trackSeedToRawSet(
   const raw: RawSet = {
     sourceSlug,
     title,
-    type: seed.type ?? setTypeFromTitle(title),
+    type: inferSetType({
+      title,
+      eventKind: festival?.kind,
+      hintedType: seed.type,
+      playbackHost: "soundcloud",
+    }),
     genre: normalizeGenre(track.genre) ?? seed.genre,
     primaryArtist: withDescriptionSocials(primary, track.description),
     collaborators,

@@ -39,7 +39,12 @@ export function setMatchesTypeFilter(
 ): boolean {
   if (type === "all") return true;
   if (type === "festival") {
-    return s.type === "festival" || s.venueTier === "festival";
+    return (
+      s.type === "festival" ||
+      s.type === "club" ||
+      s.venueTier === "festival" ||
+      s.venueTier === "club"
+    );
   }
   if (type === "radio") return s.type === "radio" || s.venueTier === "radio";
   return s.type === "mix" || s.type === "soundcloud";

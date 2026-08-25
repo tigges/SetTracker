@@ -21,6 +21,8 @@ describe("hearthis curated tracks", () => {
     );
     assert.equal(seed!.primaryArtist.slug, "robin-schulz");
     assert.equal(seed!.eventName, "Pacha Ibiza");
+    assert.equal(seed!.eventKind, "club");
+    assert.equal(seed!.type, "club");
     assert.equal(seed!.performedOn, "2026-06-06");
   });
 
