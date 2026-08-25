@@ -20,10 +20,42 @@ import { loadEnrichRunReport } from "@/lib/ingest/enrich/enrichRunReport";
 import { pageMeta } from "@/lib/site";
 import { clockSourceSlices } from "@/lib/statsHealth";
 import { getStatsHealth } from "@/lib/statsHealthData";
+import { estimateLlmSpend, formatLlmSpend } from "@/lib/ingest/discovery/llmCost";
+import {
+  queueFollowUpHint,
+  queueFollowUpLabel,
+  workbenchLaneFollowUp,
+  type QueueFollowUp,
+} from "@/lib/statsQueues";
 import {
   buildTracklistWorkbench,
   WORKBENCH_LANE_LABEL,
+  type WorkbenchLane,
 } from "@/lib/statsWorkbench";
+
+const LLM_QUEUE_ESTIMATE = estimateLlmSpend({
+  jobs: ["handles", "events", "quality"],
+  limit: 24,
+  providers: ["gemini"],
+});
+
+const FOLLOW_UP_PILL: Record<QueueFollowUp, string> = {
+  auto: "border-teal/40 bg-teal/10 text-teal",
+  operator: "border-amber/40 bg-amber/10 text-amber",
+  both: "border-line bg-bg2 text-muted",
+};
+
+const FOLLOW_UP_FOLD: Record<QueueFollowUp, string> = {
+  auto: "border-l-teal",
+  operator: "border-l-amber",
+  both: "border-l-muted2",
+};
+
+function lanePillClass(lane: WorkbenchLane): string {
+  return workbenchLaneFollowUp(lane) === "operator"
+    ? FOLLOW_UP_PILL.operator
+    : FOLLOW_UP_PILL.auto;
+}
 
 export const metadata: Metadata = pageMeta({
   title: "Stats",
@@ -58,22 +90,32 @@ function QueueFold({
   count,
   hint,
   open,
+  followUp,
   children,
 }: {
   title: string;
   count: number;
   hint: string;
   open?: boolean;
+  followUp: QueueFollowUp;
   children: ReactNode;
 }) {
   return (
     <details
       open={open}
-      className="mb-2 rounded-lg border border-line bg-panel px-2.5 py-1.5"
+      className={`mb-2 rounded-lg border border-line border-l-[3px] bg-panel px-2.5 py-1.5 ${FOLLOW_UP_FOLD[followUp]}`}
     >
       <summary className="cursor-pointer list-none [&::-webkit-details-marker]:hidden">
         <div className="flex items-baseline justify-between gap-3">
-          <h2 className="text-[14px] font-bold tracking-tight">{title}</h2>
+          <div className="flex min-w-0 flex-wrap items-baseline gap-2">
+            <h2 className="text-[14px] font-bold tracking-tight">{title}</h2>
+            <span
+              className={`inline-block rounded-full border px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.08em] ${FOLLOW_UP_PILL[followUp]}`}
+              title={queueFollowUpHint(followUp)}
+            >
+              {queueFollowUpLabel(followUp)}
+            </span>
+          </div>
           <span className="mono text-[11px] text-muted2">
             {count.toLocaleString()}
           </span>
@@ -332,12 +374,45 @@ export default async function StatsPage() {
       <p className="mb-2 mt-5 text-[12px] font-semibold uppercase tracking-[0.14em] text-muted">
         Queues
       </p>
+      <div className="mb-2 flex flex-wrap gap-x-3 gap-y-1 text-[11px] text-muted2">
+        <span>
+          <span
+            className={`mr-1 inline-block rounded-full border px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.08em] ${FOLLOW_UP_PILL.auto}`}
+          >
+            Automatic
+          </span>
+          jobs drain
+        </span>
+        <span>
+          <span
+            className={`mr-1 inline-block rounded-full border px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.08em] ${FOLLOW_UP_PILL.operator}`}
+          >
+            Operator
+          </span>
+          you link or paste
+        </span>
+        <span>
+          <span
+            className={`mr-1 inline-block rounded-full border px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.08em] ${FOLLOW_UP_PILL.both}`}
+          >
+            Automatic + operator
+          </span>
+          jobs first, leftovers on you
+        </span>
+      </div>
+      <p className="mb-3 text-[11px] leading-snug text-muted2">
+        LLM calls need a confirm (this page cannot run the model). Catalog
+        LLM research: check Accept spend. Local: type yes or{" "}
+        <span className="mono">LLM_RESEARCH_CONFIRM=1</span>.{" "}
+        {formatLlmSpend(LLM_QUEUE_ESTIMATE)}.
+      </p>
 
       <div id="workbench" className="scroll-mt-20">
         <QueueFold
           title="Tracklist workbench"
           count={workbench.length}
-          hint="First-party text, then ACR, then IDs. Capture 1001 is last and optional — do not invent a URL."
+          hint="First-party text, then ACR, then IDs (automatic). Capture 1001 is last and operator-only — do not invent a URL."
+          followUp="both"
           open
         >
           {workbench.length === 0 ? (
@@ -347,7 +422,9 @@ export default async function StatsPage() {
               {workbench.map((row) => (
                 <li key={`${row.lane}-${row.slug}`} className="py-1">
                   <div className="flex items-baseline gap-2">
-                    <span className="mono flex-none rounded-full border border-line px-1.5 py-0.5 text-[10px] uppercase tracking-[0.08em] text-muted2">
+                    <span
+                      className={`mono flex-none rounded-full border px-1.5 py-0.5 text-[10px] uppercase tracking-[0.08em] ${lanePillClass(row.lane)}`}
+                    >
                       {WORKBENCH_LANE_LABEL[row.lane]}
                     </span>
                     {row.href ? (
@@ -378,6 +455,7 @@ export default async function StatsPage() {
           title="Leftover hosts"
           count={health.playbook.leftoverHosts.length}
           hint="Set / film / event titles stored as DJs. Relink the sets, then drop the row. Not LLM handle work."
+          followUp="operator"
         >
           <LeftoverHostQueue rows={health.playbook.leftoverHosts} />
         </QueueFold>
@@ -387,6 +465,7 @@ export default async function StatsPage() {
           title="Weak chart websites"
           count={health.playbook.weakSites.length}
           hint="Official www only. DJ Mag, 6am, Wikipedia, RA, Techno Music World, DICE, and Shotgun are not the homepage. RA / TMW are tour or bio seeds — do not pin them as www."
+          followUp="both"
         >
           <WeakSiteQueue rows={health.playbook.weakSites} />
         </QueueFold>
@@ -395,7 +474,8 @@ export default async function StatsPage() {
         <QueueFold
           title="Pin handles"
           count={s.djs.missingHandleWithSets.length}
-          hint="DJs with a set and no social/web handle. ★ current Top 100 first. Junk omitted."
+          hint={`DJs with a set and no social/web handle. ★ current Top 100 first. Junk omitted. LLM needs a confirm — ${formatLlmSpend(LLM_QUEUE_ESTIMATE)}.`}
+          followUp="auto"
         >
           <DjQueue
             rows={[...s.djs.missingHandleWithSets].sort(
@@ -409,6 +489,7 @@ export default async function StatsPage() {
           title="Fill artwork"
           count={s.djs.noThumbWithSets.length}
           hint="DJs with a set and no image. ★ current Top 100 first."
+          followUp="auto"
         >
           <DjQueue
             rows={[...s.djs.noThumbWithSets].sort(
@@ -422,6 +503,7 @@ export default async function StatsPage() {
           title="Festivals without a set"
           count={health.festivals.gaps.length}
           hint="Link an official set. ★ current Top 100 first."
+          followUp="operator"
         >
           <PlaceGapQueue rows={health.festivals.gaps} />
         </QueueFold>
@@ -431,6 +513,7 @@ export default async function StatsPage() {
           title="Clubs without a set"
           count={health.clubs.gaps.length}
           hint="Link an official set. ★ current Top 100 first."
+          followUp="operator"
         >
           <PlaceGapQueue rows={health.clubs.gaps} />
         </QueueFold>
@@ -440,6 +523,7 @@ export default async function StatsPage() {
           title="Fill thin lists"
           count={s.tracklistGaps.length}
           hint="Also ranked in Tracklist workbench. This-year / last-year chart sets with a thin list. Do not invent 1001 URLs."
+          followUp="auto"
         >
           <ul className="divide-y divide-line border-y border-line">
             {s.tracklistGaps.slice(0, PREVIEW).map((row) => (
@@ -481,6 +565,7 @@ export default async function StatsPage() {
           title="ID cues"
           count={s.sets.needsIds}
           hint="Also ranked in Tracklist workbench. Lowest identified share first."
+          followUp="auto"
         >
           <ul className="divide-y divide-line border-y border-line">
             {s.needsIdsSets.slice(0, PREVIEW).map((row) => (
@@ -510,6 +595,7 @@ export default async function StatsPage() {
           title="Capture 1001"
           count={captureQueue.presets.length}
           hint="Last resort. Optional community overlay on sets that already have official playback. First-party text + ACR fill clocks without 1001. Do not invent 1001 URLs."
+          followUp="operator"
         >
           <Suspense fallback={null}>
             <Capture1001Client

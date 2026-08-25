@@ -249,8 +249,10 @@ tutorials are dropped. They are never created as DJs on the next ingest.
 propose official SC/YT/IG/X/websites for DJs that already have sets but no
 handle. Junk names are skipped. Proposals are **never written raw** — the URL must be a profile, the
 handle must overlap the DJ name, it must be live, and it must not belong to
-another catalog DJ. Missing keys → safe no-op. Runs on catalog-deep and
-weekly enrich `full`. Reports: `data/crosscheck/llm-handle-research.json`.
+another catalog DJ. Missing keys → safe no-op. **Confirm spend** before a
+model call (`LLM_RESEARCH_CONFIRM=1`, TTY `yes`, or Catalog LLM research
+**Accept spend**). Deep / enrich print the estimate and skip the model
+unless confirmed. Reports: `data/crosscheck/llm-handle-research.json`.
 Cue research (`LLM_RESEARCH_JOBS=cues`) re-parses first-party YT/SC/hearthis
 on empty/stub lists (live YT/hearthis first; radio without clocks is
 skipped). Parser clocks always write (no key needed). `LLM_RESEARCH_APPLY=0`

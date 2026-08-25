@@ -25,6 +25,7 @@ import {
   websiteHost,
   websiteHostMatchesDj,
 } from "./wikidataOfficial";
+import { llmSpendConfirmed } from "./llmCost";
 import {
   djMayClaimSocialUrl,
   eventMayClaimSocialUrl,
@@ -210,6 +211,11 @@ export async function complete(
   provider: LlmProvider,
   prompt: string,
 ): Promise<string> {
+  if (!llmSpendConfirmed()) {
+    throw new Error(
+      "LLM call blocked — confirm spend (LLM_RESEARCH_CONFIRM=1) before the model is called",
+    );
+  }
   return provider === "claude" ? callClaude(prompt) : callGemini(prompt);
 }
 

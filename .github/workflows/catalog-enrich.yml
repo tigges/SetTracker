@@ -264,6 +264,8 @@ jobs:
         run: npm run research:track-ids
         continue-on-error: true
 
+      # Prints a spend estimate; skips the model unless LLM_RESEARCH_CONFIRM=1.
+      # Overnight stays estimate-only. Use Catalog LLM research + Accept spend.
       - name: LLM handle + track research
         if: steps.mode.outputs.do_thumbs == '1'
         timeout-minutes: 12
@@ -278,7 +280,7 @@ jobs:
         continue-on-error: true
 
       # Parser clocks always write. LLM extras stay report-only unless
-      # LLM_RESEARCH_APPLY=1 after review. Never interpolates.
+      # LLM_RESEARCH_APPLY=1 and spend is confirmed. Never interpolates.
       - name: Cue research (parser apply; LLM extras dry-run)
         if: steps.mode.outputs.do_thumbs == '1'
         timeout-minutes: 12

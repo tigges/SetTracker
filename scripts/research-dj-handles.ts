@@ -7,6 +7,7 @@
  *   LLM_RESEARCH_JOBS=cues npm run research:handles
  *   LLM_RESEARCH_JOBS=all npm run research:handles
  *   LLM_RESEARCH_APPLY=0 npm run research:handles   # parser clocks write; LLM extras report-only
+ *   LLM_RESEARCH_CONFIRM=1 npm run research:handles # accept spend (or type yes on a TTY)
  *   LLM_QUALITY=1 npm run research:handles          # extra model commentary
  *   LLM_RESEARCH_PROVIDER=gemini|claude|both
  *
@@ -14,6 +15,8 @@
  * grounding — then Claude on whoever is still handle-less).
  */
 import { PrismaClient } from "@prisma/client";
+import { confirmLlmSpend } from "../src/lib/ingest/discovery/llmConfirm";
+import { estimateLlmSpend } from "../src/lib/ingest/discovery/llmCost";
 import {
   parseResearchJobs,
   runLlmHomeCityResearch,
@@ -55,6 +58,29 @@ async function main() {
     console.log(
       "[llm-research] skipped (set GEMINI_API_KEY and/or CLAUDE_API_KEY / CLAUDE_AGENT_API / ANTHROPIC_API_KEY)",
     );
+  }
+  const limit = Math.max(1, Number(process.env.LLM_RESEARCH_LIMIT || 12));
+  const estimate = estimateLlmSpend({
+    jobs,
+    limit,
+    providers: providers.length ? providers : ["gemini"],
+  });
+  const spendOk =
+    providers.length > 0 ? await confirmLlmSpend(estimate) : false;
+  if (!spendOk && providers.length) {
+    process.env.LLM_RESEARCH_APPLY = "0";
+    if (jobs.includes("cues")) {
+      console.log("[llm-research] running cue parser only (no model extras)");
+      const cues = await runLlmCueResearch(prisma, {
+        reportTag: process.env.LLM_RESEARCH_TAG || undefined,
+      });
+      console.log("Done:", { jobs, cues: { provider: null, research: cues } });
+      await prisma.$disconnect();
+      return;
+    }
+    console.log("Done:", { jobs, skippedModel: true, estimate: estimate.summary });
+    await prisma.$disconnect();
+    return;
   }
   const tag = process.env.LLM_RESEARCH_TAG || undefined;
   const done: Record<string, unknown> = { jobs };

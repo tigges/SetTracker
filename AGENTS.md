@@ -166,9 +166,12 @@ unless asked. Never write Relive for HARD / Insomniac / Nameless / Ultra.
   preferred when present (Search grounding). Propose official socials for DJs
   that have sets but no handle. **Verify-then-write:** live profile URL +
   handle matches the DJ name + not owned by another Dj. Never invents `@slug`
-  guesses. No-op without keys on deep/enrich; dedicated workflow fails if
-  both keys are missing. Trigger on main by bumping `data/llm-request`.
-  Reports in `data/crosscheck/llm-handle-research.json`.
+  guesses. **Confirm spend** before a model call (`LLM_RESEARCH_CONFIRM=1`,
+  TTY `yes`, or Catalog LLM research **Accept spend**). Deep / enrich and
+  `data/llm-request` print the estimate and skip the model unless confirmed.
+  Cue parser still writes clocks. `/stats` cannot dispatch LLM. No-op
+  without keys on deep/enrich; dedicated workflow fails if both keys are
+  missing. Reports in `data/crosscheck/llm-handle-research.json`.
   **Cue job** (`LLM_RESEARCH_JOBS=cues` or `all`): re-parse first-party
   YT/SC/hearthis on empty/stub lists. Queue ranks live YT/hearthis ahead of
   weekly radio; radio without clocks does not consume the limit. Parser
