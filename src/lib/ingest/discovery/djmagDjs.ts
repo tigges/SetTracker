@@ -17,6 +17,12 @@ import { ARTIST_ROSTER } from "../roster";
 import { slugify } from "../types";
 import { loadCandidates, saveCandidates, upsertCandidate } from "./store";
 import {
+  officialSiteMissClear,
+  officialSiteMissIsFresh,
+  officialSiteMissRecord,
+  persistOfficialSiteMissCache,
+} from "./officialSiteMiss";
+import {
   normalizeOfficialWebsite,
   resolveWikidataOfficialWebsite,
 } from "./wikidataOfficial";
@@ -261,9 +267,15 @@ export async function enrichDjMagDjWebsites(opts?: {
 
     const curated = curatedWebsiteFor(row.name, row.slug);
     if (curated) {
+      officialSiteMissClear("dj", row.slug);
       row.website = curated;
       found += 1;
       console.log(`[djmag-djs] ${row.slug} → ${curated} (curated)`);
+      continue;
+    }
+
+    if (officialSiteMissIsFresh("dj", row.slug)) {
+      console.log(`[djmag-djs] skip site ${row.slug} (recent miss)`);
       continue;
     }
 
@@ -271,12 +283,14 @@ export async function enrichDjMagDjWebsites(opts?: {
       delayMs: Math.min(delay, 150),
     });
     if (!website) {
+      officialSiteMissRecord("dj", row.slug, "wikidata");
       console.log(
         `[djmag-djs] no site ${row.slug}` +
           (row.homeCity ? ` (from=${row.homeCity})` : ""),
       );
       continue;
     }
+    officialSiteMissClear("dj", row.slug);
     row.website = website;
     found += 1;
     console.log(`[djmag-djs] ${row.slug} → ${website}`);
@@ -316,6 +330,7 @@ export async function enrichDjMagDjWebsites(opts?: {
     );
     console.log(`[djmag-djs] wrote seed (${found} with websites)`);
   }
+  persistOfficialSiteMissCache();
   return { fetched, found, djs };
 }
 

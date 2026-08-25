@@ -48,11 +48,17 @@ import {
 import { ensureCuratedLabels } from "./curatedLabels";
 import { ensureVenueCalendarNights } from "./discovery/venueCalendars";
 import { rematchCatalogSetTypes } from "./rematchSetTypes";
+import {
+  cachedUrlProbe,
+  persistUrlProbeCache,
+  recordUrlProbe,
+} from "./urlProbeCache";
 
 export type VerifyStats = {
   checked: number;
   cleared: number;
   kept: number;
+  skipped: number;
 };
 
 const TIMEOUT_MS = 8_000;
@@ -104,8 +110,15 @@ async function scrubField(
   stats: VerifyStats,
 ): Promise<void> {
   if (!url) return;
+  const cached = cachedUrlProbe(url);
+  if (cached === "ok" || cached === "soft") {
+    stats.skipped += 1;
+    stats.kept += 1;
+    return;
+  }
   stats.checked += 1;
   const result = await probe(url);
+  recordUrlProbe(url, result);
   if (result === "dead") {
     stats.cleared += 1;
     if (kind === "dj") {
@@ -511,7 +524,7 @@ export async function applyKnownUrlFixes(prisma: PrismaClient): Promise<number> 
 export async function verifyStoredSocialUrls(
   prisma: PrismaClient,
 ): Promise<VerifyStats> {
-  const stats: VerifyStats = { checked: 0, cleared: 0, kept: 0 };
+  const stats: VerifyStats = { checked: 0, cleared: 0, kept: 0, skipped: 0 };
   const fixes = await applyKnownUrlFixes(prisma);
   if (fixes) console.log(`[verify-urls] applied ${fixes} curated entity fixes`);
 
@@ -568,8 +581,9 @@ export async function verifyStoredSocialUrls(
     await scrubField(prisma, "event", e.id, "website", e.website, stats);
   }
 
+  persistUrlProbeCache();
   console.log(
-    `[verify-urls] checked=${stats.checked} kept=${stats.kept} cleared=${stats.cleared}`,
+    `[verify-urls] checked=${stats.checked} skipped=${stats.skipped} kept=${stats.kept} cleared=${stats.cleared}`,
   );
   return stats;
 }

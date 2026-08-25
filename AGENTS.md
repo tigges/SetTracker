@@ -140,7 +140,12 @@ unless asked. Never write Relive for HARD / Insomniac / Nameless / Ultra.
   Pages: **push = no crawl** unless curated catalog sources changed
   (`soundcloud/`, `youtube/`, `tracklists1001/`, roster, …). Default path:
   restore cached `prisma/dev.db` → `verify-urls` (pins/remaps) → static
-  export → deploy (~minutes). New SC/YT roster seeds on the same push still
+  export → deploy (~minutes). Deep verify skips a Wikidata official-site
+  lookup for 21 days after a miss (`data/crosscheck/official-site-miss.json`;
+  `DJMAG_ENRICH_FORCE=1` recrawls) and HEADs a stored social/www only when
+  the URL is new or last-ok is older than 30 days
+  (`data/crosscheck/url-probe.json`; `VERIFY_URLS_FORCE=1` re-probes).
+  Both files ride the Actions discovery cache — not committed. New SC/YT roster seeds on the same push still
   run the light curated ingest (existing catalog slugs are not re-watched).
   1001 clocks overlay in verify-urls (no poll).
   `catalog-deep` / enrich **dispatch** this

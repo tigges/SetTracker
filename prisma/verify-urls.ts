@@ -11,7 +11,7 @@ const curatedOnly = process.env.VERIFY_URLS_CURATED_ONLY === "1";
 (curatedOnly
   ? applyKnownUrlFixes(prisma).then((n) => {
       console.log(`[verify-urls] curated fixes: ${n}`);
-      return { checked: 0, cleared: 0, kept: 0 };
+      return { checked: 0, cleared: 0, kept: 0, skipped: 0 };
     })
   : verifyStoredSocialUrls(prisma)
 )
