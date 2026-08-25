@@ -171,12 +171,21 @@ unless asked. Never write Relive for HARD / Insomniac / Nameless / Ultra.
   preferred when present (Search grounding). Propose official socials for DJs
   that have sets but no handle. **Verify-then-write:** live profile URL +
   handle matches the DJ name + not owned by another Dj. Never invents `@slug`
-  guesses. **Confirm spend** before a model call (`LLM_RESEARCH_CONFIRM=1`,
-  TTY `yes`, or Catalog LLM research **Accept spend**). Deep / enrich and
-  `data/llm-request` print the estimate and skip the model unless confirmed.
-  Cue parser still writes clocks. `/stats` cannot dispatch LLM. No-op
-  without keys on deep/enrich; dedicated workflow fails if both keys are
-  missing. Reports in `data/crosscheck/llm-handle-research.json`.
+  guesses. **Disclose, then confirm — no exceptions.** `complete()` is the
+  only model path and throws unless (1) `announceLlmPlan()` has printed what
+  each job researches, what is sent, what may be written, and the USD range,
+  and (2) spend is confirmed (`LLM_RESEARCH_CONFIRM=1`, TTY `yes`, or Catalog
+  LLM research **Accept spend**). Job wording lives in `LLM_JOB_DISCLOSURE`
+  (`llmPlan.ts`) — update it when a job's prompt or writes change; a test
+  fails if a job has no disclosure. `npm run research:plan` prints the plan
+  and sends nothing. **Deep / enrich never call a model** — they run
+  `research:plan` plus the parser-only cue step (`LLM_RESEARCH=0`, no keys
+  passed). Bumping `data/llm-request` only produces the plan. Spend lives in
+  `catalog-llm-research.yml`: a `plan` job prints the disclosure (also on the
+  run summary), then the `spend` job needs **Accept spend** *and* the
+  `llm-spend` environment approval (add a required reviewer in Settings →
+  Environments). `/stats` cannot dispatch LLM. Reports in
+  `data/crosscheck/llm-handle-research.json`.
   **Cue job** (`LLM_RESEARCH_JOBS=cues` or `all`): re-parse first-party
   YT/SC/hearthis on empty/stub lists. Queue ranks live YT/hearthis ahead of
   weekly radio; radio without clocks does not consume the limit. Parser

@@ -196,27 +196,14 @@ jobs:
           npm run catalog-yt-socials || true
           npm run catalog-sc-socials || true
 
-      # Prints a spend estimate; skips the model unless LLM_RESEARCH_CONFIRM=1.
-      # Overnight stays estimate-only. Use Catalog LLM research + Accept spend.
-      # No-op when CLAUDE_AGENT_API / GEMINI_API_KEY are unset.
-      - name: LLM handle research
+      # No LLM here. Model spend only happens in Catalog LLM research, where
+      # the plan and cost are disclosed and a reviewer approves first.
+      # This prints what handle research would cover and sends nothing.
+      - name: LLM research plan (sends nothing)
         env:
-          CLAUDE_AGENT_API: ${{ secrets.CLAUDE_AGENT_API }}
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY || secrets.GEMINI_AGENT_API || secrets.GEMINI || secrets.GOOGLE_API_KEY }}
           LLM_RESEARCH_LIMIT: "16"
-          LLM_QUALITY: "1"
-        run: npm run research:handles
+        run: npm run research:plan
         continue-on-error: true
-
-      - name: Upload LLM research report
-        uses: actions/upload-artifact@v4
-        with:
-          name: llm-research
-          path: |
-            data/crosscheck/llm-handle-research.json
-            data/crosscheck/llm-quality-check.json
-          if-no-files-found: warn
 
       - name: Save catalog DB
         uses: actions/cache/save@v4

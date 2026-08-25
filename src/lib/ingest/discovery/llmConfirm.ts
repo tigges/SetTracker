@@ -1,30 +1,53 @@
 /**
- * Gate model calls. Parser clocks still write without this.
+ * Disclose, then ask. Model calls stay blocked until both happen.
  *
- * Confirm with LLM_RESEARCH_CONFIRM=1, an interactive yes, or the
- * Catalog LLM research workflow checkbox. Deep/enrich skip the model
- * when unconfirmed and print the estimate.
+ * The plan (what is researched, what is sent, what is written, cost range)
+ * is always printed first — on a laptop and in Actions. Confirm with
+ * LLM_RESEARCH_CONFIRM=1, an interactive yes, or the Catalog LLM research
+ * "Accept spend" checkbox. Unconfirmed runs print the plan and stop.
+ * Parser-only cue clocks never need this.
  */
 
+import { appendFileSync } from "node:fs";
 import * as readline from "node:readline/promises";
 import { stdin as input, stdout as output } from "node:process";
+import { formatUsdRange, llmSpendConfirmed } from "./llmCost";
 import {
-  formatLlmSpend,
-  llmSpendConfirmed,
-  type LlmSpendEstimate,
-} from "./llmCost";
+  announceLlmPlan,
+  formatLlmPlanMarkdown,
+  type LlmPlan,
+} from "./llmPlan";
 
+/** Mirror the disclosure onto the GitHub run summary. */
+function writeJobSummary(plan: LlmPlan, env: NodeJS.ProcessEnv): void {
+  const path = env.GITHUB_STEP_SUMMARY;
+  if (!path) return;
+  try {
+    appendFileSync(path, `${formatLlmPlanMarkdown(plan)}\n\n`, "utf8");
+  } catch {
+    // Summary is a convenience — never fail a run over it.
+  }
+}
+
+/**
+ * Print the plan, then decide whether the model may be called.
+ * Always call this before running jobs; it is what unlocks `complete()`.
+ */
 export async function confirmLlmSpend(
-  estimate: LlmSpendEstimate,
-  env: Record<string, string | undefined> = process.env,
+  plan: LlmPlan,
+  env: NodeJS.ProcessEnv = process.env,
 ): Promise<boolean> {
-  console.log(`[llm-research] spend estimate: ${formatLlmSpend(estimate)}`);
+  announceLlmPlan(plan);
+  writeJobSummary(plan, env);
+
   if ((env.LLM_RESEARCH || "").trim() === "0") {
-    console.log("[llm-research] skipped (LLM_RESEARCH=0)");
+    console.log("[llm-research] no model calls (LLM_RESEARCH=0)");
     return false;
   }
   if (llmSpendConfirmed(env)) {
-    console.log("[llm-research] spend confirmed (LLM_RESEARCH_CONFIRM)");
+    console.log(
+      "[llm-research] spend confirmed (LLM_RESEARCH_CONFIRM) — proceeding with the plan above",
+    );
     return true;
   }
   if (input.isTTY && output.isTTY) {
@@ -32,7 +55,10 @@ export async function confirmLlmSpend(
     try {
       const answer = (
         await rl.question(
-          `Type yes to spend ${formatLlmSpend(estimate).split(" · ")[0]}: `,
+          `Send the ${plan.jobs.join(", ")} prompts above for ${formatUsdRange(
+            plan.estimate.usdLow,
+            plan.estimate.usdHigh,
+          )}? Type yes: `,
         )
       )
         .trim()
@@ -44,11 +70,11 @@ export async function confirmLlmSpend(
     } finally {
       rl.close();
     }
-    console.log("[llm-research] skipped (no confirmation)");
+    console.log("[llm-research] no model calls (not confirmed)");
     return false;
   }
   console.log(
-    "[llm-research] skipped model calls — set LLM_RESEARCH_CONFIRM=1 or check Accept spend on Catalog LLM research. Parser clocks still write.",
+    "[llm-research] no model calls — this run only printed the plan. To spend, run Actions → Catalog LLM research and check Accept spend (or set LLM_RESEARCH_CONFIRM=1 locally).",
   );
   return false;
 }

@@ -257,10 +257,18 @@ tutorials are dropped. They are never created as DJs on the next ingest.
 propose official SC/YT/IG/X/websites for DJs that already have sets but no
 handle. Junk names are skipped. Proposals are **never written raw** — the URL must be a profile, the
 handle must overlap the DJ name, it must be live, and it must not belong to
-another catalog DJ. Missing keys → safe no-op. **Confirm spend** before a
-model call (`LLM_RESEARCH_CONFIRM=1`, TTY `yes`, or Catalog LLM research
-**Accept spend**). Deep / enrich print the estimate and skip the model
-unless confirmed. Reports: `data/crosscheck/llm-handle-research.json`.
+another catalog DJ. Missing keys → safe no-op.
+
+**Nothing is sent to a model without a printed plan first.** Every run
+discloses, per job, what is researched, what catalog data goes in the prompt,
+what may be written back, and the estimated USD range — then asks. `complete()`
+throws if either the disclosure or the confirmation is missing, so a new call
+site cannot skip it. `npm run research:plan` prints the plan and sends nothing.
+Catalog deep and Catalog enrich never call a model: they print the plan and run
+the deterministic cue parser. Spend happens only in **Catalog LLM research**,
+which prints the plan in its own `plan` job and then waits for **Accept spend**
+plus `llm-spend` environment approval. Reports:
+`data/crosscheck/llm-handle-research.json`.
 Cue research (`LLM_RESEARCH_JOBS=cues`) re-parses first-party YT/SC/hearthis
 on empty/stub lists (live YT/hearthis first; radio without clocks is
 skipped). Parser clocks always write (no key needed). `LLM_RESEARCH_APPLY=0`

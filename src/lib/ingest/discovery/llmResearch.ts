@@ -26,6 +26,7 @@ import {
   websiteHostMatchesDj,
 } from "./wikidataOfficial";
 import { llmSpendConfirmed } from "./llmCost";
+import { llmPlanAnnounced } from "./llmPlan";
 import {
   djMayClaimSocialUrl,
   eventMayClaimSocialUrl,
@@ -207,10 +208,20 @@ async function callGemini(prompt: string): Promise<string> {
   );
 }
 
+/**
+ * The only path to a model. Two independent gates, both required:
+ *   1. the research plan (what is researched + cost) was printed, and
+ *   2. spend was confirmed.
+ */
 export async function complete(
   provider: LlmProvider,
   prompt: string,
 ): Promise<string> {
+  if (!llmPlanAnnounced()) {
+    throw new Error(
+      "LLM call blocked — announceLlmPlan() must disclose what is researched and the cost estimate before any model call",
+    );
+  }
   if (!llmSpendConfirmed()) {
     throw new Error(
       "LLM call blocked — confirm spend (LLM_RESEARCH_CONFIRM=1) before the model is called",
