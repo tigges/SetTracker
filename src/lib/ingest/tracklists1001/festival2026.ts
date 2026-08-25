@@ -139,6 +139,7 @@ import {
   TL_ROSE_RINGED_TML_WE1_FREEDOM_2026,
   TL_TIMMY_TRUMPET_TML_WE2_FREEDOM_2026,
 } from "./festivalCaptures20260824";
+import { TL_AGENTS_OF_TIME_TIME_WARP_FLOOR_1_2026 } from "./festivalCaptures20260825";
 
 export {
   TL_ALESSO_TML_WE2_2026,
@@ -258,6 +259,7 @@ export {
   TL_ERIC_PRYDZ_EPIC_RADIO_025_2026,
   TL_HONEY_DIJON_THE_LOOP_DEKMANTEL_NETHERLANDS_2025,
   TL_VINAI_S2O_SONGKRAN_THAILAND_2023,
+  TL_AGENTS_OF_TIME_TIME_WARP_FLOOR_1_2026,
 };
 
 function formatClock(sec: number): string {
@@ -4850,6 +4852,8 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "sc-eric-prydz-epic-radio-025": TL_ERIC_PRYDZ_EPIC_RADIO_025_2026,
   "yt-t5KwF_VsM50": TL_HONEY_DIJON_THE_LOOP_DEKMANTEL_NETHERLANDS_2025,
   "yt-193z2Yyb-4g": TL_VINAI_S2O_SONGKRAN_THAILAND_2023,
+  "sc-agents-of-time-agents-of-time-time-warp-full":
+    TL_AGENTS_OF_TIME_TIME_WARP_FLOOR_1_2026,
 };
 
 /** Sanity: every seeded clock must parse. */

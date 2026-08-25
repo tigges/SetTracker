@@ -188,6 +188,7 @@ import {
   TL_ERIC_PRYDZ_EPIC_RADIO_025_2026,
   TL_HONEY_DIJON_THE_LOOP_DEKMANTEL_NETHERLANDS_2025,
   TL_VINAI_S2O_SONGKRAN_THAILAND_2023,
+  TL_AGENTS_OF_TIME_TIME_WARP_FLOOR_1_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   isSecondaryPlaybackSlug,
@@ -3860,6 +3861,41 @@ for (let i = 1; i < vinaiS2o.length; i++) {
   assert.ok(
     (vinaiS2o[i]!.timestamp ?? 0) > (vinaiS2o[i - 1]!.timestamp ?? 0),
     `VINAI S2O Songkran clocks must increase at index ${i}`,
+  );
+}
+
+assertSeedClocks(TL_AGENTS_OF_TIME_TIME_WARP_FLOOR_1_2026);
+assert.equal(TL_AGENTS_OF_TIME_TIME_WARP_FLOOR_1_2026.length, 26);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-agents-of-time-agents-of-time-time-warp-full"],
+  TL_AGENTS_OF_TIME_TIME_WARP_FLOOR_1_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-https://soundcloud.com/agents-of-time/agents-of-time-time-warp-full"
+  ],
+  undefined,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-agents-of-time-time-warp-full"],
+  undefined,
+);
+assert.equal(isWiredTracklistSlug("sc-agents-of-time-agents-of-time-time-warp-full"), true);
+assert.equal(TL_AGENTS_OF_TIME_TIME_WARP_FLOOR_1_2026[0]?.title, "Signal");
+assert.equal(TL_AGENTS_OF_TIME_TIME_WARP_FLOOR_1_2026[25]?.title, "You + Me");
+const aotTimeWarp = tracklist1001RowsToPlays(
+  TL_AGENTS_OF_TIME_TIME_WARP_FLOOR_1_2026,
+);
+assert.equal(aotTimeWarp.length, 26);
+assert.equal(aotTimeWarp[0]?.provenance, "1001tl");
+assert.equal(aotTimeWarp[0]?.timestamp, 0);
+assert.equal(aotTimeWarp[0]?.artistName, "John Monkman");
+assert.equal(aotTimeWarp[25]?.timestamp, 1 * 3600 + 48 * 60 + 41);
+assert.equal(aotTimeWarp[25]?.artistName, "Agents Of Time & JONOS & Son Of Son");
+for (let i = 1; i < aotTimeWarp.length; i++) {
+  assert.ok(
+    (aotTimeWarp[i]!.timestamp ?? 0) > (aotTimeWarp[i - 1]!.timestamp ?? 0),
+    `Agents Of Time Time Warp clocks must increase at index ${i}`,
   );
 }
 

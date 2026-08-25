@@ -733,4 +733,18 @@ assert.equal(
   false,
 );
 
+const aotTimeWarpSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url ===
+    "https://soundcloud.com/agents-of-time/agents-of-time-time-warp-full",
+);
+assert.ok(aotTimeWarpSc);
+assert.equal(aotTimeWarpSc.primaryArtist.name, "Agents Of Time");
+assert.equal(aotTimeWarpSc.eventName, "Time Warp");
+assert.equal(aotTimeWarpSc.type, "festival");
+assert.equal(
+  `sc-agents-of-time-${slugify("agents-of-time-time-warp-full")}`,
+  "sc-agents-of-time-agents-of-time-time-warp-full",
+);
+
 console.log("soundcloud/tracks.test.ts ok");

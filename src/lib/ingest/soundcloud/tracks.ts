@@ -695,4 +695,18 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     type: "mix",
     minDurationSec: 45 * 60,
   },
+  {
+    // Official Agents Of Time Time Warp Floor 1 2026-03-21; 1001TL wired via
+    // sc-agents-of-time-agents-of-time-time-warp-full. Never wire sc-https://….
+    // No YouTube in the paste — do not invent a YT slug.
+    url: "https://soundcloud.com/agents-of-time/agents-of-time-time-warp-full",
+    primaryArtist: dj("Agents Of Time", {
+      accent: "#7c5cff",
+      homeCity: "Bari, Italy",
+    }),
+    genre: "Melodic House",
+    eventName: "Time Warp",
+    type: "festival",
+    minDurationSec: 60 * 60,
+  },
 ];
