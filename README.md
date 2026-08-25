@@ -61,10 +61,12 @@ Provenance per row: `1001TL parse`, `MixesDB`, `SoundCloud parse`, `fingerprint`
    chips are multi-select; pin tap selects (nearby stack listed); Hide ranks
    keeps the legend. Header search; empty pins link to `/stats?q=…#capture-1001`.
 6. **Stats** (`/stats`) — operator catalog health (incomplete sets, needs IDs,
-   DJ gaps, festival capture gaps). Queues show 10 rows, then **N more**.
-   Capture 1001 lives here (`#capture-1001`) after Fill thin lists / ID cues;
-   `/capture-1001` redirects in. Every Pages export rebuilds this page from
-   the current catalog DB. Footer link only; not in the main nav.
+   DJ gaps, festival capture gaps). Five queues: Tracklist workbench, DJ
+   complete, Places without a set, leftover hosts, weak chart websites.
+   Lists show 10 rows, then **N more**. Capture 1001 is nested in the
+   workbench (`#capture-1001`); `/capture-1001` redirects in. Every Pages
+   export rebuilds this page from the current catalog DB. Footer link only;
+   not in the main nav.
 7. **Search / About** — catalog search and product notes.
 8. **Tracks / Labels** — still in the catalog and sitemap; not in the main nav.
 
@@ -249,8 +251,10 @@ tutorials are dropped. They are never created as DJs on the next ingest.
 propose official SC/YT/IG/X/websites for DJs that already have sets but no
 handle. Junk names are skipped. Proposals are **never written raw** — the URL must be a profile, the
 handle must overlap the DJ name, it must be live, and it must not belong to
-another catalog DJ. Missing keys → safe no-op. Runs on catalog-deep and
-weekly enrich `full`. Reports: `data/crosscheck/llm-handle-research.json`.
+another catalog DJ. Missing keys → safe no-op. **Confirm spend** before a
+model call (`LLM_RESEARCH_CONFIRM=1`, TTY `yes`, or Catalog LLM research
+**Accept spend**). Deep / enrich print the estimate and skip the model
+unless confirmed. Reports: `data/crosscheck/llm-handle-research.json`.
 Cue research (`LLM_RESEARCH_JOBS=cues`) re-parses first-party YT/SC/hearthis
 on empty/stub lists (live YT/hearthis first; radio without clocks is
 skipped). Parser clocks always write (no key needed). `LLM_RESEARCH_APPLY=0`

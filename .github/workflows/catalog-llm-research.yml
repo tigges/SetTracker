@@ -2,7 +2,8 @@ name: Catalog LLM research
 
 # Claude / Gemini handle research against the cached catalog.
 # Preferred provider is Gemini when GEMINI_API_KEY (or an alias) is set.
-# Agents often lack workflow_dispatch; bump data/llm-request on main to start.
+# Model calls need Accept spend (or LLM_RESEARCH_CONFIRM=1).
+# Bump data/llm-request prints the estimate only — it does not spend.
 on:
   workflow_dispatch:
     inputs:
@@ -21,6 +22,10 @@ on:
         required: false
         default: "0"
         type: string
+      confirm_spend:
+        description: "Accept spend — Gemini ≈ $0.015–$0.045 / call, Claude ≈ $0.008–$0.025 / call. handles+events+quality cap 24 ≈ $0.77–$2.30 Gemini. Unchecked = print estimate only; cue parser still runs."
+        type: boolean
+        default: false
   push:
     branches: [main]
     paths:
@@ -103,6 +108,7 @@ jobs:
           LLM_RESEARCH_LIMIT: ${{ github.event.inputs.limit || '24' }}
           LLM_RESEARCH_JOBS: ${{ github.event.inputs.jobs || 'handles,events,quality' }}
           LLM_RESEARCH_APPLY: ${{ github.event.inputs.apply || '0' }}
+          LLM_RESEARCH_CONFIRM: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.confirm_spend == 'true' && '1' || '0' }}
           LLM_QUALITY: "1"
         run: npm run research:handles
 
