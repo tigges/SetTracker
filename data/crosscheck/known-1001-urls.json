@@ -483,6 +483,72 @@
       "soundcloudUrl": "https://soundcloud.com/tomorrowland/hardwell-presents-euphoria-june-2026",
       "youtubeUrl": "https://youtu.be/9aDj2qyAIBw",
       "note": "Operator paste 2026-08-26. 19 cues, observed clocks. Host twin: also wired as yt-9aDj2qyAIBw. Previous month's show; 019 is a separate seed."
+    },
+    {
+      "label": "AFROJACK & R3HAB · Mainstage, Tomorrowland WE2 2026-07-26",
+      "slug": "sc-r3hab-r3hab-b2b-afrojack",
+      "name": "TL_AFROJACK_R3HAB_TML_WE2_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/2s55dyj1/afrojack-r3hab-mainstage-tomorrowland-weekend-2-belgium-2026-07-26.html",
+      "soundcloudUrl": "https://soundcloud.com/r3hab/r3hab-b2b-afrojack",
+      "youtubeUrl": "https://youtu.be/AjQeohYmg3A",
+      "note": "Operator paste 2026-08-26 added the R3HAB SoundCloud row. Same performance and same 1001 tracklist as the existing seed (captured 2026-08-16, recaptured 08-23), already wired to yt-AjQeohYmg3A (@tomorrowland) and yt-lEIGnx7qLl0 (R3HAB). 54 cues; all three slugs share one seed."
+    },
+    {
+      "label": "Hardwell & Sub Zero Project · The Great Library, Tomorrowland WE1 2026-07-17",
+      "slug": "yt-5EsSxcR5ges",
+      "name": "TL_HARDWELL_SUB_ZERO_TML_WE1_GREAT_LIBRARY_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/1w71wl0t/hardwell-sub-zero-project-the-great-library-stage-tomorrowland-weekend-1-belgium-2026-07-17.html",
+      "youtubeUrl": "https://youtu.be/5EsSxcR5ges",
+      "note": "Operator paste 2026-08-26. 45 cues, observed clocks. TWO official uploads of the same set, both verified via oEmbed and both wired: yt-5EsSxcR5ges (@tomorrowland) and yt-PCKfswh4ZBA (@hardwell). No SoundCloud known."
+    },
+    {
+      "label": "Lost Frequencies · Mainstage, Tomorrowland WE2 2026-07-26",
+      "slug": "yt-KLyeLMJuIOY",
+      "name": "TL_LOST_FREQUENCIES_TML_WE2_MAINSTAGE_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/9xst011/lost-frequencies-mainstage-tomorrowland-weekend-2-belgium-2026-07-26.html",
+      "youtubeUrl": "https://youtu.be/KLyeLMJuIOY",
+      "note": "Operator paste 2026-08-26. 22 cues, observed clocks. 'The Feeling' twice - Deluxe Mix 2.0 at 41:45, original at 45:10."
+    },
+    {
+      "label": "Space 92 · Freedom Stage, Tomorrowland WE1 2026-07-18",
+      "slug": "sc-space92-space-92-tomorrowland-2026",
+      "name": "TL_SPACE_92_TML_WE1_FREEDOM_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/1x4vfuuk/space-92-freedom-stage-tomorrowland-weekend-1-belgium-2026-07-18.html",
+      "soundcloudUrl": "https://soundcloud.com/space92/space-92-tomorrowland-2026",
+      "youtubeUrl": "https://youtu.be/3k66DQuU31A",
+      "note": "Operator paste 2026-08-26. 29 cues, observed clocks, list starts at 2:41. Both hosts verified official: artist SC (200) and @tomorrowland YT (oEmbed). Also wired as yt-3k66DQuU31A."
+    },
+    {
+      "label": "Max Styler · Lollapalooza Afters, Radius Chicago 2026-08-01",
+      "slug": "sc-maxstyler-lollaafters26",
+      "name": "TL_MAX_STYLER_LOLLA_AFTERS_RADIUS_CHICAGO_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/2gv88zkt/max-styler-lollapalooza-afters-radius-chicago-united-states-2026-08-01.html",
+      "soundcloudUrl": "https://soundcloud.com/maxstyler/lollaafters26",
+      "note": "Operator paste 2026-08-26. 30 cues over ~2h51m, observed clocks, starts at 12:12. Club after-party, not a festival stage - first non-Tomorrowland capture of this batch. No YouTube upload given."
+    },
+    {
+      "label": "YOTTO · Odd World July 2026-07-12 (Tomorrowland One World Radio)",
+      "slug": "sc-tomorrowland-yottos-odd-world-july-2026",
+      "name": "TL_YOTTO_ODD_WORLD_JULY_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/28bjrj2t/yotto-odd-world-july-2026-07-12.html",
+      "soundcloudUrl": "https://soundcloud.com/tomorrowland/yottos-odd-world-july-2026",
+      "note": "Operator paste 2026-08-26. 14 cues, observed clocks. SoundCloud only: the pasted yt-RKAigBy-4PI is 'YOTTO - Odd One Out Radio - Ep. 097' on the artist's own channel (oEmbed), a different series from this Tomorrowland Odd World show - left unwired until the audio is confirmed to match. Bart Skils & Weska -> Booka Shade are 1s apart at 54:41; kept as captured."
+    },
+    {
+      "label": "Kevin de Vries · Mainstage, Tomorrowland WE1 2026-07-19",
+      "slug": "yt-jAZiK2WJuhk",
+      "name": "TL_KEVIN_DE_VRIES_TML_WE1_MAINSTAGE_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/xhlqtrt/kevin-de-vries-mainstage-tomorrowland-weekend-1-belgium-2026-07-19.html",
+      "youtubeUrl": "https://youtu.be/jAZiK2WJuhk",
+      "note": "Operator paste 2026-08-26. 23 cues, observed clocks. oEmbed confirms @tomorrowland 'Kevin de Vries WE1 | Tomorrowland 2026'. Distinct from his Street Parade 2025 seed. Two different tracks named 'Payback' (Cassian 1:09:39, Dimitri Vangelis & Wyman X Steve Angello 1:11:56) - both kept, artist is part of the collapse key."
+    },
+    {
+      "label": "Camila Jun · Crystal Garden, Tomorrowland WE1 2026-07-17",
+      "slug": "yt-8Oq0TMeaY4I",
+      "name": "TL_CAMILA_JUN_TML_WE1_CRYSTAL_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/yfd51vt/camila-jun-crystal-garden-stage-tomorrowland-weekend-1-belgium-2026-07-17.html",
+      "youtubeUrl": "https://youtu.be/8Oq0TMeaY4I",
+      "note": "Operator paste 2026-08-26. 17 cues. CLOCKS APPROXIMATE - all 16 gaps are exactly 3:29 (209s) from a 0:20 start, i.e. evenlySpaceRows output; 1001 had the order but no cue times. oEmbed confirms @tomorrowland 'Camila Jun WE1 | Tomorrowland 2026'."
     }
   ],
   "stillMissing1001": [

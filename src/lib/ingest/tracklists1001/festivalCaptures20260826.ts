@@ -62,6 +62,734 @@ export const TL_HARDWELL_EUPHORIA_019_2026: FingerprintSeedRow[] = [
 ];
 
 /**
+ * Camila Jun @ Crystal Garden Stage, Tomorrowland Weekend 1, Belgium
+ * 2026-07-17
+ * Official YouTube (oEmbed: @tomorrowland "Camila Jun WE1 | Tomorrowland
+ * 2026"): https://youtu.be/8Oq0TMeaY4I
+ * https://www.1001tracklists.com/tracklist/yfd51vt/camila-jun-crystal-garden-stage-tomorrowland-weekend-1-belgium-2026-07-17.html
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-8Oq0TMeaY4I"]
+ * No SoundCloud permalink in the operator paste — do not invent one.
+ *
+ * CLOCKS ARE APPROXIMATE. All 16 gaps are exactly 3:29 (209s) from a 0:20
+ * start — `evenlySpaceRows` output, so 1001 had the track order but no cue
+ * times (implied duration ~59.5m). Order is real; every position is a rough
+ * marker. Replace if the set is ever cued properly.
+ * Captured 2026-08-26 — provenance 1001tl.
+ */
+export const TL_CAMILA_JUN_TML_WE1_CRYSTAL_2026: FingerprintSeedRow[] = [
+  { at: "0:20", artist: "Doechii", title: "NISSAN ALTIMA" },
+  { at: "3:49", artist: "Camila Jun", title: "Latina" },
+  { at: "7:18", artist: "Nolek", title: "The Night Is Yours" },
+  {
+    at: "10:47",
+    artist: "Miguel Bastida",
+    title: "The Music Don't Stop",
+  },
+  {
+    at: "14:16",
+    artist: "Amedeo Picone & ABOUTME",
+    title: "Sunny Grooves",
+  },
+  { at: "17:45", artist: "Pave & Yvvan Back", title: "Lo Pasa" },
+  { at: "21:14", artist: "Camila Jun", title: "Dance" },
+  { at: "24:43", artist: "Groove Killah", title: "Bumbum" },
+  {
+    at: "28:12",
+    artist: "Max Dean & Luke Dean",
+    title: "Gets Like That (Jamie Jones Remix)",
+  },
+  {
+    at: "31:41",
+    artist: "Armand van Helden",
+    title: "The Funk Phenomena",
+  },
+  { at: "35:10", artist: "Mark Knight", title: "Second Story" },
+  { at: "38:39", artist: "KENZ & ESSE", title: "Godzilla" },
+  { at: "42:08", artist: "Tony Dark Eyes", title: "Mofo" },
+  {
+    at: "45:37",
+    artist: "Frankie Knuckles pres. Marshall Jefferson",
+    title: "Move Your Body",
+  },
+  { at: "49:06", artist: "Camila Jun", title: "Carnival Fever" },
+  {
+    at: "52:35",
+    artist: "Illyus Barrientos & MALU",
+    title: "Right Here",
+  },
+  {
+    at: "56:04",
+    artist: "Gadjo",
+    title: "I'm Watching You (So Many Times)",
+  },
+];
+
+/**
+ * Kevin de Vries @ Mainstage, Tomorrowland Weekend 1, Belgium 2026-07-19
+ * Official YouTube (oEmbed: @tomorrowland "Kevin de Vries WE1 | Tomorrowland
+ * 2026"): https://youtu.be/jAZiK2WJuhk
+ * https://www.1001tracklists.com/tracklist/xhlqtrt/kevin-de-vries-mainstage-tomorrowland-weekend-1-belgium-2026-07-19.html
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-jAZiK2WJuhk"]
+ * No SoundCloud permalink in the operator paste — do not invent one.
+ * Distinct from TL_KEVIN_DE_VRIES_STREET_PARADE_2025, his only other seed.
+ *
+ * Observed clocks (gaps 136s–274s; longest near-uniform run 2). Two different
+ * tracks are both called "Payback" — his own with Cassian at 1:09:39 and the
+ * Dimitri Vangelis & Wyman X Steve Angello one at 1:11:56. Not a duplicate:
+ * the collapse key includes the artist, so both cues correctly stay.
+ * Captured 2026-08-26 — provenance 1001tl.
+ */
+export const TL_KEVIN_DE_VRIES_TML_WE1_MAINSTAGE_2026: FingerprintSeedRow[] = [
+  {
+    at: "0:12",
+    artist: "Kevin de Vries & Cyantist",
+    title: "Sempre Sei",
+  },
+  { at: "2:47", artist: "Kevin de Vries & DAMEN", title: "Overclock" },
+  {
+    at: "5:12",
+    artist: "HUGEL & SOLTO",
+    title: "Jamaican (Bam Bam) (Jast Remix)",
+  },
+  { at: "8:35", artist: "Stoac", title: "Do It Like" },
+  {
+    at: "12:29",
+    artist: "Kevin de Vries & Platero",
+    title: "Man Like Me",
+  },
+  { at: "16:13", artist: "Anyma & Volkoder", title: "Other Dimension" },
+  {
+    at: "19:35",
+    artist: "Mario Eighta & Eklipse",
+    title: "We Run The Night",
+  },
+  {
+    at: "23:13",
+    artist: "Bountyhunter",
+    title: "Woops (Dimitri Vegas & Junkie Kid Remix / BRANDON Remix)",
+  },
+  {
+    at: "26:19",
+    artist: "Macca",
+    title: "Freak Like You (DAMEN Remix)",
+  },
+  { at: "28:59", artist: "Cassian & AR/CO", title: "Come To Life" },
+  {
+    at: "33:26",
+    artist: "Age Of Love",
+    title: "The Age Of Love (Dave Summer Edit)",
+  },
+  { at: "36:48", artist: "Cirez D", title: "On Off" },
+  {
+    at: "40:09",
+    artist: "Kevin de Vries & Jast",
+    title: "Born Like That",
+  },
+  {
+    at: "43:53",
+    artist: "Rihanna",
+    title: "Where Have You Been (KAF3R Remix)",
+  },
+  { at: "47:33", artist: "Kevin de Vries & Mau P", title: "Metro" },
+  {
+    at: "51:59",
+    artist: "MORGANJ ft. Scrufizzer",
+    title: "4thepeople",
+  },
+  {
+    at: "55:25",
+    artist: "Anyma & Rebūke",
+    title: "Syren (Dimitri Vangelis & Wyman Remix)",
+  },
+  {
+    at: "59:01",
+    artist: "Florence + The Machine",
+    title: "Spectrum (Say My Name) (Moonphazes Remix)",
+  },
+  {
+    at: "1:03:35",
+    artist: "Anyma & Kevin de Vries & Dimitri Vangelis & Wyman",
+    title: "Transcend",
+  },
+  {
+    at: "1:05:55",
+    artist: "Swedish House Mafia & Connie Constance",
+    title: "Heaven Takes You Home (Swedish House Mafia Remake)",
+  },
+  { at: "1:09:39", artist: "Kevin de Vries & Cassian", title: "Payback" },
+  {
+    at: "1:11:56",
+    artist: "Dimitri Vangelis & Wyman X Steve Angello",
+    title: "Payback",
+  },
+  {
+    at: "1:14:12",
+    artist: "Kevin de Vries & Stylo",
+    title: "I'll Be There",
+  },
+];
+
+/**
+ * YOTTO — Odd World July 2026-07-12 (Tomorrowland One World Radio)
+ * Official SoundCloud:
+ * https://soundcloud.com/tomorrowland/yottos-odd-world-july-2026
+ * https://www.1001tracklists.com/tracklist/28bjrj2t/yotto-odd-world-july-2026-07-12.html
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["sc-tomorrowland-yottos-odd-world-july-2026"]
+ *
+ * NOT wired to yt-RKAigBy-4PI. That video came with the paste, but oEmbed
+ * resolves it to "YOTTO - Odd One Out Radio - Ep. 097" on @YOTTO's own
+ * channel — a different series from Tomorrowland's Odd World, and the 1001
+ * page is the Odd World show. Same artist, probably not the same mix, so it
+ * stays unwired until someone confirms the audio matches.
+ *
+ * Observed clocks. One quirk kept as captured: Bart Skils & Weska → Booka
+ * Shade are 1s apart (54:41 → 54:42); every other gap is 68s+, so that is
+ * almost certainly a 1001 slip, but clocks are never silently adjusted.
+ * Captured 2026-08-26 — provenance 1001tl.
+ */
+export const TL_YOTTO_ODD_WORLD_JULY_2026: FingerprintSeedRow[] = [
+  { at: "0:18", artist: "Avenue One", title: "Nopia" },
+  { at: "4:25", artist: "Lexer", title: "Anyywayy" },
+  { at: "8:41", artist: "Jos & Eli", title: "Lucidia" },
+  { at: "16:23", artist: "ZHU & Gc_bestbelieve_sa", title: "LEVELZZZ" },
+  { at: "20:38", artist: "Tommy Farrow", title: "Visions" },
+  { at: "25:46", artist: "Temple Tears", title: "From The Wall" },
+  {
+    at: "29:26",
+    artist: "Enrico Sangiuliano",
+    title: "Step Into The End",
+  },
+  {
+    at: "37:12",
+    artist: "Bolier & AMRV",
+    title: "My Friend (BLR Podium Mix)",
+  },
+  { at: "40:47", artist: "LP Giobbi & EMJIE", title: "Spirit Higher" },
+  { at: "44:39", artist: "KREAM & SCRIPT", title: "Turn Up The Dose" },
+  { at: "49:15", artist: "HILLS & Shilla", title: "Right Now" },
+  { at: "54:41", artist: "Bart Skils & Weska", title: "For The Music" },
+  {
+    at: "54:42",
+    artist: "Booka Shade",
+    title: "Your Command (Paul Kalkbrenner Remix)",
+  },
+  {
+    at: "55:50",
+    artist: "ABBA",
+    title: "If It Wasn't For The Nights (YOTTO Edit)",
+  },
+];
+
+/**
+ * Max Styler @ Lollapalooza Afters, Radius Chicago, United States 2026-08-01
+ * Official SoundCloud: https://soundcloud.com/maxstyler/lollaafters26
+ * https://www.1001tracklists.com/tracklist/2gv88zkt/max-styler-lollapalooza-afters-radius-chicago-united-states-2026-08-01.html
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["sc-maxstyler-lollaafters26"]
+ * No YouTube upload in the operator paste — do not invent one.
+ *
+ * A club after-party, not a festival stage: ~2h51m with 30 cues, which still
+ * assesses "ok" (10.5 tracks/hour, 61% coverage) — long sets ride slower.
+ * Observed clocks (gaps 103s–527s, longest near-uniform run 2). Starts at
+ * 12:12; the warm-up stays unlogged rather than inventing an opening cue.
+ * Captured 2026-08-26 — provenance 1001tl.
+ */
+export const TL_MAX_STYLER_LOLLA_AFTERS_RADIUS_CHICAGO_2026: FingerprintSeedRow[] =
+  [
+    { at: "12:12", artist: "Sama (US)", title: "Killa" },
+    { at: "16:00", artist: "JØRD & Vylow", title: "Do It!" },
+    { at: "20:02", artist: "Romain Dary", title: "Trust Me" },
+    { at: "28:37", artist: "Talón", title: "The King" },
+    {
+      at: "36:17",
+      artist: "Max Styler & Greggio",
+      title: "Oldskool Flavor",
+    },
+    { at: "40:47", artist: "Viot", title: "Cardio" },
+    {
+      at: "45:36",
+      artist: "Kolombo & Malikk",
+      title: "I Take Ya (Kolombo 2017 Mix)",
+    },
+    { at: "47:19", artist: "Max Styler", title: "Time To Go" },
+    { at: "49:02", artist: "Amour Propre", title: "Feel So Good" },
+    { at: "52:45", artist: "Max Styler", title: "Body Shake" },
+    {
+      at: "56:45",
+      artist: "Max Styler ft. Ad-Apt",
+      title: "One More (Solomun Remix)",
+    },
+    {
+      at: "1:04:01",
+      artist: "B/AN/K & Humans Musik",
+      title: "What Is It",
+    },
+    { at: "1:12:34", artist: "Max Styler", title: "Inferno" },
+    {
+      at: "1:16:30",
+      artist: "2 Unlimited",
+      title: "Let The Beat Control Your Body",
+    },
+    { at: "1:20:26", artist: "Rufus & Chaka Khan", title: "Ain't Nobody" },
+    { at: "1:24:45", artist: "Knorst", title: "SuperFreak" },
+    {
+      at: "1:32:19",
+      artist: "Max Styler ft. Benni Ola",
+      title: "Uh Oh!",
+    },
+    { at: "1:36:34", artist: "Greggio", title: "Hey DJ" },
+    { at: "1:40:22", artist: "Tair Haim", title: "Justice" },
+    { at: "1:48:55", artist: "DvirNuns", title: "Start Again" },
+    {
+      at: "1:56:05",
+      artist: "Max Styler & Vintage Culture & Ali Love",
+      title: "Freaky 1",
+    },
+    {
+      at: "2:00:14",
+      artist: "Chris Lorenzo & Max Styler & Audio Bullys",
+      title: "London's On Fire",
+    },
+    { at: "2:03:41", artist: "Goom Gum", title: "Just Be Good To Me" },
+    { at: "2:07:28", artist: "Who Else & Zagitar", title: "Voltage" },
+    {
+      at: "2:14:25",
+      artist: "Wonderland Avenue",
+      title: "White Horse (Max Styler Rework)",
+    },
+    {
+      at: "2:23:04",
+      artist: "CamelPhat & Josh Gigante ft. Kuuda",
+      title: "So Good (Max Styler Remix)",
+    },
+    { at: "2:28:36", artist: "Orbital", title: "Halcyon On & On" },
+    {
+      at: "2:37:23",
+      artist: "Opus III",
+      title: "It's A Fine Day (Acappella)",
+    },
+    { at: "2:46:09", artist: "Max Styler & Deomid", title: "Every Night" },
+    {
+      at: "2:50:58",
+      artist: "Max Styler ft. Kuuda",
+      title: "Love Forever",
+    },
+  ];
+
+/**
+ * Space 92 @ Freedom Stage, Tomorrowland Weekend 1, Belgium 2026-07-18
+ * Official SoundCloud (artist's own, verified 200 "Space 92 @ Tomorrowland
+ * 2026 Freedom Stage"):
+ * https://soundcloud.com/space92/space-92-tomorrowland-2026
+ * Official YouTube twin (oEmbed: @tomorrowland "Space 92 WE1 | Tomorrowland
+ * 2026"): https://youtu.be/3k66DQuU31A
+ * https://www.1001tracklists.com/tracklist/1x4vfuuk/space-92-freedom-stage-tomorrowland-weekend-1-belgium-2026-07-18.html
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["sc-space92-space-92-tomorrowland-2026"]
+ * plus the YT slug so either host resolves the same clocks.
+ * Observed clocks (gaps 43s–385s; longest near-uniform run 3). List starts at
+ * 2:41 — the intro is unlogged, so no cue is invented before it.
+ * Captured 2026-08-26 — provenance 1001tl.
+ */
+export const TL_SPACE_92_TML_WE1_FREEDOM_2026: FingerprintSeedRow[] = [
+  {
+    at: "2:41",
+    artist: "Nicole Moudaber & Space 92",
+    title: "Eyes On Me",
+  },
+  { at: "5:26", artist: "Maddix & Space 92", title: "Rolling" },
+  {
+    at: "8:48",
+    artist: "Bountyhunter",
+    title: "Woops (Dimitri Vegas & Junkie Kid Remix / BRANDON Remix)",
+  },
+  { at: "11:18", artist: "Space 92", title: "The Door" },
+  {
+    at: "14:52",
+    artist: "Voodoo & Serano",
+    title: "Blood Is Pumpin' (Space 92 Edit)",
+  },
+  {
+    at: "18:29",
+    artist: "Space 92 ft. Malena Narvay",
+    title: "Formula Loca",
+  },
+  { at: "21:50", artist: "Space 92", title: "Orbit Motion" },
+  {
+    at: "24:20",
+    artist: "HI-LO & Space-92 vs. Opus III",
+    title: "ORION vs. Fine Day (Modeā Mashup)",
+  },
+  {
+    at: "25:03",
+    artist: "Opus III",
+    title: "It's A Fine Day (Acappella)",
+  },
+  { at: "25:46", artist: "HI-LO & Space 92", title: "ORION" },
+  {
+    at: "26:29",
+    artist: "Da Hool",
+    title: "Meet Her At The Love Parade (Daxson Remix)",
+  },
+  { at: "28:40", artist: "Space 92 & Alignment", title: "Proton" },
+  { at: "32:20", artist: "Space 92 & The YellowHeads", title: "Planet X" },
+  { at: "38:45", artist: "Space 92", title: "Robot" },
+  { at: "41:20", artist: "Argy & Omnya", title: "Aria (Omiki Remix)" },
+  {
+    at: "45:38",
+    artist: "Disclosure ft. Eliza Doolittle",
+    title: "You & Me (Flume Remix / Space 92 Edit)",
+  },
+  { at: "48:48", artist: "Space 92", title: "Melodia" },
+  { at: "50:28", artist: "Faithless", title: "Insomnia (Space 92 Edit)" },
+  { at: "53:08", artist: "Oxia", title: "Domino (Space 92 Remix)" },
+  {
+    at: "57:09",
+    artist: "Anyma & Argy & Son Of Son",
+    title: "Voices In My Head (Space 92 Edit)",
+  },
+  { at: "1:00:15", artist: "Darude", title: "Sandstorm (Space 92 Edit)" },
+  { at: "1:03:48", artist: "Bassjackers & Space 92", title: "I'm On Acid" },
+  {
+    at: "1:07:55",
+    artist: "Maddix & Olly James & Hannah Laing",
+    title: "Transmission",
+  },
+  {
+    at: "1:10:22",
+    artist: "Zombie Nation",
+    title: "Kernkraft 400 (Mr.Machine & EDMMARO Edit)",
+  },
+  {
+    at: "1:12:58",
+    artist: "Masters At Work",
+    title: "Work (Space 92 Edit)",
+  },
+  {
+    at: "1:16:14",
+    artist: "Nicole Moudaber",
+    title: "Reasons To Love You (Space 92 Remix)",
+  },
+  { at: "1:19:25", artist: "Space 92", title: "Offbeat" },
+  {
+    at: "1:22:40",
+    artist: "Brennan Heart & HI-LO & Project Zeitgeist",
+    title: "Adagio For Strings",
+  },
+  { at: "1:26:42", artist: "TNT", title: "Teknogym 2K19" },
+];
+
+/**
+ * Lost Frequencies @ Mainstage, Tomorrowland Weekend 2, Belgium 2026-07-26
+ * Official YouTube: https://youtu.be/KLyeLMJuIOY
+ * https://www.1001tracklists.com/tracklist/9xst011/lost-frequencies-mainstage-tomorrowland-weekend-2-belgium-2026-07-26.html
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-KLyeLMJuIOY"]
+ * No SoundCloud permalink in the operator paste — do not invent one.
+ * Observed clocks (gaps 50s–400s; longest near-uniform run 3).
+ * "The Feeling" appears twice — the Deluxe Mix 2.0 at 41:45 and the original
+ * at 45:10, so both cues stay.
+ * Captured 2026-08-26 — provenance 1001tl.
+ */
+export const TL_LOST_FREQUENCIES_TML_WE2_MAINSTAGE_2026: FingerprintSeedRow[] = [
+  {
+    at: "0:12",
+    artist: "Lost Frequencies ft. Calum Scott",
+    title: "Where Are You Now (Lost Frequencies Deluxe Mix 2.0)",
+  },
+  {
+    at: "5:30",
+    artist: "Lost Frequencies ft. Janieck Devy",
+    title: "Reality (Lost Frequencies Deluxe Mix 2.0)",
+  },
+  {
+    at: "9:12",
+    artist: "Diplo ft. Cameron Whitcomb",
+    title: "Would U Still Love Me (Lost Frequencies Remix)",
+  },
+  {
+    at: "10:50",
+    artist: "Lost Frequencies & Tom Gregory",
+    title: "Dive (Deluxe Mix)",
+  },
+  {
+    at: "13:28",
+    artist: "Michael Calfan & Axwell & Bigfett vs. Empire Of The Sun",
+    title: "Resurrection vs. Walking On A Dream (Bigfett Mashup)",
+  },
+  {
+    at: "14:37",
+    artist: "Empire Of The Sun",
+    title: "Walking On A Dream (Acappella)",
+  },
+  {
+    at: "15:46",
+    artist: "Michael Calfan",
+    title: "Resurrection (Axwell Re-Cut Club Version / Bigfett Remix)",
+  },
+  {
+    at: "16:55",
+    artist: "Deorro ft. Chris Brown",
+    title: "Five More Hours",
+  },
+  {
+    at: "18:43",
+    artist: "Lost Frequencies & Argy ft. rhys from the sticks",
+    title: "Summer Skies (I Love To Cry)",
+  },
+  {
+    at: "21:27",
+    artist: "Magnetic Man ft. Angela Hunte",
+    title: "I Need Air",
+  },
+  {
+    at: "25:20",
+    artist: "Lost Frequencies ft. Bastille",
+    title: "Head Down (Lost Frequencies & SUARK Deluxe Mix)",
+  },
+  { at: "28:42", artist: "Lost Frequencies", title: "Live It All" },
+  {
+    at: "32:00",
+    artist: "FaceSoul",
+    title: "Grow (Lost Frequencies Remix)",
+  },
+  { at: "35:43", artist: "Bicep", title: "Glue (Tim Hox Remix)" },
+  {
+    at: "36:57",
+    artist: "Lost Frequencies ft. Easton Corbin",
+    title: "Are You With Me (Acappella)",
+  },
+  {
+    at: "38:10",
+    artist: "Lost Frequencies & The Temper Trap",
+    title: "Sweet Disposition (a moment, a love) (Deluxe Mix)",
+  },
+  {
+    at: "41:45",
+    artist: "Lost Frequencies",
+    title: "The Feeling (Lost Frequencies Deluxe Mix 2.0)",
+  },
+  { at: "44:20", artist: "Killin' Void", title: "New World" },
+  { at: "45:10", artist: "Lost Frequencies", title: "The Feeling" },
+  {
+    at: "46:00",
+    artist: "Lost Frequencies & CIEL. & Radio Cargo",
+    title: "Listen To Me",
+  },
+  {
+    at: "52:40",
+    artist: "Lost Frequencies ft. Tom Odell",
+    title: "Black Friday (pretty like the sun) (Lost Frequencies Deluxe Mix)",
+  },
+  {
+    at: "55:42",
+    artist: "Lost Frequencies & Nathan Nicholson",
+    title: "So Much Beauty (Around Us)",
+  },
+];
+
+/**
+ * Hardwell & Sub Zero Project @ The Great Library Stage, Tomorrowland
+ * Weekend 1, Belgium 2026-07-17
+ * https://www.1001tracklists.com/tracklist/1w71wl0t/hardwell-sub-zero-project-the-great-library-stage-tomorrowland-weekend-1-belgium-2026-07-17.html
+ *
+ * TWO official YouTube uploads of the same performance, both verified via
+ * oEmbed and both wired so either row resolves these clocks:
+ *   yt-5EsSxcR5ges — @tomorrowland "… WE1 | Tomorrowland 2026" (catalog row)
+ *   yt-PCKfswh4ZBA — @hardwell "… - Tomorrowland 2026 [FULL SET]"
+ * No SoundCloud permalink known — do not invent one.
+ *
+ * Observed clocks (gaps 27s–221s; longest near-uniform run 3). Hardstyle B2B
+ * with heavy mashup expansion: mashup rows are followed by their components.
+ * Captured 2026-08-26 — provenance 1001tl.
+ */
+export const TL_HARDWELL_SUB_ZERO_TML_WE1_GREAT_LIBRARY_2026: FingerprintSeedRow[] =
+  [
+    {
+      at: "0:12",
+      artist: "Showtek",
+      title: "FTS (Fuck The System) (Sub Zero Project Rework)",
+    },
+    {
+      at: "1:52",
+      artist: "Showtek & Justin Prime",
+      title: "Cannonball (Hardwell & W&W Remix)",
+    },
+    {
+      at: "2:39",
+      artist: "Avicii & Nicky Romero ft. Noonie Bao",
+      title: "I Could Be The One (Acappella)",
+    },
+    {
+      at: "3:26",
+      artist: "Public Domain vs. Maddix",
+      title: "Operation Blade vs. Receive Life (DJ Francesco Mashup)",
+    },
+    {
+      at: "3:55",
+      artist: "Public Domain",
+      title: "Operation Blade (Bass In The Place)",
+    },
+    { at: "4:24", artist: "Maddix", title: "Receive Life" },
+    { at: "4:52", artist: "Intrude", title: "LSD" },
+    { at: "5:39", artist: "Armin van Buuren", title: "Blah Blah Blah" },
+    {
+      at: "6:25",
+      artist: "Headhunterz & Sub Zero Project",
+      title: "Our Church (Sub Zero Project Kick Edit / All In One Edit)",
+    },
+    {
+      at: "7:50",
+      artist: "Hardwell ft. Amba Shepherd",
+      title: "Apollo (Acappella)",
+    },
+    {
+      at: "9:14",
+      artist: "David Guetta vs. Benny Benassi",
+      title: "Satisfaction (Hardwell & Maddix Remix)",
+    },
+    {
+      at: "10:51",
+      artist: "David Guetta vs. Benny Benassi",
+      title:
+        "Satisfaction (Hardwell & Maddix Remix / Sub Zero Project Psycho Edit)",
+    },
+    {
+      at: "12:27",
+      artist: "David Guetta ft. Akon",
+      title: "Sexy Bitch (4444 OF A KIND Bootleg)",
+    },
+    { at: "15:10", artist: "Hardwell & Vorwerk", title: "Cambodia" },
+    {
+      at: "15:59",
+      artist: "Hardwell",
+      title: "Spaceman (Sub Zero Project Edit)",
+    },
+    {
+      at: "16:36",
+      artist: "Hardwell ft. Mitch Crown",
+      title: "Call Me A Spaceman (Acappella)",
+    },
+    {
+      at: "17:13",
+      artist: "Zedd & Lucky Date ft. Ellie Goulding",
+      title: "Fall Into The Sky (Everybody Fuckin Jump Acappella)",
+    },
+    {
+      at: "17:50",
+      artist:
+        "Dimitri Vegas & Like Mike & Timmy Trumpet & Sub Zero Project",
+      title: "Move Your Body",
+    },
+    {
+      at: "20:34",
+      artist: "Sebastian Ingrosso & Alesso ft. Ryan Tedder",
+      title:
+        "Calling (Lose My Mind) (Hardwell & W&W Bootleg / Sub Zero Project Edit)",
+    },
+    {
+      at: "23:22",
+      artist: "Faithless",
+      title: "Insomnia (Sub Zero Project Remix)",
+    },
+    {
+      at: "24:20",
+      artist: "Benny Benassi ft. Gary Go",
+      title: "Cinema (Acappella)",
+    },
+    { at: "25:18", artist: "Sub Zero Project & Rebelion", title: "Save Me" },
+    {
+      at: "26:05",
+      artist: "Calvin Harris & Disciples ft. Ina Wroldsen",
+      title: "How Deep Is Your Love (Acappella)",
+    },
+    {
+      at: "26:51",
+      artist: "Hardwell & Sub Zero Project & Lil Jon vs. Gotye & Kimbra",
+      title:
+        "Brace For Impact vs. Somebody That I Used To Know (Hardwell Mashup)",
+    },
+    {
+      at: "28:15",
+      artist: "Gotye ft. Kimbra",
+      title: "Somebody That I Used To Know (Acappella)",
+    },
+    {
+      at: "29:39",
+      artist: "Hardwell & Sub Zero Project ft. Lil Jon",
+      title: "Brace For Impact",
+    },
+    { at: "31:03", artist: "4444 OF A KIND & Hardwell", title: "RE4SON" },
+    {
+      at: "34:44",
+      artist: "Dimitri Vegas & Like Mike & Martin Garrix",
+      title: "Tremor (Sensation 2014 Anthem) (Sub Zero Project Remix)",
+    },
+    { at: "35:37", artist: "Sub Zero Project", title: "Sweet But Psycho" },
+    {
+      at: "36:30",
+      artist: "Hardwell & Sub Zero Project vs. Queen",
+      title: "Bohemian Judgement Day (Hardwell Mashup)",
+    },
+    { at: "37:21", artist: "Queen", title: "Bohemian Rhapsody" },
+    {
+      at: "38:13",
+      artist: "Hardwell & Sub Zero Project",
+      title: "Judgement Day",
+    },
+    {
+      at: "39:04",
+      artist: "David Guetta & Bebe Rexha vs. Eiffel 65",
+      title:
+        "I'm Good (Blue) (Da Tweekaz & Code Black & Adrenalize Team Blue Mix)",
+    },
+    {
+      at: "40:05",
+      artist: "David Guetta ft. Bebe Rexha",
+      title: "I'm Good (Blue)",
+    },
+    {
+      at: "41:07",
+      artist: "Eiffel 65",
+      title:
+        "Blue (Da Ba Dee) (Da Tweekaz & Code Black & Adrenalize Team Blue Mix)",
+    },
+    { at: "42:08", artist: "Sub Zero Project", title: "Are U Me" },
+    { at: "44:10", artist: "Hardwell & Outsiders", title: "Falling In Love" },
+    {
+      at: "45:47",
+      artist: "Hardwell & KSHMR & Jarrad Kritzstein vs. Aversion",
+      title: "Power Activation (Hardwell Outro Edit)",
+    },
+    {
+      at: "46:15",
+      artist: "Hardwell & KSHMR ft. Jarrad Kritzstein",
+      title: "Power (Acappella)",
+    },
+    { at: "46:43", artist: "Aversion", title: "Activation" },
+    { at: "47:10", artist: "Hardwell & Sound Rush", title: "IRIS" },
+    {
+      at: "50:35",
+      artist:
+        "Sub Zero Project & Dual Damage vs. Swedish House Mafia & John Martin",
+      title: "It Will Be OK vs. Don't You Worry Child (Hardwell Mashup)",
+    },
+    {
+      at: "53:33",
+      artist: "Swedish House Mafia ft. John Martin",
+      title: "Don't You Worry Child (Acappella)",
+    },
+    {
+      at: "56:32",
+      artist: "Dimitri Vegas & Like Mike & Martin Garrix",
+      title: "Tremor (Sensation 2014 Anthem) (3, 2, 1 Go Acappella)",
+    },
+    {
+      at: "59:30",
+      artist: "Sub Zero Project & Dual Damage",
+      title: "It Will Be OK",
+    },
+  ];
+
+
+/**
  * Hardwell - Euphoria 018 2026-06-26
  * Official SoundCloud:
  * https://soundcloud.com/tomorrowland/hardwell-presents-euphoria-june-2026
