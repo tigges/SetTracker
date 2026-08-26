@@ -62,6 +62,78 @@ export const TL_HARDWELL_EUPHORIA_019_2026: FingerprintSeedRow[] = [
 ];
 
 /**
+ * Joris Voorn & Cassian - Spectrum Radio 484 2026-08-05
+ * https://www.1001tracklists.com/tracklist/1z0kzf5k/joris-voorn-cassian-spectrum-radio-484-2026-08-05.html
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-d5JZLJSJc6w"]
+ *       TRACKLIST_1001_BY_SOURCE_SLUG["sc-joris-voorn-spectrum-radio-484"]
+ *
+ * Three official hosts, all verified 2026-08-26:
+ *   YouTube    https://youtu.be/d5JZLJSJc6w — channel "Spectrum" (his own show)
+ *   SoundCloud https://soundcloud.com/joris-voorn/spectrum-radio-484 — 200
+ *   Mixcloud   .../JorisVoorn/joris-voorn-presents-spectrum-radio-484/ — 200
+ * The paste wired the SoundCloud slug only, but joris-voorn is not a curated
+ * SoundCloud show or roster artist, so nothing polls that account and the seed
+ * would have sat orphaned. The YouTube slug carries the set (curated in
+ * YOUTUBE_SETS like episode 485); the SC slug shares this array so the twin
+ * group keeps both hosts and picks up cues if his SC is ever crawled.
+ * Mixcloud stays a stored mirror in SET_HOST_PINS — never a set slug.
+ *
+ * Billed as radio but recorded live at Tomorrowland's Freedom Stage b2b
+ * Cassian, which both host titles state; type stays "radio" with the event
+ * attached, as episode 485 does for Exit Brno.
+ * Observed clocks: 18 cues over ~60min, gaps 45s–417s, longest near-uniform
+ * run 2. Shares 5 tracks with episode 485 (his own promos plus the recurring
+ * "Horizon (Eelke Kleijn Remix)" opener); 13 of 18 are unique, so these are
+ * distinct episodes.
+ * Captured 2026-08-26 — provenance 1001tl.
+ */
+export const TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026: FingerprintSeedRow[] =
+  [
+    {
+      at: "0:30",
+      artist: "Joris Voorn",
+      title: "Horizon (Eelke Kleijn Remix)",
+    },
+    {
+      at: "1:15",
+      artist: "Noir & Haze",
+      title: "Around (Seth Hills & Victor Garde Remix)",
+    },
+    { at: "4:50", artist: "AURAPAX", title: "Afterparty" },
+    { at: "8:02", artist: "Argy & SOLANCE", title: "Window Shake" },
+    { at: "11:25", artist: "Mariz", title: "No Past, No Future" },
+    { at: "14:10", artist: "Cassian", title: "SOS" },
+    {
+      at: "20:35",
+      artist: "Calvin Harris ft. Clementine Douglas",
+      title: "Blessings (Cassian Remix)",
+    },
+    { at: "27:32", artist: "CamelPhat & Volkoder", title: "Unique Moment" },
+    { at: "30:47", artist: "Khainz", title: "Nightcreatures" },
+    { at: "34:00", artist: "SLVR", title: "Oh La La La" },
+    {
+      at: "40:10",
+      artist: "Adam Port & Stryv ft. Malachiii",
+      title: "Move (Anyma & Cassian Remix)",
+    },
+    { at: "43:30", artist: "deadmau5 ft. Stevie Appleton", title: "Science" },
+    { at: "45:20", artist: "Roland Clark", title: "Speak To Me (Accapella)" },
+    { at: "47:10", artist: "Cassian", title: "Dun Dun" },
+    {
+      at: "49:47",
+      artist: "Joris Voorn & Roddy Lima & Taylr Renee",
+      title: "Machine",
+    },
+    {
+      at: "52:40",
+      artist: "ANOTR ft. 54 Ultra",
+      title: "Talk To You (Eli Brown Bootleg)",
+    },
+    { at: "56:30", artist: "Joris Voorn & Xavier Rudd", title: "Spirit Bird" },
+    { at: "59:45", artist: "Kevin de Vries & Cassian", title: "Payback" },
+  ];
+
+/**
  * Cloonee @ neonGARDEN, EDC Orlando, United States 2025-11-08
  * Official YouTube (oEmbed: @Cloonee "Cloonee - Live At EDC Orlando"):
  * https://youtu.be/3mOMDdX6miw

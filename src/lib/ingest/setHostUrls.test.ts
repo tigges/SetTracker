@@ -267,6 +267,37 @@ assert.equal(
   "https://soundcloud.com/r3hab/r3hab-b2b-afrojack",
 );
 
+// Spectrum Radio 484: three official hosts on one performance. joris-voorn is
+// not a curated SoundCloud account, so both mirrors come from pins rather than
+// a track seed, and both slugs in the twin group must carry all three.
+for (const slug of ["yt-d5JZLJSJc6w", "sc-joris-voorn-spectrum-radio-484"]) {
+  assert.equal(
+    extras[slug]?.soundcloudUrl,
+    "https://soundcloud.com/joris-voorn/spectrum-radio-484",
+    `missing SoundCloud mirror on ${slug}`,
+  );
+  assert.equal(
+    extras[slug]?.mixcloudUrl,
+    "https://www.mixcloud.com/jorisvoorn/joris-voorn-presents-spectrum-radio-484/",
+    `missing Mixcloud mirror on ${slug}`,
+  );
+  assert.equal(
+    extras[slug]?.youtubeUrl,
+    "https://www.youtube.com/watch?v=d5JZLJSJc6w",
+    `missing YouTube host on ${slug}`,
+  );
+}
+assert.deepEqual(
+  unusedOfficialHostLinks({
+    playbackUrl: "https://www.youtube.com/watch?v=d5JZLJSJc6w",
+    ...harvestSetHostUrls({
+      slug: "yt-d5JZLJSJc6w",
+      playbackUrl: "https://www.youtube.com/watch?v=d5JZLJSJc6w",
+    }),
+  }).map((l) => l.host),
+  ["soundcloud", "mixcloud"],
+);
+
 for (const [slug, pin] of Object.entries(SET_HOST_PINS)) {
   if (pin.mixcloudUrl) {
     assert.ok(

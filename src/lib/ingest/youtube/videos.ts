@@ -68,6 +68,7 @@ import {
   TL_ALOK_TML_WE2_2026,
   TL_HARDWELL_HOA_527_YEARMIX_2025,
   TL_JOEL_CORRY_EDGE_NYC_2026,
+  TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026,
   TL_MISS_MONIQUE_IBIZA_SUNSET_YACHT_2026,
   TL_NICKY_ROMERO_PROTOCOL_RADIO_731,
@@ -1246,6 +1247,29 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/m7vw17k/tiesto-prismatic-032-2026-08-08.html",
     tracklist1001: TL_TIESTO_PRISMATIC_032_2026,
+  },
+  {
+    // Official Spectrum Radio 484 (channel "Spectrum"); timed 1001 capture.
+    // Recorded live at Tomorrowland's Freedom Stage b2b Cassian. Official SC
+    // and Mixcloud mirrors are pinned in SET_HOST_PINS — joris-voorn is not a
+    // curated SC account, so they cannot be derived from a track seed.
+    video: "https://www.youtube.com/watch?v=d5JZLJSJc6w",
+    primaryArtist: dj("Joris Voorn", {
+      accent: "#2ec4b6",
+      homeCity: "Rotterdam, NL",
+    }),
+    genre: "Tech House",
+    type: "radio",
+    // Artists lead the title on purpose. artistsForSet splits the segment
+    // before the first "|", so a show-name prefix ahead of "b2b"/"&" would be
+    // read as an artist and mint a junk "Spectrum Radio 484 Joris Voorn" DJ;
+    // with the show name after the pipe, Cassian links as a collaborator.
+    title: "Joris Voorn b2b Cassian | Spectrum Radio 484, Tomorrowland 2026",
+    seriesName: "Spectrum Radio",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1z0kzf5k/joris-voorn-cassian-spectrum-radio-484-2026-08-05.html",
+    tracklist1001: TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   },
   {
     // Official Spectrum Radio 485; timed 1001 capture.

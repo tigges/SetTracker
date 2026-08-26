@@ -99,6 +99,20 @@ export const SET_HOST_PINS: Record<string, SetHostUrls> = {
   "sc-r3hab-r3hab-b2b-afrojack": {
     soundcloudUrl: "https://soundcloud.com/r3hab/r3hab-b2b-afrojack",
   },
+  // Joris Voorn & Cassian — Spectrum Radio 484, b2b at Tomorrowland's Freedom
+  // Stage. All three hosts verified 200 on 2026-08-26. joris-voorn is not a
+  // curated SoundCloud account, so neither mirror can be derived from a track
+  // seed; pin both on the YouTube slug that carries the set and on its twin.
+  "yt-d5JZLJSJc6w": {
+    soundcloudUrl: "https://soundcloud.com/joris-voorn/spectrum-radio-484",
+    mixcloudUrl:
+      "https://www.mixcloud.com/JorisVoorn/joris-voorn-presents-spectrum-radio-484/",
+  },
+  "sc-joris-voorn-spectrum-radio-484": {
+    soundcloudUrl: "https://soundcloud.com/joris-voorn/spectrum-radio-484",
+    mixcloudUrl:
+      "https://www.mixcloud.com/JorisVoorn/joris-voorn-presents-spectrum-radio-484/",
+  },
 };
 
 export function soundcloudSlugFromUrl(url: string): string | null {

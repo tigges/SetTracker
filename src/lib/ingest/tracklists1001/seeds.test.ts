@@ -190,6 +190,7 @@ import {
   TL_VINAI_S2O_SONGKRAN_THAILAND_2023,
   TL_AGENTS_OF_TIME_TIME_WARP_FLOOR_1_2026,
   TL_CLOONEE_NEONGARDEN_EDC_ORLANDO_2025,
+  TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   isSecondaryPlaybackSlug,
@@ -4816,6 +4817,44 @@ assert.equal(
     "sc-https://soundcloud.com/claptone/clapcast-576"
   ],
   undefined,
+);
+
+// Joris Voorn & Cassian — Spectrum Radio 484. The YouTube slug carries the
+// set; the SoundCloud slug must hold the same array so the twin group keeps all
+// three hosts. joris-voorn is not a curated SC account, so wiring SC alone (as
+// the operator paste's Wire line did) would leave the seed orphaned.
+assertSeedClocks(TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026);
+assert.equal(TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026.length, 18);
+for (const slug of ["yt-d5JZLJSJc6w", "sc-joris-voorn-spectrum-radio-484"]) {
+  assert.equal(
+    TRACKLIST_1001_BY_SOURCE_SLUG[slug],
+    TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
+    `Spectrum 484 must share one seed object on ${slug}`,
+  );
+}
+const spectrum484 = tracklist1001RowsToPlays(
+  TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
+);
+assert.equal(spectrum484.length, 18);
+assert.equal(spectrum484[0]?.provenance, "1001tl");
+assert.equal(spectrum484[0]?.timestamp, 30);
+assert.equal(spectrum484[0]?.trackTitle, "Horizon (Eelke Kleijn Remix)");
+assert.equal(spectrum484[17]?.trackTitle, "Payback");
+assert.equal(spectrum484[17]?.timestamp, 59 * 60 + 45);
+for (let i = 1; i < spectrum484.length; i++) {
+  assert.ok(
+    (spectrum484[i]!.timestamp ?? 0) > (spectrum484[i - 1]!.timestamp ?? 0),
+    `Spectrum 484 clocks must increase at index ${i}`,
+  );
+}
+// Consecutive episodes share his own promos, so they must stay separate seeds.
+assert.notEqual(
+  TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
+  TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-yTRvLrtsM9I"],
+  TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026,
 );
 
 // Cloonee @ neonGARDEN, EDC Orlando 2025-11-08 — official artist-channel

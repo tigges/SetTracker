@@ -146,6 +146,7 @@ import {
   TL_CAMILA_JUN_TML_WE1_CRYSTAL_2026,
   TL_CLOONEE_NEONGARDEN_EDC_ORLANDO_2025,
   TL_DAVID_HERRLICH_OWR_ACADEMY_2026,
+  TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_HARDWELL_EUPHORIA_018_2026,
   TL_HARDWELL_EUPHORIA_019_2026,
   TL_HARDWELL_SUB_ZERO_TML_WE1_GREAT_LIBRARY_2026,
@@ -280,6 +281,7 @@ export {
   TL_VINAI_S2O_SONGKRAN_THAILAND_2023,
   TL_AGENTS_OF_TIME_TIME_WARP_FLOOR_1_2026,
   TL_CLOONEE_NEONGARDEN_EDC_ORLANDO_2025,
+  TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
 };
 
 function formatClock(sec: number): string {
@@ -4797,6 +4799,12 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-8Oq0TMeaY4I": TL_CAMILA_JUN_TML_WE1_CRYSTAL_2026,
   // Intro-only approximation: rows 1-5 sit 57-58s apart, the rest observed.
   "yt-3mOMDdX6miw": TL_CLOONEE_NEONGARDEN_EDC_ORLANDO_2025,
+  // Spectrum Radio 484. The YouTube slug carries the set; the SoundCloud slug
+  // shares this array so the twin group keeps both hosts. joris-voorn is not a
+  // curated SC account, so wiring SC alone would orphan the seed.
+  "yt-d5JZLJSJc6w": TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
+  "sc-joris-voorn-spectrum-radio-484":
+    TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   "yt-oxG_iaVCkY4": TL_REINIER_ZONNEVELD_TML_WE1_ATMOSPHERE_2026,
   "yt-Wbc9jh-7tTw": TL_INDIRA_PAGANOTTO_TML_WE2_MAINSTAGE_2026,
   "yt-s_iciA5Eg1E": TL_HI_LO_LAYTON_GIORDANI_TML_WE2_CRYSTAL_2026,
