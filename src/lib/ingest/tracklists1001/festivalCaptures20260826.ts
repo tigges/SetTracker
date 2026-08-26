@@ -62,6 +62,69 @@ export const TL_HARDWELL_EUPHORIA_019_2026: FingerprintSeedRow[] = [
 ];
 
 /**
+ * Camila Jun @ Crystal Garden Stage, Tomorrowland Weekend 1, Belgium
+ * 2026-07-17
+ * Official YouTube (oEmbed: @tomorrowland "Camila Jun WE1 | Tomorrowland
+ * 2026"): https://youtu.be/8Oq0TMeaY4I
+ * https://www.1001tracklists.com/tracklist/yfd51vt/camila-jun-crystal-garden-stage-tomorrowland-weekend-1-belgium-2026-07-17.html
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-8Oq0TMeaY4I"]
+ * No SoundCloud permalink in the operator paste — do not invent one.
+ *
+ * CLOCKS ARE APPROXIMATE. All 16 gaps are exactly 3:29 (209s) from a 0:20
+ * start — `evenlySpaceRows` output, so 1001 had the track order but no cue
+ * times (implied duration ~59.5m). Order is real; every position is a rough
+ * marker. Replace if the set is ever cued properly.
+ * Captured 2026-08-26 — provenance 1001tl.
+ */
+export const TL_CAMILA_JUN_TML_WE1_CRYSTAL_2026: FingerprintSeedRow[] = [
+  { at: "0:20", artist: "Doechii", title: "NISSAN ALTIMA" },
+  { at: "3:49", artist: "Camila Jun", title: "Latina" },
+  { at: "7:18", artist: "Nolek", title: "The Night Is Yours" },
+  {
+    at: "10:47",
+    artist: "Miguel Bastida",
+    title: "The Music Don't Stop",
+  },
+  {
+    at: "14:16",
+    artist: "Amedeo Picone & ABOUTME",
+    title: "Sunny Grooves",
+  },
+  { at: "17:45", artist: "Pave & Yvvan Back", title: "Lo Pasa" },
+  { at: "21:14", artist: "Camila Jun", title: "Dance" },
+  { at: "24:43", artist: "Groove Killah", title: "Bumbum" },
+  {
+    at: "28:12",
+    artist: "Max Dean & Luke Dean",
+    title: "Gets Like That (Jamie Jones Remix)",
+  },
+  {
+    at: "31:41",
+    artist: "Armand van Helden",
+    title: "The Funk Phenomena",
+  },
+  { at: "35:10", artist: "Mark Knight", title: "Second Story" },
+  { at: "38:39", artist: "KENZ & ESSE", title: "Godzilla" },
+  { at: "42:08", artist: "Tony Dark Eyes", title: "Mofo" },
+  {
+    at: "45:37",
+    artist: "Frankie Knuckles pres. Marshall Jefferson",
+    title: "Move Your Body",
+  },
+  { at: "49:06", artist: "Camila Jun", title: "Carnival Fever" },
+  {
+    at: "52:35",
+    artist: "Illyus Barrientos & MALU",
+    title: "Right Here",
+  },
+  {
+    at: "56:04",
+    artist: "Gadjo",
+    title: "I'm Watching You (So Many Times)",
+  },
+];
+
+/**
  * Kevin de Vries @ Mainstage, Tomorrowland Weekend 1, Belgium 2026-07-19
  * Official YouTube (oEmbed: @tomorrowland "Kevin de Vries WE1 | Tomorrowland
  * 2026"): https://youtu.be/jAZiK2WJuhk

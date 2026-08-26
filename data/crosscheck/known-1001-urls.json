@@ -541,6 +541,14 @@
       "tracklistUrl": "https://www.1001tracklists.com/tracklist/xhlqtrt/kevin-de-vries-mainstage-tomorrowland-weekend-1-belgium-2026-07-19.html",
       "youtubeUrl": "https://youtu.be/jAZiK2WJuhk",
       "note": "Operator paste 2026-08-26. 23 cues, observed clocks. oEmbed confirms @tomorrowland 'Kevin de Vries WE1 | Tomorrowland 2026'. Distinct from his Street Parade 2025 seed. Two different tracks named 'Payback' (Cassian 1:09:39, Dimitri Vangelis & Wyman X Steve Angello 1:11:56) - both kept, artist is part of the collapse key."
+    },
+    {
+      "label": "Camila Jun · Crystal Garden, Tomorrowland WE1 2026-07-17",
+      "slug": "yt-8Oq0TMeaY4I",
+      "name": "TL_CAMILA_JUN_TML_WE1_CRYSTAL_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/yfd51vt/camila-jun-crystal-garden-stage-tomorrowland-weekend-1-belgium-2026-07-17.html",
+      "youtubeUrl": "https://youtu.be/8Oq0TMeaY4I",
+      "note": "Operator paste 2026-08-26. 17 cues. CLOCKS APPROXIMATE - all 16 gaps are exactly 3:29 (209s) from a 0:20 start, i.e. evenlySpaceRows output; 1001 had the order but no cue times. oEmbed confirms @tomorrowland 'Camila Jun WE1 | Tomorrowland 2026'."
     }
   ],
   "stillMissing1001": [
