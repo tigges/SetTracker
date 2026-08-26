@@ -154,6 +154,7 @@ import {
   TL_NERVO_TML_WE1_MAINSTAGE_2025,
   TL_REINIER_ZONNEVELD_TML_WE1_ATMOSPHERE_2026,
   TL_SPACE_92_TML_WE1_FREEDOM_2026,
+  TL_YOTTO_ODD_WORLD_JULY_2026,
 } from "./festivalCaptures20260826";
 
 export {
@@ -4784,6 +4785,9 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-3k66DQuU31A": TL_SPACE_92_TML_WE1_FREEDOM_2026,
   "sc-maxstyler-lollaafters26":
     TL_MAX_STYLER_LOLLA_AFTERS_RADIUS_CHICAGO_2026,
+  // SoundCloud only — yt-RKAigBy-4PI is Odd One Out Radio Ep. 097, a
+  // different series on the artist's own channel, not this Odd World show.
+  "sc-tomorrowland-yottos-odd-world-july-2026": TL_YOTTO_ODD_WORLD_JULY_2026,
   "yt-oxG_iaVCkY4": TL_REINIER_ZONNEVELD_TML_WE1_ATMOSPHERE_2026,
   "yt-Wbc9jh-7tTw": TL_INDIRA_PAGANOTTO_TML_WE2_MAINSTAGE_2026,
   "yt-s_iciA5Eg1E": TL_HI_LO_LAYTON_GIORDANI_TML_WE2_CRYSTAL_2026,

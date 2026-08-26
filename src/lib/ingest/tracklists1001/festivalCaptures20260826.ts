@@ -62,6 +62,57 @@ export const TL_HARDWELL_EUPHORIA_019_2026: FingerprintSeedRow[] = [
 ];
 
 /**
+ * YOTTO — Odd World July 2026-07-12 (Tomorrowland One World Radio)
+ * Official SoundCloud:
+ * https://soundcloud.com/tomorrowland/yottos-odd-world-july-2026
+ * https://www.1001tracklists.com/tracklist/28bjrj2t/yotto-odd-world-july-2026-07-12.html
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["sc-tomorrowland-yottos-odd-world-july-2026"]
+ *
+ * NOT wired to yt-RKAigBy-4PI. That video came with the paste, but oEmbed
+ * resolves it to "YOTTO - Odd One Out Radio - Ep. 097" on @YOTTO's own
+ * channel — a different series from Tomorrowland's Odd World, and the 1001
+ * page is the Odd World show. Same artist, probably not the same mix, so it
+ * stays unwired until someone confirms the audio matches.
+ *
+ * Observed clocks. One quirk kept as captured: Bart Skils & Weska → Booka
+ * Shade are 1s apart (54:41 → 54:42); every other gap is 68s+, so that is
+ * almost certainly a 1001 slip, but clocks are never silently adjusted.
+ * Captured 2026-08-26 — provenance 1001tl.
+ */
+export const TL_YOTTO_ODD_WORLD_JULY_2026: FingerprintSeedRow[] = [
+  { at: "0:18", artist: "Avenue One", title: "Nopia" },
+  { at: "4:25", artist: "Lexer", title: "Anyywayy" },
+  { at: "8:41", artist: "Jos & Eli", title: "Lucidia" },
+  { at: "16:23", artist: "ZHU & Gc_bestbelieve_sa", title: "LEVELZZZ" },
+  { at: "20:38", artist: "Tommy Farrow", title: "Visions" },
+  { at: "25:46", artist: "Temple Tears", title: "From The Wall" },
+  {
+    at: "29:26",
+    artist: "Enrico Sangiuliano",
+    title: "Step Into The End",
+  },
+  {
+    at: "37:12",
+    artist: "Bolier & AMRV",
+    title: "My Friend (BLR Podium Mix)",
+  },
+  { at: "40:47", artist: "LP Giobbi & EMJIE", title: "Spirit Higher" },
+  { at: "44:39", artist: "KREAM & SCRIPT", title: "Turn Up The Dose" },
+  { at: "49:15", artist: "HILLS & Shilla", title: "Right Now" },
+  { at: "54:41", artist: "Bart Skils & Weska", title: "For The Music" },
+  {
+    at: "54:42",
+    artist: "Booka Shade",
+    title: "Your Command (Paul Kalkbrenner Remix)",
+  },
+  {
+    at: "55:50",
+    artist: "ABBA",
+    title: "If It Wasn't For The Nights (YOTTO Edit)",
+  },
+];
+
+/**
  * Max Styler @ Lollapalooza Afters, Radius Chicago, United States 2026-08-01
  * Official SoundCloud: https://soundcloud.com/maxstyler/lollaafters26
  * https://www.1001tracklists.com/tracklist/2gv88zkt/max-styler-lollapalooza-afters-radius-chicago-united-states-2026-08-01.html
