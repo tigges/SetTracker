@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { Suspense } from "react";
 import Link from "next/link";
 import { Capture1001Client } from "@/components/Capture1001Client";
+import { OpenFoldWhenQuery } from "@/components/OpenFoldWhenQuery";
 import {
   LeftoverHostQueue,
   WeakSiteQueue,
@@ -459,8 +460,10 @@ export default async function StatsPage() {
           count={captureQueueOpen}
           hint="Community tracklist overlay for sets that already have official playback. Open the playback, search 1001, run the bookmarklet. Never invent a 1001 URL."
           followUp="operator"
-          open
         >
+          <Suspense fallback={null}>
+            <OpenFoldWhenQuery />
+          </Suspense>
           <Suspense fallback={null}>
             <Capture1001Client
               presets={captureQueue.presets}
