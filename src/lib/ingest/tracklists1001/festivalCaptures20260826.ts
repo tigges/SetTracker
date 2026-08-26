@@ -457,3 +457,74 @@ export const TL_BLONDISH_TML_WE1_CRYSTAL_2026: FingerprintSeedRow[] = [
     title: "Finally (Acappella)",
   },
 ];
+
+/**
+ * Arielle Free @ Freedom Stage, Tomorrowland Weekend 1, Belgium 2026-07-19
+ * Official YouTube: https://youtu.be/xipWzYd7R8o
+ * https://www.1001tracklists.com/tracklist/2b633wqt/arielle-free-freedom-stage-tomorrowland-weekend-1-belgium-2026-07-19.html
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-xipWzYd7R8o"]
+ * No SoundCloud permalink in the operator paste — do not invent one.
+ * Observed clocks (gaps 120s–450s), so no even-spacing.
+ * Captured 2026-08-26 — provenance 1001tl.
+ */
+export const TL_ARIELLE_FREE_TML_WE1_FREEDOM_2026: FingerprintSeedRow[] = [
+  { at: "0:12", artist: "Arielle Free", title: "Feels So Good" },
+  {
+    at: "2:21",
+    artist: "Antoine Clamaran",
+    title: "Back To The Old School",
+  },
+  { at: "4:30", artist: "Us Two", title: "Santa Maria" },
+  { at: "9:20", artist: "GotSome", title: "Mardi Gras" },
+  {
+    at: "12:20",
+    artist: "Arielle Free vs. Will Clarke",
+    title: "Wit Ya (Bootleg)",
+  },
+  { at: "19:30", artist: "AMMIL", title: "Selecta" },
+  { at: "23:30", artist: "Masters At Work", title: "Work" },
+  { at: "26:20", artist: "Arielle Free", title: "'Cause I Can" },
+  { at: "29:20", artist: "AMMIL", title: "All For The Ladies" },
+  { at: "32:45", artist: "Ninetoes", title: "Finder" },
+  { at: "36:00", artist: "Trace", title: "House Music" },
+  { at: "40:00", artist: "Dale Howard", title: "On Lock" },
+  {
+    at: "43:35",
+    artist: "Simon Fava & Yvvan Back ft. Sergio Mendes",
+    title: "Magalenha",
+  },
+  { at: "50:00", artist: "Bella Backe", title: "Voodoo Jelly" },
+  { at: "52:00", artist: "Chris Lorenzo & aMo", title: "HOTS 4 U" },
+  {
+    at: "54:40",
+    artist: "Cloonee & Prospa",
+    title: "Free Your Mind (James Poole Edit)",
+  },
+  { at: "1:01:00", artist: "Soulsearcher", title: "Can't Get Enough" },
+  { at: "1:08:30", artist: "William Kiss", title: "XXX" },
+  {
+    at: "1:11:50",
+    artist: "Illyus Barrientos & MALU",
+    title: "Right Here",
+  },
+  {
+    at: "1:15:30",
+    artist: "The Good Men & Milk & Sugar",
+    title: "Give It Up",
+  },
+  {
+    at: "1:17:40",
+    artist: "Mousse T & Hot 'N' Juicy ft. Inaya Day",
+    title: "Horny (Mousse T 98 Extended Mix)",
+  },
+  {
+    at: "1:21:30",
+    artist: "Arielle Free & GHSTGHSTGHST",
+    title: "Keep On Jumpin'",
+  },
+  {
+    at: "1:25:50",
+    artist: "Arielle Free & Jem Cooke",
+    title: "Hold Me Closer",
+  },
+];
