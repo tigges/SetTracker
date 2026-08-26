@@ -395,3 +395,65 @@ export const TL_HI_LO_LAYTON_GIORDANI_TML_WE2_CRYSTAL_2026: FingerprintSeedRow[]
       title: "One More Time (HILLS Remix)",
     },
   ];
+
+/**
+ * BLOND:ISH @ Crystal Garden Stage, Tomorrowland Weekend 1, Belgium
+ * 2026-07-17
+ * Official YouTube: https://youtu.be/n3TESnQqiQ4
+ * https://www.1001tracklists.com/tracklist/rwsfpn1/blondish-crystal-garden-stage-tomorrowland-weekend-1-belgium-2026-07-17.html
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-n3TESnQqiQ4"]
+ * No SoundCloud permalink in the operator paste — do not invent one.
+ * Observed clocks (gaps 65s–668s), so no even-spacing.
+ * Captured 2026-08-26 — provenance 1001tl.
+ */
+export const TL_BLONDISH_TML_WE1_CRYSTAL_2026: FingerprintSeedRow[] = [
+  { at: "0:05", artist: "Bustafunk", title: "Tha Preechaa (MERCER Remix)" },
+  { at: "3:05", artist: "Nico Rac", title: "On The Floor" },
+  { at: "4:10", artist: "La Bouche", title: "Be My Lover" },
+  { at: "6:43", artist: "Sapian", title: "Dance Now" },
+  {
+    at: "11:09",
+    artist: "Empire Of The Sun",
+    title: "Walking On A Dream (BLOND:ISH Remix)",
+  },
+  { at: "16:08", artist: "DJ PP", title: "Queen Of Disco" },
+  { at: "17:15", artist: "Moloko", title: "Sing It Back (Acappella)" },
+  {
+    at: "23:56",
+    artist: "Teriyaki Boyz",
+    title: "Tokyo Drift (The Fast And The Furious: Tokyo Drift OST)",
+  },
+  { at: "31:36", artist: "iiO ft. Nadia Ali", title: "Rapture" },
+  { at: "35:54", artist: "House Of Glass", title: "Disco Down" },
+  { at: "37:12", artist: "Wildchild", title: "Renegade Master (Acappella)" },
+  {
+    at: "38:29",
+    artist: "BLOND:ISH & Kurtis Wells",
+    title: "Lovers On The Dancefloor",
+  },
+  { at: "41:45", artist: "BLOND:ISH", title: "$MONEY" },
+  {
+    at: "49:58",
+    artist: "Uffie ft. Pharrell Williams",
+    title: "Add Suv (Dedro Edit)",
+  },
+  {
+    at: "53:54",
+    artist: "BLOND:ISH & Stevie Appleton",
+    title: "Never Walk Alone",
+  },
+  { at: "57:36", artist: "Marco Lys & Ben Miller", title: "So Good" },
+  { at: "1:02:01", artist: "FIRZA", title: "Jump" },
+  { at: "1:08:11", artist: "Lock 'n Load", title: "Blow Ya Mind" },
+  {
+    at: "1:11:58",
+    artist: "Florence + The Machine",
+    title: "You've Got The Love",
+  },
+  { at: "1:23:06", artist: "Atlantic Ocean", title: "Waterfall" },
+  {
+    at: "1:27:26",
+    artist: "Kings Of Tomorrow ft. Julie McKnight",
+    title: "Finally (Acappella)",
+  },
+];

@@ -141,6 +141,7 @@ import {
 } from "./festivalCaptures20260824";
 import { TL_AGENTS_OF_TIME_TIME_WARP_FLOOR_1_2026 } from "./festivalCaptures20260825";
 import {
+  TL_BLONDISH_TML_WE1_CRYSTAL_2026,
   TL_DAVID_HERRLICH_OWR_ACADEMY_2026,
   TL_HARDWELL_EUPHORIA_019_2026,
   TL_HI_LO_LAYTON_GIORDANI_TML_WE2_CRYSTAL_2026,
@@ -4764,6 +4765,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-oxG_iaVCkY4": TL_REINIER_ZONNEVELD_TML_WE1_ATMOSPHERE_2026,
   "yt-Wbc9jh-7tTw": TL_INDIRA_PAGANOTTO_TML_WE2_MAINSTAGE_2026,
   "yt-s_iciA5Eg1E": TL_HI_LO_LAYTON_GIORDANI_TML_WE2_CRYSTAL_2026,
+  "yt-n3TESnQqiQ4": TL_BLONDISH_TML_WE1_CRYSTAL_2026,
   // Even-spaced clocks (evenlySpaceRows): order real, times approximate.
   "sc-tomorrowland-tomorrowland-academy-student-mix-david-herrlich":
     TL_DAVID_HERRLICH_OWR_ACADEMY_2026,
