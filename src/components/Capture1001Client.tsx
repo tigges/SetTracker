@@ -1,7 +1,8 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useSyncExternalStore } from "react";
 import { useSearchParams } from "next/navigation";
+import { captureDeferUntil } from "@/lib/ingest/captureDefer";
 import {
   SEARCH_1001_RESULT,
   SEARCH_1001_TRACKLISTS,
@@ -11,6 +12,62 @@ import {
 } from "@/lib/search1001";
 
 const LIVE_SCRIPT = "https://setradar.ai/capture-1001tl.js";
+
+/** Per-browser parks. The committed defer file is the shared, durable one. */
+const SNOOZE_KEY = "setradar.capture.snooze.v1";
+const SNOOZE_EVENT = "setradar:capture-snooze";
+
+/** Raw string snapshot keeps useSyncExternalStore referentially stable. */
+function snoozeSnapshot(): string {
+  try {
+    return window.localStorage.getItem(SNOOZE_KEY) ?? "";
+  } catch {
+    return "";
+  }
+}
+
+function subscribeSnooze(onChange: () => void): () => void {
+  window.addEventListener("storage", onChange);
+  window.addEventListener(SNOOZE_EVENT, onChange);
+  return () => {
+    window.removeEventListener("storage", onChange);
+    window.removeEventListener(SNOOZE_EVENT, onChange);
+  };
+}
+
+function parseSnooze(raw: string): Record<string, string> {
+  if (!raw) return {};
+  try {
+    const parsed = JSON.parse(raw) as Record<string, string>;
+    return parsed && typeof parsed === "object" ? parsed : {};
+  } catch {
+    return {};
+  }
+}
+
+function writeSnoozeStore(next: Record<string, string>): void {
+  try {
+    window.localStorage.setItem(SNOOZE_KEY, JSON.stringify(next));
+  } catch {
+    // Private mode / full storage — the park just does not survive reload.
+  }
+  window.dispatchEvent(new Event(SNOOZE_EVENT));
+}
+
+function isSnoozeActive(until: string, nowMs = Date.now()): boolean {
+  const at = Date.parse(
+    /^\d{4}-\d{2}-\d{2}$/.test(until) ? `${until}T23:59:59.999Z` : until,
+  );
+  return Number.isFinite(at) && at > nowMs;
+}
+
+function activeSnoozeSlugs(store: Record<string, string>): Set<string> {
+  const out = new Set<string>();
+  for (const [slug, until] of Object.entries(store)) {
+    if (isSnoozeActive(until)) out.add(slug);
+  }
+  return out;
+}
 
 export type CapturePreset = {
   label: string;
@@ -119,8 +176,16 @@ function Capture1001Workbench({
   const [query, setQuery] = useState(initialQuery);
   const [status, setStatus] = useState<string>("");
 
+  // Local parks apply immediately; commit data/capture-defer.json to share them.
+  const snoozeRaw = useSyncExternalStore(
+    subscribeSnooze,
+    snoozeSnapshot,
+    () => "",
+  );
+  const snoozed = useMemo(() => parseSnooze(snoozeRaw), [snoozeRaw]);
+
   const generic = bookmarkletFor(scriptUrl);
-  const filtered = useMemo(() => {
+  const matches = useMemo(() => {
     const q = query.trim().toLowerCase();
     if (!q) return presets;
     return presets.filter((p) =>
@@ -129,11 +194,49 @@ function Capture1001Workbench({
         .includes(q),
     );
   }, [presets, query]);
+  const activeSnoozes = useMemo(() => activeSnoozeSlugs(snoozed), [snoozed]);
+  const filtered = useMemo(
+    () => matches.filter((p) => !activeSnoozes.has(p.slug)),
+    [matches, activeSnoozes],
+  );
+  const parked = useMemo(
+    () => matches.filter((p) => activeSnoozes.has(p.slug)),
+    [matches, activeSnoozes],
+  );
   const findQuery = search1001Query(query.trim());
 
   async function onCopy(label: string, text: string) {
     const ok = await copyText(text);
     setStatus(ok ? `Copied ${label}` : `Copy failed — long-press the code below`);
+  }
+
+  function onSnooze(p: CapturePreset) {
+    const until = captureDeferUntil();
+    writeSnoozeStore({ ...snoozed, [p.slug]: until });
+    setStatus(`Parked ${p.label} until ${until} — Copy defer JSON to keep it`);
+  }
+
+  function onRestore(slug: string) {
+    const next = { ...snoozed };
+    delete next[slug];
+    writeSnoozeStore(next);
+  }
+
+  async function onCopyDeferJson() {
+    const rows = Object.entries(snoozed)
+      .filter(([, until]) => isSnoozeActive(until))
+      .map(([slug, until]) => {
+        const preset = presets.find((p) => p.slug === slug);
+        return {
+          slug,
+          until,
+          note: preset
+            ? `${preset.label} — no 1001 tracklist found yet.`
+            : "Parked from /stats.",
+        };
+      })
+      .sort((a, b) => a.slug.localeCompare(b.slug));
+    await onCopy("defer JSON", JSON.stringify({ rows }, null, 2));
   }
 
   return (
@@ -270,11 +373,63 @@ function Capture1001Workbench({
               >
                 Copy capture
               </button>
+              <button
+                type="button"
+                className="rounded-md border border-amber/40 px-2.5 py-1 text-[12px] font-bold text-amber"
+                title="No clear reading yet — park it and let the next candidate take this slot"
+                onClick={() => onSnooze(p)}
+              >
+                Later
+              </button>
             </div>
           </li>
           );
         })}
       </ol>
+
+      {parked.length > 0 ? (
+        <details className="rounded-md border border-amber/30 bg-amber/5 px-2 py-1.5">
+          <summary className="cursor-pointer text-[12px] font-semibold text-ink">
+            Parked for later{" "}
+            <span className="mono text-muted2">({parked.length})</span>
+          </summary>
+          <p className="mt-1 text-[11px] leading-snug text-muted2">
+            Hidden in this browser only, and they return on their own date. To
+            park them for everyone — and free the slot in the built queue —
+            copy the JSON and commit it into{" "}
+            <span className="mono text-ink">data/capture-defer.json</span>.
+          </p>
+          <ul className="mt-1.5 divide-y divide-line border-y border-line">
+            {parked.map((p) => (
+              <li
+                key={p.slug}
+                className="flex items-baseline justify-between gap-2 py-1"
+              >
+                <div className="min-w-0">
+                  <div className="truncate text-[13px] text-ink">{p.label}</div>
+                  <div className="mono truncate text-[11px] text-muted2">
+                    {p.slug} · back {snoozed[p.slug]}
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  className="mono shrink-0 text-[11px] text-brand hover:underline"
+                  onClick={() => onRestore(p.slug)}
+                >
+                  restore
+                </button>
+              </li>
+            ))}
+          </ul>
+          <button
+            type="button"
+            className="mt-2 rounded-md border border-line px-2.5 py-1 text-[12px] font-bold"
+            onClick={() => void onCopyDeferJson()}
+          >
+            Copy defer JSON
+          </button>
+        </details>
+      ) : null}
     </div>
   );
 }

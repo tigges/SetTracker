@@ -414,16 +414,24 @@ export function presetFromNeed(row: CaptureNeedRow): CapturePreset {
 /** Rank catalog gaps. Already-mapped slugs never appear. */
 export function buildCaptureQueueFromNeeds(
   rows: CaptureNeedRow[],
-  opts: { limit?: number; extra?: CapturePreset[]; nowMs?: number } = {},
+  opts: {
+    limit?: number;
+    extra?: CapturePreset[];
+    nowMs?: number;
+    /** Parked rows (data/capture-defer.json) — filtered before the cap. */
+    deferred?: Set<string>;
+  } = {},
 ): CapturePreset[] {
   const limit = opts.limit ?? CAPTURE_QUEUE_LIMIT;
   const mapped = mappedSlugs();
   const nowMs = opts.nowMs ?? Date.now();
+  const deferred = opts.deferred ?? new Set<string>();
   const seen = new Set<string>();
   const out: CapturePreset[] = [];
 
   const push = (p: CapturePreset) => {
     if (seen.has(p.slug) || mapped.has(p.slug)) return;
+    if (deferred.has(p.slug)) return;
     if (isSecondaryPlaybackSlug(p.slug)) return;
     if (out.length >= limit) return;
     seen.add(p.slug);

@@ -140,6 +140,7 @@ import {
   TL_TIMMY_TRUMPET_TML_WE2_FREEDOM_2026,
 } from "./festivalCaptures20260824";
 import { TL_AGENTS_OF_TIME_TIME_WARP_FLOOR_1_2026 } from "./festivalCaptures20260825";
+import { TL_HARDWELL_EUPHORIA_019_2026 } from "./festivalCaptures20260826";
 
 export {
   TL_ALESSO_TML_WE2_2026,
@@ -4750,6 +4751,10 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-UETk8HSB0Yw": TL_DUBVISION_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
   "yt-or_SDolEBfw": TL_W_AND_W_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
   "sc-tomorrowland-mandy-mondays-august-2026": TL_MANDY_MANDY_MONDAYS_028_2026,
+  // Host twins — same performance on the Tomorrowland SC show and YouTube.
+  "sc-tomorrowland-hardwell-presents-euphoria-july-2026":
+    TL_HARDWELL_EUPHORIA_019_2026,
+  "yt-39KkVIunYAk": TL_HARDWELL_EUPHORIA_019_2026,
   "yt-J7b0G4XX8pg":
     TL_MANDY_AND_NEGATIV_ATMOSPHERE_STAGE_TOMORROWLAND_WE1_BELGIUM_2026,
   "yt-B1EaMgsf84Q":
