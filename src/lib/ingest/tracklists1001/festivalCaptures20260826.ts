@@ -62,6 +62,108 @@ export const TL_HARDWELL_EUPHORIA_019_2026: FingerprintSeedRow[] = [
 ];
 
 /**
+ * Space 92 @ Freedom Stage, Tomorrowland Weekend 1, Belgium 2026-07-18
+ * Official SoundCloud (artist's own, verified 200 "Space 92 @ Tomorrowland
+ * 2026 Freedom Stage"):
+ * https://soundcloud.com/space92/space-92-tomorrowland-2026
+ * Official YouTube twin (oEmbed: @tomorrowland "Space 92 WE1 | Tomorrowland
+ * 2026"): https://youtu.be/3k66DQuU31A
+ * https://www.1001tracklists.com/tracklist/1x4vfuuk/space-92-freedom-stage-tomorrowland-weekend-1-belgium-2026-07-18.html
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["sc-space92-space-92-tomorrowland-2026"]
+ * plus the YT slug so either host resolves the same clocks.
+ * Observed clocks (gaps 43s–385s; longest near-uniform run 3). List starts at
+ * 2:41 — the intro is unlogged, so no cue is invented before it.
+ * Captured 2026-08-26 — provenance 1001tl.
+ */
+export const TL_SPACE_92_TML_WE1_FREEDOM_2026: FingerprintSeedRow[] = [
+  {
+    at: "2:41",
+    artist: "Nicole Moudaber & Space 92",
+    title: "Eyes On Me",
+  },
+  { at: "5:26", artist: "Maddix & Space 92", title: "Rolling" },
+  {
+    at: "8:48",
+    artist: "Bountyhunter",
+    title: "Woops (Dimitri Vegas & Junkie Kid Remix / BRANDON Remix)",
+  },
+  { at: "11:18", artist: "Space 92", title: "The Door" },
+  {
+    at: "14:52",
+    artist: "Voodoo & Serano",
+    title: "Blood Is Pumpin' (Space 92 Edit)",
+  },
+  {
+    at: "18:29",
+    artist: "Space 92 ft. Malena Narvay",
+    title: "Formula Loca",
+  },
+  { at: "21:50", artist: "Space 92", title: "Orbit Motion" },
+  {
+    at: "24:20",
+    artist: "HI-LO & Space-92 vs. Opus III",
+    title: "ORION vs. Fine Day (Modeā Mashup)",
+  },
+  {
+    at: "25:03",
+    artist: "Opus III",
+    title: "It's A Fine Day (Acappella)",
+  },
+  { at: "25:46", artist: "HI-LO & Space 92", title: "ORION" },
+  {
+    at: "26:29",
+    artist: "Da Hool",
+    title: "Meet Her At The Love Parade (Daxson Remix)",
+  },
+  { at: "28:40", artist: "Space 92 & Alignment", title: "Proton" },
+  { at: "32:20", artist: "Space 92 & The YellowHeads", title: "Planet X" },
+  { at: "38:45", artist: "Space 92", title: "Robot" },
+  { at: "41:20", artist: "Argy & Omnya", title: "Aria (Omiki Remix)" },
+  {
+    at: "45:38",
+    artist: "Disclosure ft. Eliza Doolittle",
+    title: "You & Me (Flume Remix / Space 92 Edit)",
+  },
+  { at: "48:48", artist: "Space 92", title: "Melodia" },
+  { at: "50:28", artist: "Faithless", title: "Insomnia (Space 92 Edit)" },
+  { at: "53:08", artist: "Oxia", title: "Domino (Space 92 Remix)" },
+  {
+    at: "57:09",
+    artist: "Anyma & Argy & Son Of Son",
+    title: "Voices In My Head (Space 92 Edit)",
+  },
+  { at: "1:00:15", artist: "Darude", title: "Sandstorm (Space 92 Edit)" },
+  { at: "1:03:48", artist: "Bassjackers & Space 92", title: "I'm On Acid" },
+  {
+    at: "1:07:55",
+    artist: "Maddix & Olly James & Hannah Laing",
+    title: "Transmission",
+  },
+  {
+    at: "1:10:22",
+    artist: "Zombie Nation",
+    title: "Kernkraft 400 (Mr.Machine & EDMMARO Edit)",
+  },
+  {
+    at: "1:12:58",
+    artist: "Masters At Work",
+    title: "Work (Space 92 Edit)",
+  },
+  {
+    at: "1:16:14",
+    artist: "Nicole Moudaber",
+    title: "Reasons To Love You (Space 92 Remix)",
+  },
+  { at: "1:19:25", artist: "Space 92", title: "Offbeat" },
+  {
+    at: "1:22:40",
+    artist: "Brennan Heart & HI-LO & Project Zeitgeist",
+    title: "Adagio For Strings",
+  },
+  { at: "1:26:42", artist: "TNT", title: "Teknogym 2K19" },
+];
+
+/**
  * Lost Frequencies @ Mainstage, Tomorrowland Weekend 2, Belgium 2026-07-26
  * Official YouTube: https://youtu.be/KLyeLMJuIOY
  * https://www.1001tracklists.com/tracklist/9xst011/lost-frequencies-mainstage-tomorrowland-weekend-2-belgium-2026-07-26.html
