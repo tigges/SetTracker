@@ -1,6 +1,6 @@
 {
   "note": "Operator-collected 1001Tracklists URLs. All listed urls[] rows are now seeded. Prefer new operator pastes over this archive. stillMissing1001 is video-in / no 1001 page — do not invent URLs. heldPendingPlayback is 1001-in / no official YT/SC playback — seed held, do not invent or wire fan playback. pendingCuePaste is official playback + operator 1001 URL without cue rows — do not scrape 1001 or invent 1001tl seeds.",
-  "updatedAt": "2026-08-26T10:20:00.000Z",
+  "updatedAt": "2026-08-26T11:05:00.000Z",
   "urls": [
     {
       "label": "VINAI · S2O Songkran Music Festival Thailand 2023-04-15",
@@ -491,7 +491,7 @@
       "tracklistUrl": "https://www.1001tracklists.com/tracklist/2s55dyj1/afrojack-r3hab-mainstage-tomorrowland-weekend-2-belgium-2026-07-26.html",
       "soundcloudUrl": "https://soundcloud.com/r3hab/r3hab-b2b-afrojack",
       "youtubeUrl": "https://youtu.be/AjQeohYmg3A",
-      "note": "Operator paste 2026-08-26 added the R3HAB SoundCloud row. Same performance and same 1001 tracklist as the existing seed (captured 2026-08-16, recaptured 08-23), already wired to yt-AjQeohYmg3A (@tomorrowland) and yt-lEIGnx7qLl0 (R3HAB). 54 cues; all three slugs share one seed."
+      "note": "Operator paste 2026-08-26 added the R3HAB SoundCloud row. Same performance and same 1001 tracklist as the existing seed (captured 2026-08-16, recaptured 08-23), already wired to yt-AjQeohYmg3A (@tomorrowland) and yt-lEIGnx7qLl0 (R3HAB). 54 cues; all three slugs share one seed. SC permalink is not a SOUNDCLOUD_TRACK_SEEDS entry, so all three slugs pin soundcloudUrl in SET_HOST_PINS (verified 2026-08-26) — otherwise the YouTube rows carry no SoundCloud host."
     },
     {
       "label": "Hardwell & Sub Zero Project · The Great Library, Tomorrowland WE1 2026-07-17",

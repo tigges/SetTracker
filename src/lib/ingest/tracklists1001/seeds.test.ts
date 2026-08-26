@@ -1085,6 +1085,13 @@ assert.equal(
   TRACKLIST_1001_BY_SOURCE_SLUG["yt-lEIGnx7qLl0"],
   TL_AFROJACK_R3HAB_TML_WE2_2026,
 );
+// R3HAB's SoundCloud upload of the same performance. All three slugs must hold
+// the SAME array object: extraHostUrlsBySlug groups twins by seed identity, so
+// a re-declared copy would silently split the group.
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-r3hab-r3hab-b2b-afrojack"],
+  TL_AFROJACK_R3HAB_TML_WE2_2026,
+);
 
 assertSeedClocks(TL_STEVE_AOKI_TML_WE2_2026);
 const aoki = tracklist1001RowsToPlays(TL_STEVE_AOKI_TML_WE2_2026);

@@ -83,6 +83,22 @@ export const SET_HOST_PINS: Record<string, SetHostUrls> = {
     soundcloudUrl:
       "https://soundcloud.com/rose-ringed/rose-ringed-freedomstage-we1",
   },
+  // AFROJACK & R3HAB @ Mainstage, Tomorrowland WE2 2026-07-26. One
+  // performance on three slugs: @tomorrowland and R3HAB's own YouTube plus
+  // R3HAB's SoundCloud. The SC permalink is not a SOUNDCLOUD_TRACK_SEEDS
+  // entry, so without these pins the YouTube rows carry no soundcloudUrl and
+  // the twin fold cannot prefer SC playback.
+  // Verified 2026-08-26: 200, og:title "R3HAB B2B AFROJACK @ TOMORROWLAND
+  // BELGIUM W2".
+  "yt-AjQeohYmg3A": {
+    soundcloudUrl: "https://soundcloud.com/r3hab/r3hab-b2b-afrojack",
+  },
+  "yt-lEIGnx7qLl0": {
+    soundcloudUrl: "https://soundcloud.com/r3hab/r3hab-b2b-afrojack",
+  },
+  "sc-r3hab-r3hab-b2b-afrojack": {
+    soundcloudUrl: "https://soundcloud.com/r3hab/r3hab-b2b-afrojack",
+  },
 };
 
 export function soundcloudSlugFromUrl(url: string): string | null {

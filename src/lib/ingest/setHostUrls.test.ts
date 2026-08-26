@@ -7,7 +7,7 @@ import {
   soundcloudSlugFromUrl,
   youtubeUrlFromSlug,
 } from "./setHostUrls";
-import { mixcloudPageUrl } from "../playback";
+import { mixcloudPageUrl, unusedOfficialHostLinks } from "../playback";
 
 assert.equal(
   soundcloudSlugFromUrl(
@@ -226,6 +226,45 @@ assert.equal(
     "https://soundcloud.com/claptone/clapcast-576",
   ),
   "https://soundcloud.com/claptone/clapcast-576",
+);
+
+// AFROJACK & R3HAB TML WE2: three slugs, one performance. R3HAB's SoundCloud
+// permalink is not a SOUNDCLOUD_TRACK_SEEDS entry, so it only reaches the
+// YouTube rows through SET_HOST_PINS. Without it those rows list no other
+// official host.
+for (const slug of [
+  "yt-AjQeohYmg3A",
+  "yt-lEIGnx7qLl0",
+  "sc-r3hab-r3hab-b2b-afrojack",
+]) {
+  assert.equal(
+    extras[slug]?.soundcloudUrl,
+    "https://soundcloud.com/r3hab/r3hab-b2b-afrojack",
+    `missing R3HAB SoundCloud host on ${slug}`,
+  );
+  assert.equal(
+    extras[slug]?.youtubeUrl,
+    "https://www.youtube.com/watch?v=AjQeohYmg3A",
+    `missing shared YouTube host on ${slug}`,
+  );
+}
+assert.deepEqual(
+  unusedOfficialHostLinks({
+    playbackUrl: "https://www.youtube.com/watch?v=AjQeohYmg3A",
+    ...harvestSetHostUrls({
+      slug: "yt-AjQeohYmg3A",
+      playbackUrl: "https://www.youtube.com/watch?v=AjQeohYmg3A",
+    }),
+  }).map((l) => l.host),
+  ["soundcloud"],
+);
+// SoundCloud still wins playback over the YouTube twin.
+assert.equal(
+  preferPlaybackUrl(
+    "https://www.youtube.com/watch?v=AjQeohYmg3A",
+    "https://soundcloud.com/r3hab/r3hab-b2b-afrojack",
+  ),
+  "https://soundcloud.com/r3hab/r3hab-b2b-afrojack",
 );
 
 for (const [slug, pin] of Object.entries(SET_HOST_PINS)) {
