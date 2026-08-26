@@ -2933,5 +2933,11 @@
     "slug": "tomorrowland",
     "imageUrl": "https://yt3.googleusercontent.com/bVYSBgDgjx0Onq0N5WPEZkbwlwGNECTsjzQorUshOfrebX0Y5sYWBaVOQ_HhjJUN847tBkw2=s900-c-k-c0x00ffffff-no-rj",
     "twitter": "https://x.com/tomorrowland"
+  },
+  {
+    "kind": "festival",
+    "slug": "vision-colour-music-festival",
+    "website": "https://linktr.ee/VACFEST",
+    "instagram": "https://www.instagram.com/vacfestival/"
   }
 ]

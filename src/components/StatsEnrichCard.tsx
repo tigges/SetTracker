@@ -1,8 +1,6 @@
 import type { ActionsStatusFile } from "@/lib/actionsStatus";
-import {
-  actionsConclusionLabel,
-  enrichOutcomeLabel,
-} from "@/lib/actionsStatus";
+import { enrichOutcomeLabel } from "@/lib/actionsStatus";
+import { StatsLiveRuns } from "@/components/StatsLiveRuns";
 import type { EnrichRunReport } from "@/lib/ingest/enrich/enrichRunReport";
 import { cookieRefreshHint } from "@/lib/ingest/enrich/youtubeCookies";
 
@@ -49,8 +47,8 @@ export function StatsEnrichCard({
         <div>
           <h2 className="text-[14px] font-bold tracking-tight">Last enrich</h2>
           <p className="mt-0.5 text-[11px] text-muted2">
-            Identify + File Scan from the cached catalog. Snapshot at last Pages
-            ship — not a live Actions poll.
+            Identify + File Scan from the cached catalog, as of the last Pages
+            ship. The workflow rows below refresh live from GitHub.
           </p>
         </div>
         <Tone label={outcome} tone={outcomeTone} />
@@ -119,39 +117,17 @@ export function StatsEnrichCard({
         </p>
       ) : null}
 
-      {actions?.workflows && actions.workflows.length > 0 ? (
-        <ul className="mt-2 divide-y divide-line border-y border-line">
-          {actions.workflows.map((w) => {
-            const label = actionsConclusionLabel(w.conclusion, w.status);
-            const tone =
-              w.conclusion === "success"
-                ? "ok"
-                : w.conclusion === "failure" || w.conclusion === "cancelled"
-                  ? "warn"
-                  : "muted";
-            return (
-              <li
-                key={w.id}
-                className="flex items-baseline justify-between gap-2 py-1"
-              >
-                {w.htmlUrl ? (
-                  <a
-                    href={w.htmlUrl}
-                    className="truncate text-[13px] font-semibold text-ink hover:underline"
-                  >
-                    {w.label}
-                  </a>
-                ) : (
-                  <span className="truncate text-[13px] font-semibold text-ink">
-                    {w.label}
-                  </span>
-                )}
-                <Tone label={label} tone={tone} />
-              </li>
-            );
-          })}
-        </ul>
-      ) : null}
+      <StatsLiveRuns
+        initial={(actions?.workflows ?? []).map((w) => ({
+          id: w.id,
+          label: w.label,
+          status: w.status,
+          conclusion: w.conclusion,
+          htmlUrl: w.htmlUrl,
+          displayTitle: w.displayTitle,
+          updatedAt: w.updatedAt,
+        }))}
+      />
     </section>
   );
 }

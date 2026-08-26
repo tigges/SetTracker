@@ -1,6 +1,10 @@
 /**
  * Last GitHub Actions runs (Pages build snapshot) + last enrich report
  * stored in the catalog DB. Missing files/token → empty, never throw.
+ *
+ * This snapshot is only the pre-hydration value for the run rows; /stats
+ * refreshes them from the public Actions API in the browser (actionsLive.ts).
+ * Server-only — reads from disk, so never import it into a client component.
  */
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
@@ -34,15 +38,6 @@ export function loadActionsStatusFile(
   } catch {
     return null;
   }
-}
-
-export function actionsConclusionLabel(conclusion: string, status: string): string {
-  if (status === "in_progress" || status === "queued") return status.replace("_", " ");
-  if (conclusion === "success") return "success";
-  if (conclusion === "cancelled") return "cancelled";
-  if (conclusion === "failure") return "failure";
-  if (conclusion === "skipped") return "skipped";
-  return conclusion || status || "unknown";
 }
 
 export function enrichOutcomeLabel(report: EnrichRunReport | null): string {

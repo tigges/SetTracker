@@ -217,7 +217,15 @@ unless asked. Never write Relive for HARD / Insomniac / Nameless / Ultra.
   `festivals-need-complete.csv`, `clubs-need-complete.csv`, plus combined
   `entities-need-complete.csv` / `.jsonl` and `claude-entity-complete-prompt.md`.
   `/stats` links **Export for Claude complete**. Never invent `@slug` handles;
-  DJ Mag / 6am / Wikipedia are not official websites. Verify-then-pin
+  DJ Mag / 6am / Wikipedia are not official websites — but the chart URL is
+  **kept**, not discarded: `djmagUrl` lives on every row of
+  `data/venue-seeds/djmag-atlas-2026.json`,
+  `djmag-top100-festivals-2026.json`, `data/artist-seeds/djmag-top100-djs-2025.json`
+  and `djmag-atlas-djs-2025.json`. It is never written to `Dj.website` /
+  `Event.website` and never displayed while a first-party URL exists.
+  Acronym handles are accepted when the acronym leads the handle and the rest
+  is a remaining name word or generic filler (`acronymMatchesHandle` —
+  Vision & Colour Music Festival → `@vacfestival`, `&` counts as "and"). Verify-then-pin
   (`data/entity-complete-pins.json`, fill-null on verify-urls). Wide
   `djs-need-complete` CSV also fills-null `homeCity` / distinctive `bio` /
   canonical `genre` on Dj. Template bios, DJ Mag / RA websites, and
@@ -312,9 +320,13 @@ unless asked. Never write Relive for HARD / Insomniac / Nameless / Ultra.
   workflow does not matter — `ubuntu-latest` is the IP YouTube sees. Cookies
   do not make GHA YouTube-steady; refresh the dummy jar when `/stats` Last
   enrich marks it stale (`npm run cookies:export` on a desktop, then
-  `gh secret set YT_DUMMY_COOKIE_LOCAL < .local/yt-cookies.txt`). Identify +
-  File Scan totals land on `/stats` after the next Pages ship (DB snapshot +
-  last enrich/deep/Pages conclusions).
+  `gh secret set YT_DUMMY_COOKIE_LOCAL < .local/yt-cookies.txt`).   Identify +
+ File Scan totals land on `/stats` after the next Pages ship (DB snapshot).
+ The **run rows refresh live** — the repo is public, so `StatsLiveRuns` reads
+ the Actions API from the browser (no token) and replaces the export snapshot,
+ which can never show Pages' own conclusion because it is written mid-run.
+ It polls only while a run is active. Keep `actionsStatus.ts` (node:fs) out of
+ client components — put shared helpers in `actionsLive.ts`.
 - **File Scanning (YouTube, CI-safe):** `npm run enrich:filescan`
   (`src/lib/ingest/enrich/acrFileScan.ts`; step in `catalog-enrich.yml`).
   Server-side — POST the YouTube URL to an ACRCloud **File Scanning** container;

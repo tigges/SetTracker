@@ -64,7 +64,10 @@ Provenance per row: `1001TL parse`, `MixesDB`, `SoundCloud parse`, `fingerprint`
    DJ gaps, festival capture gaps). Five flat queues, no nesting: Capture 1001,
    DJ complete, Places without a set, leftover hosts, weak chart websites.
    Lists show 10 rows, then **N more**. `/capture-1001` redirects into
-   `#capture-1001`. Every Pages export rebuilds this page from the current
+   `#capture-1001`. A static export cannot start a run, so the page links the
+   **Catalog deep refresh** / **Catalog enrich** / **Catalog LLM research**
+   workflow pages instead; paid passes print an estimate before sending.
+   Every Pages export rebuilds this page from the current
    catalog DB. Footer link only; not in the main nav.
 7. **Search / About** — catalog search and product notes.
 8. **Tracks / Labels** — still in the catalog and sitemap; not in the main nav.
