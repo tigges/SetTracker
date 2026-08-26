@@ -528,3 +528,169 @@ export const TL_ARIELLE_FREE_TML_WE1_FREEDOM_2026: FingerprintSeedRow[] = [
     title: "Hold Me Closer",
   },
 ];
+
+/**
+ * NERVO @ Mainstage, Tomorrowland Weekend 1, Belgium 2025-07-18
+ * Official YouTube: https://youtu.be/HWwmfWovTeI
+ * https://www.1001tracklists.com/tracklist/xfdu3jt/nervo-mainstage-tomorrowland-weekend-1-belgium-2025-07-18.html
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-HWwmfWovTeI"]
+ * Note the year — this is the 2025 edition, not 2026 like the rest of the
+ * 2026-08-26 batch. No SoundCloud permalink in the paste; none invented.
+ *
+ * CLOCKS ARE APPROXIMATE, and more so than most. Nothing here was observed:
+ * the first 11 rows sit exactly 195s apart, then 32 gaps alternate 50/51s
+ * (an even division rounding to whole seconds). Track order is real; treat
+ * every position as a rough marker. Replace if the set is ever cued properly.
+ * Captured 2026-08-26 — provenance 1001tl.
+ */
+export const TL_NERVO_TML_WE1_MAINSTAGE_2025: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "Madonna", title: "Like A Prayer (Acappella)" },
+  { at: "3:15", artist: "Nicky Romero & NERVO", title: "Like Home" },
+  {
+    at: "6:30",
+    artist: "Avicii ft. Amy Pearson",
+    title: "Let Me Show You Love (Don't Give Up On Us) (Acappella)",
+  },
+  {
+    at: "9:45",
+    artist: "Dimitri Vegas & Like Mike & AFROJACK & NERVO",
+    title: "The Way We See The World (Acappella)",
+  },
+  {
+    at: "13:00",
+    artist: "Ummet Ozcan & R3HAB & NERVO",
+    title: "Revolution (Acappella)",
+  },
+  {
+    at: "16:15",
+    artist: "Orjan Nilsen & Mark Sixma pres. nilsix",
+    title: "Bring Back The Techno",
+  },
+  { at: "19:30", artist: "Timmy Trumpet & Vengaboys", title: "Up & Down" },
+  { at: "22:45", artist: "The Rocketman", title: "Papi" },
+  { at: "26:00", artist: "NERVO & Tigerlily", title: "Mickey" },
+  {
+    at: "29:15",
+    artist: "Stardust",
+    title: "Music Sounds Better With You",
+  },
+  {
+    at: "32:30",
+    artist: "Nervo & 22Bullets",
+    title: "Destination Unknown (Calabria)",
+  },
+  { at: "33:21", artist: "Heerhorst", title: "Wimbo" },
+  { at: "34:12", artist: "Zerb ft. Sofiya Nzau", title: "Mwaki" },
+  {
+    at: "35:03",
+    artist: "Ummet Ozcan & R3HAB & NERVO",
+    title: "Revolution (Acappella)",
+  },
+  {
+    at: "35:54",
+    artist: "BL3SS & CamrinWatsin ft. bbyclose",
+    title: "Kisses (Malugi Remix)",
+  },
+  {
+    at: "36:45",
+    artist: "PAWSA & Adventures Of Stevie V vs. Bingo Players",
+    title:
+      "Dirty Cash (Money Talks) vs. Devotion (Rudeejay & Da Brozz Bootleg)",
+  },
+  { at: "37:36", artist: "Bingo Players", title: "Devotion" },
+  {
+    at: "38:27",
+    artist: "PAWSA & Adventures Of Stevie V",
+    title: "Dirty Cash (Money Talks)",
+  },
+  { at: "39:18", artist: "Jansons", title: "Messan" },
+  {
+    at: "40:09",
+    artist: "Technotronic",
+    title: "Pump Up The Jam (Acappella)",
+  },
+  {
+    at: "40:59",
+    artist: "David Guetta ft. Kelly Rowland",
+    title: "When Love Takes Over",
+  },
+  { at: "41:50", artist: "LÜRUM", title: "Energy Of Life" },
+  {
+    at: "42:40",
+    artist: "Culture Beat vs. Dom Dolla",
+    title: "Mr Vain Maker (TUCCI Mashup)",
+  },
+  { at: "43:31", artist: "Culture Beat", title: "Mr. Vain" },
+  {
+    at: "44:21",
+    artist: "Dom Dolla ft. Clementine Douglas",
+    title: "Miracle Maker",
+  },
+  {
+    at: "45:12",
+    artist: "MorganJ & G-POL vs. Travis Scott & Kendrick Lamar vs. Tyla",
+    title: "Bad vs. Goosebumps vs. Water (Oliver Heldens Mashup)",
+  },
+  {
+    at: "46:02",
+    artist: "Travis Scott ft. Kendrick Lamar",
+    title: "Goosebumps (Acappella)",
+  },
+  { at: "46:53", artist: "Tyla", title: "Water" },
+  { at: "47:43", artist: "MORGANJ & G-POL", title: "Bad" },
+  { at: "48:34", artist: "Michael Jackson", title: "Heal The World" },
+  {
+    at: "49:24",
+    artist: "Stevie Krash & Redscope",
+    title: "We Can Find A Way (Third ≡ Party Remix)",
+  },
+  {
+    at: "50:15",
+    artist: "Rihanna",
+    title: "Where Have You Been (Pickle Remix)",
+  },
+  {
+    at: "51:05",
+    artist: "Cloonee & InntRaw & Young M.A",
+    title: "Stephanie (Pickle Club Edit)",
+  },
+  { at: "51:56", artist: "The Rocketman", title: "The Nighttrain" },
+  {
+    at: "52:46",
+    artist: "NERVO & 22Bullets & Naeleck",
+    title: "Voices (Together We Will Rise)",
+  },
+  { at: "53:37", artist: "The Rocketman", title: "Loca" },
+  {
+    at: "54:27",
+    artist:
+      "RÜFÜS DU SOL & B JONES vs. Dom Dolla & Layton Giordani vs. Ozgun & Førehand",
+    title: "Innerbloom vs. girl$ vs. The Underground (B JONES Mashup)",
+  },
+  { at: "55:18", artist: "Ozgun & Førehand", title: "The Underground" },
+  {
+    at: "56:08",
+    artist: "Dom Dolla",
+    title: "girl$ (Layton Giordani Remix)",
+  },
+  {
+    at: "56:59",
+    artist: "RÜFÜS DU SOL",
+    title: "Innerbloom (B JONES Bootleg)",
+  },
+  {
+    at: "57:49",
+    artist: "Martin Garrix & Third ≡ Party vs. Nicky Romero & NERVO",
+    title: "Carry You vs. Like Home (Nicky Romero Mashup)",
+  },
+  {
+    at: "58:40",
+    artist: "Nicky Romero & NERVO",
+    title: "Like Home (Acappella)",
+  },
+  {
+    at: "59:30",
+    artist: "Martin Garrix & Third ≡ Party ft. Oaks & Declan J Donovan",
+    title: "Carry You",
+  },
+];

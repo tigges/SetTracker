@@ -147,6 +147,7 @@ import {
   TL_HARDWELL_EUPHORIA_019_2026,
   TL_HI_LO_LAYTON_GIORDANI_TML_WE2_CRYSTAL_2026,
   TL_INDIRA_PAGANOTTO_TML_WE2_MAINSTAGE_2026,
+  TL_NERVO_TML_WE1_MAINSTAGE_2025,
   TL_REINIER_ZONNEVELD_TML_WE1_ATMOSPHERE_2026,
 } from "./festivalCaptures20260826";
 
@@ -4768,6 +4769,8 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-s_iciA5Eg1E": TL_HI_LO_LAYTON_GIORDANI_TML_WE2_CRYSTAL_2026,
   "yt-n3TESnQqiQ4": TL_BLONDISH_TML_WE1_CRYSTAL_2026,
   "yt-xipWzYd7R8o": TL_ARIELLE_FREE_TML_WE1_FREEDOM_2026,
+  // Approximate clocks (195s × 10, then ~50s × 32): order real, times rough.
+  "yt-HWwmfWovTeI": TL_NERVO_TML_WE1_MAINSTAGE_2025,
   // Even-spaced clocks (evenlySpaceRows): order real, times approximate.
   "sc-tomorrowland-tomorrowland-academy-student-mix-david-herrlich":
     TL_DAVID_HERRLICH_OWR_ACADEMY_2026,

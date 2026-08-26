@@ -48,8 +48,10 @@ console.log("idRow.test.ts ok");
 // Even-spaced clocks are `evenlySpaceRows` output: order real, times not.
 import { hasEvenlySpacedClocks } from "./seeds";
 
+// Herrlich's real paste: 15 rows, every gap exactly 237s.
 const evenSpaced = [
-  "0:20","4:17","8:14","12:11","16:08","20:05","24:02","27:59",
+  "0:20","4:17","8:14","12:11","16:08","20:05","24:02","27:59","31:56",
+  "35:53","39:50","43:47","47:44","51:41","55:38",
 ].map((at, i) => ({ at, artist: `A${i}`, title: `T${i}` }));
 assert.equal(hasEvenlySpacedClocks(evenSpaced), true, "237s apart every time");
 
@@ -76,3 +78,33 @@ assert.equal(
 );
 
 console.log("evenSpacing checks ok");
+
+// A long uniform *run* inside a mixed list is still generated, not observed:
+// NERVO's paste was 195s x 10 then ~50s x 32 (an even division that rounds).
+import { longestUniformClockRun } from "./seeds";
+
+const nervoish = [
+  "0:00","3:15","6:30","9:45","13:00","16:15","19:30","22:45","26:00","29:15",
+  "32:30","33:21","34:12","35:03","35:54","36:45","37:36","38:27","39:18",
+  "40:09","40:59","41:50","42:40","43:31","44:21",
+].map((at, i) => ({ at, artist: `A${i}`, title: `T${i}` }));
+assert.equal(hasEvenlySpacedClocks(nervoish), true, "uniform run is generated");
+assert.ok(longestUniformClockRun(nervoish).run >= 9);
+
+// 50/51 alternation counts as uniform — rounding, not observation.
+const rounded = ["0:00","0:50","1:41","2:31","3:22","4:12","5:03","5:53","6:44"]
+  .map((at, i) => ({ at, artist: `A${i}`, title: `T${i}` }));
+assert.equal(hasEvenlySpacedClocks(rounded), true, "±1s is still even spacing");
+
+// A short mashup cluster must not trip it — HI-LO opens with 5 equal gaps.
+const mashupCluster = [
+  "0:12","0:56","1:41","2:25","3:10","3:54","7:27","11:00","15:20","19:40",
+  "24:00","28:29","29:24","30:18","31:13",
+].map((at, i) => ({ at, artist: `A${i}`, title: `T${i}` }));
+assert.equal(
+  hasEvenlySpacedClocks(mashupCluster),
+  false,
+  "a real mix with a short equal run stays clean",
+);
+
+console.log("uniformRun checks ok");
