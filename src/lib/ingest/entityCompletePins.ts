@@ -86,7 +86,7 @@ const TEMPLATE_BIO =
   /is an? (?:.+based )?DJ, producer or electronic artist whose work centers on/i;
 
 const GENERIC_HANDLE_LEFTOVER =
-  /^(the|its|itsthe|thisis|official|real|dj|music|beats|sound|sounds|channel|video|live|tv|hq|ok|iam|im|weare|and|x|com|net|org|nu|io|co|uk|dot|dotcom|[0-9]+)*$/;
+  /^(the|its|itsthe|thisis|official|real|dj|music|beats|sound|sounds|channel|video|live|tv|hq|ok|iam|im|weare|and|fest|festival|x|com|net|org|nu|io|co|uk|dot|dotcom|[0-9]+)*$/;
 
 /** Spoken digit used in handles like @4444fourofakind for "4444 OF A KIND". */
 const DIGIT_WORD: Record<string, string> = {
@@ -338,6 +338,40 @@ export function handleLeftoverOk(name: string, value: string): boolean {
   return GENERIC_HANDLE_LEFTOVER.test(leftover);
 }
 
+/** Words for acronym building — "&" counts as "and" (VAC = Vision And Colour). */
+function acronymWords(name: string): string[] {
+  return name
+    .toLowerCase()
+    .replace(/[øØ]/g, "o")
+    .replace(/[æÆ]/g, "ae")
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/&/g, " and ")
+    .split(/[^a-z0-9]+/)
+    .filter(Boolean);
+}
+
+/**
+ * Acronym handles for multi-word names, e.g. Vision & Colour Music Festival
+ * → @vacfestival. The acronym must lead the handle and whatever follows must
+ * be a remaining name word or a generic filler — never a different act.
+ */
+export function acronymMatchesHandle(name: string, handleKey: string): boolean {
+  const words = acronymWords(name);
+  if (words.length < 3 || !handleKey) return false;
+  for (let k = 3; k <= words.length; k += 1) {
+    const acronym = words
+      .slice(0, k)
+      .map((w) => w[0]!)
+      .join("");
+    if (acronym.length < 3 || !handleKey.startsWith(acronym)) continue;
+    let leftover = handleKey.slice(acronym.length);
+    for (const w of words.slice(k)) leftover = leftover.split(w).join("");
+    if (GENERIC_HANDLE_LEFTOVER.test(leftover)) return true;
+  }
+  return false;
+}
+
 /** Handle or host must overlap the catalog name (never @slug guesses). */
 export function nameOverlapsHandle(name: string, value: string): boolean {
   const nameKey = coreName(name);
@@ -357,8 +391,8 @@ export function nameOverlapsHandle(name: string, value: string): boolean {
     handleKey.includes(nameKey) ||
     nameKey.includes(handleKey) ||
     (nameKey.length >= 5 && handleKey.includes(nameKey));
-  if (!coreHit && !tokenHit) return false;
-  return handleLeftoverOk(name, value);
+  if (coreHit || tokenHit) return handleLeftoverOk(name, value);
+  return acronymMatchesHandle(name, handleKey);
 }
 
 export function isHttpsImageUrl(url: string): boolean {

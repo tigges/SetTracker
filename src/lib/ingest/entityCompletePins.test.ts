@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import {
+  acronymMatchesHandle,
   decodeMojibake,
   evaluateEntityCompleteRow,
   isFallbackWebsiteHub,
@@ -517,6 +518,49 @@ assert.equal(
     evidence: "operator paste",
   }).value,
   "https://linktr.ee/i.am.shdw",
+);
+
+// Acronym handles: Vision & Colour Music Festival → @vacfestival ("&" = and).
+assert.equal(
+  acronymMatchesHandle("Vision & Colour Music Festival", "vacfestival"),
+  true,
+);
+assert.equal(
+  acronymMatchesHandle("Vision & Colour Music Festival", "vacfest"),
+  true,
+);
+assert.equal(
+  acronymMatchesHandle("Vision & Colour Music Festival", "awakenings"),
+  false,
+  "a different act must not match",
+);
+assert.equal(
+  acronymMatchesHandle("Amnesia Ibiza", "ai"),
+  false,
+  "two-word names give no usable acronym",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "festival",
+    slug: "vision-colour-music-festival",
+    name: "Vision & Colour Music Festival",
+    field: "instagram",
+    value: "https://www.instagram.com/vacfestival/",
+    evidence: "operator paste",
+  }).value,
+  "https://instagram.com/vacfestival",
+);
+// The chart page is never an official website (it stays in the seed instead).
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "festival",
+    slug: "vision-colour-music-festival",
+    name: "Vision & Colour Music Festival",
+    field: "website",
+    value: "https://djmag.com/top100festivals/2026/62/vision-colour-music-festival",
+    evidence: "operator paste",
+  }).drop,
+  "weak or invalid website",
 );
 
 console.log("entityCompletePins.test.ts ok");

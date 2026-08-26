@@ -16,7 +16,7 @@ import { getCatalogStats } from "@/lib/catalogStats";
 import { prisma } from "@/lib/db";
 import { loadDjMagTop100RankBySlug } from "@/lib/djmagTop100";
 import { loadEnrichRunReport } from "@/lib/ingest/enrich/enrichRunReport";
-import { pageMeta } from "@/lib/site";
+import { pageMeta, workflowRunUrl } from "@/lib/site";
 import { clockSourceSlices } from "@/lib/statsHealth";
 import { getStatsHealth } from "@/lib/statsHealthData";
 import { estimateLlmSpend, formatLlmSpend } from "@/lib/ingest/discovery/llmCost";
@@ -413,11 +413,34 @@ export default async function StatsPage() {
           jobs first, leftovers on you
         </span>
       </div>
+      <p className="mb-2 text-[11px] leading-snug text-muted2">
+        This page is a static export — it cannot start a run. Open a workflow,
+        then <span className="mono">Run workflow</span>:{" "}
+        <a
+          href={workflowRunUrl("catalog-deep.yml")}
+          className="text-brand underline decoration-dotted underline-offset-2"
+        >
+          Catalog deep refresh
+        </a>{" "}
+        drains Automatic queues (handles, artwork, official www, venue thumbs).{" "}
+        <a
+          href={workflowRunUrl("catalog-enrich.yml")}
+          className="text-brand underline decoration-dotted underline-offset-2"
+        >
+          Catalog enrich
+        </a>{" "}
+        adds fingerprint cues — needs <span className="mono">Accept ACR spend</span>.{" "}
+        <a
+          href={workflowRunUrl("catalog-llm-research.yml")}
+          className="text-brand underline decoration-dotted underline-offset-2"
+        >
+          Catalog LLM research
+        </a>{" "}
+        proposes handles — needs <span className="mono">Accept spend</span>.
+      </p>
       <p className="mb-3 text-[11px] leading-snug text-muted2">
-        LLM calls need a confirm (this page cannot run the model). Catalog
-        LLM research: check Accept spend. Local: type yes or{" "}
-        <span className="mono">LLM_RESEARCH_CONFIRM=1</span>.{" "}
-        {formatLlmSpend(LLM_QUEUE_ESTIMATE)}.
+        Every paid run prints what it researches and a cost estimate before it
+        sends anything. LLM: {formatLlmSpend(LLM_QUEUE_ESTIMATE)}.
       </p>
 
       <div id="capture-1001" className="scroll-mt-20">

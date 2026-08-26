@@ -217,7 +217,15 @@ unless asked. Never write Relive for HARD / Insomniac / Nameless / Ultra.
   `festivals-need-complete.csv`, `clubs-need-complete.csv`, plus combined
   `entities-need-complete.csv` / `.jsonl` and `claude-entity-complete-prompt.md`.
   `/stats` links **Export for Claude complete**. Never invent `@slug` handles;
-  DJ Mag / 6am / Wikipedia are not official websites. Verify-then-pin
+  DJ Mag / 6am / Wikipedia are not official websites — but the chart URL is
+  **kept**, not discarded: `djmagUrl` lives on every row of
+  `data/venue-seeds/djmag-atlas-2026.json`,
+  `djmag-top100-festivals-2026.json`, `data/artist-seeds/djmag-top100-djs-2025.json`
+  and `djmag-atlas-djs-2025.json`. It is never written to `Dj.website` /
+  `Event.website` and never displayed while a first-party URL exists.
+  Acronym handles are accepted when the acronym leads the handle and the rest
+  is a remaining name word or generic filler (`acronymMatchesHandle` —
+  Vision & Colour Music Festival → `@vacfestival`, `&` counts as "and"). Verify-then-pin
   (`data/entity-complete-pins.json`, fill-null on verify-urls). Wide
   `djs-need-complete` CSV also fills-null `homeCity` / distinctive `bio` /
   canonical `genre` on Dj. Template bios, DJ Mag / RA websites, and

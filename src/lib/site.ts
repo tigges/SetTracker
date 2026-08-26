@@ -9,6 +9,17 @@ export const SITE_TAGLINE = "DJ set database";
 export const SITE_DESCRIPTION =
   "Tracklists, IDs, and provenance for electronic DJ sets — festivals, clubs, livestreams, and radio from SoundCloud, YouTube, hearthis.at, and the community.";
 
+/** Operator repo — /stats links the workflow pages a pass is started from. */
+export const OPERATOR_REPO = "tigges/SetTracker";
+
+/**
+ * A static export cannot dispatch Actions, so /stats links the run page
+ * instead. Click through, then Run workflow.
+ */
+export function workflowRunUrl(workflowFile: string): string {
+  return `https://github.com/${OPERATOR_REPO}/actions/workflows/${workflowFile}`;
+}
+
 export function absoluteUrl(path = "/"): string {
   const p = path.startsWith("/") ? path : `/${path}`;
   return `${SITE_URL}${p === "/" ? "/" : p}`;
