@@ -62,6 +62,436 @@ export const TL_HARDWELL_EUPHORIA_019_2026: FingerprintSeedRow[] = [
 ];
 
 /**
+ * Zedd @ Mainstage, Ultra Music Festival Miami, United States 2025-03-30
+ * https://www.1001tracklists.com/tracklist/1tbusd0k/zedd-mainstage-ultra-music-festival-miami-united-states-2025-03-30.html
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-TT32mIg4oqg"]
+ *
+ * oEmbed 2026-08-26: channel "Zedd" — his own upload. That video was already
+ * curated in YOUTUBE_SETS without a tracklist, so this capture fills an
+ * existing set. No SoundCloud in the paste; none invented. Distinct from
+ * TL_KNOCK2_ZEDD_HARD_SUMMER_2026, a different performance.
+ *
+ * Observed clocks: 38 cues over ~52min, longest near-uniform run 3.
+ * Kept exactly as pasted, including three 1001 conventions:
+ *  - Four pairs sit 1–2s apart (4:55/4:56, 6:20/6:21, 31:09/31:11,
+ *    49:16/49:17). These are layered blends, an instrumental under a Zedd
+ *    vocal, which 1001 marks at the same moment rather than a mashup
+ *    expansion. Clocks stay as captured, never silently spread.
+ *  - Mashup rows ("A vs. B") are followed by their components, so
+ *    "Zedd & Alessia Cara - Stay" appears twice: the standalone play at 32:40
+ *    and again at 34:59 as part of the Bust-R mashup. The rows are not
+ *    adjacent, so both cues survive collapse.
+ *  - 1001 spells the mashup credit "Alessia Clara"; the catalog spells her
+ *    "Alessia Cara" elsewhere. Left as captured so the row matches the source.
+ * Captured 2026-08-26 — provenance 1001tl.
+ */
+export const TL_ZEDD_ULTRA_MIAMI_MAINSTAGE_2025: FingerprintSeedRow[] = [
+  {
+    at: "0:00",
+    artist: "Radiohead",
+    title: "Everything In Its Right Place (Zedd Remix)",
+  },
+  {
+    at: "3:20",
+    artist: "Hailee Steinfeld & Grey ft. Zedd",
+    title: "Starving (Bali Bandits Remix)",
+  },
+  { at: "4:07", artist: "Joey Ayden", title: "The Bass" },
+  { at: "4:55", artist: "Mesto & Vluarr", title: "All Night" },
+  {
+    at: "4:56",
+    artist: "Zedd & Bea Miller & Ellis",
+    title: "Tangerine Rays",
+  },
+  { at: "6:20", artist: "Jay Eskar", title: "Watch Me Rise" },
+  { at: "6:21", artist: "Zedd ft. Bea Miller", title: "Out Of Time" },
+  {
+    at: "7:52",
+    artist: "Zedd ft. Selena Gomez",
+    title: "I Want You To Know",
+  },
+  {
+    at: "12:05",
+    artist: "John Summit ft. HAYLA",
+    title: "Where You Are (Zedd Remix)",
+  },
+  {
+    at: "14:35",
+    artist: "Zedd ft. Hayley Williams",
+    title: "Stay The Night",
+  },
+  { at: "17:50", artist: "Chic", title: "Good Times (Ellis Remix)" },
+  {
+    at: "19:18",
+    artist: "ACRAZE & Cherish vs. 23",
+    title:
+      "Do It To It vs. Pink Soldiers (Squid Game OST) (Zedd Edit)",
+  },
+  { at: "19:48", artist: "ACRAZE ft. Cherish", title: "Do It To It" },
+  { at: "20:18", artist: "23", title: "Pink Soldiers (Squid Game OST)" },
+  { at: "20:47", artist: "MAGIC!", title: "Rude (Zedd Remix)" },
+  { at: "23:00", artist: "Wolfgang Gartner", title: "818" },
+  { at: "24:32", artist: "Zedd & Jeff Buckley", title: "Dream Brother" },
+  { at: "25:27", artist: "Zedd & The Olllam", title: "Sona" },
+  { at: "26:32", artist: "Zedd ft. Remi Wolf", title: "Lucky" },
+  { at: "27:37", artist: "M83", title: "Midnight City" },
+  { at: "28:35", artist: "Zedd & Elley Duhé", title: "Happy Now" },
+  {
+    at: "30:12",
+    artist: "Zedd & Elley Duhé",
+    title: "Happy Now (Marc Benjamin Remix)",
+  },
+  { at: "31:09", artist: "Arcando & Pirapus", title: "Ultrasound" },
+  { at: "31:11", artist: "Zedd & Bava", title: "No Gravity" },
+  { at: "32:40", artist: "Zedd & Alessia Cara", title: "Stay" },
+  {
+    at: "34:27",
+    artist: "CMC$ & NUZB vs. Zedd & Alessia Clara",
+    title: "Stay In Sin City (Bust-R Mashup)",
+  },
+  { at: "34:59", artist: "Zedd & Alessia Cara", title: "Stay" },
+  { at: "35:31", artist: "CMC$ & NUZB ft. Felix Samuel", title: "Sin City" },
+  { at: "36:03", artist: "Ariana Grande ft. Zedd", title: "Break Free" },
+  { at: "37:58", artist: "Eleganto", title: "Keep It Real" },
+  { at: "38:42", artist: "Daft Punk", title: "One More Time (Zedd Remix)" },
+  { at: "42:18", artist: "Zedd ft. Jon Bellion", title: "Beautiful Now" },
+  {
+    at: "46:52",
+    artist: "Zedd & Maren Morris & Grey",
+    title: "The Middle",
+  },
+  { at: "48:40", artist: "Zedd & Jasmine Thompson", title: "Funny" },
+  { at: "49:16", artist: "Virtual Riot", title: "VROOM" },
+  {
+    at: "49:17",
+    artist: "Zedd & Maren Morris & Grey",
+    title: "The Middle (Acappella)",
+  },
+  {
+    at: "51:15",
+    artist: "Zedd ft. Foxes",
+    title: "Clarity (Evan Duffy Piano Cover)",
+  },
+  { at: "52:05", artist: "Zedd ft. Foxes", title: "Clarity" },
+];
+
+/**
+ * Black Coffee @ Mayan Warrior, Burning Man, United States 2025-08-26
+ * https://www.1001tracklists.com/tracklist/1qlc330k/black-coffee-mayan-warrior-burning-man-united-states-2025-08-26.html
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-FH7lIOv1s3Q"]
+ *
+ * oEmbed 2026-08-26: channel "MayanWarrior", the art car collective's own
+ * channel — a venue channel like Boiler Room or Cercle, not a fan re-upload.
+ * That video was already curated in YOUTUBE_SETS with no tracklist, so this
+ * capture fills an existing set rather than adding one. No SoundCloud in the
+ * paste; none invented.
+ *
+ * Observed clocks: 45 cues over ~3h28m, gaps 113s–450s, longest near-uniform
+ * run 3. A long Burning Man sunrise set that closes on disco and soul
+ * singalongs, so the tail runs denser than the opening.
+ * Captured 2026-08-26 — provenance 1001tl.
+ */
+export const TL_BLACK_COFFEE_MAYAN_WARRIOR_BURNING_MAN_2025: FingerprintSeedRow[] =
+  [
+    { at: "0:00", artist: "Jimi Jules", title: "Baby Run" },
+    {
+      at: "5:03",
+      artist: "Hercules & Love Affair",
+      title: "Blind (Matt Sawyer Remix)",
+    },
+    { at: "9:53", artist: "FKA MASH", title: "Ascension Pt. II" },
+    {
+      at: "14:47",
+      artist: "Black Coffee ft. Bucie",
+      title: "Superman (Meera Remix)",
+    },
+    { at: "21:40", artist: "Keinemusik & Sevdaliza", title: "See You Again" },
+    {
+      at: "27:00",
+      artist: "Disla & Danis ft. Syntheticsax",
+      title: "Man With The Red Face",
+    },
+    { at: "31:29", artist: "The Cure", title: "All I Ever Am (Meera Remix)" },
+    {
+      at: "36:55",
+      artist: "AMÉMÉ ft. Mario Charo",
+      title: "Power (Monkey Safari Remix)",
+    },
+    {
+      at: "42:00",
+      artist: "Kuniyuki Takahashi",
+      title: "Deliverance (Culoe De Song Ka Mnguni Remix)",
+    },
+    { at: "48:15", artist: "Sammi Ferrer", title: "MT" },
+    { at: "51:26", artist: "Roland Clark", title: "I Get Deep (Acappella)" },
+    { at: "54:36", artist: "UNER", title: "Cocoua" },
+    {
+      at: "57:56",
+      artist: "Kings Of Tomorrow ft. Julie McKnight",
+      title: "Finally (Acappella)",
+    },
+    { at: "1:01:16", artist: "Groove Junkies ft. Indeya", title: "Oh Lord" },
+    {
+      at: "1:04:36",
+      artist: "DJ Micks ft. Robin Latimore",
+      title: "First To Say Goodbye",
+    },
+    {
+      at: "1:11:00",
+      artist: "DJ Said & Cee ElAssaad",
+      title: "Fela Is Everything (Eric Kupper Remix)",
+    },
+    {
+      at: "1:15:45",
+      artist: "AfroTura & Manoo & Idd Aziz",
+      title: "Amilo",
+    },
+    { at: "1:23:15", artist: "Karyendasoul", title: "Isambulo" },
+    {
+      at: "1:30:00",
+      artist: "Roland Clark pres. Urban Soul",
+      title: "Brown James",
+    },
+    {
+      at: "1:33:30",
+      artist: "Oskido ft. Candy",
+      title: "Tsa Ma Ndebele (Manoo Remix)",
+    },
+    { at: "1:40:16", artist: "&lez", title: "In My House" },
+    {
+      at: "1:46:15",
+      artist: "Culoe De Song",
+      title: "Mount Zion (Jonathan Kaspar Remix)",
+    },
+    {
+      at: "1:48:38",
+      artist: "Stardust",
+      title: "Music Sounds Better With You (Acappella)",
+    },
+    {
+      at: "1:51:00",
+      artist: "Fiona Kraft",
+      title:
+        "Deeper Feelings (Manoo The Dub / Piano Interpretation By Bacanito)",
+    },
+    { at: "1:57:37", artist: "&ME & Black Coffee", title: "The Rapture Pt.III" },
+    { at: "2:00:28", artist: "Bongi Dube", title: "Go Around" },
+    { at: "2:03:19", artist: "Moojo", title: "Mimisiku" },
+    { at: "2:08:36", artist: "Da Africa Deep & NuroGroove", title: "No End" },
+    { at: "2:15:09", artist: "Dr Feel", title: "Drums Of Orisha" },
+    {
+      at: "2:20:23",
+      artist: "Juan Luis Guerra 4.40",
+      title: "Vale La Pena (Moojo & Biralo Remix)",
+    },
+    { at: "2:24:52", artist: "Wham!", title: "Everything She Wants" },
+    {
+      at: "2:31:22",
+      artist: "Marianto",
+      title: "Simple World (CJ Jeff & Thodoris Triantafillou Remix)",
+    },
+    { at: "2:35:51", artist: "Adore ft. Marine Abtan", title: "Sing It Back" },
+    {
+      at: "2:41:11",
+      artist: "Spiller ft. Sophie Ellis-Bextor",
+      title: "Groovejet (If This Ain't Love)",
+    },
+    { at: "2:44:51", artist: "Jimi Jules & Black Coffee", title: "Trippy Yeah" },
+    {
+      at: "2:50:15",
+      artist: "George Michael",
+      title: "Careless Whisper (Abicah Soul Edit)",
+    },
+    {
+      at: "2:56:08",
+      artist: "Lou Rawls",
+      title:
+        "You'll Never Find Another Love Like Mine (Kenny Summit & Frankie Knuckles & Eric Kupper Unreleased Anthem)",
+    },
+    {
+      at: "3:01:38",
+      artist: "Chew Fu ft. Steve Clisby",
+      title: "Purple Rain (Mousse T Home Alone Mix)",
+    },
+    { at: "3:07:38", artist: "Toto", title: "Africa" },
+    {
+      at: "3:11:42",
+      artist: "Lionel Richie",
+      title: "All Night Long (All Night)",
+    },
+    { at: "3:15:39", artist: "Bob Marley & The Wailers", title: "Is This Love" },
+    { at: "3:19:32", artist: "Angie Stone", title: "Wish I Didn't Miss You" },
+    { at: "3:23:06", artist: "Earth, Wind & Fire", title: "September" },
+    { at: "3:26:29", artist: "Jamiroquai", title: "You Give Me Something" },
+    { at: "3:28:22", artist: "Gloria Gaynor", title: "I Will Survive" },
+  ];
+
+/**
+ * Joris Voorn & Cassian - Spectrum Radio 484 2026-08-05
+ * https://www.1001tracklists.com/tracklist/1z0kzf5k/joris-voorn-cassian-spectrum-radio-484-2026-08-05.html
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-d5JZLJSJc6w"]
+ *       TRACKLIST_1001_BY_SOURCE_SLUG["sc-joris-voorn-spectrum-radio-484"]
+ *
+ * Three official hosts, all verified 2026-08-26:
+ *   YouTube    https://youtu.be/d5JZLJSJc6w — channel "Spectrum" (his own show)
+ *   SoundCloud https://soundcloud.com/joris-voorn/spectrum-radio-484 — 200
+ *   Mixcloud   .../JorisVoorn/joris-voorn-presents-spectrum-radio-484/ — 200
+ * The paste wired the SoundCloud slug only, but joris-voorn is not a curated
+ * SoundCloud show or roster artist, so nothing polls that account and the seed
+ * would have sat orphaned. The YouTube slug carries the set (curated in
+ * YOUTUBE_SETS like episode 485); the SC slug shares this array so the twin
+ * group keeps both hosts and picks up cues if his SC is ever crawled.
+ * Mixcloud stays a stored mirror in SET_HOST_PINS — never a set slug.
+ *
+ * Billed as radio but recorded live at Tomorrowland's Freedom Stage b2b
+ * Cassian, which both host titles state; type stays "radio" with the event
+ * attached, as episode 485 does for Exit Brno.
+ * Observed clocks: 18 cues over ~60min, gaps 45s–417s, longest near-uniform
+ * run 2. Shares 5 tracks with episode 485 (his own promos plus the recurring
+ * "Horizon (Eelke Kleijn Remix)" opener); 13 of 18 are unique, so these are
+ * distinct episodes.
+ * Captured 2026-08-26 — provenance 1001tl.
+ */
+export const TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026: FingerprintSeedRow[] =
+  [
+    {
+      at: "0:30",
+      artist: "Joris Voorn",
+      title: "Horizon (Eelke Kleijn Remix)",
+    },
+    {
+      at: "1:15",
+      artist: "Noir & Haze",
+      title: "Around (Seth Hills & Victor Garde Remix)",
+    },
+    { at: "4:50", artist: "AURAPAX", title: "Afterparty" },
+    { at: "8:02", artist: "Argy & SOLANCE", title: "Window Shake" },
+    { at: "11:25", artist: "Mariz", title: "No Past, No Future" },
+    { at: "14:10", artist: "Cassian", title: "SOS" },
+    {
+      at: "20:35",
+      artist: "Calvin Harris ft. Clementine Douglas",
+      title: "Blessings (Cassian Remix)",
+    },
+    { at: "27:32", artist: "CamelPhat & Volkoder", title: "Unique Moment" },
+    { at: "30:47", artist: "Khainz", title: "Nightcreatures" },
+    { at: "34:00", artist: "SLVR", title: "Oh La La La" },
+    {
+      at: "40:10",
+      artist: "Adam Port & Stryv ft. Malachiii",
+      title: "Move (Anyma & Cassian Remix)",
+    },
+    { at: "43:30", artist: "deadmau5 ft. Stevie Appleton", title: "Science" },
+    { at: "45:20", artist: "Roland Clark", title: "Speak To Me (Accapella)" },
+    { at: "47:10", artist: "Cassian", title: "Dun Dun" },
+    {
+      at: "49:47",
+      artist: "Joris Voorn & Roddy Lima & Taylr Renee",
+      title: "Machine",
+    },
+    {
+      at: "52:40",
+      artist: "ANOTR ft. 54 Ultra",
+      title: "Talk To You (Eli Brown Bootleg)",
+    },
+    { at: "56:30", artist: "Joris Voorn & Xavier Rudd", title: "Spirit Bird" },
+    { at: "59:45", artist: "Kevin de Vries & Cassian", title: "Payback" },
+  ];
+
+/**
+ * Cloonee @ neonGARDEN, EDC Orlando, United States 2025-11-08
+ * Official YouTube (oEmbed: @Cloonee "Cloonee - Live At EDC Orlando"):
+ * https://youtu.be/3mOMDdX6miw
+ * https://www.1001tracklists.com/tracklist/22q6uw0k/cloonee-neongarden-edc-orlando-united-states-2025-11-08.html
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-3mOMDdX6miw"]
+ * The capture paste used TL_CAPTURED, which is too generic to keep — this is
+ * the named constant. No SoundCloud permalink given; none invented.
+ * Distinct from TL_CLOONEE_EDC_LV_2022 and TL_CLOONEE_PROSPA_DESTINO_2026.
+ *
+ * Mostly observed clocks (gaps to 403s), with one caveat: the opening five
+ * rows sit 57–58s apart, so that intro run looks interpolated by 1001 while
+ * the rest is real. Under the 8-gap threshold, so not flagged wholesale.
+ * "Stephanie" appears twice — the original at 2:10 and the Beyond Limits
+ * Edit at 1:09:22 — distinct titles, so both cues stay.
+ * Captured 2026-08-26 — provenance 1001tl.
+ */
+export const TL_CLOONEE_NEONGARDEN_EDC_ORLANDO_2025: FingerprintSeedRow[] = [
+  {
+    at: "1:12",
+    artist: "Cloonee & Nice & Smooth",
+    title: "I Rhyme Quick",
+  },
+  {
+    at: "2:10",
+    artist: "Cloonee & InntRaw & Young M.A",
+    title: "Stephanie",
+  },
+  { at: "3:07", artist: "GREG 99 & Cloonee", title: "Still My Baby" },
+  {
+    at: "4:05",
+    artist: "Chris Lake & Disclosure ft. Leven Kali",
+    title: "one2three",
+  },
+  { at: "5:02", artist: "Raized", title: "Papara Low" },
+  { at: "8:06", artist: "ATLAC", title: "Hood Beat" },
+  {
+    at: "11:55",
+    artist: "Chris Lorenzo & Kah-Lo",
+    title: "In This Bih'",
+  },
+  { at: "16:08", artist: "Lightleak", title: "EQ (Dance For Me)" },
+  { at: "19:20", artist: "FIRZA", title: "Lick It" },
+  { at: "24:01", artist: "Noah Scannell", title: "Elevate" },
+  { at: "27:00", artist: "Funk Cartel", title: "Baianá" },
+  { at: "29:57", artist: "JOSHWA", title: "Out Of My Mind" },
+  {
+    at: "33:46",
+    artist: "Cloonee ft. Jocelyn Enriquez",
+    title: "XTC",
+  },
+  {
+    at: "38:41",
+    artist: "Chris Lorenzo & Paris Mitchell ft. Waxmaster",
+    title: "Hell Yeah!",
+  },
+  { at: "43:51", artist: "Stacey Pullen", title: "Side2Step" },
+  {
+    at: "48:07",
+    artist: "Cloonee",
+    title: "Fine Night (GREG 99 Remix)",
+  },
+  {
+    at: "54:50",
+    artist: "Travis Scott",
+    title: "I KNOW ? (Raized Edit)",
+  },
+  { at: "58:15", artist: "Finky", title: "House Rules" },
+  {
+    at: "1:01:59",
+    artist: "Cloonee & Funkdoobiest",
+    title: "X-Rated (Devault Remix)",
+  },
+  { at: "1:05:55", artist: "Daft Punk", title: "Da Funk (Hawkeys Edit)" },
+  {
+    at: "1:09:22",
+    artist: "Cloonee & InntRaw & Young M.A",
+    title: "Stephanie (Beyond Limits Edit)",
+  },
+  {
+    at: "1:14:02",
+    artist: "Cloonee",
+    title: "How Deep Are Your Dreams?",
+  },
+  { at: "1:18:13", artist: "Galo", title: "Last Nite" },
+  { at: "1:20:41", artist: "Cloonee & Prospa", title: "Free Your Mind" },
+  {
+    at: "1:25:31",
+    artist: "Duke",
+    title: "So In Love With You (Full Intention Remix)",
+  },
+];
+
+/**
  * Camila Jun @ Crystal Garden Stage, Tomorrowland Weekend 1, Belgium
  * 2026-07-17
  * Official YouTube (oEmbed: @tomorrowland "Camila Jun WE1 | Tomorrowland

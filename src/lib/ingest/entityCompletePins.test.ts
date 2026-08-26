@@ -563,4 +563,60 @@ assert.equal(
   "weak or invalid website",
 );
 
+// Country-domain official sites. The public suffix is stripped before matching,
+// so an act's .be site is accepted like its .com would be — previously only the
+// handful of TLDs in GENERIC_HANDLE_LEFTOVER passed and everything else read as
+// a name mismatch.
+assert.equal(
+  nameOverlapsHandle("Omdat Het Kan", "https://www.omdathetkan.be/"),
+  true,
+);
+assert.equal(nameOverlapsHandle("Charlotte de Witte", "https://charlottedewitte.be"), true);
+assert.equal(nameOverlapsHandle("Kraftwerk", "https://kraftwerk.de"), true);
+assert.equal(nameOverlapsHandle("Amelie Lens", "https://amelielens.nl"), true);
+// Two-part suffixes leave "co"/"com", which the leftover list already allows.
+assert.equal(nameOverlapsHandle("Annie Mac", "https://anniemac.co.uk"), true);
+// Stripping the suffix must not start accepting somebody else's domain.
+assert.equal(nameOverlapsHandle("Omdat Het Kan", "https://someotheract.be"), false);
+assert.equal(nameOverlapsHandle("Mike Williams", "https://tiesto.com"), false);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "omdat-het-kan",
+    name: "Omdat Het Kan",
+    field: "website",
+    value: "https://www.omdathetkan.be/",
+    evidence: "operator paste, 200, og:title \"Omdat Het Kan\"",
+  }).value,
+  "https://omdathetkan.be",
+);
+
+// Fields with no Dj column must drop rather than be coerced somewhere else.
+for (const field of ["tiktok", "facebook", "spotify", "deezer"]) {
+  assert.equal(
+    evaluateEntityCompleteRow({
+      kind: "dj",
+      slug: "mu540",
+      name: "MU540",
+      field,
+      value: "https://example.com/mu540",
+      evidence: "operator paste",
+    }).drop,
+    "unknown field",
+    `${field} has no Dj column and must drop`,
+  );
+}
+// An Instagram post URL is not a profile handle.
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "mike-williams",
+    name: "Mike Williams",
+    field: "instagram",
+    value: "https://www.instagram.com/p/DcToLAXycHO/",
+    evidence: "operator paste",
+  }).drop,
+  "handle name mismatch",
+);
+
 console.log("entityCompletePins.test.ts ok");

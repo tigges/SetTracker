@@ -295,7 +295,13 @@ function handleHaystack(value: string): string {
     ) {
       return coreName(u.pathname);
     }
-    return coreName(`${host} ${u.pathname}`);
+    // Drop the public suffix before matching. Otherwise the TLD survives as
+    // leftover and only the few in GENERIC_HANDLE_LEFTOVER pass, so an official
+    // site on a country domain (omdathetkan.be) reads as a name mismatch while
+    // the same act's .com would pass. Two-part suffixes leave "co"/"com",
+    // which that list already tolerates.
+    const bareHost = host.replace(/\.[a-z]{2,}$/, "");
+    return coreName(`${bareHost} ${u.pathname}`);
   } catch {
     return coreName(value);
   }

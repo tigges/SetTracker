@@ -189,6 +189,10 @@ import {
   TL_HONEY_DIJON_THE_LOOP_DEKMANTEL_NETHERLANDS_2025,
   TL_VINAI_S2O_SONGKRAN_THAILAND_2023,
   TL_AGENTS_OF_TIME_TIME_WARP_FLOOR_1_2026,
+  TL_BLACK_COFFEE_MAYAN_WARRIOR_BURNING_MAN_2025,
+  TL_CLOONEE_NEONGARDEN_EDC_ORLANDO_2025,
+  TL_ZEDD_ULTRA_MIAMI_MAINSTAGE_2025,
+  TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   isSecondaryPlaybackSlug,
@@ -1082,6 +1086,13 @@ assert.equal(
 );
 assert.equal(
   TRACKLIST_1001_BY_SOURCE_SLUG["yt-lEIGnx7qLl0"],
+  TL_AFROJACK_R3HAB_TML_WE2_2026,
+);
+// R3HAB's SoundCloud upload of the same performance. All three slugs must hold
+// the SAME array object: extraHostUrlsBySlug groups twins by seed identity, so
+// a re-declared copy would silently split the group.
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-r3hab-r3hab-b2b-afrojack"],
   TL_AFROJACK_R3HAB_TML_WE2_2026,
 );
 
@@ -4200,12 +4211,15 @@ assert.equal(
 const wwParookaville = tracklist1001RowsToPlays(
   TL_W_AND_W_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
 );
-assert.equal(wwParookaville.length, 58);
+// 58 seed rows collapse to 56 plays: 1001 lists "Rave From Outer Space" and
+// "OIIA OIIA (Spinning Cat)" on two adjacent rows each, and consecutive
+// same-song cues fold into one play.
+assert.equal(wwParookaville.length, 56);
 assert.equal(wwParookaville[0]?.provenance, "1001tl");
 assert.equal(wwParookaville[0]?.timestamp, 10);
 assert.equal(wwParookaville[0]?.trackTitle, "Bangkok");
-assert.equal(wwParookaville[57]?.trackTitle, "Moonlight Shadow");
-assert.equal(wwParookaville[57]?.timestamp, 1 * 3600 + 11 * 60 + 25);
+assert.equal(wwParookaville[55]?.trackTitle, "Moonlight Shadow");
+assert.equal(wwParookaville[55]?.timestamp, 1 * 3600 + 11 * 60 + 25);
 for (let i = 1; i < wwParookaville.length; i++) {
   assert.ok(
     (wwParookaville[i]!.timestamp ?? 0) >
@@ -4805,6 +4819,144 @@ assert.equal(
     "sc-https://soundcloud.com/claptone/clapcast-576"
   ],
   undefined,
+);
+
+// Zedd @ Mainstage, Ultra Miami 2025 — his own channel, and the video was
+// already curated without cues, so assert the seed reaches both the slug map
+// and that entry.
+assertSeedClocks(TL_ZEDD_ULTRA_MIAMI_MAINSTAGE_2025);
+assert.equal(TL_ZEDD_ULTRA_MIAMI_MAINSTAGE_2025.length, 38);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-TT32mIg4oqg"],
+  TL_ZEDD_ULTRA_MIAMI_MAINSTAGE_2025,
+);
+const zeddUltra = tracklist1001RowsToPlays(TL_ZEDD_ULTRA_MIAMI_MAINSTAGE_2025);
+assert.equal(zeddUltra.length, 38);
+assert.equal(zeddUltra[0]?.provenance, "1001tl");
+assert.equal(zeddUltra[0]?.timestamp, 0);
+assert.equal(
+  zeddUltra[0]?.trackTitle,
+  "Everything In Its Right Place (Zedd Remix)",
+);
+assert.equal(zeddUltra[37]?.trackTitle, "Clarity");
+assert.equal(zeddUltra[37]?.timestamp, 52 * 60 + 5);
+for (let i = 1; i < zeddUltra.length; i++) {
+  assert.ok(
+    (zeddUltra[i]!.timestamp ?? 0) > (zeddUltra[i - 1]!.timestamp ?? 0),
+    `Zedd Ultra clocks must increase at index ${i}`,
+  );
+}
+// Layered blends 1s apart must stay two cues, not fold into one.
+assert.equal(zeddUltra[3]?.timestamp, 4 * 60 + 55);
+assert.equal(zeddUltra[4]?.timestamp, 4 * 60 + 56);
+assert.equal(zeddUltra[3]?.trackTitle, "All Night");
+assert.equal(zeddUltra[4]?.trackTitle, "Tangerine Rays");
+// "Stay" is played once and then again as a mashup component, non-adjacent, so
+// both cues survive the consecutive-same-song collapse.
+assert.equal(
+  zeddUltra.filter((p) => p.trackTitle === "Stay").length,
+  2,
+  "both Stay cues must survive",
+);
+assert.notEqual(TL_ZEDD_ULTRA_MIAMI_MAINSTAGE_2025, TL_KNOCK2_ZEDD_HARD_SUMMER_2026);
+
+// Black Coffee @ Mayan Warrior, Burning Man 2025 — the venue collective's own
+// channel. The video was already curated in YOUTUBE_SETS with no cues, so this
+// capture fills an existing set; assert the seed is attached there too, not
+// just wired in the slug map.
+assertSeedClocks(TL_BLACK_COFFEE_MAYAN_WARRIOR_BURNING_MAN_2025);
+assert.equal(TL_BLACK_COFFEE_MAYAN_WARRIOR_BURNING_MAN_2025.length, 45);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-FH7lIOv1s3Q"],
+  TL_BLACK_COFFEE_MAYAN_WARRIOR_BURNING_MAN_2025,
+);
+const blackCoffeeBm = tracklist1001RowsToPlays(
+  TL_BLACK_COFFEE_MAYAN_WARRIOR_BURNING_MAN_2025,
+);
+assert.equal(blackCoffeeBm.length, 45);
+assert.equal(blackCoffeeBm[0]?.provenance, "1001tl");
+assert.equal(blackCoffeeBm[0]?.timestamp, 0);
+assert.equal(blackCoffeeBm[0]?.trackTitle, "Baby Run");
+assert.equal(blackCoffeeBm[44]?.trackTitle, "I Will Survive");
+assert.equal(blackCoffeeBm[44]?.timestamp, 3 * 3600 + 28 * 60 + 22);
+for (let i = 1; i < blackCoffeeBm.length; i++) {
+  assert.ok(
+    (blackCoffeeBm[i]!.timestamp ?? 0) > (blackCoffeeBm[i - 1]!.timestamp ?? 0),
+    `Black Coffee Burning Man clocks must increase at index ${i}`,
+  );
+}
+// Roland Clark appears twice under different titles — both cues must survive.
+assert.equal(
+  blackCoffeeBm.filter((p) => /Roland Clark/.test(p.rawText ?? "")).length,
+  2,
+);
+
+// Joris Voorn & Cassian — Spectrum Radio 484. The YouTube slug carries the
+// set; the SoundCloud slug must hold the same array so the twin group keeps all
+// three hosts. joris-voorn is not a curated SC account, so wiring SC alone (as
+// the operator paste's Wire line did) would leave the seed orphaned.
+assertSeedClocks(TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026);
+assert.equal(TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026.length, 18);
+for (const slug of ["yt-d5JZLJSJc6w", "sc-joris-voorn-spectrum-radio-484"]) {
+  assert.equal(
+    TRACKLIST_1001_BY_SOURCE_SLUG[slug],
+    TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
+    `Spectrum 484 must share one seed object on ${slug}`,
+  );
+}
+const spectrum484 = tracklist1001RowsToPlays(
+  TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
+);
+assert.equal(spectrum484.length, 18);
+assert.equal(spectrum484[0]?.provenance, "1001tl");
+assert.equal(spectrum484[0]?.timestamp, 30);
+assert.equal(spectrum484[0]?.trackTitle, "Horizon (Eelke Kleijn Remix)");
+assert.equal(spectrum484[17]?.trackTitle, "Payback");
+assert.equal(spectrum484[17]?.timestamp, 59 * 60 + 45);
+for (let i = 1; i < spectrum484.length; i++) {
+  assert.ok(
+    (spectrum484[i]!.timestamp ?? 0) > (spectrum484[i - 1]!.timestamp ?? 0),
+    `Spectrum 484 clocks must increase at index ${i}`,
+  );
+}
+// Consecutive episodes share his own promos, so they must stay separate seeds.
+assert.notEqual(
+  TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
+  TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-yTRvLrtsM9I"],
+  TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026,
+);
+
+// Cloonee @ neonGARDEN, EDC Orlando 2025-11-08 — official artist-channel
+// YouTube. "Stephanie" plays twice but the second is the Beyond Limits Edit,
+// and the two cues are far apart, so nothing collapses.
+assertSeedClocks(TL_CLOONEE_NEONGARDEN_EDC_ORLANDO_2025);
+assert.equal(TL_CLOONEE_NEONGARDEN_EDC_ORLANDO_2025.length, 25);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-3mOMDdX6miw"],
+  TL_CLOONEE_NEONGARDEN_EDC_ORLANDO_2025,
+);
+const clooneeOrlando = tracklist1001RowsToPlays(
+  TL_CLOONEE_NEONGARDEN_EDC_ORLANDO_2025,
+);
+assert.equal(clooneeOrlando.length, 25);
+assert.equal(clooneeOrlando[0]?.provenance, "1001tl");
+assert.equal(clooneeOrlando[0]?.timestamp, 72);
+assert.equal(clooneeOrlando[0]?.trackTitle, "I Rhyme Quick");
+assert.equal(clooneeOrlando[24]?.trackTitle, "So In Love With You (Full Intention Remix)");
+assert.equal(clooneeOrlando[24]?.timestamp, 1 * 3600 + 25 * 60 + 31);
+for (let i = 1; i < clooneeOrlando.length; i++) {
+  assert.ok(
+    (clooneeOrlando[i]!.timestamp ?? 0) > (clooneeOrlando[i - 1]!.timestamp ?? 0),
+    "Cloonee EDC Orlando clocks must increase",
+  );
+}
+// Distinct from the other two Cloonee captures already on file.
+assert.notEqual(
+  TL_CLOONEE_NEONGARDEN_EDC_ORLANDO_2025,
+  TL_CLOONEE_EDC_LV_2022,
 );
 
 console.log("tracklists1001/seeds.test.ts ok");

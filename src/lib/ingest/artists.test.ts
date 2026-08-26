@@ -348,4 +348,29 @@ assert.deepEqual(
   ["giuseppe-ottaviani"],
 );
 
+// Two curated sets added from an operator paste. Both titles carry the b2b
+// partner, and both put the artists ahead of the first "|" — a show or venue
+// name in front of the separator gets read as part of the artist and mints a
+// junk DJ, so pin the parse.
+const omdatSet = artistsForSet(
+  "Omdat Het Kan & Average Rob WE1 | Tomorrowland 2026",
+  { name: "Omdat Het Kan", slug: "omdat-het-kan", accent: "#f4a261" },
+);
+assert.equal(omdatSet.primary.slug, "omdat-het-kan");
+assert.deepEqual(
+  omdatSet.collaborators.map((c) => c.slug),
+  ["average-rob"],
+);
+
+const mu540Set = artistsForSet(
+  "MU540 B2B Mochakk | DJ Set, sotrackboa São Paulo 2024",
+  { name: "MU540", slug: "mu540", accent: "#e76f51" },
+);
+assert.equal(mu540Set.primary.slug, "mu540");
+// Must resolve to the existing roster Mochakk, not a new spelling.
+assert.deepEqual(
+  mu540Set.collaborators.map((c) => c.slug),
+  ["mochakk"],
+);
+
 console.log("artists.test.ts ok");

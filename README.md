@@ -100,6 +100,7 @@ npm run dev        # http://localhost:3000
 | `npm run thumbs`     | Resolve artwork URLs (Deezer / iTunes) |
 | `npm run enrich:fingerprint` | ACRCloud gap-fill for sparse sets (`ACRCLOUD_*`) |
 | `npm run crosscheck:set-density` | Flag thin tracklists (duration vs play count) |
+| `npm run check:capture -- <url…>` | Is a 1001 / YouTube / SoundCloud paste already wired? |
 
 ### Handle cross-link (automatic)
 

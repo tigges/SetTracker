@@ -83,6 +83,36 @@ export const SET_HOST_PINS: Record<string, SetHostUrls> = {
     soundcloudUrl:
       "https://soundcloud.com/rose-ringed/rose-ringed-freedomstage-we1",
   },
+  // AFROJACK & R3HAB @ Mainstage, Tomorrowland WE2 2026-07-26. One
+  // performance on three slugs: @tomorrowland and R3HAB's own YouTube plus
+  // R3HAB's SoundCloud. The SC permalink is not a SOUNDCLOUD_TRACK_SEEDS
+  // entry, so without these pins the YouTube rows carry no soundcloudUrl and
+  // the twin fold cannot prefer SC playback.
+  // Verified 2026-08-26: 200, og:title "R3HAB B2B AFROJACK @ TOMORROWLAND
+  // BELGIUM W2".
+  "yt-AjQeohYmg3A": {
+    soundcloudUrl: "https://soundcloud.com/r3hab/r3hab-b2b-afrojack",
+  },
+  "yt-lEIGnx7qLl0": {
+    soundcloudUrl: "https://soundcloud.com/r3hab/r3hab-b2b-afrojack",
+  },
+  "sc-r3hab-r3hab-b2b-afrojack": {
+    soundcloudUrl: "https://soundcloud.com/r3hab/r3hab-b2b-afrojack",
+  },
+  // Joris Voorn & Cassian — Spectrum Radio 484, b2b at Tomorrowland's Freedom
+  // Stage. All three hosts verified 200 on 2026-08-26. joris-voorn is not a
+  // curated SoundCloud account, so neither mirror can be derived from a track
+  // seed; pin both on the YouTube slug that carries the set and on its twin.
+  "yt-d5JZLJSJc6w": {
+    soundcloudUrl: "https://soundcloud.com/joris-voorn/spectrum-radio-484",
+    mixcloudUrl:
+      "https://www.mixcloud.com/JorisVoorn/joris-voorn-presents-spectrum-radio-484/",
+  },
+  "sc-joris-voorn-spectrum-radio-484": {
+    soundcloudUrl: "https://soundcloud.com/joris-voorn/spectrum-radio-484",
+    mixcloudUrl:
+      "https://www.mixcloud.com/JorisVoorn/joris-voorn-presents-spectrum-radio-484/",
+  },
 };
 
 export function soundcloudSlugFromUrl(url: string): string | null {

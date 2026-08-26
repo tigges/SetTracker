@@ -2939,5 +2939,27 @@
     "slug": "vision-colour-music-festival",
     "website": "https://linktr.ee/VACFEST",
     "instagram": "https://www.instagram.com/vacfestival/"
+  },
+  {
+    "kind": "dj",
+    "slug": "omdat-het-kan",
+    "website": "https://omdathetkan.be",
+    "soundcloud": "https://soundcloud.com/omdathetkandj",
+    "youtube": "https://www.youtube.com/@omdathetkandj"
+  },
+  {
+    "kind": "dj",
+    "slug": "average-rob",
+    "website": "https://averagerob.com",
+    "instagram": "https://instagram.com/AverageRob",
+    "youtube": "https://www.youtube.com/@AverageRob",
+    "twitter": "https://x.com/AverageRob",
+    "homeCity": "Belgium"
+  },
+  {
+    "kind": "dj",
+    "slug": "mu540",
+    "instagram": "https://instagram.com/mu540",
+    "youtube": "https://www.youtube.com/@MU540"
   }
 ]

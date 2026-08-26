@@ -68,6 +68,9 @@ import {
   TL_ALOK_TML_WE2_2026,
   TL_HARDWELL_HOA_527_YEARMIX_2025,
   TL_JOEL_CORRY_EDGE_NYC_2026,
+  TL_BLACK_COFFEE_MAYAN_WARRIOR_BURNING_MAN_2025,
+  TL_ZEDD_ULTRA_MIAMI_MAINSTAGE_2025,
+  TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026,
   TL_MISS_MONIQUE_IBIZA_SUNSET_YACHT_2026,
   TL_NICKY_ROMERO_PROTOCOL_RADIO_731,
@@ -629,6 +632,33 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/qz04ypk/odd-mob-mainstage-tomorrowland-weekend-2-belgium-2026-07-26.html",
     tracklist1001: TL_ODD_MOB_TML_WE2_2026,
+  },
+  {
+    // Official Tomorrowland upload, 1h00m. Belgian act b2b the YouTuber
+    // Average Rob; the title drives the collaborator parse. No 1001 page or
+    // description tracklist yet, so it enters the capture queue.
+    video: "https://www.youtube.com/watch?v=akMGRN4_KK8",
+    primaryArtist: dj("Omdat Het Kan", {
+      accent: "#f4a261",
+      homeCity: "Belgium",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    title: "Omdat Het Kan & Average Rob WE1 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+  },
+  {
+    // MU540's own channel, 1h24m b2b with Mochakk at sotrackboa, São Paulo.
+    // sotrackboa is not in KNOWN_EVENTS, so no eventName is invented.
+    video: "https://www.youtube.com/watch?v=gcHLUNPDb_U",
+    primaryArtist: dj("MU540", {
+      accent: "#e76f51",
+      homeCity: "Praia Grande, Brazil",
+    }),
+    genre: "House",
+    type: "club",
+    title: "MU540 B2B Mochakk | DJ Set, sotrackboa São Paulo 2024",
   },
   {
     // Tomorrowland official — Mainstage WE2; 20/20 timed cues from 1001.
@@ -1248,6 +1278,29 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_TIESTO_PRISMATIC_032_2026,
   },
   {
+    // Official Spectrum Radio 484 (channel "Spectrum"); timed 1001 capture.
+    // Recorded live at Tomorrowland's Freedom Stage b2b Cassian. Official SC
+    // and Mixcloud mirrors are pinned in SET_HOST_PINS — joris-voorn is not a
+    // curated SC account, so they cannot be derived from a track seed.
+    video: "https://www.youtube.com/watch?v=d5JZLJSJc6w",
+    primaryArtist: dj("Joris Voorn", {
+      accent: "#2ec4b6",
+      homeCity: "Rotterdam, NL",
+    }),
+    genre: "Tech House",
+    type: "radio",
+    // Artists lead the title on purpose. artistsForSet splits the segment
+    // before the first "|", so a show-name prefix ahead of "b2b"/"&" would be
+    // read as an artist and mint a junk "Spectrum Radio 484 Joris Voorn" DJ;
+    // with the show name after the pipe, Cassian links as a collaborator.
+    title: "Joris Voorn b2b Cassian | Spectrum Radio 484, Tomorrowland 2026",
+    seriesName: "Spectrum Radio",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1z0kzf5k/joris-voorn-cassian-spectrum-radio-484-2026-08-05.html",
+    tracklist1001: TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
+  },
+  {
     // Official Spectrum Radio 485; timed 1001 capture.
     video: "https://www.youtube.com/watch?v=yTRvLrtsM9I",
     primaryArtist: dj("Joris Voorn", {
@@ -1771,6 +1824,10 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     type: "festival",
     title: "BLACK COFFEE - Mayan Warrior - Burning Man 2025",
     eventName: "Burning Man",
+    // Operator 1001 capture 2026-08-26 filled this previously empty set.
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1qlc330k/black-coffee-mayan-warrior-burning-man-united-states-2025-08-26.html",
+    tracklist1001: TL_BLACK_COFFEE_MAYAN_WARRIOR_BURNING_MAN_2025,
   },
   {
     video: "https://www.youtube.com/watch?v=6VPNizjOyBQ",
@@ -2522,10 +2579,14 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     eventName: "Lollapalooza Chile",
     // Different upload from the operator 1001 paste (yt-loD-whuR5zc).
     // Do not attach that list or merge sourceSlugs.
+    // Third-party channel "Condukta", not an official upload.
   },
   {
-    // Official operator paste 2026-08-19. No SoundCloud in the paste —
-    // do not invent an SC slug. Never yt-oGS0A_R9tag (different Chile upload).
+    // Operator paste 2026-08-19. No SoundCloud in the paste — do not invent
+    // an SC slug. Never yt-oGS0A_R9tag (different Chile upload).
+    // Third-party channel "PyroMan" (4K re-upload), not an official Skrillex
+    // or Lollapalooza upload — see the seed header in
+    // festivalCaptures20260819.ts.
     video: "https://youtu.be/loD-whuR5zc",
     primaryArtist: dj("Skrillex", { accent: "#80ffdb" }),
     genre: "Dubstep",
@@ -2562,6 +2623,10 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     type: "festival",
     title: "ZEDD LIVE @ ULTRA MUSIC FESTIVAL MIAMI (2025)",
     eventName: "Ultra Music Festival Miami",
+    // Operator 1001 capture 2026-08-26 filled this previously empty set.
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1tbusd0k/zedd-mainstage-ultra-music-festival-miami-united-states-2025-03-30.html",
+    tracklist1001: TL_ZEDD_ULTRA_MIAMI_MAINSTAGE_2025,
   },
   {
     video: "https://www.youtube.com/watch?v=N8i1hf1S6ow",
