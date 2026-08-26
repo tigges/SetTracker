@@ -634,6 +634,33 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_ODD_MOB_TML_WE2_2026,
   },
   {
+    // Official Tomorrowland upload, 1h00m. Belgian act b2b the YouTuber
+    // Average Rob; the title drives the collaborator parse. No 1001 page or
+    // description tracklist yet, so it enters the capture queue.
+    video: "https://www.youtube.com/watch?v=akMGRN4_KK8",
+    primaryArtist: dj("Omdat Het Kan", {
+      accent: "#f4a261",
+      homeCity: "Belgium",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    title: "Omdat Het Kan & Average Rob WE1 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+  },
+  {
+    // MU540's own channel, 1h24m b2b with Mochakk at sotrackboa, São Paulo.
+    // sotrackboa is not in KNOWN_EVENTS, so no eventName is invented.
+    video: "https://www.youtube.com/watch?v=gcHLUNPDb_U",
+    primaryArtist: dj("MU540", {
+      accent: "#e76f51",
+      homeCity: "Praia Grande, Brazil",
+    }),
+    genre: "House",
+    type: "club",
+    title: "MU540 B2B Mochakk | DJ Set, sotrackboa São Paulo 2024",
+  },
+  {
     // Tomorrowland official — Mainstage WE2; 20/20 timed cues from 1001.
     video: "https://www.youtube.com/watch?v=WhPtvotfYbc",
     primaryArtist: dj("Miss Monique", {
