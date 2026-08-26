@@ -189,6 +189,7 @@ import {
   TL_HONEY_DIJON_THE_LOOP_DEKMANTEL_NETHERLANDS_2025,
   TL_VINAI_S2O_SONGKRAN_THAILAND_2023,
   TL_AGENTS_OF_TIME_TIME_WARP_FLOOR_1_2026,
+  TL_CLOONEE_NEONGARDEN_EDC_ORLANDO_2025,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   isSecondaryPlaybackSlug,
@@ -4200,12 +4201,15 @@ assert.equal(
 const wwParookaville = tracklist1001RowsToPlays(
   TL_W_AND_W_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
 );
-assert.equal(wwParookaville.length, 58);
+// 58 seed rows collapse to 56 plays: 1001 lists "Rave From Outer Space" and
+// "OIIA OIIA (Spinning Cat)" on two adjacent rows each, and consecutive
+// same-song cues fold into one play.
+assert.equal(wwParookaville.length, 56);
 assert.equal(wwParookaville[0]?.provenance, "1001tl");
 assert.equal(wwParookaville[0]?.timestamp, 10);
 assert.equal(wwParookaville[0]?.trackTitle, "Bangkok");
-assert.equal(wwParookaville[57]?.trackTitle, "Moonlight Shadow");
-assert.equal(wwParookaville[57]?.timestamp, 1 * 3600 + 11 * 60 + 25);
+assert.equal(wwParookaville[55]?.trackTitle, "Moonlight Shadow");
+assert.equal(wwParookaville[55]?.timestamp, 1 * 3600 + 11 * 60 + 25);
 for (let i = 1; i < wwParookaville.length; i++) {
   assert.ok(
     (wwParookaville[i]!.timestamp ?? 0) >
@@ -4805,6 +4809,36 @@ assert.equal(
     "sc-https://soundcloud.com/claptone/clapcast-576"
   ],
   undefined,
+);
+
+// Cloonee @ neonGARDEN, EDC Orlando 2025-11-08 — official artist-channel
+// YouTube. "Stephanie" plays twice but the second is the Beyond Limits Edit,
+// and the two cues are far apart, so nothing collapses.
+assertSeedClocks(TL_CLOONEE_NEONGARDEN_EDC_ORLANDO_2025);
+assert.equal(TL_CLOONEE_NEONGARDEN_EDC_ORLANDO_2025.length, 25);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-3mOMDdX6miw"],
+  TL_CLOONEE_NEONGARDEN_EDC_ORLANDO_2025,
+);
+const clooneeOrlando = tracklist1001RowsToPlays(
+  TL_CLOONEE_NEONGARDEN_EDC_ORLANDO_2025,
+);
+assert.equal(clooneeOrlando.length, 25);
+assert.equal(clooneeOrlando[0]?.provenance, "1001tl");
+assert.equal(clooneeOrlando[0]?.timestamp, 72);
+assert.equal(clooneeOrlando[0]?.trackTitle, "I Rhyme Quick");
+assert.equal(clooneeOrlando[24]?.trackTitle, "So In Love With You (Full Intention Remix)");
+assert.equal(clooneeOrlando[24]?.timestamp, 1 * 3600 + 25 * 60 + 31);
+for (let i = 1; i < clooneeOrlando.length; i++) {
+  assert.ok(
+    (clooneeOrlando[i]!.timestamp ?? 0) > (clooneeOrlando[i - 1]!.timestamp ?? 0),
+    "Cloonee EDC Orlando clocks must increase",
+  );
+}
+// Distinct from the other two Cloonee captures already on file.
+assert.notEqual(
+  TL_CLOONEE_NEONGARDEN_EDC_ORLANDO_2025,
+  TL_CLOONEE_EDC_LV_2022,
 );
 
 console.log("tracklists1001/seeds.test.ts ok");
