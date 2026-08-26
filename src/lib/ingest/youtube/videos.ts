@@ -69,6 +69,7 @@ import {
   TL_HARDWELL_HOA_527_YEARMIX_2025,
   TL_JOEL_CORRY_EDGE_NYC_2026,
   TL_BLACK_COFFEE_MAYAN_WARRIOR_BURNING_MAN_2025,
+  TL_CLOONEE_NEONGARDEN_EDC_ORLANDO_2025,
   TL_ZEDD_ULTRA_MIAMI_MAINSTAGE_2025,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026,
@@ -659,6 +660,26 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     genre: "House",
     type: "club",
     title: "MU540 B2B Mochakk | DJ Set, sotrackboa São Paulo 2024",
+  },
+  {
+    // Cloonee's own channel, EDC Orlando neonGARDEN 2025-11-08. Curated
+    // explicitly rather than left to the artist-channel sweep: that sweep only
+    // reaches the newest YOUTUBE_ARTIST_VIDEO_LIMIT_HIGH uploads, so a set this
+    // old drops out of range as he keeps posting. The 1001 seed was wired on
+    // 2026-08-26 without a curated entry, which made the cue rows depend on
+    // that window.
+    video: "https://www.youtube.com/watch?v=3mOMDdX6miw",
+    primaryArtist: dj("Cloonee", {
+      accent: "#f08a3d",
+      homeCity: "London, UK",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    title: "Cloonee - Live At EDC Orlando",
+    eventName: "EDC Orlando",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/22q6uw0k/cloonee-neongarden-edc-orlando-united-states-2025-11-08.html",
+    tracklist1001: TL_CLOONEE_NEONGARDEN_EDC_ORLANDO_2025,
   },
   {
     // Tomorrowland official — Mainstage WE2; 20/20 timed cues from 1001.
