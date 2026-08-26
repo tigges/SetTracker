@@ -62,6 +62,114 @@ export const TL_HARDWELL_EUPHORIA_019_2026: FingerprintSeedRow[] = [
 ];
 
 /**
+ * Lost Frequencies @ Mainstage, Tomorrowland Weekend 2, Belgium 2026-07-26
+ * Official YouTube: https://youtu.be/KLyeLMJuIOY
+ * https://www.1001tracklists.com/tracklist/9xst011/lost-frequencies-mainstage-tomorrowland-weekend-2-belgium-2026-07-26.html
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-KLyeLMJuIOY"]
+ * No SoundCloud permalink in the operator paste — do not invent one.
+ * Observed clocks (gaps 50s–400s; longest near-uniform run 3).
+ * "The Feeling" appears twice — the Deluxe Mix 2.0 at 41:45 and the original
+ * at 45:10, so both cues stay.
+ * Captured 2026-08-26 — provenance 1001tl.
+ */
+export const TL_LOST_FREQUENCIES_TML_WE2_MAINSTAGE_2026: FingerprintSeedRow[] = [
+  {
+    at: "0:12",
+    artist: "Lost Frequencies ft. Calum Scott",
+    title: "Where Are You Now (Lost Frequencies Deluxe Mix 2.0)",
+  },
+  {
+    at: "5:30",
+    artist: "Lost Frequencies ft. Janieck Devy",
+    title: "Reality (Lost Frequencies Deluxe Mix 2.0)",
+  },
+  {
+    at: "9:12",
+    artist: "Diplo ft. Cameron Whitcomb",
+    title: "Would U Still Love Me (Lost Frequencies Remix)",
+  },
+  {
+    at: "10:50",
+    artist: "Lost Frequencies & Tom Gregory",
+    title: "Dive (Deluxe Mix)",
+  },
+  {
+    at: "13:28",
+    artist: "Michael Calfan & Axwell & Bigfett vs. Empire Of The Sun",
+    title: "Resurrection vs. Walking On A Dream (Bigfett Mashup)",
+  },
+  {
+    at: "14:37",
+    artist: "Empire Of The Sun",
+    title: "Walking On A Dream (Acappella)",
+  },
+  {
+    at: "15:46",
+    artist: "Michael Calfan",
+    title: "Resurrection (Axwell Re-Cut Club Version / Bigfett Remix)",
+  },
+  {
+    at: "16:55",
+    artist: "Deorro ft. Chris Brown",
+    title: "Five More Hours",
+  },
+  {
+    at: "18:43",
+    artist: "Lost Frequencies & Argy ft. rhys from the sticks",
+    title: "Summer Skies (I Love To Cry)",
+  },
+  {
+    at: "21:27",
+    artist: "Magnetic Man ft. Angela Hunte",
+    title: "I Need Air",
+  },
+  {
+    at: "25:20",
+    artist: "Lost Frequencies ft. Bastille",
+    title: "Head Down (Lost Frequencies & SUARK Deluxe Mix)",
+  },
+  { at: "28:42", artist: "Lost Frequencies", title: "Live It All" },
+  {
+    at: "32:00",
+    artist: "FaceSoul",
+    title: "Grow (Lost Frequencies Remix)",
+  },
+  { at: "35:43", artist: "Bicep", title: "Glue (Tim Hox Remix)" },
+  {
+    at: "36:57",
+    artist: "Lost Frequencies ft. Easton Corbin",
+    title: "Are You With Me (Acappella)",
+  },
+  {
+    at: "38:10",
+    artist: "Lost Frequencies & The Temper Trap",
+    title: "Sweet Disposition (a moment, a love) (Deluxe Mix)",
+  },
+  {
+    at: "41:45",
+    artist: "Lost Frequencies",
+    title: "The Feeling (Lost Frequencies Deluxe Mix 2.0)",
+  },
+  { at: "44:20", artist: "Killin' Void", title: "New World" },
+  { at: "45:10", artist: "Lost Frequencies", title: "The Feeling" },
+  {
+    at: "46:00",
+    artist: "Lost Frequencies & CIEL. & Radio Cargo",
+    title: "Listen To Me",
+  },
+  {
+    at: "52:40",
+    artist: "Lost Frequencies ft. Tom Odell",
+    title: "Black Friday (pretty like the sun) (Lost Frequencies Deluxe Mix)",
+  },
+  {
+    at: "55:42",
+    artist: "Lost Frequencies & Nathan Nicholson",
+    title: "So Much Beauty (Around Us)",
+  },
+];
+
+/**
  * Hardwell & Sub Zero Project @ The Great Library Stage, Tomorrowland
  * Weekend 1, Belgium 2026-07-17
  * https://www.1001tracklists.com/tracklist/1w71wl0t/hardwell-sub-zero-project-the-great-library-stage-tomorrowland-weekend-1-belgium-2026-07-17.html
