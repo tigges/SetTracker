@@ -320,9 +320,13 @@ unless asked. Never write Relive for HARD / Insomniac / Nameless / Ultra.
   workflow does not matter — `ubuntu-latest` is the IP YouTube sees. Cookies
   do not make GHA YouTube-steady; refresh the dummy jar when `/stats` Last
   enrich marks it stale (`npm run cookies:export` on a desktop, then
-  `gh secret set YT_DUMMY_COOKIE_LOCAL < .local/yt-cookies.txt`). Identify +
-  File Scan totals land on `/stats` after the next Pages ship (DB snapshot +
-  last enrich/deep/Pages conclusions).
+  `gh secret set YT_DUMMY_COOKIE_LOCAL < .local/yt-cookies.txt`).   Identify +
+ File Scan totals land on `/stats` after the next Pages ship (DB snapshot).
+ The **run rows refresh live** — the repo is public, so `StatsLiveRuns` reads
+ the Actions API from the browser (no token) and replaces the export snapshot,
+ which can never show Pages' own conclusion because it is written mid-run.
+ It polls only while a run is active. Keep `actionsStatus.ts` (node:fs) out of
+ client components — put shared helpers in `actionsLive.ts`.
 - **File Scanning (YouTube, CI-safe):** `npm run enrich:filescan`
   (`src/lib/ingest/enrich/acrFileScan.ts`; step in `catalog-enrich.yml`).
   Server-side — POST the YouTube URL to an ACRCloud **File Scanning** container;
