@@ -50,16 +50,23 @@ export function fingerprintRowsToPlays(
     const artist = row.artist.replace(/\s+/g, " ").trim();
     const title = row.title.replace(/\s+/g, " ").trim();
     if (!artist || !title) continue;
-    const key = playCollapseKey({ artistName: artist, title });
+    // 1001 writes "ID" when the artist is unknown. Keep the title, but never
+    // store a act called ID, and never call the cue identified.
+    const unknownArtist = /^id$/i.test(artist);
+    // playCollapseKey needs an artist, so unknown rows collapse on title
+    // alone — the `unknown::` prefix cannot collide with a real key.
+    const key = unknownArtist
+      ? `unknown::${title.toLowerCase()}`
+      : playCollapseKey({ artistName: artist, title });
     if (key && key === lastKey) continue;
     if (key) lastKey = key;
     out.push({
       position: out.length + 1,
       timestamp,
-      idStatus: "identified",
+      idStatus: unknownArtist ? "unresolved_id" : "identified",
       provenance: "fingerprint",
       trackTitle: title,
-      artistName: artist,
+      ...(unknownArtist ? {} : { artistName: artist }),
       rawText: `${artist} - ${title}`,
     });
   }

@@ -60,3 +60,84 @@ export const TL_HARDWELL_EUPHORIA_019_2026: FingerprintSeedRow[] = [
   { at: "53:56", artist: "Hardwell & Bassjackers", title: "Bang On The Drums" },
   { at: "57:09", artist: "4444 OF A KIND", title: "WAITING 4" },
 ];
+
+/**
+ * Reinier Zonneveld @ Atmosphere Stage, Tomorrowland Weekend 1, Belgium
+ * 2026-07-18
+ * Official YouTube: https://youtu.be/oxG_iaVCkY4
+ * https://www.1001tracklists.com/tracklist/1pqhutm9/reinier-zonneveld-atmosphere-stage-tomorrowland-weekend-1-belgium-2026-07-18.html
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-oxG_iaVCkY4"]
+ * No SoundCloud permalink in the operator paste — do not invent one.
+ * The 46:00 row is a 1001 "ID" (artist unknown, title known): it lands as an
+ * unresolved cue keeping the title, never an act called ID.
+ * Captured 2026-08-26 — provenance 1001tl.
+ */
+export const TL_REINIER_ZONNEVELD_TML_WE1_ATMOSPHERE_2026: FingerprintSeedRow[] =
+  [
+    { at: "0:12", artist: "Reinier Zonneveld", title: "Acid Incident" },
+    {
+      at: "0:48",
+      artist: "Reinier Zonneveld",
+      title: "Move Your Body To The Beat",
+    },
+    { at: "1:24", artist: "GORDO & Reinier Zonneveld", title: "Loco Loco" },
+    {
+      at: "2:00",
+      artist: "Maddix & Reinier Zonneveld & Sarah de Warren",
+      title: "Girls Go Freak",
+    },
+    {
+      at: "12:34",
+      artist: "Benny Benassi pres. The Biz",
+      title: "Satisfaction (Reinier Zonneveld Remix)",
+    },
+    {
+      at: "15:41",
+      artist: "D-Devils & Reinier Zonneveld",
+      title:
+        "Dance With The Devil (The 6th Gate) (Reinier Zonneveld Remix)",
+    },
+    { at: "18:47", artist: "Will Atkinson", title: "Marching Powder" },
+    {
+      at: "23:37",
+      artist: "GORDO & Reinier Zonneveld",
+      title: "Loco Loco (Reinier Zonneveld Filth On Acid Remix)",
+    },
+    { at: "29:14", artist: "Antoon", title: "Beetje Van Mij" },
+    {
+      at: "38:11",
+      artist: "Angerfist & Gaston Zani",
+      title: "The Dark of The Night",
+    },
+    { at: "42:33", artist: "D-Block & S-te-Fan", title: "Loopmachine" },
+    { at: "46:00", artist: "ID", title: "Feels Like Holiday" },
+    { at: "47:25", artist: "Alex Farell", title: "Bring Me Up" },
+    { at: "48:50", artist: "Reinier Zonneveld", title: "In De Olie" },
+    {
+      at: "53:19",
+      artist: "Tiësto",
+      title: "Adagio For Strings (Reinier Zonneveld Remix)",
+    },
+    {
+      at: "55:36",
+      artist: "Reinier Zonneveld & Angerfist",
+      title: "World On Fire",
+    },
+    { at: "59:26", artist: "Underworld", title: "Born Slippy" },
+    {
+      at: "1:02:37",
+      artist: "Showtek",
+      title: "FTS (Fuck The System) (Reinier Zonneveld Tech Mix)",
+    },
+    { at: "1:08:36", artist: "Angerfist & CARV", title: "Shot To The Brain" },
+    {
+      at: "1:12:03",
+      artist: "Forze DJ Team",
+      title: "'98 To Piano (The Viper & Neophyte Rfx / Angerfist Refix)",
+    },
+    {
+      at: "1:14:32",
+      artist: "Hellfish",
+      title: "Destined For Destruction (Angerfist Remix)",
+    },
+  ];
