@@ -228,3 +228,170 @@ export const TL_DAVID_HERRLICH_OWR_ACADEMY_2026: FingerprintSeedRow[] = [
   { at: "51:41", artist: "Danidane", title: "Spirit Soul" },
   { at: "55:38", artist: "OMRI.", title: "Nothing Wrong" },
 ];
+
+/**
+ * HI-LO & Layton Giordani @ Crystal Garden Stage, Tomorrowland Weekend 2,
+ * Belgium 2026-07-25
+ * Official YouTube: https://youtu.be/s_iciA5Eg1E
+ * https://www.1001tracklists.com/tracklist/q16wsw9/hi-lo-layton-giordani-crystal-garden-stage-tomorrowland-weekend-2-belgium-2026-07-25.html
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-s_iciA5Eg1E"]
+ * No SoundCloud permalink in the operator paste — do not invent one.
+ *
+ * Kept exactly as pasted, including two 1001 conventions:
+ *  - Mashup rows ("A vs. B") are followed by their component tracks, so one
+ *    moment can occupy several cues (Kronos / Deeper Love / Last Night…).
+ *  - Township Rebellion → Cloonee & Prospa are 3s apart (1:10:57 → 1:11:00).
+ *    Likely a 1001 quirk; clocks stay as captured, never silently adjusted.
+ * Captured 2026-08-26 — provenance 1001tl.
+ */
+export const TL_HI_LO_LAYTON_GIORDANI_TML_WE2_CRYSTAL_2026: FingerprintSeedRow[] =
+  [
+    {
+      at: "0:12",
+      artist: "Eli Brown & Layton Giordani & OFFAIAH",
+      title: "When I Push",
+    },
+    { at: "0:56", artist: "Wehbba", title: "Basic Pleasure" },
+    {
+      at: "1:41",
+      artist: "Sander van Doorn & Oliver Heldens",
+      title: "THIS",
+    },
+    {
+      at: "2:25",
+      artist: "Danny Tenaglia ft. Celeda",
+      title: "Music Is The Answer (Dancin' And Prancin') (Acappella)",
+    },
+    { at: "3:10", artist: "LUSU", title: "RISE" },
+    {
+      at: "3:54",
+      artist: "Tiga",
+      title: "Mind Dimension (Adam Sellouk Remix)",
+    },
+    { at: "7:27", artist: "Eminem", title: "Without Me (Acappella)" },
+    {
+      at: "11:00",
+      artist: "Shakedown",
+      title: "At Night (Anyma & Layton Giordani Remix)",
+    },
+    {
+      at: "15:20",
+      artist: "Empire Of The Sun",
+      title: "We Are The People (Acappella)",
+    },
+    { at: "19:40", artist: "Rihanna", title: "Don't Stop The Music" },
+    {
+      at: "24:00",
+      artist: "Layton Giordani & GENESI ft. Be No Rain",
+      title: "Call You Back",
+    },
+    {
+      at: "28:29",
+      artist: "HI-LO vs. Aretha Franklin vs. Indeep",
+      title:
+        "Kronos vs. Deeper Love vs. Last Night A DJ Saved My Life (Oliver Heldens Mashup)",
+    },
+    { at: "29:24", artist: "Aretha Franklin", title: "A Deeper Love" },
+    {
+      at: "30:18",
+      artist: "Indeep",
+      title: "Last Night A Dj Saved My Life",
+    },
+    { at: "31:13", artist: "HI-LO", title: "Kronos" },
+    {
+      at: "32:07",
+      artist: "AFROJACK & Bart B More",
+      title: "Nothing But This",
+    },
+    { at: "35:16", artist: "Adam Beyer & DJ Jock", title: "Let Loose" },
+    { at: "39:05", artist: "Matt Sassari & HNTR", title: "Short Stop" },
+    {
+      at: "42:57",
+      artist: "HI-LO & Danny Avila vs. Coolio",
+      title: "Gangsta's PARADISE (Oliver Heldens Mashup)",
+    },
+    { at: "45:21", artist: "Coolio ft. L.V.", title: "Gangsta's Paradise" },
+    { at: "47:46", artist: "HI-LO & Danny Avila", title: "PARADISE" },
+    {
+      at: "50:10",
+      artist: "Donna Summer",
+      title: "I Feel Love (Cosmic Boys Remix)",
+    },
+    {
+      at: "54:01",
+      artist: "Sharam",
+      title:
+        "PATT (Party All The Time) (Adam Beyer & Layton Giordani & Green Velvet Remix)",
+    },
+    {
+      at: "57:23",
+      artist: "HI-LO & Space 92 vs. Avicii",
+      title: "Mercury vs. Waiting For Love (Oliver Heldens Mashup)",
+    },
+    {
+      at: "58:42",
+      artist: "Avicii ft. Simon Aldred",
+      title: "Waiting For Love (Acappella)",
+    },
+    { at: "1:00:02", artist: "HI-LO & Space 92", title: "Mercury" },
+    {
+      at: "1:01:21",
+      artist: "No Doubt",
+      title: "Hella Good (Layton Giordani Remix)",
+    },
+    {
+      at: "1:04:29",
+      artist: "Eelke Kleijn & Armin van Buuren vs. Lana Del Rey",
+      title: "Transmission vs. Summertime Sadness (Oliver Heldens Mashup)",
+    },
+    {
+      at: "1:05:25",
+      artist: "Lana Del Rey",
+      title: "Summertime Sadness (Acappella)",
+    },
+    {
+      at: "1:06:22",
+      artist: "Eelke Kleijn",
+      title: "Transmission (Armin van Buuren Remix)",
+    },
+    { at: "1:07:18", artist: "Shilla", title: "Resist The System" },
+    { at: "1:10:57", artist: "Township Rebellion", title: "Sequences" },
+    { at: "1:11:00", artist: "Cloonee & Prospa", title: "Free Your Mind" },
+    {
+      at: "1:13:37",
+      artist: "Layton Giordani ft. LINNEY & Sarah de Warren",
+      title: "Act Of God (CamelPhat Remix)",
+    },
+    {
+      at: "1:17:24",
+      artist: "HI-LO vs. Kx5 & HAYLA",
+      title: "Reese vs. Escape (HI-LO Mashup)",
+    },
+    { at: "1:18:36", artist: "Kx5 ft. Hayla", title: "Escape" },
+    { at: "1:19:48", artist: "HI-LO", title: "REESE" },
+    {
+      at: "1:21:00",
+      artist: "Layton Giordani & HILLS ft. Majestic",
+      title: "Bassline",
+    },
+    {
+      at: "1:23:44",
+      artist: "HI-LO & Layton Giordani vs. David Guetta & Sia",
+      title: "Rabbit Hole vs. Titanium (Layton Giordani Mashup)",
+    },
+    {
+      at: "1:24:49",
+      artist: "David Guetta ft. Sia",
+      title: "Titanium (Acappella)",
+    },
+    {
+      at: "1:25:54",
+      artist: "HI-LO & Layton Giordani",
+      title: "Rabbit Hole",
+    },
+    {
+      at: "1:26:58",
+      artist: "Daft Punk",
+      title: "One More Time (HILLS Remix)",
+    },
+  ];
