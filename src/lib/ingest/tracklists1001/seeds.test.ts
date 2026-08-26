@@ -191,6 +191,7 @@ import {
   TL_AGENTS_OF_TIME_TIME_WARP_FLOOR_1_2026,
   TL_BLACK_COFFEE_MAYAN_WARRIOR_BURNING_MAN_2025,
   TL_CLOONEE_NEONGARDEN_EDC_ORLANDO_2025,
+  TL_ZEDD_ULTRA_MIAMI_MAINSTAGE_2025,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
@@ -4819,6 +4820,45 @@ assert.equal(
   ],
   undefined,
 );
+
+// Zedd @ Mainstage, Ultra Miami 2025 — his own channel, and the video was
+// already curated without cues, so assert the seed reaches both the slug map
+// and that entry.
+assertSeedClocks(TL_ZEDD_ULTRA_MIAMI_MAINSTAGE_2025);
+assert.equal(TL_ZEDD_ULTRA_MIAMI_MAINSTAGE_2025.length, 38);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-TT32mIg4oqg"],
+  TL_ZEDD_ULTRA_MIAMI_MAINSTAGE_2025,
+);
+const zeddUltra = tracklist1001RowsToPlays(TL_ZEDD_ULTRA_MIAMI_MAINSTAGE_2025);
+assert.equal(zeddUltra.length, 38);
+assert.equal(zeddUltra[0]?.provenance, "1001tl");
+assert.equal(zeddUltra[0]?.timestamp, 0);
+assert.equal(
+  zeddUltra[0]?.trackTitle,
+  "Everything In Its Right Place (Zedd Remix)",
+);
+assert.equal(zeddUltra[37]?.trackTitle, "Clarity");
+assert.equal(zeddUltra[37]?.timestamp, 52 * 60 + 5);
+for (let i = 1; i < zeddUltra.length; i++) {
+  assert.ok(
+    (zeddUltra[i]!.timestamp ?? 0) > (zeddUltra[i - 1]!.timestamp ?? 0),
+    `Zedd Ultra clocks must increase at index ${i}`,
+  );
+}
+// Layered blends 1s apart must stay two cues, not fold into one.
+assert.equal(zeddUltra[3]?.timestamp, 4 * 60 + 55);
+assert.equal(zeddUltra[4]?.timestamp, 4 * 60 + 56);
+assert.equal(zeddUltra[3]?.trackTitle, "All Night");
+assert.equal(zeddUltra[4]?.trackTitle, "Tangerine Rays");
+// "Stay" is played once and then again as a mashup component, non-adjacent, so
+// both cues survive the consecutive-same-song collapse.
+assert.equal(
+  zeddUltra.filter((p) => p.trackTitle === "Stay").length,
+  2,
+  "both Stay cues must survive",
+);
+assert.notEqual(TL_ZEDD_ULTRA_MIAMI_MAINSTAGE_2025, TL_KNOCK2_ZEDD_HARD_SUMMER_2026);
 
 // Black Coffee @ Mayan Warrior, Burning Man 2025 — the venue collective's own
 // channel. The video was already curated in YOUTUBE_SETS with no cues, so this

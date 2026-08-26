@@ -62,6 +62,120 @@ export const TL_HARDWELL_EUPHORIA_019_2026: FingerprintSeedRow[] = [
 ];
 
 /**
+ * Zedd @ Mainstage, Ultra Music Festival Miami, United States 2025-03-30
+ * https://www.1001tracklists.com/tracklist/1tbusd0k/zedd-mainstage-ultra-music-festival-miami-united-states-2025-03-30.html
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-TT32mIg4oqg"]
+ *
+ * oEmbed 2026-08-26: channel "Zedd" — his own upload. That video was already
+ * curated in YOUTUBE_SETS without a tracklist, so this capture fills an
+ * existing set. No SoundCloud in the paste; none invented. Distinct from
+ * TL_KNOCK2_ZEDD_HARD_SUMMER_2026, a different performance.
+ *
+ * Observed clocks: 38 cues over ~52min, longest near-uniform run 3.
+ * Kept exactly as pasted, including three 1001 conventions:
+ *  - Four pairs sit 1–2s apart (4:55/4:56, 6:20/6:21, 31:09/31:11,
+ *    49:16/49:17). These are layered blends, an instrumental under a Zedd
+ *    vocal, which 1001 marks at the same moment rather than a mashup
+ *    expansion. Clocks stay as captured, never silently spread.
+ *  - Mashup rows ("A vs. B") are followed by their components, so
+ *    "Zedd & Alessia Cara - Stay" appears twice: the standalone play at 32:40
+ *    and again at 34:59 as part of the Bust-R mashup. The rows are not
+ *    adjacent, so both cues survive collapse.
+ *  - 1001 spells the mashup credit "Alessia Clara"; the catalog spells her
+ *    "Alessia Cara" elsewhere. Left as captured so the row matches the source.
+ * Captured 2026-08-26 — provenance 1001tl.
+ */
+export const TL_ZEDD_ULTRA_MIAMI_MAINSTAGE_2025: FingerprintSeedRow[] = [
+  {
+    at: "0:00",
+    artist: "Radiohead",
+    title: "Everything In Its Right Place (Zedd Remix)",
+  },
+  {
+    at: "3:20",
+    artist: "Hailee Steinfeld & Grey ft. Zedd",
+    title: "Starving (Bali Bandits Remix)",
+  },
+  { at: "4:07", artist: "Joey Ayden", title: "The Bass" },
+  { at: "4:55", artist: "Mesto & Vluarr", title: "All Night" },
+  {
+    at: "4:56",
+    artist: "Zedd & Bea Miller & Ellis",
+    title: "Tangerine Rays",
+  },
+  { at: "6:20", artist: "Jay Eskar", title: "Watch Me Rise" },
+  { at: "6:21", artist: "Zedd ft. Bea Miller", title: "Out Of Time" },
+  {
+    at: "7:52",
+    artist: "Zedd ft. Selena Gomez",
+    title: "I Want You To Know",
+  },
+  {
+    at: "12:05",
+    artist: "John Summit ft. HAYLA",
+    title: "Where You Are (Zedd Remix)",
+  },
+  {
+    at: "14:35",
+    artist: "Zedd ft. Hayley Williams",
+    title: "Stay The Night",
+  },
+  { at: "17:50", artist: "Chic", title: "Good Times (Ellis Remix)" },
+  {
+    at: "19:18",
+    artist: "ACRAZE & Cherish vs. 23",
+    title:
+      "Do It To It vs. Pink Soldiers (Squid Game OST) (Zedd Edit)",
+  },
+  { at: "19:48", artist: "ACRAZE ft. Cherish", title: "Do It To It" },
+  { at: "20:18", artist: "23", title: "Pink Soldiers (Squid Game OST)" },
+  { at: "20:47", artist: "MAGIC!", title: "Rude (Zedd Remix)" },
+  { at: "23:00", artist: "Wolfgang Gartner", title: "818" },
+  { at: "24:32", artist: "Zedd & Jeff Buckley", title: "Dream Brother" },
+  { at: "25:27", artist: "Zedd & The Olllam", title: "Sona" },
+  { at: "26:32", artist: "Zedd ft. Remi Wolf", title: "Lucky" },
+  { at: "27:37", artist: "M83", title: "Midnight City" },
+  { at: "28:35", artist: "Zedd & Elley Duhé", title: "Happy Now" },
+  {
+    at: "30:12",
+    artist: "Zedd & Elley Duhé",
+    title: "Happy Now (Marc Benjamin Remix)",
+  },
+  { at: "31:09", artist: "Arcando & Pirapus", title: "Ultrasound" },
+  { at: "31:11", artist: "Zedd & Bava", title: "No Gravity" },
+  { at: "32:40", artist: "Zedd & Alessia Cara", title: "Stay" },
+  {
+    at: "34:27",
+    artist: "CMC$ & NUZB vs. Zedd & Alessia Clara",
+    title: "Stay In Sin City (Bust-R Mashup)",
+  },
+  { at: "34:59", artist: "Zedd & Alessia Cara", title: "Stay" },
+  { at: "35:31", artist: "CMC$ & NUZB ft. Felix Samuel", title: "Sin City" },
+  { at: "36:03", artist: "Ariana Grande ft. Zedd", title: "Break Free" },
+  { at: "37:58", artist: "Eleganto", title: "Keep It Real" },
+  { at: "38:42", artist: "Daft Punk", title: "One More Time (Zedd Remix)" },
+  { at: "42:18", artist: "Zedd ft. Jon Bellion", title: "Beautiful Now" },
+  {
+    at: "46:52",
+    artist: "Zedd & Maren Morris & Grey",
+    title: "The Middle",
+  },
+  { at: "48:40", artist: "Zedd & Jasmine Thompson", title: "Funny" },
+  { at: "49:16", artist: "Virtual Riot", title: "VROOM" },
+  {
+    at: "49:17",
+    artist: "Zedd & Maren Morris & Grey",
+    title: "The Middle (Acappella)",
+  },
+  {
+    at: "51:15",
+    artist: "Zedd ft. Foxes",
+    title: "Clarity (Evan Duffy Piano Cover)",
+  },
+  { at: "52:05", artist: "Zedd ft. Foxes", title: "Clarity" },
+];
+
+/**
  * Black Coffee @ Mayan Warrior, Burning Man, United States 2025-08-26
  * https://www.1001tracklists.com/tracklist/1qlc330k/black-coffee-mayan-warrior-burning-man-united-states-2025-08-26.html
  * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-FH7lIOv1s3Q"]

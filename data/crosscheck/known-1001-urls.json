@@ -1,6 +1,6 @@
 {
   "note": "Operator-collected 1001Tracklists URLs. All listed urls[] rows are now seeded. Prefer new operator pastes over this archive. stillMissing1001 is video-in / no 1001 page — do not invent URLs. heldPendingPlayback is 1001-in / no official YT/SC playback — seed held, do not invent or wire fan playback. pendingCuePaste is official playback + operator 1001 URL without cue rows — do not scrape 1001 or invent 1001tl seeds.",
-  "updatedAt": "2026-08-26T11:45:00.000Z",
+  "updatedAt": "2026-08-26T11:55:00.000Z",
   "urls": [
     {
       "label": "VINAI · S2O Songkran Music Festival Thailand 2023-04-15",
@@ -575,6 +575,14 @@
       "tracklistUrl": "https://www.1001tracklists.com/tracklist/1qlc330k/black-coffee-mayan-warrior-burning-man-united-states-2025-08-26.html",
       "youtubeUrl": "https://youtu.be/FH7lIOv1s3Q",
       "note": "Operator paste 2026-08-26. 45 cues over ~3h28m, observed clocks (gaps 113-450s), density ok at 12.6 tracks/hour. oEmbed: channel \"MayanWarrior\" - the art car collective's own channel, a venue channel like Boiler Room / Cercle, not a fan re-upload. The video was ALREADY curated in YOUTUBE_SETS with no tracklist, so this capture filled an existing empty set rather than adding one; tracklist1001 + tracklist1001Url now attached to that entry. No SoundCloud in the paste. Roland Clark appears twice under different titles - both cues kept."
+    },
+    {
+      "label": "Zedd · Mainstage, Ultra Music Festival Miami 2025-03-30",
+      "slug": "yt-TT32mIg4oqg",
+      "name": "TL_ZEDD_ULTRA_MIAMI_MAINSTAGE_2025",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/1tbusd0k/zedd-mainstage-ultra-music-festival-miami-united-states-2025-03-30.html",
+      "youtubeUrl": "https://youtu.be/TT32mIg4oqg",
+      "note": "Operator paste 2026-08-26. 38 cues over ~52min, observed clocks, density ok. oEmbed: channel \"Zedd\" - his own upload. The video was ALREADY curated in YOUTUBE_SETS with no tracklist, so this filled an existing empty set; tracklist1001 + tracklist1001Url attached to that entry. Kept exactly as pasted: four pairs sit 1-2s apart (4:55/4:56, 6:20/6:21, 31:09/31:11, 49:16/49:17) as layered blends, not mashup expansions; \"Zedd & Alessia Cara - Stay\" appears at 32:40 standalone and 34:59 as a Bust-R mashup component (non-adjacent, both cues kept); 1001 spells the mashup credit \"Alessia Clara\" while the catalog uses \"Alessia Cara\" elsewhere - left as captured. No SoundCloud in the paste. Distinct from TL_KNOCK2_ZEDD_HARD_SUMMER_2026."
     }
   ],
   "stillMissing1001": [

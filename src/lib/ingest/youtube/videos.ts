@@ -69,6 +69,7 @@ import {
   TL_HARDWELL_HOA_527_YEARMIX_2025,
   TL_JOEL_CORRY_EDGE_NYC_2026,
   TL_BLACK_COFFEE_MAYAN_WARRIOR_BURNING_MAN_2025,
+  TL_ZEDD_ULTRA_MIAMI_MAINSTAGE_2025,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026,
   TL_MISS_MONIQUE_IBIZA_SUNSET_YACHT_2026,
@@ -2595,6 +2596,10 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     type: "festival",
     title: "ZEDD LIVE @ ULTRA MUSIC FESTIVAL MIAMI (2025)",
     eventName: "Ultra Music Festival Miami",
+    // Operator 1001 capture 2026-08-26 filled this previously empty set.
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1tbusd0k/zedd-mainstage-ultra-music-festival-miami-united-states-2025-03-30.html",
+    tracklist1001: TL_ZEDD_ULTRA_MIAMI_MAINSTAGE_2025,
   },
   {
     video: "https://www.youtube.com/watch?v=N8i1hf1S6ow",
