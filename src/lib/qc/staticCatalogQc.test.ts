@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import {
+  auditCuratedTracklistAgreement,
   auditFingerprintOnlyWatches,
   dropJunkTrackIdPins,
   runStaticCatalogQc,
@@ -40,5 +41,27 @@ const wiredFan = auditFingerprintOnlyWatches(
 );
 assert.equal(wiredFan.length, 1);
 assert.match(wiredFan[0]!.detail, /never a tracklist key/);
+
+// Curated entry vs slug map: silence is fine, disagreement is not.
+assert.equal(auditCuratedTracklistAgreement().length, 0);
+const seedA = [{ at: "0:00", title: "a" }];
+const seedB = [{ at: "0:00", title: "a" }];
+assert.equal(
+  auditCuratedTracklistAgreement(
+    [{ video: "https://www.youtube.com/watch?v=aaaaaaaaaaa" }],
+    { "yt-aaaaaaaaaaa": seedA },
+  ).length,
+  0,
+  "an entry with no tracklist1001 still gets cues from the map",
+);
+const split = auditCuratedTracklistAgreement(
+  [{ video: "https://www.youtube.com/watch?v=aaaaaaaaaaa", tracklist1001: seedB }],
+  { "yt-aaaaaaaaaaa": seedA },
+);
+assert.equal(split.length, 1);
+assert.equal(split[0]?.severity, "error");
+assert.match(split[0]!.detail, /different array/);
+// Equal-looking copies must still fail: host twins group on array identity.
+assert.deepEqual(seedA, seedB);
 
 console.log("qc/staticCatalogQc.test.ts ok", report.pins, report.counts);
