@@ -62,6 +62,99 @@ export const TL_HARDWELL_EUPHORIA_019_2026: FingerprintSeedRow[] = [
 ];
 
 /**
+ * Cloonee @ neonGARDEN, EDC Orlando, United States 2025-11-08
+ * Official YouTube (oEmbed: @Cloonee "Cloonee - Live At EDC Orlando"):
+ * https://youtu.be/3mOMDdX6miw
+ * https://www.1001tracklists.com/tracklist/22q6uw0k/cloonee-neongarden-edc-orlando-united-states-2025-11-08.html
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-3mOMDdX6miw"]
+ * The capture paste used TL_CAPTURED, which is too generic to keep — this is
+ * the named constant. No SoundCloud permalink given; none invented.
+ * Distinct from TL_CLOONEE_EDC_LV_2022 and TL_CLOONEE_PROSPA_DESTINO_2026.
+ *
+ * Mostly observed clocks (gaps to 403s), with one caveat: the opening five
+ * rows sit 57–58s apart, so that intro run looks interpolated by 1001 while
+ * the rest is real. Under the 8-gap threshold, so not flagged wholesale.
+ * "Stephanie" appears twice — the original at 2:10 and the Beyond Limits
+ * Edit at 1:09:22 — distinct titles, so both cues stay.
+ * Captured 2026-08-26 — provenance 1001tl.
+ */
+export const TL_CLOONEE_NEONGARDEN_EDC_ORLANDO_2025: FingerprintSeedRow[] = [
+  {
+    at: "1:12",
+    artist: "Cloonee & Nice & Smooth",
+    title: "I Rhyme Quick",
+  },
+  {
+    at: "2:10",
+    artist: "Cloonee & InntRaw & Young M.A",
+    title: "Stephanie",
+  },
+  { at: "3:07", artist: "GREG 99 & Cloonee", title: "Still My Baby" },
+  {
+    at: "4:05",
+    artist: "Chris Lake & Disclosure ft. Leven Kali",
+    title: "one2three",
+  },
+  { at: "5:02", artist: "Raized", title: "Papara Low" },
+  { at: "8:06", artist: "ATLAC", title: "Hood Beat" },
+  {
+    at: "11:55",
+    artist: "Chris Lorenzo & Kah-Lo",
+    title: "In This Bih'",
+  },
+  { at: "16:08", artist: "Lightleak", title: "EQ (Dance For Me)" },
+  { at: "19:20", artist: "FIRZA", title: "Lick It" },
+  { at: "24:01", artist: "Noah Scannell", title: "Elevate" },
+  { at: "27:00", artist: "Funk Cartel", title: "Baianá" },
+  { at: "29:57", artist: "JOSHWA", title: "Out Of My Mind" },
+  {
+    at: "33:46",
+    artist: "Cloonee ft. Jocelyn Enriquez",
+    title: "XTC",
+  },
+  {
+    at: "38:41",
+    artist: "Chris Lorenzo & Paris Mitchell ft. Waxmaster",
+    title: "Hell Yeah!",
+  },
+  { at: "43:51", artist: "Stacey Pullen", title: "Side2Step" },
+  {
+    at: "48:07",
+    artist: "Cloonee",
+    title: "Fine Night (GREG 99 Remix)",
+  },
+  {
+    at: "54:50",
+    artist: "Travis Scott",
+    title: "I KNOW ? (Raized Edit)",
+  },
+  { at: "58:15", artist: "Finky", title: "House Rules" },
+  {
+    at: "1:01:59",
+    artist: "Cloonee & Funkdoobiest",
+    title: "X-Rated (Devault Remix)",
+  },
+  { at: "1:05:55", artist: "Daft Punk", title: "Da Funk (Hawkeys Edit)" },
+  {
+    at: "1:09:22",
+    artist: "Cloonee & InntRaw & Young M.A",
+    title: "Stephanie (Beyond Limits Edit)",
+  },
+  {
+    at: "1:14:02",
+    artist: "Cloonee",
+    title: "How Deep Are Your Dreams?",
+  },
+  { at: "1:18:13", artist: "Galo", title: "Last Nite" },
+  { at: "1:20:41", artist: "Cloonee & Prospa", title: "Free Your Mind" },
+  {
+    at: "1:25:31",
+    artist: "Duke",
+    title: "So In Love With You (Full Intention Remix)",
+  },
+];
+
+/**
  * Camila Jun @ Crystal Garden Stage, Tomorrowland Weekend 1, Belgium
  * 2026-07-17
  * Official YouTube (oEmbed: @tomorrowland "Camila Jun WE1 | Tomorrowland

@@ -1,6 +1,6 @@
 {
   "note": "Operator-collected 1001Tracklists URLs. All listed urls[] rows are now seeded. Prefer new operator pastes over this archive. stillMissing1001 is video-in / no 1001 page — do not invent URLs. heldPendingPlayback is 1001-in / no official YT/SC playback — seed held, do not invent or wire fan playback. pendingCuePaste is official playback + operator 1001 URL without cue rows — do not scrape 1001 or invent 1001tl seeds.",
-  "updatedAt": "2026-08-26T03:40:00.000Z",
+  "updatedAt": "2026-08-26T10:20:00.000Z",
   "urls": [
     {
       "label": "VINAI · S2O Songkran Music Festival Thailand 2023-04-15",
@@ -549,6 +549,14 @@
       "tracklistUrl": "https://www.1001tracklists.com/tracklist/yfd51vt/camila-jun-crystal-garden-stage-tomorrowland-weekend-1-belgium-2026-07-17.html",
       "youtubeUrl": "https://youtu.be/8Oq0TMeaY4I",
       "note": "Operator paste 2026-08-26. 17 cues. CLOCKS APPROXIMATE - all 16 gaps are exactly 3:29 (209s) from a 0:20 start, i.e. evenlySpaceRows output; 1001 had the order but no cue times. oEmbed confirms @tomorrowland 'Camila Jun WE1 | Tomorrowland 2026'."
+    },
+    {
+      "label": "Cloonee · neonGARDEN, EDC Orlando 2025-11-08",
+      "slug": "yt-3mOMDdX6miw",
+      "name": "TL_CLOONEE_NEONGARDEN_EDC_ORLANDO_2025",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/22q6uw0k/cloonee-neongarden-edc-orlando-united-states-2025-11-08.html",
+      "youtubeUrl": "https://youtu.be/3mOMDdX6miw",
+      "note": "Operator paste 2026-08-26. 25 cues. Non-Tomorrowland (EDC Orlando 2025). Clocks mostly observed (gaps to 403s); the first five rows sit 57-58s apart, so treat that intro run as interpolated. Paste named the const TL_CAPTURED - renamed on wiring. oEmbed confirms @Cloonee 'Cloonee - Live At EDC Orlando' (artist's own channel). Distinct from TL_CLOONEE_EDC_LV_2022 and TL_CLOONEE_PROSPA_DESTINO_2026. Stephanie appears twice (original 2:10, Beyond Limits Edit 1:09:22)."
     }
   ],
   "stillMissing1001": [
