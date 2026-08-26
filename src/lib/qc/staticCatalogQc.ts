@@ -11,7 +11,10 @@ import {
   hasEvenlySpacedClocks,
   type FingerprintSeedRow,
 } from "../ingest/fingerprint/seeds";
+import { FINGERPRINT_ONLY_WATCH } from "../ingest/identify/fingerprintWatch";
 import { TRACKLIST_1001_BY_SOURCE_SLUG } from "../ingest/tracklists1001/festival2026";
+import { YOUTUBE_SETS } from "../ingest/youtube/videos";
+import { youtubeVideoId } from "../thumbs/youtubeThumb";
 import {
   isJunkTrackPin,
   loadTrackIdPins,
@@ -201,6 +204,46 @@ function auditWiredTracklistClocks(): QcIssue[] {
   ];
 }
 
+/**
+ * Fan watch URLs must stay Identify-only.
+ *
+ * FINGERPRINT_ONLY_WATCH entries are unofficial re-uploads: they may be
+ * sampled for offsets but must never become a set's playback or a wired
+ * tracklist key. Until now that rule was only enforced inside File Scanning,
+ * so nothing stopped a fan video from being curated as a set in the first
+ * place. Check both directions statically.
+ */
+export function auditFingerprintOnlyWatches(
+  watches: Array<{ videoId: string; channel: string }> = FINGERPRINT_ONLY_WATCH,
+  curatedVideos: readonly string[] = YOUTUBE_SETS.map((v) => v.video),
+): QcIssue[] {
+  const issues: QcIssue[] = [];
+  const curated = new Set<string>();
+  for (const v of curatedVideos) {
+    const id = youtubeVideoId(v);
+    if (id) curated.add(id);
+  }
+  for (const w of watches) {
+    if (TRACKLIST_1001_BY_SOURCE_SLUG[`yt-${w.videoId}`]) {
+      issues.push({
+        severity: "error",
+        area: "fingerprint-only-watch",
+        slug: `yt-${w.videoId}`,
+        detail: `fan upload (${w.channel}) is wired in TRACKLIST_1001_BY_SOURCE_SLUG — Identify probes only, never a tracklist key`,
+      });
+    }
+    if (curated.has(w.videoId)) {
+      issues.push({
+        severity: "error",
+        area: "fingerprint-only-watch",
+        slug: `yt-${w.videoId}`,
+        detail: `fan upload (${w.channel}) is curated in YOUTUBE_SETS — that makes it sourceUrl/playbackUrl for a set`,
+      });
+    }
+  }
+  return issues;
+}
+
 function auditRosterAndGraduates(): QcIssue[] {
   const issues: QcIssue[] = [];
   for (const a of ARTIST_ROSTER_CURATED) {
@@ -293,6 +336,7 @@ export function runStaticCatalogQc(): StaticCatalogQc {
     ...auditOperatorSearchUrls(),
     ...auditWiredTracklistClocks(),
     ...auditTracklistSlugDuplicates(),
+    ...auditFingerprintOnlyWatches(),
   ];
   const counts: Record<string, number> = {};
   for (const i of issues) {

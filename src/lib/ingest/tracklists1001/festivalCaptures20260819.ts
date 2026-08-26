@@ -679,7 +679,13 @@ export const TL_JAMIE_JONES_GAS_TOWER_LOST_HORIZON_FESTIVAL_2020: FingerprintSee
 
 /**
  * Skrillex @ Banco de Chile Stage, Lollapalooza Chile 2026-03-15
- * Official YouTube: https://youtu.be/loD-whuR5zc
+ * Operator-supplied YouTube: https://youtu.be/loD-whuR5zc
+ * NOT an official channel — oEmbed 2026-08-26 reports "PyroMan", "SKRILLEX
+ * LIVE @ LOLLAPALOOZA CHILE 2026 (4K REMASTERED)". The alternate upload
+ * yt-oGS0A_R9tag is also third-party ("Condukta"). Neither is Skrillex or
+ * Lollapalooza, so both are fan re-uploads of one performance. Producer
+ * decision pending: keep as the only available playback, or move to
+ * FINGERPRINT_ONLY_WATCH (Identify-only) per the fan-upload rule.
  * https://www.1001tracklists.com/tracklist/1sh3nkvk/skrillex-banco-de-chile-stage-lollapalooza-chile-2026-03-15.html
  * Overlay name TL_Skrillex_Banco-de-Chile-Stage_Lollapalooza_Chile_2026-03-15 is not a valid identifier.
  * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-loD-whuR5zc"]

@@ -2522,10 +2522,14 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     eventName: "Lollapalooza Chile",
     // Different upload from the operator 1001 paste (yt-loD-whuR5zc).
     // Do not attach that list or merge sourceSlugs.
+    // Third-party channel "Condukta", not an official upload.
   },
   {
-    // Official operator paste 2026-08-19. No SoundCloud in the paste —
-    // do not invent an SC slug. Never yt-oGS0A_R9tag (different Chile upload).
+    // Operator paste 2026-08-19. No SoundCloud in the paste — do not invent
+    // an SC slug. Never yt-oGS0A_R9tag (different Chile upload).
+    // Third-party channel "PyroMan" (4K re-upload), not an official Skrillex
+    // or Lollapalooza upload — see the seed header in
+    // festivalCaptures20260819.ts.
     video: "https://youtu.be/loD-whuR5zc",
     primaryArtist: dj("Skrillex", { accent: "#80ffdb" }),
     genre: "Dubstep",

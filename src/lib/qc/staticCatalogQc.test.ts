@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import {
+  auditFingerprintOnlyWatches,
   dropJunkTrackIdPins,
   runStaticCatalogQc,
 } from "./staticCatalogQc";
@@ -20,5 +21,24 @@ const cleaned = dropJunkTrackIdPins([
 ]);
 assert.equal(cleaned.next.length, 1);
 assert.equal(cleaned.dropped[0], "youtube-biscits");
+
+// Fan watch URLs are Identify-only: never a wired tracklist key, never a
+// curated set (which would make them sourceUrl/playbackUrl). The shipped list
+// is clean, so feed synthetic entries to prove the guard actually fires.
+assert.equal(auditFingerprintOnlyWatches().length, 0);
+const curatedFan = auditFingerprintOnlyWatches(
+  [{ videoId: "6DC3xoQF4Zs", channel: "DerekD2" }],
+  ["https://www.youtube.com/watch?v=6DC3xoQF4Zs"],
+);
+assert.equal(curatedFan.length, 1);
+assert.equal(curatedFan[0]?.severity, "error");
+assert.match(curatedFan[0]!.detail, /curated in YOUTUBE_SETS/);
+// A slug that is genuinely wired, standing in for a fan re-upload.
+const wiredFan = auditFingerprintOnlyWatches(
+  [{ videoId: "loD-whuR5zc", channel: "PyroMan" }],
+  [],
+);
+assert.equal(wiredFan.length, 1);
+assert.match(wiredFan[0]!.detail, /never a tracklist key/);
 
 console.log("qc/staticCatalogQc.test.ts ok", report.pins, report.counts);
