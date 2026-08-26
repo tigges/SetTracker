@@ -39,6 +39,34 @@ export function parseClockToSec(raw: string): number | null {
  * Convert seed rows → RawPlay[]. Drops consecutive duplicates (same artist+title
  * — fingerprint spam often re-IDs the same playing track every minute).
  */
+/**
+ * Reject a capture whose clocks are a duration divided by track count.
+ *
+ * A real mix never places 10+ consecutive tracks at an identical interval.
+ * When 1001 (or MixesDB, or a paste tool) has no cue times, evenly spaced
+ * clocks get generated — those are fabricated positions, not observations,
+ * and an untimed list stays out rather than pretending to be a timeline.
+ */
+export function hasEvenlySpacedClocks(
+  rows: FingerprintSeedRow[],
+  minRows = 8,
+): boolean {
+  const secs: number[] = [];
+  for (const row of rows) {
+    const at = parseClockToSec(row.at);
+    if (at == null) return false;
+    secs.push(at);
+  }
+  if (secs.length < minRows) return false;
+  const gaps: number[] = [];
+  for (let i = 1; i < secs.length; i += 1) {
+    const gap = secs[i]! - secs[i - 1]!;
+    if (gap <= 0) return false;
+    gaps.push(gap);
+  }
+  return new Set(gaps).size === 1;
+}
+
 export function fingerprintRowsToPlays(
   rows: FingerprintSeedRow[],
 ): RawPlay[] {

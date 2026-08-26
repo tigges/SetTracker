@@ -181,3 +181,50 @@ export const TL_INDIRA_PAGANOTTO_TML_WE2_MAINSTAGE_2026: FingerprintSeedRow[] = 
   { at: "54:20", artist: "Klipsun & Aura Vortex", title: "Cliffjumper" },
   { at: "56:28", artist: "Abso X", title: "Sky Has No Limit" },
 ];
+
+/**
+ * David Herrlich — One World Radio Academy Mix 2026-07-13
+ * Official SoundCloud:
+ * https://soundcloud.com/tomorrowland/tomorrowland-academy-student-mix-david-herrlich
+ * https://www.1001tracklists.com/tracklist/2uyj62zk/david-herrlich-one-world-radio-academy-mix-2026-07-13.html
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["sc-tomorrowland-tomorrowland-academy-student-mix-david-herrlich"]
+ *
+ * CLOCKS ARE APPROXIMATE. Every gap is exactly 3:57 (237s) from 0:20, i.e.
+ * `evenlySpaceRows` output — 1001 had the track order but no cue times.
+ * Order is real; a seek lands near, not on, the drop. Replace with observed
+ * clocks if the show is ever cued properly.
+ * Captured 2026-08-26 — provenance 1001tl.
+ */
+export const TL_DAVID_HERRLICH_OWR_ACADEMY_2026: FingerprintSeedRow[] = [
+  {
+    at: "0:20",
+    artist: "MK ft. Alana",
+    title: "Burning (Obskür All Purpose Club Edit / David Herrlich Edit)",
+  },
+  { at: "4:17", artist: "Agoria & Mooglie", title: "Cambodia" },
+  { at: "8:14", artist: "Timothy Allen", title: "Stay With Me" },
+  {
+    at: "12:11",
+    artist: "Africanism ft. DJ Gregory",
+    title: "Block Party (Baron (FR) Remix)",
+  },
+  { at: "16:08", artist: "Duke Dumont", title: "Street Walker" },
+  { at: "20:05", artist: "Emanuel Satie", title: "Give It All" },
+  { at: "24:02", artist: "KANT", title: "Everywhere I Go" },
+  {
+    at: "27:59",
+    artist: "Big Thief",
+    title: "Simulation Swarm (Kelly & Mina Cover / David Herrlich Remix)",
+  },
+  { at: "31:56", artist: "Melé", title: "Conga Mode" },
+  { at: "35:53", artist: "UN*DEUX & Keilimei", title: "Karma" },
+  { at: "39:50", artist: "Kowski & Eric Reyes", title: "Break Down!" },
+  {
+    at: "43:47",
+    artist: "Francesco Poggi ft. IDA fLO",
+    title: "The Sun Can't Compare (My Life)",
+  },
+  { at: "47:44", artist: "Peace Control", title: "U Ain't Lyin'" },
+  { at: "51:41", artist: "Danidane", title: "Spirit Soul" },
+  { at: "55:38", artist: "OMRI.", title: "Nothing Wrong" },
+];

@@ -8,6 +8,11 @@ import { isLeftoverHostName } from "../artistName";
 import { KNOWN_EVENTS } from "../ingest/events";
 import type { EntityCompletePin } from "../ingest/entityCompletePins";
 import {
+  hasEvenlySpacedClocks,
+  type FingerprintSeedRow,
+} from "../ingest/fingerprint/seeds";
+import { TRACKLIST_1001_BY_SOURCE_SLUG } from "../ingest/tracklists1001/festival2026";
+import {
   isJunkTrackPin,
   loadTrackIdPins,
   type TrackIdPin,
@@ -132,6 +137,35 @@ function auditEntityPins(): QcIssue[] {
   return issues;
 }
 
+/**
+ * Count seeds standing on `evenlySpaceRows` clocks.
+ *
+ * That helper is deliberate — 1001 often lists track order with no cue
+ * times — but the result is ordering dressed as timing: the rows still say
+ * `identified`, so a seek lands minutes off. One aggregate warn keeps the
+ * scale visible without pretending a sanctioned convention is a defect.
+ */
+function auditWiredTracklistClocks(): QcIssue[] {
+  const seen = new Set<FingerprintSeedRow[]>();
+  const slugs: string[] = [];
+  for (const [slug, rows] of Object.entries(TRACKLIST_1001_BY_SOURCE_SLUG)) {
+    if (!rows?.length || seen.has(rows)) continue;
+    seen.add(rows);
+    if (hasEvenlySpacedClocks(rows)) slugs.push(slug);
+  }
+  if (!slugs.length) return [];
+  return [
+    {
+      severity: "warn",
+      area: "tracklist-1001-clocks",
+      detail:
+        `${slugs.length} wired seeds use evenly spaced clocks ` +
+        "(evenlySpaceRows): track order is real, the times are approximate. " +
+        `e.g. ${slugs.slice(0, 3).join(", ")}`,
+    },
+  ];
+}
+
 function auditRosterAndGraduates(): QcIssue[] {
   const issues: QcIssue[] = [];
   for (const a of ARTIST_ROSTER_CURATED) {
@@ -222,6 +256,7 @@ export function runStaticCatalogQc(): StaticCatalogQc {
     ...auditEntityPins(),
     ...auditRosterAndGraduates(),
     ...auditOperatorSearchUrls(),
+    ...auditWiredTracklistClocks(),
   ];
   const counts: Record<string, number> = {};
   for (const i of issues) {

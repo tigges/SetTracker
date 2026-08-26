@@ -44,3 +44,35 @@ const dupes = fingerprintRowsToPlays([
 assert.equal(dupes.length, 1, "consecutive duplicates collapse as before");
 
 console.log("idRow.test.ts ok");
+
+// Even-spaced clocks are `evenlySpaceRows` output: order real, times not.
+import { hasEvenlySpacedClocks } from "./seeds";
+
+const evenSpaced = [
+  "0:20","4:17","8:14","12:11","16:08","20:05","24:02","27:59",
+].map((at, i) => ({ at, artist: `A${i}`, title: `T${i}` }));
+assert.equal(hasEvenlySpacedClocks(evenSpaced), true, "237s apart every time");
+
+const realMix = [
+  "0:12","0:48","1:24","2:00","12:34","15:41","18:47","23:37","29:14",
+].map((at, i) => ({ at, artist: `A${i}`, title: `T${i}` }));
+assert.equal(hasEvenlySpacedClocks(realMix), false, "a real mix varies");
+
+// Too short to judge, and non-monotonic clocks, are both left alone.
+assert.equal(
+  hasEvenlySpacedClocks(
+    ["0:20", "4:17", "8:14"].map((at, i) => ({ at, artist: "A", title: `T${i}` })),
+  ),
+  false,
+);
+assert.equal(
+  hasEvenlySpacedClocks(
+    ["0:20", "0:20", "4:17", "8:14", "12:11", "16:08", "20:05", "24:02"].map(
+      (at, i) => ({ at, artist: "A", title: `T${i}` }),
+    ),
+  ),
+  false,
+  "a repeated clock is not even spacing",
+);
+
+console.log("evenSpacing checks ok");
