@@ -2,7 +2,11 @@
 
 import { useMemo, useState, useSyncExternalStore } from "react";
 import { useSearchParams } from "next/navigation";
-import { captureDeferUntil } from "@/lib/ingest/captureDefer";
+import {
+  captureDeferUntil,
+  captureQueueView,
+} from "@/lib/ingest/captureDefer";
+import { CAPTURE_QUEUE_LIMIT } from "@/lib/ingest/captureQueueLimits";
 import {
   SEARCH_1001_RESULT,
   SEARCH_1001_TRACKLISTS,
@@ -195,14 +199,15 @@ function Capture1001Workbench({
     );
   }, [presets, query]);
   const activeSnoozes = useMemo(() => activeSnoozeSlugs(snoozed), [snoozed]);
-  const filtered = useMemo(
-    () => matches.filter((p) => !activeSnoozes.has(p.slug)),
+  // The server ships spares past CAPTURE_QUEUE_LIMIT, so parking a row promotes
+  // the next one instead of leaving a hole.
+  const view = useMemo(
+    () => captureQueueView(matches, activeSnoozes, CAPTURE_QUEUE_LIMIT),
     [matches, activeSnoozes],
   );
-  const parked = useMemo(
-    () => matches.filter((p) => activeSnoozes.has(p.slug)),
-    [matches, activeSnoozes],
-  );
+  const filtered = view.open;
+  const parked = view.parked;
+  const reserve = view.reserve;
   const findQuery = search1001Query(query.trim());
 
   async function onCopy(label: string, text: string) {
@@ -301,8 +306,9 @@ function Capture1001Workbench({
         <p className="mono text-[11px] text-muted2">
           Queue built {generatedAt.slice(0, 16).replace("T", " ")} UTC
           {query.trim()
-            ? ` · ${filtered.length} of ${presets.length}`
-            : ` · ${presets.length}`}
+            ? ` · ${filtered.length} of ${filtered.length + reserve}`
+            : ` · ${filtered.length} open`}
+          {reserve ? ` · ${reserve} in reserve` : ""}
         </p>
       ) : null}
       {filtered.length === 0 ? (

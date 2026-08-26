@@ -72,6 +72,25 @@ unless asked. Never write Relive for HARD / Insomniac / Nameless / Ultra.
   hosts, then refresh graduate + playback reports). `--fix` drops junk track-id
   pins. `--full` also runs the QC unit tests. Live DB audits run only when
   the catalog has 200+ sets. Never scrapes Beatport or 1001.
+- **Capture queue balance:** `buildCaptureQueueFromNeeds` fills in two passes —
+  at most `capturePerEventCap(limit)` rows per event (5 at limit 40, floor 3),
+  then an uncapped overflow pass for leftover slots. Without it an in-season
+  brand takes all 40, since every one of its gap rows carries the same
+  `festivalSeason` +120. Bucket key is `eventSlug`, falling back to
+  `primaryDjSlug` so one artist's back catalogue cannot flood it either. The
+  notable-festival bump is **flat** for any DJ Mag Top 100 Festivals event
+  (`CaptureNeedRow.eventRank`) — never scale it by rank, that pushes the biggest
+  brand harder and fights the cap. The old six-brand regex remains only as the
+  fallback for rows with no rank.
+- **Capture queue reserve:** the queue is built at
+  `CAPTURE_QUEUE_LIMIT + CAPTURE_QUEUE_RESERVE` (40 + 20) and `captureQueueView`
+  filters parked rows *before* slicing to 40, so a browser-side "Later" park
+  promotes a spare instead of leaving a hole. `/stats` is a static export, so the
+  spares must already be in the HTML — the page cannot fetch a replacement.
+  Committed parks in `data/capture-defer.json` backfill on their own because
+  `activeDeferSlugs` filters before the cap at build time. Both constants live in
+  `captureQueueLimits.ts`: `nextCaptures.ts` imports `node:fs`, so a client
+  component importing from there drags Node built-ins into the browser bundle.
 - **Capture precheck:** `npm run check:capture -- <url…>` before wiring a 1001
   paste. Takes 1001 / YouTube / SoundCloud URLs (utm junk fine), bare video
   ids, or `yt-`/`sc-` slugs; reports the slug it resolves to, whether a seed is

@@ -3,6 +3,7 @@
  */
 import { prisma } from "@/lib/db";
 import { isLiveVenueSet, isLivestreamSet } from "@/lib/setType";
+import { loadDjMagFestivalRankBySlug } from "@/lib/djmagFestivalRanks";
 import { loadDjMagTop100RankBySlug } from "@/lib/djmagTop100";
 import {
   editionGapEventSlugs,
@@ -10,6 +11,7 @@ import {
 } from "@/lib/ingest/festivalDrops";
 import {
   CAPTURE_QUEUE_LIMIT,
+  CAPTURE_QUEUE_RESERVE,
   buildCaptureQueueFromNeeds,
   extrasFromCaptureSnapshot,
   extrasFromHeldReliveWatch,
@@ -34,6 +36,7 @@ export async function getCaptureQueue(
   extra: CapturePreset[] = [],
 ): Promise<CaptureQueue> {
   const top100 = loadDjMagTop100RankBySlug();
+  const festivalRank = loadDjMagFestivalRankBySlug();
   const known1001 = curated1001UrlBySourceSlug();
   const nowMs = Date.now();
 
@@ -100,6 +103,7 @@ export async function getCaptureQueue(
       plays1001,
       identifiedStrong,
       top100Rank: primary?.slug ? (top100.get(primary.slug) ?? null) : null,
+      eventRank: s.event?.slug ? (festivalRank.get(s.event.slug) ?? null) : null,
       isFestival,
       isLivestream,
       editionGap: Boolean(s.event?.slug && gapEvents.has(s.event.slug)),
@@ -133,9 +137,16 @@ export async function getCaptureQueue(
   };
 }
 
-/** Stats workbench: live catalog rank, else official-playback extras / committed snapshot. */
+/**
+ * Stats workbench: live catalog rank, else official-playback extras / committed
+ * snapshot.
+ *
+ * Builds CAPTURE_QUEUE_RESERVE rows past the display limit. The page is a static
+ * export, so a row parked in the browser cannot ask the server for a
+ * replacement — the spares have to already be in the HTML.
+ */
 export async function loadOperatorCaptureQueue(
-  limit = CAPTURE_QUEUE_LIMIT,
+  limit = CAPTURE_QUEUE_LIMIT + CAPTURE_QUEUE_RESERVE,
 ): Promise<CaptureQueue> {
   const extras = [
     ...extrasFromHeldReliveWatch(),

@@ -8,6 +8,7 @@
  */
 
 import { readFileSync, existsSync } from "node:fs";
+import { CAPTURE_QUEUE_LIMIT } from "./captureQueueLimits";
 import { join } from "node:path";
 import { isArchiveTitledSet } from "../feedPriority";
 import { looksLikeLiveFestivalRadio } from "../sourceComments";
@@ -22,7 +23,10 @@ import { searchMixesdbByPlayerUrl } from "../searchMixesdb";
 export { nativeCaptureSearchUrl, search1001, searchMixesdbByPlayerUrl };
 
 /** /stats#capture-1001 ranked queue size (live DB + committed snapshot). */
-export const CAPTURE_QUEUE_LIMIT = 40;
+export {
+  CAPTURE_QUEUE_LIMIT,
+  CAPTURE_QUEUE_RESERVE,
+} from "./captureQueueLimits";
 
 export type CapturePreset = {
   label: string;
@@ -279,6 +283,13 @@ export type CaptureNeedRow = {
   festivalSeason: boolean;
   /** Event brand is in an edition-gap window (few complete playbacks). */
   editionGap?: boolean;
+  /**
+   * DJ Mag Top 100 Festivals rank of this row's event, when it has one.
+   * Used as a flat "notable festival" signal, never scaled by rank: a
+   * rank-proportional boost would push the biggest brand even harder, which is
+   * the opposite of spreading capture work across venues.
+   */
+  eventRank?: number | null;
   density: DensitySeverity;
   watchUrl?: string;
   /** Known 1001 page from a curated YT seed (not yet captured as a seed). */
@@ -367,12 +378,16 @@ export function scoreCaptureNeed(row: CaptureNeedRow, nowMs = Date.now()): numbe
   if (ageDays <= 21) s += 45;
   else if (ageDays <= 90) s += 25;
   else if (ageDays <= 365) s += 8;
-  const hay = `${row.title} ${row.eventSlug ?? ""}`;
-  if (
+  // Notable-festival bump, flat on purpose. Any DJ Mag Top 100 Festivals event
+  // counts the same, so a Nameless or Awakenings gap ranks level with a
+  // Tomorrowland one instead of losing to the six brands this used to hardcode.
+  if (row.eventRank != null) s += 20;
+  else if (
     /tomorrowland|ultra|edc|street.?parade|lollapalooza|parookaville/i.test(
-      hay,
+      `${row.title} ${row.eventSlug ?? ""}`,
     )
   ) {
+    // No rank on the row (offline fallback, or an event we do not map yet).
     s += 20;
   }
   return s;
@@ -420,9 +435,17 @@ export function buildCaptureQueueFromNeeds(
     nowMs?: number;
     /** Parked rows (data/capture-defer.json) — filtered before the cap. */
     deferred?: Set<string>;
+    /**
+     * Max rows per event in the first pass. An in-season brand can hold
+     * hundreds of gap rows, all carrying the same +120 season bonus, so score
+     * order alone hands it every slot. Overflow still fills leftover slots, so
+     * a quiet week is never short-changed.
+     */
+    perEventCap?: number;
   } = {},
 ): CapturePreset[] {
   const limit = opts.limit ?? CAPTURE_QUEUE_LIMIT;
+  const perEventCap = opts.perEventCap ?? capturePerEventCap(limit);
   const mapped = mappedSlugs();
   const nowMs = opts.nowMs ?? Date.now();
   const deferred = opts.deferred ?? new Set<string>();
@@ -454,8 +477,35 @@ export function buildCaptureQueueFromNeeds(
           new Date(a.row.publishedAt).getTime(),
     );
 
+  // Pass 1: spread across events. Pass 2: ignore the cap so leftover slots go
+  // to the next-best rows rather than sitting empty.
+  const perEvent = new Map<string, number>();
+  for (const { row } of ranked) {
+    const key = captureEventBucket(row);
+    const used = perEvent.get(key) ?? 0;
+    if (used >= perEventCap) continue;
+    const before = out.length;
+    push(presetFromNeed(row));
+    if (out.length > before) perEvent.set(key, used + 1);
+  }
   for (const { row } of ranked) push(presetFromNeed(row));
   return out.slice(0, limit);
+}
+
+/**
+ * Bucket a row for the per-event cap. Rows with no event fall back to the DJ so
+ * one artist's back catalogue cannot flood the queue either; slug is the last
+ * resort so an unattributed row is never lumped in with unrelated ones.
+ */
+export function captureEventBucket(row: CaptureNeedRow): string {
+  if (row.eventSlug) return `event:${row.eventSlug}`;
+  if (row.primaryDjSlug) return `dj:${row.primaryDjSlug}`;
+  return `slug:${row.slug}`;
+}
+
+/** Room for at least 8 distinct events in the first pass, never below 3. */
+export function capturePerEventCap(limit = CAPTURE_QUEUE_LIMIT): number {
+  return Math.max(3, Math.ceil(limit / 8));
 }
 
 export function isStrongIdentifiedPlay(p: {

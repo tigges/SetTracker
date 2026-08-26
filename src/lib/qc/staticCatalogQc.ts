@@ -244,6 +244,41 @@ export function auditFingerprintOnlyWatches(
   return issues;
 }
 
+/**
+ * A curated set and the slug map must not disagree about a tracklist.
+ *
+ * Cues reach a YouTube set two ways: TRACKLIST_1001_BY_SOURCE_SLUG keyed by
+ * video id, and the optional tracklist1001 field on the YOUTUBE_SETS entry.
+ * Leaving the field off is fine — the map alone works — but pointing it at a
+ * *different* array is the silent-split failure the duplicate-key audit exists
+ * for, one layer up. Host-twin grouping keys on array identity, so a copy that
+ * merely looks equal still breaks it.
+ */
+export function auditCuratedTracklistAgreement(
+  curated: ReadonlyArray<{ video: string; tracklist1001?: unknown }> = YOUTUBE_SETS,
+  map: Record<string, unknown> = TRACKLIST_1001_BY_SOURCE_SLUG,
+): QcIssue[] {
+  const issues: QcIssue[] = [];
+  for (const v of curated) {
+    const id = youtubeVideoId(v.video);
+    if (!id) continue;
+    const slug = `yt-${id}`;
+    const wired = map[slug];
+    if (!wired || !v.tracklist1001) continue;
+    if (v.tracklist1001 !== wired) {
+      issues.push({
+        severity: "error",
+        area: "curated-tracklist-agreement",
+        slug,
+        detail:
+          "YOUTUBE_SETS tracklist1001 is a different array than the slug map — " +
+          "one of them silently wins and host-twin grouping keys on identity",
+      });
+    }
+  }
+  return issues;
+}
+
 function auditRosterAndGraduates(): QcIssue[] {
   const issues: QcIssue[] = [];
   for (const a of ARTIST_ROSTER_CURATED) {
@@ -337,6 +372,7 @@ export function runStaticCatalogQc(): StaticCatalogQc {
     ...auditWiredTracklistClocks(),
     ...auditTracklistSlugDuplicates(),
     ...auditFingerprintOnlyWatches(),
+    ...auditCuratedTracklistAgreement(),
   ];
   const counts: Record<string, number> = {};
   for (const i of issues) {
