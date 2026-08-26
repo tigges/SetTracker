@@ -7,6 +7,7 @@ import { readFileSync } from "fs";
 import path from "path";
 import type { PrismaClient } from "@prisma/client";
 import { labelSocials } from "../social";
+import { curatedLabelSlugByName } from "./curatedLabels";
 import { parseTrackTitle } from "../trackMeta";
 import { slugify } from "./types";
 
@@ -77,7 +78,10 @@ export async function applyResolutions(
     if (!track) {
       let labelId: string | null = null;
       if (row.label) {
-        const slug = slugify(row.label);
+        // Curated imprints pin a slug that slugify(name) does not reproduce
+        // ("Black Book Records" -> blackbook), so a plain slugify here would
+        // create a second row for the same label and split its releases.
+        const slug = curatedLabelSlugByName(row.label) ?? slugify(row.label);
         const label =
           (await prisma.label.findUnique({ where: { slug } })) ??
           (await prisma.label.create({
