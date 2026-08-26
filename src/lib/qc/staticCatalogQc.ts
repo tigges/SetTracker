@@ -138,6 +138,41 @@ function auditEntityPins(): QcIssue[] {
 }
 
 /**
+ * Duplicate keys in TRACKLIST_1001_BY_SOURCE_SLUG.
+ *
+ * A repeated slug is legal JS — the last one silently wins — so a fresh
+ * capture can override an existing seed and, worse, break a host-twin group
+ * by pointing one slug at a different array than its partner. Only the source
+ * text can show this; the parsed object has already collapsed.
+ */
+function auditTracklistSlugDuplicates(): QcIssue[] {
+  let src = "";
+  try {
+    src = readFileSync(
+      join(process.cwd(), "src/lib/ingest/tracklists1001/festival2026.ts"),
+      "utf8",
+    );
+  } catch {
+    return [];
+  }
+  const at = src.indexOf("export const TRACKLIST_1001_BY_SOURCE_SLUG");
+  if (at < 0) return [];
+  const counts = new Map<string, number>();
+  for (const m of src.slice(at).matchAll(/^\s*"([^"]+)":/gm)) {
+    const slug = m[1]!;
+    counts.set(slug, (counts.get(slug) ?? 0) + 1);
+  }
+  return [...counts.entries()]
+    .filter(([, n]) => n > 1)
+    .map(([slug, n]) => ({
+      severity: "error" as const,
+      area: "tracklist-1001-slug-map",
+      slug,
+      detail: `wired ${n}× — the last entry silently wins and can split a host-twin group. Keep one entry per slug.`,
+    }));
+}
+
+/**
  * Count seeds standing on `evenlySpaceRows` clocks.
  *
  * That helper is deliberate — 1001 often lists track order with no cue
@@ -257,6 +292,7 @@ export function runStaticCatalogQc(): StaticCatalogQc {
     ...auditRosterAndGraduates(),
     ...auditOperatorSearchUrls(),
     ...auditWiredTracklistClocks(),
+    ...auditTracklistSlugDuplicates(),
   ];
   const counts: Record<string, number> = {};
   for (const i of issues) {

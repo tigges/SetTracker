@@ -62,216 +62,208 @@ export const TL_HARDWELL_EUPHORIA_019_2026: FingerprintSeedRow[] = [
 ];
 
 /**
- * AFROJACK & R3HAB @ Mainstage, Tomorrowland Weekend 2, Belgium 2026-07-26
- * Official SoundCloud: https://soundcloud.com/r3hab/r3hab-b2b-afrojack
- * Official YouTube twin: https://youtu.be/AjQeohYmg3A
- * https://www.1001tracklists.com/tracklist/2s55dyj1/afrojack-r3hab-mainstage-tomorrowland-weekend-2-belgium-2026-07-26.html
- * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["sc-r3hab-r3hab-b2b-afrojack"] plus the
- * YT slug so either host resolves the same clocks.
+ * Hardwell & Sub Zero Project @ The Great Library Stage, Tomorrowland
+ * Weekend 1, Belgium 2026-07-17
+ * https://www.1001tracklists.com/tracklist/1w71wl0t/hardwell-sub-zero-project-the-great-library-stage-tomorrowland-weekend-1-belgium-2026-07-17.html
  *
- * Observed clocks (gaps 14s–221s; longest near-uniform run is 5, so not
- * generated). Dense acappella/mashup B2B: mashup rows are followed by their
- * components, and Mightyfools "Footrocker" is dropped twice (9:03, 33:13) —
- * non-consecutive, so both cues stay.
+ * TWO official YouTube uploads of the same performance, both verified via
+ * oEmbed and both wired so either row resolves these clocks:
+ *   yt-5EsSxcR5ges — @tomorrowland "… WE1 | Tomorrowland 2026" (catalog row)
+ *   yt-PCKfswh4ZBA — @hardwell "… - Tomorrowland 2026 [FULL SET]"
+ * No SoundCloud permalink known — do not invent one.
+ *
+ * Observed clocks (gaps 27s–221s; longest near-uniform run 3). Hardstyle B2B
+ * with heavy mashup expansion: mashup rows are followed by their components.
  * Captured 2026-08-26 — provenance 1001tl.
  */
-export const TL_AFROJACK_R3HAB_TML_WE2_MAINSTAGE_2026: FingerprintSeedRow[] = [
-  { at: "0:12", artist: "R3HAB & Vion Konger & Skytech", title: "Ultimate" },
-  {
-    at: "1:52",
-    artist: "AFROJACK & Steve Aoki ft. Miss Palmer",
-    title: "No Beef (Acappella)",
-  },
-  { at: "3:31", artist: "Zombie Nation", title: "Kernkraft 400" },
-  { at: "3:46", artist: "Alesso", title: "Raise Your Head (Acappella)" },
-  { at: "4:01", artist: "AFROJACK & R3HAB", title: "Shockwave" },
-  {
-    at: "4:16",
-    artist: "David Guetta & GLOWINTHEDARK ft. Harrison",
-    title: "Ain't A Party (Let Me See Your Fuckin Hands Acappella)",
-  },
-  { at: "4:30", artist: "Vion Konger", title: "Funky Shit" },
-  {
-    at: "5:10",
-    artist: "Icona Pop ft. Charli xcx",
-    title: "I Love It (Acappella)",
-  },
-  {
-    at: "5:50",
-    artist: "Martin Garrix & R3HAB & Skytech vs. Empire Of The Sun",
-    title: "Voodoo vs. Walking On A Dream (Martin Garrix Mashup)",
-  },
-  {
-    at: "6:47",
-    artist: "Empire Of The Sun",
-    title: "Walking On A Dream (Acappella)",
-  },
-  {
-    at: "7:44",
-    artist: "Martin Garrix & R3HAB & Skytech",
-    title: "Voodoo",
-  },
-  { at: "8:40", artist: "R3HAB & Deorro", title: "Flashlight" },
-  {
-    at: "9:03",
-    artist: "Mightyfools",
-    title: "Footrocker (Get Your, Get Your Hands Up Acappella)",
-  },
-  { at: "9:26", artist: "R3HAB & KSHMR", title: "Karate" },
-  {
-    at: "10:11",
-    artist: "Corona",
-    title: "The Rhythm Of The Night (Acappella)",
-  },
-  {
-    at: "10:55",
-    artist: "AFROJACK & Bart B More",
-    title: "Nothing But This",
-  },
-  { at: "13:24", artist: "Tavatli", title: "FE!N" },
-  {
-    at: "14:51",
-    artist: "Tove Lo",
-    title: "Habits (Stay High) (Acappella)",
-  },
-  { at: "16:18", artist: "Korolova & R3HAB", title: "Hi Hello" },
-  { at: "19:07", artist: "ARTBAT & R3HAB", title: "The Sound" },
-  {
-    at: "22:48",
-    artist: "HUGEL & SOLTO",
-    title: "Jamaican (Bam Bam) (Vion Konger Remix)",
-  },
-  {
-    at: "24:03",
-    artist: "Sebastian Ingrosso & Tommy Trash ft. John Martin",
-    title: "Reload (Afrojack Edit)",
-  },
-  {
-    at: "25:18",
-    artist: "Swedish House Mafia ft. John Martin",
-    title: "Don't You Worry Child (Acappella)",
-  },
-  {
-    at: "26:33",
-    artist: "NLW & R3HAB ft. MC Ambush",
-    title: "Let Me See Those Hands",
-  },
-  { at: "27:48", artist: "Afrojack ft. Wrabel", title: "Ten Feet Tall" },
-  {
-    at: "31:22",
-    artist: "ANOTR ft. 54 Ultra",
-    title: "Talk To You (AFROJACK Remix)",
-  },
-  {
-    at: "33:13",
-    artist: "Mightyfools",
-    title: "Footrocker (Get Your, Get Your Hands Up Acappella)",
-  },
-  {
-    at: "35:04",
-    artist: "Pitbull ft. Ne-Yo & Afrojack & Nayer",
-    title: "Give Me Everything (Acappella)",
-  },
-  {
-    at: "36:55",
-    artist: "AFROJACK & Arti Prjct & SOFI TUKKER",
-    title: "Adrenaline",
-  },
-  { at: "39:50", artist: "David Guetta ft. Sia", title: "Titanium" },
-  { at: "40:29", artist: "Lazy Rich & Hot Mouth", title: "Flash" },
-  {
-    at: "41:08",
-    artist: "UMEK & Popof & Space 92 vs. Hardwell & Afrojack",
-    title: "Control vs. Hands Up (Hardwell Mashup)",
-  },
-  {
-    at: "41:47",
-    artist: "Hardwell & AFROJACK ft. MC Ambush",
-    title: "Hands Up",
-  },
-  { at: "42:27", artist: "UMEK & POPOF & Space 92", title: "Control" },
-  { at: "43:06", artist: "AFROJACK & Gil Glaze", title: "Allein" },
-  {
-    at: "46:39",
-    artist: "ARTBAT & R3HAB & Stylo & Eli & Dani ft. NAIIM",
-    title: "Fight Machine",
-  },
-  {
-    at: "47:20",
-    artist: "Pitbull ft. Lil Jon & will.i.am & Jermaine Dupri",
-    title: "Put Ya Fuckin Hands Up (Acappella)",
-  },
-  {
-    at: "48:01",
-    artist: "MAKJ & Lil Jon",
-    title: "Let's Get F*cked Up (Acappella)",
-  },
-  {
-    at: "48:43",
-    artist: "The Bloody Beetroots ft. Steve Aoki",
-    title: "Warp 1.9 (One, Two, Woop, Woop Acappella)",
-  },
-  {
-    at: "49:24",
-    artist: "AFROJACK & Martin Garrix",
-    title: "Turn Up The Speakers (AFROJACK Edit)",
-  },
-  {
-    at: "50:20",
-    artist: "Avicii ft. Simon Aldred",
-    title: "Waiting For Love (Acappella)",
-  },
-  {
-    at: "51:16",
-    artist: "AFROJACK & Martin Garrix",
-    title: "Turn Up The Speakers",
-  },
-  {
-    at: "52:12",
-    artist:
-      "R3HAB & Skytech & Pupa Nas T & Kevin McKay ft. Denise Belfon & Fideles",
-    title: "Work",
-  },
-  {
-    at: "53:08",
-    artist: "AFROJACK & Martin Garrix",
-    title: "Turn Up The Speakers (Julian Jordan Remix)",
-  },
-  {
-    at: "54:03",
-    artist: "Jack Ü ft. Bunji Garlin & MX Prime",
-    title: "Jungle Bae",
-  },
-  { at: "54:29", artist: "R3HAB & VINAI", title: "How We Party" },
-  {
-    at: "54:55",
-    artist: "Major Lazer ft. Vybz Kartel",
-    title: "Pon De Floor (Acappella)",
-  },
-  {
-    at: "55:21",
-    artist: "Dimitri Vegas & Like Mike & W&W vs. The White Stripes",
-    title: "Arcade vs. Seven Nation Army (W&W Edit)",
-  },
-  { at: "55:50", artist: "The White Stripes", title: "Seven Nation Army" },
-  {
-    at: "56:19",
-    artist: "Dimitri Vegas & Like Mike vs. W&W",
-    title: "Arcade",
-  },
-  {
-    at: "56:48",
-    artist: "Dimitri Vegas & Like Mike & Martin Garrix",
-    title: "Tremor (Sensation 2014 Anthem) (3, 2, 1 Go Acappella)",
-  },
-  {
-    at: "57:17",
-    artist: "AFROJACK ft. Eva Simons",
-    title: "Take Over Control",
-  },
-  { at: "58:24", artist: "Avicii", title: "Levels" },
-  { at: "59:30", artist: "Afrojack", title: "Bangduck" },
-];
+export const TL_HARDWELL_SUB_ZERO_TML_WE1_GREAT_LIBRARY_2026: FingerprintSeedRow[] =
+  [
+    {
+      at: "0:12",
+      artist: "Showtek",
+      title: "FTS (Fuck The System) (Sub Zero Project Rework)",
+    },
+    {
+      at: "1:52",
+      artist: "Showtek & Justin Prime",
+      title: "Cannonball (Hardwell & W&W Remix)",
+    },
+    {
+      at: "2:39",
+      artist: "Avicii & Nicky Romero ft. Noonie Bao",
+      title: "I Could Be The One (Acappella)",
+    },
+    {
+      at: "3:26",
+      artist: "Public Domain vs. Maddix",
+      title: "Operation Blade vs. Receive Life (DJ Francesco Mashup)",
+    },
+    {
+      at: "3:55",
+      artist: "Public Domain",
+      title: "Operation Blade (Bass In The Place)",
+    },
+    { at: "4:24", artist: "Maddix", title: "Receive Life" },
+    { at: "4:52", artist: "Intrude", title: "LSD" },
+    { at: "5:39", artist: "Armin van Buuren", title: "Blah Blah Blah" },
+    {
+      at: "6:25",
+      artist: "Headhunterz & Sub Zero Project",
+      title: "Our Church (Sub Zero Project Kick Edit / All In One Edit)",
+    },
+    {
+      at: "7:50",
+      artist: "Hardwell ft. Amba Shepherd",
+      title: "Apollo (Acappella)",
+    },
+    {
+      at: "9:14",
+      artist: "David Guetta vs. Benny Benassi",
+      title: "Satisfaction (Hardwell & Maddix Remix)",
+    },
+    {
+      at: "10:51",
+      artist: "David Guetta vs. Benny Benassi",
+      title:
+        "Satisfaction (Hardwell & Maddix Remix / Sub Zero Project Psycho Edit)",
+    },
+    {
+      at: "12:27",
+      artist: "David Guetta ft. Akon",
+      title: "Sexy Bitch (4444 OF A KIND Bootleg)",
+    },
+    { at: "15:10", artist: "Hardwell & Vorwerk", title: "Cambodia" },
+    {
+      at: "15:59",
+      artist: "Hardwell",
+      title: "Spaceman (Sub Zero Project Edit)",
+    },
+    {
+      at: "16:36",
+      artist: "Hardwell ft. Mitch Crown",
+      title: "Call Me A Spaceman (Acappella)",
+    },
+    {
+      at: "17:13",
+      artist: "Zedd & Lucky Date ft. Ellie Goulding",
+      title: "Fall Into The Sky (Everybody Fuckin Jump Acappella)",
+    },
+    {
+      at: "17:50",
+      artist:
+        "Dimitri Vegas & Like Mike & Timmy Trumpet & Sub Zero Project",
+      title: "Move Your Body",
+    },
+    {
+      at: "20:34",
+      artist: "Sebastian Ingrosso & Alesso ft. Ryan Tedder",
+      title:
+        "Calling (Lose My Mind) (Hardwell & W&W Bootleg / Sub Zero Project Edit)",
+    },
+    {
+      at: "23:22",
+      artist: "Faithless",
+      title: "Insomnia (Sub Zero Project Remix)",
+    },
+    {
+      at: "24:20",
+      artist: "Benny Benassi ft. Gary Go",
+      title: "Cinema (Acappella)",
+    },
+    { at: "25:18", artist: "Sub Zero Project & Rebelion", title: "Save Me" },
+    {
+      at: "26:05",
+      artist: "Calvin Harris & Disciples ft. Ina Wroldsen",
+      title: "How Deep Is Your Love (Acappella)",
+    },
+    {
+      at: "26:51",
+      artist: "Hardwell & Sub Zero Project & Lil Jon vs. Gotye & Kimbra",
+      title:
+        "Brace For Impact vs. Somebody That I Used To Know (Hardwell Mashup)",
+    },
+    {
+      at: "28:15",
+      artist: "Gotye ft. Kimbra",
+      title: "Somebody That I Used To Know (Acappella)",
+    },
+    {
+      at: "29:39",
+      artist: "Hardwell & Sub Zero Project ft. Lil Jon",
+      title: "Brace For Impact",
+    },
+    { at: "31:03", artist: "4444 OF A KIND & Hardwell", title: "RE4SON" },
+    {
+      at: "34:44",
+      artist: "Dimitri Vegas & Like Mike & Martin Garrix",
+      title: "Tremor (Sensation 2014 Anthem) (Sub Zero Project Remix)",
+    },
+    { at: "35:37", artist: "Sub Zero Project", title: "Sweet But Psycho" },
+    {
+      at: "36:30",
+      artist: "Hardwell & Sub Zero Project vs. Queen",
+      title: "Bohemian Judgement Day (Hardwell Mashup)",
+    },
+    { at: "37:21", artist: "Queen", title: "Bohemian Rhapsody" },
+    {
+      at: "38:13",
+      artist: "Hardwell & Sub Zero Project",
+      title: "Judgement Day",
+    },
+    {
+      at: "39:04",
+      artist: "David Guetta & Bebe Rexha vs. Eiffel 65",
+      title:
+        "I'm Good (Blue) (Da Tweekaz & Code Black & Adrenalize Team Blue Mix)",
+    },
+    {
+      at: "40:05",
+      artist: "David Guetta ft. Bebe Rexha",
+      title: "I'm Good (Blue)",
+    },
+    {
+      at: "41:07",
+      artist: "Eiffel 65",
+      title:
+        "Blue (Da Ba Dee) (Da Tweekaz & Code Black & Adrenalize Team Blue Mix)",
+    },
+    { at: "42:08", artist: "Sub Zero Project", title: "Are U Me" },
+    { at: "44:10", artist: "Hardwell & Outsiders", title: "Falling In Love" },
+    {
+      at: "45:47",
+      artist: "Hardwell & KSHMR & Jarrad Kritzstein vs. Aversion",
+      title: "Power Activation (Hardwell Outro Edit)",
+    },
+    {
+      at: "46:15",
+      artist: "Hardwell & KSHMR ft. Jarrad Kritzstein",
+      title: "Power (Acappella)",
+    },
+    { at: "46:43", artist: "Aversion", title: "Activation" },
+    { at: "47:10", artist: "Hardwell & Sound Rush", title: "IRIS" },
+    {
+      at: "50:35",
+      artist:
+        "Sub Zero Project & Dual Damage vs. Swedish House Mafia & John Martin",
+      title: "It Will Be OK vs. Don't You Worry Child (Hardwell Mashup)",
+    },
+    {
+      at: "53:33",
+      artist: "Swedish House Mafia ft. John Martin",
+      title: "Don't You Worry Child (Acappella)",
+    },
+    {
+      at: "56:32",
+      artist: "Dimitri Vegas & Like Mike & Martin Garrix",
+      title: "Tremor (Sensation 2014 Anthem) (3, 2, 1 Go Acappella)",
+    },
+    {
+      at: "59:30",
+      artist: "Sub Zero Project & Dual Damage",
+      title: "It Will Be OK",
+    },
+  ];
+
 
 /**
  * Hardwell - Euphoria 018 2026-06-26
