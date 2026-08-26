@@ -68,6 +68,7 @@ import {
   TL_ALOK_TML_WE2_2026,
   TL_HARDWELL_HOA_527_YEARMIX_2025,
   TL_JOEL_CORRY_EDGE_NYC_2026,
+  TL_BLACK_COFFEE_MAYAN_WARRIOR_BURNING_MAN_2025,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026,
   TL_MISS_MONIQUE_IBIZA_SUNSET_YACHT_2026,
@@ -1795,6 +1796,10 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     type: "festival",
     title: "BLACK COFFEE - Mayan Warrior - Burning Man 2025",
     eventName: "Burning Man",
+    // Operator 1001 capture 2026-08-26 filled this previously empty set.
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1qlc330k/black-coffee-mayan-warrior-burning-man-united-states-2025-08-26.html",
+    tracklist1001: TL_BLACK_COFFEE_MAYAN_WARRIOR_BURNING_MAN_2025,
   },
   {
     video: "https://www.youtube.com/watch?v=6VPNizjOyBQ",

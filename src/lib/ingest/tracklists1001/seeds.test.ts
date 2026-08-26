@@ -189,6 +189,7 @@ import {
   TL_HONEY_DIJON_THE_LOOP_DEKMANTEL_NETHERLANDS_2025,
   TL_VINAI_S2O_SONGKRAN_THAILAND_2023,
   TL_AGENTS_OF_TIME_TIME_WARP_FLOOR_1_2026,
+  TL_BLACK_COFFEE_MAYAN_WARRIOR_BURNING_MAN_2025,
   TL_CLOONEE_NEONGARDEN_EDC_ORLANDO_2025,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
@@ -4817,6 +4818,37 @@ assert.equal(
     "sc-https://soundcloud.com/claptone/clapcast-576"
   ],
   undefined,
+);
+
+// Black Coffee @ Mayan Warrior, Burning Man 2025 — the venue collective's own
+// channel. The video was already curated in YOUTUBE_SETS with no cues, so this
+// capture fills an existing set; assert the seed is attached there too, not
+// just wired in the slug map.
+assertSeedClocks(TL_BLACK_COFFEE_MAYAN_WARRIOR_BURNING_MAN_2025);
+assert.equal(TL_BLACK_COFFEE_MAYAN_WARRIOR_BURNING_MAN_2025.length, 45);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-FH7lIOv1s3Q"],
+  TL_BLACK_COFFEE_MAYAN_WARRIOR_BURNING_MAN_2025,
+);
+const blackCoffeeBm = tracklist1001RowsToPlays(
+  TL_BLACK_COFFEE_MAYAN_WARRIOR_BURNING_MAN_2025,
+);
+assert.equal(blackCoffeeBm.length, 45);
+assert.equal(blackCoffeeBm[0]?.provenance, "1001tl");
+assert.equal(blackCoffeeBm[0]?.timestamp, 0);
+assert.equal(blackCoffeeBm[0]?.trackTitle, "Baby Run");
+assert.equal(blackCoffeeBm[44]?.trackTitle, "I Will Survive");
+assert.equal(blackCoffeeBm[44]?.timestamp, 3 * 3600 + 28 * 60 + 22);
+for (let i = 1; i < blackCoffeeBm.length; i++) {
+  assert.ok(
+    (blackCoffeeBm[i]!.timestamp ?? 0) > (blackCoffeeBm[i - 1]!.timestamp ?? 0),
+    `Black Coffee Burning Man clocks must increase at index ${i}`,
+  );
+}
+// Roland Clark appears twice under different titles — both cues must survive.
+assert.equal(
+  blackCoffeeBm.filter((p) => /Roland Clark/.test(p.rawText ?? "")).length,
+  2,
 );
 
 // Joris Voorn & Cassian — Spectrum Radio 484. The YouTube slug carries the

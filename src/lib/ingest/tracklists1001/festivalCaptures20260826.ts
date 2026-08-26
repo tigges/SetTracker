@@ -62,6 +62,157 @@ export const TL_HARDWELL_EUPHORIA_019_2026: FingerprintSeedRow[] = [
 ];
 
 /**
+ * Black Coffee @ Mayan Warrior, Burning Man, United States 2025-08-26
+ * https://www.1001tracklists.com/tracklist/1qlc330k/black-coffee-mayan-warrior-burning-man-united-states-2025-08-26.html
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-FH7lIOv1s3Q"]
+ *
+ * oEmbed 2026-08-26: channel "MayanWarrior", the art car collective's own
+ * channel — a venue channel like Boiler Room or Cercle, not a fan re-upload.
+ * That video was already curated in YOUTUBE_SETS with no tracklist, so this
+ * capture fills an existing set rather than adding one. No SoundCloud in the
+ * paste; none invented.
+ *
+ * Observed clocks: 45 cues over ~3h28m, gaps 113s–450s, longest near-uniform
+ * run 3. A long Burning Man sunrise set that closes on disco and soul
+ * singalongs, so the tail runs denser than the opening.
+ * Captured 2026-08-26 — provenance 1001tl.
+ */
+export const TL_BLACK_COFFEE_MAYAN_WARRIOR_BURNING_MAN_2025: FingerprintSeedRow[] =
+  [
+    { at: "0:00", artist: "Jimi Jules", title: "Baby Run" },
+    {
+      at: "5:03",
+      artist: "Hercules & Love Affair",
+      title: "Blind (Matt Sawyer Remix)",
+    },
+    { at: "9:53", artist: "FKA MASH", title: "Ascension Pt. II" },
+    {
+      at: "14:47",
+      artist: "Black Coffee ft. Bucie",
+      title: "Superman (Meera Remix)",
+    },
+    { at: "21:40", artist: "Keinemusik & Sevdaliza", title: "See You Again" },
+    {
+      at: "27:00",
+      artist: "Disla & Danis ft. Syntheticsax",
+      title: "Man With The Red Face",
+    },
+    { at: "31:29", artist: "The Cure", title: "All I Ever Am (Meera Remix)" },
+    {
+      at: "36:55",
+      artist: "AMÉMÉ ft. Mario Charo",
+      title: "Power (Monkey Safari Remix)",
+    },
+    {
+      at: "42:00",
+      artist: "Kuniyuki Takahashi",
+      title: "Deliverance (Culoe De Song Ka Mnguni Remix)",
+    },
+    { at: "48:15", artist: "Sammi Ferrer", title: "MT" },
+    { at: "51:26", artist: "Roland Clark", title: "I Get Deep (Acappella)" },
+    { at: "54:36", artist: "UNER", title: "Cocoua" },
+    {
+      at: "57:56",
+      artist: "Kings Of Tomorrow ft. Julie McKnight",
+      title: "Finally (Acappella)",
+    },
+    { at: "1:01:16", artist: "Groove Junkies ft. Indeya", title: "Oh Lord" },
+    {
+      at: "1:04:36",
+      artist: "DJ Micks ft. Robin Latimore",
+      title: "First To Say Goodbye",
+    },
+    {
+      at: "1:11:00",
+      artist: "DJ Said & Cee ElAssaad",
+      title: "Fela Is Everything (Eric Kupper Remix)",
+    },
+    {
+      at: "1:15:45",
+      artist: "AfroTura & Manoo & Idd Aziz",
+      title: "Amilo",
+    },
+    { at: "1:23:15", artist: "Karyendasoul", title: "Isambulo" },
+    {
+      at: "1:30:00",
+      artist: "Roland Clark pres. Urban Soul",
+      title: "Brown James",
+    },
+    {
+      at: "1:33:30",
+      artist: "Oskido ft. Candy",
+      title: "Tsa Ma Ndebele (Manoo Remix)",
+    },
+    { at: "1:40:16", artist: "&lez", title: "In My House" },
+    {
+      at: "1:46:15",
+      artist: "Culoe De Song",
+      title: "Mount Zion (Jonathan Kaspar Remix)",
+    },
+    {
+      at: "1:48:38",
+      artist: "Stardust",
+      title: "Music Sounds Better With You (Acappella)",
+    },
+    {
+      at: "1:51:00",
+      artist: "Fiona Kraft",
+      title:
+        "Deeper Feelings (Manoo The Dub / Piano Interpretation By Bacanito)",
+    },
+    { at: "1:57:37", artist: "&ME & Black Coffee", title: "The Rapture Pt.III" },
+    { at: "2:00:28", artist: "Bongi Dube", title: "Go Around" },
+    { at: "2:03:19", artist: "Moojo", title: "Mimisiku" },
+    { at: "2:08:36", artist: "Da Africa Deep & NuroGroove", title: "No End" },
+    { at: "2:15:09", artist: "Dr Feel", title: "Drums Of Orisha" },
+    {
+      at: "2:20:23",
+      artist: "Juan Luis Guerra 4.40",
+      title: "Vale La Pena (Moojo & Biralo Remix)",
+    },
+    { at: "2:24:52", artist: "Wham!", title: "Everything She Wants" },
+    {
+      at: "2:31:22",
+      artist: "Marianto",
+      title: "Simple World (CJ Jeff & Thodoris Triantafillou Remix)",
+    },
+    { at: "2:35:51", artist: "Adore ft. Marine Abtan", title: "Sing It Back" },
+    {
+      at: "2:41:11",
+      artist: "Spiller ft. Sophie Ellis-Bextor",
+      title: "Groovejet (If This Ain't Love)",
+    },
+    { at: "2:44:51", artist: "Jimi Jules & Black Coffee", title: "Trippy Yeah" },
+    {
+      at: "2:50:15",
+      artist: "George Michael",
+      title: "Careless Whisper (Abicah Soul Edit)",
+    },
+    {
+      at: "2:56:08",
+      artist: "Lou Rawls",
+      title:
+        "You'll Never Find Another Love Like Mine (Kenny Summit & Frankie Knuckles & Eric Kupper Unreleased Anthem)",
+    },
+    {
+      at: "3:01:38",
+      artist: "Chew Fu ft. Steve Clisby",
+      title: "Purple Rain (Mousse T Home Alone Mix)",
+    },
+    { at: "3:07:38", artist: "Toto", title: "Africa" },
+    {
+      at: "3:11:42",
+      artist: "Lionel Richie",
+      title: "All Night Long (All Night)",
+    },
+    { at: "3:15:39", artist: "Bob Marley & The Wailers", title: "Is This Love" },
+    { at: "3:19:32", artist: "Angie Stone", title: "Wish I Didn't Miss You" },
+    { at: "3:23:06", artist: "Earth, Wind & Fire", title: "September" },
+    { at: "3:26:29", artist: "Jamiroquai", title: "You Give Me Something" },
+    { at: "3:28:22", artist: "Gloria Gaynor", title: "I Will Survive" },
+  ];
+
+/**
  * Joris Voorn & Cassian - Spectrum Radio 484 2026-08-05
  * https://www.1001tracklists.com/tracklist/1z0kzf5k/joris-voorn-cassian-spectrum-radio-484-2026-08-05.html
  * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-d5JZLJSJc6w"]

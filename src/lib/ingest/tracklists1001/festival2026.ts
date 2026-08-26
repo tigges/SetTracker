@@ -144,6 +144,7 @@ import {
   TL_ARIELLE_FREE_TML_WE1_FREEDOM_2026,
   TL_BLONDISH_TML_WE1_CRYSTAL_2026,
   TL_CAMILA_JUN_TML_WE1_CRYSTAL_2026,
+  TL_BLACK_COFFEE_MAYAN_WARRIOR_BURNING_MAN_2025,
   TL_CLOONEE_NEONGARDEN_EDC_ORLANDO_2025,
   TL_DAVID_HERRLICH_OWR_ACADEMY_2026,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
@@ -282,6 +283,7 @@ export {
   TL_AGENTS_OF_TIME_TIME_WARP_FLOOR_1_2026,
   TL_CLOONEE_NEONGARDEN_EDC_ORLANDO_2025,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
+  TL_BLACK_COFFEE_MAYAN_WARRIOR_BURNING_MAN_2025,
 };
 
 function formatClock(sec: number): string {
@@ -4802,6 +4804,8 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   // Spectrum Radio 484. The YouTube slug carries the set; the SoundCloud slug
   // shares this array so the twin group keeps both hosts. joris-voorn is not a
   // curated SC account, so wiring SC alone would orphan the seed.
+  // Mayan Warrior's own channel; the set was already curated without cues.
+  "yt-FH7lIOv1s3Q": TL_BLACK_COFFEE_MAYAN_WARRIOR_BURNING_MAN_2025,
   "yt-d5JZLJSJc6w": TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   "sc-joris-voorn-spectrum-radio-484":
     TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
