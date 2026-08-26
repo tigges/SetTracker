@@ -72,6 +72,20 @@ unless asked. Never write Relive for HARD / Insomniac / Nameless / Ultra.
   hosts, then refresh graduate + playback reports). `--fix` drops junk track-id
   pins. `--full` also runs the QC unit tests. Live DB audits run only when
   the catalog has 200+ sets. Never scrapes Beatport or 1001.
+- **Capture precheck:** `npm run check:capture -- <url…>` before wiring a 1001
+  paste. Takes 1001 / YouTube / SoundCloud URLs (utm junk fine), bare video
+  ids, or `yt-`/`sc-` slugs; reports the slug it resolves to, whether a seed is
+  already wired, the cue count, host twins, and the archive note. Committed
+  files only — no network, no DB. Catches the two ways a paste wastes work: the
+  set is already wired, or the paste's `Wire:` line names a different slug than
+  the one the 1001 page is already on file under. Both `/stats` lists already
+  drop wired slugs (`buildCaptureQueueFromNeeds` and the tracklist workbench),
+  so a re-paste is a backlog artefact, not the queue asking again.
+- **Fan uploads:** `FINGERPRINT_ONLY_WATCH` rows are Identify-only and must
+  never be `sourceUrl` / `playbackUrl` / a `TRACKLIST_1001_BY_SOURCE_SLUG` key.
+  QC now enforces both directions. The guard only sees videos already listed
+  there, so verify a channel via oEmbed before treating an upload as official —
+  a third-party re-upload curated in `YOUTUBE_SETS` looks official otherwise.
 - **Release version:** bump `package.json` `"version"` on every ship to main.
   Pages workflows inject it as `NEXT_PUBLIC_APP_VERSION` (footer `v…`). Do not
   hardcode the version in workflow YAML.

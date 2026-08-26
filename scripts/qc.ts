@@ -124,6 +124,12 @@ async function main() {
     steps.push(
       runStep("events-test", "npx", ["tsx", "src/lib/ingest/events.test.ts"]),
     );
+    steps.push(
+      runStep("capture-lookup-test", "npx", [
+        "tsx",
+        "src/lib/ingest/captureLookup.test.ts",
+      ]),
+    );
   }
 
   const errors = staticQc.issues.filter((i) => i.severity === "error");
