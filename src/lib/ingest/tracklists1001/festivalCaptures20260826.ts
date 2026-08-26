@@ -141,3 +141,43 @@ export const TL_REINIER_ZONNEVELD_TML_WE1_ATMOSPHERE_2026: FingerprintSeedRow[] 
       title: "Destined For Destruction (Angerfist Remix)",
     },
   ];
+
+/**
+ * Indira Paganotto @ Mainstage, Tomorrowland Weekend 2, Belgium 2026-07-24
+ * Official YouTube: https://youtu.be/Wbc9jh-7tTw
+ * https://www.1001tracklists.com/tracklist/1w739nf1/indira-paganotto-mainstage-tomorrowland-weekend-2-belgium-2026-07-24.html
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-Wbc9jh-7tTw"]
+ * No SoundCloud permalink in the operator paste — do not invent one.
+ * Partial list: 11 cues starting at 13:30, so it gap-fills a denser source
+ * tracklist rather than replacing it (merge1001Plays replaces at 12+).
+ * Captured 2026-08-26 — provenance 1001tl.
+ */
+export const TL_INDIRA_PAGANOTTO_TML_WE2_MAINSTAGE_2026: FingerprintSeedRow[] = [
+  { at: "13:30", artist: "Indira Paganotto ft. El Karima", title: "DREAM" },
+  { at: "18:20", artist: "A*S*Y*S", title: "Acid Phase" },
+  { at: "21:30", artist: "BK", title: "Revolution (Alphazone Remix)" },
+  { at: "25:00", artist: "Maddix", title: "Acid For Breakfast" },
+  {
+    at: "28:00",
+    artist: "Talamasca & Ivan Castro ft. Manasi Scott",
+    title: "Nova Goa",
+  },
+  {
+    at: "33:40",
+    artist: "Bring Me The Horizon",
+    title: "Can You Feel My Heart",
+  },
+  {
+    at: "38:10",
+    artist: "Indira Paganotto & Harald Barrett",
+    title: "Mea Culpa",
+  },
+  {
+    at: "46:00",
+    artist: "Talamasca & Ivan Castro ft. Eric Castiglia",
+    title: "Uprising Tribute To Muse",
+  },
+  { at: "51:20", artist: "Charlie Sparks", title: "Bankai" },
+  { at: "54:20", artist: "Klipsun & Aura Vortex", title: "Cliffjumper" },
+  { at: "56:28", artist: "Abso X", title: "Sky Has No Limit" },
+];
