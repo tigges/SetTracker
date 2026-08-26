@@ -195,6 +195,13 @@ unless asked. Never write Relive for HARD / Insomniac / Nameless / Ultra.
   interpolate; never overwrite 1001tl / fingerprint / community. Enrich
   `full` and Catalog LLM research default to parser apply / LLM extras
   dry-run. Report: `data/crosscheck/llm-cue-research.json`.
+  **Defer a capture:** rows with no findable tracklist park in
+  `data/capture-defer.json` (`{slug, until, note}`). `activeDeferSlugs()`
+  filters them **before** the 40-row cap, so the next candidate takes the
+  slot; expired rows return on their own and nothing is deleted. `/stats` has
+  a per-row **Later** button (localStorage, this browser only) plus **Copy
+  defer JSON** to commit the shared version. Wiring a tracklist is the real
+  fix — never park a row to "finish" it.
   **/stats queues:** flat, no nesting. **Capture 1001** (`#capture-1001`) is
   the only set queue on the page — it has real actions (Open SC/YT, Search
   1001, Copy capture). `statsWorkbench.ts` still ranks text / ACR / IDs lanes

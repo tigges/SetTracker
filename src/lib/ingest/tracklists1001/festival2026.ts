@@ -140,6 +140,17 @@ import {
   TL_TIMMY_TRUMPET_TML_WE2_FREEDOM_2026,
 } from "./festivalCaptures20260824";
 import { TL_AGENTS_OF_TIME_TIME_WARP_FLOOR_1_2026 } from "./festivalCaptures20260825";
+import {
+  TL_ARIELLE_FREE_TML_WE1_FREEDOM_2026,
+  TL_BLONDISH_TML_WE1_CRYSTAL_2026,
+  TL_DAVID_HERRLICH_OWR_ACADEMY_2026,
+  TL_HARDWELL_EUPHORIA_018_2026,
+  TL_HARDWELL_EUPHORIA_019_2026,
+  TL_HI_LO_LAYTON_GIORDANI_TML_WE2_CRYSTAL_2026,
+  TL_INDIRA_PAGANOTTO_TML_WE2_MAINSTAGE_2026,
+  TL_NERVO_TML_WE1_MAINSTAGE_2025,
+  TL_REINIER_ZONNEVELD_TML_WE1_ATMOSPHERE_2026,
+} from "./festivalCaptures20260826";
 
 export {
   TL_ALESSO_TML_WE2_2026,
@@ -4750,6 +4761,23 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-UETk8HSB0Yw": TL_DUBVISION_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
   "yt-or_SDolEBfw": TL_W_AND_W_MAINSTAGE_PAROOKAVILLE_GERMANY_2026,
   "sc-tomorrowland-mandy-mondays-august-2026": TL_MANDY_MANDY_MONDAYS_028_2026,
+  // Host twins — same performance on the Tomorrowland SC show and YouTube.
+  "sc-tomorrowland-hardwell-presents-euphoria-july-2026":
+    TL_HARDWELL_EUPHORIA_019_2026,
+  "yt-39KkVIunYAk": TL_HARDWELL_EUPHORIA_019_2026,
+  "sc-tomorrowland-hardwell-presents-euphoria-june-2026":
+    TL_HARDWELL_EUPHORIA_018_2026,
+  "yt-9aDj2qyAIBw": TL_HARDWELL_EUPHORIA_018_2026,
+  "yt-oxG_iaVCkY4": TL_REINIER_ZONNEVELD_TML_WE1_ATMOSPHERE_2026,
+  "yt-Wbc9jh-7tTw": TL_INDIRA_PAGANOTTO_TML_WE2_MAINSTAGE_2026,
+  "yt-s_iciA5Eg1E": TL_HI_LO_LAYTON_GIORDANI_TML_WE2_CRYSTAL_2026,
+  "yt-n3TESnQqiQ4": TL_BLONDISH_TML_WE1_CRYSTAL_2026,
+  "yt-xipWzYd7R8o": TL_ARIELLE_FREE_TML_WE1_FREEDOM_2026,
+  // Approximate clocks (195s × 10, then ~50s × 32): order real, times rough.
+  "yt-HWwmfWovTeI": TL_NERVO_TML_WE1_MAINSTAGE_2025,
+  // Even-spaced clocks (evenlySpaceRows): order real, times approximate.
+  "sc-tomorrowland-tomorrowland-academy-student-mix-david-herrlich":
+    TL_DAVID_HERRLICH_OWR_ACADEMY_2026,
   "yt-J7b0G4XX8pg":
     TL_MANDY_AND_NEGATIV_ATMOSPHERE_STAGE_TOMORROWLAND_WE1_BELGIUM_2026,
   "yt-B1EaMgsf84Q":

@@ -1,0 +1,10 @@
+{
+  "note": "Capture rows parked until `until` (ISO date). Expired rows return to the /stats 1001 queue automatically; the filter runs before the 40-row cap, so a parked row frees its slot for the next candidate. Never delete a row to 'finish' it — wire the tracklist instead.",
+  "rows": [
+    {
+      "slug": "yt-DWPSLZLKslg",
+      "until": "2026-09-25",
+      "note": "Liu @ Tomorrowland Belgium — no 1001 tracklist logged yet (2026-08-26)."
+    }
+  ]
+}

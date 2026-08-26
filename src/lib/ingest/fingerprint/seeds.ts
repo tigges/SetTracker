@@ -39,6 +39,65 @@ export function parseClockToSec(raw: string): number | null {
  * Convert seed rows → RawPlay[]. Drops consecutive duplicates (same artist+title
  * — fingerprint spam often re-IDs the same playing track every minute).
  */
+function clockGaps(rows: FingerprintSeedRow[]): number[] | null {
+  const secs: number[] = [];
+  for (const row of rows) {
+    const at = parseClockToSec(row.at);
+    if (at == null) return null;
+    secs.push(at);
+  }
+  const gaps: number[] = [];
+  for (let i = 1; i < secs.length; i += 1) {
+    const gap = secs[i]! - secs[i - 1]!;
+    if (gap <= 0) return null;
+    gaps.push(gap);
+  }
+  return gaps;
+}
+
+/**
+ * Longest run of near-identical gaps, and that run's gap.
+ *
+ * Tolerance is 1s because an even division with a fractional step rounds to
+ * alternating values — 50, 51, 50, 51 is arithmetic, not observation.
+ */
+export function longestUniformClockRun(
+  rows: FingerprintSeedRow[],
+  toleranceSec = 1,
+): { run: number; gapSec: number } {
+  const gaps = clockGaps(rows);
+  if (!gaps?.length) return { run: 0, gapSec: 0 };
+  let best = { run: 1, gapSec: gaps[0]! };
+  let startAt = 0;
+  for (let i = 1; i <= gaps.length; i += 1) {
+    const window = gaps.slice(startAt, i + 1);
+    const spread = Math.max(...window) - Math.min(...window);
+    if (i < gaps.length && spread <= toleranceSec) continue;
+    const run = i - startAt;
+    if (run > best.run) best = { run, gapSec: gaps[startAt]! };
+    startAt = i;
+  }
+  return best;
+}
+
+/**
+ * Flag a capture whose clocks were computed rather than observed.
+ *
+ * A real mix never places 8+ consecutive tracks at the same interval. When
+ * 1001 (or MixesDB, or a paste tool) has no cue times, evenly spaced clocks
+ * get generated. Catches a wholly uniform list and a long uniform run inside
+ * an otherwise mixed one — NERVO's paste had 195s × 10 then ~50s × 32.
+ */
+export function hasEvenlySpacedClocks(
+  rows: FingerprintSeedRow[],
+  minRun = 8,
+): boolean {
+  const gaps = clockGaps(rows);
+  if (!gaps || gaps.length < minRun) return false;
+  if (new Set(gaps).size === 1) return true;
+  return longestUniformClockRun(rows).run >= minRun;
+}
+
 export function fingerprintRowsToPlays(
   rows: FingerprintSeedRow[],
 ): RawPlay[] {
@@ -50,16 +109,23 @@ export function fingerprintRowsToPlays(
     const artist = row.artist.replace(/\s+/g, " ").trim();
     const title = row.title.replace(/\s+/g, " ").trim();
     if (!artist || !title) continue;
-    const key = playCollapseKey({ artistName: artist, title });
+    // 1001 writes "ID" when the artist is unknown. Keep the title, but never
+    // store a act called ID, and never call the cue identified.
+    const unknownArtist = /^id$/i.test(artist);
+    // playCollapseKey needs an artist, so unknown rows collapse on title
+    // alone — the `unknown::` prefix cannot collide with a real key.
+    const key = unknownArtist
+      ? `unknown::${title.toLowerCase()}`
+      : playCollapseKey({ artistName: artist, title });
     if (key && key === lastKey) continue;
     if (key) lastKey = key;
     out.push({
       position: out.length + 1,
       timestamp,
-      idStatus: "identified",
+      idStatus: unknownArtist ? "unresolved_id" : "identified",
       provenance: "fingerprint",
       trackTitle: title,
-      artistName: artist,
+      ...(unknownArtist ? {} : { artistName: artist }),
       rawText: `${artist} - ${title}`,
     });
   }

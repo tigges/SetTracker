@@ -19,8 +19,10 @@ import {
   watchUrlForSlug,
 } from "@/lib/ingest/nextCaptures";
 import { curated1001UrlBySourceSlug } from "@/lib/ingest/youtube/videos";
+import { activeDeferSlugs } from "@/lib/ingest/captureDefer";
 import { assessSetDensity } from "@/lib/setDensity";
 import nextCaptures from "../../data/crosscheck/next-captures.json";
+import captureDefer from "../../data/capture-defer.json";
 
 export type CaptureQueue = {
   generatedAt: string;
@@ -122,7 +124,12 @@ export async function getCaptureQueue(
 
   return {
     generatedAt: new Date().toISOString(),
-    presets: buildCaptureQueueFromNeeds(rows, { limit, extra, nowMs }),
+    presets: buildCaptureQueueFromNeeds(rows, {
+      limit,
+      extra,
+      nowMs,
+      deferred: activeDeferSlugs(captureDefer, nowMs),
+    }),
   };
 }
 

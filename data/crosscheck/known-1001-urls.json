@@ -1,6 +1,6 @@
 {
   "note": "Operator-collected 1001Tracklists URLs. All listed urls[] rows are now seeded. Prefer new operator pastes over this archive. stillMissing1001 is video-in / no 1001 page — do not invent URLs. heldPendingPlayback is 1001-in / no official YT/SC playback — seed held, do not invent or wire fan playback. pendingCuePaste is official playback + operator 1001 URL without cue rows — do not scrape 1001 or invent 1001tl seeds.",
-  "updatedAt": "2026-08-24T00:00:00.000Z",
+  "updatedAt": "2026-08-26T03:40:00.000Z",
   "urls": [
     {
       "label": "VINAI · S2O Songkran Music Festival Thailand 2023-04-15",
@@ -409,6 +409,80 @@
       "youtubeUrl": "https://www.youtube.com/watch?v=-UOMvxh4MYU",
       "priority": "low",
       "note": "Archive official Cercle — capture after EDC 2026"
+    },
+    {
+      "label": "Hardwell · Euphoria 019 2026-07-24",
+      "slug": "sc-tomorrowland-hardwell-presents-euphoria-july-2026",
+      "name": "TL_HARDWELL_EUPHORIA_019_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/1shw71uk/hardwell-euphoria-019-2026-07-24.html",
+      "soundcloudUrl": "https://soundcloud.com/tomorrowland/hardwell-presents-euphoria-july-2026",
+      "youtubeUrl": "https://youtu.be/39KkVIunYAk",
+      "note": "Operator paste 2026-08-26. 20 cues. Host twin: also wired as yt-39KkVIunYAk."
+    },
+    {
+      "label": "Reinier Zonneveld · Atmosphere Stage, Tomorrowland WE1 2026-07-18",
+      "slug": "yt-oxG_iaVCkY4",
+      "name": "TL_REINIER_ZONNEVELD_TML_WE1_ATMOSPHERE_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/1pqhutm9/reinier-zonneveld-atmosphere-stage-tomorrowland-weekend-1-belgium-2026-07-18.html",
+      "youtubeUrl": "https://youtu.be/oxG_iaVCkY4",
+      "note": "Operator paste 2026-08-26. 21 cues. 46:00 is a 1001 ID row (title known, artist unknown) -> unresolved_id."
+    },
+    {
+      "label": "Indira Paganotto · Mainstage, Tomorrowland WE2 2026-07-24",
+      "slug": "yt-Wbc9jh-7tTw",
+      "name": "TL_INDIRA_PAGANOTTO_TML_WE2_MAINSTAGE_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/1w739nf1/indira-paganotto-mainstage-tomorrowland-weekend-2-belgium-2026-07-24.html",
+      "youtubeUrl": "https://youtu.be/Wbc9jh-7tTw",
+      "note": "Operator paste 2026-08-26. 11 cues from 13:30 - partial, under the 12-row replace threshold so it gap-fills."
+    },
+    {
+      "label": "David Herrlich · One World Radio Academy Mix 2026-07-13",
+      "slug": "sc-tomorrowland-tomorrowland-academy-student-mix-david-herrlich",
+      "name": "TL_DAVID_HERRLICH_OWR_ACADEMY_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/2uyj62zk/david-herrlich-one-world-radio-academy-mix-2026-07-13.html",
+      "soundcloudUrl": "https://soundcloud.com/tomorrowland/tomorrowland-academy-student-mix-david-herrlich",
+      "note": "Operator paste 2026-08-26. 15 cues. CLOCKS APPROXIMATE - every gap is 3:57 (evenlySpaceRows); 1001 had order, no cue times."
+    },
+    {
+      "label": "HI-LO & Layton Giordani · Crystal Garden, Tomorrowland WE2 2026-07-25",
+      "slug": "yt-s_iciA5Eg1E",
+      "name": "TL_HI_LO_LAYTON_GIORDANI_TML_WE2_CRYSTAL_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/q16wsw9/hi-lo-layton-giordani-crystal-garden-stage-tomorrowland-weekend-2-belgium-2026-07-25.html",
+      "youtubeUrl": "https://youtu.be/s_iciA5Eg1E",
+      "note": "Operator paste 2026-08-26. 42 cues. Mashup rows list their component tracks; 1:10:57 -> 1:11:00 is a 3s gap kept as captured."
+    },
+    {
+      "label": "BLOND:ISH · Crystal Garden, Tomorrowland WE1 2026-07-17",
+      "slug": "yt-n3TESnQqiQ4",
+      "name": "TL_BLONDISH_TML_WE1_CRYSTAL_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/rwsfpn1/blondish-crystal-garden-stage-tomorrowland-weekend-1-belgium-2026-07-17.html",
+      "youtubeUrl": "https://youtu.be/n3TESnQqiQ4",
+      "note": "Operator paste 2026-08-26. 21 cues, observed clocks."
+    },
+    {
+      "label": "Arielle Free · Freedom Stage, Tomorrowland WE1 2026-07-19",
+      "slug": "yt-xipWzYd7R8o",
+      "name": "TL_ARIELLE_FREE_TML_WE1_FREEDOM_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/2b633wqt/arielle-free-freedom-stage-tomorrowland-weekend-1-belgium-2026-07-19.html",
+      "youtubeUrl": "https://youtu.be/xipWzYd7R8o",
+      "note": "Operator paste 2026-08-26. 23 cues, observed clocks."
+    },
+    {
+      "label": "NERVO · Mainstage, Tomorrowland WE1 2025-07-18",
+      "slug": "yt-HWwmfWovTeI",
+      "name": "TL_NERVO_TML_WE1_MAINSTAGE_2025",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/xfdu3jt/nervo-mainstage-tomorrowland-weekend-1-belgium-2025-07-18.html",
+      "youtubeUrl": "https://youtu.be/HWwmfWovTeI",
+      "note": "Operator paste 2026-08-26. 43 cues. 2025 edition, not 2026. CLOCKS APPROXIMATE - 195s x 10 then ~50s x 32, nothing observed."
+    },
+    {
+      "label": "Hardwell · Euphoria 018 2026-06-26",
+      "slug": "sc-tomorrowland-hardwell-presents-euphoria-june-2026",
+      "name": "TL_HARDWELL_EUPHORIA_018_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/27dkt939/hardwell-euphoria-018-2026-06-26.html",
+      "soundcloudUrl": "https://soundcloud.com/tomorrowland/hardwell-presents-euphoria-june-2026",
+      "youtubeUrl": "https://youtu.be/9aDj2qyAIBw",
+      "note": "Operator paste 2026-08-26. 19 cues, observed clocks. Host twin: also wired as yt-9aDj2qyAIBw. Previous month's show; 019 is a separate seed."
     }
   ],
   "stillMissing1001": [
