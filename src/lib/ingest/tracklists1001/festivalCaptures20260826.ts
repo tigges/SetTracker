@@ -62,6 +62,111 @@ export const TL_HARDWELL_EUPHORIA_019_2026: FingerprintSeedRow[] = [
 ];
 
 /**
+ * Kevin de Vries @ Mainstage, Tomorrowland Weekend 1, Belgium 2026-07-19
+ * Official YouTube (oEmbed: @tomorrowland "Kevin de Vries WE1 | Tomorrowland
+ * 2026"): https://youtu.be/jAZiK2WJuhk
+ * https://www.1001tracklists.com/tracklist/xhlqtrt/kevin-de-vries-mainstage-tomorrowland-weekend-1-belgium-2026-07-19.html
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-jAZiK2WJuhk"]
+ * No SoundCloud permalink in the operator paste — do not invent one.
+ * Distinct from TL_KEVIN_DE_VRIES_STREET_PARADE_2025, his only other seed.
+ *
+ * Observed clocks (gaps 136s–274s; longest near-uniform run 2). Two different
+ * tracks are both called "Payback" — his own with Cassian at 1:09:39 and the
+ * Dimitri Vangelis & Wyman X Steve Angello one at 1:11:56. Not a duplicate:
+ * the collapse key includes the artist, so both cues correctly stay.
+ * Captured 2026-08-26 — provenance 1001tl.
+ */
+export const TL_KEVIN_DE_VRIES_TML_WE1_MAINSTAGE_2026: FingerprintSeedRow[] = [
+  {
+    at: "0:12",
+    artist: "Kevin de Vries & Cyantist",
+    title: "Sempre Sei",
+  },
+  { at: "2:47", artist: "Kevin de Vries & DAMEN", title: "Overclock" },
+  {
+    at: "5:12",
+    artist: "HUGEL & SOLTO",
+    title: "Jamaican (Bam Bam) (Jast Remix)",
+  },
+  { at: "8:35", artist: "Stoac", title: "Do It Like" },
+  {
+    at: "12:29",
+    artist: "Kevin de Vries & Platero",
+    title: "Man Like Me",
+  },
+  { at: "16:13", artist: "Anyma & Volkoder", title: "Other Dimension" },
+  {
+    at: "19:35",
+    artist: "Mario Eighta & Eklipse",
+    title: "We Run The Night",
+  },
+  {
+    at: "23:13",
+    artist: "Bountyhunter",
+    title: "Woops (Dimitri Vegas & Junkie Kid Remix / BRANDON Remix)",
+  },
+  {
+    at: "26:19",
+    artist: "Macca",
+    title: "Freak Like You (DAMEN Remix)",
+  },
+  { at: "28:59", artist: "Cassian & AR/CO", title: "Come To Life" },
+  {
+    at: "33:26",
+    artist: "Age Of Love",
+    title: "The Age Of Love (Dave Summer Edit)",
+  },
+  { at: "36:48", artist: "Cirez D", title: "On Off" },
+  {
+    at: "40:09",
+    artist: "Kevin de Vries & Jast",
+    title: "Born Like That",
+  },
+  {
+    at: "43:53",
+    artist: "Rihanna",
+    title: "Where Have You Been (KAF3R Remix)",
+  },
+  { at: "47:33", artist: "Kevin de Vries & Mau P", title: "Metro" },
+  {
+    at: "51:59",
+    artist: "MORGANJ ft. Scrufizzer",
+    title: "4thepeople",
+  },
+  {
+    at: "55:25",
+    artist: "Anyma & Rebūke",
+    title: "Syren (Dimitri Vangelis & Wyman Remix)",
+  },
+  {
+    at: "59:01",
+    artist: "Florence + The Machine",
+    title: "Spectrum (Say My Name) (Moonphazes Remix)",
+  },
+  {
+    at: "1:03:35",
+    artist: "Anyma & Kevin de Vries & Dimitri Vangelis & Wyman",
+    title: "Transcend",
+  },
+  {
+    at: "1:05:55",
+    artist: "Swedish House Mafia & Connie Constance",
+    title: "Heaven Takes You Home (Swedish House Mafia Remake)",
+  },
+  { at: "1:09:39", artist: "Kevin de Vries & Cassian", title: "Payback" },
+  {
+    at: "1:11:56",
+    artist: "Dimitri Vangelis & Wyman X Steve Angello",
+    title: "Payback",
+  },
+  {
+    at: "1:14:12",
+    artist: "Kevin de Vries & Stylo",
+    title: "I'll Be There",
+  },
+];
+
+/**
  * YOTTO — Odd World July 2026-07-12 (Tomorrowland One World Radio)
  * Official SoundCloud:
  * https://soundcloud.com/tomorrowland/yottos-odd-world-july-2026
