@@ -62,6 +62,101 @@ export const TL_HARDWELL_EUPHORIA_019_2026: FingerprintSeedRow[] = [
 ];
 
 /**
+ * Max Styler @ Lollapalooza Afters, Radius Chicago, United States 2026-08-01
+ * Official SoundCloud: https://soundcloud.com/maxstyler/lollaafters26
+ * https://www.1001tracklists.com/tracklist/2gv88zkt/max-styler-lollapalooza-afters-radius-chicago-united-states-2026-08-01.html
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["sc-maxstyler-lollaafters26"]
+ * No YouTube upload in the operator paste — do not invent one.
+ *
+ * A club after-party, not a festival stage: ~2h51m with 30 cues, which still
+ * assesses "ok" (10.5 tracks/hour, 61% coverage) — long sets ride slower.
+ * Observed clocks (gaps 103s–527s, longest near-uniform run 2). Starts at
+ * 12:12; the warm-up stays unlogged rather than inventing an opening cue.
+ * Captured 2026-08-26 — provenance 1001tl.
+ */
+export const TL_MAX_STYLER_LOLLA_AFTERS_RADIUS_CHICAGO_2026: FingerprintSeedRow[] =
+  [
+    { at: "12:12", artist: "Sama (US)", title: "Killa" },
+    { at: "16:00", artist: "JØRD & Vylow", title: "Do It!" },
+    { at: "20:02", artist: "Romain Dary", title: "Trust Me" },
+    { at: "28:37", artist: "Talón", title: "The King" },
+    {
+      at: "36:17",
+      artist: "Max Styler & Greggio",
+      title: "Oldskool Flavor",
+    },
+    { at: "40:47", artist: "Viot", title: "Cardio" },
+    {
+      at: "45:36",
+      artist: "Kolombo & Malikk",
+      title: "I Take Ya (Kolombo 2017 Mix)",
+    },
+    { at: "47:19", artist: "Max Styler", title: "Time To Go" },
+    { at: "49:02", artist: "Amour Propre", title: "Feel So Good" },
+    { at: "52:45", artist: "Max Styler", title: "Body Shake" },
+    {
+      at: "56:45",
+      artist: "Max Styler ft. Ad-Apt",
+      title: "One More (Solomun Remix)",
+    },
+    {
+      at: "1:04:01",
+      artist: "B/AN/K & Humans Musik",
+      title: "What Is It",
+    },
+    { at: "1:12:34", artist: "Max Styler", title: "Inferno" },
+    {
+      at: "1:16:30",
+      artist: "2 Unlimited",
+      title: "Let The Beat Control Your Body",
+    },
+    { at: "1:20:26", artist: "Rufus & Chaka Khan", title: "Ain't Nobody" },
+    { at: "1:24:45", artist: "Knorst", title: "SuperFreak" },
+    {
+      at: "1:32:19",
+      artist: "Max Styler ft. Benni Ola",
+      title: "Uh Oh!",
+    },
+    { at: "1:36:34", artist: "Greggio", title: "Hey DJ" },
+    { at: "1:40:22", artist: "Tair Haim", title: "Justice" },
+    { at: "1:48:55", artist: "DvirNuns", title: "Start Again" },
+    {
+      at: "1:56:05",
+      artist: "Max Styler & Vintage Culture & Ali Love",
+      title: "Freaky 1",
+    },
+    {
+      at: "2:00:14",
+      artist: "Chris Lorenzo & Max Styler & Audio Bullys",
+      title: "London's On Fire",
+    },
+    { at: "2:03:41", artist: "Goom Gum", title: "Just Be Good To Me" },
+    { at: "2:07:28", artist: "Who Else & Zagitar", title: "Voltage" },
+    {
+      at: "2:14:25",
+      artist: "Wonderland Avenue",
+      title: "White Horse (Max Styler Rework)",
+    },
+    {
+      at: "2:23:04",
+      artist: "CamelPhat & Josh Gigante ft. Kuuda",
+      title: "So Good (Max Styler Remix)",
+    },
+    { at: "2:28:36", artist: "Orbital", title: "Halcyon On & On" },
+    {
+      at: "2:37:23",
+      artist: "Opus III",
+      title: "It's A Fine Day (Acappella)",
+    },
+    { at: "2:46:09", artist: "Max Styler & Deomid", title: "Every Night" },
+    {
+      at: "2:50:58",
+      artist: "Max Styler ft. Kuuda",
+      title: "Love Forever",
+    },
+  ];
+
+/**
  * Space 92 @ Freedom Stage, Tomorrowland Weekend 1, Belgium 2026-07-18
  * Official SoundCloud (artist's own, verified 200 "Space 92 @ Tomorrowland
  * 2026 Freedom Stage"):
