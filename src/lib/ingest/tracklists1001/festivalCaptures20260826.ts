@@ -62,6 +62,76 @@ export const TL_HARDWELL_EUPHORIA_019_2026: FingerprintSeedRow[] = [
 ];
 
 /**
+ * Hardwell - Euphoria 018 2026-06-26
+ * Official SoundCloud:
+ * https://soundcloud.com/tomorrowland/hardwell-presents-euphoria-june-2026
+ * Official YouTube twin: https://youtu.be/9aDj2qyAIBw
+ * https://www.1001tracklists.com/tracklist/27dkt939/hardwell-euphoria-018-2026-06-26.html
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["sc-tomorrowland-hardwell-presents-euphoria-june-2026"]
+ * plus the YT slug so either host resolves the same clocks.
+ * Observed clocks (gaps 138s–237s) — the previous month's show, 019, is
+ * wired separately below.
+ * Captured 2026-08-26 — provenance 1001tl.
+ */
+export const TL_HARDWELL_EUPHORIA_018_2026: FingerprintSeedRow[] = [
+  {
+    at: "0:39",
+    artist: "David Guetta & MARTEN HØRGER pres. Men Machine ft. Vitalic",
+    title: "Engage",
+  },
+  {
+    at: "2:57",
+    artist: "Hardwell & Showtek",
+    title: "How We Do (NLW Remix)",
+  },
+  {
+    at: "5:37",
+    artist: "Rikki & Matty x Kenny & Antheros",
+    title: "Eternity",
+  },
+  {
+    at: "8:22",
+    artist: "Tiësto ft. Olivia Sebastianelli",
+    title: "Don't Lose Your Head",
+  },
+  { at: "11:14", artist: "Mark Sixma & Noubya", title: "Like You Do" },
+  {
+    at: "15:01",
+    artist: "JOSHWA",
+    title: "Out Of My Mind (Hardwell Bootleg)",
+  },
+  { at: "18:49", artist: "Mannie Sapra", title: "Like A Rhythm" },
+  { at: "21:39", artist: "Hardwell", title: "Encoded (2ACES Remix)" },
+  { at: "24:52", artist: "Joey Dale & Dirty Signal", title: "Get Up" },
+  { at: "28:46", artist: "Hardwell & MAKJ", title: "Countdown 2026" },
+  { at: "32:38", artist: "Detmex", title: "Shut Me Out" },
+  { at: "35:26", artist: "RIOTZ & LUQ", title: "Go Hard" },
+  {
+    at: "38:19",
+    artist: "2ACES",
+    title: "All Night (What It Feels Like)",
+  },
+  {
+    at: "40:46",
+    artist: "Armin van Buuren & Hannah Laing & Wippenberg",
+    title: "U Got 2 Know",
+  },
+  { at: "44:43", artist: "Deorro", title: "Yee (Dr Phunk Remix)" },
+  { at: "47:25", artist: "Nifra", title: "I Can See It" },
+  {
+    at: "50:43",
+    artist: "Alex Nocera & Roy Batty",
+    title: "Interference",
+  },
+  { at: "53:41", artist: "Hardwell & Azteck & Dr Phunk", title: "LOW" },
+  {
+    at: "56:42",
+    artist: "Hardwell & Dyro",
+    title: "Not Alone (Bass Modulators Remix)",
+  },
+];
+
+/**
  * Reinier Zonneveld @ Atmosphere Stage, Tomorrowland Weekend 1, Belgium
  * 2026-07-18
  * Official YouTube: https://youtu.be/oxG_iaVCkY4
