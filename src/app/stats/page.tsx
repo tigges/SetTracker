@@ -12,6 +12,7 @@ import { StatsHealthCard, StatsMeter } from "@/components/StatsHealthCard";
 import { loadActionsStatusFile } from "@/lib/actionsStatus";
 import { capture1001StatsHref } from "@/lib/captureHref";
 import { loadOperatorCaptureQueue } from "@/lib/captureQueue";
+import { CAPTURE_QUEUE_LIMIT } from "@/lib/ingest/captureQueueLimits";
 import { getCatalogStats } from "@/lib/catalogStats";
 import { prisma } from "@/lib/db";
 import { loadDjMagTop100RankBySlug } from "@/lib/djmagTop100";
@@ -233,6 +234,12 @@ export default async function StatsPage() {
     loadEnrichRunReport(prisma),
     loadOperatorCaptureQueue(),
   ]);
+  // The queue carries a reserve past the display limit so a parked row promotes
+  // its replacement in the browser; the fold counts what an operator can see.
+  const captureQueueOpen = Math.min(
+    captureQueue.presets.length,
+    CAPTURE_QUEUE_LIMIT,
+  );
   const actionsStatus = loadActionsStatusFile();
   const top100 = loadDjMagTop100RankBySlug();
   const starFirst = (slug: string) => (top100.has(slug) ? 0 : 1);
@@ -325,12 +332,12 @@ export default async function StatsPage() {
         slices={health.sets.slices}
         onChart={health.sets.onChart}
         actions={
-          captureQueue.presets.length
+          captureQueueOpen
             ? [
                 {
                   href: "#capture-1001",
                   label: "Capture 1001",
-                  count: captureQueue.presets.length,
+                  count: captureQueueOpen,
                 },
               ]
             : []
@@ -449,7 +456,7 @@ export default async function StatsPage() {
         <span id="cues" />
         <QueueFold
           title="Capture 1001"
-          count={captureQueue.presets.length}
+          count={captureQueueOpen}
           hint="Community tracklist overlay for sets that already have official playback. Open the playback, search 1001, run the bookmarklet. Never invent a 1001 URL."
           followUp="operator"
           open

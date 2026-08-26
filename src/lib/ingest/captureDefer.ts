@@ -85,3 +85,24 @@ export function withDeferRow(
   rows.sort((a, b) => a.slug.localeCompare(b.slug));
   return { rows };
 }
+
+/**
+ * Split a built queue into what an operator can act on now and what is parked.
+ *
+ * Parking happens in the browser, after the page was exported, so the server
+ * ships spare rows past `limit` (CAPTURE_QUEUE_RESERVE). Filtering before the
+ * slice is what lets a park promote the next row instead of leaving a hole.
+ */
+export function captureQueueView<T extends { slug: string }>(
+  rows: readonly T[],
+  parkedSlugs: ReadonlySet<string>,
+  limit: number,
+): { open: T[]; parked: T[]; reserve: number } {
+  const actionable = rows.filter((r) => !parkedSlugs.has(r.slug));
+  const open = actionable.slice(0, limit);
+  return {
+    open,
+    parked: rows.filter((r) => parkedSlugs.has(r.slug)),
+    reserve: Math.max(0, actionable.length - open.length),
+  };
+}
