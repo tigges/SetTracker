@@ -1,7 +1,10 @@
 import assert from "node:assert/strict";
 import {
   CAPTURE_QUEUE_LIMIT,
+  CAPTURE_QUEUE_RESERVE,
   buildCaptureQueueFromNeeds,
+  captureEventBucket,
+  capturePerEventCap,
   scoreCaptureNeed,
   skipCaptureNeed,
   type CaptureNeedRow,
@@ -854,5 +857,120 @@ assert.equal(
   ),
   "livestream-hub",
 );
+
+// --- Venue balance -----------------------------------------------------------
+// An in-season brand can hold hundreds of gap rows, every one carrying the same
+// +120 season bonus, so pure score order hands it all 40 slots. Build that
+// flood, then a handful of rows from other venues, and check the spread.
+const flood: CaptureNeedRow[] = Array.from({ length: 80 }, (_, i) =>
+  row({
+    slug: `yt-tml-${i}`,
+    title: `Tomorrowland gap ${i}`,
+    eventSlug: "tomorrowland",
+    eventRank: 1,
+    festivalSeason: true,
+    isFestival: true,
+    playCount: 0,
+    publishedAt: "2026-07-20T00:00:00Z",
+  }),
+);
+const others = [
+  ["untold", "Untold"],
+  ["creamfields", "Creamfields"],
+  ["awakenings", "Awakenings"],
+  ["time-warp", "Time Warp"],
+  ["nameless", "Nameless"],
+  ["dekmantel", "Dekmantel"],
+].flatMap(([slug, name], idx) =>
+  Array.from({ length: 4 }, (_, i) =>
+    row({
+      slug: `yt-${slug}-${i}`,
+      title: `${name} gap ${i}`,
+      eventSlug: slug,
+      eventRank: 10 + idx,
+      festivalSeason: true,
+      isFestival: true,
+      playCount: 0,
+      publishedAt: "2026-07-18T00:00:00Z",
+    }),
+  ),
+);
+
+const eventsOf = (q: ReturnType<typeof buildCaptureQueueFromNeeds>) =>
+  new Set(
+    q.map((p) => {
+      const m = p.slug.match(/^yt-([a-z-]+?)-\d+$/);
+      return m ? m[1] : p.slug;
+    }),
+  );
+
+const uncapped = buildCaptureQueueFromNeeds([...flood, ...others], {
+  nowMs: now,
+  perEventCap: Number.POSITIVE_INFINITY,
+});
+const balanced = buildCaptureQueueFromNeeds([...flood, ...others], {
+  nowMs: now,
+});
+assert.equal(balanced.length, CAPTURE_QUEUE_LIMIT);
+// Without the cap the flood takes every slot; with it, other venues get in.
+assert.equal(eventsOf(uncapped).size, 1, "uncapped queue is one brand");
+assert.ok(
+  eventsOf(balanced).size >= 7,
+  `expected 7+ venues, got ${eventsOf(balanced).size}`,
+);
+// Pass 1 caps each event; the leftover slots then go to the best remaining
+// rows, which here are the flood's. So the brand keeps a large share but no
+// longer starves the other venues of their 24 rows.
+const tmlRows = balanced.filter((p) => p.slug.startsWith("yt-tml-"));
+const otherRows = balanced.filter((p) => !p.slug.startsWith("yt-tml-"));
+assert.equal(otherRows.length, 24, "every other venue row made the queue");
+assert.equal(tmlRows.length, CAPTURE_QUEUE_LIMIT - 24);
+assert.ok(tmlRows.length < CAPTURE_QUEUE_LIMIT / 2, "brand no longer dominates");
+for (const slug of ["untold", "creamfields", "awakenings", "time-warp", "nameless", "dekmantel"]) {
+  assert.equal(
+    balanced.filter((p) => p.slug.startsWith(`yt-${slug}-`)).length,
+    4,
+    `${slug} rows must survive the flood`,
+  );
+}
+assert.equal(capturePerEventCap(40), 5);
+assert.equal(capturePerEventCap(8), 3, "cap never drops below 3");
+
+// Overflow still fills the queue when only one venue has actionable rows, so
+// the cap costs nothing on a quiet week.
+const floodOnly = buildCaptureQueueFromNeeds(flood, { nowMs: now });
+assert.equal(floodOnly.length, CAPTURE_QUEUE_LIMIT);
+
+// Rows with no event bucket by DJ, so one artist's back catalogue cannot flood
+// the queue either.
+assert.equal(
+  captureEventBucket(row({ slug: "yt-a", title: "a", eventSlug: "untold" })),
+  "event:untold",
+);
+assert.equal(
+  captureEventBucket(row({ slug: "yt-b", title: "b", primaryDjSlug: "fisher" })),
+  "dj:fisher",
+);
+assert.equal(captureEventBucket(row({ slug: "yt-c", title: "c" })), "slug:yt-c");
+
+// The notable-festival bump is flat: a rank-1 brand must not outscore a rank-90
+// one on that signal alone, or balancing fights the score.
+const rank1 = row({ slug: "yt-r1", title: "gap", eventSlug: "tomorrowland", eventRank: 1 });
+const rank90 = row({ slug: "yt-r90", title: "gap", eventSlug: "nameless", eventRank: 90 });
+assert.equal(scoreCaptureNeed(rank1, now), scoreCaptureNeed(rank90, now));
+// An unranked event still loses that bump unless the legacy brand names match.
+const unranked = row({ slug: "yt-u", title: "gap", eventSlug: "some-club" });
+assert.ok(scoreCaptureNeed(rank1, now) > scoreCaptureNeed(unranked, now));
+// Legacy fallback keeps working when no rank is on the row at all.
+const legacy = row({ slug: "yt-l", title: "Ultra Miami gap", eventSlug: null });
+assert.equal(scoreCaptureNeed(legacy, now), scoreCaptureNeed(rank1, now));
+
+// The reserve exists so a browser-side park promotes the next row.
+assert.equal(CAPTURE_QUEUE_RESERVE, 20);
+const withReserve = buildCaptureQueueFromNeeds([...flood, ...others], {
+  nowMs: now,
+  limit: CAPTURE_QUEUE_LIMIT + CAPTURE_QUEUE_RESERVE,
+});
+assert.equal(withReserve.length, CAPTURE_QUEUE_LIMIT + CAPTURE_QUEUE_RESERVE);
 
 console.log("nextCaptures.queue.test.ts ok");
