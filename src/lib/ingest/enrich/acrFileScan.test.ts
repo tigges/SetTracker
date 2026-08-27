@@ -5,6 +5,7 @@ import {
   isHeldFileScanTarget,
   isFingerprintOnlyFileScanTarget,
   parseScanHits,
+  parseScanResults,
   youtubeFileScanQueue,
   youtubeVideoIdFromFsUri,
   youtubeWatchUrl,
@@ -81,6 +82,11 @@ const file = {
 };
 const hits = parseScanHits(file, 55);
 assert.equal(hits.length, 2, "score-40 hit filtered out");
+const scanned = parseScanResults(file, 55);
+assert.equal(scanned.hits.length, 2);
+assert.equal(scanned.partials.length, 1);
+assert.equal(scanned.partials[0]!.hit.title, "my ex called");
+assert.equal(scanned.partials[0]!.hit.score, 40);
 // sorted by offset
 assert.equal(hits[0]!.offsetSec, 0);
 assert.equal(hits[0]!.hit.title, "Millones");

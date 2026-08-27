@@ -16,6 +16,10 @@ export type EnrichIdentifySnapshot = {
   probed: number;
   identified: number;
   unresolved: number;
+  partial?: number;
+  missed?: number;
+  variables?: string;
+  hitRate?: string;
   clipFails: number;
   youtubeBotWalls: number;
   youtubeSkipped: number;
@@ -27,6 +31,10 @@ export type EnrichFileScanSnapshot = {
   submitted: number;
   ready: number;
   identified: number;
+  partial?: number;
+  missed?: number;
+  variables?: string;
+  hitRate?: string;
   skipped: string;
 };
 

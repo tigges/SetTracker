@@ -421,6 +421,29 @@ export default async function StatsPage() {
           jobs first, leftovers on you
         </span>
       </div>
+      <div className="mb-3 grid gap-2 sm:grid-cols-2">
+        <div className="rounded-lg border border-teal/30 bg-teal/5 px-2.5 py-2">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-teal">
+            Automated IDs
+          </p>
+          <p className="mt-1 text-[12px] leading-snug text-ink">
+            Catalog enrich Identify + File Scan write artist, title, ISRC,
+            score, and offset. Weak or empty results park as grey misses so
+            the same clip is not retraced. Cue parser apply and track-id
+            fill-null run on the same workflow.
+          </p>
+        </div>
+        <div className="rounded-lg border border-amber/30 bg-amber/5 px-2.5 py-2">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-amber">
+            Manual IDs
+          </p>
+          <p className="mt-1 text-[12px] leading-snug text-ink">
+            Capture 1001, Suggest ID on a set page, wire official playbacks,
+            and entity-complete pins. LLM handle research still needs{" "}
+            <span className="mono">Accept spend</span>.
+          </p>
+        </div>
+      </div>
       <p className="mb-2 text-[11px] leading-snug text-muted2">
         This page is a static export — it cannot start a run. Open a workflow,
         then <span className="mono">Run workflow</span>:{" "}
@@ -437,7 +460,7 @@ export default async function StatsPage() {
         >
           Catalog enrich
         </a>{" "}
-        adds fingerprint cues — needs <span className="mono">Accept ACR spend</span>.{" "}
+        runs ACR Identify + File Scan on a standing budget (no per-run Accept).{" "}
         <a
           href={workflowRunUrl("catalog-llm-research.yml")}
           className="text-brand underline decoration-dotted underline-offset-2"

@@ -106,7 +106,7 @@ export function parseWeakFingerprintHint(
   for (const part of parts) {
     if (!part) continue;
     const m = part.match(
-      /weak score\s+\d+\s*:\s*(.+?)\s+[-–—]\s+(.+)$/i,
+      /weak score\s+\d+\s*:\s*(.+?)\s+[-–—]\s+(.+?)(?:\s*[·|]\s*ISRC\s+\S+)?$/i,
     );
     if (!m) continue;
     const artist = m[1]!.replace(/\s+/g, " ").trim();

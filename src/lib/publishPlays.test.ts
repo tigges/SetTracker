@@ -36,6 +36,12 @@ describe("weak hint parse", () => {
       "weak score 48: Amelie Lens - Exhale",
     );
     assert.deepEqual(hint, { artist: "Amelie Lens", title: "Exhale" });
+    assert.deepEqual(
+      parseWeakFingerprintHint(
+        "acr-miss @ 12:00: weak score 48: Amelie Lens - Exhale · ISRC BE6F51700012",
+      ),
+      { artist: "Amelie Lens", title: "Exhale" },
+    );
   });
 
   it("ignores vendor miss text without a name", () => {

@@ -153,6 +153,13 @@ Identify 20×12 + File Scan 16, no thumbs/LLM; `data/enrich-request`), `smoke`
 (4×5). Each expensive step times out and checkpoints the DB so a 6h GitHub
 cancel cannot throw away Identify hits. Do not start deep and enrich at the same time.
 
+**Automated IDs** (Catalog enrich, standing budget): Identify + File Scan
+(artist, title, ISRC, score, offset), cue parser apply, track-id fill-null.
+Weak or empty probes park those fields so the same clip is not retraced. Each
+run prints variables, probe count, and hit rate. **Manual IDs:** Capture 1001,
+Suggest ID, wire official playbacks, entity-complete pins. LLM handles still
+need Accept spend.
+
 ### ACRCloud fingerprint enrich
 
 `npm run enrich:fingerprint` samples SoundCloud / hearthis playback and
@@ -165,7 +172,7 @@ the same way. Writes `Played` rows with `provenance: fingerprint` into
 | Env | Effect |
 | --- | --- |
 | `ACRCLOUD_ENABLED=1` | Hard gate (no network without this) |
-| `ACRCLOUD_CONFIRM_SPEND=1` | **Required per run**, covers ACR Identify + File Scan + AudD recognize. Without it the pass prints the cost estimate and sends nothing |
+| `ACRCLOUD_CONFIRM_SPEND=1` | Required for a local CLI run (Identify + File Scan + AudD). Catalog enrich sets this automatically — no per-run Accept. Without it the pass prints the estimate and sends nothing |
 | `ACR_USD_PER_AUDD_LOW` / `_HIGH` | Override the AudD per-clip estimate (default ≈ $0.003–$0.008) |
 | `ACR_USD_PER_IDENTIFY_LOW` / `_HIGH` | Override the per-clip estimate (default ≈ $0.002–$0.006) |
 | `ACR_USD_PER_FS_HOUR_LOW` / `_HIGH` | Override the File Scan per-audio-hour estimate (default ≈ $0.05–$0.15) |
@@ -188,8 +195,9 @@ returns every matched track with an offset. `npm run enrich:filescan` (and a
 step in `catalog-enrich.yml`) scans a **YouTube-only** sparse queue this way
 (Identify keeps SoundCloud/hearthis first; File Scanning does not share that
 ranking). Held official playbacks on the fan-clip watch list are skipped. Already-scanned
-YouTube files in the ACR container are reused (no re-submit). Identify writes
-grey `acr-miss` rows so the same offset is not probed again. Writes the same
+YouTube files in the ACR container are reused (no re-submit). Identify and
+File Scan write grey `acr-miss` rows (including artist / title / ISRC on weak
+hits) so the same offset is not probed again. Writes the same
 `provenance: fingerprint` gap-fill rows. No-op unless configured.
 
 | Env | Effect |

@@ -1,6 +1,11 @@
 import type { ActionsStatusFile } from "@/lib/actionsStatus";
 import { enrichOutcomeLabel } from "@/lib/actionsStatus";
 import { StatsLiveRuns } from "@/components/StatsLiveRuns";
+import {
+  ACR_IDENTIFY_VARIABLES_LABEL,
+  formatAcrHitRate,
+  formatAcrTrackMessage,
+} from "@/lib/ingest/enrich/acrProbeRecord";
 import type { EnrichRunReport } from "@/lib/ingest/enrich/enrichRunReport";
 import { cookieRefreshHint } from "@/lib/ingest/enrich/youtubeCookies";
 
@@ -38,6 +43,28 @@ export function StatsEnrichCard({
   const fs = report?.filescan;
   const cookies = report?.cookies;
   const outcome = enrichOutcomeLabel(report);
+  const idRate = id
+    ? (id.hitRate ?? formatAcrHitRate(id.identified, id.probed))
+    : null;
+  const fsRate = fs
+    ? (fs.hitRate ?? formatAcrHitRate(fs.identified, fs.ready))
+    : null;
+  const idTrack =
+    id &&
+    formatAcrTrackMessage({
+      probed: id.probed,
+      identified: id.identified,
+      partial: id.partial ?? 0,
+      missed: id.missed ?? Math.max(0, (id.unresolved ?? 0) - (id.partial ?? 0)),
+    });
+  const fsTrack =
+    fs &&
+    formatAcrTrackMessage({
+      probed: fs.ready,
+      identified: fs.identified,
+      partial: fs.partial ?? 0,
+      missed: fs.missed ?? 0,
+    });
   const outcomeTone =
     report?.outcome === "ok" ? "ok" : report?.outcome === "partial" ? "warn" : "muted";
 
@@ -47,8 +74,9 @@ export function StatsEnrichCard({
         <div>
           <h2 className="text-[14px] font-bold tracking-tight">Last enrich</h2>
           <p className="mt-0.5 text-[11px] text-muted2">
-            Identify + File Scan from the cached catalog, as of the last Pages
-            ship. The workflow rows below refresh live from GitHub.
+            Automated Identify + File Scan from the cached catalog, as of the
+            last Pages ship. Tracks {id?.variables ?? ACR_IDENTIFY_VARIABLES_LABEL}.
+            The workflow rows below refresh live from GitHub.
           </p>
         </div>
         <Tone label={outcome} tone={outcomeTone} />
@@ -60,7 +88,7 @@ export function StatsEnrichCard({
             Identify hits
           </dt>
           <dd className="mono font-semibold tabular-nums">
-            {id ? id.identified : "—"}
+            {id ? `${id.identified}${idRate && idRate !== "n/a" ? ` · ${idRate}` : ""}` : "—"}
           </dd>
         </div>
         <div>
@@ -68,7 +96,7 @@ export function StatsEnrichCard({
             File Scan hits
           </dt>
           <dd className="mono font-semibold tabular-nums">
-            {fs ? fs.identified : "—"}
+            {fs ? `${fs.identified}${fsRate && fsRate !== "n/a" ? ` · ${fsRate}` : ""}` : "—"}
           </dd>
         </div>
         <div>
@@ -91,7 +119,7 @@ export function StatsEnrichCard({
 
       <p className="mono mt-2 text-[11px] text-muted2">
         {report
-          ? `updated ${fmtWhen(report.updatedAt)} · SC/hearthis probes ${id?.probed ?? 0} · clip fails ${id?.clipFails ?? 0} · FS submitted ${fs?.submitted ?? 0}`
+          ? `updated ${fmtWhen(report.updatedAt)} · ${idTrack ?? "Identify idle"} · FS ${fsTrack ?? "idle"}`
           : "No enrich snapshot in this catalog yet. Next Catalog enrich writes one into the DB cache."}
       </p>
 

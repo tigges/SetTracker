@@ -160,6 +160,21 @@ assert.equal(
   true,
   "unresolved cues still worth a resolve pass",
 );
+assert.equal(
+  hasRemainingAcrWork({
+    durationSec: 120,
+    plays: [
+      { timestamp: 40, provenance: "fingerprint", idStatus: "unparsed" },
+      { timestamp: 80, provenance: "fingerprint", idStatus: "identified" },
+    ],
+    unresolvedCount: 2,
+    unresolvedNeedProbe: 0,
+    stepSec: 90,
+    sampleSec: 12,
+  }),
+  false,
+  "already-parked unresolved IDs do not retrace a blocked set",
+);
 
 // --- demand proxy (DJ Mag Top 100) ---
 const top100 = loadDjMagTop100RankBySlug();

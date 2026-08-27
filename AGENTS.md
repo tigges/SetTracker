@@ -373,18 +373,21 @@ unless asked. Never write Relive for HARD / Insomniac / Nameless / Ultra.
   checkpoint (`setradar-db-<run>-1identify` / `-2filescan` / exact run id).
   GitHub hosted jobs die at 6h and otherwise skip Save/Pages — do not pack
   thumbs + a 40×20 Identify loop + File Scan + 400 ISRCs into one uncapped job.
-  **Disclose, then confirm — audio ID is billable.** Every pass prints what is
- sent (12s audio clips for Identify / AudD; the YouTube URL for File Scan),
- what is written (`provenance: "fingerprint"` gap-fill only), and a USD range,
- then sends nothing unless `ACRCLOUD_CONFIRM_SPEND=1` for that run.
- `acrIdentify()`, `submitPlatformScan()` and the AudD recognize calls throw
- without both, so no call site can bill quietly. **AudD is tried before ACR
- on each clip** when `AUDD_ANALYZE=1` + `AUDD_API_TOKEN`, so it discloses its
- own estimate (`ACR_USD_PER_AUDD_LOW/HIGH`). One confirm covers all three. Catalog enrich has an **Accept ACR spend** checkbox and sits behind
- the `acr-spend` environment (add a required reviewer) — cron and
- `data/enrich-request` pushes print the estimate and stop. Rates are rounded
- operator guesses; set `ACR_USD_PER_IDENTIFY_LOW/HIGH` and
- `ACR_USD_PER_FS_HOUR_LOW/HIGH` to your real plan rate.
+  **Automated IDs** (Catalog enrich, standing budget — no per-run Accept):
+  Identify + File Scan write artist / title / ISRC / score / offset; first-party
+  cue parser apply; track-id ISRC/Beatport fill-null. Weak or empty probes park
+  those fields as grey `acr-miss` so the same offset is not retraced. Every pass
+  prints the variables, probe count, hits, partials, no-match, and hit rate.
+  **Manual IDs:** Capture 1001, Suggest ID / `resolutions.json`, wire official
+  playbacks, entity-complete pins. LLM handle research still needs Accept spend.
+  Local CLI still requires `ACRCLOUD_CONFIRM_SPEND=1`. `acrIdentify()`,
+  `submitPlatformScan()` and AudD throw unless `announceAcrPlan()` ran for that
+  process. Catalog enrich sets confirm=1 for cron, `data/enrich-request` pushes,
+  and dispatch — it no longer uses the `acr-spend` environment. Diagnose keeps
+  that environment. **AudD is tried before ACR on each clip** when
+  `AUDD_ANALYZE=1` + `AUDD_API_TOKEN`. Rates are rounded operator guesses; set
+  `ACR_USD_PER_IDENTIFY_LOW/HIGH` and `ACR_USD_PER_FS_HOUR_LOW/HIGH` to your
+  real plan rate.
   Samples SC/hearthis `playbackUrl`
  via ffmpeg → ACRCloud Identify (`ACRCLOUD_*` secrets + `ACRCLOUD_ENABLED=1`).
   YouTube festival playbacks (Top20 / festival priority by default) use `yt-dlp
@@ -423,7 +426,8 @@ unless asked. Never write Relive for HARD / Insomniac / Nameless / Ultra.
   offsets, bypassing the CI bot wall. Uses a YouTube-only sparse queue (does
   not share Identify's SC-first ranking) and skips held official playbacks. Reuses files
   already in the ACR container (no second POST of the same YouTube URL).
-  Identify records grey `acr-miss` rows so the same offset is not re-probed.
+  Identify and File Scan record grey `acr-miss` rows (names / ISRC on weak
+  hits) so the same offset is not re-probed.
   Writes the
   same `provenance: "fingerprint"` gap-fill rows (never overwrites source).
   Operator secrets: `ACRCLOUD_FS_TOKEN`

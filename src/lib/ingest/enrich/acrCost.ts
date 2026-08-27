@@ -4,9 +4,11 @@
  *
  * These run in the program (not by hand), but no billable request is sent
  * until this plan has been printed for the current process AND spend is
- * confirmed for that run. `acrIdentify()`, `submitPlatformScan()` and the
- * AudD recognize calls throw otherwise, so a new call site cannot quietly
- * bill. One confirm (`ACRCLOUD_CONFIRM_SPEND`) covers all three.
+ * confirmed. Catalog enrich sets `ACRCLOUD_CONFIRM_SPEND=1` on a standing
+ * budget (cron / enrich-request / dispatch). Local CLI still needs the
+ * env flag. `acrIdentify()`, `submitPlatformScan()` and the AudD recognize
+ * calls throw otherwise, so a new call site cannot quietly bill. One
+ * confirm covers all three.
  *
  * Pure module (no fs) so /stats can show the same wording.
  *
@@ -171,20 +173,20 @@ const AUDD_DISCLOSURE = {
 
 const IDENTIFY_DISCLOSURE = {
   researches:
-    "Which tracks play at sampled offsets inside a set we already host, so unnamed cues get a title",
+    "artist, title, ISRC, score, offset at sampled clips inside a set we already host",
   sends:
     "Short audio clips (default 12s) cut from the official SoundCloud / hearthis / YouTube playback we already store",
   writes:
-    "Gap-fill Played rows with provenance \"fingerprint\" only; never overwrites sourceUrl / sourceName or a 1001tl / community row",
+    "Gap-fill Played rows with provenance \"fingerprint\" only; weak/no hits park those fields as grey acr-miss so the same offset is not retraced; never overwrites sourceUrl / sourceName or a 1001tl / community row",
 };
 
 const FILESCAN_DISCLOSURE = {
   researches:
-    "Full-length track detection for a YouTube set, returned as timestamped matches",
+    "artist, title, ISRC, score, offset for a full-length YouTube set",
   sends:
     "The YouTube URL itself — ACRCloud downloads and fingerprints it server-side (no clip upload, no yt-dlp)",
   writes:
-    "Same provenance \"fingerprint\" gap-fill rows; held official playbacks are skipped",
+    "Same provenance \"fingerprint\" gap-fill rows; below-floor hits park as grey acr-miss; held official playbacks are skipped",
 };
 
 export function acrDisclosure(mode: AcrSpendMode) {

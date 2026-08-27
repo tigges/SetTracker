@@ -9,6 +9,11 @@ import { appendFileSync } from "node:fs";
 import { PrismaClient } from "@prisma/client";
 import { enrichSparseSetsWithAcrCloud } from "../src/lib/ingest/enrich/acrcloud";
 import {
+  ACR_IDENTIFY_VARIABLES_LABEL,
+  formatAcrHitRate,
+  formatAcrTrackMessage,
+} from "../src/lib/ingest/enrich/acrProbeRecord";
+import {
   githubEnrichContext,
   inspectCookiesFromEnv,
   mergeEnrichRunReport,
@@ -22,6 +27,8 @@ function writeStepSummary(stats: {
   probed: number;
   identified: number;
   unresolved: number;
+  partial: number;
+  missed: number;
   skipped: string;
   clipFails: number;
   setsProbed: number;
@@ -34,13 +41,19 @@ function writeStepSummary(stats: {
     "",
     "## ACRCloud Identify totals",
     "",
+    formatAcrTrackMessage(stats),
+    "",
     `| Field | Value |`,
     `| --- | --- |`,
+    `| tracks | ${ACR_IDENTIFY_VARIABLES_LABEL} |`,
     `| enabled | ${stats.enabled} |`,
     `| candidates | ${stats.candidates} |`,
     `| sets probed | ${stats.setsProbed} |`,
     `| ACR probes | ${stats.probed} |`,
     `| identified | ${stats.identified} |`,
+    `| hit rate | ${formatAcrHitRate(stats.identified, stats.probed)} |`,
+    `| partial parked | ${stats.partial} |`,
+    `| no-match | ${stats.missed} |`,
     `| unresolved / weak | ${stats.unresolved} |`,
     `| clip fails | ${stats.clipFails} |`,
     `| YouTube bot-walls | ${stats.youtubeBotWalls} |`,
@@ -71,7 +84,7 @@ async function main() {
     }
   } else if (stats.enabled) {
     console.log(
-      `[acrcloud] identified=${stats.identified} unresolved=${stats.unresolved} probed=${stats.probed} ` +
+      `[acrcloud] ${formatAcrTrackMessage(stats)} ` +
         `clipFails=${stats.clipFails} ytBotWalls=${stats.youtubeBotWalls} ytSkipped=${stats.youtubeSkipped}`,
     );
     if (stats.youtubeBotWalls > 0) {
@@ -80,7 +93,7 @@ async function main() {
       );
     } else {
       console.log(
-        `::notice title=ACR Identify::done sets=${stats.setsProbed} hits=${stats.identified} probed=${stats.probed} clipFails=${stats.clipFails} ytSkipped=${stats.youtubeSkipped}`,
+        `::notice title=ACR Identify::${formatAcrTrackMessage(stats)} sets=${stats.setsProbed} clipFails=${stats.clipFails} ytSkipped=${stats.youtubeSkipped}`,
       );
     }
   }
@@ -96,6 +109,10 @@ async function main() {
         probed: stats.probed,
         identified: stats.identified,
         unresolved: stats.unresolved,
+        partial: stats.partial,
+        missed: stats.missed,
+        variables: ACR_IDENTIFY_VARIABLES_LABEL,
+        hitRate: formatAcrHitRate(stats.identified, stats.probed),
         clipFails: stats.clipFails,
         youtubeBotWalls: stats.youtubeBotWalls,
         youtubeSkipped: stats.youtubeSkipped,
