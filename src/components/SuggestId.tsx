@@ -1,13 +1,25 @@
 "use client";
 
 import { useState } from "react";
+import {
+  buildSuggestIdSnippet,
+  suggestIdSnippetText,
+} from "@/lib/suggestIdSnippet";
 
 /**
- * Community ID wedge for the static site:
- * copy a resolutions.json snippet (no GitHub account required),
- * or email it. Optional GitHub issue for maintainers who already have one.
+ * Community ID wedge for the static site: open a prefilled GitHub issue, or copy
+ * the resolutions.json snippet for anyone without an account.
  *
- * Applied resolutions are merged at ingest/build time (see applyResolutions).
+ * No email option. `mailto:` with no recipient just opens a blank compose window,
+ * so it looked like a working channel while sending nothing anywhere. Restore it
+ * only with a real inbox behind it.
+ *
+ * The panel is position-fixed on purpose: the tracklist card is overflow-hidden,
+ * which clipped an absolutely-positioned dropdown on rows near the bottom of a
+ * long playlist — on mobile the actions were unreachable.
+ *
+ * Applied resolutions are merged at build time (see applyResolutions), which
+ * matches on `timestamp` because set pages renumber `position` for display.
  */
 export function SuggestIdButton({
   setSlug,
@@ -36,27 +48,11 @@ export function SuggestIdButton({
   const [copied, setCopied] = useState(false);
 
   const ready = Boolean(artist.trim() && title.trim());
-  const snippet = {
-    setSlug,
-    position,
-    trackTitle: title.trim(),
-    artistName: artist.trim(),
-    suggestedBy: "suggest-id",
-  };
-  const snippetText = JSON.stringify(snippet, null, 2);
-  const mailBody = [
-    `Set: ${setSlug}`,
-    `Position: ${position}`,
-    `Timestamp: ${timestamp}s`,
-    `Current row: ${currentLabel}`,
-    `Suggested: ${artist.trim()} – ${title.trim()}`,
-    ``,
-    `resolutions.json entry:`,
-    snippetText,
-  ].join("\n");
-  const mailUrl = `mailto:?subject=${encodeURIComponent(
-    `setradar ID: ${setSlug} #${position}`,
-  )}&body=${encodeURIComponent(mailBody)}`;
+  // timestamp is what applyResolutions matches on, so the copied snippet is
+  // committable as-is; position alone can address the wrong cue.
+  const snippetText = suggestIdSnippetText(
+    buildSuggestIdSnippet({ setSlug, position, timestamp, artist, title }),
+  );
 
   const issueUrl = (() => {
     const q = new URLSearchParams();
@@ -110,7 +106,18 @@ export function SuggestIdButton({
         {actionLabel}
       </button>
       {open && (
-        <div className="absolute right-0 z-20 mt-1 w-64 rounded-lg border border-line bg-panel p-3 shadow-lg">
+        <>
+          {/* Tap-outside close. Also stops the row's play-from-cue handler. */}
+          <button
+            type="button"
+            aria-label="Close ID suggestion"
+            onClick={() => setOpen(false)}
+            className="fixed inset-0 z-40 cursor-default bg-bg/70"
+          />
+          {/* Fixed, not absolute: the tracklist card clips overflow, which hid
+              this panel on rows near the bottom. Bottom sheet on mobile so the
+              actions stay in reach; small centred panel from sm up. */}
+          <div className="fixed inset-x-3 bottom-3 z-50 rounded-lg border border-line bg-panel p-2.5 shadow-lg sm:inset-x-auto sm:bottom-auto sm:left-1/2 sm:top-1/2 sm:w-56 sm:-translate-x-1/2 sm:-translate-y-1/2">
           <p className="mb-2 text-[11px] text-muted">
             {confirmHint
               ? "Confirm this suggested release for "
@@ -135,9 +142,13 @@ export function SuggestIdButton({
               placeholder="Rampage"
             />
           </label>
+          {/* Both actions are top level — the old nested "Advanced" fold pushed
+              them below the clip and made them untappable on mobile. */}
           <div className="flex flex-col gap-1.5">
             <a
-              href={ready ? mailUrl : undefined}
+              href={ready ? issueUrl : undefined}
+              target="_blank"
+              rel="noreferrer"
               aria-disabled={!ready}
               className={`rounded-md px-2 py-1 text-center text-[11px] font-semibold ${
                 ready
@@ -148,37 +159,20 @@ export function SuggestIdButton({
                 if (!ready) e.preventDefault();
               }}
             >
-              Copy email
+              Open GitHub issue
             </a>
-            <details className="text-[11px] text-muted">
-              <summary className="cursor-pointer hover:text-ink">Advanced</summary>
-              <div className="mt-1.5 flex flex-col gap-1.5">
-                <button
-                  type="button"
-                  disabled={!ready}
-                  onClick={() => void copySnippet()}
-                  className={`rounded-md border border-line px-2 py-1 text-center ${
-                    ready ? "text-ink hover:border-brand" : "cursor-not-allowed text-muted2"
-                  }`}
-                >
-                  {copied ? "Copied JSON" : "Copy JSON"}
-                </button>
-                <a
-                  href={ready ? issueUrl : undefined}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-disabled={!ready}
-                  className={`rounded-md border border-line px-2 py-1 text-center ${
-                    ready ? "text-ink hover:border-brand" : "pointer-events-none text-muted2"
-                  }`}
-                  onClick={(e) => {
-                    if (!ready) e.preventDefault();
-                  }}
-                >
-                  Open GitHub issue
-                </a>
-              </div>
-            </details>
+            <button
+              type="button"
+              disabled={!ready}
+              onClick={() => void copySnippet()}
+              className={`rounded-md border border-line px-2 py-1 text-center text-[11px] ${
+                ready
+                  ? "text-ink hover:border-brand"
+                  : "cursor-not-allowed text-muted2"
+              }`}
+            >
+              {copied ? "Copied JSON" : "Copy JSON"}
+            </button>
             <button
               type="button"
               className="text-[10px] text-muted hover:text-ink"
@@ -187,7 +181,8 @@ export function SuggestIdButton({
               Close
             </button>
           </div>
-        </div>
+          </div>
+        </>
       )}
     </div>
   );

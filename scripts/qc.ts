@@ -136,6 +136,12 @@ async function main() {
         "src/lib/ingest/resolutions.test.ts",
       ]),
     );
+    steps.push(
+      runStep("suggest-id-snippet-test", "npx", [
+        "tsx",
+        "src/lib/suggestIdSnippet.test.ts",
+      ]),
+    );
   }
 
   const errors = staticQc.issues.filter((i) => i.severity === "error");
