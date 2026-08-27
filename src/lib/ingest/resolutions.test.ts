@@ -30,6 +30,14 @@ for (const row of rows) {
   );
   assert.ok(row.trackTitle?.trim(), `row ${row.setSlug} needs a trackTitle`);
   assert.ok(row.artistName?.trim(), `row ${row.setSlug} needs an artistName`);
+  // Set pages renumber plays for display (numberPublished), so the position in
+  // a Suggest ID issue is an index, not Played.position. Position-only matching
+  // does not just miss — it can land on a different real cue and mislabel it.
+  // Every committed row carries the timestamp the issue printed.
+  assert.ok(
+    Number.isInteger(row.timestamp) && (row.timestamp as number) >= 0,
+    `row ${row.setSlug}#${row.position} needs the issue's timestamp — position alone can resolve the wrong cue`,
+  );
 }
 
 // One resolution per play. Two rows for the same position would leave the second

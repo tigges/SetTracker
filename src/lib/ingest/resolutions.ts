@@ -18,6 +18,15 @@ export type ResolutionRow = {
   artistName: string;
   suggestedBy?: string;
   label?: string;
+  /**
+   * Cue offset in seconds, as printed in the Suggest ID issue.
+   *
+   * Prefer it over `position`. Set pages renumber plays for display
+   * (numberPublished: talk rows become 0, the rest re-index from 1), so the
+   * number a suggester sees is not Played.position unless nothing was collapsed
+   * and the set has no talk rows. Timestamps are not rewritten, so they match.
+   */
+  timestamp?: number;
 };
 
 export type ResolutionStats = {
@@ -59,10 +68,19 @@ export async function applyResolutions(
       stats.missing += 1;
       continue;
     }
-    const play = await prisma.played.findFirst({
-      where: { setId: set.id, position: row.position },
-      include: { idTrack: true },
-    });
+    // Timestamp first: it survives display renumbering, position does not.
+    let play = Number.isFinite(row.timestamp)
+      ? await prisma.played.findFirst({
+          where: { setId: set.id, timestamp: row.timestamp },
+          include: { idTrack: true },
+        })
+      : null;
+    if (!play) {
+      play = await prisma.played.findFirst({
+        where: { setId: set.id, position: row.position },
+        include: { idTrack: true },
+      });
+    }
     if (!play) {
       stats.missing += 1;
       continue;
