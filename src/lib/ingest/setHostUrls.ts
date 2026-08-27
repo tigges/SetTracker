@@ -113,6 +113,19 @@ export const SET_HOST_PINS: Record<string, SetHostUrls> = {
     mixcloudUrl:
       "https://www.mixcloud.com/JorisVoorn/joris-voorn-presents-spectrum-radio-484/",
   },
+  // Spectrum Radio 486 — Yard Stage, Balance Croatia. All three hosts
+  // verified 200 on 2026-08-27. Same pin reason as 484: joris-voorn is not
+  // a curated SoundCloud account.
+  "yt-wlePVzVaMOY": {
+    soundcloudUrl: "https://soundcloud.com/joris-voorn/spectrum-radio-486",
+    mixcloudUrl:
+      "https://www.mixcloud.com/JorisVoorn/joris-voorn-presents-spectrum-radio-486/",
+  },
+  "sc-joris-voorn-spectrum-radio-486": {
+    soundcloudUrl: "https://soundcloud.com/joris-voorn/spectrum-radio-486",
+    mixcloudUrl:
+      "https://www.mixcloud.com/JorisVoorn/joris-voorn-presents-spectrum-radio-486/",
+  },
 };
 
 export function soundcloudSlugFromUrl(url: string): string | null {

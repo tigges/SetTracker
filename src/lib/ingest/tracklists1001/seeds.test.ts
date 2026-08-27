@@ -193,6 +193,7 @@ import {
   TL_CLOONEE_NEONGARDEN_EDC_ORLANDO_2025,
   TL_ZEDD_ULTRA_MIAMI_MAINSTAGE_2025,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
+  TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
   isWiredTracklistSlug,
   isSecondaryPlaybackSlug,
@@ -4923,6 +4924,43 @@ for (let i = 1; i < spectrum484.length; i++) {
 assert.notEqual(
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026,
+);
+
+// Spectrum Radio 486 — Balance Croatia. Same three-host pattern as 484.
+assertSeedClocks(TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026);
+assert.equal(TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026.length, 18);
+for (const slug of ["yt-wlePVzVaMOY", "sc-joris-voorn-spectrum-radio-486"]) {
+  assert.equal(
+    TRACKLIST_1001_BY_SOURCE_SLUG[slug],
+    TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
+    `Spectrum 486 must share one seed object on ${slug}`,
+  );
+}
+const spectrum486 = tracklist1001RowsToPlays(
+  TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
+);
+assert.equal(spectrum486.length, 18);
+assert.equal(spectrum486[0]?.provenance, "1001tl");
+assert.equal(spectrum486[0]?.timestamp, 48);
+assert.equal(spectrum486[0]?.trackTitle, "Walk Thru Ruins (Melatonin Version)");
+assert.equal(
+  spectrum486[17]?.trackTitle,
+  "So Get Up (The End Of The Earth Acappella)",
+);
+assert.equal(spectrum486[17]?.timestamp, 59 * 60 + 30);
+for (let i = 1; i < spectrum486.length; i++) {
+  assert.ok(
+    (spectrum486[i]!.timestamp ?? 0) > (spectrum486[i - 1]!.timestamp ?? 0),
+    `Spectrum 486 clocks must increase at index ${i}`,
+  );
+}
+assert.notEqual(
+  TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
+  TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026,
+);
+assert.notEqual(
+  TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
+  TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
 );
 assert.equal(
   TRACKLIST_1001_BY_SOURCE_SLUG["yt-yTRvLrtsM9I"],

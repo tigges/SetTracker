@@ -73,6 +73,7 @@ import {
   TL_ZEDD_ULTRA_MIAMI_MAINSTAGE_2025,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026,
+  TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
   TL_MISS_MONIQUE_IBIZA_SUNSET_YACHT_2026,
   TL_NICKY_ROMERO_PROTOCOL_RADIO_731,
   TL_KOROLOVA_CAPTIVE_SOUL_098_2026,
@@ -1336,6 +1337,27 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/2vwh8lq1/joris-voorn-spectrum-radio-485-exit-veveri-castle-brno-czech-republic-2026-08-12.html",
     tracklist1001: TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026,
+  },
+  {
+    // Official Spectrum Radio 486 (channel "Spectrum"); timed 1001 capture.
+    // Recorded live at Balance Croatia's Yard Stage. Official SC and Mixcloud
+    // mirrors are pinned in SET_HOST_PINS — joris-voorn is not a curated SC
+    // account, so they cannot be derived from a track seed.
+    video: "https://www.youtube.com/watch?v=wlePVzVaMOY",
+    primaryArtist: dj("Joris Voorn", {
+      accent: "#2ec4b6",
+      homeCity: "Rotterdam, NL",
+    }),
+    genre: "Tech House",
+    type: "radio",
+    // Artists lead the title. artistsForSet splits before the first "|";
+    // a "Spectrum Radio 486 Joris Voorn" prefix would mint a junk DJ.
+    title: "Joris Voorn | Spectrum Radio 486, Balance Croatia 2026",
+    seriesName: "Spectrum Radio",
+    eventName: "Balance Croatia Festival",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/17rlug81/joris-voorn-spectrum-radio-486-yard-stage-balance-croatia-festival-croatia-2026-08-10-2026-08-19.html",
+    tracklist1001: TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
   },
   {
     // Official Group Therapy 690; timed 1001 capture.
