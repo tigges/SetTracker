@@ -1,11 +1,12 @@
 [
   {
     "setSlug": "sc-jamie-jones-hot-rbot-radio-254",
-    "position": 6,
+    "position": 8,
     "trackTitle": "No Panties",
     "artistName": "Fallon",
     "label": "Black Book Records",
-    "suggestedBy": "suggest-id"
+    "suggestedBy": "suggest-id",
+    "timestamp": 1972
   },
   {
     "setSlug": "sc-jamie-jones-hot-rbot-radio-254",
@@ -13,6 +14,7 @@
     "trackTitle": "GDM",
     "artistName": "Adne",
     "label": "DPE",
-    "suggestedBy": "suggest-id"
+    "suggestedBy": "suggest-id",
+    "timestamp": 2204
   }
 ]

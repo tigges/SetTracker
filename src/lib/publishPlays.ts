@@ -66,6 +66,12 @@ export type PublishPlayMeta = {
 export type PublishablePlay = {
   id: string;
   position: number;
+  /**
+   * Played.position as stored. numberPublished rewrites `position` for display,
+   * so anything that has to address the row in the database — Suggest ID, and
+   * therefore data/resolutions.json — must carry this instead.
+   */
+  sourcePosition?: number;
   timestamp: number;
   idStatus: string;
   provenance: string;
@@ -352,9 +358,12 @@ function numberPublished<T extends PublishablePlay>(
 ): PublishedPlay<T>[] {
   let n = 0;
   return plays.map((p) => {
-    if (isTalkPlay(p)) return { ...p, position: 0 };
+    // Keep the stored position before overwriting it, so callers that address
+    // the DB row (Suggest ID) are not handed a display index.
+    const sourcePosition = p.sourcePosition ?? p.position;
+    if (isTalkPlay(p)) return { ...p, sourcePosition, position: 0 };
     n += 1;
-    return { ...p, position: n };
+    return { ...p, sourcePosition, position: n };
   });
 }
 

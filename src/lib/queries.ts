@@ -381,6 +381,9 @@ export async function getSetBySlug(slug: string) {
     return {
       id: p.id,
       position: p.position,
+      // Survives numberPublished's display re-index; Suggest ID needs the
+      // stored position to address the row in the database.
+      sourcePosition: p.position,
       timestamp: p.timestamp,
       idStatus: p.idStatus,
       provenance: p.provenance,

@@ -86,6 +86,15 @@ unless asked. Never write Relive for HARD / Insomniac / Nameless / Ultra.
   that is a producer call, not an agent one. A wrong `setSlug` or `position`
   counts as `missing` with no error, so `resolutions.test.ts` validates the
   committed file.
+  **The `position` in a Suggest ID issue is a display index, not
+  `Played.position`.** `numberPublished` re-indexes plays for the set page (talk
+  rows become 0, tracks re-number from 1), so the two only agree when nothing was
+  collapsed and the set has no talk rows. Match on the issue's **timestamp**,
+  which is never rewritten; `applyResolutions` tries timestamp first and falls
+  back to position. Position-only matching does not merely miss — it can land on
+  a different real cue and mislabel it while reporting success. `sourcePosition`
+  carries the stored position through publish for Suggest ID; anything else that
+  addresses a play in the DB from page data must use it too.
 - **Curated label slugs are pinned:** `CURATED_LABELS` may override
   `slugify(name)` — "Black Book Records" lives at `blackbook`. Resolve any
   human-written label name through `curatedLabelSlugByName()` first; a bare

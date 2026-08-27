@@ -430,7 +430,7 @@ export function SetTimeline({
                   {talk ? (
                     <SuggestIdButton
                       setSlug={setSlug}
-                      position={p.position}
+                      position={p.sourcePosition ?? p.position}
                       timestamp={p.timestamp}
                       currentLabel={`Talk at ${fmtTimestamp(p.timestamp)}`}
                       actionLabel="This is a track"
@@ -439,7 +439,7 @@ export function SetTimeline({
                     p.idStatus === "unparsed" ? (
                     <SuggestIdButton
                       setSlug={setSlug}
-                      position={p.position}
+                      position={p.sourcePosition ?? p.position}
                       timestamp={p.timestamp}
                       currentLabel={
                         p.artistName
