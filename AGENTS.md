@@ -72,6 +72,41 @@ unless asked. Never write Relive for HARD / Insomniac / Nameless / Ultra.
   hosts, then refresh graduate + playback reports). `--fix` drops junk track-id
   pins. `--full` also runs the QC unit tests. Live DB audits run only when
   the catalog has 200+ sets. Never scrapes Beatport or 1001.
+- **Suggest ID → published:** `/stats`-style **Suggest ID** opens a GitHub issue
+  carrying a ready `data/resolutions.json` snippet. Publishing = commit the rows,
+  merge, deploy. GitHub's "create a branch from issue" placeholder branch is
+  **not** the mechanism — those branches are empty and can be ignored.
+  `applyResolutions` is an **overlay** (it flips existing plays), so it runs in
+  `prisma/verify-urls.ts` on every deploy. Do **not** add `data/resolutions.json`
+  to `CURATED_INGEST_PATHS`: that list is only for paths that introduce *new
+  sets*, and a resolutions-only push used to decide `run=0`, skip the ingest step,
+  and silently publish nothing. One row per play — `applyResolutions` skips a play
+  that is already `identified`/`community_resolved`, so a second suggestion for
+  the same position never lands. Multiple open issues can claim one position;
+  that is a producer call, not an agent one. A wrong `setSlug` or `position`
+  counts as `missing` with no error, so `resolutions.test.ts` validates the
+  committed file.
+- **Curated label slugs are pinned:** `CURATED_LABELS` may override
+  `slugify(name)` — "Black Book Records" lives at `blackbook`. Resolve any
+  human-written label name through `curatedLabelSlugByName()` first; a bare
+  `slugify` mints a second row for the same imprint and splits its releases.
+  `/labels/black-book-records` is an existing duplicate from before that rule.
+- **`artistsForSet` splits the segment before the first `|`.** Put the artists
+  first in a curated title: `"Joris Voorn b2b Cassian | Spectrum Radio 484"`. A
+  show or venue name ahead of a `b2b`/`&` gets read as part of the artist and
+  mints a junk DJ ("Spectrum Radio 484 Joris Voorn"); putting the b2b after the
+  pipe drops the partner instead. Verify the parse before shipping a b2b title.
+- **Verifying the export needs `GITHUB_PAGES=true`.** `output: "export"` is gated
+  on that env var, so plain `npm run build` writes only `.next` and leaves a
+  stale `out/` from the snapshot build. Check exported HTML with
+  `GITHUB_PAGES=true PAGES_BASE_PATH="" npm run build`, or the file you read is
+  hours old.
+- **A push deploy carrying a crawl can be cancelled.** `catalog-deep` →
+  `catalog-enrich` → dispatched Pages runs with `run=0` ("cached catalog, no
+  curated re-poll") and supersedes an in-flight push deploy that decided `run=1`.
+  The published code is then correct while newly curated videos have no set row
+  (404 pages) until the next crawling deploy. After a merge that touches curated
+  sources, check `Decide curated ingest` on the run that actually published.
 - **Capture queue balance:** `buildCaptureQueueFromNeeds` fills in two passes —
   at most `capturePerEventCap(limit)` rows per event (5 at limit 40, floor 3),
   then an uncapped overflow pass for leftover slots. Without it an in-season

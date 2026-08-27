@@ -130,6 +130,12 @@ async function main() {
         "src/lib/ingest/captureLookup.test.ts",
       ]),
     );
+    steps.push(
+      runStep("resolutions-test", "npx", [
+        "tsx",
+        "src/lib/ingest/resolutions.test.ts",
+      ]),
+    );
   }
 
   const errors = staticQc.issues.filter((i) => i.severity === "error");

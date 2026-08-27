@@ -165,6 +165,23 @@ export function curatedLabelSlug(entry: CuratedLabel): string {
   return entry.slug ?? slugify(entry.name);
 }
 
+/**
+ * Canonical slug for a label written out by name, honouring slug overrides.
+ *
+ * Curated entries may pin a shorter slug than slugify(name) — "Black Book
+ * Records" lives at `blackbook`. Anything that resolves a label from a
+ * human-written name must go through here, or slugify mints a second row for
+ * the same imprint (`black-book-records`) that then splits its releases.
+ */
+export function curatedLabelSlugByName(name: string): string | null {
+  const key = name.trim().toLowerCase();
+  if (!key) return null;
+  const hit = CURATED_LABELS.find(
+    (l) => l.name.trim().toLowerCase() === key,
+  );
+  return hit ? curatedLabelSlug(hit) : null;
+}
+
 type LabelClient = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   label: {
