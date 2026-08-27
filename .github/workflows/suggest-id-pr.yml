@@ -1,0 +1,126 @@
+name: Suggest ID review PR
+
+# Suggest ID on the static site opens a GitHub issue with a resolutions.json
+# snippet. This turns that issue into a PR the producer can merge (publish)
+# or close (reject). applyResolutions still runs on Pages verify-urls.
+#
+# One PR per issue so a single suggestion can be rejected without blocking
+# others. Duplicate clocks and junk snippets get a comment, no PR.
+on:
+  issues:
+    types: [opened]
+  workflow_dispatch:
+    inputs:
+      issue:
+        description: "Issue number to turn into a review PR"
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+concurrency:
+  group: suggest-id-pr
+  cancel-in-progress: false
+
+jobs:
+  pr:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Load issue
+        id: issue
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          EVENT_ISSUE: ${{ github.event.issue.number }}
+          INPUT_ISSUE: ${{ github.event.inputs.issue }}
+        run: |
+          NUM="${EVENT_ISSUE:-$INPUT_ISSUE}"
+          if [ -z "$NUM" ]; then
+            echo "No issue number" >&2
+            exit 1
+          fi
+          gh issue view "$NUM" --json number,title,body,url > /tmp/suggest-id-issue.json
+          jq -r .body /tmp/suggest-id-issue.json > /tmp/suggest-id-body.md
+          TITLE=$(jq -r .title /tmp/suggest-id-issue.json)
+          echo "number=$NUM" >> "$GITHUB_OUTPUT"
+          echo "title=$TITLE" >> "$GITHUB_OUTPUT"
+          echo "url=$(jq -r .url /tmp/suggest-id-issue.json)" >> "$GITHUB_OUTPUT"
+
+      - name: Merge snippet into resolutions.json
+        id: merge
+        env:
+          ISSUE_TITLE: ${{ steps.issue.outputs.title }}
+          ISSUE_BODY_FILE: /tmp/suggest-id-body.md
+        run: |
+          RESULT=$(npx tsx scripts/suggest-id-from-issue.ts)
+          echo "$RESULT"
+          echo "result=$RESULT" >> "$GITHUB_OUTPUT"
+          echo "status=$(printf '%s' "$RESULT" | jq -r .status)" >> "$GITHUB_OUTPUT"
+
+      - name: Comment when not opening a PR
+        if: steps.merge.outputs.status != 'added'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NUM: ${{ steps.issue.outputs.number }}
+          RESULT: ${{ steps.merge.outputs.result }}
+        run: |
+          STATUS=$(printf '%s' "$RESULT" | jq -r .status)
+          REASON=$(printf '%s' "$RESULT" | jq -r '.reason // empty')
+          if [ "$STATUS" = "duplicate" ]; then
+            gh issue comment "$NUM" --body "This clock is already in \`data/resolutions.json\`. No new PR."
+          elif [ "$STATUS" = "skip" ]; then
+            echo "Not an ID suggest issue — nothing to do."
+          else
+            gh issue comment "$NUM" --body "Could not turn this into a review PR${REASON:+: $REASON}."
+          fi
+
+      - name: Open review PR
+        if: steps.merge.outputs.status == 'added'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NUM: ${{ steps.issue.outputs.number }}
+          TITLE: ${{ steps.issue.outputs.title }}
+          URL: ${{ steps.issue.outputs.url }}
+          RESULT: ${{ steps.merge.outputs.result }}
+        run: |
+          BRANCH="suggest-id/${NUM}"
+          SLUG=$(printf '%s' "$RESULT" | jq -r .setSlug)
+          POS=$(printf '%s' "$RESULT" | jq -r .position)
+          TS=$(printf '%s' "$RESULT" | jq -r .timestamp)
+          ARTIST=$(printf '%s' "$RESULT" | jq -r .artistName)
+          TRACK=$(printf '%s' "$RESULT" | jq -r .trackTitle)
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$BRANCH"
+          git add data/resolutions.json
+          git commit -m "Suggest ID: ${SLUG} #${POS} → ${ARTIST} – ${TRACK} (#${NUM})"
+          git push -u origin "$BRANCH"
+          PR_URL=$(gh pr create \
+            --title "$TITLE" \
+            --body "$(printf '%s\n' \
+              "Review this Suggest ID, then merge to publish or close to reject." \
+              "" \
+              "Closes #${NUM}" \
+              "" \
+              "- Set: \`${SLUG}\`" \
+              "- Display play: #${POS}" \
+              "- Timestamp: ${TS}s" \
+              "- Suggested: ${ARTIST} – ${TRACK}" \
+              "" \
+              "Source: ${URL}" \
+              "" \
+              "\`applyResolutions\` runs on the next Pages deploy. One row per clock."
+            )")
+          gh issue comment "$NUM" --body "Review PR: ${PR_URL} — merge to publish, close the PR to reject."

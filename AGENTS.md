@@ -72,9 +72,10 @@ unless asked. Never write Relive for HARD / Insomniac / Nameless / Ultra.
   hosts, then refresh graduate + playback reports). `--fix` drops junk track-id
   pins. `--full` also runs the QC unit tests. Live DB audits run only when
   the catalog has 200+ sets. Never scrapes Beatport or 1001.
-- **Suggest ID → published:** `/stats`-style **Suggest ID** opens a GitHub issue
-  carrying a ready `data/resolutions.json` snippet. Publishing = commit the rows,
-  merge, deploy. GitHub's "create a branch from issue" placeholder branch is
+- **Suggest ID → published:** **Suggest ID** opens a GitHub issue carrying a
+  ready `data/resolutions.json` snippet. `suggest-id-pr.yml` turns that issue
+  into a review PR (one PR per issue). Merge the PR to publish; close it to
+  reject. GitHub's "create a branch from issue" placeholder branch is
   **not** the mechanism — those branches are empty and can be ignored.
   `applyResolutions` runs in `prisma/verify-urls.ts` on every deploy. Do **not**
   add `data/resolutions.json` to `CURATED_INGEST_PATHS`: that list is only for
