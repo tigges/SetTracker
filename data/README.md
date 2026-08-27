@@ -17,8 +17,9 @@ Each entry:
 ```
 
 The set detail UI **Suggest ID** button opens a GitHub issue with this JSON
-prefilled. Paste approved suggestions here and redeploy — the play flips to
-`community_resolved`.
+prefilled. `suggest-id-pr.yml` commits the snippet on a review PR. Merge to
+publish; close the PR to reject. The play flips to `community_resolved` on
+the next Pages deploy.
 
 ## `soundcloud-poll-state.json`
 

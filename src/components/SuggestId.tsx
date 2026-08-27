@@ -7,8 +7,9 @@ import {
 } from "@/lib/suggestIdSnippet";
 
 /**
- * Community ID wedge for the static site: open a prefilled GitHub issue, or copy
- * the resolutions.json snippet for anyone without an account.
+ * Community ID wedge for the static site: open a prefilled GitHub issue
+ * (workflow turns it into a review PR), or copy the resolutions.json snippet
+ * for anyone without an account.
  *
  * No email option. `mailto:` with no recipient just opens a blank compose window,
  * so it looked like a working channel while sending nothing anywhere. Restore it
@@ -123,6 +124,7 @@ export function SuggestIdButton({
               ? "Confirm this suggested release for "
               : "Suggest a release for "}
             <span className="text-ink">{currentLabel}</span>
+            . Opens a review PR — merge to publish, close to reject.
           </p>
           <label className="mb-1 block text-[10px] uppercase tracking-wider text-muted2">
             Artist
@@ -159,7 +161,7 @@ export function SuggestIdButton({
                 if (!ready) e.preventDefault();
               }}
             >
-              Open GitHub issue
+              Send for review
             </a>
             <button
               type="button"

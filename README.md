@@ -131,8 +131,9 @@ accounts (see `data/soundcloud-poll-state.json`).
 ### Suggest ID (community wedge)
 
 On unresolved / unparsed rows, **Suggest ID** opens a GitHub issue with a
-`data/resolutions.json` snippet. Approved entries are applied on the next
-ingest/deploy and flip the play to `community_resolved`.
+`data/resolutions.json` snippet. `suggest-id-pr.yml` turns that issue into a
+review PR. Merge to publish (Pages `applyResolutions` flips the play to
+`community_resolved`); close the PR to reject.
 
 The SQLite database lives at `prisma/dev.db` (git-ignored). Connection string
 is in `.env` (`DATABASE_URL="file:./dev.db"`).

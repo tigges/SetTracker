@@ -155,6 +155,12 @@ async function main() {
         "src/lib/suggestIdSnippet.test.ts",
       ]),
     );
+    steps.push(
+      runStep("suggest-id-issue-test", "npx", [
+        "tsx",
+        "src/lib/suggestIdIssue.test.ts",
+      ]),
+    );
   }
 
   const errors = staticQc.issues.filter((i) => i.severity === "error");
