@@ -3585,10 +3585,15 @@ for (let i = 1; i < prismatic032.length; i++) {
 
 assertSeedClocks(TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026);
 assert.equal(TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026.length, 15);
-assert.equal(
-  TRACKLIST_1001_BY_SOURCE_SLUG["yt-yTRvLrtsM9I"],
-  TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026,
-);
+for (const slug of ["yt-yTRvLrtsM9I", "sc-joris-voorn-spectrum-radio-485"]) {
+  assert.equal(
+    TRACKLIST_1001_BY_SOURCE_SLUG[slug],
+    TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026,
+    `Spectrum 485 must share one seed object on ${slug}`,
+  );
+}
+assert.equal(isSecondaryPlaybackSlug("sc-joris-voorn-spectrum-radio-485"), true);
+assert.equal(isSecondaryPlaybackSlug("yt-yTRvLrtsM9I"), false);
 const spectrum485 = tracklist1001RowsToPlays(
   TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026,
 );

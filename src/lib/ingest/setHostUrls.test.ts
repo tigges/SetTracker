@@ -288,6 +288,25 @@ for (const slug of ["yt-d5JZLJSJc6w", "sc-joris-voorn-spectrum-radio-484"]) {
   );
 }
 
+// Spectrum Radio 485: YT already carried the set; SC + Mixcloud pinned 2026-08-27.
+for (const slug of ["yt-yTRvLrtsM9I", "sc-joris-voorn-spectrum-radio-485"]) {
+  assert.equal(
+    extras[slug]?.soundcloudUrl,
+    "https://soundcloud.com/joris-voorn/spectrum-radio-485",
+    `missing SoundCloud mirror on ${slug}`,
+  );
+  assert.equal(
+    extras[slug]?.mixcloudUrl,
+    "https://www.mixcloud.com/jorisvoorn/joris-voorn-presents-spectrum-radio-485/",
+    `missing Mixcloud mirror on ${slug}`,
+  );
+  assert.equal(
+    extras[slug]?.youtubeUrl,
+    "https://www.youtube.com/watch?v=yTRvLrtsM9I",
+    `missing YouTube host on ${slug}`,
+  );
+}
+
 // Spectrum Radio 486: three official hosts, same pin reason as 484.
 for (const slug of ["yt-wlePVzVaMOY", "sc-joris-voorn-spectrum-radio-486"]) {
   assert.equal(

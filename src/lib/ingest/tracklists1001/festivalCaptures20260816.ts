@@ -560,9 +560,14 @@ export const TL_TIESTO_PRISMATIC_032_2026: FingerprintSeedRow[] = [
  * Joris Voorn @ Spectrum Radio 485 (Exit, Veveří Castle Brno, Czech Republic) 2026-08-12
  * https://www.1001tracklists.com/tracklist/2vwh8lq1/joris-voorn-spectrum-radio-485-exit-veveri-castle-brno-czech-republic-2026-08-12.html
  * Official YT: https://youtu.be/yTRvLrtsM9I
+ * Official SC: https://soundcloud.com/joris-voorn/spectrum-radio-485
+ * Mixcloud: .../JorisVoorn/joris-voorn-presents-spectrum-radio-485/ (mirror)
  * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-yTRvLrtsM9I"]
+ *       TRACKLIST_1001_BY_SOURCE_SLUG["sc-joris-voorn-spectrum-radio-485"]
  * Captured 2026-08-16 — provenance 1001tl. Official script: 15 tracks.
  * Capture overlay used an invalid identifier (hyphens); constant renamed.
+ * 2026-08-27 re-paste: cues unchanged; SC + Mixcloud pinned as host twins
+ * (same pattern as 484 / 486). joris-voorn is not a curated SC account.
  */
 export const TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026: FingerprintSeedRow[] = [
   { at: "0:30", artist: "Joris Voorn", title: "Horizon (Eelke Kleijn Remix)" },

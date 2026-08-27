@@ -4743,7 +4743,11 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "sc-sashaofficial-sasha-eclipse-mix-12-8-26": TL_SASHA_ECLIPSE_MIX_2026,
   "yt-0-s_qZRWElA": TL_MISS_MONIQUE_IBIZA_SUNSET_YACHT_2026,
   "yt-blP5J6BUG0M": TL_TIESTO_PRISMATIC_032_2026,
+  // Spectrum Radio 485. YouTube slug already carried the set (2026-08-16);
+  // SoundCloud slug now shares this array so the twin group keeps both hosts.
   "yt-yTRvLrtsM9I": TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026,
+  "sc-joris-voorn-spectrum-radio-485":
+    TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026,
   "yt-phWKhIwgiTo": TL_ABOVE_AND_BEYOND_ESTIVA_GROUP_THERAPY_RADIO_690_2026,
   "yt-k4Drn6AwAdk": TL_MAX_STYLER_OPULENT_TEMPLE_BURNING_MAN_2024,
   "sc-maxstyler-max-styler-live-opulent-temple-burning-man-2024":
