@@ -50,6 +50,7 @@ const DEBORAH_AMNESIA = YOUTUBE_SETS.find((s) =>
 const MM_YACHT = YOUTUBE_SETS.find((s) => s.video.includes("0-s_qZRWElA"));
 const PRISMATIC_032 = YOUTUBE_SETS.find((s) => s.video.includes("blP5J6BUG0M"));
 const SPECTRUM_485 = YOUTUBE_SETS.find((s) => s.video.includes("yTRvLrtsM9I"));
+const SPECTRUM_486 = YOUTUBE_SETS.find((s) => s.video.includes("wlePVzVaMOY"));
 const NICKY_TML_ARTIST = YOUTUBE_SETS.find((s) =>
   s.video.includes("B05MAbsCOLA"),
 );
@@ -899,6 +900,17 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(meta.durationSec, 59 * 60 + 10 + 180);
   });
 
+  it("builds Joris Voorn Spectrum Radio 486 meta from the curated 1001 capture", () => {
+    assert.ok(SPECTRUM_486);
+    const meta = watchMetaFromCuratedSeed(SPECTRUM_486);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "wlePVzVaMOY");
+    assert.match(meta.title, /Spectrum Radio 486/i);
+    assert.equal(meta.watchUrl, "https://www.youtube.com/watch?v=wlePVzVaMOY");
+    // Last cue 59:30 + 180s pad.
+    assert.equal(meta.durationSec, 59 * 60 + 30 + 180);
+  });
+
   it("builds Nicky Romero TML artist playback meta from the curated 1001 capture", () => {
     assert.ok(NICKY_TML_ARTIST);
     const meta = watchMetaFromCuratedSeed(NICKY_TML_ARTIST);
@@ -1642,6 +1654,21 @@ describe("curated YouTube 429 fallback", () => {
     assert.ok(sets[0]!.durationSec >= 59 * 60);
     assert.equal(sets[0]?.primaryArtist?.slug, "joris-voorn");
     assert.equal(sets[0]?.seriesName, "Spectrum Radio");
+  });
+
+  it("lands Joris Voorn Spectrum Radio 486 from the 1001 seed when watch is 429", async () => {
+    assert.ok(SPECTRUM_486);
+    const adapter = createYoutubeAdapter([SPECTRUM_486], [], [], []);
+    const sets = await adapter.fetchRecent();
+    assert.equal(sets.length, 1);
+    assert.equal(sets[0]!.sourceSlug, "yt-wlePVzVaMOY");
+    assert.equal(sets[0]!.type, "radio");
+    assert.ok(sets[0]!.plays.length >= 18);
+    assert.ok(sets[0]!.plays.every((p) => p.provenance === "1001tl"));
+    assert.ok(sets[0]!.durationSec >= 59 * 60);
+    assert.equal(sets[0]?.primaryArtist?.slug, "joris-voorn");
+    assert.equal(sets[0]?.seriesName, "Spectrum Radio");
+    assert.match(String(sets[0]?.eventName ?? ""), /Balance Croatia/i);
   });
 
   it("lands Nicky Romero TML artist playback from the 1001 seed when watch is 429", async () => {

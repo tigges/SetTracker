@@ -287,6 +287,25 @@ for (const slug of ["yt-d5JZLJSJc6w", "sc-joris-voorn-spectrum-radio-484"]) {
     `missing YouTube host on ${slug}`,
   );
 }
+
+// Spectrum Radio 486: three official hosts, same pin reason as 484.
+for (const slug of ["yt-wlePVzVaMOY", "sc-joris-voorn-spectrum-radio-486"]) {
+  assert.equal(
+    extras[slug]?.soundcloudUrl,
+    "https://soundcloud.com/joris-voorn/spectrum-radio-486",
+    `missing SoundCloud mirror on ${slug}`,
+  );
+  assert.equal(
+    extras[slug]?.mixcloudUrl,
+    "https://www.mixcloud.com/jorisvoorn/joris-voorn-presents-spectrum-radio-486/",
+    `missing Mixcloud mirror on ${slug}`,
+  );
+  assert.equal(
+    extras[slug]?.youtubeUrl,
+    "https://www.youtube.com/watch?v=wlePVzVaMOY",
+    `missing YouTube host on ${slug}`,
+  );
+}
 assert.deepEqual(
   unusedOfficialHostLinks({
     playbackUrl: "https://www.youtube.com/watch?v=d5JZLJSJc6w",
