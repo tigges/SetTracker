@@ -64,6 +64,12 @@ describe("publishSetPlays", () => {
     assert.ok(published.every((p) => !hasVendorDetectionCopy(p.title, p.rawText, p.idNote)));
     assert.ok(published.every((p) => p.detectionComment === COMMENT_NOT_DETECTED));
     assert.ok(published.some((p) => p.id.startsWith("expected:")));
+    assert.ok(
+      published
+        .filter((p) => p.id.startsWith("expected:") || p.id.startsWith("talk:"))
+        .every((p) => p.sourcePosition == null),
+      "synthetic slots must not leak a stored Played.position",
+    );
   });
 
   it("keeps a low-confidence hint and asks to confirm", () => {

@@ -32,6 +32,7 @@ import {
 import { ensureGenre, normalizeGenre } from "../genre";
 import { rosterGenreForArtist } from "./roster";
 import { allocateTrackSlug, trackSlugBase } from "../tracks/slug";
+import { mergeCommunityKeeps, type CommunityKeep } from "./communityKeeps";
 import { slugify, type RawArtist, type RawPlay, type RawSet, type SourceAdapter } from "./types";
 import { canonicalDjSlug } from "./djSlugAliases";
 import { curatedEventSocialPatch } from "./eventSocials";
@@ -131,15 +132,6 @@ export type IngestStats = {
   /** Sets with ≥1 identified/community play */
   setsWithTracklist: number;
   totalPlaysIngested: number;
-};
-
-type CommunityKeep = {
-  position: number;
-  timestamp: number;
-  trackTitle: string;
-  artistName: string;
-  idLabel: string | null;
-  note: string | null;
 };
 
 export async function runIngest(
@@ -616,30 +608,6 @@ export async function runIngest(
       }));
   }
 
-  function mergeCommunityKeeps(
-    sourcePlays: RawPlay[],
-    keeps: CommunityKeep[],
-  ): RawPlay[] {
-    if (keeps.length === 0) return sourcePlays;
-    const byPosition = new Map(sourcePlays.map((p) => [p.position, p]));
-    for (const k of keeps) {
-      byPosition.set(k.position, {
-        position: k.position,
-        timestamp: k.timestamp,
-        idStatus: "community_resolved",
-        provenance: "community",
-        trackTitle: k.trackTitle,
-        artistName: k.artistName,
-        idLabel: k.idLabel ?? `${k.artistName} - ID`,
-        note: k.note ?? undefined,
-        rawText: k.idLabel ?? undefined,
-      });
-    }
-    return [...byPosition.values()]
-      .sort((a, b) => a.position - b.position || a.timestamp - b.timestamp)
-      .map((p, i) => ({ ...p, position: i + 1 }));
-  }
-
   async function replacePlays(
     setId: string,
     plays: RawPlay[],
@@ -941,7 +909,7 @@ export async function runIngest(
         return;
       }
 
-      // Refresh tracklist; preserve prior community resolutions by position.
+      // Refresh tracklist; preserve prior community resolutions (timestamp first).
       const keeps = await snapshotCommunityKeeps(existing.id);
       const plays = mergeCommunityKeeps(raw.plays, keeps);
 
