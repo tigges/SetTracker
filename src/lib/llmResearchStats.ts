@@ -15,6 +15,10 @@ export type LlmResearchRound = {
   scanned: number;
   applied: number;
   rejected: number;
+  found?: number;
+  partial?: number;
+  missed?: number;
+  variables?: string;
   generatedAt: string | null;
 };
 
@@ -109,10 +113,19 @@ export function summarizeHandleReport(
   const body = raw as {
     generatedAt?: string;
     provider?: string;
-    stats?: { scanned?: number; applied?: number; rejected?: number };
+    variables?: string;
+    tally?: { tracked?: number; found?: number; partial?: number; missed?: number };
+    stats?: {
+      scanned?: number;
+      applied?: number;
+      rejected?: number;
+      found?: number;
+      partial?: number;
+      missed?: number;
+    };
     rows?: HandleRow[];
   };
-  const scanned = Number(body.stats?.scanned ?? 0);
+  const scanned = Number(body.stats?.scanned ?? body.tally?.tracked ?? 0);
   const applied = Number(body.stats?.applied ?? 0);
   const rejected = Number(body.stats?.rejected ?? 0);
   if (scanned <= 0 && applied <= 0) return { round: null, fills: [] };
@@ -133,6 +146,10 @@ export function summarizeHandleReport(
       scanned,
       applied,
       rejected,
+      found: body.tally?.found ?? body.stats?.found,
+      partial: body.tally?.partial ?? body.stats?.partial,
+      missed: body.tally?.missed ?? body.stats?.missed,
+      variables: body.variables,
       generatedAt: body.generatedAt ?? null,
     },
     fills,

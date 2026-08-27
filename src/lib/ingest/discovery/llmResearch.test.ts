@@ -7,6 +7,8 @@ import {
   geminiApiKey,
   isResearchWorthyName,
   parseLlmJson,
+  previouslyResearchedKeys,
+  previouslyResearchedSlugs,
   researchPriority,
 } from "./llmResearch";
 
@@ -165,6 +167,15 @@ assert.equal(
     eventKeys,
   ).ok,
   true,
+);
+
+const parked = previouslyResearchedSlugs();
+assert.ok(parked.size > 0, "committed handle reports park slugs");
+assert.ok(
+  previouslyResearchedKeys("llm-identity-research").size >= 0,
+);
+assert.ok(
+  previouslyResearchedKeys("llm-handle-research").has([...parked][0]!),
 );
 
 console.log("llmResearch.test.ts ok");

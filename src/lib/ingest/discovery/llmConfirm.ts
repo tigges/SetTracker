@@ -2,10 +2,10 @@
  * Disclose, then ask. Model calls stay blocked until both happen.
  *
  * The plan (what is researched, what is sent, what is written, cost range)
- * is always printed first — on a laptop and in Actions. Confirm with
- * LLM_RESEARCH_CONFIRM=1, an interactive yes, or the Catalog LLM research
- * "Accept spend" checkbox. Unconfirmed runs print the plan and stop.
- * Parser-only cue clocks never need this.
+ * is always printed first — on a laptop and in Actions. Catalog LLM
+ * research sets LLM_RESEARCH_CONFIRM=1 on a standing budget. Local CLI
+ * still needs the env flag or an interactive yes. Unconfirmed local runs
+ * print the plan and stop. Parser-only cue clocks never need this.
  */
 
 import { appendFileSync } from "node:fs";
@@ -74,7 +74,7 @@ export async function confirmLlmSpend(
     return false;
   }
   console.log(
-    "[llm-research] no model calls — this run only printed the plan. To spend, run Actions → Catalog LLM research and check Accept spend (or set LLM_RESEARCH_CONFIRM=1 locally).",
+    "[llm-research] no model calls — this run only printed the plan. Catalog LLM research spends automatically. Locally set LLM_RESEARCH_CONFIRM=1.",
   );
   return false;
 }

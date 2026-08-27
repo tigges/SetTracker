@@ -254,20 +254,19 @@ unless asked. Never write Relive for HARD / Insomniac / Nameless / Ultra.
   preferred when present (Search grounding). Propose official socials for DJs
   that have sets but no handle. **Verify-then-write:** live profile URL +
   handle matches the DJ name + not owned by another Dj. Never invents `@slug`
-  guesses. **Disclose, then confirm — no exceptions.** `complete()` is the
-  only model path and throws unless (1) `announceLlmPlan()` has printed what
-  each job researches, what is sent, what may be written, and the USD range,
-  and (2) spend is confirmed (`LLM_RESEARCH_CONFIRM=1`, TTY `yes`, or Catalog
-  LLM research **Accept spend**). Job wording lives in `LLM_JOB_DISCLOSURE`
-  (`llmPlan.ts`) — update it when a job's prompt or writes change; a test
-  fails if a job has no disclosure. `npm run research:plan` prints the plan
-  and sends nothing. **Deep / enrich never call a model** — they run
-  `research:plan` plus the parser-only cue step (`LLM_RESEARCH=0`, no keys
-  passed). Bumping `data/llm-request` only produces the plan. Spend lives in
-  `catalog-llm-research.yml`: a `plan` job prints the disclosure (also on the
-  run summary), then the `spend` job needs **Accept spend** *and* the
-  `llm-spend` environment approval (add a required reviewer in Settings →
-  Environments). `/stats` cannot dispatch LLM. Reports in
+  guesses. **Disclose, then spend on a standing budget.** `complete()` is the
+  only model path and throws unless `announceLlmPlan()` has printed what each
+  job tracks (variables), what is sent, what may be written, and the USD range.
+  Catalog LLM research sets `LLM_RESEARCH_CONFIRM=1` for dispatch and
+  `data/llm-request` pushes — no per-run Accept / `llm-spend` reviewer. Local
+  CLI still needs the env flag or a TTY `yes`. Every job then prints tracked /
+  found / partial parked / no-match. Partial and empty rows stay in the
+  report so the same slug / track / set is not retraced. Job wording lives in
+  `LLM_JOB_DISCLOSURE` (`llmPlan.ts`) plus `LLM_JOB_VARIABLES`
+  (`llmTrackRecord.ts`) — a test fails if a job has no disclosure. `npm run
+  research:plan` prints the plan and sends nothing. **Deep / enrich never
+  call a model** — they run `research:plan` plus the parser-only cue step
+  (`LLM_RESEARCH=0`, no keys passed). `/stats` cannot dispatch LLM. Reports in
   `data/crosscheck/llm-handle-research.json`.
   **Cue job** (`LLM_RESEARCH_JOBS=cues` or `all`): re-parse first-party
   YT/SC/hearthis on empty/stub lists. Queue ranks live YT/hearthis ahead of
@@ -379,7 +378,8 @@ unless asked. Never write Relive for HARD / Insomniac / Nameless / Ultra.
   those fields as grey `acr-miss` so the same offset is not retraced. Every pass
   prints the variables, probe count, hits, partials, no-match, and hit rate.
   **Manual IDs:** Capture 1001, Suggest ID / `resolutions.json`, wire official
-  playbacks, entity-complete pins. LLM handle research still needs Accept spend.
+  playbacks, entity-complete pins. LLM research is automated on Catalog LLM
+  research (standing budget; prints variables / tracked / found / partials).
   Local CLI still requires `ACRCLOUD_CONFIRM_SPEND=1`. `acrIdentify()`,
   `submitPlatformScan()` and AudD throw unless `announceAcrPlan()` ran for that
   process. Catalog enrich sets confirm=1 for cron, `data/enrich-request` pushes,

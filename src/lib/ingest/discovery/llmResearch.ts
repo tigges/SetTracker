@@ -28,6 +28,15 @@ import {
 import { llmSpendConfirmed } from "./llmCost";
 import { llmPlanAnnounced } from "./llmPlan";
 import {
+  addLlmTally,
+  classifyLlmOutcome,
+  emptyLlmTally,
+  formatLlmTrackMessage,
+  llmJobVariablesLabel,
+  type LlmTally,
+} from "./llmTrackRecord";
+import type { LlmCostJob } from "./llmCost";
+import {
   djMayClaimSocialUrl,
   eventMayClaimSocialUrl,
   handleMatchesEvent,
@@ -71,6 +80,13 @@ export type ResearchStats = {
   proposed: number;
   applied: number;
   rejected: number;
+  /** Rows with a verified write or report-only confirm. */
+  found: number;
+  /** Named proposal that did not fully write — parked in the report. */
+  partial: number;
+  /** Nothing named (empty / error / unparseable). */
+  missed: number;
+  variables?: string;
   skippedNoKey: boolean;
 };
 
@@ -374,13 +390,19 @@ export function isResearchWorthyName(name: string): boolean {
 }
 
 /** Slugs already scanned in data/crosscheck/llm-handle-research*.json */
-export function previouslyResearchedSlugs(cwd = process.cwd()): Set<string> {
+/** Slugs / ids already parked in committed or local research reports. */
+export function previouslyResearchedKeys(
+  prefix: string,
+  pick: (row: Record<string, unknown>) => string | undefined = (row) =>
+    typeof row.slug === "string" ? row.slug : undefined,
+  cwd = process.cwd(),
+): Set<string> {
   const dir = join(cwd, "data", "crosscheck");
   const out = new Set<string>();
   let files: string[] = [];
   try {
     files = readdirSync(dir).filter(
-      (f) => f.startsWith("llm-handle-research") && f.endsWith(".json"),
+      (f) => f.startsWith(prefix) && f.endsWith(".json") && !f.includes("summary"),
     );
   } catch {
     return out;
@@ -388,16 +410,59 @@ export function previouslyResearchedSlugs(cwd = process.cwd()): Set<string> {
   for (const f of files) {
     try {
       const raw = JSON.parse(readFileSync(join(dir, f), "utf8")) as {
-        rows?: Array<{ slug?: string }>;
+        rows?: Array<Record<string, unknown>>;
+        skipped?: Array<Record<string, unknown>>;
       };
-      for (const row of raw.rows ?? []) {
-        if (row.slug) out.add(row.slug);
+      for (const row of [...(raw.rows ?? []), ...(raw.skipped ?? [])]) {
+        const key = pick(row);
+        if (key) out.add(key);
       }
     } catch {
       /* ignore broken report */
     }
   }
   return out;
+}
+
+/** Slugs already scanned in data/crosscheck/llm-handle-research*.json */
+export function previouslyResearchedSlugs(cwd = process.cwd()): Set<string> {
+  return previouslyResearchedKeys("llm-handle-research", undefined, cwd);
+}
+
+export function emptyResearchStats(
+  provider: LlmProvider | null,
+): ResearchStats {
+  return {
+    provider,
+    scanned: 0,
+    proposed: 0,
+    applied: 0,
+    rejected: 0,
+    found: 0,
+    partial: 0,
+    missed: 0,
+    skippedNoKey: !provider,
+  };
+}
+
+export function finishLlmJobStats(
+  stats: ResearchStats,
+  job: LlmCostJob,
+  tally: LlmTally,
+  logLabel: string,
+): ResearchStats {
+  stats.found = tally.found;
+  stats.partial = tally.partial;
+  stats.missed = tally.missed;
+  stats.variables = llmJobVariablesLabel(job);
+  const msg = formatLlmTrackMessage(job, {
+    tracked: stats.scanned,
+    found: tally.found,
+    partial: tally.partial,
+    missed: tally.missed,
+  });
+  console.log(`[${logLabel}] ${msg}`);
+  return stats;
 }
 
 export async function verifyProposal(
@@ -440,14 +505,8 @@ export async function runLlmHandleResearch(
   opts: { provider?: LlmProvider; reportTag?: string } = {},
 ): Promise<ResearchStats> {
   const provider = opts.provider ?? detectLlmProvider();
-  const stats: ResearchStats = {
-    provider,
-    scanned: 0,
-    proposed: 0,
-    applied: 0,
-    rejected: 0,
-    skippedNoKey: !provider,
-  };
+  const stats = emptyResearchStats(provider);
+  stats.variables = llmJobVariablesLabel("handles");
   if (!provider) {
     console.log(
       "[llm-research] skipped (set CLAUDE_AGENT_API and/or GEMINI_API_KEY)",
@@ -542,6 +601,7 @@ export async function runLlmHandleResearch(
   );
 
   const rows: ResearchRow[] = [];
+  const tally = emptyLlmTally();
   for (const d of djs) {
     stats.scanned += 1;
     const context = d.sets.map((s) => s.set.title).filter(Boolean).join("; ");
@@ -552,6 +612,7 @@ export async function runLlmHandleResearch(
       const text = await complete(provider, handlePrompt(d.name, context));
       const proposal = parseLlmJson(text);
       if (!proposal) {
+        addLlmTally(tally, "missed");
         rows.push({
           slug: d.slug,
           name: d.name,
@@ -580,6 +641,13 @@ export async function runLlmHandleResearch(
           if (key) artistKeys.add(key);
         }
       }
+      addLlmTally(
+        tally,
+        classifyLlmOutcome({
+          found: accepted.length > 0,
+          namedPartial: rejected.length > 0,
+        }),
+      );
       rows.push({
         slug: d.slug,
         name: d.name,
@@ -589,6 +657,7 @@ export async function runLlmHandleResearch(
         rejected,
       });
     } catch (err) {
+      addLlmTally(tally, "missed");
       rows.push({
         slug: d.slug,
         name: d.name,
@@ -601,10 +670,18 @@ export async function runLlmHandleResearch(
     }
   }
 
+  finishLlmJobStats(stats, "handles", tally, "llm-research");
   const payload = {
     generatedAt: new Date().toISOString(),
     provider,
     apply,
+    variables: stats.variables,
+    tally: {
+      tracked: stats.scanned,
+      found: stats.found,
+      partial: stats.partial,
+      missed: stats.missed,
+    },
     stats,
     rows,
   };
@@ -613,10 +690,6 @@ export async function runLlmHandleResearch(
     const tag = opts.reportTag ? `-${opts.reportTag}` : "";
     writeReport(`llm-handle-research-${provider}${tag}.json`, payload);
   }
-  console.log(
-    `[llm-research] provider=${provider} scanned=${stats.scanned}` +
-      ` proposed=${stats.proposed} applied=${stats.applied} rejected=${stats.rejected}`,
-  );
   return stats;
 }
 
@@ -646,29 +719,7 @@ async function verifyEventProposal(
 }
 
 function previouslyResearchedEventSlugs(cwd = process.cwd()): Set<string> {
-  const dir = join(cwd, "data", "crosscheck");
-  const out = new Set<string>();
-  let files: string[] = [];
-  try {
-    files = readdirSync(dir).filter(
-      (f) => f.startsWith("llm-event-handle-research") && f.endsWith(".json"),
-    );
-  } catch {
-    return out;
-  }
-  for (const f of files) {
-    try {
-      const raw = JSON.parse(readFileSync(join(dir, f), "utf8")) as {
-        rows?: Array<{ slug?: string }>;
-      };
-      for (const row of raw.rows ?? []) {
-        if (row.slug) out.add(row.slug);
-      }
-    } catch {
-      /* ignore */
-    }
-  }
-  return out;
+  return previouslyResearchedKeys("llm-event-handle-research", undefined, cwd);
 }
 
 /**
@@ -679,14 +730,8 @@ export async function runLlmEventHandleResearch(
   opts: { provider?: LlmProvider; reportTag?: string } = {},
 ): Promise<ResearchStats> {
   const provider = opts.provider ?? detectLlmProvider();
-  const stats: ResearchStats = {
-    provider,
-    scanned: 0,
-    proposed: 0,
-    applied: 0,
-    rejected: 0,
-    skippedNoKey: !provider,
-  };
+  const stats = emptyResearchStats(provider);
+  stats.variables = llmJobVariablesLabel("events");
   if (!provider) return stats;
   if (process.env.LLM_RESEARCH === "0" || process.env.LLM_RESEARCH_EVENTS === "0") {
     console.log("[llm-event-research] skipped");
@@ -748,6 +793,7 @@ export async function runLlmEventHandleResearch(
   );
 
   const rows: ResearchRow[] = [];
+  const tally = emptyLlmTally();
   for (const e of events) {
     stats.scanned += 1;
     console.log(
@@ -760,6 +806,7 @@ export async function runLlmEventHandleResearch(
       );
       const proposal = parseLlmJson(text);
       if (!proposal) {
+        addLlmTally(tally, "missed");
         rows.push({
           slug: e.slug,
           name: e.name,
@@ -796,6 +843,13 @@ export async function runLlmEventHandleResearch(
           stats.applied += Object.keys(data).length;
         }
       }
+      addLlmTally(
+        tally,
+        classifyLlmOutcome({
+          found: accepted.length > 0,
+          namedPartial: rejected.length > 0,
+        }),
+      );
       rows.push({
         slug: e.slug,
         name: e.name,
@@ -805,6 +859,7 @@ export async function runLlmEventHandleResearch(
         rejected,
       });
     } catch (err) {
+      addLlmTally(tally, "missed");
       rows.push({
         slug: e.slug,
         name: e.name,
@@ -817,10 +872,18 @@ export async function runLlmEventHandleResearch(
     }
   }
 
+  finishLlmJobStats(stats, "events", tally, "llm-event-research");
   const payload = {
     generatedAt: new Date().toISOString(),
     provider,
     apply,
+    variables: stats.variables,
+    tally: {
+      tracked: stats.scanned,
+      found: stats.found,
+      partial: stats.partial,
+      missed: stats.missed,
+    },
     stats,
     rows,
   };
@@ -829,10 +892,6 @@ export async function runLlmEventHandleResearch(
     const tag = opts.reportTag ? `-${opts.reportTag}` : "";
     writeReport(`llm-event-handle-research-${provider}${tag}.json`, payload);
   }
-  console.log(
-    `[llm-event-research] provider=${provider} scanned=${stats.scanned}` +
-      ` proposed=${stats.proposed} applied=${stats.applied} rejected=${stats.rejected}`,
-  );
   return stats;
 }
 
@@ -952,8 +1011,22 @@ export async function runLlmQualityCheck(
   writeReport("llm-quality-check.json", {
     generatedAt: new Date().toISOString(),
     provider,
+    variables: llmJobVariablesLabel("quality"),
+    tally: {
+      tracked: notes.length,
+      found: notes.length,
+      partial: 0,
+      missed: 0,
+    },
     notes,
   });
-  console.log(`[llm-quality] notes=${notes.length} provider=${provider ?? "none"}`);
+  console.log(
+    `[llm-quality] ${formatLlmTrackMessage("quality", {
+      tracked: notes.length,
+      found: notes.length,
+      partial: 0,
+      missed: 0,
+    })}`,
+  );
   return { notes, provider };
 }

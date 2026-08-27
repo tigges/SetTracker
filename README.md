@@ -156,9 +156,10 @@ cancel cannot throw away Identify hits. Do not start deep and enrich at the same
 **Automated IDs** (Catalog enrich, standing budget): Identify + File Scan
 (artist, title, ISRC, score, offset), cue parser apply, track-id fill-null.
 Weak or empty probes park those fields so the same clip is not retraced. Each
-run prints variables, probe count, and hit rate. **Manual IDs:** Capture 1001,
-Suggest ID, wire official playbacks, entity-complete pins. LLM handles still
-need Accept spend.
+run prints variables, probe count, and hit rate. Catalog LLM research is also
+automated (standing budget): each job names its variables and parks partial
+or empty results so the same row is not retraced. **Manual IDs:** Capture 1001,
+Suggest ID, wire official playbacks, entity-complete pins.
 
 ### ACRCloud fingerprint enrich
 
@@ -275,15 +276,14 @@ handle must overlap the DJ name, it must be live, and it must not belong to
 another catalog DJ. Missing keys → safe no-op.
 
 **Nothing is sent to a model without a printed plan first.** Every run
-discloses, per job, what is researched, what catalog data goes in the prompt,
-what may be written back, and the estimated USD range — then asks. `complete()`
-throws if either the disclosure or the confirmation is missing, so a new call
-site cannot skip it. `npm run research:plan` prints the plan and sends nothing.
-Catalog deep and Catalog enrich never call a model: they print the plan and run
-the deterministic cue parser. Spend happens only in **Catalog LLM research**,
-which prints the plan in its own `plan` job and then waits for **Accept spend**
-plus `llm-spend` environment approval. Reports:
-`data/crosscheck/llm-handle-research.json`.
+discloses, per job, the variables it tracks, what catalog data goes in the
+prompt, what may be written back, and the estimated USD range. After the run
+it prints tracked / found / partial parked / no-match. `complete()` throws
+if the disclosure is missing. Catalog LLM research spends on a standing
+budget (dispatch and `data/llm-request`) — no per-run Accept. Local CLI
+still needs `LLM_RESEARCH_CONFIRM=1`. Catalog deep and Catalog enrich never
+call a model: they print the plan and run the deterministic cue parser.
+Reports: `data/crosscheck/llm-handle-research.json`.
 Cue research (`LLM_RESEARCH_JOBS=cues`) re-parses first-party YT/SC/hearthis
 on empty/stub lists (live YT/hearthis first; radio without clocks is
 skipped). Parser clocks always write (no key needed). `LLM_RESEARCH_APPLY=0`

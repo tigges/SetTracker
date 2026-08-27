@@ -270,8 +270,8 @@ jobs:
         run: npm run research:track-ids
         continue-on-error: true
 
-      # No LLM here. Model spend only happens in Catalog LLM research, where
-      # the plan and cost are disclosed and a reviewer approves first.
+      # No LLM here. Model spend lives in Catalog LLM research (standing
+      # budget). This step only prints the plan.
       - name: LLM research plan (sends nothing)
         if: steps.mode.outputs.do_thumbs == '1'
         env:

@@ -9,6 +9,7 @@ import {
   WeakSiteQueue,
 } from "@/components/StatsPlaybook";
 import { StatsEnrichCard } from "@/components/StatsEnrichCard";
+import { StatsLlmCard } from "@/components/StatsLlmCard";
 import { StatsHealthCard, StatsMeter } from "@/components/StatsHealthCard";
 import { loadActionsStatusFile } from "@/lib/actionsStatus";
 import { capture1001StatsHref } from "@/lib/captureHref";
@@ -18,6 +19,7 @@ import { getCatalogStats } from "@/lib/catalogStats";
 import { prisma } from "@/lib/db";
 import { loadDjMagTop100RankBySlug } from "@/lib/djmagTop100";
 import { loadEnrichRunReport } from "@/lib/ingest/enrich/enrichRunReport";
+import { loadLlmResearchStats } from "@/lib/llmResearchStats";
 import { pageMeta, workflowRunUrl } from "@/lib/site";
 import { clockSourceSlices } from "@/lib/statsHealth";
 import { getStatsHealth } from "@/lib/statsHealthData";
@@ -242,6 +244,7 @@ export default async function StatsPage() {
     CAPTURE_QUEUE_LIMIT,
   );
   const actionsStatus = loadActionsStatusFile();
+  const llmStats = loadLlmResearchStats();
   const top100 = loadDjMagTop100RankBySlug();
   const starFirst = (slug: string) => (top100.has(slug) ? 0 : 1);
   const cueTotal = health.sets.identified.reduce((n, row) => n + row.count, 0);
@@ -297,6 +300,7 @@ export default async function StatsPage() {
       </div>
 
       <StatsEnrichCard report={enrichReport} actions={actionsStatus} />
+      <StatsLlmCard stats={llmStats} />
 
       <StatsHealthCard
         id="djs"
@@ -428,9 +432,11 @@ export default async function StatsPage() {
           </p>
           <p className="mt-1 text-[12px] leading-snug text-ink">
             Catalog enrich Identify + File Scan write artist, title, ISRC,
-            score, and offset. Weak or empty results park as grey misses so
-            the same clip is not retraced. Cue parser apply and track-id
-            fill-null run on the same workflow.
+            score, and offset. Catalog LLM research writes handles, event
+            socials, home city, track IDs, and cue clocks — each job names
+            its variables and parks partial / empty results so the same row
+            is not retraced. Cue parser apply and track-id fill-null also
+            run on enrich.
           </p>
         </div>
         <div className="rounded-lg border border-amber/30 bg-amber/5 px-2.5 py-2">
@@ -439,8 +445,7 @@ export default async function StatsPage() {
           </p>
           <p className="mt-1 text-[12px] leading-snug text-ink">
             Capture 1001, Suggest ID on a set page, wire official playbacks,
-            and entity-complete pins. LLM handle research still needs{" "}
-            <span className="mono">Accept spend</span>.
+            and entity-complete pins.
           </p>
         </div>
       </div>
@@ -467,7 +472,9 @@ export default async function StatsPage() {
         >
           Catalog LLM research
         </a>{" "}
-        proposes handles — needs <span className="mono">Accept spend</span>.
+        runs handle / event / quality research on a standing budget (no
+        per-run Accept). Every job prints variables, tracked, found, and
+        partials parked.
       </p>
       <p className="mb-3 text-[11px] leading-snug text-muted2">
         Every paid run prints what it researches and a cost estimate before it
@@ -501,7 +508,7 @@ export default async function StatsPage() {
         <QueueFold
           title="DJ complete"
           count={djComplete.length}
-          hint={`${handleCount} handle · ${artCount} art. ★ current Top 100 first. Junk omitted. LLM handles need a confirm — ${formatLlmSpend(LLM_QUEUE_ESTIMATE)}.`}
+          hint={`${handleCount} handle · ${artCount} art. ★ current Top 100 first. Junk omitted. LLM handles: ${formatLlmSpend(LLM_QUEUE_ESTIMATE)}.`}
           followUp="auto"
         >
           <DjCompleteQueue rows={djComplete} />
