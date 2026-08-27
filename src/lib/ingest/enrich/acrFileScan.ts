@@ -39,8 +39,13 @@ import { detectPlaybackHost } from "../../playback";
 import { HELD_PLAYBACK_WATCH } from "../nextCaptures";
 import { isFingerprintOnlyVideoId, isFingerprintOnlyWatchUrl } from "../identify/fingerprintWatch";
 import {
+  formatAcrPartialReason,
+  formatAcrTrackMessage,
+} from "./acrProbeRecord";
+import {
   mapAcrMusicHit,
   nextPlayPosition,
+  recordFingerprintMiss,
   selectSparseSetsForFingerprint,
   upsertFingerprintTrack,
   type AcrHit,
@@ -240,24 +245,42 @@ export async function getScanFile(
 
 export type ScanHit = { offsetSec: number; hit: AcrHit };
 
+export type ScanResults = { hits: ScanHit[]; partials: ScanHit[] };
+
+function scanHitFromRow(m: FsMusicRow): ScanHit | null {
+  const hit = mapAcrMusicHit(fileScanMusicPayload(m));
+  if (!hit) return null;
+  // File Scanning docs: score is optional (title + artists are required).
+  // ACR already accepted the match — don't drop a real hit with score omitted.
+  const score = hit.score > 0 ? hit.score : 100;
+  return {
+    offsetSec: Math.max(0, Math.floor(Number(m.offset) || 0)),
+    hit: { ...hit, score },
+  };
+}
+
+/** Strong hits plus below-floor named rows (parked, not written as IDs). */
+export function parseScanResults(
+  file: FsFile,
+  minScore: number,
+): ScanResults {
+  const music = file.results?.music ?? [];
+  const hits: ScanHit[] = [];
+  const partials: ScanHit[] = [];
+  for (const m of music) {
+    const row = scanHitFromRow(m);
+    if (!row) continue;
+    if (row.hit.score < minScore) partials.push(row);
+    else hits.push(row);
+  }
+  hits.sort((a, b) => a.offsetSec - b.offsetSec);
+  partials.sort((a, b) => a.offsetSec - b.offsetSec);
+  return { hits, partials };
+}
+
 /** Parse a ready FsFile's music results into offset-sorted hits ≥ minScore. */
 export function parseScanHits(file: FsFile, minScore: number): ScanHit[] {
-  const music = file.results?.music ?? [];
-  const out: ScanHit[] = [];
-  for (const m of music) {
-    const hit = mapAcrMusicHit(fileScanMusicPayload(m));
-    if (!hit) continue;
-    // File Scanning docs: score is optional (title + artists are required).
-    // ACR already accepted the match — don't drop a real hit with score omitted.
-    const score = hit.score > 0 ? hit.score : 100;
-    if (score < minScore) continue;
-    out.push({
-      offsetSec: Math.max(0, Math.floor(Number(m.offset) || 0)),
-      hit: { ...hit, score },
-    });
-  }
-  out.sort((a, b) => a.offsetSec - b.offsetSec);
-  return out;
+  return parseScanResults(file, minScore).hits;
 }
 
 /** List container files (one page) with results. */
@@ -480,11 +503,48 @@ export async function applyScanHitsToSet(
   return { written, skipped };
 }
 
+/** Park below-floor File Scan hits so Identify does not retrace those offsets. */
+export async function applyScanPartialsToSet(
+  prisma: PrismaClient,
+  setId: string,
+  partials: ScanHit[],
+  opts: { dryRun?: boolean; gapWindowSec?: number } = {},
+): Promise<{ parked: number; skipped: number }> {
+  const gap = opts.gapWindowSec ?? 45;
+  const existing = await prisma.played.findMany({
+    where: { setId },
+    select: { timestamp: true },
+  });
+  const marks = existing.map((p) => p.timestamp);
+  let parked = 0;
+  let skipped = 0;
+  const ordered = [...partials].sort((a, b) => a.offsetSec - b.offsetSec);
+  for (const { offsetSec, hit } of ordered) {
+    if (marks.some((t) => Math.abs(t - offsetSec) <= gap)) {
+      skipped += 1;
+      continue;
+    }
+    if (!opts.dryRun) {
+      await recordFingerprintMiss(
+        prisma,
+        setId,
+        offsetSec,
+        formatAcrPartialReason(hit),
+      );
+    }
+    parked += 1;
+    marks.push(offsetSec);
+  }
+  return { parked, skipped };
+}
+
 export type FileScanStats = {
   enabled: boolean;
   submitted: number;
   ready: number;
   identified: number;
+  partial: number;
+  missed: number;
   skipped: string;
 };
 
@@ -571,6 +631,8 @@ export async function enrichYoutubeSetsWithFileScan(
       submitted: 0,
       ready: 0,
       identified: 0,
+      partial: 0,
+      missed: 0,
       skipped: "ACRCLOUD_FS_TOKEN / ACRCLOUD_FS_CONTAINER_ID not set",
     };
   }
@@ -582,13 +644,15 @@ export async function enrichYoutubeSetsWithFileScan(
   announceAcrPlan(estimate);
   if (!dryRun && !acrSpendConfirmed()) {
     console.log(
-      "[acr-fs] no requests — set ACRCLOUD_CONFIRM_SPEND=1 for this run (Catalog enrich: check Accept ACR spend)",
+      "[acr-fs] no requests — set ACRCLOUD_CONFIRM_SPEND=1 for this local run",
     );
     return {
       enabled: false,
       submitted: 0,
       ready: 0,
       identified: 0,
+      partial: 0,
+      missed: 0,
       skipped: `spend not confirmed (${estimate.summary})`,
     };
   }
@@ -617,6 +681,8 @@ export async function enrichYoutubeSetsWithFileScan(
       submitted: 0,
       ready: 0,
       identified: 0,
+      partial: 0,
+      missed: 0,
       skipped: "no sparse YouTube candidates",
     };
   }
@@ -631,36 +697,69 @@ export async function enrichYoutubeSetsWithFileScan(
   let reused = 0;
   let ready = 0;
   let identified = 0;
+  let partial = 0;
+  let missed = 0;
   const genreCache = new Map<string, string | null>();
+
+  const finish = (skipped: string): FileScanStats => {
+    const trackMsg = formatAcrTrackMessage({
+      probed: ready,
+      identified,
+      partial,
+      missed,
+    });
+    console.log(`[acr-fs] ${trackMsg}`);
+    return {
+      enabled: true,
+      submitted,
+      ready,
+      identified,
+      partial,
+      missed,
+      skipped,
+    };
+  };
 
   const applyReady = async (
     slug: string,
     setId: string,
     file: FsFile,
   ): Promise<void> => {
-    const hits = parseScanHits(file, cfg.minScore);
-    if (hits.length === 0) {
+    const { hits, partials } = parseScanResults(file, cfg.minScore);
+    if (hits.length === 0 && partials.length === 0) {
+      missed += 1;
       console.log(`[acr-fs] ${slug}: ready, no matches`);
       return;
     }
-    if (!genreCache.has(setId)) {
+    if (hits.length > 0 && !genreCache.has(setId)) {
       const s = await prisma.set.findUnique({
         where: { id: setId },
         select: { genre: true },
       });
       genreCache.set(setId, s?.genre ?? null);
     }
-    const { written, skipped } = await applyScanHitsToSet(
-      prisma,
-      setId,
-      genreCache.get(setId),
-      hits,
-      { dryRun },
-    );
-    identified += written;
-    console.log(
-      `[acr-fs] ${slug}: ${written} written, ${skipped} skipped (${hits.length} hits)`,
-    );
+    if (hits.length > 0) {
+      const { written, skipped } = await applyScanHitsToSet(
+        prisma,
+        setId,
+        genreCache.get(setId),
+        hits,
+        { dryRun },
+      );
+      identified += written;
+      console.log(
+        `[acr-fs] ${slug}: ${written} written, ${skipped} skipped (${hits.length} hits)`,
+      );
+    }
+    if (partials.length > 0) {
+      const parked = await applyScanPartialsToSet(prisma, setId, partials, {
+        dryRun,
+      });
+      partial += parked.parked;
+      console.log(
+        `[acr-fs] ${slug}: ${parked.parked} partial parked, ${parked.skipped} skipped (${partials.length} below floor)`,
+      );
+    }
   };
 
   for (const c of ytOnly) {
@@ -697,27 +796,17 @@ export async function enrichYoutubeSetsWithFileScan(
     `[acr-fs] submit ${submitted} new, reuse ${reused} already in container`,
   );
   if (submitted === 0 && reused === 0) {
-    return {
-      enabled: true,
-      submitted: 0,
-      ready,
-      identified,
-      skipped: "all submits failed (token/container/region?)",
-    };
+    return finish("all submits failed (token/container/region?)");
   }
 
   // Phase B — poll only files that are still processing (new submits + reused in-flight).
   const inflight = [...byVideo.values()].filter((v) => v.fileId && !v.done);
   if (inflight.length === 0) {
-    return {
-      enabled: true,
-      submitted,
-      ready,
-      identified,
-      skipped: reused
+    return finish(
+      reused
         ? `reused ${reused} already-scanned YouTube file(s); no re-submit`
         : "",
-    };
+    );
   }
   const deadline = Date.now() + timeoutMs;
 
@@ -751,6 +840,7 @@ export async function enrichYoutubeSetsWithFileScan(
         target.done = true;
         ready += 1;
         if (state !== 1) {
+          missed += 1;
           console.log(
             `[acr-fs] ${target.candidate.slug}: state=${state} (no result)`,
           );
@@ -767,13 +857,9 @@ export async function enrichYoutubeSetsWithFileScan(
   const stillPending = [...byVideo.values()].filter(
     (v) => v.fileId && !v.done,
   ).length;
-  return {
-    enabled: true,
-    submitted,
-    ready,
-    identified,
-    skipped: stillPending
+  return finish(
+    stillPending
       ? `${stillPending} scan(s) still processing (results persist; next run collects)`
       : "",
-  };
+  );
 }

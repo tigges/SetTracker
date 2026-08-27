@@ -15,6 +15,7 @@ import {
   type LlmCostProvider,
   type LlmSpendEstimate,
 } from "./llmCost";
+import { llmJobVariablesLabel } from "./llmTrackRecord";
 
 export type LlmJobDisclosure = {
   /** What question the model is asked. */
@@ -129,6 +130,7 @@ export function formatLlmPlan(plan: LlmPlan): string {
     const d = LLM_JOB_DISCLOSURE[job];
     if (!d) continue;
     lines.push(`  • ${job} — ${d.researches}`);
+    lines.push(`      tracks: ${llmJobVariablesLabel(job)}`);
     lines.push(`      sends:  ${d.sends}`);
     lines.push(`      writes: ${d.writes}`);
   }
@@ -167,12 +169,14 @@ export function formatLlmPlanMarkdown(plan: LlmPlan): string {
     }`,
   );
   lines.push("");
-  lines.push("| Job | Information researched | Sent to the model | Written back |");
-  lines.push("| --- | --- | --- | --- |");
+  lines.push("| Job | Tracks | Information researched | Sent to the model | Written back |");
+  lines.push("| --- | --- | --- | --- | --- |");
   for (const job of plan.jobs) {
     const d = LLM_JOB_DISCLOSURE[job];
     if (!d) continue;
-    lines.push(`| \`${job}\` | ${d.researches} | ${d.sends} | ${d.writes} |`);
+    lines.push(
+      `| \`${job}\` | ${llmJobVariablesLabel(job)} | ${d.researches} | ${d.sends} | ${d.writes} |`,
+    );
   }
   lines.push("");
   lines.push(

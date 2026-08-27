@@ -4,11 +4,11 @@ name: Catalog LLM research
 # Preferred provider is Gemini when GEMINI_API_KEY (or an alias) is set.
 #
 # Spend is disclosed before it happens. The `plan` job always runs first and
-# prints what each job researches, what is sent, what may be written, and the
-# cost range (also on the run summary). It sends nothing. The `spend` job runs
-# only on workflow_dispatch with Accept spend checked, and it sits behind the
-# `llm-spend` environment so a required reviewer can read the plan and approve.
-# Bumping data/llm-request only ever produces the plan.
+# prints variables, what is sent, what may be written, and the cost range
+# (also on the run summary). The `research` job then spends on a standing
+# budget — dispatch and data/llm-request pushes both call the model.
+# No per-run Accept / llm-spend reviewer. Local CLI still needs
+# LLM_RESEARCH_CONFIRM=1. Enrich / deep stay plan-only + parser cues.
 on:
   workflow_dispatch:
     inputs:
@@ -27,10 +27,6 @@ on:
         required: false
         default: "0"
         type: string
-      confirm_spend:
-        description: "Accept spend — Gemini ≈ $0.015–$0.045 / call, Claude ≈ $0.008–$0.025 / call. handles+events+quality cap 24 ≈ $0.77–$2.30 Gemini. Unchecked = plan only, nothing is sent."
-        type: boolean
-        default: false
   push:
     branches: [main]
     paths:
@@ -69,18 +65,9 @@ jobs:
           LLM_RESEARCH_APPLY: ${{ github.event.inputs.apply || '0' }}
         run: npm run research:plan
 
-      - name: Note how to approve
-        if: github.event_name != 'workflow_dispatch' || github.event.inputs.confirm_spend != 'true'
-        run: |
-          echo "::notice::Plan only — no model was called. To spend, run Actions → Catalog LLM research with Accept spend checked."
-
   research:
     needs: plan
-    # Hard gate: add yourself as a required reviewer on the llm-spend
-    # environment (Settings → Environments) and Actions will pause here
-    # until someone reads the plan above and approves.
-    environment: llm-spend
-    if: github.event_name == 'workflow_dispatch' && github.event.inputs.confirm_spend == 'true'
+    if: success()
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -140,9 +127,8 @@ jobs:
             echo "provider=claude" >> "$GITHUB_OUTPUT"
           fi
 
-      # Reprints the plan, then spends. Approved above via the llm-spend
-      # environment plus the Accept spend checkbox.
-      - name: LLM handle research (approved spend)
+      # Reprints the plan, then spends. Standing budget — no Accept checkbox.
+      - name: LLM research (standing spend)
         env:
           CLAUDE_AGENT_API: ${{ secrets.CLAUDE_AGENT_API }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}

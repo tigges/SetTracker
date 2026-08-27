@@ -14,11 +14,19 @@ import type { PrismaClient } from "@prisma/client";
 import { isJunkArtistName } from "../../artistName";
 import { HELD_PLAYBACK_WATCH } from "../nextCaptures";
 import {
+  addLlmTally,
+  classifyLlmOutcome,
+  emptyLlmTally,
+} from "./llmTrackRecord";
+import {
   complete,
   detectLlmProvider,
   evaluateProposedUrl,
+  emptyResearchStats,
+  finishLlmJobStats,
   isResearchWorthyName,
   parseLlmJson,
+  previouslyResearchedKeys,
   probeLive,
   writeReport,
   type LlmProvider,
@@ -215,14 +223,7 @@ export async function titleMatchesOfficialWatch(
 }
 
 function emptyStats(provider: LlmProvider | null): ResearchStats {
-  return {
-    provider,
-    scanned: 0,
-    proposed: 0,
-    applied: 0,
-    rejected: 0,
-    skippedNoKey: !provider,
-  };
+  return emptyResearchStats(provider);
 }
 
 export async function runLlmIdentityResearch(
@@ -233,6 +234,7 @@ export async function runLlmIdentityResearch(
   const stats = emptyStats(provider);
   if (!provider) return stats;
   const limit = Math.max(1, opts.limit ?? Number(process.env.LLM_IDENTITY_LIMIT || 24));
+  const already = previouslyResearchedKeys("llm-identity-research");
   const djs = (
     await prisma.dj.findMany({
       where: {
@@ -248,7 +250,12 @@ export async function runLlmIdentityResearch(
       orderBy: { name: "asc" },
     })
   )
-    .filter((d) => isResearchWorthyName(d.name) && !isJunkArtistName(d.name))
+    .filter(
+      (d) =>
+        !already.has(d.slug) &&
+        isResearchWorthyName(d.name) &&
+        !isJunkArtistName(d.name),
+    )
     .slice(0, limit);
 
   const rows: Array<{
@@ -259,6 +266,7 @@ export async function runLlmIdentityResearch(
     reason: string;
     notes?: string;
   }> = [];
+  const tally = emptyLlmTally();
 
   for (const d of djs) {
     stats.scanned += 1;
@@ -279,6 +287,13 @@ Sets in catalog: ${d._count.sets}`,
       const ev = evaluateIdentityClass(d.name, proposal?.class);
       if (!ev.ok || !ev.value) {
         stats.rejected += 1;
+        addLlmTally(
+          tally,
+          classifyLlmOutcome({
+            found: false,
+            namedPartial: Boolean(proposal?.class),
+          }),
+        );
         rows.push({
           slug: d.slug,
           name: d.name,
@@ -288,6 +303,13 @@ Sets in catalog: ${d._count.sets}`,
         });
         continue;
       }
+      addLlmTally(
+        tally,
+        classifyLlmOutcome({
+          found: ev.value !== "unknown",
+          namedPartial: ev.value === "unknown",
+        }),
+      );
       rows.push({
         slug: d.slug,
         name: d.name,
@@ -298,6 +320,7 @@ Sets in catalog: ${d._count.sets}`,
       });
     } catch (err) {
       stats.rejected += 1;
+      addLlmTally(tally, "missed");
       rows.push({
         slug: d.slug,
         name: d.name,
@@ -308,17 +331,22 @@ Sets in catalog: ${d._count.sets}`,
     }
   }
 
+  finishLlmJobStats(stats, "identity", tally, "llm-identity");
   const tag = opts.reportTag ? `-${opts.reportTag}` : "";
   writeReport(`llm-identity-research${tag}.json`, {
     generatedAt: new Date().toISOString(),
     provider,
     write: false,
-    note: "Report only. Identity class never writes socials or 1001 URLs.",
+    variables: stats.variables,
+    tally: {
+      tracked: stats.scanned,
+      found: stats.found,
+      partial: stats.partial,
+      missed: stats.missed,
+    },
+    note: "Report only. Identity class never writes socials or 1001 URLs. Partial = unknown class; parked so the same slug is not retraced.",
     rows,
   });
-  console.log(
-    `[llm-identity] provider=${provider} scanned=${stats.scanned} rejected=${stats.rejected}`,
-  );
   return stats;
 }
 
@@ -332,29 +360,35 @@ export async function runLlmHomeCityResearch(
   const apply = process.env.LLM_RESEARCH_APPLY !== "0";
   const limit = Math.max(1, opts.limit ?? Number(process.env.LLM_HOMECITY_LIMIT || 20));
   const artistKeys = await loadArtistSocialKeys(prisma);
-  const djs = await prisma.dj.findMany({
-    where: {
-      homeCity: null,
-      sets: { some: {} },
-      OR: [
-        { soundcloud: { not: null } },
-        { youtube: { not: null } },
-        { instagram: { not: null } },
-        { website: { not: null } },
-      ],
-    },
-    select: {
-      id: true,
-      slug: true,
-      name: true,
-      website: true,
-      homeCity: true,
-    },
-    take: limit,
-    orderBy: { name: "asc" },
-  });
+  const already = previouslyResearchedKeys("llm-homecity-research");
+  const djs = (
+    await prisma.dj.findMany({
+      where: {
+        homeCity: null,
+        sets: { some: {} },
+        OR: [
+          { soundcloud: { not: null } },
+          { youtube: { not: null } },
+          { instagram: { not: null } },
+          { website: { not: null } },
+        ],
+      },
+      select: {
+        id: true,
+        slug: true,
+        name: true,
+        website: true,
+        homeCity: true,
+      },
+      take: Math.max(limit * 4, 40),
+      orderBy: { name: "asc" },
+    })
+  )
+    .filter((d) => !already.has(d.slug))
+    .slice(0, limit);
 
   const rows = [];
+  const tally = emptyLlmTally();
   for (const d of djs) {
     stats.scanned += 1;
     try {
@@ -371,6 +405,7 @@ DJ: ${d.name}`,
       } | null;
       if (!proposal) {
         stats.rejected += 1;
+        addLlmTally(tally, "missed");
         rows.push({ slug: d.slug, accepted: [], rejected: ["no json"] });
         continue;
       }
@@ -411,9 +446,17 @@ DJ: ${d.name}`,
           stats.rejected += 1;
         }
       }
+      addLlmTally(
+        tally,
+        classifyLlmOutcome({
+          found: accepted.length > 0,
+          namedPartial: rejected.length > 0,
+        }),
+      );
       rows.push({ slug: d.slug, name: d.name, accepted, rejected });
     } catch (err) {
       stats.rejected += 1;
+      addLlmTally(tally, "missed");
       rows.push({
         slug: d.slug,
         name: d.name,
@@ -423,16 +466,21 @@ DJ: ${d.name}`,
     }
   }
 
+  finishLlmJobStats(stats, "homecity", tally, "llm-homecity");
   const tag = opts.reportTag ? `-${opts.reportTag}` : "";
   writeReport(`llm-homecity-research${tag}.json`, {
     generatedAt: new Date().toISOString(),
     provider,
     apply,
+    variables: stats.variables,
+    tally: {
+      tracked: stats.scanned,
+      found: stats.found,
+      partial: stats.partial,
+      missed: stats.missed,
+    },
     rows,
   });
-  console.log(
-    `[llm-homecity] provider=${provider} scanned=${stats.scanned} applied=${stats.applied}`,
-  );
   return stats;
 }
 
@@ -443,8 +491,16 @@ export async function runLlmOfficialVideoResearch(
   const stats = emptyStats(provider);
   if (!provider) return stats;
 
+  const already = previouslyResearchedKeys(
+    "llm-official-video-research",
+    (row) =>
+      (typeof row.seed === "string" && row.seed) ||
+      (typeof row.name === "string" ? row.name : undefined),
+  );
   const rows = [];
+  const tally = emptyLlmTally();
   for (const held of HELD_PLAYBACK_WATCH) {
+    if (already.has(held.name) || already.has(held.seed)) continue;
     stats.scanned += 1;
     try {
       const text = await complete(
@@ -459,6 +515,7 @@ Search hints: ${held.search.join(" ")}`,
       const ev = evaluateOfficialWatchUrl(proposal?.watchUrl);
       if (ev.ok && ev.url && isFingerprintOnlyWatchUrl(ev.url)) {
         stats.rejected += 1;
+        addLlmTally(tally, "partial");
         rows.push({
           name: held.name,
           seed: held.seed,
@@ -469,6 +526,13 @@ Search hints: ${held.search.join(" ")}`,
       }
       if (!ev.ok || !ev.url) {
         stats.rejected += 1;
+        addLlmTally(
+          tally,
+          classifyLlmOutcome({
+            found: false,
+            namedPartial: Boolean(proposal?.watchUrl),
+          }),
+        );
         rows.push({
           name: held.name,
           seed: held.seed,
@@ -481,6 +545,7 @@ Search hints: ${held.search.join(" ")}`,
       const live = await probeLive(ev.url);
       if (live === "dead") {
         stats.rejected += 1;
+        addLlmTally(tally, "partial");
         rows.push({
           name: held.name,
           seed: held.seed,
@@ -496,6 +561,7 @@ Search hints: ${held.search.join(" ")}`,
       );
       if (!titled.ok) {
         stats.rejected += 1;
+        addLlmTally(tally, "partial");
         rows.push({
           name: held.name,
           seed: held.seed,
@@ -505,6 +571,7 @@ Search hints: ${held.search.join(" ")}`,
         });
         continue;
       }
+      addLlmTally(tally, "found");
       rows.push({
         name: held.name,
         seed: held.seed,
@@ -514,6 +581,7 @@ Search hints: ${held.search.join(" ")}`,
       });
     } catch (err) {
       stats.rejected += 1;
+      addLlmTally(tally, "missed");
       rows.push({
         name: held.name,
         seed: held.seed,
@@ -523,17 +591,22 @@ Search hints: ${held.search.join(" ")}`,
     }
   }
 
+  finishLlmJobStats(stats, "videos", tally, "llm-videos");
   const tag = opts.reportTag ? `-${opts.reportTag}` : "";
   writeReport(`llm-official-video-research${tag}.json`, {
     generatedAt: new Date().toISOString(),
     provider,
     write: false,
-    note: "Report only. Operator wires official playback; never invent 1001 URLs.",
+    variables: stats.variables,
+    tally: {
+      tracked: stats.scanned,
+      found: stats.found,
+      partial: stats.partial,
+      missed: stats.missed,
+    },
+    note: "Report only. Operator wires official playback; never invent 1001 URLs. Parked rows are not retraced.",
     rows,
   });
-  console.log(
-    `[llm-videos] provider=${provider} scanned=${stats.scanned} rejected=${stats.rejected}`,
-  );
   return stats;
 }
 
@@ -549,14 +622,23 @@ export async function runLlmTrackIdResearch(
     1,
     opts.limit ?? Number(process.env.LLM_TRACK_ID_LIMIT || 12),
   );
-  const tracks = await prisma.track.findMany({
-    where: { isrc: null },
-    select: { id: true, title: true, artistName: true, isrc: true, beatportUrl: true },
-    take: limit,
-    orderBy: { createdAt: "desc" },
-  });
+  const already = previouslyResearchedKeys(
+    "llm-track-id-research",
+    (row) => (typeof row.id === "string" ? row.id : undefined),
+  );
+  const tracks = (
+    await prisma.track.findMany({
+      where: { isrc: null },
+      select: { id: true, title: true, artistName: true, isrc: true, beatportUrl: true },
+      take: Math.max(limit * 4, 40),
+      orderBy: { createdAt: "desc" },
+    })
+  )
+    .filter((t) => !already.has(t.id))
+    .slice(0, limit);
 
   const rows = [];
+  const tally = emptyLlmTally();
   for (const t of tracks) {
     stats.scanned += 1;
     try {
@@ -585,12 +667,20 @@ Title: ${t.title}`,
       const ev = evaluateConfirmedTrackIds(proposal, confirmed);
       if (!ev.ok) {
         stats.rejected += 1;
+        addLlmTally(
+          tally,
+          classifyLlmOutcome({
+            found: false,
+            namedPartial: Boolean(proposal?.isrc || proposal?.beatportUrl),
+          }),
+        );
         rows.push({
           id: t.id,
           artist: t.artistName,
           title: t.title,
           accepted: null,
           reason: ev.reason,
+          proposal,
         });
         continue;
       }
@@ -603,6 +693,7 @@ Title: ${t.title}`,
           stats.applied += 1;
         }
       }
+      addLlmTally(tally, "found");
       rows.push({
         id: t.id,
         artist: t.artistName,
@@ -612,6 +703,7 @@ Title: ${t.title}`,
       });
     } catch (err) {
       stats.rejected += 1;
+      addLlmTally(tally, "missed");
       rows.push({
         id: t.id,
         artist: t.artistName,
@@ -622,17 +714,22 @@ Title: ${t.title}`,
     }
   }
 
+  finishLlmJobStats(stats, "tracks", tally, "llm-tracks");
   const tag = opts.reportTag ? `-${opts.reportTag}` : "";
   writeReport(`llm-track-id-research${tag}.json`, {
     generatedAt: new Date().toISOString(),
     provider,
     write: apply,
-    note: "Fill-null Track.isrc / beatportUrl only when Deezer/MB confirms the proposal.",
+    variables: stats.variables,
+    tally: {
+      tracked: stats.scanned,
+      found: stats.found,
+      partial: stats.partial,
+      missed: stats.missed,
+    },
+    note: "Fill-null Track.isrc / beatportUrl only when Deezer/MB confirms the proposal. Named-but-unconfirmed proposals stay in this report so the same track is not retraced.",
     rows,
   });
-  console.log(
-    `[llm-tracks] provider=${provider} scanned=${stats.scanned} applied=${stats.applied}`,
-  );
   return stats;
 }
 

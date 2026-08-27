@@ -56,6 +56,12 @@ import {
   estimateAuddSpend,
   formatAcrPlanMarkdown,
 } from "./acrCost";
+import {
+  acrPartialHasNames,
+  formatAcrPartialReason,
+  formatAcrTrackMessage,
+  playAlreadyAcrProbed,
+} from "./acrProbeRecord";
 import { createHmac } from "node:crypto";
 import { execFile } from "node:child_process";
 import { appendFileSync } from "node:fs";
@@ -140,6 +146,10 @@ export type AcrEnrichStats = {
   probed: number;
   identified: number;
   unresolved: number;
+  /** Weak hits that stored artist / title / ISRC as a grey miss. */
+  partial: number;
+  /** Probes that returned no usable fields. */
+  missed: number;
   skipped: string;
   /** yt-dlp clips that failed (bot-wall, empty, timeout). */
   clipFails: number;
@@ -159,6 +169,8 @@ export type AcrSetEnrichResult = {
   probed: number;
   identified: number;
   unresolved: number;
+  partial: number;
+  missed: number;
   clipFails: number;
   botWall: boolean;
   skipReason: string;
@@ -173,6 +185,8 @@ function emptyStats(
     probed: 0,
     identified: 0,
     unresolved: 0,
+    partial: 0,
+    missed: 0,
     clipFails: 0,
     setsProbed: 0,
     youtubeBotWalls: 0,
@@ -555,17 +569,24 @@ export function planGapProbes(
 }
 
 /**
- * True when Identify still has work: unresolved cues, or gap/transition
- * slots that are not already blocked by a hit *or* a recorded miss.
+ * True when Identify still has work: unresolved cues that have not been
+ * parked as `acr-miss`, or gap/transition slots that are not already
+ * blocked by a hit *or* a recorded miss.
  */
 export function hasRemainingAcrWork(opts: {
   durationSec: number;
   plays: ExistingPlayMark[];
   unresolvedCount: number;
+  /**
+   * Unresolved cues that still need a probe. Defaults to `unresolvedCount`.
+   * Pass 0 when every pink ID already has an `acr-miss` park.
+   */
+  unresolvedNeedProbe?: number;
   stepSec?: number;
   sampleSec?: number;
 }): boolean {
-  if (opts.unresolvedCount > 0) return true;
+  const needProbe = opts.unresolvedNeedProbe ?? opts.unresolvedCount;
+  if (needProbe > 0) return true;
   const stepSec = opts.stepSec ?? 90;
   const sampleSec = opts.sampleSec ?? 12;
   return planGapProbes(
@@ -1168,7 +1189,13 @@ export async function selectSparseSetsForFingerprint(
       genre: true,
       type: true,
       plays: {
-        select: { idStatus: true, provenance: true, timestamp: true },
+        select: {
+          idStatus: true,
+          provenance: true,
+          timestamp: true,
+          rawText: true,
+          idTrack: { select: { note: true } },
+        },
       },
       artists: {
         where: { isPrimary: true },
@@ -1193,6 +1220,9 @@ export async function selectSparseSetsForFingerprint(
     const unresolvedCount = row.plays.filter(
       (p) => p.idStatus === "unresolved_id",
     ).length;
+    const unresolvedNeedProbe = row.plays.filter(
+      (p) => p.idStatus === "unresolved_id" && !playAlreadyAcrProbed(p),
+    ).length;
     // Duration-aware skip: a 2h set with 4 IDs is still sparse (~2/h).
     // Keep sets that still have unresolved IDs even if density looks ok.
     const expectedFloor = Math.max(
@@ -1205,6 +1235,7 @@ export async function selectSparseSetsForFingerprint(
         durationSec: row.durationSec,
         plays: row.plays,
         unresolvedCount,
+        unresolvedNeedProbe,
       })
     ) {
       continue;
@@ -1415,7 +1446,7 @@ export async function upsertFingerprintTrack(
 }
 
 /** Grey fingerprint miss — blocks the gap grid without counting as unresolved. */
-async function recordFingerprintMiss(
+export async function recordFingerprintMiss(
   prisma: PrismaClient,
   setId: string,
   offsetSec: number,
@@ -1464,6 +1495,8 @@ async function enrichOneSet(
     probed: 0,
     identified: 0,
     unresolved: 0,
+    partial: 0,
+    missed: 0,
     clipFails: 0,
     botWall: false,
     skipReason: "",
@@ -1531,6 +1564,8 @@ async function enrichOneSet(
   let probed = 0;
   let identified = 0;
   let unresolved = 0;
+  let partial = 0;
+  let missed = 0;
   let clipFails = 0;
   let clipAttempts = 0;
   let consecutiveFails = 0;
@@ -1562,10 +1597,41 @@ async function enrichOneSet(
     return null;
   };
 
+  const parkResolveNote = async (
+    play: (typeof set.plays)[number],
+    reason: string,
+  ): Promise<void> => {
+    const note = `acr-miss: ${reason}`.slice(0, 240);
+    if (play.idTrackId) {
+      await prisma.idTrack.update({
+        where: { id: play.idTrackId },
+        data: { note },
+      });
+      return;
+    }
+    const idTrack = await prisma.idTrack.create({
+      data: {
+        label: `ID @ ${fmtTimestamp(play.timestamp)}`,
+        note,
+        status: "unresolved",
+      },
+    });
+    await prisma.played.update({
+      where: { id: play.id },
+      data: { idTrackId: idTrack.id },
+    });
+  };
+
+  const tallyWeakOrMiss = (hit: AcrHit | null): void => {
+    unresolved += 1;
+    if (acrPartialHasNames(hit)) partial += 1;
+    else missed += 1;
+  };
+
   // 1) Resolve existing unresolved_id cues and host ID-asks at those times.
   const unresolvedPlays = set.plays
     .filter((p) => {
-      if (/acr-miss/i.test(p.idTrack?.note ?? "")) return false;
+      if (playAlreadyAcrProbed(p)) return false;
       if (p.idStatus === "unresolved_id") return true;
       return (
         isHostCommentProvenance(p.provenance) &&
@@ -1587,25 +1653,16 @@ async function enrichOneSet(
       console.warn(
         `[acrcloud] resolve fail ${candidate.slug}@${play.timestamp}: ${result.error}`,
       );
-      if (!opts.dryRun && play.idTrackId) {
-        await prisma.idTrack.update({
-          where: { id: play.idTrackId },
-          data: { note: `acr-miss: ${result.error}` },
-        });
+      tallyWeakOrMiss(null);
+      if (!opts.dryRun) {
+        await parkResolveNote(play, formatAcrPartialReason(null, result.error));
       }
       continue;
     }
     if (!result.hit || result.hit.score < opts.minScore) {
-      unresolved += 1;
-      if (!opts.dryRun && play.idTrackId) {
-        await prisma.idTrack.update({
-          where: { id: play.idTrackId },
-          data: {
-            note: result.hit
-              ? `acr-miss: weak score ${result.hit.score}`
-              : "acr-miss: no ACRCloud match",
-          },
-        });
+      tallyWeakOrMiss(result.hit);
+      if (!opts.dryRun) {
+        await parkResolveNote(play, formatAcrPartialReason(result.hit));
       }
       continue;
     }
@@ -1701,13 +1758,14 @@ async function enrichOneSet(
       console.warn(
         `[acrcloud] identify fail ${candidate.slug}@${plan.offsetSec}: ${result.error}`,
       );
+      tallyWeakOrMiss(null);
       // Record the miss so the next run advances past this offset.
       if (!opts.dryRun) {
         await recordFingerprintMiss(
           prisma,
           candidate.id,
           plan.offsetSec,
-          result.error,
+          formatAcrPartialReason(null, result.error),
         );
       }
       marks.push({
@@ -1720,18 +1778,18 @@ async function enrichOneSet(
 
     const tsLabel = fmtTimestamp(plan.offsetSec);
     if (!result.hit || result.hit.score < opts.minScore) {
-      unresolved += 1;
+      tallyWeakOrMiss(result.hit);
       // Default: do not write weak gap rows — they inflate unresolvedCount and
       // crowd the next enrich queue. Opt in with ACRCLOUD_WRITE_WEAK_GAPS=1.
-      // Always record a grey miss so we do not re-Identify the same offset.
+      // Always record a grey miss (with names / ISRC when ACR returned them)
+      // so we do not re-Identify the same offset.
+      const partialReason = formatAcrPartialReason(result.hit);
       if (!opts.dryRun && writeWeakGaps) {
         const idLabel = `ID @ ${tsLabel} (fingerprint weak)`;
         const idTrack = await prisma.idTrack.create({
           data: {
             label: idLabel,
-            note: result.hit
-              ? `weak score ${result.hit.score}: ${result.hit.artist} - ${result.hit.title}`
-              : "no ACRCloud match",
+            note: partialReason,
             status: "unresolved",
           },
         });
@@ -1743,7 +1801,7 @@ async function enrichOneSet(
             timestamp: plan.offsetSec,
             idStatus: "unresolved_id",
             provenance: "fingerprint",
-            rawText: idLabel,
+            rawText: `acr-miss @ ${tsLabel}: ${partialReason}`.slice(0, 240),
             idTrackId: idTrack.id,
           },
         });
@@ -1752,9 +1810,7 @@ async function enrichOneSet(
           prisma,
           candidate.id,
           plan.offsetSec,
-          result.hit
-            ? `weak score ${result.hit.score}`
-            : "no ACRCloud match",
+          partialReason,
         );
       }
       marks.push({
@@ -1810,7 +1866,16 @@ async function enrichOneSet(
     });
   }
 
-  return { probed, identified, unresolved, clipFails, botWall, skipReason: "" };
+  return {
+    probed,
+    identified,
+    unresolved,
+    partial,
+    missed,
+    clipFails,
+    botWall,
+    skipReason: "",
+  };
 }
 
 /**
@@ -1865,7 +1930,7 @@ export async function enrichSparseSetsWithAcrCloud(
   }
   if (!dryRun && !acrSpendConfirmed()) {
     console.log(
-      "[acrcloud] no requests — set ACRCLOUD_CONFIRM_SPEND=1 for this run (Catalog enrich: check Accept ACR spend)",
+      "[acrcloud] no requests — set ACRCLOUD_CONFIRM_SPEND=1 for this local run",
     );
     return emptyStats({
       enabled: false,
@@ -1905,6 +1970,8 @@ export async function enrichSparseSetsWithAcrCloud(
   let probed = 0;
   let identified = 0;
   let unresolved = 0;
+  let partial = 0;
+  let missed = 0;
   let clipFails = 0;
   let setsWithStream = 0;
   let youtubeBotWalls = 0;
@@ -1964,6 +2031,8 @@ export async function enrichSparseSetsWithAcrCloud(
     probed += r.probed;
     identified += r.identified;
     unresolved += r.unresolved;
+    partial += r.partial;
+    missed += r.missed;
     clipFails += r.clipFails;
     if (r.botWall) {
       youtubeBotWalls += 1;
@@ -1980,7 +2049,7 @@ export async function enrichSparseSetsWithAcrCloud(
       ? `bot-wall (clipFails=${r.clipFails})`
       : r.skipReason
         ? `skip — ${r.skipReason}`
-        : `probed=${r.probed} hits=${r.identified} weak=${r.unresolved} clipFails=${r.clipFails}`;
+        : `probed=${r.probed} hits=${r.identified} partial=${r.partial} miss=${r.missed} clipFails=${r.clipFails}`;
     console.log(`[acrcloud] done ${c.slug}: ${result}`);
     console.log("::endgroup::");
     console.log(
@@ -1989,12 +2058,23 @@ export async function enrichSparseSetsWithAcrCloud(
     appendIdentifySummary([`| ${c.slug} | ${c.host} | ${result} |`]);
   }
 
+  const trackMsg = formatAcrTrackMessage({
+    probed,
+    identified,
+    partial,
+    missed,
+  });
+  console.log(`[acrcloud] ${trackMsg}`);
+  appendIdentifySummary(["", trackMsg, ""]);
+
   return emptyStats({
     enabled: true,
     candidates: candidates.length,
     probed,
     identified,
     unresolved,
+    partial,
+    missed,
     clipFails,
     setsProbed: setsWithStream,
     youtubeBotWalls,

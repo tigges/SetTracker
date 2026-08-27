@@ -24,10 +24,6 @@ on:
           - acr
           - smoke
           - full
-      confirm_acr_spend:
-        description: "Accept ACR spend — Identify ≈ $0.002–$0.006 / clip, File Scan ≈ $0.05–$0.15 / audio-hour. Unchecked = print the estimate and send nothing."
-        type: boolean
-        default: false
   # Agents often lack workflow_dispatch; bump on main to start:
   #   data/enrich-request      → acr (fast)
   #   data/enrich-full-request → full (thumbs + MB + deep ACR + filescan)
@@ -50,16 +46,14 @@ concurrency:
 jobs:
   enrich:
     runs-on: ubuntu-latest
-    # ACR is billable, so the whole pass sits behind the acr-spend
-    # environment. Add a required reviewer (Settings → Environments) and
-    # Actions pauses here until someone reads the estimate and approves.
-    environment: acr-spend
+    # Standing ACR budget — cron, enrich-request pushes, and dispatch all
+    # spend. The job still prints variables / probe count / hit rate first.
+    # Local CLI (`npm run enrich:fingerprint`) still needs
+    # ACRCLOUD_CONFIRM_SPEND=1. Diagnose keeps the acr-spend environment.
     # Hosted cap is 6h; leave headroom so we never rely on the hard cancel.
     timeout-minutes: 340
     env:
-      # Every billable ACR request needs this for the run. Unchecked (and
-      # cron / data/enrich-request pushes) print the estimate and send nothing.
-      ACRCLOUD_CONFIRM_SPEND: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.confirm_acr_spend == 'true' && '1' || '0' }}
+      ACRCLOUD_CONFIRM_SPEND: "1"
     steps:
       - uses: actions/checkout@v4
 
@@ -276,8 +270,8 @@ jobs:
         run: npm run research:track-ids
         continue-on-error: true
 
-      # No LLM here. Model spend only happens in Catalog LLM research, where
-      # the plan and cost are disclosed and a reviewer approves first.
+      # No LLM here. Model spend lives in Catalog LLM research (standing
+      # budget). This step only prints the plan.
       - name: LLM research plan (sends nothing)
         if: steps.mode.outputs.do_thumbs == '1'
         env:

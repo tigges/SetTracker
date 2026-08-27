@@ -35,9 +35,17 @@ import { fetchWatchMeta } from "../youtube/client";
 import { isFingerprintOnlyWatchUrl } from "../identify/fingerprintWatch";
 import type { RawPlay } from "../types";
 import {
+  addLlmTally,
+  classifyLlmOutcome,
+  emptyLlmTally,
+} from "./llmTrackRecord";
+import {
   complete,
   detectLlmProvider,
+  emptyResearchStats,
+  finishLlmJobStats,
   parseLlmJson,
+  previouslyResearchedKeys,
   writeReport,
   type LlmProvider,
   type ResearchStats,
@@ -241,14 +249,7 @@ export async function fetchFirstPartyCueText(
 }
 
 function emptyStats(provider: LlmProvider | null): ResearchStats {
-  return {
-    provider,
-    scanned: 0,
-    proposed: 0,
-    applied: 0,
-    rejected: 0,
-    skippedNoKey: false,
-  };
+  return emptyResearchStats(provider);
 }
 
 async function upsertCueTrack(
@@ -402,9 +403,11 @@ export async function runLlmCueResearch(
     take: windowSize,
   });
 
+  const already = previouslyResearchedKeys("llm-cue-research");
   const stubs = sets
     .filter((set) => isCueStub(set.plays))
     .filter((set) => !set.plays.some((p) => p.provenance === "1001tl"))
+    .filter((set) => !already.has(set.slug))
     .filter((set) => {
       const url = set.playbackUrl || set.sourceUrl;
       return !!url && !isFingerprintOnlyWatchUrl(url);
@@ -418,6 +421,7 @@ export async function runLlmCueResearch(
 
   const rows: unknown[] = [];
   const skipped: unknown[] = [];
+  const tally = emptyLlmTally();
   let skippedRadio = 0;
   let skippedNoClocks = 0;
   let skippedNoText = 0;
@@ -447,6 +451,13 @@ export async function runLlmCueResearch(
       if (skipped.length < 24) {
         skipped.push({ slug: set.slug, reason });
       }
+      addLlmTally(
+        tally,
+        classifyLlmOutcome({
+          found: false,
+          namedPartial: reason !== "no first-party text",
+        }),
+      );
       continue;
     }
 
@@ -478,6 +489,7 @@ ${firstParty.text.slice(0, 8000)}`,
           reason: err instanceof Error ? err.message : String(err),
         });
         stats.rejected += 1;
+        addLlmTally(tally, "missed");
         continue;
       }
     }
@@ -485,6 +497,7 @@ ${firstParty.text.slice(0, 8000)}`,
     const merged = cuePlaysForWrite(firstParty.plays, extra, applyLlm);
     if (merged.length === 0) {
       stats.rejected += 1;
+      addLlmTally(tally, "partial");
       rows.push({
         slug: set.slug,
         accepted: 0,
@@ -496,6 +509,7 @@ ${firstParty.text.slice(0, 8000)}`,
 
     const applied = await applyCuePlays(prisma, set.id, merged, set.genre);
     stats.applied += applied;
+    addLlmTally(tally, "found");
 
     rows.push({
       slug: set.slug,
@@ -514,13 +528,21 @@ ${firstParty.text.slice(0, 8000)}`,
     });
   }
 
+  finishLlmJobStats(stats, "cues", tally, "llm-cues");
   const tag = opts.reportTag ? `-${opts.reportTag}` : "";
   writeReport(`llm-cue-research${tag}.json`, {
     generatedAt: new Date().toISOString(),
     provider,
     apply: true,
     applyLlm,
-    note: "Parser clocks always write. LLM extras only when LLM_RESEARCH_APPLY≠0, and only clocks that already appear in that text. Never interpolates. Never overwrites 1001tl / fingerprint / community. Queue ranks live YT/hearthis ahead of radio; radio without clocks does not consume the limit.",
+    variables: stats.variables,
+    tally: {
+      tracked: stats.scanned,
+      found: stats.found,
+      partial: stats.partial,
+      missed: stats.missed,
+    },
+    note: "Parser clocks always write. LLM extras only when LLM_RESEARCH_APPLY≠0, and only clocks that already appear in that text. Never interpolates. Never overwrites 1001tl / fingerprint / community. Queue ranks live YT/hearthis ahead of radio; radio without clocks does not consume the limit. Probed slugs park so the same stub is not retraced.",
     window: sets.length,
     stubs: stubs.length,
     probed: probes,
@@ -530,9 +552,5 @@ ${firstParty.text.slice(0, 8000)}`,
     skipped,
     rows,
   });
-  console.log(
-    `[llm-cues] provider=${provider ?? "parser"} scanned=${stats.scanned} proposed=${stats.proposed} applied=${stats.applied}` +
-      ` probed=${probes} skippedRadio=${skippedRadio} skippedNoClocks=${skippedNoClocks}`,
-  );
   return stats;
 }

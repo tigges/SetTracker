@@ -9,6 +9,11 @@ import { appendFileSync } from "node:fs";
 import { PrismaClient } from "@prisma/client";
 import { enrichYoutubeSetsWithFileScan } from "../src/lib/ingest/enrich/acrFileScan";
 import {
+  ACR_IDENTIFY_VARIABLES_LABEL,
+  formatAcrHitRate,
+  formatAcrTrackMessage,
+} from "../src/lib/ingest/enrich/acrProbeRecord";
+import {
   githubEnrichContext,
   mergeEnrichRunReport,
 } from "../src/lib/ingest/enrich/enrichRunReport";
@@ -31,12 +36,23 @@ async function main() {
       [
         "## ACRCloud File Scanning (YouTube)",
         "",
+        formatAcrTrackMessage({
+          probed: stats.ready,
+          identified: stats.identified,
+          partial: stats.partial,
+          missed: stats.missed,
+        }),
+        "",
         `| Field | Value |`,
         `| --- | --- |`,
+        `| tracks | ${ACR_IDENTIFY_VARIABLES_LABEL} |`,
         `| enabled | ${stats.enabled} |`,
         `| submitted | ${stats.submitted} |`,
         `| ready | ${stats.ready} |`,
         `| identified | ${stats.identified} |`,
+        `| hit rate | ${formatAcrHitRate(stats.identified, stats.ready)} |`,
+        `| partial parked | ${stats.partial} |`,
+        `| no-match | ${stats.missed} |`,
         `| skipped | ${stats.skipped || "—"} |`,
         "",
       ].join("\n"),
@@ -50,6 +66,10 @@ async function main() {
         submitted: stats.submitted,
         ready: stats.ready,
         identified: stats.identified,
+        partial: stats.partial,
+        missed: stats.missed,
+        variables: ACR_IDENTIFY_VARIABLES_LABEL,
+        hitRate: formatAcrHitRate(stats.identified, stats.ready),
         skipped: stats.skipped,
       },
     });

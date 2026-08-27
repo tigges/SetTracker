@@ -153,6 +153,14 @@ Identify 20×12 + File Scan 16, no thumbs/LLM; `data/enrich-request`), `smoke`
 (4×5). Each expensive step times out and checkpoints the DB so a 6h GitHub
 cancel cannot throw away Identify hits. Do not start deep and enrich at the same time.
 
+**Automated IDs** (Catalog enrich, standing budget): Identify + File Scan
+(artist, title, ISRC, score, offset), cue parser apply, track-id fill-null.
+Weak or empty probes park those fields so the same clip is not retraced. Each
+run prints variables, probe count, and hit rate. Catalog LLM research is also
+automated (standing budget): each job names its variables and parks partial
+or empty results so the same row is not retraced. **Manual IDs:** Capture 1001,
+Suggest ID, wire official playbacks, entity-complete pins.
+
 ### ACRCloud fingerprint enrich
 
 `npm run enrich:fingerprint` samples SoundCloud / hearthis playback and
@@ -165,7 +173,7 @@ the same way. Writes `Played` rows with `provenance: fingerprint` into
 | Env | Effect |
 | --- | --- |
 | `ACRCLOUD_ENABLED=1` | Hard gate (no network without this) |
-| `ACRCLOUD_CONFIRM_SPEND=1` | **Required per run**, covers ACR Identify + File Scan + AudD recognize. Without it the pass prints the cost estimate and sends nothing |
+| `ACRCLOUD_CONFIRM_SPEND=1` | Required for a local CLI run (Identify + File Scan + AudD). Catalog enrich sets this automatically — no per-run Accept. Without it the pass prints the estimate and sends nothing |
 | `ACR_USD_PER_AUDD_LOW` / `_HIGH` | Override the AudD per-clip estimate (default ≈ $0.003–$0.008) |
 | `ACR_USD_PER_IDENTIFY_LOW` / `_HIGH` | Override the per-clip estimate (default ≈ $0.002–$0.006) |
 | `ACR_USD_PER_FS_HOUR_LOW` / `_HIGH` | Override the File Scan per-audio-hour estimate (default ≈ $0.05–$0.15) |
@@ -188,8 +196,9 @@ returns every matched track with an offset. `npm run enrich:filescan` (and a
 step in `catalog-enrich.yml`) scans a **YouTube-only** sparse queue this way
 (Identify keeps SoundCloud/hearthis first; File Scanning does not share that
 ranking). Held official playbacks on the fan-clip watch list are skipped. Already-scanned
-YouTube files in the ACR container are reused (no re-submit). Identify writes
-grey `acr-miss` rows so the same offset is not probed again. Writes the same
+YouTube files in the ACR container are reused (no re-submit). Identify and
+File Scan write grey `acr-miss` rows (including artist / title / ISRC on weak
+hits) so the same offset is not probed again. Writes the same
 `provenance: fingerprint` gap-fill rows. No-op unless configured.
 
 | Env | Effect |
@@ -267,15 +276,14 @@ handle must overlap the DJ name, it must be live, and it must not belong to
 another catalog DJ. Missing keys → safe no-op.
 
 **Nothing is sent to a model without a printed plan first.** Every run
-discloses, per job, what is researched, what catalog data goes in the prompt,
-what may be written back, and the estimated USD range — then asks. `complete()`
-throws if either the disclosure or the confirmation is missing, so a new call
-site cannot skip it. `npm run research:plan` prints the plan and sends nothing.
-Catalog deep and Catalog enrich never call a model: they print the plan and run
-the deterministic cue parser. Spend happens only in **Catalog LLM research**,
-which prints the plan in its own `plan` job and then waits for **Accept spend**
-plus `llm-spend` environment approval. Reports:
-`data/crosscheck/llm-handle-research.json`.
+discloses, per job, the variables it tracks, what catalog data goes in the
+prompt, what may be written back, and the estimated USD range. After the run
+it prints tracked / found / partial parked / no-match. `complete()` throws
+if the disclosure is missing. Catalog LLM research spends on a standing
+budget (dispatch and `data/llm-request`) — no per-run Accept. Local CLI
+still needs `LLM_RESEARCH_CONFIRM=1`. Catalog deep and Catalog enrich never
+call a model: they print the plan and run the deterministic cue parser.
+Reports: `data/crosscheck/llm-handle-research.json`.
 Cue research (`LLM_RESEARCH_JOBS=cues`) re-parses first-party YT/SC/hearthis
 on empty/stub lists (live YT/hearthis first; radio without clocks is
 skipped). Parser clocks always write (no key needed). `LLM_RESEARCH_APPLY=0`

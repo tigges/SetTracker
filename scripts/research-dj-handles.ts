@@ -8,16 +8,20 @@
  *   LLM_RESEARCH_JOBS=all npm run research:handles
  *   npm run research:handles -- --plan              # print the plan + cost, send nothing
  *   LLM_RESEARCH_APPLY=0 npm run research:handles   # parser clocks write; LLM extras report-only
- *   LLM_RESEARCH_CONFIRM=1 npm run research:handles # accept spend (or type yes on a TTY)
+ *   LLM_RESEARCH_CONFIRM=1 npm run research:handles # local spend (Actions sets this)
  *   LLM_QUALITY=1 npm run research:handles          # extra model commentary
  *   LLM_RESEARCH_PROVIDER=gemini|claude|both
  *
  * When both keys are present, default is both (Gemini first — Search
  * grounding — then Claude on whoever is still handle-less).
  */
+import { appendFileSync } from "node:fs";
 import { PrismaClient } from "@prisma/client";
 import { confirmLlmSpend } from "../src/lib/ingest/discovery/llmConfirm";
 import { buildLlmPlan } from "../src/lib/ingest/discovery/llmPlan";
+import { formatLlmTrackMessage } from "../src/lib/ingest/discovery/llmTrackRecord";
+import type { LlmCostJob } from "../src/lib/ingest/discovery/llmCost";
+import type { ResearchStats } from "../src/lib/ingest/discovery/llmResearch";
 import {
   parseResearchJobs,
   runLlmHomeCityResearch,
@@ -184,6 +188,47 @@ async function main() {
     done.videos = videos;
   }
 
+  const summaries: string[] = [];
+  const asStats = (value: unknown): ResearchStats | null => {
+    if (!value || typeof value !== "object") return null;
+    const s = value as { research?: ResearchStats } | ResearchStats;
+    if ("research" in s && s.research) return s.research;
+    if ("scanned" in s) return s as ResearchStats;
+    return null;
+  };
+  for (const [job, value] of Object.entries(done)) {
+    if (job === "jobs") continue;
+    const rounds = Array.isArray(value) ? value : [value];
+    for (const round of rounds) {
+      const stats = asStats(round);
+      if (!stats) continue;
+      summaries.push(
+        formatLlmTrackMessage(job as LlmCostJob, {
+          tracked: stats.scanned,
+          found: stats.found,
+          partial: stats.partial,
+          missed: stats.missed,
+        }),
+      );
+    }
+  }
+  if (summaries.length) {
+    console.log("[llm-research] results");
+    for (const line of summaries) console.log(`  ${line}`);
+    const path = process.env.GITHUB_STEP_SUMMARY;
+    if (path) {
+      try {
+        appendFileSync(
+          path,
+          ["", "### LLM research results", "", ...summaries.map((l) => `- ${l}`), ""].join(
+            "\n",
+          ),
+        );
+      } catch {
+        /* summary is optional */
+      }
+    }
+  }
   console.log("Done:", done);
   await prisma.$disconnect();
 }

@@ -46,6 +46,9 @@ assert.equal(Number(fs.usdHigh.toFixed(2)), 4.5);
 assert.match(acrDisclosure("identify").sends, /audio clips/i);
 assert.match(acrDisclosure("filescan").sends, /YouTube URL/i);
 assert.match(acrDisclosure("identify").writes, /fingerprint/);
+assert.match(acrDisclosure("identify").researches, /artist, title, ISRC, score, offset/);
+assert.match(acrDisclosure("identify").writes, /acr-miss/);
+assert.match(acrDisclosure("filescan").researches, /artist, title, ISRC/);
 
 const text = formatAcrPlan(identify);
 assert.match(text, /nothing has been sent yet/);

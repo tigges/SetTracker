@@ -33,6 +33,7 @@ assert.match(text, /nothing has been sent yet/);
 assert.match(text, /Gemini Flash \+ Google Search/);
 assert.match(text, /Information researched:/);
 assert.match(text, /handles — Official SoundCloud/);
+assert.match(text, /tracks: SoundCloud, YouTube, Instagram, X, website/);
 assert.match(text, /sends:/);
 assert.match(text, /writes:/);
 assert.match(text, /Estimated cost: ≈ \$0\.72–\$2\.16/);
