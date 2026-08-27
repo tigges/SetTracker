@@ -1,20 +1,46 @@
 [
   {
     "setSlug": "sc-jamie-jones-hot-rbot-radio-254",
+    "position": 1,
+    "timestamp": 348,
+    "trackTitle": "So Sweet",
+    "artistName": "Michel De Hey",
+    "label": "Future Feel",
+    "suggestedBy": "suggest-id"
+  },
+  {
+    "setSlug": "sc-jamie-jones-hot-rbot-radio-254",
+    "position": 4,
+    "timestamp": 1044,
+    "trackTitle": "Voices",
+    "artistName": "Deltech",
+    "suggestedBy": "suggest-id"
+  },
+  {
+    "setSlug": "sc-jamie-jones-hot-rbot-radio-254",
+    "position": 6,
+    "timestamp": 1508,
+    "trackTitle": "Va Va Voom",
+    "artistName": "Joey London Style",
+    "label": "Hot Creations",
+    "suggestedBy": "suggest-id"
+  },
+  {
+    "setSlug": "sc-jamie-jones-hot-rbot-radio-254",
     "position": 8,
+    "timestamp": 1972,
     "trackTitle": "No Panties",
     "artistName": "Fallon",
     "label": "Black Book Records",
-    "suggestedBy": "suggest-id",
-    "timestamp": 1972
+    "suggestedBy": "suggest-id"
   },
   {
     "setSlug": "sc-jamie-jones-hot-rbot-radio-254",
     "position": 9,
+    "timestamp": 2204,
     "trackTitle": "GDM",
     "artistName": "Adne",
     "label": "DPE",
-    "suggestedBy": "suggest-id",
-    "timestamp": 2204
+    "suggestedBy": "suggest-id"
   }
 ]
