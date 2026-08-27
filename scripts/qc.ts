@@ -137,6 +137,19 @@ async function main() {
       ]),
     );
     steps.push(
+      runStep("community-keeps-test", "npx", [
+        "tsx",
+        "src/lib/ingest/communityKeeps.test.ts",
+      ]),
+    );
+    steps.push(
+      runStep("resolutions-apply-test", "npx", [
+        "tsx",
+        "--env-file=.env",
+        "src/lib/ingest/resolutions.apply.test.ts",
+      ]),
+    );
+    steps.push(
       runStep("suggest-id-snippet-test", "npx", [
         "tsx",
         "src/lib/suggestIdSnippet.test.ts",

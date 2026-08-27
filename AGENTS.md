@@ -76,25 +76,30 @@ unless asked. Never write Relive for HARD / Insomniac / Nameless / Ultra.
   carrying a ready `data/resolutions.json` snippet. Publishing = commit the rows,
   merge, deploy. GitHub's "create a branch from issue" placeholder branch is
   **not** the mechanism — those branches are empty and can be ignored.
-  `applyResolutions` is an **overlay** (it flips existing plays), so it runs in
-  `prisma/verify-urls.ts` on every deploy. Do **not** add `data/resolutions.json`
-  to `CURATED_INGEST_PATHS`: that list is only for paths that introduce *new
-  sets*, and a resolutions-only push used to decide `run=0`, skip the ingest step,
-  and silently publish nothing. One row per play — `applyResolutions` skips a play
-  that is already `identified`/`community_resolved`, so a second suggestion for
-  the same position never lands. Multiple open issues can claim one position;
-  that is a producer call, not an agent one. A wrong `setSlug` or `position`
-  counts as `missing` with no error, so `resolutions.test.ts` validates the
-  committed file.
+  `applyResolutions` runs in `prisma/verify-urls.ts` on every deploy. Do **not**
+  add `data/resolutions.json` to `CURATED_INGEST_PATHS`: that list is only for
+  paths that introduce *new sets*, and a resolutions-only push used to decide
+  `run=0`, skip the ingest step, and silently publish nothing. One row per play
+  — `applyResolutions` skips a play that is already
+  `identified`/`community_resolved`, so a second suggestion for the same
+  timestamp never lands. Multiple open issues can claim one position; that is a
+  producer call, not an agent one. A wrong `setSlug` counts as `missing` with no
+  error, so `resolutions.test.ts` validates the committed file.
   **The `position` in a Suggest ID issue is a display index, not
   `Played.position`.** `numberPublished` re-indexes plays for the set page (talk
   rows become 0, tracks re-number from 1), so the two only agree when nothing was
   collapsed and the set has no talk rows. Match on the issue's **timestamp**,
-  which is never rewritten; `applyResolutions` tries timestamp first and falls
-  back to position. Position-only matching does not merely miss — it can land on
-  a different real cue and mislabel it while reporting success. `sourcePosition`
-  carries the stored position through publish for Suggest ID; anything else that
-  addresses a play in the DB from page data must use it too.
+  which is never rewritten; `applyResolutions` tries timestamp first. When the
+  clock is present and no Played row exists there (synthetic `expected:` /
+  `talk:` slots from `publishSetPlays`), **insert** a community play at that
+  timestamp with the next free `Played.position`. Do **not** fall back to
+  position in that case — a display index can name a different real cue and
+  report success while mislabelling it. Position-only matching stays for
+  snippets that never printed a clock. `sourcePosition` carries the stored
+  position through publish for Suggest ID; synthetic slots leave it unset so
+  the button emits the display index. `mergeCommunityKeeps` also matches
+  timestamp first, otherwise an inserted keep at max(position)+1 would
+  overwrite a different source cue on the next ingest.
 - **Curated label slugs are pinned:** `CURATED_LABELS` may override
   `slugify(name)` — "Black Book Records" lives at `blackbook`. Resolve any
   human-written label name through `curatedLabelSlugByName()` first; a bare

@@ -246,6 +246,8 @@ function emptySlot<T extends PublishablePlay>(
   const base = {
     id: `expected:${timestamp}:${index}`,
     position: 0,
+    // Do not inherit the template's stored position — there is no Played row.
+    sourcePosition: undefined,
     timestamp,
     idStatus: "unparsed" as const,
     provenance: "community",
@@ -291,6 +293,7 @@ function talkSlot<T extends PublishablePlay>(
   const base = {
     id: `talk:${startSec}`,
     position: 0,
+    sourcePosition: undefined,
     timestamp: startSec,
     idStatus: "unparsed" as const,
     provenance: "community",
@@ -360,7 +363,9 @@ function numberPublished<T extends PublishablePlay>(
   return plays.map((p) => {
     // Keep the stored position before overwriting it, so callers that address
     // the DB row (Suggest ID) are not handed a display index.
-    const sourcePosition = p.sourcePosition ?? p.position;
+    // 0 is emptySlot/talkSlot's placeholder, not a stored Played.position.
+    const sourcePosition =
+      p.sourcePosition && p.sourcePosition > 0 ? p.sourcePosition : undefined;
     if (isTalkPlay(p)) return { ...p, sourcePosition, position: 0 };
     n += 1;
     return { ...p, sourcePosition, position: n };

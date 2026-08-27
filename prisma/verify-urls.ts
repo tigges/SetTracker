@@ -10,12 +10,14 @@ const prisma = new PrismaClient();
 const curatedOnly = process.env.VERIFY_URLS_CURATED_ONLY === "1";
 
 /**
- * Community ID resolutions are an overlay on existing plays, so they belong
- * here rather than only inside the ingest poll. Pages runs verify-urls on every
- * deploy but gates the poll on curated source changes, so a commit that only
- * adds to data/resolutions.json never reached applyResolutions and the
- * suggestion stayed unpublished. Idempotent: rows already identified or
- * community_resolved are skipped.
+ * Community ID resolutions belong here rather than only inside the ingest poll.
+ * Pages runs verify-urls on every deploy but gates the poll on curated source
+ * changes, so a commit that only adds to data/resolutions.json never reached
+ * applyResolutions and the suggestion stayed unpublished.
+ *
+ * Existing Played rows are flipped in place. Synthetic expected/talk slots
+ * insert a Played row at the issue timestamp. Idempotent: rows already
+ * identified or community_resolved are skipped.
  */
 async function overlayResolutions(): Promise<void> {
   const stats = await applyResolutions(prisma);

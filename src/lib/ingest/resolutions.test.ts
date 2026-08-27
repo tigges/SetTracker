@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { curatedLabelSlugByName } from "./curatedLabels";
-import type { ResolutionRow } from "./resolutions";
+import { planResolution, type ResolutionRow } from "./resolutions";
 import { slugify } from "./types";
 
 const rows = JSON.parse(
@@ -40,15 +40,21 @@ for (const row of rows) {
   );
 }
 
-// One resolution per play. Two rows for the same position would leave the second
-// silently counted as "skipped" once the first flipped the row.
+// One resolution per play. Two rows for the same position or timestamp would
+// leave the second silently counted as "skipped" once the first flipped the row.
 const seen = new Map<string, number>();
+const seenTs = new Map<string, number>();
 for (const row of rows) {
   const key = `${row.setSlug}#${row.position}`;
   seen.set(key, (seen.get(key) ?? 0) + 1);
+  const tsKey = `${row.setSlug}@${row.timestamp}`;
+  seenTs.set(tsKey, (seenTs.get(tsKey) ?? 0) + 1);
 }
 for (const [key, n] of seen) {
   assert.equal(n, 1, `${key} is resolved ${n}× — keep one row per play`);
+}
+for (const [key, n] of seenTs) {
+  assert.equal(n, 1, `${key} is resolved ${n}× — keep one row per clock`);
 }
 
 // Labels must land on the curated row, not a slugify twin. "Black Book Records"
@@ -73,5 +79,34 @@ for (const row of rows) {
     );
   }
 }
+
+// Timestamp present + no Played row → insert. Falling back to position here
+// is how a synthetic expected-slot suggestion mislabels a real cue.
+const catalog = [
+  { position: 1, timestamp: 90 },
+  { position: 2, timestamp: 600 },
+];
+assert.deepEqual(
+  planResolution({ position: 8, timestamp: 1972 }, catalog),
+  { kind: "insert", timestamp: 1972 },
+);
+assert.deepEqual(
+  planResolution({ position: 2, timestamp: 600 }, catalog),
+  { kind: "update", by: "timestamp" },
+);
+assert.deepEqual(
+  planResolution({ position: 2 }, catalog),
+  { kind: "update", by: "position" },
+);
+assert.deepEqual(
+  planResolution({ position: 8 }, catalog),
+  { kind: "missing" },
+);
+// Display index 1 exists as a real play at 90s. A synthetic suggestion for
+// play 1 / 348s must insert at 348, not update position 1.
+assert.deepEqual(
+  planResolution({ position: 1, timestamp: 348 }, catalog),
+  { kind: "insert", timestamp: 348 },
+);
 
 console.log("ingest/resolutions.test.ts ok", rows.length);
