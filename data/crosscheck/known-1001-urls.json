@@ -569,6 +569,16 @@
       "note": "Operator paste 2026-08-26. 18 cues, observed clocks (gaps 45-417s) over ~60min. Three official hosts all verified 200: YT channel \"Spectrum\", his own SC, his own Mixcloud. Paste wired sc-joris-voorn-spectrum-radio-484 ONLY, but joris-voorn is not a curated SC show/roster artist so nothing polls it - the seed would have been orphaned. YT slug carries the set (curated in YOUTUBE_SETS like ep 485); SC slug shares the same array as a twin. SC + Mixcloud pinned in SET_HOST_PINS since neither can be derived from a track seed. Billed as radio, recorded live at Tomorrowland Freedom Stage b2b Cassian - type radio + eventName, as ep 485 does for Exit Brno. Shares 5 promo tracks with ep 485; 13 of 18 unique, distinct episodes."
     },
     {
+      "label": "Joris Voorn · Spectrum Radio 485 2026-08-12",
+      "slug": "yt-yTRvLrtsM9I",
+      "name": "TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/2vwh8lq1/joris-voorn-spectrum-radio-485-exit-veveri-castle-brno-czech-republic-2026-08-12.html",
+      "youtubeUrl": "https://youtu.be/yTRvLrtsM9I",
+      "soundcloudUrl": "https://soundcloud.com/joris-voorn/spectrum-radio-485",
+      "mixcloudUrl": "https://www.mixcloud.com/JorisVoorn/joris-voorn-presents-spectrum-radio-485/",
+      "note": "Cues already wired 2026-08-16 on yt-yTRvLrtsM9I (15 tracks). 2026-08-27 re-paste matched the existing seed exactly. SC + Mixcloud verified 200 and pinned as host twins (same pattern as 484 / 486). sc-joris-voorn-spectrum-radio-485 now shares the seed array."
+    },
+    {
       "label": "Joris Voorn · Spectrum Radio 486 2026-08-10",
       "slug": "yt-wlePVzVaMOY",
       "name": "TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026",

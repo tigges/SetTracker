@@ -113,6 +113,18 @@ export const SET_HOST_PINS: Record<string, SetHostUrls> = {
     mixcloudUrl:
       "https://www.mixcloud.com/JorisVoorn/joris-voorn-presents-spectrum-radio-484/",
   },
+  // Spectrum Radio 485 — Exit, Veveří Castle Brno. YT was already wired
+  // 2026-08-16; SC + Mixcloud verified 200 on 2026-08-27.
+  "yt-yTRvLrtsM9I": {
+    soundcloudUrl: "https://soundcloud.com/joris-voorn/spectrum-radio-485",
+    mixcloudUrl:
+      "https://www.mixcloud.com/JorisVoorn/joris-voorn-presents-spectrum-radio-485/",
+  },
+  "sc-joris-voorn-spectrum-radio-485": {
+    soundcloudUrl: "https://soundcloud.com/joris-voorn/spectrum-radio-485",
+    mixcloudUrl:
+      "https://www.mixcloud.com/JorisVoorn/joris-voorn-presents-spectrum-radio-485/",
+  },
   // Spectrum Radio 486 — Yard Stage, Balance Croatia. All three hosts
   // verified 200 on 2026-08-27. Same pin reason as 484: joris-voorn is not
   // a curated SoundCloud account.
