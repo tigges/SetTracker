@@ -257,6 +257,14 @@ assert.equal(
   survivorSlugForSecondary("sc-loveland-legacy-bart-skils-loveland-festival"),
   "yt-d-EOE2u7HT4",
 );
+const bartLovelandArtistFold = folds.find(
+  (c) => c.fromSlug === "sc-bart-skils-bart-skils-loveland-festival",
+);
+assert.equal(bartLovelandArtistFold?.toSlug, "yt-d-EOE2u7HT4");
+assert.equal(
+  survivorSlugForSecondary("sc-bart-skils-bart-skils-loveland-festival"),
+  "yt-d-EOE2u7HT4",
+);
 assert.equal(survivorSlugForSecondary("yt-d-EOE2u7HT4"), null);
 
 console.log("hostTwins.test.ts ok");

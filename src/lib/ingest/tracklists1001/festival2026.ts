@@ -4980,6 +4980,8 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-d-EOE2u7HT4": TL_BART_SKILS_LOVELAND_FIRE_2026,
   "sc-loveland-legacy-bart-skils-loveland-festival":
     TL_BART_SKILS_LOVELAND_FIRE_2026,
+  "sc-bart-skils-bart-skils-loveland-festival":
+    TL_BART_SKILS_LOVELAND_FIRE_2026,
 };
 
 /** Sanity: every seeded clock must parse. */

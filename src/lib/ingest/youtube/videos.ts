@@ -2390,9 +2390,9 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
   },
   {
     // Official Loveland playback (@LovelandEvents) — Fire Stage 2026-08-08.
-    // Video was not yet curated; this capture adds the row. Host twin with
-    // official SC loveland-legacy/bart-skils-loveland-festival. Paste Wire
-    // sc-bart-skils-bart-skils-loveland-festival is not the pasted host.
+    // Host twin with official SC loveland-legacy/bart-skils-loveland-festival
+    // (stored) and artist SC bart-skils/bart-skils-loveland-festival (same
+    // 5466s edit, secondary).
     video: "https://www.youtube.com/watch?v=d-EOE2u7HT4",
     primaryArtist: dj("Bart Skils", { accent: "#2a9d8f" }),
     genre: "Techno",
