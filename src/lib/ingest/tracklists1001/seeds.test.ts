@@ -196,6 +196,7 @@ import {
   TL_OSCAR_AND_THE_WOLF_TML_WE1_CRYSTAL_2026,
   TL_AGENTS_OF_TIME_TML_WE2_MAINSTAGE_2026,
   TL_STEVE_ANGELLO_TML_WE1_CRYSTAL_2026,
+  TL_DEADMAU5_VELD_MAINSTAGE_2025,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
@@ -5152,5 +5153,31 @@ for (let i = 1; i < angelloCrystal.length; i++) {
 }
 assert.equal(isWiredTracklistSlug("yt-eir5Sh_gHbo"), true);
 assert.equal(isWiredTracklistSlug("yt-5AdQy7lCbN0"), true);
+
+// deadmau5 @ Mainstage, Veld 2025-08-03 — official @deadmau5 YT already
+// curated. Overlay TL_DEADMAU5 is too generic. The Veldt + remix 1s pair
+// stays as captured.
+assertSeedClocks(TL_DEADMAU5_VELD_MAINSTAGE_2025);
+assert.equal(TL_DEADMAU5_VELD_MAINSTAGE_2025.length, 22);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-5LqJCIi6p7Y"],
+  TL_DEADMAU5_VELD_MAINSTAGE_2025,
+);
+const mau5Veld = tracklist1001RowsToPlays(TL_DEADMAU5_VELD_MAINSTAGE_2025);
+assert.equal(mau5Veld.length, 22);
+assert.equal(mau5Veld[0]?.provenance, "1001tl");
+assert.equal(mau5Veld[0]?.timestamp, 0);
+assert.equal(mau5Veld[0]?.trackTitle, "Artefact");
+assert.equal(mau5Veld[20]?.trackTitle, "The Veldt");
+assert.equal(mau5Veld[20]?.timestamp, 66 * 60 + 30);
+assert.equal(mau5Veld[21]?.trackTitle, "The Veldt (Tommy Trash Remix)");
+assert.equal(mau5Veld[21]?.timestamp, 66 * 60 + 31);
+for (let i = 1; i < mau5Veld.length; i++) {
+  assert.ok(
+    (mau5Veld[i]!.timestamp ?? 0) > (mau5Veld[i - 1]!.timestamp ?? 0),
+    `deadmau5 Veld clocks must increase at index ${i}`,
+  );
+}
+assert.equal(isWiredTracklistSlug("yt-5LqJCIi6p7Y"), true);
 
 console.log("tracklists1001/seeds.test.ts ok");

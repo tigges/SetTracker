@@ -308,3 +308,43 @@ export const TL_STEVE_ANGELLO_TML_WE1_CRYSTAL_2026: FingerprintSeedRow[] = [
   { at: "2:53:38", artist: "Sebastian Ingrosso", title: "Flood" },
   { at: "2:55:10", artist: "Swedish House Mafia & Lykke Li", title: "Happiness Is So Sad" },
 ];
+
+/**
+ * deadmau5 @ Mainstage, Veld Music Festival, Canada 2025-08-03
+ * Official YouTube: https://youtu.be/5LqJCIi6p7Y
+ * oEmbed 2026-08-28: channel "deadmau5" (@deadmau5), title
+ * "deadmau5 Live @ VELD Music Festival 2025 Toronto, Canada". That video
+ * was already curated in YOUTUBE_SETS without a tracklist, so this capture
+ * fills an existing set.
+ * https://www.1001tracklists.com/tracklist/2lj793ht/deadmau5-mainstage-veld-music-festival-canada-2025-08-03.html
+ * Overlay name TL_DEADMAU5 is too generic; constant is the performance.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-5LqJCIi6p7Y"] = TL_DEADMAU5_VELD_MAINSTAGE_2025
+ * No SoundCloud in the paste — do not invent an SC slug.
+ * Monophobia appears twice (34:00 / 39:40). The Veldt at 1:06:30 is followed
+ * by The Veldt (Tommy Trash Remix) at 1:06:31 — clocks stay as captured.
+ * Captured 2026-08-28 — provenance 1001tl.
+ */
+export const TL_DEADMAU5_VELD_MAINSTAGE_2025: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "ARTBAT", title: "Artefact" },
+  { at: "3:15", artist: "deadmau5", title: "Fn Pig" },
+  { at: "6:30", artist: "No Mana", title: "Array of Sirens" },
+  { at: "8:00", artist: "deadmau5 ft. Lights", title: "When The Summer Dies" },
+  { at: "13:00", artist: "deadmau5 & Wolfgang Gartner", title: "Channel 43" },
+  { at: "19:08", artist: "deadmau5", title: "Moar Ghosts 'n' Stuff" },
+  { at: "21:04", artist: "deadmau5 ft. Rob Swire", title: "Ghosts 'n' Stuff (JAUZ Remix)" },
+  { at: "22:59", artist: "deadmau5 ft. Rob Swire", title: "Ghosts 'n' Stuff (Chuckie Remix)" },
+  { at: "24:55", artist: "deadmau5 ft. Rob Swire", title: "Ghosts 'n' Stuff" },
+  { at: "26:50", artist: "deadmau5", title: "Rydly" },
+  { at: "31:45", artist: "deadmau5", title: "Some Chords (Dillon Francis Remix)" },
+  { at: "34:00", artist: "deadmau5 ft. Rob Swire", title: "Monophobia" },
+  { at: "36:50", artist: "Oliver Schories", title: "Devon (Oliver Huntemann Remix)" },
+  { at: "39:40", artist: "deadmau5 ft. Rob Swire", title: "Monophobia" },
+  { at: "42:30", artist: "Kx5 ft. HAYLA", title: "Escape (Spencer Brown Remix)" },
+  { at: "48:20", artist: "deadmau5", title: "Imaginary Friends" },
+  { at: "49:48", artist: "deadmau5", title: "gula" },
+  { at: "51:16", artist: "deadmau5", title: "Avaritia" },
+  { at: "54:00", artist: "deadmau5", title: "8ths" },
+  { at: "1:00:00", artist: "deadmau5", title: "Sixes" },
+  { at: "1:06:30", artist: "deadmau5 ft. Chris James", title: "The Veldt" },
+  { at: "1:06:31", artist: "deadmau5 ft. Chris James", title: "The Veldt (Tommy Trash Remix)" },
+];

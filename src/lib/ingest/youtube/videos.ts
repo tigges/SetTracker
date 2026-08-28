@@ -75,6 +75,7 @@ import {
   TL_OSCAR_AND_THE_WOLF_TML_WE1_CRYSTAL_2026,
   TL_AGENTS_OF_TIME_TML_WE2_MAINSTAGE_2026,
   TL_STEVE_ANGELLO_TML_WE1_CRYSTAL_2026,
+  TL_DEADMAU5_VELD_MAINSTAGE_2025,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
@@ -3023,12 +3024,17 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_CHRIS_STUSSY_BOILER_ROOM_EDINBURGH_2024,
   },
   {
+    // Official deadmau5 upload already curated. Operator 1001 paste
+    // 2026-08-28 fills clocks. Overlay TL_DEADMAU5 is too generic.
     video: "https://www.youtube.com/watch?v=5LqJCIi6p7Y",
     primaryArtist: dj("deadmau5", { accent: "#00f5d4" }),
     genre: "Progressive House",
     type: "festival",
     title: "deadmau5 Live @ VELD Music Festival 2025 Toronto, Canada",
     eventName: "VELD Music Festival",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2lj793ht/deadmau5-mainstage-veld-music-festival-canada-2025-08-03.html",
+    tracklist1001: TL_DEADMAU5_VELD_MAINSTAGE_2025,
   },
   {
     video: "https://www.youtube.com/watch?v=PT_IBAfbPo8",

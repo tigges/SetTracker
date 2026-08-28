@@ -3,6 +3,14 @@
   "updatedAt": "2026-08-28T08:30:00.000Z",
   "urls": [
     {
+      "label": "deadmau5 · Mainstage, Veld Music Festival 2025-08-03",
+      "slug": "yt-5LqJCIi6p7Y",
+      "name": "TL_DEADMAU5_VELD_MAINSTAGE_2025",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/2lj793ht/deadmau5-mainstage-veld-music-festival-canada-2025-08-03.html",
+      "youtubeUrl": "https://youtu.be/5LqJCIi6p7Y",
+      "note": "Operator paste 2026-08-28. 22 timed cues on official deadmau5 YT (@deadmau5) already curated in videos.ts. Overlay TL_DEADMAU5 is too generic. No SC in the paste — do not invent an SC slug. The Veldt + Tommy Trash Remix at 1:06:30 / 1:06:31 kept as captured."
+    },
+    {
       "label": "Steve Angello · Crystal Garden, Tomorrowland WE1 2026-07-18",
       "slug": "yt-eir5Sh_gHbo",
       "name": "TL_STEVE_ANGELLO_TML_WE1_CRYSTAL_2026",
