@@ -1,7 +1,16 @@
 {
   "note": "Operator-collected 1001Tracklists URLs. All listed urls[] rows are now seeded. Prefer new operator pastes over this archive. stillMissing1001 is video-in / no 1001 page — do not invent URLs. heldPendingPlayback is 1001-in / no official YT/SC playback — seed held, do not invent or wire fan playback. pendingCuePaste is official playback + operator 1001 URL without cue rows — do not scrape 1001 or invent 1001tl seeds.",
-  "updatedAt": "2026-08-28T14:30:00.000Z",
+  "updatedAt": "2026-08-28T14:35:00.000Z",
   "urls": [
+    {
+      "label": "Bart Skils · Fire Stage, Loveland Festival 2026-08-08",
+      "slug": "yt-d-EOE2u7HT4",
+      "name": "TL_BART_SKILS_LOVELAND_FIRE_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/140dd8zt/bart-skils-fire-stage-loveland-festival-netherlands-2026-08-08.html",
+      "youtubeUrl": "https://youtu.be/d-EOE2u7HT4",
+      "soundcloudUrl": "https://soundcloud.com/loveland-legacy/bart-skils-loveland-festival",
+      "note": "Operator paste 2026-08-28. 18 timed cues on official Loveland YT (@LovelandEvents) plus official SC soundcloud.com/loveland-legacy. Host twin — SC slug sc-loveland-legacy-bart-skils-loveland-festival is secondary. Overlay TL_BART_SKILS is too generic. Paste Wire sc-bart-skils-bart-skils-loveland-festival is not the pasted host — do not invent an artist SC slug."
+    },
     {
       "label": "Bleu Clair · BLEUPRINT VOL. 5, Jakarta livestream 2022-03-31",
       "slug": "yt-_hdM8uJV1LM",

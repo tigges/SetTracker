@@ -623,3 +623,43 @@ export const TL_BLEU_CLAIR_BLEUPRINT_VOL_5_JAKARTA_2022: FingerprintSeedRow[] = 
   { at: "29:27", artist: "Jaded", title: "Physically" },
   { at: "30:59", artist: "Bleu Clair", title: "Mistake" },
 ];
+
+/**
+ * Bart Skils @ Fire Stage, Loveland Festival, Netherlands 2026-08-08
+ * Official YouTube: https://youtu.be/d-EOE2u7HT4
+ * oEmbed 2026-08-28: channel "Loveland" (@LovelandEvents), title
+ * "BART SKILS | LOVELAND FESTIVAL 2026". Video was not yet curated —
+ * this capture adds the YOUTUBE_SETS row.
+ * Official SoundCloud: https://soundcloud.com/loveland-legacy/bart-skils-loveland-festival
+ * oEmbed 2026-08-28: author "Loveland" (soundcloud.com/loveland-legacy),
+ * title "BART SKILS | Loveland Festival 2026 | LL279".
+ * Same 1001 seed + both official permalinks → host twin (SC-first playback,
+ * YT kept). SC slug is secondary.
+ * Paste Wire line sc-bart-skils-bart-skils-loveland-festival is not the
+ * pasted host — do not invent an artist SC slug.
+ * https://www.1001tracklists.com/tracklist/140dd8zt/bart-skils-fire-stage-loveland-festival-netherlands-2026-08-08.html
+ * Overlay name TL_BART_SKILS is too generic; constant is the performance.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-d-EOE2u7HT4"] = TL_BART_SKILS_LOVELAND_FIRE_2026
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["sc-loveland-legacy-bart-skils-loveland-festival"] = TL_BART_SKILS_LOVELAND_FIRE_2026
+ * Captured 2026-08-28 — provenance 1001tl.
+ */
+export const TL_BART_SKILS_LOVELAND_FIRE_2026: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "Intro Spectral", title: "Intro" },
+  { at: "1:00", artist: "Bart Skils & Weska", title: "For The Music" },
+  { at: "3:10", artist: "DJ Hyperactive", title: "Wide Open (Len Faki DJ Edit)" },
+  { at: "6:30", artist: "Kos:mo & A.D.H.S.", title: "Taste Of The Night" },
+  { at: "11:20", artist: "Blawan", title: "Why They Hide Their Bodies Under My Garage? (Odd Mob Remix)" },
+  { at: "14:30", artist: "Kratex & Shreyas", title: "Taambdi Chaamdi (Sam WOLFE Remix)" },
+  { at: "18:00", artist: "HNTR", title: "Out Of My Mind" },
+  { at: "26:20", artist: "Adam Beyer & Mark Reeve", title: "Frames" },
+  { at: "30:40", artist: "Oscar L & Victor Ruiz", title: "Wasting Time" },
+  { at: "38:40", artist: "Bart Skils & Deniz Koyu", title: "Your Mind On Acid" },
+  { at: "43:00", artist: "A.D.H.S.", title: "Eos" },
+  { at: "50:20", artist: "Mattia Saviolo", title: "Never Stop The Groove" },
+  { at: "57:03", artist: "HNGT & Victor Ruiz", title: "Dontcha" },
+  { at: "1:02:35", artist: "Eli Brown", title: "Badman Riddim" },
+  { at: "1:06:30", artist: "Faithless", title: "We Come 1 (Adam Beyer Remix)" },
+  { at: "1:13:45", artist: "Juan Elvadin", title: "Mind Glue" },
+  { at: "1:22:00", artist: "Selena (KR)", title: "Lose Myself" },
+  { at: "1:26:40", artist: "Soul Central ft. Kathy Brown", title: "Strings Of Life (Stronger On My Own) (Bart Skils & Weska Remix)" },
+];

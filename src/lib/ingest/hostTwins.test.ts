@@ -249,4 +249,14 @@ assert.equal(
   "BLEUPRINT VOL. 5 is not the EDC LV 2023 seed — do not fold",
 );
 
+const bartLovelandFold = folds.find(
+  (c) => c.fromSlug === "sc-loveland-legacy-bart-skils-loveland-festival",
+);
+assert.equal(bartLovelandFold?.toSlug, "yt-d-EOE2u7HT4");
+assert.equal(
+  survivorSlugForSecondary("sc-loveland-legacy-bart-skils-loveland-festival"),
+  "yt-d-EOE2u7HT4",
+);
+assert.equal(survivorSlugForSecondary("yt-d-EOE2u7HT4"), null);
+
 console.log("hostTwins.test.ts ok");

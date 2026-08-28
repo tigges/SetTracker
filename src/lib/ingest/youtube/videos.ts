@@ -80,6 +80,7 @@ import {
   TL_FIDELES_TML_WE2_FREEDOM_2026,
   TL_THE_CHAINSMOKERS_ULTRA_MELBOURNE_MAINSTAGE_2026,
   TL_BLEU_CLAIR_BLEUPRINT_VOL_5_JAKARTA_2022,
+  TL_BART_SKILS_LOVELAND_FIRE_2026,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
@@ -2386,6 +2387,22 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/blv1r3k/bleu-clair-bleuprint-vol.-5-livestream-from-jakarta-indonesia-2022-03-31.html",
     tracklist1001: TL_BLEU_CLAIR_BLEUPRINT_VOL_5_JAKARTA_2022,
+  },
+  {
+    // Official Loveland playback (@LovelandEvents) — Fire Stage 2026-08-08.
+    // Video was not yet curated; this capture adds the row. Host twin with
+    // official SC loveland-legacy/bart-skils-loveland-festival. Paste Wire
+    // sc-bart-skils-bart-skils-loveland-festival is not the pasted host.
+    video: "https://www.youtube.com/watch?v=d-EOE2u7HT4",
+    primaryArtist: dj("Bart Skils", { accent: "#2a9d8f" }),
+    genre: "Techno",
+    type: "festival",
+    title: "Bart Skils | Loveland Festival 2026",
+    seriesName: "Loveland",
+    eventName: "Loveland Festival",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/140dd8zt/bart-skils-fire-stage-loveland-festival-netherlands-2026-08-08.html",
+    tracklist1001: TL_BART_SKILS_LOVELAND_FIRE_2026,
   },
   // ---- DJ Mag Top 100: at least one set for chart DJs still at 0 ----
   {

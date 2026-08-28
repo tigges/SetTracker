@@ -202,6 +202,7 @@ import {
   TL_FIDELES_TML_WE2_FREEDOM_2026,
   TL_THE_CHAINSMOKERS_ULTRA_MELBOURNE_MAINSTAGE_2026,
   TL_BLEU_CLAIR_BLEUPRINT_VOL_5_JAKARTA_2022,
+  TL_BART_SKILS_LOVELAND_FIRE_2026,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
@@ -5365,5 +5366,53 @@ assert.equal(isWiredTracklistSlug("yt-_hdM8uJV1LM"), true);
 assert.equal(isWiredTracklistSlug("sc-bleuclair-bleuprintvol5"), true);
 assert.equal(isSecondaryPlaybackSlug("yt-_hdM8uJV1LM"), false);
 assert.equal(isSecondaryPlaybackSlug("sc-bleuclair-bleuprintvol5"), true);
+
+// Bart Skils @ Fire Stage, Loveland Festival 2026-08-08 — official Loveland
+// YT + SC host twin. Overlay TL_BART_SKILS is too generic. Paste Wire
+// sc-bart-skils-bart-skils-loveland-festival is not the pasted host.
+assertSeedClocks(TL_BART_SKILS_LOVELAND_FIRE_2026);
+assert.equal(TL_BART_SKILS_LOVELAND_FIRE_2026.length, 18);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-d-EOE2u7HT4"],
+  TL_BART_SKILS_LOVELAND_FIRE_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-loveland-legacy-bart-skils-loveland-festival"
+  ],
+  TL_BART_SKILS_LOVELAND_FIRE_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-bart-skils-bart-skils-loveland-festival"],
+  undefined,
+);
+const bartLoveland = tracklist1001RowsToPlays(TL_BART_SKILS_LOVELAND_FIRE_2026);
+assert.equal(bartLoveland.length, 18);
+assert.equal(bartLoveland[0]?.provenance, "1001tl");
+assert.equal(bartLoveland[0]?.timestamp, 0);
+assert.equal(bartLoveland[0]?.trackTitle, "Intro");
+assert.equal(bartLoveland[17]?.trackTitle, "Strings Of Life (Stronger On My Own) (Bart Skils & Weska Remix)");
+assert.equal(bartLoveland[17]?.timestamp, 1 * 3600 + 26 * 60 + 40);
+for (let i = 1; i < bartLoveland.length; i++) {
+  assert.ok(
+    (bartLoveland[i]!.timestamp ?? 0) >
+      (bartLoveland[i - 1]!.timestamp ?? 0),
+    `Bart Skils Loveland Fire clocks must increase at index ${i}`,
+  );
+}
+assert.equal(isWiredTracklistSlug("yt-d-EOE2u7HT4"), true);
+assert.equal(
+  isWiredTracklistSlug("sc-loveland-legacy-bart-skils-loveland-festival"),
+  true,
+);
+assert.equal(isSecondaryPlaybackSlug("yt-d-EOE2u7HT4"), false);
+assert.equal(
+  isSecondaryPlaybackSlug("sc-loveland-legacy-bart-skils-loveland-festival"),
+  true,
+);
+assert.equal(
+  isWiredTracklistSlug("sc-bart-skils-bart-skils-loveland-festival"),
+  false,
+);
 
 console.log("tracklists1001/seeds.test.ts ok");

@@ -749,4 +749,16 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     type: "radio",
     minDurationSec: 20 * 60,
   },
+  {
+    // Official Loveland SC (soundcloud.com/loveland-legacy). Same 1001 seed
+    // as yt-d-EOE2u7HT4 — host twin, SC-first playback. Never wire
+    // sc-https://… or invent sc-bart-skils-bart-skils-loveland-festival.
+    url: "https://soundcloud.com/loveland-legacy/bart-skils-loveland-festival",
+    primaryArtist: dj("Bart Skils", { accent: "#2a9d8f" }),
+    genre: "Techno",
+    seriesName: "Loveland",
+    eventName: "Loveland Festival",
+    type: "festival",
+    minDurationSec: 30 * 60,
+  },
 ];

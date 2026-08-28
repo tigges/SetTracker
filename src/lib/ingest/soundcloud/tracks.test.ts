@@ -795,4 +795,25 @@ assert.equal(
   "sc-bleuclair-bleuprintvol5",
 );
 
+const bartLovelandSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url ===
+    "https://soundcloud.com/loveland-legacy/bart-skils-loveland-festival",
+);
+assert.ok(bartLovelandSc);
+assert.equal(bartLovelandSc.primaryArtist.name, "Bart Skils");
+assert.equal(bartLovelandSc.seriesName, "Loveland");
+assert.equal(bartLovelandSc.eventName, "Loveland Festival");
+assert.equal(bartLovelandSc.type, "festival");
+assert.equal(
+  SOUNDCLOUD_TRACK_SEEDS.some(
+    (s) => s.url === "https://soundcloud.com/bart-skils/bart-skils-loveland-festival",
+  ),
+  false,
+);
+assert.equal(
+  `sc-loveland-legacy-${slugify("bart-skils-loveland-festival")}`,
+  "sc-loveland-legacy-bart-skils-loveland-festival",
+);
+
 console.log("soundcloud/tracks.test.ts ok");
