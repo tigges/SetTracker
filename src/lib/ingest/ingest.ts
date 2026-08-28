@@ -48,6 +48,7 @@ import {
 } from "./festivalDrops";
 import {
   backfillSetEditions,
+  editionPerformedAtForSet,
   ensureFestivalEditions,
 } from "./setEditions";
 import { ensureVenueCalendarNights } from "./discovery/venueCalendars";
@@ -411,6 +412,7 @@ export async function runIngest(
     eventSlug: string | null | undefined,
     title: string,
     publishedAt: Date,
+    setType?: string | null,
   ): Promise<{ editionId: string | null; performedAt: Date | null }> {
     if (!eventId || !eventSlug) {
       return { editionId: null, performedAt: null };
@@ -426,7 +428,7 @@ export async function runIngest(
     if (existing) {
       return {
         editionId: existing.id,
-        performedAt: existing.endsAt ?? endsAt,
+        performedAt: editionPerformedAtForSet(setType, existing.endsAt ?? endsAt),
       };
     }
     const created = await prisma.eventEdition.create({
@@ -439,7 +441,10 @@ export async function runIngest(
         endsAt,
       },
     });
-    return { editionId: created.id, performedAt: endsAt };
+    return {
+      editionId: created.id,
+      performedAt: editionPerformedAtForSet(setType, endsAt),
+    };
   }
 
   async function reportFestivalGaps(): Promise<void> {
@@ -800,6 +805,7 @@ export async function runIngest(
       eventSlug,
       raw.title,
       raw.publishedAt,
+      raw.type,
     );
     const seriesId = await upsertSeries(
       raw.seriesName ?? inferFilmSeriesName(raw.title),

@@ -3,12 +3,14 @@ import { describe, it } from "node:test";
 import {
   comparePlaceNights,
   comparePlaceSetTimes,
+  dateConflictsTitle,
   groupPlaceSetsByYear,
   parseDateFromSetTitle,
   placeNightsHeading,
   setBandYear,
   sortPlaceNights,
   sortPlaceSets,
+  titleCalendarHint,
 } from "./placeTimeline";
 
 const NOW = Date.parse("2026-08-18T12:00:00Z");
@@ -34,6 +36,47 @@ describe("placeTimeline", () => {
     assert.equal(
       parseDateFromSetTitle("Chris Stussy | Boiler Room: Edinburgh", now),
       null,
+    );
+  });
+
+  it("reads August, 2026 as a month hint, not a night", () => {
+    assert.deepEqual(
+      titleCalendarHint(
+        "Tomorrowland Friendship Mix with Topic - August, 2026",
+        NOW,
+      ),
+      { year: 2026, month: 8 },
+    );
+    assert.equal(
+      parseDateFromSetTitle(
+        "Tomorrowland Friendship Mix with Topic - August, 2026",
+        NOW,
+      ),
+      null,
+    );
+    assert.equal(
+      dateConflictsTitle(
+        "2026-07-26T23:59:59Z",
+        "Tomorrowland Friendship Mix with Topic - August, 2026",
+        NOW,
+      ),
+      true,
+    );
+    assert.equal(
+      dateConflictsTitle(
+        "2026-08-20T00:00:00Z",
+        "Tomorrowland Friendship Mix with Topic - August, 2026",
+        NOW,
+      ),
+      false,
+    );
+    assert.equal(
+      dateConflictsTitle(
+        "2026-07-18T00:00:00Z",
+        "Steve Angello WE1 | Tomorrowland 2026",
+        NOW,
+      ),
+      false,
     );
   });
 
