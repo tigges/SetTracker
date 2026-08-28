@@ -7,17 +7,18 @@
  * Spotlight rails (`compareFeedPriority`) sort:
  *   1) Tracklist completeness (ok → thin → severe; empty last)
  *   2) ID coverage (mostly identified → partial → sparse)
- *   3) Performance year (performedAt / edition year / publishedAt — never ingest)
- *   4) Live room (festival / club) ahead of radio; uncharted radio last
- *   5) DJ Mag Top 100 DJs (lower chart rank first)
- *   6) DJ Mag Top 100 Festivals (linked event; lower rank first)
- *   7) Venue class: festival → club → livestream → radio → other
- *   8) Performance date
+ *   3) ID quality (named/resolved → all-pink/unparsed → empty)
+ *   4) Performance year (performedAt / edition year / publishedAt — never ingest)
+ *   5) Live room (festival / club) ahead of radio; uncharted radio last
+ *   6) DJ Mag Top 100 DJs (lower chart rank first)
+ *   7) DJ Mag Top 100 Festivals (linked event; lower rank first)
+ *   8) Venue class: festival → club → livestream → radio → other
+ *   9) Performance date
  *
- * Deep catalog leftovers (`compareDeepCatalog`) put physical live ahead of
- * radio fillers, then date, IDs, density, chart. Uncharted radio with a
- * reasonable ID fill is leftover fodder — not a spotlight card.
- * Radar rejects radio. New this week drops uncharted radio.
+ * Deep catalog leftovers (`compareDeepCatalog`) use the same completeness
+ * order as spotlight. Empty / all-pink / placeholder cards stay in the
+ * catalog and search; `promoteLeadCards` keeps them off the first All-sets
+ * page. Radar rejects radio. New this week drops uncharted radio.
  *
  * Event/festival profile grids (`sortEventSets`) list this year first
  * (today → upcoming → latest finished), then older title-years descending.
@@ -253,6 +254,10 @@ export function compareFeedPriority(
   const ib = idCoverageTier(b.statusCounts, b.trackCount ?? 0);
   if (ia !== ib) return ia - ib;
 
+  const qa = idQualityTier(a.statusCounts, a.trackCount ?? 0);
+  const qb = idQualityTier(b.statusCounts, b.trackCount ?? 0);
+  if (qa !== qb) return qa - qb;
+
   const ya = setPerformanceYear(a);
   const yb = setPerformanceYear(b);
   if (ya !== yb) return yb - ya;
@@ -280,40 +285,52 @@ export function compareFeedPriority(
   return setPerformanceTime(b) - setPerformanceTime(a);
 }
 
-/** Leftover Deep catalog: live rooms first, then date, IDs, density, chart. */
+/**
+ * Leftover Deep catalog — same completeness order as spotlight so a
+ * same-week empty card does not outrank an identified festival set.
+ */
 export function compareDeepCatalog(
   a: FeedPriorityFields,
   b: FeedPriorityFields,
 ): number {
-  const la = displayLane(a);
-  const lb = displayLane(b);
-  if (la !== lb) return la - lb;
+  return compareFeedPriority(a, b);
+}
 
-  const ta = setPerformanceTime(a);
-  const tb = setPerformanceTime(b);
-  if (ta !== tb) return tb - ta;
+/** First All-sets page: enough named IDs, or a full-length dense set with one. */
+export const FEED_LEAD_MIN_RESOLVED_IDS = 10;
+export const FEED_LEAD_MIN_DURATION_SEC = 40 * 60;
 
-  const ia = idCoverageTier(a.statusCounts, a.trackCount ?? 0);
-  const ib = idCoverageTier(b.statusCounts, b.trackCount ?? 0);
-  if (ia !== ib) return ia - ib;
+export type FeedLeadFields = {
+  densitySeverity?: DensitySeverity | null;
+  statusCounts?: StatusCountFields;
+  trackCount?: number | null;
+  durationSec?: number | null;
+};
 
-  const da = DENSITY_RANK[a.densitySeverity ?? "ok"];
-  const db = DENSITY_RANK[b.densitySeverity ?? "ok"];
-  if (da !== db) return da - db;
+/**
+ * Cards that may occupy the first All-sets page.
+ * `expected:` display slots and unparsed-only rows are not named IDs.
+ */
+export function isFeedLeadCard(s: FeedLeadFields): boolean {
+  const resolved = resolvedIdCount(s.statusCounts);
+  if (resolved >= FEED_LEAD_MIN_RESOLVED_IDS) return true;
+  const durationSec = s.durationSec ?? 0;
+  return (
+    durationSec >= FEED_LEAD_MIN_DURATION_SEC &&
+    (s.densitySeverity ?? "ok") === "ok" &&
+    resolved >= 1
+  );
+}
 
-  const ra = a.top100Rank ?? 999;
-  const rb = b.top100Rank ?? 999;
-  if (ra !== rb) return ra - rb;
-
-  const fa = a.festivalRank ?? 999;
-  const fb = b.festivalRank ?? 999;
-  if (fa !== fb) return fa - fb;
-
-  const ca = a.clubRank ?? 999;
-  const cb = b.clubRank ?? 999;
-  if (ca !== cb) return ca - cb;
-
-  return 0;
+/** Keep relative order; lead cards first so Load more still reaches the rest. */
+export function promoteLeadCards<T extends FeedLeadFields>(items: T[]): T[] {
+  const lead: T[] = [];
+  const rest: T[] = [];
+  for (const s of items) {
+    if (isFeedLeadCard(s)) lead.push(s);
+    else rest.push(s);
+  }
+  return [...lead, ...rest];
 }
 
 export function isThisPerformanceYear(

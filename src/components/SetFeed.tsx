@@ -13,6 +13,7 @@ import {
   isRadarCandidate,
   isThisPerformanceYear,
   pickRadarPicks,
+  promoteLeadCards,
 } from "@/lib/feedPriority";
 import { collapseHostTwins, identifiedRatio } from "@/lib/feedQuality";
 import { setMatchesGenreFilter } from "@/lib/genreFamilies";
@@ -161,8 +162,12 @@ export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }
       .filter((s) => !used.has(s.id))
       .sort(compareDeepCatalog);
     const deepRanked = diversifyBySeries(diversifyByArtist(deepSorted, 1), 1);
-    const thisYearDeep = deepRanked.filter((s) => isThisPerformanceYear(s));
-    const earlierDeep = deepRanked.filter((s) => !isThisPerformanceYear(s));
+    const thisYearDeep = promoteLeadCards(
+      deepRanked.filter((s) => isThisPerformanceYear(s)),
+    );
+    const earlierDeep = promoteLeadCards(
+      deepRanked.filter((s) => !isThisPerformanceYear(s)),
+    );
     const deepPool = showEarlier ? [...thisYearDeep, ...earlierDeep] : thisYearDeep;
     const deepShown = deepPool.slice(0, visible);
     return {
