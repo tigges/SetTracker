@@ -205,6 +205,7 @@ import {
   TL_BART_SKILS_LOVELAND_FIRE_2026,
   TL_TOPIC_TML_FRIENDSHIP_MIX_2026,
   TL_HARDWELL_EUPHORIA_020_2026,
+  TL_LAMMER_TML_WE2_CORE_2026,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
@@ -5527,6 +5528,36 @@ for (let i = 1; i < euphoria020.length; i++) {
   assert.ok(
     (euphoria020[i]!.timestamp ?? 0) > (euphoria020[i - 1]!.timestamp ?? 0),
     `Hardwell Euphoria 020 clocks must increase at index ${i}`,
+  );
+}
+
+// LAMMER @ CORE Stage, Tomorrowland WE2 2026-07-26 — official Tomorrowland YT.
+// Overlay TL_LAMMER is too generic. No SC in the paste.
+assertSeedClocks(TL_LAMMER_TML_WE2_CORE_2026);
+assert.equal(TL_LAMMER_TML_WE2_CORE_2026.length, 16);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-bi_8FdSaT30"],
+  TL_LAMMER_TML_WE2_CORE_2026,
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-bi_8FdSaT30"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-G-DciaWb5KY"],
+  "LAMMER CORE WE2 is not the Bullet Tooth CORE WE2 seed",
+);
+assert.equal(isWiredTracklistSlug("yt-bi_8FdSaT30"), true);
+assert.equal(isSecondaryPlaybackSlug("yt-bi_8FdSaT30"), false);
+assert.equal(isWiredTracklistSlug("sc-lammer-tomorrowland"), false);
+const lammerCore = tracklist1001RowsToPlays(TL_LAMMER_TML_WE2_CORE_2026);
+assert.equal(lammerCore.length, 16);
+assert.equal(lammerCore[0]?.provenance, "1001tl");
+assert.equal(lammerCore[0]?.trackTitle, "Faux Loop");
+assert.equal(lammerCore[0]?.timestamp, 2 * 60 + 15);
+assert.equal(lammerCore[15]?.trackTitle, "Time To Move");
+assert.equal(lammerCore[15]?.timestamp, 3600 + 48 * 60 + 15);
+for (let i = 1; i < lammerCore.length; i++) {
+  assert.ok(
+    (lammerCore[i]!.timestamp ?? 0) > (lammerCore[i - 1]!.timestamp ?? 0),
+    `LAMMER TML WE2 CORE clocks must increase at index ${i}`,
   );
 }
 

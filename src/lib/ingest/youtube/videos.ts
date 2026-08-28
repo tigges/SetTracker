@@ -82,6 +82,7 @@ import {
   TL_BLEU_CLAIR_BLEUPRINT_VOL_5_JAKARTA_2022,
   TL_BART_SKILS_LOVELAND_FIRE_2026,
   TL_HARDWELL_EUPHORIA_020_2026,
+  TL_LAMMER_TML_WE2_CORE_2026,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
@@ -2421,6 +2422,21 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/1w79plst/hardwell-euphoria-020-2026-08-28.html",
     tracklist1001: TL_HARDWELL_EUPHORIA_020_2026,
+  },
+  {
+    // Tomorrowland official — CORE Stage WE2. oEmbed @tomorrowland.
+    // No SoundCloud in the paste — do not invent an SC slug. Distinct from
+    // Bullet Tooth CORE WE2 (yt-G-DciaWb5KY).
+    video: "https://www.youtube.com/watch?v=bi_8FdSaT30",
+    primaryArtist: dj("LAMMER", { accent: "#c9184a" }),
+    genre: "Hard Dance",
+    type: "festival",
+    title: "Lammer WE2 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1ucjccjk/lammer-core-stage-tomorrowland-weekend-2-belgium-2026-07-26.html",
+    tracklist1001: TL_LAMMER_TML_WE2_CORE_2026,
   },
   // ---- DJ Mag Top 100: at least one set for chart DJs still at 0 ----
   {

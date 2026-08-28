@@ -760,3 +760,35 @@ export const TL_HARDWELL_EUPHORIA_020_2026: FingerprintSeedRow[] = [
     title: "Discorecord (Galactixx Remix)",
   },
 ];
+
+/**
+ * LAMMER @ CORE Stage, Tomorrowland Weekend 2, Belgium 2026-07-26
+ * Official YouTube: https://youtu.be/bi_8FdSaT30
+ * oEmbed 2026-08-28: channel "Tomorrowland" (@tomorrowland), title
+ * "Lammer WE2 | Tomorrowland 2026".
+ * https://www.1001tracklists.com/tracklist/1ucjccjk/lammer-core-stage-tomorrowland-weekend-2-belgium-2026-07-26.html
+ * Overlay name TL_LAMMER is too generic; constant is the performance.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-bi_8FdSaT30"] = TL_LAMMER_TML_WE2_CORE_2026
+ * No SoundCloud in the paste — do not invent an SC slug.
+ * Distinct from Bullet Tooth CORE WE2 (yt-G-DciaWb5KY).
+ * Opening gap 2:15 → 23:20 kept as captured.
+ * Captured 2026-08-28 — provenance 1001tl.
+ */
+export const TL_LAMMER_TML_WE2_CORE_2026: FingerprintSeedRow[] = [
+  { at: "2:15", artist: "Mar Vista", title: "Faux Loop" },
+  { at: "23:20", artist: "Joe Hunt", title: "DJ Start Playing" },
+  { at: "31:35", artist: "Saxxon", title: "Tiki Taka" },
+  { at: "39:10", artist: "Alan Fitzpatrick", title: "We Do What We Want" },
+  { at: "43:50", artist: "S3PPA", title: "Inner Peace" },
+  { at: "46:35", artist: "LAMMER", title: "Alive" },
+  { at: "54:50", artist: "DJ FREEKFUNK & Bo Bensdorp", title: "Mango Loco Anthem" },
+  { at: "59:10", artist: "Riordan", title: "Needle On The Record" },
+  { at: "1:03:30", artist: "Awesome 3 ft. Lizzie Curious", title: "Don't Go" },
+  { at: "1:07:30", artist: "TWOFACED", title: "Yearning" },
+  { at: "1:11:30", artist: "LAMMER", title: "Out Of Space (Like Its 1992 Mix)" },
+  { at: "1:26:00", artist: "LAMMER", title: "All Night" },
+  { at: "1:32:40", artist: "Marlon Hoffstadt", title: "Party People" },
+  { at: "1:36:45", artist: "Redlight", title: "Get Out My Head" },
+  { at: "1:40:20", artist: "Nova Blue & EV", title: "Weekend Cinderella" },
+  { at: "1:48:15", artist: "LAMMER", title: "Time To Move" },
+];
