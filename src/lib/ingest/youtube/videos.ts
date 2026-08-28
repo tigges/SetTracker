@@ -78,6 +78,7 @@ import {
   TL_DEADMAU5_VELD_MAINSTAGE_2025,
   TL_CARL_COX_BOILER_ROOM_IBIZA_VILLA_2013,
   TL_FIDELES_TML_WE2_FREEDOM_2026,
+  TL_THE_CHAINSMOKERS_ULTRA_MELBOURNE_MAINSTAGE_2026,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
@@ -2963,12 +2964,18 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_GORDO_TML_WE2_2023,
   },
   {
+    // Official The Chainsmokers playback (@THECHAINSMOKERS) — Ultra Melbourne
+    // Mainstage 2026-04-11. Video was already curated; this capture fills
+    // the 1001 overlay. Distinct from TML WE1 yt-1lqmFLr-SkA.
     video: "https://www.youtube.com/watch?v=A5ERobJaS_0",
     primaryArtist: dj("The Chainsmokers", { accent: "#4cc9f0" }),
     genre: "Future Bass",
     type: "festival",
     title: "The Chainsmokers - Live @ Ultra Melbourne 2026",
     eventName: "Ultra Melbourne",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2fwrq83t/the-chainsmokers-mainstage-ultra-music-festival-flemington-racecourse-melbourne-australia-2026-04-11.html",
+    tracklist1001: TL_THE_CHAINSMOKERS_ULTRA_MELBOURNE_MAINSTAGE_2026,
   },
   {
     // Artist-channel playback (@Liumusic). No 1001Tracklists URL in the

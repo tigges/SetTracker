@@ -1,7 +1,15 @@
 {
   "note": "Operator-collected 1001Tracklists URLs. All listed urls[] rows are now seeded. Prefer new operator pastes over this archive. stillMissing1001 is video-in / no 1001 page — do not invent URLs. heldPendingPlayback is 1001-in / no official YT/SC playback — seed held, do not invent or wire fan playback. pendingCuePaste is official playback + operator 1001 URL without cue rows — do not scrape 1001 or invent 1001tl seeds.",
-  "updatedAt": "2026-08-28T14:20:00.000Z",
+  "updatedAt": "2026-08-28T14:25:00.000Z",
   "urls": [
+    {
+      "label": "The Chainsmokers · Mainstage, Ultra Melbourne 2026-04-11",
+      "slug": "yt-A5ERobJaS_0",
+      "name": "TL_THE_CHAINSMOKERS_ULTRA_MELBOURNE_MAINSTAGE_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/2fwrq83t/the-chainsmokers-mainstage-ultra-music-festival-flemington-racecourse-melbourne-australia-2026-04-11.html",
+      "youtubeUrl": "https://youtu.be/A5ERobJaS_0",
+      "note": "Operator paste 2026-08-28. 95 timed cues on official The Chainsmokers YT (@THECHAINSMOKERS) already curated in videos.ts. Overlay TL_THE_CHAINSMOKERS is too generic and is not TML WE1 yt-1lqmFLr-SkA. No SC in the paste — do not invent an SC slug. Mashup-then-component clusters stay as captured, including the 1s closer at 1:11:02–1:11:07."
+    },
     {
       "label": "Fideles · Freedom Stage, Tomorrowland WE2 2026-07-26",
       "slug": "yt-e0xXSwtVwe0",

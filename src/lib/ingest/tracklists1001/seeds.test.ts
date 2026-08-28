@@ -200,6 +200,7 @@ import {
   TL_CARL_COX_BOILER_ROOM_IBIZA_VILLA_2013,
   TL_MARNIK_TML_WE1_PLANAXIS_2026,
   TL_FIDELES_TML_WE2_FREEDOM_2026,
+  TL_THE_CHAINSMOKERS_ULTRA_MELBOURNE_MAINSTAGE_2026,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
@@ -5286,5 +5287,43 @@ for (let i = 1; i < fidelesFreedom.length; i++) {
 }
 assert.equal(isWiredTracklistSlug("yt-e0xXSwtVwe0"), true);
 assert.equal(isSecondaryPlaybackSlug("yt-e0xXSwtVwe0"), false);
+
+// The Chainsmokers @ Mainstage, Ultra Melbourne 2026-04-11 — official
+// artist YT already curated. Overlay TL_THE_CHAINSMOKERS is too generic
+// and is not TML WE1. Mashup 1s closer cluster stays as captured.
+assertSeedClocks(TL_THE_CHAINSMOKERS_ULTRA_MELBOURNE_MAINSTAGE_2026);
+assert.equal(TL_THE_CHAINSMOKERS_ULTRA_MELBOURNE_MAINSTAGE_2026.length, 95);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-A5ERobJaS_0"],
+  TL_THE_CHAINSMOKERS_ULTRA_MELBOURNE_MAINSTAGE_2026,
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-A5ERobJaS_0"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-1lqmFLr-SkA"],
+  "Ultra Melbourne is not the Tomorrowland WE1 seed",
+);
+const tcsMelbourne = tracklist1001RowsToPlays(
+  TL_THE_CHAINSMOKERS_ULTRA_MELBOURNE_MAINSTAGE_2026,
+);
+assert.equal(tcsMelbourne.length, 95);
+assert.equal(tcsMelbourne[0]?.provenance, "1001tl");
+assert.equal(tcsMelbourne[0]?.timestamp, 0);
+assert.equal(
+  tcsMelbourne[0]?.trackTitle,
+  "Something Just Like This (Acappella)",
+);
+assert.equal(tcsMelbourne[94]?.trackTitle, "Sailor Song");
+assert.equal(tcsMelbourne[94]?.timestamp, 1 * 3600 + 11 * 60 + 7);
+assert.equal(tcsMelbourne[93]?.timestamp, 1 * 3600 + 11 * 60 + 6);
+for (let i = 1; i < tcsMelbourne.length; i++) {
+  assert.ok(
+    (tcsMelbourne[i]!.timestamp ?? 0) >
+      (tcsMelbourne[i - 1]!.timestamp ?? 0),
+    `Chainsmokers Ultra Melbourne clocks must increase at index ${i}`,
+  );
+}
+assert.equal(isWiredTracklistSlug("yt-A5ERobJaS_0"), true);
+assert.equal(isSecondaryPlaybackSlug("yt-A5ERobJaS_0"), false);
+assert.equal(isWiredTracklistSlug("yt-1lqmFLr-SkA"), true);
 
 console.log("tracklists1001/seeds.test.ts ok");
