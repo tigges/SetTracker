@@ -19,7 +19,10 @@ import { derivePerformedAt } from "./derivePerformedAt";
 import { dateConflictsTitle, parseDateFromSetTitle } from "../placeTimeline";
 import { KNOWN_EVENTS } from "./events";
 import { looksLikeLiveFestivalRadio } from "../sourceComments";
-import { isLivestreamHubFeedTitle } from "../tracklistGap";
+import {
+  isLivestreamHubFeedTitle,
+  looksLikeWeeklyRadioSeries,
+} from "../tracklistGap";
 import type { DensitySeverity } from "../setDensity";
 import { SET_SLUG_ALIASES } from "./sourceRemaps";
 import { TRACKLIST_1001_BY_SOURCE_SLUG } from "./tracklists1001/festival2026";
@@ -372,10 +375,14 @@ export function skipCaptureNeed(
   }
   if (row.plays1001 >= 12) return "has-1001";
   if (
+    looksLikeWeeklyRadioSeries(row.title) &&
+    !looksLikeLiveFestivalRadio(row.title)
+  ) {
+    return "weekly-radio";
+  }
+  if (
     row.type === "radio" &&
-    !row.isFestival &&
     !row.isLivestream &&
-    !row.festivalSeason &&
     !looksLikeLiveFestivalRadio(row.title)
   ) {
     return "weekly-radio";
@@ -403,7 +410,7 @@ export function skipCaptureNeed(
 
 export function scoreCaptureNeed(row: CaptureNeedRow, nowMs = Date.now()): number {
   let s = 0;
-  if (row.festivalSeason) s += 120;
+  if (row.festivalSeason && isCaptureRealNight(row)) s += 120;
   if (row.editionGap) s += 35;
   if (row.top100Rank != null) {
     s += row.top100Rank <= 20 ? 90 : 45;
@@ -441,7 +448,9 @@ export function captureReason(row: CaptureNeedRow): string {
   if (row.tracklistUrl && row.plays1001 < 12) {
     return "YT/SC in · 1001 URL known · no seed";
   }
-  if (row.festivalSeason) return "festival season · find 1001";
+  if (row.festivalSeason && isCaptureRealNight(row)) {
+    return "festival season · find 1001";
+  }
   if (row.editionGap) return "edition gap · find 1001";
   if (row.density === "severe") return "thin tracklist · capture 1001";
   if (row.density === "thin") return "thin tracklist · capture 1001";
@@ -508,21 +517,60 @@ export function isFocusYearCaptureNeed(
 }
 
 /**
- * This year's Top 100 DJ or Top 100 festival. Mix / weekly radio wait
- * behind real nights even when the host brand is charted.
+ * This year's Top 100 DJ or Top 100 festival night. Mix / weekly radio
+ * wait behind real nights even when the host brand is charted, and even
+ * when ingest glued the row onto a festival event.
  */
 export function isFocusChartCaptureNeed(
   row: CaptureNeedRow,
   nowMs = Date.now(),
 ): boolean {
   if (!isFocusYearCaptureNeed(row, nowMs)) return false;
+  if (!isCaptureRealNight(row)) return false;
+  return row.top100Rank != null || row.eventRank != null;
+}
+
+const MONTH_YEAR_IN_TITLE =
+  /\b(january|february|march|april|may|june|july|august|september|october|november|december|jan|feb|mar|apr|jun|jul|aug|sep|sept|oct|nov|dec),?\s+(19|20)\d{2}\b/i;
+
+const LIVE_NIGHT_CUE =
+  /\b(we\s*[12]|weekend\s*[12]|mainstage|freedom\s*stage|live\s+(at|from|@)|@\s+)/i;
+
+/**
+ * "Hardwell presents Euphoria - August, 2026" is a monthly studio mix,
+ * not the July weekend. WE1 / live @ / a stage keep the row a night.
+ */
+export function isStudioMonthSpecial(title: string): boolean {
+  if (LIVE_NIGHT_CUE.test(title)) return false;
+  return MONTH_YEAR_IN_TITLE.test(title);
+}
+
+/**
+ * Festival / club / livestream night. Weekly series and month-named
+ * studio mixes stay out even when they inherit a festival event.
+ */
+export function isCaptureRealNight(row: Pick<CaptureNeedRow, "title" | "type" | "isFestival" | "isLivestream">): boolean {
+  if (isStudioMonthSpecial(row.title)) return false;
   if (
-    row.type === "mix" ||
-    (row.type === "radio" && !looksLikeLiveFestivalRadio(row.title))
+    looksLikeWeeklyRadioSeries(row.title) &&
+    !looksLikeLiveFestivalRadio(row.title)
   ) {
     return false;
   }
-  return row.top100Rank != null || row.eventRank != null;
+  if (
+    row.type === "mix" ||
+    row.type === "radio" ||
+    row.type === "soundcloud"
+  ) {
+    return looksLikeLiveFestivalRadio(row.title);
+  }
+  return (
+    row.isFestival ||
+    Boolean(row.isLivestream) ||
+    row.type === "festival" ||
+    row.type === "club" ||
+    row.type === "livestream"
+  );
 }
 
 export function captureEventSearchName(
@@ -716,8 +764,8 @@ export function buildCaptureQueueFromNeeds(
     );
 
   // This year first: Top 100 DJ / festival nights, then other current-year
-  // gaps, then leftover current-year slots. Older years only after that —
-  // once 2026 is covered the same code starts filling 2025. Per-event cap
+  // nights, then leftover current-year night slots. Older nights next.
+  // Mix / weekly radio wait until real nights are covered. Per-event cap
   // still spreads the first passes so one brand cannot take all 40.
   const yearFocus = ranked.filter(({ row }) =>
     isFocusYearCaptureNeed(row, nowMs),
@@ -725,10 +773,14 @@ export function buildCaptureQueueFromNeeds(
   const older = ranked.filter(
     ({ row }) => !isFocusYearCaptureNeed(row, nowMs),
   );
-  const chart = yearFocus.filter(({ row }) =>
+  const yearNights = yearFocus.filter(({ row }) => isCaptureRealNight(row));
+  const yearMix = yearFocus.filter(({ row }) => !isCaptureRealNight(row));
+  const olderNights = older.filter(({ row }) => isCaptureRealNight(row));
+  const olderMix = older.filter(({ row }) => !isCaptureRealNight(row));
+  const chart = yearNights.filter(({ row }) =>
     isFocusChartCaptureNeed(row, nowMs),
   );
-  const yearRest = yearFocus.filter(
+  const yearRestNights = yearNights.filter(
     ({ row }) => !isFocusChartCaptureNeed(row, nowMs),
   );
 
@@ -744,9 +796,11 @@ export function buildCaptureQueueFromNeeds(
     }
   };
   fillCapped(chart);
-  fillCapped(yearRest);
-  for (const { row } of yearFocus) push(presetFromNeed(row));
-  for (const { row } of older) push(presetFromNeed(row));
+  fillCapped(yearRestNights);
+  for (const { row } of yearNights) push(presetFromNeed(row));
+  for (const { row } of olderNights) push(presetFromNeed(row));
+  for (const { row } of yearMix) push(presetFromNeed(row));
+  for (const { row } of olderMix) push(presetFromNeed(row));
   return out.slice(0, limit);
 }
 

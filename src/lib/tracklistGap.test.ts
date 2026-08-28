@@ -5,6 +5,7 @@ import {
   isLivestreamHubFeedTitle,
   isLivestreamHubTitle,
   isSourceCompleteRadioStub,
+  looksLikeWeeklyRadioSeries,
   setPageIsPublished,
   tracklistGapReason,
 } from "./tracklistGap";
@@ -21,6 +22,16 @@ describe("tracklistGap", () => {
         durationSec: 3600,
       }),
       true,
+    );
+    assert.equal(looksLikeWeeklyRadioSeries("Korolova - Captive Soul 99"), true);
+    assert.equal(looksLikeWeeklyRadioSeries("Nora En Pure · Purified #522"), true);
+    assert.equal(
+      looksLikeWeeklyRadioSeries("Honey Dijon · Dijon FM 011 | Malix"),
+      true,
+    );
+    assert.equal(
+      looksLikeWeeklyRadioSeries("Anetha WE1 | Tomorrowland 2026"),
+      false,
     );
     assert.equal(
       isActionableTracklistGap(

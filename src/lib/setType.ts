@@ -7,6 +7,7 @@
  */
 
 import { looksLikeLiveFestivalRadio } from "./sourceComments";
+import { looksLikeWeeklyRadioSeries } from "./tracklistGap";
 
 export const SET_TYPES = [
   "festival",
@@ -78,6 +79,7 @@ export function isLiveFocusSet(s: SetTypeSignals): boolean {
 /** Studio / weekly radio. Live-from-festival titles stay live. */
 export function isWeeklyRadioSet(s: SetTypeSignals): boolean {
   if (looksLikeLiveFestivalRadio(s.title)) return false;
+  if (s.title && looksLikeWeeklyRadioSeries(s.title)) return true;
   if (s.eventKind === "festival" || s.eventKind === "club") return false;
   if (s.type === "festival" || s.type === "club") return false;
   return (s.type || "").toLowerCase() === "radio";

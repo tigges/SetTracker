@@ -115,6 +115,22 @@ describe("live focus helpers", () => {
       true,
     );
     assert.equal(
+      isWeeklyRadioSet({
+        type: "mix",
+        eventKind: "festival",
+        title: "Korolova - Captive Soul 99",
+      }),
+      true,
+      "title-based weekly series stays weekly even when glued to a festival",
+    );
+    assert.equal(
+      isWeeklyRadioSet({
+        type: "soundcloud",
+        title: "Honey Dijon · Dijon FM 011 | Malix",
+      }),
+      true,
+    );
+    assert.equal(
       isLivestreamSet({
         type: "radio",
         eventKind: "livestream",
