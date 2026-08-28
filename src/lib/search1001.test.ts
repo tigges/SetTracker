@@ -9,7 +9,7 @@ import {
 
 assert.equal(
   search1001Query("Skrillex", "SKRILLEX LIVE @ LOLLAPALOOZA CHILE 2026 (Full Set"),
-  "SKRILLEX LIVE @ LOLLAPALOOZA CHILE 2026",
+  "SKRILLEX LOLLAPALOOZA CHILE 2026",
 );
 
 assert.equal(
@@ -77,6 +77,27 @@ assert.equal(
     "https://www.1001tracklists.com/search?q=alok",
   ),
   "alok",
+);
+
+assert.equal(
+  search1001Query("Steve Angello", "Steve Angello WE1 | Tomorrowland 2026"),
+  "Steve Angello Weekend 1 Tomorrowland 2026",
+);
+assert.equal(
+  search1001Query(
+    "Carl Cox",
+    "Carl Cox Boiler Room Ibiza Villa Takeovers DJ Set 2013-08-15",
+    "Boiler Room",
+    "2013-08-15",
+  ),
+  "Carl Cox Boiler Room Ibiza Villa Takeovers 2013-08-15",
+);
+assert.equal(
+  search1001Query(
+    "Peggy Gou",
+    "Peggy Gou | Boiler Room x Dekmantel Festival: Amsterdam 2017-08-04",
+  ),
+  "Peggy Gou Boiler Room x Dekmantel Festival Amsterdam 2017-08-04",
 );
 
 console.log("search1001.test.ts ok");

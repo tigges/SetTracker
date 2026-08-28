@@ -53,7 +53,7 @@ export async function getCaptureQueue(
       performedAt: true,
       durationSec: true,
       playbackUrl: true,
-      event: { select: { slug: true, kind: true } },
+      event: { select: { slug: true, kind: true, name: true } },
       edition: { select: { endsAt: true, year: true } },
       artists: {
         where: { isPrimary: true },
@@ -98,6 +98,7 @@ export async function getCaptureQueue(
       primaryDjSlug: primary?.slug,
       type: s.type,
       eventSlug: s.event?.slug,
+      eventName: s.event?.name,
       publishedAt: s.publishedAt,
       performedAt: s.performedAt,
       editionYear: s.edition?.year ?? null,
