@@ -178,6 +178,116 @@ export function parseDateFromSetTitle(
   return null;
 }
 
+export type TitleCalendarHint = {
+  year: number;
+  /** 1–12 when the title names a month. */
+  month?: number;
+  day?: number;
+};
+
+/**
+ * Calendar tokens printed in the title. Month+year without a day
+ * (`August, 2026`) is a hint, not a night — do not invent July 1.
+ */
+export function titleCalendarHint(
+  title: string | null | undefined,
+  nowMs = Date.now(),
+): TitleCalendarHint | null {
+  if (!title) return null;
+  const max = new Date(nowMs).getUTCFullYear() + 1;
+
+  const iso = title.match(/\b(20\d{2})-(\d{2})-(\d{2})\b/);
+  if (iso) {
+    const y = Number(iso[1]);
+    if (y <= max) return { year: y, month: Number(iso[2]), day: Number(iso[3]) };
+  }
+
+  const euro = title.match(/\b(\d{1,2})\.(\d{1,2})\.(20\d{2})\b/);
+  if (euro) {
+    const y = Number(euro[3]);
+    if (y <= max) {
+      return { year: y, month: Number(euro[2]), day: Number(euro[1]) };
+    }
+  }
+
+  const slash = title.match(/\b(20\d{2})\/(\d{1,2})\/(\d{1,2})\b/);
+  if (slash) {
+    const y = Number(slash[1]);
+    if (y <= max) {
+      return { year: y, month: Number(slash[2]), day: Number(slash[3]) };
+    }
+  }
+
+  const monthDay = title.match(
+    new RegExp(
+      `\\b(${MONTH_NAME})\\.?\\s+(\\d{1,2})(?:st|nd|rd|th)?(?:[.,]?\\s+)(20\\d{2})\\b`,
+      "i",
+    ),
+  );
+  if (monthDay) {
+    const y = Number(monthDay[3]);
+    const m0 = MONTH_INDEX[monthDay[1]!.toLowerCase()];
+    if (y <= max && m0 != null) {
+      return { year: y, month: m0 + 1, day: Number(monthDay[2]) };
+    }
+  }
+
+  const dayMonth = title.match(
+    new RegExp(
+      `\\b(\\d{1,2})(?:st|nd|rd|th)?\\s+(${MONTH_NAME})\\.?[.,]?\\s+(20\\d{2})\\b`,
+      "i",
+    ),
+  );
+  if (dayMonth) {
+    const y = Number(dayMonth[3]);
+    const m0 = MONTH_INDEX[dayMonth[2]!.toLowerCase()];
+    if (y <= max && m0 != null) {
+      return { year: y, month: m0 + 1, day: Number(dayMonth[1]) };
+    }
+  }
+
+  const isoYm = title.match(/\b(20\d{2})-(\d{2})\b/);
+  if (isoYm) {
+    const y = Number(isoYm[1]);
+    if (y <= max) return { year: y, month: Number(isoYm[2]) };
+  }
+
+  const monthYear = title.match(
+    new RegExp(`\\b(${MONTH_NAME})\\.?[.,]?\\s*(20\\d{2})\\b`, "i"),
+  );
+  if (monthYear) {
+    const y = Number(monthYear[2]);
+    const m0 = MONTH_INDEX[monthYear[1]!.toLowerCase()];
+    if (y >= 2005 && y <= max && m0 != null) {
+      return { year: y, month: m0 + 1 };
+    }
+  }
+
+  const titled = yearFromSetTitle(title, nowMs);
+  if (titled) return { year: titled };
+  return null;
+}
+
+/**
+ * True when a stored night fights the title (August mix + July 26 festival
+ * weekend). Year-only titles do not fight a day in that year.
+ */
+export function dateConflictsTitle(
+  when: Date | string | null | undefined,
+  title: string | null | undefined,
+  nowMs = Date.now(),
+): boolean {
+  if (!when || !title) return false;
+  const d = new Date(when);
+  if (!Number.isFinite(d.getTime())) return false;
+  const hint = titleCalendarHint(title, nowMs);
+  if (!hint) return false;
+  if (d.getUTCFullYear() !== hint.year) return true;
+  if (hint.month != null && d.getUTCMonth() + 1 !== hint.month) return true;
+  if (hint.day != null && d.getUTCDate() !== hint.day) return true;
+  return false;
+}
+
 /** Event year printed in the set title (`TML 2018`, `Ultra Miami 2023`). */
 export function yearFromSetTitle(
   title: string | null | undefined,

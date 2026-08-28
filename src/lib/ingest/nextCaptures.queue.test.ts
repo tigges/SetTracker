@@ -1202,4 +1202,38 @@ assert.ok(!angelloPreset.searchQuery?.endsWith("Augu"));
 assert.ok(!angelloPreset.searchQuery?.endsWith("Fe"));
 assert.ok((angelloPreset.searchQuery?.length ?? 0) > 20);
 
+const topicFriendship = {
+  slug: "sc-tomorrowland-friendship-mix-topic-unwired",
+  title: "Tomorrowland Friendship Mix with Topic - August, 2026",
+  primaryDj: "Topic",
+  eventName: "Tomorrowland",
+  eventSlug: "tomorrowland",
+  performedAt: "2026-07-26T23:59:59Z",
+  type: "mix" as const,
+  isFestival: false,
+};
+assert.equal(
+  skipCaptureNeed(row(topicFriendship), mapped, now),
+  null,
+);
+assert.equal(captureSearchWhen(topicFriendship, now), "2026");
+assert.equal(
+  captureQueueLabel(topicFriendship, now),
+  "Topic · Tomorrowland Friendship Mix with Topic - August, 2026",
+);
+assert.equal(
+  captureSearchQuery(row(topicFriendship), now),
+  "Tomorrowland Friendship Mix with Topic August 2026",
+);
+assert.equal(
+  captureSearchWhen(
+    {
+      ...topicFriendship,
+      performedAt: "2026-08-20T00:00:00Z",
+    },
+    now,
+  ),
+  "2026-08-20",
+);
+
 console.log("nextCaptures.queue.test.ts ok");

@@ -9,6 +9,19 @@ import {
   matchEditionSeed,
 } from "./festivalDrops";
 
+/**
+ * Festival edition `endsAt` is the weekend, not the mix/radio night.
+ * Friendship Mix / Selects stay on the brand event without stealing July 26.
+ */
+export function editionPerformedAtForSet(
+  setType: string | null | undefined,
+  editionEndsAt: Date | null | undefined,
+): Date | null {
+  if (!editionEndsAt) return null;
+  if (setType === "mix" || setType === "radio") return null;
+  return editionEndsAt;
+}
+
 export async function ensureFestivalEditions(
   prisma: PrismaClient,
 ): Promise<number> {
@@ -67,6 +80,7 @@ export async function backfillSetEditions(
     select: {
       id: true,
       title: true,
+      type: true,
       publishedAt: true,
       event: { select: { slug: true } },
     },
@@ -82,11 +96,12 @@ export async function backfillSetEditions(
       where: { slug: seed.slug },
     });
     if (!ed) continue;
+    const night = editionPerformedAtForSet(s.type, ed.endsAt);
     await prisma.set.update({
       where: { id: s.id },
       data: {
         editionId: ed.id,
-        performedAt: ed.endsAt ?? s.publishedAt,
+        ...(night ? { performedAt: night } : {}),
       },
     });
     n += 1;

@@ -16,6 +16,7 @@ import {
   yearFromSetTitle,
 } from "../feedPriority";
 import { derivePerformedAt } from "./derivePerformedAt";
+import { dateConflictsTitle, parseDateFromSetTitle } from "../placeTimeline";
 import { KNOWN_EVENTS } from "./events";
 import { looksLikeLiveFestivalRadio } from "../sourceComments";
 import { isLivestreamHubFeedTitle } from "../tracklistGap";
@@ -488,8 +489,10 @@ export function captureEventSearchName(
 }
 
 /**
- * Calendar day or year for a 1001 search. Title / performedAt / 1001 URL /
- * edition only — never YouTube upload time (reuploads lie).
+ * Calendar day or year for a 1001 search. Printed title first, then a
+ * catalog night that does not fight that title, then a 1001 URL / edition
+ * year. Never YouTube upload time (reuploads lie). Never a festival
+ * weekend glued onto an August mix.
  */
 export function captureSearchWhen(
   row: Pick<
@@ -498,18 +501,28 @@ export function captureSearchWhen(
   >,
   nowMs = Date.now(),
 ): string | undefined {
-  const performedAt =
-    row.performedAt ??
-    derivePerformedAt(
-      row.title,
-      row.slug,
-      row.tracklistUrl ? { [row.slug]: row.tracklistUrl } : {},
-      nowMs,
-    );
-  if (performedAt) {
-    const d = new Date(performedAt);
-    if (Number.isFinite(d.getTime())) return d.toISOString().slice(0, 10);
+  const titledDay = parseDateFromSetTitle(row.title, nowMs);
+  if (titledDay) return titledDay.toISOString().slice(0, 10);
+
+  const stored = row.performedAt ? new Date(row.performedAt) : null;
+  if (
+    stored &&
+    Number.isFinite(stored.getTime()) &&
+    !dateConflictsTitle(stored, row.title, nowMs)
+  ) {
+    return stored.toISOString().slice(0, 10);
   }
+
+  const derived = derivePerformedAt(
+    row.title,
+    row.slug,
+    row.tracklistUrl ? { [row.slug]: row.tracklistUrl } : {},
+    nowMs,
+  );
+  if (derived && !dateConflictsTitle(derived, row.title, nowMs)) {
+    return derived.toISOString().slice(0, 10);
+  }
+
   const titled = yearFromSetTitle(row.title, nowMs);
   if (titled) return String(titled);
   const urlYear = row.tracklistUrl?.match(/-(20\d{2})(?:-\d{2}-\d{2})?(?:\.html)?(?:[?#]|$)/);
