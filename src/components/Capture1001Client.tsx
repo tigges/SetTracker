@@ -354,14 +354,6 @@ function Capture1001Workbench({
                 {p.performanceYear ? ` · ${p.performanceYear}` : ""}
                 {p.reason ? ` · ${p.reason}` : ""}
               </div>
-              {searchQ ? (
-                <div
-                  className="mono truncate text-[11px] text-muted"
-                  title={searchQ}
-                >
-                  {searchQ}
-                </div>
-              ) : null}
             </div>
             <div className="flex flex-wrap gap-1.5">
               {watch ? (
