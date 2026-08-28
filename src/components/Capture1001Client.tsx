@@ -258,27 +258,6 @@ function Capture1001Workbench({
 
   return (
     <div className="space-y-3">
-      <p className="text-[12px] text-muted">
-        Official playback is already in the catalog. First-party
-        descriptions, timed comments, and ACR fingerprints fill clocks
-        without 1001. A wired slug drops on the next Pages export — live
-        /stats cannot drop a row the same day you paste. Search 1001 POSTs
-        artist + venue + date (GET /search?q= is a 404). Run the
-        bookmarklet (or paste{" "}
-        <span className="mono text-[11px] text-ink">
-          scripts/capture-1001tl.console.js
-        </span>
-        {" / "}
-        <span className="mono text-[11px] text-ink">
-          scripts/capture-mixesdb.console.js
-        </span>
-        {" / "}
-        <span className="mono text-[11px] text-ink">
-          scripts/capture-applemusic.console.js
-        </span>
-        ). Apple Music mix times are segment lengths — accumulate, do not
-        even-space. CI never fetches 1001, MixesDB, or Apple Music.
-      </p>
       <div className="flex flex-wrap gap-1.5">
         <button
           type="button"

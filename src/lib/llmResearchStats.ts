@@ -5,6 +5,7 @@
 
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
+import { LLM_JOB_VARIABLES } from "./ingest/discovery/llmTrackRecord";
 
 export type LlmResearchTarget = "dj" | "event" | "identity" | "first-party";
 
@@ -43,12 +44,17 @@ export type LlmResearchStats = {
   totals: {
     djsScanned: number;
     djFieldsApplied: number;
+    djFieldSlots: number;
+    djWithWrite: number;
     eventsScanned: number;
     eventFieldsApplied: number;
+    eventFieldSlots: number;
+    eventWithWrite: number;
     identityClassified: number;
     touringDj: number;
     junkOrHost: number;
   };
+  providers: string[];
   firstParty: {
     anySocial: number;
     djsIg: number;
@@ -190,12 +196,17 @@ export function loadLlmResearchStats(
     totals: {
       djsScanned: 0,
       djFieldsApplied: 0,
+      djFieldSlots: 0,
+      djWithWrite: 0,
       eventsScanned: 0,
       eventFieldsApplied: 0,
+      eventFieldSlots: 0,
+      eventWithWrite: 0,
       identityClassified: 0,
       touringDj: 0,
       junkOrHost: 0,
     },
+    providers: [],
     firstParty: null,
     rounds: [],
     fills: [],
@@ -262,17 +273,36 @@ export function loadLlmResearchStats(
     return b.sets - a.sets || a.name.localeCompare(b.name);
   });
 
+  const djsScanned = rounds
+    .filter((r) => r.target === "dj")
+    .reduce((n, r) => n + r.scanned, 0);
+  const eventsScanned = rounds
+    .filter((r) => r.target === "event")
+    .reduce((n, r) => n + r.scanned, 0);
+  const providers = [
+    ...new Set(
+      rounds
+        .map((r) => r.provider)
+        .filter((p) => p === "gemini" || p === "claude"),
+    ),
+  ];
+  if (providers.includes("gemini") && providers[0] !== "gemini") {
+    providers.sort((a, b) => (a === "gemini" ? -1 : b === "gemini" ? 1 : 0));
+  }
+
   const totals = {
-    djsScanned: rounds.filter((r) => r.target === "dj").reduce((n, r) => n + r.scanned, 0),
+    djsScanned,
     djFieldsApplied: rounds
       .filter((r) => r.target === "dj")
       .reduce((n, r) => n + r.applied, 0),
-    eventsScanned: rounds
-      .filter((r) => r.target === "event")
-      .reduce((n, r) => n + r.scanned, 0),
+    djFieldSlots: djsScanned * LLM_JOB_VARIABLES.handles.length,
+    djWithWrite: fills.filter((f) => f.kind === "dj").length,
+    eventsScanned,
     eventFieldsApplied: rounds
       .filter((r) => r.target === "event")
       .reduce((n, r) => n + r.applied, 0),
+    eventFieldSlots: eventsScanned * LLM_JOB_VARIABLES.events.length,
+    eventWithWrite: fills.filter((f) => f.kind === "event").length,
     identityClassified: identitySorted.length,
     touringDj: identitySorted.filter((r) => r.cls === "touring_dj").length,
     junkOrHost: identitySorted.filter(
@@ -284,6 +314,7 @@ export function loadLlmResearchStats(
     generatedAt,
     note: "Models propose; we write only live name-matched profiles. Events never receive a lineup-artist profile. Identity is report-only.",
     totals,
+    providers,
     firstParty,
     rounds,
     fills,

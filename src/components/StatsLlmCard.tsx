@@ -1,7 +1,7 @@
 import { StatsNotesLink } from "@/components/StatsNotesLink";
 import {
-  formatLlmHitRate,
-  formatLlmTrackMessage,
+  formatLlmFieldFill,
+  formatLlmLatestPass,
   llmJobVariablesLabel,
 } from "@/lib/ingest/discovery/llmTrackRecord";
 import type { LlmCostJob } from "@/lib/ingest/discovery/llmCost";
@@ -26,18 +26,43 @@ function jobFromFile(file: string): LlmCostJob | null {
   return null;
 }
 
+function providerLine(providers: string[]): string {
+  if (providers.includes("gemini") && providers.includes("claude")) {
+    return "Gemini, then Claude";
+  }
+  if (providers.includes("gemini")) return "Gemini";
+  if (providers.includes("claude")) return "Claude";
+  return "no model";
+}
+
+function Stat({
+  label,
+  value,
+}: {
+  label: string;
+  value: string;
+}) {
+  return (
+    <div>
+      <dt className="text-[11px] uppercase tracking-[0.14em] text-muted">
+        {label}
+      </dt>
+      <dd className="mono font-semibold tabular-nums">{value}</dd>
+    </div>
+  );
+}
+
 export function StatsLlmCard({ stats }: { stats: LlmResearchStats }) {
   const latest = [...stats.rounds].sort((a, b) =>
     (b.generatedAt || "").localeCompare(a.generatedAt || ""),
   )[0];
   const job = latest ? jobFromFile(latest.file) : null;
-  const line =
+  const latestLine =
     latest && job
-      ? formatLlmTrackMessage(job, {
-          tracked: latest.scanned,
-          found: latest.found ?? latest.applied,
-          partial: latest.partial ?? 0,
-          missed: latest.missed ?? Math.max(0, latest.rejected),
+      ? formatLlmLatestPass({
+          job,
+          sent: latest.scanned,
+          fieldsWritten: latest.applied,
         })
       : null;
 
@@ -48,46 +73,49 @@ export function StatsLlmCard({ stats }: { stats: LlmResearchStats }) {
         <StatsNotesLink hash="runs" />
       </div>
       <dl className="grid grid-cols-2 gap-x-4 gap-y-1 text-[12px] sm:grid-cols-4">
-        <div>
-          <dt className="text-[11px] uppercase tracking-[0.14em] text-muted">
-            DJs tracked
-          </dt>
-          <dd className="mono font-semibold tabular-nums">
-            {stats.totals.djsScanned.toLocaleString()}
-          </dd>
-        </div>
-        <div>
-          <dt className="text-[11px] uppercase tracking-[0.14em] text-muted">
-            DJ fields found
-          </dt>
-          <dd className="mono font-semibold tabular-nums">
-            {stats.totals.djFieldsApplied.toLocaleString()}
-            {stats.totals.djsScanned
-              ? ` · ${formatLlmHitRate(stats.totals.djFieldsApplied, stats.totals.djsScanned)}`
-              : ""}
-          </dd>
-        </div>
-        <div>
-          <dt className="text-[11px] uppercase tracking-[0.14em] text-muted">
-            Events tracked
-          </dt>
-          <dd className="mono font-semibold tabular-nums">
-            {stats.totals.eventsScanned.toLocaleString()}
-          </dd>
-        </div>
-        <div>
-          <dt className="text-[11px] uppercase tracking-[0.14em] text-muted">
-            Event fields found
-          </dt>
-          <dd className="mono font-semibold tabular-nums">
-            {stats.totals.eventFieldsApplied.toLocaleString()}
-          </dd>
-        </div>
+        <Stat
+          label="DJs sent"
+          value={stats.totals.djsScanned.toLocaleString()}
+        />
+        <Stat
+          label="DJ fields"
+          value={formatLlmFieldFill(
+            stats.totals.djFieldsApplied,
+            stats.totals.djFieldSlots,
+          )}
+        />
+        <Stat
+          label="Events sent"
+          value={stats.totals.eventsScanned.toLocaleString()}
+        />
+        <Stat
+          label="Event fields"
+          value={formatLlmFieldFill(
+            stats.totals.eventFieldsApplied,
+            stats.totals.eventFieldSlots,
+          )}
+        />
+        <Stat
+          label="DJs with a write"
+          value={
+            stats.totals.djsScanned
+              ? stats.totals.djWithWrite.toLocaleString()
+              : "—"
+          }
+        />
+        <Stat
+          label="Events with a write"
+          value={
+            stats.totals.eventsScanned
+              ? stats.totals.eventWithWrite.toLocaleString()
+              : "—"
+          }
+        />
       </dl>
       <p className="mono mt-2 text-[11px] text-muted2">
-        {line
-          ? `updated ${fmtWhen(stats.generatedAt)} · ${line}`
-          : `updated ${fmtWhen(stats.generatedAt)} · tracks ${llmJobVariablesLabel("handles")}`}
+        {`updated ${fmtWhen(stats.generatedAt)} · ${providerLine(stats.providers)}`}
+        {latestLine ? ` · ${latestLine}` : ""}
+        {` · DJs ${llmJobVariablesLabel("handles")} · events ${llmJobVariablesLabel("events")}`}
       </p>
     </section>
   );

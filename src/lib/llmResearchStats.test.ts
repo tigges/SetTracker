@@ -58,6 +58,11 @@ assert.ok(live.totals.djsScanned >= 200, "expected committed DJ research rounds"
 assert.ok(live.totals.djFieldsApplied >= 500);
 assert.equal(live.totals.eventsScanned, 88);
 assert.equal(live.totals.eventFieldsApplied, 73);
+assert.equal(live.totals.djFieldSlots, live.totals.djsScanned * 5);
+assert.equal(live.totals.eventFieldSlots, 88 * 4);
+assert.ok(live.totals.djFieldsApplied / live.totals.djFieldSlots < 1);
+assert.ok(live.totals.djWithWrite <= live.totals.djsScanned);
+assert.ok(live.providers.includes("gemini") || live.providers.includes("claude"));
 assert.ok(!live.rounds.some((r) => r.file === "llm-event-handle-research.json"));
 assert.ok(live.fills.some((f) => f.kind === "dj"));
 assert.ok(live.identity.some((r) => r.cls === "junk"));

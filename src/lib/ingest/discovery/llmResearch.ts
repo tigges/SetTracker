@@ -18,6 +18,10 @@ import type { PrismaClient } from "@prisma/client";
 import { isJunkArtistName } from "../../artistName";
 import { isCatalogWorkDj, isTop100DjSlug } from "../../djCatalog";
 import { isBrandHostSlug } from "../../brandHosts";
+import {
+  eventHasParseableFirstParty,
+  hasParseableFirstPartyHost,
+} from "./firstPartyProfile";
 import { isProducerHiddenSlug } from "../producerDjReview.data";
 import { youtubeChannelUrl } from "../../social";
 import {
@@ -545,6 +549,9 @@ export async function runLlmHandleResearch(
                 title: true,
                 sourceName: true,
                 sourceUrl: true,
+                playbackUrl: true,
+                soundcloudUrl: true,
+                youtubeUrl: true,
                 type: true,
                 event: { select: { kind: true } },
               },
@@ -564,6 +571,15 @@ export async function runLlmHandleResearch(
         isResearchWorthyName(d.name) &&
         !isBrandHostSlug(d.slug) &&
         !isProducerHiddenSlug(d.slug) &&
+        !hasParseableFirstPartyHost(
+          d.name,
+          d.slug,
+          d.sets.map((s) => ({
+            sourceUrl: s.set.sourceUrl,
+            playbackUrl: s.set.playbackUrl,
+            sourceName: s.set.sourceName ?? s.set.youtubeUrl ?? s.set.soundcloudUrl,
+          })),
+        ) &&
         isCatalogWorkDj({
           slug: d.slug,
           isTop100: isTop100DjSlug(d.slug),
@@ -777,6 +793,7 @@ export async function runLlmEventHandleResearch(
   )
     .filter((e) => {
       if (already.has(e.slug)) return false;
+      if (eventHasParseableFirstParty(e)) return false;
       if (djNames.has(e.name.toLowerCase()) || djNames.has(e.slug.toLowerCase())) {
         return false;
       }

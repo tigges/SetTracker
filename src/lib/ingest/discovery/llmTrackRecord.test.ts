@@ -4,7 +4,9 @@ import {
   addLlmTally,
   classifyLlmOutcome,
   emptyLlmTally,
+  formatLlmFieldFill,
   formatLlmHitRate,
+  formatLlmLatestPass,
   formatLlmTrackMessage,
   llmJobVariablesLabel,
 } from "./llmTrackRecord";
@@ -38,6 +40,11 @@ assert.deepEqual(tally, { found: 2, partial: 1, missed: 1 });
 
 assert.equal(formatLlmHitRate(6, 24), "25.0%");
 assert.equal(formatLlmHitRate(0, 0), "n/a");
+assert.equal(formatLlmFieldFill(617, 1210), "617 / 1,210 · 51.0%");
+assert.equal(
+  formatLlmLatestPass({ job: "events", sent: 28, fieldsWritten: 29 }),
+  "latest: 28 events sent · 29 fields written",
+);
 
 assert.equal(
   formatLlmTrackMessage("handles", {
