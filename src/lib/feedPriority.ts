@@ -17,8 +17,9 @@
  *
  * Deep catalog leftovers (`compareDeepCatalog`) use the same completeness
  * order as spotlight. Empty / all-pink / placeholder cards stay in the
- * catalog and search; `promoteLeadCards` keeps them off the first All-sets
- * page. Radar rejects radio. New this week drops uncharted radio.
+ * catalog and search; `isFeedLeadCard` / `promoteLeadCards` keep half-ID
+ * and short-clip cards off This week and the first All-sets page.
+ * Radar rejects radio. New this week drops uncharted radio.
  *
  * Event/festival profile grids (`sortEventSets`) list this year first
  * (today → upcoming → latest finished), then older title-years descending.
@@ -296,8 +297,8 @@ export function compareDeepCatalog(
   return compareFeedPriority(a, b);
 }
 
-/** First All-sets page: enough named IDs, or a full-length dense set with one. */
-export const FEED_LEAD_MIN_RESOLVED_IDS = 10;
+/** First This-week / All-sets page: mostly identified (idCoverageTier 0). */
+export const FEED_LEAD_MAX_COVERAGE_TIER = 0;
 export const FEED_LEAD_MIN_DURATION_SEC = 40 * 60;
 
 export type FeedLeadFields = {
@@ -308,17 +309,16 @@ export type FeedLeadFields = {
 };
 
 /**
- * Cards that may occupy the first All-sets page.
- * `expected:` display slots and unparsed-only rows are not named IDs.
+ * Cards that may occupy This week and the first All-sets page.
+ * Mostly identified (≥70% orange/teal), dense, and a real-length set.
+ * Half-pink / grey bars and short clips stay in Load more.
  */
 export function isFeedLeadCard(s: FeedLeadFields): boolean {
-  const resolved = resolvedIdCount(s.statusCounts);
-  if (resolved >= FEED_LEAD_MIN_RESOLVED_IDS) return true;
-  const durationSec = s.durationSec ?? 0;
+  if ((s.densitySeverity ?? "ok") !== "ok") return false;
+  if ((s.durationSec ?? 0) < FEED_LEAD_MIN_DURATION_SEC) return false;
   return (
-    durationSec >= FEED_LEAD_MIN_DURATION_SEC &&
-    (s.densitySeverity ?? "ok") === "ok" &&
-    resolved >= 1
+    idCoverageTier(s.statusCounts, s.trackCount ?? 0) <=
+    FEED_LEAD_MAX_COVERAGE_TIER
   );
 }
 

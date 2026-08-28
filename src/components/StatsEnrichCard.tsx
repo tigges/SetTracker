@@ -1,13 +1,10 @@
 import type { ActionsStatusFile } from "@/lib/actionsStatus";
 import { enrichOutcomeLabel } from "@/lib/actionsStatus";
 import { StatsLiveRuns } from "@/components/StatsLiveRuns";
-import {
-  ACR_IDENTIFY_VARIABLES_LABEL,
-  formatAcrHitRate,
-} from "@/lib/ingest/enrich/acrProbeRecord";
+import { StatsNotesLink } from "@/components/StatsNotesLink";
+import { formatAcrHitRate } from "@/lib/ingest/enrich/acrProbeRecord";
 import type { EnrichRunReport } from "@/lib/ingest/enrich/enrichRunReport";
 import {
-  ACR_INVOICE_SKU,
   formatFileScanSpendLine,
   formatIdentifySpendLine,
   sumFileScanSpend,
@@ -56,7 +53,10 @@ export function StatsEnrichCard({
     ? (id.hitRate ?? formatAcrHitRate(id.identified, id.probed))
     : null;
   const fsRate = fs
-    ? (fs.hitRate ?? formatAcrHitRate(fs.identified, fs.ready))
+    ? formatAcrHitRate(
+        fs.identified,
+        Math.max(fs.ready, fs.submitted + (fs.reused ?? 0)),
+      )
     : null;
   const idSpend = id
     ? {
@@ -85,40 +85,11 @@ export function StatsEnrichCard({
   return (
     <section id="enrich" className="card mb-2.5 scroll-mt-20 p-3">
       <div className="mb-2 flex items-end justify-between gap-3">
-        <div>
+        <div className="flex items-baseline gap-2">
           <h2 className="text-[14px] font-bold tracking-tight">Last enrich</h2>
-          <p className="mt-0.5 text-[11px] text-muted2">
-            Identify + File Scan from the cached catalog, as of the last Pages
-            ship. ACR&apos;s invoice lists SKUs and dollars only — request
-            counts, hits, partials, and reuse live here.
-          </p>
+          <StatsNotesLink hash="acr" />
         </div>
         <Tone label={outcome} tone={outcomeTone} />
-      </div>
-
-      <div className="mb-2 rounded-lg border border-line bg-bg px-2.5 py-2">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-muted">
-          What we send ACR
-        </p>
-        <p className="mt-1 text-[12px] leading-snug text-ink">
-          Variables:{" "}
-          <span className="mono">
-            {id?.variables ?? fs?.variables ?? ACR_IDENTIFY_VARIABLES_LABEL}
-          </span>
-          . Identify cuts 12s clips from SoundCloud / hearthis we already host.
-          File Scan POSTs the YouTube URL; ACR downloads the set. Same fields
-          either path. We do not request AI-detection hours.
-        </p>
-        <p className="mono mt-1 text-[10px] leading-snug text-muted2">
-          Invoice Identify → {ACR_INVOICE_SKU.identify}
-        </p>
-        <p className="mono mt-0.5 text-[10px] leading-snug text-muted2">
-          Invoice File Scan → {ACR_INVOICE_SKU.filescan}
-        </p>
-        <p className="mono mt-0.5 text-[10px] leading-snug text-muted2">
-          {ACR_INVOICE_SKU.filescanAi} is leftover container default, not a
-          catalog ask.
-        </p>
       </div>
 
       <dl className="grid grid-cols-2 gap-x-4 gap-y-1 text-[12px] sm:grid-cols-4">
@@ -163,18 +134,13 @@ export function StatsEnrichCard({
       <p className="mono mt-2 text-[11px] text-muted2">
         {report
           ? `this run ${fmtWhen(report.updatedAt)} · Identify ${idSpend ? formatIdentifySpendLine(idSpend) : "idle"}`
-          : "No enrich snapshot in this catalog yet. Next Catalog enrich writes one into the DB cache."}
+          : "No enrich snapshot in this catalog yet."}
       </p>
       {fsSpend ? (
         <p className="mono mt-0.5 text-[11px] text-muted2">
           File Scan {formatFileScanSpendLine(fsSpend)}
         </p>
       ) : null}
-      <p className="mt-1 text-[11px] leading-snug text-muted2">
-        Same YouTube URL is not re-POSTed (container reuse). Same offset is not
-        re-Identified (grey acr-miss park). The same release in two sets is two
-        requests — different performances.
-      </p>
 
       {ledgerId && ledgerFs ? (
         <div className="mt-2 rounded-lg border border-line px-2.5 py-2">
@@ -188,24 +154,12 @@ export function StatsEnrichCard({
           <p className="mono mt-0.5 text-[11px] text-ink">
             File Scan {formatFileScanSpendLine(ledgerFs)}
           </p>
-          <p className="mt-1 text-[10px] leading-snug text-muted2">
-            Starts with the first enrich after this ship. Divide the ACR dollar
-            line by these request / submit totals to get the real unit rate.
-            Older invoice months are not reconstructable from last-run
-            snapshots.
-          </p>
         </div>
-      ) : (
-        <p className="mono mt-2 text-[11px] text-muted2">
-          Spend ledger starts on the next Catalog enrich after this ship. Last
-          run still shows requests / hits / partials / reuse above.
-        </p>
-      )}
+      ) : null}
 
-      {cookies ? (
-        <p className={`mono mt-1 text-[11px] ${cookies.stale ? "text-amber" : "text-muted2"}`}>
+      {cookies?.stale ? (
+        <p className="mono mt-1 text-[11px] text-amber">
           {cookieRefreshHint(cookies)}
-          {" · GitHub-hosted Actions still bot-wall YouTube — File Scan is the CI path."}
         </p>
       ) : null}
 

@@ -10,6 +10,7 @@ import {
 } from "@/components/StatsPlaybook";
 import { StatsEnrichCard } from "@/components/StatsEnrichCard";
 import { StatsLlmCard } from "@/components/StatsLlmCard";
+import { StatsNotesLink } from "@/components/StatsNotesLink";
 import { StatsHealthCard, StatsMeter } from "@/components/StatsHealthCard";
 import { loadActionsStatusFile } from "@/lib/actionsStatus";
 import { capture1001StatsHref } from "@/lib/captureHref";
@@ -23,7 +24,7 @@ import {
   loadEnrichSpendLedger,
 } from "@/lib/ingest/enrich/enrichRunReport";
 import { loadLlmResearchStats } from "@/lib/llmResearchStats";
-import { pageMeta, workflowRunUrl } from "@/lib/site";
+import { pageMeta } from "@/lib/site";
 import { clockSourceSlices } from "@/lib/statsHealth";
 import { getStatsHealth } from "@/lib/statsHealthData";
 import { estimateLlmSpend, formatLlmSpend } from "@/lib/ingest/discovery/llmCost";
@@ -383,11 +384,6 @@ export default async function StatsPage() {
             total={clockTotal}
           />
         ) : null}
-        <p className="mt-2 text-[11px] text-muted2">
-          Clocks come from official YT/SC/hearthis text and ACR fingerprints.
-          1001 is a community overlay only. No playback has no button — wait
-          for an official full-set upload.
-        </p>
       </StatsHealthCard>
       <StatsHealthCard
         id="tracks"
@@ -404,90 +400,12 @@ export default async function StatsPage() {
         />
       </StatsHealthCard>
 
-      <p className="mb-2 mt-5 text-[12px] font-semibold uppercase tracking-[0.14em] text-muted">
-        Queues
-      </p>
-      <div className="mb-2 flex flex-wrap gap-x-3 gap-y-1 text-[11px] text-muted2">
-        <span>
-          <span
-            className={`mr-1 inline-block rounded-full border px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.08em] ${FOLLOW_UP_PILL.auto}`}
-          >
-            Automatic
-          </span>{" "}
-          jobs drain
-        </span>
-        <span>
-          <span
-            className={`mr-1 inline-block rounded-full border px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.08em] ${FOLLOW_UP_PILL.operator}`}
-          >
-            Operator
-          </span>{" "}
-          you link or paste
-        </span>
-        <span>
-          <span
-            className={`mr-1 inline-block rounded-full border px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.08em] ${FOLLOW_UP_PILL.both}`}
-          >
-            Automatic + operator
-          </span>{" "}
-          jobs first, leftovers on you
-        </span>
+      <div className="mb-2 mt-5 flex items-baseline gap-2">
+        <p className="text-[12px] font-semibold uppercase tracking-[0.14em] text-muted">
+          Queues
+        </p>
+        <StatsNotesLink hash="queues" />
       </div>
-      <div className="mb-3 grid gap-2 sm:grid-cols-2">
-        <div className="rounded-lg border border-teal/30 bg-teal/5 px-2.5 py-2">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-teal">
-            Automated IDs
-          </p>
-          <p className="mt-1 text-[12px] leading-snug text-ink">
-            Catalog enrich Identify + File Scan write artist, title, ISRC,
-            score, and offset. Catalog LLM research writes handles, event
-            socials, home city, track IDs, and cue clocks — each job names
-            its variables and parks partial / empty results so the same row
-            is not retraced. Cue parser apply and track-id fill-null also
-            run on enrich.
-          </p>
-        </div>
-        <div className="rounded-lg border border-amber/30 bg-amber/5 px-2.5 py-2">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-amber">
-            Manual IDs
-          </p>
-          <p className="mt-1 text-[12px] leading-snug text-ink">
-            Capture 1001, Suggest ID on a set page, wire official playbacks,
-            and entity-complete pins.
-          </p>
-        </div>
-      </div>
-      <p className="mb-2 text-[11px] leading-snug text-muted2">
-        This page is a static export — it cannot start a run. Open a workflow,
-        then <span className="mono">Run workflow</span>:{" "}
-        <a
-          href={workflowRunUrl("catalog-deep.yml")}
-          className="text-brand underline decoration-dotted underline-offset-2"
-        >
-          Catalog deep refresh
-        </a>{" "}
-        drains Automatic queues (handles, artwork, official www, venue thumbs).{" "}
-        <a
-          href={workflowRunUrl("catalog-enrich.yml")}
-          className="text-brand underline decoration-dotted underline-offset-2"
-        >
-          Catalog enrich
-        </a>{" "}
-        runs ACR Identify + File Scan on a standing budget (no per-run Accept).{" "}
-        <a
-          href={workflowRunUrl("catalog-llm-research.yml")}
-          className="text-brand underline decoration-dotted underline-offset-2"
-        >
-          Catalog LLM research
-        </a>{" "}
-        runs handle / event / quality research on a standing budget (no
-        per-run Accept). Every job prints variables, tracked, found, and
-        partials parked.
-      </p>
-      <p className="mb-3 text-[11px] leading-snug text-muted2">
-        Every paid run prints what it researches and a cost estimate before it
-        sends anything. LLM: {formatLlmSpend(LLM_QUEUE_ESTIMATE)}.
-      </p>
 
       <div id="capture-1001" className="scroll-mt-20">
         <span id="workbench" />

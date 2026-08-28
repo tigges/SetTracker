@@ -366,6 +366,61 @@ describe("popularity rails", () => {
     );
   });
 
+  it("drops a half-identified recent radio from This week", () => {
+    const now = Date.parse("2026-08-28T12:00:00Z");
+    const week = newThisWeekSets(
+      [
+        item({
+          id: "hot-robot-255",
+          slug: "hot-robot-255",
+          type: "radio",
+          venueTier: "radio",
+          top100Rank: 4,
+          title: "Hot Robot Radio 255",
+          publishedAt: new Date("2026-08-27T00:00:00Z"),
+          durationSec: 58 * 60,
+          trackCount: 12,
+          statusCounts: { identified: 12, unresolved_id: 0, unparsed: 0 },
+          primaryDj: {
+            name: "Jamie Jones",
+            slug: "jamie-jones",
+            accent: "#1",
+            imageUrl: "https://example.com/jj.jpg",
+          },
+        }),
+        item({
+          id: "hot-robot-254",
+          slug: "hot-robot-254",
+          type: "radio",
+          venueTier: "radio",
+          top100Rank: 4,
+          title: "Hot Robot Radio 254",
+          publishedAt: new Date("2026-08-25T00:00:00Z"),
+          durationSec: 58 * 60,
+          trackCount: 15,
+          statusCounts: {
+            identified: 0,
+            community_resolved: 6,
+            unresolved_id: 3,
+            unparsed: 6,
+          },
+          primaryDj: {
+            name: "Jamie Jones",
+            slug: "jamie-jones",
+            accent: "#1",
+            imageUrl: "https://example.com/jj.jpg",
+          },
+        }),
+      ],
+      9,
+      now,
+    );
+    assert.deepEqual(
+      week.map((s) => s.id),
+      ["hot-robot-255"],
+    );
+  });
+
   it("fills New this week from 14 days when the 7-day pool is thin", () => {
     const now = Date.parse("2026-08-16T12:00:00Z");
     const feed = [
