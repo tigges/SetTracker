@@ -10,7 +10,7 @@
  */
 
 const JUNK_PHRASE =
-  /\b(?:official(?:\s+full)?\s+set|full\s+set|live\s+set|site:1001tracklists\.com)\b/gi;
+  /\b(?:official(?:\s+full)?\s+set|full\s+set|live\s+set|dj\s+set|live\s+from|live\s+at|site:1001tracklists\.com)\b/gi;
 
 /** Landing page (empty search welcome). */
 export const SEARCH_1001_LANDING = "https://www.1001tracklists.com/search";
@@ -25,8 +25,17 @@ export const SEARCH_1001_TRACKLISTS = "9";
 /** YYYY + glued day (August, 202026 → 2020). Do not match a bare year. */
 const GLUED_YEAR_DAY = /\b(20\d{2})(0[1-9]|[12]\d|3[01])\b/g;
 
-function tidySearchText(s: string): string {
+/** WE1 / TML / Live @ → tokens 1001 actually indexes. */
+export function expandCaptureSearchText(s: string): string {
   return s
+    .replace(/\bWE\s*1\b/gi, "Weekend 1")
+    .replace(/\bWE\s*2\b/gi, "Weekend 2")
+    .replace(/\bTML\b/g, "Tomorrowland")
+    .replace(/\bLive\s*@\s*/gi, " ");
+}
+
+function tidySearchText(s: string): string {
+  return expandCaptureSearchText(s)
     .replace(/[|/]+/g, " ")
     .replace(JUNK_PHRASE, " ")
     .replace(/['\u2018\u2019]s\b/gi, "")

@@ -10,15 +10,25 @@
 import { readFileSync, existsSync } from "node:fs";
 import { CAPTURE_QUEUE_LIMIT } from "./captureQueueLimits";
 import { join } from "node:path";
-import { isArchiveTitledSet, setPerformanceYear } from "../feedPriority";
+import {
+  isArchiveTitledSet,
+  setPerformanceYear,
+  yearFromSetTitle,
+} from "../feedPriority";
 import { derivePerformedAt } from "./derivePerformedAt";
+import { KNOWN_EVENTS } from "./events";
 import { looksLikeLiveFestivalRadio } from "../sourceComments";
 import { isLivestreamHubFeedTitle } from "../tracklistGap";
 import type { DensitySeverity } from "../setDensity";
 import { SET_SLUG_ALIASES } from "./sourceRemaps";
 import { TRACKLIST_1001_BY_SOURCE_SLUG } from "./tracklists1001/festival2026";
 import { isSecondaryPlaybackSlug } from "./tracklists1001/seeds";
-import { nativeCaptureSearchUrl, search1001 } from "../search1001";
+import {
+  nativeCaptureSearchUrl,
+  search1001,
+  search1001Query,
+  search1001QueryFromUrl,
+} from "../search1001";
 import { searchMixesdbByPlayerUrl } from "../searchMixesdb";
 
 export { nativeCaptureSearchUrl, search1001, searchMixesdbByPlayerUrl };
@@ -43,6 +53,8 @@ export type CapturePreset = {
   host?: "youtube" | "soundcloud";
   /** Performance year (performedAt / title / 1001 URL / edition — not ingest). */
   performanceYear?: number;
+  /** Exact 1001 POST query (artist + venue + date). Shown on the row. */
+  searchQuery?: string;
 };
 
 /** Hand-curated high-value assists (official YT, 1001 TBD). Empty when wired. */
@@ -190,10 +202,19 @@ export function extrasFromCaptureSnapshot(snapshot: {
   return (snapshot.presets ?? [])
     .filter((p) => p.reason === "relive:official-unwired")
     .filter((p) => !mapped.has(p.slug) && !isSecondaryPlaybackSlug(p.slug))
-    .map((p) => ({
-      ...p,
-      searchUrl: nativeCaptureSearchUrl(p.searchUrl, p.label),
-    }));
+    .map(withNativeSearch);
+}
+
+function withNativeSearch(p: CapturePreset): CapturePreset {
+  const searchUrl = nativeCaptureSearchUrl(p.searchUrl, p.label);
+  return {
+    ...p,
+    searchUrl,
+    searchQuery:
+      search1001QueryFromUrl(searchUrl) ||
+      p.searchQuery ||
+      search1001Query(p.label),
+  };
 }
 
 export function tlNameFromLabel(label: string): string {
@@ -229,7 +250,7 @@ function loadDensityYtSevere(cwd: string): CapturePreset[] {
           label: `${dj} · density gap`,
           slug,
           name: tlNameFromLabel(dj),
-          searchUrl: search1001(dj, title.replace(/\|/g, " ").slice(0, 60)),
+          searchUrl: search1001(dj, title.replace(/\|/g, " ")),
           reason: `density:${row.severity ?? "severe"}`,
         });
       }
@@ -274,6 +295,7 @@ export type CaptureNeedRow = {
   primaryDjSlug?: string;
   type: string;
   eventSlug?: string | null;
+  eventName?: string | null;
   publishedAt: Date | string;
   performedAt?: Date | string | null;
   editionYear?: number | null;
@@ -331,6 +353,14 @@ export function skipCaptureNeed(
   if (/\bshorts?\b/i.test(row.title)) return "shorts";
   if (isLivestreamHubFeedTitle(row.title)) return "livestream-hub";
   if (isArchiveTitledSet(row.title, nowMs)) return "archive-title";
+  const whenYear = Number((captureSearchWhen(row, nowMs) ?? "").slice(0, 4));
+  if (
+    Number.isFinite(whenYear) &&
+    whenYear >= 2005 &&
+    whenYear < new Date(nowMs).getUTCFullYear() - 1
+  ) {
+    return "archive-title";
+  }
   if (row.plays1001 >= 12) return "has-1001";
   if (
     row.type === "radio" &&
@@ -440,16 +470,100 @@ export function capturePerformanceYear(
   );
 }
 
+export function captureEventSearchName(
+  row: Pick<CaptureNeedRow, "eventSlug" | "eventName">,
+): string {
+  const named = row.eventName?.trim();
+  if (named) return named;
+  if (!row.eventSlug) return "";
+  return KNOWN_EVENTS[row.eventSlug]?.name ?? "";
+}
+
+/**
+ * Calendar day or year for a 1001 search. Title / performedAt / 1001 URL /
+ * edition only — never YouTube upload time (reuploads lie).
+ */
+export function captureSearchWhen(
+  row: Pick<
+    CaptureNeedRow,
+    "title" | "slug" | "performedAt" | "editionYear" | "tracklistUrl"
+  >,
+  nowMs = Date.now(),
+): string | undefined {
+  const performedAt =
+    row.performedAt ??
+    derivePerformedAt(
+      row.title,
+      row.slug,
+      row.tracklistUrl ? { [row.slug]: row.tracklistUrl } : {},
+      nowMs,
+    );
+  if (performedAt) {
+    const d = new Date(performedAt);
+    if (Number.isFinite(d.getTime())) return d.toISOString().slice(0, 10);
+  }
+  const titled = yearFromSetTitle(row.title, nowMs);
+  if (titled) return String(titled);
+  const urlYear = row.tracklistUrl?.match(/-(20\d{2})(?:-\d{2}-\d{2})?(?:\.html)?(?:[?#]|$)/);
+  if (urlYear) return urlYear[1];
+  if (row.editionYear && row.editionYear > 1990 && row.editionYear < 2100) {
+    return String(row.editionYear);
+  }
+  return undefined;
+}
+
+/** Artist + venue + weekend + date. Never slice the title mid-word. */
+export function captureSearchQuery(
+  row: Pick<
+    CaptureNeedRow,
+    | "title"
+    | "slug"
+    | "primaryDj"
+    | "eventSlug"
+    | "eventName"
+    | "performedAt"
+    | "editionYear"
+    | "tracklistUrl"
+  >,
+  nowMs = Date.now(),
+): string {
+  const when = captureSearchWhen(row, nowMs) ?? "";
+  const q = search1001Query(
+    row.primaryDj || row.title,
+    row.title,
+    captureEventSearchName(row),
+    when,
+  );
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(when)) return q;
+  const year = when.slice(0, 4);
+  return q
+    .replace(new RegExp(`\\b${year}\\b(?!-)`), " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+export function captureQueueLabel(
+  row: Pick<
+    CaptureNeedRow,
+    "title" | "slug" | "performedAt" | "editionYear" | "tracklistUrl"
+  >,
+  nowMs = Date.now(),
+): string {
+  const title = row.title.trim();
+  const when = captureSearchWhen(row, nowMs);
+  if (!when || title.includes(when)) return title.slice(0, 90);
+  return `${title} ${when}`.slice(0, 90);
+}
+
 export function presetFromNeed(row: CaptureNeedRow): CapturePreset {
   const host = captureHost(row.slug) ?? undefined;
+  const searchQuery = captureSearchQuery(row);
   return {
-    label: row.title.slice(0, 90),
+    label: captureQueueLabel(row),
     slug: row.slug,
     name: tlNameFromLabel(row.primaryDj || row.title),
-    searchUrl: search1001(
-      row.primaryDj || row.title,
-      row.title.replace(/\|/g, " ").slice(0, 50),
-    ),
+    searchUrl: search1001(searchQuery),
+    searchQuery,
     tracklistUrl: row.tracklistUrl,
     reason: captureReason(row),
     watchUrl: row.watchUrl || watchUrlForSlug(row.slug),
@@ -490,10 +604,7 @@ export function buildCaptureQueueFromNeeds(
     if (isSecondaryPlaybackSlug(p.slug)) return;
     if (out.length >= limit) return;
     seen.add(p.slug);
-    out.push({
-      ...p,
-      searchUrl: nativeCaptureSearchUrl(p.searchUrl, p.label),
-    });
+    out.push(withNativeSearch(p));
   };
 
   for (const p of PRIORITY_CAPTURES) push(p);
@@ -568,10 +679,7 @@ export function buildNextCaptures(
     if (isSecondaryPlaybackSlug(p.slug)) return;
     if (out.length >= limit) return;
     seen.add(p.slug);
-    out.push({
-      ...p,
-      searchUrl: nativeCaptureSearchUrl(p.searchUrl, p.label),
-    });
+    out.push(withNativeSearch(p));
   };
 
   for (const p of PRIORITY_CAPTURES) push(p);

@@ -6,6 +6,9 @@ import {
   captureEventBucket,
   capturePerEventCap,
   capturePerformanceYear,
+  captureQueueLabel,
+  captureSearchQuery,
+  captureSearchWhen,
   presetFromNeed,
   scoreCaptureNeed,
   skipCaptureNeed,
@@ -1023,5 +1026,88 @@ assert.equal(
   ),
   "archive-title",
 );
+
+assert.equal(
+  captureSearchQuery(
+    row({
+      slug: "yt-eir5Sh_gHbo",
+      title: "Steve Angello WE1 | Tomorrowland 2026",
+      primaryDj: "Steve Angello",
+      eventSlug: "tomorrowland",
+      eventName: "Tomorrowland",
+      performedAt: "2026-07-18T00:00:00Z",
+    }),
+    now,
+  ),
+  "Steve Angello Weekend 1 Tomorrowland 2026-07-18",
+);
+assert.equal(
+  captureSearchQuery(
+    row({
+      slug: "yt-5LqJCIi6p7Y",
+      title: "deadmau5 Live @ VELD Music Festival 2025 Toronto, Canada",
+      primaryDj: "deadmau5",
+    }),
+    now,
+  ),
+  "deadmau5 VELD Music Festival 2025 Toronto Canada",
+);
+assert.equal(
+  captureSearchWhen(
+    {
+      slug: "yt-vy-k0FopsmY",
+      title: "Carl Cox Boiler Room Ibiza Villa Takeovers DJ Set",
+      tracklistUrl:
+        "https://www.1001tracklists.com/tracklist/3v69b81/carl-cox-carl-cox-friends-ibiza-villa-takeovers-boiler-room-2013-08-15.html",
+    },
+    now,
+  ),
+  "2013-08-15",
+);
+assert.equal(
+  captureQueueLabel(
+    {
+      slug: "yt-vy-k0FopsmY",
+      title: "Carl Cox Boiler Room Ibiza Villa Takeovers DJ Set",
+      tracklistUrl:
+        "https://www.1001tracklists.com/tracklist/3v69b81/carl-cox-carl-cox-friends-ibiza-villa-takeovers-boiler-room-2013-08-15.html",
+    },
+    now,
+  ),
+  "Carl Cox Boiler Room Ibiza Villa Takeovers DJ Set 2013-08-15",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "yt-cox-untitled-2013",
+      title: "Carl Cox Boiler Room Ibiza Villa Takeovers DJ Set",
+      primaryDj: "Carl Cox",
+      eventSlug: "boiler-room",
+      tracklistUrl:
+        "https://www.1001tracklists.com/tracklist/3v69b81/carl-cox-carl-cox-friends-ibiza-villa-takeovers-boiler-room-2013-08-15.html",
+      festivalSeason: false,
+      publishedAt: "2026-08-01T00:00:00Z",
+    }),
+    mapped,
+    now,
+  ),
+  "archive-title",
+);
+const angelloPreset = presetFromNeed(
+  row({
+    slug: "yt-eir5Sh_gHbo",
+    title: "Steve Angello WE1 | Tomorrowland 2026",
+    primaryDj: "Steve Angello",
+    eventSlug: "tomorrowland",
+    performedAt: "2026-07-18T00:00:00Z",
+  }),
+);
+assert.equal(
+  angelloPreset.searchQuery,
+  "Steve Angello Weekend 1 Tomorrowland 2026-07-18",
+);
+assert.ok(!angelloPreset.searchQuery?.endsWith("Augu"));
+assert.ok(!angelloPreset.searchQuery?.endsWith("Fe"));
+assert.ok((angelloPreset.searchQuery?.length ?? 0) > 20);
 
 console.log("nextCaptures.queue.test.ts ok");

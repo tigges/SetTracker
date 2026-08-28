@@ -414,7 +414,7 @@ export default async function StatsPage() {
         <QueueFold
           title="Capture 1001"
           count={captureQueueOpen}
-          hint="Community tracklist overlay for sets that already have official playback. Open the playback, search 1001, run the bookmarklet. Never invent a 1001 URL."
+          hint="Community tracklist overlay for sets that already have official playback. Search is artist + venue + date. A wired slug drops on the next Pages export — do not re-paste from a stale live queue. Never invent a 1001 URL."
           followUp="operator"
         >
           <Suspense fallback={null}>

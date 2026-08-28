@@ -85,7 +85,17 @@ export type CapturePreset = {
   host?: "youtube" | "soundcloud";
   /** Performance year (performedAt / title / 1001 URL / edition — not ingest). */
   performanceYear?: number;
+  /** Exact 1001 POST query (artist + venue + date). */
+  searchQuery?: string;
 };
+
+function queryForPreset(p: CapturePreset): string {
+  return (
+    p.searchQuery ||
+    search1001QueryFromUrl(nativeCaptureSearchUrl(p.searchUrl, p.label)) ||
+    search1001Query(p.label)
+  );
+}
 
 /** Official playback for a catalog slug. */
 function watchFromPreset(p: CapturePreset): string {
@@ -195,7 +205,7 @@ function Capture1001Workbench({
     const q = query.trim().toLowerCase();
     if (!q) return presets;
     return presets.filter((p) =>
-      `${p.label} ${p.slug} ${p.reason ?? ""} ${p.name}`
+      `${p.label} ${p.slug} ${p.reason ?? ""} ${p.name} ${p.searchQuery ?? ""}`
         .toLowerCase()
         .includes(q),
     );
@@ -251,8 +261,9 @@ function Capture1001Workbench({
       <p className="text-[12px] text-muted">
         Official playback is already in the catalog. First-party
         descriptions, timed comments, and ACR fingerprints fill clocks
-        without 1001. Search 1001 POSTs their tracklist form (GET /search?q=
-        is a 404) only for community overlays. Run the
+        without 1001. A wired slug drops on the next Pages export — live
+        /stats cannot drop a row the same day you paste. Search 1001 POSTs
+        artist + venue + date (GET /search?q= is a 404). Run the
         bookmarklet (or paste{" "}
         <span className="mono text-[11px] text-ink">
           scripts/capture-1001tl.console.js
@@ -327,6 +338,7 @@ function Capture1001Workbench({
       <ol className="divide-y divide-line border-y border-line">
         {filtered.map((p, i) => {
           const watch = watchFromPreset(p);
+          const searchQ = queryForPreset(p);
           return (
           <li
             key={p.slug}
@@ -342,6 +354,14 @@ function Capture1001Workbench({
                 {p.performanceYear ? ` · ${p.performanceYear}` : ""}
                 {p.reason ? ` · ${p.reason}` : ""}
               </div>
+              {searchQ ? (
+                <div
+                  className="mono truncate text-[11px] text-muted"
+                  title={searchQ}
+                >
+                  {searchQ}
+                </div>
+              ) : null}
             </div>
             <div className="flex flex-wrap gap-1.5">
               {watch ? (
@@ -367,11 +387,7 @@ function Capture1001Workbench({
                 </a>
               ) : (
                 <Search1001Button
-                  query={
-                    search1001QueryFromUrl(
-                      nativeCaptureSearchUrl(p.searchUrl, p.label),
-                    ) || search1001Query(p.label)
-                  }
+                  query={searchQ}
                   onSearch={(q) => void onCopy("1001 search", q)}
                 />
               )}
