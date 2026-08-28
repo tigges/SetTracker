@@ -73,6 +73,7 @@ import {
   TL_ZEDD_ULTRA_MIAMI_MAINSTAGE_2025,
   TL_ANYMA_SOLOMUN_ULTRA_MIAMI_MAINSTAGE_2025,
   TL_OSCAR_AND_THE_WOLF_TML_WE1_CRYSTAL_2026,
+  TL_AGENTS_OF_TIME_TML_WE2_MAINSTAGE_2026,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
@@ -873,6 +874,23 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/14y11rh1/hardwell-mainstage-tomorrowland-weekend-2-belgium-2026-07-24.html",
     tracklist1001: TL_HARDWELL_TML_WE2_2026,
+  },
+  {
+    // Tomorrowland official — Mainstage WE2. Distinct from Time Warp Floor 1
+    // sc-agents-of-time-agents-of-time-time-warp-full.
+    video: "https://www.youtube.com/watch?v=5GyoClE4Q8o",
+    primaryArtist: dj("Agents Of Time", {
+      accent: "#7c5cff",
+      homeCity: "Bari, Italy",
+    }),
+    genre: "Melodic House",
+    type: "festival",
+    title: "Agents Of Time WE2 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/hjlpktt/agents-of-time-mainstage-tomorrowland-weekend-2-belgium-2026-07-25.html",
+    tracklist1001: TL_AGENTS_OF_TIME_TML_WE2_MAINSTAGE_2026,
   },
   {
     // Tomorrowland official — Crystal Garden WE2 B2B; 26/30 timed cues.

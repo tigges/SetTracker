@@ -194,6 +194,7 @@ import {
   TL_ZEDD_ULTRA_MIAMI_MAINSTAGE_2025,
   TL_ANYMA_SOLOMUN_ULTRA_MIAMI_MAINSTAGE_2025,
   TL_OSCAR_AND_THE_WOLF_TML_WE1_CRYSTAL_2026,
+  TL_AGENTS_OF_TIME_TML_WE2_MAINSTAGE_2026,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
@@ -5081,6 +5082,39 @@ assert.notEqual(
   TRACKLIST_1001_BY_SOURCE_SLUG["yt-Ty03QjFnL90"],
   TRACKLIST_1001_BY_SOURCE_SLUG["yt-n3TESnQqiQ4"],
   "Oscar And The Wolf is not the Blondish Crystal Garden WE1 seed",
+);
+
+// Agents Of Time @ Mainstage, Tomorrowland WE2 2026-07-25 — official
+// Tomorrowland YT. Distinct from Time Warp Floor 1.
+assertSeedClocks(TL_AGENTS_OF_TIME_TML_WE2_MAINSTAGE_2026);
+assert.equal(TL_AGENTS_OF_TIME_TML_WE2_MAINSTAGE_2026.length, 17);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-5GyoClE4Q8o"],
+  TL_AGENTS_OF_TIME_TML_WE2_MAINSTAGE_2026,
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-5GyoClE4Q8o"],
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-agents-of-time-agents-of-time-time-warp-full"
+  ],
+);
+const aotTml = tracklist1001RowsToPlays(TL_AGENTS_OF_TIME_TML_WE2_MAINSTAGE_2026);
+assert.equal(aotTml.length, 17);
+assert.equal(aotTml[0]?.provenance, "1001tl");
+assert.equal(aotTml[0]?.timestamp, 13);
+assert.equal(aotTml[0]?.trackTitle, "Forever");
+assert.equal(aotTml[16]?.trackTitle, "I Can't Do Without You");
+assert.equal(aotTml[16]?.timestamp, 56 * 60 + 19);
+for (let i = 1; i < aotTml.length; i++) {
+  assert.ok(
+    (aotTml[i]!.timestamp ?? 0) > (aotTml[i - 1]!.timestamp ?? 0),
+    `Agents Of Time TML WE2 clocks must increase at index ${i}`,
+  );
+}
+assert.equal(isWiredTracklistSlug("yt-5GyoClE4Q8o"), true);
+assert.notEqual(
+  TL_AGENTS_OF_TIME_TML_WE2_MAINSTAGE_2026,
+  TL_AGENTS_OF_TIME_TIME_WARP_FLOOR_1_2026,
 );
 
 console.log("tracklists1001/seeds.test.ts ok");

@@ -98,3 +98,45 @@ export const TL_OSCAR_AND_THE_WOLF_TML_WE1_CRYSTAL_2026: FingerprintSeedRow[] = 
   { at: "53:52", artist: "Oscar And The Wolf", title: "Cabriolet (Pour It Up Edit)" },
   { at: "56:48", artist: "Oscar And The Wolf", title: "Strange Entity" },
 ];
+
+/**
+ * Agents Of Time @ Mainstage, Tomorrowland Weekend 2, Belgium 2026-07-25
+ * Official YouTube: https://youtu.be/5GyoClE4Q8o
+ * oEmbed 2026-08-28: channel "Tomorrowland" (@tomorrowland), title
+ * "Agents Of Time WE2 | Tomorrowland 2026".
+ * https://www.1001tracklists.com/tracklist/hjlpktt/agents-of-time-mainstage-tomorrowland-weekend-2-belgium-2026-07-25.html
+ * Overlay name TL_AGENTS_OF_TIME is too generic and would collide with
+ * TL_AGENTS_OF_TIME_TIME_WARP_FLOOR_1_2026 (official SC, different night).
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-5GyoClE4Q8o"] = TL_AGENTS_OF_TIME_TML_WE2_MAINSTAGE_2026
+ * No SoundCloud in the paste — do not invent an SC slug. Do not attach this
+ * list to sc-agents-of-time-agents-of-time-time-warp-full.
+ * 3:48 → 17:35 gap kept as captured (not even-spaced).
+ * Captured 2026-08-28 — provenance 1001tl.
+ */
+export const TL_AGENTS_OF_TIME_TML_WE2_MAINSTAGE_2026: FingerprintSeedRow[] = [
+  { at: "0:13", artist: "Agents Of Time", title: "Forever" },
+  { at: "3:48", artist: "AZAD & Jast & RYCH DSYGNR", title: "Yatabala" },
+  { at: "17:35", artist: "Stylo & Q.U.A.K.E & Eli & Dani", title: "On The Ground" },
+  { at: "20:14", artist: "Felix Da Housecat ft. Miss Kittin", title: "Silver Screen Shower Scene" },
+  { at: "22:45", artist: "Agents Of Time & Miss Monique", title: "Rajada" },
+  { at: "26:15", artist: "Fedde Le Grand", title: "Put Your Hands Up For Detroit" },
+  { at: "29:52", artist: "The Prodigy", title: "Breathe" },
+  {
+    at: "33:10",
+    artist: "Bountyhunter",
+    title: "Woops (Dimitri Vegas & Junkie Kid Remix / BRANDON Remix)",
+  },
+  { at: "34:35", artist: "Mau P", title: "MERTHER" },
+  { at: "36:25", artist: "Nirvana", title: "Smells Like Teen Spirit" },
+  {
+    at: "38:14",
+    artist: "Swedish House Mafia",
+    title: "Wait So Long (Why Do I Have To) (Agents Of Time Remix)",
+  },
+  { at: "41:04", artist: "Agents Of Time", title: "Let Me Love U" },
+  { at: "44:55", artist: "Agents Of Time & JONOS & Son Of Son", title: "You + Me" },
+  { at: "50:51", artist: "Agents Of Time & Korolova ft. Conor Ross", title: "Made For Love" },
+  { at: "52:07", artist: "Swedish House Mafia & Connie Constance", title: "Heaven Takes You Home" },
+  { at: "53:22", artist: "Agents Of Time", title: "Zodiac" },
+  { at: "56:19", artist: "Agents Of Time", title: "I Can't Do Without You" },
+];
