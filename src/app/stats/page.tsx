@@ -414,7 +414,7 @@ export default async function StatsPage() {
         <QueueFold
           title="Capture 1001"
           count={captureQueueOpen}
-          hint="Community tracklist overlay for sets that already have official playback. Label and search are artist + venue + date — never a bare DJ Mix 3. Untitled host mixes without a venue drop out. A wired slug drops on the next Pages export — do not re-paste from a stale live queue. Never invent a 1001 URL."
+          hint="This year's Top 100 DJ and festival nights fill first. Older years wait until those are covered — ingest still follows any year. Label and search are artist + venue + date — never a bare DJ Mix 3. Untitled host mixes without a venue drop out. A wired slug drops on the next Pages export — do not re-paste from a stale live queue. Never invent a 1001 URL."
           followUp="operator"
         >
           <Suspense fallback={null}>

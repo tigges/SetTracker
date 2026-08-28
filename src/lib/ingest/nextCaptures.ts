@@ -479,6 +479,52 @@ export function capturePerformanceYear(
   );
 }
 
+/** Capture 1001 works this year first. Next January that year moves on. */
+export function captureFocusYear(nowMs = Date.now()): number {
+  return new Date(nowMs).getUTCFullYear();
+}
+
+/** Printed title year, else performance / publish year. */
+export function captureQueueYear(
+  row: Pick<
+    CaptureNeedRow,
+    "title" | "slug" | "publishedAt" | "performedAt" | "editionYear" | "tracklistUrl"
+  >,
+  nowMs = Date.now(),
+): number {
+  const titled = yearFromSetTitle(row.title, nowMs);
+  if (titled != null) return titled;
+  return capturePerformanceYear(row, nowMs);
+}
+
+export function isFocusYearCaptureNeed(
+  row: Pick<
+    CaptureNeedRow,
+    "title" | "slug" | "publishedAt" | "performedAt" | "editionYear" | "tracklistUrl"
+  >,
+  nowMs = Date.now(),
+): boolean {
+  return captureQueueYear(row, nowMs) === captureFocusYear(nowMs);
+}
+
+/**
+ * This year's Top 100 DJ or Top 100 festival. Mix / weekly radio wait
+ * behind real nights even when the host brand is charted.
+ */
+export function isFocusChartCaptureNeed(
+  row: CaptureNeedRow,
+  nowMs = Date.now(),
+): boolean {
+  if (!isFocusYearCaptureNeed(row, nowMs)) return false;
+  if (
+    row.type === "mix" ||
+    (row.type === "radio" && !looksLikeLiveFestivalRadio(row.title))
+  ) {
+    return false;
+  }
+  return row.top100Rank != null || row.eventRank != null;
+}
+
 export function captureEventSearchName(
   row: Pick<CaptureNeedRow, "eventSlug" | "eventName">,
 ): string {
@@ -669,18 +715,38 @@ export function buildCaptureQueueFromNeeds(
           new Date(a.row.publishedAt).getTime(),
     );
 
-  // Pass 1: spread across events. Pass 2: ignore the cap so leftover slots go
-  // to the next-best rows rather than sitting empty.
+  // This year first: Top 100 DJ / festival nights, then other current-year
+  // gaps, then leftover current-year slots. Older years only after that —
+  // once 2026 is covered the same code starts filling 2025. Per-event cap
+  // still spreads the first passes so one brand cannot take all 40.
+  const yearFocus = ranked.filter(({ row }) =>
+    isFocusYearCaptureNeed(row, nowMs),
+  );
+  const older = ranked.filter(
+    ({ row }) => !isFocusYearCaptureNeed(row, nowMs),
+  );
+  const chart = yearFocus.filter(({ row }) =>
+    isFocusChartCaptureNeed(row, nowMs),
+  );
+  const yearRest = yearFocus.filter(
+    ({ row }) => !isFocusChartCaptureNeed(row, nowMs),
+  );
+
   const perEvent = new Map<string, number>();
-  for (const { row } of ranked) {
-    const key = captureEventBucket(row);
-    const used = perEvent.get(key) ?? 0;
-    if (used >= perEventCap) continue;
-    const before = out.length;
-    push(presetFromNeed(row));
-    if (out.length > before) perEvent.set(key, used + 1);
-  }
-  for (const { row } of ranked) push(presetFromNeed(row));
+  const fillCapped = (list: typeof ranked) => {
+    for (const { row } of list) {
+      const key = captureEventBucket(row);
+      const used = perEvent.get(key) ?? 0;
+      if (used >= perEventCap) continue;
+      const before = out.length;
+      push(presetFromNeed(row));
+      if (out.length > before) perEvent.set(key, used + 1);
+    }
+  };
+  fillCapped(chart);
+  fillCapped(yearRest);
+  for (const { row } of yearFocus) push(presetFromNeed(row));
+  for (const { row } of older) push(presetFromNeed(row));
   return out.slice(0, limit);
 }
 

@@ -5,10 +5,14 @@ import {
   buildCaptureQueueFromNeeds,
   captureEventBucket,
   capturePerEventCap,
+  captureFocusYear,
   capturePerformanceYear,
   captureQueueLabel,
+  captureQueueYear,
   captureSearchQuery,
   captureSearchWhen,
+  isFocusChartCaptureNeed,
+  isFocusYearCaptureNeed,
   presetFromNeed,
   scoreCaptureNeed,
   skipCaptureNeed,
@@ -1235,5 +1239,141 @@ assert.equal(
   ),
   "2026-08-20",
 );
+
+assert.equal(captureFocusYear(now), 2026);
+assert.equal(
+  captureQueueYear(
+    {
+      slug: "yt-awakenings-2025",
+      title: "Reinier Zonneveld | Awakenings Festival 2025",
+      publishedAt: "2026-08-01T00:00:00Z",
+    },
+    now,
+  ),
+  2025,
+);
+assert.equal(
+  isFocusYearCaptureNeed(
+    row({
+      slug: "yt-nameless-2026",
+      title: "Someone Nameless 2026",
+    }),
+    now,
+  ),
+  true,
+);
+assert.equal(
+  isFocusYearCaptureNeed(
+    row({
+      slug: "yt-ultra-2025",
+      title: "David Guetta Ultra Miami 2025",
+    }),
+    now,
+  ),
+  false,
+);
+assert.equal(
+  isFocusChartCaptureNeed(
+    row({
+      slug: "yt-nameless-chart-2026",
+      title: "Someone Nameless 2026",
+      eventSlug: "nameless",
+      eventRank: 40,
+      top100Rank: 80,
+    }),
+    now,
+  ),
+  true,
+);
+assert.equal(
+  isFocusChartCaptureNeed(
+    row({
+      slug: "sc-tml-friendship-2026",
+      title: "Tomorrowland Friendship Mix with Topic - August, 2026",
+      type: "mix",
+      eventSlug: "tomorrowland",
+      eventRank: 1,
+      top100Rank: 50,
+    }),
+    now,
+  ),
+  false,
+);
+
+const y2025Star = row({
+  slug: "yt-guetta-ultra-2025",
+  title: "David Guetta Ultra Miami 2025",
+  primaryDj: "David Guetta",
+  eventSlug: "ultra-miami",
+  eventRank: 2,
+  top100Rank: 2,
+  festivalSeason: true,
+  publishedAt: "2025-03-30T00:00:00Z",
+});
+const y2026Chart = row({
+  slug: "yt-nameless-2026-night",
+  title: "Someone Nameless 2026",
+  eventSlug: "nameless",
+  eventRank: 40,
+  top100Rank: 80,
+  festivalSeason: false,
+  publishedAt: "2026-06-15T00:00:00Z",
+});
+assert.ok(
+  scoreCaptureNeed(y2025Star, now) > scoreCaptureNeed(y2026Chart, now),
+  "2025 chart leftover can still outscore a quiet 2026 night",
+);
+assert.equal(
+  skipCaptureNeed(y2025Star, mapped, now),
+  null,
+  "2025 stays eligible once this year is covered",
+);
+assert.equal(
+  buildCaptureQueueFromNeeds([y2025Star, y2026Chart], {
+    limit: 10,
+    nowMs: now,
+  })[0]?.slug,
+  "yt-nameless-2026-night",
+);
+
+const year2026Flood = Array.from({ length: 45 }, (_, i) =>
+  row({
+    slug: `yt-focus-2026-${i}`,
+    title: `Nameless gap ${i} 2026`,
+    eventSlug: "nameless",
+    eventRank: 40,
+    top100Rank: 80,
+    festivalSeason: true,
+    publishedAt: "2026-06-15T00:00:00Z",
+  }),
+);
+const yearLocked = buildCaptureQueueFromNeeds([...year2026Flood, y2025Star], {
+  nowMs: now,
+});
+assert.equal(yearLocked.length, CAPTURE_QUEUE_LIMIT);
+assert.ok(
+  !yearLocked.some((p) => p.slug === "yt-guetta-ultra-2025"),
+  "2025 waits while this year still has Top 100 festival gaps",
+);
+
+const yearThenOlder = buildCaptureQueueFromNeeds(
+  [
+    y2026Chart,
+    y2025Star,
+    row({
+      slug: "yt-creamfields-2026",
+      title: "Someone Creamfields 2026",
+      eventSlug: "creamfields",
+      eventRank: 12,
+      top100Rank: 30,
+    }),
+  ],
+  { limit: 10, nowMs: now },
+);
+assert.deepEqual(
+  yearThenOlder.slice(0, 2).map((p) => p.slug).sort(),
+  ["yt-creamfields-2026", "yt-nameless-2026-night"],
+);
+assert.equal(yearThenOlder[2]?.slug, "yt-guetta-ultra-2025");
 
 console.log("nextCaptures.queue.test.ts ok");
