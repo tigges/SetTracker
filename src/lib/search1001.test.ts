@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import {
   SEARCH_1001_LANDING,
+  isGenericHostTitle,
   nativeCaptureSearchUrl,
   search1001,
   search1001Query,
@@ -99,5 +100,24 @@ assert.equal(
   ),
   "Peggy Gou Boiler Room x Dekmantel Festival Amsterdam 2017-08-04",
 );
+
+assert.equal(isGenericHostTitle("DJ Mix 3"), true);
+assert.equal(isGenericHostTitle("DJ Mix"), true);
+assert.equal(isGenericHostTitle("Black Coffee DJ Mix 3", "Black Coffee"), true);
+assert.equal(isGenericHostTitle("Protocol Radio 731"), false);
+assert.equal(isGenericHostTitle("Friendship Mix"), false);
+assert.equal(
+  isGenericHostTitle("Maddix live @ ULTRA EUROPE 2026 | Mainstage", "Maddix"),
+  false,
+);
+assert.equal(
+  search1001Query("Black Coffee", "DJ Mix 3"),
+  "Black Coffee",
+);
+assert.equal(
+  search1001Query("Black Coffee", "Black Coffee DJ Mix 3"),
+  "Black Coffee",
+);
+assert.ok(search1001Query("Steve Aoki", "Friendship Mix").includes("Friendship Mix"));
 
 console.log("search1001.test.ts ok");

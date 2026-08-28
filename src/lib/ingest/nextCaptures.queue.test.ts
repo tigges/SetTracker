@@ -1093,6 +1093,98 @@ assert.equal(
   ),
   "archive-title",
 );
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "sc-realblackcoffee-dj-mix-3",
+      title: "DJ Mix 3",
+      primaryDj: "Black Coffee",
+      type: "mix",
+      isFestival: false,
+      festivalSeason: false,
+      top100Rank: 5,
+      publishedAt: "2016-06-01T00:00:00Z",
+    }),
+    mapped,
+    now,
+  ),
+  "generic-title",
+);
+assert.equal(
+  captureSearchQuery(
+    row({
+      slug: "sc-realblackcoffee-dj-mix-3",
+      title: "DJ Mix 3",
+      primaryDj: "Black Coffee",
+    }),
+    now,
+  ),
+  "Black Coffee",
+);
+assert.equal(
+  captureQueueLabel(
+    {
+      slug: "sc-realblackcoffee-dj-mix-3",
+      title: "DJ Mix 3",
+      primaryDj: "Black Coffee",
+    },
+    now,
+  ),
+  "Black Coffee",
+);
+assert.equal(
+  captureQueueLabel(
+    {
+      slug: "sc-realblackcoffee-club-space",
+      title: "DJ Mix",
+      primaryDj: "Black Coffee",
+      eventName: "Club Space",
+      performedAt: "2025-04-04T00:00:00Z",
+    },
+    now,
+  ),
+  "Black Coffee · Club Space · 2025-04-04",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "sc-realblackcoffee-club-space",
+      title: "DJ Mix",
+      primaryDj: "Black Coffee",
+      eventName: "Club Space",
+      eventSlug: "club-space",
+      performedAt: "2025-04-04T00:00:00Z",
+    }),
+    mapped,
+    now,
+  ),
+  null,
+);
+assert.equal(
+  captureQueueLabel(
+    {
+      slug: "yt-A5ERobJaS_0",
+      title: "Live @ Ultra Melbourne 2026",
+      primaryDj: "The Chainsmokers",
+    },
+    now,
+  ),
+  "The Chainsmokers · Live @ Ultra Melbourne 2026",
+);
+assert.equal(
+  captureQueueLabel(
+    {
+      slug: "yt-eir5Sh_gHbo",
+      title: "Steve Angello WE1 | Tomorrowland 2026",
+      primaryDj: "Steve Angello",
+      eventName: "Tomorrowland",
+      performedAt: "2026-07-18T00:00:00Z",
+    },
+    now,
+  ),
+  "Steve Angello WE1 | Tomorrowland 2026 2026-07-18",
+);
+
 const angelloPreset = presetFromNeed(
   row({
     slug: "yt-eir5Sh_gHbo",
