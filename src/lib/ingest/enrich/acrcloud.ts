@@ -60,6 +60,7 @@ import {
   acrPartialHasNames,
   formatAcrPartialReason,
   formatAcrTrackMessage,
+  isAcrProbedText,
   playAlreadyAcrProbed,
 } from "./acrProbeRecord";
 import { createHmac } from "node:crypto";
@@ -159,6 +160,8 @@ export type AcrEnrichStats = {
   youtubeBotWalls: number;
   /** YouTube candidates skipped (circuit, File Scan owns YT, archive title). */
   youtubeSkipped: number;
+  /** Parked acr-miss offsets on probed sets — not billed again. */
+  alreadyProbed: number;
 };
 
 export type ClipSampleResult =
@@ -174,6 +177,7 @@ export type AcrSetEnrichResult = {
   clipFails: number;
   botWall: boolean;
   skipReason: string;
+  alreadyProbed: number;
 };
 
 function emptyStats(
@@ -191,6 +195,7 @@ function emptyStats(
     setsProbed: 0,
     youtubeBotWalls: 0,
     youtubeSkipped: 0,
+    alreadyProbed: 0,
     ...partial,
   };
 }
@@ -342,6 +347,7 @@ export type ExistingPlayMark = {
   timestamp: number;
   provenance: string;
   idStatus: string;
+  rawText?: string | null;
 };
 
 export type AcrHit = {
@@ -485,7 +491,8 @@ export function planTransitionProbes(
       STRONG_PROVENANCE.has(p.provenance) ||
       p.provenance === "fingerprint" ||
       p.idStatus === "identified" ||
-      p.idStatus === "community_resolved",
+      p.idStatus === "community_resolved" ||
+      isAcrProbedText(p.rawText),
   );
   const blocked = (offsetSec: number) =>
     blockers.some((p) => Math.abs(p.timestamp - offsetSec) <= half) ||
@@ -1500,6 +1507,7 @@ async function enrichOneSet(
     clipFails: 0,
     botWall: false,
     skipReason: "",
+    alreadyProbed: 0,
   };
   // YouTube: selection already applied allow/priority policy. Clips come from
   // yt-dlp (no progressive stream URL). SC/hearthis still need a stream.
@@ -1549,7 +1557,9 @@ async function enrichOneSet(
     timestamp: p.timestamp,
     provenance: p.provenance,
     idStatus: p.idStatus,
+    rawText: p.rawText,
   }));
+  const alreadyProbed = set.plays.filter((p) => playAlreadyAcrProbed(p)).length;
   let lastIdentifiedKey: string | null = null;
   for (const p of [...set.plays].sort((a, b) => a.timestamp - b.timestamp)) {
     const key = playCollapseKey({
@@ -1875,6 +1885,7 @@ async function enrichOneSet(
     clipFails,
     botWall,
     skipReason: "",
+    alreadyProbed,
   };
 }
 
@@ -1976,6 +1987,7 @@ export async function enrichSparseSetsWithAcrCloud(
   let setsWithStream = 0;
   let youtubeBotWalls = 0;
   let youtubeSkipped = 0;
+  let alreadyProbed = 0;
   let skipRemainingYoutube = skipYtIdentify;
   const startedAt = Date.now();
   const budgetMs = identifyBudgetMs();
@@ -2034,6 +2046,7 @@ export async function enrichSparseSetsWithAcrCloud(
     partial += r.partial;
     missed += r.missed;
     clipFails += r.clipFails;
+    alreadyProbed += r.alreadyProbed;
     if (r.botWall) {
       youtubeBotWalls += 1;
       skipRemainingYoutube = true;
@@ -2079,6 +2092,7 @@ export async function enrichSparseSetsWithAcrCloud(
     setsProbed: setsWithStream,
     youtubeBotWalls,
     youtubeSkipped,
+    alreadyProbed,
     skipped:
       candidates.length === 0
         ? "no sparse candidates"

@@ -110,6 +110,24 @@ assert.ok(emptyPlans.length <= 6);
 assert.ok(emptyPlans.every((p) => p.kind === "empty"));
 assert.ok(emptyPlans.some((p) => p.isGap));
 
+// acr-miss copy blocks even when provenance is not fingerprint.
+const parkedByText = planGapProbes(
+  400,
+  [
+    {
+      timestamp: 200,
+      provenance: "youtube",
+      idStatus: "unresolved_id",
+      rawText: "acr-miss @ 3:20: weak score 48: Amelie Lens - Exhale",
+    },
+  ],
+  90,
+  12,
+);
+const nearParked = parkedByText.find((p) => Math.abs(p.offsetSec - 200) <= 24);
+assert.ok(nearParked, "empty-set probe lands near the parked miss");
+assert.equal(nearParked!.isGap, false);
+
 // Fingerprint miss (grey unparsed) blocks that offset.
 const missed = planGapProbes(
   400,

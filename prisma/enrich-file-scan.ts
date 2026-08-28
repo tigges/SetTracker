@@ -47,7 +47,8 @@ async function main() {
         `| --- | --- |`,
         `| tracks | ${ACR_IDENTIFY_VARIABLES_LABEL} |`,
         `| enabled | ${stats.enabled} |`,
-        `| submitted | ${stats.submitted} |`,
+        `| submitted (new, billed) | ${stats.submitted} |`,
+        `| reused (same YouTube, no re-POST) | ${stats.reused} |`,
         `| ready | ${stats.ready} |`,
         `| identified | ${stats.identified} |`,
         `| hit rate | ${formatAcrHitRate(stats.identified, stats.ready)} |`,
@@ -64,6 +65,7 @@ async function main() {
       filescan: {
         enabled: stats.enabled,
         submitted: stats.submitted,
+        reused: stats.reused,
         ready: stats.ready,
         identified: stats.identified,
         partial: stats.partial,

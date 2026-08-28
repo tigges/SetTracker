@@ -1,5 +1,10 @@
 import assert from "node:assert/strict";
-import { enrichOutcome, githubEnrichContext } from "./enrichRunReport";
+import {
+  enrichOutcome,
+  fileScanSpendFromSnapshot,
+  githubEnrichContext,
+  identifySpendFromSnapshot,
+} from "./enrichRunReport";
 
 assert.equal(enrichOutcome({}), "noop");
 assert.equal(
@@ -83,5 +88,49 @@ assert.equal(
   "https://github.com/tigges/SetTracker/actions/runs/32379015638",
 );
 assert.equal(githubEnrichContext({}), undefined);
+
+assert.deepEqual(
+  identifySpendFromSnapshot({
+    enabled: true,
+    candidates: 10,
+    setsProbed: 4,
+    probed: 155,
+    identified: 52,
+    unresolved: 97,
+    partial: 21,
+    missed: 76,
+    alreadyProbed: 40,
+    clipFails: 0,
+    youtubeBotWalls: 0,
+    youtubeSkipped: 3,
+    skipped: "",
+  }),
+  {
+    requests: 155,
+    hits: 52,
+    partial: 21,
+    missed: 76,
+    alreadyProbed: 40,
+  },
+);
+assert.deepEqual(
+  fileScanSpendFromSnapshot({
+    enabled: true,
+    submitted: 8,
+    reused: 12,
+    ready: 20,
+    identified: 81,
+    partial: 132,
+    missed: 3,
+    skipped: "",
+  }),
+  {
+    submitted: 8,
+    reused: 12,
+    hits: 81,
+    partial: 132,
+    missed: 3,
+  },
+);
 
 console.log("enrichRunReport.test.ts ok");

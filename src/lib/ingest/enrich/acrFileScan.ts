@@ -541,12 +541,28 @@ export async function applyScanPartialsToSet(
 export type FileScanStats = {
   enabled: boolean;
   submitted: number;
+  /** Same YouTube already in the container — no re-POST. */
+  reused: number;
   ready: number;
   identified: number;
   partial: number;
   missed: number;
   skipped: string;
 };
+
+function emptyFileScanStats(
+  partial: Partial<FileScanStats> & Pick<FileScanStats, "enabled" | "skipped">,
+): FileScanStats {
+  return {
+    submitted: 0,
+    reused: 0,
+    ready: 0,
+    identified: 0,
+    partial: 0,
+    missed: 0,
+    ...partial,
+  };
+}
 
 function videoIdFromSlug(slug: string): string | null {
   const id = slug.startsWith("yt-") ? slug.slice(3) : slug;
@@ -626,15 +642,10 @@ export async function enrichYoutubeSetsWithFileScan(
 ): Promise<FileScanStats> {
   const cfg = fileScanConfig();
   if (!cfg) {
-    return {
+    return emptyFileScanStats({
       enabled: false,
-      submitted: 0,
-      ready: 0,
-      identified: 0,
-      partial: 0,
-      missed: 0,
       skipped: "ACRCLOUD_FS_TOKEN / ACRCLOUD_FS_CONTAINER_ID not set",
-    };
+    });
   }
   const setLimit = numEnv("ACRCLOUD_FS_SET_LIMIT", 10);
   const dryRun = process.env.ACRCLOUD_FS_DRY_RUN === "1";
@@ -646,15 +657,10 @@ export async function enrichYoutubeSetsWithFileScan(
     console.log(
       "[acr-fs] no requests — set ACRCLOUD_CONFIRM_SPEND=1 for this local run",
     );
-    return {
+    return emptyFileScanStats({
       enabled: false,
-      submitted: 0,
-      ready: 0,
-      identified: 0,
-      partial: 0,
-      missed: 0,
       skipped: `spend not confirmed (${estimate.summary})`,
-    };
+    });
   }
 
   const pollMs = numEnv("ACRCLOUD_FS_POLL_MS", 20_000);
@@ -676,15 +682,10 @@ export async function enrichYoutubeSetsWithFileScan(
       (dryRun ? " (dry-run)" : ""),
   );
   if (ytOnly.length === 0) {
-    return {
+    return emptyFileScanStats({
       enabled: true,
-      submitted: 0,
-      ready: 0,
-      identified: 0,
-      partial: 0,
-      missed: 0,
       skipped: "no sparse YouTube candidates",
-    };
+    });
   }
 
   // Phase A — reuse files already in the container; submit only new videos.
@@ -712,6 +713,7 @@ export async function enrichYoutubeSetsWithFileScan(
     return {
       enabled: true,
       submitted,
+      reused,
       ready,
       identified,
       partial,

@@ -18,7 +18,10 @@ import { CAPTURE_QUEUE_LIMIT } from "@/lib/ingest/captureQueueLimits";
 import { getCatalogStats } from "@/lib/catalogStats";
 import { prisma } from "@/lib/db";
 import { loadDjMagTop100RankBySlug } from "@/lib/djmagTop100";
-import { loadEnrichRunReport } from "@/lib/ingest/enrich/enrichRunReport";
+import {
+  loadEnrichRunReport,
+  loadEnrichSpendLedger,
+} from "@/lib/ingest/enrich/enrichRunReport";
 import { loadLlmResearchStats } from "@/lib/llmResearchStats";
 import { pageMeta, workflowRunUrl } from "@/lib/site";
 import { clockSourceSlices } from "@/lib/statsHealth";
@@ -231,10 +234,11 @@ function PlaceGapQueue({
 }
 
 export default async function StatsPage() {
-  const [s, health, enrichReport, captureQueue] = await Promise.all([
+  const [s, health, enrichReport, enrichLedger, captureQueue] = await Promise.all([
     getCatalogStats(),
     getStatsHealth(),
     loadEnrichRunReport(prisma),
+    loadEnrichSpendLedger(prisma),
     loadOperatorCaptureQueue(),
   ]);
   // The queue carries a reserve past the display limit so a parked row promotes
@@ -299,7 +303,11 @@ export default async function StatsPage() {
         </p>
       </div>
 
-      <StatsEnrichCard report={enrichReport} actions={actionsStatus} />
+      <StatsEnrichCard
+        report={enrichReport}
+        ledger={enrichLedger}
+        actions={actionsStatus}
+      />
       <StatsLlmCard stats={llmStats} />
 
       <StatsHealthCard
