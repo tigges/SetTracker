@@ -24,6 +24,7 @@ import { SET_SLUG_ALIASES } from "./sourceRemaps";
 import { TRACKLIST_1001_BY_SOURCE_SLUG } from "./tracklists1001/festival2026";
 import { isSecondaryPlaybackSlug } from "./tracklists1001/seeds";
 import {
+  isGenericHostTitle,
   nativeCaptureSearchUrl,
   search1001,
   search1001Query,
@@ -361,6 +362,13 @@ export function skipCaptureNeed(
   ) {
     return "archive-title";
   }
+  if (
+    isGenericHostTitle(row.title, row.primaryDj) &&
+    !captureEventSearchName(row) &&
+    !captureSearchWhen(row, nowMs)
+  ) {
+    return "generic-title";
+  }
   if (row.plays1001 >= 12) return "has-1001";
   if (
     row.type === "radio" &&
@@ -528,9 +536,10 @@ export function captureSearchQuery(
   nowMs = Date.now(),
 ): string {
   const when = captureSearchWhen(row, nowMs) ?? "";
+  const title = isGenericHostTitle(row.title, row.primaryDj) ? "" : row.title;
   const q = search1001Query(
-    row.primaryDj || row.title,
-    row.title,
+    row.primaryDj || title,
+    title,
     captureEventSearchName(row),
     when,
   );
@@ -545,14 +554,41 @@ export function captureSearchQuery(
 export function captureQueueLabel(
   row: Pick<
     CaptureNeedRow,
-    "title" | "slug" | "performedAt" | "editionYear" | "tracklistUrl"
+    | "title"
+    | "slug"
+    | "primaryDj"
+    | "eventSlug"
+    | "eventName"
+    | "performedAt"
+    | "editionYear"
+    | "tracklistUrl"
   >,
   nowMs = Date.now(),
 ): string {
   const title = row.title.trim();
+  const artist = row.primaryDj?.trim() ?? "";
   const when = captureSearchWhen(row, nowMs);
-  if (!when || title.includes(when)) return title.slice(0, 90);
-  return `${title} ${when}`.slice(0, 90);
+  const event = captureEventSearchName(row);
+  const generic = isGenericHostTitle(title, artist || undefined);
+  if (generic) {
+    const parts = [artist, event, when].filter((p) => p && p.length > 0);
+    const seen = new Set<string>();
+    const kept: string[] = [];
+    for (const part of parts) {
+      const key = part.toLowerCase();
+      if (seen.has(key)) continue;
+      if (kept.some((k) => k.toLowerCase().includes(key))) continue;
+      seen.add(key);
+      kept.push(part);
+    }
+    return (kept.join(" · ") || title).slice(0, 90);
+  }
+  let label = title;
+  if (artist && !title.toLowerCase().startsWith(artist.toLowerCase())) {
+    label = `${artist} · ${title}`;
+  }
+  if (when && !label.includes(when)) label = `${label} ${when}`;
+  return label.slice(0, 90);
 }
 
 export function presetFromNeed(row: CaptureNeedRow): CapturePreset {

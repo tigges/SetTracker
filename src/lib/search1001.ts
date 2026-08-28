@@ -10,7 +10,28 @@
  */
 
 const JUNK_PHRASE =
-  /\b(?:official(?:\s+full)?\s+set|full\s+set|live\s+set|dj\s+set|live\s+from|live\s+at|site:1001tracklists\.com)\b/gi;
+  /\b(?:official(?:\s+full)?\s+set|full\s+set|live\s+set|dj\s+set|dj\s+mix(?:\s+\d+)?|mix\s+\d+|live\s+from|live\s+at|site:1001tracklists\.com)\b/gi;
+
+/** Host leftover after the artist name — "DJ Mix 3", not "Protocol Radio 731". */
+const GENERIC_HOST_TITLE =
+  /^(?:(?:official\s+)?(?:full\s+)?(?:live\s+)?(?:dj\s+)?mix(?:\s+\d+)?|untitled(?:\s+\d+)?|podcast(?:\s+\d+)?|radio(?:\s+show)?|live(?:\s+set)?|full\s+set)$/i;
+
+/** Drop a leading artist so "Black Coffee DJ Mix 3" and "DJ Mix 3" match. */
+export function stripLeadingArtist(title: string, artist?: string): string {
+  const t = title.trim();
+  const a = artist?.trim();
+  if (!a) return t;
+  if (t.toLowerCase().startsWith(a.toLowerCase())) {
+    return t.slice(a.length).replace(/^[\s\-–—|:·.,]+/, "").trim();
+  }
+  return t;
+}
+
+/** True when the title is only a generic host name (DJ Mix 3, Untitled). */
+export function isGenericHostTitle(title: string, artist?: string): boolean {
+  const rest = stripLeadingArtist(title, artist);
+  return rest.length === 0 || GENERIC_HOST_TITLE.test(rest);
+}
 
 /** Landing page (empty search welcome). */
 export const SEARCH_1001_LANDING = "https://www.1001tracklists.com/search";
