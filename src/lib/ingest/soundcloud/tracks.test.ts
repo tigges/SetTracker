@@ -306,6 +306,20 @@ assert.equal(
   "sc-tomorrowland-tomorrowland-friendship-mix-with-sara-landry-july-2026",
 );
 
+const topicFriendshipSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url ===
+    "https://soundcloud.com/tomorrowland/tomorrowland-friendship-mix-with-topic-august-2026",
+);
+assert.ok(topicFriendshipSc);
+assert.equal(topicFriendshipSc.primaryArtist.name, "Topic");
+assert.equal(topicFriendshipSc.type, "mix");
+assert.equal(topicFriendshipSc.seriesName, "Tomorrowland Friendship Mix");
+assert.equal(
+  `sc-tomorrowland-${slugify("tomorrowland-friendship-mix-with-topic-august-2026")}`,
+  "sc-tomorrowland-tomorrowland-friendship-mix-with-topic-august-2026",
+);
+
 const lukeSelectsSc = SOUNDCLOUD_TRACK_SEEDS.find(
   (s) =>
     s.url ===

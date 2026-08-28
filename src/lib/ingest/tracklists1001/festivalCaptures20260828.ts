@@ -665,3 +665,34 @@ export const TL_BART_SKILS_LOVELAND_FIRE_2026: FingerprintSeedRow[] = [
   { at: "1:22:00", artist: "Selena (KR)", title: "Lose Myself" },
   { at: "1:26:40", artist: "Soul Central ft. Kathy Brown", title: "Strings Of Life (Stronger On My Own) (Bart Skils & Weska Remix)" },
 ];
+
+/**
+ * Topic - Tomorrowland Friendship Mix 2026-08-20
+ * Official SoundCloud: https://soundcloud.com/tomorrowland/tomorrowland-friendship-mix-with-topic-august-2026
+ * oEmbed 2026-08-28: author "Tomorrowland" (soundcloud.com/tomorrowland),
+ * title "Tomorrowland Friendship Mix with Topic - August, 2026".
+ * https://www.1001tracklists.com/tracklist/uqch80t/topic-tomorrowland-friendship-mix-2026-08-20.html
+ * Overlay name TL_TOPIC is too generic; constant is the performance.
+ * Distinct from Topic WE2 Tomorrowland 2024 (yt-yrG_Ldr05SQ).
+ * No YouTube in the operator paste — do not invent a YT slug.
+ * 1001 posted even 3:57 marks — kept as captured.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["sc-tomorrowland-tomorrowland-friendship-mix-with-topic-august-2026"] = TL_TOPIC_TML_FRIENDSHIP_MIX_2026
+ * Captured 2026-08-28 — provenance 1001tl.
+ */
+export const TL_TOPIC_TML_FRIENDSHIP_MIX_2026: FingerprintSeedRow[] = [
+  { at: "0:20", artist: "Topic & Becky G", title: "Sorry Papi (KIDDO Remix)" },
+  { at: "4:17", artist: "HUGEL & Topic & Arash ft. Daecolm", title: "I Adore You" },
+  { at: "8:14", artist: "Arodes & Ewerseen", title: "Too Young" },
+  { at: "12:11", artist: "Kimonos & Josh Gigante", title: "Feel So Right" },
+  { at: "16:08", artist: "Topic ft. Nico Santos", title: "Home" },
+  { at: "20:05", artist: "ATB & Topic & A7S vs. Notre Dame", title: "Your Love 9PM vs. Nobody Told Me (Topic Mashup)" },
+  { at: "24:02", artist: "CamelPhat & Josh Gigante ft. Kuuda", title: "So Good" },
+  { at: "27:59", artist: "Humans Musik", title: "2 Phones On" },
+  { at: "31:56", artist: "Mylo", title: "Drop The Pressure (GENESI & ESSENTIA Remix)" },
+  { at: "35:53", artist: "Topic & Carteblanche", title: "Lucky Ones" },
+  { at: "39:50", artist: "Max Styler ft. Kuuda", title: "Love Forever" },
+  { at: "43:47", artist: "Arodes & CamelPhat", title: "Cycles" },
+  { at: "47:44", artist: "Sofi & Arodes", title: "I Wanna Be" },
+  { at: "51:41", artist: "Topic & Sasha Alex Sloan vs. Marten Lou", title: "Saving Me vs. Late Night (Topic Mashup)" },
+  { at: "55:38", artist: "Kotiēr", title: "Smalltown Boy" },
+];

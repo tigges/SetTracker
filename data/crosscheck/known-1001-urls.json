@@ -1,7 +1,15 @@
 {
   "note": "Operator-collected 1001Tracklists URLs. All listed urls[] rows are now seeded. Prefer new operator pastes over this archive. stillMissing1001 is video-in / no 1001 page — do not invent URLs. heldPendingPlayback is 1001-in / no official YT/SC playback — seed held, do not invent or wire fan playback. pendingCuePaste is official playback + operator 1001 URL without cue rows — do not scrape 1001 or invent 1001tl seeds.",
-  "updatedAt": "2026-08-28T14:35:00.000Z",
+  "updatedAt": "2026-08-28T15:45:00.000Z",
   "urls": [
+    {
+      "label": "Topic · Tomorrowland Friendship Mix 2026-08-20",
+      "slug": "sc-tomorrowland-tomorrowland-friendship-mix-with-topic-august-2026",
+      "name": "TL_TOPIC_TML_FRIENDSHIP_MIX_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/uqch80t/topic-tomorrowland-friendship-mix-2026-08-20.html",
+      "soundcloudUrl": "https://soundcloud.com/tomorrowland/tomorrowland-friendship-mix-with-topic-august-2026",
+      "note": "Operator paste 2026-08-28. 15 timed cues on official Tomorrowland SC. Overlay TL_TOPIC is too generic. Distinct from Topic WE2 2024 yt-yrG_Ldr05SQ. No YT in the paste — do not invent one. 1001 even 3:57 marks kept as captured."
+    },
     {
       "label": "Bart Skils · Fire Stage, Loveland Festival 2026-08-08",
       "slug": "yt-d-EOE2u7HT4",

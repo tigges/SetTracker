@@ -344,6 +344,17 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     minDurationSec: 30 * 60,
   },
   {
+    // Official Tomorrowland Friendship Mix; 1001TL wired via
+    // sc-tomorrowland-tomorrowland-friendship-mix-with-topic-august-2026.
+    // Distinct from Topic WE2 2024 (yt-yrG_Ldr05SQ). No YT in the paste.
+    url: "https://soundcloud.com/tomorrowland/tomorrowland-friendship-mix-with-topic-august-2026",
+    primaryArtist: dj("Topic", { accent: "#4361ee" }),
+    genre: "Dance",
+    seriesName: "Tomorrowland Friendship Mix",
+    type: "mix",
+    minDurationSec: 30 * 60,
+  },
+  {
     // Official Tomorrowland One World Radio Selects 017; 1001TL wired via
     // sc-tomorrowland-laidback-luke-selects-august-2026. No YT in the paste.
     // laidback-luke-selects aliases to laidback-luke.

@@ -203,6 +203,7 @@ import {
   TL_THE_CHAINSMOKERS_ULTRA_MELBOURNE_MAINSTAGE_2026,
   TL_BLEU_CLAIR_BLEUPRINT_VOL_5_JAKARTA_2022,
   TL_BART_SKILS_LOVELAND_FIRE_2026,
+  TL_TOPIC_TML_FRIENDSHIP_MIX_2026,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
@@ -5418,5 +5419,52 @@ assert.equal(
   isSecondaryPlaybackSlug("sc-bart-skils-bart-skils-loveland-festival"),
   true,
 );
+
+// Topic - Tomorrowland Friendship Mix 2026-08-20 — official Tomorrowland SC.
+// Overlay TL_TOPIC is too generic. Distinct from Topic WE2 2024.
+// No YT in the paste.
+assertSeedClocks(TL_TOPIC_TML_FRIENDSHIP_MIX_2026);
+assert.equal(TL_TOPIC_TML_FRIENDSHIP_MIX_2026.length, 15);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-tomorrowland-tomorrowland-friendship-mix-with-topic-august-2026"
+  ],
+  TL_TOPIC_TML_FRIENDSHIP_MIX_2026,
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-tomorrowland-tomorrowland-friendship-mix-with-topic-august-2026"
+  ],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-yrG_Ldr05SQ"],
+);
+assert.equal(isWiredTracklistSlug("yt-topic-friendship-mix"), false);
+assert.equal(
+  isWiredTracklistSlug(
+    "sc-tomorrowland-tomorrowland-friendship-mix-with-topic-august-2026",
+  ),
+  true,
+);
+assert.equal(
+  isSecondaryPlaybackSlug(
+    "sc-tomorrowland-tomorrowland-friendship-mix-with-topic-august-2026",
+  ),
+  false,
+);
+const topicFriendship = tracklist1001RowsToPlays(
+  TL_TOPIC_TML_FRIENDSHIP_MIX_2026,
+);
+assert.equal(topicFriendship.length, 15);
+assert.equal(topicFriendship[0]?.provenance, "1001tl");
+assert.equal(topicFriendship[0]?.trackTitle, "Sorry Papi (KIDDO Remix)");
+assert.equal(topicFriendship[0]?.timestamp, 20);
+assert.equal(topicFriendship[14]?.trackTitle, "Smalltown Boy");
+assert.equal(topicFriendship[14]?.timestamp, 55 * 60 + 38);
+for (let i = 1; i < topicFriendship.length; i++) {
+  assert.ok(
+    (topicFriendship[i]!.timestamp ?? 0) >
+      (topicFriendship[i - 1]!.timestamp ?? 0),
+    `Topic Friendship Mix 2026 clocks must increase at index ${i}`,
+  );
+}
 
 console.log("tracklists1001/seeds.test.ts ok");
