@@ -54,7 +54,23 @@ export function formatLlmHitRate(found: number, tracked: number): string {
   return `${((found / tracked) * 100).toFixed(1)}%`;
 }
 
-/** Console / /stats line: variables, tracked, found, partials, miss. */
+/** Fields written vs slots (entities × variables). Never fields / entities. */
+export function formatLlmFieldFill(written: number, slots: number): string {
+  if (slots <= 0) return `${written.toLocaleString()} written`;
+  return `${written.toLocaleString()} / ${slots.toLocaleString()} · ${formatLlmHitRate(written, slots)}`;
+}
+
+/** Latest pass only — sent and fields stay separate units. */
+export function formatLlmLatestPass(opts: {
+  job: LlmCostJob;
+  sent: number;
+  fieldsWritten: number;
+}): string {
+  const noun = opts.job === "events" ? "events" : opts.job === "handles" ? "DJs" : opts.job;
+  return `latest: ${opts.sent.toLocaleString()} ${noun} sent · ${opts.fieldsWritten.toLocaleString()} fields written`;
+}
+
+/** Console line: variables, tracked, found, partials, miss — same unit. */
 export function formatLlmTrackMessage(
   job: LlmCostJob,
   stats: { tracked: number; found: number; partial: number; missed: number },
