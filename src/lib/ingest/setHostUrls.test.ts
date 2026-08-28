@@ -129,6 +129,22 @@ assert.ok(!extras["yt-_4P9Y5KN9n4"]?.soundcloudUrl);
 assert.ok(!extras["yt-5V5qDFSw8Hs"]?.soundcloudUrl);
 assert.ok(!extras["yt-VuwLOFniScA"]?.soundcloudUrl);
 assert.ok(!extras["yt-czU0VhOB_Lg"]?.soundcloudUrl);
+assert.equal(
+  extras["yt-vy-k0FopsmY"]?.soundcloudUrl,
+  "https://soundcloud.com/platform/carl-cox-45-min-boiler-room",
+);
+assert.equal(
+  extras["yt-vy-k0FopsmY"]?.youtubeUrl,
+  "https://www.youtube.com/watch?v=vy-k0FopsmY",
+);
+assert.equal(
+  extras["sc-platform-carl-cox-45-min-boiler-room"]?.youtubeUrl,
+  "https://www.youtube.com/watch?v=vy-k0FopsmY",
+);
+assert.equal(
+  extras["sc-platform-carl-cox-45-min-boiler-room"]?.soundcloudUrl,
+  "https://soundcloud.com/platform/carl-cox-45-min-boiler-room",
+);
 assert.ok(
   !extras[
     "sc-tomorrowland-tomorrowland-friendship-mix-with-sara-landry-july-2026"

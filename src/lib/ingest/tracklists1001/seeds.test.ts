@@ -197,6 +197,7 @@ import {
   TL_AGENTS_OF_TIME_TML_WE2_MAINSTAGE_2026,
   TL_STEVE_ANGELLO_TML_WE1_CRYSTAL_2026,
   TL_DEADMAU5_VELD_MAINSTAGE_2025,
+  TL_CARL_COX_BOILER_ROOM_IBIZA_VILLA_2013,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
@@ -5179,5 +5180,43 @@ for (let i = 1; i < mau5Veld.length; i++) {
   );
 }
 assert.equal(isWiredTracklistSlug("yt-5LqJCIi6p7Y"), true);
+
+// Carl Cox @ Boiler Room Ibiza Villa Takeovers 2013-08-15 — official
+// Boiler Room YT + SC host twin. Overlay TL_CARL_COX is too generic.
+assertSeedClocks(TL_CARL_COX_BOILER_ROOM_IBIZA_VILLA_2013);
+assert.equal(TL_CARL_COX_BOILER_ROOM_IBIZA_VILLA_2013.length, 13);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-vy-k0FopsmY"],
+  TL_CARL_COX_BOILER_ROOM_IBIZA_VILLA_2013,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-platform-carl-cox-45-min-boiler-room"],
+  TL_CARL_COX_BOILER_ROOM_IBIZA_VILLA_2013,
+);
+const coxVilla = tracklist1001RowsToPlays(
+  TL_CARL_COX_BOILER_ROOM_IBIZA_VILLA_2013,
+);
+assert.equal(coxVilla.length, 13);
+assert.equal(coxVilla[0]?.provenance, "1001tl");
+assert.equal(coxVilla[0]?.timestamp, 0);
+assert.equal(coxVilla[0]?.trackTitle, "Muzik Xpress");
+assert.equal(coxVilla[12]?.trackTitle, "Finally");
+assert.equal(coxVilla[12]?.timestamp, 40 * 60 + 50);
+for (let i = 1; i < coxVilla.length; i++) {
+  assert.ok(
+    (coxVilla[i]!.timestamp ?? 0) > (coxVilla[i - 1]!.timestamp ?? 0),
+    `Carl Cox Boiler Room Ibiza clocks must increase at index ${i}`,
+  );
+}
+assert.equal(isWiredTracklistSlug("yt-vy-k0FopsmY"), true);
+assert.equal(
+  isWiredTracklistSlug("sc-platform-carl-cox-45-min-boiler-room"),
+  true,
+);
+assert.equal(isSecondaryPlaybackSlug("yt-vy-k0FopsmY"), false);
+assert.equal(
+  isSecondaryPlaybackSlug("sc-platform-carl-cox-45-min-boiler-room"),
+  true,
+);
 
 console.log("tracklists1001/seeds.test.ts ok");

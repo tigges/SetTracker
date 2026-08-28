@@ -76,6 +76,7 @@ import {
   TL_AGENTS_OF_TIME_TML_WE2_MAINSTAGE_2026,
   TL_STEVE_ANGELLO_TML_WE1_CRYSTAL_2026,
   TL_DEADMAU5_VELD_MAINSTAGE_2025,
+  TL_CARL_COX_BOILER_ROOM_IBIZA_VILLA_2013,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
@@ -2491,6 +2492,10 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     eventName: "Boiler Room London",
   },
   {
+    // Official Boiler Room upload already curated. Operator 1001 paste
+    // 2026-08-28 fills clocks. Official SC twin is
+    // soundcloud.com/platform/carl-cox-45-min-boiler-room. Overlay
+    // TL_CARL_COX is too generic. Title year is the performance date.
     video: "https://www.youtube.com/watch?v=vy-k0FopsmY",
     primaryArtist: dj("Carl Cox", {
       accent: "#e63946",
@@ -2498,9 +2503,12 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     }),
     genre: "Techno",
     type: "festival",
-    title: "Carl Cox Boiler Room Ibiza Villa Takeovers DJ Set",
+    title: "Carl Cox Boiler Room Ibiza Villa Takeovers DJ Set 2013-08-15",
     seriesName: "Boiler Room",
     eventName: "Ibiza Villa Takeovers",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/3v69b81/carl-cox-carl-cox-friends-ibiza-villa-takeovers-boiler-room-2013-08-15.html",
+    tracklist1001: TL_CARL_COX_BOILER_ROOM_IBIZA_VILLA_2013,
   },
   {
     // Operator-supplied official channel upload (Rave Culture Live 002).

@@ -348,3 +348,46 @@ export const TL_DEADMAU5_VELD_MAINSTAGE_2025: FingerprintSeedRow[] = [
   { at: "1:06:30", artist: "deadmau5 ft. Chris James", title: "The Veldt" },
   { at: "1:06:31", artist: "deadmau5 ft. Chris James", title: "The Veldt (Tommy Trash Remix)" },
 ];
+
+/**
+ * Carl Cox @ Carl Cox & Friends, Ibiza Villa Takeovers, Boiler Room 2013-08-15
+ * Official YouTube: https://youtu.be/vy-k0FopsmY
+ * oEmbed 2026-08-28: channel "Boiler Room" (@boilerroom), title
+ * "Carl Cox Boiler Room Ibiza Villa Takeovers DJ Set". That video was
+ * already curated in YOUTUBE_SETS without a tracklist, so this capture
+ * fills an existing set.
+ * Official SoundCloud: https://soundcloud.com/platform/carl-cox-45-min-boiler-room
+ * oEmbed 2026-08-28: author "Boiler Room" (soundcloud.com/platform), title
+ * "Carl Cox 45 min Boiler Room Ibiza Villa Takeovers DJ Set".
+ * Same 1001 seed + both official permalinks → host twin (SC-first playback,
+ * YT kept). SC slug is secondary.
+ * https://www.1001tracklists.com/tracklist/3v69b81/carl-cox-carl-cox-friends-ibiza-villa-takeovers-boiler-room-2013-08-15.html
+ * Overlay name TL_CARL_COX is too generic; constant is the performance.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-vy-k0FopsmY"] = TL_CARL_COX_BOILER_ROOM_IBIZA_VILLA_2013
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["sc-platform-carl-cox-45-min-boiler-room"] = TL_CARL_COX_BOILER_ROOM_IBIZA_VILLA_2013
+ * Only Carl Cox Boiler Room row in the catalog — not NYC.
+ * Captured 2026-08-28 — provenance 1001tl.
+ */
+export const TL_CARL_COX_BOILER_ROOM_IBIZA_VILLA_2013: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "X-Press 2 ft. James Yuill", title: "Muzik Xpress" },
+  { at: "2:40", artist: "Chez Damier", title: "Can You Feel It (Steve Bug Re-Dub)" },
+  { at: "5:20", artist: "Sergio Fernandez", title: "Carioca" },
+  { at: "8:00", artist: "Elio Riso", title: "Pain In The Ass" },
+  { at: "12:30", artist: "Round Table Knights & Bauchamp", title: "Calypso" },
+  { at: "17:00", artist: "Joe Brunning", title: "Positive Vibes" },
+  {
+    at: "20:00",
+    artist: "The Rivera Project",
+    title: "Puerto Rico Vibe (Robbie Rivera Original Mix)",
+  },
+  { at: "23:00", artist: "Jim Rivers", title: "We Can Do This All Night" },
+  { at: "26:00", artist: "Trevor Rockcliffe", title: "Jumping (Deep House Mix)" },
+  { at: "30:00", artist: "Stefano Frisoni", title: "El Nino Loco (Turkana Remix)" },
+  { at: "32:46", artist: "New Order", title: "Blue Monday (Original 12'' Mix)" },
+  {
+    at: "35:32",
+    artist: "Chris Montana vs. Denis The Menace",
+    title: "Spanish Hustle (Chris Moody Remix)",
+  },
+  { at: "40:50", artist: "CeCe Peniston ft. Joyriders", title: "Finally" },
+];

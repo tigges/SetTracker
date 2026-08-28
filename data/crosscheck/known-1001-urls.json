@@ -3,6 +3,15 @@
   "updatedAt": "2026-08-28T08:30:00.000Z",
   "urls": [
     {
+      "label": "Carl Cox · Carl Cox & Friends, Ibiza Villa Takeovers, Boiler Room 2013-08-15",
+      "slug": "yt-vy-k0FopsmY",
+      "name": "TL_CARL_COX_BOILER_ROOM_IBIZA_VILLA_2013",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/3v69b81/carl-cox-carl-cox-friends-ibiza-villa-takeovers-boiler-room-2013-08-15.html",
+      "youtubeUrl": "https://youtu.be/vy-k0FopsmY",
+      "soundcloudUrl": "https://soundcloud.com/platform/carl-cox-45-min-boiler-room",
+      "note": "Operator paste 2026-08-28. 13 timed cues on official Boiler Room YT (@boilerroom) already curated in videos.ts plus official SC soundcloud.com/platform. Host twin — SC slug sc-platform-carl-cox-45-min-boiler-room is secondary. Overlay TL_CARL_COX is too generic. Only Carl Cox Boiler Room row in the catalog (not NYC)."
+    },
+    {
       "label": "deadmau5 · Mainstage, Veld Music Festival 2025-08-03",
       "slug": "yt-5LqJCIi6p7Y",
       "name": "TL_DEADMAU5_VELD_MAINSTAGE_2025",
