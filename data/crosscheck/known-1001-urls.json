@@ -3,6 +3,14 @@
   "updatedAt": "2026-08-28T08:30:00.000Z",
   "urls": [
     {
+      "label": "MARNIK · Planaxis, Tomorrowland WE1 2026-07-18",
+      "slug": "sc-marnikofficial-marnik-live-at-tomorrowland",
+      "name": "TL_MARNIK_TML_WE1_PLANAXIS_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/vn48l79/marnik-planaxis-stage-tomorrowland-weekend-1-belgium-2026-07-18.html",
+      "soundcloudUrl": "https://soundcloud.com/marnikofficial/marnik-live-at-tomorrowland",
+      "note": "Operator paste 2026-08-28. 22 timed cues on official MARNIK SC (marnikofficial). Overlay TL_MARNIK is too generic and is not held TL_MARNIK_NAMELESS_FESTIVAL_2016 or UNLEGEND Nameless 2026. No YT in the paste — do not invent a YT slug."
+    },
+    {
       "label": "Carl Cox · Carl Cox & Friends, Ibiza Villa Takeovers, Boiler Room 2013-08-15",
       "slug": "yt-vy-k0FopsmY",
       "name": "TL_CARL_COX_BOILER_ROOM_IBIZA_VILLA_2013",

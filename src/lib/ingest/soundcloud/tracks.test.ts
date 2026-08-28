@@ -761,4 +761,22 @@ assert.equal(
   "sc-platform-carl-cox-45-min-boiler-room",
 );
 
+const marnikPlanaxisSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url ===
+    "https://soundcloud.com/marnikofficial/marnik-live-at-tomorrowland",
+);
+assert.ok(marnikPlanaxisSc);
+assert.equal(marnikPlanaxisSc.primaryArtist.name, "MARNIK");
+assert.equal(marnikPlanaxisSc.eventName, "Tomorrowland Belgium");
+assert.equal(marnikPlanaxisSc.type, "festival");
+assert.notEqual(
+  marnikPlanaxisSc.url,
+  "https://soundcloud.com/marnikofficial/marnik-presents-unlegend-show",
+);
+assert.equal(
+  `sc-marnikofficial-${slugify("marnik-live-at-tomorrowland")}`,
+  "sc-marnikofficial-marnik-live-at-tomorrowland",
+);
+
 console.log("soundcloud/tracks.test.ts ok");

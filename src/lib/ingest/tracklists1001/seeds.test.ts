@@ -198,6 +198,7 @@ import {
   TL_STEVE_ANGELLO_TML_WE1_CRYSTAL_2026,
   TL_DEADMAU5_VELD_MAINSTAGE_2025,
   TL_CARL_COX_BOILER_ROOM_IBIZA_VILLA_2013,
+  TL_MARNIK_TML_WE1_PLANAXIS_2026,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
@@ -5217,6 +5218,43 @@ assert.equal(isSecondaryPlaybackSlug("yt-vy-k0FopsmY"), false);
 assert.equal(
   isSecondaryPlaybackSlug("sc-platform-carl-cox-45-min-boiler-room"),
   true,
+);
+
+// MARNIK @ Planaxis, Tomorrowland WE1 2026-07-18 — official SC.
+// Overlay TL_MARNIK is too generic. No YT in the paste.
+assertSeedClocks(TL_MARNIK_TML_WE1_PLANAXIS_2026);
+assert.equal(TL_MARNIK_TML_WE1_PLANAXIS_2026.length, 22);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-marnikofficial-marnik-live-at-tomorrowland"],
+  TL_MARNIK_TML_WE1_PLANAXIS_2026,
+);
+const marnikPlanaxis = tracklist1001RowsToPlays(
+  TL_MARNIK_TML_WE1_PLANAXIS_2026,
+);
+assert.equal(marnikPlanaxis.length, 22);
+assert.equal(marnikPlanaxis[0]?.provenance, "1001tl");
+assert.equal(marnikPlanaxis[0]?.timestamp, 0);
+assert.equal(marnikPlanaxis[0]?.trackTitle, "Stranger (To Stability)");
+assert.equal(marnikPlanaxis[21]?.trackTitle, "Hard Techno");
+assert.equal(marnikPlanaxis[21]?.timestamp, 51 * 60 + 44);
+for (let i = 1; i < marnikPlanaxis.length; i++) {
+  assert.ok(
+    (marnikPlanaxis[i]!.timestamp ?? 0) >
+      (marnikPlanaxis[i - 1]!.timestamp ?? 0),
+    `MARNIK TML WE1 Planaxis clocks must increase at index ${i}`,
+  );
+}
+assert.equal(
+  isWiredTracklistSlug("sc-marnikofficial-marnik-live-at-tomorrowland"),
+  true,
+);
+assert.equal(
+  isSecondaryPlaybackSlug("sc-marnikofficial-marnik-live-at-tomorrowland"),
+  false,
+);
+assert.equal(
+  isWiredTracklistSlug("sc-marnikofficial-marnik-presents-unlegend-show"),
+  false,
 );
 
 console.log("tracklists1001/seeds.test.ts ok");
