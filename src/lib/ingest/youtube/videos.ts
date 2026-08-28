@@ -77,6 +77,7 @@ import {
   TL_STEVE_ANGELLO_TML_WE1_CRYSTAL_2026,
   TL_DEADMAU5_VELD_MAINSTAGE_2025,
   TL_CARL_COX_BOILER_ROOM_IBIZA_VILLA_2013,
+  TL_FIDELES_TML_WE2_FREEDOM_2026,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
@@ -861,6 +862,23 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/116uj1x1/massano-freedom-stage-tomorrowland-weekend-2-belgium-2026-07-25.html",
     tracklist1001: TL_MASSANO_TML_WE2_2026,
+  },
+  {
+    // Tomorrowland official — Freedom Stage WE2. Video was not yet curated;
+    // this capture adds the row. No SoundCloud in the paste.
+    video: "https://www.youtube.com/watch?v=e0xXSwtVwe0",
+    primaryArtist: dj("Fideles", {
+      accent: "#c1121f",
+      homeCity: "Italy",
+    }),
+    genre: "Techno",
+    type: "festival",
+    title: "Fideles WE2 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/9xss8m1/fideles-freedom-stage-tomorrowland-weekend-2-belgium-2026-07-26.html",
+    tracklist1001: TL_FIDELES_TML_WE2_FREEDOM_2026,
   },
   {
     // Tomorrowland official — Mainstage WE2 closing; also artist upload Py-GG74lLU8.

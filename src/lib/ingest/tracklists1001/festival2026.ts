@@ -171,6 +171,7 @@ import {
   TL_DEADMAU5_VELD_MAINSTAGE_2025,
   TL_CARL_COX_BOILER_ROOM_IBIZA_VILLA_2013,
   TL_MARNIK_TML_WE1_PLANAXIS_2026,
+  TL_FIDELES_TML_WE2_FREEDOM_2026,
 } from "./festivalCaptures20260828";
 
 export {
@@ -304,6 +305,7 @@ export {
   TL_DEADMAU5_VELD_MAINSTAGE_2025,
   TL_CARL_COX_BOILER_ROOM_IBIZA_VILLA_2013,
   TL_MARNIK_TML_WE1_PLANAXIS_2026,
+  TL_FIDELES_TML_WE2_FREEDOM_2026,
 };
 
 function formatClock(sec: number): string {
@@ -4965,6 +4967,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
     TL_CARL_COX_BOILER_ROOM_IBIZA_VILLA_2013,
   "sc-marnikofficial-marnik-live-at-tomorrowland":
     TL_MARNIK_TML_WE1_PLANAXIS_2026,
+  "yt-e0xXSwtVwe0": TL_FIDELES_TML_WE2_FREEDOM_2026,
 };
 
 /** Sanity: every seeded clock must parse. */

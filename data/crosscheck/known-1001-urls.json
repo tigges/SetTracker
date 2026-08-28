@@ -1,7 +1,15 @@
 {
   "note": "Operator-collected 1001Tracklists URLs. All listed urls[] rows are now seeded. Prefer new operator pastes over this archive. stillMissing1001 is video-in / no 1001 page — do not invent URLs. heldPendingPlayback is 1001-in / no official YT/SC playback — seed held, do not invent or wire fan playback. pendingCuePaste is official playback + operator 1001 URL without cue rows — do not scrape 1001 or invent 1001tl seeds.",
-  "updatedAt": "2026-08-28T08:30:00.000Z",
+  "updatedAt": "2026-08-28T14:20:00.000Z",
   "urls": [
+    {
+      "label": "Fideles · Freedom Stage, Tomorrowland WE2 2026-07-26",
+      "slug": "yt-e0xXSwtVwe0",
+      "name": "TL_FIDELES_TML_WE2_FREEDOM_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/9xss8m1/fideles-freedom-stage-tomorrowland-weekend-2-belgium-2026-07-26.html",
+      "youtubeUrl": "https://youtu.be/e0xXSwtVwe0",
+      "note": "Operator paste 2026-08-28. 23 timed cues on official Tomorrowland YT (@tomorrowland). Overlay TL_FIDELES is too generic. Video was not yet curated in YOUTUBE_SETS — this capture adds the row. No SC in the paste — do not invent an SC slug. Gap 0:12 → 10:51 and the long Victory Lap Five credit stay as captured."
+    },
     {
       "label": "MARNIK · Planaxis, Tomorrowland WE1 2026-07-18",
       "slug": "sc-marnikofficial-marnik-live-at-tomorrowland",

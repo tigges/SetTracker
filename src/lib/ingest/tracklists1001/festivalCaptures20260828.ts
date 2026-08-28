@@ -429,3 +429,47 @@ export const TL_MARNIK_TML_WE1_PLANAXIS_2026: FingerprintSeedRow[] = [
   { at: "48:47", artist: "Linkin Park", title: "Numb (Trey Pearce Remix)" },
   { at: "51:44", artist: "MARNIK & Samuel Moriero", title: "Hard Techno" },
 ];
+
+/**
+ * Fideles @ Freedom Stage, Tomorrowland Weekend 2, Belgium 2026-07-26
+ * Official YouTube: https://youtu.be/e0xXSwtVwe0
+ * oEmbed 2026-08-28: channel "Tomorrowland" (@tomorrowland), title
+ * "Fideles WE2 | Tomorrowland 2026".
+ * https://www.1001tracklists.com/tracklist/9xss8m1/fideles-freedom-stage-tomorrowland-weekend-2-belgium-2026-07-26.html
+ * Overlay name TL_FIDELES is too generic; constant is the performance.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-e0xXSwtVwe0"] = TL_FIDELES_TML_WE2_FREEDOM_2026
+ * No SoundCloud in the paste — do not invent an SC slug.
+ * Video was not yet curated in YOUTUBE_SETS — this capture adds the row.
+ * Gap 0:12 → 10:51 and the long Victory Lap Five credit stay as captured.
+ * Captured 2026-08-28 — provenance 1001tl.
+ */
+export const TL_FIDELES_TML_WE2_FREEDOM_2026: FingerprintSeedRow[] = [
+  { at: "0:12", artist: "The Prodigy", title: "Breathe" },
+  { at: "10:51", artist: "FEZZO & Ricck", title: "High" },
+  { at: "15:27", artist: "Chris Lake & Chris Lorenzo pres. Anti Up", title: "I Cannot" },
+  { at: "18:45", artist: "Tame Impala", title: "Dracula (CHRSTPHR Remix)" },
+  { at: "20:48", artist: "SKIY", title: "Disco" },
+  { at: "22:50", artist: "Adam In Deep", title: "Jump Off" },
+  { at: "27:29", artist: "BARIŞ BERBER", title: "Tak Tuk" },
+  { at: "31:48", artist: "Fideles", title: "Hey Bro" },
+  { at: "35:36", artist: "Arude", title: "Duskline" },
+  { at: "39:44", artist: "BLR", title: "My Precious" },
+  { at: "41:03", artist: "Nelly Furtado", title: "Say It Right" },
+  { at: "42:22", artist: "Fatima Yamaha", title: "What's A Girl To Do" },
+  { at: "43:40", artist: "Fred again.. & Skepta & PlaqueBoyMax", title: "Victory Lap" },
+  {
+    at: "45:46",
+    artist:
+      "Fred again.. & Skepta & PlaqueBoyMax & Denzel Curry & Hanumankind & That Mexican OT & D Double E & LYNY",
+    title: "Victory Lap Five",
+  },
+  { at: "47:51", artist: "Faithless", title: "Insomnia (BLR Remix)" },
+  { at: "52:37", artist: "Groove Armada ft. Gramma Funk", title: "I See You Baby (R3HAB Remix)" },
+  { at: "1:00:03", artist: "Adriatique & GENESI & Emmit Fenn", title: "Closer" },
+  { at: "1:05:00", artist: "Hardrive", title: "Deep Inside" },
+  { at: "1:09:04", artist: "Axwell", title: "Feel The Vibe" },
+  { at: "1:13:44", artist: "Eric Prydz", title: "Opus (Trashock Remix)" },
+  { at: "1:18:33", artist: "Calvin Harris ft. Florence Welch", title: "Sweet Nothing" },
+  { at: "1:23:12", artist: "Armand van Helden", title: "I Want Your Soul (Fideles Remix)" },
+  { at: "1:28:01", artist: "Bah Samba & The Fatback Band", title: "Let The Drums Speak" },
+];

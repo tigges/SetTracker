@@ -199,6 +199,7 @@ import {
   TL_DEADMAU5_VELD_MAINSTAGE_2025,
   TL_CARL_COX_BOILER_ROOM_IBIZA_VILLA_2013,
   TL_MARNIK_TML_WE1_PLANAXIS_2026,
+  TL_FIDELES_TML_WE2_FREEDOM_2026,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
@@ -5256,5 +5257,34 @@ assert.equal(
   isWiredTracklistSlug("sc-marnikofficial-marnik-presents-unlegend-show"),
   false,
 );
+
+// Fideles @ Freedom Stage, Tomorrowland WE2 2026-07-26 — official
+// Tomorrowland YT. Overlay TL_FIDELES is too generic. No SC in the paste.
+assertSeedClocks(TL_FIDELES_TML_WE2_FREEDOM_2026);
+assert.equal(TL_FIDELES_TML_WE2_FREEDOM_2026.length, 23);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-e0xXSwtVwe0"],
+  TL_FIDELES_TML_WE2_FREEDOM_2026,
+);
+const fidelesFreedom = tracklist1001RowsToPlays(
+  TL_FIDELES_TML_WE2_FREEDOM_2026,
+);
+assert.equal(fidelesFreedom.length, 23);
+assert.equal(fidelesFreedom[0]?.provenance, "1001tl");
+assert.equal(fidelesFreedom[0]?.timestamp, 12);
+assert.equal(fidelesFreedom[0]?.trackTitle, "Breathe");
+assert.equal(fidelesFreedom[0]?.artistName, "The Prodigy");
+assert.equal(fidelesFreedom[22]?.trackTitle, "Let The Drums Speak");
+assert.equal(fidelesFreedom[22]?.timestamp, 1 * 3600 + 28 * 60 + 1);
+assert.equal(fidelesFreedom[13]?.trackTitle, "Victory Lap Five");
+for (let i = 1; i < fidelesFreedom.length; i++) {
+  assert.ok(
+    (fidelesFreedom[i]!.timestamp ?? 0) >
+      (fidelesFreedom[i - 1]!.timestamp ?? 0),
+    `Fideles TML WE2 Freedom clocks must increase at index ${i}`,
+  );
+}
+assert.equal(isWiredTracklistSlug("yt-e0xXSwtVwe0"), true);
+assert.equal(isSecondaryPlaybackSlug("yt-e0xXSwtVwe0"), false);
 
 console.log("tracklists1001/seeds.test.ts ok");
