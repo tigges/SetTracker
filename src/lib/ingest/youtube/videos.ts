@@ -2323,13 +2323,17 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_ANYMA_SOLOMUN_ULTRA_MIAMI_MAINSTAGE_2025,
   },
   {
+    // 1001 search for this catalog title hits
+    // "Peggy Gou @ Boiler Room x Dekmantel Festival 2017-08-04".
+    // Title had no year, so cards fell through to upload time. Do not invent
+    // the 1001 page URL — paste the tracklist to wire it.
     video: "https://www.youtube.com/watch?v=nKHpbiYCtDQ",
     primaryArtist: dj("Peggy Gou", {
       accent: "#e63946"
     }),
     genre: "House",
     type: "festival",
-    title: "Peggy Gou | Boiler Room x Dekmantel Festival: Amsterdam",
+    title: "Peggy Gou | Boiler Room x Dekmantel Festival: Amsterdam 2017-08-04",
     seriesName: "Boiler Room",
     eventName: "Dekmantel Festival",
   },

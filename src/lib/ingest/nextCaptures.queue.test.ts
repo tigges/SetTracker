@@ -999,5 +999,29 @@ assert.equal(
   ).performanceYear,
   2026,
 );
+assert.equal(
+  capturePerformanceYear(
+    {
+      slug: "yt-nKHpbiYCtDQ",
+      title:
+        "Peggy Gou | Boiler Room x Dekmantel Festival: Amsterdam 2017-08-04",
+      publishedAt: "2026-08-01T00:00:00Z",
+    },
+    now,
+  ),
+  2017,
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "yt-nKHpbiYCtDQ",
+      title:
+        "Peggy Gou | Boiler Room x Dekmantel Festival: Amsterdam 2017-08-04",
+    }),
+    mapped,
+    now,
+  ),
+  "archive-title",
+);
 
 console.log("nextCaptures.queue.test.ts ok");

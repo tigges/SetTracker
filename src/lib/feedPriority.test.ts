@@ -90,6 +90,27 @@ describe("title year vs upload date", () => {
     );
   });
 
+  it("reads 2017 from the Boiler Room x Dekmantel catalog title", () => {
+    assert.equal(
+      setPerformanceYearLabel(
+        {
+          title:
+            "Peggy Gou | Boiler Room x Dekmantel Festival: Amsterdam 2017-08-04",
+          publishedAt: "2026-08-01T00:00:00.000Z",
+        },
+        now,
+      ),
+      "2017",
+    );
+    assert.equal(
+      isArchiveTitledSet(
+        "Peggy Gou | Boiler Room x Dekmantel Festival: Amsterdam 2017-08-04",
+        now,
+      ),
+      true,
+    );
+  });
+
   it("uses a title calendar day, not ingest publishedAt", () => {
     const t = setPerformanceTime(
       {
