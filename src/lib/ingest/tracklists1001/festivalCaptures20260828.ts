@@ -140,3 +140,171 @@ export const TL_AGENTS_OF_TIME_TML_WE2_MAINSTAGE_2026: FingerprintSeedRow[] = [
   { at: "53:22", artist: "Agents Of Time", title: "Zodiac" },
   { at: "56:19", artist: "Agents Of Time", title: "I Can't Do Without You" },
 ];
+
+/**
+ * Steve Angello @ Crystal Garden Stage, Tomorrowland Weekend 1, Belgium 2026-07-18
+ * Official YouTube: https://youtu.be/eir5Sh_gHbo
+ * oEmbed 2026-08-28: channel "Tomorrowland" (@tomorrowland), title
+ * "Steve Angello WE1 | Tomorrowland 2026".
+ * https://www.1001tracklists.com/tracklist/1cgmpl0k/steve-angello-crystal-garden-stage-tomorrowland-weekend-1-belgium-2026-07-18.html
+ * Overlay name TL_STEVE_ANGELLO is too generic and would collide with
+ * TL_STEVE_ANGELLO_TML_WE2_2026 (Mainstage WE2, yt-5AdQy7lCbN0).
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-eir5Sh_gHbo"] = TL_STEVE_ANGELLO_TML_WE1_CRYSTAL_2026
+ * No SoundCloud in the paste — do not invent an SC slug. Do not attach this
+ * list to yt-5AdQy7lCbN0.
+ * Mashup expansions kept as captured (Be / Show Me Love / Knas, One / Sweet
+ * Dreams, Midnight City / Sweet Disposition, Tell Me Why / Dive, Reload /
+ * Flash, Innerbloom / Payback, Don't You Worry Child variants).
+ * Captured 2026-08-28 — provenance 1001tl.
+ */
+export const TL_STEVE_ANGELLO_TML_WE1_CRYSTAL_2026: FingerprintSeedRow[] = [
+  { at: "0:11", artist: "Steve Angello & Modern Tales", title: "Darkness In Me" },
+  { at: "4:15", artist: "Jewel Kid", title: "Talking To You" },
+  { at: "8:20", artist: "Max Styler", title: "Inferno" },
+  { at: "10:55", artist: "The Chemical Brothers", title: "Hey Boy, Hey Girl (Mesto Remix)" },
+  { at: "13:57", artist: "Magnificence & Corey James ft. Rion S", title: "Time Machine" },
+  { at: "20:55", artist: "Steve Angello & Sebastian Ingrosso ft. Namasenda", title: "No Enemies" },
+  { at: "21:30", artist: "Empire Of The Sun", title: "We Are The People (Acappella)" },
+  { at: "24:02", artist: "Manuel Ribeca", title: "My House" },
+  { at: "27:40", artist: "James Carter", title: "Open Up Your Love" },
+  { at: "31:28", artist: "Swedish House Mafia ft. Sting", title: "Redlight" },
+  { at: "34:57", artist: "PARISI x Sebastian Ingrosso x Steve Angello", title: "U Ok?" },
+  { at: "38:07", artist: "Galoski", title: "Move" },
+  { at: "41:50", artist: "Manuel Ribeca & Blow", title: "Deep Breath" },
+  {
+    at: "47:11",
+    artist: "Corey James & HIISAK ft. Roland Clark",
+    title: "The Underground (House of God) (Steve Angello Edit)",
+  },
+  { at: "49:45", artist: "HIISAK & Reeva", title: "LIFT-OFF" },
+  {
+    at: "52:08",
+    artist: "Steve Angello & Laidback Luke & Rowetta",
+    title: "Be vs. Show Me Love vs. Knas (Swedish House Mafia Mashup)",
+  },
+  { at: "52:54", artist: "Steve Angello & Laidback Luke ft. Rowetta", title: "Be" },
+  { at: "53:40", artist: "Steve Angello & Laidback Luke ft. Robin S", title: "Show Me Love (Tool)" },
+  { at: "54:26", artist: "Steve Angello", title: "Knas" },
+  { at: "55:12", artist: "The S.O.S. Band", title: "Just Be Good To Me" },
+  { at: "58:07", artist: "HIISAK & Reeva", title: "KILLA" },
+  { at: "1:00:36", artist: "Steve Angello", title: "ME" },
+  { at: "1:04:05", artist: "Cirez D", title: "On Off (Kapuchon Edit)" },
+  { at: "1:06:01", artist: "Swedish House Mafia ft. Mapei", title: "Time" },
+  { at: "1:07:57", artist: "Swedish House Mafia", title: "Greyhound" },
+  { at: "1:09:26", artist: "Rui Da Silva ft. Cassandra Fox", title: "Touch Me (Acappella)" },
+  {
+    at: "1:10:55",
+    artist: "Swedish House Mafia & Knife Party ft. ADL",
+    title: "Antidote (MPH Remix)",
+  },
+  {
+    at: "1:12:37",
+    artist: "Steve Angello vs. Swedish House Mafia & A$AP Rocky",
+    title: "Hooligans vs. Frankenstein (Axwell Mashup)",
+  },
+  { at: "1:13:45", artist: "Swedish House Mafia & A$AP Rocky", title: "Frankenstein" },
+  { at: "1:14:53", artist: "Steve Angello", title: "Hooligans" },
+  { at: "1:16:00", artist: "Cloonee & Prospa", title: "Free Your Mind (James Poole Edit)" },
+  { at: "1:18:53", artist: "Basement Jaxx", title: "Where's Your Head At? (Steve Angello Remix)" },
+  { at: "1:21:48", artist: "Swedish House Mafia ft. Tinie Tempah", title: "Miami 2 Ibiza" },
+  { at: "1:24:27", artist: "deadmau5", title: "Strobe (DBL Flip)" },
+  {
+    at: "1:28:22",
+    artist: "Kerri Chandler & Dennis Quin ft. Troy Denari",
+    title: "You Are In My System",
+  },
+  { at: "1:31:05", artist: "Faithless", title: "Insomnia (Steve Angello Remix)" },
+  {
+    at: "1:33:27",
+    artist: "Swedish House Mafia vs. Eurythmics & Steve Angello vs. Pharrell Williams",
+    title: "One (Your Name) vs. Sweet Dreams (Swedish House Mafia Mashup)",
+  },
+  {
+    at: "1:34:34",
+    artist: "Eurythmics",
+    title: "Sweet Dreams (Are Made of This) (Steve Angello Remix)",
+  },
+  { at: "1:35:41", artist: "Swedish House Mafia", title: "One" },
+  { at: "1:36:48", artist: "Swedish House Mafia ft. Pharrell Williams", title: "One (Your Name)" },
+  { at: "1:37:55", artist: "Gala", title: "Freed From Desire" },
+  {
+    at: "1:40:40",
+    artist: "M83 & Eric Prydz vs. The Temper Trap",
+    title: "Midnight City vs. Sweet Disposition (Steve Angello Mashup)",
+  },
+  { at: "1:42:00", artist: "The Temper Trap", title: "Sweet Disposition (Acappella)" },
+  { at: "1:43:20", artist: "M83", title: "Midnight City (Eric Prydz Private Remix)" },
+  {
+    at: "1:44:40",
+    artist: "Axwell & Sebastian Ingrosso & Steve Angello & Laidback Luke ft. Deborah Cox",
+    title: "Leave The World Behind",
+  },
+  {
+    at: "1:47:28",
+    artist: "Sebastian Ingrosso & Céline Dion vs. Coldplay",
+    title: "A New Day vs. A Sky Full Of Stars (Alesso Mashup)",
+  },
+  { at: "1:48:30", artist: "Coldplay", title: "A Sky Full Of Stars (Acappella)" },
+  { at: "1:49:32", artist: "Sebastian Ingrosso ft. Céline Dion", title: "A New Day" },
+  { at: "1:50:34", artist: "Kryder", title: "Eivissa" },
+  { at: "1:54:01", artist: "Swedish House Mafia & Niki & The Dove", title: "Lioness" },
+  { at: "1:57:10", artist: "Swedish House Mafia", title: "Wait So Long (Why Do I Have To)" },
+  { at: "1:59:12", artist: "Avicii", title: "Levels" },
+  { at: "2:01:27", artist: "Duke Dumont", title: "The Chant" },
+  { at: "2:05:48", artist: "Pryda", title: "Allein" },
+  {
+    at: "2:08:59",
+    artist: "Steve Angello ft. Dougy Mandagi from The Temper Trap",
+    title: "Wasted Love (Grum Remix)",
+  },
+  { at: "2:12:43", artist: "Start The Party", title: "I Feel Love (Kevin McKay Remix)" },
+  { at: "2:16:46", artist: "Armand van Helden ft. Duane Harden", title: "You Don't Know Me" },
+  {
+    at: "2:19:54",
+    artist: "Swedish House Mafia & The Weeknd",
+    title: "Moth To A Flame (Swedish House Mafia Rework)",
+  },
+  { at: "2:22:50", artist: "Swedish House Mafia & Alicia Keys", title: "Finally" },
+  { at: "2:25:15", artist: "Eric Prydz & Steve Angello", title: "Bedtime Stories" },
+  { at: "2:27:19", artist: "Corona", title: "The Rhythm Of The Night (Acappella)" },
+  {
+    at: "2:29:23",
+    artist: "Supermode & MEDUZA vs. Benwal",
+    title: "Tell Me Why vs. Dive (Steve Angello Mashup)",
+  },
+  { at: "2:31:11", artist: "Supermode", title: "Tell Me Why (MEDUZA Remix)" },
+  { at: "2:32:59", artist: "Benwal", title: "Dive" },
+  { at: "2:34:46", artist: "Eric Prydz", title: "Pjanoo (LAWZ Remix)" },
+  { at: "2:37:16", artist: "Swedish House Mafia ft. John Martin", title: "Save The World (NC Edit)" },
+  {
+    at: "2:37:50",
+    artist: "Sebastian Ingrosso & Tommy Trash & John Martin vs. Green Velvet & Nicky Romero",
+    title: "Reload vs. Flash (Axwell Λ Ingrosso Mashup)",
+  },
+  { at: "2:38:24", artist: "Green Velvet", title: "Flash (Nicky Romero Remix)" },
+  {
+    at: "2:38:58",
+    artist: "Sebastian Ingrosso & Tommy Trash ft. John Martin",
+    title: "Reload (Vocal Mix)",
+  },
+  { at: "2:39:31", artist: "Swedish House Mafia ft. John Martin", title: "Don't You Worry Child" },
+  {
+    at: "2:42:25",
+    artist: "Swedish House Mafia ft. John Martin",
+    title: "Don't You Worry Child (Swedish House Mafia Rework)",
+  },
+  {
+    at: "2:45:18",
+    artist: "Swedish House Mafia & Connie Constance",
+    title: "Heaven Takes You Home (Swedish House Mafia Remake)",
+  },
+  {
+    at: "2:49:02",
+    artist: "RÜFÜS DU SOL vs. Steve Angello & Dimitri Vangelis & Wyman",
+    title: "Innerbloom vs. Payback (Steve Angello Mashup)",
+  },
+  { at: "2:50:34", artist: "Dimitri Vangelis & Wyman X Steve Angello", title: "Payback" },
+  { at: "2:52:06", artist: "RÜFÜS DU SOL", title: "Innerbloom" },
+  { at: "2:53:38", artist: "Sebastian Ingrosso", title: "Flood" },
+  { at: "2:55:10", artist: "Swedish House Mafia & Lykke Li", title: "Happiness Is So Sad" },
+];

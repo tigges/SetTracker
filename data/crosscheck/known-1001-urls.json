@@ -3,6 +3,14 @@
   "updatedAt": "2026-08-28T08:30:00.000Z",
   "urls": [
     {
+      "label": "Steve Angello · Crystal Garden, Tomorrowland WE1 2026-07-18",
+      "slug": "yt-eir5Sh_gHbo",
+      "name": "TL_STEVE_ANGELLO_TML_WE1_CRYSTAL_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/1cgmpl0k/steve-angello-crystal-garden-stage-tomorrowland-weekend-1-belgium-2026-07-18.html",
+      "youtubeUrl": "https://youtu.be/eir5Sh_gHbo",
+      "note": "Operator paste 2026-08-28. 77 timed cues on official Tomorrowland YT (@tomorrowland). Overlay TL_STEVE_ANGELLO is too generic and is not the Mainstage WE2 seed (yt-5AdQy7lCbN0). No SC in the paste — do not invent an SC slug. Distinct from TL_STEVE_ANGELLO_TML_WE2_2026."
+    },
+    {
       "label": "Agents Of Time · Mainstage, Tomorrowland WE2 2026-07-25",
       "slug": "yt-5GyoClE4Q8o",
       "name": "TL_AGENTS_OF_TIME_TML_WE2_MAINSTAGE_2026",

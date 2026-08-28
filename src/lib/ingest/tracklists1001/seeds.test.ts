@@ -195,6 +195,7 @@ import {
   TL_ANYMA_SOLOMUN_ULTRA_MIAMI_MAINSTAGE_2025,
   TL_OSCAR_AND_THE_WOLF_TML_WE1_CRYSTAL_2026,
   TL_AGENTS_OF_TIME_TML_WE2_MAINSTAGE_2026,
+  TL_STEVE_ANGELLO_TML_WE1_CRYSTAL_2026,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
@@ -5116,5 +5117,40 @@ assert.notEqual(
   TL_AGENTS_OF_TIME_TML_WE2_MAINSTAGE_2026,
   TL_AGENTS_OF_TIME_TIME_WARP_FLOOR_1_2026,
 );
+
+// Steve Angello @ Crystal Garden, Tomorrowland WE1 2026-07-18 — official
+// Tomorrowland YT. Distinct from Mainstage WE2.
+assertSeedClocks(TL_STEVE_ANGELLO_TML_WE1_CRYSTAL_2026);
+assert.equal(TL_STEVE_ANGELLO_TML_WE1_CRYSTAL_2026.length, 77);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-eir5Sh_gHbo"],
+  TL_STEVE_ANGELLO_TML_WE1_CRYSTAL_2026,
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-eir5Sh_gHbo"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-5AdQy7lCbN0"],
+);
+assert.notEqual(
+  TL_STEVE_ANGELLO_TML_WE1_CRYSTAL_2026,
+  TL_STEVE_ANGELLO_TML_WE2_2026,
+);
+const angelloCrystal = tracklist1001RowsToPlays(
+  TL_STEVE_ANGELLO_TML_WE1_CRYSTAL_2026,
+);
+assert.equal(angelloCrystal.length, 77);
+assert.equal(angelloCrystal[0]?.provenance, "1001tl");
+assert.equal(angelloCrystal[0]?.timestamp, 11);
+assert.equal(angelloCrystal[0]?.trackTitle, "Darkness In Me");
+assert.equal(angelloCrystal[76]?.trackTitle, "Happiness Is So Sad");
+assert.equal(angelloCrystal[76]?.timestamp, 2 * 3600 + 55 * 60 + 10);
+for (let i = 1; i < angelloCrystal.length; i++) {
+  assert.ok(
+    (angelloCrystal[i]!.timestamp ?? 0) >
+      (angelloCrystal[i - 1]!.timestamp ?? 0),
+    `Steve Angello TML WE1 Crystal clocks must increase at index ${i}`,
+  );
+}
+assert.equal(isWiredTracklistSlug("yt-eir5Sh_gHbo"), true);
+assert.equal(isWiredTracklistSlug("yt-5AdQy7lCbN0"), true);
 
 console.log("tracklists1001/seeds.test.ts ok");

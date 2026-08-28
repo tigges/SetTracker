@@ -74,6 +74,7 @@ import {
   TL_ANYMA_SOLOMUN_ULTRA_MIAMI_MAINSTAGE_2025,
   TL_OSCAR_AND_THE_WOLF_TML_WE1_CRYSTAL_2026,
   TL_AGENTS_OF_TIME_TML_WE2_MAINSTAGE_2026,
+  TL_STEVE_ANGELLO_TML_WE1_CRYSTAL_2026,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
@@ -923,6 +924,23 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/1shz3hut/oscar-the-wolf-crystal-garden-stage-tomorrowland-weekend-1-belgium-2026-07-19.html",
     tracklist1001: TL_OSCAR_AND_THE_WOLF_TML_WE1_CRYSTAL_2026,
+  },
+  {
+    // Tomorrowland official — Crystal Garden WE1. Distinct from Mainstage WE2
+    // yt-5AdQy7lCbN0 / TL_STEVE_ANGELLO_TML_WE2_2026.
+    video: "https://www.youtube.com/watch?v=eir5Sh_gHbo",
+    primaryArtist: dj("Steve Angello", {
+      accent: "#e63946",
+      homeCity: "Stockholm, SE",
+    }),
+    genre: "Progressive House",
+    type: "festival",
+    title: "Steve Angello WE1 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1cgmpl0k/steve-angello-crystal-garden-stage-tomorrowland-weekend-1-belgium-2026-07-18.html",
+    tracklist1001: TL_STEVE_ANGELLO_TML_WE1_CRYSTAL_2026,
   },
   {
     // Tomorrowland official — Crystal Garden WE2; 34/38 timed cues from 1001.
