@@ -65,3 +65,36 @@ export const TL_ANYMA_SOLOMUN_ULTRA_MIAMI_MAINSTAGE_2025: FingerprintSeedRow[] =
   { at: "1:26:00", artist: "Aaron Hibell", title: "running up that hill" },
   { at: "1:26:42", artist: "TouchTalk", title: "Change It" },
 ];
+
+/**
+ * Oscar And The Wolf @ Crystal Garden Stage, Tomorrowland Weekend 1, Belgium 2026-07-19
+ * Official YouTube: https://youtu.be/Ty03QjFnL90
+ * oEmbed 2026-08-28: channel "Tomorrowland" (@tomorrowland), title
+ * "Oscar and the Wolf WE1 | Tomorrowland 2026".
+ * https://www.1001tracklists.com/tracklist/1shz3hut/oscar-the-wolf-crystal-garden-stage-tomorrowland-weekend-1-belgium-2026-07-19.html
+ * Overlay name TL_OSCAR is too generic; constant is the performance.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-Ty03QjFnL90"] = TL_OSCAR_AND_THE_WOLF_TML_WE1_CRYSTAL_2026
+ * No SoundCloud in the paste — do not invent an SC slug.
+ * Distinct from other Crystal Garden WE1 captures (Blondish, Camila Jun).
+ * Captured 2026-08-28 — provenance 1001tl.
+ */
+export const TL_OSCAR_AND_THE_WOLF_TML_WE1_CRYSTAL_2026: FingerprintSeedRow[] = [
+  { at: "2:11", artist: "Oscar And The Wolf", title: "Universe" },
+  { at: "4:43", artist: "Charli xcx", title: "Everything Is Romantic (Oscar And The Wolf Bootleg)" },
+  { at: "7:40", artist: "Oscar And The Wolf", title: "Never Felt This" },
+  { at: "10:07", artist: "Oscar And The Wolf", title: "You're Mine" },
+  { at: "15:40", artist: "Oscar And The Wolf", title: "Think About You" },
+  { at: "19:05", artist: "Oscar And The Wolf", title: "Forever Alone" },
+  { at: "24:12", artist: "Stromae", title: "Papa Ou T'es (Oscar And The Wolf Bootleg)" },
+  { at: "25:40", artist: "Oscar And The Wolf", title: "I Really Love Him" },
+  { at: "27:51", artist: "Oscar And The Wolf", title: "Break Away" },
+  { at: "31:29", artist: "Oscar And The Wolf", title: "Losing My Religion" },
+  { at: "35:47", artist: "Oscar And The Wolf", title: "Blue (Voyage Voyage Edit)" },
+  { at: "39:04", artist: "Oscar And The Wolf", title: "Who's The Guy" },
+  { at: "41:53", artist: "Oscar And The Wolf", title: "Wish You Were Here" },
+  { at: "45:28", artist: "Oscar And The Wolf", title: "Vanilla" },
+  { at: "48:11", artist: "Roméo Elvis & Oscar & The Wolf", title: "Fading Into You (Show Me Love Edit)" },
+  { at: "51:05", artist: "Oscar And The Wolf", title: "Uforia" },
+  { at: "53:52", artist: "Oscar And The Wolf", title: "Cabriolet (Pour It Up Edit)" },
+  { at: "56:48", artist: "Oscar And The Wolf", title: "Strange Entity" },
+];

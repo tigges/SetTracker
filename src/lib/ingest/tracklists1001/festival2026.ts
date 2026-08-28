@@ -163,7 +163,10 @@ import {
   TL_YOTTO_ODD_WORLD_JULY_2026,
 } from "./festivalCaptures20260826";
 import { TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026 } from "./festivalCaptures20260827";
-import { TL_ANYMA_SOLOMUN_ULTRA_MIAMI_MAINSTAGE_2025 } from "./festivalCaptures20260828";
+import {
+  TL_ANYMA_SOLOMUN_ULTRA_MIAMI_MAINSTAGE_2025,
+  TL_OSCAR_AND_THE_WOLF_TML_WE1_CRYSTAL_2026,
+} from "./festivalCaptures20260828";
 
 export {
   TL_ALESSO_TML_WE2_2026,
@@ -290,6 +293,7 @@ export {
   TL_BLACK_COFFEE_MAYAN_WARRIOR_BURNING_MAN_2025,
   TL_ZEDD_ULTRA_MIAMI_MAINSTAGE_2025,
   TL_ANYMA_SOLOMUN_ULTRA_MIAMI_MAINSTAGE_2025,
+  TL_OSCAR_AND_THE_WOLF_TML_WE1_CRYSTAL_2026,
 };
 
 function formatClock(sec: number): string {
@@ -4942,6 +4946,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "sc-agents-of-time-agents-of-time-time-warp-full":
     TL_AGENTS_OF_TIME_TIME_WARP_FLOOR_1_2026,
   "yt-1TN78OJjJT0": TL_ANYMA_SOLOMUN_ULTRA_MIAMI_MAINSTAGE_2025,
+  "yt-Ty03QjFnL90": TL_OSCAR_AND_THE_WOLF_TML_WE1_CRYSTAL_2026,
 };
 
 /** Sanity: every seeded clock must parse. */

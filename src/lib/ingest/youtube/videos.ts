@@ -72,6 +72,7 @@ import {
   TL_CLOONEE_NEONGARDEN_EDC_ORLANDO_2025,
   TL_ZEDD_ULTRA_MIAMI_MAINSTAGE_2025,
   TL_ANYMA_SOLOMUN_ULTRA_MIAMI_MAINSTAGE_2025,
+  TL_OSCAR_AND_THE_WOLF_TML_WE1_CRYSTAL_2026,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
@@ -888,6 +889,22 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/1qn93jz1/ayybo-odd-mob-crystal-garden-stage-tomorrowland-weekend-2-belgium-2026-07-25.html",
     tracklist1001: TL_AYYBO_ODD_MOB_TML_WE2_2026,
+  },
+  {
+    // Tomorrowland official — Crystal Garden WE1. oEmbed @tomorrowland.
+    video: "https://www.youtube.com/watch?v=Ty03QjFnL90",
+    primaryArtist: dj("Oscar And The Wolf", {
+      accent: "#e9c46a",
+      homeCity: "Belgium",
+    }),
+    genre: "Indie Dance",
+    type: "festival",
+    title: "Oscar and the Wolf WE1 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1shz3hut/oscar-the-wolf-crystal-garden-stage-tomorrowland-weekend-1-belgium-2026-07-19.html",
+    tracklist1001: TL_OSCAR_AND_THE_WOLF_TML_WE1_CRYSTAL_2026,
   },
   {
     // Tomorrowland official — Crystal Garden WE2; 34/38 timed cues from 1001.

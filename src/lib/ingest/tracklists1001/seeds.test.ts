@@ -193,6 +193,7 @@ import {
   TL_CLOONEE_NEONGARDEN_EDC_ORLANDO_2025,
   TL_ZEDD_ULTRA_MIAMI_MAINSTAGE_2025,
   TL_ANYMA_SOLOMUN_ULTRA_MIAMI_MAINSTAGE_2025,
+  TL_OSCAR_AND_THE_WOLF_TML_WE1_CRYSTAL_2026,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
@@ -5050,6 +5051,36 @@ assert.equal(
     "sc-edmfamilylivesets2025-anyma-b2b-solomun-live-ultra-music-festival-2025-miami-day2",
   ),
   false,
+);
+
+// Oscar And The Wolf @ Crystal Garden, Tomorrowland WE1 2026-07-19 —
+// official Tomorrowland YT. Overlay TL_OSCAR is too generic.
+assertSeedClocks(TL_OSCAR_AND_THE_WOLF_TML_WE1_CRYSTAL_2026);
+assert.equal(TL_OSCAR_AND_THE_WOLF_TML_WE1_CRYSTAL_2026.length, 18);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-Ty03QjFnL90"],
+  TL_OSCAR_AND_THE_WOLF_TML_WE1_CRYSTAL_2026,
+);
+const oscarWolf = tracklist1001RowsToPlays(
+  TL_OSCAR_AND_THE_WOLF_TML_WE1_CRYSTAL_2026,
+);
+assert.equal(oscarWolf.length, 18);
+assert.equal(oscarWolf[0]?.provenance, "1001tl");
+assert.equal(oscarWolf[0]?.timestamp, 2 * 60 + 11);
+assert.equal(oscarWolf[0]?.trackTitle, "Universe");
+assert.equal(oscarWolf[17]?.trackTitle, "Strange Entity");
+assert.equal(oscarWolf[17]?.timestamp, 56 * 60 + 48);
+for (let i = 1; i < oscarWolf.length; i++) {
+  assert.ok(
+    (oscarWolf[i]!.timestamp ?? 0) > (oscarWolf[i - 1]!.timestamp ?? 0),
+    `Oscar And The Wolf TML WE1 clocks must increase at index ${i}`,
+  );
+}
+assert.equal(isWiredTracklistSlug("yt-Ty03QjFnL90"), true);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-Ty03QjFnL90"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-n3TESnQqiQ4"],
+  "Oscar And The Wolf is not the Blondish Crystal Garden WE1 seed",
 );
 
 console.log("tracklists1001/seeds.test.ts ok");
