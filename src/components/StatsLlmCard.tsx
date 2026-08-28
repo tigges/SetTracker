@@ -1,3 +1,4 @@
+import { StatsNotesLink } from "@/components/StatsNotesLink";
 import {
   formatLlmHitRate,
   formatLlmTrackMessage,
@@ -42,14 +43,9 @@ export function StatsLlmCard({ stats }: { stats: LlmResearchStats }) {
 
   return (
     <section id="llm-research" className="card mb-2.5 scroll-mt-20 p-3">
-      <div className="mb-2">
+      <div className="mb-2 flex items-baseline gap-2">
         <h2 className="text-[14px] font-bold tracking-tight">Last LLM research</h2>
-        <p className="mt-0.5 text-[11px] text-muted2">
-          Automated Catalog LLM research on a standing budget. Each job names
-          the variables it tracks, then parks partial / empty results so the
-          same row is not retraced. From committed reports as of the last
-          Pages ship.
-        </p>
+        <StatsNotesLink hash="runs" />
       </div>
       <dl className="grid grid-cols-2 gap-x-4 gap-y-1 text-[12px] sm:grid-cols-4">
         <div>
