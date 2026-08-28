@@ -181,6 +181,18 @@ assert.equal(
   extras["sc-loveland-legacy-bart-skils-loveland-festival"]?.soundcloudUrl,
   "https://soundcloud.com/loveland-legacy/bart-skils-loveland-festival",
 );
+assert.equal(
+  extras["sc-bart-skils-bart-skils-loveland-festival"]?.youtubeUrl,
+  "https://www.youtube.com/watch?v=d-EOE2u7HT4",
+);
+assert.equal(
+  extras["sc-bart-skils-bart-skils-loveland-festival"]?.soundcloudUrl,
+  "https://soundcloud.com/loveland-legacy/bart-skils-loveland-festival",
+);
+assert.equal(
+  extras["yt-d-EOE2u7HT4"]?.soundcloudUrl,
+  extras["sc-bart-skils-bart-skils-loveland-festival"]?.soundcloudUrl,
+);
 assert.ok(
   !extras[
     "sc-tomorrowland-tomorrowland-friendship-mix-with-sara-landry-july-2026"

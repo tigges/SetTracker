@@ -751,9 +751,23 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
   },
   {
     // Official Loveland SC (soundcloud.com/loveland-legacy). Same 1001 seed
-    // as yt-d-EOE2u7HT4 — host twin, SC-first playback. Never wire
-    // sc-https://… or invent sc-bart-skils-bart-skils-loveland-festival.
+    // as yt-d-EOE2u7HT4 — host twin, SC-first playback. Festival SC is the
+    // stored soundcloudUrl. Artist SC bart-skils/bart-skils-loveland-festival
+    // is the same 5466s edit (oEmbed 2026-08-28) and aliases to the YT survivor.
     url: "https://soundcloud.com/loveland-legacy/bart-skils-loveland-festival",
+    primaryArtist: dj("Bart Skils", { accent: "#2a9d8f" }),
+    genre: "Techno",
+    seriesName: "Loveland",
+    eventName: "Loveland Festival",
+    type: "festival",
+    minDurationSec: 30 * 60,
+  },
+  {
+    // Official Bart Skils upload of the same Loveland Fire Stage night.
+    // oEmbed 2026-08-28: author "Bart Skils", title "`@ Loveland Festival
+    // Amsterdam 2026", 5466s — same duration as loveland-legacy. Same 1001
+    // seed as yt-d-EOE2u7HT4; secondary slug, festival SC stays stored.
+    url: "https://soundcloud.com/bart-skils/bart-skils-loveland-festival",
     primaryArtist: dj("Bart Skils", { accent: "#2a9d8f" }),
     genre: "Techno",
     seriesName: "Loveland",

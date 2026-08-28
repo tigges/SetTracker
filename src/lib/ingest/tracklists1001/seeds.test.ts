@@ -5368,8 +5368,8 @@ assert.equal(isSecondaryPlaybackSlug("yt-_hdM8uJV1LM"), false);
 assert.equal(isSecondaryPlaybackSlug("sc-bleuclair-bleuprintvol5"), true);
 
 // Bart Skils @ Fire Stage, Loveland Festival 2026-08-08 — official Loveland
-// YT + SC host twin. Overlay TL_BART_SKILS is too generic. Paste Wire
-// sc-bart-skils-bart-skils-loveland-festival is not the pasted host.
+// YT + festival SC + artist SC (same 5466s edit). Overlay TL_BART_SKILS
+// is too generic. Both SC slugs are secondary; YT is the survivor.
 assertSeedClocks(TL_BART_SKILS_LOVELAND_FIRE_2026);
 assert.equal(TL_BART_SKILS_LOVELAND_FIRE_2026.length, 18);
 assert.equal(
@@ -5384,7 +5384,7 @@ assert.equal(
 );
 assert.equal(
   TRACKLIST_1001_BY_SOURCE_SLUG["sc-bart-skils-bart-skils-loveland-festival"],
-  undefined,
+  TL_BART_SKILS_LOVELAND_FIRE_2026,
 );
 const bartLoveland = tracklist1001RowsToPlays(TL_BART_SKILS_LOVELAND_FIRE_2026);
 assert.equal(bartLoveland.length, 18);
@@ -5405,14 +5405,18 @@ assert.equal(
   isWiredTracklistSlug("sc-loveland-legacy-bart-skils-loveland-festival"),
   true,
 );
+assert.equal(
+  isWiredTracklistSlug("sc-bart-skils-bart-skils-loveland-festival"),
+  true,
+);
 assert.equal(isSecondaryPlaybackSlug("yt-d-EOE2u7HT4"), false);
 assert.equal(
   isSecondaryPlaybackSlug("sc-loveland-legacy-bart-skils-loveland-festival"),
   true,
 );
 assert.equal(
-  isWiredTracklistSlug("sc-bart-skils-bart-skils-loveland-festival"),
-  false,
+  isSecondaryPlaybackSlug("sc-bart-skils-bart-skils-loveland-festival"),
+  true,
 );
 
 console.log("tracklists1001/seeds.test.ts ok");

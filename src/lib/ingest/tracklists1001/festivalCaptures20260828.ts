@@ -633,14 +633,16 @@ export const TL_BLEU_CLAIR_BLEUPRINT_VOL_5_JAKARTA_2022: FingerprintSeedRow[] = 
  * Official SoundCloud: https://soundcloud.com/loveland-legacy/bart-skils-loveland-festival
  * oEmbed 2026-08-28: author "Loveland" (soundcloud.com/loveland-legacy),
  * title "BART SKILS | Loveland Festival 2026 | LL279".
- * Same 1001 seed + both official permalinks → host twin (SC-first playback,
- * YT kept). SC slug is secondary.
- * Paste Wire line sc-bart-skils-bart-skils-loveland-festival is not the
- * pasted host — do not invent an artist SC slug.
- * https://www.1001tracklists.com/tracklist/140dd8zt/bart-skils-fire-stage-loveland-festival-netherlands-2026-08-08.html
- * Overlay name TL_BART_SKILS is too generic; constant is the performance.
+ * Artist SoundCloud (same night, same duration 5466s): 
+ * https://soundcloud.com/bart-skils/bart-skils-loveland-festival
+ * oEmbed 2026-08-28: author "Bart Skils" (soundcloud.com/bart-skils),
+ * title "Bart Skils `@ Loveland Festival Amsterdam 2026".
+ * Same 1001 seed + official YT + both official SC permalinks → host twin
+ * (SC-first playback, festival SC stored, YT survivor). Both SC slugs
+ * are secondary. Overlay name TL_BART_SKILS is too generic.
  * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-d-EOE2u7HT4"] = TL_BART_SKILS_LOVELAND_FIRE_2026
  * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["sc-loveland-legacy-bart-skils-loveland-festival"] = TL_BART_SKILS_LOVELAND_FIRE_2026
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["sc-bart-skils-bart-skils-loveland-festival"] = TL_BART_SKILS_LOVELAND_FIRE_2026
  * Captured 2026-08-28 — provenance 1001tl.
  */
 export const TL_BART_SKILS_LOVELAND_FIRE_2026: FingerprintSeedRow[] = [
