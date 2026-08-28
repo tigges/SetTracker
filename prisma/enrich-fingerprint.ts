@@ -34,6 +34,7 @@ function writeStepSummary(stats: {
   setsProbed: number;
   youtubeBotWalls: number;
   youtubeSkipped: number;
+  alreadyProbed: number;
 }): void {
   const path = process.env.GITHUB_STEP_SUMMARY;
   if (!path) return;
@@ -49,11 +50,12 @@ function writeStepSummary(stats: {
     `| enabled | ${stats.enabled} |`,
     `| candidates | ${stats.candidates} |`,
     `| sets probed | ${stats.setsProbed} |`,
-    `| ACR probes | ${stats.probed} |`,
+    `| ACR probes (billable clips) | ${stats.probed} |`,
     `| identified | ${stats.identified} |`,
     `| hit rate | ${formatAcrHitRate(stats.identified, stats.probed)} |`,
     `| partial parked | ${stats.partial} |`,
     `| no-match | ${stats.missed} |`,
+    `| already parked (not billed) | ${stats.alreadyProbed} |`,
     `| unresolved / weak | ${stats.unresolved} |`,
     `| clip fails | ${stats.clipFails} |`,
     `| YouTube bot-walls | ${stats.youtubeBotWalls} |`,
@@ -116,6 +118,7 @@ async function main() {
         clipFails: stats.clipFails,
         youtubeBotWalls: stats.youtubeBotWalls,
         youtubeSkipped: stats.youtubeSkipped,
+        alreadyProbed: stats.alreadyProbed,
         skipped: stats.skipped,
       },
     });

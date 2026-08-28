@@ -16,8 +16,10 @@ import {
   diversifyBySeries,
   idCoverageTier,
   idQualityTier,
+  isFeedLeadCard,
   nearDuplicateKey,
   isRadarCandidate,
+  promoteLeadCards,
   isRecentPerformance,
   pickRadarPicks,
   radarPickScore,
@@ -414,7 +416,7 @@ describe("feedPriority complete → Top 100 → festivals", () => {
     assert.equal(sorted[1]?.festivalRank, 1);
   });
 
-  it("Deep catalog sorts by performance date, then density, then chart", () => {
+  it("Deep catalog uses completeness first, then year, then chart", () => {
     const now = Date.parse("2026-08-16T12:00:00.000Z");
     const sorted = [
       {
@@ -448,7 +450,7 @@ describe("feedPriority complete → Top 100 → festivals", () => {
     ].sort(compareDeepCatalog);
     assert.deepEqual(
       sorted.map((s) => s.id),
-      ["lost-freq", "thin-july", "alok-winter", "guetta-2024"],
+      ["lost-freq", "alok-winter", "guetta-2024", "thin-july"],
     );
     assert.equal(
       isThisPerformanceYear({ publishedAt: "2026-03-15T00:00:00.000Z" }, now),
@@ -480,6 +482,115 @@ describe("feedPriority complete → Top 100 → festivals", () => {
     assert.deepEqual(
       sorted.map((s) => s.id),
       ["full", "sparse"],
+    );
+  });
+
+  it("Deep catalog ranks named IDs ahead of all-pink and empty cards", () => {
+    const sorted = [
+      {
+        id: "empty-recent",
+        densitySeverity: "severe" as const,
+        venueTier: "club" as const,
+        publishedAt: "2026-08-16T00:00:00.000Z",
+        trackCount: 0,
+        statusCounts: {},
+      },
+      {
+        id: "all-pink",
+        densitySeverity: "ok" as const,
+        venueTier: "festival" as const,
+        publishedAt: "2026-08-10T00:00:00.000Z",
+        trackCount: 20,
+        statusCounts: { unresolved_id: 20 },
+      },
+      {
+        id: "named",
+        densitySeverity: "ok" as const,
+        venueTier: "festival" as const,
+        publishedAt: "2026-07-01T00:00:00.000Z",
+        trackCount: 18,
+        statusCounts: { identified: 18 },
+      },
+    ].sort(compareDeepCatalog);
+    assert.deepEqual(
+      sorted.map((s) => s.id),
+      ["named", "all-pink", "empty-recent"],
+    );
+  });
+
+  it("lead-card floor keeps short clips and empty placeholders off page one", () => {
+    assert.equal(
+      isFeedLeadCard({
+        densitySeverity: "ok",
+        durationSec: 27 * 60,
+        statusCounts: { identified: 6 },
+        trackCount: 6,
+      }),
+      false,
+    );
+    assert.equal(
+      isFeedLeadCard({
+        densitySeverity: "severe",
+        durationSec: 60 * 60,
+        statusCounts: {},
+        trackCount: 0,
+      }),
+      false,
+    );
+    assert.equal(
+      isFeedLeadCard({
+        densitySeverity: "ok",
+        durationSec: 90 * 60,
+        statusCounts: { unresolved_id: 22 },
+        trackCount: 22,
+      }),
+      false,
+    );
+    assert.equal(
+      isFeedLeadCard({
+        densitySeverity: "ok",
+        durationSec: 45 * 60,
+        statusCounts: { identified: 8 },
+        trackCount: 8,
+      }),
+      true,
+    );
+    assert.equal(
+      isFeedLeadCard({
+        densitySeverity: "thin",
+        durationSec: 20 * 60,
+        statusCounts: { identified: 12 },
+        trackCount: 12,
+      }),
+      true,
+    );
+
+    const promoted = promoteLeadCards([
+      {
+        id: "summit-clip",
+        densitySeverity: "ok" as const,
+        durationSec: 27 * 60,
+        statusCounts: { identified: 6 },
+        trackCount: 6,
+      },
+      {
+        id: "empty-radio",
+        densitySeverity: "severe" as const,
+        durationSec: 60 * 60,
+        statusCounts: {},
+        trackCount: 0,
+      },
+      {
+        id: "lolla",
+        densitySeverity: "ok" as const,
+        durationSec: 90 * 60,
+        statusCounts: { identified: 24 },
+        trackCount: 24,
+      },
+    ]);
+    assert.deepEqual(
+      promoted.map((s) => s.id),
+      ["lolla", "summit-clip", "empty-radio"],
     );
   });
 
