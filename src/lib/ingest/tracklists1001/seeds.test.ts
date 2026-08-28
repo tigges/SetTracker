@@ -207,6 +207,7 @@ import {
   TL_HARDWELL_EUPHORIA_020_2026,
   TL_LAMMER_TML_WE2_CORE_2026,
   TL_NOSI_TML_WE1_CRYSTAL_2026,
+  TL_GIUSEPPE_OTTAVIANI_ASOT_AREA_TWO_ROTTERDAM_2026,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
@@ -5604,6 +5605,73 @@ for (let i = 1; i < nosiCrystal.length; i++) {
   assert.ok(
     (nosiCrystal[i]!.timestamp ?? 0) > (nosiCrystal[i - 1]!.timestamp ?? 0),
     `Nosi TML WE1 Crystal clocks must increase at index ${i}`,
+  );
+}
+
+// Giuseppe Ottaviani @ Area Two, ASOT Ahoy Rotterdam 2026-02-27.
+// Official @astateoftrance YT + official artist SC. Overlay
+// TL_GIUSEPPE_OTTAVIANI is too generic. hearthis/razorator is a fan
+// reupload — not wired. Distinct from Digital Society Leeds, ASOT 1290,
+// and ASOT Poland.
+assertSeedClocks(TL_GIUSEPPE_OTTAVIANI_ASOT_AREA_TWO_ROTTERDAM_2026);
+assert.equal(TL_GIUSEPPE_OTTAVIANI_ASOT_AREA_TWO_ROTTERDAM_2026.length, 18);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-YvPI-unGanA"],
+  TL_GIUSEPPE_OTTAVIANI_ASOT_AREA_TWO_ROTTERDAM_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-giuseppeottaviani-giuseppe-ottaviani-a-state-of"
+  ],
+  TL_GIUSEPPE_OTTAVIANI_ASOT_AREA_TWO_ROTTERDAM_2026,
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-YvPI-unGanA"],
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-giuseppeottaviani-giuseppe-ottaviani-digitalsociety"
+  ],
+  "ASOT Area Two Rotterdam is not the Digital Society Leeds seed",
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-YvPI-unGanA"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-bxb6Tglooc4"],
+  "ASOT Area Two Rotterdam is not the ASOT 1290 radio seed",
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-giuseppeottaviani-giuseppe-ottaviani-live-at-a"
+  ],
+  undefined,
+  "ASOT Poland artist SC stays unwired to this seed",
+);
+assert.equal(isWiredTracklistSlug("yt-YvPI-unGanA"), true);
+assert.equal(
+  isWiredTracklistSlug("sc-giuseppeottaviani-giuseppe-ottaviani-a-state-of"),
+  true,
+);
+assert.equal(isSecondaryPlaybackSlug("yt-YvPI-unGanA"), false);
+assert.equal(
+  isSecondaryPlaybackSlug("sc-giuseppeottaviani-giuseppe-ottaviani-a-state-of"),
+  true,
+);
+assert.equal(
+  isWiredTracklistSlug("sc-giuseppeottaviani-giuseppe-ottaviani-live-at-a"),
+  false,
+);
+const goAsotRotterdam = tracklist1001RowsToPlays(
+  TL_GIUSEPPE_OTTAVIANI_ASOT_AREA_TWO_ROTTERDAM_2026,
+);
+assert.equal(goAsotRotterdam.length, 18);
+assert.equal(goAsotRotterdam[0]?.provenance, "1001tl");
+assert.equal(goAsotRotterdam[0]?.trackTitle, "Space Unicorn");
+assert.equal(goAsotRotterdam[0]?.timestamp, 10);
+assert.equal(goAsotRotterdam[17]?.trackTitle, "Hold On");
+assert.equal(goAsotRotterdam[17]?.timestamp, 55 * 60 + 38);
+for (let i = 1; i < goAsotRotterdam.length; i++) {
+  assert.ok(
+    (goAsotRotterdam[i]!.timestamp ?? 0) >
+      (goAsotRotterdam[i - 1]!.timestamp ?? 0),
+    `Giuseppe Ottaviani ASOT Area Two clocks must increase at index ${i}`,
   );
 }
 

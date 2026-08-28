@@ -829,3 +829,62 @@ export const TL_NOSI_TML_WE1_CRYSTAL_2026: FingerprintSeedRow[] = [
   { at: "56:22", artist: "JUNO (DE)", title: "Que Rico" },
   { at: "59:30", artist: "Andrea Oliva", title: "Neon Hearts" },
 ];
+
+/**
+ * Giuseppe Ottaviani @ Area Two, A State Of Trance, Ahoy Rotterdam, Netherlands 2026-02-27
+ * Official YouTube: https://youtu.be/YvPI-unGanA
+ * oEmbed 2026-08-28: channel "A State Of Trance" (@astateoftrance), title
+ * "Giuseppe Ottaviani live at A State of Trance 2026 (Friday | Area 2)".
+ * That video was already curated in YOUTUBE_SETS without a tracklist.
+ * Official artist SoundCloud:
+ * https://soundcloud.com/giuseppeottaviani/giuseppe-ottaviani-a-state-of
+ * oEmbed 2026-08-28: author "Giuseppe Ottaviani".
+ * https://www.1001tracklists.com/tracklist/1084t4l1/giuseppe-ottaviani-area-two-a-state-of-trance-event-ahoy-rotterdam-netherlands-2026-02-27.html
+ * Overlay name TL_GIUSEPPE_OTTAVIANI is too generic; constant is the night.
+ * Distinct from Digital Society Leeds and ASOT 1290 radio (yt-bxb6Tglooc4).
+ * Not ASOT Poland (sc-giuseppeottaviani-giuseppe-ottaviani-live-at-a).
+ * hearthis.at/razorator/giuseppeottaviani-liveatastateoftrancefestivalrotterdam27-02-2026-razorator
+ * is a fan reupload — do not wire as sourceUrl / playback /
+ * TRACKLIST_1001_BY_SOURCE_SLUG.
+ * Same 1001 seed + both official permalinks → host twin (SC-first playback).
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-YvPI-unGanA"] = TL_GIUSEPPE_OTTAVIANI_ASOT_AREA_TWO_ROTTERDAM_2026
+ * plus sc-giuseppeottaviani-giuseppe-ottaviani-a-state-of.
+ * Captured 2026-08-28 — provenance 1001tl.
+ */
+export const TL_GIUSEPPE_OTTAVIANI_ASOT_AREA_TWO_ROTTERDAM_2026: FingerprintSeedRow[] =
+  [
+    { at: "0:10", artist: "Giuseppe Ottaviani ft. Hypaton", title: "Space Unicorn" },
+    { at: "3:45", artist: "Giuseppe Ottaviani & Hypaton", title: "Soundboy" },
+    { at: "6:34", artist: "Armin van Buuren & Giuseppe Ottaviani", title: "Magico" },
+    { at: "10:03", artist: "Mauro Picotto & Giuseppe Ottaviani", title: "Ibiza Dream" },
+    { at: "13:17", artist: "Giuseppe Ottaviani & Dicosis", title: "Run Away" },
+    { at: "17:04", artist: "LAWTON", title: "Bad Potato" },
+    { at: "19:14", artist: "KI/KI", title: "5AM" },
+    {
+      at: "22:26",
+      artist: "Giuseppe Ottaviani & Andrew Rayel ft. Alessia Labate",
+      title: "How Do We Know",
+    },
+    {
+      at: "25:55",
+      artist: "Eric Prydz",
+      title: "Every Day (Sneijder pres. Alt1 Remix)",
+    },
+    {
+      at: "29:07",
+      artist: "Giuseppe Ottaviani & Gabry Ponte & Crooked Bangs",
+      title: "Astra",
+    },
+    { at: "32:05", artist: "Legend B", title: "Lost In Love" },
+    { at: "35:58", artist: "Yahel & Eyal Barkan", title: "Voyage (Rafael Osmo Rework)" },
+    { at: "39:00", artist: "Giuseppe Ottaviani", title: "Panama" },
+    { at: "42:03", artist: "Giuseppe Ottaviani", title: "No One Like You" },
+    {
+      at: "45:40",
+      artist: "Bryn Liedl ft. Bethany Marie",
+      title: "Statues (Bryan Kearney Remix)",
+    },
+    { at: "48:21", artist: "Giuseppe Ottaviani & Lucid Blue", title: "Be The Angel" },
+    { at: "52:03", artist: "Giuseppe Ottaviani", title: "Linking People" },
+    { at: "55:38", artist: "Giuseppe Ottaviani ft. Diana Goldberg", title: "Hold On" },
+  ];

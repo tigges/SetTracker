@@ -412,6 +412,18 @@ assert.equal(
   extras["sc-tomorrowland-hardwell-presents-euphoria-august-2026"]?.youtubeUrl,
   "https://www.youtube.com/watch?v=Itd5D4q1KuM",
 );
+assert.equal(
+  extras["yt-YvPI-unGanA"]?.soundcloudUrl,
+  "https://soundcloud.com/giuseppeottaviani/giuseppe-ottaviani-a-state-of",
+);
+assert.equal(
+  extras["yt-YvPI-unGanA"]?.youtubeUrl,
+  "https://www.youtube.com/watch?v=YvPI-unGanA",
+);
+assert.equal(
+  extras["sc-giuseppeottaviani-giuseppe-ottaviani-a-state-of"]?.youtubeUrl,
+  "https://www.youtube.com/watch?v=YvPI-unGanA",
+);
 
 for (const [slug, pin] of Object.entries(SET_HOST_PINS)) {
   if (pin.mixcloudUrl) {
