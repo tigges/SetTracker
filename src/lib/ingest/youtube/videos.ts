@@ -77,6 +77,10 @@ import {
   TL_STEVE_ANGELLO_TML_WE1_CRYSTAL_2026,
   TL_DEADMAU5_VELD_MAINSTAGE_2025,
   TL_CARL_COX_BOILER_ROOM_IBIZA_VILLA_2013,
+  TL_FIDELES_TML_WE2_FREEDOM_2026,
+  TL_THE_CHAINSMOKERS_ULTRA_MELBOURNE_MAINSTAGE_2026,
+  TL_BLEU_CLAIR_BLEUPRINT_VOL_5_JAKARTA_2022,
+  TL_BART_SKILS_LOVELAND_FIRE_2026,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
@@ -861,6 +865,23 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/116uj1x1/massano-freedom-stage-tomorrowland-weekend-2-belgium-2026-07-25.html",
     tracklist1001: TL_MASSANO_TML_WE2_2026,
+  },
+  {
+    // Tomorrowland official — Freedom Stage WE2. Video was not yet curated;
+    // this capture adds the row. No SoundCloud in the paste.
+    video: "https://www.youtube.com/watch?v=e0xXSwtVwe0",
+    primaryArtist: dj("Fideles", {
+      accent: "#c1121f",
+      homeCity: "Italy",
+    }),
+    genre: "Techno",
+    type: "festival",
+    title: "Fideles WE2 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/9xss8m1/fideles-freedom-stage-tomorrowland-weekend-2-belgium-2026-07-26.html",
+    tracklist1001: TL_FIDELES_TML_WE2_FREEDOM_2026,
   },
   {
     // Tomorrowland official — Mainstage WE2 closing; also artist upload Py-GG74lLU8.
@@ -2350,6 +2371,10 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_BLEU_CLAIR_EDC_LV_2023,
   },
   {
+    // Official Bleu Clair playback (@bleuclairmusic) — BLEUPRINT VOL. 5
+    // Jakarta livestream 2022-03-31. Video was already curated; this
+    // capture fills the 1001 overlay. Host twin with official SC
+    // bleuclair/bleuprintvol5. Distinct from EDC LV 2023.
     video: "https://www.youtube.com/watch?v=_hdM8uJV1LM",
     primaryArtist: dj("Bleu Clair", {
       accent: "#4cc9f0",
@@ -2357,8 +2382,27 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     }),
     genre: "Tech House",
     type: "radio",
-    title: "Bleu Clair presents BLEUPRINT VOL. 5 (Live from Jakarta)",
+    title: "Bleu Clair presents BLEUPRINT VOL. 5 (Live from Jakarta) 2022",
     seriesName: "BLEUPRINT",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/blv1r3k/bleu-clair-bleuprint-vol.-5-livestream-from-jakarta-indonesia-2022-03-31.html",
+    tracklist1001: TL_BLEU_CLAIR_BLEUPRINT_VOL_5_JAKARTA_2022,
+  },
+  {
+    // Official Loveland playback (@LovelandEvents) — Fire Stage 2026-08-08.
+    // Video was not yet curated; this capture adds the row. Host twin with
+    // official SC loveland-legacy/bart-skils-loveland-festival. Paste Wire
+    // sc-bart-skils-bart-skils-loveland-festival is not the pasted host.
+    video: "https://www.youtube.com/watch?v=d-EOE2u7HT4",
+    primaryArtist: dj("Bart Skils", { accent: "#2a9d8f" }),
+    genre: "Techno",
+    type: "festival",
+    title: "Bart Skils | Loveland Festival 2026",
+    seriesName: "Loveland",
+    eventName: "Loveland Festival",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/140dd8zt/bart-skils-fire-stage-loveland-festival-netherlands-2026-08-08.html",
+    tracklist1001: TL_BART_SKILS_LOVELAND_FIRE_2026,
   },
   // ---- DJ Mag Top 100: at least one set for chart DJs still at 0 ----
   {
@@ -2945,12 +2989,18 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_GORDO_TML_WE2_2023,
   },
   {
+    // Official The Chainsmokers playback (@THECHAINSMOKERS) — Ultra Melbourne
+    // Mainstage 2026-04-11. Video was already curated; this capture fills
+    // the 1001 overlay. Distinct from TML WE1 yt-1lqmFLr-SkA.
     video: "https://www.youtube.com/watch?v=A5ERobJaS_0",
     primaryArtist: dj("The Chainsmokers", { accent: "#4cc9f0" }),
     genre: "Future Bass",
     type: "festival",
     title: "The Chainsmokers - Live @ Ultra Melbourne 2026",
     eventName: "Ultra Melbourne",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2fwrq83t/the-chainsmokers-mainstage-ultra-music-festival-flemington-racecourse-melbourne-australia-2026-04-11.html",
+    tracklist1001: TL_THE_CHAINSMOKERS_ULTRA_MELBOURNE_MAINSTAGE_2026,
   },
   {
     // Artist-channel playback (@Liumusic). No 1001Tracklists URL in the

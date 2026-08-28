@@ -1,7 +1,49 @@
 {
   "note": "Operator-collected 1001Tracklists URLs. All listed urls[] rows are now seeded. Prefer new operator pastes over this archive. stillMissing1001 is video-in / no 1001 page — do not invent URLs. heldPendingPlayback is 1001-in / no official YT/SC playback — seed held, do not invent or wire fan playback. pendingCuePaste is official playback + operator 1001 URL without cue rows — do not scrape 1001 or invent 1001tl seeds.",
-  "updatedAt": "2026-08-28T08:30:00.000Z",
+  "updatedAt": "2026-08-28T14:35:00.000Z",
   "urls": [
+    {
+      "label": "Bart Skils · Fire Stage, Loveland Festival 2026-08-08",
+      "slug": "yt-d-EOE2u7HT4",
+      "name": "TL_BART_SKILS_LOVELAND_FIRE_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/140dd8zt/bart-skils-fire-stage-loveland-festival-netherlands-2026-08-08.html",
+      "youtubeUrl": "https://youtu.be/d-EOE2u7HT4",
+      "soundcloudUrl": "https://soundcloud.com/loveland-legacy/bart-skils-loveland-festival",
+      "note": "Operator paste 2026-08-28. 18 timed cues on official Loveland YT (@LovelandEvents) plus official SC soundcloud.com/loveland-legacy. Host twin — SC slug sc-loveland-legacy-bart-skils-loveland-festival is secondary. Overlay TL_BART_SKILS is too generic. Paste Wire sc-bart-skils-bart-skils-loveland-festival is not the pasted host — do not invent an artist SC slug."
+    },
+    {
+      "label": "Bleu Clair · BLEUPRINT VOL. 5, Jakarta livestream 2022-03-31",
+      "slug": "yt-_hdM8uJV1LM",
+      "name": "TL_BLEU_CLAIR_BLEUPRINT_VOL_5_JAKARTA_2022",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/blv1r3k/bleu-clair-bleuprint-vol.-5-livestream-from-jakarta-indonesia-2022-03-31.html",
+      "youtubeUrl": "https://youtu.be/_hdM8uJV1LM",
+      "soundcloudUrl": "https://soundcloud.com/bleuclair/bleuprintvol5",
+      "note": "Operator paste 2026-08-28. 12 timed cues on official Bleu Clair YT (@bleuclairmusic) already curated in videos.ts plus official SC soundcloud.com/bleuclair. Host twin — SC slug sc-bleuclair-bleuprintvol5 is secondary. Overlay TL_BLEU_CLAIR is too generic and is not EDC LV 2023 (sc-bleuclair-edclv2023 / yt-c_sx3zum8Z0)."
+    },
+    {
+      "label": "The Chainsmokers · Mainstage, Ultra Melbourne 2026-04-11",
+      "slug": "yt-A5ERobJaS_0",
+      "name": "TL_THE_CHAINSMOKERS_ULTRA_MELBOURNE_MAINSTAGE_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/2fwrq83t/the-chainsmokers-mainstage-ultra-music-festival-flemington-racecourse-melbourne-australia-2026-04-11.html",
+      "youtubeUrl": "https://youtu.be/A5ERobJaS_0",
+      "note": "Operator paste 2026-08-28. 95 timed cues on official The Chainsmokers YT (@THECHAINSMOKERS) already curated in videos.ts. Overlay TL_THE_CHAINSMOKERS is too generic and is not TML WE1 yt-1lqmFLr-SkA. No SC in the paste — do not invent an SC slug. Mashup-then-component clusters stay as captured, including the 1s closer at 1:11:02–1:11:07."
+    },
+    {
+      "label": "Fideles · Freedom Stage, Tomorrowland WE2 2026-07-26",
+      "slug": "yt-e0xXSwtVwe0",
+      "name": "TL_FIDELES_TML_WE2_FREEDOM_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/9xss8m1/fideles-freedom-stage-tomorrowland-weekend-2-belgium-2026-07-26.html",
+      "youtubeUrl": "https://youtu.be/e0xXSwtVwe0",
+      "note": "Operator paste 2026-08-28. 23 timed cues on official Tomorrowland YT (@tomorrowland). Overlay TL_FIDELES is too generic. Video was not yet curated in YOUTUBE_SETS — this capture adds the row. No SC in the paste — do not invent an SC slug. Gap 0:12 → 10:51 and the long Victory Lap Five credit stay as captured."
+    },
+    {
+      "label": "MARNIK · Planaxis, Tomorrowland WE1 2026-07-18",
+      "slug": "sc-marnikofficial-marnik-live-at-tomorrowland",
+      "name": "TL_MARNIK_TML_WE1_PLANAXIS_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/vn48l79/marnik-planaxis-stage-tomorrowland-weekend-1-belgium-2026-07-18.html",
+      "soundcloudUrl": "https://soundcloud.com/marnikofficial/marnik-live-at-tomorrowland",
+      "note": "Operator paste 2026-08-28. 22 timed cues on official MARNIK SC (marnikofficial). Overlay TL_MARNIK is too generic and is not held TL_MARNIK_NAMELESS_FESTIVAL_2016 or UNLEGEND Nameless 2026. No YT in the paste — do not invent a YT slug."
+    },
     {
       "label": "Carl Cox · Carl Cox & Friends, Ibiza Villa Takeovers, Boiler Room 2013-08-15",
       "slug": "yt-vy-k0FopsmY",

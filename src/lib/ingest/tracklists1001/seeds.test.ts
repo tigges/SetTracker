@@ -198,6 +198,11 @@ import {
   TL_STEVE_ANGELLO_TML_WE1_CRYSTAL_2026,
   TL_DEADMAU5_VELD_MAINSTAGE_2025,
   TL_CARL_COX_BOILER_ROOM_IBIZA_VILLA_2013,
+  TL_MARNIK_TML_WE1_PLANAXIS_2026,
+  TL_FIDELES_TML_WE2_FREEDOM_2026,
+  TL_THE_CHAINSMOKERS_ULTRA_MELBOURNE_MAINSTAGE_2026,
+  TL_BLEU_CLAIR_BLEUPRINT_VOL_5_JAKARTA_2022,
+  TL_BART_SKILS_LOVELAND_FIRE_2026,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
@@ -5217,6 +5222,197 @@ assert.equal(isSecondaryPlaybackSlug("yt-vy-k0FopsmY"), false);
 assert.equal(
   isSecondaryPlaybackSlug("sc-platform-carl-cox-45-min-boiler-room"),
   true,
+);
+
+// MARNIK @ Planaxis, Tomorrowland WE1 2026-07-18 — official SC.
+// Overlay TL_MARNIK is too generic. No YT in the paste.
+assertSeedClocks(TL_MARNIK_TML_WE1_PLANAXIS_2026);
+assert.equal(TL_MARNIK_TML_WE1_PLANAXIS_2026.length, 22);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-marnikofficial-marnik-live-at-tomorrowland"],
+  TL_MARNIK_TML_WE1_PLANAXIS_2026,
+);
+const marnikPlanaxis = tracklist1001RowsToPlays(
+  TL_MARNIK_TML_WE1_PLANAXIS_2026,
+);
+assert.equal(marnikPlanaxis.length, 22);
+assert.equal(marnikPlanaxis[0]?.provenance, "1001tl");
+assert.equal(marnikPlanaxis[0]?.timestamp, 0);
+assert.equal(marnikPlanaxis[0]?.trackTitle, "Stranger (To Stability)");
+assert.equal(marnikPlanaxis[21]?.trackTitle, "Hard Techno");
+assert.equal(marnikPlanaxis[21]?.timestamp, 51 * 60 + 44);
+for (let i = 1; i < marnikPlanaxis.length; i++) {
+  assert.ok(
+    (marnikPlanaxis[i]!.timestamp ?? 0) >
+      (marnikPlanaxis[i - 1]!.timestamp ?? 0),
+    `MARNIK TML WE1 Planaxis clocks must increase at index ${i}`,
+  );
+}
+assert.equal(
+  isWiredTracklistSlug("sc-marnikofficial-marnik-live-at-tomorrowland"),
+  true,
+);
+assert.equal(
+  isSecondaryPlaybackSlug("sc-marnikofficial-marnik-live-at-tomorrowland"),
+  false,
+);
+assert.equal(
+  isWiredTracklistSlug("sc-marnikofficial-marnik-presents-unlegend-show"),
+  false,
+);
+
+// Fideles @ Freedom Stage, Tomorrowland WE2 2026-07-26 — official
+// Tomorrowland YT. Overlay TL_FIDELES is too generic. No SC in the paste.
+assertSeedClocks(TL_FIDELES_TML_WE2_FREEDOM_2026);
+assert.equal(TL_FIDELES_TML_WE2_FREEDOM_2026.length, 23);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-e0xXSwtVwe0"],
+  TL_FIDELES_TML_WE2_FREEDOM_2026,
+);
+const fidelesFreedom = tracklist1001RowsToPlays(
+  TL_FIDELES_TML_WE2_FREEDOM_2026,
+);
+assert.equal(fidelesFreedom.length, 23);
+assert.equal(fidelesFreedom[0]?.provenance, "1001tl");
+assert.equal(fidelesFreedom[0]?.timestamp, 12);
+assert.equal(fidelesFreedom[0]?.trackTitle, "Breathe");
+assert.equal(fidelesFreedom[0]?.artistName, "The Prodigy");
+assert.equal(fidelesFreedom[22]?.trackTitle, "Let The Drums Speak");
+assert.equal(fidelesFreedom[22]?.timestamp, 1 * 3600 + 28 * 60 + 1);
+assert.equal(fidelesFreedom[13]?.trackTitle, "Victory Lap Five");
+for (let i = 1; i < fidelesFreedom.length; i++) {
+  assert.ok(
+    (fidelesFreedom[i]!.timestamp ?? 0) >
+      (fidelesFreedom[i - 1]!.timestamp ?? 0),
+    `Fideles TML WE2 Freedom clocks must increase at index ${i}`,
+  );
+}
+assert.equal(isWiredTracklistSlug("yt-e0xXSwtVwe0"), true);
+assert.equal(isSecondaryPlaybackSlug("yt-e0xXSwtVwe0"), false);
+
+// The Chainsmokers @ Mainstage, Ultra Melbourne 2026-04-11 — official
+// artist YT already curated. Overlay TL_THE_CHAINSMOKERS is too generic
+// and is not TML WE1. Mashup 1s closer cluster stays as captured.
+assertSeedClocks(TL_THE_CHAINSMOKERS_ULTRA_MELBOURNE_MAINSTAGE_2026);
+assert.equal(TL_THE_CHAINSMOKERS_ULTRA_MELBOURNE_MAINSTAGE_2026.length, 95);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-A5ERobJaS_0"],
+  TL_THE_CHAINSMOKERS_ULTRA_MELBOURNE_MAINSTAGE_2026,
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-A5ERobJaS_0"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-1lqmFLr-SkA"],
+  "Ultra Melbourne is not the Tomorrowland WE1 seed",
+);
+const tcsMelbourne = tracklist1001RowsToPlays(
+  TL_THE_CHAINSMOKERS_ULTRA_MELBOURNE_MAINSTAGE_2026,
+);
+assert.equal(tcsMelbourne.length, 95);
+assert.equal(tcsMelbourne[0]?.provenance, "1001tl");
+assert.equal(tcsMelbourne[0]?.timestamp, 0);
+assert.equal(
+  tcsMelbourne[0]?.trackTitle,
+  "Something Just Like This (Acappella)",
+);
+assert.equal(tcsMelbourne[94]?.trackTitle, "Sailor Song");
+assert.equal(tcsMelbourne[94]?.timestamp, 1 * 3600 + 11 * 60 + 7);
+assert.equal(tcsMelbourne[93]?.timestamp, 1 * 3600 + 11 * 60 + 6);
+for (let i = 1; i < tcsMelbourne.length; i++) {
+  assert.ok(
+    (tcsMelbourne[i]!.timestamp ?? 0) >
+      (tcsMelbourne[i - 1]!.timestamp ?? 0),
+    `Chainsmokers Ultra Melbourne clocks must increase at index ${i}`,
+  );
+}
+assert.equal(isWiredTracklistSlug("yt-A5ERobJaS_0"), true);
+assert.equal(isSecondaryPlaybackSlug("yt-A5ERobJaS_0"), false);
+assert.equal(isWiredTracklistSlug("yt-1lqmFLr-SkA"), true);
+
+// Bleu Clair @ BLEUPRINT VOL. 5, Jakarta livestream 2022-03-31 — official
+// artist YT already curated + official SC host twin. Overlay TL_BLEU_CLAIR
+// is too generic and is not EDC LV 2023.
+assertSeedClocks(TL_BLEU_CLAIR_BLEUPRINT_VOL_5_JAKARTA_2022);
+assert.equal(TL_BLEU_CLAIR_BLEUPRINT_VOL_5_JAKARTA_2022.length, 12);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-_hdM8uJV1LM"],
+  TL_BLEU_CLAIR_BLEUPRINT_VOL_5_JAKARTA_2022,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-bleuclair-bleuprintvol5"],
+  TL_BLEU_CLAIR_BLEUPRINT_VOL_5_JAKARTA_2022,
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-_hdM8uJV1LM"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-c_sx3zum8Z0"],
+  "BLEUPRINT VOL. 5 is not the EDC LV 2023 seed",
+);
+const bleuBlueprint = tracklist1001RowsToPlays(
+  TL_BLEU_CLAIR_BLEUPRINT_VOL_5_JAKARTA_2022,
+);
+assert.equal(bleuBlueprint.length, 12);
+assert.equal(bleuBlueprint[0]?.provenance, "1001tl");
+assert.equal(bleuBlueprint[0]?.timestamp, 2);
+assert.equal(bleuBlueprint[0]?.trackTitle, "Funk Accelerator");
+assert.equal(bleuBlueprint[11]?.trackTitle, "Mistake");
+assert.equal(bleuBlueprint[11]?.timestamp, 30 * 60 + 59);
+for (let i = 1; i < bleuBlueprint.length; i++) {
+  assert.ok(
+    (bleuBlueprint[i]!.timestamp ?? 0) >
+      (bleuBlueprint[i - 1]!.timestamp ?? 0),
+    `Bleu Clair BLEUPRINT VOL. 5 clocks must increase at index ${i}`,
+  );
+}
+assert.equal(isWiredTracklistSlug("yt-_hdM8uJV1LM"), true);
+assert.equal(isWiredTracklistSlug("sc-bleuclair-bleuprintvol5"), true);
+assert.equal(isSecondaryPlaybackSlug("yt-_hdM8uJV1LM"), false);
+assert.equal(isSecondaryPlaybackSlug("sc-bleuclair-bleuprintvol5"), true);
+
+// Bart Skils @ Fire Stage, Loveland Festival 2026-08-08 — official Loveland
+// YT + SC host twin. Overlay TL_BART_SKILS is too generic. Paste Wire
+// sc-bart-skils-bart-skils-loveland-festival is not the pasted host.
+assertSeedClocks(TL_BART_SKILS_LOVELAND_FIRE_2026);
+assert.equal(TL_BART_SKILS_LOVELAND_FIRE_2026.length, 18);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-d-EOE2u7HT4"],
+  TL_BART_SKILS_LOVELAND_FIRE_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-loveland-legacy-bart-skils-loveland-festival"
+  ],
+  TL_BART_SKILS_LOVELAND_FIRE_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-bart-skils-bart-skils-loveland-festival"],
+  undefined,
+);
+const bartLoveland = tracklist1001RowsToPlays(TL_BART_SKILS_LOVELAND_FIRE_2026);
+assert.equal(bartLoveland.length, 18);
+assert.equal(bartLoveland[0]?.provenance, "1001tl");
+assert.equal(bartLoveland[0]?.timestamp, 0);
+assert.equal(bartLoveland[0]?.trackTitle, "Intro");
+assert.equal(bartLoveland[17]?.trackTitle, "Strings Of Life (Stronger On My Own) (Bart Skils & Weska Remix)");
+assert.equal(bartLoveland[17]?.timestamp, 1 * 3600 + 26 * 60 + 40);
+for (let i = 1; i < bartLoveland.length; i++) {
+  assert.ok(
+    (bartLoveland[i]!.timestamp ?? 0) >
+      (bartLoveland[i - 1]!.timestamp ?? 0),
+    `Bart Skils Loveland Fire clocks must increase at index ${i}`,
+  );
+}
+assert.equal(isWiredTracklistSlug("yt-d-EOE2u7HT4"), true);
+assert.equal(
+  isWiredTracklistSlug("sc-loveland-legacy-bart-skils-loveland-festival"),
+  true,
+);
+assert.equal(isSecondaryPlaybackSlug("yt-d-EOE2u7HT4"), false);
+assert.equal(
+  isSecondaryPlaybackSlug("sc-loveland-legacy-bart-skils-loveland-festival"),
+  true,
+);
+assert.equal(
+  isWiredTracklistSlug("sc-bart-skils-bart-skils-loveland-festival"),
+  false,
 );
 
 console.log("tracklists1001/seeds.test.ts ok");

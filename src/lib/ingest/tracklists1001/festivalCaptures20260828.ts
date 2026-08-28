@@ -391,3 +391,275 @@ export const TL_CARL_COX_BOILER_ROOM_IBIZA_VILLA_2013: FingerprintSeedRow[] = [
   },
   { at: "40:50", artist: "CeCe Peniston ft. Joyriders", title: "Finally" },
 ];
+
+/**
+ * MARNIK @ Planaxis Stage, Tomorrowland Weekend 1, Belgium 2026-07-18
+ * Official SoundCloud: https://soundcloud.com/marnikofficial/marnik-live-at-tomorrowland
+ * oEmbed 2026-08-28: author "MARNIK" (soundcloud.com/marnikofficial), title
+ * "MARNIK Live at Tomorrowland 2026 | Planaxis Stage – Full Set".
+ * https://www.1001tracklists.com/tracklist/vn48l79/marnik-planaxis-stage-tomorrowland-weekend-1-belgium-2026-07-18.html
+ * Overlay name TL_MARNIK is too generic and is not
+ * TL_MARNIK_NAMELESS_FESTIVAL_2016 (held, no playback) or the UNLEGEND
+ * Nameless 2026 SC (sc-marnikofficial-marnik-presents-unlegend-show).
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["sc-marnikofficial-marnik-live-at-tomorrowland"] = TL_MARNIK_TML_WE1_PLANAXIS_2026
+ * No YouTube in the paste — do not invent a YT slug.
+ * Captured 2026-08-28 — provenance 1001tl.
+ */
+export const TL_MARNIK_TML_WE1_PLANAXIS_2026: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "MARNIK", title: "Stranger (To Stability)" },
+  { at: "2:59", artist: "MARNIK ft. Crooked Bangs", title: "Synthetic Heart" },
+  { at: "5:35", artist: "DJ KUBA & NEITAN", title: "Feel The Beat" },
+  { at: "8:34", artist: "Ferry Corsten & Ruben de Ronde pres. NRG2000", title: "Rise Up" },
+  { at: "10:41", artist: "JUULS & FISION & NLW", title: "Cricket" },
+  { at: "13:23", artist: "NIVEK", title: "My Neck, My Back" },
+  { at: "15:25", artist: "Alex Nocera & Roy Batty", title: "Interference" },
+  { at: "19:22", artist: "MARNIK & T78 ft. LaVie", title: "Maximus" },
+  { at: "23:19", artist: "Gabry Ponte & Blasterjaxx & 1World & AntoNetta", title: "Now We Are Free" },
+  { at: "25:49", artist: "MARNIK", title: "ARENA" },
+  { at: "30:21", artist: "Restricted & NIKSTER", title: "Insomnia" },
+  { at: "31:54", artist: "AREA ØNE", title: "Switch!" },
+  { at: "33:15", artist: "Steve Aoki & MARNIK & MR.BLACK", title: "Instant Moments" },
+  { at: "35:44", artist: "MARNIK", title: "Lasers" },
+  { at: "37:10", artist: "Bountyhunter", title: "Woops (Dimitri Vegas & Junkie Kid Remix)" },
+  { at: "38:31", artist: "MARNIK X MOTVS X Tony Richard", title: "Profondo Rosso" },
+  { at: "40:23", artist: "MARNIK", title: "We Came We Saw We Conquered" },
+  { at: "43:13", artist: "MARNIK & Naeleck & VINAI", title: "Boyz In Paris (Coone Remix)" },
+  { at: "44:52", artist: "Mo-Do", title: "Eins Zwei Polizei" },
+  { at: "46:59", artist: "YuB & EDMMARO", title: "FDAU" },
+  { at: "48:47", artist: "Linkin Park", title: "Numb (Trey Pearce Remix)" },
+  { at: "51:44", artist: "MARNIK & Samuel Moriero", title: "Hard Techno" },
+];
+
+/**
+ * Fideles @ Freedom Stage, Tomorrowland Weekend 2, Belgium 2026-07-26
+ * Official YouTube: https://youtu.be/e0xXSwtVwe0
+ * oEmbed 2026-08-28: channel "Tomorrowland" (@tomorrowland), title
+ * "Fideles WE2 | Tomorrowland 2026".
+ * https://www.1001tracklists.com/tracklist/9xss8m1/fideles-freedom-stage-tomorrowland-weekend-2-belgium-2026-07-26.html
+ * Overlay name TL_FIDELES is too generic; constant is the performance.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-e0xXSwtVwe0"] = TL_FIDELES_TML_WE2_FREEDOM_2026
+ * No SoundCloud in the paste — do not invent an SC slug.
+ * Video was not yet curated in YOUTUBE_SETS — this capture adds the row.
+ * Gap 0:12 → 10:51 and the long Victory Lap Five credit stay as captured.
+ * Captured 2026-08-28 — provenance 1001tl.
+ */
+export const TL_FIDELES_TML_WE2_FREEDOM_2026: FingerprintSeedRow[] = [
+  { at: "0:12", artist: "The Prodigy", title: "Breathe" },
+  { at: "10:51", artist: "FEZZO & Ricck", title: "High" },
+  { at: "15:27", artist: "Chris Lake & Chris Lorenzo pres. Anti Up", title: "I Cannot" },
+  { at: "18:45", artist: "Tame Impala", title: "Dracula (CHRSTPHR Remix)" },
+  { at: "20:48", artist: "SKIY", title: "Disco" },
+  { at: "22:50", artist: "Adam In Deep", title: "Jump Off" },
+  { at: "27:29", artist: "BARIŞ BERBER", title: "Tak Tuk" },
+  { at: "31:48", artist: "Fideles", title: "Hey Bro" },
+  { at: "35:36", artist: "Arude", title: "Duskline" },
+  { at: "39:44", artist: "BLR", title: "My Precious" },
+  { at: "41:03", artist: "Nelly Furtado", title: "Say It Right" },
+  { at: "42:22", artist: "Fatima Yamaha", title: "What's A Girl To Do" },
+  { at: "43:40", artist: "Fred again.. & Skepta & PlaqueBoyMax", title: "Victory Lap" },
+  {
+    at: "45:46",
+    artist:
+      "Fred again.. & Skepta & PlaqueBoyMax & Denzel Curry & Hanumankind & That Mexican OT & D Double E & LYNY",
+    title: "Victory Lap Five",
+  },
+  { at: "47:51", artist: "Faithless", title: "Insomnia (BLR Remix)" },
+  { at: "52:37", artist: "Groove Armada ft. Gramma Funk", title: "I See You Baby (R3HAB Remix)" },
+  { at: "1:00:03", artist: "Adriatique & GENESI & Emmit Fenn", title: "Closer" },
+  { at: "1:05:00", artist: "Hardrive", title: "Deep Inside" },
+  { at: "1:09:04", artist: "Axwell", title: "Feel The Vibe" },
+  { at: "1:13:44", artist: "Eric Prydz", title: "Opus (Trashock Remix)" },
+  { at: "1:18:33", artist: "Calvin Harris ft. Florence Welch", title: "Sweet Nothing" },
+  { at: "1:23:12", artist: "Armand van Helden", title: "I Want Your Soul (Fideles Remix)" },
+  { at: "1:28:01", artist: "Bah Samba & The Fatback Band", title: "Let The Drums Speak" },
+];
+
+/**
+ * The Chainsmokers @ Mainstage, Ultra Music Festival, Flemington Racecourse
+ * Melbourne, Australia 2026-04-11
+ * Official YouTube: https://youtu.be/A5ERobJaS_0
+ * oEmbed 2026-08-28: channel "The Chainsmokers" (@THECHAINSMOKERS), title
+ * "The Chainsmokers - Live @ Ultra Melbourne 2026".
+ * That video was already curated in YOUTUBE_SETS without a tracklist, so this
+ * capture fills an existing set.
+ * https://www.1001tracklists.com/tracklist/2fwrq83t/the-chainsmokers-mainstage-ultra-music-festival-flemington-racecourse-melbourne-australia-2026-04-11.html
+ * Overlay name TL_THE_CHAINSMOKERS is too generic; constant is the performance
+ * and is not TL_THE_CHAINSMOKERS_TML_WE1_2026 (yt-1lqmFLr-SkA).
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-A5ERobJaS_0"] = TL_THE_CHAINSMOKERS_ULTRA_MELBOURNE_MAINSTAGE_2026
+ * No SoundCloud in the paste — do not invent an SC slug.
+ * Mashup-then-component clusters stay as captured, including the 1s closer
+ * at 1:11:02–1:11:07.
+ * Captured 2026-08-28 — provenance 1001tl.
+ */
+export const TL_THE_CHAINSMOKERS_ULTRA_MELBOURNE_MAINSTAGE_2026: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "The Chainsmokers & Coldplay", title: "Something Just Like This (Acappella)" },
+  { at: "4:20", artist: "Helvig", title: "Feelings" },
+  { at: "5:30", artist: "TOYZZ vs. HUGEL & SOTO vs. The Chainsmokers & Beau Nox", title: "SexyBack vs. Jamaican (Bam Bam) vs. White Wine & Adderall (The Chainsmokers Mashup)" },
+  { at: "6:13", artist: "TOYZZ", title: "SexyBack" },
+  { at: "6:56", artist: "The Chainsmokers ft. Beau Nox", title: "White Wine & Adderall" },
+  { at: "7:40", artist: "HUGEL & SOLTO", title: "Jamaican (Bam Bam)" },
+  { at: "8:23", artist: "The Chainsmokers & Oaks vs. Eric Prydz vs. Rozalla", title: "Already Know vs. Pjanoo vs. Everybody's Free (To Feel Good) (The Chainsmokers Mashup)" },
+  { at: "8:56", artist: "Eric Prydz", title: "Pjanoo" },
+  { at: "9:28", artist: "Rozalla", title: "Everybody's Free (To Feel Good) (Acappella)" },
+  { at: "10:01", artist: "The Chainsmokers & Oaks", title: "Already Know" },
+  { at: "10:33", artist: "Congorock & Mr. Lexx & Men Machine & KENZ vs. Kelis vs. Fallon", title: "Babylon vs. Milkshake vs. Diet Coke (The Chainsmokers Mashup)" },
+  { at: "10:55", artist: "Kelis", title: "Milkshake (Acappella)" },
+  { at: "11:17", artist: "Fallon", title: "Diet Coke" },
+  { at: "11:40", artist: "Congorock ft. Mr. Lexx", title: "Babylon (David Guetta & MARTEN HØRGER pres. Men Machine & KENZ Rework)" },
+  { at: "12:02", artist: "Alice Deejay & Pickle vs. The Chainsmokers & Daya & W&W & ILLENIUM", title: "Better Off Alone vs. Don't Let Me Down (The Chainsmokers VIP Edit)" },
+  { at: "12:39", artist: "The Chainsmokers ft. Daya", title: "Don't Let Me Down (W&W Remix)" },
+  { at: "13:16", artist: "The Chainsmokers ft. Daya", title: "Don't Let Me Down (ILLENIUM Remix)" },
+  { at: "13:53", artist: "Alice Deejay", title: "Better Off Alone (Pickle Remix)" },
+  { at: "14:30", artist: "The Chainsmokers ft. Daya", title: "Don't Let Me Down (The Chainsmokers DnB Edit)" },
+  { at: "15:07", artist: "Yeah Yeah Yeahs & A-Trak vs. Disco Lines & Tinashe & Whethan vs. Deniz Koyu vs. Mau P", title: "Heads Will Roll vs. No Broke Boys vs. Tung! vs. Like I Like It (The Chainsmokers Mashup)" },
+  { at: "15:28", artist: "Yeah Yeah Yeahs", title: "Heads Will Roll (A-Trak Remix)" },
+  { at: "15:50", artist: "Deniz Koyu", title: "Tung!" },
+  { at: "16:11", artist: "Mau P", title: "Like I Like It" },
+  { at: "16:33", artist: "Disco Lines & Tinashe", title: "No Broke Boys (Whethan Remix)" },
+  { at: "16:54", artist: "Deniz Koyu", title: "Bong" },
+  { at: "17:16", artist: "Disco Lines & Tinashe", title: "No Broke Boys" },
+  { at: "17:37", artist: "OMI", title: "Cheerleader (felix jaehn Remix)" },
+  { at: "18:43", artist: "The Chainsmokers ft. ROZES", title: "Roses" },
+  { at: "20:49", artist: "Wheatus", title: "Teenage Dirtbag" },
+  { at: "22:10", artist: "The Chainsmokers ft. ROZES", title: "Roses (The Him Remix)" },
+  { at: "22:46", artist: "Tiësto & The Chainsmokers vs. 50 Cent vs. Ke$ha & SIDEPIECE", title: "Split (Only U) vs. In Da Club vs. Die Young (The Chainsmokers Mashup)" },
+  { at: "23:11", artist: "50 Cent", title: "In Da Club (Acappella)" },
+  { at: "23:36", artist: "Tiësto & The Chainsmokers", title: "Split (Only U) (The Chainsmokers VIP)" },
+  { at: "24:01", artist: "Ke$ha", title: "Die Young (SIDEPIECE Treat)" },
+  { at: "24:26", artist: "The Chainsmokers ft. Oaks", title: "Echo" },
+  { at: "28:14", artist: "ANOTR & 54 Ultra vs. Don Toliver vs. FISHER vs. Wiz Khalifa", title: "Talk To You vs. E85 vs. Stay vs. The Thrill (The Chainsmokers Mashup)" },
+  { at: "28:42", artist: "Wiz Khalifa", title: "The Thrill" },
+  { at: "29:10", artist: "FISHER", title: "Stay" },
+  { at: "29:39", artist: "Don Toliver", title: "E85" },
+  { at: "30:07", artist: "Stadiumx vs. Empire Of The Sun", title: "Vibe Right vs. Walking On A Dream (The Chainsmokers Mashup)" },
+  { at: "30:43", artist: "Empire Of The Sun", title: "Walking On A Dream (Acappella)" },
+  { at: "31:20", artist: "Stadiumx", title: "Vibe Right" },
+  { at: "31:56", artist: "John Summit & The Chainsmokers & Ilsey", title: "ALL THE TIME" },
+  { at: "35:37", artist: "The Chainsmokers ft. Emily Warren", title: "Paris (VIP)" },
+  { at: "39:04", artist: "Major Lazer ft. Vybz Kartel", title: "Pon De Floor" },
+  { at: "41:44", artist: "RÜFÜS DU SOL", title: "On My Knees (Cassian Remix)" },
+  { at: "42:11", artist: "ARTBAT", title: "Dance" },
+  { at: "42:56", artist: "The Chainsmokers & Oaks", title: "Love Is Kind" },
+  { at: "44:30", artist: "Skrillex & Habstrakt", title: "Chicken Soup (AFROJACK Seven Nation Army Edit)" },
+  { at: "44:47", artist: "The White Stripes", title: "Seven Nation Army" },
+  { at: "45:05", artist: "Skrillex & Habstrakt", title: "Chicken Soup" },
+  { at: "45:22", artist: "Justice vs. Simian", title: "We Are Your Friends (Acappella)" },
+  { at: "45:56", artist: "Chase & Status & Bou ft. Trigga & IRAH & Flowdan & Takura", title: "Baddadan (Knock2 Remix)" },
+  { at: "46:38", artist: "Soulja Boy Tell 'Em vs. Skrillex & MUST DIE! vs. Marshmello & Eptic & Juicy J", title: "Crank That (Soulja Boy) vs. VIP's vs. Hitta (The Chainsmokers Mashup)" },
+  { at: "46:50", artist: "Soulja Boy Tell 'Em", title: "Crank That (Soulja Boy)" },
+  { at: "47:02", artist: "Skrillex & MUST DIE!", title: "VIP's" },
+  { at: "47:14", artist: "Marshmello & Eptic ft. Juicy J", title: "Hitta" },
+  { at: "47:25", artist: "sombr & The Chainsmokers vs. Disclosure & Eliza Doolittle & Flume", title: "back to friends vs. You & Me (The Chainsmokers Mashup)" },
+  { at: "48:26", artist: "Disclosure ft. Eliza Doolittle", title: "You & Me (Flume Remix)" },
+  { at: "49:27", artist: "sombr", title: "back to friends (The Chainsmokers Remix)" },
+  { at: "50:28", artist: "The Chainsmokers ft. Halsey", title: "Closer" },
+  { at: "52:54", artist: "The Chainsmokers ft. Halsey", title: "Closer (VIP)" },
+  { at: "54:41", artist: "Backstreet Boys vs. Charli xcx & The Chainsmokers", title: "Everybody (Backstreet's Back) vs. b2b (The Chainsmokers Mashup)" },
+  { at: "55:10", artist: "Backstreet Boys", title: "Everybody (Backstreet's Back)" },
+  { at: "55:40", artist: "Charli xcx", title: "B2b (The Chainsmokers Remix)" },
+  { at: "56:09", artist: "Dean Turnley vs. Calvin Harris vs. Tame Impala & JENNIE vs. AFROJACK & Lucas & Steve", title: "Actin' Tough vs. I'm Not Alone vs. Dracula vs. Control (The Chainsmokers Mashup)" },
+  { at: "56:31", artist: "Calvin Harris", title: "I'm Not Alone (Calvin Harris 2019 Edit)" },
+  { at: "56:53", artist: "AFROJACK & Lucas & Steve", title: "Control" },
+  { at: "57:15", artist: "Tame Impala", title: "Dracula (JENNIE Remix)" },
+  { at: "57:37", artist: "Dean Turnley", title: "Actin' Tough" },
+  { at: "57:58", artist: "Ella Langley vs. Swedish House Mafia & Alicia Keys vs. Alan Fitzpatrick", title: "Choosin' Texas vs. Finally vs. We Do What We Want (The Chainsmokers Mashup)" },
+  { at: "58:25", artist: "Alan Fitzpatrick", title: "We Do What We Want" },
+  { at: "58:52", artist: "Swedish House Mafia & Alicia Keys", title: "Finally" },
+  { at: "59:19", artist: "Ella Langley", title: "Choosin' Texas" },
+  { at: "59:46", artist: "Michael Gray", title: "The Weekend (The chainsmokers & KENZ Remix)" },
+  { at: "1:01:06", artist: "Rune RK vs. Jack Ü ft. Bunji Garlin", title: "Jungle Calabria (Cristian Marchi & Luis Rodriguez Private Bootleg)" },
+  { at: "1:01:22", artist: "Rune RK", title: "Calabria" },
+  { at: "1:01:38", artist: "Jack Ü ft. Bunji Garlin & MX Prime", title: "Jungle Bae" },
+  { at: "1:01:54", artist: "Zedd & Lucky Date ft. Ellie Goulding", title: "Fall Into The Sky (Everybody Fuckin Jump Acappella)" },
+  { at: "1:01:57", artist: "FISHER & Shermanology", title: "It's A Killa" },
+  { at: "1:02:35", artist: "Bountyhunter", title: "Woops (Dimitri Vegas & Junkie Kid Remix / BRANDON Remix)" },
+  { at: "1:03:32", artist: "No Doubt", title: "Hella Good (Naughty Nice Remix)" },
+  { at: "1:04:52", artist: "VOLAC vs. Spice Girls & Smochi", title: "Wannabe (The Chainsmokers Mashup)" },
+  { at: "1:05:31", artist: "VOLAC", title: "Wannabe" },
+  { at: "1:06:10", artist: "Spice Girls", title: "Wannabe (Smochi Remix)" },
+  { at: "1:06:48", artist: "Flux Pavilion vs. Don Toliver vs. LYNY", title: "I Won't Stop vs. Body vs. Section (The Chainsmokers Mashup)" },
+  { at: "1:07:52", artist: "Flux Pavilion", title: "I Won't Stop" },
+  { at: "1:08:55", artist: "LYNY", title: "Section" },
+  { at: "1:09:59", artist: "Don Toliver", title: "Body" },
+  { at: "1:11:02", artist: "The Chainsmokers & Coldplay vs. Adrian Lux vs. Gigi Perez vs. Rag 'N' Bone Man & Sub Focus", title: "Something Just Like This vs. Teenage Crime vs. Sailor Song vs. All You Ever Wanted (The Chainsmokers Mashup)" },
+  { at: "1:11:03", artist: "Adrian Lux", title: "Teenage Crime (Acappella)" },
+  { at: "1:11:04", artist: "The Chainsmokers & Coldplay", title: "Something Just Like This" },
+  { at: "1:11:05", artist: "Rag 'N' Bone Man", title: "All You Ever Wanted (Sub Focus Remix)" },
+  { at: "1:11:06", artist: "The Chainsmokers & Coldplay", title: "Something Just Like This (VIP)" },
+  { at: "1:11:07", artist: "Gigi Perez", title: "Sailor Song" },
+];
+
+/**
+ * Bleu Clair @ BLEUPRINT VOL. 5 (Livestream from Jakarta), Indonesia 2022-03-31
+ * Official YouTube: https://youtu.be/_hdM8uJV1LM
+ * oEmbed 2026-08-28: channel "Bleu Clair" (@bleuclairmusic), title
+ * "Bleu Clair presents BLEUPRINT VOL. 5 (Live from Jakarta)". That video
+ * was already curated in YOUTUBE_SETS without a tracklist, so this capture
+ * fills an existing set.
+ * Official SoundCloud: https://soundcloud.com/bleuclair/bleuprintvol5
+ * oEmbed 2026-08-28: author "Bleu Clair" (soundcloud.com/bleuclair), title
+ * "BLEUPRINT VOL. 5 by Bleu Clair". SC description links the same YT.
+ * Same 1001 seed + both official permalinks → host twin (SC-first playback,
+ * YT kept). SC slug is secondary.
+ * https://www.1001tracklists.com/tracklist/blv1r3k/bleu-clair-bleuprint-vol.-5-livestream-from-jakarta-indonesia-2022-03-31.html
+ * Overlay name TL_BLEU_CLAIR is too generic; constant is the performance
+ * and is not TL_BLEU_CLAIR_EDC_LV_2023 (sc-bleuclair-edclv2023 /
+ * yt-c_sx3zum8Z0).
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-_hdM8uJV1LM"] = TL_BLEU_CLAIR_BLEUPRINT_VOL_5_JAKARTA_2022
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["sc-bleuclair-bleuprintvol5"] = TL_BLEU_CLAIR_BLEUPRINT_VOL_5_JAKARTA_2022
+ * Captured 2026-08-28 — provenance 1001tl.
+ */
+export const TL_BLEU_CLAIR_BLEUPRINT_VOL_5_JAKARTA_2022: FingerprintSeedRow[] = [
+  { at: "0:02", artist: "Bleu Clair", title: "Funk Accelerator" },
+  { at: "2:04", artist: "Sampson.", title: "Cutty" },
+  { at: "3:36", artist: "Devarra & Thincut", title: "Stay" },
+  { at: "7:07", artist: "Tommy Trash & Yolanda Be Cool", title: "Emergency" },
+  { at: "9:12", artist: "Bleu Clair ft. Teza Sumendra", title: "Hyperspace" },
+  { at: "12:14", artist: "Ben Kim", title: "Woa House" },
+  { at: "18:18", artist: "Bleu Clair & Dances", title: "Yeah Daddy" },
+  { at: "20:07", artist: "Dombresky", title: "Bubblin" },
+  { at: "24:25", artist: "Shermanology ft. Jay Colin", title: "Backfire" },
+  { at: "26:42", artist: "Wade", title: "Basement" },
+  { at: "29:27", artist: "Jaded", title: "Physically" },
+  { at: "30:59", artist: "Bleu Clair", title: "Mistake" },
+];
+
+/**
+ * Bart Skils @ Fire Stage, Loveland Festival, Netherlands 2026-08-08
+ * Official YouTube: https://youtu.be/d-EOE2u7HT4
+ * oEmbed 2026-08-28: channel "Loveland" (@LovelandEvents), title
+ * "BART SKILS | LOVELAND FESTIVAL 2026". Video was not yet curated —
+ * this capture adds the YOUTUBE_SETS row.
+ * Official SoundCloud: https://soundcloud.com/loveland-legacy/bart-skils-loveland-festival
+ * oEmbed 2026-08-28: author "Loveland" (soundcloud.com/loveland-legacy),
+ * title "BART SKILS | Loveland Festival 2026 | LL279".
+ * Same 1001 seed + both official permalinks → host twin (SC-first playback,
+ * YT kept). SC slug is secondary.
+ * Paste Wire line sc-bart-skils-bart-skils-loveland-festival is not the
+ * pasted host — do not invent an artist SC slug.
+ * https://www.1001tracklists.com/tracklist/140dd8zt/bart-skils-fire-stage-loveland-festival-netherlands-2026-08-08.html
+ * Overlay name TL_BART_SKILS is too generic; constant is the performance.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-d-EOE2u7HT4"] = TL_BART_SKILS_LOVELAND_FIRE_2026
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["sc-loveland-legacy-bart-skils-loveland-festival"] = TL_BART_SKILS_LOVELAND_FIRE_2026
+ * Captured 2026-08-28 — provenance 1001tl.
+ */
+export const TL_BART_SKILS_LOVELAND_FIRE_2026: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "Intro Spectral", title: "Intro" },
+  { at: "1:00", artist: "Bart Skils & Weska", title: "For The Music" },
+  { at: "3:10", artist: "DJ Hyperactive", title: "Wide Open (Len Faki DJ Edit)" },
+  { at: "6:30", artist: "Kos:mo & A.D.H.S.", title: "Taste Of The Night" },
+  { at: "11:20", artist: "Blawan", title: "Why They Hide Their Bodies Under My Garage? (Odd Mob Remix)" },
+  { at: "14:30", artist: "Kratex & Shreyas", title: "Taambdi Chaamdi (Sam WOLFE Remix)" },
+  { at: "18:00", artist: "HNTR", title: "Out Of My Mind" },
+  { at: "26:20", artist: "Adam Beyer & Mark Reeve", title: "Frames" },
+  { at: "30:40", artist: "Oscar L & Victor Ruiz", title: "Wasting Time" },
+  { at: "38:40", artist: "Bart Skils & Deniz Koyu", title: "Your Mind On Acid" },
+  { at: "43:00", artist: "A.D.H.S.", title: "Eos" },
+  { at: "50:20", artist: "Mattia Saviolo", title: "Never Stop The Groove" },
+  { at: "57:03", artist: "HNGT & Victor Ruiz", title: "Dontcha" },
+  { at: "1:02:35", artist: "Eli Brown", title: "Badman Riddim" },
+  { at: "1:06:30", artist: "Faithless", title: "We Come 1 (Adam Beyer Remix)" },
+  { at: "1:13:45", artist: "Juan Elvadin", title: "Mind Glue" },
+  { at: "1:22:00", artist: "Selena (KR)", title: "Lose Myself" },
+  { at: "1:26:40", artist: "Soul Central ft. Kathy Brown", title: "Strings Of Life (Stronger On My Own) (Bart Skils & Weska Remix)" },
+];

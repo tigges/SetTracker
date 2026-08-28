@@ -761,4 +761,59 @@ assert.equal(
   "sc-platform-carl-cox-45-min-boiler-room",
 );
 
+const marnikPlanaxisSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url ===
+    "https://soundcloud.com/marnikofficial/marnik-live-at-tomorrowland",
+);
+assert.ok(marnikPlanaxisSc);
+assert.equal(marnikPlanaxisSc.primaryArtist.name, "MARNIK");
+assert.equal(marnikPlanaxisSc.eventName, "Tomorrowland Belgium");
+assert.equal(marnikPlanaxisSc.type, "festival");
+assert.notEqual(
+  marnikPlanaxisSc.url,
+  "https://soundcloud.com/marnikofficial/marnik-presents-unlegend-show",
+);
+assert.equal(
+  `sc-marnikofficial-${slugify("marnik-live-at-tomorrowland")}`,
+  "sc-marnikofficial-marnik-live-at-tomorrowland",
+);
+
+const bleuBlueprintSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) => s.url === "https://soundcloud.com/bleuclair/bleuprintvol5",
+);
+assert.ok(bleuBlueprintSc);
+assert.equal(bleuBlueprintSc.primaryArtist.name, "Bleu Clair");
+assert.equal(bleuBlueprintSc.seriesName, "BLEUPRINT");
+assert.equal(bleuBlueprintSc.type, "radio");
+assert.notEqual(
+  bleuBlueprintSc.url,
+  "https://soundcloud.com/bleuclair/edclv2023",
+);
+assert.equal(
+  `sc-bleuclair-${slugify("bleuprintvol5")}`,
+  "sc-bleuclair-bleuprintvol5",
+);
+
+const bartLovelandSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url ===
+    "https://soundcloud.com/loveland-legacy/bart-skils-loveland-festival",
+);
+assert.ok(bartLovelandSc);
+assert.equal(bartLovelandSc.primaryArtist.name, "Bart Skils");
+assert.equal(bartLovelandSc.seriesName, "Loveland");
+assert.equal(bartLovelandSc.eventName, "Loveland Festival");
+assert.equal(bartLovelandSc.type, "festival");
+assert.equal(
+  SOUNDCLOUD_TRACK_SEEDS.some(
+    (s) => s.url === "https://soundcloud.com/bart-skils/bart-skils-loveland-festival",
+  ),
+  false,
+);
+assert.equal(
+  `sc-loveland-legacy-${slugify("bart-skils-loveland-festival")}`,
+  "sc-loveland-legacy-bart-skils-loveland-festival",
+);
+
 console.log("soundcloud/tracks.test.ts ok");
