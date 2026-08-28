@@ -1,7 +1,15 @@
 {
   "note": "Operator-collected 1001Tracklists URLs. All listed urls[] rows are now seeded. Prefer new operator pastes over this archive. stillMissing1001 is video-in / no 1001 page — do not invent URLs. heldPendingPlayback is 1001-in / no official YT/SC playback — seed held, do not invent or wire fan playback. pendingCuePaste is official playback + operator 1001 URL without cue rows — do not scrape 1001 or invent 1001tl seeds.",
-  "updatedAt": "2026-08-26T12:10:00.000Z",
+  "updatedAt": "2026-08-28T08:30:00.000Z",
   "urls": [
+    {
+      "label": "Anyma & Solomun · Mainstage, Ultra Miami 2025-03-29",
+      "slug": "yt-1TN78OJjJT0",
+      "name": "TL_ANYMA_SOLOMUN_ULTRA_MIAMI_MAINSTAGE_2025",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/2wrb6cmk/anyma-solomun-mainstage-ultra-music-festival-miami-united-states-2025-03-29.html",
+      "youtubeUrl": "https://youtu.be/1TN78OJjJT0",
+      "note": "Operator paste 2026-08-28. 30 timed cues on official Anyma YT already curated in videos.ts. Overlay TL_ANYMA is too generic. soundcloud.com/edmfamilylivesets2025/anyma-b2b-solomun-live-ultra-music-festival-2025-miami-day2 and hearthis.at/razorator/anymab2bsolomun-live-atultramusicfestivalmiami29-03-2025-razorator are fan reuploads — not wired. Kept ID ID / Push That (named title)."
+    },
     {
       "label": "VINAI · S2O Songkran Music Festival Thailand 2023-04-15",
       "slug": "yt-193z2Yyb-4g",
