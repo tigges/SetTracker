@@ -71,6 +71,12 @@ import {
   TL_BLACK_COFFEE_MAYAN_WARRIOR_BURNING_MAN_2025,
   TL_CLOONEE_NEONGARDEN_EDC_ORLANDO_2025,
   TL_ZEDD_ULTRA_MIAMI_MAINSTAGE_2025,
+  TL_ANYMA_SOLOMUN_ULTRA_MIAMI_MAINSTAGE_2025,
+  TL_OSCAR_AND_THE_WOLF_TML_WE1_CRYSTAL_2026,
+  TL_AGENTS_OF_TIME_TML_WE2_MAINSTAGE_2026,
+  TL_STEVE_ANGELLO_TML_WE1_CRYSTAL_2026,
+  TL_DEADMAU5_VELD_MAINSTAGE_2025,
+  TL_CARL_COX_BOILER_ROOM_IBIZA_VILLA_2013,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
@@ -873,6 +879,23 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_HARDWELL_TML_WE2_2026,
   },
   {
+    // Tomorrowland official — Mainstage WE2. Distinct from Time Warp Floor 1
+    // sc-agents-of-time-agents-of-time-time-warp-full.
+    video: "https://www.youtube.com/watch?v=5GyoClE4Q8o",
+    primaryArtist: dj("Agents Of Time", {
+      accent: "#7c5cff",
+      homeCity: "Bari, Italy",
+    }),
+    genre: "Melodic House",
+    type: "festival",
+    title: "Agents Of Time WE2 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/hjlpktt/agents-of-time-mainstage-tomorrowland-weekend-2-belgium-2026-07-25.html",
+    tracklist1001: TL_AGENTS_OF_TIME_TML_WE2_MAINSTAGE_2026,
+  },
+  {
     // Tomorrowland official — Crystal Garden WE2 B2B; 26/30 timed cues.
     video: "https://www.youtube.com/watch?v=gO03gfI_JF0",
     primaryArtist: dj("AYYBO", {
@@ -887,6 +910,39 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/1qn93jz1/ayybo-odd-mob-crystal-garden-stage-tomorrowland-weekend-2-belgium-2026-07-25.html",
     tracklist1001: TL_AYYBO_ODD_MOB_TML_WE2_2026,
+  },
+  {
+    // Tomorrowland official — Crystal Garden WE1. oEmbed @tomorrowland.
+    video: "https://www.youtube.com/watch?v=Ty03QjFnL90",
+    primaryArtist: dj("Oscar And The Wolf", {
+      accent: "#e9c46a",
+      homeCity: "Belgium",
+    }),
+    genre: "Indie Dance",
+    type: "festival",
+    title: "Oscar and the Wolf WE1 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1shz3hut/oscar-the-wolf-crystal-garden-stage-tomorrowland-weekend-1-belgium-2026-07-19.html",
+    tracklist1001: TL_OSCAR_AND_THE_WOLF_TML_WE1_CRYSTAL_2026,
+  },
+  {
+    // Tomorrowland official — Crystal Garden WE1. Distinct from Mainstage WE2
+    // yt-5AdQy7lCbN0 / TL_STEVE_ANGELLO_TML_WE2_2026.
+    video: "https://www.youtube.com/watch?v=eir5Sh_gHbo",
+    primaryArtist: dj("Steve Angello", {
+      accent: "#e63946",
+      homeCity: "Stockholm, SE",
+    }),
+    genre: "Progressive House",
+    type: "festival",
+    title: "Steve Angello WE1 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1cgmpl0k/steve-angello-crystal-garden-stage-tomorrowland-weekend-1-belgium-2026-07-18.html",
+    tracklist1001: TL_STEVE_ANGELLO_TML_WE1_CRYSTAL_2026,
   },
   {
     // Tomorrowland official — Crystal Garden WE2; 34/38 timed cues from 1001.
@@ -2306,6 +2362,9 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
   },
   // ---- DJ Mag Top 100: at least one set for chart DJs still at 0 ----
   {
+    // Official Anyma @anyma_ofc. soundcloud.com/edmfamilylivesets2025 and
+    // hearthis.at/razorator are fan reuploads — do not wire as sourceUrl /
+    // playback / TRACKLIST_1001_BY_SOURCE_SLUG.
     video: "https://www.youtube.com/watch?v=1TN78OJjJT0",
     primaryArtist: dj("Anyma", {
       accent: "#7b2cbf"
@@ -2314,15 +2373,22 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     type: "festival",
     title: "Anyma b2b Solomun — Ultra Music Festival Miami 2025",
     eventName: "Ultra Music Festival Miami",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2wrb6cmk/anyma-solomun-mainstage-ultra-music-festival-miami-united-states-2025-03-29.html",
+    tracklist1001: TL_ANYMA_SOLOMUN_ULTRA_MIAMI_MAINSTAGE_2025,
   },
   {
+    // 1001 search for this catalog title hits
+    // "Peggy Gou @ Boiler Room x Dekmantel Festival 2017-08-04".
+    // Title had no year, so cards fell through to upload time. Do not invent
+    // the 1001 page URL — paste the tracklist to wire it.
     video: "https://www.youtube.com/watch?v=nKHpbiYCtDQ",
     primaryArtist: dj("Peggy Gou", {
       accent: "#e63946"
     }),
     genre: "House",
     type: "festival",
-    title: "Peggy Gou | Boiler Room x Dekmantel Festival: Amsterdam",
+    title: "Peggy Gou | Boiler Room x Dekmantel Festival: Amsterdam 2017-08-04",
     seriesName: "Boiler Room",
     eventName: "Dekmantel Festival",
   },
@@ -2426,6 +2492,10 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     eventName: "Boiler Room London",
   },
   {
+    // Official Boiler Room upload already curated. Operator 1001 paste
+    // 2026-08-28 fills clocks. Official SC twin is
+    // soundcloud.com/platform/carl-cox-45-min-boiler-room. Overlay
+    // TL_CARL_COX is too generic. Title year is the performance date.
     video: "https://www.youtube.com/watch?v=vy-k0FopsmY",
     primaryArtist: dj("Carl Cox", {
       accent: "#e63946",
@@ -2433,9 +2503,12 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     }),
     genre: "Techno",
     type: "festival",
-    title: "Carl Cox Boiler Room Ibiza Villa Takeovers DJ Set",
+    title: "Carl Cox Boiler Room Ibiza Villa Takeovers DJ Set 2013-08-15",
     seriesName: "Boiler Room",
     eventName: "Ibiza Villa Takeovers",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/3v69b81/carl-cox-carl-cox-friends-ibiza-villa-takeovers-boiler-room-2013-08-15.html",
+    tracklist1001: TL_CARL_COX_BOILER_ROOM_IBIZA_VILLA_2013,
   },
   {
     // Operator-supplied official channel upload (Rave Culture Live 002).
@@ -2959,12 +3032,17 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_CHRIS_STUSSY_BOILER_ROOM_EDINBURGH_2024,
   },
   {
+    // Official deadmau5 upload already curated. Operator 1001 paste
+    // 2026-08-28 fills clocks. Overlay TL_DEADMAU5 is too generic.
     video: "https://www.youtube.com/watch?v=5LqJCIi6p7Y",
     primaryArtist: dj("deadmau5", { accent: "#00f5d4" }),
     genre: "Progressive House",
     type: "festival",
     title: "deadmau5 Live @ VELD Music Festival 2025 Toronto, Canada",
     eventName: "VELD Music Festival",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2lj793ht/deadmau5-mainstage-veld-music-festival-canada-2025-08-03.html",
+    tracklist1001: TL_DEADMAU5_VELD_MAINSTAGE_2025,
   },
   {
     video: "https://www.youtube.com/watch?v=PT_IBAfbPo8",

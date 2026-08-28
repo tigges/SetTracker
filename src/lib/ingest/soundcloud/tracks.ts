@@ -709,4 +709,18 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     type: "festival",
     minDurationSec: 60 * 60,
   },
+  {
+    // Official Boiler Room SC (soundcloud.com/platform). Same 1001 seed as
+    // yt-vy-k0FopsmY — host twin, SC-first playback. Never wire sc-https://….
+    url: "https://soundcloud.com/platform/carl-cox-45-min-boiler-room",
+    primaryArtist: dj("Carl Cox", {
+      accent: "#e63946",
+      homeCity: "Barbados / UK",
+    }),
+    genre: "Techno",
+    seriesName: "Boiler Room",
+    eventName: "Ibiza Villa Takeovers",
+    type: "festival",
+    minDurationSec: 30 * 60,
+  },
 ];

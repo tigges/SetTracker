@@ -335,6 +335,7 @@ export type FeedItem = Awaited<ReturnType<typeof getFeed>>[number];
 const SET_DETAIL_INCLUDE = {
   artists: { include: { dj: true }, orderBy: { isPrimary: "desc" as const } },
   event: true,
+  edition: { select: { year: true, label: true } },
   series: true,
   plays: {
     orderBy: { position: "asc" as const },
@@ -457,6 +458,8 @@ export async function getSetBySlug(slug: string) {
     type: set.type,
     genre: normalizeGenre(set.genre),
     publishedAt: set.publishedAt,
+    performedAt: set.performedAt,
+    editionYear: set.edition?.year ?? null,
     durationSec: set.durationSec,
     sourceName: set.sourceName,
     sourceUrl: set.sourceUrl,

@@ -1,7 +1,56 @@
 {
   "note": "Operator-collected 1001Tracklists URLs. All listed urls[] rows are now seeded. Prefer new operator pastes over this archive. stillMissing1001 is video-in / no 1001 page — do not invent URLs. heldPendingPlayback is 1001-in / no official YT/SC playback — seed held, do not invent or wire fan playback. pendingCuePaste is official playback + operator 1001 URL without cue rows — do not scrape 1001 or invent 1001tl seeds.",
-  "updatedAt": "2026-08-26T12:10:00.000Z",
+  "updatedAt": "2026-08-28T08:30:00.000Z",
   "urls": [
+    {
+      "label": "Carl Cox · Carl Cox & Friends, Ibiza Villa Takeovers, Boiler Room 2013-08-15",
+      "slug": "yt-vy-k0FopsmY",
+      "name": "TL_CARL_COX_BOILER_ROOM_IBIZA_VILLA_2013",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/3v69b81/carl-cox-carl-cox-friends-ibiza-villa-takeovers-boiler-room-2013-08-15.html",
+      "youtubeUrl": "https://youtu.be/vy-k0FopsmY",
+      "soundcloudUrl": "https://soundcloud.com/platform/carl-cox-45-min-boiler-room",
+      "note": "Operator paste 2026-08-28. 13 timed cues on official Boiler Room YT (@boilerroom) already curated in videos.ts plus official SC soundcloud.com/platform. Host twin — SC slug sc-platform-carl-cox-45-min-boiler-room is secondary. Overlay TL_CARL_COX is too generic. Only Carl Cox Boiler Room row in the catalog (not NYC)."
+    },
+    {
+      "label": "deadmau5 · Mainstage, Veld Music Festival 2025-08-03",
+      "slug": "yt-5LqJCIi6p7Y",
+      "name": "TL_DEADMAU5_VELD_MAINSTAGE_2025",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/2lj793ht/deadmau5-mainstage-veld-music-festival-canada-2025-08-03.html",
+      "youtubeUrl": "https://youtu.be/5LqJCIi6p7Y",
+      "note": "Operator paste 2026-08-28. 22 timed cues on official deadmau5 YT (@deadmau5) already curated in videos.ts. Overlay TL_DEADMAU5 is too generic. No SC in the paste — do not invent an SC slug. The Veldt + Tommy Trash Remix at 1:06:30 / 1:06:31 kept as captured."
+    },
+    {
+      "label": "Steve Angello · Crystal Garden, Tomorrowland WE1 2026-07-18",
+      "slug": "yt-eir5Sh_gHbo",
+      "name": "TL_STEVE_ANGELLO_TML_WE1_CRYSTAL_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/1cgmpl0k/steve-angello-crystal-garden-stage-tomorrowland-weekend-1-belgium-2026-07-18.html",
+      "youtubeUrl": "https://youtu.be/eir5Sh_gHbo",
+      "note": "Operator paste 2026-08-28. 77 timed cues on official Tomorrowland YT (@tomorrowland). Overlay TL_STEVE_ANGELLO is too generic and is not the Mainstage WE2 seed (yt-5AdQy7lCbN0). No SC in the paste — do not invent an SC slug. Distinct from TL_STEVE_ANGELLO_TML_WE2_2026."
+    },
+    {
+      "label": "Agents Of Time · Mainstage, Tomorrowland WE2 2026-07-25",
+      "slug": "yt-5GyoClE4Q8o",
+      "name": "TL_AGENTS_OF_TIME_TML_WE2_MAINSTAGE_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/hjlpktt/agents-of-time-mainstage-tomorrowland-weekend-2-belgium-2026-07-25.html",
+      "youtubeUrl": "https://youtu.be/5GyoClE4Q8o",
+      "note": "Operator paste 2026-08-28. 17 timed cues on official Tomorrowland YT (@tomorrowland). Overlay TL_AGENTS_OF_TIME is too generic and is not the Time Warp Floor 1 seed. No SC in the paste — do not invent an SC slug. Distinct from sc-agents-of-time-agents-of-time-time-warp-full."
+    },
+    {
+      "label": "Oscar And The Wolf · Crystal Garden, Tomorrowland WE1 2026-07-19",
+      "slug": "yt-Ty03QjFnL90",
+      "name": "TL_OSCAR_AND_THE_WOLF_TML_WE1_CRYSTAL_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/1shz3hut/oscar-the-wolf-crystal-garden-stage-tomorrowland-weekend-1-belgium-2026-07-19.html",
+      "youtubeUrl": "https://youtu.be/Ty03QjFnL90",
+      "note": "Operator paste 2026-08-28. 18 timed cues on official Tomorrowland YT (@tomorrowland). Overlay TL_OSCAR is too generic. No SC in the paste — do not invent an SC slug. Distinct from Blondish / Camila Jun Crystal Garden WE1."
+    },
+    {
+      "label": "Anyma & Solomun · Mainstage, Ultra Miami 2025-03-29",
+      "slug": "yt-1TN78OJjJT0",
+      "name": "TL_ANYMA_SOLOMUN_ULTRA_MIAMI_MAINSTAGE_2025",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/2wrb6cmk/anyma-solomun-mainstage-ultra-music-festival-miami-united-states-2025-03-29.html",
+      "youtubeUrl": "https://youtu.be/1TN78OJjJT0",
+      "note": "Operator paste 2026-08-28. 30 timed cues on official Anyma YT already curated in videos.ts. Overlay TL_ANYMA is too generic. soundcloud.com/edmfamilylivesets2025/anyma-b2b-solomun-live-ultra-music-festival-2025-miami-day2 and hearthis.at/razorator/anymab2bsolomun-live-atultramusicfestivalmiami29-03-2025-razorator are fan reuploads — not wired. Kept ID ID / Push That (named title)."
+    },
     {
       "label": "VINAI · S2O Songkran Music Festival Thailand 2023-04-15",
       "slug": "yt-193z2Yyb-4g",

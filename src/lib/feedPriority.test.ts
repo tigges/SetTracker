@@ -26,6 +26,7 @@ import {
   resolveVenueTier,
   setPerformanceTime,
   setPerformanceYear,
+  setPerformanceYearLabel,
   yearFromSetTitle,
 } from "./feedPriority";
 import { resolveFeedRanks } from "./feedPriorityResolve";
@@ -72,6 +73,41 @@ describe("title year vs upload date", () => {
         now,
       ),
       2018,
+    );
+  });
+
+  it("prints the 1001 night year when the catalog title omits it", () => {
+    assert.equal(
+      setPerformanceYearLabel(
+        {
+          title: "Peggy Gou at Palais des Beaux-Arts, Lille for Cercle",
+          publishedAt: "2026-08-01T00:00:00.000Z",
+          performedAt: "2018-12-03T00:00:00.000Z",
+        },
+        now,
+      ),
+      "2018",
+    );
+  });
+
+  it("reads 2017 from the Boiler Room x Dekmantel catalog title", () => {
+    assert.equal(
+      setPerformanceYearLabel(
+        {
+          title:
+            "Peggy Gou | Boiler Room x Dekmantel Festival: Amsterdam 2017-08-04",
+          publishedAt: "2026-08-01T00:00:00.000Z",
+        },
+        now,
+      ),
+      "2017",
+    );
+    assert.equal(
+      isArchiveTitledSet(
+        "Peggy Gou | Boiler Room x Dekmantel Festival: Amsterdam 2017-08-04",
+        now,
+      ),
+      true,
     );
   });
 

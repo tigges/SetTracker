@@ -11,6 +11,11 @@ import { SetTimeline } from "@/components/SetTimeline";
 import { setHostHeadline } from "@/lib/brandHosts";
 import { detectPlaybackHost, unusedOfficialHostLinks } from "@/lib/playback";
 import { pageMeta } from "@/lib/site";
+import {
+  hasPrecisePerformanceDate,
+  setPerformanceTime,
+  setPerformanceYearLabel,
+} from "@/lib/feedPriority";
 import { SET_TYPE_META, fmtDate, fmtDuration } from "@/lib/status";
 import { isTalkPlay } from "@/lib/publishPlays";
 import { beatportCoverage } from "@/lib/trackMeta";
@@ -31,9 +36,13 @@ export async function generateMetadata({
   const set = await getSetBySlug(slug);
   if (!set) return { title: "Set" };
   const artists = set.artists.map((a) => a.name).join(" b2b ");
+  const when = setPerformanceTime(set);
+  const whenLabel = hasPrecisePerformanceDate(set)
+    ? fmtDate(new Date(when))
+    : setPerformanceYearLabel(set);
   return pageMeta({
     title: set.title,
-    description: [artists, set.event?.name, fmtDate(set.publishedAt), `${set.trackCount} tracks`]
+    description: [artists, set.event?.name, whenLabel, `${set.trackCount} tracks`]
       .filter(Boolean)
       .join(" · "),
     path: `/sets/${set.slug}`,
@@ -144,7 +153,11 @@ export default async function SetPage({
           </div>
 
           <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-[12px] text-muted2">
-            <span className="mono">{fmtDate(set.publishedAt)}</span>
+            <span className="mono">
+              {hasPrecisePerformanceDate(set)
+                ? fmtDate(new Date(setPerformanceTime(set)))
+                : setPerformanceYearLabel(set)}
+            </span>
             <span className="mono">{fmtDuration(set.durationSec)}</span>
             <span className="mono">{set.trackCount} tracks</span>
             {(() => {

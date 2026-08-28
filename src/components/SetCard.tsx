@@ -11,7 +11,11 @@ import {
   fmtDuration,
   fmtRelative,
 } from "@/lib/status";
-import { FEED_SPOTLIGHT_META, setPerformanceTime } from "@/lib/feedPriority";
+import {
+  FEED_SPOTLIGHT_META,
+  setPerformanceTime,
+  setPerformanceYearLabel,
+} from "@/lib/feedPriority";
 import { isListPendingOfficialSet, setDisplayThumb } from "@/lib/setBrowse";
 import type { FeedItem } from "@/lib/queries";
 
@@ -33,6 +37,7 @@ export function SetCard({
   });
   const place = set.eventName ?? set.seriesName ?? type.label;
   const when = new Date(setPerformanceTime(set));
+  const year = setPerformanceYearLabel(set);
   const thumb = setDisplayThumb({
     imageUrl: set.imageUrl,
     primaryDjImageUrl: set.primaryDj?.imageUrl,
@@ -83,7 +88,7 @@ export function SetCard({
             {place}
             <span className="text-muted2">
               {" "}
-              ·{" "}
+              · {year} ·{" "}
               <time title={fmtDate(when)}>
                 {fmtRelative(when)}
               </time>

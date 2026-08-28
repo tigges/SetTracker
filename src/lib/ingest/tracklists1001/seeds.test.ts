@@ -192,6 +192,12 @@ import {
   TL_BLACK_COFFEE_MAYAN_WARRIOR_BURNING_MAN_2025,
   TL_CLOONEE_NEONGARDEN_EDC_ORLANDO_2025,
   TL_ZEDD_ULTRA_MIAMI_MAINSTAGE_2025,
+  TL_ANYMA_SOLOMUN_ULTRA_MIAMI_MAINSTAGE_2025,
+  TL_OSCAR_AND_THE_WOLF_TML_WE1_CRYSTAL_2026,
+  TL_AGENTS_OF_TIME_TML_WE2_MAINSTAGE_2026,
+  TL_STEVE_ANGELLO_TML_WE1_CRYSTAL_2026,
+  TL_DEADMAU5_VELD_MAINSTAGE_2025,
+  TL_CARL_COX_BOILER_ROOM_IBIZA_VILLA_2013,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
@@ -5000,6 +5006,217 @@ for (let i = 1; i < clooneeOrlando.length; i++) {
 assert.notEqual(
   TL_CLOONEE_NEONGARDEN_EDC_ORLANDO_2025,
   TL_CLOONEE_EDC_LV_2022,
+);
+
+// Anyma & Solomun @ Mainstage, Ultra Miami 2025-03-29 — official Anyma YT.
+// Fan SC edmfamilylivesets2025 + hearthis razorator stay unwired.
+assertSeedClocks(TL_ANYMA_SOLOMUN_ULTRA_MIAMI_MAINSTAGE_2025);
+assert.equal(TL_ANYMA_SOLOMUN_ULTRA_MIAMI_MAINSTAGE_2025.length, 30);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-1TN78OJjJT0"],
+  TL_ANYMA_SOLOMUN_ULTRA_MIAMI_MAINSTAGE_2025,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-edmfamilylivesets2025-anyma-b2b-solomun-live-ultra-music-festival-2025-miami-day2"
+  ],
+  undefined,
+);
+const anymaSolomunUltra = tracklist1001RowsToPlays(
+  TL_ANYMA_SOLOMUN_ULTRA_MIAMI_MAINSTAGE_2025,
+);
+assert.equal(anymaSolomunUltra.length, 30);
+assert.equal(anymaSolomunUltra[0]?.provenance, "1001tl");
+assert.equal(anymaSolomunUltra[0]?.timestamp, 15);
+assert.equal(
+  anymaSolomunUltra[0]?.trackTitle,
+  "At Night (Anyma & Layton Giordani Remix)",
+);
+assert.equal(anymaSolomunUltra[25]?.artistName, "ID ID");
+assert.equal(anymaSolomunUltra[25]?.trackTitle, "Push That");
+assert.equal(anymaSolomunUltra[25]?.timestamp, 3600 + 15 * 60 + 12);
+assert.equal(anymaSolomunUltra[29]?.trackTitle, "Change It");
+assert.equal(anymaSolomunUltra[29]?.timestamp, 3600 + 26 * 60 + 42);
+assert.equal(
+  anymaSolomunUltra.some((p) => /^id$/i.test(p.trackTitle ?? "")),
+  false,
+  "named ID ID / Push That stays; bare title ID must stay dropped",
+);
+for (let i = 1; i < anymaSolomunUltra.length; i++) {
+  assert.ok(
+    (anymaSolomunUltra[i]!.timestamp ?? 0) >
+      (anymaSolomunUltra[i - 1]!.timestamp ?? 0),
+    `Anyma & Solomun Ultra Miami clocks must increase at index ${i}`,
+  );
+}
+assert.equal(isWiredTracklistSlug("yt-1TN78OJjJT0"), true);
+assert.equal(
+  isWiredTracklistSlug(
+    "sc-edmfamilylivesets2025-anyma-b2b-solomun-live-ultra-music-festival-2025-miami-day2",
+  ),
+  false,
+);
+
+// Oscar And The Wolf @ Crystal Garden, Tomorrowland WE1 2026-07-19 —
+// official Tomorrowland YT. Overlay TL_OSCAR is too generic.
+assertSeedClocks(TL_OSCAR_AND_THE_WOLF_TML_WE1_CRYSTAL_2026);
+assert.equal(TL_OSCAR_AND_THE_WOLF_TML_WE1_CRYSTAL_2026.length, 18);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-Ty03QjFnL90"],
+  TL_OSCAR_AND_THE_WOLF_TML_WE1_CRYSTAL_2026,
+);
+const oscarWolf = tracklist1001RowsToPlays(
+  TL_OSCAR_AND_THE_WOLF_TML_WE1_CRYSTAL_2026,
+);
+assert.equal(oscarWolf.length, 18);
+assert.equal(oscarWolf[0]?.provenance, "1001tl");
+assert.equal(oscarWolf[0]?.timestamp, 2 * 60 + 11);
+assert.equal(oscarWolf[0]?.trackTitle, "Universe");
+assert.equal(oscarWolf[17]?.trackTitle, "Strange Entity");
+assert.equal(oscarWolf[17]?.timestamp, 56 * 60 + 48);
+for (let i = 1; i < oscarWolf.length; i++) {
+  assert.ok(
+    (oscarWolf[i]!.timestamp ?? 0) > (oscarWolf[i - 1]!.timestamp ?? 0),
+    `Oscar And The Wolf TML WE1 clocks must increase at index ${i}`,
+  );
+}
+assert.equal(isWiredTracklistSlug("yt-Ty03QjFnL90"), true);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-Ty03QjFnL90"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-n3TESnQqiQ4"],
+  "Oscar And The Wolf is not the Blondish Crystal Garden WE1 seed",
+);
+
+// Agents Of Time @ Mainstage, Tomorrowland WE2 2026-07-25 — official
+// Tomorrowland YT. Distinct from Time Warp Floor 1.
+assertSeedClocks(TL_AGENTS_OF_TIME_TML_WE2_MAINSTAGE_2026);
+assert.equal(TL_AGENTS_OF_TIME_TML_WE2_MAINSTAGE_2026.length, 17);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-5GyoClE4Q8o"],
+  TL_AGENTS_OF_TIME_TML_WE2_MAINSTAGE_2026,
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-5GyoClE4Q8o"],
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-agents-of-time-agents-of-time-time-warp-full"
+  ],
+);
+const aotTml = tracklist1001RowsToPlays(TL_AGENTS_OF_TIME_TML_WE2_MAINSTAGE_2026);
+assert.equal(aotTml.length, 17);
+assert.equal(aotTml[0]?.provenance, "1001tl");
+assert.equal(aotTml[0]?.timestamp, 13);
+assert.equal(aotTml[0]?.trackTitle, "Forever");
+assert.equal(aotTml[16]?.trackTitle, "I Can't Do Without You");
+assert.equal(aotTml[16]?.timestamp, 56 * 60 + 19);
+for (let i = 1; i < aotTml.length; i++) {
+  assert.ok(
+    (aotTml[i]!.timestamp ?? 0) > (aotTml[i - 1]!.timestamp ?? 0),
+    `Agents Of Time TML WE2 clocks must increase at index ${i}`,
+  );
+}
+assert.equal(isWiredTracklistSlug("yt-5GyoClE4Q8o"), true);
+assert.notEqual(
+  TL_AGENTS_OF_TIME_TML_WE2_MAINSTAGE_2026,
+  TL_AGENTS_OF_TIME_TIME_WARP_FLOOR_1_2026,
+);
+
+// Steve Angello @ Crystal Garden, Tomorrowland WE1 2026-07-18 — official
+// Tomorrowland YT. Distinct from Mainstage WE2.
+assertSeedClocks(TL_STEVE_ANGELLO_TML_WE1_CRYSTAL_2026);
+assert.equal(TL_STEVE_ANGELLO_TML_WE1_CRYSTAL_2026.length, 77);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-eir5Sh_gHbo"],
+  TL_STEVE_ANGELLO_TML_WE1_CRYSTAL_2026,
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-eir5Sh_gHbo"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-5AdQy7lCbN0"],
+);
+assert.notEqual(
+  TL_STEVE_ANGELLO_TML_WE1_CRYSTAL_2026,
+  TL_STEVE_ANGELLO_TML_WE2_2026,
+);
+const angelloCrystal = tracklist1001RowsToPlays(
+  TL_STEVE_ANGELLO_TML_WE1_CRYSTAL_2026,
+);
+assert.equal(angelloCrystal.length, 77);
+assert.equal(angelloCrystal[0]?.provenance, "1001tl");
+assert.equal(angelloCrystal[0]?.timestamp, 11);
+assert.equal(angelloCrystal[0]?.trackTitle, "Darkness In Me");
+assert.equal(angelloCrystal[76]?.trackTitle, "Happiness Is So Sad");
+assert.equal(angelloCrystal[76]?.timestamp, 2 * 3600 + 55 * 60 + 10);
+for (let i = 1; i < angelloCrystal.length; i++) {
+  assert.ok(
+    (angelloCrystal[i]!.timestamp ?? 0) >
+      (angelloCrystal[i - 1]!.timestamp ?? 0),
+    `Steve Angello TML WE1 Crystal clocks must increase at index ${i}`,
+  );
+}
+assert.equal(isWiredTracklistSlug("yt-eir5Sh_gHbo"), true);
+assert.equal(isWiredTracklistSlug("yt-5AdQy7lCbN0"), true);
+
+// deadmau5 @ Mainstage, Veld 2025-08-03 — official @deadmau5 YT already
+// curated. Overlay TL_DEADMAU5 is too generic. The Veldt + remix 1s pair
+// stays as captured.
+assertSeedClocks(TL_DEADMAU5_VELD_MAINSTAGE_2025);
+assert.equal(TL_DEADMAU5_VELD_MAINSTAGE_2025.length, 22);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-5LqJCIi6p7Y"],
+  TL_DEADMAU5_VELD_MAINSTAGE_2025,
+);
+const mau5Veld = tracklist1001RowsToPlays(TL_DEADMAU5_VELD_MAINSTAGE_2025);
+assert.equal(mau5Veld.length, 22);
+assert.equal(mau5Veld[0]?.provenance, "1001tl");
+assert.equal(mau5Veld[0]?.timestamp, 0);
+assert.equal(mau5Veld[0]?.trackTitle, "Artefact");
+assert.equal(mau5Veld[20]?.trackTitle, "The Veldt");
+assert.equal(mau5Veld[20]?.timestamp, 66 * 60 + 30);
+assert.equal(mau5Veld[21]?.trackTitle, "The Veldt (Tommy Trash Remix)");
+assert.equal(mau5Veld[21]?.timestamp, 66 * 60 + 31);
+for (let i = 1; i < mau5Veld.length; i++) {
+  assert.ok(
+    (mau5Veld[i]!.timestamp ?? 0) > (mau5Veld[i - 1]!.timestamp ?? 0),
+    `deadmau5 Veld clocks must increase at index ${i}`,
+  );
+}
+assert.equal(isWiredTracklistSlug("yt-5LqJCIi6p7Y"), true);
+
+// Carl Cox @ Boiler Room Ibiza Villa Takeovers 2013-08-15 — official
+// Boiler Room YT + SC host twin. Overlay TL_CARL_COX is too generic.
+assertSeedClocks(TL_CARL_COX_BOILER_ROOM_IBIZA_VILLA_2013);
+assert.equal(TL_CARL_COX_BOILER_ROOM_IBIZA_VILLA_2013.length, 13);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-vy-k0FopsmY"],
+  TL_CARL_COX_BOILER_ROOM_IBIZA_VILLA_2013,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-platform-carl-cox-45-min-boiler-room"],
+  TL_CARL_COX_BOILER_ROOM_IBIZA_VILLA_2013,
+);
+const coxVilla = tracklist1001RowsToPlays(
+  TL_CARL_COX_BOILER_ROOM_IBIZA_VILLA_2013,
+);
+assert.equal(coxVilla.length, 13);
+assert.equal(coxVilla[0]?.provenance, "1001tl");
+assert.equal(coxVilla[0]?.timestamp, 0);
+assert.equal(coxVilla[0]?.trackTitle, "Muzik Xpress");
+assert.equal(coxVilla[12]?.trackTitle, "Finally");
+assert.equal(coxVilla[12]?.timestamp, 40 * 60 + 50);
+for (let i = 1; i < coxVilla.length; i++) {
+  assert.ok(
+    (coxVilla[i]!.timestamp ?? 0) > (coxVilla[i - 1]!.timestamp ?? 0),
+    `Carl Cox Boiler Room Ibiza clocks must increase at index ${i}`,
+  );
+}
+assert.equal(isWiredTracklistSlug("yt-vy-k0FopsmY"), true);
+assert.equal(
+  isWiredTracklistSlug("sc-platform-carl-cox-45-min-boiler-room"),
+  true,
+);
+assert.equal(isSecondaryPlaybackSlug("yt-vy-k0FopsmY"), false);
+assert.equal(
+  isSecondaryPlaybackSlug("sc-platform-carl-cox-45-min-boiler-room"),
+  true,
 );
 
 console.log("tracklists1001/seeds.test.ts ok");

@@ -747,4 +747,18 @@ assert.equal(
   "sc-agents-of-time-agents-of-time-time-warp-full",
 );
 
+const coxVillaSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url === "https://soundcloud.com/platform/carl-cox-45-min-boiler-room",
+);
+assert.ok(coxVillaSc);
+assert.equal(coxVillaSc.primaryArtist.name, "Carl Cox");
+assert.equal(coxVillaSc.eventName, "Ibiza Villa Takeovers");
+assert.equal(coxVillaSc.seriesName, "Boiler Room");
+assert.equal(coxVillaSc.type, "festival");
+assert.equal(
+  `sc-platform-${slugify("carl-cox-45-min-boiler-room")}`,
+  "sc-platform-carl-cox-45-min-boiler-room",
+);
+
 console.log("soundcloud/tracks.test.ts ok");
