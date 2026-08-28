@@ -192,6 +192,7 @@ import {
   TL_BLACK_COFFEE_MAYAN_WARRIOR_BURNING_MAN_2025,
   TL_CLOONEE_NEONGARDEN_EDC_ORLANDO_2025,
   TL_ZEDD_ULTRA_MIAMI_MAINSTAGE_2025,
+  TL_ANYMA_SOLOMUN_ULTRA_MIAMI_MAINSTAGE_2025,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
@@ -5000,6 +5001,55 @@ for (let i = 1; i < clooneeOrlando.length; i++) {
 assert.notEqual(
   TL_CLOONEE_NEONGARDEN_EDC_ORLANDO_2025,
   TL_CLOONEE_EDC_LV_2022,
+);
+
+// Anyma & Solomun @ Mainstage, Ultra Miami 2025-03-29 — official Anyma YT.
+// Fan SC edmfamilylivesets2025 + hearthis razorator stay unwired.
+assertSeedClocks(TL_ANYMA_SOLOMUN_ULTRA_MIAMI_MAINSTAGE_2025);
+assert.equal(TL_ANYMA_SOLOMUN_ULTRA_MIAMI_MAINSTAGE_2025.length, 30);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-1TN78OJjJT0"],
+  TL_ANYMA_SOLOMUN_ULTRA_MIAMI_MAINSTAGE_2025,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-edmfamilylivesets2025-anyma-b2b-solomun-live-ultra-music-festival-2025-miami-day2"
+  ],
+  undefined,
+);
+const anymaSolomunUltra = tracklist1001RowsToPlays(
+  TL_ANYMA_SOLOMUN_ULTRA_MIAMI_MAINSTAGE_2025,
+);
+assert.equal(anymaSolomunUltra.length, 30);
+assert.equal(anymaSolomunUltra[0]?.provenance, "1001tl");
+assert.equal(anymaSolomunUltra[0]?.timestamp, 15);
+assert.equal(
+  anymaSolomunUltra[0]?.trackTitle,
+  "At Night (Anyma & Layton Giordani Remix)",
+);
+assert.equal(anymaSolomunUltra[25]?.artistName, "ID ID");
+assert.equal(anymaSolomunUltra[25]?.trackTitle, "Push That");
+assert.equal(anymaSolomunUltra[25]?.timestamp, 3600 + 15 * 60 + 12);
+assert.equal(anymaSolomunUltra[29]?.trackTitle, "Change It");
+assert.equal(anymaSolomunUltra[29]?.timestamp, 3600 + 26 * 60 + 42);
+assert.equal(
+  anymaSolomunUltra.some((p) => /^id$/i.test(p.trackTitle ?? "")),
+  false,
+  "named ID ID / Push That stays; bare title ID must stay dropped",
+);
+for (let i = 1; i < anymaSolomunUltra.length; i++) {
+  assert.ok(
+    (anymaSolomunUltra[i]!.timestamp ?? 0) >
+      (anymaSolomunUltra[i - 1]!.timestamp ?? 0),
+    `Anyma & Solomun Ultra Miami clocks must increase at index ${i}`,
+  );
+}
+assert.equal(isWiredTracklistSlug("yt-1TN78OJjJT0"), true);
+assert.equal(
+  isWiredTracklistSlug(
+    "sc-edmfamilylivesets2025-anyma-b2b-solomun-live-ultra-music-festival-2025-miami-day2",
+  ),
+  false,
 );
 
 console.log("tracklists1001/seeds.test.ts ok");

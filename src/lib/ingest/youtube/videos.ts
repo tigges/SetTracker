@@ -71,6 +71,7 @@ import {
   TL_BLACK_COFFEE_MAYAN_WARRIOR_BURNING_MAN_2025,
   TL_CLOONEE_NEONGARDEN_EDC_ORLANDO_2025,
   TL_ZEDD_ULTRA_MIAMI_MAINSTAGE_2025,
+  TL_ANYMA_SOLOMUN_ULTRA_MIAMI_MAINSTAGE_2025,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
@@ -2306,6 +2307,9 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
   },
   // ---- DJ Mag Top 100: at least one set for chart DJs still at 0 ----
   {
+    // Official Anyma @anyma_ofc. soundcloud.com/edmfamilylivesets2025 and
+    // hearthis.at/razorator are fan reuploads — do not wire as sourceUrl /
+    // playback / TRACKLIST_1001_BY_SOURCE_SLUG.
     video: "https://www.youtube.com/watch?v=1TN78OJjJT0",
     primaryArtist: dj("Anyma", {
       accent: "#7b2cbf"
@@ -2314,6 +2318,9 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     type: "festival",
     title: "Anyma b2b Solomun — Ultra Music Festival Miami 2025",
     eventName: "Ultra Music Festival Miami",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2wrb6cmk/anyma-solomun-mainstage-ultra-music-festival-miami-united-states-2025-03-29.html",
+    tracklist1001: TL_ANYMA_SOLOMUN_ULTRA_MIAMI_MAINSTAGE_2025,
   },
   {
     video: "https://www.youtube.com/watch?v=nKHpbiYCtDQ",
