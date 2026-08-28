@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import {
   clockStringInText,
   compareCueQueueSeeds,
+  cueLlmExtrasEnabled,
   cueQueueHostRank,
   filterProposedCues,
   firstPartyTextHasClocks,
@@ -165,5 +166,20 @@ assert.equal(
   true,
 );
 assert.equal(firstPartyTextHasClocks("1. Artist - Title\n2. Other - Song"), false);
+
+assert.equal(cueLlmExtrasEnabled({}), false);
+assert.equal(cueLlmExtrasEnabled({ LLM_RESEARCH_APPLY: "1" }), false);
+assert.equal(
+  cueLlmExtrasEnabled({ LLM_CUE_EXTRAS: "1", LLM_RESEARCH_APPLY: "1" }),
+  true,
+);
+assert.equal(
+  cueLlmExtrasEnabled({
+    LLM_CUE_EXTRAS: "1",
+    LLM_RESEARCH_APPLY: "1",
+    LLM_RESEARCH: "0",
+  }),
+  false,
+);
 
 console.log("llmCues.test.ts ok");

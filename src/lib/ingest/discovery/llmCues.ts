@@ -8,7 +8,8 @@
  * Never overwrite 1001tl / fingerprint / community.
  *
  *   LLM_RESEARCH_JOBS=cues npm run research:handles
- *   LLM_RESEARCH_APPLY=0   parser clocks still write; LLM extras stay report-only
+ *   LLM_CUE_EXTRAS=1       opt-in model pass for leftover clocks already in the text
+ *   LLM_RESEARCH_APPLY=0   parser clocks still write; extras stay off
  *   LLM_CUE_LIMIT=16       max clocked stubs to process (not fetch budget)
  *
  * Queue: scan a wide stub window, rank live YT/hearthis ahead of radio,
@@ -64,6 +65,17 @@ export function clockStringInText(at: string, text: string): boolean {
   const raw = String(at || "").trim();
   if (!raw || raw.length < 3) return false;
   return text.includes(raw);
+}
+
+/** Model extras for cues stay off unless this is set. Parser always runs. */
+export function cueLlmExtrasEnabled(
+  env: Record<string, string | undefined> = process.env,
+): boolean {
+  return (
+    env.LLM_CUE_EXTRAS === "1" &&
+    env.LLM_RESEARCH_APPLY !== "0" &&
+    env.LLM_RESEARCH !== "0"
+  );
 }
 
 export function parseClockToSec(at: string): number | null {
@@ -372,7 +384,7 @@ export async function runLlmCueResearch(
 ): Promise<ResearchStats> {
   const provider = opts.provider ?? detectLlmProvider();
   const stats = emptyStats(provider);
-  const applyLlm = process.env.LLM_RESEARCH_APPLY !== "0";
+  const applyLlm = cueLlmExtrasEnabled();
   const limit = Math.max(
     1,
     opts.limit ?? Number(process.env.LLM_CUE_LIMIT || 16),
@@ -542,7 +554,7 @@ ${firstParty.text.slice(0, 8000)}`,
       partial: stats.partial,
       missed: stats.missed,
     },
-    note: "Parser clocks always write. LLM extras only when LLM_RESEARCH_APPLY≠0, and only clocks that already appear in that text. Never interpolates. Never overwrites 1001tl / fingerprint / community. Queue ranks live YT/hearthis ahead of radio; radio without clocks does not consume the limit. Probed slugs park so the same stub is not retraced.",
+    note: "Parser clocks always write. LLM extras stay off unless LLM_CUE_EXTRAS=1 (and apply is on). Extras must already appear in that text. Never interpolates. Never overwrites 1001tl / fingerprint / community.",
     window: sets.length,
     stubs: stubs.length,
     probed: probes,

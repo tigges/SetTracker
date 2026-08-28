@@ -18,7 +18,7 @@ on:
         default: "24"
         type: string
       jobs:
-        description: "Comma list, or all / cues (cue = cues)"
+        description: "Default handles,events,quality. Do not add tracks/cues/identity/videos unless you mean to spend."
         required: false
         default: "handles,events,quality"
         type: string

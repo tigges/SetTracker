@@ -96,7 +96,9 @@ export default function StatsNotesPage() {
           enrich Identify + File Scan write artist, title, ISRC, score, and
           offset. Catalog LLM research writes handles, event socials, home
           city, track IDs, and cue clocks — each job names its variables and
-          parks partial / empty results so the same row is not retraced. Cue
+          parks partial / empty results so the same row is not retraced. Handle
+          research skips DJs and venues that already have a first-party page
+          to parse. Cue extras stay off unless you set LLM_CUE_EXTRAS. Cue
           parser apply and track-id fill-null also run on enrich.
         </p>
         <p className="mt-2 text-[13px] leading-relaxed text-muted">
