@@ -320,6 +320,20 @@ assert.equal(
   "sc-tomorrowland-tomorrowland-friendship-mix-with-topic-august-2026",
 );
 
+const hardwellEuphoria020Sc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url ===
+    "https://soundcloud.com/tomorrowland/hardwell-presents-euphoria-august-2026",
+);
+assert.ok(hardwellEuphoria020Sc);
+assert.equal(hardwellEuphoria020Sc.primaryArtist.name, "Hardwell");
+assert.equal(hardwellEuphoria020Sc.type, "radio");
+assert.equal(hardwellEuphoria020Sc.seriesName, "Euphoria");
+assert.equal(
+  `sc-tomorrowland-${slugify("hardwell-presents-euphoria-august-2026")}`,
+  "sc-tomorrowland-hardwell-presents-euphoria-august-2026",
+);
+
 const lukeSelectsSc = SOUNDCLOUD_TRACK_SEEDS.find(
   (s) =>
     s.url ===

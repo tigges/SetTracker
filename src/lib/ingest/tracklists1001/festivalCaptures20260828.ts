@@ -696,3 +696,67 @@ export const TL_TOPIC_TML_FRIENDSHIP_MIX_2026: FingerprintSeedRow[] = [
   { at: "51:41", artist: "Topic & Sasha Alex Sloan vs. Marten Lou", title: "Saving Me vs. Late Night (Topic Mashup)" },
   { at: "55:38", artist: "Kotiēr", title: "Smalltown Boy" },
 ];
+
+/**
+ * Hardwell - Euphoria 020 2026-08-28
+ * Official SoundCloud: https://soundcloud.com/tomorrowland/hardwell-presents-euphoria-august-2026
+ * oEmbed 2026-08-28: author "Tomorrowland" (soundcloud.com/tomorrowland),
+ * title "Hardwell presents Euphoria - August, 2026".
+ * Official YouTube twin: https://youtu.be/Itd5D4q1KuM
+ * oEmbed 2026-08-28: channel "Tomorrowland One World Radio"
+ * (@tomorrowlandoneworldradio), title "Hardwell presents Euphoria I Episode #20".
+ * https://www.1001tracklists.com/tracklist/1w79plst/hardwell-euphoria-020-2026-08-28.html
+ * Overlay name TL_HARDWELL is too generic; constant is the episode.
+ * Distinct from Euphoria 018 (June, sc-…-june-2026 / yt-9aDj2qyAIBw) and
+ * 019 (July, sc-…-july-2026 / yt-39KkVIunYAk). Not a Tomorrowland weekend.
+ * Same 1001 seed + both official permalinks → host twin (SC-first playback).
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["sc-tomorrowland-hardwell-presents-euphoria-august-2026"] = TL_HARDWELL_EUPHORIA_020_2026
+ * plus yt-Itd5D4q1KuM.
+ * Captured 2026-08-28 — provenance 1001tl.
+ */
+export const TL_HARDWELL_EUPHORIA_020_2026: FingerprintSeedRow[] = [
+  { at: "0:39", artist: "Bolier & AMRV", title: "Everybody Lookin' 4" },
+  { at: "4:32", artist: "MORTEN & David Guetta", title: "La Révolution" },
+  { at: "7:27", artist: "Tiësto & Caleb Arredondo", title: "Echo Sax Finale" },
+  { at: "9:57", artist: "Hardwell & W&W", title: "Bangkok" },
+  {
+    at: "13:13",
+    artist: "Hardwell vs. Michael Jackson",
+    title: "Spaceman vs. Beat It (Hardwell Mashup)",
+  },
+  { at: "14:37", artist: "Hardwell", title: "Spaceman" },
+  { at: "16:01", artist: "Michael Jackson", title: "Beat It (Acappella)" },
+  { at: "17:24", artist: "Armin van Buuren ft. SACHA", title: "Everlasting" },
+  { at: "20:24", artist: "Steeper", title: "Take Me" },
+  { at: "23:26", artist: "Dirty Signal & Blink", title: "The World Never Sleeps" },
+  { at: "26:05", artist: "ZYNØX", title: "Be Yours Alone" },
+  { at: "28:39", artist: "JUNIVERZ & HEN1", title: "Take Control" },
+  { at: "31:43", artist: "Hardwell & W&W", title: "Turn Up The Bass" },
+  { at: "34:54", artist: "2ACES", title: "For The Ones" },
+  { at: "38:15", artist: "MaRLo", title: "Give Me Tech Energy" },
+  { at: "41:28", artist: "The Rocketman & SHVDZ", title: "Brasil" },
+  {
+    at: "44:02",
+    artist: "Hardwell & Bassjackers vs. Masters At Work",
+    title: "Work On The Drums (Hardwell Mashup)",
+  },
+  { at: "45:02", artist: "Masters At Work", title: "Work (Acappella)" },
+  { at: "46:02", artist: "Hardwell & Bassjackers", title: "Bang On The Drums" },
+  {
+    at: "47:02",
+    artist: "Olly James & Panteros666 & Evil Twin",
+    title: "Berlin 99'",
+  },
+  { at: "49:26", artist: "Bassjackers & Maddix", title: "Rave Is My Therapy" },
+  {
+    at: "52:42",
+    artist: "Dimitri Vegas & Pat B ft. Sylver",
+    title: "Turn The Tide",
+  },
+  { at: "55:57", artist: "VINAI", title: "Lose Myself" },
+  {
+    at: "58:36",
+    artist: "Frontliner",
+    title: "Discorecord (Galactixx Remix)",
+  },
+];

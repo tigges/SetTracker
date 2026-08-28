@@ -81,6 +81,7 @@ import {
   TL_THE_CHAINSMOKERS_ULTRA_MELBOURNE_MAINSTAGE_2026,
   TL_BLEU_CLAIR_BLEUPRINT_VOL_5_JAKARTA_2022,
   TL_BART_SKILS_LOVELAND_FIRE_2026,
+  TL_HARDWELL_EUPHORIA_020_2026,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
@@ -2403,6 +2404,23 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/140dd8zt/bart-skils-fire-stage-loveland-festival-netherlands-2026-08-08.html",
     tracklist1001: TL_BART_SKILS_LOVELAND_FIRE_2026,
+  },
+  {
+    // Official Tomorrowland One World Radio (@tomorrowlandoneworldradio).
+    // Host twin with official SC tomorrowland/hardwell-presents-euphoria-august-2026.
+    // Distinct from Euphoria 018 / 019 and Mainstage WE2.
+    video: "https://www.youtube.com/watch?v=Itd5D4q1KuM",
+    primaryArtist: dj("Hardwell", {
+      accent: "#023e8a",
+      homeCity: "Breda, NL",
+    }),
+    genre: "Big Room",
+    type: "radio",
+    title: "Hardwell presents Euphoria I Episode #20",
+    seriesName: "Euphoria",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1w79plst/hardwell-euphoria-020-2026-08-28.html",
+    tracklist1001: TL_HARDWELL_EUPHORIA_020_2026,
   },
   // ---- DJ Mag Top 100: at least one set for chart DJs still at 0 ----
   {

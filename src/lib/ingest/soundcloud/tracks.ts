@@ -355,6 +355,20 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     minDurationSec: 30 * 60,
   },
   {
+    // Official Tomorrowland One World Radio Euphoria 020; 1001TL wired via
+    // sc-tomorrowland-hardwell-presents-euphoria-august-2026 (same list as
+    // yt-Itd5D4q1KuM). Distinct from June 018 / July 019.
+    url: "https://soundcloud.com/tomorrowland/hardwell-presents-euphoria-august-2026",
+    primaryArtist: dj("Hardwell", {
+      accent: "#023e8a",
+      homeCity: "Breda, NL",
+    }),
+    genre: "Big Room",
+    seriesName: "Euphoria",
+    type: "radio",
+    minDurationSec: 30 * 60,
+  },
+  {
     // Official Tomorrowland One World Radio Selects 017; 1001TL wired via
     // sc-tomorrowland-laidback-luke-selects-august-2026. No YT in the paste.
     // laidback-luke-selects aliases to laidback-luke.

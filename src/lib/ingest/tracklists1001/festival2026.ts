@@ -176,6 +176,7 @@ import {
   TL_BLEU_CLAIR_BLEUPRINT_VOL_5_JAKARTA_2022,
   TL_BART_SKILS_LOVELAND_FIRE_2026,
   TL_TOPIC_TML_FRIENDSHIP_MIX_2026,
+  TL_HARDWELL_EUPHORIA_020_2026,
 } from "./festivalCaptures20260828";
 
 export {
@@ -314,6 +315,7 @@ export {
   TL_BLEU_CLAIR_BLEUPRINT_VOL_5_JAKARTA_2022,
   TL_BART_SKILS_LOVELAND_FIRE_2026,
   TL_TOPIC_TML_FRIENDSHIP_MIX_2026,
+  TL_HARDWELL_EUPHORIA_020_2026,
 };
 
 function formatClock(sec: number): string {
@@ -4986,6 +4988,10 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
     TL_BART_SKILS_LOVELAND_FIRE_2026,
   "sc-tomorrowland-tomorrowland-friendship-mix-with-topic-august-2026":
     TL_TOPIC_TML_FRIENDSHIP_MIX_2026,
+  // Host twins — same Euphoria 020 on Tomorrowland SC and OWR YouTube.
+  "sc-tomorrowland-hardwell-presents-euphoria-august-2026":
+    TL_HARDWELL_EUPHORIA_020_2026,
+  "yt-Itd5D4q1KuM": TL_HARDWELL_EUPHORIA_020_2026,
 };
 
 /** Sanity: every seeded clock must parse. */

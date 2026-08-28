@@ -400,6 +400,19 @@ assert.deepEqual(
   ["soundcloud", "mixcloud"],
 );
 
+assert.equal(
+  extras["yt-Itd5D4q1KuM"]?.soundcloudUrl,
+  "https://soundcloud.com/tomorrowland/hardwell-presents-euphoria-august-2026",
+);
+assert.equal(
+  extras["yt-Itd5D4q1KuM"]?.youtubeUrl,
+  "https://www.youtube.com/watch?v=Itd5D4q1KuM",
+);
+assert.equal(
+  extras["sc-tomorrowland-hardwell-presents-euphoria-august-2026"]?.youtubeUrl,
+  "https://www.youtube.com/watch?v=Itd5D4q1KuM",
+);
+
 for (const [slug, pin] of Object.entries(SET_HOST_PINS)) {
   if (pin.mixcloudUrl) {
     assert.ok(

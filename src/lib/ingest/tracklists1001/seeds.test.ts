@@ -204,6 +204,7 @@ import {
   TL_BLEU_CLAIR_BLEUPRINT_VOL_5_JAKARTA_2022,
   TL_BART_SKILS_LOVELAND_FIRE_2026,
   TL_TOPIC_TML_FRIENDSHIP_MIX_2026,
+  TL_HARDWELL_EUPHORIA_020_2026,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
@@ -5464,6 +5465,68 @@ for (let i = 1; i < topicFriendship.length; i++) {
     (topicFriendship[i]!.timestamp ?? 0) >
       (topicFriendship[i - 1]!.timestamp ?? 0),
     `Topic Friendship Mix 2026 clocks must increase at index ${i}`,
+  );
+}
+
+// Hardwell Euphoria 020 — official Tomorrowland SC + OWR YouTube twin.
+// Overlay TL_HARDWELL is too generic. Distinct from 018 / 019 / Mainstage WE2.
+assertSeedClocks(TL_HARDWELL_EUPHORIA_020_2026);
+assert.equal(TL_HARDWELL_EUPHORIA_020_2026.length, 24);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-tomorrowland-hardwell-presents-euphoria-august-2026"
+  ],
+  TL_HARDWELL_EUPHORIA_020_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-Itd5D4q1KuM"],
+  TL_HARDWELL_EUPHORIA_020_2026,
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-tomorrowland-hardwell-presents-euphoria-august-2026"
+  ],
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-tomorrowland-hardwell-presents-euphoria-july-2026"
+  ],
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-Itd5D4q1KuM"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-39KkVIunYAk"],
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-Itd5D4q1KuM"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-9aDj2qyAIBw"],
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-Itd5D4q1KuM"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-yWZyIQtxoXU"],
+);
+assert.equal(
+  isWiredTracklistSlug(
+    "sc-tomorrowland-hardwell-presents-euphoria-august-2026",
+  ),
+  true,
+);
+assert.equal(isWiredTracklistSlug("yt-Itd5D4q1KuM"), true);
+assert.equal(
+  isSecondaryPlaybackSlug(
+    "sc-tomorrowland-hardwell-presents-euphoria-august-2026",
+  ),
+  true,
+);
+assert.equal(isSecondaryPlaybackSlug("yt-Itd5D4q1KuM"), false);
+const euphoria020 = tracklist1001RowsToPlays(TL_HARDWELL_EUPHORIA_020_2026);
+assert.equal(euphoria020.length, 24);
+assert.equal(euphoria020[0]?.provenance, "1001tl");
+assert.equal(euphoria020[0]?.trackTitle, "Everybody Lookin' 4");
+assert.equal(euphoria020[0]?.timestamp, 39);
+assert.equal(euphoria020[23]?.trackTitle, "Discorecord (Galactixx Remix)");
+assert.equal(euphoria020[23]?.timestamp, 58 * 60 + 36);
+for (let i = 1; i < euphoria020.length; i++) {
+  assert.ok(
+    (euphoria020[i]!.timestamp ?? 0) > (euphoria020[i - 1]!.timestamp ?? 0),
+    `Hardwell Euphoria 020 clocks must increase at index ${i}`,
   );
 }
 
