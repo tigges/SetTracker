@@ -391,3 +391,41 @@ export const TL_CARL_COX_BOILER_ROOM_IBIZA_VILLA_2013: FingerprintSeedRow[] = [
   },
   { at: "40:50", artist: "CeCe Peniston ft. Joyriders", title: "Finally" },
 ];
+
+/**
+ * MARNIK @ Planaxis Stage, Tomorrowland Weekend 1, Belgium 2026-07-18
+ * Official SoundCloud: https://soundcloud.com/marnikofficial/marnik-live-at-tomorrowland
+ * oEmbed 2026-08-28: author "MARNIK" (soundcloud.com/marnikofficial), title
+ * "MARNIK Live at Tomorrowland 2026 | Planaxis Stage – Full Set".
+ * https://www.1001tracklists.com/tracklist/vn48l79/marnik-planaxis-stage-tomorrowland-weekend-1-belgium-2026-07-18.html
+ * Overlay name TL_MARNIK is too generic and is not
+ * TL_MARNIK_NAMELESS_FESTIVAL_2016 (held, no playback) or the UNLEGEND
+ * Nameless 2026 SC (sc-marnikofficial-marnik-presents-unlegend-show).
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["sc-marnikofficial-marnik-live-at-tomorrowland"] = TL_MARNIK_TML_WE1_PLANAXIS_2026
+ * No YouTube in the paste — do not invent a YT slug.
+ * Captured 2026-08-28 — provenance 1001tl.
+ */
+export const TL_MARNIK_TML_WE1_PLANAXIS_2026: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "MARNIK", title: "Stranger (To Stability)" },
+  { at: "2:59", artist: "MARNIK ft. Crooked Bangs", title: "Synthetic Heart" },
+  { at: "5:35", artist: "DJ KUBA & NEITAN", title: "Feel The Beat" },
+  { at: "8:34", artist: "Ferry Corsten & Ruben de Ronde pres. NRG2000", title: "Rise Up" },
+  { at: "10:41", artist: "JUULS & FISION & NLW", title: "Cricket" },
+  { at: "13:23", artist: "NIVEK", title: "My Neck, My Back" },
+  { at: "15:25", artist: "Alex Nocera & Roy Batty", title: "Interference" },
+  { at: "19:22", artist: "MARNIK & T78 ft. LaVie", title: "Maximus" },
+  { at: "23:19", artist: "Gabry Ponte & Blasterjaxx & 1World & AntoNetta", title: "Now We Are Free" },
+  { at: "25:49", artist: "MARNIK", title: "ARENA" },
+  { at: "30:21", artist: "Restricted & NIKSTER", title: "Insomnia" },
+  { at: "31:54", artist: "AREA ØNE", title: "Switch!" },
+  { at: "33:15", artist: "Steve Aoki & MARNIK & MR.BLACK", title: "Instant Moments" },
+  { at: "35:44", artist: "MARNIK", title: "Lasers" },
+  { at: "37:10", artist: "Bountyhunter", title: "Woops (Dimitri Vegas & Junkie Kid Remix)" },
+  { at: "38:31", artist: "MARNIK X MOTVS X Tony Richard", title: "Profondo Rosso" },
+  { at: "40:23", artist: "MARNIK", title: "We Came We Saw We Conquered" },
+  { at: "43:13", artist: "MARNIK & Naeleck & VINAI", title: "Boyz In Paris (Coone Remix)" },
+  { at: "44:52", artist: "Mo-Do", title: "Eins Zwei Polizei" },
+  { at: "46:59", artist: "YuB & EDMMARO", title: "FDAU" },
+  { at: "48:47", artist: "Linkin Park", title: "Numb (Trey Pearce Remix)" },
+  { at: "51:44", artist: "MARNIK & Samuel Moriero", title: "Hard Techno" },
+];

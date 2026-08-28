@@ -723,4 +723,16 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     type: "festival",
     minDurationSec: 30 * 60,
   },
+  {
+    // Official MARNIK Planaxis WE1 2026-07-18. 1001TL wired via
+    // sc-marnikofficial-marnik-live-at-tomorrowland. No YT in the paste —
+    // do not invent a YT slug. Never wire sc-https://…. Distinct from
+    // UNLEGEND Nameless 2026 and held TL_MARNIK_NAMELESS_FESTIVAL_2016.
+    url: "https://soundcloud.com/marnikofficial/marnik-live-at-tomorrowland",
+    primaryArtist: dj("MARNIK", { accent: "#ff006e" }),
+    genre: "Big Room",
+    eventName: "Tomorrowland Belgium",
+    type: "festival",
+    minDurationSec: 30 * 60,
+  },
 ];
