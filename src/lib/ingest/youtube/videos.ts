@@ -83,6 +83,7 @@ import {
   TL_BART_SKILS_LOVELAND_FIRE_2026,
   TL_HARDWELL_EUPHORIA_020_2026,
   TL_LAMMER_TML_WE2_CORE_2026,
+  TL_NOSI_TML_WE1_CRYSTAL_2026,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
@@ -2437,6 +2438,21 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/1ucjccjk/lammer-core-stage-tomorrowland-weekend-2-belgium-2026-07-26.html",
     tracklist1001: TL_LAMMER_TML_WE2_CORE_2026,
+  },
+  {
+    // Tomorrowland official — Crystal Garden WE1. oEmbed @tomorrowland.
+    // No SoundCloud in the paste — do not invent an SC slug. Distinct from
+    // Oscar / Blondish / Camila Jun / Steve Angello Crystal Garden WE1.
+    video: "https://www.youtube.com/watch?v=O9xAX_vrDJI",
+    primaryArtist: dj("Nosi", { accent: "#2d6a4f" }),
+    genre: "House",
+    type: "festival",
+    title: "NOSI WE1 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1zy8fryt/nosi-crystal-garden-stage-tomorrowland-weekend-1-belgium-2026-07-18.html",
+    tracklist1001: TL_NOSI_TML_WE1_CRYSTAL_2026,
   },
   // ---- DJ Mag Top 100: at least one set for chart DJs still at 0 ----
   {

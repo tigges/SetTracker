@@ -792,3 +792,40 @@ export const TL_LAMMER_TML_WE2_CORE_2026: FingerprintSeedRow[] = [
   { at: "1:40:20", artist: "Nova Blue & EV", title: "Weekend Cinderella" },
   { at: "1:48:15", artist: "LAMMER", title: "Time To Move" },
 ];
+
+/**
+ * Nosi @ Crystal Garden Stage, Tomorrowland Weekend 1, Belgium 2026-07-18
+ * Official YouTube: https://youtu.be/O9xAX_vrDJI
+ * oEmbed 2026-08-28: channel "Tomorrowland" (@tomorrowland), title
+ * "NOSI WE1 | Tomorrowland 2026".
+ * https://www.1001tracklists.com/tracklist/1zy8fryt/nosi-crystal-garden-stage-tomorrowland-weekend-1-belgium-2026-07-18.html
+ * Overlay name TL_NOSI is too generic; constant is the performance.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-O9xAX_vrDJI"] = TL_NOSI_TML_WE1_CRYSTAL_2026
+ * No SoundCloud in the paste — do not invent an SC slug.
+ * Distinct from other Crystal Garden WE1 captures (Oscar And The Wolf,
+ * Blondish, Camila Jun, Steve Angello).
+ * Gap 9:11 → 18:30 kept as captured.
+ * Captured 2026-08-28 — provenance 1001tl.
+ */
+export const TL_NOSI_TML_WE1_CRYSTAL_2026: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "Eats Everything ft. Tiga & Audion", title: "Dancing (Again!)" },
+  { at: "2:34", artist: "Nosi & Sistek", title: "Burn For You" },
+  { at: "5:08", artist: "Liva K & OVEOUS", title: "Blessings" },
+  { at: "6:18", artist: "HotLap", title: "Get Enough" },
+  { at: "7:45", artist: "Rihanna", title: "Don't Stop The Music" },
+  { at: "9:11", artist: "Andrea Oliva", title: "Spotlight" },
+  { at: "18:30", artist: "Nelly Furtado", title: "Say It Right (Adana Twins Remix)" },
+  { at: "21:50", artist: "Liva K", title: "Didn't Miss You" },
+  { at: "24:58", artist: "Notre Dame", title: "No Rules" },
+  { at: "28:06", artist: "Kotiēr", title: "Smalltown Boy" },
+  { at: "31:14", artist: "Nosi", title: "So Good" },
+  { at: "34:22", artist: "HUGEL & SOLTO", title: "Jamaican (Bam Bam)" },
+  { at: "37:31", artist: "DERON x DJ Delicious", title: "Same Man (DERON Rework)" },
+  { at: "40:39", artist: "Nosi", title: "On My Own" },
+  { at: "43:48", artist: "Fahlberg", title: "There's Hope In Your Eyes" },
+  { at: "46:56", artist: "Nosi", title: "Losing My Religion" },
+  { at: "50:05", artist: "Victor Flash", title: "Let You Down" },
+  { at: "53:13", artist: "Shakedown", title: "At Night (Acappella)" },
+  { at: "56:22", artist: "JUNO (DE)", title: "Que Rico" },
+  { at: "59:30", artist: "Andrea Oliva", title: "Neon Hearts" },
+];

@@ -178,6 +178,7 @@ import {
   TL_TOPIC_TML_FRIENDSHIP_MIX_2026,
   TL_HARDWELL_EUPHORIA_020_2026,
   TL_LAMMER_TML_WE2_CORE_2026,
+  TL_NOSI_TML_WE1_CRYSTAL_2026,
 } from "./festivalCaptures20260828";
 
 export {
@@ -318,6 +319,7 @@ export {
   TL_TOPIC_TML_FRIENDSHIP_MIX_2026,
   TL_HARDWELL_EUPHORIA_020_2026,
   TL_LAMMER_TML_WE2_CORE_2026,
+  TL_NOSI_TML_WE1_CRYSTAL_2026,
 };
 
 function formatClock(sec: number): string {
@@ -4995,6 +4997,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
     TL_HARDWELL_EUPHORIA_020_2026,
   "yt-Itd5D4q1KuM": TL_HARDWELL_EUPHORIA_020_2026,
   "yt-bi_8FdSaT30": TL_LAMMER_TML_WE2_CORE_2026,
+  "yt-O9xAX_vrDJI": TL_NOSI_TML_WE1_CRYSTAL_2026,
 };
 
 /** Sanity: every seeded clock must parse. */

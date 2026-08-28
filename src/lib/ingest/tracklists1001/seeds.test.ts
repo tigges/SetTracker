@@ -206,6 +206,7 @@ import {
   TL_TOPIC_TML_FRIENDSHIP_MIX_2026,
   TL_HARDWELL_EUPHORIA_020_2026,
   TL_LAMMER_TML_WE2_CORE_2026,
+  TL_NOSI_TML_WE1_CRYSTAL_2026,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
@@ -5558,6 +5559,51 @@ for (let i = 1; i < lammerCore.length; i++) {
   assert.ok(
     (lammerCore[i]!.timestamp ?? 0) > (lammerCore[i - 1]!.timestamp ?? 0),
     `LAMMER TML WE2 CORE clocks must increase at index ${i}`,
+  );
+}
+
+// Nosi @ Crystal Garden, Tomorrowland WE1 2026-07-18 — official Tomorrowland YT.
+// Overlay TL_NOSI is too generic. No SC in the paste.
+assertSeedClocks(TL_NOSI_TML_WE1_CRYSTAL_2026);
+assert.equal(TL_NOSI_TML_WE1_CRYSTAL_2026.length, 20);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-O9xAX_vrDJI"],
+  TL_NOSI_TML_WE1_CRYSTAL_2026,
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-O9xAX_vrDJI"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-Ty03QjFnL90"],
+  "Nosi is not the Oscar And The Wolf Crystal Garden WE1 seed",
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-O9xAX_vrDJI"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-n3TESnQqiQ4"],
+  "Nosi is not the Blondish Crystal Garden WE1 seed",
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-O9xAX_vrDJI"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-8Oq0TMeaY4I"],
+  "Nosi is not the Camila Jun Crystal Garden WE1 seed",
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-O9xAX_vrDJI"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-eir5Sh_gHbo"],
+  "Nosi is not the Steve Angello Crystal Garden WE1 seed",
+);
+assert.equal(isWiredTracklistSlug("yt-O9xAX_vrDJI"), true);
+assert.equal(isSecondaryPlaybackSlug("yt-O9xAX_vrDJI"), false);
+assert.equal(isWiredTracklistSlug("sc-nosi-tomorrowland"), false);
+const nosiCrystal = tracklist1001RowsToPlays(TL_NOSI_TML_WE1_CRYSTAL_2026);
+assert.equal(nosiCrystal.length, 20);
+assert.equal(nosiCrystal[0]?.provenance, "1001tl");
+assert.equal(nosiCrystal[0]?.trackTitle, "Dancing (Again!)");
+assert.equal(nosiCrystal[0]?.timestamp, 0);
+assert.equal(nosiCrystal[19]?.trackTitle, "Neon Hearts");
+assert.equal(nosiCrystal[19]?.timestamp, 59 * 60 + 30);
+for (let i = 1; i < nosiCrystal.length; i++) {
+  assert.ok(
+    (nosiCrystal[i]!.timestamp ?? 0) > (nosiCrystal[i - 1]!.timestamp ?? 0),
+    `Nosi TML WE1 Crystal clocks must increase at index ${i}`,
   );
 }
 
