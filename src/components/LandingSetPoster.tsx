@@ -5,6 +5,7 @@ import { EntityThumb } from "@/components/EntityThumb";
 import { setHostHeadline } from "@/lib/brandHosts";
 import { resolvePlaybackTarget } from "@/lib/playback";
 import { setDisplayThumb } from "@/lib/setBrowse";
+import { setPerformanceYearLabel } from "@/lib/feedPriority";
 import { setgraphTicks } from "@/lib/homeLanding";
 import type { FeedItem } from "@/lib/queries";
 import { STATUS_META, type IdStatus } from "@/lib/status";
@@ -58,6 +59,7 @@ export function LandingSetPoster({
     eventName: set.eventName,
   });
   const place = set.eventName ?? set.seriesName ?? "Set";
+  const year = setPerformanceYearLabel(set);
   const thumb = setDisplayThumb({
     imageUrl: set.imageUrl,
     primaryDjImageUrl: set.primaryDj?.imageUrl,
@@ -104,7 +106,9 @@ export function LandingSetPoster({
               compact ? "space-y-1.5 p-3 sm:space-y-2 sm:p-4" : "space-y-2 p-4"
             }`}
           >
-            <p className="eyebrow text-muted2">{place}</p>
+            <p className="eyebrow text-muted2">
+              {place} · {year}
+            </p>
             <h3
               className={`font-bold leading-tight text-ink ${
                 compact ? "text-[15px] sm:text-[18px]" : "text-[18px]"

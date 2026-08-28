@@ -5,6 +5,8 @@ import {
   buildCaptureQueueFromNeeds,
   captureEventBucket,
   capturePerEventCap,
+  capturePerformanceYear,
+  presetFromNeed,
   scoreCaptureNeed,
   skipCaptureNeed,
   type CaptureNeedRow,
@@ -972,5 +974,30 @@ const withReserve = buildCaptureQueueFromNeeds([...flood, ...others], {
   limit: CAPTURE_QUEUE_LIMIT + CAPTURE_QUEUE_RESERVE,
 });
 assert.equal(withReserve.length, CAPTURE_QUEUE_LIMIT + CAPTURE_QUEUE_RESERVE);
+
+// Performance year on capture rows: 1001 URL night beats ingest publishedAt.
+assert.equal(
+  capturePerformanceYear(
+    {
+      slug: "yt-cercle-peggy",
+      title: "Peggy Gou at Palais des Beaux-Arts, Lille for Cercle",
+      publishedAt: "2026-08-01T00:00:00Z",
+      tracklistUrl:
+        "https://www.1001tracklists.com/tracklist/260tzmnk/peggy-gou-palais-des-beaux-arts-lille-france-cercle-2018-12-03.html",
+    },
+    now,
+  ),
+  2018,
+);
+assert.equal(
+  presetFromNeed(
+    row({
+      slug: "yt-edc-peggy",
+      title: "Peggy Gou Live at EDC Las Vegas 2026 (Official Full Set)",
+      publishedAt: "2026-08-01T00:00:00Z",
+    }),
+  ).performanceYear,
+  2026,
+);
 
 console.log("nextCaptures.queue.test.ts ok");

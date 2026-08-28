@@ -10,7 +10,8 @@
 import { readFileSync, existsSync } from "node:fs";
 import { CAPTURE_QUEUE_LIMIT } from "./captureQueueLimits";
 import { join } from "node:path";
-import { isArchiveTitledSet } from "../feedPriority";
+import { isArchiveTitledSet, setPerformanceYear } from "../feedPriority";
+import { derivePerformedAt } from "./derivePerformedAt";
 import { looksLikeLiveFestivalRadio } from "../sourceComments";
 import { isLivestreamHubFeedTitle } from "../tracklistGap";
 import type { DensitySeverity } from "../setDensity";
@@ -40,6 +41,8 @@ export type CapturePreset = {
   /** Official playback (YT or SC). */
   watchUrl?: string;
   host?: "youtube" | "soundcloud";
+  /** Performance year (performedAt / title / 1001 URL / edition — not ingest). */
+  performanceYear?: number;
 };
 
 /** Hand-curated high-value assists (official YT, 1001 TBD). Empty when wired. */
@@ -272,6 +275,8 @@ export type CaptureNeedRow = {
   type: string;
   eventSlug?: string | null;
   publishedAt: Date | string;
+  performedAt?: Date | string | null;
+  editionYear?: number | null;
   durationSec: number;
   playCount: number;
   plays1001: number;
@@ -409,6 +414,32 @@ export function captureReason(row: CaptureNeedRow): string {
   return "catalog gap · no 1001 seed";
 }
 
+export function capturePerformanceYear(
+  row: Pick<
+    CaptureNeedRow,
+    "title" | "slug" | "publishedAt" | "performedAt" | "editionYear" | "tracklistUrl"
+  >,
+  nowMs = Date.now(),
+): number {
+  const performedAt =
+    row.performedAt ??
+    derivePerformedAt(
+      row.title,
+      row.slug,
+      row.tracklistUrl ? { [row.slug]: row.tracklistUrl } : {},
+      nowMs,
+    );
+  return setPerformanceYear(
+    {
+      title: row.title,
+      publishedAt: row.publishedAt,
+      performedAt,
+      editionYear: row.editionYear,
+    },
+    nowMs,
+  );
+}
+
 export function presetFromNeed(row: CaptureNeedRow): CapturePreset {
   const host = captureHost(row.slug) ?? undefined;
   return {
@@ -423,6 +454,7 @@ export function presetFromNeed(row: CaptureNeedRow): CapturePreset {
     reason: captureReason(row),
     watchUrl: row.watchUrl || watchUrlForSlug(row.slug),
     host,
+    performanceYear: capturePerformanceYear(row),
   };
 }
 

@@ -83,6 +83,8 @@ export type CapturePreset = {
   reason?: string;
   watchUrl?: string;
   host?: "youtube" | "soundcloud";
+  /** Performance year (performedAt / title / 1001 URL / edition — not ingest). */
+  performanceYear?: number;
 };
 
 /** Official playback for a catalog slug. */
@@ -337,6 +339,7 @@ function Capture1001Workbench({
               </div>
               <div className="mono truncate text-[11px] text-muted2">
                 {p.slug}
+                {p.performanceYear ? ` · ${p.performanceYear}` : ""}
                 {p.reason ? ` · ${p.reason}` : ""}
               </div>
             </div>

@@ -242,6 +242,14 @@ export function setPerformanceYear(
   return Number.isFinite(y) ? y : new Date(nowMs).getUTCFullYear();
 }
 
+/** Printed year for cards and capture rows — performance, never ingest. */
+export function setPerformanceYearLabel(
+  s: PerformanceTimeFields,
+  nowMs = Date.now(),
+): string {
+  return String(setPerformanceYear(s, nowMs));
+}
+
 /** Within an age section — complete → IDs → year → live room → chart → date. */
 export function compareFeedPriority(
   a: FeedPriorityFields,
