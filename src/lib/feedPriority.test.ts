@@ -549,9 +549,32 @@ describe("feedPriority complete → Top 100 → festivals", () => {
     assert.equal(
       isFeedLeadCard({
         densitySeverity: "ok",
+        durationSec: 58 * 60,
+        statusCounts: {
+          community_resolved: 6,
+          unresolved_id: 3,
+          unparsed: 6,
+        },
+        trackCount: 15,
+      }),
+      false,
+      "half-identified radio (Jamie Jones 254-shaped) is not a lead card",
+    );
+    assert.equal(
+      isFeedLeadCard({
+        densitySeverity: "ok",
         durationSec: 45 * 60,
         statusCounts: { identified: 8 },
         trackCount: 8,
+      }),
+      true,
+    );
+    assert.equal(
+      isFeedLeadCard({
+        densitySeverity: "ok",
+        durationSec: 58 * 60,
+        statusCounts: { identified: 12 },
+        trackCount: 12,
       }),
       true,
     );
@@ -562,16 +585,20 @@ describe("feedPriority complete → Top 100 → festivals", () => {
         statusCounts: { identified: 12 },
         trackCount: 12,
       }),
-      true,
+      false,
     );
 
     const promoted = promoteLeadCards([
       {
-        id: "summit-clip",
+        id: "hot-robot-254",
         densitySeverity: "ok" as const,
-        durationSec: 27 * 60,
-        statusCounts: { identified: 6 },
-        trackCount: 6,
+        durationSec: 58 * 60,
+        statusCounts: {
+          community_resolved: 6,
+          unresolved_id: 3,
+          unparsed: 6,
+        },
+        trackCount: 15,
       },
       {
         id: "empty-radio",
@@ -590,7 +617,7 @@ describe("feedPriority complete → Top 100 → festivals", () => {
     ]);
     assert.deepEqual(
       promoted.map((s) => s.id),
-      ["lolla", "summit-clip", "empty-radio"],
+      ["lolla", "hot-robot-254", "empty-radio"],
     );
   });
 

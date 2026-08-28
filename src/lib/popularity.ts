@@ -3,6 +3,8 @@
  */
 
 import {
+  compareFeedPriority,
+  isFeedLeadCard,
   isRadioFiller,
   isRecentPerformance,
   pickRadarPicks,
@@ -333,21 +335,24 @@ export function festivalSeasonSets(
   );
 }
 
-/** Complete non-festival-story sets from 7 days, fill from 14 when the rail is thin. */
+/** Mostly-identified non-festival-story sets from 7 days, fill from 14 when thin. */
 export function newThisWeekSets(
   feed: FeedItem[],
   limit = 9,
   nowMs = Date.now(),
 ): FeedItem[] {
   const pick = (days: number, exclude: Set<string>) =>
-    feed.filter(
-      (s) =>
-        isCompleteTracklist(s) &&
-        !isRadioFiller(s) &&
-        isRecentPerformance(s, days, nowMs) &&
-        !isFestivalStorySet(s, nowMs) &&
-        !exclude.has(s.id),
-    );
+    feed
+      .filter(
+        (s) =>
+          isCompleteTracklist(s) &&
+          isFeedLeadCard(s) &&
+          !isRadioFiller(s) &&
+          isRecentPerformance(s, days, nowMs) &&
+          !isFestivalStorySet(s, nowMs) &&
+          !exclude.has(s.id),
+      )
+      .sort(compareFeedPriority);
   const primary = pick(7, new Set()).slice(0, limit);
   if (primary.length >= Math.min(limit, MIN_RAIL_SHOW)) return primary;
   const used = new Set(primary.map((s) => s.id));

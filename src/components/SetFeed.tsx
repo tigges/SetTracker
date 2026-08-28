@@ -129,7 +129,7 @@ export function SetFeed({ feed, genres }: { feed: FeedItem[]; genres: string[] }
   } = useMemo(() => {
     const weekAll = diversifyByArtist(
       newThisWeekSets(filtered, CLUSTER).sort(compareFeedPriority),
-      2,
+      1,
     );
     const newWeek = weekAll.slice(0, CLUSTER);
     const used = new Set(newWeek.map((s) => s.id));
