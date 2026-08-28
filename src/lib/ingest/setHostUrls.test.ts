@@ -145,6 +145,26 @@ assert.equal(
   extras["sc-platform-carl-cox-45-min-boiler-room"]?.soundcloudUrl,
   "https://soundcloud.com/platform/carl-cox-45-min-boiler-room",
 );
+assert.equal(
+  extras["yt-_hdM8uJV1LM"]?.soundcloudUrl,
+  "https://soundcloud.com/bleuclair/bleuprintvol5",
+);
+assert.equal(
+  extras["yt-_hdM8uJV1LM"]?.youtubeUrl,
+  "https://www.youtube.com/watch?v=_hdM8uJV1LM",
+);
+assert.equal(
+  extras["sc-bleuclair-bleuprintvol5"]?.youtubeUrl,
+  "https://www.youtube.com/watch?v=_hdM8uJV1LM",
+);
+assert.equal(
+  extras["sc-bleuclair-bleuprintvol5"]?.soundcloudUrl,
+  "https://soundcloud.com/bleuclair/bleuprintvol5",
+);
+assert.notEqual(
+  extras["yt-_hdM8uJV1LM"]?.soundcloudUrl,
+  extras["yt-c_sx3zum8Z0"]?.soundcloudUrl,
+);
 assert.ok(
   !extras[
     "sc-tomorrowland-tomorrowland-friendship-mix-with-sara-landry-july-2026"

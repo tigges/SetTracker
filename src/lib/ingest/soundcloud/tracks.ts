@@ -735,4 +735,18 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     type: "festival",
     minDurationSec: 30 * 60,
   },
+  {
+    // Official Bleu Clair SC (soundcloud.com/bleuclair). Same 1001 seed as
+    // yt-_hdM8uJV1LM — host twin, SC-first playback. Never wire sc-https://….
+    // Distinct from EDC LV 2023 sc-bleuclair-edclv2023.
+    url: "https://soundcloud.com/bleuclair/bleuprintvol5",
+    primaryArtist: dj("Bleu Clair", {
+      accent: "#4cc9f0",
+      homeCity: "Indonesia",
+    }),
+    genre: "Tech House",
+    seriesName: "BLEUPRINT",
+    type: "radio",
+    minDurationSec: 20 * 60,
+  },
 ];

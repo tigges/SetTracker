@@ -79,6 +79,7 @@ import {
   TL_CARL_COX_BOILER_ROOM_IBIZA_VILLA_2013,
   TL_FIDELES_TML_WE2_FREEDOM_2026,
   TL_THE_CHAINSMOKERS_ULTRA_MELBOURNE_MAINSTAGE_2026,
+  TL_BLEU_CLAIR_BLEUPRINT_VOL_5_JAKARTA_2022,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
@@ -2369,6 +2370,10 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_BLEU_CLAIR_EDC_LV_2023,
   },
   {
+    // Official Bleu Clair playback (@bleuclairmusic) — BLEUPRINT VOL. 5
+    // Jakarta livestream 2022-03-31. Video was already curated; this
+    // capture fills the 1001 overlay. Host twin with official SC
+    // bleuclair/bleuprintvol5. Distinct from EDC LV 2023.
     video: "https://www.youtube.com/watch?v=_hdM8uJV1LM",
     primaryArtist: dj("Bleu Clair", {
       accent: "#4cc9f0",
@@ -2376,8 +2381,11 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     }),
     genre: "Tech House",
     type: "radio",
-    title: "Bleu Clair presents BLEUPRINT VOL. 5 (Live from Jakarta)",
+    title: "Bleu Clair presents BLEUPRINT VOL. 5 (Live from Jakarta) 2022",
     seriesName: "BLEUPRINT",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/blv1r3k/bleu-clair-bleuprint-vol.-5-livestream-from-jakarta-indonesia-2022-03-31.html",
+    tracklist1001: TL_BLEU_CLAIR_BLEUPRINT_VOL_5_JAKARTA_2022,
   },
   // ---- DJ Mag Top 100: at least one set for chart DJs still at 0 ----
   {

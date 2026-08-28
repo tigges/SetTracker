@@ -1,7 +1,16 @@
 {
   "note": "Operator-collected 1001Tracklists URLs. All listed urls[] rows are now seeded. Prefer new operator pastes over this archive. stillMissing1001 is video-in / no 1001 page — do not invent URLs. heldPendingPlayback is 1001-in / no official YT/SC playback — seed held, do not invent or wire fan playback. pendingCuePaste is official playback + operator 1001 URL without cue rows — do not scrape 1001 or invent 1001tl seeds.",
-  "updatedAt": "2026-08-28T14:25:00.000Z",
+  "updatedAt": "2026-08-28T14:30:00.000Z",
   "urls": [
+    {
+      "label": "Bleu Clair · BLEUPRINT VOL. 5, Jakarta livestream 2022-03-31",
+      "slug": "yt-_hdM8uJV1LM",
+      "name": "TL_BLEU_CLAIR_BLEUPRINT_VOL_5_JAKARTA_2022",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/blv1r3k/bleu-clair-bleuprint-vol.-5-livestream-from-jakarta-indonesia-2022-03-31.html",
+      "youtubeUrl": "https://youtu.be/_hdM8uJV1LM",
+      "soundcloudUrl": "https://soundcloud.com/bleuclair/bleuprintvol5",
+      "note": "Operator paste 2026-08-28. 12 timed cues on official Bleu Clair YT (@bleuclairmusic) already curated in videos.ts plus official SC soundcloud.com/bleuclair. Host twin — SC slug sc-bleuclair-bleuprintvol5 is secondary. Overlay TL_BLEU_CLAIR is too generic and is not EDC LV 2023 (sc-bleuclair-edclv2023 / yt-c_sx3zum8Z0)."
+    },
     {
       "label": "The Chainsmokers · Mainstage, Ultra Melbourne 2026-04-11",
       "slug": "yt-A5ERobJaS_0",

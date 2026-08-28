@@ -588,3 +588,38 @@ export const TL_THE_CHAINSMOKERS_ULTRA_MELBOURNE_MAINSTAGE_2026: FingerprintSeed
   { at: "1:11:06", artist: "The Chainsmokers & Coldplay", title: "Something Just Like This (VIP)" },
   { at: "1:11:07", artist: "Gigi Perez", title: "Sailor Song" },
 ];
+
+/**
+ * Bleu Clair @ BLEUPRINT VOL. 5 (Livestream from Jakarta), Indonesia 2022-03-31
+ * Official YouTube: https://youtu.be/_hdM8uJV1LM
+ * oEmbed 2026-08-28: channel "Bleu Clair" (@bleuclairmusic), title
+ * "Bleu Clair presents BLEUPRINT VOL. 5 (Live from Jakarta)". That video
+ * was already curated in YOUTUBE_SETS without a tracklist, so this capture
+ * fills an existing set.
+ * Official SoundCloud: https://soundcloud.com/bleuclair/bleuprintvol5
+ * oEmbed 2026-08-28: author "Bleu Clair" (soundcloud.com/bleuclair), title
+ * "BLEUPRINT VOL. 5 by Bleu Clair". SC description links the same YT.
+ * Same 1001 seed + both official permalinks → host twin (SC-first playback,
+ * YT kept). SC slug is secondary.
+ * https://www.1001tracklists.com/tracklist/blv1r3k/bleu-clair-bleuprint-vol.-5-livestream-from-jakarta-indonesia-2022-03-31.html
+ * Overlay name TL_BLEU_CLAIR is too generic; constant is the performance
+ * and is not TL_BLEU_CLAIR_EDC_LV_2023 (sc-bleuclair-edclv2023 /
+ * yt-c_sx3zum8Z0).
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-_hdM8uJV1LM"] = TL_BLEU_CLAIR_BLEUPRINT_VOL_5_JAKARTA_2022
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["sc-bleuclair-bleuprintvol5"] = TL_BLEU_CLAIR_BLEUPRINT_VOL_5_JAKARTA_2022
+ * Captured 2026-08-28 — provenance 1001tl.
+ */
+export const TL_BLEU_CLAIR_BLEUPRINT_VOL_5_JAKARTA_2022: FingerprintSeedRow[] = [
+  { at: "0:02", artist: "Bleu Clair", title: "Funk Accelerator" },
+  { at: "2:04", artist: "Sampson.", title: "Cutty" },
+  { at: "3:36", artist: "Devarra & Thincut", title: "Stay" },
+  { at: "7:07", artist: "Tommy Trash & Yolanda Be Cool", title: "Emergency" },
+  { at: "9:12", artist: "Bleu Clair ft. Teza Sumendra", title: "Hyperspace" },
+  { at: "12:14", artist: "Ben Kim", title: "Woa House" },
+  { at: "18:18", artist: "Bleu Clair & Dances", title: "Yeah Daddy" },
+  { at: "20:07", artist: "Dombresky", title: "Bubblin" },
+  { at: "24:25", artist: "Shermanology ft. Jay Colin", title: "Backfire" },
+  { at: "26:42", artist: "Wade", title: "Basement" },
+  { at: "29:27", artist: "Jaded", title: "Physically" },
+  { at: "30:59", artist: "Bleu Clair", title: "Mistake" },
+];

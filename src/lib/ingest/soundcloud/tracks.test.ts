@@ -779,4 +779,20 @@ assert.equal(
   "sc-marnikofficial-marnik-live-at-tomorrowland",
 );
 
+const bleuBlueprintSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) => s.url === "https://soundcloud.com/bleuclair/bleuprintvol5",
+);
+assert.ok(bleuBlueprintSc);
+assert.equal(bleuBlueprintSc.primaryArtist.name, "Bleu Clair");
+assert.equal(bleuBlueprintSc.seriesName, "BLEUPRINT");
+assert.equal(bleuBlueprintSc.type, "radio");
+assert.notEqual(
+  bleuBlueprintSc.url,
+  "https://soundcloud.com/bleuclair/edclv2023",
+);
+assert.equal(
+  `sc-bleuclair-${slugify("bleuprintvol5")}`,
+  "sc-bleuclair-bleuprintvol5",
+);
+
 console.log("soundcloud/tracks.test.ts ok");

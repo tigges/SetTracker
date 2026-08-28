@@ -201,6 +201,7 @@ import {
   TL_MARNIK_TML_WE1_PLANAXIS_2026,
   TL_FIDELES_TML_WE2_FREEDOM_2026,
   TL_THE_CHAINSMOKERS_ULTRA_MELBOURNE_MAINSTAGE_2026,
+  TL_BLEU_CLAIR_BLEUPRINT_VOL_5_JAKARTA_2022,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
@@ -5325,5 +5326,44 @@ for (let i = 1; i < tcsMelbourne.length; i++) {
 assert.equal(isWiredTracklistSlug("yt-A5ERobJaS_0"), true);
 assert.equal(isSecondaryPlaybackSlug("yt-A5ERobJaS_0"), false);
 assert.equal(isWiredTracklistSlug("yt-1lqmFLr-SkA"), true);
+
+// Bleu Clair @ BLEUPRINT VOL. 5, Jakarta livestream 2022-03-31 — official
+// artist YT already curated + official SC host twin. Overlay TL_BLEU_CLAIR
+// is too generic and is not EDC LV 2023.
+assertSeedClocks(TL_BLEU_CLAIR_BLEUPRINT_VOL_5_JAKARTA_2022);
+assert.equal(TL_BLEU_CLAIR_BLEUPRINT_VOL_5_JAKARTA_2022.length, 12);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-_hdM8uJV1LM"],
+  TL_BLEU_CLAIR_BLEUPRINT_VOL_5_JAKARTA_2022,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-bleuclair-bleuprintvol5"],
+  TL_BLEU_CLAIR_BLEUPRINT_VOL_5_JAKARTA_2022,
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-_hdM8uJV1LM"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-c_sx3zum8Z0"],
+  "BLEUPRINT VOL. 5 is not the EDC LV 2023 seed",
+);
+const bleuBlueprint = tracklist1001RowsToPlays(
+  TL_BLEU_CLAIR_BLEUPRINT_VOL_5_JAKARTA_2022,
+);
+assert.equal(bleuBlueprint.length, 12);
+assert.equal(bleuBlueprint[0]?.provenance, "1001tl");
+assert.equal(bleuBlueprint[0]?.timestamp, 2);
+assert.equal(bleuBlueprint[0]?.trackTitle, "Funk Accelerator");
+assert.equal(bleuBlueprint[11]?.trackTitle, "Mistake");
+assert.equal(bleuBlueprint[11]?.timestamp, 30 * 60 + 59);
+for (let i = 1; i < bleuBlueprint.length; i++) {
+  assert.ok(
+    (bleuBlueprint[i]!.timestamp ?? 0) >
+      (bleuBlueprint[i - 1]!.timestamp ?? 0),
+    `Bleu Clair BLEUPRINT VOL. 5 clocks must increase at index ${i}`,
+  );
+}
+assert.equal(isWiredTracklistSlug("yt-_hdM8uJV1LM"), true);
+assert.equal(isWiredTracklistSlug("sc-bleuclair-bleuprintvol5"), true);
+assert.equal(isSecondaryPlaybackSlug("yt-_hdM8uJV1LM"), false);
+assert.equal(isSecondaryPlaybackSlug("sc-bleuclair-bleuprintvol5"), true);
 
 console.log("tracklists1001/seeds.test.ts ok");

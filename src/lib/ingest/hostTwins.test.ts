@@ -230,4 +230,23 @@ assert.equal(
   true,
 );
 
+const bleuBlueprintFold = folds.find(
+  (c) => c.fromSlug === "sc-bleuclair-bleuprintvol5",
+);
+assert.equal(bleuBlueprintFold?.toSlug, "yt-_hdM8uJV1LM");
+assert.equal(
+  survivorSlugForSecondary("sc-bleuclair-bleuprintvol5"),
+  "yt-_hdM8uJV1LM",
+);
+assert.equal(survivorSlugForSecondary("yt-_hdM8uJV1LM"), null);
+assert.equal(
+  folds.some(
+    (c) =>
+      c.fromSlug === "sc-bleuclair-edclv2023" &&
+      c.toSlug === "yt-_hdM8uJV1LM",
+  ),
+  false,
+  "BLEUPRINT VOL. 5 is not the EDC LV 2023 seed — do not fold",
+);
+
 console.log("hostTwins.test.ts ok");
