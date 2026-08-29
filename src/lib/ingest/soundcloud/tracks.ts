@@ -355,6 +355,20 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     minDurationSec: 30 * 60,
   },
   {
+    // Official Tomorrowland One World Radio Euphoria 020; 1001TL wired via
+    // sc-tomorrowland-hardwell-presents-euphoria-august-2026 (same list as
+    // yt-Itd5D4q1KuM). Distinct from June 018 / July 019.
+    url: "https://soundcloud.com/tomorrowland/hardwell-presents-euphoria-august-2026",
+    primaryArtist: dj("Hardwell", {
+      accent: "#023e8a",
+      homeCity: "Breda, NL",
+    }),
+    genre: "Big Room",
+    seriesName: "Euphoria",
+    type: "radio",
+    minDurationSec: 30 * 60,
+  },
+  {
     // Official Tomorrowland One World Radio Selects 017; 1001TL wired via
     // sc-tomorrowland-laidback-luke-selects-august-2026. No YT in the paste.
     // laidback-luke-selects aliases to laidback-luke.
@@ -634,6 +648,20 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     minDurationSec: 45 * 60,
   },
   {
+    // Official Korolova playback; 1001TL wired via
+    // sc-korolovadj-korolova-live-kyiv-ukraine
+    // (same list as yt-ruri2xxu7wU). Distinct from Captive Soul 098 /
+    // TML WE2 / Snowattack / Tulum. Never wire sc-https://….
+    url: "https://soundcloud.com/korolovadj/korolova-live-kyiv-ukraine",
+    primaryArtist: dj("Korolova", {
+      accent: "#f72585",
+      homeCity: "Kyiv, UA",
+    }),
+    genre: "Melodic Techno",
+    type: "mix",
+    minDurationSec: 40 * 60,
+  },
+  {
     // Official MARNIK UNLEGEND playback @ Nameless Festival 2026-02-14.
     // No 1001 cue paste — do not invent 1001tl rows. Never wire sc-https://….
     url: "https://soundcloud.com/marnikofficial/marnik-presents-unlegend-show",
@@ -654,6 +682,33 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     seriesName: "Digital Society",
     type: "festival",
     minDurationSec: 90 * 60,
+  },
+  {
+    // Official artist SC; 1001TL wired via
+    // sc-giuseppeottaviani-giuseppe-ottaviani-a-state-of (same list as
+    // yt-YvPI-unGanA). Distinct from Digital Society Leeds and ASOT Poland
+    // Legia (sc-giuseppeottaviani-giuseppe-ottaviani-live-at-a). Never wire
+    // hearthis.at/razorator or sc-https://….
+    url: "https://soundcloud.com/giuseppeottaviani/giuseppe-ottaviani-a-state-of",
+    primaryArtist: dj("Giuseppe Ottaviani", { accent: "#7b2cbf" }),
+    genre: "Trance",
+    seriesName: "A State of Trance",
+    eventName: "A State of Trance",
+    type: "festival",
+    minDurationSec: 30 * 60,
+  },
+  {
+    // Official artist SC; 1001TL wired via
+    // sc-giuseppeottaviani-giuseppe-ottaviani-live-at-a. Distinct from
+    // Area Two Rotterdam and Digital Society Leeds. No YouTube in the
+    // paste — do not invent. Never wire sc-https://….
+    url: "https://soundcloud.com/giuseppeottaviani/giuseppe-ottaviani-live-at-a",
+    primaryArtist: dj("Giuseppe Ottaviani", { accent: "#7b2cbf" }),
+    genre: "Trance",
+    seriesName: "A State of Trance",
+    eventName: "A State of Trance",
+    type: "festival",
+    minDurationSec: 60 * 60,
   },
   {
     // Official Cuebrick Conference 297; 1001TL wired via

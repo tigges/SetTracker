@@ -414,7 +414,7 @@ export default async function StatsPage() {
         <QueueFold
           title="Capture 1001"
           count={captureQueueOpen}
-          hint="Official playback · no 1001 list. ★ this year Top 100 first."
+          hint="Official playback · no 1001 list. ★ this year Top 100 nights first."
           followUp="operator"
         >
           <Suspense fallback={null}>

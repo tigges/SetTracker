@@ -204,6 +204,12 @@ import {
   TL_BLEU_CLAIR_BLEUPRINT_VOL_5_JAKARTA_2022,
   TL_BART_SKILS_LOVELAND_FIRE_2026,
   TL_TOPIC_TML_FRIENDSHIP_MIX_2026,
+  TL_HARDWELL_EUPHORIA_020_2026,
+  TL_LAMMER_TML_WE2_CORE_2026,
+  TL_NOSI_TML_WE1_CRYSTAL_2026,
+  TL_GIUSEPPE_OTTAVIANI_ASOT_AREA_TWO_ROTTERDAM_2026,
+  TL_GIUSEPPE_OTTAVIANI_ASOT_POLAND_LEGIA_2026,
+  TL_KOROLOVA_MOTHERLAND_MONUMENT_KYIV_2026,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
@@ -5464,6 +5470,338 @@ for (let i = 1; i < topicFriendship.length; i++) {
     (topicFriendship[i]!.timestamp ?? 0) >
       (topicFriendship[i - 1]!.timestamp ?? 0),
     `Topic Friendship Mix 2026 clocks must increase at index ${i}`,
+  );
+}
+
+// Hardwell Euphoria 020 — official Tomorrowland SC + OWR YouTube twin.
+// Overlay TL_HARDWELL is too generic. Distinct from 018 / 019 / Mainstage WE2.
+assertSeedClocks(TL_HARDWELL_EUPHORIA_020_2026);
+assert.equal(TL_HARDWELL_EUPHORIA_020_2026.length, 24);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-tomorrowland-hardwell-presents-euphoria-august-2026"
+  ],
+  TL_HARDWELL_EUPHORIA_020_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-Itd5D4q1KuM"],
+  TL_HARDWELL_EUPHORIA_020_2026,
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-tomorrowland-hardwell-presents-euphoria-august-2026"
+  ],
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-tomorrowland-hardwell-presents-euphoria-july-2026"
+  ],
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-Itd5D4q1KuM"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-39KkVIunYAk"],
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-Itd5D4q1KuM"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-9aDj2qyAIBw"],
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-Itd5D4q1KuM"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-yWZyIQtxoXU"],
+);
+assert.equal(
+  isWiredTracklistSlug(
+    "sc-tomorrowland-hardwell-presents-euphoria-august-2026",
+  ),
+  true,
+);
+assert.equal(isWiredTracklistSlug("yt-Itd5D4q1KuM"), true);
+assert.equal(
+  isSecondaryPlaybackSlug(
+    "sc-tomorrowland-hardwell-presents-euphoria-august-2026",
+  ),
+  true,
+);
+assert.equal(isSecondaryPlaybackSlug("yt-Itd5D4q1KuM"), false);
+const euphoria020 = tracklist1001RowsToPlays(TL_HARDWELL_EUPHORIA_020_2026);
+assert.equal(euphoria020.length, 24);
+assert.equal(euphoria020[0]?.provenance, "1001tl");
+assert.equal(euphoria020[0]?.trackTitle, "Everybody Lookin' 4");
+assert.equal(euphoria020[0]?.timestamp, 39);
+assert.equal(euphoria020[23]?.trackTitle, "Discorecord (Galactixx Remix)");
+assert.equal(euphoria020[23]?.timestamp, 58 * 60 + 36);
+for (let i = 1; i < euphoria020.length; i++) {
+  assert.ok(
+    (euphoria020[i]!.timestamp ?? 0) > (euphoria020[i - 1]!.timestamp ?? 0),
+    `Hardwell Euphoria 020 clocks must increase at index ${i}`,
+  );
+}
+
+// LAMMER @ CORE Stage, Tomorrowland WE2 2026-07-26 — official Tomorrowland YT.
+// Overlay TL_LAMMER is too generic. No SC in the paste.
+assertSeedClocks(TL_LAMMER_TML_WE2_CORE_2026);
+assert.equal(TL_LAMMER_TML_WE2_CORE_2026.length, 16);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-bi_8FdSaT30"],
+  TL_LAMMER_TML_WE2_CORE_2026,
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-bi_8FdSaT30"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-G-DciaWb5KY"],
+  "LAMMER CORE WE2 is not the Bullet Tooth CORE WE2 seed",
+);
+assert.equal(isWiredTracklistSlug("yt-bi_8FdSaT30"), true);
+assert.equal(isSecondaryPlaybackSlug("yt-bi_8FdSaT30"), false);
+assert.equal(isWiredTracklistSlug("sc-lammer-tomorrowland"), false);
+const lammerCore = tracklist1001RowsToPlays(TL_LAMMER_TML_WE2_CORE_2026);
+assert.equal(lammerCore.length, 16);
+assert.equal(lammerCore[0]?.provenance, "1001tl");
+assert.equal(lammerCore[0]?.trackTitle, "Faux Loop");
+assert.equal(lammerCore[0]?.timestamp, 2 * 60 + 15);
+assert.equal(lammerCore[15]?.trackTitle, "Time To Move");
+assert.equal(lammerCore[15]?.timestamp, 3600 + 48 * 60 + 15);
+for (let i = 1; i < lammerCore.length; i++) {
+  assert.ok(
+    (lammerCore[i]!.timestamp ?? 0) > (lammerCore[i - 1]!.timestamp ?? 0),
+    `LAMMER TML WE2 CORE clocks must increase at index ${i}`,
+  );
+}
+
+// Nosi @ Crystal Garden, Tomorrowland WE1 2026-07-18 — official Tomorrowland YT.
+// Overlay TL_NOSI is too generic. No SC in the paste.
+assertSeedClocks(TL_NOSI_TML_WE1_CRYSTAL_2026);
+assert.equal(TL_NOSI_TML_WE1_CRYSTAL_2026.length, 20);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-O9xAX_vrDJI"],
+  TL_NOSI_TML_WE1_CRYSTAL_2026,
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-O9xAX_vrDJI"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-Ty03QjFnL90"],
+  "Nosi is not the Oscar And The Wolf Crystal Garden WE1 seed",
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-O9xAX_vrDJI"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-n3TESnQqiQ4"],
+  "Nosi is not the Blondish Crystal Garden WE1 seed",
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-O9xAX_vrDJI"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-8Oq0TMeaY4I"],
+  "Nosi is not the Camila Jun Crystal Garden WE1 seed",
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-O9xAX_vrDJI"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-eir5Sh_gHbo"],
+  "Nosi is not the Steve Angello Crystal Garden WE1 seed",
+);
+assert.equal(isWiredTracklistSlug("yt-O9xAX_vrDJI"), true);
+assert.equal(isSecondaryPlaybackSlug("yt-O9xAX_vrDJI"), false);
+assert.equal(isWiredTracklistSlug("sc-nosi-tomorrowland"), false);
+const nosiCrystal = tracklist1001RowsToPlays(TL_NOSI_TML_WE1_CRYSTAL_2026);
+assert.equal(nosiCrystal.length, 20);
+assert.equal(nosiCrystal[0]?.provenance, "1001tl");
+assert.equal(nosiCrystal[0]?.trackTitle, "Dancing (Again!)");
+assert.equal(nosiCrystal[0]?.timestamp, 0);
+assert.equal(nosiCrystal[19]?.trackTitle, "Neon Hearts");
+assert.equal(nosiCrystal[19]?.timestamp, 59 * 60 + 30);
+for (let i = 1; i < nosiCrystal.length; i++) {
+  assert.ok(
+    (nosiCrystal[i]!.timestamp ?? 0) > (nosiCrystal[i - 1]!.timestamp ?? 0),
+    `Nosi TML WE1 Crystal clocks must increase at index ${i}`,
+  );
+}
+
+// Giuseppe Ottaviani @ Area Two, ASOT Ahoy Rotterdam 2026-02-27.
+// Official @astateoftrance YT + official artist SC. Overlay
+// TL_GIUSEPPE_OTTAVIANI is too generic. hearthis/razorator is a fan
+// reupload — not wired. Distinct from Digital Society Leeds, ASOT 1290,
+// and ASOT Poland Legia.
+assertSeedClocks(TL_GIUSEPPE_OTTAVIANI_ASOT_AREA_TWO_ROTTERDAM_2026);
+assert.equal(TL_GIUSEPPE_OTTAVIANI_ASOT_AREA_TWO_ROTTERDAM_2026.length, 18);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-YvPI-unGanA"],
+  TL_GIUSEPPE_OTTAVIANI_ASOT_AREA_TWO_ROTTERDAM_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-giuseppeottaviani-giuseppe-ottaviani-a-state-of"
+  ],
+  TL_GIUSEPPE_OTTAVIANI_ASOT_AREA_TWO_ROTTERDAM_2026,
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-YvPI-unGanA"],
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-giuseppeottaviani-giuseppe-ottaviani-digitalsociety"
+  ],
+  "ASOT Area Two Rotterdam is not the Digital Society Leeds seed",
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-YvPI-unGanA"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-bxb6Tglooc4"],
+  "ASOT Area Two Rotterdam is not the ASOT 1290 radio seed",
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-YvPI-unGanA"],
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-giuseppeottaviani-giuseppe-ottaviani-live-at-a"
+  ],
+  "ASOT Area Two Rotterdam is not the ASOT Poland Legia seed",
+);
+assert.equal(isWiredTracklistSlug("yt-YvPI-unGanA"), true);
+assert.equal(
+  isWiredTracklistSlug("sc-giuseppeottaviani-giuseppe-ottaviani-a-state-of"),
+  true,
+);
+assert.equal(isSecondaryPlaybackSlug("yt-YvPI-unGanA"), false);
+assert.equal(
+  isSecondaryPlaybackSlug("sc-giuseppeottaviani-giuseppe-ottaviani-a-state-of"),
+  true,
+);
+const goAsotRotterdam = tracklist1001RowsToPlays(
+  TL_GIUSEPPE_OTTAVIANI_ASOT_AREA_TWO_ROTTERDAM_2026,
+);
+assert.equal(goAsotRotterdam.length, 18);
+assert.equal(goAsotRotterdam[0]?.provenance, "1001tl");
+assert.equal(goAsotRotterdam[0]?.trackTitle, "Space Unicorn");
+assert.equal(goAsotRotterdam[0]?.timestamp, 10);
+assert.equal(goAsotRotterdam[17]?.trackTitle, "Hold On");
+assert.equal(goAsotRotterdam[17]?.timestamp, 55 * 60 + 38);
+for (let i = 1; i < goAsotRotterdam.length; i++) {
+  assert.ok(
+    (goAsotRotterdam[i]!.timestamp ?? 0) >
+      (goAsotRotterdam[i - 1]!.timestamp ?? 0),
+    `Giuseppe Ottaviani ASOT Area Two clocks must increase at index ${i}`,
+  );
+}
+
+// Giuseppe Ottaviani @ ASOT, Legia Stadium, Poland 2026-06-20.
+// Official artist SC only. Overlay TL_GIUSEPPE_OTTAVIANI is too generic.
+// No YouTube in the paste. Distinct from Area Two Rotterdam, Digital
+// Society Leeds, and ASOT 1290.
+assertSeedClocks(TL_GIUSEPPE_OTTAVIANI_ASOT_POLAND_LEGIA_2026);
+assert.equal(TL_GIUSEPPE_OTTAVIANI_ASOT_POLAND_LEGIA_2026.length, 22);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-giuseppeottaviani-giuseppe-ottaviani-live-at-a"
+  ],
+  TL_GIUSEPPE_OTTAVIANI_ASOT_POLAND_LEGIA_2026,
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-giuseppeottaviani-giuseppe-ottaviani-live-at-a"
+  ],
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-giuseppeottaviani-giuseppe-ottaviani-a-state-of"
+  ],
+  "ASOT Poland Legia is not the Area Two Rotterdam seed",
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-giuseppeottaviani-giuseppe-ottaviani-live-at-a"
+  ],
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-giuseppeottaviani-giuseppe-ottaviani-digitalsociety"
+  ],
+  "ASOT Poland Legia is not the Digital Society Leeds seed",
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-giuseppeottaviani-giuseppe-ottaviani-live-at-a"
+  ],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-bxb6Tglooc4"],
+  "ASOT Poland Legia is not the ASOT 1290 radio seed",
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-https://soundcloud.com/giuseppeottaviani/giuseppe-ottaviani-live-at-a"
+  ],
+  undefined,
+);
+assert.equal(
+  isWiredTracklistSlug("sc-giuseppeottaviani-giuseppe-ottaviani-live-at-a"),
+  true,
+);
+assert.equal(
+  isSecondaryPlaybackSlug("sc-giuseppeottaviani-giuseppe-ottaviani-live-at-a"),
+  false,
+);
+const goAsotPoland = tracklist1001RowsToPlays(
+  TL_GIUSEPPE_OTTAVIANI_ASOT_POLAND_LEGIA_2026,
+);
+assert.equal(goAsotPoland.length, 22);
+assert.equal(goAsotPoland[0]?.provenance, "1001tl");
+assert.equal(goAsotPoland[0]?.trackTitle, "Unstoppable");
+assert.equal(goAsotPoland[0]?.timestamp, 40);
+assert.equal(goAsotPoland[21]?.trackTitle, "Hold On");
+assert.equal(goAsotPoland[21]?.timestamp, 3600 + 9 * 60 + 6);
+for (let i = 1; i < goAsotPoland.length; i++) {
+  assert.ok(
+    (goAsotPoland[i]!.timestamp ?? 0) > (goAsotPoland[i - 1]!.timestamp ?? 0),
+    `Giuseppe Ottaviani ASOT Poland clocks must increase at index ${i}`,
+  );
+}
+
+// Korolova @ Motherland Monument Kyiv 2026-06-18 — official @KOROLOVADJ YT
+// + official korolovadj SC. Overlay TL_KOROLOVA is too generic. Distinct
+// from Captive Soul 098 / TML WE2 / Snowattack / Tulum.
+assertSeedClocks(TL_KOROLOVA_MOTHERLAND_MONUMENT_KYIV_2026);
+assert.equal(TL_KOROLOVA_MOTHERLAND_MONUMENT_KYIV_2026.length, 12);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-ruri2xxu7wU"],
+  TL_KOROLOVA_MOTHERLAND_MONUMENT_KYIV_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-korolovadj-korolova-live-kyiv-ukraine"],
+  TL_KOROLOVA_MOTHERLAND_MONUMENT_KYIV_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-https://soundcloud.com/korolovadj/korolova-live-kyiv-ukraine"
+  ],
+  undefined,
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-ruri2xxu7wU"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-5JxfEjVdQFk"],
+  "Kyiv is not the Captive Soul 098 seed",
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-ruri2xxu7wU"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-RLOghpXjuJI"],
+  "Kyiv is not the TML WE2 Captive Soul seed",
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-ruri2xxu7wU"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-7UcyaKbvy2o"],
+  "Kyiv is not the Snowattack seed",
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-ruri2xxu7wU"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-HvkAfj1QnK8"],
+  "Kyiv is not the Tulum seed",
+);
+assert.equal(isWiredTracklistSlug("yt-ruri2xxu7wU"), true);
+assert.equal(
+  isWiredTracklistSlug("sc-korolovadj-korolova-live-kyiv-ukraine"),
+  true,
+);
+assert.equal(isSecondaryPlaybackSlug("yt-ruri2xxu7wU"), false);
+assert.equal(
+  isSecondaryPlaybackSlug("sc-korolovadj-korolova-live-kyiv-ukraine"),
+  true,
+);
+const korolovaKyiv = tracklist1001RowsToPlays(
+  TL_KOROLOVA_MOTHERLAND_MONUMENT_KYIV_2026,
+);
+assert.equal(korolovaKyiv.length, 12);
+assert.equal(korolovaKyiv[0]?.provenance, "1001tl");
+assert.equal(korolovaKyiv[0]?.trackTitle, "Buka");
+assert.equal(korolovaKyiv[0]?.timestamp, 0);
+assert.equal(korolovaKyiv[11]?.trackTitle, "The Present");
+assert.equal(korolovaKyiv[11]?.timestamp, 43 * 60 + 15);
+for (let i = 1; i < korolovaKyiv.length; i++) {
+  assert.ok(
+    (korolovaKyiv[i]!.timestamp ?? 0) > (korolovaKyiv[i - 1]!.timestamp ?? 0),
+    `Korolova Motherland Monument Kyiv clocks must increase at index ${i}`,
   );
 }
 

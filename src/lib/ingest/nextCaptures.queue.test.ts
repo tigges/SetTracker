@@ -11,8 +11,10 @@ import {
   captureQueueYear,
   captureSearchQuery,
   captureSearchWhen,
+  isCaptureRealNight,
   isFocusChartCaptureNeed,
   isFocusYearCaptureNeed,
+  isStudioMonthSpecial,
   presetFromNeed,
   scoreCaptureNeed,
   skipCaptureNeed,
@@ -1375,5 +1377,164 @@ assert.deepEqual(
   ["yt-creamfields-2026", "yt-nameless-2026-night"],
 );
 assert.equal(yearThenOlder[2]?.slug, "yt-guetta-ultra-2025");
+
+assert.equal(isStudioMonthSpecial("Hardwell presents Euphoria - August, 2026"), true);
+assert.equal(
+  isStudioMonthSpecial("Full Moon with Timmy Trumpet - August, 2026"),
+  true,
+);
+assert.equal(
+  isStudioMonthSpecial("Anetha WE1 | Tomorrowland 2026"),
+  false,
+);
+assert.equal(
+  isStudioMonthSpecial("SKRILLEX LIVE @ LOLLAPALOOZA CHILE 2026"),
+  false,
+);
+assert.equal(
+  isCaptureRealNight(
+    row({
+      slug: "sc-tomorrowland-hardwell-euphoria",
+      title: "Hardwell presents Euphoria - August, 2026",
+      type: "festival",
+      isFestival: true,
+      festivalSeason: true,
+      eventSlug: "tomorrowland",
+      eventRank: 1,
+    }),
+  ),
+  false,
+  "August OWR mix is not a July weekend night",
+);
+assert.equal(
+  isFocusChartCaptureNeed(
+    row({
+      slug: "sc-tomorrowland-hardwell-euphoria",
+      title: "Hardwell presents Euphoria - August, 2026",
+      type: "festival",
+      isFestival: true,
+      festivalSeason: true,
+      eventSlug: "tomorrowland",
+      eventRank: 1,
+      top100Rank: 3,
+    }),
+    now,
+  ),
+  false,
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "sc-korolova-captive-soul-unwired-99",
+      title: "Korolova - Captive Soul 99",
+      type: "mix",
+      isFestival: true,
+      festivalSeason: true,
+      eventSlug: "tomorrowland",
+      eventRank: 1,
+      top100Rank: 80,
+    }),
+    mapped,
+    now,
+  ),
+  "weekly-radio",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "sc-nora-purified-unwired-522",
+      title: "Nora En Pure · Purified #522",
+      type: "mix",
+      isFestival: false,
+      festivalSeason: false,
+      top100Rank: 40,
+    }),
+    mapped,
+    now,
+  ),
+  "weekly-radio",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "sc-honey-dijon-fm-unwired-011",
+      title: "Honey Dijon · Dijon FM 011 | Malix",
+      type: "soundcloud",
+      isFestival: false,
+    }),
+    mapped,
+    now,
+  ),
+  "weekly-radio",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "sc-amelielens-exhale-glued",
+      title: "Amelie Lens Exhale Radio 121",
+      type: "radio",
+      isFestival: true,
+      festivalSeason: true,
+      eventSlug: "tomorrowland",
+    }),
+    mapped,
+    now,
+  ),
+  "weekly-radio",
+  "inherited festival event does not keep weekly radio on Capture 1001",
+);
+
+const owrMix = row({
+  slug: "sc-tomorrowland-hardwell-euphoria",
+  title: "Hardwell presents Euphoria - August, 2026",
+  primaryDj: "Hardwell",
+  type: "festival",
+  isFestival: true,
+  festivalSeason: true,
+  eventSlug: "tomorrowland",
+  eventRank: 1,
+  top100Rank: 3,
+  publishedAt: "2026-08-20T00:00:00Z",
+});
+const clubNight = row({
+  slug: "yt-pacha-2026-night",
+  title: "Someone Live at Pacha Ibiza 2026",
+  type: "club",
+  isFestival: true,
+  festivalSeason: false,
+  eventSlug: "pacha-ibiza",
+  top100Rank: 90,
+  publishedAt: "2026-06-01T00:00:00Z",
+});
+assert.equal(
+  buildCaptureQueueFromNeeds([owrMix, clubNight], { limit: 10, nowMs: now })[0]
+    ?.slug,
+  "yt-pacha-2026-night",
+  "a 2026 club night fills before an August studio mix glued to Tomorrowland",
+);
+
+const mixFlood = Array.from({ length: 20 }, (_, i) =>
+  row({
+    slug: `sc-studio-mix-${i}`,
+    title: `Studio Month Mix ${i} - August, 2026`,
+    type: "festival",
+    isFestival: true,
+    festivalSeason: true,
+    eventSlug: "tomorrowland",
+    eventRank: 1,
+    top100Rank: 5,
+    publishedAt: "2026-08-20T00:00:00Z",
+  }),
+);
+const nightsThenMix = buildCaptureQueueFromNeeds(
+  [...mixFlood, clubNight, y2025Star],
+  { limit: 10, nowMs: now },
+);
+assert.equal(nightsThenMix[0]?.slug, "yt-pacha-2026-night");
+assert.equal(nightsThenMix[1]?.slug, "yt-guetta-ultra-2025");
+assert.ok(
+  nightsThenMix.slice(2).every((p) => p.slug.startsWith("sc-studio-mix-")),
+  "older real nights still beat this year's studio mixes",
+);
 
 console.log("nextCaptures.queue.test.ts ok");

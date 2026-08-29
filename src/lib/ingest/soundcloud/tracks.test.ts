@@ -320,6 +320,20 @@ assert.equal(
   "sc-tomorrowland-tomorrowland-friendship-mix-with-topic-august-2026",
 );
 
+const hardwellEuphoria020Sc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url ===
+    "https://soundcloud.com/tomorrowland/hardwell-presents-euphoria-august-2026",
+);
+assert.ok(hardwellEuphoria020Sc);
+assert.equal(hardwellEuphoria020Sc.primaryArtist.name, "Hardwell");
+assert.equal(hardwellEuphoria020Sc.type, "radio");
+assert.equal(hardwellEuphoria020Sc.seriesName, "Euphoria");
+assert.equal(
+  `sc-tomorrowland-${slugify("hardwell-presents-euphoria-august-2026")}`,
+  "sc-tomorrowland-hardwell-presents-euphoria-august-2026",
+);
+
 const lukeSelectsSc = SOUNDCLOUD_TRACK_SEEDS.find(
   (s) =>
     s.url ===
@@ -612,6 +626,17 @@ assert.equal(
   `sc-korolovadj-${slugify("korolova-tulum-mexico-melodic")}`,
   "sc-korolovadj-korolova-tulum-mexico-melodic",
 );
+const korolovaKyivSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url === "https://soundcloud.com/korolovadj/korolova-live-kyiv-ukraine",
+);
+assert.ok(korolovaKyivSc);
+assert.equal(korolovaKyivSc.primaryArtist.name, "Korolova");
+assert.equal(korolovaKyivSc.type, "mix");
+assert.equal(
+  `sc-korolovadj-${slugify("korolova-live-kyiv-ukraine")}`,
+  "sc-korolovadj-korolova-live-kyiv-ukraine",
+);
 
 const marnikUnlegendSc = SOUNDCLOUD_TRACK_SEEDS.find(
   (s) =>
@@ -639,6 +664,34 @@ assert.equal(goDigitalSc.seriesName, "Digital Society");
 assert.equal(
   `sc-giuseppeottaviani-${slugify("giuseppe-ottaviani-digitalsociety")}`,
   "sc-giuseppeottaviani-giuseppe-ottaviani-digitalsociety",
+);
+const goAsotRotterdamSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url ===
+    "https://soundcloud.com/giuseppeottaviani/giuseppe-ottaviani-a-state-of",
+);
+assert.ok(goAsotRotterdamSc);
+assert.equal(goAsotRotterdamSc.primaryArtist.name, "Giuseppe Ottaviani");
+assert.equal(goAsotRotterdamSc.seriesName, "A State of Trance");
+assert.equal(goAsotRotterdamSc.eventName, "A State of Trance");
+assert.equal(goAsotRotterdamSc.type, "festival");
+assert.equal(
+  `sc-giuseppeottaviani-${slugify("giuseppe-ottaviani-a-state-of")}`,
+  "sc-giuseppeottaviani-giuseppe-ottaviani-a-state-of",
+);
+const goAsotPolandSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url ===
+    "https://soundcloud.com/giuseppeottaviani/giuseppe-ottaviani-live-at-a",
+);
+assert.ok(goAsotPolandSc);
+assert.equal(goAsotPolandSc.primaryArtist.name, "Giuseppe Ottaviani");
+assert.equal(goAsotPolandSc.seriesName, "A State of Trance");
+assert.equal(goAsotPolandSc.eventName, "A State of Trance");
+assert.equal(goAsotPolandSc.type, "festival");
+assert.equal(
+  `sc-giuseppeottaviani-${slugify("giuseppe-ottaviani-live-at-a")}`,
+  "sc-giuseppeottaviani-giuseppe-ottaviani-live-at-a",
 );
 const tiniAntsSc = SOUNDCLOUD_TRACK_SEEDS.find(
   (s) =>

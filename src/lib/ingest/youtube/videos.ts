@@ -81,6 +81,11 @@ import {
   TL_THE_CHAINSMOKERS_ULTRA_MELBOURNE_MAINSTAGE_2026,
   TL_BLEU_CLAIR_BLEUPRINT_VOL_5_JAKARTA_2022,
   TL_BART_SKILS_LOVELAND_FIRE_2026,
+  TL_HARDWELL_EUPHORIA_020_2026,
+  TL_LAMMER_TML_WE2_CORE_2026,
+  TL_NOSI_TML_WE1_CRYSTAL_2026,
+  TL_GIUSEPPE_OTTAVIANI_ASOT_AREA_TWO_ROTTERDAM_2026,
+  TL_KOROLOVA_MOTHERLAND_MONUMENT_KYIV_2026,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
@@ -1271,6 +1276,23 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_KOROLOVA_TULUM_MEXICO_2026,
   },
   {
+    // Official Korolova playback — Motherland Monument Kyiv 2026-06-18.
+    // oEmbed 2026-08-29: @KOROLOVADJ. Official SC twin
+    // sc-korolovadj-korolova-live-kyiv-ukraine. Distinct from Captive Soul
+    // 098 / TML WE2 / Snowattack / Tulum.
+    video: "https://www.youtube.com/watch?v=ruri2xxu7wU",
+    primaryArtist: dj("Korolova", {
+      accent: "#f72585",
+      homeCity: "Kyiv, UA",
+    }),
+    genre: "Melodic Techno",
+    type: "mix",
+    title: "Korolova | Kyiv, Ukraine 2026",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/298h7wq1/korolova-motherland-monument-kyiv-ukraine-2026-06-18.html",
+    tracklist1001: TL_KOROLOVA_MOTHERLAND_MONUMENT_KYIV_2026,
+  },
+  {
     // Official playback — Teletech x FYM, AFAS Live Amsterdam 2025-12-31.
     // No SoundCloud in the operator paste — do not invent an SC slug.
     video: "https://www.youtube.com/watch?v=Nrl9yBX6Kpw",
@@ -2404,6 +2426,53 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
       "https://www.1001tracklists.com/tracklist/140dd8zt/bart-skils-fire-stage-loveland-festival-netherlands-2026-08-08.html",
     tracklist1001: TL_BART_SKILS_LOVELAND_FIRE_2026,
   },
+  {
+    // Official Tomorrowland One World Radio (@tomorrowlandoneworldradio).
+    // Host twin with official SC tomorrowland/hardwell-presents-euphoria-august-2026.
+    // Distinct from Euphoria 018 / 019 and Mainstage WE2.
+    video: "https://www.youtube.com/watch?v=Itd5D4q1KuM",
+    primaryArtist: dj("Hardwell", {
+      accent: "#023e8a",
+      homeCity: "Breda, NL",
+    }),
+    genre: "Big Room",
+    type: "radio",
+    title: "Hardwell presents Euphoria I Episode #20",
+    seriesName: "Euphoria",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1w79plst/hardwell-euphoria-020-2026-08-28.html",
+    tracklist1001: TL_HARDWELL_EUPHORIA_020_2026,
+  },
+  {
+    // Tomorrowland official — CORE Stage WE2. oEmbed @tomorrowland.
+    // No SoundCloud in the paste — do not invent an SC slug. Distinct from
+    // Bullet Tooth CORE WE2 (yt-G-DciaWb5KY).
+    video: "https://www.youtube.com/watch?v=bi_8FdSaT30",
+    primaryArtist: dj("LAMMER", { accent: "#c9184a" }),
+    genre: "Hard Dance",
+    type: "festival",
+    title: "Lammer WE2 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1ucjccjk/lammer-core-stage-tomorrowland-weekend-2-belgium-2026-07-26.html",
+    tracklist1001: TL_LAMMER_TML_WE2_CORE_2026,
+  },
+  {
+    // Tomorrowland official — Crystal Garden WE1. oEmbed @tomorrowland.
+    // No SoundCloud in the paste — do not invent an SC slug. Distinct from
+    // Oscar / Blondish / Camila Jun / Steve Angello Crystal Garden WE1.
+    video: "https://www.youtube.com/watch?v=O9xAX_vrDJI",
+    primaryArtist: dj("Nosi", { accent: "#2d6a4f" }),
+    genre: "House",
+    type: "festival",
+    title: "NOSI WE1 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1zy8fryt/nosi-crystal-garden-stage-tomorrowland-weekend-1-belgium-2026-07-18.html",
+    tracklist1001: TL_NOSI_TML_WE1_CRYSTAL_2026,
+  },
   // ---- DJ Mag Top 100: at least one set for chart DJs still at 0 ----
   {
     // Official Anyma @anyma_ofc. soundcloud.com/edmfamilylivesets2025 and
@@ -3240,6 +3309,11 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     eventName: "Tomorrowland Belgium",
   },
   {
+    // Official ASOT channel (@astateoftrance). Already curated without a
+    // tracklist — this capture fills the existing set. Host twin with
+    // official artist SC giuseppe-ottaviani-a-state-of. hearthis.at/razorator
+    // is a fan reupload — do not wire as sourceUrl / playback / 1001 key.
+    // Distinct from ASOT 1290 radio (yt-bxb6Tglooc4) and Digital Society Leeds.
     video: "https://www.youtube.com/watch?v=YvPI-unGanA",
     primaryArtist: dj("Giuseppe Ottaviani", { accent: "#7b2cbf" }),
     genre: "Trance",
@@ -3247,6 +3321,9 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     title: "Giuseppe Ottaviani live at A State of Trance 2026 (Friday | Area 2)",
     seriesName: "A State of Trance",
     eventName: "A State of Trance",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1084t4l1/giuseppe-ottaviani-area-two-a-state-of-trance-event-ahoy-rotterdam-netherlands-2026-02-27.html",
+    tracklist1001: TL_GIUSEPPE_OTTAVIANI_ASOT_AREA_TWO_ROTTERDAM_2026,
   },
   {
     video: "https://www.youtube.com/watch?v=eNa3hh-3ZF0",

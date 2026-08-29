@@ -696,3 +696,294 @@ export const TL_TOPIC_TML_FRIENDSHIP_MIX_2026: FingerprintSeedRow[] = [
   { at: "51:41", artist: "Topic & Sasha Alex Sloan vs. Marten Lou", title: "Saving Me vs. Late Night (Topic Mashup)" },
   { at: "55:38", artist: "Kotiēr", title: "Smalltown Boy" },
 ];
+
+/**
+ * Hardwell - Euphoria 020 2026-08-28
+ * Official SoundCloud: https://soundcloud.com/tomorrowland/hardwell-presents-euphoria-august-2026
+ * oEmbed 2026-08-28: author "Tomorrowland" (soundcloud.com/tomorrowland),
+ * title "Hardwell presents Euphoria - August, 2026".
+ * Official YouTube twin: https://youtu.be/Itd5D4q1KuM
+ * oEmbed 2026-08-28: channel "Tomorrowland One World Radio"
+ * (@tomorrowlandoneworldradio), title "Hardwell presents Euphoria I Episode #20".
+ * https://www.1001tracklists.com/tracklist/1w79plst/hardwell-euphoria-020-2026-08-28.html
+ * Overlay name TL_HARDWELL is too generic; constant is the episode.
+ * Distinct from Euphoria 018 (June, sc-…-june-2026 / yt-9aDj2qyAIBw) and
+ * 019 (July, sc-…-july-2026 / yt-39KkVIunYAk). Not a Tomorrowland weekend.
+ * Same 1001 seed + both official permalinks → host twin (SC-first playback).
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["sc-tomorrowland-hardwell-presents-euphoria-august-2026"] = TL_HARDWELL_EUPHORIA_020_2026
+ * plus yt-Itd5D4q1KuM.
+ * Captured 2026-08-28 — provenance 1001tl.
+ */
+export const TL_HARDWELL_EUPHORIA_020_2026: FingerprintSeedRow[] = [
+  { at: "0:39", artist: "Bolier & AMRV", title: "Everybody Lookin' 4" },
+  { at: "4:32", artist: "MORTEN & David Guetta", title: "La Révolution" },
+  { at: "7:27", artist: "Tiësto & Caleb Arredondo", title: "Echo Sax Finale" },
+  { at: "9:57", artist: "Hardwell & W&W", title: "Bangkok" },
+  {
+    at: "13:13",
+    artist: "Hardwell vs. Michael Jackson",
+    title: "Spaceman vs. Beat It (Hardwell Mashup)",
+  },
+  { at: "14:37", artist: "Hardwell", title: "Spaceman" },
+  { at: "16:01", artist: "Michael Jackson", title: "Beat It (Acappella)" },
+  { at: "17:24", artist: "Armin van Buuren ft. SACHA", title: "Everlasting" },
+  { at: "20:24", artist: "Steeper", title: "Take Me" },
+  { at: "23:26", artist: "Dirty Signal & Blink", title: "The World Never Sleeps" },
+  { at: "26:05", artist: "ZYNØX", title: "Be Yours Alone" },
+  { at: "28:39", artist: "JUNIVERZ & HEN1", title: "Take Control" },
+  { at: "31:43", artist: "Hardwell & W&W", title: "Turn Up The Bass" },
+  { at: "34:54", artist: "2ACES", title: "For The Ones" },
+  { at: "38:15", artist: "MaRLo", title: "Give Me Tech Energy" },
+  { at: "41:28", artist: "The Rocketman & SHVDZ", title: "Brasil" },
+  {
+    at: "44:02",
+    artist: "Hardwell & Bassjackers vs. Masters At Work",
+    title: "Work On The Drums (Hardwell Mashup)",
+  },
+  { at: "45:02", artist: "Masters At Work", title: "Work (Acappella)" },
+  { at: "46:02", artist: "Hardwell & Bassjackers", title: "Bang On The Drums" },
+  {
+    at: "47:02",
+    artist: "Olly James & Panteros666 & Evil Twin",
+    title: "Berlin 99'",
+  },
+  { at: "49:26", artist: "Bassjackers & Maddix", title: "Rave Is My Therapy" },
+  {
+    at: "52:42",
+    artist: "Dimitri Vegas & Pat B ft. Sylver",
+    title: "Turn The Tide",
+  },
+  { at: "55:57", artist: "VINAI", title: "Lose Myself" },
+  {
+    at: "58:36",
+    artist: "Frontliner",
+    title: "Discorecord (Galactixx Remix)",
+  },
+];
+
+/**
+ * LAMMER @ CORE Stage, Tomorrowland Weekend 2, Belgium 2026-07-26
+ * Official YouTube: https://youtu.be/bi_8FdSaT30
+ * oEmbed 2026-08-28: channel "Tomorrowland" (@tomorrowland), title
+ * "Lammer WE2 | Tomorrowland 2026".
+ * https://www.1001tracklists.com/tracklist/1ucjccjk/lammer-core-stage-tomorrowland-weekend-2-belgium-2026-07-26.html
+ * Overlay name TL_LAMMER is too generic; constant is the performance.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-bi_8FdSaT30"] = TL_LAMMER_TML_WE2_CORE_2026
+ * No SoundCloud in the paste — do not invent an SC slug.
+ * Distinct from Bullet Tooth CORE WE2 (yt-G-DciaWb5KY).
+ * Opening gap 2:15 → 23:20 kept as captured.
+ * Captured 2026-08-28 — provenance 1001tl.
+ */
+export const TL_LAMMER_TML_WE2_CORE_2026: FingerprintSeedRow[] = [
+  { at: "2:15", artist: "Mar Vista", title: "Faux Loop" },
+  { at: "23:20", artist: "Joe Hunt", title: "DJ Start Playing" },
+  { at: "31:35", artist: "Saxxon", title: "Tiki Taka" },
+  { at: "39:10", artist: "Alan Fitzpatrick", title: "We Do What We Want" },
+  { at: "43:50", artist: "S3PPA", title: "Inner Peace" },
+  { at: "46:35", artist: "LAMMER", title: "Alive" },
+  { at: "54:50", artist: "DJ FREEKFUNK & Bo Bensdorp", title: "Mango Loco Anthem" },
+  { at: "59:10", artist: "Riordan", title: "Needle On The Record" },
+  { at: "1:03:30", artist: "Awesome 3 ft. Lizzie Curious", title: "Don't Go" },
+  { at: "1:07:30", artist: "TWOFACED", title: "Yearning" },
+  { at: "1:11:30", artist: "LAMMER", title: "Out Of Space (Like Its 1992 Mix)" },
+  { at: "1:26:00", artist: "LAMMER", title: "All Night" },
+  { at: "1:32:40", artist: "Marlon Hoffstadt", title: "Party People" },
+  { at: "1:36:45", artist: "Redlight", title: "Get Out My Head" },
+  { at: "1:40:20", artist: "Nova Blue & EV", title: "Weekend Cinderella" },
+  { at: "1:48:15", artist: "LAMMER", title: "Time To Move" },
+];
+
+/**
+ * Nosi @ Crystal Garden Stage, Tomorrowland Weekend 1, Belgium 2026-07-18
+ * Official YouTube: https://youtu.be/O9xAX_vrDJI
+ * oEmbed 2026-08-28: channel "Tomorrowland" (@tomorrowland), title
+ * "NOSI WE1 | Tomorrowland 2026".
+ * https://www.1001tracklists.com/tracklist/1zy8fryt/nosi-crystal-garden-stage-tomorrowland-weekend-1-belgium-2026-07-18.html
+ * Overlay name TL_NOSI is too generic; constant is the performance.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-O9xAX_vrDJI"] = TL_NOSI_TML_WE1_CRYSTAL_2026
+ * No SoundCloud in the paste — do not invent an SC slug.
+ * Distinct from other Crystal Garden WE1 captures (Oscar And The Wolf,
+ * Blondish, Camila Jun, Steve Angello).
+ * Gap 9:11 → 18:30 kept as captured.
+ * Captured 2026-08-28 — provenance 1001tl.
+ */
+export const TL_NOSI_TML_WE1_CRYSTAL_2026: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "Eats Everything ft. Tiga & Audion", title: "Dancing (Again!)" },
+  { at: "2:34", artist: "Nosi & Sistek", title: "Burn For You" },
+  { at: "5:08", artist: "Liva K & OVEOUS", title: "Blessings" },
+  { at: "6:18", artist: "HotLap", title: "Get Enough" },
+  { at: "7:45", artist: "Rihanna", title: "Don't Stop The Music" },
+  { at: "9:11", artist: "Andrea Oliva", title: "Spotlight" },
+  { at: "18:30", artist: "Nelly Furtado", title: "Say It Right (Adana Twins Remix)" },
+  { at: "21:50", artist: "Liva K", title: "Didn't Miss You" },
+  { at: "24:58", artist: "Notre Dame", title: "No Rules" },
+  { at: "28:06", artist: "Kotiēr", title: "Smalltown Boy" },
+  { at: "31:14", artist: "Nosi", title: "So Good" },
+  { at: "34:22", artist: "HUGEL & SOLTO", title: "Jamaican (Bam Bam)" },
+  { at: "37:31", artist: "DERON x DJ Delicious", title: "Same Man (DERON Rework)" },
+  { at: "40:39", artist: "Nosi", title: "On My Own" },
+  { at: "43:48", artist: "Fahlberg", title: "There's Hope In Your Eyes" },
+  { at: "46:56", artist: "Nosi", title: "Losing My Religion" },
+  { at: "50:05", artist: "Victor Flash", title: "Let You Down" },
+  { at: "53:13", artist: "Shakedown", title: "At Night (Acappella)" },
+  { at: "56:22", artist: "JUNO (DE)", title: "Que Rico" },
+  { at: "59:30", artist: "Andrea Oliva", title: "Neon Hearts" },
+];
+
+/**
+ * Giuseppe Ottaviani @ Area Two, A State Of Trance, Ahoy Rotterdam, Netherlands 2026-02-27
+ * Official YouTube: https://youtu.be/YvPI-unGanA
+ * oEmbed 2026-08-28: channel "A State Of Trance" (@astateoftrance), title
+ * "Giuseppe Ottaviani live at A State of Trance 2026 (Friday | Area 2)".
+ * That video was already curated in YOUTUBE_SETS without a tracklist.
+ * Official artist SoundCloud:
+ * https://soundcloud.com/giuseppeottaviani/giuseppe-ottaviani-a-state-of
+ * oEmbed 2026-08-28: author "Giuseppe Ottaviani".
+ * https://www.1001tracklists.com/tracklist/1084t4l1/giuseppe-ottaviani-area-two-a-state-of-trance-event-ahoy-rotterdam-netherlands-2026-02-27.html
+ * Overlay name TL_GIUSEPPE_OTTAVIANI is too generic; constant is the night.
+ * Distinct from Digital Society Leeds, ASOT 1290 radio (yt-bxb6Tglooc4),
+ * and ASOT Poland Legia (sc-giuseppeottaviani-giuseppe-ottaviani-live-at-a).
+ * hearthis.at/razorator/giuseppeottaviani-liveatastateoftrancefestivalrotterdam27-02-2026-razorator
+ * is a fan reupload — do not wire as sourceUrl / playback /
+ * TRACKLIST_1001_BY_SOURCE_SLUG.
+ * Same 1001 seed + both official permalinks → host twin (SC-first playback).
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-YvPI-unGanA"] = TL_GIUSEPPE_OTTAVIANI_ASOT_AREA_TWO_ROTTERDAM_2026
+ * plus sc-giuseppeottaviani-giuseppe-ottaviani-a-state-of.
+ * Captured 2026-08-28 — provenance 1001tl.
+ */
+export const TL_GIUSEPPE_OTTAVIANI_ASOT_AREA_TWO_ROTTERDAM_2026: FingerprintSeedRow[] =
+  [
+    { at: "0:10", artist: "Giuseppe Ottaviani ft. Hypaton", title: "Space Unicorn" },
+    { at: "3:45", artist: "Giuseppe Ottaviani & Hypaton", title: "Soundboy" },
+    { at: "6:34", artist: "Armin van Buuren & Giuseppe Ottaviani", title: "Magico" },
+    { at: "10:03", artist: "Mauro Picotto & Giuseppe Ottaviani", title: "Ibiza Dream" },
+    { at: "13:17", artist: "Giuseppe Ottaviani & Dicosis", title: "Run Away" },
+    { at: "17:04", artist: "LAWTON", title: "Bad Potato" },
+    { at: "19:14", artist: "KI/KI", title: "5AM" },
+    {
+      at: "22:26",
+      artist: "Giuseppe Ottaviani & Andrew Rayel ft. Alessia Labate",
+      title: "How Do We Know",
+    },
+    {
+      at: "25:55",
+      artist: "Eric Prydz",
+      title: "Every Day (Sneijder pres. Alt1 Remix)",
+    },
+    {
+      at: "29:07",
+      artist: "Giuseppe Ottaviani & Gabry Ponte & Crooked Bangs",
+      title: "Astra",
+    },
+    { at: "32:05", artist: "Legend B", title: "Lost In Love" },
+    { at: "35:58", artist: "Yahel & Eyal Barkan", title: "Voyage (Rafael Osmo Rework)" },
+    { at: "39:00", artist: "Giuseppe Ottaviani", title: "Panama" },
+    { at: "42:03", artist: "Giuseppe Ottaviani", title: "No One Like You" },
+    {
+      at: "45:40",
+      artist: "Bryn Liedl ft. Bethany Marie",
+      title: "Statues (Bryan Kearney Remix)",
+    },
+    { at: "48:21", artist: "Giuseppe Ottaviani & Lucid Blue", title: "Be The Angel" },
+    { at: "52:03", artist: "Giuseppe Ottaviani", title: "Linking People" },
+    { at: "55:38", artist: "Giuseppe Ottaviani ft. Diana Goldberg", title: "Hold On" },
+  ];
+
+/**
+ * Giuseppe Ottaviani @ A State Of Trance, Legia Stadium, Poland 2026-06-20
+ * Official artist SoundCloud:
+ * https://soundcloud.com/giuseppeottaviani/giuseppe-ottaviani-live-at-a
+ * oEmbed 2026-08-29: author "Giuseppe Ottaviani", title
+ * "Giuseppe Ottaviani live at A State of Trance Poland 2026".
+ * https://www.1001tracklists.com/tracklist/1muply39/giuseppe-ottaviani-a-state-of-trance-event-legia-stadium-poland-2026-06-20.html
+ * Overlay name TL_GIUSEPPE_OTTAVIANI is too generic; constant is the night.
+ * Distinct from Area Two Rotterdam (yt-YvPI-unGanA), Digital Society Leeds,
+ * and ASOT 1290 radio (yt-bxb6Tglooc4). No YouTube in the paste — do not invent.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["sc-giuseppeottaviani-giuseppe-ottaviani-live-at-a"]
+ * = TL_GIUSEPPE_OTTAVIANI_ASOT_POLAND_LEGIA_2026
+ * Captured 2026-08-29 — provenance 1001tl.
+ */
+export const TL_GIUSEPPE_OTTAVIANI_ASOT_POLAND_LEGIA_2026: FingerprintSeedRow[] = [
+  { at: "0:40", artist: "Anyma & OTTAGON", title: "Unstoppable" },
+  { at: "3:33", artist: "ARTBAT & Giuseppe Ottaviani & Conor Ross", title: "Break The Loop" },
+  { at: "7:20", artist: "Orkidea", title: "Forward Forever (OTTAGON Retouch)" },
+  { at: "11:05", artist: "Giuseppe Ottaviani & Hypaton", title: "Soundboy" },
+  { at: "14:05", artist: "Anyma & Joji", title: "Beautiful (OTTAGON Remix)" },
+  {
+    at: "18:22",
+    artist: "Mark Roma",
+    title: "What Is On Your Mind (Giuseppe Ottaviani Edit)",
+  },
+  { at: "19:35", artist: "Max Styler & Three Drives", title: "Greece 2000 (Max Styler Rework)" },
+  {
+    at: "21:10",
+    artist: "ARTBAT & R3HAB & Stylo & Eli & Dani ft. NAIIM",
+    title: "Fight Machine (Giuseppe Ottaviani Edit)",
+  },
+  {
+    at: "23:40",
+    artist: "Giuseppe Ottaviani & Andrew Rayel ft. Alessia Labate",
+    title: "How Do We Know",
+  },
+  {
+    at: "27:00",
+    artist: "Green Velvet & Harvard Bass",
+    title: "Lazer Beams (Adam Beyer & Massano Remix)",
+  },
+  { at: "30:25", artist: "Eric Prydz", title: "Liberate (Giuseppe Ottaviani Rework)" },
+  { at: "34:10", artist: "Ben Hemsley & Giuseppe Ottaviani", title: "Law Of Attraction" },
+  { at: "38:20", artist: "Giuseppe Ottaviani & Dicosis", title: "Run Away" },
+  { at: "42:30", artist: "Paul Denton", title: "Deep In Your Mind" },
+  {
+    at: "45:35",
+    artist: "Tin Tin Out",
+    title: "Always Something There To Remind Me (Sneijder Rework)",
+  },
+  {
+    at: "48:48",
+    artist: "Giuseppe Ottaviani & Gabry Ponte & Crooked Bangs",
+    title: "Astra",
+  },
+  { at: "51:20", artist: "Mauro Picotto & Giuseppe Ottaviani", title: "Ibiza Dream" },
+  { at: "54:40", artist: "Giuseppe Ottaviani & Ilan Bluestone", title: "Together Again" },
+  { at: "59:16", artist: "Giuseppe Ottaviani & Billy Gillies", title: "Doves" },
+  { at: "1:02:00", artist: "Ratty", title: "Sunrise (Here I Am) (Club Mix)" },
+  {
+    at: "1:05:20",
+    artist: "Hardwell ft. Jonathan Mendelsohn",
+    title: "Echo (Giuseppe Ottaviani Remix)",
+  },
+  { at: "1:09:06", artist: "Giuseppe Ottaviani ft. Diana Goldberg", title: "Hold On" },
+];
+
+/**
+ * Korolova @ Motherland Monument Kyiv, Ukraine 2026-06-18
+ * Official YouTube: https://youtu.be/ruri2xxu7wU
+ * oEmbed 2026-08-29: channel "KOROLOVA" (@KOROLOVADJ), title
+ * "KOROLOVA - LIVE @ KYIV, UKRAINE 2026".
+ * Official artist SoundCloud:
+ * https://soundcloud.com/korolovadj/korolova-live-kyiv-ukraine
+ * oEmbed 2026-08-29: author "KOROLOVA", same title.
+ * https://www.1001tracklists.com/tracklist/298h7wq1/korolova-motherland-monument-kyiv-ukraine-2026-06-18.html
+ * Overlay name TL_KOROLOVA is too generic (Captive Soul 098 / TML WE2 /
+ * Snowattack / Tulum). Constant is the night.
+ * Same 1001 seed + both official permalinks → host twin (SC-first extras).
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-ruri2xxu7wU"]
+ * = TL_KOROLOVA_MOTHERLAND_MONUMENT_KYIV_2026
+ * plus sc-korolovadj-korolova-live-kyiv-ukraine.
+ * Captured 2026-08-29 — provenance 1001tl.
+ */
+export const TL_KOROLOVA_MOTHERLAND_MONUMENT_KYIV_2026: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "Cherry", title: "Buka" },
+  { at: "4:30", artist: "CamelPhat & Volkoder", title: "Unique Moment" },
+  { at: "9:20", artist: "Jast", title: "Rhythm" },
+  { at: "12:30", artist: "Fancy Inc", title: "Hypnotic" },
+  { at: "16:10", artist: "TH;EN & Carlo Whale", title: "Echoes Of You" },
+  { at: "20:20", artist: "Woo York", title: "Lightfall" },
+  { at: "24:15", artist: "Kostyn", title: "Papi" },
+  { at: "27:05", artist: "Catta", title: "La Isla" },
+  { at: "31:00", artist: "Max Styler & Greggio", title: "Oldskool Flavor" },
+  { at: "34:40", artist: "Chris Avantgarde", title: "Rhythm Check" },
+  { at: "38:25", artist: "EYNKA ft. Låpsley", title: "Promises" },
+  { at: "43:15", artist: "GOODBOYS & Korolova", title: "The Present" },
+];

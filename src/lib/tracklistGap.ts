@@ -42,7 +42,12 @@ export type TracklistGapFields = {
 };
 
 const WEEKLY_RADIO =
-  /\b(radio\s*(show|ep\.?|#)?|on air|captive soul|selects|clapcast|desire radio|resonation|dharma|spannung|group therapy|a state of trance|\basot\b|gdwb|gdjb|hot robot|steve radio|smash the house radio|night owl radio|core radio|night service|protocol radio|prismatic|spectrum radio|purified)\b/i;
+  /\b(radio\s*(show|ep\.?|#)?|on air|captive soul|selects|clapcast|desire radio|resonation|dharma|spannung|group therapy|a state of trance|\basot\b|gdwb|gdjb|hot robot|steve radio|smash the house radio|night owl radio|core radio|night service|protocol radio|prismatic|spectrum radio|purified|dijon\s*fm)\b/i;
+
+/** Weekly / numbered studio series — not a festival or club night. */
+export function looksLikeWeeklyRadioSeries(title: string): boolean {
+  return WEEKLY_RADIO.test(title);
+}
 
 const LIVESTREAM_HUB =
   /\b(livestream|live\s*stream|one world radio)\b/i;
