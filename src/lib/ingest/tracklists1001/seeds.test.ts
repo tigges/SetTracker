@@ -4757,9 +4757,33 @@ assert.equal(
   TL_JOHN_SUMMIT_BURNING_MAN_PLAYA_PACKAGE_MIX_2025,
 );
 assert.equal(isWiredTracklistSlug("yt-PkWNuf7rtms"), true);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-johnsummit-john-summit-burning-man-playa-package-mix-experts-only-remix-album"
+  ],
+  TL_JOHN_SUMMIT_BURNING_MAN_PLAYA_PACKAGE_MIX_2025,
+);
+assert.equal(
+  isWiredTracklistSlug(
+    "sc-johnsummit-john-summit-burning-man-playa-package-mix-experts-only-remix-album",
+  ),
+  true,
+);
+assert.equal(isSecondaryPlaybackSlug("yt-PkWNuf7rtms"), false);
+assert.equal(
+  isSecondaryPlaybackSlug(
+    "sc-johnsummit-john-summit-burning-man-playa-package-mix-experts-only-remix-album",
+  ),
+  true,
+);
 assert.notEqual(
   TRACKLIST_1001_BY_SOURCE_SLUG["yt-PkWNuf7rtms"],
   TRACKLIST_1001_BY_SOURCE_SLUG["yt-PlArfyuzuqo"],
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-PkWNuf7rtms"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-9TKqqBCmDHA"],
+  "Playa Package is not the Lollapalooza seed",
 );
 const playaPackage = tracklist1001RowsToPlays(
   TL_JOHN_SUMMIT_BURNING_MAN_PLAYA_PACKAGE_MIX_2025,

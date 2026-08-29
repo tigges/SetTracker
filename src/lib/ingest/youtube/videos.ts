@@ -3458,6 +3458,7 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
   },
   {
     // Official John Summit upload — Experts Only remix album mix.
+    // Official SC twin: sc-johnsummit-john-summit-burning-man-playa-package-mix-experts-only-remix-album.
     // Distinct from TML WE2 (yt-PlArfyuzuqo) and Lollapalooza (yt-9TKqqBCmDHA).
     video: "https://www.youtube.com/watch?v=PkWNuf7rtms",
     primaryArtist: dj("John Summit", {

@@ -4899,6 +4899,8 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "sc-vintageculturemusic-vintage-culture-robot-heart-residency-2024-california":
     TL_VINTAGE_CULTURE_ROBOT_HEART_RESIDENCY_UNITED_STATES_2024,
   "yt-PkWNuf7rtms": TL_JOHN_SUMMIT_BURNING_MAN_PLAYA_PACKAGE_MIX_2025,
+  "sc-johnsummit-john-summit-burning-man-playa-package-mix-experts-only-remix-album":
+    TL_JOHN_SUMMIT_BURNING_MAN_PLAYA_PACKAGE_MIX_2025,
   "yt-AQ6wWT2HaSQ": TL_BRANDON_DESERT_VALLEY_PAROOKAVILLE_GERMANY_2024,
   "sc-brandonsounds-brandon-live-at-parookaville-2024-desert-valley":
     TL_BRANDON_DESERT_VALLEY_PAROOKAVILLE_GERMANY_2024,
