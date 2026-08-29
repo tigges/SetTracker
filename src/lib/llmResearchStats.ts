@@ -5,7 +5,13 @@
 
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
-import { LLM_JOB_VARIABLES } from "./ingest/discovery/llmTrackRecord";
+import {
+  addLlmTally,
+  classifyLlmOutcome,
+  emptyLlmTally,
+  LLM_JOB_VARIABLES,
+  type LlmTally,
+} from "./ingest/discovery/llmTrackRecord";
 
 export type LlmResearchTarget = "dj" | "event" | "identity" | "first-party";
 
@@ -70,7 +76,27 @@ type HandleRow = {
   slug?: string;
   name?: string;
   accepted?: Array<{ field?: string }>;
+  rejected?: Array<{ field?: string }>;
 };
+
+/**
+ * Rebuild exclusive request outcomes from a report that predates `tally`.
+ * Same rule the job uses: a write is found, a named reject is partial,
+ * nothing accepted or rejected is a miss.
+ */
+export function tallyFromHandleRows(rows: HandleRow[]): LlmTally {
+  const tally = emptyLlmTally();
+  for (const row of rows) {
+    addLlmTally(
+      tally,
+      classifyLlmOutcome({
+        found: (row.accepted?.length ?? 0) > 0,
+        namedPartial: (row.rejected?.length ?? 0) > 0,
+      }),
+    );
+  }
+  return tally;
+}
 
 type IdentityRow = {
   slug?: string;
@@ -144,6 +170,10 @@ export function summarizeHandleReport(
     if (!row.slug || !row.name || !fields.length) continue;
     fills.push({ kind, slug: row.slug, name: row.name, fields });
   }
+  const derived = tallyFromHandleRows(body.rows ?? []);
+  const found = body.tally?.found ?? body.stats?.found ?? derived.found;
+  const partial = body.tally?.partial ?? body.stats?.partial ?? derived.partial;
+  const missed = body.tally?.missed ?? body.stats?.missed ?? derived.missed;
   return {
     round: {
       file,
@@ -152,9 +182,9 @@ export function summarizeHandleReport(
       scanned,
       applied,
       rejected,
-      found: body.tally?.found ?? body.stats?.found,
-      partial: body.tally?.partial ?? body.stats?.partial,
-      missed: body.tally?.missed ?? body.stats?.missed,
+      found,
+      partial,
+      missed,
       variables: body.variables,
       generatedAt: body.generatedAt ?? null,
     },

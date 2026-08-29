@@ -5,6 +5,7 @@ import {
   identifyOutcomeFromReport,
   llmFieldView,
   llmHasOutcomeTally,
+  llmRequestView,
   llmRoundOutcome,
   outcomeSlices,
 } from "./statsRunHealth";
@@ -111,5 +112,45 @@ assert.equal(view.dj.find((s) => s.key === "open")?.count, 111);
 assert.equal(view.event.find((s) => s.key === "written")?.count, 10);
 assert.ok(view.outcome);
 assert.equal(view.outcome.find((s) => s.key === "hit")?.count, 8);
+
+const req = llmRequestView(stats);
+assert.equal(req.sent, 24);
+assert.equal(req.found, 8);
+assert.equal(req.partial, 3);
+assert.equal(req.missed, 13);
+assert.deepEqual(
+  req.slices.map((s) => [s.key, s.count]),
+  [
+    ["hit", 8],
+    ["partial", 3],
+    ["miss", 13],
+  ],
+);
+assert.equal(req.event, null);
+assert.equal(req.fields.djWritten, 29);
+
+const withEvents = llmRequestView({
+  ...stats,
+  rounds: [
+    ...rounds,
+    {
+      file: "llm-event-handle-research-gemini.json",
+      provider: "gemini",
+      target: "event",
+      scanned: 8,
+      applied: 10,
+      rejected: 2,
+      found: 2,
+      partial: 1,
+      missed: 5,
+      generatedAt: "2026-08-17T07:00:00.000Z",
+    },
+  ],
+});
+assert.equal(withEvents.sent, 32);
+assert.equal(withEvents.found, 10);
+assert.ok(withEvents.event);
+assert.equal(withEvents.event.sent, 8);
+assert.equal(withEvents.event.slices.find((s) => s.key === "hit")?.count, 2);
 
 console.log("statsRunHealth.test.ts ok");

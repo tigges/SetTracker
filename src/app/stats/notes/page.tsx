@@ -101,7 +101,9 @@ export default function StatsNotesPage() {
           to parse. Cue extras stay off unless you set LLM_CUE_EXTRAS. Cue
           parser apply and track-id fill-null also run on enrich. Each
           Catalog LLM research run dispatches Pages so this card and the DJ
-          complete list match that run.
+          complete list match that run. Last LLM research counts one request
+          per DJ or event sent, then exclusive hit / partial / miss — the
+          same slices as Last enrich. Field fill is a footnote.
         </p>
         <p className="mt-2 text-[13px] leading-relaxed text-muted">
           <span className="font-semibold text-ink">Manual IDs:</span> Capture
