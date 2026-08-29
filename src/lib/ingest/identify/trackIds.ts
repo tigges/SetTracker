@@ -24,8 +24,12 @@ import {
   resolveTrackMetaMusicBrainz,
   resolveTrackMetaMusicBrainzByIsrc,
 } from "../../thumbs/musicbrainz";
-import { canonicalSpotifyUrl, normalizeIsrc } from "../../trackMeta";
-import { resolveSpotifyTrackUrl } from "./spotify";
+import {
+  canonicalBeatportUrl,
+  canonicalSpotifyUrl,
+  normalizeIsrc,
+} from "../../trackMeta";
+import { resolveSpotifyTrack, spotifyConfigured } from "./spotify";
 import {
   parseTracksCsv,
   tracksNeedEnrich,
@@ -56,11 +60,15 @@ import {
 export type IdentifyQueueRow = FingerprintSeedRow & {
   slug?: string;
   isrc?: string | null;
+  beatportUrl?: string | null;
+  spotifyUrl?: string | null;
 };
 
 export type IdentifyLookupPlan = {
   knownIsrc?: string;
   needIsrc: boolean;
+  needBeatport: boolean;
+  needSpotify: boolean;
   useDeezer: boolean;
   useAudd: boolean;
   mbByIsrc: boolean;
@@ -70,9 +78,13 @@ export type IdentifyLookupPlan = {
 export function identifyLookupPlan(row: IdentifyQueueRow): IdentifyLookupPlan {
   const knownIsrc = normalizeIsrc(row.isrc) || undefined;
   const needIsrc = !knownIsrc;
+  const needBeatport = !acceptBeatportTrackUrl(row.beatportUrl);
+  const needSpotify = !canonicalSpotifyUrl(row.spotifyUrl);
   return {
     knownIsrc,
     needIsrc,
+    needBeatport,
+    needSpotify,
     useDeezer: needIsrc,
     useAudd: needIsrc,
     mbByIsrc: Boolean(knownIsrc),
@@ -90,7 +102,7 @@ export type TrackIdHit = {
   spotifyUrl?: string;
   deezerTitle?: string;
   platforms?: TrackRadarPlatforms;
-  source: "deezer" | "musicbrainz" | "both" | "trackradar" | "audd";
+  source: "deezer" | "musicbrainz" | "both" | "trackradar" | "audd" | "spotify";
 };
 
 export type TrackIdMiss = {
@@ -112,6 +124,8 @@ export type TrackIdReport = {
   set79Hints: Set79Hint[];
   applied: number;
   pinned: number;
+  spotifyFilled: number;
+  spotifyConfigured: boolean;
 };
 
 const HELD_SEED_ROWS: Record<string, FingerprintSeedRow[]> = {
@@ -223,6 +237,7 @@ export async function fingerprintNeedIdRows(
       title: true,
       isrc: true,
       beatportUrl: true,
+      spotifyUrl: true,
     },
   });
   return uniqueIdentifyRows(
@@ -242,6 +257,8 @@ export async function fingerprintNeedIdRows(
         title: t.title,
         slug: t.slug,
         isrc: t.isrc,
+        beatportUrl: t.beatportUrl,
+        spotifyUrl: t.spotifyUrl,
       })),
   ).slice(0, limit);
 }
@@ -264,7 +281,14 @@ export async function catalogNeedIdRows(
     },
     orderBy: { plays: { _count: "desc" } },
     take: Math.max(limit * 8, limit),
-    select: { slug: true, artistName: true, title: true, isrc: true, beatportUrl: true },
+    select: {
+      slug: true,
+      artistName: true,
+      title: true,
+      isrc: true,
+      beatportUrl: true,
+      spotifyUrl: true,
+    },
   });
   const candidates = tracks.filter((t) => {
     if (isJunkTrackPin({ slug: t.slug, artist: t.artistName, title: t.title })) {
@@ -286,7 +310,7 @@ export async function catalogNeedIdRows(
       plays: 0,
       isrc: t.isrc,
       beatportUrl: t.beatportUrl,
-      spotifyUrl: null,
+      spotifyUrl: t.spotifyUrl,
     })),
     limit,
   );
@@ -297,6 +321,8 @@ export async function catalogNeedIdRows(
       title: t.title,
       slug: t.slug,
       isrc: t.isrc,
+      beatportUrl: t.beatportUrl,
+      spotifyUrl: t.spotifyUrl,
     })),
   ).slice(0, limit);
 }
@@ -340,33 +366,152 @@ export function exportRowsToIdentifyQueue(
       title: r.title,
       slug: r.slug,
       isrc: r.isrc,
+      beatportUrl: r.beatportUrl,
+      spotifyUrl: r.spotifyUrl,
     })),
   ).slice(0, Math.max(0, limit));
+}
+
+/** Have-ISRC rows whose Spotify field is still a search URL or empty. */
+export function catalogRowNeedsSpotifyFill(row: {
+  isrc?: string | null;
+  spotifyUrl?: string | null;
+}): boolean {
+  return Boolean(normalizeIsrc(row.isrc)) && !canonicalSpotifyUrl(row.spotifyUrl);
+}
+
+export function takeSpotifyFillRows(
+  rows: IdentifyQueueRow[],
+  limit: number,
+  skip: Set<string> = new Set(),
+): IdentifyQueueRow[] {
+  const pins = loadTrackIdPins();
+  const pinBySlug = new Map(pins.map((p) => [p.slug, p]));
+  const out: IdentifyQueueRow[] = [];
+  for (const row of uniqueIdentifyRows(rows)) {
+    if (out.length >= limit) break;
+    if (!catalogRowNeedsSpotifyFill(row)) continue;
+    if (isJunkTrackPin({ slug: row.slug, artist: row.artist, title: row.title })) {
+      continue;
+    }
+    if (row.slug && pinCoversNeed(pinBySlug.get(row.slug), { wantSpotify: true })) {
+      continue;
+    }
+    const key = row.slug || rowKey(row);
+    if (skip.has(key) || skip.has(rowKey(row))) continue;
+    out.push(row);
+  }
+  return out;
+}
+
+/** High-play catalog tracks that already have an ISRC but no /track/{22}. */
+export async function catalogNeedSpotifyRows(
+  prisma: PrismaClient,
+  limit: number,
+  skip: Set<string> = new Set(),
+): Promise<IdentifyQueueRow[]> {
+  if (limit <= 0) return [];
+  const tracks = await prisma.track.findMany({
+    where: {
+      AND: [
+        { artistName: { not: "" } },
+        { title: { not: "" } },
+        { isrc: { not: null } },
+        {
+          OR: [
+            { spotifyUrl: null },
+            { NOT: { spotifyUrl: { startsWith: "https://open.spotify.com/track/" } } },
+          ],
+        },
+      ],
+    },
+    orderBy: { plays: { _count: "desc" } },
+    take: Math.max(limit * 8, limit),
+    select: {
+      slug: true,
+      artistName: true,
+      title: true,
+      isrc: true,
+      beatportUrl: true,
+      spotifyUrl: true,
+    },
+  });
+  return takeSpotifyFillRows(
+    tracks.map((t) => ({
+      at: "0:00",
+      artist: t.artistName,
+      title: t.title,
+      slug: t.slug,
+      isrc: t.isrc,
+      beatportUrl: t.beatportUrl,
+      spotifyUrl: t.spotifyUrl,
+    })),
+    limit,
+    skip,
+  );
+}
+
+export function exportRowsToSpotifyQueue(
+  rows: ExportTrackRow[],
+  limit: number,
+  skip: Set<string> = new Set(),
+): IdentifyQueueRow[] {
+  return takeSpotifyFillRows(
+    rows.map((r) => ({
+      at: "0:00",
+      artist: r.artist,
+      title: r.title,
+      slug: r.slug,
+      isrc: r.isrc,
+      beatportUrl: r.beatportUrl,
+      spotifyUrl: r.spotifyUrl,
+    })),
+    limit,
+    skip,
+  );
+}
+
+async function loadTracksCsvText(): Promise<string> {
+  const fromEnv = process.env.TRACK_ID_EXPORT_PATH?.trim();
+  const localPath = fromEnv || "data/track-id-export/tracks.csv";
+  try {
+    const { readFileSync } = await import("node:fs");
+    return readFileSync(localPath, "utf8");
+  } catch {
+    try {
+      const res = await fetch(LIVE_TRACKS_CSV, {
+        headers: {
+          Accept: "text/csv",
+          "User-Agent":
+            "SetRadar/0.2.275 (+https://setradar.ai; track-id enrich)",
+        },
+        signal: AbortSignal.timeout(60_000),
+      });
+      if (res.ok) return await res.text();
+    } catch {
+      return "";
+    }
+  }
+  return "";
 }
 
 export async function loadNeedEnrichExportRows(
   limit: number,
 ): Promise<IdentifyQueueRow[]> {
   if (limit <= 0) return [];
-  const fromEnv = process.env.TRACK_ID_EXPORT_PATH?.trim();
-  const localPath = fromEnv || "data/track-id-export/tracks.csv";
-  let text = "";
-  try {
-    const { readFileSync } = await import("node:fs");
-    text = readFileSync(localPath, "utf8");
-  } catch {
-    try {
-      const res = await fetch(LIVE_TRACKS_CSV, {
-        headers: { Accept: "text/csv", "User-Agent": "SetRadar/0.2.213 (+https://setradar.ai; track-id enrich)" },
-        signal: AbortSignal.timeout(60_000),
-      });
-      if (res.ok) text = await res.text();
-    } catch {
-      text = "";
-    }
-  }
+  const text = await loadTracksCsvText();
   if (!text) return [];
   return exportRowsToIdentifyQueue(parseTracksCsv(text), limit);
+}
+
+export async function loadNeedSpotifyExportRows(
+  limit: number,
+  skip: Set<string> = new Set(),
+): Promise<IdentifyQueueRow[]> {
+  if (limit <= 0) return [];
+  const text = await loadTracksCsvText();
+  if (!text) return [];
+  return exportRowsToSpotifyQueue(parseTracksCsv(text), limit, skip);
 }
 
 function mergePlatforms(
@@ -391,17 +536,20 @@ function pickSource(flags: {
   musicbrainz?: boolean;
   trackradar?: boolean;
   audd?: boolean;
+  spotify?: boolean;
 }): TrackIdHit["source"] {
   const n = [
     flags.deezer,
     flags.musicbrainz,
     flags.trackradar,
     flags.audd,
+    flags.spotify,
   ].filter(Boolean).length;
   if (n > 1) return "both";
   if (flags.musicbrainz) return "musicbrainz";
   if (flags.trackradar) return "trackradar";
   if (flags.audd) return "audd";
+  if (flags.spotify) return "spotify";
   return "deezer";
 }
 
@@ -419,6 +567,34 @@ export async function identifySeedRow(
 
   const plan = identifyLookupPlan(row);
   const queryTitle = catalogQueryTitle(row.title);
+
+  // Have-ISRC + Beatport already on file: one Spotify `isrc:` lookup, no MB.
+  if (!plan.needIsrc && !plan.needBeatport && plan.needSpotify) {
+    const sp = await resolveSpotifyTrack({
+      artist: row.artist,
+      title: queryTitle,
+      isrc: plan.knownIsrc,
+    });
+    if (!sp) {
+      return {
+        artist: row.artist,
+        title: row.title,
+        at: row.at,
+        reason: spotifyConfigured() ? "no verified spotify" : "spotify not configured",
+      };
+    }
+    return {
+      artist: row.artist,
+      title: row.title,
+      at: row.at,
+      slug: row.slug,
+      isrc: plan.knownIsrc,
+      beatportUrl: acceptBeatportTrackUrl(row.beatportUrl),
+      spotifyUrl: sp.url,
+      source: "spotify",
+    };
+  }
+
   let isrc = plan.knownIsrc ?? null;
   let mbid: string | undefined;
   let beatportUrl: string | undefined;
@@ -481,13 +657,40 @@ export async function identifySeedRow(
   if (!spotifyUrl) {
     spotifyUrl = canonicalSpotifyUrl(platforms?.spotify) ?? undefined;
   }
+  let usedSpotify = false;
   if (!spotifyUrl) {
-    spotifyUrl =
-      (await resolveSpotifyTrackUrl({
-        artist: row.artist,
-        title: queryTitle,
-        isrc,
-      })) ?? undefined;
+    const sp = await resolveSpotifyTrack({
+      artist: row.artist,
+      title: queryTitle,
+      isrc,
+    });
+    if (sp) {
+      usedSpotify = true;
+      spotifyUrl = sp.url;
+      if (!isrc && sp.isrc) isrc = sp.isrc;
+    }
+  }
+
+  // Spotify (or Deezer / TrackRadar) often lands the ISRC after the first
+  // MusicBrainz name search. Re-query by ISRC for the Beatport /track rel.
+  if (opts.musicbrainz && isrc && !beatportUrl && !plan.mbByIsrc) {
+    const mbByIsrc = await resolveTrackMetaMusicBrainzByIsrc(
+      isrc,
+      queryTitle,
+      row.artist,
+    );
+    if (mbByIsrc?.mbid) {
+      usedMb = true;
+      mbid = mbByIsrc.mbid;
+    }
+    if (!beatportUrl) beatportUrl = acceptBeatportTrackUrl(mbByIsrc?.beatportUrl);
+    if (!spotifyUrl) {
+      spotifyUrl = canonicalSpotifyUrl(mbByIsrc?.spotifyUrl) ?? undefined;
+    }
+    if (!isrc && mbByIsrc?.isrc) {
+      const ev = evaluateIsrc(mbByIsrc.isrc);
+      if (ev.ok) isrc = ev.isrc ?? null;
+    }
   }
 
   if (!isrc && !mbid && !beatportUrl && !platforms && !spotifyUrl) {
@@ -515,6 +718,7 @@ export async function identifySeedRow(
       musicbrainz: usedMb,
       trackradar: usedTr,
       audd: usedAudd,
+      spotify: usedSpotify,
     }),
   };
 }
@@ -527,6 +731,7 @@ export async function identifyHeldSeeds(opts: {
   set79?: boolean;
   apply?: boolean;
   prisma?: PrismaClient;
+  spotifyLimit?: number;
 } = {}): Promise<TrackIdReport> {
   const limit = opts.limit ?? Number(process.env.TRACK_ID_LIMIT || 20);
   const musicbrainz =
@@ -535,6 +740,8 @@ export async function identifyHeldSeeds(opts: {
     opts.trackradar ?? process.env.TRACKRADAR !== "0";
   const audd = opts.audd ?? process.env.AUDD !== "0";
   const set79 = opts.set79 ?? process.env.SET79 !== "0";
+  const spotifyLimit =
+    opts.spotifyLimit ?? Number(process.env.TRACK_ID_SPOTIFY_LIMIT || 80);
   const useCatalog =
     Boolean(opts.prisma) && process.env.TRACK_ID_CATALOG !== "0";
   const held = heldIdentifyJobs().flatMap((j) => j.rows);
@@ -559,11 +766,36 @@ export async function identifyHeldSeeds(opts: {
     catalog = await loadNeedEnrichExportRows(Math.max(0, limit));
   }
   const slice = mergeIdentifyQueue(held, catalog, { limit, fingerprint });
+  const skipSpotify = new Set(
+    slice.flatMap((r) => [r.slug, rowKey(r)].filter((x): x is string => Boolean(x))),
+  );
+  let spotifyExtra: IdentifyQueueRow[] = [];
+  if (spotifyLimit > 0) {
+    if (useCatalog) {
+      try {
+        spotifyExtra = await catalogNeedSpotifyRows(
+          opts.prisma!,
+          spotifyLimit,
+          skipSpotify,
+        );
+      } catch {
+        spotifyExtra = [];
+      }
+    }
+    if (spotifyExtra.length === 0 && process.env.TRACK_ID_EXPORT !== "0") {
+      spotifyExtra = await loadNeedSpotifyExportRows(spotifyLimit, skipSpotify);
+    }
+  }
+  if (spotifyLimit > 0 && !spotifyConfigured()) {
+    console.warn(
+      "SPOTIFY_CLIENT_ID / SPOTIFY_CLIENT_SECRET missing — /track fill skipped. Search URLs stay fallback.",
+    );
+  }
   const hits: TrackIdHit[] = [];
   const misses: TrackIdMiss[] = [];
   const delayMs = Number(process.env.TRACK_ID_DELAY_MS || 0);
 
-  for (const row of slice) {
+  for (const row of [...slice, ...spotifyExtra]) {
     const result = await identifySeedRow(row, { musicbrainz, trackradar, audd });
     if ("reason" in result) misses.push(result);
     else hits.push({ ...result, slug: result.slug ?? row.slug });
@@ -583,8 +815,8 @@ export async function identifyHeldSeeds(opts: {
 
   const report: TrackIdReport = {
     generatedAt: new Date().toISOString(),
-    note: "Verified Deezer / MusicBrainz / TrackRadar / AudD IDs from held 1001 seeds, then high-play catalog tracks missing ISRC or Beatport. Beatport only via MB url-rels or TrackRadar canonical /track URLs (never scrape). Set79 is sitemap-only. AudioScout / MusicMate / TrackId stay paste-only. Fan playbacks stay unwired.",
-    scanned: slice.length,
+    note: "Verified Deezer / MusicBrainz / TrackRadar / AudD IDs from held 1001 seeds, then high-play catalog tracks missing ISRC or Beatport. A second pass fills Spotify /track/{22} from known ISRCs (Client Credentials). Beatport only via MB url-rels or TrackRadar canonical /track URLs (never scrape). Set79 is sitemap-only. AudioScout / MusicMate / TrackId stay paste-only. Fan playbacks stay unwired.",
+    scanned: slice.length + spotifyExtra.length,
     hits,
     misses,
     idGaps: fingerprintIdProbes(),
@@ -593,6 +825,8 @@ export async function identifyHeldSeeds(opts: {
     set79Hints,
     applied,
     pinned,
+    spotifyFilled: hits.filter((h) => canonicalSpotifyUrl(h.spotifyUrl)).length,
+    spotifyConfigured: spotifyConfigured(),
   };
   writeReport("track-id-research.json", report);
   return report;
@@ -626,6 +860,26 @@ export function upsertPinsFromHits(hits: TrackIdHit[]): number {
   return incoming.length;
 }
 
+/** Fill-null, and upgrade a search URL to a canonical /track page. */
+export function trackIdWriteFields(
+  have: {
+    isrc?: string | null;
+    beatportUrl?: string | null;
+    spotifyUrl?: string | null;
+  },
+  hit: { isrc?: string; beatportUrl?: string; spotifyUrl?: string },
+): { isrc?: string; beatportUrl?: string; spotifyUrl?: string } {
+  const data: { isrc?: string; beatportUrl?: string; spotifyUrl?: string } = {};
+  if (hit.isrc && !normalizeIsrc(have.isrc)) data.isrc = hit.isrc;
+  if (hit.beatportUrl && !canonicalBeatportUrl(have.beatportUrl)) {
+    data.beatportUrl = hit.beatportUrl;
+  }
+  if (hit.spotifyUrl && !canonicalSpotifyUrl(have.spotifyUrl)) {
+    data.spotifyUrl = hit.spotifyUrl;
+  }
+  return data;
+}
+
 export async function applyTrackIdHits(
   prisma: PrismaClient,
   hits: TrackIdHit[],
@@ -634,17 +888,16 @@ export async function applyTrackIdHits(
   for (const hit of hits) {
     if (!hit.isrc && !hit.beatportUrl && !hit.spotifyUrl) continue;
     const tracks = await prisma.track.findMany({
-      where: {
-        artistName: hit.artist,
-        title: hit.title,
-      },
+      where: hit.slug
+        ? { slug: hit.slug }
+        : {
+            artistName: hit.artist,
+            title: hit.title,
+          },
       select: { id: true, isrc: true, beatportUrl: true, spotifyUrl: true },
     });
     for (const t of tracks) {
-      const data: { isrc?: string; beatportUrl?: string; spotifyUrl?: string } = {};
-      if (hit.isrc && !t.isrc) data.isrc = hit.isrc;
-      if (hit.beatportUrl && !t.beatportUrl) data.beatportUrl = hit.beatportUrl;
-      if (hit.spotifyUrl && !t.spotifyUrl) data.spotifyUrl = hit.spotifyUrl;
+      const data = trackIdWriteFields(t, hit);
       if (!Object.keys(data).length) continue;
       await prisma.track.update({ where: { id: t.id }, data });
       n += 1;

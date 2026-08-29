@@ -132,12 +132,17 @@ async function searchSpotify(
   return json.tracks?.items ?? [];
 }
 
-/** Verify-then-return a canonical /track/{22}. Null when unsure. */
-export async function resolveSpotifyTrackUrl(want: {
+export type SpotifyTrackHit = {
+  url: string;
+  isrc?: string;
+};
+
+/** Verify-then-return a canonical /track/{22} plus ISRC when Spotify has one. */
+export async function resolveSpotifyTrack(want: {
   artist: string;
   title: string;
   isrc?: string | null;
-}): Promise<string | null> {
+}): Promise<SpotifyTrackHit | null> {
   if (!spotifyConfigured()) return null;
   const token = await spotifyAccessToken();
   if (!token) return null;
@@ -159,7 +164,10 @@ export async function resolveSpotifyTrackUrl(want: {
             isrc: parsed.isrc,
           })
         ) {
-          return parsed.url;
+          return {
+            url: parsed.url,
+            ...(parsed.isrc ? { isrc: parsed.isrc } : {}),
+          };
         }
       }
     } catch {
@@ -167,4 +175,14 @@ export async function resolveSpotifyTrackUrl(want: {
     }
   }
   return null;
+}
+
+/** Verify-then-return a canonical /track/{22}. Null when unsure. */
+export async function resolveSpotifyTrackUrl(want: {
+  artist: string;
+  title: string;
+  isrc?: string | null;
+}): Promise<string | null> {
+  const hit = await resolveSpotifyTrack(want);
+  return hit?.url ?? null;
 }

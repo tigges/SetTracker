@@ -89,17 +89,17 @@ jobs:
             smoke)
               SET_LIMIT=4; MAX_PROBES=5; DO_THUMBS=0; FS_LIMIT=4
               ID_DEADLINE_MS=600000; ID_STEP=15; FS_STEP=15
-              TRACK_ID_LIMIT=0; FS_WAIT_MS=600000
+              TRACK_ID_LIMIT=0; TRACK_ID_SPOTIFY_LIMIT=0; FS_WAIT_MS=600000
               ;;
             acr)
               SET_LIMIT=20; MAX_PROBES=12; DO_THUMBS=0; FS_LIMIT=16
               ID_DEADLINE_MS=3000000; ID_STEP=65; FS_STEP=45
-              TRACK_ID_LIMIT=80; FS_WAIT_MS=1500000
+              TRACK_ID_LIMIT=80; TRACK_ID_SPOTIFY_LIMIT=200; FS_WAIT_MS=1500000
               ;;
             full)
               SET_LIMIT=28; MAX_PROBES=16; DO_THUMBS=1; FS_LIMIT=20
               ID_DEADLINE_MS=4200000; ID_STEP=85; FS_STEP=55
-              TRACK_ID_LIMIT=120; FS_WAIT_MS=1800000
+              TRACK_ID_LIMIT=120; TRACK_ID_SPOTIFY_LIMIT=400; FS_WAIT_MS=1800000
               ;;
             *)     echo "::error::Unknown mode '$MODE'"; exit 1 ;;
           esac
@@ -113,7 +113,8 @@ jobs:
           echo "fs_step=$FS_STEP" >> "$GITHUB_OUTPUT"
           echo "fs_wait_ms=$FS_WAIT_MS" >> "$GITHUB_OUTPUT"
           echo "track_id_limit=$TRACK_ID_LIMIT" >> "$GITHUB_OUTPUT"
-          echo "Enrich mode=$MODE (sets=$SET_LIMIT probes=$MAX_PROBES fs=$FS_LIMIT thumbs=$DO_THUMBS track_ids=$TRACK_ID_LIMIT id_step=${ID_STEP}m)"
+          echo "track_id_spotify_limit=$TRACK_ID_SPOTIFY_LIMIT" >> "$GITHUB_OUTPUT"
+          echo "Enrich mode=$MODE (sets=$SET_LIMIT probes=$MAX_PROBES fs=$FS_LIMIT thumbs=$DO_THUMBS track_ids=$TRACK_ID_LIMIT spotify=$TRACK_ID_SPOTIFY_LIMIT id_step=${ID_STEP}m)"
 
       - name: Restore catalog DB
         id: dbcache
@@ -253,8 +254,11 @@ jobs:
           path: prisma/dev.db
           key: setradar-db-${{ github.run_id }}-2filescan
 
-      # Fill-null ISRC / canonical Beatport on high-play catalog tracks.
-      # Deezer + MusicBrainz + TrackRadar + AudD — never scrape Beatport HTML.
+      # Fill-null ISRC / canonical Beatport / Spotify /track on high-play
+      # catalog tracks. Deezer + MusicBrainz + TrackRadar + AudD + Spotify
+      # Client Credentials — never scrape Beatport HTML. Spotify `isrc:`
+      # lookups run as a second pass (TRACK_ID_SPOTIFY_LIMIT) so search
+      # URLs can become /track/{22} without eating the ISRC/Beatport quota.
       # Writes the cached DB (TRACK_ID_APPLY) and data/track-id-pins.json.
       - name: Beatport / ISRC / Spotify enrich
         if: steps.mode.outputs.track_id_limit != '0'
@@ -262,6 +266,7 @@ jobs:
         env:
           TRACK_ID_APPLY: "1"
           TRACK_ID_LIMIT: ${{ steps.mode.outputs.track_id_limit }}
+          TRACK_ID_SPOTIFY_LIMIT: ${{ steps.mode.outputs.track_id_spotify_limit }}
           TRACK_ID_HELD_LIMIT: "8"
           TRACK_ID_DELAY_MS: "0"
           TRACKRADAR_ARCHIVE: "0"
@@ -321,6 +326,9 @@ jobs:
               repo: context.repo.repo,
               workflow_id: 'deploy-pages.yml',
               ref: context.ref,
-              inputs: { mode: 'fast' },
+              inputs: {
+                mode: 'fast',
+                restore_run_id: '${{ github.run_id }}',
+              },
             });
             core.info('Dispatched Deploy to GitHub Pages (fast) after enrich (mode=${{ steps.mode.outputs.mode }}).');
