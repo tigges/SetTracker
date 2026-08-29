@@ -126,3 +126,70 @@ export function llmFieldView(stats: LlmResearchStats): {
       : null,
   };
 }
+
+function requestSent(
+  rounds: LlmResearchRound[],
+  scannedFallback: number,
+): { found: number; partial: number; missed: number; sent: number } {
+  const tally = llmRoundOutcome(rounds);
+  const fromTally = tally.found + tally.partial + tally.missed;
+  if (rounds.length === 0) return { ...tally, sent: 0 };
+  return {
+    ...tally,
+    sent: fromTally > 0 ? fromTally : scannedFallback,
+  };
+}
+
+/** Requests sent → exclusive hit / partial / miss. Field fill is a footnote. */
+export function llmRequestView(stats: LlmResearchStats): {
+  sent: number;
+  found: number;
+  partial: number;
+  missed: number;
+  slices: HealthSlice[];
+  event: { sent: number; slices: HealthSlice[] } | null;
+  fields: {
+    djWritten: number;
+    djSlots: number;
+    eventWritten: number;
+    eventSlots: number;
+  };
+} {
+  const handleRounds = stats.rounds.filter(
+    (r) => r.target === "dj" || r.target === "event",
+  );
+  const eventRounds = handleRounds.filter((r) => r.target === "event");
+  const all = requestSent(
+    handleRounds,
+    stats.totals.djsScanned + stats.totals.eventsScanned,
+  );
+  const event = requestSent(eventRounds, stats.totals.eventsScanned);
+  return {
+    sent: all.sent,
+    found: all.found,
+    partial: all.partial,
+    missed: all.missed,
+    slices: outcomeSlices({
+      hit: all.found,
+      partial: all.partial,
+      miss: all.missed,
+    }),
+    event:
+      event.sent > 0
+        ? {
+            sent: event.sent,
+            slices: outcomeSlices({
+              hit: event.found,
+              partial: event.partial,
+              miss: event.missed,
+            }),
+          }
+        : null,
+    fields: {
+      djWritten: stats.totals.djFieldsApplied,
+      djSlots: stats.totals.djFieldSlots,
+      eventWritten: stats.totals.eventFieldsApplied,
+      eventSlots: stats.totals.eventFieldSlots,
+    },
+  };
+}
