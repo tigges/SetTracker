@@ -987,3 +987,72 @@ export const TL_KOROLOVA_MOTHERLAND_MONUMENT_KYIV_2026: FingerprintSeedRow[] = [
   { at: "38:25", artist: "EYNKA ft. Låpsley", title: "Promises" },
   { at: "43:15", artist: "GOODBOYS & Korolova", title: "The Present" },
 ];
+
+/**
+ * Chris Lorenzo @ stereoBLOOM, EDC Mexico 2026-02-21
+ * https://www.1001tracklists.com/tracklist/1rk5lh8k/chris-lorenzo-stereobloom-edc-mexico-2026-02-21.html
+ * Operator YouTube https://youtu.be/b8o4lj_sEpQ is a fan live-broadcast — // pragma: allowlist secret
+ * oEmbed 2026-08-29: channel "Toñito Digital". Not Insomniac and not
+ * official artist YouTube. Listed in FINGERPRINT_ONLY_WATCH (Identify-only).
+ * Wire line named sc-chris-stanley93-back-up-acc-2-listen-1-1-mp3-1 —
+ * backup account, not official chris-lorenzo-1. SoundCloud oEmbed 404.
+ * Never sourceUrl / playback / TRACKLIST_1001_BY_SOURCE_SLUG.
+ * Overlay name TL_CHRIS_LORENZO is too generic (TML WE2 Great Library).
+ * Seed held until an official Insomniac / artist playback exists.
+ * Captured 2026-08-29 — provenance 1001tl. Gap 24:30→34:20 and the
+ * second MAMI at 56:50 stay as captured.
+ */
+export const TL_CHRIS_LORENZO_STEREOBLOOM_EDC_MEXICO_2026: FingerprintSeedRow[] =
+  [
+    { at: "0:00", artist: "Chris Lorenzo", title: "Appetite (VIP)" },
+    { at: "1:35", artist: "Fatboy Slim", title: "Right Here, Right Now (Acappella)" },
+    { at: "3:10", artist: "Chris Lorenzo ft. Chynna", title: "Bad Bitch" },
+    {
+      at: "4:45",
+      artist: "Chris Lorenzo & Amyl & The Sniffers",
+      title: "U Should Not Be Doing That",
+    },
+    { at: "6:48", artist: "Chris Lorenzo & COBRAH", title: "MAMI" },
+    {
+      at: "8:50",
+      artist: "Chris Lorenzo & Paris Mitchell ft. Waxmaster",
+      title: "Hell Yeah!",
+    },
+    { at: "13:55", artist: "Andy Toth & Billy Love", title: "Thrillseekers" },
+    { at: "17:00", artist: "Enzo Is Burning", title: "All The Ladies" },
+    { at: "20:26", artist: "Chris Lorenzo & aMo", title: "HOTS 4 U" },
+    {
+      at: "24:30",
+      artist: "Chris Lorenzo & Max Styler & Audio Bullys",
+      title: "London's On Fire",
+    },
+    {
+      at: "34:20",
+      artist: "Chris Lake & Chris Lorenzo & Cake & Kenny Beats",
+      title: "Long Jacket",
+    },
+    { at: "38:00", artist: "Chris Lorenzo & Kah-Lo", title: "In This Bih'" },
+    {
+      at: "41:50",
+      artist: "Chris Lake & Chris Lorenzo pres. Anti Up",
+      title: "I Cannot",
+    },
+    { at: "45:50", artist: "Riton & Kah-Lo", title: "Fake ID (Chris Lorenzo Edit)" },
+    { at: "47:10", artist: "Daft Punk", title: "Technologic (Acappella)" },
+    { at: "48:30", artist: "DJ Assault", title: "Tear The Club Up" },
+    { at: "51:40", artist: "Marco Strous", title: "No Games" },
+    { at: "53:40", artist: "Marco Strous ft. Rusko", title: "Professor X" },
+    { at: "56:50", artist: "Chris Lorenzo & COBRAH", title: "MAMI" },
+    {
+      at: "1:00:10",
+      artist: "J Balvin & Skrillex",
+      title: "In Da Getto (Chris Lorenzo Remix)",
+    },
+    { at: "1:03:30", artist: "Chris Lorenzo", title: "Every Morning" },
+    { at: "1:09:50", artist: "Odd Mob", title: "cut tf up" },
+    {
+      at: "1:12:40",
+      artist: "Calvin Harris",
+      title: "Acceptable In The 80's (Chris Lorenzo Edit)",
+    },
+  ];

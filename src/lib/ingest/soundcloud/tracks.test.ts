@@ -36,6 +36,19 @@ assert.equal(
   `sc-johnsummit-${slugify("john-summit-live-lollapalooza")}`,
   "sc-johnsummit-john-summit-live-lollapalooza",
 );
+const summitPlayaSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url ===
+    "https://soundcloud.com/johnsummit/john-summit-burning-man-playa-package-mix-experts-only-remix-album",
+);
+assert.ok(summitPlayaSc);
+assert.equal(summitPlayaSc.primaryArtist.name, "John Summit");
+assert.equal(summitPlayaSc.seriesName, "Experts Only");
+assert.equal(summitPlayaSc.type, "mix");
+assert.equal(
+  `sc-johnsummit-${slugify("john-summit-burning-man-playa-package-mix-experts-only-remix-album")}`,
+  "sc-johnsummit-john-summit-burning-man-playa-package-mix-experts-only-remix-album",
+);
 
 const notionPerrySc = SOUNDCLOUD_TRACK_SEEDS.find(
   (s) =>

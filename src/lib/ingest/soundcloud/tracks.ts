@@ -82,6 +82,21 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     minDurationSec: 15 * 60,
   },
   {
+    // Official John Summit Experts Only remix album mix; 1001TL wired via
+    // sc-johnsummit-john-summit-burning-man-playa-package-mix-experts-only-remix-album
+    // (same list as yt-PkWNuf7rtms). Distinct from Lollapalooza and TML WE2.
+    // Never wire sc-https://….
+    url: "https://soundcloud.com/johnsummit/john-summit-burning-man-playa-package-mix-experts-only-remix-album",
+    primaryArtist: dj("John Summit", {
+      accent: "#4cc9f0",
+      homeCity: "Chicago, US",
+    }),
+    genre: "Tech House",
+    seriesName: "Experts Only",
+    type: "mix",
+    minDurationSec: 15 * 60,
+  },
+  {
     // Official NOTION Perry's Lollapalooza; 1001TL wired via
     // sc-notiondj-notion-live-at-lollapalooza (same list as yt-9vgSTomhCp8).
     url: "https://soundcloud.com/notiondj/notion-live-at-lollapalooza",

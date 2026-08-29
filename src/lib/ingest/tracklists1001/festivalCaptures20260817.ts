@@ -801,12 +801,17 @@ export const TL_VINTAGE_CULTURE_ROBOT_HEART_RESIDENCY_UNITED_STATES_2024: Finger
  * John Summit - Burning Man Playa Package Mix 2025-10-09
  * https://www.1001tracklists.com/tracklist/btv3mn9/john-summit-burning-man-playa-package-mix-2025-10-09.html
  * Official YT: https://youtu.be/PkWNuf7rtms (@JohnSummit — Experts Only remix album)
+ * Official SC: https://soundcloud.com/johnsummit/john-summit-burning-man-playa-package-mix-experts-only-remix-album
+ * oEmbed 2026-08-29: author "John Summit", same title as YT.
  * Capture overlay used TL_John-Summit_Burning-Man_Playa-Package-Mix_2025
  * (hyphens illegal); constant is TL_JOHN_SUMMIT_BURNING_MAN_PLAYA_PACKAGE_MIX_2025.
+ * Overlay TL_JOHN_SUMMIT is too generic.
  * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-PkWNuf7rtms"]
+ * plus sc-johnsummit-john-summit-burning-man-playa-package-mix-experts-only-remix-album.
+ * Same 1001 seed + both official permalinks → host twin (SC extras on YT).
  * 6 timed cues — gap-fill, not dense-replace.
  * Distinct from TL_JOHN_SUMMIT_TML_WE2_2026 / TL_JOHN_SUMMIT_LOLLAPALOOZA.
- * Captured 2026-08-17 - provenance 1001tl.
+ * Captured 2026-08-17; SC twin 2026-08-29 — provenance 1001tl.
  */
 export const TL_JOHN_SUMMIT_BURNING_MAN_PLAYA_PACKAGE_MIX_2025: FingerprintSeedRow[] =
   [

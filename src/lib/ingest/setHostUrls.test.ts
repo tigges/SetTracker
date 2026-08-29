@@ -43,6 +43,20 @@ assert.equal(
   summitSc?.soundcloudUrl,
   "https://soundcloud.com/johnsummit/john-summit-live-lollapalooza",
 );
+assert.equal(
+  extras["yt-PkWNuf7rtms"]?.soundcloudUrl,
+  "https://soundcloud.com/johnsummit/john-summit-burning-man-playa-package-mix-experts-only-remix-album",
+);
+assert.equal(
+  extras["yt-PkWNuf7rtms"]?.youtubeUrl,
+  "https://www.youtube.com/watch?v=PkWNuf7rtms",
+);
+assert.equal(
+  extras[
+    "sc-johnsummit-john-summit-burning-man-playa-package-mix-experts-only-remix-album"
+  ]?.youtubeUrl,
+  "https://www.youtube.com/watch?v=PkWNuf7rtms",
+);
 
 const korolovaYt = extras["yt-RLOghpXjuJI"];
 assert.equal(
