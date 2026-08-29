@@ -335,12 +335,16 @@ tracklist HTML and their paid SoundCloud analyzer are never fetched.
 / TrackId stay operator-paste in `src/lib/ingest/fingerprint/seeds.ts`.
 `TRACKRADAR_ANALYZE=1` / `AUDD_ANALYZE=1` (needs `AUDD_API_TOKEN`) analyze
 fingerprint-only fan clips (quota; never official playback).
-Catalog enrich `acr` (80) / `full` (120) also run `npm run research:track-ids`
-against high-play tracks missing ISRC or Beatport. Have-ISRC rows skip
-Deezer/AudD and query MusicBrainz by ISRC. Fill-null only; never scrape
-Beatport HTML.
-Fill-null `Track.isrc` / `beatportUrl` only with `TRACK_ID_APPLY=1`. Report:
-`data/crosscheck/track-id-research.json`.
+Catalog enrich `acr` (80 ISRC/Beatport + 200 Spotify) / `full` (120 + 400)
+also run `npm run research:track-ids` against high-play tracks missing
+ISRC or Beatport, then a second pass of have-ISRC rows still on a Spotify
+search URL (`TRACK_ID_SPOTIFY_LIMIT`). Have-ISRC rows skip Deezer/AudD and
+query MusicBrainz by ISRC. A new ISRC from Spotify re-queries MB for the
+Beatport `/track` rel. Fill-null only; never scrape Beatport HTML. Search
+URLs are upgraded to canonical `/track` pages. Needs
+`SPOTIFY_CLIENT_ID` / `SPOTIFY_CLIENT_SECRET` or the Spotify pass no-ops.
+Fill-null `Track.isrc` / `beatportUrl` / `spotifyUrl` only with
+`TRACK_ID_APPLY=1`. Report: `data/crosscheck/track-id-research.json`.
 
 `https://gemini.google.com/app` is the consumer chat UI — Actions cannot
 call it. Gemini in CI needs a key from

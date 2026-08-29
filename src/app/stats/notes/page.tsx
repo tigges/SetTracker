@@ -99,7 +99,9 @@ export default function StatsNotesPage() {
           parks partial / empty results so the same row is not retraced. Handle
           research skips DJs and venues that already have a first-party page
           to parse. Cue extras stay off unless you set LLM_CUE_EXTRAS. Cue
-          parser apply and track-id fill-null also run on enrich.
+          parser apply and track-id fill-null also run on enrich. Each
+          Catalog LLM research run dispatches Pages so this card and the DJ
+          complete list match that run.
         </p>
         <p className="mt-2 text-[13px] leading-relaxed text-muted">
           <span className="font-semibold text-ink">Manual IDs:</span> Capture
@@ -141,7 +143,8 @@ export default function StatsNotesPage() {
             >
               Catalog LLM research
             </a>{" "}
-            runs handle / event / quality research on a standing budget.
+            runs handle / event / quality research on a standing budget,
+            then refreshes /stats (Last LLM card + DJ complete).
           </li>
         </ul>
         <p className="mt-2 text-[13px] leading-relaxed text-muted">

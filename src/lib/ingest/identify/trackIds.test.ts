@@ -1,11 +1,15 @@
 import assert from "node:assert/strict";
 import {
+  catalogRowNeedsSpotifyFill,
   evaluateIsrc,
   exportRowsToIdentifyQueue,
+  exportRowsToSpotifyQueue,
   heldIdentifyJobs,
   identifyLookupPlan,
   mergeIdentifyQueue,
   splitEnrichPriorities,
+  takeSpotifyFillRows,
+  trackIdWriteFields,
   uniqueIdentifyRows,
 } from "./trackIds";
 import { isPasteOnlyIdentifyUrl } from "./pasteOnly";
@@ -148,6 +152,27 @@ assert.deepEqual(
   {
     knownIsrc: "NLZ542600064",
     needIsrc: false,
+    needBeatport: true,
+    needSpotify: true,
+    useDeezer: false,
+    useAudd: false,
+    mbByIsrc: true,
+  },
+);
+assert.deepEqual(
+  identifyLookupPlan({
+    at: "0:00",
+    artist: "A",
+    title: "B",
+    isrc: "NLZ542600064",
+    beatportUrl: "https://www.beatport.com/track/already/1",
+    spotifyUrl: "https://open.spotify.com/search/Already",
+  }),
+  {
+    knownIsrc: "NLZ542600064",
+    needIsrc: false,
+    needBeatport: false,
+    needSpotify: true,
     useDeezer: false,
     useAudd: false,
     mbByIsrc: true,
@@ -185,5 +210,125 @@ const split = splitEnrichPriorities(
 );
 assert.equal(split[0]?.slug, "no-isrc-hot");
 assert.equal(split[1]?.slug, "has-isrc-no-bp");
+
+assert.equal(
+  catalogRowNeedsSpotifyFill({
+    isrc: "USUM70000001",
+    spotifyUrl: "https://open.spotify.com/search/Already",
+  }),
+  true,
+);
+assert.equal(
+  catalogRowNeedsSpotifyFill({
+    isrc: "USUM70000001",
+    spotifyUrl: "https://open.spotify.com/track/2ISSQPb9LHHiV6ng2NXosL",
+  }),
+  false,
+);
+assert.equal(catalogRowNeedsSpotifyFill({ isrc: null, spotifyUrl: null }), false);
+
+const spotifyQueue = exportRowsToSpotifyQueue(
+  [
+    {
+      slug: "zz-test-enrich-queue-hot",
+      artist: "Catalog",
+      title: "Hot Track",
+      mix: null,
+      remixer: null,
+      genre: "House",
+      plays: 12,
+      isrc: "USUM70000000",
+      beatportUrl: null,
+      spotifyUrl: null,
+    },
+    {
+      slug: "zz-test-enrich-queue-done",
+      artist: "Done",
+      title: "Already",
+      mix: null,
+      remixer: null,
+      genre: "House",
+      plays: 20,
+      isrc: "USUM70000001",
+      beatportUrl: "https://www.beatport.com/track/already/1",
+      spotifyUrl: "https://open.spotify.com/search/Already",
+    },
+    {
+      slug: "convex-id",
+      artist: "Convex",
+      title: "ID",
+      mix: null,
+      remixer: null,
+      genre: "House",
+      plays: 99,
+      isrc: null,
+      beatportUrl: null,
+      spotifyUrl: null,
+    },
+  ],
+  10,
+);
+assert.equal(
+  spotifyQueue.some((r) => r.slug === "zz-test-enrich-queue-done"),
+  true,
+);
+assert.equal(
+  spotifyQueue.some((r) => r.slug === "zz-test-enrich-queue-hot"),
+  true,
+);
+assert.equal(
+  spotifyQueue.some((r) => r.slug === "convex-id" || r.title === "ID"),
+  false,
+);
+assert.equal(
+  takeSpotifyFillRows(
+    [
+      {
+        at: "0:00",
+        artist: "Done",
+        title: "Already",
+        slug: "zz-test-enrich-queue-done",
+        isrc: "USUM70000001",
+        spotifyUrl: null,
+      },
+    ],
+    10,
+    new Set(["zz-test-enrich-queue-done"]),
+  ).length,
+  0,
+);
+
+assert.deepEqual(
+  trackIdWriteFields(
+    {
+      isrc: "USUM70000001",
+      beatportUrl: "https://www.beatport.com/search?q=already",
+      spotifyUrl: "https://open.spotify.com/search/Already",
+    },
+    {
+      beatportUrl: "https://www.beatport.com/track/already/1",
+      spotifyUrl: "https://open.spotify.com/track/2ISSQPb9LHHiV6ng2NXosL",
+    },
+  ),
+  {
+    beatportUrl: "https://www.beatport.com/track/already/1",
+    spotifyUrl: "https://open.spotify.com/track/2ISSQPb9LHHiV6ng2NXosL",
+  },
+);
+assert.deepEqual(
+  trackIdWriteFields(
+    {
+      isrc: "USUM70000001",
+      beatportUrl: "https://www.beatport.com/track/already/1",
+      spotifyUrl: "https://open.spotify.com/track/2ISSQPb9LHHiV6ng2NXosL",
+    },
+    {
+      isrc: "USUM70000099",
+      beatportUrl: "https://www.beatport.com/track/other/2",
+      spotifyUrl: "https://open.spotify.com/track/7ouMYWpwJ422jRcDASZB7P",
+    },
+  ),
+  {},
+);
 
 console.log("identify/trackIds.test.ts ok");

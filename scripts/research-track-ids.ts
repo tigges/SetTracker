@@ -10,7 +10,8 @@
  *   TRACK_ID_MB=0 npm run research:track-ids      # skip MusicBrainz (on by default)
  *   AUDD=0 npm run research:track-ids             # skip AudD findLyrics
  *   SET79=0 npm run research:track-ids            # skip Set79 sitemap hints
- *   TRACK_ID_APPLY=1 npm run research:track-ids   # fill-null Track.isrc / beatportUrl
+ *   TRACK_ID_APPLY=1 npm run research:track-ids   # fill-null Track.isrc / beatportUrl / spotifyUrl
+ *   TRACK_ID_SPOTIFY_LIMIT=80 npm run research:track-ids  # have-ISRC → /track/{22}
  *   TRACKRADAR=0 npm run research:track-ids       # skip TrackRadar
  *   TRACKRADAR_ANALYZE=1 npm run research:track-ids  # analyze fan YT (quota; never official playback)
  *   AUDD_ANALYZE=1                                # AudD recognize (needs AUDD_API_TOKEN)
@@ -45,6 +46,8 @@ async function main() {
         musicbrainz: report.hits.filter((h) => h.mbid).length,
         audd: report.hits.filter((h) => h.source === "audd" || h.source === "both").length,
         beatport: report.hits.filter((h) => h.beatportUrl).length,
+        spotify: report.spotifyFilled,
+        spotifyConfigured: report.spotifyConfigured,
         set79Hints: report.set79Hints.map((h) => ({
           seed: h.seed,
           urls: h.urls.length,
