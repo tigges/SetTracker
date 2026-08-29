@@ -267,7 +267,11 @@ unless asked. Never write Relive for HARD / Insomniac / Nameless / Ultra.
   (`llmTrackRecord.ts`) — a test fails if a job has no disclosure. `npm run
   research:plan` prints the plan and sends nothing. **Deep / enrich never
   call a model** — they run `research:plan` plus the parser-only cue step
-  (`LLM_RESEARCH=0`, no keys passed). `/stats` cannot dispatch LLM. Reports in
+  (`LLM_RESEARCH=0`, no keys passed). `/stats` cannot dispatch LLM. After each
+  Catalog LLM research run (apply 0 or 1) the job caches `data/crosscheck/llm-*.json`
+  plus the catalog DB and dispatches Pages with `restore_run_id` so the Last
+  LLM card and DJ complete list match that run. `apply=1` writes handles;
+  dry-run still refreshes the card. Reports in
   `data/crosscheck/llm-handle-research.json`.
   **Cue job** (`LLM_RESEARCH_JOBS=cues` or `all`): re-parse first-party
   YT/SC/hearthis on empty/stub lists. Queue ranks live YT/hearthis ahead of
@@ -329,13 +333,18 @@ unless asked. Never write Relive for HARD / Insomniac / Nameless / Ultra.
   tracks missing ISRC **or** Beatport (`TRACK_ID_HELD_LIMIT`,
   `TRACK_ID_CATALOG=0` skips catalog). Empty official playbacks rank first
   for Identify / File Scan so those hits can hand off here.
-  Catalog enrich `acr` (120) and `full` (400) run this automatically with
-  `TRACK_ID_APPLY=1` — do not dispatch enrich/Pages to start it while those
-  workflows are already running. Fast path: rows that already have an ISRC
-  skip Deezer/AudD and look up MusicBrainz **by ISRC** (Beatport `/track`
-  url-rels only — release pages are not scraped). Missing-ISRC rows run
-  Deezer + TrackRadar + AudD in parallel, then MB. Queue is ~60% no-ISRC /
-  ~40% have-ISRC-no-Beatport. No catalog DB → live
+  Catalog enrich `acr` (80 ISRC/Beatport + 200 Spotify) and `full`
+  (120 + 400) run this automatically with `TRACK_ID_APPLY=1` — do not
+  dispatch enrich/Pages to start it while those workflows are already
+  running. Fast path: rows that already have an ISRC skip Deezer/AudD and
+  look up MusicBrainz **by ISRC** (Beatport `/track` url-rels only —
+  release pages are not scraped). Missing-ISRC rows run Deezer + TrackRadar
+  + AudD in parallel, then MB. A new ISRC from Spotify / Deezer re-queries
+  MB by ISRC for the Beatport rel. Queue is ~60% no-ISRC / ~40%
+  have-ISRC-no-Beatport, then a second `TRACK_ID_SPOTIFY_LIMIT` pass of
+  have-ISRC rows whose Spotify field is still a search URL (one `isrc:`
+  Client Credentials lookup; upgrades search → `/track/{22}`). Needs
+  `SPOTIFY_CLIENT_ID` + `SPOTIFY_CLIENT_SECRET`. No catalog DB → live
   `/exports/tracks.csv` (`TRACK_ID_EXPORT=0` skips). Confirmed hits also
   fill-null `data/track-id-pins.json` (verify-urls / Pages). Chain: Deezer,
   MusicBrainz (on unless `TRACK_ID_MB=0` — MBID / ISRC / Beatport url-rels),
