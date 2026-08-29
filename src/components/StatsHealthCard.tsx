@@ -86,6 +86,8 @@ export function StatsHealthCard({
   slices,
   onChart,
   actions,
+  titleExtra,
+  barTotal,
   children,
 }: {
   id: string;
@@ -95,13 +97,19 @@ export function StatsHealthCard({
   slices: HealthSlice[];
   onChart?: number;
   actions: HealthAction[];
+  titleExtra?: ReactNode;
+  /** Denominator for the stacked bar when it is not the headline count. */
+  barTotal?: number;
   children?: ReactNode;
 }) {
   return (
     <section id={id} className="card mb-2.5 scroll-mt-20 p-3">
       <div className="mb-2 flex items-end justify-between gap-3">
         <div>
-          <h2 className="text-[14px] font-bold tracking-tight">{noun}</h2>
+          <div className="flex items-baseline gap-2">
+            <h2 className="text-[14px] font-bold tracking-tight">{noun}</h2>
+            {titleExtra}
+          </div>
           {hint ? (
             <p className="mt-0.5 text-[11px] text-muted2">{hint}</p>
           ) : null}
@@ -110,7 +118,7 @@ export function StatsHealthCard({
           {total.toLocaleString()}
         </p>
       </div>
-      <StackedBar slices={slices} total={total} />
+      <StackedBar slices={slices} total={barTotal ?? total} />
       <SliceLegend slices={slices} />
       <StarLine onChart={onChart} slices={slices} />
       {children}
