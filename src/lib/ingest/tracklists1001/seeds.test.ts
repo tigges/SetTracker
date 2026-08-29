@@ -210,6 +210,7 @@ import {
   TL_GIUSEPPE_OTTAVIANI_ASOT_AREA_TWO_ROTTERDAM_2026,
   TL_GIUSEPPE_OTTAVIANI_ASOT_POLAND_LEGIA_2026,
   TL_KOROLOVA_MOTHERLAND_MONUMENT_KYIV_2026,
+  TL_CHRIS_LORENZO_STEREOBLOOM_EDC_MEXICO_2026,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
@@ -5802,6 +5803,57 @@ for (let i = 1; i < korolovaKyiv.length; i++) {
   assert.ok(
     (korolovaKyiv[i]!.timestamp ?? 0) > (korolovaKyiv[i - 1]!.timestamp ?? 0),
     `Korolova Motherland Monument Kyiv clocks must increase at index ${i}`,
+  );
+}
+
+// Chris Lorenzo @ stereoBLOOM, EDC Mexico 2026-02-21.
+// Overlay TL_CHRIS_LORENZO is too generic. Fan YT (@tonitodigital) and
+// backup SC (chris-stanley93) stay unwired. Distinct from TML WE2.
+assertSeedClocks(TL_CHRIS_LORENZO_STEREOBLOOM_EDC_MEXICO_2026);
+assert.equal(TL_CHRIS_LORENZO_STEREOBLOOM_EDC_MEXICO_2026.length, 23);
+assert.equal(
+  Object.values(TRACKLIST_1001_BY_SOURCE_SLUG).includes(
+    TL_CHRIS_LORENZO_STEREOBLOOM_EDC_MEXICO_2026,
+  ),
+  false,
+  "EDC Mexico seed is held — no official playback slug",
+);
+assert.equal(TRACKLIST_1001_BY_SOURCE_SLUG["yt-b8o4lj_sEpQ"], undefined); // pragma: allowlist secret
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-chris-stanley93-back-up-acc-2-listen-1-1-mp3-1"
+  ],
+  undefined,
+);
+assert.equal(isWiredTracklistSlug("yt-b8o4lj_sEpQ"), false); // pragma: allowlist secret
+assert.equal(
+  isWiredTracklistSlug("sc-chris-stanley93-back-up-acc-2-listen-1-1-mp3-1"),
+  false,
+);
+assert.notEqual(
+  TL_CHRIS_LORENZO_STEREOBLOOM_EDC_MEXICO_2026,
+  TL_CHRIS_LORENZO_TML_WE2_2026,
+  "EDC Mexico is not the TML WE2 Great Library seed",
+);
+const chrisLorenzoEdcMx = tracklist1001RowsToPlays(
+  TL_CHRIS_LORENZO_STEREOBLOOM_EDC_MEXICO_2026,
+);
+assert.equal(chrisLorenzoEdcMx.length, 23);
+assert.equal(chrisLorenzoEdcMx[0]?.provenance, "1001tl");
+assert.equal(chrisLorenzoEdcMx[0]?.trackTitle, "Appetite (VIP)");
+assert.equal(chrisLorenzoEdcMx[0]?.timestamp, 0);
+assert.equal(chrisLorenzoEdcMx[18]?.trackTitle, "MAMI");
+assert.equal(chrisLorenzoEdcMx[18]?.timestamp, 56 * 60 + 50);
+assert.equal(
+  chrisLorenzoEdcMx[22]?.trackTitle,
+  "Acceptable In The 80's (Chris Lorenzo Edit)",
+);
+assert.equal(chrisLorenzoEdcMx[22]?.timestamp, 3600 + 12 * 60 + 40);
+for (let i = 1; i < chrisLorenzoEdcMx.length; i++) {
+  assert.ok(
+    (chrisLorenzoEdcMx[i]!.timestamp ?? 0) >
+      (chrisLorenzoEdcMx[i - 1]!.timestamp ?? 0),
+    `Chris Lorenzo stereoBLOOM EDC Mexico clocks must increase at index ${i}`,
   );
 }
 
