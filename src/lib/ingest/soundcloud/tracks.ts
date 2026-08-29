@@ -673,7 +673,7 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     // Official artist SC; 1001TL wired via
     // sc-giuseppeottaviani-giuseppe-ottaviani-a-state-of (same list as
     // yt-YvPI-unGanA). Distinct from Digital Society Leeds and ASOT Poland
-    // (sc-giuseppeottaviani-giuseppe-ottaviani-live-at-a). Never wire
+    // Legia (sc-giuseppeottaviani-giuseppe-ottaviani-live-at-a). Never wire
     // hearthis.at/razorator or sc-https://….
     url: "https://soundcloud.com/giuseppeottaviani/giuseppe-ottaviani-a-state-of",
     primaryArtist: dj("Giuseppe Ottaviani", { accent: "#7b2cbf" }),
@@ -682,6 +682,19 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     eventName: "A State of Trance",
     type: "festival",
     minDurationSec: 30 * 60,
+  },
+  {
+    // Official artist SC; 1001TL wired via
+    // sc-giuseppeottaviani-giuseppe-ottaviani-live-at-a. Distinct from
+    // Area Two Rotterdam and Digital Society Leeds. No YouTube in the
+    // paste — do not invent. Never wire sc-https://….
+    url: "https://soundcloud.com/giuseppeottaviani/giuseppe-ottaviani-live-at-a",
+    primaryArtist: dj("Giuseppe Ottaviani", { accent: "#7b2cbf" }),
+    genre: "Trance",
+    seriesName: "A State of Trance",
+    eventName: "A State of Trance",
+    type: "festival",
+    minDurationSec: 60 * 60,
   },
   {
     // Official Cuebrick Conference 297; 1001TL wired via

@@ -180,6 +180,7 @@ import {
   TL_LAMMER_TML_WE2_CORE_2026,
   TL_NOSI_TML_WE1_CRYSTAL_2026,
   TL_GIUSEPPE_OTTAVIANI_ASOT_AREA_TWO_ROTTERDAM_2026,
+  TL_GIUSEPPE_OTTAVIANI_ASOT_POLAND_LEGIA_2026,
 } from "./festivalCaptures20260828";
 
 export {
@@ -322,6 +323,7 @@ export {
   TL_LAMMER_TML_WE2_CORE_2026,
   TL_NOSI_TML_WE1_CRYSTAL_2026,
   TL_GIUSEPPE_OTTAVIANI_ASOT_AREA_TWO_ROTTERDAM_2026,
+  TL_GIUSEPPE_OTTAVIANI_ASOT_POLAND_LEGIA_2026,
 };
 
 function formatClock(sec: number): string {
@@ -5003,6 +5005,8 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-YvPI-unGanA": TL_GIUSEPPE_OTTAVIANI_ASOT_AREA_TWO_ROTTERDAM_2026,
   "sc-giuseppeottaviani-giuseppe-ottaviani-a-state-of":
     TL_GIUSEPPE_OTTAVIANI_ASOT_AREA_TWO_ROTTERDAM_2026,
+  "sc-giuseppeottaviani-giuseppe-ottaviani-live-at-a":
+    TL_GIUSEPPE_OTTAVIANI_ASOT_POLAND_LEGIA_2026,
 };
 
 /** Sanity: every seeded clock must parse. */

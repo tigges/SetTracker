@@ -208,6 +208,7 @@ import {
   TL_LAMMER_TML_WE2_CORE_2026,
   TL_NOSI_TML_WE1_CRYSTAL_2026,
   TL_GIUSEPPE_OTTAVIANI_ASOT_AREA_TWO_ROTTERDAM_2026,
+  TL_GIUSEPPE_OTTAVIANI_ASOT_POLAND_LEGIA_2026,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
@@ -5612,7 +5613,7 @@ for (let i = 1; i < nosiCrystal.length; i++) {
 // Official @astateoftrance YT + official artist SC. Overlay
 // TL_GIUSEPPE_OTTAVIANI is too generic. hearthis/razorator is a fan
 // reupload — not wired. Distinct from Digital Society Leeds, ASOT 1290,
-// and ASOT Poland.
+// and ASOT Poland Legia.
 assertSeedClocks(TL_GIUSEPPE_OTTAVIANI_ASOT_AREA_TWO_ROTTERDAM_2026);
 assert.equal(TL_GIUSEPPE_OTTAVIANI_ASOT_AREA_TWO_ROTTERDAM_2026.length, 18);
 assert.equal(
@@ -5637,12 +5638,12 @@ assert.notEqual(
   TRACKLIST_1001_BY_SOURCE_SLUG["yt-bxb6Tglooc4"],
   "ASOT Area Two Rotterdam is not the ASOT 1290 radio seed",
 );
-assert.equal(
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-YvPI-unGanA"],
   TRACKLIST_1001_BY_SOURCE_SLUG[
     "sc-giuseppeottaviani-giuseppe-ottaviani-live-at-a"
   ],
-  undefined,
-  "ASOT Poland artist SC stays unwired to this seed",
+  "ASOT Area Two Rotterdam is not the ASOT Poland Legia seed",
 );
 assert.equal(isWiredTracklistSlug("yt-YvPI-unGanA"), true);
 assert.equal(
@@ -5653,10 +5654,6 @@ assert.equal(isSecondaryPlaybackSlug("yt-YvPI-unGanA"), false);
 assert.equal(
   isSecondaryPlaybackSlug("sc-giuseppeottaviani-giuseppe-ottaviani-a-state-of"),
   true,
-);
-assert.equal(
-  isWiredTracklistSlug("sc-giuseppeottaviani-giuseppe-ottaviani-live-at-a"),
-  false,
 );
 const goAsotRotterdam = tracklist1001RowsToPlays(
   TL_GIUSEPPE_OTTAVIANI_ASOT_AREA_TWO_ROTTERDAM_2026,
@@ -5672,6 +5669,73 @@ for (let i = 1; i < goAsotRotterdam.length; i++) {
     (goAsotRotterdam[i]!.timestamp ?? 0) >
       (goAsotRotterdam[i - 1]!.timestamp ?? 0),
     `Giuseppe Ottaviani ASOT Area Two clocks must increase at index ${i}`,
+  );
+}
+
+// Giuseppe Ottaviani @ ASOT, Legia Stadium, Poland 2026-06-20.
+// Official artist SC only. Overlay TL_GIUSEPPE_OTTAVIANI is too generic.
+// No YouTube in the paste. Distinct from Area Two Rotterdam, Digital
+// Society Leeds, and ASOT 1290.
+assertSeedClocks(TL_GIUSEPPE_OTTAVIANI_ASOT_POLAND_LEGIA_2026);
+assert.equal(TL_GIUSEPPE_OTTAVIANI_ASOT_POLAND_LEGIA_2026.length, 22);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-giuseppeottaviani-giuseppe-ottaviani-live-at-a"
+  ],
+  TL_GIUSEPPE_OTTAVIANI_ASOT_POLAND_LEGIA_2026,
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-giuseppeottaviani-giuseppe-ottaviani-live-at-a"
+  ],
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-giuseppeottaviani-giuseppe-ottaviani-a-state-of"
+  ],
+  "ASOT Poland Legia is not the Area Two Rotterdam seed",
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-giuseppeottaviani-giuseppe-ottaviani-live-at-a"
+  ],
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-giuseppeottaviani-giuseppe-ottaviani-digitalsociety"
+  ],
+  "ASOT Poland Legia is not the Digital Society Leeds seed",
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-giuseppeottaviani-giuseppe-ottaviani-live-at-a"
+  ],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-bxb6Tglooc4"],
+  "ASOT Poland Legia is not the ASOT 1290 radio seed",
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-https://soundcloud.com/giuseppeottaviani/giuseppe-ottaviani-live-at-a"
+  ],
+  undefined,
+);
+assert.equal(
+  isWiredTracklistSlug("sc-giuseppeottaviani-giuseppe-ottaviani-live-at-a"),
+  true,
+);
+assert.equal(
+  isSecondaryPlaybackSlug("sc-giuseppeottaviani-giuseppe-ottaviani-live-at-a"),
+  false,
+);
+const goAsotPoland = tracklist1001RowsToPlays(
+  TL_GIUSEPPE_OTTAVIANI_ASOT_POLAND_LEGIA_2026,
+);
+assert.equal(goAsotPoland.length, 22);
+assert.equal(goAsotPoland[0]?.provenance, "1001tl");
+assert.equal(goAsotPoland[0]?.trackTitle, "Unstoppable");
+assert.equal(goAsotPoland[0]?.timestamp, 40);
+assert.equal(goAsotPoland[21]?.trackTitle, "Hold On");
+assert.equal(goAsotPoland[21]?.timestamp, 3600 + 9 * 60 + 6);
+for (let i = 1; i < goAsotPoland.length; i++) {
+  assert.ok(
+    (goAsotPoland[i]!.timestamp ?? 0) > (goAsotPoland[i - 1]!.timestamp ?? 0),
+    `Giuseppe Ottaviani ASOT Poland clocks must increase at index ${i}`,
   );
 }
 

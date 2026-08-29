@@ -841,8 +841,8 @@ export const TL_NOSI_TML_WE1_CRYSTAL_2026: FingerprintSeedRow[] = [
  * oEmbed 2026-08-28: author "Giuseppe Ottaviani".
  * https://www.1001tracklists.com/tracklist/1084t4l1/giuseppe-ottaviani-area-two-a-state-of-trance-event-ahoy-rotterdam-netherlands-2026-02-27.html
  * Overlay name TL_GIUSEPPE_OTTAVIANI is too generic; constant is the night.
- * Distinct from Digital Society Leeds and ASOT 1290 radio (yt-bxb6Tglooc4).
- * Not ASOT Poland (sc-giuseppeottaviani-giuseppe-ottaviani-live-at-a).
+ * Distinct from Digital Society Leeds, ASOT 1290 radio (yt-bxb6Tglooc4),
+ * and ASOT Poland Legia (sc-giuseppeottaviani-giuseppe-ottaviani-live-at-a).
  * hearthis.at/razorator/giuseppeottaviani-liveatastateoftrancefestivalrotterdam27-02-2026-razorator
  * is a fan reupload — do not wire as sourceUrl / playback /
  * TRACKLIST_1001_BY_SOURCE_SLUG.
@@ -888,3 +888,70 @@ export const TL_GIUSEPPE_OTTAVIANI_ASOT_AREA_TWO_ROTTERDAM_2026: FingerprintSeed
     { at: "52:03", artist: "Giuseppe Ottaviani", title: "Linking People" },
     { at: "55:38", artist: "Giuseppe Ottaviani ft. Diana Goldberg", title: "Hold On" },
   ];
+
+/**
+ * Giuseppe Ottaviani @ A State Of Trance, Legia Stadium, Poland 2026-06-20
+ * Official artist SoundCloud:
+ * https://soundcloud.com/giuseppeottaviani/giuseppe-ottaviani-live-at-a
+ * oEmbed 2026-08-29: author "Giuseppe Ottaviani", title
+ * "Giuseppe Ottaviani live at A State of Trance Poland 2026".
+ * https://www.1001tracklists.com/tracklist/1muply39/giuseppe-ottaviani-a-state-of-trance-event-legia-stadium-poland-2026-06-20.html
+ * Overlay name TL_GIUSEPPE_OTTAVIANI is too generic; constant is the night.
+ * Distinct from Area Two Rotterdam (yt-YvPI-unGanA), Digital Society Leeds,
+ * and ASOT 1290 radio (yt-bxb6Tglooc4). No YouTube in the paste — do not invent.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["sc-giuseppeottaviani-giuseppe-ottaviani-live-at-a"]
+ * = TL_GIUSEPPE_OTTAVIANI_ASOT_POLAND_LEGIA_2026
+ * Captured 2026-08-29 — provenance 1001tl.
+ */
+export const TL_GIUSEPPE_OTTAVIANI_ASOT_POLAND_LEGIA_2026: FingerprintSeedRow[] = [
+  { at: "0:40", artist: "Anyma & OTTAGON", title: "Unstoppable" },
+  { at: "3:33", artist: "ARTBAT & Giuseppe Ottaviani & Conor Ross", title: "Break The Loop" },
+  { at: "7:20", artist: "Orkidea", title: "Forward Forever (OTTAGON Retouch)" },
+  { at: "11:05", artist: "Giuseppe Ottaviani & Hypaton", title: "Soundboy" },
+  { at: "14:05", artist: "Anyma & Joji", title: "Beautiful (OTTAGON Remix)" },
+  {
+    at: "18:22",
+    artist: "Mark Roma",
+    title: "What Is On Your Mind (Giuseppe Ottaviani Edit)",
+  },
+  { at: "19:35", artist: "Max Styler & Three Drives", title: "Greece 2000 (Max Styler Rework)" },
+  {
+    at: "21:10",
+    artist: "ARTBAT & R3HAB & Stylo & Eli & Dani ft. NAIIM",
+    title: "Fight Machine (Giuseppe Ottaviani Edit)",
+  },
+  {
+    at: "23:40",
+    artist: "Giuseppe Ottaviani & Andrew Rayel ft. Alessia Labate",
+    title: "How Do We Know",
+  },
+  {
+    at: "27:00",
+    artist: "Green Velvet & Harvard Bass",
+    title: "Lazer Beams (Adam Beyer & Massano Remix)",
+  },
+  { at: "30:25", artist: "Eric Prydz", title: "Liberate (Giuseppe Ottaviani Rework)" },
+  { at: "34:10", artist: "Ben Hemsley & Giuseppe Ottaviani", title: "Law Of Attraction" },
+  { at: "38:20", artist: "Giuseppe Ottaviani & Dicosis", title: "Run Away" },
+  { at: "42:30", artist: "Paul Denton", title: "Deep In Your Mind" },
+  {
+    at: "45:35",
+    artist: "Tin Tin Out",
+    title: "Always Something There To Remind Me (Sneijder Rework)",
+  },
+  {
+    at: "48:48",
+    artist: "Giuseppe Ottaviani & Gabry Ponte & Crooked Bangs",
+    title: "Astra",
+  },
+  { at: "51:20", artist: "Mauro Picotto & Giuseppe Ottaviani", title: "Ibiza Dream" },
+  { at: "54:40", artist: "Giuseppe Ottaviani & Ilan Bluestone", title: "Together Again" },
+  { at: "59:16", artist: "Giuseppe Ottaviani & Billy Gillies", title: "Doves" },
+  { at: "1:02:00", artist: "Ratty", title: "Sunrise (Here I Am) (Club Mix)" },
+  {
+    at: "1:05:20",
+    artist: "Hardwell ft. Jonathan Mendelsohn",
+    title: "Echo (Giuseppe Ottaviani Remix)",
+  },
+  { at: "1:09:06", artist: "Giuseppe Ottaviani ft. Diana Goldberg", title: "Hold On" },
+];

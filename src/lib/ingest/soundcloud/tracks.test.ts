@@ -668,6 +668,20 @@ assert.equal(
   `sc-giuseppeottaviani-${slugify("giuseppe-ottaviani-a-state-of")}`,
   "sc-giuseppeottaviani-giuseppe-ottaviani-a-state-of",
 );
+const goAsotPolandSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url ===
+    "https://soundcloud.com/giuseppeottaviani/giuseppe-ottaviani-live-at-a",
+);
+assert.ok(goAsotPolandSc);
+assert.equal(goAsotPolandSc.primaryArtist.name, "Giuseppe Ottaviani");
+assert.equal(goAsotPolandSc.seriesName, "A State of Trance");
+assert.equal(goAsotPolandSc.eventName, "A State of Trance");
+assert.equal(goAsotPolandSc.type, "festival");
+assert.equal(
+  `sc-giuseppeottaviani-${slugify("giuseppe-ottaviani-live-at-a")}`,
+  "sc-giuseppeottaviani-giuseppe-ottaviani-live-at-a",
+);
 const tiniAntsSc = SOUNDCLOUD_TRACK_SEEDS.find(
   (s) =>
     s.url ===
