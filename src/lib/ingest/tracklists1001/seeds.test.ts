@@ -209,6 +209,7 @@ import {
   TL_NOSI_TML_WE1_CRYSTAL_2026,
   TL_GIUSEPPE_OTTAVIANI_ASOT_AREA_TWO_ROTTERDAM_2026,
   TL_GIUSEPPE_OTTAVIANI_ASOT_POLAND_LEGIA_2026,
+  TL_KOROLOVA_MOTHERLAND_MONUMENT_KYIV_2026,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
@@ -5736,6 +5737,71 @@ for (let i = 1; i < goAsotPoland.length; i++) {
   assert.ok(
     (goAsotPoland[i]!.timestamp ?? 0) > (goAsotPoland[i - 1]!.timestamp ?? 0),
     `Giuseppe Ottaviani ASOT Poland clocks must increase at index ${i}`,
+  );
+}
+
+// Korolova @ Motherland Monument Kyiv 2026-06-18 — official @KOROLOVADJ YT
+// + official korolovadj SC. Overlay TL_KOROLOVA is too generic. Distinct
+// from Captive Soul 098 / TML WE2 / Snowattack / Tulum.
+assertSeedClocks(TL_KOROLOVA_MOTHERLAND_MONUMENT_KYIV_2026);
+assert.equal(TL_KOROLOVA_MOTHERLAND_MONUMENT_KYIV_2026.length, 12);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-ruri2xxu7wU"],
+  TL_KOROLOVA_MOTHERLAND_MONUMENT_KYIV_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-korolovadj-korolova-live-kyiv-ukraine"],
+  TL_KOROLOVA_MOTHERLAND_MONUMENT_KYIV_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-https://soundcloud.com/korolovadj/korolova-live-kyiv-ukraine"
+  ],
+  undefined,
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-ruri2xxu7wU"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-5JxfEjVdQFk"],
+  "Kyiv is not the Captive Soul 098 seed",
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-ruri2xxu7wU"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-RLOghpXjuJI"],
+  "Kyiv is not the TML WE2 Captive Soul seed",
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-ruri2xxu7wU"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-7UcyaKbvy2o"],
+  "Kyiv is not the Snowattack seed",
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-ruri2xxu7wU"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-HvkAfj1QnK8"],
+  "Kyiv is not the Tulum seed",
+);
+assert.equal(isWiredTracklistSlug("yt-ruri2xxu7wU"), true);
+assert.equal(
+  isWiredTracklistSlug("sc-korolovadj-korolova-live-kyiv-ukraine"),
+  true,
+);
+assert.equal(isSecondaryPlaybackSlug("yt-ruri2xxu7wU"), false);
+assert.equal(
+  isSecondaryPlaybackSlug("sc-korolovadj-korolova-live-kyiv-ukraine"),
+  true,
+);
+const korolovaKyiv = tracklist1001RowsToPlays(
+  TL_KOROLOVA_MOTHERLAND_MONUMENT_KYIV_2026,
+);
+assert.equal(korolovaKyiv.length, 12);
+assert.equal(korolovaKyiv[0]?.provenance, "1001tl");
+assert.equal(korolovaKyiv[0]?.trackTitle, "Buka");
+assert.equal(korolovaKyiv[0]?.timestamp, 0);
+assert.equal(korolovaKyiv[11]?.trackTitle, "The Present");
+assert.equal(korolovaKyiv[11]?.timestamp, 43 * 60 + 15);
+for (let i = 1; i < korolovaKyiv.length; i++) {
+  assert.ok(
+    (korolovaKyiv[i]!.timestamp ?? 0) > (korolovaKyiv[i - 1]!.timestamp ?? 0),
+    `Korolova Motherland Monument Kyiv clocks must increase at index ${i}`,
   );
 }
 

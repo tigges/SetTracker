@@ -85,6 +85,7 @@ import {
   TL_LAMMER_TML_WE2_CORE_2026,
   TL_NOSI_TML_WE1_CRYSTAL_2026,
   TL_GIUSEPPE_OTTAVIANI_ASOT_AREA_TWO_ROTTERDAM_2026,
+  TL_KOROLOVA_MOTHERLAND_MONUMENT_KYIV_2026,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
@@ -1273,6 +1274,23 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/20v73731/korolova-tulum-mexico-2026-02-27.html",
     tracklist1001: TL_KOROLOVA_TULUM_MEXICO_2026,
+  },
+  {
+    // Official Korolova playback — Motherland Monument Kyiv 2026-06-18.
+    // oEmbed 2026-08-29: @KOROLOVADJ. Official SC twin
+    // sc-korolovadj-korolova-live-kyiv-ukraine. Distinct from Captive Soul
+    // 098 / TML WE2 / Snowattack / Tulum.
+    video: "https://www.youtube.com/watch?v=ruri2xxu7wU",
+    primaryArtist: dj("Korolova", {
+      accent: "#f72585",
+      homeCity: "Kyiv, UA",
+    }),
+    genre: "Melodic Techno",
+    type: "mix",
+    title: "Korolova | Kyiv, Ukraine 2026",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/298h7wq1/korolova-motherland-monument-kyiv-ukraine-2026-06-18.html",
+    tracklist1001: TL_KOROLOVA_MOTHERLAND_MONUMENT_KYIV_2026,
   },
   {
     // Official playback — Teletech x FYM, AFAS Live Amsterdam 2025-12-31.

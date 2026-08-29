@@ -648,6 +648,20 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     minDurationSec: 45 * 60,
   },
   {
+    // Official Korolova playback; 1001TL wired via
+    // sc-korolovadj-korolova-live-kyiv-ukraine
+    // (same list as yt-ruri2xxu7wU). Distinct from Captive Soul 098 /
+    // TML WE2 / Snowattack / Tulum. Never wire sc-https://….
+    url: "https://soundcloud.com/korolovadj/korolova-live-kyiv-ukraine",
+    primaryArtist: dj("Korolova", {
+      accent: "#f72585",
+      homeCity: "Kyiv, UA",
+    }),
+    genre: "Melodic Techno",
+    type: "mix",
+    minDurationSec: 40 * 60,
+  },
+  {
     // Official MARNIK UNLEGEND playback @ Nameless Festival 2026-02-14.
     // No 1001 cue paste — do not invent 1001tl rows. Never wire sc-https://….
     url: "https://soundcloud.com/marnikofficial/marnik-presents-unlegend-show",

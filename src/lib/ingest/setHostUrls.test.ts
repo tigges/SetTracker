@@ -424,6 +424,18 @@ assert.equal(
   extras["sc-giuseppeottaviani-giuseppe-ottaviani-a-state-of"]?.youtubeUrl,
   "https://www.youtube.com/watch?v=YvPI-unGanA",
 );
+assert.equal(
+  extras["yt-ruri2xxu7wU"]?.soundcloudUrl,
+  "https://soundcloud.com/korolovadj/korolova-live-kyiv-ukraine",
+);
+assert.equal(
+  extras["yt-ruri2xxu7wU"]?.youtubeUrl,
+  "https://www.youtube.com/watch?v=ruri2xxu7wU",
+);
+assert.equal(
+  extras["sc-korolovadj-korolova-live-kyiv-ukraine"]?.youtubeUrl,
+  "https://www.youtube.com/watch?v=ruri2xxu7wU",
+);
 
 for (const [slug, pin] of Object.entries(SET_HOST_PINS)) {
   if (pin.mixcloudUrl) {

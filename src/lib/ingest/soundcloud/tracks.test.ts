@@ -626,6 +626,17 @@ assert.equal(
   `sc-korolovadj-${slugify("korolova-tulum-mexico-melodic")}`,
   "sc-korolovadj-korolova-tulum-mexico-melodic",
 );
+const korolovaKyivSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url === "https://soundcloud.com/korolovadj/korolova-live-kyiv-ukraine",
+);
+assert.ok(korolovaKyivSc);
+assert.equal(korolovaKyivSc.primaryArtist.name, "Korolova");
+assert.equal(korolovaKyivSc.type, "mix");
+assert.equal(
+  `sc-korolovadj-${slugify("korolova-live-kyiv-ukraine")}`,
+  "sc-korolovadj-korolova-live-kyiv-ukraine",
+);
 
 const marnikUnlegendSc = SOUNDCLOUD_TRACK_SEEDS.find(
   (s) =>

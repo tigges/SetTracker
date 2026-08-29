@@ -955,3 +955,35 @@ export const TL_GIUSEPPE_OTTAVIANI_ASOT_POLAND_LEGIA_2026: FingerprintSeedRow[] 
   },
   { at: "1:09:06", artist: "Giuseppe Ottaviani ft. Diana Goldberg", title: "Hold On" },
 ];
+
+/**
+ * Korolova @ Motherland Monument Kyiv, Ukraine 2026-06-18
+ * Official YouTube: https://youtu.be/ruri2xxu7wU
+ * oEmbed 2026-08-29: channel "KOROLOVA" (@KOROLOVADJ), title
+ * "KOROLOVA - LIVE @ KYIV, UKRAINE 2026".
+ * Official artist SoundCloud:
+ * https://soundcloud.com/korolovadj/korolova-live-kyiv-ukraine
+ * oEmbed 2026-08-29: author "KOROLOVA", same title.
+ * https://www.1001tracklists.com/tracklist/298h7wq1/korolova-motherland-monument-kyiv-ukraine-2026-06-18.html
+ * Overlay name TL_KOROLOVA is too generic (Captive Soul 098 / TML WE2 /
+ * Snowattack / Tulum). Constant is the night.
+ * Same 1001 seed + both official permalinks → host twin (SC-first extras).
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-ruri2xxu7wU"]
+ * = TL_KOROLOVA_MOTHERLAND_MONUMENT_KYIV_2026
+ * plus sc-korolovadj-korolova-live-kyiv-ukraine.
+ * Captured 2026-08-29 — provenance 1001tl.
+ */
+export const TL_KOROLOVA_MOTHERLAND_MONUMENT_KYIV_2026: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "Cherry", title: "Buka" },
+  { at: "4:30", artist: "CamelPhat & Volkoder", title: "Unique Moment" },
+  { at: "9:20", artist: "Jast", title: "Rhythm" },
+  { at: "12:30", artist: "Fancy Inc", title: "Hypnotic" },
+  { at: "16:10", artist: "TH;EN & Carlo Whale", title: "Echoes Of You" },
+  { at: "20:20", artist: "Woo York", title: "Lightfall" },
+  { at: "24:15", artist: "Kostyn", title: "Papi" },
+  { at: "27:05", artist: "Catta", title: "La Isla" },
+  { at: "31:00", artist: "Max Styler & Greggio", title: "Oldskool Flavor" },
+  { at: "34:40", artist: "Chris Avantgarde", title: "Rhythm Check" },
+  { at: "38:25", artist: "EYNKA ft. Låpsley", title: "Promises" },
+  { at: "43:15", artist: "GOODBOYS & Korolova", title: "The Present" },
+];
