@@ -10,7 +10,9 @@ import type { PrismaClient } from "@prisma/client";
 import {
   canonicalBeatportUrl,
   canonicalSpotifyUrl,
+  isLikelyUnbuyable,
   normalizeIsrc,
+  trackIdentityKey,
 } from "../../trackMeta";
 import { catalogQueryTitle, namesClose, normName, primaryArtist } from "./names";
 
@@ -273,7 +275,84 @@ export function evaluateTrackIdPin(
   };
 }
 
-/** Fill-null by Track.slug. Never overwrites an existing ISRC, Beatport, or Spotify URL. */
+/** Pin store links keyed by ISRC — same recording, different catalog slug. */
+export function storeLinksByIsrc(pins: TrackIdPin[]): Map<
+  string,
+  { beatportUrl?: string; spotifyUrl?: string }
+> {
+  const out = new Map<string, { beatportUrl?: string; spotifyUrl?: string }>();
+  for (const pin of pins) {
+    const code = normalizeIsrc(pin.isrc);
+    if (!code) continue;
+    const beatport = canonicalBeatportUrl(pin.beatportUrl) || undefined;
+    const spotify = canonicalSpotifyUrl(pin.spotifyUrl) || undefined;
+    if (!beatport && !spotify) continue;
+    const prev = out.get(code) ?? {};
+    out.set(code, {
+      beatportUrl: prev.beatportUrl || beatport,
+      spotifyUrl: prev.spotifyUrl || spotify,
+    });
+  }
+  return out;
+}
+
+export type StoreLinkSpreadRow = {
+  id: string;
+  isrc?: string | null;
+  title: string;
+  artistName: string;
+  beatportUrl?: string | null;
+  spotifyUrl?: string | null;
+};
+
+/** Copy canonical store URLs across the same ISRC or the same artist+title. */
+export function planStoreLinkSpreads(
+  rows: StoreLinkSpreadRow[],
+): Array<{ id: string; beatportUrl?: string; spotifyUrl?: string }> {
+  const byIsrcBp = new Map<string, string>();
+  const byIsrcSp = new Map<string, string>();
+  const byKeyBp = new Map<string, string>();
+  const byKeySp = new Map<string, string>();
+  for (const row of rows) {
+    const code = normalizeIsrc(row.isrc);
+    const bp = canonicalBeatportUrl(row.beatportUrl);
+    const sp = canonicalSpotifyUrl(row.spotifyUrl);
+    if (code && bp) byIsrcBp.set(code, byIsrcBp.get(code) || bp);
+    if (code && sp) byIsrcSp.set(code, byIsrcSp.get(code) || sp);
+    if (isLikelyUnbuyable(row.title, row.artistName)) continue;
+    const key = trackIdentityKey(row.title, row.artistName);
+    if (bp) byKeyBp.set(key, byKeyBp.get(key) || bp);
+    if (sp) byKeySp.set(key, byKeySp.get(key) || sp);
+  }
+  const out: Array<{ id: string; beatportUrl?: string; spotifyUrl?: string }> =
+    [];
+  for (const row of rows) {
+    if (isLikelyUnbuyable(row.title, row.artistName)) continue;
+    const code = normalizeIsrc(row.isrc);
+    const key = trackIdentityKey(row.title, row.artistName);
+    const beatport =
+      canonicalBeatportUrl(row.beatportUrl) ||
+      (code ? byIsrcBp.get(code) : undefined) ||
+      byKeyBp.get(key);
+    const spotify =
+      canonicalSpotifyUrl(row.spotifyUrl) ||
+      (code ? byIsrcSp.get(code) : undefined) ||
+      byKeySp.get(key);
+    const data: { id: string; beatportUrl?: string; spotifyUrl?: string } = {
+      id: row.id,
+    };
+    if (beatport && !canonicalBeatportUrl(row.beatportUrl)) {
+      data.beatportUrl = beatport;
+    }
+    if (spotify && !canonicalSpotifyUrl(row.spotifyUrl)) {
+      data.spotifyUrl = spotify;
+    }
+    if (data.beatportUrl || data.spotifyUrl) out.push(data);
+  }
+  return out;
+}
+
+/** Fill-null by Track.slug, then by shared ISRC. Never overwrites a stored store URL. */
 export async function applyTrackIdPins(
   prisma: PrismaClient,
   pins = loadTrackIdPins(),
@@ -305,5 +384,73 @@ export async function applyTrackIdPins(
     if (data.isrc) isrc += 1;
     if (data.spotifyUrl) spotifyN += 1;
   }
+  const byIsrc = storeLinksByIsrc(pins);
+  const codes = [...byIsrc.keys()];
+  for (let i = 0; i < codes.length; i += 200) {
+    const batch = codes.slice(i, i + 200);
+    const rows = await prisma.track.findMany({
+      where: { isrc: { in: batch } },
+      select: {
+        id: true,
+        isrc: true,
+        title: true,
+        artistName: true,
+        beatportUrl: true,
+        spotifyUrl: true,
+      },
+    });
+    for (const row of rows) {
+      const code = normalizeIsrc(row.isrc);
+      if (!code) continue;
+      const hit = byIsrc.get(code);
+      if (!hit) continue;
+      if (isLikelyUnbuyable(row.title, row.artistName)) continue;
+      const data: { beatportUrl?: string; spotifyUrl?: string } = {};
+      if (
+        hit.beatportUrl &&
+        !canonicalBeatportUrl(row.beatportUrl) &&
+        beatportSlugMatchesTitle(hit.beatportUrl, row.title)
+      ) {
+        data.beatportUrl = hit.beatportUrl;
+      }
+      if (hit.spotifyUrl && !canonicalSpotifyUrl(row.spotifyUrl)) {
+        data.spotifyUrl = hit.spotifyUrl;
+      }
+      if (!Object.keys(data).length) continue;
+      matched += 1;
+      await prisma.track.update({ where: { id: row.id }, data });
+      if (data.beatportUrl) beatport += 1;
+      if (data.spotifyUrl) spotifyN += 1;
+    }
+  }
   return { matched, beatport, isrc, spotify: spotifyN };
+}
+
+/** Copy store URLs already on one catalog row onto ISRC / name twins. */
+export async function spreadCatalogStoreLinks(
+  prisma: PrismaClient,
+): Promise<{ beatport: number; spotify: number }> {
+  const rows = await prisma.track.findMany({
+    select: {
+      id: true,
+      isrc: true,
+      title: true,
+      artistName: true,
+      beatportUrl: true,
+      spotifyUrl: true,
+    },
+  });
+  const plan = planStoreLinkSpreads(rows);
+  let beatport = 0;
+  let spotify = 0;
+  for (const row of plan) {
+    const data: { beatportUrl?: string; spotifyUrl?: string } = {};
+    if (row.beatportUrl) data.beatportUrl = row.beatportUrl;
+    if (row.spotifyUrl) data.spotifyUrl = row.spotifyUrl;
+    if (!Object.keys(data).length) continue;
+    await prisma.track.update({ where: { id: row.id }, data });
+    if (data.beatportUrl) beatport += 1;
+    if (data.spotifyUrl) spotify += 1;
+  }
+  return { beatport, spotify };
 }
