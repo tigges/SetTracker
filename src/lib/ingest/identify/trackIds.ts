@@ -21,12 +21,13 @@ import {
 } from "../tracklists1001/seeds";
 import { resolveTrackImage, sleep } from "../../thumbs/deezer";
 import {
-  resolveTrackMetaMusicBrainz,
   resolveTrackMetaMusicBrainzByIsrc,
+  resolveTrackMetaMusicBrainzPreferred,
 } from "../../thumbs/musicbrainz";
 import {
   canonicalBeatportUrl,
   canonicalSpotifyUrl,
+  isLikelyUnbuyable,
   normalizeIsrc,
 } from "../../trackMeta";
 import { resolveSpotifyTrack, spotifyConfigured } from "./spotify";
@@ -41,6 +42,7 @@ import { fingerprintIdProbes } from "./fingerprintWatch";
 import { catalogQueryTitle } from "./names";
 import { dropPasteOnlyUrls } from "./pasteOnly";
 import {
+  beatportSlugMatchesTitle,
   evaluateTrackIdPin,
   isJunkTrackPin,
   loadTrackIdPins,
@@ -635,9 +637,11 @@ export async function identifySeedRow(
   }
 
   if (opts.musicbrainz) {
-    const mb = isrc
-      ? await resolveTrackMetaMusicBrainzByIsrc(isrc, queryTitle, row.artist)
-      : await resolveTrackMetaMusicBrainz(queryTitle, row.artist);
+    const mb = await resolveTrackMetaMusicBrainzPreferred(
+      queryTitle,
+      row.artist,
+      isrc,
+    );
     if (mb?.mbid) {
       usedMb = true;
       mbid = mb.mbid;
@@ -880,6 +884,27 @@ export function trackIdWriteFields(
   return data;
 }
 
+/** Slug first; same-ISRC twins also get the fill-null store URLs. */
+export function trackIdHitWhere(hit: {
+  slug?: string;
+  artist: string;
+  title: string;
+  isrc?: string;
+}): {
+  slug?: string;
+  isrc?: string;
+  artistName?: string;
+  title?: string;
+  OR?: Array<{ slug?: string; isrc?: string }>;
+} {
+  const code = normalizeIsrc(hit.isrc);
+  if (hit.slug) {
+    return { OR: [{ slug: hit.slug }, ...(code ? [{ isrc: code }] : [])] };
+  }
+  if (code) return { isrc: code };
+  return { artistName: hit.artist, title: hit.title };
+}
+
 export async function applyTrackIdHits(
   prisma: PrismaClient,
   hits: TrackIdHit[],
@@ -888,16 +913,27 @@ export async function applyTrackIdHits(
   for (const hit of hits) {
     if (!hit.isrc && !hit.beatportUrl && !hit.spotifyUrl) continue;
     const tracks = await prisma.track.findMany({
-      where: hit.slug
-        ? { slug: hit.slug }
-        : {
-            artistName: hit.artist,
-            title: hit.title,
-          },
-      select: { id: true, isrc: true, beatportUrl: true, spotifyUrl: true },
+      where: trackIdHitWhere(hit),
+      select: {
+        id: true,
+        slug: true,
+        title: true,
+        artistName: true,
+        isrc: true,
+        beatportUrl: true,
+        spotifyUrl: true,
+      },
     });
     for (const t of tracks) {
-      const data = trackIdWriteFields(t, hit);
+      const sameRow = Boolean(hit.slug && t.slug === hit.slug);
+      let beatportUrl = hit.beatportUrl;
+      if (beatportUrl && !sameRow) {
+        if (isLikelyUnbuyable(t.title, t.artistName)) beatportUrl = undefined;
+        else if (!beatportSlugMatchesTitle(beatportUrl, t.title)) {
+          beatportUrl = undefined;
+        }
+      }
+      const data = trackIdWriteFields(t, { ...hit, beatportUrl });
       if (!Object.keys(data).length) continue;
       await prisma.track.update({ where: { id: t.id }, data });
       n += 1;

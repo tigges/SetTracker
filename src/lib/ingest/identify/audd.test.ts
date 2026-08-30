@@ -19,6 +19,26 @@ assert.equal(
   "https://www.youtube.com/watch?v=nRt46mdx8oY",
 );
 
+const withBeatport = parseAuddLyricRow({
+  artist: "Zedd",
+  title: "Beautiful Now",
+  media: JSON.stringify([
+    { provider: "beatport", url: "https://www.beatport.com/search?q=skip" },
+    {
+      provider: "beatport",
+      url: "https://www.beatport.com/track/beautiful-now/123?ref=audd",
+    },
+  ]),
+});
+assert.equal(
+  withBeatport?.beatportUrl,
+  "https://www.beatport.com/track/beautiful-now/123",
+);
+assert.equal(
+  withBeatport?.platforms.beatport,
+  "https://www.beatport.com/track/beautiful-now/123",
+);
+
 assert.equal(
   evaluateAuddHit("Zedd ft. Jon Bellion", "Beautiful Now", {
     artist: "Zedd",

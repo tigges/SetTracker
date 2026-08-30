@@ -24,7 +24,7 @@ import { applyProducerDjReview } from "./producerDjReview";
 import { mergeSetTitleDjs } from "./mergeSetTitleDjs";
 import { repairInsomniacMixPlayback } from "./insomniac/repairMixPlayback";
 import { applyDjSocialPins } from "./djSocialPins";
-import { applyTrackIdPins } from "./identify/trackIdPins";
+import { applyTrackIdPins, spreadCatalogStoreLinks } from "./identify/trackIdPins";
 import { applyEntityCompletePins } from "./entityCompletePins";
 import {
   curatedEventSocialPatch,
@@ -188,6 +188,13 @@ export async function applyKnownUrlFixes(prisma: PrismaClient): Promise<number> 
   if (trackIds.beatport || trackIds.isrc || trackIds.spotify) {
     console.log(
       `[verify-urls] track id pins matched=${trackIds.matched} beatport=${trackIds.beatport} isrc=${trackIds.isrc} spotify=${trackIds.spotify}`,
+    );
+  }
+  const spread = await spreadCatalogStoreLinks(prisma);
+  n += spread.beatport + spread.spotify;
+  if (spread.beatport || spread.spotify) {
+    console.log(
+      `[verify-urls] store-link spread beatport=${spread.beatport} spotify=${spread.spotify}`,
     );
   }
 

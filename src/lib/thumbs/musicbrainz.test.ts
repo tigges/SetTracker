@@ -1,8 +1,10 @@
 import assert from "node:assert/strict";
 import {
   beatportUrlFromMbRelations,
+  mbRecordingLookupOrder,
   pickBestRecording,
   spotifyUrlFromMbRelations,
+  storeLinksFromMbRecordings,
 } from "./musicbrainz";
 
 assert.equal(
@@ -67,6 +69,73 @@ assert.equal(
     },
   ]),
   null,
+);
+
+assert.equal(
+  beatportUrlFromMbRelations([
+    { url: { resource: "https://www.beatport.com/release/pressure/99" } },
+    { url: { resource: "https://www.beatport.com/track/pressure/123" } },
+  ]),
+  "https://www.beatport.com/track/pressure/123",
+);
+
+const ordered = mbRecordingLookupOrder(
+  [
+    {
+      id: "bootleg",
+      title: "Beautiful Now [Twysted & Jellix bootleg]",
+      "artist-credit": [{ name: "Zedd" }],
+    },
+    {
+      id: "studio",
+      title: "Beautiful Now",
+      "artist-credit": [{ name: "Zedd" }],
+    },
+    {
+      id: "studio",
+      title: "Beautiful Now (dup)",
+      "artist-credit": [{ name: "Zedd" }],
+    },
+  ],
+  "Beautiful Now",
+  "Zedd",
+);
+assert.deepEqual(
+  ordered.map((r) => r.id),
+  ["studio", "bootleg"],
+);
+
+const firstWins = mbRecordingLookupOrder([
+  { id: "a", title: "One" },
+  { id: "b", title: "Two" },
+]);
+assert.deepEqual(
+  firstWins.map((r) => r.id),
+  ["a", "b"],
+);
+
+assert.deepEqual(
+  storeLinksFromMbRecordings([
+    {
+      relations: [
+        { url: { resource: "https://www.beatport.com/release/pressure/99" } },
+      ],
+    },
+    {
+      relations: [
+        { url: { resource: "https://www.beatport.com/track/pressure/123" } },
+        {
+          url: {
+            resource: "https://open.spotify.com/track/2ISSQPb9LHHiV6ng2NXosL",
+          },
+        },
+      ],
+    },
+  ]),
+  {
+    beatportUrl: "https://www.beatport.com/track/pressure/123",
+    spotifyUrl: "https://open.spotify.com/track/2ISSQPb9LHHiV6ng2NXosL",
+  },
 );
 
 console.log("musicbrainz.test.ts ok");

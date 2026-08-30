@@ -8,7 +8,9 @@ import {
   loadTrackIdPins,
   mergeTrackIdPins,
   pinCoversNeed,
+  planStoreLinkSpreads,
   slugMatchesLive,
+  storeLinksByIsrc,
 } from "./trackIdPins";
 
 assert.equal(isJunkTrackPin({ slug: "youtube-biscits", artist: "Youtube", title: "@Biscits" }), true);
@@ -197,4 +199,75 @@ assert.equal(
 assert.equal(
   pinCoversNeed({ slug: "artist-song", isrc: "USUM70000000" }, { wantBeatport: true }),
   false,
+);
+
+const byIsrc = storeLinksByIsrc([
+  { slug: "zedd-beautiful-now", isrc: "USUM71500700" },
+  {
+    slug: "zedd-beautiful-now-radio",
+    isrc: "USUM71500700",
+    beatportUrl: "https://www.beatport.com/track/beautiful-now/123",
+    spotifyUrl: "https://open.spotify.com/track/2ISSQPb9LHHiV6ng2NXosL",
+  },
+  {
+    slug: "other",
+    isrc: "USUM71500700",
+    beatportUrl: "https://www.beatport.com/search?q=skip",
+  },
+]);
+assert.equal(
+  byIsrc.get("USUM71500700")?.beatportUrl,
+  "https://www.beatport.com/track/beautiful-now/123",
+);
+assert.equal(
+  byIsrc.get("USUM71500700")?.spotifyUrl,
+  "https://open.spotify.com/track/2ISSQPb9LHHiV6ng2NXosL",
+);
+
+const spreads = planStoreLinkSpreads([
+  {
+    id: "has-store",
+    isrc: "USUM71500700",
+    title: "Beautiful Now",
+    artistName: "Zedd",
+    beatportUrl: "https://www.beatport.com/track/beautiful-now/123",
+    spotifyUrl: "https://open.spotify.com/track/2ISSQPb9LHHiV6ng2NXosL",
+  },
+  {
+    id: "same-isrc",
+    isrc: "USUM71500700",
+    title: "Beautiful Now (Extended Mix)",
+    artistName: "Zedd",
+  },
+  {
+    id: "same-name",
+    title: "Beautiful Now",
+    artistName: "Zedd",
+  },
+  {
+    id: "mashup",
+    isrc: "USUM71500700",
+    title: "Beautiful Now vs Clarity mashup",
+    artistName: "Zedd",
+  },
+  {
+    id: "already",
+    isrc: "USUM71500700",
+    title: "Beautiful Now",
+    artistName: "Zedd",
+    beatportUrl: "https://www.beatport.com/track/beautiful-now/999",
+    spotifyUrl: "https://open.spotify.com/track/7ouMYWpwJ422jRcDASZB7P",
+  },
+]);
+assert.deepEqual(
+  spreads.map((r) => r.id).sort(),
+  ["same-isrc", "same-name"],
+);
+assert.equal(
+  spreads.find((r) => r.id === "same-isrc")?.beatportUrl,
+  "https://www.beatport.com/track/beautiful-now/123",
+);
+assert.equal(
+  spreads.find((r) => r.id === "same-name")?.spotifyUrl,
+  "https://open.spotify.com/track/2ISSQPb9LHHiV6ng2NXosL",
 );

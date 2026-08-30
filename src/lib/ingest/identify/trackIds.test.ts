@@ -9,6 +9,7 @@ import {
   mergeIdentifyQueue,
   splitEnrichPriorities,
   takeSpotifyFillRows,
+  trackIdHitWhere,
   trackIdWriteFields,
   uniqueIdentifyRows,
 } from "./trackIds";
@@ -329,6 +330,30 @@ assert.deepEqual(
     },
   ),
   {},
+);
+
+assert.deepEqual(
+  trackIdHitWhere({
+    slug: "zedd-beautiful-now",
+    artist: "Zedd",
+    title: "Beautiful Now",
+    isrc: "USUM71500700",
+  }),
+  {
+    OR: [{ slug: "zedd-beautiful-now" }, { isrc: "USUM71500700" }],
+  },
+);
+assert.deepEqual(
+  trackIdHitWhere({
+    artist: "Zedd",
+    title: "Beautiful Now",
+    isrc: "USUM71500700",
+  }),
+  { isrc: "USUM71500700" },
+);
+assert.deepEqual(
+  trackIdHitWhere({ artist: "Zedd", title: "Beautiful Now" }),
+  { artistName: "Zedd", title: "Beautiful Now" },
 );
 
 console.log("identify/trackIds.test.ts ok");

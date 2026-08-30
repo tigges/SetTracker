@@ -10,7 +10,7 @@
  */
 
 import { assertAcrSpendAllowed } from "../enrich/acrCost";
-import { normalizeIsrc } from "../../trackMeta";
+import { canonicalBeatportUrl, normalizeIsrc } from "../../trackMeta";
 import { namesClose, primaryArtist, titleRank } from "./names";
 import type { TrackRadarPlatforms, TrackRadarTrack } from "./trackradar";
 
@@ -41,6 +41,10 @@ function platformsFromAuddMedia(raw: string | undefined): TrackRadarPlatforms {
       if (p === "spotify") out.spotify = url.replace("http://", "https://");
       if (p === "youtube") out.youtube = url.replace("http://", "https://");
       if (p === "apple" || p === "apple_music") out.appleMusic = url;
+      if (p === "beatport") {
+        const canon = canonicalBeatportUrl(url);
+        if (canon) out.beatport = canon;
+      }
       if (p === "deezer") continue;
     }
     return out;
@@ -53,10 +57,12 @@ export function parseAuddLyricRow(raw: AuddLyricRow): TrackRadarTrack | null {
   const artist = String(raw.artist || "").trim();
   const title = String(raw.title || "").trim();
   if (!artist || !title) return null;
+  const platforms = platformsFromAuddMedia(raw.media);
   return {
     artist,
     title,
-    platforms: platformsFromAuddMedia(raw.media),
+    platforms,
+    ...(platforms.beatport ? { beatportUrl: platforms.beatport } : {}),
   };
 }
 
