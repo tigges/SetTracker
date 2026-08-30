@@ -74,4 +74,14 @@ describe("displayDjBio", () => {
     assert.equal(displayDjBio(null), null);
     assert.equal(displayDjBio("   "), null);
   });
+
+  it("keeps the bradeazy Beatport artist bio", () => {
+    const out = displayDjBio(
+      "Miami-based DJ and producer bradeazy is a rising force in the electronic music scene, blending high-energy tech-house with the attitude and edge of viral internet culture. He followed that momentum with “Up Down,” his breakout club anthem that topped Beatport and radio club charts.",
+      { genre: "Bass House", homeCity: "Miami, US" },
+    );
+    assert.ok(out);
+    assert.match(out, /Backstage Baddies|Up Down|tech-house/i);
+    assert.doesNotMatch(out, /beatport\.com/i);
+  });
 });
