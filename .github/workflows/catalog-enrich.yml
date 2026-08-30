@@ -270,8 +270,6 @@ jobs:
           TRACK_ID_HELD_LIMIT: "8"
           TRACK_ID_DELAY_MS: "0"
           TRACKRADAR_ARCHIVE: "0"
-          # Empty secret is a no-op; MCP search_track stays off.
-          TRACKRADAR_API_KEY: ${{ secrets.TRACKRADAR_API_KEY }}
           SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
           SPOTIFY_CLIENT_SECRET: ${{ secrets.SPOTIFY_CLIENT_SECRET }}
         run: npm run research:track-ids
