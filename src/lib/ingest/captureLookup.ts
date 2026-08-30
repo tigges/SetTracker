@@ -6,9 +6,13 @@
  * committed data only — no network, no DB — so it is safe to run before any
  * capture work starts.
  */
-import { soundcloudSlugFromUrl } from "./setHostUrls";
 import { TRACKLIST_1001_BY_SOURCE_SLUG } from "./tracklists1001/festival2026";
-import { youtubeVideoId } from "../thumbs/youtubeThumb";
+import {
+  resolveCaptureSlug,
+  tracklistId,
+} from "./capturePreflight";
+
+export { resolveCaptureSlug, tracklistId };
 
 export type CaptureArchiveRow = {
   label?: string;
@@ -34,38 +38,6 @@ export type CaptureLookup = {
   archive: CaptureArchiveRow[];
   alreadyOnFile: boolean;
 };
-
-/**
- * 1001 tracklist ids are the stable part of the URL; the trailing name slug
- * drifts when 1001 re-titles a page, so compare on the id alone.
- */
-export function tracklistId(url: string): string | null {
-  if (!/1001tracklists\.com/i.test(url)) return null;
-  return url.match(/\/tracklist\/([a-z0-9]+)\//i)?.[1]?.toLowerCase() ?? null;
-}
-
-export function resolveCaptureSlug(input: string): {
-  slug: string | null;
-  how: string;
-} {
-  const arg = input.trim();
-  if (/^(yt|sc)-/.test(arg)) return { slug: arg, how: "given as a slug" };
-  if (/^[a-zA-Z0-9_-]{11}$/.test(arg) && !arg.includes("."))
-    return { slug: `yt-${arg}`, how: "bare YouTube video id" };
-  if (/youtube\.com|youtu\.be/i.test(arg)) {
-    const id = youtubeVideoId(arg);
-    return id
-      ? { slug: `yt-${id}`, how: "YouTube URL" }
-      : { slug: null, how: "YouTube URL, but no video id in it" };
-  }
-  if (/soundcloud\.com/i.test(arg)) {
-    const slug = soundcloudSlugFromUrl(arg.split("?")[0]!);
-    return slug
-      ? { slug, how: "SoundCloud permalink" }
-      : { slug: null, how: "SoundCloud URL, but no slug could be derived" };
-  }
-  return { slug: null, how: "not a slug or a known host URL" };
-}
 
 export function lookupCapture(
   input: string,

@@ -14,32 +14,11 @@
  *
  * Reads committed files only — no network, no DB.
  */
-import { readFileSync } from "node:fs";
-import { join } from "node:path";
 import {
   formatCaptureLookup,
   lookupCapture,
-  type CaptureArchiveRow,
 } from "../src/lib/ingest/captureLookup";
-
-function loadArchive(): CaptureArchiveRow[] {
-  try {
-    const d = JSON.parse(
-      readFileSync(
-        join(process.cwd(), "data/crosscheck/known-1001-urls.json"),
-        "utf8",
-      ),
-    ) as Record<string, CaptureArchiveRow[] | undefined>;
-    return [
-      ...(d.urls ?? []),
-      ...(d.heldPendingPlayback ?? []),
-      ...(d.pendingCuePaste ?? []),
-      ...(d.stillMissing1001 ?? []),
-    ];
-  } catch {
-    return [];
-  }
-}
+import { loadKnown1001ArchiveRows } from "../src/lib/ingest/known1001Archive";
 
 function main(): void {
   const args = process.argv.slice(2).filter((a) => !a.startsWith("--"));
@@ -49,7 +28,7 @@ function main(): void {
     );
     process.exit(1);
   }
-  const archive = loadArchive();
+  const archive = loadKnown1001ArchiveRows();
   let known = 0;
   for (const a of args) {
     const r = lookupCapture(a, archive);
