@@ -36,6 +36,7 @@ type MbRecording = {
   length?: number; // ms
   isrcs?: string[];
   releases?: {
+    id?: string;
     date?: string;
     title?: string;
     "label-info"?: { label?: { name?: string } }[];
@@ -146,7 +147,29 @@ function metaFromRecording(
   };
 }
 
-/** Exact ISRC → recording → Beatport /track url-rel (never scrape). */
+/** Best recording first, then remaining same-ISRC siblings (deduped). */
+export function mbRecordingLookupOrder(
+  recordings: MbRecording[],
+  title?: string,
+  artistName?: string,
+): MbRecording[] {
+  const seen = new Set<string>();
+  const out: MbRecording[] = [];
+  const best =
+    title && artistName
+      ? pickBestRecording(title, artistName, recordings)
+      : null;
+  for (const row of [best, ...recordings]) {
+    if (!row?.id || seen.has(row.id)) continue;
+    seen.add(row.id);
+    out.push(row);
+  }
+  return out;
+}
+
+const MB_ISRC_RECORDING_LOOKUPS = 2; // best + one sibling
+
+/** Exact ISRC → recording(s) → Beatport /track url-rel (never scrape). */
 export async function resolveTrackMetaMusicBrainzByIsrc(
   isrc: string,
   title?: string,
@@ -157,15 +180,32 @@ export async function resolveTrackMetaMusicBrainzByIsrc(
   const json = await mbGet<{ recordings?: MbRecording[] }>(
     `https://musicbrainz.org/ws/2/isrc/${encodeURIComponent(code)}?fmt=json`,
   );
-  const recordings = json?.recordings ?? [];
-  if (!recordings.length) return null;
-  const row =
-    title && artistName
-      ? pickBestRecording(title, artistName, recordings) ?? recordings[0]
-      : recordings[0];
-  if (!row?.id) return null;
-  const extra = await lookupRecordingIds(row.id);
-  return metaFromRecording(row, extra);
+  const order = mbRecordingLookupOrder(json?.recordings ?? [], title, artistName);
+  const primary = order[0];
+  if (!primary?.id) return null;
+  const extra = {
+    beatportUrl: null as string | null,
+    isrc: code,
+    spotifyUrl: null as string | null,
+  };
+  let releaseIds: string[] = [];
+  for (const rec of order.slice(0, MB_ISRC_RECORDING_LOOKUPS)) {
+    if (!rec.id) continue;
+    const ids = await lookupRecordingIds(rec.id);
+    extra.beatportUrl ||= ids.beatportUrl;
+    extra.spotifyUrl ||= ids.spotifyUrl;
+    extra.isrc ||= ids.isrc;
+    if (!releaseIds.length) releaseIds = ids.releaseIds;
+    if (extra.beatportUrl && extra.spotifyUrl) {
+      return metaFromRecording(primary, extra);
+    }
+  }
+  if (!extra.beatportUrl && releaseIds[0]) {
+    const rel = await lookupReleaseStoreLinks(releaseIds[0]);
+    extra.beatportUrl ||= rel.beatportUrl;
+    extra.spotifyUrl ||= rel.spotifyUrl;
+  }
+  return metaFromRecording(primary, extra);
 }
 
 export async function resolveTrackMetaMusicBrainz(
@@ -181,20 +221,43 @@ export async function resolveTrackMetaMusicBrainz(
   const row = pickBestRecording(title, artistName, json?.recordings ?? []);
   if (!row?.id) return null;
   const extra = await lookupRecordingIds(row.id);
+  if (!extra.beatportUrl && extra.releaseIds[0]) {
+    const rel = await lookupReleaseStoreLinks(extra.releaseIds[0]);
+    extra.beatportUrl ||= rel.beatportUrl;
+    extra.spotifyUrl ||= rel.spotifyUrl;
+  }
   return metaFromRecording(row, extra);
+}
+
+async function lookupReleaseStoreLinks(releaseId: string): Promise<{
+  beatportUrl: string | null;
+  spotifyUrl: string | null;
+}> {
+  const url = `https://musicbrainz.org/ws/2/release/${encodeURIComponent(releaseId)}?inc=url-rels&fmt=json`;
+  const json = await mbGet<{ relations?: MbUrlRel[] }>(url);
+  if (!json) return { beatportUrl: null, spotifyUrl: null };
+  return {
+    // canonicalBeatportUrl already drops /release/… pages.
+    beatportUrl: beatportUrlFromMbRelations(json.relations),
+    spotifyUrl: spotifyUrlFromMbRelations(json.relations),
+  };
 }
 
 async function lookupRecordingIds(mbid: string): Promise<{
   beatportUrl: string | null;
   isrc: string | null;
   spotifyUrl: string | null;
+  releaseIds: string[];
 }> {
-  const url = `https://musicbrainz.org/ws/2/recording/${encodeURIComponent(mbid)}?inc=url-rels+isrcs&fmt=json`;
+  const url = `https://musicbrainz.org/ws/2/recording/${encodeURIComponent(mbid)}?inc=url-rels+isrcs+releases&fmt=json`;
   const json = await mbGet<{
     relations?: MbUrlRel[];
     isrcs?: string[];
+    releases?: { id?: string }[];
   }>(url);
-  if (!json) return { beatportUrl: null, isrc: null, spotifyUrl: null };
+  if (!json) {
+    return { beatportUrl: null, isrc: null, spotifyUrl: null, releaseIds: [] };
+  }
   const isrc = json.isrcs?.find((x) =>
     /^[A-Z]{2}[A-Z0-9]{3}[0-9]{7}$/i.test(x),
   );
@@ -202,5 +265,8 @@ async function lookupRecordingIds(mbid: string): Promise<{
     beatportUrl: beatportUrlFromMbRelations(json.relations),
     isrc: isrc ? isrc.toUpperCase() : null,
     spotifyUrl: spotifyUrlFromMbRelations(json.relations),
+    releaseIds: (json.releases ?? [])
+      .map((r) => r.id)
+      .filter((id): id is string => Boolean(id)),
   };
 }
