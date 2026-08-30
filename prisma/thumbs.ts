@@ -47,7 +47,7 @@ import {
   resolveHearthisTrackImage,
   resolveHearthisUserImage,
 } from "../src/lib/thumbs/hearthis";
-import { resolveTrackMetaMusicBrainz } from "../src/lib/thumbs/musicbrainz";
+import { resolveTrackMetaMusicBrainzPreferred } from "../src/lib/thumbs/musicbrainz";
 import { resolveOgImage } from "../src/lib/thumbs/ogImage";
 import { resolveSoundcloudAvatar } from "../src/lib/thumbs/soundcloudAvatar";
 import {
@@ -453,7 +453,12 @@ async function main() {
 
       if (needsMb) {
         mbCalls += 1;
-        const mb = await resolveTrackMetaMusicBrainz(t.title, t.artistName);
+        const knownIsrc = normalizeIsrc(t.isrc) || normalizeIsrc(result?.isrc);
+        const mb = await resolveTrackMetaMusicBrainzPreferred(
+          t.title,
+          t.artistName,
+          knownIsrc,
+        );
         // MusicBrainz asks for ~1 req/sec
         await sleep(Math.max(DELAY_MS, 1100));
         if (mb) {

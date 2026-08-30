@@ -21,8 +21,8 @@ import {
 } from "../tracklists1001/seeds";
 import { resolveTrackImage, sleep } from "../../thumbs/deezer";
 import {
-  resolveTrackMetaMusicBrainz,
   resolveTrackMetaMusicBrainzByIsrc,
+  resolveTrackMetaMusicBrainzPreferred,
 } from "../../thumbs/musicbrainz";
 import {
   canonicalBeatportUrl,
@@ -637,9 +637,11 @@ export async function identifySeedRow(
   }
 
   if (opts.musicbrainz) {
-    const mb = isrc
-      ? await resolveTrackMetaMusicBrainzByIsrc(isrc, queryTitle, row.artist)
-      : await resolveTrackMetaMusicBrainz(queryTitle, row.artist);
+    const mb = await resolveTrackMetaMusicBrainzPreferred(
+      queryTitle,
+      row.artist,
+      isrc,
+    );
     if (mb?.mbid) {
       usedMb = true;
       mbid = mb.mbid;

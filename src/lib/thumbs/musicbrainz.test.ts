@@ -4,6 +4,7 @@ import {
   mbRecordingLookupOrder,
   pickBestRecording,
   spotifyUrlFromMbRelations,
+  storeLinksFromMbRecordings,
 } from "./musicbrainz";
 
 assert.equal(
@@ -111,6 +112,30 @@ const firstWins = mbRecordingLookupOrder([
 assert.deepEqual(
   firstWins.map((r) => r.id),
   ["a", "b"],
+);
+
+assert.deepEqual(
+  storeLinksFromMbRecordings([
+    {
+      relations: [
+        { url: { resource: "https://www.beatport.com/release/pressure/99" } },
+      ],
+    },
+    {
+      relations: [
+        { url: { resource: "https://www.beatport.com/track/pressure/123" } },
+        {
+          url: {
+            resource: "https://open.spotify.com/track/2ISSQPb9LHHiV6ng2NXosL",
+          },
+        },
+      ],
+    },
+  ]),
+  {
+    beatportUrl: "https://www.beatport.com/track/pressure/123",
+    spotifyUrl: "https://open.spotify.com/track/2ISSQPb9LHHiV6ng2NXosL",
+  },
 );
 
 console.log("musicbrainz.test.ts ok");
