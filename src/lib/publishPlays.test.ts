@@ -12,6 +12,7 @@ import {
   publishListTally,
   publishSetPlays,
   shouldFillExpectedSlots,
+  soundsLikeLine,
   type PublishablePlay,
 } from "./publishPlays";
 
@@ -440,6 +441,14 @@ describe("publishListTally", () => {
 });
 
 describe("listener-facing unknown copy", () => {
+  it("names a weak fingerprint as Sounds like", () => {
+    assert.equal(
+      soundsLikeLine("Zedd", "Beautiful Now"),
+      "Sounds like Zedd — Beautiful Now",
+    );
+    assert.equal(soundsLikeLine("Zedd", "  "), null);
+  });
+
   it("maps leftover Unknown titles to Unknown track", () => {
     assert.equal(displayPlayTitle("Unknown"), UNKNOWN_TRACK_TITLE);
     assert.equal(displayPlayTitle("unknown tracks"), UNKNOWN_TRACK_TITLE);

@@ -27,6 +27,7 @@ import {
   isTalkPlay,
   publicStatusLabel,
   segmentColor,
+  soundsLikeLine,
 } from "@/lib/publishPlays";
 import type { PlayRow } from "@/lib/queries";
 import { playablePlaybackUrl } from "@/lib/playback";
@@ -303,6 +304,7 @@ export function SetTimeline({
             const meta = STATUS_META[p.idStatus as IdStatus];
             const kind = talk ? null : editKind(p.title, p.artistName);
             const color = segmentColor(p);
+            const like = soundsLikeLine(p.suggestedArtist, p.suggestedTitle);
             return (
               <li key={p.id}>
                 <div
@@ -415,7 +417,11 @@ export function SetTimeline({
                       {p.resolvedTitle && (
                         <span className="truncate text-teal">→ {p.resolvedTitle}</span>
                       )}
-                      {talk ? null : p.detectionComment ? (
+                      {talk ? null : like ? (
+                        <span className="truncate text-muted2 italic">
+                          {like}
+                        </span>
+                      ) : p.detectionComment ? (
                         <span className="truncate text-muted2 italic">
                           {p.detectionComment}
                         </span>
