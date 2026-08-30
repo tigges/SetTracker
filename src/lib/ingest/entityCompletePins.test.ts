@@ -343,6 +343,18 @@ assert.equal(
 assert.equal(
   evaluateEntityCompleteRow({
     kind: "dj",
+    slug: "bradeazy",
+    name: "bradeazy",
+    field: "bio",
+    value:
+      "Miami-based DJ and producer bradeazy is a rising force in the electronic music scene, blending high-energy tech-house with the attitude and edge of viral internet culture.",
+    evidence: "Beatport artist page",
+  }).field,
+  "bio",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
     slug: "adrian-mills",
     name: "Adrián Mills",
     field: "soundcloud",
