@@ -18,6 +18,7 @@ import {
 } from "@/lib/feedPriority";
 import { isListPendingOfficialSet, setDisplayThumb } from "@/lib/setBrowse";
 import type { FeedItem } from "@/lib/queries";
+import { setCardStatusHint } from "@/lib/setCardStatusHint";
 
 export function SetCard({
   set,
@@ -44,16 +45,7 @@ export function SetCard({
     eventImageUrl: set.eventImageUrl,
     primaryDjSlug: set.primaryDj?.slug,
   });
-  const identified = set.statusCounts.identified ?? 0;
-  const unresolved = set.statusCounts.unresolved_id ?? 0;
-  const community = set.statusCounts.community_resolved ?? 0;
-  const statusHint = [
-    identified ? `${identified} ID` : null,
-    unresolved ? `${unresolved} unresolved` : null,
-    community ? `${community} resolved` : null,
-  ]
-    .filter(Boolean)
-    .join(" · ");
+  const statusHint = setCardStatusHint(set.statusCounts);
   const target = resolvePlaybackTarget(set.playbackUrl, {
     sourceUrl: set.sourceUrl,
   });

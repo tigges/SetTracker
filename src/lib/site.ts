@@ -7,7 +7,7 @@ export const SITE_NAME = "setradar.ai";
 export const SITE_TAGLINE = "DJ set database";
 
 export const SITE_DESCRIPTION =
-  "Tracklists, IDs, and provenance for electronic DJ sets — festivals, clubs, livestreams, and radio from SoundCloud, YouTube, hearthis.at, and the community.";
+  "Timed tracklists for festival, club, livestream, and radio DJ sets — play the recording and see what was playing.";
 
 /** Operator repo — /stats links the workflow pages a pass is started from. */
 export const OPERATOR_REPO = "tigges/SetTracker";
