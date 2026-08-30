@@ -14,6 +14,11 @@ import {
   search1001Query,
   search1001QueryFromUrl,
 } from "@/lib/search1001";
+import {
+  formatCapturePreflight,
+  formatCaptureRowPreflight,
+  type CapturePreflightIndex,
+} from "@/lib/ingest/capturePreflight";
 
 const LIVE_SCRIPT = "https://setradar.ai/capture-1001tl.js";
 
@@ -168,6 +173,7 @@ async function copyText(text: string): Promise<boolean> {
 export function Capture1001Client(props: {
   presets: CapturePreset[];
   generatedAt?: string;
+  preflight?: CapturePreflightIndex;
 }) {
   const urlQ = useSearchParams().get("q") ?? "";
   return <Capture1001Workbench key={urlQ} initialQuery={urlQ} {...props} />;
@@ -178,10 +184,12 @@ function Capture1001Workbench({
   presets,
   generatedAt,
   initialQuery,
+  preflight,
 }: {
   presets: CapturePreset[];
   generatedAt?: string;
   initialQuery: string;
+  preflight?: CapturePreflightIndex;
 }) {
   const scriptUrl = useMemo(() => {
     if (typeof window === "undefined") return LIVE_SCRIPT;
@@ -191,6 +199,7 @@ function Capture1001Workbench({
 
   const [query, setQuery] = useState(initialQuery);
   const [status, setStatus] = useState<string>("");
+  const [pasteUrl, setPasteUrl] = useState("");
 
   // Local parks apply immediately; commit data/capture-defer.json to share them.
   const snoozeRaw = useSyncExternalStore(
@@ -221,6 +230,10 @@ function Capture1001Workbench({
   const parked = view.parked;
   const reserve = view.reserve;
   const findQuery = search1001Query(query.trim());
+  const pasteCheck = useMemo(() => {
+    if (!preflight || !pasteUrl.trim()) return null;
+    return formatCapturePreflight(pasteUrl, preflight);
+  }, [pasteUrl, preflight]);
 
   async function onCopy(label: string, text: string) {
     const ok = await copyText(text);
@@ -283,6 +296,36 @@ function Capture1001Workbench({
       {status ? (
         <p className="mono text-[11px] text-brand">{status}</p>
       ) : null}
+      {preflight ? (
+        <label className="block">
+          <span className="mb-1 block text-[11px] font-semibold text-ink">
+            Check a URL before you paste
+          </span>
+          <input
+            type="url"
+            value={pasteUrl}
+            onChange={(e) => setPasteUrl(e.target.value)}
+            placeholder="1001 / YouTube / SoundCloud URL or yt- / sc- slug"
+            className="w-full rounded-md border border-line bg-bg px-2.5 py-1.5 text-[13px] text-ink outline-none focus:border-brand"
+          />
+          {pasteCheck?.message ? (
+            <p
+              className={`mt-1 text-[12px] ${
+                pasteCheck.kind === "wired" || pasteCheck.kind === "mismatch"
+                  ? "text-amber"
+                  : "text-muted"
+              }`}
+            >
+              {pasteCheck.message}
+            </p>
+          ) : (
+            <p className="mt-1 text-[11px] text-muted2">
+              Catches a set that is already wired, or a 1001 page filed under a
+              different slug.
+            </p>
+          )}
+        </label>
+      ) : null}
 
       <label className="block">
         <span className="sr-only">Filter queue</span>
@@ -318,6 +361,13 @@ function Capture1001Workbench({
         {filtered.map((p, i) => {
           const watch = watchFromPreset(p);
           const searchQ = queryForPreset(p);
+          const rowCheck = preflight
+            ? formatCaptureRowPreflight(
+                p.slug,
+                { watchUrl: watch || undefined, tracklistUrl: p.tracklistUrl },
+                preflight,
+              )
+            : null;
           return (
           <li
             key={p.slug}
@@ -333,6 +383,9 @@ function Capture1001Workbench({
                 {p.performanceYear ? ` · ${p.performanceYear}` : ""}
                 {p.reason ? ` · ${p.reason}` : ""}
               </div>
+              {rowCheck ? (
+                <div className="mt-0.5 text-[11px] text-amber">{rowCheck.message}</div>
+              ) : null}
             </div>
             <div className="flex flex-wrap gap-1.5">
               {watch ? (
@@ -384,17 +437,28 @@ function Capture1001Workbench({
       </ol>
 
       {parked.length > 0 ? (
-        <details className="rounded-md border border-amber/30 bg-amber/5 px-2 py-1.5">
+        <div className="rounded-md border border-amber/30 bg-amber/5 px-2 py-1.5">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <p className="text-[12px] text-ink">
+              <span className="font-semibold">Parked in this browser</span>
+              <span className="mono text-muted2"> ({parked.length})</span>
+              {" — "}
+              copy the JSON and commit{" "}
+              <span className="mono">data/capture-defer.json</span> so everyone
+              gets the spare slot.
+            </p>
+            <button
+              type="button"
+              className="rounded-md border border-line px-2.5 py-1 text-[12px] font-bold"
+              onClick={() => void onCopyDeferJson()}
+            >
+              Copy defer JSON
+            </button>
+          </div>
+        <details className="mt-1.5">
           <summary className="cursor-pointer text-[12px] font-semibold text-ink">
-            Parked for later{" "}
-            <span className="mono text-muted2">({parked.length})</span>
+            Parked list
           </summary>
-          <p className="mt-1 text-[11px] leading-snug text-muted2">
-            Hidden in this browser only, and they return on their own date. To
-            park them for everyone — and free the slot in the built queue —
-            copy the JSON and commit it into{" "}
-            <span className="mono text-ink">data/capture-defer.json</span>.
-          </p>
           <ul className="mt-1.5 divide-y divide-line border-y border-line">
             {parked.map((p) => (
               <li
@@ -417,14 +481,8 @@ function Capture1001Workbench({
               </li>
             ))}
           </ul>
-          <button
-            type="button"
-            className="mt-2 rounded-md border border-line px-2.5 py-1 text-[12px] font-bold"
-            onClick={() => void onCopyDeferJson()}
-          >
-            Copy defer JSON
-          </button>
         </details>
+        </div>
       ) : null}
     </div>
   );

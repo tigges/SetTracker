@@ -34,6 +34,17 @@ export const COMMENT_LIKELY_TALK = "Likely talk";
 export const UNKNOWN_TRACK_TITLE = "Unknown track";
 export const TALK_COLOR = "var(--slate)";
 
+/** Visitor line when a weak fingerprint already named the cue. */
+export function soundsLikeLine(
+  artist?: string | null,
+  title?: string | null,
+): string | null {
+  const a = artist?.trim();
+  const t = title?.trim();
+  if (!a || !t) return null;
+  return `Sounds like ${a} — ${t}`;
+}
+
 /** Listener-facing title. Maps leftover "Unknown" rows to the same copy. */
 export function displayPlayTitle(title: string | null | undefined): string {
   const t = (title ?? "").trim();

@@ -15,6 +15,9 @@ import { StatsHealthCard, StatsMeter } from "@/components/StatsHealthCard";
 import { loadActionsStatusFile } from "@/lib/actionsStatus";
 import { capture1001StatsHref } from "@/lib/captureHref";
 import { loadOperatorCaptureQueue } from "@/lib/captureQueue";
+import { buildCapturePreflightIndex } from "@/lib/ingest/capturePreflight";
+import { loadKnown1001ArchiveRows } from "@/lib/ingest/known1001Archive";
+import { TRACKLIST_1001_BY_SOURCE_SLUG } from "@/lib/ingest/tracklists1001/festival2026";
 import { CAPTURE_QUEUE_LIMIT } from "@/lib/ingest/captureQueueLimits";
 import { getCatalogStats } from "@/lib/catalogStats";
 import { prisma } from "@/lib/db";
@@ -242,6 +245,10 @@ export default async function StatsPage() {
     loadEnrichSpendLedger(prisma),
     loadOperatorCaptureQueue(),
   ]);
+  const capturePreflight = buildCapturePreflightIndex(
+    TRACKLIST_1001_BY_SOURCE_SLUG,
+    loadKnown1001ArchiveRows(),
+  );
   // The queue carries a reserve past the display limit so a parked row promotes
   // its replacement in the browser; the fold counts what an operator can see.
   const captureQueueOpen = Math.min(
@@ -424,6 +431,7 @@ export default async function StatsPage() {
             <Capture1001Client
               presets={captureQueue.presets}
               generatedAt={captureQueue.generatedAt}
+              preflight={capturePreflight}
             />
           </Suspense>
         </QueueFold>

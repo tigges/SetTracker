@@ -231,11 +231,11 @@ export function HomeLanding({
                 <ul className="hero-legend mono">
                   <li className="hero-legend-chip">
                     <span className="dot bg-amber" />
-                    identified
+                    named
                   </li>
                   <li className="hero-legend-chip">
                     <span className="dot bg-magenta" />
-                    unresolved
+                    unknown
                   </li>
                   <li className="hero-legend-chip">
                     <span className="dot bg-teal" />
@@ -243,7 +243,7 @@ export function HomeLanding({
                   </li>
                   <li className="hero-legend-chip">
                     <span className="dot bg-grey" />
-                    unparsed
+                    not detected
                   </li>
                 </ul>
               </div>

@@ -131,7 +131,6 @@ export default async function TrackPage({
                 <span> · {fmtTimestamp(track.durationSec)}</span>
               ) : null}
               {track.genre ? <span> · {track.genre}</span> : null}
-              {track.isrc ? <span> · ISRC {track.isrc}</span> : null}
             </p>
             <div className="mt-3 flex flex-wrap items-center gap-2">
               {track.label && (
@@ -315,9 +314,12 @@ export default async function TrackPage({
             </Panel>
           )}
 
-          {(track.releaseDate || track.remixerName) && (
-            <Panel title="Release">
-              <dl className="space-y-2 text-[13px]">
+          {(track.releaseDate || track.remixerName || track.isrc) && (
+            <details className="card p-5">
+              <summary className="cursor-pointer text-[13px] font-semibold uppercase tracking-[0.14em] text-muted">
+                Details
+              </summary>
+              <dl className="mt-4 space-y-2 text-[13px]">
                 {track.remixerName && (
                   <div className="flex justify-between gap-3">
                     <dt className="text-muted2">Remixer</dt>
@@ -332,8 +334,14 @@ export default async function TrackPage({
                     </dd>
                   </div>
                 )}
+                {track.isrc && (
+                  <div className="flex justify-between gap-3">
+                    <dt className="text-muted2">ISRC</dt>
+                    <dd className="mono text-ink">{track.isrc}</dd>
+                  </div>
+                )}
               </dl>
-            </Panel>
+            </details>
           )}
         </div>
       </div>

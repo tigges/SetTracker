@@ -45,8 +45,9 @@ export default function AboutPage() {
 
       <h2 className="mt-10 text-lg font-bold tracking-tight">Suggest an ID</h2>
       <p className="mt-3 text-[14px] leading-relaxed text-muted">
-        On an open row, Suggest ID copies a short email you can send. No
-        account required.
+        On an open row, Suggest ID opens a GitHub issue with a ready snippet —
+        or copy the JSON if you do not have an account. We match the clock on
+        the row, not the number. No site login required.
       </p>
 
       <details className="mt-10 rounded-lg border border-line bg-panel px-4 py-3">

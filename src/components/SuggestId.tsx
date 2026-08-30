@@ -5,6 +5,7 @@ import {
   buildSuggestIdSnippet,
   suggestIdSnippetText,
 } from "@/lib/suggestIdSnippet";
+import { soundsLikeLine } from "@/lib/publishPlays";
 
 /**
  * Community ID wedge for the static site: open a prefilled GitHub issue
@@ -44,6 +45,7 @@ export function SuggestIdButton({
   const [open, setOpen] = useState(false);
   const [artist, setArtist] = useState(suggestedArtist ?? "");
   const [title, setTitle] = useState(suggestedTitle ?? "");
+  const like = soundsLikeLine(suggestedArtist, suggestedTitle);
   const actionLabel =
     actionLabelProp ?? (confirmHint ? "Confirm ID" : "Suggest ID");
   const [copied, setCopied] = useState(false);
@@ -100,7 +102,9 @@ export function SuggestIdButton({
         className="rounded-md border border-line px-1.5 py-0.5 text-[10px] text-muted2 transition-colors hover:border-brand hover:text-brand"
         title={
           confirmHint
-            ? "Confirm or correct this suggested ID"
+            ? like
+              ? `Confirm ${suggestedArtist!.trim()} — ${suggestedTitle!.trim()}`
+              : "Confirm or correct this suggested ID"
             : "Suggest an ID for this row"
         }
       >
@@ -121,7 +125,9 @@ export function SuggestIdButton({
           <div className="fixed inset-x-3 bottom-3 z-50 rounded-lg border border-line bg-panel p-2.5 shadow-lg sm:inset-x-auto sm:bottom-auto sm:left-1/2 sm:top-1/2 sm:w-56 sm:-translate-x-1/2 sm:-translate-y-1/2">
           <p className="mb-2 text-[11px] text-muted">
             {confirmHint
-              ? "Confirm this suggested release for "
+              ? like
+                ? `${like} — confirm or correct for `
+                : "Confirm this suggested release for "
               : "Suggest a release for "}
             <span className="text-ink">{currentLabel}</span>
             . Opens a review PR — merge to publish, close to reject.
