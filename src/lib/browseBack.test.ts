@@ -17,6 +17,8 @@ assert.equal(isBrowsePath("/sets/"), true);
 assert.equal(isBrowsePath("/djs/steve-aoki"), true);
 assert.equal(isBrowsePath("/events/tomorrowland"), true);
 assert.equal(isBrowsePath("/search"), true);
+assert.equal(isBrowsePath("/wishlist"), true);
+assert.equal(browseLabelFromPath("/wishlist"), "Wishlist");
 assert.equal(isBrowsePath("/sets/aoki-friendship-mix"), false);
 assert.equal(isBrowsePath("/djs/steve-aoki/extra"), false);
 

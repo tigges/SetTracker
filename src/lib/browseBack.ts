@@ -19,6 +19,7 @@ const INDEX_LABELS: Record<string, string> = {
   "/stats": "Stats",
   "/search": "Search",
   "/about": "About",
+  "/wishlist": "Wishlist",
 };
 
 const ENTITY = /^\/(djs|events|series|tracks|labels)\/([^/]+)$/;

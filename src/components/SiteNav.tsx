@@ -15,6 +15,7 @@ const PRIMARY = [
 const MORE = [
   { href: "/tracks", label: "Tracks" },
   { href: "/labels", label: "Labels" },
+  { href: "/wishlist", label: "Wishlist" },
 ] as const;
 
 function linkClass(active: boolean) {

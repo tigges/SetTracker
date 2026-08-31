@@ -7,6 +7,8 @@ assert.equal(isPrimaryNavActive("/sets/yt-abc", "/sets"), true);
 assert.equal(isPrimaryNavActive("/djs", "/sets"), false);
 assert.equal(isPrimaryNavActive("/djs", "/djs"), true);
 assert.equal(isPrimaryNavActive("/djs/charlotte-de-witte", "/djs"), true);
+assert.equal(isPrimaryNavActive("/wishlist", "/djs"), false);
+assert.equal(isPrimaryNavActive("/wishlist", "/wishlist"), true);
 assert.equal(isPrimaryNavActive("/events", "/events"), true);
 assert.equal(isPrimaryNavActive("/events/tomorrowland", "/events"), true);
 assert.equal(isPrimaryNavActive("/events/calendar", "/events"), true);
