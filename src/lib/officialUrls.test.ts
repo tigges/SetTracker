@@ -16,6 +16,17 @@ describe("isWeakOfficialUrl", () => {
       true,
     );
     assert.equal(isWeakOfficialUrl("https://www.wikidata.org/wiki/Q123"), true);
+    assert.equal(
+      isWeakOfficialUrl("https://www.discogs.com/artist/2697000-Valentino-Khan"),
+      true,
+    );
+    assert.equal(
+      isWeakOfficialUrl(
+        "https://www.insomniac.com/music/artists/valentino-khan/",
+      ),
+      true,
+    );
+    assert.equal(isWeakOfficialUrl("https://www.insomniac.com/"), false);
   });
 
   it("treats ticket / directory hosts as weak", () => {
@@ -50,6 +61,7 @@ describe("isWeakOfficialUrl", () => {
     assert.equal(isWeakOfficialUrl("https://djoon.com/"), false);
     assert.equal(isWeakOfficialUrl("https://solo.to/korolova.dj"), false);
     assert.equal(isWeakOfficialUrl("https://linktr.ee/honeydijon"), false);
+    assert.equal(isWeakOfficialUrl("https://valentinokhan.com/"), false);
     assert.equal(isWeakOfficialUrl("https://skrillex.com/"), false);
     assert.equal(isWeakOfficialUrl("https://plastik-funk.de/"), false);
     assert.equal(isWeakOfficialUrl("https://www.aboveandbeyond.nu/"), false);

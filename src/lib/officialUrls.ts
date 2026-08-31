@@ -6,12 +6,15 @@
  * ra.co as website. Techno Music World is the same class: follow a concrete
  * `/artist/{slug}/about` URL already in hand, then verify outbound official
  * links — do not site-crawl, and never store it as website.
+ * Discogs is a marketplace wiki, never a homepage. An Insomniac
+ * `/music/artists/` hub is a promoter page, not the artist's site —
+ * keep `insomniac.com` itself for the promoter Event row.
  * DICE / Shotgun / JamBase / Eventpop / PuntoTicket are tickets.
  * Follow a JamBase URL already in hand; do not crawl jambase.com.
  */
 
 const WEAK_OFFICIAL =
-  /6amgroup\.com|clubtickets\.com\/blog|djmag\.com\/top[-_]?100|djmag\.com\/?([?#]|$)|wikipedia\.org|wikidata\.org|mixesdb\.com|(^|[/.])ra\.co([/?#]|$)|residentadvisor\.net|technomusicworld\.com|dice\.fm|shotgun\.live|jambase\.com|eventpop\.me|puntoticket\.com/i;
+  /6amgroup\.com|clubtickets\.com\/blog|djmag\.com\/top[-_]?100|djmag\.com\/?([?#]|$)|wikipedia\.org|wikidata\.org|mixesdb\.com|discogs\.com|insomniac\.com\/music\/artists|(^|[/.])ra\.co([/?#]|$)|residentadvisor\.net|technomusicworld\.com|dice\.fm|shotgun\.live|jambase\.com|eventpop\.me|puntoticket\.com/i;
 
 export function isWeakOfficialUrl(url: string | null | undefined): boolean {
   if (!url?.trim()) return false;

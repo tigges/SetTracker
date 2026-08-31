@@ -84,4 +84,15 @@ describe("displayDjBio", () => {
     assert.match(out, /Backstage Baddies|Up Down|tech-house/i);
     assert.doesNotMatch(out, /beatport\.com/i);
   });
+
+  it("keeps the Valentino Khan About prose and drops no emails", () => {
+    const out = displayDjBio(
+      "Los Angeles DJ and producer whose music spans house, trap, bass, and hardstyle. His House Party EP on Mad Decent, with Diplo, Chris Lorenzo, and Wuki, debuted at #1 on the Apple Music Dance charts.",
+      { homeCity: "Los Angeles, US" },
+    );
+    assert.ok(out);
+    assert.match(out, /House Party EP/);
+    assert.match(out, /Mad Decent/);
+    assert.doesNotMatch(out, /unitedtalent|prodigyartists|@/i);
+  });
 });
