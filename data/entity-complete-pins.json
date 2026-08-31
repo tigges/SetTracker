@@ -1259,6 +1259,16 @@
   },
   {
     "kind": "dj",
+    "slug": "jauz",
+    "website": "https://jauzofficial.com",
+    "instagram": "https://instagram.com/jauzofficial",
+    "youtube": "https://www.youtube.com/@jauzofficial",
+    "soundcloud": "https://soundcloud.com/jauzofficial",
+    "twitter": "https://x.com/jauzofficial",
+    "homeCity": "United States"
+  },
+  {
+    "kind": "dj",
     "slug": "jaytech",
     "imageUrl": "https://cdn-images.dzcdn.net/images/artist/f49eeef0f4dafaf983a4fa3b284ace5a/250x250-000000-80-0-0.jpg",
     "website": "https://jaytechmusic.com",

@@ -1052,6 +1052,125 @@ assert.equal(
   assert.doesNotMatch(anti.bio ?? "", /\+1|323|@chrislake/i);
 }
 
+// Jauz — operator paste. jauzofficial.com + matching @jauzofficial
+// handles. Channel /c/ ID is not a handle. Bite This
+// (heybitethis.com) is the label, not the artist site. "Official
+// YouTube for Jauz" is not a bio. Booking email stays out.
+assert.equal(
+  nameOverlapsHandle("Jauz", "https://jauzofficial.com"),
+  true,
+);
+assert.equal(
+  nameOverlapsHandle("Jauz", "https://www.youtube.com/@jauzofficial"),
+  true,
+);
+assert.equal(
+  nameOverlapsHandle("Jauz", "https://www.heybitethis.com/"),
+  false,
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "jauz",
+    name: "Jauz",
+    field: "website",
+    value: "https://jauzofficial.com",
+    evidence: "operator paste, official site",
+  }).value,
+  "https://jauzofficial.com",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "jauz",
+    name: "Jauz",
+    field: "youtube",
+    value: "https://www.youtube.com/@jauzofficial",
+    evidence: "operator paste, channel About",
+  }).value,
+  "https://www.youtube.com/@jauzofficial",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "jauz",
+    name: "Jauz",
+    field: "youtube",
+    value: "https://www.youtube.com/channel/UCoFl689sYMJfI1pZxWqlQgg",
+    evidence: "operator paste, channel id",
+  }).drop,
+  "youtube name mismatch",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "jauz",
+    name: "Jauz",
+    field: "instagram",
+    value: "https://www.instagram.com/jauzofficial",
+    evidence: "operator paste",
+  }).value,
+  "https://instagram.com/jauzofficial",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "jauz",
+    name: "Jauz",
+    field: "soundcloud",
+    value: "https://soundcloud.com/jauzofficial",
+    evidence: "operator paste",
+  }).value,
+  "https://soundcloud.com/jauzofficial",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "jauz",
+    name: "Jauz",
+    field: "twitter",
+    value: "https://twitter.com/jauzofficial",
+    evidence: "operator paste",
+  }).value,
+  "https://x.com/jauzofficial",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "jauz",
+    name: "Jauz",
+    field: "homeCity",
+    value: "United States",
+    evidence: "operator paste, YouTube About",
+  }).value,
+  "United States",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "jauz",
+    name: "Jauz",
+    field: "website",
+    value: "https://www.heybitethis.com/",
+    evidence: "operator paste, Bite This label",
+  }).drop,
+  "website name mismatch",
+);
+{
+  const jauz = loadEntityCompletePins().find((p) => p.slug === "jauz");
+  assert.ok(jauz);
+  assert.equal(jauz.kind, "dj");
+  assert.equal(jauz.website, "https://jauzofficial.com");
+  assert.equal(jauz.instagram, "https://instagram.com/jauzofficial");
+  assert.equal(jauz.youtube, "https://www.youtube.com/@jauzofficial");
+  assert.equal(jauz.soundcloud, "https://soundcloud.com/jauzofficial");
+  assert.equal(jauz.twitter, "https://x.com/jauzofficial");
+  assert.equal(jauz.homeCity, "United States");
+  assert.equal(jauz.bio, undefined);
+  assert.equal(jauz.genre, undefined);
+  assert.equal(jauz.imageUrl, undefined);
+}
+
 // Fields with no Dj column must drop rather than be coerced somewhere else.
 for (const field of ["tiktok", "facebook", "spotify", "deezer"]) {
   assert.equal(
