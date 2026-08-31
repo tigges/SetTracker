@@ -1,6 +1,10 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { isWeakOfficialUrl } from "./officialUrls";
+import {
+  evidenceUrlMatchesName,
+  isFollowableEvidenceUrl,
+  isWeakOfficialUrl,
+} from "./officialUrls";
 
 describe("isWeakOfficialUrl", () => {
   it("treats rank lists and encyclopedias as weak", () => {
@@ -16,6 +20,22 @@ describe("isWeakOfficialUrl", () => {
       true,
     );
     assert.equal(isWeakOfficialUrl("https://www.wikidata.org/wiki/Q123"), true);
+    assert.equal(
+      isWeakOfficialUrl("https://grokipedia.com/page/Valentino_Khan"),
+      true,
+    );
+    assert.equal(isWeakOfficialUrl("https://grokipedia.com/page/Malaa"), true);
+    assert.equal(
+      isWeakOfficialUrl("https://www.discogs.com/artist/2697000-Valentino-Khan"),
+      true,
+    );
+    assert.equal(
+      isWeakOfficialUrl(
+        "https://www.insomniac.com/music/artists/valentino-khan/",
+      ),
+      true,
+    );
+    assert.equal(isWeakOfficialUrl("https://www.insomniac.com/"), false);
   });
 
   it("treats ticket / directory hosts as weak", () => {
@@ -50,6 +70,7 @@ describe("isWeakOfficialUrl", () => {
     assert.equal(isWeakOfficialUrl("https://djoon.com/"), false);
     assert.equal(isWeakOfficialUrl("https://solo.to/korolova.dj"), false);
     assert.equal(isWeakOfficialUrl("https://linktr.ee/honeydijon"), false);
+    assert.equal(isWeakOfficialUrl("https://valentinokhan.com/"), false);
     assert.equal(isWeakOfficialUrl("https://skrillex.com/"), false);
     assert.equal(isWeakOfficialUrl("https://plastik-funk.de/"), false);
     assert.equal(isWeakOfficialUrl("https://www.aboveandbeyond.nu/"), false);
@@ -57,5 +78,81 @@ describe("isWeakOfficialUrl", () => {
     assert.equal(isWeakOfficialUrl("https://www.creamfields.cl/"), false);
     assert.equal(isWeakOfficialUrl(null), false);
     assert.equal(isWeakOfficialUrl(""), false);
+  });
+});
+
+describe("followable evidence hubs", () => {
+  it("follows a concrete Grokipedia or Insomniac artist page already in hand", () => {
+    assert.equal(
+      isFollowableEvidenceUrl("https://grokipedia.com/page/Valentino_Khan"),
+      true,
+    );
+    assert.equal(
+      isFollowableEvidenceUrl(
+        "https://www.insomniac.com/music/artists/malaa/",
+      ),
+      true,
+    );
+    assert.equal(
+      isFollowableEvidenceUrl("https://en.wikipedia.org/wiki/I_Hate_Models"),
+      true,
+    );
+    assert.equal(
+      isFollowableEvidenceUrl("https://www.discogs.com/artist/5120339-Brohug"),
+      true,
+    );
+    assert.equal(isFollowableEvidenceUrl("https://www.discogs.com/search/?q=brohug"), false);
+    assert.equal(isFollowableEvidenceUrl("https://www.discogs.com/"), false);
+    assert.equal(isFollowableEvidenceUrl("https://grokipedia.com/"), false);
+    assert.equal(isFollowableEvidenceUrl("https://www.insomniac.com/"), false);
+    assert.equal(
+      isFollowableEvidenceUrl("https://www.insomniac.com/music/mixes/"),
+      false,
+    );
+  });
+
+  it("requires the leaf to name this act", () => {
+    assert.equal(
+      evidenceUrlMatchesName(
+        "Valentino Khan",
+        "https://grokipedia.com/page/Valentino_Khan",
+      ),
+      true,
+    );
+    assert.equal(
+      evidenceUrlMatchesName(
+        "Malaa",
+        "https://www.insomniac.com/music/artists/malaa/",
+      ),
+      true,
+    );
+    assert.equal(
+      evidenceUrlMatchesName(
+        "Anti Up",
+        "https://grokipedia.com/page/dj_fresh_american_dj",
+      ),
+      false,
+    );
+    assert.equal(
+      evidenceUrlMatchesName(
+        "Valentino Khan",
+        "https://grokipedia.com/page/Malaa",
+      ),
+      false,
+    );
+    assert.equal(
+      evidenceUrlMatchesName(
+        "BROHUG",
+        "https://www.discogs.com/artist/5120339-Brohug",
+      ),
+      true,
+    );
+    assert.equal(
+      evidenceUrlMatchesName(
+        "Valentino Khan",
+        "https://www.discogs.com/artist/5120339-Brohug",
+      ),
+      false,
+    );
   });
 });

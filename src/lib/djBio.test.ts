@@ -84,4 +84,56 @@ describe("displayDjBio", () => {
     assert.match(out, /Backstage Baddies|Up Down|tech-house/i);
     assert.doesNotMatch(out, /beatport\.com/i);
   });
+
+  it("keeps the Valentino Khan About prose and drops no emails", () => {
+    const out = displayDjBio(
+      "Los Angeles DJ and producer whose music spans house, trap, bass, and hardstyle. His House Party EP on Mad Decent, with Diplo, Chris Lorenzo, and Wuki, debuted at #1 on the Apple Music Dance charts.",
+      { homeCity: "Los Angeles, US" },
+    );
+    assert.ok(out);
+    assert.match(out, /House Party EP/);
+    assert.match(out, /Mad Decent/);
+    assert.doesNotMatch(out, /unitedtalent|prodigyartists|@/i);
+  });
+
+  it("keeps the GREG 99 About prose", () => {
+    const out = displayDjBio(
+      "Minas Gerais producer whose sound mixes Afro House, Latin House, and Balearic vibes. Releases on Hellbent, Criterio, Nervous, and Moodchild; Still My Baby with Cloonee hit #1 on Beatport's global chart.",
+      { genre: "Afro House", homeCity: "Minas Gerais, Brazil" },
+    );
+    assert.ok(out);
+    assert.match(out, /Still My Baby/);
+    assert.match(out, /Cloonee/);
+    assert.doesNotMatch(out, /@greg99|spotify\.com/i);
+  });
+
+  it("keeps the Anti Up slogan and drops handles", () => {
+    const out = displayDjBio(
+      "Never established. Never limited. Keep calm? Says who? @chrislake x @chrislorenzo66.",
+      { homeCity: "United States" },
+    );
+    assert.ok(out);
+    assert.match(out, /Never established/);
+    assert.doesNotMatch(out, /@chrislake|@chrislorenzo66/i);
+  });
+
+  it("keeps the Malaa Insomniac artist-hub bio", () => {
+    const out = displayDjBio(
+      "French DJ and producer who has performed in a balaclava since 2015 and released Who Is Malaa mixes on SoundCloud. Debut Illicit EP and Notorious landed on Tchami's Confession; also known for Illegal Mixtapes and the NO REDEMPTION project with Tchami.",
+      { genre: "Bass House", homeCity: "France" },
+    );
+    assert.ok(out);
+    assert.match(out, /balaclava|Who Is Malaa|Confession/i);
+    assert.doesNotMatch(out, /insomniac\.com|grokipedia/i);
+  });
+
+  it("keeps the BROHUG Discogs profile line", () => {
+    const out = displayDjBio(
+      "The Swedish bass-house band from Stockholm, which started its activity in 2015.",
+      { genre: "Bass House", homeCity: "Stockholm, Sweden" },
+    );
+    assert.ok(out);
+    assert.match(out, /Swedish|2015/i);
+    assert.doesNotMatch(out, /discogs\.com/i);
+  });
 });

@@ -120,6 +120,15 @@
   },
   {
     "kind": "dj",
+    "slug": "anti-up",
+    "instagram": "https://instagram.com/antiupmusic",
+    "youtube": "https://www.youtube.com/@antiup",
+    "twitter": "https://x.com/antiupmusic",
+    "homeCity": "United States",
+    "bio": "Never established. Never limited. Keep calm? Says who?"
+  },
+  {
+    "kind": "dj",
     "slug": "aqutie",
     "imageUrl": "https://cdn-images.dzcdn.net/images/artist/afac91bf72713f39c3acb93b3f9ca01c/250x250-000000-80-0-0.jpg",
     "soundcloud": "https://soundcloud.com/aqutie",
@@ -408,6 +417,18 @@
     "soundcloud": "https://soundcloud.com/brandy-maina",
     "homeCity": "Nairobi, Kenya",
     "genre": "Hip Hop"
+  },
+  {
+    "kind": "dj",
+    "slug": "brohug",
+    "website": "https://wearebrohug.com",
+    "instagram": "https://instagram.com/brohugofficial",
+    "youtube": "https://www.youtube.com/@brohugofficial",
+    "soundcloud": "https://soundcloud.com/brohugofficial",
+    "twitter": "https://x.com/wearebrohug",
+    "homeCity": "Stockholm, Sweden",
+    "bio": "The Swedish bass-house band from Stockholm, which started its activity in 2015.",
+    "genre": "Bass House"
   },
   {
     "kind": "dj",
@@ -1050,6 +1071,17 @@
   },
   {
     "kind": "dj",
+    "slug": "greg-99",
+    "instagram": "https://instagram.com/greg99music",
+    "youtube": "https://www.youtube.com/@greg99music",
+    "soundcloud": "https://soundcloud.com/greg99music",
+    "twitter": "https://x.com/greg99music",
+    "homeCity": "Minas Gerais, Brazil",
+    "bio": "Minas Gerais producer whose sound mixes Afro House, Latin House, and Balearic vibes. Releases on Hellbent, Criterio, Nervous, and Moodchild; Still My Baby with Cloonee hit #1 on Beatport's global chart.",
+    "genre": "Afro House"
+  },
+  {
+    "kind": "dj",
     "slug": "green-velvet",
     "imageUrl": "https://cdn-images.dzcdn.net/images/artist/b0a56315df2977ebb0740c414330b831/250x250-000000-80-0-0.jpg",
     "youtube": "https://www.youtube.com/@officialgreenvelvet",
@@ -1236,6 +1268,16 @@
     "instagram": "https://instagram.com/jamiiemusic",
     "homeCity": "Berlin, Germany",
     "genre": "Afro House"
+  },
+  {
+    "kind": "dj",
+    "slug": "jauz",
+    "website": "https://jauzofficial.com",
+    "instagram": "https://instagram.com/jauzofficial",
+    "youtube": "https://www.youtube.com/@jauzofficial",
+    "soundcloud": "https://soundcloud.com/jauzofficial",
+    "twitter": "https://x.com/jauzofficial",
+    "homeCity": "United States"
   },
   {
     "kind": "dj",
@@ -1644,7 +1686,11 @@
     "imageUrl": "https://yt3.googleusercontent.com/49BQwS44A6epGxh-PyBu5Q4AFoJyx2akz806OyKticOdmEVlNSco4odvLcDXL-_PnSzXZLWTKdw=s900-c-k-c0x00ffffff-no-rj",
     "instagram": "https://instagram.com/malaamusic",
     "youtube": "https://www.youtube.com/@malaa_music",
-    "twitter": "https://x.com/Malaamusic"
+    "soundcloud": "https://soundcloud.com/malaamusic",
+    "twitter": "https://x.com/Malaamusic",
+    "homeCity": "France",
+    "bio": "French DJ and producer who has performed in a balaclava since 2015 and released Who Is Malaa mixes on SoundCloud. Debut Illicit EP and Notorious landed on Tchami's Confession; also known for Illegal Mixtapes and the NO REDEMPTION project with Tchami.",
+    "genre": "Bass House"
   },
   {
     "kind": "dj",
@@ -2706,6 +2752,16 @@
     "soundcloud": "https://soundcloud.com/umlilo",
     "homeCity": "Johannesburg, South Africa",
     "genre": "Gqom"
+  },
+  {
+    "kind": "dj",
+    "slug": "valentino-khan",
+    "website": "https://valentinokhan.com",
+    "instagram": "https://instagram.com/valentinokhan",
+    "youtube": "https://www.youtube.com/@ValentinoKhan",
+    "twitter": "https://x.com/ValentinoKhan",
+    "homeCity": "Los Angeles, US",
+    "bio": "Los Angeles DJ and producer whose music spans house, trap, bass, and hardstyle. His House Party EP on Mad Decent, with Diplo, Chris Lorenzo, and Wuki, debuted at #1 on the Apple Music Dance charts."
   },
   {
     "kind": "dj",

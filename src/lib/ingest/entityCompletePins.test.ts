@@ -6,6 +6,7 @@ import {
   decodeMojibake,
   evaluateEntityCompleteRow,
   isFallbackWebsiteHub,
+  loadEntityCompletePins,
   mergeEntityCompletePins,
   nameOverlapsHandle,
   parseEntityCompleteCsv,
@@ -602,6 +603,711 @@ assert.equal(
   }).value,
   "https://omdathetkan.be",
 );
+
+// Valentino Khan — operator paste. First-party site + matching handles.
+// Insomniac / Discogs hubs stay out of website. No TikTok / Facebook /
+// Spotify-playlist / Apple Music columns. Genre left unset (house + trap
+// + bass + hardstyle — do not invent one chip).
+assert.equal(
+  nameOverlapsHandle("Valentino Khan", "https://valentinokhan.com/"),
+  true,
+);
+assert.equal(
+  nameOverlapsHandle("Valentino Khan", "https://www.youtube.com/@ValentinoKhan"),
+  true,
+);
+assert.equal(
+  nameOverlapsHandle("Valentino Khan", "https://instagram.com/valentinokhan"),
+  true,
+);
+assert.equal(
+  nameOverlapsHandle("Valentino Khan", "https://x.com/ValentinoKhan"),
+  true,
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "valentino-khan",
+    name: "Valentino Khan",
+    field: "website",
+    value: "https://www.valentinokhan.com/",
+    evidence: "operator paste, official site",
+  }).value,
+  "https://valentinokhan.com",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "valentino-khan",
+    name: "Valentino Khan",
+    field: "youtube",
+    value: "https://www.youtube.com/@ValentinoKhan",
+    evidence: "operator paste, channel About",
+  }).value,
+  "https://www.youtube.com/@ValentinoKhan",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "valentino-khan",
+    name: "Valentino Khan",
+    field: "instagram",
+    value: "https://www.instagram.com/valentinokhan",
+    evidence: "operator paste",
+  }).value,
+  "https://instagram.com/valentinokhan",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "valentino-khan",
+    name: "Valentino Khan",
+    field: "twitter",
+    value: "https://twitter.com/ValentinoKhan",
+    evidence: "operator paste",
+  }).value,
+  "https://x.com/ValentinoKhan",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "valentino-khan",
+    name: "Valentino Khan",
+    field: "homeCity",
+    value: "Los Angeles, US",
+    evidence: "operator paste, Los Angeles-based",
+  }).value,
+  "Los Angeles, US",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "valentino-khan",
+    name: "Valentino Khan",
+    field: "bio",
+    value:
+      "Los Angeles DJ and producer whose music spans house, trap, bass, and hardstyle. His House Party EP on Mad Decent, with Diplo, Chris Lorenzo, and Wuki, debuted at #1 on the Apple Music Dance charts.",
+    evidence: "operator paste, official site About",
+  }).field,
+  "bio",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "valentino-khan",
+    name: "Valentino Khan",
+    field: "website",
+    value: "https://www.insomniac.com/music/artists/valentino-khan/",
+    evidence: "operator paste, promoter hub",
+  }).drop,
+  "weak or invalid website",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "valentino-khan",
+    name: "Valentino Khan",
+    field: "website",
+    value: "https://www.discogs.com/artist/2697000-Valentino-Khan",
+    evidence: "operator paste, marketplace wiki",
+  }).drop,
+  "weak or invalid website",
+);
+{
+  const vk = loadEntityCompletePins().find((p) => p.slug === "valentino-khan");
+  assert.ok(vk);
+  assert.equal(vk.kind, "dj");
+  assert.equal(vk.website, "https://valentinokhan.com");
+  assert.equal(vk.instagram, "https://instagram.com/valentinokhan");
+  assert.equal(vk.youtube, "https://www.youtube.com/@ValentinoKhan");
+  assert.equal(vk.twitter, "https://x.com/ValentinoKhan");
+  assert.equal(vk.homeCity, "Los Angeles, US");
+  assert.ok(vk.bio?.includes("House Party EP"));
+  assert.equal(vk.soundcloud, undefined);
+  assert.equal(vk.genre, undefined);
+  assert.equal(vk.imageUrl, undefined);
+}
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "valentino-khan",
+    name: "Valentino Khan",
+    field: "website",
+    value: "https://grokipedia.com/page/Valentino_Khan",
+    evidence: "operator paste, encyclopedia",
+  }).drop,
+  "weak or invalid website",
+);
+
+// GREG 99 — operator paste. Matching greg99music handles; no first-party
+// site. Spotify artist URL has no pin column. Genre is the lead named
+// chip (Afro House); Latin / Balearic stay in the bio.
+assert.equal(
+  nameOverlapsHandle("GREG 99", "https://www.youtube.com/@greg99music"),
+  true,
+);
+assert.equal(
+  nameOverlapsHandle("GREG 99", "https://instagram.com/greg99music"),
+  true,
+);
+assert.equal(
+  nameOverlapsHandle("GREG 99", "https://soundcloud.com/greg99music"),
+  true,
+);
+assert.equal(
+  nameOverlapsHandle("GREG 99", "https://x.com/greg99music"),
+  true,
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "greg-99",
+    name: "GREG 99",
+    field: "youtube",
+    value: "https://www.youtube.com/@greg99music",
+    evidence: "operator paste, channel About",
+  }).value,
+  "https://www.youtube.com/@greg99music",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "greg-99",
+    name: "GREG 99",
+    field: "instagram",
+    value: "https://www.instagram.com/greg99music",
+    evidence: "operator paste",
+  }).value,
+  "https://instagram.com/greg99music",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "greg-99",
+    name: "GREG 99",
+    field: "soundcloud",
+    value: "https://soundcloud.com/greg99music",
+    evidence: "operator paste",
+  }).value,
+  "https://soundcloud.com/greg99music",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "greg-99",
+    name: "GREG 99",
+    field: "twitter",
+    value: "https://twitter.com/greg99music",
+    evidence: "operator paste",
+  }).value,
+  "https://x.com/greg99music",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "greg-99",
+    name: "GREG 99",
+    field: "homeCity",
+    value: "Minas Gerais, Brazil",
+    evidence: "operator paste, countryside of Minas Gerais",
+  }).value,
+  "Minas Gerais, Brazil",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "greg-99",
+    name: "GREG 99",
+    field: "genre",
+    value: "Afro House",
+    evidence: "operator paste, lead influence",
+  }).value,
+  "Afro House",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "greg-99",
+    name: "GREG 99",
+    field: "bio",
+    value:
+      "Minas Gerais producer whose sound mixes Afro House, Latin House, and Balearic vibes. Releases on Hellbent, Criterio, Nervous, and Moodchild; Still My Baby with Cloonee hit #1 on Beatport's global chart.",
+    evidence: "operator paste, official About",
+  }).field,
+  "bio",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "greg-99",
+    name: "GREG 99",
+    field: "spotify",
+    value: "https://open.spotify.com/artist/68ocQOFVB9wvLiC1C1WjYp",
+    evidence: "operator paste",
+  }).drop,
+  "unknown field",
+);
+{
+  const greg = loadEntityCompletePins().find((p) => p.slug === "greg-99");
+  assert.ok(greg);
+  assert.equal(greg.kind, "dj");
+  assert.equal(greg.instagram, "https://instagram.com/greg99music");
+  assert.equal(greg.youtube, "https://www.youtube.com/@greg99music");
+  assert.equal(greg.soundcloud, "https://soundcloud.com/greg99music");
+  assert.equal(greg.twitter, "https://x.com/greg99music");
+  assert.equal(greg.homeCity, "Minas Gerais, Brazil");
+  assert.equal(greg.genre, "Afro House");
+  assert.ok(greg.bio?.includes("Still My Baby"));
+  assert.equal(greg.website, undefined);
+  assert.equal(greg.imageUrl, undefined);
+}
+
+// Malaa — operator paste fills SoundCloud + France on the existing pin.
+// Insomniac artist hub is followable evidence (Bass House + balaclava bio)
+// but never website. Grokipedia /page/Malaa is the same class. Facebook /
+// Spotify have no pin columns. "Official YouTube Channel of Malaa" is not
+// a bio.
+assert.equal(
+  nameOverlapsHandle("Malaa", "https://soundcloud.com/malaamusic"),
+  true,
+);
+assert.equal(
+  nameOverlapsHandle("Malaa", "https://www.youtube.com/@malaa_music"),
+  true,
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "malaa",
+    name: "Malaa",
+    field: "soundcloud",
+    value: "https://soundcloud.com/malaamusic",
+    evidence: "operator paste, official channel",
+  }).value,
+  "https://soundcloud.com/malaamusic",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "malaa",
+    name: "Malaa",
+    field: "homeCity",
+    value: "France",
+    evidence: "operator paste, YouTube About + Insomniac Origin",
+  }).value,
+  "France",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "malaa",
+    name: "Malaa",
+    field: "genre",
+    value: "Bass House",
+    evidence: "insomniac.com/music/artists/malaa Genre",
+  }).value,
+  "Bass House",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "malaa",
+    name: "Malaa",
+    field: "bio",
+    value:
+      "French DJ and producer who has performed in a balaclava since 2015 and released Who Is Malaa mixes on SoundCloud. Debut Illicit EP and Notorious landed on Tchami's Confession; also known for Illegal Mixtapes and the NO REDEMPTION project with Tchami.",
+    evidence: "insomniac.com/music/artists/malaa",
+  }).field,
+  "bio",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "malaa",
+    name: "Malaa",
+    field: "website",
+    value: "https://www.insomniac.com/music/artists/malaa/",
+    evidence: "operator paste, promoter hub",
+  }).drop,
+  "weak or invalid website",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "malaa",
+    name: "Malaa",
+    field: "website",
+    value: "https://grokipedia.com/page/Malaa",
+    evidence: "operator paste, encyclopedia",
+  }).drop,
+  "weak or invalid website",
+);
+{
+  const malaa = loadEntityCompletePins().find((p) => p.slug === "malaa");
+  assert.ok(malaa);
+  assert.equal(malaa.instagram, "https://instagram.com/malaamusic");
+  assert.equal(malaa.youtube, "https://www.youtube.com/@malaa_music");
+  assert.equal(malaa.soundcloud, "https://soundcloud.com/malaamusic");
+  assert.equal(malaa.twitter, "https://x.com/Malaamusic");
+  assert.equal(malaa.homeCity, "France");
+  assert.equal(malaa.genre, "Bass House");
+  assert.ok(malaa.bio?.includes("Who Is Malaa"));
+  assert.equal(malaa.website, undefined);
+}
+
+// Anti Up — operator paste. Matching @antiup / antiupmusic handles.
+// Slogan bio only — drop the +1 phone and @chrislake handle dump.
+// Facebook has no pin column. SoundCloud was not in this paste.
+// DJ Fresh Grokipedia is an encyclopedia, not a website.
+assert.equal(
+  nameOverlapsHandle("Anti Up", "https://www.youtube.com/@antiup"),
+  true,
+);
+assert.equal(
+  nameOverlapsHandle("Anti Up", "https://instagram.com/antiupmusic"),
+  true,
+);
+assert.equal(
+  nameOverlapsHandle("Anti Up", "https://x.com/antiupmusic"),
+  true,
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "anti-up",
+    name: "Anti Up",
+    field: "youtube",
+    value: "https://www.youtube.com/@antiup",
+    evidence: "operator paste, channel About",
+  }).value,
+  "https://www.youtube.com/@antiup",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "anti-up",
+    name: "Anti Up",
+    field: "instagram",
+    value: "https://www.instagram.com/antiupmusic",
+    evidence: "operator paste",
+  }).value,
+  "https://instagram.com/antiupmusic",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "anti-up",
+    name: "Anti Up",
+    field: "twitter",
+    value: "https://twitter.com/antiupmusic",
+    evidence: "operator paste",
+  }).value,
+  "https://x.com/antiupmusic",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "anti-up",
+    name: "Anti Up",
+    field: "homeCity",
+    value: "United States",
+    evidence: "operator paste, YouTube About",
+  }).value,
+  "United States",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "anti-up",
+    name: "Anti Up",
+    field: "bio",
+    value: "Never established. Never limited. Keep calm? Says who?",
+    evidence: "operator paste, channel About",
+  }).field,
+  "bio",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "anti-up",
+    name: "Anti Up",
+    field: "website",
+    value: "https://grokipedia.com/page/dj_fresh_american_dj",
+    evidence: "operator paste, encyclopedia",
+  }).drop,
+  "weak or invalid website",
+);
+{
+  const anti = loadEntityCompletePins().find((p) => p.slug === "anti-up");
+  assert.ok(anti);
+  assert.equal(anti.kind, "dj");
+  assert.equal(anti.instagram, "https://instagram.com/antiupmusic");
+  assert.equal(anti.youtube, "https://www.youtube.com/@antiup");
+  assert.equal(anti.twitter, "https://x.com/antiupmusic");
+  assert.equal(anti.homeCity, "United States");
+  assert.equal(anti.bio, "Never established. Never limited. Keep calm? Says who?");
+  assert.equal(anti.soundcloud, undefined);
+  assert.equal(anti.website, undefined);
+  assert.equal(anti.genre, undefined);
+  assert.doesNotMatch(anti.bio ?? "", /\+1|323|@chrislake/i);
+}
+
+// Jauz — operator paste. jauzofficial.com + matching @jauzofficial
+// handles. Channel /c/ ID is not a handle. Bite This
+// (heybitethis.com) is the label, not the artist site. "Official
+// YouTube for Jauz" is not a bio. Booking email stays out.
+assert.equal(
+  nameOverlapsHandle("Jauz", "https://jauzofficial.com"),
+  true,
+);
+assert.equal(
+  nameOverlapsHandle("Jauz", "https://www.youtube.com/@jauzofficial"),
+  true,
+);
+assert.equal(
+  nameOverlapsHandle("Jauz", "https://www.heybitethis.com/"),
+  false,
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "jauz",
+    name: "Jauz",
+    field: "website",
+    value: "https://jauzofficial.com",
+    evidence: "operator paste, official site",
+  }).value,
+  "https://jauzofficial.com",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "jauz",
+    name: "Jauz",
+    field: "youtube",
+    value: "https://www.youtube.com/@jauzofficial",
+    evidence: "operator paste, channel About",
+  }).value,
+  "https://www.youtube.com/@jauzofficial",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "jauz",
+    name: "Jauz",
+    field: "youtube",
+    value: "https://www.youtube.com/channel/UCoFl689sYMJfI1pZxWqlQgg",
+    evidence: "operator paste, channel id",
+  }).drop,
+  "youtube name mismatch",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "jauz",
+    name: "Jauz",
+    field: "instagram",
+    value: "https://www.instagram.com/jauzofficial",
+    evidence: "operator paste",
+  }).value,
+  "https://instagram.com/jauzofficial",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "jauz",
+    name: "Jauz",
+    field: "soundcloud",
+    value: "https://soundcloud.com/jauzofficial",
+    evidence: "operator paste",
+  }).value,
+  "https://soundcloud.com/jauzofficial",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "jauz",
+    name: "Jauz",
+    field: "twitter",
+    value: "https://twitter.com/jauzofficial",
+    evidence: "operator paste",
+  }).value,
+  "https://x.com/jauzofficial",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "jauz",
+    name: "Jauz",
+    field: "homeCity",
+    value: "United States",
+    evidence: "operator paste, YouTube About",
+  }).value,
+  "United States",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "jauz",
+    name: "Jauz",
+    field: "website",
+    value: "https://www.heybitethis.com/",
+    evidence: "operator paste, Bite This label",
+  }).drop,
+  "website name mismatch",
+);
+{
+  const jauz = loadEntityCompletePins().find((p) => p.slug === "jauz");
+  assert.ok(jauz);
+  assert.equal(jauz.kind, "dj");
+  assert.equal(jauz.website, "https://jauzofficial.com");
+  assert.equal(jauz.instagram, "https://instagram.com/jauzofficial");
+  assert.equal(jauz.youtube, "https://www.youtube.com/@jauzofficial");
+  assert.equal(jauz.soundcloud, "https://soundcloud.com/jauzofficial");
+  assert.equal(jauz.twitter, "https://x.com/jauzofficial");
+  assert.equal(jauz.homeCity, "United States");
+  assert.equal(jauz.bio, undefined);
+  assert.equal(jauz.genre, undefined);
+  assert.equal(jauz.imageUrl, undefined);
+}
+
+// BROHUG — operator paste. wearebrohug.com + matching @brohugofficial
+// YT/IG/SC. Discogs /artist/5120339-Brohug is followable evidence
+// (X @wearebrohug, Stockholm, Bass House, short profile) but never
+// website. Facebook has no pin column.
+assert.equal(
+  nameOverlapsHandle("BROHUG", "https://www.wearebrohug.com/"),
+  true,
+);
+assert.equal(
+  nameOverlapsHandle("BROHUG", "https://www.youtube.com/@brohugofficial"),
+  true,
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "brohug",
+    name: "BROHUG",
+    field: "website",
+    value: "https://www.wearebrohug.com/",
+    evidence: "operator paste, official site",
+  }).value,
+  "https://wearebrohug.com",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "brohug",
+    name: "BROHUG",
+    field: "youtube",
+    value: "https://www.youtube.com/@brohugofficial",
+    evidence: "operator paste, channel About",
+  }).value,
+  "https://www.youtube.com/@brohugofficial",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "brohug",
+    name: "BROHUG",
+    field: "instagram",
+    value: "https://www.instagram.com/brohugofficial/",
+    evidence: "operator paste",
+  }).value,
+  "https://instagram.com/brohugofficial",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "brohug",
+    name: "BROHUG",
+    field: "soundcloud",
+    value: "https://soundcloud.com/brohugofficial",
+    evidence: "operator paste",
+  }).value,
+  "https://soundcloud.com/brohugofficial",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "brohug",
+    name: "BROHUG",
+    field: "facebook",
+    value: "https://www.facebook.com/brohugofficial/",
+    evidence: "operator paste",
+  }).drop,
+  "unknown field",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "brohug",
+    name: "BROHUG",
+    field: "website",
+    value: "https://www.discogs.com/artist/5120339-Brohug",
+    evidence: "operator paste, marketplace wiki",
+  }).drop,
+  "weak or invalid website",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "brohug",
+    name: "BROHUG",
+    field: "twitter",
+    value: "https://twitter.com/wearebrohug",
+    evidence: "discogs.com/artist/5120339-Brohug urls",
+  }).value,
+  "https://x.com/wearebrohug",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "brohug",
+    name: "BROHUG",
+    field: "homeCity",
+    value: "Stockholm, Sweden",
+    evidence: "discogs.com/artist/5120339-Brohug profile",
+  }).value,
+  "Stockholm, Sweden",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "brohug",
+    name: "BROHUG",
+    field: "genre",
+    value: "Bass House",
+    evidence: "discogs.com/artist/5120339-Brohug profile bass-house",
+  }).value,
+  "Bass House",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "brohug",
+    name: "BROHUG",
+    field: "bio",
+    value:
+      "The Swedish bass-house band from Stockholm, which started its activity in 2015.",
+    evidence: "discogs.com/artist/5120339-Brohug profile",
+  }).field,
+  "bio",
+);
+{
+  const brohug = loadEntityCompletePins().find((p) => p.slug === "brohug");
+  assert.ok(brohug);
+  assert.equal(brohug.kind, "dj");
+  assert.equal(brohug.website, "https://wearebrohug.com");
+  assert.equal(brohug.instagram, "https://instagram.com/brohugofficial");
+  assert.equal(brohug.youtube, "https://www.youtube.com/@brohugofficial");
+  assert.equal(brohug.soundcloud, "https://soundcloud.com/brohugofficial");
+  assert.equal(brohug.twitter, "https://x.com/wearebrohug");
+  assert.equal(brohug.homeCity, "Stockholm, Sweden");
+  assert.equal(brohug.genre, "Bass House");
+  assert.ok(brohug.bio?.includes("Stockholm"));
+  assert.equal(brohug.imageUrl, undefined);
+}
 
 // Fields with no Dj column must drop rather than be coerced somewhere else.
 for (const field of ["tiktok", "facebook", "spotify", "deezer"]) {
