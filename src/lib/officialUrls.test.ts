@@ -97,6 +97,12 @@ describe("followable evidence hubs", () => {
       isFollowableEvidenceUrl("https://en.wikipedia.org/wiki/I_Hate_Models"),
       true,
     );
+    assert.equal(
+      isFollowableEvidenceUrl("https://www.discogs.com/artist/5120339-Brohug"),
+      true,
+    );
+    assert.equal(isFollowableEvidenceUrl("https://www.discogs.com/search/?q=brohug"), false);
+    assert.equal(isFollowableEvidenceUrl("https://www.discogs.com/"), false);
     assert.equal(isFollowableEvidenceUrl("https://grokipedia.com/"), false);
     assert.equal(isFollowableEvidenceUrl("https://www.insomniac.com/"), false);
     assert.equal(
@@ -131,6 +137,20 @@ describe("followable evidence hubs", () => {
       evidenceUrlMatchesName(
         "Valentino Khan",
         "https://grokipedia.com/page/Malaa",
+      ),
+      false,
+    );
+    assert.equal(
+      evidenceUrlMatchesName(
+        "BROHUG",
+        "https://www.discogs.com/artist/5120339-Brohug",
+      ),
+      true,
+    );
+    assert.equal(
+      evidenceUrlMatchesName(
+        "Valentino Khan",
+        "https://www.discogs.com/artist/5120339-Brohug",
       ),
       false,
     );

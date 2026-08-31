@@ -126,4 +126,14 @@ describe("displayDjBio", () => {
     assert.match(out, /balaclava|Who Is Malaa|Confession/i);
     assert.doesNotMatch(out, /insomniac\.com|grokipedia/i);
   });
+
+  it("keeps the BROHUG Discogs profile line", () => {
+    const out = displayDjBio(
+      "The Swedish bass-house band from Stockholm, which started its activity in 2015.",
+      { genre: "Bass House", homeCity: "Stockholm, Sweden" },
+    );
+    assert.ok(out);
+    assert.match(out, /Swedish|2015/i);
+    assert.doesNotMatch(out, /discogs\.com/i);
+  });
 });

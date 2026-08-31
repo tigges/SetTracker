@@ -6,7 +6,10 @@
  * ra.co as website. Techno Music World is the same class: follow a concrete
  * `/artist/{slug}/about` URL already in hand, then verify outbound official
  * links — do not site-crawl, and never store it as website.
- * Discogs is a marketplace wiki, never a homepage. Grokipedia is an
+ * Discogs is a marketplace wiki, never a homepage. Follow a concrete
+ * `/artist/{id}-{Name}` already in hand (outbound official links, bio,
+ * homeCity, genre) — never store discogs.com as website, and never
+ * search or invent artist ids. Grokipedia is an
  * encyclopedia, same class as Wikipedia: follow a concrete `/page/{Name}`
  * already in hand for outbound official links, bio, homeCity, and genre —
  * never store grokipedia.com as website, and never invent or search titles.
@@ -50,6 +53,9 @@ export function isFollowableEvidenceUrl(
     }
     if (host === "technomusicworld.com") {
       return /^\/artist\/[^/]+(\/about)?$/.test(path);
+    }
+    if (host === "discogs.com") {
+      return /^\/artist\/\d+-[^/]+$/.test(path);
     }
     return false;
   } catch {

@@ -1172,8 +1172,9 @@ assert.equal(
 }
 
 // BROHUG — operator paste. wearebrohug.com + matching @brohugofficial
-// YT/IG/SC. Facebook has no pin column. "Official Youtube-channel
-// for BROHUG" is not a distinctive bio. No city or genre in the paste.
+// YT/IG/SC. Discogs /artist/5120339-Brohug is followable evidence
+// (X @wearebrohug, Stockholm, Bass House, short profile) but never
+// website. Facebook has no pin column.
 assert.equal(
   nameOverlapsHandle("BROHUG", "https://www.wearebrohug.com/"),
   true,
@@ -1237,6 +1238,62 @@ assert.equal(
   }).drop,
   "unknown field",
 );
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "brohug",
+    name: "BROHUG",
+    field: "website",
+    value: "https://www.discogs.com/artist/5120339-Brohug",
+    evidence: "operator paste, marketplace wiki",
+  }).drop,
+  "weak or invalid website",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "brohug",
+    name: "BROHUG",
+    field: "twitter",
+    value: "https://twitter.com/wearebrohug",
+    evidence: "discogs.com/artist/5120339-Brohug urls",
+  }).value,
+  "https://x.com/wearebrohug",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "brohug",
+    name: "BROHUG",
+    field: "homeCity",
+    value: "Stockholm, Sweden",
+    evidence: "discogs.com/artist/5120339-Brohug profile",
+  }).value,
+  "Stockholm, Sweden",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "brohug",
+    name: "BROHUG",
+    field: "genre",
+    value: "Bass House",
+    evidence: "discogs.com/artist/5120339-Brohug profile bass-house",
+  }).value,
+  "Bass House",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "brohug",
+    name: "BROHUG",
+    field: "bio",
+    value:
+      "The Swedish bass-house band from Stockholm, which started its activity in 2015.",
+    evidence: "discogs.com/artist/5120339-Brohug profile",
+  }).field,
+  "bio",
+);
 {
   const brohug = loadEntityCompletePins().find((p) => p.slug === "brohug");
   assert.ok(brohug);
@@ -1245,10 +1302,10 @@ assert.equal(
   assert.equal(brohug.instagram, "https://instagram.com/brohugofficial");
   assert.equal(brohug.youtube, "https://www.youtube.com/@brohugofficial");
   assert.equal(brohug.soundcloud, "https://soundcloud.com/brohugofficial");
-  assert.equal(brohug.twitter, undefined);
-  assert.equal(brohug.homeCity, undefined);
-  assert.equal(brohug.bio, undefined);
-  assert.equal(brohug.genre, undefined);
+  assert.equal(brohug.twitter, "https://x.com/wearebrohug");
+  assert.equal(brohug.homeCity, "Stockholm, Sweden");
+  assert.equal(brohug.genre, "Bass House");
+  assert.ok(brohug.bio?.includes("Stockholm"));
   assert.equal(brohug.imageUrl, undefined);
 }
 
