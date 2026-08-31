@@ -728,6 +728,129 @@ assert.equal(
   assert.equal(vk.imageUrl, undefined);
 }
 
+// GREG 99 — operator paste. Matching greg99music handles; no first-party
+// site. Spotify artist URL has no pin column. Genre is the lead named
+// chip (Afro House); Latin / Balearic stay in the bio.
+assert.equal(
+  nameOverlapsHandle("GREG 99", "https://www.youtube.com/@greg99music"),
+  true,
+);
+assert.equal(
+  nameOverlapsHandle("GREG 99", "https://instagram.com/greg99music"),
+  true,
+);
+assert.equal(
+  nameOverlapsHandle("GREG 99", "https://soundcloud.com/greg99music"),
+  true,
+);
+assert.equal(
+  nameOverlapsHandle("GREG 99", "https://x.com/greg99music"),
+  true,
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "greg-99",
+    name: "GREG 99",
+    field: "youtube",
+    value: "https://www.youtube.com/@greg99music",
+    evidence: "operator paste, channel About",
+  }).value,
+  "https://www.youtube.com/@greg99music",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "greg-99",
+    name: "GREG 99",
+    field: "instagram",
+    value: "https://www.instagram.com/greg99music",
+    evidence: "operator paste",
+  }).value,
+  "https://instagram.com/greg99music",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "greg-99",
+    name: "GREG 99",
+    field: "soundcloud",
+    value: "https://soundcloud.com/greg99music",
+    evidence: "operator paste",
+  }).value,
+  "https://soundcloud.com/greg99music",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "greg-99",
+    name: "GREG 99",
+    field: "twitter",
+    value: "https://twitter.com/greg99music",
+    evidence: "operator paste",
+  }).value,
+  "https://x.com/greg99music",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "greg-99",
+    name: "GREG 99",
+    field: "homeCity",
+    value: "Minas Gerais, Brazil",
+    evidence: "operator paste, countryside of Minas Gerais",
+  }).value,
+  "Minas Gerais, Brazil",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "greg-99",
+    name: "GREG 99",
+    field: "genre",
+    value: "Afro House",
+    evidence: "operator paste, lead influence",
+  }).value,
+  "Afro House",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "greg-99",
+    name: "GREG 99",
+    field: "bio",
+    value:
+      "Minas Gerais producer whose sound mixes Afro House, Latin House, and Balearic vibes. Releases on Hellbent, Criterio, Nervous, and Moodchild; Still My Baby with Cloonee hit #1 on Beatport's global chart.",
+    evidence: "operator paste, official About",
+  }).field,
+  "bio",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "greg-99",
+    name: "GREG 99",
+    field: "spotify",
+    value: "https://open.spotify.com/artist/68ocQOFVB9wvLiC1C1WjYp",
+    evidence: "operator paste",
+  }).drop,
+  "unknown field",
+);
+{
+  const greg = loadEntityCompletePins().find((p) => p.slug === "greg-99");
+  assert.ok(greg);
+  assert.equal(greg.kind, "dj");
+  assert.equal(greg.instagram, "https://instagram.com/greg99music");
+  assert.equal(greg.youtube, "https://www.youtube.com/@greg99music");
+  assert.equal(greg.soundcloud, "https://soundcloud.com/greg99music");
+  assert.equal(greg.twitter, "https://x.com/greg99music");
+  assert.equal(greg.homeCity, "Minas Gerais, Brazil");
+  assert.equal(greg.genre, "Afro House");
+  assert.ok(greg.bio?.includes("Still My Baby"));
+  assert.equal(greg.website, undefined);
+  assert.equal(greg.imageUrl, undefined);
+}
+
 // Fields with no Dj column must drop rather than be coerced somewhere else.
 for (const field of ["tiktok", "facebook", "spotify", "deezer"]) {
   assert.equal(

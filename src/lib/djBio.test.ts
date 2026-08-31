@@ -95,4 +95,15 @@ describe("displayDjBio", () => {
     assert.match(out, /Mad Decent/);
     assert.doesNotMatch(out, /unitedtalent|prodigyartists|@/i);
   });
+
+  it("keeps the GREG 99 About prose", () => {
+    const out = displayDjBio(
+      "Minas Gerais producer whose sound mixes Afro House, Latin House, and Balearic vibes. Releases on Hellbent, Criterio, Nervous, and Moodchild; Still My Baby with Cloonee hit #1 on Beatport's global chart.",
+      { genre: "Afro House", homeCity: "Minas Gerais, Brazil" },
+    );
+    assert.ok(out);
+    assert.match(out, /Still My Baby/);
+    assert.match(out, /Cloonee/);
+    assert.doesNotMatch(out, /@greg99|spotify\.com/i);
+  });
 });
