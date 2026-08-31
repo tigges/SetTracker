@@ -763,6 +763,18 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     minDurationSec: 30 * 60,
   },
   {
+    // Official artist SC of Dreamstate Sydney; 1001TL wired via
+    // sc-giuseppeottaviani-giuseppe-ottaviani-dreamstate (same list as
+    // yt-Diu60Wd0kfo). Distinct from Vancouver (giuseppe-ottaviani-1).
+    // Never sc-https://….
+    url: "https://soundcloud.com/giuseppeottaviani/giuseppe-ottaviani-dreamstate",
+    primaryArtist: dj("Giuseppe Ottaviani", { accent: "#7b2cbf" }),
+    genre: "Trance",
+    type: "festival",
+    eventName: "Dreamstate",
+    minDurationSec: 30 * 60,
+  },
+  {
     // Official Cuebrick Conference 297; 1001TL wired via
     // sc-cuebrick-cuebricks-conference-297. Never wire sc-https://….
     url: "https://soundcloud.com/cuebrick/cuebricks-conference-297",

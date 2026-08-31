@@ -79,6 +79,10 @@ assert.equal(
     ?.slug,
   "dreamstate",
 );
+assert.equal(
+  inferFestivalEvent("Giuseppe Ottaviani | Dreamstate Sydney 2026")?.slug,
+  "dreamstate",
+);
 assert.equal(inferFestivalEvent("Dreamstate")?.slug, "dreamstate");
 assert.equal(resolveEvent("Ultra Europe").slug, "ultra-europe");
 assert.notEqual(

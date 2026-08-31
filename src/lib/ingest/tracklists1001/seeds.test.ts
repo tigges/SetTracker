@@ -217,6 +217,7 @@ import {
   TL_MADDIX_ULTRA_EUROPE_2026,
   TL_GIUSEPPE_OTTAVIANI_ILAN_BLUESTONE_BEYOND_WONDERLAND_2026,
   TL_GIUSEPPE_OTTAVIANI_DREAMSTATE_VANCOUVER_2026,
+  TL_GIUSEPPE_OTTAVIANI_DREAMSTATE_SYDNEY_2026,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
@@ -6125,6 +6126,67 @@ for (let i = 1; i < goDreamstateVan.length; i++) {
     (goDreamstateVan[i]?.timestamp ?? 0) >
       (goDreamstateVan[i - 1]?.timestamp ?? 0),
     `Giuseppe Ottaviani Dreamstate Vancouver clocks must increase at index ${i}`,
+  );
+}
+
+// Giuseppe Ottaviani @ Dreamstate Sydney Showground 2026-02-07 —
+// official YT + official artist SC host twin. Overlay
+// TL_GIUSEPPE_OTTAVIANI is too generic. Distinct from Vancouver.
+assertSeedClocks(TL_GIUSEPPE_OTTAVIANI_DREAMSTATE_SYDNEY_2026);
+assert.equal(TL_GIUSEPPE_OTTAVIANI_DREAMSTATE_SYDNEY_2026.length, 20);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-Diu60Wd0kfo"],
+  TL_GIUSEPPE_OTTAVIANI_DREAMSTATE_SYDNEY_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-giuseppeottaviani-giuseppe-ottaviani-dreamstate"
+  ],
+  TL_GIUSEPPE_OTTAVIANI_DREAMSTATE_SYDNEY_2026,
+);
+assert.equal(isWiredTracklistSlug("yt-Diu60Wd0kfo"), true);
+assert.equal(
+  isSecondaryPlaybackSlug(
+    "sc-giuseppeottaviani-giuseppe-ottaviani-dreamstate",
+  ),
+  true,
+);
+assert.equal(isSecondaryPlaybackSlug("yt-Diu60Wd0kfo"), false);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-Diu60Wd0kfo"],
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-giuseppeottaviani-giuseppe-ottaviani-1"
+  ],
+  "Dreamstate Sydney is not the Vancouver seed",
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-Diu60Wd0kfo"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-aezdL54IRZ0"],
+  "Dreamstate Sydney is not the Beyond Wonderland b2b seed",
+);
+const goDreamstateSyd = tracklist1001RowsToPlays(
+  TL_GIUSEPPE_OTTAVIANI_DREAMSTATE_SYDNEY_2026,
+);
+assert.equal(goDreamstateSyd.length, 20);
+assert.equal(goDreamstateSyd[0]?.provenance, "1001tl");
+assert.equal(goDreamstateSyd[0]?.timestamp, 0);
+assert.equal(goDreamstateSyd[0]?.trackTitle, "Break The Loop");
+assert.equal(
+  goDreamstateSyd[15]?.trackTitle,
+  "Knightfall Brightside (Sandro Vanniel Mashup)",
+);
+assert.equal(goDreamstateSyd[16]?.trackTitle, "Mr. Brightside");
+assert.equal(goDreamstateSyd[17]?.trackTitle, "Knightfall");
+assert.equal(
+  goDreamstateSyd[19]?.trackTitle,
+  "Echo (Giuseppe Ottaviani Remix)",
+);
+assert.equal(goDreamstateSyd[19]?.timestamp, 53 * 60 + 50);
+for (let i = 1; i < goDreamstateSyd.length; i++) {
+  assert.ok(
+    (goDreamstateSyd[i]?.timestamp ?? 0) >
+      (goDreamstateSyd[i - 1]?.timestamp ?? 0),
+    `Giuseppe Ottaviani Dreamstate Sydney clocks must increase at index ${i}`,
   );
 }
 

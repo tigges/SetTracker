@@ -750,6 +750,20 @@ assert.equal(
   `sc-giuseppeottaviani-${slugify("giuseppe-ottaviani-1")}`,
   "sc-giuseppeottaviani-giuseppe-ottaviani-1",
 );
+const goDreamstateSydSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url ===
+    "https://soundcloud.com/giuseppeottaviani/giuseppe-ottaviani-dreamstate",
+);
+assert.ok(goDreamstateSydSc);
+assert.equal(goDreamstateSydSc.primaryArtist.name, "Giuseppe Ottaviani");
+assert.equal(goDreamstateSydSc.eventName, "Dreamstate");
+assert.equal(goDreamstateSydSc.type, "festival");
+assert.notEqual(goDreamstateSydSc.url, goDreamstateVanSc.url);
+assert.equal(
+  `sc-giuseppeottaviani-${slugify("giuseppe-ottaviani-dreamstate")}`,
+  "sc-giuseppeottaviani-giuseppe-ottaviani-dreamstate",
+);
 const tiniAntsSc = SOUNDCLOUD_TRACK_SEEDS.find(
   (s) =>
     s.url ===

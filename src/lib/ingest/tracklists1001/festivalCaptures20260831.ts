@@ -297,3 +297,43 @@ export const TL_GIUSEPPE_OTTAVIANI_DREAMSTATE_VANCOUVER_2026: FingerprintSeedRow
     { at: "50:45", artist: "The Rocketman & Veracocha", title: "Carte Blanche" },
     { at: "54:32", artist: "Giuseppe Ottaviani ft. Diana Goldberg", title: "Hold On" },
   ];
+
+/**
+ * Giuseppe Ottaviani @ Dreamstate, Sydney Showground, Australia 2026-02-07
+ * Official artist SoundCloud:
+ * https://soundcloud.com/giuseppeottaviani/giuseppe-ottaviani-dreamstate
+ * Official YouTube: https://www.youtube.com/watch?v=Diu60Wd0kfo
+ * https://www.1001tracklists.com/tracklist/dq5pm4k/giuseppe-ottaviani-dreamstate-sydney-showground-australia-2026-02-07.html
+ * Overlay name TL_GIUSEPPE_OTTAVIANI is too generic (ASOT Poland / Area Two /
+ * Digital Society / Beyond Wonderland / Vancouver / ASOT 1290). Constant is
+ * the Sydney night. Same 1001 seed + both official permalinks → host twin
+ * (YT listing, SC secondary). Distinct from Dreamstate Vancouver
+ * (sc-giuseppeottaviani-giuseppe-ottaviani-1). Never sc-https://….
+ * Mashup-then-component cluster at 46:20 stays as captured.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-Diu60Wd0kfo"]
+ *       TRACKLIST_1001_BY_SOURCE_SLUG["sc-giuseppeottaviani-giuseppe-ottaviani-dreamstate"]
+ * Captured 2026-08-31 — provenance 1001tl.
+ */
+export const TL_GIUSEPPE_OTTAVIANI_DREAMSTATE_SYDNEY_2026: FingerprintSeedRow[] =
+  [
+    { at: "0:00", artist: "ARTBAT & Giuseppe Ottaviani & Conor Ross", title: "Break The Loop" },
+    { at: "4:20", artist: "Giuseppe Ottaviani & Hypaton", title: "Soundboy" },
+    { at: "7:20", artist: "ARTBAT & R3HAB & Stylo & Eli & Dani ft. NAIIM", title: "Fight Machine" },
+    { at: "9:50", artist: "Tiësto & FORS", title: "Bring Me To Life" },
+    { at: "12:30", artist: "OTTAGON ft. Lake Silver", title: "What The Future Holds" },
+    { at: "16:00", artist: "Laura van Dam", title: "One Last Time" },
+    { at: "19:00", artist: "Nicole Moudaber & Space 92", title: "Eyes On Me" },
+    { at: "22:20", artist: "Giuseppe Ottaviani & Gabry Ponte & Crooked Bangs", title: "Astra" },
+    { at: "25:40", artist: "Maddix & Olly James & Hannah Laing", title: "Transmission" },
+    { at: "27:20", artist: "KATO ft. Jon", title: "Turn The Lights Off" },
+    { at: "29:00", artist: "Armin van Buuren", title: "Sonic Samba (Rising Star Remix)" },
+    { at: "32:30", artist: "FEZZO", title: "Kids" },
+    { at: "36:00", artist: "Eric Prydz", title: "Every Day (Sneijder pres. Alt1 Remix)" },
+    { at: "39:40", artist: "Giuseppe Ottaviani & Andrew Rayel ft. Alessia Labate", title: "How Do We Know" },
+    { at: "43:00", artist: "David Forbes", title: "Skylines" },
+    { at: "46:20", artist: "Arkham Knights vs. The Killers", title: "Knightfall Brightside (Sandro Vanniel Mashup)" },
+    { at: "47:33", artist: "The Killers", title: "Mr. Brightside" },
+    { at: "48:47", artist: "Arkham Knights", title: "Knightfall" },
+    { at: "50:00", artist: "Giuseppe Ottaviani & Nifra", title: "Unified" },
+    { at: "53:50", artist: "Hardwell ft. Jonathan Mendelsohn", title: "Echo (Giuseppe Ottaviani Remix)" },
+  ];

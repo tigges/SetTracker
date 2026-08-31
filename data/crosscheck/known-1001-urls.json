@@ -1,7 +1,16 @@
 {
   "note": "Operator-collected 1001Tracklists URLs. All listed urls[] rows are now seeded. Prefer new operator pastes over this archive. stillMissing1001 is video-in / no 1001 page — do not invent URLs. heldPendingPlayback is 1001-in / no official YT/SC playback — seed held, do not invent or wire fan playback. pendingCuePaste is official playback + operator 1001 URL without cue rows — do not scrape 1001 or invent 1001tl seeds.",
-  "updatedAt": "2026-08-31T10:45:00.000Z",
+  "updatedAt": "2026-08-31T10:50:00.000Z",
   "urls": [
+    {
+      "label": "Giuseppe Ottaviani · Dreamstate Sydney Showground 2026-02-07",
+      "slug": "yt-Diu60Wd0kfo",
+      "name": "TL_GIUSEPPE_OTTAVIANI_DREAMSTATE_SYDNEY_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/dq5pm4k/giuseppe-ottaviani-dreamstate-sydney-showground-australia-2026-02-07.html",
+      "youtubeUrl": "https://www.youtube.com/watch?v=Diu60Wd0kfo",
+      "soundcloudUrl": "https://soundcloud.com/giuseppeottaviani/giuseppe-ottaviani-dreamstate",
+      "note": "Operator paste 2026-08-31. 20 timed cues on official artist SC + official YT host twin (SC secondary). Overlay TL_GIUSEPPE_OTTAVIANI is too generic. Distinct from Dreamstate Vancouver sc-giuseppeottaviani-giuseppe-ottaviani-1 / Beyond Wonderland b2b / ASOT Poland / Area Two. Title Giuseppe Ottaviani | Dreamstate Sydney 2026 parses to Giuseppe only; event is dreamstate. Mashup-then-component Knightfall Brightside cluster stays as captured. Never sc-https://…."
+    },
     {
       "label": "Giuseppe Ottaviani · Dreamstate Vancouver 2026-03-14 (Insomniac Radio The Residency 2026-03-20)",
       "slug": "sc-giuseppeottaviani-giuseppe-ottaviani-1",

@@ -309,6 +309,16 @@ assert.equal(
   ),
   "Giuseppe Ottaviani",
 );
+const goDreamstateSydSet = artistsForSet(
+  "Giuseppe Ottaviani | Dreamstate Sydney 2026",
+  { name: "Giuseppe Ottaviani", slug: "giuseppe-ottaviani", accent: "#7b2cbf" },
+);
+assert.equal(goDreamstateSydSet.primary.slug, "giuseppe-ottaviani");
+assert.equal(goDreamstateSydSet.collaborators.length, 0);
+assert.equal(
+  performingCreditFromTitle("Giuseppe Ottaviani @ Dreamstate, Sydney 2026"),
+  "Giuseppe Ottaviani",
+);
 const jackShoreSet = artistsForSet(
   "Jack Shore WE1 | Tomorrowland 2026",
   { name: "Jack Shore", slug: "jack-shore", accent: "#3d5a80" },

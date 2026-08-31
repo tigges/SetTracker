@@ -92,6 +92,7 @@ import {
   TL_MIKE_WILLIAMS_TML_WE1_THROWBACK_2026,
   TL_MADDIX_ULTRA_EUROPE_2026,
   TL_GIUSEPPE_OTTAVIANI_ILAN_BLUESTONE_BEYOND_WONDERLAND_2026,
+  TL_GIUSEPPE_OTTAVIANI_DREAMSTATE_SYDNEY_2026,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
@@ -3428,6 +3429,22 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/2uxwty89/giuseppe-ottaviani-ilan-bluestone-cheshire-woods-beyond-wonderland-socal-nos-events-center-san-bernardino-united-states-2026-03-28.html",
     tracklist1001: TL_GIUSEPPE_OTTAVIANI_ILAN_BLUESTONE_BEYOND_WONDERLAND_2026,
+  },
+  {
+    // Official playback of Dreamstate Sydney Showground 2026-02-07.
+    // Host twin with official artist SC giuseppe-ottaviani-dreamstate.
+    // Distinct from Dreamstate Vancouver (sc-…-giuseppe-ottaviani-1)
+    // and Beyond Wonderland b2b. Overlay TL_GIUSEPPE_OTTAVIANI is too
+    // generic. Never sc-https://….
+    video: "https://www.youtube.com/watch?v=Diu60Wd0kfo",
+    primaryArtist: dj("Giuseppe Ottaviani", { accent: "#7b2cbf" }),
+    genre: "Trance",
+    type: "festival",
+    title: "Giuseppe Ottaviani | Dreamstate Sydney 2026",
+    eventName: "Dreamstate",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/dq5pm4k/giuseppe-ottaviani-dreamstate-sydney-showground-australia-2026-02-07.html",
+    tracklist1001: TL_GIUSEPPE_OTTAVIANI_DREAMSTATE_SYDNEY_2026,
   },
   {
     video: "https://www.youtube.com/watch?v=eNa3hh-3ZF0",
