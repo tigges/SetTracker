@@ -344,7 +344,7 @@ export function watchUrlForSlug(slug: string, playbackUrl?: string | null): stri
   return "";
 }
 
-/** Skip shorts, already-wired lists, and stale low-value rows. */
+/** Skip shorts, already-wired lists, and last-year / stale leftover rows. */
 export function skipCaptureNeed(
   row: CaptureNeedRow,
   mapped: Set<string>,
@@ -366,6 +366,7 @@ export function skipCaptureNeed(
   ) {
     return "archive-title";
   }
+  if (isStaleYearCaptureNeed(row, nowMs)) return "stale";
   if (
     isGenericHostTitle(row.title, row.primaryDj) &&
     !captureEventSearchName(row) &&
@@ -488,9 +489,33 @@ export function capturePerformanceYear(
   );
 }
 
-/** Capture 1001 works this year first. Next January that year moves on. */
+/** Capture 1001 works this year only. Next January that year moves on. */
 export function captureFocusYear(nowMs = Date.now()): number {
   return new Date(nowMs).getUTCFullYear();
+}
+
+/** Last year and older — do not put these on /stats Capture 1001. */
+export function isStaleYearCaptureNeed(
+  row: Pick<
+    CaptureNeedRow,
+    "title" | "slug" | "publishedAt" | "performedAt" | "editionYear" | "tracklistUrl"
+  >,
+  nowMs = Date.now(),
+): boolean {
+  return captureQueueYear(row, nowMs) < captureFocusYear(nowMs);
+}
+
+/** Snapshot / priority extras with a printed or stored year before this year. */
+export function isStaleYearCapturePreset(
+  p: Pick<CapturePreset, "label" | "performanceYear" | "searchQuery">,
+  nowMs = Date.now(),
+): boolean {
+  const year =
+    p.performanceYear ??
+    yearFromSetTitle(p.label, nowMs) ??
+    yearFromSetTitle(p.searchQuery, nowMs);
+  if (year == null) return false;
+  return year < captureFocusYear(nowMs);
 }
 
 /** Printed title year, else performance / publish year. */
@@ -745,6 +770,7 @@ export function buildCaptureQueueFromNeeds(
     if (seen.has(p.slug) || mapped.has(p.slug)) return;
     if (deferred.has(p.slug)) return;
     if (isSecondaryPlaybackSlug(p.slug)) return;
+    if (isStaleYearCapturePreset(p, nowMs)) return;
     if (out.length >= limit) return;
     seen.add(p.slug);
     out.push(withNativeSearch(p));
@@ -763,20 +789,16 @@ export function buildCaptureQueueFromNeeds(
           new Date(a.row.publishedAt).getTime(),
     );
 
-  // This year first: Top 100 DJ / festival nights, then other current-year
-  // nights, then leftover current-year night slots. Older nights next.
-  // Mix / weekly radio wait until real nights are covered. Per-event cap
-  // still spreads the first passes so one brand cannot take all 40.
+  // This year only: Top 100 DJ / festival nights, then other current-year
+  // nights, then leftover current-year night slots. Last year stays out —
+  // January moves the focus year forward. Mix / weekly radio wait until
+  // real nights are covered. Per-event cap still spreads the first passes
+  // so one brand cannot take all 40.
   const yearFocus = ranked.filter(({ row }) =>
     isFocusYearCaptureNeed(row, nowMs),
   );
-  const older = ranked.filter(
-    ({ row }) => !isFocusYearCaptureNeed(row, nowMs),
-  );
   const yearNights = yearFocus.filter(({ row }) => isCaptureRealNight(row));
   const yearMix = yearFocus.filter(({ row }) => !isCaptureRealNight(row));
-  const olderNights = older.filter(({ row }) => isCaptureRealNight(row));
-  const olderMix = older.filter(({ row }) => !isCaptureRealNight(row));
   const chart = yearNights.filter(({ row }) =>
     isFocusChartCaptureNeed(row, nowMs),
   );
@@ -798,9 +820,7 @@ export function buildCaptureQueueFromNeeds(
   fillCapped(chart);
   fillCapped(yearRestNights);
   for (const { row } of yearNights) push(presetFromNeed(row));
-  for (const { row } of olderNights) push(presetFromNeed(row));
   for (const { row } of yearMix) push(presetFromNeed(row));
-  for (const { row } of olderMix) push(presetFromNeed(row));
   return out.slice(0, limit);
 }
 
