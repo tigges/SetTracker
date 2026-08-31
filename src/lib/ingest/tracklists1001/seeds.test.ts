@@ -211,6 +211,7 @@ import {
   TL_GIUSEPPE_OTTAVIANI_ASOT_POLAND_LEGIA_2026,
   TL_KOROLOVA_MOTHERLAND_MONUMENT_KYIV_2026,
   TL_CHRIS_LORENZO_STEREOBLOOM_EDC_MEXICO_2026,
+  TL_JACK_SHORE_TML_WE1_FREEDOM_2026,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
@@ -5880,5 +5881,28 @@ for (let i = 1; i < chrisLorenzoEdcMx.length; i++) {
     `Chris Lorenzo stereoBLOOM EDC Mexico clocks must increase at index ${i}`,
   );
 }
+
+// Jack Shore @ Freedom Stage, Tomorrowland WE1 2026-07-19 — official
+// Tomorrowland YT. Overlay TL_JACK_SHORE is too generic. Two timed IDs
+// as captured.
+assertSeedClocks(TL_JACK_SHORE_TML_WE1_FREEDOM_2026);
+assert.equal(TL_JACK_SHORE_TML_WE1_FREEDOM_2026.length, 2);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-wWgtmdI_adQ"],
+  TL_JACK_SHORE_TML_WE1_FREEDOM_2026,
+);
+const jackShore = tracklist1001RowsToPlays(TL_JACK_SHORE_TML_WE1_FREEDOM_2026);
+assert.equal(jackShore.length, 2);
+assert.equal(jackShore[0]?.provenance, "1001tl");
+assert.equal(jackShore[0]?.timestamp, 20);
+assert.match(jackShore[0]?.trackTitle ?? "", /Sweet Disposition/);
+assert.equal(jackShore[1]?.trackTitle, "POINT OFVIEW");
+assert.equal(jackShore[1]?.timestamp, 29 * 60 + 57);
+assert.equal(isWiredTracklistSlug("yt-wWgtmdI_adQ"), true);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-wWgtmdI_adQ"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-zMW5SQPS1cY"],
+  "Jack Shore is not the I Hate Models Freedom WE1 seed",
+);
 
 console.log("tracklists1001/seeds.test.ts ok");
