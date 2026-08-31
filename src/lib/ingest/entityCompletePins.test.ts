@@ -1171,6 +1171,39 @@ assert.equal(
   assert.equal(jauz.imageUrl, undefined);
 }
 
+// BROHUG — operator paste. Official YT @brohugofficial only.
+// "Official Youtube-channel for BROHUG" is not a distinctive bio.
+// No site, city, genre, or other handles in the paste.
+assert.equal(
+  nameOverlapsHandle("BROHUG", "https://www.youtube.com/@brohugofficial"),
+  true,
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "brohug",
+    name: "BROHUG",
+    field: "youtube",
+    value: "https://www.youtube.com/@brohugofficial",
+    evidence: "operator paste, channel About",
+  }).value,
+  "https://www.youtube.com/@brohugofficial",
+);
+{
+  const brohug = loadEntityCompletePins().find((p) => p.slug === "brohug");
+  assert.ok(brohug);
+  assert.equal(brohug.kind, "dj");
+  assert.equal(brohug.youtube, "https://www.youtube.com/@brohugofficial");
+  assert.equal(brohug.website, undefined);
+  assert.equal(brohug.instagram, undefined);
+  assert.equal(brohug.soundcloud, undefined);
+  assert.equal(brohug.twitter, undefined);
+  assert.equal(brohug.homeCity, undefined);
+  assert.equal(brohug.bio, undefined);
+  assert.equal(brohug.genre, undefined);
+  assert.equal(brohug.imageUrl, undefined);
+}
+
 // Fields with no Dj column must drop rather than be coerced somewhere else.
 for (const field of ["tiktok", "facebook", "spotify", "deezer"]) {
   assert.equal(
