@@ -86,6 +86,7 @@ import {
   TL_NOSI_TML_WE1_CRYSTAL_2026,
   TL_GIUSEPPE_OTTAVIANI_ASOT_AREA_TWO_ROTTERDAM_2026,
   TL_KOROLOVA_MOTHERLAND_MONUMENT_KYIV_2026,
+  TL_JACK_SHORE_TML_WE1_FREEDOM_2026,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
@@ -1659,6 +1660,20 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/ctbyvpk/i-hate-models-freedom-stage-tomorrowland-weekend-1-belgium-2026-07-19.html",
     tracklist1001: TL_I_HATE_MODELS_TML_WE1_2026,
+  },
+  {
+    // Tomorrowland official playback — Freedom Stage WE1. Two 1001
+    // clocks as captured; do not invent the rest of the set.
+    video: "https://www.youtube.com/watch?v=wWgtmdI_adQ",
+    primaryArtist: dj("Jack Shore", { accent: "#3d5a80" }),
+    genre: "House",
+    type: "festival",
+    title: "Jack Shore WE1 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1pqg9hh9/jack-shore-freedom-stage-tomorrowland-weekend-1-belgium-2026-07-19.html",
+    tracklist1001: TL_JACK_SHORE_TML_WE1_FREEDOM_2026,
   },
   {
     // Tomorrowland official playback — Freedom Stage WE1.

@@ -267,6 +267,16 @@ assert.equal(kindFreedom.primary.slug, "4444-of-a-kind");
 assert.equal(kindFreedom.primary.name, "4444 OF A KIND");
 assert.equal(kindFreedom.collaborators.length, 0);
 assert.equal(
+  performingCreditFromTitle("Jack Shore WE1 | Tomorrowland 2026"),
+  "Jack Shore",
+);
+const jackShoreSet = artistsForSet(
+  "Jack Shore WE1 | Tomorrowland 2026",
+  { name: "Jack Shore", slug: "jack-shore", accent: "#3d5a80" },
+);
+assert.equal(jackShoreSet.primary.slug, "jack-shore");
+assert.equal(jackShoreSet.collaborators.length, 0);
+assert.equal(
   performingCreditFromTitle("Push only WE2 | Tomorrowland 2026"),
   "Push",
 );

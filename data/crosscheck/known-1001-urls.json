@@ -1,7 +1,15 @@
 {
   "note": "Operator-collected 1001Tracklists URLs. All listed urls[] rows are now seeded. Prefer new operator pastes over this archive. stillMissing1001 is video-in / no 1001 page — do not invent URLs. heldPendingPlayback is 1001-in / no official YT/SC playback — seed held, do not invent or wire fan playback. pendingCuePaste is official playback + operator 1001 URL without cue rows — do not scrape 1001 or invent 1001tl seeds.",
-  "updatedAt": "2026-08-28T15:45:00.000Z",
+  "updatedAt": "2026-08-31T10:03:00.000Z",
   "urls": [
+    {
+      "label": "Jack Shore · Freedom Stage, Tomorrowland WE1 2026-07-19",
+      "slug": "yt-wWgtmdI_adQ",
+      "name": "TL_JACK_SHORE_TML_WE1_FREEDOM_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/1pqg9hh9/jack-shore-freedom-stage-tomorrowland-weekend-1-belgium-2026-07-19.html",
+      "youtubeUrl": "https://www.youtube.com/watch?v=wWgtmdI_adQ",
+      "note": "Operator paste 2026-08-31. Two timed cues on official Tomorrowland YT. Overlay TL_JACK_SHORE is too generic. Distinct from other Freedom WE1 seeds (I Hate Models yt-zMW5SQPS1cY, Netsky, Armin). No SC in the paste — do not invent an SC slug."
+    },
     {
       "label": "Topic · Tomorrowland Friendship Mix 2026-08-20",
       "slug": "sc-tomorrowland-tomorrowland-friendship-mix-with-topic-august-2026",
