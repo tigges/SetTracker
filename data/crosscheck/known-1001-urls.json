@@ -1,7 +1,15 @@
 {
   "note": "Operator-collected 1001Tracklists URLs. All listed urls[] rows are now seeded. Prefer new operator pastes over this archive. stillMissing1001 is video-in / no 1001 page — do not invent URLs. heldPendingPlayback is 1001-in / no official YT/SC playback — seed held, do not invent or wire fan playback. pendingCuePaste is official playback + operator 1001 URL without cue rows — do not scrape 1001 or invent 1001tl seeds.",
-  "updatedAt": "2026-08-31T10:03:00.000Z",
+  "updatedAt": "2026-08-31T10:10:00.000Z",
   "urls": [
+    {
+      "label": "Bassjackers · The Great Library Stage, Tomorrowland WE2 2026-07-26",
+      "slug": "yt-BG3Lr9EdWVY",
+      "name": "TL_BASSJACKERS_TML_WE2_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/1muwkg71/bassjackers-the-great-library-stage-tomorrowland-weekend-2-belgium-2026-07-26.html",
+      "youtubeUrl": "https://youtu.be/BG3Lr9EdWVY",
+      "note": "Operator paste 2026-08-31. Already wired 2026-08-01 / recaptured 2026-08-16 (36 cues on official Tomorrowland YT). Re-paste Wire line named yt-ypYSzU3fj88 — not on file; keep yt-BG3Lr9EdWVY only. Overlay TL_BASSJACKERS is too generic. Paste shortens 44:08 to Rave Therapy; catalog keeps Rave Is My Therapy. No SC in the paste — do not invent an SC slug."
+    },
     {
       "label": "Jack Shore · Freedom Stage, Tomorrowland WE1 2026-07-19",
       "slug": "yt-wWgtmdI_adQ",
