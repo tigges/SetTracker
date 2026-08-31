@@ -863,9 +863,10 @@ assert.equal(
 }
 
 // Malaa — operator paste fills SoundCloud + France on the existing pin.
-// YT @malaa_music / IG / X already matched. "Official YouTube Channel of
-// Malaa" is not a distinctive bio. Grokipedia + Insomniac stay off website.
-// Facebook / Spotify have no pin columns.
+// Insomniac artist hub is followable evidence (Bass House + balaclava bio)
+// but never website. Grokipedia /page/Malaa is the same class. Facebook /
+// Spotify have no pin columns. "Official YouTube Channel of Malaa" is not
+// a bio.
 assert.equal(
   nameOverlapsHandle("Malaa", "https://soundcloud.com/malaamusic"),
   true,
@@ -892,9 +893,32 @@ assert.equal(
     name: "Malaa",
     field: "homeCity",
     value: "France",
-    evidence: "operator paste, YouTube About",
+    evidence: "operator paste, YouTube About + Insomniac Origin",
   }).value,
   "France",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "malaa",
+    name: "Malaa",
+    field: "genre",
+    value: "Bass House",
+    evidence: "insomniac.com/music/artists/malaa Genre",
+  }).value,
+  "Bass House",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "malaa",
+    name: "Malaa",
+    field: "bio",
+    value:
+      "French DJ and producer who has performed in a balaclava since 2015 and released Who Is Malaa mixes on SoundCloud. Debut Illicit EP and Notorious landed on Tchami's Confession; also known for Illegal Mixtapes and the NO REDEMPTION project with Tchami.",
+    evidence: "insomniac.com/music/artists/malaa",
+  }).field,
+  "bio",
 );
 assert.equal(
   evaluateEntityCompleteRow({
@@ -926,9 +950,9 @@ assert.equal(
   assert.equal(malaa.soundcloud, "https://soundcloud.com/malaamusic");
   assert.equal(malaa.twitter, "https://x.com/Malaamusic");
   assert.equal(malaa.homeCity, "France");
+  assert.equal(malaa.genre, "Bass House");
+  assert.ok(malaa.bio?.includes("Who Is Malaa"));
   assert.equal(malaa.website, undefined);
-  assert.equal(malaa.bio, undefined);
-  assert.equal(malaa.genre, undefined);
 }
 
 // Anti Up — operator paste. Matching @antiup / antiupmusic handles.

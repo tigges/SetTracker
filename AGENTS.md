@@ -310,7 +310,11 @@ unless asked. Never write Relive for HARD / Insomniac / Nameless / Ultra.
   `festivals-need-complete.csv`, `clubs-need-complete.csv`, plus combined
   `entities-need-complete.csv` / `.jsonl` and `claude-entity-complete-prompt.md`.
   `/stats` links **Export for Claude complete**. Never invent `@slug` handles;
-  DJ Mag / 6am / Wikipedia are not official websites — but the chart URL is
+  DJ Mag / 6am / Wikipedia / Grokipedia / Insomniac artist hubs are not
+  official websites — but a concrete URL already in hand is followable
+  evidence (outbound first-party links, distinctive bio, homeCity, genre).
+  Do not crawl those hosts or invent `/page/` titles. A Grokipedia leaf
+  that names a different act is a miss. The DJ Mag chart URL is
   **kept**, not discarded: `djmagUrl` lives on every row of
   `data/venue-seeds/djmag-atlas-2026.json`,
   `djmag-top100-festivals-2026.json`, `data/artist-seeds/djmag-top100-djs-2025.json`

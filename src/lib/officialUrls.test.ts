@@ -1,6 +1,10 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { isWeakOfficialUrl } from "./officialUrls";
+import {
+  evidenceUrlMatchesName,
+  isFollowableEvidenceUrl,
+  isWeakOfficialUrl,
+} from "./officialUrls";
 
 describe("isWeakOfficialUrl", () => {
   it("treats rank lists and encyclopedias as weak", () => {
@@ -74,5 +78,61 @@ describe("isWeakOfficialUrl", () => {
     assert.equal(isWeakOfficialUrl("https://www.creamfields.cl/"), false);
     assert.equal(isWeakOfficialUrl(null), false);
     assert.equal(isWeakOfficialUrl(""), false);
+  });
+});
+
+describe("followable evidence hubs", () => {
+  it("follows a concrete Grokipedia or Insomniac artist page already in hand", () => {
+    assert.equal(
+      isFollowableEvidenceUrl("https://grokipedia.com/page/Valentino_Khan"),
+      true,
+    );
+    assert.equal(
+      isFollowableEvidenceUrl(
+        "https://www.insomniac.com/music/artists/malaa/",
+      ),
+      true,
+    );
+    assert.equal(
+      isFollowableEvidenceUrl("https://en.wikipedia.org/wiki/I_Hate_Models"),
+      true,
+    );
+    assert.equal(isFollowableEvidenceUrl("https://grokipedia.com/"), false);
+    assert.equal(isFollowableEvidenceUrl("https://www.insomniac.com/"), false);
+    assert.equal(
+      isFollowableEvidenceUrl("https://www.insomniac.com/music/mixes/"),
+      false,
+    );
+  });
+
+  it("requires the leaf to name this act", () => {
+    assert.equal(
+      evidenceUrlMatchesName(
+        "Valentino Khan",
+        "https://grokipedia.com/page/Valentino_Khan",
+      ),
+      true,
+    );
+    assert.equal(
+      evidenceUrlMatchesName(
+        "Malaa",
+        "https://www.insomniac.com/music/artists/malaa/",
+      ),
+      true,
+    );
+    assert.equal(
+      evidenceUrlMatchesName(
+        "Anti Up",
+        "https://grokipedia.com/page/dj_fresh_american_dj",
+      ),
+      false,
+    );
+    assert.equal(
+      evidenceUrlMatchesName(
+        "Valentino Khan",
+        "https://grokipedia.com/page/Malaa",
+      ),
+      false,
+    );
   });
 });

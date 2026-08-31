@@ -69,6 +69,8 @@ assert.equal(jsonl.trim().split("\n").length, 1);
 
 assert.match(CLAUDE_ENTITY_COMPLETE_PROMPT, /Never invent an @slug/);
 assert.match(CLAUDE_ENTITY_COMPLETE_PROMPT, /DJ Mag/);
+assert.match(CLAUDE_ENTITY_COMPLETE_PROMPT, /Grokipedia/);
+assert.match(CLAUDE_ENTITY_COMPLETE_PROMPT, /Insomniac/);
 assert.match(CLAUDE_ENTITY_COMPLETE_PROMPT, /kind,slug,name,field,value,evidence/);
 
 console.log("exportEntities.test.ts ok");

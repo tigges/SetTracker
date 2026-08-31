@@ -116,4 +116,14 @@ describe("displayDjBio", () => {
     assert.match(out, /Never established/);
     assert.doesNotMatch(out, /@chrislake|@chrislorenzo66/i);
   });
+
+  it("keeps the Malaa Insomniac artist-hub bio", () => {
+    const out = displayDjBio(
+      "French DJ and producer who has performed in a balaclava since 2015 and released Who Is Malaa mixes on SoundCloud. Debut Illicit EP and Notorious landed on Tchami's Confession; also known for Illegal Mixtapes and the NO REDEMPTION project with Tchami.",
+      { genre: "Bass House", homeCity: "France" },
+    );
+    assert.ok(out);
+    assert.match(out, /balaclava|Who Is Malaa|Confession/i);
+    assert.doesNotMatch(out, /insomniac\.com|grokipedia/i);
+  });
 });

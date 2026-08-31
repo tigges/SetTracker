@@ -7,9 +7,12 @@
  * `/artist/{slug}/about` URL already in hand, then verify outbound official
  * links — do not site-crawl, and never store it as website.
  * Discogs is a marketplace wiki, never a homepage. Grokipedia is an
- * encyclopedia, same class as Wikipedia. An Insomniac
- * `/music/artists/` hub is a promoter page, not the artist's site —
- * keep `insomniac.com` itself for the promoter Event row.
+ * encyclopedia, same class as Wikipedia: follow a concrete `/page/{Name}`
+ * already in hand for outbound official links, bio, homeCity, and genre —
+ * never store grokipedia.com as website, and never invent or search titles.
+ * An Insomniac `/music/artists/{slug}` hub is the same follow-in-hand
+ * class (promoter bio + Origin/Genre) — never the artist's site.
+ * Keep `insomniac.com` itself for the promoter Event row.
  * DICE / Shotgun / JamBase / Eventpop / PuntoTicket are tickets.
  * Follow a JamBase URL already in hand; do not crawl jambase.com.
  */
@@ -20,4 +23,53 @@ const WEAK_OFFICIAL =
 export function isWeakOfficialUrl(url: string | null | undefined): boolean {
   if (!url?.trim()) return false;
   return WEAK_OFFICIAL.test(url);
+}
+
+function compact(value: string): string {
+  return value.toLowerCase().replace(/[^a-z0-9]+/g, "");
+}
+
+/**
+ * Concrete encyclopedia / promoter-hub URL already in hand.
+ * Listing homepages are not followable — that would be a crawl.
+ */
+export function isFollowableEvidenceUrl(
+  url: string | null | undefined,
+): boolean {
+  if (!url?.trim()) return false;
+  try {
+    const u = new URL(url);
+    const host = u.hostname.replace(/^www\./, "").toLowerCase();
+    const path = u.pathname.replace(/\/+$/, "");
+    if (host === "grokipedia.com") return /^\/page\/[^/]+$/.test(path);
+    if (host === "insomniac.com") {
+      return /^\/music\/artists\/[a-z0-9-]+$/.test(path);
+    }
+    if (host === "en.wikipedia.org" || host === "wikipedia.org") {
+      return /^\/wiki\/[^/]+$/.test(path);
+    }
+    if (host === "technomusicworld.com") {
+      return /^\/artist\/[^/]+(\/about)?$/.test(path);
+    }
+    return false;
+  } catch {
+    return false;
+  }
+}
+
+/** Leaf slug must name this act. DJ Fresh Grokipedia is not Anti Up. */
+export function evidenceUrlMatchesName(
+  name: string,
+  url: string | null | undefined,
+): boolean {
+  if (!isFollowableEvidenceUrl(url)) return false;
+  try {
+    const leaf = new URL(url!).pathname.split("/").filter(Boolean).pop() ?? "";
+    const nameKey = compact(name);
+    const leafKey = compact(leaf.replace(/_/g, " "));
+    if (nameKey.length < 3 || !leafKey) return false;
+    return leafKey.includes(nameKey) || nameKey.includes(leafKey);
+  } catch {
+    return false;
+  }
 }
