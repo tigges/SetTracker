@@ -6,6 +6,7 @@ import {
   decodeMojibake,
   evaluateEntityCompleteRow,
   isFallbackWebsiteHub,
+  loadEntityCompletePins,
   mergeEntityCompletePins,
   nameOverlapsHandle,
   parseEntityCompleteCsv,
@@ -602,6 +603,130 @@ assert.equal(
   }).value,
   "https://omdathetkan.be",
 );
+
+// Valentino Khan — operator paste. First-party site + matching handles.
+// Insomniac / Discogs hubs stay out of website. No TikTok / Facebook /
+// Spotify-playlist / Apple Music columns. Genre left unset (house + trap
+// + bass + hardstyle — do not invent one chip).
+assert.equal(
+  nameOverlapsHandle("Valentino Khan", "https://valentinokhan.com/"),
+  true,
+);
+assert.equal(
+  nameOverlapsHandle("Valentino Khan", "https://www.youtube.com/@ValentinoKhan"),
+  true,
+);
+assert.equal(
+  nameOverlapsHandle("Valentino Khan", "https://instagram.com/valentinokhan"),
+  true,
+);
+assert.equal(
+  nameOverlapsHandle("Valentino Khan", "https://x.com/ValentinoKhan"),
+  true,
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "valentino-khan",
+    name: "Valentino Khan",
+    field: "website",
+    value: "https://www.valentinokhan.com/",
+    evidence: "operator paste, official site",
+  }).value,
+  "https://valentinokhan.com",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "valentino-khan",
+    name: "Valentino Khan",
+    field: "youtube",
+    value: "https://www.youtube.com/@ValentinoKhan",
+    evidence: "operator paste, channel About",
+  }).value,
+  "https://www.youtube.com/@ValentinoKhan",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "valentino-khan",
+    name: "Valentino Khan",
+    field: "instagram",
+    value: "https://www.instagram.com/valentinokhan",
+    evidence: "operator paste",
+  }).value,
+  "https://instagram.com/valentinokhan",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "valentino-khan",
+    name: "Valentino Khan",
+    field: "twitter",
+    value: "https://twitter.com/ValentinoKhan",
+    evidence: "operator paste",
+  }).value,
+  "https://x.com/ValentinoKhan",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "valentino-khan",
+    name: "Valentino Khan",
+    field: "homeCity",
+    value: "Los Angeles, US",
+    evidence: "operator paste, Los Angeles-based",
+  }).value,
+  "Los Angeles, US",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "valentino-khan",
+    name: "Valentino Khan",
+    field: "bio",
+    value:
+      "Los Angeles DJ and producer whose music spans house, trap, bass, and hardstyle. His House Party EP on Mad Decent, with Diplo, Chris Lorenzo, and Wuki, debuted at #1 on the Apple Music Dance charts.",
+    evidence: "operator paste, official site About",
+  }).field,
+  "bio",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "valentino-khan",
+    name: "Valentino Khan",
+    field: "website",
+    value: "https://www.insomniac.com/music/artists/valentino-khan/",
+    evidence: "operator paste, promoter hub",
+  }).drop,
+  "weak or invalid website",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "valentino-khan",
+    name: "Valentino Khan",
+    field: "website",
+    value: "https://www.discogs.com/artist/2697000-Valentino-Khan",
+    evidence: "operator paste, marketplace wiki",
+  }).drop,
+  "weak or invalid website",
+);
+{
+  const vk = loadEntityCompletePins().find((p) => p.slug === "valentino-khan");
+  assert.ok(vk);
+  assert.equal(vk.kind, "dj");
+  assert.equal(vk.website, "https://valentinokhan.com");
+  assert.equal(vk.instagram, "https://instagram.com/valentinokhan");
+  assert.equal(vk.youtube, "https://www.youtube.com/@ValentinoKhan");
+  assert.equal(vk.twitter, "https://x.com/ValentinoKhan");
+  assert.equal(vk.homeCity, "Los Angeles, US");
+  assert.ok(vk.bio?.includes("House Party EP"));
+  assert.equal(vk.soundcloud, undefined);
+  assert.equal(vk.genre, undefined);
+  assert.equal(vk.imageUrl, undefined);
+}
 
 // Fields with no Dj column must drop rather than be coerced somewhere else.
 for (const field of ["tiktok", "facebook", "spotify", "deezer"]) {
