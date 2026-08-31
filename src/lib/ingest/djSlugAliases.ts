@@ -37,6 +37,12 @@ export const DJ_SLUG_ALIASES: Record<string, string> = {
   "recovery-hot-air-balloon-set": "hot-since-82",
   // MUCHAKK is a Mu540 b2b Mochakk performance nickname, not a DJ
   "muchakk-mu540": "mu540",
+  // Set / series chrome mistaken for a second DJ
+  "push-only": "push",
+  "bonobo-solo": "bonobo",
+  "enrico-sangiuliano-lockdown": "enrico-sangiuliano",
+  "mike-williams-throwback": "mike-williams",
+  "yotto-s-odd-world": "yotto",
   ...PRODUCER_DJ_ALIASES,
 };
 
@@ -55,7 +61,9 @@ export function foldSetChromeSlug(slug: string): string {
   return slug
     .replace(/-(?:official-)?full(?:-set)?(?:-hd)?$/i, "")
     .replace(/-dj-set$/i, "")
-    .replace(/-live-set$/i, "");
+    .replace(/-live-set$/i, "")
+    .replace(/-(?:only|solo|throwback|lockdown)$/i, "")
+    .replace(/-s-odd-world$/i, "");
 }
 
 export function canonicalDjSlug(slug: string): string {

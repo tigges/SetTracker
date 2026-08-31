@@ -34,6 +34,11 @@ export const PRODUCER_DJ_ALIASES: Record<string, string> = {
   "soulidan-minna-tonno-disko": "soulidan",
   // MUCHAKK is the Só Track Boa b2b nickname, not an artist
   "muchakk-mu540": "mu540",
+  "push-only": "push",
+  "bonobo-solo": "bonobo",
+  "enrico-sangiuliano-lockdown": "enrico-sangiuliano",
+  "mike-williams-throwback": "mike-williams",
+  "yotto-s-odd-world": "yotto",
 };
 
 /** Extra SetArtist links when a discarded row was a merged credit. */
@@ -77,6 +82,12 @@ export const PRODUCER_DISCARD_NAMES = [
   "monateng",
   "monateng music",
   "muchakk (mu540",
+  "push only",
+  "bonobo solo",
+  "enrico sangiuliano lockdown",
+  "mike williams throwback",
+  "yotto's odd world",
+  "yottos odd world",
 ] as const;
 
 export const PRODUCER_DISCARD_SLUGS = new Set<string>([
@@ -113,6 +124,11 @@ export const PRODUCER_DISCARD_SLUGS = new Set<string>([
   "monateng",
   "monateng-music",
   "muchakk-mu540",
+  "push-only",
+  "bonobo-solo",
+  "enrico-sangiuliano-lockdown",
+  "mike-williams-throwback",
+  "yotto-s-odd-world",
 ]);
 
 /** Wrong channel / not a catalog DJ. Never drop a pin or roster slug. */

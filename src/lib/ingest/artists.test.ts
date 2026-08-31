@@ -267,6 +267,27 @@ assert.equal(kindFreedom.primary.slug, "4444-of-a-kind");
 assert.equal(kindFreedom.primary.name, "4444 OF A KIND");
 assert.equal(kindFreedom.collaborators.length, 0);
 assert.equal(
+  performingCreditFromTitle("Push only WE2 | Tomorrowland 2026"),
+  "Push",
+);
+assert.equal(
+  performingCreditFromTitle("Push WE2 | Tomorrowland 2026"),
+  "Push",
+);
+assert.equal(performingCreditFromTitle("Bonobo Solo"), "Bonobo");
+assert.equal(
+  performingCreditFromTitle("Mike Williams Throwback"),
+  "Mike Williams",
+);
+assert.equal(
+  performingCreditFromTitle("Enrico Sangiuliano Lockdown"),
+  "Enrico Sangiuliano",
+);
+assert.equal(
+  performingCreditFromTitle("Yotto's Odd World"),
+  "Yotto",
+);
+assert.equal(
   performingCreditFromTitle("Bullet Tooth WE2 | Tomorrowland 2026"),
   "Bullet Tooth",
 );

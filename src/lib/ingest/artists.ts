@@ -63,6 +63,10 @@ export function tidyPerformingCredit(name: string): string {
     .replace(/\s+WE\s*[12]\s*$/i, "")
     .replace(/\s+weekend\s*[12]\s*$/i, "")
     .replace(/\s+(main\s*stage|mainstage|freedom)\s*$/i, "")
+    // "Push only WE2", "Bonobo Solo", "Mike Williams Throwback",
+    // "Enrico Sangiuliano Lockdown", "Yotto's Odd World"
+    .replace(/\s+(?:only|solo|throwback|lockdown)\s*$/i, "")
+    .replace(/\s*'s\s+odd\s+world\s*$/i, "")
     // "Guetta & Horger pres. Men Machine" → presenters (project is preferred primary)
     .replace(/\s+pres(?:ents?|\.)\s+.+$/i, "")
     .replace(/\s+selects\s*$/i, "")

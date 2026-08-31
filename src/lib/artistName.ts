@@ -268,6 +268,8 @@ export function sanitizeArtistName(raw: string): string | null {
   // "Chris Lake Full" / "James Hype Official" leftover from set titles
   n = n.replace(/\s+(?:official\s+)?full(?:\s+sets?)?(?:\s+hd)?\s*$/i, "").trim();
   n = n.replace(/\s+(?:official|hd)\s*$/i, "").trim();
+  n = n.replace(/\s+(?:only|solo|throwback|lockdown)\s*$/i, "").trim();
+  n = n.replace(/\s*'s\s+odd\s+world\s*$/i, "").trim();
   // Scrape leftover: "Ginger)"
   if (/\)+$/.test(n) && !n.includes("(")) n = n.replace(/\)+$/g, "").trim();
   if (/^\(+/.test(n) && !n.includes(")")) n = n.replace(/^\(+/g, "").trim();
@@ -305,6 +307,8 @@ export function isLeftoverHostName(name: string): boolean {
   if (/^le\s+grand\s+brand$/i.test(n)) return true;
   // "Chris Lake Full" / "James Hype Official" — title chrome, not a second DJ
   if (/\s+(?:official|full|hd)\s*$/i.test(n)) return true;
+  if (/\s+(?:only|solo|throwback|lockdown)\s*$/i.test(n)) return true;
+  if (/\bodd\s+world\s*$/i.test(n)) return true;
   return false;
 }
 

@@ -1895,7 +1895,8 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     }),
     genre: "Trance",
     type: "festival",
-    title: "Push only WE2 | Tomorrowland 2026",
+    // "only" was lineup chrome ("Push only WE2") and minted a junk DJ.
+    title: "Push WE2 | Tomorrowland 2026",
     seriesName: "Tomorrowland",
     eventName: "Tomorrowland Belgium",
     tracklist1001Url:
