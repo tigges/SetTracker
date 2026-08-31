@@ -68,6 +68,12 @@ assert.equal(
   inferFestivalEvent("Maddix live @ ULTRA EUROPE 2026 | Mainstage")?.slug,
   "ultra-europe",
 );
+assert.equal(
+  inferFestivalEvent(
+    "Giuseppe Ottaviani B2B Ilan Bluestone | Beyond Wonderland 2026",
+  )?.slug,
+  "beyond-wonderland",
+);
 assert.equal(resolveEvent("Ultra Europe").slug, "ultra-europe");
 assert.notEqual(
   inferFestivalEvent("Maddix live @ ULTRA EUROPE 2026 | Mainstage")?.slug,

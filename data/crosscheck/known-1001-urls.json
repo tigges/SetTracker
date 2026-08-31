@@ -1,7 +1,16 @@
 {
   "note": "Operator-collected 1001Tracklists URLs. All listed urls[] rows are now seeded. Prefer new operator pastes over this archive. stillMissing1001 is video-in / no 1001 page — do not invent URLs. heldPendingPlayback is 1001-in / no official YT/SC playback — seed held, do not invent or wire fan playback. pendingCuePaste is official playback + operator 1001 URL without cue rows — do not scrape 1001 or invent 1001tl seeds.",
-  "updatedAt": "2026-08-31T10:35:00.000Z",
+  "updatedAt": "2026-08-31T10:38:00.000Z",
   "urls": [
+    {
+      "label": "Giuseppe Ottaviani B2B Ilan Bluestone · Cheshire Woods, Beyond Wonderland SoCal 2026-03-28",
+      "slug": "yt-aezdL54IRZ0",
+      "name": "TL_GIUSEPPE_OTTAVIANI_ILAN_BLUESTONE_BEYOND_WONDERLAND_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/2uxwty89/giuseppe-ottaviani-ilan-bluestone-cheshire-woods-beyond-wonderland-socal-nos-events-center-san-bernardino-united-states-2026-03-28.html",
+      "youtubeUrl": "https://www.youtube.com/watch?v=aezdL54IRZ0",
+      "soundcloudUrl": "https://soundcloud.com/giuseppeottaviani/giuseppe-ottaviani-b2b-ilan",
+      "note": "Operator paste 2026-08-31. 15 timed cues on official artist SC + official YT host twin (SC secondary). Overlay TL_GIUSEPPE_OTTAVIANI is too generic. Distinct from ASOT Poland yt-jpsXS2mpO-M / Area Two Rotterdam / Digital Society / ASOT 1290. First-line date 2026-03-21 was leftover; 1001 is 2026-03-28. Title Giuseppe Ottaviani B2B Ilan Bluestone | Beyond Wonderland 2026 parses collaborator ilan-bluestone. Never sc-https://…."
+    },
     {
       "label": "Giuseppe Ottaviani · A State of Trance, Legia Stadium, Poland 2026-06-20",
       "slug": "yt-jpsXS2mpO-M",

@@ -290,6 +290,13 @@ const maddixUltraSet = artistsForSet(
 );
 assert.equal(maddixUltraSet.primary.slug, "maddix");
 assert.equal(maddixUltraSet.collaborators.length, 0);
+const goIlanBeyondSet = artistsForSet(
+  "Giuseppe Ottaviani B2B Ilan Bluestone | Beyond Wonderland 2026",
+  { name: "Giuseppe Ottaviani", slug: "giuseppe-ottaviani", accent: "#7b2cbf" },
+);
+assert.equal(goIlanBeyondSet.primary.slug, "giuseppe-ottaviani");
+assert.equal(goIlanBeyondSet.collaborators.length, 1);
+assert.equal(goIlanBeyondSet.collaborators[0]?.slug, "ilan-bluestone");
 const jackShoreSet = artistsForSet(
   "Jack Shore WE1 | Tomorrowland 2026",
   { name: "Jack Shore", slug: "jack-shore", accent: "#3d5a80" },

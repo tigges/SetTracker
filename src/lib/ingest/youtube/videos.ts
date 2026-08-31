@@ -91,6 +91,7 @@ import {
   TL_NICKY_ROMERO_TML_WE1_LIBRARY_2026,
   TL_MIKE_WILLIAMS_TML_WE1_THROWBACK_2026,
   TL_MADDIX_ULTRA_EUROPE_2026,
+  TL_GIUSEPPE_OTTAVIANI_ILAN_BLUESTONE_BEYOND_WONDERLAND_2026,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
@@ -3411,6 +3412,22 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/1muply39/giuseppe-ottaviani-a-state-of-trance-event-legia-stadium-poland-2026-06-20.html",
     tracklist1001: TL_GIUSEPPE_OTTAVIANI_ASOT_POLAND_LEGIA_2026,
+  },
+  {
+    // Official playback of Cheshire Woods Beyond Wonderland SoCal.
+    // Host twin with official artist SC giuseppe-ottaviani-b2b-ilan.
+    // Title drives Ilan Bluestone collaborator. Distinct from solo ASOT
+    // Poland / Area Two. First-line date 2026-03-21 was leftover; 1001 is
+    // 2026-03-28.
+    video: "https://www.youtube.com/watch?v=aezdL54IRZ0",
+    primaryArtist: dj("Giuseppe Ottaviani", { accent: "#7b2cbf" }),
+    genre: "Trance",
+    type: "festival",
+    title: "Giuseppe Ottaviani B2B Ilan Bluestone | Beyond Wonderland 2026",
+    eventName: "Beyond Wonderland",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2uxwty89/giuseppe-ottaviani-ilan-bluestone-cheshire-woods-beyond-wonderland-socal-nos-events-center-san-bernardino-united-states-2026-03-28.html",
+    tracklist1001: TL_GIUSEPPE_OTTAVIANI_ILAN_BLUESTONE_BEYOND_WONDERLAND_2026,
   },
   {
     video: "https://www.youtube.com/watch?v=eNa3hh-3ZF0",

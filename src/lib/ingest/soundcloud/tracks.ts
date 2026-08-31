@@ -739,6 +739,17 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     minDurationSec: 60 * 60,
   },
   {
+    // Official artist SC of the Ilan Bluestone b2b; 1001TL wired via
+    // sc-giuseppeottaviani-giuseppe-ottaviani-b2b-ilan (same list as
+    // yt-aezdL54IRZ0). Distinct from ASOT Poland / Area Two. Never sc-https://….
+    url: "https://soundcloud.com/giuseppeottaviani/giuseppe-ottaviani-b2b-ilan",
+    primaryArtist: dj("Giuseppe Ottaviani", { accent: "#7b2cbf" }),
+    genre: "Trance",
+    type: "festival",
+    eventName: "Beyond Wonderland",
+    minDurationSec: 30 * 60,
+  },
+  {
     // Official Cuebrick Conference 297; 1001TL wired via
     // sc-cuebrick-cuebricks-conference-297. Never wire sc-https://….
     url: "https://soundcloud.com/cuebrick/cuebricks-conference-297",

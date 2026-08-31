@@ -225,3 +225,38 @@ export const TL_MADDIX_ULTRA_EUROPE_2026: FingerprintSeedRow[] = [
   { at: "58:16", artist: "Simtec", title: "Burn The System" },
   { at: "1:00:14", artist: "Darren Styles", title: "Pump This Party" },
 ];
+
+/**
+ * Giuseppe Ottaviani B2B Ilan Bluestone @ Cheshire Woods, Beyond Wonderland SoCal,
+ * NOS Events Center San Bernardino, United States 2026-03-28
+ * Official artist SoundCloud:
+ * https://soundcloud.com/giuseppeottaviani/giuseppe-ottaviani-b2b-ilan
+ * Official YouTube: https://www.youtube.com/watch?v=aezdL54IRZ0
+ * https://www.1001tracklists.com/tracklist/2uxwty89/giuseppe-ottaviani-ilan-bluestone-cheshire-woods-beyond-wonderland-socal-nos-events-center-san-bernardino-united-states-2026-03-28.html
+ * Overlay name TL_GIUSEPPE_OTTAVIANI is too generic (ASOT Poland / Area Two /
+ * Digital Society / ASOT 1290). Constant is the b2b night.
+ * Same 1001 seed + both official permalinks → host twin (YT listing, SC secondary).
+ * First-line date 2026-03-21 was leftover; 1001 is 2026-03-28.
+ * Distinct from solo Giuseppe ASOT Poland / Rotterdam. Never sc-https://….
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-aezdL54IRZ0"]
+ *       TRACKLIST_1001_BY_SOURCE_SLUG["sc-giuseppeottaviani-giuseppe-ottaviani-b2b-ilan"]
+ * Captured 2026-08-31 — provenance 1001tl.
+ */
+export const TL_GIUSEPPE_OTTAVIANI_ILAN_BLUESTONE_BEYOND_WONDERLAND_2026: FingerprintSeedRow[] =
+  [
+    { at: "0:00", artist: "Giuseppe Ottaviani & Ilan Bluestone", title: "Futuro" },
+    { at: "2:40", artist: "Giuseppe Ottaviani & Hypaton", title: "Soundboy" },
+    { at: "5:43", artist: "Darude", title: "Feel The Beat (Ilan Bluestone Remix)" },
+    { at: "8:50", artist: "ARTBAT & Giuseppe Ottaviani & Conor Ross", title: "Break The Loop" },
+    { at: "12:25", artist: "Ilan Bluestone & El Waves", title: "Africana (Ilan Bluestone Club Mix)" },
+    { at: "15:30", artist: "Giuseppe Ottaviani ft. Mila Josef", title: "Fade Away" },
+    { at: "21:55", artist: "OTTAGON ft. Lake Silver", title: "What The Future Holds" },
+    { at: "25:35", artist: "Elysian", title: "Now We Are Free" },
+    { at: "30:17", artist: "Max Styler & Three Drives", title: "Greece 2000 (Max Styler Rework)" },
+    { at: "31:42", artist: "Ilan Bluestone & Giuseppe De Luca", title: "This Town" },
+    { at: "34:50", artist: "Giuseppe Ottaviani & Andrew Rayel ft. Alessia Labate", title: "How Do We Know" },
+    { at: "41:20", artist: "Giuseppe Ottaviani & Dicosis", title: "Run Away" },
+    { at: "45:00", artist: "Ilan Bluestone pres. Stoneblue ft. Emma Hewitt", title: "Hypnotized" },
+    { at: "48:40", artist: "Giuseppe Ottaviani ft. Diana Goldberg", title: "Hold On" },
+    { at: "53:15", artist: "Giuseppe Ottaviani & Ilan Bluestone", title: "Together Again" },
+  ];

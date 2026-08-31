@@ -215,6 +215,7 @@ import {
   TL_NICKY_ROMERO_TML_WE1_LIBRARY_2026,
   TL_MIKE_WILLIAMS_TML_WE1_THROWBACK_2026,
   TL_MADDIX_ULTRA_EUROPE_2026,
+  TL_GIUSEPPE_OTTAVIANI_ILAN_BLUESTONE_BEYOND_WONDERLAND_2026,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
@@ -6028,5 +6029,44 @@ assert.equal(
   maddixUltra[maddixUltra.length - 1]?.timestamp,
   1 * 3600 + 14,
 );
+
+// Giuseppe Ottaviani B2B Ilan Bluestone @ Beyond Wonderland SoCal
+// 2026-03-28 — official YT + official artist SC host twin. Overlay
+// TL_GIUSEPPE_OTTAVIANI is too generic. Distinct from ASOT Poland.
+assertSeedClocks(TL_GIUSEPPE_OTTAVIANI_ILAN_BLUESTONE_BEYOND_WONDERLAND_2026);
+assert.equal(
+  TL_GIUSEPPE_OTTAVIANI_ILAN_BLUESTONE_BEYOND_WONDERLAND_2026.length,
+  15,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-aezdL54IRZ0"],
+  TL_GIUSEPPE_OTTAVIANI_ILAN_BLUESTONE_BEYOND_WONDERLAND_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-giuseppeottaviani-giuseppe-ottaviani-b2b-ilan"
+  ],
+  TL_GIUSEPPE_OTTAVIANI_ILAN_BLUESTONE_BEYOND_WONDERLAND_2026,
+);
+assert.equal(isWiredTracklistSlug("yt-aezdL54IRZ0"), true);
+assert.equal(
+  isSecondaryPlaybackSlug("sc-giuseppeottaviani-giuseppe-ottaviani-b2b-ilan"),
+  true,
+);
+assert.equal(isSecondaryPlaybackSlug("yt-aezdL54IRZ0"), false);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-aezdL54IRZ0"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-jpsXS2mpO-M"],
+  "Beyond Wonderland b2b is not the ASOT Poland seed",
+);
+const goIlanBeyond = tracklist1001RowsToPlays(
+  TL_GIUSEPPE_OTTAVIANI_ILAN_BLUESTONE_BEYOND_WONDERLAND_2026,
+);
+assert.equal(goIlanBeyond.length, 15);
+assert.equal(goIlanBeyond[0]?.provenance, "1001tl");
+assert.equal(goIlanBeyond[0]?.timestamp, 0);
+assert.equal(goIlanBeyond[0]?.trackTitle, "Futuro");
+assert.equal(goIlanBeyond[14]?.trackTitle, "Together Again");
+assert.equal(goIlanBeyond[14]?.timestamp, 53 * 60 + 15);
 
 console.log("tracklists1001/seeds.test.ts ok");

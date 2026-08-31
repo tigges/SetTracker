@@ -721,6 +721,20 @@ assert.equal(
   `sc-giuseppeottaviani-${slugify("giuseppe-ottaviani-live-at-a")}`,
   "sc-giuseppeottaviani-giuseppe-ottaviani-live-at-a",
 );
+const goIlanBeyondSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url ===
+    "https://soundcloud.com/giuseppeottaviani/giuseppe-ottaviani-b2b-ilan",
+);
+assert.ok(goIlanBeyondSc);
+assert.equal(goIlanBeyondSc.primaryArtist.name, "Giuseppe Ottaviani");
+assert.equal(goIlanBeyondSc.eventName, "Beyond Wonderland");
+assert.equal(goIlanBeyondSc.type, "festival");
+assert.notEqual(goIlanBeyondSc.url, goAsotPolandSc.url);
+assert.equal(
+  `sc-giuseppeottaviani-${slugify("giuseppe-ottaviani-b2b-ilan")}`,
+  "sc-giuseppeottaviani-giuseppe-ottaviani-b2b-ilan",
+);
 const tiniAntsSc = SOUNDCLOUD_TRACK_SEEDS.find(
   (s) =>
     s.url ===
