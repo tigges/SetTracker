@@ -188,6 +188,12 @@ export const TL_CLAPTONE_MASQUERADE_BUENOS_AIRES_2022: FingerprintSeedRow[] = [
  * and TL_REINIER_ZONNEVELD_AWAKENINGS_2025 (yt-i-mFuxbGHzg, same stage/day).
  * Captured 2026-08-19 — provenance 1001tl.
  * Keep "ID ft. Bilja Krstic — Magla Padnala" (not a bare ID–ID).
+ * 2026-08-31 recapture is the same 26 clocks. First line named ARTCORE x
+ * Awakenings ADE 2026-07-12 and Wire named
+ * sc-indirapaganotto-indira-paganotto-artcore-x-awakenings — that slug is
+ * not on file and is a different permalink (artist ARTCORE, not the
+ * official Awakenings SC already twinned). Do not mint a second set.
+ * Overlay TL_INDIRA_PAGANOTTO is too generic.
  */
 export const TL_INDIRA_PAGANOTTO_AREA_V_AWAKENINGS_2025: FingerprintSeedRow[] = [
   { at: "1:10", artist: "Vegas & Vermont", title: "Jahbulam" },

@@ -1,6 +1,6 @@
 {
   "note": "Operator-collected 1001Tracklists URLs. All listed urls[] rows are now seeded. Prefer new operator pastes over this archive. stillMissing1001 is video-in / no 1001 page — do not invent URLs. heldPendingPlayback is 1001-in / no official YT/SC playback — seed held, do not invent or wire fan playback. pendingCuePaste is official playback + operator 1001 URL without cue rows — do not scrape 1001 or invent 1001tl seeds.",
-  "updatedAt": "2026-08-31T10:30:00.000Z",
+  "updatedAt": "2026-08-31T10:32:00.000Z",
   "urls": [
     {
       "label": "Maddix · Mainstage, Ultra Europe 2026-07-11",
@@ -381,7 +381,7 @@
       "tracklistUrl": "https://www.1001tracklists.com/tracklist/27bmn1uk/indira-paganotto-area-v-awakenings-festival-netherlands-2025-07-11.html",
       "youtubeUrl": "https://youtu.be/xUdcEDryN8o",
       "soundcloudUrl": "https://soundcloud.com/awakenings/indira-paganotto-awakenings-festival-2025",
-      "note": "Operator paste 2026-08-19. 26 timed cues on official YT + Awakenings SC playbacks. Distinct from Atmosphere TML WE1 2023 and Reinier Zonneveld Area V same day. Keep ID ft. Bilja Krstic — Magla Padnala."
+      "note": "Operator paste 2026-08-19. 26 timed cues on official YT + Awakenings SC playbacks. Distinct from Atmosphere TML WE1 2023 and Reinier Zonneveld Area V same day. Keep ID ft. Bilja Krstic — Magla Padnala. 2026-08-31 recapture matches those clocks. First line named ARTCORE x Awakenings ADE 2026-07-12 and Wire named sc-indirapaganotto-indira-paganotto-artcore-x-awakenings — not on file; keep yt-xUdcEDryN8o + sc-awakenings-indira-paganotto-awakenings-festival-2025 only. Overlay TL_INDIRA_PAGANOTTO is too generic."
     },
     {
       "label": "Claptone · The Masquerade, Buenos Aires 2022-11-05",
