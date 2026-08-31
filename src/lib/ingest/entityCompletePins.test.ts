@@ -931,6 +931,103 @@ assert.equal(
   assert.equal(malaa.genre, undefined);
 }
 
+// Anti Up — operator paste. Matching @antiup / antiupmusic handles.
+// Slogan bio only — drop the +1 phone and @chrislake handle dump.
+// Facebook has no pin column. SoundCloud was not in this paste.
+// DJ Fresh Grokipedia is an encyclopedia, not a website.
+assert.equal(
+  nameOverlapsHandle("Anti Up", "https://www.youtube.com/@antiup"),
+  true,
+);
+assert.equal(
+  nameOverlapsHandle("Anti Up", "https://instagram.com/antiupmusic"),
+  true,
+);
+assert.equal(
+  nameOverlapsHandle("Anti Up", "https://x.com/antiupmusic"),
+  true,
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "anti-up",
+    name: "Anti Up",
+    field: "youtube",
+    value: "https://www.youtube.com/@antiup",
+    evidence: "operator paste, channel About",
+  }).value,
+  "https://www.youtube.com/@antiup",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "anti-up",
+    name: "Anti Up",
+    field: "instagram",
+    value: "https://www.instagram.com/antiupmusic",
+    evidence: "operator paste",
+  }).value,
+  "https://instagram.com/antiupmusic",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "anti-up",
+    name: "Anti Up",
+    field: "twitter",
+    value: "https://twitter.com/antiupmusic",
+    evidence: "operator paste",
+  }).value,
+  "https://x.com/antiupmusic",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "anti-up",
+    name: "Anti Up",
+    field: "homeCity",
+    value: "United States",
+    evidence: "operator paste, YouTube About",
+  }).value,
+  "United States",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "anti-up",
+    name: "Anti Up",
+    field: "bio",
+    value: "Never established. Never limited. Keep calm? Says who?",
+    evidence: "operator paste, channel About",
+  }).field,
+  "bio",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "anti-up",
+    name: "Anti Up",
+    field: "website",
+    value: "https://grokipedia.com/page/dj_fresh_american_dj",
+    evidence: "operator paste, encyclopedia",
+  }).drop,
+  "weak or invalid website",
+);
+{
+  const anti = loadEntityCompletePins().find((p) => p.slug === "anti-up");
+  assert.ok(anti);
+  assert.equal(anti.kind, "dj");
+  assert.equal(anti.instagram, "https://instagram.com/antiupmusic");
+  assert.equal(anti.youtube, "https://www.youtube.com/@antiup");
+  assert.equal(anti.twitter, "https://x.com/antiupmusic");
+  assert.equal(anti.homeCity, "United States");
+  assert.equal(anti.bio, "Never established. Never limited. Keep calm? Says who?");
+  assert.equal(anti.soundcloud, undefined);
+  assert.equal(anti.website, undefined);
+  assert.equal(anti.genre, undefined);
+  assert.doesNotMatch(anti.bio ?? "", /\+1|323|@chrislake/i);
+}
+
 // Fields with no Dj column must drop rather than be coerced somewhere else.
 for (const field of ["tiktok", "facebook", "spotify", "deezer"]) {
   assert.equal(

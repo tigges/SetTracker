@@ -106,4 +106,14 @@ describe("displayDjBio", () => {
     assert.match(out, /Cloonee/);
     assert.doesNotMatch(out, /@greg99|spotify\.com/i);
   });
+
+  it("keeps the Anti Up slogan and drops handles", () => {
+    const out = displayDjBio(
+      "Never established. Never limited. Keep calm? Says who? @chrislake x @chrislorenzo66.",
+      { homeCity: "United States" },
+    );
+    assert.ok(out);
+    assert.match(out, /Never established/);
+    assert.doesNotMatch(out, /@chrislake|@chrislorenzo66/i);
+  });
 });

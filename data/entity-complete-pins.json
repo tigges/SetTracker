@@ -120,6 +120,15 @@
   },
   {
     "kind": "dj",
+    "slug": "anti-up",
+    "instagram": "https://instagram.com/antiupmusic",
+    "youtube": "https://www.youtube.com/@antiup",
+    "twitter": "https://x.com/antiupmusic",
+    "homeCity": "United States",
+    "bio": "Never established. Never limited. Keep calm? Says who?"
+  },
+  {
+    "kind": "dj",
     "slug": "aqutie",
     "imageUrl": "https://cdn-images.dzcdn.net/images/artist/afac91bf72713f39c3acb93b3f9ca01c/250x250-000000-80-0-0.jpg",
     "soundcloud": "https://soundcloud.com/aqutie",
