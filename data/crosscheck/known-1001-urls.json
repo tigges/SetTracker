@@ -1,7 +1,16 @@
 {
   "note": "Operator-collected 1001Tracklists URLs. All listed urls[] rows are now seeded. Prefer new operator pastes over this archive. stillMissing1001 is video-in / no 1001 page — do not invent URLs. heldPendingPlayback is 1001-in / no official YT/SC playback — seed held, do not invent or wire fan playback. pendingCuePaste is official playback + operator 1001 URL without cue rows — do not scrape 1001 or invent 1001tl seeds.",
-  "updatedAt": "2026-08-31T10:32:00.000Z",
+  "updatedAt": "2026-08-31T10:35:00.000Z",
   "urls": [
+    {
+      "label": "Giuseppe Ottaviani · A State of Trance, Legia Stadium, Poland 2026-06-20",
+      "slug": "yt-jpsXS2mpO-M",
+      "name": "TL_GIUSEPPE_OTTAVIANI_ASOT_POLAND_LEGIA_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/1muply39/giuseppe-ottaviani-a-state-of-trance-event-legia-stadium-poland-2026-06-20.html",
+      "youtubeUrl": "https://youtu.be/jpsXS2mpO-M",
+      "soundcloudUrl": "https://soundcloud.com/giuseppeottaviani/giuseppe-ottaviani-live-at-a",
+      "note": "Operator paste 2026-08-31. 22 timed cues already on official artist SC (2026-08-29). This paste adds official YT jpsXS2mpO-M as host twin (SC secondary). Overlay TL_GIUSEPPE_OTTAVIANI is too generic. Distinct from Area Two Rotterdam yt-YvPI-unGanA, Digital Society Leeds, and ASOT 1290. Paste Wire named sc-giuseppeottaviani-giuseppe-ottaviani-at-legia — not on file; keep live-at-a. Never sc-https://…."
+    },
     {
       "label": "Maddix · Mainstage, Ultra Europe 2026-07-11",
       "slug": "yt-0DFmXisYFZI",

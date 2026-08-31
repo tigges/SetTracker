@@ -5703,16 +5703,26 @@ for (let i = 1; i < goAsotRotterdam.length; i++) {
 }
 
 // Giuseppe Ottaviani @ ASOT, Legia Stadium, Poland 2026-06-20.
-// Official artist SC only. Overlay TL_GIUSEPPE_OTTAVIANI is too generic.
-// No YouTube in the paste. Distinct from Area Two Rotterdam, Digital
-// Society Leeds, and ASOT 1290.
+// Official YT + official artist SC host twin. Overlay TL_GIUSEPPE_OTTAVIANI
+// is too generic. Paste Wire named …-at-legia is not on file. Distinct
+// from Area Two Rotterdam, Digital Society Leeds, and ASOT 1290.
 assertSeedClocks(TL_GIUSEPPE_OTTAVIANI_ASOT_POLAND_LEGIA_2026);
 assert.equal(TL_GIUSEPPE_OTTAVIANI_ASOT_POLAND_LEGIA_2026.length, 22);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-jpsXS2mpO-M"],
+  TL_GIUSEPPE_OTTAVIANI_ASOT_POLAND_LEGIA_2026,
+);
 assert.equal(
   TRACKLIST_1001_BY_SOURCE_SLUG[
     "sc-giuseppeottaviani-giuseppe-ottaviani-live-at-a"
   ],
   TL_GIUSEPPE_OTTAVIANI_ASOT_POLAND_LEGIA_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-giuseppeottaviani-giuseppe-ottaviani-at-legia"
+  ],
+  undefined,
 );
 assert.notEqual(
   TRACKLIST_1001_BY_SOURCE_SLUG[
@@ -5749,10 +5759,12 @@ assert.equal(
   isWiredTracklistSlug("sc-giuseppeottaviani-giuseppe-ottaviani-live-at-a"),
   true,
 );
+assert.equal(isWiredTracklistSlug("yt-jpsXS2mpO-M"), true);
 assert.equal(
   isSecondaryPlaybackSlug("sc-giuseppeottaviani-giuseppe-ottaviani-live-at-a"),
-  false,
+  true,
 );
+assert.equal(isSecondaryPlaybackSlug("yt-jpsXS2mpO-M"), false);
 const goAsotPoland = tracklist1001RowsToPlays(
   TL_GIUSEPPE_OTTAVIANI_ASOT_POLAND_LEGIA_2026,
 );

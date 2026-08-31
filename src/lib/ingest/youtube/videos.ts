@@ -85,6 +85,7 @@ import {
   TL_LAMMER_TML_WE2_CORE_2026,
   TL_NOSI_TML_WE1_CRYSTAL_2026,
   TL_GIUSEPPE_OTTAVIANI_ASOT_AREA_TWO_ROTTERDAM_2026,
+  TL_GIUSEPPE_OTTAVIANI_ASOT_POLAND_LEGIA_2026,
   TL_KOROLOVA_MOTHERLAND_MONUMENT_KYIV_2026,
   TL_JACK_SHORE_TML_WE1_FREEDOM_2026,
   TL_NICKY_ROMERO_TML_WE1_LIBRARY_2026,
@@ -3394,6 +3395,22 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/1084t4l1/giuseppe-ottaviani-area-two-a-state-of-trance-event-ahoy-rotterdam-netherlands-2026-02-27.html",
     tracklist1001: TL_GIUSEPPE_OTTAVIANI_ASOT_AREA_TWO_ROTTERDAM_2026,
+  },
+  {
+    // Official playback of ASOT Poland Legia. Host twin with official
+    // artist SC giuseppe-ottaviani-live-at-a. Paste Wire named
+    // sc-giuseppeottaviani-giuseppe-ottaviani-at-legia is not on file.
+    // Distinct from Area Two Rotterdam (yt-YvPI-unGanA) and ASOT 1290.
+    video: "https://www.youtube.com/watch?v=jpsXS2mpO-M",
+    primaryArtist: dj("Giuseppe Ottaviani", { accent: "#7b2cbf" }),
+    genre: "Trance",
+    type: "festival",
+    title: "Giuseppe Ottaviani live at A State of Trance Poland 2026",
+    seriesName: "A State of Trance",
+    eventName: "A State of Trance",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1muply39/giuseppe-ottaviani-a-state-of-trance-event-legia-stadium-poland-2026-06-20.html",
+    tracklist1001: TL_GIUSEPPE_OTTAVIANI_ASOT_POLAND_LEGIA_2026,
   },
   {
     video: "https://www.youtube.com/watch?v=eNa3hh-3ZF0",

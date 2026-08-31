@@ -727,9 +727,9 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
   },
   {
     // Official artist SC; 1001TL wired via
-    // sc-giuseppeottaviani-giuseppe-ottaviani-live-at-a. Distinct from
-    // Area Two Rotterdam and Digital Society Leeds. No YouTube in the
-    // paste — do not invent. Never wire sc-https://….
+    // sc-giuseppeottaviani-giuseppe-ottaviani-live-at-a (same list as
+    // yt-jpsXS2mpO-M). Distinct from Area Two Rotterdam and Digital
+    // Society Leeds. Never wire sc-https://….
     url: "https://soundcloud.com/giuseppeottaviani/giuseppe-ottaviani-live-at-a",
     primaryArtist: dj("Giuseppe Ottaviani", { accent: "#7b2cbf" }),
     genre: "Trance",
