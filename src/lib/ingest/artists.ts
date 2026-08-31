@@ -140,9 +140,28 @@ export function guestFromSeriesByTitle(title: string): string | null {
 }
 
 /**
+ * "MUCHAKK (Mu540 b2b Mochakk)" — a performance nickname plus the real
+ * b2b credit in parens. Prefer the inner artists so we do not mint a junk DJ.
+ */
+export function unwrapParenCollabCredit(credit: string): string {
+  const trimmed = credit.replace(/\s+/g, " ").trim();
+  const m = trimmed.match(
+    /^(.+?)\s*\(([^)]*\b(?:b2b|vs\.?)\b[^)]*)\)\s*$/i,
+  );
+  if (!m?.[2]) return credit;
+  const inner = m[2].trim();
+  if (inner.length < 3) return credit;
+  return tidyPerformingCredit(inner);
+}
+
+/**
  * Extract the performing-artist portion of a set title before venue/event noise.
  */
 export function performingCreditFromTitle(title: string): string {
+  return unwrapParenCollabCredit(extractPerformingCredit(title));
+}
+
+function extractPerformingCredit(title: string): string {
   const cleaned = title
     .replace(/[⠶✦★☆●◆]/g, " ")
     .replace(/\s+/g, " ")
@@ -240,7 +259,7 @@ export function splitArtistCredit(
   credit: string,
   extras: Partial<RawArtist> = {},
 ): SplitArtists {
-  const head = normalizeCollabSeparators(credit);
+  const head = normalizeCollabSeparators(unwrapParenCollabCredit(credit));
   // Drop trailing event crumbs if still present
   const cut = head.split(STOP_AFTER)[0]?.trim() || head;
 

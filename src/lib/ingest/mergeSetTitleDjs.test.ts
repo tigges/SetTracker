@@ -150,6 +150,17 @@ describe("resolveCanonicalFromSetTitleDj", () => {
     );
   });
 
+  it("folds MUCHAKK performance leftover onto MU540", () => {
+    assert.deepEqual(
+      resolveCanonicalFromSetTitleDj(
+        "MUCHAKK (Mu540",
+        "muchakk-mu540",
+        ["MUCHAKK (Mu540 b2b Mochakk) @ STB São Paulo 2024"],
+      ),
+      { slug: "mu540", name: "MU540" },
+    );
+  });
+
   it("reads the guest off a label radio title", () => {
     assert.equal(
       guestFromSeriesByTitle("Keinemusik Radio Show by Lara Bee 17.07.2026"),

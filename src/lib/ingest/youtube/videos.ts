@@ -667,7 +667,9 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
   },
   {
     // MU540's own channel, 1h24m b2b with Mochakk at sotrackboa, São Paulo.
-    // sotrackboa is not in KNOWN_EVENTS, so no eventName is invented.
+    // Mochakk's SoundCloud upload titles this "MUCHAKK" — that is the
+    // performance nickname, not a third DJ. sotrackboa is not in
+    // KNOWN_EVENTS, so no eventName is invented.
     video: "https://www.youtube.com/watch?v=gcHLUNPDb_U",
     primaryArtist: dj("MU540", {
       accent: "#e76f51",

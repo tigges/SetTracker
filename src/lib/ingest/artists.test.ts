@@ -373,4 +373,30 @@ assert.deepEqual(
   ["mochakk"],
 );
 
+// Official Mochakk SoundCloud title. MUCHAKK is the performance nickname,
+// not an artist — the parenthetical credit is MU540 b2b Mochakk.
+assert.equal(
+  performingCreditFromTitle(
+    "MUCHAKK (Mu540 b2b Mochakk) @ STB São Paulo 2024",
+  ),
+  "Mu540 b2b Mochakk",
+);
+const muchakkSc = artistsForSet(
+  "MUCHAKK (Mu540 b2b Mochakk) @ STB São Paulo 2024",
+);
+assert.equal(muchakkSc.primary.slug, "mu540");
+assert.equal(muchakkSc.primary.name, "Mu540");
+assert.deepEqual(
+  muchakkSc.collaborators.map((c) => c.slug),
+  ["mochakk"],
+);
+const muchakkPiped = artistsForSet(
+  "MU540 b2b Mochakk | MUCHAKK @ STB São Paulo 2024",
+);
+assert.equal(muchakkPiped.primary.slug, "mu540");
+assert.deepEqual(
+  muchakkPiped.collaborators.map((c) => c.slug),
+  ["mochakk"],
+);
+
 console.log("artists.test.ts ok");

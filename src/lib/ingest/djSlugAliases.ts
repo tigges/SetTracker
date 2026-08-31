@@ -35,6 +35,8 @@ export const DJ_SLUG_ALIASES: Record<string, string> = {
   // Hot Since 82 destination films mistaken for a DJ
   "recovery-hot-air-balloon": "hot-since-82",
   "recovery-hot-air-balloon-set": "hot-since-82",
+  // MUCHAKK is a Mu540 b2b Mochakk performance nickname, not a DJ
+  "muchakk-mu540": "mu540",
   ...PRODUCER_DJ_ALIASES,
 };
 
