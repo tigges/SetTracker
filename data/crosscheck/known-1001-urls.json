@@ -1,7 +1,15 @@
 {
   "note": "Operator-collected 1001Tracklists URLs. All listed urls[] rows are now seeded. Prefer new operator pastes over this archive. stillMissing1001 is video-in / no 1001 page — do not invent URLs. heldPendingPlayback is 1001-in / no official YT/SC playback — seed held, do not invent or wire fan playback. pendingCuePaste is official playback + operator 1001 URL without cue rows — do not scrape 1001 or invent 1001tl seeds.",
-  "updatedAt": "2026-08-31T10:10:00.000Z",
+  "updatedAt": "2026-08-31T10:20:00.000Z",
   "urls": [
+    {
+      "label": "Nicky Romero · The Great Library Stage, Tomorrowland WE1 2026-07-17",
+      "slug": "yt-imKMwwGAaDk",
+      "name": "TL_NICKY_ROMERO_TML_WE1_LIBRARY_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/14y0890k/nicky-romero-the-great-library-stage-tomorrowland-weekend-1-belgium-2026-07-17.html",
+      "youtubeUrl": "https://youtu.be/imKMwwGAaDk",
+      "note": "Operator paste 2026-08-31. 81 timed cues on official Tomorrowland YT. Overlay TL_NICKY_ROMERO is too generic. Distinct from Mainstage WE2 yt-TsyGMhx8izw / yt-B05MAbsCOLA and Protocol Radio 731. First-line date 2026-07-26 was leftover; 1001 is WE1 2026-07-17. No SC in the paste — do not invent an SC slug. Mashup-then-component clusters stay as captured."
+    },
     {
       "label": "Bassjackers · The Great Library Stage, Tomorrowland WE2 2026-07-26",
       "slug": "yt-BG3Lr9EdWVY",

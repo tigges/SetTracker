@@ -212,6 +212,7 @@ import {
   TL_KOROLOVA_MOTHERLAND_MONUMENT_KYIV_2026,
   TL_CHRIS_LORENZO_STEREOBLOOM_EDC_MEXICO_2026,
   TL_JACK_SHORE_TML_WE1_FREEDOM_2026,
+  TL_NICKY_ROMERO_TML_WE1_LIBRARY_2026,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
@@ -5904,5 +5905,36 @@ assert.notEqual(
   TRACKLIST_1001_BY_SOURCE_SLUG["yt-zMW5SQPS1cY"],
   "Jack Shore is not the I Hate Models Freedom WE1 seed",
 );
+
+// Nicky Romero @ The Great Library Stage, Tomorrowland WE1 2026-07-17 —
+// official Tomorrowland YT. Overlay TL_NICKY_ROMERO is too generic.
+// Distinct from Mainstage WE2.
+assertSeedClocks(TL_NICKY_ROMERO_TML_WE1_LIBRARY_2026);
+assert.equal(TL_NICKY_ROMERO_TML_WE1_LIBRARY_2026.length, 81);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-imKMwwGAaDk"],
+  TL_NICKY_ROMERO_TML_WE1_LIBRARY_2026,
+);
+const nickyLib = tracklist1001RowsToPlays(TL_NICKY_ROMERO_TML_WE1_LIBRARY_2026);
+assert.equal(nickyLib.length, 81);
+assert.equal(nickyLib[0]?.provenance, "1001tl");
+assert.equal(nickyLib[0]?.timestamp, 11);
+assert.equal(nickyLib[0]?.trackTitle, "Afterglow");
+assert.equal(nickyLib[nickyLib.length - 1]?.trackTitle, "I Could Be The One");
+assert.equal(nickyLib[nickyLib.length - 1]?.timestamp, 56 * 60 + 2);
+assert.equal(isWiredTracklistSlug("yt-imKMwwGAaDk"), true);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-imKMwwGAaDk"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-TsyGMhx8izw"],
+  "Library WE1 is not the Nicky Romero Mainstage WE2 seed",
+);
+let nickyLibPrev = -1;
+for (const p of nickyLib) {
+  assert.ok(
+    (p.timestamp ?? 0) >= nickyLibPrev,
+    `Nicky Romero Library WE1 clocks must not go back @ ${p.timestamp}`,
+  );
+  nickyLibPrev = p.timestamp ?? 0;
+}
 
 console.log("tracklists1001/seeds.test.ts ok");

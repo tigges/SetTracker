@@ -270,6 +270,16 @@ assert.equal(
   performingCreditFromTitle("Jack Shore WE1 | Tomorrowland 2026"),
   "Jack Shore",
 );
+assert.equal(
+  performingCreditFromTitle("Nicky Romero WE1 | Tomorrowland 2026"),
+  "Nicky Romero",
+);
+const nickyLibSet = artistsForSet(
+  "Nicky Romero WE1 | Tomorrowland 2026",
+  { name: "Nicky Romero", slug: "nicky-romero", accent: "#00bbf9" },
+);
+assert.equal(nickyLibSet.primary.slug, "nicky-romero");
+assert.equal(nickyLibSet.collaborators.length, 0);
 const jackShoreSet = artistsForSet(
   "Jack Shore WE1 | Tomorrowland 2026",
   { name: "Jack Shore", slug: "jack-shore", accent: "#3d5a80" },

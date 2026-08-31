@@ -87,6 +87,7 @@ import {
   TL_GIUSEPPE_OTTAVIANI_ASOT_AREA_TWO_ROTTERDAM_2026,
   TL_KOROLOVA_MOTHERLAND_MONUMENT_KYIV_2026,
   TL_JACK_SHORE_TML_WE1_FREEDOM_2026,
+  TL_NICKY_ROMERO_TML_WE1_LIBRARY_2026,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
@@ -1631,6 +1632,23 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/1kz7zvr9/illenium-the-great-library-stage-tomorrowland-weekend-1-belgium-2026-07-18.html",
     tracklist1001: TL_ILLENIUM_TML_WE1_2026,
+  },
+  {
+    // Tomorrowland official playback — Great Library WE1. Distinct from
+    // Mainstage WE2 (yt-TsyGMhx8izw / yt-B05MAbsCOLA).
+    video: "https://www.youtube.com/watch?v=imKMwwGAaDk",
+    primaryArtist: dj("Nicky Romero", {
+      accent: "#00bbf9",
+      homeCity: "Amerongen, NL",
+    }),
+    genre: "Progressive House",
+    type: "festival",
+    title: "Nicky Romero WE1 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/14y0890k/nicky-romero-the-great-library-stage-tomorrowland-weekend-1-belgium-2026-07-17.html",
+    tracklist1001: TL_NICKY_ROMERO_TML_WE1_LIBRARY_2026,
   },
   {
     // Tomorrowland official playback — Mainstage WE2.

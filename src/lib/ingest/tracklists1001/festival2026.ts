@@ -184,7 +184,10 @@ import {
   TL_KOROLOVA_MOTHERLAND_MONUMENT_KYIV_2026,
   TL_CHRIS_LORENZO_STEREOBLOOM_EDC_MEXICO_2026,
 } from "./festivalCaptures20260828";
-import { TL_JACK_SHORE_TML_WE1_FREEDOM_2026 } from "./festivalCaptures20260831";
+import {
+  TL_JACK_SHORE_TML_WE1_FREEDOM_2026,
+  TL_NICKY_ROMERO_TML_WE1_LIBRARY_2026,
+} from "./festivalCaptures20260831";
 
 export {
   TL_ALESSO_TML_WE2_2026,
@@ -330,6 +333,7 @@ export {
   TL_KOROLOVA_MOTHERLAND_MONUMENT_KYIV_2026,
   TL_CHRIS_LORENZO_STEREOBLOOM_EDC_MEXICO_2026,
   TL_JACK_SHORE_TML_WE1_FREEDOM_2026,
+  TL_NICKY_ROMERO_TML_WE1_LIBRARY_2026,
 };
 
 function formatClock(sec: number): string {
@@ -5022,6 +5026,7 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "sc-korolovadj-korolova-live-kyiv-ukraine":
     TL_KOROLOVA_MOTHERLAND_MONUMENT_KYIV_2026,
   "yt-wWgtmdI_adQ": TL_JACK_SHORE_TML_WE1_FREEDOM_2026,
+  "yt-imKMwwGAaDk": TL_NICKY_ROMERO_TML_WE1_LIBRARY_2026,
 };
 
 /** Sanity: every seeded clock must parse. */
