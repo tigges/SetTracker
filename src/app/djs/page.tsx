@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { DjDirectory } from "@/components/DjDirectory";
 import { VisualTeaser } from "@/components/VisualTeaser";
 import { getAtlasTeaserFaces, getDjList } from "@/lib/queries";
@@ -23,7 +24,13 @@ export default async function DjsPage() {
         <h1 className="mt-1 text-3xl font-extrabold tracking-tight">DJs</h1>
         <p className="mt-2 max-w-2xl text-[14px] text-muted">
           {djs.filter((d) => d.isBrowseReady).length} artists with a handle, a
-          set, a tracklist, and artwork. Jump a letter or search (⌘K).
+          set, a tracklist, and artwork. Jump a letter or search (⌘K).{" "}
+          <Link
+            href="/wishlist"
+            className="text-ink underline decoration-dotted underline-offset-2 hover:text-brand"
+          >
+            Wishlist
+          </Link>
         </p>
         <div className="mt-5 max-w-xl">
           <VisualTeaser

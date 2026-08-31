@@ -14,6 +14,7 @@ import { chartKicker } from "@/lib/atlas/mapMath";
 import { displayCity } from "@/lib/displayCity";
 import { pageMeta } from "@/lib/site";
 import { SET_TYPE_META, fmtDate, fmtDuration, fmtRelative } from "@/lib/status";
+import { WishlistToggle } from "@/components/WishlistToggle";
 
 export async function generateStaticParams() {
   const slugs = await getAllDjSlugs();
@@ -134,6 +135,7 @@ export default async function DjPage({
                 {dj.genre}
               </span>
             ) : null}
+            <WishlistToggle slug={dj.slug} />
           </div>
         </div>
         {bio ? <DjBio text={bio} /> : null}
