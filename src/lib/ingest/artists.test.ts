@@ -300,6 +300,18 @@ assert.equal(
   "Mike Williams",
 );
 assert.equal(
+  performingCreditFromTitle(
+    "Mike Williams Throwback Set WE1 | Tomorrowland 2026",
+  ),
+  "Mike Williams",
+);
+const mikeThrowbackSet = artistsForSet(
+  "Mike Williams Throwback Set WE1 | Tomorrowland 2026",
+  { name: "Mike Williams", slug: "mike-williams", accent: "#e9c46a" },
+);
+assert.equal(mikeThrowbackSet.primary.slug, "mike-williams");
+assert.equal(mikeThrowbackSet.collaborators.length, 0);
+assert.equal(
   performingCreditFromTitle("Enrico Sangiuliano Lockdown"),
   "Enrico Sangiuliano",
 );

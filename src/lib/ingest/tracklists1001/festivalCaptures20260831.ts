@@ -114,3 +114,70 @@ export const TL_NICKY_ROMERO_TML_WE1_LIBRARY_2026: FingerprintSeedRow[] = [
   { at: "55:02", artist: "Avicii ft. Simon Aldred", title: "Waiting For Love (Acappella)" },
   { at: "56:02", artist: "Avicii & Nicky Romero ft. Noonie Bao", title: "I Could Be The One" },
 ];
+
+/**
+ * Mike Williams @ Throwback Set, House Of Fortune Stage, Tomorrowland Weekend 1, Belgium 2026-07-17
+ * Official YouTube: https://www.youtube.com/watch?v=mGSV0ELvoEQ
+ * https://www.1001tracklists.com/tracklist/28bhkh99/mike-williams-throwback-set-house-of-fortune-stage-tomorrowland-weekend-1-belgium-2026-07-17.html
+ * Overlay name TL_MIKE_WILLIAMS is too generic; constant is the performance.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-mGSV0ELvoEQ"] = TL_MIKE_WILLIAMS_TML_WE1_THROWBACK_2026
+ * Paste Wire line named yt-1SW3F3LcGCk — not on file; do not mint a second set.
+ * Distinct from Mainstage WE2 TL_MIKE_WILLIAMS_TML_WE2_2026 (yt-WnjXXOZ8Te8)
+ * and Time Lab Parookaville. 1001 was held pending playback (2026-08-26);
+ * this paste supplies official YT + 51 clocks. No SoundCloud in the paste.
+ * Mashup-then-component clusters stay as captured.
+ * Captured 2026-08-31 — provenance 1001tl.
+ */
+export const TL_MIKE_WILLIAMS_TML_WE1_THROWBACK_2026: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "Mike Williams ft. Zoë Moss", title: "Melody (Tip Of My Tongue)" },
+  { at: "1:25", artist: "Alesso & OneRepublic", title: "If I Lose Myself" },
+  { at: "1:40", artist: "Madison Mars ft. Feldz", title: "Darkside (VIP Mix)" },
+  { at: "3:55", artist: "David Guetta ft. Bebe Rexha", title: "I'm Good (Blue) (Brooks Remix)" },
+  { at: "6:30", artist: "Tiësto & Mike Williams", title: "I Want You" },
+  { at: "9:05", artist: "Mike Williams & Hardwell vs. Madonna", title: "The Beat vs. Music (Hardwell Mashup)" },
+  { at: "9:57", artist: "Madonna", title: "Music (Acappella)" },
+  { at: "10:49", artist: "Mike Williams", title: "The Beat (Hardwell Edit)" },
+  { at: "11:40", artist: "Nadia Ali & Starkillers & Alex Kenji", title: "Pressure (Alesso Remix)" },
+  { at: "12:55", artist: "Duck Sauce", title: "NRG (Skrillex & Kill The Noise & Milo & Otis Remix)" },
+  { at: "13:30", artist: "Mike Williams", title: "Sweet & Sour" },
+  { at: "14:35", artist: "Bassjackers & Brooks", title: "Alamo" },
+  { at: "15:05", artist: "Mightyfools", title: "Footrocker (Get Your, Get Your Hands Up Acappella)" },
+  { at: "16:00", artist: "Mike Williams & Brooks vs. Icona Pop & Charli XCX", title: "Jetlag vs. I Love It (WeDamnz Mashup)" },
+  { at: "16:27", artist: "Icona Pop ft. Charli xcx", title: "I Love It (Acappella)" },
+  { at: "16:54", artist: "Mike Williams & Brooks", title: "Jetlag" },
+  { at: "17:20", artist: "Curbi & Fox Stevenson", title: "Hoohah" },
+  { at: "18:35", artist: "Daddy's Groove", title: "Stellar" },
+  { at: "20:15", artist: "Avicii", title: "Levels" },
+  { at: "22:00", artist: "David Guetta & Brooks & Loote", title: "Better When You're Gone" },
+  { at: "23:45", artist: "R3HAB & Mike Williams ft. Mary Jane Smith", title: "Lullaby" },
+  { at: "26:20", artist: "Hardwell & Mike Williams ft. Robin Valo", title: "I'm Not Sorry" },
+  { at: "29:45", artist: "Mike Williams ft. Brezy", title: "Don't Hurt" },
+  { at: "32:10", artist: "Lana Del Rey", title: "Summertime Sadness (Cedric Gervais Remix)" },
+  { at: "34:10", artist: "Kanye West & Lil Pump ft. Adele Givens", title: "I Love It" },
+  { at: "34:57", artist: "Yeah Yeah Yeahs", title: "Heads Will Roll (DiscoTech Remix)" },
+  { at: "35:30", artist: "Brooks & Mesto", title: "Long Time" },
+  { at: "36:10", artist: "Red Hot Chili Peppers", title: "Otherside" },
+  { at: "36:18", artist: "Calvin Harris & Dua Lipa", title: "One Kiss (R3HAB Remix)" },
+  { at: "37:45", artist: "Pep & Rash", title: "Fatality (Quintino Edit)" },
+  { at: "38:32", artist: "Mike Williams & Mesto & Sasha Rangas vs. Zombie Nation", title: "Wait Another Day vs. Kernkraft 400 (Mike Williams Mashup)" },
+  { at: "39:47", artist: "Zombie Nation", title: "Kernkraft 400 (W&W Remix)" },
+  { at: "41:02", artist: "Mike Williams & Mesto ft. Sasha Rangas", title: "Wait Another Day" },
+  { at: "42:16", artist: "Calvin Harris vs. Mike Williams", title: "Feel So Close vs. Rocket (Mike Williams Mashup)" },
+  { at: "42:49", artist: "Calvin Harris", title: "Feel So Close (Acappella)" },
+  { at: "43:22", artist: "Mike Williams", title: "Rocket" },
+  { at: "43:55", artist: "Nicky Romero & Mike Williams ft. Amba Shepherd", title: "Dynamite" },
+  { at: "45:28", artist: "Axwell Λ Ingrosso ft. Vargas & Lagola", title: "Sun Is Shining" },
+  { at: "48:25", artist: "Mike Williams ft. Amba Shepherd", title: "Stay Awake" },
+  { at: "50:06", artist: "Sander van Doorn & Oliver Heldens", title: "THIS" },
+  { at: "51:15", artist: "David Guetta & Sia vs. Brooks", title: "Titanium vs. Lynx (David Guetta Mashup)" },
+  { at: "51:54", artist: "David Guetta ft. Sia", title: "Titanium" },
+  { at: "52:34", artist: "Brooks", title: "Lynx" },
+  { at: "53:13", artist: "Mike Williams & Curbi vs. Ivan Gough & Feenixpawl & Georgi KAY", title: "Take Me There vs. In My Mind (Mike Williams Mashup)" },
+  { at: "53:32", artist: "Fedde Le Grand", title: "Put Your Hands Up For Detroit (Acappella)" },
+  { at: "53:50", artist: "Ivan Gough & Feenixpawl ft. Georgi Kay", title: "In My Mind (Acappella)" },
+  { at: "54:09", artist: "Mike Williams & Curbi", title: "Take Me There" },
+  { at: "54:27", artist: "Tiësto & Oliver Heldens ft. Natalie La Rose", title: "The Right Song (Wombass) (Mike Williams Remix)" },
+  { at: "55:56", artist: "Mike Williams vs. The Temper Trap", title: "Bambini vs. Sweet Disposition (Mike Williams Mashup)" },
+  { at: "57:43", artist: "The Temper Trap", title: "Sweet Disposition" },
+  { at: "59:30", artist: "Mike Williams", title: "Bambini" },
+];

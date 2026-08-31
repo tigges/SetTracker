@@ -213,6 +213,7 @@ import {
   TL_CHRIS_LORENZO_STEREOBLOOM_EDC_MEXICO_2026,
   TL_JACK_SHORE_TML_WE1_FREEDOM_2026,
   TL_NICKY_ROMERO_TML_WE1_LIBRARY_2026,
+  TL_MIKE_WILLIAMS_TML_WE1_THROWBACK_2026,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
@@ -5935,6 +5936,43 @@ for (const p of nickyLib) {
     `Nicky Romero Library WE1 clocks must not go back @ ${p.timestamp}`,
   );
   nickyLibPrev = p.timestamp ?? 0;
+}
+
+// Mike Williams Throwback @ House of Fortune, Tomorrowland WE1 2026-07-17 —
+// official YT. Overlay TL_MIKE_WILLIAMS is too generic. Distinct from
+// Mainstage WE2. Paste Wire named yt-1SW3F3LcGCk — not on file.
+assertSeedClocks(TL_MIKE_WILLIAMS_TML_WE1_THROWBACK_2026);
+assert.equal(TL_MIKE_WILLIAMS_TML_WE1_THROWBACK_2026.length, 51);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-mGSV0ELvoEQ"],
+  TL_MIKE_WILLIAMS_TML_WE1_THROWBACK_2026,
+);
+assert.equal(TRACKLIST_1001_BY_SOURCE_SLUG["yt-1SW3F3LcGCk"], undefined);
+const mikeThrowback = tracklist1001RowsToPlays(
+  TL_MIKE_WILLIAMS_TML_WE1_THROWBACK_2026,
+);
+assert.equal(mikeThrowback.length, 51);
+assert.equal(mikeThrowback[0]?.provenance, "1001tl");
+assert.equal(mikeThrowback[0]?.timestamp, 0);
+assert.match(mikeThrowback[0]?.trackTitle ?? "", /Melody/);
+assert.equal(mikeThrowback[mikeThrowback.length - 1]?.trackTitle, "Bambini");
+assert.equal(
+  mikeThrowback[mikeThrowback.length - 1]?.timestamp,
+  59 * 60 + 30,
+);
+assert.equal(isWiredTracklistSlug("yt-mGSV0ELvoEQ"), true);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-mGSV0ELvoEQ"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-WnjXXOZ8Te8"],
+  "Throwback WE1 is not the Mike Williams Mainstage WE2 seed",
+);
+let mikeTbPrev = -1;
+for (const p of mikeThrowback) {
+  assert.ok(
+    (p.timestamp ?? 0) >= mikeTbPrev,
+    `Mike Williams Throwback WE1 clocks must not go back @ ${p.timestamp}`,
+  );
+  mikeTbPrev = p.timestamp ?? 0;
 }
 
 console.log("tracklists1001/seeds.test.ts ok");

@@ -88,6 +88,7 @@ import {
   TL_KOROLOVA_MOTHERLAND_MONUMENT_KYIV_2026,
   TL_JACK_SHORE_TML_WE1_FREEDOM_2026,
   TL_NICKY_ROMERO_TML_WE1_LIBRARY_2026,
+  TL_MIKE_WILLIAMS_TML_WE1_THROWBACK_2026,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
@@ -3129,6 +3130,21 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/132ft5h9/mike-williams-mainstage-tomorrowland-weekend-2-belgium-2026-07-25.html",
     tracklist1001: TL_MIKE_WILLIAMS_TML_WE2_2026,
+  },
+  {
+    // Tomorrowland official playback — House of Fortune Throwback WE1.
+    // Distinct from Mainstage WE2 (yt-WnjXXOZ8Te8). Wire line named
+    // yt-1SW3F3LcGCk is not on file — do not mint a second set.
+    video: "https://www.youtube.com/watch?v=mGSV0ELvoEQ",
+    primaryArtist: dj("Mike Williams", { accent: "#e9c46a" }),
+    genre: "Future House",
+    type: "festival",
+    title: "Mike Williams Throwback Set WE1 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/28bhkh99/mike-williams-throwback-set-house-of-fortune-stage-tomorrowland-weekend-1-belgium-2026-07-17.html",
+    tracklist1001: TL_MIKE_WILLIAMS_TML_WE1_THROWBACK_2026,
   },
   {
     video: "https://www.youtube.com/watch?v=4G2QlSLG0tI",
