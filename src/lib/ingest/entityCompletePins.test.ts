@@ -727,6 +727,17 @@ assert.equal(
   assert.equal(vk.genre, undefined);
   assert.equal(vk.imageUrl, undefined);
 }
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "valentino-khan",
+    name: "Valentino Khan",
+    field: "website",
+    value: "https://grokipedia.com/page/Valentino_Khan",
+    evidence: "operator paste, encyclopedia",
+  }).drop,
+  "weak or invalid website",
+);
 
 // GREG 99 — operator paste. Matching greg99music handles; no first-party
 // site. Spotify artist URL has no pin column. Genre is the lead named
@@ -849,6 +860,75 @@ assert.equal(
   assert.ok(greg.bio?.includes("Still My Baby"));
   assert.equal(greg.website, undefined);
   assert.equal(greg.imageUrl, undefined);
+}
+
+// Malaa — operator paste fills SoundCloud + France on the existing pin.
+// YT @malaa_music / IG / X already matched. "Official YouTube Channel of
+// Malaa" is not a distinctive bio. Grokipedia + Insomniac stay off website.
+// Facebook / Spotify have no pin columns.
+assert.equal(
+  nameOverlapsHandle("Malaa", "https://soundcloud.com/malaamusic"),
+  true,
+);
+assert.equal(
+  nameOverlapsHandle("Malaa", "https://www.youtube.com/@malaa_music"),
+  true,
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "malaa",
+    name: "Malaa",
+    field: "soundcloud",
+    value: "https://soundcloud.com/malaamusic",
+    evidence: "operator paste, official channel",
+  }).value,
+  "https://soundcloud.com/malaamusic",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "malaa",
+    name: "Malaa",
+    field: "homeCity",
+    value: "France",
+    evidence: "operator paste, YouTube About",
+  }).value,
+  "France",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "malaa",
+    name: "Malaa",
+    field: "website",
+    value: "https://www.insomniac.com/music/artists/malaa/",
+    evidence: "operator paste, promoter hub",
+  }).drop,
+  "weak or invalid website",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "malaa",
+    name: "Malaa",
+    field: "website",
+    value: "https://grokipedia.com/page/Malaa",
+    evidence: "operator paste, encyclopedia",
+  }).drop,
+  "weak or invalid website",
+);
+{
+  const malaa = loadEntityCompletePins().find((p) => p.slug === "malaa");
+  assert.ok(malaa);
+  assert.equal(malaa.instagram, "https://instagram.com/malaamusic");
+  assert.equal(malaa.youtube, "https://www.youtube.com/@malaa_music");
+  assert.equal(malaa.soundcloud, "https://soundcloud.com/malaamusic");
+  assert.equal(malaa.twitter, "https://x.com/Malaamusic");
+  assert.equal(malaa.homeCity, "France");
+  assert.equal(malaa.website, undefined);
+  assert.equal(malaa.bio, undefined);
+  assert.equal(malaa.genre, undefined);
 }
 
 // Fields with no Dj column must drop rather than be coerced somewhere else.

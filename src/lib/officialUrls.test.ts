@@ -17,6 +17,11 @@ describe("isWeakOfficialUrl", () => {
     );
     assert.equal(isWeakOfficialUrl("https://www.wikidata.org/wiki/Q123"), true);
     assert.equal(
+      isWeakOfficialUrl("https://grokipedia.com/page/Valentino_Khan"),
+      true,
+    );
+    assert.equal(isWeakOfficialUrl("https://grokipedia.com/page/Malaa"), true);
+    assert.equal(
       isWeakOfficialUrl("https://www.discogs.com/artist/2697000-Valentino-Khan"),
       true,
     );
