@@ -65,6 +65,15 @@ assert.equal(
   "tomorrowland",
 );
 assert.equal(
+  inferFestivalEvent("Maddix live @ ULTRA EUROPE 2026 | Mainstage")?.slug,
+  "ultra-europe",
+);
+assert.equal(resolveEvent("Ultra Europe").slug, "ultra-europe");
+assert.notEqual(
+  inferFestivalEvent("Maddix live @ ULTRA EUROPE 2026 | Mainstage")?.slug,
+  "ultra-miami",
+);
+assert.equal(
   inferFestivalEvent("MARTEN HØRGER @ Mainstage, Parookaville 2026")?.slug,
   "parookaville",
 );

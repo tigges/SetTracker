@@ -292,6 +292,21 @@ assert.equal(
   "sc-maddixmusic-maddix-live-tomorrowland-2026",
 );
 
+const maddixUltraSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url ===
+    "https://soundcloud.com/maddixmusic/maddix-live-ultra-europe-2026",
+);
+assert.ok(maddixUltraSc);
+assert.equal(maddixUltraSc.primaryArtist.name, "Maddix");
+assert.equal(maddixUltraSc.type, "festival");
+assert.equal(maddixUltraSc.eventName, "Ultra Europe");
+assert.notEqual(maddixUltraSc.url, maddixTmlSc.url);
+assert.equal(
+  `sc-maddixmusic-${slugify("maddix-live-ultra-europe-2026")}`,
+  "sc-maddixmusic-maddix-live-ultra-europe-2026",
+);
+
 const dyenMaddixSc = SOUNDCLOUD_TRACK_SEEDS.find(
   (s) =>
     s.url === "https://soundcloud.com/maddixmusic/dyen-b2b-maddix-live",

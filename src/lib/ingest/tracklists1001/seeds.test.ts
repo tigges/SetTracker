@@ -214,6 +214,7 @@ import {
   TL_JACK_SHORE_TML_WE1_FREEDOM_2026,
   TL_NICKY_ROMERO_TML_WE1_LIBRARY_2026,
   TL_MIKE_WILLIAMS_TML_WE1_THROWBACK_2026,
+  TL_MADDIX_ULTRA_EUROPE_2026,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
@@ -5974,5 +5975,46 @@ for (const p of mikeThrowback) {
   );
   mikeTbPrev = p.timestamp ?? 0;
 }
+
+// Maddix @ Mainstage, Ultra Europe 2026-07-11 — official YT + official
+// Maddix SC host twin. Overlay TL_MADDIX is too generic. hearthis
+// razorator stays unwired. Distinct from TML WE1.
+assertSeedClocks(TL_MADDIX_ULTRA_EUROPE_2026);
+assert.equal(TL_MADDIX_ULTRA_EUROPE_2026.length, 26);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-0DFmXisYFZI"],
+  TL_MADDIX_ULTRA_EUROPE_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-maddixmusic-maddix-live-ultra-europe-2026"
+  ],
+  TL_MADDIX_ULTRA_EUROPE_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-maddixmusic-maddix-live-ultra-europe-2026"],
+  undefined,
+);
+assert.equal(isWiredTracklistSlug("yt-0DFmXisYFZI"), true);
+assert.equal(
+  isSecondaryPlaybackSlug("sc-maddixmusic-maddix-live-ultra-europe-2026"),
+  true,
+);
+assert.equal(isSecondaryPlaybackSlug("yt-0DFmXisYFZI"), false);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-0DFmXisYFZI"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-1Fu89dxrXI0"],
+  "Ultra Europe is not the Maddix TML WE1 seed",
+);
+const maddixUltra = tracklist1001RowsToPlays(TL_MADDIX_ULTRA_EUROPE_2026);
+assert.equal(maddixUltra.length, 26);
+assert.equal(maddixUltra[0]?.provenance, "1001tl");
+assert.equal(maddixUltra[0]?.timestamp, 11);
+assert.equal(maddixUltra[0]?.trackTitle, "We Rave");
+assert.equal(maddixUltra[maddixUltra.length - 1]?.trackTitle, "Pump This Party");
+assert.equal(
+  maddixUltra[maddixUltra.length - 1]?.timestamp,
+  1 * 3600 + 14,
+);
 
 console.log("tracklists1001/seeds.test.ts ok");

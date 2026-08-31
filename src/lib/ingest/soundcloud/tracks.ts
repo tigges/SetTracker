@@ -333,6 +333,19 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     minDurationSec: 15 * 60,
   },
   {
+    // Official Maddix Ultra Europe Mainstage; 1001TL wired via
+    // sc-maddixmusic-maddix-live-ultra-europe-2026 (same list as yt-0DFmXisYFZI).
+    // hearthis razorator is a fan reupload — do not wire. Never sc-https://….
+    url: "https://soundcloud.com/maddixmusic/maddix-live-ultra-europe-2026",
+    primaryArtist: dj("Maddix", {
+      accent: "#ff4d6d",
+    }),
+    genre: "Techno",
+    type: "festival",
+    eventName: "Ultra Europe",
+    minDurationSec: 15 * 60,
+  },
+  {
     // Official Maddix upload of DYEN B2B TML WE2; 1001TL wired via
     // sc-maddixmusic-dyen-b2b-maddix-live (same list as yt-VABm0tIRn2U).
     // Distinct from Maddix Mainstage WE1. Never sc-https://… or yt-maddixmusic-….

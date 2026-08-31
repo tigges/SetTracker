@@ -89,6 +89,7 @@ import {
   TL_JACK_SHORE_TML_WE1_FREEDOM_2026,
   TL_NICKY_ROMERO_TML_WE1_LIBRARY_2026,
   TL_MIKE_WILLIAMS_TML_WE1_THROWBACK_2026,
+  TL_MADDIX_ULTRA_EUROPE_2026,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
@@ -1551,6 +1552,23 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/1lx100pt/maddix-mainstage-tomorrowland-weekend-1-belgium-2026-07-18.html",
     tracklist1001: TL_MADDIX_TML_WE1_2026,
+  },
+  {
+    // Official Ultra Europe Mainstage. Official SC twin:
+    // maddixmusic/maddix-live-ultra-europe-2026. hearthis razorator is a
+    // fan reupload — do not wire. Distinct from TML WE1 yt-1Fu89dxrXI0.
+    // eventName is Ultra Europe — not Ultra Music Festival (Miami).
+    video: "https://www.youtube.com/watch?v=0DFmXisYFZI",
+    primaryArtist: dj("Maddix", {
+      accent: "#ff4d6d",
+    }),
+    genre: "Techno",
+    type: "festival",
+    title: "Maddix live @ ULTRA EUROPE 2026 | Mainstage",
+    eventName: "Ultra Europe",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/26gv13vk/maddix-mainstage-ultra-europe-croatia-2026-07-11.html",
+    tracklist1001: TL_MADDIX_ULTRA_EUROPE_2026,
   },
   {
     // Tomorrowland official playback — Atmosphere WE2 B2B; title drives collaborator.

@@ -181,3 +181,47 @@ export const TL_MIKE_WILLIAMS_TML_WE1_THROWBACK_2026: FingerprintSeedRow[] = [
   { at: "57:43", artist: "The Temper Trap", title: "Sweet Disposition" },
   { at: "59:30", artist: "Mike Williams", title: "Bambini" },
 ];
+
+/**
+ * Maddix @ Mainstage, Ultra Europe, Croatia 2026-07-11
+ * Official YouTube: https://youtu.be/0DFmXisYFZI
+ * Official SoundCloud: https://soundcloud.com/maddixmusic/maddix-live-ultra-europe-2026
+ * https://www.1001tracklists.com/tracklist/26gv13vk/maddix-mainstage-ultra-europe-croatia-2026-07-11.html
+ * Overlay name TL_MADDIX is too generic (already Maddix TML WE1).
+ * Same 1001 seed + both official permalinks → host twin (YT listing, SC secondary).
+ * hearthis.at/razorator/maddix-liveatultraeuropesplit11-07-2026-razorator
+ * is a fan reupload — do not wire as sourceUrl / playback.
+ * Distinct from TL_MADDIX_TML_WE1_2026 and TL_DYEN_MADDIX_TML_WE2_2026.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-0DFmXisYFZI"]
+ *       TRACKLIST_1001_BY_SOURCE_SLUG["sc-maddixmusic-maddix-live-ultra-europe-2026"]
+ * Never sc-https://… or yt-maddixmusic-….
+ * Captured 2026-08-31 — provenance 1001tl.
+ */
+export const TL_MADDIX_ULTRA_EUROPE_2026: FingerprintSeedRow[] = [
+  { at: "0:11", artist: "Maddix", title: "We Rave" },
+  { at: "3:20", artist: "Tiësto", title: "Traffic (Maddix Remix)" },
+  { at: "5:55", artist: "Maddix", title: "Move It 2 The Drum" },
+  { at: "7:20", artist: "Roøney", title: "Bass Is Pumpin'" },
+  { at: "9:45", artist: "John Summit", title: "LIGHTS GO OUT (Bassjackers TECH BOUNCE Edit)" },
+  { at: "11:08", artist: "Maddix & The Rocketman & CRW & Dimitri Vegas", title: "I Feel Love" },
+  { at: "13:20", artist: "Hi-Gate", title: "Pitchin' (In Every Direction) (Shugz & Trance Wax Remix)" },
+  { at: "15:10", artist: "Nifra", title: "Say Say Say" },
+  { at: "17:08", artist: "Bassjackers & Hannah Laing", title: "New Bass, New Kick" },
+  { at: "21:00", artist: "Brisa (ES) & A*S*Y*S", title: "Discoteca" },
+  { at: "21:32", artist: "Pupa Nas T & FOVOS ft. Denise Belfon", title: "Work Edit" },
+  { at: "23:38", artist: "Maddix", title: "Acid For Breakfast" },
+  { at: "26:40", artist: "Hardwell & Maddix ft. Villain", title: "Rave Till My Grave" },
+  { at: "29:43", artist: "GORDO & Reinier Zonneveld", title: "Loco Loco (Maddix Remix)" },
+  { at: "32:01", artist: "LYNSY", title: "303 In My Face" },
+  { at: "34:44", artist: "Energy 52", title: "Cafe Del Mar (David Forbes Remix)" },
+  { at: "37:19", artist: "Maddix & TMPL", title: "The Ultimate Seduction" },
+  { at: "39:30", artist: "Bassjackers & Maddix", title: "Rave Therapy" },
+  { at: "42:09", artist: "Gabry Ponte & T78 & Rudeejay & Da Brozz", title: "Outside World" },
+  { at: "44:03", artist: "Dimitri Vegas & Pat B ft. Sylver", title: "Turn The Tide" },
+  { at: "46:48", artist: "Hardwell & Maddix", title: "AI CARALHO" },
+  { at: "52:52", artist: "Warp Brothers & Lupage", title: "Phatt Bass Reloaded" },
+  { at: "54:24", artist: "DYEN & Maddix", title: "GABBER" },
+  { at: "55:28", artist: "Johannes Schuster & Lil Rave Machine", title: "NRG" },
+  { at: "58:16", artist: "Simtec", title: "Burn The System" },
+  { at: "1:00:14", artist: "Darren Styles", title: "Pump This Party" },
+];

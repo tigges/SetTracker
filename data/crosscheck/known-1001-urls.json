@@ -1,7 +1,16 @@
 {
   "note": "Operator-collected 1001Tracklists URLs. All listed urls[] rows are now seeded. Prefer new operator pastes over this archive. stillMissing1001 is video-in / no 1001 page — do not invent URLs. heldPendingPlayback is 1001-in / no official YT/SC playback — seed held, do not invent or wire fan playback. pendingCuePaste is official playback + operator 1001 URL without cue rows — do not scrape 1001 or invent 1001tl seeds.",
-  "updatedAt": "2026-08-31T10:25:00.000Z",
+  "updatedAt": "2026-08-31T10:30:00.000Z",
   "urls": [
+    {
+      "label": "Maddix · Mainstage, Ultra Europe 2026-07-11",
+      "slug": "yt-0DFmXisYFZI",
+      "name": "TL_MADDIX_ULTRA_EUROPE_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/26gv13vk/maddix-mainstage-ultra-europe-croatia-2026-07-11.html",
+      "youtubeUrl": "https://youtu.be/0DFmXisYFZI",
+      "soundcloudUrl": "https://soundcloud.com/maddixmusic/maddix-live-ultra-europe-2026",
+      "note": "Operator paste 2026-08-31. 26 timed cues. Official Maddix SC + official YT host twin (SC secondary). Overlay TL_MADDIX is too generic and is already TML WE1. hearthis.at/razorator/maddix-liveatultraeuropesplit11-07-2026-razorator is a fan reupload — do not wire. Distinct from TML WE1 yt-1Fu89dxrXI0 / sc-maddixmusic-maddix-live-tomorrowland-2026. Event is Ultra Europe (not Miami). Never sc-https://… or yt-maddixmusic-…."
+    },
     {
       "label": "Mike Williams · Throwback Set, House of Fortune Stage, Tomorrowland WE1 2026-07-17",
       "slug": "yt-mGSV0ELvoEQ",
