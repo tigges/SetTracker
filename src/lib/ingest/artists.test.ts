@@ -267,6 +267,65 @@ assert.equal(kindFreedom.primary.slug, "4444-of-a-kind");
 assert.equal(kindFreedom.primary.name, "4444 OF A KIND");
 assert.equal(kindFreedom.collaborators.length, 0);
 assert.equal(
+  performingCreditFromTitle("Jack Shore WE1 | Tomorrowland 2026"),
+  "Jack Shore",
+);
+assert.equal(
+  performingCreditFromTitle("Nicky Romero WE1 | Tomorrowland 2026"),
+  "Nicky Romero",
+);
+const nickyLibSet = artistsForSet(
+  "Nicky Romero WE1 | Tomorrowland 2026",
+  { name: "Nicky Romero", slug: "nicky-romero", accent: "#00bbf9" },
+);
+assert.equal(nickyLibSet.primary.slug, "nicky-romero");
+assert.equal(nickyLibSet.collaborators.length, 0);
+assert.equal(
+  performingCreditFromTitle("Maddix live @ ULTRA EUROPE 2026 | Mainstage"),
+  "Maddix",
+);
+const maddixUltraSet = artistsForSet(
+  "Maddix live @ ULTRA EUROPE 2026 | Mainstage",
+  { name: "Maddix", slug: "maddix", accent: "#ff4d6d" },
+);
+assert.equal(maddixUltraSet.primary.slug, "maddix");
+assert.equal(maddixUltraSet.collaborators.length, 0);
+const goIlanBeyondSet = artistsForSet(
+  "Giuseppe Ottaviani B2B Ilan Bluestone | Beyond Wonderland 2026",
+  { name: "Giuseppe Ottaviani", slug: "giuseppe-ottaviani", accent: "#7b2cbf" },
+);
+assert.equal(goIlanBeyondSet.primary.slug, "giuseppe-ottaviani");
+assert.equal(goIlanBeyondSet.collaborators.length, 1);
+assert.equal(goIlanBeyondSet.collaborators[0]?.slug, "ilan-bluestone");
+const goDreamstateVanSet = artistsForSet(
+  "Giuseppe Ottaviani | Dreamstate Vancouver 2026",
+  { name: "Giuseppe Ottaviani", slug: "giuseppe-ottaviani", accent: "#7b2cbf" },
+);
+assert.equal(goDreamstateVanSet.primary.slug, "giuseppe-ottaviani");
+assert.equal(goDreamstateVanSet.collaborators.length, 0);
+assert.equal(
+  performingCreditFromTitle(
+    "Giuseppe Ottaviani @ Dreamstate, Vancouver 2026",
+  ),
+  "Giuseppe Ottaviani",
+);
+const goDreamstateSydSet = artistsForSet(
+  "Giuseppe Ottaviani | Dreamstate Sydney 2026",
+  { name: "Giuseppe Ottaviani", slug: "giuseppe-ottaviani", accent: "#7b2cbf" },
+);
+assert.equal(goDreamstateSydSet.primary.slug, "giuseppe-ottaviani");
+assert.equal(goDreamstateSydSet.collaborators.length, 0);
+assert.equal(
+  performingCreditFromTitle("Giuseppe Ottaviani @ Dreamstate, Sydney 2026"),
+  "Giuseppe Ottaviani",
+);
+const jackShoreSet = artistsForSet(
+  "Jack Shore WE1 | Tomorrowland 2026",
+  { name: "Jack Shore", slug: "jack-shore", accent: "#3d5a80" },
+);
+assert.equal(jackShoreSet.primary.slug, "jack-shore");
+assert.equal(jackShoreSet.collaborators.length, 0);
+assert.equal(
   performingCreditFromTitle("Push only WE2 | Tomorrowland 2026"),
   "Push",
 );
@@ -279,6 +338,18 @@ assert.equal(
   performingCreditFromTitle("Mike Williams Throwback"),
   "Mike Williams",
 );
+assert.equal(
+  performingCreditFromTitle(
+    "Mike Williams Throwback Set WE1 | Tomorrowland 2026",
+  ),
+  "Mike Williams",
+);
+const mikeThrowbackSet = artistsForSet(
+  "Mike Williams Throwback Set WE1 | Tomorrowland 2026",
+  { name: "Mike Williams", slug: "mike-williams", accent: "#e9c46a" },
+);
+assert.equal(mikeThrowbackSet.primary.slug, "mike-williams");
+assert.equal(mikeThrowbackSet.collaborators.length, 0);
 assert.equal(
   performingCreditFromTitle("Enrico Sangiuliano Lockdown"),
   "Enrico Sangiuliano",

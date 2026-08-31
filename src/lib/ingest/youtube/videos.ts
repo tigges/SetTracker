@@ -85,7 +85,14 @@ import {
   TL_LAMMER_TML_WE2_CORE_2026,
   TL_NOSI_TML_WE1_CRYSTAL_2026,
   TL_GIUSEPPE_OTTAVIANI_ASOT_AREA_TWO_ROTTERDAM_2026,
+  TL_GIUSEPPE_OTTAVIANI_ASOT_POLAND_LEGIA_2026,
   TL_KOROLOVA_MOTHERLAND_MONUMENT_KYIV_2026,
+  TL_JACK_SHORE_TML_WE1_FREEDOM_2026,
+  TL_NICKY_ROMERO_TML_WE1_LIBRARY_2026,
+  TL_MIKE_WILLIAMS_TML_WE1_THROWBACK_2026,
+  TL_MADDIX_ULTRA_EUROPE_2026,
+  TL_GIUSEPPE_OTTAVIANI_ILAN_BLUESTONE_BEYOND_WONDERLAND_2026,
+  TL_GIUSEPPE_OTTAVIANI_DREAMSTATE_SYDNEY_2026,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_485_CZECH_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
@@ -1550,6 +1557,23 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_MADDIX_TML_WE1_2026,
   },
   {
+    // Official Ultra Europe Mainstage. Official SC twin:
+    // maddixmusic/maddix-live-ultra-europe-2026. hearthis razorator is a
+    // fan reupload — do not wire. Distinct from TML WE1 yt-1Fu89dxrXI0.
+    // eventName is Ultra Europe — not Ultra Music Festival (Miami).
+    video: "https://www.youtube.com/watch?v=0DFmXisYFZI",
+    primaryArtist: dj("Maddix", {
+      accent: "#ff4d6d",
+    }),
+    genre: "Techno",
+    type: "festival",
+    title: "Maddix live @ ULTRA EUROPE 2026 | Mainstage",
+    eventName: "Ultra Europe",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/26gv13vk/maddix-mainstage-ultra-europe-croatia-2026-07-11.html",
+    tracklist1001: TL_MADDIX_ULTRA_EUROPE_2026,
+  },
+  {
     // Tomorrowland official playback — Atmosphere WE2 B2B; title drives collaborator.
     // Official SC twin: maddixmusic/dyen-b2b-maddix-live.
     // Distinct from Dyzen Planaxis WE2 (held).
@@ -1632,6 +1656,23 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_ILLENIUM_TML_WE1_2026,
   },
   {
+    // Tomorrowland official playback — Great Library WE1. Distinct from
+    // Mainstage WE2 (yt-TsyGMhx8izw / yt-B05MAbsCOLA).
+    video: "https://www.youtube.com/watch?v=imKMwwGAaDk",
+    primaryArtist: dj("Nicky Romero", {
+      accent: "#00bbf9",
+      homeCity: "Amerongen, NL",
+    }),
+    genre: "Progressive House",
+    type: "festival",
+    title: "Nicky Romero WE1 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/14y0890k/nicky-romero-the-great-library-stage-tomorrowland-weekend-1-belgium-2026-07-17.html",
+    tracklist1001: TL_NICKY_ROMERO_TML_WE1_LIBRARY_2026,
+  },
+  {
     // Tomorrowland official playback — Mainstage WE2.
     video: "https://www.youtube.com/watch?v=jSJEkiV3cCs",
     primaryArtist: dj("Chase & Status", {
@@ -1659,6 +1700,20 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/ctbyvpk/i-hate-models-freedom-stage-tomorrowland-weekend-1-belgium-2026-07-19.html",
     tracklist1001: TL_I_HATE_MODELS_TML_WE1_2026,
+  },
+  {
+    // Tomorrowland official playback — Freedom Stage WE1. Two 1001
+    // clocks as captured; do not invent the rest of the set.
+    video: "https://www.youtube.com/watch?v=wWgtmdI_adQ",
+    primaryArtist: dj("Jack Shore", { accent: "#3d5a80" }),
+    genre: "House",
+    type: "festival",
+    title: "Jack Shore WE1 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1pqg9hh9/jack-shore-freedom-stage-tomorrowland-weekend-1-belgium-2026-07-19.html",
+    tracklist1001: TL_JACK_SHORE_TML_WE1_FREEDOM_2026,
   },
   {
     // Tomorrowland official playback — Freedom Stage WE1.
@@ -3098,6 +3153,21 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001: TL_MIKE_WILLIAMS_TML_WE2_2026,
   },
   {
+    // Tomorrowland official playback — House of Fortune Throwback WE1.
+    // Distinct from Mainstage WE2 (yt-WnjXXOZ8Te8). Wire line named
+    // yt-1SW3F3LcGCk is not on file — do not mint a second set.
+    video: "https://www.youtube.com/watch?v=mGSV0ELvoEQ",
+    primaryArtist: dj("Mike Williams", { accent: "#e9c46a" }),
+    genre: "Future House",
+    type: "festival",
+    title: "Mike Williams Throwback Set WE1 | Tomorrowland 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Belgium",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/28bhkh99/mike-williams-throwback-set-house-of-fortune-stage-tomorrowland-weekend-1-belgium-2026-07-17.html",
+    tracklist1001: TL_MIKE_WILLIAMS_TML_WE1_THROWBACK_2026,
+  },
+  {
     video: "https://www.youtube.com/watch?v=4G2QlSLG0tI",
     primaryArtist: dj("KAAZE", { accent: "#9b5de5" }),
     genre: "Progressive House",
@@ -3327,6 +3397,54 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/1084t4l1/giuseppe-ottaviani-area-two-a-state-of-trance-event-ahoy-rotterdam-netherlands-2026-02-27.html",
     tracklist1001: TL_GIUSEPPE_OTTAVIANI_ASOT_AREA_TWO_ROTTERDAM_2026,
+  },
+  {
+    // Official playback of ASOT Poland Legia. Host twin with official
+    // artist SC giuseppe-ottaviani-live-at-a. Paste Wire named
+    // sc-giuseppeottaviani-giuseppe-ottaviani-at-legia is not on file.
+    // Distinct from Area Two Rotterdam (yt-YvPI-unGanA) and ASOT 1290.
+    video: "https://www.youtube.com/watch?v=jpsXS2mpO-M",
+    primaryArtist: dj("Giuseppe Ottaviani", { accent: "#7b2cbf" }),
+    genre: "Trance",
+    type: "festival",
+    title: "Giuseppe Ottaviani live at A State of Trance Poland 2026",
+    seriesName: "A State of Trance",
+    eventName: "A State of Trance",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1muply39/giuseppe-ottaviani-a-state-of-trance-event-legia-stadium-poland-2026-06-20.html",
+    tracklist1001: TL_GIUSEPPE_OTTAVIANI_ASOT_POLAND_LEGIA_2026,
+  },
+  {
+    // Official playback of Cheshire Woods Beyond Wonderland SoCal.
+    // Host twin with official artist SC giuseppe-ottaviani-b2b-ilan.
+    // Title drives Ilan Bluestone collaborator. Distinct from solo ASOT
+    // Poland / Area Two. First-line date 2026-03-21 was leftover; 1001 is
+    // 2026-03-28.
+    video: "https://www.youtube.com/watch?v=aezdL54IRZ0",
+    primaryArtist: dj("Giuseppe Ottaviani", { accent: "#7b2cbf" }),
+    genre: "Trance",
+    type: "festival",
+    title: "Giuseppe Ottaviani B2B Ilan Bluestone | Beyond Wonderland 2026",
+    eventName: "Beyond Wonderland",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2uxwty89/giuseppe-ottaviani-ilan-bluestone-cheshire-woods-beyond-wonderland-socal-nos-events-center-san-bernardino-united-states-2026-03-28.html",
+    tracklist1001: TL_GIUSEPPE_OTTAVIANI_ILAN_BLUESTONE_BEYOND_WONDERLAND_2026,
+  },
+  {
+    // Official playback of Dreamstate Sydney Showground 2026-02-07.
+    // Host twin with official artist SC giuseppe-ottaviani-dreamstate.
+    // Distinct from Dreamstate Vancouver (sc-…-giuseppe-ottaviani-1)
+    // and Beyond Wonderland b2b. Overlay TL_GIUSEPPE_OTTAVIANI is too
+    // generic. Never sc-https://….
+    video: "https://www.youtube.com/watch?v=Diu60Wd0kfo",
+    primaryArtist: dj("Giuseppe Ottaviani", { accent: "#7b2cbf" }),
+    genre: "Trance",
+    type: "festival",
+    title: "Giuseppe Ottaviani | Dreamstate Sydney 2026",
+    eventName: "Dreamstate",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/dq5pm4k/giuseppe-ottaviani-dreamstate-sydney-showground-australia-2026-02-07.html",
+    tracklist1001: TL_GIUSEPPE_OTTAVIANI_DREAMSTATE_SYDNEY_2026,
   },
   {
     video: "https://www.youtube.com/watch?v=eNa3hh-3ZF0",

@@ -292,6 +292,21 @@ assert.equal(
   "sc-maddixmusic-maddix-live-tomorrowland-2026",
 );
 
+const maddixUltraSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url ===
+    "https://soundcloud.com/maddixmusic/maddix-live-ultra-europe-2026",
+);
+assert.ok(maddixUltraSc);
+assert.equal(maddixUltraSc.primaryArtist.name, "Maddix");
+assert.equal(maddixUltraSc.type, "festival");
+assert.equal(maddixUltraSc.eventName, "Ultra Europe");
+assert.notEqual(maddixUltraSc.url, maddixTmlSc.url);
+assert.equal(
+  `sc-maddixmusic-${slugify("maddix-live-ultra-europe-2026")}`,
+  "sc-maddixmusic-maddix-live-ultra-europe-2026",
+);
+
 const dyenMaddixSc = SOUNDCLOUD_TRACK_SEEDS.find(
   (s) =>
     s.url === "https://soundcloud.com/maddixmusic/dyen-b2b-maddix-live",
@@ -705,6 +720,49 @@ assert.equal(goAsotPolandSc.type, "festival");
 assert.equal(
   `sc-giuseppeottaviani-${slugify("giuseppe-ottaviani-live-at-a")}`,
   "sc-giuseppeottaviani-giuseppe-ottaviani-live-at-a",
+);
+const goIlanBeyondSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url ===
+    "https://soundcloud.com/giuseppeottaviani/giuseppe-ottaviani-b2b-ilan",
+);
+assert.ok(goIlanBeyondSc);
+assert.equal(goIlanBeyondSc.primaryArtist.name, "Giuseppe Ottaviani");
+assert.equal(goIlanBeyondSc.eventName, "Beyond Wonderland");
+assert.equal(goIlanBeyondSc.type, "festival");
+assert.notEqual(goIlanBeyondSc.url, goAsotPolandSc.url);
+assert.equal(
+  `sc-giuseppeottaviani-${slugify("giuseppe-ottaviani-b2b-ilan")}`,
+  "sc-giuseppeottaviani-giuseppe-ottaviani-b2b-ilan",
+);
+const goDreamstateVanSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url ===
+    "https://soundcloud.com/giuseppeottaviani/giuseppe-ottaviani-1",
+);
+assert.ok(goDreamstateVanSc);
+assert.equal(goDreamstateVanSc.primaryArtist.name, "Giuseppe Ottaviani");
+assert.equal(goDreamstateVanSc.eventName, "Dreamstate");
+assert.equal(goDreamstateVanSc.type, "festival");
+assert.notEqual(goDreamstateVanSc.url, goIlanBeyondSc.url);
+assert.notEqual(goDreamstateVanSc.url, goAsotPolandSc.url);
+assert.equal(
+  `sc-giuseppeottaviani-${slugify("giuseppe-ottaviani-1")}`,
+  "sc-giuseppeottaviani-giuseppe-ottaviani-1",
+);
+const goDreamstateSydSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url ===
+    "https://soundcloud.com/giuseppeottaviani/giuseppe-ottaviani-dreamstate",
+);
+assert.ok(goDreamstateSydSc);
+assert.equal(goDreamstateSydSc.primaryArtist.name, "Giuseppe Ottaviani");
+assert.equal(goDreamstateSydSc.eventName, "Dreamstate");
+assert.equal(goDreamstateSydSc.type, "festival");
+assert.notEqual(goDreamstateSydSc.url, goDreamstateVanSc.url);
+assert.equal(
+  `sc-giuseppeottaviani-${slugify("giuseppe-ottaviani-dreamstate")}`,
+  "sc-giuseppeottaviani-giuseppe-ottaviani-dreamstate",
 );
 const tiniAntsSc = SOUNDCLOUD_TRACK_SEEDS.find(
   (s) =>

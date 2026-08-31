@@ -184,6 +184,15 @@ import {
   TL_KOROLOVA_MOTHERLAND_MONUMENT_KYIV_2026,
   TL_CHRIS_LORENZO_STEREOBLOOM_EDC_MEXICO_2026,
 } from "./festivalCaptures20260828";
+import {
+  TL_JACK_SHORE_TML_WE1_FREEDOM_2026,
+  TL_NICKY_ROMERO_TML_WE1_LIBRARY_2026,
+  TL_MIKE_WILLIAMS_TML_WE1_THROWBACK_2026,
+  TL_MADDIX_ULTRA_EUROPE_2026,
+  TL_GIUSEPPE_OTTAVIANI_ILAN_BLUESTONE_BEYOND_WONDERLAND_2026,
+  TL_GIUSEPPE_OTTAVIANI_DREAMSTATE_VANCOUVER_2026,
+  TL_GIUSEPPE_OTTAVIANI_DREAMSTATE_SYDNEY_2026,
+} from "./festivalCaptures20260831";
 
 export {
   TL_ALESSO_TML_WE2_2026,
@@ -328,6 +337,13 @@ export {
   TL_GIUSEPPE_OTTAVIANI_ASOT_POLAND_LEGIA_2026,
   TL_KOROLOVA_MOTHERLAND_MONUMENT_KYIV_2026,
   TL_CHRIS_LORENZO_STEREOBLOOM_EDC_MEXICO_2026,
+  TL_JACK_SHORE_TML_WE1_FREEDOM_2026,
+  TL_NICKY_ROMERO_TML_WE1_LIBRARY_2026,
+  TL_MIKE_WILLIAMS_TML_WE1_THROWBACK_2026,
+  TL_MADDIX_ULTRA_EUROPE_2026,
+  TL_GIUSEPPE_OTTAVIANI_ILAN_BLUESTONE_BEYOND_WONDERLAND_2026,
+  TL_GIUSEPPE_OTTAVIANI_DREAMSTATE_VANCOUVER_2026,
+  TL_GIUSEPPE_OTTAVIANI_DREAMSTATE_SYDNEY_2026,
 };
 
 function formatClock(sec: number): string {
@@ -2981,6 +2997,9 @@ export const TL_PUSH_TML_WE2_2026: FingerprintSeedRow[] = [
  * Capture overlay used TL_Bassjackers_Great-Library-Stage_Tomorrowland_WE2_Belgium_2026
  * (hyphens illegal). 2026-08-16 official recapture matches the 36 cues already
  * wired (2026-08-01 console capture; 26/36 timed, rest lerped — clocks agree).
+ * 2026-08-31 recapture is the same 36 clocks. Wire line named yt-ypYSzU3fj88
+ * (not on file — do not mint a second set). Paste shortens 44:08 to
+ * "Rave Therapy"; keep "Rave Is My Therapy". Overlay TL_BASSJACKERS is too generic.
  */
 export const TL_BASSJACKERS_TML_WE2_2026: FingerprintSeedRow[] = [
   { at: "0:11", artist: "Bassjackers & WUKONG & Evil Twiin", title: "Rave Baby" },
@@ -5013,9 +5032,23 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
     TL_GIUSEPPE_OTTAVIANI_ASOT_AREA_TWO_ROTTERDAM_2026,
   "sc-giuseppeottaviani-giuseppe-ottaviani-live-at-a":
     TL_GIUSEPPE_OTTAVIANI_ASOT_POLAND_LEGIA_2026,
+  "yt-jpsXS2mpO-M": TL_GIUSEPPE_OTTAVIANI_ASOT_POLAND_LEGIA_2026,
   "yt-ruri2xxu7wU": TL_KOROLOVA_MOTHERLAND_MONUMENT_KYIV_2026,
   "sc-korolovadj-korolova-live-kyiv-ukraine":
     TL_KOROLOVA_MOTHERLAND_MONUMENT_KYIV_2026,
+  "yt-wWgtmdI_adQ": TL_JACK_SHORE_TML_WE1_FREEDOM_2026,
+  "yt-imKMwwGAaDk": TL_NICKY_ROMERO_TML_WE1_LIBRARY_2026,
+  "yt-mGSV0ELvoEQ": TL_MIKE_WILLIAMS_TML_WE1_THROWBACK_2026,
+  "yt-0DFmXisYFZI": TL_MADDIX_ULTRA_EUROPE_2026,
+  "sc-maddixmusic-maddix-live-ultra-europe-2026": TL_MADDIX_ULTRA_EUROPE_2026,
+  "yt-aezdL54IRZ0": TL_GIUSEPPE_OTTAVIANI_ILAN_BLUESTONE_BEYOND_WONDERLAND_2026,
+  "sc-giuseppeottaviani-giuseppe-ottaviani-b2b-ilan":
+    TL_GIUSEPPE_OTTAVIANI_ILAN_BLUESTONE_BEYOND_WONDERLAND_2026,
+  "sc-giuseppeottaviani-giuseppe-ottaviani-1":
+    TL_GIUSEPPE_OTTAVIANI_DREAMSTATE_VANCOUVER_2026,
+  "yt-Diu60Wd0kfo": TL_GIUSEPPE_OTTAVIANI_DREAMSTATE_SYDNEY_2026,
+  "sc-giuseppeottaviani-giuseppe-ottaviani-dreamstate":
+    TL_GIUSEPPE_OTTAVIANI_DREAMSTATE_SYDNEY_2026,
 };
 
 /** Sanity: every seeded clock must parse. */

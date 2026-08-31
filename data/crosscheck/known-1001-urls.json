@@ -1,7 +1,83 @@
 {
   "note": "Operator-collected 1001Tracklists URLs. All listed urls[] rows are now seeded. Prefer new operator pastes over this archive. stillMissing1001 is video-in / no 1001 page — do not invent URLs. heldPendingPlayback is 1001-in / no official YT/SC playback — seed held, do not invent or wire fan playback. pendingCuePaste is official playback + operator 1001 URL without cue rows — do not scrape 1001 or invent 1001tl seeds.",
-  "updatedAt": "2026-08-28T15:45:00.000Z",
+  "updatedAt": "2026-08-31T10:50:00.000Z",
   "urls": [
+    {
+      "label": "Giuseppe Ottaviani · Dreamstate Sydney Showground 2026-02-07",
+      "slug": "yt-Diu60Wd0kfo",
+      "name": "TL_GIUSEPPE_OTTAVIANI_DREAMSTATE_SYDNEY_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/dq5pm4k/giuseppe-ottaviani-dreamstate-sydney-showground-australia-2026-02-07.html",
+      "youtubeUrl": "https://www.youtube.com/watch?v=Diu60Wd0kfo",
+      "soundcloudUrl": "https://soundcloud.com/giuseppeottaviani/giuseppe-ottaviani-dreamstate",
+      "note": "Operator paste 2026-08-31. 20 timed cues on official artist SC + official YT host twin (SC secondary). Overlay TL_GIUSEPPE_OTTAVIANI is too generic. Distinct from Dreamstate Vancouver sc-giuseppeottaviani-giuseppe-ottaviani-1 / Beyond Wonderland b2b / ASOT Poland / Area Two. Title Giuseppe Ottaviani | Dreamstate Sydney 2026 parses to Giuseppe only; event is dreamstate. Mashup-then-component Knightfall Brightside cluster stays as captured. Never sc-https://…."
+    },
+    {
+      "label": "Giuseppe Ottaviani · Dreamstate Vancouver 2026-03-14 (Insomniac Radio The Residency 2026-03-20)",
+      "slug": "sc-giuseppeottaviani-giuseppe-ottaviani-1",
+      "name": "TL_GIUSEPPE_OTTAVIANI_DREAMSTATE_VANCOUVER_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/13zj751t/giuseppe-ottaviani-insomniac-radio-the-residency-dreamstate-vancouver-canada-2026-03-14-2026-03-20.html",
+      "soundcloudUrl": "https://soundcloud.com/giuseppeottaviani/giuseppe-ottaviani-1",
+      "note": "Operator paste 2026-08-31. 18 timed cues on official artist SC. Overlay TL_GIUSEPPE_OTTAVIANI is too generic. Live night is Dreamstate Vancouver 2026-03-14; 1001 frames the Insomniac Radio The Residency airing 2026-03-20. No YouTube in the paste — do not invent a host twin. Distinct from ASOT Poland yt-jpsXS2mpO-M / Area Two Rotterdam / Beyond Wonderland b2b / Digital Society / ASOT 1290. Title Giuseppe Ottaviani | Dreamstate Vancouver 2026 parses to Giuseppe only; event is dreamstate. Never sc-https://…."
+    },
+    {
+      "label": "Giuseppe Ottaviani B2B Ilan Bluestone · Cheshire Woods, Beyond Wonderland SoCal 2026-03-28",
+      "slug": "yt-aezdL54IRZ0",
+      "name": "TL_GIUSEPPE_OTTAVIANI_ILAN_BLUESTONE_BEYOND_WONDERLAND_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/2uxwty89/giuseppe-ottaviani-ilan-bluestone-cheshire-woods-beyond-wonderland-socal-nos-events-center-san-bernardino-united-states-2026-03-28.html",
+      "youtubeUrl": "https://www.youtube.com/watch?v=aezdL54IRZ0",
+      "soundcloudUrl": "https://soundcloud.com/giuseppeottaviani/giuseppe-ottaviani-b2b-ilan",
+      "note": "Operator paste 2026-08-31. 15 timed cues on official artist SC + official YT host twin (SC secondary). Overlay TL_GIUSEPPE_OTTAVIANI is too generic. Distinct from ASOT Poland yt-jpsXS2mpO-M / Area Two Rotterdam / Digital Society / ASOT 1290. First-line date 2026-03-21 was leftover; 1001 is 2026-03-28. Title Giuseppe Ottaviani B2B Ilan Bluestone | Beyond Wonderland 2026 parses collaborator ilan-bluestone. Never sc-https://…."
+    },
+    {
+      "label": "Giuseppe Ottaviani · A State of Trance, Legia Stadium, Poland 2026-06-20",
+      "slug": "yt-jpsXS2mpO-M",
+      "name": "TL_GIUSEPPE_OTTAVIANI_ASOT_POLAND_LEGIA_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/1muply39/giuseppe-ottaviani-a-state-of-trance-event-legia-stadium-poland-2026-06-20.html",
+      "youtubeUrl": "https://youtu.be/jpsXS2mpO-M",
+      "soundcloudUrl": "https://soundcloud.com/giuseppeottaviani/giuseppe-ottaviani-live-at-a",
+      "note": "Operator paste 2026-08-31. 22 timed cues already on official artist SC (2026-08-29). This paste adds official YT jpsXS2mpO-M as host twin (SC secondary). Overlay TL_GIUSEPPE_OTTAVIANI is too generic. Distinct from Area Two Rotterdam yt-YvPI-unGanA, Digital Society Leeds, and ASOT 1290. Paste Wire named sc-giuseppeottaviani-giuseppe-ottaviani-at-legia — not on file; keep live-at-a. Never sc-https://…."
+    },
+    {
+      "label": "Maddix · Mainstage, Ultra Europe 2026-07-11",
+      "slug": "yt-0DFmXisYFZI",
+      "name": "TL_MADDIX_ULTRA_EUROPE_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/26gv13vk/maddix-mainstage-ultra-europe-croatia-2026-07-11.html",
+      "youtubeUrl": "https://youtu.be/0DFmXisYFZI",
+      "soundcloudUrl": "https://soundcloud.com/maddixmusic/maddix-live-ultra-europe-2026",
+      "note": "Operator paste 2026-08-31. 26 timed cues. Official Maddix SC + official YT host twin (SC secondary). Overlay TL_MADDIX is too generic and is already TML WE1. hearthis.at/razorator/maddix-liveatultraeuropesplit11-07-2026-razorator is a fan reupload — do not wire. Distinct from TML WE1 yt-1Fu89dxrXI0 / sc-maddixmusic-maddix-live-tomorrowland-2026. Event is Ultra Europe (not Miami). Never sc-https://… or yt-maddixmusic-…."
+    },
+    {
+      "label": "Mike Williams · Throwback Set, House of Fortune Stage, Tomorrowland WE1 2026-07-17",
+      "slug": "yt-mGSV0ELvoEQ",
+      "name": "TL_MIKE_WILLIAMS_TML_WE1_THROWBACK_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/28bhkh99/mike-williams-throwback-set-house-of-fortune-stage-tomorrowland-weekend-1-belgium-2026-07-17.html",
+      "youtubeUrl": "https://www.youtube.com/watch?v=mGSV0ELvoEQ",
+      "note": "Operator paste 2026-08-31. 51 timed cues on official YT mGSV0ELvoEQ. Was heldPendingPlayback (2026-08-26, 1001 URL only). Overlay TL_MIKE_WILLIAMS is too generic. Distinct from Mainstage WE2 yt-WnjXXOZ8Te8 and Time Lab Parookaville. Paste Wire line named yt-1SW3F3LcGCk — not on file; keep yt-mGSV0ELvoEQ only. First-line date 2026-07-26 was leftover; 1001 is WE1 2026-07-17. Title Mike Williams Throwback Set WE1 | Tomorrowland 2026 parses to Mike Williams (not mike-williams-throwback). No SC in the paste — do not invent an SC slug. Mashup-then-component clusters stay as captured."
+    },
+    {
+      "label": "Nicky Romero · The Great Library Stage, Tomorrowland WE1 2026-07-17",
+      "slug": "yt-imKMwwGAaDk",
+      "name": "TL_NICKY_ROMERO_TML_WE1_LIBRARY_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/14y0890k/nicky-romero-the-great-library-stage-tomorrowland-weekend-1-belgium-2026-07-17.html",
+      "youtubeUrl": "https://youtu.be/imKMwwGAaDk",
+      "note": "Operator paste 2026-08-31. 81 timed cues on official Tomorrowland YT. Overlay TL_NICKY_ROMERO is too generic. Distinct from Mainstage WE2 yt-TsyGMhx8izw / yt-B05MAbsCOLA and Protocol Radio 731. First-line date 2026-07-26 was leftover; 1001 is WE1 2026-07-17. No SC in the paste — do not invent an SC slug. Mashup-then-component clusters stay as captured."
+    },
+    {
+      "label": "Bassjackers · The Great Library Stage, Tomorrowland WE2 2026-07-26",
+      "slug": "yt-BG3Lr9EdWVY",
+      "name": "TL_BASSJACKERS_TML_WE2_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/1muwkg71/bassjackers-the-great-library-stage-tomorrowland-weekend-2-belgium-2026-07-26.html",
+      "youtubeUrl": "https://youtu.be/BG3Lr9EdWVY",
+      "note": "Operator paste 2026-08-31. Already wired 2026-08-01 / recaptured 2026-08-16 (36 cues on official Tomorrowland YT). Re-paste Wire line named yt-ypYSzU3fj88 — not on file; keep yt-BG3Lr9EdWVY only. Overlay TL_BASSJACKERS is too generic. Paste shortens 44:08 to Rave Therapy; catalog keeps Rave Is My Therapy. No SC in the paste — do not invent an SC slug."
+    },
+    {
+      "label": "Jack Shore · Freedom Stage, Tomorrowland WE1 2026-07-19",
+      "slug": "yt-wWgtmdI_adQ",
+      "name": "TL_JACK_SHORE_TML_WE1_FREEDOM_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/1pqg9hh9/jack-shore-freedom-stage-tomorrowland-weekend-1-belgium-2026-07-19.html",
+      "youtubeUrl": "https://www.youtube.com/watch?v=wWgtmdI_adQ",
+      "note": "Operator paste 2026-08-31. Two timed cues on official Tomorrowland YT. Overlay TL_JACK_SHORE is too generic. Distinct from other Freedom WE1 seeds (I Hate Models yt-zMW5SQPS1cY, Netsky, Armin). No SC in the paste — do not invent an SC slug."
+    },
     {
       "label": "Topic · Tomorrowland Friendship Mix 2026-08-20",
       "slug": "sc-tomorrowland-tomorrowland-friendship-mix-with-topic-august-2026",
@@ -340,7 +416,7 @@
       "tracklistUrl": "https://www.1001tracklists.com/tracklist/27bmn1uk/indira-paganotto-area-v-awakenings-festival-netherlands-2025-07-11.html",
       "youtubeUrl": "https://youtu.be/xUdcEDryN8o",
       "soundcloudUrl": "https://soundcloud.com/awakenings/indira-paganotto-awakenings-festival-2025",
-      "note": "Operator paste 2026-08-19. 26 timed cues on official YT + Awakenings SC playbacks. Distinct from Atmosphere TML WE1 2023 and Reinier Zonneveld Area V same day. Keep ID ft. Bilja Krstic — Magla Padnala."
+      "note": "Operator paste 2026-08-19. 26 timed cues on official YT + Awakenings SC playbacks. Distinct from Atmosphere TML WE1 2023 and Reinier Zonneveld Area V same day. Keep ID ft. Bilja Krstic — Magla Padnala. 2026-08-31 recapture matches those clocks. First line named ARTCORE x Awakenings ADE 2026-07-12 and Wire named sc-indirapaganotto-indira-paganotto-artcore-x-awakenings — not on file; keep yt-xUdcEDryN8o + sc-awakenings-indira-paganotto-awakenings-festival-2025 only. Overlay TL_INDIRA_PAGANOTTO is too generic."
     },
     {
       "label": "Claptone · The Masquerade, Buenos Aires 2022-11-05",
@@ -733,11 +809,6 @@
       "tracklistUrl": "https://www.1001tracklists.com/tracklist/2vwfrkc9/cole-terrazas-pink-stage-hard-summer-festival-united-states-2026-08-02.html",
       "eventUrl": "https://www.hardsummer.com/",
       "note": "Operator paste. 1001 has no media links. Seed held until official HARD/Insomniac playback."
-    },
-    {
-      "label": "Mike Williams · Throwback Set, House of Fortune Stage, Tomorrowland WE1 2026-07-17",
-      "tracklistUrl": "https://www.1001tracklists.com/tracklist/28bhkh99/mike-williams-throwback-set-house-of-fortune-stage-tomorrowland-weekend-1-belgium-2026-07-17.html",
-      "note": "Operator paste 2026-08-26 gave the 1001 URL only - NO cue rows and no official YT/SC playback for this performance, so there is no seed to hold yet. Do not scrape 1001 and do not invent cues. Distinct from the Mike Williams WE2 Tomorrowland 2026 set already curated (different weekend, different stage, and this one is a Throwback Set). The paste's Facebook URL was dropped: Dj has no facebook column. Its Instagram link was a post (/p/DcToLAXycHO/), not a profile, so it fails the handle check. Its bio came from Wikipedia under CC-BY-SA 3.0 with an attribution notice; the pin file has no attribution field and existing bios are original prose, so it was left out pending a producer call."
     }
   ],
   "pendingCuePaste": [

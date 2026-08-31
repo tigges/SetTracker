@@ -333,6 +333,19 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     minDurationSec: 15 * 60,
   },
   {
+    // Official Maddix Ultra Europe Mainstage; 1001TL wired via
+    // sc-maddixmusic-maddix-live-ultra-europe-2026 (same list as yt-0DFmXisYFZI).
+    // hearthis razorator is a fan reupload — do not wire. Never sc-https://….
+    url: "https://soundcloud.com/maddixmusic/maddix-live-ultra-europe-2026",
+    primaryArtist: dj("Maddix", {
+      accent: "#ff4d6d",
+    }),
+    genre: "Techno",
+    type: "festival",
+    eventName: "Ultra Europe",
+    minDurationSec: 15 * 60,
+  },
+  {
     // Official Maddix upload of DYEN B2B TML WE2; 1001TL wired via
     // sc-maddixmusic-dyen-b2b-maddix-live (same list as yt-VABm0tIRn2U).
     // Distinct from Maddix Mainstage WE1. Never sc-https://… or yt-maddixmusic-….
@@ -714,9 +727,9 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
   },
   {
     // Official artist SC; 1001TL wired via
-    // sc-giuseppeottaviani-giuseppe-ottaviani-live-at-a. Distinct from
-    // Area Two Rotterdam and Digital Society Leeds. No YouTube in the
-    // paste — do not invent. Never wire sc-https://….
+    // sc-giuseppeottaviani-giuseppe-ottaviani-live-at-a (same list as
+    // yt-jpsXS2mpO-M). Distinct from Area Two Rotterdam and Digital
+    // Society Leeds. Never wire sc-https://….
     url: "https://soundcloud.com/giuseppeottaviani/giuseppe-ottaviani-live-at-a",
     primaryArtist: dj("Giuseppe Ottaviani", { accent: "#7b2cbf" }),
     genre: "Trance",
@@ -724,6 +737,42 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     eventName: "A State of Trance",
     type: "festival",
     minDurationSec: 60 * 60,
+  },
+  {
+    // Official artist SC of the Ilan Bluestone b2b; 1001TL wired via
+    // sc-giuseppeottaviani-giuseppe-ottaviani-b2b-ilan (same list as
+    // yt-aezdL54IRZ0). Distinct from ASOT Poland / Area Two. Never sc-https://….
+    url: "https://soundcloud.com/giuseppeottaviani/giuseppe-ottaviani-b2b-ilan",
+    primaryArtist: dj("Giuseppe Ottaviani", { accent: "#7b2cbf" }),
+    genre: "Trance",
+    type: "festival",
+    eventName: "Beyond Wonderland",
+    minDurationSec: 30 * 60,
+  },
+  {
+    // Official artist SC of the Dreamstate Vancouver night (aired on
+    // Insomniac Radio The Residency 2026-03-20). 1001TL wired via
+    // sc-giuseppeottaviani-giuseppe-ottaviani-1. No YT in the paste.
+    // Distinct from ASOT Poland / Area Two / Beyond Wonderland b2b.
+    // Never sc-https://….
+    url: "https://soundcloud.com/giuseppeottaviani/giuseppe-ottaviani-1",
+    primaryArtist: dj("Giuseppe Ottaviani", { accent: "#7b2cbf" }),
+    genre: "Trance",
+    type: "festival",
+    eventName: "Dreamstate",
+    minDurationSec: 30 * 60,
+  },
+  {
+    // Official artist SC of Dreamstate Sydney; 1001TL wired via
+    // sc-giuseppeottaviani-giuseppe-ottaviani-dreamstate (same list as
+    // yt-Diu60Wd0kfo). Distinct from Vancouver (giuseppe-ottaviani-1).
+    // Never sc-https://….
+    url: "https://soundcloud.com/giuseppeottaviani/giuseppe-ottaviani-dreamstate",
+    primaryArtist: dj("Giuseppe Ottaviani", { accent: "#7b2cbf" }),
+    genre: "Trance",
+    type: "festival",
+    eventName: "Dreamstate",
+    minDurationSec: 30 * 60,
   },
   {
     // Official Cuebrick Conference 297; 1001TL wired via

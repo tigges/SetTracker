@@ -65,6 +65,31 @@ assert.equal(
   "tomorrowland",
 );
 assert.equal(
+  inferFestivalEvent("Maddix live @ ULTRA EUROPE 2026 | Mainstage")?.slug,
+  "ultra-europe",
+);
+assert.equal(
+  inferFestivalEvent(
+    "Giuseppe Ottaviani B2B Ilan Bluestone | Beyond Wonderland 2026",
+  )?.slug,
+  "beyond-wonderland",
+);
+assert.equal(
+  inferFestivalEvent("Giuseppe Ottaviani | Dreamstate Vancouver 2026")
+    ?.slug,
+  "dreamstate",
+);
+assert.equal(
+  inferFestivalEvent("Giuseppe Ottaviani | Dreamstate Sydney 2026")?.slug,
+  "dreamstate",
+);
+assert.equal(inferFestivalEvent("Dreamstate")?.slug, "dreamstate");
+assert.equal(resolveEvent("Ultra Europe").slug, "ultra-europe");
+assert.notEqual(
+  inferFestivalEvent("Maddix live @ ULTRA EUROPE 2026 | Mainstage")?.slug,
+  "ultra-miami",
+);
+assert.equal(
   inferFestivalEvent("MARTEN HØRGER @ Mainstage, Parookaville 2026")?.slug,
   "parookaville",
 );

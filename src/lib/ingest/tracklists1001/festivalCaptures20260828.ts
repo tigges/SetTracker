@@ -895,13 +895,18 @@ export const TL_GIUSEPPE_OTTAVIANI_ASOT_AREA_TWO_ROTTERDAM_2026: FingerprintSeed
  * https://soundcloud.com/giuseppeottaviani/giuseppe-ottaviani-live-at-a
  * oEmbed 2026-08-29: author "Giuseppe Ottaviani", title
  * "Giuseppe Ottaviani live at A State of Trance Poland 2026".
+ * Official YouTube: https://youtu.be/jpsXS2mpO-M (2026-08-31 paste).
  * https://www.1001tracklists.com/tracklist/1muply39/giuseppe-ottaviani-a-state-of-trance-event-legia-stadium-poland-2026-06-20.html
  * Overlay name TL_GIUSEPPE_OTTAVIANI is too generic; constant is the night.
  * Distinct from Area Two Rotterdam (yt-YvPI-unGanA), Digital Society Leeds,
- * and ASOT 1290 radio (yt-bxb6Tglooc4). No YouTube in the paste — do not invent.
- * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["sc-giuseppeottaviani-giuseppe-ottaviani-live-at-a"]
+ * and ASOT 1290 radio (yt-bxb6Tglooc4).
+ * Same 1001 seed + both official permalinks → host twin (YT listing, SC secondary).
+ * Paste Wire named sc-giuseppeottaviani-giuseppe-ottaviani-at-legia — not on
+ * file; keep sc-giuseppeottaviani-giuseppe-ottaviani-live-at-a. Never sc-https://….
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-jpsXS2mpO-M"]
+ *       TRACKLIST_1001_BY_SOURCE_SLUG["sc-giuseppeottaviani-giuseppe-ottaviani-live-at-a"]
  * = TL_GIUSEPPE_OTTAVIANI_ASOT_POLAND_LEGIA_2026
- * Captured 2026-08-29 — provenance 1001tl.
+ * Captured 2026-08-29; YT twin 2026-08-31 — provenance 1001tl.
  */
 export const TL_GIUSEPPE_OTTAVIANI_ASOT_POLAND_LEGIA_2026: FingerprintSeedRow[] = [
   { at: "0:40", artist: "Anyma & OTTAGON", title: "Unstoppable" },

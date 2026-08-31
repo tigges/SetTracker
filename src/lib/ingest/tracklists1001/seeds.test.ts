@@ -211,6 +211,13 @@ import {
   TL_GIUSEPPE_OTTAVIANI_ASOT_POLAND_LEGIA_2026,
   TL_KOROLOVA_MOTHERLAND_MONUMENT_KYIV_2026,
   TL_CHRIS_LORENZO_STEREOBLOOM_EDC_MEXICO_2026,
+  TL_JACK_SHORE_TML_WE1_FREEDOM_2026,
+  TL_NICKY_ROMERO_TML_WE1_LIBRARY_2026,
+  TL_MIKE_WILLIAMS_TML_WE1_THROWBACK_2026,
+  TL_MADDIX_ULTRA_EUROPE_2026,
+  TL_GIUSEPPE_OTTAVIANI_ILAN_BLUESTONE_BEYOND_WONDERLAND_2026,
+  TL_GIUSEPPE_OTTAVIANI_DREAMSTATE_VANCOUVER_2026,
+  TL_GIUSEPPE_OTTAVIANI_DREAMSTATE_SYDNEY_2026,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
@@ -5699,16 +5706,26 @@ for (let i = 1; i < goAsotRotterdam.length; i++) {
 }
 
 // Giuseppe Ottaviani @ ASOT, Legia Stadium, Poland 2026-06-20.
-// Official artist SC only. Overlay TL_GIUSEPPE_OTTAVIANI is too generic.
-// No YouTube in the paste. Distinct from Area Two Rotterdam, Digital
-// Society Leeds, and ASOT 1290.
+// Official YT + official artist SC host twin. Overlay TL_GIUSEPPE_OTTAVIANI
+// is too generic. Paste Wire named …-at-legia is not on file. Distinct
+// from Area Two Rotterdam, Digital Society Leeds, and ASOT 1290.
 assertSeedClocks(TL_GIUSEPPE_OTTAVIANI_ASOT_POLAND_LEGIA_2026);
 assert.equal(TL_GIUSEPPE_OTTAVIANI_ASOT_POLAND_LEGIA_2026.length, 22);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-jpsXS2mpO-M"],
+  TL_GIUSEPPE_OTTAVIANI_ASOT_POLAND_LEGIA_2026,
+);
 assert.equal(
   TRACKLIST_1001_BY_SOURCE_SLUG[
     "sc-giuseppeottaviani-giuseppe-ottaviani-live-at-a"
   ],
   TL_GIUSEPPE_OTTAVIANI_ASOT_POLAND_LEGIA_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-giuseppeottaviani-giuseppe-ottaviani-at-legia"
+  ],
+  undefined,
 );
 assert.notEqual(
   TRACKLIST_1001_BY_SOURCE_SLUG[
@@ -5745,10 +5762,12 @@ assert.equal(
   isWiredTracklistSlug("sc-giuseppeottaviani-giuseppe-ottaviani-live-at-a"),
   true,
 );
+assert.equal(isWiredTracklistSlug("yt-jpsXS2mpO-M"), true);
 assert.equal(
   isSecondaryPlaybackSlug("sc-giuseppeottaviani-giuseppe-ottaviani-live-at-a"),
-  false,
+  true,
 );
+assert.equal(isSecondaryPlaybackSlug("yt-jpsXS2mpO-M"), false);
 const goAsotPoland = tracklist1001RowsToPlays(
   TL_GIUSEPPE_OTTAVIANI_ASOT_POLAND_LEGIA_2026,
 );
@@ -5878,6 +5897,296 @@ for (let i = 1; i < chrisLorenzoEdcMx.length; i++) {
     (chrisLorenzoEdcMx[i]!.timestamp ?? 0) >
       (chrisLorenzoEdcMx[i - 1]!.timestamp ?? 0),
     `Chris Lorenzo stereoBLOOM EDC Mexico clocks must increase at index ${i}`,
+  );
+}
+
+// Jack Shore @ Freedom Stage, Tomorrowland WE1 2026-07-19 — official
+// Tomorrowland YT. Overlay TL_JACK_SHORE is too generic. Two timed IDs
+// as captured.
+assertSeedClocks(TL_JACK_SHORE_TML_WE1_FREEDOM_2026);
+assert.equal(TL_JACK_SHORE_TML_WE1_FREEDOM_2026.length, 2);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-wWgtmdI_adQ"],
+  TL_JACK_SHORE_TML_WE1_FREEDOM_2026,
+);
+const jackShore = tracklist1001RowsToPlays(TL_JACK_SHORE_TML_WE1_FREEDOM_2026);
+assert.equal(jackShore.length, 2);
+assert.equal(jackShore[0]?.provenance, "1001tl");
+assert.equal(jackShore[0]?.timestamp, 20);
+assert.match(jackShore[0]?.trackTitle ?? "", /Sweet Disposition/);
+assert.equal(jackShore[1]?.trackTitle, "POINT OFVIEW");
+assert.equal(jackShore[1]?.timestamp, 29 * 60 + 57);
+assert.equal(isWiredTracklistSlug("yt-wWgtmdI_adQ"), true);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-wWgtmdI_adQ"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-zMW5SQPS1cY"],
+  "Jack Shore is not the I Hate Models Freedom WE1 seed",
+);
+
+// Nicky Romero @ The Great Library Stage, Tomorrowland WE1 2026-07-17 —
+// official Tomorrowland YT. Overlay TL_NICKY_ROMERO is too generic.
+// Distinct from Mainstage WE2.
+assertSeedClocks(TL_NICKY_ROMERO_TML_WE1_LIBRARY_2026);
+assert.equal(TL_NICKY_ROMERO_TML_WE1_LIBRARY_2026.length, 81);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-imKMwwGAaDk"],
+  TL_NICKY_ROMERO_TML_WE1_LIBRARY_2026,
+);
+const nickyLib = tracklist1001RowsToPlays(TL_NICKY_ROMERO_TML_WE1_LIBRARY_2026);
+assert.equal(nickyLib.length, 81);
+assert.equal(nickyLib[0]?.provenance, "1001tl");
+assert.equal(nickyLib[0]?.timestamp, 11);
+assert.equal(nickyLib[0]?.trackTitle, "Afterglow");
+assert.equal(nickyLib[nickyLib.length - 1]?.trackTitle, "I Could Be The One");
+assert.equal(nickyLib[nickyLib.length - 1]?.timestamp, 56 * 60 + 2);
+assert.equal(isWiredTracklistSlug("yt-imKMwwGAaDk"), true);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-imKMwwGAaDk"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-TsyGMhx8izw"],
+  "Library WE1 is not the Nicky Romero Mainstage WE2 seed",
+);
+let nickyLibPrev = -1;
+for (const p of nickyLib) {
+  assert.ok(
+    (p.timestamp ?? 0) >= nickyLibPrev,
+    `Nicky Romero Library WE1 clocks must not go back @ ${p.timestamp}`,
+  );
+  nickyLibPrev = p.timestamp ?? 0;
+}
+
+// Mike Williams Throwback @ House of Fortune, Tomorrowland WE1 2026-07-17 —
+// official YT. Overlay TL_MIKE_WILLIAMS is too generic. Distinct from
+// Mainstage WE2. Paste Wire named yt-1SW3F3LcGCk — not on file.
+assertSeedClocks(TL_MIKE_WILLIAMS_TML_WE1_THROWBACK_2026);
+assert.equal(TL_MIKE_WILLIAMS_TML_WE1_THROWBACK_2026.length, 51);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-mGSV0ELvoEQ"],
+  TL_MIKE_WILLIAMS_TML_WE1_THROWBACK_2026,
+);
+assert.equal(TRACKLIST_1001_BY_SOURCE_SLUG["yt-1SW3F3LcGCk"], undefined);
+const mikeThrowback = tracklist1001RowsToPlays(
+  TL_MIKE_WILLIAMS_TML_WE1_THROWBACK_2026,
+);
+assert.equal(mikeThrowback.length, 51);
+assert.equal(mikeThrowback[0]?.provenance, "1001tl");
+assert.equal(mikeThrowback[0]?.timestamp, 0);
+assert.match(mikeThrowback[0]?.trackTitle ?? "", /Melody/);
+assert.equal(mikeThrowback[mikeThrowback.length - 1]?.trackTitle, "Bambini");
+assert.equal(
+  mikeThrowback[mikeThrowback.length - 1]?.timestamp,
+  59 * 60 + 30,
+);
+assert.equal(isWiredTracklistSlug("yt-mGSV0ELvoEQ"), true);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-mGSV0ELvoEQ"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-WnjXXOZ8Te8"],
+  "Throwback WE1 is not the Mike Williams Mainstage WE2 seed",
+);
+let mikeTbPrev = -1;
+for (const p of mikeThrowback) {
+  assert.ok(
+    (p.timestamp ?? 0) >= mikeTbPrev,
+    `Mike Williams Throwback WE1 clocks must not go back @ ${p.timestamp}`,
+  );
+  mikeTbPrev = p.timestamp ?? 0;
+}
+
+// Maddix @ Mainstage, Ultra Europe 2026-07-11 — official YT + official
+// Maddix SC host twin. Overlay TL_MADDIX is too generic. hearthis
+// razorator stays unwired. Distinct from TML WE1.
+assertSeedClocks(TL_MADDIX_ULTRA_EUROPE_2026);
+assert.equal(TL_MADDIX_ULTRA_EUROPE_2026.length, 26);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-0DFmXisYFZI"],
+  TL_MADDIX_ULTRA_EUROPE_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-maddixmusic-maddix-live-ultra-europe-2026"
+  ],
+  TL_MADDIX_ULTRA_EUROPE_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-maddixmusic-maddix-live-ultra-europe-2026"],
+  undefined,
+);
+assert.equal(isWiredTracklistSlug("yt-0DFmXisYFZI"), true);
+assert.equal(
+  isSecondaryPlaybackSlug("sc-maddixmusic-maddix-live-ultra-europe-2026"),
+  true,
+);
+assert.equal(isSecondaryPlaybackSlug("yt-0DFmXisYFZI"), false);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-0DFmXisYFZI"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-1Fu89dxrXI0"],
+  "Ultra Europe is not the Maddix TML WE1 seed",
+);
+const maddixUltra = tracklist1001RowsToPlays(TL_MADDIX_ULTRA_EUROPE_2026);
+assert.equal(maddixUltra.length, 26);
+assert.equal(maddixUltra[0]?.provenance, "1001tl");
+assert.equal(maddixUltra[0]?.timestamp, 11);
+assert.equal(maddixUltra[0]?.trackTitle, "We Rave");
+assert.equal(maddixUltra[maddixUltra.length - 1]?.trackTitle, "Pump This Party");
+assert.equal(
+  maddixUltra[maddixUltra.length - 1]?.timestamp,
+  1 * 3600 + 14,
+);
+
+// Giuseppe Ottaviani B2B Ilan Bluestone @ Beyond Wonderland SoCal
+// 2026-03-28 — official YT + official artist SC host twin. Overlay
+// TL_GIUSEPPE_OTTAVIANI is too generic. Distinct from ASOT Poland.
+assertSeedClocks(TL_GIUSEPPE_OTTAVIANI_ILAN_BLUESTONE_BEYOND_WONDERLAND_2026);
+assert.equal(
+  TL_GIUSEPPE_OTTAVIANI_ILAN_BLUESTONE_BEYOND_WONDERLAND_2026.length,
+  15,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-aezdL54IRZ0"],
+  TL_GIUSEPPE_OTTAVIANI_ILAN_BLUESTONE_BEYOND_WONDERLAND_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-giuseppeottaviani-giuseppe-ottaviani-b2b-ilan"
+  ],
+  TL_GIUSEPPE_OTTAVIANI_ILAN_BLUESTONE_BEYOND_WONDERLAND_2026,
+);
+assert.equal(isWiredTracklistSlug("yt-aezdL54IRZ0"), true);
+assert.equal(
+  isSecondaryPlaybackSlug("sc-giuseppeottaviani-giuseppe-ottaviani-b2b-ilan"),
+  true,
+);
+assert.equal(isSecondaryPlaybackSlug("yt-aezdL54IRZ0"), false);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-aezdL54IRZ0"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-jpsXS2mpO-M"],
+  "Beyond Wonderland b2b is not the ASOT Poland seed",
+);
+const goIlanBeyond = tracklist1001RowsToPlays(
+  TL_GIUSEPPE_OTTAVIANI_ILAN_BLUESTONE_BEYOND_WONDERLAND_2026,
+);
+assert.equal(goIlanBeyond.length, 15);
+assert.equal(goIlanBeyond[0]?.provenance, "1001tl");
+assert.equal(goIlanBeyond[0]?.timestamp, 0);
+assert.equal(goIlanBeyond[0]?.trackTitle, "Futuro");
+assert.equal(goIlanBeyond[14]?.trackTitle, "Together Again");
+assert.equal(goIlanBeyond[14]?.timestamp, 53 * 60 + 15);
+
+// Giuseppe Ottaviani @ Dreamstate Vancouver 2026-03-14, aired on
+// Insomniac Radio The Residency 2026-03-20. Official artist SC only.
+// Overlay TL_GIUSEPPE_OTTAVIANI is too generic. No YT — not a host twin.
+assertSeedClocks(TL_GIUSEPPE_OTTAVIANI_DREAMSTATE_VANCOUVER_2026);
+assert.equal(TL_GIUSEPPE_OTTAVIANI_DREAMSTATE_VANCOUVER_2026.length, 18);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-giuseppeottaviani-giuseppe-ottaviani-1"
+  ],
+  TL_GIUSEPPE_OTTAVIANI_DREAMSTATE_VANCOUVER_2026,
+);
+assert.equal(
+  isWiredTracklistSlug("sc-giuseppeottaviani-giuseppe-ottaviani-1"),
+  true,
+);
+assert.equal(
+  isSecondaryPlaybackSlug("sc-giuseppeottaviani-giuseppe-ottaviani-1"),
+  false,
+  "SC-only Dreamstate Vancouver is not a host-twin secondary",
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-giuseppeottaviani-giuseppe-ottaviani-1"
+  ],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-aezdL54IRZ0"],
+  "Dreamstate Vancouver is not the Beyond Wonderland b2b seed",
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-giuseppeottaviani-giuseppe-ottaviani-1"
+  ],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-jpsXS2mpO-M"],
+  "Dreamstate Vancouver is not the ASOT Poland seed",
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-giuseppeottaviani-giuseppe-ottaviani-1"
+  ],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-YvPI-unGanA"],
+  "Dreamstate Vancouver is not the Area Two Rotterdam seed",
+);
+const goDreamstateVan = tracklist1001RowsToPlays(
+  TL_GIUSEPPE_OTTAVIANI_DREAMSTATE_VANCOUVER_2026,
+);
+assert.equal(goDreamstateVan.length, 18);
+assert.equal(goDreamstateVan[0]?.provenance, "1001tl");
+assert.equal(goDreamstateVan[0]?.timestamp, 0);
+assert.equal(goDreamstateVan[0]?.trackTitle, "Break The Loop");
+assert.equal(goDreamstateVan[17]?.trackTitle, "Hold On");
+assert.equal(goDreamstateVan[17]?.timestamp, 54 * 60 + 32);
+for (let i = 1; i < goDreamstateVan.length; i++) {
+  assert.ok(
+    (goDreamstateVan[i]?.timestamp ?? 0) >
+      (goDreamstateVan[i - 1]?.timestamp ?? 0),
+    `Giuseppe Ottaviani Dreamstate Vancouver clocks must increase at index ${i}`,
+  );
+}
+
+// Giuseppe Ottaviani @ Dreamstate Sydney Showground 2026-02-07 —
+// official YT + official artist SC host twin. Overlay
+// TL_GIUSEPPE_OTTAVIANI is too generic. Distinct from Vancouver.
+assertSeedClocks(TL_GIUSEPPE_OTTAVIANI_DREAMSTATE_SYDNEY_2026);
+assert.equal(TL_GIUSEPPE_OTTAVIANI_DREAMSTATE_SYDNEY_2026.length, 20);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-Diu60Wd0kfo"],
+  TL_GIUSEPPE_OTTAVIANI_DREAMSTATE_SYDNEY_2026,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-giuseppeottaviani-giuseppe-ottaviani-dreamstate"
+  ],
+  TL_GIUSEPPE_OTTAVIANI_DREAMSTATE_SYDNEY_2026,
+);
+assert.equal(isWiredTracklistSlug("yt-Diu60Wd0kfo"), true);
+assert.equal(
+  isSecondaryPlaybackSlug(
+    "sc-giuseppeottaviani-giuseppe-ottaviani-dreamstate",
+  ),
+  true,
+);
+assert.equal(isSecondaryPlaybackSlug("yt-Diu60Wd0kfo"), false);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-Diu60Wd0kfo"],
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-giuseppeottaviani-giuseppe-ottaviani-1"
+  ],
+  "Dreamstate Sydney is not the Vancouver seed",
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-Diu60Wd0kfo"],
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-aezdL54IRZ0"],
+  "Dreamstate Sydney is not the Beyond Wonderland b2b seed",
+);
+const goDreamstateSyd = tracklist1001RowsToPlays(
+  TL_GIUSEPPE_OTTAVIANI_DREAMSTATE_SYDNEY_2026,
+);
+assert.equal(goDreamstateSyd.length, 20);
+assert.equal(goDreamstateSyd[0]?.provenance, "1001tl");
+assert.equal(goDreamstateSyd[0]?.timestamp, 0);
+assert.equal(goDreamstateSyd[0]?.trackTitle, "Break The Loop");
+assert.equal(
+  goDreamstateSyd[15]?.trackTitle,
+  "Knightfall Brightside (Sandro Vanniel Mashup)",
+);
+assert.equal(goDreamstateSyd[16]?.trackTitle, "Mr. Brightside");
+assert.equal(goDreamstateSyd[17]?.trackTitle, "Knightfall");
+assert.equal(
+  goDreamstateSyd[19]?.trackTitle,
+  "Echo (Giuseppe Ottaviani Remix)",
+);
+assert.equal(goDreamstateSyd[19]?.timestamp, 53 * 60 + 50);
+for (let i = 1; i < goDreamstateSyd.length; i++) {
+  assert.ok(
+    (goDreamstateSyd[i]?.timestamp ?? 0) >
+      (goDreamstateSyd[i - 1]?.timestamp ?? 0),
+    `Giuseppe Ottaviani Dreamstate Sydney clocks must increase at index ${i}`,
   );
 }
 

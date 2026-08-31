@@ -14,6 +14,8 @@ import {
   isCaptureRealNight,
   isFocusChartCaptureNeed,
   isFocusYearCaptureNeed,
+  isStaleYearCaptureNeed,
+  isStaleYearCapturePreset,
   isStudioMonthSpecial,
   presetFromNeed,
   scoreCaptureNeed,
@@ -1114,6 +1116,24 @@ assert.equal(
     mapped,
     now,
   ),
+  "stale",
+  "2016 generic mix is last-year-or-older, not a Capture 1001 ask",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "sc-realblackcoffee-dj-mix-now",
+      title: "DJ Mix 3",
+      primaryDj: "Black Coffee",
+      type: "mix",
+      isFestival: false,
+      festivalSeason: false,
+      top100Rank: 5,
+      publishedAt: "2026-06-01T00:00:00Z",
+    }),
+    mapped,
+    now,
+  ),
   "generic-title",
 );
 assert.equal(
@@ -1164,7 +1184,8 @@ assert.equal(
     mapped,
     now,
   ),
-  null,
+  "stale",
+  "2025 Club Space is last year — do not ask again on /stats",
 );
 assert.equal(
   captureQueueLabel(
@@ -1327,15 +1348,24 @@ assert.ok(
 );
 assert.equal(
   skipCaptureNeed(y2025Star, mapped, now),
-  null,
-  "2025 stays eligible once this year is covered",
+  "stale",
+  "last-year nights stay off Capture 1001",
 );
+assert.equal(isStaleYearCaptureNeed(y2025Star, now), true);
+assert.equal(isStaleYearCaptureNeed(y2026Chart, now), false);
 assert.equal(
   buildCaptureQueueFromNeeds([y2025Star, y2026Chart], {
     limit: 10,
     nowMs: now,
   })[0]?.slug,
   "yt-nameless-2026-night",
+);
+assert.ok(
+  !buildCaptureQueueFromNeeds([y2025Star, y2026Chart], {
+    limit: 10,
+    nowMs: now,
+  }).some((p) => p.slug === "yt-guetta-ultra-2025"),
+  "2025 does not fill leftover Capture 1001 slots",
 );
 
 const year2026Flood = Array.from({ length: 45 }, (_, i) =>
@@ -1355,7 +1385,7 @@ const yearLocked = buildCaptureQueueFromNeeds([...year2026Flood, y2025Star], {
 assert.equal(yearLocked.length, CAPTURE_QUEUE_LIMIT);
 assert.ok(
   !yearLocked.some((p) => p.slug === "yt-guetta-ultra-2025"),
-  "2025 waits while this year still has Top 100 festival gaps",
+  "2025 stays off Capture 1001 while this year still has gaps",
 );
 
 const yearThenOlder = buildCaptureQueueFromNeeds(
@@ -1373,10 +1403,77 @@ const yearThenOlder = buildCaptureQueueFromNeeds(
   { limit: 10, nowMs: now },
 );
 assert.deepEqual(
-  yearThenOlder.slice(0, 2).map((p) => p.slug).sort(),
+  yearThenOlder.map((p) => p.slug).sort(),
   ["yt-creamfields-2026", "yt-nameless-2026-night"],
 );
-assert.equal(yearThenOlder[2]?.slug, "yt-guetta-ultra-2025");
+assert.ok(
+  !yearThenOlder.some((p) => p.slug === "yt-guetta-ultra-2025"),
+  "last-year leftovers do not backfill after this year's nights",
+);
+assert.equal(
+  isStaleYearCapturePreset(
+    {
+      label: "David Guetta Miami Ultra Music Festival 2017",
+      performanceYear: 2017,
+    },
+    now,
+  ),
+  true,
+);
+assert.equal(
+  isStaleYearCapturePreset(
+    { label: "Someone Nameless 2026", performanceYear: 2026 },
+    now,
+  ),
+  false,
+);
+assert.ok(
+  !buildCaptureQueueFromNeeds([y2026Chart], {
+    limit: 10,
+    nowMs: now,
+    extra: [
+      {
+        label: "David Guetta Miami Ultra Music Festival 2017",
+        slug: "yt-guetta-2017-extra",
+        name: "TL_DAVID_GUETTA",
+        searchUrl: "https://www.1001tracklists.com/search#q=guetta%202017",
+        reason: "density:severe",
+        performanceYear: 2017,
+      },
+    ],
+  }).some((p) => p.slug === "yt-guetta-2017-extra"),
+  "stale extras do not jump the Capture 1001 queue",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "yt-indira-awakenings-2025",
+      title: "Indira Paganotto | Awakenings Festival 2025",
+      eventSlug: "awakenings",
+      festivalSeason: true,
+      top100Rank: 40,
+      publishedAt: "2025-07-11T00:00:00Z",
+    }),
+    mapped,
+    now,
+  ),
+  "stale",
+);
+assert.equal(
+  skipCaptureNeed(
+    row({
+      slug: "yt-jan-2027-drops-2026",
+      title: "Someone Nameless 2026",
+      eventSlug: "nameless",
+      festivalSeason: true,
+      publishedAt: "2026-06-15T00:00:00Z",
+    }),
+    mapped,
+    Date.parse("2027-01-02T00:00:00Z"),
+  ),
+  "stale",
+  "January moves the focus year forward",
+);
 
 assert.equal(isStudioMonthSpecial("Hardwell presents Euphoria - August, 2026"), true);
 assert.equal(
@@ -1531,10 +1628,13 @@ const nightsThenMix = buildCaptureQueueFromNeeds(
   { limit: 10, nowMs: now },
 );
 assert.equal(nightsThenMix[0]?.slug, "yt-pacha-2026-night");
-assert.equal(nightsThenMix[1]?.slug, "yt-guetta-ultra-2025");
 assert.ok(
-  nightsThenMix.slice(2).every((p) => p.slug.startsWith("sc-studio-mix-")),
-  "older real nights still beat this year's studio mixes",
+  !nightsThenMix.some((p) => p.slug === "yt-guetta-ultra-2025"),
+  "last-year nights do not beat this year's studio mixes onto Capture 1001",
+);
+assert.ok(
+  nightsThenMix.slice(1).every((p) => p.slug.startsWith("sc-studio-mix-")),
+  "this year's studio mixes fill after this year's nights",
 );
 
 console.log("nextCaptures.queue.test.ts ok");
