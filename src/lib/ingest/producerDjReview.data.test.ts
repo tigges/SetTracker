@@ -53,6 +53,17 @@ describe("producerDjReview.data", () => {
       "layton-giordani",
     );
     assert.equal(PRODUCER_DJ_ALIASES["maceo-plex-bart-skils"], "maceo-plex");
+    assert.equal(PRODUCER_DJ_ALIASES["muchakk-mu540"], "mu540");
+    assert.equal(isProducerDiscardSlug("muchakk-mu540"), true);
+    assert.equal(isProducerDiscardName("MUCHAKK (Mu540"), true);
+    assert.equal(isProducerDiscardName("MU540"), false);
+    assert.equal(isProducerDiscardName("Mochakk"), false);
+    assert.equal(PRODUCER_DJ_ALIASES["push-only"], "push");
+    assert.equal(PRODUCER_DJ_ALIASES["yotto-s-odd-world"], "yotto");
+    assert.equal(isProducerDiscardSlug("bonobo-solo"), true);
+    assert.equal(isProducerDiscardName("Bonobo Solo"), true);
+    assert.equal(isProducerDiscardName("Push"), false);
+    assert.equal(isProducerDiscardName("Yotto"), false);
   });
 
   it("drops non-DJ / unverified identities without hiding real names", () => {

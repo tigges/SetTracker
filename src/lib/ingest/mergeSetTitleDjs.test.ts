@@ -150,6 +150,46 @@ describe("resolveCanonicalFromSetTitleDj", () => {
     );
   });
 
+  it("folds set/series chrome leftovers onto the artist", () => {
+    assert.deepEqual(
+      resolveCanonicalFromSetTitleDj("Push only", "push-only"),
+      { slug: "push", name: "Push" },
+    );
+    assert.deepEqual(
+      resolveCanonicalFromSetTitleDj("Bonobo Solo", "bonobo-solo"),
+      { slug: "bonobo", name: "Bonobo" },
+    );
+    assert.deepEqual(
+      resolveCanonicalFromSetTitleDj(
+        "Enrico Sangiuliano Lockdown",
+        "enrico-sangiuliano-lockdown",
+      ),
+      { slug: "enrico-sangiuliano", name: "Enrico Sangiuliano" },
+    );
+    assert.deepEqual(
+      resolveCanonicalFromSetTitleDj(
+        "Mike Williams Throwback",
+        "mike-williams-throwback",
+      ),
+      { slug: "mike-williams", name: "Mike Williams" },
+    );
+    assert.deepEqual(
+      resolveCanonicalFromSetTitleDj("Yotto's Odd World", "yotto-s-odd-world"),
+      { slug: "yotto", name: "Yotto" },
+    );
+  });
+
+  it("folds MUCHAKK performance leftover onto MU540", () => {
+    assert.deepEqual(
+      resolveCanonicalFromSetTitleDj(
+        "MUCHAKK (Mu540",
+        "muchakk-mu540",
+        ["MUCHAKK (Mu540 b2b Mochakk) @ STB São Paulo 2024"],
+      ),
+      { slug: "mu540", name: "MU540" },
+    );
+  });
+
   it("reads the guest off a label radio title", () => {
     assert.equal(
       guestFromSeriesByTitle("Keinemusik Radio Show by Lara Bee 17.07.2026"),

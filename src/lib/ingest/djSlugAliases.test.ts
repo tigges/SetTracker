@@ -38,6 +38,22 @@ describe("djSlugAliases", () => {
     assert.equal(canonicalDjSlug("mandy-mondays"), "mandy");
   });
 
+  it("folds MUCHAKK performance leftover onto MU540", () => {
+    assert.equal(canonicalDjSlug("muchakk-mu540"), "mu540");
+    assert.equal(canonicalDjSlug("mu540"), "mu540");
+    assert.equal(canonicalDjSlug("mochakk"), "mochakk");
+  });
+
+  it("folds set/series chrome leftovers onto the artist", () => {
+    assert.equal(canonicalDjSlug("push-only"), "push");
+    assert.equal(canonicalDjSlug("bonobo-solo"), "bonobo");
+    assert.equal(canonicalDjSlug("enrico-sangiuliano-lockdown"), "enrico-sangiuliano");
+    assert.equal(canonicalDjSlug("mike-williams-throwback"), "mike-williams");
+    assert.equal(canonicalDjSlug("yotto-s-odd-world"), "yotto");
+    assert.equal(canonicalDjSlug("push"), "push");
+    assert.equal(canonicalDjSlug("yotto"), "yotto");
+  });
+
   it("folds Recovery balloon film slugs onto Hot Since 82", () => {
     assert.equal(
       canonicalDjSlug("recovery-hot-air-balloon"),

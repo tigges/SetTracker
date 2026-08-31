@@ -369,7 +369,7 @@
   },
   {
     "kind": "dj",
-    "slug": "bonobo-solo",
+    "slug": "bonobo",
     "imageUrl": "https://i1.sndcdn.com/avatars-7dycmMr3XG477In2-sNqZsg-t500x500.jpg",
     "youtube": "https://www.youtube.com/@bonobo",
     "soundcloud": "https://soundcloud.com/bonobo",
@@ -835,16 +835,6 @@
     "youtube": "https://www.youtube.com/@EnricoSangiulianoOfficial",
     "soundcloud": "https://soundcloud.com/enricosangiuliano",
     "homeCity": "Reggio Emilia, Italy",
-    "genre": "Techno"
-  },
-  {
-    "kind": "dj",
-    "slug": "enrico-sangiuliano-lockdown",
-    "imageUrl": "https://i1.sndcdn.com/avatars-z3NQ11OPAvD0ottV-jEhvpg-t500x500.jpg",
-    "instagram": "https://instagram.com/enricosangiuliano",
-    "soundcloud": "https://soundcloud.com/enricosangiuliano",
-    "homeCity": "Reggio Emilia, Italy",
-    "bio": "Techno project associated with Enrico Sangiuliano, focused on driving, meticulously produced electronic sets.",
     "genre": "Techno"
   },
   {
@@ -1978,11 +1968,6 @@
   },
   {
     "kind": "dj",
-    "slug": "muchakk-mu540",
-    "genre": "House"
-  },
-  {
-    "kind": "dj",
     "slug": "myles-o-neal",
     "imageUrl": "https://cdn-images.dzcdn.net/images/artist/a24f3f8602c83c63757873be5f21cca1/250x250-000000-80-0-0.jpg",
     "website": "https://mylesoneal.com",
@@ -2856,11 +2841,10 @@
   },
   {
     "kind": "dj",
-    "slug": "yotto-s-odd-world",
+    "slug": "yotto",
     "imageUrl": "https://i1.sndcdn.com/avatars-6320TVCCiJ3v8rRx-iz2Kdg-t500x500.jpg",
     "soundcloud": "https://soundcloud.com/yotto",
     "homeCity": "Helsinki, Finland",
-    "bio": "Yotto-led project presenting melodic house, progressive music and the broader Odd One Out label sound.",
     "genre": "Melodic House"
   },
   {

@@ -267,6 +267,27 @@ assert.equal(kindFreedom.primary.slug, "4444-of-a-kind");
 assert.equal(kindFreedom.primary.name, "4444 OF A KIND");
 assert.equal(kindFreedom.collaborators.length, 0);
 assert.equal(
+  performingCreditFromTitle("Push only WE2 | Tomorrowland 2026"),
+  "Push",
+);
+assert.equal(
+  performingCreditFromTitle("Push WE2 | Tomorrowland 2026"),
+  "Push",
+);
+assert.equal(performingCreditFromTitle("Bonobo Solo"), "Bonobo");
+assert.equal(
+  performingCreditFromTitle("Mike Williams Throwback"),
+  "Mike Williams",
+);
+assert.equal(
+  performingCreditFromTitle("Enrico Sangiuliano Lockdown"),
+  "Enrico Sangiuliano",
+);
+assert.equal(
+  performingCreditFromTitle("Yotto's Odd World"),
+  "Yotto",
+);
+assert.equal(
   performingCreditFromTitle("Bullet Tooth WE2 | Tomorrowland 2026"),
   "Bullet Tooth",
 );
@@ -370,6 +391,32 @@ assert.equal(mu540Set.primary.slug, "mu540");
 // Must resolve to the existing roster Mochakk, not a new spelling.
 assert.deepEqual(
   mu540Set.collaborators.map((c) => c.slug),
+  ["mochakk"],
+);
+
+// Official Mochakk SoundCloud title. MUCHAKK is the performance nickname,
+// not an artist — the parenthetical credit is MU540 b2b Mochakk.
+assert.equal(
+  performingCreditFromTitle(
+    "MUCHAKK (Mu540 b2b Mochakk) @ STB São Paulo 2024",
+  ),
+  "Mu540 b2b Mochakk",
+);
+const muchakkSc = artistsForSet(
+  "MUCHAKK (Mu540 b2b Mochakk) @ STB São Paulo 2024",
+);
+assert.equal(muchakkSc.primary.slug, "mu540");
+assert.equal(muchakkSc.primary.name, "Mu540");
+assert.deepEqual(
+  muchakkSc.collaborators.map((c) => c.slug),
+  ["mochakk"],
+);
+const muchakkPiped = artistsForSet(
+  "MU540 b2b Mochakk | MUCHAKK @ STB São Paulo 2024",
+);
+assert.equal(muchakkPiped.primary.slug, "mu540");
+assert.deepEqual(
+  muchakkPiped.collaborators.map((c) => c.slug),
   ["mochakk"],
 );
 

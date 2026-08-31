@@ -667,7 +667,9 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
   },
   {
     // MU540's own channel, 1h24m b2b with Mochakk at sotrackboa, São Paulo.
-    // sotrackboa is not in KNOWN_EVENTS, so no eventName is invented.
+    // Mochakk's SoundCloud upload titles this "MUCHAKK" — that is the
+    // performance nickname, not a third DJ. sotrackboa is not in
+    // KNOWN_EVENTS, so no eventName is invented.
     video: "https://www.youtube.com/watch?v=gcHLUNPDb_U",
     primaryArtist: dj("MU540", {
       accent: "#e76f51",
@@ -1893,7 +1895,8 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     }),
     genre: "Trance",
     type: "festival",
-    title: "Push only WE2 | Tomorrowland 2026",
+    // "only" was lineup chrome ("Push only WE2") and minted a junk DJ.
+    title: "Push WE2 | Tomorrowland 2026",
     seriesName: "Tomorrowland",
     eventName: "Tomorrowland Belgium",
     tracklist1001Url:

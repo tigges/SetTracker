@@ -71,6 +71,13 @@ const EXPLICIT_ALIAS: Record<string, string> = {
   "chris-lake-full-set": "chris-lake",
   "recovery-hot-air-balloon": "hot-since-82",
   "recovery-hot-air-balloon-set": "hot-since-82",
+  // MUCHAKK is a Mu540 b2b Mochakk performance nickname, not a DJ
+  "muchakk-mu540": "mu540",
+  "push-only": "push",
+  "bonobo-solo": "bonobo",
+  "enrico-sangiuliano-lockdown": "enrico-sangiuliano",
+  "mike-williams-throwback": "mike-williams",
+  "yotto-s-odd-world": "yotto",
   ...PRODUCER_DJ_ALIASES,
 };
 
@@ -219,6 +226,12 @@ function displayNameForSlug(slug: string, fallbackName: string): string {
     "charlotte-de-witte": "Charlotte de Witte",
     "indira-paganotto": "Indira Paganotto",
     mochakk: "Mochakk",
+    mu540: "MU540",
+    push: "Push",
+    bonobo: "Bonobo",
+    "enrico-sangiuliano": "Enrico Sangiuliano",
+    "mike-williams": "Mike Williams",
+    yotto: "Yotto",
     folamour: "Folamour",
     "hot-since-82": "Hot Since 82",
     "chris-lake": "Chris Lake",
