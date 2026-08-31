@@ -1171,12 +1171,27 @@ assert.equal(
   assert.equal(jauz.imageUrl, undefined);
 }
 
-// BROHUG — operator paste. Official YT @brohugofficial only.
-// "Official Youtube-channel for BROHUG" is not a distinctive bio.
-// No site, city, genre, or other handles in the paste.
+// BROHUG — operator paste. wearebrohug.com + matching @brohugofficial
+// YT/IG/SC. Facebook has no pin column. "Official Youtube-channel
+// for BROHUG" is not a distinctive bio. No city or genre in the paste.
+assert.equal(
+  nameOverlapsHandle("BROHUG", "https://www.wearebrohug.com/"),
+  true,
+);
 assert.equal(
   nameOverlapsHandle("BROHUG", "https://www.youtube.com/@brohugofficial"),
   true,
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "brohug",
+    name: "BROHUG",
+    field: "website",
+    value: "https://www.wearebrohug.com/",
+    evidence: "operator paste, official site",
+  }).value,
+  "https://wearebrohug.com",
 );
 assert.equal(
   evaluateEntityCompleteRow({
@@ -1189,14 +1204,47 @@ assert.equal(
   }).value,
   "https://www.youtube.com/@brohugofficial",
 );
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "brohug",
+    name: "BROHUG",
+    field: "instagram",
+    value: "https://www.instagram.com/brohugofficial/",
+    evidence: "operator paste",
+  }).value,
+  "https://instagram.com/brohugofficial",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "brohug",
+    name: "BROHUG",
+    field: "soundcloud",
+    value: "https://soundcloud.com/brohugofficial",
+    evidence: "operator paste",
+  }).value,
+  "https://soundcloud.com/brohugofficial",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "brohug",
+    name: "BROHUG",
+    field: "facebook",
+    value: "https://www.facebook.com/brohugofficial/",
+    evidence: "operator paste",
+  }).drop,
+  "unknown field",
+);
 {
   const brohug = loadEntityCompletePins().find((p) => p.slug === "brohug");
   assert.ok(brohug);
   assert.equal(brohug.kind, "dj");
+  assert.equal(brohug.website, "https://wearebrohug.com");
+  assert.equal(brohug.instagram, "https://instagram.com/brohugofficial");
   assert.equal(brohug.youtube, "https://www.youtube.com/@brohugofficial");
-  assert.equal(brohug.website, undefined);
-  assert.equal(brohug.instagram, undefined);
-  assert.equal(brohug.soundcloud, undefined);
+  assert.equal(brohug.soundcloud, "https://soundcloud.com/brohugofficial");
   assert.equal(brohug.twitter, undefined);
   assert.equal(brohug.homeCity, undefined);
   assert.equal(brohug.bio, undefined);
