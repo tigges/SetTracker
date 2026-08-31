@@ -750,6 +750,19 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     minDurationSec: 30 * 60,
   },
   {
+    // Official artist SC of the Dreamstate Vancouver night (aired on
+    // Insomniac Radio The Residency 2026-03-20). 1001TL wired via
+    // sc-giuseppeottaviani-giuseppe-ottaviani-1. No YT in the paste.
+    // Distinct from ASOT Poland / Area Two / Beyond Wonderland b2b.
+    // Never sc-https://….
+    url: "https://soundcloud.com/giuseppeottaviani/giuseppe-ottaviani-1",
+    primaryArtist: dj("Giuseppe Ottaviani", { accent: "#7b2cbf" }),
+    genre: "Trance",
+    type: "festival",
+    eventName: "Dreamstate",
+    minDurationSec: 30 * 60,
+  },
+  {
     // Official Cuebrick Conference 297; 1001TL wired via
     // sc-cuebrick-cuebricks-conference-297. Never wire sc-https://….
     url: "https://soundcloud.com/cuebrick/cuebricks-conference-297",

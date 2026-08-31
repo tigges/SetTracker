@@ -297,6 +297,18 @@ const goIlanBeyondSet = artistsForSet(
 assert.equal(goIlanBeyondSet.primary.slug, "giuseppe-ottaviani");
 assert.equal(goIlanBeyondSet.collaborators.length, 1);
 assert.equal(goIlanBeyondSet.collaborators[0]?.slug, "ilan-bluestone");
+const goDreamstateVanSet = artistsForSet(
+  "Giuseppe Ottaviani | Dreamstate Vancouver 2026",
+  { name: "Giuseppe Ottaviani", slug: "giuseppe-ottaviani", accent: "#7b2cbf" },
+);
+assert.equal(goDreamstateVanSet.primary.slug, "giuseppe-ottaviani");
+assert.equal(goDreamstateVanSet.collaborators.length, 0);
+assert.equal(
+  performingCreditFromTitle(
+    "Giuseppe Ottaviani @ Dreamstate, Vancouver 2026",
+  ),
+  "Giuseppe Ottaviani",
+);
 const jackShoreSet = artistsForSet(
   "Jack Shore WE1 | Tomorrowland 2026",
   { name: "Jack Shore", slug: "jack-shore", accent: "#3d5a80" },

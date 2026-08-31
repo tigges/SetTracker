@@ -260,3 +260,40 @@ export const TL_GIUSEPPE_OTTAVIANI_ILAN_BLUESTONE_BEYOND_WONDERLAND_2026: Finger
     { at: "48:40", artist: "Giuseppe Ottaviani ft. Diana Goldberg", title: "Hold On" },
     { at: "53:15", artist: "Giuseppe Ottaviani & Ilan Bluestone", title: "Together Again" },
   ];
+
+/**
+ * Giuseppe Ottaviani @ Insomniac Radio The Residency
+ * (Dreamstate Vancouver, Canada 2026-03-14) 2026-03-20
+ * Official artist SoundCloud:
+ * https://soundcloud.com/giuseppeottaviani/giuseppe-ottaviani-1
+ * https://www.1001tracklists.com/tracklist/13zj751t/giuseppe-ottaviani-insomniac-radio-the-residency-dreamstate-vancouver-canada-2026-03-14-2026-03-20.html
+ * Overlay name TL_GIUSEPPE_OTTAVIANI is too generic (ASOT Poland / Area Two /
+ * Digital Society / Beyond Wonderland / ASOT 1290). Constant is the
+ * Dreamstate Vancouver night (aired on Insomniac Radio The Residency).
+ * No YouTube in the paste — do not invent a host twin.
+ * Distinct from ASOT Poland / Area Two / Beyond Wonderland b2b.
+ * Never sc-https://….
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["sc-giuseppeottaviani-giuseppe-ottaviani-1"]
+ * Captured 2026-08-31 — provenance 1001tl.
+ */
+export const TL_GIUSEPPE_OTTAVIANI_DREAMSTATE_VANCOUVER_2026: FingerprintSeedRow[] =
+  [
+    { at: "0:00", artist: "ARTBAT & Giuseppe Ottaviani & Conor Ross", title: "Break The Loop" },
+    { at: "4:30", artist: "OTTAGON", title: "The Underground" },
+    { at: "7:37", artist: "Giuseppe Ottaviani & Hypaton", title: "Soundboy" },
+    { at: "10:34", artist: "Max Styler & Three Drives", title: "Greece 2000 (Max Styler Rework)" },
+    { at: "13:12", artist: "Armin van Buuren", title: "Fathers and Sons (OTTAGON Remix)" },
+    { at: "17:47", artist: "Giuseppe Ottaviani & Andrew Rayel ft. Alessia Labate", title: "How Do We Know" },
+    { at: "21:08", artist: "Nicole Moudaber & Space 92", title: "Eyes On Me" },
+    { at: "24:10", artist: "Eric Prydz", title: "Every Day (Sneijder pres. Alt1 Remix)" },
+    { at: "27:25", artist: "LAWTON", title: "Bad Potato" },
+    { at: "29:37", artist: "KAAZE & Mentum", title: "Antidote" },
+    { at: "32:50", artist: "Armin van Buuren", title: "Sonic Samba (Rising Star Remix)" },
+    { at: "36:40", artist: "Mauro Somm", title: "Energy" },
+    { at: "38:23", artist: "The Prodigy", title: "Voodoo People" },
+    { at: "40:05", artist: "Giuseppe Ottaviani & Dicosis", title: "Run Away" },
+    { at: "44:14", artist: "Giuseppe Ottaviani & Gabry Ponte & Crooked Bangs", title: "Astra" },
+    { at: "47:37", artist: "Dimension ft. Karen Harding", title: "Guardian Angel (Ben Nicky Remix)" },
+    { at: "50:45", artist: "The Rocketman & Veracocha", title: "Carte Blanche" },
+    { at: "54:32", artist: "Giuseppe Ottaviani ft. Diana Goldberg", title: "Hold On" },
+  ];

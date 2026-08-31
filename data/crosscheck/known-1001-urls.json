@@ -1,7 +1,15 @@
 {
   "note": "Operator-collected 1001Tracklists URLs. All listed urls[] rows are now seeded. Prefer new operator pastes over this archive. stillMissing1001 is video-in / no 1001 page — do not invent URLs. heldPendingPlayback is 1001-in / no official YT/SC playback — seed held, do not invent or wire fan playback. pendingCuePaste is official playback + operator 1001 URL without cue rows — do not scrape 1001 or invent 1001tl seeds.",
-  "updatedAt": "2026-08-31T10:38:00.000Z",
+  "updatedAt": "2026-08-31T10:45:00.000Z",
   "urls": [
+    {
+      "label": "Giuseppe Ottaviani · Dreamstate Vancouver 2026-03-14 (Insomniac Radio The Residency 2026-03-20)",
+      "slug": "sc-giuseppeottaviani-giuseppe-ottaviani-1",
+      "name": "TL_GIUSEPPE_OTTAVIANI_DREAMSTATE_VANCOUVER_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/13zj751t/giuseppe-ottaviani-insomniac-radio-the-residency-dreamstate-vancouver-canada-2026-03-14-2026-03-20.html",
+      "soundcloudUrl": "https://soundcloud.com/giuseppeottaviani/giuseppe-ottaviani-1",
+      "note": "Operator paste 2026-08-31. 18 timed cues on official artist SC. Overlay TL_GIUSEPPE_OTTAVIANI is too generic. Live night is Dreamstate Vancouver 2026-03-14; 1001 frames the Insomniac Radio The Residency airing 2026-03-20. No YouTube in the paste — do not invent a host twin. Distinct from ASOT Poland yt-jpsXS2mpO-M / Area Two Rotterdam / Beyond Wonderland b2b / Digital Society / ASOT 1290. Title Giuseppe Ottaviani | Dreamstate Vancouver 2026 parses to Giuseppe only; event is dreamstate. Never sc-https://…."
+    },
     {
       "label": "Giuseppe Ottaviani B2B Ilan Bluestone · Cheshire Woods, Beyond Wonderland SoCal 2026-03-28",
       "slug": "yt-aezdL54IRZ0",
