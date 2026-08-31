@@ -35,6 +35,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: loc("/atlas"), changeFrequency: "monthly", priority: 0.7 },
     { url: loc("/stats"), changeFrequency: "daily", priority: 0.4 },
     { url: loc("/about"), changeFrequency: "monthly", priority: 0.5 },
+    { url: loc("/wishlist"), changeFrequency: "monthly", priority: 0.4 },
     { url: loc("/search"), changeFrequency: "weekly", priority: 0.4 },
     { url: loc("/labels"), changeFrequency: "monthly", priority: 0.3 },
     { url: loc("/tracks"), changeFrequency: "weekly", priority: 0.3 },
