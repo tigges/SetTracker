@@ -226,6 +226,7 @@ import {
   TL_TCHAMI_MALAA_EDC_LV_CIRCUITGROUNDS_2025,
   TL_JAUZ_GET_CRANKED_BILL_GRAHAM_SF_2025,
   TL_WENZDAY_ILLFEST_WICKED_OAKS_AUSTIN_2025,
+  TL_BROHUG_BASS_HOUSE_MIXTAPE_2026,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
@@ -6453,6 +6454,28 @@ for (let i = 1; i < wenzdayIllfest.length; i++) {
     (wenzdayIllfest[i]?.timestamp ?? 0) >
       (wenzdayIllfest[i - 1]?.timestamp ?? 0),
     `Wenzday Illfest Wicked Oaks clocks must increase at index ${i}`,
+  );
+}
+
+// BROHUG - Bass House Mixtape 2026 — wired, artist-owned BROHOUSE label YT.
+assertSeedClocks(TL_BROHUG_BASS_HOUSE_MIXTAPE_2026);
+assert.equal(TL_BROHUG_BASS_HOUSE_MIXTAPE_2026.length, 8);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-3nd9yXIty2w"],
+  TL_BROHUG_BASS_HOUSE_MIXTAPE_2026,
+);
+assert.equal(isWiredTracklistSlug("yt-3nd9yXIty2w"), true);
+const brohugMixtape = tracklist1001RowsToPlays(TL_BROHUG_BASS_HOUSE_MIXTAPE_2026);
+assert.equal(brohugMixtape.length, 8);
+assert.equal(brohugMixtape[0]?.provenance, "1001tl");
+assert.equal(brohugMixtape[0]?.timestamp, 0);
+assert.equal(brohugMixtape[0]?.trackTitle, "Face Melt");
+assert.equal(brohugMixtape[7]?.trackTitle, "Rats");
+assert.equal(brohugMixtape[7]?.timestamp, 18 * 60 + 30);
+for (let i = 1; i < brohugMixtape.length; i++) {
+  assert.ok(
+    (brohugMixtape[i]?.timestamp ?? 0) > (brohugMixtape[i - 1]?.timestamp ?? 0),
+    `BROHUG Bass House Mixtape clocks must increase at index ${i}`,
   );
 }
 

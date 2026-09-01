@@ -185,6 +185,7 @@ import {
   TL_MORTEN_MALAA_TML_WINTER_MAINSTAGE_2026,
   TL_TCHAMI_MALAA_EDC_LV_CIRCUITGROUNDS_2025,
   TL_WENZDAY_ILLFEST_WICKED_OAKS_AUSTIN_2025,
+  TL_BROHUG_BASS_HOUSE_MIXTAPE_2026,
 } from "../tracklists1001/seeds";
 import type { RawArtist } from "../types";
 import { slugify } from "../types";
@@ -3664,6 +3665,22 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/2q86zwr9/wenzday-illfest-wicked-oaks-festival-carson-creek-ranch-austin-united-states-2025-10-25.html",
     tracklist1001: TL_WENZDAY_ILLFEST_WICKED_OAKS_AUSTIN_2025,
+  },
+  {
+    // BROHOUSE is BROHUG's own label (founded by the trio) — artist-owned
+    // account, not the personal @brohugofficial channel.
+    video: "https://www.youtube.com/watch?v=3nd9yXIty2w",
+    primaryArtist: dj("BROHUG", {
+      accent: "#00c2ff",
+      homeCity: "Stockholm, Sweden",
+    }),
+    genre: "Bass House",
+    type: "mix",
+    title: "BROHUG - Bass House Mixtape 2026",
+    seriesName: "BROHOUSE",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/1ub9uq6k/brohug-bass-house-mixtape-2026-2026-01-07.html",
+    tracklist1001: TL_BROHUG_BASS_HOUSE_MIXTAPE_2026,
   },
 ];
 

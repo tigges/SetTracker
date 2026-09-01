@@ -365,3 +365,29 @@ export const TL_WENZDAY_ILLFEST_WICKED_OAKS_AUSTIN_2025: FingerprintSeedRow[] = 
   { at: "55:14", artist: "SIDEPIECE", title: "Cry For You" },
   { at: "57:16", artist: "Madonna", title: "Like A Prayer (Autograf Remix)" },
 ];
+
+/**
+ * BROHUG - Bass House Mixtape 2026 2026-01-07
+ * https://www.1001tracklists.com/tracklist/1ub9uq6k/brohug-bass-house-mixtape-2026-2026-01-07.html
+ * Official YT: https://youtu.be/3nd9yXIty2w — oEmbed 2026-09-01: channel
+ * "BROHOUSE Label" (@BROHOUSEMusic), title "BASS HOUSE MIXTAPE 2026".
+ * BROHOUSE is BROHUG's own label (founded by the trio; per Spotify bio
+ * "their new label BROHOUSE") — not the personal @brohugofficial channel,
+ * but an artist-owned account, same class as GREG 99 / Hellbent Records.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-3nd9yXIty2w"]
+ *   = TL_BROHUG_BASS_HOUSE_MIXTAPE_2026
+ * Overlay name TL_BROHUG_Bass-House_Mixtape_2026_… is not a valid
+ * identifier.
+ * No SoundCloud in the paste — do not invent an SC slug.
+ * Captured 2026-09-01 — provenance 1001tl.
+ */
+export const TL_BROHUG_BASS_HOUSE_MIXTAPE_2026: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "BROHUG", title: "Face Melt" },
+  { at: "3:00", artist: "BROHUG", title: "Why You Mad" },
+  { at: "5:00", artist: "BROHUG", title: "That Boy" },
+  { at: "8:00", artist: "BROHUG", title: "House" },
+  { at: "10:20", artist: "BROHUG & Medium Rare", title: "Beat Drop" },
+  { at: "12:00", artist: "BROHUG", title: "Stockholm" },
+  { at: "16:20", artist: "BROHUG", title: "Mosquito" },
+  { at: "18:30", artist: "BROHUG", title: "Rats" },
+];
