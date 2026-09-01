@@ -8,10 +8,14 @@ import {
   isFallbackWebsiteHub,
   loadEntityCompletePins,
   mergeEntityCompletePins,
+  isHttpsImageUrl,
   nameOverlapsHandle,
   parseEntityCompleteCsv,
   pinsFromAudit,
+  applyEntityCompletePins,
+  wishlistDjStubFromPin,
 } from "./entityCompletePins";
+import { WISHLIST_DEFAULTS } from "../wishlist";
 
 assert.equal(decodeMojibake("\u00C3\u2020ON:MODE"), "ÆON:MODE");
 assert.equal(decodeMojibake("\u00C3\u201Clafur Arnalds"), "Ólafur Arnalds");
@@ -67,6 +71,43 @@ assert.equal(
 );
 assert.equal(nameOverlapsHandle("Joris Voorn", "https://soundcloud.com/korolovadj"), false);
 assert.equal(nameOverlapsHandle("Ferry Corsten", "https://www.instagram.com/someoneelse/"), false);
+assert.equal(
+  nameOverlapsHandle("BDK", "https://www.instagram.com/oficialbdk/"),
+  true,
+);
+assert.equal(
+  nameOverlapsHandle("BDK", "https://www.youtube.com/@OficialBDK"),
+  true,
+);
+assert.equal(
+  isHttpsImageUrl(
+    "https://image-cdn-fa.spotifycdn.com/image/ab6761610000517490d742bdf4a26e4e6279efac",
+  ),
+  true,
+);
+assert.equal(nameOverlapsHandle("Bexxie", "https://bexxiemusic.com/"), true);
+assert.equal(
+  nameOverlapsHandle("Bexxie", "https://www.instagram.com/bexxiemusic/"),
+  true,
+);
+assert.equal(
+  isHttpsImageUrl(
+    "https://bexxiemusic.com/cdn/shop/files/Bexxie---Exchange---Los-Angeles_-CA---15-November-2024---Photos-by-Alex-Cole-_alexcxle-7-shopify-banner.jpg?v=1735264425",
+  ),
+  true,
+);
+assert.equal(
+  isHttpsImageUrl(
+    "https://cdn-images.dzcdn.net/images/artist/d8315de10c16736f16b43549fb360448/250x250-000000-80-0-0.jpg",
+  ),
+  false,
+);
+assert.equal(
+  isHttpsImageUrl(
+    "https://i1.sndcdn.com/artworks-iCux6u9UHJRW2S5d-QYhDBg-t500x500.png",
+  ),
+  true,
+);
 
 assert.equal(
   evaluateEntityCompleteRow({
@@ -1309,6 +1350,116 @@ assert.equal(
   assert.equal(brohug.imageUrl, undefined);
 }
 
+{
+  const faster = loadEntityCompletePins().find((p) => p.slug === "faster-horses");
+  assert.ok(faster);
+  assert.equal(faster.kind, "dj");
+  assert.equal(
+    faster.imageUrl,
+    "https://i1.sndcdn.com/artworks-iCux6u9UHJRW2S5d-QYhDBg-t500x500.png",
+  );
+  assert.ok(
+    !faster.imageUrl?.includes("d8315de10c16736f16b43549fb360448"),
+    "Deezer silhouette must not stay pinned",
+  );
+}
+
+{
+  const bexxie = loadEntityCompletePins().find((p) => p.slug === "bexxie");
+  assert.ok(bexxie);
+  assert.equal(bexxie.kind, "dj");
+  assert.equal(bexxie.website, "https://bexxiemusic.com");
+  assert.equal(bexxie.instagram, "https://instagram.com/bexxiemusic");
+  assert.equal(bexxie.youtube, "https://www.youtube.com/@bexxiemusic");
+  assert.match(bexxie.imageUrl ?? "", /bexxiemusic\.com\/cdn\/shop\/files\/Bexxie/);
+}
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "bexxie",
+    name: "Bexxie",
+    field: "website",
+    value: "https://bexxiemusic.com/",
+    evidence: "operator paste, official site",
+  }).value,
+  "https://bexxiemusic.com",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "bexxie",
+    name: "Bexxie",
+    field: "imageUrl",
+    value:
+      "https://bexxiemusic.com/cdn/shop/files/Bexxie---Exchange---Los-Angeles_-CA---15-November-2024---Photos-by-Alex-Cole-_alexcxle-7-shopify-banner.jpg?v=1735264425",
+    evidence: "operator paste, official homepage hero",
+  }).field,
+  "imageUrl",
+);
+
+{
+  const bdk = loadEntityCompletePins().find((p) => p.slug === "bdk");
+  assert.ok(bdk);
+  assert.equal(bdk.kind, "dj");
+  assert.equal(
+    bdk.imageUrl,
+    "https://image-cdn-fa.spotifycdn.com/image/ab6761610000517490d742bdf4a26e4e6279efac",
+  );
+  assert.equal(bdk.instagram, "https://instagram.com/oficialbdk");
+  assert.equal(bdk.youtube, "https://www.youtube.com/@OficialBDK");
+  assert.equal(bdk.genre, undefined);
+  assert.ok(
+    !bdk.imageUrl?.includes("3186191e16afc811cac6be4d037b3cbf"),
+    "wrong Deezer BDK RIDERS art",
+  );
+}
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "bdk",
+    name: "BDK",
+    field: "instagram",
+    value: "https://www.instagram.com/oficialbdk/",
+    evidence: "operator paste",
+  }).value,
+  "https://instagram.com/oficialbdk",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "bdk",
+    name: "BDK",
+    field: "youtube",
+    value: "https://www.youtube.com/@OficialBDK",
+    evidence: "operator paste",
+  }).value,
+  "https://www.youtube.com/@OficialBDK",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "bdk",
+    name: "BDK",
+    field: "imageUrl",
+    value:
+      "https://image-cdn-fa.spotifycdn.com/image/ab6761610000517490d742bdf4a26e4e6279efac",
+    evidence: "operator paste, Spotify artist oembed",
+  }).value,
+  "https://image-cdn-fa.spotifycdn.com/image/ab6761610000517490d742bdf4a26e4e6279efac",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "faster-horses",
+    name: "Faster Horses",
+    field: "imageUrl",
+    value:
+      "https://cdn-images.dzcdn.net/images/artist/d8315de10c16736f16b43549fb360448/250x250-000000-80-0-0.jpg",
+    evidence: "deezer artist placeholder",
+  }).drop,
+  "image url not allowed",
+);
+
 // Fields with no Dj column must drop rather than be coerced somewhere else.
 for (const field of ["tiktok", "facebook", "spotify", "deezer"]) {
   assert.equal(
@@ -1337,4 +1488,79 @@ assert.equal(
   "handle name mismatch",
 );
 
-console.log("entityCompletePins.test.ts ok");
+{
+  const vk = loadEntityCompletePins().find((p) => p.slug === "valentino-khan");
+  const stub = wishlistDjStubFromPin(vk!);
+  assert.ok(stub);
+  assert.equal(stub.name, "Valentino Khan");
+  assert.equal(stub.website, "https://valentinokhan.com");
+  assert.equal(stub.instagram, "https://instagram.com/valentinokhan");
+  assert.ok(stub.bio?.includes("House Party EP"));
+}
+{
+  const random = loadEntityCompletePins().find((p) => p.slug === "aqutie");
+  assert.ok(random);
+  assert.equal(wishlistDjStubFromPin(random), null);
+}
+assert.equal(
+  wishlistDjStubFromPin({ kind: "festival", slug: "valentino-khan" }),
+  null,
+);
+{
+  const empties = [
+    "valentino-khan",
+    "greg-99",
+    "malaa",
+    "jauz",
+    "brohug",
+    "anti-up",
+    "tchami",
+  ];
+  for (const slug of empties) {
+    const pin = loadEntityCompletePins().find((p) => p.slug === slug);
+    assert.ok(pin, `${slug} pin`);
+    const stub = wishlistDjStubFromPin(pin);
+    assert.ok(stub, `${slug} wishlist stub`);
+    assert.equal(
+      stub.name,
+      WISHLIST_DEFAULTS.find((d) => d.slug === slug)?.name,
+    );
+  }
+}
+
+{
+  const created: string[] = [];
+  applyEntityCompletePins(
+    {
+      dj: {
+        findUnique: async () => null,
+        create: async ({ data }: { data: { slug: string } }) => {
+          created.push(data.slug);
+          return data;
+        },
+      },
+      event: { findUnique: async () => null },
+    } as never,
+    [
+      {
+        kind: "dj",
+        slug: "valentino-khan",
+        website: "https://valentinokhan.com",
+      },
+      {
+        kind: "dj",
+        slug: "aqutie",
+        soundcloud: "https://soundcloud.com/aqutie",
+      },
+    ],
+  )
+    .then((out) => {
+      assert.equal(out.created, 1);
+      assert.deepEqual(created, ["valentino-khan"]);
+      console.log("entityCompletePins.test.ts ok");
+    })
+    .catch((err) => {
+      console.error(err);
+      process.exitCode = 1;
+    });
+}

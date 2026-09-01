@@ -33,6 +33,14 @@ assert.equal(
   }),
   false,
 );
+assert.equal(
+  isBrowseReadyDj({
+    ...base,
+    imageUrl:
+      "https://cdn-images.dzcdn.net/images/artist/d8315de10c16736f16b43549fb360448/250x250-000000-80-0-0.jpg",
+  }),
+  false,
+);
 
 assert.equal(isSearchableDj(base), true);
 assert.equal(isSearchableDj({ ...base, isJunk: true }), false);

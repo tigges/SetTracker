@@ -9,6 +9,7 @@ import { djSocialsFromKnown } from "../../social";
 import { DJ_SOCIAL_PINS } from "../djSocialPins.data";
 import { ARTIST_ROSTER } from "../roster";
 import { slugify } from "../types";
+import { wishlistDefaultSlugs } from "../../wishlist";
 import { hintForName } from "./knownHandles";
 import { loadCandidates } from "./store";
 
@@ -209,6 +210,7 @@ export async function purgeThinDjStubs(prisma: PrismaClient): Promise<number> {
   const keep = new Set<string>([
     ...ARTIST_ROSTER.map((a) => slugify(a.name)),
     ...DJ_SOCIAL_PINS.map((p) => p.slug),
+    ...wishlistDefaultSlugs(),
   ]);
   const rows = await prisma.dj.findMany({
     select: {

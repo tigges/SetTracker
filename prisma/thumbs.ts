@@ -33,6 +33,7 @@ import {
   resolveSetImage,
   resolveTrackImage,
   sleep,
+  usableImageUrl,
 } from "../src/lib/thumbs/deezer";
 import {
   applyCuratedDjImages,
@@ -543,9 +544,9 @@ async function main() {
     const djUrl =
       primary?.imageUrl ?? (primary ? djImageById.get(primary.id) : null) ?? null;
 
-    // Refresh when empty, or when set art still points at a stale DJ portrait.
+    // Refresh when empty, placeholder, or set art still points at a stale DJ portrait.
     const needsWork =
-      !s.imageUrl ||
+      !usableImageUrl(s.imageUrl) ||
       (djUrl && isArtistArtUrl(s.imageUrl) && s.imageUrl !== djUrl);
 
     if (!needsWork) continue;
@@ -584,7 +585,7 @@ async function main() {
         console.log(`  ✓ set ${s.slug} (youtube)`);
       }
     }
-    if (!url) url = djUrl;
+    if (!url) url = usableImageUrl(djUrl);
     if (!url) {
       url = await resolveSetImage(s.title, primary?.name ?? null);
       await sleep(DELAY_MS);

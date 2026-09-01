@@ -10,6 +10,8 @@ import { isJunkArtistName } from "./artistName";
 import { isBrandHostSlug } from "./brandHosts";
 import { isGenreTagName } from "./genre";
 import { playablePlaybackUrl } from "./playback";
+import { usableImageUrl } from "./thumbs/usableImage";
+import { pickYoutubeThumbnail, youtubeVideoId } from "./thumbs/youtubeThumb";
 
 export type SetBrowseSignals = {
   /** Set cover URL (preferred). */
@@ -69,13 +71,54 @@ export function isNonCatalogSet(s: {
   return false;
 }
 
-/** Effective thumbnail used by SetCard (set cover, else DJ, else event). */
+function youtubeStill(s: {
+  playbackUrl?: string | null | undefined;
+  sourceUrl?: string | null | undefined;
+}): string | null {
+  const id =
+    youtubeVideoId(s.playbackUrl || "") || youtubeVideoId(s.sourceUrl || "");
+  return id ? pickYoutubeThumbnail(id) : null;
+}
+
+/** Effective thumbnail used by SetCard (set cover, else YT still, else DJ, else event). */
 export function setDisplayThumb(s: SetBrowseSignals): string | null {
-  const cover = s.imageUrl?.trim() || null;
+  const cover = usableImageUrl(s.imageUrl);
   if (cover) return cover;
-  const dj = s.primaryDjImageUrl?.trim() || null;
+  const still = youtubeStill(s);
+  if (still) return still;
+  const dj = usableImageUrl(s.primaryDjImageUrl);
   if (dj) return dj;
-  return s.eventImageUrl?.trim() || null;
+  return usableImageUrl(s.eventImageUrl);
+}
+
+/**
+ * DJ portrait for directory / profile / OG. Skip Deezer silhouettes and
+ * fall through to a real set cover or YouTube still from that DJ's sets.
+ */
+export function djDisplayThumb(d: {
+  imageUrl?: string | null | undefined;
+  setImageUrls?: Array<string | null | undefined>;
+  sets?: Array<{
+    imageUrl?: string | null | undefined;
+    playbackUrl?: string | null | undefined;
+    sourceUrl?: string | null | undefined;
+  }>;
+}): string | null {
+  const own = usableImageUrl(d.imageUrl);
+  if (own) return own;
+  for (const url of d.setImageUrls ?? []) {
+    const cover = usableImageUrl(url);
+    if (cover) return cover;
+  }
+  for (const set of d.sets ?? []) {
+    const cover = usableImageUrl(set.imageUrl);
+    if (cover) return cover;
+  }
+  for (const set of d.sets ?? []) {
+    const still = youtubeStill(set);
+    if (still) return still;
+  }
+  return null;
 }
 
 /**

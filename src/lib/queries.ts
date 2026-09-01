@@ -75,7 +75,12 @@ import {
   editionCalendar,
   editionGapReport,
 } from "@/lib/ingest/festivalDrops";
-import { isBrowseReadySet, isProfileVisibleSet } from "@/lib/setBrowse";
+import {
+  djDisplayThumb,
+  isBrowseReadySet,
+  isProfileVisibleSet,
+  setDisplayThumb,
+} from "@/lib/setBrowse";
 import { isBrowseReadyVenue, isVenueListed } from "@/lib/venueBrowse";
 import type { IdStatus } from "@/lib/status";
 
@@ -324,6 +329,8 @@ export async function getFeed() {
         title: s.title,
         trackCount: s.trackCount,
         durationSec: s.durationSec,
+        playbackUrl: s.playbackUrl,
+        sourceUrl: s.sourceUrl,
       }),
     );
 }
@@ -973,7 +980,13 @@ export async function getDjBySlug(slug: string): Promise<DjProfile | null> {
         publishedAt: s.publishedAt,
         durationSec: s.durationSec,
         cover: s.cover,
-        imageUrl: s.imageUrl ?? primary?.dj.imageUrl ?? null,
+        imageUrl: setDisplayThumb({
+          imageUrl: s.imageUrl,
+          primaryDjImageUrl: primary?.dj.imageUrl,
+          eventImageUrl: s.event?.imageUrl,
+          playbackUrl: s.playbackUrl,
+          sourceUrl: s.sourceUrl,
+        }),
         eventName: s.event?.name ?? null,
         seriesName: s.series?.name ?? null,
         trackCount: tally?.trackCount ?? 0,
@@ -1098,7 +1111,14 @@ export async function getDjBySlug(slug: string): Promise<DjProfile | null> {
     homeCity: dj.homeCity,
     bio: dj.bio,
     accent: dj.accent,
-    imageUrl: dj.imageUrl,
+    imageUrl: djDisplayThumb({
+      imageUrl: dj.imageUrl,
+      sets: sets.map((s) => ({
+        imageUrl: s.imageUrl,
+        playbackUrl: s.playbackUrl,
+        sourceUrl: s.sourceUrl,
+      })),
+    }),
     socials: {
       soundcloud: dj.soundcloud,
       youtube: dj.youtube,
@@ -1271,6 +1291,8 @@ export async function getDjList(): Promise<DjListItem[]> {
           select: {
             sourceName: true,
             sourceUrl: true,
+            playbackUrl: true,
+            imageUrl: true,
             type: true,
             event: { select: { kind: true } },
           },
@@ -1284,6 +1306,8 @@ export async function getDjList(): Promise<DjListItem[]> {
     Array<{
       sourceName: string | null;
       sourceUrl: string | null;
+      playbackUrl: string | null;
+      imageUrl: string | null;
       type: string;
       eventKind: string | null;
     }>
@@ -1293,6 +1317,8 @@ export async function getDjList(): Promise<DjListItem[]> {
     list.push({
       sourceName: row.set.sourceName,
       sourceUrl: row.set.sourceUrl,
+      playbackUrl: row.set.playbackUrl,
+      imageUrl: row.set.imageUrl,
       type: row.set.type,
       eventKind: row.set.event?.kind ?? null,
     });
@@ -1333,7 +1359,14 @@ export async function getDjList(): Promise<DjListItem[]> {
       name: d.name,
       homeCity: d.homeCity,
       accent: d.accent,
-      imageUrl: d.imageUrl,
+      imageUrl: djDisplayThumb({
+        imageUrl: d.imageUrl,
+        sets: sets.map((s) => ({
+          imageUrl: s.imageUrl,
+          playbackUrl: s.playbackUrl,
+          sourceUrl: s.sourceUrl,
+        })),
+      }),
       soundcloud: d.soundcloud,
       youtube: d.youtube,
       instagram: d.instagram,
@@ -1546,8 +1579,11 @@ export async function getAllDjSlugs(): Promise<string[]> {
   // Always keep social-pinned artist DJs even before their first set lands.
   // Never export festival / stage / radio-series / brand-host rows as artists.
   const { DJ_SOCIAL_PINS } = await import("@/lib/ingest/djSocialPins.data");
+  const { wishlistDefaultSlugs } = await import("@/lib/wishlist");
   const pinned = new Set(
-    DJ_SOCIAL_PINS.map((p) => p.slug).filter((s) => !isBrandHostSlug(s)),
+    [...DJ_SOCIAL_PINS.map((p) => p.slug), ...wishlistDefaultSlugs()].filter(
+      (s) => !isBrandHostSlug(s),
+    ),
   );
   const rows = await prisma.dj.findMany({
     where: {

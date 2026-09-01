@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { mediaUrl } from "@/lib/mediaUrl";
+import { usableImageUrl } from "@/lib/thumbs/usableImage";
 
 /**
  * Shared avatar/cover tile. Shows a sourced image when available, otherwise a
@@ -40,7 +41,7 @@ export function EntityThumb({
   const style = fill
     ? { width: "100%", height: "100%", borderRadius: radius }
     : { width: size, height: size, borderRadius: radius };
-  const resolved = broken ? undefined : mediaUrl(src);
+  const resolved = broken ? undefined : mediaUrl(usableImageUrl(src));
 
   if (resolved) {
     return (
