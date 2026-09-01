@@ -1100,6 +1100,19 @@ assert.equal(
   }).drop,
   "weak or invalid website",
 );
+// Official album smart link from the Coachella YT description — listen
+// hub, not a homepage. Leftover "whatislife" is not generic filler.
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "anti-up",
+    name: "Anti Up",
+    field: "website",
+    value: "https://antiup.lnk.to/whatislife",
+    evidence: "official YT description album smart link",
+  }).drop,
+  "website name mismatch",
+);
 {
   const anti = loadEntityCompletePins().find((p) => p.slug === "anti-up");
   assert.ok(anti);
@@ -1124,6 +1137,7 @@ assert.equal(
     ),
   );
   assert.ok(roster.socials?.includes("https://www.youtube.com/@antiup"));
+  assert.ok(roster.socials?.includes("https://antiup.lnk.to/whatislife"));
 }
 
 // Jauz — operator paste. jauzofficial.com + matching @jauzofficial

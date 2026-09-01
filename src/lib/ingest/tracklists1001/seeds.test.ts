@@ -220,6 +220,7 @@ import {
   TL_GIUSEPPE_OTTAVIANI_DREAMSTATE_SYDNEY_2026,
   TL_GREG_99_HELLBENT_FM_006_2026,
   TL_VALENTINO_KHAN_REVEL_ALBUQUERQUE_2026,
+  TL_ANTI_UP_COACHELLA_WE1_MOJAVE_2024,
   TL_ANTI_UP_COACHELLA_WE2_MOJAVE_2024,
   TL_MORTEN_MALAA_TML_WE1_CRYSTAL_2026,
   TL_MORTEN_MALAA_TML_WINTER_MAINSTAGE_2026,
@@ -6271,29 +6272,45 @@ for (let i = 1; i < vkRevel.length; i++) {
   );
 }
 
-// Anti Up @ Mojave, Coachella WE2 2024-04-19.
+// Anti Up @ Mojave, Coachella WE1 2024-04-12.
 // Official @antiup yt-cZhNpGcYq_A is the full Mojave set (album-titled).
-assertSeedClocks(TL_ANTI_UP_COACHELLA_WE2_MOJAVE_2024);
-assert.equal(TL_ANTI_UP_COACHELLA_WE2_MOJAVE_2024.length, 21);
+assertSeedClocks(TL_ANTI_UP_COACHELLA_WE1_MOJAVE_2024);
+assert.equal(TL_ANTI_UP_COACHELLA_WE1_MOJAVE_2024.length, 21);
 assert.equal(
   TRACKLIST_1001_BY_SOURCE_SLUG["yt-cZhNpGcYq_A"],
-  TL_ANTI_UP_COACHELLA_WE2_MOJAVE_2024,
+  TL_ANTI_UP_COACHELLA_WE1_MOJAVE_2024,
 );
 assert.equal(isWiredTracklistSlug("yt-cZhNpGcYq_A"), true);
-const antiUpCoachella = tracklist1001RowsToPlays(
+assert.notEqual(
+  TL_ANTI_UP_COACHELLA_WE1_MOJAVE_2024,
   TL_ANTI_UP_COACHELLA_WE2_MOJAVE_2024,
+  "WE1 and WE2 Mojave clocks are distinct performances",
+);
+assert.equal(
+  Object.values(TRACKLIST_1001_BY_SOURCE_SLUG).includes(
+    TL_ANTI_UP_COACHELLA_WE2_MOJAVE_2024,
+  ),
+  false,
+  "Anti Up Coachella WE2 seed is held — no official playback",
+);
+assertSeedClocks(TL_ANTI_UP_COACHELLA_WE2_MOJAVE_2024);
+assert.equal(TL_ANTI_UP_COACHELLA_WE2_MOJAVE_2024.length, 21);
+const antiUpCoachella = tracklist1001RowsToPlays(
+  TL_ANTI_UP_COACHELLA_WE1_MOJAVE_2024,
 );
 assert.equal(antiUpCoachella.length, 21);
 assert.equal(antiUpCoachella[0]?.provenance, "1001tl");
 assert.equal(antiUpCoachella[0]?.timestamp, 0);
 assert.equal(antiUpCoachella[0]?.trackTitle, "What Is Life");
+assert.equal(antiUpCoachella[1]?.timestamp, 6 * 60 + 5);
+assert.equal(antiUpCoachella[15]?.trackTitle, "Turn The Page");
 assert.equal(antiUpCoachella[20]?.trackTitle, "Holding On");
-assert.equal(antiUpCoachella[20]?.timestamp, 63 * 60);
+assert.equal(antiUpCoachella[20]?.timestamp, 63 * 60 + 30);
 for (let i = 1; i < antiUpCoachella.length; i++) {
   assert.ok(
     (antiUpCoachella[i]?.timestamp ?? 0) >
       (antiUpCoachella[i - 1]?.timestamp ?? 0),
-    `Anti Up Coachella Mojave 2024 clocks must increase at index ${i}`,
+    `Anti Up Coachella Mojave WE1 2024 clocks must increase at index ${i}`,
   );
 }
 

@@ -3,12 +3,12 @@
   "updatedAt": "2026-09-01T11:30:00.000Z",
   "urls": [
     {
-      "label": "Anti Up · What Is Life [Live From Coachella 2024] — Mojave WE2 2024-04-19",
+      "label": "Anti Up · What Is Life [Live From Coachella 2024] — Mojave WE1 2024-04-12",
       "slug": "yt-cZhNpGcYq_A",
-      "name": "TL_ANTI_UP_COACHELLA_WE2_MOJAVE_2024",
-      "tracklistUrl": "https://www.1001tracklists.com/tracklist/2mccm4u1/chris-lake-chris-lorenzo-pres.-anti-up-mojave-coachella-festival-weekend-2-united-states-2024-04-19.html",
+      "name": "TL_ANTI_UP_COACHELLA_WE1_MOJAVE_2024",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/2hn3tym9/chris-lake-chris-lorenzo-pres.-anti-up-mojave-coachella-festival-weekend-1-united-states-2024-04-12.html",
       "youtubeUrl": "https://youtu.be/cZhNpGcYq_A",
-      "note": "Operator re-paste 2026-09-01. Official @antiup. oEmbed title is the album (What Is Life [Live From Coachella 2024]); watch is 70:27 with description \"full performance from Coachella 2024 @ The Mojave Stage\" — not a one-track clip. 21 timed 1001 cues. YouTube Music only credits the opener. 1001 page is WE2. Overlay TL_Chris-Lake_AND_… is not a valid identifier. No SC in the paste — do not invent an SC slug."
+      "note": "Operator re-paste 2026-09-01. Official @antiup. oEmbed title is the album (What Is Life [Live From Coachella 2024]); watch is 70:27 with description \"full performance from Coachella 2024 @ The Mojave Stage\" — not a one-track clip. Description Album Track list + antiup.lnk.to/whatislife is the studio album (15 tracks, includes Revolution) — never overlay as set cues. 21 timed 1001 cues. YouTube Music only credits the opener. 1001 page is WE1 (2hn3tym9). Earlier paste wired the same YT to WE2 2mccm4u1 — clocks differ, so WE2 is held. Overlay TL_Anti-Up_Coachella_2024 / TL_Chris-Lake_AND_… is not a valid identifier. No SC in the paste — do not invent an SC slug."
     },
     {
       "label": "GREG 99 · Data Transmission 903 2025-01-27",
@@ -845,6 +845,12 @@
     }
   ],
   "heldPendingPlayback": [
+    {
+      "label": "Anti Up · Mojave, Coachella WE2 2024-04-19",
+      "name": "TL_ANTI_UP_COACHELLA_WE2_MOJAVE_2024",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/2mccm4u1/chris-lake-chris-lorenzo-pres.-anti-up-mojave-coachella-festival-weekend-2-united-states-2024-04-19.html",
+      "note": "Operator paste 2026-09-01. 21 timed cues. Distinct from official @antiup WE1 yt-cZhNpGcYq_A (2hn3tym9) — clocks differ (The Weekend 5:30 vs WE1 6:05). Never reuse the WE1 YouTube as WE2 playback. Seed held until an official WE2 playback exists. No SC in the paste. Overlay TL_Chris-Lake_AND_… is not a valid identifier."
+    },
     {
       "label": "JAUZ · GET CRANKED! 2.0, Bill Graham Civic Auditorium SF 2025-10-11",
       "name": "TL_JAUZ_GET_CRANKED_BILL_GRAHAM_SF_2025",

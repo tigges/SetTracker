@@ -804,7 +804,7 @@ export const ARTIST_ROSTER_CURATED: ArtistRosterEntry[] = [
   {
     // Chris Lake + Chris Lorenzo project — anchor favorite.
     // Official SC is still singles. Official YT is mostly shorts plus one
-    // curated long-form: yt-cZhNpGcYq_A (full Mojave Coachella 2024).
+    // curated long-form: yt-cZhNpGcYq_A (full Mojave Coachella WE1 2024).
     // Keep youtube weak so deep-scan does not ingest the remaining clips.
     name: "Anti Up",
     genre: "Tech House",
@@ -816,7 +816,7 @@ export const ARTIST_ROSTER_CURATED: ArtistRosterEntry[] = [
       // point ingest at the wrong property.
       handle: "UC8Bhgj67ino3eyL6WXvYgAA",
       status: "weak",
-      note: "official channel/UC8Bhgj67ino3eyL6WXvYgAA; About @antiup. yt-cZhNpGcYq_A is the full Mojave Coachella 2024 set (album-titled What Is Life [Live From Coachella 2024], 70:27). Channel otherwise shorts/clips — keep weak so deep-scan does not ingest those.",
+      note: "official channel/UC8Bhgj67ino3eyL6WXvYgAA; About @antiup. yt-cZhNpGcYq_A is the full Mojave Coachella WE1 2024 set (album-titled What Is Life [Live From Coachella 2024], 70:27). YT description Album Track list is the studio album, not the live set. Channel otherwise shorts/clips — keep weak so deep-scan does not ingest those.",
     },
     soundcloud: {
       permalink: "antiupmusic",
@@ -832,6 +832,7 @@ export const ARTIST_ROSTER_CURATED: ArtistRosterEntry[] = [
       "https://www.facebook.com/antiupmusic/",
       "https://twitter.com/antiupmusic",
       "https://open.spotify.com/artist/4UwR1ir6PovnQiwX5jRPvF",
+      "https://antiup.lnk.to/whatislife",
     ],
     priority: "high",
   },

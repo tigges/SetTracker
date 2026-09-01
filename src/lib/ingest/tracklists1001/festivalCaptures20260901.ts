@@ -84,13 +84,53 @@ export const TL_VALENTINO_KHAN_REVEL_ALBUQUERQUE_2026: FingerprintSeedRow[] = [
 ];
 
 /**
- * Chris Lake & Chris Lorenzo pres. Anti Up @ Mojave, Coachella WE2 2024-04-19
- * https://www.1001tracklists.com/tracklist/2mccm4u1/chris-lake-chris-lorenzo-pres.-anti-up-mojave-coachella-festival-weekend-2-united-states-2024-04-19.html
+ * Chris Lake & Chris Lorenzo pres. Anti Up @ Mojave, Coachella WE1 2024-04-12
+ * https://www.1001tracklists.com/tracklist/2hn3tym9/chris-lake-chris-lorenzo-pres.-anti-up-mojave-coachella-festival-weekend-1-united-states-2024-04-12.html
  * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-cZhNpGcYq_A"]
+ *   = TL_ANTI_UP_COACHELLA_WE1_MOJAVE_2024
  * Official @antiup — oEmbed "Anti Up - What Is Life [Live From Coachella
  * 2024]". Watch 2026-09-01: 70:27, description "full performance from
  * Coachella 2024 @ The Mojave Stage" (album-titled, not a one-track clip).
- * 1001 page is WE2. Overlay TL_Chris-Lake_AND_… is not a valid identifier.
+ * Description "Album Track list" + https://antiup.lnk.to/whatislife is the
+ * studio album (15 tracks, includes Revolution, different order) — never
+ * overlay those as set cues. Album page og:video is this same YT.
+ * Operator re-paste 2026-09-01: 1001 page is WE1 (2hn3tym9), not WE2
+ * (2mccm4u1). Clocks differ (The Weekend 6:05 vs WE2 5:30; Turn The Page
+ * after Something's About To Go Down). Overlay TL_Anti-Up_Coachella_2024
+ * / TL_Chris-Lake_AND_… is not a valid identifier. No SoundCloud in the
+ * paste — do not invent an SC slug.
+ * Captured 2026-09-01 — provenance 1001tl.
+ */
+export const TL_ANTI_UP_COACHELLA_WE1_MOJAVE_2024: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "Chris Lake & Chris Lorenzo pres. Anti Up ft. rhys from the sticks", title: "What Is Life" },
+  { at: "6:05", artist: "Chris Lake & Chris Lorenzo pres. Anti Up", title: "The Weekend" },
+  { at: "9:00", artist: "Chris Lake & Chris Lorenzo pres. Anti Up", title: "Shake" },
+  { at: "12:05", artist: "Chris Lake & Chris Lorenzo pres. Anti Up", title: "Do You Know Where Your Children Are" },
+  { at: "16:20", artist: "Anti Up", title: "9 Of 10" },
+  { at: "20:15", artist: "Truncate", title: "Utility 2" },
+  { at: "23:00", artist: "NIKK", title: "Force Of Pleasure" },
+  { at: "23:30", artist: "Chris Lake & Chris Lorenzo pres. Anti Up", title: "Right Now" },
+  { at: "24:00", artist: "Chris Lake & Chris Lorenzo pres. Anti Up", title: "Control The Media" },
+  { at: "27:40", artist: "Chris Lake & Chris Lorenzo pres. Anti Up ft. Leven Kali", title: "Freaky Feed Me" },
+  { at: "30:50", artist: "Chris Lake & Chris Lorenzo pres. Anti Up & hollow.io", title: "Shambles" },
+  { at: "35:35", artist: "Chris Lake & Chris Lorenzo pres. Anti Up ft. Audio Bullys & Olly Burden", title: "Outlaws" },
+  { at: "38:40", artist: "Chris Lake & Chris Lorenzo pres. Anti Up ft. Olly Burden", title: "MONEY" },
+  { at: "41:40", artist: "Skrillex", title: "ANDY" },
+  { at: "45:45", artist: "Chris Lake & Chris Lorenzo pres. Anti Up", title: "Something's About To Go Down" },
+  { at: "47:33", artist: "The Streets", title: "Turn The Page" },
+  { at: "49:20", artist: "Chris Lake & Chris Lorenzo pres. Anti Up", title: "Chromatic" },
+  { at: "54:00", artist: "Beau Didier", title: "Booty Shake" },
+  { at: "56:30", artist: "Chris Lake & Chris Lorenzo pres. Anti Up", title: "Hey Pablo" },
+  { at: "59:40", artist: "Chris Lake & Chris Lorenzo pres. Anti Up", title: "Set Me Free" },
+  { at: "1:03:30", artist: "Chris Lake & Chris Lorenzo pres. Anti Up ft. rhys from the sticks", title: "Holding On" },
+];
+
+/**
+ * Chris Lake & Chris Lorenzo pres. Anti Up @ Mojave, Coachella WE2 2024-04-19
+ * https://www.1001tracklists.com/tracklist/2mccm4u1/chris-lake-chris-lorenzo-pres.-anti-up-mojave-coachella-festival-weekend-2-united-states-2024-04-19.html
+ * Distinct from WE1 yt-cZhNpGcYq_A. No official WE2 playback — seed held.
+ * Never invent a second-weekend playback or reuse the WE1 YouTube clocks.
+ * Overlay TL_Chris-Lake_AND_… is not a valid identifier.
  * No SoundCloud in the paste — do not invent an SC slug.
  * Captured 2026-09-01 — provenance 1001tl.
  */

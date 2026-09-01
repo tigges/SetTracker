@@ -85,25 +85,36 @@ const fake = { "yt-aaa": seed, "sc-b-c": seed, "yt-solo": [{ at: "0:00" }] };
 assert.deepEqual(lookupCapture("yt-aaa", [], fake).twins, ["sc-b-c"]);
 assert.deepEqual(lookupCapture("yt-solo", [], fake).twins, []);
 
-// Official @antiup Mojave Coachella 2024 — full set, album-titled.
+// Official @antiup Mojave Coachella WE1 2024 — full set, album-titled.
 const shippedArchive = loadKnown1001ArchiveRows();
 const antiUpClip = lookupCapture("https://youtu.be/cZhNpGcYq_A", shippedArchive);
 assert.equal(antiUpClip.slug, "yt-cZhNpGcYq_A");
 assert.equal(antiUpClip.alreadyOnFile, true);
 assert.equal(antiUpClip.wiredCues, 21);
 assert.ok(
-  antiUpClip.archive.some((h) => h.name === "TL_ANTI_UP_COACHELLA_WE2_MOJAVE_2024"),
+  antiUpClip.archive.some((h) => h.name === "TL_ANTI_UP_COACHELLA_WE1_MOJAVE_2024"),
 );
-const antiUp1001 = lookupCapture(
+const antiUpWe1 = lookupCapture(
+  "https://www.1001tracklists.com/tracklist/2hn3tym9/chris-lake-chris-lorenzo-pres.-anti-up-mojave-coachella-festival-weekend-1-united-states-2024-04-12.html",
+  shippedArchive,
+);
+assert.equal(antiUpWe1.tracklistId, "2hn3tym9");
+assert.equal(antiUpWe1.alreadyOnFile, true);
+assert.equal(antiUpWe1.slug, "yt-cZhNpGcYq_A");
+assert.equal(antiUpWe1.wiredCues, 21);
+assert.ok(
+  antiUpWe1.archive.some((h) => h.name === "TL_ANTI_UP_COACHELLA_WE1_MOJAVE_2024"),
+);
+const antiUpWe2 = lookupCapture(
   "https://www.1001tracklists.com/tracklist/2mccm4u1/chris-lake-chris-lorenzo-pres.-anti-up-mojave-coachella-festival-weekend-2-united-states-2024-04-19.html",
   shippedArchive,
 );
-assert.equal(antiUp1001.tracklistId, "2mccm4u1");
-assert.equal(antiUp1001.alreadyOnFile, true);
-assert.equal(antiUp1001.slug, "yt-cZhNpGcYq_A");
-assert.equal(antiUp1001.wiredCues, 21);
+assert.equal(antiUpWe2.tracklistId, "2mccm4u1");
+assert.equal(antiUpWe2.alreadyOnFile, true);
+assert.equal(antiUpWe2.slug, null);
+assert.equal(antiUpWe2.wiredCues, null);
 assert.ok(
-  antiUp1001.archive.some((h) => h.name === "TL_ANTI_UP_COACHELLA_WE2_MOJAVE_2024"),
+  antiUpWe2.archive.some((h) => h.name === "TL_ANTI_UP_COACHELLA_WE2_MOJAVE_2024"),
 );
 
 // MORTEN & Malaa TML WE1 — 1001 on file as a hold; yt-unavailable_atm is not a video.
