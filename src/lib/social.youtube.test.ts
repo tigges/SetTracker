@@ -18,6 +18,16 @@ describe("youtubeChannelUrl", () => {
     );
     assert.equal(youtubeChannelUrl(""), null);
     assert.equal(youtubeChannelUrl("https://soundcloud.com/biscits"), null);
+    assert.equal(
+      youtubeChannelUrl("UC8Bhgj67ino3eyL6WXvYgAA"),
+      "https://www.youtube.com/channel/UC8Bhgj67ino3eyL6WXvYgAA",
+    );
+    assert.equal(
+      youtubeChannelUrl(
+        "https://www.youtube.com/channel/UC8Bhgj67ino3eyL6WXvYgAA",
+      ),
+      "https://www.youtube.com/channel/UC8Bhgj67ino3eyL6WXvYgAA",
+    );
   });
 
   it("djSocialsFromKnown prefers youtube handle", () => {

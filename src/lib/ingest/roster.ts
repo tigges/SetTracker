@@ -809,9 +809,13 @@ export const ARTIST_ROSTER_CURATED: ArtistRosterEntry[] = [
     genre: "Tech House",
     accent: "#ff006e",
     youtube: {
-      handle: "@antiup",
+      // Durable channel id from operator paste 2026-09-01. About still
+      // lists @antiup (keep that on the entity pin — /channel/UC fails
+      // name overlap). Deep-scan uses the UC id so a handle move cannot
+      // point ingest at the wrong property.
+      handle: "UC8Bhgj67ino3eyL6WXvYgAA",
       status: "weak",
-      note: "shorts/clips only; full sets not on official channel",
+      note: "official channel/UC8Bhgj67ino3eyL6WXvYgAA; About @antiup; shorts/clips, no official long-form sets yet",
     },
     soundcloud: {
       permalink: "antiupmusic",
@@ -820,6 +824,7 @@ export const ARTIST_ROSTER_CURATED: ArtistRosterEntry[] = [
       note: "singles/extended mixes only; no official long-form sets",
     },
     socials: [
+      "https://www.youtube.com/channel/UC8Bhgj67ino3eyL6WXvYgAA",
       "https://www.youtube.com/@antiup",
       "https://soundcloud.com/antiupmusic",
       "https://www.instagram.com/antiupmusic/",
