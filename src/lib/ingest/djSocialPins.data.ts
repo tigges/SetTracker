@@ -1269,4 +1269,16 @@ export const DJ_SOCIAL_PINS: DjSocialPin[] = [
     beatport: "https://www.beatport.com/artist/bullet-tooth/1146765",
     bio: "UK Garage. Beatport artist/bullet-tooth/1146765 — no first-party homepage, SoundCloud, or YouTube channel confirmed.",
   },
+  {
+    slug: "wenzday",
+    name: "Wenzday",
+    accent: "#ff6b35",
+    soundcloud: null,
+    youtube: "https://www.youtube.com/@WenzdayMusic",
+    instagram: "https://www.instagram.com/wenzdaymusic/",
+    twitter: "https://x.com/wenzdaymusic",
+    website: "https://wenzdaymusic.com",
+    beatport: "https://www.beatport.com/artist/wenzday/591627",
+    bio: "Born and raised in the Bay Area, Taylor Chung aka Wenzday uses her classically trained ear to bring a new sound to the electronic scene. Official wenzdaymusic.com — YT @WenzdayMusic, IG/X @wenzdaymusic. Beatport artist/wenzday/591627.",
+  },
 ];

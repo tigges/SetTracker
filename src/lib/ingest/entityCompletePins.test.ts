@@ -1350,6 +1350,141 @@ assert.equal(
   assert.equal(brohug.imageUrl, undefined);
 }
 
+// Wenzday — operator paste. Official wenzdaymusic.com + matching
+// @WenzdayMusic / @wenzdaymusic. Beatport /artist/wenzday/591627 and
+// Discogs /artist/2414415-Wenzday are evidence (store links, bio, LA),
+// never website. Facebook / Spotify stay on roster.socials.
+assert.equal(
+  nameOverlapsHandle("Wenzday", "https://www.wenzdaymusic.com/"),
+  true,
+);
+assert.equal(
+  nameOverlapsHandle("Wenzday", "https://www.youtube.com/@WenzdayMusic"),
+  true,
+);
+assert.equal(
+  nameOverlapsHandle("Wenzday", "https://instagram.com/wenzdaymusic"),
+  true,
+);
+assert.equal(
+  nameOverlapsHandle("Wenzday", "https://x.com/wenzdaymusic"),
+  true,
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "wenzday",
+    name: "Wenzday",
+    field: "website",
+    value: "https://www.wenzdaymusic.com/",
+    evidence: "operator paste, official site",
+  }).value,
+  "https://wenzdaymusic.com",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "wenzday",
+    name: "Wenzday",
+    field: "youtube",
+    value: "https://www.youtube.com/@WenzdayMusic",
+    evidence: "operator paste, channel About",
+  }).value,
+  "https://www.youtube.com/@WenzdayMusic",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "wenzday",
+    name: "Wenzday",
+    field: "instagram",
+    value: "https://www.instagram.com/wenzdaymusic/",
+    evidence: "operator paste, channel About",
+  }).value,
+  "https://instagram.com/wenzdaymusic",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "wenzday",
+    name: "Wenzday",
+    field: "twitter",
+    value: "https://twitter.com/wenzdaymusic",
+    evidence: "operator paste, channel About",
+  }).value,
+  "https://x.com/wenzdaymusic",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "wenzday",
+    name: "Wenzday",
+    field: "website",
+    value: "https://www.discogs.com/artist/2414415-Wenzday",
+    evidence: "operator paste, marketplace wiki",
+  }).drop,
+  "weak or invalid website",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "wenzday",
+    name: "Wenzday",
+    field: "website",
+    value: "https://www.beatport.com/artist/wenzday/591627",
+    evidence: "operator paste, store page",
+  }).drop,
+  "weak or invalid website",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "wenzday",
+    name: "Wenzday",
+    field: "homeCity",
+    value: "Los Angeles, US",
+    evidence: "wenzdaymusic.com bio, moved to Los Angeles",
+  }).value,
+  "Los Angeles, US",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "wenzday",
+    name: "Wenzday",
+    field: "genre",
+    value: "Bass House",
+    evidence: "wenzdaymusic.com house and bass",
+  }).value,
+  "Bass House",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "wenzday",
+    name: "Wenzday",
+    field: "bio",
+    value:
+      "Born and raised in the Bay Area, Taylor Chung aka Wenzday uses her classically trained ear to bring a new sound to the electronic scene.",
+    evidence: "wenzdaymusic.com bio",
+  }).field,
+  "bio",
+);
+{
+  const wenzday = loadEntityCompletePins().find((p) => p.slug === "wenzday");
+  assert.ok(wenzday);
+  assert.equal(wenzday.kind, "dj");
+  assert.equal(wenzday.website, "https://wenzdaymusic.com");
+  assert.equal(wenzday.instagram, "https://instagram.com/wenzdaymusic");
+  assert.equal(wenzday.youtube, "https://www.youtube.com/@WenzdayMusic");
+  assert.equal(wenzday.twitter, "https://x.com/wenzdaymusic");
+  assert.equal(wenzday.soundcloud, undefined);
+  assert.equal(wenzday.homeCity, "Los Angeles, US");
+  assert.equal(wenzday.genre, "Bass House");
+  assert.ok(wenzday.bio?.includes("Taylor Chung"));
+  assert.equal(wenzday.imageUrl, undefined);
+}
+
 {
   const faster = loadEntityCompletePins().find((p) => p.slug === "faster-horses");
   assert.ok(faster);
@@ -1515,6 +1650,7 @@ assert.equal(
     "brohug",
     "anti-up",
     "tchami",
+    "wenzday",
   ];
   for (const slug of empties) {
     const pin = loadEntityCompletePins().find((p) => p.slug === slug);

@@ -55,5 +55,6 @@ describe("djCatalog", () => {
     );
     assert.equal(isCatalogWorkDj({ slug: "greg-99", sets: [] }), true);
     assert.equal(isCatalogWorkDj({ slug: "malaa", sets: [] }), true);
+    assert.equal(isCatalogWorkDj({ slug: "wenzday", sets: [] }), true);
   });
 });

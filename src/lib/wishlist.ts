@@ -45,6 +45,7 @@ export const WISHLIST_DEFAULTS: WishlistEntry[] = [
   { slug: "bleu-clair", name: "Bleu Clair" },
   { slug: "jauz", name: "Jauz" },
   { slug: "brohug", name: "Brohug" },
+  { slug: "wenzday", name: "Wenzday" },
 ];
 
 /** Typed / pasted leftovers → catalog slug. */

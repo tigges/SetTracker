@@ -393,6 +393,19 @@ assert.match(
   /beatport\.com\/artist\/bullet-tooth\/1146765/,
 );
 assert.match(bySlug["bullet-tooth"]!.bio, /UK Garage/);
+assert.ok(bySlug.wenzday);
+assert.equal(bySlug.wenzday.website, "https://wenzdaymusic.com");
+assert.equal(bySlug.wenzday.soundcloud, null);
+assert.match(bySlug.wenzday.youtube!, /youtube\.com\/@WenzdayMusic/);
+assert.match(bySlug.wenzday.instagram!, /instagram\.com\/wenzdaymusic/);
+assert.match(bySlug.wenzday.twitter!, /x\.com\/wenzdaymusic/);
+assert.equal(
+  bySlug.wenzday.beatport,
+  "https://www.beatport.com/artist/wenzday/591627",
+);
+assert.match(bySlug.wenzday.bio, /Taylor Chung/);
+assert.equal(hintForName("Wenzday")?.youtubeHandle, "@WenzdayMusic");
+assert.equal(hintForName("Wenzday")?.website, "https://wenzdaymusic.com");
 assert.match(bySlug.kaaze!.soundcloud!, /soundcloud\.com\/iamkaaze/);
 assert.match(bySlug.faustix!.bio, /Diplo/);
 assert.match(bySlug["vini-vici"]!.bio, /Aviram Saharai/);

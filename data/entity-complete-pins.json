@@ -2841,6 +2841,17 @@
   },
   {
     "kind": "dj",
+    "slug": "wenzday",
+    "website": "https://wenzdaymusic.com",
+    "instagram": "https://instagram.com/wenzdaymusic",
+    "youtube": "https://www.youtube.com/@WenzdayMusic",
+    "twitter": "https://x.com/wenzdaymusic",
+    "homeCity": "Los Angeles, US",
+    "bio": "Born and raised in the Bay Area, Taylor Chung aka Wenzday uses her classically trained ear to bring a new sound to the electronic scene.",
+    "genre": "Bass House"
+  },
+  {
+    "kind": "dj",
     "slug": "wes-pierce",
     "imageUrl": "https://cdn-images.dzcdn.net/images/artist/13d83f63fb5c92df70a557be9e674270/250x250-000000-80-0-0.jpg",
     "soundcloud": "https://soundcloud.com/wespiercemusic",
