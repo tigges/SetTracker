@@ -519,4 +519,13 @@ assert.deepEqual(
   ["malaa"],
 );
 
+// Album-titled official Coachella upload — artists first so "What Is Life"
+// is not read as a DJ.
+const antiUpCoachellaSet = artistsForSet(
+  "Anti Up | What Is Life [Live From Coachella 2024]",
+  { name: "Anti Up", slug: "anti-up", accent: "#ff006e" },
+);
+assert.equal(antiUpCoachellaSet.primary.slug, "anti-up");
+assert.deepEqual(antiUpCoachellaSet.collaborators, []);
+
 console.log("artists.test.ts ok");

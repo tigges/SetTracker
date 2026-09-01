@@ -86,13 +86,12 @@ export const TL_VALENTINO_KHAN_REVEL_ALBUQUERQUE_2026: FingerprintSeedRow[] = [
 /**
  * Chris Lake & Chris Lorenzo pres. Anti Up @ Mojave, Coachella WE2 2024-04-19
  * https://www.1001tracklists.com/tracklist/2mccm4u1/chris-lake-chris-lorenzo-pres.-anti-up-mojave-coachella-festival-weekend-2-united-states-2024-04-19.html
- * Operator YouTube https://youtu.be/cZhNpGcYq_A is official @antiup but a
- * clip — oEmbed 2026-09-01: "Anti Up - What Is Life [Live From Coachella
- * 2024]". Roster: Coachella 2024 was livestream-only; no official long-form
- * archive. Never YOUTUBE_SETS / TRACKLIST_1001_BY_SOURCE_SLUG / playback.
- * Overlay TL_Chris-Lake_AND_… is not a valid identifier.
- * Seed held until an official full-set playback exists. No SoundCloud in
- * the paste — do not invent an SC slug.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-cZhNpGcYq_A"]
+ * Official @antiup — oEmbed "Anti Up - What Is Life [Live From Coachella
+ * 2024]". Watch 2026-09-01: 70:27, description "full performance from
+ * Coachella 2024 @ The Mojave Stage" (album-titled, not a one-track clip).
+ * 1001 page is WE2. Overlay TL_Chris-Lake_AND_… is not a valid identifier.
+ * No SoundCloud in the paste — do not invent an SC slug.
  * Captured 2026-09-01 — provenance 1001tl.
  */
 export const TL_ANTI_UP_COACHELLA_WE2_MOJAVE_2024: FingerprintSeedRow[] = [

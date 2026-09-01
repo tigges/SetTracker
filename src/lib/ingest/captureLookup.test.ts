@@ -85,15 +85,14 @@ const fake = { "yt-aaa": seed, "sc-b-c": seed, "yt-solo": [{ at: "0:00" }] };
 assert.deepEqual(lookupCapture("yt-aaa", [], fake).twins, ["sc-b-c"]);
 assert.deepEqual(lookupCapture("yt-solo", [], fake).twins, []);
 
-// Official @antiup clip is on file as a hold, never wired as the Mojave set.
+// Official @antiup Mojave Coachella 2024 — full set, album-titled.
 const shippedArchive = loadKnown1001ArchiveRows();
 const antiUpClip = lookupCapture("https://youtu.be/cZhNpGcYq_A", shippedArchive);
 assert.equal(antiUpClip.slug, "yt-cZhNpGcYq_A");
-assert.equal(antiUpClip.alreadyOnFile, false);
-assert.equal(antiUpClip.wiredCues, null);
+assert.equal(antiUpClip.alreadyOnFile, true);
+assert.equal(antiUpClip.wiredCues, 21);
 assert.ok(
   antiUpClip.archive.some((h) => h.name === "TL_ANTI_UP_COACHELLA_WE2_MOJAVE_2024"),
-  "clip URL must hit the held Coachella seed so re-paste shows the hold note",
 );
 const antiUp1001 = lookupCapture(
   "https://www.1001tracklists.com/tracklist/2mccm4u1/chris-lake-chris-lorenzo-pres.-anti-up-mojave-coachella-festival-weekend-2-united-states-2024-04-19.html",
@@ -101,8 +100,8 @@ const antiUp1001 = lookupCapture(
 );
 assert.equal(antiUp1001.tracklistId, "2mccm4u1");
 assert.equal(antiUp1001.alreadyOnFile, true);
-assert.equal(antiUp1001.slug, null);
-assert.equal(antiUp1001.wiredCues, null);
+assert.equal(antiUp1001.slug, "yt-cZhNpGcYq_A");
+assert.equal(antiUp1001.wiredCues, 21);
 assert.ok(
   antiUp1001.archive.some((h) => h.name === "TL_ANTI_UP_COACHELLA_WE2_MOJAVE_2024"),
 );
