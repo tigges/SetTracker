@@ -1,6 +1,8 @@
 /**
- * Scan DJ Mag Top 100 DJ profiles for From: + fill official websites
- * (roster/pins + Wikidata P856) and persist the seed.
+ * Scan concrete DJ Mag Top 100 DJ profile URLs already on the seed
+ * for From: / DJ style / body lede, fill official websites
+ * (roster/pins + Wikidata P856), and persist the seed.
+ * Never writes djmag.com to Dj.website. Never crawls /top100djs.
  *
  *   npm run enrich:djmag-djs
  */

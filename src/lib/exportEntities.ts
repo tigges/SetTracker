@@ -41,7 +41,7 @@ Return one JSON object per input row, same kind + slug.
 Rules:
 - Never invent an @slug from the setradar slug. Confirm the live profile is this DJ, club, or festival.
 - website must be the official homepage — not DJ Mag, 6am, ClubTickets, Wikipedia, Grokipedia, Discogs, an Insomniac artist hub, or a ticket reseller.
-- A concrete Grokipedia / Wikipedia / Discogs /artist/{id}-{Name} / Insomniac /music/artists/ URL already in hand may be followed for outbound first-party links, homeCity, distinctive bio, and canonical genre. Do not invent page titles or crawl those hosts. A page that names a different act is a miss.
+- A concrete Grokipedia / Wikipedia / Discogs /artist/{id}-{Name} / Insomniac /music/artists/ / DJ Mag /top100djs/{year}/{rank}/{slug} URL already in hand may be followed for outbound first-party links, homeCity, distinctive bio, and canonical genre. Do not invent page titles, crawl /top100djs, or write those hubs to website. A page that names a different act is a miss. The rank line "DJ Mag Top 100 DJs 2025 · #1" is not a bio.
 - instagram / youtube / soundcloud / twitter must be first-party profiles (or official venue accounts). Not a fan page, not another catalog artist.
 - imageUrl must be a stable public image: official-site Open Graph, Wikimedia Commons File path, or a press-kit URL. No DJ Mag screenshots. No guessed CDN paths. No data: URLs.
 - Use null when unsure. confidence is high | medium | low.

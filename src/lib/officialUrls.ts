@@ -13,6 +13,9 @@
  * encyclopedia, same class as Wikipedia: follow a concrete `/page/{Name}`
  * already in hand for outbound official links, bio, homeCity, and genre —
  * never store grokipedia.com as website, and never invent or search titles.
+ * A concrete DJ Mag `/top100djs/{year}/{rank}/{slug}` profile already
+ * in the seed is the same follow-in-hand class (From:, DJ style, body
+ * lede) — never the listing `/top100djs` and never Dj.website.
  * An Insomniac `/music/artists/{slug}` hub is the same follow-in-hand
  * class (promoter bio + Origin/Genre) — never the artist's site.
  * Keep `insomniac.com` itself for the promoter Event row.
@@ -56,6 +59,9 @@ export function isFollowableEvidenceUrl(
     }
     if (host === "discogs.com") {
       return /^\/artist\/\d+-[^/]+$/.test(path);
+    }
+    if (host === "djmag.com") {
+      return /^\/top100djs\/\d{4}\/\d{1,3}\/[a-z0-9-]+$/.test(path);
     }
     return false;
   } catch {
