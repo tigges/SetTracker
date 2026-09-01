@@ -125,7 +125,10 @@ export function groupMonthLocations<
     });
   }
   return out.sort(
-    (a, b) => a.startsAt.localeCompare(b.startsAt) || a.key.localeCompare(b.key),
+    (a, b) =>
+      BUCKET_RANK[b.bucket] - BUCKET_RANK[a.bucket] ||
+      a.startsAt.localeCompare(b.startsAt) ||
+      a.key.localeCompare(b.key),
   );
 }
 

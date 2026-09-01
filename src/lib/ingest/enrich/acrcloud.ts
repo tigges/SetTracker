@@ -1210,7 +1210,7 @@ export async function selectSparseSetsForFingerprint(
         select: { dj: { select: { slug: true } } },
       },
       event: { select: { slug: true, kind: true } },
-      edition: { select: { endsAt: true } },
+      edition: { select: { startsAt: true, endsAt: true } },
     },
   });
 
@@ -1261,6 +1261,7 @@ export async function selectSparseSetsForFingerprint(
     const festivalSeason = isFestivalSeasonSet(
       {
         eventSlug: row.event?.slug,
+        editionStartsAt: row.edition?.startsAt ?? null,
         editionEndsAt: row.edition?.endsAt ?? null,
         publishedAt: row.publishedAt,
         type: row.type,

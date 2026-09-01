@@ -13,7 +13,10 @@ import {
 } from "@/lib/feedPriority";
 import { diversifyByEvent, identifiedRatio } from "@/lib/feedQuality";
 import { isBrandHostSlug } from "@/lib/brandHosts";
-import { isFestivalSeasonSet } from "@/lib/ingest/festivalDrops";
+import {
+  festivalWeekActive,
+  isFestivalSeasonSet,
+} from "@/lib/ingest/festivalDrops";
 import type { FeedItem } from "@/lib/queries";
 
 const DAY_MS = 24 * 60 * 60 * 1000;
@@ -54,6 +57,7 @@ export function isFestivalStorySet(
   return isFestivalSeasonSet(
     {
       eventSlug: s.eventSlug,
+      editionStartsAt: s.editionStartsAt,
       editionEndsAt: s.editionEndsAt,
       publishedAt: s.publishedAt,
       type: s.type,
@@ -82,7 +86,7 @@ function pickRecentSets(
     .filter(
       (s) =>
         isCompleteTracklist(s) &&
-        !isRadioFiller(s) &&
+        !isRadioFiller(s, { festivalWeek: festivalWeekActive(nowMs) }) &&
         withinDays(s.publishedAt, lookbackDays, nowMs) &&
         !excludeIds?.has(s.id),
     )
@@ -320,6 +324,7 @@ export function festivalSeasonSets(
         isFestivalSeasonSet(
           {
             eventSlug: s.eventSlug,
+            editionStartsAt: s.editionStartsAt,
             editionEndsAt: s.editionEndsAt,
             publishedAt: s.publishedAt,
             type: s.type,
@@ -347,7 +352,7 @@ export function newThisWeekSets(
         (s) =>
           isCompleteTracklist(s) &&
           isFeedLeadCard(s) &&
-          !isRadioFiller(s) &&
+          !isRadioFiller(s, { festivalWeek: festivalWeekActive(nowMs) }) &&
           isRecentPerformance(s, days, nowMs) &&
           !isFestivalStorySet(s, nowMs) &&
           !exclude.has(s.id),

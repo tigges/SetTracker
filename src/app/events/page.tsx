@@ -143,7 +143,7 @@ export default async function EventsPage() {
             }))}
           />
           <VisualTeaser
-            href="/events/calendar"
+            href="/events/calendar#cal-today"
             eyebrow="Festival editions & club nights"
             title="This season’s calendar"
             blurb="Curated weekends plus official club calendars."

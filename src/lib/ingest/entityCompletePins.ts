@@ -83,7 +83,7 @@ const PROFILE_FIELDS = new Set<EntityCompleteField>([
 ]);
 
 const WEAK_WEBSITE_HUB =
-  /mixcloud\.com|hearthis\.at|\.gov\b|music\.youtube\.com/i;
+  /mixcloud\.com|hearthis\.at|\.gov\b|music\.youtube\.com|beatport\.com/i;
 
 const FALLBACK_WEBSITE_HUB = /linktr\.ee|(^|[./])komi\.io/i;
 

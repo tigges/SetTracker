@@ -8,7 +8,7 @@ import { isPrimaryNavActive } from "@/lib/siteNav";
 const PRIMARY = [
   { href: "/sets", label: "Sets" },
   { href: "/djs", label: "DJs" },
-  { href: "/events", label: "Events" },
+  { href: "/events/calendar#cal-today", label: "Events" },
   { href: "/atlas", label: "Atlas" },
 ] as const;
 

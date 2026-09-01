@@ -109,6 +109,32 @@ export function monthsForEditions(
     .sort((a, b) => a.year - b.year || a.month - b.month);
 }
 
+/** Current month first, then upcoming, then earlier months for a fold. */
+export function partitionCalendarMonths(
+  months: YearMonth[],
+  nowMs = Date.now(),
+): {
+  current: YearMonth | null;
+  upcoming: YearMonth[];
+  earlier: YearMonth[];
+} {
+  const now = new Date(nowMs);
+  const cy = now.getUTCFullYear();
+  const cm = now.getUTCMonth() + 1;
+  const current = months.find((m) => m.year === cy && m.month === cm) ?? null;
+  const upcoming = months.filter(
+    (m) => m.year > cy || (m.year === cy && m.month > cm),
+  );
+  const earlier = months.filter(
+    (m) => m.year < cy || (m.year === cy && m.month < cm),
+  );
+  return { current, upcoming, earlier };
+}
+
+export function monthSectionId(year: number, month: number): string {
+  return `cal-${year}-${pad2(month)}`;
+}
+
 export function editionsInMonth<T extends { startsAt: string; endsAt: string }>(
   editions: T[],
   year: number,

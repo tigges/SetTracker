@@ -32,6 +32,7 @@ function item(partial: Partial<FeedItem> & { id: string; slug: string }): FeedIt
     editionSlug: null,
     editionYear: null,
     editionLabel: null,
+    editionStartsAt: null,
     editionEndsAt: null,
     seriesName: null,
     primaryDj: {
@@ -435,6 +436,36 @@ describe("popularity rails", () => {
     ];
     const week = newThisWeekSets(feed, 9, now);
     assert.ok(week.some((s) => s.id === "d10"));
+  });
+
+  it("treats a mid-week Burning Man upload as festival-story", () => {
+    const now = Date.parse("2026-09-01T12:00:00Z");
+    const bm = item({
+      id: "bm",
+      slug: "bm",
+      eventSlug: "burning-man",
+      editionStartsAt: new Date("2026-08-30T00:00:00Z"),
+      editionEndsAt: new Date("2026-09-07T23:59:59Z"),
+      publishedAt: new Date("2026-09-01"),
+      type: "festival",
+    });
+    const radio = item({
+      id: "joel-radio",
+      slug: "joel-radio",
+      title: "Joel Corry Radio 188",
+      type: "radio",
+      eventSlug: null,
+      editionEndsAt: null,
+      venueTier: "radio",
+      top100Rank: 11,
+      publishedAt: new Date("2026-08-31"),
+    });
+    assert.equal(isFestivalStorySet(bm, now), true);
+    const week = newThisWeekSets([bm, radio], 9, now);
+    assert.ok(!week.some((s) => s.id === "joel-radio"));
+    assert.ok(!week.some((s) => s.id === "bm"));
+    const season = festivalSeasonSets([bm, radio], 9, now);
+    assert.ok(season.some((s) => s.id === "bm"));
   });
 
   it("caps festival season at two cards per event brand", () => {

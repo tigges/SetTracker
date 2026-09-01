@@ -642,6 +642,23 @@ export const ARTIST_ROSTER_CURATED: ArtistRosterEntry[] = [
     priority: "high",
   },
   {
+    name: "Wenzday",
+    genre: "Bass House",
+    accent: "#ff6b35",
+    homeCity: "Los Angeles, US",
+    youtube: { handle: "@WenzdayMusic", status: "ok" },
+    website: "https://wenzdaymusic.com",
+    socials: [
+      "https://www.youtube.com/@WenzdayMusic",
+      "https://instagram.com/wenzdaymusic",
+      "https://x.com/wenzdaymusic",
+      "https://facebook.com/wenzdaymusic",
+      "https://open.spotify.com/artist/1TOclxL64oLeB45DFWFFU2",
+      "https://www.beatport.com/artist/wenzday/591627",
+    ],
+    priority: "normal",
+  },
+  {
     name: "David Guetta",
     genre: "House",
     accent: "#1e90ff",

@@ -279,7 +279,7 @@ function toTracklistGapFields(
     sourceUrl: string | null;
     playbackUrl?: string | null;
     event: { slug: string; kind: string | null } | null;
-    edition: { year: number; endsAt: Date | null } | null;
+    edition: { year: number; startsAt: Date | null; endsAt: Date | null } | null;
     artists: Array<{ dj: { name: string; slug: string } }>;
   },
   playCount: number,
@@ -310,6 +310,7 @@ function toTracklistGapFields(
     publishedAt: s.publishedAt,
     performedAt: s.performedAt,
     editionYear: s.edition?.year,
+    editionStartsAt: s.edition?.startsAt,
     editionEndsAt: s.edition?.endsAt,
   };
 }
@@ -401,7 +402,7 @@ export async function getCatalogStats(): Promise<CatalogStats> {
         publishedAt: true,
         performedAt: true,
         event: { select: { slug: true, kind: true } },
-        edition: { select: { year: true, endsAt: true } },
+        edition: { select: { year: true, startsAt: true, endsAt: true } },
         artists: {
           where: { isPrimary: true },
           take: 1,
@@ -424,7 +425,7 @@ export async function getCatalogStats(): Promise<CatalogStats> {
         performedAt: true,
         _count: { select: { plays: true } },
         event: { select: { slug: true, kind: true } },
-        edition: { select: { year: true, endsAt: true } },
+        edition: { select: { year: true, startsAt: true, endsAt: true } },
         artists: {
           where: { isPrimary: true },
           take: 1,
@@ -500,7 +501,7 @@ export async function getCatalogStats(): Promise<CatalogStats> {
                 type: true,
                 publishedAt: true,
                 event: { select: { slug: true, kind: true } },
-                edition: { select: { endsAt: true } },
+                edition: { select: { startsAt: true, endsAt: true } },
                 artists: {
                   where: { isPrimary: true },
                   take: 1,
@@ -667,6 +668,7 @@ export async function getCatalogStats(): Promise<CatalogStats> {
         const festivalSeason = isFestivalSeasonSet(
           {
             eventSlug: set.event?.slug,
+            editionStartsAt: set.edition?.startsAt ?? null,
             editionEndsAt: set.edition?.endsAt ?? null,
             publishedAt: set.publishedAt,
             type: set.type,

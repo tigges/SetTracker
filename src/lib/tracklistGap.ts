@@ -38,6 +38,7 @@ export type TracklistGapFields = {
   publishedAt: Date | string;
   performedAt?: Date | string | null;
   editionYear?: number | null;
+  editionStartsAt?: Date | string | null;
   editionEndsAt?: Date | string | null;
 };
 
@@ -171,6 +172,7 @@ export function isActionableTracklistGap(
   const inSeason = isFestivalSeasonSet(
     {
       eventSlug: s.eventSlug,
+      editionStartsAt: s.editionStartsAt,
       editionEndsAt: s.editionEndsAt,
       publishedAt: s.publishedAt,
       type: s.type ?? undefined,

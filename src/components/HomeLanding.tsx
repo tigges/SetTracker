@@ -178,7 +178,7 @@ export function HomeLanding({
   markedDays: Set<string>;
   nowMs: number;
 }) {
-  const landingSets = pickLandingSets(feed, 3);
+  const landingSets = pickLandingSets(feed, 3, nowMs);
   const festivals = pickVenueMosaic(venues, "festival", 9);
   const clubs = pickVenueMosaic(venues, "club", 9);
   const djFaces = pickDjFaces(djs, 10);
@@ -350,7 +350,7 @@ export function HomeLanding({
           faces={atlasFaces}
         />
         <VisualTeaser
-          href="/events/calendar"
+          href="/events/calendar#cal-today"
           eyebrow="Festival editions & club nights"
           title="This season’s calendar"
           blurb="Curated weekends plus official club calendars."

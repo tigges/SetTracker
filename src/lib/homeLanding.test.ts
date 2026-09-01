@@ -114,6 +114,36 @@ assert.deepEqual(
   ["c"],
 );
 
+const burnNow = Date.parse("2026-09-01T12:00:00Z");
+const joelRadio = set({
+  id: "joel-radio",
+  title: "Joel Corry Radio 188",
+  venueTier: "radio",
+  top100Rank: 11,
+  festivalRank: null,
+  publishedAt: "2026-08-31T00:00:00Z",
+  performedAt: "2026-08-31T00:00:00Z",
+  primaryDj: { name: "Joel Corry", slug: "joel-corry" },
+});
+const burningMan = set({
+  id: "bm-playa",
+  title: "Vintage Culture b2b Arodes | Burning Man 2024",
+  eventSlug: "burning-man",
+  venueTier: "festival",
+  festivalRank: 40,
+  top100Rank: 18,
+  publishedAt: "2024-09-05T00:00:00Z",
+  performedAt: "2024-08-31T00:00:00Z",
+  editionYear: 2024,
+  primaryDj: { name: "Vintage Culture", slug: "vintage-culture" },
+});
+const burnWeek = pickLandingSets([joelRadio, burningMan], 3, burnNow);
+assert.equal(burnWeek[0]?.id, "bm-playa");
+assert.ok(
+  !burnWeek.some((s) => s.id === "joel-radio"),
+  "chart radio stays off the landing during Burning Man week",
+);
+
 assert.deepEqual(
   pickVisualFaces(
     [

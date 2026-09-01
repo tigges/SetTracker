@@ -142,6 +142,14 @@ export const KNOWN_HANDLES: Record<string, HandleHint> = {
     genre: "Bass House",
     accent: "#3aa0e0",
   },
+  wenzday: {
+    youtubeHandle: "@WenzdayMusic",
+    website: "https://wenzdaymusic.com",
+    instagram: "https://instagram.com/wenzdaymusic",
+    twitter: "https://x.com/wenzdaymusic",
+    genre: "Bass House",
+    accent: "#ff6b35",
+  },
   breazly: {
     youtubeHandle: "@bradeazy",
     soundcloudPermalink: "bradeazy",

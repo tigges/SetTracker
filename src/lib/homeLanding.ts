@@ -7,8 +7,13 @@ import {
   compareFeedPriority,
   dedupeNearDuplicates,
   isRadarCandidate,
+  isRadioFiller,
   pickRadarPicks,
 } from "./feedPriority";
+import {
+  currentFestivalEventSlugs,
+  festivalWeekActive,
+} from "./ingest/festivalDrops";
 import { collapseHostTwins, identifiedRatio } from "./feedQuality";
 import { detectPlaybackHost } from "./playback";
 import { setDisplayThumb } from "./setBrowse";
@@ -101,7 +106,15 @@ export function preferLandingPlayback<T extends LandingSetFields>(
   return kept.length > 0 ? kept : pool;
 }
 
-/** Three proof sets: Radar first, then feed priority so the landing never goes blank. */
+function isOnNowFestivalSet(
+  s: { eventSlug?: string | null },
+  nowMs: number,
+): boolean {
+  const slugs = currentFestivalEventSlugs(nowMs);
+  return Boolean(s.eventSlug && slugs.has(s.eventSlug));
+}
+
+/** Three proof sets: on-now festival, Radar, then feed priority. */
 export function pickLandingSets<T extends LandingSetFields>(
   feed: T[],
   limit = 3,
@@ -111,23 +124,40 @@ export function pickLandingSets<T extends LandingSetFields>(
   const mapped = collapseHostTwins(
     dedupeNearDuplicates(feed.map((s) => withLandingKeys(s))),
   );
+  const festivalWeek = festivalWeekActive(nowMs);
+  const onNow = preferLandingPlayback(
+    mapped.filter((s) => isOnNowFestivalSet(s, nowMs)),
+  ).sort(compareFeedPriority);
+  const lead = onNow.slice(0, festivalWeek ? 1 : 0);
+  const usedLead = new Set(lead.map((s) => s.id));
   const radar = pickRadarPicks(
-    preferLandingPlayback(mapped.filter((s) => isRadarCandidate(s, nowMs))),
-    limit,
+    preferLandingPlayback(
+      mapped.filter(
+        (s) => !usedLead.has(s.id) && isRadarCandidate(s, nowMs),
+      ),
+    ),
+    Math.max(0, limit - lead.length),
     nowMs,
   );
-  if (radar.length >= limit) return radar;
-  const used = new Set(radar.map((s) => s.id));
-  const playableRest = preferLandingPlayback(
-    mapped.filter((s) => !used.has(s.id)),
-  ).sort(compareFeedPriority);
-  const out = [...radar, ...playableRest];
+  const out = [...lead, ...radar];
   if (out.length >= limit) return out.slice(0, limit);
-  const usedAll = new Set(out.map((s) => s.id));
+  const used = new Set(out.map((s) => s.id));
+  const playableRest = preferLandingPlayback(
+    mapped.filter(
+      (s) =>
+        !used.has(s.id) && !isRadioFiller(s, { festivalWeek }),
+    ),
+  ).sort(compareFeedPriority);
+  const rest = [...out, ...playableRest];
+  if (rest.length >= limit) return rest.slice(0, limit);
+  const usedAll = new Set(rest.map((s) => s.id));
   const filler = mapped
-    .filter((s) => !usedAll.has(s.id))
+    .filter(
+      (s) =>
+        !usedAll.has(s.id) && !isRadioFiller(s, { festivalWeek }),
+    )
     .sort(compareFeedPriority);
-  return [...out, ...filler].slice(0, limit);
+  return [...rest, ...filler].slice(0, limit);
 }
 
 /** Unique image faces, first-seen wins. Skips empty / duplicate src. */
