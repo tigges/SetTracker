@@ -391,3 +391,35 @@ export const TL_BROHUG_BASS_HOUSE_MIXTAPE_2026: FingerprintSeedRow[] = [
   { at: "16:20", artist: "BROHUG", title: "Mosquito" },
   { at: "18:30", artist: "BROHUG", title: "Rats" },
 ];
+
+/**
+ * GREG 99 - Data Transmission 903 2025-01-27
+ * https://www.1001tracklists.com/tracklist/wgmjh91/greg-99-data-transmission-903-2025-01-27.html
+ * Official SC: https://soundcloud.com/data-transmission/dt903-gregbr
+ * oEmbed 2026-09-01: "DT903 - GREG(BR) by Data Transmission" — Data
+ * Transmission's own radio brand account (datatransmission.co), same class
+ * as GREG 99 / Hellbent Records. Paste utm_* query junk stripped from the
+ * slug. Paste Wire line named "sc-https://soundcloud.com/…" — never wire
+ * that; the real slug is sc-data-transmission-dt903-gregbr.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["sc-data-transmission-dt903-gregbr"]
+ *   = TL_GREG_99_DATA_TRANSMISSION_DT903_2025
+ * Overlay name TL_GREG-99_DATA_TRANSMISSION_DT903_2025-01-27 is not a
+ * valid identifier.
+ * No YouTube in the paste — do not invent a YT slug.
+ * Captured 2026-09-01 — provenance 1001tl.
+ */
+export const TL_GREG_99_DATA_TRANSMISSION_DT903_2025: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "GREG 99 & Pitros", title: "Rockstar" },
+  { at: "4:40", artist: "GREG 99", title: "Whispers" },
+  { at: "8:40", artist: "Discip", title: "The Way I Like It" },
+  { at: "12:20", artist: "Marian (BR)", title: "On & On" },
+  { at: "16:40", artist: "GREG 99", title: "Katchy" },
+  { at: "22:15", artist: "GREG 99", title: "Ibiza Nights" },
+  { at: "26:50", artist: "Mendo & Yvan Genkins", title: "Everybody" },
+  { at: "31:55", artist: "nocapz.", title: "More Love" },
+  { at: "36:45", artist: "Biscits", title: "Freak (GREG 99 Remix)" },
+  { at: "41:55", artist: "Ferra Black", title: "Star" },
+  { at: "45:35", artist: "Rick Legnani", title: "DERBY" },
+  { at: "49:45", artist: "GREG 99 & Cloonee", title: "Still My Baby" },
+  { at: "54:55", artist: "Prospa ft. RAHH", title: "This Rhythm" },
+];

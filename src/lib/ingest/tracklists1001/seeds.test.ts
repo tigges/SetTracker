@@ -227,6 +227,7 @@ import {
   TL_JAUZ_GET_CRANKED_BILL_GRAHAM_SF_2025,
   TL_WENZDAY_ILLFEST_WICKED_OAKS_AUSTIN_2025,
   TL_BROHUG_BASS_HOUSE_MIXTAPE_2026,
+  TL_GREG_99_DATA_TRANSMISSION_DT903_2025,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
@@ -6476,6 +6477,34 @@ for (let i = 1; i < brohugMixtape.length; i++) {
   assert.ok(
     (brohugMixtape[i]?.timestamp ?? 0) > (brohugMixtape[i - 1]?.timestamp ?? 0),
     `BROHUG Bass House Mixtape clocks must increase at index ${i}`,
+  );
+}
+
+// GREG 99 - Data Transmission 903 — wired, official Data Transmission SC.
+assertSeedClocks(TL_GREG_99_DATA_TRANSMISSION_DT903_2025);
+assert.equal(TL_GREG_99_DATA_TRANSMISSION_DT903_2025.length, 13);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-data-transmission-dt903-gregbr"],
+  TL_GREG_99_DATA_TRANSMISSION_DT903_2025,
+);
+assert.equal(
+  isWiredTracklistSlug("sc-data-transmission-dt903-gregbr"),
+  true,
+);
+const gregDataTransmission = tracklist1001RowsToPlays(
+  TL_GREG_99_DATA_TRANSMISSION_DT903_2025,
+);
+assert.equal(gregDataTransmission.length, 13);
+assert.equal(gregDataTransmission[0]?.provenance, "1001tl");
+assert.equal(gregDataTransmission[0]?.timestamp, 0);
+assert.equal(gregDataTransmission[0]?.trackTitle, "Rockstar");
+assert.equal(gregDataTransmission[12]?.trackTitle, "This Rhythm");
+assert.equal(gregDataTransmission[12]?.timestamp, 54 * 60 + 55);
+for (let i = 1; i < gregDataTransmission.length; i++) {
+  assert.ok(
+    (gregDataTransmission[i]?.timestamp ?? 0) >
+      (gregDataTransmission[i - 1]?.timestamp ?? 0),
+    `GREG 99 Data Transmission 903 clocks must increase at index ${i}`,
   );
 }
 

@@ -975,4 +975,17 @@ assert.equal(
   "sc-hellbentrecords-hellbent-fm-episode-006-greg99",
 );
 
+const gregDataTransmissionSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) => s.url === "https://soundcloud.com/data-transmission/dt903-gregbr",
+);
+assert.ok(gregDataTransmissionSc);
+assert.equal(gregDataTransmissionSc.primaryArtist.name, "GREG 99");
+assert.equal(gregDataTransmissionSc.primaryArtist.slug, "greg-99");
+assert.equal(gregDataTransmissionSc.seriesName, "Data Transmission");
+assert.equal(gregDataTransmissionSc.type, "radio");
+assert.equal(
+  `sc-data-transmission-${slugify("dt903-gregbr")}`,
+  "sc-data-transmission-dt903-gregbr",
+);
+
 console.log("soundcloud/tracks.test.ts ok");
