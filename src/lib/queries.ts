@@ -1921,6 +1921,8 @@ export type VenueProfile = NonNullable<Awaited<ReturnType<typeof getVenueBySlug>
 // ---------------------------------------------------------------------------
 type TrackChartSqlRow = {
   trackId: string;
+  title: string | null;
+  artistName: string | null;
   playCount: number | bigint;
   setCount: number | bigint;
   djCount: number | bigint;
@@ -1934,19 +1936,24 @@ async function loadTrackChartAggs(): Promise<TrackChartAgg[]> {
   const grouped = await prisma.$queryRaw<TrackChartSqlRow[]>`
     SELECT
       p.trackId AS trackId,
+      t.title AS title,
+      t.artistName AS artistName,
       COUNT(p.id) AS playCount,
       COUNT(DISTINCT p.setId) AS setCount,
       COUNT(DISTINCT sa.djId) AS djCount,
       COUNT(DISTINCT s.eventId) AS eventCount
     FROM Played p
+    INNER JOIN Track t ON t.id = p.trackId
     INNER JOIN "Set" s ON s.id = p.setId
     INNER JOIN SetArtist sa ON sa.setId = p.setId AND sa.isPrimary = 1
     WHERE p.trackId IS NOT NULL
-    GROUP BY p.trackId
+    GROUP BY p.trackId, t.title, t.artistName
   `;
   trackChartAggCache = grouped.map(
     (g): TrackChartAgg => ({
       trackId: g.trackId,
+      title: g.title ?? undefined,
+      artistName: g.artistName ?? undefined,
       playCount: Number(g.playCount ?? 0),
       setCount: Number(g.setCount ?? 0),
       djCount: Number(g.djCount ?? 0),

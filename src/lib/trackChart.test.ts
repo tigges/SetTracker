@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import {
   compareTrackChart,
+  isChartJunkTrack,
   isTrackChartRow,
   rankTrackChart,
   type TrackChartAgg,
@@ -100,6 +101,45 @@ describe("trackChart", () => {
     assert.deepEqual(
       ranked.map((r) => r.trackId),
       ["spread", "club-circuit"],
+    );
+  });
+
+  it("drops set intros and ID placeholders from the chart", () => {
+    assert.equal(
+      isChartJunkTrack("Live at Tomorrowland Brasil 2024 (Mixed) - Intro", "Armin van Buuren"),
+      true,
+    );
+    assert.equal(isChartJunkTrack("ID (ID Remix)", "ID"), true);
+    assert.equal(isChartJunkTrack("Intro", "Armin van Buuren"), true);
+    assert.equal(isChartJunkTrack("Show Intro", "Natte Visstick"), true);
+    assert.equal(isChartJunkTrack("Unknown track", "ID"), true);
+    assert.equal(isChartJunkTrack("Connect (Intro Edit)", "Ferry Corsten"), false);
+    assert.equal(isChartJunkTrack("Offshore (Axwell Intro Mix)", "Chicane"), false);
+    assert.equal(isChartJunkTrack("Levels (Radio Edit)", "Avicii"), false);
+    const intro = row({
+      trackId: "tml-intro",
+      title: "Live at Tomorrowland Brasil 2024 (Mixed) - Intro",
+      artistName: "Armin van Buuren",
+      djCount: 17,
+      setCount: 17,
+    });
+    const id = row({
+      trackId: "id-row",
+      title: "ID (ID Remix)",
+      artistName: "ID",
+      djCount: 8,
+      setCount: 8,
+    });
+    const song = row({
+      trackId: "levels",
+      title: "Levels (Radio Edit)",
+      artistName: "Avicii",
+      djCount: 10,
+      setCount: 11,
+    });
+    assert.deepEqual(
+      rankTrackChart([intro, id, song], 10).map((r) => r.trackId),
+      ["levels"],
     );
   });
 

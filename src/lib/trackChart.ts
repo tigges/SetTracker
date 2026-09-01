@@ -3,7 +3,10 @@
  *
  * A radio ident in 30 episodes of the same show is catalog coverage, not a
  * chart. Rank by how many primary DJs mixed the track; hide one-DJ rows.
+ * Set intros and unresolved ID placeholders are not songs.
  */
+
+import { isPlaceholderTitle } from "./playCollapse";
 
 export const TRACK_CHART_MIN_DJS = 2;
 /** `/tracks` index — top crossing tracks by DJ spread. */
@@ -17,10 +20,35 @@ export type TrackChartAgg = {
   setCount: number;
   djCount: number;
   eventCount: number;
+  title?: string;
+  artistName?: string;
 };
 
-export function isTrackChartRow(row: Pick<TrackChartAgg, "djCount">): boolean {
-  return row.djCount >= TRACK_CHART_MIN_DJS;
+/** Unresolved ID rows and set-open intros — not a crossing song. */
+export function isChartJunkTrack(
+  title: string | null | undefined,
+  artistName?: string | null,
+): boolean {
+  const t = (title ?? "").replace(/\s+/g, " ").trim();
+  const a = (artistName ?? "").replace(/\s+/g, " ").trim();
+  if (isPlaceholderTitle(t) || isPlaceholderTitle(a)) return true;
+  if (/^id(\s*[(\[]id(?:\s+remix)?[)\]])?$/i.test(t) && (!a || /^id$/i.test(a))) {
+    return true;
+  }
+  if (/^id$/i.test(a) && /^id\b/i.test(t)) return true;
+  if (/^(show\s+)?(intro|outro)(\s+id)?$/i.test(t)) return true;
+  if (/[-–—]\s*(intro|outro)\s*$/i.test(t)) return true;
+  return false;
+}
+
+export function isTrackChartRow(
+  row: Pick<TrackChartAgg, "djCount" | "title" | "artistName">,
+): boolean {
+  if (row.djCount < TRACK_CHART_MIN_DJS) return false;
+  if (row.title != null || row.artistName != null) {
+    return !isChartJunkTrack(row.title, row.artistName);
+  }
+  return true;
 }
 
 /** Unique DJs, then venues, then sets, then raw plays. */
