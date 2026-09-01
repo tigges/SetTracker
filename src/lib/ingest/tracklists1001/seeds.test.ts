@@ -218,6 +218,7 @@ import {
   TL_GIUSEPPE_OTTAVIANI_ILAN_BLUESTONE_BEYOND_WONDERLAND_2026,
   TL_GIUSEPPE_OTTAVIANI_DREAMSTATE_VANCOUVER_2026,
   TL_GIUSEPPE_OTTAVIANI_DREAMSTATE_SYDNEY_2026,
+  TL_GREG_99_HELLBENT_FM_006_2026,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
@@ -6187,6 +6188,46 @@ for (let i = 1; i < goDreamstateSyd.length; i++) {
     (goDreamstateSyd[i]?.timestamp ?? 0) >
       (goDreamstateSyd[i - 1]?.timestamp ?? 0),
     `Giuseppe Ottaviani Dreamstate Sydney clocks must increase at index ${i}`,
+  );
+}
+
+// GREG 99 - Hellbent FM 006 2026-05-21 — official Hellbent Records SC.
+// Overlay TL_GREG_99 is too generic. No YouTube in the paste.
+assertSeedClocks(TL_GREG_99_HELLBENT_FM_006_2026);
+assert.equal(TL_GREG_99_HELLBENT_FM_006_2026.length, 15);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-hellbentrecords-hellbent-fm-episode-006-greg99"
+  ],
+  TL_GREG_99_HELLBENT_FM_006_2026,
+);
+assert.equal(
+  isWiredTracklistSlug("sc-hellbentrecords-hellbent-fm-episode-006-greg99"),
+  true,
+);
+assert.equal(
+  isSecondaryPlaybackSlug("sc-hellbentrecords-hellbent-fm-episode-006-greg99"),
+  false,
+);
+assert.equal(
+  isWiredTracklistSlug("sc-greg99music-hellbent-fm-episode-006-greg99"),
+  false,
+  "do not invent a greg99music twin",
+);
+const gregHellbent = tracklist1001RowsToPlays(TL_GREG_99_HELLBENT_FM_006_2026);
+assert.equal(gregHellbent.length, 15);
+assert.equal(gregHellbent[0]?.provenance, "1001tl");
+assert.equal(gregHellbent[0]?.timestamp, 0);
+assert.equal(gregHellbent[0]?.artistName, "GREG 99");
+assert.equal(gregHellbent[0]?.trackTitle, "Waist Move");
+assert.equal(gregHellbent[14]?.trackTitle, "HOTS 4 U");
+assert.equal(gregHellbent[14]?.artistName, "Chris Lorenzo & aMo");
+assert.equal(gregHellbent[14]?.timestamp, 58 * 60 + 38);
+for (let i = 1; i < gregHellbent.length; i++) {
+  assert.ok(
+    (gregHellbent[i]?.timestamp ?? 0) >
+      (gregHellbent[i - 1]?.timestamp ?? 0),
+    `GREG 99 Hellbent FM 006 clocks must increase at index ${i}`,
   );
 }
 

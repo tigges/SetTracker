@@ -1,7 +1,15 @@
 {
   "note": "Operator-collected 1001Tracklists URLs. All listed urls[] rows are now seeded. Prefer new operator pastes over this archive. stillMissing1001 is video-in / no 1001 page — do not invent URLs. heldPendingPlayback is 1001-in / no official YT/SC playback — seed held, do not invent or wire fan playback. pendingCuePaste is official playback + operator 1001 URL without cue rows — do not scrape 1001 or invent 1001tl seeds.",
-  "updatedAt": "2026-08-31T10:50:00.000Z",
+  "updatedAt": "2026-09-01T11:20:00.000Z",
   "urls": [
+    {
+      "label": "GREG 99 · Hellbent FM 006 2026-05-21",
+      "slug": "sc-hellbentrecords-hellbent-fm-episode-006-greg99",
+      "name": "TL_GREG_99_HELLBENT_FM_006_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/19lpp259/greg-99-hellbent-fm-006-2026-05-21.html",
+      "soundcloudUrl": "https://soundcloud.com/hellbentrecords/hellbent-fm-episode-006-greg99",
+      "note": "Operator paste 2026-09-01. 15 timed cues on official Hellbent Records SC. Overlay TL_GREG_99 is too generic. Label account, not greg99music. No YouTube in the paste — do not invent a host twin. Paste Wire named sc-https://… — keep hellbent-fm-episode-006-greg99. Never sc-https://…."
+    },
     {
       "label": "Giuseppe Ottaviani · Dreamstate Sydney Showground 2026-02-07",
       "slug": "yt-Diu60Wd0kfo",

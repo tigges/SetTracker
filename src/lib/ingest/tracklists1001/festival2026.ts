@@ -193,6 +193,7 @@ import {
   TL_GIUSEPPE_OTTAVIANI_DREAMSTATE_VANCOUVER_2026,
   TL_GIUSEPPE_OTTAVIANI_DREAMSTATE_SYDNEY_2026,
 } from "./festivalCaptures20260831";
+import { TL_GREG_99_HELLBENT_FM_006_2026 } from "./festivalCaptures20260901";
 
 export {
   TL_ALESSO_TML_WE2_2026,
@@ -344,6 +345,7 @@ export {
   TL_GIUSEPPE_OTTAVIANI_ILAN_BLUESTONE_BEYOND_WONDERLAND_2026,
   TL_GIUSEPPE_OTTAVIANI_DREAMSTATE_VANCOUVER_2026,
   TL_GIUSEPPE_OTTAVIANI_DREAMSTATE_SYDNEY_2026,
+  TL_GREG_99_HELLBENT_FM_006_2026,
 };
 
 function formatClock(sec: number): string {
@@ -5049,6 +5051,8 @@ export const TRACKLIST_1001_BY_SOURCE_SLUG: Record<
   "yt-Diu60Wd0kfo": TL_GIUSEPPE_OTTAVIANI_DREAMSTATE_SYDNEY_2026,
   "sc-giuseppeottaviani-giuseppe-ottaviani-dreamstate":
     TL_GIUSEPPE_OTTAVIANI_DREAMSTATE_SYDNEY_2026,
+  "sc-hellbentrecords-hellbent-fm-episode-006-greg99":
+    TL_GREG_99_HELLBENT_FM_006_2026,
 };
 
 /** Sanity: every seeded clock must parse. */
