@@ -31,7 +31,10 @@ import {
   resolveBeatportUrl,
   trackIdentityKey,
 } from "@/lib/trackMeta";
-import { relatedSlugsFor } from "@/lib/ingest/discovery/relations";
+import {
+  allRelatedBySlug,
+  relatedSlugsFor,
+} from "@/lib/ingest/discovery/relations";
 import { quotedTitles, type BioLinkTarget } from "@/lib/srDjBio";
 import { resolveSetSlug } from "@/lib/ingest/sourceRemaps";
 import { collapseConsecutivePlays, playCollapseKey } from "@/lib/playCollapse";
@@ -81,6 +84,11 @@ import {
   isProfileVisibleSet,
   setDisplayThumb,
 } from "@/lib/setBrowse";
+import {
+  collaboratorHintsFromSets,
+  mergeSimilarHints,
+  type SimilarHint,
+} from "@/lib/wishlistSimilar";
 import { isBrowseReadyVenue, isVenueListed } from "@/lib/venueBrowse";
 import type { IdStatus } from "@/lib/status";
 
@@ -1227,6 +1235,8 @@ export type DjListItem = {
   isBrowseReady: boolean;
   /** DJ Mag Top 100 rank when listed; omit from the A–Z directory card otherwise. */
   top100Rank: number | null;
+  /** Canonical genre when known — wishlist similar uses the same lane. */
+  genre?: string | null;
 };
 
 type DjPlayAggRow = {
@@ -1280,6 +1290,7 @@ export async function getDjList(): Promise<DjListItem[]> {
         twitter: true,
         website: true,
         beatport: true,
+        genre: true,
         _count: { select: { sets: true } },
       },
     }),
@@ -1373,6 +1384,7 @@ export async function getDjList(): Promise<DjListItem[]> {
       twitter: d.twitter,
       website: d.website,
       beatport: d.beatport,
+      genre: normalizeGenre(d.genre),
       setCount: d._count.sets,
       playCount: plays.playCount,
       identifiedPlayCount: plays.identifiedPlayCount,
@@ -1385,6 +1397,21 @@ export async function getDjList(): Promise<DjListItem[]> {
     item.isBrowseReady = isBrowseReadyDj(item) && !isLowSignal;
     return item;
   });
+}
+
+/** Shared-set + press-graph hints for the wishlist similar strip. */
+export async function getWishlistSimilarHints(): Promise<
+  Record<string, SimilarHint[]>
+> {
+  const links = await prisma.setArtist.findMany({
+    select: { setId: true, dj: { select: { slug: true } } },
+  });
+  return mergeSimilarHints(
+    allRelatedBySlug(16),
+    collaboratorHintsFromSets(
+      links.map((row) => ({ setId: row.setId, slug: row.dj.slug })),
+    ),
+  );
 }
 
 export async function getAllSetSlugs(): Promise<string[]> {

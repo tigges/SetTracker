@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useMemo, useSyncExternalStore } from "react";
 import { EntityThumb } from "@/components/EntityThumb";
+import { SuggestDjButton } from "@/components/SuggestDj";
 import { djCardSubtitle } from "@/lib/djDirectory";
 import type { DjListItem } from "@/lib/queries";
 import {
@@ -12,13 +13,23 @@ import {
   wishlistLabel,
 } from "@/lib/wishlist";
 import {
+  rankWishlistSimilar,
+  type SimilarHint,
+} from "@/lib/wishlistSimilar";
+import {
   resetStoredWishlist,
   subscribeWishlist,
   toggleStoredWishlist,
   wishlistSnapshot,
 } from "@/lib/wishlistStore";
 
-export function WishlistClient({ djs }: { djs: DjListItem[] }) {
+export function WishlistClient({
+  djs,
+  similarHints,
+}: {
+  djs: DjListItem[];
+  similarHints: Record<string, SimilarHint[]>;
+}) {
   const raw = useSyncExternalStore(
     subscribeWishlist,
     wishlistSnapshot,
@@ -35,20 +46,26 @@ export function WishlistClient({ djs }: { djs: DjListItem[] }) {
 
   return (
     <div>
-      <div className="mb-4 flex flex-wrap items-baseline justify-between gap-2">
+      <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
         <p className="text-[14px] text-muted">
           {slugs.length} {slugs.length === 1 ? "DJ" : "DJs"}
           {customized ? " · this browser" : " · starting set"}
         </p>
-        {customized ? (
-          <button
-            type="button"
-            onClick={() => resetStoredWishlist()}
-            className="text-[12px] text-muted underline decoration-dotted underline-offset-2 hover:text-ink"
-          >
-            Reset to starting set
-          </button>
-        ) : null}
+        <div className="flex flex-wrap items-center gap-3">
+          <SuggestDjButton
+            catalog={djs.map((d) => ({ slug: d.slug, name: d.name }))}
+            wishlisted={slugs}
+          />
+          {customized ? (
+            <button
+              type="button"
+              onClick={() => resetStoredWishlist()}
+              className="text-[12px] text-muted underline decoration-dotted underline-offset-2 hover:text-ink"
+            >
+              Reset to starting set
+            </button>
+          ) : null}
+        </div>
       </div>
       {slugs.length === 0 ? (
         <p className="text-[14px] text-muted">
@@ -110,6 +127,87 @@ export function WishlistClient({ djs }: { djs: DjListItem[] }) {
           })}
         </ul>
       )}
+      <SimilarStrip
+        slugs={slugs}
+        djs={djs}
+        bySlug={bySlug}
+        similarHints={similarHints}
+      />
     </div>
+  );
+}
+
+function SimilarStrip({
+  slugs,
+  djs,
+  bySlug,
+  similarHints,
+}: {
+  slugs: string[];
+  djs: DjListItem[];
+  bySlug: Map<string, DjListItem>;
+  similarHints: Record<string, SimilarHint[]>;
+}) {
+  const rows = useMemo(
+    () =>
+      rankWishlistSimilar({
+        wishlisted: slugs,
+        hintsBySlug: similarHints,
+        catalog: djs,
+      }),
+    [slugs, similarHints, djs],
+  );
+  if (rows.length === 0) return null;
+  return (
+    <section className="mt-10">
+      <div className="mb-3 flex items-baseline justify-between gap-3">
+        <h2 className="text-[13px] font-semibold uppercase tracking-[0.14em] text-muted">
+          Similar DJs
+        </h2>
+        <span className="mono text-[12px] text-muted2">{rows.length}</span>
+      </div>
+      <p className="mb-3 max-w-2xl text-[13px] text-muted">
+        From sets they share and the same lane. Not on your list yet.
+      </p>
+      <ul className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
+        {rows.map((row) => {
+          const dj = bySlug.get(row.slug);
+          if (!dj) return null;
+          return (
+            <li key={row.slug}>
+              <div className="card flex h-[64px] items-center gap-2.5 px-3">
+                <Link
+                  href={`/djs/${dj.slug}`}
+                  className="flex min-w-0 flex-1 items-center gap-2.5"
+                >
+                  <EntityThumb
+                    src={dj.imageUrl}
+                    label={dj.name}
+                    accent={dj.accent}
+                    size={40}
+                    radius={10}
+                  />
+                  <div className="min-w-0">
+                    <div className="truncate text-[15px] font-semibold leading-5 text-ink">
+                      {dj.name}
+                    </div>
+                    <div className="truncate text-[12px] leading-4 text-muted2">
+                      {row.reason}
+                    </div>
+                  </div>
+                </Link>
+                <button
+                  type="button"
+                  onClick={() => toggleStoredWishlist(dj.slug)}
+                  className="flex-none rounded-md border border-line px-2 py-1 text-[11px] font-bold text-ink hover:border-brand hover:text-brand"
+                >
+                  Add
+                </button>
+              </div>
+            </li>
+          );
+        })}
+      </ul>
+    </section>
   );
 }
