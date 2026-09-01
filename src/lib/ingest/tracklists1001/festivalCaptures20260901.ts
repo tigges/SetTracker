@@ -118,3 +118,53 @@ export const TL_ANTI_UP_COACHELLA_WE2_MOJAVE_2024: FingerprintSeedRow[] = [
   { at: "59:00", artist: "Chris Lake & Chris Lorenzo pres. Anti Up", title: "Set Me Free" },
   { at: "1:03:00", artist: "Chris Lake & Chris Lorenzo pres. Anti Up ft. rhys from the sticks", title: "Holding On" },
 ];
+
+/**
+ * MORTEN & Malaa @ Crystal Garden Stage, Tomorrowland Weekend 1, Belgium 2026-07-18
+ * https://www.1001tracklists.com/tracklist/m7srdk1/morten-malaa-crystal-garden-stage-tomorrowland-weekend-1-belgium-2026-07-18.html
+ * Operator Wire named yt-unavailable_atm — not a video id. Never invent a
+ * Tomorrowland / artist playback. Seed held until official Relive lands.
+ * Overlay TL_MORTEN_Malaa_Crystal-Garden-… is not a valid identifier.
+ * Distinct from other Crystal Garden WE1 captures (Nosi, Steve Angello,
+ * Oscar And The Wolf, Blondish, Camila Jun). No SoundCloud in the paste.
+ * Mashup-then-component FE!N / Night In Detroit cluster stays as captured.
+ * If wired later, title artists first: "MORTEN & Malaa | Crystal Garden…".
+ * Captured 2026-09-01 — provenance 1001tl.
+ */
+export const TL_MORTEN_MALAA_TML_WE1_CRYSTAL_2026: FingerprintSeedRow[] = [
+  { at: "0:12", artist: "Danzfolk", title: "LMU" },
+  { at: "3:43", artist: "Humans Musik", title: "Got This One" },
+  { at: "7:05", artist: "Kiko & Olivier Giacomotto", title: "Let Me Know" },
+  { at: "9:40", artist: "MORTEN & Rafael Cerato", title: "Backstage Pass" },
+  { at: "12:40", artist: "Congorock ft. Mr. Lexx", title: "Babylon (David Guetta & MARTEN HØRGER pres. Men Machine & KENZ Rework)" },
+  { at: "14:10", artist: "Bountyhunter", title: "Woops (Dimitri Vegas & Junkie Kid Remix / BRANDON Remix)" },
+  { at: "17:10", artist: "Cassian & YOTTO & Da Hool", title: "Love Parade" },
+  { at: "19:04", artist: "G-POL", title: "Proper Education" },
+  { at: "23:20", artist: "Roddy Lima", title: "Night Time" },
+  { at: "26:17", artist: "MORTEN", title: "The Drill" },
+  { at: "27:49", artist: "Anyma & Baset", title: "Neverland (From Japan)" },
+  { at: "29:20", artist: "Pupa Nas T & SHUFFA ft. Denise Belfon", title: "Work Dub" },
+  { at: "32:20", artist: "MORTEN & David Guetta ft. Tinie Tempah", title: "London" },
+  { at: "36:05", artist: "Tchami & Malaa & MAKJ", title: "N9" },
+  { at: "37:38", artist: "David Guetta & MORTEN ft. Trippie Redd", title: "Locked In" },
+  { at: "40:45", artist: "Tigerblind", title: "It's About Time" },
+  { at: "44:15", artist: "Darude", title: "Sandstorm (ZANS Edit)" },
+  { at: "45:30", artist: "MORTEN & David Guetta", title: "La Révolution" },
+  { at: "47:50", artist: "Cloonee & Prospa vs. Faithless", title: "Free Your Mind vs. Insomnia (Crizzy Edit)" },
+  { at: "49:45", artist: "Township Rebellion & Fab Massimo", title: "Labyrinth" },
+  { at: "53:55", artist: "MORTEN & ARTBAT ft. Bonn", title: "Hollow" },
+  { at: "57:50", artist: "ARTBAT & David Guetta ft. Gotye", title: "Somebody That I Used To Know" },
+  { at: "1:02:00", artist: "Matisse & Sadko & Vion Konger ft. Scrufizzer", title: "Pull Up" },
+  { at: "1:03:10", artist: "Fafaq & The M", title: "Red Light Zone" },
+  { at: "1:05:58", artist: "Martin Garrix ft. Bonn", title: "High On Life" },
+  { at: "1:09:34", artist: "Stylo & Eli & Dani", title: "Body Works" },
+  { at: "1:12:53", artist: "Chris Lorenzo", title: "Appetite" },
+  { at: "1:14:34", artist: "Malaa", title: "Notorious" },
+  { at: "1:16:15", artist: "Mia Mendi & TH;EN", title: "Collapsing Sky" },
+  { at: "1:19:10", artist: "Bob Sinclar ft. Vybrate & Queen Ifrica & Makedah", title: "New New New (Avicii Meets Yellow Mix)" },
+  { at: "1:21:10", artist: "Travis Scott & Playboi Carti vs. MORTEN & David Guetta & Fedde Le Grand", title: "FE!N vs. Night In Detroit (DJs From Mars Bootleg)" },
+  { at: "1:21:33", artist: "Travis Scott ft. Playboi Carti", title: "FE!N" },
+  { at: "1:21:57", artist: "MORTEN & David Guetta ft. Fedde Le Grand", title: "Night In Detroit" },
+  { at: "1:22:20", artist: "DJ Snake & Tchami & Malaa & MERCER", title: "Made In France (Wax Motif Remix)" },
+  { at: "1:26:45", artist: "MORTEN & Malaa", title: "Shock The System" },
+];

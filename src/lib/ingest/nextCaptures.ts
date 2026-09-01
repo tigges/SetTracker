@@ -114,6 +114,14 @@ export const HELD_PLAYBACK_WATCH: {
     search: ["holy priest", "tomorrowland", "weekend 1", "2026"],
   },
   {
+    name: "MORTEN & Malaa · TML WE1",
+    seed: "TL_MORTEN_MALAA_TML_WE1_CRYSTAL_2026",
+    match: /\bmorten\b.+\bmalaa\b|\bmalaa\b.+\bmorten\b/i,
+    search: ["morten", "malaa", "tomorrowland", "weekend 1", "2026"],
+    waitNote:
+      "Do not invent yt-unavailable_atm — wait for official Tomorrowland playback.",
+  },
+  {
     name: "Knock2 B2B Zedd · HARD Summer",
     seed: "TL_KNOCK2_ZEDD_HARD_SUMMER_2026",
     match: /knock2/i,

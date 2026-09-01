@@ -798,6 +798,12 @@
   ],
   "heldPendingPlayback": [
     {
+      "label": "MORTEN & Malaa · Crystal Garden, Tomorrowland WE1 2026-07-18",
+      "name": "TL_MORTEN_MALAA_TML_WE1_CRYSTAL_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/m7srdk1/morten-malaa-crystal-garden-stage-tomorrowland-weekend-1-belgium-2026-07-18.html",
+      "note": "Operator paste 2026-09-01. 35 timed cues. Wire named yt-unavailable_atm — not a video id. Never invent Tomorrowland / artist playback or YOUTUBE_SETS / TRACKLIST_1001_BY_SOURCE_SLUG. Seed held until official Relive. Distinct from Nosi / Steve Angello / Oscar And The Wolf / Blondish / Camila Jun Crystal Garden WE1. No SC in the paste. Overlay TL_MORTEN_Malaa_Crystal-Garden-… is not a valid identifier. Mashup-then-component FE!N cluster stays as captured."
+    },
+    {
       "label": "Anti Up · Mojave, Coachella Festival Weekend 2 2024-04-19",
       "name": "TL_ANTI_UP_COACHELLA_WE2_MOJAVE_2024",
       "tracklistUrl": "https://www.1001tracklists.com/tracklist/2mccm4u1/chris-lake-chris-lorenzo-pres.-anti-up-mojave-coachella-festival-weekend-2-united-states-2024-04-19.html",

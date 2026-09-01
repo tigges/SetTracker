@@ -221,6 +221,15 @@ assert.equal(
   false,
 );
 assert.equal(
+  isHeldFileScanTarget({ title: "MORTEN B2B Malaa WE1 | Tomorrowland 2026" }),
+  true,
+);
+assert.equal(
+  isHeldFileScanTarget({ title: "MORTEN WE1 | Tomorrowland 2026" }),
+  false,
+  "solo MORTEN is not the held Crystal Garden b2b",
+);
+assert.equal(
   isFingerprintOnlyFileScanTarget({ slug: "yt-6DC3xoQF4Zs" }),
   true,
 );

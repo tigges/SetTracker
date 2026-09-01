@@ -221,6 +221,7 @@ import {
   TL_GREG_99_HELLBENT_FM_006_2026,
   TL_VALENTINO_KHAN_REVEL_ALBUQUERQUE_2026,
   TL_ANTI_UP_COACHELLA_WE2_MOJAVE_2024,
+  TL_MORTEN_MALAA_TML_WE1_CRYSTAL_2026,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
@@ -6292,6 +6293,40 @@ for (let i = 1; i < antiUpCoachella.length; i++) {
     (antiUpCoachella[i]?.timestamp ?? 0) >
       (antiUpCoachella[i - 1]?.timestamp ?? 0),
     `Anti Up Coachella Mojave 2024 clocks must increase at index ${i}`,
+  );
+}
+
+// MORTEN & Malaa @ Crystal Garden, Tomorrowland WE1 2026-07-18.
+// yt-unavailable_atm is a placeholder — seed held, never invent playback.
+assertSeedClocks(TL_MORTEN_MALAA_TML_WE1_CRYSTAL_2026);
+assert.equal(TL_MORTEN_MALAA_TML_WE1_CRYSTAL_2026.length, 35);
+assert.equal(
+  Object.values(TRACKLIST_1001_BY_SOURCE_SLUG).includes(
+    TL_MORTEN_MALAA_TML_WE1_CRYSTAL_2026,
+  ),
+  false,
+  "MORTEN & Malaa Crystal Garden seed is held — no official playback",
+);
+assert.equal(TRACKLIST_1001_BY_SOURCE_SLUG["yt-unavailable_atm"], undefined);
+assert.equal(isWiredTracklistSlug("yt-unavailable_atm"), false);
+assert.notEqual(
+  TL_MORTEN_MALAA_TML_WE1_CRYSTAL_2026,
+  TL_NOSI_TML_WE1_CRYSTAL_2026,
+  "MORTEN & Malaa is not the Nosi Crystal Garden WE1 seed",
+);
+const mortenMalaa = tracklist1001RowsToPlays(
+  TL_MORTEN_MALAA_TML_WE1_CRYSTAL_2026,
+);
+assert.equal(mortenMalaa.length, 35);
+assert.equal(mortenMalaa[0]?.provenance, "1001tl");
+assert.equal(mortenMalaa[0]?.timestamp, 12);
+assert.equal(mortenMalaa[0]?.trackTitle, "LMU");
+assert.equal(mortenMalaa[34]?.trackTitle, "Shock The System");
+assert.equal(mortenMalaa[34]?.timestamp, 86 * 60 + 45);
+for (let i = 1; i < mortenMalaa.length; i++) {
+  assert.ok(
+    (mortenMalaa[i]?.timestamp ?? 0) > (mortenMalaa[i - 1]?.timestamp ?? 0),
+    `MORTEN & Malaa TML WE1 Crystal clocks must increase at index ${i}`,
   );
 }
 

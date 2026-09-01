@@ -107,5 +107,23 @@ assert.ok(
   antiUp1001.archive.some((h) => h.name === "TL_ANTI_UP_COACHELLA_WE2_MOJAVE_2024"),
 );
 
+// MORTEN & Malaa TML WE1 — 1001 on file as a hold; yt-unavailable_atm is not a video.
+const mortenMalaa1001 = lookupCapture(
+  "https://www.1001tracklists.com/tracklist/m7srdk1/morten-malaa-crystal-garden-stage-tomorrowland-weekend-1-belgium-2026-07-18.html",
+  shippedArchive,
+);
+assert.equal(mortenMalaa1001.tracklistId, "m7srdk1");
+assert.equal(mortenMalaa1001.alreadyOnFile, true);
+assert.equal(mortenMalaa1001.slug, null);
+assert.equal(mortenMalaa1001.wiredCues, null);
+assert.ok(
+  mortenMalaa1001.archive.some(
+    (h) => h.name === "TL_MORTEN_MALAA_TML_WE1_CRYSTAL_2026",
+  ),
+);
+const fakeUnavailable = lookupCapture("yt-unavailable_atm", shippedArchive);
+assert.equal(fakeUnavailable.alreadyOnFile, false);
+assert.equal(fakeUnavailable.wiredCues, null);
+
 void TRACKLIST_1001_BY_SOURCE_SLUG;
 console.log("ingest/captureLookup.test.ts ok");

@@ -491,4 +491,18 @@ assert.deepEqual(
   ["mochakk"],
 );
 
+// Held Crystal Garden WE1 — artists first so Crystal Garden is not a junk DJ.
+const mortenMalaaSet = artistsForSet(
+  "MORTEN & Malaa | Crystal Garden Stage, Tomorrowland Weekend 1 2026",
+);
+assert.equal(mortenMalaaSet.primary.slug, "morten");
+assert.deepEqual(
+  mortenMalaaSet.collaborators.map((c) => c.slug),
+  ["malaa"],
+);
+assert.equal(
+  performingCreditFromTitle("MORTEN B2B Malaa WE1 | Tomorrowland 2026"),
+  "MORTEN B2B Malaa",
+);
+
 console.log("artists.test.ts ok");
