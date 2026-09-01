@@ -14,6 +14,9 @@ export const KNOWN_DJ_IMAGES: Record<string, string> = {
   "gentlemen-s-groove": "/artists/gentlemens-groove.png",
   // Official Deezer artist portrait (id 14043917).
   "1788-l": "/artists/1788-l.jpg",
+  // Spotify artist portrait (oembed from open.spotify.com/artist/3YiM6gLNY4UzJPcsnJBWQJ).
+  // Deezer "Bdk" 4574796 is a different act (BDK RIDERS graphic).
+  bdk: "/artists/bdk.jpg",
 };
 
 /**

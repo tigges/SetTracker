@@ -8,6 +8,7 @@ import {
   isFallbackWebsiteHub,
   loadEntityCompletePins,
   mergeEntityCompletePins,
+  isHttpsImageUrl,
   nameOverlapsHandle,
   parseEntityCompleteCsv,
   pinsFromAudit,
@@ -70,6 +71,20 @@ assert.equal(
 );
 assert.equal(nameOverlapsHandle("Joris Voorn", "https://soundcloud.com/korolovadj"), false);
 assert.equal(nameOverlapsHandle("Ferry Corsten", "https://www.instagram.com/someoneelse/"), false);
+assert.equal(
+  nameOverlapsHandle("BDK", "https://www.instagram.com/oficialbdk/"),
+  true,
+);
+assert.equal(
+  nameOverlapsHandle("BDK", "https://www.youtube.com/@OficialBDK"),
+  true,
+);
+assert.equal(
+  isHttpsImageUrl(
+    "https://image-cdn-fa.spotifycdn.com/image/ab6761610000517490d742bdf4a26e4e6279efac",
+  ),
+  true,
+);
 
 assert.equal(
   evaluateEntityCompleteRow({
@@ -1311,6 +1326,57 @@ assert.equal(
   assert.ok(brohug.bio?.includes("Stockholm"));
   assert.equal(brohug.imageUrl, undefined);
 }
+
+{
+  const bdk = loadEntityCompletePins().find((p) => p.slug === "bdk");
+  assert.ok(bdk);
+  assert.equal(bdk.kind, "dj");
+  assert.equal(
+    bdk.imageUrl,
+    "https://image-cdn-fa.spotifycdn.com/image/ab6761610000517490d742bdf4a26e4e6279efac",
+  );
+  assert.equal(bdk.instagram, "https://instagram.com/oficialbdk");
+  assert.equal(bdk.youtube, "https://www.youtube.com/@OficialBDK");
+  assert.equal(bdk.genre, undefined);
+  assert.ok(
+    !bdk.imageUrl?.includes("3186191e16afc811cac6be4d037b3cbf"),
+    "wrong Deezer BDK RIDERS art",
+  );
+}
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "bdk",
+    name: "BDK",
+    field: "instagram",
+    value: "https://www.instagram.com/oficialbdk/",
+    evidence: "operator paste",
+  }).value,
+  "https://instagram.com/oficialbdk",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "bdk",
+    name: "BDK",
+    field: "youtube",
+    value: "https://www.youtube.com/@OficialBDK",
+    evidence: "operator paste",
+  }).value,
+  "https://www.youtube.com/@OficialBDK",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "bdk",
+    name: "BDK",
+    field: "imageUrl",
+    value:
+      "https://image-cdn-fa.spotifycdn.com/image/ab6761610000517490d742bdf4a26e4e6279efac",
+    evidence: "operator paste, Spotify artist oembed",
+  }).value,
+  "https://image-cdn-fa.spotifycdn.com/image/ab6761610000517490d742bdf4a26e4e6279efac",
+);
 
 // Fields with no Dj column must drop rather than be coerced somewhere else.
 for (const field of ["tiktok", "facebook", "spotify", "deezer"]) {

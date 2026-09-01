@@ -87,7 +87,7 @@ const TEMPLATE_BIO =
   /is an? (?:.+based )?DJ, producer or electronic artist whose work centers on/i;
 
 const GENERIC_HANDLE_LEFTOVER =
-  /^(the|its|itsthe|thisis|official|real|dj|music|beats|sound|sounds|channel|video|live|tv|hq|ok|iam|im|weare|and|fest|festival|x|com|net|org|nu|io|co|uk|dot|dotcom|[0-9]+)*$/;
+  /^(the|its|itsthe|thisis|official|oficial|real|dj|music|beats|sound|sounds|channel|video|live|tv|hq|ok|iam|im|weare|and|fest|festival|x|com|net|org|nu|io|co|uk|dot|dotcom|[0-9]+)*$/;
 
 /** Spoken digit used in handles like @4444fourofakind for "4444 OF A KIND". */
 const DIGIT_WORD: Record<string, string> = {
@@ -406,7 +406,7 @@ export function isHttpsImageUrl(url: string): boolean {
   if (!/^https:\/\//i.test(url) || /^data:/i.test(url)) return false;
   if (isWeakOfficialUrl(url)) return false;
   return (
-    /yt3\.googleusercontent\.com|i\.ytimg\.com|cloudfront\.net|upload\.wikimedia\.org|commons\.wikimedia\.org/i.test(
+    /yt3\.googleusercontent\.com|i\.ytimg\.com|cloudfront\.net|upload\.wikimedia\.org|commons\.wikimedia\.org|spotifycdn\.com|i\.scdn\.co/i.test(
       url,
     ) || /\.(jpe?g|png|webp|gif|avif)(\?|$)/i.test(url)
   );
