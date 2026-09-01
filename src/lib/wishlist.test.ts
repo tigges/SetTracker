@@ -20,11 +20,16 @@ assert.equal(normalizeWishlistSlug("breazly"), "bradeazy");
 assert.equal(normalizeWishlistSlug("Marten Hørger"), "marten-horger");
 assert.equal(normalizeWishlistSlug("Chapter & Verse"), "chapter-verse");
 assert.equal(normalizeWishlistSlug("Mau P"), "mau-p");
-assert.equal(normalizeWishlistSlug("Gregg GG"), "gregg-gg");
+assert.equal(normalizeWishlistSlug("Gregg GG"), "greg-99");
+assert.equal(normalizeWishlistSlug("Greg GG"), "greg-99");
+assert.equal(normalizeWishlistSlug("GREG 99"), "greg-99");
 assert.equal(normalizeWishlistSlug("FISHER"), "fisher");
 assert.equal(normalizeWishlistSlug("MEDUZA"), "meduza");
 assert.ok(!wishlistDefaultSlugs().includes("dradeazy"));
+assert.ok(!wishlistDefaultSlugs().includes("gregg-gg"));
+assert.ok(!wishlistDefaultSlugs().includes("lao"));
 assert.ok(wishlistDefaultSlugs().includes("bradeazy"));
+assert.ok(wishlistDefaultSlugs().includes("greg-99"));
 
 for (const row of WISHLIST_DEFAULTS) {
   assert.equal(slugify(row.name), row.slug, `${row.name} → ${row.slug}`);

@@ -1,7 +1,7 @@
 {
   "source": "https://djmag.com/top100djs",
   "year": 2025,
-  "note": "DJ Mag Top 100 DJs. Profiles omit official URLs — website from roster/pins + Wikidata P856; homeCity / bio / genre from a concrete profile already on the seed. Never Dj.website. Mixmag.net not used.",
+  "note": "DJ Mag Top 100 DJs. Profiles omit official URLs — `website` from roster/pins + Wikidata P856; `homeCity` / `bio` / `genre` from a concrete profile already on the seed. Never Dj.website. Mixmag.net not used.",
   "djs": [
     {
       "rank": 1,
@@ -18,13 +18,17 @@
       "name": "Martin Garrix",
       "djmagUrl": "https://djmag.com/top100djs/2025/2/martin-garrix",
       "website": "https://martingarrix.com/",
-      "homeCity": "The Netherlands"
+      "homeCity": "The Netherlands",
+      "bio": "For superstar DJ Martin Garrix, 2025 meant more milestones. He played his first arena set in India at DY Patil Stadium in Mumbai, and celebrated a decade of his residency at Ushuaïa Ibiza. In LA, he headlined two nights at the State Historic Park, while ticking off Creamfields, Lollapalooza, Tomorrowland and Ultra Europe in his festival gig diary Garrix spent plenty of time in the producer’s chair too. As well as his track ‘Inside Our Hearts’ with Alesso and Shaun Farrugia, there was ‘Our Time’ with Afrojack, David Guetta and Amél, plus two tracks with Arijit Singh: ‘Weightless’ and ‘Angels For Each Other’. Before the year is out, last year’s No.1 will perform at Austin’s Wicked Oaks…",
+      "genre": "Progressive House"
     },
     {
       "rank": 3,
       "slug": "alok",
       "name": "Alok",
-      "djmagUrl": "https://djmag.com/top100djs/2025/3/alok"
+      "djmagUrl": "https://djmag.com/top100djs/2025/3/alok",
+      "website": "https://alokmusic.com/",
+      "bio": "Two-time Latin Grammy–nominated Brazilian DJ, producer, and philanthropist Alok repeatedly lands the No.1 position for Latin American DJs, including in this Top 100 DJs poll. The most streamed Brazilian artist internationally, he was also named one of Bloomberg Línea’s 500 most influential people in Latin America. His reach is global, with appearances not only at Rock In Rio, but also at marquee festivals such as Lollapalooza, Tomorrowland, and Coachella, where he premiered his Keep Art Human movement to critical and popular acclaim His high-octane Brazilian bass sound obliterates dancefloors while incorporating his rich cultural influences. Among his notable collaborations are Kylie…"
     },
     {
       "rank": 4,
@@ -32,7 +36,8 @@
       "name": "Dimitri Vegas & Like Mike",
       "djmagUrl": "https://djmag.com/top100djs/2025/4/dimitri-vegas-mike",
       "website": "https://www.dimitrivegasandlikemike.com/",
-      "homeCity": "Belgium"
+      "homeCity": "Belgium",
+      "bio": "2025 has been a big year for many of us. Dimitri Vegas and Like Mike are no exceptions. Reflecting on events since last September, we’re told about the success of singles like ‘Yeah’ and ‘Heroine’, that huge Ushuaïa Ibiza residency, and how an all-vinyl headline set at Tomorrowland reflected a process of revisiting roots in old school rave, techno, and gabber Then there’s a forthcoming Amazon Christmas movie, co-starring Arnold Schwarzenegger and Alan Ritchson, the Dino Warriors comic book, and making a drum & bass-style track with Loreen and David Guetta. And that’s just Dimitri"
     },
     {
       "rank": 5,
@@ -40,7 +45,8 @@
       "name": "Armin Van Buuren",
       "djmagUrl": "https://djmag.com/top100djs/2025/5/armin-van-buuren",
       "website": "https://www.arminvanbuuren.com/",
-      "homeCity": "The Netherlands"
+      "homeCity": "The Netherlands",
+      "bio": "Perhaps the biggest surprise for Armin fans in 2025 was the DJ and producer’s experiment with techno. His reimagining of D-Shake’s 1990 classic ‘Techno Trance’, made alongside Adam Beyer, raised some eyebrows. “I loved working with Adam Beyer,” Armin says. “More than anything, this track shows the synergy between our two genres, and how crossing over between them can be more than the sum of its parts.” Armin also released his ninth album, ‘Breathe’, in the summer, and ‘A State Of Trance Ibiza 2025’. “For my mix albums, I pick tracks from a very long list of recent fan favourites, unreleased label signings, personal favourites from the radio show, and tunes that got an amazing response at…"
     },
     {
       "rank": 6,
@@ -48,7 +54,9 @@
       "name": "Timmy Trumpet",
       "djmagUrl": "https://djmag.com/top100djs/2025/6/timmy-trumpet",
       "website": "https://www.timmytrumpet.com/",
-      "homeCity": "Sydney, Australia"
+      "homeCity": "Sydney, Australia",
+      "bio": "Timmy Trumpet ascended to the top table of EDM some time ago and this last year has seem him solidify it with his Las Vegas residency. Each week he plays Marquee Nightclub and pulls out all of the stops with wild production, maximal sounds and of course plenty of his famous trumpet. In between those gigs he's toured Asia, Europe and continued his Sinphony Radio show as well as dropping big tunes like 'Move Your Body' in collaboration with Sub Zero Project and Dimitri Vegas & Like Mike, and 'Ziga' with Zafrir and Henrique Camacho — so it's been another busy 12 months",
+      "genre": "House"
     },
     {
       "rank": 7,
@@ -56,7 +64,9 @@
       "name": "FISHER",
       "djmagUrl": "https://djmag.com/top100djs/2025/7/fisher",
       "website": "https://followthefishtv.com/",
-      "homeCity": "Australia"
+      "homeCity": "Australia",
+      "bio": "FISHER’s signature antics made for a wild summer out in clubland. Whether dropping dancefloor heaters like the punchy ‘blackberries’ with bbyclose, or quite literally falling from the ceiling and into the booth for his Thursday night residency at Ibiza’s [UNVRS], the Australian house icon continues to reel in crowds with his playful energy and knack for surprise. The CATCH & RELEASE label boss took the global festival circuit for a swim this year too, delivering massive sets at Rothbury, MI’s Electric Forest, Solidays in Paris and Romania’s award-winning UNTOLD, among others. In 2025, it’s clear — good times unfold when you follow the fish",
+      "genre": "House"
     },
     {
       "rank": 8,
@@ -64,7 +74,8 @@
       "name": "Afrojack",
       "djmagUrl": "https://djmag.com/top100djs/2025/8/afrojack",
       "website": "https://afrojack.com/",
-      "homeCity": "Rotterdam"
+      "homeCity": "Rotterdam",
+      "bio": "It's easy to check off highlights from another year in the Afrojack universe. That David Guetta and Sia remix finally got a release. His track ‘Never Forget You’ was ubiquitous at festivals around the world over the summer. But if you speak to Afrojack, he'll tell you that 2025 was the year that he fell back in love with DJing. When your star is as big as his, it's easy to ride your coattails and simply turn up and give the people a ‘best of’ set. But this year saw the Rotterdam shapeshifter get back to his roots — his DJ sets were a celebration of dance music in all its forms, going right back to the moment he fell in love with the club."
     },
     {
       "rank": 9,
@@ -81,7 +92,8 @@
       "slug": "anyma",
       "name": "Anyma",
       "djmagUrl": "https://djmag.com/top100djs/2025/10/anyma",
-      "website": "https://www.anyma.com/"
+      "website": "https://www.anyma.com/",
+      "bio": "Like his “cybernetic opera” at the Las Vegas Sphere, what comes after ‘The End Of Genesys’ also unfolds in several acts. And just as they did for his humanoid Eva, together, they’ll offer new glimpses of Anyma’s own identity. With his newfound freedom to explore concepts beyond ‘Genesys’, he’ll soon trade the White Isle for one of the Seven Wonders of the World to present his first-ever two-part show, Quantum Genesys, at the Great Pyramids of Giza. Six months later, Anyma will headline Coachella, where he’ll present the world premiere of his new audiovisual show, Æden. Assuredly, its creative fruits will be worth picking"
     },
     {
       "rank": 11,
@@ -89,7 +101,9 @@
       "name": "Vintage Culture",
       "djmagUrl": "https://djmag.com/top100djs/2025/11/vintage-culture",
       "website": "https://vintageculture.com/",
-      "homeCity": "Brazil"
+      "homeCity": "Brazil",
+      "bio": "Ten years after first breaking into the Top 100 DJs poll, Vintage Culture remains one of the biggest DJs in the world, landing the No.11 spot this year. Real name Lukas Rafael Ruiz Hespanhol, he was born in the Brazilian state of Mato Grosso do Sul, but grew up just across the border in Katueté, a farming city in Paraguay. His sound feels as at home at major festivals, including Tomorrowland and EDC, as it does during 10-hour sets on the Space Miami terrace and his recent performance at Burning Man. This year, he also launched his new label, Affairs Records, with ‘Upon Your Skin’ featuring Noah Kulaga, with more music on the imprint said to be imminent",
+      "genre": "House"
     },
     {
       "rank": 12,
@@ -97,7 +111,9 @@
       "name": "Peggy Gou",
       "djmagUrl": "https://djmag.com/top100djs/2025/12/peggy-gou",
       "website": "https://peggygou.com/",
-      "homeCity": "South Korea"
+      "homeCity": "South Korea",
+      "bio": "After releasing her debut album, ‘I Hear You’, in June last year Peggy Gou maintained the momentum with a string of high-profile shows, seamlessly moving between the worlds of music and fashion. The DJ and producer rounded out 2024 with a headline tour in Australia — her first major run in the country for a number of years — playing to packed crowds in Brisbane, Sydney and Melbourne. This summer saw her dominate the festival circuit, with standout sets at Kappa Futur, Sonar, and Parklife — as well as plans to play [UNVRS]’s closing party. In early October Gou brings her magic to London, selling out Drumsheds, the capital’s biggest nightclub venue, and in November she’ll be scaling up Gou…",
+      "genre": "House"
     },
     {
       "rank": 13,
@@ -105,7 +121,8 @@
       "name": "Don Diablo",
       "djmagUrl": "https://djmag.com/top100djs/2025/13/don-diablo",
       "website": "https://www.dondiablo.com/",
-      "homeCity": "The Netherlands"
+      "homeCity": "The Netherlands",
+      "bio": "Don Diablo’s 2025 highlights were numerous. He built a new recording studio in Hollywood, worked with superstar vocalist Nelly Furtado, and reimagined tunes by Fleetwood Mac and The Chemical Brothers. There were plentiful sold-out gigs worldwide, but what occupied him most of all was celebrating 10 years of his HEXAGON label. “It’s more than an anniversary, it’s a decade of dreams turned into reality, of building a global family from nothing but an idea, of ups and downs, late nights, and endless flights, but always with love and passion at the core,” he says. “I feel humbled, proud, and inspired all at once, grateful to every fan, every artist, and every soul who believed in the vision.…"
     },
     {
       "rank": 14,
@@ -113,7 +130,8 @@
       "name": "Steve Aoki",
       "djmagUrl": "https://djmag.com/top100djs/2025/14/steve-aoki",
       "website": "https://www.steveaoki.com/",
-      "homeCity": "California"
+      "homeCity": "California",
+      "bio": "Is Steve Aoki man or machine? Judging by his non-stop gigging schedule, his prolific output, and his work with both his Dim Mak label and the Aoki Foundation (supporting research into degenerative brain diseases), he must have at least some high voltage running through his veins. In truth, he may have slowed down a teensy bit since his move to Henderson, Nevada, a decade ago — many of his live dates take place in nearby Las Vegas — but he’s still got the energy of someone half his age. “I’m not here to party,” he said in a recent interview. “I’m here to work.” May the work never end"
     },
     {
       "rank": 15,
@@ -121,7 +139,9 @@
       "name": "Hardwell",
       "djmagUrl": "https://djmag.com/top100djs/2025/15/hardwell",
       "website": "https://djhardwell.com/",
-      "homeCity": "Breda, The Netherlands"
+      "homeCity": "Breda, The Netherlands",
+      "bio": "It can’t be easy being Hardwell. The Dutch DJ and producer, who claimed the Top 100 DJs crown twice before turning 25, shows no signs of slowing down since his return to the scene. In 2025, he launched his monthly radio show, Hardwell Presents Euphoria, on Tomorrowland’s One World Radio, returned to Ultra Miami with the debut of ‘Sanctuary’, and dropped a series of high-energy tracks including ‘Beat Of The Drum’ and his collaborative edit of Julian Cross and FISION’s ‘KUTMEG' with Afrojack. Touring heavily, he completed a fan-voted, three-city US run, and cites his back-to-back set with ARTBAT at Resistance Ibiza as a key highlight",
+      "genre": "Big Room"
     },
     {
       "rank": 16,
@@ -129,7 +149,9 @@
       "name": "Calvin Harris",
       "djmagUrl": "https://djmag.com/top100djs/2025/16/calvin-harris",
       "website": "https://www.calvinharris.com/",
-      "homeCity": "Dumfries, UK"
+      "homeCity": "Dumfries, UK",
+      "bio": "This year, chart-dominating dance superstar Calvin Harris has turned out more of his catchy magic in the form of the Gold-certified 'Blessings' featuring Clementine Douglas, which hit the Top 3 in the UK and is a summery, Ibiza-primed gem, as well as the equally Balearic 'Ocean' with Jessie Reyez. Bigger than any of that, though, was the fact that the 41-year-old Scottish DJ and producer also became a father in July. That didn't stop him returning to Ibiza for a monster season that saw him playing twice a week at Ushuaïa. His Tuesday and Friday residencies featured guests like Nic Fanciulli and Oliver Heldens and kept him firmly at the top table",
+      "genre": "House"
     },
     {
       "rank": 17,
@@ -137,7 +159,9 @@
       "name": "Black Coffee",
       "djmagUrl": "https://djmag.com/top100djs/2025/17/black-coffee",
       "website": "https://music.apple.com/za/artist/black-coffee/306140760/",
-      "homeCity": "South Africa"
+      "homeCity": "South Africa",
+      "bio": "Twenty years on from his breakout debut album, Black Coffee remains one of dance music’s most influential figures. Renowned for fusing African instrumentation with deep, soulful house, he brought Afro-house to the global stage and helped transform it into one of electronic music’s biggest sounds, Afro-tech. In 2024 he reunited with fellow South African star Shimza for a surprise B2B under their The Rhythm banner, and followed up with fresh studio work, reworking Nite Freak’s ‘Not The Same’ in December and dropping ‘Trippy Yeah’ with Jimi Jules earlier this summer. A master selector, Coffee continued to grace the decks at some of dance music’s biggest events, including Coachella,…",
+      "genre": "House"
     },
     {
       "rank": 18,
@@ -145,7 +169,9 @@
       "name": "W&W",
       "djmagUrl": "https://djmag.com/top100djs/2025/18/ww",
       "website": "https://www.wandwmusic.com/",
-      "homeCity": "The Netherlands"
+      "homeCity": "The Netherlands",
+      "bio": "Ethel the cat is having her best year ever thanks to W&W. The Dutch duo rinsed ‘OIIA OIIA’ alongside spinning visuals of the munchkin feline on New Year’s Eve, and the rest is history. “The day after the show we posted a video on TikTok, and we had never seen a response as we did that day,” they share. The lightning-fast tune, as well as viral clips of ‘Tung Tung Tung Sahur’, continue to spotlight W&W’s lasting influence on the EDM scene. “Those videos really show us that dance music can resonate with the younger and upcoming generation,” they add. Easing back into the Top 20, W&W are only getting louder.",
+      "genre": "Melodic House"
     },
     {
       "rank": 19,
@@ -153,7 +179,9 @@
       "name": "Lost Frequencies",
       "djmagUrl": "https://djmag.com/top100djs/2025/19/lost-frequencies",
       "website": "https://lostfrequencies.com/",
-      "homeCity": "Belgium"
+      "homeCity": "Belgium",
+      "bio": "The last year has been a learning curve for Lost Frequencies. That might have something to do with him turning 30, a major milestone for anyone. Either way, when we asked the man himself — Felix De Laet — to summarise 2025, he first spoke about working on his work-life balance, then moved onto “pushing the boundaries of music while staying true to my world”. That means premiering a new solo show at London’s Roundhouse, sets from North America to the Far East, Lebanon to Morocco, and teaming up with Argy & rhys from the sticks for the single ‘Summer Skies’. Among other things",
+      "genre": "Melodic House"
     },
     {
       "rank": 20,
@@ -161,7 +189,9 @@
       "name": "Keinemusik",
       "djmagUrl": "https://djmag.com/top100djs/2025/20/keinemusik",
       "website": "https://keinemusik.com/",
-      "homeCity": "Berlin, Germany"
+      "homeCity": "Berlin, Germany",
+      "bio": "Berlin-based superforce Keinemusik — DJs and producers Adam Port, &ME, Rampa and Reznik — have steadily built an empire worldwide, and this year was one for refinement and expansion. As a collective they released a string of singles including ‘See You Again’ with Sevdaliza, ‘Crazy For It’ featuring Vinson, and ‘Say What’. Beyond the studio, they carried the spirit of the collective across the globe, with their biggest hometown show to date at Berlin’s Tempelhof Airport, to Zamna in Tulum, and milestones like Coachella, Al-Ula and La Caja Magica in Madrid. “Berlin’s Tempelhof Homecoming show was unforgettable, returning to the city where everything started in front of tens of thousands of…",
+      "genre": "House"
     },
     {
       "rank": 21,
@@ -169,13 +199,16 @@
       "name": "Tiësto",
       "djmagUrl": "https://djmag.com/top100djs/2025/21/tiesto",
       "website": "https://www.tiesto.com/",
-      "homeCity": "The Netherlands"
+      "homeCity": "The Netherlands",
+      "bio": "A regular in the Top 100 DJs list for many years now, Grammy-nominated and multi-award-winning Tiësto once again makes an appearance, following another 12 months of sell-out events. Kicking off the year with Zamna presents Tiësto Tulum, the Dutch big room legend took his unique style to DJ dates all over Europe, North and South America, while also holding down a pair of Las Vegas residencies at TAO Beach and OMNIA Nightclub. He’s also been remarkably prolific in the studio, collaborating with many artists including Oscar L, Undercatt, Odd Mob & Good Boys, and Oak on more of his signature, Tiësto, big, big room tunes"
     },
     {
       "rank": 22,
       "slug": "reinier-zonneveld",
       "name": "Reinier Zonneveld",
-      "djmagUrl": "https://djmag.com/top100djs/2025/22/reinier-zonneveld"
+      "djmagUrl": "https://djmag.com/top100djs/2025/22/reinier-zonneveld",
+      "website": "https://linktr.ee/reinierzonneveld/",
+      "bio": "Fresh off the back of his own R2 festival in Spaarnwoude, Filth On Acid founder Reinier Zonneveld continues to dominate the live scene, melding hard techno, rave, gabber, and house. He even played a live 10-hour show at the festival, as part of his new concept, R2. “I programmed an AI and trained it on just my own music to have kind of a copy of myself,” he says. “We had a hologram setup to visualise what the AI was doing, and gave it robots, with which it was able to control the exact same setup that I use on stage.” Like having “two extra hands on stage”, this is just one technique that Reinier has used to level up his live show."
     },
     {
       "rank": 23,
@@ -183,7 +216,9 @@
       "name": "KSHMR",
       "djmagUrl": "https://djmag.com/top100djs/2025/23/kshmr",
       "website": "https://welcometokshmr.com/",
-      "homeCity": "Berkeley, CA"
+      "homeCity": "Berkeley, CA",
+      "bio": "\"One of the top moments of 2025 was hitting the stage at Ultra Miami with the orchestra — that was a next-level experience,” says KSHMR. The innovative live show (which he’ll tour in 2026) materialised in tandem with a full-throttle studio year, which bore the ‘Sounds of KSHMR Vol.5’ sample pack and global bangers like ‘The Chant’ with Ryos and ‘Bad’ alongside W&W “Connecting with my audience to create mashups of cultural classics and major dance music tracks at festivals across South America and Europe, along with the live orchestral performances, was incredibly inspiring,” the Top 100 DJ shares of recent highs. “It’s exciting to see the love for the fusion of these eclectic worlds and…",
+      "genre": "Techno"
     },
     {
       "rank": 24,
@@ -191,7 +226,8 @@
       "name": "Alan Walker",
       "djmagUrl": "https://djmag.com/top100djs/2025/24/alan-walker",
       "website": "https://alanwalker.com/",
-      "homeCity": "Norway"
+      "homeCity": "Norway",
+      "bio": "For Alan Walker, 2025 has been all about the release of his album, ‘Walkerworld 2.0’, featuring 23 tracks and collaborations with the likes of Joe Jonas and Steve Aoki. The fifth studio long-player for the masked one has been greeted with a wave of enthusiasm by his loyal Walkers, and new fans across the globe. Simultaneously, it’s been the 10th anniversary of his mega hit, ‘Faded’, so it’s only right and fitting to take the show on the road across North America, Europe and India. Highlights included headliner performances at Tomorrowland, Electric Love Festival in Austria, and an appearance at Formula 1 Singapore Grand Prix no less"
     },
     {
       "rank": 25,
@@ -199,7 +235,9 @@
       "name": "Carl Cox",
       "djmagUrl": "https://djmag.com/top100djs/2025/25/carl-cox",
       "website": "https://www.carlcox.com/",
-      "homeCity": "UK"
+      "homeCity": "UK",
+      "bio": "After Carl played the closing set at his beloved Space in Ibiza in 2016, he refused to take up another residency on the island until 2025. He didn’t want to set foot in Space’s successor Hï Ibiza — currently the No.1 club in the world — because “the memories [of Space] that I have would be ripped apart”, he told DJ Mag Ibiza earlier this year. But when state-of-the-art [UNVRS] came knocking, he couldn’t resist. Packing the new superclub out every Sunday all summer with an assortment of top-notch guests, Carl has ably demonstrated how he’s still very much at the top of his game. Triumphant",
+      "genre": "Techno"
     },
     {
       "rank": 26,
@@ -207,7 +245,9 @@
       "name": "Oliver Heldens",
       "djmagUrl": "https://djmag.com/top100djs/2025/26/oliver-heldens",
       "website": "https://oliverheldens.com/",
-      "homeCity": "The Netherlands"
+      "homeCity": "The Netherlands",
+      "bio": "There has been no let-up from Dutch powerhouse Oliver Heldens this year. He's dropped the emotionally charged single 'Ruins' with Julia Church, remixed Calvin Harris's 'I’m Not Alone' alongside Centre Court Music, and finally released the heart-wrenching heater 'Chills (Feel My Love)', which he made with David Guetta and first teased on the main stage of Miami's Ultra festival back in 2014. Gig-wise, the Heldeep Records boss performed everywhere from Creamfields and Tomorrowland to Pacha and Ushuaia in Ibiza, played a special set at the Dutch Grand Prix back in August, and continued to dig deep on his own Heldeep Radio show",
+      "genre": "Big Room"
     },
     {
       "rank": 27,
@@ -215,7 +255,9 @@
       "name": "Jamie Jones",
       "djmagUrl": "https://djmag.com/top100djs/2025/27/jamie-jones",
       "homeCity": "Wales",
-      "website": "https://jamiejones.com/"
+      "website": "https://jamiejones.com/",
+      "bio": "Former DJ Mag cover star Jamie Jones is a mainstay in the Top 100 DJs poll, living the legacy as the co-creator of the Hot Creations label, one-fourth of Hot Natured, and the founder of Paradise. This year he launched a new residency for Paradise in Ibiza at new superclub [UNVRS], with a concept named Sands Of Solaris every Wednesday for 16 weeks across the season. “My residency at Paradise [UNVRS] Ibiza has been insane,” he tells DJ Mag. His latest single ‘Murder Mystery’ is set for release via Hot Creations in October, marking the labels’ 266th release; an impressive number to reach since its inception in 2010. For Jones, this year has been all about “making tunes, playing tunes,…",
+      "genre": "House"
     },
     {
       "rank": 28,
@@ -223,7 +265,9 @@
       "name": "R3hab",
       "djmagUrl": "https://djmag.com/top100djs/2025/28/r3hab",
       "website": "https://www.r3hab.com/",
-      "homeCity": "Breda, NL"
+      "homeCity": "Breda, NL",
+      "bio": "R3HAB captivated global audiences this year, including in Japan, where he says crowds are “truly unmatched”. However, offstage, the Dutch artist unlocked inspiration via writing camps and a new album that will arrive in 2026. “On a personal level, dedicating so much time to this project has been both challenging and rewarding,” the ‘Tsunami’ producer explains. “It feels like a real turning point.” Meanwhile, he attests festival culture is gaining strength, too. “I believe that this sense of unity will only keep growing, and dance music will continue to be a force that connects people across borders and backgrounds,” R3HAB offers.",
+      "genre": "House"
     },
     {
       "rank": 29,
@@ -231,7 +275,9 @@
       "name": "Nicky Romero",
       "djmagUrl": "https://djmag.com/top100djs/2025/29/nicky-romero",
       "website": "https://nickyromero.com/",
-      "homeCity": "The Netherlands"
+      "homeCity": "The Netherlands",
+      "bio": "It's hard to figure out where to go when you're someone like Nicky Romero. The Dutch producer, DJ, and head honcho at Protocol Recordings is so synonymous with dance music, he even made a cameo in Zac Efron's We Are Your Friends film back in the day. But yet, year in and year out, Romero still manages to keep ahead of the curve. 2025 was no exception. He released records like the starry-eyed 'Fade Away' with Barmuda, but also went old school on 'Rave Music' with Gabry Ponte. He played all of the usual summer festivals and still found time to release ‘Nightvision', a fully immersive live set to re-live the Romero magic at home",
+      "genre": "Big Room"
     },
     {
       "rank": 30,
@@ -239,7 +285,9 @@
       "name": "Claptone",
       "djmagUrl": "https://djmag.com/top100djs/2025/30/claptone",
       "website": "https://claptone.com/",
-      "homeCity": "“Unknown.”"
+      "homeCity": "“Unknown.”",
+      "bio": "International man of mystery Claptone has crossed every inhabited continent on the planet in 2025, playing for tens of thousands on South American stages and intimate crowds at clandestine pop-ups elsewhere. His own Ibiza residency, The Masquerade, went from strength to strength at its new home of Chinois, and what happened in Vegas... well “I’ve shared unforgettable meals, met extraordinary people, danced with crowds all over the world, wrestled a crocodile, slipped through time — and finished my upcoming album,” he tells us. “I can’t wait to spend the next twelve months revealing everything I’ve been quietly creating behind closed doors",
+      "genre": "House"
     },
     {
       "rank": 31,
@@ -247,13 +295,16 @@
       "name": "Skrillex",
       "djmagUrl": "https://djmag.com/top100djs/2025/31/skrillex",
       "website": "https://www.skrillex.com/",
-      "homeCity": "USA"
+      "homeCity": "USA",
+      "bio": "Sonny Moore dropped a surprise album in April, sending ‘Fuck U Skrillex You Think Ur Andy Warhol but Ur Not!! &lt;3’ to email subscribers via a Dropbox link. The new record, following his double album drop of ‘Quest For Fire’ and ‘Don’t Get Too Close’ in 2023, is a continuous mix, and features regular collaborators Boys Noize and Fred again... It’s his last contractual record for major label Atlantic before going fully independent, and features a whirlwind 34 tracks that take in the brash dubstep sound that first made him famous as well as nods to his emo band past, drum & bass, UKG and more Beyond the new record, Skrillex played mega fests including Sónar in Barcelona, LIDO in London,…",
+      "genre": "Bass House"
     },
     {
       "rank": 32,
       "slug": "vini-vici",
       "name": "Vini Vici",
-      "djmagUrl": "https://djmag.com/top100djs/2025/32/vini-vici"
+      "djmagUrl": "https://djmag.com/top100djs/2025/32/vini-vici",
+      "bio": "Best known for: Tracks like ‘The Tribe’ and ‘Free Tibet’ Highlights of 2025 for Vini Vici include psy-trance’s first-ever stage takeover in Ultra Miami history, hosted by their label, Alteza Records. They also scored 100 million streams on their breakout remix of ‘Free Tibet’. Nearly 10 years ago, their viral spin on Hilight Tribe’s original brought unprecedented visibility to psy-trance, bridging an underground genre with the high-powered strains of dance/electronic music dominating main stages, and increasing their popularity in the process. Today, this benchmark is a barometer of psy-trance’s staying power and of Vini Vici’s enduring role as its global ambassadors. ​"
     },
     {
       "rank": 33,
@@ -261,7 +312,8 @@
       "name": "Fred again...",
       "djmagUrl": "https://djmag.com/top100djs/2025/33/fred-again",
       "homeCity": "UK",
-      "website": "https://www.fredagain.com/"
+      "website": "https://www.fredagain.com/",
+      "bio": "Best known for: His diarist style and legendary Boiler Room Fred again..'s USB is an infinite album project that continues to yield new music. This year that included a wealth of new tunes featuring grime pioneer Skepta, namely 'Back 2 Back’, '21 Years', 'London' and 'Last 1s Left', while he also picked up a Grammy nomination for 'Leavemealone' with Baby Keem"
     },
     {
       "rank": 34,
@@ -269,14 +321,17 @@
       "name": "Swedish House Mafia",
       "djmagUrl": "https://djmag.com/top100djs/2025/34/swedish-house-mafia",
       "website": "https://swedishhousemafia.com/",
-      "homeCity": "Sweden"
+      "homeCity": "Sweden",
+      "bio": "Best known for? ‘One’, ‘Miami 2 Ibiza’, ‘Don’t You Worry Child’ The Swedish trio upped their ante this year with the launch of a new record label entitled SUPERHUMAN, and a shout out to the world to send them music so that they can “redefine the standard”. Axwell, Sebastian Ingrosso and Steve Angello also completed a series of impressive dates on their micro-tour that took in Creamfields, two sold out shows in New York — at Arthur Ashe Stadium and Under the K Bridge Park — before winding up in Mexico City. Plus, another enticing collab with The Weeknd on ‘Closing Night’ sent fans into a spin and reaffirmed their prominence in the scene",
+      "genre": "House"
     },
     {
       "rank": 35,
       "slug": "joel-corry",
       "name": "Joel Corry",
       "djmagUrl": "https://djmag.com/top100djs/2025/35/joel-corry",
-      "website": "https://www.joelcorry.com/"
+      "website": "https://www.joelcorry.com/",
+      "bio": "Best known for: “‘Head & Heart’ (feat. MNEK).” London-born Joel Corry returns to the Top 100 for the fourth year in a row, with a year full of firsts in 2025. This year he made his main stage debut at Ultra Music Festival Miami, as well as Ultra Europe and Australia. “Ultra Miami was incredible. Playing the Main Stage was an unforgettable experience,” he tells DJ Mag"
     },
     {
       "rank": 36,
@@ -284,7 +339,9 @@
       "name": "Indira Paganotto",
       "djmagUrl": "https://djmag.com/top100djs/2025/36/indira-paganotto",
       "homeCity": "Gran Canaria, Canary Islands",
-      "website": "https://indirapaganotto.com/"
+      "website": "https://indirapaganotto.com/",
+      "bio": "What a year it’s been for Indira Paganotto. The former DJ Mag cover star hosted her own ARTCORE stages at Tomorrowland, Mysteryland and Dreambeach, and played EXIT’s final festival in Serbia. Additionally, she helmed a 14-week residency at Hï Ibiza, performed a “killer b3b” with Sara Landry and Amelie Lens at Coachella, and Beatport named her ARTCORE imprint Best New Label. Music-wise, she released her single ‘Arte Como Amante’ with Nile Rodgers, sitting alongside her previous collaborations with Depeche Mode, Joseph Capriati and more. Plus, Indira’s debut album is on the horizon. “I am so proud of it,” she says. “I have poured all my love into it.” She’s also lined up more ARTCORE…",
+      "genre": "Techno"
     },
     {
       "rank": 37,
@@ -292,7 +349,9 @@
       "name": "Eric Prydz",
       "djmagUrl": "https://djmag.com/top100djs/2025/37/eric-prydz",
       "website": "https://www.ericprydz.com/",
-      "homeCity": "Sweden"
+      "homeCity": "Sweden",
+      "bio": "Best known for: Mega hits like ‘Call On Me’ and 'Pjanoo', his holographic AV shows 2025 must have felt like another dizzying year of touring for Eric Prydz, all centred around his Holosphere 2.0 residency at new Ibiza superclub, [UNVRS]. Five years in development, the new live show boasts “feature-length custom animations, 3-D holographic effects, and never-before-seen multi-dimensional layers of custom transparent LED”. It opened accompanied by a three-part documentary, and followed his [CELL] residency in 2024, which was designed specifically for his previous residency at Hï Ibiza. Not one to shy away from hard work, Prydz also packed in performances at Tomorrowland and EDC, as well as…",
+      "genre": "Progressive House"
     },
     {
       "rank": 38,
@@ -300,7 +359,9 @@
       "name": "Amelie Lens",
       "djmagUrl": "https://djmag.com/top100djs/2025/38/amelie-lens",
       "website": "https://www.amelielens.com/",
-      "homeCity": "Belgium"
+      "homeCity": "Belgium",
+      "bio": "Techno powerhouse Amelie Lens remains one of the genre’s most loved performers in 2025. This year saw her unveil a new brand and visual concept for her events called Aura, created with High Scream Studios to deepen audience connection through light, movement, and immersion. She also released the high-impact 'Serenity' EP and teamed up with Charlotte de Witte for the collaborative 'One Mind' EP, blending acid and trance-driven techno. Lens headlined Tomorrowland’s Mainstage, closing out with a Saturday set, and delivered a historic B2B performance with de Witte at Belgium’s Flanders Expo, drawing in a crowd of more than 40,000 eager fans",
+      "genre": "Techno"
     },
     {
       "rank": 39,
@@ -308,7 +369,9 @@
       "name": "Paul van Dyk",
       "djmagUrl": "https://djmag.com/top100djs/2025/39/paul-van-dyk",
       "website": "https://www.paulvandyk.com/",
-      "homeCity": "Germany"
+      "homeCity": "Germany",
+      "bio": "It’s been another big year for the veteran German DJ. It began with ‘For An Angel’’s 30th-anniversary release, followed by an album of original work, ‘This World Is Ours’; he’s also prepping for the 25th-anniversary release of his trance classic, ‘Out There And Back’. But what he considers the high point of his past 12 months isn’t music-related at all: “My wife summited Mount Everest,” he says, “becoming the first Colombian woman to complete the Seven Summits. I’m incredibly proud of this wonderful, beautiful, and brave woman — and so grateful to be her husband.”",
+      "genre": "House"
     },
     {
       "rank": 40,
@@ -316,7 +379,9 @@
       "name": "DJ Snake",
       "djmagUrl": "https://djmag.com/top100djs/2025/40/dj-snake",
       "website": "https://djsnake.com/",
-      "homeCity": "France"
+      "homeCity": "France",
+      "bio": "It's unclear whether DJ Snake will ever slow down. Over two decades in the game and the French producer and DJ shows no signs of taking his foot off the gas. 2025 saw him reclaim the throne with ‘Noventa', made alongside Colombian artist J Balvin. The smash hit saw Snake lay down syncopated reggaeton rhythms under Balvin's Spanish rapping for a tune that garnered an invite to perform at the VMAs this year. 'Noventa' was just a prelude to DJ Snake's third album, ‘Nomad', that dropped late this year. Oh, and did we mention that he sold out an 80,000-person stadium? Yep, DJ Snake remains one of France's biggest superstars.",
+      "genre": "Trap"
     },
     {
       "rank": 41,
@@ -324,7 +389,9 @@
       "name": "Dom Dolla",
       "djmagUrl": "https://djmag.com/top100djs/2025/41/dom-dolla",
       "website": "https://domdolla.com.au/",
-      "homeCity": "Melbourne, Australia"
+      "homeCity": "Melbourne, Australia",
+      "bio": "“For me, this year’s been all about trying a few new things creatively,” says Dom Dolla. From curating his first Ibiza residency to co-producing the F1 movie soundtrack’s ‘No Room For A Saint’, and making Perry’s Stage history with his first-ever ‘Dollapalooza’ showcase, 2025 proved explosive for the Aussie star — and it’s not over yet. “I’ll also be hosting a stadium show back home in Australia later this year, which is a surreal thing to say, inspired by the experiences I had at my Madison Square Garden shows in New York earlier this year,” the Top 100 DJ offers of why it pays to keep evolving.",
+      "genre": "House"
     },
     {
       "rank": 42,
@@ -332,7 +399,8 @@
       "name": "Marshmello",
       "djmagUrl": "https://djmag.com/top100djs/2025/42/marshmello",
       "website": "https://marshmellomusic.com/",
-      "homeCity": "Philadelphia, USA"
+      "homeCity": "Philadelphia, USA",
+      "bio": "Marshmello remains in the top half of the Top 100 DJs, 10 years after first entering the poll. Maintaining a relentless touring schedule and racking up millions of social media followers and billions of streams, he has also had a busy year in the studio, dropping solo tracks like 'wantsomemusic', as well as collaborations including 'Slow Motion' with the Jonas Brothers, 'Fale Então' with Trueno, and 'Save My Love' with Ellie Goulding and AVAION, and a remix project titled 'The R∞ts'. This all continues to grow his Mello Gang — the affectionate name he uses for his vast number of fans"
     },
     {
       "rank": 43,
@@ -340,7 +408,9 @@
       "name": "The Martinez Brothers",
       "djmagUrl": "https://djmag.com/top100djs/2025/43/martinez-brothers",
       "homeCity": "The Bronx, New York",
-      "website": "https://themartinezbrothers.com/"
+      "website": "https://themartinezbrothers.com/",
+      "bio": "2025 was a big year of change for the Martinez Brothers, who moved their European base from Ibiza to Barcelona, and have since been locked in the studio cooking up new collabs. They’ve also been developing Orbita, a brand new live show concept they’re very excited to be taking out on the road in 2026. “We're looking forward to the focus shifting back to what matters most,” they tell DJ Mag, “the raw, incredible music that connects people on the dancefloor. It’s always been about the music first for us, and we hope that becomes the priority for the entire scene again.”",
+      "genre": "House"
     },
     {
       "rank": 44,
@@ -348,7 +418,8 @@
       "name": "Zedd",
       "djmagUrl": "https://djmag.com/top100djs/2025/44/zedd",
       "website": "https://www.zedd.net/",
-      "homeCity": "Born in Russia, raised in Germany"
+      "homeCity": "Born in Russia, raised in Germany",
+      "bio": "Earlier this year Zedd let go of the reigns of his first album in nine years, the highly anticipated ‘Telos’. It was unleashed and soon received a Grammy nomination for Best Dance/Electronic Album — check out the piano, vocal, guitar songbook available in his merch shop for something extra special. His appearance at Coachella 2025, which included performing his hit ‘Clarity’ with the LA Philharmonic Orchestra, was a thing of beauty that also allowed him to demonstrate his skills on drums and piano. Elsewhere, Zedd’s regular slots in Las Vegas at Tao Beach Club and Omnia continue to bring in the wow factor"
     },
     {
       "rank": 45,
@@ -356,7 +427,9 @@
       "name": "Bassjackers",
       "djmagUrl": "https://djmag.com/top100djs/2025/45/bassjackers",
       "website": "https://www.bassjackers.com/",
-      "homeCity": "The Netherlands"
+      "homeCity": "The Netherlands",
+      "bio": "EDM duo Bassjackers first broke through in 2011 with ‘Mush Mush’, a release on Tïesto’s Musical Freedom label that quickly became a festival anthem. In the years following they landed in DJ Mag’s Top 100 DJs poll, where they’ve remained a consistent presence. The pair are known for spinning explosive, hard-hitting mixes, playing some of the world’s biggest festivals — Tomorrowland, Ultra and EDC — and collaborating with some of the scene’s biggest names. They’ve kept up a busy release schedule too, dropping tracks like ‘Wake The F Up’, ‘Bla Bla Bla’, ‘All Around The World (La La La La La)’ and ‘Beethoven’s Aria Für Elise’ and more in the past 12 months alone",
+      "genre": "House"
     },
     {
       "rank": 46,
@@ -364,7 +437,8 @@
       "name": "John Summit",
       "djmagUrl": "https://djmag.com/top100djs/2025/46/john-summit",
       "website": "https://www.johnsummitmusic.com/",
-      "homeCity": "Chicago, IL"
+      "homeCity": "Chicago, IL",
+      "bio": "“Was always told as an American it would be nearly impossible to break overseas,” John Summit writes in an Instagram post that then lists off recent achievements like the Hï Ibiza residency and an O2 Arena date in London that marks his biggest international headline yet. It’s no secret that the Miami-based artist enjoys proving his cynics wrong both abroad and on home turf. His events brand and record label broke more attendance records in September with the inaugural edition of the Experts Only Festival in NYC, reiterating that the ‘Focus’ producer’s vision cannot be confined to a single genre, stadium or lane"
     },
     {
       "rank": 47,
@@ -372,7 +446,9 @@
       "name": "Quintino",
       "djmagUrl": "https://djmag.com/top100djs/2025/47/quintino",
       "website": "https://www.djquintino.com/",
-      "homeCity": "Amsterdam, Netherlands"
+      "homeCity": "Amsterdam, Netherlands",
+      "bio": "We caught up with Quintino at the right time. Over the past 12 months he’s been in the studio pushing his productions into fresher territories, and according to the Dutch star he has now found what he was looking for. “Still 100% Quintino main stage vibes but with a new twist,” we’re told. Tested on the road at major events including Tomorrowland, the response from fans and newcomers alike has been resolutely positive. Proverbial ducks now lined up in a row, from October we’re expecting a string of new music to start hitting the release schedule, so watch this space",
+      "genre": "House"
     },
     {
       "rank": 48,
@@ -380,7 +456,9 @@
       "name": "Michael Bibi",
       "djmagUrl": "https://djmag.com/top100djs/2025/48/michael-bibi",
       "website": "https://www.michaelbibi.com/",
-      "homeCity": "UK"
+      "homeCity": "UK",
+      "bio": "Released in April this year, DJ Mag 2025 cover star Michael Bibi described his comeback track ‘Sungazing’ as a message of “life, healing and hope”. The track was his first release since his 2023 CNS lymphoma diagnosis, from which he is now in remission. This year Bibi continued to spearhead his One Life project, the event series aimed at raising awareness and support for cancer research, with a headline One Life London show in July. He played a sold-out block party in Brooklyn in May, and his Solid Grooves imprint (co-founded with PAWSA) also celebrated its 100th release in 2025. All this had led to Bibi taking home this year’s Highest New Entry award",
+      "genre": "Tech House"
     },
     {
       "rank": 49,
@@ -388,21 +466,27 @@
       "name": "Boris Brejcha",
       "djmagUrl": "https://djmag.com/top100djs/2025/49/boris-brejcha",
       "website": "https://www.borisbrejcha.de/",
-      "homeCity": "Germany"
+      "homeCity": "Germany",
+      "bio": "It’s been ten years since Boris Brejcha launched his label Fckng Serious. “Looking back, it’s amazing to see what we’ve achieved worldwide in just a decade — from the unique bus tours to sold-out showcases across the globe, and building a family of artists who push boundaries together,” he says. As well as continuing to evolve the imprint, this year Boris played Ibiza superclubs [UNVRS], Ushuaïa, and Hï Ibiza, the Sahara Stage at Coachella, and brought his new Reflections show to Red Rocks in Denver. Next up, he’ll tour the show across Europe and South America. Boris will also drop his collaboration ‘Red’ with Poppy Baskcomb, showing a “different, more emotional side” of his sound. “For…",
+      "genre": "Tech House"
     },
     {
       "rank": 50,
       "slug": "korolova",
       "name": "Korolova",
       "djmagUrl": "https://djmag.com/top100djs/2025/50/korolova",
-      "homeCity": "Ukraine"
+      "homeCity": "Ukraine",
+      "website": "https://solo.to/korolova.dj/",
+      "bio": "Since launching her label, its branded event series, and radio show last year, the Ukrainian triple-threat’s stock has soared, leading “every Captive Soul party around the world” to sell out so far this year, from Athens to Ibiza and beyond. As its event arm builds on that momentum, the label welcomes releases from burgeoning talents like Sixth Ocean and Matador — proof that Korolova practices what she preaches. She also held down a RESISTANCE residency at Amnesia Ibiza, and played headline slots everywhere from Camboriú to Tulum (Zamna), Rome to Los Angeles, plus appearances at Ultra Buenos Aires, Ultra Miami and Tomorrowland",
+      "genre": "Melodic Techno"
     },
     {
       "rank": 51,
       "slug": "alesso",
       "name": "Alesso",
       "djmagUrl": "https://djmag.com/top100djs/2025/51/alesso",
-      "website": "https://alessoworld.com/"
+      "website": "https://alessoworld.com/",
+      "bio": "In addition to festivals like Ultra Europe in Croatia, and Veld and ÎleSoniq in Canada, Alesso played mostly US club dates in 2025. LIV in Miami, TAO Beach Dayclub and Palm Tree Beach Club in Las Vegas, and Brooklyn Mirage in New York are just some of the venues he could be found at. He also released a handful of big collaborations, chief among them ‘Surrender’ with Becky Hill, a trance-inflected vocal track, and ‘Inside Our Hearts’ with Martin Garrix and Shaun Farrugia, a stadium-sized pop tune. At the start of November, he was due to join the likes of Dimitri Vegas at Escape: Psycho Circus, held in San Bernardino, California."
     },
     {
       "rank": 52,
@@ -410,7 +494,9 @@
       "name": "James Hype",
       "djmagUrl": "https://djmag.com/top100djs/2025/52/james-hype",
       "website": "https://www.jameshype.com/",
-      "homeCity": "Liverpool, UK"
+      "homeCity": "Liverpool, UK",
+      "bio": "James Hype has always managed to balance big room energy with more nuanced sounds. He plays across the board from dark and broody to more euphoric, whether on the main stage at Creamfields or in spaces like Drumsheds. Back in August, Hype dropped the single 'Waterfalls' featuring Sam Harper and Bobby Harvey off the back of 'Don't Wake Me Up' and 'Let Me Show You' with Camisra, all of which proved huge for him at the return of his Our House residency with MEDUZA at Hï Ibiza this summer, where he once again showed off his four-deck skills",
+      "genre": "House"
     },
     {
       "rank": 53,
@@ -418,7 +504,9 @@
       "name": "Maddix",
       "djmagUrl": "https://djmag.com/top100djs/2025/53/maddix",
       "website": "https://maddixmusic.com/",
-      "homeCity": "Utrecht, Netherlands"
+      "homeCity": "Utrecht, Netherlands",
+      "bio": "2025 was something of a return to his roots for Utrecht's reigning prince of rave, Maddix. While he continues to become a bigger and bigger player on the global stage, he also wanted to recenter the core values of what makes dance music more than just a branding exercise. Teaming up with Hardwell, he drew a line in the sand with 'Rave Til My Grave’, a track as old school as they come. Alongside other big tunes like a remix of the classic 'Mix The Master’, he also held down an Ibiza residency and went back-to-back with none other than Armin van Buuren",
+      "genre": "House"
     },
     {
       "rank": 54,
@@ -426,7 +514,9 @@
       "name": "HUGEL",
       "djmagUrl": "https://djmag.com/top100djs/2025/54/hugel",
       "website": "https://www.djhugel.com/",
-      "homeCity": "Marseille, France"
+      "homeCity": "Marseille, France",
+      "bio": "It's no surprise to see Beatport’s Best Selling Artist of the Year 2025 make his debut on the Top 100 DJs list. The Frenchman has taken his sound to main room heights via his label, Make The Girls Dance Records, named after his 2017 breakout hit. Following 2024’s summer anthem ‘I Adore You’, he’s maintained a consistent stream of new productions. With over four billion streams, HUGEL commands residencies at Hï Ibiza and XS Las Vegas, has sold out Space Miami, Surf Club Dubai, Red Rocks Denver, Café del Mar Thailand, and dominated at major festivals including Tomorrowland and EDC Las Vegas",
+      "genre": "House"
     },
     {
       "rank": 55,
@@ -434,7 +524,9 @@
       "name": "Solomun",
       "djmagUrl": "https://djmag.com/top100djs/2025/55/solomun",
       "website": "https://solomun.org/",
-      "homeCity": "Bosnia / Germany"
+      "homeCity": "Bosnia / Germany",
+      "bio": "2025 was another biggie for the inimitable Mladen Solomun. Music-wise, we’ve had high-profile remixes of Jamie xx’s ‘Waited All Night’, contributions to the Fatal Fury: City Of The Wolves soundtrack, and February’s ‘Tout le Monde’ with French vocalist, Jain. All perfect gear for standout sets at Glastonbury, the 10th anniversary of Solomun At The Port, mid-September’s free party in Ibiza Town, his legendary +1 Pacha residency — another island essential — and February 2026’s epic Alexandra Palace, London debut",
+      "genre": "Melodic Techno"
     },
     {
       "rank": 56,
@@ -442,7 +534,9 @@
       "name": "Mochakk",
       "djmagUrl": "https://djmag.com/top100djs/2025/56/mochakk",
       "website": "https://mochakk.com/",
-      "homeCity": "Brazil"
+      "homeCity": "Brazil",
+      "bio": "In 2025, Pedro Luis Nunes Maia, better known as Mochakk, hit several career milestones. He expanded his Mochakk Calling party series with the launch of Mochakk Calling Festival in Malta in July, which featured names like Bonobo, Honey Dijon, Dixon and Todd Terje. In February he dropped the 'From The Stars' two-tracker on Ninja Tune, and paired up with British drill artist Kwengface in August to deliver the percussive collab, 'Legumes'. Before the year is out, he'll take Mochakk Calling to Sydney for a long-awaited Australian debut, and will play a sold-out one-off headline show at LA's Hollywood Boulevard in November",
+      "genre": "House"
     },
     {
       "rank": 57,
@@ -450,14 +544,17 @@
       "name": "Lilly Palmer",
       "djmagUrl": "https://djmag.com/top100djs/2025/57/lilly-palmer",
       "website": "https://www.beatport.com/artist/lilly-palmer/597345/",
-      "homeCity": "“Germany, living on the shores outside of Amsterdam.”"
+      "homeCity": "“Germany, living on the shores outside of Amsterdam.”",
+      "bio": "It’s been another jam-packed year for Lilly Palmer. “I’ve had the honour of playing at some of the most amazing events and clubs worldwide, where the energy and connection with the crowd were unforgettable,” she says. “Seeing my music reach more people and watching my fan base grow as they resonate with what I represent as an artist and producer has been deeply rewarding.” Excited to expand her Bigger Than Techno concept as an album and event experience, Lilly intends to push the boundaries of what techno represents. “Bigger Than Techno isn’t about me being bigger than the genre — it’s about techno itself being bigger than anything,” she says, citing its transcendental nature and senses…",
+      "genre": "Techno"
     },
     {
       "rank": 58,
       "slug": "nora-en-pure",
       "name": "Nora En Pure",
       "djmagUrl": "https://djmag.com/top100djs/2025/58/nora-en-pure",
-      "website": "https://www.noraenpure.com/"
+      "website": "https://www.noraenpure.com/",
+      "bio": "With outsize influence a precursor to mainstage placement, it’s no wonder that Swiss songstress Nora En Pure debuted on EDC Las Vegas’ kineticFIELD. This peak gave rise to another: her first-ever Purified parties in São Paulo and Miami. Soundtracking it all is a handful of singles that strike with the emotive power of a second bolt of lightning, like ‘Protected’ with Richard Walters. As evidenced by her 2025 Femmy Award for Best Visual Experience, Nora En Pure deals not only in soul-stirring sentiments but also in the aesthetic touches that elevate shows to spiritual multi-sensory experiences. Purified, indeed"
     },
     {
       "rank": 59,
@@ -465,7 +562,9 @@
       "name": "ATB",
       "djmagUrl": "https://djmag.com/top100djs/2025/59/atb",
       "website": "https://www.atb-music.com/",
-      "homeCity": "Germany"
+      "homeCity": "Germany",
+      "bio": "Trance and big room dance DJ André Tanneberger had another busy year performing at festivals and clubs around Europe. The artist behind mega hits like ‘9PM (Till I Come)’ and ‘Ecstasy’ appeared at Germany’s Parookaville, KALEIDOSCOP festival in Moldova and at various venues in the UK, Poland, Hungary and Latvia. In between, the prolific producer was putting the finishing touches to “my 12th and final album, for 2026 — closing the album chapter”. Beyond the long-player, ATB will keep making singles, and is looking forward to plenty more gigs, including the Home Sweet Home event series in his hometown of Bochum.",
+      "genre": "House"
     },
     {
       "rank": 60,
@@ -473,7 +572,9 @@
       "name": "Deborah De Luca",
       "djmagUrl": "https://djmag.com/top100djs/2025/60/deborah-de-luca",
       "homeCity": "Italy",
-      "website": "https://deborahdeluca.it/"
+      "website": "https://deborahdeluca.it/",
+      "bio": "A regular in the Top 100 DJs chart since 2020, Deborah De Luca’s back here again, having had another whirlwind, high-octane, no-let-up year of music. First there was her official remix of Nelly Furtado’s ‘Say It Right’ that dropped in February, swiftly followed by the release of her new album ‘Hard Pop 2’, a 25-track bumper package of festival-ready mainstage cuts. She’s put out five tunes on Sola_mente Records, the label she founded back in 2013, and DJ’d her big, accessible, euphoric sound on several continents, while still fitting in a series of regular appearances at Amnesia Ibiza throughout the summer season too",
+      "genre": "Techno"
     },
     {
       "rank": 61,
@@ -481,7 +582,9 @@
       "name": "Above & Beyond",
       "djmagUrl": "https://djmag.com/top100djs/2025/61/above-beyond",
       "website": "https://www.aboveandbeyond.nu/",
-      "homeCity": "UK (Jono and Tony), Finland (Paavo)"
+      "homeCity": "UK (Jono and Tony), Finland (Paavo)",
+      "bio": "2025 has been a huge year for Above & Beyond, who marked their 25th anniversary with the release of their latest album, 'Bigger Than All Of Us', and embarked on a world tour to celebrate. “Trance is making a massive comeback after a few years of techno dominance,” says Above & Beyond's Paavo Siljamäki, reflecting on the last 12 months. They also continued to run the Anjuna empire, which includes Anjunabeats, and deep house sub-label, Anjunadeep. This year they also relaunched their ambient and downtempo imprint, Anjunachill. “I’m so glad we have our own ecosystem, long live the Anjunafamily,” adds A&B’s Tony McGuinness",
+      "genre": "House"
     },
     {
       "rank": 62,
@@ -489,14 +592,19 @@
       "name": "Sara Landry",
       "djmagUrl": "https://djmag.com/top100djs/2025/62/sara-landry",
       "website": "https://www.saralandry.com/",
-      "homeCity": "Austin, TX, USA (based in Amsterdam, Netherlands)"
+      "homeCity": "Austin, TX, USA (based in Amsterdam, Netherlands)",
+      "bio": "From: Austin, TX, USA (based in Amsterdam, Netherlands) DJ style: “Hard techno, psy-techno, psytrance, hard dance.”",
+      "genre": "Techno"
     },
     {
       "rank": 63,
       "slug": "nervo",
       "name": "Nervo",
       "djmagUrl": "https://djmag.com/top100djs/2025/63/nervo",
-      "homeCity": "Australia"
+      "homeCity": "Australia",
+      "website": "https://linktr.ee/nervomusic/",
+      "bio": "Twin sisters Olivia and Miriam have won the hearts of fans across the world with their catchy crossover records, unwavering charm and consistency, and have been a permanent feature in the DJ Mag Top 100 DJs poll since 2012. This summer they were based in Ibiza, and they’ve just returned from touring Asia with shows in Japan, Seoul, and South Korea. Memorable moments this year include playing the Main Stage at Tomorrowland in Belgium, and DLDK Festival in Chile. “The last 12 months have been buuuuuuusssssyyyy!” the sisters exclaim. “We’re actually working on some K-pop at the moment and always trying to finish our NERVO records.” This year the sisters hope to maintain a healthy balance of…",
+      "genre": "Big Room"
     },
     {
       "rank": 64,
@@ -504,7 +612,8 @@
       "name": "Sub Zero Project",
       "djmagUrl": "https://djmag.com/top100djs/2025/64/sub-zero-project",
       "website": "https://www.subzeroproject.com/",
-      "homeCity": "The Netherlands."
+      "homeCity": "The Netherlands.",
+      "bio": "Best known for: “Energetic, hard and uplifting sound.” The popularity of Dutch hardstyle crew Sub Zero Project has spiked after a few years outside the poll. In 2025, Thomas Velderman and Nigel Coppen made their debut on the Tomorrowland main stage, played at a string of other dance festivals — including Electric Love in Austria and EDC Las Vegas — and toured Australia, Canada and the US. The duo also found the time to craft a hit record, with their tune ‘Won’t Let Me Down’, featuring Teddy Bee, a staple of their summer sets"
     },
     {
       "rank": 65,
@@ -512,7 +621,9 @@
       "name": "Kölsch",
       "djmagUrl": "https://djmag.com/top100djs/2025/65/kolsch",
       "homeCity": "Denmark",
-      "website": "https://www.kolschofficial.com/"
+      "website": "https://www.kolschofficial.com/",
+      "bio": "Best known for: “‘Grey’, ‘All That Matters’, ‘Loreley’.” Kölsch has spent the last 12 months laser-focused on producing his next album ‘Kinema’ and developing his new Kölsch & The Machine live show. This was alongside his DJ schedule, which this year included playing the Tomorrowland main stage after the original stage was destroyed by fire just days before the event. He’s also been working on the soundtrack for a sci-fi film, has dropped a series of heavy hitters on his IPSO label, while the re-release of ‘Goldfisch’, his day-glo euphoric anthem from 2013, was a welcome reminder of that huge, emotive sound he’s become so well known for",
+      "genre": "Techno"
     },
     {
       "rank": 66,
@@ -520,7 +631,9 @@
       "name": "Lucas & Steve",
       "djmagUrl": "https://djmag.com/top100djs/2025/66/lucas-steve",
       "website": "https://www.lucasandsteve.com/",
-      "homeCity": "The Netherlands"
+      "homeCity": "The Netherlands",
+      "bio": "Fourteen years is a long time to spend on the road. Long enough to prove your determination and dedication to rising through the ranks of the global club and festival circuits. Suffice to say, Lucas de Wert and Steven Jansen — AKA Lucas & Steve — are proof that hard work can pay off. Showing no signs of slowing down, in 2025 the Dutch duo have continued to tour relentlessly, taking them from Belgium to the Netherlands, USA to Brazil. Meanwhile, their remix of the classic ‘Push The Feeling On’ and that Nick Schilder collaboration, ‘Something Like Magic’, have proven to be huge hits.",
+      "genre": "House"
     },
     {
       "rank": 67,
@@ -528,14 +641,17 @@
       "name": "Nico Moreno",
       "djmagUrl": "https://djmag.com/top100djs/2025/67/nico-moreno",
       "website": "https://www.nicomoreno.info/",
-      "homeCity": "Caen, France"
+      "homeCity": "Caen, France",
+      "bio": "tHard techno has grown in popularity over the years, and here’s one artist in particular who continues to push the sound, no-holds-barred, and we really can’t emphasise the latter enough. Ever since he released the breakout banger ‘Purple Widow’ via his label Insolent Rave Records in 2019, Nico Moreno has remained a key artist in the hard techno scene. This summer marked another significant moment in his journey, when he played the Main Stage at Tomorrowland. “It was my goal, I did it!” he says. “It’s a consecration for me but also for our generation and our music style.” Looking ahead, Nico’s itching to get back to the studio. “This year was difficult because of the intense touring, but…",
+      "genre": "Techno"
     },
     {
       "rank": 68,
       "slug": "gordo",
       "name": "GORDO",
       "djmagUrl": "https://djmag.com/top100djs/2025/68/gordo",
-      "website": "https://www.gordomusic.com/"
+      "website": "https://www.gordomusic.com/",
+      "bio": "Best known for: “My records with Drake, my first hit ‘Hombres y Mujeres’ with Feid, plus my extended sets and party brand TARAKA.” Throughout 2025, GORDO has set his metaphorical box ablaze to the applause of crowds around the world. He’s let his debut album ‘DIAMANTE’ simmer while embarking on a 15-country Gordito Summer tour, followed by his headline TAKARA show in Toronto, and 18 hours spent DJing Burning Man’s Black Rock City. Meanwhile, his Afterlife debut in Barcelona solidified his stride into broader sonic terrain. More than just a “personal” moment, the performance, he says, was also “a win for every artist out there who refuses to be boxed in.”"
     },
     {
       "rank": 69,
@@ -543,28 +659,37 @@
       "name": "PAWSA",
       "djmagUrl": "https://djmag.com/top100djs/2025/69/pawsa",
       "homeCity": "UK",
-      "website": "https://www.pawsaofficial.com/"
+      "website": "https://www.pawsaofficial.com/",
+      "bio": "In 2025, PAWSA cemented his status in the tech‑house scene with a string of high‑profile shows. Highlights include a headline set at Monaco’s Grand Prix Beach Party, a Bank Holiday show in Marbella, and his biggest UK outdoor headline yet: PAWSA In The Park — All Day Long at Gunnersbury Park, London in August. On the music side, Solid Grooves (the label he co-runs with Michael Bibi) marked its 100th release with the 'Summer Sampler 2025' compilation, featuring the new PAWSA cut 'Rendezvous'. Solid Grooves' summer residency at DC-10 in Ibiza meant that PAWSA's name was big on the White Isle this year, too.",
+      "genre": "Tech House"
     },
     {
       "rank": 70,
       "slug": "chainsmokers",
       "name": "The Chainsmokers",
       "djmagUrl": "https://djmag.com/top100djs/2025/70/chainsmokers",
-      "website": "https://thechainsmokers.com/"
+      "website": "https://thechainsmokers.com/",
+      "bio": "From collaborations with Coldplay and Kim Petras to a return to their progressive house roots with remixes of Lola Young’s ‘Messy’ and Gigi Perez’s ‘Sailor Song’, the Grammy-winning duo consistently hit the mark. Singles like ‘White Wine & Adderall' and ‘Helium’, featuring Beau Nox and Anna Sophia respectively, flex their creative range. On the road, they’ve commanded stages from Singapore’s Arena @ Expo and Osheaga in Montreal to intimate shows at Paris’ La Clairière, London’s The Cause and suspended 100 stories high at New York’s EDGE, not to mention their Vegas residencies at XS and Encore Beach Club"
     },
     {
       "rank": 71,
       "slug": "liu",
       "name": "Liu",
       "djmagUrl": "https://djmag.com/top100djs/2025/71/liu",
-      "homeCity": "São Paulo, Brazil"
+      "homeCity": "São Paulo, Brazil",
+      "website": "https://linktr.ee/liulive/",
+      "bio": "The Brazilian-Chinese DJ and producer Liu is quickly becoming a fixture on both the world stage and in the DJ Mag Top 100 DJs poll. His style of music is infectiously fun. Take this year's 'The Way I Are’, a collaboration with Mojjo. The two fuse crunchy synths, slinky tech-house percussion, and a cheeky riff on the classic Timbaland lyric. Add to this the fact that he's now a regular everywhere from Tomorrowland to Ibiza and that he hosted his first ever festival, Around The World, in his hometown of São Paulo, and 2025 was yet another banner year for the rising star.",
+      "genre": "House"
     },
     {
       "rank": 72,
       "slug": "mike-williams",
       "name": "Mike Williams",
       "djmagUrl": "https://djmag.com/top100djs/2025/72/mike-williams",
-      "homeCity": "Amsterdam"
+      "homeCity": "Amsterdam",
+      "website": "https://www.mikewilliams.nl/",
+      "bio": "Dutchman Mike Williams has remained at the forefront of the big room house world in the last 12 months. A highlight for him has been “seeing big emotional melodies coming back to the dancefloor”, because they are what he excels at. In fact, his cut ‘Drop The Pressure’ with Brooks has been hammered by top-tier DJs all year, while he has played Tomorrowland and toured Asia, Europe and North America. “I also decided to go back to making music for only myself and the fans,” he says ahead of collabs with Brooks, Oaks and Bruno Martini",
+      "genre": "Future House"
     },
     {
       "rank": 73,
@@ -572,14 +697,17 @@
       "name": "ARTBAT",
       "djmagUrl": "https://djmag.com/top100djs/2025/73/artbat",
       "website": "https://www.beatport.com/artist/artbat/499932/",
-      "homeCity": "Ukraine"
+      "homeCity": "Ukraine",
+      "bio": "ARTBAT's favourite moment of 2025? “UPPERGROUND Poland, our biggest UPPERGROUND show to date at Legia Warsaw Stadium in front of 22,000 people,” they say. It was a mammoth event that marked the duo's only show in Poland for 2025, and featured sets from Armin van Buuren, Korolova, and Miss Monique. Release-wise, the pair dropped the melodic techno track 'Afterparty' early in the year via their UPPERGROUND label, and also made an impact with their spin on the CamelPhat & Elderbrook Defected classic 'Cola'. As for their favourite tune of 2025? That would be the Adriatique remix of Rufus Du Sol's 'In The Moment'"
     },
     {
       "rank": 74,
       "slug": "kaaze",
       "name": "KAAZE",
       "djmagUrl": "https://djmag.com/top100djs/2025/74/kaaze",
-      "homeCity": "Sweden"
+      "homeCity": "Sweden",
+      "bio": "Launching his first record label Se7en this year — and affectionately dedicating it to his daughter — has certainly set a pace for KAAZE to live up to. Of the several belters he released in 2025, ‘Reach Out I’ll Be There’ is the eye-watering anthem that’s taken the Motown classic stratospheric. His Resonance tour debuted in North America and Canada, with European festivals Parookaville and Beats For Love also playing host to this Swedish trailblazer. Remixes and collaborations with the likes of David Guetta, Steve Aoki and KSHMR have also combined to shape 2025 into one hell of a year for KAAZE",
+      "genre": "Techno"
     },
     {
       "rank": 75,
@@ -587,7 +715,9 @@
       "name": "Miss Monique",
       "djmagUrl": "https://djmag.com/top100djs/2025/75/miss-monique",
       "website": "https://missmoniquemusic.com/",
-      "homeCity": "Ukraine"
+      "homeCity": "Ukraine",
+      "bio": "Best known for: “Bringing progressive house and melodic techno to a global audience through YouTube performances.” From reaching No.1 in the Melodic Techno charts on Beatport with her proggy tune ‘Nomacita’, to helming a residency at the world’s No.1 club Hï Ibiza, to working on a remix for David Guetta and Sia, Miss Monique has come into her own as a producer, DJ, and founder of the label Siona Records. So what’s next for the Ukrainian hyphenate? “My new track ‘Rain’ with Poppy Baskcomb is being released on the iconic Three Six Zero label,” she says. “We’re also preparing for my second Siona Records event at ADE, and in 2026 I plan to take my own show to a large-scale and highly…",
+      "genre": "Progressive House"
     },
     {
       "rank": 76,
@@ -595,20 +725,26 @@
       "name": "Burak Yeter",
       "djmagUrl": "https://djmag.com/top100djs/2025/76/burak-yeter",
       "website": "https://burakyeter.com/",
-      "homeCity": "Turkey"
+      "homeCity": "Turkey",
+      "bio": "Burak Yeter is one of Turkey's most celebrated EDM exports. He has a widescreen style that covers tech, future and big room house and has not only had a global hit with 2017's ‘Tuesday’ but has also remixed everyone from Depeche Mode to Frank Sinatra. More famous than all that are his DJ exploits in a stratospheric balloon in space, which earlier this year made him officially the highest-altitude music performer in history. He followed that with a 360 Space Concert Experience featuring mad visuals and a 14-meter-tall astronaut statue, so he has had quite the year",
+      "genre": "House"
     },
     {
       "rank": 77,
       "slug": "mau-p",
       "name": "Mau P",
-      "djmagUrl": "https://djmag.com/top100djs/2025/77/mau-p"
+      "djmagUrl": "https://djmag.com/top100djs/2025/77/mau-p",
+      "bio": "Best known for: “‘Drugs From Amsterdam’.” Emerging from the ever-illustrious dance music scene of Amsterdam, Maurits Westveen aka Mau P exploded into the mainstream three years ago with his big room hit ‘Drugs From Amsterdam’. Since his breakthrough debut single, he’s remixed the likes of Armand van Helden, Calvin Harris and Swedish House Mafia. Last year he released a debut single on Defected called ‘Merther’ that samples Ini Kamoze’s timeless reggae classic ‘World A Music’, and was supported by the likes of Solomun and Michael Bibi. It was another busy summer for Westveen, touring the festival circuit with shows at Ultra Music Festival, Coachella, EDC, Lollapalooza, Parklife, Sonus…"
     },
     {
       "rank": 78,
       "slug": "le-twins",
       "name": "Le Twins",
       "djmagUrl": "https://djmag.com/top100djs/2025/78/le-twins",
-      "homeCity": "Mexico"
+      "homeCity": "Mexico",
+      "website": "https://linktr.ee/officialletwins/",
+      "bio": "Best known for: “Twins who DJ, produce, sing and drum.” Over the past few years, twin sisters Karen and Karla de la Garza have carved out their own unique space in the DJ and festival worlds with their ultra-slick sets of tech-house, bass house and techno that come with an irresistible added Latin flavour. Le Twins have graced major stages like Tomorrowland and Ushuaïa Ibiza and have just delivered a memorable DJ Mag Teotihuacán hot air balloon set too. In the release department, the multi-talented duo have put out more singles this year, including well-received jams for high-calibre labels like Steve Aoki’s Dim Mak and Don Diablo’s HEXAGON",
+      "genre": "House"
     },
     {
       "rank": 79,
@@ -616,7 +752,9 @@
       "name": "I Hate Models",
       "djmagUrl": "https://djmag.com/top100djs/2025/79/i-hate-models",
       "website": "https://www.ihatemodelsmusic.com/",
-      "homeCity": "France"
+      "homeCity": "France",
+      "bio": "Masked DJ I Hate Models broke through in the mid-2010s, the course textures, ethereal atmospherics, and jackhammer kicks of his EPs for Arts, Toxic Waste Buried and Monnom Black acting like a jolt of electricity in a techno scene that felt increasingly stale. As his sound — hard, raw, euphoric — has evolved and industrial-strength dance music has become a global force, I Hate Models has remained a leading proponent, with gigs like Ultra Miami and EDC Las Vegas — and his Top 100 placement — a sign of just how far he and his sound has come",
+      "genre": "Techno"
     },
     {
       "rank": 80,
@@ -624,14 +762,19 @@
       "name": "Marnik",
       "djmagUrl": "https://djmag.com/top100djs/2025/80/marnik",
       "website": "https://www.marnikofficial.com/",
-      "homeCity": "Milan, Italy"
+      "homeCity": "Milan, Italy",
+      "bio": "Best known for: “For our mood-board, a fusion of ancient worlds, grand arenas, and the raw energy of hybrid epic EDM.” Milanese duo Marnik debuted in the Top 100 DJs poll in 2024 following a huge 12 months, and the pace has only increased in the year that's followed. Since we last spoke they launched the Arena Records juggernaut, a label “inspired by ancient worlds and dedicated to exploring every shade of techno, trance, and rave”, allowing them to develop and fine-tune their own “epic techno” sound. The road and live shows have also played a dominant role, with the pair touching down in South America for the first time following appearances at events in Myanmar, Thailand, Taiwan, and Japan",
+      "genre": "Techno"
     },
     {
       "rank": 81,
       "slug": "chris-stussy",
       "name": "Chris Stussy",
       "djmagUrl": "https://djmag.com/top100djs/2025/81/chris-stussy",
-      "homeCity": "Amsterdam, The Netherlands"
+      "homeCity": "Amsterdam, The Netherlands",
+      "website": "https://www.chrisstussy.com/",
+      "bio": "Amsterdam’s star Chris Stussy has ascended over the past decade, gaining a far-reaching fanbase with his slick productions, and gracing the cover of DJ Mag back in 2023. This year he revealed his own event concept called USS. The first outing was a sell-out show at London’s Roundhouse, with the next taking place in Amsterdam during ADE. This summer he road-tested a new AV show called ‘Linger’ at festivals like Lowlands. “Presenting the AV show for the first time in my home country was a real milestone. The connection with the crowd in that moment was unforgettable,” he tells DJ Mag. Under his alias with Locklead, Across Boundaries, they released ‘Sakura’, an LP recorded during a series…",
+      "genre": "House"
     },
     {
       "rank": 82,
@@ -639,14 +782,19 @@
       "name": "Deadmau5",
       "djmagUrl": "https://djmag.com/top100djs/2025/82/deadmau5",
       "website": "https://deadmau5.com/",
-      "homeCity": "Toronto, Canada"
+      "homeCity": "Toronto, Canada",
+      "bio": "Skilled Rocket Leaguers were among the first to score new tunes from deadmau5, who released his ‘Error5’ EP as part of an in-game event this summer. The four-track collection includes exploratory grooves like ‘8ths’ and ‘What A Save’, and proves that the world-building producer is still unmatched in engaging audiences beyond the traditional nightlife circuit, though his cinematic, synth-driven productions pack a punch there too. Ultra Miami 2025 saw Joel Zimmerman close out a historic run of retro5pective sets which brought more than 25 years of deadmau5 classics to North America’s biggest stages, but if recent interviews aren’t just trolling, it appears a whole new era is about to…",
+      "genre": "Progressive House"
     },
     {
       "rank": 83,
       "slug": "wukong",
       "name": "WUKONG",
       "djmagUrl": "https://djmag.com/top100djs/2025/83/wukong",
-      "homeCity": "Singapore"
+      "homeCity": "Singapore",
+      "website": "https://linktr.ee/wukongmusic/",
+      "bio": "Watch out for WUKONG. The Singaporean DJ who coined “oriental rave” has only been active for five years, yet he’s already made a global impact with his Asia-centred brand. Recent highlights include collaborations ‘Drip Drip’ with R3HAB and ‘My Immortal’ with MOGUAI and Crazy Donkey, while his official remix of Chinese superstar LBI’s ‘Jumping Machine' became that country’s biggest song of 2024. He’s everywhere across Asia and Australia, from S2O in Thailand and Taiwan to Lunation Festival and Singapore’s Yuewen Festival, and is about to launch WUJACKERS, his new project with Bassjackers",
+      "genre": "Techno"
     },
     {
       "rank": 84,
@@ -654,21 +802,27 @@
       "name": "Fedde Le Grand",
       "djmagUrl": "https://djmag.com/top100djs/2025/84/fedde-le-grand",
       "website": "https://feddelegrand.com/",
-      "homeCity": "The Netherlands"
+      "homeCity": "The Netherlands",
+      "bio": "Best known for: ‘Put Your Hands Up For Detroit’ Fedde Le Grand came out of the gate running via early hits like ‘Put Your Hands Up For Detroit’ and ‘Let Me Think About It’, tunes that can still elicit cheers when dropped at the right place at the right time. Those kinds of tunes, along with his DJ sets, are what led to accolades like the International Dance Music Awards’ Breakthrough Solo Artist in 2007. Nearly two decades later, the Dutch star is still getting those hands up — most recently, through a skippy house version of the Ol’ Dirty Bastard classic ‘Got Your Money’, a back-to-basics production that was one of the highlights of this past summer",
+      "genre": "House"
     },
     {
       "rank": 85,
       "slug": "ferry-corsten",
       "name": "Ferry Corsten",
       "djmagUrl": "https://djmag.com/top100djs/2025/85/ferry-corsten",
-      "website": "https://www.ferrycorsten.com/"
+      "website": "https://www.ferrycorsten.com/",
+      "bio": "The Dutch trance legend has been in the Top 100 pretty much every year since the millennium, and shows little sign of slowing down. One of his highlights of '25 has been bringing his Gouryella show to the main stage at Dance Valley in the Netherlands. “It was truly special,” he says. “I’ve had a long and meaningful history with this festival, so returning with this project made the moment even more memorable.” He’s also celebrating 25 years of Gouryella at ADE, while his Connect album tour has taken him across four continents this year, with Australia still to come. “Every stop has been unforgettable,” he tells DJ Mag"
     },
     {
       "rank": 86,
       "slug": "plastik-funk",
       "name": "Plastik Funk",
       "djmagUrl": "https://djmag.com/top100djs/2025/86/plastik-funk",
-      "homeCity": "Spain / Germany"
+      "homeCity": "Spain / Germany",
+      "website": "https://plastik-funk.de/",
+      "bio": "When you're as prolific as Plastik Funk, it can feel like each year you set yourself unbeatable goals. And 2024 was a hard year to beat: he released some of his biggest tunes (like 'Who') and continued to conquer the global circuit. But 2025 was just as big, starting off with a headlining show in Vietnam to ring in the New Year where he was rinsing his contemporary take on house to over 55,000 people. Throw in some studio hits, like the slinky 'Samba de Janeiro' and a standout Tomorrowland set and 2025 was another benchmark year for Plastik Funk.",
+      "genre": "House"
     },
     {
       "rank": 87,
@@ -676,7 +830,9 @@
       "name": "DubVision",
       "djmagUrl": "https://djmag.com/top100djs/2025/87/dubvision",
       "website": "https://dubvisionmusic.com/",
-      "homeCity": "The Netherlands"
+      "homeCity": "The Netherlands",
+      "bio": "It’s been a good year for progressive house, and that’s an understatement. Thanks to a stream of stadium-sized anthems and the widespread sense that the world could benefit from the themes of positivity and unity at the genre’s core, 2025 has seen a renewed zeal for the genre. As trusted arbiters of its sounds for 15 years now, Stephan and Victor Leicher — DubVision — have run the decks like well-oiled machines this year on a multi-phase world tour that included a stop at Tomorrowland’s mainstage. Between the deluxe version of 2024’s ‘Another World’ and a string of euphoric singles, including ‘Endless Dreamers’ alongside Sick Individuals and 'Live My Life’ with Nicky Romero and Oaks,…",
+      "genre": "Progressive House"
     },
     {
       "rank": 88,
@@ -684,7 +840,9 @@
       "name": "B Jones",
       "djmagUrl": "https://djmag.com/top100djs/2025/88/b-jones",
       "website": "https://bjonesdj.com/",
-      "homeCity": "Spain"
+      "homeCity": "Spain",
+      "bio": "Best known for: “Making history at Tomorrowland.” This Spanish sensation has continued her close relationship with Tomorrowland, performing for the fourth consecutive year on the Belgian mega-festival's Mainstage (having made history in 2022 as the first-ever Spanish artist to perform there). This year B Jones also released her debut EP, the fittingly-titled 'Mainstage EP Vol.1', on her own ARRYBA Music label, which she founded in 2024 as a vibrant community for Spanish-speaking artists. She collaborated with Steve Aoki, Alok and NERVO in 2025, and to top it all off, was also honoured with the prestigious Andalusian Flag of the Arts Award, one of the highest cultural recognitions in Spain.",
+      "genre": "Trance"
     },
     {
       "rank": 89,
@@ -692,21 +850,28 @@
       "name": "Giuseppe Ottaviani",
       "djmagUrl": "https://djmag.com/top100djs/2025/89/giuseppe-ottaviani",
       "website": "https://www.giuseppeottaviani.com/",
-      "homeCity": "Rome, Italy"
+      "homeCity": "Rome, Italy",
+      "bio": "DJ style: “Melodic and energetic with some influences of techno.” Best known for: “Performing live on stage with multiple keyboards.”",
+      "genre": "Melodic House"
     },
     {
       "rank": 90,
       "slug": "cuebrick",
       "name": "Cuebrick",
       "djmagUrl": "https://djmag.com/top100djs/2025/90/cuebrick",
-      "homeCity": "Germany"
+      "homeCity": "Germany",
+      "bio": "In the midst of another busy year of touring, Germany's Cuebrick admits that a return to his homeland's oldest electronic music festival, Nature One Festival, was a real highlight. He also debuted in Romania and has developed his sound with the new wavetable synthesiser, Serum 2, by bringing in “speed garage and house with a new edge and groove into my productions and sets” He also put out a big remix of 'Freeze Time' on Revealed as part of the Legacy vs Destiny concept, a trance-laced EDM tune that he says takes him back to the beginnings of his career and reminds him “how grateful I am for everything that’s happened since.”",
+      "genre": "Techno"
     },
     {
       "rank": 91,
       "slug": "mariana-bo",
       "name": "Mariana Bo",
       "djmagUrl": "https://djmag.com/top100djs/2025/91/mariana-bo",
-      "homeCity": "Culiacán, Sinaloa, Mexico"
+      "homeCity": "Culiacán, Sinaloa, Mexico",
+      "website": "https://linktr.ee/djmarianabo/",
+      "bio": "Best known for: “Blending live violin performances with electronic music.” 2025 has been a huge year of change for Mariana BO, who says she has been “deeply focused on restructuring my career and refining my sound” over the last 12 months. She has still found the time to perform at major festivals like Tomorrowland and EDC Mexico, and collaborate with brands including Pepsi, Spotify, and Tequila Volcán. “It’s been a transformative year,” she explains. “Both musically and personally.” She is also currently deep into rehearsals for a sold-out show with the Mexican classical orchestra, Filarmonica de Queretaro. “This is something I’ve been looking forward to for so long as it bridges my…",
+      "genre": "Techno"
     },
     {
       "rank": 92,
@@ -714,21 +879,26 @@
       "name": "MEDUZA",
       "djmagUrl": "https://djmag.com/top100djs/2025/92/meduza",
       "website": "https://www.meduzamusic.net/",
-      "homeCity": "Italy"
+      "homeCity": "Italy",
+      "bio": "Best known for: “‘Piece Of Your Heart,’ ‘Lose Control’, ‘Paradise,’ ‘Bad Memories’, ‘Tell It To My Heart’.” How do you reconcile a knack for making hooky hits with a love of underground-leaning house music? If you’re Luca Gregorio, Mattia Vitale, and Simone Giani, the Milan-based trio better known as MEDUZA, the answer is simple — indulge in a bit of both. Their luminous tracks tend to be eyes-to-the-sky productions, racking up millions and sometimes billions of Spotify streams. Meanwhile, DJ gigs focus on the pumping end of things, as does their Aeterna label — they cite the label’s ‘Nomacita’ by Miss Monique, GENESI and Carl Bee as one of their key cuts of the year.",
+      "genre": "House"
     },
     {
       "rank": 93,
       "slug": "fantasm",
       "name": "Fantasm",
       "djmagUrl": "https://djmag.com/top100djs/2025/93/fantasm",
-      "homeCity": "Los Angeles, USA and based in Lyon, France"
+      "homeCity": "Los Angeles, USA and based in Lyon, France",
+      "bio": "Fantasm, aka Kenzo Meservey, is part of the new wave of hard techno talents repping the industrial-strength genre. Hailing from Los Angeles and now based in Lyon, France, the young DJ and producer has played a slew of hell-raising gigs of late, including Teletech in Amnesia Ibiza, Sound Waves in Porto, VERKNIPT in Amsterdam, and many more. Fantasm’s tracks are just as intense as his DJ sets, imbued with thundering kicks, spiky melodies, and menacing motifs. Case in point, Fantasm’s track with Hades called ‘Requiem Psycho’, another collab with Exproz titled ‘NFWU’, and Fantasm’s single ‘Red Spider Lilly’. Not for the faint of heart",
+      "genre": "Techno"
     },
     {
       "rank": 94,
       "slug": "vinai",
       "name": "VINAI",
       "djmagUrl": "https://djmag.com/top100djs/2025/94/vinai",
-      "website": "https://www.wearevinai.com/"
+      "website": "https://www.wearevinai.com/",
+      "bio": "Best known for: “Our all-time hits ‘Bounce Generation’ and ‘How We Party,’ and our most recent tracks ‘Rise Up’ and ‘Boyz in Paris’.” Italian DJ/producer duo Alessandro and Andrea Vinai continued reaching new heights in EDM over the past year. They headlined ING Silesia Beats in Poland, appeared at S2O Songkran in Korea, and sold out Tokyo’s destination nightclub RAISE. Their label, DRAGON X, launched in 2024, has already amassed a staggering 150 releases, while landmark track ‘Rise Up’ surpassed 400 million global streams, and two-year-old ‘Boyz In Paris’ crossed 300 million. With these milestones, the brothers have solidified their influence, proving that more than a decade into their…"
     },
     {
       "rank": 95,
@@ -736,28 +906,38 @@
       "name": "Chris Lake",
       "djmagUrl": "https://djmag.com/top100djs/2025/95/chris-lake",
       "website": "https://www.chris-lake.com/",
-      "homeCity": "England (originally)"
+      "homeCity": "England (originally)",
+      "bio": "During the first-ever Coachella Campgrounds party this April, Black Book Records label boss Chris Lake delivered a powerhouse set — and a career-shaping announcement. There, he unveiled the single ‘In My Head’ alongside Amber Mark, and news of his highly-anticipated debut LP, ‘Chemistry’. “Putting out a full album after all these years, and doing it fully independently, felt like a big statement for me and my team,” Lake shares of the 2025 accomplishment. “We backed ourselves, trusted the music, and didn’t have to bend to anyone else’s agenda.”",
+      "genre": "House"
     },
     {
       "rank": 96,
       "slug": "faustix",
       "name": "Faustix",
       "djmagUrl": "https://djmag.com/top100djs/2025/96/faustix",
-      "homeCity": "Denmark"
+      "homeCity": "Denmark",
+      "bio": "In Denmark, the Dubai-based Faustix is famed for the reality TV show The Olsens, “which followed my journey from smalltown boy to living out my dream, performing on the biggest stages,” he says. In the dance music world, though, he’s known for playing big room techno and for collaborations with the likes of Diplo, David Guetta and Icona Pop. In 2025, Faustix played over 70 shows and released music on HEXAGON, Dim Mak and Spinnin’. “I’ve had one of my craziest years ever,” Faustix says. “I’m forever grateful that I’m able to tour, share my music, meet the ones following my journey and see the world with my passion.”",
+      "genre": "Techno"
     },
     {
       "rank": 97,
       "slug": "honey-dijon",
       "name": "Honey Dijon",
       "djmagUrl": "https://djmag.com/top100djs/2025/97/honey-dijon",
-      "homeCity": "Chicago"
+      "homeCity": "Chicago",
+      "website": "https://linktr.ee/honeydijon/",
+      "bio": "Best known for: Fierce and fun sets of impeccable house tunes Honey Dijon is proof that sometimes, hard work really does pay off. She toiled for years in the trenches of NYC nightlife, spinning at tiny spots in the Lower East Side and the East Village, slowly taking steps up the ladder to where she is today — spinning the best clubs and festivals the world has to offer while exuding glamour to the max. She’s one of those DJs who know how to build drama — check her ‘DJ-Kicks’ mix released late last year — but for the full effect, you really need to catch Dijon live, as there are few better at moving the crowd",
+      "genre": "House"
     },
     {
       "rank": 98,
       "slug": "nils-van-zandt",
       "name": "Nils van Zandt",
       "djmagUrl": "https://djmag.com/top100djs/2025/98/nils-van-zandt",
-      "homeCity": "The Netherlands"
+      "homeCity": "The Netherlands",
+      "website": "https://linktr.ee/nilsvanzandt/",
+      "bio": "It’s been a highly productive year for Nils van Zandt, who’s dropped 14 new releases and collabs with the likes of DJ BRNT, Pattendorf, and 2 Fabiola, while his reach-for-the-lasers mainstage rinser ’33 Max Verstappen’has surpassed more than one billion plays on TikTok and Instagram. Part of the track’s continued success is down to Nils’ packed touring schedule, and this year he took his one-of-a-kind music and visuals show to dancers all over Europe, Asia, and Central America. “Every crowd is different, every city has its own soul, but the one thing that never changes is the way music brings us together,” he says",
+      "genre": "House"
     },
     {
       "rank": 99,
@@ -765,7 +945,9 @@
       "name": "Topic",
       "djmagUrl": "https://djmag.com/top100djs/2025/99/topic",
       "website": "https://www.topic-music.com/",
-      "homeCity": "Germany"
+      "homeCity": "Germany",
+      "bio": "Versatile studio wizard Topic has produced everything from pop hits to rap-laced dance and deeper melodic house. This year, he rolled out more charming sounds in the form of the tender and vulnerable 'Body' with Fireboy DML and Nico Santos, and the chilled-out house melancholia of 'Control Of Me' with Daecolm Despite his famously introspective house sound, Topic remains a mainstage favourite who has played across Montenegro, Bali, much of Europe, New York and Thailand while his music amassed a grand total of more than five billion streams across all platforms. Some going",
+      "genre": "Melodic House"
     },
     {
       "rank": 100,
@@ -773,7 +955,8 @@
       "name": "Marlon Hoffstadt",
       "djmagUrl": "https://djmag.com/top100djs/2025/100/marlon-hoffstadt",
       "website": "https://marlonhoffstadt.com/",
-      "homeCity": "Berlin Schöneberg, Germany"
+      "homeCity": "Berlin Schöneberg, Germany",
+      "bio": "Though he’s been around for years on the Berlin underground and behind-the-scenes in electronic music, Marlon Hoffstadt has catapulted to superstardom since the launch of his DJ Daddy Trance alias. Pushing a blend of Eurodance, techno, rave and dance-pop, he’s dropped hits like ‘It’s That Time’, ‘Call Me’ and ‘I Got You’. Reeling off highlights from the past 12 months, he mentions his playing between Tiësto and Armin van Buuren on the EDC main stage in front of 70,000 people, and going back-to-back with KI/KI on the beach in Belgium in front of 20,000 more — “but the real one is always coming home to my son”. Awww!"
     }
   ]
 }
