@@ -1,7 +1,14 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
-import { loadDjMagTopDjs, parseHomeFromDjHtml } from "./djmagDjs";
+import {
+  applyDjMagProfileHtml,
+  loadDjMagTopDjs,
+  needsDjMagProfile,
+  parseBioFromDjHtml,
+  parseDjStyleFromDjHtml,
+  parseHomeFromDjHtml,
+} from "./djmagDjs";
 
 const seed = JSON.parse(
   readFileSync(
@@ -15,6 +22,8 @@ const seed = JSON.parse(
     name: string;
     website?: string;
     homeCity?: string;
+    bio?: string;
+    genre?: string;
   }>;
 };
 
@@ -51,6 +60,68 @@ assert.equal(
   ),
   "Paris, France",
 );
+
+const guettaHtml = readFileSync(
+  join(process.cwd(), "src/lib/ingest/discovery/fixtures/djmag-top100-dj-profile.html"),
+  "utf8",
+);
+const technoHtml = readFileSync(
+  join(process.cwd(), "src/lib/ingest/discovery/fixtures/djmag-top100-dj-techno.html"),
+  "utf8",
+);
+assert.equal(parseHomeFromDjHtml(guettaHtml), "Paris, France");
+assert.equal(parseDjStyleFromDjHtml(guettaHtml), null, "all forms is not a chip");
+assert.equal(parseDjStyleFromDjHtml(technoHtml), "Techno");
+assert.match(parseBioFromDjHtml(guettaHtml) ?? "", /still make music every single day/);
+assert.match(parseBioFromDjHtml(technoHtml) ?? "", /techno stratosphere/);
+assert.doesNotMatch(parseBioFromDjHtml(guettaHtml) ?? "", /Position 1/);
+const applied = applyDjMagProfileHtml(
+  {
+    rank: 9,
+    slug: "charlotte-de-witte",
+    name: "Charlotte de Witte",
+    djmagUrl: "https://djmag.com/top100djs/2025/9/charlotte-de-witte",
+  },
+  technoHtml,
+);
+assert.equal(applied.homeCity, "Ghent, Belgium");
+assert.equal(applied.genre, "Techno");
+assert.match(applied.bio ?? "", /MainStage/);
+assert.match(
+  seed.djs.find((d) => d.slug === "david-guetta")?.bio ?? "",
+  /still make music every single day/,
+);
+assert.match(
+  seed.djs.find((d) => d.slug === "charlotte-de-witte")?.bio ?? "",
+  /techno stratosphere/,
+);
+assert.equal(
+  seed.djs.find((d) => d.slug === "charlotte-de-witte")?.genre,
+  "Techno",
+);
+assert.equal(
+  needsDjMagProfile({ homeCity: "Paris, France", bio: "DJ Mag Top 100 DJs 2025 · #1." }),
+  true,
+);
+assert.equal(
+  needsDjMagProfile({
+    homeCity: "Paris, France",
+    bio: "“It might sound crazy,” says David Guetta, “but I still make music every single day.",
+  }),
+  false,
+);
+const replaced = applyDjMagProfileHtml(
+  {
+    rank: 1,
+    slug: "david-guetta",
+    name: "David Guetta",
+    djmagUrl: "https://djmag.com/top100djs/2025/1/david-guetta",
+    bio: "DJ Mag Top 100 DJs 2025 · #1.",
+  },
+  guettaHtml,
+);
+assert.match(replaced.bio ?? "", /still make music/);
+assert.equal(replaced.genre, undefined);
 
 loadDjMagTopDjs().then((djs) => {
   assert.ok(djs.length >= 100, `expected 100 djs, got ${djs.length}`);

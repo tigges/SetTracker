@@ -109,6 +109,12 @@ describe("followable evidence hubs", () => {
       isFollowableEvidenceUrl("https://www.insomniac.com/music/mixes/"),
       false,
     );
+    assert.equal(
+      isFollowableEvidenceUrl("https://djmag.com/top100djs/2025/1/david-guetta"),
+      true,
+    );
+    assert.equal(isFollowableEvidenceUrl("https://djmag.com/top100djs"), false);
+    assert.equal(isFollowableEvidenceUrl("https://djmag.com/"), false);
   });
 
   it("requires the leaf to name this act", () => {
@@ -151,6 +157,20 @@ describe("followable evidence hubs", () => {
       evidenceUrlMatchesName(
         "Valentino Khan",
         "https://www.discogs.com/artist/5120339-Brohug",
+      ),
+      false,
+    );
+    assert.equal(
+      evidenceUrlMatchesName(
+        "David Guetta",
+        "https://djmag.com/top100djs/2025/1/david-guetta",
+      ),
+      true,
+    );
+    assert.equal(
+      evidenceUrlMatchesName(
+        "BROHUG",
+        "https://djmag.com/top100djs/2025/1/david-guetta",
       ),
       false,
     );

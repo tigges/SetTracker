@@ -2,7 +2,9 @@
  * DJ Mag Top 100 DJs — industry context for artist discovery.
  * Source: https://djmag.com/top100djs (latest published year seed).
  *
- * Chart profiles list From: / style but NOT official URLs (unlike clubs).
+ * Chart profiles list From: / DJ style / body lede but NOT official URLs
+ * (unlike clubs). Follow a concrete `djmagUrl` already on the seed —
+ * never crawl `/top100djs` as a search, never write it to Dj.website.
  * We fill Dj.website from roster/pins first, then Wikidata P856.
  *
  * Mixmag.net is NOT crawled — Mixmag contributes sets via YouTube only.
@@ -12,6 +14,8 @@ import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import type { PrismaClient } from "@prisma/client";
 import { sanitizeArtistName } from "../../artistName";
+import { isChartRankBio, stripChartRankSuffix } from "../../djBio";
+import { normalizeGenre } from "../../genre";
 import { DJ_SOCIAL_PINS } from "../djSocialPins";
 import { ARTIST_ROSTER } from "../roster";
 import { slugify } from "../types";
@@ -34,6 +38,8 @@ export type DjMagTopDj = {
   djmagUrl: string;
   homeCity?: string;
   website?: string;
+  bio?: string;
+  genre?: string;
 };
 
 const LIST_URL = "https://djmag.com/top100djs";
@@ -139,19 +145,98 @@ function mergeSeedMeta(djs: DjMagTopDj[]): DjMagTopDj[] {
       ...d,
       homeCity: d.homeCity ?? seed?.homeCity,
       website: d.website ?? seed?.website ?? curated ?? undefined,
+      bio: d.bio ?? seed?.bio,
+      genre: d.genre ?? seed?.genre,
     };
   });
+}
+
+function stripHtmlText(raw: string): string {
+  return decodeEntities(raw.replace(/<[^>]+>/g, " "))
+    .replace(/\s+/g, " ")
+    .replace(/\.+$/, "")
+    .trim();
 }
 
 /** `From: Paris, France` on DJ Mag Top 100 DJ profiles. */
 export function parseHomeFromDjHtml(html: string): string | null {
   const m = html.match(/From:\s*<\/strong>\s*([^<]+)/i);
   if (!m?.[1]) return null;
-  const loc = decodeEntities(m[1])
-    .replace(/\s+/g, " ")
-    .replace(/\.+$/, "")
-    .trim();
+  const loc = stripHtmlText(m[1]);
   return loc.length >= 2 && loc.length <= 80 ? loc : null;
+}
+
+/**
+ * `DJ style: Techno` when it is a single canonical chip.
+ * "All forms of dance music" is not a genre.
+ */
+export function parseDjStyleFromDjHtml(html: string): string | null {
+  const m = html.match(/DJ style:\s*<\/strong>\s*([^<]+)/i);
+  if (!m?.[1]) return null;
+  const raw = stripHtmlText(m[1]);
+  if (!raw || /all forms|various|everything|eclectic|mixed/i.test(raw)) {
+    return null;
+  }
+  return normalizeGenre(raw);
+}
+
+/** First 1–2 body paragraphs, else Best known for, else og:description. */
+export function parseBioFromDjHtml(html: string): string | null {
+  const body = html.match(
+    /field--name-body[\s\S]*?<div class="field__item">([\s\S]*?)<\/div>/i,
+  );
+  if (body?.[1]) {
+    const chunk = body[1].replace(/<div class="advert"[\s\S]*?<\/div>/gi, " ");
+    const paras = [...chunk.matchAll(/<p>([\s\S]*?)<\/p>/gi)]
+      .map((p) => stripHtmlText(p[1] ?? ""))
+      .filter((p) => p.length >= 40);
+    let bio = paras.slice(0, 2).join(" ").trim();
+    if (bio.length > 700) {
+      bio = `${bio.slice(0, 697).replace(/\s+\S*$/, "")}…`;
+    }
+    if (bio.length >= 24 && !isChartRankBio(bio)) return bio;
+  }
+  const known = html.match(/Best known for:\s*<\/strong>\s*([^<]+)/i);
+  if (known?.[1]) {
+    const line = stripHtmlText(known[1]);
+    if (line.length >= 24) return line;
+  }
+  const og = html.match(
+    /<meta property="og:description" content="([^"]+)"/i,
+  );
+  if (og?.[1]) {
+    const line = stripHtmlText(og[1]).replace(
+      /^Position\s+\d+[^|]*\|\s*/i,
+      "",
+    );
+    if (line.length >= 24 && !isChartRankBio(line)) return line;
+  }
+  return null;
+}
+
+function distinctiveBio(bio?: string | null): string | undefined {
+  if (!bio || isChartRankBio(bio)) return undefined;
+  return bio;
+}
+
+/** Profile fetch for From: / lede — not a second trip just for a missing style chip. */
+export function needsDjMagProfile(row: Pick<DjMagTopDj, "homeCity" | "bio">): boolean {
+  return !row.homeCity || !row.bio || isChartRankBio(row.bio);
+}
+
+export function applyDjMagProfileHtml(
+  row: DjMagTopDj,
+  html: string,
+): DjMagTopDj {
+  const home = parseHomeFromDjHtml(html);
+  const genre = parseDjStyleFromDjHtml(html);
+  const bio = parseBioFromDjHtml(html);
+  return {
+    ...row,
+    homeCity: row.homeCity || home || undefined,
+    genre: row.genre || genre || undefined,
+    bio: row.bio && !isChartRankBio(row.bio) ? row.bio : bio || row.bio,
+  };
 }
 
 function parseListHtml(html: string): DjMagTopDj[] {
@@ -242,7 +327,7 @@ export async function enrichDjMagDjWebsites(opts?: {
   const djs = await loadDjMagTopDjs({ force: true });
   const targets = djs.filter((d) => {
     if (!missingOnly) return true;
-    return !d.website || !d.homeCity;
+    return !d.website || needsDjMagProfile(d);
   });
   const limit = opts?.limit ?? targets.length;
   let fetched = 0;
@@ -250,14 +335,10 @@ export async function enrichDjMagDjWebsites(opts?: {
 
   for (const row of targets.slice(0, limit)) {
     fetched += 1;
-    // Profile → home city (always cheap when missing).
-    if (!row.homeCity) {
+    if (needsDjMagProfile(row)) {
       const html = await fetchHtml(row.djmagUrl);
       await sleep(delay);
-      if (html) {
-        const home = parseHomeFromDjHtml(html);
-        if (home) row.homeCity = home;
-      }
+      if (html) Object.assign(row, applyDjMagProfileHtml(row, html));
     }
 
     if (row.website && !/djmag\.com/i.test(row.website)) {
@@ -307,6 +388,8 @@ export async function enrichDjMagDjWebsites(opts?: {
             ...d,
             website: live.website ?? d.website,
             homeCity: live.homeCity ?? d.homeCity,
+            bio: distinctiveBio(live.bio) ?? distinctiveBio(d.bio),
+            genre: live.genre ?? d.genre,
           }
         : d;
     });
@@ -320,7 +403,7 @@ export async function enrichDjMagDjWebsites(opts?: {
         {
           source: LIST_URL,
           year: YEAR,
-          note: "DJ Mag Top 100 DJs. Profiles omit official URLs — `website` from roster/pins + Wikidata P856; `homeCity` from profile From:. Mixmag.net not used.",
+          note: "DJ Mag Top 100 DJs. Profiles omit official URLs — `website` from roster/pins + Wikidata P856; `homeCity` / `bio` / `genre` from a concrete profile already on the seed. Never Dj.website. Mixmag.net not used.",
           djs: next,
         },
         null,
@@ -358,7 +441,7 @@ export async function ensureDjMagTopDjs(
     const clean = sanitizeArtistName(row.name);
     if (!clean) continue;
     const slug = slugify(clean);
-    const bio = `DJ Mag Top 100 DJs ${YEAR} · #${row.rank}.`;
+    const bio = distinctiveBio(row.bio) ?? null;
     const existing = await prisma.dj.findUnique({ where: { slug } });
     if (!existing) {
       await prisma.dj.create({
@@ -368,6 +451,7 @@ export async function ensureDjMagTopDjs(
           accent: accentFor(slug),
           homeCity: row.homeCity ?? null,
           website: row.website ?? null,
+          genre: row.genre ?? null,
           bio,
         },
       });
@@ -375,18 +459,20 @@ export async function ensureDjMagTopDjs(
     } else {
       const data: Record<string, unknown> = {};
       if (!existing.homeCity && row.homeCity) data.homeCity = row.homeCity;
+      if (!existing.genre && row.genre) data.genre = row.genre;
       if (
         row.website &&
         (!existing.website || /djmag\.com\/top100djs/i.test(existing.website))
       ) {
         data.website = row.website;
       }
-      if (!existing.bio) data.bio = bio;
-      else if (
-        !/DJ Mag Top 100 DJs/i.test(existing.bio) &&
-        existing.bio.length < 400
-      ) {
-        data.bio = `${existing.bio} ${bio}`.trim();
+      if (existing.bio && isChartRankBio(existing.bio)) {
+        data.bio = bio;
+      } else if (existing.bio) {
+        const stripped = stripChartRankSuffix(existing.bio);
+        if (stripped !== existing.bio) data.bio = stripped || bio;
+      } else if (bio) {
+        data.bio = bio;
       }
       if (Object.keys(data).length) {
         await prisma.dj.update({ where: { id: existing.id }, data });

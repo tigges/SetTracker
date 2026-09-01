@@ -3,6 +3,21 @@ import { extractBeatportArtistUrl } from "@/lib/beatportArtist";
 const OPERATOR =
   /^(do not use|never use)\b|1001 sometimes|no official soundcloud|\bnot bare\b|\(not\s+[@\w.-]+\)|different (artist|channel)|facebook on roster/i;
 
+/** Rank dump written by older ensureDjMagTopDjs — not a distinctive bio. */
+export const CHART_RANK_BIO =
+  /^DJ Mag Top 100 DJs \d{4}\s*[·•-]\s*#\d+\.?$/i;
+
+export function isChartRankBio(bio: string | null | undefined): boolean {
+  return CHART_RANK_BIO.test(String(bio || "").trim());
+}
+
+/** Drop a trailing rank dump appended to an otherwise distinctive bio. */
+export function stripChartRankSuffix(bio: string): string {
+  return bio
+    .replace(/\s*DJ Mag Top 100 DJs \d{4}\s*[·•-]\s*#\d+\.?\s*$/i, "")
+    .trim();
+}
+
 const GENRE_WORD =
   /house|techno|trance|bass|edm|dance|riddim|hardstyle|hard dance|future bass|big room|breaks|electro/i;
 
@@ -64,6 +79,7 @@ export function displayDjBio(
   const kept: string[] = [];
   for (const sentence of splitSentences(bio)) {
     if (OPERATOR.test(sentence)) continue;
+    if (isChartRankBio(sentence)) continue;
     const leftover = stripDumpTokens(sentence);
     if (!leftover) continue;
     if (isGenreOrCity(leftover, opts)) continue;

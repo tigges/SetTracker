@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { displayDjBio } from "./djBio";
+import { displayDjBio, isChartRankBio, stripChartRankSuffix } from "./djBio";
 import { DJ_SOCIAL_PINS } from "./ingest/djSocialPins.data";
 
 function pinBio(slug: string): string {
@@ -73,6 +73,24 @@ describe("displayDjBio", () => {
   it("returns null for empty", () => {
     assert.equal(displayDjBio(null), null);
     assert.equal(displayDjBio("   "), null);
+  });
+
+  it("hides a DJ Mag chart rank dump", () => {
+    assert.equal(isChartRankBio("DJ Mag Top 100 DJs 2025 · #1."), true);
+    assert.equal(isChartRankBio("The Swedish bass-house band from Stockholm started in 2015."), false);
+    assert.equal(
+      stripChartRankSuffix(
+        "The Swedish bass-house band from Stockholm started in 2015. DJ Mag Top 100 DJs 2025 · #40.",
+      ),
+      "The Swedish bass-house band from Stockholm started in 2015.",
+    );
+    assert.equal(displayDjBio("DJ Mag Top 100 DJs 2025 · #1."), null);
+    const out = displayDjBio(
+      "The Swedish bass-house band from Stockholm started in 2015. DJ Mag Top 100 DJs 2025 · #40.",
+    );
+    assert.ok(out);
+    assert.match(out, /Stockholm/);
+    assert.doesNotMatch(out, /Top 100 DJs/);
   });
 
   it("keeps the bradeazy Beatport artist bio", () => {

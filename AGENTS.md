@@ -315,6 +315,10 @@ unless asked. Never write Relive for HARD / Insomniac / Nameless / Ultra.
   followable evidence (outbound first-party links, distinctive bio,
   homeCity, genre). Do not crawl those hosts or invent `/page/` titles
   or Discogs artist ids. A leaf that names a different act is a miss.
+  DJ Mag Top 100 DJ profiles (`djmagUrl` on the seed) may fill From:,
+  a canonical DJ style, and the body lede — never the listing
+  `/top100djs`, never `Dj.website`, and never the rank dump
+  `DJ Mag Top 100 DJs 2025 · #N` as a bio.
   The DJ Mag chart URL is
   **kept**, not discarded: `djmagUrl` lives on every row of
   `data/venue-seeds/djmag-atlas-2026.json`,

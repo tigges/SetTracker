@@ -1,7 +1,7 @@
 {
   "source": "https://djmag.com/top100djs",
   "year": 2025,
-  "note": "DJ Mag Top 100 DJs. Profiles omit official URLs — `website` from roster/pins + Wikidata P856 + curated extras; `homeCity` from profile From:. Mixmag.net not used.",
+  "note": "DJ Mag Top 100 DJs. Profiles omit official URLs — website from roster/pins + Wikidata P856; homeCity / bio / genre from a concrete profile already on the seed. Never Dj.website. Mixmag.net not used.",
   "djs": [
     {
       "rank": 1,
@@ -9,7 +9,8 @@
       "name": "David Guetta",
       "djmagUrl": "https://djmag.com/top100djs/2025/1/david-guetta",
       "website": "https://davidguetta.com/",
-      "homeCity": "Paris, France"
+      "homeCity": "Paris, France",
+      "bio": "“It might sound crazy,” says David Guetta, “but I still make music every single day, because I still see it as a hobby and a passion. Even when I want a break, I just move to making a different style.” Now more than four decades into his career, Guetta continues to operate at full speed, releasing over a single a month in the past year. 2025 has been one of his most varied too, with releases including the trap and hip-hop influenced track ‘Lucky’, with MORTEN, collaborations with Afrojack, Martin Garrix, Hypaton, Nicky Romero, Hugel, MK, Fatboy Slim, a new single with Sia, in addition to a remix for fictional K-pop group Huntr/x"
     },
     {
       "rank": 2,
@@ -71,7 +72,9 @@
       "name": "Charlotte de Witte",
       "djmagUrl": "https://djmag.com/top100djs/2025/9/charlotte-de-witte",
       "website": "https://charlottedewittemusic.com/",
-      "homeCity": "Ghent, Belgium"
+      "homeCity": "Ghent, Belgium",
+      "genre": "Techno",
+      "bio": "Charlotte de Witte seemingly reached the techno stratosphere in 2025. At Tomorrowland in July, she became the first artist ever to open and close the MainStage on the same day (with a 'Daybreak' stage set at noon, then returning for a closing headline slot). She announced her debut self-titled LP, to be released on her own KNTXT label in November, and launched an ongoing series of free street parties with events in New York, Milan and Ghent to date. Staying true to her rave roots, she names the NYC party as a standout moment of 2025, “playing a pop-up set at the Williamsburg Bridge”"
     },
     {
       "rank": 10,
