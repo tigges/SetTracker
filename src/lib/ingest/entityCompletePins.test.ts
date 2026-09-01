@@ -16,6 +16,7 @@ import {
   wishlistDjStubFromPin,
 } from "./entityCompletePins";
 import { WISHLIST_DEFAULTS } from "../wishlist";
+import { ARTIST_ROSTER_CURATED } from "./roster";
 
 assert.equal(decodeMojibake("\u00C3\u2020ON:MODE"), "ÆON:MODE");
 assert.equal(decodeMojibake("\u00C3\u201Clafur Arnalds"), "Ólafur Arnalds");
@@ -997,12 +998,22 @@ assert.equal(
 }
 
 // Anti Up — operator paste. Matching @antiup / antiupmusic handles.
+// Official channel id UC8Bhgj67ino3eyL6WXvYgAA lives on the roster
+// (deep-scan). The pin keeps @antiup — About still lists it, and a
+// /channel/UC URL fails name overlap (same rule as Jauz).
 // Slogan bio only — drop the +1 phone and @chrislake handle dump.
 // Facebook has no pin column. SoundCloud was not in this paste.
 // DJ Fresh Grokipedia is an encyclopedia, not a website.
 assert.equal(
   nameOverlapsHandle("Anti Up", "https://www.youtube.com/@antiup"),
   true,
+);
+assert.equal(
+  nameOverlapsHandle(
+    "Anti Up",
+    "https://www.youtube.com/channel/UC8Bhgj67ino3eyL6WXvYgAA",
+  ),
+  false,
 );
 assert.equal(
   nameOverlapsHandle("Anti Up", "https://instagram.com/antiupmusic"),
@@ -1091,6 +1102,17 @@ assert.equal(
   assert.equal(anti.website, undefined);
   assert.equal(anti.genre, undefined);
   assert.doesNotMatch(anti.bio ?? "", /\+1|323|@chrislake/i);
+}
+{
+  const roster = ARTIST_ROSTER_CURATED.find((a) => a.name === "Anti Up");
+  assert.ok(roster);
+  assert.equal(roster.youtube?.handle, "UC8Bhgj67ino3eyL6WXvYgAA");
+  assert.ok(
+    roster.socials?.includes(
+      "https://www.youtube.com/channel/UC8Bhgj67ino3eyL6WXvYgAA",
+    ),
+  );
+  assert.ok(roster.socials?.includes("https://www.youtube.com/@antiup"));
 }
 
 // Jauz — operator paste. jauzofficial.com + matching @jauzofficial
