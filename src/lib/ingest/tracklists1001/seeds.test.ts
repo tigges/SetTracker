@@ -220,6 +220,7 @@ import {
   TL_GIUSEPPE_OTTAVIANI_DREAMSTATE_SYDNEY_2026,
   TL_GREG_99_HELLBENT_FM_006_2026,
   TL_VALENTINO_KHAN_REVEL_ALBUQUERQUE_2026,
+  TL_ANTI_UP_COACHELLA_WE2_MOJAVE_2024,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
@@ -6260,6 +6261,37 @@ for (let i = 1; i < vkRevel.length; i++) {
   assert.ok(
     (vkRevel[i]?.timestamp ?? 0) > (vkRevel[i - 1]?.timestamp ?? 0),
     `Valentino Khan Revel Albuquerque clocks must increase at index ${i}`,
+  );
+}
+
+// Anti Up @ Mojave, Coachella WE2 2024-04-19.
+// Official @antiup yt-cZhNpGcYq_A is a What Is Life clip, not the set.
+// Seed held — never wire the clip as the Mojave playback.
+assertSeedClocks(TL_ANTI_UP_COACHELLA_WE2_MOJAVE_2024);
+assert.equal(TL_ANTI_UP_COACHELLA_WE2_MOJAVE_2024.length, 21);
+assert.equal(
+  Object.values(TRACKLIST_1001_BY_SOURCE_SLUG).includes(
+    TL_ANTI_UP_COACHELLA_WE2_MOJAVE_2024,
+  ),
+  false,
+  "Coachella Mojave seed is held — clip is not the full set",
+);
+assert.equal(TRACKLIST_1001_BY_SOURCE_SLUG["yt-cZhNpGcYq_A"], undefined);
+assert.equal(isWiredTracklistSlug("yt-cZhNpGcYq_A"), false);
+const antiUpCoachella = tracklist1001RowsToPlays(
+  TL_ANTI_UP_COACHELLA_WE2_MOJAVE_2024,
+);
+assert.equal(antiUpCoachella.length, 21);
+assert.equal(antiUpCoachella[0]?.provenance, "1001tl");
+assert.equal(antiUpCoachella[0]?.timestamp, 0);
+assert.equal(antiUpCoachella[0]?.trackTitle, "What Is Life");
+assert.equal(antiUpCoachella[20]?.trackTitle, "Holding On");
+assert.equal(antiUpCoachella[20]?.timestamp, 63 * 60);
+for (let i = 1; i < antiUpCoachella.length; i++) {
+  assert.ok(
+    (antiUpCoachella[i]?.timestamp ?? 0) >
+      (antiUpCoachella[i - 1]?.timestamp ?? 0),
+    `Anti Up Coachella Mojave 2024 clocks must increase at index ${i}`,
   );
 }
 

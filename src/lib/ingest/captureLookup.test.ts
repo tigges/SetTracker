@@ -6,6 +6,7 @@ import {
   type CaptureArchiveRow,
 } from "./captureLookup";
 import { TRACKLIST_1001_BY_SOURCE_SLUG } from "./tracklists1001/festival2026";
+import { loadKnown1001ArchiveRows } from "./known1001Archive";
 
 // Slug resolution across the hosts an operator actually pastes.
 assert.equal(resolveCaptureSlug("yt-3mOMDdX6miw").slug, "yt-3mOMDdX6miw");
@@ -83,6 +84,28 @@ const seed = [{ at: "0:00", title: "x" }];
 const fake = { "yt-aaa": seed, "sc-b-c": seed, "yt-solo": [{ at: "0:00" }] };
 assert.deepEqual(lookupCapture("yt-aaa", [], fake).twins, ["sc-b-c"]);
 assert.deepEqual(lookupCapture("yt-solo", [], fake).twins, []);
+
+// Official @antiup clip is on file as a hold, never wired as the Mojave set.
+const shippedArchive = loadKnown1001ArchiveRows();
+const antiUpClip = lookupCapture("https://youtu.be/cZhNpGcYq_A", shippedArchive);
+assert.equal(antiUpClip.slug, "yt-cZhNpGcYq_A");
+assert.equal(antiUpClip.alreadyOnFile, false);
+assert.equal(antiUpClip.wiredCues, null);
+assert.ok(
+  antiUpClip.archive.some((h) => h.name === "TL_ANTI_UP_COACHELLA_WE2_MOJAVE_2024"),
+  "clip URL must hit the held Coachella seed so re-paste shows the hold note",
+);
+const antiUp1001 = lookupCapture(
+  "https://www.1001tracklists.com/tracklist/2mccm4u1/chris-lake-chris-lorenzo-pres.-anti-up-mojave-coachella-festival-weekend-2-united-states-2024-04-19.html",
+  shippedArchive,
+);
+assert.equal(antiUp1001.tracklistId, "2mccm4u1");
+assert.equal(antiUp1001.alreadyOnFile, true);
+assert.equal(antiUp1001.slug, null);
+assert.equal(antiUp1001.wiredCues, null);
+assert.ok(
+  antiUp1001.archive.some((h) => h.name === "TL_ANTI_UP_COACHELLA_WE2_MOJAVE_2024"),
+);
 
 void TRACKLIST_1001_BY_SOURCE_SLUG;
 console.log("ingest/captureLookup.test.ts ok");

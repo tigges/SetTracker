@@ -82,3 +82,39 @@ export const TL_VALENTINO_KHAN_REVEL_ALBUQUERQUE_2026: FingerprintSeedRow[] = [
   { at: "20:13", artist: "OMNOM", title: "Lavender Town" },
   { at: "20:39", artist: "MARTEN HØRGER", title: "Worth The Wait" },
 ];
+
+/**
+ * Chris Lake & Chris Lorenzo pres. Anti Up @ Mojave, Coachella WE2 2024-04-19
+ * https://www.1001tracklists.com/tracklist/2mccm4u1/chris-lake-chris-lorenzo-pres.-anti-up-mojave-coachella-festival-weekend-2-united-states-2024-04-19.html
+ * Operator YouTube https://youtu.be/cZhNpGcYq_A is official @antiup but a
+ * clip — oEmbed 2026-09-01: "Anti Up - What Is Life [Live From Coachella
+ * 2024]". Roster: Coachella 2024 was livestream-only; no official long-form
+ * archive. Never YOUTUBE_SETS / TRACKLIST_1001_BY_SOURCE_SLUG / playback.
+ * Overlay TL_Chris-Lake_AND_… is not a valid identifier.
+ * Seed held until an official full-set playback exists. No SoundCloud in
+ * the paste — do not invent an SC slug.
+ * Captured 2026-09-01 — provenance 1001tl.
+ */
+export const TL_ANTI_UP_COACHELLA_WE2_MOJAVE_2024: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "Chris Lake & Chris Lorenzo pres. Anti Up ft. rhys from the sticks", title: "What Is Life" },
+  { at: "5:30", artist: "Chris Lake & Chris Lorenzo pres. Anti Up", title: "The Weekend" },
+  { at: "8:30", artist: "Chris Lake & Chris Lorenzo pres. Anti Up", title: "Shake" },
+  { at: "12:00", artist: "Chris Lake & Chris Lorenzo pres. Anti Up", title: "Do You Know Where Your Children Are" },
+  { at: "16:00", artist: "Anti Up", title: "9 Of 10" },
+  { at: "19:50", artist: "Truncate", title: "Utility 2" },
+  { at: "21:30", artist: "NIKK", title: "Force Of Pleasure" },
+  { at: "22:30", artist: "Chris Lake & Chris Lorenzo pres. Anti Up", title: "Right Now" },
+  { at: "23:30", artist: "Chris Lake & Chris Lorenzo pres. Anti Up", title: "Control The Media" },
+  { at: "27:00", artist: "Chris Lake & Chris Lorenzo pres. Anti Up ft. Leven Kali", title: "Freaky Feed Me" },
+  { at: "30:00", artist: "Chris Lake & Chris Lorenzo pres. Anti Up & hollow.io", title: "Shambles" },
+  { at: "35:00", artist: "Chris Lake & Chris Lorenzo pres. Anti Up ft. Audio Bullys & Olly Burden", title: "Outlaws" },
+  { at: "38:20", artist: "Chris Lake & Chris Lorenzo pres. Anti Up ft. Olly Burden", title: "MONEY" },
+  { at: "41:15", artist: "Skrillex", title: "ANDY" },
+  { at: "43:08", artist: "The Streets", title: "Turn The Page" },
+  { at: "45:00", artist: "Chris Lake & Chris Lorenzo pres. Anti Up", title: "Something's About To Go Down" },
+  { at: "48:50", artist: "Chris Lake & Chris Lorenzo pres. Anti Up", title: "Chromatic" },
+  { at: "53:45", artist: "Beau Didier", title: "Booty Shake" },
+  { at: "56:30", artist: "Chris Lake & Chris Lorenzo pres. Anti Up", title: "Hey Pablo" },
+  { at: "59:00", artist: "Chris Lake & Chris Lorenzo pres. Anti Up", title: "Set Me Free" },
+  { at: "1:03:00", artist: "Chris Lake & Chris Lorenzo pres. Anti Up ft. rhys from the sticks", title: "Holding On" },
+];

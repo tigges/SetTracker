@@ -815,7 +815,7 @@ export const ARTIST_ROSTER_CURATED: ArtistRosterEntry[] = [
       // point ingest at the wrong property.
       handle: "UC8Bhgj67ino3eyL6WXvYgAA",
       status: "weak",
-      note: "official channel/UC8Bhgj67ino3eyL6WXvYgAA; About @antiup; shorts/clips, no official long-form sets yet",
+      note: "official channel/UC8Bhgj67ino3eyL6WXvYgAA; About @antiup; shorts/clips, no official long-form sets yet. yt-cZhNpGcYq_A is What Is Life [Live From Coachella 2024] — clip, not the Mojave WE2 full set (TL_ANTI_UP_COACHELLA_WE2_MOJAVE_2024 held)",
     },
     soundcloud: {
       permalink: "antiupmusic",

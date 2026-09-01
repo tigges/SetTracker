@@ -44,4 +44,16 @@ assert.match(vkRevelWatch.note, /never official playback/i);
 assert.equal(isFingerprintOnlyVideoId("6ZN3aI2o2OY"), true);
 assert.equal(isFingerprintOnlyWatchUrl("https://youtu.be/6ZN3aI2o2OY"), true);
 
+// Official @antiup What Is Life clip — not a fan upload. Hold the 1001
+// seed; never Identify-probe the clip as if it were the Mojave set.
+assert.equal(isFingerprintOnlyVideoId("cZhNpGcYq_A"), false);
+assert.equal(
+  isFingerprintOnlyWatchUrl("https://youtu.be/cZhNpGcYq_A"),
+  false,
+);
+assert.equal(
+  FINGERPRINT_ONLY_WATCH.some((w) => w.videoId === "cZhNpGcYq_A"),
+  false,
+);
+
 console.log("identify/fingerprintWatch.test.ts ok");
