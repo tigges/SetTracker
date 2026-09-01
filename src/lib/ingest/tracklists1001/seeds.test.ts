@@ -225,6 +225,9 @@ import {
   TL_MORTEN_MALAA_TML_WINTER_MAINSTAGE_2026,
   TL_TCHAMI_MALAA_EDC_LV_CIRCUITGROUNDS_2025,
   TL_JAUZ_GET_CRANKED_BILL_GRAHAM_SF_2025,
+  TL_WENZDAY_ILLFEST_WICKED_OAKS_AUSTIN_2025,
+  TL_BROHUG_BASS_HOUSE_MIXTAPE_2026,
+  TL_GREG_99_DATA_TRANSMISSION_DT903_2025,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
@@ -6422,6 +6425,86 @@ for (let i = 1; i < jauzBillGraham.length; i++) {
     (jauzBillGraham[i]?.timestamp ?? 0) >
       (jauzBillGraham[i - 1]?.timestamp ?? 0),
     `JAUZ Bill Graham clocks must increase at index ${i}`,
+  );
+}
+
+// Wenzday @ Illfest, Wicked Oaks Festival, Austin 2025-10-25 — wired,
+// official @WenzdayMusic YT. Evenly spaced ~2:02 apart per 1001 (not
+// independently observed) — kept as pasted.
+assertSeedClocks(TL_WENZDAY_ILLFEST_WICKED_OAKS_AUSTIN_2025);
+assert.equal(TL_WENZDAY_ILLFEST_WICKED_OAKS_AUSTIN_2025.length, 29);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-2tz9HFofnFQ"],
+  TL_WENZDAY_ILLFEST_WICKED_OAKS_AUSTIN_2025,
+);
+assert.equal(isWiredTracklistSlug("yt-2tz9HFofnFQ"), true);
+const wenzdayIllfest = tracklist1001RowsToPlays(
+  TL_WENZDAY_ILLFEST_WICKED_OAKS_AUSTIN_2025,
+);
+assert.equal(wenzdayIllfest.length, 29);
+assert.equal(wenzdayIllfest[0]?.provenance, "1001tl");
+assert.equal(wenzdayIllfest[0]?.timestamp, 20);
+assert.equal(wenzdayIllfest[0]?.trackTitle, "Keep On Dancin'");
+assert.equal(
+  wenzdayIllfest[28]?.trackTitle,
+  "Like A Prayer (Autograf Remix)",
+);
+assert.equal(wenzdayIllfest[28]?.timestamp, 57 * 60 + 16);
+for (let i = 1; i < wenzdayIllfest.length; i++) {
+  assert.ok(
+    (wenzdayIllfest[i]?.timestamp ?? 0) >
+      (wenzdayIllfest[i - 1]?.timestamp ?? 0),
+    `Wenzday Illfest Wicked Oaks clocks must increase at index ${i}`,
+  );
+}
+
+// BROHUG - Bass House Mixtape 2026 — wired, artist-owned BROHOUSE label YT.
+assertSeedClocks(TL_BROHUG_BASS_HOUSE_MIXTAPE_2026);
+assert.equal(TL_BROHUG_BASS_HOUSE_MIXTAPE_2026.length, 8);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-3nd9yXIty2w"],
+  TL_BROHUG_BASS_HOUSE_MIXTAPE_2026,
+);
+assert.equal(isWiredTracklistSlug("yt-3nd9yXIty2w"), true);
+const brohugMixtape = tracklist1001RowsToPlays(TL_BROHUG_BASS_HOUSE_MIXTAPE_2026);
+assert.equal(brohugMixtape.length, 8);
+assert.equal(brohugMixtape[0]?.provenance, "1001tl");
+assert.equal(brohugMixtape[0]?.timestamp, 0);
+assert.equal(brohugMixtape[0]?.trackTitle, "Face Melt");
+assert.equal(brohugMixtape[7]?.trackTitle, "Rats");
+assert.equal(brohugMixtape[7]?.timestamp, 18 * 60 + 30);
+for (let i = 1; i < brohugMixtape.length; i++) {
+  assert.ok(
+    (brohugMixtape[i]?.timestamp ?? 0) > (brohugMixtape[i - 1]?.timestamp ?? 0),
+    `BROHUG Bass House Mixtape clocks must increase at index ${i}`,
+  );
+}
+
+// GREG 99 - Data Transmission 903 — wired, official Data Transmission SC.
+assertSeedClocks(TL_GREG_99_DATA_TRANSMISSION_DT903_2025);
+assert.equal(TL_GREG_99_DATA_TRANSMISSION_DT903_2025.length, 13);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["sc-data-transmission-dt903-gregbr"],
+  TL_GREG_99_DATA_TRANSMISSION_DT903_2025,
+);
+assert.equal(
+  isWiredTracklistSlug("sc-data-transmission-dt903-gregbr"),
+  true,
+);
+const gregDataTransmission = tracklist1001RowsToPlays(
+  TL_GREG_99_DATA_TRANSMISSION_DT903_2025,
+);
+assert.equal(gregDataTransmission.length, 13);
+assert.equal(gregDataTransmission[0]?.provenance, "1001tl");
+assert.equal(gregDataTransmission[0]?.timestamp, 0);
+assert.equal(gregDataTransmission[0]?.trackTitle, "Rockstar");
+assert.equal(gregDataTransmission[12]?.trackTitle, "This Rhythm");
+assert.equal(gregDataTransmission[12]?.timestamp, 54 * 60 + 55);
+for (let i = 1; i < gregDataTransmission.length; i++) {
+  assert.ok(
+    (gregDataTransmission[i]?.timestamp ?? 0) >
+      (gregDataTransmission[i - 1]?.timestamp ?? 0),
+    `GREG 99 Data Transmission 903 clocks must increase at index ${i}`,
   );
 }
 

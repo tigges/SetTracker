@@ -920,4 +920,19 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     type: "radio",
     minDurationSec: 30 * 60,
   },
+  {
+    // Official Data Transmission radio brand account (datatransmission.co);
+    // 1001TL wired via sc-data-transmission-dt903-gregbr. oEmbed title
+    // "DT903 - GREG(BR) by Data Transmission". No YouTube in the paste —
+    // do not invent a YT slug. Never wire sc-https://….
+    url: "https://soundcloud.com/data-transmission/dt903-gregbr",
+    primaryArtist: dj("GREG 99", {
+      accent: "#2a9d8f",
+      homeCity: "Minas Gerais, Brazil",
+    }),
+    genre: "Tech House",
+    seriesName: "Data Transmission",
+    type: "radio",
+    minDurationSec: 30 * 60,
+  },
 ];

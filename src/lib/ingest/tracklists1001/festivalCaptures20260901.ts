@@ -318,3 +318,108 @@ export const TL_JAUZ_GET_CRANKED_BILL_GRAHAM_SF_2025: FingerprintSeedRow[] = [
   { at: "39:28", artist: "Swedish House Mafia ft. Pharrell Williams", title: "One (Your Name)" },
   { at: "59:30", artist: "Marshmello & SVDDEN DEATH", title: "Vortexblade" },
 ];
+
+/**
+ * Wenzday @ Illfest, Wicked Oaks Festival, Carson Creek Ranch Austin 2025-10-25
+ * https://www.1001tracklists.com/tracklist/2q86zwr9/wenzday-illfest-wicked-oaks-festival-carson-creek-ranch-austin-united-states-2025-10-25.html
+ * Official YT: https://youtu.be/2tz9HFofnFQ — oEmbed 2026-09-01: channel
+ * "Wenzday Music" (@WenzdayMusic), title "WENZDAY @ WICKED OAKS 2025" —
+ * matches the roster-pinned handle.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-2tz9HFofnFQ"]
+ *   = TL_WENZDAY_ILLFEST_WICKED_OAKS_AUSTIN_2025
+ * Overlay name TL_Wenzday_Illfest_Wicked-Oaks-Festival_… is not a valid
+ * identifier.
+ * Clocks are evenly spaced ~2:02 apart per 1001 (not independently
+ * observed) — kept exactly as pasted.
+ * No SoundCloud in the paste — do not invent an SC slug.
+ * Captured 2026-09-01 — provenance 1001tl.
+ */
+export const TL_WENZDAY_ILLFEST_WICKED_OAKS_AUSTIN_2025: FingerprintSeedRow[] = [
+  { at: "0:20", artist: "Wenzday", title: "Keep On Dancin'" },
+  { at: "2:22", artist: "Wenzday", title: "Closer" },
+  { at: "4:24", artist: "Benny Benassi pres. The Biz vs. SIDEPIECE", title: "Satisfaction vs. Electric Bongo" },
+  { at: "6:26", artist: "Wenzday", title: "VSCO Girl" },
+  { at: "8:28", artist: "Matroda", title: "House X Pressure" },
+  { at: "10:30", artist: "Juos ft. Techno Tupac", title: "Side Man" },
+  { at: "12:32", artist: "CID & Taylr Renee", title: "Fancy $hit" },
+  { at: "14:34", artist: "Ship Wrek & Disco Lines", title: "I Don't Trust A Soul" },
+  { at: "16:36", artist: "SIDEPIECE & Westend", title: "Take Your Places" },
+  { at: "18:38", artist: "Wenzday", title: "Emergency" },
+  { at: "20:40", artist: "Wenzday", title: "Bossy" },
+  { at: "22:42", artist: "Justice vs. Simian", title: "We Are Your Friends (Ship Wrek Remix)" },
+  { at: "24:44", artist: "Bingo Players vs. Adam Gold", title: "Addams Family x Rattle (DJ Brau Rework)" },
+  { at: "26:46", artist: "Bingo Players", title: "Rattle (HÄWK Edit)" },
+  { at: "28:48", artist: "Fallon", title: "Diet Coke" },
+  { at: "30:50", artist: "Wenzday ft. Tyler Graves", title: "Like That" },
+  { at: "32:52", artist: "Siege", title: "That's Jack" },
+  { at: "34:54", artist: "BrEaCh", title: "Jack (Acappella)" },
+  { at: "36:56", artist: "Mau P", title: "Drugs From Amsterdam" },
+  { at: "38:58", artist: "James Hype ft. Sam Harper & Bobby Harvey", title: "Waterfalls (Wenzday Remix)" },
+  { at: "41:00", artist: "Wenzday", title: "Naughty" },
+  { at: "43:02", artist: "Wenzday", title: "I Wanna Talk" },
+  { at: "45:04", artist: "Wenzday", title: "Sweat" },
+  { at: "47:06", artist: "Chris Lake & Skrillex ft. ANITA B QUEEN", title: "LA NOCHE" },
+  { at: "49:08", artist: "AFROJACK ft. Eva Simons", title: "Take Over Control (HILLS Remix)" },
+  { at: "51:10", artist: "Wenzday & Kaysin ft. Haylee Wood", title: "Your Fantasy" },
+  { at: "53:12", artist: "Gabriel Rojas & Daniel Alejandro", title: "Missy" },
+  { at: "55:14", artist: "SIDEPIECE", title: "Cry For You" },
+  { at: "57:16", artist: "Madonna", title: "Like A Prayer (Autograf Remix)" },
+];
+
+/**
+ * BROHUG - Bass House Mixtape 2026 2026-01-07
+ * https://www.1001tracklists.com/tracklist/1ub9uq6k/brohug-bass-house-mixtape-2026-2026-01-07.html
+ * Official YT: https://youtu.be/3nd9yXIty2w — oEmbed 2026-09-01: channel
+ * "BROHOUSE Label" (@BROHOUSEMusic), title "BASS HOUSE MIXTAPE 2026".
+ * BROHOUSE is BROHUG's own label (founded by the trio; per Spotify bio
+ * "their new label BROHOUSE") — not the personal @brohugofficial channel,
+ * but an artist-owned account, same class as GREG 99 / Hellbent Records.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-3nd9yXIty2w"]
+ *   = TL_BROHUG_BASS_HOUSE_MIXTAPE_2026
+ * Overlay name TL_BROHUG_Bass-House_Mixtape_2026_… is not a valid
+ * identifier.
+ * No SoundCloud in the paste — do not invent an SC slug.
+ * Captured 2026-09-01 — provenance 1001tl.
+ */
+export const TL_BROHUG_BASS_HOUSE_MIXTAPE_2026: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "BROHUG", title: "Face Melt" },
+  { at: "3:00", artist: "BROHUG", title: "Why You Mad" },
+  { at: "5:00", artist: "BROHUG", title: "That Boy" },
+  { at: "8:00", artist: "BROHUG", title: "House" },
+  { at: "10:20", artist: "BROHUG & Medium Rare", title: "Beat Drop" },
+  { at: "12:00", artist: "BROHUG", title: "Stockholm" },
+  { at: "16:20", artist: "BROHUG", title: "Mosquito" },
+  { at: "18:30", artist: "BROHUG", title: "Rats" },
+];
+
+/**
+ * GREG 99 - Data Transmission 903 2025-01-27
+ * https://www.1001tracklists.com/tracklist/wgmjh91/greg-99-data-transmission-903-2025-01-27.html
+ * Official SC: https://soundcloud.com/data-transmission/dt903-gregbr
+ * oEmbed 2026-09-01: "DT903 - GREG(BR) by Data Transmission" — Data
+ * Transmission's own radio brand account (datatransmission.co), same class
+ * as GREG 99 / Hellbent Records. Paste utm_* query junk stripped from the
+ * slug. Paste Wire line named "sc-https://soundcloud.com/…" — never wire
+ * that; the real slug is sc-data-transmission-dt903-gregbr.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["sc-data-transmission-dt903-gregbr"]
+ *   = TL_GREG_99_DATA_TRANSMISSION_DT903_2025
+ * Overlay name TL_GREG-99_DATA_TRANSMISSION_DT903_2025-01-27 is not a
+ * valid identifier.
+ * No YouTube in the paste — do not invent a YT slug.
+ * Captured 2026-09-01 — provenance 1001tl.
+ */
+export const TL_GREG_99_DATA_TRANSMISSION_DT903_2025: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "GREG 99 & Pitros", title: "Rockstar" },
+  { at: "4:40", artist: "GREG 99", title: "Whispers" },
+  { at: "8:40", artist: "Discip", title: "The Way I Like It" },
+  { at: "12:20", artist: "Marian (BR)", title: "On & On" },
+  { at: "16:40", artist: "GREG 99", title: "Katchy" },
+  { at: "22:15", artist: "GREG 99", title: "Ibiza Nights" },
+  { at: "26:50", artist: "Mendo & Yvan Genkins", title: "Everybody" },
+  { at: "31:55", artist: "nocapz.", title: "More Love" },
+  { at: "36:45", artist: "Biscits", title: "Freak (GREG 99 Remix)" },
+  { at: "41:55", artist: "Ferra Black", title: "Star" },
+  { at: "45:35", artist: "Rick Legnani", title: "DERBY" },
+  { at: "49:45", artist: "GREG 99 & Cloonee", title: "Still My Baby" },
+  { at: "54:55", artist: "Prospa ft. RAHH", title: "This Rhythm" },
+];

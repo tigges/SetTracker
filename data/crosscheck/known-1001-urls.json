@@ -3,6 +3,30 @@
   "updatedAt": "2026-09-01T11:30:00.000Z",
   "urls": [
     {
+      "label": "GREG 99 · Data Transmission 903 2025-01-27",
+      "slug": "sc-data-transmission-dt903-gregbr",
+      "name": "TL_GREG_99_DATA_TRANSMISSION_DT903_2025",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/wgmjh91/greg-99-data-transmission-903-2025-01-27.html",
+      "soundcloudUrl": "https://soundcloud.com/data-transmission/dt903-gregbr",
+      "note": "Operator paste 2026-09-01. 13 timed cues on official Data Transmission SC (datatransmission.co radio brand). oEmbed title DT903 - GREG(BR) by Data Transmission. Same class as GREG 99 / Hellbent Records. Paste URL carried utm_* clipboard junk — stripped from the slug. Paste Wire line named sc-https://… — keep sc-data-transmission-dt903-gregbr. Never sc-https://…. No YouTube in the paste — do not invent a YT slug."
+    },
+    {
+      "label": "BROHUG · Bass House Mixtape 2026 2026-01-07",
+      "slug": "yt-3nd9yXIty2w",
+      "name": "TL_BROHUG_BASS_HOUSE_MIXTAPE_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/1ub9uq6k/brohug-bass-house-mixtape-2026-2026-01-07.html",
+      "youtubeUrl": "https://youtu.be/3nd9yXIty2w",
+      "note": "Operator paste 2026-09-01. 8 timed cues. oEmbed: channel \"BROHOUSE Label\" (@BROHOUSEMusic), title BASS HOUSE MIXTAPE 2026. BROHOUSE is BROHUG's own label (per Spotify bio), not the personal @brohugofficial channel — artist-owned account, same class as GREG 99 / Hellbent Records. Overlay TL_BROHUG_Bass-House_Mixtape_2026_… is not a valid identifier. No SC in the paste — do not invent an SC slug."
+    },
+    {
+      "label": "Wenzday · Illfest, Wicked Oaks Festival, Carson Creek Ranch Austin 2025-10-25",
+      "slug": "yt-2tz9HFofnFQ",
+      "name": "TL_WENZDAY_ILLFEST_WICKED_OAKS_AUSTIN_2025",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/2q86zwr9/wenzday-illfest-wicked-oaks-festival-carson-creek-ranch-austin-united-states-2025-10-25.html",
+      "youtubeUrl": "https://youtu.be/2tz9HFofnFQ",
+      "note": "Operator paste 2026-09-01. 29 timed cues, evenly spaced ~2:02 apart per 1001 (not independently observed) — kept as pasted. oEmbed: channel \"Wenzday Music\" (@WenzdayMusic), title WENZDAY @ WICKED OAKS 2025 — matches the roster-pinned handle. Overlay TL_Wenzday_Illfest_Wicked-Oaks-Festival_… is not a valid identifier. No SC in the paste — do not invent an SC slug."
+    },
+    {
       "label": "Tchami & Malaa · circuitGROUNDS, EDC Las Vegas 2025-05-17",
       "slug": "yt-k9pYsuLTL2o",
       "name": "TL_TCHAMI_MALAA_EDC_LV_CIRCUITGROUNDS_2025",
