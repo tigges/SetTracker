@@ -8,6 +8,7 @@ import { DJ_SOCIAL_PINS } from "./ingest/djSocialPins.data";
 import { HEARTHIS_ARTISTS } from "./ingest/hearthis/artists";
 import { HEARTHIS_TRACKS } from "./ingest/hearthis/tracks";
 import { loadDjMagTop100RankBySlug } from "./djmagTop100";
+import { wishlistDefaultSlugs } from "./wishlist";
 
 export type SetCatalogSignal = {
   sourceName?: string | null;
@@ -18,6 +19,7 @@ export type SetCatalogSignal = {
 
 const CURATED_SLUGS = new Set<string>([
   ...DJ_SOCIAL_PINS.map((p) => p.slug),
+  ...wishlistDefaultSlugs(),
   ...HEARTHIS_ARTISTS.map((a) => a.primaryArtist.slug).filter(
     (s): s is string => Boolean(s),
   ),

@@ -11,7 +11,10 @@ import {
   nameOverlapsHandle,
   parseEntityCompleteCsv,
   pinsFromAudit,
+  applyEntityCompletePins,
+  wishlistDjStubFromPin,
 } from "./entityCompletePins";
+import { WISHLIST_DEFAULTS } from "../wishlist";
 
 assert.equal(decodeMojibake("\u00C3\u2020ON:MODE"), "ÆON:MODE");
 assert.equal(decodeMojibake("\u00C3\u201Clafur Arnalds"), "Ólafur Arnalds");
@@ -1337,4 +1340,79 @@ assert.equal(
   "handle name mismatch",
 );
 
-console.log("entityCompletePins.test.ts ok");
+{
+  const vk = loadEntityCompletePins().find((p) => p.slug === "valentino-khan");
+  const stub = wishlistDjStubFromPin(vk!);
+  assert.ok(stub);
+  assert.equal(stub.name, "Valentino Khan");
+  assert.equal(stub.website, "https://valentinokhan.com");
+  assert.equal(stub.instagram, "https://instagram.com/valentinokhan");
+  assert.ok(stub.bio?.includes("House Party EP"));
+}
+{
+  const random = loadEntityCompletePins().find((p) => p.slug === "aqutie");
+  assert.ok(random);
+  assert.equal(wishlistDjStubFromPin(random), null);
+}
+assert.equal(
+  wishlistDjStubFromPin({ kind: "festival", slug: "valentino-khan" }),
+  null,
+);
+{
+  const empties = [
+    "valentino-khan",
+    "greg-99",
+    "malaa",
+    "jauz",
+    "brohug",
+    "anti-up",
+    "tchami",
+  ];
+  for (const slug of empties) {
+    const pin = loadEntityCompletePins().find((p) => p.slug === slug);
+    assert.ok(pin, `${slug} pin`);
+    const stub = wishlistDjStubFromPin(pin);
+    assert.ok(stub, `${slug} wishlist stub`);
+    assert.equal(
+      stub.name,
+      WISHLIST_DEFAULTS.find((d) => d.slug === slug)?.name,
+    );
+  }
+}
+
+{
+  const created: string[] = [];
+  applyEntityCompletePins(
+    {
+      dj: {
+        findUnique: async () => null,
+        create: async ({ data }: { data: { slug: string } }) => {
+          created.push(data.slug);
+          return data;
+        },
+      },
+      event: { findUnique: async () => null },
+    } as never,
+    [
+      {
+        kind: "dj",
+        slug: "valentino-khan",
+        website: "https://valentinokhan.com",
+      },
+      {
+        kind: "dj",
+        slug: "aqutie",
+        soundcloud: "https://soundcloud.com/aqutie",
+      },
+    ],
+  )
+    .then((out) => {
+      assert.equal(out.created, 1);
+      assert.deepEqual(created, ["valentino-khan"]);
+      console.log("entityCompletePins.test.ts ok");
+    })
+    .catch((err) => {
+      console.error(err);
+      process.exitCode = 1;
+    });
+}

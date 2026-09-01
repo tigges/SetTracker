@@ -449,10 +449,10 @@ export async function applyKnownUrlFixes(prisma: PrismaClient): Promise<number> 
   }
 
   const entities = await applyEntityCompletePins(prisma);
-  n += entities.filled;
-  if (entities.filled) {
+  n += entities.filled + entities.created;
+  if (entities.filled || entities.created) {
     console.log(
-      `[verify-urls] entity complete pins matched=${entities.matched} filled=${entities.filled}`,
+      `[verify-urls] entity complete pins matched=${entities.matched} filled=${entities.filled} created=${entities.created}`,
     );
   }
 

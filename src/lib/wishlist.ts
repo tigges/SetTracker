@@ -69,6 +69,10 @@ export function wishlistDefaultSlugs(): string[] {
   return WISHLIST_DEFAULTS.map((d) => d.slug);
 }
 
+export function wishlistDefaultSlugSet(): Set<string> {
+  return new Set(wishlistDefaultSlugs());
+}
+
 export function normalizeWishlistSlug(input: string): string {
   const slug = slugify(input.trim());
   return WISHLIST_SLUG_ALIASES[slug] ?? slug;
