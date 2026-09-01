@@ -184,6 +184,7 @@ import {
   TL_VINAI_S2O_SONGKRAN_THAILAND_2023,
   TL_MORTEN_MALAA_TML_WINTER_MAINSTAGE_2026,
   TL_TCHAMI_MALAA_EDC_LV_CIRCUITGROUNDS_2025,
+  TL_WENZDAY_ILLFEST_WICKED_OAKS_AUSTIN_2025,
 } from "../tracklists1001/seeds";
 import type { RawArtist } from "../types";
 import { slugify } from "../types";
@@ -3648,6 +3649,21 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/16r2dlxt/tchami-malaa-circuitgrounds-edc-las-vegas-united-states-2025-05-17.html",
     tracklist1001: TL_TCHAMI_MALAA_EDC_LV_CIRCUITGROUNDS_2025,
+  },
+  {
+    // Official Wenzday channel (@WenzdayMusic) — matches roster-pinned handle.
+    video: "https://www.youtube.com/watch?v=2tz9HFofnFQ",
+    primaryArtist: dj("Wenzday", {
+      accent: "#ff6b35",
+      homeCity: "Los Angeles, US",
+    }),
+    genre: "Bass House",
+    type: "festival",
+    title: "Wenzday @ Illfest, Wicked Oaks Festival - Austin 2025",
+    eventName: "Wicked Oaks Festival",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2q86zwr9/wenzday-illfest-wicked-oaks-festival-carson-creek-ranch-austin-united-states-2025-10-25.html",
+    tracklist1001: TL_WENZDAY_ILLFEST_WICKED_OAKS_AUSTIN_2025,
   },
 ];
 
