@@ -269,3 +269,52 @@ export const TL_MORTEN_MALAA_TML_WINTER_MAINSTAGE_2026: FingerprintSeedRow[] = [
   { at: "56:18", artist: "Malaa", title: "Notorious" },
   { at: "57:00", artist: "David Guetta & MORTEN ft. Trippie Redd", title: "Locked In" },
 ];
+
+/**
+ * JAUZ @ GET CRANKED! 2.0, Bill Graham Civic Auditorium San Francisco 2025-10-11
+ * https://www.1001tracklists.com/tracklist/1zwms3k1/jauz-get-cranked-2.0-bill-graham-civic-auditorium-san-francisco-united-states-2025-10-11.html
+ * Operator YouTube https://youtu.be/HeEW36GRsPQ — oEmbed 2026-09-01: channel
+ * "Crawford_RECAPS" (@crawfordrecap), title "JAUZ LIVE FROM BILL GRAHAM
+ * (FIRST 20 MINS) 10/11/2025" — a fan recap covering only the opening ~20
+ * minutes, not the official artist. Official artist channels are
+ * @jauzofficial (YT) / jauzofficial (SC); neither is linked from this paste.
+ * Never YOUTUBE_SETS / TRACKLIST_1001_BY_SOURCE_SLUG. Identify-only in
+ * FINGERPRINT_ONLY_WATCH — the video cannot cover the 39:28 / 59:30 cues
+ * below either, since it stops at ~20 minutes.
+ * Overlay TL_JAUZ_GET-CRANKED!-2.0_… is not a valid identifier.
+ * Mashup-then-component clusters (The Beat vs. No Beef, Rock The Party vs.
+ * Comecloser, Role Models Push Push Bootleg, NISSAN ALTIMA vs. Back vs. Damn
+ * vs. Poison, One (Your Name) vs. Vortexblade) stay as captured, including
+ * the large 19:26 → 39:28 → 59:30 gaps between the last mashup and its
+ * components — kept as pasted, not invented.
+ * No SoundCloud in the paste — do not invent an SC slug.
+ * Captured 2026-09-01 — provenance 1001tl.
+ */
+export const TL_JAUZ_GET_CRANKED_BILL_GRAHAM_SF_2025: FingerprintSeedRow[] = [
+  { at: "1:16", artist: "JAUZ & Lazer Lazer Lazer", title: "Keep The Rave Alive" },
+  { at: "1:46", artist: "Skrillex & Kill The Noise ft. Fatman Scoop & Michael Angelakos", title: "Recess (Acappella)" },
+  { at: "2:16", artist: "JAUZ & HYPRESSION", title: "On Fire (VIP)" },
+  { at: "3:03", artist: "JAUZ & Nonsens vs. AFROJACK & Steve Aoki & Miss Palmer", title: "The Beat vs. No Beef (JAUZ Edit)" },
+  { at: "3:36", artist: "JAUZ & Nonsens", title: "The Beat" },
+  { at: "4:10", artist: "AFROJACK & Steve Aoki ft. Miss Palmer", title: "No Beef (Acappella)" },
+  { at: "4:43", artist: "JAUZ & Ephwurd vs. Eliminate", title: "Rock The Party vs. Comecloser (JAUZ Edit)" },
+  { at: "5:24", artist: "Eliminate", title: "Comecloser" },
+  { at: "6:06", artist: "JAUZ & Ephwurd", title: "Rock The Party" },
+  { at: "6:47", artist: "AC/DC", title: "Thunderstruck (Crookers Remix)" },
+  { at: "7:46", artist: "JAUZ & DNMO", title: "Thunder" },
+  { at: "9:53", artist: "JAUZ & Silent Child", title: "Shake Sh!t Up" },
+  { at: "14:44", artist: "Too $hort", title: "Blow The Whistle (Valentino Khan Remix)" },
+  { at: "15:33", artist: "JAUZ vs. Skrillex & Hamdi & Taichu & OFFAIAH vs. Benny Benassi", title: "Role Models (JAUZ Push Push Bootleg Version)" },
+  { at: "15:58", artist: "JAUZ", title: "Role Models" },
+  { at: "16:23", artist: "Benny Benassi pres. The Biz", title: "Satisfaction" },
+  { at: "16:48", artist: "Skrillex & Hamdi & Taichu & OFFAIAH", title: "Push" },
+  { at: "17:13", artist: "Drake", title: "NOKIA" },
+  { at: "18:29", artist: "Doechii vs. Dirty Audio vs. JOYRYDE & Freddie Gibbs vs. Viperactive", title: "NISSAN ALTIMA vs. Back vs. Damn vs. Poison (TURCH Edit)" },
+  { at: "18:40", artist: "Dirty Audio", title: "Back" },
+  { at: "18:52", artist: "Viperactive", title: "Poison" },
+  { at: "19:03", artist: "Doechii", title: "NISSAN ALTIMA" },
+  { at: "19:15", artist: "JOYRYDE ft. Freddie Gibbs", title: "Damn" },
+  { at: "19:26", artist: "Swedish House Mafia & Pharrell Williams vs. Marshmello & SVDDEN DEATH", title: "One (Your Name) vs. Vortexblade (SLICK Edit)" },
+  { at: "39:28", artist: "Swedish House Mafia ft. Pharrell Williams", title: "One (Your Name)" },
+  { at: "59:30", artist: "Marshmello & SVDDEN DEATH", title: "Vortexblade" },
+];

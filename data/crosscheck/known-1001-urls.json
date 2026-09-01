@@ -814,6 +814,15 @@
   ],
   "heldPendingPlayback": [
     {
+      "label": "JAUZ · GET CRANKED! 2.0, Bill Graham Civic Auditorium SF 2025-10-11",
+      "name": "TL_JAUZ_GET_CRANKED_BILL_GRAHAM_SF_2025",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/1zwms3k1/jauz-get-cranked-2.0-bill-graham-civic-auditorium-san-francisco-united-states-2025-10-11.html",
+      "youtubeUrl": "https://youtu.be/HeEW36GRsPQ",
+      "rejectedYoutubeUrl": "https://youtu.be/HeEW36GRsPQ",
+      "rejectedChannel": "Crawford_RECAPS",
+      "note": "Operator paste 2026-09-01. 26 timed cues. oEmbed is @crawfordrecap, title JAUZ LIVE FROM BILL GRAHAM (FIRST 20 MINS) 10/11/2025 — a fan recap covering only the opening ~20 minutes. Identify-only — never YOUTUBE_SETS or TRACKLIST_1001_BY_SOURCE_SLUG. Official artist is @jauzofficial (YT) / jauzofficial (SC), neither linked from this paste. Seed held until an official full-set playback exists. No SC in the paste. Overlay TL_JAUZ_GET-CRANKED!-2.0_… is not a valid identifier."
+    },
+    {
       "label": "MORTEN & Malaa · Crystal Garden, Tomorrowland WE1 2026-07-18",
       "name": "TL_MORTEN_MALAA_TML_WE1_CRYSTAL_2026",
       "tracklistUrl": "https://www.1001tracklists.com/tracklist/m7srdk1/morten-malaa-crystal-garden-stage-tomorrowland-weekend-1-belgium-2026-07-18.html",

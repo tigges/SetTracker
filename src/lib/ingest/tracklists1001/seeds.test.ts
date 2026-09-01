@@ -224,6 +224,7 @@ import {
   TL_MORTEN_MALAA_TML_WE1_CRYSTAL_2026,
   TL_MORTEN_MALAA_TML_WINTER_MAINSTAGE_2026,
   TL_TCHAMI_MALAA_EDC_LV_CIRCUITGROUNDS_2025,
+  TL_JAUZ_GET_CRANKED_BILL_GRAHAM_SF_2025,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
@@ -6390,6 +6391,37 @@ for (let i = 1; i < tchamiMalaa.length; i++) {
   assert.ok(
     (tchamiMalaa[i]?.timestamp ?? 0) > (tchamiMalaa[i - 1]?.timestamp ?? 0),
     `Tchami & Malaa EDC LV circuitGROUNDS clocks must increase at index ${i}`,
+  );
+}
+
+// JAUZ @ GET CRANKED! 2.0, Bill Graham Civic Auditorium SF 2025-10-11.
+// yt-HeEW36GRsPQ is a fan recap (@crawfordrecap, first 20 mins only) —
+// seed held, never wired, Identify-only via FINGERPRINT_ONLY_WATCH.
+assertSeedClocks(TL_JAUZ_GET_CRANKED_BILL_GRAHAM_SF_2025);
+assert.equal(TL_JAUZ_GET_CRANKED_BILL_GRAHAM_SF_2025.length, 26);
+assert.equal(
+  Object.values(TRACKLIST_1001_BY_SOURCE_SLUG).includes(
+    TL_JAUZ_GET_CRANKED_BILL_GRAHAM_SF_2025,
+  ),
+  false,
+  "JAUZ Bill Graham seed is held — the YT is a fan recap, not official",
+);
+assert.equal(TRACKLIST_1001_BY_SOURCE_SLUG["yt-HeEW36GRsPQ"], undefined);
+assert.equal(isWiredTracklistSlug("yt-HeEW36GRsPQ"), false);
+const jauzBillGraham = tracklist1001RowsToPlays(
+  TL_JAUZ_GET_CRANKED_BILL_GRAHAM_SF_2025,
+);
+assert.equal(jauzBillGraham.length, 26);
+assert.equal(jauzBillGraham[0]?.provenance, "1001tl");
+assert.equal(jauzBillGraham[0]?.timestamp, 76);
+assert.equal(jauzBillGraham[0]?.trackTitle, "Keep The Rave Alive");
+assert.equal(jauzBillGraham[25]?.trackTitle, "Vortexblade");
+assert.equal(jauzBillGraham[25]?.timestamp, 59 * 60 + 30);
+for (let i = 1; i < jauzBillGraham.length; i++) {
+  assert.ok(
+    (jauzBillGraham[i]?.timestamp ?? 0) >
+      (jauzBillGraham[i - 1]?.timestamp ?? 0),
+    `JAUZ Bill Graham clocks must increase at index ${i}`,
   );
 }
 

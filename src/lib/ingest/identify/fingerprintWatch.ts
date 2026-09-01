@@ -42,6 +42,15 @@ export const FINGERPRINT_ONLY_WATCH: FingerprintOnlyWatch[] = [
     idOffsetsSec: [],
     note: "Third-party Revel Albuquerque upload (@WineHouseMusicTV). Identify-only — never official playback, YOUTUBE_SETS, or TRACKLIST_1001_BY_SOURCE_SLUG. Official artist is @ValentinoKhan.",
   },
+  {
+    seed: "TL_JAUZ_GET_CRANKED_BILL_GRAHAM_SF_2025",
+    youtubeUrl: "https://www.youtube.com/watch?v=HeEW36GRsPQ",
+    videoId: "HeEW36GRsPQ",
+    channel: "Crawford_RECAPS",
+    official: false,
+    idOffsetsSec: [],
+    note: "Fan recap (@crawfordrecap), first ~20 minutes only. Identify-only — never official playback, YOUTUBE_SETS, or TRACKLIST_1001_BY_SOURCE_SLUG. Official artist is @jauzofficial.",
+  },
 ];
 
 export function isFingerprintOnlyVideoId(id: string): boolean {

@@ -56,4 +56,15 @@ assert.equal(
   false,
 );
 
+const jauzWatch = FINGERPRINT_ONLY_WATCH.find(
+  (w) => w.videoId === "HeEW36GRsPQ",
+);
+assert.ok(jauzWatch);
+assert.equal(jauzWatch.official, false);
+assert.equal(jauzWatch.channel, "Crawford_RECAPS");
+assert.equal(jauzWatch.idOffsetsSec.length, 0);
+assert.match(jauzWatch.note, /never official playback/i);
+assert.equal(isFingerprintOnlyVideoId("HeEW36GRsPQ"), true);
+assert.equal(isFingerprintOnlyWatchUrl("https://youtu.be/HeEW36GRsPQ"), true);
+
 console.log("identify/fingerprintWatch.test.ts ok");
