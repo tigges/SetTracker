@@ -11,6 +11,55 @@ export function isChartRankBio(bio: string | null | undefined): boolean {
   return CHART_RANK_BIO.test(String(bio || "").trim());
 }
 
+const GENERIC_PRESS_KIT =
+  /harnessing a distinct|knows no categorical|in-demand names|nothing short of breakneck|visceral energy that commands|meteoric rise|global phenomenon status|ardent catalyst/i;
+
+export function isGenericPressKitBio(bio: string | null | undefined): boolean {
+  return GENERIC_PRESS_KIT.test(String(bio || ""));
+}
+
+/** DJ Mag "Best known for:" chip — first sentence of the stored bio. */
+export function cleanBestKnownFor(raw: string | null | undefined): string | null {
+  const line = String(raw || "")
+    .replace(/^Best known for:\s*/i, "")
+    .replace(/\s+/g, " ")
+    .replace(/^[“"']+|[”"']+$/g, "")
+    .replace(/[.!?]+$/g, "")
+    .trim();
+  if (line.length < 8 || line.length > 140) return null;
+  if (isChartRankBio(line) || isGenericPressKitBio(line)) return null;
+  return line;
+}
+
+/** Store Best known for, then the profile lede. */
+export function composeDjMagStoredBio(input: {
+  bestKnownFor?: string | null;
+  bio?: string | null;
+}): string | null {
+  const known = cleanBestKnownFor(input.bestKnownFor);
+  let body = String(input.bio || "").replace(/\s+/g, " ").trim();
+  if (isChartRankBio(body)) body = "";
+  body = body.replace(/^Best known for:\s*/i, "").trim();
+  if (known && body) {
+    const bodyStart = body.slice(0, known.length + 8).toLowerCase();
+    if (bodyStart.startsWith(known.toLowerCase())) return body;
+    return `${known}. ${body}`;
+  }
+  if (known) return `${known}.`;
+  return body.length >= 24 ? body : null;
+}
+
+/** Handle dump, rank line, or press-kit puffery — DJ Mag may replace it. */
+export function isReplaceableDjBio(bio: string | null | undefined): boolean {
+  const raw = String(bio || "").trim();
+  if (!raw) return true;
+  if (isChartRankBio(raw)) return true;
+  if (isGenericPressKitBio(raw)) return true;
+  const stripped = stripChartRankSuffix(raw);
+  if (!stripped) return true;
+  return displayDjBio(stripped) == null;
+}
+
 /** Drop a trailing rank dump appended to an otherwise distinctive bio. */
 export function stripChartRankSuffix(bio: string): string {
   return bio
@@ -62,7 +111,13 @@ function isGenreOrCity(text: string, opts?: { genre?: string | null; homeCity?: 
   if (genre && t.toLowerCase() === genre.toLowerCase()) return true;
   const city = opts?.homeCity?.trim();
   if (city && t.toLowerCase() === city.toLowerCase()) return true;
-  if (t.length <= 40 && GENRE_WORD.test(t) && !/management|booking|founder|not the /i.test(t)) {
+  if (
+    t.length <= 40 &&
+    GENRE_WORD.test(t) &&
+    t.split(/\s+/).length <= 4 &&
+    !/\b(to|for|with|bringing|playing|known)\b/i.test(t) &&
+    !/management|booking|founder|not the /i.test(t)
+  ) {
     return true;
   }
   return /^(uk|us|usa|nyc|uae|eu|australia|brazil|belgium|netherlands|germany|france|italy|spain|sweden|canada|tokyo|berlin|london|paris|ibiza|melbourne|brisbane|leeds|cologne|stockholm|south africa|united states|indonesia)$/i.test(

@@ -14,7 +14,10 @@ import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import type { PrismaClient } from "@prisma/client";
 import { sanitizeArtistName } from "../../artistName";
-import { isChartRankBio, stripChartRankSuffix } from "../../djBio";
+import {
+  composeDjMagStoredBio,
+  isChartRankBio,
+} from "../../djBio";
 import { normalizeGenre } from "../../genre";
 import { DJ_SOCIAL_PINS } from "../djSocialPins";
 import { ARTIST_ROSTER } from "../roster";
@@ -39,6 +42,7 @@ export type DjMagTopDj = {
   homeCity?: string;
   website?: string;
   bio?: string;
+  bestKnownFor?: string;
   genre?: string;
 };
 
@@ -146,6 +150,7 @@ function mergeSeedMeta(djs: DjMagTopDj[]): DjMagTopDj[] {
       homeCity: d.homeCity ?? seed?.homeCity,
       website: d.website ?? seed?.website ?? curated ?? undefined,
       bio: d.bio ?? seed?.bio,
+      bestKnownFor: d.bestKnownFor ?? seed?.bestKnownFor,
       genre: d.genre ?? seed?.genre,
     };
   });
@@ -196,11 +201,8 @@ export function parseBioFromDjHtml(html: string): string | null {
     }
     if (bio.length >= 24 && !isChartRankBio(bio)) return bio;
   }
-  const known = html.match(/Best known for:\s*<\/strong>\s*([^<]+)/i);
-  if (known?.[1]) {
-    const line = stripHtmlText(known[1]);
-    if (line.length >= 24) return line;
-  }
+  const known = parseBestKnownFromDjHtml(html);
+  if (known && known.length >= 24) return known;
   const og = html.match(
     /<meta property="og:description" content="([^"]+)"/i,
   );
@@ -219,9 +221,24 @@ function distinctiveBio(bio?: string | null): string | undefined {
   return bio;
 }
 
-/** Profile fetch for From: / lede — not a second trip just for a missing style chip. */
-export function needsDjMagProfile(row: Pick<DjMagTopDj, "homeCity" | "bio">): boolean {
-  return !row.homeCity || !row.bio || isChartRankBio(row.bio);
+/** `Best known for: Two Ibiza residencies and chart domination` */
+export function parseBestKnownFromDjHtml(html: string): string | null {
+  const m = html.match(/Best known for:\s*<\/strong>\s*([^<]+)/i);
+  if (!m?.[1]) return null;
+  const line = stripHtmlText(m[1]);
+  return line.length >= 8 && line.length <= 140 ? line : null;
+}
+
+/** Profile fetch for From: / lede / Best known for. */
+export function needsDjMagProfile(
+  row: Pick<DjMagTopDj, "homeCity" | "bio" | "bestKnownFor">,
+): boolean {
+  return (
+    !row.homeCity ||
+    !row.bio ||
+    isChartRankBio(row.bio) ||
+    !row.bestKnownFor
+  );
 }
 
 export function applyDjMagProfileHtml(
@@ -231,10 +248,12 @@ export function applyDjMagProfileHtml(
   const home = parseHomeFromDjHtml(html);
   const genre = parseDjStyleFromDjHtml(html);
   const bio = parseBioFromDjHtml(html);
+  const known = parseBestKnownFromDjHtml(html);
   return {
     ...row,
     homeCity: row.homeCity || home || undefined,
     genre: row.genre || genre || undefined,
+    bestKnownFor: row.bestKnownFor || known || undefined,
     bio: row.bio && !isChartRankBio(row.bio) ? row.bio : bio || row.bio,
   };
 }
@@ -389,6 +408,7 @@ export async function enrichDjMagDjWebsites(opts?: {
             website: live.website ?? d.website,
             homeCity: live.homeCity ?? d.homeCity,
             bio: distinctiveBio(live.bio) ?? distinctiveBio(d.bio),
+            bestKnownFor: live.bestKnownFor ?? d.bestKnownFor,
             genre: live.genre ?? d.genre,
           }
         : d;
@@ -403,7 +423,7 @@ export async function enrichDjMagDjWebsites(opts?: {
         {
           source: LIST_URL,
           year: YEAR,
-          note: "DJ Mag Top 100 DJs. Profiles omit official URLs — `website` from roster/pins + Wikidata P856; `homeCity` / `bio` / `genre` from a concrete profile already on the seed. Never Dj.website. Mixmag.net not used.",
+          note: "DJ Mag Top 100 DJs. Profiles omit official URLs — `website` from roster/pins + Wikidata P856; `homeCity` / `bestKnownFor` / `bio` / `genre` from a concrete profile already on the seed. Never Dj.website. Mixmag.net not used.",
           djs: next,
         },
         null,
@@ -441,7 +461,7 @@ export async function ensureDjMagTopDjs(
     const clean = sanitizeArtistName(row.name);
     if (!clean) continue;
     const slug = slugify(clean);
-    const bio = distinctiveBio(row.bio) ?? null;
+    const bio = composeDjMagStoredBio(row);
     const existing = await prisma.dj.findUnique({ where: { slug } });
     if (!existing) {
       await prisma.dj.create({
@@ -466,12 +486,7 @@ export async function ensureDjMagTopDjs(
       ) {
         data.website = row.website;
       }
-      if (existing.bio && isChartRankBio(existing.bio)) {
-        data.bio = bio;
-      } else if (existing.bio) {
-        const stripped = stripChartRankSuffix(existing.bio);
-        if (stripped !== existing.bio) data.bio = stripped || bio;
-      } else if (bio) {
+      if (bio && existing.bio !== bio) {
         data.bio = bio;
       }
       if (Object.keys(data).length) {
