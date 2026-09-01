@@ -182,17 +182,7 @@ export const DJ_SOCIAL_PINS: DjSocialPin[] = [
     instagram: "https://www.instagram.com/charlottedewittemusic/",
     twitter: "https://twitter.com/charlottedwitte",
     website: "https://charlottedewittemusic.com",
-    bio: [
-      "Techno. Belgium.",
-      "Harnessing a distinct brand of artistry that knows no categorical bounds,",
-      "the DJ, producer and record label head has cemented herself as one of the",
-      "music industry's most in-demand names at nothing short of breakneck speed.",
-      "Her signature sonic approach masterfully blends genres with a visceral energy",
-      "that commands attention, the ardent catalyst in her meteoric rise from",
-      "Belgium's underground to global phenomenon status.",
-      "Official charlottedewittemusic.com — SC/IG/FB/TikTok/YT @charlottedewittemusic,",
-      "X @charlottedwitte.",
-    ].join(" "),
+    bio: "Techno. Belgium. Official charlottedewittemusic.com — SC/IG/FB/TikTok/YT @charlottedewittemusic, X @charlottedwitte.",
   },
   {
     slug: "black-coffee",
