@@ -218,6 +218,13 @@ import {
   TL_GIUSEPPE_OTTAVIANI_ILAN_BLUESTONE_BEYOND_WONDERLAND_2026,
   TL_GIUSEPPE_OTTAVIANI_DREAMSTATE_VANCOUVER_2026,
   TL_GIUSEPPE_OTTAVIANI_DREAMSTATE_SYDNEY_2026,
+  TL_GREG_99_HELLBENT_FM_006_2026,
+  TL_VALENTINO_KHAN_REVEL_ALBUQUERQUE_2026,
+  TL_ANTI_UP_COACHELLA_WE2_MOJAVE_2024,
+  TL_MORTEN_MALAA_TML_WE1_CRYSTAL_2026,
+  TL_MORTEN_MALAA_TML_WINTER_MAINSTAGE_2026,
+  TL_TCHAMI_MALAA_EDC_LV_CIRCUITGROUNDS_2025,
+  TL_JAUZ_GET_CRANKED_BILL_GRAHAM_SF_2025,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
@@ -6187,6 +6194,234 @@ for (let i = 1; i < goDreamstateSyd.length; i++) {
     (goDreamstateSyd[i]?.timestamp ?? 0) >
       (goDreamstateSyd[i - 1]?.timestamp ?? 0),
     `Giuseppe Ottaviani Dreamstate Sydney clocks must increase at index ${i}`,
+  );
+}
+
+// GREG 99 - Hellbent FM 006 2026-05-21 — official Hellbent Records SC.
+// Overlay TL_GREG_99 is too generic. No YouTube in the paste.
+assertSeedClocks(TL_GREG_99_HELLBENT_FM_006_2026);
+assert.equal(TL_GREG_99_HELLBENT_FM_006_2026.length, 15);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-hellbentrecords-hellbent-fm-episode-006-greg99"
+  ],
+  TL_GREG_99_HELLBENT_FM_006_2026,
+);
+assert.equal(
+  isWiredTracklistSlug("sc-hellbentrecords-hellbent-fm-episode-006-greg99"),
+  true,
+);
+assert.equal(
+  isSecondaryPlaybackSlug("sc-hellbentrecords-hellbent-fm-episode-006-greg99"),
+  false,
+);
+assert.equal(
+  isWiredTracklistSlug("sc-greg99music-hellbent-fm-episode-006-greg99"),
+  false,
+  "do not invent a greg99music twin",
+);
+const gregHellbent = tracklist1001RowsToPlays(TL_GREG_99_HELLBENT_FM_006_2026);
+assert.equal(gregHellbent.length, 15);
+assert.equal(gregHellbent[0]?.provenance, "1001tl");
+assert.equal(gregHellbent[0]?.timestamp, 0);
+assert.equal(gregHellbent[0]?.artistName, "GREG 99");
+assert.equal(gregHellbent[0]?.trackTitle, "Waist Move");
+assert.equal(gregHellbent[14]?.trackTitle, "HOTS 4 U");
+assert.equal(gregHellbent[14]?.artistName, "Chris Lorenzo & aMo");
+assert.equal(gregHellbent[14]?.timestamp, 58 * 60 + 38);
+for (let i = 1; i < gregHellbent.length; i++) {
+  assert.ok(
+    (gregHellbent[i]?.timestamp ?? 0) >
+      (gregHellbent[i - 1]?.timestamp ?? 0),
+    `GREG 99 Hellbent FM 006 clocks must increase at index ${i}`,
+  );
+}
+
+// Valentino Khan @ Revel Albuquerque 2026-05-29.
+// Overlay TL_Valentino-Khan is not a valid identifier. Fan YT
+// (@WineHouseMusicTV) stays unwired. Held until official artist playback.
+assertSeedClocks(TL_VALENTINO_KHAN_REVEL_ALBUQUERQUE_2026);
+assert.equal(TL_VALENTINO_KHAN_REVEL_ALBUQUERQUE_2026.length, 34);
+assert.equal(
+  Object.values(TRACKLIST_1001_BY_SOURCE_SLUG).includes(
+    TL_VALENTINO_KHAN_REVEL_ALBUQUERQUE_2026,
+  ),
+  false,
+  "Revel Albuquerque seed is held — Wine House Music TV is not official",
+);
+assert.equal(TRACKLIST_1001_BY_SOURCE_SLUG["yt-6ZN3aI2o2OY"], undefined);
+assert.equal(isWiredTracklistSlug("yt-6ZN3aI2o2OY"), false);
+const vkRevel = tracklist1001RowsToPlays(TL_VALENTINO_KHAN_REVEL_ALBUQUERQUE_2026);
+assert.equal(vkRevel.length, 34);
+assert.equal(vkRevel[0]?.provenance, "1001tl");
+assert.equal(vkRevel[0]?.timestamp, 6);
+assert.equal(
+  vkRevel[0]?.trackTitle,
+  "Stress vs. Nasty (Valentino Khan Edit)",
+);
+assert.equal(vkRevel[33]?.trackTitle, "Worth The Wait");
+assert.equal(vkRevel[33]?.timestamp, 20 * 60 + 39);
+for (let i = 1; i < vkRevel.length; i++) {
+  assert.ok(
+    (vkRevel[i]?.timestamp ?? 0) > (vkRevel[i - 1]?.timestamp ?? 0),
+    `Valentino Khan Revel Albuquerque clocks must increase at index ${i}`,
+  );
+}
+
+// Anti Up @ Mojave, Coachella WE2 2024-04-19.
+// Official @antiup yt-cZhNpGcYq_A is a What Is Life clip, not the set.
+// Seed held — never wire the clip as the Mojave playback.
+assertSeedClocks(TL_ANTI_UP_COACHELLA_WE2_MOJAVE_2024);
+assert.equal(TL_ANTI_UP_COACHELLA_WE2_MOJAVE_2024.length, 21);
+assert.equal(
+  Object.values(TRACKLIST_1001_BY_SOURCE_SLUG).includes(
+    TL_ANTI_UP_COACHELLA_WE2_MOJAVE_2024,
+  ),
+  false,
+  "Coachella Mojave seed is held — clip is not the full set",
+);
+assert.equal(TRACKLIST_1001_BY_SOURCE_SLUG["yt-cZhNpGcYq_A"], undefined);
+assert.equal(isWiredTracklistSlug("yt-cZhNpGcYq_A"), false);
+const antiUpCoachella = tracklist1001RowsToPlays(
+  TL_ANTI_UP_COACHELLA_WE2_MOJAVE_2024,
+);
+assert.equal(antiUpCoachella.length, 21);
+assert.equal(antiUpCoachella[0]?.provenance, "1001tl");
+assert.equal(antiUpCoachella[0]?.timestamp, 0);
+assert.equal(antiUpCoachella[0]?.trackTitle, "What Is Life");
+assert.equal(antiUpCoachella[20]?.trackTitle, "Holding On");
+assert.equal(antiUpCoachella[20]?.timestamp, 63 * 60);
+for (let i = 1; i < antiUpCoachella.length; i++) {
+  assert.ok(
+    (antiUpCoachella[i]?.timestamp ?? 0) >
+      (antiUpCoachella[i - 1]?.timestamp ?? 0),
+    `Anti Up Coachella Mojave 2024 clocks must increase at index ${i}`,
+  );
+}
+
+// MORTEN & Malaa @ Crystal Garden, Tomorrowland WE1 2026-07-18.
+// yt-unavailable_atm is a placeholder — seed held, never invent playback.
+assertSeedClocks(TL_MORTEN_MALAA_TML_WE1_CRYSTAL_2026);
+assert.equal(TL_MORTEN_MALAA_TML_WE1_CRYSTAL_2026.length, 35);
+assert.equal(
+  Object.values(TRACKLIST_1001_BY_SOURCE_SLUG).includes(
+    TL_MORTEN_MALAA_TML_WE1_CRYSTAL_2026,
+  ),
+  false,
+  "MORTEN & Malaa Crystal Garden seed is held — no official playback",
+);
+assert.equal(TRACKLIST_1001_BY_SOURCE_SLUG["yt-unavailable_atm"], undefined);
+assert.equal(isWiredTracklistSlug("yt-unavailable_atm"), false);
+assert.notEqual(
+  TL_MORTEN_MALAA_TML_WE1_CRYSTAL_2026,
+  TL_NOSI_TML_WE1_CRYSTAL_2026,
+  "MORTEN & Malaa is not the Nosi Crystal Garden WE1 seed",
+);
+const mortenMalaa = tracklist1001RowsToPlays(
+  TL_MORTEN_MALAA_TML_WE1_CRYSTAL_2026,
+);
+assert.equal(mortenMalaa.length, 35);
+assert.equal(mortenMalaa[0]?.provenance, "1001tl");
+assert.equal(mortenMalaa[0]?.timestamp, 12);
+assert.equal(mortenMalaa[0]?.trackTitle, "LMU");
+assert.equal(mortenMalaa[34]?.trackTitle, "Shock The System");
+assert.equal(mortenMalaa[34]?.timestamp, 86 * 60 + 45);
+for (let i = 1; i < mortenMalaa.length; i++) {
+  assert.ok(
+    (mortenMalaa[i]?.timestamp ?? 0) > (mortenMalaa[i - 1]?.timestamp ?? 0),
+    `MORTEN & Malaa TML WE1 Crystal clocks must increase at index ${i}`,
+  );
+}
+
+// MORTEN & Malaa @ Mainstage, Tomorrowland Winter France 2026-03-25 — wired,
+// official Tomorrowland YT. Distinct from the held Crystal Garden WE1 seed.
+assertSeedClocks(TL_MORTEN_MALAA_TML_WINTER_MAINSTAGE_2026);
+assert.equal(TL_MORTEN_MALAA_TML_WINTER_MAINSTAGE_2026.length, 28);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-vjI-Oc_pgag"],
+  TL_MORTEN_MALAA_TML_WINTER_MAINSTAGE_2026,
+);
+assert.equal(isWiredTracklistSlug("yt-vjI-Oc_pgag"), true);
+assert.notEqual(
+  TL_MORTEN_MALAA_TML_WINTER_MAINSTAGE_2026,
+  TL_MORTEN_MALAA_TML_WE1_CRYSTAL_2026,
+  "TML Winter Mainstage is not the held Crystal Garden WE1 seed",
+);
+const mortenMalaaWinter = tracklist1001RowsToPlays(
+  TL_MORTEN_MALAA_TML_WINTER_MAINSTAGE_2026,
+);
+assert.equal(mortenMalaaWinter.length, 28);
+assert.equal(mortenMalaaWinter[0]?.provenance, "1001tl");
+assert.equal(mortenMalaaWinter[0]?.timestamp, 0);
+assert.equal(mortenMalaaWinter[0]?.trackTitle, "Shock The System");
+assert.equal(mortenMalaaWinter[27]?.trackTitle, "Locked In");
+assert.equal(mortenMalaaWinter[27]?.timestamp, 57 * 60);
+for (let i = 1; i < mortenMalaaWinter.length; i++) {
+  assert.ok(
+    (mortenMalaaWinter[i]?.timestamp ?? 0) >
+      (mortenMalaaWinter[i - 1]?.timestamp ?? 0),
+    `MORTEN & Malaa TML Winter Mainstage clocks must increase at index ${i}`,
+  );
+}
+
+// Tchami & Malaa @ circuitGROUNDS, EDC Las Vegas 2025-05-17 — wired, official
+// Tchami YT. The 35 paste rows repeat "When The Beat Bang" back-to-back
+// (14:15 / 15:55); fingerprintRowsToPlays collapses adjacent same-artist
+// same-title cues, so the wired play count is 34, not 35.
+assertSeedClocks(TL_TCHAMI_MALAA_EDC_LV_CIRCUITGROUNDS_2025);
+assert.equal(TL_TCHAMI_MALAA_EDC_LV_CIRCUITGROUNDS_2025.length, 35);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-k9pYsuLTL2o"],
+  TL_TCHAMI_MALAA_EDC_LV_CIRCUITGROUNDS_2025,
+);
+assert.equal(isWiredTracklistSlug("yt-k9pYsuLTL2o"), true);
+const tchamiMalaa = tracklist1001RowsToPlays(
+  TL_TCHAMI_MALAA_EDC_LV_CIRCUITGROUNDS_2025,
+);
+assert.equal(tchamiMalaa.length, 34);
+assert.equal(tchamiMalaa[0]?.provenance, "1001tl");
+assert.equal(tchamiMalaa[0]?.timestamp, 0);
+assert.equal(tchamiMalaa[0]?.trackTitle, "RUSH");
+assert.equal(tchamiMalaa[7]?.timestamp, 14 * 60 + 15);
+assert.equal(tchamiMalaa[7]?.trackTitle, "When The Beat Bang");
+assert.equal(tchamiMalaa[8]?.trackTitle, "Reset");
+assert.equal(tchamiMalaa[33]?.trackTitle, "A Prayer (Drinks On Me Remix)");
+assert.equal(tchamiMalaa[33]?.timestamp, 59 * 60 + 30);
+for (let i = 1; i < tchamiMalaa.length; i++) {
+  assert.ok(
+    (tchamiMalaa[i]?.timestamp ?? 0) > (tchamiMalaa[i - 1]?.timestamp ?? 0),
+    `Tchami & Malaa EDC LV circuitGROUNDS clocks must increase at index ${i}`,
+  );
+}
+
+// JAUZ @ GET CRANKED! 2.0, Bill Graham Civic Auditorium SF 2025-10-11.
+// yt-HeEW36GRsPQ is a fan recap (@crawfordrecap, first 20 mins only) —
+// seed held, never wired, Identify-only via FINGERPRINT_ONLY_WATCH.
+assertSeedClocks(TL_JAUZ_GET_CRANKED_BILL_GRAHAM_SF_2025);
+assert.equal(TL_JAUZ_GET_CRANKED_BILL_GRAHAM_SF_2025.length, 26);
+assert.equal(
+  Object.values(TRACKLIST_1001_BY_SOURCE_SLUG).includes(
+    TL_JAUZ_GET_CRANKED_BILL_GRAHAM_SF_2025,
+  ),
+  false,
+  "JAUZ Bill Graham seed is held — the YT is a fan recap, not official",
+);
+assert.equal(TRACKLIST_1001_BY_SOURCE_SLUG["yt-HeEW36GRsPQ"], undefined);
+assert.equal(isWiredTracklistSlug("yt-HeEW36GRsPQ"), false);
+const jauzBillGraham = tracklist1001RowsToPlays(
+  TL_JAUZ_GET_CRANKED_BILL_GRAHAM_SF_2025,
+);
+assert.equal(jauzBillGraham.length, 26);
+assert.equal(jauzBillGraham[0]?.provenance, "1001tl");
+assert.equal(jauzBillGraham[0]?.timestamp, 76);
+assert.equal(jauzBillGraham[0]?.trackTitle, "Keep The Rave Alive");
+assert.equal(jauzBillGraham[25]?.trackTitle, "Vortexblade");
+assert.equal(jauzBillGraham[25]?.timestamp, 59 * 60 + 30);
+for (let i = 1; i < jauzBillGraham.length; i++) {
+  assert.ok(
+    (jauzBillGraham[i]?.timestamp ?? 0) >
+      (jauzBillGraham[i - 1]?.timestamp ?? 0),
+    `JAUZ Bill Graham clocks must increase at index ${i}`,
   );
 }
 

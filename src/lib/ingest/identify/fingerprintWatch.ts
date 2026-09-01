@@ -33,6 +33,24 @@ export const FINGERPRINT_ONLY_WATCH: FingerprintOnlyWatch[] = [
     idOffsetsSec: [],
     note: "Fan EDC Mexico live-broadcast (Toñito Digital). Identify-only — never official playback, YOUTUBE_SETS, or TRACKLIST_1001_BY_SOURCE_SLUG. Official artist is @ChrisLorenzo / chris-lorenzo-1.", // pragma: allowlist secret
   },
+  {
+    seed: "TL_VALENTINO_KHAN_REVEL_ALBUQUERQUE_2026",
+    youtubeUrl: "https://www.youtube.com/watch?v=6ZN3aI2o2OY",
+    videoId: "6ZN3aI2o2OY",
+    channel: "Wine House Music TV",
+    official: false,
+    idOffsetsSec: [],
+    note: "Third-party Revel Albuquerque upload (@WineHouseMusicTV). Identify-only — never official playback, YOUTUBE_SETS, or TRACKLIST_1001_BY_SOURCE_SLUG. Official artist is @ValentinoKhan.",
+  },
+  {
+    seed: "TL_JAUZ_GET_CRANKED_BILL_GRAHAM_SF_2025",
+    youtubeUrl: "https://www.youtube.com/watch?v=HeEW36GRsPQ",
+    videoId: "HeEW36GRsPQ",
+    channel: "Crawford_RECAPS",
+    official: false,
+    idOffsetsSec: [],
+    note: "Fan recap (@crawfordrecap), first ~20 minutes only. Identify-only — never official playback, YOUTUBE_SETS, or TRACKLIST_1001_BY_SOURCE_SLUG. Official artist is @jauzofficial.",
+  },
 ];
 
 export function isFingerprintOnlyVideoId(id: string): boolean {

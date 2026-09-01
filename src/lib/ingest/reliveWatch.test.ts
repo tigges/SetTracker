@@ -151,6 +151,61 @@ assert.equal(
   "waiting",
 );
 
+const mortenMalaaWaiting = held.find((h) => /morten/i.test(h.name));
+assert.ok(mortenMalaaWaiting);
+assert.equal(mortenMalaaWaiting!.status, "waiting");
+assert.match(mortenMalaaWaiting!.note, /yt-unavailable_atm/i);
+
+const mortenEntries = [
+  {
+    videoId: "MORTENMAL01",
+    title: "MORTEN B2B Malaa WE1 | Tomorrowland 2026",
+    channel: "Tomorrowland",
+  },
+  {
+    videoId: "MORTENSOLO01",
+    title: "MORTEN WE1 | Tomorrowland 2026",
+    channel: "Tomorrowland",
+  },
+  {
+    videoId: "MALAASOLO01",
+    title: "Malaa WE1 | Tomorrowland 2026",
+    channel: "Tomorrowland",
+  },
+  {
+    videoId: "MORTENWE2FAKE",
+    title: "MORTEN B2B Malaa WE2 | Tomorrowland 2026",
+    channel: "Tomorrowland",
+  },
+];
+const mortenHeld = matchHeldRelives(mortenEntries, HELD_PLAYBACK_WATCH);
+const mortenHit = mortenHeld.find((h) => /morten/i.test(h.name));
+assert.equal(mortenHit!.status, "candidate");
+assert.equal(mortenHit!.videoId, "MORTENMAL01");
+assert.equal(
+  mortenHeld.find((h) => /calvin/i.test(h.name))!.status,
+  "waiting",
+);
+
+// A wired Tomorrowland Winter upload (different performance, no WE token)
+// must never be offered as a candidate for the held WE1 Crystal Garden seed.
+const mortenWinterEntries = [
+  {
+    videoId: "vjI-Oc_pgag",
+    title: "MORTEN B2B Malaa | Tomorrowland Winter 2026",
+    channel: "Tomorrowland",
+  },
+];
+const mortenWinterHeld = matchHeldRelives(
+  mortenWinterEntries,
+  HELD_PLAYBACK_WATCH,
+);
+assert.equal(
+  mortenWinterHeld.find((h) => /morten/i.test(h.name))!.status,
+  "waiting",
+  "Tomorrowland Winter upload is not the held WE1 Crystal Garden performance",
+);
+
 const unwired = matchUnwiredOfficialRelives(entries, {
   curatedVideoIds: new Set(["DuXXMZLfAkQ"]),
   mappedSlugs: new Set(),

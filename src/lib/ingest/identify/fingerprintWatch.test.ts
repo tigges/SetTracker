@@ -33,5 +33,38 @@ assert.equal(lorenzoEdcMx.official, false);
 assert.equal(lorenzoEdcMx.channel, "Toñito Digital");
 assert.equal(lorenzoEdcMx.idOffsetsSec.length, 0);
 assert.match(lorenzoEdcMx.note, /never official playback/i);
+const vkRevelWatch = FINGERPRINT_ONLY_WATCH.find(
+  (w) => w.videoId === "6ZN3aI2o2OY",
+);
+assert.ok(vkRevelWatch);
+assert.equal(vkRevelWatch.official, false);
+assert.equal(vkRevelWatch.channel, "Wine House Music TV");
+assert.equal(vkRevelWatch.idOffsetsSec.length, 0);
+assert.match(vkRevelWatch.note, /never official playback/i);
+assert.equal(isFingerprintOnlyVideoId("6ZN3aI2o2OY"), true);
+assert.equal(isFingerprintOnlyWatchUrl("https://youtu.be/6ZN3aI2o2OY"), true);
+
+// Official @antiup What Is Life clip — not a fan upload. Hold the 1001
+// seed; never Identify-probe the clip as if it were the Mojave set.
+assert.equal(isFingerprintOnlyVideoId("cZhNpGcYq_A"), false);
+assert.equal(
+  isFingerprintOnlyWatchUrl("https://youtu.be/cZhNpGcYq_A"),
+  false,
+);
+assert.equal(
+  FINGERPRINT_ONLY_WATCH.some((w) => w.videoId === "cZhNpGcYq_A"),
+  false,
+);
+
+const jauzWatch = FINGERPRINT_ONLY_WATCH.find(
+  (w) => w.videoId === "HeEW36GRsPQ",
+);
+assert.ok(jauzWatch);
+assert.equal(jauzWatch.official, false);
+assert.equal(jauzWatch.channel, "Crawford_RECAPS");
+assert.equal(jauzWatch.idOffsetsSec.length, 0);
+assert.match(jauzWatch.note, /never official playback/i);
+assert.equal(isFingerprintOnlyVideoId("HeEW36GRsPQ"), true);
+assert.equal(isFingerprintOnlyWatchUrl("https://youtu.be/HeEW36GRsPQ"), true);
 
 console.log("identify/fingerprintWatch.test.ts ok");
