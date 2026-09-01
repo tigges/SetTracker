@@ -3648,7 +3648,8 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     }),
     genre: "Tech House",
     type: "festival",
-    title: "Anti Up | What Is Life [Live From Coachella 2024]",
+    title:
+      "Chris Lake & Chris Lorenzo pres. Anti Up | What Is Life [Live From Coachella 2024]",
     seriesName: "Coachella",
     eventName: "Coachella",
     tracklist1001Url:

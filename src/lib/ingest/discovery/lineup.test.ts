@@ -43,5 +43,14 @@ assert.ok((live.venueArtists.tomorrowland ?? []).includes("david-guetta"));
 assert.ok(
   (allRelatedBySlug()["marten-horger"] ?? []).some((r) => r.slug === "david-guetta"),
 );
+const antiUpRelated = relatedSlugsFor("anti-up");
+assert.ok(
+  antiUpRelated.some((r) => r.slug === "chris-lake"),
+  "expected Anti Up ↔ Chris Lake relation in data/artist-relations.json",
+);
+assert.ok(
+  antiUpRelated.some((r) => r.slug === "chris-lorenzo"),
+  "expected Anti Up ↔ Chris Lorenzo relation in data/artist-relations.json",
+);
 
 console.log("lineup.test.ts ok");

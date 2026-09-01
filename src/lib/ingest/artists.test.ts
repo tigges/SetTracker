@@ -519,13 +519,17 @@ assert.deepEqual(
   ["malaa"],
 );
 
-// Album-titled official Coachella upload — artists first so "What Is Life"
-// is not read as a DJ.
+// Album-titled official Coachella upload — presenters stay on the left
+// of the pipe so "What Is Life" is not a DJ. Preferred primary is the
+// project; Lake + Lorenzo land as collaborators (Men Machine pattern).
 const antiUpCoachellaSet = artistsForSet(
-  "Anti Up | What Is Life [Live From Coachella 2024]",
+  "Chris Lake & Chris Lorenzo pres. Anti Up | What Is Life [Live From Coachella 2024]",
   { name: "Anti Up", slug: "anti-up", accent: "#ff006e" },
 );
 assert.equal(antiUpCoachellaSet.primary.slug, "anti-up");
-assert.deepEqual(antiUpCoachellaSet.collaborators, []);
+assert.deepEqual(
+  antiUpCoachellaSet.collaborators.map((c) => c.slug),
+  ["chris-lake", "chris-lorenzo"],
+);
 
 console.log("artists.test.ts ok");
