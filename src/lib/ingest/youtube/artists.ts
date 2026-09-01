@@ -4,6 +4,7 @@
  */
 
 import { ARTIST_ROSTER } from "../roster";
+import { boostedYoutubeArtistLimit } from "../wishlistPollBoost";
 
 export type YoutubeArtistChannel = {
   channel: string;
@@ -16,6 +17,8 @@ export type YoutubeArtistChannel = {
 
 const DEFAULT_LIMIT = Number(process.env.YOUTUBE_ARTIST_VIDEO_LIMIT || 50);
 const HIGH_LIMIT = Number(process.env.YOUTUBE_ARTIST_VIDEO_LIMIT_HIGH || 80);
+// WISHLIST_POLL_BOOST=1 raises default wishlist names to HIGH_LIMIT for
+// this process only. Capture / Identify ranking is unchanged.
 
 export const YOUTUBE_ARTIST_CHANNELS: YoutubeArtistChannel[] = ARTIST_ROSTER
   .filter((a) => a.youtube?.handle && a.youtube.status !== "missing")
@@ -24,7 +27,12 @@ export const YOUTUBE_ARTIST_CHANNELS: YoutubeArtistChannel[] = ARTIST_ROSTER
     primaryName: a.name,
     genre: a.genre,
     accent: a.accent,
-    limit: a.priority === "high" ? HIGH_LIMIT : DEFAULT_LIMIT,
+    limit: boostedYoutubeArtistLimit({
+      priority: a.priority,
+      name: a.name,
+      defaultLimit: DEFAULT_LIMIT,
+      highLimit: HIGH_LIMIT,
+    }),
     minDurationSec: 18 * 60,
   }));
 

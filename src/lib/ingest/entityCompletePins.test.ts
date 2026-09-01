@@ -16,6 +16,7 @@ import {
   wishlistDjStubFromPin,
 } from "./entityCompletePins";
 import { WISHLIST_DEFAULTS } from "../wishlist";
+import { ARTIST_ROSTER_CURATED } from "./roster";
 
 assert.equal(decodeMojibake("\u00C3\u2020ON:MODE"), "ÆON:MODE");
 assert.equal(decodeMojibake("\u00C3\u201Clafur Arnalds"), "Ólafur Arnalds");
@@ -997,12 +998,22 @@ assert.equal(
 }
 
 // Anti Up — operator paste. Matching @antiup / antiupmusic handles.
+// Official channel id UC8Bhgj67ino3eyL6WXvYgAA lives on the roster
+// (deep-scan). The pin keeps @antiup — About still lists it, and a
+// /channel/UC URL fails name overlap (same rule as Jauz).
 // Slogan bio only — drop the +1 phone and @chrislake handle dump.
 // Facebook has no pin column. SoundCloud was not in this paste.
 // DJ Fresh Grokipedia is an encyclopedia, not a website.
 assert.equal(
   nameOverlapsHandle("Anti Up", "https://www.youtube.com/@antiup"),
   true,
+);
+assert.equal(
+  nameOverlapsHandle(
+    "Anti Up",
+    "https://www.youtube.com/channel/UC8Bhgj67ino3eyL6WXvYgAA",
+  ),
+  false,
 );
 assert.equal(
   nameOverlapsHandle("Anti Up", "https://instagram.com/antiupmusic"),
@@ -1091,6 +1102,17 @@ assert.equal(
   assert.equal(anti.website, undefined);
   assert.equal(anti.genre, undefined);
   assert.doesNotMatch(anti.bio ?? "", /\+1|323|@chrislake/i);
+}
+{
+  const roster = ARTIST_ROSTER_CURATED.find((a) => a.name === "Anti Up");
+  assert.ok(roster);
+  assert.equal(roster.youtube?.handle, "UC8Bhgj67ino3eyL6WXvYgAA");
+  assert.ok(
+    roster.socials?.includes(
+      "https://www.youtube.com/channel/UC8Bhgj67ino3eyL6WXvYgAA",
+    ),
+  );
+  assert.ok(roster.socials?.includes("https://www.youtube.com/@antiup"));
 }
 
 // Jauz — operator paste. jauzofficial.com + matching @jauzofficial
@@ -1348,6 +1370,118 @@ assert.equal(
   assert.equal(brohug.genre, "Bass House");
   assert.ok(brohug.bio?.includes("Stockholm"));
   assert.equal(brohug.imageUrl, undefined);
+}
+
+// Tujamo — operator paste from YT About @Tujamo. SC/IG tujamo.
+// Official site tujamo.com. anna-agency.nl is booking. Songkick is
+// not the artist site. Channel welcome line is not a bio. No thumb.
+assert.equal(
+  nameOverlapsHandle("Tujamo", "https://www.youtube.com/@Tujamo"),
+  true,
+);
+assert.equal(
+  nameOverlapsHandle("Tujamo", "https://soundcloud.com/tujamo"),
+  true,
+);
+assert.equal(
+  nameOverlapsHandle("Tujamo", "https://instagram.com/tujamo"),
+  true,
+);
+assert.equal(
+  nameOverlapsHandle("Tujamo", "https://tujamo.com/"),
+  true,
+);
+assert.equal(
+  nameOverlapsHandle("Tujamo", "https://anna-agency.nl"),
+  false,
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "tujamo",
+    name: "Tujamo",
+    field: "youtube",
+    value: "https://www.youtube.com/@Tujamo",
+    evidence: "operator paste, YouTube About",
+  }).value,
+  "https://www.youtube.com/@Tujamo",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "tujamo",
+    name: "Tujamo",
+    field: "soundcloud",
+    value: "https://soundcloud.com/tujamo",
+    evidence: "operator paste, YouTube About",
+  }).value,
+  "https://soundcloud.com/tujamo",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "tujamo",
+    name: "Tujamo",
+    field: "instagram",
+    value: "https://www.instagram.com/tujamo",
+    evidence: "operator paste, YouTube About",
+  }).value,
+  "https://instagram.com/tujamo",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "tujamo",
+    name: "Tujamo",
+    field: "website",
+    value: "https://tujamo.com/",
+    evidence: "operator paste, official site",
+  }).value,
+  "https://tujamo.com",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "tujamo",
+    name: "Tujamo",
+    field: "website",
+    value: "https://anna-agency.nl",
+    evidence: "YouTube About booking",
+  }).drop,
+  "website name mismatch",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "tujamo",
+    name: "Tujamo",
+    field: "homeCity",
+    value: "Germany",
+    evidence: "YouTube About, Germany",
+  }).value,
+  "Germany",
+);
+{
+  const tujamo = loadEntityCompletePins().find((p) => p.slug === "tujamo");
+  assert.ok(tujamo);
+  assert.equal(tujamo.kind, "dj");
+  assert.equal(tujamo.website, "https://tujamo.com");
+  assert.equal(tujamo.instagram, "https://instagram.com/tujamo");
+  assert.equal(tujamo.youtube, "https://www.youtube.com/@Tujamo");
+  assert.equal(tujamo.soundcloud, "https://soundcloud.com/tujamo");
+  assert.equal(tujamo.twitter, undefined);
+  assert.equal(tujamo.homeCity, "Germany");
+  assert.equal(tujamo.bio, undefined);
+  assert.equal(tujamo.genre, undefined);
+  assert.equal(tujamo.imageUrl, undefined);
+}
+{
+  const roster = ARTIST_ROSTER_CURATED.find((a) => a.name === "Tujamo");
+  assert.ok(roster);
+  assert.equal(roster.youtube?.handle, "@Tujamo");
+  assert.equal(roster.soundcloud?.permalink, "tujamo");
+  assert.equal(roster.website, "https://tujamo.com");
+  assert.equal(roster.priority, "normal");
 }
 
 // Wenzday — operator paste. Official wenzdaymusic.com + matching
@@ -1651,6 +1785,7 @@ assert.equal(
     "anti-up",
     "tchami",
     "wenzday",
+    "tujamo",
   ];
   for (const slug of empties) {
     const pin = loadEntityCompletePins().find((p) => p.slug === slug);

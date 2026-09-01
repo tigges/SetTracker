@@ -7,11 +7,21 @@ import { SuggestDjButton } from "@/components/SuggestDj";
 import { djCardSubtitle } from "@/lib/djDirectory";
 import type { DjListItem } from "@/lib/queries";
 import {
+  SEARCH_1001_RESULT,
+  SEARCH_1001_TRACKLISTS,
+  search1001Query,
+} from "@/lib/search1001";
+import {
   effectiveWishlistSlugs,
   parseWishlistOverlay,
   wishlistIsCustomized,
   wishlistLabel,
 } from "@/lib/wishlist";
+import {
+  sortWishlistByNeeds,
+  wishlistCompleteness,
+  WISHLIST_GAP_LABEL,
+} from "@/lib/wishlistComplete";
 import {
   rankWishlistSimilar,
   type SimilarHint,
@@ -43,6 +53,16 @@ export function WishlistClient({
     return map;
   }, [djs]);
   const customized = wishlistIsCustomized(overlay);
+  const ordered = useMemo(
+    () => sortWishlistByNeeds(slugs, (slug) => bySlug.get(slug)),
+    [slugs, bySlug],
+  );
+  const needWork = useMemo(
+    () =>
+      ordered.filter((slug) => wishlistCompleteness(bySlug.get(slug)).needsWork)
+        .length,
+    [ordered, bySlug],
+  );
 
   return (
     <div>
@@ -50,6 +70,9 @@ export function WishlistClient({
         <p className="text-[14px] text-muted">
           {slugs.length} {slugs.length === 1 ? "DJ" : "DJs"}
           {customized ? " · this browser" : " · starting set"}
+          {needWork > 0
+            ? ` · ${needWork} ${needWork === 1 ? "needs" : "need"} work`
+            : " · complete"}
         </p>
         <div className="flex flex-wrap items-center gap-3">
           <SuggestDjButton
@@ -73,54 +96,94 @@ export function WishlistClient({
         </p>
       ) : (
         <ul className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
-          {slugs.map((slug) => {
+          {ordered.map((slug) => {
             const dj = bySlug.get(slug);
             const name = wishlistLabel(slug, dj?.name);
+            const { gaps } = wishlistCompleteness(dj);
             return (
               <li key={slug}>
-                <div className="card flex h-[64px] items-center gap-2.5 px-3">
-                  {dj ? (
-                    <Link
-                      href={`/djs/${dj.slug}`}
-                      className="flex min-w-0 flex-1 items-center gap-2.5"
-                    >
-                      <EntityThumb
-                        src={dj.imageUrl}
-                        label={dj.name}
-                        accent={dj.accent}
-                        size={40}
-                        radius={10}
-                      />
-                      <div className="min-w-0">
+                <div className="card px-3 py-2.5">
+                  <div className="flex min-h-[44px] items-center gap-2.5">
+                    {dj ? (
+                      <Link
+                        href={`/djs/${dj.slug}`}
+                        className="flex min-w-0 flex-1 items-center gap-2.5"
+                      >
+                        <EntityThumb
+                          src={dj.imageUrl}
+                          label={dj.name}
+                          accent={dj.accent}
+                          size={40}
+                          radius={10}
+                        />
+                        <div className="min-w-0">
+                          <div className="truncate text-[15px] font-semibold leading-5 text-ink">
+                            {dj.name}
+                          </div>
+                          <div className="truncate text-[12px] leading-4 text-muted2">
+                            {djCardSubtitle(
+                              dj.homeCity,
+                              dj.setCount,
+                              dj.top100Rank,
+                            )}
+                          </div>
+                        </div>
+                      </Link>
+                    ) : (
+                      <div className="min-w-0 flex-1">
                         <div className="truncate text-[15px] font-semibold leading-5 text-ink">
-                          {dj.name}
+                          {name}
                         </div>
                         <div className="truncate text-[12px] leading-4 text-muted2">
-                          {djCardSubtitle(
-                            dj.homeCity,
-                            dj.setCount,
-                            dj.top100Rank,
-                          )}
+                          No catalog page yet
                         </div>
                       </div>
-                    </Link>
-                  ) : (
-                    <div className="min-w-0 flex-1">
-                      <div className="truncate text-[15px] font-semibold leading-5 text-ink">
-                        {name}
+                    )}
+                    <button
+                      type="button"
+                      onClick={() => toggleStoredWishlist(slug)}
+                      className="flex-none rounded-md border border-line px-2 py-1 text-[11px] font-bold text-muted hover:border-brand hover:text-brand"
+                    >
+                      Remove
+                    </button>
+                  </div>
+                  {gaps.length > 0 ? (
+                    <div className="mt-2">
+                      <div className="mb-2 flex flex-wrap gap-1">
+                        {gaps.map((gap) => (
+                          <span
+                            key={gap}
+                            className="rounded-md border border-line px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-[0.04em] text-muted"
+                          >
+                            {WISHLIST_GAP_LABEL[gap]}
+                          </span>
+                        ))}
                       </div>
-                      <div className="truncate text-[12px] leading-4 text-muted2">
-                        No catalog page yet
+                      <div className="flex flex-wrap gap-1.5">
+                        <Search1001ArtistButton query={search1001Query(name)} />
+                        {dj?.youtube ? (
+                          <a
+                            href={dj.youtube}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="rounded-md border border-line px-2 py-1 text-[11px] font-bold text-ink hover:border-brand hover:text-brand"
+                          >
+                            YouTube
+                          </a>
+                        ) : null}
+                        {dj?.soundcloud ? (
+                          <a
+                            href={dj.soundcloud}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="rounded-md border border-line px-2 py-1 text-[11px] font-bold text-ink hover:border-brand hover:text-brand"
+                          >
+                            SoundCloud
+                          </a>
+                        ) : null}
                       </div>
                     </div>
-                  )}
-                  <button
-                    type="button"
-                    onClick={() => toggleStoredWishlist(slug)}
-                    className="flex-none rounded-md border border-line px-2 py-1 text-[11px] font-bold text-muted hover:border-brand hover:text-brand"
-                  >
-                    Remove
-                  </button>
+                  ) : null}
                 </div>
               </li>
             );
@@ -134,6 +197,33 @@ export function WishlistClient({
         similarHints={similarHints}
       />
     </div>
+  );
+}
+
+function Search1001ArtistButton({ query }: { query: string }) {
+  const q = query.trim();
+  if (q.length < 2) return null;
+  return (
+    <form
+      action={SEARCH_1001_RESULT}
+      method="post"
+      target="_blank"
+      acceptCharset="utf-8"
+      className="inline"
+    >
+      <input type="hidden" name="main_search" value={q} />
+      <input
+        type="hidden"
+        name="search_selection"
+        value={SEARCH_1001_TRACKLISTS}
+      />
+      <button
+        type="submit"
+        className="rounded-md border border-line px-2 py-1 text-[11px] font-bold text-ink hover:border-brand hover:text-brand"
+      >
+        Search 1001
+      </button>
+    </form>
   );
 }
 

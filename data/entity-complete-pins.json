@@ -2747,6 +2747,15 @@
   },
   {
     "kind": "dj",
+    "slug": "tujamo",
+    "website": "https://tujamo.com",
+    "instagram": "https://instagram.com/tujamo",
+    "youtube": "https://www.youtube.com/@Tujamo",
+    "soundcloud": "https://soundcloud.com/tujamo",
+    "homeCity": "Germany"
+  },
+  {
+    "kind": "dj",
     "slug": "tuta-m",
     "imageUrl": "https://cdn-images.dzcdn.net/images/artist/228db74023dba388565ee88e0f50d423/250x250-000000-80-0-0.jpg",
     "soundcloud": "https://soundcloud.com/tuta-m",

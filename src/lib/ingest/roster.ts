@@ -809,9 +809,13 @@ export const ARTIST_ROSTER_CURATED: ArtistRosterEntry[] = [
     genre: "Tech House",
     accent: "#ff006e",
     youtube: {
-      handle: "@antiup",
+      // Durable channel id from operator paste 2026-09-01. About still
+      // lists @antiup (keep that on the entity pin — /channel/UC fails
+      // name overlap). Deep-scan uses the UC id so a handle move cannot
+      // point ingest at the wrong property.
+      handle: "UC8Bhgj67ino3eyL6WXvYgAA",
       status: "weak",
-      note: "shorts/clips only; full sets not on official channel",
+      note: "official channel/UC8Bhgj67ino3eyL6WXvYgAA; About @antiup; shorts/clips, no official long-form sets yet",
     },
     soundcloud: {
       permalink: "antiupmusic",
@@ -820,6 +824,7 @@ export const ARTIST_ROSTER_CURATED: ArtistRosterEntry[] = [
       note: "singles/extended mixes only; no official long-form sets",
     },
     socials: [
+      "https://www.youtube.com/channel/UC8Bhgj67ino3eyL6WXvYgAA",
       "https://www.youtube.com/@antiup",
       "https://soundcloud.com/antiupmusic",
       "https://www.instagram.com/antiupmusic/",
@@ -828,6 +833,127 @@ export const ARTIST_ROSTER_CURATED: ArtistRosterEntry[] = [
       "https://open.spotify.com/artist/4UwR1ir6PovnQiwX5jRPvF",
     ],
     priority: "high",
+  },
+  // Wishlist official channels from entity-complete pins / knownHandles.
+  // priority normal — do not raise Capture 1001 or Identify rank.
+  {
+    name: "Dillon Francis",
+    genre: "House",
+    accent: "#ff4d6d",
+    homeCity: "Los Angeles, CA",
+    youtube: { handle: "@DillonFrancis", status: "ok" },
+    soundcloud: { permalink: "dillonfrancis", status: "ok" },
+    website: "https://dillonfrancis.com",
+    socials: [
+      "https://www.youtube.com/@DillonFrancis",
+      "https://soundcloud.com/dillonfrancis",
+      "https://instagram.com/dillonfrancis",
+      "https://x.com/DillonFrancis",
+    ],
+    priority: "normal",
+  },
+  {
+    name: "Valentino Khan",
+    genre: "House",
+    accent: "#e63946",
+    homeCity: "Los Angeles, US",
+    youtube: { handle: "@ValentinoKhan", status: "ok" },
+    website: "https://valentinokhan.com",
+    socials: [
+      "https://www.youtube.com/@ValentinoKhan",
+      "https://instagram.com/valentinokhan",
+      "https://x.com/ValentinoKhan",
+    ],
+    priority: "normal",
+  },
+  {
+    name: "GREG 99",
+    genre: "Afro House",
+    accent: "#2a9d8f",
+    homeCity: "Minas Gerais, Brazil",
+    youtube: { handle: "@greg99music", status: "ok" },
+    soundcloud: { permalink: "greg99music", status: "ok" },
+    socials: [
+      "https://www.youtube.com/@greg99music",
+      "https://soundcloud.com/greg99music",
+      "https://instagram.com/greg99music",
+      "https://x.com/greg99music",
+    ],
+    priority: "normal",
+  },
+  {
+    name: "Malaa",
+    genre: "Bass House",
+    accent: "#6c757d",
+    homeCity: "France",
+    youtube: { handle: "@malaa_music", status: "ok" },
+    soundcloud: { permalink: "malaamusic", status: "ok" },
+    socials: [
+      "https://www.youtube.com/@malaa_music",
+      "https://soundcloud.com/malaamusic",
+      "https://instagram.com/malaamusic",
+      "https://x.com/Malaamusic",
+    ],
+    priority: "normal",
+  },
+  {
+    name: "Tchami",
+    genre: "Future House",
+    accent: "#f4a261",
+    youtube: { handle: "@TchamiTV", status: "ok" },
+    socials: ["https://www.youtube.com/@TchamiTV"],
+    priority: "normal",
+  },
+  {
+    name: "Jauz",
+    genre: "Bass House",
+    accent: "#7c5cff",
+    homeCity: "United States",
+    youtube: { handle: "@jauzofficial", status: "ok" },
+    soundcloud: { permalink: "jauzofficial", status: "ok" },
+    website: "https://jauzofficial.com",
+    socials: [
+      "https://www.youtube.com/@jauzofficial",
+      "https://soundcloud.com/jauzofficial",
+      "https://instagram.com/jauzofficial",
+      "https://x.com/jauzofficial",
+    ],
+    priority: "normal",
+  },
+  {
+    name: "Brohug",
+    genre: "Bass House",
+    accent: "#00c2ff",
+    homeCity: "Stockholm, Sweden",
+    youtube: { handle: "@brohugofficial", status: "ok" },
+    soundcloud: { permalink: "brohugofficial", status: "ok" },
+    website: "https://wearebrohug.com",
+    socials: [
+      "https://www.youtube.com/@brohugofficial",
+      "https://soundcloud.com/brohugofficial",
+      "https://instagram.com/brohugofficial",
+      "https://x.com/wearebrohug",
+    ],
+    priority: "normal",
+  },
+  {
+    // Operator paste 2026-09-01: YT About @Tujamo + SC/IG tujamo.
+    // anna-agency.nl is booking; songkick is not the artist site.
+    name: "Tujamo",
+    genre: "Big Room",
+    accent: "#f4a261",
+    homeCity: "Germany",
+    youtube: { handle: "@Tujamo", status: "ok" },
+    soundcloud: { permalink: "tujamo", status: "ok" },
+    website: "https://tujamo.com",
+    socials: [
+      "https://tujamo.com",
+      "https://www.youtube.com/@Tujamo",
+      "https://soundcloud.com/tujamo",
+      "https://instagram.com/tujamo",
+      "https://open.spotify.com/artist/2vVNxGBvKRQMWwI5c8KmYh",
+    ],
+    priority: "normal",
   },
   {
     name: "Hannah Wants",
