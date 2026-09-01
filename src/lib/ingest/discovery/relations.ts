@@ -132,13 +132,41 @@ export function relatedSlugsFor(slug: string, limit = 12): Array<{
   reason: string;
   weight: number;
 }> {
+  return allRelatedBySlug(limit)[slug] ?? [];
+}
+
+/** Load the relations file once and fan out both directions. */
+export function allRelatedBySlug(limitPer = 12): Record<
+  string,
+  Array<{ slug: string; reason: string; weight: number }>
+> {
   const file = loadRelations();
-  const out: Array<{ slug: string; reason: string; weight: number }> = [];
+  const map = new Map<
+    string,
+    Array<{ slug: string; reason: string; weight: number }>
+  >();
+  const push = (
+    from: string,
+    to: string,
+    reason: string,
+    weight: number,
+  ) => {
+    const list = map.get(from) ?? [];
+    list.push({ slug: to, reason, weight });
+    map.set(from, list);
+  };
   for (const r of file.relations) {
-    if (r.a === slug) out.push({ slug: r.b, reason: r.reason, weight: r.weight });
-    else if (r.b === slug) out.push({ slug: r.a, reason: r.reason, weight: r.weight });
+    push(r.a, r.b, r.reason, r.weight);
+    push(r.b, r.a, r.reason, r.weight);
   }
-  return out.sort((a, b) => b.weight - a.weight).slice(0, limit);
+  const out: Record<
+    string,
+    Array<{ slug: string; reason: string; weight: number }>
+  > = {};
+  for (const [from, list] of map) {
+    out[from] = list.sort((a, b) => b.weight - a.weight).slice(0, limitPer);
+  }
+  return out;
 }
 
 export function venueArtistSlugs(venueSlug: string): string[] {

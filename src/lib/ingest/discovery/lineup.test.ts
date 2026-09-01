@@ -1,7 +1,12 @@
 import assert from "node:assert/strict";
 import { LINEUP_SOURCES } from "./lineupSources";
 import { PRESS_SEEDS } from "./pressSeeds";
-import { linkCohort, loadRelations, relatedSlugsFor } from "./relations";
+import {
+  allRelatedBySlug,
+  linkCohort,
+  loadRelations,
+  relatedSlugsFor,
+} from "./relations";
 import type { RelationFile } from "./types";
 
 assert.ok(LINEUP_SOURCES.some((s) => s.eventSlug === "tomorrowland"));
@@ -35,5 +40,8 @@ assert.ok(
   "expected Horger ↔ Guetta relation in data/artist-relations.json",
 );
 assert.ok((live.venueArtists.tomorrowland ?? []).includes("david-guetta"));
+assert.ok(
+  (allRelatedBySlug()["marten-horger"] ?? []).some((r) => r.slug === "david-guetta"),
+);
 
 console.log("lineup.test.ts ok");

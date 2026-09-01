@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { WishlistClient } from "@/components/WishlistClient";
-import { getDjList } from "@/lib/queries";
+import { getDjList, getWishlistSimilarHints } from "@/lib/queries";
 import { pageMeta } from "@/lib/site";
 import { WISHLIST_DEFAULTS } from "@/lib/wishlist";
 
@@ -13,7 +13,10 @@ export const metadata: Metadata = pageMeta({
 });
 
 export default async function WishlistPage() {
-  const djs = await getDjList();
+  const [djs, similarHints] = await Promise.all([
+    getDjList(),
+    getWishlistSimilarHints(),
+  ]);
 
   return (
     <div>
@@ -23,7 +26,7 @@ export default async function WishlistPage() {
         <p className="mt-2 max-w-2xl text-[14px] text-muted">
           {WISHLIST_DEFAULTS.length} house / bass house DJs to keep an eye on.
           Add or drop anyone from a DJ page — this browser only. Not the
-          DJ Mag ★ on /stats.
+          DJ Mag ★ on /stats. Missing someone? Suggest a DJ.
         </p>
         <p className="mt-3 text-[13px]">
           <Link
@@ -34,7 +37,7 @@ export default async function WishlistPage() {
           </Link>
         </p>
       </div>
-      <WishlistClient djs={djs} />
+      <WishlistClient djs={djs} similarHints={similarHints} />
     </div>
   );
 }
