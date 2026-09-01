@@ -47,4 +47,13 @@ describe("djCatalog", () => {
       true,
     );
   });
+
+  it("keeps wishlist defaults before their first set", () => {
+    assert.equal(
+      isCatalogWorkDj({ slug: "valentino-khan", sets: [] }),
+      true,
+    );
+    assert.equal(isCatalogWorkDj({ slug: "greg-99", sets: [] }), true);
+    assert.equal(isCatalogWorkDj({ slug: "malaa", sets: [] }), true);
+  });
 });

@@ -8,6 +8,7 @@ import {
   normalizeWishlistSlug,
   parseWishlistOverlay,
   toggleWishlistSlug,
+  wishlistDefaultSlugSet,
   wishlistDefaultSlugs,
   wishlistIsCustomized,
   wishlistLabel,
@@ -30,6 +31,10 @@ assert.ok(!wishlistDefaultSlugs().includes("gregg-gg"));
 assert.ok(!wishlistDefaultSlugs().includes("lao"));
 assert.ok(wishlistDefaultSlugs().includes("bradeazy"));
 assert.ok(wishlistDefaultSlugs().includes("greg-99"));
+assert.ok(wishlistDefaultSlugSet().has("valentino-khan"));
+assert.ok(wishlistDefaultSlugSet().has("malaa"));
+assert.ok(wishlistDefaultSlugSet().has("jauz"));
+assert.ok(wishlistDefaultSlugSet().has("brohug"));
 
 for (const row of WISHLIST_DEFAULTS) {
   assert.equal(slugify(row.name), row.slug, `${row.name} → ${row.slug}`);

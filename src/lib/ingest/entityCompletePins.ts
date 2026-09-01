@@ -9,6 +9,7 @@ import type { PrismaClient } from "@prisma/client";
 import { normalizeGenre } from "../genre";
 import { isWeakOfficialUrl } from "../officialUrls";
 import { youtubeChannelUrl } from "../social";
+import { WISHLIST_DEFAULTS } from "../wishlist";
 import { remapAtomicActHalfSlug, remapAtomicActPin } from "./atomicActs";
 import { evaluateHomeCity } from "./discovery/llmJobs";
 import { normalizeSocialUrl } from "./eventSocials";
@@ -621,13 +622,89 @@ function shouldFill(
   return false;
 }
 
+const STUB_ACCENTS = [
+  "#ff7a45",
+  "#4fb0e0",
+  "#ff7096",
+  "#b0d24e",
+  "#ffd24d",
+  "#5cc7d6",
+  "#c56cff",
+  "#ff6f5e",
+];
+
+function accentForSlug(slug: string): string {
+  let h = 0;
+  for (const ch of slug) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
+  return STUB_ACCENTS[h % STUB_ACCENTS.length]!;
+}
+
+function pinHasOfficialHandle(pin: EntityCompletePin): boolean {
+  return Boolean(
+    pin.website ||
+      pin.instagram ||
+      pin.youtube ||
+      pin.soundcloud ||
+      pin.twitter,
+  );
+}
+
+/**
+ * Wishlist names with a verified pin but no ingested set still get a /djs
+ * page. Pins stay fill-null — this only mints the missing row.
+ */
+export function wishlistDjStubFromPin(
+  pin: EntityCompletePin,
+): {
+  slug: string;
+  name: string;
+  accent: string;
+  imageUrl?: string;
+  website?: string;
+  instagram?: string;
+  youtube?: string;
+  soundcloud?: string;
+  twitter?: string;
+  homeCity?: string;
+  bio?: string;
+  genre?: string;
+} | null {
+  if (pin.kind !== "dj") return null;
+  const name = WISHLIST_DEFAULTS.find((d) => d.slug === pin.slug)?.name;
+  if (!name || !pinHasOfficialHandle(pin)) return null;
+  const stub: {
+    slug: string;
+    name: string;
+    accent: string;
+    imageUrl?: string;
+    website?: string;
+    instagram?: string;
+    youtube?: string;
+    soundcloud?: string;
+    twitter?: string;
+    homeCity?: string;
+    bio?: string;
+    genre?: string;
+  } = {
+    slug: pin.slug,
+    name,
+    accent: accentForSlug(pin.slug),
+  };
+  for (const field of FIELDS) {
+    const value = pin[field];
+    if (value) stub[field] = value;
+  }
+  return stub;
+}
+
 /** Fill-null by slug. Never overwrites a strong official URL or existing art. */
 export async function applyEntityCompletePins(
   prisma: PrismaClient,
   pins = loadEntityCompletePins(),
-): Promise<{ matched: number; filled: number }> {
+): Promise<{ matched: number; filled: number; created: number }> {
   let matched = 0;
   let filled = 0;
+  let created = 0;
   for (const pin of pins.map(remapDjPin)) {
     if (pin.kind === "dj") {
       const row = await prisma.dj.findUnique({
@@ -645,7 +722,13 @@ export async function applyEntityCompletePins(
           genre: true,
         },
       });
-      if (!row) continue;
+      if (!row) {
+        const stub = wishlistDjStubFromPin(pin);
+        if (!stub) continue;
+        await prisma.dj.create({ data: stub });
+        created += 1;
+        continue;
+      }
       matched += 1;
       const data: Record<string, string> = {};
       for (const field of FIELDS) {
@@ -690,5 +773,5 @@ export async function applyEntityCompletePins(
     await prisma.event.update({ where: { id: row.id }, data });
     filled += 1;
   }
-  return { matched, filled };
+  return { matched, filled, created };
 }

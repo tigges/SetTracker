@@ -1546,8 +1546,11 @@ export async function getAllDjSlugs(): Promise<string[]> {
   // Always keep social-pinned artist DJs even before their first set lands.
   // Never export festival / stage / radio-series / brand-host rows as artists.
   const { DJ_SOCIAL_PINS } = await import("@/lib/ingest/djSocialPins.data");
+  const { wishlistDefaultSlugs } = await import("@/lib/wishlist");
   const pinned = new Set(
-    DJ_SOCIAL_PINS.map((p) => p.slug).filter((s) => !isBrandHostSlug(s)),
+    [...DJ_SOCIAL_PINS.map((p) => p.slug), ...wishlistDefaultSlugs()].filter(
+      (s) => !isBrandHostSlug(s),
+    ),
   );
   const rows = await prisma.dj.findMany({
     where: {
