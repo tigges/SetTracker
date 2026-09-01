@@ -33,5 +33,15 @@ assert.equal(lorenzoEdcMx.official, false);
 assert.equal(lorenzoEdcMx.channel, "Toñito Digital");
 assert.equal(lorenzoEdcMx.idOffsetsSec.length, 0);
 assert.match(lorenzoEdcMx.note, /never official playback/i);
+const vkRevelWatch = FINGERPRINT_ONLY_WATCH.find(
+  (w) => w.videoId === "6ZN3aI2o2OY",
+);
+assert.ok(vkRevelWatch);
+assert.equal(vkRevelWatch.official, false);
+assert.equal(vkRevelWatch.channel, "Wine House Music TV");
+assert.equal(vkRevelWatch.idOffsetsSec.length, 0);
+assert.match(vkRevelWatch.note, /never official playback/i);
+assert.equal(isFingerprintOnlyVideoId("6ZN3aI2o2OY"), true);
+assert.equal(isFingerprintOnlyWatchUrl("https://youtu.be/6ZN3aI2o2OY"), true);
 
 console.log("identify/fingerprintWatch.test.ts ok");

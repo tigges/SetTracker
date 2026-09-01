@@ -219,6 +219,7 @@ import {
   TL_GIUSEPPE_OTTAVIANI_DREAMSTATE_VANCOUVER_2026,
   TL_GIUSEPPE_OTTAVIANI_DREAMSTATE_SYDNEY_2026,
   TL_GREG_99_HELLBENT_FM_006_2026,
+  TL_VALENTINO_KHAN_REVEL_ALBUQUERQUE_2026,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
@@ -6228,6 +6229,37 @@ for (let i = 1; i < gregHellbent.length; i++) {
     (gregHellbent[i]?.timestamp ?? 0) >
       (gregHellbent[i - 1]?.timestamp ?? 0),
     `GREG 99 Hellbent FM 006 clocks must increase at index ${i}`,
+  );
+}
+
+// Valentino Khan @ Revel Albuquerque 2026-05-29.
+// Overlay TL_Valentino-Khan is not a valid identifier. Fan YT
+// (@WineHouseMusicTV) stays unwired. Held until official artist playback.
+assertSeedClocks(TL_VALENTINO_KHAN_REVEL_ALBUQUERQUE_2026);
+assert.equal(TL_VALENTINO_KHAN_REVEL_ALBUQUERQUE_2026.length, 34);
+assert.equal(
+  Object.values(TRACKLIST_1001_BY_SOURCE_SLUG).includes(
+    TL_VALENTINO_KHAN_REVEL_ALBUQUERQUE_2026,
+  ),
+  false,
+  "Revel Albuquerque seed is held — Wine House Music TV is not official",
+);
+assert.equal(TRACKLIST_1001_BY_SOURCE_SLUG["yt-6ZN3aI2o2OY"], undefined);
+assert.equal(isWiredTracklistSlug("yt-6ZN3aI2o2OY"), false);
+const vkRevel = tracklist1001RowsToPlays(TL_VALENTINO_KHAN_REVEL_ALBUQUERQUE_2026);
+assert.equal(vkRevel.length, 34);
+assert.equal(vkRevel[0]?.provenance, "1001tl");
+assert.equal(vkRevel[0]?.timestamp, 6);
+assert.equal(
+  vkRevel[0]?.trackTitle,
+  "Stress vs. Nasty (Valentino Khan Edit)",
+);
+assert.equal(vkRevel[33]?.trackTitle, "Worth The Wait");
+assert.equal(vkRevel[33]?.timestamp, 20 * 60 + 39);
+for (let i = 1; i < vkRevel.length; i++) {
+  assert.ok(
+    (vkRevel[i]?.timestamp ?? 0) > (vkRevel[i - 1]?.timestamp ?? 0),
+    `Valentino Khan Revel Albuquerque clocks must increase at index ${i}`,
   );
 }
 
