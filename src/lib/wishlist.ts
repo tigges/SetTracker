@@ -34,7 +34,8 @@ export const WISHLIST_DEFAULTS: WishlistEntry[] = [
   { slug: "valentino-khan", name: "Valentino Khan" },
   { slug: "mau-p", name: "Mau P" },
   { slug: "cid", name: "CID" },
-  { slug: "gregg-gg", name: "Gregg GG" },
+  { slug: "greg-99", name: "GREG 99" },
+  { slug: "lao", name: "Lao" },
   { slug: "anti-up", name: "Anti Up" },
   { slug: "chapter-verse", name: "Chapter & Verse" },
   { slug: "ac-slater", name: "AC Slater" },
@@ -51,6 +52,8 @@ export const WISHLIST_DEFAULTS: WishlistEntry[] = [
 export const WISHLIST_SLUG_ALIASES: Record<string, string> = {
   dradeazy: "bradeazy",
   breazly: "bradeazy",
+  "gregg-gg": "greg-99",
+  "greg-gg": "greg-99",
 };
 
 export type WishlistOverlay = {
