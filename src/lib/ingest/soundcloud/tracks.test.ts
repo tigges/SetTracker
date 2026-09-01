@@ -960,4 +960,19 @@ assert.equal(
   "sc-bart-skils-bart-skils-loveland-festival",
 );
 
+const gregHellbentSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url ===
+    "https://soundcloud.com/hellbentrecords/hellbent-fm-episode-006-greg99",
+);
+assert.ok(gregHellbentSc);
+assert.equal(gregHellbentSc.primaryArtist.name, "GREG 99");
+assert.equal(gregHellbentSc.primaryArtist.slug, "greg-99");
+assert.equal(gregHellbentSc.seriesName, "Hellbent FM");
+assert.equal(gregHellbentSc.type, "radio");
+assert.equal(
+  `sc-hellbentrecords-${slugify("hellbent-fm-episode-006-greg99")}`,
+  "sc-hellbentrecords-hellbent-fm-episode-006-greg99",
+);
+
 console.log("soundcloud/tracks.test.ts ok");

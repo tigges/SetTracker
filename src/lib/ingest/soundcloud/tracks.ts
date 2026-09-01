@@ -905,4 +905,19 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     type: "festival",
     minDurationSec: 30 * 60,
   },
+  {
+    // Official Hellbent Records upload; 1001TL wired via
+    // sc-hellbentrecords-hellbent-fm-episode-006-greg99.
+    // Label account, not greg99music. No YouTube in the paste — do not
+    // invent a YT slug. Never wire sc-https://….
+    url: "https://soundcloud.com/hellbentrecords/hellbent-fm-episode-006-greg99",
+    primaryArtist: dj("GREG 99", {
+      accent: "#2a9d8f",
+      homeCity: "Minas Gerais, Brazil",
+    }),
+    genre: "Tech House",
+    seriesName: "Hellbent FM",
+    type: "radio",
+    minDurationSec: 30 * 60,
+  },
 ];
