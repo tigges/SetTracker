@@ -3637,7 +3637,9 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
   },
   {
     // Official @antiup. Title is the album; description is the full Mojave
-    // set (70:27). YouTube Music only credits the opener. 1001 page is WE1
+    // set (70:27). Description "Album Track list" + antiup.lnk.to/whatislife
+    // is the studio album (15 tracks, includes Revolution) — not the live
+    // set. YouTube Music only credits the opener. 1001 page is WE1
     // (2hn3tym9). WE2 2mccm4u1 stays held — distinct clocks, no playback.
     video: "https://www.youtube.com/watch?v=cZhNpGcYq_A",
     primaryArtist: dj("Anti Up", {

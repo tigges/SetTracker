@@ -91,6 +91,9 @@ export const TL_VALENTINO_KHAN_REVEL_ALBUQUERQUE_2026: FingerprintSeedRow[] = [
  * Official @antiup — oEmbed "Anti Up - What Is Life [Live From Coachella
  * 2024]". Watch 2026-09-01: 70:27, description "full performance from
  * Coachella 2024 @ The Mojave Stage" (album-titled, not a one-track clip).
+ * Description "Album Track list" + https://antiup.lnk.to/whatislife is the
+ * studio album (15 tracks, includes Revolution, different order) — never
+ * overlay those as set cues. Album page og:video is this same YT.
  * Operator re-paste 2026-09-01: 1001 page is WE1 (2hn3tym9), not WE2
  * (2mccm4u1). Clocks differ (The Weekend 6:05 vs WE2 5:30; Turn The Page
  * after Something's About To Go Down). Overlay TL_Anti-Up_Coachella_2024
