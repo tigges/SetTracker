@@ -78,8 +78,15 @@ export function expectedPlayCount(
 }
 
 /**
- * Severe: avg ≥ 10 min/play OR < 5 tracks/hour.
- * Thin:    avg ≥ 8 min/play  OR < 7 tracks/hour.
+ * Coverage vs expected cue count. 9 named tracks on a 54m house mix is
+ * ~60% of ~15 expected — the graph looks finished and is not.
+ */
+export const DENSITY_COVERAGE_THIN = 0.65;
+export const DENSITY_COVERAGE_SEVERE = 0.4;
+
+/**
+ * Severe: avg ≥ 10 min/play OR < 5 tracks/hour OR coverage < 40%.
+ * Thin:    avg ≥ 8 min/play  OR < 7 tracks/hour OR coverage < 65%.
  */
 export function assessSetDensity(input: SetDensityInput): SetDensity {
   const durationSec = Math.max(0, input.durationSec || 0);
@@ -117,7 +124,15 @@ export function assessSetDensity(input: SetDensityInput): SetDensity {
   }
 
   const avgMin = avgSecPerPlay / 60;
-  if (avgSecPerPlay >= 10 * 60 || tracksPerHour < 5) {
+  const shortVsExpected =
+    expectedPlays > 0 && playCount < expectedPlays
+      ? `${playCount} of ~${expectedPlays} expected`
+      : null;
+  if (
+    avgSecPerPlay >= 10 * 60 ||
+    tracksPerHour < 5 ||
+    coverage < DENSITY_COVERAGE_SEVERE
+  ) {
     return {
       durationSec,
       playCount,
@@ -126,10 +141,17 @@ export function assessSetDensity(input: SetDensityInput): SetDensity {
       expectedPlays,
       coverage,
       severity: "severe",
-      reason: `${playCount} plays / ${fmtHours(durationSec)} (avg ${avgMin.toFixed(1)}m · ${tracksPerHour.toFixed(1)}/h)`,
+      reason:
+        shortVsExpected && coverage < DENSITY_COVERAGE_SEVERE
+          ? `${shortVsExpected} / ${fmtHours(durationSec)}`
+          : `${playCount} plays / ${fmtHours(durationSec)} (avg ${avgMin.toFixed(1)}m · ${tracksPerHour.toFixed(1)}/h)`,
     };
   }
-  if (avgSecPerPlay >= 8 * 60 || tracksPerHour < 7) {
+  if (
+    avgSecPerPlay >= 8 * 60 ||
+    tracksPerHour < 7 ||
+    coverage < DENSITY_COVERAGE_THIN
+  ) {
     return {
       durationSec,
       playCount,
@@ -138,7 +160,10 @@ export function assessSetDensity(input: SetDensityInput): SetDensity {
       expectedPlays,
       coverage,
       severity: "thin",
-      reason: `${playCount} plays / ${fmtHours(durationSec)} (avg ${avgMin.toFixed(1)}m · ${tracksPerHour.toFixed(1)}/h)`,
+      reason:
+        shortVsExpected && coverage < DENSITY_COVERAGE_THIN
+          ? `${shortVsExpected} / ${fmtHours(durationSec)}`
+          : `${playCount} plays / ${fmtHours(durationSec)} (avg ${avgMin.toFixed(1)}m · ${tracksPerHour.toFixed(1)}/h)`,
     };
   }
 

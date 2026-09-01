@@ -54,6 +54,7 @@ export function resolveFeedRanks(opts: {
   const density = assessSetDensity({
     durationSec: opts.durationSec,
     playCount: opts.trackCount,
+    type: opts.setType,
   });
   const djSlug = opts.primaryDjSlug?.trim() || "";
   const top100Rank = djSlug ? (top100Ranks().get(djSlug) ?? null) : null;

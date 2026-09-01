@@ -29,6 +29,27 @@ assert.equal(short.severity, "ok");
 assert.equal(isThinTracklist({ durationSec: 3600, playCount: 6 }), true);
 assert.equal(isThinTracklist({ durationSec: 3600, playCount: 18 }), false);
 
+// Afrojack Friendship Mix shape: 54:14 / 9 identified. Avg ~6m (~10/h)
+// used to pass the old floor. Coverage vs ~15 expected must flag thin.
+const friendship = assessSetDensity({
+  durationSec: 54 * 60 + 14,
+  playCount: 9,
+  genre: "House",
+  type: "mix",
+});
+assert.equal(friendship.severity, "thin");
+assert.ok(friendship.expectedPlays >= 14);
+assert.ok(friendship.coverage < 0.65);
+assert.match(friendship.reason ?? "", /9 of ~/);
+
+const friendshipFilled = assessSetDensity({
+  durationSec: 54 * 60 + 14,
+  playCount: 15,
+  genre: "House",
+  type: "mix",
+});
+assert.equal(friendshipFilled.severity, "ok");
+
 // Genre cadence: techno ~18/hour, house default ~17, never a miss-grid 69.
 assert.equal(expectedPlayCount(3600), 17);
 assert.ok(expectedPlayCount(3600, { genre: "Techno" }) >= 16);

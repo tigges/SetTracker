@@ -1,6 +1,6 @@
 {
   "name": "setradar",
-  "version": "0.2.293",
+  "version": "0.2.294",
   "private": true,
   "prisma": {
     "seed": "tsx prisma/seed.ts"

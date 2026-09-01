@@ -224,6 +224,7 @@ export default async function SetPage({
         accent={accent}
         setSlug={set.slug}
         setGenre={set.genre}
+        setType={set.type}
         setSourceUrl={set.sourceUrl}
         setPlaybackUrl={set.playbackUrl}
       >

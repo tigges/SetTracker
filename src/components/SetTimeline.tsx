@@ -34,6 +34,7 @@ import { playablePlaybackUrl } from "@/lib/playback";
 import { EDIT_KIND_LABEL, editKind } from "@/lib/trackMeta";
 import { useSetListen, useSetSeek } from "@/components/SetListen";
 import { nearestPlayByCue } from "@/lib/setCue";
+import { assessSetDensity } from "@/lib/setDensity";
 import {
   cueIndexAtRatio,
   playSpans,
@@ -77,6 +78,7 @@ export function SetTimeline({
   accent,
   setSlug,
   setGenre,
+  setType,
   setSourceUrl,
   setPlaybackUrl,
   children,
@@ -87,6 +89,7 @@ export function SetTimeline({
   setSlug: string;
   /** When set, per-track genre is only shown if it differs (avoids clutter). */
   setGenre?: string | null;
+  setType?: string | null;
   /** Provenance / upload URL — used with playback to decide on-site Play. */
   setSourceUrl?: string | null;
   /** Playable host URL when it differs from source (official YT vs SC upload). */
@@ -120,6 +123,12 @@ export function SetTimeline({
   const trackCount = segments.filter((s) => !s.talk).length;
   const talkCount = segments.length - trackCount;
   const dense = stripIsDense(segments.length);
+  const density = assessSetDensity({
+    durationSec,
+    playCount: trackCount,
+    genre: setGenre,
+    type: setType,
+  });
 
   useEffect(() => {
     if (!flashId) return;
@@ -187,6 +196,11 @@ export function SetTimeline({
             <p className="mt-1 text-[11px] text-muted2">
               Tap a segment or row to play from that cue
             </p>
+            {density.severity !== "ok" && density.reason ? (
+              <p className="mt-1 text-[11px] text-muted">
+                Thin list · {density.reason}
+              </p>
+            ) : null}
           </div>
           <div className="flex items-center gap-3 text-[12px] text-muted2 sm:ml-auto">
             <span className="mono">00:00</span>

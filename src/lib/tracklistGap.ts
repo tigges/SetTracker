@@ -128,6 +128,7 @@ export function tracklistGapReason(s: TracklistGapFields): string {
   const d = assessSetDensity({
     durationSec: s.durationSec,
     playCount: s.playCount,
+    type: s.type,
   });
   return `${d.severity} · ${s.playCount} cues / ${Math.round(s.durationSec / 60)}m · capture 1001`;
 }
@@ -192,6 +193,7 @@ export function isActionableTracklistGap(
   const density = assessSetDensity({
     durationSec: s.durationSec,
     playCount: s.playCount,
+    type: s.type,
   });
   return density.severity === "thin" || density.severity === "severe";
 }

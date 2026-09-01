@@ -101,6 +101,8 @@ async function main() {
     const density = assessSetDensity({
       durationSec: s.durationSec,
       playCount: s._count.plays,
+      type: s.type,
+      genre: s.genre,
     });
     const boost = homepageEnrichBoost({
       publishedAt: s.publishedAt,

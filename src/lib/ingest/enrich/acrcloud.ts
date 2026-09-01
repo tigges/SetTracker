@@ -1292,6 +1292,7 @@ export async function selectSparseSetsForFingerprint(
     const density = assessSetDensity({
       durationSec: row.durationSec,
       playCount: row.plays.length,
+      type: row.type,
     });
     const eventSlug = row.event?.slug?.toLowerCase() ?? "";
     candidates.push({

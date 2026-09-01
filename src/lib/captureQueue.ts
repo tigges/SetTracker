@@ -125,6 +125,7 @@ export async function getCaptureQueue(
       density: assessSetDensity({
         durationSec: s.durationSec,
         playCount,
+        type: s.type,
       }).severity,
       watchUrl: watchUrlForSlug(s.slug, s.playbackUrl),
       tracklistUrl: known1001[s.slug],

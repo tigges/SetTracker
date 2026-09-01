@@ -52,7 +52,9 @@ unless asked. Never write Relive for HARD / Insomniac / Nameless / Ultra.
   as the tracklist (talk included, hatched non-track). SoundCloud playhead
   follow is an overlay — never a visibility gate, and never YouTube-only.
   Do not hide it to “simplify” the listen loop. List-pending sets (no cues)
-  omit the strip.
+  omit the strip. Cue honesty: `assessSetDensity` flags a graph that is
+  short versus expected plays (54m / 9 house cues is thin). Capture 1001
+  is the fix — never invent a `/tracklist/…` URL to pad the strip.
 
 - **Run the app:** `npm run dev` (Turbopack, http://localhost:3000). Dev output
   goes to `.next/dev` in Next 16.

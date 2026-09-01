@@ -392,4 +392,23 @@ describe("tracklistGap", () => {
       false,
     );
   });
+
+  it("queues a festival mix whose named cues cover under 65% of expected", () => {
+    assert.equal(
+      isActionableTracklistGap(
+        {
+          title: "Tomorrowland Friendship Mix with Afrojack - July, 2026",
+          type: "mix",
+          eventKind: "festival",
+          eventSlug: "tomorrowland",
+          playCount: 9,
+          durationSec: 54 * 60 + 14,
+          publishedAt: "2026-07-26T00:00:00.000Z",
+          top100Rank: 8,
+        },
+        now,
+      ),
+      true,
+    );
+  });
 });
