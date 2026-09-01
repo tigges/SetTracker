@@ -6272,19 +6272,14 @@ for (let i = 1; i < vkRevel.length; i++) {
 }
 
 // Anti Up @ Mojave, Coachella WE2 2024-04-19.
-// Official @antiup yt-cZhNpGcYq_A is a What Is Life clip, not the set.
-// Seed held — never wire the clip as the Mojave playback.
+// Official @antiup yt-cZhNpGcYq_A is the full Mojave set (album-titled).
 assertSeedClocks(TL_ANTI_UP_COACHELLA_WE2_MOJAVE_2024);
 assert.equal(TL_ANTI_UP_COACHELLA_WE2_MOJAVE_2024.length, 21);
 assert.equal(
-  Object.values(TRACKLIST_1001_BY_SOURCE_SLUG).includes(
-    TL_ANTI_UP_COACHELLA_WE2_MOJAVE_2024,
-  ),
-  false,
-  "Coachella Mojave seed is held — clip is not the full set",
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-cZhNpGcYq_A"],
+  TL_ANTI_UP_COACHELLA_WE2_MOJAVE_2024,
 );
-assert.equal(TRACKLIST_1001_BY_SOURCE_SLUG["yt-cZhNpGcYq_A"], undefined);
-assert.equal(isWiredTracklistSlug("yt-cZhNpGcYq_A"), false);
+assert.equal(isWiredTracklistSlug("yt-cZhNpGcYq_A"), true);
 const antiUpCoachella = tracklist1001RowsToPlays(
   TL_ANTI_UP_COACHELLA_WE2_MOJAVE_2024,
 );

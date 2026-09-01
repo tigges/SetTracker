@@ -183,6 +183,7 @@ import {
   TL_HONEY_DIJON_THE_LOOP_DEKMANTEL_NETHERLANDS_2025,
   TL_VINAI_S2O_SONGKRAN_THAILAND_2023,
   TL_MORTEN_MALAA_TML_WINTER_MAINSTAGE_2026,
+  TL_ANTI_UP_COACHELLA_WE2_MOJAVE_2024,
   TL_TCHAMI_MALAA_EDC_LV_CIRCUITGROUNDS_2025,
   TL_WENZDAY_ILLFEST_WICKED_OAKS_AUSTIN_2025,
   TL_BROHUG_BASS_HOUSE_MIXTAPE_2026,
@@ -3633,6 +3634,23 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/9x22d2k/morten-malaa-mainstage-tomorrowland-winter-france-2026-03-25.html",
     tracklist1001: TL_MORTEN_MALAA_TML_WINTER_MAINSTAGE_2026,
+  },
+  {
+    // Official @antiup. Title is the album; description is the full Mojave
+    // set (70:27). YouTube Music only credits the opener. 1001 page is WE2.
+    video: "https://www.youtube.com/watch?v=cZhNpGcYq_A",
+    primaryArtist: dj("Anti Up", {
+      accent: "#ff006e",
+      homeCity: "United States",
+    }),
+    genre: "Tech House",
+    type: "festival",
+    title: "Anti Up | What Is Life [Live From Coachella 2024]",
+    seriesName: "Coachella",
+    eventName: "Coachella",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2mccm4u1/chris-lake-chris-lorenzo-pres.-anti-up-mojave-coachella-festival-weekend-2-united-states-2024-04-19.html",
+    tracklist1001: TL_ANTI_UP_COACHELLA_WE2_MOJAVE_2024,
   },
   {
     // Official Tchami channel (@TchamiTV) — No Redemption is the duo's b2b
