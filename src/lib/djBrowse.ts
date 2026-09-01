@@ -4,6 +4,8 @@
  * Browse also hides thin / dupe / unresolvable profiles.
  */
 
+import { usableImageUrl } from "./thumbs/usableImage";
+
 export type DjBrowseSignals = {
   isJunk: boolean;
   hasHandle: boolean;
@@ -26,7 +28,7 @@ export function isBrowseReadyDj(d: DjBrowseSignals): boolean {
   if (d.setCount < 1) return false;
   // Empty shells: set row exists but nothing parsed onto the timeline yet.
   if (d.playCount < 1) return false;
-  if (!d.imageUrl?.trim()) return false;
+  if (!usableImageUrl(d.imageUrl)) return false;
   return true;
 }
 

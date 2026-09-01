@@ -28,6 +28,8 @@ export async function getSearchIndex(): Promise<SearchIndexItem[]> {
         title: true,
         genre: true,
         imageUrl: true,
+        playbackUrl: true,
+        sourceUrl: true,
         durationSec: true,
         event: { select: { name: true } },
         series: { select: { name: true } },
@@ -129,6 +131,8 @@ export async function getSearchIndex(): Promise<SearchIndexItem[]> {
         title: s.title,
         trackCount: s._count.plays,
         durationSec: s.durationSec,
+        playbackUrl: s.playbackUrl,
+        sourceUrl: s.sourceUrl,
       })
     ) {
       continue;

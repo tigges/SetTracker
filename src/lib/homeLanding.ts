@@ -12,6 +12,7 @@ import {
 import { collapseHostTwins, identifiedRatio } from "./feedQuality";
 import { detectPlaybackHost } from "./playback";
 import { setDisplayThumb } from "./setBrowse";
+import { usableImageUrl } from "./thumbs/usableImage";
 import { STATUS_ORDER, type IdStatus } from "./status";
 
 export type LandingFace = {
@@ -43,6 +44,7 @@ export type LandingSetFields = {
   sourceName?: string | null;
   seriesName?: string | null;
   playbackUrl?: string | null;
+  sourceUrl?: string | null;
   dominantProvenance?: string | null;
   statusCounts: Partial<Record<IdStatus, number>>;
   venueTier?: "festival" | "club" | "livestream" | "radio" | "other" | null;
@@ -224,6 +226,8 @@ export function pickHeroCollage(opts: {
       primaryDjImageUrl: s.primaryDj?.imageUrl,
       eventImageUrl: s.eventImageUrl,
       primaryDjSlug: s.primaryDj?.slug,
+      playbackUrl: s.playbackUrl,
+      sourceUrl: s.sourceUrl,
     });
     if (cover) {
       faces.push({
@@ -233,17 +237,19 @@ export function pickHeroCollage(opts: {
         href: s.slug ? `/sets/${s.slug}` : undefined,
       });
     }
-    if (s.primaryDj?.imageUrl && s.primaryDj.imageUrl !== cover) {
+    const djArt = usableImageUrl(s.primaryDj?.imageUrl);
+    if (djArt && s.primaryDj && djArt !== cover) {
       faces.push({
-        src: s.primaryDj.imageUrl,
+        src: djArt,
         label: s.primaryDj.name,
         accent: s.primaryDj.accent,
         href: `/djs/${s.primaryDj.slug}`,
       });
     }
-    if (s.eventImageUrl && s.eventSlug && s.eventImageUrl !== cover) {
+    const eventArt = usableImageUrl(s.eventImageUrl);
+    if (eventArt && s.eventSlug && eventArt !== cover) {
       faces.push({
-        src: s.eventImageUrl,
+        src: eventArt,
         label: s.eventName ?? s.eventSlug,
         href: `/events/${s.eventSlug}`,
       });

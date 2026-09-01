@@ -96,6 +96,18 @@ assert.equal(
   ),
   true,
 );
+assert.equal(
+  isHttpsImageUrl(
+    "https://cdn-images.dzcdn.net/images/artist/d8315de10c16736f16b43549fb360448/250x250-000000-80-0-0.jpg",
+  ),
+  false,
+);
+assert.equal(
+  isHttpsImageUrl(
+    "https://i1.sndcdn.com/artworks-iCux6u9UHJRW2S5d-QYhDBg-t500x500.png",
+  ),
+  true,
+);
 
 assert.equal(
   evaluateEntityCompleteRow({
@@ -1339,6 +1351,20 @@ assert.equal(
 }
 
 {
+  const faster = loadEntityCompletePins().find((p) => p.slug === "faster-horses");
+  assert.ok(faster);
+  assert.equal(faster.kind, "dj");
+  assert.equal(
+    faster.imageUrl,
+    "https://i1.sndcdn.com/artworks-iCux6u9UHJRW2S5d-QYhDBg-t500x500.png",
+  );
+  assert.ok(
+    !faster.imageUrl?.includes("d8315de10c16736f16b43549fb360448"),
+    "Deezer silhouette must not stay pinned",
+  );
+}
+
+{
   const bexxie = loadEntityCompletePins().find((p) => p.slug === "bexxie");
   assert.ok(bexxie);
   assert.equal(bexxie.kind, "dj");
@@ -1420,6 +1446,18 @@ assert.equal(
     evidence: "operator paste, Spotify artist oembed",
   }).value,
   "https://image-cdn-fa.spotifycdn.com/image/ab6761610000517490d742bdf4a26e4e6279efac",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "faster-horses",
+    name: "Faster Horses",
+    field: "imageUrl",
+    value:
+      "https://cdn-images.dzcdn.net/images/artist/d8315de10c16736f16b43549fb360448/250x250-000000-80-0-0.jpg",
+    evidence: "deezer artist placeholder",
+  }).drop,
+  "image url not allowed",
 );
 
 // Fields with no Dj column must drop rather than be coerced somewhere else.

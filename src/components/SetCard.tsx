@@ -44,6 +44,8 @@ export function SetCard({
     primaryDjImageUrl: set.primaryDj?.imageUrl,
     eventImageUrl: set.eventImageUrl,
     primaryDjSlug: set.primaryDj?.slug,
+    playbackUrl: set.playbackUrl,
+    sourceUrl: set.sourceUrl,
   });
   const statusHint = setCardStatusHint(set.statusCounts);
   const target = resolvePlaybackTarget(set.playbackUrl, {

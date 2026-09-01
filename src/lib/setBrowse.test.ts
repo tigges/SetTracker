@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import {
+  djDisplayThumb,
   isBrowseReadySet,
   isEmptyOrPreviewSet,
   isListPendingOfficialSet,
@@ -27,6 +28,50 @@ describe("setBrowse", () => {
         primaryDjImageUrl: "https://example.com/dj.jpg",
       }),
       "https://example.com/dj.jpg",
+    );
+  });
+
+  it("skips Deezer silhouettes and uses a YouTube still", () => {
+    const silhouette =
+      "https://cdn-images.dzcdn.net/images/artist/d8315de10c16736f16b43549fb360448/250x250-000000-80-0-0.jpg";
+    assert.equal(
+      setDisplayThumb({
+        imageUrl: silhouette,
+        primaryDjImageUrl: silhouette,
+        playbackUrl: "https://www.youtube.com/watch?v=MfQnbHgdDaQ",
+      }),
+      "https://i.ytimg.com/vi/MfQnbHgdDaQ/hqdefault.jpg",
+    );
+  });
+
+  it("promotes a real set cover onto a silhouette DJ", () => {
+    const silhouette =
+      "https://cdn-images.dzcdn.net/images/artist/d8315de10c16736f16b43549fb360448/250x250-000000-80-0-0.jpg";
+    const clubAre =
+      "https://i1.sndcdn.com/artworks-iCux6u9UHJRW2S5d-QYhDBg-t500x500.png";
+    assert.equal(
+      djDisplayThumb({
+        imageUrl: silhouette,
+        sets: [
+          { imageUrl: silhouette, playbackUrl: "https://youtu.be/MfQnbHgdDaQ" },
+          { imageUrl: clubAre },
+        ],
+      }),
+      clubAre,
+    );
+  });
+
+  it("uses a YouTube still when every set cover is a silhouette", () => {
+    const silhouette =
+      "https://cdn-images.dzcdn.net/images/artist/d8315de10c16736f16b43549fb360448/250x250-000000-80-0-0.jpg";
+    assert.equal(
+      djDisplayThumb({
+        imageUrl: silhouette,
+        sets: [
+          { imageUrl: silhouette, playbackUrl: "https://youtu.be/MfQnbHgdDaQ" },
+        ],
+      }),
+      "https://i.ytimg.com/vi/MfQnbHgdDaQ/hqdefault.jpg",
     );
   });
 

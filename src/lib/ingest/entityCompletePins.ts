@@ -9,6 +9,10 @@ import type { PrismaClient } from "@prisma/client";
 import { normalizeGenre } from "../genre";
 import { isWeakOfficialUrl } from "../officialUrls";
 import { youtubeChannelUrl } from "../social";
+import {
+  isPlaceholderArtistImage,
+  usableImageUrl,
+} from "../thumbs/usableImage";
 import { WISHLIST_DEFAULTS } from "../wishlist";
 import { remapAtomicActHalfSlug, remapAtomicActPin } from "./atomicActs";
 import { evaluateHomeCity } from "./discovery/llmJobs";
@@ -405,8 +409,9 @@ export function nameOverlapsHandle(name: string, value: string): boolean {
 export function isHttpsImageUrl(url: string): boolean {
   if (!/^https:\/\//i.test(url) || /^data:/i.test(url)) return false;
   if (isWeakOfficialUrl(url)) return false;
+  if (isPlaceholderArtistImage(url)) return false;
   return (
-    /yt3\.googleusercontent\.com|i\.ytimg\.com|cloudfront\.net|upload\.wikimedia\.org|commons\.wikimedia\.org|spotifycdn\.com|i\.scdn\.co/i.test(
+    /yt3\.googleusercontent\.com|i\.ytimg\.com|i1\.sndcdn\.com|cloudfront\.net|upload\.wikimedia\.org|commons\.wikimedia\.org|spotifycdn\.com|i\.scdn\.co/i.test(
       url,
     ) || /\.(jpe?g|png|webp|gif|avif)(\?|$)/i.test(url)
   );
@@ -613,6 +618,7 @@ function shouldFill(
 ): boolean {
   const cur = current?.trim();
   if (!cur) return true;
+  if (field === "imageUrl" && !usableImageUrl(cur)) return true;
   if (
     field === "website" &&
     (isWeakOfficialUrl(cur) || isFallbackWebsiteHub(cur))
@@ -692,7 +698,9 @@ export function wishlistDjStubFromPin(
   };
   for (const field of FIELDS) {
     const value = pin[field];
-    if (value) stub[field] = value;
+    if (!value) continue;
+    if (field === "imageUrl" && !usableImageUrl(value)) continue;
+    stub[field] = value;
   }
   return stub;
 }
@@ -734,6 +742,7 @@ export async function applyEntityCompletePins(
       for (const field of FIELDS) {
         const next = pin[field];
         if (!next) continue;
+        if (field === "imageUrl" && !usableImageUrl(next)) continue;
         if (shouldFill(field, row[field as keyof typeof row] as string | null)) {
           data[field] = next;
         }

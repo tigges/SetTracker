@@ -14,6 +14,7 @@ import { ensureDjMagTopDjs } from "./discovery/djmagDjs";
 import { ensureDjMagFestivals } from "./discovery/djmagFestivals";
 import { ensureDiscoveredDjs } from "./discovery/ensureDjs";
 import { applyCuratedDjImages } from "../thumbs/djImages";
+import { promoteDjArtFromSets } from "../thumbs/promoteDjArt";
 import { applyCuratedEventImages, fillEventImages } from "../thumbs/eventImages";
 import { applyCuratedSetImages } from "../thumbs/setImages";
 import { mergeSplitAtomicActs } from "./mergeAtomicActs";
@@ -453,6 +454,22 @@ export async function applyKnownUrlFixes(prisma: PrismaClient): Promise<number> 
   if (entities.filled || entities.created) {
     console.log(
       `[verify-urls] entity complete pins matched=${entities.matched} filled=${entities.filled} created=${entities.created}`,
+    );
+  }
+
+  // Silhouette DJ / set rows → real set cover or YouTube still.
+  try {
+    const promoted = await promoteDjArtFromSets(prisma);
+    n += promoted.djs + promoted.sets;
+    if (promoted.djs || promoted.sets) {
+      console.log(
+        `[verify-urls] promoted art djs=${promoted.djs} sets=${promoted.sets}`,
+      );
+    }
+  } catch (err) {
+    console.warn(
+      "[verify-urls] promote dj art:",
+      err instanceof Error ? err.message : err,
     );
   }
 

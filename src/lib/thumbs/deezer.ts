@@ -3,25 +3,11 @@
  * Used at build/ingest time to resolve artwork URLs for DJs, labels, tracks, sets.
  */
 
+import { usableImageUrl } from "./usableImage";
+
 const UA = "SetRadar/0.1 (+https://setradar.ai; artwork resolver)";
 
-/** Empty / missing Deezer artwork patterns to reject. */
-const BAD_IMAGE_MARKERS = [
-  "/images/artist//",
-  "/images/cover//",
-  "/images/label//",
-  // empty-file MD5 that Deezer sometimes returns
-  "d41d8cd98f00b204e9800998ecf8427e",
-];
-
-export function usableImageUrl(url: string | null | undefined): string | null {
-  if (!url || typeof url !== "string") return null;
-  if (!url.startsWith("https://")) return null;
-  for (const m of BAD_IMAGE_MARKERS) {
-    if (url.includes(m)) return null;
-  }
-  return url;
-}
+export { usableImageUrl };
 
 export function isCoverArtUrl(url: string | null | undefined): boolean {
   return !!url && url.includes("/images/cover/");
@@ -115,10 +101,33 @@ export async function resolveArtistImage(name: string): Promise<string | null> {
     .sort((a, b) => b.score - a.score || b.fans - a.fans);
 
   for (const { row } of ranked) {
-    const img = usableImageUrl(row.picture_medium);
-    if (img) return preferMedium(img);
+    const img = await confirmDeezerArtistImage(row.picture_medium);
+    if (img) return img;
   }
   return null;
+}
+
+/** Drop artist pictures that 302 to the empty-hash silhouette. */
+async function confirmDeezerArtistImage(
+  url: string | null | undefined,
+): Promise<string | null> {
+  const first = usableImageUrl(url);
+  if (!first) return null;
+  if (!isArtistArtUrl(first)) return preferMedium(first);
+  try {
+    const res = await fetch(first, {
+      method: "HEAD",
+      redirect: "follow",
+      headers: { "User-Agent": UA, Accept: "image/*" },
+      signal: AbortSignal.timeout(8_000),
+    });
+    if (!res.ok) return null;
+    const finalUrl = res.url || first;
+    if (!usableImageUrl(finalUrl)) return null;
+    return preferMedium(first);
+  } catch {
+    return preferMedium(first);
+  }
 }
 
 export async function resolveLabelImage(name: string): Promise<string | null> {
