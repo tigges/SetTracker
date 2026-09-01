@@ -391,18 +391,47 @@ export function recentlyEndedEditions(
   });
 }
 
-/** True when any tracked edition is in the post-weekend discovery boost window. */
-export function festivalDropBoostActive(nowMs = Date.now()): boolean {
-  return recentlyEndedEditions(21, nowMs).length > 0;
+/**
+ * On the grounds now, or in the post-close playback dump window.
+ * Burning Man week should poll / rank before the Sunday close.
+ */
+export function editionsInLiveOrDropWindow(
+  withinDays = 21,
+  nowMs = Date.now(),
+): FestivalEditionSeed[] {
+  return FESTIVAL_EDITION_SEEDS.filter((e) => {
+    const start = Date.parse(`${e.startsAt}T00:00:00Z`);
+    const end = Date.parse(`${e.endsAt}T23:59:59Z`);
+    if (!Number.isFinite(start) || !Number.isFinite(end)) return false;
+    return nowMs >= start && nowMs - end <= withinDays * DAY_MS;
+  });
 }
 
-/** True when this event brand has an edition in the drop window. */
+/** True when any curated edition is happening right now. */
+export function festivalWeekActive(nowMs = Date.now()): boolean {
+  return editionCalendar(nowMs).some((e) => e.bucket === "current");
+}
+
+export function currentFestivalEventSlugs(nowMs = Date.now()): Set<string> {
+  return new Set(
+    editionCalendar(nowMs)
+      .filter((e) => e.bucket === "current")
+      .map((e) => e.eventSlug),
+  );
+}
+
+/** True when any tracked edition is in the live or post-weekend discovery window. */
+export function festivalDropBoostActive(nowMs = Date.now()): boolean {
+  return editionsInLiveOrDropWindow(21, nowMs).length > 0;
+}
+
+/** True when this event brand has an edition in the live or drop window. */
 export function eventInDropWindow(
   eventSlug: string,
   withinDays = 21,
   nowMs = Date.now(),
 ): boolean {
-  return recentlyEndedEditions(withinDays, nowMs).some(
+  return editionsInLiveOrDropWindow(withinDays, nowMs).some(
     (e) => e.eventSlug === eventSlug,
   );
 }
@@ -518,10 +547,38 @@ export function matchEditionSeed(
   return [...candidates].sort((a, b) => b.year - a.year)[0] ?? null;
 }
 
-/** Sets whose edition ended recently — for homepage Festival season rail. */
+function editionSeasonContains(
+  s: {
+    eventSlug?: string | null;
+    editionStartsAt?: Date | string | null;
+    editionEndsAt?: Date | string | null;
+  },
+  withinDays: number,
+  nowMs: number,
+): boolean {
+  const end = s.editionEndsAt ? new Date(s.editionEndsAt).getTime() : NaN;
+  const start = s.editionStartsAt
+    ? new Date(s.editionStartsAt).getTime()
+    : Number.NaN;
+  if (Number.isFinite(start) && Number.isFinite(end)) {
+    return nowMs >= start - 2 * DAY_MS && nowMs <= end + withinDays * DAY_MS;
+  }
+  if (Number.isFinite(end)) {
+    const age = nowMs - end;
+    // Last two weeks of the weekend plus the post-close dump, when start is missing.
+    if (age >= -14 * DAY_MS && age <= withinDays * DAY_MS) return true;
+  }
+  if (!s.eventSlug) return false;
+  return editionsInLiveOrDropWindow(withinDays, nowMs).some(
+    (e) => e.eventSlug === s.eventSlug,
+  );
+}
+
+/** Sets whose edition is on now or just ended — homepage Festival season rail. */
 export function isFestivalSeasonSet(
   s: {
     eventSlug?: string | null;
+    editionStartsAt?: Date | string | null;
     editionEndsAt?: Date | string | null;
     publishedAt: Date | string;
     type?: string;
@@ -529,24 +586,19 @@ export function isFestivalSeasonSet(
   withinDays = 21,
   nowMs = Date.now(),
 ): boolean {
-  if (s.editionEndsAt) {
-    const end = new Date(s.editionEndsAt).getTime();
-    if (Number.isFinite(end)) {
-      const age = nowMs - end;
-      const inWindow = age >= -2 * DAY_MS && age <= withinDays * DAY_MS;
-      if (!inWindow) return false;
-      // Don't promote archive uploads remapped onto this edition.
-      return nowMs - new Date(s.publishedAt).getTime() < 45 * DAY_MS;
-    }
+  const publishedAge = nowMs - new Date(s.publishedAt).getTime();
+  if (s.editionEndsAt || s.editionStartsAt) {
+    if (!editionSeasonContains(s, withinDays, nowMs)) return false;
+    // Don't promote archive uploads remapped onto this edition.
+    return publishedAge < 45 * DAY_MS;
   }
   // Fallback without edition: festival-type + known brand + recent publish
-  // in a post-weekend boost window for that brand.
+  // while that brand is on the grounds or in the post-weekend dump.
   if (!s.eventSlug || s.type !== "festival") return false;
-  const boost = recentlyEndedEditions(withinDays, nowMs).some(
-    (e) => e.eventSlug === s.eventSlug,
-  );
-  if (!boost) return false;
-  return nowMs - new Date(s.publishedAt).getTime() < withinDays * DAY_MS;
+  if (!editionsInLiveOrDropWindow(withinDays, nowMs).some((e) => e.eventSlug === s.eventSlug)) {
+    return false;
+  }
+  return publishedAge < withinDays * DAY_MS;
 }
 
 const EVENT_BRAND_LABEL: Record<string, string> = {

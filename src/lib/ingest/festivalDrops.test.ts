@@ -1,11 +1,13 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import {
+  currentFestivalEventSlugs,
   editionCalendar,
   editionGapReport,
   editionLabel,
   eventInDropWindow,
   festivalSourcePollLimit,
+  festivalWeekActive,
   isFestivalSeasonSet,
   matchEditionSeed,
   recentlyEndedEditions,
@@ -88,6 +90,42 @@ describe("festivalDrops", () => {
       ),
       false,
       "old uploads stay out of Festival season even if editionEndsAt is current",
+    );
+  });
+
+  it("treats Burning Man mid-week as festival season and a live drop window", () => {
+    const now = Date.parse("2026-09-01T12:00:00Z");
+    assert.equal(festivalWeekActive(now), true);
+    assert.ok(currentFestivalEventSlugs(now).has("burning-man"));
+    assert.equal(eventInDropWindow("burning-man", 21, now), true);
+    assert.equal(
+      isFestivalSeasonSet(
+        {
+          eventSlug: "burning-man",
+          editionStartsAt: new Date("2026-08-30T00:00:00Z"),
+          editionEndsAt: new Date("2026-09-07T23:59:59Z"),
+          publishedAt: new Date("2026-09-01"),
+          type: "festival",
+        },
+        21,
+        now,
+      ),
+      true,
+    );
+    assert.equal(
+      isFestivalSeasonSet(
+        {
+          eventSlug: "burning-man",
+          editionStartsAt: new Date("2026-08-30T00:00:00Z"),
+          editionEndsAt: new Date("2026-09-07T23:59:59Z"),
+          publishedAt: new Date("2024-09-05"),
+          type: "festival",
+        },
+        21,
+        now,
+      ),
+      false,
+      "2024 Burning Man uploads stay off Festival season during 2026 week",
     );
   });
 

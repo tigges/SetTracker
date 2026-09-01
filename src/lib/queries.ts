@@ -302,6 +302,7 @@ export async function getFeed() {
         editionSlug: s.edition?.slug ?? null,
         editionYear: s.edition?.year ?? null,
         editionLabel: s.edition?.label ?? null,
+        editionStartsAt: s.edition?.startsAt ?? null,
         editionEndsAt: s.edition?.endsAt ?? null,
         seriesName: s.series?.name ?? null,
         primaryDj: primary
@@ -1925,6 +1926,7 @@ export async function getVenueBySlug(slug: string, nowMs = Date.now()) {
         editionSlug: null,
         editionYear: null,
         editionLabel: null,
+        editionStartsAt: null,
         editionEndsAt: null,
         seriesName: null,
         spotlight: ranks.spotlight,

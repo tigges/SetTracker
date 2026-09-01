@@ -92,12 +92,19 @@ export function isPhysicalLive(s: {
 /**
  * Weekly radio from a DJ who is not on the current Top 100.
  * Identified episodes fill Deep catalog after live sets.
+ * During a curated festival week, chart radio is filler too — Burning Man
+ * should not lose the landing to a Top 100 studio show.
  */
-export function isRadioFiller(s: {
-  venueTier?: VenueTier | null;
-  top100Rank?: number | null;
-}): boolean {
-  return s.venueTier === "radio" && s.top100Rank == null;
+export function isRadioFiller(
+  s: {
+    venueTier?: VenueTier | null;
+    top100Rank?: number | null;
+  },
+  opts?: { festivalWeek?: boolean },
+): boolean {
+  if (s.venueTier !== "radio") return false;
+  if (opts?.festivalWeek) return true;
+  return s.top100Rank == null;
 }
 
 /**

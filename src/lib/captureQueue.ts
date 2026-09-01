@@ -54,7 +54,7 @@ export async function getCaptureQueue(
       durationSec: true,
       playbackUrl: true,
       event: { select: { slug: true, kind: true, name: true } },
-      edition: { select: { endsAt: true, year: true } },
+      edition: { select: { startsAt: true, endsAt: true, year: true } },
       artists: {
         where: { isPrimary: true },
         take: 1,
@@ -114,6 +114,7 @@ export async function getCaptureQueue(
       festivalSeason: isFestivalSeasonSet(
         {
           eventSlug: s.event?.slug,
+          editionStartsAt: s.edition?.startsAt ?? null,
           editionEndsAt: s.edition?.endsAt ?? null,
           publishedAt: s.publishedAt,
           type: s.type,

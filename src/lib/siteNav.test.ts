@@ -12,5 +12,13 @@ assert.equal(isPrimaryNavActive("/wishlist", "/wishlist"), true);
 assert.equal(isPrimaryNavActive("/events", "/events"), true);
 assert.equal(isPrimaryNavActive("/events/tomorrowland", "/events"), true);
 assert.equal(isPrimaryNavActive("/events/calendar", "/events"), true);
+assert.equal(
+  isPrimaryNavActive("/events/calendar", "/events/calendar#cal-today"),
+  true,
+);
+assert.equal(
+  isPrimaryNavActive("/events", "/events/calendar#cal-today"),
+  true,
+);
 assert.equal(isPrimaryNavActive("/venues/amnesia", "/events"), true);
 assert.equal(isPrimaryNavActive("/atlas", "/events"), false);

@@ -950,6 +950,11 @@ describe("feedPriority complete → Top 100 → festivals", () => {
   it("treats uncharted radio as a Deep filler, behind live rooms", () => {
     assert.equal(isRadioFiller({ venueTier: "radio", top100Rank: null }), true);
     assert.equal(isRadioFiller({ venueTier: "radio", top100Rank: 11 }), false);
+    assert.equal(
+      isRadioFiller({ venueTier: "radio", top100Rank: 11 }, { festivalWeek: true }),
+      true,
+      "chart radio is filler during a curated festival week",
+    );
     assert.equal(isRadioFiller({ venueTier: "festival", top100Rank: null }), false);
     assert.equal(displayLane({ venueTier: "festival" }), 0);
     assert.equal(displayLane({ venueTier: "radio", top100Rank: 4 }), 2);

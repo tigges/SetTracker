@@ -7,7 +7,9 @@ import {
   isoUTC,
   monthGrid,
   monthTitle,
+  monthSectionId,
   monthsForEditions,
+  partitionCalendarMonths,
 } from "./calendarGrid";
 import {
   calendarPillClass,
@@ -49,6 +51,24 @@ describe("calendarGrid", () => {
     assert.equal(editionsInMonth(eds, 2026, 9).length, 1);
     assert.ok(daysCoveredByEditions(eds).has("2026-09-01"));
     assert.equal(isoUTC(new Date("2026-08-16T12:00:00Z")), "2026-08-16");
+  });
+
+  it("opens the current month first and parks earlier months", () => {
+    const now = Date.parse("2026-09-01T12:00:00Z");
+    const months = monthsForEditions(
+      [
+        { startsAt: "2026-07-30", endsAt: "2026-08-02" },
+        { startsAt: "2026-08-30", endsAt: "2026-09-07" },
+      ],
+      now,
+    );
+    const parts = partitionCalendarMonths(months, now);
+    assert.deepEqual(parts.current, { year: 2026, month: 9 });
+    assert.deepEqual(
+      parts.earlier.map((m) => `${m.year}-${m.month}`),
+      ["2026-7", "2026-8"],
+    );
+    assert.equal(monthSectionId(2026, 9), "cal-2026-09");
   });
 });
 
@@ -126,7 +146,7 @@ describe("calendarLocations", () => {
     assert.equal(locs.length, 3);
     assert.deepEqual(
       locs.map((l) => l.key),
-      ["fest:lollapalooza-2026-chicago", "club:ushuaia-ibiza", "club:unvrs"],
+      ["club:unvrs", "fest:lollapalooza-2026-chicago", "club:ushuaia-ibiza"],
     );
     const unvrs = locs.find((l) => l.kind === "club" && l.eventSlug === "unvrs");
     assert.ok(unvrs && unvrs.kind === "club");

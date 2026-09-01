@@ -1,11 +1,14 @@
 import Link from "next/link";
+import { CalendarJumpToToday } from "@/components/CalendarJumpToToday";
 import { EntityThumb } from "@/components/EntityThumb";
 import {
   CALENDAR_WEEKDAYS,
   editionsInMonth,
   monthGrid,
+  monthSectionId,
   monthTitle,
   monthsForEditions,
+  partitionCalendarMonths,
 } from "@/lib/calendarGrid";
 import {
   calendarPillClass,
@@ -111,6 +114,7 @@ export function FestivalCalendar({
 }) {
   const dated = [...editions, ...nights];
   const months = monthsForEditions(dated, nowMs);
+  const { current, upcoming, earlier } = partitionCalendarMonths(months, nowMs);
   const occurrences = toCalendarOccurrences(editions, nights);
 
   if (dated.length === 0) {
@@ -121,8 +125,137 @@ export function FestivalCalendar({
     );
   }
 
+  const renderMonth = (year: number, month: number) => {
+    const cells = monthGrid(year, month, nowMs);
+    const monthEds = editionsInMonth(editions, year, month);
+    const monthNights = editionsInMonth(nights, year, month);
+    const locations = groupMonthLocations(monthEds, monthNights);
+    const monthOcc = editionsInMonth(occurrences, year, month);
+    return (
+      <section key={`${year}-${month}`} id={monthSectionId(year, month)}>
+        <div className="mb-3 flex items-baseline justify-between gap-3">
+          <h2 className="text-lg font-bold tracking-tight">
+            {monthTitle(year, month)}
+          </h2>
+          <span className="mono text-[12px] text-muted2">
+            {locations.length}
+          </span>
+        </div>
+        <div className="overflow-x-auto">
+          <div
+            className="grid min-w-[36rem] grid-cols-7 overflow-hidden rounded-xl border border-line bg-panel"
+            role="grid"
+            aria-label={monthTitle(year, month)}
+          >
+            {CALENDAR_WEEKDAYS.map((d) => (
+              <div
+                key={d}
+                className="border-b border-line bg-panel2 px-2 py-1.5 text-center text-[11px] font-medium uppercase tracking-[0.08em] text-muted2"
+              >
+                {d}
+              </div>
+            ))}
+            {cells.map((c) => {
+              const hits = dedupeDayPills(occurrencesOnDay(monthOcc, c.iso));
+              return (
+                <div
+                  key={c.iso}
+                  id={c.isToday ? "cal-today" : undefined}
+                  role="gridcell"
+                  className={`min-h-[5.5rem] border-t border-l border-line p-1.5 ${
+                    c.inMonth ? "bg-panel" : "bg-bg/40"
+                  } ${c.isToday ? "scroll-mt-24 ring-1 ring-inset ring-brand/60" : ""}`}
+                >
+                  <span
+                    className={`mono text-[11px] ${
+                      c.isToday
+                        ? "font-semibold text-brand"
+                        : c.inMonth
+                          ? "text-muted"
+                          : "text-muted2"
+                    }`}
+                  >
+                    {c.day}
+                  </span>
+                  <ul className="mt-1 space-y-0.5">
+                    {hits.slice(0, 2).map((e) => (
+                      <li key={e.groupKey}>
+                        <Link
+                          href={e.href}
+                          className={`block truncate rounded px-1 py-0.5 text-[10px] font-medium leading-tight ${calendarPillClass(e.accent, e.bucket)}`}
+                          title={`${e.tooltip}${BUCKET_COPY[e.bucket] ? ` · ${BUCKET_COPY[e.bucket]}` : ""}`}
+                        >
+                          {e.name}
+                        </Link>
+                      </li>
+                    ))}
+                    {hits.length > 2 ? (
+                      <li className="px-1 text-[10px] text-muted2">
+                        +{hits.length - 2}
+                      </li>
+                    ) : null}
+                  </ul>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+        {locations.length > 0 ? (
+          <ul className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
+            {locations.map((loc) => {
+              if (loc.kind === "festival") {
+                const e = loc.edition;
+                const bits = [
+                  dateRange(e.startsAt, e.endsAt),
+                  e.label,
+                  BUCKET_COPY[e.bucket] ?? e.bucket,
+                ].filter(Boolean);
+                return (
+                  <PlaceTeaser
+                    key={loc.key}
+                    href={`/events/${e.eventSlug}`}
+                    name={e.name}
+                    imageUrl={e.imageUrl}
+                    accent="var(--amber)"
+                    meta={bits.join(" · ")}
+                    playbacks={setCounts[e.eventSlug] ?? 0}
+                  />
+                );
+              }
+
+              const next = nextClubNight(loc.nights);
+              const bits = [
+                dateRange(loc.startsAt, loc.endsAt),
+                BUCKET_COPY[loc.bucket] ?? loc.bucket,
+                `${loc.nights.length} ${loc.nights.length === 1 ? "night" : "nights"}`,
+              ];
+              return (
+                <PlaceTeaser
+                  key={loc.key}
+                  href={`/events/${loc.eventSlug}`}
+                  name={loc.name}
+                  imageUrl={loc.imageUrl}
+                  accent="var(--teal)"
+                  meta={bits.join(" · ")}
+                  playbacks={setCounts[loc.eventSlug] ?? 0}
+                  next={
+                    next &&
+                    (next.bucket === "current" || next.bucket === "upcoming")
+                      ? { startsAt: next.startsAt, title: next.title }
+                      : null
+                  }
+                />
+              );
+            })}
+          </ul>
+        ) : null}
+      </section>
+    );
+  };
+
   return (
     <div className="space-y-10">
+      <CalendarJumpToToday />
       <p className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[10px] uppercase tracking-[0.12em] text-muted2">
         <span className="inline-flex items-center gap-1.5">
           <i className="inline-block h-2 w-2 rounded-full bg-amber" />
@@ -136,133 +269,30 @@ export function FestivalCalendar({
           <i className="inline-block h-2 w-2 rounded-full ring-1 ring-inset ring-brand" />
           On now
         </span>
+        <a
+          href="#cal-today"
+          className="ml-auto normal-case tracking-normal text-brand hover:text-brandstrong"
+        >
+          Today
+        </a>
       </p>
-      {months.map(({ year, month }) => {
-        const cells = monthGrid(year, month, nowMs);
-        const monthEds = editionsInMonth(editions, year, month);
-        const monthNights = editionsInMonth(nights, year, month);
-        const locations = groupMonthLocations(monthEds, monthNights);
-        const monthOcc = editionsInMonth(occurrences, year, month);
-        return (
-          <section key={`${year}-${month}`}>
-            <div className="mb-3 flex items-baseline justify-between gap-3">
-              <h2 className="text-lg font-bold tracking-tight">
-                {monthTitle(year, month)}
-              </h2>
-              <span className="mono text-[12px] text-muted2">
-                {locations.length}
-              </span>
-            </div>
-            <div className="overflow-x-auto">
-              <div
-                className="grid min-w-[36rem] grid-cols-7 overflow-hidden rounded-xl border border-line bg-panel"
-                role="grid"
-                aria-label={monthTitle(year, month)}
-              >
-                {CALENDAR_WEEKDAYS.map((d) => (
-                  <div
-                    key={d}
-                    className="border-b border-line bg-panel2 px-2 py-1.5 text-center text-[11px] font-medium uppercase tracking-[0.08em] text-muted2"
-                  >
-                    {d}
-                  </div>
-                ))}
-                {cells.map((c) => {
-                  const hits = dedupeDayPills(occurrencesOnDay(monthOcc, c.iso));
-                  return (
-                    <div
-                      key={c.iso}
-                      role="gridcell"
-                      className={`min-h-[5.5rem] border-t border-l border-line p-1.5 ${
-                        c.inMonth ? "bg-panel" : "bg-bg/40"
-                      } ${c.isToday ? "ring-1 ring-inset ring-brand/60" : ""}`}
-                    >
-                      <span
-                        className={`mono text-[11px] ${
-                          c.isToday
-                            ? "font-semibold text-brand"
-                            : c.inMonth
-                              ? "text-muted"
-                              : "text-muted2"
-                        }`}
-                      >
-                        {c.day}
-                      </span>
-                      <ul className="mt-1 space-y-0.5">
-                        {hits.slice(0, 2).map((e) => (
-                          <li key={e.groupKey}>
-                            <Link
-                              href={e.href}
-                              className={`block truncate rounded px-1 py-0.5 text-[10px] font-medium leading-tight ${calendarPillClass(e.accent, e.bucket)}`}
-                              title={`${e.tooltip}${BUCKET_COPY[e.bucket] ? ` · ${BUCKET_COPY[e.bucket]}` : ""}`}
-                            >
-                              {e.name}
-                            </Link>
-                          </li>
-                        ))}
-                        {hits.length > 2 ? (
-                          <li className="px-1 text-[10px] text-muted2">
-                            +{hits.length - 2}
-                          </li>
-                        ) : null}
-                      </ul>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-            {locations.length > 0 ? (
-              <ul className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
-                {locations.map((loc) => {
-                  if (loc.kind === "festival") {
-                    const e = loc.edition;
-                    const bits = [
-                      dateRange(e.startsAt, e.endsAt),
-                      e.label,
-                      BUCKET_COPY[e.bucket] ?? e.bucket,
-                    ].filter(Boolean);
-                    return (
-                      <PlaceTeaser
-                        key={loc.key}
-                        href={`/events/${e.eventSlug}`}
-                        name={e.name}
-                        imageUrl={e.imageUrl}
-                        accent="var(--amber)"
-                        meta={bits.join(" · ")}
-                        playbacks={setCounts[e.eventSlug] ?? 0}
-                      />
-                    );
-                  }
-
-                  const next = nextClubNight(loc.nights);
-                  const bits = [
-                    dateRange(loc.startsAt, loc.endsAt),
-                    BUCKET_COPY[loc.bucket] ?? loc.bucket,
-                    `${loc.nights.length} ${loc.nights.length === 1 ? "night" : "nights"}`,
-                  ];
-                  return (
-                    <PlaceTeaser
-                      key={loc.key}
-                      href={`/events/${loc.eventSlug}`}
-                      name={loc.name}
-                      imageUrl={loc.imageUrl}
-                        accent="var(--teal)"
-                      meta={bits.join(" · ")}
-                      playbacks={setCounts[loc.eventSlug] ?? 0}
-                      next={
-                        next &&
-                        (next.bucket === "current" || next.bucket === "upcoming")
-                          ? { startsAt: next.startsAt, title: next.title }
-                          : null
-                      }
-                    />
-                  );
-                })}
-              </ul>
-            ) : null}
-          </section>
-        );
-      })}
+      {current ? renderMonth(current.year, current.month) : null}
+      {upcoming.map(({ year, month }) => renderMonth(year, month))}
+      {earlier.length > 0 ? (
+        <details className="rounded-xl border border-line bg-panel/40 px-4 py-3">
+          <summary className="cursor-pointer text-[13px] font-medium text-muted hover:text-ink">
+            Earlier this season
+            <span className="mono ml-2 text-[12px] text-muted2">
+              {earlier
+                .map(({ year, month }) => monthTitle(year, month))
+                .join(" · ")}
+            </span>
+          </summary>
+          <div className="mt-6 space-y-10">
+            {earlier.map(({ year, month }) => renderMonth(year, month))}
+          </div>
+        </details>
+      ) : null}
     </div>
   );
 }
