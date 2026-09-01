@@ -871,6 +871,9 @@ export const ARTIST_ROSTER_CURATED: ArtistRosterEntry[] = [
     genre: "Afro House",
     accent: "#2a9d8f",
     homeCity: "Minas Gerais, Brazil",
+    // No official domain — Linktree is the fill-null fallback (no artist
+    // site on file).
+    website: "https://linktr.ee/greg99music",
     youtube: { handle: "@greg99music", status: "ok" },
     soundcloud: { permalink: "greg99music", status: "ok" },
     socials: [

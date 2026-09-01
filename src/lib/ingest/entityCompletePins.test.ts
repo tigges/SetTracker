@@ -883,6 +883,17 @@ assert.equal(
     kind: "dj",
     slug: "greg-99",
     name: "GREG 99",
+    field: "website",
+    value: "https://linktr.ee/greg99music",
+    evidence: "operator paste — no official domain on file",
+  }).value,
+  "https://linktr.ee/greg99music",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "greg-99",
+    name: "GREG 99",
     field: "spotify",
     value: "https://open.spotify.com/artist/68ocQOFVB9wvLiC1C1WjYp",
     evidence: "operator paste",
@@ -900,7 +911,7 @@ assert.equal(
   assert.equal(greg.homeCity, "Minas Gerais, Brazil");
   assert.equal(greg.genre, "Afro House");
   assert.ok(greg.bio?.includes("Still My Baby"));
-  assert.equal(greg.website, undefined);
+  assert.equal(greg.website, "https://linktr.ee/greg99music");
   assert.equal(greg.imageUrl, undefined);
 }
 
