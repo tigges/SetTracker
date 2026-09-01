@@ -13,6 +13,7 @@ import {
 import { ARTIST_ROSTER } from "../roster";
 import type { RawArtist } from "../types";
 import { slugify } from "../types";
+import { boostedSoundcloudArtistLimit } from "../wishlistPollBoost";
 
 export type SoundCloudShow = {
   /** SoundCloud permalink (soundcloud.com/{permalink}) */
@@ -333,7 +334,11 @@ export function rosterSoundcloudShows(): SoundCloudShow[] {
       type: "soundcloud",
       minDurationSec: 20 * 60,
       titleMatch: /\b(live|mix|set|b2b|radio|session|heldeep|open\s*to\s*close)\b/i,
-      limit: a.priority === "high" ? SC_DEEP_LIMIT : Math.min(SC_DEEP_LIMIT, 40),
+      limit: boostedSoundcloudArtistLimit({
+        priority: a.priority,
+        name: a.name,
+        deepLimit: SC_DEEP_LIMIT,
+      }),
     });
   }
   return out;

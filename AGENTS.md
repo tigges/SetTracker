@@ -150,6 +150,17 @@ unless asked. Never write Relive for HARD / Insomniac / Nameless / Ultra.
   the one the 1001 page is already on file under. Both `/stats` lists already
   drop wired slugs (`buildCaptureQueueFromNeeds` and the tracklist workbench),
   so a re-paste is a backlog artefact, not the queue asking again.
+- **Wishlist completeness:** `/wishlist` ranks gaps (no page / no set /
+  no thumb / no handle / no IDs) and offers Search 1001 + official YT/SC
+  when a row needs work. File-side map: `npm run wishlist:audit` (roster
+  YT/SC + entity pin). Do **not** bump `scoreCaptureNeed` for wishlist
+  slugs — festival-season / Top 100 scoring stays as-is. Mapping more
+  sets: official YT/SC on `ARTIST_ROSTER_CURATED` (next curated ingest),
+  then Capture 1001 for clocks (`npm run check:capture` first), then
+  Suggest ID / `resolutions.json`. Never invent 1001 / SC / YT set URLs.
+  One-run deeper poll for default wishlist roster names only:
+  `WISHLIST_POLL_BOOST=1` (YT high limit + SC deep limit). Default
+  ingest depth is unchanged.
 - **Fan uploads:** `FINGERPRINT_ONLY_WATCH` rows are Identify-only and must
   never be `sourceUrl` / `playbackUrl` / a `TRACKLIST_1001_BY_SOURCE_SLUG` key.
   QC now enforces both directions. The guard only sees videos already listed

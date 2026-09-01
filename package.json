@@ -48,6 +48,7 @@
     "probe:beatport-heads": "tsx scripts/probe-beatport-heads.ts",
     "build:next-captures": "tsx scripts/build-next-captures.ts",
     "check:capture": "tsx scripts/check-capture.ts",
+    "wishlist:audit": "tsx scripts/wishlist-audit.ts",
     "watch:held-relives": "tsx scripts/watch-held-relives.ts",
     "preview:acr-queue": "tsx scripts/preview-acr-queue.ts",
     "backfill:set-events": "tsx scripts/backfill-set-events.ts",
