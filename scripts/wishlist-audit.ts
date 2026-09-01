@@ -3,8 +3,6 @@
  *   npm run wishlist:audit
  *
  * No network, no DB. Does not change Capture / Identify ranking.
- * Tujamo stays off the roster until an official artist-channel pin exists
- * (Parookaville 2026 is already a curated YT + 1001 seed).
  */
 import { wishlistFileCoverage } from "../src/lib/wishlistCoverage";
 

@@ -1252,6 +1252,10 @@ export const KNOWN_HANDLES: Record<string, HandleHint> = {
   toyzz: {
     soundcloudPermalink: "toyzzx",
   },
+  tujamo: {
+    youtubeHandle: "@Tujamo",
+    soundcloudPermalink: "tujamo",
+  },
   vltra: {
     youtubeHandle: "@vltramusic",
     soundcloudPermalink: "vltramusic1719",

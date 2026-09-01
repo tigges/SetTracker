@@ -33,15 +33,17 @@ assert.ok(tchami.gaps.includes("no-roster-soundcloud"));
 
 const tujamo = bySlug.get("tujamo");
 assert.ok(tujamo);
-assert.equal(tujamo.roster, false);
-assert.ok(tujamo.gaps.includes("no-roster"));
-assert.ok(tujamo.gaps.includes("no-entity-pin"));
+assert.equal(tujamo.roster, true);
+assert.equal(tujamo.youtube, "@Tujamo");
+assert.equal(tujamo.soundcloud, "tujamo");
+assert.equal(tujamo.pin, true);
+assert.ok(tujamo.gaps.includes("no-pin-thumb"));
 
 const missingRoster = rows.filter((r) => r.gaps.includes("no-roster"));
 assert.deepEqual(
   missingRoster.map((r) => r.slug),
-  ["tujamo"],
-  "only Tujamo stays off the roster until an official artist channel is pinned",
+  [],
+  "every wishlist default has a roster row after the Tujamo About pin",
 );
 
 console.log("wishlistCoverage.test.ts ok");

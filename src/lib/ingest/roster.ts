@@ -937,6 +937,23 @@ export const ARTIST_ROSTER_CURATED: ArtistRosterEntry[] = [
     priority: "normal",
   },
   {
+    // Operator paste 2026-09-01: YT About @Tujamo + SC/IG tujamo.
+    // anna-agency.nl is booking; songkick is not the artist site.
+    name: "Tujamo",
+    genre: "Big Room",
+    accent: "#f4a261",
+    homeCity: "Germany",
+    youtube: { handle: "@Tujamo", status: "ok" },
+    soundcloud: { permalink: "tujamo", status: "ok" },
+    socials: [
+      "https://www.youtube.com/@Tujamo",
+      "https://soundcloud.com/tujamo",
+      "https://instagram.com/tujamo",
+      "https://open.spotify.com/artist/2vVNxGBvKRQMWwI5c8KmYh",
+    ],
+    priority: "normal",
+  },
+  {
     name: "Hannah Wants",
     genre: "Tech House",
     accent: "#ff4d8d",
