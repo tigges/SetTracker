@@ -85,6 +85,17 @@ assert.equal(
   ),
   true,
 );
+assert.equal(nameOverlapsHandle("Bexxie", "https://bexxiemusic.com/"), true);
+assert.equal(
+  nameOverlapsHandle("Bexxie", "https://www.instagram.com/bexxiemusic/"),
+  true,
+);
+assert.equal(
+  isHttpsImageUrl(
+    "https://bexxiemusic.com/cdn/shop/files/Bexxie---Exchange---Los-Angeles_-CA---15-November-2024---Photos-by-Alex-Cole-_alexcxle-7-shopify-banner.jpg?v=1735264425",
+  ),
+  true,
+);
 
 assert.equal(
   evaluateEntityCompleteRow({
@@ -1326,6 +1337,39 @@ assert.equal(
   assert.ok(brohug.bio?.includes("Stockholm"));
   assert.equal(brohug.imageUrl, undefined);
 }
+
+{
+  const bexxie = loadEntityCompletePins().find((p) => p.slug === "bexxie");
+  assert.ok(bexxie);
+  assert.equal(bexxie.kind, "dj");
+  assert.equal(bexxie.website, "https://bexxiemusic.com");
+  assert.equal(bexxie.instagram, "https://instagram.com/bexxiemusic");
+  assert.equal(bexxie.youtube, "https://www.youtube.com/@bexxiemusic");
+  assert.match(bexxie.imageUrl ?? "", /bexxiemusic\.com\/cdn\/shop\/files\/Bexxie/);
+}
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "bexxie",
+    name: "Bexxie",
+    field: "website",
+    value: "https://bexxiemusic.com/",
+    evidence: "operator paste, official site",
+  }).value,
+  "https://bexxiemusic.com",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "bexxie",
+    name: "Bexxie",
+    field: "imageUrl",
+    value:
+      "https://bexxiemusic.com/cdn/shop/files/Bexxie---Exchange---Los-Angeles_-CA---15-November-2024---Photos-by-Alex-Cole-_alexcxle-7-shopify-banner.jpg?v=1735264425",
+    evidence: "operator paste, official homepage hero",
+  }).field,
+  "imageUrl",
+);
 
 {
   const bdk = loadEntityCompletePins().find((p) => p.slug === "bdk");

@@ -17,6 +17,9 @@ export const KNOWN_DJ_IMAGES: Record<string, string> = {
   // Spotify artist portrait (oembed from open.spotify.com/artist/3YiM6gLNY4UzJPcsnJBWQJ).
   // Deezer "Bdk" 4574796 is a different act (BDK RIDERS graphic).
   bdk: "/artists/bdk.jpg",
+  // Homepage hero on bexxiemusic.com (Exchange LA, Nov 2024). Deezer is a
+  // blank silhouette placeholder.
+  bexxie: "/artists/bexxie.jpg",
 };
 
 /**
