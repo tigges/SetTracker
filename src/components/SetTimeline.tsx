@@ -34,7 +34,12 @@ import { playablePlaybackUrl } from "@/lib/playback";
 import { EDIT_KIND_LABEL, editKind } from "@/lib/trackMeta";
 import { useSetListen, useSetSeek } from "@/components/SetListen";
 import { nearestPlayByCue } from "@/lib/setCue";
-import { cueIndexAtRatio, playSpans, stripIsDense } from "@/lib/setStrip";
+import {
+  cueIndexAtRatio,
+  playSpans,
+  setgraphVisible,
+  stripIsDense,
+} from "@/lib/setStrip";
 
 const DENSITY_KEY = "setradar.tracklistDensity";
 const densityListeners = new Set<() => void>();
@@ -130,7 +135,8 @@ export function SetTimeline({
       ? (nearestPlayByCue(plays, followSec)?.id ?? null)
       : null;
   const activeId = cuedPlayId ?? pickedId;
-  const showStrip = nowSec != null;
+  const showStrip = setgraphVisible(plays.length);
+  const followingClock = nowSec != null;
 
   useEffect(() => {
     if (!cuedPlayId || nowSec != null) return;
@@ -171,14 +177,18 @@ export function SetTimeline({
 
   return (
     <div className="mt-4 space-y-4 sm:mt-6 sm:space-y-6">
-      {/* Strip is a now-playing view during SoundCloud playback, not a second cue picker. */}
+      {/* Mix map is always on when cues exist. Clock follow is extra, not a gate. */}
       {showStrip ? (
       <div className="card min-w-0 overflow-x-clip p-3 sm:p-4">
         <div className="mb-2 flex items-center justify-between gap-3 sm:mb-3">
           <div className="min-w-0">
-            <span className="eyebrow">Now playing</span>
+            <span className="eyebrow">
+              {followingClock ? "Now playing" : "Setgraph"}
+            </span>
             <p className="mt-1 text-[11px] text-muted2">
-              Follows the playback clock
+              {followingClock
+                ? "Follows the playback clock"
+                : "Tap a segment or row to play from that cue"}
             </p>
           </div>
           <div className="flex items-center gap-3 text-[12px] text-muted2 sm:ml-auto">

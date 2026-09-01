@@ -34,3 +34,11 @@ export function cueIndexAtRatio(ratio: number, spans: number[]): number {
 export function stripIsDense(cueCount: number): boolean {
   return cueCount > 40;
 }
+
+/**
+ * Mix map for the set page. Show whenever published cues exist.
+ * Playback clock (`nowSec`) follows the playhead — it does not gate the strip.
+ */
+export function setgraphVisible(playCount: number): boolean {
+  return playCount > 0;
+}

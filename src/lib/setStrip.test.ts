@@ -1,5 +1,10 @@
 import assert from "node:assert/strict";
-import { cueIndexAtRatio, playSpans, stripIsDense } from "./setStrip";
+import {
+  cueIndexAtRatio,
+  playSpans,
+  setgraphVisible,
+  stripIsDense,
+} from "./setStrip";
 
 const spans = playSpans([0, 10, 30], 60);
 assert.deepEqual(spans, [10, 20, 30]);
@@ -23,3 +28,7 @@ assert.equal(stripIsDense(22), false);
 assert.equal(stripIsDense(40), false);
 assert.equal(stripIsDense(63), true);
 assert.equal(stripIsDense(74), true);
+
+assert.equal(setgraphVisible(0), false);
+assert.equal(setgraphVisible(1), true);
+assert.equal(setgraphVisible(11), true);
