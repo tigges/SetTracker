@@ -35,7 +35,6 @@ export const WISHLIST_DEFAULTS: WishlistEntry[] = [
   { slug: "mau-p", name: "Mau P" },
   { slug: "cid", name: "CID" },
   { slug: "greg-99", name: "GREG 99" },
-  { slug: "lao", name: "Lao" },
   { slug: "anti-up", name: "Anti Up" },
   { slug: "chapter-verse", name: "Chapter & Verse" },
   { slug: "ac-slater", name: "AC Slater" },
