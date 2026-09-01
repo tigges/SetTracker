@@ -191,8 +191,13 @@ export function matchHeldRelives(
       if (!venue.test(e.title)) return false;
       if (h.alsoMatch && !h.alsoMatch.test(e.title)) return false;
       if (wantWe) {
+        // A held WE1/WE2 name must match an explicit same-weekend title —
+        // an edition-less title (e.g. a Tomorrowland Winter upload) also
+        // passes the bare /tomorrowland/i venue check but is a different
+        // performance, so require the token rather than merely not
+        // disagreeing with it.
         const got = reliveEditionToken(e.title);
-        if (got && got !== `tml-we${wantWe}`) return false;
+        if (got !== `tml-we${wantWe}`) return false;
       }
       return true;
     });

@@ -182,6 +182,7 @@ import {
   TL_ERIC_PRYDZ_EPIC_RADIO_025_2026,
   TL_HONEY_DIJON_THE_LOOP_DEKMANTEL_NETHERLANDS_2025,
   TL_VINAI_S2O_SONGKRAN_THAILAND_2023,
+  TL_MORTEN_MALAA_TML_WINTER_MAINSTAGE_2026,
 } from "../tracklists1001/seeds";
 import type { RawArtist } from "../types";
 import { slugify } from "../types";
@@ -3611,6 +3612,24 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/1w51jd7t/brandon-desert-valley-parookaville-germany-2024-07-28.html",
     tracklist1001: TL_BRANDON_DESERT_VALLEY_PAROOKAVILLE_GERMANY_2024,
+  },
+  {
+    // Tomorrowland official — Mainstage, Tomorrowland Winter France 2026.
+    // oEmbed @tomorrowland, title "MORTEN B2B Malaa | Tomorrowland Winter 2026".
+    // Distinct from held Crystal Garden WE1 2026-07-18 (no official playback).
+    video: "https://www.youtube.com/watch?v=vjI-Oc_pgag",
+    primaryArtist: dj("MORTEN", {
+      accent: "#4361ee",
+      homeCity: "Aarhus, Denmark",
+    }),
+    genre: "House",
+    type: "festival",
+    title: "MORTEN B2B Malaa | Tomorrowland Winter 2026",
+    seriesName: "Tomorrowland",
+    eventName: "Tomorrowland Winter",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/9x22d2k/morten-malaa-mainstage-tomorrowland-winter-france-2026-03-25.html",
+    tracklist1001: TL_MORTEN_MALAA_TML_WINTER_MAINSTAGE_2026,
   },
 ];
 

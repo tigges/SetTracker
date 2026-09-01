@@ -125,5 +125,14 @@ const fakeUnavailable = lookupCapture("yt-unavailable_atm", shippedArchive);
 assert.equal(fakeUnavailable.alreadyOnFile, false);
 assert.equal(fakeUnavailable.wiredCues, null);
 
+// MORTEN & Malaa TML Winter Mainstage — genuinely wired official YT.
+const mortenMalaaWinter = lookupCapture(
+  "https://youtu.be/vjI-Oc_pgag",
+  shippedArchive,
+);
+assert.equal(mortenMalaaWinter.slug, "yt-vjI-Oc_pgag");
+assert.equal(mortenMalaaWinter.alreadyOnFile, true);
+assert.equal(mortenMalaaWinter.wiredCues, 28);
+
 void TRACKLIST_1001_BY_SOURCE_SLUG;
 console.log("ingest/captureLookup.test.ts ok");

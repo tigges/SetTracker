@@ -168,3 +168,50 @@ export const TL_MORTEN_MALAA_TML_WE1_CRYSTAL_2026: FingerprintSeedRow[] = [
   { at: "1:22:20", artist: "DJ Snake & Tchami & Malaa & MERCER", title: "Made In France (Wax Motif Remix)" },
   { at: "1:26:45", artist: "MORTEN & Malaa", title: "Shock The System" },
 ];
+
+/**
+ * MORTEN & Malaa @ Mainstage, Tomorrowland Winter, France 2026-03-25
+ * https://www.1001tracklists.com/tracklist/9x22d2k/morten-malaa-mainstage-tomorrowland-winter-france-2026-03-25.html
+ * Official YT: https://youtu.be/vjI-Oc_pgag — oEmbed 2026-09-01: channel
+ * "Tomorrowland" (@tomorrowland), title "MORTEN B2B Malaa | Tomorrowland
+ * Winter 2026".
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-vjI-Oc_pgag"]
+ *   = TL_MORTEN_MALAA_TML_WINTER_MAINSTAGE_2026
+ * Overlay name TL_MORTEN_Malaa_Mainstage_… is not a valid identifier.
+ * No SoundCloud in the paste — do not invent an SC slug.
+ * Distinct from the held Crystal Garden WE1 2026-07-18 seed
+ * (TL_MORTEN_MALAA_TML_WE1_CRYSTAL_2026, no official playback).
+ * Mashup-then-component clusters (Alive Again vs. Save The World / FE!N vs.
+ * Night In Detroit) stay as captured.
+ * Captured 2026-09-01 — provenance 1001tl.
+ */
+export const TL_MORTEN_MALAA_TML_WINTER_MAINSTAGE_2026: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "MORTEN & Malaa", title: "Shock The System" },
+  { at: "4:20", artist: "Congorock ft. Mr. Lexx", title: "Babylon (David Guetta & MARTEN HØRGER pres. Men Machine & KENZ Rework)" },
+  { at: "7:20", artist: "Tchami & Malaa & MAKJ", title: "N9" },
+  { at: "11:04", artist: "MORTEN & David Guetta ft. Tinie Tempah", title: "London" },
+  { at: "13:25", artist: "Gigi D'Agostino", title: "Bla Bla Bla (HEVOLVE Edit)" },
+  { at: "16:30", artist: "MORTEN & Prophecy", title: "Suelta" },
+  { at: "18:30", artist: "MORTEN & David Guetta", title: "Lucky" },
+  { at: "21:30", artist: "Corey James & MORGANJ & Tyoz", title: "Jungle" },
+  { at: "24:50", artist: "Maesic", title: "Technologic" },
+  { at: "27:20", artist: "David Guetta & MORTEN & Roland Clark vs. Swedish House Mafia & John Martin", title: "Alive Again vs. Save The World (JP Candela Edit)" },
+  { at: "28:06", artist: "Swedish House Mafia ft. John Martin", title: "Save The World" },
+  { at: "28:52", artist: "David Guetta & MORTEN & Roland Clark", title: "Alive Again" },
+  { at: "29:38", artist: "A$AP Ferg", title: "Plain Jane" },
+  { at: "30:24", artist: "Calvin Harris ft. Kelis", title: "Bounce" },
+  { at: "31:10", artist: "Travis Scott & Playboi Carti vs. MORTEN & David Guetta & Fedde Le Grand", title: "FE!N vs. Night In Detroit (DJs From Mars Bootleg)" },
+  { at: "32:03", artist: "Travis Scott ft. Playboi Carti", title: "FE!N" },
+  { at: "32:57", artist: "MORTEN & David Guetta ft. Fedde Le Grand", title: "Night In Detroit" },
+  { at: "33:50", artist: "TH;EN & SLVR", title: "Gangs" },
+  { at: "35:05", artist: "MORTEN & ARTBAT", title: "Culture" },
+  { at: "37:35", artist: "SLVR", title: "Music 4 Ur Body" },
+  { at: "41:15", artist: "Raffi Habel & Artichokes", title: "Bring The Beat Back" },
+  { at: "44:00", artist: "Matisse & Sadko & Vion Konger ft. Scrufizzer", title: "Pull Up" },
+  { at: "46:33", artist: "Vintage Culture", title: "Do You" },
+  { at: "49:40", artist: "DJ Snake & Tchami & Malaa & MERCER", title: "Made In France (Wax Motif Remix)" },
+  { at: "51:50", artist: "Armin van Buuren & JOA", title: "Heavy" },
+  { at: "55:35", artist: "Chris Lorenzo", title: "Appetite" },
+  { at: "56:18", artist: "Malaa", title: "Notorious" },
+  { at: "57:00", artist: "David Guetta & MORTEN ft. Trippie Redd", title: "Locked In" },
+];
