@@ -134,5 +134,12 @@ assert.equal(mortenMalaaWinter.slug, "yt-vjI-Oc_pgag");
 assert.equal(mortenMalaaWinter.alreadyOnFile, true);
 assert.equal(mortenMalaaWinter.wiredCues, 28);
 
+// Tchami & Malaa EDC LV circuitGROUNDS — official YT wired; fan hearthis
+// archive from the same paste is not a resolvable host and stays unwired.
+const tchamiMalaa = lookupCapture("https://youtu.be/k9pYsuLTL2o", shippedArchive);
+assert.equal(tchamiMalaa.slug, "yt-k9pYsuLTL2o");
+assert.equal(tchamiMalaa.alreadyOnFile, true);
+assert.equal(tchamiMalaa.wiredCues, 35);
+
 void TRACKLIST_1001_BY_SOURCE_SLUG;
 console.log("ingest/captureLookup.test.ts ok");

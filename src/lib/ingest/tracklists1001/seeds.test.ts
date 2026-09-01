@@ -223,6 +223,7 @@ import {
   TL_ANTI_UP_COACHELLA_WE2_MOJAVE_2024,
   TL_MORTEN_MALAA_TML_WE1_CRYSTAL_2026,
   TL_MORTEN_MALAA_TML_WINTER_MAINSTAGE_2026,
+  TL_TCHAMI_MALAA_EDC_LV_CIRCUITGROUNDS_2025,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
@@ -6359,6 +6360,36 @@ for (let i = 1; i < mortenMalaaWinter.length; i++) {
     (mortenMalaaWinter[i]?.timestamp ?? 0) >
       (mortenMalaaWinter[i - 1]?.timestamp ?? 0),
     `MORTEN & Malaa TML Winter Mainstage clocks must increase at index ${i}`,
+  );
+}
+
+// Tchami & Malaa @ circuitGROUNDS, EDC Las Vegas 2025-05-17 — wired, official
+// Tchami YT. The 35 paste rows repeat "When The Beat Bang" back-to-back
+// (14:15 / 15:55); fingerprintRowsToPlays collapses adjacent same-artist
+// same-title cues, so the wired play count is 34, not 35.
+assertSeedClocks(TL_TCHAMI_MALAA_EDC_LV_CIRCUITGROUNDS_2025);
+assert.equal(TL_TCHAMI_MALAA_EDC_LV_CIRCUITGROUNDS_2025.length, 35);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-k9pYsuLTL2o"],
+  TL_TCHAMI_MALAA_EDC_LV_CIRCUITGROUNDS_2025,
+);
+assert.equal(isWiredTracklistSlug("yt-k9pYsuLTL2o"), true);
+const tchamiMalaa = tracklist1001RowsToPlays(
+  TL_TCHAMI_MALAA_EDC_LV_CIRCUITGROUNDS_2025,
+);
+assert.equal(tchamiMalaa.length, 34);
+assert.equal(tchamiMalaa[0]?.provenance, "1001tl");
+assert.equal(tchamiMalaa[0]?.timestamp, 0);
+assert.equal(tchamiMalaa[0]?.trackTitle, "RUSH");
+assert.equal(tchamiMalaa[7]?.timestamp, 14 * 60 + 15);
+assert.equal(tchamiMalaa[7]?.trackTitle, "When The Beat Bang");
+assert.equal(tchamiMalaa[8]?.trackTitle, "Reset");
+assert.equal(tchamiMalaa[33]?.trackTitle, "A Prayer (Drinks On Me Remix)");
+assert.equal(tchamiMalaa[33]?.timestamp, 59 * 60 + 30);
+for (let i = 1; i < tchamiMalaa.length; i++) {
+  assert.ok(
+    (tchamiMalaa[i]?.timestamp ?? 0) > (tchamiMalaa[i - 1]?.timestamp ?? 0),
+    `Tchami & Malaa EDC LV circuitGROUNDS clocks must increase at index ${i}`,
   );
 }
 

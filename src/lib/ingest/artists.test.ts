@@ -505,4 +505,18 @@ assert.equal(
   "MORTEN B2B Malaa",
 );
 
+// The raw oEmbed title has a colon before "Live from" ("No Redemption :
+// Live from Circuit Grounds…") that would otherwise leave a junk "- No
+// Redemption" tail on the credit, so the curated title puts artists first
+// and moves the project name after the pipe.
+const tchamiMalaaSet = artistsForSet(
+  "Tchami b2b Malaa | No Redemption - EDC Las Vegas 2025 (circuitGROUNDS)",
+  { name: "Tchami", slug: "tchami", accent: "#f4a261" },
+);
+assert.equal(tchamiMalaaSet.primary.slug, "tchami");
+assert.deepEqual(
+  tchamiMalaaSet.collaborators.map((c) => c.slug),
+  ["malaa"],
+);
+
 console.log("artists.test.ts ok");

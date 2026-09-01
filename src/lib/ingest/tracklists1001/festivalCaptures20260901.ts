@@ -170,6 +170,60 @@ export const TL_MORTEN_MALAA_TML_WE1_CRYSTAL_2026: FingerprintSeedRow[] = [
 ];
 
 /**
+ * Tchami & Malaa @ circuitGROUNDS, EDC Las Vegas, United States 2025-05-17
+ * https://www.1001tracklists.com/tracklist/16r2dlxt/tchami-malaa-circuitgrounds-edc-las-vegas-united-states-2025-05-17.html
+ * Official YT: https://youtu.be/k9pYsuLTL2o — oEmbed 2026-09-01: channel
+ * "Tchami" (@TchamiTV), title "Tchami x Malaa - No Redemption : Live from
+ * Circuit Grounds, EDC Las Vegas 2025" — the duo's No Redemption project.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-k9pYsuLTL2o"]
+ *   = TL_TCHAMI_MALAA_EDC_LV_CIRCUITGROUNDS_2025
+ * Overlay name TL_Tchami_Malaa_circuitGROUNDS_… is not a valid identifier.
+ * Paste also linked hearthis.at/edmliveset/… (fan archive) — superseded by
+ * the official YT; never wired as playback or added to HEARTHIS_TRACKS.
+ * When The Beat Bang repeats at 14:15 and 15:55 — kept as captured.
+ * Mashup-then-component Turn Off The Light vs. It Takes Two vs. Move Your
+ * Body cluster and the Adieu vs. Adieu Pt. II outro stay as captured.
+ * Captured 2026-09-01 — provenance 1001tl.
+ */
+export const TL_TCHAMI_MALAA_EDC_LV_CIRCUITGROUNDS_2025: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "ROSSY", title: "RUSH" },
+  { at: "1:48", artist: "Henry Fong", title: "Rave Tool" },
+  { at: "3:35", artist: "Playboi Carti", title: "EVIL J0RDAN (HILLS Remix)" },
+  { at: "4:40", artist: "Victor Lou & Klean", title: "Buhbum" },
+  { at: "6:55", artist: "Darude", title: "Sandstorm (VNSSA Remix)" },
+  { at: "9:05", artist: "OMNOM & Marco Strous", title: "Everyone's Your Friend" },
+  { at: "11:05", artist: "REBRN", title: "For Your Head" },
+  { at: "14:15", artist: "Tchami & Malaa", title: "When The Beat Bang" },
+  { at: "15:55", artist: "Tchami & Malaa", title: "When The Beat Bang" },
+  { at: "17:35", artist: "Kenty Clide", title: "Reset" },
+  { at: "18:55", artist: "OMNOM & Sven Lochenhoer", title: "That's The Spot" },
+  { at: "21:30", artist: "DJ Snake & Tchami & Malaa & MERCER", title: "Made In France" },
+  { at: "24:35", artist: "Murphy's Law & Guy Mac", title: "Passion" },
+  { at: "26:45", artist: "BL3SS & Tchami", title: "R 2 ME" },
+  { at: "28:35", artist: "Sammy Virji & Interplanetary Criminal", title: "Damager" },
+  { at: "30:55", artist: "ALRT", title: "All That I Can" },
+  { at: "32:55", artist: "Fly With Us & Deijuvhs", title: "Blacked Out" },
+  { at: "35:25", artist: "Malaa", title: "Notorious" },
+  { at: "36:30", artist: "Michael Sparks", title: "Slayer (VIP)" },
+  { at: "37:35", artist: "Linkin Park", title: "In The End (Malaa Remix)" },
+  { at: "39:35", artist: "Tchami & Malaa & MAKJ", title: "N9" },
+  { at: "43:15", artist: "Dog Blood vs. Rob Base & DJ E-Z Rock vs. Tchami & Marshall Jefferson", title: "Turn Off The Light vs. It Takes Two vs. Move Your Body (Tchami Mashup)" },
+  { at: "43:45", artist: "Rob Base & DJ E-Z Rock", title: "It Takes Two (Tchami Bootleg)" },
+  { at: "44:15", artist: "Tchami & Marshall Jefferson", title: "Move Your Body (Future House)" },
+  { at: "44:45", artist: "Dog Blood", title: "Turn Off The Lights" },
+  { at: "45:15", artist: "DJ Snake & AlunaGeorge", title: "You Know You Like It (Tchami Remix)" },
+  { at: "45:45", artist: "BRANDON & PVC", title: "Watch Me Move" },
+  { at: "46:15", artist: "Malaa", title: "Face Off" },
+  { at: "48:55", artist: "Azzecca", title: "Tell That Boy" },
+  { at: "52:15", artist: "Tchami & Malaa & Loge21", title: "Underground" },
+  { at: "53:55", artist: "Bessey", title: "I Wonder" },
+  { at: "56:45", artist: "Tchami", title: "Adieu vs. Adieu Pt. II (Tchami Outro Mashup)" },
+  { at: "57:40", artist: "Tchami", title: "Adieu" },
+  { at: "58:35", artist: "Tchami", title: "Adieu Pt. II" },
+  { at: "59:30", artist: "Tchami & Malaa", title: "A Prayer (Drinks On Me Remix)" },
+];
+
+/**
  * MORTEN & Malaa @ Mainstage, Tomorrowland Winter, France 2026-03-25
  * https://www.1001tracklists.com/tracklist/9x22d2k/morten-malaa-mainstage-tomorrowland-winter-france-2026-03-25.html
  * Official YT: https://youtu.be/vjI-Oc_pgag — oEmbed 2026-09-01: channel

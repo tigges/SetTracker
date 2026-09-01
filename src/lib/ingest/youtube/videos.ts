@@ -183,6 +183,7 @@ import {
   TL_HONEY_DIJON_THE_LOOP_DEKMANTEL_NETHERLANDS_2025,
   TL_VINAI_S2O_SONGKRAN_THAILAND_2023,
   TL_MORTEN_MALAA_TML_WINTER_MAINSTAGE_2026,
+  TL_TCHAMI_MALAA_EDC_LV_CIRCUITGROUNDS_2025,
 } from "../tracklists1001/seeds";
 import type { RawArtist } from "../types";
 import { slugify } from "../types";
@@ -3630,6 +3631,23 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/9x22d2k/morten-malaa-mainstage-tomorrowland-winter-france-2026-03-25.html",
     tracklist1001: TL_MORTEN_MALAA_TML_WINTER_MAINSTAGE_2026,
+  },
+  {
+    // Official Tchami channel (@TchamiTV) — No Redemption is the duo's b2b
+    // project name. Paste also linked a hearthis edmliveset fan archive;
+    // superseded by this official upload, never wired.
+    video: "https://www.youtube.com/watch?v=k9pYsuLTL2o",
+    primaryArtist: dj("Tchami", {
+      accent: "#f4a261",
+      homeCity: "France",
+    }),
+    genre: "Future House",
+    type: "festival",
+    title: "Tchami b2b Malaa | No Redemption - EDC Las Vegas 2025 (circuitGROUNDS)",
+    eventName: "EDC Las Vegas",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/16r2dlxt/tchami-malaa-circuitgrounds-edc-las-vegas-united-states-2025-05-17.html",
+    tracklist1001: TL_TCHAMI_MALAA_EDC_LV_CIRCUITGROUNDS_2025,
   },
 ];
 
