@@ -720,6 +720,7 @@ export async function getCatalogStats(): Promise<CatalogStats> {
       const d = assessSetDensity({
         durationSec: s.durationSec,
         playCount,
+        type: s.type,
       });
       return {
         id: s.id,

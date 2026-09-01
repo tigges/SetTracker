@@ -42,6 +42,8 @@ async function main() {
     const density = assessSetDensity({
       durationSec: s.durationSec,
       playCount: s._count.plays,
+      type: s.type,
+      genre: s.genre,
     });
     if (density.severity === "ok") continue;
     const slug = dj?.slug ?? "";

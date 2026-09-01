@@ -58,6 +58,7 @@ async function main() {
     const d = assessSetDensity({
       durationSec: s.durationSec,
       playCount,
+      type: s.type,
     });
     return {
       slug: s.slug,
