@@ -12,6 +12,7 @@ import { StatsEnrichCard } from "@/components/StatsEnrichCard";
 import { StatsLlmCard } from "@/components/StatsLlmCard";
 import { StatsNotesLink } from "@/components/StatsNotesLink";
 import { StatsHealthCard, StatsMeter } from "@/components/StatsHealthCard";
+import { StatsNewSetsCard } from "@/components/StatsNewSetsCard";
 import { loadActionsStatusFile } from "@/lib/actionsStatus";
 import { capture1001StatsHref } from "@/lib/captureHref";
 import { loadOperatorCaptureQueue } from "@/lib/captureQueue";
@@ -20,6 +21,7 @@ import { loadKnown1001ArchiveRows } from "@/lib/ingest/known1001Archive";
 import { TRACKLIST_1001_BY_SOURCE_SLUG } from "@/lib/ingest/tracklists1001/festival2026";
 import { CAPTURE_QUEUE_LIMIT } from "@/lib/ingest/captureQueueLimits";
 import { getCatalogStats } from "@/lib/catalogStats";
+import { getStatsNewSets } from "@/lib/statsNewSets";
 import { prisma } from "@/lib/db";
 import { loadDjMagTop100RankBySlug } from "@/lib/djmagTop100";
 import {
@@ -238,13 +240,15 @@ function PlaceGapQueue({
 }
 
 export default async function StatsPage() {
-  const [s, health, enrichReport, enrichLedger, captureQueue] = await Promise.all([
-    getCatalogStats(),
-    getStatsHealth(),
-    loadEnrichRunReport(prisma),
-    loadEnrichSpendLedger(prisma),
-    loadOperatorCaptureQueue(),
-  ]);
+  const [s, health, enrichReport, enrichLedger, captureQueue, newSets] =
+    await Promise.all([
+      getCatalogStats(),
+      getStatsHealth(),
+      loadEnrichRunReport(prisma),
+      loadEnrichSpendLedger(prisma),
+      loadOperatorCaptureQueue(),
+      getStatsNewSets(),
+    ]);
   const capturePreflight = buildCapturePreflightIndex(
     TRACKLIST_1001_BY_SOURCE_SLUG,
     loadKnown1001ArchiveRows(),
@@ -310,6 +314,8 @@ export default async function StatsPage() {
           · {s.detection.communityResolved} community IDs
         </p>
       </div>
+
+      <StatsNewSetsCard days={newSets} />
 
       <StatsEnrichCard
         report={enrichReport}
