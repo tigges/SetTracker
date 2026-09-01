@@ -945,7 +945,9 @@ export const ARTIST_ROSTER_CURATED: ArtistRosterEntry[] = [
     homeCity: "Germany",
     youtube: { handle: "@Tujamo", status: "ok" },
     soundcloud: { permalink: "tujamo", status: "ok" },
+    website: "https://tujamo.com",
     socials: [
+      "https://tujamo.com",
       "https://www.youtube.com/@Tujamo",
       "https://soundcloud.com/tujamo",
       "https://instagram.com/tujamo",

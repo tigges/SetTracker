@@ -1373,8 +1373,8 @@ assert.equal(
 }
 
 // Tujamo — operator paste from YT About @Tujamo. SC/IG tujamo.
-// anna-agency.nl is booking. Songkick is not the artist site.
-// Channel description is a welcome line, not a bio. No thumb in hand.
+// Official site tujamo.com. anna-agency.nl is booking. Songkick is
+// not the artist site. Channel welcome line is not a bio. No thumb.
 assert.equal(
   nameOverlapsHandle("Tujamo", "https://www.youtube.com/@Tujamo"),
   true,
@@ -1385,6 +1385,10 @@ assert.equal(
 );
 assert.equal(
   nameOverlapsHandle("Tujamo", "https://instagram.com/tujamo"),
+  true,
+);
+assert.equal(
+  nameOverlapsHandle("Tujamo", "https://tujamo.com/"),
   true,
 );
 assert.equal(
@@ -1430,6 +1434,17 @@ assert.equal(
     slug: "tujamo",
     name: "Tujamo",
     field: "website",
+    value: "https://tujamo.com/",
+    evidence: "operator paste, official site",
+  }).value,
+  "https://tujamo.com",
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "tujamo",
+    name: "Tujamo",
+    field: "website",
     value: "https://anna-agency.nl",
     evidence: "YouTube About booking",
   }).drop,
@@ -1450,7 +1465,7 @@ assert.equal(
   const tujamo = loadEntityCompletePins().find((p) => p.slug === "tujamo");
   assert.ok(tujamo);
   assert.equal(tujamo.kind, "dj");
-  assert.equal(tujamo.website, undefined);
+  assert.equal(tujamo.website, "https://tujamo.com");
   assert.equal(tujamo.instagram, "https://instagram.com/tujamo");
   assert.equal(tujamo.youtube, "https://www.youtube.com/@Tujamo");
   assert.equal(tujamo.soundcloud, "https://soundcloud.com/tujamo");
@@ -1465,7 +1480,7 @@ assert.equal(
   assert.ok(roster);
   assert.equal(roster.youtube?.handle, "@Tujamo");
   assert.equal(roster.soundcloud?.permalink, "tujamo");
-  assert.equal(roster.website, undefined);
+  assert.equal(roster.website, "https://tujamo.com");
   assert.equal(roster.priority, "normal");
 }
 
