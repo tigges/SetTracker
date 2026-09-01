@@ -48,6 +48,12 @@ only for the Tomorrowland Relive series internals
 `reason: "relive:official-unwired"`). Do not rename those internals
 unless asked. Never write Relive for HARD / Insomniac / Nameless / Ultra.
 
+- **Setgraph:** always on a set page when published cues exist. Same rows
+  as the tracklist (talk included, hatched non-track). SoundCloud playhead
+  follow is an overlay — never a visibility gate, and never YouTube-only.
+  Do not hide it to “simplify” the listen loop. List-pending sets (no cues)
+  omit the strip.
+
 - **Run the app:** `npm run dev` (Turbopack, http://localhost:3000). Dev output
   goes to `.next/dev` in Next 16.
 - **Database:** SQLite at `prisma/dev.db` (git-ignored), `DATABASE_URL` is in the

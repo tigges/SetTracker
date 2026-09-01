@@ -37,6 +37,8 @@ import { nearestPlayByCue } from "@/lib/setCue";
 import {
   cueIndexAtRatio,
   playSpans,
+  setgraphPlayheadRatio,
+  setgraphSegments,
   setgraphVisible,
   stripIsDense,
 } from "@/lib/setStrip";
@@ -110,15 +112,14 @@ export function SetTimeline({
     setDensityCompact(!getDensityCompact());
   }
 
+  const segments = useMemo(() => setgraphSegments(plays), [plays]);
   const spans = useMemo(
-    () => playSpans(
-      plays.map((p) => ({ timestamp: p.timestamp, until: p.talkUntil })),
-      durationSec,
-    ),
-    [plays, durationSec],
+    () => playSpans(segments, durationSec),
+    [segments, durationSec],
   );
-  const trackCount = plays.filter((p) => !isTalkPlay(p)).length;
-  const dense = stripIsDense(plays.length);
+  const trackCount = segments.filter((s) => !s.talk).length;
+  const talkCount = segments.length - trackCount;
+  const dense = stripIsDense(segments.length);
 
   useEffect(() => {
     if (!flashId) return;
@@ -135,8 +136,8 @@ export function SetTimeline({
       ? (nearestPlayByCue(plays, followSec)?.id ?? null)
       : null;
   const activeId = cuedPlayId ?? pickedId;
-  const showStrip = setgraphVisible(plays.length);
-  const followingClock = nowSec != null;
+  const showStrip = setgraphVisible(segments.length);
+  const playhead = setgraphPlayheadRatio(nowSec, durationSec);
 
   useEffect(() => {
     if (!cuedPlayId || nowSec != null) return;
@@ -177,18 +178,14 @@ export function SetTimeline({
 
   return (
     <div className="mt-4 space-y-4 sm:mt-6 sm:space-y-6">
-      {/* Mix map is always on when cues exist. Clock follow is extra, not a gate. */}
+      {/* Always on when cues exist. Same rows as the tracklist, including talk. */}
       {showStrip ? (
       <div className="card min-w-0 overflow-x-clip p-3 sm:p-4">
         <div className="mb-2 flex items-center justify-between gap-3 sm:mb-3">
           <div className="min-w-0">
-            <span className="eyebrow">
-              {followingClock ? "Now playing" : "Setgraph"}
-            </span>
+            <span className="eyebrow">Setgraph</span>
             <p className="mt-1 text-[11px] text-muted2">
-              {followingClock
-                ? "Follows the playback clock"
-                : "Tap a segment or row to play from that cue"}
+              Tap a segment or row to play from that cue
             </p>
           </div>
           <div className="flex items-center gap-3 text-[12px] text-muted2 sm:ml-auto">
@@ -198,10 +195,15 @@ export function SetTimeline({
           </div>
         </div>
 
+        <div className="relative">
         <div
           ref={stripRef}
           role="img"
-          aria-label={`Set timeline, ${trackCount} tracks. Click to play from a cue.`}
+          aria-label={`Setgraph, ${trackCount} ${trackCount === 1 ? "track" : "tracks"}${
+            talkCount > 0
+              ? `, ${talkCount} ${talkCount === 1 ? "talk section" : "talk sections"}`
+              : ""
+          }. Click to play from a cue.`}
           className={`flex h-8 w-full min-w-0 cursor-pointer sm:h-14 ${
             dense ? "gap-px" : "gap-[2px]"
           }`}
@@ -209,21 +211,21 @@ export function SetTimeline({
           onPointerMove={onStripMove}
           onPointerLeave={() => setHoverId(null)}
         >
-          {plays.map((p, i) => {
-            const isActive = p.id === activeId;
-            const isHover = p.id === hoverId;
-            const color = segmentColor(p);
-            const talk = isTalkPlay(p);
+          {segments.map((seg, i) => {
+            const play = plays[i];
+            const isActive = seg.id === activeId;
+            const isHover = seg.id === hoverId;
+            const color = play ? segmentColor(play) : "var(--grey)";
             return (
               <div
-                key={p.id}
+                key={seg.id}
                 className="relative h-full min-w-0 rounded-[3px] transition-all duration-150"
                 style={{
                   flex: `${spans[i]} 1 0%`,
-                  background: talk
+                  background: seg.talk
                     ? `repeating-linear-gradient(135deg, ${color} 0 3px, transparent 3px 6px), ${color}`
                     : color,
-                  opacity: isActive ? 1 : isHover ? 0.92 : talk ? 0.42 : 0.72,
+                  opacity: isActive ? 1 : isHover ? 0.92 : seg.talk ? 0.42 : 0.72,
                   transform: isActive ? "scaleY(1.06)" : "scaleY(1)",
                   boxShadow: isActive
                     ? `0 0 0 1.5px var(--bg), 0 0 14px ${color}`
@@ -239,6 +241,14 @@ export function SetTimeline({
               </div>
             );
           })}
+        </div>
+        {playhead != null ? (
+          <span
+            aria-hidden
+            className="pointer-events-none absolute inset-y-0 z-10 w-px bg-ink"
+            style={{ left: `${playhead * 100}%` }}
+          />
+        ) : null}
         </div>
 
         {/* playhead caption */}
