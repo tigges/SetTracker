@@ -183,7 +183,7 @@ import {
   TL_HONEY_DIJON_THE_LOOP_DEKMANTEL_NETHERLANDS_2025,
   TL_VINAI_S2O_SONGKRAN_THAILAND_2023,
   TL_MORTEN_MALAA_TML_WINTER_MAINSTAGE_2026,
-  TL_ANTI_UP_COACHELLA_WE2_MOJAVE_2024,
+  TL_ANTI_UP_COACHELLA_WE1_MOJAVE_2024,
   TL_TCHAMI_MALAA_EDC_LV_CIRCUITGROUNDS_2025,
   TL_WENZDAY_ILLFEST_WICKED_OAKS_AUSTIN_2025,
   TL_BROHUG_BASS_HOUSE_MIXTAPE_2026,
@@ -3637,7 +3637,8 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
   },
   {
     // Official @antiup. Title is the album; description is the full Mojave
-    // set (70:27). YouTube Music only credits the opener. 1001 page is WE2.
+    // set (70:27). YouTube Music only credits the opener. 1001 page is WE1
+    // (2hn3tym9). WE2 2mccm4u1 stays held — distinct clocks, no playback.
     video: "https://www.youtube.com/watch?v=cZhNpGcYq_A",
     primaryArtist: dj("Anti Up", {
       accent: "#ff006e",
@@ -3649,8 +3650,8 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     seriesName: "Coachella",
     eventName: "Coachella",
     tracklist1001Url:
-      "https://www.1001tracklists.com/tracklist/2mccm4u1/chris-lake-chris-lorenzo-pres.-anti-up-mojave-coachella-festival-weekend-2-united-states-2024-04-19.html",
-    tracklist1001: TL_ANTI_UP_COACHELLA_WE2_MOJAVE_2024,
+      "https://www.1001tracklists.com/tracklist/2hn3tym9/chris-lake-chris-lorenzo-pres.-anti-up-mojave-coachella-festival-weekend-1-united-states-2024-04-12.html",
+    tracklist1001: TL_ANTI_UP_COACHELLA_WE1_MOJAVE_2024,
   },
   {
     // Official Tchami channel (@TchamiTV) — No Redemption is the duo's b2b
