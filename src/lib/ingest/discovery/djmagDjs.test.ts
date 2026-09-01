@@ -5,10 +5,12 @@ import {
   applyDjMagProfileHtml,
   loadDjMagTopDjs,
   needsDjMagProfile,
+  parseBestKnownFromDjHtml,
   parseBioFromDjHtml,
   parseDjStyleFromDjHtml,
   parseHomeFromDjHtml,
 } from "./djmagDjs";
+import { composeDjMagStoredBio, isReplaceableDjBio } from "../../djBio";
 
 const seed = JSON.parse(
   readFileSync(
@@ -87,6 +89,22 @@ const applied = applyDjMagProfileHtml(
 assert.equal(applied.homeCity, "Ghent, Belgium");
 assert.equal(applied.genre, "Techno");
 assert.match(applied.bio ?? "", /MainStage/);
+assert.equal(parseBestKnownFromDjHtml(guettaHtml), "Two Ibiza residencies and chart domination");
+assert.equal(parseBestKnownFromDjHtml(technoHtml), "Bringing techno to the mainstage");
+assert.equal(applied.bestKnownFor, "Bringing techno to the mainstage");
+assert.match(
+  composeDjMagStoredBio({
+    bestKnownFor: "Bringing techno to the mainstage",
+    bio: applied.bio,
+  }) ?? "",
+  /^Bringing techno to the mainstage\./,
+);
+assert.equal(
+  isReplaceableDjBio(
+    "Harnessing a distinct brand of artistry that knows no categorical bounds, the DJ, producer and record label head has cemented herself as one of the music industry's most in-demand names.",
+  ),
+  true,
+);
 assert.match(
   seed.djs.find((d) => d.slug === "david-guetta")?.bio ?? "",
   /still make music every single day/,
@@ -107,6 +125,14 @@ assert.equal(
   needsDjMagProfile({
     homeCity: "Paris, France",
     bio: "“It might sound crazy,” says David Guetta, “but I still make music every single day.",
+  }),
+  true,
+);
+assert.equal(
+  needsDjMagProfile({
+    homeCity: "Paris, France",
+    bio: "“It might sound crazy,” says David Guetta, “but I still make music every single day.",
+    bestKnownFor: "Two Ibiza residencies and chart domination",
   }),
   false,
 );

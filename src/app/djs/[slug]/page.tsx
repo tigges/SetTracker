@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SetEntryLink } from "@/components/SetEntryLink";
 import { notFound, redirect } from "next/navigation";
-import { getDjBySlug, getAllDjSlugs, getAllTrackSlugs } from "@/lib/queries";
+import { getDjBySlug, getAllDjSlugs, getAllTrackSlugs, getBioLinkIndex } from "@/lib/queries";
 import { EntityThumb } from "@/components/EntityThumb";
 import { StatusBar } from "@/components/StatusBits";
 import { SocialLinks } from "@/components/SocialLinks";
 import { TrackTitleLink } from "@/components/TrackTitleLink";
 import { DjBio } from "@/components/DjBio";
-import { displayDjBio } from "@/lib/djBio";
+import { srDjBio } from "@/lib/srDjBio";
 import { ATLAS_DJ_YEAR, lookupAtlasDj } from "@/lib/atlas/seed";
 import { chartKicker } from "@/lib/atlas/mapMath";
 import { displayCity } from "@/lib/displayCity";
@@ -78,7 +78,12 @@ export default async function DjPage({
   const city = displayCity(dj.homeCity);
   const chart = lookupAtlasDj(dj.slug);
   const maxPlays = dj.mostPlayed[0]?.count ?? 1;
-  const bio = displayDjBio(dj.bio, { genre: dj.genre, homeCity: dj.homeCity });
+  const catalog = await getBioLinkIndex(dj.bio);
+  const bio = srDjBio(dj.bio, catalog, {
+    genre: dj.genre,
+    homeCity: dj.homeCity,
+    skipSlugs: [dj.slug],
+  });
 
   return (
     <div>
@@ -138,7 +143,7 @@ export default async function DjPage({
             <WishlistToggle slug={dj.slug} />
           </div>
         </div>
-        {bio ? <DjBio text={bio} /> : null}
+        {bio ? <DjBio parts={bio.parts} full={bio.full} /> : null}
         <div className="mt-4">
           <SocialLinks links={dj.socials} />
         </div>

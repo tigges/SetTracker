@@ -32,6 +32,7 @@ import {
   trackIdentityKey,
 } from "@/lib/trackMeta";
 import { relatedSlugsFor } from "@/lib/ingest/discovery/relations";
+import { quotedTitles, type BioLinkTarget } from "@/lib/srDjBio";
 import { resolveSetSlug } from "@/lib/ingest/sourceRemaps";
 import { collapseConsecutivePlays, playCollapseKey } from "@/lib/playCollapse";
 import {
@@ -1494,6 +1495,51 @@ export async function getLabelBySlug(slug: string) {
 }
 
 export type LabelProfile = NonNullable<Awaited<ReturnType<typeof getLabelBySlug>>>;
+
+/** Names we can turn into bio links. Quoted track titles are looked up when `text` is set. */
+export async function getBioLinkIndex(text?: string | null): Promise<BioLinkTarget[]> {
+  const { DJ_SOCIAL_PINS } = await import("@/lib/ingest/djSocialPins.data");
+  const pinned = DJ_SOCIAL_PINS.map((p) => p.slug);
+  const titles = quotedTitles(text ?? "");
+  const [djs, labels, events, tracks] = await Promise.all([
+    prisma.dj.findMany({
+      select: { slug: true, name: true },
+      where: { OR: [{ sets: { some: {} } }, { slug: { in: pinned } }] },
+    }),
+    prisma.label.findMany({ select: { slug: true, name: true } }),
+    prisma.event.findMany({ select: { slug: true, name: true } }),
+    titles.length
+      ? prisma.track.findMany({
+          select: { slug: true, title: true },
+          where: {
+            OR: titles.map((title) => ({
+              title: { equals: title },
+            })),
+          },
+        })
+      : Promise.resolve([]),
+  ]);
+  const out: BioLinkTarget[] = [
+    ...djs.map((d) => ({ kind: "dj" as const, slug: d.slug, name: d.name })),
+    ...labels.map((l) => ({ kind: "label" as const, slug: l.slug, name: l.name })),
+    ...events.map((e) => ({ kind: "event" as const, slug: e.slug, name: e.name })),
+  ];
+  const seenTitle = new Map<string, string>();
+  for (const t of tracks) {
+    const key = t.title.toLowerCase();
+    if (seenTitle.has(key)) {
+      seenTitle.set(key, "");
+      continue;
+    }
+    seenTitle.set(key, t.slug);
+  }
+  for (const [title, slug] of seenTitle) {
+    if (!slug) continue;
+    const named = tracks.find((t) => t.title.toLowerCase() === title);
+    if (named) out.push({ kind: "track", slug, name: named.title });
+  }
+  return out;
+}
 
 export async function getAllDjSlugs(): Promise<string[]> {
   // Pages export size cliff (~1–2GB): skip discovery stub DJs with no sets.

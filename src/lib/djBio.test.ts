@@ -1,6 +1,12 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { displayDjBio, isChartRankBio, stripChartRankSuffix } from "./djBio";
+import {
+  composeDjMagStoredBio,
+  displayDjBio,
+  isChartRankBio,
+  isReplaceableDjBio,
+  stripChartRankSuffix,
+} from "./djBio";
 import { DJ_SOCIAL_PINS } from "./ingest/djSocialPins.data";
 
 function pinBio(slug: string): string {
@@ -73,6 +79,24 @@ describe("displayDjBio", () => {
   it("returns null for empty", () => {
     assert.equal(displayDjBio(null), null);
     assert.equal(displayDjBio("   "), null);
+  });
+
+  it("composes Best known for as the stored first sentence", () => {
+    const out = composeDjMagStoredBio({
+      bestKnownFor: "Bringing techno to the mainstage",
+      bio: "Charlotte de Witte seemingly reached the techno stratosphere in 2025. At Tomorrowland in July, she became the first artist ever to open and close the MainStage on the same day.",
+    });
+    assert.match(out ?? "", /^Bringing techno to the mainstage\./);
+    assert.equal(
+      composeDjMagStoredBio({
+        bestKnownFor: "“Five-times No.1 DJ in the world, A State Of Trance.”",
+        bio: "Armin released ‘Breathe’.",
+      }),
+      "Five-times No.1 DJ in the world, A State Of Trance. Armin released ‘Breathe’.",
+    );
+    assert.match(out ?? "", /Tomorrowland/);
+    assert.equal(isReplaceableDjBio("House. Official site davidguetta.com — SC davidguetta."), true);
+    assert.equal(isReplaceableDjBio("DJ Mag Top 100 DJs 2025 · #1."), true);
   });
 
   it("hides a DJ Mag chart rank dump", () => {
