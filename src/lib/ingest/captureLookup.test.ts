@@ -213,6 +213,29 @@ const vkHighPowerFakeWire = lookupCapture(
 assert.equal(vkHighPowerFakeWire.alreadyOnFile, false);
 assert.equal(vkHighPowerFakeWire.wiredCues, null);
 
+// JAUZ @ The Republik Honolulu — 1001 on file as a hold; fan YT
+// @Lordnanakuli is Identify-only, never wired.
+const jauzHonolulu1001 = lookupCapture(
+  "https://www.1001tracklists.com/tracklist/1pp2lvmt/jauz-the-republik-honolulu-united-states-2025-11-29.html",
+  shippedArchive,
+);
+assert.equal(jauzHonolulu1001.tracklistId, "1pp2lvmt");
+assert.equal(jauzHonolulu1001.alreadyOnFile, true);
+assert.equal(jauzHonolulu1001.slug, null);
+assert.equal(jauzHonolulu1001.wiredCues, null);
+assert.ok(
+  jauzHonolulu1001.archive.some(
+    (h) => h.name === "TL_JAUZ_REPUBLIK_HONOLULU_2025",
+  ),
+);
+const jauzHonoluluYt = lookupCapture(
+  "https://youtu.be/VWMrMUaONhk",
+  shippedArchive,
+);
+assert.equal(jauzHonoluluYt.slug, "yt-VWMrMUaONhk");
+assert.equal(jauzHonoluluYt.alreadyOnFile, false);
+assert.equal(jauzHonoluluYt.wiredCues, null);
+
 const gregElrowYt = lookupCapture("https://youtu.be/JjkfofWcfec", shippedArchive);
 assert.equal(gregElrowYt.slug, "yt-JjkfofWcfec");
 assert.equal(gregElrowYt.alreadyOnFile, true);

@@ -227,6 +227,7 @@ import {
   TL_MORTEN_MALAA_TML_WINTER_MAINSTAGE_2026,
   TL_TCHAMI_MALAA_EDC_LV_CIRCUITGROUNDS_2025,
   TL_JAUZ_GET_CRANKED_BILL_GRAHAM_SF_2025,
+  TL_JAUZ_REPUBLIK_HONOLULU_2025,
   TL_WENZDAY_ILLFEST_WICKED_OAKS_AUSTIN_2025,
   TL_BROHUG_BASS_HOUSE_MIXTAPE_2026,
   TL_GREG_99_DATA_TRANSMISSION_DT903_2025,
@@ -6601,6 +6602,46 @@ for (let i = 1; i < vkHighPower.length; i++) {
   assert.ok(
     (vkHighPower[i]?.timestamp ?? 0) > (vkHighPower[i - 1]?.timestamp ?? 0),
     `Valentino Khan High Power Radio 339 clocks must increase at index ${i}`,
+  );
+}
+
+// JAUZ @ The Republik Honolulu 2025-11-29.
+// yt-VWMrMUaONhk is a fan 4K live (@Lordnanakuli) — seed held, never wired,
+// Identify-only via FINGERPRINT_ONLY_WATCH. Distinct from Get Cranked
+// Bill Graham (fan @crawfordrecap recap). Overlay
+// TL_JAUZ_The-Republik_Honolulu_2025-11-29 is not a valid identifier.
+assertSeedClocks(TL_JAUZ_REPUBLIK_HONOLULU_2025);
+assert.equal(TL_JAUZ_REPUBLIK_HONOLULU_2025.length, 99);
+assert.equal(
+  Object.values(TRACKLIST_1001_BY_SOURCE_SLUG).includes(
+    TL_JAUZ_REPUBLIK_HONOLULU_2025,
+  ),
+  false,
+  "JAUZ Honolulu seed is held — the YT is a fan 4K, not official",
+);
+assert.equal(TRACKLIST_1001_BY_SOURCE_SLUG["yt-VWMrMUaONhk"], undefined);
+assert.equal(isWiredTracklistSlug("yt-VWMrMUaONhk"), false);
+assert.notEqual(
+  TL_JAUZ_REPUBLIK_HONOLULU_2025,
+  TL_JAUZ_GET_CRANKED_BILL_GRAHAM_SF_2025,
+  "Honolulu and Get Cranked are distinct performances",
+);
+const jauzHonolulu = tracklist1001RowsToPlays(TL_JAUZ_REPUBLIK_HONOLULU_2025);
+assert.equal(jauzHonolulu.length, 99);
+assert.equal(jauzHonolulu[0]?.provenance, "1001tl");
+assert.equal(jauzHonolulu[0]?.timestamp, 1);
+assert.equal(jauzHonolulu[0]?.trackTitle, "Keep The Rave Alive");
+assert.equal(jauzHonolulu[96]?.trackTitle, "In The End vs. S.O.S (JAUZ Edit)");
+assert.equal(jauzHonolulu[96]?.timestamp, 1 * 3600 + 27 * 60 + 19);
+assert.equal(jauzHonolulu[97]?.trackTitle, "In The End");
+assert.equal(jauzHonolulu[97]?.timestamp, 1 * 3600 + 27 * 60 + 20);
+assert.equal(jauzHonolulu[98]?.trackTitle, "S.O.S");
+assert.equal(jauzHonolulu[98]?.timestamp, 1 * 3600 + 27 * 60 + 21);
+for (let i = 1; i < jauzHonolulu.length; i++) {
+  assert.ok(
+    (jauzHonolulu[i]?.timestamp ?? 0) >
+      (jauzHonolulu[i - 1]?.timestamp ?? 0),
+    `JAUZ Honolulu clocks must increase at index ${i}`,
   );
 }
 
