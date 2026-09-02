@@ -188,6 +188,7 @@ import {
   TL_WENZDAY_ILLFEST_WICKED_OAKS_AUSTIN_2025,
   TL_BROHUG_BASS_HOUSE_MIXTAPE_2026,
   TL_GREG_99_ELROW_LAROC_SAO_PAULO_2025,
+  TL_JAUZ_BLOCK_PARTY_IRVS_BURGERS_SD_2025,
 } from "../tracklists1001/seeds";
 import type { RawArtist } from "../types";
 import { slugify } from "../types";
@@ -3723,6 +3724,26 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/2899xjxk/greg-99-elrow-laroc-club-sao-paulo-brazil-2025-11-29.html",
     tracklist1001: TL_GREG_99_ELROW_LAROC_SAO_PAULO_2025,
+  },
+  {
+    // Official Block Party series — oEmbed 2026-09-02: channel
+    // "Block Party" (@BlockPartytv), title "JAUZ | Bass House Set at
+    // Irv's Burgers | San Diego | BLOCK PARTY 003". First-party San
+    // Diego pop-up series film, not a fan recap and not @jauzofficial.
+    // Distinct from held Get Cranked / Honolulu. No eventName — Irv's
+    // Burgers / Block Party is not in KNOWN_EVENTS. No SC in the paste.
+    video: "https://www.youtube.com/watch?v=QIC0mmUc4OU",
+    primaryArtist: dj("JAUZ", {
+      accent: "#7c5cff",
+      homeCity: "United States",
+    }),
+    genre: "Bass House",
+    type: "club",
+    title: "JAUZ | Block Party, Irv's Burgers San Diego 2025",
+    seriesName: "Block Party",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2uwdryg1/jauz-block-party-irvs-burgers-san-diego-united-states-2025-07-17.html",
+    tracklist1001: TL_JAUZ_BLOCK_PARTY_IRVS_BURGERS_SD_2025,
   },
 ];
 
