@@ -532,6 +532,18 @@ assert.deepEqual(
   ["chris-lake", "chris-lorenzo"],
 );
 
+// Same Men Machine parse for the held EDC LV 2018 night — official
+// playback would keep Anti Up primary; Lake + Lorenzo stay collaborators.
+const antiUpEdc2018Set = artistsForSet(
+  "Chris Lake & Chris Lorenzo pres. Anti Up | cosmicMEADOW EDC Las Vegas 2018",
+  { name: "Anti Up", slug: "anti-up", accent: "#ff006e" },
+);
+assert.equal(antiUpEdc2018Set.primary.slug, "anti-up");
+assert.deepEqual(
+  antiUpEdc2018Set.collaborators.map((c) => c.slug),
+  ["chris-lake", "chris-lorenzo"],
+);
+
 // High Power Radio show title has no guest token — preferred primary
 // (the host) must stick so we do not mint a "High Power Radio" DJ.
 const vkHighPowerSet = artistsForSet("HighPower Radio #339 (August 21 2026)", {
