@@ -32,18 +32,6 @@ export default async function WishlistPage() {
         </p>
       </div>
       <WishlistClient djs={djs} similarHints={similarHints} />
-      <p className="mt-10 max-w-2xl text-[14px] text-muted">
-        Gaps first — no page, set, thumb, handle, or identified tracks.
-        Search 1001 for a concrete tracklist page; wire it from{" "}
-        <Link
-          href="/stats#capture-1001"
-          className="text-ink underline decoration-dotted underline-offset-2 hover:text-brand"
-        >
-          Capture 1001
-        </Link>
-        . Official YT/SC channels on the roster are how ingest finds more
-        sets. Capture ranking stays festival-first.
-      </p>
     </div>
   );
 }
