@@ -555,4 +555,11 @@ assert.equal(vkHighPowerSet.primary.slug, "valentino-khan");
 assert.equal(vkHighPowerSet.primary.name, "Valentino Khan");
 assert.deepEqual(vkHighPowerSet.collaborators, []);
 
+const gregElrowSet = artistsForSet(
+  "GREG 99 | elrow, Laroc Club São Paulo 2025",
+  { name: "GREG 99", slug: "greg-99", accent: "#2a9d8f" },
+);
+assert.equal(gregElrowSet.primary.slug, "greg-99");
+assert.deepEqual(gregElrowSet.collaborators, []);
+
 console.log("artists.test.ts ok");

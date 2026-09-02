@@ -213,5 +213,23 @@ const vkHighPowerFakeWire = lookupCapture(
 assert.equal(vkHighPowerFakeWire.alreadyOnFile, false);
 assert.equal(vkHighPowerFakeWire.wiredCues, null);
 
+const gregElrowYt = lookupCapture("https://youtu.be/JjkfofWcfec", shippedArchive);
+assert.equal(gregElrowYt.slug, "yt-JjkfofWcfec");
+assert.equal(gregElrowYt.alreadyOnFile, true);
+assert.equal(gregElrowYt.wiredCues, 21);
+assert.ok(
+  gregElrowYt.archive.some(
+    (h) => h.name === "TL_GREG_99_ELROW_LAROC_SAO_PAULO_2025",
+  ),
+);
+const gregElrow1001 = lookupCapture(
+  "https://www.1001tracklists.com/tracklist/2899xjxk/greg-99-elrow-laroc-club-sao-paulo-brazil-2025-11-29.html",
+  shippedArchive,
+);
+assert.equal(gregElrow1001.tracklistId, "2899xjxk");
+assert.equal(gregElrow1001.alreadyOnFile, true);
+assert.equal(gregElrow1001.slug, "yt-JjkfofWcfec");
+assert.equal(gregElrow1001.wiredCues, 21);
+
 void TRACKLIST_1001_BY_SOURCE_SLUG;
 console.log("ingest/captureLookup.test.ts ok");

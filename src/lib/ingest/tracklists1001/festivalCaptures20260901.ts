@@ -571,3 +571,41 @@ export const TL_VALENTINO_KHAN_HIGH_POWER_RADIO_339_2026: FingerprintSeedRow[] =
   { at: "52:08", artist: "AFTER MIDNIGHT", title: "Slinging Dope" },
   { at: "55:50", artist: "Odd Mob & OMNOM pres. HYPERBEAM", title: "Take You There" },
 ];
+
+/**
+ * GREG 99 @ elrow, Laroc Club Sao Paulo, Brazil 2025-11-29
+ * https://www.1001tracklists.com/tracklist/2899xjxk/greg-99-elrow-laroc-club-sao-paulo-brazil-2025-11-29.html
+ * Official YT: https://youtu.be/JjkfofWcfec — oEmbed 2026-09-02: channel
+ * "GREG 99" (@greg99music), title "GREG 99 @ ELROW BRAZIL" — matches the
+ * roster-pinned handle.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-JjkfofWcfec"]
+ *   = TL_GREG_99_ELROW_LAROC_SAO_PAULO_2025
+ * Overlay name TL_GREG-99_elrow_Laroc-Club_Sao-Paulo_Brazil_2025-11-29 is
+ * not a valid identifier.
+ * Distinct from Hellbent FM 006 and Data Transmission 903.
+ * No SoundCloud in the paste — do not invent an SC slug.
+ * Captured 2026-09-02 — provenance 1001tl.
+ */
+export const TL_GREG_99_ELROW_LAROC_SAO_PAULO_2025: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "DJ Glen", title: "From Out Of Space" },
+  { at: "1:55", artist: "Chuck Roberts", title: "My House (Acappella)" },
+  { at: "3:50", artist: "Pedroz & GREG 99", title: "Goodies" },
+  { at: "8:00", artist: "Mike Dunn pres. Mr. 69", title: "Phreaky MF (Matroda & GREG 99 Remix)" },
+  { at: "12:35", artist: "Gabss", title: "Giddy Up" },
+  { at: "16:55", artist: "Volkoder", title: "She Kisses" },
+  { at: "20:35", artist: "Fly With Us & Deijuvhs", title: "Blacked Out" },
+  { at: "25:55", artist: "GREG 99", title: "Pump It Up" },
+  { at: "29:45", artist: "GREG 99", title: "Waist Move" },
+  { at: "34:50", artist: "Benny Benassi pres. The Biz", title: "Satisfaction (TOBEHONEST Edit)" },
+  { at: "38:45", artist: "GREG 99", title: "Get Stupid" },
+  { at: "44:25", artist: "AYYBO & Ragie Ban", title: "I Don't Want To" },
+  { at: "47:15", artist: "Loleatta Holloway", title: "Dreamin'" },
+  { at: "50:05", artist: "GREG 99", title: "Bad Choices" },
+  { at: "1:00:25", artist: "Pedroz & GREG 99", title: "Music Is The Answer" },
+  { at: "1:06:30", artist: "GREG 99", title: "Goin Junky" },
+  { at: "1:10:30", artist: "Pedroz", title: "1, 2 Step" },
+  { at: "1:12:40", artist: "GREG 99", title: "We Like It Raw" },
+  { at: "1:17:20", artist: "Florence + The Machine", title: "You've Got The Love (JOSHWA Edit)" },
+  { at: "1:20:10", artist: "Laura Branigan", title: "Self Control" },
+  { at: "1:25:40", artist: "Felix Da Housecat & The Visionary", title: "My Life Is Music" },
+];

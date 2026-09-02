@@ -187,6 +187,7 @@ import {
   TL_TCHAMI_MALAA_EDC_LV_CIRCUITGROUNDS_2025,
   TL_WENZDAY_ILLFEST_WICKED_OAKS_AUSTIN_2025,
   TL_BROHUG_BASS_HOUSE_MIXTAPE_2026,
+  TL_GREG_99_ELROW_LAROC_SAO_PAULO_2025,
 } from "../tracklists1001/seeds";
 import type { RawArtist } from "../types";
 import { slugify } from "../types";
@@ -3703,6 +3704,25 @@ export const YOUTUBE_SETS: YoutubeSetSource[] = [
     tracklist1001Url:
       "https://www.1001tracklists.com/tracklist/1ub9uq6k/brohug-bass-house-mixtape-2026-2026-01-07.html",
     tracklist1001: TL_BROHUG_BASS_HOUSE_MIXTAPE_2026,
+  },
+  {
+    // Official @greg99music — oEmbed 2026-09-02: "GREG 99 @ ELROW BRAZIL"
+    // by GREG 99. Matches the roster-pinned handle. 1001 is elrow at
+    // Laroc Club São Paulo 2025-11-29. Distinct from Hellbent FM 006 and
+    // Data Transmission 903. No SC in the paste — do not invent an SC slug.
+    video: "https://www.youtube.com/watch?v=JjkfofWcfec",
+    primaryArtist: dj("GREG 99", {
+      accent: "#2a9d8f",
+      homeCity: "Minas Gerais, Brazil",
+    }),
+    genre: "Tech House",
+    type: "club",
+    title: "GREG 99 | elrow, Laroc Club São Paulo 2025",
+    seriesName: "elrow",
+    eventName: "elrow",
+    tracklist1001Url:
+      "https://www.1001tracklists.com/tracklist/2899xjxk/greg-99-elrow-laroc-club-sao-paulo-brazil-2025-11-29.html",
+    tracklist1001: TL_GREG_99_ELROW_LAROC_SAO_PAULO_2025,
   },
 ];
 

@@ -1,7 +1,15 @@
 {
   "note": "Operator-collected 1001Tracklists URLs. All listed urls[] rows are now seeded. Prefer new operator pastes over this archive. stillMissing1001 is video-in / no 1001 page — do not invent URLs. heldPendingPlayback is 1001-in / no official YT/SC playback — seed held, do not invent or wire fan playback. pendingCuePaste is official playback + operator 1001 URL without cue rows — do not scrape 1001 or invent 1001tl seeds.",
-  "updatedAt": "2026-09-02T07:30:00.000Z",
+  "updatedAt": "2026-09-02T07:40:00.000Z",
   "urls": [
+    {
+      "label": "GREG 99 · elrow, Laroc Club São Paulo 2025-11-29",
+      "slug": "yt-JjkfofWcfec",
+      "name": "TL_GREG_99_ELROW_LAROC_SAO_PAULO_2025",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/2899xjxk/greg-99-elrow-laroc-club-sao-paulo-brazil-2025-11-29.html",
+      "youtubeUrl": "https://youtu.be/JjkfofWcfec",
+      "note": "Operator paste 2026-09-02. 21 timed cues on official @greg99music. oEmbed title GREG 99 @ ELROW BRAZIL by GREG 99 — matches the roster-pinned handle. Overlay TL_GREG-99_elrow_Laroc-Club_… is not a valid identifier. Distinct from Hellbent FM 006 and Data Transmission 903. No SC in the paste — do not invent an SC slug."
+    },
     {
       "label": "Valentino Khan · High Power Radio 339 2026-08-21",
       "slug": "sc-highpowerradio-highpower-radio-339-august-27",

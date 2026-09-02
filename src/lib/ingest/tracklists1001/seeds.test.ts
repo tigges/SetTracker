@@ -231,6 +231,7 @@ import {
   TL_BROHUG_BASS_HOUSE_MIXTAPE_2026,
   TL_GREG_99_DATA_TRANSMISSION_DT903_2025,
   TL_VALENTINO_KHAN_HIGH_POWER_RADIO_339_2026,
+  TL_GREG_99_ELROW_LAROC_SAO_PAULO_2025,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
@@ -6600,6 +6601,29 @@ for (let i = 1; i < vkHighPower.length; i++) {
   assert.ok(
     (vkHighPower[i]?.timestamp ?? 0) > (vkHighPower[i - 1]?.timestamp ?? 0),
     `Valentino Khan High Power Radio 339 clocks must increase at index ${i}`,
+  );
+}
+
+// GREG 99 @ elrow, Laroc Club São Paulo — wired, official @greg99music.
+// Overlay TL_GREG-99_elrow_… is not a valid identifier.
+assertSeedClocks(TL_GREG_99_ELROW_LAROC_SAO_PAULO_2025);
+assert.equal(TL_GREG_99_ELROW_LAROC_SAO_PAULO_2025.length, 21);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-JjkfofWcfec"],
+  TL_GREG_99_ELROW_LAROC_SAO_PAULO_2025,
+);
+assert.equal(isWiredTracklistSlug("yt-JjkfofWcfec"), true);
+const gregElrow = tracklist1001RowsToPlays(TL_GREG_99_ELROW_LAROC_SAO_PAULO_2025);
+assert.equal(gregElrow.length, 21);
+assert.equal(gregElrow[0]?.provenance, "1001tl");
+assert.equal(gregElrow[0]?.timestamp, 0);
+assert.equal(gregElrow[0]?.trackTitle, "From Out Of Space");
+assert.equal(gregElrow[20]?.trackTitle, "My Life Is Music");
+assert.equal(gregElrow[20]?.timestamp, 1 * 3600 + 25 * 60 + 40);
+for (let i = 1; i < gregElrow.length; i++) {
+  assert.ok(
+    (gregElrow[i]?.timestamp ?? 0) > (gregElrow[i - 1]?.timestamp ?? 0),
+    `GREG 99 elrow Laroc São Paulo clocks must increase at index ${i}`,
   );
 }
 
