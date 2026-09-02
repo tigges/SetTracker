@@ -229,6 +229,7 @@ import {
   TL_WENZDAY_ILLFEST_WICKED_OAKS_AUSTIN_2025,
   TL_BROHUG_BASS_HOUSE_MIXTAPE_2026,
   TL_GREG_99_DATA_TRANSMISSION_DT903_2025,
+  TL_VALENTINO_KHAN_HIGH_POWER_RADIO_339_2026,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
@@ -6517,6 +6518,47 @@ for (let i = 1; i < gregDataTransmission.length; i++) {
     (gregDataTransmission[i]?.timestamp ?? 0) >
       (gregDataTransmission[i - 1]?.timestamp ?? 0),
     `GREG 99 Data Transmission 903 clocks must increase at index ${i}`,
+  );
+}
+
+// Valentino Khan - High Power Radio 339 — wired, official show SC.
+// Paste Wire sc-Valentino-Khan_High-Power-Radio-399_2026-08-21 is invented
+// (episode 399) and stays unwired. Distinct from held Revel Albuquerque.
+assertSeedClocks(TL_VALENTINO_KHAN_HIGH_POWER_RADIO_339_2026);
+assert.equal(TL_VALENTINO_KHAN_HIGH_POWER_RADIO_339_2026.length, 16);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-highpowerradio-highpower-radio-339-august-27"
+  ],
+  TL_VALENTINO_KHAN_HIGH_POWER_RADIO_339_2026,
+);
+assert.equal(
+  isWiredTracklistSlug("sc-highpowerradio-highpower-radio-339-august-27"),
+  true,
+);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG[
+    "sc-Valentino-Khan_High-Power-Radio-399_2026-08-21"
+  ],
+  undefined,
+);
+assert.equal(
+  isWiredTracklistSlug("sc-Valentino-Khan_High-Power-Radio-399_2026-08-21"),
+  false,
+);
+const vkHighPower = tracklist1001RowsToPlays(
+  TL_VALENTINO_KHAN_HIGH_POWER_RADIO_339_2026,
+);
+assert.equal(vkHighPower.length, 16);
+assert.equal(vkHighPower[0]?.provenance, "1001tl");
+assert.equal(vkHighPower[0]?.timestamp, 20);
+assert.equal(vkHighPower[0]?.trackTitle, "Highroller");
+assert.equal(vkHighPower[15]?.trackTitle, "Take You There");
+assert.equal(vkHighPower[15]?.timestamp, 55 * 60 + 50);
+for (let i = 1; i < vkHighPower.length; i++) {
+  assert.ok(
+    (vkHighPower[i]?.timestamp ?? 0) > (vkHighPower[i - 1]?.timestamp ?? 0),
+    `Valentino Khan High Power Radio 339 clocks must increase at index ${i}`,
   );
 }
 

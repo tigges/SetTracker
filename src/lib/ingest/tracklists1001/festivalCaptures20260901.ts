@@ -462,3 +462,50 @@ export const TL_GREG_99_DATA_TRANSMISSION_DT903_2025: FingerprintSeedRow[] = [
   { at: "49:45", artist: "GREG 99 & Cloonee", title: "Still My Baby" },
   { at: "54:55", artist: "Prospa ft. RAHH", title: "This Rhythm" },
 ];
+
+/**
+ * Valentino Khan - High Power Radio 339 2026-08-21
+ * https://www.1001tracklists.com/tracklist/124tr24k/valentino-khan-high-power-radio-339-2026-08-21.html
+ * Official SC: https://soundcloud.com/highpowerradio/highpower-radio-339-august-27
+ * oEmbed 2026-09-02: "HighPower Radio #339 (August 21 2026) by High Power
+ * Radio" — High Power Radio's own SiriusXM Ch 52 (Diplo's Revolution) show
+ * account; user description "Hosted by Valentino Khan." Same class as
+ * Data Transmission / Hellbent Records. Not Valentino Khan's personal SC
+ * (none on the roster) — do not invent a VK permalink or treat
+ * highpowerradio as one.
+ * Paste URL carried utm_* clipboard junk — stripped from the slug.
+ * Paste Wire line named
+ * sc-Valentino-Khan_High-Power-Radio-399_2026-08-21 (episode 399, invented
+ * slug) — never wire that. Real slug is
+ * sc-highpowerradio-highpower-radio-339-august-27. Never sc-https://….
+ * No YouTube in the paste — do not invent a YT slug.
+ * Distinct from held Revel Albuquerque
+ * (TL_VALENTINO_KHAN_REVEL_ALBUQUERQUE_2026 / fan YT).
+ * Overlay name TL_VALENTINO_KHAN_HIGH_POWER_RADIO_399_2026_08_21 is the
+ * paste constant (wrong episode) — not a valid wire key.
+ * Clocks are evenly spaced ~3:42 apart per 1001 (not independently
+ * observed). Recording is 50:44 (full_duration 3044430 ms); last cues at
+ * 52:08 / 55:50 overshoot — kept exactly as pasted.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG[
+ *   "sc-highpowerradio-highpower-radio-339-august-27"
+ * ] = TL_VALENTINO_KHAN_HIGH_POWER_RADIO_339_2026
+ * Captured 2026-09-02 — provenance 1001tl.
+ */
+export const TL_VALENTINO_KHAN_HIGH_POWER_RADIO_339_2026: FingerprintSeedRow[] = [
+  { at: "0:20", artist: "Detlef", title: "Highroller" },
+  { at: "4:02", artist: "Ragie Ban", title: "Taste" },
+  { at: "7:44", artist: "Valentino Khan", title: "SUMMERTIMEBADDIE" },
+  { at: "11:26", artist: "Loco Dice", title: "Hold Up (You Feel That)" },
+  { at: "15:08", artist: "Tiga & Chris Lake ft. Aatig", title: "Party Time" },
+  { at: "18:50", artist: "Brandy", title: "I Wanna Be Down (DXNBY Afters Edit)" },
+  { at: "22:32", artist: "Discip", title: "Red Room" },
+  { at: "26:14", artist: "Valentino Khan & No/Me", title: "What Can I Say" },
+  { at: "29:56", artist: "AYYBO ft. Blazey", title: "Dirty" },
+  { at: "33:38", artist: "SOFI TUKKER", title: "Barthelona" },
+  { at: "37:20", artist: "Maesic & Local Singles", title: "Cold Blooded" },
+  { at: "41:02", artist: "Diablo", title: "Tequila" },
+  { at: "44:44", artist: "Cloonee & Prospa ft. Tristan Henry", title: "Good Girl" },
+  { at: "48:26", artist: "Valentino Khan & Proppa ft. Big Baby Scumbag", title: "Dale Earnhardt" },
+  { at: "52:08", artist: "AFTER MIDNIGHT", title: "Slinging Dope" },
+  { at: "55:50", artist: "Odd Mob & OMNOM pres. HYPERBEAM", title: "Take You There" },
+];

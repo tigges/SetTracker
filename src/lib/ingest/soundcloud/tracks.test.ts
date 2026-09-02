@@ -988,4 +988,25 @@ assert.equal(
   "sc-data-transmission-dt903-gregbr",
 );
 
+const vkHighPowerSc = SOUNDCLOUD_TRACK_SEEDS.find(
+  (s) =>
+    s.url ===
+    "https://soundcloud.com/highpowerradio/highpower-radio-339-august-27",
+);
+assert.ok(vkHighPowerSc);
+assert.equal(vkHighPowerSc.primaryArtist.name, "Valentino Khan");
+assert.equal(vkHighPowerSc.primaryArtist.slug, "valentino-khan");
+assert.equal(vkHighPowerSc.seriesName, "High Power Radio");
+assert.equal(vkHighPowerSc.type, "radio");
+assert.equal(
+  `sc-highpowerradio-${slugify("highpower-radio-339-august-27")}`,
+  "sc-highpowerradio-highpower-radio-339-august-27",
+);
+assert.equal(
+  SOUNDCLOUD_TRACK_SEEDS.some((s) =>
+    s.url.includes("Valentino-Khan_High-Power-Radio-399"),
+  ),
+  false,
+);
+
 console.log("soundcloud/tracks.test.ts ok");

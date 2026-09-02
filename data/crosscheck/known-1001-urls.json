@@ -1,7 +1,15 @@
 {
   "note": "Operator-collected 1001Tracklists URLs. All listed urls[] rows are now seeded. Prefer new operator pastes over this archive. stillMissing1001 is video-in / no 1001 page — do not invent URLs. heldPendingPlayback is 1001-in / no official YT/SC playback — seed held, do not invent or wire fan playback. pendingCuePaste is official playback + operator 1001 URL without cue rows — do not scrape 1001 or invent 1001tl seeds.",
-  "updatedAt": "2026-09-01T11:30:00.000Z",
+  "updatedAt": "2026-09-02T07:20:00.000Z",
   "urls": [
+    {
+      "label": "Valentino Khan · High Power Radio 339 2026-08-21",
+      "slug": "sc-highpowerradio-highpower-radio-339-august-27",
+      "name": "TL_VALENTINO_KHAN_HIGH_POWER_RADIO_339_2026",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/124tr24k/valentino-khan-high-power-radio-339-2026-08-21.html",
+      "soundcloudUrl": "https://soundcloud.com/highpowerradio/highpower-radio-339-august-27",
+      "note": "Operator paste 2026-09-02. 16 timed cues on official High Power Radio SC (SiriusXM Ch 52 Diplo's Revolution show account; user description Hosted by Valentino Khan). oEmbed title HighPower Radio #339 (August 21 2026) by High Power Radio. Same class as Data Transmission / Hellbent. Not VK's personal SC — do not invent a permalink. Paste URL carried utm_* clipboard junk — stripped from the slug. Paste Wire line named sc-Valentino-Khan_High-Power-Radio-399_2026-08-21 (episode 399) — keep sc-highpowerradio-highpower-radio-339-august-27. Never sc-https://…. Recording 50:44; last clocks 52:08 / 55:50 overshoot — kept as pasted (evenly spaced ~3:42). Distinct from held Revel Albuquerque. No YouTube in the paste — do not invent a YT slug."
+    },
     {
       "label": "Anti Up · What Is Life [Live From Coachella 2024] — Mojave WE1 2024-04-12",
       "slug": "yt-cZhNpGcYq_A",

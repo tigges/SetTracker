@@ -151,5 +151,38 @@ assert.equal(tchamiMalaa.slug, "yt-k9pYsuLTL2o");
 assert.equal(tchamiMalaa.alreadyOnFile, true);
 assert.equal(tchamiMalaa.wiredCues, 35);
 
+const vkHighPowerSc = lookupCapture(
+  "https://soundcloud.com/highpowerradio/highpower-radio-339-august-27?utm_source=clipboard&utm_campaign=wtshare",
+  shippedArchive,
+);
+assert.equal(
+  vkHighPowerSc.slug,
+  "sc-highpowerradio-highpower-radio-339-august-27",
+);
+assert.equal(vkHighPowerSc.alreadyOnFile, true);
+assert.equal(vkHighPowerSc.wiredCues, 16);
+assert.ok(
+  vkHighPowerSc.archive.some(
+    (h) => h.name === "TL_VALENTINO_KHAN_HIGH_POWER_RADIO_339_2026",
+  ),
+);
+const vkHighPower1001 = lookupCapture(
+  "https://www.1001tracklists.com/tracklist/124tr24k/valentino-khan-high-power-radio-339-2026-08-21.html",
+  shippedArchive,
+);
+assert.equal(vkHighPower1001.tracklistId, "124tr24k");
+assert.equal(vkHighPower1001.alreadyOnFile, true);
+assert.equal(
+  vkHighPower1001.slug,
+  "sc-highpowerradio-highpower-radio-339-august-27",
+);
+assert.equal(vkHighPower1001.wiredCues, 16);
+const vkHighPowerFakeWire = lookupCapture(
+  "sc-Valentino-Khan_High-Power-Radio-399_2026-08-21",
+  shippedArchive,
+);
+assert.equal(vkHighPowerFakeWire.alreadyOnFile, false);
+assert.equal(vkHighPowerFakeWire.wiredCues, null);
+
 void TRACKLIST_1001_BY_SOURCE_SLUG;
 console.log("ingest/captureLookup.test.ts ok");
