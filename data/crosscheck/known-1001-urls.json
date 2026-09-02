@@ -1,6 +1,6 @@
 {
   "note": "Operator-collected 1001Tracklists URLs. All listed urls[] rows are now seeded. Prefer new operator pastes over this archive. stillMissing1001 is video-in / no 1001 page — do not invent URLs. heldPendingPlayback is 1001-in / no official YT/SC playback — seed held, do not invent or wire fan playback. pendingCuePaste is official playback + operator 1001 URL without cue rows — do not scrape 1001 or invent 1001tl seeds.",
-  "updatedAt": "2026-09-02T07:20:00.000Z",
+  "updatedAt": "2026-09-02T07:30:00.000Z",
   "urls": [
     {
       "label": "Valentino Khan · High Power Radio 339 2026-08-21",
@@ -853,6 +853,14 @@
     }
   ],
   "heldPendingPlayback": [
+    {
+      "label": "Anti Up · cosmicMEADOW, EDC Las Vegas 2018-05-18",
+      "name": "TL_ANTI_UP_EDC_LV_COSMICMEADOW_2018",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/2bp7vrmt/chris-lake-chris-lorenzo-pres.-anti-up-cosmicmeadow-edc-las-vegas-united-states-2018-05-18.html",
+      "rejectedMixcloudUrl": "https://www.mixcloud.com/ravetapes/chris-lake-b2b-chris-lorenzo-edc-2018-las-vegas-full-set/",
+      "rejectedChannel": "Rave Tapes",
+      "note": "Operator paste 2026-09-02. 36 timed cues. Mixcloud is ravetapes (Rave Tapes blog archive), not official Anti Up / Chris Lake / Chris Lorenzo / Insomniac / EDC. Title Chris Lake B2B Chris Lorenzo EDC 2018 Las Vegas - full set by Rave Tapes. Never YOUTUBE_SETS / TRACKLIST_1001_BY_SOURCE_SLUG / Mixcloud playback. Mixcloud slugs are not a capture host — never wire mc-chris-lake-b2b-chris-lorenzo-edc-2018-las-vegas-full-set. No YT/SC in the paste — do not invent slugs. Distinct from Coachella WE1 yt-cZhNpGcYq_A and held WE2 2mccm4u1. Overlay TL_MC_CHRIS_LAKE_B2B_… is not a valid identifier. Mashup-then-component 46:00 / 46:01 stays as captured. Seed held until official artist / Insomniac / EDC playback."
+    },
     {
       "label": "Anti Up · Mojave, Coachella WE2 2024-04-19",
       "name": "TL_ANTI_UP_COACHELLA_WE2_MOJAVE_2024",

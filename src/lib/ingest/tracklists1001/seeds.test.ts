@@ -222,6 +222,7 @@ import {
   TL_VALENTINO_KHAN_REVEL_ALBUQUERQUE_2026,
   TL_ANTI_UP_COACHELLA_WE1_MOJAVE_2024,
   TL_ANTI_UP_COACHELLA_WE2_MOJAVE_2024,
+  TL_ANTI_UP_EDC_LV_COSMICMEADOW_2018,
   TL_MORTEN_MALAA_TML_WE1_CRYSTAL_2026,
   TL_MORTEN_MALAA_TML_WINTER_MAINSTAGE_2026,
   TL_TCHAMI_MALAA_EDC_LV_CIRCUITGROUNDS_2025,
@@ -6307,6 +6308,46 @@ assert.equal(antiUpCoachella[1]?.timestamp, 6 * 60 + 5);
 assert.equal(antiUpCoachella[15]?.trackTitle, "Turn The Page");
 assert.equal(antiUpCoachella[20]?.trackTitle, "Holding On");
 assert.equal(antiUpCoachella[20]?.timestamp, 63 * 60 + 30);
+
+// Anti Up @ cosmicMEADOW, EDC Las Vegas 2018-05-18.
+// Rave Tapes Mixcloud is a fan archive — held. Never wire mc-… slugs.
+assertSeedClocks(TL_ANTI_UP_EDC_LV_COSMICMEADOW_2018);
+assert.equal(TL_ANTI_UP_EDC_LV_COSMICMEADOW_2018.length, 36);
+assert.equal(
+  Object.values(TRACKLIST_1001_BY_SOURCE_SLUG).includes(
+    TL_ANTI_UP_EDC_LV_COSMICMEADOW_2018,
+  ),
+  false,
+  "EDC LV 2018 cosmicMEADOW seed is held — Rave Tapes Mixcloud is not official",
+);
+assert.equal(
+  isWiredTracklistSlug(
+    "mc-chris-lake-b2b-chris-lorenzo-edc-2018-las-vegas-full-set",
+  ),
+  false,
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-cZhNpGcYq_A"],
+  TL_ANTI_UP_EDC_LV_COSMICMEADOW_2018,
+  "Coachella WE1 YouTube is not EDC LV 2018 playback",
+);
+const antiUpEdc2018 = tracklist1001RowsToPlays(
+  TL_ANTI_UP_EDC_LV_COSMICMEADOW_2018,
+);
+assert.equal(antiUpEdc2018.length, 36);
+assert.equal(antiUpEdc2018[0]?.provenance, "1001tl");
+assert.equal(antiUpEdc2018[0]?.timestamp, 0);
+assert.equal(antiUpEdc2018[0]?.trackTitle, "Piano Hand");
+assert.equal(antiUpEdc2018[14]?.trackTitle, "HUMBLE. (Acappella)");
+assert.equal(antiUpEdc2018[14]?.timestamp, 46 * 60 + 1);
+assert.equal(antiUpEdc2018[35]?.trackTitle, "I Want You");
+assert.equal(antiUpEdc2018[35]?.timestamp, 1 * 3600 + 55 * 60 + 19);
+for (let i = 1; i < antiUpEdc2018.length; i++) {
+  assert.ok(
+    (antiUpEdc2018[i]?.timestamp ?? 0) > (antiUpEdc2018[i - 1]?.timestamp ?? 0),
+    `Anti Up EDC LV cosmicMEADOW 2018 clocks must increase at index ${i}`,
+  );
+}
 for (let i = 1; i < antiUpCoachella.length; i++) {
   assert.ok(
     (antiUpCoachella[i]?.timestamp ?? 0) >

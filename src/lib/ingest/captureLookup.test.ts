@@ -117,6 +117,35 @@ assert.ok(
   antiUpWe2.archive.some((h) => h.name === "TL_ANTI_UP_COACHELLA_WE2_MOJAVE_2024"),
 );
 
+// Anti Up EDC LV cosmicMEADOW 2018 — 1001 on file as a hold; Mixcloud
+// ravetapes is not a resolvable host and stays unwired.
+const antiUpEdc2018 = lookupCapture(
+  "https://www.1001tracklists.com/tracklist/2bp7vrmt/chris-lake-chris-lorenzo-pres.-anti-up-cosmicmeadow-edc-las-vegas-united-states-2018-05-18.html",
+  shippedArchive,
+);
+assert.equal(antiUpEdc2018.tracklistId, "2bp7vrmt");
+assert.equal(antiUpEdc2018.alreadyOnFile, true);
+assert.equal(antiUpEdc2018.slug, null);
+assert.equal(antiUpEdc2018.wiredCues, null);
+assert.ok(
+  antiUpEdc2018.archive.some(
+    (h) => h.name === "TL_ANTI_UP_EDC_LV_COSMICMEADOW_2018",
+  ),
+);
+const antiUpEdc2018Mc = lookupCapture(
+  "https://www.mixcloud.com/ravetapes/chris-lake-b2b-chris-lorenzo-edc-2018-las-vegas-full-set/",
+  shippedArchive,
+);
+assert.equal(antiUpEdc2018Mc.slug, null);
+assert.equal(antiUpEdc2018Mc.alreadyOnFile, false);
+assert.equal(antiUpEdc2018Mc.wiredCues, null);
+const antiUpEdc2018FakeWire = lookupCapture(
+  "mc-chris-lake-b2b-chris-lorenzo-edc-2018-las-vegas-full-set",
+  shippedArchive,
+);
+assert.equal(antiUpEdc2018FakeWire.alreadyOnFile, false);
+assert.equal(antiUpEdc2018FakeWire.wiredCues, null);
+
 // MORTEN & Malaa TML WE1 — 1001 on file as a hold; yt-unavailable_atm is not a video.
 const mortenMalaa1001 = lookupCapture(
   "https://www.1001tracklists.com/tracklist/m7srdk1/morten-malaa-crystal-garden-stage-tomorrowland-weekend-1-belgium-2026-07-18.html",

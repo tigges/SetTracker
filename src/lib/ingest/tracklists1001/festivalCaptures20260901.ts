@@ -159,6 +159,68 @@ export const TL_ANTI_UP_COACHELLA_WE2_MOJAVE_2024: FingerprintSeedRow[] = [
 ];
 
 /**
+ * Chris Lake & Chris Lorenzo pres. Anti Up @ cosmicMEADOW, EDC Las Vegas 2018-05-18
+ * https://www.1001tracklists.com/tracklist/2bp7vrmt/chris-lake-chris-lorenzo-pres.-anti-up-cosmicmeadow-edc-las-vegas-united-states-2018-05-18.html
+ * Operator Mixcloud
+ * https://www.mixcloud.com/ravetapes/chris-lake-b2b-chris-lorenzo-edc-2018-las-vegas-full-set/
+ * is Rave Tapes (ravetapes.com blog archive), not official Anti Up / Chris
+ * Lake / Chris Lorenzo / Insomniac / EDC. Mixcloud page 2026-09-02: title
+ * "Chris Lake B2B Chris Lorenzo EDC 2018 Las Vegas - full set by Rave Tapes".
+ * Never sourceUrl / playbackUrl / TRACKLIST_1001_BY_SOURCE_SLUG / YOUTUBE_SETS.
+ * Mixcloud slugs are not a capture host (check:capture cannot resolve them)
+ * and are never wired — same as Epic Radio Mixcloud mirrors.
+ * Paste Wire mc-chris-lake-b2b-chris-lorenzo-edc-2018-las-vegas-full-set
+ * is invented — never wire that. Overlay
+ * TL_MC_CHRIS_LAKE_B2B_CHRIS_LORENZO_EDC_2018_LAS_VEG is not a valid
+ * identifier.
+ * No YouTube or SoundCloud in the paste — do not invent YT/SC slugs.
+ * Distinct from Coachella WE1 yt-cZhNpGcYq_A and held WE2 2mccm4u1.
+ * Anti Up is the Lake + Lorenzo project (Men Machine pattern) — primary
+ * stays anti-up when an official playback exists.
+ * Mashup-then-component cluster at 46:00 / 46:01 stays as captured.
+ * Seed held until official artist / Insomniac / EDC playback exists.
+ * Captured 2026-09-02 — provenance 1001tl.
+ */
+export const TL_ANTI_UP_EDC_LV_COSMICMEADOW_2018: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "Chris Lake & Chris Lorenzo", title: "Piano Hand" },
+  { at: "4:40", artist: "Goooey Vuitton", title: "Appreciation" },
+  { at: "6:30", artist: "Distinkt", title: "Brands" },
+  { at: "11:50", artist: "Youri Donatz & Franky Rizardo", title: "I Like This Sound" },
+  { at: "12:16", artist: "Elektrochemie LK", title: "Schall (Acappella)" },
+  { at: "12:48", artist: "Chris Lake & Chris Lorenzo pres. Anti Up", title: "Pizza" },
+  { at: "16:30", artist: "Todd Terry ft. The Gypsymen", title: "Babarabatiri (David Penn Remix)" },
+  { at: "25:20", artist: "Friend Within", title: "The Renegade" },
+  { at: "29:00", artist: "Chris Lake ft. Dances With White Girls", title: "Operator (Ring Ring)" },
+  { at: "32:00", artist: "Chris Lake & Chris Lorenzo", title: "The Calling" },
+  { at: "35:55", artist: "Yaeji", title: "Raingurl (Chris Lake Re-Edit)" },
+  { at: "39:30", artist: "Walker & Royce & Ardalan", title: "Turn It Around" },
+  { at: "43:10", artist: "Chris Lake & Green Velvet", title: "Deceiver" },
+  { at: "46:00", artist: "Chris Lorenzo & DJ Zinc", title: "Gammy Elbow" },
+  { at: "46:01", artist: "Kendrick Lamar", title: "HUMBLE. (Acappella)" },
+  { at: "48:40", artist: "Chris Lake ft. Dances With White Girls", title: "Give Her Right Back" },
+  { at: "50:40", artist: "Chris Lake & Destructo", title: "Y.O.D.O" },
+  { at: "52:30", artist: "Chris Lake & Walker & Royce", title: "Drop Top" },
+  { at: "56:25", artist: "FISHER", title: "Ya Kidding" },
+  { at: "59:30", artist: "Chris Lake & Chris Lorenzo pres. Anti Up", title: "Concentrate" },
+  { at: "1:07:30", artist: "Prince", title: "FUNKNROLL (Chris Lake Edit)" },
+  { at: "1:08:30", artist: "Chris Lake", title: "Lose My Mind" },
+  { at: "1:13:28", artist: "BETON ft. Wevie Stonder", title: "Directions" },
+  { at: "1:15:01", artist: "Chris Lake & Chris Lorenzo pres. Anti Up", title: "Hey Pablo" },
+  { at: "1:18:07", artist: "Cause & Affect", title: "Snatch Ma Crops" },
+  { at: "1:18:55", artist: "Justin Martin ft. Will Clarke", title: "Back To The Jungle (Chris Lorenzo Remix)" },
+  { at: "1:21:29", artist: "Will Clarke", title: "Take A Seat" },
+  { at: "1:24:58", artist: "Neville Bartos & Chris Lorenzo", title: "Coke Diet" },
+  { at: "1:28:01", artist: "FISHER", title: "Losing It" },
+  { at: "1:33:16", artist: "Chris Lake & Chris Lorenzo pres. Anti Up", title: "Friday" },
+  { at: "1:36:46", artist: "Destructo ft. Ty Dolla $ign & iLoveMakonnen", title: "4 Real (Chris Lorenzo Remix)" },
+  { at: "1:37:35", artist: "Dennis Ferrer", title: "Hey Hey (Dennis Ferrer Attention Vocal Mix)" },
+  { at: "1:42:50", artist: "Chris Lake & Walker & Royce", title: "Dance With Me" },
+  { at: "1:47:34", artist: "Cause & Affect", title: "The Enforcer" },
+  { at: "1:51:18", artist: "Chris Lake & Chris Lorenzo", title: "Nothing Better" },
+  { at: "1:55:19", artist: "Chris Lake", title: "I Want You" },
+];
+
+/**
  * MORTEN & Malaa @ Crystal Garden Stage, Tomorrowland Weekend 1, Belgium 2026-07-18
  * https://www.1001tracklists.com/tracklist/m7srdk1/morten-malaa-crystal-garden-stage-tomorrowland-weekend-1-belgium-2026-07-18.html
  * Operator Wire named yt-unavailable_atm — not a video id. Never invent a
