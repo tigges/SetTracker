@@ -13,8 +13,10 @@ import {
   parseEntityCompleteCsv,
   pinsFromAudit,
   applyEntityCompletePins,
+  isRejectedEntitySocialUrl,
   wishlistDjStubFromPin,
 } from "./entityCompletePins";
+import { hintForName } from "./discovery/knownHandles";
 import { WISHLIST_DEFAULTS } from "../wishlist";
 import { ARTIST_ROSTER_CURATED } from "./roster";
 
@@ -1643,6 +1645,42 @@ assert.equal(
   assert.ok(wenzday.bio?.includes("Taylor Chung"));
   assert.equal(wenzday.imageUrl, undefined);
 }
+
+{
+  const malone = loadEntityCompletePins().find((p) => p.slug === "malone");
+  assert.ok(malone);
+  assert.equal(malone.kind, "dj");
+  assert.equal(
+    malone.soundcloud,
+    undefined,
+    "empty malone-music SoundCloud must not stay pinned",
+  );
+}
+assert.equal(
+  nameOverlapsHandle("Malóne", "https://soundcloud.com/malone-music"),
+  true,
+  "leftover music still name-matches — reject list is the gate",
+);
+assert.equal(
+  isRejectedEntitySocialUrl("https://soundcloud.com/malone-music"),
+  true,
+);
+assert.equal(
+  isRejectedEntitySocialUrl("https://m.soundcloud.com/malone-music/"),
+  true,
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "malone",
+    name: "Malóne",
+    field: "soundcloud",
+    value: "https://soundcloud.com/malone-music",
+    evidence: "LLM name-matched leftover",
+  }).drop,
+  "rejected social",
+);
+assert.equal(hintForName("Malóne")?.soundcloudPermalink, undefined);
 
 {
   const faster = loadEntityCompletePins().find((p) => p.slug === "faster-horses");

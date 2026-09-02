@@ -90,6 +90,30 @@ const FALLBACK_WEBSITE_HUB = /linktr\.ee|(^|[./])komi\.io/i;
 const TEMPLATE_BIO =
   /is an? (?:.+based )?DJ, producer or electronic artist whose work centers on/i;
 
+/**
+ * Name-adjacent profiles that are not this catalog act.
+ * `malone-music` leftover is generic ("music") so nameOverlapsHandle passes,
+ * but the SoundCloud is empty/private — not Malóne. Never invent a replacement.
+ */
+const REJECTED_ENTITY_SOCIAL_URLS = new Set([
+  "https://soundcloud.com/malone-music",
+]);
+
+const DJ_SOCIAL_FIELDS = [
+  "website",
+  "instagram",
+  "youtube",
+  "soundcloud",
+  "twitter",
+] as const;
+
+export function isRejectedEntitySocialUrl(
+  url: string | null | undefined,
+): boolean {
+  const n = normalizeSocialUrl(url);
+  return Boolean(n && REJECTED_ENTITY_SOCIAL_URLS.has(n));
+}
+
 const GENERIC_HANDLE_LEFTOVER =
   /^(the|its|itsthe|thisis|official|oficial|real|dj|music|beats|sound|sounds|channel|video|live|tv|hq|ok|iam|im|weare|and|fest|festival|x|com|net|org|nu|io|co|uk|dot|dotcom|[0-9]+)*$/;
 
@@ -492,6 +516,7 @@ export function evaluateEntityCompleteRow(row: EntityCompleteAuditRow): {
 
   const n = normalizeSocialUrl(row.value);
   if (!n) return { drop: "invalid url" };
+  if (isRejectedEntitySocialUrl(n)) return { drop: "rejected social" };
   if (!nameOverlapsHandle(row.name, n)) return { drop: "handle name mismatch" };
   return { field, value: n };
 }
@@ -783,4 +808,40 @@ export async function applyEntityCompletePins(
     filled += 1;
   }
   return { matched, filled, created };
+}
+
+/** Null already-written leftover socials that fill-null pins cannot undo. */
+export async function clearRejectedDjSocials(
+  prisma: PrismaClient,
+): Promise<number> {
+  const rows = await prisma.dj.findMany({
+    where: {
+      OR: DJ_SOCIAL_FIELDS.map((field) => ({ [field]: { not: null } })),
+    },
+    select: {
+      id: true,
+      slug: true,
+      website: true,
+      instagram: true,
+      youtube: true,
+      soundcloud: true,
+      twitter: true,
+    },
+  });
+  let n = 0;
+  for (const row of rows) {
+    const data: Partial<Record<(typeof DJ_SOCIAL_FIELDS)[number], null>> = {};
+    for (const field of DJ_SOCIAL_FIELDS) {
+      if (row[field] && isRejectedEntitySocialUrl(row[field])) {
+        data[field] = null;
+      }
+    }
+    if (!Object.keys(data).length) continue;
+    await prisma.dj.update({ where: { id: row.id }, data });
+    n += 1;
+    console.log(
+      `[verify-urls] cleared rejected social on ${row.slug}: ${Object.keys(data).join(",")}`,
+    );
+  }
+  return n;
 }
