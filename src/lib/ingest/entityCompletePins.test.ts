@@ -1682,6 +1682,27 @@ assert.equal(
 );
 assert.equal(hintForName("Malóne")?.soundcloudPermalink, undefined);
 
+assert.equal(
+  nameOverlapsHandle("DJ Mag", "https://www.instagram.com/djmagofficial"),
+  true,
+  "leftover official still name-matches — reject list is the gate",
+);
+assert.equal(
+  isRejectedEntitySocialUrl("https://www.instagram.com/djmagofficial"),
+  true,
+);
+assert.equal(
+  evaluateEntityCompleteRow({
+    kind: "dj",
+    slug: "dj-mag",
+    name: "DJ Mag",
+    field: "instagram",
+    value: "https://www.instagram.com/djmagofficial",
+    evidence: "site footer harvest",
+  }).drop,
+  "rejected social",
+);
+
 {
   const faster = loadEntityCompletePins().find((p) => p.slug === "faster-horses");
   assert.ok(faster);
