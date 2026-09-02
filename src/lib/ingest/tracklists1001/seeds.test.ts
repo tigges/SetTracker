@@ -228,6 +228,7 @@ import {
   TL_TCHAMI_MALAA_EDC_LV_CIRCUITGROUNDS_2025,
   TL_JAUZ_GET_CRANKED_BILL_GRAHAM_SF_2025,
   TL_JAUZ_REPUBLIK_HONOLULU_2025,
+  TL_JAUZ_BLOCK_PARTY_IRVS_BURGERS_SD_2025,
   TL_WENZDAY_ILLFEST_WICKED_OAKS_AUSTIN_2025,
   TL_BROHUG_BASS_HOUSE_MIXTAPE_2026,
   TL_GREG_99_DATA_TRANSMISSION_DT903_2025,
@@ -6642,6 +6643,43 @@ for (let i = 1; i < jauzHonolulu.length; i++) {
     (jauzHonolulu[i]?.timestamp ?? 0) >
       (jauzHonolulu[i - 1]?.timestamp ?? 0),
     `JAUZ Honolulu clocks must increase at index ${i}`,
+  );
+}
+
+// JAUZ @ Block Party, Irv's Burgers San Diego — wired, official
+// @BlockPartytv series film. Distinct from held Get Cranked / Honolulu.
+// Overlay TL_JAUZ_Bloc- Party_San Diego_… is not a valid identifier.
+assertSeedClocks(TL_JAUZ_BLOCK_PARTY_IRVS_BURGERS_SD_2025);
+assert.equal(TL_JAUZ_BLOCK_PARTY_IRVS_BURGERS_SD_2025.length, 104);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-QIC0mmUc4OU"],
+  TL_JAUZ_BLOCK_PARTY_IRVS_BURGERS_SD_2025,
+);
+assert.equal(isWiredTracklistSlug("yt-QIC0mmUc4OU"), true);
+assert.notEqual(
+  TL_JAUZ_BLOCK_PARTY_IRVS_BURGERS_SD_2025,
+  TL_JAUZ_REPUBLIK_HONOLULU_2025,
+  "Block Party and Honolulu are distinct performances",
+);
+assert.notEqual(
+  TL_JAUZ_BLOCK_PARTY_IRVS_BURGERS_SD_2025,
+  TL_JAUZ_GET_CRANKED_BILL_GRAHAM_SF_2025,
+  "Block Party and Get Cranked are distinct performances",
+);
+const jauzBlockParty = tracklist1001RowsToPlays(
+  TL_JAUZ_BLOCK_PARTY_IRVS_BURGERS_SD_2025,
+);
+assert.equal(jauzBlockParty.length, 104);
+assert.equal(jauzBlockParty[0]?.provenance, "1001tl");
+assert.equal(jauzBlockParty[0]?.timestamp, 1 * 60 + 55);
+assert.equal(jauzBlockParty[0]?.trackTitle, "Renegade Master");
+assert.equal(jauzBlockParty[103]?.trackTitle, "Trampoline (JAUZ Remix)");
+assert.equal(jauzBlockParty[103]?.timestamp, 1 * 3600 + 16 * 60 + 58);
+for (let i = 1; i < jauzBlockParty.length; i++) {
+  assert.ok(
+    (jauzBlockParty[i]?.timestamp ?? 0) >
+      (jauzBlockParty[i - 1]?.timestamp ?? 0),
+    `JAUZ Block Party clocks must increase at index ${i}`,
   );
 }
 

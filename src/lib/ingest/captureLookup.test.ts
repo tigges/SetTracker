@@ -236,6 +236,27 @@ assert.equal(jauzHonoluluYt.slug, "yt-VWMrMUaONhk");
 assert.equal(jauzHonoluluYt.alreadyOnFile, false);
 assert.equal(jauzHonoluluYt.wiredCues, null);
 
+const jauzBlockPartyYt = lookupCapture(
+  "https://youtu.be/QIC0mmUc4OU",
+  shippedArchive,
+);
+assert.equal(jauzBlockPartyYt.slug, "yt-QIC0mmUc4OU");
+assert.equal(jauzBlockPartyYt.alreadyOnFile, true);
+assert.equal(jauzBlockPartyYt.wiredCues, 104);
+assert.ok(
+  jauzBlockPartyYt.archive.some(
+    (h) => h.name === "TL_JAUZ_BLOCK_PARTY_IRVS_BURGERS_SD_2025",
+  ),
+);
+const jauzBlockParty1001 = lookupCapture(
+  "https://www.1001tracklists.com/tracklist/2uwdryg1/jauz-block-party-irvs-burgers-san-diego-united-states-2025-07-17.html",
+  shippedArchive,
+);
+assert.equal(jauzBlockParty1001.tracklistId, "2uwdryg1");
+assert.equal(jauzBlockParty1001.alreadyOnFile, true);
+assert.equal(jauzBlockParty1001.slug, "yt-QIC0mmUc4OU");
+assert.equal(jauzBlockParty1001.wiredCues, 104);
+
 const gregElrowYt = lookupCapture("https://youtu.be/JjkfofWcfec", shippedArchive);
 assert.equal(gregElrowYt.slug, "yt-JjkfofWcfec");
 assert.equal(gregElrowYt.alreadyOnFile, true);
