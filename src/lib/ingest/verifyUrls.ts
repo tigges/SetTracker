@@ -26,7 +26,10 @@ import { mergeSetTitleDjs } from "./mergeSetTitleDjs";
 import { repairInsomniacMixPlayback } from "./insomniac/repairMixPlayback";
 import { applyDjSocialPins } from "./djSocialPins";
 import { applyTrackIdPins, spreadCatalogStoreLinks } from "./identify/trackIdPins";
-import { applyEntityCompletePins } from "./entityCompletePins";
+import {
+  applyEntityCompletePins,
+  clearRejectedDjSocials,
+} from "./entityCompletePins";
 import {
   curatedEventSocialPatch,
   eventSocialCleanupPatch,
@@ -456,6 +459,8 @@ export async function applyKnownUrlFixes(prisma: PrismaClient): Promise<number> 
       `[verify-urls] entity complete pins matched=${entities.matched} filled=${entities.filled} created=${entities.created}`,
     );
   }
+  const rejectedSocials = await clearRejectedDjSocials(prisma);
+  n += rejectedSocials;
 
   // Silhouette DJ / set rows → real set cover or YouTube still.
   try {

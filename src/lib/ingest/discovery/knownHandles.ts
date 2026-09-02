@@ -1067,9 +1067,6 @@ export const KNOWN_HANDLES: Record<string, HandleHint> = {
   zomboy: {
     soundcloudPermalink: "zomboy",
   },
-  "mal\u00f3ne": {
-    soundcloudPermalink: "malone-music",
-  },
   "\u00e6on:mode": {
     soundcloudPermalink: "aeonmode",
   },
