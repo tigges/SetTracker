@@ -14,6 +14,7 @@ assert.equal(isWishlistRosterName("Dillon Francis"), true);
 assert.equal(isWishlistRosterName("Marten Horger"), true);
 assert.equal(isWishlistRosterName("Chapter & Verse"), true);
 assert.equal(isWishlistRosterName("GREG 99"), true);
+assert.equal(isWishlistRosterName("Dimitri Vegas & Like Mike"), true);
 assert.equal(isWishlistRosterName("James Hype"), false);
 
 assert.equal(

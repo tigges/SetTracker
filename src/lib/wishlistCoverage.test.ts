@@ -20,6 +20,11 @@ assert.equal(dillon.youtube, "@DillonFrancis");
 assert.equal(dillon.soundcloud, "dillonfrancis");
 assert.equal(dillon.pin, true);
 
+const dimitri = bySlug.get("dimitri-vegas-like-mike");
+assert.ok(dimitri);
+assert.equal(dimitri.roster, true);
+assert.ok(dimitri.youtube);
+
 const jauz = bySlug.get("jauz");
 assert.ok(jauz);
 assert.equal(jauz.roster, true);
