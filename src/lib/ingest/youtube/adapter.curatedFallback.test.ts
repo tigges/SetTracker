@@ -194,6 +194,9 @@ const BIZARRAP_ULTRA = YOUTUBE_SETS.find((s) =>
   s.video.includes("0psLTNmJM38"),
 );
 const GREG_ELROW = YOUTUBE_SETS.find((s) => s.video.includes("JjkfofWcfec"));
+const JAUZ_BLOCK_PARTY = YOUTUBE_SETS.find((s) =>
+  s.video.includes("QIC0mmUc4OU"),
+);
 
 describe("watchMetaFromCuratedSeed", () => {
   it("builds ASOT 1290 meta from the curated 1001 capture", () => {
@@ -219,6 +222,21 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.equal(GREG_ELROW.eventName, "elrow");
     // Last cue 1:25:40 + 180s pad.
     assert.equal(meta.durationSec, 1 * 3600 + 25 * 60 + 40 + 180);
+  });
+
+  it("builds JAUZ Block Party Irv's Burgers meta from the curated 1001 capture", () => {
+    assert.ok(JAUZ_BLOCK_PARTY);
+    const meta = watchMetaFromCuratedSeed(JAUZ_BLOCK_PARTY);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "QIC0mmUc4OU");
+    assert.match(meta.title, /Block Party/i);
+    assert.equal(JAUZ_BLOCK_PARTY.primaryArtist.name, "JAUZ");
+    assert.equal(JAUZ_BLOCK_PARTY.primaryArtist.slug, "jauz");
+    assert.equal(JAUZ_BLOCK_PARTY.type, "club");
+    assert.equal(JAUZ_BLOCK_PARTY.eventName, undefined);
+    assert.equal(JAUZ_BLOCK_PARTY.seriesName, "Block Party");
+    // Last cue 1:16:58 + 180s pad.
+    assert.equal(meta.durationSec, 1 * 3600 + 16 * 60 + 58 + 180);
   });
 
   it("builds Armin Freedom WE1 meta from the curated 1001 capture", () => {

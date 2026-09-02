@@ -78,4 +78,15 @@ assert.match(jauzHonoluluWatch.note, /never official playback/i);
 assert.equal(isFingerprintOnlyVideoId("VWMrMUaONhk"), true);
 assert.equal(isFingerprintOnlyWatchUrl("https://youtu.be/VWMrMUaONhk"), true);
 
+// Official Block Party series film — playback, not Identify-only.
+assert.equal(isFingerprintOnlyVideoId("QIC0mmUc4OU"), false);
+assert.equal(
+  isFingerprintOnlyWatchUrl("https://youtu.be/QIC0mmUc4OU"),
+  false,
+);
+assert.equal(
+  FINGERPRINT_ONLY_WATCH.some((w) => w.videoId === "QIC0mmUc4OU"),
+  false,
+);
+
 console.log("identify/fingerprintWatch.test.ts ok");

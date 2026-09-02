@@ -562,4 +562,11 @@ const gregElrowSet = artistsForSet(
 assert.equal(gregElrowSet.primary.slug, "greg-99");
 assert.deepEqual(gregElrowSet.collaborators, []);
 
+const jauzBlockPartySet = artistsForSet(
+  "JAUZ | Block Party, Irv's Burgers San Diego 2025",
+  { name: "JAUZ", slug: "jauz", accent: "#7c5cff" },
+);
+assert.equal(jauzBlockPartySet.primary.slug, "jauz");
+assert.deepEqual(jauzBlockPartySet.collaborators, []);
+
 console.log("artists.test.ts ok");
