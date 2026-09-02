@@ -14,8 +14,8 @@ import {
   wishlistLabel,
 } from "./wishlist";
 
-assert.equal(WISHLIST_DEFAULTS.length, 26);
-assert.equal(new Set(wishlistDefaultSlugs()).size, 26);
+assert.equal(WISHLIST_DEFAULTS.length, 27);
+assert.equal(new Set(wishlistDefaultSlugs()).size, 27);
 assert.equal(normalizeWishlistSlug("dradeazy"), "bradeazy");
 assert.equal(normalizeWishlistSlug("breazly"), "bradeazy");
 assert.equal(normalizeWishlistSlug("Marten Hørger"), "marten-horger");
@@ -36,6 +36,15 @@ assert.ok(wishlistDefaultSlugSet().has("malaa"));
 assert.ok(wishlistDefaultSlugSet().has("jauz"));
 assert.ok(wishlistDefaultSlugSet().has("brohug"));
 assert.ok(wishlistDefaultSlugSet().has("wenzday"));
+assert.ok(wishlistDefaultSlugSet().has("dimitri-vegas-like-mike"));
+assert.equal(
+  normalizeWishlistSlug("Dimitri Vegas & Mike"),
+  "dimitri-vegas-like-mike",
+);
+assert.equal(
+  normalizeWishlistSlug("dimitri-vegas-mike"),
+  "dimitri-vegas-like-mike",
+);
 
 for (const row of WISHLIST_DEFAULTS) {
   assert.equal(slugify(row.name), row.slug, `${row.name} → ${row.slug}`);
@@ -54,7 +63,7 @@ const dropped = toggleWishlistSlug(empty, "Chris Lorenzo");
 assert.equal(isWishlisted("chris-lorenzo", dropped), false);
 assert.equal(wishlistIsCustomized(dropped), true);
 assert.ok(!effectiveWishlistSlugs(dropped).includes("chris-lorenzo"));
-assert.equal(effectiveWishlistSlugs(dropped).length, 25);
+assert.equal(effectiveWishlistSlugs(dropped).length, 26);
 
 const restored = toggleWishlistSlug(dropped, "chris-lorenzo");
 assert.equal(isWishlisted("chris-lorenzo", restored), true);

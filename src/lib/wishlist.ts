@@ -46,6 +46,7 @@ export const WISHLIST_DEFAULTS: WishlistEntry[] = [
   { slug: "jauz", name: "Jauz" },
   { slug: "brohug", name: "Brohug" },
   { slug: "wenzday", name: "Wenzday" },
+  { slug: "dimitri-vegas-like-mike", name: "Dimitri Vegas & Like Mike" },
 ];
 
 /** Typed / pasted leftovers → catalog slug. */
@@ -54,6 +55,7 @@ export const WISHLIST_SLUG_ALIASES: Record<string, string> = {
   breazly: "bradeazy",
   "gregg-gg": "greg-99",
   "greg-gg": "greg-99",
+  "dimitri-vegas-mike": "dimitri-vegas-like-mike",
 };
 
 export type WishlistOverlay = {
