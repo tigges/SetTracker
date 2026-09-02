@@ -68,6 +68,28 @@ export function normalizeSocialUrl(
   }
 }
 
+/**
+ * Publisher / empty / collision profiles that name-matching still accepts.
+ * `djmagofficial` leftover is generic ("official") so DJ Mag (and scrape
+ * harvests from djmag.com) can claim the magazine Instagram. Not a DJ source.
+ */
+const REJECTED_SOCIAL_URLS = new Set([
+  "https://soundcloud.com/malone-music",
+  "https://instagram.com/djmagofficial",
+]);
+
+const REJECTED_SOCIAL_HANDLES = new Set(["djmagofficial"]);
+
+export function isRejectedEntitySocialUrl(
+  url: string | null | undefined,
+): boolean {
+  const n = normalizeSocialUrl(url);
+  if (!n) return false;
+  if (REJECTED_SOCIAL_URLS.has(n)) return true;
+  const handle = socialProfileKey(n)?.split(":")[1] ?? "";
+  return REJECTED_SOCIAL_HANDLES.has(handle);
+}
+
 /** `soundcloud:adambeyer` / `twitter:andreaoliva1` / `instagram:streetparade` */
 export function socialProfileKey(
   url: string | null | undefined,
@@ -220,6 +242,7 @@ export function socialFieldFromUrl(
 }
 
 export function djMayClaimSocialUrl(djName: string, url: string): boolean {
+  if (isRejectedEntitySocialUrl(url)) return false;
   const key = socialProfileKey(url);
   if (!key) return false;
   return handleMatchesArtist(key.split(":")[1] ?? "", djName);
@@ -230,6 +253,7 @@ export function eventMayClaimSocialUrl(
   url: string,
   artistKeys: Set<string>,
 ): boolean {
+  if (isRejectedEntitySocialUrl(url)) return false;
   const key = socialProfileKey(url);
   if (!key) return false;
   if (artistKeys.has(key)) return false;

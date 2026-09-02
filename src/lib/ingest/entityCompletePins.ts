@@ -16,7 +16,12 @@ import {
 import { WISHLIST_DEFAULTS } from "../wishlist";
 import { remapAtomicActHalfSlug, remapAtomicActPin } from "./atomicActs";
 import { evaluateHomeCity } from "./discovery/llmJobs";
-import { normalizeSocialUrl } from "./eventSocials";
+import {
+  isRejectedEntitySocialUrl,
+  normalizeSocialUrl,
+} from "./eventSocials";
+
+export { isRejectedEntitySocialUrl };
 
 export type EntityCompleteKind = "dj" | "festival" | "club";
 
@@ -90,15 +95,6 @@ const FALLBACK_WEBSITE_HUB = /linktr\.ee|(^|[./])komi\.io/i;
 const TEMPLATE_BIO =
   /is an? (?:.+based )?DJ, producer or electronic artist whose work centers on/i;
 
-/**
- * Name-adjacent profiles that are not this catalog act.
- * `malone-music` leftover is generic ("music") so nameOverlapsHandle passes,
- * but the SoundCloud is empty/private — not Malóne. Never invent a replacement.
- */
-const REJECTED_ENTITY_SOCIAL_URLS = new Set([
-  "https://soundcloud.com/malone-music",
-]);
-
 const DJ_SOCIAL_FIELDS = [
   "website",
   "instagram",
@@ -106,13 +102,6 @@ const DJ_SOCIAL_FIELDS = [
   "soundcloud",
   "twitter",
 ] as const;
-
-export function isRejectedEntitySocialUrl(
-  url: string | null | undefined,
-): boolean {
-  const n = normalizeSocialUrl(url);
-  return Boolean(n && REJECTED_ENTITY_SOCIAL_URLS.has(n));
-}
 
 const GENERIC_HANDLE_LEFTOVER =
   /^(the|its|itsthe|thisis|official|oficial|real|dj|music|beats|sound|sounds|channel|video|live|tv|hq|ok|iam|im|weare|and|fest|festival|x|com|net|org|nu|io|co|uk|dot|dotcom|[0-9]+)*$/;

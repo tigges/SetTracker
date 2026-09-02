@@ -8,6 +8,7 @@ import { PrismaClient } from "@prisma/client";
 import { DJ_SOCIAL_PINS } from "../src/lib/ingest/djSocialPins.data";
 import {
   djMayClaimSocialUrl,
+  isRejectedEntitySocialUrl,
   socialProfileKey,
 } from "../src/lib/ingest/eventSocials";
 
@@ -76,7 +77,7 @@ async function main() {
       }
       const key = socialProfileKey(url);
       const handle = key?.split(":")[1] ?? "";
-      if (GENERIC.has(handle)) {
+      if (GENERIC.has(handle) || isRejectedEntitySocialUrl(url)) {
         data[field] = null;
         continue;
       }
