@@ -519,13 +519,28 @@ assert.deepEqual(
   ["malaa"],
 );
 
-// Album-titled official Coachella upload — artists first so "What Is Life"
-// is not read as a DJ.
+// Album-titled official Coachella upload — presenters stay on the left
+// of the pipe so "What Is Life" is not a DJ. Preferred primary is the
+// project; Lake + Lorenzo land as collaborators (Men Machine pattern).
 const antiUpCoachellaSet = artistsForSet(
-  "Anti Up | What Is Life [Live From Coachella 2024]",
+  "Chris Lake & Chris Lorenzo pres. Anti Up | What Is Life [Live From Coachella 2024]",
   { name: "Anti Up", slug: "anti-up", accent: "#ff006e" },
 );
 assert.equal(antiUpCoachellaSet.primary.slug, "anti-up");
-assert.deepEqual(antiUpCoachellaSet.collaborators, []);
+assert.deepEqual(
+  antiUpCoachellaSet.collaborators.map((c) => c.slug),
+  ["chris-lake", "chris-lorenzo"],
+);
+
+// High Power Radio show title has no guest token — preferred primary
+// (the host) must stick so we do not mint a "High Power Radio" DJ.
+const vkHighPowerSet = artistsForSet("HighPower Radio #339 (August 21 2026)", {
+  name: "Valentino Khan",
+  slug: "valentino-khan",
+  accent: "#e63946",
+});
+assert.equal(vkHighPowerSet.primary.slug, "valentino-khan");
+assert.equal(vkHighPowerSet.primary.name, "Valentino Khan");
+assert.deepEqual(vkHighPowerSet.collaborators, []);
 
 console.log("artists.test.ts ok");

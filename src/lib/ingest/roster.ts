@@ -803,6 +803,8 @@ export const ARTIST_ROSTER_CURATED: ArtistRosterEntry[] = [
   },
   {
     // Chris Lake + Chris Lorenzo project — anchor favorite.
+    // Member handles (@chrislake, @Lorenzosbeats) stay on those DJ rows,
+    // not Anti Up socials. Relations file links the three slugs.
     // Official SC is still singles. Official YT is mostly shorts plus one
     // curated long-form: yt-cZhNpGcYq_A (full Mojave Coachella WE1 2024).
     // Keep youtube weak so deep-scan does not ingest the remaining clips.

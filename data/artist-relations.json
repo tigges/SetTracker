@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-26T13:00:00.000Z",
+  "updatedAt": "2026-09-01T20:54:00.000Z",
   "relations": [
     {
       "a": "david-guetta",
@@ -22,6 +22,27 @@
       "reason": "Men Machine project",
       "weight": 45,
       "source": "https://www.beatportal.com/articles/1412031-david-guetta-and-marten-horger-launch-men-machine-with-self-titled-ep"
+    },
+    {
+      "a": "anti-up",
+      "b": "chris-lake",
+      "reason": "Anti Up project",
+      "weight": 45,
+      "source": "https://www.youtube.com/watch?v=cZhNpGcYq_A"
+    },
+    {
+      "a": "anti-up",
+      "b": "chris-lorenzo",
+      "reason": "Anti Up project",
+      "weight": 45,
+      "source": "https://www.youtube.com/watch?v=cZhNpGcYq_A"
+    },
+    {
+      "a": "chris-lake",
+      "b": "chris-lorenzo",
+      "reason": "Anti Up project",
+      "weight": 40,
+      "source": "https://www.youtube.com/watch?v=cZhNpGcYq_A"
     }
   ],
   "venueArtists": {

@@ -935,4 +935,22 @@ export const SOUNDCLOUD_TRACK_SEEDS: SoundCloudTrackSeed[] = [
     type: "radio",
     minDurationSec: 30 * 60,
   },
+  {
+    // Official High Power Radio show account (SiriusXM Ch 52 Diplo's
+    // Revolution); user description "Hosted by Valentino Khan." Same class
+    // as Data Transmission / Hellbent. 1001TL wired via
+    // sc-highpowerradio-highpower-radio-339-august-27. Not VK's personal
+    // SC — do not invent a permalink. Paste Wire named
+    // sc-Valentino-Khan_High-Power-Radio-399_2026-08-21 — never wire that.
+    // Never wire sc-https://…. No YouTube in the paste.
+    url: "https://soundcloud.com/highpowerradio/highpower-radio-339-august-27",
+    primaryArtist: dj("Valentino Khan", {
+      accent: "#e63946",
+      homeCity: "Los Angeles, US",
+    }),
+    genre: "House",
+    seriesName: "High Power Radio",
+    type: "radio",
+    minDurationSec: 30 * 60,
+  },
 ];
