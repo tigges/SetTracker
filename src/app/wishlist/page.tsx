@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { WishlistClient } from "@/components/WishlistClient";
 import { getDjList, getWishlistSimilarHints } from "@/lib/queries";
 import { pageMeta } from "@/lib/site";
@@ -22,14 +21,6 @@ export default async function WishlistPage() {
       <div className="mb-8">
         <p className="eyebrow">Personal</p>
         <h1 className="mt-1 text-3xl font-extrabold tracking-tight">Wishlist</h1>
-        <p className="mt-3 text-[13px]">
-          <Link
-            href="/djs"
-            className="text-muted underline decoration-dotted underline-offset-2 hover:text-ink"
-          >
-            All DJs
-          </Link>
-        </p>
       </div>
       <WishlistClient djs={djs} similarHints={similarHints} />
     </div>
