@@ -257,7 +257,7 @@ function SimilarStrip({
         <span className="mono text-[12px] text-muted2">{rows.length}</span>
       </div>
       <p className="mb-3 max-w-2xl text-[13px] text-muted">
-        From sets they share and the same lane. Not on your list yet.
+        Shared sets and the same lane · new names every 6 hours.
       </p>
       <ul className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
         {rows.map((row) => {
