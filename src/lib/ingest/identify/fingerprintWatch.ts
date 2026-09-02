@@ -51,6 +51,15 @@ export const FINGERPRINT_ONLY_WATCH: FingerprintOnlyWatch[] = [
     idOffsetsSec: [],
     note: "Fan recap (@crawfordrecap), first ~20 minutes only. Identify-only — never official playback, YOUTUBE_SETS, or TRACKLIST_1001_BY_SOURCE_SLUG. Official artist is @jauzofficial.",
   },
+  {
+    seed: "TL_JAUZ_REPUBLIK_HONOLULU_2025",
+    youtubeUrl: "https://www.youtube.com/watch?v=VWMrMUaONhk",
+    videoId: "VWMrMUaONhk",
+    channel: "Lord nanakuli",
+    official: false,
+    idOffsetsSec: [],
+    note: "Fan 4K live (@Lordnanakuli), title Jauz live in Hawaii(4k). Identify-only — never official playback, YOUTUBE_SETS, or TRACKLIST_1001_BY_SOURCE_SLUG. Official artist is @jauzofficial. Distinct from held Get Cranked @crawfordrecap recap.",
+  },
 ];
 
 export function isFingerprintOnlyVideoId(id: string): boolean {

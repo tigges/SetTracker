@@ -193,6 +193,7 @@ const LE_TWINS_TULUM = YOUTUBE_SETS.find((s) => s.video.includes("i7XZBixP9m0"))
 const BIZARRAP_ULTRA = YOUTUBE_SETS.find((s) =>
   s.video.includes("0psLTNmJM38"),
 );
+const GREG_ELROW = YOUTUBE_SETS.find((s) => s.video.includes("JjkfofWcfec"));
 
 describe("watchMetaFromCuratedSeed", () => {
   it("builds ASOT 1290 meta from the curated 1001 capture", () => {
@@ -205,6 +206,19 @@ describe("watchMetaFromCuratedSeed", () => {
     assert.match(meta.imageUrl, /bxb6Tglooc4/);
     // Last cue 1:57:45 + 180s pad.
     assert.equal(meta.durationSec, 1 * 3600 + 57 * 60 + 45 + 180);
+  });
+
+  it("builds GREG 99 elrow Laroc meta from the curated 1001 capture", () => {
+    assert.ok(GREG_ELROW);
+    const meta = watchMetaFromCuratedSeed(GREG_ELROW);
+    assert.ok(meta);
+    assert.equal(meta.videoId, "JjkfofWcfec");
+    assert.match(meta.title, /elrow/i);
+    assert.equal(GREG_ELROW.primaryArtist.name, "GREG 99");
+    assert.equal(GREG_ELROW.type, "club");
+    assert.equal(GREG_ELROW.eventName, "elrow");
+    // Last cue 1:25:40 + 180s pad.
+    assert.equal(meta.durationSec, 1 * 3600 + 25 * 60 + 40 + 180);
   });
 
   it("builds Armin Freedom WE1 meta from the curated 1001 capture", () => {

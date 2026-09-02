@@ -117,6 +117,35 @@ assert.ok(
   antiUpWe2.archive.some((h) => h.name === "TL_ANTI_UP_COACHELLA_WE2_MOJAVE_2024"),
 );
 
+// Anti Up EDC LV cosmicMEADOW 2018 — 1001 on file as a hold; Mixcloud
+// ravetapes is not a resolvable host and stays unwired.
+const antiUpEdc2018 = lookupCapture(
+  "https://www.1001tracklists.com/tracklist/2bp7vrmt/chris-lake-chris-lorenzo-pres.-anti-up-cosmicmeadow-edc-las-vegas-united-states-2018-05-18.html",
+  shippedArchive,
+);
+assert.equal(antiUpEdc2018.tracklistId, "2bp7vrmt");
+assert.equal(antiUpEdc2018.alreadyOnFile, true);
+assert.equal(antiUpEdc2018.slug, null);
+assert.equal(antiUpEdc2018.wiredCues, null);
+assert.ok(
+  antiUpEdc2018.archive.some(
+    (h) => h.name === "TL_ANTI_UP_EDC_LV_COSMICMEADOW_2018",
+  ),
+);
+const antiUpEdc2018Mc = lookupCapture(
+  "https://www.mixcloud.com/ravetapes/chris-lake-b2b-chris-lorenzo-edc-2018-las-vegas-full-set/",
+  shippedArchive,
+);
+assert.equal(antiUpEdc2018Mc.slug, null);
+assert.equal(antiUpEdc2018Mc.alreadyOnFile, false);
+assert.equal(antiUpEdc2018Mc.wiredCues, null);
+const antiUpEdc2018FakeWire = lookupCapture(
+  "mc-chris-lake-b2b-chris-lorenzo-edc-2018-las-vegas-full-set",
+  shippedArchive,
+);
+assert.equal(antiUpEdc2018FakeWire.alreadyOnFile, false);
+assert.equal(antiUpEdc2018FakeWire.wiredCues, null);
+
 // MORTEN & Malaa TML WE1 — 1001 on file as a hold; yt-unavailable_atm is not a video.
 const mortenMalaa1001 = lookupCapture(
   "https://www.1001tracklists.com/tracklist/m7srdk1/morten-malaa-crystal-garden-stage-tomorrowland-weekend-1-belgium-2026-07-18.html",
@@ -183,6 +212,47 @@ const vkHighPowerFakeWire = lookupCapture(
 );
 assert.equal(vkHighPowerFakeWire.alreadyOnFile, false);
 assert.equal(vkHighPowerFakeWire.wiredCues, null);
+
+// JAUZ @ The Republik Honolulu — 1001 on file as a hold; fan YT
+// @Lordnanakuli is Identify-only, never wired.
+const jauzHonolulu1001 = lookupCapture(
+  "https://www.1001tracklists.com/tracklist/1pp2lvmt/jauz-the-republik-honolulu-united-states-2025-11-29.html",
+  shippedArchive,
+);
+assert.equal(jauzHonolulu1001.tracklistId, "1pp2lvmt");
+assert.equal(jauzHonolulu1001.alreadyOnFile, true);
+assert.equal(jauzHonolulu1001.slug, null);
+assert.equal(jauzHonolulu1001.wiredCues, null);
+assert.ok(
+  jauzHonolulu1001.archive.some(
+    (h) => h.name === "TL_JAUZ_REPUBLIK_HONOLULU_2025",
+  ),
+);
+const jauzHonoluluYt = lookupCapture(
+  "https://youtu.be/VWMrMUaONhk",
+  shippedArchive,
+);
+assert.equal(jauzHonoluluYt.slug, "yt-VWMrMUaONhk");
+assert.equal(jauzHonoluluYt.alreadyOnFile, false);
+assert.equal(jauzHonoluluYt.wiredCues, null);
+
+const gregElrowYt = lookupCapture("https://youtu.be/JjkfofWcfec", shippedArchive);
+assert.equal(gregElrowYt.slug, "yt-JjkfofWcfec");
+assert.equal(gregElrowYt.alreadyOnFile, true);
+assert.equal(gregElrowYt.wiredCues, 21);
+assert.ok(
+  gregElrowYt.archive.some(
+    (h) => h.name === "TL_GREG_99_ELROW_LAROC_SAO_PAULO_2025",
+  ),
+);
+const gregElrow1001 = lookupCapture(
+  "https://www.1001tracklists.com/tracklist/2899xjxk/greg-99-elrow-laroc-club-sao-paulo-brazil-2025-11-29.html",
+  shippedArchive,
+);
+assert.equal(gregElrow1001.tracklistId, "2899xjxk");
+assert.equal(gregElrow1001.alreadyOnFile, true);
+assert.equal(gregElrow1001.slug, "yt-JjkfofWcfec");
+assert.equal(gregElrow1001.wiredCues, 21);
 
 void TRACKLIST_1001_BY_SOURCE_SLUG;
 console.log("ingest/captureLookup.test.ts ok");

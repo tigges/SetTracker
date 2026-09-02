@@ -1,7 +1,15 @@
 {
   "note": "Operator-collected 1001Tracklists URLs. All listed urls[] rows are now seeded. Prefer new operator pastes over this archive. stillMissing1001 is video-in / no 1001 page — do not invent URLs. heldPendingPlayback is 1001-in / no official YT/SC playback — seed held, do not invent or wire fan playback. pendingCuePaste is official playback + operator 1001 URL without cue rows — do not scrape 1001 or invent 1001tl seeds.",
-  "updatedAt": "2026-09-02T07:20:00.000Z",
+  "updatedAt": "2026-09-02T07:40:00.000Z",
   "urls": [
+    {
+      "label": "GREG 99 · elrow, Laroc Club São Paulo 2025-11-29",
+      "slug": "yt-JjkfofWcfec",
+      "name": "TL_GREG_99_ELROW_LAROC_SAO_PAULO_2025",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/2899xjxk/greg-99-elrow-laroc-club-sao-paulo-brazil-2025-11-29.html",
+      "youtubeUrl": "https://youtu.be/JjkfofWcfec",
+      "note": "Operator paste 2026-09-02. 21 timed cues on official @greg99music. oEmbed title GREG 99 @ ELROW BRAZIL by GREG 99 — matches the roster-pinned handle. Overlay TL_GREG-99_elrow_Laroc-Club_… is not a valid identifier. Distinct from Hellbent FM 006 and Data Transmission 903. No SC in the paste — do not invent an SC slug."
+    },
     {
       "label": "Valentino Khan · High Power Radio 339 2026-08-21",
       "slug": "sc-highpowerradio-highpower-radio-339-august-27",
@@ -853,6 +861,23 @@
     }
   ],
   "heldPendingPlayback": [
+    {
+      "label": "JAUZ · The Republik Honolulu 2025-11-29",
+      "name": "TL_JAUZ_REPUBLIK_HONOLULU_2025",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/1pp2lvmt/jauz-the-republik-honolulu-united-states-2025-11-29.html",
+      "youtubeUrl": "https://youtu.be/VWMrMUaONhk",
+      "rejectedYoutubeUrl": "https://youtu.be/VWMrMUaONhk",
+      "rejectedChannel": "Lord nanakuli",
+      "note": "Operator paste 2026-09-02. 99 timed cues. oEmbed is @Lordnanakuli, title Jauz live in Hawaii(4k) — a fan 4K live capture, not official. Identify-only — never YOUTUBE_SETS or TRACKLIST_1001_BY_SOURCE_SLUG. Official artist is @jauzofficial (YT) / jauzofficial (SC), neither linked from this paste. Seed held until official artist playback. Distinct from held Get Cranked Bill Graham (TL_JAUZ_GET_CRANKED_BILL_GRAHAM_SF_2025 / @crawfordrecap recap). No SC in the paste. Overlay TL_JAUZ_The-Republik_Honolulu_2025-11-29 is not a valid identifier. Mashup-then-component 1:27:19 / 1:27:20 / 1:27:21 stays as captured."
+    },
+    {
+      "label": "Anti Up · cosmicMEADOW, EDC Las Vegas 2018-05-18",
+      "name": "TL_ANTI_UP_EDC_LV_COSMICMEADOW_2018",
+      "tracklistUrl": "https://www.1001tracklists.com/tracklist/2bp7vrmt/chris-lake-chris-lorenzo-pres.-anti-up-cosmicmeadow-edc-las-vegas-united-states-2018-05-18.html",
+      "rejectedMixcloudUrl": "https://www.mixcloud.com/ravetapes/chris-lake-b2b-chris-lorenzo-edc-2018-las-vegas-full-set/",
+      "rejectedChannel": "Rave Tapes",
+      "note": "Operator paste 2026-09-02. 36 timed cues. Mixcloud is ravetapes (Rave Tapes blog archive), not official Anti Up / Chris Lake / Chris Lorenzo / Insomniac / EDC. Title Chris Lake B2B Chris Lorenzo EDC 2018 Las Vegas - full set by Rave Tapes. Never YOUTUBE_SETS / TRACKLIST_1001_BY_SOURCE_SLUG / Mixcloud playback. Mixcloud slugs are not a capture host — never wire mc-chris-lake-b2b-chris-lorenzo-edc-2018-las-vegas-full-set. No YT/SC in the paste — do not invent slugs. Distinct from Coachella WE1 yt-cZhNpGcYq_A and held WE2 2mccm4u1. Overlay TL_MC_CHRIS_LAKE_B2B_… is not a valid identifier. Mashup-then-component 46:00 / 46:01 stays as captured. Seed held until official artist / Insomniac / EDC playback."
+    },
     {
       "label": "Anti Up · Mojave, Coachella WE2 2024-04-19",
       "name": "TL_ANTI_UP_COACHELLA_WE2_MOJAVE_2024",

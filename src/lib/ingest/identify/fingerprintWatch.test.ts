@@ -66,4 +66,16 @@ assert.match(jauzWatch.note, /never official playback/i);
 assert.equal(isFingerprintOnlyVideoId("HeEW36GRsPQ"), true);
 assert.equal(isFingerprintOnlyWatchUrl("https://youtu.be/HeEW36GRsPQ"), true);
 
+const jauzHonoluluWatch = FINGERPRINT_ONLY_WATCH.find(
+  (w) => w.videoId === "VWMrMUaONhk",
+);
+assert.ok(jauzHonoluluWatch);
+assert.equal(jauzHonoluluWatch.official, false);
+assert.equal(jauzHonoluluWatch.channel, "Lord nanakuli");
+assert.equal(jauzHonoluluWatch.seed, "TL_JAUZ_REPUBLIK_HONOLULU_2025");
+assert.equal(jauzHonoluluWatch.idOffsetsSec.length, 0);
+assert.match(jauzHonoluluWatch.note, /never official playback/i);
+assert.equal(isFingerprintOnlyVideoId("VWMrMUaONhk"), true);
+assert.equal(isFingerprintOnlyWatchUrl("https://youtu.be/VWMrMUaONhk"), true);
+
 console.log("identify/fingerprintWatch.test.ts ok");

@@ -222,14 +222,17 @@ import {
   TL_VALENTINO_KHAN_REVEL_ALBUQUERQUE_2026,
   TL_ANTI_UP_COACHELLA_WE1_MOJAVE_2024,
   TL_ANTI_UP_COACHELLA_WE2_MOJAVE_2024,
+  TL_ANTI_UP_EDC_LV_COSMICMEADOW_2018,
   TL_MORTEN_MALAA_TML_WE1_CRYSTAL_2026,
   TL_MORTEN_MALAA_TML_WINTER_MAINSTAGE_2026,
   TL_TCHAMI_MALAA_EDC_LV_CIRCUITGROUNDS_2025,
   TL_JAUZ_GET_CRANKED_BILL_GRAHAM_SF_2025,
+  TL_JAUZ_REPUBLIK_HONOLULU_2025,
   TL_WENZDAY_ILLFEST_WICKED_OAKS_AUSTIN_2025,
   TL_BROHUG_BASS_HOUSE_MIXTAPE_2026,
   TL_GREG_99_DATA_TRANSMISSION_DT903_2025,
   TL_VALENTINO_KHAN_HIGH_POWER_RADIO_339_2026,
+  TL_GREG_99_ELROW_LAROC_SAO_PAULO_2025,
   TL_JORIS_VOORN_CASSIAN_SPECTRUM_RADIO_484_2026,
   TL_JORIS_VOORN_SPECTRUM_RADIO_486_BALANCE_CROATIA_2026,
   TRACKLIST_1001_BY_SOURCE_SLUG,
@@ -6307,6 +6310,46 @@ assert.equal(antiUpCoachella[1]?.timestamp, 6 * 60 + 5);
 assert.equal(antiUpCoachella[15]?.trackTitle, "Turn The Page");
 assert.equal(antiUpCoachella[20]?.trackTitle, "Holding On");
 assert.equal(antiUpCoachella[20]?.timestamp, 63 * 60 + 30);
+
+// Anti Up @ cosmicMEADOW, EDC Las Vegas 2018-05-18.
+// Rave Tapes Mixcloud is a fan archive — held. Never wire mc-… slugs.
+assertSeedClocks(TL_ANTI_UP_EDC_LV_COSMICMEADOW_2018);
+assert.equal(TL_ANTI_UP_EDC_LV_COSMICMEADOW_2018.length, 36);
+assert.equal(
+  Object.values(TRACKLIST_1001_BY_SOURCE_SLUG).includes(
+    TL_ANTI_UP_EDC_LV_COSMICMEADOW_2018,
+  ),
+  false,
+  "EDC LV 2018 cosmicMEADOW seed is held — Rave Tapes Mixcloud is not official",
+);
+assert.equal(
+  isWiredTracklistSlug(
+    "mc-chris-lake-b2b-chris-lorenzo-edc-2018-las-vegas-full-set",
+  ),
+  false,
+);
+assert.notEqual(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-cZhNpGcYq_A"],
+  TL_ANTI_UP_EDC_LV_COSMICMEADOW_2018,
+  "Coachella WE1 YouTube is not EDC LV 2018 playback",
+);
+const antiUpEdc2018 = tracklist1001RowsToPlays(
+  TL_ANTI_UP_EDC_LV_COSMICMEADOW_2018,
+);
+assert.equal(antiUpEdc2018.length, 36);
+assert.equal(antiUpEdc2018[0]?.provenance, "1001tl");
+assert.equal(antiUpEdc2018[0]?.timestamp, 0);
+assert.equal(antiUpEdc2018[0]?.trackTitle, "Piano Hand");
+assert.equal(antiUpEdc2018[14]?.trackTitle, "HUMBLE. (Acappella)");
+assert.equal(antiUpEdc2018[14]?.timestamp, 46 * 60 + 1);
+assert.equal(antiUpEdc2018[35]?.trackTitle, "I Want You");
+assert.equal(antiUpEdc2018[35]?.timestamp, 1 * 3600 + 55 * 60 + 19);
+for (let i = 1; i < antiUpEdc2018.length; i++) {
+  assert.ok(
+    (antiUpEdc2018[i]?.timestamp ?? 0) > (antiUpEdc2018[i - 1]?.timestamp ?? 0),
+    `Anti Up EDC LV cosmicMEADOW 2018 clocks must increase at index ${i}`,
+  );
+}
 for (let i = 1; i < antiUpCoachella.length; i++) {
   assert.ok(
     (antiUpCoachella[i]?.timestamp ?? 0) >
@@ -6559,6 +6602,69 @@ for (let i = 1; i < vkHighPower.length; i++) {
   assert.ok(
     (vkHighPower[i]?.timestamp ?? 0) > (vkHighPower[i - 1]?.timestamp ?? 0),
     `Valentino Khan High Power Radio 339 clocks must increase at index ${i}`,
+  );
+}
+
+// JAUZ @ The Republik Honolulu 2025-11-29.
+// yt-VWMrMUaONhk is a fan 4K live (@Lordnanakuli) — seed held, never wired,
+// Identify-only via FINGERPRINT_ONLY_WATCH. Distinct from Get Cranked
+// Bill Graham (fan @crawfordrecap recap). Overlay
+// TL_JAUZ_The-Republik_Honolulu_2025-11-29 is not a valid identifier.
+assertSeedClocks(TL_JAUZ_REPUBLIK_HONOLULU_2025);
+assert.equal(TL_JAUZ_REPUBLIK_HONOLULU_2025.length, 99);
+assert.equal(
+  Object.values(TRACKLIST_1001_BY_SOURCE_SLUG).includes(
+    TL_JAUZ_REPUBLIK_HONOLULU_2025,
+  ),
+  false,
+  "JAUZ Honolulu seed is held — the YT is a fan 4K, not official",
+);
+assert.equal(TRACKLIST_1001_BY_SOURCE_SLUG["yt-VWMrMUaONhk"], undefined);
+assert.equal(isWiredTracklistSlug("yt-VWMrMUaONhk"), false);
+assert.notEqual(
+  TL_JAUZ_REPUBLIK_HONOLULU_2025,
+  TL_JAUZ_GET_CRANKED_BILL_GRAHAM_SF_2025,
+  "Honolulu and Get Cranked are distinct performances",
+);
+const jauzHonolulu = tracklist1001RowsToPlays(TL_JAUZ_REPUBLIK_HONOLULU_2025);
+assert.equal(jauzHonolulu.length, 99);
+assert.equal(jauzHonolulu[0]?.provenance, "1001tl");
+assert.equal(jauzHonolulu[0]?.timestamp, 1);
+assert.equal(jauzHonolulu[0]?.trackTitle, "Keep The Rave Alive");
+assert.equal(jauzHonolulu[96]?.trackTitle, "In The End vs. S.O.S (JAUZ Edit)");
+assert.equal(jauzHonolulu[96]?.timestamp, 1 * 3600 + 27 * 60 + 19);
+assert.equal(jauzHonolulu[97]?.trackTitle, "In The End");
+assert.equal(jauzHonolulu[97]?.timestamp, 1 * 3600 + 27 * 60 + 20);
+assert.equal(jauzHonolulu[98]?.trackTitle, "S.O.S");
+assert.equal(jauzHonolulu[98]?.timestamp, 1 * 3600 + 27 * 60 + 21);
+for (let i = 1; i < jauzHonolulu.length; i++) {
+  assert.ok(
+    (jauzHonolulu[i]?.timestamp ?? 0) >
+      (jauzHonolulu[i - 1]?.timestamp ?? 0),
+    `JAUZ Honolulu clocks must increase at index ${i}`,
+  );
+}
+
+// GREG 99 @ elrow, Laroc Club São Paulo — wired, official @greg99music.
+// Overlay TL_GREG-99_elrow_… is not a valid identifier.
+assertSeedClocks(TL_GREG_99_ELROW_LAROC_SAO_PAULO_2025);
+assert.equal(TL_GREG_99_ELROW_LAROC_SAO_PAULO_2025.length, 21);
+assert.equal(
+  TRACKLIST_1001_BY_SOURCE_SLUG["yt-JjkfofWcfec"],
+  TL_GREG_99_ELROW_LAROC_SAO_PAULO_2025,
+);
+assert.equal(isWiredTracklistSlug("yt-JjkfofWcfec"), true);
+const gregElrow = tracklist1001RowsToPlays(TL_GREG_99_ELROW_LAROC_SAO_PAULO_2025);
+assert.equal(gregElrow.length, 21);
+assert.equal(gregElrow[0]?.provenance, "1001tl");
+assert.equal(gregElrow[0]?.timestamp, 0);
+assert.equal(gregElrow[0]?.trackTitle, "From Out Of Space");
+assert.equal(gregElrow[20]?.trackTitle, "My Life Is Music");
+assert.equal(gregElrow[20]?.timestamp, 1 * 3600 + 25 * 60 + 40);
+for (let i = 1; i < gregElrow.length; i++) {
+  assert.ok(
+    (gregElrow[i]?.timestamp ?? 0) > (gregElrow[i - 1]?.timestamp ?? 0),
+    `GREG 99 elrow Laroc São Paulo clocks must increase at index ${i}`,
   );
 }
 

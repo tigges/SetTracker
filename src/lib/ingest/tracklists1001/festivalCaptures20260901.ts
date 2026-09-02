@@ -159,6 +159,68 @@ export const TL_ANTI_UP_COACHELLA_WE2_MOJAVE_2024: FingerprintSeedRow[] = [
 ];
 
 /**
+ * Chris Lake & Chris Lorenzo pres. Anti Up @ cosmicMEADOW, EDC Las Vegas 2018-05-18
+ * https://www.1001tracklists.com/tracklist/2bp7vrmt/chris-lake-chris-lorenzo-pres.-anti-up-cosmicmeadow-edc-las-vegas-united-states-2018-05-18.html
+ * Operator Mixcloud
+ * https://www.mixcloud.com/ravetapes/chris-lake-b2b-chris-lorenzo-edc-2018-las-vegas-full-set/
+ * is Rave Tapes (ravetapes.com blog archive), not official Anti Up / Chris
+ * Lake / Chris Lorenzo / Insomniac / EDC. Mixcloud page 2026-09-02: title
+ * "Chris Lake B2B Chris Lorenzo EDC 2018 Las Vegas - full set by Rave Tapes".
+ * Never sourceUrl / playbackUrl / TRACKLIST_1001_BY_SOURCE_SLUG / YOUTUBE_SETS.
+ * Mixcloud slugs are not a capture host (check:capture cannot resolve them)
+ * and are never wired — same as Epic Radio Mixcloud mirrors.
+ * Paste Wire mc-chris-lake-b2b-chris-lorenzo-edc-2018-las-vegas-full-set
+ * is invented — never wire that. Overlay
+ * TL_MC_CHRIS_LAKE_B2B_CHRIS_LORENZO_EDC_2018_LAS_VEG is not a valid
+ * identifier.
+ * No YouTube or SoundCloud in the paste — do not invent YT/SC slugs.
+ * Distinct from Coachella WE1 yt-cZhNpGcYq_A and held WE2 2mccm4u1.
+ * Anti Up is the Lake + Lorenzo project (Men Machine pattern) — primary
+ * stays anti-up when an official playback exists.
+ * Mashup-then-component cluster at 46:00 / 46:01 stays as captured.
+ * Seed held until official artist / Insomniac / EDC playback exists.
+ * Captured 2026-09-02 — provenance 1001tl.
+ */
+export const TL_ANTI_UP_EDC_LV_COSMICMEADOW_2018: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "Chris Lake & Chris Lorenzo", title: "Piano Hand" },
+  { at: "4:40", artist: "Goooey Vuitton", title: "Appreciation" },
+  { at: "6:30", artist: "Distinkt", title: "Brands" },
+  { at: "11:50", artist: "Youri Donatz & Franky Rizardo", title: "I Like This Sound" },
+  { at: "12:16", artist: "Elektrochemie LK", title: "Schall (Acappella)" },
+  { at: "12:48", artist: "Chris Lake & Chris Lorenzo pres. Anti Up", title: "Pizza" },
+  { at: "16:30", artist: "Todd Terry ft. The Gypsymen", title: "Babarabatiri (David Penn Remix)" },
+  { at: "25:20", artist: "Friend Within", title: "The Renegade" },
+  { at: "29:00", artist: "Chris Lake ft. Dances With White Girls", title: "Operator (Ring Ring)" },
+  { at: "32:00", artist: "Chris Lake & Chris Lorenzo", title: "The Calling" },
+  { at: "35:55", artist: "Yaeji", title: "Raingurl (Chris Lake Re-Edit)" },
+  { at: "39:30", artist: "Walker & Royce & Ardalan", title: "Turn It Around" },
+  { at: "43:10", artist: "Chris Lake & Green Velvet", title: "Deceiver" },
+  { at: "46:00", artist: "Chris Lorenzo & DJ Zinc", title: "Gammy Elbow" },
+  { at: "46:01", artist: "Kendrick Lamar", title: "HUMBLE. (Acappella)" },
+  { at: "48:40", artist: "Chris Lake ft. Dances With White Girls", title: "Give Her Right Back" },
+  { at: "50:40", artist: "Chris Lake & Destructo", title: "Y.O.D.O" },
+  { at: "52:30", artist: "Chris Lake & Walker & Royce", title: "Drop Top" },
+  { at: "56:25", artist: "FISHER", title: "Ya Kidding" },
+  { at: "59:30", artist: "Chris Lake & Chris Lorenzo pres. Anti Up", title: "Concentrate" },
+  { at: "1:07:30", artist: "Prince", title: "FUNKNROLL (Chris Lake Edit)" },
+  { at: "1:08:30", artist: "Chris Lake", title: "Lose My Mind" },
+  { at: "1:13:28", artist: "BETON ft. Wevie Stonder", title: "Directions" },
+  { at: "1:15:01", artist: "Chris Lake & Chris Lorenzo pres. Anti Up", title: "Hey Pablo" },
+  { at: "1:18:07", artist: "Cause & Affect", title: "Snatch Ma Crops" },
+  { at: "1:18:55", artist: "Justin Martin ft. Will Clarke", title: "Back To The Jungle (Chris Lorenzo Remix)" },
+  { at: "1:21:29", artist: "Will Clarke", title: "Take A Seat" },
+  { at: "1:24:58", artist: "Neville Bartos & Chris Lorenzo", title: "Coke Diet" },
+  { at: "1:28:01", artist: "FISHER", title: "Losing It" },
+  { at: "1:33:16", artist: "Chris Lake & Chris Lorenzo pres. Anti Up", title: "Friday" },
+  { at: "1:36:46", artist: "Destructo ft. Ty Dolla $ign & iLoveMakonnen", title: "4 Real (Chris Lorenzo Remix)" },
+  { at: "1:37:35", artist: "Dennis Ferrer", title: "Hey Hey (Dennis Ferrer Attention Vocal Mix)" },
+  { at: "1:42:50", artist: "Chris Lake & Walker & Royce", title: "Dance With Me" },
+  { at: "1:47:34", artist: "Cause & Affect", title: "The Enforcer" },
+  { at: "1:51:18", artist: "Chris Lake & Chris Lorenzo", title: "Nothing Better" },
+  { at: "1:55:19", artist: "Chris Lake", title: "I Want You" },
+];
+
+/**
  * MORTEN & Malaa @ Crystal Garden Stage, Tomorrowland Weekend 1, Belgium 2026-07-18
  * https://www.1001tracklists.com/tracklist/m7srdk1/morten-malaa-crystal-garden-stage-tomorrowland-weekend-1-belgium-2026-07-18.html
  * Operator Wire named yt-unavailable_atm — not a video id. Never invent a
@@ -508,4 +570,163 @@ export const TL_VALENTINO_KHAN_HIGH_POWER_RADIO_339_2026: FingerprintSeedRow[] =
   { at: "48:26", artist: "Valentino Khan & Proppa ft. Big Baby Scumbag", title: "Dale Earnhardt" },
   { at: "52:08", artist: "AFTER MIDNIGHT", title: "Slinging Dope" },
   { at: "55:50", artist: "Odd Mob & OMNOM pres. HYPERBEAM", title: "Take You There" },
+];
+
+/**
+ * GREG 99 @ elrow, Laroc Club Sao Paulo, Brazil 2025-11-29
+ * https://www.1001tracklists.com/tracklist/2899xjxk/greg-99-elrow-laroc-club-sao-paulo-brazil-2025-11-29.html
+ * Official YT: https://youtu.be/JjkfofWcfec — oEmbed 2026-09-02: channel
+ * "GREG 99" (@greg99music), title "GREG 99 @ ELROW BRAZIL" — matches the
+ * roster-pinned handle.
+ * Wire: TRACKLIST_1001_BY_SOURCE_SLUG["yt-JjkfofWcfec"]
+ *   = TL_GREG_99_ELROW_LAROC_SAO_PAULO_2025
+ * Overlay name TL_GREG-99_elrow_Laroc-Club_Sao-Paulo_Brazil_2025-11-29 is
+ * not a valid identifier.
+ * Distinct from Hellbent FM 006 and Data Transmission 903.
+ * No SoundCloud in the paste — do not invent an SC slug.
+ * Captured 2026-09-02 — provenance 1001tl.
+ */
+export const TL_GREG_99_ELROW_LAROC_SAO_PAULO_2025: FingerprintSeedRow[] = [
+  { at: "0:00", artist: "DJ Glen", title: "From Out Of Space" },
+  { at: "1:55", artist: "Chuck Roberts", title: "My House (Acappella)" },
+  { at: "3:50", artist: "Pedroz & GREG 99", title: "Goodies" },
+  { at: "8:00", artist: "Mike Dunn pres. Mr. 69", title: "Phreaky MF (Matroda & GREG 99 Remix)" },
+  { at: "12:35", artist: "Gabss", title: "Giddy Up" },
+  { at: "16:55", artist: "Volkoder", title: "She Kisses" },
+  { at: "20:35", artist: "Fly With Us & Deijuvhs", title: "Blacked Out" },
+  { at: "25:55", artist: "GREG 99", title: "Pump It Up" },
+  { at: "29:45", artist: "GREG 99", title: "Waist Move" },
+  { at: "34:50", artist: "Benny Benassi pres. The Biz", title: "Satisfaction (TOBEHONEST Edit)" },
+  { at: "38:45", artist: "GREG 99", title: "Get Stupid" },
+  { at: "44:25", artist: "AYYBO & Ragie Ban", title: "I Don't Want To" },
+  { at: "47:15", artist: "Loleatta Holloway", title: "Dreamin'" },
+  { at: "50:05", artist: "GREG 99", title: "Bad Choices" },
+  { at: "1:00:25", artist: "Pedroz & GREG 99", title: "Music Is The Answer" },
+  { at: "1:06:30", artist: "GREG 99", title: "Goin Junky" },
+  { at: "1:10:30", artist: "Pedroz", title: "1, 2 Step" },
+  { at: "1:12:40", artist: "GREG 99", title: "We Like It Raw" },
+  { at: "1:17:20", artist: "Florence + The Machine", title: "You've Got The Love (JOSHWA Edit)" },
+  { at: "1:20:10", artist: "Laura Branigan", title: "Self Control" },
+  { at: "1:25:40", artist: "Felix Da Housecat & The Visionary", title: "My Life Is Music" },
+];
+
+/**
+ * JAUZ @ The Republik Honolulu, United States 2025-11-29
+ * https://www.1001tracklists.com/tracklist/1pp2lvmt/jauz-the-republik-honolulu-united-states-2025-11-29.html
+ * Operator YouTube https://youtu.be/VWMrMUaONhk — oEmbed 2026-09-02: channel
+ * "Lord nanakuli" (@Lordnanakuli), title "Jauz live in Hawaii(4k)" — a fan
+ * 4K live capture, not the official artist. Official artist channels are
+ * @jauzofficial (YT) / jauzofficial (SC); neither is linked from this paste.
+ * Never YOUTUBE_SETS / TRACKLIST_1001_BY_SOURCE_SLUG. Identify-only in
+ * FINGERPRINT_ONLY_WATCH. Paste Wire
+ * TRACKLIST_1001_BY_SOURCE_SLUG["yt-VWMrMUaONhk"] =
+ * TL_JAUZ_The-Republik_Honolulu_2025-11-29 stays unwired — overlay name is
+ * not a valid identifier.
+ * Distinct from held Get Cranked Bill Graham
+ * (TL_JAUZ_GET_CRANKED_BILL_GRAHAM_SF_2025 / fan @crawfordrecap recap).
+ * Mashup-then-component clusters stay as captured, including the 1:27:19 /
+ * 1:27:20 / 1:27:21 In The End vs. S.O.S triple.
+ * No SoundCloud in the paste — do not invent an SC slug.
+ * Captured 2026-09-02 — provenance 1001tl.
+ */
+export const TL_JAUZ_REPUBLIK_HONOLULU_2025: FingerprintSeedRow[] = [
+  { at: "0:01", artist: "JAUZ & Lazer Lazer Lazer", title: "Keep The Rave Alive" },
+  { at: "1:03", artist: "Skrillex & Kill The Noise ft. Fatman Scoop & Michael Angelakos", title: "Recess (Acappella)" },
+  { at: "2:04", artist: "JAUZ & HYPRESSION", title: "On Fire (VIP)" },
+  { at: "2:51", artist: "JAUZ & Nonsens vs. AFROJACK & Steve Aoki & Miss Palmer", title: "The Beat vs. No Beef (JAUZ Edit)" },
+  { at: "3:26", artist: "JAUZ & Nonsens", title: "The Beat" },
+  { at: "4:01", artist: "AFROJACK & Steve Aoki ft. Miss Palmer", title: "No Beef (Acappella)" },
+  { at: "4:35", artist: "JAUZ & Ephwurd vs. Eliminate", title: "Rock The Party vs. Comecloser (JAUZ Edit)" },
+  { at: "5:20", artist: "Eliminate", title: "Comecloser" },
+  { at: "6:06", artist: "JAUZ & Ephwurd", title: "Rock The Party" },
+  { at: "6:51", artist: "JAUZ & Crankdat ft. Slushii", title: "I Hold Still" },
+  { at: "8:05", artist: "Axwell Λ Ingrosso & Kristoffer Fogelmark vs. JAUZ", title: "More Than You Know vs. Alpha (JAUZ Edit)" },
+  { at: "8:36", artist: "Axwell Λ Ingrosso ft. Kristoffer Fogelmark", title: "More Than You Know" },
+  { at: "9:07", artist: "JAUZ", title: "Alpha" },
+  { at: "9:37", artist: "Montell Jordan vs. Jauz", title: "This Is How We Do It vs. Alpha (JAUZ Mashup)" },
+  { at: "10:23", artist: "Montell Jordan", title: "This Is How We Do It" },
+  { at: "11:09", artist: "JAUZ", title: "Alpha" },
+  { at: "11:54", artist: "Wuki", title: "Pon De Time (NITTI Edit)" },
+  { at: "12:15", artist: "Daft Punk", title: "One More Time" },
+  { at: "12:37", artist: "Major Lazer ft. Vybz Kartel", title: "Pon De Floor" },
+  { at: "12:58", artist: "Major Lazer ft. Vybz Kartel vs. Busy Signal vs. Eptic vs. Carnage & Breaux & Nom De Strip", title: "Pon De The End (Benzi Edit)" },
+  { at: "13:05", artist: "Major Lazer ft. Vybz Kartel", title: "Pon De Floor" },
+  { at: "13:12", artist: "Eptic", title: "The End (Carnage & Breaux Festival Trap Remix)" },
+  { at: "13:18", artist: "DJ Snake", title: "Propaganda (JAUZ Remix)" },
+  { at: "13:54", artist: "AC/DC", title: "Thunderstruck (Crookers Remix)" },
+  { at: "14:44", artist: "JAUZ & DNMO", title: "Thunder" },
+  { at: "16:53", artist: "JAUZ & Silent Child", title: "Shake Sh!t Up" },
+  { at: "19:22", artist: "JAUZ vs. Skrillex & Hamdi & Taichu & OFFAIAH vs. Benny Benassi", title: "Role Models (JAUZ Push Push Bootleg Version)" },
+  { at: "20:02", artist: "JAUZ", title: "Role Models" },
+  { at: "20:42", artist: "Skrillex & Hamdi & Taichu & OFFAIAH", title: "Push" },
+  { at: "21:22", artist: "Adam Port & Stryv ft. Malachiii", title: "Move (JAUZ Remix)" },
+  { at: "22:44", artist: "Drake", title: "NOKIA" },
+  { at: "24:13", artist: "Doechii vs. Dirty Audio vs. JOYRYDE & Freddie Gibbs vs. Viperactive", title: "NISSAN ALTIMA vs. Back vs. Damn vs. Poison (TURCH Edit)" },
+  { at: "24:23", artist: "Dirty Audio", title: "Back" },
+  { at: "24:33", artist: "Viperactive", title: "Poison" },
+  { at: "24:43", artist: "Doechii", title: "NISSAN ALTIMA" },
+  { at: "24:53", artist: "JOYRYDE ft. Freddie Gibbs", title: "Damn" },
+  { at: "25:03", artist: "Swedish House Mafia & Pharrell Williams vs. Marshmello & SVDDEN DEATH", title: "One (Your Name) vs. Vortexblade (SLICK Edit)" },
+  { at: "25:35", artist: "Marshmello & SVDDEN DEATH", title: "Vortexblade" },
+  { at: "26:08", artist: "Swedish House Mafia ft. Pharrell Williams", title: "One (Your Name)" },
+  { at: "26:40", artist: "Cobra Starship ft. Sabi", title: "You Make Me Feel..." },
+  { at: "27:20", artist: "DEV ft. The Cataracs", title: "Bass Down Low (Acappella)" },
+  { at: "28:00", artist: "Cajmere ft. Dajae", title: "Brighter Days (OVTPLAY Remix)" },
+  { at: "28:36", artist: "Ariana Grande ft. Zedd", title: "Break Free" },
+  { at: "30:11", artist: "JAUZ ft. 666", title: "Super Fly (Wicked VIP)" },
+  { at: "31:27", artist: "Crazy Frog vs. JAUZ & 666", title: "Axel F vs. Super Fly (JAUZ Edit)" },
+  { at: "31:54", artist: "Crazy Frog", title: "Axel F" },
+  { at: "32:21", artist: "666 ft. 666", title: "Supa-Dupa-Fly (JAUZ Super Fly)" },
+  { at: "32:47", artist: "Artemas", title: "i like the way you kiss me (JAUZ Remix)" },
+  { at: "34:59", artist: "JAUZ", title: "2 Step" },
+  { at: "36:50", artist: "Alice Deejay vs. JAUZ & DJ Snake", title: "Better Off Alone vs. Gassed Up (JAUZ Mashup)" },
+  { at: "37:01", artist: "Alice Deejay", title: "Better Off Alone" },
+  { at: "37:12", artist: "JAUZ & DJ Snake", title: "Gassed Up" },
+  { at: "37:22", artist: "Yeah Yeah Yeahs & A-Trak & Kid Kamillion vs. Rihanna vs. Mightyfools & Yellow Claw & Hasse De Moor", title: "Heads Will Roll vs. Work vs. Lick Dat (Flosstradamus Edit)" },
+  { at: "37:32", artist: "Yeah Yeah Yeahs", title: "Heads Will Roll (A-Trak Remix / Kid Kamillion Trap Edit)" },
+  { at: "37:41", artist: "Mightyfools & Yellow Claw", title: "Lick Dat (Hasse de Moor Bootlick)" },
+  { at: "37:51", artist: "Rihanna ft. Drake", title: "Work" },
+  { at: "38:00", artist: "JAUZ & DJ Snake", title: "Gassed Up" },
+  { at: "39:10", artist: "Calvin Harris & Ellie Goulding", title: "Miracle (Edison Cole Remix)" },
+  { at: "40:25", artist: "Diplo & HUGEL ft. Malou & Yuna (US)", title: "Forever (JAUZ Remix)" },
+  { at: "41:56", artist: "Massano & Segan vs. Black Eyed Peas & TANTRON", title: "The Feeling vs. Pump It (JAUZ Edit)" },
+  { at: "42:49", artist: "Massano", title: "The Feeling (Segan Edit)" },
+  { at: "43:42", artist: "Black Eyed Peas", title: "Pump It (Tantron DnB Bootleg)" },
+  { at: "44:35", artist: "JAUZ", title: "BAD BOI SOUND" },
+  { at: "45:01", artist: "Fred again.. & Baby Keem", title: "leavemealone" },
+  { at: "45:26", artist: "Bare Up", title: "Can't Stop" },
+  { at: "46:04", artist: "JAUZ & Netsky", title: "Higher (The Prototypes Remix)" },
+  { at: "48:01", artist: "Dom Dolla ft. Clementine Douglas", title: "Miracle Maker (Subsonic Bootleg)" },
+  { at: "49:12", artist: "Imagine Dragons", title: "Eyes Closed (JAUZ Remix)" },
+  { at: "50:50", artist: "Hedex ft. Eksman", title: "MHITR (Semi Automatic)" },
+  { at: "51:36", artist: "JAUZ & Zeds Dead", title: "Lights Go Down" },
+  { at: "52:18", artist: "deadmau5", title: "Strobe (Dimension Remix)" },
+  { at: "53:26", artist: "JAUZ", title: "Lose Control" },
+  { at: "55:00", artist: "JAUZ & Habstrakt", title: "Like Before" },
+  { at: "58:08", artist: "MK ft. CHRYSTAL", title: "Dior" },
+  { at: "1:00:56", artist: "JAUZ & Ephwurd", title: "Rock The Party (longstoryshort UKG Flip)" },
+  { at: "1:02:03", artist: "Skrillex & BEAM", title: "Selecta (Ashdunn Remix)" },
+  { at: "1:03:00", artist: "Sammy Virji", title: "I Guess We're Not The Same (JAUZ Remix)" },
+  { at: "1:05:05", artist: "ATRIP", title: "ORB" },
+  { at: "1:05:30", artist: "CHRYSTAL", title: "The Days (NOTION Remix)" },
+  { at: "1:07:29", artist: "JAUZ", title: "Rockin" },
+  { at: "1:10:54", artist: "FISHER & Flowdan", title: "Boost Up (JAUZ Bootleg)" },
+  { at: "1:12:30", artist: "JAUZ", title: "Melting" },
+  { at: "1:15:04", artist: "Imagine Dragons & Codeko vs. Perry Wayne vs. Flux Pavillion vs. RAFAEL & HAHNER vs. Knife Party & JAUZ", title: "Power vs. Radioactive vs. Lost vs. ICS vs. PLUR Police (JAUZ Edit)" },
+  { at: "1:15:43", artist: "Imagine Dragons", title: "Radioactive" },
+  { at: "1:16:22", artist: "Knife Party", title: "PLUR Police (JAUZ Remix)" },
+  { at: "1:17:00", artist: "Zomboy", title: "Invaders" },
+  { at: "1:17:26", artist: "Kanye West & Ty Dolla $ign pres. ¥$ & Playboi Carti & Rich The Kid vs. Travis Scott vs. Knife Party & JAUZ vs. Cascada & Hardwell & Maurice West", title: "CARNIVAL vs. FE!N vs. PLUR Police vs. Everytime We Touch (JAUZ Edit)" },
+  { at: "1:17:56", artist: "Cascada", title: "Everytime We Touch (Hardwell & Maurice West Remix)" },
+  { at: "1:18:27", artist: "Knife Party", title: "PLUR Police (JAUZ Remix)" },
+  { at: "1:18:57", artist: "Travis Scott ft. Playboi Carti", title: "FE!N" },
+  { at: "1:19:28", artist: "Kanye West & Ty Dolla $ign pres. ¥$ ft. Playboi Carti & Rich The Kid", title: "CARNIVAL" },
+  { at: "1:19:58", artist: "Corona", title: "The Rhythm Of The Night (Acappella)" },
+  { at: "1:20:17", artist: "Skrillex", title: "Scary Monsters And Nice Sprites (YOOKiE 'This Kills It Live' VIP)" },
+  { at: "1:21:02", artist: "AFK & Carbin ft. Cody Ray", title: "Boss" },
+  { at: "1:23:02", artist: "JAUZ & HALIENE", title: "Oceans & Galaxies (VIP)" },
+  { at: "1:25:42", artist: "SHAED", title: "Trampoline (JAUZ Remix)" },
+  { at: "1:27:19", artist: "Tommee Profitt & Fleurie vs. JAUZ & Zeds Dead & Nicole Millar", title: "In The End vs. S.O.S (JAUZ Edit)" },
+  { at: "1:27:20", artist: "Tommee Profitt & Fleurie", title: "In The End" },
+  { at: "1:27:21", artist: "JAUZ & Zeds Dead ft. Nicole Millar", title: "S.O.S" },
 ];
