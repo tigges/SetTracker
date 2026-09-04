@@ -28,15 +28,24 @@ assert.equal(fileNeedsCuratedIngest("src/app/page.tsx"), false);
 assert.equal(fileNeedsCuratedIngest("public/artists/1788-l.jpg"), false);
 assert.equal(fileNeedsCuratedIngest("package.json"), false);
 
-assert.deepEqual(
+const dispatchSkip = decideCuratedIngest({
+  eventName: "workflow_dispatch",
+  changedFiles: ["src/lib/ingest/soundcloud/tracks.ts"],
+});
+assert.equal(dispatchSkip.run, false);
+assert.equal(
+  dispatchSkip.reason,
+  "workflow_dispatch uses cached catalog (no curated re-poll)",
+);
+assert.match(dispatchSkip.warn ?? "", /will not poll curated YT\/SC/);
+
+assert.match(
   decideCuratedIngest({
-    eventName: "workflow_dispatch",
+    eventName: "push",
+    mode: "skip",
     changedFiles: ["src/lib/ingest/soundcloud/tracks.ts"],
-  }),
-  {
-    run: false,
-    reason: "workflow_dispatch uses cached catalog (no curated re-poll)",
-  },
+  }).warn ?? "",
+  /ingest=skip with catalog source changes/,
 );
 
 assert.equal(

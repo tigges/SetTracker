@@ -6,7 +6,10 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { isLeftoverHostName } from "../artistName";
 import { KNOWN_EVENTS } from "../ingest/events";
-import type { EntityCompletePin } from "../ingest/entityCompletePins";
+import {
+  isRejectedEntitySocialUrl,
+  type EntityCompletePin,
+} from "../ingest/entityCompletePins";
 import {
   hasEvenlySpacedClocks,
   type FingerprintSeedRow,
@@ -135,6 +138,23 @@ function auditEntityPins(): QcIssue[] {
         slug: pin.slug,
         detail: `weak official website ${pin.website}`,
       });
+    }
+    for (const field of [
+      "website",
+      "instagram",
+      "youtube",
+      "soundcloud",
+      "twitter",
+    ] as const) {
+      const value = pin[field];
+      if (value && isRejectedEntitySocialUrl(value)) {
+        issues.push({
+          severity: "error",
+          area: "entity-complete-pins",
+          slug: pin.slug,
+          detail: `rejected social ${value}`,
+        });
+      }
     }
   }
   return issues;

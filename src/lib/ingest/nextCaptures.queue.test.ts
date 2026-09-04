@@ -3,6 +3,8 @@ import {
   CAPTURE_QUEUE_LIMIT,
   CAPTURE_QUEUE_RESERVE,
   buildCaptureQueueFromNeeds,
+  formatCaptureHolds,
+  summarizeCaptureHolds,
   captureEventBucket,
   capturePerEventCap,
   captureFocusYear,
@@ -1636,5 +1638,28 @@ assert.ok(
   nightsThenMix.slice(1).every((p) => p.slug.startsWith("sc-studio-mix-")),
   "this year's studio mixes fill after this year's nights",
 );
+
+const holdRows = [
+  row({ slug: "yt-epic-026", title: "EPIC Radio 026", playCount: 20 }),
+  y2025Star,
+  row({
+    slug: "yt-hold-night-2026",
+    title: "Nameless gap 2026",
+    eventSlug: "nameless",
+    eventRank: 40,
+    publishedAt: "2026-07-01T00:00:00Z",
+    performedAt: "2026-07-01T00:00:00Z",
+    editionYear: 2026,
+    playCount: 0,
+    density: "severe",
+    isFestival: true,
+  }),
+];
+const holds = summarizeCaptureHolds(holdRows, {
+  nowMs: now,
+  deferred: new Set(["yt-hold-night-2026"]),
+});
+assert.ok((holds.mapped ?? 0) + (holds.stale ?? 0) + (holds.deferred ?? 0) >= 2);
+assert.match(formatCaptureHolds(holds), /already wired|prior year|parked/);
 
 console.log("nextCaptures.queue.test.ts ok");

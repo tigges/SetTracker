@@ -330,10 +330,13 @@ export function planStoreLinkSpreads(
     if (isLikelyUnbuyable(row.title, row.artistName)) continue;
     const code = normalizeIsrc(row.isrc);
     const key = trackIdentityKey(row.title, row.artistName);
+    const namedBp = byKeyBp.get(key);
     const beatport =
       canonicalBeatportUrl(row.beatportUrl) ||
       (code ? byIsrcBp.get(code) : undefined) ||
-      byKeyBp.get(key);
+      (namedBp && beatportSlugMatchesTitle(namedBp, row.title)
+        ? namedBp
+        : undefined);
     const spotify =
       canonicalSpotifyUrl(row.spotifyUrl) ||
       (code ? byIsrcSp.get(code) : undefined) ||

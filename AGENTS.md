@@ -307,13 +307,13 @@ unless asked. Never write Relive for HARD / Insomniac / Nameless / Ultra.
   a per-row **Later** button (localStorage, this browser only) plus **Copy
   defer JSON** to commit the shared version. Wiring a tracklist is the real
   fix — never park a row to "finish" it.
-  **/stats queues:** flat, no nesting. **Capture 1001** (`#capture-1001`) is
-  the only set queue on the page — it has real actions (Open SC/YT, Search
-  1001, Copy capture). `statsWorkbench.ts` still ranks text / ACR / IDs lanes
-  and keeps its tests, but nothing renders it: those lanes had no operator
-  action and starved each other at the 40-row cut. Do not re-add a workbench
-  fold without per-row actions and a per-lane quota. DJ complete and
-  places-without-a-set are the other queues.
+  **/stats queues:** flat, no nesting. **Auto ID** (`#auto-id`) is the
+  default set queue — first-party text → File Scan / Identify → track IDs,
+  8 rows per lane, Open SC/YT/HT + Search MixesDB (stored player URL only).
+  **Capture 1001** (`#capture-1001`) is exceptional: overlay when those
+  jobs still leave a thin list (Open SC/YT, Search 1001, Copy capture).
+  Do not fold the lanes together without a per-lane quota. DJ complete
+  and places-without-a-set are the other queues.
   **Host-twin fold:** same 1001 seed + both official YT and SC permalinks
   already known → one catalog row, both URLs kept, SC-first playback,
   secondary slug aliases to the survivor. Never invents a missing host.

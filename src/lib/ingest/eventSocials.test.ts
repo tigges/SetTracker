@@ -5,6 +5,7 @@ import {
   curatedEventSocialPatch,
   djMayClaimSocialUrl,
   eventMayClaimSocialUrl,
+  isRejectedEntitySocialUrl,
   eventSocialCleanupPatch,
   handleMatchesArtist,
   handleMatchesEvent,
@@ -79,11 +80,27 @@ assert.equal(
   djMayClaimSocialUrl("Westend", "https://instagram.com/beatport"),
   false,
 );
+assert.equal(
+  isRejectedEntitySocialUrl("https://www.instagram.com/djmagofficial"),
+  true,
+);
+assert.equal(
+  djMayClaimSocialUrl("DJ Mag", "https://www.instagram.com/djmagofficial"),
+  false,
+);
 
 const pins = artistSocialKeysFromPins();
 assert.ok(pins.has("instagram:realadambeyer"));
 
 const emptyArtists = new Set<string>();
+assert.equal(
+  eventMayClaimSocialUrl(
+    "DJ Mag",
+    "https://www.instagram.com/djmagofficial",
+    emptyArtists,
+  ),
+  false,
+);
 assert.equal(
   eventMayClaimSocialUrl(
     "Street Parade",

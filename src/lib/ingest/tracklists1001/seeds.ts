@@ -8,10 +8,11 @@
  * https://1001.tl/vfff7hk (2026-07-27).
  */
 
-import type { FingerprintSeedRow } from "../fingerprint/seeds";
 import {
   fingerprintRowsToPlays,
+  hasEvenlySpacedClocks,
   mergeFingerprintPlays,
+  type FingerprintSeedRow,
 } from "../fingerprint/seeds";
 import type { RawPlay } from "../types";
 import { TRACKLIST_1001_BY_SOURCE_SLUG } from "./festival2026";
@@ -263,18 +264,50 @@ export function tracklist1001RowsToPlays(rows: FingerprintSeedRow[]): RawPlay[] 
   }));
 }
 
+function clockAt(sec: number): string {
+  const n = Math.max(0, Math.floor(sec));
+  const m = Math.floor(n / 60);
+  const s = n % 60;
+  return `${m}:${String(s).padStart(2, "0")}`;
+}
+
+/** True when overlay clocks vary like a real mix, not evenlySpaceRows. */
+export function overlayHasRealClocks(plays: RawPlay[]): boolean {
+  const rows: FingerprintSeedRow[] = plays
+    .filter((p) => Number.isFinite(p.timestamp) && p.timestamp >= 0)
+    .map((p) => ({
+      at: clockAt(p.timestamp),
+      artist: p.artistName || "x",
+      title: p.trackTitle || "x",
+    }));
+  const clocked = plays.filter((p) => p.timestamp > 0).length;
+  if (clocked < 3 || rows.length < 3) return false;
+  const minRun = Math.min(8, Math.max(5, rows.length - 1));
+  return !hasEvenlySpacedClocks(rows, minRun);
+}
+
+function baseLooksUntimed(base: RawPlay[]): boolean {
+  if (base.length === 0) return true;
+  return base.filter((p) => p.timestamp > 0).length < 3;
+}
+
 /**
- * Merge curated / fetched 1001 plays into a source tracklist.
- * Dense lists (≥12) replace thin stubs; otherwise gap-fill.
+ * Merge overlay clocks (1001 / MixesDB) into a source tracklist.
+ * Real (uneven) clocks replace an untimed YouTube-credit stub even below 12
+ * rows. Evenly spaced synthetic clocks only gap-fill. Dense real lists (≥12)
+ * still replace.
  */
 export function merge1001Plays(
   base: RawPlay[],
   from1001: RawPlay[],
 ): RawPlay[] {
   if (!from1001.length) return base;
-  if (from1001.length >= 12) return from1001;
+  const realClocks = overlayHasRealClocks(from1001);
+  if (from1001.length >= 12 && realClocks) return from1001;
+  if (realClocks && baseLooksUntimed(base)) return from1001;
   return mergeFingerprintPlays(base, from1001, {
-    replaceIfSourceBelow: 15,
+    // Synthetic even clocks must not become the backbone of a credit stub.
+    replaceIfSourceBelow: realClocks ? 15 : 0,
   });
 }
 

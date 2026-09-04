@@ -7,6 +7,7 @@ import {
 import { suggestIdSnippetText } from "./suggestIdSnippet";
 
 assert.equal(isSuggestIdIssueTitle("ID suggest: sc-foo #2 → A – T"), true);
+assert.equal(isSuggestIdIssueTitle("ID suggest: sc-foo @04:12 → A – T"), true);
 assert.equal(isSuggestIdIssueTitle("chore: bump"), false);
 
 const body = [

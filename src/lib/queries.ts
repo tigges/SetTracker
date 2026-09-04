@@ -515,6 +515,12 @@ export async function getSetBySlug(slug: string) {
       })),
     statusCounts: tallyStatuses(plays.filter((p) => !isTalkPlay(p))),
     trackCount: plays.filter((p) => !isTalkPlay(p)).length,
+    storedPlayCount: set.plays.length,
+    parkedIdCount: set.plays.filter(
+      (p) =>
+        /\bacr-miss\b/i.test(p.rawText ?? "") ||
+        /\bacr-miss\b/i.test(p.idTrack?.note ?? ""),
+    ).length,
     plays,
   };
 }
