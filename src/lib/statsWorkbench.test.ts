@@ -1,8 +1,11 @@
 import assert from "node:assert/strict";
 import {
+  AUTO_ID_LANE_QUOTA,
+  buildAutoIdQueue,
   buildTracklistWorkbench,
   compareWorkbenchRows,
   looksLikeFirstPartyStub,
+  watchUrlForAutoId,
   workbenchLaneRank,
 } from "./statsWorkbench";
 
@@ -91,4 +94,113 @@ const emptyOnlyInCapture = buildTracklistWorkbench({
 });
 assert.equal(emptyOnlyInCapture[0]?.lane, "capture_1001");
 
-console.log("statsWorkbench.test.ts ok", rows.length);
+assert.equal(
+  watchUrlForAutoId("yt-ViNSjYircPs"),
+  "https://www.youtube.com/watch?v=ViNSjYircPs",
+);
+assert.equal(
+  watchUrlForAutoId("sc-mix", "https://soundcloud.com/artist/set"),
+  "https://soundcloud.com/artist/set",
+);
+assert.equal(
+  watchUrlForAutoId(
+    "sc-mix",
+    null,
+    "https://www.1001tracklists.com/tracklist/abc/index.html",
+  ),
+  null,
+);
+
+const auto = buildAutoIdQueue({
+  emptySets: [
+    {
+      slug: "yt-ViNSjYircPs",
+      title: "Empty official YT",
+      sourceName: "YouTube",
+    },
+  ],
+  sparseSets: [
+    {
+      id: "1b",
+      slug: "sc-acr",
+      title: "ACR sparse",
+      sourceName: "SoundCloud",
+      durationSec: 3600,
+      playCount: 8,
+      playbackHost: "soundcloud",
+      playbackUrl: "https://soundcloud.com/artist/set",
+    },
+  ],
+  needsIdsSets: [
+    {
+      id: "2",
+      slug: "yt-needs-id",
+      title: "Needs IDs",
+      sourceName: "YouTube",
+      durationSec: 3600,
+      playCount: 20,
+      identifiedCount: 4,
+      unresolvedCount: 16,
+      identifiedRatio: 0.2,
+      primaryDj: "Someone",
+    },
+  ],
+  capturePresets: [
+    {
+      label: "Capture me",
+      slug: "yt-capture",
+      name: "TL_CAPTURE",
+      searchUrl: "https://www.1001tracklists.com/search/",
+    },
+  ],
+});
+assert.equal(
+  auto.some((r) => r.lane === "capture_1001"),
+  false,
+  "Auto ID never lists a 1001 paste row",
+);
+assert.ok(auto.some((r) => r.lane === "first_party" && r.mixesdbUrl));
+assert.ok(auto.some((r) => r.lane === "fingerprint" && r.hostLabel === "SC"));
+assert.ok(auto.some((r) => r.lane === "track_id"));
+
+const flooded = buildAutoIdQueue({
+  emptySets: Array.from({ length: 30 }, (_, i) => ({
+    slug: `yt-empty${String(i).padStart(2, "0")}`,
+    title: `Empty ${i}`,
+    sourceName: "YouTube",
+  })),
+  sparseSets: [
+    {
+      id: "acr",
+      slug: "sc-acr-quota",
+      title: "ACR kept",
+      sourceName: "SoundCloud",
+      durationSec: 3600,
+      playCount: 8,
+      playbackHost: "soundcloud",
+    },
+  ],
+  needsIdsSets: [
+    {
+      id: "ids",
+      slug: "yt-ids-quota",
+      title: "IDs kept",
+      sourceName: "YouTube",
+      durationSec: 3600,
+      playCount: 20,
+      identifiedCount: 2,
+      unresolvedCount: 18,
+      identifiedRatio: 0.1,
+      primaryDj: null,
+    },
+  ],
+  laneQuota: AUTO_ID_LANE_QUOTA,
+});
+assert.equal(
+  flooded.filter((r) => r.lane === "first_party").length,
+  AUTO_ID_LANE_QUOTA,
+);
+assert.ok(flooded.some((r) => r.lane === "fingerprint"));
+assert.ok(flooded.some((r) => r.lane === "track_id"));
+
+console.log("statsWorkbench.test.ts ok", rows.length, auto.length);

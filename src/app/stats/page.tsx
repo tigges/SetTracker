@@ -20,7 +20,13 @@ import { buildCapturePreflightIndex } from "@/lib/ingest/capturePreflight";
 import { loadKnown1001ArchiveRows } from "@/lib/ingest/known1001Archive";
 import { TRACKLIST_1001_BY_SOURCE_SLUG } from "@/lib/ingest/tracklists1001/festival2026";
 import { CAPTURE_QUEUE_LIMIT } from "@/lib/ingest/captureQueueLimits";
+import { formatCaptureHolds } from "@/lib/ingest/nextCaptures";
 import { getCatalogStats } from "@/lib/catalogStats";
+import {
+  WORKBENCH_LANE_LABEL,
+  buildAutoIdQueue,
+  type AutoIdRow,
+} from "@/lib/statsWorkbench";
 import { getStatsNewSets } from "@/lib/statsNewSets";
 import { prisma } from "@/lib/db";
 import { loadDjMagTop100RankBySlug } from "@/lib/djmagTop100";
@@ -191,6 +197,86 @@ function DjCompleteQueue({
   );
 }
 
+function AutoIdQueue({ rows }: { rows: AutoIdRow[] }) {
+  if (rows.length === 0) {
+    return (
+      <p className="text-[13px] text-muted2">
+        Next enrich / cue parse / File Scan / track-id pass has nothing queued.
+      </p>
+    );
+  }
+  const head = rows.slice(0, PREVIEW);
+  const rest = rows.slice(PREVIEW);
+  const list = (items: AutoIdRow[]) => (
+    <ul className="divide-y divide-line border-y border-line">
+      {items.map((row) => (
+        <li
+          key={`${row.lane}-${row.slug}`}
+          className="flex flex-col gap-1.5 py-1.5 sm:flex-row sm:items-center sm:justify-between"
+        >
+          <div className="min-w-0">
+            <div className="flex min-w-0 items-baseline gap-1.5">
+              <NeedPill
+                label={WORKBENCH_LANE_LABEL[row.lane]}
+                className={FOLLOW_UP_PILL.auto}
+              />
+              {row.href ? (
+                <Link
+                  href={row.href}
+                  className="truncate text-[13px] font-semibold text-ink hover:underline"
+                >
+                  {row.title}
+                </Link>
+              ) : (
+                <span className="truncate text-[13px] font-semibold text-ink">
+                  {row.title}
+                </span>
+              )}
+            </div>
+            <p className="mono truncate text-[11px] text-muted2">
+              {row.slug}
+              {row.detail ? ` · ${row.detail}` : ""}
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-1.5">
+            {row.watchUrl ? (
+              <a
+                href={row.watchUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="chip-ink rounded-md px-2.5 py-1 text-[12px] font-bold"
+              >
+                {row.hostLabel === "SC"
+                  ? "Open SC"
+                  : row.hostLabel === "HT"
+                    ? "Open HT"
+                    : "Open YT"}
+              </a>
+            ) : null}
+            {row.mixesdbUrl ? (
+              <a
+                href={row.mixesdbUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="rounded-md border border-line px-2.5 py-1 text-[12px] font-bold text-ink"
+                title="Follow the stored player URL — do not invent a MixesDB title"
+              >
+                Search MixesDB
+              </a>
+            ) : null}
+          </div>
+        </li>
+      ))}
+    </ul>
+  );
+  return (
+    <>
+      {list(head)}
+      <MoreFold restCount={rest.length}>{list(rest)}</MoreFold>
+    </>
+  );
+}
+
 function PlaceGapQueue({
   rows,
 }: {
@@ -259,6 +345,7 @@ export default async function StatsPage() {
     captureQueue.presets.length,
     CAPTURE_QUEUE_LIMIT,
   );
+  const captureHolds = formatCaptureHolds(captureQueue.holds);
   const actionsStatus = loadActionsStatusFile();
   const llmStats = loadLlmResearchStats();
   const top100 = loadDjMagTop100RankBySlug();
@@ -282,6 +369,17 @@ export default async function StatsPage() {
     health.festivals.gaps,
     health.clubs.gaps,
   );
+  const autoId = buildAutoIdQueue({
+    emptySets: s.emptySets,
+    sparseSets: s.sparseSets,
+    tracklistGaps: s.tracklistGaps,
+    needsIdsSets: s.needsIdsSets,
+  });
+  const autoIdCounts = {
+    text: autoId.filter((r) => r.lane === "first_party").length,
+    acr: autoId.filter((r) => r.lane === "fingerprint").length,
+    ids: autoId.filter((r) => r.lane === "track_id").length,
+  };
 
   return (
     <div>
@@ -358,8 +456,17 @@ export default async function StatsPage() {
         hint="A set is the list of tracks · playback is the official recording"
         slices={health.sets.slices}
         onChart={health.sets.onChart}
-        actions={
-          captureQueueOpen
+        actions={[
+          ...(autoId.length
+            ? [
+                {
+                  href: "#auto-id",
+                  label: "Auto ID",
+                  count: autoId.length,
+                },
+              ]
+            : []),
+          ...(captureQueueOpen
             ? [
                 {
                   href: "#capture-1001",
@@ -367,8 +474,8 @@ export default async function StatsPage() {
                   count: captureQueueOpen,
                 },
               ]
-            : []
-        }
+            : []),
+        ]}
       >
         <StatsMeter
           label="Identified"
@@ -420,14 +527,27 @@ export default async function StatsPage() {
         <StatsNotesLink hash="queues" />
       </div>
 
-      <div id="capture-1001" className="scroll-mt-20">
+      <div id="auto-id" className="scroll-mt-20">
         <span id="workbench" />
         <span id="lists" />
         <span id="cues" />
         <QueueFold
+          title="Auto ID"
+          count={autoId.length}
+          hint={`${autoIdCounts.text} text · ${autoIdCounts.acr} File Scan · ${autoIdCounts.ids} track IDs. Next enrich / cue parse drains this. Search MixesDB follows the stored player URL only — never invent a /w/ title.`}
+          followUp="auto"
+          open
+        >
+          <AutoIdQueue rows={autoId} />
+        </QueueFold>
+      </div>
+      <div id="capture-1001" className="scroll-mt-20">
+        <QueueFold
           title="Capture 1001"
           count={captureQueueOpen}
-          hint="Official playback · no 1001 list. This year only · ★ Top 100 nights first."
+          hint={`Exceptional overlay when first-party clocks and File Scan still leave a thin list. This year only · ★ Top 100 nights first.${
+            captureHolds ? ` Held out: ${captureHolds}.` : ""
+          }`}
           followUp="operator"
         >
           <Suspense fallback={null}>
