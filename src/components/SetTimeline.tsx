@@ -23,6 +23,7 @@ import {
   COMMENT_LIKELY_TALK,
   COMMENT_LOW_CONFIDENCE,
   displayPlayTitle,
+  formatCueDebt,
   hasVendorDetectionCopy,
   isTalkPlay,
   publicStatusLabel,
@@ -81,6 +82,8 @@ export function SetTimeline({
   setType,
   setSourceUrl,
   setPlaybackUrl,
+  storedPlayCount,
+  parkedIdCount,
   children,
 }: {
   plays: PlayRow[];
@@ -94,6 +97,9 @@ export function SetTimeline({
   setSourceUrl?: string | null;
   /** Playable host URL when it differs from source (official YT vs SC upload). */
   setPlaybackUrl?: string | null;
+  /** Raw Played rows before publishSetPlays hides acr-miss / expected slots. */
+  storedPlayCount?: number;
+  parkedIdCount?: number;
   /** Rendered between the set strip and the tracklist (legend, export). */
   children?: ReactNode;
 }) {
@@ -128,6 +134,11 @@ export function SetTimeline({
     playCount: trackCount,
     genre: setGenre,
     type: setType,
+  });
+  const cueDebt = formatCueDebt({
+    stored: storedPlayCount ?? plays.length,
+    published: trackCount,
+    parked: parkedIdCount ?? 0,
   });
 
   useEffect(() => {
@@ -200,6 +211,9 @@ export function SetTimeline({
               <p className="mt-1 text-[11px] text-muted">
                 Thin list · {density.reason}
               </p>
+            ) : null}
+            {cueDebt ? (
+              <p className="mt-1 text-[11px] text-muted2">{cueDebt}</p>
             ) : null}
           </div>
           <div className="flex items-center gap-3 text-[12px] text-muted2 sm:ml-auto">
@@ -508,6 +522,8 @@ export function SetTimeline({
                     if (!canSeek && !links) return null;
                     const pill =
                       "grid h-6 w-6 place-items-center rounded-md border border-line text-[10px] text-muted2 transition-colors hover:border-brand hover:text-brand";
+                    const pillSearch =
+                      "grid h-6 w-6 place-items-center rounded-md border border-dashed border-line text-[10px] text-muted2/80 transition-colors hover:border-brand hover:text-brand";
                     return (
                       <div
                         className="flex flex-none items-center gap-1"
@@ -534,9 +550,16 @@ export function SetTimeline({
                                 ? "Play on Spotify"
                                 : "Search on Spotify"
                             }
-                            className={pill}
+                            aria-label={
+                              links.spotifyIsCanonical
+                                ? "Play on Spotify"
+                                : "Search on Spotify"
+                            }
+                            className={
+                              links.spotifyIsCanonical ? pill : pillSearch
+                            }
                           >
-                            SP
+                            {links.spotifyIsCanonical ? "SP" : "S?"}
                           </a>
                         )}
                         {links?.beatport && (
@@ -549,9 +572,16 @@ export function SetTimeline({
                                 ? "Buy on Beatport"
                                 : "Search on Beatport"
                             }
-                            className={pill}
+                            aria-label={
+                              links.beatportIsCanonical
+                                ? "Buy on Beatport"
+                                : "Search on Beatport"
+                            }
+                            className={
+                              links.beatportIsCanonical ? pill : pillSearch
+                            }
                           >
-                            BP
+                            {links.beatportIsCanonical ? "BP" : "B?"}
                           </a>
                         )}
                       </div>

@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import {
   buildSuggestIdSnippet,
+  suggestIdIssueTitle,
   suggestIdSnippetText,
 } from "./suggestIdSnippet";
 
@@ -31,5 +32,24 @@ assert.ok(
 // Pasted text has to be valid JSON for data/resolutions.json.
 const parsed = JSON.parse(suggestIdSnippetText(snippet));
 assert.deepEqual(parsed, snippet);
+
+assert.equal(
+  suggestIdIssueTitle({
+    setSlug: "sc-foo",
+    timestamp: 252,
+    artist: "A",
+    title: "T",
+  }),
+  "ID suggest: sc-foo @04:12 → A – T",
+);
+assert.match(
+  suggestIdIssueTitle({
+    setSlug: "yt-bar",
+    timestamp: 3723,
+    artist: "A",
+    title: "T",
+  }),
+  /@1:02:03/,
+);
 
 console.log("suggestIdSnippet.test.ts ok");

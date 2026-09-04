@@ -227,6 +227,8 @@ export default async function SetPage({
         setType={set.type}
         setSourceUrl={set.sourceUrl}
         setPlaybackUrl={set.playbackUrl}
+        storedPlayCount={set.storedPlayCount}
+        parkedIdCount={set.parkedIdCount}
       >
         <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
           <p className="min-w-0 text-[12px] text-muted2">
