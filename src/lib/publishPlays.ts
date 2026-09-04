@@ -185,6 +185,19 @@ function isConfirmedId(status: string): boolean {
   return status === "identified" || status === "community_resolved";
 }
 
+/** Operator line when stored rows and the published graph disagree. */
+export function formatCueDebt(input: {
+  stored: number;
+  published: number;
+  parked: number;
+}): string | null {
+  if (input.parked <= 0 && input.stored <= input.published) return null;
+  const parts = [`${input.published} on the graph`];
+  if (input.stored !== input.published) parts.push(`${input.stored} stored`);
+  if (input.parked > 0) parts.push(`${input.parked} parked IDs`);
+  return parts.join(" · ");
+}
+
 export function isFingerprintPlaceholder(
   play: Pick<
     PublishablePlay,

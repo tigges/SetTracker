@@ -40,3 +40,6 @@ const decision = decideCuratedIngest({
 
 console.log(`run=${decision.run ? "1" : "0"}`);
 console.log(`reason=${decision.reason}`);
+if (decision.warn) {
+  console.log(`::warning::${decision.warn}`);
+}

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import {
   buildSuggestIdSnippet,
+  suggestIdIssueTitle,
   suggestIdSnippetText,
 } from "@/lib/suggestIdSnippet";
 import { soundsLikeLine } from "@/lib/publishPlays";
@@ -61,7 +62,12 @@ export function SuggestIdButton({
     const q = new URLSearchParams();
     q.set(
       "title",
-      `ID suggest: ${setSlug} #${position} → ${artist.trim()} – ${title.trim()}`,
+      suggestIdIssueTitle({
+        setSlug,
+        timestamp,
+        artist,
+        title,
+      }),
     );
     q.set(
       "body",
@@ -69,8 +75,8 @@ export function SuggestIdButton({
         `## ID suggestion`,
         ``,
         `- **Set:** \`${setSlug}\``,
-        `- **Position:** ${position}`,
-        `- **Timestamp:** ${timestamp}s`,
+        `- **Timestamp:** ${timestamp}s (match key)`,
+        `- **Position:** ${position} (display index only)`,
         `- **Current row:** ${currentLabel}`,
         `- **Suggested:** ${artist.trim()} – ${title.trim()}`,
         ``,

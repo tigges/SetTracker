@@ -2,9 +2,9 @@
  * Build the operator capture queue.
  *
  * Offline JSON (set-density / top100 reports) is a fallback for CI scripts.
- * The /stats#workbench ranks from the catalog DB at Pages build time
+ * The /stats Auto ID fold ranks from the catalog DB at Pages build time
  * so every deploy after deep/enrich shows current gaps. Capture 1001
- * stays a closed #capture-1001 anchor — last lane, not the default.
+ * stays a closed #capture-1001 anchor — exceptional overlay, not the default.
  */
 
 import { readFileSync, existsSync } from "node:fs";
@@ -415,6 +415,60 @@ export function skipCaptureNeed(
     return "already-dense";
   }
   return null;
+}
+
+const HOLD_LABEL: Record<string, string> = {
+  mapped: "already wired",
+  "has-1001": "already wired",
+  deferred: "parked",
+  stale: "prior year",
+  "weekly-radio": "weekly radio",
+  "already-dense": "already dense",
+  mirror: "host twin",
+  alias: "host twin",
+  "generic-title": "generic title",
+  "archive-title": "archive title",
+  shorts: "shorts",
+  short: "too short",
+  "livestream-hub": "hub feed",
+};
+
+/** Why catalog gaps never reached the 40-row Capture 1001 queue. */
+export function summarizeCaptureHolds(
+  rows: CaptureNeedRow[],
+  opts: { nowMs?: number; deferred?: Set<string> } = {},
+): Record<string, number> {
+  const mapped = mappedSlugs();
+  const nowMs = opts.nowMs ?? Date.now();
+  const deferred = opts.deferred ?? new Set<string>();
+  const counts: Record<string, number> = {};
+  const bump = (key: string) => {
+    counts[key] = (counts[key] ?? 0) + 1;
+  };
+  for (const row of rows) {
+    const skip = skipCaptureNeed(row, mapped, nowMs);
+    if (skip) {
+      bump(skip);
+      continue;
+    }
+    if (deferred.has(row.slug)) bump("deferred");
+  }
+  return counts;
+}
+
+export function formatCaptureHolds(holds: Record<string, number> | undefined): string {
+  if (!holds) return "";
+  const rolled: Record<string, number> = {};
+  for (const [key, n] of Object.entries(holds)) {
+    if (!n) continue;
+    const label = HOLD_LABEL[key] ?? key;
+    rolled[label] = (rolled[label] ?? 0) + n;
+  }
+  return Object.entries(rolled)
+    .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+    .slice(0, 6)
+    .map(([label, n]) => `${n} ${label}`)
+    .join(" · ");
 }
 
 export function scoreCaptureNeed(row: CaptureNeedRow, nowMs = Date.now()): number {

@@ -15,6 +15,7 @@ import {
   buildCaptureQueueFromNeeds,
   extrasFromCaptureSnapshot,
   extrasFromHeldReliveWatch,
+  summarizeCaptureHolds,
   type CaptureNeedRow,
   type CapturePreset,
   isStrongIdentifiedPlay,
@@ -29,6 +30,7 @@ import captureDefer from "../../data/capture-defer.json";
 export type CaptureQueue = {
   generatedAt: string;
   presets: CapturePreset[];
+  holds?: Record<string, number>;
 };
 
 export async function getCaptureQueue(
@@ -132,14 +134,16 @@ export async function getCaptureQueue(
     };
   });
 
+  const deferred = activeDeferSlugs(captureDefer, nowMs);
   return {
     generatedAt: new Date().toISOString(),
     presets: buildCaptureQueueFromNeeds(rows, {
       limit,
       extra,
       nowMs,
-      deferred: activeDeferSlugs(captureDefer, nowMs),
+      deferred,
     }),
+    holds: summarizeCaptureHolds(rows, { nowMs, deferred }),
   };
 }
 
@@ -168,5 +172,5 @@ export async function loadOperatorCaptureQueue(
   } catch {
     /* no catalog DB — keep playback extras / committed snapshot */
   }
-  return { generatedAt, presets };
+  return { generatedAt, presets, holds: {} };
 }

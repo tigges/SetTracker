@@ -6,6 +6,7 @@ import {
   COMMENT_NOT_DETECTED,
   UNKNOWN_TRACK_TITLE,
   displayPlayTitle,
+  formatCueDebt,
   hasVendorDetectionCopy,
   parseWeakFingerprintHint,
   publicStatusLabel,
@@ -471,6 +472,18 @@ describe("listener-facing unknown copy", () => {
         segmentKind: "track",
       }),
       COMMENT_NOT_DETECTED,
+    );
+  });
+});
+
+describe("formatCueDebt", () => {
+  it("stays quiet when the graph matches storage", () => {
+    assert.equal(formatCueDebt({ stored: 12, published: 12, parked: 0 }), null);
+  });
+  it("names parked IDs and extra stored rows", () => {
+    assert.equal(
+      formatCueDebt({ stored: 40, published: 9, parked: 28 }),
+      "9 on the graph · 40 stored · 28 parked IDs",
     );
   });
 });

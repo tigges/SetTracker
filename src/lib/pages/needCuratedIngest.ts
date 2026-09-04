@@ -46,13 +46,20 @@ export function decideCuratedIngest(opts: {
   mode?: string;
   changedFiles: string[];
   hasPreviousSha?: boolean;
-}): { run: boolean; reason: string } {
+}): { run: boolean; reason: string; warn?: string } {
   const mode = parseCuratedIngestMode(opts.mode);
   if (mode === "force") {
     return { run: true, reason: "ingest=force" };
   }
   if (mode === "skip") {
-    return { run: false, reason: "ingest=skip" };
+    const skippedHits = opts.changedFiles.filter(fileNeedsCuratedIngest);
+    return {
+      run: false,
+      reason: "ingest=skip",
+      warn: skippedHits.length
+        ? "ingest=skip with catalog source changes — new YT/SC seeds 404 until a crawling deploy"
+        : undefined,
+    };
   }
 
   // Deep/enrich dispatch must not re-poll — they already wrote the DB cache.
@@ -60,6 +67,8 @@ export function decideCuratedIngest(opts: {
     return {
       run: false,
       reason: "workflow_dispatch uses cached catalog (no curated re-poll)",
+      warn:
+        "This Pages run will not poll curated YT/SC. If it cancelled a push that added roster or video seeds, those sets 404 until the next crawling deploy.",
     };
   }
 
