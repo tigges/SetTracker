@@ -3,6 +3,10 @@
  *
  * Lanes: first-party text → fingerprint → track IDs → optional 1001 last.
  * One set appears in one lane. Capture 1001 never outranks the others.
+ *
+ * /stats Auto ID renders the three automatic lanes with a per-lane quota
+ * and Open playback / Search MixesDB actions. Capture 1001 stays its own
+ * exceptional fold.
  */
 
 import {
@@ -16,6 +20,7 @@ import type {
   StatsSparseSet,
   StatsTracklistGap,
 } from "./catalogStats";
+import { searchMixesdbByPlayerUrl } from "./searchMixesdb";
 
 export type WorkbenchLane =
   | "first_party"
@@ -38,6 +43,57 @@ export const WORKBENCH_LANE_LABEL: Record<WorkbenchLane, string> = {
   track_id: "IDs",
   capture_1001: "1001",
 };
+
+export const AUTO_ID_LANES = [
+  "first_party",
+  "fingerprint",
+  "track_id",
+] as const satisfies readonly WorkbenchLane[];
+
+/** Per automatic lane so text / ACR / IDs cannot starve each other. */
+export const AUTO_ID_LANE_QUOTA = 8;
+
+export type AutoIdRow = WorkbenchRow & {
+  watchUrl: string | null;
+  mixesdbUrl: string | null;
+  hostLabel: "YT" | "SC" | "HT" | null;
+};
+
+type Watchable = {
+  slug: string;
+  playbackUrl?: string | null;
+  sourceUrl?: string | null;
+};
+
+export function watchUrlForAutoId(
+  slug: string,
+  playbackUrl?: string | null,
+  sourceUrl?: string | null,
+): string | null {
+  if (playbackUrl?.startsWith("http")) return playbackUrl;
+  const source = sourceUrl?.startsWith("http") ? sourceUrl : null;
+  if (
+    source &&
+    !/1001tracklists\.com|1001\.tl/i.test(source)
+  ) {
+    return source;
+  }
+  if (slug.startsWith("yt-") && slug.length > 3) {
+    return `https://www.youtube.com/watch?v=${slug.slice(3)}`;
+  }
+  return null;
+}
+
+export function autoIdHostLabel(
+  slug: string,
+  watchUrl: string | null,
+): AutoIdRow["hostLabel"] {
+  const hay = `${slug} ${watchUrl ?? ""}`.toLowerCase();
+  if (hay.includes("soundcloud") || slug.startsWith("sc-")) return "SC";
+  if (hay.includes("hearthis") || slug.startsWith("ht-")) return "HT";
+  if (hay.includes("youtube") || slug.startsWith("yt-")) return "YT";
+  return null;
+}
 
 export function workbenchLaneRank(lane: WorkbenchLane): number {
   if (lane === "first_party") return 0;
@@ -68,7 +124,13 @@ function officialHost(
 }
 
 export function buildTracklistWorkbench(input: {
-  emptySets?: Array<{ slug: string; title: string; sourceName: string | null }>;
+  emptySets?: Array<{
+    slug: string;
+    title: string;
+    sourceName: string | null;
+    playbackUrl?: string | null;
+    sourceUrl?: string | null;
+  }>;
   sparseSets?: StatsSparseSet[];
   tracklistGaps?: StatsTracklistGap[];
   needsIdsSets?: StatsNeedsIdSet[];
@@ -169,6 +231,58 @@ export function buildTracklistWorkbench(input: {
   });
 
   return rows.sort(compareWorkbenchRows).slice(0, limit);
+}
+
+function watchMapFromWorkbenchInput(input: {
+  emptySets?: Watchable[];
+  sparseSets?: Watchable[];
+  tracklistGaps?: Watchable[];
+  needsIdsSets?: Watchable[];
+}): Map<string, string> {
+  const map = new Map<string, string>();
+  const remember = (row: Watchable) => {
+    if (map.has(row.slug)) return;
+    const url = watchUrlForAutoId(row.slug, row.playbackUrl, row.sourceUrl);
+    if (url) map.set(row.slug, url);
+  };
+  for (const row of input.emptySets ?? []) remember(row);
+  for (const row of input.sparseSets ?? []) remember(row);
+  for (const row of input.tracklistGaps ?? []) remember(row);
+  for (const row of input.needsIdsSets ?? []) remember(row);
+  return map;
+}
+
+/** Automatic ID spine — no 1001 lane, per-lane quota, MixesDB follow actions. */
+export function buildAutoIdQueue(
+  input: Parameters<typeof buildTracklistWorkbench>[0] & {
+    laneQuota?: number;
+  },
+): AutoIdRow[] {
+  const quota = input.laneQuota ?? AUTO_ID_LANE_QUOTA;
+  const ranked = buildTracklistWorkbench({
+    ...input,
+    capturePresets: [],
+    // Rank the full pool first; per-lane quota is applied below so one
+    // lane of stubs cannot eat the 24-row cut.
+    limit: 400,
+  });
+  const watches = watchMapFromWorkbenchInput(input);
+  const taken: Record<string, number> = {};
+  const out: AutoIdRow[] = [];
+  for (const row of ranked) {
+    if (row.lane === "capture_1001") continue;
+    const n = taken[row.lane] ?? 0;
+    if (n >= quota) continue;
+    taken[row.lane] = n + 1;
+    const watchUrl = watches.get(row.slug) ?? watchUrlForAutoId(row.slug);
+    out.push({
+      ...row,
+      watchUrl,
+      mixesdbUrl: searchMixesdbByPlayerUrl(watchUrl),
+      hostLabel: autoIdHostLabel(row.slug, watchUrl),
+    });
+  }
+  return out;
 }
 
 /** Test helper: empty official playbacks rank as first-party stubs. */

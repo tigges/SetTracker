@@ -88,6 +88,7 @@ export type StatsSparseSet = {
   durationSec: number;
   playCount: number;
   playbackHost: string | null;
+  playbackUrl?: string | null;
 };
 
 export type StatsTracklistGap = {
@@ -99,6 +100,7 @@ export type StatsTracklistGap = {
   durationSec: number;
   reason: string;
   sourceUrl: string | null;
+  playbackUrl?: string | null;
   hasSetPage: boolean;
   captureQuery: string;
 };
@@ -114,6 +116,7 @@ export type StatsNeedsIdSet = {
   unresolvedCount: number;
   identifiedRatio: number;
   primaryDj: string | null;
+  playbackUrl?: string | null;
 };
 
 export type CatalogStats = {
@@ -188,6 +191,8 @@ export type CatalogStats = {
     title: string;
     sourceName: string | null;
     type: string;
+    playbackUrl?: string | null;
+    sourceUrl?: string | null;
   }>;
   /**
    * Operator capture queue — this-year chart/festival playbacks with a
@@ -630,6 +635,7 @@ export async function getCatalogStats(): Promise<CatalogStats> {
       durationSec: s.durationSec,
       playCount: s._count.plays,
       playbackHost: playbackHost(s.playbackUrl),
+      playbackUrl: s.playbackUrl,
     }));
 
   const top100 = loadDjMagTop100RankBySlug();
@@ -824,6 +830,7 @@ export async function getCatalogStats(): Promise<CatalogStats> {
             title: true,
             sourceName: true,
             durationSec: true,
+            playbackUrl: true,
             publishedAt: true,
             performedAt: true,
             artists: {
@@ -870,6 +877,7 @@ export async function getCatalogStats(): Promise<CatalogStats> {
         unresolvedCount: counts.unresolved_id ?? 0,
         identifiedRatio: identifiedRatio(counts),
         primaryDj: s.artists[0]?.dj.name ?? null,
+        playbackUrl: s.playbackUrl,
         publishedAt: s.publishedAt,
         performedAt: s.performedAt,
         statusCounts: counts,
@@ -888,6 +896,7 @@ export async function getCatalogStats(): Promise<CatalogStats> {
       unresolvedCount: row.unresolvedCount,
       identifiedRatio: row.identifiedRatio,
       primaryDj: row.primaryDj,
+      playbackUrl: row.playbackUrl,
     }));
 
   return {
@@ -968,6 +977,8 @@ export async function getCatalogStats(): Promise<CatalogStats> {
       title: s.title,
       sourceName: s.sourceName,
       type: s.type,
+      playbackUrl: s.playbackUrl,
+      sourceUrl: s.sourceUrl,
     })),
     tracklistGaps,
     density,

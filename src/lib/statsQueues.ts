@@ -10,8 +10,8 @@ export const QUEUE_FOLLOW_UP_LABEL: Record<QueueFollowUp, string> = {
 
 export const QUEUE_FOLLOW_UP_HINT: Record<QueueFollowUp, string> = {
   auto: "Deep / enrich / Pages drain this. Leftovers failed confirm or wait for the next pass.",
-  operator: "You link or paste. Jobs do not invent URLs or relink leftover hosts.",
-  both: "Jobs run first. 1001 paste / official www / leftover IDs stay on you.",
+  operator: "You link or paste. Jobs do not invent URLs or relink leftover hosts. 1001 is exceptional.",
+  both: "Jobs run first. 1001 paste is exceptional; official www / leftover IDs stay on you.",
 };
 
 export function queueFollowUpLabel(kind: QueueFollowUp): string {
